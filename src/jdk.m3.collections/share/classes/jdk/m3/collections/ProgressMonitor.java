@@ -20,9 +20,10 @@ import java.io.OutputStream;
 
 import java.util.concurrent.CancellationException;
 import jdk.internal.m3.collections.ShadowStreams;
+import jdk.m3.arrays.WorkMonitor;
 
 /** Dependency-light progress/cancellation SPI shared below job and collection layers. */
-public interface ProgressMonitor {
+public interface ProgressMonitor extends WorkMonitor {
     long UNKNOWN = -1L;
 
     void beginTask(String taskName, long totalWork);

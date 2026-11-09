@@ -14,7 +14,7 @@
  *******************************************************************************/
 /** Independently built Apache-2.0 M3 collection primitives. */
 module jdk.m3.collections {
-    requires jdk.m3.arrays;
+    requires transitive jdk.m3.arrays;
     exports jdk.m3.collections;
     exports jdk.m3.collections.bits;
     exports jdk.m3.collections.concurrent;

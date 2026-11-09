@@ -358,11 +358,11 @@ def include_master_source_successor(previous_rows, receipt=_MASTER_RECEIPT):
 # keys stay in the m3/collections/src key space; located() finds each file. Generator:
 # qualification/module-source-successor-20261109.py (replays the sealed chain, diffs it against the tree).
 _MODULE_RECEIPT = HERE / 'qualification/module-source-successor-20261109.tsv'
-_MODULE_RECEIPT_SHA256 = '16640e6341712cf8f5f1ba791171fc0024e35095f4ae6ebb6a3fc523ff24dc77'
+_MODULE_RECEIPT_SHA256 = '9595415f77fe425beb3318b4178177fa1d24575bf52c209fe3e003325f84173c'
 _MODULE_PREDECESSOR_SHA256 = '860b9552b6d9e13ec46b6634ce1a6bf759f75f71aee1604533bb3e8c4d770e44'
-_MODULE_TRANSITIONS = 2553
-_MODULE_RESULT_ROWS = 1835
-_MODULE_RESULT_JAVA = 1829
+_MODULE_TRANSITIONS = 2551
+_MODULE_RESULT_ROWS = 1833
+_MODULE_RESULT_JAVA = 1827
 
 
 def include_module_source_successor(previous_rows, receipt=_MODULE_RECEIPT):

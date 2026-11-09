@@ -70,8 +70,11 @@ public final class PackedIntArrayTest {
         equal(36_028_797_018_963_967L, Int56Array.MAX_VALUE, "int56 maximum constant");
         check(PackedIntArray.class.isSealed(), "base class is sealed");
         Set<Class<?>> permitted = Set.of(PackedIntArray.class.getPermittedSubclasses());
-        check(permitted.equals(Set.of(Int40Array.class, Int48Array.class, Int56Array.class)),
+        // PACKED_UNION U9 (2026-11-09): the package-private FixedWidthIntArray covers every other IntWidth and the
+        // unsigned widths; the three typed signed widths stay the only public members of the family.
+        check(permitted.equals(Set.of(Int40Array.class, Int48Array.class, Int56Array.class, FixedWidthIntArray.class)),
                 "sealed family has exactly the documented widths");
+        check(!Modifier.isPublic(FixedWidthIntArray.class.getModifiers()), "the general width class is not public");
         equal(0, PackedIntArray.class.getConstructors().length, "no public base constructor");
         for (Class<?> type : permitted) {
             check(Modifier.isFinal(type.getModifiers()), "width class is final");
