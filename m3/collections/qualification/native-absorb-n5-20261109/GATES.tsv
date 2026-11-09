@@ -1,0 +1,9 @@
+gate	host	result	evidence
+census	any	203 native methods: BOUND 189, ABSENT 14	tools/native_census.py v1.2
+build_windows	Windows 11, MinGW gcc 15.2, CMake 4.3.1, JDK 21	22 libraries	tools/build_check.sh
+exports_windows	same	exported 152 = expected 152, missing 0, extra 0, non-JNI 0	tools/export_check.sh v1.1
+mutant_windows	same	without header survived, with header killed	tools/mutant_check.sh
+build_linux	WSL Ubuntu 24.04, gcc 13.3, CMake 3.28, OpenJDK 21	23 libraries	tools/build_check.sh
+exports_linux	same	exported 154 = expected 154, missing 0, extra 0, non-JNI 0	tools/export_check.sh v1.1
+mutant_linux	same	without header survived, with header killed	tools/mutant_check.sh
+suite_windows_native	Windows, JDK 21	2854 tests, 0 failures, 0 errors, 1 skipped (m3_mat_csr on java.library.path, so MatCsrGraph loads it)	mvn verify -Pm3-collections-native
