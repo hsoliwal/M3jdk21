@@ -84,6 +84,35 @@ counts are not execution totals. For a release attempt invoke the admission
 verifier with `--release` and a complete exact-source evidence manifest as
 documented in [the release pack](README.md).
 
+## 2026-11-09 measured candidate (in progress)
+
+| Item | Value |
+| --- | --- |
+| Source `master` | `43ffa8f6016f237463846a82f68883567b1dbe5b` (includes #2884-#2889) |
+| Source tree | `ece07eeaa519b23ab3d4d83165480fad84a8840e` |
+| Candidate commit | `7607ffeee51557cc4695d25fc98fb2f48264284c` on `release-candidate/m3jdk-21.0.14-m3.1-preview-20261109` |
+| Candidate shape | single commit, parent `890adb6410dab4606a4f26a942aed02fb2f55387` (`jdk-21+35`), tree equal to the source tree; author and committer `Hitesh Soliwal <hsoliwal@gmail.com>`, both dates `2026-11-09T00:00:00+00:00` (the cut date, not backdated) |
+| Existing `release/m3jdk-21.0.14-m3.1-preview` | `5589b15ec870` (2026-10-31), stale; not moved, deleted or force-pushed |
+| Evidence pack | outside the checkout, `M3_RELEASE_EVIDENCE_V1`; raw logs with SHA-256 |
+
+Gate results are recorded here as each local run finishes. GitHub Actions
+runs for this repository are queued; a queued or cancelled run is PENDING,
+never PASS.
+
+| Gate | Status | Evidence |
+| --- | --- | --- |
+| `RIGHTS_AND_LICENSE_BOUNDARY` | PENDING (running) | - |
+| `SOURCE_TREE_AND_UPSTREAM_BASELINE` | PENDING (running) | - |
+| `OPENJDK_SANITY_MATRIX` | PENDING (running) | - |
+| `M3_FOUNDATION_TESTS` | PENDING (running) | - |
+| `PRECOMPUTE_JAVA_DIFFERENTIAL` | PENDING (running) | - |
+| `PRECOMPUTE_JNI_NATIVE_PARITY` | PENDING (running) | - |
+| `M3_MAVEN_CONTROL_REACTOR` | HOLD | owner decision required (see below) |
+| `STRING_UTF16_CONTRACT` | PENDING (running) | - |
+| `M3_CHANGED_ATOM_COVERAGE` | PENDING (running) | - |
+| `RELEASE_CLAIMS_VALIDATION` | PENDING (running) | - |
+| `PROOF_PACK_SHA256` | PENDING (running) | - |
+
 ## Remaining release blockers
 
 - An exact release candidate still needs a green **OpenJDK sanity/jtreg
