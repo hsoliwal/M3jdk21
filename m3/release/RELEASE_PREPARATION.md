@@ -104,16 +104,32 @@ never PASS.
 | Gate | Status | Evidence |
 | --- | --- | --- |
 | `RIGHTS_AND_LICENSE_BOUNDARY` | PENDING (running) | - |
-| `SOURCE_TREE_AND_UPSTREAM_BASELINE` | PENDING (running) | - |
-| `OPENJDK_SANITY_MATRIX` | PENDING (running) | - |
-| `M3_FOUNDATION_TESTS` | PENDING (running) | - |
-| `PRECOMPUTE_JAVA_DIFFERENTIAL` | PENDING (running) | - |
-| `PRECOMPUTE_JNI_NATIVE_PARITY` | PENDING (running) | - |
+| `SOURCE_TREE_AND_UPSTREAM_BASELINE` | PENDING (running); extracted candidate bytes hash to tree `30651922a8b3` | `logs/extract-rawtree-identity-809625db.log` |
+| `OPENJDK_SANITY_MATRIX` | **FAIL**: `make images` stops in `java.base`. There are 83 `unmappable character ... for encoding ascii` errors in 16 `jdk/internal/math/M3*.java` files (the FastDoubleParser absorb); the OpenJDK 21 build compiles with `-encoding ascii`. With javac on UTF-8 (the javac part of JDK-8301971), `-Werror` then refuses 6 javadoc warnings in `java/security/SHA256Adapter.java` and 1 `lossy-conversions` warning in `M3FftMultiplier.java`. A full warning census is running | `logs/jdk-make-images.log`, `logs/jdk-make-images-fix3.log` |
+| `M3_FOUNDATION_TESTS` | **FAIL** (1 of 4 job steps). `m3/build.sh` exit 0 and `run_extra_core_contracts.sh` exit 0 in all four VM modes; strict test wiring PASS; `verify-shared-mapping.py` exit 0. `compatibility/check-m3.py` exits 1 on a stale fixture path; fix in #2893 | `logs/foundation-*.log` |
+| `PRECOMPUTE_JAVA_DIFFERENTIAL` | PASS: 125 tests, 0 failures, 2 skipped | `logs/precompute-java.log` |
+| `PRECOMPUTE_JNI_NATIVE_PARITY` | PASS: precompute `-Pnative`, 125 tests, 0 failures; word-row JNI proof, 4 VM modes, `checks=96 JNI=true`; collections native (`-Pm3-collections-native`) 2854 tests, 0 failures, 1 skipped | `logs/precompute-native.log`, `logs/wordrows-native-jni.log`, `logs/collections-native-mvn.log` |
 | `M3_MAVEN_CONTROL_REACTOR` | HOLD | owner decision required (see below) |
-| `STRING_UTF16_CONTRACT` | PENDING (running) | - |
-| `M3_CHANGED_ATOM_COVERAGE` | PENDING (running) | - |
+| `STRING_UTF16_CONTRACT` | PENDING: needs the source-built image, which `OPENJDK_SANITY_MATRIX` cannot yet produce | - |
+| `M3_CHANGED_ATOM_COVERAGE` | **FAIL** (measured, below threshold). JaCoCo 0.8.12 over the `jdk.m3.text` foundation suites: line 71.9% (2359/3279), branch 54.0% (1200/2224); 311 of 607 methods are at least 90% on both. A reviewed changed-atom inventory does not exist yet | `logs/coverage/jacoco.xml` |
 | `RELEASE_CLAIMS_VALIDATION` | PENDING (running) | - |
-| `PROOF_PACK_SHA256` | PENDING (running) | - |
+| `PROOF_PACK_SHA256` | PENDING (pack assembly) | - |
+
+Development admission on the candidate (`verify_release_admission.py`,
+exit 1) reports `policy_valid: false`:
+- `name_queue` BLOCK: `name-plan.json` pins `authority_blob` `3879a0f1fbc2`, but `9eb3a926ff`
+  changed one target in `m3/docs/name-mapping.json`, so its blob is now `f191f5772b1d`.
+- `standalone.no_external_repo_dependency` BLOCK: the dependency ratchet grew past
+  `STANDALONE_BASELINE.tsv` (`D_CHECKOUT` 4->5, `D_REPO_REF` 360->428, `N_PATH` 12->19,
+  `N_NAME` 2011->2339).
+- `legacy_recipe_custody` HOLD: 817 executable candidates.
+
+Other local results:
+- Release tooling unit tests: 149 run, OK.
+- Name-contract unit tests: 121 run; 2 failures and 2 errors, all from the same authority drift
+  and from mapping targets that still point at pre-move `m3/arrays/...` and `m3/collections/...` paths.
+- Release identity audit (`--release`): PASS.
+- Strict retained-source queue: `ARCHIVE_PATH_MISSING_PR_ORIGINAL_PATH`.
 
 ## Remaining release blockers
 
