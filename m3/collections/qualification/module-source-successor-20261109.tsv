@@ -853,6 +853,7 @@ m3/collections/src/main/java/jdk/internal/m3/collections/FrozenOrdinalLongMap.ja
 m3/collections/src/main/java/jdk/internal/m3/collections/FrozenOrdinalObjectMap.java	ABSENT	a31905523717c7a44af7ba01a60d85ec936782764c96502e6da5e7b5b33db9a5
 m3/collections/src/main/java/jdk/internal/m3/collections/FrozenSet.java	ABSENT	f2661f010d4cddb4f257fa1f0aa9ed0fa48bcc9e50d90d3cc638588688a852ab
 m3/collections/src/main/java/jdk/internal/m3/collections/FrozenTable.java	ABSENT	617c03d9efefe264fb49be315fce88ccb437925c97a7443e816308709f8778a2
+m3/collections/src/main/java/jdk/internal/m3/collections/FuzzyAlgorithmFactory.java	ABSENT	e4830f0767dde33eb52dd88d0bf80a458cf79ab123a3b2e5b1bc3e1008f1e94c
 m3/collections/src/main/java/jdk/internal/m3/collections/FuzzyProviderCollectionFactory.java	ABSENT	53767befc17a8866206468bf851d790a6432536796dd6df07afdcb647626042b
 m3/collections/src/main/java/jdk/internal/m3/collections/GenericCollections.java	ABSENT	4820a78a4458fdc2b704084d4a21fc02ac3031c41396baae60cc16bd1180d87f
 m3/collections/src/main/java/jdk/internal/m3/collections/GrowthListView.java	ABSENT	ffbe177b74f204a59d7ee692e311ca653f37b7ba0c30d305100415b05522c30e
@@ -1049,6 +1050,7 @@ m3/collections/src/main/java/jdk/internal/m3/collections/SourceSignalQualityFact
 m3/collections/src/main/java/jdk/internal/m3/collections/SparseExtents.java	ABSENT	2f2e393836257e93504f61e3ac5ecd669a9f8ced379315ff8ead823d05f765c5
 m3/collections/src/main/java/jdk/internal/m3/collections/SparseItemStore.java	ABSENT	9f3e6cab5d2d6af3ad5467d2a7253510919367abe9018fb048a70855fed0e307
 m3/collections/src/main/java/jdk/internal/m3/collections/StableDeduplicator.java	ABSENT	7d9f6f127e156d15684c29dfb0ac5252b6a05cfd5199114dc1458b8822439a1e
+m3/collections/src/main/java/jdk/internal/m3/collections/StandardAlgorithmCandidates.java	ABSENT	173b38b8905c6120fae164755647d056e042d22cb2e87251a6ce9b720dd1bad3
 m3/collections/src/main/java/jdk/internal/m3/collections/StateMaskArrays.java	ABSENT	be05ded9f2f61b45239768a7cda23b95ad96e7aba90abfed764b9634f61edc2c
 m3/collections/src/main/java/jdk/internal/m3/collections/StrategyHashMap.java	ABSENT	226909421841ccde6a6b89bfd5405d6c1bb65ad57be333b724f6ec49b76a85bc
 m3/collections/src/main/java/jdk/internal/m3/collections/StrongPoolOverflowPolicy.java	ABSENT	97f3df30832e1c16ec38b08d75f984a94a9e636ed683b54816370af2be5c2eb8
