@@ -60,10 +60,10 @@ NAME_MAP = "m3/docs/name-mapping.json"
 NAME_PLAN = "m3/tooling/name-contract/name-plan.json"
 EVIDENCE_SCHEMA = "M3_RELEASE_EVIDENCE_V1"
 DEFAULT_EVIDENCE = "m3/release/queue/current/evidence.json"
-# Product gates are independently accepted here. The canonical transformation
-# receipt is data from Synexia; this consumer never executes recipe source.
+# Product gates are independently accepted here. Standalone rule (2026-10-31): the Maven
+# control-reactor receipt is produced inside M3jdk21; this consumer never executes recipe source.
 PRODUCT_REPOSITORY = "hsoliwal/M3jdk21"
-CANONICAL_RECIPE_REPOSITORY = "hsoliwal/com.synexia"
+CANONICAL_RECIPE_REPOSITORY = PRODUCT_REPOSITORY
 MAVEN_GATE = "M3_MAVEN_CONTROL_REACTOR"
 COVERAGE_GATE = "M3_CHANGED_ATOM_COVERAGE"
 COVERAGE_SCHEMA = "M3_CHANGED_ATOM_COVERAGE_V1"
@@ -412,7 +412,7 @@ def validate(root: Path, release_mode: bool = False,
                             if gate not in gates or owner != gate_owner(gate)) if isinstance(gate_owners, dict) else []
     if (not isinstance(gate_owners, dict)
             or gate_owners.get(MAVEN_GATE) != CANONICAL_RECIPE_REPOSITORY or foreign_owners):
-        block("contract.recipe_owner", MAVEN_GATE + " requires the canonical Synexia receipt; "
+        block("contract.recipe_owner", MAVEN_GATE + " requires the M3jdk21-produced recipe receipt; "
               "all product gates remain owned by " + PRODUCT_REPOSITORY
               + "; invalid declarations: " + (", ".join(foreign_owners) or "-"))
 

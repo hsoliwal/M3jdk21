@@ -126,9 +126,9 @@
     "artifact_paths_relative_to": "manifest_directory",
     "legacy_recipe_sources_block_release": true,
     "gate_owners": {
-      "M3_MAVEN_CONTROL_REACTOR": "hsoliwal/com.synexia"
+      "M3_MAVEN_CONTROL_REACTOR": "hsoliwal/M3jdk21"
     },
-    "maven_gate_scope": "Preserve this existing gate ID. Canonical Maven/OpenRewrite authoring, execution and recipe memory remain exclusively in Synexia under AGENTS.md and the porting invariant. M3JDK21 consumes an exact source-bound, hash-verified receipt as data; it never runs its command. All product build, runtime and target acceptance gates remain M3JDK21-owned. Legacy recipe roots remain visible HOLD debt; a passive provenance receipt does not introduce a target runtime or build dependency.",
+    "maven_gate_scope": "Preserve this existing gate ID. Under the 2026-10-31 standalone rule (M3JDK21 builds, tests, gates and releases without another repository) the Maven control-reactor receipt is produced inside hsoliwal/M3jdk21 from M3jdk21 sources rather than by the Synexia repository; it still records the exact repository, commit and recipe ID it executed. All product build, runtime and target acceptance gates remain M3JDK21-owned. Legacy recipe roots remain visible HOLD debt; a passive provenance receipt does not introduce a target runtime or build dependency.",
     "required_manifest_fields": [
       "schema",
       "source_commit",
