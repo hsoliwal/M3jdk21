@@ -47,7 +47,7 @@ public final class PrimitiveDirectIntMap {
         if (initialKeyCapacity < 0) throw new IllegalArgumentException("initialKeyCapacity < 0");
         int capacity = Math.max(1, initialKeyCapacity);
         values = valueKind.newArray(capacity);
-        present = new LongBitSet(capacity);
+        present = LongBitSet.of(capacity);
     }
 
     public PrimitiveKind valueKind() { return valueKind; }

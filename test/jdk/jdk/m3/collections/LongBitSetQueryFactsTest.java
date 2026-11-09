@@ -19,7 +19,7 @@ final class LongBitSetQueryFactsTest {
     void repeatedQueriesAndMutationsMatchJavaBitSet() {
         Random random = new Random(0xC011EC7L);
         for (int bits : new int[] {0, 1, 63, 64, 65, 127, 128, 129, 8192}) {
-            LongBitSet actual = new LongBitSet(bits);
+            LongBitSet actual = LongBitSet.of(bits);
             BitSet reference = new BitSet(bits);
             for (int i = 0; i < 4096; i++) {
                 int index = random.nextInt(Math.max(1, bits + 64));
@@ -42,9 +42,9 @@ final class LongBitSetQueryFactsTest {
 
     @Test
     void bulkOperationsAndSelfAliasingInvalidateCorrectly() {
-        LongBitSet actual = new LongBitSet(1000);
+        LongBitSet actual = LongBitSet.of(1000);
         BitSet expected = new BitSet(1000);
-        LongBitSet mask = new LongBitSet(1000);
+        LongBitSet mask = LongBitSet.of(1000);
         BitSet referenceMask = new BitSet(1000);
         for (int i = 0; i < 1000; i += 3) { actual.set(i); expected.set(i); }
         for (int i = 0; i < 1000; i += 7) { mask.set(i); referenceMask.set(i); }
@@ -72,7 +72,7 @@ final class LongBitSetQueryFactsTest {
 
     @Test
     void callbackMutationStillObservesLiveFutureBits() {
-        LongBitSet bits = new LongBitSet(256);
+        LongBitSet bits = LongBitSet.of(256);
         bits.set(1); bits.set(64); bits.set(66);
         List<Integer> observed = new ArrayList<>();
         bits.forEachSetBit(index -> {

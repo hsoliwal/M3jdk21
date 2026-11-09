@@ -55,7 +55,7 @@ public final class PrimitiveDirectIntTable {
         this.columnCount = columnCount;
         int capacity = (int) cells;
         values = valueKind.newArray(capacity);
-        present = new LongBitSet(capacity);
+        present = LongBitSet.of(capacity);
     }
 
     public PrimitiveKind valueKind() { return valueKind; }

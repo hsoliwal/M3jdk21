@@ -1166,7 +1166,7 @@
   "module_source_successor_20261109": {
     "schema": "M3_COLLECTION_EXACT_SOURCE_REFINEMENT_V2",
     "successor_receipt": "qualification/module-source-successor-20261109.tsv",
-    "successor_receipt_sha256": "63f05475d096fca5bbc5ec026723bf8c07c579bb2037b4b48ed64bcf2fb07cab",
+    "successor_receipt_sha256": "542471492580ec79e24d66308927a6924cd8405c59a9d43568da05ca43c6359c",
     "receipt_columns": [
       "path",
       "inherited_sha256",
@@ -1176,10 +1176,10 @@
     "inherited_rows": 774,
     "successor_rows": 2488,
     "refined_rows": 26,
-    "added_rows": 1727,
-    "removed_rows": 735,
-    "resulting_rows": 1766,
-    "exact_java_source_membership": 1762,
+    "added_rows": 1729,
+    "removed_rows": 733,
+    "resulting_rows": 1770,
+    "exact_java_source_membership": 1764,
     "predecessor_successor": "master_source_successor_20261031",
     "origin": "master after the JDK module move #2849: sources absorbed, renamed and moved since the master seal; recorded keys stay in the m3/collections/src key space (verify_donation.py located/recorded)",
     "chain_repins": "JDK_NAMING_RESEAL caf39c93e4c left the Tools4j, Superset and Master predecessor pins stale; derived by replaying the sealed chain",
