@@ -1,0 +1,8 @@
+Running M3 rope-index Java21 proof: jit
+M3RopeTextIndexTest PASS checks=83941
+Running M3 rope-index Java21 proof: int
+M3RopeTextIndexTest PASS checks=83941
+Running M3 rope-index Java21 proof: noncompact
+M3RopeTextIndexTest PASS checks=83941
+Running M3 rope-index Java21 proof: c2
+M3RopeTextIndexTest PASS checks=83941

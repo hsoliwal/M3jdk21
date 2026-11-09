@@ -1,0 +1,18 @@
+{
+  "schema": "M3_AST_HIERARCHY_SOURCE_SUCCESSOR_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_baseline_commit": "98368e107f4a205d852ef958cd48c1ee633219b1",
+  "canonical_source_commit": "9f500fff0bcdf96807899e96090e245fb530c48b",
+  "recipe_owner": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "recipe_name": "jdk.internal.m3.m3jdk.CollectionsContractRefinement20261017",
+  "canonical_dataset": "ast-hierarchy-20261018",
+  "target_dataset": "ast-hierarchy-target-20261018",
+  "previous_source_sha256": "5c8143c5a5d35efb9753414b7a575799a8821aba525e7849e8e4f6289f1b9ec8",
+  "source_sha256": "f777c2777b78e5fe5ecb734576fc6833500f5041435d5ac92a4041f2eaa14295",
+  "previous_target_sha256": "79155aabbb045e4a4c6ea38359a642912d940df2b6dc68c5070f205c94e6dd43",
+  "target_sha256": "0db46e317758d03f8d295e5fd6b1afc8099ab06321e1376abb15e24d06e8ec52",
+  "legacy_contract_sha256": "3bfbcaec686210a6d6a11bc292aa86a57a20456a9c78881fe336ae1aecb6c9b8",
+  "custody_manifest_sha256": "08eadf6ab7605f35814fb426f758fe6a0c1b9b7d4979cafbd4e7603bedf6d286",
+  "compatibility": "well-formed UTF-16 retains exact v1 roots; malformed identifiers use a disjoint framed extension",
+  "scope": "INDEPENDENT_TARGET_MODULE; CANDIDATE_ONLY"
+}

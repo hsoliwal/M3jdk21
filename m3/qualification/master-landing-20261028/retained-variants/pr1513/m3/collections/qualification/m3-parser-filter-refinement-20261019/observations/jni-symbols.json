@@ -1,0 +1,25 @@
+{
+  "before": [
+    "Java_jdk_m3_collections_M3IndexMaskCompactor_positionsAbiNative",
+    "Java_jdk_m3_collections_M3IndexMaskCompactor_positionsMasksAbiNative",
+    "Java_jdk_m3_collections_M3IndexMaskCompactor_rangeAbiNative",
+    "Java_jdk_m3_collections_M3IndexMaskCompactor_selectLongWindowNative",
+    "Java_jdk_m3_collections_M3IndexMaskCompactor_selectNative",
+    "Java_jdk_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative",
+    "Java_jdk_m3_collections_M3IndexMaskCompactor_selectPositionsNative",
+    "Java_jdk_m3_collections_M3IndexMaskCompactor_selectRangeNative",
+    "Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowNative"
+  ],
+  "after": [
+    "Java_jdk_m3_collections_M3IndexMaskCompactor_positionsAbiNative",
+    "Java_jdk_m3_collections_M3IndexMaskCompactor_positionsMasksAbiNative",
+    "Java_jdk_m3_collections_M3IndexMaskCompactor_rangeAbiNative",
+    "Java_jdk_m3_collections_M3IndexMaskCompactor_selectLongWindowNative",
+    "Java_jdk_m3_collections_M3IndexMaskCompactor_selectNative",
+    "Java_jdk_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative",
+    "Java_jdk_m3_collections_M3IndexMaskCompactor_selectPositionsNative",
+    "Java_jdk_m3_collections_M3IndexMaskCompactor_selectRangeNative",
+    "Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowNative"
+  ],
+  "equal": true
+}

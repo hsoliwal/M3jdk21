@@ -1,0 +1,5 @@
+M3_SDK_RESULTS_RECEIVER_PASS mode=check targets=15 changes=0
+AFFIX_WARM_PROBE case=warm-positive-short before_ns=26.96 after_ns=17.80 ratio=0.660 source_fixture=true
+AFFIX_WARM_PROBE case=warm-positive-long before_ns=49.81 after_ns=90.67 ratio=1.820 source_fixture=true
+AFFIX_WARM_PROBE case=warm-prefix-negative before_ns=30.89 after_ns=34.31 ratio=1.111 source_fixture=true
+AFFIX_WARM_PROBE case=cache-churn-prefix-negative before_ns=2700.62 after_ns=48.33 ratio=0.018 source_fixture=true

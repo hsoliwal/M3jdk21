@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+# Gates of the compiletime vendor-AST wiring (2026-11-07, JDK 21.0.9, Maven 3.9.14, master 04fae52d11dd590d6640377caa96ebac8e2d004a; -Dasm.version=9.6 -Djunit.artifact.version=5.10.2 as the pom documents for builds without the vendored artifact universe).
+gate	command	state	evidence
+1_master_red	mvn -B -ntp -f m3/ports/compiletime/pom.xml clean package (master pom and sources)	FAIL (baseline)	200 [ERROR] compile lines: package jdk.internal.m3.mindex.compiler.ast does not exist, plus cascades; tests never compile
+2_closure_compile	javac --release 21 -Xlint:all -Werror over compiletime main (35) + m3/vendor/m3/m3-mindex/{compiler,runtime} (101) + m3/vendor/m3/m3-native-interop (2), ASM 9.9 on the classpath	PASS	138 files, 0 errors, 0 warnings
+3_package_wiring_only	mvn ... clean package with the pom change only	FAIL (expected)	compiles (-Werror 0 warnings); tests 30 run, 8 fail: M3ItemReferenceScanTest 6, M3EscapePreparedTest 2, all "@M3Transient seeds the set"-class assertions
+4_package_leaf	mvn ... clean package with the pom change + M3ItemReferenceScan descriptors	PASS	BUILD SUCCESS; Tests run: 30, Failures: 0, Errors: 0 (ConstantRegexImage 4, EscapePrepared 10, FormatPlan 2, GvasLiteralHarvester 2, ItemReferenceScan 7, RegexRequirement 5)
+5_scope	compare master...head	PASS	m3/ports/compiletime/** only (pom.xml, M3ItemReferenceScan.java, this directory)

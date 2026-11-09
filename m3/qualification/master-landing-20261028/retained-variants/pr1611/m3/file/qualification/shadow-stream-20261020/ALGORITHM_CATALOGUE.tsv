@@ -1,0 +1,5 @@
+category	problem_shape	selected	complexity	rationale
+stream-fanout	one producer feeds N observers without reread	ordered reusable observers	O(bytes * observers)	Primary bytes stay authoritative; observers consume borrowed ranges
+progress-subdivision	child work reports into fixed parent budget	overflow-safe rational scaling	O(1) normal path	Default methods avoid framework coupling and preserve monotonic bounded progress
+file-delta	avoid hashing unchanged provider files	metadata gate + optional SHA-256	O(1) metadata; O(bytes) exact probe	mtime/size/type cheaply reject most unchanged work; digest supplies exact content evidence when requested
+filesystem-traversal	index roots lazily without retaining tree	Files.walk + lazy Stream	O(entries) time; O(depth) provider state	DOOP materializes only demanded M3File handles and no global tree

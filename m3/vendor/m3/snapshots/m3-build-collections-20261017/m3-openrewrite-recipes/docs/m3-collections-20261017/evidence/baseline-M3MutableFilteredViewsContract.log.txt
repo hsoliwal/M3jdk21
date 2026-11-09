@@ -1,0 +1,4 @@
+COMMAND ["/workspace/scratch/4f99f40718f0/m3-implementation/toolchain/jdk-21.0.2+13/bin/java", "-Xmx128m", "-cp", "/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/baseline-classes", "com.synexia.common.collections.M3MutableFilteredViewsContract"]
+PASS M3_MUTABLE_FILTERED_VIEWS assertions=288223
+
+EXIT 0

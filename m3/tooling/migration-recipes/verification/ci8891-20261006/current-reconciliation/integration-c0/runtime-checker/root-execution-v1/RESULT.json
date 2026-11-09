@@ -1,0 +1,36 @@
+{
+  "schema": "m3.root-package-execution/1",
+  "status": "PASS",
+  "spec": {
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/packaging-authoring-v1/ROOT-COMMANDS.json",
+    "sha256": "f86a236dffa5e20e487c1cd4c9dda530c95d5f213f7e37a2749b5993fb48f2cf",
+    "bytes": 8276
+  },
+  "commands": [
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/root-packaging-v1/select.json",
+      "sha256": "89ba9636fb1a01270f5495f55724555271e05d189bd41e9f93c8b20fcfcf762e",
+      "bytes": 2011
+    },
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/root-packaging-v1/pack.json",
+      "sha256": "93eb46593cdb05a6ddf4b20b2f6e962b65b8c847ae2f762e0b52bfbd4f0644ef",
+      "bytes": 1683
+    },
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/root-packaging-v1/verify.json",
+      "sha256": "d2285698a2044fa4e4e2c960121898a841aeff5dfd0ff9619762f17a1961ed06",
+      "bytes": 1384
+    },
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/root-packaging-v1/extract.json",
+      "sha256": "6710ecdced1973b852e3a1ec2e1101b3c91e21fd8f61672a7df12e69082bc4cf",
+      "bytes": 1541
+    },
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/root-packaging-v1/finish.json",
+      "sha256": "81af3d04d7eac5eab04b23aa66e7554bb664f055c0d465b6dcc5f9c493678dba",
+      "bytes": 1207
+    }
+  ]
+}

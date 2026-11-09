@@ -1,0 +1,17 @@
+test_class	owner	atom	pattern	params
+M3IntAlgorithmsAtomsTest	jdk.internal.m3.IntAlgorithms	*	CLASS	{"summary": "Per-atom contracts of jdk.internal.m3.IntAlgorithms private atoms against HashMap/HashSet/BitSet oracles (generated, template internal)"}
+M3IntAlgorithmsAtomsTest	jdk.internal.m3.IntAlgorithms	M3IntAlgorithms	PRIVATE_THROWING_CONSTRUCTOR	{"message": "no instances"}
+M3IntAlgorithmsAtomsTest	jdk.internal.m3.IntAlgorithms	lonelyDense	INT_LONELY	{"lonely_doc": "values, offset, length, minimum, width", "lonely_args": "values, offset, length, min, (int) width", "domain_guard": "\n            int min = IntStream.of(values).skip(offset).min().getAsInt();\n            long width = (long) IntStream.of(values).skip(offset).max().getAsInt() - min + 1;\n            if (width > (int) OWNER.constant(\"MAX_DENSE_DOMAIN\")) {\n                continue;\n            }"}
+M3IntAlgorithmsAtomsTest	jdk.internal.m3.IntAlgorithms	lonelySparse	INT_LONELY	{"lonely_doc": "values, offset, length", "lonely_args": "values, offset, length", "domain_guard": ""}
+M3IntAlgorithmsAtomsTest	jdk.internal.m3.IntAlgorithms	hasBit	BIT_TEST	{}
+M3IntAlgorithmsAtomsTest	jdk.internal.m3.IntAlgorithms	tableCapacity	INT_TABLE_CAPACITY	{}
+M3IntAlgorithmsAtomsTest	jdk.internal.m3.IntAlgorithms	findSlot	INT_HASH_SLOT	{"test": "findSlot"}
+M3IntAlgorithmsAtomsTest	jdk.internal.m3.IntAlgorithms	contains	INT_HASH_SLOT	{"test": "contains"}
+M3IOAtomsTest	jdk.internal.m3.io.M3IO	*	CLASS	{}
+M3IOAtomsTest	jdk.internal.m3.io.M3IO	M3IO	PRIVATE_UTILITY_CONSTRUCTOR	{}
+M3IOAtomsTest	jdk.internal.m3.io.M3IO	active	BIT_TEST	{}
+M3PipelinePlanAtomsTest	jdk.internal.util.M3PipelinePlan	*	CLASS	{"summary": "Per-atom contracts of jdk.internal.util.M3PipelinePlan private atoms against java.util.stream (generated, template internal)"}
+M3PipelinePlanAtomsTest	jdk.internal.util.M3PipelinePlan	M3PipelinePlan	PIPE_CONSTRUCTOR	{}
+M3PipelinePlanAtomsTest	jdk.internal.util.M3PipelinePlan	append	PIPE_APPEND	{}
+M3PipelinePlanAtomsTest	jdk.internal.util.M3PipelinePlan	traverse	PIPE_TRAVERSE	{}
+M3PipelinePlanAtomsTest	jdk.internal.util.M3PipelinePlan	accept	PIPE_SINK_ACCEPT	{}

@@ -1,0 +1,7 @@
+stage	status	note
+diff	NOT_RUN	No source patch or product execution in this task
+lint	NOT_RUN	No source patch or product execution in this task
+compile	NOT_RUN	No source patch or product execution in this task
+tests	NOT_RUN	No source patch or product execution in this task
+runtime	NOT_RUN	No source patch or product execution in this task
+fixed_point	NOT_RUN	No source patch or product execution in this task

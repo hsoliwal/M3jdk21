@@ -1,0 +1,2 @@
+owner	java_method	descriptor	native_symbol	input_contract	output_contract	lifetime_contract
+jdk.m3.tooling.image.M3JniReachabilityKernel	close0	(I[I[I[I)[I	Java_jdk_m3_tooling_image_M3JniReachabilityKernel_close0	vertex_count >= 0; offsets length vertex_count+1; monotone CSR; sorted unique in-range edges and roots	sorted unique reachable vertex indexes including every root	GetIntArrayElements pointers are released with JNI_ABORT before return; no Java heap pointer or native allocation survives the call

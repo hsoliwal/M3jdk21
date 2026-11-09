@@ -1,0 +1,637 @@
+[
+  {
+    "bytes": 81738,
+    "path": "jars/com.fasterxml.jackson.annotation.jar",
+    "sha256": "90c1c860090b7e99c7b4106e3581d326cd9513d7a1d9ed3236d00e843f945b7f"
+  },
+  {
+    "bytes": 563814,
+    "path": "jars/com.fasterxml.jackson.core.jar",
+    "sha256": "4334ba0da1faaf328ae17afeb67c9e60139a1f00c501dbbf6ea2ad95a491f9b6"
+  },
+  {
+    "bytes": 1694191,
+    "path": "jars/com.fasterxml.jackson.databind.jar",
+    "sha256": "00163210225420370a5eaf06ce99c6e85b74874ee20fe64250d224834808428e"
+  },
+  {
+    "bytes": 15056193,
+    "path": "jars/com.ibm.icu.jar",
+    "sha256": "17ec8c4e7aa50e216cf13f4d5a47e4c049eae7ba318d55d544ec290de0040907"
+  },
+  {
+    "bytes": 163254,
+    "path": "jars/com.m3.text.jar",
+    "sha256": "4235c6d20f8beca69d65e76b3e4bdfd655279c2368d8f8ed51ba52c9a92f3391"
+  },
+  {
+    "bytes": 1647954,
+    "path": "jars/hppc.jar",
+    "sha256": "f7b6fd630248ffb6304b9720848bc245788d4808c3cd9fe6ad7edeaf0ed0a180"
+  },
+  {
+    "bytes": 627233,
+    "path": "jars/io.github.classgraph.jar",
+    "sha256": "5c91fe294d2bd3d04c3fe37b1bab7f1d7074d4c4412063a88126be0f832eec8e"
+  },
+  {
+    "bytes": 965216,
+    "path": "jars/io.github.dmlloyd.classfile.jar",
+    "sha256": "4e6dcba50fef5f9ee4044da4ccf8edb4486ac6f8a9a803c0f9e3e68b997d6c5d"
+  },
+  {
+    "bytes": 83014,
+    "path": "jars/jcommander.jar",
+    "sha256": "e27b0bda3df16765c089a95afaddf9900640979c395ab20b32e9b801e1ca9eda"
+  },
+  {
+    "bytes": 459641,
+    "path": "jars/jdk.m3.compiletime.jar",
+    "sha256": "7657ae949d07538426e9c19f6d30af6e155b73d0da2a9fe5f382554ea3fcebe2"
+  },
+  {
+    "bytes": 7860,
+    "path": "jars/jdk.m3.nlp.search.jar",
+    "sha256": "d41ee8aa65ec7c4839f5cc40a2980b65dfeebc26b027b824ca0cb1eb23a7c882"
+  },
+  {
+    "bytes": 40454,
+    "path": "jars/libsvm.jar",
+    "sha256": "a95c6efb1e49a22355610ae3e45c42d70736adc0d30a28b2e7ac93b6031512bf"
+  },
+  {
+    "bytes": 4100957,
+    "path": "jars/morfologik.ukrainian.search.jar",
+    "sha256": "524f0babb05988737fa8176fa92415a92cae2f18b4d32aa9dd4a75e2c5d81afd"
+  },
+  {
+    "bytes": 27521,
+    "path": "jars/noggit.jar",
+    "sha256": "b9723907834cda32f55264ebb8f04b9704f85559f010652c8f17da8ff75509d5"
+  },
+  {
+    "bytes": 324541,
+    "path": "jars/org.antlr.antlr4.runtime.jar",
+    "sha256": "715c8e60bcfe2c2b5212343d2fa279e2cb29084b2a4161058003266b83e7be56"
+  },
+  {
+    "bytes": 413123,
+    "path": "jars/org.apache.commons.codec.jar",
+    "sha256": "b8bf09ed455ccf7dba285c18825aa3a87623ea2fde0098e7513b93d2c36e6fc3"
+  },
+  {
+    "bytes": 74131,
+    "path": "jars/org.apache.commons.xml.secure.jar",
+    "sha256": "b42a2e3afdadc409612ce696b8bcd65e577efdd3c96cff3df6daf64504dc57fe"
+  },
+  {
+    "bytes": 1705177,
+    "path": "jars/org.apache.lucene.analysis.common.jar",
+    "sha256": "8ea54e18ee6d71faae59b25da9a860978e9cda38cb30e6150c9cae4ba4dcef28"
+  },
+  {
+    "bytes": 85580,
+    "path": "jars/org.apache.lucene.analysis.icu.jar",
+    "sha256": "91b070217bcbe4f7fd00f0526e01782cc5c5224c7935e91d52671b2629322260"
+  },
+  {
+    "bytes": 4706967,
+    "path": "jars/org.apache.lucene.analysis.kuromoji.jar",
+    "sha256": "00ad7ca4517f0f2d7b7f539eb87bced01c390c990453a37f2138b381c5b49331"
+  },
+  {
+    "bytes": 28407,
+    "path": "jars/org.apache.lucene.analysis.morfologik.jar",
+    "sha256": "b097f1c95e6ac5252ab944db74d14dfc6ea15f0bff3cbb1d1af14653d970bee3"
+  },
+  {
+    "bytes": 7819182,
+    "path": "jars/org.apache.lucene.analysis.nori.jar",
+    "sha256": "0b9b45d18375fddda142a18a85c42dbcbc6ee42a4dde0b89f29efc1a93f063b6"
+  },
+  {
+    "bytes": 38415,
+    "path": "jars/org.apache.lucene.analysis.opennlp.jar",
+    "sha256": "fe76f06096923c4da0f5126ff0899f54bd9f5193e46788b10cab846edae0fbca"
+  },
+  {
+    "bytes": 26343,
+    "path": "jars/org.apache.lucene.analysis.phonetic.jar",
+    "sha256": "d5ee5115e2fdfe74c18b0778c07218562b84ceba57a75fd80525c80b59e3ab62"
+  },
+  {
+    "bytes": 3593230,
+    "path": "jars/org.apache.lucene.analysis.smartcn.jar",
+    "sha256": "21e8e345634ea9457b2e48119e8f9a825323e8c1ceb0f34f53b27250c43325ae"
+  },
+  {
+    "bytes": 521879,
+    "path": "jars/org.apache.lucene.analysis.stempel.jar",
+    "sha256": "d7012b818428943f44cd5d907cb5f2d3a1448bd9736462f12a2f0522f3610323"
+  },
+  {
+    "bytes": 651494,
+    "path": "jars/org.apache.lucene.backward_codecs.jar",
+    "sha256": "e3e6d4d9e3cdee8c0e2f372ba48cadbe2197f52a8ea796929cc5bb21cbef1383"
+  },
+  {
+    "bytes": 59095,
+    "path": "jars/org.apache.lucene.classification.jar",
+    "sha256": "c2567fb91bf6ce3fa7d49b6ce637206a48d49577d6c50ac009a77170f635d692"
+  },
+  {
+    "bytes": 433989,
+    "path": "jars/org.apache.lucene.codecs.jar",
+    "sha256": "b826613124cf70ff39c53fb76b098d42478d95121754d244a3f363df0f77d0cd"
+  },
+  {
+    "bytes": 4247883,
+    "path": "jars/org.apache.lucene.core.jar",
+    "sha256": "b74f7c7d0210477feba9396ddbdf09bea4a5754d5e7a74909f8741331c2789cb"
+  },
+  {
+    "bytes": 78667,
+    "path": "jars/org.apache.lucene.expressions.jar",
+    "sha256": "3396a97fd4ac3e9a5e8847b4eec549dacb0768c9e0e8b6e5f4615d80e6d30b83"
+  },
+  {
+    "bytes": 289789,
+    "path": "jars/org.apache.lucene.facet.jar",
+    "sha256": "34ab7666954f3739327e16be6b59c2132c4ac5e7f2279b4091e0da90fbbd8cd5"
+  },
+  {
+    "bytes": 99266,
+    "path": "jars/org.apache.lucene.grouping.jar",
+    "sha256": "edc57e5a1e240684d42f58d68d3a2b27b60cda8b4a9be86a7e9fcd2bad4c0f20"
+  },
+  {
+    "bytes": 245853,
+    "path": "jars/org.apache.lucene.highlighter.jar",
+    "sha256": "2ba71a8ebd622cb4d41efd611061350ebacf294c10000586238b08c8e6c58345"
+  },
+  {
+    "bytes": 175902,
+    "path": "jars/org.apache.lucene.join.jar",
+    "sha256": "64af1df032376219ead691ed7e8116350e28e6f868d38ac4d6de3ab532766a20"
+  },
+  {
+    "bytes": 573274,
+    "path": "jars/org.apache.lucene.luke.jar",
+    "sha256": "eec288603dc7f0a40e4e6e61e964eaf4b0a7c68c0f8f1c75e697e35d015656c3"
+  },
+  {
+    "bytes": 62915,
+    "path": "jars/org.apache.lucene.memory.jar",
+    "sha256": "7b76b6670b7b5a52024ca64007e102d94e2ab43b0020085cfc297cf902e8b3fd"
+  },
+  {
+    "bytes": 159445,
+    "path": "jars/org.apache.lucene.misc.jar",
+    "sha256": "3891f953d91c7ac9df7eb56c337fdfc6051097187bbff9f8788d0114c9da81ac"
+  },
+  {
+    "bytes": 130431,
+    "path": "jars/org.apache.lucene.monitor.jar",
+    "sha256": "4369109cfafc8b8273c6f2102a8a13832dd766e47da9803ff317266d3db17f54"
+  },
+  {
+    "bytes": 468124,
+    "path": "jars/org.apache.lucene.queries.jar",
+    "sha256": "917539ecbe18765d00a80fdff6bdac451ea35e40fa4e9e443cd93fe3dad281eb"
+  },
+  {
+    "bytes": 391835,
+    "path": "jars/org.apache.lucene.queryparser.jar",
+    "sha256": "9085780f8414172d015cd613d30c2c2f6aeb4595895901b77536dd521e6ea233"
+  },
+  {
+    "bytes": 50764,
+    "path": "jars/org.apache.lucene.replicator.jar",
+    "sha256": "76ccfcebac9a05c6e23729ef315696ce3f909ea507755dafb2f00770946a954e"
+  },
+  {
+    "bytes": 470249,
+    "path": "jars/org.apache.lucene.sandbox.jar",
+    "sha256": "e5066931b65b0b90d0dafabc17290d4421aab3e32e08108dac44b23d7a7a6a4f"
+  },
+  {
+    "bytes": 279924,
+    "path": "jars/org.apache.lucene.spatial3d.jar",
+    "sha256": "fabf0aaf7031fcdf1851f01ca398f3bc1dc3b61671e4efa50e8bd542daceeb34"
+  },
+  {
+    "bytes": 217149,
+    "path": "jars/org.apache.lucene.spatial_extras.jar",
+    "sha256": "9f2cd9d32b090e1eed1f1240ad6d9a2d0fb59b14cc2d6024f5d10f8ecbf5089e"
+  },
+  {
+    "bytes": 214940,
+    "path": "jars/org.apache.lucene.suggest.jar",
+    "sha256": "4305e6c938a80bf2d5ab1f292458425af50a13c2bf39d03c286c5e9c8af4a719"
+  },
+  {
+    "bytes": 17165,
+    "path": "jars/org.apache.opennlp.morfologik.jar",
+    "sha256": "964092bbd1ac72d64a00f24adad67ddf85dbea232e48ef624cbf50f7f5dfd793"
+  },
+  {
+    "bytes": 55015,
+    "path": "jars/org.apache.opennlp.spellcheck.jar",
+    "sha256": "637adcde78bd30a83c533ac2c106de269ade00e206892b9d4d3308007e4fd6c4"
+  },
+  {
+    "bytes": 2016658,
+    "path": "jars/org.apache.opennlp.tools.jar",
+    "sha256": "a7d4a446c7d5368a3b7e606e9bafe6a9b42c1aa7296d08f098a40815e8e68b87"
+  },
+  {
+    "bytes": 57298,
+    "path": "jars/org.apache.opennlp.uima.jar",
+    "sha256": "4f7c9afe25bcd447a0d5ca1f47258e0dcc6f552936ca8ea0cff0ad939b7b2375"
+  },
+  {
+    "bytes": 18341,
+    "path": "jars/org.carrot2.morfologik.fsa.jar",
+    "sha256": "ea569874d7909a62ea65d719392f9188af5e4586e20939073bab35c96cd57f9b"
+  },
+  {
+    "bytes": 30500,
+    "path": "jars/org.carrot2.morfologik.fsa_builders.jar",
+    "sha256": "aa8ca70e3c4f017a75ed0a6b4ff426e8717bb0dc98aed2aa7725ac59e359185d"
+  },
+  {
+    "bytes": 1884742,
+    "path": "jars/org.carrot2.morfologik.polish.jar",
+    "sha256": "b18a8192636eb4e7b286ebfcc01eb596ee6a424caaaee90693ec2283d8b33172"
+  },
+  {
+    "bytes": 52797,
+    "path": "jars/org.carrot2.morfologik.stemming.jar",
+    "sha256": "405381710a7e19c8339c9dff5eb9abd880f4f0823f2157fa5671c5d4f021f178"
+  },
+  {
+    "bytes": 36143,
+    "path": "jars/org.carrot2.morfologik.tools.jar",
+    "sha256": "f28c70ae1b9674c2ef1f48cc20d8053613d320fd422dda25bc3e952ff2e8552d"
+  },
+  {
+    "bytes": 1216621,
+    "path": "jars/org.locationtech.jts.jar",
+    "sha256": "3f3b233106941b454678c2a87925252f7f29d493015684e5237d139f08aad3da"
+  },
+  {
+    "bytes": 67358,
+    "path": "jars/org.slf4j.jar",
+    "sha256": "e2038cee67ccfcafcf8e72fa560782a8d5bf46010553314c9a365a48c2cedf08"
+  },
+  {
+    "bytes": 13645,
+    "path": "jars/org.slf4j.simple.jar",
+    "sha256": "e78aba9e69bc8c064f7a0659334a3f122ff0228e1a61836c5bac3d16732c79b6"
+  },
+  {
+    "bytes": 120206,
+    "path": "jars/s2.geometry.library.java.jar",
+    "sha256": "32f0b4fb2193013cc0b569efc1f4aef8794061403334e98b2a6e56cfdbbc7f6d"
+  },
+  {
+    "bytes": 185351,
+    "path": "jars/spatial4j.jar",
+    "sha256": "68705f89e10df9ddae60150f4e4742cc82373b4c1b0e41a4ea89bdc66cbe603f"
+  },
+  {
+    "bytes": 1914479,
+    "path": "jars/uimaj.core.jar",
+    "sha256": "126fdb24335aded7b7c0298800c5f8fbeda3dfb4249b391bce5817ef3c956e9c"
+  },
+  {
+    "bytes": 37861,
+    "path": "jars/zlibsvm.core.jar",
+    "sha256": "fc6cffcc239dc8d103d546c3815ad7789d131ed1319a7057be44e275fda934f9"
+  },
+  {
+    "bytes": 240387,
+    "path": "pack/jmods/com.fasterxml.jackson.annotation.jmod",
+    "sha256": "b24ab7fff0e7f7c306fbde6d2af4c401da9cbc077e6927185147d835ad62ec88"
+  },
+  {
+    "bytes": 726911,
+    "path": "pack/jmods/com.fasterxml.jackson.core.jmod",
+    "sha256": "86413ab0ea9c93f8e64188f12fed1ee8bfd8290bb816a5aac4cf11f9882fb97f"
+  },
+  {
+    "bytes": 1876392,
+    "path": "pack/jmods/com.fasterxml.jackson.databind.jmod",
+    "sha256": "f35cb7cf046d7df6c5d5b3134b2824bd0e14fd739e46f020716a0e93dd2ef4bd"
+  },
+  {
+    "bytes": 15398586,
+    "path": "pack/jmods/com.ibm.icu.jmod",
+    "sha256": "2197fa471a14a94e1c6d1809e18932b5ae6c207ebed9d7401929331df04215fd"
+  },
+  {
+    "bytes": 321923,
+    "path": "pack/jmods/com.m3.text.jmod",
+    "sha256": "4096181175450e4007344377cbc8d40405116234f8a681209dedbf8df21a66a7"
+  },
+  {
+    "bytes": 1846411,
+    "path": "pack/jmods/hppc.jmod",
+    "sha256": "bc43fe44b283e8cbfdcdf9f7f9b348fe54f5436d2a0c14766f3c0efb32f2e077"
+  },
+  {
+    "bytes": 792314,
+    "path": "pack/jmods/io.github.classgraph.jmod",
+    "sha256": "416e9d4a6f54a2f7aba9d3512a6ccb4095fcfc6aca14e7f63827c8e7cf90539f"
+  },
+  {
+    "bytes": 1142937,
+    "path": "pack/jmods/io.github.dmlloyd.classfile.jmod",
+    "sha256": "0193e05ac110d7120f55e5816137689ddbefd475a70466c82a8754590b89a6f8"
+  },
+  {
+    "bytes": 241215,
+    "path": "pack/jmods/jcommander.jmod",
+    "sha256": "4ead232f83f5466b27673740c25c96d17fef4c3f8d3b64fcccd3a66f196074df"
+  },
+  {
+    "bytes": 623371,
+    "path": "pack/jmods/jdk.m3.compiletime.jmod",
+    "sha256": "f17b5419009e238c823c5e7df4505c845f2e78d7849ae6427d3c53ceaf865a82"
+  },
+  {
+    "bytes": 164062,
+    "path": "pack/jmods/jdk.m3.nlp.search.jmod",
+    "sha256": "5c76164c2a9ddaadf2f0d44add48526911f9801b428ae58646cdac0b030919c2"
+  },
+  {
+    "bytes": 197151,
+    "path": "pack/jmods/libsvm.jmod",
+    "sha256": "6b3d6a8279d3b01a060eb1790d96cc33199119e9b7605bba3b12f3eb8a72863b"
+  },
+  {
+    "bytes": 4257142,
+    "path": "pack/jmods/morfologik.ukrainian.search.jmod",
+    "sha256": "5fcfd54d82e779c1ca545dcc65ff4fb39bf23d74e6d0d89aff078b8931374cef"
+  },
+  {
+    "bytes": 184090,
+    "path": "pack/jmods/noggit.jmod",
+    "sha256": "2d24a064decc546336e0a63a011b455e99acd0a5b2671393d71cd35a35f48dd6"
+  },
+  {
+    "bytes": 487542,
+    "path": "pack/jmods/org.antlr.antlr4.runtime.jmod",
+    "sha256": "a7f33e3cbf761ed17ae3f1aef3f68d0a885cdcb3a9b34a0258551c37ba6c3de7"
+  },
+  {
+    "bytes": 578172,
+    "path": "pack/jmods/org.apache.commons.codec.jmod",
+    "sha256": "b42d51779f78a3ada2c6f1561330b9f89710269296f6f9a4ae39e2a08224b2c8"
+  },
+  {
+    "bytes": 231692,
+    "path": "pack/jmods/org.apache.commons.xml.secure.jmod",
+    "sha256": "bf6bf7cc94a3a4550fc4b1c26f5895b013374f8335cea3424c687f780cdb5be7"
+  },
+  {
+    "bytes": 1884274,
+    "path": "pack/jmods/org.apache.lucene.analysis.common.jmod",
+    "sha256": "2bba77d307d32706d1f678da8ff252c7e2e1322dcb8cc39fa6f821a027d7092d"
+  },
+  {
+    "bytes": 242693,
+    "path": "pack/jmods/org.apache.lucene.analysis.icu.jmod",
+    "sha256": "9f28b4313a0e617133d1cc83d9f7c5375bc1dc5e6e7b8cfae37895813739540c"
+  },
+  {
+    "bytes": 4865776,
+    "path": "pack/jmods/org.apache.lucene.analysis.kuromoji.jmod",
+    "sha256": "f47542277db9f763a4ae2a56cb5d9a5b9e60d48369041f7293bb8c5c96b62ed4"
+  },
+  {
+    "bytes": 184880,
+    "path": "pack/jmods/org.apache.lucene.analysis.morfologik.jmod",
+    "sha256": "d0b72d78ce07818a95ed4df738b214a7bade0b6d5b4074e278dfa71c9b397058"
+  },
+  {
+    "bytes": 7977287,
+    "path": "pack/jmods/org.apache.lucene.analysis.nori.jmod",
+    "sha256": "8066075758934030fe45435cf87d6fd05ea45b44684458f924b68241ff34732d"
+  },
+  {
+    "bytes": 195176,
+    "path": "pack/jmods/org.apache.lucene.analysis.opennlp.jmod",
+    "sha256": "bc0d19ccc9df9b84b95f4b0216bee2d8ac1b1127277a21f30c55447d83170723"
+  },
+  {
+    "bytes": 182784,
+    "path": "pack/jmods/org.apache.lucene.analysis.phonetic.jmod",
+    "sha256": "98e83275455710685b3efacfd7e405bcb18e79dc08e1814ef008877aaba1d06e"
+  },
+  {
+    "bytes": 3750119,
+    "path": "pack/jmods/org.apache.lucene.analysis.smartcn.jmod",
+    "sha256": "6db9b1bd522f2f1100976f4f60adc0d9c963836e1197264a73cd13b9e332f89d"
+  },
+  {
+    "bytes": 678800,
+    "path": "pack/jmods/org.apache.lucene.analysis.stempel.jmod",
+    "sha256": "551c194f894811cbf9002c3d3f9de5c00fd9ea0a1298577d842a4047cc1b3bad"
+  },
+  {
+    "bytes": 819103,
+    "path": "pack/jmods/org.apache.lucene.backward_codecs.jmod",
+    "sha256": "91146aadf3d1f474c9d19fa1e456619390add26f9ac9178a30ab9d91b30b88a3"
+  },
+  {
+    "bytes": 215824,
+    "path": "pack/jmods/org.apache.lucene.classification.jmod",
+    "sha256": "321d1c16486e40e128186ffdf86abdf71920bf0851b2206464495afc6e5aff9a"
+  },
+  {
+    "bytes": 596926,
+    "path": "pack/jmods/org.apache.lucene.codecs.jmod",
+    "sha256": "2e2a22a61d1442e890d0f34241b59d6d34f6f7619d3c62829f32e4841e87c4cb"
+  },
+  {
+    "bytes": 4491396,
+    "path": "pack/jmods/org.apache.lucene.core.jmod",
+    "sha256": "999f6fa1f5f84c6c714f36fc4a8b6134df3c9ec2eade44422c5a0b900ad61095"
+  },
+  {
+    "bytes": 236164,
+    "path": "pack/jmods/org.apache.lucene.expressions.jmod",
+    "sha256": "f1d26fd5fa66481b10fefafc9a543d9f6c9e9480758ac654e318f107c7209ce8"
+  },
+  {
+    "bytes": 451798,
+    "path": "pack/jmods/org.apache.lucene.facet.jmod",
+    "sha256": "610ec803c639b9b64dd32d28900e255900b7f8f1c130a25e372c0541a8df44e1"
+  },
+  {
+    "bytes": 257339,
+    "path": "pack/jmods/org.apache.lucene.grouping.jmod",
+    "sha256": "ecd48ff687e14b4a73bf6453720fdd0b8eef790dda5b2acd53e3e18442e87d56"
+  },
+  {
+    "bytes": 407254,
+    "path": "pack/jmods/org.apache.lucene.highlighter.jmod",
+    "sha256": "7bd9c137392d2d009a1d4af6747a3ad5928e31981ed8c1a35bfe3738b7c6cdfe"
+  },
+  {
+    "bytes": 336023,
+    "path": "pack/jmods/org.apache.lucene.join.jmod",
+    "sha256": "d4e985264e8b53cf2852158d7f7a01191fb765a96f02a97b64692bacd151df71"
+  },
+  {
+    "bytes": 738451,
+    "path": "pack/jmods/org.apache.lucene.luke.jmod",
+    "sha256": "5c744d0f600b8c45f11c59efe6d99348b923ff6d0dfbc8adb0dcaf4f59be6653"
+  },
+  {
+    "bytes": 220156,
+    "path": "pack/jmods/org.apache.lucene.memory.jmod",
+    "sha256": "3209e52b6845e592912831e25edb412469b7d2ef5eee01d25944b81dd455d707"
+  },
+  {
+    "bytes": 318510,
+    "path": "pack/jmods/org.apache.lucene.misc.jmod",
+    "sha256": "0c71f0714e6cac9202b7acd63473f1e1e38a06de54db926bfa7b6b0f84eb289e"
+  },
+  {
+    "bytes": 289400,
+    "path": "pack/jmods/org.apache.lucene.monitor.jmod",
+    "sha256": "511a6e34cfef2a10667465ae0f9e437bce120ba92893a5d503a4802d2e8e8ecf"
+  },
+  {
+    "bytes": 635989,
+    "path": "pack/jmods/org.apache.lucene.queries.jmod",
+    "sha256": "3d9cd82345597e1a1c27596c00e9c5354996c8b2c6b678092d3ae1f309b4bb30"
+  },
+  {
+    "bytes": 556084,
+    "path": "pack/jmods/org.apache.lucene.queryparser.jmod",
+    "sha256": "0c427689db00c9fa20a600ccb16c39e445a43f8ac51654487b0e6c30941a11db"
+  },
+  {
+    "bytes": 207397,
+    "path": "pack/jmods/org.apache.lucene.replicator.jmod",
+    "sha256": "1cd9a44e0c9f62a930317abbf2235e9c87a69dbc09cea0f266f86f414292a7d2"
+  },
+  {
+    "bytes": 635970,
+    "path": "pack/jmods/org.apache.lucene.sandbox.jmod",
+    "sha256": "7bf8b90bffad4e04a033d1d8870547c75a25754e914ccd4079718f1b2c040c0d"
+  },
+  {
+    "bytes": 440717,
+    "path": "pack/jmods/org.apache.lucene.spatial3d.jmod",
+    "sha256": "cb0414db6310a9a2922c5c8d005f1791cb158c9f15e298621fe489113a4047b7"
+  },
+  {
+    "bytes": 377654,
+    "path": "pack/jmods/org.apache.lucene.spatial_extras.jmod",
+    "sha256": "5e43ee1706ea340fb2209db3ae7e7d1be79e4a0fb347621bfd6f57b1512ea038"
+  },
+  {
+    "bytes": 374837,
+    "path": "pack/jmods/org.apache.lucene.suggest.jmod",
+    "sha256": "82403a3e03119b0aa4535fca567fa2d3154b9c93fdf3934afaa9f56c112a0b10"
+  },
+  {
+    "bytes": 173574,
+    "path": "pack/jmods/org.apache.opennlp.morfologik.jmod",
+    "sha256": "f5bbe0df3f02033162dab7f841daf00c0541870e82b1a0e5f9df820444e688cf"
+  },
+  {
+    "bytes": 212096,
+    "path": "pack/jmods/org.apache.opennlp.spellcheck.jmod",
+    "sha256": "ab6fd6d1d6671e58e87fd886ae967f91475301eb21b658ca0102f59b05cc32ac"
+  },
+  {
+    "bytes": 2212939,
+    "path": "pack/jmods/org.apache.opennlp.tools.jmod",
+    "sha256": "cb8c7315efb43c6483d2b4e8e25b41812a17d261c7a5fae4e7acd269e15eeffd"
+  },
+  {
+    "bytes": 214859,
+    "path": "pack/jmods/org.apache.opennlp.uima.jmod",
+    "sha256": "3ab55d69c1f96014c7c538053cb18f17a7f00268eebcf15c9c10f4720a817c43"
+  },
+  {
+    "bytes": 174718,
+    "path": "pack/jmods/org.carrot2.morfologik.fsa.jmod",
+    "sha256": "2be392c16c9af6f3abf43c832d2d359803b55254f35c32a5036379ee4810a290"
+  },
+  {
+    "bytes": 187069,
+    "path": "pack/jmods/org.carrot2.morfologik.fsa_builders.jmod",
+    "sha256": "758492be5cac7a5cea0410060c4de244852b6022db18277aa402bc6829ea1a64"
+  },
+  {
+    "bytes": 2041055,
+    "path": "pack/jmods/org.carrot2.morfologik.polish.jmod",
+    "sha256": "b310584bf8f4756cf1f0a3b0d3f29c4b9788cfecdf0e97b503a06b7466004f4f"
+  },
+  {
+    "bytes": 210038,
+    "path": "pack/jmods/org.carrot2.morfologik.stemming.jmod",
+    "sha256": "e825c9b96a1fdbe464b4f30a3756317b64e7c0c630419b123a7642065db1dd30"
+  },
+  {
+    "bytes": 192968,
+    "path": "pack/jmods/org.carrot2.morfologik.tools.jmod",
+    "sha256": "266c4ec765bafb1306fa78fa321a5d216c72d0e01b121ef2cef4f363214bf792"
+  },
+  {
+    "bytes": 1396166,
+    "path": "pack/jmods/org.locationtech.jts.jmod",
+    "sha256": "54faa9eeec8b23a429ef4971b0bce80a8bb43b1b7229ddd1f1aec7596dd11678"
+  },
+  {
+    "bytes": 225239,
+    "path": "pack/jmods/org.slf4j.jmod",
+    "sha256": "44bbe26ab05b35f47577d90a5f61bf9e8b75cf9966ea205c42356d49e4c0ac43"
+  },
+  {
+    "bytes": 169990,
+    "path": "pack/jmods/org.slf4j.simple.jmod",
+    "sha256": "1dc3e7c9f3b63f66b5adcd7f0a7ac74f9a17ac53c3e069fe9896a42622cdd187"
+  },
+  {
+    "bytes": 277959,
+    "path": "pack/jmods/s2.geometry.library.java.jmod",
+    "sha256": "38b64f0fcd7fe440b058a212acbc4f538259775c7417fc8813ffe3ba592cc55d"
+  },
+  {
+    "bytes": 344960,
+    "path": "pack/jmods/spatial4j.jmod",
+    "sha256": "5613be014a1a84db7be88908de85fa822ea2d82bf240dc02289de6747b83ffe9"
+  },
+  {
+    "bytes": 2103528,
+    "path": "pack/jmods/uimaj.core.jmod",
+    "sha256": "89626fcf13f0f17db485b4f066dd134ee7bc7652d1ceaad39cbe9e6b4e67e02d"
+  },
+  {
+    "bytes": 194942,
+    "path": "pack/jmods/zlibsvm.core.jmod",
+    "sha256": "979f35097bf949843f594ae971e321db0845be9b091fbe3699ed66c52e4ee744"
+  },
+  {
+    "bytes": 12328,
+    "path": "pack/image/bin/java",
+    "sha256": "3282b9858bee1ffd212a1a640236699494235d106e3b8bccbf726f9ac02cb0aa"
+  },
+  {
+    "bytes": 213309387,
+    "path": "pack/image/lib/modules",
+    "sha256": "77c1140ea75e10d2aef55076302deb2ee4d2158a34002e151e6f635c9aacc8cf"
+  },
+  {
+    "bytes": 2018,
+    "path": "pack/image/release",
+    "sha256": "1e9ec9c46a6d922ad35835cf0c1720f55c75dbad603a96b07e62b9506fb158ce"
+  }
+]

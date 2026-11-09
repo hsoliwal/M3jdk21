@@ -1,0 +1,15 @@
+{
+  "command": [
+    "javac",
+    "-Xlint:all",
+    "-Werror",
+    "--patch-module",
+    "java.base=/workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/trial-01/snapshot/classes",
+    "-d",
+    "/workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/trial-01/memory",
+    "/workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/canonical/synexia-openrewrite-recipes/recipe-crates/m3jdk-collection-dense-20261019/proof/MemoryAgent.java",
+    "/workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/canonical/synexia-openrewrite-recipes/recipe-crates/m3jdk-collection-dense-20261019/proof/SnapshotMemory.java"
+  ],
+  "exit": 0,
+  "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

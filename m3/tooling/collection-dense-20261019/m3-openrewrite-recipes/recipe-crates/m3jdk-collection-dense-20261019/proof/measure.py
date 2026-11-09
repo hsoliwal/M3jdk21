@@ -1,0 +1,54 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+"""Run preserved complete-call diagnostics on qualified baseline and SDK output."""
+from pathlib import Path
+import argparse, hashlib, json, os, subprocess, shutil
+p=argparse.ArgumentParser()
+for arg in ['work','jdk','m2']:p.add_argument('--'+arg,type=Path,required=True)
+p.add_argument('--measure-only',action='store_true')
+a=p.parse_args();w=a.work.resolve();c=Path(__file__).resolve().parent.parent;e=w/'evidence'
+assert (e/'PARITY.json').is_file(), 'contract runtime must precede performance diagnostics'
+env=os.environ.copy();env['JAVA_HOME']=str(a.jdk);env['PATH']=str(a.jdk/'bin')+os.pathsep+env['PATH']
+def run(name,cmd):
+    cmd=list(map(str,cmd));log=e/(name+'.log');assert not log.exists(),name
+    with log.open('w') as f:
+        r=subprocess.Popen(cmd,env=env,stdout=f,stderr=subprocess.STDOUT)
+        _, status, usage=os.wait4(r.pid,0)
+        r.returncode=os.waitstatus_to_exitcode(status)
+    (e/(name+'-process.json')).write_text(json.dumps({'user_seconds':usage.ru_utime,'system_seconds':usage.ru_stime,'max_rss_kib':usage.ru_maxrss,'minor_faults':usage.ru_minflt,'major_faults':usage.ru_majflt},indent=2)+'\n')
+    (e/(name+'.json')).write_text(json.dumps({'command':cmd,'exit':r.returncode,'log_sha256':hashlib.sha256(log.read_bytes()).hexdigest()},indent=2)+'\n')
+    print(name,r.returncode,'\n'.join(log.read_text().splitlines()[-2:]),flush=True)
+    if r.returncode:raise SystemExit('HOLD '+name)
+management=['--add-modules','java.management,jdk.management','--add-reads','java.base=java.management','--add-reads','java.base=jdk.management']
+if not a.measure_only:
+    cp=os.pathsep.join(str(a.m2/part) for part in (c/'proof/lint-classpath.txt').read_text().splitlines())
+    run('20-cost-lint',['java','-cp',cp,'com.puppycrawl.tools.checkstyle.Main','-c',c/'proof/checkstyle.xml',*c.glob('proof/*.java')])
+    memory=w/'memory';memory.mkdir();(memory/'MANIFEST.MF').write_text('Manifest-Version: 1.0\nPremain-Class: proof.MemoryAgent\n\n')
+    run('21-memory-compile',['javac','-Xlint:all','-Werror','--patch-module','java.base='+str(w/'snapshot/classes'),'-d',memory,c/'proof/MemoryAgent.java',c/'proof/SnapshotMemory.java'])
+    run('22-memory-package',['jar','--create','--file',memory/'agent.jar','--manifest',memory/'MANIFEST.MF','-C',memory,'proof/MemoryAgent.class'])
+    for state in ['baseline','snapshot']:
+        stage=w/state;benchsource=stage/'bench-source/java/util';benchsource.mkdir(parents=True);bench=stage/'bench-classes';bench.mkdir()
+        for name in ['M3CollectionViewsBenchmark','M3CollectionMasksBenchmark']:
+            shutil.copyfile(c/'proof'/(name+'.java'),benchsource/(name+'.java'))
+        run(state+'-23-cost-compile',['javac','-J-Xmx256m','-Xlint:all','--patch-module','java.base='+str(stage/'classes')+os.pathsep+str(stage/'bench-source'),*management,'-d',bench,*benchsource.glob('*.java')])
+        native=stage/'libM3MasksCost.so'
+        source=w/'generated/src/java.base/share/native/libjava/M3CollectionMasks.c' if state=='snapshot' else c/'proof/inputs/src/java.base/share/native/libjava/M3CollectionMasks.c'
+        flags=['-std=c17','-Wall','-Wextra','-Werror','-I'+str(a.jdk/'include'),'-I'+str(a.jdk/'include/linux'),'-I'+str(stage/'headers')]
+        run(state+'-24-cost-native-lint',['cc',*flags,'-fsyntax-only',source])
+        run(state+'-25-cost-native-compile',['cc',*flags,'-O3','-fPIC','-shared',source,'-o',native])
+        run(state+'-26-cost-native-contract',['java','-Xmx256m','-Xcheck:jni','--patch-module','java.base='+str(stage/'classes')+os.pathsep+str(stage/'boot-classes'),'-Dtest.m3.masks.native.library='+str(native),'java.util.M3CollectionDenseTest','native'])
+        run(state+'-27-memory',['java','-Xmx256m','-javaagent:'+str(memory/'agent.jar'),'--patch-module','java.base='+str(stage/'classes'),'--add-opens','java.base/java.util=ALL-UNNAMED','-cp',memory,'SnapshotMemory'])
+else:
+    for state in ['baseline','snapshot']:
+        for stage in ['23-cost-compile','24-cost-native-lint','25-cost-native-compile','26-cost-native-contract','27-memory']:
+            label=state+'-'+stage
+            receipt=json.loads((e/(label+'.json')).read_text())
+            assert receipt['exit']==0 and hashlib.sha256((e/(label+'.log')).read_bytes()).hexdigest()==receipt['log_sha256'],label
+for fork in range(3):
+    for state in (['baseline','snapshot'] if fork%2==0 else ['snapshot','baseline']):
+        stage=w/state
+        base=['java','-Xms256m','-Xmx256m',*management,'--patch-module','java.base='+str(stage/'classes')+os.pathsep+str(stage/'bench-classes'),'-Dtest.m3.masks.native.library='+str(stage/'libM3MasksCost.so')]
+        for probe,mode in [('M3CollectionMasksBenchmark','both'),('M3CollectionViewsBenchmark','integrated')]:
+            label=state+'-29-'+probe+'-'+str(fork)
+            run(label,[*base,'java.util.'+probe,mode])
+assert (e/'baseline-27-memory.log').read_bytes()==(e/'snapshot-27-memory.log').read_bytes()

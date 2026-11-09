@@ -1,0 +1,25 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.java.ReorderMethodArguments"
+contributors:
+- name: "Jonathan Schneider"
+  email: "jkschneider@gmail.com"
+  lineCount: 94
+- name: "Joan Viladrosa"
+  email: "joan@moderne.io"
+  lineCount: 46
+- name: "Tyler Van Gorder"
+  email: "tkvangorder@users.noreply.github.com"
+  lineCount: 24
+- name: "Sam Snyder"
+  email: "sam@moderne.io"
+  lineCount: 23
+- name: "Greg Adams"
+  email: "greg@moderne.io"
+  lineCount: 17
+- name: "traceyyoshima"
+  email: "tracey.yoshima@gmail.com"
+  lineCount: 7
+- name: "Tim te Beek"
+  email: "tim@moderne.io"
+  lineCount: 3

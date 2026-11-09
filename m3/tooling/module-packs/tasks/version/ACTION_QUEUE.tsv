@@ -1,0 +1,9 @@
+id	state	exit
+RUNNER	BLOCKED	GitHub must create actual jobs; retry returned403
+FRAMEWORK	BLOCKED	Maven/OpenRewrite/JUnit executed and 99% measured, full lint/reactor green
+NORMALIZE	PENDING	existing source-convergence plane applied and proved on exact selected sources
+BACKPORTS	PENDING	all compatible JEP/non-JEP rows have implemented and verified product receipts
+JDK_BUILD	PENDING	modified JDK configure/make/jtreg
+MODULE_PACKS	PENDING	actual JavaFX/application/native integration and dependency locks
+M3_STORAGE	PENDING	remaining M3 naming/String/native/GPU/semantic-store contracts
+PLATFORM	PENDING	Windows/macOS/native acceptance

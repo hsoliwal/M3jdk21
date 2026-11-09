@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015, 2023, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2015, 2025, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -26,6 +26,7 @@
  * @summary Test using -XX:+CrashOnOutOfMemoryError
  * @modules java.base/jdk.internal.misc
  * @library /test/lib
+ * @requires vm.flagless
  * @run driver TestCrashOnOutOfMemoryError
  * @bug 8138745
  */
@@ -53,7 +54,7 @@ public class TestCrashOnOutOfMemoryError {
             }
         }
         // else this is the main test
-        ProcessBuilder pb = ProcessTools.createJavaProcessBuilder("-XX:+CrashOnOutOfMemoryError",
+        ProcessBuilder pb = ProcessTools.createLimitedTestJavaProcessBuilder("-XX:+CrashOnOutOfMemoryError",
                  "-XX:-CreateCoredumpOnCrash", "-Xmx128m", TestCrashOnOutOfMemoryError.class.getName(),"throwOOME");
         OutputAnalyzer output = new OutputAnalyzer(pb.start());
         int exitValue = output.getExitValue();
@@ -71,8 +72,8 @@ public class TestCrashOnOutOfMemoryError {
            #
            # JRE version: OpenJDK Runtime Environment (9.0) (build 1.9.0-internal-debug-cheleswer_2015_10_20_14_32-b00)
            # Java VM: OpenJDK 64-Bit Server VM (1.9.0-internal-debug-cheleswer_2015_10_20_14_32-b00, mixed mode, tiered, compressed oops, serial gc, linux-amd64)
-           # Core dump will be written. Default location: Core dumps may be processed with "/usr/share/apport/apport %p %s %c %P" (or dumping to
-             /home/cheleswer/Desktop/core.6212)
+           # Core dump will be written. Default location: Determined by the following:
+           "/usr/share/apport/apport %p %s %c %P" (alternatively, falling back to /home/cheleswer/Desktop/core.6212)
            #
            # An error report file with more information is saved as:
            # /home/cheleswer/Desktop/hs_err_pid6212.log

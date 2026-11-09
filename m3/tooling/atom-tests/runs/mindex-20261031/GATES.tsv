@@ -1,0 +1,7 @@
+stage	status	command	evidence
+ATOMIZE	PASS	gen_atom_tests.py v2 (assertion and literal gates) + atom_census_join.py	spec_atom_rows=385 perf_rows=17 assertion_gate v1_accepts=402 v2_accepts=402 v1_only=0 rows=402 generated_atoms=402
+JUNIT	PASS	run_atom_tests.sh (stock JDK 21.0.9 + --patch-module java.base)	junit_classes=21 tests=385 failures=0 errors=0 skipped=0
+JIT_PERF	PASS	M3MindexAtomPerf -XX:+PrintCompilation (warm-up then interleaved rounds)	perf_rows=17 c2=12 host_cpu_pct_before=21 after=6
+PATTERNIZE	PASS	per_atom_test_census.py + atom_census_join.py	atoms=1150 spec_covered=385 pending=765 before={'CLASS_ONLY': 484, 'TESTED': 464, 'UNTESTED': 202} after={'CLASS_ONLY': 300, 'TESTED': 850} census_tree_java_files=586 reference_java_files=557 added=29
+FACTS	PASS	TEST_PATTERNS.tsv + scenario_shapes.py census + RECIPE_MEMORY.tsv	scenario_rows=289 census BODY shapes=0 rows=0 census ASSERTION shapes=0 rows=0 census scenario_rows=289 recipe_memory_rows=31
+MUTATION	PASS	mutation_run.sh (MUTANTS.tsv: mutate_once.py + run_atom_tests.sh per mutant -> MUTATION.tsv)	mutants=7 killed=7

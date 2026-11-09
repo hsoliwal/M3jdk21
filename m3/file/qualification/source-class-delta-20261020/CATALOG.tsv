@@ -1,0 +1,15 @@
+problem_category	selected_owner	selection	contract	status
+Exact source delta	com.m3.file.M3FileDeltaLedger	SHA-256 over exact NIO bytes	Same-length/mtime edits detected; no source parse	JAVA21_PROBE_PASS
+Exact .class delta	com.m3.file.M3FileDeltaLedger	Same byte fingerprint plane, binary kind mask	Class content changes and deletions detected; not structural ABI	JAVA21_PROBE_PASS
+Path lookup	M3 parent-owned indexed columns	Open-addressed int[] physical slots	No retained per-row Entry/Node; stable slot after edit or recreation	JAVA21_PROBE_PASS
+Change state	M3 bit masks	LIVE CREATED MODIFIED REMOVED	Tombstone one-generation event, retained physical slot	JAVA21_PROBE_PASS
+File snapshot image	M3File facts	Version/root, SHA-256 seal, atomic replacement	Corrupt/foreign images refused; host durability still requires verification	JAVA21_PROBE_PASS
+Class ABI impact	Original javac class reader	Compiler-derived ABI digest, reverse DAG	Never skip dependent compile from raw bytes alone	HOLD
+Source semantic impact	M3AST original attributed task	Source/atom signatures and exact dependency context	Reuse original task, not second parser; processors/reflective paths conservative	HOLD
+Maven 4	Original Maven fork	Consume SDK facts within original lifecycle/model paths	Retain goals/toolchains/processor behavior and invalidation	HOLD
+Gradle	Original Gradle fork	Consume SDK facts via existing incremental input/task services	Preserve configuration cache, build cache and workers	HOLD
+JNI hash acceleration	Existing M3FS native owner	Reuse only after Java/JNI comparative benchmark	No new unqualified native symbol or movable heap pointer	HOLD
+Collection filtered views	Existing M3Collections and java.util owner	Array/offset/mask backed view, predicate selection	Original API, mutation, predicate demand, comparator, nested view contracts	REUSE_EXISTING_PRS
+Collection sorted views	Existing M3Collections and java.util owner	Index-only stable physical-offset order	Comparer/null/duplicate/range/reverse/iterator contracts	REUSE_EXISTING_PRS
+LeetCode HackerRank GeeksforGeeks	Algorithm category catalogue	Hashing/graph/difference taxonomy only	No challenge code copied; exact hashes determine equality	REFERENCE_ONLY
+Buffered file hashing	M3FileDeltaLedger private atom	One 64KiB reusable ByteBuffer per scan	No per-file 64KiB scratch allocation; refuse repeated zero reads	JAVA21_PROBE_PASS

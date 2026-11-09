@@ -1,0 +1,7 @@
+consumer	before	after	gate	classes_new	errors_vs_old	errors_vs_new	added_by_repoint	verdict
+DROP	junit-jupiter-5.11.4	-	files=12	-	-	-	proof_mentions=7 proof_blocking=0	PASS
+DROP	junit-jupiter-engine-5.11.4	-	files=115	-	-	-	proof_mentions=5 proof_blocking=0	PASS
+DROP	junit-platform-launcher-1.11.4	-	files=94	-	-	-	proof_mentions=9 proof_blocking=0	PASS
+DROP	junit-platform-engine-1.11.4	-	files=114	-	-	-	proof_mentions=31 proof_blocking=0	PASS
+DROP	junit-jupiter-api-5.11.4	-	files=166	-	-	-	proof_mentions=11 proof_blocking=0	PASS
+DROP	junit-platform-commons-1.11.4	-	files=73	-	-	-	proof_mentions=1 proof_blocking=0	PASS

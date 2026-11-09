@@ -1,0 +1,8 @@
+id	file	old	new	test_class	description
+M1	M3RegexDpPlan.java	|| c == '@u2028' || c == '@u2029';	|| c == '@u2028';	M3RegexDpPlanAtomTest	lineTerminator drops U+2029
+M2	M3RX7Transitions.java	result[state] = intermediate < 0 ? -1 : right[intermediate];	result[state] = intermediate <= 0 ? -1 : right[intermediate];	M3RX7TransitionsAtomTest	composeJava treats state 0 as dead (< -> <=)
+M3	M3Automaton.java	if (max < maxLabel) {	if (max <= maxLabel) {	M3AutomatonAtomTest	getStartPoints adds max+1 at maxLabel (< -> <=)
+M4	M3StateRelation.java	while (active != 0L && result != ceiling) {	while (active != 0L && result == ceiling) {	M3StateRelationAtomTest	applyRowsUntil stop condition inverted
+M5	M3TokenEngine.java	System.arraycopy(alternativeSaves, saved, registers, 0, stride);	// M5: restore dropped	M3TokenEngineAtomTest	alternative second branch reads the lane the first branch rewrote (restore dropped: the pre-fix behaviour)
+M6	M3AutomatonOps.java	h ^= h >>> 13;	h ^= h >>> 12;	M3AutomatonOpsAtomTest	mix second shift 13 -> 12
+M7	M3Boundary.java	int count = 1;	int count = 0;	M3BoundaryAtomTest	liveLoaderCount omits bootstrap

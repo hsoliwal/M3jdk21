@@ -1,0 +1,149 @@
+current	family	public_name	why
+M3IntCollection	core	IntCollection	root interface of the int collections
+M3LongCollection	core	LongCollection	root interface of the long collections
+M3IntList	core	IntList	list interface
+M3LongList	core	LongList	list interface
+M3IntIterator	core	IntIterator	primitive iterator
+M3LongIterator	core	LongIterator	primitive iterator
+M3LongDeque	core	LongDeque	deque interface
+M3LongQueue	core	LongQueue	queue interface
+M3PrimitiveKind	core	PrimitiveKind	the eight primitive kinds (used by m3/tooling)
+M3IntArrayList	core	IntArrayList	canonical growable int list
+M3LongArrayList	core	LongArrayList	canonical growable long list (used by m3/eclipse)
+M3IntHashSet	core	IntHashSet	open-addressing int set
+M3LongHashSet	core	LongHashSet	open-addressing long set
+M3LongLinkedHashSet	core	LongLinkedHashSet	insertion-ordered long set
+M3LongTreeSet	core	LongTreeSet	sorted long set
+M3LongSortedSet	core	LongSortedSet	sorted long set interface
+M3IntSparseSet	core	IntSparseSet	sparse set over a bounded universe
+M3IntIntHashMap	core	IntIntHashMap	int -> int map
+M3IntLongHashMap	core	IntLongHashMap	int -> long map
+M3IntObjectHashMap	core	IntObjectHashMap	int -> object map
+M3LongIntHashMap	core	LongIntHashMap	long -> int map
+M3LongLongHashMap	core	LongLongHashMap	long -> long map
+M3LongObjectHashMap	core	LongObjectHashMap	long -> object map
+M3ObjectIntHashMap	core	ObjectIntHashMap	object -> int map
+M3ObjectLongHashMap	core	ObjectLongHashMap	object -> long map
+M3LongLongLinkedHashMap	core	LongLongLinkedHashMap	insertion-ordered long -> long map
+M3LongLongTreeMap	core	LongLongTreeMap	sorted long -> long map
+M3LongLongSortedMap	core	LongLongSortedMap	sorted long -> long map interface
+M3LongBag	core	LongBag	long multiset (API names pinned by peer)
+M3LongOrderStatisticMultiset	core	LongOrderStatisticMultiset	rank/select multiset
+M3IntArrayDeque	core	IntArrayDeque	int deque
+M3LongArrayDeque	core	LongArrayDeque	long deque
+M3IntPriorityQueue	core	IntPriorityQueue	int min-heap queue
+M3LongPriorityQueue	core	LongPriorityQueue	long min-heap queue
+M3LongLongPriorityQueue	core	LongLongPriorityQueue	keyed long priority queue
+M3LongStack	core	LongStack	long stack
+M3MonotoneLongDeque	core	MonotoneLongDeque	monotone deque (sliding extrema)
+M3LongCircularFifoQueue	core	LongCircularFifoQueue	bounded FIFO
+M3LongSlidingWindow	core	LongSlidingWindow	sliding-window aggregate
+M3LongTimingWheel	core	LongTimingWheel	timer wheel
+M3IntDisjointSet	core	IntDisjointSet	union-find
+M3IntRollbackDisjointSet	core	IntRollbackDisjointSet	union-find with rollback
+M3FrozenIntList	core	FrozenIntList	immutable int list
+M3FrozenIntSet	core	FrozenIntSet	immutable int set
+M3FrozenIntMap	core	FrozenIntMap	immutable int map
+M3FrozenLongList	core	FrozenLongList	immutable long list
+M3FrozenLongSet	core	FrozenLongSet	immutable long set
+M3FrozenLongMap	core	FrozenLongMap	immutable long map
+M3ArrayList	core	M3ArrayList	java.util.ArrayList variant (name clash: prefix kept)
+M3HashMap	core	M3HashMap	java.util.HashMap variant (prefix kept)
+M3HashSet	core	M3HashSet	java.util.HashSet variant (prefix kept)
+M3LinkedHashMap	core	M3LinkedHashMap	java.util.LinkedHashMap variant (prefix kept; 38 outside uses)
+M3LinkedHashSet	core	M3LinkedHashSet	java.util.LinkedHashSet variant (prefix kept)
+M3LinkedList	core	M3LinkedList	java.util.LinkedList variant (prefix kept)
+M3TreeMap	core	M3TreeMap	java.util.TreeMap variant (prefix kept)
+M3TreeSet	core	M3TreeSet	java.util.TreeSet variant (prefix kept)
+M3ArrayDeque	core	M3ArrayDeque	java.util.ArrayDeque variant (prefix kept)
+M3PriorityQueue	core	M3PriorityQueue	java.util.PriorityQueue variant (prefix kept)
+M3WeakHashMap	core	M3WeakHashMap	java.util.WeakHashMap variant (prefix kept)
+M3EnumSet	core	M3EnumSet	java.util.EnumSet variant (prefix kept)
+M3LongBitSet	bits	LongBitSet	long-indexed bitset
+M3PrimitiveRoaringIntSet	bits	RoaringIntSet	compressed int bitmap
+M3PrimitiveRoaringLongSet	bits	RoaringLongSet	compressed long bitmap
+M3PackedBitVector	bits	PackedBitVector	packed bit vector
+M3BitMatrixClosure	bits	BitMatrixClosure	transitive closure over bit rows
+M3IntSpscRingBuffer	concurrent	IntSpscRingBuffer	single-producer single-consumer ring
+M3LongSpscRingBuffer	concurrent	LongSpscRingBuffer	single-producer single-consumer ring
+M3SpscLongQueue	concurrent	SpscLongQueue	SPSC long queue
+M3MpmcLongQueue	concurrent	MpmcLongQueue	MPMC long queue
+M3MpscQueue	concurrent	MpscQueue	MPSC object queue
+M3MpmcQueue	concurrent	MpmcQueue	MPMC object queue
+M3SpscQueue	concurrent	SpscQueue	SPSC object queue
+M3ConcurrentLongMap	concurrent	ConcurrentLongMap	concurrent long -> object map
+M3ConcurrentLongSet	concurrent	ConcurrentLongSet	concurrent long set
+M3ConcurrentSkipLongSet	concurrent	ConcurrentSkipLongSet	concurrent sorted long set
+M3ConcurrentSkipLongLongMap	concurrent	ConcurrentSkipLongLongMap	concurrent sorted long -> long map
+M3ConcurrentLongLinkedDeque	concurrent	ConcurrentLongLinkedDeque	concurrent long deque
+M3ConcurrentLongMultiset	concurrent	ConcurrentLongMultiset	concurrent long multiset
+M3ConcurrentBitSet	concurrent	ConcurrentBitSet	concurrent bitset
+M3ArrayBlockingLongQueue	concurrent	ArrayBlockingLongQueue	bounded blocking long queue
+M3PriorityBlockingLongQueue	concurrent	PriorityBlockingLongQueue	blocking long priority queue
+M3IntCsrGraph	graph	IntCsrGraph	compressed sparse row graph
+M3WeightedIntCsrGraph	graph	WeightedIntCsrGraph	weighted CSR graph
+M3IntGraphTraversal	graph	IntGraphTraversal	BFS / DFS / topological order
+M3IntMinimumSpanningForest	graph	IntMinimumSpanningForest	minimum spanning forest
+M3IntLinkCutForest	graph	IntLinkCutForest	dynamic trees
+M3IntCartesianTree	graph	IntCartesianTree	Cartesian tree
+M3IntHeavyLightIndex	graph	IntHeavyLightIndex	heavy-light decomposition
+M3IntBinaryLiftingLca	graph	IntBinaryLiftingLca	lowest common ancestor
+M3IntLowLink	graph	IntLowLink	bridges / articulation points
+M3StrongComponents	graph	StrongComponents	strongly connected components
+M3IntBipartiteMatching	graph	IntBipartiteMatching	maximum bipartite matching
+M3SparseMaxFlow	graph	SparseMaxFlow	maximum flow
+M3LongMinCostFlow	graph	LongMinCostFlow	minimum-cost flow
+M3IntLongShortestPaths	graph	IntLongShortestPaths	single-source shortest paths
+M3LongFenwickTree	range	LongFenwickTree	binary indexed tree
+M3LongSegmentTree	range	LongSegmentTree	segment tree
+M3LongLazySegmentTree	range	LongLazySegmentTree	segment tree with lazy updates
+M3LongMonoidSegmentTree	range	LongMonoidSegmentTree	segment tree over a monoid
+M3LongSparseTable	range	LongSparseTable	static range queries
+M3LongDisjointSparseTable	range	LongDisjointSparseTable	disjoint sparse table
+M3LongDifferenceArray	range	LongDifferenceArray	range add, point read
+M3LongLiChaoTree	range	LongLiChaoTree	line container
+M3PersistentLongSumTree	range	PersistentLongSumTree	persistent sum tree
+M3RangeAddLongSumTree	range	RangeAddLongSumTree	range add / range sum
+M3LongRangeSet	range	LongRangeSet	set of long ranges
+M3LongLongRangeMap	range	LongLongRangeMap	long range -> long map
+M3ObjectRangeMap	range	ObjectRangeMap	long range -> object map
+M3LongHyperLogLog	sketch	LongHyperLogLog	cardinality sketch
+M3LongCountMinSketch	sketch	LongCountMinSketch	frequency sketch
+M3LongBloomFilter	sketch	LongBloomFilter	membership filter
+M3LongCountingBloomFilter	sketch	LongCountingBloomFilter	membership filter with deletion
+M3LongReservoirSampler	sketch	LongReservoirSampler	uniform sample
+M3LongSpaceSavingTopK	sketch	LongSpaceSavingTopK	heavy hitters
+M3LongHistogram	sketch	LongHistogram	value histogram
+M3IntSuffixArray	text	IntSuffixArray	suffix array
+M3IntAhoCorasick	text	IntAhoCorasick	multi-pattern matching
+M3IntManacher	text	IntManacher	palindromic radii
+M3IntPrefixRollingHash	text	IntPrefixRollingHash	prefix rolling hash
+M3IntKmpPattern	text	IntKmpPattern	KMP pattern
+M3CharTrieSet	text	CharTrieSet	trie of strings
+M3PackedLongList	packed	PackedLongList	bit-packed long list
+M3PackedBooleanList	packed	PackedBooleanList	bit-packed boolean list
+M3PackedUnsignedIntList	packed	PackedUnsignedIntList	bit-packed unsigned int list
+M3EliasFanoLongList	packed	EliasFanoLongList	monotone compressed list
+M3RunLengthLongList	packed	RunLengthLongList	run-length list
+M3DeltaEncodedLongList	packed	DeltaEncodedLongList	delta-encoded list
+M3PackedByteArray	packed	PackedByteArray	packed byte array
+M3PrimitiveBigArray	packed	BigArray	long-indexed primitive array
+M3PrimitiveBigList	packed	BigList	long-indexed primitive list
+M3ParentOwned	core	ParentOwned	annotation applied by user code (read by m3/compiler/parent-owned)
+M3Sortable	core	Sortable	annotation applied by user code (mat-sortable processor)
+M3SortField	core	SortField	annotation (mat-sortable processor)
+M3SortSignal	core	SortSignal	annotation (mat-sortable processor)
+M3SortDistance	core	SortDistance	annotation (mat-sortable processor)
+M3SortDependency	core	SortDependency	annotation (mat-sortable processor)
+M3LongLongConsumer	core	LongLongConsumer	functional interface in exported signatures
+M3IntIntConsumer	core	IntIntConsumer	functional interface in exported signatures
+M3IntLongConsumer	core	IntLongConsumer	functional interface in exported signatures
+M3IntLongAdjacencyGraph	graph	IntLongAdjacencyGraph	graph input type of LCA / HLD / shortest paths
+M3LongRangeAction	range	LongRangeAction	lazy segment tree action
+M3IndexPathMasks	core	IndexPathMasks	selection backend type in LongRangeSet / ObjectRangeMap signatures
+M3LazyEventPolicy	core	LazyEventPolicy	exposed by M3TreeMap
+M3LazyValueProvider	core	LazyValueProvider	exposed by M3TreeMap
+M3Progress	core	M3Progress	exposed by M3TreeMap (prefix kept: progress types clash with javax.swing)
+M3ProgressMonitor	core	M3ProgressMonitor	used by 6 modules; clashes with javax.swing.ProgressMonitor
+M3ProgressState	core	M3ProgressState	progress state enum exposed by M3ProgressMonitor (prefix kept)
+M3LazyEventGranularity	core	LazyEventGranularity	exposed by LazyEventPolicy

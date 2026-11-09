@@ -1,0 +1,19 @@
+--- synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/apply_receiver.py
++++ synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/apply_receiver.py
+@@ -1,6 +1,7 @@
+ #!/usr/bin/env python3
+ # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+ # SPDX-License-Identifier: Apache-2.0
++# Adapted 2026-10-21 from published core #12648 for this distinct NLP lock task.
+ """Verify and install bytes emitted by the qualified canonical OpenRewrite recipe.
+ 
+ Adapted 2026-10-21 from PR12605, preserving its proof and receiver guards.
+@@ -62,7 +63,7 @@
+         raise ValueError('recipe proof did not pass')
+     checks = {
+         'phases.tsv': crate / 'phases.tsv', 'pom.xml': crate / 'pom.xml',
+-        'test.java': crate / 'src/test/java/com/synexia/rewrite/M3IntegratedRefinementRecipeTest.java',
++        'test.java': crate / 'src/test/java/com/synexia/rewrite/M3NlpCurrentReceiverLockRecipeTest.java',
+         'named_yaml_sha256': proof_dir / 'named-recipe.yml',
+         'dependency_probe_sha256': crate / 'attribution/DependencyCustody.java',
+         'dependency_expectations_sha256': crate / 'attribution/expected-methods.txt',

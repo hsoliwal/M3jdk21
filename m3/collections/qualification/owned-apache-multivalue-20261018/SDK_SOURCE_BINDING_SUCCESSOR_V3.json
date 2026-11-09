@@ -1,0 +1,109 @@
+{
+  "schema": "M3_QUALIFIED_SOURCE_BINDING_SUCCESSOR_V3",
+  "baseCommit": "0efc1719ca5766aead09f4f7c49f5067975bd946",
+  "scope": "Effective input qualification only: preserve old33-row source receipt and exact32owned implementation/test bodies; qualify exactly one SDK append successor. No production source, JNI ABI or old public body is changed by this receipt.",
+  "history": [
+    {
+      "path": "m3/collections/qualification/owned-apache-multivalue-20261018/source-provenance.json",
+      "bytes": 15595,
+      "sha256": "c12810499738df40393bbe82291eaca77e84e8cad7f5989f26def47f25bbf06e",
+      "gitBlob": "d4bf015c3aadf6cd5d0ef869069a5a3503001afb"
+    },
+    {
+      "path": "m3/collections/qualification/owned-apache-multivalue-20261018/verify.py",
+      "bytes": 1027,
+      "sha256": "4a23749f6419ea5b1cc63f412db5ab9f7cb38b62f2420fb1bae2cb6cb88d1595",
+      "gitBlob": "8d6021fcf5ba9e0bb325c01c58b2f94022d8534d"
+    },
+    {
+      "path": "m3/collections/qualification/owned-apache-multivalue-20261018/SOURCE_QUALIFICATION_V2.json",
+      "bytes": 7903,
+      "sha256": "090cc4cada34c1bf01d2a49a3bc84c8ee7b35675de02ecbb1a0b7ef303d23d1a",
+      "gitBlob": "2af05bb60360f1a33ca3735ac9d25f00933069c9"
+    }
+  ],
+  "sdkPath": "m3/collections/src/main/java/jdk/m3/collections/M3CollectionSdk.java",
+  "before": {
+    "path": "m3/collections/qualification/owned-apache-multivalue-20261018/SDK_HISTORICAL_7020.java.txt",
+    "bytes": 7020,
+    "sha256": "e4f05110dd6aaebcfb4f6a6d45d1ff0d8f5b50cc154f6372337d09877b62e83f",
+    "gitBlob": "07dc6f52a8de569e47ff36f80dbba4d8e059ef8a"
+  },
+  "after": {
+    "bytes": 7807,
+    "sha256": "f805ff3b86349480dd575840326eb015e5626b5eb4f0f61deccc73f83e9e1452",
+    "gitBlob": "4f3a64d070b361cd6a25269184370a7ab486c0a5"
+  },
+  "append": {
+    "bytes": 787,
+    "sha256": "15efbff6b50beefb360aadbcda6d19d15a3fb9e19511a86ccca174f189d9f539"
+  },
+  "preservedOldPublicStaticMethods": 26,
+  "addedFactories": [
+    "m3ArrayList",
+    "indexedTable",
+    "indexedMultiValueMap",
+    "longRangeSet"
+  ],
+  "oldSourceRows": 33,
+  "unchangedOwnedRows": 32,
+  "arrayAndNativeOwners": [
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java",
+      "bytes": 10039,
+      "sha256": "78340d2c41e0ade88474171636a02da07ecae0860c6988acaefac5c1fdf0fa03",
+      "gitBlob": "23977d3c314a52e82acadee97daa7d3d659c2601"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexedTable.java",
+      "bytes": 20810,
+      "sha256": "9b87cefcc65e295afe516a1d007e3b5acbc87a8035e1f55223d1b2558cf7858c",
+      "gitBlob": "5dc062e138b273382b4f161fb4c9869d90558390"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexedMultiValueMap.java",
+      "bytes": 15368,
+      "sha256": "407d5b24f3dbce305c0fcd4f43fd0ff49fd9747907c0016bcd70d9276db6b1b7",
+      "gitBlob": "1eb0a1c600997e7fba6bf0156e197f83c16d5b09"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongRangeSet.java",
+      "bytes": 9008,
+      "sha256": "11a1001d54bbd39d25102dab36b9ee7a9125713f8a1496598655f41f9c47652e",
+      "gitBlob": "8f3ed8efe75e7eb4744b35537192cf1a8b169423"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
+      "bytes": 12568,
+      "sha256": "af78b910c1639030286023696da693890be5163cd0ffe6befef68748ff9450bc",
+      "gitBlob": "5def05aad11dbe3ab7bebe27a3c11b5d241c9a7a"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "bytes": 11744,
+      "sha256": "a549b92b38eaa337c0e95f32c46607cace9ae46d8240d37bd58a3a48e296990d",
+      "gitBlob": "8c2ff6e02369a2632bfdd3534d01259e9c86e21c"
+    }
+  ],
+  "originalDuplicateSDK": {
+    "bytes": 7589,
+    "sha256": "1fb66d3c334f4087bfcd2be7502dad25cfe6b18ae7c3a6d968cb44a4612e41e8",
+    "gitBlob": "5a28be57fda7978231166d402af539e48d297ef3",
+    "interpretation": "historical illegal duplicate preimage; old repair recipe preserved; not an eligible current effective SDK source"
+  },
+  "observedFailure": {
+    "workflow": "Owned M3 Apache multivalue contracts",
+    "runs": [
+      39085774228,
+      39089393785
+    ],
+    "latestJob": 117562682978,
+    "phase": "old verifier refuses exact current SDK before compile/runtime"
+  },
+  "limits": [
+    "Only exact7807/f805 current SDK is effective; historical7020 is precursor, not a hash alias",
+    "Receipt/source checks do not replace Java/JUnit/provider/native or receiving recipe execution",
+    "Allfour added API names retained; no new LongStateArray SDK factory claimed",
+    "No fullfive-library or allcontract admission"
+  ]
+}

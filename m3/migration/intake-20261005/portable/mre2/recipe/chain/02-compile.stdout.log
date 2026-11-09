@@ -1,0 +1,28 @@
+{"stage": "compile", "commandIndex": 1, "executable": "/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/apache-maven-3.9.9/bin/mvn"}
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------< com.synexia.verification:mre-current-bootstrap-20261005 >-------
+[INFO] Building Mre2 current exact-source qualification 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ mre-current-bootstrap-20261005 ---
+[INFO] Copying 5 resources from ../sources/synexia-openrewrite-recipes/src/main/resources to ../target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ mre-current-bootstrap-20261005 ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 4 source files with javac [debug release 21] to ../target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ mre-current-bootstrap-20261005 ---
+[INFO] Copying 2 resources from ../sources/synexia-openrewrite-recipes/verification/mre-20261005/bootstrap-v2/src/test/resources to ../target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ mre-current-bootstrap-20261005 ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug release 21] to ../target/test-classes
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.740 s
+[INFO] Finished at: 2026-10-05T11:01:13+02:00
+[INFO] ------------------------------------------------------------------------
+{"artifacts": 25, "artifactManifestSHA256": "3ee340bb11137edaa51c514685164acaeaed224c3961f5667d1046d0cbd8544e"}

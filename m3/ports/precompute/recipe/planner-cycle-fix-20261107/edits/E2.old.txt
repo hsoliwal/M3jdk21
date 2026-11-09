@@ -1,0 +1,2 @@
+ * build-time default for a universal capability catalog.</p>
+ */

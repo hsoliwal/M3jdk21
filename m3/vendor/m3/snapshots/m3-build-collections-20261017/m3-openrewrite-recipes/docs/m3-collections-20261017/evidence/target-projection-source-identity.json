@@ -1,0 +1,160 @@
+{
+  "schema": 1,
+  "status": "CANDIDATE_ONLY",
+  "source_revision": "11c94feb18155a53cc213708c353791132edc4a7",
+  "target_revision": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+  "qualification": "Synexia qualified final generated sources; target SDK/compiler/runtime pending",
+  "projections": [
+    {
+      "source": "synexia-common/src/main/java/com/synexia/common/collections/M3FilteredViews.java",
+      "source_sha256": "ba12bcdd6a5ec1129d4babc8aa7766382ad6a04dc79f210214b427842e9dcefc",
+      "target": "m3/tooling/module-packs/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
+      "target_before": "ABSENT",
+      "target_sha256": "d75e5fa03b4e4f709663c6fb9f9725cb1b3f5dcc9e2cf714c6587ab2b4bafd0e",
+      "mapped_java_token_count": 3763,
+      "token_projection": "PASS",
+      "old_package": "com.synexia.common.collections",
+      "new_package": "jdk.m3.collections",
+      "identifier_renames": {},
+      "license": "Apache-2.0",
+      "source_origin": "Synexia"
+    },
+    {
+      "source": "synexia-common/src/main/java/com/synexia/common/collections/M3MutableFilteredViews.java",
+      "source_sha256": "8b315e4ca9d574eaa50a710add87ec4e76f84fdaa47bf73ec9d81899a898c8e9",
+      "target": "m3/tooling/module-packs/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java",
+      "target_before": "ABSENT",
+      "target_sha256": "2ed8566a184f74a52b84ae6c95fecb9be2a85a016adad9b7fcf2a8d1d45f3d9d",
+      "mapped_java_token_count": 3719,
+      "token_projection": "PASS",
+      "old_package": "com.synexia.common.collections",
+      "new_package": "jdk.m3.collections",
+      "identifier_renames": {},
+      "license": "Apache-2.0",
+      "source_origin": "Synexia"
+    },
+    {
+      "source": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveIndexView.java",
+      "source_sha256": "b7938e14c342196e74bc506020ecf58f7180fa5332c813a46d5f5aefbafef47a",
+      "target": "m3/ports/collections/src/main/java/jdk/m3/util/M3PrimitiveIndexView.java",
+      "target_before": "ABSENT",
+      "target_sha256": "874378d38cee18d74072d8f5a7d44552a072cd290560dcb36d91e298a453495e",
+      "mapped_java_token_count": 1695,
+      "token_projection": "PASS",
+      "old_package": "com.synexia.primitives",
+      "new_package": "com.m3.util",
+      "identifier_renames": {
+        "PrimitiveIndexView": "M3PrimitiveIndexView",
+        "PrimitiveSoaStore": "M3PrimitiveSoaStore",
+        "PrimitiveKind": "M3PrimitiveKind",
+        "DenseHash": "M3DenseHash"
+      },
+      "license": "Apache-2.0",
+      "source_origin": "Synexia"
+    },
+    {
+      "source": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveSoaStore.java",
+      "source_sha256": "54a8f953dcccb7dadb57839e0124f44ce9b1da68fa1a6cddcf5098771e087a2e",
+      "target": "m3/ports/collections/src/main/java/jdk/m3/util/M3PrimitiveSoaStore.java",
+      "target_before": "ABSENT",
+      "target_sha256": "7bce76bc55cc3c552e463baf387287ee89100dea8b14e86659e27ae0ef661c0f",
+      "mapped_java_token_count": 3581,
+      "token_projection": "PASS",
+      "old_package": "com.synexia.primitives",
+      "new_package": "com.m3.util",
+      "identifier_renames": {
+        "PrimitiveIndexView": "M3PrimitiveIndexView",
+        "PrimitiveSoaStore": "M3PrimitiveSoaStore",
+        "PrimitiveKind": "M3PrimitiveKind",
+        "DenseHash": "M3DenseHash"
+      },
+      "license": "Apache-2.0",
+      "source_origin": "Synexia"
+    },
+    {
+      "source": "synexia-primitives/src/main/java/com/synexia/primitives/M3SortableTopK.java",
+      "source_sha256": "f001578644a6c89adf52abdf911bc4c436ce0c09c241b116f45044ff68765223",
+      "target": "m3/ports/collections/src/main/java/jdk/m3/util/M3SortableTopK.java",
+      "target_before": "ABSENT",
+      "target_sha256": "88dc3a4d84e46ff31d8214cb23d0944901ace649b16cf0c26ed6d1b96cd95f5a",
+      "mapped_java_token_count": 1071,
+      "token_projection": "PASS",
+      "old_package": "com.synexia.primitives",
+      "new_package": "com.m3.util",
+      "identifier_renames": {
+        "PrimitiveIndexView": "M3PrimitiveIndexView",
+        "PrimitiveSoaStore": "M3PrimitiveSoaStore",
+        "PrimitiveKind": "M3PrimitiveKind",
+        "DenseHash": "M3DenseHash"
+      },
+      "license": "Apache-2.0",
+      "source_origin": "Synexia"
+    },
+    {
+      "source": "synexia-primitives/src/main/java/com/synexia/primitives/M3RuntimeHeap.java",
+      "source_sha256": "b63d0e05810b56ec8a79c9add47abe64846d492d863078458573c9e6575956b5",
+      "target": "m3/ports/collections/src/main/java/jdk/m3/util/M3RuntimeHeap.java",
+      "target_before": "ABSENT",
+      "target_sha256": "e8dd77e65aeb67120cf0c4f0b955e750e45be756d942b281cf142cf44690d49f",
+      "mapped_java_token_count": 708,
+      "token_projection": "PASS",
+      "old_package": "com.synexia.primitives",
+      "new_package": "com.m3.util",
+      "identifier_renames": {
+        "PrimitiveIndexView": "M3PrimitiveIndexView",
+        "PrimitiveSoaStore": "M3PrimitiveSoaStore",
+        "PrimitiveKind": "M3PrimitiveKind",
+        "DenseHash": "M3DenseHash"
+      },
+      "license": "Apache-2.0",
+      "source_origin": "Synexia"
+    },
+    {
+      "source": "synexia-common/src/test/java/com/synexia/common/collections/M3FilteredViewsContract.java",
+      "source_sha256": "b68c48d0d41d02a8441863ce2c2541ea95710cbd27461fd1630a449759716ae9",
+      "target": "m3/tooling/module-packs/collections/src/test/java/jdk/m3/collections/M3FilteredViewsContract.java",
+      "target_before": "ABSENT",
+      "target_sha256": "cf2035f9b8555276b9a387ea7b55cf0cd72a9774ae5ff9a9853166512873985f",
+      "mapped_java_token_count": 2773,
+      "token_projection": "PASS",
+      "old_package": "com.synexia.common.collections",
+      "new_package": "jdk.m3.collections",
+      "identifier_renames": {},
+      "license": "Apache-2.0",
+      "source_origin": "Synexia"
+    },
+    {
+      "source": "synexia-common/src/test/java/com/synexia/common/collections/M3MutableFilteredViewsContract.java",
+      "source_sha256": "6ab10e77da3683ae9fcffc4919f63e1456fdb397d5649d45a7f8e75b05435833",
+      "target": "m3/tooling/module-packs/collections/src/test/java/jdk/m3/collections/M3MutableFilteredViewsContract.java",
+      "target_before": "ABSENT",
+      "target_sha256": "508eb3cb215842d08b2c3b35a785317164b4b79a6823477bed1856e96f0f5c34",
+      "mapped_java_token_count": 4374,
+      "token_projection": "PASS",
+      "old_package": "com.synexia.common.collections",
+      "new_package": "jdk.m3.collections",
+      "identifier_renames": {},
+      "license": "Apache-2.0",
+      "source_origin": "Synexia"
+    },
+    {
+      "source": "frozen-independent-tests/M3PrimitiveIndexViewFilterContract.java",
+      "source_sha256": "adccec347f1ff8f304aa9d7b2a850bc8408a659beef3c6c3b75b10eea4536a4d",
+      "target": "m3/tooling/module-packs/collections/src/test/java/jdk/m3/util/M3PrimitiveIndexViewFilterContract.java",
+      "target_before": "ABSENT",
+      "target_sha256": "5271edd73a643d4d2a1dafa036e3d3eda71552744bce6948387adf5fdd08b411",
+      "mapped_java_token_count": 2716,
+      "token_projection": "PASS",
+      "old_package": "com.synexia.primitives",
+      "new_package": "com.m3.util",
+      "identifier_renames": {
+        "PrimitiveIndexView": "M3PrimitiveIndexView",
+        "PrimitiveSoaStore": "M3PrimitiveSoaStore",
+        "PrimitiveKind": "M3PrimitiveKind",
+        "DenseHash": "M3DenseHash"
+      },
+      "license": "Apache-2.0",
+      "source_origin": "frozen independent first-party oracle"
+    }
+  ]
+}

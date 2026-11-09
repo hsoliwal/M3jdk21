@@ -1,0 +1,20 @@
+{
+  "schema": "M3_CONFIGURE_LOG_CUSTODY_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "meaning": "Setup failure and successfulconfigureonly,notimageproof",
+  "items": [
+    {
+      "path": "configure-nonempty-refusal.log.gz",
+      "uncompressed_bytes": 4065,
+      "uncompressed_sha256": "3e3325e702cd83e90a8751372498cf98291acecd2be061514df0ddfaf2c69b97",
+      "compressed_sha256": "38095aeee4682aaa9965972ff88317e90527706756746de0b2475e550cc736b4"
+    },
+    {
+      "path": "configure-console.log.gz",
+      "uncompressed_bytes": 19858,
+      "uncompressed_sha256": "b4f51d3ceb67423ef265e54f9bd48017bef763277156f8bdd0f0cc15c0a3a588",
+      "compressed_sha256": "434cf26e5f7bc4181c55a8aaa01c98780b748e8871627cc3a82a53c6a74bd7d8"
+    }
+  ]
+}

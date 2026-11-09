@@ -1,0 +1,29 @@
+Compiled from "M3IndexMaskCompactor.java"
+public final class com.m3.collections.M3IndexMaskCompactor {
+  public static boolean nativeAvailable();
+    descriptor: ()Z
+
+  public static int[] select(int[], byte[], int, com.m3.collections.M3IndexMaskCompactor$Backend);
+    descriptor: ([I[BILcom/m3/collections/M3IndexMaskCompactor$Backend;)[I
+
+  public static int[] selectPositions(byte[], int, com.m3.collections.M3IndexMaskCompactor$Backend);
+    descriptor: ([BILcom/m3/collections/M3IndexMaskCompactor$Backend;)[I
+
+  public static int[] selectPositions(byte[], int, int, com.m3.collections.M3IndexMaskCompactor$Backend);
+    descriptor: ([BIILcom/m3/collections/M3IndexMaskCompactor$Backend;)[I
+
+  public static int selectedCount(byte[], int);
+    descriptor: ([BI)I
+
+  public static int selectedCount(byte[], int, int);
+    descriptor: ([BII)I
+
+  public static long[] selectLong(long[], byte[], int);
+    descriptor: ([J[BI)[J
+
+  public static int[] selectWindow(int[], int, byte[], int, int, int, com.m3.collections.M3IndexMaskCompactor$Backend);
+    descriptor: ([II[BIIILcom/m3/collections/M3IndexMaskCompactor$Backend;)[I
+
+  public static long[] selectLongWindow(long[], int, byte[], int, int, int, com.m3.collections.M3IndexMaskCompactor$Backend);
+    descriptor: ([JI[BIIILcom/m3/collections/M3IndexMaskCompactor$Backend;)[J
+}

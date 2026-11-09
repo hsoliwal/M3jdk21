@@ -1,0 +1,47 @@
+# SPDX-License-Identifier: Apache-2.0
+# The crate's 44 residency contract tests, now all relocated as M3ObjectResidencyReuseContractTest (census G7 recipe, no DROP_METHOD row left), compiled once and run on three owners: M3JDK master 3beb791e741 (master), leaf P1 #2610 d97c5603f21 (p1) and this head (p2). group: DECISION.tsv (- = relocated by census G7 #2598).
+test	group	master	p1	p2	master_failure
+absentSameOccupiedAndInvalidRequestsDoNotInvokeReset	-	PASS	PASS	PASS	-
+activeBorrowAndInstalledAliasRefuseHandoff	-	PASS	PASS	PASS	-
+admissionClaimsInstallTargetAgainstInstallAndBorrowReentry	b	FAIL	PASS	PASS	AssertionFailedError:expected: <CREATING> but was: <ABSENT>
+admissionClaimsRequestedSlotBeforeCodecOrStoreCanPublishItAgain	b	FAIL	PASS	PASS	AssertionFailedError:expected: <CREATING> but was: <ABSENT>
+admissionRestoresAbsentRequestAfterIoOrRuntimeFailureAndAllowsRetry	-	PASS	PASS	PASS	-
+admissionRestoresCreateInstallAndRestoreRequestOnErrorWithoutReplacingIt	-	PASS	PASS	PASS	-
+callerInstalledProjectionsAndUnprovedModesNeverInvokeReset	c	FAIL	FAIL	PASS	AssertionFailedError:expected: <false> but was: <true>
+checkedResetFailureWrapsOriginalAndDiscardsTaintedShell	-	PASS	PASS	PASS	-
+decodeErrorRestoresSwappedStateAndRetainsSecondaryBytesForRetry	a	FAIL	FAIL	PASS	AssertionFailedError:expected: <SWAPPED> but was: <RESTORING>
+decodeReentryRefusesBeforeDeletingTheSnapshotAndAllowsRetry	-	PASS	PASS	PASS	-
+deleteErrorBeforeMutationRestoresSwappedStateAndAllowsRetry	a	FAIL	FAIL	PASS	AssertionFailedError:expected: <SWAPPED> but was: <RESTORING>
+encodeAndWriteErrorsRetainResidentIdentityAndOriginalThrowable	a	FAIL	FAIL	PASS	AssertionFailedError:expected: <RESIDENT> but was: <SWAPPING>
+factoryAndDecodeNullResultsStillFailBeforeTheBudgetCheck	-	PASS	PASS	PASS	-
+factoryErrorRestoresAbsentStateAndOriginalThrowableBeforeRetry	a	FAIL	FAIL	PASS	AssertionFailedError:expected: <ABSENT> but was: <CREATING>
+factoryFailureAfterNestedAdmissionKeepsTheOriginalThrowable	a	FAIL	FAIL	PASS	AssertionFailedError:expected: <ABSENT> but was: <CREATING>
+factoryReentryRefusesPublicationWithoutEvictingTheNestedProjection	-	PASS	PASS	PASS	-
+failedRebindPreservesUnrelatedLruVictimOrdering	c	FAIL	FAIL	PASS	AssertionFailedError:Unexpected exception type thrown, expected: <java.lang.IllegalArgumentException> but was:
+handoffPreservesIdentityAndLogicalBitsWithoutNewFactoryObject	-	PASS	PASS	PASS	-
+linkedVictimsExcludeAnInProgressSwap	b	FAIL	PASS	PASS	AssertionFailedError:expected: <CREATING> but was: <ABSENT>
+maximumBudgetArithmeticRejectsOverflowAndAcceptsExactBoundary	-	PASS	PASS	PASS	-
+noVictimAdmissionRestoresTheClaimWithoutFactoryOrDecisionEffects	-	PASS	PASS	PASS	-
+observeOnlyOverflowKeepsCallbackDemandAndArithmeticFailureOrdering	-	PASS	PASS	PASS	-
+observeOnlyStillAllowsFactoryReentryToExceedTheBudget	-	PASS	PASS	PASS	-
+occupiedDestinationBorrowAndActiveCallbackRefuseBeforeReset	-	PASS	PASS	PASS	-
+pressureAwareReserveStillControlsAdmissionAndRebind	-	PASS	PASS	PASS	-
+publicationAcceptsZeroAndExactLongMaxBudgetBoundaries	-	PASS	PASS	PASS	-
+readErrorRestoresSwappedStateAndRetainsSecondaryBytesForRetry	a	FAIL	FAIL	PASS	AssertionFailedError:expected: <SWAPPED> but was: <RESTORING>
+readReentryStillDecodesBeforeThePublicationCheck	-	PASS	PASS	PASS	-
+refusalDoesNotMutateAndFailedResetDiscardsShell	c	FAIL	FAIL	PASS	AssertionFailedError:Unexpected exception type thrown, expected: <java.lang.IllegalArgumentException> but was:
+resetErrorPreservesErrorIdentityAndDiscardsTaintedShell	-	PASS	PASS	PASS	-
+resetGuardsBothParticipatingSlotsButAllowsUnrelatedCalls	c	FAIL	FAIL	PASS	AssertionFailedError:expected: <CREATING> but was: <SWAPPING>
+resetReentryCannotSpendTheDestinationBudgetTwice	d	FAIL	FAIL	PASS	AssertionFailedError:Unexpected exception type thrown, expected: <jdk.m3.collections.M3ObjectResidency.BudgetE
+restoreAdmissionClaimsSwappedRequestAndPreservesStoreCallbackOrder	b	FAIL	PASS	PASS	AssertionFailedError:expected: <RESTORING> but was: <SWAPPED>
+rolloverScanVictimsExcludeAnInProgressSwap	b	FAIL	PASS	PASS	AssertionFailedError:expected: <CREATING> but was: <ABSENT>
+runtimeResetFailurePreservesExceptionIdentityAndDiscardsTaintedShell	c	FAIL	FAIL	PASS	AssertionFailedError:expected: <java.lang.IllegalArgumentException: runtime reset failure> but was: <jdk.m3.co
+sourceAndDestinationPinAndCountLanesFailClosed	c	FAIL	FAIL	PASS	AssertionFailedError:expected: <false> but was: <true>
+sourceBorrowAndActiveCallbackRefuseBeforeReset	-	PASS	PASS	PASS	-
+successfulRebindPreservesLogicalBitsAndMakesTargetMostRecentlyUsed	-	PASS	PASS	PASS	-
+swapWriteErrorAfterStoreMutationStillRetainsResidentValue	a	FAIL	FAIL	PASS	AssertionFailedError:expected: <RESIDENT> but was: <SWAPPING>
+swappingVictimExclusionPreservesBorrowActiveAndPermanentPinGuards	b	FAIL	PASS	PASS	AssertionFailedError:execution timed out after 2000 ms
+unrelatedNestedRequestCanUseTheNextEligibleVictimAndKeepsLruOrder	b	FAIL	PASS	PASS	AssertionFailedError:execution timed out after 2000 ms
+withinBudgetFactoryReentryPreservesOrderAndTheNextLruVictim	-	PASS	PASS	PASS	-
+zeroBorrowCountDoesNotProveNoEscape	-	PASS	PASS	PASS	-
+zeroWeightAndMaximumWeightCanRebindWithoutArithmeticOverflow	-	PASS	PASS	PASS	-

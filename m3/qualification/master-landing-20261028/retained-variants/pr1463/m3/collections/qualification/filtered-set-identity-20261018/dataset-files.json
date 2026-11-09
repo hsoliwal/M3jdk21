@@ -1,0 +1,47 @@
+[
+  {
+    "path": "DATASET.json",
+    "sha256": "920d453c455b1e164d1b35dbda35506dba820b4ea89eba90c97b255edc92b0a6",
+    "git_blob": "f6392892da539741d9d6aeea1d1482b39914b1cd"
+  },
+  {
+    "path": "ENGINE_EFFECTIVE.tsv",
+    "sha256": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23",
+    "git_blob": "9046fe413e41ad083f5bc1b9a73ddeecee5d694a"
+  },
+  {
+    "path": "MODES.tsv",
+    "sha256": "6cfdbf74a398f315fbfe7d646d04779485bc761d3c739574166ad8707dea0497",
+    "git_blob": "2c208ed7c793b70807efee736a24187f65553dc3"
+  },
+  {
+    "path": "resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-filtered-set-identity-20261018.yml",
+    "sha256": "8db29c3036f767542b57251cd50657d1b07a1633b16c9d1f3752166bea436c47",
+    "git_blob": "0289665a0761d74e46d2e1fdef1065a7b370d813"
+  },
+  {
+    "path": "resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-filtered-set-identity-20261018/0001-M3CollectionViews.java.txt",
+    "sha256": "90b0ba9467d6cb6741de9a3e7b39f1a6016eef2401da3b3eadfab3cdb0e975c8",
+    "git_blob": "a8470a26113a3f55e407a80bef95953146f3ce72"
+  },
+  {
+    "path": "resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-filtered-set-identity-20261018/0002-M3FilteredSetIdentityContract.java.txt",
+    "sha256": "65aefd4de0f0232cc912da6d86367c1c4d09fd9cea44dd251374e527dfc275d8",
+    "git_blob": "526c6feb1f3307c2f1de70a58dc6a71003b481f9"
+  },
+  {
+    "path": "resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-filtered-set-identity-20261018/0003-M3FilteredSetIdentityTest.java.txt",
+    "sha256": "f778e4705464f733ca59b32603c7ce05bed2a712ce9bdc95b6b9c79662af9052",
+    "git_blob": "b304728640ec7aa34d992128786569d8f7ee9cc1"
+  },
+  {
+    "path": "resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-filtered-set-identity-20261018/manifest.tsv",
+    "sha256": "a04da62705ed2a46b68f9e59dab9bc89f490f760cdeeb55c0505dd1b382d2204",
+    "git_blob": "a2068217d0d018f573b5ef97489a7c62bb29c811"
+  },
+  {
+    "path": "resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-filtered-set-identity-20261018/pre/0001-M3CollectionViews.java.txt",
+    "sha256": "956ae0faf7f37d4b963d0d074445484548efe73f164142f2bd0c7de0815e49d4",
+    "git_blob": "258452f8442df0e257db791bdc99d1a7604ba7bc"
+  }
+]

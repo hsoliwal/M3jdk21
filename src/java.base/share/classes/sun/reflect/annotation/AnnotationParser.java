@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2022, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2023, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -124,7 +124,7 @@ public class AnnotationParser {
                 if (AnnotationType.getInstance(klass).retention() == RetentionPolicy.RUNTIME &&
                     result.put(klass, a) != null) {
                         throw new AnnotationFormatError(
-                            "Duplicate annotation for class: "+klass+": " + a);
+                            "Duplicate annotation " + klass + " in " + container);
             }
         }
         }
@@ -445,9 +445,8 @@ public class AnnotationParser {
     }
     static Class<?> toClass(Type o) {
         if (o instanceof GenericArrayType gat)
-            return Array.newInstance(toClass(gat.getGenericComponentType()), 0)
-                .getClass();
-        return (Class)o;
+            return toClass(gat.getGenericComponentType()).arrayType();
+        return (Class<?>) o;
     }
 
     /**

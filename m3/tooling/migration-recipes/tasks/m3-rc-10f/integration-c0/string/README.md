@@ -1,0 +1,7 @@
+# Sc0 bounded String repair producer
+
+This Maven task uses the unchanged admitted M3Jdk21HashPinnedTextSnapshotRecipe owner from the actual Fc0 producer. The one Spc family contains five replacements. Its preimages are two exact Fc0 generated outputs and three preserved current c0 bodies. The final Spc v2 handoff changes semantic-fixture lint context while retaining all five v1 target preimages and postimages.
+
+Seven JUnit methods retain the actual scheduler, named recipe, fixed-point, 32 mixed-state, 27 initial-refusal and ten post-scan controls. Forward and Reverse are two explicit named replays of the same one-family sequence; they are not two distinct permutations. Runtime repeats the controls and exports five actual scheduler outputs, OUTPUT.json, candidate.patch and four composition/replay patches. The exact project has 20 files and the export inventory has 11 files.
+
+The proof runner retains static, compile, test and runtime gates, cumulative command/raw-stream custody, exact JUnit inventory and six tool-role identities. The source task is not receiving qualification or a canonical source application. StringEscapeContract and runtime-checker limitations remain separately admitted v2 fixture evidence; this generic text-snapshot task does not claim their execution. Parent results and receiving STOP receipts remain unchanged. Root owns fresh proof preparation and execution.

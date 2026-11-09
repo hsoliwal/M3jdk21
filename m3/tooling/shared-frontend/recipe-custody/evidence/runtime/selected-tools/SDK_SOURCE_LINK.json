@@ -1,0 +1,153 @@
+{
+  "schema": "M3_SELECTED_TOOLS_SDK_PRODUCT_LINK_V1",
+  "status": "PASS",
+  "selected_receipt_sha256": "45dc1574882bbb51e7c4b770298883b50b126f8d95a4613c1bd3242824c7f397",
+  "installed_framework_receipt_sha256": "077cfb35402caf3e9644d0b8e105bf9d59796f5c56483e72d25a9f1fa844559b",
+  "source_dependency_commit": "4c69d0bad1ea3714509c185922c40f339d08073b",
+  "receiving_source_commit": "f0bba76b44d3a7f12c80e5b30a7bb47337436137",
+  "verifier_dataset": "m3jdk21-selected-verifier",
+  "verifier_path": "m3/tooling/module-packs/verify_combined_selection.py",
+  "verifier_sha256": "1f97567d361e9bbf130a7b3c7817664b778246e913322b36483c77798782ce2e",
+  "selected_packs": [
+    "maven",
+    "openrewrite"
+  ],
+  "selected_assets_verified": 336,
+  "relocation_with_spaces": true,
+  "native_maven_shared_frontend": {
+    "analyzed": "2",
+    "captures": "2",
+    "completed": "true",
+    "consumerFailed": "false",
+    "errors": "0",
+    "extraSourceReads": "0",
+    "hits": "0",
+    "parsed": "2",
+    "projections": "0"
+  },
+  "typed_two_file_recipe": {
+    "analyzed": "2",
+    "completed": "true",
+    "conversions": "2",
+    "errors": "0",
+    "inputLsts": "2",
+    "parsed": "2",
+    "sourceChecks": "2"
+  },
+  "source_jdk_sha256": {
+    "lib/modules": "e7a2827ebfcb2f1fb474db3a8e4e4bc058ffe5f5dea5f9701803669101b28b8b",
+    "release": "5a3d73c8957e7fcb0da466afc0be260adeaddbf8bb04ad82ebb562710c2989de"
+  },
+  "installed_image_modules_sha256": "ca2c5b3a1dfcf229e220c40191755f8716d2a4aec046234c33610cdf6b1ba63c",
+  "input_locks": [
+    {
+      "name": "maven",
+      "path": "/workspace/scratch/13309be96b09/build-work/native-maven-sdk-pack-lock.json",
+      "sha256": "13231a58122efbf7269810a1dba934ec8663833adbf738c32f25b36b2e65e03f"
+    },
+    {
+      "name": "openrewrite",
+      "path": "/workspace/scratch/13309be96b09/ast-work/rewrite-pack-sdk-proof/openrewrite-lock.json",
+      "sha256": "a847e6c9c8f89a1d0c9be9aaf047d3ffa64a65fb33d4ec7dcabfa08d8d1619a8"
+    }
+  ],
+  "datasets": [
+    {
+      "dataset": "m3jdk21-build",
+      "repository": "hsoliwal/M3JDK21",
+      "baseline_commit": "c0f992009f7045c9f0d8ef4f734b3f1113c7a3f6",
+      "source_files": {
+        "m3/tooling/jmod-recipes/tools/jmod_pack.py": "250d98a2789ed8d5018a5b911a14c0a6729e435a9da1513d37a2dac7429ec3d6",
+        "m3/tooling/module-packs/build-tools/README.md": "7793bb9e194b22813f8af94333147fa463f4c9d256649714fbb488be367b8a09",
+        "m3/tooling/module-packs/build-tools/config/ant-m3ast.xml": "609cef3e53e6895f2eff31ae7cac7c52c3d8c47033068319feeed5783ccb1b9a",
+        "m3/tooling/module-packs/build-tools/config/gradle-m3ast.init.gradle": "d0d938186a2ace2ed702790de23cfd257b15438efb9fa9fc4b21486b26ffc790",
+        "m3/tooling/module-packs/build-tools/config/maven-m3ast.xml": "61fcf00281bc4ae3f086319c379bb7ace1c6ca8fa8c6145d32d8a0f8664d1016",
+        "m3/tooling/module-packs/build-tools/launchers/m3-ant": "1dae04b5386be591dbb40203d32905aab2fb1c15de3724ec38a457fae2fa36d8",
+        "m3/tooling/module-packs/build-tools/launchers/m3-ant.cmd": "4288b7d8cf5371c71e0688f70d88897102176a2dbcaf1324ad15caf5e12a8b5f",
+        "m3/tooling/module-packs/build-tools/launchers/m3-gradle": "2257c556905c67b1dfcf83a2e4e5095d070aedb8353bb95c6cad5c8dccfb72b6",
+        "m3/tooling/module-packs/build-tools/launchers/m3-gradle.cmd": "dff184e0045e21f5429521bc0c9450539ba25a8781342fe42845e46e46ea1b95",
+        "m3/tooling/module-packs/build-tools/launchers/m3-mvn": "798678a5f5882282afd2e8e53ed99533c3127b979afb1818f829d946d02da9c3",
+        "m3/tooling/module-packs/build-tools/launchers/m3-mvn.cmd": "b0c6a7d3d5b8e6da5391cb80177d0e70dbf1a8a953b0adcebb38496a27149113",
+        "m3/tooling/module-packs/build-tools/verify_maven.py": "36e82de3e0f24b4b1004e9d4b15ae09e4bda739ab01cac096e38e797b403f806",
+        "m3/tooling/module-packs/build_pack.py": "0e620dac3cbc986ac448739e721d399d84d76a284ac72b3793880c740538fc43",
+        "m3/tooling/module-packs/lock_tool_distribution.py": "ee0a50592064d8ba5bdb9f9ca9f412e036c9d5e60c062a6985b3062ee1192d4c",
+        "m3/tooling/module-packs/test_tool_packs.py": "ba28752dfdcedb66165de9f0d202749c2a848d2c555632c1f846b2f4a724b199",
+        "m3/tooling/module-packs/tool_packs.py": "24edd66788009d00eddcae9b2ba1bc61fd492b28aefb5f34c1439eff9e6b5acf"
+      },
+      "sdk_inputs_sha256": "4ca037b3876fbeb90842ed63ac7ab258c687fff9e032fd16607ac05d6d03e13e",
+      "sdk_results_sha256": "29f5a7da639086ceaefa93293dcb80e8cff5ad2f004bd88af03ece65ef2fd050"
+    },
+    {
+      "dataset": "m3jdk21-compiler",
+      "repository": "hsoliwal/M3JDK21",
+      "baseline_commit": "c0f992009f7045c9f0d8ef4f734b3f1113c7a3f6",
+      "source_files": {
+        "m3/docs/name-mapping.d/m3-shared-frontend.json": "463102c3c23c7f1e3d7ee483421d15cff6def4c9a6c020d0e71423dab6e7fabe",
+        "m3/tooling/shared-frontend/README.md": "8f076c768f832ebcad3e9e25b4e99b0a24f3b2e6a072865d449bf216203c642c",
+        "m3/tooling/shared-frontend/algorithm-catalogue.tsv": "a9b61bf5d96072144f0e229a48011e573dd7125572edb6e6599ebf4a71003faa",
+        "m3/tooling/shared-frontend/openrewrite/pom.xml": "f6dd1edf87821933d42e0adf549c7c180506455c52526a2d3e46471b58a17382",
+        "m3/tooling/shared-frontend/openrewrite/src/main/java/org/m3jdk/tooling/rewrite/M3RewriteFrontend.java": "533ffc0c12992f9a9c5c5232104590f7171b20959145f9fe4acd8da6a30e918f",
+        "m3/tooling/shared-frontend/openrewrite/src/test/java/org/m3jdk/tooling/rewrite/M3RewriteFrontendTest.java": "e7b1ac45e0d23a6dc308b19a4618323303eb4e335fe3a8c8ea549a747cbdf1cf",
+        "m3/tooling/shared-frontend/verify_frontend.py": "464f6c5c43af3d4a3f24c63c63144fbe9430f131dcdd3741c91472714ddf9a50",
+        "src/jdk.compiler/share/classes/com/sun/source/util/M3AST.java": "6a8bccb501a516cca779e71e24ef814ca40825faf92fed744e48f65ad4c1d854",
+        "src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3ASTPC.java": "845c70bdc5e77a62282417889dc77bf466fd0c0005f72112e86faf27ec616399",
+        "src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3PrimitiveImageCompiler.java": "5827f24f34317707564be6ca031ecb6ef69958b66ca69a42a787080ef6ccb006",
+        "src/jdk.compiler/share/classes/com/sun/tools/javac/main/JavaCompiler.java": "129e8c19ef328185c45465b9c8bf9baee43bb24be54842b69833c52e3e6f3dcb",
+        "src/jdk.compiler/share/classes/module-info.java": "ae52d1734570fee7404aeb68b65ef86ea23ad322b72ff0b137c9039c71aafb09",
+        "test/langtools/tools/javac/m3/M3ASTSharedFrontendTest.java": "47349ef82633f724f3ca694521250048ba70486b094b069fc51c13b5e64978a5"
+      },
+      "sdk_inputs_sha256": "3d2e6a69e1b00ff9f2f91e4f417c9eae9cbddf75422fcfec22915e12b8680379",
+      "sdk_results_sha256": "219fa25b975746f57797d4a7399ce8cd1e96e372a277b117379190ef76276dc2"
+    },
+    {
+      "dataset": "m3jdk21-openrewrite-tool",
+      "repository": "hsoliwal/M3jdk21",
+      "baseline_commit": "c0f992009f7045c9f0d8ef4f734b3f1113c7a3f6",
+      "source_files": {
+        "m3/tooling/shared-frontend/openrewrite-tool/README.md": "95c706e9a672f0447991478a09de36afaffbadb23c7a2f9275d8b67ffc5c80aa",
+        "m3/tooling/shared-frontend/openrewrite-tool/pom.xml": "b486de013cf39a2d5d2962a965dd848415a4800e0fc71f8543fb02b82e9cdaf5",
+        "m3/tooling/shared-frontend/openrewrite-tool/src/main/java/org/m3jdk/tooling/rewrite/M3RewriteTool.java": "5ff61fe56b750096da8b9972a9cb4d9f4c318d6c2f73863f26b9c49404ad2976",
+        "m3/tooling/shared-frontend/openrewrite-tool/src/test/java/org/m3jdk/tooling/rewrite/M3RewriteToolTest.java": "53c807cf46d1b7dd14c3031b3bc9fef84349488cef4d7a0b43d9643c2aaffa86"
+      },
+      "sdk_inputs_sha256": "d3d1fe5477955801468dde7990a6e2bdf39166a45f0d0e99fb05b8bc8877f0a9",
+      "sdk_results_sha256": "59f30112a2e467c316cff159400f6b8c4df743d3b929072b36cfff243e1216c8"
+    },
+    {
+      "dataset": "m3jdk21-openrewrite-pack",
+      "repository": "hsoliwal/M3jdk21",
+      "baseline_commit": "c0f992009f7045c9f0d8ef4f734b3f1113c7a3f6",
+      "source_files": {
+        "m3/tooling/module-packs/build-tools/OPENREWRITE.md": "9a6536e3d8c30fd8064189dbb8be1ea01f02d9dc54739820d199634e6a4f46cd",
+        "m3/tooling/module-packs/build-tools/openrewrite_pack.py": "05f932678db1957965c325aa8da06169b3e42b2dc002d4f1deb8f6d1e9e2db2e",
+        "m3/tooling/module-packs/build-tools/test_openrewrite_pack.py": "0cba34745fd33107d97dad89ddd72d90753e724975b6b9367fc42c11e230caf9",
+        "m3/tooling/shared-frontend/openrewrite-runtime/pom.xml": "f90996fcfa174a0c95225e45248e9c6f2d372ef09c835f1df08cf3727dac4a35",
+        "m3/tooling/shared-frontend/openrewrite-runtime/src/test/java/org/m3jdk/tooling/rewrite/M3RewriteRuntimeTest.java": "f962ad41a3bd6f559a51da0c1aca5488ce17e3828b5a771f8a5e0b77a7769666"
+      },
+      "sdk_inputs_sha256": "34cca5e88956e9371a26435d389c2d511e7917db167ab05a50d10b615c7fbf98",
+      "sdk_results_sha256": "c39df2ca690e7c177059dec0f66b2fcf03804c90279cfd4dcdf211e952a9109e"
+    },
+    {
+      "dataset": "m3jdk21-lock-order",
+      "repository": "hsoliwal/M3jdk21",
+      "baseline_commit": "1489e102d5edcb4d66bfa5c99615d7d0157f59d7",
+      "source_files": {
+        "m3/tooling/module-packs/lock_tool_distribution.py": "ec090eda4c5376f387d66e43e0e744e6883f59385008df939757471c6c879b71",
+        "m3/tooling/module-packs/test_tool_packs.py": "0c2cc1a09f2f298cdf1e43d59a27df568b5914eafe513dfffb0c00365ed7f686"
+      },
+      "sdk_inputs_sha256": "8f1c3129876308fb534b15eb3cc9f551700880d674bcab03c5bc033404a05ca6",
+      "sdk_results_sha256": "d998f5aec0cc01249d674e1c90c2805794356a7c1b26454389c20eb8e282a50e"
+    },
+    {
+      "dataset": "m3jdk21-selected-verifier",
+      "repository": "hsoliwal/M3jdk21",
+      "baseline_commit": "c0f992009f7045c9f0d8ef4f734b3f1113c7a3f6",
+      "source_files": {
+        "m3/tooling/module-packs/verify_combined_selection.py": "1f97567d361e9bbf130a7b3c7817664b778246e913322b36483c77798782ce2e"
+      },
+      "sdk_inputs_sha256": "1a4972fdb75b0116987a307ad7ffb76fa5d8d4a945b021266e76fe964a8ee648",
+      "sdk_results_sha256": "8e4a93104d10ac8284659a04237414e7c004cfae3cb740b6dee53360ff6acf29"
+    }
+  ],
+  "epoch_rule": "The original build16/c0 snapshot remains immutable. The separately qualified lock-order2/1489 overlay supersedes its two target files. The selected verifier ran from its exact SDK Result before target publication.",
+  "scope": "Linux x86_64 actual source-built M3JDK with the selected optional native Maven4 and full OpenRewrite bundle. Eight commands pass; 336 assets retain bytes and executable modes through relocation. Source input files, original JDK, and both input locks remain unchanged. The installed framework11 proof is separately retained; no native Windows or full Gradle source-build claim."
+}

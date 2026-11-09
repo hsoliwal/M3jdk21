@@ -1,0 +1,21 @@
+{
+  "identical_logs": [
+    "09-api-GapContent-InsertUndo.log",
+    "09-api-GapContent-MarkData.log",
+    "09-api-GapContent-MarkVector.log",
+    "09-api-GapContent-RemoveUndo.log",
+    "09-api-GapContent-StickyPosition.log",
+    "09-api-GapContent-UndoPosRef.log",
+    "09-api-GapContent.log",
+    "09-api-GapVector.log",
+    "10-contract-c1.log",
+    "10-contract-interpreter.log",
+    "10-contract-mixed.log",
+    "11-netbeans-oracle.log",
+    "12-html-regression.log"
+  ],
+  "scope": "single production-file pass; actual java.desktop patch-module execution",
+  "full_image": "PENDING",
+  "full_jtreg": "PENDING",
+  "jni": "NOT_APPLICABLE_NO_NATIVE_CHANGE"
+}

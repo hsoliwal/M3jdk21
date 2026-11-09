@@ -1,0 +1,42 @@
+{
+  "copyright": "Copyright (c) 2026, Hitesh Soliwal and contributors.",
+  "license": "Apache-2.0",
+  "schema": "M3_TARGET_NAME_MAPPING_V1",
+  "date": "2026-10-18",
+  "source": "Existing RX7 primitive automaton ownership; independently authored lexical predicates",
+  "canonical_recipe_repository": "hsoliwal/com.synexia",
+  "canonical_recipe_path": "synexia-openrewrite-recipes/recipes/m3jdk21-token-composite-convergence-20261018",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_base": "3e1a0b7b7d2498a62550861a6a5a9bd88a2314d7",
+  "target_owner": "jdk.internal.mindex.M3RX7",
+  "target_path": "src/java.base/share/classes/jdk/internal/mindex/M3RX7.java",
+  "additive_members": [
+    "fromLexicalNfa",
+    "LexicalPlan",
+    "rangeStart",
+    "rangeEnd",
+    "utf16Range"
+  ],
+  "representation": "CSR state/edge offsets, int kinds/flags, long spelling IDs, epsilon-closure masks; no per-token objects or spelling payload",
+  "semantics": "Exact bounded pretokenized predicate NFA; full-region matches; leftmost-longest lexical find; original UTF-16 span mapping",
+  "identity_contract": "Compiler and caller share exact canonical dictionary namespace/generation and token schema; spelling IDs are identities, not hashes",
+  "preserved": [
+    "Existing M3RX7 ASCII candidate descriptors and behavior",
+    "Existing TokenIndex character-DFA transfer and mask semantics",
+    "M3RX7Image v7 wire semantics",
+    "M3TQ and M3RegexDpPlan canonical owners",
+    "java.lang.String and java.util.regex.Pattern/Matcher public contracts"
+  ],
+  "runtime_dependency": "java.base only; no Synexia runtime dependency",
+  "test": "test/jdk/jdk/internal/mindex/M3RX7LexicalContract.java",
+  "intake": "TARGET_OWNED_PORT; existing per-file notices preserved; new independently authored Synexia sources Apache-2.0",
+  "source_expression_copied_from_third_parties": false,
+  "status": "ADDITIVE_COMPONENT_QUALIFICATION; target runtime acceptance pending",
+  "receiving_sequence_advanced": false,
+  "pending_gates": [
+    "source-built matched M3JDK21 and actual jtreg",
+    "JIT/GC/CDS/native-linkage and non-Linux platforms",
+    "resource-pressure, cold/warm CPU, retained heap and native/process memory",
+    "complete canonical Synexia SDK/reactor qualification"
+  ]
+}

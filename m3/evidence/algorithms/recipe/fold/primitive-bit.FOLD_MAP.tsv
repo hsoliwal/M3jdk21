@@ -1,0 +1,8 @@
+# FOLD_MEMBERS v1.3 map (m3/tooling/jdk-naming/fold_members.py): PrimitiveBitAlgorithms folds into BitAlgorithms, one owner per concept (2026-11-08).
+# Primitive overloads join the bare-named owner (java.util.Arrays holds int[] and Object[] overloads the same way); bodies byte for byte.
+kind	a	b	c	d
+OWNER	m3/algorithms/src/main/java/jdk/m3/algorithm/BitAlgorithms.java
+FILE	m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveBitAlgorithms.java
+TAKE	PrimitiveBitAlgorithms.*
+REFS	\bPrimitiveBitAlgorithms\b	BitAlgorithms
+REMOVE	m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveBitAlgorithms.java

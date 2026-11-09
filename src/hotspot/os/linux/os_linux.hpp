@@ -30,9 +30,7 @@
 // os::Linux defines the interface to Linux operating systems
 
 class os::Linux {
-  friend class CgroupSubsystem;
   friend class os;
-  friend class OSContainer;
   friend class TestReserveMemorySpecial;
 
   static int (*_pthread_getcpuclockid)(pthread_t, clockid_t *);
@@ -49,19 +47,16 @@ class os::Linux {
   static GrowableArray<int>* _cpu_to_node;
   static GrowableArray<int>* _nindex_to_node;
 
-  static size_t _default_large_page_size;
-
   static julong available_memory_in_container();
 
  protected:
 
-  static julong _physical_memory;
+  static physical_memory_size_type _physical_memory;
   static pthread_t _main_thread;
 
-  static julong available_memory();
-  static julong free_memory();
+  static bool available_memory(physical_memory_size_type& value);
+  static bool free_memory(physical_memory_size_type& value);
 
-  static int active_processor_count();
 
   static void initialize_system_info();
 
@@ -76,10 +71,6 @@ class os::Linux {
   static void rebuild_nindex_to_node_map();
   static GrowableArray<int>* cpu_to_node()    { return _cpu_to_node; }
   static GrowableArray<int>* nindex_to_node()  { return _nindex_to_node; }
-
-  static size_t default_large_page_size();
-  static size_t scan_default_large_page_size();
-  static os::PageSizes scan_multiple_page_support();
 
   static bool setup_large_page_type(size_t page_size);
   static bool transparent_huge_pages_sanity_check(bool warn, size_t pages_size);
@@ -105,6 +96,7 @@ class os::Linux {
   static void print_proc_sys_info(outputStream* st);
   static bool print_ld_preload_file(outputStream* st);
   static void print_uptime_info(outputStream* st);
+  static bool print_numa_info(outputStream* st);
 
  public:
   struct CPUPerfTicks {
@@ -114,6 +106,9 @@ class os::Linux {
     uint64_t steal;
     bool     has_steal_ticks;
   };
+
+  static int active_processor_count();
+  static void kernel_version(long* major, long* minor);
 
   // which_logical_cpu=-1 returns accumulated ticks for all cpus.
   static bool get_tick_information(CPUPerfTicks* pticks, int which_logical_cpu);
@@ -133,7 +128,7 @@ class os::Linux {
   static address   initial_thread_stack_bottom(void)                { return _initial_thread_stack_bottom; }
   static uintptr_t initial_thread_stack_size(void)                  { return _initial_thread_stack_size; }
 
-  static julong physical_memory() { return _physical_memory; }
+  static physical_memory_size_type physical_memory() { return _physical_memory; }
   static julong host_swap();
 
   static intptr_t* ucontext_get_sp(const ucontext_t* uc);

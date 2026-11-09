@@ -1,0 +1,37 @@
+# SPDX-License-Identifier: Apache-2.0
+# Relocation map of recipe/progress-algorithm-20261108/relocate.py (recipe RELOCATE_PROGRESS_ALGORITHM v1, derived from recipe/corpus-search-20261108). Census pass 4 core package (S:/m3-scratch/eb-conv/census4; module root synexia-algo, package com.synexia.algorithms.core): the THIS_PR row of DECISION.tsv.
+# Donor: hsoliwal/com.synexia develop a7b7bb639802c0042c11cf2a5dc8427edd6a9775 (census4 pin, fetched 2026-11-07); the donor progress closure (synexia-job, synexia-common, synexia-cop) and the IAlgorithm closure compiled on the donor side only.
+# Row kinds as in corpus-search-20261108 (REPO, FILE, OWNED, DONOR_ONLY, PACKAGE, TYPE, MEMBER, EXTERNAL, EDIT, DROP_METHOD, DROP_LINE, SKIP, NEC). A DONOR_ONLY note starting with DRIVER marks a donor type the differential driver imports on the donor side.
+kind	donor	target	note
+REPO	hsoliwal/com.synexia	https://github.com/hsoliwal/com.synexia	private donor repository; blob URL = <url>/blob/<commit>/<donor path>
+FILE	synexia-algo/src/main/java/com/synexia/algorithms/core/ProgressAlgorithm.java	src/main/java/jdk/m3/algorithm/M3ProgressAlgorithm.java	C4-core: the functional progress contract execute(I, monitor); asAlgorithm (IAlgorithm compatibility surface) and andThen (child slices) dropped; blob 0b0d30906fe8
+DONOR_ONLY	synexia-algo/src/main/java/com/synexia/algorithms/core/ProgressMonitors.java	-	DRIVER ALREADY relocated as M3ProgressChecks by catalogue-kernels-20261107 (TYPE row; made public by this leaf through apply.py); the driver calls its nonNull / checkCanceled on both sides (blob 8507c2772316)
+DONOR_ONLY	synexia-algo/src/main/java/com/synexia/algorithms/core/IAlgorithm.java	-	OMIT: the older compatibility contract (slf4j logging, timed/logged/retry/when/map over child slices); named by the dropped asAlgorithm, compiled on the donor side only
+DONOR_ONLY	synexia-algo/src/main/java/com/synexia/algorithms/core/AlgorithmException.java	-	OMIT: RuntimeException subclass that logs through slf4j in its constructors; closure of IAlgorithm.retry
+OWNED	synexia-job/src/main/java/com/synexia/job/IProgressMonitor.java	src/main/java/jdk/m3/algorithm/M3ProgressMonitor.java	ALREADY: owner m3/qualification/progress-monitor-unify-20261106 (adapter over jdk.m3.collections.M3ProgressMonitor); blob 62e5ceea645b
+OWNED	synexia-job/src/main/java/com/synexia/job/ProgressSnapshot.java	-	donor progress closure (owner jdk.m3.collections.M3ProgressState)
+OWNED	synexia-job/src/main/java/com/synexia/job/ChildProgressMonitor.java	-	donor progress closure (owner jdk.m3.collections.M3ChildProgressMonitor)
+OWNED	synexia-job/src/main/java/com/synexia/job/utils/ProgressCalculationUtils.java	-	donor progress closure
+OWNED	synexia-common/src/main/java/com/synexia/common/progress/ProgressMonitor.java	-	donor progress closure (owner jdk.m3.collections.M3ProgressMonitor)
+OWNED	synexia-common/src/main/java/com/synexia/common/progress/ProgressState.java	-	donor progress closure (owner jdk.m3.collections.M3ProgressState)
+OWNED	synexia-common/src/main/java/com/synexia/common/progress/ChildProgressMonitor.java	-	donor progress closure
+OWNED	synexia-cop/src/main/java/com/synexia/context/core/ContextProgressMonitor.java	-	donor progress closure
+OWNED	synexia-cop/src/main/java/com/synexia/context/core/ContextNullProgressMonitor.java	-	donor progress closure
+OWNED	synexia-cop/src/main/java/com/synexia/context/core/ContextProgressChild.java	-	donor progress closure
+OWNED	synexia-cop/src/main/java/com/synexia/context/core/ContextProgressSnapshot.java	-	donor progress closure
+PACKAGE	com.synexia.algorithms.core	jdk.m3.algorithm	the package of m3/algorithms
+PACKAGE	com.synexia.job	jdk.m3.algorithm	the progress contract lives in the module package (same-package import, legal and kept, as in the lineage)
+TYPE	ProgressAlgorithm	M3ProgressAlgorithm	the M3 functional contract of an algorithm atom
+TYPE	IProgressMonitor	M3ProgressMonitor	the owner contract (OWNED row)
+TYPE	ProgressMonitors	M3ProgressChecks	the landed helper (catalogue-kernels-20261107), public after this leaf
+MEMBER	IProgressMonitor.noop	M3ProgressMonitor.none	the donor no-op monitor factory = the owner none() (OWNED row)
+EXTERNAL	org.junit.jupiter.api	org.junit.jupiter.api	JUnit 5; pom dependency already declared (no donor test relocated by this leaf)
+EDIT	synexia-algo/src/main/java/com/synexia/algorithms/core/ProgressAlgorithm.java	E1_PA_DOC	675e6fbe1733 class comment: the reference to the IAlgorithm compatibility surface becomes the M3 contract description
+DROP_METHOD	ProgressAlgorithm.asAlgorithm	-	adapter to the IAlgorithm compatibility surface (OMIT)
+DROP_METHOD	ProgressAlgorithm.andThen	jdk.m3.collections.M3ProgressMonitor.split	OVERLAP_OTHER_OWNER: the chain allocates child slices (ProgressMonitors.child = the owner split); a chain is a lambda over execute
+DROP_LINE	ProgressAlgorithm	^import java\.util\.Objects;$	import used only by the dropped andThen
+SKIP	synexia-algo/src/test/java/com/synexia/algorithms/core/ProgressAlgorithmSurfaceTest.java	donor test	OMIT: binds Searching / Sorting factories of other packages and the donor snapshot(); contract covered by M3ProgressAlgorithmTest (blob 23bafbbb4f67)
+SKIP	synexia-algo/src/test/java/com/synexia/algorithms/core/ProgressAwareAlgorithmTest.java	donor test	OMIT: tests IAlgorithm chains (blob 2e4124d22111)
+SKIP	synexia-algo/src/test/java/com/synexia/algorithms/core/CancellationPropagationTest.java	donor test	OMIT: tests AbstractAlgorithm and the pipeline package (blob 888046ea8fec)
+NEC	synexia-algo/src/main/java/com/synexia/algorithms/core/AbstractAlgorithm.java	jdk.m3.algorithm.M3AlgorithmShapeCatalog.Shape + M3ProgressAlgorithm	OMIT: name/time/space metadata = the catalog Shape rows; hooks and AlgorithmException wrapping have no M3 counterpart; its users are shapes, eip, gof and microservices (DECISION.tsv)
+NEC	synexia-algo/src/main/java/com/synexia/algorithms/core/NativeParityGate.java	-	OMIT: Java-vs-native parity gate of the JNI lanes; the module is pure Java (DECISION.tsv)

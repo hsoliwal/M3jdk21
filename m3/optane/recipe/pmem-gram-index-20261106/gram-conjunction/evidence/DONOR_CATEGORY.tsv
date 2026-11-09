@@ -1,0 +1,10 @@
+id	category	reference	decision	contract and rights review
+SYNEXIA-PMEM-GRAM	source gram filter	https://github.com/hsoliwal/com.synexia/blob/87acd7a0fb85fe47ad082de97270747b52603024/m3-pmem-sdk/campaign/src/main/java/com/synexia/m3/pmem/campaign/PmemCorpusGramIndex.java	ADOPT_FIRST_PARTY	Apache-2.0; original SHA256 84cc411d7e6b4c9867517bd675fd1693f3e5cac1c7300567460cf408949c086e; preserve source generation and byte-first-hit contract
+SYNEXIA-KMP	JNI native exact first hit	https://github.com/hsoliwal/com.synexia/blob/48c20ddce0afef2d1350187cf5193f2493392783/m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/PmemSearch.java	REUSE_FIRST_PARTY	Apache-2.0 original Java/POSIX JNI first-hit authority; no JNI export change
+LC-28	first substring occurrence	https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/	CATEGORY_ONLY	Java String position is not a raw UTF-8 byte offset; no challenge code copied
+LC-349	unique intersection	https://leetcode.com/problems/intersection-of-two-arrays/	CATEGORY_ONLY	Unique set intersections motivate necessary Gram tests; no challenge code copied
+LC-350	multiset intersection	https://leetcode.com/problems/intersection-of-two-arrays-ii/	REJECT_DROP_IN	Multiplicity-based output is not required pair-presence; no solution copied
+HR-FIND-A-STRING	overlapping substring counts	https://www.hackerrank.com/challenges/find-a-string/problem	REJECT_DROP_IN	Counts occurrences, not first byte position; no submission copied
+HR-SPARSE-ARRAYS	frequency lookup	https://www.hackerrank.com/challenges/sparse-arrays/problem	CATEGORY_ONLY	Exact full-query frequency not first-hit gram presence; no submission copied
+GFG-INTERSECTION	intersection of sorted arrays	https://www.geeksforgeeks.org/dsa/intersection-of-two-sorted-arrays/	CATEGORY_ONLY	Unique necessary membership signal; file selection needs exact KMP verification; no editorial code copied
+GITHUB-THEALGORITHMS	educational Java search	https://github.com/TheAlgorithms/Java	REVIEW_ONLY	MIT repo, no source copied or unpinned code adopted

@@ -1,0 +1,339 @@
+{
+  "host": {
+    "system": "Linux",
+    "machine": "x86_64"
+  },
+  "source_hashes": {
+    "baseline_owner": "1d1f2de2aa47769d058ef5ca889742f674ef0f40556e282dec5ddf69258ac5ce",
+    "candidate_owner": "fb7bab27b68ecfbffc8c98743e8ab3dc06abcc61555e777001b376441b747c1d",
+    "candidate_helper": "3daf7de3b3fb18d8d2f6c5a5409ae9bf33d847fd6ca1604acb46f984e6966b3f"
+  },
+  "commands": [
+    {
+      "label": "cc-version",
+      "argv": [
+        "cc",
+        "--version"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "cxx-version",
+      "argv": [
+        "c++",
+        "--version"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "java-version",
+      "argv": [
+        "/tmp/m3-toolchains/jdk-21/bin/java",
+        "-version"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "generate-jni-header",
+      "argv": [
+        "/tmp/m3-toolchains/jdk-21/bin/javac",
+        "--patch-module",
+        "java.base=/workspace/scratch/528dc83be6f5/native-tests/.build/abi-source",
+        "-h",
+        "/workspace/scratch/528dc83be6f5/native-tests/.build/headers",
+        "-d",
+        "/workspace/scratch/528dc83be6f5/native-tests/.build/abi-classes",
+        "/workspace/scratch/528dc83be6f5/native-tests/.build/abi-source/java/lang/M3StringPool.java"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "compile-baseline-linux",
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I/tmp/m3-toolchains/jdk-21/include",
+        "-I/tmp/m3-toolchains/jdk-21/include/linux",
+        "-I/workspace/scratch/528dc83be6f5/native-tests/.build/headers",
+        "-I/workspace/scratch/528dc83be6f5/native-candidate/baseline/src/java.base/share/native/libjava",
+        "-DM3_POOL_SOURCE=\"/workspace/scratch/528dc83be6f5/native-candidate/baseline/src/java.base/share/native/libjava/M3StringPool.c\"",
+        "/workspace/scratch/528dc83be6f5/native-tests/m3_string_pool_model.c",
+        "-o",
+        "/workspace/scratch/528dc83be6f5/native-tests/.build/baseline-linux"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "run-baseline-linux",
+      "argv": [
+        "/workspace/scratch/528dc83be6f5/native-tests/.build/baseline-linux"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "compile-candidate-linux",
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I/tmp/m3-toolchains/jdk-21/include",
+        "-I/tmp/m3-toolchains/jdk-21/include/linux",
+        "-I/workspace/scratch/528dc83be6f5/native-tests/.build/headers",
+        "-I/workspace/scratch/528dc83be6f5/native-candidate/candidate/src/java.base/share/native/libjava",
+        "-DM3_POOL_SOURCE=\"/workspace/scratch/528dc83be6f5/native-candidate/candidate/src/java.base/share/native/libjava/M3StringPool.c\"",
+        "/workspace/scratch/528dc83be6f5/native-tests/m3_string_pool_model.c",
+        "-o",
+        "/workspace/scratch/528dc83be6f5/native-tests/.build/candidate-linux"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "run-candidate-linux",
+      "argv": [
+        "/workspace/scratch/528dc83be6f5/native-tests/.build/candidate-linux"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "compile-candidate-linux-hint-model",
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I/tmp/m3-toolchains/jdk-21/include",
+        "-I/tmp/m3-toolchains/jdk-21/include/linux",
+        "-I/workspace/scratch/528dc83be6f5/native-tests/.build/headers",
+        "-I/workspace/scratch/528dc83be6f5/native-candidate/candidate/src/java.base/share/native/libjava",
+        "-DM3_POOL_SOURCE=\"/workspace/scratch/528dc83be6f5/native-candidate/candidate/src/java.base/share/native/libjava/M3StringPool.c\"",
+        "-DM3_MODEL_NO_NOREPLACE=1",
+        "/workspace/scratch/528dc83be6f5/native-tests/m3_string_pool_model.c",
+        "-o",
+        "/workspace/scratch/528dc83be6f5/native-tests/.build/candidate-linux-hint-model"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "run-candidate-linux-hint-model",
+      "argv": [
+        "/workspace/scratch/528dc83be6f5/native-tests/.build/candidate-linux-hint-model"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "compile-candidate-apple-model",
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I/tmp/m3-toolchains/jdk-21/include",
+        "-I/tmp/m3-toolchains/jdk-21/include/linux",
+        "-I/workspace/scratch/528dc83be6f5/native-tests/.build/headers",
+        "-I/workspace/scratch/528dc83be6f5/native-candidate/candidate/src/java.base/share/native/libjava",
+        "-DM3_POOL_SOURCE=\"/workspace/scratch/528dc83be6f5/native-candidate/candidate/src/java.base/share/native/libjava/M3StringPool.c\"",
+        "-DM3_MODEL_APPLE=1",
+        "/workspace/scratch/528dc83be6f5/native-tests/m3_string_pool_model.c",
+        "-o",
+        "/workspace/scratch/528dc83be6f5/native-tests/.build/candidate-apple-model"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "run-candidate-apple-model",
+      "argv": [
+        "/workspace/scratch/528dc83be6f5/native-tests/.build/candidate-apple-model"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "compile-helper-c",
+      "argv": [
+        "cc",
+        "-x",
+        "c",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I/tmp/m3-toolchains/jdk-21/include",
+        "-I/tmp/m3-toolchains/jdk-21/include/linux",
+        "-I/workspace/scratch/528dc83be6f5/native-tests/.build/headers",
+        "-I/workspace/scratch/528dc83be6f5/native-candidate/candidate/src/java.base/share/native/libjava",
+        "/workspace/scratch/528dc83be6f5/native-tests/m3_jni_util_contract.c",
+        "-o",
+        "/workspace/scratch/528dc83be6f5/native-tests/.build/helper-c"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "run-helper-c",
+      "argv": [
+        "/workspace/scratch/528dc83be6f5/native-tests/.build/helper-c"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "compile-helper-cpp",
+      "argv": [
+        "c++",
+        "-x",
+        "c++",
+        "-std=c++20",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I/tmp/m3-toolchains/jdk-21/include",
+        "-I/tmp/m3-toolchains/jdk-21/include/linux",
+        "-I/workspace/scratch/528dc83be6f5/native-tests/.build/headers",
+        "-I/workspace/scratch/528dc83be6f5/native-candidate/candidate/src/java.base/share/native/libjava",
+        "/workspace/scratch/528dc83be6f5/native-tests/m3_jni_util_contract.c",
+        "-o",
+        "/workspace/scratch/528dc83be6f5/native-tests/.build/helper-cpp"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "run-helper-cpp",
+      "argv": [
+        "/workspace/scratch/528dc83be6f5/native-tests/.build/helper-cpp"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "compile-jvm-fixture",
+      "argv": [
+        "/tmp/m3-toolchains/jdk-21/bin/javac",
+        "-d",
+        "/workspace/scratch/528dc83be6f5/native-tests/.build/classes",
+        "/workspace/scratch/528dc83be6f5/native-tests/M3StringPoolNativeTest.java"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "compile-jvm-baseline",
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I/tmp/m3-toolchains/jdk-21/include",
+        "-I/tmp/m3-toolchains/jdk-21/include/linux",
+        "-I/workspace/scratch/528dc83be6f5/native-tests/.build/headers",
+        "-fPIC",
+        "-shared",
+        "-I/workspace/scratch/528dc83be6f5/native-candidate/baseline/src/java.base/share/native/libjava",
+        "-DM3_POOL_SOURCE=\"/workspace/scratch/528dc83be6f5/native-candidate/baseline/src/java.base/share/native/libjava/M3StringPool.c\"",
+        "/workspace/scratch/528dc83be6f5/native-tests/m3_string_pool_jni_smoke.c",
+        "-o",
+        "/workspace/scratch/528dc83be6f5/native-tests/.build/libm3_pool_test_baseline.so"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "jvm-baseline",
+      "argv": [
+        "/tmp/m3-toolchains/jdk-21/bin/java",
+        "-Xcheck:jni",
+        "-Dm3.test.library=/workspace/scratch/528dc83be6f5/native-tests/.build/libm3_pool_test_baseline.so",
+        "-cp",
+        "/workspace/scratch/528dc83be6f5/native-tests/.build/classes",
+        "M3StringPoolNativeTest"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "compile-jvm-candidate",
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I/tmp/m3-toolchains/jdk-21/include",
+        "-I/tmp/m3-toolchains/jdk-21/include/linux",
+        "-I/workspace/scratch/528dc83be6f5/native-tests/.build/headers",
+        "-fPIC",
+        "-shared",
+        "-I/workspace/scratch/528dc83be6f5/native-candidate/candidate/src/java.base/share/native/libjava",
+        "-DM3_POOL_SOURCE=\"/workspace/scratch/528dc83be6f5/native-candidate/candidate/src/java.base/share/native/libjava/M3StringPool.c\"",
+        "/workspace/scratch/528dc83be6f5/native-tests/m3_string_pool_jni_smoke.c",
+        "-o",
+        "/workspace/scratch/528dc83be6f5/native-tests/.build/libm3_pool_test_candidate.so"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "jvm-candidate",
+      "argv": [
+        "/tmp/m3-toolchains/jdk-21/bin/java",
+        "-Xcheck:jni",
+        "-Dm3.test.library=/workspace/scratch/528dc83be6f5/native-tests/.build/libm3_pool_test_candidate.so",
+        "-cp",
+        "/workspace/scratch/528dc83be6f5/native-tests/.build/classes",
+        "M3StringPoolNativeTest"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "results": {
+    "baseline-linux": {
+      "checks": 24,
+      "kind": "deterministic-model"
+    },
+    "candidate-linux": {
+      "checks": 24,
+      "kind": "deterministic-model"
+    },
+    "candidate-linux-hint-model": {
+      "checks": 24,
+      "kind": "deterministic-model"
+    },
+    "candidate-apple-model": {
+      "checks": 24,
+      "kind": "deterministic-model"
+    },
+    "linux-before-after-differential": "identical 24-case transcript",
+    "helper-c": {
+      "checks": 3,
+      "kind": "JNI-table-contract-model"
+    },
+    "helper-cpp": {
+      "checks": 3,
+      "kind": "JNI-table-contract-model"
+    },
+    "jvm-linux-baseline": {
+      "checks": 8,
+      "kind": "actual-production-C-real-JVM-and-Linux-mmap",
+      "jni_checking": true
+    },
+    "jvm-linux-candidate": {
+      "checks": 8,
+      "kind": "actual-production-C-real-JVM-and-Linux-mmap",
+      "jni_checking": true
+    }
+  },
+  "limitations": [
+    "Apple branch uses Linux host headers and stubbed syscalls; it is not an Apple build or kernel test.",
+    "The no-NOREPLACE branch is a deterministic syscall model, not an old-kernel execution.",
+    "Real JVM execution uses the actual production C mapping owner registered to a test class, not a source-built M3JDK21 image.",
+    "Android/iOS device execution, Windows mapping execution and full integrated runtime qualification are not exercised here."
+  ],
+  "status": "PASS"
+}

@@ -1,0 +1,8 @@
+category	operation	candidate	source	decision	rationale
+stable-mask-compaction	selected logical coordinates	direct position count+emit	M3 Java/JNI owner	ADMITTED_M3_ATOM	one exact output; removes O(n) caller identity input and current-JNI transfer
+stable-mask-compaction	selected logical coordinates	identity row array plus generic selector	previous M3 baseline	REPLACED_BASELINE	correct but carries O(n) scratch unrelated to caller semantics
+stable-compaction	stable survivor order	LeetCode 283 Move Zeroes	problem taxonomy only	TAXONOMY_ONLY	order-preserving compaction shape; no solution code copied
+bit-mask	mask mechanics	HackerRank Java BitSet	problem taxonomy only	TAXONOMY_ONLY	bit operations shape only; M3 byte-state lane remains owner
+stable-partition	stable relative order	GeeksforGeeks stable partition	problem taxonomy only	TAXONOMY_ONLY	stable-order property only; no partition implementation copied
+jni-boundary	array access	chunked Region API	current M3 JNI owner	RETAINED	bounded primitive chunks; no retained Java pointers or critical pins
+native-compatibility	new position ABI	lazy symbol probe plus old selector fallback	first-principles	ADMITTED_COMPATIBILITY	new binaries avoid identity transfer; old binaries remain usable for NATIVE_REQUIRED

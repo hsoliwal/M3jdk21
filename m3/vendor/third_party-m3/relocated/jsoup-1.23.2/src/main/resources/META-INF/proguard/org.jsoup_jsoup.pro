@@ -1,0 +1,1 @@
+-dontwarn com.m3.lib.re2j.**

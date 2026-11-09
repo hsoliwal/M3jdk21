@@ -1,0 +1,416 @@
+/*
+ * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+ * SPDX-License-Identifier: Apache-2.0
+ */
+package com.m3.collections;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.security.MessageDigest;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HexFormat;
+import java.util.List;
+
+/** Deterministic oracle over the actual projection, mask-window and JNI owners. */
+public final class M3IndexOrderWindowContract {
+    private static final int CANARY = 0x74ac013d;
+    private static final Field INDEX = field("indices");
+    private static final Field PAYLOAD = field("values");
+    private static long checks;
+    private static long windows;
+    private static boolean nativeMode;
+    private static MessageDigest observations;
+
+    private M3IndexOrderWindowContract() { }
+
+    private static Field field(String name) {
+        try {
+            Field value = M3LongIndexProjection.class.getDeclaredField(name);
+            value.setAccessible(true);
+            return value;
+        } catch (ReflectiveOperationException failure) {
+            throw new ExceptionInInitializerError(failure);
+        }
+    }
+
+    private static Object metadata(Field field, M3LongIndexProjection view) {
+        try { return field.get(view); }
+        catch (IllegalAccessException failure) { throw new AssertionError(failure); }
+    }
+
+    private static void check(boolean valid, String message) {
+        checks++;
+        if (!valid) throw new AssertionError(message);
+    }
+
+    private static void observe(long value) {
+        for (int shift = 56; shift >= 0; shift -= 8)
+            observations.update((byte) (value >>> shift));
+    }
+
+    private static void same(int[] expected, int[] actual, String message) {
+        check(Arrays.equals(expected, actual), message);
+    }
+
+    private static int[] stable(int[] order, long[] payload, boolean descending) {
+        Integer[] boxed = Arrays.stream(order).boxed().toArray(Integer[]::new);
+        Arrays.sort(boxed, (a, b) -> descending
+                ? Long.compare(payload[b], payload[a]) : Long.compare(payload[a], payload[b]));
+        return Arrays.stream(boxed).mapToInt(Integer::intValue).toArray();
+    }
+
+    private static int[] selected(int[] order, byte[] states, int required) {
+        List<Integer> expected = new ArrayList<>();
+        for (int i = 0; i < order.length; i++) {
+            int flags = Byte.toUnsignedInt(states[i]);
+            if ((flags | required) == flags) expected.add(order[i]);
+        }
+        return expected.stream().mapToInt(Integer::intValue).toArray();
+    }
+
+    private static M3LongIndexProjection sorted(M3LongIndexProjection view, boolean descending) {
+        return descending ? view.sortedDescending() : view.sortedAscending();
+    }
+
+    private static M3LongIndexProjection.Order direction(boolean descending) {
+        return descending ? M3LongIndexProjection.Order.DESCENDING
+                : M3LongIndexProjection.Order.ASCENDING;
+    }
+
+    private static void projection(M3LongIndexProjection actual, int[] ids, long[] payload,
+            M3LongIndexProjection.Order order) {
+        check(actual.size() == ids.length && actual.isEmpty() == (ids.length == 0), "view size");
+        check(actual.order() == order, "order metadata");
+        int[] exported = actual.physicalIndices();
+        same(ids, exported, "exact stable physical occurrence order");
+        long[] values = actual.toArray();
+        check(values.length == ids.length, "materialized length");
+        observe(order.ordinal()); observe(ids.length);
+        for (int i = 0; i < ids.length; i++) {
+            check(actual.physicalIndex(i) == ids[i], "logical-to-physical address");
+            check(actual.get(i) == payload[ids[i]] && values[i] == payload[ids[i]], "payload value");
+            observe(ids[i]); observe(values[i]);
+        }
+        if (ids.length != 0) {
+            exported[0] = -1; values[0] = ~values[0];
+            check(actual.physicalIndex(0) == ids[0] && actual.get(0) == payload[ids[0]],
+                    "public materialization is detached");
+        }
+    }
+
+    private static void projectionCase(long[] input, int shape) {
+        long[] payload = input.clone();
+        M3LongIndexProjection snapshot = M3LongIndexProjection.snapshot(input);
+        Arrays.fill(input, Long.MIN_VALUE);
+        int[] identity = new int[payload.length];
+        for (int i = 0; i < identity.length; i++) identity[i] = i;
+        projection(snapshot, identity, payload, M3LongIndexProjection.Order.ENCOUNTER);
+        for (boolean descending : new boolean[] {false, true}) {
+            int[] order = stable(identity, payload, descending);
+            M3LongIndexProjection ordered = sorted(snapshot, descending);
+            projection(ordered, order, payload, direction(descending));
+            check(metadata(PAYLOAD, ordered) == metadata(PAYLOAD, snapshot), "sort keeps payload owner");
+            for (int first = 0; first <= order.length; first++) {
+                for (int length = 0; length <= order.length - first; length++) {
+                    int[] sliceIds = Arrays.copyOfRange(order, first, first + length);
+                    M3LongIndexProjection slice = ordered.slice(first, length);
+                    check(metadata(INDEX, slice) == metadata(INDEX, ordered), "slice shares index owner");
+                    M3LongIndexProjection repeated = sorted(slice, descending);
+                    check(repeated != slice, "same-order sort returns a distinct descriptor");
+                    check(metadata(INDEX, repeated) == metadata(INDEX, slice), "same-order index reuse");
+                    int[] reversedIds = stable(sliceIds, payload, !descending);
+                    M3LongIndexProjection reversed = sorted(slice, !descending);
+                    projection(reversed, reversedIds, payload, direction(!descending));
+                    check(metadata(PAYLOAD, reversed) == metadata(PAYLOAD, snapshot), "reversal keeps payload owner");
+                    projection(sorted(reversed, descending), sliceIds, payload, direction(descending));
+                    projection(slice, sliceIds, payload, direction(descending));
+
+                    byte[] states = new byte[length];
+                    for (int i = 0; i < length; i++) states[i] = switch ((i + shape) & 3) {
+                        case 0 -> 0; case 1 -> 1; case 2 -> (byte) 128; default -> (byte) 255;
+                    };
+                    byte[] originalStates = states.clone();
+                    int required = new int[] {0, 1, 128, 129, 255}[shape % 5];
+                    int[] filteredIds = selected(reversedIds, states, required);
+                    M3LongIndexProjection filtered = reversed.filtered(states, required,
+                            M3IndexMaskCompactor.Backend.JAVA);
+                    projection(filtered, filteredIds, payload, direction(!descending));
+                    check(metadata(PAYLOAD, filtered) == metadata(PAYLOAD, snapshot), "filter keeps payload owner");
+                    if (filteredIds.length == length)
+                        check(metadata(INDEX, filtered) == metadata(INDEX, reversed), "all-selected Java index reuse");
+                    int cut = filteredIds.length / 3;
+                    int kept = filteredIds.length - cut - (filteredIds.length > 1 ? 1 : 0);
+                    int[] nestedIds = Arrays.copyOfRange(filteredIds, cut, cut + kept);
+                    projection(sorted(filtered.slice(cut, kept), descending),
+                            stable(nestedIds, payload, descending), payload, direction(descending));
+                    if (nativeMode && (shape + first + length) % 17 == 0) {
+                        M3LongIndexProjection nativeFiltered = slice.filtered(states, required,
+                                M3IndexMaskCompactor.Backend.NATIVE_REQUIRED);
+                        same(selected(sliceIds, states, required), nativeFiltered.physicalIndices(),
+                                "native selection reads the actual offset index window");
+                        check(nativeFiltered.order() == slice.order(), "native filter retains direction");
+                        check(metadata(PAYLOAD, nativeFiltered) == metadata(PAYLOAD, snapshot), "native payload owner");
+                    }
+                    check(Arrays.equals(states, originalStates), "selection states remain unchanged");
+                }
+            }
+        }
+        projection(snapshot, identity, payload, M3LongIndexProjection.Order.ENCOUNTER);
+    }
+
+    private static void projections() {
+        int shapes = 1;
+        for (int length = 0; length <= 6; length++) {
+            for (int code = 0; code < shapes; code++) {
+                long[] values = new long[length]; int digits = code;
+                for (int i = 0; i < length; i++) { values[i] = digits % 3 - 1; digits /= 3; }
+                projectionCase(values, code);
+            }
+            shapes *= 3;
+        }
+        projectionCase(new long[] {Long.MAX_VALUE, Long.MIN_VALUE, 0, Long.MIN_VALUE,
+                Long.MAX_VALUE, -1, 1, Long.MIN_VALUE}, 257);
+        projectionCase(new long[] {2, 1, 2, 1, 2, 0, 1}, 129);
+    }
+
+    private static long reference(int[] rows, byte[] states, int first, int budget,
+            int required, int excluded, int[] output, int offset, int limit) {
+        int next = first, written = 0;
+        long end = Math.min((long) rows.length, (long) first + budget);
+        while (next < end && written < limit) {
+            int flags = Byte.toUnsignedInt(states[next]);
+            if ((flags | required) == flags && (flags & excluded) == 0)
+                output[offset + written++] = rows[next];
+            next++;
+        }
+        return ((long) next << 32) | Integer.toUnsignedLong(written);
+    }
+
+    private static long window(int[] rows, byte[] states, int first, int budget,
+            int required, int excluded, int offset, int limit) {
+        windows++;
+        int[] originalRows = rows.clone(); byte[] originalStates = states.clone();
+        int[] expected = new int[offset + limit + 4]; Arrays.fill(expected, CANARY);
+        int[] actual = expected.clone();
+        long want = reference(rows, states, first, budget, required, excluded, expected, offset, limit);
+        long got = M3IndexMaskWindow.scanBounded(rows, states, first, budget, required, excluded,
+                actual, offset, limit, M3IndexMaskCompactor.Backend.JAVA);
+        check(got == want, "exact bounded Java cursor/count");
+        same(expected, actual, "bounded Java ordered output and guards");
+        observe(got); for (int value : actual) observe(value);
+        if (budget == Integer.MAX_VALUE) {
+            Arrays.fill(actual, CANARY);
+            got = M3IndexMaskWindow.scan(rows, states, first, required, excluded, actual,
+                    offset, limit, M3IndexMaskCompactor.Backend.JAVA);
+            check(got == want, "legacy Java cursor/count");
+            same(expected, actual, "legacy Java full-remainder parity");
+        }
+        if (nativeMode) {
+            Arrays.fill(actual, CANARY);
+            got = M3IndexMaskWindow.scanBounded(rows, states, first, budget, required, excluded,
+                    actual, offset, limit, M3IndexMaskCompactor.Backend.NATIVE_REQUIRED);
+            check(got == want, "exact bounded JNI cursor/count");
+            same(expected, actual, "bounded JNI ordered output and guards");
+            if (budget == Integer.MAX_VALUE) {
+                Arrays.fill(actual, CANARY);
+                got = M3IndexMaskWindow.scan(rows, states, first, required, excluded, actual,
+                        offset, limit, M3IndexMaskCompactor.Backend.NATIVE_REQUIRED);
+                check(got == want, "legacy JNI cursor/count");
+                same(expected, actual, "legacy JNI full-remainder parity");
+            }
+        }
+        same(originalRows, rows, "row source unchanged");
+        check(Arrays.equals(originalStates, states), "state source unchanged");
+        return want;
+    }
+
+    private static void maskPairs() {
+        int[] rows = new int[257]; byte[] states = new byte[257];
+        for (int i = 0; i < rows.length; i++) { rows[i] = i % 7 - 3; states[i] = (byte) i; }
+        rows[0] = Integer.MIN_VALUE; rows[256] = Integer.MAX_VALUE;
+        for (int required = 0; required < 256; required++)
+            for (int excluded = 0; excluded < 256; excluded++)
+                window(rows, states, 0, Integer.MAX_VALUE, required, excluded, 3, 257);
+    }
+
+    private static void boundaries() {
+        int[] limits = {0, 1, 2, 63, 64, 65, 127, 128, 129, 4096};
+        int[] budgets = {0, 1, 63, 64, 65, 127, 128, 129, 4096, Integer.MAX_VALUE};
+        int[][] masks = {{0, 0}, {128, 0}, {128, 1}, {1, 128}, {129, 0}, {128, 128}, {255, 0}};
+        for (int length : new int[] {0, 1, 2, 63, 64, 65, 127, 128, 129, 255, 256, 257, 4095, 4096, 4097}) {
+            int[] rows = new int[length]; byte[] states = new byte[length];
+            for (int i = 0; i < length; i++) rows[i] = switch (i % 5) {
+                case 0 -> Integer.MIN_VALUE; case 1 -> Integer.MAX_VALUE; default -> i % 9 - 4;
+            };
+            for (int pattern = 0; pattern < 5; pattern++) {
+                for (int i = 0; i < length; i++) states[i] = switch (pattern) {
+                    case 0 -> 0; case 1 -> (byte) 129;
+                    case 2 -> (byte) (i % 128 == 127 ? 129 : 0);
+                    case 3 -> (byte) (i * 37 + 11);
+                    default -> (byte) (i % 128 >= 62 && i % 128 <= 65 ? 255 : 0);
+                };
+                for (int first : new int[] {0, length / 2, length}) {
+                    for (int i = 0; i < budgets.length; i++) {
+                        int[] mask = masks[(i + pattern) % masks.length];
+                        window(rows, states, first, budgets[i], mask[0], mask[1],
+                                (i + first) % 4, limits[(i + pattern) % limits.length]);
+                    }
+                }
+            }
+        }
+        int[] rows = new int[1025]; byte[] states = new byte[1025];
+        for (int i = 0; i < rows.length; i++) rows[i] = i - 512;
+        for (int hit : new int[] {63, 64, 65, 127, 128, 129, 255, 256, 1024}) states[hit] = (byte) 128;
+        for (int first : new int[] {0, 1, 63, 64, 65, 127, 128, 129})
+            for (int budget : new int[] {1, 63, 64, 65, 127, 128, 129, Integer.MAX_VALUE})
+                for (int limit : new int[] {1, 2}) window(rows, states, first, budget, 128, 0, 2, limit);
+    }
+
+    private static void resumes() {
+        int[] rows = new int[8201]; byte[] states = new byte[8201];
+        List<Integer> expected = new ArrayList<>();
+        for (int i = 0; i < rows.length; i++) {
+            rows[i] = i % 13 - 6;
+            if (i % 128 == 127 || i == rows.length - 1) { states[i] = (byte) 128; expected.add(rows[i]); }
+        }
+        M3IndexMaskCompactor.Backend backend = nativeMode
+                ? M3IndexMaskCompactor.Backend.NATIVE_REQUIRED : M3IndexMaskCompactor.Backend.JAVA;
+        for (int budget : new int[] {1, 63, 64, 65, 127, 128, 129, 513, Integer.MAX_VALUE}) {
+            for (int limit : new int[] {1, 2, 7, 129}) {
+                int cursor = 0; List<Integer> emitted = new ArrayList<>();
+                int[] out = new int[limit + 4], oracle = new int[out.length];
+                while (cursor < rows.length) {
+                    Arrays.fill(out, CANARY); Arrays.fill(oracle, CANARY);
+                    long want = reference(rows, states, cursor, budget, 128, 0, oracle, 2, limit);
+                    long got = M3IndexMaskWindow.scanBounded(rows, states, cursor, budget, 128, 0,
+                            out, 2, limit, backend);
+                    check(got == want, "resumed exact cursor/count");
+                    same(oracle, out, "resumed output guards");
+                    int next = M3IndexMaskWindow.nextIndex(got);
+                    check(next > cursor && next <= rows.length && (long) next - cursor <= budget,
+                            "positive budgets make bounded progress");
+                    for (int i = 0; i < M3IndexMaskWindow.written(got); i++) emitted.add(out[i + 2]);
+                    observe(got); cursor = next;
+                }
+                check(expected.equals(emitted), "resumption preserves every duplicate occurrence exactly once");
+            }
+        }
+    }
+
+    private static void refusal(Class<? extends Throwable> type, Runnable call, int[] output) {
+        int[] before = output.clone();
+        try { call.run(); }
+        catch (RuntimeException | LinkageError failure) {
+            check(type.isInstance(failure), "wrong refusal: " + failure);
+            same(before, output, "refused call wrote output");
+            return;
+        }
+        throw new AssertionError("missing refusal " + type.getSimpleName());
+    }
+
+    private static void failures(M3IndexMaskCompactor.Backend backend) {
+        int[] rows = {3, 3, -1}, out = {CANARY, CANARY, CANARY}; byte[] states = {1, 2, 3};
+        refusal(NullPointerException.class, () -> M3IndexMaskWindow.scanBounded(null, states, -1, -1, -1, -1, out, -1, -1, backend), out);
+        refusal(NullPointerException.class, () -> M3IndexMaskWindow.scanBounded(rows, null, 0, 0, 0, 0, out, 0, 0, backend), out);
+        refusal(NullPointerException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, 0, 0, 0, 0, out, 0, 0, null), out);
+        refusal(IllegalArgumentException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, 0, 0, 0, 0, rows, 0, 0, backend), rows);
+        refusal(IllegalArgumentException.class, () -> M3IndexMaskWindow.scanBounded(rows, new byte[0], -1, -1, -1, -1, out, -1, -1, backend), out);
+        for (int bad : new int[] {-1, 256, Integer.MIN_VALUE, Integer.MAX_VALUE}) {
+            refusal(IllegalArgumentException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, -1, -1, bad, 0, out, 0, 0, backend), out);
+            refusal(IllegalArgumentException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, 0, 0, 0, bad, out, 0, 0, backend), out);
+        }
+        refusal(IndexOutOfBoundsException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, -1, -1, 0, 0, out, 0, 0, backend), out);
+        refusal(IndexOutOfBoundsException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, 4, 0, 0, 0, out, 0, 0, backend), out);
+        refusal(IllegalArgumentException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, 0, -1, 0, 0, out, 0, 0, backend), out);
+        refusal(IllegalArgumentException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, 0, 0, 0, 0, out, 0, 4097, backend), out);
+        refusal(IndexOutOfBoundsException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, 0, -1, 0, 0, out, -1, 0, backend), out);
+        refusal(IndexOutOfBoundsException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, 0, 0, 0, 0, out, Integer.MAX_VALUE, 1, backend), out);
+        M3LongIndexProjection view = M3LongIndexProjection.snapshot(new long[] {3, 2, 1});
+        refusal(IndexOutOfBoundsException.class, () -> view.slice(1, Integer.MAX_VALUE), out);
+        refusal(IndexOutOfBoundsException.class, () -> view.get(-1), out);
+        refusal(IllegalArgumentException.class, () -> view.filtered(new byte[2], 0, backend), out);
+        refusal(IllegalArgumentException.class, () -> view.filtered(new byte[3], 256, backend), out);
+        refusal(NullPointerException.class, () -> view.filtered(null, 0, backend), out);
+    }
+
+    private static void rawRefusals() throws Exception {
+        Method legacy = M3IndexMaskWindow.class.getDeclaredMethod("scanNative", int[].class,
+                byte[].class, int.class, int.class, int.class, int[].class, int.class, int.class);
+        Method bounded = M3IndexMaskWindow.class.getDeclaredMethod("scanBoundedNative", int[].class,
+                byte[].class, int.class, int.class, int.class, int.class, int[].class, int.class, int.class);
+        legacy.setAccessible(true); bounded.setAccessible(true);
+        int[] rows = {7, 7, -1}, out = {CANARY, CANARY, CANARY}; byte[] states = {1, 1, 1};
+        Object[][] legacyArgs = {
+            {null, states, 0, 0, 0, out, 0, 0}, {rows, null, 0, 0, 0, out, 0, 0},
+            {rows, states, 0, 0, 0, null, 0, 0}, {rows, states, -1, 0, 0, out, 0, 0},
+            {rows, states, 4, 0, 0, out, 0, 0}, {rows, states, 0, 256, 0, out, 0, 0},
+            {rows, states, 0, 0, -1, out, 0, 0}, {rows, states, 0, 0, 0, rows, 0, 0},
+            {rows, new byte[0], 0, 0, 0, out, 0, 0}, {rows, states, 0, 0, 0, out, 0, 4097},
+            {rows, states, 0, 0, 0, out, Integer.MAX_VALUE, 1}
+        };
+        Object[][] boundedArgs = {
+            {null, states, 0, 2, 0, 0, out, 0, 0}, {rows, null, 0, 2, 0, 0, out, 0, 0},
+            {rows, states, 0, 2, 0, 0, null, 0, 0}, {rows, states, -1, 2, 0, 0, out, 0, 0},
+            {rows, states, 0, 4, 0, 0, out, 0, 0}, {rows, states, 2, 1, 0, 0, out, 0, 0},
+            {rows, states, 0, 2, 256, 0, out, 0, 0}, {rows, states, 0, 2, 0, -1, out, 0, 0},
+            {rows, states, 0, 2, 0, 0, rows, 0, 0}, {rows, new byte[0], 0, 2, 0, 0, out, 0, 0},
+            {rows, states, 0, 2, 0, 0, out, 0, 4097}, {rows, states, 0, 2, 0, 0, out, Integer.MAX_VALUE, 1}
+        };
+        for (int abi = 0; abi < 2; abi++) {
+            Method method = abi == 0 ? legacy : bounded;
+            for (Object[] arguments : abi == 0 ? legacyArgs : boundedArgs) {
+                int[] beforeRows = rows.clone(), beforeOut = out.clone();
+                try { method.invoke(null, arguments); throw new AssertionError("raw JNI boundary accepted invalid geometry"); }
+                catch (InvocationTargetException failure) {
+                    check(failure.getCause() instanceof IllegalArgumentException, "raw JNI refusal type");
+                }
+                same(beforeRows, rows, "raw JNI refused call changed source");
+                same(beforeOut, out, "raw JNI refused call changed output");
+            }
+        }
+    }
+
+    private static void unavailable(boolean oldBinary) {
+        check(M3IndexMaskCompactor.nativeAvailable() == oldBinary, "requested isolated native-library mode");
+        int[] rows = {7}, out = {CANARY}; byte[] states = {(byte) 128};
+        var backend = M3IndexMaskCompactor.Backend.NATIVE_REQUIRED;
+        refusal(UnsatisfiedLinkError.class, () -> M3IndexMaskWindow.scanBounded(rows, states,
+                0, 1, 128, 0, out, 0, 1, backend), out);
+        if (oldBinary) {
+            long got = M3IndexMaskWindow.scan(rows, states, 0, 128, 0, out, 0, 1, backend);
+            check(got == ((1L << 32) | 1) && out[0] == 7, "legacy JNI symbol remains usable");
+            check(M3IndexMaskWindow.scanBounded(rows, states, 0, 0, 128, 0, out, 0, 1, backend) == 0,
+                    "old binary preserves public zero-work shortcut after library availability");
+        } else {
+            for (int limit : new int[] {0, 1}) {
+                refusal(UnsatisfiedLinkError.class, () -> M3IndexMaskWindow.scan(rows, states,
+                        0, 128, 128, out, 0, limit, backend), out);
+                refusal(UnsatisfiedLinkError.class, () -> M3IndexMaskWindow.scanBounded(rows, states,
+                        0, 0, 128, 128, out, 0, limit, backend), out);
+            }
+            refusal(UnsatisfiedLinkError.class, () -> M3LongIndexProjection.snapshot(new long[] {1})
+                    .filtered(new byte[] {1}, 1, backend), out);
+        }
+        System.out.println("INDEX_ORDER_WINDOW_NATIVE_REFUSAL_PASS oldBinary=" + oldBinary + " checks=" + checks);
+    }
+
+    public static void main(String[] args) throws Exception {
+        if (args.length > 1) throw new IllegalArgumentException("--java | --native | --missing | --old-native");
+        String mode = args.length == 0 ? "--java" : args[0];
+        if (mode.equals("--missing") || mode.equals("--old-native")) {
+            unavailable(mode.equals("--old-native")); return;
+        }
+        if (!mode.equals("--java") && !mode.equals("--native"))
+            throw new IllegalArgumentException("--java | --native | --missing | --old-native");
+        nativeMode = mode.equals("--native");
+        if (nativeMode) check(M3IndexMaskCompactor.nativeAvailable(), "real native library required");
+        observations = MessageDigest.getInstance("SHA-256");
+        projections(); maskPairs(); boundaries(); resumes();
+        failures(M3IndexMaskCompactor.Backend.JAVA);
+        if (nativeMode) { failures(M3IndexMaskCompactor.Backend.NATIVE_REQUIRED); rawRefusals(); }
+        System.out.println("INDEX_ORDER_WINDOW_PASS native=" + nativeMode + " maskPairs=65536 windows="
+                + windows + " checks=" + checks + " observations=" + HexFormat.of().formatHex(observations.digest()));
+    }
+}

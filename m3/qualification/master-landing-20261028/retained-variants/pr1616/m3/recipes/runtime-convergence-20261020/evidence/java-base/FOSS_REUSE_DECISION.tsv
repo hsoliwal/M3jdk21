@@ -1,0 +1,4 @@
+category	candidate	decision	reason	license
+bounded-mask-strategy	current M3CollectionMaskCompactor removalRuns	REFINE_EXISTING_PRIVATE_ATOM	Caller observes only whether count exceeds max(4,length>>>7); stop exact counting after that decision is fixed	GPL-2.0-only WITH Classpath-exception-2.0
+stable-survivor-copy	current scalar and arraycopy paths	RETAIN_UNCHANGED	Existing owner preserves reference identity/order; no new payload or reference JNI	GPL-2.0-only WITH Classpath-exception-2.0
+span-copy-replacement	prior NetBeans collection-atom catalogue	REJECT_ALREADY_MEASURED	Existing catalogue retains fragmented-workload regression; do not re-port rejected branch	EVIDENCE_ONLY

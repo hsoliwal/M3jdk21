@@ -1,0 +1,1 @@
+s/org\.brotli\.dec([^A-Za-z0-9_$]|$)/com.m3.lib.dec\1/g;s#org/brotli/dec([^A-Za-z0-9_$]|$)#com/m3/lib/dec\1#g;

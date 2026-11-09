@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "target_repository": "hsoliwal/M3jdk21",
+  "canonical_convergence_repository": "hsoliwal/com.synexia",
+  "canonical_recipe_pr": 12148,
+  "canonical_recipe_commit": "65e99fe813ec8f2f017c51d365d1d3953bb8f95b",
+  "source_license": "Apache-2.0",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receiving_scope": "independent m3/collections module, no java.base replacement",
+  "mappings": [
+    {"family":"generic mutable List<E>", "public_contract":"java.util.List", "target_owner":"com.m3.collections.M3ArrayList", "disposition":"NEW_ADD_ONLY_GENERIC_SDK", "java_util_ArrayList_identity":"NOT_CLAIMED"},
+    {"family":"generic immutable indexed List<E>", "public_contract":"java.util.List", "target_owner":"com.m3.collections.M3IndexedListSnapshot", "disposition":"NEW_ADD_ONLY_GENERIC_SDK", "java_util_List_live_view":"NOT_CLAIMED"},
+    {"family":"factory", "target_owner":"com.m3.collections.M3GenericCollections", "disposition":"NEW_ADD_ONLY_FACTORY"},
+    {"family":"generic Map<K,V>/Set<E>/Deque<E>", "target_owners":["M3LinkedHashMap","M3TreeMap","M3LinkedHashSet","M3TreeSet","M3LinkedList"], "disposition":"EXISTING_UNCHANGED"},
+    {"family":"Guava/Eclipse/Spring/Apache API identity", "disposition":"DEFER_EXACT_INTERFACE_COMPATIBILITY", "note":"similar storage alone does not implement provider API"},
+    {"family":"java.util.ArrayList", "target_owner":"java.util.ArrayList", "disposition":"RETAIN_DEFAULT_M3Collections_arrayList"}
+  ]
+}

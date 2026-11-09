@@ -1,0 +1,47 @@
+$ ['/workspace/scratch/b37f6ba1283f/synexia-continuation/toolchain/apache-maven-3.9.9/bin/mvn', '-B', '-ntp', '-o', '-Dmaven.repo.local=/workspace/scratch/b37f6ba1283f/synexia-continuation/dependencies/m2', '-f', 'm3/collections/pom.xml', 'test']
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------------< com.m3:m3-collections >------------------------
+[INFO] Building M3 collection lanes 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ m3-collections ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8d1d6779abbf/collection-lanes/jdk-repo/m3/collections/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ m3-collections ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 18 source files with javac [debug release 21 module-path] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ m3-collections ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8d1d6779abbf/collection-lanes/jdk-repo/m3/collections/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ m3-collections ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 3 source files with javac [debug release 21 module-path] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ m3-collections ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.m3.collections.SegmentedPrimitiveStorageTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.043 s -- in com.m3.collections.SegmentedPrimitiveStorageTest
+[INFO] Running com.m3.collections.M3ConcurrentLaneContractTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.084 s -- in com.m3.collections.M3ConcurrentLaneContractTest
+[INFO] Running com.m3.collections.SegmentedLaneBulkContractTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.182 s -- in com.m3.collections.SegmentedLaneBulkContractTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 18, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.169 s
+[INFO] Finished at: 2026-10-02T04:27:42Z
+[INFO] ------------------------------------------------------------------------
+
+EXIT=0

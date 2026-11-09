@@ -1,0 +1,6 @@
+packet_id	atom_id	scope	scope_promotion_approved	work_ref	depends_on
+jdk-8367584-jfr-help	dcmd-cpp	FILE	false	M3Jdk21HashPinnedTextSnapshotRecipe:jdk27-jfr-options-help-8367584-dcmd-cpp	
+jdk-8367584-jfr-help	dcmd-hpp	FILE	false	M3Jdk21HashPinnedTextSnapshotRecipe:jdk27-jfr-options-help-8367584-dcmd-hpp	
+jdk-8367584-jfr-help	option-set	FILE	false	M3Jdk21HashPinnedTextSnapshotRecipe:jdk27-jfr-options-help-8367584-option-set	
+jdk-8367584-jfr-help	jtreg	FILE	false	M3Jdk21HashPinnedSnapshotRecipe:jdk27-jfr-options-help-8367584-java	
+jdk-8367584-jfr-help	module-join	MODULE	true	com.m3.rewrite.backport.M3Jdk8367584JfrOptionsHelpBackportRecipe	dcmd-cpp,dcmd-hpp,option-set,jtreg

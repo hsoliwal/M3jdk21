@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "/tmp/m3-cursor-tools/jdk-21.0.12.1+1/bin/java",
+    "-Xmx256m",
+    "-Duser.language=en",
+    "-DexpectedJavaHome=/tmp/m3-cursor-tools/jdk-21.0.12.1+1",
+    "-DexpectedProviderOrigin=jrt:/java.base",
+    "-cp",
+    "/workspace/scratch/a20ebe6f78bb/evidence/fixture-classes:/workspace/scratch/a20ebe6f78bb/M3jdk21/m3/collections/target/classes",
+    "EmptyRootLookupOracle",
+    "java.util.TreeMap"
+  ],
+  "exitCode": 0,
+  "stdoutSha256": "996cd27e79e0f103f2a4eaf74f85d07339998b6bb4201036554924bd1948eb7b",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

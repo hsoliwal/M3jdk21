@@ -1,0 +1,3 @@
+/tmp/jdk-21.0.12.1+1/bin/java -Xss256k -ea -Xcheck:jni -Xmx512m -Djava.library.path=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/empty-lib -cp /workspace/scratch/6b6041146177/verification/received-runtime-20261018/java/classes:/workspace/scratch/6b6041146177/verification/received-runtime-20261018/java/test-classes com.m3.collections.M3FilteredNavigationReconciliationContract depth
+depth checks=48 failures=0 first=null
+TOTAL checks=48 failures=0

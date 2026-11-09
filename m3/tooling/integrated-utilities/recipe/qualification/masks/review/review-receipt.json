@@ -1,0 +1,29 @@
+[
+  {
+    "command": [
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+      "--patch-module",
+      "java.base=/dev/shm/m3jdk21-work/collection-classes",
+      "-d",
+      "/dev/shm/m3jdk21-work/mask-candidates/qualification/review",
+      "/dev/shm/m3jdk21-work/mask-candidates/qualification/review/MapViewReview.java"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+      "-Xmx64m",
+      "--patch-module",
+      "java.base=/dev/shm/m3jdk21-work/collection-classes",
+      "-cp",
+      "/dev/shm/m3jdk21-work/mask-candidates/qualification/review",
+      "MapViewReview"
+    ],
+    "exit_code": 0,
+    "stdout": "bounded contains(-1): false\nbounded lower(99): 4\nbounded ceiling(-1): 2\nidentity map equals: true reverse=false\nidentity keySet equals: true reverse=true hash=3522662 backingHash=566034357\naccess-order after filtered get(a): [a, b]\nhidden collision add(HIDDEN)=false then contains(HIDDEN)=false\n",
+    "stderr": ""
+  }
+]

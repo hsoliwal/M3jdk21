@@ -1,0 +1,186 @@
+// SPDX-License-Identifier: Apache-2.0
+// Copyright 2026 Hitesh Soliwal and contributors
+package jdk.internal.mindex;
+
+import java.util.Objects;
+
+/**
+ * Bounded regular matching over typed tokens, reusing the M3 predicate/state and JNI effect atoms.
+ * A program is a sequence of up to 63 predicates; selected predicates repeat zero or more times.
+ * Kind, domain-local identity and flag tests consume one token, never characters of its spelling.
+ * This internal plan has no pattern parser, captures, lookaround or backreferences.
+ *
+ * <p>Predicate fields follow Synexia MIndexASTQuery; primitive token-domain state masks follow
+ * MIndexTokenPattern. Earliest-start/shortest-end selection follows IndexRegex. The existing
+ * M3RegexDpPlan owns state transitions, epsilon closure, effect composition and native fallback.</p>
+ */
+public final class M3TokenRegexPlan {
+    public static final int KIND = 1;
+    public static final int SYMBOL = 2;
+
+    /** Compile-time value only; plans retain primitive columns, not predicate objects. */
+    public record Predicate(int kind, long symbol, long requiredFlags, long forbiddenFlags,
+                            int attributes) {
+        public Predicate {
+            if ((attributes & ~(KIND | SYMBOL)) != 0 || (requiredFlags & forbiddenFlags) != 0) {
+                throw new IllegalArgumentException("invalid token predicate");
+            }
+        }
+    }
+
+    /** Immutable token columns and constant-space slices; domain equality is identity equality. */
+    public static final class Input {
+        private final Object domain;
+        private final int[] kinds;
+        private final long[] symbols;
+        private final long[] flags;
+        private final int offset;
+        private final int length;
+
+        private Input(Object domain, int[] kinds, long[] symbols, long[] flags, int offset, int length) {
+            this.domain = domain;
+            this.kinds = kinds;
+            this.symbols = symbols;
+            this.flags = flags;
+            this.offset = offset;
+            this.length = length;
+        }
+
+        /** Caller arrays must remain stable during this defensive snapshot. */
+        public static Input of(Object domain, int[] kinds, long[] symbols, long[] flags) {
+            Objects.requireNonNull(domain, "domain");
+            Objects.requireNonNull(kinds, "kinds");
+            Objects.requireNonNull(symbols, "symbols");
+            Objects.requireNonNull(flags, "flags");
+            if (kinds.length != symbols.length || kinds.length != flags.length) {
+                throw new IllegalArgumentException("mismatched token columns");
+            }
+            return new Input(domain, kinds.clone(), symbols.clone(), flags.clone(), 0, kinds.length);
+        }
+
+        public int tokenCount() { return length; }
+        public int kindAt(int token) { return kinds[offset + Objects.checkIndex(token, length)]; }
+        public long symbolAt(int token) { return symbols[offset + Objects.checkIndex(token, length)]; }
+        public long flagsAt(int token) { return flags[offset + Objects.checkIndex(token, length)]; }
+        public Input slice(int from, int to) {
+            Objects.checkFromToIndex(from, to, length);
+            return new Input(domain, kinds, symbols, flags, offset + from, to - from);
+        }
+    }
+
+    /** Half-open token positions relative to the supplied input view. */
+    public record Match(int startToken, int endToken) { }
+
+    private final Object domain;
+    private final int[] kinds;
+    private final long[] symbols;
+    private final long[] required;
+    private final long[] forbidden;
+    private final long kindTests;
+    private final long symbolTests;
+    private final M3RegexDpPlan states;
+
+    private M3TokenRegexPlan(Object domain, Predicate[] predicates, long repeated) {
+        this.domain = domain;
+        int count = predicates.length;
+        states = M3RegexDpPlan.forTokenPredicates(count, repeated);
+        kinds = new int[count];
+        symbols = new long[count];
+        required = new long[count];
+        forbidden = new long[count];
+        long kindBits = 0, symbolBits = 0;
+        for (int i = 0; i < count; i++) {
+            Predicate predicate = Objects.requireNonNull(predicates[i], "predicate");
+            kinds[i] = predicate.kind();
+            symbols[i] = predicate.symbol();
+            required[i] = predicate.requiredFlags();
+            forbidden[i] = predicate.forbiddenFlags();
+            if ((predicate.attributes() & KIND) != 0) kindBits |= 1L << i;
+            if ((predicate.attributes() & SYMBOL) != 0) symbolBits |= 1L << i;
+        }
+        kindTests = kindBits;
+        symbolTests = symbolBits;
+    }
+
+    /** Bit i repeats predicate i; bits outside the supplied predicate array are rejected. */
+    public static M3TokenRegexPlan compile(Object domain, Predicate[] predicates, long repeated) {
+        Objects.requireNonNull(domain, "domain");
+        Objects.requireNonNull(predicates, "predicates");
+        return new M3TokenRegexPlan(domain, predicates.clone(), repeated);
+    }
+
+    public int predicateCount() { return kinds.length; }
+    public long initialState() { return states.initialState(); }
+    public boolean accepts(long frontier) { return states.accepts(frontier); }
+
+    public boolean matches(Input input) {
+        requireDomain(input);
+        long frontier = initialState();
+        for (int i = 0; i < input.length; i++) {
+            frontier = states.advanceTokenMask(frontier, matchingMask(input, i));
+            if (frontier == 0) return false;
+        }
+        return accepts(frontier);
+    }
+
+    /** Earliest start, then shortest accepted end. Worst-case O(tokens squared * predicates). */
+    public Match find(Input input) {
+        requireDomain(input);
+        long initial = initialState();
+        if (accepts(initial)) return new Match(0, 0);
+        for (int start = 0; start < input.length; start++) {
+            long frontier = initial;
+            for (int end = start; end < input.length; end++) {
+                frontier = states.advanceTokenMask(frontier, matchingMask(input, end));
+                if (accepts(frontier)) return new Match(start, end + 1);
+                if (frontier == 0) break;
+            }
+        }
+        return null;
+    }
+
+    /** Token predicates are evaluated once per slot; effects retain no input or token payload. */
+    public Effect summarize(Input input, Runnable checkpoint) {
+        requireDomain(input);
+        return new Effect(states.summarizeTokenMasks(input.length,
+                i -> matchingMask(input, i), checkpoint));
+    }
+
+    public Effect identity() { return new Effect(states.identity()); }
+
+    /** Existing primitive Java/JNI relation algebra, with lengths measured in tokens. */
+    public final class Effect {
+        private final M3RegexDpPlan.Effect delegate;
+        private Effect(M3RegexDpPlan.Effect delegate) { this.delegate = delegate; }
+        public long tokenCount() { return delegate.length(); }
+        public long apply(long frontier) { return delegate.apply(frontier); }
+        public boolean matches() { return accepts(apply(initialState())); }
+        public Effect then(Effect right, Runnable checkpoint) {
+            Objects.requireNonNull(right, "right");
+            return new Effect(delegate.then(right.delegate, checkpoint));
+        }
+        public Effect repeated(long count, Runnable checkpoint) {
+            return new Effect(delegate.repeated(count, checkpoint));
+        }
+    }
+
+    private void requireDomain(Input input) {
+        Objects.requireNonNull(input, "input");
+        if (input.domain != domain) throw new IllegalArgumentException("different token domain");
+    }
+
+    private long matchingMask(Input input, int token) {
+        int at = input.offset + token;
+        int kind = input.kinds[at];
+        long symbol = input.symbols[at], flags = input.flags[at], matched = 0;
+        for (int i = 0; i < kinds.length; i++) {
+            long bit = 1L << i;
+            if (((kindTests & bit) == 0 || kinds[i] == kind)
+                    && ((symbolTests & bit) == 0 || symbols[i] == symbol)
+                    && (flags & required[i]) == required[i] && (flags & forbidden[i]) == 0) {
+                matched |= bit << 1;
+            }
+        }
+        return matched;
+    }
+}

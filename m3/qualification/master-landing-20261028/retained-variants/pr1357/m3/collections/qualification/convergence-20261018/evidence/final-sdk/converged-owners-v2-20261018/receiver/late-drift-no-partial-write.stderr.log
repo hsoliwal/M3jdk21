@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/8cbeab1c181e/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/converged-owners-v2-20261018/final-receiver/isolated-_xs_k612/late-drift/crate/receive.py", line 195, in <module>
+    main()
+  File "/workspace/scratch/8cbeab1c181e/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/converged-owners-v2-20261018/final-receiver/isolated-_xs_k612/late-drift/crate/receive.py", line 190, in main
+    result = receive(crate, args.dataset, owner.absolute(), args.target.absolute(), args.check)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/8cbeab1c181e/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/converged-owners-v2-20261018/final-receiver/isolated-_xs_k612/late-drift/crate/receive.py", line 154, in receive
+    raise ValueError("target source drift: " + relative)
+ValueError: target source drift: m3/collections/src/main/native/collections/m3_index_mask_window.c

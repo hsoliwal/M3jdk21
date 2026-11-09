@@ -1,0 +1,30 @@
+/*
+ * Copyright 2026 Hitesh Soliwal and contributors
+ * SPDX-License-Identifier: Apache-2.0
+ */
+package jdk.m3.collections;
+
+import org.junit.jupiter.api.Test;
+
+/** Maven delegates to the same independent mains used in the linked-image proof. */
+final class M3CollectionsPackTest {
+    @Test
+    void packedDecisionBoundariesAndComposition() {
+        jdk.m3.collections.M3PrimitiveSelectionWordContract.main(new String[0]);
+    }
+
+    @Test
+    void readOnlyFilteredAndSortedViews() {
+        FilteredViewsContract.main(new String[0]);
+    }
+
+    @Test
+    void mutableFilteredAndSortedViews() {
+        MutableFilteredViewsContract.main(new String[0]);
+    }
+
+    @Test
+    void versionedPrimitiveFilterProjection() {
+        M3PrimitiveIndexViewFilterContract.main(new String[0]);
+    }
+}

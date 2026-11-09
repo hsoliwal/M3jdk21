@@ -1,0 +1,29 @@
+Compiled from "M3RegexDpPlan.java"
+public final class jdk.internal.mindex.M3RegexDpPlan {
+  public static jdk.internal.mindex.M3RegexDpPlan prepare(java.lang.String);
+    descriptor: (Ljava/lang/String;)Ljdk/internal/mindex/M3RegexDpPlan;
+
+  public int stateCount();
+    descriptor: ()I
+
+  public long initialState();
+    descriptor: ()J
+
+  public boolean accepts(long);
+    descriptor: (J)Z
+
+  public boolean supports(char);
+    descriptor: (C)Z
+
+  public long advance(long, char);
+    descriptor: (JC)J
+
+  public jdk.internal.mindex.M3RegexDpPlan$Effect summarize(java.lang.CharSequence, java.lang.Runnable);
+    descriptor: (Ljava/lang/CharSequence;Ljava/lang/Runnable;)Ljdk/internal/mindex/M3RegexDpPlan$Effect;
+
+  public jdk.internal.mindex.M3RegexDpPlan$Effect summarizeUtf16(java.lang.CharSequence, java.lang.Runnable);
+    descriptor: (Ljava/lang/CharSequence;Ljava/lang/Runnable;)Ljdk/internal/mindex/M3RegexDpPlan$Effect;
+
+  public jdk.internal.mindex.M3RegexDpPlan$Effect identity();
+    descriptor: ()Ljdk/internal/mindex/M3RegexDpPlan$Effect;
+}

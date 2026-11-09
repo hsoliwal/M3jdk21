@@ -1,0 +1,99 @@
+// Copyright 2026 Hitesh Soliwal and contributors
+// Relocated byte-for-byte below this header from Synexia crate m3fs-hash-lane-cache-20261102/qualification/
+// HashLaneDifferential.template.java.txt (sha256 b9b5acaab2a45eabf032f373473409dbe13476f2f3845647a2ad269ef72a25bf);
+// differential.sh inserts the M3JDK stage-03 class as LegacySlots and the stage-04 class as CachedSlots.
+// SPDX-License-Identifier: Apache-2.0
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Random;
+
+public class HashLaneDifferential {
+  // OLD_NESTED_MAP
+  // NEW_NESTED_MAP
+  private static long hashCalls, equalsCalls;
+  private static final class Key {
+    final int id;
+    final int hash;
+    Key(int id) {
+      this.id=id;
+      hash = id % 5 == 0 ? 7 : (id % 11 == 0 ? Integer.MIN_VALUE : Integer.rotateLeft(id * 31, 9));
+    }
+    @Override public int hashCode() { hashCalls++; return hash; }
+    @Override public boolean equals(Object o) { equalsCalls++; return o instanceof Key k && id==k.id; }
+  }
+  private static void require(boolean b,String message) {if(!b) throw new AssertionError(message);}
+  private static long oldHashes, cachedHashes, oldEquals, cachedEquals;
+  private static final Random RNG=new Random(0x6d33484153484c31L);
+
+  private static void compareMaps(int steps) {
+    var expected=new LinkedHashMap<Key,Object>();
+    var old=new LegacySlots<Key,Object>();
+    var candidate=new CachedSlots<Key,Object>();
+    for(int i=0;i<steps;i++) {
+      int id=RNG.nextInt(4000);
+      Key key=i%211==0?null:new Key(id);
+      boolean write=i%7!=0;
+      Object v=i%101==0?null:new Object();
+      Object ref=write?expected.put(key,v):expected.get(key);
+      hashCalls=equalsCalls=0;
+      Object a=write?old.put(key,v):old.get(key);
+      oldHashes+=hashCalls;oldEquals+=equalsCalls;
+      hashCalls=equalsCalls=0;
+      Object b=write?candidate.put(key,v):candidate.get(key);
+      cachedHashes+=hashCalls;cachedEquals+=equalsCalls;
+      require(ref==a && a==b,"return identity mismatch at "+i);
+      require(expected.size()==old.size() && old.size()==candidate.size(),"size mismatch at "+i);
+      require(candidate.keys.length==candidate.values.length && candidate.keys.length==candidate.hashes.length,"storage lane width drift");
+      require((candidate.keys.length & (candidate.keys.length-1))==0,"capacity not power-of-two");
+      require(candidate.used+(candidate.hasNull?1:0)==candidate.size(),"occupied slot count mismatch");
+    }
+  }
+
+  /** Simulate the actual M3FS mapping-owner algorithm and compare callback order/budget. */
+  private static final class Stored { final int size;Stored(int size){this.size=size;} }
+  private static String mapTrace(int[] ids,int budget,boolean cached) {
+    var old=cached?null:new LegacySlots<Key,Stored>();
+    var hash=cached?new CachedSlots<Key,Stored>():null;
+    StringBuilder log=new StringBuilder();
+    int mapped=0;
+    for(int id:ids){
+      Key key=new Key(id);
+      Stored value=cached?hash.get(key):old.get(key);
+      if(value==null){
+        log.append('R').append(id).append(';');
+        Stored reference=new Stored(1+(id%99));
+        int next=Math.addExact(mapped,reference.size);
+        if(next>budget){log.append("BUDGET");break;}
+        log.append('M').append(id).append(';');
+        value=reference;
+        if(cached)hash.put(key,value);else old.put(key,value);
+        mapped=next;
+      }
+      int span=(id%13)+1;
+      if(span>value.size){log.append("BOUNDS");break;}
+      log.append('S').append(id).append(':').append(span).append(';');
+    }
+    return log.append("#").append(mapped).append('#').append(cached?hash.size():old.size()).toString();
+  }
+  private static void mapTransactions(int count) {
+    for(int trial=0;trial<count;trial++){
+      int n=1+RNG.nextInt(170);
+      int[] ids=new int[n];
+      for(int i=0;i<n;i++) ids[i]=RNG.nextInt(300);
+      int budget=RNG.nextInt(7000);
+      String a=mapTrace(ids,budget,false), b=mapTrace(ids,budget,true);
+      require(a.equals(b),"mapping trace mismatch "+trial+" old="+a+" cache="+b);
+    }
+  }
+  public static void main(String[] args) {
+    int operations=Integer.getInteger("m3.hash.operations",65000);
+    int transactions=Integer.getInteger("m3.hash.transactions",4000);
+    compareMaps(operations);
+    mapTransactions(transactions);
+    require(cachedHashes<oldHashes,"cached-hash growth did not save hash calls");
+    require(cachedEquals<oldEquals,"hash short-circuit did not save equals calls");
+    System.out.println("M3_HASH_LANES_PASS operations="+operations+" transactions="+transactions+" oldHashes="+oldHashes+" cachedHashes="+cachedHashes+" oldEquals="+oldEquals+" cachedEquals="+cachedEquals);
+  }
+}

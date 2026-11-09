@@ -1,0 +1,201 @@
+{
+  "archiveOnlyProjectFiles": 0,
+  "archiveOwner": {
+    "bytes": 33814,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/m3-checkout/m3/migration/intake-20261005/current-752-ci/cih-producer-portable/package_evidence.py",
+    "sha256": "93a1c116c197854b0167c172581cd768d0f9098067bf0f1296607ca6ba855556"
+  },
+  "automaticProofRerun": false,
+  "commands": [
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/prepare_package.py",
+        "--proof",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/evidence/producer-v1",
+        "--receiving-result",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string/primary-observation-v1/RESULT.json",
+        "--receiving-inputs",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string-preparation/receiving-selection-v1/RECEIVING-SELECTION.json",
+        "--semantic-result",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string/spc-semantic-v1/RESULT.json"
+      ],
+      "cwd": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1",
+      "executed": false,
+      "executionOwner": "/root",
+      "id": "select",
+      "purpose": "Copy the exact finished Sc0 producer, separate actual semantic PASS, actual primary STOP, and bounded literal history into a fresh source closure."
+    },
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/m3-checkout/m3/migration/intake-20261005/current-752-ci/cih-producer-portable/package_evidence.py",
+        "pack",
+        "--root",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/source",
+        "--plan",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/package-plan.json",
+        "--output",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/bundle"
+      ],
+      "cwd": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1",
+      "executed": false,
+      "executionOwner": "/root",
+      "id": "pack",
+      "purpose": "Run the unchanged archive owner against the actual selected closure."
+    },
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/m3-checkout/m3/migration/intake-20261005/current-752-ci/cih-producer-portable/package_evidence.py",
+        "verify",
+        "--bundle",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/bundle"
+      ],
+      "cwd": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1",
+      "executed": false,
+      "executionOwner": "/root",
+      "id": "verify",
+      "purpose": "Verify the resulting archive with the unchanged owner."
+    },
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/m3-checkout/m3/migration/intake-20261005/current-752-ci/cih-producer-portable/package_evidence.py",
+        "extract",
+        "--bundle",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/bundle",
+        "--output",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/extracted"
+      ],
+      "cwd": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1",
+      "executed": false,
+      "executionOwner": "/root",
+      "id": "extract",
+      "purpose": "Extract into a fresh directory using the unchanged owner."
+    },
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/finish_package.py"
+      ],
+      "cwd": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1",
+      "executed": false,
+      "executionOwner": "/root",
+      "id": "finish",
+      "purpose": "Read back extracted bytes and emit the paired publication mapping and reconstruction metadata."
+    }
+  ],
+  "consumerQualified": false,
+  "executionOrder": [
+    "select",
+    "pack",
+    "verify",
+    "extract",
+    "finish"
+  ],
+  "exports": 11,
+  "flatProjectFiles": 20,
+  "freshOutputsRequired": [
+    "source",
+    "package-plan.json",
+    "SOURCE-CLOSURE.json",
+    "bundle",
+    "extracted",
+    "READBACK.json",
+    "PROJECT-READY.json",
+    "PAIRED-FILES.json"
+  ],
+  "helperInputs": [
+    {
+      "bytes": 28933,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/prepare_package.py",
+      "sha256": "f92fc8d812a953cd089bcf145fb2497ad83009a8b037c05359b0d66e202c49d7"
+    },
+    {
+      "bytes": 8236,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/finish_package.py",
+      "sha256": "a23496665fd649df5040864f9c8e44049bbfd5112c4d661857bec808437c1f43"
+    },
+    {
+      "bytes": 1860,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/reconstruct.py",
+      "sha256": "1f2aea22146165a1c8cdf703a04e6fbd48771f637b629116d2772dfc60742e42"
+    },
+    {
+      "bytes": 18636,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/AUTHORING-PLAN.json",
+      "sha256": "6e64d3144fe2b9815671af4c1f0baf9fb45e8099884a62d9bac1343d773bbf1c"
+    }
+  ],
+  "historicalOrFrozenEvidenceEdited": false,
+  "logicalProjectFiles": 20,
+  "namespace": "string",
+  "noRf0Selection": true,
+  "parentPublishedCohorts": [
+    338,
+    97
+  ],
+  "parentPublishedPaths": 435,
+  "producerResult": {
+    "bytes": 7899,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/evidence/producer-v1/RESULT.json",
+    "sha256": "93a0a751404f26418165bcd9287b90287214d8c8f3213ce1baf1c975ccaa3fd6"
+  },
+  "python": {
+    "bytes": 30894944,
+    "path": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+    "sha256": "fa67443527ed9647f760d807e2a38f26340757123e643c4639cf273ed15d5ea7"
+  },
+  "receivingResult": {
+    "bytes": 33725,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string/primary-observation-v1/RESULT.json",
+    "sha256": "6f8d824c7b58f801a3563869d1a34605b36f160a1a04ea4dc6d9dc5455e5e6e8"
+  },
+  "receivingSelection": {
+    "bytes": 74585,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string-preparation/receiving-selection-v1/RECEIVING-SELECTION.json",
+    "sha256": "ee018354430dd4a256f88b09ad93adbcc91139adc6c2d6c83a050acd24030a2a"
+  },
+  "receivingStatus": "PRIMARY_ONLY_STOP",
+  "receivingStopPreserved": true,
+  "rootMustCaptureActualCommandsAndStreams": true,
+  "rootReviewRequiredBeforeExecution": true,
+  "runNextOnlyAfterActualPriorSuccess": true,
+  "schema": "m3.sc0.terminal-bound-packaging-plan/1",
+  "selectionReadback": {
+    "bytes": 7504,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/terminal-selection-v1/SELECTION-READBACK.json",
+    "sha256": "7589a0107031bc02f4542714d1f03071ecbc3256d50a0040347a287c1385824e"
+  },
+  "semanticOutcomeSeparateFromPrimary": true,
+  "semanticPrerequisite": {
+    "controller": {
+      "bytes": 27576,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string-preparation/semantic-authoring/spc_semantic_capture_v2.py",
+      "sha256": "e5af8e5b84691328d05a4177881b18dae2c7596d19f6c743ebea0a7c804bc823"
+    },
+    "plan": {
+      "bytes": 23197,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string-preparation/semantic-authoring/SEMANTIC-PLAN-v2.json",
+      "sha256": "946d2ce1d5d6b948c6ed8794c776904a07a886b980027092f2104f47dd18f85e"
+    },
+    "result": {
+      "bytes": 11281,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string/spc-semantic-v1/RESULT.json",
+      "sha256": "072c8c827e49f7822f780a17e9c1a2fcc80b1ce5744fbbd90f197901b61a41de"
+    }
+  },
+  "semanticReportedStatus": "PASS_SPC_SEMANTICS_PRIMARY_PENDING",
+  "semanticResult": {
+    "bytes": 11281,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string/spc-semantic-v1/RESULT.json",
+    "sha256": "072c8c827e49f7822f780a17e9c1a2fcc80b1ce5744fbbd90f197901b61a41de"
+  },
+  "semanticSelection": {
+    "bytes": 32783,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string-preparation/semantic-selection-v1/SEMANTIC-SELECTION.json",
+    "sha256": "59e2b5a9598f343a04a528879b3928e420292ab678b2786c597158624c020821"
+  },
+  "status": "AUTHORED_NOT_EXECUTED"
+}

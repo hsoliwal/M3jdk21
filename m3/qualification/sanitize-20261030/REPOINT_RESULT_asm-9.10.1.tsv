@@ -1,0 +1,4 @@
+consumer	before	after	gate	classes_new	errors_vs_old	errors_vs_new	added_by_repoint	verdict
+cglib	asm-9.10.1	asm-9.6	DIFFERENTIAL	0	21	21	0	PASS
+commons-compress-1.27.1	asm-9.10.1	asm-9.6	DIFFERENTIAL	0	12	12	0	PASS
+DROP	asm-9.10.1	-	files=49	-	-	-	proof_mentions=8 proof_blocking=0	PASS

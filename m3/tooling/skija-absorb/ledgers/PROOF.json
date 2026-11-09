@@ -1,0 +1,78 @@
+{
+  "authority": {
+    "canonical": "jdk.internal.m3.rewrite.M3AtomizeRecipe + M3PatternizeRecipe via .m3/atomize-patternize/run.sh",
+    "projection": "cpu_lhash_treesitter leaf extraction + declared pattern dimensions (candidate evidence, no mutation authority)",
+    "status": "PENDING_BUILD_HOST (Maven/OpenRewrite not executed on this host)"
+  },
+  "counts": {
+    "cross_donor_exact_classes": 0,
+    "cross_donor_structural_classes": 0,
+    "errors": 0,
+    "exact_classes": 1559,
+    "exact_classes_size_ge2": 334,
+    "hashed_leaves_min8_tokens": 2911,
+    "java_files": 217,
+    "lambdas": 4,
+    "leaves": 2918,
+    "leaves_in_exact_dup_class": 1686,
+    "leaves_in_structural_class": 2493,
+    "methods": 2651,
+    "parse_errors": 0,
+    "parsed_files": 217,
+    "structural_classes": 552,
+    "structural_classes_size_ge2": 134,
+    "types": 263,
+    "worker_faults": 6
+  },
+  "declared_rules": {
+    "algorithm": "NOT PROJECTED: requires M3PatternizeRecipe problem catalogues; keyword detectors are not admitted as algorithm identity",
+    "carrier": "REGEX if Pattern.compile/matches/quote or String.replaceAll/replaceFirst/matches is invoked; else TEXT_BLOCK if a text_block literal occurs; else STRING if a string_literal occurs; else NONE",
+    "classes": "leaves with fewer than 8 normalized tokens are not entered into pattern classes",
+    "complexity": "normalized token count: <16 TRIVIAL, <64 SIMPLE, <256 ORDINARY, <1024 COMPLEX, <4096 HOSTILE, else PATHOLOGICAL",
+    "composition": "LOCAL_ANON if a local class declaration or anonymous class body occurs; else LAMBDA_STREAM if a lambda, method reference or stream()/parallelStream() invocation occurs; else PLAIN",
+    "control": "STRAIGHT: no control statement; NESTED: control nesting depth >= 2; SWITCH: a switch occurs at depth <= 1; BRANCH: otherwise",
+    "language": "sorted '|'-joined flags among RECORD_GENERIC (record or type parameters), SEALED_PATTERN (sealed/non-sealed/permits, instanceof type/record pattern, switch pattern label), METHOD_REFERENCE, TRY_RESOURCE, RECURSIVE (unqualified or this-qualified self invocation); BASELINE when none",
+    "native": "DECLARATION if the native modifier is present; OVERLOAD if another method of the same owner shares the name; else NONE",
+    "visibility": "modifier keyword public/protected/private, else package (interface-implicit public is not inferred)"
+  },
+  "donors": [
+    {
+      "commit": "0.143.18",
+      "counts": {
+        "lambdas": 4,
+        "leaves": 2918,
+        "methods": 2651,
+        "types": 263
+      },
+      "donor": "skija",
+      "errors": 0,
+      "image": "H:/m3-scratch/skija-absorb/image",
+      "java_files": 217,
+      "parse_errors": 0
+    }
+  ],
+  "root_sha256": "8f56adb1cbd9746a19f08f284e8d4d68738256367cd87dec4b1e0a70fe168368",
+  "schema": "m3.java-corpus-atomize-patternize.v1",
+  "self_validation_guard": {
+    "skija": {
+      "all_equal": true,
+      "checked_leaves": 576
+    }
+  },
+  "tables": {
+    "PATTERNS_EXACT.tsv": "71810a29c051fc11d07c78ceab933d3a2624a8b6b681ec02a9c7fee220ae5ef5",
+    "PATTERNS_STRUCTURAL.tsv": "5a92218d4f633f166b4a75414fc78948f81b5e052b263fb7dde1fa91f8586ef4",
+    "SPECTRUM.tsv": "552beba3e9e1147c30599589bd5a45918f9dd26eaade6e9bb95ff59c21cbf5bb",
+    "skija/ATOMS.tsv.gz": "1e8a52533b3d66689fe7ef921a25fd9f1cefa39d50b0a552d3b705ac0eef7bb1",
+    "skija/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "skija/FILES.tsv": "4dc051a98c5ac8a6f749e3e82bc51bff4f363410a27fb63643a936996bc815c2"
+  },
+  "tools": {
+    "lhash_module": "cpu_lhash_treesitter.py",
+    "lhash_module_sha256": "a5d270b105b7dcd530e66e7223efbd2fef5401b393ca9480598745c1bea332a6",
+    "projector_sha256": "141a29d995d0992b1f731056652ea2c1e1887aec2685a2faf0074c6a45cdaca6",
+    "python": "3.12.6",
+    "tree_sitter": "0.26.0",
+    "tree_sitter_language_pack": "1.12.5"
+  }
+}

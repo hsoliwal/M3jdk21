@@ -1,0 +1,58 @@
+TYPE	jdk.m3.compiler.standard.M3ChangedNameGate	jdk.m3.compiler.standard.ChangedNameGate
+TYPE	jdk.m3.compiler.standard.M3ChangedNameGateSelfTest	jdk.m3.compiler.standard.ChangedNameGateSelfTest
+TYPE	jdk.m3.compiler.standard.M3JdkStandardCensus	jdk.m3.compiler.standard.JdkStandardCensus
+TYPE	jdk.m3.compiler.standard.M3JdkStandardCensusSelfTest	jdk.m3.compiler.standard.JdkStandardCensusSelfTest
+TYPE	jdk.m3.compiler.standard.M3JdkStandardPlugin	jdk.m3.compiler.standard.JdkStandardPlugin
+TYPE	jdk.m3.compiler.standard.M3JdkStandardPluginJUnitTest	jdk.m3.compiler.standard.JdkStandardPluginJUnitTest
+TYPE	jdk.m3.compiler.standard.M3JdkStandardPluginSelfTest	jdk.m3.compiler.standard.JdkStandardPluginSelfTest
+TYPE	jdk.m3.compiler.standard.M3NameQuality	jdk.m3.compiler.standard.NameQuality
+TYPE	jdk.m3.compiler.signals.M3MethodSignals	jdk.m3.compiler.signals.MethodSignals
+TYPE	jdk.m3.compiler.signals.M3MethodSignalsJUnitTest	jdk.m3.compiler.signals.MethodSignalsJUnitTest
+TYPE	jdk.m3.compiler.signals.M3MethodSignalsPluginTest	jdk.m3.compiler.signals.MethodSignalsPluginTest
+TYPE	jdk.m3.compiler.signals.M3MethodSignalsSelfTest	jdk.m3.compiler.signals.MethodSignalsSelfTest
+TYPE	jdk.m3.compiler.signals.M3SourceSignalPlugin	jdk.m3.compiler.signals.SourceSignalPlugin
+TYPE	jdk.m3.compiler.signals.M3SourceSignalPluginJUnitTest	jdk.m3.compiler.signals.SourceSignalPluginJUnitTest
+TYPE	jdk.m3.compiler.signals.M3SourceSignalPluginSelfTest	jdk.m3.compiler.signals.SourceSignalPluginSelfTest
+EDIT	.github/workflows/m3-method-source-signals-20261022.yml
+EDIT	.github/workflows/m3-source-signal-image-20261022.yml
+EDIT	.github/workflows/m3-source-signal-recorded-graph-20261024.yml
+EDIT	.github/workflows/m3-typed-signal-domain-evidence-20261022.yml
+EDIT	m3/compiler/jdk-standard/census.sh
+EDIT	m3/compiler/jdk-standard/check-changed.sh
+EDIT	m3/compiler/jdk-standard/MEANINGFUL_NAMES.md
+EDIT	m3/compiler/jdk-standard/README.md
+EDIT	m3/compiler/jdk-standard/src/main/java/jdk/m3/compiler/standard/M3ChangedNameGate.java
+EDIT	m3/compiler/jdk-standard/src/main/java/jdk/m3/compiler/standard/M3JdkStandardCensus.java
+EDIT	m3/compiler/jdk-standard/src/main/java/jdk/m3/compiler/standard/M3JdkStandardPlugin.java
+EDIT	m3/compiler/jdk-standard/src/main/java/jdk/m3/compiler/standard/M3NameQuality.java
+EDIT	m3/compiler/jdk-standard/src/main/resources/META-INF/services/com.sun.source.util.Plugin
+EDIT	m3/compiler/jdk-standard/src/test/java/jdk/m3/compiler/standard/M3ChangedNameGateSelfTest.java
+EDIT	m3/compiler/jdk-standard/src/test/java/jdk/m3/compiler/standard/M3JdkStandardCensusSelfTest.java
+EDIT	m3/compiler/jdk-standard/src/test/java/jdk/m3/compiler/standard/M3JdkStandardPluginJUnitTest.java
+EDIT	m3/compiler/jdk-standard/src/test/java/jdk/m3/compiler/standard/M3JdkStandardPluginSelfTest.java
+EDIT	m3/compiler/jdk-standard/verify.sh
+EDIT	m3/compiler/source-signals/README.md
+EDIT	m3/compiler/source-signals/src/main/java/jdk/m3/compiler/signals/M3MethodSignals.java
+EDIT	m3/compiler/source-signals/src/main/java/jdk/m3/compiler/signals/M3SourceSignalPlugin.java
+EDIT	m3/compiler/source-signals/src/main/resources/META-INF/services/com.sun.source.util.Plugin
+EDIT	m3/compiler/source-signals/src/test/java/jdk/m3/compiler/signals/M3MethodSignalsJUnitTest.java
+EDIT	m3/compiler/source-signals/src/test/java/jdk/m3/compiler/signals/M3MethodSignalsPluginTest.java
+EDIT	m3/compiler/source-signals/src/test/java/jdk/m3/compiler/signals/M3MethodSignalsSelfTest.java
+EDIT	m3/compiler/source-signals/src/test/java/jdk/m3/compiler/signals/M3SourceSignalPluginJUnitTest.java
+EDIT	m3/compiler/source-signals/src/test/java/jdk/m3/compiler/signals/M3SourceSignalPluginSelfTest.java
+EDIT	m3/compiler/source-signals/verify.sh
+MOVE	m3/compiler/jdk-standard/src/main/java/jdk/m3/compiler/standard/M3ChangedNameGate.java	m3/compiler/jdk-standard/src/main/java/jdk/m3/compiler/standard/ChangedNameGate.java
+MOVE	m3/compiler/jdk-standard/src/main/java/jdk/m3/compiler/standard/M3JdkStandardCensus.java	m3/compiler/jdk-standard/src/main/java/jdk/m3/compiler/standard/JdkStandardCensus.java
+MOVE	m3/compiler/jdk-standard/src/main/java/jdk/m3/compiler/standard/M3JdkStandardPlugin.java	m3/compiler/jdk-standard/src/main/java/jdk/m3/compiler/standard/JdkStandardPlugin.java
+MOVE	m3/compiler/jdk-standard/src/main/java/jdk/m3/compiler/standard/M3NameQuality.java	m3/compiler/jdk-standard/src/main/java/jdk/m3/compiler/standard/NameQuality.java
+MOVE	m3/compiler/jdk-standard/src/test/java/jdk/m3/compiler/standard/M3ChangedNameGateSelfTest.java	m3/compiler/jdk-standard/src/test/java/jdk/m3/compiler/standard/ChangedNameGateSelfTest.java
+MOVE	m3/compiler/jdk-standard/src/test/java/jdk/m3/compiler/standard/M3JdkStandardCensusSelfTest.java	m3/compiler/jdk-standard/src/test/java/jdk/m3/compiler/standard/JdkStandardCensusSelfTest.java
+MOVE	m3/compiler/jdk-standard/src/test/java/jdk/m3/compiler/standard/M3JdkStandardPluginJUnitTest.java	m3/compiler/jdk-standard/src/test/java/jdk/m3/compiler/standard/JdkStandardPluginJUnitTest.java
+MOVE	m3/compiler/jdk-standard/src/test/java/jdk/m3/compiler/standard/M3JdkStandardPluginSelfTest.java	m3/compiler/jdk-standard/src/test/java/jdk/m3/compiler/standard/JdkStandardPluginSelfTest.java
+MOVE	m3/compiler/source-signals/src/main/java/jdk/m3/compiler/signals/M3MethodSignals.java	m3/compiler/source-signals/src/main/java/jdk/m3/compiler/signals/MethodSignals.java
+MOVE	m3/compiler/source-signals/src/main/java/jdk/m3/compiler/signals/M3SourceSignalPlugin.java	m3/compiler/source-signals/src/main/java/jdk/m3/compiler/signals/SourceSignalPlugin.java
+MOVE	m3/compiler/source-signals/src/test/java/jdk/m3/compiler/signals/M3MethodSignalsJUnitTest.java	m3/compiler/source-signals/src/test/java/jdk/m3/compiler/signals/MethodSignalsJUnitTest.java
+MOVE	m3/compiler/source-signals/src/test/java/jdk/m3/compiler/signals/M3MethodSignalsPluginTest.java	m3/compiler/source-signals/src/test/java/jdk/m3/compiler/signals/MethodSignalsPluginTest.java
+MOVE	m3/compiler/source-signals/src/test/java/jdk/m3/compiler/signals/M3MethodSignalsSelfTest.java	m3/compiler/source-signals/src/test/java/jdk/m3/compiler/signals/MethodSignalsSelfTest.java
+MOVE	m3/compiler/source-signals/src/test/java/jdk/m3/compiler/signals/M3SourceSignalPluginJUnitTest.java	m3/compiler/source-signals/src/test/java/jdk/m3/compiler/signals/SourceSignalPluginJUnitTest.java
+MOVE	m3/compiler/source-signals/src/test/java/jdk/m3/compiler/signals/M3SourceSignalPluginSelfTest.java	m3/compiler/source-signals/src/test/java/jdk/m3/compiler/signals/SourceSignalPluginSelfTest.java

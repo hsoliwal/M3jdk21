@@ -1,0 +1,171 @@
+#Test Results (version 2)
+#Sun Oct 18 17:42:17 GST 2026
+#-----testdescription-----
+$file=/workspace/scratch/8cbeab1c181e/M3jdk21-typed/test/jdk/jdk/internal/mindex/M3TokenCompilerLexicalContract.java
+$root=/workspace/scratch/8cbeab1c181e/M3jdk21-typed/test/jdk
+keywords=othervm
+modules=java.base/jdk.internal.mindex jdk.compiler/com.sun.tools.javac.parser jdk.compiler/com.sun.tools.javac.util
+run=USER_SPECIFIED main/othervm M3TokenCompilerLexicalContract\n
+source=M3TokenCompilerLexicalContract.java
+title=Actual javac lexical tokens distinguish identifiers from comments and literal content
+
+#-----environment-----
+
+#-----testresult-----
+description=file\:/workspace/scratch/8cbeab1c181e/M3jdk21-typed/test/jdk/jdk/internal/mindex/M3TokenCompilerLexicalContract.java
+elapsed=1765 0\:00\:01.765
+end=Sun Oct 18 17\:42\:17 GST 2026
+environment=regtest
+execStatus=Passed. Execution successful
+harnessLoaderMode=Classpath Loader
+harnessVariety=Full Bundle
+hostname=44ce4c212211
+javatestOS=Linux 6.18.55 (amd64)
+javatestVersion=6.0-ea+b24-1970-01-25-${BUILT_FROM_COMMIT}
+jtregVersion=jtreg 7.5.2 src 1
+modules=java.base/jdk.internal.mindex jdk.compiler/com.sun.tools.javac.parser jdk.compiler/com.sun.tools.javac.util
+script=com.sun.javatest.regtest.exec.RegressionScript
+sections=script_messages build compile main
+start=Sun Oct 18 17\:42\:16 GST 2026
+test=jdk/internal/mindex/M3TokenCompilerLexicalContract.java
+testJDK=/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1
+testJDK_OS=[name\:Linux,arch\:amd64,version\:6.18.55,family\:linux,simple_arch\:x64,simple_version\:6.18,processors\:8,maxMemory\:8589934592,maxSwap\:0]
+testJDK_os.arch=amd64
+testJDK_os.name=Linux
+testJDK_os.version=6.18.55
+totalTime=1769
+user.name=root
+work=/workspace/scratch/8cbeab1c181e/tooling/typed-token/jtreg-final-work/jdk/internal/mindex
+
+#section:script_messages
+----------messages:(4/261)----------
+JDK under test: /tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1
+openjdk version "21.0.12.1" 2026-08-18 LTS
+OpenJDK Runtime Environment Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS)
+OpenJDK 64-Bit Server VM Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS, mixed mode)
+
+#section:build
+----------messages:(7/250)----------
+command: build M3TokenCompilerLexicalContract
+reason: Named class compiled on demand
+started: Sun Oct 18 17:42:16 GST 2026
+Test directory:
+  compile: M3TokenCompilerLexicalContract
+finished: Sun Oct 18 17:42:17 GST 2026
+elapsed time (seconds): 1.115
+result: Passed. Build successful
+
+#section:compile
+----------messages:(8/571)----------
+command: compile /workspace/scratch/8cbeab1c181e/M3jdk21-typed/test/jdk/jdk/internal/mindex/M3TokenCompilerLexicalContract.java
+reason: .class file out of date or does not exist
+started: Sun Oct 18 17:42:16 GST 2026
+Additional options from @modules: --add-modules java.base,jdk.compiler --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED
+Mode: othervm
+Process id: 176
+finished: Sun Oct 18 17:42:17 GST 2026
+elapsed time (seconds): 1.11
+----------configuration:(13/890)----------
+Boot Layer (javac runtime environment)
+  patch: java.base /workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/classes
+
+javac compilation environment
+  add modules: java.base jdk.compiler                  
+  add exports: java.base/jdk.internal.mindex           ALL-UNNAMED
+               jdk.compiler/com.sun.tools.javac.parser ALL-UNNAMED
+               jdk.compiler/com.sun.tools.javac.util   ALL-UNNAMED
+  source path: /workspace/scratch/8cbeab1c181e/M3jdk21-typed/test/jdk/jdk/internal/mindex 
+  class path:  /workspace/scratch/8cbeab1c181e/M3jdk21-typed/test/jdk/jdk/internal/mindex 
+               /workspace/scratch/8cbeab1c181e/tooling/typed-token/jtreg-final-work/classes/jdk/internal/mindex/M3TokenCompilerLexicalContract.d 
+  patch:       java.base                               /workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/classes
+
+----------rerun:(27/2195)*----------
+cd /workspace/scratch/8cbeab1c181e/tooling/typed-token/jtreg-final-work/scratch && \\
+HOME=/root \\
+LANG=C.UTF-8 \\
+LC_ALL=C.UTF-8 \\
+LC_CTYPE=C.UTF-8 \\
+PATH=/bin:/usr/bin:/usr/sbin \\
+TZ=Asia/Dubai \\
+    /tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/javac \\
+        -J--patch-module \\
+        -Jjava.base=/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/classes \\
+        -J-Dtest.vm.opts=--patch-module=java.base=/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/classes \\
+        -J-Dtest.tool.vm.opts=-J--patch-module=java.base=/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/classes \\
+        -J-Dtest.compiler.opts=--patch-module=java.base=/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/classes \\
+        -J-Dtest.java.opts= \\
+        -J-Dtest.jdk=/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1 \\
+        -J-Dcompile.jdk=/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1 \\
+        -J-Dtest.timeout.factor=1.0 \\
+        -J-Dtest.root=/workspace/scratch/8cbeab1c181e/M3jdk21-typed/test/jdk \\
+        -J-Dtest.name=jdk/internal/mindex/M3TokenCompilerLexicalContract.java \\
+        -J-Dtest.file=/workspace/scratch/8cbeab1c181e/M3jdk21-typed/test/jdk/jdk/internal/mindex/M3TokenCompilerLexicalContract.java \\
+        -J-Dtest.main.class=M3TokenCompilerLexicalContract \\
+        -J-Dtest.src=/workspace/scratch/8cbeab1c181e/M3jdk21-typed/test/jdk/jdk/internal/mindex \\
+        -J-Dtest.src.path=/workspace/scratch/8cbeab1c181e/M3jdk21-typed/test/jdk/jdk/internal/mindex \\
+        -J-Dtest.classes=/workspace/scratch/8cbeab1c181e/tooling/typed-token/jtreg-final-work/classes/jdk/internal/mindex/M3TokenCompilerLexicalContract.d \\
+        -J-Dtest.class.path=/workspace/scratch/8cbeab1c181e/tooling/typed-token/jtreg-final-work/classes/jdk/internal/mindex/M3TokenCompilerLexicalContract.d \\
+        -J-Dtest.modules='java.base/jdk.internal.mindex jdk.compiler/com.sun.tools.javac.parser jdk.compiler/com.sun.tools.javac.util' \\
+        @/workspace/scratch/8cbeab1c181e/tooling/typed-token/jtreg-final-work/jdk/internal/mindex/M3TokenCompilerLexicalContract.d/compile.0.jta
+----------System.out:(0/0)----------
+----------System.err:(0/0)----------
+result: Passed. Compilation successful
+
+#section:main
+----------messages:(8/540)----------
+command: main M3TokenCompilerLexicalContract
+reason: User specified action: run main/othervm M3TokenCompilerLexicalContract 
+started: Sun Oct 18 17:42:17 GST 2026
+Mode: othervm [/othervm specified]
+Additional options from @modules: --add-modules java.base,jdk.compiler --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED
+Process id: 203
+finished: Sun Oct 18 17:42:17 GST 2026
+elapsed time (seconds): 0.414
+----------configuration:(7/404)----------
+Boot Layer
+  add modules: java.base jdk.compiler                  
+  add exports: java.base/jdk.internal.mindex           ALL-UNNAMED
+               jdk.compiler/com.sun.tools.javac.parser ALL-UNNAMED
+               jdk.compiler/com.sun.tools.javac.util   ALL-UNNAMED
+  patch:       java.base                               /workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/classes
+
+----------System.out:(1/114)----------
+M3TokenCompilerLexicalContract PASS targetIdentifiers=3 UnicodeEscape=true commentsAndLiteralContentExcluded=true
+----------System.err:(1/15)----------
+STATUS:Passed.
+----------rerun:(31/2804)*----------
+cd /workspace/scratch/8cbeab1c181e/tooling/typed-token/jtreg-final-work/scratch && \\
+HOME=/root \\
+LANG=C.UTF-8 \\
+LC_ALL=C.UTF-8 \\
+LC_CTYPE=C.UTF-8 \\
+PATH=/bin:/usr/bin:/usr/sbin \\
+TZ=Asia/Dubai \\
+CLASSPATH=/workspace/scratch/8cbeab1c181e/tooling/typed-token/jtreg-final-work/classes/jdk/internal/mindex/M3TokenCompilerLexicalContract.d:/workspace/scratch/8cbeab1c181e/M3jdk21-typed/test/jdk/jdk/internal/mindex:/tmp/m3jdk21-work/native-deps/root/usr/share/jtreg/lib/javatest.jar:/tmp/m3jdk21-work/native-deps/root/usr/share/jtreg/lib/jtreg.jar \\
+    /tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java \\
+        -Dtest.vm.opts=--patch-module=java.base=/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/classes \\
+        -Dtest.tool.vm.opts=-J--patch-module=java.base=/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/classes \\
+        -Dtest.compiler.opts=--patch-module=java.base=/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/classes \\
+        -Dtest.java.opts= \\
+        -Dtest.jdk=/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1 \\
+        -Dcompile.jdk=/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1 \\
+        -Dtest.timeout.factor=1.0 \\
+        -Dtest.root=/workspace/scratch/8cbeab1c181e/M3jdk21-typed/test/jdk \\
+        -Dtest.name=jdk/internal/mindex/M3TokenCompilerLexicalContract.java \\
+        -Dtest.file=/workspace/scratch/8cbeab1c181e/M3jdk21-typed/test/jdk/jdk/internal/mindex/M3TokenCompilerLexicalContract.java \\
+        -Dtest.main.class=M3TokenCompilerLexicalContract \\
+        -Dtest.src=/workspace/scratch/8cbeab1c181e/M3jdk21-typed/test/jdk/jdk/internal/mindex \\
+        -Dtest.src.path=/workspace/scratch/8cbeab1c181e/M3jdk21-typed/test/jdk/jdk/internal/mindex \\
+        -Dtest.classes=/workspace/scratch/8cbeab1c181e/tooling/typed-token/jtreg-final-work/classes/jdk/internal/mindex/M3TokenCompilerLexicalContract.d \\
+        -Dtest.class.path=/workspace/scratch/8cbeab1c181e/tooling/typed-token/jtreg-final-work/classes/jdk/internal/mindex/M3TokenCompilerLexicalContract.d \\
+        -Dtest.modules='java.base/jdk.internal.mindex jdk.compiler/com.sun.tools.javac.parser jdk.compiler/com.sun.tools.javac.util' \\
+        --add-modules java.base,jdk.compiler \\
+        --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \\
+        --add-exports jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED \\
+        --add-exports jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED \\
+        --patch-module java.base=/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/classes \\
+        com.sun.javatest.regtest.agent.MainWrapper /workspace/scratch/8cbeab1c181e/tooling/typed-token/jtreg-final-work/jdk/internal/mindex/M3TokenCompilerLexicalContract.d/main.1.jta
+result: Passed. Execution successful
+
+
+test result: Passed. Execution successful

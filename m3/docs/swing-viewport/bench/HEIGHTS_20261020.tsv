@@ -1,0 +1,28 @@
+# Leaf 8: DeltaBench heights, JTable with a TableRowSorter (column 1 descending), 2026-10-20, JDK 21.0.9 + --patch-module java.desktop, SerialGC, -Xmx1500m, shared machine (other agents running).
+# One row per JVM run and metric; each value is the median of 7 rounds, in ms. run A = first run (09:54), B1-B3 and C1-C3 stock then m3, D1-D2 m3 then stock, E = m3 with -XX:+PrintCompilation on a quieter machine.
+# set_1000_heights: setRowHeight on 1,000 spread rows; frame_queries_1000: 1,000 rowAtPoint + getCellRect pairs (sparse store); set_every_height: setRowHeight on every row in random order (dense above 4,096 entries); dense_queries: 1,000 pairs with every row custom; dense_steady: the same after 200,000 more queries.
+run	n	impl	set_1000_heights	frame_queries_1000	set_every_height	dense_queries	dense_steady
+A	100000	stock	2.064	1.303	210.941	1.180	-
+A	100000	m3	0.678	1.420	149.887	0.998	-
+A	1000000	stock	3.344	2.436	2561.431	1.148	-
+A	1000000	m3	0.784	1.318	2828.589	4.376	-
+B1	1000000	stock	3.772	2.839	2940.944	5.238	-
+B1	1000000	m3	0.815	2.026	3133.996	8.706	-
+B2	1000000	stock	3.388	2.019	2264.654	1.507	-
+B2	1000000	m3	0.768	1.493	2282.170	3.347	-
+B3	1000000	stock	3.289	3.819	3759.212	1.144	-
+B3	1000000	m3	0.842	1.210	2491.873	6.754	-
+C1	1000000	stock	-	-	3617.066	1.219	1.351
+C1	1000000	m3	-	-	2092.725	4.354	2.157
+C2	1000000	stock	-	-	2821.742	1.542	1.650
+C2	1000000	m3	-	-	2175.589	2.931	1.809
+C3	1000000	stock	-	-	2377.698	2.134	1.181
+C3	1000000	m3	-	-	2393.914	10.659	2.748
+D1	1000000	m3	3.492	1.017	2075.449	4.323	5.992
+D1	1000000	stock	3.466	2.171	2535.826	2.152	1.160
+D2	1000000	m3	0.703	1.066	2733.771	2.218	2.027
+D2	1000000	stock	3.018	2.032	2482.742	1.628	1.472
+E	1000000	m3	0.666	1.402	1067.244	1.234	0.968
+# Medians over the 10^6 runs: set_1000_heights stock 3.37 / m3 0.78; frame_queries_1000 stock 2.30 / m3 1.32; set_every_height stock 2,561 / m3 2,338; dense_queries stock 1.54 / m3 4.34; dense_steady stock 1.35 / m3 2.09.
+# Probe (scratch DenseProbe: same model, sorter and sparse phase, then 6 rounds of 100,000 pairs, JVM order alternated, 3 runs per flag), ms per 1,000 pairs: flag on 0.94-2.70, flag off 1.00-3.29.
+# Allocation per 1,000 query pairs: 0.056 MB on both sides (the Point and Rectangle per pair that the bench and getCellRect create); per setRowHeight: 0.

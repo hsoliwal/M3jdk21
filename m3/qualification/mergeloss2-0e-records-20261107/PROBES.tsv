@@ -1,0 +1,34 @@
+leaf	file	kind	literal
+28	m3/collections/src/main/java/jdk/m3/collections/M3SlotMap.java	PRESENT	public entry views alone create fresh, caller-owned live projections.
+28	m3/collections/src/main/java/jdk/m3/collections/M3SlotMap.java	ABSENT	private M3LFUCache<Entry<K, V>> apiProjections;
+32	m3/collections/src/main/java/jdk/m3/collections/M3SlotMap.java	PRESENT	int entrySlot(K key, int hint, int expected) { return findSlot(key); }
+32	m3/collections/src/main/java/jdk/m3/collections/M3SlotMap.java	ABSENT	API entry is no longer backed by its original row
+47	m3/collections/src/main/java/jdk/m3/collections/M3SlotMap.java	PRESENT	/** Compatibility invalidation hook; there is no retained projection state. */
+47	m3/collections/src/main/java/jdk/m3/collections/M3WeakHashMap.java	ABSENT	retainApiProjections
+30	m3/collections/src/main/java/jdk/m3/collections/M3ObjectResidency.java	PRESENT	public synchronized boolean reuseUnborrowedProjection(int source, int target,
+30	m3/collections/src/main/java/jdk/m3/collections/M3ObjectResidency.java	PRESENT	private void discardFailedRebind(int source, int target) {
+30	m3/collections/src/main/java/jdk/m3/collections/M3ObjectResidency.java	ABSENT	public synchronized boolean rebindUnborrowedProjection(int from, int to, long estimatedBytes,
+45	m3/collections/src/main/java/jdk/m3/collections/M3ObjectResidency.java	PRESENT	private long targetBudget() {
+45	m3/collections/src/main/java/jdk/m3/collections/M3ObjectResidency.java	PRESENT	HeapSnapshot heap = HeapSnapshot.current();
+45	m3/collections/src/main/java/jdk/m3/collections/M3ObjectResidency.java	ABSENT	targetBudget(HeapSnapshot.current())
+33	m3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java	PRESENT	// Two primitive mask words avoid BitSet allocation for at most 128 slots.
+33	m3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java	ABSENT	private static long[] markRemoval(long[] words, int bit) {
+39	m3/collections/src/main/java/jdk/m3/collections/M3KeyedParallelismPlan.java	PRESENT	put(queues.get(lane), new Work<>(submitted, item, false), laneFailure);
+39	m3/collections/src/main/java/jdk/m3/collections/M3KeyedParallelismPlan.java	ABSENT	private static <T, R> int admit(BlockingQueue<Work<T>> queue, Work<T> work,
+44	m3/collections/src/main/java/jdk/m3/collections/M3IndexedLiveView.java	PRESENT	private void checkPreparationEpoch(int expectedStructure, long expectedValue,
+44	m3/collections/src/main/java/jdk/m3/collections/M3IndexedLiveView.java	PRESENT	"M3 indexed view invalidated during preparation");
+44	m3/collections/src/main/java/jdk/m3/collections/M3IndexedLiveView.java	PRESENT	throw new ConcurrentModificationException("M3 indexed view recursively refreshed");
+49	m3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java	PRESENT	// Commit is publication: validate every native handle and dense-preorder
+49	m3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java	PRESENT	throw new IllegalArgumentException ("uncommitted native row " + entry);
+50	m3/collections/src/main/native/collections/m3_index_mask_window.c	ABSENT	m3_jni_throw_by_name
+50	m3/collections/src/main/native/collections/m3_index_mask_window.c	PRESENT	(*env)->DeleteLocalRef(env, type);
+50	m3/collections/src/main/native/collections/m3_long_index_path_masks_jni.c	ABSENT	m3_jni_throw_by_name
+50	m3/collections/src/main/native/collections/m3_long_index_path_masks_jni.c	PRESENT	(*env)->DeleteLocalRef(env, cls);
+50	m3/collections/src/main/native/collections/m3_state_mask_histogram.c	ABSENT	m3_jni_throw_by_name
+50	m3/collections/src/main/native/collections/segmented_bit_lane.c	ABSENT	m3_jni_throw_by_name
+50	src/java.base/share/native/libjava/m3_jni_util.h	ABSENT_FILE	-
+54	m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3ApacheBag.java	PRESENT	int excess = requested == 0 || requested > owned
+99	m3/core/src/jdk/m3/text/M3GvasLiteralImage.java	PRESENT	private static int[] buildHashSlots(ByteBuffer bytes, int rows) {
+99	m3/core/src/jdk/m3/text/M3GvasLiteralImage.java	ABSENT	prepareLookup
+100	m3/ports/swing-viewport/src/main/java/jdk/m3/swing/viewport/M3ViewportBinding.java	PRESENT	if ((e.getChangeFlags () & HierarchyEvent.PARENT_CHANGED) != 0) {
+100	m3/ports/swing-viewport/src/main/java/jdk/m3/swing/viewport/M3ViewportBinding.java	ABSENT	private void bindViewport ()

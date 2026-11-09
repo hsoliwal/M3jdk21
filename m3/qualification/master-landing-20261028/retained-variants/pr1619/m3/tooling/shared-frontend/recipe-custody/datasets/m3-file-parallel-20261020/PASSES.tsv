@@ -1,0 +1,4 @@
+# ordinal	stage_crate	target	resource	behavioral_atom	problem_category
+1	m3-file-parallel-20261020-p1	m3/file/src/main/java/com/m3/file/M3FileParallel.java	0001-M3FileParallel.java.txt	bounded virtual-task scheduler	VIRTUAL_CONCURRENCY
+2	m3-file-parallel-20261020-p2	m3/file/src/main/java/com/m3/file/M3FileTraversal.java	0002-M3FileTraversal.java.txt	default primitive-row parallel work	SCOPED_FILE_SELECTION
+3	m3-file-parallel-20261020-p3	m3/file/src/test/java/com/m3/file/M3FileParallelTest.java	0003-M3FileParallelTest.java.txt	JDK21 deterministic and cancellation oracle	BOUNDED_PRODUCER_CONSUMER

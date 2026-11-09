@@ -1,0 +1,17 @@
+{
+  "schema": "m3-exact-file-recipe-proof/v1",
+  "status": "PASS",
+  "preimageSha256": "e8dcb2c6a1101195dbbecbb55018bb68f182f088309cdfd83f189231d69ca08e",
+  "postimageSha256": "21dc9a2eed607c55b1ff4d49ffef5e19b3bac43b591b62e13191791cabbc3b41",
+  "applyExact": true,
+  "fixedPoint": true,
+  "inversion": true,
+  "refusedMutatedPreimages": [
+    "012d73b252f955fb482a6774980ad8cf3ffb4fc41e7f5aaa3fad91007a9081a2",
+    "d0d2543342d198abeaee00c804448b40de36ea48f9bc197d45b5296bff45e08c",
+    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  ],
+  "sourceFileCount": 1,
+  "sourceUnchangedByProof": true,
+  "controllerSha256": "9dd762ea78e76e1578176fd444ed6aa9221b74cec1b5b9d9e78d4b8c3719fcca"
+}

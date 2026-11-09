@@ -1,0 +1,11 @@
+gate	state	detail
+SOURCE_RECONCILIATION	PENDING	Compare three required commits with exact M3JDK21 HotSpot owners
+FILE_ATOM_RECIPES	PENDING	C/C++/header/Java test source-sealed one-file atoms
+MULTI_MODULE_DAG	PENDING	Promote only after FILE owners converge
+NATIVE_CONFIGURE	BLOCKED	Linux ALSA/CUPS/Freetype/Fontconfig/GTK dev headers unavailable
+FASTDEBUG_BUILD	BLOCKED	Depends on native configure
+PINNED_JTREG	PENDING	All gc/g1/pinnedobjs and affected evacuation/full-GC tests
+JNI_CRITICAL	PENDING	Get/ReleasePrimitiveArrayCritical contract and stress
+SA_JFR	PENDING	Serviceability-agent VMStructs and JFR GC causes/phases
+PERFORMANCE	PENDING	Pin-cache regression comparison
+NON_G1	PENDING	No regression for other collectors

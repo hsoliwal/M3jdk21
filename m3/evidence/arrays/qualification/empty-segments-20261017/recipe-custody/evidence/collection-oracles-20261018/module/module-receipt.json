@@ -1,0 +1,27 @@
+{
+  "command": [
+    "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+    "-B",
+    "-ntp",
+    "-o",
+    "-Dmaven.repo.local=/tmp/m3-maven-repository",
+    "-DargLine=-Xmx768m -Xcheck:jni",
+    "-f",
+    "m3/collections/pom.xml",
+    "verify"
+  ],
+  "sourceCommit": "0efc1719ca5766aead09f4f7c49f5067975bd946",
+  "datasets": [
+    "m3jdk21-progress-percent",
+    "m3jdk21-collection-oracles"
+  ],
+  "exit": 0,
+  "seconds": 39.48486137390137,
+  "tests": {
+    "tests": 226,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "progress_sha256": "2b74e2f37552ff65c46dbae5793171dd86bd1d60015356af1d6963b6327ad698"
+}

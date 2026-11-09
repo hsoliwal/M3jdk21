@@ -1,0 +1,17 @@
+[
+  {
+    "path": "oracle/EmptyRootLookupOracle.java",
+    "sha256": "66bee1e712eb5053ca4414b8b756191f9c1e134be3c6183ab93663fc40d2cd1f",
+    "provenance": "PR1442 exact frozen artifact"
+  },
+  {
+    "path": "oracle/CanonicalPutAllCalibration3.java",
+    "sha256": "f5634e54075c6eea6dd4e8c621a15b8d07680ee90f495eba3594caf750bcd37d",
+    "provenance": "PR1442 exact frozen artifact"
+  },
+  {
+    "path": "oracle/jdk-original.jsonl",
+    "sha256": "428bed8247d22d1c1c968ecf9bb0c6af10c92e0d79814c8eaf67d565e4684d23",
+    "provenance": "PR1442 exact frozen artifact"
+  }
+]

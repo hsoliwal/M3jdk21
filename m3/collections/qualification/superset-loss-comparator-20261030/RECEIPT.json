@@ -1,0 +1,60 @@
+{
+  "schema": "m3.collections.superset-loss-receipt.v1",
+  "status": "REVIEW_ONLY_CURRENT_HEAD_GATES_PENDING",
+  "baseline": {
+    "repository": "hsoliwal/M3jdk21",
+    "commit": "cda404e4a4539d8f4e5cf1a92f20859a522a56b7",
+    "merge": "PR2151 additive superset",
+    "original_qualified_pr": 2115,
+    "original_merge_commit": "816953bec63f5e7dcea96596ce8637514f93b2b5"
+  },
+  "diagnosis": {
+    "owner_reverted_to_exact_source_before": "ac193ba399e9b4709999d629874e56909b75da8d",
+    "regression": "Generic bounded navigation catches user comparator IllegalArgumentException as out-of-range and falls back; dedicated regression test absent from master",
+    "before_sha256": "7b13b0f3a81a9821a944ee1c7669d182d6c35461170c8489facc9b0c30d3ec3c"
+  },
+  "canonical": {
+    "repository": "hsoliwal/com.synexia",
+    "commit": "977cb34746e56e5c71128c41475425a28c932787",
+    "recipe": "com.synexia.m3.MutableFilteredComparator20261029",
+    "crate": "synexia-openrewrite-recipes/recipe-crates/m3-mutable-filtered-comparator-20261029",
+    "original_receipt": "proof/RESULTS.json",
+    "source_qualified_original_tests": {
+      "baseline": {
+        "tests": 5,
+        "failures": 3
+      },
+      "recipe": {
+        "tests": 5,
+        "failures": 0
+      },
+      "candidate_normal": {
+        "tests": 5,
+        "failures": 0
+      },
+      "candidate_xint": {
+        "tests": 5,
+        "failures": 0
+      },
+      "comparisons_per_runtime": 64512
+    }
+  },
+  "restored_postimages": [
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java",
+      "git_blob": "e1ce7319289b441b51853d90df3dd24dc63d12ef",
+      "sha256": "7940b7ca8d0e3eb716e67934350b27fe1f608ab2424fa1dbdc8b1160fab8e88a"
+    },
+    {
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3MutableComparatorFailureTest.java",
+      "git_blob": "2f6e68010c5f31e0217b1a48b8af809b379e49a3",
+      "sha256": "532361f47588eb08fab960a0952b5280a2d75b5923c119cdaf59969a2e7eceb6"
+    }
+  ],
+  "constraints": [
+    "All product/test bytes are original executed Synexia results re-received from existing exact Git objects; no recipe copies in public",
+    "No replacement of unrelated current-master files, receipts, JNI, or workflow pins",
+    "Current-master Maven/Java/JUnit/JNI, source-JUnit dependency closure, whole JDK/jtreg, provenance and hosted Actions not yet qualified",
+    "No default-branch write or automatic draft merge"
+  ]
+}

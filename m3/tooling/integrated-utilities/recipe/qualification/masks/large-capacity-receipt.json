@@ -1,0 +1,22 @@
+{
+  "label": "large-capacity",
+  "command": [
+    "/usr/bin/time",
+    "-v",
+    "-o",
+    "/dev/shm/m3jdk21-work/mask-candidates/qualification/large-capacity-resource.txt",
+    "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+    "-Xms32m",
+    "-Xmx512m",
+    "-Xcheck:jni",
+    "--patch-module",
+    "java.base=/dev/shm/m3jdk21-work/mask-candidates/qualification/classes",
+    "-Dtest.m3.masks.native.library=/tmp/m3jdk21-integrated-native/libM3CollectionMasksQualification.so",
+    "java.util.M3CollectionMasksTest",
+    "large"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 0.6981329917907715,
+  "output": "M3CollectionMasksTest PASS cases=8 selectors=4 mode=large nativeRequested=false\n",
+  "resources": "\tCommand being timed: \"/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java -Xms32m -Xmx512m -Xcheck:jni --patch-module java.base=/dev/shm/m3jdk21-work/mask-candidates/qualification/classes -Dtest.m3.masks.native.library=/tmp/m3jdk21-integrated-native/libM3CollectionMasksQualification.so java.util.M3CollectionMasksTest large\"\n\tUser time (seconds): 0.24\n\tSystem time (seconds): 0.51\n\tPercent of CPU this job got: 109%\n\tElapsed (wall clock) time (h:mm:ss or m:ss): 0:00.69\n\tAverage shared text size (kbytes): 0\n\tAverage unshared data size (kbytes): 0\n\tAverage stack size (kbytes): 0\n\tAverage total size (kbytes): 0\n\tMaximum resident set size (kbytes): 300936\n\tAverage resident set size (kbytes): 0\n\tMajor (requiring I/O) page faults: 13\n\tMinor (reclaiming a frame) page faults: 71668\n\tVoluntary context switches: 410\n\tInvoluntary context switches: 262\n\tSwaps: 0\n\tFile system inputs: 54448\n\tFile system outputs: 120\n\tSocket messages sent: 0\n\tSocket messages received: 0\n\tSignals delivered: 0\n\tPage size (bytes): 4096\n\tExit status: 0\n"
+}

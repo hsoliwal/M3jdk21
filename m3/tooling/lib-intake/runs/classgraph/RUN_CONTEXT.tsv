@@ -1,0 +1,10 @@
+key	value
+lib	classgraph
+source	m3/vendor/third_party/classgraph
+mappings	io.github.classgraph=com.m3.lib.classgraph;nonapi.io.github.classgraph=com.m3.lib.classgraph.nonapi
+module	jdk.m3.classgraph
+version	4.8.165-m3-source-1
+layer	m3/vendor/third_party-m3/relocated/classgraph
+intake_deps	-
+java	java version 21.0.9 2025-10-21 LTS
+rewrite	rewrite-maven-plugin 5.23.1 / rewrite 8.17.1

@@ -1,0 +1,19 @@
+{
+  "command": [
+    "gcc",
+    "-std=c17",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-O2",
+    "-I/tmp/m3-cursor-tools/jdk-21.0.12.1+1/include",
+    "-I/tmp/m3-cursor-tools/jdk-21.0.12.1+1/include/linux",
+    "-fPIC",
+    "-shared",
+    "/workspace/scratch/a20ebe6f78bb/continuation/after/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+    "-o",
+    "/workspace/scratch/a20ebe6f78bb/continuation/portable/native-after/libm3_collections_mask.so"
+  ],
+  "cwd": "/workspace/scratch/a20ebe6f78bb/continuation/after",
+  "jdk": "/tmp/m3-cursor-tools/jdk-21.0.12.1+1"
+}

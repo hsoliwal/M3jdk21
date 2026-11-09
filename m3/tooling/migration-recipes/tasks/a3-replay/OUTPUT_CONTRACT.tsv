@@ -1,0 +1,11 @@
+artifact	role
+DESIGN.md	Contract and scope before source edits
+TASK_PACKET.json	Executable task boundaries
+STATUS.tsv	Measured gate states
+FINAL_REPORT.md	Exact changes and limits
+RUN_CONTEXT.tsv	Pinned execution inputs
+PROVENANCE.tsv	Before/after source identities
+VERIFY_CONTRACT.tsv	Ordered verification gates
+OUTPUT_CONTRACT.tsv	Artifact inventory
+ACTION_QUEUE.tsv	Unfinished proof and product obligations
+RESULTS.tsv	Actual log/report identities and outcomes

@@ -1,0 +1,21 @@
+field	value
+schema	M3_RECIPE_BOOT_CUSTODY_CORRECTION_V1
+date	2026-10-30
+path	m3/migration/original-provider-20261017/sdk/pom.xml
+previous_disposition	INSTALLED (coverage.tsv row 282, installer commit 49791e92b1c063a2cb65875831976cc9c599e8e0)
+corrected_disposition	EXCLUDED
+reason	CUSTODY
+custody_owner	hsoliwal/com.synexia synexia-openrewrite-recipes/recipes/m3-original-mapping-provider-20261017/sdk
+custody_binding	m3/migration/original-provider-20261017/source-binding.json (M3_ORIGINAL_MAPPING_PROVIDER_RECEIVER_BINDING_V1, moduleGitTree c93b25915d57178bec19458ba9ddc34383d92639)
+canonical_source_commit	f44400ead6a4c65e9bb9fc371a5b1c2deecc9c6b
+canonical_tree_at_develop_head	c93b25915d57178bec19458ba9ddc34383d92639 (eeb6ad2ca5, 2026-10-30; canonical SDK unchanged)
+drifted_git_blob	4197e02af76dc6c63c00fb10736007889e4f55e6
+drifted_sha256	9be266066dc9836673e6cef6513ee632939d1ba8ade3bd546a229df90ba9bec7
+drifted_module_git_tree	6b10015f1de9539924f8a4f1f99af5c0b11534e2
+restored_git_blob	bb4994b86272405a0de2a30ad55509548cd1a2ff
+restored_sha256	f3f2a72dbe469776766a02184b59702b55917b5f8a1b397d0aa615f342678ae8
+restored_module_git_tree	c93b25915d57178bec19458ba9ddc34383d92639
+evidence	M3 original mapping provider and reconciliation run 40917174727 (streak 13): RuntimeError exact SDK/workflow binding drift; pinsSha256 and workflowSha256 unchanged; only moduleGitTree drifted
+ci_effect_of_profile	NONE (m3-recipe-boot activates only on ${maven.multiModuleProjectDirectory}/.m3/recipe-boot.properties, absent under the sealed SDK root)
+rule	Sealed receiver copies bound by a source-binding moduleGitTree are custody paths; installer sweeps must list them EXCLUDED/CUSTODY and never rewrite them
+coverage_ledger	coverage.tsv row 282 and semantic-installation.tsv row 256 remain as sealed 2026-10-21 receipts; this dated record supersedes their disposition for the path above

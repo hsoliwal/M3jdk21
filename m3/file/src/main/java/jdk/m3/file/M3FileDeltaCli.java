@@ -1,0 +1,98 @@
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+// SPDX-License-Identifier: Apache-2.0
+package jdk.m3.file;
+
+import java.io.IOException;
+import java.io.PrintStream;
+import java.nio.ByteBuffer;
+import java.nio.charset.CodingErrorAction;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+/**
+ * Build-tool-neutral read-only TSV projection of M3NioFileDelta evidence.
+ *
+ * <p>Maven, Gradle and other tools must generate complete exact-hash manifests using
+ * their own task input/processor/classpath model; this command does not discover
+ * inputs, infer source-to-class edges, modify cache state or authorize a skipped task.
+ * The output is a candidate comparison receipt, not a build lifecycle decision.
+ */
+public final class M3FileDeltaCli {
+    private static final int MANIFEST_LIMIT = 32 * 1024 * 1024;
+    private static final String HEADER = "M3FILEDELTA_MANIFEST_V1";
+
+    private M3FileDeltaCli() { }
+
+    /** Arguments: before.tsv after.tsv before-context-sha256 after-context-sha256. */
+    public static void main(String[] args) throws IOException {
+        Objects.requireNonNull(args, "args");
+        if (args.length != 4) {
+            throw new IllegalArgumentException("expected before.tsv after.tsv before-context-sha256 after-context-sha256");
+        }
+        execute(Path.of(args[0]), Path.of(args[1]), args[2], args[3], System.out);
+    }
+
+    static void execute(Path before, Path after, String beforeContext, String afterContext,
+                        PrintStream output) throws IOException {
+        Objects.requireNonNull(output, "output");
+        var oldState = M3NioFileDelta.snapshot(read(before), beforeContext);
+        var newState = M3NioFileDelta.snapshot(read(after), afterContext);
+        var result = M3NioFileDelta.compare(oldState, newState);
+        //FLLDCIM: MRL - windows-green-20261107: receipt lines end with LF on every platform (println emits CRLF on Windows; M3FileDeltaSelfTest asserts the LF receipt header), like every other jdk.m3.file writer
+        output.print("M3FILEDELTA_RECEIPT_V1\n");
+        output.print("BEFORE\t" + result.previousRoot() + "\n");
+        output.print("AFTER\t" + result.currentRoot() + "\n");
+        output.print("CONTEXT_CHANGED\t" + result.contextChanged() + "\n");
+        output.print("IDENTICAL_EVIDENCE\t" + result.sameEvidence() + "\n");
+        for (var delta : result.changes()) {
+            output.print(delta.kind() + "\t" + delta.path() + "\t" + delta.change()
+                    + "\t" + delta.abi() + "\t" + nullField(delta.previousSha256())
+                    + "\t" + nullField(delta.currentSha256()) + "\n");
+        }
+    }
+
+    private static String nullField(String value) { return value == null ? "-" : value; }
+
+    private static List<M3NioFileDelta.Entry> read(Path manifest) throws IOException {
+        Objects.requireNonNull(manifest, "manifest");
+        byte[] bytes = M3NioFile.of(manifest).readAllBytes(MANIFEST_LIMIT);
+        String body;
+        try {
+            body = StandardCharsets.UTF_8.newDecoder()
+                    .onMalformedInput(CodingErrorAction.REPORT)
+                    .onUnmappableCharacter(CodingErrorAction.REPORT)
+                    .decode(ByteBuffer.wrap(bytes)).toString();
+        } catch (java.nio.charset.CharacterCodingException invalid) {
+            throw new IOException("manifest is not strict UTF-8", invalid);
+        }
+        List<M3NioFileDelta.Entry> entries = new ArrayList<>();
+        boolean headerSeen = false;
+        for (String line : body.split("\n", -1)) {
+            if (line.isEmpty()) continue;
+            if (line.endsWith("\r")) line = line.substring(0, line.length() - 1);
+            if (!headerSeen) {
+                if (!HEADER.equals(line)) throw new IOException("wrong M3NioFileDelta manifest version");
+                headerSeen = true;
+                continue;
+            }
+            if (entries.size() == M3NioFileDelta.MAX_ENTRIES) {
+                throw new IOException("manifest entry budget exceeded");
+            }
+            String[] cells = line.split("\t", -1);
+            if (cells.length != 5) throw new IOException("invalid M3NioFileDelta manifest record");
+            try {
+                var kind = M3NioFileDelta.Kind.valueOf(cells[0]);
+                long length = Long.parseLong(cells[2]);
+                String abi = cells[4].equals("-") ? null : cells[4];
+                entries.add(new M3NioFileDelta.Entry(kind, cells[1], length, cells[3], abi));
+            } catch (IllegalArgumentException invalid) {
+                throw new IOException("invalid M3NioFileDelta manifest record", invalid);
+            }
+        }
+        if (!headerSeen) throw new IOException("empty M3NioFileDelta manifest");
+        return List.copyOf(entries);
+    }
+}

@@ -1,0 +1,39 @@
+{
+  "artifacts": [
+    {
+      "bytes": 547,
+      "path": "test-M3ASTProjectionStateTest.log",
+      "sha256": "a62cc15d71d6dfd2e31d77f5667b7731c01eb595535a8d4c5beabdf2722e36ce"
+    },
+    {
+      "bytes": 782,
+      "path": "test-M3CrossFrontendContract.log",
+      "sha256": "06f4767a0fd8dd83ae1495fd5b02f927f15602b5a7ab83b6cbd194c9d7f20dae"
+    },
+    {
+      "bytes": 551,
+      "path": "test-M3JavacParserContract.log",
+      "sha256": "428077182596ae87a1f40df5843051fc2eb15a991e5de697c51b58eea2879629"
+    },
+    {
+      "bytes": 562,
+      "path": "test-M3ParserFrameworkContract.log",
+      "sha256": "5c46557d0c343b453d9c71a940d4dc19e7238d9e4c6f6fe4d16c392185c52a79"
+    },
+    {
+      "bytes": 3344,
+      "path": "test-commands.json",
+      "sha256": "74a39d5b1d283fb54149ddff23f3d429ebc437bd8a3594af479fba795b75c999"
+    },
+    {
+      "bytes": 673,
+      "path": "test-consumer-smoke.log",
+      "sha256": "57c48d893068a488b1b21bca4fa3422070c2d60c29ac33e824c213de72e07f0d"
+    }
+  ],
+  "input_sha256": "a7258ac8a63127666fe904bb016eeb3abe8c6ddae2f2163b78e476b929cbca64",
+  "phase": "test",
+  "previous_receipt_sha256": "b17edda51e72fb504f6714db8611e41867e00d251a5f5e407ee7c8f50543d4b9",
+  "schema": "M3_PARSER_PHASE_RECEIPT_V1",
+  "status": "PASS"
+}

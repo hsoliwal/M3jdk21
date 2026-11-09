@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+# Result-only receiving, no OpenRewrite recipe/tool/template in this product branch.
+# Source: canonical Synexia merged PR https://github.com/hsoliwal/com.synexia/pull/15090
+# Prior exact generated M3JDK21 original: https://github.com/hsoliwal/M3JDK21/pull/2219
+# That PR's dedicated "M3 array map fill" differential job completed successfully on commit c28e9cfee03a7cdd189dd9eef95a6e391d0e6d00.
+# Public APIs remain as qualified in that original branch; materialization is 1:1 by Git blob.
+class	sha1	algorithm-category	product-gates
+M3HashedMap	0440ac943b5eb31d443d8be9943fc14597890277	LC706-open-addressing;LC27-compaction	Java21_receiver_PENDING;native_JNI_PENDING;full_JDK_PENDING
+M3LinkedMap	ebf03006129b74b813e406613594c196de10f477	LC307-rank-select;LC283-compaction	Java21_receiver_PENDING;native_JNI_PENDING;full_JDK_PENDING
+M3LRUMap	703641cfe70f58ba93dc4a9ef5129048c3b59bcd	LC146-LRU-index-lanes;LC706-hash	Java21_receiver_PENDING;native_JNI_PENDING;full_JDK_PENDING
+M3LongObjectLinkedHashMap	bc8b45e9337fc1fadd139827d1197b357dbee3a3	PRIMITIVE_LONG_ID-LC706-hash;LC283-stable-compaction	Java21_receiver_PENDING;native_JNI_PENDING;full_JDK_PENDING

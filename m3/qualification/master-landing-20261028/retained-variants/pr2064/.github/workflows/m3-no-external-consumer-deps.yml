@@ -1,0 +1,37 @@
+# SPDX-License-Identifier: Apache-2.0
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+name: M3 no external consumer runtime dependencies
+on:
+  pull_request:
+    paths:
+      - 'm3/arrays/pom.xml'
+      - 'm3/collections/pom.xml'
+      - 'm3/collections/interop/pom.xml'
+      - 'm3/collections/verification/**'
+      - '.github/workflows/m3-no-external-consumer-deps.yml'
+  push:
+    branches:
+      - 'm3/no-external-runtime-publish-gate-20261028'
+      - 'm3/collection-views-convergence-20261024'
+    paths:
+      - 'm3/arrays/pom.xml'
+      - 'm3/collections/pom.xml'
+      - 'm3/collections/interop/pom.xml'
+      - 'm3/collections/verification/**'
+      - '.github/workflows/m3-no-external-consumer-deps.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  declared-direct-closure:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Refusal oracles (no external tools)
+        run: python3 -m unittest discover -s m3/collections/verification -p 'test_no_external_runtime.py' -v
+      - name: Inspect current direct Maven ownership and enforce deploy quarantine
+        run: python3 m3/collections/verification/no_external_runtime.py --root .

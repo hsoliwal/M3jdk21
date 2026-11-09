@@ -1,0 +1,3 @@
+PASS M3LongBitmapFilteredSnapshotSelfTest checks=32425 native=true
+
+EXIT=0

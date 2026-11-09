@@ -1,0 +1,17 @@
+{
+  "label": "31-provider-runtime",
+  "command": [
+    "/workspace/scratch/65626af64474/m3-ast-shared-20261018/descriptor-qualification-02/candidate/image/bin/java",
+    "-cp",
+    "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/generated-final/m3/tooling/module-packs/build-support/gradle-provider/target/m3-gradle-ast-provider-1.0-SNAPSHOT.jar:/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/generated-final/m3/tooling/module-packs/build-support/gradle-provider/target/test-classes:/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/proof-inputs/gradle-exact-spi-419a77cf.jar",
+    "org.gradle.internal.m3.ast.M3GradleASTProviderProbe",
+    "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/runtime-proof-01"
+  ],
+  "cwd": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/generated-final/m3/tooling/module-packs/build-support/gradle-provider",
+  "jdk": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/descriptor-qualification-02/candidate/image",
+  "previous": "30-provider-package",
+  "started_utc": "2026-10-18T13:27:06.207600+00:00",
+  "finished_utc": "2026-10-18T13:27:07.047791+00:00",
+  "exit_code": 0,
+  "log_sha256": "7989a8f6202f6f385a32336ef5843ec4294fabf2ca876161a25e4aba3b683636"
+}

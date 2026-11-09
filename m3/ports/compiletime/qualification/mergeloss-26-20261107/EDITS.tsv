@@ -1,0 +1,2 @@
+file	before_sha256	after_sha256	leaf	origin_commit	dropping_merge	rule
+m3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/M3FileSourceFacts.java	553029d91f99fd3e34d7dfb9455d4d38e7eaf1ef33bdcf82c48204353d01b4ea	a2bca3a899d8542d469c16700ba848eeb7f8a264276255eaf07c27cfb1b3191a	26	d3c0986e91101af77d2fe406db8b250fdfdc1383	a7d07c6b1f00103fc1e7e78e0922c5717767cdde	RESTORE d3c0986e911 M3FileSourceFacts hunk: bounded 4,096-unit bulk UTF-16 framing, identical digest bytes

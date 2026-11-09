@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: Apache-2.0
+# Census rows of group G4 (leaf L084, crate m3-longlong-indexed-sorted-20261017): three NEW files (manifest before=ABSENT); re-checked by name over m3/collections on the gate base feae0743e6c25f826d7f289c0b0acca19ff65e62 (the last -Werror-green base before #2561) and on the push base: no M3LongLongIndexedSortedView, M3LongLongIndexedSortedViewProof, M3LongLongIndexedSortedViewTest. Owner search for the contract (immutable long-to-long sorted-map snapshot, O(1) slices, mask selection): M3LongSortedSnapshot (immutable long set, no values), M3LongLongTreeMap (mutable), M3LongLongSortedMap (mutable interface), M3PrimitiveSortedArrayMap (mutable, collections lane #2541): no owner -> PORTED, NEC row in RELOCATION_MAP.tsv.
+leaf	crate	type	status	note
+L084	m3-longlong-indexed-sorted-20261017	M3LongLongIndexedSortedView	NO_OWNER	new main class, 247 lines; depends on M3IndexMaskCompactor (Backend, select, selectedCount, package-private validate/matches) present on the base
+L084	m3-longlong-indexed-sorted-20261017	M3LongLongIndexedSortedViewProof	NO_OWNER	TreeMap differential oracle main (1,368,500 evaluations)
+L084	m3-longlong-indexed-sorted-20261017	M3LongLongIndexedSortedViewTest	NO_OWNER	JUnit wrapper shipped by the crate

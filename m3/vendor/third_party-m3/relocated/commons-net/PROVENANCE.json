@@ -1,0 +1,1173 @@
+{
+  "artifact": "commons-net",
+  "automatic_module_name": "org.apache.commons.net",
+  "build": "java",
+  "build_reason": "",
+  "consumers": "synexia-common (synexia-bom)",
+  "coordinate": "commons-net:commons-net:3.11.1-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "delomboked": false,
+  "delomboked_files": 0,
+  "dependencies": [],
+  "donor": "commons-net-3.11.1",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/commons-net/src/main/resources/META-INF/LICENSE.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "upstream": "META-INF/LICENSE.txt"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/commons-net/upstream-excluded/META-INF/MANIFEST.MF",
+      "sha256": "68d75804225cf7d51402c6cc94aaba15ea29bb684d68a8e7010da246f474d91c",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/commons-net/src/main/resources/META-INF/NOTICE.txt",
+      "sha256": "10d2af65acb2d5107e6eb53908f649409782c8e8270b225d01a737a2e199f508",
+      "upstream": "META-INF/NOTICE.txt"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/commons-net/upstream-excluded/META-INF/maven/commons-net/commons-net/pom.properties",
+      "sha256": "ea907fcf7f3538a409e5bbe18098e14809dbae6dae2911088607a7b2069d324a",
+      "upstream": "META-INF/maven/commons-net/commons-net/pom.properties"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/commons-net/upstream-excluded/META-INF/maven/commons-net/commons-net/pom.xml",
+      "sha256": "b1acdbcf78cab0205a68afb4b6f0bc3551e077a3bb2b3ff7cf9c000f2e9b834d",
+      "upstream": "META-INF/maven/commons-net/commons-net/pom.xml"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/DatagramSocketClient.java",
+      "sha256": "c3f1c23537d15edcfb44e54733d0894d2a0cb16d2da280d598742c89a40c1575",
+      "upstream": "org/apache/commons/net/DatagramSocketClient.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/DatagramSocketFactory.java",
+      "sha256": "f76bac8b3423f00726e5c3ddf3ed254b99867a74fd07ad9822977d040baa6f83",
+      "upstream": "org/apache/commons/net/DatagramSocketFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/DefaultDatagramSocketFactory.java",
+      "sha256": "e45931a921149c6872a9b9d385bcbb410ddaeb34575cb1d1e5f6c51f6a60ba4f",
+      "upstream": "org/apache/commons/net/DefaultDatagramSocketFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/DefaultSocketFactory.java",
+      "sha256": "bdb61d94b00bb6b4f7790aa20d371783ac7edd8a7ff6f6f2ca721393ad7c7e18",
+      "upstream": "org/apache/commons/net/DefaultSocketFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/MalformedServerReplyException.java",
+      "sha256": "3834cd092fc46861e8e3b42bbc21bfee451f0edb759c1b90b7b6ef887d32d5ac",
+      "upstream": "org/apache/commons/net/MalformedServerReplyException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/PrintCommandListener.java",
+      "sha256": "1906ab191944cecb06dd2ebbe020dc0d8222eae4722d6910834cd9c9d41362c5",
+      "upstream": "org/apache/commons/net/PrintCommandListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ProtocolCommandEvent.java",
+      "sha256": "1e249bec0fab1309dbea517bcb5352488e1a3ec0a7a799e40d0bb194838b2a8c",
+      "upstream": "org/apache/commons/net/ProtocolCommandEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ProtocolCommandListener.java",
+      "sha256": "7179eff817e1d50bc0923f6bf6cdf7e7b7e09ecde9b0c18dac1c1b48d552ce49",
+      "upstream": "org/apache/commons/net/ProtocolCommandListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ProtocolCommandSupport.java",
+      "sha256": "11b2bd83a8a8fb45b8445c3ceaef043c9b7f3bf43db18bc3eb3506b2e74570c1",
+      "upstream": "org/apache/commons/net/ProtocolCommandSupport.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/SocketClient.java",
+      "sha256": "9b141932ca067dec6235aee0930a5fd5f616cc4b838da07e1037ad39f70a6497",
+      "upstream": "org/apache/commons/net/SocketClient.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/bsd/RCommandClient.java",
+      "sha256": "23224452b3cab3d9fa53d827133939a52aed1aa84adf1782c41e127b50dcd022",
+      "upstream": "org/apache/commons/net/bsd/RCommandClient.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/bsd/RExecClient.java",
+      "sha256": "8f9a7d7126537461d55f567cfb68d25b84d06c0596eb3b3629bee3c8ecbf5826",
+      "upstream": "org/apache/commons/net/bsd/RExecClient.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/bsd/RLoginClient.java",
+      "sha256": "6bc5dc910df859ef37f34ea0f7d296b0279a6050b495cdcfc1e3880552358836",
+      "upstream": "org/apache/commons/net/bsd/RLoginClient.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/bsd/package-info.java",
+      "sha256": "cf10c8b3f2f9595c793418b7d6d7ab09b984d9709eeaf3fa31f09e655e6df0de",
+      "upstream": "org/apache/commons/net/bsd/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/chargen/CharGenTCPClient.java",
+      "sha256": "d3500379280c160dc4b757b3c605f3c6c07c69081a53f239e31c41d68b0d7247",
+      "upstream": "org/apache/commons/net/chargen/CharGenTCPClient.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/chargen/CharGenUDPClient.java",
+      "sha256": "ea88dd5236c4a534eaeee05bb767d951d25e504d4f2502914c3ccd6ec4915d8a",
+      "upstream": "org/apache/commons/net/chargen/CharGenUDPClient.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/chargen/package-info.java",
+      "sha256": "f09af01fe20830484ce9386ac2183a720cce08ea2f9c74da0b4a3ffadb515de4",
+      "upstream": "org/apache/commons/net/chargen/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/daytime/DaytimeTCPClient.java",
+      "sha256": "c397d684dd13e2f9ff52c1556299099c2a8b1f7e1e6f7cfc0efdd8fa40a33ea2",
+      "upstream": "org/apache/commons/net/daytime/DaytimeTCPClient.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/daytime/DaytimeUDPClient.java",
+      "sha256": "fefb1464f23448d23b819d888ea3deaf64dbaf50336f56435dbe0fd11632e64c",
+      "upstream": "org/apache/commons/net/daytime/DaytimeUDPClient.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/daytime/package-info.java",
+      "sha256": "a0815bfc544c262bac2049643b25731ae36a32160e51e2b5edace146ee336dbb",
+      "upstream": "org/apache/commons/net/daytime/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/discard/DiscardTCPClient.java",
+      "sha256": "7f482025d03a99acde630747b2b94d6aabb7a884f971a1cca41a71077cce0027",
+      "upstream": "org/apache/commons/net/discard/DiscardTCPClient.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/discard/DiscardUDPClient.java",
+      "sha256": "ab197480e70e3f6b2c5ef3468edfbbd3b5cd31371ccd74ada83b8d42f016b4f1",
+      "upstream": "org/apache/commons/net/discard/DiscardUDPClient.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/discard/package-info.java",
+      "sha256": "fd57f51cb48080bd6630f0f4c40e37b79da21a9375a7b4ed70cfd8bee33920a5",
+      "upstream": "org/apache/commons/net/discard/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/echo/EchoTCPClient.java",
+      "sha256": "196764b6a8f7c4f27f9d35e2c5f06ee23cb53ecad2354dde971e035d00fe90d5",
+      "upstream": "org/apache/commons/net/echo/EchoTCPClient.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/echo/EchoUDPClient.java",
+      "sha256": "3b24e3603df90915266587b823b3d17e20a9a6d9c0cd019ff1a36131ff55b0d9",
+      "upstream": "org/apache/commons/net/echo/EchoUDPClient.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/echo/package-info.java",
+      "sha256": "123e78e796ccbaef76ea1f593260fcc8fc62913b714243559b3e3172227b4bb4",
+      "upstream": "org/apache/commons/net/echo/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/finger/FingerClient.java",
+      "sha256": "de2c6a83fc934a4077f5cf897a9c43e90669fd1a6a0cd81d9e448d0a883cd30a",
+      "upstream": "org/apache/commons/net/finger/FingerClient.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/finger/package-info.java",
+      "sha256": "57c793032daa5948fc277469e46f310fb3508824866409666ced82cee12d2d9d",
+      "upstream": "org/apache/commons/net/finger/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/Configurable.java",
+      "sha256": "da9aaebe8db4ae2a466e42d7f4b508d4ed44d6363e55cac85e8a4f3c42f0d8df",
+      "upstream": "org/apache/commons/net/ftp/Configurable.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/DeflateSocket.java",
+      "sha256": "a165385d95f3cebe01439673bdf55e015f09ccae19c52b6515be788b6263bf6f",
+      "upstream": "org/apache/commons/net/ftp/DeflateSocket.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/DelegateSocket.java",
+      "sha256": "57940929e42298842dd137afa5e6af24f898b357fd3e549d33b50148e1e58dd5",
+      "upstream": "org/apache/commons/net/ftp/DelegateSocket.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/DurationUtils.java",
+      "sha256": "96a8187ec4a67c8c496dd068f9f34b553bb3af97e3030bf1f90568bbeb185feb",
+      "upstream": "org/apache/commons/net/ftp/DurationUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/FTP.java",
+      "sha256": "73179ceb75c0d3606bc21c4b637bb41408b94aa911c1c2818b58b25bdc399860",
+      "upstream": "org/apache/commons/net/ftp/FTP.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/FTPClient.java",
+      "sha256": "0100b9a12c07a7b7f15281ea4f5ab25bee719cbdc644ba5a7395ffae918a3bd7",
+      "upstream": "org/apache/commons/net/ftp/FTPClient.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/FTPClientConfig.java",
+      "sha256": "93cd646b724de60b88b7d4e5116233788fd03209a8f36d7b18174db72338057b",
+      "upstream": "org/apache/commons/net/ftp/FTPClientConfig.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/FTPCmd.java",
+      "sha256": "82e5e8281276b2ff1610f62c8693add5b8dbcba7705fe8a7579ae13d154ef93a",
+      "upstream": "org/apache/commons/net/ftp/FTPCmd.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/FTPCommand.java",
+      "sha256": "bdf13ff44bf5abfc3c277a7a70afef21b6a3f55989f7f4d17dccec883ed8795f",
+      "upstream": "org/apache/commons/net/ftp/FTPCommand.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/FTPConnectionClosedException.java",
+      "sha256": "1147b83d9205dc7f829b22dae6c096e7ff7d5f8f871223f8080a533e2e2f5341",
+      "upstream": "org/apache/commons/net/ftp/FTPConnectionClosedException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/FTPFile.java",
+      "sha256": "c7f96e4c98512c1d3d522be5fa4684906fdf3598dff408d98c9d69877aafcf1b",
+      "upstream": "org/apache/commons/net/ftp/FTPFile.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/FTPFileEntryParser.java",
+      "sha256": "3e0a4114e7d5b411407e4c8486ab7a5c0d939043e5a6568e6f551a0f0997cd94",
+      "upstream": "org/apache/commons/net/ftp/FTPFileEntryParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/FTPFileEntryParserImpl.java",
+      "sha256": "aa6bc3c242257d4861454b8b60c71ed9e8e4428eea0fe1c8b5c46fcdf48eeb99",
+      "upstream": "org/apache/commons/net/ftp/FTPFileEntryParserImpl.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/FTPFileFilter.java",
+      "sha256": "629a58b0ed663e01e998900440e3d222bbbdc61ee0d1153c69eb806a2abd7a76",
+      "upstream": "org/apache/commons/net/ftp/FTPFileFilter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/FTPFileFilters.java",
+      "sha256": "040d490eaf37810ebd3d721a69365c0b9c0306c79e245e5cc1170ff0cdc16fee",
+      "upstream": "org/apache/commons/net/ftp/FTPFileFilters.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/FTPHTTPClient.java",
+      "sha256": "c4a72be1a4dafb36d7d96285d59cf0fa94d29ffbde3b6e673228d4f9ead97ae9",
+      "upstream": "org/apache/commons/net/ftp/FTPHTTPClient.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/FTPListParseEngine.java",
+      "sha256": "6854cd85135ee1e26ead18bb3749d94f69ffc50cfedaecb58bdfab9517806d33",
+      "upstream": "org/apache/commons/net/ftp/FTPListParseEngine.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/FTPReply.java",
+      "sha256": "16982fb61dd0ba1d461e900682d1f8e8c61bac8a6ea459348067f35027fa0389",
+      "upstream": "org/apache/commons/net/ftp/FTPReply.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/FTPSClient.java",
+      "sha256": "beb12c33b45fde97c55dd591afc27d3490b2f1d938bae5428c972cb5ed757f8c",
+      "upstream": "org/apache/commons/net/ftp/FTPSClient.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/FTPSCommand.java",
+      "sha256": "8856675531e75045203bf321d6926b405e27af51d96f5d1281f8b08e7d06a100",
+      "upstream": "org/apache/commons/net/ftp/FTPSCommand.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/FTPSServerSocketFactory.java",
+      "sha256": "6a8b6bea29534f348b7a253b387f0a09f58e6b94e78612ac3e4f9b549c4f8272",
+      "upstream": "org/apache/commons/net/ftp/FTPSServerSocketFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/FTPSSocketFactory.java",
+      "sha256": "1dc8d2159656231d38ef457fa346019d0a4284999f7e4be4b85a5a7957022d3e",
+      "upstream": "org/apache/commons/net/ftp/FTPSSocketFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/FTPSTrustManager.java",
+      "sha256": "0bc7a8fda182ad3975ee45fa64d71f6f34f3ed36f1022dcab4944f21e48f20ec",
+      "upstream": "org/apache/commons/net/ftp/FTPSTrustManager.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/package-info.java",
+      "sha256": "a6d93fb27096511a20b4ef6992bd40f493b6b7093d6e31dbd994887cf5cd75ca",
+      "upstream": "org/apache/commons/net/ftp/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/parser/CompositeFileEntryParser.java",
+      "sha256": "6cc238b12c2fbf293e3c8a249ee8bbc9c204496c9b8f8c06e61dc52d49ea5453",
+      "upstream": "org/apache/commons/net/ftp/parser/CompositeFileEntryParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/parser/ConfigurableFTPFileEntryParserImpl.java",
+      "sha256": "597429acfb741fd899ff847f0abc6c817d6978abab697a928caf43a7b9fe6a87",
+      "upstream": "org/apache/commons/net/ftp/parser/ConfigurableFTPFileEntryParserImpl.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/parser/DefaultFTPFileEntryParserFactory.java",
+      "sha256": "8341f804fad5448d1f3749ee1f0fb8738af115ca51e7980f5cccb12b4e8f84cd",
+      "upstream": "org/apache/commons/net/ftp/parser/DefaultFTPFileEntryParserFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/parser/EnterpriseUnixFTPEntryParser.java",
+      "sha256": "aa3f92de57761af2264f74c06aea1e3808cfa1c815216b15b8ff9994d0f1060c",
+      "upstream": "org/apache/commons/net/ftp/parser/EnterpriseUnixFTPEntryParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/parser/FTPFileEntryParserFactory.java",
+      "sha256": "b49cc1e0c380f5e6965abb82d1b7e25e3e814dac52c1e807613f83569b00fce1",
+      "upstream": "org/apache/commons/net/ftp/parser/FTPFileEntryParserFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/parser/FTPTimestampParser.java",
+      "sha256": "868622be7d6ae88cf2e3c0808ce62ad89cc9c9926373d8de9181036cf442ba07",
+      "upstream": "org/apache/commons/net/ftp/parser/FTPTimestampParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/parser/FTPTimestampParserImpl.java",
+      "sha256": "75ead6a16970e0f0b27c0d1f6a272698170f0805e1f4a7719b6e0f32bc3e222b",
+      "upstream": "org/apache/commons/net/ftp/parser/FTPTimestampParserImpl.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/parser/MLSxEntryParser.java",
+      "sha256": "9af17ac7e45ff77c637d93f68308f04ace3e5d871744ce9a67e2dcff7b080dfc",
+      "upstream": "org/apache/commons/net/ftp/parser/MLSxEntryParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/parser/MVSFTPEntryParser.java",
+      "sha256": "e43d78dfa02a50fc6f090729e33c28aa32ef0375fb516f776d89b18b1d8da337",
+      "upstream": "org/apache/commons/net/ftp/parser/MVSFTPEntryParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/parser/MacOsPeterFTPEntryParser.java",
+      "sha256": "6b52abf3cf0d427fb9e36e2c500157bc5aae796e148fd6e0480b291d2df66837",
+      "upstream": "org/apache/commons/net/ftp/parser/MacOsPeterFTPEntryParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/parser/NTFTPEntryParser.java",
+      "sha256": "74ae3e66e36b1b201a50254b10e45c37f01f3858020e68838d2b7f5d2ae76a5d",
+      "upstream": "org/apache/commons/net/ftp/parser/NTFTPEntryParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/parser/NetwareFTPEntryParser.java",
+      "sha256": "a4cdf291f60031b38c2b8cfd01176b7b4f7d444d9153a5ed23bbeb04dc87922c",
+      "upstream": "org/apache/commons/net/ftp/parser/NetwareFTPEntryParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/parser/OS2FTPEntryParser.java",
+      "sha256": "3a15f2496914fdef8f7b3b6c0f06b9e2aece14cd2848409e6d9f2883c381396c",
+      "upstream": "org/apache/commons/net/ftp/parser/OS2FTPEntryParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/parser/OS400FTPEntryParser.java",
+      "sha256": "bc7095db36e952565e433548c96640ab171eae8db95b226267049847d267e701",
+      "upstream": "org/apache/commons/net/ftp/parser/OS400FTPEntryParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/parser/ParserInitializationException.java",
+      "sha256": "fbc5548ad4f7e68f0c2a4a5c067b96819355ed6b930c0fe12b15bec500ceb193",
+      "upstream": "org/apache/commons/net/ftp/parser/ParserInitializationException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/parser/RegexFTPFileEntryParserImpl.java",
+      "sha256": "6d35ef892667490c453eb0a0ea55d8116b07e47bd92f763d982a3a28160dcef0",
+      "upstream": "org/apache/commons/net/ftp/parser/RegexFTPFileEntryParserImpl.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/parser/UnixFTPEntryParser.java",
+      "sha256": "9c765d9fcf1c158c49e0ccff4bba24a1e6670d3153633f191645e2454063e985",
+      "upstream": "org/apache/commons/net/ftp/parser/UnixFTPEntryParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/parser/VMSFTPEntryParser.java",
+      "sha256": "1092439894c21a4979e6b5a1386299d7a38c585787580db1d9f62e19be03bf7e",
+      "upstream": "org/apache/commons/net/ftp/parser/VMSFTPEntryParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/parser/VMSVersioningFTPEntryParser.java",
+      "sha256": "fd2a2a3893f06a96eb908f17c696c3c1731bc89b08f74f6b17ba2e79238f1f71",
+      "upstream": "org/apache/commons/net/ftp/parser/VMSVersioningFTPEntryParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ftp/parser/package-info.java",
+      "sha256": "04dd68fc3464f4cd86bf528aee807ca0db6cb523c5928544601fa62977b65c6d",
+      "upstream": "org/apache/commons/net/ftp/parser/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/imap/AuthenticatingIMAPClient.java",
+      "sha256": "058acdb7db2347b7ab6f396f86621d8b68e899116980a97e616d4e6140032fea",
+      "upstream": "org/apache/commons/net/imap/AuthenticatingIMAPClient.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/imap/IMAP.java",
+      "sha256": "b1927c99a4ae2cc1016d457a2f1ddd61573163ec608398084737b102b88f758a",
+      "upstream": "org/apache/commons/net/imap/IMAP.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/imap/IMAPClient.java",
+      "sha256": "5f99bdf01177b951ef3cb45b114df4dd6f00bb3f1fed2ac2bd9a1e1ca2e14851",
+      "upstream": "org/apache/commons/net/imap/IMAPClient.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/imap/IMAPCommand.java",
+      "sha256": "f65fecc00dd07f6ff1c16761ee666bd4924d1dca12b21bf66acdf46063c95f6c",
+      "upstream": "org/apache/commons/net/imap/IMAPCommand.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/imap/IMAPReply.java",
+      "sha256": "d96a24715a229502b6857079d2a3b1fd7c72ace29fa284e9f6d9d563cd812811",
+      "upstream": "org/apache/commons/net/imap/IMAPReply.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/imap/IMAPSClient.java",
+      "sha256": "3a68282d8b702d23e210d9683dbabdac9e29e808ad91c65a45c282cadcd3fb80",
+      "upstream": "org/apache/commons/net/imap/IMAPSClient.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/imap/package-info.java",
+      "sha256": "e95c03169dd224af932682c15d94ae48598923584c86ee042a8a9e0aab904057",
+      "upstream": "org/apache/commons/net/imap/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/io/CRLFLineReader.java",
+      "sha256": "82db6dbcf3a92f6d10b419bf7568f296a93ff37393940050f1d59c5bee39e41d",
+      "upstream": "org/apache/commons/net/io/CRLFLineReader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/io/CopyStreamAdapter.java",
+      "sha256": "7c84924647c0a70c80b2f7d214f9e405e64c387973d9f2ba60d1a8639749cc88",
+      "upstream": "org/apache/commons/net/io/CopyStreamAdapter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/io/CopyStreamEvent.java",
+      "sha256": "7b789587a1464cd91a30f3d3c502623655d2bc578d08a6fab0bf0438b357e806",
+      "upstream": "org/apache/commons/net/io/CopyStreamEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/io/CopyStreamException.java",
+      "sha256": "51634c4c15187ad79a1a505165430c329afc834d613a563030a13f8b2f47e839",
+      "upstream": "org/apache/commons/net/io/CopyStreamException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/io/CopyStreamListener.java",
+      "sha256": "a9fe2125fcee9a72336e6612bc12648c3ed6ca6841e010e03fc0c15a3c4a6890",
+      "upstream": "org/apache/commons/net/io/CopyStreamListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/io/DotTerminatedMessageReader.java",
+      "sha256": "1b0844b4847d0fbe7ae173d17a02bfa5cf6d9a86118c8c9a2c5e8aa7f0b3c54b",
+      "upstream": "org/apache/commons/net/io/DotTerminatedMessageReader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/io/DotTerminatedMessageWriter.java",
+      "sha256": "4e2510ef21eadeada62d48548eed1d32cf175ed1878750e2d4c16b38bc4ebba2",
+      "upstream": "org/apache/commons/net/io/DotTerminatedMessageWriter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/io/FromNetASCIIInputStream.java",
+      "sha256": "e7910d19b2473820bbc371d184e40e048bfa345beaa8cf64f1c429c13731b9cb",
+      "upstream": "org/apache/commons/net/io/FromNetASCIIInputStream.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/io/FromNetASCIIOutputStream.java",
+      "sha256": "c42aa9367eb2c99b2c55857270d6bfc0f762bd64e01a3b8a36319d3fdfc0bbe6",
+      "upstream": "org/apache/commons/net/io/FromNetASCIIOutputStream.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/io/SocketInputStream.java",
+      "sha256": "b616aa52ac448ec8d1c7d75e0751821d5951602950ac14824d68604c0d41ba07",
+      "upstream": "org/apache/commons/net/io/SocketInputStream.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/io/SocketOutputStream.java",
+      "sha256": "db41d54530e9c3534e428c799bb75c641adeaab38c47751f55c8bde4b0786048",
+      "upstream": "org/apache/commons/net/io/SocketOutputStream.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/io/ToNetASCIIInputStream.java",
+      "sha256": "729b7aed454acf30915aeef8f188f8ba863289a2b7866cb0a743ec025305c6ae",
+      "upstream": "org/apache/commons/net/io/ToNetASCIIInputStream.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/io/ToNetASCIIOutputStream.java",
+      "sha256": "7f377c151255b5136c867d10c18366ea5249695d30eed407a531aa5833faacb6",
+      "upstream": "org/apache/commons/net/io/ToNetASCIIOutputStream.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/io/Util.java",
+      "sha256": "a4c1059c00951ff4093f1293df534b73d626dde9d3aac88600f6cdb00c09778b",
+      "upstream": "org/apache/commons/net/io/Util.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/io/package-info.java",
+      "sha256": "c373a0312405d333520fc2ac989f2412a3da2c117321f34eb307543368817438",
+      "upstream": "org/apache/commons/net/io/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/nntp/Article.java",
+      "sha256": "d7b1416d7d8bda2052d5c01027f6e8ba1e0bf1dcca9831e7a8f354321a23d7ec",
+      "upstream": "org/apache/commons/net/nntp/Article.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/nntp/ArticleInfo.java",
+      "sha256": "d4d22c1c0de3d43936228b90340526d05ff3bfb5f8135e053c8f69f88703b6ae",
+      "upstream": "org/apache/commons/net/nntp/ArticleInfo.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/nntp/ArticleIterator.java",
+      "sha256": "61e97f188a55095e68bfa0f253a48c6579fa918f7c94b87983aa7c888fed5eb2",
+      "upstream": "org/apache/commons/net/nntp/ArticleIterator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/nntp/ArticlePointer.java",
+      "sha256": "a6a0ceddd3f4ef1416a69cecdc18fcd7c7d4c7f93997b48d8f1f13bd5b2d8442",
+      "upstream": "org/apache/commons/net/nntp/ArticlePointer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/nntp/NNTP.java",
+      "sha256": "f04bbed10adc421afa080ed0e3c3882ad43e477f89ad5fa2dbbc867901652f5b",
+      "upstream": "org/apache/commons/net/nntp/NNTP.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/nntp/NNTPClient.java",
+      "sha256": "0b667c30980b20aac95ec30da7ea5c3e4ea6178ffa011c3b5e335a99c367122e",
+      "upstream": "org/apache/commons/net/nntp/NNTPClient.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/nntp/NNTPCommand.java",
+      "sha256": "e66fc5f4440bf86a50f43d151c184f7917fa48eb441f7064df3a4dec0d6f221f",
+      "upstream": "org/apache/commons/net/nntp/NNTPCommand.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/nntp/NNTPConnectionClosedException.java",
+      "sha256": "50b103dd145ec8c3a52221737641bdfc6b33c3cbbfaf135c9cee5380ce15522e",
+      "upstream": "org/apache/commons/net/nntp/NNTPConnectionClosedException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/nntp/NNTPReply.java",
+      "sha256": "b86f6d28115d3036edae50695cb00e4c8efc7fec8fe5c94737de1b34f2f1b13b",
+      "upstream": "org/apache/commons/net/nntp/NNTPReply.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/nntp/NewGroupsOrNewsQuery.java",
+      "sha256": "c7e438c3acc41737b1a69031ec2a130f8f2a17e14c22d19474958411b439ca7f",
+      "upstream": "org/apache/commons/net/nntp/NewGroupsOrNewsQuery.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/nntp/NewsgroupInfo.java",
+      "sha256": "69bb3936ca7e31acd37256d4f224da8b9022e8d661ce584d24472637711e7544",
+      "upstream": "org/apache/commons/net/nntp/NewsgroupInfo.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/nntp/NewsgroupIterator.java",
+      "sha256": "b6f5d0fe85ed4caab776053c0f109caf4d9348c23ab9522d0fb6a24a393d4da6",
+      "upstream": "org/apache/commons/net/nntp/NewsgroupIterator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/nntp/NntpThreadContainer.java",
+      "sha256": "4438215d3ba327f61558082ec7960d0251f1f12ce5a9db6fff8dd0dfeb843891",
+      "upstream": "org/apache/commons/net/nntp/NntpThreadContainer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/nntp/ReplyIterator.java",
+      "sha256": "82b3894f3c4b4cb4a17795e5d545637c5d2f98b59873e1391219b3165250ceee",
+      "upstream": "org/apache/commons/net/nntp/ReplyIterator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/nntp/SimpleNNTPHeader.java",
+      "sha256": "59c5e3ee878b2e65579897d6facf52120c9d7ad270f0b10cba782da67c943095",
+      "upstream": "org/apache/commons/net/nntp/SimpleNNTPHeader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/nntp/Threadable.java",
+      "sha256": "c20fecef367fe7ecb564c9635627ce44bca2a9a556103e58110b00920059d57a",
+      "upstream": "org/apache/commons/net/nntp/Threadable.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/nntp/Threader.java",
+      "sha256": "89f2eaa4c77945c2a80a09c67f28059f7b692442ddf1b4c9f5f1f7d95e956446",
+      "upstream": "org/apache/commons/net/nntp/Threader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/nntp/package-info.java",
+      "sha256": "4818961b702c9caafe5b68ace3825f2138785d6c125a13999b705e5c268b269a",
+      "upstream": "org/apache/commons/net/nntp/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ntp/NTPUDPClient.java",
+      "sha256": "3b7a7c20af4bc782db8f06d69d1b58603b1b129129a7d7ae77cfb5ae0853ad31",
+      "upstream": "org/apache/commons/net/ntp/NTPUDPClient.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ntp/NtpUtils.java",
+      "sha256": "1a9f4485cba18b1c967de8fb4aaa206c4b9534688f70094d05af3c3928d80c61",
+      "upstream": "org/apache/commons/net/ntp/NtpUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ntp/NtpV3Impl.java",
+      "sha256": "d1878aa0d945992dbd16868ca4ebe621f477a822fa64b45f5dbccbc7a04a9696",
+      "upstream": "org/apache/commons/net/ntp/NtpV3Impl.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ntp/NtpV3Packet.java",
+      "sha256": "e11626764daee1ce0d964451fa5f9072904645444dfdce895ce22aabc2bfaad8",
+      "upstream": "org/apache/commons/net/ntp/NtpV3Packet.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ntp/TimeInfo.java",
+      "sha256": "3f3aec97ea6c36cf21b354f5efc384b5096bc38dd9c1314a35c6dd07e8caebd7",
+      "upstream": "org/apache/commons/net/ntp/TimeInfo.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ntp/TimeStamp.java",
+      "sha256": "ae254e54c5d4dcc3377299209f0e0ee884b979454c9bb67b2f229b2e93d6cc8b",
+      "upstream": "org/apache/commons/net/ntp/TimeStamp.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/ntp/package-info.java",
+      "sha256": "dc124ffe7bc0c2850600b0ba4484810868acb05b3c430c9f8e7fc00535b3e0d3",
+      "upstream": "org/apache/commons/net/ntp/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/package-info.java",
+      "sha256": "0d0718b250d580a87368c433b1f0b963151a4fa576c9c4b19ac4bf40c0eebf16",
+      "upstream": "org/apache/commons/net/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/pop3/ExtendedPOP3Client.java",
+      "sha256": "443718e3a07bfe8bef43b1e55c6fb7f02512034ce644ec58ab7a6aff4e0e7aa0",
+      "upstream": "org/apache/commons/net/pop3/ExtendedPOP3Client.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/pop3/POP3.java",
+      "sha256": "4159bd49794e2c83efec5c1fc424a9b415c582533b49fcbe3e8a05567ab63a47",
+      "upstream": "org/apache/commons/net/pop3/POP3.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/pop3/POP3Client.java",
+      "sha256": "786bf14a4345327e84b2ef1e8a45b2882a500f3cc234026dd37a914ae1d25e95",
+      "upstream": "org/apache/commons/net/pop3/POP3Client.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/pop3/POP3Command.java",
+      "sha256": "42ff56d0c97530cdd230920369515c7975ad1b52be0abe53ce39b8e9d24ab366",
+      "upstream": "org/apache/commons/net/pop3/POP3Command.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/pop3/POP3MessageInfo.java",
+      "sha256": "333c3647e700d961cae58279c0a400c7fb81360f014dc7350b2be81b712c7208",
+      "upstream": "org/apache/commons/net/pop3/POP3MessageInfo.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/pop3/POP3Reply.java",
+      "sha256": "795e1c216b5181eed720ab7981e7286e746c9125d710181f5ca85812afea44e2",
+      "upstream": "org/apache/commons/net/pop3/POP3Reply.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/pop3/POP3SClient.java",
+      "sha256": "38e38f574922d5123a2c5384b33412c8dae1c683f6435d0828cb136d739b9c4f",
+      "upstream": "org/apache/commons/net/pop3/POP3SClient.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/pop3/package-info.java",
+      "sha256": "94db4bf9d6d5b7c1473a6e8097aefd7e298d79a5cadb909e3fda28e0cbf52197",
+      "upstream": "org/apache/commons/net/pop3/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/smtp/AuthenticatingSMTPClient.java",
+      "sha256": "145fbbd5c4e82b3fc1be8dff8b1292cd3b95edec8cd1b8bccb5b239e55650d11",
+      "upstream": "org/apache/commons/net/smtp/AuthenticatingSMTPClient.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/smtp/RelayPath.java",
+      "sha256": "16f14d2142ca756ea5f8ba7783949e650a04a59a2a353f29d905ea7a9dac74dd",
+      "upstream": "org/apache/commons/net/smtp/RelayPath.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/smtp/SMTP.java",
+      "sha256": "4269d4fabf00e4f00940f940ae99c8ca2510dc6f4673a7465d569859a248f684",
+      "upstream": "org/apache/commons/net/smtp/SMTP.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/smtp/SMTPClient.java",
+      "sha256": "d016ab5322c4b6fc3fb1d66da66ea21990c61e9498f043736d3bb7588ea3d5dc",
+      "upstream": "org/apache/commons/net/smtp/SMTPClient.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/smtp/SMTPCommand.java",
+      "sha256": "4e860f922cc90eaae224909eb1b0b1d1d4c8309a7c656d56c3b1962c0b8b84ef",
+      "upstream": "org/apache/commons/net/smtp/SMTPCommand.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/smtp/SMTPConnectionClosedException.java",
+      "sha256": "5ed745ef5c2ea775263a6914f8d07eea986f99a17da26eff0350357c4063fa8d",
+      "upstream": "org/apache/commons/net/smtp/SMTPConnectionClosedException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/smtp/SMTPReply.java",
+      "sha256": "e6c0ec582c2fd7253e1e223ad4eadd55a86a3fa9dc490713356b7f3abe896e92",
+      "upstream": "org/apache/commons/net/smtp/SMTPReply.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/smtp/SMTPSClient.java",
+      "sha256": "d5f014f7c7725b0d090b8f1f528b16f173ca0b4f733e501edc8c8c65e2c4229f",
+      "upstream": "org/apache/commons/net/smtp/SMTPSClient.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/smtp/SimpleSMTPHeader.java",
+      "sha256": "9035712a41565c1d81bb35928b74e2f30ddf26581bba2395dab189dbfa07156b",
+      "upstream": "org/apache/commons/net/smtp/SimpleSMTPHeader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/smtp/package-info.java",
+      "sha256": "7c4c3fc278033d7e4eda5901a53588c623dacbcd9e931a97c1bfc9dd41cffdf2",
+      "upstream": "org/apache/commons/net/smtp/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/telnet/EchoOptionHandler.java",
+      "sha256": "b6e4df657d57d3967607ab46f7def3b0ef0397a2006ec2cf32200604fde19e85",
+      "upstream": "org/apache/commons/net/telnet/EchoOptionHandler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/telnet/InvalidTelnetOptionException.java",
+      "sha256": "b81f639953b634a94bde54ef0078e85b0f1cf9737e529293d021f060f7a0d502",
+      "upstream": "org/apache/commons/net/telnet/InvalidTelnetOptionException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/telnet/SimpleOptionHandler.java",
+      "sha256": "a3680bca5e4f91e1edb691ef5477b197f1fa1f739682bdffad105eafd62bd329",
+      "upstream": "org/apache/commons/net/telnet/SimpleOptionHandler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/telnet/SuppressGAOptionHandler.java",
+      "sha256": "f2a76f97ece6f67af4325ef8618aec4e7d30f03d64d90f560a97d024b97e7e38",
+      "upstream": "org/apache/commons/net/telnet/SuppressGAOptionHandler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/telnet/Telnet.java",
+      "sha256": "c84a8d7a5c0d52a7aa63f06e3bb27fb37a5cbd50438039a9a80595a816065f4a",
+      "upstream": "org/apache/commons/net/telnet/Telnet.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/telnet/TelnetClient.java",
+      "sha256": "4772b4bce4d3b1514b7bda0f5e885c139bbd4e53a1765ea4d7ea98dce2758e41",
+      "upstream": "org/apache/commons/net/telnet/TelnetClient.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/telnet/TelnetCommand.java",
+      "sha256": "a97064e8ad70be32027e6e71d335a4495f67fbb0b9062c21a5cc264dcc7a2a90",
+      "upstream": "org/apache/commons/net/telnet/TelnetCommand.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/telnet/TelnetInputListener.java",
+      "sha256": "9b4ec88056978ccdcd3fbf235e1c46929f25e6bfbb391cb50d27f610f87d0f08",
+      "upstream": "org/apache/commons/net/telnet/TelnetInputListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/telnet/TelnetInputStream.java",
+      "sha256": "f9094c638446f7a4d0233707f965d81775d3ab0e0e22ed3e521547b7d98ccf53",
+      "upstream": "org/apache/commons/net/telnet/TelnetInputStream.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/telnet/TelnetNotificationHandler.java",
+      "sha256": "d9ae9803d25a360d0b0f350f9f17cdd5fdf591d96b3b06e625f7afe0543a52c7",
+      "upstream": "org/apache/commons/net/telnet/TelnetNotificationHandler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/telnet/TelnetOption.java",
+      "sha256": "97bd920a61b6277e05ea7717e4e24b7c26dc7c22c341f40a8065b802af7a6e8d",
+      "upstream": "org/apache/commons/net/telnet/TelnetOption.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/telnet/TelnetOptionHandler.java",
+      "sha256": "5e08f742d922ad19565de2357022b27c79f69f62751e6845221f3d1de309f7da",
+      "upstream": "org/apache/commons/net/telnet/TelnetOptionHandler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/telnet/TelnetOutputStream.java",
+      "sha256": "cd0aa8e84bc4ebc68c5cddf2a59077ac4c1c16a1abf3d02ea2ddd543a2a42aa6",
+      "upstream": "org/apache/commons/net/telnet/TelnetOutputStream.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/telnet/TerminalTypeOptionHandler.java",
+      "sha256": "5d99a6032e57ff543c92668050ed7692d71fcd0c59f25bcfb4bce1ca102feadd",
+      "upstream": "org/apache/commons/net/telnet/TerminalTypeOptionHandler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/telnet/WindowSizeOptionHandler.java",
+      "sha256": "82bc75627f2fe4c795f50474827fcd37027c7433ea7fc2ade67a0364b6009cc6",
+      "upstream": "org/apache/commons/net/telnet/WindowSizeOptionHandler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/telnet/package-info.java",
+      "sha256": "721b50b8e476b1aa8d7be892cb9c52dfb9603fc10a7605eef222a85fe9d0d609",
+      "upstream": "org/apache/commons/net/telnet/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/tftp/TFTP.java",
+      "sha256": "f2a10d5c4bc34857cfa8ddc63e8dd10183d86208c515fd60cb980e62829de2b6",
+      "upstream": "org/apache/commons/net/tftp/TFTP.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/tftp/TFTPAckPacket.java",
+      "sha256": "2c66c8e550dd9f1c9959b5508a5be000a9be434d2bb59b5b0e1d412de8dfdba9",
+      "upstream": "org/apache/commons/net/tftp/TFTPAckPacket.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/tftp/TFTPClient.java",
+      "sha256": "74f30f786a8c631930c81bdbaaf3de22232a6b5ee72b75eebc6cd78b989259ea",
+      "upstream": "org/apache/commons/net/tftp/TFTPClient.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/tftp/TFTPDataPacket.java",
+      "sha256": "ede9a88db0270f790f723107a07907e92b53fe46f59923a2f2fc89a9e6bb3fcd",
+      "upstream": "org/apache/commons/net/tftp/TFTPDataPacket.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/tftp/TFTPErrorPacket.java",
+      "sha256": "7c00da08a0d18d8669612e25eb3ccf9e9e0a8e7c76d2728b0485a4d9a8bf6c98",
+      "upstream": "org/apache/commons/net/tftp/TFTPErrorPacket.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/tftp/TFTPPacket.java",
+      "sha256": "20bcc66fb1fe0b56bdf60358ffad99c1ade1f5c8b7d1016c036fc9936572b233",
+      "upstream": "org/apache/commons/net/tftp/TFTPPacket.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/tftp/TFTPPacketException.java",
+      "sha256": "9c12ea877af46034a341de1781e4cc61bbd46c130504e9eac8940d9cf1658abf",
+      "upstream": "org/apache/commons/net/tftp/TFTPPacketException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/tftp/TFTPReadRequestPacket.java",
+      "sha256": "95292b7785e4d1efb8608f4a9a0bcd92c0d322c1c8398674f95229c42c5711b4",
+      "upstream": "org/apache/commons/net/tftp/TFTPReadRequestPacket.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/tftp/TFTPRequestPacket.java",
+      "sha256": "2cb580f669ccd04c3e2404130c57b6ca6977320e69e342e602af90f0cf80f795",
+      "upstream": "org/apache/commons/net/tftp/TFTPRequestPacket.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/tftp/TFTPWriteRequestPacket.java",
+      "sha256": "9de52ac534539cb8a65b4f93aa0887ed9c3feaedb15a003053dd7c01f1410f95",
+      "upstream": "org/apache/commons/net/tftp/TFTPWriteRequestPacket.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/tftp/package-info.java",
+      "sha256": "43e85d5d4944c34d72570625f1b4790a55980982c397d8f1750b6528204f0f83",
+      "upstream": "org/apache/commons/net/tftp/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/time/TimeTCPClient.java",
+      "sha256": "4d9c63ba569b18c921e5cefd22393325318dba67a80f65cd438e877d3e0a7dab",
+      "upstream": "org/apache/commons/net/time/TimeTCPClient.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/time/TimeUDPClient.java",
+      "sha256": "e91cbb89ec7af8acfbb5ec867933966b56c31ea69b2513dd8d96afdb48eb7851",
+      "upstream": "org/apache/commons/net/time/TimeUDPClient.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/time/package-info.java",
+      "sha256": "c76bf56ee0f2b5215a091207896bd0c8e446acdecca3ec7bbe74157ddf84c4af",
+      "upstream": "org/apache/commons/net/time/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/util/Base64.java",
+      "sha256": "0dce1f46d48e610f27df71e181586e53389ab7a51e526fc6b61463ce13dbee7c",
+      "upstream": "org/apache/commons/net/util/Base64.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/util/Charsets.java",
+      "sha256": "fd39504d0b53be4a707a2321ce69f02933064f29446893dd8f8982ab4979f7d7",
+      "upstream": "org/apache/commons/net/util/Charsets.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/util/KeyManagerUtils.java",
+      "sha256": "62fb2e5ed17387adfebedda9f08c39b96711dbe448c253ca384632bdd8f3e9f2",
+      "upstream": "org/apache/commons/net/util/KeyManagerUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/util/ListenerList.java",
+      "sha256": "3b3b52b64acdd9b5e07e3776de4e80ce363ccd8692eac8ba13b42b326a196297",
+      "upstream": "org/apache/commons/net/util/ListenerList.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/util/NetConstants.java",
+      "sha256": "213bd4ed93db5c47dc0e16f2c97e23ce2a1babfc80b392cd6b2872bcc2ea60ea",
+      "upstream": "org/apache/commons/net/util/NetConstants.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/util/SSLContextUtils.java",
+      "sha256": "25133dfc71914c67f083daa11ecf17a16660acf9dc1b0d0ede5cefcc3097e6c9",
+      "upstream": "org/apache/commons/net/util/SSLContextUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/util/SSLSocketUtils.java",
+      "sha256": "d6c3e65f5f0737bcebf88d1ff7704622184f140c2ca77211cb260a662a1d4ba0",
+      "upstream": "org/apache/commons/net/util/SSLSocketUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/util/SubnetUtils.java",
+      "sha256": "110f897073ad3cdf7c26b7e2ae76d0fcfc9acc80f25f1c5e20cfe00f7dfa7c2a",
+      "upstream": "org/apache/commons/net/util/SubnetUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/util/TrustManagerUtils.java",
+      "sha256": "a484a41d8ebbb876c1b8770d40283dd8db9bd6acbf4de1643f4d88ba2ab4a50b",
+      "upstream": "org/apache/commons/net/util/TrustManagerUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/util/package-info.java",
+      "sha256": "e54d68e16bdfc17ec311ec3b59c3f993f736a62934ec1432c9d6e125e72a11af",
+      "upstream": "org/apache/commons/net/util/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/whois/WhoisClient.java",
+      "sha256": "530307c2a88c53ce8f8596f9ffa19404cb88a7b2a3f80fadf0daada8fc6f9ef3",
+      "upstream": "org/apache/commons/net/whois/WhoisClient.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-net/src/main/java/org/apache/commons/net/whois/package-info.java",
+      "sha256": "88b85488985a21b6df0bcbd589e893d8903d92db36ab20abc094b126ddf6184f",
+      "upstream": "org/apache/commons/net/whois/package-info.java"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/commons-net/SOURCES_MANIFEST.tsv",
+      "sha256": "845b5b898ef3d9ce57e220f8218d417ab9af8eaac3b0870589fdbfa97eaed3dd",
+      "upstream": "(inventory)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/commons-net/LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "upstream": "META-INF/LICENSE.txt"
+    },
+    {
+      "kind": "descriptor-from-published-jar",
+      "published_jar": "commons-net:commons-net:3.11.1 (sha256 3bb861274992dba5487de328303745b7085de72694b63a3300be1e057144311e)",
+      "repository": "m3/vendor/third_party/commons-net/src/main/descriptor/9/module-info.java",
+      "sha256": "ebfa5fb49936a42c7ba33ce0311dc3223d363c93fbcc7d1056ac3e599fd45627",
+      "upstream": "META-INF/versions/9/module-info.class"
+    }
+  ],
+  "group": "commons-net",
+  "kind": "MODULE",
+  "license": "Apache License, Version 2.0 (from the license text; pom declares none)",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
+  "native_binaries": 0,
+  "parent": "org.apache.commons:commons-parent:70",
+  "pom": "https://repo.maven.apache.org/maven2/commons-net/commons-net/3.11.1/commons-net-3.11.1.pom",
+  "receipt": {
+    "buildRoot": "b4f77f484fc637b1355fa07ffd4c6893acdc0109f1ee603e946aef90f62e7e53",
+    "distributionSha256": "047cf294f916a2a27aafbc25ef590275e5939c9f13fc7f384e57f577d6fa28ac",
+    "lock": "33ab049867c1c736c65dececbbb9f9d42697fd3336cf178946c3c43ba55336ff",
+    "message": "",
+    "sourceRoot": "e2ad2c65ae95a91ac6c7c39aa7a5d645e905334c2c61f7c0391ad2b2b87512e6",
+    "status": "PASS"
+  },
+  "resources_completed": 0,
+  "sources_jar": "https://repo.maven.apache.org/maven2/commons-net/commons-net/3.11.1/commons-net-3.11.1-sources.jar",
+  "sources_jar_sha1": "96cfb848abe8352c3f29a7c39d93c07ada1be08d",
+  "sources_jar_sha256": "53ea2b764e4e7676bbac372128f72cbb69ee0e79a68975260c9065565b4a2f80",
+  "status": "PASS",
+  "upstream": "https://gitbox.apache.org/repos/asf/commons-net",
+  "version": "3.11.1"
+}

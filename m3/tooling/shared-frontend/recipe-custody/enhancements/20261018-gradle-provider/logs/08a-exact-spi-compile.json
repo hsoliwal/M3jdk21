@@ -1,0 +1,23 @@
+{
+  "label": "08a-exact-spi-compile",
+  "command": [
+    "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/javac",
+    "--release",
+    "21",
+    "-Xlint:all",
+    "-Werror",
+    "-implicit:none",
+    "-cp",
+    "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/maven-cache/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar",
+    "-d",
+    "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/proof-inputs/gradle-spi-classes",
+    "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/proof-inputs/gradle/org/gradle/api/internal/tasks/compile/M3JavacASTProvider.java"
+  ],
+  "cwd": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work",
+  "jdk": "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1",
+  "previous": "07-product-lint",
+  "started_utc": "2026-10-18T12:56:01.003241+00:00",
+  "finished_utc": "2026-10-18T12:56:01.813941+00:00",
+  "exit_code": 0,
+  "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

@@ -1,0 +1,10 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.xml.format.NormalizeTabsOrSpaces"
+contributors:
+- name: "Jonathan Schnéider"
+  email: "jkschneider@gmail.com"
+  lineCount: 51
+- name: "Sam Snyder"
+  email: "sam@moderne.io"
+  lineCount: 1

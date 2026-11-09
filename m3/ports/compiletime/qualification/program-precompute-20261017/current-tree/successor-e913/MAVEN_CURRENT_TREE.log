@@ -1,0 +1,25 @@
+Picked up JAVA_TOOL_OPTIONS: -XX:ActiveProcessorCount=2
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --< com.synexia.verification:m3-program-precompute-provenance-recipe-proof >--
+[INFO] Building m3-program-precompute-provenance-recipe-proof 1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- exec:3.5.0:exec (verify-current-tree) @ m3-program-precompute-provenance-recipe-proof ---
+sdk-post-admission-0 PASS
+java-version PASS
+receiving-head PASS
+receiving-source-tree PASS
+current-vendored-asm PASS
+strict-current-port-and-tests PASS
+current-port-junit PASS
+current-ast-leaf-selftest PASS
+receiving-head-after PASS
+CURRENT_RECEIVING_TREE_PASS family=compiletime sources=146
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  7.339 s
+[INFO] Finished at: 2026-10-17T07:21:26-06:00
+[INFO] ------------------------------------------------------------------------

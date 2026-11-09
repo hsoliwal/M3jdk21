@@ -1,0 +1,18 @@
+{
+  "request": {
+    "repository_full_name": "hsoliwal/M3jdk21",
+    "blob_sha": "3027859a0454b5905780c250b13c34fa075fad03"
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": ".github/workflows/m3jdk-proof.yml\tABSENT\tad4fa143d9ffa9fa769d9651772bbf48eaa6bc77bd4b4d0ffdcdf40215a6228b\tworkflow.yml.txt\n"
+    },
+    "isError": false
+  }
+}

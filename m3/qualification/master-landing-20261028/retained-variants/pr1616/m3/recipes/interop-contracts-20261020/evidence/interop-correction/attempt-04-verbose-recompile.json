@@ -1,0 +1,39 @@
+{
+  "command": [
+    "/tmp/m3jdk21-toolchain-20261020/apache-maven-3.9.9/bin/mvn",
+    "-o",
+    "-B",
+    "-ntp",
+    "-Dmaven.repo.local=/tmp/m3jdk21-toolchain-20261020/m2",
+    "-Dmaven.compiler.verbose=true",
+    "clean",
+    "test-compile"
+  ],
+  "start_time_ns": 1792506284869517170,
+  "before": {
+    "M3FiveLibraryArrayificationTest": "2144a65349ce395a48f6a3bad490ee7a6827f358fbf2e152d5898f999c5e7674",
+    "M3GuavaListMultimapContract": "59afee8356d265bb72ac13d2bd07226f2e595b93921410e4c0081c91115ae627",
+    "M3SpringArrayContractTest": "74afae4b24ff025d75ff7400c0f1dd4d2be7fad25f31fa1a3ef946b84e3d0afa"
+  },
+  "exit": 0,
+  "end_time_ns": 1792506290708811617,
+  "after": {
+    "M3FiveLibraryArrayificationTest": "2144a65349ce395a48f6a3bad490ee7a6827f358fbf2e152d5898f999c5e7674",
+    "M3GuavaListMultimapContract": "59afee8356d265bb72ac13d2bd07226f2e595b93921410e4c0081c91115ae627",
+    "M3SpringArrayContractTest": "74afae4b24ff025d75ff7400c0f1dd4d2be7fad25f31fa1a3ef946b84e3d0afa"
+  },
+  "classes": {
+    "M3FiveLibraryArrayificationTest": {
+      "mtime_ns": 1792506289591762419,
+      "sha256": "fd2ec4d1fb22cf8a63d4db54248b55cb2198a60965413bbf46cdd35f58673722"
+    },
+    "M3GuavaListMultimapContract": {
+      "mtime_ns": 1792506290135776454,
+      "sha256": "2dc1d38023237e1c208e19ad9220fd1baef68bea21a1086c13d18fedc34be32f"
+    },
+    "M3SpringArrayContractTest": {
+      "mtime_ns": 1792506290623789045,
+      "sha256": "4de262c00a81a437a93a199bf8373b653f72ac470cca83ddd8f1380f008e3d07"
+    }
+  }
+}

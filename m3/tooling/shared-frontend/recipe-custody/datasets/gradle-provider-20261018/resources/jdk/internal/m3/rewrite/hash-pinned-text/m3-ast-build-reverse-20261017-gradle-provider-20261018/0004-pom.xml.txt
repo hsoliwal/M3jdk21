@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2026 Hitesh Soliwal and contributors; SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.m3jdk.tooling</groupId>
+  <artifactId>m3-gradle-ast-provider</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <name>M3 Gradle original-compiler provider</name>
+  <description>Optional provider for the existing Gradle M3JavacASTProvider SPI and public M3AST compiler session.</description>
+  <licenses><license><name>Apache License, Version 2.0</name><url>https://www.apache.org/licenses/LICENSE-2.0</url></license></licenses>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>21</maven.compiler.source>
+    <maven.compiler.target>21</maven.compiler.target>
+    <m3.test.vm.args></m3.test.vm.args>
+    <m3.gradle.worker.jar>${env.M3_GRADLE_WORKER_JAR}</m3.gradle.worker.jar>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>org.gradle</groupId><artifactId>gradle-java-compiler-worker</artifactId>
+      <version>419a77cf61af3924f60678510ed2440230047671</version>
+      <scope>system</scope><systemPath>${m3.gradle.worker.jar}</systemPath>
+    </dependency>
+    <dependency><groupId>org.jspecify</groupId><artifactId>jspecify</artifactId><version>1.0.0</version><scope>provided</scope></dependency>
+    <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2</version><scope>test</scope></dependency>
+  </dependencies>
+  <build>
+    <testResources><testResource><directory>src/test/resources</directory><excludes>
+      <exclude>META-INF/services/com.sun.source.util.Plugin</exclude>
+    </excludes></testResource></testResources>
+    <plugins>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-resources-plugin</artifactId><version>3.3.1</version>
+        <executions><execution><id>compiled-test-plugin-service</id><phase>process-test-classes</phase><goals><goal>copy-resources</goal></goals>
+          <configuration><outputDirectory>${project.build.testOutputDirectory}</outputDirectory><resources><resource>
+            <directory>src/test/resources</directory><includes><include>META-INF/services/com.sun.source.util.Plugin</include></includes>
+          </resource></resources></configuration>
+        </execution></executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version>
+        <configuration><compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs></configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version>
+        <configuration>
+          <failIfNoTests>true</failIfNoTests><argLine>${m3.test.vm.args}</argLine>
+          <systemPropertyVariables>
+            <m3.gradle.provider.output>${project.build.directory}/provider-proof</m3.gradle.provider.output>
+            <m3.gradle.provider.classpath>${project.build.testOutputDirectory}${path.separator}${project.build.outputDirectory}${path.separator}${m3.gradle.worker.jar}</m3.gradle.provider.classpath>
+          </systemPropertyVariables>
+        </configuration>
+      </plugin>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jar-plugin</artifactId><version>3.4.1</version></plugin>
+    </plugins>
+  </build>
+  <profiles>
+    <profile>
+      <id>patched-compiler</id>
+      <activation><property><name>m3.compiler.patch</name></property></activation>
+      <properties><m3.test.vm.args>--patch-module jdk.compiler=${m3.compiler.patch}</m3.test.vm.args></properties>
+      <build><plugins><plugin>
+        <groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId>
+        <configuration><compilerArgs combine.children="append"><arg>--patch-module=jdk.compiler=${m3.compiler.patch}</arg></compilerArgs></configuration>
+      </plugin></plugins></build>
+    </profile>
+  </profiles>
+</project>

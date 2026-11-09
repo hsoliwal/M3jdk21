@@ -1,0 +1,20 @@
+{
+  "command": [
+    "dpkg-deb",
+    "-x",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/native/libsqlite3-dev_3.45.1-1ubuntu2_amd64.deb",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/native/deps"
+  ],
+  "exit_code": 0,
+  "header": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/native/deps/usr/include/sqlite3.h",
+  "header_sha256": "9bc10b653f5125a93dda7212c569607d837b1208b1a197a04d9e1a58f8f76489",
+  "installed_runtime": {
+    "package": "libsqlite3-0",
+    "path": "/usr/lib/x86_64-linux-gnu/libsqlite3.so.0.8.6",
+    "sha256": "eac351cf84d688d1f9235e6165bd57555b31a491cd2f65e0dca67daa69036370",
+    "version": "3.45.1-1ubuntu2.5"
+  },
+  "package_sha256": "d23577c43936fedd8c4fa1337a6e960a6e71e94ac164d7a15c46ea96bf21265d",
+  "qualification": "Header and runtime have upstream API version 3.45.1; Ubuntu package revisions differ and are recorded separately.",
+  "sqlite_version": "3.45.1"
+}

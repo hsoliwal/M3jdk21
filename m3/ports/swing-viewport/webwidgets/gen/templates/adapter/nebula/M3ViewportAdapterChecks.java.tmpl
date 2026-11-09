@@ -1,0 +1,230 @@
+package @WPKG@.adapter;
+
+import static @PKG@.M3WebChecks.check;
+
+import java.util.Arrays;
+import java.util.function.BiFunction;
+import java.util.function.Supplier;
+
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Rectangle;
+import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Dialog;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.ScrollBar;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Tray;
+import org.junit.Assume;
+
+/**
+ * Contract of every viewport adapter (pattern M3P-ADAPTER-1), run under a Display on the hidden test desktop:
+ * off == stock (an unattached and a detached adapter leave the host's listeners and state exactly as a fresh stock
+ * instance), opt-in attach, R resident window bounded by the viewport also for a million logical items, G logical
+ * extent beyond the int range and the thumb projection, D damage-only redraw of one shown item, P plane moves that
+ * damage only the old and new plane bounds, scroll bar and dispose routing.
+ */
+public final class M3ViewportAdapterChecks {
+	private static final int TYPES = 64;
+
+	private M3ViewportAdapterChecks() {
+	}
+
+	/** An open shell on the default display. */
+	public static Shell shell() {
+		Shell shell = new Shell(Display.getDefault());
+		shell.setBounds(0, 0, 400, 560);
+		shell.open();
+		return shell;
+	}
+
+	/** A 360 x 240 fill-layout panel for one widget. */
+	public static Composite panel(Shell shell) {
+		Composite p = new Composite(shell, SWT.NONE);
+		p.setLayout(new FillLayout());
+		p.setBounds(0, 0, 360, 240);
+		return p;
+	}
+
+	/** Runs the contract on an adapter made twice: one stays stock (never attached), one is adapted. */
+	public static void run(Supplier<M3ViewportAdapter> make, int aspects) {
+		M3ViewportAdapter stock = make.get(), a = make.get();
+		settle(stock);
+		settle(a);
+		int[] before = fingerprint(a.host());
+		check(Arrays.equals(before, fingerprint(stock.host())), "off == stock: an unattached adapter installs nothing");
+		check(!a.isAttached() && !a.itemChanged(0) && !a.movePlane(1, 1, 5, 5) && a.scrolled() == 0 && a.redraws() == 0, "off: no redraw");
+		check(a.aspects() == aspects && a.widget() != null, "declared aspects");
+		check(a.attach() && !a.attach() && a.isAttached(), "opt-in attach, once");
+		resident(a);
+		geometry(a);
+		damage(a);
+		planes(a);
+		routing(a);
+		a.detach();
+		a.detach();
+		check(Arrays.equals(before, fingerprint(a.host())) && !a.itemChanged(0), "detached == stock");
+		disposal(a);
+	}
+
+	private static void settle(M3ViewportAdapter a) {
+		a.host().getParent().layout(true, true);
+		spin(a.host().getDisplay(), 40);
+	}
+
+	/** Listener counts per event type of the host and its vertical bar, plus bounds, visibility and enablement. */
+	static int[] fingerprint(Control c) {
+		int[] f = new int[2 * TYPES + 6];
+		ScrollBar bar = M3ViewportKind.bar(c);
+		for (int t = 0; t < TYPES; t++) {
+			f[t] = c.getListeners(t).length;
+			f[TYPES + t] = bar == null ? -1 : bar.getListeners(t).length;
+		}
+		Rectangle b = c.getBounds();
+		int k = 2 * TYPES;
+		f[k] = b.x;
+		f[k + 1] = b.y;
+		f[k + 2] = b.width;
+		f[k + 3] = b.height;
+		f[k + 4] = c.isVisible() ? 1 : 0;
+		f[k + 5] = c.isEnabled() ? 1 : 0;
+		return f;
+	}
+
+	/** R: the resident window is the visible window plus overscan, also for a million logical items. */
+	static void resident(M3ViewportAdapter a) {
+		if ((a.aspects() & M3ViewportAdapter.R) == 0) {
+			return;
+		}
+		int[] w = new int[4];
+		a.resident(w);
+		int visible = w[1] - w[0], bound = visible + 2 * M3ViewportAdapter.OVERSCAN;
+		check(w[0] >= 0 && w[1] <= a.count() && w[2] <= w[0] && w[3] >= w[1] && a.residentCount() <= bound, "resident window " + Arrays.toString(w));
+		a.setLogical(1_000_000, 24);
+		check(a.residentCount() <= bound && a.count() == 1_000_000, "a million logical items keep the resident window");
+		a.setLogical(-1, 0);
+	}
+
+	/** G: logical extent beyond int for large virtual hosts; the thumb stays inside the track. */
+	static void geometry(M3ViewportAdapter a) {
+		if ((a.aspects() & M3ViewportAdapter.G) == 0) {
+			return;
+		}
+		a.setLogical(1_000_000, 4096);
+		int[] t = new int[2];
+		a.thumb(200, t);
+		check(a.extent() == 4_096_000_000L && t[0] >= 0 && t[1] >= 1 && t[0] + t[1] <= 200, "logical extent and thumb " + Arrays.toString(t));
+		a.setLogical(-1, 0);
+		check(a.extent() == a.count() * a.itemExtent(), "measured extent");
+	}
+
+	/** D: a shown item redraws only its bounds inside the client area (rows: less than the whole area). */
+	static void damage(M3ViewportAdapter a) {
+		if ((a.aspects() & M3ViewportAdapter.D) == 0) {
+			return;
+		}
+		int[] w = new int[4];
+		a.resident(w);
+		boolean drew = a.itemChanged(w[0]);
+		int[] r = a.lastRedraw();
+		Rectangle ca = M3ViewportKind.frame(a.host());
+		check(drew || a.count() == 0 || ca.isEmpty() || w[1] == w[0], "a shown item redraws");
+		check(!drew || (r[2] > 0 && r[3] > 0 && ca.union(new Rectangle(r[0], r[1], r[2], r[3])).equals(ca)), "damage inside the client area " + Arrays.toString(r));
+		check(!drew || !items(a) || w[1] - w[0] < 2 || (long) r[2] * r[3] < (long) ca.width * ca.height, "damage is the item, not the area " + Arrays.toString(r));
+		check(!a.itemChanged(-1), "an item that is not shown redraws nothing");
+	}
+
+	private static boolean items(M3ViewportAdapter a) {
+		M3ViewportMeasure m = a.measure();
+		return m != M3ViewportKind.SURFACE && m != M3ViewportKind.PLANE && m != M3ViewportKind.COMBO && m != M3ViewportKind.RANGE
+				&& (m != M3ViewportKind.AUTO || M3ViewportKind.of(a.host()) != M3ViewportKind.SURFACE);
+	}
+
+	/** P: a plane move damages its old and new bounds only. */
+	static void planes(M3ViewportAdapter a) {
+		if ((a.aspects() & M3ViewportAdapter.P) == 0) {
+			return;
+		}
+		check(a.movePlane(10, 10, 40, 20) && Arrays.equals(a.lastRedraw(), new int[] { 10, 10, 40, 20 }), "a new plane damages its bounds");
+		check(a.movePlane(17, 15, 40, 20) && Arrays.equals(a.lastRedraw(), new int[] { 10, 10, 47, 25 }), "a move damages old and new bounds only");
+		check(Arrays.equals(a.plane(), new int[] { 17, 15, 40, 20 }), "plane bounds");
+	}
+
+	/** Resize, scroll bar selection and the scroll mask reach the adapter only while attached. */
+	static void routing(M3ViewportAdapter a) {
+		Rectangle b = a.host().getBounds();
+		a.host().setSize(b.width, Math.max(1, b.height - 8));
+		a.host().setSize(b.width, b.height);
+		ScrollBar bar = M3ViewportKind.bar(a.host());
+		if (bar != null) {
+			bar.notifyListeners(SWT.Selection, new Event());
+		}
+		check(a.scrolled() == 0 && a.takeScrollMask() == 0 && a.takeScrollMask() == 0, "no move, no dirty plane");
+		check(a.measure().visible(a.widget(), a.host()) >= 0 && a.measure().viewport(a.widget(), a.host()) >= 0, "measure");
+	}
+
+	/** Disposing the host of an attached adapter detaches it. */
+	static void disposal(M3ViewportAdapter a) {
+		check(a.attach(), "re-attach");
+		a.host().dispose();
+		check(!a.isAttached() && !a.attach(), "a disposed host detaches and refuses attach");
+	}
+
+	/** A composite laid out by a GridLayout with children, handed to the layout factory. */
+	public static M3ViewportAdapter gridLayout(Shell shell, BiFunction<GridLayout, Composite, M3ViewportAdapter> factory) {
+		Composite host = new Composite(shell, SWT.NONE);
+		host.setBounds(0, 0, 360, 240);
+		GridLayout layout = new GridLayout(2, false);
+		host.setLayout(layout);
+		M3ViewportFills.children(host, false);
+		return factory.apply(layout, host);
+	}
+
+	/** An application dialog (not opened). */
+	public static Dialog dialog(Shell shell) {
+		return new Dialog(shell) {
+			@Override
+			protected void checkSubclass() {
+				// a test-local dialog
+			}
+		};
+	}
+
+	/** The system tray; the test is skipped where the platform has none. */
+	public static Tray tray(Shell shell) {
+		Tray tray = shell.getDisplay().getSystemTray();
+		Assume.assumeNotNull(tray);
+		return tray;
+	}
+
+	/** A class by name; the test is skipped (NOT_RUN) when the Nebula bundle is not on the test class path. */
+	public static Class<?> type(String name) {
+		try {
+			return Class.forName(name);
+		} catch (ClassNotFoundException e) {
+			Assume.assumeNoException("not on the test class path: " + name, e);
+			throw new IllegalStateException(e);
+		}
+	}
+
+	/** A Nebula control by name and (Composite, int) constructor; skipped when the bundle is absent. */
+	public static Control reflect(String name, Composite parent, int style) {
+		try {
+			return (Control) type(name).getConstructor(Composite.class, int.class).newInstance(parent, style);
+		} catch (ReflectiveOperationException e) {
+			throw new AssertionError("Nebula widgets have a (Composite, int) constructor: " + name, e);
+		}
+	}
+
+	static void spin(Display d, int ms) {
+		long end = System.currentTimeMillis() + ms;
+		while (System.currentTimeMillis() < end) {
+			if (!d.readAndDispatch()) {
+				Thread.onSpinWait();
+			}
+		}
+	}
+}

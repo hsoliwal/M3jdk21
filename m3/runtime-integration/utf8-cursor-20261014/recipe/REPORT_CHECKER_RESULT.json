@@ -1,0 +1,12 @@
+{
+  "schema": "M3_CPU_REPORT_CHECKER_EVIDENCE_V1",
+  "scope": "SELECTED_ACTUAL_REPORT_VALIDATOR_ONLY",
+  "unitSha256": "7f81ce6628afd8231e18d2ecfe44a912d0b9e747e5aacb7b1c09161d507476dd",
+  "validReportAccepted": 1,
+  "invalidReportsRefused": 13,
+  "fileWrites": 0,
+  "mavenSdk": "NOT_RUN",
+  "wholeVerifier": "NOT_RUN",
+  "receivingApplied": false,
+  "phaseAdvanced": false
+}

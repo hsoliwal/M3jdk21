@@ -1,0 +1,71 @@
+// SPDX-License-Identifier: Apache-2.0
+// Reviewed release-21 descriptor; original automatic-module exports/openness retained.
+open module org.locationtech.jts {
+    requires transitive java.desktop;
+    requires transitive java.xml;
+
+    exports org.locationtech.jts;
+    exports org.locationtech.jts.algorithm;
+    exports org.locationtech.jts.algorithm.construct;
+    exports org.locationtech.jts.algorithm.distance;
+    exports org.locationtech.jts.algorithm.hull;
+    exports org.locationtech.jts.algorithm.locate;
+    exports org.locationtech.jts.algorithm.match;
+    exports org.locationtech.jts.awt;
+    exports org.locationtech.jts.coverage;
+    exports org.locationtech.jts.densify;
+    exports org.locationtech.jts.dissolve;
+    exports org.locationtech.jts.edgegraph;
+    exports org.locationtech.jts.geom;
+    exports org.locationtech.jts.geom.impl;
+    exports org.locationtech.jts.geom.prep;
+    exports org.locationtech.jts.geom.util;
+    exports org.locationtech.jts.geomgraph;
+    exports org.locationtech.jts.geomgraph.index;
+    exports org.locationtech.jts.index;
+    exports org.locationtech.jts.index.bintree;
+    exports org.locationtech.jts.index.chain;
+    exports org.locationtech.jts.index.hprtree;
+    exports org.locationtech.jts.index.intervalrtree;
+    exports org.locationtech.jts.index.kdtree;
+    exports org.locationtech.jts.index.quadtree;
+    exports org.locationtech.jts.index.strtree;
+    exports org.locationtech.jts.index.sweepline;
+    exports org.locationtech.jts.io;
+    exports org.locationtech.jts.io.gml2;
+    exports org.locationtech.jts.io.kml;
+    exports org.locationtech.jts.linearref;
+    exports org.locationtech.jts.math;
+    exports org.locationtech.jts.noding;
+    exports org.locationtech.jts.noding.snap;
+    exports org.locationtech.jts.noding.snapround;
+    exports org.locationtech.jts.operation;
+    exports org.locationtech.jts.operation.buffer;
+    exports org.locationtech.jts.operation.buffer.validate;
+    exports org.locationtech.jts.operation.distance;
+    exports org.locationtech.jts.operation.distance3d;
+    exports org.locationtech.jts.operation.linemerge;
+    exports org.locationtech.jts.operation.overlay;
+    exports org.locationtech.jts.operation.overlay.snap;
+    exports org.locationtech.jts.operation.overlay.validate;
+    exports org.locationtech.jts.operation.overlayng;
+    exports org.locationtech.jts.operation.polygonize;
+    exports org.locationtech.jts.operation.predicate;
+    exports org.locationtech.jts.operation.relate;
+    exports org.locationtech.jts.operation.relateng;
+    exports org.locationtech.jts.operation.union;
+    exports org.locationtech.jts.operation.valid;
+    exports org.locationtech.jts.planargraph;
+    exports org.locationtech.jts.planargraph.algorithm;
+    exports org.locationtech.jts.precision;
+    exports org.locationtech.jts.shape;
+    exports org.locationtech.jts.shape.fractal;
+    exports org.locationtech.jts.shape.random;
+    exports org.locationtech.jts.simplify;
+    exports org.locationtech.jts.triangulate;
+    exports org.locationtech.jts.triangulate.polygon;
+    exports org.locationtech.jts.triangulate.quadedge;
+    exports org.locationtech.jts.triangulate.tri;
+    exports org.locationtech.jts.util;
+
+}

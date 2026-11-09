@@ -1,0 +1,12 @@
+gate	state	evidence
+EXACT_PREIMAGE	PASS	Original MFileStreams.java and owning JUnit before Git blobs
+EXACT_POSTIMAGE	PASS	Both target GitHub blobs equal canonical Synexia templates
+ORIGINAL_JAVA_API	PRESERVED	Six-argument transferRanges unchanged; seven-argument overload additive
+PROVIDER_AND_JNI	SOURCE_PRESERVED	Original MFileContent/VFS/SQLite JNI parent source untouched
+SCOPED_JAVA21_RANGE	PASS	4333 assertions on API-shape transfer algorithm, compressed ZIP fixture
+OWNING_JUNIT	TEST_DEFINED_NOT_RUN	720 seeded Java21 buffer cases in actual M3FS test file
+OPENREWRITE_MAVEN	NOT_RUN	Fixed point, source drift refusal and owning recipe crate tests
+FULL_M3FS_NATIVE	NOT_RUN	Actual native SQLite/C17/JNI and provider JUnit
+HOTSPOT_JTREG	NOT_RUN	Full M3JDK21 image, JMOD and jtreg
+CROSS_PLATFORM	NOT_RUN	Windows macOS Android and remote-provider lifecycle
+BENCHMARK	NOT_MEASURED	Repeat-call heap allocations, CPU wall clock, native memory

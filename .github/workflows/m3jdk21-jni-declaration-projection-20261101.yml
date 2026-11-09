@@ -1,0 +1,56 @@
+# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+name: M3JDK21 native JNI declaration projection Java21
+on:
+  pull_request:
+    paths:
+      - 'm3/tooling/atom-census/**'
+      - '.github/workflows/m3jdk21-jni-declaration-projection-20261101.yml'
+  push:
+    paths:
+      - 'm3/tooling/atom-census/**'
+      - '.github/workflows/m3jdk21-jni-declaration-projection-20261101.yml'
+permissions:
+  contents: read
+jobs:
+  java21-jni-declaration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Java21 strict compile and independent JNI source/header proof
+        shell: bash
+        run: bash m3/tooling/atom-census/verify-jni-projection.sh
+      - name: Genuine module JUnit tests with full original semantic tests
+        shell: bash
+        run: mvn -B -ntp -f m3/tooling/atom-census/pom.xml clean test
+      - name: Fail closed on absent or skipped JUnit XML
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+          root=Path('m3/tooling/atom-census/target/surefire-reports')
+          reports=sorted(root.glob('TEST-*.xml'))
+          if not reports: raise SystemExit('HOLD: missing JUnit XML results')
+          tests=0
+          for path in reports:
+              if path.is_symlink() or path.stat().st_size>2*1024*1024: raise SystemExit('HOLD: invalid JUnit XML')
+              blob=path.read_bytes()
+              if b'<!DOCTYPE' in blob.upper() or b'<!ENTITY' in blob.upper(): raise SystemExit('HOLD: XML entity')
+              suite=ET.fromstring(blob)
+              for key in ('failures','errors','skipped'):
+                  if int(suite.get(key,'-1'))!=0: raise SystemExit('HOLD: '+key)
+              cases=suite.findall('testcase')
+              if len(cases)!=int(suite.get('tests','-1')): raise SystemExit('HOLD: incomplete test count')
+              tests+=len(cases)
+          if tests<3: raise SystemExit('HOLD: missing required atom tests')
+          print('M3_JNI_JUNIT_PASS', tests)
+          PY
+      - name: Reference tool proof is not installed-image ABI qualification
+        run: echo 'HOLD_M3JDK21_SOURCE_BUILT_JNI_ABI_JIT_JTREG_JCK'

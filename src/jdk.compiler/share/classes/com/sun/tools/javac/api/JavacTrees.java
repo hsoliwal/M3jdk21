@@ -366,18 +366,32 @@ public class JavacTrees extends DocTrees {
         DocTree tree = path.getLeaf();
         if (tree instanceof DCReference dcReference) {
             JCTree qexpr = dcReference.qualifierExpression;
-            if (qexpr != null) {
+
+            // Forward references with explicit module names to getElement.
+            if (qexpr != null && dcReference.moduleName == null) {
+                Env<AttrContext> env = getAttrContext(path.getTreePath());
+                if (env == null) return null;
                 Log.DeferredDiagnosticHandler deferredDiagnosticHandler =
                         new Log.DeferredDiagnosticHandler(log);
+                JavaFileObject prevSource = log.useSource(env.toplevel.sourcefile);
                 try {
-                    Env<AttrContext> env = getAttrContext(path.getTreePath());
                     Type t = attr.attribType(dcReference.qualifierExpression, env);
                     if (t != null && !t.isErroneous()) {
+                        if (dcReference.memberName != null) {
+                            Symbol sym =
+                                    resolveMember(
+                                            t,
+                                            (Name) dcReference.memberName,
+                                            dcReference,
+                                            env);
+                            return sym == null ? null : sym.type;
+                        }
                         return t;
                     }
                 } catch (Abort e) { // may be thrown by Check.completionError in case of bad class file
                     return null;
                 } finally {
+                    log.useSource(prevSource);
                     log.popDiagnosticHandler(deferredDiagnosticHandler);
                 }
             }
@@ -400,14 +414,15 @@ public class JavacTrees extends DocTrees {
         }
         Log.DeferredDiagnosticHandler deferredDiagnosticHandler =
                 new Log.DeferredDiagnosticHandler(log);
+        JavaFileObject prevSource = log.useSource(env.toplevel.sourcefile);
         try {
             final TypeSymbol tsym;
             final Name memberName;
             final ModuleSymbol mdlsym;
 
             if (ref.moduleName != null) {
-                mdlsym = modules.modulesInitialized() ?
-                        modules.getObservableModule(names.fromString(ref.moduleName.toString()))
+                mdlsym = modules.modulesInitialized()
+                        ? modules.getObservableModule(names.fromString(ref.moduleName.toString()))
                         : null;
                 if (mdlsym == null) {
                     return null;
@@ -422,15 +437,18 @@ public class JavacTrees extends DocTrees {
                 tsym = env.enclClass.sym;
                 memberName = (Name) ref.memberName;
             } else {
-                // Check if qualifierExpression is a type or package, using the methods javac provides.
-                // If no module name is given we check if qualifierExpression identifies a type.
-                // If that fails or we have a module name, use that to resolve qualifierExpression to
-                // a package or type.
-                Type t = ref.moduleName == null ? attr.attribType(ref.qualifierExpression, env) : null;
+                // First try normal attribution even for explicit-module references. If the
+                // resulting type belongs to a different module, retry in the requested module.
+                Type t = attr.attribType(ref.qualifierExpression, env);
 
-                if (t == null || t.isErroneous()) {
-                    JCCompilationUnit toplevel =
-                        treeMaker.TopLevel(List.nil());
+                Symbol attributedElement = t == null ? null : t.asElement();
+                if (t == null
+                        || t.isErroneous()
+                        || (ref.moduleName != null
+                                && (attributedElement == null
+                                        || !mdlsym.equals(
+                                                elements.getModuleOf(attributedElement))))) {
+                    JCCompilationUnit toplevel = treeMaker.TopLevel(List.nil());
                     toplevel.modle = mdlsym;
                     toplevel.packge = mdlsym.unnamedPackage;
                     Symbol sym = attr.attribIdent(ref.qualifierExpression, toplevel);
@@ -444,21 +462,20 @@ public class JavacTrees extends DocTrees {
                     if ((sym.kind == PCK || sym.kind == TYP) && sym.exists()) {
                         tsym = (TypeSymbol) sym;
                         memberName = (Name) ref.memberName;
-                        if (sym.kind == PCK && memberName != null) {
-                            //cannot refer to a package "member"
-                            return null;
-                        }
                     } else {
-                        if (modules.modulesInitialized() && ref.moduleName == null && ref.memberName == null) {
-                            // package/type does not exist, check if there is a matching module
-                            ModuleSymbol moduleSymbol = modules.getObservableModule(names.fromString(ref.signature));
+                        if (modules.modulesInitialized()
+                                && ref.moduleName == null
+                                && ref.memberName == null) {
+                            ModuleSymbol moduleSymbol =
+                                    modules.getObservableModule(names.fromString(ref.signature));
                             if (moduleSymbol != null) {
                                 return moduleSymbol;
                             }
                         }
-                        if (ref.qualifierExpression.hasTag(JCTree.Tag.IDENT) && ref.moduleName == null
+                        if (ref.qualifierExpression.hasTag(JCTree.Tag.IDENT)
+                                && ref.moduleName == null
                                 && ref.memberName == null) {
-                            // fixup:  allow "identifier" instead of "#identifier"
+                            // fixup: allow "identifier" instead of "#identifier"
                             // for compatibility with javadoc
                             tsym = env.enclClass.sym;
                             memberName = ((JCIdent) ref.qualifierExpression).name;
@@ -467,61 +484,80 @@ public class JavacTrees extends DocTrees {
                         }
                     }
                 } else {
-                    Type e = t;
-                    // If this is an array type convert to element type
-                    while (e instanceof ArrayType arrayType)
-                        e = arrayType.elemtype;
-                    tsym = e.tsym;
+                    tsym = switch (t.getKind()) {
+                        case DECLARED, TYPEVAR, PACKAGE, MODULE -> t.tsym;
+                        default -> null;
+                    };
                     memberName = (Name) ref.memberName;
                 }
             }
 
-            if (memberName == null)
+            if (memberName == null) {
                 return tsym;
-
-            final List<Type> paramTypes;
-            if (ref.paramTypes == null)
-                paramTypes = null;
-            else {
-                ListBuffer<Type> lb = new ListBuffer<>();
-                for (List<JCTree> l = (List<JCTree>) ref.paramTypes; l.nonEmpty(); l = l.tail) {
-                    JCTree tree = l.head;
-                    Type t = attr.attribType(tree, env);
-                    lb.add(t);
-                }
-                paramTypes = lb.toList();
+            } else if (tsym == null) {
+                return null;
             }
 
-            ClassSymbol sym = (ClassSymbol) types.skipTypeVars(tsym.type, false).tsym;
-            Symbol msym = (memberName == sym.name)
-                    ? findConstructor(sym, paramTypes, true)
-                    : findMethod(sym, memberName, paramTypes, true);
-
-            if (msym == null) {
-                msym = (memberName == sym.name)
-                        ? findConstructor(sym, paramTypes, false)
-                        : findMethod(sym, memberName, paramTypes, false);
-            }
-
-            if (paramTypes != null) {
-                // explicit (possibly empty) arg list given, so cannot be a field
-                return msym;
-            }
-
-            VarSymbol vsym = (ref.paramTypes != null) ? null : findField(sym, memberName);
-            // prefer a field over a method with no parameters
-            if (vsym != null &&
-                    (msym == null ||
-                        types.isSubtypeUnchecked(vsym.enclClass().asType(), msym.enclClass().asType()))) {
-                return vsym;
-            } else {
-                return msym;
-            }
+            return resolveMember(tsym.type, memberName, ref, env);
         } catch (Abort e) { // may be thrown by Check.completionError in case of bad class file
             return null;
         } finally {
+            log.useSource(prevSource);
             log.popDiagnosticHandler(deferredDiagnosticHandler);
         }
+    }
+
+    private Symbol resolveMember(
+            Type type,
+            Name memberName,
+            DCReference ref,
+            Env<AttrContext> env) {
+        if (type.isPrimitive()
+                || type.getKind() == TypeKind.PACKAGE
+                || type.getKind() == TypeKind.MODULE) {
+            return null;
+        }
+
+        final List<Type> paramTypes;
+        if (ref.paramTypes == null) {
+            paramTypes = null;
+        } else {
+            ListBuffer<Type> lb = new ListBuffer<>();
+            for (List<JCTree> l = (List<JCTree>) ref.paramTypes; l.nonEmpty(); l = l.tail) {
+                JCTree tree = l.head;
+                Type t = attr.attribType(tree, env);
+                lb.add(t);
+            }
+            paramTypes = lb.toList();
+        }
+
+        ClassSymbol sym = (ClassSymbol) types.skipTypeVars(type, false).tsym;
+        Symbol msym =
+                (memberName == sym.name)
+                        ? findConstructor(sym, paramTypes, true)
+                        : findMethod(sym, memberName, paramTypes, true);
+
+        if (msym == null) {
+            msym =
+                    (memberName == sym.name)
+                            ? findConstructor(sym, paramTypes, false)
+                            : findMethod(sym, memberName, paramTypes, false);
+        }
+
+        if (paramTypes != null) {
+            return msym;
+        }
+
+        VarSymbol vsym =
+                (ref.paramTypes != null) ? null : findField(sym, memberName);
+        if (vsym != null
+                && (msym == null
+                        || types.isSubtypeUnchecked(
+                                vsym.enclClass().asType(),
+                                msym.enclClass().asType()))) {
+            return vsym;
+        }
+        return msym;
     }
 
     private Symbol attributeParamIdentifier(TreePath path, DCParam paramTag) {

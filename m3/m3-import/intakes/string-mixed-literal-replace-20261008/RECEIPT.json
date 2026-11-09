@@ -1,0 +1,28 @@
+{
+  "schema": "m3-synexia-receiver-receipt-v1",
+  "source_repository": "hsoliwal/com.synexia",
+  "source_pr": 9852,
+  "source_branch": "m3/string-mixed-literal-replace-recipe-20261008",
+  "source_recipe": "com.synexia.rewrite.M3Jdk21StringMixedLiteralReplace",
+  "source_task_crate": "synexia-m3-recipe/task-crates/m3jdk21-string-mixed-literal-replace-20261008.yaml",
+  "donor_commit": "7cbab5e0423380dd096542eb2ed14d075e0b8028",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_branch": "m3/string-mixed-literal-replace-receiver-20261008",
+  "target_preimage_sha256": "f8d4fc5e0e35ef3c7a0c90250926c6254d5992fac1357901e5e3469982c86944",
+  "target_postimage_sha256": "9a0be5dbeb399eecefec9f0e890d7af7fbef7fdd6b92f624e632381e5cfb67bd",
+  "runtime_dependency_on_synexia": false,
+  "semantic_rules": [
+    "any M3 operand routes non-empty literal replacement through canonical M3",
+    "flat receiver may be transiently canonicalized without changing wrapper ownership",
+    "absent match preserves receiver identity",
+    "empty target routes through M3 when receiver or replacement is M3-backed",
+    "all-flat inputs retain stock JDK replacement paths"
+  ],
+  "verification": {
+    "source_checker": "m3/runtime-integration/check-m3string-mixed-literal-replace.py",
+    "jtreg": "test/jdk/java/lang/String/M3StringMixedLiteralReplaceTest.java",
+    "jdk_build": "NOT_RUN",
+    "jtreg_run": "NOT_RUN",
+    "synexia_maven_recipe_test": "NOT_RUN"
+  }
+}

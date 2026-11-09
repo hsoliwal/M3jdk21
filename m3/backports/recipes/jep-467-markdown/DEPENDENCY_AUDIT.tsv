@@ -1,0 +1,11 @@
+dependency_or_boundary	jdk21_state	jdk23_usage	m3_action
+JavaTokenizer doc-comment lexing	PRESENT	adds /// documentation comment recognition	ADAPT_JAVAC_ENGINE
+DocCommentParser	PRESENT	Markdown doc-tree parsing and transformation	ADAPT_JAVAC_ENGINE
+com.sun.source.doctree API	PRESENT_WITHOUT_MARKDOWN_ADDITIONS	new/extended public compiler tree API	LIBRARY_API_REVIEW
+javax.lang.model.util.Elements	PRESENT	new documentation-comment-kind/model behavior	LIBRARY_API_REVIEW
+jdk.javadoc standard doclet	PRESENT	renders Markdown doc comments	ADAPT_JAVADOC
+jdk.internal.md	ABSENT	new private vendored CommonMark parser module	ADD_PRIVATE_MODULE_WITH_LICENSE_PROVENANCE
+commonmark-java vendored source	ABSENT	private transformed source copy	LICENSE_AND_TRANSFORMATION_AUDIT
+build/module wiring	JDK21_BASELINE	new module/build edges	MULTI_MODULE_BUILD_REVIEW
+Java source grammar	UNCHANGED	/// recognized as documentation comment, not Java grammar production	NO_LANGUAGE_GRAMMAR_BACKPORT
+Java 21 target compatibility	REQUIRES_PROOF	new compiler/doc tooling on Java21 VM/classfile	BUILD_JAVAC_JAVADOC_AND_LANGTOOLS

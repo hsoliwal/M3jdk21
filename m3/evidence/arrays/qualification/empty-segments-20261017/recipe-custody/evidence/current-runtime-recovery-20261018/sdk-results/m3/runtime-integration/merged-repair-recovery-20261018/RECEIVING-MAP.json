@@ -1,0 +1,16 @@
+{
+  "schema": "M3_CURRENT_RUNTIME_DELIVERY_MAP_V1",
+  "dataset": "m3jdk21-runtime-restore-07ba",
+  "recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+  "baseline": "07ba6e383343d32c83cfdaf641387bbe72bf325d",
+  "restored_delivery": "86528a90079b89a50b51ef13da08e7e70d468cb4",
+  "scope": "27 original runtime repair targets; four separate current-delivery metadata files",
+  "owner": "Existing JDK/HotSpot/JNI owners and seven original canonical datasets",
+  "admission": "m3/runtime-integration/merged-repair-recovery-20261018/ADMISSION.json",
+  "catalogue": "m3/runtime-integration/merged-repair-recovery-20261018/CATALOGUE.tsv",
+  "current_catalogue_prefix_preserved": true,
+  "names_and_public_signatures": "UNCHANGED_BY_RESTORATION",
+  "Object_no_break": "HOLD_UNCHANGED",
+  "phase": "STRING_UNCHANGED",
+  "status": "PENDING_CURRENT_RECEIVING_AND_BUILD_SOURCE_IDENTITY"
+}

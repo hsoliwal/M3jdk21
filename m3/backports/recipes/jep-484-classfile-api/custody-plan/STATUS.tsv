@@ -1,0 +1,9 @@
+item	state	evidence	limit
+path_map	MERGED_SEALED	PR185 denominator 241/245/238/3/0/7	no semantic equivalence claim
+custody_planner	IMPLEMENTED	custody_plan.py	non-mutating
+custody_tests	AUTHORED	test_custody_plan.py	hosted execution pending
+current_tree_custody	PENDING_HOSTED	248 obligations	actual state counts pending
+product_source	NOT_APPLIED	-	no API promotion
+scope	LIBRARY_API	JEP484 final public SE API	opt-in only
+contract	EXPLICIT_CONTRACT_CHANGE	post-21 java.lang.classfile API	default Java21 remains sealed
+whole_jdk	INCOMPLETE	-	no completion claim

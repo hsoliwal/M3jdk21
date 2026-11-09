@@ -1,0 +1,2 @@
+trigger	observed	atom	guard	lesson	status
+review	M3ArrayList master trimToSize(boolean) would be lost by a wholesale #1614 source overwrite	M3ArrayList.trimToSize plus removeIf	M3ArrayListSupersetContract#existingTrimContract	Always replay source-sealed behavioral atoms from BOTH parents, never replace an older public API	CANDIDATE_HOSTED_GATE_PENDING

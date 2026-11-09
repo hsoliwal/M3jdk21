@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: Apache-2.0
+family	atom	contract	limit	status
+Search/index engines	M3SortedIntSet.lowerBound	Signed ascending immutable bounded lower-bound	2_000_000 per operand	SOURCE_SEALED_JAVA_CANDIDATE
+Set/algebra tools	M3SortedIntSet.intersection	Distinct sorted intersection (merge/gallop)	2_000_000 per operand	SOURCE_SEALED_JAVA_CANDIDATE
+Set/algebra tools	M3SortedIntSet.union	Sorted distinct union with exact output budget	2_000_000 result	SOURCE_SEALED_JAVA_CANDIDATE
+Set/algebra tools	M3SortedIntSet.difference	Sorted distinct set subtraction	2_000_000 per operand	SOURCE_SEALED_JAVA_CANDIDATE
+JNI/native	M3SortedIntSetNative.intersection	Explicit opt-in JNI parity with Java oracle	2_000_000 per operand	SOURCE_SEALED_C17_CANDIDATE_NO_TARGET_INTEGRATION

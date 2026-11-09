@@ -1,0 +1,3 @@
+# SPDX-License-Identifier: Apache-2.0
+# target	before_sha256	after_sha256	template
+m3/collections/src/main/java/jdk/m3/collections/M3CollectionSdk.java	e4f05110dd6aaebcfb4f6a6d45d1ff0d8f5b50cc154f6372337d09877b62e83f	f805ff3b86349480dd575840326eb015e5626b5eb4f0f61deccc73f83e9e1452	M3CollectionSdk.java.txt

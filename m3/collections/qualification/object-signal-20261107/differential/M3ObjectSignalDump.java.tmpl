@@ -1,0 +1,368 @@
+// Copyright 2026 Hitesh Soliwal and contributors
+// SPDX-License-Identifier: Apache-2.0
+package @PACKAGE@;
+
+@IMPORTS@
+import java.io.BufferedOutputStream;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.CancellationException;
+import java.util.function.BiFunction;
+
+/**
+ * Dump driver of the differential gate of recipe object-signal-20261107 (template: gen_dump.py writes the donor copy
+ * in the donor vocabulary and the relocated copy through the TYPE rows of RELOCATION_MAP.tsv; not a test).
+ *
+ * <p>Replays the same seeded random and edge rows, masks, flags, queries, projector inputs and bitmaps through one
+ * class set and prints every observable result as text: signal fields, the first-pass counters (total, after the
+ * bitwise planes, after the metadata, the two rejection counts, the survivor ratio bits), the exact-stage counters
+ * (checks, matches, checks avoided), the candidate and exact populations (cardinality and an FNV-1a digest of the
+ * ascending indices), the progress events, the refusals (exception class and message) and the cancellation point.
+ * No line prints a type name or an identity hash.</p>
+ *
+ * <p>usage: M3ObjectSignalDump [queries] [seed]</p>
+ */
+public final class M3ObjectSignalDump {
+    private static final int[] SIZES = {0, 1, 2, 63, 64, 65, 127, 128, 129, 255, 256, 257, 1000, 4096, 4097, 16449};
+    private static final long[] EDGE = {0L, -1L, 1L, 2L, Long.MIN_VALUE, Long.MAX_VALUE, 0x5555_5555_5555_5555L,
+        0xAAAA_AAAA_AAAA_AAAAL, 0xFFFF_0000_0000_0000L, 0x0000_0000_FFFF_FFFFL, 0x8000_0000_0000_0001L, 63L, 64L};
+    private static final String[] TEXTS = {"", "a", "dog", "dogma", "dogmatic", "hotdog", "d-o-g", "😀",
+        "\uD800", "\uDC00x", "\u0000￿", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"};
+    private static final ProjectionKind[] KINDS = ProjectionKind.values();
+    private static final BiFunction<byte[], ProgressMonitor, byte[]> BYTES = (bytes, monitor) -> bytes;
+
+    private final PrintStream out;
+    private final Random random;
+    private long lines;
+
+    private M3ObjectSignalDump(PrintStream out, long seed) {
+        this.out = out;
+        this.random = new Random(seed);
+    }
+
+    public static void main(String[] args) {
+        int queries = args.length > 0 ? Integer.parseInt(args[0]) : 20000;
+        long seed = args.length > 1 ? Long.parseLong(args[1]) : 20261107L;
+        PrintStream out = new PrintStream(new BufferedOutputStream(System.out, 1 << 16), false, StandardCharsets.UTF_8);
+        M3ObjectSignalDump dump = new M3ObjectSignalDump(out, seed);
+        dump.math();
+        dump.projectors();
+        dump.tables(queries);
+        dump.bitmaps();
+        dump.refusals();
+        dump.cancellation();
+        dump.line("END lines=" + dump.lines + " queries=" + queries + " seed=" + seed);
+        out.flush();
+    }
+
+    private void line(String text) {
+        lines++;
+        out.println(lines + " " + text);
+    }
+
+//@DONOR_BEGIN
+    private static <T> ImmutableCodec<T> codecOf(BiFunction<? super T, ? super ProgressMonitor, byte[]> encoder) {
+        return new ImmutableCodec<>() {
+            @Override public String typeName() { return "dump.bytes/v1"; }
+            @Override public byte[] encode(T value, ProgressMonitor monitor) { return encoder.apply(value, monitor); }
+            @Override public T decode(java.nio.ByteBuffer bytes, ProgressMonitor monitor) {
+                throw new UnsupportedOperationException();
+            }
+        };
+    }
+
+//@DONOR_END
+    private static String fields(ObjectSignal s) {
+        return s.kind().ordinal() + "," + s.domain() + "," + s.logicalLength() + "," + Long.toHexString(s.exactHash64())
+            + "," + Long.toHexString(s.featureBits()) + "," + Long.toHexString(s.rawIdentity()) + "," + s.flags()
+            + "," + s.hasLength() + s.hasHash() + s.hasIdentity();
+    }
+
+    private static String population(SignalBitmap bitmap) {
+        long[] digest = {0xcbf29ce484222325L};
+        bitmap.forEachIndex(index -> digest[0] = (digest[0] ^ index) * 0x100000001b3L);
+        return bitmap.size() + "/" + bitmap.cardinality() + "/" + bitmap.isEmpty() + "/" + Long.toHexString(digest[0]);
+    }
+
+    private long mask() {
+        return switch (random.nextInt(6)) {
+            case 0 -> EDGE[random.nextInt(EDGE.length)];
+            case 1 -> random.nextLong();
+            case 2 -> random.nextLong() & random.nextLong() & random.nextLong();
+            case 3 -> 1L << random.nextInt(64);
+            case 4 -> ~(1L << random.nextInt(64));
+            default -> random.nextLong() | random.nextLong();
+        };
+    }
+
+    private String text(int length) {
+        StringBuilder builder = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            builder.append(random.nextInt(5) == 0 ? (char) random.nextInt(0x10000) : (char) ('a' + random.nextInt(7)));
+        }
+        return builder.toString();
+    }
+
+    private byte[] bytes(int length) {
+        byte[] value = new byte[length];
+        random.nextBytes(value);
+        if (random.nextBoolean()) for (int i = 0; i < length; i++) value[i] &= 7;
+        return value;
+    }
+
+    // ---- 1: the math atoms over edge and random inputs -------------------------------------------------------------
+
+    private void math() {
+        for (long value : EDGE) mathLong(value);
+        for (int i = 0; i < 2000; i++) mathLong(random.nextLong());
+        for (String value : TEXTS) mathText(value);
+        for (int i = 0; i < 2000; i++) mathText(text(random.nextInt(48)));
+        byte[] all = new byte[256];
+        for (int i = 0; i < 256; i++) all[i] = (byte) i;
+        mathBytes(new byte[0]);
+        mathBytes(new byte[] {0});
+        mathBytes(new byte[] {(byte) 0xff});
+        mathBytes(all);
+        for (int i = 0; i < 2000; i++) mathBytes(bytes(random.nextInt(64)));
+    }
+
+    private void mathLong(long value) {
+        line("long " + Long.toHexString(value) + " mix64=" + Long.toHexString(SignalMath.mix64(value)) + " index="
+            + Long.toHexString(SignalMath.indexFeatures(value)));
+    }
+
+    private void mathText(String value) {
+        line("text " + value.length() + " hash=" + Long.toHexString(SignalMath.hashString(value)) + " features="
+            + Long.toHexString(SignalMath.stringFeatures(value)) + " builder="
+            + Long.toHexString(SignalMath.hashString(new StringBuilder(value))));
+    }
+
+    private void mathBytes(byte[] value) {
+        line("bytes " + value.length + " hash=" + Long.toHexString(SignalMath.hashBytes(value)) + " features="
+            + Long.toHexString(SignalMath.byteFeatures(value)));
+    }
+
+    // ---- 2: the kept projectors -------------------------------------------------------------------------------------
+
+    private void projectors() {
+        ObjectProjector<String> strings = ObjectProjectors.byString(value -> value);
+        ObjectProjector<String> customDomain = ObjectProjectors.byString(SignalDomains.CUSTOM_BASE + 3, value -> value);
+        ObjectProjector<Long> index = ObjectProjectors.byIndex(SignalDomains.CUSTOM_BASE + 5, Long::longValue);
+        ObjectProjector<Long> signal = ObjectProjectors.bySignal(SignalDomains.CUSTOM_BASE + 7, Long::longValue);
+        ObjectProjector<byte[]> canonical =
+            ObjectProjectors.byCanonicalBytes(SignalDomains.CANONICAL_BYTES, @ENCODER@(BYTES));
+        for (String value : TEXTS) {
+            line("byString " + fields(strings.project(value, ProgressMonitor.none())) + " "
+                + fields(customDomain.project(value, ProgressMonitor.none())));
+        }
+        for (long value : EDGE) {
+            line("byIndex " + fields(index.project(value, ProgressMonitor.none())) + " bySignal "
+                + fields(signal.project(value, ProgressMonitor.none())));
+        }
+        for (int i = 0; i < 1000; i++) {
+            long raw = random.nextLong();
+            byte[] value = bytes(random.nextInt(40));
+            line("projected " + fields(index.project(raw, ProgressMonitor.none())) + " "
+                + fields(signal.project(raw, ProgressMonitor.none())) + " "
+                + fields(canonical.project(value, ProgressMonitor.none())) + " "
+                + fields(strings.project(text(random.nextInt(20)), ProgressMonitor.none())));
+        }
+        line("domains " + SignalDomains.STRING + " " + SignalDomains.INDEX_STRING_BASE + " "
+            + SignalDomains.IMMUTABLE_ID_BASE + " " + SignalDomains.CANONICAL_BYTES + " " + SignalDomains.CUSTOM_BASE
+            + " kinds " + KINDS.length + " " + ProjectionKind.STRING.ordinal() + ProjectionKind.INDEX.ordinal()
+            + ProjectionKind.CANONICAL_BYTES.ordinal() + ProjectionKind.SIGNAL.ordinal());
+    }
+
+    // ---- 3: tables, queries, first-pass and exact counters ----------------------------------------------------------
+
+    private ObjectSignal row() {
+        int flags = random.nextInt(8);
+        int length = (flags & ObjectSignal.HAS_LENGTH) != 0 || random.nextBoolean() ? random.nextInt(12) : -1;
+        return new ObjectSignal(KINDS[random.nextInt(KINDS.length)], random.nextInt(4), length, random.nextInt(5),
+            mask(), random.nextInt(5), flags);
+    }
+
+    private SignalQuery query(List<ObjectSignal> rows) {
+        if (!rows.isEmpty() && random.nextInt(4) == 0) {
+            ObjectSignal target = rows.get(random.nextInt(rows.size()));
+            return random.nextBoolean() ? SignalQuery.exact(target) : SignalQuery.maybeContains(target);
+        }
+        long required = mask() & (random.nextBoolean() ? random.nextLong() : -1L);
+        long forbidden = mask() & ~required & (random.nextBoolean() ? random.nextLong() : -1L);
+        if (random.nextInt(5) == 0) {
+            return random.nextBoolean() ? SignalQuery.anyMask(required, forbidden)
+                : SignalQuery.mask(random.nextInt(4), required, forbidden);
+        }
+        int min = random.nextInt(3) == 0 ? SignalQuery.UNBOUNDED : random.nextInt(8);
+        int max = random.nextInt(3) == 0 ? SignalQuery.UNBOUNDED : Math.max(min, 0) + random.nextInt(8);
+        return new SignalQuery(random.nextInt(KINDS.length + 1) - 1, random.nextInt(5) - 1, min, max, required,
+            forbidden, random.nextInt(5), random.nextInt(5), random.nextInt(4));
+    }
+
+    private static String query(SignalQuery q) {
+        return q.kindOrdinal() + "," + q.domain() + "," + q.minLength() + "," + q.maxLength() + ","
+            + Long.toHexString(q.requiredBits()) + "," + Long.toHexString(q.forbiddenBits()) + ","
+            + Long.toHexString(q.exactHash64()) + "," + Long.toHexString(q.exactIdentity()) + "," + q.requirements();
+    }
+
+    private final class Recorder implements ProgressMonitor {
+        private long begun;
+        private long worked;
+        private long done;
+
+        @Override public void begin(String task, long totalWork) { begun += totalWork; }
+        @Override public void worked(long work) { worked += work; }
+        @Override public void done() { done++; }
+
+        String events() { return begun + "/" + worked + "/" + done; }
+    }
+
+    private void tables(int queries) {
+        int remaining = queries;
+        int table = 0;
+        while (remaining > 0) {
+            int size = random.nextInt(3) == 0 ? random.nextInt(300) : SIZES[random.nextInt(SIZES.length)];
+            List<ObjectSignal> rows = new ArrayList<>(size);
+            for (int i = 0; i < size; i++) rows.add(row());
+            Recorder recorder = new Recorder();
+            SignalTable signals = SignalTable.build(rows, ObjectProjectors.custom(s -> s), recorder);
+            long[] digest = {0xcbf29ce484222325L};
+            for (int i = 0; i < size; i++) {
+                digest[0] = (digest[0] ^ signals.featureBitsAt(i)) * 0x100000001b3L;
+                digest[0] = (digest[0] ^ fields(signals.signalAt(i)).hashCode()) * 0x100000001b3L;
+            }
+            line("table " + table++ + " size=" + signals.size() + " payload=" + signals.primitivePayloadBytes()
+                + " rows=" + Long.toHexString(digest[0]) + " build=" + recorder.events()
+                + (size > 0 ? " row0=" + fields(signals.signalAt(0)) : ""));
+            int count = Math.min(remaining, 8 + random.nextInt(24));
+            for (int q = 0; q < count; q++) firstPass(signals, rows, query(rows));
+            remaining -= count;
+        }
+    }
+
+    private void firstPass(SignalTable signals, List<ObjectSignal> rows, SignalQuery query) {
+        Recorder recorder = new Recorder();
+        SignalFirstPassResult pass;
+        String initial = "all";
+        if (random.nextBoolean()) {
+            pass = signals.firstPass(query, recorder);
+        } else {
+            SignalBitmap candidates = SignalBitmap.all(rows.size());
+            for (int k = random.nextInt(3); k > 0; k--) {
+                SignalQuery narrow = SignalQuery.anyMask(1L << random.nextInt(64), 0L);
+                candidates = random.nextBoolean()
+                    ? candidates.andNot(signals.firstPass(narrow, ProgressMonitor.none()).candidates())
+                    : candidates.and(signals.firstPass(narrow, ProgressMonitor.none()).candidates());
+            }
+            initial = population(candidates);
+            pass = signals.firstPass(query, candidates, recorder);
+        }
+        long target = random.nextInt(5);
+        SignalExactResult exact = SignalMatcher.verify(rows, pass, s -> s.rawIdentity() == target, recorder);
+        line("query " + query(query) + " initial=" + initial + " pass=" + pass.totalObjects() + ","
+            + pass.afterBitwiseSignals() + "," + pass.afterMetadata() + "," + pass.rejectedByBitwiseSignals() + ","
+            + pass.rejectedByMetadata() + "," + Long.toHexString(Double.doubleToRawLongBits(pass.survivorRatio()))
+            + " candidates=" + population(pass.candidates()) + " exact=" + exact.exactChecks() + ","
+            + exact.exactMatchCount() + "," + exact.exactChecksAvoided() + " matches=" + population(exact.exactMatches())
+            + " progress=" + recorder.events());
+    }
+
+    // ---- 4: bitmap algebra ------------------------------------------------------------------------------------------
+
+    private void bitmaps() {
+        for (int size : SIZES) {
+            SignalBitmap all = SignalBitmap.all(size);
+            SignalBitmap empty = SignalBitmap.empty(size);
+            line("bitmap " + population(all) + " " + population(empty) + " " + population(all.andNot(empty)) + " "
+                + population(all.and(empty)) + " " + population(empty.andNot(all)));
+        }
+    }
+
+    // ---- 5: refusals and cancellation -------------------------------------------------------------------------------
+
+    private void refuse(String name, Runnable action) {
+        try {
+            action.run();
+            line("refuse " + name + " accepted");
+        } catch (RuntimeException failure) {
+            line("refuse " + name + " " + failure.getClass().getName() + ": " + failure.getMessage());
+        }
+    }
+
+    private void refusals() {
+        refuse("required&forbidden", () -> new SignalQuery(-1, -1, -1, -1, 1L, 1L, 0L, 0L, 0));
+        refuse("kind-high", () -> new SignalQuery(KINDS.length, -1, -1, -1, 0L, 0L, 0L, 0L, 0));
+        refuse("kind-low", () -> new SignalQuery(-2, -1, -1, -1, 0L, 0L, 0L, 0L, 0));
+        refuse("domain-low", () -> new SignalQuery(-1, -2, -1, -1, 0L, 0L, 0L, 0L, 0));
+        refuse("max<min", () -> new SignalQuery(-1, -1, 5, 4, 0L, 0L, 0L, 0L, 0));
+        refuse("min-low", () -> new SignalQuery(-1, -1, -2, -1, 0L, 0L, 0L, 0L, 0));
+        refuse("max-low", () -> new SignalQuery(-1, -1, -1, -2, 0L, 0L, 0L, 0L, 0));
+        refuse("signal-null-kind", () -> new ObjectSignal(null, 0, 0, 0L, 0L, 0L, 0));
+        refuse("signal-domain", () -> new ObjectSignal(KINDS[0], -1, 0, 0L, 0L, 0L, 0));
+        refuse("signal-length", () -> new ObjectSignal(KINDS[0], 0, -2, 0L, 0L, 0L, 0));
+        refuse("signal-has-length", () -> new ObjectSignal(KINDS[0], 0, -1, 0L, 0L, 0L, ObjectSignal.HAS_LENGTH));
+        refuse("projector-domain", () -> ObjectProjectors.byString(-1, value -> ""));
+        refuse("index-domain", () -> ObjectProjectors.<Long>byIndex(-1, Long::longValue));
+        refuse("bytes-domain", () -> ObjectProjectors.byCanonicalBytes(-1, @ENCODER@(BYTES)));
+        refuse("null-string", () -> ObjectProjectors.byString(value -> null).project("x", ProgressMonitor.none()));
+        refuse("null-monitor", () -> ObjectProjectors.byString(value -> "x").project("x", null));
+        refuse("null-custom", () -> ObjectProjectors.custom(value -> null).project("x", ProgressMonitor.none()));
+        refuse("null-bytes", () -> ObjectProjectors.byCanonicalBytes(1, @ENCODER@((byte[] value, ProgressMonitor m)
+            -> null)).project(new byte[0], ProgressMonitor.none()));
+        refuse("bitmap-size", () -> SignalBitmap.all(-1));
+        refuse("bitmap-empty-size", () -> SignalBitmap.empty(-1));
+        SignalBitmap two = SignalBitmap.all(2);
+        refuse("bitmap-contains", () -> two.contains(2));
+        refuse("bitmap-contains-low", () -> two.contains(-1));
+        refuse("bitmap-and", () -> two.and(SignalBitmap.all(3)));
+        refuse("bitmap-andNot-null", () -> two.andNot(null));
+        refuse("bitmap-forEach-null", () -> two.forEachIndex(null));
+        SignalTable table = SignalTable.build(List.of("a", "b"), ObjectProjectors.byString(v -> v),
+            ProgressMonitor.none());
+        refuse("pass-size", () -> table.firstPass(SignalQuery.anyMask(0L, 0L), SignalBitmap.all(3),
+            ProgressMonitor.none()));
+        refuse("signalAt", () -> table.signalAt(2));
+        refuse("featureBitsAt", () -> table.featureBitsAt(-1));
+        refuse("matcher-size", () -> SignalMatcher.verify(List.of("a"), table.firstPass(
+            SignalQuery.anyMask(0L, 0L), ProgressMonitor.none()), v -> true, ProgressMonitor.none()));
+        refuse("ops-shape", () -> NativeSignalOps.applyFeatureMasks(new long[64], 2, 0L, 0L, new long[2]));
+        refuse("ops-negative", () -> NativeSignalOps.applyFeatureMasks(new long[0], -1, 0L, 0L, new long[0]));
+        refuse("ops-selected", () -> NativeSignalOps.applyFeatureMasks(new long[128], 2, 0L, 0L, new long[1]));
+        refuse("build-null", () -> SignalTable.build(null, ObjectProjectors.byString(v -> "x"), ProgressMonitor.none()));
+        refuse("build-projected-null", () -> SignalTable.build(List.of("a"),
+            ObjectProjectors.custom(v -> null), ProgressMonitor.none()));
+    }
+
+    private void cancellation() {
+        List<String> values = new ArrayList<>();
+        for (int i = 0; i < 700; i++) values.add("v" + i);
+        for (int stop : new int[] {0, 1, 17, 699}) {
+            long[] worked = {0};
+            ProgressMonitor cancelling = new ProgressMonitor() {
+                @Override public void worked(long work) { worked[0] += work; }
+                @Override public boolean cancelled() { return worked[0] >= stop; }
+            };
+            try {
+                SignalTable.build(values, ObjectProjectors.byString(v -> v), cancelling);
+                line("cancel " + stop + " completed worked=" + worked[0]);
+            } catch (CancellationException expected) {
+                line("cancel " + stop + " " + expected.getMessage() + " worked=" + worked[0]);
+            }
+        }
+        SignalTable table = SignalTable.build(values, ObjectProjectors.byString(v -> v), ProgressMonitor.none());
+        long[] worked = {0};
+        ProgressMonitor cancelling = new ProgressMonitor() {
+            @Override public void worked(long work) { worked[0] += work; }
+            @Override public boolean cancelled() { return worked[0] >= 3; }
+        };
+        try {
+            table.firstPass(SignalQuery.anyMask(0L, 0L), cancelling);
+            line("cancel firstPass completed");
+        } catch (CancellationException expected) {
+            line("cancel firstPass " + expected.getMessage() + " worked=" + worked[0]);
+        }
+    }
+}

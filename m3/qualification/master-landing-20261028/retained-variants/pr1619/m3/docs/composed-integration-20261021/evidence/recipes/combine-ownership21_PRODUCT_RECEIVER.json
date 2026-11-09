@@ -1,0 +1,34 @@
+{
+  "dataset": "combine-ownership21",
+  "checks": [
+    {
+      "dataset": "combine-ownership21",
+      "targets": 5,
+      "changes": 5,
+      "mode": "check",
+      "actual_sdk_results": true
+    },
+    {
+      "dataset": "combine-ownership21",
+      "targets": 5,
+      "changes": 5,
+      "mode": "apply",
+      "actual_sdk_results": true
+    },
+    {
+      "dataset": "combine-ownership21",
+      "targets": 5,
+      "changes": 0,
+      "mode": "apply",
+      "actual_sdk_results": true
+    }
+  ],
+  "replay_preserved_bytes_and_mtime": true,
+  "postimages": {
+    "src/java.base/share/classes/java/lang/M3StringAtom.java": "fd876a583c846560e86351eaae70f93c1c8c038dc9372f6ed15024325cc98789",
+    "src/java.base/share/classes/java/lang/M3StringPool.java": "6994d26ef522f0e61021e003b94e652e272a0df36d633887c64ebf6896f6547b",
+    "test/jdk/java/lang/String/M3StringCriticalBulkTest.java": "b7ec39a73debba74732d4cd194a6af7585c374a7147797d184f8424af8931f2d",
+    "test/jdk/java/lang/String/M3StringNativePublicationFailureTest.java": "264666f587d4b5cd99a0d17da66f7833df40b49e4f52aafb4112fcbfc4b16ed1",
+    "test/jdk/java/lang/String/M3StringRegexNativeBridgeTest.c": "3549fc5d0ab78d3af0355a65597a367adedf208529b8eb9824c741550537eef8"
+  }
+}

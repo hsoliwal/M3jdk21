@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: Apache-2.0
+# Snapshot: 2026-10-29; Git blob SHA-1 identities, NOT equivalence or lost-code claims
+# merged_pr_head=be9430ce6b644f8b8b6648f94911e361a0d454c7; master_snapshot=649a735e23a79a4df46e6c61bfcd2fadf156d90d
+path	merged_1908_blob	master_20261029_blob	observed
+src/java.base/share/classes/java/util/regex/M3PatternQuery.java	b9debcbeb3964c53e72acb878b93f185ed837bff	4974e71c6db4dcb74b4fe6943254db38a801daac	DIFFERENT
+src/java.base/share/classes/java/util/regex/Matcher.java	91028d46e069879446a03cf815e7043866924e6b	a83304ac5763ab6b4e67af5586ed22eb0592eba3	DIFFERENT
+src/java.base/share/classes/jdk/internal/mindex/M3TQ.java	8fc8308c919d60c78b80843d3e601553b16f19d4	e353a1c656c573d832d50a310ce17a52ae8ee4cd	DIFFERENT
+src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java	1dec3dbe282a53f20c3c70458d949ac3f7df53b5	ffce58d2ca6f1f64f787b53ad3434949bb8613ee	DIFFERENT
+src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java	135f13b0c4478659aa3395bdeaa740b4438f649d	f3ba337134a4f639438c7e9e4336a34453e2dc59	DIFFERENT
+src/java.base/share/native/libjava/M3IndexMaskWindow.c	157d0e3f9d4063e7a4f31097e374409b863d071c	e29f91089022d9132e499ad04bd68ad2379b70f2	DIFFERENT
+test/jdk/java/util/regex/M3RegexCompactPlanTest.java	e8159f02725fa37dfddb711ac0ff804b3bacd357	ABSENT	ABSENT_ON_MASTER
+test/jdk/jdk/internal/m3/M3IndexedViewLifecycleTest.java	18c5a8e29de56b00b22ce1fe7dd9aae56e2a03ec	ABSENT	ABSENT_ON_MASTER
+m3/history/verify_m3_handoff.py	176ed9778a2aff9726a92cef814b770807c4f4cd	34df7d9fca4fcb4a930ce3887ae2f4c4d4cd3e59	DIFFERENT
+.github/workflows/m3-regex-collection-superset.yml	e13d56f7d19a6964c8ca1f71401baed1385ef671	ABSENT	ABSENT_ON_MASTER

@@ -1,0 +1,877 @@
+Compiled from "M3SpringArrayContractTest.java"
+final class com.m3.collections.interop.M3SpringArrayContractTest {
+  com.m3.collections.interop.M3SpringArrayContractTest();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+    LineNumberTable:
+      line 22: 0
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0       5     0  this   Lcom/m3/collections/interop/M3SpringArrayContractTest;
+
+  void directContractNotSpringAdapter();
+    Code:
+       0: invokestatic  #7                  // Method com/m3/collections/interop/M3LibraryCollections.springMultiValueMap:()Lorg/springframework/util/MultiValueMap;
+       3: astore_1
+       4: ldc           #13                 // class com/m3/collections/interop/M3SpringArrayMultiValueMap
+       6: aload_1
+       7: invokestatic  #15                 // Method org/junit/jupiter/api/Assertions.assertInstanceOf:(Ljava/lang/Class;Ljava/lang/Object;)Ljava/lang/Object;
+      10: pop
+      11: ldc           #21                 // class java/util/AbstractMap
+      13: aload_1
+      14: invokeinterface #23,  1           // InterfaceMethod org/springframework/util/MultiValueMap.getClass:()Ljava/lang/Class;
+      19: invokevirtual #29                 // Method java/lang/Class.getSuperclass:()Ljava/lang/Class;
+      22: invokestatic  #34                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      25: aload_1
+      26: instanceof    #38                 // class org/springframework/util/MultiValueMapAdapter
+      29: invokestatic  #40                 // Method org/junit/jupiter/api/Assertions.assertFalse:(Z)V
+      32: ldc           #44                 // class com/m3/collections/M3LinkedHashMap
+      34: aload_1
+      35: invokeinterface #46,  1           // InterfaceMethod org/springframework/util/MultiValueMap.toSingleValueMap:()Ljava/util/Map;
+      40: invokestatic  #15                 // Method org/junit/jupiter/api/Assertions.assertInstanceOf:(Ljava/lang/Class;Ljava/lang/Object;)Ljava/lang/Object;
+      43: pop
+      44: aload_1
+      45: ldc           #50                 // String k
+      47: bipush        9
+      49: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      52: invokeinterface #58,  3           // InterfaceMethod org/springframework/util/MultiValueMap.set:(Ljava/lang/Object;Ljava/lang/Object;)V
+      57: ldc           #61                 // class com/m3/collections/M3LinkedList
+      59: aload_1
+      60: ldc           #50                 // String k
+      62: invokeinterface #63,  2           // InterfaceMethod org/springframework/util/MultiValueMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      67: invokestatic  #15                 // Method org/junit/jupiter/api/Assertions.assertInstanceOf:(Ljava/lang/Class;Ljava/lang/Object;)Ljava/lang/Object;
+      70: pop
+      71: return
+    LineNumberTable:
+      line 24: 0
+      line 25: 4
+      line 26: 11
+      line 27: 25
+      line 28: 32
+      line 29: 44
+      line 30: 57
+      line 31: 71
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0      72     0  this   Lcom/m3/collections/interop/M3SpringArrayContractTest;
+          4      68     1 actual   Lorg/springframework/util/MultiValueMap;
+
+  void absentEmptyNullAndCallerListIdentity();
+    Code:
+       0: new           #13                 // class com/m3/collections/interop/M3SpringArrayMultiValueMap
+       3: dup
+       4: invokespecial #67                 // Method com/m3/collections/interop/M3SpringArrayMultiValueMap."<init>":()V
+       7: astore_1
+       8: aload_1
+       9: ldc           #68                 // String absent
+      11: invokeinterface #63,  2           // InterfaceMethod org/springframework/util/MultiValueMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      16: invokestatic  #70                 // Method org/junit/jupiter/api/Assertions.assertNull:(Ljava/lang/Object;)V
+      19: aload_1
+      20: ldc           #74                 // String empty
+      22: invokestatic  #76                 // InterfaceMethod java/util/List.of:()Ljava/util/List;
+      25: invokeinterface #82,  3           // InterfaceMethod org/springframework/util/MultiValueMap.addAll:(Ljava/lang/Object;Ljava/util/List;)V
+      30: aload_1
+      31: ldc           #74                 // String empty
+      33: invokeinterface #86,  2           // InterfaceMethod org/springframework/util/MultiValueMap.containsKey:(Ljava/lang/Object;)Z
+      38: invokestatic  #90                 // Method org/junit/jupiter/api/Assertions.assertTrue:(Z)V
+      41: invokestatic  #76                 // InterfaceMethod java/util/List.of:()Ljava/util/List;
+      44: aload_1
+      45: ldc           #74                 // String empty
+      47: invokeinterface #63,  2           // InterfaceMethod org/springframework/util/MultiValueMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      52: invokestatic  #34                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      55: aload_1
+      56: ldc           #74                 // String empty
+      58: invokeinterface #93,  2           // InterfaceMethod org/springframework/util/MultiValueMap.getFirst:(Ljava/lang/Object;)Ljava/lang/Object;
+      63: invokestatic  #70                 // Method org/junit/jupiter/api/Assertions.assertNull:(Ljava/lang/Object;)V
+      66: aload_1
+      67: ldc           #74                 // String empty
+      69: bipush        9
+      71: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      74: invokeinterface #96,  3           // InterfaceMethod org/springframework/util/MultiValueMap.addIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)V
+      79: aload_1
+      80: ldc           #74                 // String empty
+      82: invokeinterface #63,  2           // InterfaceMethod org/springframework/util/MultiValueMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      87: checkcast     #77                 // class java/util/List
+      90: invokeinterface #99,  1           // InterfaceMethod java/util/List.isEmpty:()Z
+      95: invokestatic  #90                 // Method org/junit/jupiter/api/Assertions.assertTrue:(Z)V
+      98: new           #103                // class java/util/ArrayList
+     101: dup
+     102: iconst_3
+     103: anewarray     #53                 // class java/lang/Integer
+     106: dup
+     107: iconst_0
+     108: iconst_3
+     109: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     112: aastore
+     113: dup
+     114: iconst_1
+     115: aconst_null
+     116: aastore
+     117: dup
+     118: iconst_2
+     119: iconst_5
+     120: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     123: aastore
+     124: invokestatic  #105                // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+     127: invokespecial #111                // Method java/util/ArrayList."<init>":(Ljava/util/Collection;)V
+     130: astore_2
+     131: aload_1
+     132: ldc           #114                // String borrowed
+     134: aload_2
+     135: invokeinterface #116,  3          // InterfaceMethod org/springframework/util/MultiValueMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     140: pop
+     141: aload_2
+     142: aload_1
+     143: ldc           #114                // String borrowed
+     145: invokeinterface #63,  2           // InterfaceMethod org/springframework/util/MultiValueMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     150: invokestatic  #120                // Method org/junit/jupiter/api/Assertions.assertSame:(Ljava/lang/Object;Ljava/lang/Object;)V
+     153: aload_2
+     154: bipush        7
+     156: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     159: invokeinterface #123,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     164: pop
+     165: iconst_4
+     166: anewarray     #53                 // class java/lang/Integer
+     169: dup
+     170: iconst_0
+     171: iconst_3
+     172: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     175: aastore
+     176: dup
+     177: iconst_1
+     178: aconst_null
+     179: aastore
+     180: dup
+     181: iconst_2
+     182: iconst_5
+     183: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     186: aastore
+     187: dup
+     188: iconst_3
+     189: bipush        7
+     191: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     194: aastore
+     195: invokestatic  #105                // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+     198: aload_1
+     199: ldc           #114                // String borrowed
+     201: invokeinterface #63,  2           // InterfaceMethod org/springframework/util/MultiValueMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     206: invokestatic  #34                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+     209: aload_1
+     210: ldc           #126                // String nullList
+     212: aconst_null
+     213: invokeinterface #116,  3          // InterfaceMethod org/springframework/util/MultiValueMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     218: pop
+     219: aload_1
+     220: ldc           #126                // String nullList
+     222: invokeinterface #86,  2           // InterfaceMethod org/springframework/util/MultiValueMap.containsKey:(Ljava/lang/Object;)Z
+     227: invokestatic  #90                 // Method org/junit/jupiter/api/Assertions.assertTrue:(Z)V
+     230: aload_1
+     231: ldc           #126                // String nullList
+     233: invokeinterface #93,  2           // InterfaceMethod org/springframework/util/MultiValueMap.getFirst:(Ljava/lang/Object;)Ljava/lang/Object;
+     238: invokestatic  #70                 // Method org/junit/jupiter/api/Assertions.assertNull:(Ljava/lang/Object;)V
+     241: aload_1
+     242: ldc           #126                // String nullList
+     244: aconst_null
+     245: invokeinterface #128,  3          // InterfaceMethod org/springframework/util/MultiValueMap.add:(Ljava/lang/Object;Ljava/lang/Object;)V
+     250: iconst_1
+     251: anewarray     #53                 // class java/lang/Integer
+     254: dup
+     255: iconst_0
+     256: aconst_null
+     257: checkcast     #53                 // class java/lang/Integer
+     260: aastore
+     261: invokestatic  #105                // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+     264: aload_1
+     265: ldc           #126                // String nullList
+     267: invokeinterface #63,  2           // InterfaceMethod org/springframework/util/MultiValueMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     272: invokestatic  #34                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+     275: aload_1
+     276: invokeinterface #46,  1           // InterfaceMethod org/springframework/util/MultiValueMap.toSingleValueMap:()Ljava/util/Map;
+     281: ldc           #74                 // String empty
+     283: invokeinterface #130,  2          // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+     288: invokestatic  #40                 // Method org/junit/jupiter/api/Assertions.assertFalse:(Z)V
+     291: iconst_3
+     292: aload_1
+     293: invokeinterface #46,  1           // InterfaceMethod org/springframework/util/MultiValueMap.toSingleValueMap:()Ljava/util/Map;
+     298: ldc           #114                // String borrowed
+     300: invokeinterface #133,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     305: checkcast     #53                 // class java/lang/Integer
+     308: invokestatic  #134                // Method org/junit/jupiter/api/Assertions.assertEquals:(ILjava/lang/Integer;)V
+     311: return
+    LineNumberTable:
+      line 34: 0
+      line 35: 8
+      line 36: 19
+      line 37: 30
+      line 38: 41
+      line 39: 55
+      line 40: 66
+      line 41: 79
+      line 42: 98
+      line 43: 131
+      line 44: 141
+      line 45: 153
+      line 46: 165
+      line 47: 209
+      line 48: 219
+      line 49: 230
+      line 50: 241
+      line 51: 250
+      line 52: 275
+      line 53: 291
+      line 54: 311
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0     312     0  this   Lcom/m3/collections/interop/M3SpringArrayContractTest;
+          8     304     1 actual   Lorg/springframework/util/MultiValueMap;
+        131     181     2 borrowed   Ljava/util/List;
+
+  void detachedCopyVersusLiveViewAndUnsupportedSingletonMutation();
+    Code:
+       0: new           #13                 // class com/m3/collections/interop/M3SpringArrayMultiValueMap
+       3: dup
+       4: invokespecial #67                 // Method com/m3/collections/interop/M3SpringArrayMultiValueMap."<init>":()V
+       7: astore_1
+       8: aload_1
+       9: ldc           #137                // String a
+      11: iconst_1
+      12: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      15: invokeinterface #128,  3          // InterfaceMethod org/springframework/util/MultiValueMap.add:(Ljava/lang/Object;Ljava/lang/Object;)V
+      20: aload_1
+      21: invokeinterface #46,  1           // InterfaceMethod org/springframework/util/MultiValueMap.toSingleValueMap:()Ljava/util/Map;
+      26: astore_2
+      27: aload_1
+      28: invokeinterface #139,  1          // InterfaceMethod org/springframework/util/MultiValueMap.asSingleValueMap:()Ljava/util/Map;
+      33: astore_3
+      34: aload_1
+      35: ldc           #137                // String a
+      37: iconst_2
+      38: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      41: invokeinterface #58,  3           // InterfaceMethod org/springframework/util/MultiValueMap.set:(Ljava/lang/Object;Ljava/lang/Object;)V
+      46: iconst_1
+      47: aload_2
+      48: ldc           #137                // String a
+      50: invokeinterface #133,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      55: checkcast     #53                 // class java/lang/Integer
+      58: invokestatic  #134                // Method org/junit/jupiter/api/Assertions.assertEquals:(ILjava/lang/Integer;)V
+      61: iconst_2
+      62: aload_3
+      63: ldc           #137                // String a
+      65: invokeinterface #133,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      70: checkcast     #53                 // class java/lang/Integer
+      73: invokestatic  #134                // Method org/junit/jupiter/api/Assertions.assertEquals:(ILjava/lang/Integer;)V
+      76: iconst_2
+      77: aload_3
+      78: ldc           #137                // String a
+      80: iconst_3
+      81: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      84: invokeinterface #142,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      89: checkcast     #53                 // class java/lang/Integer
+      92: invokestatic  #134                // Method org/junit/jupiter/api/Assertions.assertEquals:(ILjava/lang/Integer;)V
+      95: iconst_3
+      96: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      99: invokestatic  #143                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;)Ljava/util/List;
+     102: aload_1
+     103: ldc           #137                // String a
+     105: invokeinterface #63,  2           // InterfaceMethod org/springframework/util/MultiValueMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     110: invokestatic  #34                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+     113: ldc           #146                // class java/lang/UnsupportedOperationException
+     115: aload_1
+     116: invokedynamic #148,  0            // InvokeDynamic #0:execute:(Lorg/springframework/util/MultiValueMap;)Lorg/junit/jupiter/api/function/Executable;
+     121: invokestatic  #152                // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+     124: pop
+     125: aload_3
+     126: ldc           #156                // String null
+     128: aconst_null
+     129: invokeinterface #142,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     134: invokestatic  #70                 // Method org/junit/jupiter/api/Assertions.assertNull:(Ljava/lang/Object;)V
+     137: aload_1
+     138: ldc           #156                // String null
+     140: invokeinterface #86,  2           // InterfaceMethod org/springframework/util/MultiValueMap.containsKey:(Ljava/lang/Object;)Z
+     145: invokestatic  #90                 // Method org/junit/jupiter/api/Assertions.assertTrue:(Z)V
+     148: aload_1
+     149: ldc           #156                // String null
+     151: invokeinterface #63,  2           // InterfaceMethod org/springframework/util/MultiValueMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     156: invokestatic  #70                 // Method org/junit/jupiter/api/Assertions.assertNull:(Ljava/lang/Object;)V
+     159: aload_1
+     160: invokeinterface #158,  1          // InterfaceMethod org/springframework/util/MultiValueMap.hashCode:()I
+     165: aload_3
+     166: invokeinterface #162,  1          // InterfaceMethod java/util/Map.hashCode:()I
+     171: invokestatic  #163                // Method org/junit/jupiter/api/Assertions.assertEquals:(II)V
+     174: aload_1
+     175: invokeinterface #166,  1          // InterfaceMethod org/springframework/util/MultiValueMap.toString:()Ljava/lang/String;
+     180: aload_3
+     181: invokeinterface #170,  1          // InterfaceMethod java/util/Map.toString:()Ljava/lang/String;
+     186: invokestatic  #34                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+     189: iconst_3
+     190: aload_3
+     191: ldc           #137                // String a
+     193: invokeinterface #171,  2          // InterfaceMethod java/util/Map.remove:(Ljava/lang/Object;)Ljava/lang/Object;
+     198: checkcast     #53                 // class java/lang/Integer
+     201: invokestatic  #134                // Method org/junit/jupiter/api/Assertions.assertEquals:(ILjava/lang/Integer;)V
+     204: aload_1
+     205: ldc           #137                // String a
+     207: invokeinterface #86,  2           // InterfaceMethod org/springframework/util/MultiValueMap.containsKey:(Ljava/lang/Object;)Z
+     212: invokestatic  #40                 // Method org/junit/jupiter/api/Assertions.assertFalse:(Z)V
+     215: return
+    LineNumberTable:
+      line 57: 0
+      line 58: 8
+      line 59: 20
+      line 60: 27
+      line 61: 34
+      line 62: 46
+      line 63: 61
+      line 64: 76
+      line 65: 95
+      line 66: 113
+      line 67: 125
+      line 68: 137
+      line 69: 148
+      line 70: 159
+      line 71: 174
+      line 72: 189
+      line 73: 204
+      line 74: 215
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0     216     0  this   Lcom/m3/collections/interop/M3SpringArrayContractTest;
+          8     208     1 actual   Lorg/springframework/util/MultiValueMap;
+         27     189     2  copy   Ljava/util/Map;
+         34     182     3  live   Ljava/util/Map;
+
+  void realSpringSixTwoDifferentialSeeded();
+    Code:
+       0: new           #13                 // class com/m3/collections/interop/M3SpringArrayMultiValueMap
+       3: dup
+       4: invokespecial #67                 // Method com/m3/collections/interop/M3SpringArrayMultiValueMap."<init>":()V
+       7: astore_1
+       8: new           #38                 // class org/springframework/util/MultiValueMapAdapter
+      11: dup
+      12: new           #174                // class java/util/LinkedHashMap
+      15: dup
+      16: invokespecial #176                // Method java/util/LinkedHashMap."<init>":()V
+      19: invokespecial #177                // Method org/springframework/util/MultiValueMapAdapter."<init>":(Ljava/util/Map;)V
+      22: astore_2
+      23: new           #180                // class java/util/Random
+      26: dup
+      27: ldc2_w        #182                // long 539365399l
+      30: invokespecial #184                // Method java/util/Random."<init>":(J)V
+      33: astore_3
+      34: iconst_0
+      35: istore        4
+      37: iload         4
+      39: sipush        4500
+      42: if_icmpge     832
+      45: aload_3
+      46: bipush        7
+      48: invokevirtual #187                // Method java/util/Random.nextInt:(I)I
+      51: ifne          58
+      54: aconst_null
+      55: goto          67
+      58: aload_3
+      59: bipush        32
+      61: invokevirtual #187                // Method java/util/Random.nextInt:(I)I
+      64: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      67: astore        5
+      69: aload_3
+      70: bipush        8
+      72: invokevirtual #187                // Method java/util/Random.nextInt:(I)I
+      75: ifne          82
+      78: aconst_null
+      79: goto          91
+      82: aload_3
+      83: bipush        50
+      85: invokevirtual #187                // Method java/util/Random.nextInt:(I)I
+      88: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      91: astore        6
+      93: aload_3
+      94: bipush        13
+      96: invokevirtual #187                // Method java/util/Random.nextInt:(I)I
+      99: tableswitch   { // 0 to 12
+                     0: 164
+                     1: 190
+                     2: 213
+                     3: 239
+                     4: 261
+                     5: 306
+                     6: 386
+                     7: 428
+                     8: 466
+                     9: 512
+                    10: 551
+                    11: 579
+                    12: 602
+               default: 652
+          }
+     164: aload_2
+     165: aload         5
+     167: aload         6
+     169: invokedynamic #191,  0            // InvokeDynamic #1:run:(Lorg/springframework/util/MultiValueMap;Ljava/lang/Integer;Ljava/lang/Integer;)Ljava/lang/Runnable;
+     174: aload_1
+     175: aload         5
+     177: aload         6
+     179: invokedynamic #195,  0            // InvokeDynamic #2:run:(Lorg/springframework/util/MultiValueMap;Ljava/lang/Integer;Ljava/lang/Integer;)Ljava/lang/Runnable;
+     184: invokestatic  #196                // Method assertSameFailure:(Ljava/lang/Runnable;Ljava/lang/Runnable;)V
+     187: goto          660
+     190: aload_1
+     191: aload         5
+     193: aload         6
+     195: invokeinterface #58,  3           // InterfaceMethod org/springframework/util/MultiValueMap.set:(Ljava/lang/Object;Ljava/lang/Object;)V
+     200: aload_2
+     201: aload         5
+     203: aload         6
+     205: invokeinterface #58,  3           // InterfaceMethod org/springframework/util/MultiValueMap.set:(Ljava/lang/Object;Ljava/lang/Object;)V
+     210: goto          660
+     213: aload_2
+     214: aload         5
+     216: aload         6
+     218: invokedynamic #202,  0            // InvokeDynamic #3:run:(Lorg/springframework/util/MultiValueMap;Ljava/lang/Integer;Ljava/lang/Integer;)Ljava/lang/Runnable;
+     223: aload_1
+     224: aload         5
+     226: aload         6
+     228: invokedynamic #203,  0            // InvokeDynamic #4:run:(Lorg/springframework/util/MultiValueMap;Ljava/lang/Integer;Ljava/lang/Integer;)Ljava/lang/Runnable;
+     233: invokestatic  #196                // Method assertSameFailure:(Ljava/lang/Runnable;Ljava/lang/Runnable;)V
+     236: goto          660
+     239: aload_2
+     240: aload         5
+     242: invokeinterface #204,  2          // InterfaceMethod org/springframework/util/MultiValueMap.remove:(Ljava/lang/Object;)Ljava/lang/Object;
+     247: aload_1
+     248: aload         5
+     250: invokeinterface #204,  2          // InterfaceMethod org/springframework/util/MultiValueMap.remove:(Ljava/lang/Object;)Ljava/lang/Object;
+     255: invokestatic  #34                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+     258: goto          660
+     261: iconst_2
+     262: anewarray     #53                 // class java/lang/Integer
+     265: dup
+     266: iconst_0
+     267: aload         6
+     269: aastore
+     270: dup
+     271: iconst_1
+     272: aload         6
+     274: aastore
+     275: invokestatic  #105                // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+     278: astore        7
+     280: aload_2
+     281: aload         5
+     283: aload         7
+     285: invokedynamic #205,  0            // InvokeDynamic #5:run:(Lorg/springframework/util/MultiValueMap;Ljava/lang/Integer;Ljava/util/List;)Ljava/lang/Runnable;
+     290: aload_1
+     291: aload         5
+     293: aload         7
+     295: invokedynamic #208,  0            // InvokeDynamic #6:run:(Lorg/springframework/util/MultiValueMap;Ljava/lang/Integer;Ljava/util/List;)Ljava/lang/Runnable;
+     300: invokestatic  #196                // Method assertSameFailure:(Ljava/lang/Runnable;Ljava/lang/Runnable;)V
+     303: goto          660
+     306: aload_3
+     307: bipush        6
+     309: invokevirtual #187                // Method java/util/Random.nextInt:(I)I
+     312: ifne          319
+     315: aconst_null
+     316: goto          338
+     319: new           #103                // class java/util/ArrayList
+     322: dup
+     323: iconst_1
+     324: anewarray     #53                 // class java/lang/Integer
+     327: dup
+     328: iconst_0
+     329: aload         6
+     331: aastore
+     332: invokestatic  #105                // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+     335: invokespecial #111                // Method java/util/ArrayList."<init>":(Ljava/util/Collection;)V
+     338: astore        7
+     340: aload         7
+     342: ifnonnull     349
+     345: aconst_null
+     346: goto          358
+     349: new           #103                // class java/util/ArrayList
+     352: dup
+     353: aload         7
+     355: invokespecial #111                // Method java/util/ArrayList."<init>":(Ljava/util/Collection;)V
+     358: astore        8
+     360: aload_2
+     361: aload         5
+     363: aload         8
+     365: invokeinterface #116,  3          // InterfaceMethod org/springframework/util/MultiValueMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     370: aload_1
+     371: aload         5
+     373: aload         7
+     375: invokeinterface #116,  3          // InterfaceMethod org/springframework/util/MultiValueMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     380: invokestatic  #34                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+     383: goto          660
+     386: aload_2
+     387: invokeinterface #139,  1          // InterfaceMethod org/springframework/util/MultiValueMap.asSingleValueMap:()Ljava/util/Map;
+     392: aload         5
+     394: aload         6
+     396: invokeinterface #142,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     401: checkcast     #53                 // class java/lang/Integer
+     404: aload_1
+     405: invokeinterface #139,  1          // InterfaceMethod org/springframework/util/MultiValueMap.asSingleValueMap:()Ljava/util/Map;
+     410: aload         5
+     412: aload         6
+     414: invokeinterface #142,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     419: checkcast     #53                 // class java/lang/Integer
+     422: invokestatic  #209                // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Integer;Ljava/lang/Integer;)V
+     425: goto          660
+     428: aload_2
+     429: invokeinterface #139,  1          // InterfaceMethod org/springframework/util/MultiValueMap.asSingleValueMap:()Ljava/util/Map;
+     434: aload         5
+     436: invokeinterface #171,  2          // InterfaceMethod java/util/Map.remove:(Ljava/lang/Object;)Ljava/lang/Object;
+     441: checkcast     #53                 // class java/lang/Integer
+     444: aload_1
+     445: invokeinterface #139,  1          // InterfaceMethod org/springframework/util/MultiValueMap.asSingleValueMap:()Ljava/util/Map;
+     450: aload         5
+     452: invokeinterface #171,  2          // InterfaceMethod java/util/Map.remove:(Ljava/lang/Object;)Ljava/lang/Object;
+     457: checkcast     #53                 // class java/lang/Integer
+     460: invokestatic  #209                // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Integer;Ljava/lang/Integer;)V
+     463: goto          660
+     466: aload_2
+     467: aload         5
+     469: iconst_1
+     470: anewarray     #53                 // class java/lang/Integer
+     473: dup
+     474: iconst_0
+     475: aload         6
+     477: aastore
+     478: invokestatic  #105                // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+     481: invokeinterface #212,  3          // InterfaceMethod org/springframework/util/MultiValueMap.putIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     486: aload_1
+     487: aload         5
+     489: iconst_1
+     490: anewarray     #53                 // class java/lang/Integer
+     493: dup
+     494: iconst_0
+     495: aload         6
+     497: aastore
+     498: invokestatic  #105                // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+     501: invokeinterface #212,  3          // InterfaceMethod org/springframework/util/MultiValueMap.putIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     506: invokestatic  #34                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+     509: goto          660
+     512: aload_1
+     513: iconst_5
+     514: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     517: bipush        9
+     519: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     522: invokestatic  #215                // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+     525: invokeinterface #218,  2          // InterfaceMethod org/springframework/util/MultiValueMap.setAll:(Ljava/util/Map;)V
+     530: aload_2
+     531: iconst_5
+     532: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     535: bipush        9
+     537: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     540: invokestatic  #215                // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+     543: invokeinterface #218,  2          // InterfaceMethod org/springframework/util/MultiValueMap.setAll:(Ljava/util/Map;)V
+     548: goto          660
+     551: aload_2
+     552: aload         5
+     554: invokeinterface #86,  2           // InterfaceMethod org/springframework/util/MultiValueMap.containsKey:(Ljava/lang/Object;)Z
+     559: invokestatic  #221                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     562: aload_1
+     563: aload         5
+     565: invokeinterface #86,  2           // InterfaceMethod org/springframework/util/MultiValueMap.containsKey:(Ljava/lang/Object;)Z
+     570: invokestatic  #221                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     573: invokestatic  #34                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+     576: goto          660
+     579: iload         4
+     581: bipush        47
+     583: irem
+     584: ifne          660
+     587: aload_1
+     588: invokeinterface #226,  1          // InterfaceMethod org/springframework/util/MultiValueMap.clear:()V
+     593: aload_2
+     594: invokeinterface #226,  1          // InterfaceMethod org/springframework/util/MultiValueMap.clear:()V
+     599: goto          660
+     602: new           #174                // class java/util/LinkedHashMap
+     605: dup
+     606: invokespecial #176                // Method java/util/LinkedHashMap."<init>":()V
+     609: astore        7
+     611: aload         7
+     613: aload         5
+     615: iconst_1
+     616: anewarray     #53                 // class java/lang/Integer
+     619: dup
+     620: iconst_0
+     621: aload         6
+     623: aastore
+     624: invokestatic  #105                // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+     627: invokeinterface #142,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     632: pop
+     633: aload_1
+     634: aload         7
+     636: invokeinterface #229,  2          // InterfaceMethod org/springframework/util/MultiValueMap.putAll:(Ljava/util/Map;)V
+     641: aload_2
+     642: aload         7
+     644: invokeinterface #229,  2          // InterfaceMethod org/springframework/util/MultiValueMap.putAll:(Ljava/util/Map;)V
+     649: goto          660
+     652: new           #232                // class java/lang/AssertionError
+     655: dup
+     656: invokespecial #234                // Method java/lang/AssertionError."<init>":()V
+     659: athrow
+     660: aload_2
+     661: aload_1
+     662: iload         4
+     664: invokedynamic #235,  0            // InvokeDynamic #7:makeConcatWithConstants:(I)Ljava/lang/String;
+     669: invokestatic  #239                // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+     672: aload_2
+     673: invokeinterface #242,  1          // InterfaceMethod org/springframework/util/MultiValueMap.size:()I
+     678: aload_1
+     679: invokeinterface #242,  1          // InterfaceMethod org/springframework/util/MultiValueMap.size:()I
+     684: iload         4
+     686: invokedynamic #245,  0            // InvokeDynamic #8:makeConcatWithConstants:(I)Ljava/lang/String;
+     691: invokestatic  #246                // Method org/junit/jupiter/api/Assertions.assertEquals:(IILjava/lang/String;)V
+     694: aload_2
+     695: aload         5
+     697: invokeinterface #93,  2           // InterfaceMethod org/springframework/util/MultiValueMap.getFirst:(Ljava/lang/Object;)Ljava/lang/Object;
+     702: checkcast     #53                 // class java/lang/Integer
+     705: aload_1
+     706: aload         5
+     708: invokeinterface #93,  2           // InterfaceMethod org/springframework/util/MultiValueMap.getFirst:(Ljava/lang/Object;)Ljava/lang/Object;
+     713: checkcast     #53                 // class java/lang/Integer
+     716: iload         4
+     718: invokedynamic #249,  0            // InvokeDynamic #9:makeConcatWithConstants:(I)Ljava/lang/String;
+     723: invokestatic  #250                // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/String;)V
+     726: aload_2
+     727: invokeinterface #46,  1           // InterfaceMethod org/springframework/util/MultiValueMap.toSingleValueMap:()Ljava/util/Map;
+     732: aload_1
+     733: invokeinterface #46,  1           // InterfaceMethod org/springframework/util/MultiValueMap.toSingleValueMap:()Ljava/util/Map;
+     738: iload         4
+     740: invokedynamic #253,  0            // InvokeDynamic #10:makeConcatWithConstants:(I)Ljava/lang/String;
+     745: invokestatic  #239                // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+     748: new           #103                // class java/util/ArrayList
+     751: dup
+     752: aload_2
+     753: invokeinterface #254,  1          // InterfaceMethod org/springframework/util/MultiValueMap.keySet:()Ljava/util/Set;
+     758: invokespecial #111                // Method java/util/ArrayList."<init>":(Ljava/util/Collection;)V
+     761: new           #103                // class java/util/ArrayList
+     764: dup
+     765: aload_1
+     766: invokeinterface #254,  1          // InterfaceMethod org/springframework/util/MultiValueMap.keySet:()Ljava/util/Set;
+     771: invokespecial #111                // Method java/util/ArrayList."<init>":(Ljava/util/Collection;)V
+     774: iload         4
+     776: invokedynamic #258,  0            // InvokeDynamic #11:makeConcatWithConstants:(I)Ljava/lang/String;
+     781: invokestatic  #239                // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+     784: aload_2
+     785: invokeinterface #139,  1          // InterfaceMethod org/springframework/util/MultiValueMap.asSingleValueMap:()Ljava/util/Map;
+     790: aload         5
+     792: invokeinterface #133,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     797: checkcast     #53                 // class java/lang/Integer
+     800: aload_1
+     801: invokeinterface #139,  1          // InterfaceMethod org/springframework/util/MultiValueMap.asSingleValueMap:()Ljava/util/Map;
+     806: aload         5
+     808: invokeinterface #133,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     813: checkcast     #53                 // class java/lang/Integer
+     816: iload         4
+     818: invokedynamic #259,  0            // InvokeDynamic #12:makeConcatWithConstants:(I)Ljava/lang/String;
+     823: invokestatic  #250                // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/String;)V
+     826: iinc          4, 1
+     829: goto          37
+     832: return
+    LineNumberTable:
+      line 77: 0
+      line 78: 8
+      line 79: 23
+      line 80: 34
+      line 81: 45
+      line 82: 69
+      line 83: 93
+      line 84: 164
+      line 85: 190
+      line 86: 213
+      line 87: 239
+      line 89: 261
+      line 90: 280
+      line 91: 303
+      line 93: 306
+      line 94: 340
+      line 95: 360
+      line 96: 383
+      line 97: 386
+      line 98: 405
+      line 97: 422
+      line 99: 428
+      line 100: 445
+      line 99: 460
+      line 101: 466
+      line 102: 498
+      line 101: 506
+      line 103: 512
+      line 104: 551
+      line 106: 579
+      line 109: 602
+      line 110: 611
+      line 111: 633
+      line 112: 641
+      line 113: 649
+      line 114: 652
+      line 116: 660
+      line 117: 672
+      line 118: 694
+      line 119: 726
+      line 120: 748
+      line 121: 784
+      line 122: 801
+      line 121: 823
+      line 80: 826
+      line 124: 832
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+        280      23     7 input   Ljava/util/List;
+        340      43     7     a   Ljava/util/List;
+        360      23     8     b   Ljava/util/List;
+        611      38     7  copy   Ljava/util/Map;
+         69     757     5   key   Ljava/lang/Integer;
+         93     733     6 value   Ljava/lang/Integer;
+         37     795     4  step   I
+          0     833     0  this   Lcom/m3/collections/interop/M3SpringArrayContractTest;
+          8     825     1 actual   Lorg/springframework/util/MultiValueMap;
+         23     810     2 expected   Lorg/springframework/util/MultiValueMap;
+         34     799     3 random   Ljava/util/Random;
+
+  private static void assertSameFailure(java.lang.Runnable, java.lang.Runnable);
+    Code:
+       0: aload_0
+       1: invokestatic  #260                // Method failureOf:(Ljava/lang/Runnable;)Ljava/lang/Class;
+       4: aload_1
+       5: invokestatic  #260                // Method failureOf:(Ljava/lang/Runnable;)Ljava/lang/Class;
+       8: invokestatic  #34                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      11: return
+    LineNumberTable:
+      line 128: 0
+      line 129: 11
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0      12     0 expected   Ljava/lang/Runnable;
+          0      12     1 actual   Ljava/lang/Runnable;
+
+  private static java.lang.Class<? extends java.lang.RuntimeException> failureOf(java.lang.Runnable);
+    Code:
+       0: aload_0
+       1: invokeinterface #264,  1          // InterfaceMethod java/lang/Runnable.run:()V
+       6: aconst_null
+       7: areturn
+       8: astore_1
+       9: aload_1
+      10: invokevirtual #270                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      13: areturn
+    Exception table:
+       from    to  target type
+           0     7     8   Class java/lang/RuntimeException
+    LineNumberTable:
+      line 133: 0
+      line 134: 6
+      line 135: 8
+      line 136: 9
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          9       5     1 failure   Ljava/lang/RuntimeException;
+          0      14     0 operation   Ljava/lang/Runnable;
+
+  private static void lambda$realSpringSixTwoDifferentialSeeded$6(org.springframework.util.MultiValueMap, java.lang.Integer, java.util.List);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokeinterface #82,  3           // InterfaceMethod org/springframework/util/MultiValueMap.addAll:(Ljava/lang/Object;Ljava/util/List;)V
+       8: return
+    LineNumberTable:
+      line 90: 0
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0       9     0 actual   Lorg/springframework/util/MultiValueMap;
+          0       9     1   key   Ljava/lang/Integer;
+          0       9     2 input   Ljava/util/List;
+
+  private static void lambda$realSpringSixTwoDifferentialSeeded$5(org.springframework.util.MultiValueMap, java.lang.Integer, java.util.List);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokeinterface #82,  3           // InterfaceMethod org/springframework/util/MultiValueMap.addAll:(Ljava/lang/Object;Ljava/util/List;)V
+       8: return
+    LineNumberTable:
+      line 90: 0
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0       9     0 expected   Lorg/springframework/util/MultiValueMap;
+          0       9     1   key   Ljava/lang/Integer;
+          0       9     2 input   Ljava/util/List;
+
+  private static void lambda$realSpringSixTwoDifferentialSeeded$4(org.springframework.util.MultiValueMap, java.lang.Integer, java.lang.Integer);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokeinterface #96,  3           // InterfaceMethod org/springframework/util/MultiValueMap.addIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)V
+       8: return
+    LineNumberTable:
+      line 86: 0
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0       9     0 actual   Lorg/springframework/util/MultiValueMap;
+          0       9     1   key   Ljava/lang/Integer;
+          0       9     2 value   Ljava/lang/Integer;
+
+  private static void lambda$realSpringSixTwoDifferentialSeeded$3(org.springframework.util.MultiValueMap, java.lang.Integer, java.lang.Integer);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokeinterface #96,  3           // InterfaceMethod org/springframework/util/MultiValueMap.addIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)V
+       8: return
+    LineNumberTable:
+      line 86: 0
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0       9     0 expected   Lorg/springframework/util/MultiValueMap;
+          0       9     1   key   Ljava/lang/Integer;
+          0       9     2 value   Ljava/lang/Integer;
+
+  private static void lambda$realSpringSixTwoDifferentialSeeded$2(org.springframework.util.MultiValueMap, java.lang.Integer, java.lang.Integer);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokeinterface #128,  3          // InterfaceMethod org/springframework/util/MultiValueMap.add:(Ljava/lang/Object;Ljava/lang/Object;)V
+       8: return
+    LineNumberTable:
+      line 84: 0
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0       9     0 actual   Lorg/springframework/util/MultiValueMap;
+          0       9     1   key   Ljava/lang/Integer;
+          0       9     2 value   Ljava/lang/Integer;
+
+  private static void lambda$realSpringSixTwoDifferentialSeeded$1(org.springframework.util.MultiValueMap, java.lang.Integer, java.lang.Integer);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokeinterface #128,  3          // InterfaceMethod org/springframework/util/MultiValueMap.add:(Ljava/lang/Object;Ljava/lang/Object;)V
+       8: return
+    LineNumberTable:
+      line 84: 0
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0       9     0 expected   Lorg/springframework/util/MultiValueMap;
+          0       9     1   key   Ljava/lang/Integer;
+          0       9     2 value   Ljava/lang/Integer;
+
+  private static void lambda$detachedCopyVersusLiveViewAndUnsupportedSingletonMutation$0(org.springframework.util.MultiValueMap) throws java.lang.Throwable;
+    Code:
+       0: aload_0
+       1: ldc           #137                // String a
+       3: invokeinterface #63,  2           // InterfaceMethod org/springframework/util/MultiValueMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       8: checkcast     #77                 // class java/util/List
+      11: iconst_4
+      12: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      15: invokeinterface #123,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      20: pop
+      21: return
+    LineNumberTable:
+      line 66: 0
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0      22     0 actual   Lorg/springframework/util/MultiValueMap;
+}

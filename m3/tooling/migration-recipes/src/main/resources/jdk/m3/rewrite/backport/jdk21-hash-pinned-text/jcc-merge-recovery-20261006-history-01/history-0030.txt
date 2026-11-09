@@ -1,0 +1,35 @@
+{
+  "id": "02-actual-text-recipe-maven",
+  "command": [
+    "/workspace/scratch/877d9513c002/toolchains/apache-maven-3.9.12/bin/mvn",
+    "-B",
+    "-ntp",
+    "-o",
+    "-s",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/verification/empty-maven-settings.xml",
+    "-Dmaven.repo.local=/workspace/scratch/1c68df1bae79/javac-convergence-20261005/m2",
+    "-f",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/verification/jcc-source-final-handoff/pom.xml",
+    "clean",
+    "verify"
+  ],
+  "cwd": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay",
+  "started_utc": "2026-10-05T11:57:37.053295+00:00",
+  "expected_exit_code": 0,
+  "ended_utc": "2026-10-05T11:57:41.840890+00:00",
+  "exit_code": 0,
+  "stdout": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/verification/02-actual-text-recipe-maven.stdout.log",
+    "bytes": 2629,
+    "sha256": "5b2544383f9ed80a58a994df641093034aaee8f61b2826322739fcc7bb2d1097",
+    "git_blob_sha1": "f7c7fb493f9a6a2d7b43565232878e0b5bcb523b",
+    "mode": "0o644"
+  },
+  "stderr": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/verification/02-actual-text-recipe-maven.stderr.log",
+    "bytes": 210,
+    "sha256": "9ddf3781b5e43a87b1d67caac2bc4b251f9ce8d77c509c8369129f4b0359fd55",
+    "git_blob_sha1": "16fe39932aaeac0592dbd6b686f9089bec9c28ac",
+    "mode": "0o644"
+  }
+}

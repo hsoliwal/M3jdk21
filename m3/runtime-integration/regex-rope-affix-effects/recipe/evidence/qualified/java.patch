@@ -1,0 +1,1703 @@
+diff --git a/m3/runtime-integration/regex-mandatory-affixes/src/test/java/RegexAffixBeforeAfter.java b/m3/runtime-integration/regex-mandatory-affixes/src/test/java/RegexAffixBeforeAfter.java
+new file mode 100644
+index 0000000..a11c77e
+--- /dev/null
++++ b/m3/runtime-integration/regex-mandatory-affixes/src/test/java/RegexAffixBeforeAfter.java
+@@ -0,0 +1,290 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// SPDX-License-Identifier: Apache-2.0
++import java.lang.ref.WeakReference;
++import java.lang.reflect.Constructor;
++import java.lang.reflect.Field;
++import java.lang.reflect.Method;
++import java.util.Random;
++import java.util.concurrent.atomic.AtomicReferenceArray;
++import java.util.regex.Pattern;
++
++/**
++ * Differential proof for the exact source-extracted full classes.
++ * The owner is an instrumented immutable fixture, not a product M3JDK.
++ */
++public final class RegexAffixBeforeAfter {
++    private static long checks;
++    private static final Gate BEFORE = new Gate(RegexBefore.class);
++    private static final Gate AFTER = new Gate(RegexAfter.class);
++
++    public static void main(String[] arguments) throws Exception {
++        explicitBoundaries();
++        randomWitnesses();
++        generalDifferential();
++        cursorAndColdWork();
++        warmCacheIdentity();
++        unknownAndRefused();
++        retainedBound();
++        System.out.println("M3_REGEX_AFFIX_DIFFERENTIAL_PASS checks=" + checks);
++    }
++
++    private static M3String make(String text, int shape) {
++        if (text.length() < 2) return M3String.text(text);
++        int cut = Math.min(2, text.length() - 1);
++        M3String source = M3String.join(M3String.text(text.substring(0, cut)),
++                M3String.join(M3String.text(text.substring(cut, text.length() - 1)),
++                        M3String.text(text.substring(text.length() - 1))));
++        if (shape == 0) return source;
++        M3String padded = M3String.join(M3String.text("PAD"),
++                M3String.join(source, M3String.text("END")));
++        if (shape == 1) return padded.slice(3, 3 + text.length());
++        M3String shared = M3String.join(padded, padded);
++        return shared.slice(padded.length() + 3, padded.length() + 3 + text.length());
++    }
++
++    private static void compare(M3String source, String expression, boolean prepared) {
++        if (prepared) source.prepareFacts();
++        M3StringFacts facts = source.factsIfPrepared();
++        int before = RegexBefore.tryMatch(source, expression);
++        int after = RegexAfter.tryMatch(source, expression);
++        require(facts == source.factsIfPrepared(), "no forced whole-source facts");
++        boolean expected = Pattern.matches(expression, source.toString());
++        if (before >= 0) require((before == 1) == expected, "before/Pattern parity");
++        if (after >= 0) require((after == 1) == expected, "after/Pattern parity");
++        require(before < 0 || after >= 0, "no lost exact admission");
++        if (before >= 0 && after >= 0) require(before == after, "admitted parity");
++        require(RegexAfter.tryMatch(source, expression) == after, "warm decision parity");
++    }
++
++    private static void explicitBoundaries() throws Exception {
++        String[] texts = {
++                "aXcabcZZxyz", "abcZZxyzxYz", "abcxyz", "abcMIDxyz",
++                "aXcZZxyz", "abcZZxQz", "abcZZxz", "bcZZxyz", "abcxy",
++                "abc\nxyz", "abc\ud83d\ude42xyz", "abc\ud83dxyz",
++                "aXcabc\ud83d\ude42xyz", "abc\ud83d\ude42xyzxYz"
++        };
++        String[] expressions = {
++                "abc.*xyz", "abc.*xyz", "abc.*xyz", "abc.*xyz",
++                "a.c.*xyz", "abc.*x.z", "abc.*xy*z", "a*bc.*xyz", "abc.*xyz*",
++                "abc.*xyz", "abc.*xyz", "abc.*xyz", "abc.*xyz", "abc.*xyz"
++        };
++        for (int i = 0; i < texts.length; i++) {
++            boolean rejected = i < 2 || i > 11;
++            for (int shape = 0; shape < 3; shape++) {
++                for (int prepared = 0; prepared < 2; prepared++) {
++                    M3String source = make(texts[i], shape);
++                    if (prepared != 0) source.prepareFacts();
++                    require(AFTER.rejects(source, expressions[i]) == rejected,
++                            "complete literal boundary case=" + i);
++                    // Required grams are deliberately present on both negative
++                    // boundaries. The old necessary conditions cannot reject.
++                    if (rejected) require(!BEFORE.rejects(source, expressions[i]),
++                            "new guard adds a decisive ordered boundary");
++                    compare(source, expressions[i], prepared != 0);
++                }
++            }
++        }
++        M3String shared = M3String.join(M3String.text("abc"), M3String.text("xyz"));
++        for (int i = 0; i < 8; i++) shared = M3String.join(shared, shared);
++        compare(shared, "abc.*xyz", false);
++        compare(shared.slice(6, shared.length() - 6), "abc.*xyz", true);
++    }
++
++    private static String literal(Random random, int length) {
++        String alphabet = "abcABC012";
++        StringBuilder text = new StringBuilder(length);
++        for (int i = 0; i < length; i++) text.append(alphabet.charAt(random.nextInt(alphabet.length())));
++        return text.toString();
++    }
++
++    private static void randomWitnesses() throws Exception {
++        Random random = new Random(0x4d33414646495831L);
++        for (int trial = 0; trial < 1_024; trial++) {
++            String prefix = literal(random, 2 + random.nextInt(8));
++            String suffix = literal(random, 2 + random.nextInt(8));
++            String middle = literal(random, random.nextInt(12));
++            String expression = prefix + ((trial & 1) == 0 ? ".*"
++                    : "a*".repeat(33) + ".*") + suffix;
++            String wrongPrefix = prefix.substring(0, 1)
++                    + (prefix.charAt(1) == 'Q' ? 'R' : 'Q') + prefix.substring(2)
++                    + prefix + middle + suffix;
++            int index = suffix.length() - 2;
++            String wrongSuffix = prefix + middle + suffix + suffix.substring(0, index)
++                    + (suffix.charAt(index) == 'Q' ? 'R' : 'Q') + suffix.substring(index + 1);
++            String[] texts = {prefix + middle + suffix, wrongPrefix, wrongSuffix};
++            for (int i = 0; i < texts.length; i++) {
++                M3String source = make(texts[i], trial % 3);
++                boolean prepared = (trial & 2) == 0;
++                if (prepared) source.prepareFacts();
++                require(AFTER.rejects(source, expression) == (i != 0), "affix witness guard");
++                if (i != 0) require(!BEFORE.rejects(source, expression), "grams do not replace order");
++                compare(source, expression, prepared);
++            }
++        }
++    }
++
++    private static void generalDifferential() {
++        Random random = new Random(0x4d33414646495832L);
++        String[] tokens = {"a", "b", "c", "Q", ".", "a*", "b*", "c*", ".*"};
++        String[] chunks = {"a", "b", "c", "ab", "", "\n", "\r", "\u0085",
++                "\u2028", "\u2029", "\u03b2", "\ud83d", "\ude42"};
++        for (int trial = 0; trial < 4_096; trial++) {
++            StringBuilder regex = new StringBuilder();
++            int count = 1 + random.nextInt(48);
++            for (int i = 0; i < count; i++) regex.append(tokens[random.nextInt(tokens.length)]);
++            if (regex.indexOf("*") < 0) regex.append("a*");
++            StringBuilder text = new StringBuilder();
++            for (int i = random.nextInt(18); i > 0; i--) {
++                text.append(chunks[random.nextInt(chunks.length)]);
++            }
++            compare(make(text.toString(), trial % 3), regex.toString(), (trial & 1) == 0);
++        }
++    }
++
++    private static void resetReads() {
++        M3StringAtom.reads = 0;
++        M3String.wrapperReads = 0;
++    }
++
++    private static void cursorAndColdWork() throws Exception {
++        String prefix = "abcdefghijkl", suffix = "MNOPQRSTUVWX";
++        M3String positive = make(prefix + "m".repeat(2048) + suffix, 2);
++        positive.prepareFacts();
++        resetReads();
++        require(!BEFORE.rejects(positive, prefix + ".*" + suffix), "old positive guard");
++        long oldWrapperReads = M3String.wrapperReads;
++        resetReads();
++        require(!AFTER.rejects(positive, prefix + ".*" + suffix), "new positive guard");
++        require(M3StringAtom.reads == prefix.length() + suffix.length(), "affix scalar read bound");
++        require(M3String.wrapperReads == oldWrapperReads, "affixes use cursor rather than root charAt");
++        System.out.println("M3_REGEX_AFFIX_CURSOR_WORK scalar_reads=" + M3StringAtom.reads
++                + " root_wrapper_reads=" + M3String.wrapperReads + " affix_units=24");
++
++        for (boolean suffixFailure : new boolean[] {false, true}) {
++            String text = suffixFailure ? "abc" + "m".repeat(2048) + "xyzxYz"
++                    : "aXcabc" + "m".repeat(2048) + "xyz";
++            M3String source = make(text, 2);
++            source.prepareFacts();
++            resetReads();
++            require(RegexBefore.tryMatch(source, "abc.*xyz") == 0, "cold before rejection");
++            long oldReads = M3StringAtom.reads;
++            resetReads();
++            require(RegexAfter.tryMatch(source, "abc.*xyz") == 0, "cold after rejection");
++            long nextReads = M3StringAtom.reads;
++            require(oldReads >= text.length(), "baseline enters full DP");
++            require(nextReads <= 6, "affix rejection work independent of middle length");
++            System.out.println("M3_REGEX_AFFIX_COLD_WORK suffix_failure=" + suffixFailure
++                    + " text_units=" + text.length() + " before_reads=" + oldReads
++                    + " after_reads=" + nextReads);
++        }
++    }
++
++    private static void warmCacheIdentity() throws Exception {
++        M3String source = make("abc" + "m".repeat(120) + "xyz", 2);
++        String expression = "abc.*xyz";
++        require(RegexAfter.tryMatch(source, expression) == 1, "warm seed");
++        resetReads();
++        require(RegexAfter.tryMatch(source, expression) == 1, "warm exact hit");
++        require(M3StringAtom.reads == 0 && M3String.wrapperReads == 0,
++                "warm exact root hit does not reread text");
++        Object plan = AFTER.plan(expression);
++        long[] closure = (long[]) field(plan.getClass(), "closure").get(plan);
++        long incoming = closure[0];
++        long coordinate = ((long) source.start() << 32)
++                | Integer.toUnsignedLong(source.length());
++        Field effects = field(AFTER.table.getClass(), "effects");
++        @SuppressWarnings("unchecked")
++        AtomicReferenceArray<Object> entries = (AtomicReferenceArray<Object>) effects.get(AFTER.table);
++        int slot = (System.identityHashCode(source.owner()) ^ System.identityHashCode(plan)
++                ^ Long.hashCode(Long.rotateLeft(coordinate, 13) ^ incoming)) & 255;
++        Class<?> effectType = Class.forName("RegexAfter$Effect");
++        Constructor<?> effect = effectType.getDeclaredConstructor(
++                WeakReference.class, long.class, plan.getClass(), long.class, long.class);
++        effect.setAccessible(true);
++        Constructor<?> planConstructor = plan.getClass().getDeclaredConstructor(int[].class, int.class);
++        planConstructor.setAccessible(true);
++        Object differentPlan = planConstructor.newInstance(
++                ((int[]) field(plan.getClass(), "atoms").get(plan)).clone(), expression.length());
++        for (int mutation = 0; mutation < 5; mutation++) {
++            WeakReference<M3StringOwner> owner = new WeakReference<>(mutation == 0
++                    ? make(source.toString(), 0).owner() : source.owner());
++            if (mutation == 4) owner.clear();
++            Object wrong = effect.newInstance(owner, mutation == 1 ? coordinate + 1 : coordinate,
++                    mutation == 2 ? differentPlan : plan,
++                    mutation == 3 ? incoming ^ 1L : incoming, 0L);
++            entries.set(slot, wrong);
++            require(RegexAfter.tryMatch(source, expression) == 1,
++                    "cache collision must reject wrong identity lane=" + mutation);
++        }
++        entries.set(slot, effect.newInstance(new WeakReference<>(source.owner()),
++                coordinate, plan, incoming, -1L));
++        resetReads();
++        require(RegexAfter.tryMatch(source, expression) == -1,
++                "unresolved cached UNKNOWN still delegates");
++        require(M3StringAtom.reads > 0,
++                "cached UNKNOWN remains eligible for necessary-condition checks");
++        System.out.println("M3_REGEX_AFFIX_CACHE_PASS key_lanes=5 warm_text_reads=0");
++    }
++
++    private static void unknownAndRefused() {
++        M3String source = make("abcMMMMMMM\ud83d\ude42MMMMMMMxyz", 2);
++        String expression = "abc.*Q.*xyz";
++        require(RegexAfter.tryMatch(source, expression) == -1, "unprepared possible surrogate delegates");
++        source.prepareFacts();
++        require(RegexAfter.tryMatch(source, expression) == 0, "new facts can resolve cached UNKNOWN");
++        compare(make("abc\ud83d\ude42xyz", 1), "abc.*xyz", false);
++        for (String regex : new String[] {"a**", "*a", "abc", "(a*)b", "a+b", "a?b",
++                "a|b", "^ab", "[a-z]+", "\\Qa\\E", "(?i)ab", "", "β*", "a*".repeat(65)}) {
++            require(RegexAfter.tryMatch(source, regex) == -1, "refused syntax/length");
++        }
++        require(RegexAfter.tryMatch(M3String.text("a".repeat(8193)), "a*") == -1,
++                "existing source-work limit retained");
++    }
++
++    private static void retainedBound() throws Exception {
++        Method before = RegexBefore.class.getDeclaredMethod("maximumRetainedPrimitiveBytes");
++        Method after = RegexAfter.class.getDeclaredMethod("maximumRetainedPrimitiveBytes");
++        before.setAccessible(true);
++        after.setAccessible(true);
++        long oldBytes = (long) before.invoke(null), newBytes = (long) after.invoke(null);
++        require(newBytes - oldBytes == (64L + 256L) * 2L * Integer.BYTES, "bounded two-int plan growth");
++        System.out.println("M3_REGEX_AFFIX_RETAINED_PRIMITIVES before=" + oldBytes
++                + " after=" + newBytes + " maximum_delta=" + (newBytes - oldBytes));
++    }
++
++    private static Field field(Class<?> owner, String name) throws Exception {
++        Field field = owner.getDeclaredField(name);
++        field.setAccessible(true);
++        return field;
++    }
++
++    private static void require(boolean condition, String label) {
++        checks++;
++        if (!condition) throw new AssertionError(label);
++    }
++
++    private static final class Gate {
++        final Object table;
++        private final Method prepare, rejects;
++        Gate(Class<?> owner) {
++            try {
++                Method tables = owner.getDeclaredMethod("tables");
++                tables.setAccessible(true);
++                table = tables.invoke(null);
++                prepare = owner.getDeclaredMethod("prepare", String.class, table.getClass());
++                prepare.setAccessible(true);
++                Class<?> plan = Class.forName(owner.getName() + "$Plan");
++                rejects = owner.getDeclaredMethod("rejectsByPrecompute", M3String.class, plan);
++                rejects.setAccessible(true);
++            } catch (ReflectiveOperationException failure) {
++                throw new ExceptionInInitializerError(failure);
++            }
++        }
++        Object plan(String expression) throws Exception {
++            return prepare.invoke(null, expression, table);
++        }
++        boolean rejects(M3String source, String expression) throws Exception {
++            return (boolean) rejects.invoke(null, source, plan(expression));
++        }
++    }
++}
+diff --git a/m3/runtime-integration/regex-plan-amalgamation/src/test/java/RegexAmalgamationBeforeAfter.java b/m3/runtime-integration/regex-plan-amalgamation/src/test/java/RegexAmalgamationBeforeAfter.java
+new file mode 100644
+index 0000000..f51538b
+--- /dev/null
++++ b/m3/runtime-integration/regex-plan-amalgamation/src/test/java/RegexAmalgamationBeforeAfter.java
+@@ -0,0 +1,227 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// SPDX-License-Identifier: Apache-2.0
++import java.lang.reflect.Method;
++import java.util.Arrays;
++import java.util.Locale;
++import java.util.Random;
++import java.util.regex.Pattern;
++
++/**
++ * Exact Java21 source before/after regex engines with an immutable owner fixture.
++ * Pattern.matches is the independent semantic oracle, not a substitute engine.
++ * This cannot qualify HotSpot/JNI, nor is it a JMH end-to-end benchmark.
++ */
++public final class RegexAmalgamationBeforeAfter {
++    private static final Random RANDOM = new Random(0x4d33414d414c4741L);
++    private static final String[] TOKENS =
++            {"a", "b", "c", "Q", "Z", "A", ".", "a*", "b*", "c*", ".*"};
++    private static final String[] CHUNKS =
++            {"a", "b", "c", "ab", "bc", "aa", "", "\n", "\r",
++                    "\u0085", "\u2028", "\ud83d", "\ude42"};
++    private static long checks;
++    private static volatile long blackhole;
++
++    private record Workload(String name, M3String source, String expression,
++                            int iterations) {}
++
++    public static void main(String[] args) throws Exception {
++        deterministic();
++        randomDifferential();
++        retainedPlanBound();
++        benchmarks();
++        System.out.println("M3_REGEX_AMALGAMATION_DIFFERENTIAL_PASS checks=" + checks);
++    }
++
++    private static M3String make(String text, int parts) {
++        if (parts <= 1) return M3String.text(text);
++        int width = Math.max(1, text.length() / parts);
++        M3String composite = M3String.text("");
++        for (int start = 0; start < text.length(); start += width) {
++            composite = M3String.join(composite,
++                    M3String.text(text.substring(start, Math.min(text.length(), start + width))));
++        }
++        return composite;
++    }
++
++    private static void deterministic() {
++        compare(make("a".repeat(300) + "b".repeat(300), 12),
++                "a*Q.*", true, true);
++        compare(make("a".repeat(300) + "b".repeat(300), 12),
++                "a*Q.*", false, true);
++        compare(make("a", 1), "a*b*c*QRTS", true, true);
++        compare(make("b".repeat(100), 4), "Qb*", true, true);
++        compare(make("a".repeat(100), 4), "a*Q", true, true);
++        compare(make("a".repeat(80) + "b".repeat(80), 8), "a*b*", true, true);
++        compare(make("a".repeat(80) + "b".repeat(80), 8), "a.*b", false, true);
++        compare(make("a\ud83d\ude42b", 4), "a.*b", true, true);
++        compare(make("a\ud83d\ude42b", 4), "a*Q.*", true, true);
++        compare(make("abccba", 5).slice(1, 5), "a*b*c*b*a*", true, true);
++        missingRequiredLiteral();
++        compare(make("a".repeat(40) + "Q", 8),
++                "a*".repeat(36) + "Q.*", true, true);
++        compare(make("abc".repeat(40), 8),
++                "a*".repeat(36) + ".*", false, true);
++    }
++
++    private static void compare(M3String source, String regex,
++                                boolean prepareFacts, boolean fullOracle) {
++        compareExpected(source, regex, prepareFacts, fullOracle,
++                Pattern.matches(regex, source.toString()));
++    }
++
++    private static void missingRequiredLiteral() {
++        M3String source = make("a".repeat(40) + "b".repeat(40), 8);
++        String regex = "a*".repeat(36) + "Q.*";
++        String text = source.toString();
++        // Preserve the original long nullable-prefix near miss. Every accepted word
++        // must contain Q, which this source lacks. Repeating the same a* language
++        // changes the state count but not its language (a*a* = a*), so the collapsed
++        // Pattern is a second, bounded oracle for this particular known-false case.
++        // Calling the 36-star backtracking Pattern would enumerate text partitions.
++        checks++;
++        if (text.indexOf('Q') >= 0 || Pattern.matches("a*Q.*", text)) {
++            throw new AssertionError("missing mandatory Q witness changed");
++        }
++        compareExpected(source, regex, true, true, false);
++    }
++
++    private static void compareExpected(M3String source, String regex,
++                                        boolean prepareFacts, boolean fullOracle,
++                                        boolean truth) {
++        if (prepareFacts) source.prepareFacts();
++        int before = RegexBefore.tryMatch(source, regex);
++        int after = RegexAfter.tryMatch(source, regex);
++        checks++;
++        if ((before >= 0 && (before == 1) != truth)
++                || (after >= 0 && (after == 1) != truth)) {
++            throw new AssertionError("Pattern disagreement text=" + source
++                    + " regex=" + regex + " before=" + before
++                    + " after=" + after + " truth=" + truth);
++        }
++        if (before >= 0 && after < 0) {
++            throw new AssertionError("amalgamation lost an exact admission");
++        }
++        if (fullOracle) {
++            checks++;
++            if (before >= 0 && after >= 0 && before != after) {
++                throw new AssertionError("admitted decisions differ");
++            }
++        }
++    }
++
++    private static void randomDifferential() {
++        for (int trial = 0; trial < 12_288; trial++) {
++            StringBuilder expression = new StringBuilder("a*");
++            int count = 1 + RANDOM.nextInt(54);
++            for (int i = 0; i < count; i++) {
++                expression.append(TOKENS[RANDOM.nextInt(TOKENS.length)]);
++            }
++            int leaves = 1 + RANDOM.nextInt(12);
++            M3String source = M3String.text("");
++            for (int i = 0; i < leaves; i++) {
++                source = M3String.join(source,
++                        M3String.text(CHUNKS[RANDOM.nextInt(CHUNKS.length)]));
++            }
++            if ((trial & 7) == 0 && source.length() > 2) {
++                int left = RANDOM.nextInt(source.length());
++                int right = left + RANDOM.nextInt(source.length() - left + 1);
++                source = source.slice(left, right);
++            }
++            compare(source, expression.toString(), (trial & 1) == 0, true);
++        }
++    }
++
++    private static void retainedPlanBound() throws Exception {
++        Method old = RegexBefore.class.getDeclaredMethod("maximumRetainedPrimitiveBytes");
++        Method next = RegexAfter.class.getDeclaredMethod("maximumRetainedPrimitiveBytes");
++        old.setAccessible(true);
++        next.setAccessible(true);
++        long older = (long) old.invoke(null);
++        long newer = (long) next.invoke(null);
++        long difference = newer - older;
++        checks++;
++        if (difference != (64L + 256L) * (5L * Integer.BYTES + 3L * Long.BYTES)) {
++            throw new AssertionError("unaccounted plan memory delta=" + difference);
++        }
++        System.out.println("M3_REGEX_AMALGAMATION_PLAN_BYTES before=" + older
++                + " after=" + newer + " max_extra=" + difference);
++    }
++
++    private static long execute(Workload workload, boolean amalgamation) {
++        long checksum = 0;
++        for (int n = 0; n < workload.iterations; n++) {
++            checksum += amalgamation
++                    ? RegexAfter.tryMatch(workload.source, workload.expression)
++                    : RegexBefore.tryMatch(workload.source, workload.expression);
++        }
++        blackhole = checksum;
++        return checksum;
++    }
++
++    private static long median(long[] values) {
++        long[] copy = values.clone();
++        Arrays.sort(copy);
++        return copy[copy.length / 2];
++    }
++
++    private static void benchmarks() {
++        M3String absent = make("a".repeat(1024) + "b".repeat(1024), 16);
++        absent.prepareFacts();
++        M3String compatible = make("a".repeat(700) + "b".repeat(700), 16);
++        compatible.prepareFacts();
++        M3String edge = make("b".repeat(1000), 12);
++        M3String shortText = make("abc", 2);
++
++        Workload[] workloads = {
++            new Workload("missing-middle-prepared", absent, "a*Q.*", 5000),
++            new Workload("minimum-length", shortText, "a*b*c*QRST", 5000),
++            new Workload("fixed-first", edge, "Qb*", 5000),
++            new Workload("matching-prepared", compatible, "a*b*", 5000)
++        };
++        for (Workload workload : workloads) {
++            int baseline = RegexBefore.tryMatch(workload.source, workload.expression);
++            int candidate = RegexAfter.tryMatch(workload.source, workload.expression);
++            if (baseline != candidate) {
++                // This fixture has no surrogates, so exact Boolean decisions must agree.
++                throw new AssertionError("benchmark source parity");
++            }
++            for (int j = 0; j < 4; j++) {
++                if (execute(workload, false) != execute(workload, true)) {
++                    throw new AssertionError("warmup mismatch");
++                }
++            }
++            long[] before = new long[9];
++            long[] after = new long[9];
++            for (int round = 0; round < before.length; round++) {
++                if ((round & 1) == 0) {
++                    long start = System.nanoTime();
++                    long a = execute(workload, false);
++                    before[round] = System.nanoTime() - start;
++                    start = System.nanoTime();
++                    long b = execute(workload, true);
++                    after[round] = System.nanoTime() - start;
++                    if (a != b) throw new AssertionError("round parity");
++                } else {
++                    long start = System.nanoTime();
++                    long b = execute(workload, true);
++                    after[round] = System.nanoTime() - start;
++                    start = System.nanoTime();
++                    long a = execute(workload, false);
++                    before[round] = System.nanoTime() - start;
++                    if (a != b) throw new AssertionError("round parity");
++                }
++            }
++            double oldNs = (double) median(before) / workload.iterations;
++            double newNs = (double) median(after) / workload.iterations;
++            System.out.printf(Locale.ROOT,
++                    "M3_REGEX_AMALGAMATION_AB case=%s before_ns=%.3f after_ns=%.3f"
++                    + " speedup=%.3fx delta_pct=%.2f%% iterations=%d samples=9"
++                    + " stock_java21_fixture=true%n",
++                    workload.name, oldNs, newNs, oldNs / newNs,
++                    (newNs / oldNs - 1.0) * 100, workload.iterations);
++            System.out.println("M3_REGEX_AMALGAMATION_AB_RAW case=" + workload.name
++                    + " before=" + Arrays.toString(before)
++                    + " after=" + Arrays.toString(after));
++        }
++    }
++}
+diff --git a/src/java.base/share/classes/java/lang/M3StringRegexDp.java b/src/java.base/share/classes/java/lang/M3StringRegexDp.java
+index 90f61b4..c629731 100644
+--- a/src/java.base/share/classes/java/lang/M3StringRegexDp.java
++++ b/src/java.base/share/classes/java/lang/M3StringRegexDp.java
+@@ -56,6 +56,23 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+             if (plan == null || ((long) m + 1) * (plan.atoms.length + 1) > MAX_DP_CELLS) {
+                 return UNKNOWN;
+             }
++            if (plan.closure != null && m >= MIN_EFFECT_UNITS) {
++                M3StringOwner owner = source.owner();
++                long coordinate = ((long) source.start() << 32) | Integer.toUnsignedLong(m);
++                long incoming = plan.closure[0];
++                int slot = (System.identityHashCode(owner) ^ System.identityHashCode(plan)
++                        ^ Long.hashCode(Long.rotateLeft(coordinate, 13) ^ incoming))
++                        & (EFFECT_SLOTS - 1);
++                Effect effect = cache.effects.get(slot);
++                // A previously exact whole-range effect has already validated
++                // this immutable text. Do not charge its warm hits for affixes.
++                // UNKNOWN remains eligible for a new necessary-condition proof.
++                if (effect != null && effect.owner.get() == owner && effect.plan == plan
++                        && effect.coordinate == coordinate && effect.incoming == incoming
++                        && effect.outgoing != UNKNOWN) {
++                    return (effect.outgoing & (1L << plan.atoms.length)) != 0 ? MATCH : NO_MATCH;
++                }
++            }
+             // Amalgamate cached pattern minima/edge literals with already-prepared
+             // canonical text signals before entering either execution engine.
+             if (rejectsByPrecompute(source, plan)) return NO_MATCH;
+@@ -73,8 +90,9 @@
+     /**
+      * Conservative pre-match gate shared by the rolling-DP and bitset/effect
+      * engines. Positive candidate facts are never accepted as regex truth.
+-     * Never force a text scan merely to reject a candidate: only already
+-     * published canonical owner/range facts are consulted.
++     * Signals use only already published canonical owner/range facts. Exact
++     * mandatory literal boundaries use the existing code-unit cursor, without
++     * materializing the text or preparing facts for the whole source.
+      */
+     private static boolean rejectsByPrecompute(M3String source, Plan plan) {
+         int length = source.length();
+@@ -84,13 +102,30 @@
+         if (length != 0 && plan.fixedLastUnit >= 0
+                 && source.charAt(length - 1) != plan.fixedLastUnit) return true;
+         M3StringFacts known = source.factsIfPrepared();
+-        return known != null && (
++        if (known != null && (
+                 (known.bitSignal64 & plan.mandatoryUnitSignals)
+                         != plan.mandatoryUnitSignals
+                 || (known.bigramSignal64 & plan.mandatoryBigramSignals)
+                         != plan.mandatoryBigramSignals
+                 || (known.trigramSignal64 & plan.mandatoryTrigramSignals)
+-                        != plan.mandatoryTrigramSignals);
++                        != plan.mandatoryTrigramSignals)) return true;
++
++        if (plan.literalPrefixUnits > 1 || plan.literalSuffixUnits > 1) {
++            M3String.CodeUnitCursor units = new M3String.CodeUnitCursor(source);
++            // The first/last units were checked above. Both remaining ranges
++            // advance forwards so a cursor retains each scalar interval.
++            for (int i = 1; i < plan.literalPrefixUnits; i++) {
++                if (units.at(i) != (char) plan.atoms[i]) return true;
++            }
++            int sourceStart = length - plan.literalSuffixUnits;
++            int atomStart = plan.atoms.length - plan.literalSuffixUnits;
++            for (int i = 0; i < plan.literalSuffixUnits - 1; i++) {
++                if (units.at(sourceStart + i) != (char) plan.atoms[atomStart + i]) {
++                    return true;
++                }
++            }
++        }
++        return false;
+     }
+ 
+     private static Tables tables() {
+@@ -248,9 +283,10 @@
+     private static long maximumRetainedPrimitiveBytes() {
+         long perPlan = MAX_PATTERN_UNITS * (long) Integer.BYTES
+                 + (MAX_BIT_ATOMS + 1L + 128L + 2L) * Long.BYTES + Integer.BYTES;
+-        // Six precomputed facts: min length, required units/pairs/triples,
+-        // and fixed boundaries. Effects may retain evicted compiled plans.
+-        perPlan += 3L * Integer.BYTES + 3L * Long.BYTES;
++        // Eight precomputed facts: min length, required units/pairs/triples,
++        // fixed boundaries and literal boundary lengths. Effects may retain
++        // evicted compiled plans.
++        perPlan += 5L * Integer.BYTES + 3L * Long.BYTES;
+         return (PLAN_SLOTS + (long) EFFECT_SLOTS) * perPlan
+                 + EFFECT_SLOTS * 3L * Long.BYTES;
+     }
+@@ -283,6 +319,8 @@
+         final long mandatoryTrigramSignals;
+         final int fixedFirstUnit;
+         final int fixedLastUnit;
++        final int literalPrefixUnits;
++        final int literalSuffixUnits;
+ 
+         Plan(int[] atoms, int units) {
+             this.atoms = atoms;
+@@ -323,6 +361,14 @@
+             mandatoryUnitSignals = requiredSignals;
+             mandatoryBigramSignals = requiredPairs;
+             mandatoryTrigramSignals = requiredTriples;
++            int prefix = 0;
++            while (prefix < atoms.length && (atoms[prefix] & STAR) == 0
++                    && (atoms[prefix] & CODE_UNIT) != '.') {
++                prefix++;
++            }
++            literalPrefixUnits = prefix;
++            // The final uninterrupted literal run from the same gram pass.
++            literalSuffixUnits = consecutiveLiterals;
+             int first = atoms[0];
+             int last = atoms[atoms.length - 1];
+             fixedFirstUnit = (first & STAR) == 0
+diff --git a/src/java.base/share/classes/jdk/internal/mindex/M3RegexDpPlan.java b/src/java.base/share/classes/jdk/internal/mindex/M3RegexDpPlan.java
+index 650b550..ac38536 100644
+--- a/src/java.base/share/classes/jdk/internal/mindex/M3RegexDpPlan.java
++++ b/src/java.base/share/classes/jdk/internal/mindex/M3RegexDpPlan.java
+@@ -7,6 +7,7 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+ package jdk.internal.mindex;
+ 
+ import java.util.Objects;
++import java.util.concurrent.locks.ReentrantReadWriteLock;
+ 
+ /**
+  * Target-owned Boolean dot/star execution plan; not a Pattern parser or public JDK API.
+@@ -231,6 +232,382 @@
+         return rows;
+     }
+ 
++    /** Requested execution policy. JNI and CUDA are strict; PREFER_JNI may use Java. */
++    public enum BatchBackend { JAVA, JNI, CUDA, PREFER_JNI }
++
++    /** Execution actually performed. An empty batch has no backend execution. */
++    public enum BatchExecution { NONE, JAVA, JNI, CUDA }
++
++    /**
++     * Admission limits for a derived batch. Primitive bytes bound the Java coordinates,
++     * one invocation's result arrays, numeric staging image and simultaneous CPU/CUDA images.
++     * Object headers, effect references and pre-existing immutable Effects are not counted.
++     * Concurrent invocations each own their result arrays; this is not a process heap quota.
++     * State visits conservatively bound preparation and all row evaluations in one call.
++     */
++    public record BatchLimits(int maxEffects, int maxRows, int maxTupleEffects,
++                              long maxPrimitiveBytes, long maxStateVisits) {
++        public BatchLimits {
++            if (maxEffects < 0 || maxRows < 0 || maxTupleEffects < 0
++                    || maxPrimitiveBytes < 0 || maxStateVisits < 0) {
++                throw new IllegalArgumentException("negative prepared batch limit");
++            }
++        }
++
++        public static BatchLimits defaults() {
++            return new BatchLimits(65_536, 65_536, 1_048_576, 64L << 20, 64_000_000L);
++        }
++    }
++
++    private static final int BATCH_ABI = 1;
++    private static final int BATCH_ROWS_PER_CALL = 16_384;
++    private static final int BATCH_EFFECTS_PER_CALL = 65_536;
++
++    /**
++     * Prepare full-match rows over existing Effects, without reading or retaining text.
++     * Offsets are CSR boundaries: row r contains tupleEffects[offsets[r]..offsets[r+1]).
++     * Empty rows and empty Effects are identities. Null means the candidate exceeds a
++     * budget, never NO_MATCH. Malformed coordinates and foreign-plan Effects are errors.
++     */
++    public PreparedBatch prepareBatch(Effect[] effects, int[] tupleEffects, int[] offsets,
++                                      BatchLimits limits, Runnable checkpoint) {
++        return prepareBatch(null, effects, tupleEffects, offsets, null, limits, checkpoint);
++    }
++
++    /**
++     * Prepare rows with a fixed prefix and suffix. Each answer is the complete-input
++     * truth of prefix + row + suffix; this does not implement regex search or assertions.
++     * Affixes remain open at their joins, including high/low surrogate pairs split there.
++     */
++    public PreparedBatch prepareBatch(Effect prefix, Effect[] effects, int[] tupleEffects,
++                                      int[] offsets, Effect suffix, BatchLimits limits,
++                                      Runnable checkpoint) {
++        Objects.requireNonNull(effects, "effects");
++        Objects.requireNonNull(tupleEffects, "tupleEffects");
++        Objects.requireNonNull(offsets, "offsets");
++        Objects.requireNonNull(limits, "limits");
++        check(checkpoint);
++        if (offsets.length == 0) throw new IllegalArgumentException("missing row boundary");
++        int rowCount = offsets.length - 1;
++        int affixes = (prefix == null ? 0 : 1) + (suffix == null ? 0 : 1);
++        long effectCount = (long) effects.length + affixes;
++        if (effectCount > limits.maxEffects || rowCount > limits.maxRows
++                || tupleEffects.length > limits.maxTupleEffects) return null;
++        long stride = 2L + 2L * states;
++        long imageBytes = Math.addExact(Math.multiplyExact(effectCount, stride * Long.BYTES),
++                Math.addExact((long) states * Long.BYTES,
++                        ((long) tupleEffects.length + offsets.length) * Integer.BYTES));
++        // One CPU host image, one CUDA host/device image, staging, and conservative spare
++        // room for bounded workspaces. This bounds numeric allocations, not total JVM heap.
++        long primitiveBytes = Math.addExact(Math.multiplyExact(5L, imageBytes),
++                Math.addExact(((long) tupleEffects.length + offsets.length) * Integer.BYTES,
++                        (long) rowCount * (Long.BYTES * 2L + 2L) + BATCH_ROWS_PER_CALL + 512L));
++        long visits = Math.addExact(effectCount * 4L * states + 3L * states + 6L * states * states,
++                Math.addExact((long) tupleEffects.length * 2L * states, rowCount));
++        if (primitiveBytes > limits.maxPrimitiveBytes || visits > limits.maxStateVisits
++                || effectCount * stride > Integer.MAX_VALUE) return null;
++
++        // Snapshot coordinates before validation. No caller-owned mutable array is retained.
++        Effect[] pinned = new Effect[(int) effectCount];
++        System.arraycopy(effects, 0, pinned, 0, effects.length);
++        int prefixIndex = prefix == null ? -1 : effects.length;
++        int suffixIndex = suffix == null ? -1 : effects.length + (prefix == null ? 0 : 1);
++        if (prefix != null) pinned[prefixIndex] = prefix;
++        if (suffix != null) pinned[suffixIndex] = suffix;
++        int[] tuples = tupleEffects.clone();
++        int[] starts = offsets.clone();
++        long[] lengths = new long[rowCount];
++        for (int i = 0; i < pinned.length; i++) {
++            if ((i & 255) == 0) check(checkpoint);
++            requireEffect(pinned[i]);
++        }
++        if (starts[0] != 0 || starts[rowCount] != tuples.length) {
++            throw new IllegalArgumentException("row boundaries must cover all tuple effects");
++        }
++        long affixLength = Math.addExact(prefix == null ? 0L : prefix.length,
++                suffix == null ? 0L : suffix.length);
++        for (int row = 0; row < rowCount; row++) {
++            check(checkpoint);
++            int start = starts[row], end = starts[row + 1];
++            if (start < 0 || end < start || end > tuples.length) {
++                throw new IllegalArgumentException("invalid prepared row boundary");
++            }
++            long length = affixLength;
++            for (int at = start; at < end; at++) {
++                if ((at & 255) == 0) check(checkpoint);
++                int atom = tuples[at];
++                if (atom < 0 || atom >= effects.length) {
++                    throw new IllegalArgumentException("invalid prepared effect index");
++                }
++                length = Math.addExact(length, pinned[atom].length);
++            }
++            lengths[row] = length;
++            if (end - start > BATCH_EFFECTS_PER_CALL) return null;
++        }
++        // Context-specific witnesses are private derived query state. Existing all-state
++        // Effects stay immutable and retain every ordinary and boundary lane.
++        long seed = prefix == null ? initial : applyRows(prefix.rows, initial);
++        boolean seedHigh = prefix != null && prefix.trailingHigh;
++        long suffixWithoutHigh = suffixPreimage(suffix, false);
++        long suffixWithHigh = suffixPreimage(suffix, true);
++        check(checkpoint);
++        return new PreparedBatch(pinned, tuples, starts, lengths, prefixIndex, suffixIndex,
++                primitiveBytes, imageBytes, seed, seedHigh, suffixWithoutHigh, suffixWithHigh);
++    }
++
++    /** Accepting preimage of one fixed suffix, including complete-input surrogate flush. */
++    private long suffixPreimage(Effect suffix, boolean incomingHigh) {
++        if (suffix == null || suffix.length == 0) {
++            return incomingHigh ? dotPreimage(accepting) : accepting;
++        }
++        long targets = suffix.trailingHigh ? dotPreimage(accepting) : accepting;
++        long[] relation = incomingHigh && suffix.withoutLeadingLow != null
++                ? suffix.withoutLeadingLow : suffix.rows;
++        long witness = preimage(relation, targets);
++        return incomingHigh ? dotPreimage(witness) : witness;
++    }
++
++    /** Reverse existential observation scans all entry rows; it never changes a cached row. */
++    private long preimage(long[] rows, long targets) {
++        long witness = 0;
++        for (int state = 0; state < states; state++) {
++            if ((rows[state] & targets) != 0) witness |= 1L << state;
++        }
++        return witness;
++    }
++
++    private long dotPreimage(long targets) {
++        long witness = 0;
++        for (int state = 0; state < states; state++) {
++            if ((advanceMatched(1L << state, dots) & targets) != 0) witness |= 1L << state;
++        }
++        return witness;
++    }
++
++    private void requireEffect(Effect effect) {
++        Objects.requireNonNull(effect, "effect");
++        if (effect.plan != this) throw new IllegalArgumentException("different regex plan");
++    }
++
++    /** Immutable complete-input answers, with exact UTF-16 lengths and an execution receipt. */
++    public static final class BatchResult {
++        private final byte[] answers;
++        private final long[] lengths;
++        private final BatchExecution execution;
++
++        private BatchResult(byte[] answers, long[] lengths, BatchExecution execution) {
++            this.answers = answers;
++            this.lengths = lengths;
++            this.execution = execution;
++        }
++
++        public int rowCount() { return answers.length; }
++        public boolean matches(int row) { return answers[Objects.checkIndex(row, answers.length)] != 0; }
++        public long utf16Length(int row) { return lengths[Objects.checkIndex(row, lengths.length)]; }
++        public BatchExecution execution() { return execution; }
++    }
++
++    /**
++     * Reusable, closeable numeric execution view of existing immutable Effects. It owns no
++     * canonical text, parser or effect cache. Native tables are prepared lazily and retained
++     * once per backend. Fixed affixes become one open seed and two boundary-aware suffix
++     * acceptance preimages; row execution visits only its tuple fragments. Close waits for
++     * active native chunks, releases both images and drops
++     * the Java pins. Checkpoints always run outside lifecycle locks and can safely close it.
++     */
++    public final class PreparedBatch implements AutoCloseable {
++        private final ReentrantReadWriteLock lifecycle = new ReentrantReadWriteLock(true);
++        private final int rowCount;
++        private final int prefixIndex, suffixIndex;
++        private final long primitiveBytesBound, imageBytes;
++        private final long seed, suffixWithoutHigh, suffixWithHigh;
++        private final boolean seedHigh;
++        private Effect[] effects;
++        private int[] tuples, offsets;
++        private long[] lengths;
++        private long jniHandle, cudaHandle;
++        private boolean closed;
++
++        private PreparedBatch(Effect[] effects, int[] tuples, int[] offsets, long[] lengths,
++                              int prefixIndex, int suffixIndex,
++                              long primitiveBytesBound, long imageBytes, long seed, boolean seedHigh,
++                              long suffixWithoutHigh, long suffixWithHigh) {
++            this.effects = effects;
++            this.tuples = tuples;
++            this.offsets = offsets;
++            this.lengths = lengths;
++            this.rowCount = lengths.length;
++            this.prefixIndex = prefixIndex;
++            this.suffixIndex = suffixIndex;
++            this.primitiveBytesBound = primitiveBytesBound;
++            this.imageBytes = imageBytes;
++            this.seed = seed;
++            this.seedHigh = seedHigh;
++            this.suffixWithoutHigh = suffixWithoutHigh;
++            this.suffixWithHigh = suffixWithHigh;
++        }
++
++        public int rowCount() { return rowCount; }
++        public long primitiveBytesBound() { return primitiveBytesBound; }
++        public boolean isOpen() {
++            lifecycle.readLock().lock();
++            try { return !closed; }
++            finally { lifecycle.readLock().unlock(); }
++        }
++
++        /**
++         * Evaluate every row, with the same checkpoint boundaries for all backends.
++         * JNI absence is eligible only for PREFER_JNI fallback. Runtime failures, invalid
++         * geometry and cancellation propagate, and never become a definitive false answer.
++         */
++        public BatchResult matches(BatchBackend backend, Runnable checkpoint) {
++            Objects.requireNonNull(backend, "backend");
++            check(checkpoint);
++            byte[] answers;
++            long[] resultLengths;
++            BatchExecution execution;
++            lifecycle.writeLock().lock();
++            try {
++                ensureOpen();
++                answers = new byte[rowCount];
++                resultLengths = lengths.clone();
++                execution = rowCount == 0 ? BatchExecution.NONE : chooseBackend(backend);
++            } finally { lifecycle.writeLock().unlock(); }
++            int start = 0;
++            while (start < rowCount) {
++                check(checkpoint);
++                lifecycle.readLock().lock();
++                try {
++                    ensureOpen();
++                    int end = chunkEnd(start);
++                    if (execution == BatchExecution.JAVA) {
++                        for (int row = start; row < end; row++) {
++                            answers[row] = (byte) (matchRow(row) ? 1 : 0);
++                        }
++                    } else if (execution == BatchExecution.JNI) {
++                        batchEvaluate0(jniHandle, start, end, answers, start);
++                    } else {
++                        batchCudaEvaluate0(cudaHandle, start, end, answers, start);
++                    }
++                    for (int row = start; row < end; row++) {
++                        if (answers[row] != 0 && answers[row] != 1) {
++                            throw new IllegalStateException("invalid prepared regex truth result");
++                        }
++                    }
++                    start = end;
++                } finally { lifecycle.readLock().unlock(); }
++            }
++            check(checkpoint);
++            return new BatchResult(answers, resultLengths, execution);
++        }
++
++        private BatchExecution chooseBackend(BatchBackend backend) {
++            if (backend == BatchBackend.JAVA) return BatchExecution.JAVA;
++            boolean cuda = backend == BatchBackend.CUDA;
++            if ((cuda ? cudaHandle : jniHandle) == 0) {
++                try {
++                    int abi = cuda ? batchCudaAbi0() : batchAbi0();
++                    if (abi != BATCH_ABI) {
++                        if (backend == BatchBackend.PREFER_JNI) return BatchExecution.JAVA;
++                        throw new UnsupportedOperationException("prepared regex ABI mismatch");
++                    }
++                    long[] lanes = packedEffects();
++                    long[] dotRows = identityRows();
++                    advanceRows(dotRows, dots);
++                    long handle = cuda
++                            ? batchCudaCreate0(lanes, dotRows, states, initial, accepting,
++                                    tuples, offsets, prefixIndex, suffixIndex, imageBytes)
++                            : batchCreate0(lanes, dotRows, states, initial, accepting,
++                                    tuples, offsets, prefixIndex, suffixIndex, imageBytes);
++                    if (handle == 0) throw new IllegalStateException("prepared regex returned no handle");
++                    if (cuda) cudaHandle = handle;
++                    else jniHandle = handle;
++                } catch (UnsatisfiedLinkError unavailable) {
++                    if (backend == BatchBackend.PREFER_JNI) return BatchExecution.JAVA;
++                    throw new UnsupportedOperationException("prepared regex " + backend + " unavailable", unavailable);
++                }
++            }
++            return cuda ? BatchExecution.CUDA : BatchExecution.JNI;
++        }
++
++        private long[] packedEffects() {
++            int stride = 2 + 2 * states;
++            long[] lanes = new long[Math.multiplyExact(effects.length, stride)];
++            for (int i = 0; i < effects.length; i++) {
++                Effect effect = effects[i];
++                int base = i * stride;
++                lanes[base] = effect.length;
++                lanes[base + 1] = (effect.withoutLeadingLow == null ? 0L : 1L)
++                        | (effect.trailingHigh ? 2L : 0L);
++                System.arraycopy(effect.rows, 0, lanes, base + 2, states);
++                System.arraycopy(effect.withoutLeadingLow == null ? effect.rows : effect.withoutLeadingLow,
++                        0, lanes, base + 2 + states, states);
++            }
++            return lanes;
++        }
++
++        private int chunkEnd(int start) {
++            int end = start;
++            int used = 0;
++            while (end < rowCount && end - start < BATCH_ROWS_PER_CALL) {
++                int next = offsets[end + 1] - offsets[end];
++                if (end != start && used + next > BATCH_EFFECTS_PER_CALL) break;
++                used += next;
++                end++;
++            }
++            return end;
++        }
++
++        private boolean matchRow(int row) {
++            long frontier = seed;
++            boolean pendingHigh = seedHigh;
++            int start = offsets[row], end = offsets[row + 1];
++            for (int at = start; at < end; at++) {
++                Effect effect = effects[tuples[at]];
++                if (effect.length == 0) continue;
++                long[] relation = effect.rows;
++                if (pendingHigh) {
++                    frontier = advanceMatched(frontier, dots);
++                    if (effect.withoutLeadingLow != null) relation = effect.withoutLeadingLow;
++                }
++                frontier = applyRows(relation, frontier);
++                pendingHigh = effect.trailingHigh;
++            }
++            return (frontier & (pendingHigh ? suffixWithHigh : suffixWithoutHigh)) != 0;
++        }
++
++        private void ensureOpen() {
++            if (closed) throw new IllegalStateException("prepared regex batch is closed");
++        }
++
++        @Override public void close() {
++            lifecycle.writeLock().lock();
++            try {
++                if (closed) return;
++                closed = true;
++                long cpu = jniHandle, gpu = cudaHandle;
++                jniHandle = cudaHandle = 0;
++                effects = null;
++                tuples = offsets = null;
++                lengths = null;
++                try { if (cpu != 0) batchClose0(cpu); }
++                finally { if (gpu != 0) batchCudaClose0(gpu); }
++            } finally { lifecycle.writeLock().unlock(); }
++        }
++    }
++
++    /**
++     * Explicit internal attachment of the optional CUDA provider. The provider uses this
++     * plan's numeric Effects and distinct JNI symbols; it does not replace libjava or add
++     * another regex parser. No library is loaded implicitly by a String operation.
++     */
++    public static void loadCudaBatchProvider(String absolutePath) {
++        System.load(Objects.requireNonNull(absolutePath, "absolutePath"));
++        if (batchCudaAbi0() != BATCH_ABI) {
++            throw new UnsupportedOperationException("prepared regex CUDA ABI mismatch");
++        }
++    }
++
+     public final class Effect {
+         private final M3RegexDpPlan plan = M3RegexDpPlan.this;
+         private final long[] rows;
+@@ -384,4 +761,16 @@
+     static native long[] compose0(long[] left, long[] right);
+     static native long[] composeStructured0(long[] left, long[] right);
+     static native long[] repeat0(long[] rows, long count, boolean structured);
++    static native int batchAbi0();
++    static native long batchCreate0(long[] lanes, long[] dotRows, int states,
++            long initial, long accepting, int[] tuples, int[] offsets,
++            int prefix, int suffix, long maxImageBytes);
++    static native void batchEvaluate0(long handle, int start, int end, byte[] answers, int answerOffset);
++    static native void batchClose0(long handle);
++    static native int batchCudaAbi0();
++    static native long batchCudaCreate0(long[] lanes, long[] dotRows, int states,
++            long initial, long accepting, int[] tuples, int[] offsets,
++            int prefix, int suffix, long maxImageBytes);
++    static native void batchCudaEvaluate0(long handle, int start, int end, byte[] answers, int answerOffset);
++    static native void batchCudaClose0(long handle);
+ }
+diff --git a/test/jdk/java/lang/String/M3StringRegexDpTest.java b/test/jdk/java/lang/String/M3StringRegexDpTest.java
+index 8cb8891..a88f746 100644
+--- a/test/jdk/java/lang/String/M3StringRegexDpTest.java
++++ b/test/jdk/java/lang/String/M3StringRegexDpTest.java
+@@ -16,6 +16,7 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+ public final class M3StringRegexDpTest {
+     private static final Field STRING_M3;
+     private static final Method TRY_MATCH;
++    private static final Method CANONICALIZE;
+     private static long checks;
+ 
+     static {
+@@ -26,6 +27,8 @@
+             Class<?> dp = Class.forName("java.lang.M3StringRegexDp");
+             TRY_MATCH = dp.getDeclaredMethod("tryMatch", owner, String.class);
+             TRY_MATCH.setAccessible(true);
++            CANONICALIZE = owner.getDeclaredMethod("canonicalize", String.class);
++            CANONICALIZE.setAccessible(true);
+         } catch (ReflectiveOperationException error) {
+             throw new ExceptionInInitializerError(error);
+         }
+@@ -37,6 +40,7 @@
+         compositeDagsAndLongPlans();
+         amalgamatedPrecompute();
+         requiredNgramPrecompute();
++        mandatoryLiteralAffixes();
+         refusals();
+         System.out.println("M3_STRING_REGEX_DP_PASS|checks=" + checks);
+     }
+@@ -160,8 +164,8 @@
+         verify(missing, "a*b*Q", 0);
+         verify(missing, "Qb*", 0);
+         verify(missing, "a*Q", 0);
+-        verify(missing, "a*".repeat(36) + "Q.*", 0);
+-        verify(missing, "a*".repeat(36) + "b*Q", 0);
++        verifyMissingRequiredQ(missing, "Q.*");
++        verifyMissingRequiredQ(missing, "b*Q");
+         verify(missing, "a*b*", 1);
+         verify(missing, "a.*b", 1);
+         verify(String.join("", "ab", "c"), "abc.*", 1);
+@@ -170,6 +174,8 @@
+         String splitPair = String.join("", "a", "\ud83d", "\ude42", "b");
+         equal(decision(splitPair, "a.*b"), -1,
+                 "surrogate-containing possible match still delegates to Pattern");
++        // Missing-unit rejection is available only after optional facts are published.
++        prepareFacts.invoke(STRING_M3.get(splitPair));
+         verify(splitPair, "a*Q.*", 0);
+ 
+         Random random = new Random(0x4d3352414d414c47L);
+@@ -198,8 +204,9 @@
+                         "empty String/Pattern trial=" + trial);
+                 continue;
+             }
+-            if ((trial & 1) == 0) prepareFacts.invoke(STRING_M3.get(composite));
+-            int value = decision(composite, expression);
++            Object canonical = canonicalOwner(composite);
++            if ((trial & 1) == 0) prepareFacts.invoke(canonical);
++            int value = (Integer) TRY_MATCH.invoke(null, canonical, expression);
+             if (value >= 0) {
+                 equal(value == 1, oracle, "amalgamated DP/Pattern trial=" + trial);
+             }
+@@ -285,6 +292,158 @@
+         }
+     }
+ 
++
++    /**
++     * Complete mandatory literal boundaries can reject a candidate whose
++     * required letters, pairs, triples and first/last units are all present.
++     * The guard is exact across canonical tuple seams and owner/range slices.
++     */
++    private static void mandatoryLiteralAffixes() throws Exception {
++        AffixOracle oracle = new AffixOracle();
++        String[] texts = {
++                "aXcabcZZxyz", "abcZZxyzxYz", "abcxyz", "abcMIDxyz",
++                "aXcZZxyz", "abcZZxQz", "abcZZxz", "bcZZxyz", "abcxy",
++                "abc\nxyz", "abc\ud83d\ude42xyz", "abc\ud83dxyz",
++                "aXcabc\ud83d\ude42xyz", "abc\ud83d\ude42xyzxYz"
++        };
++        String[] expressions = {
++                "abc.*xyz", "abc.*xyz", "abc.*xyz", "abc.*xyz",
++                "a.c.*xyz", "abc.*x.z", "abc.*xy*z", "a*bc.*xyz", "abc.*xyz*",
++                "abc.*xyz", "abc.*xyz", "abc.*xyz",
++                "abc.*xyz", "abc.*xyz"
++        };
++        boolean[] rejected = {
++                true, true, false, false, false, false, false, false, false,
++                false, false, false, true, true
++        };
++        for (int i = 0; i < texts.length; i++) {
++            for (int shape = 0; shape < 3; shape++) {
++                for (int prepared = 0; prepared < 2; prepared++) {
++                    oracle.verify(affixComposite(texts[i], shape), expressions[i],
++                            rejected[i], prepared != 0, "affix case=" + i
++                                    + " shape=" + shape + " facts=" + prepared);
++                }
++            }
++        }
++
++        String shared = String.join("", "ab", "c", "xy", "z");
++        for (int depth = 0; depth < 8; depth++) shared = shared.concat(shared);
++        oracle.verify(shared, "abc.*xyz", false, false, "shared affix DAG");
++        oracle.verify(shared.substring(6, shared.length() - 6), "abc.*xyz",
++                false, true, "shared affix DAG range");
++
++        // Equal-length ranges retain one owner but have different exact
++        // coordinates. A cached full-range truth must never leak between them.
++        String good = "abc" + "M".repeat(96) + "xyz";
++        String bad = "aXc" + "M".repeat(93) + "abcxyz";
++        String ranges = String.join("", good, bad, good);
++        for (int index : new int[] {0, 0, 1, 1, 2, 0, 1, 2}) {
++            verify(ranges.substring(index * good.length(), (index + 1) * good.length()),
++                    "abc.*xyz", index == 1 ? 0 : 1);
++        }
++
++        // A definite ASCII boundary mismatch is decisive even when the middle
++        // would otherwise require the unchanged JDK surrogate fallback.
++        equal(decision(affixComposite("abc\ud83d\ude42xyz", 0), "abc.*xyz"), -1,
++                "possible pair-containing affix match still delegates");
++        equal(decision(affixComposite("abc\ud83dxyz", 1), "abc.*xyz"), -1,
++                "possible lone-surrogate affix match still delegates");
++        verify(affixComposite("aXcabc\ud83d\ude42xyz", 2), "abc.*xyz", 0);
++        verify(affixComposite("abc\ud83d\ude42xyzxYz", 2), "abc.*xyz", 0);
++
++        // Witnesses alternate the <=32-atom relation path and >32-atom rolling
++        // path. Every negative contains the full required prefix/suffix in the
++        // middle, so unordered source-fact signals cannot prove its rejection.
++        Random random = new Random(0x4d33414646495831L);
++        for (int trial = 0; trial < 1_024; trial++) {
++            String prefix = randomLiteral(random, 2 + random.nextInt(8));
++            String suffix = randomLiteral(random, 2 + random.nextInt(8));
++            String middle = randomLiteral(random, random.nextInt(12));
++            String expression = prefix + ((trial & 1) == 0
++                    ? ".*" : "a*".repeat(33) + ".*") + suffix;
++            String prefixMismatch = prefix.substring(0, 1)
++                    + (prefix.charAt(1) == 'Q' ? 'R' : 'Q') + prefix.substring(2)
++                    + prefix + middle + suffix;
++            int penultimate = suffix.length() - 2;
++            String suffixMismatch = prefix + middle + suffix
++                    + suffix.substring(0, penultimate)
++                    + (suffix.charAt(penultimate) == 'Q' ? 'R' : 'Q')
++                    + suffix.substring(penultimate + 1);
++            boolean prepared = (trial & 2) == 0;
++            oracle.verify(affixComposite(prefix + middle + suffix, trial % 3),
++                    expression, false, prepared, "affix witness=" + trial);
++            oracle.verify(affixComposite(prefixMismatch, trial % 3),
++                    expression, true, prepared, "prefix mismatch=" + trial);
++            oracle.verify(affixComposite(suffixMismatch, trial % 3),
++                    expression, true, prepared, "suffix mismatch=" + trial);
++        }
++    }
++
++    private static String affixComposite(String text, int shape) {
++        int first = Math.min(2, text.length());
++        int second = Math.max(first, text.length() - 2);
++        String composite = String.join("", text.substring(0, first),
++                text.substring(first, second), text.substring(second));
++        if (shape == 0) return composite;
++        String padded = String.join("", "PAD", composite, "END");
++        if (shape == 1) return padded.substring(3, 3 + text.length());
++        String shared = padded.concat(padded);
++        return shared.substring(padded.length() + 3,
++                padded.length() + 3 + text.length());
++    }
++
++    private static String randomLiteral(Random random, int length) {
++        String alphabet = "abcABC012";
++        StringBuilder result = new StringBuilder(length);
++        for (int i = 0; i < length; i++) {
++            result.append(alphabet.charAt(random.nextInt(alphabet.length())));
++        }
++        return result.toString();
++    }
++
++    private static final class AffixOracle {
++        private final Method facts;
++        private final Method factsIfPrepared;
++        private final Method compile;
++        private final Method preflight;
++        private final Object table;
++
++        AffixOracle() throws Exception {
++            Class<?> storage = Class.forName("java.lang.M3String");
++            Class<?> dp = Class.forName("java.lang.M3StringRegexDp");
++            Class<?> plan = Class.forName("java.lang.M3StringRegexDp$Plan");
++            facts = storage.getDeclaredMethod("facts");
++            facts.setAccessible(true);
++            factsIfPrepared = storage.getDeclaredMethod("factsIfPrepared");
++            factsIfPrepared.setAccessible(true);
++            Method tables = dp.getDeclaredMethod("tables");
++            tables.setAccessible(true);
++            table = tables.invoke(null);
++            compile = dp.getDeclaredMethod("prepare", String.class, table.getClass());
++            compile.setAccessible(true);
++            preflight = dp.getDeclaredMethod("rejectsByPrecompute", storage, plan);
++            preflight.setAccessible(true);
++        }
++
++        void verify(String source, String expression, boolean rejected,
++                boolean prepareFacts, String label) throws Exception {
++            Object owner = STRING_M3.get(source);
++            if (prepareFacts) facts.invoke(owner);
++            Object known = factsIfPrepared.invoke(owner);
++            Object plan = compile.invoke(null, expression, table);
++            equal((Boolean) preflight.invoke(null, owner, plan), rejected,
++                    label + " exact necessary condition");
++            equal(factsIfPrepared.invoke(owner) == known, true,
++                    label + " must not prepare whole-source facts");
++            boolean expected = Pattern.matches(expression, new StringBuilder(source));
++            if (rejected) equal(expected, false, label + " rejection oracle");
++            int result = decision(source, expression);
++            if (result >= 0) equal(result == 1, expected, label + " DP oracle");
++            if (rejected) equal(result, 0, label + " preflight decision");
++            equal(source.matches(expression), expected, label + " String oracle");
++        }
++    }
++
+     private static void refusals() throws Exception {
+         String text = String.join("", "a", "bc");
+         for (String expression : new String[] {
+@@ -311,12 +470,25 @@
+                 Pattern.matches("a+c", new StringBuilder(text)), "full JDK syntax remains authoritative");
+     }
+ 
+-    private static int decision(String text, String regex) throws Exception {
++    private static Object canonicalOwner(String text) throws Exception {
+         Object owner = STRING_M3.get(text);
+         if (owner == null) {
+-            throw new AssertionError("expected canonical M3 storage: " + text);
++            // Singleton String.join intentionally preserves a flat input's backing.
++            // Keep that original String and its public Pattern-fallback checks, while
++            // explicitly admitting the same spelling for the direct DP obligation.
++            owner = CANONICALIZE.invoke(null, text);
++            if (owner == null) throw new AssertionError("canonical fixture admission refused");
++            CharSequence value = (CharSequence) owner;
++            equal(value.length(), text.length(), "canonical fixture UTF16 length");
++            for (int i = 0; i < text.length(); i++) {
++                equal(value.charAt(i), text.charAt(i), "canonical fixture UTF16 unit");
++            }
+         }
+-        return (Integer) TRY_MATCH.invoke(null, owner, regex);
++        return owner;
++    }
++
++    private static int decision(String text, String regex) throws Exception {
++        return (Integer) TRY_MATCH.invoke(null, canonicalOwner(text), regex);
+     }
+ 
+     private static void verify(String source, String regex, int expectedDecision) throws Exception {
+@@ -326,6 +498,23 @@
+                 .matcher(new StringBuilder(source)).matches(), "JDK oracle " + regex);
+     }
+ 
++    private static void verifyMissingRequiredQ(String source, String suffix) throws Exception {
++        if (!suffix.equals("Q.*") && !suffix.equals("b*Q")) {
++            throw new AssertionError("unexpected mandatory-Q witness");
++        }
++        String regex = "a*".repeat(36) + suffix;
++        // Keep the original 384-unit witness and >32-state target pattern. A missing
++        // mandatory Q proves false; independent top-down memoization bounds the oracle.
++        // Adjacent identical a* languages are idempotent, so collapsed Pattern syntax
++        // supplies a second oracle without enumerating all 36-star text partitions.
++        equal(source.indexOf('Q'), -1, "required Q absent from original witness");
++        equal(memoized(source, regex), false, "bounded independent missing-Q oracle");
++        equal(Pattern.compile("a*" + suffix).matcher(new StringBuilder(source)).matches(),
++                false, "equivalent bounded Pattern missing-Q oracle");
++        equal(decision(source, regex), 0, "direct rolling DP missing-Q decision");
++        equal(source.matches(regex), false, "M3 String.matches missing-Q decision");
++    }
++
+     private static boolean memoized(CharSequence text, String regex) {
+         byte[][] memo = new byte[text.length() + 1][regex.length() + 1];
+         return memoFrom(text, regex, 0, 0, memo);
+diff --git a/test/jdk/java/lang/String/M3StringRegexPreparedBatchTest.java b/test/jdk/java/lang/String/M3StringRegexPreparedBatchTest.java
+new file mode 100644
+index 0000000..0b34029
+--- /dev/null
++++ b/test/jdk/java/lang/String/M3StringRegexPreparedBatchTest.java
+@@ -0,0 +1,372 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++/*
++ * Copyright (c) 2026, Hitesh Soliwal and contributors. All rights reserved.
++ * GPLv2 with the Classpath exception.
++ *
++ * @test
++ * @summary Prepared regex effects preserve UTF-16 joins, exact row truth and JNI ownership
++ * @modules java.base/jdk.internal.mindex
++ * @run main/othervm -Xcheck:jni --add-opens=java.base/jdk.internal.mindex=ALL-UNNAMED M3StringRegexPreparedBatchTest
++ * @run main/othervm -Xint -Xcheck:jni --add-opens=java.base/jdk.internal.mindex=ALL-UNNAMED M3StringRegexPreparedBatchTest
++ */
++
++import java.lang.reflect.InvocationTargetException;
++import java.lang.reflect.Method;
++import java.util.ArrayList;
++import java.util.Arrays;
++import java.util.List;
++import java.util.Random;
++import java.util.concurrent.CountDownLatch;
++import java.util.concurrent.atomic.AtomicInteger;
++import java.util.concurrent.atomic.AtomicReference;
++import java.util.regex.Pattern;
++import jdk.internal.mindex.M3RegexDpPlan;
++import jdk.internal.mindex.M3RegexDpPlan.BatchBackend;
++import jdk.internal.mindex.M3RegexDpPlan.BatchExecution;
++import jdk.internal.mindex.M3RegexDpPlan.BatchLimits;
++import jdk.internal.mindex.M3RegexDpPlan.BatchResult;
++import jdk.internal.mindex.M3RegexDpPlan.Effect;
++import jdk.internal.mindex.M3RegexDpPlan.PreparedBatch;
++
++public final class M3StringRegexPreparedBatchTest {
++    private static final BatchLimits LIMITS = BatchLimits.defaults();
++    private static final String[] PIECES = { "", "a", "b", "ab", "\u0000", "\n", "\r",
++            "\u0085", "\u2028", "\u2029", "\u00e9", "\ud83d", "\ude42", "\ud83d\ude42",
++            "\ud83d\ud83d", "\ude42\ude42", "\ude42\ud83d", "a\ud83d", "\ude42b",
++            "b".repeat(62), "a".repeat(62), "b".repeat(31) + "\ud83d\ude42" + "b".repeat(30) };
++    private static long checks, nativeRows, cudaRows;
++    private static BatchBackend strict = BatchBackend.JNI;
++    private static boolean nativeAvailable = true;
++
++    public static void main(String[] args) throws Exception {
++        if (args.length > 1) throw new AssertionError("unexpected arguments");
++        if (args.length == 1 && args[0].equals("java-only")) nativeAvailable = false;
++        else if (args.length == 1 && args[0].equals("cuda")) strict = BatchBackend.CUDA;
++        else if (args.length != 0) throw new AssertionError("unknown execution mode");
++        // Local patch-module qualification can attach the same C owner to a stock JDK.
++        // A complete target JDK resolves its CPU entry points from libjava directly.
++        String localLibrary = System.getProperty("m3.regex.batch.test.library");
++        if (localLibrary != null) {
++            Class.forName("jdk.internal.mindex.M3RegexPreparedBatchTestSupport")
++                    .getMethod("load", String.class).invoke(null, localLibrary);
++        }
++        String cudaLibrary = System.getProperty("m3.regex.batch.test.cuda.library");
++        if (cudaLibrary != null) M3RegexDpPlan.loadCudaBatchProvider(cudaLibrary);
++        semanticParity();
++        admissionAndSnapshots();
++        checkpointsAndClose();
++        if (nativeAvailable) rawNativeBoundary();
++        System.out.println("M3_STRING_REGEX_PREPARED_BATCH_PASS checks=" + checks
++                + " jniRows=" + nativeRows + " cudaRows=" + cudaRows
++                + " requested=" + (nativeAvailable ? strict : "JAVA_ONLY"));
++    }
++
++    private static void semanticParity() {
++        List<int[]> rows = new ArrayList<>();
++        rows.add(new int[0]);
++        for (int first = 0; first < PIECES.length; first++) {
++            rows.add(new int[] { first });
++            for (int second = 0; second < PIECES.length; second++) {
++                rows.add(new int[] { first, 0, second });
++            }
++        }
++        Random random = new Random(0x4d33505245504152L);
++        for (int trial = 0; trial < 350; trial++) {
++            int[] row = new int[random.nextInt(20)];
++            for (int i = 0; i < row.length; i++) row[i] = random.nextInt(PIECES.length);
++            rows.add(row);
++        }
++        int[] offsets = new int[rows.size() + 1];
++        for (int i = 0; i < rows.size(); i++) offsets[i + 1] = offsets[i] + rows.get(i).length;
++        int[] tuples = new int[offsets[rows.size()]];
++        for (int i = 0; i < rows.size(); i++) {
++            System.arraycopy(rows.get(i), 0, tuples, offsets[i], rows.get(i).length);
++        }
++        String[] patterns = { "a*", ".*", "a*b*", ".*a.*", "a*.", "a*..", "a*.b*",
++                "a*..*b*", "a*" + ".".repeat(62) };
++        String[][] contexts = { { null, null }, { "", "" }, { "\ud83d", "\ude42" },
++                { "a\ud83d", "\ude42b" }, { "\ude42", "\ud83d" }, { "a", "b" } };
++        for (String regex : patterns) {
++            M3RegexDpPlan plan = requiredPlan(regex);
++            Effect[] effects = new Effect[PIECES.length];
++            for (int i = 0; i < effects.length; i++) effects[i] = plan.summarizeUtf16(PIECES[i], null);
++            Pattern oracle = Pattern.compile(regex);
++            for (String[] context : contexts) {
++                Effect prefix = context[0] == null ? null : plan.summarizeUtf16(context[0], null);
++                Effect suffix = context[1] == null ? null : plan.summarizeUtf16(context[1], null);
++                try (PreparedBatch batch = plan.prepareBatch(prefix, effects, tuples, offsets, suffix, LIMITS, null)) {
++                    truth(batch != null, "bounded batch admitted");
++                    BatchResult java = batch.matches(BatchBackend.JAVA, null);
++                    truth(java.execution() == BatchExecution.JAVA, "Java execution receipt");
++                    BatchResult accelerated = nativeAvailable ? batch.matches(strict, null)
++                            : batch.matches(BatchBackend.PREFER_JNI, null);
++                    BatchExecution expected = nativeAvailable
++                            ? strict == BatchBackend.CUDA ? BatchExecution.CUDA : BatchExecution.JNI
++                            : BatchExecution.JAVA;
++                    truth(accelerated.execution() == expected, "actual execution receipt");
++                    if (expected == BatchExecution.JNI) nativeRows += rows.size();
++                    if (expected == BatchExecution.CUDA) cudaRows += rows.size();
++                    for (int row = 0; row < rows.size(); row++) {
++                        StringBuilder text = new StringBuilder();
++                        if (context[0] != null) text.append(context[0]);
++                        for (int atom : rows.get(row)) text.append(PIECES[atom]);
++                        if (context[1] != null) text.append(context[1]);
++                        boolean expectedTruth = oracle.matcher(text).matches();
++                        truth(java.matches(row) == expectedTruth, "Java UTF16 oracle: " + regex);
++                        truth(accelerated.matches(row) == expectedTruth, "native/fallback UTF16 oracle: " + regex);
++                        truth(java.utf16Length(row) == text.length(), "UTF16 unit length");
++                        truth(accelerated.utf16Length(row) == text.length(), "native/fallback UTF16 unit length");
++                    }
++                    BatchResult again = batch.matches(nativeAvailable ? strict : BatchBackend.JAVA, null);
++                    for (int row = 0; row < rows.size(); row++) {
++                        truth(again.matches(row) == java.matches(row), "resident image reuse");
++                    }
++                }
++            }
++        }
++    }
++
++    private static void admissionAndSnapshots() {
++        M3RegexDpPlan plan = requiredPlan("a*.");
++        Effect high = plan.summarizeUtf16("\ud83d", null);
++        Effect low = plan.summarizeUtf16("\ude42", null);
++        Effect[] effects = { high, plan.identity(), low };
++        int[] tuples = { 0, 1, 2 };
++        int[] offsets = { 0, 3 };
++        try (PreparedBatch batch = plan.prepareBatch(effects, tuples, offsets, LIMITS, null)) {
++            effects[0] = requiredPlan("b*").identity();
++            Arrays.fill(tuples, -1);
++            Arrays.fill(offsets, -1);
++            truth(batch.matches(BatchBackend.JAVA, null).matches(0), "detached tuple coordinates and pins");
++            if (nativeAvailable) truth(batch.matches(strict, null).matches(0), "native split pair through empty");
++        }
++        Effect[] empty = new Effect[0];
++        try (PreparedBatch batch = plan.prepareBatch(high, empty, new int[0], new int[] {0, 0},
++                low, LIMITS, null)) {
++            truth(batch.matches(BatchBackend.JAVA, null).matches(0), "pair across empty row and affixes");
++            if (nativeAvailable) truth(batch.matches(strict, null).matches(0), "native pair across empty row");
++        }
++        // Fixed affixes are prepared once and do not consume the per-call tuple budget.
++        int[] maximumRow = new int[65_536];
++        Effect[] identities = { plan.identity() };
++        try (PreparedBatch batch = plan.prepareBatch(high, identities, maximumRow,
++                new int[] {0, maximumRow.length}, low, LIMITS, null)) {
++            truth(batch != null, "maximum tuple row with fixed affixes admitted");
++            truth(batch.matches(BatchBackend.JAVA, null).matches(0), "factored Java affixes through maximum empty tuple");
++            if (nativeAvailable) {
++                truth(batch.matches(strict, null).matches(0), "factored native affixes through maximum empty tuple");
++            }
++        }
++        truth(plan.prepareBatch(high, identities, new int[65_537], new int[] {0, 65_537},
++                low, LIMITS, null) == null, "oversized tuple row remains UNKNOWN");
++        try (PreparedBatch batch = plan.prepareBatch(empty, new int[0], new int[] {0}, LIMITS, null)) {
++            BatchResult result = batch.matches(BatchBackend.CUDA, null);
++            truth(result.rowCount() == 0 && result.execution() == BatchExecution.NONE, "empty batch executes nothing");
++        }
++        truth(plan.prepareBatch(new Effect[] {high}, new int[] {0}, new int[] {0, 1},
++                new BatchLimits(0, 1, 1, Long.MAX_VALUE, Long.MAX_VALUE), null) == null, "effect budget refusal");
++        truth(plan.prepareBatch(empty, new int[0], new int[] {0, 0},
++                new BatchLimits(1, 0, 0, Long.MAX_VALUE, Long.MAX_VALUE), null) == null, "row budget refusal");
++        truth(plan.prepareBatch(empty, new int[0], new int[] {0},
++                new BatchLimits(1, 1, 1, 0, Long.MAX_VALUE), null) == null, "numeric budget refusal");
++        truth(plan.prepareBatch(new Effect[] {high}, new int[] {0}, new int[] {0, 1},
++                new BatchLimits(1, 1, 1, Long.MAX_VALUE, 0), null) == null, "work budget refusal");
++        expect(IllegalArgumentException.class, () -> new BatchLimits(-1, 0, 0, 0, 0));
++        expect(IllegalArgumentException.class, () -> plan.prepareBatch(empty, new int[0], new int[0], LIMITS, null));
++        expect(IllegalArgumentException.class, () -> plan.prepareBatch(new Effect[] {high},
++                new int[] {1}, new int[] {0, 1}, LIMITS, null));
++        expect(IllegalArgumentException.class, () -> plan.prepareBatch(empty,
++                new int[0], new int[] {0, -1, 0}, LIMITS, null));
++        expect(IllegalArgumentException.class, () -> plan.prepareBatch(
++                new Effect[] {requiredPlan("b*").identity()}, new int[0], new int[] {0}, LIMITS, null));
++        Effect huge = plan.summarizeUtf16("a", null).repeated(Long.MAX_VALUE, null);
++        expect(ArithmeticException.class, () -> plan.prepareBatch(new Effect[] {huge, high},
++                new int[] {0, 1}, new int[] {0, 2}, LIMITS, null));
++        try (PreparedBatch batch = plan.prepareBatch(new Effect[] {high}, new int[] {0}, new int[] {0, 1}, LIMITS, null)) {
++            if (strict != BatchBackend.CUDA) {
++                expect(UnsupportedOperationException.class, () -> batch.matches(BatchBackend.CUDA, null));
++            }
++            if (!nativeAvailable) expect(UnsupportedOperationException.class, () -> batch.matches(BatchBackend.JNI, null));
++            Thread.currentThread().interrupt();
++            batch.matches(nativeAvailable ? strict : BatchBackend.JAVA, null);
++            truth(Thread.currentThread().isInterrupted(), "null checkpoint preserves interrupt state");
++            Thread.interrupted();
++        }
++        truth(M3RegexDpPlan.prepare("(a)\\1") == null, "unsupported regex stays UNKNOWN at admission");
++        truth(M3RegexDpPlan.prepare("(?=a).*") == null, "assertion stays UNKNOWN at admission");
++    }
++
++    private static void checkpointsAndClose() throws Exception {
++        M3RegexDpPlan plan = requiredPlan(".*");
++        Effect[] effects = {plan.summarizeUtf16("\ud83d", null), plan.identity(),
++                plan.summarizeUtf16("\ude42", null)};
++        int[] tuples = new int[60_000 * 3];
++        int[] offsets = new int[60_001];
++        for (int i = 0; i < 60_000; i++) {
++            tuples[3 * i] = 0;
++            tuples[3 * i + 1] = 1;
++            tuples[3 * i + 2] = 2;
++            offsets[i + 1] = 3 * (i + 1);
++        }
++        PreparedBatch batch = plan.prepareBatch(effects, tuples, offsets, LIMITS, null);
++        AtomicInteger javaChecks = new AtomicInteger(), backendChecks = new AtomicInteger();
++        batch.matches(BatchBackend.JAVA, javaChecks::incrementAndGet);
++        batch.matches(nativeAvailable ? strict : BatchBackend.PREFER_JNI, backendChecks::incrementAndGet);
++        truth(javaChecks.get() == backendChecks.get() && javaChecks.get() > 3, "backend checkpoint schedule parity");
++        RuntimeException cancelled = new RuntimeException("checkpoint cancellation");
++        AtomicInteger calls = new AtomicInteger();
++        try {
++            batch.matches(nativeAvailable ? strict : BatchBackend.JAVA, () -> {
++                if (calls.incrementAndGet() == 3) throw cancelled;
++            });
++            throw new AssertionError("cancelled execution returned truth");
++        } catch (RuntimeException expected) {
++            truth(expected == cancelled, "original callback exception identity");
++        }
++        truth(batch.matches(BatchBackend.JAVA, null).matches(0), "cancel leaves prepared owner usable");
++        AtomicInteger closeCalls = new AtomicInteger();
++        expect(IllegalStateException.class, () -> batch.matches(nativeAvailable ? strict : BatchBackend.JAVA, () -> {
++            if (closeCalls.incrementAndGet() == 3) batch.close();
++        }));
++        truth(!batch.isOpen(), "callback close completed without lock upgrade");
++        batch.close();
++        expect(IllegalStateException.class, () -> batch.matches(BatchBackend.JAVA, null));
++
++        PreparedBatch concurrent = plan.prepareBatch(effects, tuples, offsets, LIMITS, null);
++        CountDownLatch paused = new CountDownLatch(1), resume = new CountDownLatch(1);
++        AtomicReference<Throwable> failure = new AtomicReference<>();
++        Thread worker = new Thread(() -> {
++            AtomicInteger seen = new AtomicInteger();
++            try {
++                concurrent.matches(nativeAvailable ? strict : BatchBackend.JAVA, () -> {
++                    if (seen.incrementAndGet() == 3) {
++                        paused.countDown();
++                        try { resume.await(); }
++                        catch (InterruptedException interrupted) { throw new AssertionError(interrupted); }
++                    }
++                });
++                failure.set(new AssertionError("close between chunks returned a result"));
++            } catch (IllegalStateException expected) {
++                // A closed owner cannot publish an incomplete batch result.
++            } catch (Throwable problem) { failure.set(problem); }
++        });
++        worker.start();
++        paused.await();
++        concurrent.close();
++        resume.countDown();
++        worker.join();
++        truth(failure.get() == null, "concurrent close and evaluation: " + failure.get());
++    }
++
++    private static void rawNativeBoundary() throws Exception {
++        String kind = strict == BatchBackend.CUDA ? "batchCuda" : "batch";
++        Method create = nativeMethod(kind + "Create0", long[].class, long[].class, int.class,
++                long.class, long.class, int[].class, int[].class, int.class, int.class, long.class);
++        Method evaluate = nativeMethod(kind + "Evaluate0", long.class, int.class, int.class, byte[].class, int.class);
++        Method close = nativeMethod(kind + "Close0", long.class);
++        long[] lanes = {1, 0, 2, 2, 2, 2};
++        long[] dots = {0, 0};
++        int[] tuples = {0}, offsets = {0, 1};
++        long handle = (Long) invoke(create, lanes, dots, 2, 3L, 2L, tuples, offsets, -1, -1, 1024L);
++        Arrays.fill(lanes, 0);
++        Arrays.fill(dots, -1);
++        tuples[0] = 999;
++        offsets[0] = 999;
++        byte[] answers = {99, 99, 99};
++        invoke(evaluate, handle, 0, 1, answers, 1);
++        truth(Arrays.equals(answers, new byte[] {99, 1, 99}), "native copies retain no Java pointer");
++        expect(IllegalArgumentException.class, () -> invoke(evaluate, handle, 0, 1, answers, 3));
++        expect(IllegalArgumentException.class, () -> invoke(evaluate, handle, 0, 16_385, new byte[16_385], 0));
++        expect(IllegalArgumentException.class, () -> invoke(evaluate, handle, 0, 2, new byte[2], 0));
++        expect(IllegalStateException.class, () -> invoke(evaluate, 42L, 0, 0, new byte[0], 0));
++        invoke(close, handle);
++        expect(IllegalStateException.class, () -> invoke(close, handle));
++        expect(IllegalStateException.class, () -> invoke(evaluate, handle, 0, 0, new byte[0], 0));
++        long[] good = {1, 0, 2, 2, 2, 2};
++        expect(NullPointerException.class, () -> invoke(create, null, new long[2], 2, 3L, 2L,
++                new int[] {0}, new int[] {0, 1}, -1, -1, 1024L));
++        expect(IllegalArgumentException.class, () -> invoke(create, good, new long[2], 0, 3L, 2L,
++                new int[] {0}, new int[] {0, 1}, -1, -1, 1024L));
++        expect(IllegalArgumentException.class, () -> invoke(create, good, new long[2], 2, 3L, 2L,
++                new int[] {0}, new int[] {0, 1}, -1, -1, 1L));
++        for (int corrupt : new int[] {0, 1, 2, 4}) {
++            long[] bad = good.clone();
++            bad[corrupt] = corrupt == 0 ? -1L : corrupt == 1 ? 4L : 8L;
++            expect(IllegalArgumentException.class, () -> invoke(create, bad, new long[2], 2, 3L, 2L,
++                    new int[] {0}, new int[] {0, 1}, -1, -1, 1024L));
++        }
++        long[] falseEmpty = good.clone();
++        falseEmpty[0] = 0;
++        expect(IllegalArgumentException.class, () -> invoke(create, falseEmpty, new long[2], 2, 3L, 2L,
++                new int[] {0}, new int[] {0, 1}, -1, -1, 1024L));
++        expect(IllegalArgumentException.class, () -> invoke(create, good, new long[2], 2, 3L, 2L,
++                new int[] {-1}, new int[] {0, 1}, -1, -1, 1024L));
++        expect(IllegalArgumentException.class, () -> invoke(create, good, new long[2], 2, 3L, 2L,
++                new int[] {0}, new int[] {0, -1, 1}, -1, -1, 1024L));
++        long[] overflow = good.clone();
++        overflow[0] = Long.MAX_VALUE;
++        expect(IllegalArgumentException.class, () -> invoke(create, overflow, new long[2], 2, 3L, 2L,
++                new int[] {0, 0}, new int[] {0, 2}, -1, -1, 1024L));
++        rawCloseRace(create, evaluate, close, good);
++    }
++
++    private static void rawCloseRace(Method create, Method evaluate, Method close, long[] good) throws Exception {
++        for (int trial = 0; trial < 12; trial++) {
++            long handle = (Long) invoke(create, good, new long[2], 2, 3L, 2L,
++                    new int[] {0}, new int[] {0, 1}, -1, -1, 1024L);
++            CountDownLatch start = new CountDownLatch(1);
++            AtomicReference<Throwable> failure = new AtomicReference<>();
++            Thread[] workers = new Thread[2];
++            for (int i = 0; i < workers.length; i++) {
++                workers[i] = new Thread(() -> {
++                    try {
++                        start.await();
++                        byte[] result = new byte[1];
++                        for (int attempt = 0; attempt < 100; attempt++) {
++                            try {
++                                invoke(evaluate, handle, 0, 1, result, 0);
++                                if (result[0] != 1) throw new AssertionError("leased row answer");
++                            } catch (IllegalStateException closed) { break; }
++                        }
++                    } catch (Throwable problem) { failure.set(problem); }
++                });
++                workers[i].start();
++            }
++            start.countDown();
++            invoke(close, handle);
++            for (Thread worker : workers) worker.join();
++            truth(failure.get() == null, "raw JNI close/acquire lease race: " + failure.get());
++        }
++    }
++
++    private static M3RegexDpPlan requiredPlan(String regex) {
++        M3RegexDpPlan result = M3RegexDpPlan.prepare(regex);
++        if (result == null) throw new AssertionError("test pattern rejected: " + regex);
++        return result;
++    }
++    private static Method nativeMethod(String name, Class<?>... parameters) throws Exception {
++        Method result = M3RegexDpPlan.class.getDeclaredMethod(name, parameters);
++        result.setAccessible(true);
++        return result;
++    }
++    private static Object invoke(Method method, Object... args) {
++        try { return method.invoke(null, args); }
++        catch (InvocationTargetException problem) {
++            Throwable cause = problem.getCause();
++            if (cause instanceof RuntimeException runtime) throw runtime;
++            if (cause instanceof Error error) throw error;
++            throw new AssertionError(cause);
++        } catch (ReflectiveOperationException problem) { throw new AssertionError(problem); }
++    }
++    private static void expect(Class<? extends Throwable> type, Runnable action) {
++        try { action.run(); }
++        catch (Throwable problem) {
++            truth(type.isInstance(problem), "expected " + type + ", got " + problem);
++            return;
++        }
++        throw new AssertionError("expected " + type);
++    }
++    private static void truth(boolean value, String label) {
++        checks++;
++        if (!value) throw new AssertionError(label + " at check " + checks);
++    }
++}

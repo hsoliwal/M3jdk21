@@ -1,0 +1,168 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------------< com.m3:m3-fs >----------------------------
+[INFO] Building M3JDK21 M3FS runtime 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- exec:3.3.0:exec (configure-native) @ m3-fs ---
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /tmp/m3fs-root-work/qualification/m3/fs/target/native
+[INFO] 
+[INFO] --- exec:3.3.0:exec (build-native) @ m3-fs ---
+[  6%] Built target m3fs-snapshot-loss-test
+[ 25%] Built target m3fs
+[ 31%] Built target m3fs-hotpath-test
+[ 37%] Built target m3fs-tool
+[ 43%] Built target m3fs-indexed-test
+[ 50%] Built target m3fs-snapshot-test
+[ 56%] Built target m3fs-core-test
+[ 62%] Built target m3fs-scrub-test
+[ 68%] Built target m3fs-semantic-test
+[ 75%] Built target m3fs-metadata-test
+[ 81%] Built target m3fs-sparse-test
+[ 87%] Built target m3fs-inode-identity-test
+[ 93%] Built target m3fs-replace-test
+[100%] Built target m3fs-checked-io-test
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ m3-fs ---
+[INFO] skip non existing resourceDirectory /tmp/m3fs-root-work/qualification/m3/fs/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ m3-fs ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 33 source files with javac [debug release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ m3-fs ---
+[INFO] Copying 3 resources from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ m3-fs ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 40 source files with javac [debug release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ m3-fs ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.m3.fs.M3FsCompactAsciiDfaTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.641 s -- in com.m3.fs.M3FsCompactAsciiDfaTest
+[INFO] Running com.m3.fs.M3SnapshotStoreTest
+M3SnapshotStoreSelfTest checks=32 process-read/write-lock=PASS
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.058 s -- in com.m3.fs.M3SnapshotStoreTest
+[INFO] Running com.m3.fs.M3FsCheckedInodeIoTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.696 s -- in com.m3.fs.M3FsCheckedInodeIoTest
+[INFO] Running com.m3.fs.M3FsPrecomputePipelineManifestTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.227 s -- in com.m3.fs.M3FsPrecomputePipelineManifestTest
+[INFO] Running com.m3.fs.M3FsSparseFeatureTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.137 s -- in com.m3.fs.M3FsSparseFeatureTest
+[INFO] Running com.m3.fs.M3MappedStorageTest
+M3FS_MAPPED_PASS mode=required assertions=46335 randomizedByteCases=10000 seed=1295205971
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.852 s -- in com.m3.fs.M3MappedStorageTest
+[INFO] Running com.m3.fs.M3PrecomputeArrayMetadataTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.374 s -- in com.m3.fs.M3PrecomputeArrayMetadataTest
+[INFO] Running com.m3.fs.M3FsImageBindingTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.356 s -- in com.m3.fs.M3FsImageBindingTest
+[INFO] Running com.m3.fs.M3PrecomputePublicationDurabilityTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.313 s -- in com.m3.fs.M3PrecomputePublicationDurabilityTest
+[INFO] Running com.m3.fs.M3FsMappedBundleViewTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.424 s -- in com.m3.fs.M3FsMappedBundleViewTest
+[INFO] Running com.m3.fs.M3FsSnapshotViewTest
+PASS retained-java checks=2227 seed=20260928 lane=current real-loader-jni-sqlite=YES
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.441 s -- in com.m3.fs.M3FsSnapshotViewTest
+[INFO] Running com.m3.fs.M3FsFeatureTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in com.m3.fs.M3FsFeatureTest
+[INFO] Running com.m3.fs.M3ArrayMetadataCompatibilityTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.033 s -- in com.m3.fs.M3ArrayMetadataCompatibilityTest
+[INFO] Running com.m3.fs.M3GenerationRootDirectoryIndexTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 s -- in com.m3.fs.M3GenerationRootDirectoryIndexTest
+[INFO] Running com.m3.fs.M3ArrayMetadataContractTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.250 s -- in com.m3.fs.M3ArrayMetadataContractTest
+[INFO] Running com.m3.fs.M3FsNativeSemanticTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.043 s -- in com.m3.fs.M3FsNativeSemanticTest
+[INFO] Running com.m3.fs.M3FSScrubTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.371 s -- in com.m3.fs.M3FSScrubTest
+[INFO] Running com.m3.fs.M3PrecomputeBundleTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.183 s -- in com.m3.fs.M3PrecomputeBundleTest
+[INFO] Running com.m3.fs.M3FsPrecomputeBundleTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.408 s -- in com.m3.fs.M3FsPrecomputeBundleTest
+[INFO] Running com.m3.fs.M3FileSystemStoreHeadGenerationPrecomputeTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.137 s -- in com.m3.fs.M3FileSystemStoreHeadGenerationPrecomputeTest
+[INFO] Running com.m3.fs.M3HeadPromotionDurabilityTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.202 s -- in com.m3.fs.M3HeadPromotionDurabilityTest
+[INFO] Running com.m3.fs.M3NativeContentPositionTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.675 s -- in com.m3.fs.M3NativeContentPositionTest
+[INFO] Running com.m3.fs.M3FsPreparedSearchStateTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.322 s -- in com.m3.fs.M3FsPreparedSearchStateTest
+[INFO] Running com.m3.fs.M3SegmentedUtf16FsTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.171 s -- in com.m3.fs.M3SegmentedUtf16FsTest
+[INFO] Running com.m3.fs.M3FsGpuPipelineMappedSetTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.188 s -- in com.m3.fs.M3FsGpuPipelineMappedSetTest
+[INFO] Running com.m3.fs.M3MIndexFileTokenRangeSha256Test
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.560 s -- in com.m3.fs.M3MIndexFileTokenRangeSha256Test
+[INFO] Running com.m3.fs.M3FsIndexedTest
+PASS indexed-java checks=5540 seed=20260927 lane=current real-loader-jni-sqlite=YES
+snapshot-read reads=1000 torn=0 writes=152
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.912 s -- in com.m3.fs.M3FsIndexedTest
+[INFO] Running com.m3.fs.M3FsHotPathTest
+PASS hotpath-java checks=8120635 seed=20260928 mutationCases=120 real-loader-jni-sqlite=YES
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.850 s -- in com.m3.fs.M3FsHotPathTest
+[INFO] Running com.m3.fs.M3GpuGrepSegmentsRuntimeTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.066 s -- in com.m3.fs.M3GpuGrepSegmentsRuntimeTest
+[INFO] Running com.m3.fs.M3FSNativeTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.167 s -- in com.m3.fs.M3FSNativeTest
+[INFO] Running com.m3.fs.M3FsCatalogVarargsCompatibilityTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.042 s -- in com.m3.fs.M3FsCatalogVarargsCompatibilityTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 97, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- exec:3.3.0:exec (module-descriptor) @ m3-fs ---
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ m3-fs ---
+[INFO] Building jar: /tmp/m3fs-root-work/qualification/m3/fs/target/m3-fs-0.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- exec:3.3.0:exec (verify-native) @ m3-fs ---
+Internal ctest changing into directory: /tmp/m3fs-root-work/qualification/m3/fs/target/native
+Test project /tmp/m3fs-root-work/qualification/m3/fs/target/native
+      Start  1: m3fs-core-test
+ 1/12 Test  #1: m3fs-core-test ...................   Passed    0.16 sec
+      Start  2: m3fs-indexed-test
+ 2/12 Test  #2: m3fs-indexed-test ................   Passed    0.43 sec
+      Start  3: m3fs-snapshot-test
+ 3/12 Test  #3: m3fs-snapshot-test ...............   Passed    0.35 sec
+      Start  4: m3fs-snapshot-loss-test
+ 4/12 Test  #4: m3fs-snapshot-loss-test ..........   Passed    0.11 sec
+      Start  5: m3fs-hotpath-test
+ 5/12 Test  #5: m3fs-hotpath-test ................   Passed    2.03 sec
+      Start  6: m3fs-scrub-test
+ 6/12 Test  #6: m3fs-scrub-test ..................   Passed    0.29 sec
+      Start  7: m3fs-semantic-test
+ 7/12 Test  #7: m3fs-semantic-test ...............   Passed    0.27 sec
+      Start  8: m3fs-sparse-test
+ 8/12 Test  #8: m3fs-sparse-test .................   Passed    0.23 sec
+      Start  9: m3fs-metadata-test
+ 9/12 Test  #9: m3fs-metadata-test ...............   Passed    0.15 sec
+      Start 10: m3fs-replace-test
+10/12 Test #10: m3fs-replace-test ................   Passed    0.20 sec
+      Start 11: m3fs-inode-identity-test
+11/12 Test #11: m3fs-inode-identity-test .........   Passed    0.16 sec
+      Start 12: m3fs-checked-io-test
+12/12 Test #12: m3fs-checked-io-test .............   Passed    6.75 sec
+
+100% tests passed, 0 tests failed out of 12
+
+Total Test time (real) =  11.18 sec
+[INFO] 
+[INFO] --- install:3.1.2:install (default-install) @ m3-fs ---
+[INFO] Installing /tmp/m3fs-root-work/qualification/m3/fs/pom.xml to /tmp/m3fs-eclipse-work/m2/com/m3/m3-fs/0.1.0-SNAPSHOT/m3-fs-0.1.0-SNAPSHOT.pom
+[INFO] Installing /tmp/m3fs-root-work/qualification/m3/fs/target/m3-fs-0.1.0-SNAPSHOT.jar to /tmp/m3fs-eclipse-work/m2/com/m3/m3-fs/0.1.0-SNAPSHOT/m3-fs-0.1.0-SNAPSHOT.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:17 min
+[INFO] Finished at: 2026-10-19T09:35:47+08:00
+[INFO] ------------------------------------------------------------------------

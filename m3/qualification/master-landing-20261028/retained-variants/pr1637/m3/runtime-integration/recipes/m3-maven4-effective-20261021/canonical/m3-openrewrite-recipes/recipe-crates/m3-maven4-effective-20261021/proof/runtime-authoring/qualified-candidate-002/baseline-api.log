@@ -1,0 +1,23 @@
+["/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/javap", "-public", "-s", "-classpath", "/workspace/scratch/206049dfb270/maven-work/qualified-candidate-002/baseline-classes", "jdk.m3.parser.M3ASTAuthoritativeModels"]
+Compiled from "M3ASTAuthoritativeModels.java"
+public final class jdk.m3.parser.M3ASTAuthoritativeModels {
+  public static jdk.m3.parser.M3ASTIndex eclipseJdt(jdk.m3.parser.M3File, java.lang.Object, java.lang.CharSequence, jdk.m3.parser.M3ASTIngress$Limits);
+    descriptor: (Ljdk/m3/parser/M3File;Ljava/lang/Object;Ljava/lang/CharSequence;Ljdk/m3/parser/M3ASTIngress$Limits;)Ljdk/m3/parser/M3ASTIndex;
+
+  public static jdk.m3.parser.M3ASTIndex mavenEffective(jdk.m3.parser.M3File, java.lang.Object, jdk.m3.parser.M3ASTIngress$Limits);
+    descriptor: (Ljdk/m3/parser/M3File;Ljava/lang/Object;Ljdk/m3/parser/M3ASTIngress$Limits;)Ljdk/m3/parser/M3ASTIndex;
+
+  public static jdk.m3.parser.M3ASTIndex gradleTooling(jdk.m3.parser.M3File, java.lang.Object, jdk.m3.parser.M3ASTIngress$Limits);
+    descriptor: (Ljdk/m3/parser/M3File;Ljava/lang/Object;Ljdk/m3/parser/M3ASTIngress$Limits;)Ljdk/m3/parser/M3ASTIndex;
+
+  public static jdk.m3.parser.M3ASTIndex gradleTooling(jdk.m3.parser.M3File, java.lang.Object, boolean, jdk.m3.parser.M3ASTIngress$Limits);
+    descriptor: (Ljdk/m3/parser/M3File;Ljava/lang/Object;ZLjdk/m3/parser/M3ASTIngress$Limits;)Ljdk/m3/parser/M3ASTIndex;
+
+  public static jdk.m3.parser.M3ASTIndex gradleGroovyAst(jdk.m3.parser.M3File, java.lang.Object, jdk.m3.parser.M3ASTIngress$Limits);
+    descriptor: (Ljdk/m3/parser/M3File;Ljava/lang/Object;Ljdk/m3/parser/M3ASTIngress$Limits;)Ljdk/m3/parser/M3ASTIndex;
+
+  public static jdk.m3.parser.M3ASTIndex gradleKotlinPsi(jdk.m3.parser.M3File, java.lang.Object, jdk.m3.parser.M3ASTIngress$Limits);
+    descriptor: (Ljdk/m3/parser/M3File;Ljava/lang/Object;Ljdk/m3/parser/M3ASTIngress$Limits;)Ljdk/m3/parser/M3ASTIndex;
+}
+
+EXIT 0

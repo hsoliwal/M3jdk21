@@ -1,0 +1,206 @@
+{
+  "schema": "M3_COLLECTIONS_RANGE_RANK_RECEIVER_V1",
+  "passive_only": true,
+  "mapping_id": "m3.collections.range-rank-consolidation",
+  "state": "COMPONENT_QUALIFIED_FULL_PRODUCT_ACCEPTANCE_OPEN",
+  "source": {
+    "repository": "hsoliwal/com.synexia",
+    "recipe_commit": "d4b07bc38cdb25d6b17cc09cba315430ce590648",
+    "recipe_tree": "695bfada22d86c7aa9792dde82f6a9e1688e5b98",
+    "canonical_engine_base": "5e4e20982d9bb401f7be57f0e828cec557a42d7f",
+    "crate": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+    "recipe_name": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+    "task": "tasks/range-rank-recovery-20261029",
+    "executed_datasets": [
+      {
+        "dataset": "range-rank-recovery-20261029",
+        "bound_inputs": 31,
+        "sdk_tests": 5,
+        "sdk_skipped": 0,
+        "SDK_INPUTS_sha256": "6febb3ee0b1f1ae3145b69a4a9db124b33533576ddfa936be1ab888849efff02",
+        "SDK_RESULTS_sha256": "7cddaa1c6d973dddd17d03fcc97ab752e25c2fbb2858981226cf9e7f3d6b8e83",
+        "sdk_report_sha256": "f8c9e2fcd37b465bb32a5d3c6490943be14e52150697d60827045837507358e1",
+        "receiver_contracts": 9,
+        "replay": {
+          "dataset": "range-rank-recovery-20261029",
+          "targets": 8,
+          "changes": 0,
+          "mode": "apply",
+          "actual_sdk_results": true
+        }
+      },
+      {
+        "dataset": "range-rank-metadata-20261029",
+        "bound_inputs": 26,
+        "sdk_tests": 5,
+        "sdk_skipped": 0,
+        "SDK_INPUTS_sha256": "48547ad017cd2e152adf7f7be863bb793ab81e190481554dbf0a39eebec83193",
+        "SDK_RESULTS_sha256": "b4caadacad8c8970b7f7dc24e1c6255e1c5f2e9930ec40582f42a25b9b9631fb",
+        "sdk_report_sha256": "fe1bb5f4792ac51dd99033c045c52527ce4d09ebffcc8df36576cc27f4ef0c14",
+        "receiver_contracts": 9,
+        "replay": {
+          "dataset": "range-rank-metadata-20261029",
+          "targets": 2,
+          "changes": 0,
+          "mode": "apply",
+          "actual_sdk_results": true
+        }
+      }
+    ]
+  },
+  "product": {
+    "repository": "hsoliwal/M3jdk21",
+    "qualified_base": "052ebcf7a26352c0285251eb671ee6c3640fd3ff",
+    "generated_code_commit": "3373515b9726769e455998de8024d20f9d690179",
+    "generated_code_tree": "7316cf624e1350523a90b33de281056012aa471d",
+    "qualified_file_postimages": [
+      {
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3BagRankIndex.java",
+        "sha256": "8cc2addf35e6fd39438577cdc8546cbf068e3c336fd95a25803b228ba133179d",
+        "git_blob": "0fe4e29e0aa4943b13c7deaa1c5ab5be57de713c"
+      },
+      {
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexPathRank.java",
+        "sha256": "da524a6f3c39946060c9f04e6e44ffd64d74418e1cca3ee9c9a839ad9b356682",
+        "git_blob": "979763a143bb471ad64b0a4c557e9b0be54c01b9"
+      },
+      {
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongRangeSet.java",
+        "sha256": "1b6e7cbe3306837e84c3268fbb17521ea2c3f8320397c60dcccb2eea53a7ff35",
+        "git_blob": "c4ae3296659c02e263906185c6ef31abcb1a2b50"
+      },
+      {
+        "path": "m3/collections/src/test/java/com/m3/collections/M3BagRankIndexOccurrenceContractTest.java",
+        "sha256": "202d87660a7e800639d6ed4b0c8b695fb9c6d7f829811bfeefc2d2ee8d7ed5c6",
+        "git_blob": "ad06e0d2b83acc5d8c87475f65532b01825aba96"
+      },
+      {
+        "path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathRankSelectionContractTest.java",
+        "sha256": "0c9aeb1deb49805a5c707fd1e64da17c2a0e4f465050cb0ccc39b748e6f8c733",
+        "git_blob": "f7577fba635c737c01dab19d6bab7f0eeb3f6164"
+      },
+      {
+        "path": "m3/collections/src/test/java/com/m3/collections/M3LongRangeAlgebraSelfTest.java",
+        "sha256": "d6e12a34a61c16f5092f75f7865cddf18ae99b2f544863f714e3ea170c9b23d2",
+        "git_blob": "b57e4eb5f50e9e0a01e16050a199f7725112ff70"
+      },
+      {
+        "path": "m3/collections/src/test/java/com/m3/collections/M3LongRangeAlgebraTest.java",
+        "sha256": "9ecc6698dffcb6d7c4ae492f8b8581b2a6cf20774dc173e81f1d568b7ef76c5e",
+        "git_blob": "8e4f5b56d79c7219acefdf232f76a78b1f8bbc65"
+      },
+      {
+        "path": "m3/collections/src/test/java/com/m3/collections/M3LongRangeBoundarySearchTest.java",
+        "sha256": "4c159b3745b5ccb4f2709465db96759645c75aa6bf3061f746a2b377ab30307e",
+        "git_blob": "da3b3800b350b8675ab008d6e9569ebf9a7943f3"
+      },
+      {
+        "path": "m3/docs/name-mapping.json",
+        "sha256": "a1fa6d7af43132bdbe081a2eaeb7266fe12cb2bbde12be68c8b516dca186b004",
+        "git_blob": "46c8da7b78565eadf1aa598474719e7a66beee74"
+      },
+      {
+        "path": "m3/tooling/name-contract/name-plan.json",
+        "sha256": "abc2941b7ec65196902351dd90bb7876d9e331d2da704155a6f22aad42a6c10b",
+        "git_blob": "7fe97eb64e63ea2dbada55d3c79e007e8cdbffb6"
+      }
+    ]
+  },
+  "qualification": {
+    "jdk": "openjdk version \"21.0.13\" 2026-10-20 LTS\nOpenJDK Runtime Environment Temurin-21.0.13+9 (build 21.0.13+9-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.13+9 (build 21.0.13+9-LTS, mixed mode, sharing)\n",
+    "serial_stages": [
+      {
+        "stage": 0,
+        "source_count": 317,
+        "generated_owners": [],
+        "junit_passed": 20,
+        "junit_skipped": 0,
+        "required_native_bag": "PASS",
+        "required_native_range": "NOT_APPLICABLE"
+      },
+      {
+        "stage": 1,
+        "source_count": 317,
+        "generated_owners": [
+          "m3/collections/src/main/java/jdk/m3/collections/M3LongRangeSet.java"
+        ],
+        "junit_passed": 21,
+        "junit_skipped": 0,
+        "required_native_bag": "PASS",
+        "required_native_range": "PASS"
+      },
+      {
+        "stage": 2,
+        "source_count": 317,
+        "generated_owners": [
+          "m3/collections/src/main/java/jdk/m3/collections/M3BagRankIndex.java",
+          "m3/collections/src/main/java/jdk/m3/collections/M3LongRangeSet.java"
+        ],
+        "junit_passed": 21,
+        "junit_skipped": 0,
+        "required_native_bag": "PASS",
+        "required_native_range": "PASS"
+      },
+      {
+        "stage": 3,
+        "source_count": 317,
+        "generated_owners": [
+          "m3/collections/src/main/java/jdk/m3/collections/M3BagRankIndex.java",
+          "m3/collections/src/main/java/jdk/m3/collections/M3IndexPathRank.java",
+          "m3/collections/src/main/java/jdk/m3/collections/M3LongRangeSet.java"
+        ],
+        "junit_passed": 21,
+        "junit_skipped": 0,
+        "required_native_bag": "PASS",
+        "required_native_range": "PASS"
+      }
+    ],
+    "public_api": {
+      "removed": [],
+      "added": [
+        "public com.m3.collections.M3LongRangeSet union(com.m3.collections.M3LongRangeSet);",
+        "public com.m3.collections.M3LongRangeSet intersection(com.m3.collections.M3LongRangeSet);",
+        "public com.m3.collections.M3LongRangeSet difference(com.m3.collections.M3LongRangeSet);"
+      ],
+      "unchanged": [
+        "M3BagRankIndex",
+        "M3IndexPathRank",
+        "M3IndexPathRank.Window"
+      ]
+    },
+    "source_sdk_tests": 5,
+    "metadata_sdk_tests": 5,
+    "source_receiver_cases": 9,
+    "metadata_receiver_cases": 9,
+    "name_contract": "PASS; four prior queued naming operations preserved; zero JDK promotions",
+    "source_canonical_provenance": {
+      "commit": "d4b07bc38cdb25d6b17cc09cba315430ce590648",
+      "status": "PASS",
+      "changed_paths": 245,
+      "ledger_members": 66,
+      "receipt_sha256": "d7b2964d518c92d4629878507382c92bbc9ba858ca70bbc4aa9703b19db64cc1"
+    },
+    "serial_result_receipt_sha256": "e989f8d67dc7a845efb6f90fe51fb1110cb6717c82dd312bc40471723e6cd083",
+    "exact_remote_code_blob_readback": "PASS all ten target files"
+  },
+  "scope": {
+    "production_owners": [
+      "com.m3.collections.M3LongRangeSet",
+      "com.m3.collections.M3BagRankIndex",
+      "com.m3.collections.M3IndexPathRank"
+    ],
+    "shared_owner": "com.m3.collections.M3LaneSearch",
+    "names_preserved": true,
+    "source_inventory_base": "8c8dd70e659b99c23a2d0e7daeb2adadf95429c2",
+    "source_inventory_rows": 8876,
+    "semantic_completion": "Only the three named owners are qualified by this receipt; inventory entries remain a review queue."
+  },
+  "open_gates": {
+    "global_preparation_inventory": "One of nine tests fails because .github/workflows/m3-parser-green-codec-v4.yml is absent at the pinned source base; eight scoped preparation tests pass.",
+    "full_collection_provider_suite": "NOT_RUN",
+    "source_built_installed_jdk": "NOT_RUN",
+    "jtreg": "NOT_RUN",
+    "cross_platform": "NOT_RUN",
+    "performance_and_memory_comparison": "NOT_MEASURED"
+  }
+}

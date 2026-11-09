@@ -1,0 +1,26 @@
+{
+  "argv": [
+    "python3",
+    "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/requalification1124/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/prepare.py",
+    "--dataset",
+    "array-mask-successor",
+    "--repository",
+    "hsoliwal/M3jdk21",
+    "--baseline",
+    "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/head1426",
+    "--candidates",
+    "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/proposed/current-admission",
+    "--baseline-ref",
+    "22e7a14ccd2998d994cb9a74abcdc7abd2086201",
+    "--recipe-owner",
+    "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/requalification1124/synexia-openrewrite-recipes"
+  ],
+  "exit": 0,
+  "changed_input_resources": [
+    "DATASET.json",
+    "ENGINE_EFFECTIVE.tsv"
+  ],
+  "nine_output_bytes_unchanged": true,
+  "source_pin": "1124f5b72744b306884beedebafd8558d49d4c4c",
+  "reason": "Use exact inherited canonical engine owners when stacking on original catalogue and runtime recipe branch."
+}

@@ -1,0 +1,12 @@
+item	state	evidence	limit
+base	PINNED	b71ee5bf88398fb80961c13db03e8c675fb445ce	current master at recovery start
+executor	RESTORED_BRANCH	materialize_generated_crates.py exact PR144 blob	no compatibility authority
+executor_tests	RESTORED_BRANCH	test_materialize_generated_crates.py exact PR144 blob	not yet hosted-executed on this head
+policy	RESTORED_BRANCH	MATERIALIZATION_POLICY.tsv	FILE atoms / MULTI_MODULE feature join
+receipt	RESTORED_BRANCH	materializer_ready=true	source_materialized=false
+workflow	RESTORED_BRANCH	PR144 workflow + branch trigger + libxrandr-dev	no product semantics changed
+generated_atoms	PENDING_HOSTED	47 selected paths	must account all paths
+ephemeral_materialization	PENDING_HOSTED	-	must pass changed-path/fixed-point gates
+jdk_build	PENDING_HOSTED	--enable-linkable-runtime	must build image
+jtreg	PENDING_HOSTED	runtimeImage + legacy jlink/JMOD	mandatory
+whole_jdk	INCOMPLETE	programme remains open	no completion claim

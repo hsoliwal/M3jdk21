@@ -1,0 +1,86 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+name: M3 SHA256 Object adapter receiver source and JNI ABI gate
+on:
+  push:
+    branches:
+      - codex/m3-sha256-object-adapter-20261105
+    paths:
+      - 'src/java.base/share/classes/java/lang/Object.java'
+      - 'src/java.base/share/classes/java/security/SHA256Adapter.java'
+      - 'test/jdk/java/lang/Object/SHA256ObjectAdapterTest.java'
+      - 'test/jdk/java/lang/Object/libSHA256ObjectAdapterTest.c'
+      - 'm3/qualification/sha256-object-adapter-20261105/**'
+      - '.github/workflows/m3-sha256-object-adapter-receiver-20261105.yml'
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/java/lang/Object.java'
+      - 'src/java.base/share/classes/java/security/SHA256Adapter.java'
+      - 'test/jdk/java/lang/Object/SHA256ObjectAdapterTest.java'
+      - 'test/jdk/java/lang/Object/libSHA256ObjectAdapterTest.c'
+      - 'm3/qualification/sha256-object-adapter-20261105/**'
+      - '.github/workflows/m3-sha256-object-adapter-receiver-20261105.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-receiver-source:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout exact M3JDK21 receiver
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Install stock Java21 for isolated syntax and JNI header gate
+        uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify product postimages against original Synexia source seals
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha256sum -c <<'SEALS'
+          4bf59c9e8e997f9600f42d4bffe7543aace822c849a73c377d322f2add4cdbd5  src/java.base/share/classes/java/lang/Object.java
+          85863e265fb41ddd48b49a90c07f19ff7626fd9adc8f78f329311673fccda6d2  src/java.base/share/classes/java/security/SHA256Adapter.java
+          7d7d3726d0d8caca1eb46897e1a2c1a136bd3ef8dbccaacc5b9bc265b2aa9108  test/jdk/java/lang/Object/SHA256ObjectAdapterTest.java
+          faaf42f8a91011e8417255638428ee29bf4c0e89a9692a5578fe7260831a22f9  test/jdk/java/lang/Object/libSHA256ObjectAdapterTest.c
+          SEALS
+      - name: Validate data-only receipt is still DRAFT and source-pinned
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          receipt = json.loads(Path("m3/qualification/sha256-object-adapter-20261105/RECEIVER_RECEIPT.json").read_text(encoding="utf-8"))
+          assert receipt["qualification"] == "DRAFT_HOLD"
+          assert receipt["canonical_recipe_commit"] == "208e7d340642958801e7e0778b057e4a1cf05f09"
+          rows = receipt["generated_targets"]
+          assert len(rows) == 4
+          for row in rows:
+              content = Path(row["path"]).read_bytes()
+              assert hashlib.sha256(content).hexdigest() == row["postimage_sha256"], row["path"]
+          assert "m3.object-sha256-adapter" in Path("m3/docs/name-mapping.json").read_text(encoding="utf-8")
+          print("M3_SHA256_RECEIVER_SOURCE_SEALS_PASS entries=4")
+          PY
+      - name: Compile isolated java.security.SHA256Adapter and native jtreg C source
+        shell: bash
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp -d)"
+          trap 'rm -rf "$tmp"' EXIT
+          mkdir -p "$tmp/source/java/security" "$tmp/classes"
+          cp src/java.base/share/classes/java/security/SHA256Adapter.java "$tmp/source/java/security/"
+          javac -Xlint:all -Werror --patch-module "java.base=$tmp/source" -d "$tmp/classes" "$tmp/source/java/security/SHA256Adapter.java"
+          gcc -std=c17 -Wall -Wextra -Werror -pedantic -fPIC \
+            "-I${JAVA_HOME}/include" "-I${JAVA_HOME}/include/linux" \
+            -c test/jdk/java/lang/Object/libSHA256ObjectAdapterTest.c \
+            -o "$tmp/libSHA256ObjectAdapterTest.o"
+          echo 'M3_SHA256_RECEIVER_ISOLATED_JAVA_C17_PASS'
+      - name: Refuse uncommitted changes
+        shell: bash
+        run: |
+          git diff --check
+          git diff --exit-code

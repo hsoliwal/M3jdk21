@@ -1,0 +1,21 @@
+LOAD	start	48.6	0.7	32
+LOAD	warm	44.2	-100.0	32
+PERF	M3SorterLanes#modelIndex(int)	view to model (convertRowIndexToModel)	direct	0.483	0.425	0.579	1048576	7
+PERF	ref:TableRowSorter#convertRowIndexToModel	stock view to model (JDK reference)	reference	1.076	0.865	1.416	1048576	7
+PERF	M3SorterLanes#viewIndex(int)	model to view (convertRowIndexToView)	direct	0.497	0.432	0.794	1048576	7
+PERF	ref:TableRowSorter#convertRowIndexToView	stock model to view (JDK reference)	reference	0.484	0.427	0.579	1048576	7
+PERF	M3SorterLanes#viewRowCount()	view rows	direct	0.011	0.009	0.012	1048576	7
+PERF	M3SorterLanes#transformed()	transformed flag	direct	0.010	0.009	0.029	1048576	7
+PERF	M3SorterLanes#sortLane(int[],int)	sort a lane of 4096 model indices	direct	393798.438	339662.500	477414.063	64	7
+PERF	ref:Arrays#sort(Integer[],Comparator)	stock Row sort shape: boxed TimSort (JDK reference)	reference	670679.688	575714.063	825675.000	64	7
+PERF	M3SorterLanes#binarySearch(int[],int)	insertion point in the view lane	direct	148.520	135.782	169.956	1048576	7
+PERF	M3SparseSizes#getSize(int)	getSize over 10^6 rows, 1024 custom	direct	43.865	39.420	51.081	1048576	7
+PERF	ref:SizeSequence#getSize	stock SizeSequence.getSize (JDK reference)	reference	184.249	176.082	189.998	1048576	7
+PERF	M3SparseSizes#getPosition(int)	getPosition over 10^6 rows, 1024 custom	direct	46.110	41.862	48.892	1048576	7
+PERF	ref:SizeSequence#getPosition	stock SizeSequence.getPosition (JDK reference)	reference	93.932	91.438	114.383	1048576	7
+PERF	M3SparseSizes#getIndex(int)	getIndex over 10^6 rows, 1024 custom	direct	53.692	49.537	60.333	1048576	7
+PERF	ref:SizeSequence#getIndex	stock SizeSequence.getIndex (JDK reference)	reference	194.479	185.257	209.098	1048576	7
+PERF	M3SparseSizes#find(int)	find in the sparse index lane	direct	46.211	42.831	51.630	1048576	7
+PERF	M3SparseSizes#lowerBound(int)	lowerBound in the sparse index lane	direct	41.972	38.641	45.382	1048576	7
+LOAD	end	36.3	2.9	32
+SINK	228114889267584

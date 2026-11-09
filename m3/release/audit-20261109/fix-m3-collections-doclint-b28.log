@@ -1,0 +1,55 @@
+# jdk.m3.collections doclint repair for the #2902 (b28) classes, 2026-11-09
+# found by make images (default flags) on the integration tree aaf02694a088 (master e8e1e837a640 + fix PRs)
+## diagnostics (file, line, message)
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/AlertException.java	43	empty <p> tag
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ConvergenceConstants.java	22	reference not found
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ConvergenceEvent.java	38	reference not found
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ConvergenceEvent.java	39	reference not found
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/DiffResult.java	29	reference not found
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/DiffType.java	32	reference not found
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/DiffType.java	51	malformed HTML
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ICoalescingBuffer.java	61	empty <p> tag
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ISequenceBarrier.java	47	empty <p> tag
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/IWaitStrategy.java	65	no caption for table
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/IWaitStrategy.java	80	empty <p> tag
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/PassMetrics.java	84	malformed HTML
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/TextSmoother.java	55	reference not found
+## line-by-line changes
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/AlertException.java:43	empty <p> tag
+  - * <p>
+  - * </p>
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ConvergenceConstants.java:22	reference not found
+  - * Extracted from {@link DiscreteIntegralEngine} to separate concerns and
+  + * Extracted from {@code DiscreteIntegralEngine} to separate concerns and
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ConvergenceEvent.java:38	reference not found
+  - * @see ConvergenceEventLog
+  + * @see "ConvergenceEventLog"
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ConvergenceEvent.java:39	reference not found
+  - * @see ConvergenceProjection
+  + * @see "ConvergenceProjection"
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/DiffResult.java:29	reference not found
+  - * @see IndexDiff
+  + * @see "IndexDiff"
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/DiffType.java:32	reference not found
+  - * @see ConvergenceMatcher
+  + * @see "ConvergenceMatcher"
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/DiffType.java:51	malformed HTML
+  - * Chunk modified from memory (0 < similarity <= 0.85).
+  + * Chunk modified from memory (0 &lt; similarity &lt;= 0.85).
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ICoalescingBuffer.java:61	empty <p> tag
+  - * <p>
+  - * </p>
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ISequenceBarrier.java:47	empty <p> tag
+  - * <p>
+  - * </p>
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/IWaitStrategy.java:65	no caption for table
+  + * <caption>Wait strategy trade-offs</caption> (after line 28)
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/IWaitStrategy.java:80	empty <p> tag
+  - * <p>
+  - * </p>
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/PassMetrics.java:84	malformed HTML
+  - * @return true if energy < threshold
+  + * @return true if energy &lt; threshold
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/TextSmoother.java:55	reference not found
+  - * @see ConvergenceChunker
+  + * @see "ConvergenceChunker"

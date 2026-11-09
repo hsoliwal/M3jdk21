@@ -1,0 +1,7 @@
+provider	correct_upstream_api	M3_backend	status	qualification
+JDK	java.util.Map<K,List<V>>	M3LinkedHashMap<K,List<V>> + M3LinkedList<V>	EXISTING_OWNER	M3 existing JDK differential; M3FiveLibraryInteropContractTest hosted
+GUAVA	com.google.common.collect.ListMultimap<K,V>	M3LibraryCollections.guavaListMultimap()	EXISTING_ADAPTER	M3 existing provider differential; M3FiveLibraryInteropContractTest hosted
+ECLIPSE_COLLECTIONS	org.eclipse.collections.api.multimap.list.MutableListMultimap<K,V>	M3EclipseListMultimap<K,V>	NEW_IMPLEMENTATION	161657 real 11.1.0 provider checks; 3000 operations; tiered and interpreter
+ECLIPSE_COLLECTIONS	org.eclipse.collections.api.multimap.set.MutableSetMultimap<K,V>	M3EclipseSetMultimap<K,V>	NEW_IMPLEMENTATION	161679 real 11.1.0 provider checks; 3000 operations; tiered and interpreter
+SPRING_FRAMEWORK	org.springframework.util.MultiValueMap<K,V>	M3LibraryCollections.springMultiValueMap()	EXISTING_ADAPTER	M3 existing provider differential; M3FiveLibraryInteropContractTest hosted
+APACHE_COMMONS_COLLECTIONS	org.apache.commons.collections4.ListValuedMap<K,V>	M3LibraryCollections.apacheListValuedMap()	EXISTING_ADAPTER	M3 existing Apache donor proof; M3FiveLibraryInteropContractTest hosted

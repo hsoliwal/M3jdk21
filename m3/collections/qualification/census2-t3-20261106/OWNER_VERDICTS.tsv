@@ -1,0 +1,77 @@
+# SPDX-License-Identifier: Apache-2.0
+# P2-098 owner probe of owner_probe.sh (2026-11-06, base M3JDK master 2d8273c6ad55): the held M3FilteredCursorReadinessSelfTest (donor blob 97fa2d5b3158, package line mapped) with check/same/expect recording instead of throwing, per mode, on the module owners M3FilteredViews.filterEntries (read-only), M3MutableFilteredViews.filterEntries (mutable), M3TreeMap/M3TreeSet. Rows = mode, occurrences, failing check (label, expected, actual). Owner behaviour the test expects and master lacks: (1) filtered cursors check the owner revision: an exhausted hasNext, a prepared next and a mutable remove after an owner put/clear/slot reuse throw ConcurrentModificationException (read-only and mutable); (2) re-entrant mutation from a predicate before accepting or following a slot, from a bounded comparator (nextSlot) and before the first slot (epoch captured at construction) is detected (ConcurrentModificationException) instead of returning or NoSuchElementException; (3) the mutable values view evaluates the predicate once per entry (master: twice for some entries, e.g. [null, null, -4, -3, -3, ...]) and a nonstructural replacement keeps the prepared selection (1 call, master 2); (4) M3TreeMap.verifyInvariants throws ordering after a bounded comparator that clears the owner through the mutable view (uncaught, mode aborts). The as-is test stops at the first: exhausted cursor checks revision. HOLD_OWNER_EDIT: owners M3FilteredViews, M3MutableFilteredViews (cursor revision and callback discipline) and M3TreeMap (re-entrant comparator mutation), owner review; no owner edited here.
+mode	count	check
+readonly-ready	2	exhausted cursor checks revision expected=ConcurrentModificationException actual=none
+readonly-ready	2	prepared cursor checks revision expected=ConcurrentModificationException actual=none
+mutable-ready	1	ready mutable=true bounded=false descending=false values=true first selection expected=[null, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6] actual=[null, null, -4, -3, -3, -2, -1, 0, 0, 1, 2, 3, 3, 4, 5, 6]
+mutable-ready	1	ready mutable=true bounded=false descending=false values=true first selection expected=[null, -4, -3, -2, -1, 0, 1, 2, 3] actual=[null, null, -4, -3, -3, -2, -1, 0, 0, 1, 2, 3]
+mutable-ready	1	ready mutable=true bounded=false descending=false values=true first selection expected=[null, -4, -3, -2, -1, 0] actual=[null, null, -4, -3, -3, -2, -1, 0]
+mutable-ready	1	ready mutable=true bounded=false descending=false values=true first selection expected=[null, -4, -3] actual=[null, null, -4, -3]
+mutable-ready	1	ready mutable=true bounded=false descending=false values=true next consumes prepared selection expected=[null, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6] actual=[null, null, -4, -3, -3, -2, -1, 0, 0, 1, 2, 3, 3, 4, 5, 6, 6]
+mutable-ready	1	ready mutable=true bounded=false descending=false values=true next consumes prepared selection expected=[null, -4, -3, -2, -1, 0, 1, 2, 3] actual=[null, null, -4, -3, -3, -2, -1, 0, 0, 1, 2, 3, 3]
+mutable-ready	1	ready mutable=true bounded=false descending=false values=true next consumes prepared selection expected=[null, -4, -3, -2, -1, 0] actual=[null, null, -4, -3, -3, -2, -1, 0, 0]
+mutable-ready	1	ready mutable=true bounded=false descending=false values=true next consumes prepared selection expected=[null, -4, -3] actual=[null, null, -4, -3, -3]
+mutable-ready	1	ready mutable=true bounded=false descending=false values=true next consumes prepared selection expected=[null] actual=[null, null]
+mutable-ready	1	ready mutable=true bounded=false descending=false values=true one visit per key expected=[null, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6] actual=[null, null, -4, -3, -3, -2, -1, 0, 0, 1, 2, 3, 3, 4, 5, 6, 6]
+mutable-ready	1	ready mutable=true bounded=false descending=true values=true first selection expected=[6, 5, 4, 3, 2, 1, 0, -1, -2, -3, -4, null] actual=[6, 6, 5, 4, 3, 3, 2, 1, 0, 0, -1, -2, -3, -3, -4, null]
+mutable-ready	1	ready mutable=true bounded=false descending=true values=true first selection expected=[6, 5, 4, 3, 2, 1, 0, -1, -2, -3] actual=[6, 6, 5, 4, 3, 3, 2, 1, 0, 0, -1, -2, -3]
+mutable-ready	1	ready mutable=true bounded=false descending=true values=true first selection expected=[6, 5, 4, 3, 2, 1, 0] actual=[6, 6, 5, 4, 3, 3, 2, 1, 0]
+mutable-ready	1	ready mutable=true bounded=false descending=true values=true first selection expected=[6, 5, 4, 3] actual=[6, 6, 5, 4, 3]
+mutable-ready	1	ready mutable=true bounded=false descending=true values=true next consumes prepared selection expected=[6, 5, 4, 3, 2, 1, 0, -1, -2, -3, -4, null] actual=[6, 6, 5, 4, 3, 3, 2, 1, 0, 0, -1, -2, -3, -3, -4, null, null]
+mutable-ready	1	ready mutable=true bounded=false descending=true values=true next consumes prepared selection expected=[6, 5, 4, 3, 2, 1, 0, -1, -2, -3] actual=[6, 6, 5, 4, 3, 3, 2, 1, 0, 0, -1, -2, -3, -3]
+mutable-ready	1	ready mutable=true bounded=false descending=true values=true next consumes prepared selection expected=[6, 5, 4, 3, 2, 1, 0] actual=[6, 6, 5, 4, 3, 3, 2, 1, 0, 0]
+mutable-ready	1	ready mutable=true bounded=false descending=true values=true next consumes prepared selection expected=[6, 5, 4, 3] actual=[6, 6, 5, 4, 3, 3]
+mutable-ready	1	ready mutable=true bounded=false descending=true values=true next consumes prepared selection expected=[6] actual=[6, 6]
+mutable-ready	1	ready mutable=true bounded=false descending=true values=true one visit per key expected=[6, 5, 4, 3, 2, 1, 0, -1, -2, -3, -4, null] actual=[6, 6, 5, 4, 3, 3, 2, 1, 0, 0, -1, -2, -3, -3, -4, null, null]
+mutable-ready	1	ready mutable=true bounded=true descending=false values=true first selection expected=[-3, -2, -1, 0, 1, 2, 3] actual=[-3, -3, -2, -1, 0, 0, 1, 2, 3]
+mutable-ready	1	ready mutable=true bounded=true descending=false values=true first selection expected=[-3, -2, -1, 0] actual=[-3, -3, -2, -1, 0]
+mutable-ready	1	ready mutable=true bounded=true descending=false values=true next consumes prepared selection expected=[-3, -2, -1, 0, 1, 2, 3] actual=[-3, -3, -2, -1, 0, 0, 1, 2, 3, 3]
+mutable-ready	1	ready mutable=true bounded=true descending=false values=true next consumes prepared selection expected=[-3, -2, -1, 0] actual=[-3, -3, -2, -1, 0, 0]
+mutable-ready	1	ready mutable=true bounded=true descending=false values=true next consumes prepared selection expected=[-3] actual=[-3, -3]
+mutable-ready	1	ready mutable=true bounded=true descending=false values=true one visit per key expected=[-3, -2, -1, 0, 1, 2, 3, 4, 5] actual=[-3, -3, -2, -1, 0, 0, 1, 2, 3, 3, 4, 5]
+mutable-ready	1	ready mutable=true bounded=true descending=true values=true first selection expected=[5, 4, 3, 2, 1, 0, -1, -2, -3] actual=[5, 4, 3, 3, 2, 1, 0, 0, -1, -2, -3]
+mutable-ready	1	ready mutable=true bounded=true descending=true values=true first selection expected=[5, 4, 3, 2, 1, 0] actual=[5, 4, 3, 3, 2, 1, 0]
+mutable-ready	1	ready mutable=true bounded=true descending=true values=true next consumes prepared selection expected=[5, 4, 3, 2, 1, 0, -1, -2, -3] actual=[5, 4, 3, 3, 2, 1, 0, 0, -1, -2, -3, -3]
+mutable-ready	1	ready mutable=true bounded=true descending=true values=true next consumes prepared selection expected=[5, 4, 3, 2, 1, 0] actual=[5, 4, 3, 3, 2, 1, 0, 0]
+mutable-ready	1	ready mutable=true bounded=true descending=true values=true next consumes prepared selection expected=[5, 4, 3] actual=[5, 4, 3, 3]
+mutable-ready	1	ready mutable=true bounded=true descending=true values=true one visit per key expected=[5, 4, 3, 2, 1, 0, -1, -2, -3] actual=[5, 4, 3, 3, 2, 1, 0, 0, -1, -2, -3, -3]
+mutable-ready	1	remove keeps prepared visibility expected=[1, 2, 3, 4, 4, 5] actual=[1, 2, 3, 4, 4, 5, 5]
+mutable-ready	1	remove keeps prepared visibility expected=[1, 2, 3, 4, 5] actual=[1, 2, 3, 4, 5, 5]
+mutable-ready	1	remove keeps prepared visibility expected=[7, 6, 5, 4, 3] actual=[7, 6, 5, 4, 3, 3]
+mutable-ready	1	remove keeps prepared visibility expected=[7, 6, 5, 4, 4, 3] actual=[7, 6, 5, 4, 4, 3, 3]
+mutable-ready	1	replacement preserves prepared selection expected=1 actual=2
+mutable-ready	2	exhausted cursor checks revision expected=ConcurrentModificationException actual=none
+mutable-ready	2	prepared cursor checks revision expected=ConcurrentModificationException actual=none
+mutable-ready	2	remove checks revision expected=ConcurrentModificationException actual=none
+mutable-ready	3	ready mutable=true bounded=false descending=false values=true exhausted callbacks expected=[null, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6] actual=[null, null, -4, -3, -3, -2, -1, 0, 0, 1, 2, 3, 3, 4, 5, 6, 6]
+mutable-ready	3	ready mutable=true bounded=false descending=false values=true no repeated callback expected=[null, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6] actual=[null, null, -4, -3, -3, -2, -1, 0, 0, 1, 2, 3, 3, 4, 5, 6]
+mutable-ready	3	ready mutable=true bounded=false descending=false values=true no repeated callback expected=[null, -4, -3, -2, -1, 0, 1, 2, 3] actual=[null, null, -4, -3, -3, -2, -1, 0, 0, 1, 2, 3]
+mutable-ready	3	ready mutable=true bounded=false descending=false values=true no repeated callback expected=[null, -4, -3, -2, -1, 0] actual=[null, null, -4, -3, -3, -2, -1, 0]
+mutable-ready	3	ready mutable=true bounded=false descending=false values=true no repeated callback expected=[null, -4, -3] actual=[null, null, -4, -3]
+mutable-ready	3	ready mutable=true bounded=false descending=true values=true exhausted callbacks expected=[6, 5, 4, 3, 2, 1, 0, -1, -2, -3, -4, null] actual=[6, 6, 5, 4, 3, 3, 2, 1, 0, 0, -1, -2, -3, -3, -4, null, null]
+mutable-ready	3	ready mutable=true bounded=false descending=true values=true no repeated callback expected=[6, 5, 4, 3, 2, 1, 0, -1, -2, -3, -4, null] actual=[6, 6, 5, 4, 3, 3, 2, 1, 0, 0, -1, -2, -3, -3, -4, null]
+mutable-ready	3	ready mutable=true bounded=false descending=true values=true no repeated callback expected=[6, 5, 4, 3, 2, 1, 0, -1, -2, -3] actual=[6, 6, 5, 4, 3, 3, 2, 1, 0, 0, -1, -2, -3]
+mutable-ready	3	ready mutable=true bounded=false descending=true values=true no repeated callback expected=[6, 5, 4, 3, 2, 1, 0] actual=[6, 6, 5, 4, 3, 3, 2, 1, 0]
+mutable-ready	3	ready mutable=true bounded=false descending=true values=true no repeated callback expected=[6, 5, 4, 3] actual=[6, 6, 5, 4, 3]
+mutable-ready	3	ready mutable=true bounded=true descending=false values=true exhausted callbacks expected=[-3, -2, -1, 0, 1, 2, 3, 4, 5] actual=[-3, -3, -2, -1, 0, 0, 1, 2, 3, 3, 4, 5]
+mutable-ready	3	ready mutable=true bounded=true descending=false values=true no repeated callback expected=[-3, -2, -1, 0, 1, 2, 3] actual=[-3, -3, -2, -1, 0, 0, 1, 2, 3]
+mutable-ready	3	ready mutable=true bounded=true descending=false values=true no repeated callback expected=[-3, -2, -1, 0] actual=[-3, -3, -2, -1, 0]
+mutable-ready	3	ready mutable=true bounded=true descending=true values=true exhausted callbacks expected=[5, 4, 3, 2, 1, 0, -1, -2, -3] actual=[5, 4, 3, 3, 2, 1, 0, 0, -1, -2, -3, -3]
+mutable-ready	3	ready mutable=true bounded=true descending=true values=true no repeated callback expected=[5, 4, 3, 2, 1, 0, -1, -2, -3] actual=[5, 4, 3, 3, 2, 1, 0, 0, -1, -2, -3]
+mutable-ready	3	ready mutable=true bounded=true descending=true values=true no repeated callback expected=[5, 4, 3, 2, 1, 0] actual=[5, 4, 3, 3, 2, 1, 0]
+readonly-reentrant	2	bounded nextSlot comparator mutation expected=ConcurrentModificationException actual=none
+readonly-reentrant	2	capture epoch before firstSlot expected=ConcurrentModificationException actual=none
+readonly-reentrant	3	invalidated set next expected=ConcurrentModificationException actual=none
+readonly-reentrant	3	predicate mutation before accepting or following a set slot expected=ConcurrentModificationException actual=none
+readonly-reentrant	6	invalidated map next expected=ConcurrentModificationException actual=none
+readonly-reentrant	6	predicate mutation before accepting or following a map slot expected=ConcurrentModificationException actual=none
+mutable-reentrant	1	bounded nextSlot comparator mutation expected=ConcurrentModificationException actual=none
+mutable-reentrant	1	invalidated set next expected=ConcurrentModificationException actual=NoSuchElementException
+mutable-reentrant	1	no completion line
+mutable-reentrant	1	thrown java.lang.AssertionError: ordering
+mutable-reentrant	12	predicate mutation before accepting or following a map slot expected=ConcurrentModificationException actual=none
+mutable-reentrant	2	subsequent invalidated cursor expected=ConcurrentModificationException actual=none
+mutable-reentrant	3	invalidated set next expected=ConcurrentModificationException actual=none
+mutable-reentrant	3	predicate mutation before accepting or following a set slot expected=ConcurrentModificationException actual=none
+mutable-reentrant	6	invalidated map next expected=ConcurrentModificationException actual=NoSuchElementException
+mutable-reentrant	6	invalidated map next expected=ConcurrentModificationException actual=none

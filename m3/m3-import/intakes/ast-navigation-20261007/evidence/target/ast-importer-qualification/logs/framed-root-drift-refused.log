@@ -1,0 +1,4 @@
+Exception in thread "main" java.lang.IllegalArgumentException: Synexia import manifest root mismatch
+	at com.m3.synexia.importer.SynexiaImportManifest.<init>(SynexiaImportManifest.java:44)
+	at com.m3.synexia.importer.SynexiaImportManifest.parse(SynexiaImportManifest.java:88)
+	at com.m3.synexia.importer.SynexiaImportCli.main(SynexiaImportCli.java:18)

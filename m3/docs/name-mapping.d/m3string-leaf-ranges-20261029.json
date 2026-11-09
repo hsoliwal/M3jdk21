@@ -1,0 +1,20 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf (unix4j native leaf 1b).",
+  "mappings": [
+    {
+      "source": "java.lang.M3StringLeafCursor owner/range traversal (Java-only; never exposes an address) (master 7f7accdd54e2)",
+      "source_commit": "7f7accdd54e2",
+      "target": "jdk.internal.access.JavaLangAccess.stringM3LeafRanges(String, long[]) + JavaLangAccess.M3StringLeafLanes + java.lang.M3StringLeafRanges.fill(M3String, long[])",
+      "status": "implemented; javac PASS; component oracle PASS on stock JDK 21 (--patch-module); jtreg on an M3JDK21 image and make images NOT_RUN",
+      "target_rule": "REUSE M3StringLeafCursor (coalesced); DOOP: two long lanes per leaf, no per-leaf object; ATOM = address of first visible unit + units/width/byte order; IMMEDIATE = INLINE Latin-1 units in the lanes; NOT_M3 = -1 for a String without M3 storage; caller keeps the String reachable while using addresses, which are read-only"
+    },
+    {
+      "source": "unix4j wc/grep/cut text kernels over java.lang.String (Java)",
+      "source_commit": "7f7accdd54e2",
+      "target": "libm3textio C kernels in m3/tooling/module-packs/text-tools (jdk.m3.text, jdk.m3.io) reading M3StringLeafLanes",
+      "status": "consumer contract only; the C kernel and Java facade are leaf 1 (branch m3/unix4j-native-wc-20261029), not this leaf",
+      "target_rule": "export jdk.internal.access to jdk.m3.text by --add-exports at module-pack javac time and jlink --add-options in the module-pack image; java.base module-info unchanged (open question recorded in m3/docs/m3string-leaf-ranges-20261029/README.md)"
+    }
+  ]
+}

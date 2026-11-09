@@ -1,0 +1,252 @@
+# Copyright 2026 Hitesh Soliwal, Synexia. SPDX-License-Identifier: Apache-2.0
+# Reuses the original build and the existing bounded hosted qualification lane.
+name: M3 current core contract matrix
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-core-contract-matrix.yml'
+      - 'm3/tooling/core-contract-matrix/**'
+      - 'm3/core/**'
+      - 'm3/build.sh'
+      - 'm3/lexicon/**'
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  original-core:
+    if: github.repository == 'hsoliwal/M3jdk21' && github.event.pull_request.head.repo.full_name == 'hsoliwal/M3jdk21'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Reserve storage and select provisioned JDK 21
+        id: preflight
+        env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}
+          M3_SOURCE_ROOT: ${{ github.workspace }}/m3-core-contract-source
+          TMPDIR: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TEMP: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TMP: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          XDG_CACHE_HOME: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/config
+          XDG_DATA_HOME: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/data
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -I -S -B - <<'PY'
+          import os,pathlib,re,shutil
+          reserve,cap=8*1024**3,512*1024**2
+          for key in ("RUNNER_TEMP","GITHUB_WORKSPACE"):
+              base=pathlib.Path(os.environ[key])
+              if not base.is_dir() or any(p.is_symlink() for p in [base,*base.parents]):raise SystemExit("HOLD_STORAGE redirected runner storage")
+              if shutil.disk_usage(base).free<reserve+cap:raise SystemExit("HOLD_STORAGE 8GiB after512MiB")
+          root=pathlib.Path(os.environ["M3_PROOF_ROOT"]);source=pathlib.Path(os.environ["M3_SOURCE_ROOT"])
+          if root.exists() or source.exists():raise SystemExit("fresh owned paths required")
+          cache=pathlib.Path(os.environ["RUNNER_TOOL_CACHE"])/"Java_Temurin-Hotspot_jdk"
+          javas=[v/"x64" for v in cache.glob("21.*") if re.fullmatch(r"21\.\d+\.\d+-\d+(?:\.\d+)*",v.name) and (v/"x64.complete").is_file() and all(os.access(v/"x64/bin"/n,os.X_OK) for n in ("java","javac","jar"))]
+          if not javas:raise SystemExit("HOLD_TOOLCHAIN provisioned JDK21 required; no download fallback")
+          java=sorted(javas)[-1].resolve()
+          for name in ("tmp","home","cache","config","data"):(root/name).mkdir(parents=True,exist_ok=False)
+          with open(os.environ["GITHUB_OUTPUT"],"a",encoding="utf-8") as stream:stream.write("java="+str(java)+"\n")
+          PY
+      - name: Narrow exact-head checkout
+        env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}
+          M3_SOURCE_ROOT: ${{ github.workspace }}/m3-core-contract-source
+          TMPDIR: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TEMP: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TMP: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          XDG_CACHE_HOME: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/config
+          XDG_DATA_HOME: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/data
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          path: m3-core-contract-source
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 1
+          fetch-tags: false
+          lfs: false
+          submodules: false
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /.gitattributes
+            /.github/workflows/m3-core-contract-matrix.yml
+            /m3/tooling/core-contract-matrix/
+            /m3/core/
+            /m3/build.sh
+            /m3/lexicon/english-demo.txt
+            /m3/lexicon/m3-number-target-map.tsv
+            /m3/lexicon/m3-precompute-field-map.tsv
+            /m3/lexicon/m3-source-manifest.tsv
+            /m3/lexicon/m3-word-source-revisions.tsv
+      - name: Execute unchanged original build
+        id: qualify
+        env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}
+          M3_SOURCE_ROOT: ${{ github.workspace }}/m3-core-contract-source
+          TMPDIR: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TEMP: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TMP: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          XDG_CACHE_HOME: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/config
+          XDG_DATA_HOME: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/data
+          M3JDK: ${{ steps.preflight.outputs.java }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -I -S -B "$M3_SOURCE_ROOT/m3/tooling/core-contract-matrix/qualify.py" --source "$M3_SOURCE_ROOT" --out "$M3_PROOF_ROOT" --jdk "$M3JDK"
+      - name: Preserve actual build evidence
+        if: always() && (steps.qualify.outcome == 'success' || steps.qualify.outcome == 'failure')
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-current-core-contract-${{ github.run_id }}-${{ github.run_attempt }}
+          if-no-files-found: error
+          retention-days: 7
+          path: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/contract/
+  wordrows-native:
+    if: github.repository == 'hsoliwal/M3jdk21' && github.event.pull_request.head.repo.full_name == 'hsoliwal/M3jdk21'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Reserve storage and select provisioned JDK 21
+        id: preflight
+        env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-wordrows-native-${{ github.run_id }}-${{ github.run_attempt }}
+          M3_SOURCE_ROOT: ${{ github.workspace }}/m3-wordrows-native-source
+          TMPDIR: ${{ runner.temp }}/m3-wordrows-native-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TEMP: ${{ runner.temp }}/m3-wordrows-native-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TMP: ${{ runner.temp }}/m3-wordrows-native-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          XDG_CACHE_HOME: ${{ runner.temp }}/m3-wordrows-native-${{ github.run_id }}-${{ github.run_attempt }}/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/m3-wordrows-native-${{ github.run_id }}-${{ github.run_attempt }}/config
+          XDG_DATA_HOME: ${{ runner.temp }}/m3-wordrows-native-${{ github.run_id }}-${{ github.run_attempt }}/data
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -I -S -B - <<'PY'
+          import os,pathlib,re,shutil
+          reserve,cap=8*1024**3,512*1024**2
+          for key in ("RUNNER_TEMP","GITHUB_WORKSPACE"):
+              base=pathlib.Path(os.environ[key])
+              if not base.is_dir() or any(p.is_symlink() for p in [base,*base.parents]):raise SystemExit("HOLD_STORAGE redirected runner storage")
+              if shutil.disk_usage(base).free<reserve+cap:raise SystemExit("HOLD_STORAGE 8GiB after512MiB")
+          root=pathlib.Path(os.environ["M3_PROOF_ROOT"]);source=pathlib.Path(os.environ["M3_SOURCE_ROOT"])
+          if root.exists() or source.exists():raise SystemExit("fresh owned paths required")
+          cache=pathlib.Path(os.environ["RUNNER_TOOL_CACHE"])/"Java_Temurin-Hotspot_jdk"
+          javas=[v/"x64" for v in cache.glob("21.*") if re.fullmatch(r"21\.\d+\.\d+-\d+(?:\.\d+)*",v.name) and (v/"x64.complete").is_file() and all(os.access(v/"x64/bin"/n,os.X_OK) for n in ("java","javac","jar"))]
+          if not javas:raise SystemExit("HOLD_TOOLCHAIN provisioned JDK21 required; no download fallback")
+          java=sorted(javas)[-1].resolve()
+          if not shutil.which("cc") or not shutil.which("nm"):raise SystemExit("HOLD_TOOLCHAIN provisioned compiler and nm required")
+          for name in ("tmp","home","cache","config","data"):(root/name).mkdir(parents=True,exist_ok=False)
+          with open(os.environ["GITHUB_OUTPUT"],"a",encoding="utf-8") as stream:stream.write("java="+str(java)+"\n")
+          PY
+      - name: Checkout five native proof inputs
+        env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-wordrows-native-${{ github.run_id }}-${{ github.run_attempt }}
+          M3_SOURCE_ROOT: ${{ github.workspace }}/m3-wordrows-native-source
+          TMPDIR: ${{ runner.temp }}/m3-wordrows-native-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TEMP: ${{ runner.temp }}/m3-wordrows-native-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TMP: ${{ runner.temp }}/m3-wordrows-native-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          XDG_CACHE_HOME: ${{ runner.temp }}/m3-wordrows-native-${{ github.run_id }}-${{ github.run_attempt }}/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/m3-wordrows-native-${{ github.run_id }}-${{ github.run_attempt }}/config
+          XDG_DATA_HOME: ${{ runner.temp }}/m3-wordrows-native-${{ github.run_id }}-${{ github.run_attempt }}/data
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          path: m3-wordrows-native-source
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 1
+          fetch-tags: false
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /m3/core/src/jdk/m3/text/M3WordRows.java
+            /m3/core/src/jdk/m3/text/M3WordRowsNative.java
+            /m3/core/test/M3WordRowsContractTest.java
+            /m3/lexicon/run-wordrows-proof.sh
+            /m3/lexicon/native/m3_wordrows_jni.c
+      - name: Execute original loaded JNI proof
+        id: qualify
+        env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-wordrows-native-${{ github.run_id }}-${{ github.run_attempt }}
+          M3_SOURCE_ROOT: ${{ github.workspace }}/m3-wordrows-native-source
+          TMPDIR: ${{ runner.temp }}/m3-wordrows-native-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TEMP: ${{ runner.temp }}/m3-wordrows-native-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TMP: ${{ runner.temp }}/m3-wordrows-native-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          XDG_CACHE_HOME: ${{ runner.temp }}/m3-wordrows-native-${{ github.run_id }}-${{ github.run_attempt }}/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/m3-wordrows-native-${{ github.run_id }}-${{ github.run_attempt }}/config
+          XDG_DATA_HOME: ${{ runner.temp }}/m3-wordrows-native-${{ github.run_id }}-${{ github.run_attempt }}/data
+          M3JDK: ${{ steps.preflight.outputs.java }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -I -S -B - <<'PY'
+          import hashlib,json,os,pathlib,re,shutil,signal,subprocess,time,traceback
+          source=pathlib.Path(os.environ["M3_SOURCE_ROOT"]).resolve();out=pathlib.Path(os.environ["M3_PROOF_ROOT"]).resolve()
+          expected={"m3/core/src/jdk/m3/text/M3WordRows.java":{"bytes":17149,"gitBlob":"651c03f6b1a1e672ac97e2d0830473bcfc06207b","sha256":"d79d6ab8396271548b4adc2ef5393425ff8b98f5b9b7fc8a7a39d4fc0294c765"},"m3/core/src/jdk/m3/text/M3WordRowsNative.java":{"bytes":1721,"gitBlob":"a68f0d75eaae64707cf6d073a2b50f89c5dfdc78","sha256":"b81a8520792794a5256137c1c47960b10930237904907d4c8d0a4980386a00e5"},"m3/core/test/M3WordRowsContractTest.java":{"bytes":17542,"gitBlob":"0f94d3b4f944745411578d7cf47eba8821bfafb7","sha256":"f439cefd075a377eaa5b624145e4e04412bd343ca0d324fa7068e9276ce62679"},"m3/lexicon/run-wordrows-proof.sh":{"bytes":952,"gitBlob":"09c9dcbd2d090c311b2e90d9ab06ca381435d599","sha256":"46afcaf3c6fa678257e159d4045393a05683e8c2f4b5394dbccddd576efbc668"},"m3/lexicon/native/m3_wordrows_jni.c":{"bytes":2831,"gitBlob":"5069dcfbef89c4a4a77a402d36603f4c3189d24a","sha256":"af5ab12afbe92d78b1deb8597be280dd94aa41608f1633d85d9641672a6a954a"}}
+          def ident(raw):
+              return dict(bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest(),gitBlob=hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\0"+raw).hexdigest())
+          def sources():
+              found={}
+              for name,pin in expected.items():
+                  path=source/name
+                  if not path.is_file() or any(p.is_symlink() for p in [path,*path.parents]):raise ValueError("redirected source")
+                  found[name]=ident(path.read_bytes())
+                  if found[name]!=pin:raise ValueError("native source drift: "+name)
+              return found
+          def budget():
+              total=0
+              for root in [source,out]:
+                  for path in root.rglob("*"):
+                      if path.is_symlink():raise ValueError("redirected artifact")
+                      if path.is_file():total+=path.stat().st_blocks*512
+                  if shutil.disk_usage(root).free<8*1024**3:raise ValueError("storage reserve")
+              if total>512*1024**2:raise ValueError("output cap")
+              return total
+          before=sources();peak=budget();log=out/"native.log"
+          child=None;error=None;start=time.monotonic();status="FAIL";result={}
+          env=dict(os.environ)
+          for key in ["BASH_ENV","_JAVA_OPTIONS","JDK_JAVA_OPTIONS","JAVA_TOOL_OPTIONS"]:env.pop(key,None)
+          env.update(CC=shutil.which("cc"),HOME=str(out/"home"),TMPDIR=str(out/"tmp"),TEMP=str(out/"tmp"),TMP=str(out/"tmp"),JAVA_TOOL_OPTIONS="-Xmx128m -XX:-UsePerfData -Djava.io.tmpdir="+str(out/"tmp")+" -Duser.home="+str(out/"home")+" -XX:ErrorFile="+str(out/"hs_err_pid%p.log"))
+          wrapper="set -euo pipefail\nm3_guarded_rm() {\n  local target resolved file\n  for target in \"$@\"; do\n    case \"$target\" in -*) continue;; esac\n    resolved=$(realpath -m -- \"$target\")\n    case \"$resolved\" in \"$TMPDIR\"/?*) ;; *) return 73;; esac\n    for file in \"$resolved\"/*; do\n      if [[ -f \"$file\" ]]; then sha256sum -- \"$file\"; fi\n    done\n    if [[ -f \"$resolved/libm3wordrows.so\" ]]; then nm -D --defined-only \"$resolved/libm3wordrows.so\"; fi\n  done\n  command rm \"$@\"\n}\nrm() { m3_guarded_rm \"$@\"; }\nsource \"$M3_SOURCE_ROOT/m3/lexicon/run-wordrows-proof.sh\"\n"
+          try:
+              version=subprocess.run([env["CC"],"--version"],capture_output=True,timeout=10,check=True)
+              result["compiler"]=version.stdout.decode("utf-8")
+              version=subprocess.run([env["M3JDK"]+"/bin/java","-version"],capture_output=True,env=env,timeout=10,check=True)
+              result["jdk"]=(version.stdout+version.stderr).decode("utf-8")
+              with log.open("xb") as stream:
+                  child=subprocess.Popen(["/bin/bash","--noprofile","--norc","-c",wrapper,str(source/"m3/lexicon/run-wordrows-proof.sh")],env=env,cwd=source,stdin=subprocess.DEVNULL,stdout=stream,stderr=subprocess.STDOUT,start_new_session=True)
+                  while child.poll() is None:
+                      peak=max(peak,budget())
+                      if time.monotonic()-start>180 or log.stat().st_size>128*1024:raise ValueError("deadline/output gate")
+                      time.sleep(.2)
+              if child.returncode!=0:raise AssertionError("original native proof failed")
+              text=log.read_text(encoding="utf-8")
+              passes=re.findall(r"^M3_WORDROWS_PASS checks=96 JNI=true imageFormat=3 scope=word-id-arithmetic-no-string-replacement$",text,re.M)
+              cleanups=re.findall(r"^M3_WORDROWS_FIXTURE_CLEANUP_PASS files=7 childExited=true$",text,re.M)
+              assert len(passes)==len(cleanups)==4
+              assert text.count("M3_WORDROWS_WORKER_INPUTS")==4
+              assert "Java_jdk_m3_text_M3WordRowsNative_bulkFlags0" in text
+              assert not any(x in text for x in ["WARNING in native method","FATAL ERROR in native method","JNI DETECTED ERROR"])
+              assert sources()==before
+              status="PASS_ORIGINAL_WORDROWS_LOADED_JNI_FOUR_MODES"
+              result.update(originalPrograms=4,fixtureCleanups=4,modeWitnesses=[x for x in text.splitlines() if x.startswith("M3_WORDROWS_") and "_INPUTS" in x],sourcePosthash="PASS")
+          except Exception:error=traceback.format_exc()
+          finally:
+              if child is not None and child.poll() is None:os.killpg(child.pid,signal.SIGKILL);child.wait(timeout=15)
+              result.update(status=status,error=error,exit=child.returncode if child else None,reaped=child is None or child.poll() is not None,sources=before,sampledPeak=peak,allocatedAfter=budget(),capBytes=512*1024**2,reserveBytes=8*1024**3,log=ident(log.read_bytes()) if log.exists() else None,provider="GITHUB_HOSTED_UBUNTU24_04_LOADED_JNI",generationCalls=0)
+              (out/"RESULT.json").write_text(json.dumps(result,indent=2)+"\n",encoding="utf-8")
+              print(json.dumps(dict(status=status,error=error,exit=result["exit"])))
+          raise SystemExit(0 if status.startswith("PASS") else 1)
+          
+          PY
+      - name: Preserve native proof evidence
+        if: always() && (steps.qualify.outcome == 'success' || steps.qualify.outcome == 'failure')
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-wordrows-native-${{ github.run_id }}-${{ github.run_attempt }}
+          if-no-files-found: error
+          retention-days: 7
+          path: |
+            ${{ runner.temp }}/m3-wordrows-native-${{ github.run_id }}-${{ github.run_attempt }}/native.log
+            ${{ runner.temp }}/m3-wordrows-native-${{ github.run_id }}-${{ github.run_attempt }}/RESULT.json

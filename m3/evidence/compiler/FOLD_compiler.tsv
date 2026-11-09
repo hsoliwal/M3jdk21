@@ -1,0 +1,286 @@
+RETIRE	m3/compiler/lifetime-slots/GATES.tsv	m3/evidence/compiler/lifetime-slots/GATES.tsv
+RETIRE	m3/compiler/lifetime-slots/pom.xml	m3/evidence/compiler/lifetime-slots/pom.xml
+RETIRE	m3/compiler/lifetime-slots/PROVENANCE.tsv	m3/evidence/compiler/lifetime-slots/PROVENANCE.tsv
+RETIRE	m3/compiler/lifetime-slots/README.md	m3/evidence/compiler/lifetime-slots/README.md
+RETIRE	m3/compiler/lifetime-slots/recipe/differential.sh	m3/evidence/compiler/lifetime-slots/recipe/differential.sh
+RETIRE	m3/compiler/lifetime-slots/recipe/relocate.py	m3/evidence/compiler/lifetime-slots/recipe/relocate.py
+RETIRE	m3/compiler/lifetime-slots/RECIPE_MEMORY.tsv	m3/evidence/compiler/lifetime-slots/RECIPE_MEMORY.tsv
+RETIRE	m3/compiler/lifetime-slots/RELOCATION_MAP.tsv	m3/evidence/compiler/lifetime-slots/RELOCATION_MAP.tsv
+RETIRE	m3/compiler/lifetime-slots/src/main/java/module-info.java	m3/evidence/compiler/lifetime-slots/module-info.java
+RETIRE	m3/compiler/lifetime-slots/verify.sh	m3/evidence/compiler/lifetime-slots/verify.sh
+EDIT	m3/pom.xml	<module>compiler/lifetime-slots</module> removed
+RETIRE	m3/compiler/mat-sortable/pom.xml	m3/evidence/compiler/mat-sortable/pom.xml
+RETIRE	m3/compiler/mat-sortable/README.md	m3/evidence/compiler/mat-sortable/README.md
+RETIRE	m3/compiler/mat-sortable/recipe/mat-sortable-processor-20261107/DECISION.tsv	m3/evidence/compiler/mat-sortable/recipe/mat-sortable-processor-20261107/DECISION.tsv
+RETIRE	m3/compiler/mat-sortable/recipe/mat-sortable-processor-20261107/differential.sh	m3/evidence/compiler/mat-sortable/recipe/mat-sortable-processor-20261107/differential.sh
+RETIRE	m3/compiler/mat-sortable/recipe/mat-sortable-processor-20261107/FOSS_REUSE_DECISION.tsv	m3/evidence/compiler/mat-sortable/recipe/mat-sortable-processor-20261107/FOSS_REUSE_DECISION.tsv
+RETIRE	m3/compiler/mat-sortable/recipe/mat-sortable-processor-20261107/GATES.tsv	m3/evidence/compiler/mat-sortable/recipe/mat-sortable-processor-20261107/GATES.tsv
+RETIRE	m3/compiler/mat-sortable/recipe/mat-sortable-processor-20261107/HANDOFF.tsv	m3/evidence/compiler/mat-sortable/recipe/mat-sortable-processor-20261107/HANDOFF.tsv
+RETIRE	m3/compiler/mat-sortable/recipe/mat-sortable-processor-20261107/PROVENANCE.tsv	m3/evidence/compiler/mat-sortable/recipe/mat-sortable-processor-20261107/PROVENANCE.tsv
+RETIRE	m3/compiler/mat-sortable/recipe/mat-sortable-processor-20261107/README.md	m3/evidence/compiler/mat-sortable/recipe/mat-sortable-processor-20261107/README.md
+RETIRE	m3/compiler/mat-sortable/recipe/mat-sortable-processor-20261107/RECIPE_MEMORY.tsv	m3/evidence/compiler/mat-sortable/recipe/mat-sortable-processor-20261107/RECIPE_MEMORY.tsv
+RETIRE	m3/compiler/mat-sortable/recipe/mat-sortable-processor-20261107/relocate.py	m3/evidence/compiler/mat-sortable/recipe/mat-sortable-processor-20261107/relocate.py
+RETIRE	m3/compiler/mat-sortable/recipe/mat-sortable-processor-20261107/RELOCATION_MAP.tsv	m3/evidence/compiler/mat-sortable/recipe/mat-sortable-processor-20261107/RELOCATION_MAP.tsv
+RETIRE	m3/compiler/mat-sortable/recipe/mat-sortable-processor-20261107/verify.sh	m3/evidence/compiler/mat-sortable/recipe/mat-sortable-processor-20261107/verify.sh
+RETIRE	m3/compiler/mat-sortable/src/main/java/module-info.java	m3/evidence/compiler/mat-sortable/module-info.java
+EDIT	m3/pom.xml	<module>compiler/mat-sortable</module> removed
+RETIRE	m3/compiler/nullness-facts/GATES.tsv	m3/evidence/compiler/nullness-facts/GATES.tsv
+RETIRE	m3/compiler/nullness-facts/pom.xml	m3/evidence/compiler/nullness-facts/pom.xml
+RETIRE	m3/compiler/nullness-facts/PROVENANCE.tsv	m3/evidence/compiler/nullness-facts/PROVENANCE.tsv
+RETIRE	m3/compiler/nullness-facts/README.md	m3/evidence/compiler/nullness-facts/README.md
+RETIRE	m3/compiler/nullness-facts/recipe/differential.sh	m3/evidence/compiler/nullness-facts/recipe/differential.sh
+RETIRE	m3/compiler/nullness-facts/recipe/generate_fixtures.py	m3/evidence/compiler/nullness-facts/recipe/generate_fixtures.py
+RETIRE	m3/compiler/nullness-facts/recipe/relocate.py	m3/evidence/compiler/nullness-facts/recipe/relocate.py
+RETIRE	m3/compiler/nullness-facts/RECIPE_MEMORY.tsv	m3/evidence/compiler/nullness-facts/RECIPE_MEMORY.tsv
+RETIRE	m3/compiler/nullness-facts/RELOCATION_MAP.tsv	m3/evidence/compiler/nullness-facts/RELOCATION_MAP.tsv
+RETIRE	m3/compiler/nullness-facts/src/main/java/module-info.java	m3/evidence/compiler/nullness-facts/module-info.java
+RETIRE	m3/compiler/nullness-facts/verify.sh	m3/evidence/compiler/nullness-facts/verify.sh
+EDIT	m3/pom.xml	<module>compiler/nullness-facts</module> removed
+RETIRE	m3/compiler/parent-owned/pom.xml	m3/evidence/compiler/parent-owned/pom.xml
+RETIRE	m3/compiler/parent-owned/README.md	m3/evidence/compiler/parent-owned/README.md
+RETIRE	m3/compiler/parent-owned/recipe/parent-owned-processor-20261107/DECISION.tsv	m3/evidence/compiler/parent-owned/recipe/parent-owned-processor-20261107/DECISION.tsv
+RETIRE	m3/compiler/parent-owned/recipe/parent-owned-processor-20261107/FOSS_REUSE_DECISION.tsv	m3/evidence/compiler/parent-owned/recipe/parent-owned-processor-20261107/FOSS_REUSE_DECISION.tsv
+RETIRE	m3/compiler/parent-owned/recipe/parent-owned-processor-20261107/GATES.tsv	m3/evidence/compiler/parent-owned/recipe/parent-owned-processor-20261107/GATES.tsv
+RETIRE	m3/compiler/parent-owned/recipe/parent-owned-processor-20261107/javap_v_equal.py	m3/evidence/compiler/parent-owned/recipe/parent-owned-processor-20261107/javap_v_equal.py
+RETIRE	m3/compiler/parent-owned/recipe/parent-owned-processor-20261107/PROVENANCE.tsv	m3/evidence/compiler/parent-owned/recipe/parent-owned-processor-20261107/PROVENANCE.tsv
+RETIRE	m3/compiler/parent-owned/recipe/parent-owned-processor-20261107/README.md	m3/evidence/compiler/parent-owned/recipe/parent-owned-processor-20261107/README.md
+RETIRE	m3/compiler/parent-owned/recipe/parent-owned-processor-20261107/RECIPE_MEMORY.tsv	m3/evidence/compiler/parent-owned/recipe/parent-owned-processor-20261107/RECIPE_MEMORY.tsv
+RETIRE	m3/compiler/parent-owned/recipe/parent-owned-processor-20261107/relocate.py	m3/evidence/compiler/parent-owned/recipe/parent-owned-processor-20261107/relocate.py
+RETIRE	m3/compiler/parent-owned/recipe/parent-owned-processor-20261107/RELOCATION_MAP.tsv	m3/evidence/compiler/parent-owned/recipe/parent-owned-processor-20261107/RELOCATION_MAP.tsv
+RETIRE	m3/compiler/parent-owned/src/main/java/module-info.java	m3/evidence/compiler/parent-owned/module-info.java
+EDIT	m3/pom.xml	<module>compiler/parent-owned</module> removed
+RETIRE	m3/compiler/reference-flow/FOSS_REUSE_DECISION.tsv	m3/evidence/compiler/reference-flow/FOSS_REUSE_DECISION.tsv
+RETIRE	m3/compiler/reference-flow/GATES.tsv	m3/evidence/compiler/reference-flow/GATES.tsv
+RETIRE	m3/compiler/reference-flow/pom.xml	m3/evidence/compiler/reference-flow/pom.xml
+RETIRE	m3/compiler/reference-flow/PROVENANCE.tsv	m3/evidence/compiler/reference-flow/PROVENANCE.tsv
+RETIRE	m3/compiler/reference-flow/README.md	m3/evidence/compiler/reference-flow/README.md
+RETIRE	m3/compiler/reference-flow/recipe/CrefFactProbe.java	m3/evidence/compiler/reference-flow/recipe/CrefFactProbe.java
+RETIRE	m3/compiler/reference-flow/recipe/differential.py	m3/evidence/compiler/reference-flow/recipe/differential.py
+RETIRE	m3/compiler/reference-flow/recipe/mutants.py	m3/evidence/compiler/reference-flow/recipe/mutants.py
+RETIRE	m3/compiler/reference-flow/recipe/relocate.py	m3/evidence/compiler/reference-flow/recipe/relocate.py
+RETIRE	m3/compiler/reference-flow/recipe/RELOCATION_MAP.tsv	m3/evidence/compiler/reference-flow/recipe/RELOCATION_MAP.tsv
+RETIRE	m3/compiler/reference-flow/RECIPE_MEMORY.tsv	m3/evidence/compiler/reference-flow/RECIPE_MEMORY.tsv
+RETIRE	m3/compiler/reference-flow/src/main/java/module-info.java	m3/evidence/compiler/reference-flow/module-info.java
+EDIT	m3/pom.xml	<module>compiler/reference-flow</module> removed
+RETIRE	m3/compiler/static-use/pom.xml	m3/evidence/compiler/static-use/pom.xml
+RETIRE	m3/compiler/static-use/README.md	m3/evidence/compiler/static-use/README.md
+RETIRE	m3/compiler/static-use/recipe/static-use-plan-20261107/DECISION.tsv	m3/evidence/compiler/static-use/recipe/static-use-plan-20261107/DECISION.tsv
+RETIRE	m3/compiler/static-use/recipe/static-use-plan-20261107/differential.sh	m3/evidence/compiler/static-use/recipe/static-use-plan-20261107/differential.sh
+RETIRE	m3/compiler/static-use/recipe/static-use-plan-20261107/FOSS_REUSE_DECISION.tsv	m3/evidence/compiler/static-use/recipe/static-use-plan-20261107/FOSS_REUSE_DECISION.tsv
+RETIRE	m3/compiler/static-use/recipe/static-use-plan-20261107/GATES.tsv	m3/evidence/compiler/static-use/recipe/static-use-plan-20261107/GATES.tsv
+RETIRE	m3/compiler/static-use/recipe/static-use-plan-20261107/PROVENANCE.tsv	m3/evidence/compiler/static-use/recipe/static-use-plan-20261107/PROVENANCE.tsv
+RETIRE	m3/compiler/static-use/recipe/static-use-plan-20261107/README.md	m3/evidence/compiler/static-use/recipe/static-use-plan-20261107/README.md
+RETIRE	m3/compiler/static-use/recipe/static-use-plan-20261107/RECIPE_MEMORY.tsv	m3/evidence/compiler/static-use/recipe/static-use-plan-20261107/RECIPE_MEMORY.tsv
+RETIRE	m3/compiler/static-use/recipe/static-use-plan-20261107/relocate.py	m3/evidence/compiler/static-use/recipe/static-use-plan-20261107/relocate.py
+RETIRE	m3/compiler/static-use/recipe/static-use-plan-20261107/RELOCATION_MAP.tsv	m3/evidence/compiler/static-use/recipe/static-use-plan-20261107/RELOCATION_MAP.tsv
+RETIRE	m3/compiler/static-use/recipe/static-use-plan-20261107/verify.sh	m3/evidence/compiler/static-use/recipe/static-use-plan-20261107/verify.sh
+RETIRE	m3/compiler/static-use/src/main/java/module-info.java	m3/evidence/compiler/static-use/module-info.java
+EDIT	m3/pom.xml	<module>compiler/static-use</module> removed
+MOVE	m3/compiler/lifetime-slots/src/main/java/jdk/m3/compiler/lifetime/M3DoopLifetimeSlotPlanner.java	m3/compiler/src/main/java/jdk/m3/compiler/M3DoopLifetimeSlotPlanner.java
+MOVE	m3/compiler/lifetime-slots/src/test/java/jdk/m3/compiler/lifetime/M3DoopCompatibleLifetimeSlotsSelfTest.java	m3/compiler/src/test/java/jdk/m3/compiler/M3DoopCompatibleLifetimeSlotsSelfTest.java
+MOVE	m3/compiler/lifetime-slots/src/test/java/jdk/m3/compiler/lifetime/M3DoopCompatibleLifetimeSlotsTest.java	m3/compiler/src/test/java/jdk/m3/compiler/M3DoopCompatibleLifetimeSlotsTest.java
+MOVE	m3/compiler/lifetime-slots/src/test/java/jdk/m3/compiler/lifetime/M3DoopLifetimeSlotPlannerSelfTest.java	m3/compiler/src/test/java/jdk/m3/compiler/M3DoopLifetimeSlotPlannerSelfTest.java
+MOVE	m3/compiler/lifetime-slots/src/test/java/jdk/m3/compiler/lifetime/M3DoopLifetimeSlotPlannerTest.java	m3/compiler/src/test/java/jdk/m3/compiler/M3DoopLifetimeSlotPlannerTest.java
+MOVE	m3/compiler/lifetime-slots/src/test/java/jdk/m3/compiler/lifetime/M3LifetimeSlotPlanDump.java	m3/compiler/src/test/java/jdk/m3/compiler/M3LifetimeSlotPlanDump.java
+EDIT	m3/compiler/lifetime-slots/src/main/java/jdk/m3/compiler/lifetime/M3DoopLifetimeSlotPlanner.java
+EDIT	m3/compiler/lifetime-slots/src/test/java/jdk/m3/compiler/lifetime/M3DoopCompatibleLifetimeSlotsSelfTest.java
+EDIT	m3/compiler/lifetime-slots/src/test/java/jdk/m3/compiler/lifetime/M3DoopCompatibleLifetimeSlotsTest.java
+EDIT	m3/compiler/lifetime-slots/src/test/java/jdk/m3/compiler/lifetime/M3DoopLifetimeSlotPlannerSelfTest.java
+EDIT	m3/compiler/lifetime-slots/src/test/java/jdk/m3/compiler/lifetime/M3DoopLifetimeSlotPlannerTest.java
+EDIT	m3/compiler/lifetime-slots/src/test/java/jdk/m3/compiler/lifetime/M3LifetimeSlotPlanDump.java
+MOVE	m3/compiler/mat-sortable/src/main/java/jdk/m3/compiler/matsortable/M3MatSortableProcessor.java	m3/compiler/src/main/java/jdk/m3/compiler/M3MatSortableProcessor.java
+MOVE	m3/compiler/mat-sortable/src/test/java/jdk/m3/compiler/matsortable/M3MatSortableProcessorOracle.java	m3/compiler/src/test/java/jdk/m3/compiler/M3MatSortableProcessorOracle.java
+MOVE	m3/compiler/mat-sortable/src/test/java/jdk/m3/compiler/matsortable/M3MatSortableProcessorTest.java	m3/compiler/src/test/java/jdk/m3/compiler/M3MatSortableProcessorTest.java
+MOVE	m3/compiler/mat-sortable/src/test/java/jdk/m3/compiler/matsortable/M3SortableProcessorContract.java	m3/compiler/src/test/java/jdk/m3/compiler/M3SortableProcessorContract.java
+EDIT	m3/compiler/mat-sortable/src/main/java/jdk/m3/compiler/matsortable/M3MatSortableProcessor.java
+EDIT	m3/compiler/mat-sortable/src/test/java/jdk/m3/compiler/matsortable/M3MatSortableProcessorOracle.java
+EDIT	m3/compiler/mat-sortable/src/test/java/jdk/m3/compiler/matsortable/M3MatSortableProcessorTest.java
+EDIT	m3/compiler/mat-sortable/src/test/java/jdk/m3/compiler/matsortable/M3SortableProcessorContract.java
+MOVE	m3/compiler/nullness-facts/src/main/java/jdk/m3/compiler/nullness/M3JavaNullnessCompilerPlugin.java	m3/compiler/src/main/java/jdk/m3/compiler/M3JavaNullnessCompilerPlugin.java
+MOVE	m3/compiler/nullness-facts/src/main/java/jdk/m3/compiler/nullness/M3JavaNullnessFlow.java	m3/compiler/src/main/java/jdk/m3/compiler/M3JavaNullnessFlow.java
+MOVE	m3/compiler/nullness-facts/src/main/java/jdk/m3/compiler/nullness/M3JavaNullnessJavacBridge.java	m3/compiler/src/main/java/jdk/m3/compiler/M3JavaNullnessJavacBridge.java
+MOVE	m3/compiler/nullness-facts/src/test/java/jdk/m3/compiler/nullness/M3JavacBridgeProof.java	m3/compiler/src/test/java/jdk/m3/compiler/M3JavacBridgeProof.java
+MOVE	m3/compiler/nullness-facts/src/test/java/jdk/m3/compiler/nullness/M3JavacGuardMatrixProof.java	m3/compiler/src/test/java/jdk/m3/compiler/M3JavacGuardMatrixProof.java
+MOVE	m3/compiler/nullness-facts/src/test/java/jdk/m3/compiler/nullness/M3NullnessFactsJUnitTest.java	m3/compiler/src/test/java/jdk/m3/compiler/M3NullnessFactsJUnitTest.java
+MOVE	m3/compiler/nullness-facts/src/test/java/jdk/m3/compiler/nullness/M3NullnessFactsPluginSelfTest.java	m3/compiler/src/test/java/jdk/m3/compiler/M3NullnessFactsPluginSelfTest.java
+MOVE	m3/compiler/nullness-facts/src/test/java/jdk/m3/compiler/nullness/M3NullnessProof.java	m3/compiler/src/test/java/jdk/m3/compiler/M3NullnessProof.java
+MOVE	m3/compiler/nullness-facts/src/main/resources/META-INF/services/com.sun.source.util.Plugin	m3/compiler/src/main/resources/META-INF/services/com.sun.source.util.Plugin
+MOVE	m3/compiler/nullness-facts/src/test/resources/fixtures/Sample.facts.expected.tsv	m3/compiler/src/test/resources/fixtures/Sample.facts.expected.tsv
+MOVE	m3/compiler/nullness-facts/src/test/resources/fixtures/Sample.java	m3/compiler/src/test/resources/fixtures/Sample.java
+EDIT	m3/compiler/nullness-facts/src/main/java/jdk/m3/compiler/nullness/M3JavaNullnessCompilerPlugin.java
+EDIT	m3/compiler/nullness-facts/src/main/java/jdk/m3/compiler/nullness/M3JavaNullnessFlow.java
+EDIT	m3/compiler/nullness-facts/src/main/java/jdk/m3/compiler/nullness/M3JavaNullnessJavacBridge.java
+EDIT	m3/compiler/nullness-facts/src/main/resources/META-INF/services/com.sun.source.util.Plugin
+EDIT	m3/compiler/nullness-facts/src/test/java/jdk/m3/compiler/nullness/M3JavacBridgeProof.java
+EDIT	m3/compiler/nullness-facts/src/test/java/jdk/m3/compiler/nullness/M3JavacGuardMatrixProof.java
+EDIT	m3/compiler/nullness-facts/src/test/java/jdk/m3/compiler/nullness/M3NullnessFactsJUnitTest.java
+EDIT	m3/compiler/nullness-facts/src/test/java/jdk/m3/compiler/nullness/M3NullnessFactsPluginSelfTest.java
+EDIT	m3/compiler/nullness-facts/src/test/java/jdk/m3/compiler/nullness/M3NullnessProof.java
+MOVE	m3/compiler/parent-owned/src/main/java/jdk/m3/compiler/parentowned/M3ParentOwnedProcessor.java	m3/compiler/src/main/java/jdk/m3/compiler/M3ParentOwnedProcessor.java
+MOVE	m3/compiler/parent-owned/src/test/java/jdk/m3/compiler/parentowned/M3ParentOwnedProcessorTest.java	m3/compiler/src/test/java/jdk/m3/compiler/M3ParentOwnedProcessorTest.java
+EDIT	m3/compiler/parent-owned/src/main/java/jdk/m3/compiler/parentowned/M3ParentOwnedProcessor.java
+EDIT	m3/compiler/parent-owned/src/test/java/jdk/m3/compiler/parentowned/M3ParentOwnedProcessorTest.java
+MOVE	m3/compiler/reference-flow/src/main/java/jdk/m3/compiler/reference/M3CompilerFactsAudit.java	m3/compiler/src/main/java/jdk/m3/compiler/M3CompilerFactsAudit.java
+MOVE	m3/compiler/reference-flow/src/main/java/jdk/m3/compiler/reference/M3CompilerReferenceCensus.java	m3/compiler/src/main/java/jdk/m3/compiler/M3CompilerReferenceCensus.java
+MOVE	m3/compiler/reference-flow/src/main/java/jdk/m3/compiler/reference/M3CRefPathCertainty.java	m3/compiler/src/main/java/jdk/m3/compiler/M3CRefPathCertainty.java
+MOVE	m3/compiler/reference-flow/src/main/java/jdk/m3/compiler/reference/M3Liveness.java	m3/compiler/src/main/java/jdk/m3/compiler/M3Liveness.java
+MOVE	m3/compiler/reference-flow/src/main/java/jdk/m3/compiler/reference/M3LoopFacts.java	m3/compiler/src/main/java/jdk/m3/compiler/M3LoopFacts.java
+MOVE	m3/compiler/reference-flow/src/main/java/jdk/m3/compiler/reference/M3ReferenceFlow.java	m3/compiler/src/main/java/jdk/m3/compiler/M3ReferenceFlow.java
+MOVE	m3/compiler/reference-flow/src/main/java/jdk/m3/compiler/reference/M3SourceLiveness.java	m3/compiler/src/main/java/jdk/m3/compiler/M3SourceLiveness.java
+MOVE	m3/compiler/reference-flow/src/test/java/jdk/m3/compiler/reference/M3CompilerReferenceCensusProof.java	m3/compiler/src/test/java/jdk/m3/compiler/M3CompilerReferenceCensusProof.java
+MOVE	m3/compiler/reference-flow/src/test/java/jdk/m3/compiler/reference/M3CompilerReferenceCensusTest.java	m3/compiler/src/test/java/jdk/m3/compiler/M3CompilerReferenceCensusTest.java
+MOVE	m3/compiler/reference-flow/src/test/java/jdk/m3/compiler/reference/M3CRefPathCertaintyProof.java	m3/compiler/src/test/java/jdk/m3/compiler/M3CRefPathCertaintyProof.java
+MOVE	m3/compiler/reference-flow/src/test/java/jdk/m3/compiler/reference/M3CRefPathCertaintyTest.java	m3/compiler/src/test/java/jdk/m3/compiler/M3CRefPathCertaintyTest.java
+MOVE	m3/compiler/reference-flow/src/test/java/jdk/m3/compiler/reference/M3ReferenceFlowQualification.java	m3/compiler/src/test/java/jdk/m3/compiler/M3ReferenceFlowQualification.java
+MOVE	m3/compiler/reference-flow/src/test/java/jdk/m3/compiler/reference/M3ReferenceFlowTest.java	m3/compiler/src/test/java/jdk/m3/compiler/M3ReferenceFlowTest.java
+EDIT	m3/compiler/reference-flow/src/main/java/jdk/m3/compiler/reference/M3CRefPathCertainty.java
+EDIT	m3/compiler/reference-flow/src/main/java/jdk/m3/compiler/reference/M3CompilerFactsAudit.java
+EDIT	m3/compiler/reference-flow/src/main/java/jdk/m3/compiler/reference/M3CompilerReferenceCensus.java
+EDIT	m3/compiler/reference-flow/src/main/java/jdk/m3/compiler/reference/M3Liveness.java
+EDIT	m3/compiler/reference-flow/src/main/java/jdk/m3/compiler/reference/M3LoopFacts.java
+EDIT	m3/compiler/reference-flow/src/main/java/jdk/m3/compiler/reference/M3ReferenceFlow.java
+EDIT	m3/compiler/reference-flow/src/main/java/jdk/m3/compiler/reference/M3SourceLiveness.java
+EDIT	m3/compiler/reference-flow/src/test/java/jdk/m3/compiler/reference/M3CRefPathCertaintyProof.java
+EDIT	m3/compiler/reference-flow/src/test/java/jdk/m3/compiler/reference/M3CRefPathCertaintyTest.java
+EDIT	m3/compiler/reference-flow/src/test/java/jdk/m3/compiler/reference/M3CompilerReferenceCensusProof.java
+EDIT	m3/compiler/reference-flow/src/test/java/jdk/m3/compiler/reference/M3CompilerReferenceCensusTest.java
+EDIT	m3/compiler/reference-flow/src/test/java/jdk/m3/compiler/reference/M3ReferenceFlowQualification.java
+EDIT	m3/compiler/reference-flow/src/test/java/jdk/m3/compiler/reference/M3ReferenceFlowTest.java
+MOVE	m3/compiler/static-use/src/main/java/jdk/m3/compiler/staticuse/M3StaticFactsProcessor.java	m3/compiler/src/main/java/jdk/m3/compiler/M3StaticFactsProcessor.java
+MOVE	m3/compiler/static-use/src/main/java/jdk/m3/compiler/staticuse/M3StaticUsePlan.java	m3/compiler/src/main/java/jdk/m3/compiler/M3StaticUsePlan.java
+MOVE	m3/compiler/static-use/src/test/java/jdk/m3/compiler/staticuse/CompilerOwnershipProof.java	m3/compiler/src/test/java/jdk/m3/compiler/CompilerOwnershipProof.java
+MOVE	m3/compiler/static-use/src/test/java/jdk/m3/compiler/staticuse/M3StaticFactsProcessorOracle.java	m3/compiler/src/test/java/jdk/m3/compiler/M3StaticFactsProcessorOracle.java
+MOVE	m3/compiler/static-use/src/test/java/jdk/m3/compiler/staticuse/M3StaticFactsProcessorTest.java	m3/compiler/src/test/java/jdk/m3/compiler/M3StaticFactsProcessorTest.java
+MOVE	m3/compiler/static-use/src/test/java/jdk/m3/compiler/staticuse/M3StaticUsePlanDump.java	m3/compiler/src/test/java/jdk/m3/compiler/M3StaticUsePlanDump.java
+MOVE	m3/compiler/static-use/src/test/java/jdk/m3/compiler/staticuse/M3StaticUsePlanDumpTest.java	m3/compiler/src/test/java/jdk/m3/compiler/M3StaticUsePlanDumpTest.java
+MOVE	m3/compiler/static-use/src/test/java/jdk/m3/compiler/staticuse/M3StaticUsePlanTest.java	m3/compiler/src/test/java/jdk/m3/compiler/M3StaticUsePlanTest.java
+EDIT	m3/compiler/static-use/src/main/java/jdk/m3/compiler/staticuse/M3StaticFactsProcessor.java
+EDIT	m3/compiler/static-use/src/main/java/jdk/m3/compiler/staticuse/M3StaticUsePlan.java
+EDIT	m3/compiler/static-use/src/test/java/jdk/m3/compiler/staticuse/CompilerOwnershipProof.java
+EDIT	m3/compiler/static-use/src/test/java/jdk/m3/compiler/staticuse/M3StaticFactsProcessorOracle.java
+EDIT	m3/compiler/static-use/src/test/java/jdk/m3/compiler/staticuse/M3StaticFactsProcessorTest.java
+EDIT	m3/compiler/static-use/src/test/java/jdk/m3/compiler/staticuse/M3StaticUsePlanDump.java
+EDIT	m3/compiler/static-use/src/test/java/jdk/m3/compiler/staticuse/M3StaticUsePlanDumpTest.java
+EDIT	m3/compiler/static-use/src/test/java/jdk/m3/compiler/staticuse/M3StaticUsePlanTest.java
+TYPE	jdk.m3.compiler.M3CRefPathCertainty	jdk.m3.compiler.CRefPathCertainty
+TYPE	jdk.m3.compiler.M3CRefPathCertaintyProof	jdk.m3.compiler.CRefPathCertaintyProof
+TYPE	jdk.m3.compiler.M3CRefPathCertaintyTest	jdk.m3.compiler.CRefPathCertaintyTest
+TYPE	jdk.m3.compiler.M3CompilerFactsAudit	jdk.m3.compiler.CompilerFactsAudit
+TYPE	jdk.m3.compiler.M3CompilerReferenceCensus	jdk.m3.compiler.CompilerReferenceCensus
+TYPE	jdk.m3.compiler.M3CompilerReferenceCensusProof	jdk.m3.compiler.CompilerReferenceCensusProof
+TYPE	jdk.m3.compiler.M3CompilerReferenceCensusTest	jdk.m3.compiler.CompilerReferenceCensusTest
+TYPE	jdk.m3.compiler.M3DoopCompatibleLifetimeSlotsSelfTest	jdk.m3.compiler.DoopCompatibleLifetimeSlotsSelfTest
+TYPE	jdk.m3.compiler.M3DoopCompatibleLifetimeSlotsTest	jdk.m3.compiler.DoopCompatibleLifetimeSlotsTest
+TYPE	jdk.m3.compiler.M3DoopLifetimeSlotPlanner	jdk.m3.compiler.DoopLifetimeSlotPlanner
+TYPE	jdk.m3.compiler.M3DoopLifetimeSlotPlannerSelfTest	jdk.m3.compiler.DoopLifetimeSlotPlannerSelfTest
+TYPE	jdk.m3.compiler.M3DoopLifetimeSlotPlannerTest	jdk.m3.compiler.DoopLifetimeSlotPlannerTest
+TYPE	jdk.m3.compiler.M3JavaNullnessCompilerPlugin	jdk.m3.compiler.JavaNullnessCompilerPlugin
+TYPE	jdk.m3.compiler.M3JavaNullnessFlow	jdk.m3.compiler.JavaNullnessFlow
+TYPE	jdk.m3.compiler.M3JavaNullnessJavacBridge	jdk.m3.compiler.JavaNullnessJavacBridge
+TYPE	jdk.m3.compiler.M3JavacBridgeProof	jdk.m3.compiler.JavacBridgeProof
+TYPE	jdk.m3.compiler.M3JavacGuardMatrixProof	jdk.m3.compiler.JavacGuardMatrixProof
+TYPE	jdk.m3.compiler.M3LifetimeSlotPlanDump	jdk.m3.compiler.LifetimeSlotPlanDump
+TYPE	jdk.m3.compiler.M3Liveness	jdk.m3.compiler.Liveness
+TYPE	jdk.m3.compiler.M3LoopFacts	jdk.m3.compiler.LoopFacts
+TYPE	jdk.m3.compiler.M3MatSortableProcessor	jdk.m3.compiler.MatSortableProcessor
+TYPE	jdk.m3.compiler.M3MatSortableProcessorOracle	jdk.m3.compiler.MatSortableProcessorOracle
+TYPE	jdk.m3.compiler.M3MatSortableProcessorTest	jdk.m3.compiler.MatSortableProcessorTest
+TYPE	jdk.m3.compiler.M3NullnessFactsJUnitTest	jdk.m3.compiler.NullnessFactsJUnitTest
+TYPE	jdk.m3.compiler.M3NullnessFactsPluginSelfTest	jdk.m3.compiler.NullnessFactsPluginSelfTest
+TYPE	jdk.m3.compiler.M3NullnessProof	jdk.m3.compiler.NullnessProof
+TYPE	jdk.m3.compiler.M3ParentOwnedProcessor	jdk.m3.compiler.ParentOwnedProcessor
+TYPE	jdk.m3.compiler.M3ParentOwnedProcessorTest	jdk.m3.compiler.ParentOwnedProcessorTest
+TYPE	jdk.m3.compiler.M3ReferenceFlow	jdk.m3.compiler.ReferenceFlow
+TYPE	jdk.m3.compiler.M3ReferenceFlowQualification	jdk.m3.compiler.ReferenceFlowQualification
+TYPE	jdk.m3.compiler.M3ReferenceFlowTest	jdk.m3.compiler.ReferenceFlowTest
+TYPE	jdk.m3.compiler.M3SortableProcessorContract	jdk.m3.compiler.SortableProcessorContract
+TYPE	jdk.m3.compiler.M3SourceLiveness	jdk.m3.compiler.SourceLiveness
+TYPE	jdk.m3.compiler.M3StaticFactsProcessor	jdk.m3.compiler.StaticFactsProcessor
+TYPE	jdk.m3.compiler.M3StaticFactsProcessorOracle	jdk.m3.compiler.StaticFactsProcessorOracle
+TYPE	jdk.m3.compiler.M3StaticFactsProcessorTest	jdk.m3.compiler.StaticFactsProcessorTest
+TYPE	jdk.m3.compiler.M3StaticUsePlan	jdk.m3.compiler.StaticUsePlan
+TYPE	jdk.m3.compiler.M3StaticUsePlanDump	jdk.m3.compiler.StaticUsePlanDump
+TYPE	jdk.m3.compiler.M3StaticUsePlanDumpTest	jdk.m3.compiler.StaticUsePlanDumpTest
+TYPE	jdk.m3.compiler.M3StaticUsePlanTest	jdk.m3.compiler.StaticUsePlanTest
+EDIT	m3/compiler/src/main/java/jdk/m3/compiler/M3CompilerFactsAudit.java
+EDIT	m3/compiler/src/main/java/jdk/m3/compiler/M3CompilerReferenceCensus.java
+EDIT	m3/compiler/src/main/java/jdk/m3/compiler/M3CRefPathCertainty.java
+EDIT	m3/compiler/src/main/java/jdk/m3/compiler/M3DoopLifetimeSlotPlanner.java
+EDIT	m3/compiler/src/main/java/jdk/m3/compiler/M3JavaNullnessCompilerPlugin.java
+EDIT	m3/compiler/src/main/java/jdk/m3/compiler/M3JavaNullnessFlow.java
+EDIT	m3/compiler/src/main/java/jdk/m3/compiler/M3JavaNullnessJavacBridge.java
+EDIT	m3/compiler/src/main/java/jdk/m3/compiler/M3Liveness.java
+EDIT	m3/compiler/src/main/java/jdk/m3/compiler/M3LoopFacts.java
+EDIT	m3/compiler/src/main/java/jdk/m3/compiler/M3MatSortableProcessor.java
+EDIT	m3/compiler/src/main/java/jdk/m3/compiler/M3ParentOwnedProcessor.java
+EDIT	m3/compiler/src/main/java/jdk/m3/compiler/M3ReferenceFlow.java
+EDIT	m3/compiler/src/main/java/jdk/m3/compiler/M3SourceLiveness.java
+EDIT	m3/compiler/src/main/java/jdk/m3/compiler/M3StaticFactsProcessor.java
+EDIT	m3/compiler/src/main/java/jdk/m3/compiler/M3StaticUsePlan.java
+EDIT	m3/compiler/src/main/resources/META-INF/services/com.sun.source.util.Plugin
+EDIT	m3/compiler/src/test/java/jdk/m3/compiler/CompilerOwnershipProof.java
+EDIT	m3/compiler/src/test/java/jdk/m3/compiler/M3CompilerReferenceCensusProof.java
+EDIT	m3/compiler/src/test/java/jdk/m3/compiler/M3CompilerReferenceCensusTest.java
+EDIT	m3/compiler/src/test/java/jdk/m3/compiler/M3CRefPathCertaintyProof.java
+EDIT	m3/compiler/src/test/java/jdk/m3/compiler/M3CRefPathCertaintyTest.java
+EDIT	m3/compiler/src/test/java/jdk/m3/compiler/M3DoopCompatibleLifetimeSlotsSelfTest.java
+EDIT	m3/compiler/src/test/java/jdk/m3/compiler/M3DoopCompatibleLifetimeSlotsTest.java
+EDIT	m3/compiler/src/test/java/jdk/m3/compiler/M3DoopLifetimeSlotPlannerSelfTest.java
+EDIT	m3/compiler/src/test/java/jdk/m3/compiler/M3DoopLifetimeSlotPlannerTest.java
+EDIT	m3/compiler/src/test/java/jdk/m3/compiler/M3JavacBridgeProof.java
+EDIT	m3/compiler/src/test/java/jdk/m3/compiler/M3JavacGuardMatrixProof.java
+EDIT	m3/compiler/src/test/java/jdk/m3/compiler/M3LifetimeSlotPlanDump.java
+EDIT	m3/compiler/src/test/java/jdk/m3/compiler/M3MatSortableProcessorOracle.java
+EDIT	m3/compiler/src/test/java/jdk/m3/compiler/M3MatSortableProcessorTest.java
+EDIT	m3/compiler/src/test/java/jdk/m3/compiler/M3NullnessFactsJUnitTest.java
+EDIT	m3/compiler/src/test/java/jdk/m3/compiler/M3NullnessFactsPluginSelfTest.java
+EDIT	m3/compiler/src/test/java/jdk/m3/compiler/M3NullnessProof.java
+EDIT	m3/compiler/src/test/java/jdk/m3/compiler/M3ParentOwnedProcessorTest.java
+EDIT	m3/compiler/src/test/java/jdk/m3/compiler/M3ReferenceFlowQualification.java
+EDIT	m3/compiler/src/test/java/jdk/m3/compiler/M3ReferenceFlowTest.java
+EDIT	m3/compiler/src/test/java/jdk/m3/compiler/M3SortableProcessorContract.java
+EDIT	m3/compiler/src/test/java/jdk/m3/compiler/M3StaticFactsProcessorOracle.java
+EDIT	m3/compiler/src/test/java/jdk/m3/compiler/M3StaticFactsProcessorTest.java
+EDIT	m3/compiler/src/test/java/jdk/m3/compiler/M3StaticUsePlanDump.java
+EDIT	m3/compiler/src/test/java/jdk/m3/compiler/M3StaticUsePlanDumpTest.java
+EDIT	m3/compiler/src/test/java/jdk/m3/compiler/M3StaticUsePlanTest.java
+MOVE	m3/compiler/src/main/java/jdk/m3/compiler/M3CompilerFactsAudit.java	m3/compiler/src/main/java/jdk/m3/compiler/CompilerFactsAudit.java
+MOVE	m3/compiler/src/main/java/jdk/m3/compiler/M3CompilerReferenceCensus.java	m3/compiler/src/main/java/jdk/m3/compiler/CompilerReferenceCensus.java
+MOVE	m3/compiler/src/main/java/jdk/m3/compiler/M3CRefPathCertainty.java	m3/compiler/src/main/java/jdk/m3/compiler/CRefPathCertainty.java
+MOVE	m3/compiler/src/main/java/jdk/m3/compiler/M3DoopLifetimeSlotPlanner.java	m3/compiler/src/main/java/jdk/m3/compiler/DoopLifetimeSlotPlanner.java
+MOVE	m3/compiler/src/main/java/jdk/m3/compiler/M3JavaNullnessCompilerPlugin.java	m3/compiler/src/main/java/jdk/m3/compiler/JavaNullnessCompilerPlugin.java
+MOVE	m3/compiler/src/main/java/jdk/m3/compiler/M3JavaNullnessFlow.java	m3/compiler/src/main/java/jdk/m3/compiler/JavaNullnessFlow.java
+MOVE	m3/compiler/src/main/java/jdk/m3/compiler/M3JavaNullnessJavacBridge.java	m3/compiler/src/main/java/jdk/m3/compiler/JavaNullnessJavacBridge.java
+MOVE	m3/compiler/src/main/java/jdk/m3/compiler/M3Liveness.java	m3/compiler/src/main/java/jdk/m3/compiler/Liveness.java
+MOVE	m3/compiler/src/main/java/jdk/m3/compiler/M3LoopFacts.java	m3/compiler/src/main/java/jdk/m3/compiler/LoopFacts.java
+MOVE	m3/compiler/src/main/java/jdk/m3/compiler/M3MatSortableProcessor.java	m3/compiler/src/main/java/jdk/m3/compiler/MatSortableProcessor.java
+MOVE	m3/compiler/src/main/java/jdk/m3/compiler/M3ParentOwnedProcessor.java	m3/compiler/src/main/java/jdk/m3/compiler/ParentOwnedProcessor.java
+MOVE	m3/compiler/src/main/java/jdk/m3/compiler/M3ReferenceFlow.java	m3/compiler/src/main/java/jdk/m3/compiler/ReferenceFlow.java
+MOVE	m3/compiler/src/main/java/jdk/m3/compiler/M3SourceLiveness.java	m3/compiler/src/main/java/jdk/m3/compiler/SourceLiveness.java
+MOVE	m3/compiler/src/main/java/jdk/m3/compiler/M3StaticFactsProcessor.java	m3/compiler/src/main/java/jdk/m3/compiler/StaticFactsProcessor.java
+MOVE	m3/compiler/src/main/java/jdk/m3/compiler/M3StaticUsePlan.java	m3/compiler/src/main/java/jdk/m3/compiler/StaticUsePlan.java
+MOVE	m3/compiler/src/test/java/jdk/m3/compiler/M3CompilerReferenceCensusProof.java	m3/compiler/src/test/java/jdk/m3/compiler/CompilerReferenceCensusProof.java
+MOVE	m3/compiler/src/test/java/jdk/m3/compiler/M3CompilerReferenceCensusTest.java	m3/compiler/src/test/java/jdk/m3/compiler/CompilerReferenceCensusTest.java
+MOVE	m3/compiler/src/test/java/jdk/m3/compiler/M3CRefPathCertaintyProof.java	m3/compiler/src/test/java/jdk/m3/compiler/CRefPathCertaintyProof.java
+MOVE	m3/compiler/src/test/java/jdk/m3/compiler/M3CRefPathCertaintyTest.java	m3/compiler/src/test/java/jdk/m3/compiler/CRefPathCertaintyTest.java
+MOVE	m3/compiler/src/test/java/jdk/m3/compiler/M3DoopCompatibleLifetimeSlotsSelfTest.java	m3/compiler/src/test/java/jdk/m3/compiler/DoopCompatibleLifetimeSlotsSelfTest.java
+MOVE	m3/compiler/src/test/java/jdk/m3/compiler/M3DoopCompatibleLifetimeSlotsTest.java	m3/compiler/src/test/java/jdk/m3/compiler/DoopCompatibleLifetimeSlotsTest.java
+MOVE	m3/compiler/src/test/java/jdk/m3/compiler/M3DoopLifetimeSlotPlannerSelfTest.java	m3/compiler/src/test/java/jdk/m3/compiler/DoopLifetimeSlotPlannerSelfTest.java
+MOVE	m3/compiler/src/test/java/jdk/m3/compiler/M3DoopLifetimeSlotPlannerTest.java	m3/compiler/src/test/java/jdk/m3/compiler/DoopLifetimeSlotPlannerTest.java
+MOVE	m3/compiler/src/test/java/jdk/m3/compiler/M3JavacBridgeProof.java	m3/compiler/src/test/java/jdk/m3/compiler/JavacBridgeProof.java
+MOVE	m3/compiler/src/test/java/jdk/m3/compiler/M3JavacGuardMatrixProof.java	m3/compiler/src/test/java/jdk/m3/compiler/JavacGuardMatrixProof.java
+MOVE	m3/compiler/src/test/java/jdk/m3/compiler/M3LifetimeSlotPlanDump.java	m3/compiler/src/test/java/jdk/m3/compiler/LifetimeSlotPlanDump.java
+MOVE	m3/compiler/src/test/java/jdk/m3/compiler/M3MatSortableProcessorOracle.java	m3/compiler/src/test/java/jdk/m3/compiler/MatSortableProcessorOracle.java
+MOVE	m3/compiler/src/test/java/jdk/m3/compiler/M3MatSortableProcessorTest.java	m3/compiler/src/test/java/jdk/m3/compiler/MatSortableProcessorTest.java
+MOVE	m3/compiler/src/test/java/jdk/m3/compiler/M3NullnessFactsJUnitTest.java	m3/compiler/src/test/java/jdk/m3/compiler/NullnessFactsJUnitTest.java
+MOVE	m3/compiler/src/test/java/jdk/m3/compiler/M3NullnessFactsPluginSelfTest.java	m3/compiler/src/test/java/jdk/m3/compiler/NullnessFactsPluginSelfTest.java
+MOVE	m3/compiler/src/test/java/jdk/m3/compiler/M3NullnessProof.java	m3/compiler/src/test/java/jdk/m3/compiler/NullnessProof.java
+MOVE	m3/compiler/src/test/java/jdk/m3/compiler/M3ParentOwnedProcessorTest.java	m3/compiler/src/test/java/jdk/m3/compiler/ParentOwnedProcessorTest.java
+MOVE	m3/compiler/src/test/java/jdk/m3/compiler/M3ReferenceFlowQualification.java	m3/compiler/src/test/java/jdk/m3/compiler/ReferenceFlowQualification.java
+MOVE	m3/compiler/src/test/java/jdk/m3/compiler/M3ReferenceFlowTest.java	m3/compiler/src/test/java/jdk/m3/compiler/ReferenceFlowTest.java
+MOVE	m3/compiler/src/test/java/jdk/m3/compiler/M3SortableProcessorContract.java	m3/compiler/src/test/java/jdk/m3/compiler/SortableProcessorContract.java
+MOVE	m3/compiler/src/test/java/jdk/m3/compiler/M3StaticFactsProcessorOracle.java	m3/compiler/src/test/java/jdk/m3/compiler/StaticFactsProcessorOracle.java
+MOVE	m3/compiler/src/test/java/jdk/m3/compiler/M3StaticFactsProcessorTest.java	m3/compiler/src/test/java/jdk/m3/compiler/StaticFactsProcessorTest.java
+MOVE	m3/compiler/src/test/java/jdk/m3/compiler/M3StaticUsePlanDump.java	m3/compiler/src/test/java/jdk/m3/compiler/StaticUsePlanDump.java
+MOVE	m3/compiler/src/test/java/jdk/m3/compiler/M3StaticUsePlanDumpTest.java	m3/compiler/src/test/java/jdk/m3/compiler/StaticUsePlanDumpTest.java
+MOVE	m3/compiler/src/test/java/jdk/m3/compiler/M3StaticUsePlanTest.java	m3/compiler/src/test/java/jdk/m3/compiler/StaticUsePlanTest.java

@@ -1,0 +1,7 @@
+GEOMETRY_PASS checks=5723783 ordinaryFailures=0 oracleDigest=27d10dbfbd5f515a
+mulDiv mismatches=0
+hasThumb mismatches=0
+thumbLength mismatches=0
+thumbStart mismatches=0
+selectionAt mismatches=0
+hit mismatches=0

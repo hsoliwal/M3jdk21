@@ -1,0 +1,170 @@
+# jdk.m3.collections doclint repair evidence, 2026-11-09
+# tree: candidate fe51a3c9ff2f (30651922a8b3) + PR #2899 overlay; WSL2 Ubuntu 24.04 x86_64; make images, default flags
+# doclint flags: make/modules/jdk.m3.collections/Java.gmk DOCLINT += -Xdoclint:all/protected,-missing
+
+## before: javac doclint errors (file, line, message)
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/BlockCache.java	23	reference not found
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/BlockStore.java	23	reference not found
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/BlockStore.java	29	reference not found
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ExactCover64.java	23	malformed HTML
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/GenericCollections.java	30	reference not found
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/LongIndexPathMasksJNI.java	7	reference not found
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/LongIndexPathMasksJNI.java	52	reference not found
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/LongMeetInMiddle.java	33	malformed HTML
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/MonotoneSearch.java	32	malformed HTML
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/MonotoneSearch.java	32	malformed HTML
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/RowIndex.java	25	reference not found
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ScrollBarGeometry.java	28	reference not found
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ShortLabel.java	22	reference not found
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/SortableFirstSignalOrder.java	22	reference not found
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/WeightedLRUCache.java	29	reference not found
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/bits/BitsetSubsetSum.java	22	malformed HTML
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/bits/BitsetSubsetSum.java	22	malformed HTML
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/bits/LongBitmapFilteredSnapshot.java	28	reference not found
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/graph/OrderStatisticForest.java	30	reference not found
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/packed/PackedLongInlineList.java	21	reference not found
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/packed/PackedLongLongMap.java	11	malformed HTML
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/packed/PackedLongLongMap.java	11	malformed HTML
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/packed/PackedLongRingBuffer.java	27	reference not found
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/range/SegmentedLongLaneStore28.java	22	reference not found
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/sketch/MarkerTopKIndex.java	30	reference not found
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/sketch/SortableTopKIds.java	26	reference not found
+src/jdk.m3.collections/share/classes/jdk/m3/algorithm/NumericAlgorithms.java	69	malformed HTML
+src/jdk.m3.collections/share/classes/jdk/m3/algorithm/NumericAlgorithms.java	93	malformed HTML
+src/jdk.m3.collections/share/classes/jdk/m3/arrays/ArgumentRoleBits.java	10	reference not found
+src/jdk.m3.collections/share/classes/jdk/m3/arrays/CharArrayRangeJoin.java	7	reference not found
+src/jdk.m3.collections/share/classes/jdk/m3/arrays/DirectArrayView.java	9	reference not found
+src/jdk.m3.collections/share/classes/jdk/m3/arrays/EventBuffer.java	7	reference not found
+src/jdk.m3.collections/share/classes/jdk/m3/arrays/JavaModifierBits.java	10	reference not found
+src/jdk.m3.collections/share/classes/jdk/m3/arrays/Lint.java	9	reference not found
+src/jdk.m3.collections/share/classes/jdk/m3/arrays/MappedArrays.java	11	reference not found
+src/jdk.m3.collections/share/classes/jdk/m3/arrays/PagedLongArray.java	10	reference not found
+src/jdk.m3.collections/share/classes/jdk/m3/arrays/StringTypeBits.java	10	reference not found
+src/jdk.m3.collections/share/classes/jdk/m3/arrays/SubsetSumBitset.java	7	reference not found
+src/jdk.m3.collections/share/classes/jdk/m3/collections/IntLongHashMap.java	21	reference not found
+src/jdk.m3.collections/share/classes/jdk/m3/collections/LazyTopKWindow.java	28	malformed HTML
+src/jdk.m3.collections/share/classes/jdk/m3/collections/M3EnumSet.java	22	reference not found
+src/jdk.m3.collections/share/classes/jdk/m3/collections/TextExtentCache.java	25	reference not found
+
+## after this change: doclint errors in jdk.m3.collections = 0
+## remaining, separate blocker: javac lint warnings under -Werror
+    100 documentation comment not expected here
+
+## line-by-line changes (doclint_fix.py report)
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/BlockCache.java:23	reference not found
+  - * Bounded block table behind {@link VirtualPageSource}: a fixed number of slots, each
+  + * Bounded block table behind {@code VirtualPageSource}: a fixed number of slots, each
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/BlockStore.java:23	reference not found
+  - * The block store behind {@link VirtualPageSource}: slots of <code>blockSize</code> rows keyed by
+  + * The block store behind {@code VirtualPageSource}: slots of <code>blockSize</code> rows keyed by
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/BlockStore.java:29	reference not found
+  - * only line to change is {@link VirtualPageSource#newBlockStore(int, int, int)}.</p>
+  + * only line to change is {@code VirtualPageSource#newBlockStore(int, int, int)}.</p>
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ExactCover64.java:23	malformed HTML
+  - * No per-node allocation. Depth <=64; row masks and one int[columns] path are primitive.
+  + * No per-node allocation. Depth &lt;=64; row masks and one int[columns] path are primitive.
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/GenericCollections.java:30	reference not found
+  - * {@link M3Collections#arrayList()} which retains its JDK ArrayList return type.
+  + * {@code M3Collections#arrayList()} which retains its JDK ArrayList return type.
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/LongIndexPathMasksJNI.java:7	reference not found
+  - * Optional, explicit JNI backend for {@link M3LongIndexPathMasks}.
+  + * Optional, explicit JNI backend for {@code M3LongIndexPathMasks}.
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/LongIndexPathMasksJNI.java:52	reference not found
+  - * Native counterpart to {@link M3LongIndexPathMasks#scanWindow}.
+  + * Native counterpart to {@code M3LongIndexPathMasks#scanWindow}.
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/LongMeetInMiddle.java:33	malformed HTML
+  - * Maximum subset sum <= limit.
+  + * Maximum subset sum &lt;= limit.
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/MonotoneSearch.java:32	malformed HTML
+  - * Requires 0 <= fromInclusive <= toExclusive. Empty ranges do not call predicate.
+  + * Requires 0 &lt;= fromInclusive &lt;= toExclusive. Empty ranges do not call predicate.
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/RowIndex.java:25	reference not found
+  - * a hidden row counts neither. Answered by {@link GridRowExtents} (Fenwick trees, rebuilt after a
+  + * a hidden row counts neither. Answered by {@code GridRowExtents} (Fenwick trees, rebuilt after a
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ScrollBarGeometry.java:28	reference not found
+  - * arrow buttons), with the values of {@link ScrollBar}: <code>minimum</code>, <code>maximum</code>,
+  + * arrow buttons), with the values of {@code ScrollBar}: <code>minimum</code>, <code>maximum</code>,
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ShortLabel.java:22	reference not found
+  - * {@link M3LabelPool}.
+  + * {@code M3LabelPool}.
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/SortableFirstSignalOrder.java:22	reference not found
+  - * First-pass {@link Sortable} signal ordering over stable primitive IDs.
+  + * First-pass {@code Sortable} signal ordering over stable primitive IDs.
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/WeightedLRUCache.java:29	reference not found
+  - * <p>Unlike {@link LRUCache}, this cache bounds both entry count and caller-defined retained
+  + * <p>Unlike {@code LRUCache}, this cache bounds both entry count and caller-defined retained
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/bits/BitsetSubsetSum.java:22	malformed HTML
+  - * Template transition R |= R << weight, descending words so one item is never reused.
+  + * Template transition R |= R &lt;&lt; weight, descending words so one item is never reused.
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/bits/LongBitmapFilteredSnapshot.java:28	reference not found
+  - * {@link M3LongFilteredView}. An externally changing predicate does not update
+  + * {@code M3LongFilteredView}. An externally changing predicate does not update
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/graph/OrderStatisticForest.java:30	reference not found
+  - * {@link M3TreeTopology}.
+  + * {@code M3TreeTopology}.
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/packed/PackedLongInlineList.java:21	reference not found
+  - * Existing {@link M3LongArrayList} remains the general one-array owner.</p>
+  + * Existing {@code M3LongArrayList} remains the general one-array owner.</p>
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/packed/PackedLongLongMap.java:11	malformed HTML
+  - * <p>No Map.Entry, Long, Iterator<Entry<...>>, or object-valued mutation path is required.
+  + * <p>No Map.Entry, Long, Iterator&lt;Entry&lt;...&gt;&gt;, or object-valued mutation path is required.
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/packed/PackedLongRingBuffer.java:27	reference not found
+  - * <p>Unlike {@link PackedLongDeque}, capacity never grows. This makes memory usage
+  + * <p>Unlike {@code PackedLongDeque}, capacity never grows. This makes memory usage
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/range/SegmentedLongLaneStore28.java:22	reference not found
+  - * <p>Unlike {@link PackedLongLaneStore}, rows never swap-move. A live row is addressed by a
+  + * <p>Unlike {@code PackedLongLaneStore}, rows never swap-move. A live row is addressed by a
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/sketch/MarkerTopKIndex.java:30	reference not found
+  - * <p>When the comparator is {@link SortableFirstSignalOrder}, the first {@link Sortable}
+  + * <p>When the comparator is {@code SortableFirstSignalOrder}, the first {@code Sortable}
+src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/sketch/SortableTopKIds.java:26	reference not found
+  - * it evaluates the first {@link Sortable} signal, reuses versioned precompute from
+  + * it evaluates the first {@code Sortable} signal, reuses versioned precompute from
+src/jdk.m3.collections/share/classes/jdk/m3/algorithm/NumericAlgorithms.java:69	malformed HTML
+  - /** All primes <= limit. */
+  + /** All primes &lt;= limit. */
+src/jdk.m3.collections/share/classes/jdk/m3/algorithm/NumericAlgorithms.java:93	malformed HTML
+  - /** Smallest prime factor table where result[x] is 0 for x<2 and otherwise the SPF of x. */
+  + /** Smallest prime factor table where result[x] is 0 for x&lt;2 and otherwise the SPF of x. */
+src/jdk.m3.collections/share/classes/jdk/m3/arrays/ArgumentRoleBits.java:10	reference not found
+  - * Every member body throws {@link M3NotYetReceived}, except: census3 P3-007 (qualification/census3-gaps-20261107) received the atoms of requireKnown, has, hasAny, names and their private helpers from the same donor blob at develop 78cf2ad4c7e5.
+  + * Every member body throws {@code M3NotYetReceived}, except: census3 P3-007 (qualification/census3-gaps-20261107) received the atoms of requireKnown, has, hasAny, names and their private helpers from the same donor blob at develop 78cf2ad4c7e5.
+src/jdk.m3.collections/share/classes/jdk/m3/arrays/CharArrayRangeJoin.java:7	reference not found
+  - * Every member body throws {@link M3NotYetReceived}.
+  + * Every member body throws {@code M3NotYetReceived}.
+src/jdk.m3.collections/share/classes/jdk/m3/arrays/DirectArrayView.java:9	reference not found
+  - * Every member body throws {@link M3NotYetReceived}.
+  + * Every member body throws {@code M3NotYetReceived}.
+src/jdk.m3.collections/share/classes/jdk/m3/arrays/EventBuffer.java:7	reference not found
+  - * Every member body throws {@link M3NotYetReceived}.
+  + * Every member body throws {@code M3NotYetReceived}.
+src/jdk.m3.collections/share/classes/jdk/m3/arrays/JavaModifierBits.java:10	reference not found
+  - * Every member body throws {@link M3NotYetReceived}.
+  + * Every member body throws {@code M3NotYetReceived}.
+src/jdk.m3.collections/share/classes/jdk/m3/arrays/Lint.java:9	reference not found
+  - * {@link PackedIntArray#lint(int)}. Exact operations validate every operand and reject a result
+  + * {@code PackedIntArray#lint(int)}. Exact operations validate every operand and reject a result
+src/jdk.m3.collections/share/classes/jdk/m3/arrays/MappedArrays.java:11	reference not found
+  - * Every member body throws {@link M3NotYetReceived}.
+  + * Every member body throws {@code M3NotYetReceived}.
+src/jdk.m3.collections/share/classes/jdk/m3/arrays/PagedLongArray.java:10	reference not found
+  - * Every member body throws {@link M3NotYetReceived}.
+  + * Every member body throws {@code M3NotYetReceived}.
+src/jdk.m3.collections/share/classes/jdk/m3/arrays/StringTypeBits.java:10	reference not found
+  - * Every member body throws {@link M3NotYetReceived}, except: census3 P3-007 (qualification/census3-gaps-20261107) received the atoms of requireKnown, has, hasAny, names and their private helpers from the same donor blob at develop 78cf2ad4c7e5.
+  + * Every member body throws {@code M3NotYetReceived}, except: census3 P3-007 (qualification/census3-gaps-20261107) received the atoms of requireKnown, has, hasAny, names and their private helpers from the same donor blob at develop 78cf2ad4c7e5.
+src/jdk.m3.collections/share/classes/jdk/m3/arrays/SubsetSumBitset.java:7	reference not found
+  - * Every member body throws {@link M3NotYetReceived}.
+  + * Every member body throws {@code M3NotYetReceived}.
+src/jdk.m3.collections/share/classes/jdk/m3/collections/IntLongHashMap.java:21	reference not found
+  - * this table and a dense lane (see {@link M3AdaptiveEnumLongMap}) compares the bytes the table
+  + * this table and a dense lane (see {@code M3AdaptiveEnumLongMap}) compares the bytes the table
+src/jdk.m3.collections/share/classes/jdk/m3/collections/LazyTopKWindow.java:28	malformed HTML
+  - * A miss takes O(n log k) comparisons and O(k) primitive scratch, k <= 4096.
+  + * A miss takes O(n log k) comparisons and O(k) primitive scratch, k &lt;= 4096.
+src/jdk.m3.collections/share/classes/jdk/m3/collections/M3EnumSet.java:22	reference not found
+  - * ordinal universe handling of {@link M3EnumLongMap}.</p>
+  + * ordinal universe handling of {@code M3EnumLongMap}.</p>
+src/jdk.m3.collections/share/classes/jdk/m3/collections/TextExtentCache.java:25	reference not found
+  - * {@link LabelPool} id or an {@link M3ShortLabel} value (both non-negative
+  + * {@code LabelPool} id or an {@code M3ShortLabel} value (both non-negative

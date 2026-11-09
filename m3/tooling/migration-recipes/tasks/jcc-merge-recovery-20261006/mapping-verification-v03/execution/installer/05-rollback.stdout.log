@@ -1,0 +1,1 @@
+{"files": 4, "plan_sha256": "ec52694868c4a8090afd556b5c985fe06c152bccdb3ee19d1d113bd86cf31862", "recipe": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-merge-recovery-20261006-mapping-v03", "state": "before", "writes": 4}

@@ -1,0 +1,76 @@
+package @WPKG@.adapter;
+
+import static @PKG@.M3WebChecks.check;
+
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.JTabbedPane;
+import javax.swing.JTree;
+import javax.swing.tree.DefaultTreeModel;
+
+import org.junit.jupiter.api.Test;
+
+/** Measure-kind edges of the Swing adapters (pattern M3P-ADAPTER-1), headless on the event thread: empty and hidden items, undeclared aspects. */
+class M3ViewportKindsTest {
+	@Test
+	void edges() throws Exception {
+		M3ViewportAdapterChecks.onEdt(() -> {
+			rows();
+			bounded();
+			quiet();
+		});
+	}
+
+	private static void rows() {
+		JTree tree = M3ViewportAdapterChecks.sized(new JTree(new DefaultTreeModel(null)));
+		JList<String> list = M3ViewportAdapterChecks.sized(new JList<>());
+		check(M3ViewportKind.TREE.extent(tree, tree) >= 1 && M3ViewportKind.LIST.extent(list, list) == 1, "empty rows keep a positive extent");
+		JList<String> rows = M3ViewportAdapterChecks.sized(M3ViewportFills.fill(new JList<>(), "strings"));
+		int[] out = new int[4];
+		M3ViewportKind.LIST.rect(rows, rows, 199, out);
+		check(out[3] == 0, "a row below the window has no box");
+		JComboBox<String> combo = M3ViewportAdapterChecks.sized(new JComboBox<>(new String[] { "a" }));
+		M3ViewportKind.COMBO.rect(combo, combo, 5, out);
+		check(out[2] == 0, "a drop-down row past the end has no box");
+		JSlider slider = M3ViewportAdapterChecks.sized(new JSlider());
+		M3ViewportKind.RANGE.rect(slider, slider, 10_000, out);
+		check(out[2] == 0, "a position past the end has no box");
+	}
+
+	private static void bounded() {
+		JPanel empty = M3ViewportAdapterChecks.sized(new JPanel());
+		check(M3ViewportKind.CHILDREN.extent(empty, empty) >= 1 && M3ViewportKind.CHILDREN.visible(empty, empty) == 0, "no children");
+		JPanel kids = new JPanel(null);
+		kids.add(new JLabel("a")).setBounds(0, 0, 0, 10);
+		kids.add(new JLabel("b")).setBounds(0, 0, 10, 0);
+		kids.add(new JLabel("c")).setBounds(5000, 5000, 10, 10);
+		M3ViewportAdapterChecks.sized(kids);
+		check(M3ViewportKind.CHILDREN.first(kids, kids) == 0 && M3ViewportKind.CHILDREN.visible(kids, kids) == 0, "zero-size and outside children are not shown");
+		JTabbedPane tabs = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
+		for (int i = 0; i < 40; i++) {
+			tabs.addTab("a long tab title " + i, new JPanel());
+		}
+		M3ViewportAdapterChecks.sized(tabs);
+		check(M3ViewportKind.TABS.extent(tabs, tabs) >= 1 && M3ViewportKind.TABS.visible(tabs, tabs) < 40, "tabs beyond the strip are not shown");
+		JTabbedPane bare = new JTabbedPane();
+		bare.addTab("a", new JPanel());
+		bare.setUI(null);
+		check(M3ViewportKind.TABS.bounds(bare, bare, 0).isEmpty(), "a tabbed pane without UI has no tab bounds");
+		try {
+			M3ViewportKind.SURFACE.bounds(kids, kids, 0);
+			check(false, "one-item kinds have no item bounds");
+		} catch (UnsupportedOperationException expected) {
+			// SURFACE and PLANE answer with the host area instead
+		}
+	}
+
+	private static void quiet() {
+		JPanel host = M3ViewportAdapterChecks.sized(new JPanel());
+		M3ViewportAdapter a = new M3ViewportAdapter(host, host, M3ViewportKind.SURFACE, M3ViewportAdapter.R);
+		check(a.attach() && !a.itemChanged(0) && !a.movePlane(0, 0, 4, 4) && a.redraws() == 0, "undeclared D and P stay quiet");
+		a.detach();
+	}
+}

@@ -1,0 +1,60 @@
+{
+  "tool": "mcp__codex_apps__github_create_pull_request",
+  "request": {
+    "repository_full_name": "hsoliwal/com.synexia",
+    "base": "aix/jcc-source-merge-recovery-20261005",
+    "head": "aix/jcc-donor-catalogue-recovery-20261005",
+    "title": "M3: restore the exact donor catalogue on the current recovery",
+    "body": "# Restore the donor catalogue alongside the current M3 recovery\n\nThe donor catalogue from [#9142](https://github.com/hsoliwal/com.synexia/pull/9142) was merged into an earlier task branch. Its five documentation artifacts were absent at both the merged be92 source and the current [recipe-first recovery #9362](https://github.com/hsoliwal/com.synexia/pull/9362). The actual donor Java tests are already present at the current source revision.\n\nThis companion restores the exact five original files under `synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/`. It is stacked on #9362 so its review contains only these five additions.\n\n## Exact restoration\n\n- Original donor publication: `36609e4a8719859b46e540f85013c1126a5e3bc2` in #9142.\n- Original complete donor subtree: `54c7989b23bb4fea69b74352aa144c6ba3c3adf0`.\n- Current parent: `0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8`.\n- Restoration commit: `4990edbf4ba4afaa14e0ba2d7613331c31e21e9e`.\n- Restoration root: `1bd86f643f0e08ecb1b5a43d020bf0110e797d68`.\n- Five exact files, 78,467 bytes, all mode `100644`; zero existing-file updates or deletions.\n\n| File | Role |\n| --- | --- |\n| [DONOR_CATALOGUE.md](https://github.com/hsoliwal/com.synexia/blob/4990edbf4ba4afaa14e0ba2d7613331c31e21e9e/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/DONOR_CATALOGUE.md) | 18 primary references, problem categories, donor lookup order and adoption boundaries. |\n| [EXECUTED_TEST_MAPPING.md](https://github.com/hsoliwal/com.synexia/blob/4990edbf4ba4afaa14e0ba2d7613331c31e21e9e/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/EXECUTED_TEST_MAPPING.md) | Historical finite corpus and executed method mapping. |\n| `donor_catalogue.json` | Machine-readable reference, contract and execution metadata. |\n| `INTEGRATION.md` | Original integration scope and limitations. |\n| `AUTHORING_RECEIPT.json` | Exact original authoring receipt, including its historical `published: false` observation. |\n\n## Verification and interpretation\n\nIndependent tree reconstruction agreed on the expected root before publication. Actual GitHub readbacks then verified all six affected or reused tree objects and all five complete document bodies. The graft preserves 484 unchanged sibling entries along its ancestry, including the current JCC README and every implementation/test subtree.\n\nThis documentation restoration ran no tests and changes no Java, JNI, recipe implementation, dependency or qualification gate. The documents retain their historical evidence and source-relative links. Their original 68-test total and the unexecuted 1,871-case proposal are not current execution results.\n\nThe current source recovery separately records seven passing donor methods, 247 literal pairs and 1,477 regex pairs in its required-native lane. The complete selected upstream gate remains blocked by the unavailable OpenRewrite runtime recipe. Source export, destination acceptance and JDK delivery remain separate obligations.\n\n## Receiving pipeline\n\n[M3jdk21 #147](https://github.com/hsoliwal/M3jdk21/pull/147) carries the current code epoch at `0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8`. Its pending final publication will also receive these five exact catalogue copies and a separate component binding to this restoration commit, without changing its four tested operational afterimages or reclassifying historical results.\n\nThis PR targets `aix/jcc-source-merge-recovery-20261005`, the #9362 branch. Review this five-file companion with the parent recovery before integration into `develop`.\n",
+    "draft": true,
+    "maintainer_can_modify": true
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "url": "https://github.com/hsoliwal/com.synexia/pull/9367",
+      "number": 9367,
+      "state": "open",
+      "merged": false,
+      "mergeable": false,
+      "draft": true,
+      "body": "# Restore the donor catalogue alongside the current M3 recovery\n\nThe donor catalogue from [#9142](https://github.com/hsoliwal/com.synexia/pull/9142) was merged into an earlier task branch. Its five documentation artifacts were absent at both the merged be92 source and the current [recipe-first recovery #9362](https://github.com/hsoliwal/com.synexia/pull/9362). The actual donor Java tests are already present at the current source revision.\n\nThis companion restores the exact five original files under `synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/`. It is stacked on #9362 so its review contains only these five additions.\n\n## Exact restoration\n\n- Original donor publication: `36609e4a8719859b46e540f85013c1126a5e3bc2` in #9142.\n- Original complete donor subtree: `54c7989b23bb4fea69b74352aa144c6ba3c3adf0`.\n- Current parent: `0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8`.\n- Restoration commit: `4990edbf4ba4afaa14e0ba2d7613331c31e21e9e`.\n- Restoration root: `1bd86f643f0e08ecb1b5a43d020bf0110e797d68`.\n- Five exact files, 78,467 bytes, all mode `100644`; zero existing-file updates or deletions.\n\n| File | Role |\n| --- | --- |\n| [DONOR_CATALOGUE.md](https://github.com/hsoliwal/com.synexia/blob/4990edbf4ba4afaa14e0ba2d7613331c31e21e9e/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/DONOR_CATALOGUE.md) | 18 primary references, problem categories, donor lookup order and adoption boundaries. |\n| [EXECUTED_TEST_MAPPING.md](https://github.com/hsoliwal/com.synexia/blob/4990edbf4ba4afaa14e0ba2d7613331c31e21e9e/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/EXECUTED_TEST_MAPPING.md) | Historical finite corpus and executed method mapping. |\n| `donor_catalogue.json` | Machine-readable reference, contract and execution metadata. |\n| `INTEGRATION.md` | Original integration scope and limitations. |\n| `AUTHORING_RECEIPT.json` | Exact original authoring receipt, including its historical `published: false` observation. |\n\n## Verification and interpretation\n\nIndependent tree reconstruction agreed on the expected root before publication. Actual GitHub readbacks then verified all six affected or reused tree objects and all five complete document bodies. The graft preserves 484 unchanged sibling entries along its ancestry, including the current JCC README and every implementation/test subtree.\n\nThis documentation restoration ran no tests and changes no Java, JNI, recipe implementation, dependency or qualification gate. The documents retain their historical evidence and source-relative links. Their original 68-test total and the unexecuted 1,871-case proposal are not current execution results.\n\nThe current source recovery separately records seven passing donor methods, 247 literal pairs and 1,477 regex pairs in its required-native lane. The complete selected upstream gate remains blocked by the unavailable OpenRewrite runtime recipe. Source export, destination acceptance and JDK delivery remain separate obligations.\n\n## Receiving pipeline\n\n[M3jdk21 #147](https://github.com/hsoliwal/M3jdk21/pull/147) carries the current code epoch at `0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8`. Its pending final publication will also receive these five exact catalogue copies and a separate component binding to this restoration commit, without changing its four tested operational afterimages or reclassifying historical results.\n\nThis PR targets `aix/jcc-source-merge-recovery-20261005`, the #9362 branch. Review this five-file companion with the parent recovery before integration into `develop`.\n",
+      "title": "M3: restore the exact donor catalogue on the current recovery",
+      "base": "aix/jcc-source-merge-recovery-20261005",
+      "base_sha": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+      "head": "aix/jcc-donor-catalogue-recovery-20261005",
+      "head_sha": "4990edbf4ba4afaa14e0ba2d7613331c31e21e9e",
+      "head_repo_id": 1130929330,
+      "head_repo_full_name": "hsoliwal/com.synexia",
+      "merge_commit_sha": null,
+      "user": {
+        "login": "hsoliwal",
+        "name": "hsoliwal",
+        "email": null,
+        "avatar_url": "https://avatars.githubusercontent.com/u/5656792?v=4",
+        "id": 5656792
+      },
+      "requested_reviewers": null,
+      "requested_team_reviewers": null,
+      "diff": null,
+      "comments": null,
+      "created_at": "2026-10-05T17:56:16Z",
+      "updated_at": "2026-10-05T17:56:16Z",
+      "closed_at": null,
+      "merged_at": null,
+      "commits": 1,
+      "changed_files": 5,
+      "additions": 1388,
+      "deletions": 0,
+      "display_url": "https://github.com/hsoliwal/com.synexia/pull/9367",
+      "display_title": "M3: restore the exact donor catalogue on the current recovery"
+    },
+    "isError": false
+  }
+}
+

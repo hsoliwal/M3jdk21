@@ -1,0 +1,22 @@
+{
+  "baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexPathMasks.java",
+  "baseline_git_blob_sha1": "278f63e3bdc6c2e5163376e010e20c05539802ff",
+  "baseline_sha256": "85d7512d50d223571fa91fe88df821b30740d47f1c7e4abb3ce9ff3d0d16d11e",
+  "candidate_sha256": "1e170fb2bea5b058218a64bcc2a8041e93c6b0ebb51858593e65ae87b018d7f8",
+  "shared_kernel_sha256": "db88aef334eadb9a40f34a6ca4077ff96d6af29f75d30c090b55bc76b45e567f",
+  "shared_kernel_source": "/workspace/scratch/8762dba320ce/com.synexia/m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/candidates/m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java",
+  "existing_test": "m3/collections/src/test/java/jdk/m3/collections/M3LongIndexPathMasksSelfTest.java",
+  "existing_test_sha256": "1ea9394ad582389b99e1f68b817a47e0479cc54c3860a62a652c24446faea655",
+  "window_and_validation_tail_byte_identical": true,
+  "behavior_probe_sha256": "e38f0715ed1ef6f14c5de4d5392291fe4fdb4fc9ce3440a8aaca3c0e6d333280",
+  "proof_gates_sha256": "5014e04e8dad8a9233cfa0864a31a4e94083c250d69c63b8b424f7be3f2083ed",
+  "public_api_status": "BYTE_IDENTICAL_PUBLIC_DESCRIPTORS_AND_CONSTANTS",
+  "existing_self_test_result": "7127 checks;1500 randomized cases;unchanged source;baseline and candidate pass",
+  "behavior_tape_checks": 1259,
+  "behavior_tape_sha256": "2b6d2baa61986e2357e8621bdc1d9ed663c4bfe08ae9de00117bd34c2a53bb41",
+  "actual_full_receiver_module_status": "PENDING_ROOT_INTEGRATION",
+  "sdk_status": "PASSED_ACTUAL_SDK_5_SEALING_8_ISOLATED_RECEIVER_9",
+  "sdk_receipt": "proof/SDK_BINDINGS.json",
+  "sdk_receipt_sha256": "b6d9dd3fb84931dede53134f8956f2025f2c882f7e5f606204a0578530cafd41"
+}

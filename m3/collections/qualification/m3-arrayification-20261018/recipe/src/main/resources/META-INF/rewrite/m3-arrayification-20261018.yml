@@ -1,0 +1,6 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: jdk.internal.m3.Arrayification20261018
+displayName: M3 LeetCode-index arrayification across five library collection adapters
+description: Preserve five vendor API names while using one M3 array/index/mask storage substrate.
+recipeList:
+  - jdk.internal.m3.rewrite.M3Arrayification20261018Recipe

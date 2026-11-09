@@ -1,0 +1,7 @@
+category	problem	decision	contract_reason
+exact-first-hit	LeetCode 28	REUSE_FIRST_PARTY	Original JNI/FILE KMP unchanged
+set-intersection	LeetCode 349	REFERENCE_ONLY	Files must remain sorted with verified source identities
+overlap-count	HackerRank Find a String	REJECT_DROP_IN	Overlapping occurrence count not first-hit
+exact-string-count	HackerRank Sparse Arrays	REFERENCE_ONLY	Cannot replace source-bound review with counts
+KMP	GeeksforGeeks KMP	REUSE_FIRST_PARTY	No challenge/editorial code copied
+licensed-GitHub	Synexia PmemCorpusGramIndex / PmemCatalogueWorkOrders	REUSE_PINNED	Original Apache-2.0 owners and Java/JNI symbols untouched

@@ -1,0 +1,138 @@
+# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+# Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+file	line	col	class	member	literal	type	name	state	role
+test/jdk/jdk/internal/math/M3NumberParseJitPerf.java	110	26	M3NumberParseJitPerf	longLiteral#1	'1'	char	FIRST_LEADING_DIGIT	DECLARED	The smallest leading digit of a generated long literal (no leading zero).
+test/jdk/jdk/internal/math/M3NumberParseJitPerf.java	110	42	M3NumberParseJitPerf	longLiteral#1	9	int	LEADING_DIGIT_CHOICES	DECLARED	Number of leading digit choices, FIRST_LEADING_DIGIT to '9'.
+test/jdk/jdk/internal/math/M3NumberParseJitPerf.java	112	30	M3NumberParseJitPerf	longLiteral#1	'0'	char	DIGIT_ZERO	DECLARED	The first decimal digit; a later digit is DIGIT_ZERO plus 0 to 9.
+test/jdk/jdk/internal/math/M3NumberParseJitPerf.java	112	46	M3NumberParseJitPerf	longLiteral#1	10	int	DECIMAL_DIGIT_CHOICES	DECLARED	Number of decimal digits.
+test/jdk/jdk/internal/math/M3NumberParseJitPerf.java	114	45	M3NumberParseJitPerf	longLiteral#1	'.'	char	DECIMAL_POINT	DECLARED	The decimal point inserted after the first digit or later.
+test/jdk/jdk/internal/math/M3NumberParseJitPerf.java	115	25	M3NumberParseJitPerf	longLiteral#1	'e'	char	EXPONENT_INDICATOR	DECLARED	The exponent indicator of a long literal.
+test/jdk/jdk/internal/math/M3NumberParseJitPerf.java	173	41	M3NumberParseJitPerf	measure#1	2	int	MEDIAN_DIVISOR	DECLARED	ROUNDS / MEDIAN_DIVISOR is the index of the median of the sorted round timings.
+test/jdk/jdk/internal/math/M3NumberParseJitPerf.java	173	56	M3NumberParseJitPerf	measure#2	2	int	MEDIAN_DIVISOR	DECLARED	ROUNDS / MEDIAN_DIVISOR is the index of the median of the sorted round timings.
+test/jdk/jdk/internal/math/M3NumberParseJitPerf.java	188	92	M3NumberParseJitPerf	row#1	3	int	LOAD_FIELD	DECLARED	Index of the CPU load sampled after the rounds in the result of measure.
+test/jdk/jdk/internal/math/M3NumberParseAtomsPerf.java	110	51	M3NumberParseAtomsPerf	main#1	20261031L	long	CORPUS_SEED	DECLARED	Seed of the deterministic literal corpus.
+test/jdk/jdk/internal/math/M3NumberParseAtomsPerf.java	111	30	M3NumberParseAtomsPerf	main#1	200_000	int	CORPUS_SIZE	DECLARED	Literals in the corpus.
+test/jdk/jdk/internal/math/M3NumberParseAtomsPerf.java	112	32	M3NumberParseAtomsPerf	main#1	3	int	FLOAT_LITERAL_ONE_IN	DECLARED	One corpus literal in FLOAT_LITERAL_ONE_IN is a Float.toString literal, the others Double.toString.
+test/jdk/jdk/internal/math/M3NumberParseAtomsPerf.java	112	92	M3NumberParseAtomsPerf	main#1	0x7f7fffff	int	FINITE_FLOAT_BITS_MASK	DECLARED	Masks random bits to a positive finite float (no sign bit, exponent below 0xff).
+test/jdk/jdk/internal/math/M3NumberParseAtomsPerf.java	113	97	M3NumberParseAtomsPerf	main#1	0x7fefffffffffffffL	long	FINITE_DOUBLE_BITS_MASK	DECLARED	Masks random bits to a positive finite double (no sign bit, exponent below 0x7ff).
+test/jdk/jdk/internal/math/M3NumberParseAtomsPerf.java	131	17	M3NumberParseAtomsPerf	main#1	5_000_000	int	KERNEL_OPS	DECLARED	Calls per timing of the SWAR and multiply kernels.
+test/jdk/jdk/internal/math/M3NumberParseAtomsPerf.java	132	118	M3NumberParseAtomsPerf	main#1	'0'	char	DIGIT_ZERO	DECLARED	The first decimal digit (the SWAR input cycles from it; the reference checks from it).
+test/jdk/jdk/internal/math/M3NumberParseAtomsPerf.java	132	129	M3NumberParseAtomsPerf	main#1	7	int	DIGIT_CYCLE_MASK	DECLARED	Masks the loop index to eight values, so the first byte of the SWAR input cycles through eight digits.
+test/jdk/jdk/internal/math/M3NumberParseAtomsPerf.java	133	84	M3NumberParseAtomsPerf	main#2	'0'	char	DIGIT_ZERO	DECLARED	The first decimal digit (the SWAR input cycles from it; the reference checks from it).
+test/jdk/jdk/internal/math/M3NumberParseAtomsPerf.java	133	95	M3NumberParseAtomsPerf	main#2	7	int	DIGIT_CYCLE_MASK	DECLARED	Masks the loop index to eight values, so the first byte of the SWAR input cycles through eight digits.
+test/jdk/jdk/internal/math/M3NumberParseAtomsPerf.java	133	139	M3NumberParseAtomsPerf	main#1	8	int	SWAR_WORD_BYTES	DECLARED	Bytes one isEightDigits call checks; the reference loop checks as many.
+test/jdk/jdk/internal/math/M3NumberParseAtomsPerf.java	133	162	M3NumberParseAtomsPerf	main#3	'0'	char	DIGIT_ZERO	DECLARED	The first decimal digit (the SWAR input cycles from it; the reference checks from it).
+test/jdk/jdk/internal/math/M3NumberParseAtomsPerf.java	133	178	M3NumberParseAtomsPerf	main#1	'9'	char	DIGIT_NINE	DECLARED	The last decimal digit.
+test/jdk/jdk/internal/math/M3NumberParseAtomsPerf.java	136	147	M3NumberParseAtomsPerf	main#1	0x9E3779B97F4A7C15L	long	GOLDEN_GAMMA	DECLARED	The 64-bit golden-ratio constant (SplitMix64 gamma): i * GOLDEN_GAMMA spreads the loop index over all bits.
+test/jdk/jdk/internal/math/M3NumberParseAtomsPerf.java	137	108	M3NumberParseAtomsPerf	main#2	0x9E3779B97F4A7C15L	long	GOLDEN_GAMMA	DECLARED	The 64-bit golden-ratio constant (SplitMix64 gamma): i * GOLDEN_GAMMA spreads the loop index over all bits.
+test/jdk/jdk/internal/math/M3NumberParseAtomsPerf.java	138	17	M3NumberParseAtomsPerf	main#1	300_000	int	FAST_MATH_OPS	DECLARED	Calls per timing of the decimal fast-path kernels.
+test/jdk/jdk/internal/math/M3NumberParseAtomsPerf.java	139	194	M3NumberParseAtomsPerf	main#1	7919	int	SIGNIFICAND_STRIDE	DECLARED	A prime: the significand i * SIGNIFICAND_STRIDE walks the significands without a pattern.
+test/jdk/jdk/internal/math/M3NumberParseAtomsPerf.java	139	204	M3NumberParseAtomsPerf	main#1	300	int	DOUBLE_POWER_SPAN	DECLARED	The double kernel's decimal powers cycle through DOUBLE_POWER_SPAN values.
+test/jdk/jdk/internal/math/M3NumberParseAtomsPerf.java	139	210	M3NumberParseAtomsPerf	main#1	150	int	DOUBLE_POWER_OFFSET	DECLARED	The double kernel's decimal powers start at -DOUBLE_POWER_OFFSET.
+test/jdk/jdk/internal/math/M3NumberParseAtomsPerf.java	140	144	M3NumberParseAtomsPerf	main#2	7919	int	SIGNIFICAND_STRIDE	DECLARED	A prime: the significand i * SIGNIFICAND_STRIDE walks the significands without a pattern.
+test/jdk/jdk/internal/math/M3NumberParseAtomsPerf.java	140	173	M3NumberParseAtomsPerf	main#2	300	int	DOUBLE_POWER_SPAN	DECLARED	The double kernel's decimal powers cycle through DOUBLE_POWER_SPAN values.
+test/jdk/jdk/internal/math/M3NumberParseAtomsPerf.java	140	179	M3NumberParseAtomsPerf	main#2	150	int	DOUBLE_POWER_OFFSET	DECLARED	The double kernel's decimal powers start at -DOUBLE_POWER_OFFSET.
+test/jdk/jdk/internal/math/M3NumberParseAtomsPerf.java	141	188	M3NumberParseAtomsPerf	main#3	7919	int	SIGNIFICAND_STRIDE	DECLARED	A prime: the significand i * SIGNIFICAND_STRIDE walks the significands without a pattern.
+test/jdk/jdk/internal/math/M3NumberParseAtomsPerf.java	141	198	M3NumberParseAtomsPerf	main#1	70	int	FLOAT_POWER_SPAN	DECLARED	The float kernel's decimal powers cycle through FLOAT_POWER_SPAN values.
+test/jdk/jdk/internal/math/M3NumberParseAtomsPerf.java	141	203	M3NumberParseAtomsPerf	main#1	40	int	FLOAT_POWER_OFFSET	DECLARED	The float kernel's decimal powers start at -FLOAT_POWER_OFFSET.
+test/jdk/jdk/internal/math/M3NumberParseAtomsPerf.java	142	141	M3NumberParseAtomsPerf	main#4	7919	int	SIGNIFICAND_STRIDE	DECLARED	A prime: the significand i * SIGNIFICAND_STRIDE walks the significands without a pattern.
+test/jdk/jdk/internal/math/M3NumberParseAtomsPerf.java	142	170	M3NumberParseAtomsPerf	main#2	70	int	FLOAT_POWER_SPAN	DECLARED	The float kernel's decimal powers cycle through FLOAT_POWER_SPAN values.
+test/jdk/jdk/internal/math/M3NumberParseAtomsPerf.java	142	175	M3NumberParseAtomsPerf	main#2	40	int	FLOAT_POWER_OFFSET	DECLARED	The float kernel's decimal powers start at -FLOAT_POWER_OFFSET.
+test/jdk/jdk/internal/math/M3NumberParseAtomsPerf.java	143	39	M3NumberParseAtomsPerf	main#1	400_000	int	FFT_OPERAND_BITS	DECLARED	Bit length of each operand of the FFT multiply timing.
+test/jdk/jdk/internal/math/M3NumberParseAtomsPerf.java	143	83	M3NumberParseAtomsPerf	main#2	400_000	int	FFT_OPERAND_BITS	DECLARED	Bit length of each operand of the FFT multiply timing.
+test/jdk/jdk/internal/math/M3NumberParseAtomsPerf.java	143	103	M3NumberParseAtomsPerf	main#1	2	int	SECOND_OPERAND_SEED	DECLARED	Seed of the second FFT operand (the first uses 1).
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	118	31	M3NumberParseAtomsTest	instanceAtom#1	50_000	int	MIN_COMPARED_LITERALS	DECLARED	An instance atom must have compared more than MIN_COMPARED_LITERALS corpus literals with the JDK.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	163	51	M3NumberParseAtomsTest	fastDoubleSwarEightDigitsAndReads#1	7	int	SWAR_SEED	DECLARED	Seed of the SWAR atoms test.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	165	29	M3NumberParseAtomsTest	fastDoubleSwarEightDigitsAndReads#1	50_000	int	SWAR_CASES	DECLARED	Generated 8-char groups.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	167	33	M3NumberParseAtomsTest	fastDoubleSwarEightDigitsAndReads#1	8	int	SWAR_GROUP_CHARS	DECLARED	Chars per group: one isEightDigits or readLongBE word.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	168	36	M3NumberParseAtomsTest	fastDoubleSwarEightDigitsAndReads#1	4	int	ALPHABET_ONE_IN	DECLARED	One char in ALPHABET_ONE_IN comes from the alphabet (digits, the neighbours of the digit range, a letter, space, point); the others are digits.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	168	102	M3NumberParseAtomsTest	fastDoubleSwarEightDigitsAndReads#1	'0'	char	DIGIT_ZERO	DECLARED	The first decimal digit.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	168	118	M3NumberParseAtomsTest	fastDoubleSwarEightDigitsAndReads#1	10	int	DECIMAL_DIGIT_CHOICES	DECLARED	Number of decimal digits.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	172	61	M3NumberParseAtomsTest	fastDoubleSwarEightDigitsAndReads#2	'0'	char	DIGIT_ZERO	DECLARED	The first decimal digit.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	172	74	M3NumberParseAtomsTest	fastDoubleSwarEightDigitsAndReads#1	'9'	char	DIGIT_NINE	DECLARED	The last decimal digit.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	188	51	M3NumberParseAtomsTest	fastIntegerMathAgainstJdk#1	11	int	INTEGER_MATH_SEED	DECLARED	Seed of the integer kernel test.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	189	29	M3NumberParseAtomsTest	fastIntegerMathAgainstJdk#1	100_000	int	MULTIPLY_HIGH_CASES	DECLARED	Random operand pairs for unsignedMultiplyHigh.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	193	40	M3NumberParseAtomsTest	fastIntegerMathAgainstJdk#1	2000	int	MAX_ESTIMATED_DIGITS	DECLARED	estimateNumBits is checked for every digit count up to MAX_ESTIMATED_DIGITS.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	198	30	M3NumberParseAtomsTest	fastIntegerMathAgainstJdk#1	600	int	MAX_TEN_EXPONENT	DECLARED	computePowerOfTen is checked for every exponent up to MAX_TEN_EXPONENT.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	207	51	M3NumberParseAtomsTest	fastDoubleMathAgainstBigDecimal#1	13	int	DOUBLE_MATH_SEED	DECLARED	Seed of the double fast-path test.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	209	29	M3NumberParseAtomsTest	fastDoubleMathAgainstBigDecimal#1	100_000	int	DOUBLE_MATH_CASES	DECLARED	Random significand and power pairs for the double fast path.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	211	67	M3NumberParseAtomsTest	fastDoubleMathAgainstBigDecimal#1	64	int	LONG_BITS	DECLARED	Bits of a long: a random significand is a random long shifted right by 1 to LONG_BITS - 1.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	212	31	M3NumberParseAtomsTest	fastDoubleMathAgainstBigDecimal#1	-325	int	DOUBLE_MIN_POWER	DECLARED	Smallest decimal power the double kernel's callers pass.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	212	37	M3NumberParseAtomsTest	fastDoubleMathAgainstBigDecimal#1	309	int	DOUBLE_POWER_BOUND	DECLARED	Exclusive bound of the decimal powers the double kernel's callers pass (largest 308).
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	220	41	M3NumberParseAtomsTest	fastDoubleMathAgainstBigDecimal#1	1e3	double	SCALB_VALUE_RANGE	DECLARED	fastScalb inputs are uniform in [0, SCALB_VALUE_RANGE).
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	221	31	M3NumberParseAtomsTest	fastDoubleMathAgainstBigDecimal#1	-60	int	DOUBLE_SCALB_MIN	DECLARED	Smallest scale factor of the double fastScalb check.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	221	36	M3NumberParseAtomsTest	fastDoubleMathAgainstBigDecimal#1	60	int	DOUBLE_SCALB_BOUND	DECLARED	Exclusive bound of the scale factors of the double fastScalb check.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	224	30	M3NumberParseAtomsTest	fastDoubleMathAgainstBigDecimal#1	50_000	int	MIN_FAST_PATH_DECIDED	DECLARED	The fast path must decide (not decline) more than MIN_FAST_PATH_DECIDED of the cases.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	231	51	M3NumberParseAtomsTest	fastFloatMathAgainstBigDecimal#1	17	int	FLOAT_MATH_SEED	DECLARED	Seed of the float fast-path test.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	233	29	M3NumberParseAtomsTest	fastFloatMathAgainstBigDecimal#1	100_000	int	FLOAT_MATH_CASES	DECLARED	Random significand and power pairs for the float fast path.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	235	67	M3NumberParseAtomsTest	fastFloatMathAgainstBigDecimal#1	64	int	LONG_BITS	DECLARED	Bits of a long: a random significand is a random long shifted right by 1 to LONG_BITS - 1.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	236	31	M3NumberParseAtomsTest	fastFloatMathAgainstBigDecimal#1	-45	int	FLOAT_MIN_POWER	DECLARED	Smallest decimal power the float kernel's callers pass.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	236	36	M3NumberParseAtomsTest	fastFloatMathAgainstBigDecimal#1	39	int	FLOAT_POWER_BOUND	DECLARED	Exclusive bound of the decimal powers the float kernel's callers pass (largest 38).
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	244	49	M3NumberParseAtomsTest	fastFloatMathAgainstBigDecimal#1	1e3	double	SCALB_VALUE_RANGE	DECLARED	fastScalb inputs are uniform in [0, SCALB_VALUE_RANGE).
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	245	31	M3NumberParseAtomsTest	fastFloatMathAgainstBigDecimal#1	-30	int	FLOAT_SCALB_MIN	DECLARED	Smallest scale factor of the float fastScalb check.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	245	36	M3NumberParseAtomsTest	fastFloatMathAgainstBigDecimal#1	30	int	FLOAT_SCALB_BOUND	DECLARED	Exclusive bound of the scale factors of the float fastScalb check.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	248	30	M3NumberParseAtomsTest	fastFloatMathAgainstBigDecimal#1	50_000	int	MIN_FAST_PATH_DECIDED	DECLARED	The fast path must decide (not decline) more than MIN_FAST_PATH_DECIDED of the cases.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	255	51	M3NumberParseAtomsTest	fftMultiplierAgainstBigInteger#1	19	int	FFT_SEED	DECLARED	Seed of the FFT multiplier test.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	256	29	M3NumberParseAtomsTest	fftMultiplierAgainstBigInteger#1	60	int	FFT_CASES	DECLARED	Random operand pairs for multiply and square.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	257	25	M3NumberParseAtomsTest	fftMultiplierAgainstBigInteger#1	64	int	FFT_MIN_OPERAND_BITS	DECLARED	Smallest operand bit length.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	257	40	M3NumberParseAtomsTest	fftMultiplierAgainstBigInteger#1	200_000	int	FFT_OPERAND_BITS_SPAN	DECLARED	Operand bit lengths are FFT_MIN_OPERAND_BITS plus 0 to FFT_OPERAND_BITS_SPAN - 1.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	257	58	M3NumberParseAtomsTest	fftMultiplierAgainstBigInteger#2	64	int	FFT_MIN_OPERAND_BITS	DECLARED	Smallest operand bit length.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	257	73	M3NumberParseAtomsTest	fftMultiplierAgainstBigInteger#2	200_000	int	FFT_OPERAND_BITS_SPAN	DECLARED	Operand bit lengths are FFT_MIN_OPERAND_BITS plus 0 to FFT_OPERAND_BITS_SPAN - 1.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	292	51	M3NumberParseAtomsTest	corpus#1	20261031L	long	CORPUS_SEED	DECLARED	Seed of the deterministic corpus.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	295	32	M3NumberParseAtomsTest	corpus#1	5	int	CORPUS_SHAPES	DECLARED	Shapes of the corpus round robin: Double.toString, Float.toString, Double.toHexString, junk, digits with an exponent.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	298	22	M3NumberParseAtomsTest	corpus#1	2	int	SHAPE_HEX_STRING	DECLARED	Case of the round robin: Double.toHexString of random bits.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	299	22	M3NumberParseAtomsTest	corpus#1	3	int	SHAPE_JUNK	DECLARED	Case of the round robin: junk from the grammar's alphabet.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	301	57	M3NumberParseAtomsTest	corpus#1	12	int	MAX_JUNK_CHARS	DECLARED	Junk literals have 1 to MAX_JUNK_CHARS chars.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	306	97	M3NumberParseAtomsTest	corpus#1	700	int	EXPONENT_SPAN	DECLARED	Random decimal exponents are uniform over EXPONENT_SPAN values.
+test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	306	104	M3NumberParseAtomsTest	corpus#1	350	int	EXPONENT_OFFSET	DECLARED	Random decimal exponents start at -EXPONENT_OFFSET.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	38	67	M3ParseDifferential	main#1	48	int	OUTPUT_CHARS_PER_LINE	DECLARED	Initial capacity of the output per corpus line.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	41	38	M3ParseDifferential	main#1	'\t'	char	FIELD_SEPARATOR	DECLARED	Separates the fields of an output line.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	41	64	M3ParseDifferential	main#2	'\t'	char	FIELD_SEPARATOR	DECLARED	Separates the fields of an output line.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	41	90	M3ParseDifferential	main#1	'\n'	char	LINE_END	DECLARED	Ends an output line.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	45	48	M3ParseDifferential	main#1	2	int	BENCH_ROUNDS_ARGUMENT	DECLARED	Argument index of the bench rounds.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	84	43	M3ParseDifferential	hexDigits#1	16	int	HEX_RADIX	DECLARED	Hex digits to choose from.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	93	51	M3ParseDifferential	hexCorpus#1	20261031L	long	CORPUS_SEED	DECLARED	Seed of every corpus of this gate.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	95	43	M3ParseDifferential	hexCorpus#1	8	int	WIDE_EXPONENT_ONE_IN	DECLARED	One hexdiff literal in WIDE_EXPONENT_ONE_IN gets a binary exponent from the wide range.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	95	63	M3ParseDifferential	hexCorpus#1	2400	int	WIDE_EXPONENT_SPAN	DECLARED	Wide binary exponents are uniform over WIDE_EXPONENT_SPAN values.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	95	71	M3ParseDifferential	hexCorpus#1	1200	int	WIDE_EXPONENT_OFFSET	DECLARED	Wide binary exponents start at -WIDE_EXPONENT_OFFSET.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	95	88	M3ParseDifferential	hexCorpus#1	200	int	NARROW_EXPONENT_SPAN	DECLARED	Narrow binary exponents are uniform over NARROW_EXPONENT_SPAN values.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	95	95	M3ParseDifferential	hexCorpus#1	100	int	NARROW_EXPONENT_OFFSET	DECLARED	Narrow binary exponents start at -NARROW_EXPONENT_OFFSET.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	96	37	M3ParseDifferential	hexCorpus#1	4	int	NEGATIVE_ONE_IN	DECLARED	One literal in NEGATIVE_ONE_IN is negative.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	97	32	M3ParseDifferential	hexCorpus#2	4	int	HEX_SHAPES	DECLARED	Shapes of the hexdiff round robin.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	100	57	M3ParseDifferential	hexCorpus#1	11	int	DOUBLE_ROUNDING_BIT	DECLARED	Bit of a 64-bit significand at which a double rounds (64 - 53).
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	100	62	M3ParseDifferential	hexCorpus#1	40	int	FLOAT_ROUNDING_BIT	DECLARED	Bit of a 64-bit significand at which a float rounds (64 - 24).
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	101	71	M3ParseDifferential	hexCorpus#1	3	int	HALFWAY_OFFSETS	DECLARED	The low bits sit at the halfway point minus 1, plus 0 or plus 1.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	108	63	M3ParseDifferential	hexCorpus#1	13	int	DOUBLE_FRACTION_HEX_DIGITS	DECLARED	Hex digits of a double's fraction (52 bits).
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	108	82	M3ParseDifferential	hexCorpus#1	5	int	FLOAT_FRACTION_HEX_DIGITS	DECLARED	Random hex digits of a float's fraction (a '0' follows them).
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	109	59	M3ParseDifferential	hexCorpus#1	12	int	MAX_TAIL_ZEROS	DECLARED	The tail after the halfway digit has 1 to MAX_TAIL_ZEROS - 1 zeros.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	112	22	M3ParseDifferential	hexCorpus#1	2	int	SHAPE_BOUNDARY_DIGITS	DECLARED	Case of the hexdiff round robin: random digits around the 16-digit boundary.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	114	55	M3ParseDifferential	hexCorpus#1	14	int	BOUNDARY_MIN_DIGITS	DECLARED	Fewest digits around the 16-digit boundary.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	114	59	M3ParseDifferential	hexCorpus#1	22	int	BOUNDARY_DIGITS_BOUND	DECLARED	Exclusive bound of the digits around the 16-digit boundary.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	119	58	M3ParseDifferential	hexCorpus#2	40	int	MAX_RANDOM_HEX_DIGITS	DECLARED	Random hex literals have 1 to MAX_RANDOM_HEX_DIGITS - 1 digits.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	121	42	M3ParseDifferential	hexCorpus#3	4	int	DOUBLE_SUFFIX_ONE_IN	DECLARED	One random hex literal in DOUBLE_SUFFIX_ONE_IN ends in d.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	131	51	M3ParseDifferential	swarCorpus#1	20261031L	long	CORPUS_SEED	DECLARED	Seed of every corpus of this gate.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	134	66	M3ParseDifferential	swarCorpus#1	8	int	SWAR_GROUP_DIGITS	DECLARED	Hex digits of the SWAR group after the point.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	135	27	M3ParseDifferential	swarCorpus#1	4	int	CLEAN_GROUP_ONE_IN	DECLARED	One SWAR group in CLEAN_GROUP_ONE_IN keeps its hex digits; the others get one non-hex char.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	136	43	M3ParseDifferential	swarCorpus#2	8	int	SWAR_GROUP_DIGITS	DECLARED	Hex digits of the SWAR group after the point.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	136	90	M3ParseDifferential	swarCorpus#1	2	int	G_LETTERS	DECLARED	The first G_LETTERS chars of the letter set are g and G, the letters next to the hex range.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	138	30	M3ParseDifferential	swarCorpus#2	4	int	NEGATIVE_ONE_IN	DECLARED	One literal in NEGATIVE_ONE_IN is negative.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	138	82	M3ParseDifferential	swarCorpus#1	3	int	MAX_INTEGER_HEX_DIGITS	DECLARED	Hex digits before the point: 0 to MAX_INTEGER_HEX_DIGITS - 1.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	138	125	M3ParseDifferential	swarCorpus#1	10	int	MAX_TRAILING_HEX_DIGITS	DECLARED	Hex digits after the SWAR group: 0 to MAX_TRAILING_HEX_DIGITS - 1.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	139	66	M3ParseDifferential	swarCorpus#1	200	int	NARROW_EXPONENT_SPAN	DECLARED	Narrow binary exponents are uniform over NARROW_EXPONENT_SPAN values.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	139	73	M3ParseDifferential	swarCorpus#1	100	int	NARROW_EXPONENT_OFFSET	DECLARED	Narrow binary exponents start at -NARROW_EXPONENT_OFFSET.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	146	51	M3ParseDifferential	corpus#1	20261031L	long	CORPUS_SEED	DECLARED	Seed of every corpus of this gate.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	150	32	M3ParseDifferential	corpus#1	6	int	CORPUS_SHAPES	DECLARED	Shapes of the diff round robin.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	153	22	M3ParseDifferential	corpus#1	2	int	SHAPE_DIGITS	DECLARED	Case of the diff round robin: random decimal digits.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	155	45	M3ParseDifferential	corpus#1	25	int	MAX_DIGITS	DECLARED	Random digit strings have 1 to MAX_DIGITS digits.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	157	58	M3ParseDifferential	corpus#1	10	int	DECIMAL_RADIX	DECLARED	Decimal digits to choose from.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	160	61	M3ParseDifferential	corpus#1	'.'	char	DECIMAL_POINT	DECLARED	The decimal point inserted into a digit string.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	162	35	M3ParseDifferential	corpus#1	3	int	EXPONENT_ONE_IN	DECLARED	One digit string in EXPONENT_ONE_IN gets a decimal exponent.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	163	34	M3ParseDifferential	corpus#1	'e'	char	EXPONENT_INDICATOR	DECLARED	The exponent indicator of a digit string.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	163	56	M3ParseDifferential	corpus#1	700	int	DECIMAL_EXPONENT_SPAN	DECLARED	Random decimal exponents are uniform over DECIMAL_EXPONENT_SPAN values.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	163	63	M3ParseDifferential	corpus#1	350	int	DECIMAL_EXPONENT_OFFSET	DECLARED	Random decimal exponents start at -DECIMAL_EXPONENT_OFFSET.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	167	22	M3ParseDifferential	corpus#2	3	int	SHAPE_HEX_STRING	DECLARED	Case of the diff round robin: Double.toHexString of random bits.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	168	22	M3ParseDifferential	corpus#1	4	int	SHAPE_JUNK	DECLARED	Case of the diff round robin: junk from the grammar's alphabet.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	170	45	M3ParseDifferential	corpus#1	12	int	MAX_JUNK_CHARS	DECLARED	Junk literals have 1 to MAX_JUNK_CHARS chars.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	176	44	M3ParseDifferential	corpus#2	4	int	PADDED_FLOAT_ONE_IN	DECLARED	One literal of the last shape in PADDED_FLOAT_ONE_IN is a padded float literal, the others a shifted random long.
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	176	77	M3ParseDifferential	corpus#1	1e6	double	PADDED_VALUE_RANGE	DECLARED	Padded float literals are uniform in [0, PADDED_VALUE_RANGE).
+m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	176	131	M3ParseDifferential	corpus#1	64	int	LONG_BITS	DECLARED	A random long is shifted right by 0 to LONG_BITS - 1.

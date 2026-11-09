@@ -1,0 +1,37 @@
+name: M3AST L0-L5 selected-source proof
+on:
+  pull_request:
+    paths:
+      - 'm3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ASTLeafIndex.java'
+      - 'm3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3ASTLeafIndexSelfTest.java'
+      - 'm3/ports/compiletime/qualification/ast-leaf-l0-l5-20261017/**'
+      - '.github/workflows/m3-ast-l0-l5-receiver.yml'
+  workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  selected-java21:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify exact sealed recipient blobs
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo 'd594b4d62b345f6614938f09fe2884041b352c2626c36a07bf30c316c67d684a  m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ASTLeafIndex.java' | sha256sum -c -
+          echo 'fe545c7f831d3d6261989f0252951173a1c592f4bc68526a2eddf01811d197e3  m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3ASTLeafIndexSelfTest.java' | sha256sum -c -
+      - name: Compile, run and verify source only (not full JDK)
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/m3ast-leaf-classes
+          javac --release 21 -proc:none -Xlint:all -Werror -d /tmp/m3ast-leaf-classes \
+            m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ASTLeafIndex.java \
+            m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3ASTLeafIndexSelfTest.java
+          java -cp /tmp/m3ast-leaf-classes jdk.m3.compiletime.M3ASTLeafIndexSelfTest

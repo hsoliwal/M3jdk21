@@ -1,0 +1,15 @@
+{
+  "baseline_commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "baseline_git_blob": "be8838c2ad26aac24453e05a317d63016bca100b",
+  "baseline_sha256": "d0515af261429f4f2c959c87a4c0588093612746c4f95e4927570880778ca8ef",
+  "files": {
+    "M3IndexPathMasks.java.txt": {
+      "sha256": "33b894d2b4c9f89a0244023737d49645d54cbcb1b388a0956e475567fdd4a577",
+      "size": 13942
+    },
+    "M3IndexPathMasksAliasContract.java.txt": {
+      "sha256": "0775d6002cc1d34aa76049518c40e5bfbcdd10d9c25d06930b0d0b212f01552f",
+      "size": 11368
+    }
+  }
+}

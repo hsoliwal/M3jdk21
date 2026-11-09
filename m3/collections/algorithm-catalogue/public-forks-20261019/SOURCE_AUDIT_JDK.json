@@ -1,0 +1,76 @@
+{
+  "schema": "m3-public-fork-jdk-source-audit/v1",
+  "observationDate": "2026-10-19",
+  "repository": "hsoliwal/M3jdk21",
+  "branch": "master",
+  "commit": "a3e88976ee8664d1ef5d0cade96aec1206b2133d",
+  "selectedSourceFiles": 3,
+  "source_facts": [
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "a3e88976ee8664d1ef5d0cade96aec1206b2133d",
+      "path": "src/java.base/share/classes/java/util/ArrayList.java",
+      "git_blob": "d136f7affce3632866d5b1b46a88d1e2803530af",
+      "url": "https://github.com/hsoliwal/M3jdk21/blob/a3e88976ee8664d1ef5d0cade96aec1206b2133d/src/java.base/share/classes/java/util/ArrayList.java",
+      "license": "GPL-2.0 WITH Classpath-exception-2.0 (per-file header; retain notices)",
+      "category": "dynamic-array",
+      "observed": [
+        "Object[] elementData plus logical size",
+        "Geometric growth and System.arraycopy for shifts and bulk operations"
+      ],
+      "candidate_classification": "ADAPT",
+      "limits": [
+        "Preserve per-file GPL and Classpath designation; not an Apache source donor",
+        "No tests, benchmarks or Java/JNI adaptation executed by this inventory"
+      ],
+      "source_read_at_immutable_commit": true,
+      "proof_status": "NOT_RUN"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "a3e88976ee8664d1ef5d0cade96aec1206b2133d",
+      "path": "src/java.base/share/classes/java/util/ArrayDeque.java",
+      "git_blob": "eb459b805174b7f091e09eeb3f99e74fc4b47553",
+      "url": "https://github.com/hsoliwal/M3jdk21/blob/a3e88976ee8664d1ef5d0cade96aec1206b2133d/src/java.base/share/classes/java/util/ArrayDeque.java",
+      "license": "GPL-2.0 WITH Classpath-exception-2.0 (per-file header; retain notices)",
+      "category": "ring-array",
+      "observed": [
+        "Object[] elements with head and tail indexes",
+        "Increment/decrement helpers use conditional wrap at modulus"
+      ],
+      "candidate_classification": "ADAPT",
+      "limits": [
+        "Preserve per-file GPL and Classpath designation; not an Apache source donor",
+        "No tests, benchmarks or Java/JNI adaptation executed by this inventory"
+      ],
+      "source_read_at_immutable_commit": true,
+      "proof_status": "NOT_RUN"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "a3e88976ee8664d1ef5d0cade96aec1206b2133d",
+      "path": "src/java.base/share/classes/java/util/TreeMap.java",
+      "git_blob": "a91a56a5900c8acb8d268eac16744abf7cad1134",
+      "url": "https://github.com/hsoliwal/M3jdk21/blob/a3e88976ee8664d1ef5d0cade96aec1206b2133d/src/java.base/share/classes/java/util/TreeMap.java",
+      "license": "GPL-2.0 WITH Classpath-exception-2.0 (per-file header; retain notices)",
+      "category": "sorted-node-owner",
+      "observed": [
+        "Root and left/right child links are retained Entry objects",
+        "Sorted bulk construction still creates node-based tree storage"
+      ],
+      "candidate_classification": "NO_FIT",
+      "limits": [
+        "Contract reference only for arrays-only M3; storage needs replacement",
+        "No GPL implementation text copied into Apache components"
+      ],
+      "source_read_at_immutable_commit": true,
+      "proof_status": "NOT_RUN"
+    }
+  ],
+  "mode": "SOURCE_INVENTORY_ONLY",
+  "architecture_admitted": false,
+  "noSourceBodiesIncluded": true,
+  "testsRun": false,
+  "benchmarksRun": false,
+  "fullRepositoryClaim": false
+}

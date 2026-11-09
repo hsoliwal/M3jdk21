@@ -1,0 +1,82 @@
+{
+  "schema": "M3JDK21_SYNEXIA_FACTS_MIXED_CONSUMERS_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimages (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 test",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-facts-thick-20261008",
+    "pullRequest": 9916,
+    "commit": "e05ec8ec50d",
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe + M3HashPinnedTextSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.FactsMixedConsumers",
+    "crate": "m3-facts-mixed-consumers",
+    "fossReuseDecisionRow": "string.facts.mixed-consumers",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringFacts.java",
+        "commit": "da6084c4ef",
+        "target": "java.lang.M3StringFacts",
+        "mechanics": "the owner itself; flat-needle gates mayContain/prefixMayMatch/suffixMayMatch(String) fold the needle's signals with the same functions as scan"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/String.java",
+        "commit": "da6084c4ef",
+        "target": "java.lang.String",
+        "mechanics": "the owner itself; prepared-facts gates before the mixed-side charAt loops; replace returns this without admission when the flat target cannot or does not occur; ASCII case lane for every locale except tr, az, lt (StringLatin1 branch parity)"
+      }
+    ],
+    "license": "first-party M3 owner",
+    "disposition": "ADAPT: facts prove absence only; gates consult factsIfPrepared and never force a scan; JDK semantics unchanged"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "da6084c4ef (master)",
+    "owners": [
+      "java.lang.M3StringFacts",
+      "java.lang.String"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed: 66 targets (M3StringCodePointPrecompute.java newly sealed; two drifted after-images absorbed), target_commit 0d0cc24b51; apply.py --check state=after; test_recipe.py 8/8"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringFacts.java",
+      "before": "36c9cb73608cf2f7ad40be00493def3c17cfd4653b5f450750f3595d1eb677cd",
+      "after": "c834e63534db855f06e99bbfdf45caf0ecf36b88f5760bfe7fdaa8bcc355509f",
+      "resource": "00-M3StringFacts.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringFactsMixedConsumersTest.java",
+      "before": "ABSENT",
+      "after": "ac7e50f1b49017cd6600be4713a4207263b4fe63d7c0d79c65ffdd012143b042",
+      "resource": "01-M3StringFactsMixedConsumersTest.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/String.java",
+      "before": "863bec8e801913d4eab0d8228d470ab8f8ec6a79e44ae30ce5383a94f39d5a99",
+      "after": "c16fd68b3a0402352569908ba9c99a17dc2853ba7dbb6cbbcb5c3ea6ea4efc8f",
+      "resource": "00-String.java.txt",
+      "step": "hash-pinned-text"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base over the sealed M3 java.base subset plus M3StringCodePointPrecompute (42 files, 149 classes)",
+    "flagOffDifferentialLocal": "PASS_WINDOWS M3StringFactsMixedConsumersTest on the patched module (--add-opens java.base/java.lang): 90,116 checks; flat gates agree with the M3-needle gates on every probe; present needles/prefixes/suffixes never rejected; locale-lane parity for every available locale; consumer parity vs StringBuilder/stock; 6,597 of 6,713 random absent needles rejected",
+    "g8RuntimeRecipe": "PASS_WINDOWS reseal 66 targets; apply.py --check state=after; test_recipe.py 8/8",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3FactsMixedConsumersRecipeTest 3/3 (mvn log sha256 076805c3306b7b7d...)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnDifferential": "PENDING_LINUX (same test under -XX:+UseM3StringStorage exercises the M3 receiver branches; IsBlank/Strip/EqualsIgnoreCase/ToLowerCase suites)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "gates run only on prepared facts (factsIfPrepared); a search never forces the O(n) facts scan",
+    "the flat-needle signal fold is allocation-free and reuses addSignal/addBigramSignal/addTrigramSignal, so flat and M3 needle verdicts are identical by construction (tested)",
+    "replace(CharSequence,CharSequence) with an absent flat target returns this before any admission (no transient pool entries for the target or the replacement)",
+    "the ASCII case lane excludes exactly the languages StringLatin1 routes to locale-dependent casing (tr, az, lt); the default locale therefore maps in place",
+    "no timing claim; the flag-on differential on Linux is the functional proof"
+  ]
+}

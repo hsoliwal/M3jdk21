@@ -1,0 +1,6 @@
+Directory "/workspace/scratch/8cbeab1c181e/tooling/rx7/jtreg-work-v2" not found: creating
+Directory "/workspace/scratch/8cbeab1c181e/tooling/rx7/jtreg-report-v2" not found: creating
+Cannot find file ../jtreg-ext/requires/VMProps.java for extra property definitions
+Test results: passed: 2
+Report written to /workspace/scratch/8cbeab1c181e/tooling/rx7/jtreg-report-v2/html/report.html
+Results written to /workspace/scratch/8cbeab1c181e/tooling/rx7/jtreg-work-v2

@@ -1,0 +1,91 @@
+-------------------------------------------------------------------------------
+Test set: com.synexia.rewrite.M3TaskRecipeTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 5, Errors: 0, Skipped: 0, Time elapsed: 7.590 s <<< FAILURE! -- in com.synexia.rewrite.M3TaskRecipeTest
+com.synexia.rewrite.M3TaskRecipeTest.driftMissingDuplicateAndWrongRepresentationRefuse -- Time elapsed: 2.669 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+Java parser errors: [org.openrewrite.java.JavaParsingException: Failed to convert for the following cursor stack:--- BEGIN PATH ---
+JCCompilationUnit(sourceFile = src/java.base/share/classes/java/lang/Runtime.java)
+--- END PATH ---
+, java.lang.UnsupportedOperationException: Anywhere text can occur, we need to call the visitText override that returns a list of Javadoc elements.] ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:42)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:191)
+	at com.synexia.rewrite.M3TaskRecipeTest.parse(M3TaskRecipeTest.java:103)
+	at com.synexia.rewrite.M3TaskRecipeTest.driftMissingDuplicateAndWrongRepresentationRefuse(M3TaskRecipeTest.java:201)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+com.synexia.rewrite.M3TaskRecipeTest.qualifiedSdkResultsAreRetained -- Time elapsed: 0.962 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+Java parser errors: [org.openrewrite.java.JavaParsingException: Failed to convert for the following cursor stack:--- BEGIN PATH ---
+JCCompilationUnit(sourceFile = src/java.base/share/classes/java/lang/Runtime.java)
+--- END PATH ---
+, java.lang.UnsupportedOperationException: Anywhere text can occur, we need to call the visitText override that returns a list of Javadoc elements.] ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:42)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:191)
+	at com.synexia.rewrite.M3TaskRecipeTest.parse(M3TaskRecipeTest.java:103)
+	at com.synexia.rewrite.M3TaskRecipeTest.qualifiedSdkResultsAreRetained(M3TaskRecipeTest.java:245)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+com.synexia.rewrite.M3TaskRecipeTest.postScanChangesRefuse -- Time elapsed: 0.824 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+Java parser errors: [org.openrewrite.java.JavaParsingException: Failed to convert for the following cursor stack:--- BEGIN PATH ---
+JCCompilationUnit(sourceFile = src/java.base/share/classes/java/lang/Runtime.java)
+--- END PATH ---
+, java.lang.UnsupportedOperationException: Anywhere text can occur, we need to call the visitText override that returns a list of Javadoc elements.] ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:42)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:191)
+	at com.synexia.rewrite.M3TaskRecipeTest.parse(M3TaskRecipeTest.java:103)
+	at com.synexia.rewrite.M3TaskRecipeTest.postScan(M3TaskRecipeTest.java:233)
+	at com.synexia.rewrite.M3TaskRecipeTest.postScanChangesRefuse(M3TaskRecipeTest.java:226)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+com.synexia.rewrite.M3TaskRecipeTest.mixedPreimagesAndPostimages -- Time elapsed: 1.145 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+Java parser errors: [org.openrewrite.java.JavaParsingException: Failed to convert for the following cursor stack:--- BEGIN PATH ---
+JCCompilationUnit(sourceFile = src/java.base/share/classes/java/lang/Runtime.java)
+--- END PATH ---
+, java.lang.UnsupportedOperationException: Anywhere text can occur, we need to call the visitText override that returns a list of Javadoc elements.] ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:42)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:191)
+	at com.synexia.rewrite.M3TaskRecipeTest.parse(M3TaskRecipeTest.java:103)
+	at com.synexia.rewrite.M3TaskRecipeTest.mixedPreimagesAndPostimages(M3TaskRecipeTest.java:193)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+com.synexia.rewrite.M3TaskRecipeTest.exactReplayFixedPointAndInputOrder -- Time elapsed: 1.931 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+Java parser errors: [org.openrewrite.java.JavaParsingException: Failed to convert for the following cursor stack:--- BEGIN PATH ---
+JCCompilationUnit(sourceFile = src/java.base/share/classes/java/lang/Runtime.java)
+--- END PATH ---
+, java.lang.UnsupportedOperationException: Anywhere text can occur, we need to call the visitText override that returns a list of Javadoc elements.] ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:42)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:191)
+	at com.synexia.rewrite.M3TaskRecipeTest.parse(M3TaskRecipeTest.java:103)
+	at com.synexia.rewrite.M3TaskRecipeTest.namedDescriptorComposesTheQualifiedLanes(M3TaskRecipeTest.java:168)
+	at com.synexia.rewrite.M3TaskRecipeTest.exactReplayFixedPointAndInputOrder(M3TaskRecipeTest.java:143)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+

@@ -1,0 +1,11 @@
+stage	status	evidence
+S0_VIEW	PASS	java=19 packages=1 resources=0 overlays=none upstream_descriptor=no
+S1_RELOCATE	PASS	map=com.google.re2j=com.m3.lib.re2j packages_moved=1 old_dirs_left=0 text_completed_files=0 parse_fallback_files=0 resources_moved=0 meta_mapped=0
+S1b_BCP	PASS	java_equal_after_name_map=19 resources_byte_equal=0 differing=0
+S2_RESIDUE	PASS	residue=0 (every kind) slash_form_files=0
+S3_ATOMIZE	PASS	atoms=830 KNOWN_PATTERN=12 UNPROVEN_LEAF=522 UNKNOWN_PATTERN=296
+S4_CONSOLIDATE	PASS	owner_contract_atoms=37 (proposal queue)
+S5_REFACTOR_BASELINE	PASS	METHOD_15=112 LOOP=64 CONST_HOIST=87 (ratchet: MOP passes may only lower these)
+S6_MODULE	PASS	module=jdk.m3.re2j requires=java.base exports=1 javac_warnings=3
+S7_JMOD_IMAGE	PASS	jmod=110528B image_modules=6 smoke='loaded=46 failed=0'
+S8_LAYER	PASS	files=24 layer=m3/vendor/third_party-m3/relocated/re2j

@@ -1,0 +1,31 @@
+{
+  "dataset": "combine-tuple21",
+  "checks": [
+    {
+      "dataset": "combine-tuple21",
+      "targets": 2,
+      "changes": 2,
+      "mode": "check",
+      "actual_sdk_results": true
+    },
+    {
+      "dataset": "combine-tuple21",
+      "targets": 2,
+      "changes": 2,
+      "mode": "apply",
+      "actual_sdk_results": true
+    },
+    {
+      "dataset": "combine-tuple21",
+      "targets": 2,
+      "changes": 0,
+      "mode": "apply",
+      "actual_sdk_results": true
+    }
+  ],
+  "replay_preserved_bytes_and_mtime": true,
+  "postimages": {
+    "src/java.base/share/classes/java/lang/M3StringPool.java": "d220d44887baf1054fece7d75e7e10b2ea8b787ea32e3280a06bd43f4758b675",
+    "test/jdk/java/lang/String/M3StringTuplePublicationFailureTest.java": "36c36637b50dd14c45666125bd2b371ed9ac6cd56649a9aa4a616e46b36045f8"
+  }
+}

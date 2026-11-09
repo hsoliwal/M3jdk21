@@ -1,0 +1,33 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: jdk.internal.m3.intake.Relocate
+displayName: LIB_INTAKE relocation of antlr4-runtime-4.13.2
+description: Boundary-checked package relocation, one non-recursive ChangePackage per package, longest first.
+recipeList:
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.antlr.v4.runtime.tree.pattern
+      newPackageName: jdk.m3.lib.runtime.tree.pattern
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.antlr.v4.runtime.tree.xpath
+      newPackageName: jdk.m3.lib.runtime.tree.xpath
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.antlr.v4.runtime.misc
+      newPackageName: jdk.m3.lib.runtime.misc
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.antlr.v4.runtime.tree
+      newPackageName: jdk.m3.lib.runtime.tree
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.antlr.v4.runtime.atn
+      newPackageName: jdk.m3.lib.runtime.atn
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.antlr.v4.runtime.dfa
+      newPackageName: jdk.m3.lib.runtime.dfa
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.antlr.v4.runtime
+      newPackageName: jdk.m3.lib.runtime
+      recursive: false

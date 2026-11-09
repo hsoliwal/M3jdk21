@@ -1,0 +1,15 @@
+{
+  "schema": "m3-guava-namespace-source-qualification-v1",
+  "predecessor": "receiving/guava-33.4.8-20261018",
+  "base": "b35759a36ecdfc299855a5e53b4d1a05f9f3884d",
+  "sourceRepository": "hsoliwal/guava",
+  "sourceCommits": ["69f46ada90f005821e97173c55c6c783e2001d7d", "6dcb62c653c3", "3aea962167e1", "915c0f300f5c", "7880ddf33027", "373312292f38", "880add03dfee", "d21189dd6840", "5a0ba1218ca69fb94ad74f97bae93266028a8cbd"],
+  "rows": {"edited": 12, "newInJreTree": 2, "new": 7},
+  "conflictsResolved": 59,
+  "jreCompile": "618 sources (guava/src + futures/failureaccess, module-info excluded), -source 8 -target 8 -g on JDK 21.0.9, annotation jars only: 1,972 classes, 0 errors (receipt 20261018: 1,972)",
+  "androidCompile": "616 sources, -source 8 -target 8: 1,933 classes, 0 errors",
+  "contracts": "M3ArrayStorageContractTest, M3ImmutableCountArrayContractTest, M3ImmutableIndexArrayContractTest, M3TreeMultisetArrayContractTest against the unmodified 33.4.8 classes: 32/32",
+  "topK": "TopKArrayContract: candidate 0 discarded-tail references, 33.4.8 baseline 1,067",
+  "relocationProof": "M3GuavaEvictingRelocationProof compiles (main needs the pinned original-source workflow)",
+  "notRun": ["donor guava-tests (relocated tests need a relocated Truth)", "TopKArrayBenchmark (JMH)", "hash-pinned recipe: the canonical engine admits only src/main/java and src/test/java roots, not guava/src"]
+}

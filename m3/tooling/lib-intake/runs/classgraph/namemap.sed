@@ -1,0 +1,1 @@
+s/nonapi\.io\.github\.classgraph([^A-Za-z0-9_$]|$)/com.m3.lib.classgraph.nonapi\1/g;s#nonapi/io/github/classgraph([^A-Za-z0-9_$]|$)#com/m3/lib/classgraph/nonapi\1#g;s/io\.github\.classgraph([^A-Za-z0-9_$]|$)/com.m3.lib.classgraph\1/g;s#io/github/classgraph([^A-Za-z0-9_$]|$)#com/m3/lib/classgraph\1#g;

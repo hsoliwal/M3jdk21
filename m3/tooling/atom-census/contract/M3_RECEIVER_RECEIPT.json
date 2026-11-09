@@ -1,0 +1,24 @@
+{
+  "claim": "exact postimage/provenance receipt only; not repository-wide atom coverage or product admission",
+  "contract": "M3JDK-MACHINE-MAINTAINED-MECHANICAL-SUPERSET-1",
+  "crate_manifest_sha256": "b1ebffb93a91e335d30b89fbdc756a04ec4a56d54adb1f2229a1c281a4a5060b",
+  "hold": true,
+  "postimage_count": 18,
+  "postimage_manifest_sha256": "96eaf5eba0a78ea3ef01a90acbc413a89eba1ba7ce395af68ece0c2a6a006dc3",
+  "schema": "M3_SYNEXIA_RECEIVER_RECEIPT/1",
+  "source_branch": "m3/m3jdk-atom-coverage-contract-20261031",
+  "source_commit": "faec4631f85c3eb14216ba3e3f0bb25e8d5a3f31",
+  "source_crate": "synexia-openrewrite-recipes/recipe-crates/m3jdk-atom-coverage-contract-20261031",
+  "source_pull_request": 15023,
+  "source_repository": "hsoliwal/com.synexia",
+  "target_base": "f401ad31ae555b00f6964f0e65941bf4d0a58d48",
+  "target_repository": "hsoliwal/M3jdk21",
+  "validation": {
+    "JAVADOC": "PASS",
+    "LINT_COMPILE_TEST_RUNTIME": "PASS",
+    "MANIFEST_RESOURCE_POSTIMAGE": "PASS",
+    "MAVEN_OPENREWRITE_FIXED_POINT": "NOT_RUN",
+    "SCRIPT_SYNTAX": "PASS",
+    "TARGET_RECEIVER_VALIDATION": "NOT_RUN"
+  }
+}

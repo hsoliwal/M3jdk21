@@ -1,0 +1,26 @@
+PASS PMEMSDK recipe API SHA-256 bdaedeb73b770435fe57656d4df2cce037318b084ae57bce52cf6e043523994e
+PASS M3 transfer recipe (--check): 4 files; 0 changes
+PASS M3 PMEM source-slices recipe (--check): 3 source seals, 0 created
+PASS PMEMSDK recipe API SHA-256 bdaedeb73b770435fe57656d4df2cce037318b084ae57bce52cf6e043523994e
+PASS M3 transfer recipe (--check): 4 files; 0 changes
+PASS M3 PMEM source-slices recipe (--check): 3 source seals, 0 created
+PASS M3 transfer recipe (--apply): 4 files; 0 changes
+PASS PMEMSDK transfer recipe idempotence and fail-closed drift tests
+PASS M3 PMEM source-slices recipe (--check): 3 source seals, 0 created
+PASS M3 PMEM source-slices recipe (--apply): 3 source seals, 3 created
+PASS M3 PMEM source-slices recipe (--apply): 3 source seals, 0 created
+PASS M3 PMEM source-slices recipe (--check): 3 source seals, 0 created
+PASS PMEM source-slices fixed point / source drift / template drift
+PASS PMEMSDK smoke tests: 23 assertions; backend=PmemCapabilities[nativeAvailable=true, libpmem2Compiled=false, osPageSize=4096, platform=Linux]
+PASS PMEMSDK JNI zero-heap-transfer: 25 assertions
+PASS PMEMSDK source slices CPU: 17 assertions
+PASS PMEMSDK JNI 20,000 source-slice records (1GB sparse map)
+com.synexia.m3.pmem@0.2
+exports com.synexia.m3.pmem
+requires java.base mandated
+
+PASS PMEMSDK smoke tests: 23 assertions; backend=PmemCapabilities[nativeAvailable=true, libpmem2Compiled=false, osPageSize=4096, platform=Linux]
+PASS PMEMSDK JNI zero-heap-transfer: 25 assertions
+PASS PMEMSDK source slices CPU: 17 assertions
+PASS PMEMSDK JNI 20,000 source-slice records (1GB sparse map)
+PASS PMEMSDK build + tests + linked JMOD

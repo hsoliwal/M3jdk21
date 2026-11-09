@@ -1,0 +1,65 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: jdk.internal.m3.intake.Relocate
+displayName: LIB_INTAKE relocation of commons-io-2.18.0
+description: Boundary-checked package relocation, one non-recursive ChangePackage per package, longest first.
+recipeList:
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.apache.commons.io.file.attribute
+      newPackageName: jdk.m3.lib.io.file.attribute
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.apache.commons.io.serialization
+      newPackageName: jdk.m3.lib.io.serialization
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.apache.commons.io.input.buffer
+      newPackageName: jdk.m3.lib.io.input.buffer
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.apache.commons.io.comparator
+      newPackageName: jdk.m3.lib.io.comparator
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.apache.commons.io.filefilter
+      newPackageName: jdk.m3.lib.io.filefilter
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.apache.commons.io.channels
+      newPackageName: jdk.m3.lib.io.channels
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.apache.commons.io.file.spi
+      newPackageName: jdk.m3.lib.io.file.spi
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.apache.commons.io.function
+      newPackageName: jdk.m3.lib.io.function
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.apache.commons.io.charset
+      newPackageName: jdk.m3.lib.io.charset
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.apache.commons.io.monitor
+      newPackageName: jdk.m3.lib.io.monitor
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.apache.commons.io.output
+      newPackageName: jdk.m3.lib.io.output
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.apache.commons.io.build
+      newPackageName: jdk.m3.lib.io.build
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.apache.commons.io.input
+      newPackageName: jdk.m3.lib.io.input
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.apache.commons.io.file
+      newPackageName: jdk.m3.lib.io.file
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.apache.commons.io
+      newPackageName: jdk.m3.lib.io
+      recursive: false

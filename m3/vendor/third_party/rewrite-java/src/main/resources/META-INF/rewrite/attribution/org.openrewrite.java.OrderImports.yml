@@ -1,0 +1,31 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.java.OrderImports"
+contributors:
+- name: "Jonathan Schneider"
+  email: "jkschneider@gmail.com"
+  lineCount: 80
+- name: "Greg Adams"
+  email: "greg@moderne.io"
+  lineCount: 12
+- name: "Sam Snyder"
+  email: "sam@moderne.io"
+  lineCount: 4
+- name: "Tyler Van Gorder"
+  email: "tkvangorder@users.noreply.github.com"
+  lineCount: 3
+- name: "Mike Solomon"
+  email: "mike@moderne.io"
+  lineCount: 2
+- name: "Marit van Dijk"
+  email: "mlvandijk@gmail.com"
+  lineCount: 1
+- name: "Knut Wannheden"
+  email: "knut.wannheden@gmail.com"
+  lineCount: 1
+- name: "Tracey Yoshima"
+  email: "tracey.yoshima@gmail.com"
+  lineCount: 1
+- name: "Tim te Beek"
+  email: "tim@moderne.io"
+  lineCount: 1

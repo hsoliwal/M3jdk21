@@ -55,7 +55,9 @@ import java.lang.reflect.TypeVariable;
 import java.lang.constant.Constable;
 import java.net.URL;
 import java.security.AccessController;
+import java.security.Permissions;
 import java.security.PrivilegedAction;
+import java.security.ProtectionDomain;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -818,19 +820,28 @@ public final class Class<T> implements java.io.Serializable,
 
 
     /**
-     * Determines if the specified {@code Class} object represents a
-     * primitive type.
+     * Determines if this {@code Class} object represents a primitive
+     * type or void.
      *
-     * <p> There are nine predefined {@code Class} objects to represent
-     * the eight primitive types and void.  These are created by the Java
-     * Virtual Machine, and have the same names as the primitive types that
-     * they represent, namely {@code boolean}, {@code byte},
-     * {@code char}, {@code short}, {@code int},
-     * {@code long}, {@code float}, and {@code double}.
+     * <p> There are nine predefined {@code Class} objects to
+     * represent the eight primitive types and void.  These are
+     * created by the Java Virtual Machine, and have the same
+     * {@linkplain #getName() names} as the primitive types that they
+     * represent, namely {@code boolean}, {@code byte}, {@code char},
+     * {@code short}, {@code int}, {@code long}, {@code float}, and
+     * {@code double}.
      *
-     * <p> These objects may only be accessed via the following public static
-     * final variables, and are the only {@code Class} objects for which
-     * this method returns {@code true}.
+     * <p>No other class objects are considered primitive.
+     *
+     * @apiNote
+     * A {@code Class} object represented by a primitive type can be
+     * accessed via the {@code TYPE} public static final variables
+     * defined in the primitive wrapper classes such as {@link
+     * java.lang.Integer#TYPE Integer.TYPE}. In the Java programming
+     * language, the objects may be referred to by a class literal
+     * expression such as {@code int.class}.  The {@code Class} object
+     * for void can be expressed as {@code void.class} or {@link
+     * java.lang.Void#TYPE Void.TYPE}.
      *
      * @return true if and only if this class represents a primitive type
      *
@@ -844,6 +855,7 @@ public final class Class<T> implements java.io.Serializable,
      * @see     java.lang.Double#TYPE
      * @see     java.lang.Void#TYPE
      * @since 1.1
+     * @jls 15.8.2 Class Literals
      */
     @IntrinsicCandidate
     public native boolean isPrimitive();
@@ -1582,10 +1594,8 @@ public final class Class<T> implements java.io.Serializable,
     }
 
     private static Class<?> toClass(Type o) {
-        if (o instanceof GenericArrayType)
-            return Array.newInstance(toClass(((GenericArrayType)o).getGenericComponentType()),
-                                     0)
-                .getClass();
+        if (o instanceof GenericArrayType gat)
+            return toClass(gat.getGenericComponentType()).arrayType();
         return (Class<?>)o;
      }
 
@@ -3006,8 +3016,8 @@ public final class Class<T> implements java.io.Serializable,
                 // need for a URL connection
                 if (cl == null) {
                     return BootLoader.findResourceAsStream(mn, name);
-                } else if (cl instanceof BuiltinClassLoader) {
-                    return ((BuiltinClassLoader) cl).findResourceAsStream(mn, name);
+                } else if (cl instanceof BuiltinClassLoader bcl) {
+                    return bcl.findResourceAsStream(mn, name);
                 } else {
                     URL url = cl.findResource(mn, name);
                     return (url != null) ? url.openStream() : null;
@@ -3142,10 +3152,6 @@ public final class Class<T> implements java.io.Serializable,
         return true;
     }
 
-
-    /** protection domain returned when the internal domain is null */
-    private static java.security.ProtectionDomain allPermDomain;
-
     /**
      * Returns the {@code ProtectionDomain} of this class.  If there is a
      * security manager installed, this method first calls the security
@@ -3166,7 +3172,7 @@ public final class Class<T> implements java.io.Serializable,
      * @see java.lang.RuntimePermission
      * @since 1.2
      */
-    public java.security.ProtectionDomain getProtectionDomain() {
+    public ProtectionDomain getProtectionDomain() {
         @SuppressWarnings("removal")
         SecurityManager sm = System.getSecurityManager();
         if (sm != null) {
@@ -3175,26 +3181,30 @@ public final class Class<T> implements java.io.Serializable,
         return protectionDomain();
     }
 
-    // package-private
-    java.security.ProtectionDomain protectionDomain() {
-        java.security.ProtectionDomain pd = getProtectionDomain0();
-        if (pd == null) {
-            if (allPermDomain == null) {
-                java.security.Permissions perms =
-                    new java.security.Permissions();
-                perms.add(SecurityConstants.ALL_PERMISSION);
-                allPermDomain =
-                    new java.security.ProtectionDomain(null, perms);
-            }
-            pd = allPermDomain;
+    /** Holder for the protection domain returned when the internal domain is null */
+    private static class Holder {
+        private static final ProtectionDomain allPermDomain;
+        static {
+            Permissions perms = new Permissions();
+            perms.add(SecurityConstants.ALL_PERMISSION);
+            allPermDomain = new ProtectionDomain(null, perms);
         }
-        return pd;
+    }
+
+    // package-private
+    ProtectionDomain protectionDomain() {
+        ProtectionDomain pd = getProtectionDomain0();
+        if (pd == null) {
+            return Holder.allPermDomain;
+        } else {
+            return pd;
+        }
     }
 
     /**
      * Returns the ProtectionDomain of this class.
      */
-    private native java.security.ProtectionDomain getProtectionDomain0();
+    private native ProtectionDomain getProtectionDomain0();
 
     /*
      * Return the Virtual Machine's Class object for the named

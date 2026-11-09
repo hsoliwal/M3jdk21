@@ -23,6 +23,7 @@
  * questions.
  */
 
+// Modified 2026 by Hitesh Soliwal and contributors: preserve sorted batch ordering.
 package java.util;
 
 /**
@@ -259,6 +260,35 @@ public interface SortedSet<E> extends Set<E>, SequencedSet<E> {
             public Comparator<? super E> getComparator() {
                 return SortedSet.this.comparator();
             }
+            @Override
+            public Spliterator<E> trySplit() {
+                Spliterator<E> prefix = super.trySplit();
+                return prefix == null ? null : splitWithOrder(prefix, SortedSet.this);
+            }
+        };
+    }
+
+    /**
+     * Keep the original owner's order on recursively split iterator batches.
+     * Comparator lookup remains lazy: construction, splitting and traversal do not
+     * call it. A child retains its owner while the child's comparator is available.
+     */
+    private static <T> Spliterator<T> splitWithOrder(
+            Spliterator<T> batch, SortedSet<T> owner) {
+        return new Spliterator<>() {
+            @Override public boolean tryAdvance(java.util.function.Consumer<? super T> action) {
+                return batch.tryAdvance(action);
+            }
+            @Override public void forEachRemaining(java.util.function.Consumer<? super T> action) {
+                batch.forEachRemaining(action);
+            }
+            @Override public Spliterator<T> trySplit() {
+                Spliterator<T> prefix = batch.trySplit();
+                return prefix == null ? null : splitWithOrder(prefix, owner);
+            }
+            @Override public long estimateSize() { return batch.estimateSize(); }
+            @Override public int characteristics() { return batch.characteristics(); }
+            @Override public Comparator<? super T> getComparator() { return owner.comparator(); }
         };
     }
 

@@ -1,0 +1,90 @@
+{
+  "baseCommit": "0efc1719ca5766aead09f4f7c49f5067975bd946",
+  "beforeGitBlob": "b29db809d55ba7fe6fc96e3b273253a5a21dcb82",
+  "beforeSHA256": "583e6b5dce178ee02c2efdb919271c81a00ad60771abd06f7c942330fdfc60d1",
+  "afterSHA256": "c62a23be9e5b89c3d013f8dc0ed5351c3bf7ecc2bc809c8503a777a152d6b447",
+  "beforeBytes": 13854,
+  "afterBytes": 13962,
+  "preimageWitness": {
+    "case": "last-delivered-after-lookahead",
+    "returned": "A",
+    "hasNext": true,
+    "A": 1,
+    "B": 0,
+    "contractSatisfied": false
+  },
+  "afterWitness": {
+    "case": "last-delivered-after-lookahead",
+    "returned": "A",
+    "hasNext": true,
+    "A": 0,
+    "B": 1,
+    "contractSatisfied": true
+  },
+  "java": {
+    "status": "PASS",
+    "checks": 1801984,
+    "protocolOperations": 200000,
+    "maskBackend": "JAVA"
+  },
+  "native": {
+    "status": "PASS",
+    "checks": 1801984,
+    "protocolOperations": 200000,
+    "maskBackend": "NATIVE_REQUIRED"
+  },
+  "nativeDLLSHA256": "7f7c4c0dcd581f3b40c772bf0a18bc5c08f58f1dc8b1a33e3d0d0be1dd8a908b",
+  "nativeMode": "real library, -Xcheck:jni; no fallback",
+  "publicAPIsIdentical": true,
+  "fullCurrentCore": {
+    "sources": 129,
+    "status": "PASS",
+    "java": {
+      "status": "PASS",
+      "checks": 1801984,
+      "protocolOperations": 200000,
+      "maskBackend": "JAVA"
+    },
+    "native": {
+      "status": "PASS",
+      "checks": 1801984,
+      "protocolOperations": 200000,
+      "maskBackend": "NATIVE_REQUIRED"
+    },
+    "unchangedExistingSelfTest": {
+      "checksPerMode": 165184,
+      "gitBlob": "5c6711122c23d09869a810e01265c9b396ab078a"
+    }
+  },
+  "receiving": {
+    "status": "PASS",
+    "runner": "JDK21 javac then official JUnitPlatformLauncher1.10.2; Maven POM not locally executed to keep C cache read-only",
+    "tests": 2,
+    "validStates": 4,
+    "refusalInputs": 5,
+    "refusalFamilies": 3,
+    "engineSHA256": "9dc65793cb1f4fb20866f99f4e5d0043d54734aa03cf0fe297c0cadbba2d1c37",
+    "testSHA256": "23973e65bb884a85423631032e61b1147c0b2b848a7774bd902e9e11bfb0d42a"
+  },
+  "review": {
+    "command": "python -I -B autoreview --mode local --engine codex --no-web-search",
+    "engine": "codex",
+    "model": "gpt-5.6-sol",
+    "returncode": 0,
+    "findings": [],
+    "result": "patch is correct",
+    "coverage": "one production correction, prewritten runtime fixture and recipe Java/resources; later output-routing POM/CI/metadata checked by root separately"
+  },
+  "storage": {
+    "status": "ACTIVE",
+    "localOutputLane": "verified S only; C build lane held; K unavailable",
+    "taskCapBytes": 536870912,
+    "reserveBytes": 8589934592
+  },
+  "limits": [
+    "No full Eclipse or five-library implementation claim",
+    "No JNI C or ABI changes",
+    "Repeated corpus process totals are not distinct cases",
+    "Local Maven host not executed; hosted CI pending"
+  ]
+}

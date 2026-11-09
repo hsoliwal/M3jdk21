@@ -1,0 +1,211 @@
+package @WPKG@.adapter;
+
+import @PKG@.M3WebViewportCore;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.ScrollBar;
+
+/**
+ * Opt-in viewport adapter of an existing SWT or Nebula widget (pattern M3P-ADAPTER-1) on the shared viewport
+ * core of the web widgets ({@link M3WebViewportCore}: the public M3 facades of eclipse.platform.swt PR #295):
+ * R resident window and G logical extents from the widget's measured rows ({@link M3ViewportMeasure}), D
+ * damage-only redraws of changed items, P plane moves that damage only the plane's old and new bounds.
+ * <p>
+ * Off until {@link #attach()}: an unattached or detached adapter holds no listener and never redraws, so the
+ * widget behaves exactly as stock. Every query is a read of the widget's own state.
+ * </p>
+ */
+public final class M3ViewportAdapter implements Listener {
+	/** Aspect bits (same values as the web widgets' {@code M3WebView.A_*}). */
+	public static final int R = 1, G = 2, D = 4, P = 8;
+	/** Resident items kept beyond each end of the visible window. */
+	public static final int OVERSCAN = 2;
+	private final Object widget;
+	private final Control host;
+	private final M3ViewportMeasure measure;
+	private final int aspects;
+	private final M3WebViewportCore core = new M3WebViewportCore();
+	private final int[] window = new int[4], box = new int[4], last = new int[4], plane = new int[4];
+	private long logicalCount = -1;
+	private int logicalExtent = 1, redraws, mask;
+	private boolean attached;
+
+	/**
+	 * @param widget the existing widget (or its non-widget owner: layout, display, dialog, animator)
+	 * @param host the control whose pixels a redraw damages
+	 * @param measure how the widget's rows are read
+	 * @param aspects the aspects the concept's family declares ({@link #R} | {@link #G} | {@link #D} | {@link #P})
+	 */
+	public M3ViewportAdapter(Object widget, Control host, M3ViewportMeasure measure, int aspects) {
+		this.widget = widget;
+		this.host = host;
+		this.measure = measure;
+		this.aspects = aspects;
+	}
+
+	public int aspects() {
+		return aspects;
+	}
+
+	public Object widget() {
+		return widget;
+	}
+
+	public M3ViewportMeasure measure() {
+		return measure;
+	}
+
+	public Control host() {
+		return host;
+	}
+
+	public boolean isAttached() {
+		return attached;
+	}
+
+	/** Opts in: listens to the host's resize and dispose and to its vertical bar; false when attached or disposed. */
+	public boolean attach() {
+		if (attached || host.isDisposed()) {
+			return false;
+		}
+		attached = true;
+		host.addListener(SWT.Resize, this);
+		host.addListener(SWT.Dispose, this);
+		ScrollBar bar = M3ViewportKind.bar(host);
+		if (bar != null) {
+			bar.addListener(SWT.Selection, this);
+		}
+		core.scrolled(0, scrollPixels());
+		return true;
+	}
+
+	/** Opts out: removes every listener the adapter installed; the widget is stock again. */
+	public void detach() {
+		if (!attached) {
+			return;
+		}
+		attached = false;
+		if (!host.isDisposed()) {
+			host.removeListener(SWT.Resize, this);
+			host.removeListener(SWT.Dispose, this);
+			ScrollBar bar = M3ViewportKind.bar(host);
+			if (bar != null) {
+				bar.removeListener(SWT.Selection, this);
+			}
+		}
+	}
+
+	@Override
+	public void handleEvent(Event e) {
+		if (e.type == SWT.Dispose) {
+			detach();
+		} else if (e.type == SWT.Selection) {
+			mask |= scrolled();
+		} else {
+			resident(window);
+		}
+	}
+
+	/** Logical items of a virtual host (count beyond what the widget holds, pixels per item); a negative count measures again. */
+	public void setLogical(long count, int itemExtent) {
+		logicalCount = count;
+		logicalExtent = Math.max(1, itemExtent);
+	}
+
+	public long count() {
+		return logicalCount >= 0 ? logicalCount : measure.count(widget, host);
+	}
+
+	public int itemExtent() {
+		return logicalCount >= 0 ? logicalExtent : measure.extent(widget, host);
+	}
+
+	/** R: writes {first visible, end visible, first resident, end resident} of the measured window. */
+	public void resident(int[] out) {
+		int n = (int) Math.min(Integer.MAX_VALUE, count());
+		int first = Math.max(0, Math.min(measure.first(widget, host), n));
+		core.project(n, first, Math.max(0, measure.visible(widget, host)), OVERSCAN, out);
+	}
+
+	/** R: resident items (visible plus overscan, bounded by the viewport, not by the item count). */
+	public int residentCount() {
+		resident(window);
+		return window[3] - window[2];
+	}
+
+	/** G: logical extent along the axis in pixels (a long: beyond the int range for large virtual hosts). */
+	public long extent() {
+		return core.extent(count(), itemExtent());
+	}
+
+	/** G: scroll bar thumb {offset, length} on a track of the given length. */
+	public void thumb(int track, int[] out) {
+		core.thumb(count(), itemExtent(), measure.viewport(widget, host), scrollPixels(), track, out);
+	}
+
+	private long scrollPixels() {
+		return (long) Math.max(0, measure.first(widget, host)) * itemExtent();
+	}
+
+	/** D: redraws only the item's bounds on the host; false when off, D is not declared or the item is not shown. */
+	public boolean itemChanged(int item) {
+		if (!attached || (aspects & D) == 0) {
+			return false;
+		}
+		measure.rect(widget, host, item, box);
+		return redraw(box[0], box[1], box[2], box[3], 0, 0, 0, 0);
+	}
+
+	/** P: moves the plane to new bounds and damages only its old and new bounds; false when off or P is not declared. */
+	public boolean movePlane(int x, int y, int w, int h) {
+		if (!attached || (aspects & P) == 0) {
+			return false;
+		}
+		boolean damaged = redraw(plane[0], plane[1], plane[2], plane[3], x, y, w, h);
+		plane[0] = x;
+		plane[1] = y;
+		plane[2] = w;
+		plane[3] = h;
+		return damaged;
+	}
+
+	/** P: the planes a scroll to the measured offset dirties (BODY, SCROLLBAR, ...; 0 when nothing moved or off). */
+	public int scrolled() {
+		return attached ? core.scrolled(0, scrollPixels()) : 0;
+	}
+
+	/** Planes dirtied by scroll bar selections since the last call. */
+	public int takeScrollMask() {
+		int m = mask;
+		mask = 0;
+		return m;
+	}
+
+	private boolean redraw(int x, int y, int w, int h, int x2, int y2, int w2, int h2) {
+		core.damage(x, y, w, h);
+		core.damage(x2, y2, w2, h2);
+		if (!core.take(last)) {
+			return false;
+		}
+		host.redraw(last[0], last[1], last[2], last[3], true);
+		redraws++;
+		return true;
+	}
+
+	/** Bounds {x, y, width, height} of the last redraw request (the D and P evidence). */
+	public int[] lastRedraw() {
+		return last.clone();
+	}
+
+	/** Redraw requests since construction. */
+	public int redraws() {
+		return redraws;
+	}
+
+	/** Current plane bounds {x, y, width, height}. */
+	public int[] plane() {
+		return plane.clone();
+	}
+}

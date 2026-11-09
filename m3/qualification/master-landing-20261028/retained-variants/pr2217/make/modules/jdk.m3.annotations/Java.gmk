@@ -1,0 +1,9 @@
+#
+# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+# Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+#
+
+# jdk.m3.annotations: the nullness annotations absorbed from JSpecify 1.0.1 (m3/tooling/annotations-absorb). javac
+# -Xlint:all on the module reports only the "m3" component of the module name.
+
+DISABLED_WARNINGS_java += module

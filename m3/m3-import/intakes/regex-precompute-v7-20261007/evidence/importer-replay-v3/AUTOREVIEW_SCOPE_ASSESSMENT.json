@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "status": "ROOT_ACCEPTED_SMALL_MECHANICAL_DELTA_CPU_REVIEW_NO_ADDITIONAL_MODEL_RUN",
+  "skill": "C:/Users/hsoliwal/.codex/skills/autoreview/SKILL.md",
+  "triggerQuote": "after non-trivial code edits, before final/commit/ship",
+  "rootDecision": "Qualifier1token+strict fixture correction is small auditable delta, no new model review required. Root already CPU-audited exact qualifier. No additional unit/review run.",
+  "projectionReviewDoesNotCoverThisDelta": true,
+  "newStructuredReviewClaimed": false,
+  "modelInvocations": 0,
+  "diffPath": "IMPORTER_FIX_RECIPE_V3.diff",
+  "diffSha256": "d2b79e4436e41a4b364215cfe302f707152b86ba8a5556413de8a22cfbeb4d8e",
+  "owners": 3,
+  "productionChangedLines": {
+    "removed": 1,
+    "added": 1
+  },
+  "testChangedLines": {
+    "removed": 2,
+    "added": 3
+  },
+  "changes": [
+    {
+      "path": "m3/m3-import/src/main/java/jdk/m3/importer/M3ImportPlan.java",
+      "delta": "Qualify existing outer static root helper, resolving record accessor name collision",
+      "publicApiOrAlgorithmChange": false,
+      "proof": "Existing strict6-owner compile after retained exact compile failure"
+    },
+    {
+      "path": "m3/m3-import/src/test/java/jdk/m3/importer/M3ImportPlanTest.java",
+      "delta": "Encode YAML fixture as UTF-8 bytes and mirror canonical source/target family paths",
+      "assertionChanges": false,
+      "proof": "Original ADD/M3_RECIPE assertions retained; all7cases passed"
+    },
+    {
+      "path": "m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java",
+      "delta": "Create source after source-failure assertions, before absent-target-root assertion",
+      "assertionChanges": false,
+      "publicFailureOrderingChange": false,
+      "proof": "Original exception expectations retained; all7cases passed"
+    }
+  ],
+  "allOriginalThreeUnitClassesPassed": {
+    "tests": 21,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "receipt": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\FINAL_JUNIT_PROOF.json",
+    "sha256": "011ba9dce48c402b4e51cefdeda5cc4034d93a3b49c7a47026e7666038a8b9d6"
+  },
+  "noAssertionsRemovedOrWeakened": true,
+  "scopeExpansion": false
+}

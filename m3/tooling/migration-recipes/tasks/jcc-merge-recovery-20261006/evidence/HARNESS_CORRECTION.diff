@@ -1,0 +1,77 @@
+--- failed-v02-harness
++++ reviewed-v03-harness
+@@ -23,6 +23,7 @@
+ import java.util.List;
+ import java.util.Map;
+ import java.util.TreeMap;
++import java.util.UUID;
+ import org.junit.jupiter.api.Test;
+ import org.openrewrite.InMemoryExecutionContext;
+ import org.openrewrite.Recipe;
+@@ -30,6 +31,8 @@
+ import org.openrewrite.SourceFile;
+ import org.openrewrite.config.Environment;
+ import org.openrewrite.internal.InMemoryLargeSourceSet;
++import org.openrewrite.marker.BuildMetadata;
++import org.openrewrite.marker.RecipesThatMadeChanges;
+ import org.openrewrite.text.PlainText;
+ 
+ /** Exact historical custody recovery and current retention integration, without runtime promotion. */
+@@ -79,6 +82,9 @@
+     @Test
+     void existingRecipeProduces449ExactOutputsAndFreshReplayMakesNoChanges() throws IOException {
+         var before = beforeSources();
++        var metadata = new BuildMetadata(UUID.fromString("0e901ac6-6bb1-4474-b764-432370c00ce1"),
++                Map.of("jcc-recovery", "preserved-input-marker"));
++        before.replaceAll(source -> source.withMarkers(source.getMarkers().add(metadata)));
+         SourceFile sentinel = text("unrelated-preservation.txt", "retain unrelated bytes\n");
+         before.add(sentinel);
+         var workspace = new TreeMap<String, SourceFile>();
+@@ -101,10 +107,18 @@
+                     SourceFile old = assertInstanceOf(PlainText.class, change.getBefore());
+                     assertEquals(old.getId(), next.getId());
+                     assertEquals(old.getSourcePath(), next.getSourcePath());
+-                    assertEquals(old.getMarkers(), next.getMarkers());
++                    assertEquals(old.getMarkers(), next.getMarkers().removeByType(RecipesThatMadeChanges.class));
+                     assertEquals(old.getFileAttributes(), next.getFileAttributes());
+                     assertEquals(old.getCharset(), next.getCharset());
++                    assertEquals(old.isCharsetBomMarked(), next.isCharsetBomMarked());
+                 }
++                var provenance = next.getMarkers().findAll(RecipesThatMadeChanges.class);
++                assertEquals(1, provenance.size());
++                assertEquals(1, provenance.get(0).getRecipes().size());
++                var appliedStack = provenance.get(0).getRecipes().iterator().next();
++                assertEquals(1, appliedStack.size());
++                var applied = assertInstanceOf(M3Jdk21HashPinnedTextSnapshotRecipe.class, appliedStack.get(0));
++                assertEquals(CRATES.get(i), applied.getCrateName());
+                 assertNull(actual.put(path, next.printAll()));
+                 workspace.put(path, next);
+             }
+@@ -239,10 +253,24 @@
+     }
+ 
+     private static void reject(String crate, List<SourceFile> input, String message) {
++        var before = input.stream().map(source -> normalized(source) + "\0" + source.printAll()).toList();
+         var errors = new ArrayList<Throwable>();
+-        var run = recipe(crate).run(new InMemoryLargeSourceSet(input), new InMemoryExecutionContext(errors::add), 1);
+-        assertTrue(errors.stream().anyMatch(error -> error.toString().contains(message)), errors.toString());
+-        assertTrue(run.getChangeset().getAllResults().isEmpty());
++        try {
++            var run = recipe(crate).run(new InMemoryLargeSourceSet(input), new InMemoryExecutionContext(errors::add), 1);
++            assertTrue(run.getChangeset().getAllResults().isEmpty(), "Refusal must not emit partial results");
++        } catch (RuntimeException failure) {
++            errors.add(failure);
++        }
++        assertFalse(errors.isEmpty(), message);
++        assertTrue(errors.stream().anyMatch(error -> messages(error).contains(message)), errors.toString());
++        assertEquals(before, input.stream().map(source -> normalized(source) + "\0" + source.printAll()).toList());
++    }
++
++    private static String messages(Throwable failure) {
++        var result = new StringBuilder();
++        for (int depth = 0; failure != null && depth < 32; depth++, failure = failure.getCause())
++            result.append(failure.getMessage()).append('\n');
++        return result.toString();
+     }
+ 
+     private static M3Jdk21HashPinnedTextSnapshotRecipe recipe(String crate) {

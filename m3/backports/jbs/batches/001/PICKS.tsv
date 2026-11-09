@@ -1,0 +1,51 @@
+seq	upstream_commit	upstream_date	m3_commit	jbs_ids	subject
+1	34f0a6ec6a7d52630e8d6661f9d081abcf57b84a	2023-06-08	8be6eca169dee01f276db5a3f7818cea55139f11	JDK-8305593	8305593: Add @spec tags in java.desktop
+2	6f492e800597c9ce332b9d5b54c00f551f145a0d	2023-06-08	413332366a2cead4bd078e457e07302d7620ffee	JDK-8309686	8309686: inconsistent URL for https://www.unicode.org/reports/tr35
+3	dc842e8587f1e27ef599abeec80a38a043b3d0b3	2023-06-09	3a8e844c6866b8d8c28c08fae2a35bdd2ca1985f	JDK-8309665	8309665: Simplify Arrays.copyOf/-Range methods
+4	7d6f97d04d8fac44b9c71ec7e36c27ec61e82445	2023-06-09	bf78268c793877aa6b8a19c7fa65853c0d146cfe	JDK-8309673	8309673: Refactor ref_at methods in SA ConstantPool
+5	3c15ad8d47dad303192efba4ec524a7612377d51	2023-06-12	f05c62e325d330caf5b0019764e8da71f684616d	JDK-8307144	8307144: namedParams in XECParameters and EdDSAParameters can be private final
+6	80a8144af5aae104188de9cc182e6d59c1466732	2023-06-12	f074eabb96e3e2a6068e86f41c6897c66924f740	JDK-8309867	8309867: redundant class field RSAPadding.md
+7	1a9edb8df9c1da9eb0178aa53be748828dc7835e	2023-06-13	7e2d4d828f8092887a6a0dafd7d68f8e9de77461	JDK-8309838	8309838: Classfile API Util.toBinaryName and other cleanup
+8	b5b5b7ce7220df650f6142c40d6e89c0462877ce	2023-06-13	3cef8b81f3e8d19c060e14e8c623c4a60a2b4ba3	JDK-8309884	8309884: missing @since tags in `com.sun.source.*`
+9	ba837b4bfa2dea85653d8a8fccd0817a569b4378	2023-06-14	302df7c68b82d154d2e0ea3e8250b4232e7bc263	JDK-8309910	8309910: Introduce jdk.internal.net.http.HttpConnection.getSNIServerNames() method
+10	ee4ab6709ebaf8a1b1e9f297a7c53205987f3eba	2023-06-14	cad52a47eae7af9f8d3afd07f4dc8b00cab2b8fb	JDK-8309958	8309958: Incorrect @since tag format in Container.java
+11	3e0bbd290c534b0f9729c54cd45308d505907797	2023-06-15	4bd7904e2148cc7938c627b60185a9d44bfca42b	JDK-6376959,JDK-6934301	8285368: Overhaul doc-comment inheritance 6376959: Algorithm for Inheriting Method Comments seems to go not as documented 6934301: Support directed inheriting of class comments with @inheritDoc
+12	5c705166da112395dcff70685a4d19ea6e9f426b	2023-06-15	291a62a4a24ca014b16f1c1210c7bc18a0147895	JDK-8309688	8309688: Data race on java.io.ClassCache$CacheRef.strongReferent
+13	53abba3a5acee3e4d776fe8a42a307b827fda54d	2023-06-16	2d3f292a9a43f213f9c98e52db7d222b044e5d20	JDK-8309499	8309499: javac fails to report compiler.err.no.java.lang with annotation processing enabled
+14	4eb4f20ae22a8f6a49cbbcaa6603ee19ed078e8b	2023-06-16	6caddb356f5b1f78764db76ca1b7e300daa256b4	JDK-8308808	8308808: SunMSCAPI public keys returns internal key array
+15	492d25c8df0f818d6f6e3a18a82bfad8fa95c282	2023-06-19	8ac9228cbedd361082119b95d6158478fba45ba6	JDK-8309601	8309601: [JVMCI] AMD64#getLargestStorableKind returns incorrect mask kind
+16	d2a858e173ae10c577d7a3d14eb87ab5c3f60062	2023-06-19	534742da57c4c20df8b03327e451184ae9fc0a07	JDK-7083187	7083187: Class CSS.CssValue is missing implementations of equals() and hashCode()
+17	f8f8bfbea15de0a57415ba27ad5722b6a4add07a	2023-06-19	56c4d059ca0a8db9ae8712f310f2ff0f0324be0c	JDK-8309939	8309939: HttpClient should not use Instant.now() as Instant source for deadlines
+18	e08e94f1b9eb687e7b413493e158c07063fea60c	2023-06-19	9a6a7be46b15b0d76017aeac27f50294a5bece63	JDK-8310266	8310266: JFR: Refactor after 'view' command
+19	226c6a097d9ec2fb66a678546ccd56b513494693	2023-06-21	28dbe923b274e8496bf70d2ca9cf62a23a2b1638	JDK-8309883	8309883: no `@since` info in com.sun.tools.javac package-info.java, Main.java
+20	f286e5a5e151c241556f0f1b8d6648423186a097	2023-06-21	916f6534310502d0e442fd134c15fd9c80fefaba	JDK-8310575	8310575: no `@since` for StandardDoclet
+21	8e047029e811a9e5758d564249ee794f584c9dc2	2023-06-22	046b42c263cdb80f0f6a8e8cdd6f373fe21303de	JDK-8242152	8242152: SA does not include StackMapTables when dumping .class files
+22	5a30fb6664e748fe41606eecda1f882a9a3c66b8	2023-06-22	2068ecacdffce235db4eed50df96090563780db7	JDK-8310591	8310591: Missing `@since` tags in java.lang.foreign
+23	7628da200833d0d26215a91afdd1bf7fc110da1d	2023-06-23	b8d74f3e7df27f76cec186c4dde47f5dcba2a6b7	JDK-8279254	8279254: PKCS9Attribute SigningTime always encoded in UTFTime
+24	0314292cb2d55474d8fb3d0ef46129be7e4f1838	2023-06-23	563d147486a8d49dc8ef2851ea3b2f40728678e8	JDK-8310267	8310267: Javadoc for Class#isPrimitive() is incorrect regarding Class objects for primitives
+25	0db63ec76d451295e273c8e3272d013e2c3348ef	2023-06-23	5d0aa352c84865f67438a2a668648af6c6ec0dba	JDK-8310571	8310571: Use inline @return tag on java.util.Objects
+26	a420ff48da7d8861a874ea6f7278249c20113215	2023-06-26	2f696cc051e0fd97895d900d18ff024bcd785dde	JDK-6664309	6664309: Docking point of a floating toolbar changes after closing
+27	e624484ecf2f31d9e52caf3fda2d18f0ef82123f	2023-06-26	c2f591ed2dbbc27244fbd14eb08224e72820dde0	JDK-8308540	8308540: On Kerberos TGT referral, if krb5.conf is missing realm, bad exception message
+28	d32eb015f056b09fa9ae99a2a84b7056cd3d9259	2023-06-26	028e6ef74ca81729c5d7f06dcfac4a1e3c376ed9	JDK-8310682	8310682: No package-info (and @since) for package jdk.nio.mapmode
+29	297c7996311e1e29d4a82fc8ffc7ad322e8ef107	2023-06-26	23ec1d94ad27a93809c60f564507b74bb976402a	JDK-8301492	8301492: Modernize equals() method of ResourceBundle.CacheKey and Bundles.CacheKey
+30	8f5b6771b8eb43c695fe2bfed100f17376b9efe7	2023-06-26	b2722b1b4644527fa338faab5f64b2857952a969	JDK-8310908	8310908: Non-standard `@since` tag in `com.sun.java.accessibility.util.package-info`
+31	46add3f8e3ea5d08130e0342390f998979c2a14e	2023-06-26	db7e24a2ceaf6cbf44d1fbe386abbe89c6cad606	JDK-8310909	8310909: java.io.InvalidObjectException has redundant `@since` tag
+32	79c056ec8b73de8e4841f9fdea494821a15e7313	2023-06-27	2e8b0b30eb35ba88f37ebcf6dbd2b15498b2fc1c	JDK-8006421	8006421: GraphicsConfiguration of a frame is changed when the frame is moved to another screen
+33	2bd4136bdb74599e358a22c83ffc685a2c0db4d2	2023-06-27	9a017a8ef11e5abc0713e388326b045693b04f15	JDK-8310849	8310849: Pattern matching for instanceof and arrayType cleanup in j.l.invoke and j.l.reflect
+34	fb283dff04a6fe11c8a7d44498ddd2075234e4dd	2023-06-27	dbce4188c28ae7b3c80119514cacbb5123662f77	JDK-8310828	8310828: java.sql java.sql.rowset packages have no `@since` info
+35	8f5a38488c354b21f1033e1cbdfa0a400f2622fc	2023-06-29	fec057100503e10cb160703773804d1f1789ac54	JDK-8311032	8311032: Empty value for java.protocol.handler.pkgs system property can lead to unnecessary classloading attempts of protocol handlers
+36	f4b900b607b2e857a0177d1e3061fd4dfc6b5f75	2023-06-29	540bc735c9ce6a0bb75df47143ed005a882d29c9	JDK-8310902	8310902: (fc) FileChannel.transferXXX async close and interrupt issues
+37	cbf418a4863f92241f116f782f9a676b7cb4771d	2023-06-29	efce9a778225c47ed882ded1e3eb944bc77c6818	JDK-8311020	8311020: Typo cleanup in Classfile API
+38	20f7d05ef238074143b01deb66a99217b2af47d8	2023-06-29	1162a8916bb58558e0bc43b46091cb9c93529596	JDK-8310502	8310502: Optimization for j.l.Long.fastUUID()
+39	05c2b6cd47c68d96dcb7b3db594a334e05c6ee36	2023-06-29	41c5e7a0e95323b8e64c6cd28d4bbd6f1dfd4dd9	JDK-8309979	8309979: BootstrapMethods attribute is missing in class files recreated by SA
+40	a995aa6cd1cd89c2ca6db72b060177eaf7065377	2023-06-29	0f4aa1753115b1c7368d327acdfe4f425fa95445	JDK-8310232	8310232: java.time.Clock$TickClock.millis() fails in runtime when tick is 1 microsecond
+41	11fd34e196b29d2f2fd276c36f59a3c3b3ce7280	2023-06-29	c13fab394e6c1a55050cfc602237d4280b37326f	JDK-8310241	8310241: OffsetDateTime compareTo redundant computation
+42	660cd256b72154b966208174dbf9abe95c9bfd60	2023-06-30	7cc9932f8abed5ca320509424a115d66f7512eda	JDK-8310988	8310988: Missing @since tags in java.management.rmi
+43	c08c9831df2428e9d083a56eda5ebf00623ba961	2023-06-30	b9ba381638c20b5b24cc8ba5c09cac4217a1753c	JDK-8311000	8311000: missing @since info in jdk.management
+44	e3a7e020d2d92e4eafe79b3ecebf31ec058bc48f	2023-06-30	61b35801757882e20883525d1ad3699376fbf075	JDK-8311162	8311162: Simplify and modernize equals and hashCode for java.net
+45	e8ff74c7e84ec2440a51fee1b4c45e87332807a0	2023-06-30	495f2e89d70b25f4c1bca85d0c6c2c7398834102	JDK-8310987	8310987: Missing @since tag(s) in java/util/logging/ErrorManager.java
+46	19601ebe9192773a1a47ec3e003b9f1a6808d3de	2023-06-30	7acfa6b1bdf4484454731dbb2775d8dad48f6158	JDK-8310993	8310993: Missing @since tags in jdk.attach
+47	7655b487da5cd2e570e19e9f64fbacfa5eb8d155	2023-07-04	0e8a375ed54859e4e3f40a60618f236b4504d3da	JDK-8311001	8311001: missing @since info in jdk.net
+48	607ddaa0e6a8d609aa7e4667abf40ac4c4692961	2023-07-04	e2c1f1accbb34465fc0749e02106f68dfa0759fc	JDK-8310997	8310997: missing @since tags in jdk.httpserver
+49	2cffef21201c3e8be87c92234712839bff531047	2023-07-05	fcb5f3fd6d2780143c63705d16054fee634c6903	JDK-8311290	8311290: Improve java.lang.ref.Cleaner rendered documentation
+50	6eba096ca2e6bf3b7244c632e37b32f2e47b4acc	2023-07-05	744b93533bc38622f53a7397c5d84e319533325b	JDK-8310999	8310999: Add @since info in jdk.jsobject files

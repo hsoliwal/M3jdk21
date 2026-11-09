@@ -1,0 +1,25 @@
+# SPDX-License-Identifier: Apache-2.0
+# Fold-audit (0e, S:/m3-scratch/eb-conv/foldaudit/LEAVES.tsv) lane 4d, correctness priority: decisions taken 2026-11-07.
+leaf	owner_file	origin	verdict	evidence
+L0062	src/java.base/share/classes/java/util/regex/M3PatternQuery.java	#1985 head e3148c01ec7b (retained-variants/pr1985)	RESTORED (tail hunk only)	master already exceeds the retained copy (minimumLength rejection, dead-frontier exits, word-local predicate masks); the one missing hunk, tail-run routing in matchesMixed, is restored; GATES.tsv
+L0046	src/java.base/share/classes/jdk/internal/math/M3FastDoubleMath.java	#2182 head b97ce66fb04c (ancestor of master)	PRESENT_EVOLVED	tryDecToDoubleWithFastAlgorithm is on master; the lost Clinger condition is isClingerFastPath/clingerFastPath (fb02ebb8375c JIT_ATOMIZE v1, 1b778c489faa HEX_RECONCILE v1)
+L0058	src/java.base/share/classes/jdk/internal/math/M3FastFloatMath.java	#2182 head b97ce66fb04c	PRESENT_EVOLVED	tryDecToFloatWithFastAlgorithm with isClingerFastPath (same commits)
+L0047	src/java.base/share/classes/jdk/internal/math/M3FftMultiplier.java	#2182 head b97ce66fb04c	PRESENT_EVOLVED	bitsPerFftPoint on master with POINT_BITS_* named constants (bf16b7866375 LITERAL_CONSTANTS v1); square fix 43396c7c548e
+L0059	src/java.base/share/classes/jdk/internal/math/M3AbstractNumberParser.java	#2182 head b97ce66fb04c	PRESENT_EVOLVED	digit loop uses DIGIT_ZERO..DIGIT_NINE (bf16b7866375)
+L0033	src/java.base/share/classes/jdk/internal/m3/M3IndexMaskWindow.java	fold-audit origin	RESTORED_SINCE	0 origin lines missing on master after #2683 (merge-loss leaf 70)
+L0049	src/java.base/share/native/libjava/M3IndexMaskWindow.c	fold-audit origin	RESTORED_SINCE	0 origin lines missing on master after #2683
+L0027	src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java	#653.. heads ed79b07acdb8..	SUPERSEDED	the 5 lines left belong to the stored-units ExactBlock design that invariant-6 repair cab2f8c0efc8 (A7) replaced by coordinate-keyed masks
+L0060	src/java.base/share/classes/java/lang/M3StringTuple.java	#153 head b11611609d37	SUPERSEDED	recursive getChars replaced by the pool cursor M3StringPool.copyCharsFromPath (52d147a42877)
+L0037	src/java.base/share/classes/java/lang/String.java	fold-audit origin	SUPERSEDED	origin is the MIndexString-field String (private volatile MIndexString mindex); master is the M3String design (26320a320fee consolidation)
+L0001	src/java.base/share/classes/java/lang/MIndexString.java	fold-audit origin	SUPERSEDED	whole-file MIndexString owner never on mainline; java.lang.M3String is the M3JDK design (redesign recorded in m3/docs/m3string-synexia-lineage.md)
+L0004	src/java.base/share/classes/java/lang/MIndexStringPool.java	fold-audit origin	SUPERSEDED	MIndexString-era pool; M3StringPool is the owner
+L0013	src/java.base/share/classes/java/lang/M3StringMixedCompare.java	fold-audit origin	OWNER_REVIEW	never on mainline; mixed flat/M3 compare is part of the String fast-path redesign; needs an M3JDK build (java.lang cannot run patched on a stock VM)
+L0026	src/java.base/share/classes/java/lang/M3CodeTextNativeBridge.java	fold-audit origin	OWNER_REVIEW	never on mainline; native code-text bridge in java.lang; same limit as L0013
+L0031	src/java.base/share/classes/java/lang/M3CodeTextNativeContract.java	fold-audit origin	OWNER_REVIEW	never on mainline; contract of L0026
+L0036	m3/tooling/migration-recipes/.../backport/M3BackportRecipeDagExportRecipe.java	ec49c0b3f30a	SUPERSEDED	never on mainline; DAG export/loading/projection now owned by m3/tooling/backport-dag (M3BackportDagLoader, M3DagProjector, M3RecipeDag)
+L0008	m3/tooling/migration-recipes/.../a3/M3A3CompleteDenominatorRecipe.java	b8ba19d9dcf2	SUPERSEDED	never on mainline; A3 completeness is m3/tooling/a3 A3Complete (+A3CompleteTest)
+L0038	m3/tooling/migration-recipes/.../backport/M3ReleaseJepDenominatorRecipe.java	eeca2d2cb00f	OWNER_REVIEW	never on mainline; migration-recipes needs org.openrewrite *-m3-source-1 and com.synexia:m3-openrewrite-recipes, not resolvable here
+L0054	m3/collections/counts/.../tooling/M3CountedCatalogue.java	6b16a20dcedf	HANDOFF_0E	never on mainline; collections counts tooling is the collections lane
+L0065	m3/tooling/migration-recipes/.../backport/M3Jdk21HashPinnedSnapshotRecipe.java	c7a47ead1ea4	OWNER_REVIEW	12 lines: m3-/synexia- crate admission + m3/** target roots + SourceFile-type-preserving restore order; widens recipe admission, migration-recipes not buildable here
+L0061	m3/tooling/a3/src/main/java/jdk/m3/a3/A3.java	b8ba19d9dcf2	OWNER_REVIEW	17 CLI lines (upstream inventory, sources options) after the rename; a3 CLI design moved on
+L0020	m3/tooling/a3/src/main/java/jdk/m3/a3/A3Plan.java	b8ba19d9dcf2	OWNER_REVIEW	136 lines (JEP header plan) after the rename

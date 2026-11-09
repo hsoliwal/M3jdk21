@@ -1,0 +1,64 @@
+name: M3JDK21 single-source layered shadow I/O
+on:
+  pull_request:
+    paths:
+      - 'm3/file/**'
+      - 'm3/arrays/**'
+      - 'm3/collections/**'
+      - '.github/workflows/m3-native-shadow-stream-progress-20261020.yml'
+  push:
+    paths:
+      - 'm3/file/**'
+      - 'm3/arrays/**'
+      - 'm3/collections/**'
+      - '.github/workflows/m3-native-shadow-stream-progress-20261020.yml'
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  original-m3file-io-contract:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify source-bound file workflow wiring
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash -n m3/file/compile-dependencies.sh
+          python3 -m py_compile m3/file/verify.py m3/file/test_workflow_wiring.py
+          python3 -m unittest discover -s m3/file -p test_workflow_wiring.py -v
+      - name: Compile original M3File module and run exact normal/interpreted shadow contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-native-shadow"
+          deps="$RUNNER_TEMP/m3-native-shadow-dependencies"
+          bash m3/file/compile-dependencies.sh "$JAVA_HOME" "$deps"
+          mkdir -p "$out/classes" "$out/jmods"
+          find m3/file/src/main/java -type f -name '*.java' -print0 \
+            | LC_ALL=C sort -z > "$out/file.sources"
+          mapfile -d '' -t sources < "$out/file.sources"
+          javac --release 21 -proc:none -Xlint:all,-module -Werror \
+            --module-path "$deps" -d "$out/classes" "${sources[@]}" \
+            m3/file/src/test/java/jdk/m3/file/M3ShadowStreamsContract.java
+          java --module-path "$out/classes:$deps" \
+            -m org.m3jdk.file/jdk.m3.file.M3ShadowStreamsContract
+          java -Xint --module-path "$out/classes:$deps" \
+            -m org.m3jdk.file/jdk.m3.file.M3ShadowStreamsContract
+          jmod create --class-path "$out/classes" "$out/jmods/org.m3jdk.file.jmod"
+          jlink --module-path "$JAVA_HOME/jmods:$deps:$out/jmods" \
+            --add-modules org.m3jdk.file --output "$out/image"
+          "$out/image/bin/java" \
+            -m org.m3jdk.file/jdk.m3.file.M3ShadowStreamsContract
+          "$out/image/bin/java" -Xint \
+            -m org.m3jdk.file/jdk.m3.file.M3ShadowStreamsContract

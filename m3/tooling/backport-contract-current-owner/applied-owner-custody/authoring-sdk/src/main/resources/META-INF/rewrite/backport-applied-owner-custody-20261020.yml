@@ -1,0 +1,16 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: jdk.internal.m3.BackportAppliedOwnerCustody
+displayName: Prepare applied-owner source custody
+description: Exact proof-host/runtime input refinement; actual applied-head qualification remains separate.
+recipeList:
+  - jdk.internal.m3.rewrite.M3BackportAppliedOwnerCustodyRecipe
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: jdk.internal.m3.BackportAppliedOwnerCustodyInverse
+displayName: Recover exact prior proof-host inputs
+description: Exact proof-input rollback data only; no product source is edited by the job.
+recipeList:
+  - jdk.internal.m3.rewrite.M3BackportAppliedOwnerCustodyInverseRecipe

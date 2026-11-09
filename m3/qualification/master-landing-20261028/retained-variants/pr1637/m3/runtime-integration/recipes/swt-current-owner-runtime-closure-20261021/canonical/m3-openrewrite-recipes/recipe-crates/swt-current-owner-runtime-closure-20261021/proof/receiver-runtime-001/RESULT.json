@@ -1,0 +1,60 @@
+{
+  "schema": "SWT_CURRENT_OWNER_EMITTED_POM_RECEIVER/1",
+  "status": "PASS",
+  "error": null,
+  "receiver_repository": "hsoliwal/eclipse.platform.swt",
+  "receiver_base_revision": "c0ffa6d76338ed1b06cfe0158b0e04d8930df546",
+  "receiver_root": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source",
+  "canonical_sdk_receipt_sha256": "d35f94052eb5c38a88997ec4157a4a6a0ede7fe16a5b95a6ef70b2c0bd3a917f",
+  "canonical_recipe_proof_sha256": "d52b41311724936f0f8eee9eae0a42cc7fcc974436e95296930fae5ce374e3d8",
+  "source_seals_sha256": "49261c5ff0b2de1636d26fb01c6d64f3dc3dc9a3a31583aea776169e6bb66d4e",
+  "emitted_pom_sha256": "4b864a178251e0f853cc8d2fe8027962bf831f950d9b83a9d095496ae60be158",
+  "actual_receiver_pom_sha256": "4b864a178251e0f853cc8d2fe8027962bf831f950d9b83a9d095496ae60be158",
+  "sdk_emitted_pom_consumed": true,
+  "actual_geometry_sha256": "df4f8498b1f633f2ffeae310f761ecaa0ea686e392557b8cfe2c684864a7f9b4",
+  "production_geometry_changes": 0,
+  "original_test_sources_changed": 0,
+  "sdk_tests": {
+    "tests": 7,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "steps": [
+    {
+      "name": "sdk",
+      "argv": [
+        "/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn",
+        "-B",
+        "-ntp",
+        "-o",
+        "-Dmaven.repo.local=/tmp/m3-build-m2",
+        "-f",
+        "/tmp/m3-swt-current-owner-receiver-001/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml",
+        "clean",
+        "test"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 8.325,
+      "log_sha256": "19fc788a365b6abd98459c53a9e230254bb292a63012bff937fe4a84c25b9600"
+    },
+    {
+      "name": "receiver",
+      "argv": [
+        "python3",
+        "/tmp/m3-swt-current-owner-receiver-001/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/verify.py",
+        "--receiver",
+        "/tmp/m3-swt-current-owner-receiver-001"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 8.222,
+      "log_sha256": "08e66ae27bafdcd8fab887c6f2e6e1fd4c81a6f26445b77e79b03dd36246cc66"
+    }
+  ],
+  "inputs_sha256": "54bd0d53b55e819e82014c8d6cd1a50eac671f0d87fb67850fe81d01535243ae",
+  "commands_sha256": "de942b73b77343f524fa8ad6dceeb9c0e2279134812cee3c64dbdd41fc08b910",
+  "input_files": 27,
+  "all_input_readbacks_unchanged": true,
+  "duration_seconds": 16.552,
+  "scope": "Actual emitted proof-POM and exact current SWT owner; Java21 arithmetic/ABI only; native/platform/Tycho/fullM3/performance NOT_RUN"
+}

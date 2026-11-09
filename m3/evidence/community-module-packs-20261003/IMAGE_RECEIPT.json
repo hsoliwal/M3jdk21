@@ -1,0 +1,13 @@
+{
+  "javafx": null,
+  "jdk_release_sha256": "aafe9b90f727821be100832681e0f96259d2ebd9ce84eb3b7ea826a71cd09356",
+  "m3jdk21_product_acceptance": false,
+  "maven_junit_jacoco": "NOT_EXECUTED_BY_THIS_SCRIPT",
+  "roots": [
+    "com.m3tooling.modulepack",
+    "com.m3pack.diagnostics",
+    "jdk.jcmd",
+    "jdk.jdeps"
+  ],
+  "status": "LOCAL_IMAGE_PROVEN"
+}

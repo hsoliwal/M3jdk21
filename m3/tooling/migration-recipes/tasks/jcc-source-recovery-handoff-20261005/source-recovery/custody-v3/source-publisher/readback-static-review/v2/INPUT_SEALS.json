@@ -1,0 +1,31 @@
+{
+  "schema": "publication-readback-static-inputs/v1",
+  "version": "v2",
+  "files": [
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/verify_publication.py",
+      "bytes": 9623,
+      "sha256": "fa327277439825eb5870f67063833dec3495448d03a70f2d9222acc48e4f9226"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/audit_base.py",
+      "bytes": 8839,
+      "sha256": "839c35c611de2dc02f2a3f1233131b24c79d77e109aaf010df9689dc8e04893b"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/prepare_publication.py",
+      "bytes": 15683,
+      "sha256": "9c35afe184b437b5668019f2c8702875d4fed6c3ef2b8232ec845bacc2be2bb2"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/BASE_TREE_MODEL.json",
+      "bytes": 1372743,
+      "sha256": "5a6c06886a4241745d38b6b463a88ace34236a1b0c557ffae596b05d048e1b82"
+    }
+  ],
+  "ast_parse_only": true,
+  "project_or_verifier_executions": 0,
+  "remote_actions": 0,
+  "base_model_trees_independently_rehashed": 381,
+  "all_inputs_reread_unchanged": true
+}

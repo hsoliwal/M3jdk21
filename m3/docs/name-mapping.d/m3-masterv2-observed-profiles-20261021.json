@@ -1,0 +1,31 @@
+{
+  "schema": "M3JDK21_MASTER_V2_PROFILED_OBSERVED_RECEIVER_V1",
+  "product": "M3JDK21 integrated Java21/HotSpot/JNI SDK",
+  "master_preimage": {
+    "M3BuildStateStore.java": "7c7afecea0b558aa700e0494795bc0137031c5e6",
+    "M3BuildStateTest.java": "a50ccdf2feeb0f3053020aba9b569fc43153a362"
+  },
+  "canonical_recipe": "com.synexia.m3.ObservedProfilesMasterV220261021",
+  "recipe_pr": 12807,
+  "original_successful_head": "/m3-build/state",
+  "original_unprofiled_observed": "/m3-build/observed-<successful>",
+  "new_profiled_observed": "/m3-build/observed-<successful>-<sha256(M3BuildState.contextSha256)>",
+  "new_api": "readObserved, observe, promoteObserved byte[] profileSha256 overloads",
+  "source_ownership": [
+    "com.m3.fs.M3FS",
+    "com.m3.fs.M3BuildState",
+    "com.m3.fs.M3BuildStateStore"
+  ],
+  "original_native_jni_unchanged": true,
+  "master_V2_completion_protocol_preserved": true,
+  "legacy_java_abi_unchanged": true,
+  "stacked_v1_successor": 1755,
+  "proof": {
+    "source_preimage": "PASS",
+    "source_postimage": "PASS",
+    "native_sqlite_junit": "NOT_RUN",
+    "canonical_openrewrite_sdk": "NOT_RUN",
+    "jdk21_hotspot": "NOT_RUN",
+    "benchmarks": "NOT_RUN"
+  }
+}

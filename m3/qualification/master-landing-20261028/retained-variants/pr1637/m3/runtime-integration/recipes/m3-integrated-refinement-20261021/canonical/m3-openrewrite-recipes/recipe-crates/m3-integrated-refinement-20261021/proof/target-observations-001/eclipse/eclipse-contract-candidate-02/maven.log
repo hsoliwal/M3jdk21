@@ -1,0 +1,46 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------< com.m3.qualification:eclipse-jobs-donor-1576 >------------
+[INFO] Building eclipse-jobs-donor-1576 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ eclipse-jobs-donor-1576 ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/jobs-work/eclipse-contract-candidate-02/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ eclipse-jobs-donor-1576 ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 8 source files with javac [debug release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ eclipse-jobs-donor-1576 ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/jobs-work/eclipse-contract-candidate-02/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ eclipse-jobs-donor-1576 ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 4 source files with javac [debug release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ eclipse-jobs-donor-1576 ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.m3.eclipse.runtime.M3EclipseJobSchedulerTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.122 s -- in com.m3.eclipse.runtime.M3EclipseJobSchedulerTest
+[INFO] Running com.m3.eclipse.runtime.M3EclipseJobsCompatibilityTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s -- in com.m3.eclipse.runtime.M3EclipseJobsCompatibilityTest
+[INFO] Running com.m3.eclipse.runtime.M3EclipseJobsTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.023 s -- in com.m3.eclipse.runtime.M3EclipseJobsTest
+[INFO] Running com.m3.eclipse.runtime.M3EclipseProgressMonitorTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 s -- in com.m3.eclipse.runtime.M3EclipseProgressMonitorTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 21, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.122 s
+[INFO] Finished at: 2026-10-21T02:08:42+01:00
+[INFO] ------------------------------------------------------------------------

@@ -1,0 +1,51 @@
+TYPE	jdk.m3.importer.M3CanonicalFamilyPolicy	jdk.m3.importer.CanonicalFamilyPolicy
+TYPE	jdk.m3.importer.M3CanonicalFamilyPolicyTest	jdk.m3.importer.CanonicalFamilyPolicyTest
+TYPE	jdk.m3.importer.M3CanonicalRecipeHandoff	jdk.m3.importer.CanonicalRecipeHandoff
+TYPE	jdk.m3.importer.M3CanonicalRecipeHandoffTest	jdk.m3.importer.CanonicalRecipeHandoffTest
+TYPE	jdk.m3.importer.M3GitCheckout	jdk.m3.importer.GitCheckout
+TYPE	jdk.m3.importer.M3ImportCli	jdk.m3.importer.ImportCli
+TYPE	jdk.m3.importer.M3ImportCoverageTest	jdk.m3.importer.ImportCoverageTest
+TYPE	jdk.m3.importer.M3ImportManifest	jdk.m3.importer.ImportManifest
+TYPE	jdk.m3.importer.M3ImportPlan	jdk.m3.importer.ImportPlan
+TYPE	jdk.m3.importer.M3ImportPlanCli	jdk.m3.importer.ImportPlanCli
+TYPE	jdk.m3.importer.M3ImportPlanTest	jdk.m3.importer.ImportPlanTest
+TYPE	jdk.m3.importer.M3Importer	jdk.m3.importer.Importer
+TYPE	jdk.m3.importer.M3ImporterTest	jdk.m3.importer.ImporterTest
+TYPE	jdk.m3.importer.M3RecipeOwnershipPolicy	jdk.m3.importer.RecipeOwnershipPolicy
+TYPE	jdk.m3.importer.M3RecipeOwnershipPolicyTest	jdk.m3.importer.RecipeOwnershipPolicyTest
+TYPE	jdk.m3.importer.M3SeedSnapshotTest	jdk.m3.importer.SeedSnapshotTest
+EDIT	.github/workflows/m3-full-delivery-a3.yml
+EDIT	.m3/atomize-patternize/public-verify.sh
+EDIT	m3/m3-import/src/main/java/jdk/m3/importer/M3CanonicalFamilyPolicy.java
+EDIT	m3/m3-import/src/main/java/jdk/m3/importer/M3CanonicalRecipeHandoff.java
+EDIT	m3/m3-import/src/main/java/jdk/m3/importer/M3GitCheckout.java
+EDIT	m3/m3-import/src/main/java/jdk/m3/importer/M3ImportCli.java
+EDIT	m3/m3-import/src/main/java/jdk/m3/importer/M3Importer.java
+EDIT	m3/m3-import/src/main/java/jdk/m3/importer/M3ImportManifest.java
+EDIT	m3/m3-import/src/main/java/jdk/m3/importer/M3ImportPlan.java
+EDIT	m3/m3-import/src/main/java/jdk/m3/importer/M3ImportPlanCli.java
+EDIT	m3/m3-import/src/main/java/jdk/m3/importer/M3RecipeOwnershipPolicy.java
+EDIT	m3/m3-import/src/test/java/jdk/m3/importer/M3CanonicalFamilyPolicyTest.java
+EDIT	m3/m3-import/src/test/java/jdk/m3/importer/M3CanonicalRecipeHandoffTest.java
+EDIT	m3/m3-import/src/test/java/jdk/m3/importer/M3ImportCoverageTest.java
+EDIT	m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java
+EDIT	m3/m3-import/src/test/java/jdk/m3/importer/M3ImportPlanTest.java
+EDIT	m3/m3-import/src/test/java/jdk/m3/importer/M3RecipeOwnershipPolicyTest.java
+EDIT	m3/m3-import/src/test/java/jdk/m3/importer/M3SeedSnapshotTest.java
+EDIT	m3/m3-import/src/test/java/jdk/m3/importer/PublicAtomPatternReceiverTest.java
+MOVE	m3/m3-import/src/main/java/jdk/m3/importer/M3CanonicalFamilyPolicy.java	m3/m3-import/src/main/java/jdk/m3/importer/CanonicalFamilyPolicy.java
+MOVE	m3/m3-import/src/main/java/jdk/m3/importer/M3CanonicalRecipeHandoff.java	m3/m3-import/src/main/java/jdk/m3/importer/CanonicalRecipeHandoff.java
+MOVE	m3/m3-import/src/main/java/jdk/m3/importer/M3GitCheckout.java	m3/m3-import/src/main/java/jdk/m3/importer/GitCheckout.java
+MOVE	m3/m3-import/src/main/java/jdk/m3/importer/M3ImportCli.java	m3/m3-import/src/main/java/jdk/m3/importer/ImportCli.java
+MOVE	m3/m3-import/src/main/java/jdk/m3/importer/M3Importer.java	m3/m3-import/src/main/java/jdk/m3/importer/Importer.java
+MOVE	m3/m3-import/src/main/java/jdk/m3/importer/M3ImportManifest.java	m3/m3-import/src/main/java/jdk/m3/importer/ImportManifest.java
+MOVE	m3/m3-import/src/main/java/jdk/m3/importer/M3ImportPlan.java	m3/m3-import/src/main/java/jdk/m3/importer/ImportPlan.java
+MOVE	m3/m3-import/src/main/java/jdk/m3/importer/M3ImportPlanCli.java	m3/m3-import/src/main/java/jdk/m3/importer/ImportPlanCli.java
+MOVE	m3/m3-import/src/main/java/jdk/m3/importer/M3RecipeOwnershipPolicy.java	m3/m3-import/src/main/java/jdk/m3/importer/RecipeOwnershipPolicy.java
+MOVE	m3/m3-import/src/test/java/jdk/m3/importer/M3CanonicalFamilyPolicyTest.java	m3/m3-import/src/test/java/jdk/m3/importer/CanonicalFamilyPolicyTest.java
+MOVE	m3/m3-import/src/test/java/jdk/m3/importer/M3CanonicalRecipeHandoffTest.java	m3/m3-import/src/test/java/jdk/m3/importer/CanonicalRecipeHandoffTest.java
+MOVE	m3/m3-import/src/test/java/jdk/m3/importer/M3ImportCoverageTest.java	m3/m3-import/src/test/java/jdk/m3/importer/ImportCoverageTest.java
+MOVE	m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java	m3/m3-import/src/test/java/jdk/m3/importer/ImporterTest.java
+MOVE	m3/m3-import/src/test/java/jdk/m3/importer/M3ImportPlanTest.java	m3/m3-import/src/test/java/jdk/m3/importer/ImportPlanTest.java
+MOVE	m3/m3-import/src/test/java/jdk/m3/importer/M3RecipeOwnershipPolicyTest.java	m3/m3-import/src/test/java/jdk/m3/importer/RecipeOwnershipPolicyTest.java
+MOVE	m3/m3-import/src/test/java/jdk/m3/importer/M3SeedSnapshotTest.java	m3/m3-import/src/test/java/jdk/m3/importer/SeedSnapshotTest.java

@@ -1,0 +1,630 @@
+[
+  {
+    "id": "m3.collections.SegmentedAddress28",
+    "kind": "adapter",
+    "status": "implemented-unverified",
+    "reason": "Complete bounded collection kernel in java.base; full-image and automatic JDK consumer admission remain open.",
+    "sources": [
+      {
+        "repo": "hsoliwal/com.synexia",
+        "commit": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
+        "module": "m3-common",
+        "path": "m3-common/src/main/java/jdk/internal/m3/common/collections/SegmentedAddress28.java",
+        "symbol": "jdk.internal.m3.common.collections.SegmentedAddress28",
+        "signatures": [
+          "jdk.internal.m3.common.collections.SegmentedAddress28"
+        ],
+        "sha256": "92d4ae1d60e6ce6aab79ef1b91e6de4c076e02bc0a0603a6b2fb22ca21c1d881",
+        "git_blob_sha1": "6b931aefdb4afaf8765a7228dcad5bc9e436c9f8",
+        "fingerprint": null,
+        "revision_role": "pinned"
+      }
+    ],
+    "targets": [
+      {
+        "repo": "hsoliwal/M3jdk21",
+        "commit": null,
+        "module": "java.base",
+        "path": "src/java.base/share/classes/jdk/internal/mindex/M3Address28.java",
+        "symbol": "jdk.internal.mindex.M3Address28",
+        "signatures": [
+          "jdk.internal.mindex.M3Address28"
+        ],
+        "sha256": "dd14fe5384ff92db5c0232ef1fbc68da731ee305dda5b7c22777a3fa4c5e90fa",
+        "git_blob_sha1": "14cdb999f5eab5be443044bff2d273fb4e4113fb",
+        "fingerprint": null,
+        "revision_role": "candidate"
+      }
+    ],
+    "owner": "jdk.internal.mindex.M3Address28",
+    "identity": {
+      "namespace": "Owner-local 28-bit logical slots; no pointer or global identity.",
+      "generation": "Mutable, single-threaded lane; lifecycle/concurrency belongs to its caller."
+    },
+    "contract": {
+      "differences": [
+        "JDK internal package and established M3 lane names.",
+        "Bit-lane JNI symbol and generated header target libjava rather than a host-loaded application library."
+      ],
+      "compatibility_obligations": [
+        "Preserve sparse zero reads and zero-write nonallocation, checked ranges and overlap-safe copies.",
+        "Preserve exact exclusive rank, zero-based select and post-preparation count maintenance.",
+        "No public java.util, String or Java SE behavior is replaced by this internal addition."
+      ],
+      "public_surface": [
+        "Unexported java.base internal package; no new Java SE API."
+      ]
+    },
+    "format": {
+      "schema": null,
+      "abi": "Private bit-lane JNI ([[[JII)I where applicable",
+      "bootstrap": "No Synexia or build-tool runtime dependencies; existing JDK native build discovers libjava source and generated header."
+    },
+    "dependencies": [
+      {
+        "id": "family.structural-owners",
+        "resolution": "pending",
+        "reason": "One bounded lane group; remaining collection and consumer closure is separate."
+      }
+    ],
+    "materialization": {
+      "admission": "Root directory allocation; nonzero writes allocate stable primitive pages.",
+      "joins": "Primitive lane copy uses existing arrays with overlap-safe semantics; no temporary flattened payload.",
+      "outputs": "Caller-array exports are explicit copies; internal rows have no entry wrapper.",
+      "cached_facts": "Bit rank/select lazily prepares exact region/page counts maintained by successful bit changes; metadata is not a second bitmap."
+    },
+    "recipe": {
+      "id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
+      "version": "1",
+      "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+      "sha256": "443353a0e986b0a284ad202fb85165994f31f9616993de7df9c0230f97b1c7fb",
+      "preconditions": [
+        "Explicit absent Java targets and exact source/template/dependency hashes.",
+        "Actual OpenRewrite Java/text execution, refusal/fixed-point and sealed custody gates."
+      ],
+      "rollback": "Existing sealed-install/1 restores exact preimages; foreign edits and mixed states refuse before writes."
+    },
+    "tests": [
+      {
+        "id": "lane28-port",
+        "receipt": "m3/tooling/lane28/evidence/receipt.json"
+      }
+    ],
+    "provenance": {
+      "license": "Apache-2.0; exact source, LICENSE and NOTICE retained under m3/tooling/lane28/donor. Existing JDK licenses retain their scope.",
+      "publication": "User requested incremental Synexia-to-JDK inlining and evidence-based upstream feedback.",
+      "copied_code": true
+    },
+    "sync": {
+      "source_revision": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
+      "target_revision": "b68391863561ce80169663cd2b49c2845e084b74",
+      "direction": "source-to-target",
+      "target_adaptations": [
+        "Internal package/name",
+        "JDK libjava ownership for bit count JNI"
+      ],
+      "pending": [
+        "Matched full-image JNI and compiled M3-enabled execution",
+        "Automatic use by appropriate JDK consumers",
+        "Cross-platform, memory and performance qualification",
+        "All remaining lean collection families"
+      ],
+      "conflicts": []
+    },
+    "lineage": {
+      "previous_sources": [],
+      "previous_targets": [],
+      "supersedes": []
+    },
+    "source_state": "implemented",
+    "observation": "The older jdk.m3.collections proof module is retained. New java.base owners are explicit internal capabilities, not a blanket java.util replacement."
+  },
+  {
+    "id": "m3.collections.SegmentedIntLane28",
+    "kind": "adapter",
+    "status": "implemented-unverified",
+    "reason": "Complete bounded collection kernel in java.base; full-image and automatic JDK consumer admission remain open.",
+    "sources": [
+      {
+        "repo": "hsoliwal/com.synexia",
+        "commit": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
+        "module": "m3-common",
+        "path": "m3-common/src/main/java/jdk/internal/m3/common/collections/SegmentedIntLane28.java",
+        "symbol": "jdk.internal.m3.common.collections.SegmentedIntLane28",
+        "signatures": [
+          "jdk.internal.m3.common.collections.SegmentedIntLane28"
+        ],
+        "sha256": "a9be9f532e5c3606fda0ff30599227301133ca70e9d1fcb1f1e2182ef72f5488",
+        "git_blob_sha1": "2a42412b95a5ee07c4e716fe37c530b254fedec1",
+        "fingerprint": null,
+        "revision_role": "pinned"
+      }
+    ],
+    "targets": [
+      {
+        "repo": "hsoliwal/M3jdk21",
+        "commit": null,
+        "module": "java.base",
+        "path": "src/java.base/share/classes/jdk/internal/mindex/M3IntLane28.java",
+        "symbol": "jdk.internal.mindex.M3IntLane28",
+        "signatures": [
+          "jdk.internal.mindex.M3IntLane28"
+        ],
+        "sha256": "b7860a525d753b02d146040271481044b8d6bc7bf4a9fbbeb0bcfc72d181ff19",
+        "git_blob_sha1": "bfcaf2bb3eca0f0f35f7decb0da8a61aa07e46c5",
+        "fingerprint": null,
+        "revision_role": "candidate"
+      }
+    ],
+    "owner": "jdk.internal.mindex.M3IntLane28",
+    "identity": {
+      "namespace": "Owner-local 28-bit logical slots; no pointer or global identity.",
+      "generation": "Mutable, single-threaded lane; lifecycle/concurrency belongs to its caller."
+    },
+    "contract": {
+      "differences": [
+        "JDK internal package and established M3 lane names.",
+        "Bit-lane JNI symbol and generated header target libjava rather than a host-loaded application library."
+      ],
+      "compatibility_obligations": [
+        "Preserve sparse zero reads and zero-write nonallocation, checked ranges and overlap-safe copies.",
+        "Preserve exact exclusive rank, zero-based select and post-preparation count maintenance.",
+        "No public java.util, String or Java SE behavior is replaced by this internal addition."
+      ],
+      "public_surface": [
+        "Unexported java.base internal package; no new Java SE API."
+      ]
+    },
+    "format": {
+      "schema": null,
+      "abi": "Private bit-lane JNI ([[[JII)I where applicable",
+      "bootstrap": "No Synexia or build-tool runtime dependencies; existing JDK native build discovers libjava source and generated header."
+    },
+    "dependencies": [
+      {
+        "id": "family.structural-owners",
+        "resolution": "pending",
+        "reason": "One bounded lane group; remaining collection and consumer closure is separate."
+      }
+    ],
+    "materialization": {
+      "admission": "Root directory allocation; nonzero writes allocate stable primitive pages.",
+      "joins": "Primitive lane copy uses existing arrays with overlap-safe semantics; no temporary flattened payload.",
+      "outputs": "Caller-array exports are explicit copies; internal rows have no entry wrapper.",
+      "cached_facts": "Bit rank/select lazily prepares exact region/page counts maintained by successful bit changes; metadata is not a second bitmap."
+    },
+    "recipe": {
+      "id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
+      "version": "1",
+      "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+      "sha256": "443353a0e986b0a284ad202fb85165994f31f9616993de7df9c0230f97b1c7fb",
+      "preconditions": [
+        "Explicit absent Java targets and exact source/template/dependency hashes.",
+        "Actual OpenRewrite Java/text execution, refusal/fixed-point and sealed custody gates."
+      ],
+      "rollback": "Existing sealed-install/1 restores exact preimages; foreign edits and mixed states refuse before writes."
+    },
+    "tests": [
+      {
+        "id": "lane28-port",
+        "receipt": "m3/tooling/lane28/evidence/receipt.json"
+      }
+    ],
+    "provenance": {
+      "license": "Apache-2.0; exact source, LICENSE and NOTICE retained under m3/tooling/lane28/donor. Existing JDK licenses retain their scope.",
+      "publication": "User requested incremental Synexia-to-JDK inlining and evidence-based upstream feedback.",
+      "copied_code": true
+    },
+    "sync": {
+      "source_revision": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
+      "target_revision": "b68391863561ce80169663cd2b49c2845e084b74",
+      "direction": "source-to-target",
+      "target_adaptations": [
+        "Internal package/name",
+        "JDK libjava ownership for bit count JNI"
+      ],
+      "pending": [
+        "Matched full-image JNI and compiled M3-enabled execution",
+        "Automatic use by appropriate JDK consumers",
+        "Cross-platform, memory and performance qualification",
+        "All remaining lean collection families"
+      ],
+      "conflicts": []
+    },
+    "lineage": {
+      "previous_sources": [],
+      "previous_targets": [],
+      "supersedes": []
+    },
+    "source_state": "implemented",
+    "observation": "The older jdk.m3.collections proof module is retained. New java.base owners are explicit internal capabilities, not a blanket java.util replacement."
+  },
+  {
+    "id": "m3.collections.SegmentedLongLane28",
+    "kind": "adapter",
+    "status": "implemented-unverified",
+    "reason": "Complete bounded collection kernel in java.base; full-image and automatic JDK consumer admission remain open.",
+    "sources": [
+      {
+        "repo": "hsoliwal/com.synexia",
+        "commit": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
+        "module": "m3-common",
+        "path": "m3-common/src/main/java/jdk/internal/m3/common/collections/SegmentedLongLane28.java",
+        "symbol": "jdk.internal.m3.common.collections.SegmentedLongLane28",
+        "signatures": [
+          "jdk.internal.m3.common.collections.SegmentedLongLane28"
+        ],
+        "sha256": "7fdce7c2cfe529251c69cdf186d4cabc8333c46692df78cbabdae56aa2a023e2",
+        "git_blob_sha1": "f7b3a7f0f4f4b896ad8325a96e90331881e69259",
+        "fingerprint": null,
+        "revision_role": "pinned"
+      }
+    ],
+    "targets": [
+      {
+        "repo": "hsoliwal/M3jdk21",
+        "commit": null,
+        "module": "java.base",
+        "path": "src/java.base/share/classes/jdk/internal/mindex/M3LongLane28.java",
+        "symbol": "jdk.internal.mindex.M3LongLane28",
+        "signatures": [
+          "jdk.internal.mindex.M3LongLane28"
+        ],
+        "sha256": "8364c9faa878c4be96bf36fd2ea18171670f9c45904551f7d18dbccff3d1a094",
+        "git_blob_sha1": "739df2dc2b3c0a055323c73424c55a3fa12672aa",
+        "fingerprint": null,
+        "revision_role": "candidate"
+      }
+    ],
+    "owner": "jdk.internal.mindex.M3LongLane28",
+    "identity": {
+      "namespace": "Owner-local 28-bit logical slots; no pointer or global identity.",
+      "generation": "Mutable, single-threaded lane; lifecycle/concurrency belongs to its caller."
+    },
+    "contract": {
+      "differences": [
+        "JDK internal package and established M3 lane names.",
+        "Bit-lane JNI symbol and generated header target libjava rather than a host-loaded application library."
+      ],
+      "compatibility_obligations": [
+        "Preserve sparse zero reads and zero-write nonallocation, checked ranges and overlap-safe copies.",
+        "Preserve exact exclusive rank, zero-based select and post-preparation count maintenance.",
+        "No public java.util, String or Java SE behavior is replaced by this internal addition."
+      ],
+      "public_surface": [
+        "Unexported java.base internal package; no new Java SE API."
+      ]
+    },
+    "format": {
+      "schema": null,
+      "abi": "Private bit-lane JNI ([[[JII)I where applicable",
+      "bootstrap": "No Synexia or build-tool runtime dependencies; existing JDK native build discovers libjava source and generated header."
+    },
+    "dependencies": [
+      {
+        "id": "family.structural-owners",
+        "resolution": "pending",
+        "reason": "One bounded lane group; remaining collection and consumer closure is separate."
+      }
+    ],
+    "materialization": {
+      "admission": "Root directory allocation; nonzero writes allocate stable primitive pages.",
+      "joins": "Primitive lane copy uses existing arrays with overlap-safe semantics; no temporary flattened payload.",
+      "outputs": "Caller-array exports are explicit copies; internal rows have no entry wrapper.",
+      "cached_facts": "Bit rank/select lazily prepares exact region/page counts maintained by successful bit changes; metadata is not a second bitmap."
+    },
+    "recipe": {
+      "id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
+      "version": "1",
+      "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+      "sha256": "443353a0e986b0a284ad202fb85165994f31f9616993de7df9c0230f97b1c7fb",
+      "preconditions": [
+        "Explicit absent Java targets and exact source/template/dependency hashes.",
+        "Actual OpenRewrite Java/text execution, refusal/fixed-point and sealed custody gates."
+      ],
+      "rollback": "Existing sealed-install/1 restores exact preimages; foreign edits and mixed states refuse before writes."
+    },
+    "tests": [
+      {
+        "id": "lane28-port",
+        "receipt": "m3/tooling/lane28/evidence/receipt.json"
+      }
+    ],
+    "provenance": {
+      "license": "Apache-2.0; exact source, LICENSE and NOTICE retained under m3/tooling/lane28/donor. Existing JDK licenses retain their scope.",
+      "publication": "User requested incremental Synexia-to-JDK inlining and evidence-based upstream feedback.",
+      "copied_code": true
+    },
+    "sync": {
+      "source_revision": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
+      "target_revision": "b68391863561ce80169663cd2b49c2845e084b74",
+      "direction": "source-to-target",
+      "target_adaptations": [
+        "Internal package/name",
+        "JDK libjava ownership for bit count JNI"
+      ],
+      "pending": [
+        "Matched full-image JNI and compiled M3-enabled execution",
+        "Automatic use by appropriate JDK consumers",
+        "Cross-platform, memory and performance qualification",
+        "All remaining lean collection families"
+      ],
+      "conflicts": []
+    },
+    "lineage": {
+      "previous_sources": [],
+      "previous_targets": [],
+      "supersedes": []
+    },
+    "source_state": "implemented",
+    "observation": "The older jdk.m3.collections proof module is retained. New java.base owners are explicit internal capabilities, not a blanket java.util replacement."
+  },
+  {
+    "id": "m3.collections.SegmentedBitLane28",
+    "kind": "adapter",
+    "status": "implemented-unverified",
+    "reason": "Complete bounded collection kernel in java.base; full-image and automatic JDK consumer admission remain open.",
+    "sources": [
+      {
+        "repo": "hsoliwal/com.synexia",
+        "commit": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
+        "module": "m3-common",
+        "path": "m3-common/src/main/java/jdk/internal/m3/common/collections/SegmentedBitLane28.java",
+        "symbol": "jdk.internal.m3.common.collections.SegmentedBitLane28",
+        "signatures": [
+          "jdk.internal.m3.common.collections.SegmentedBitLane28"
+        ],
+        "sha256": "147021a606f135a4b6b0f347ce90354ee15aef12c229ec5c02a30935216a1e70",
+        "git_blob_sha1": "9bb7173afa861c05b62a557db63e3a6692ddfe4c",
+        "fingerprint": null,
+        "revision_role": "pinned"
+      },
+      {
+        "repo": "hsoliwal/com.synexia",
+        "commit": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
+        "module": "m3-common",
+        "path": "m3-common/src/main/native/collections/segmented_bit_lane.c",
+        "symbol": "Java_jdk_internal_m3_common_collections_SegmentedBitLane28_cardinality0",
+        "signatures": [
+          "Java_jdk_internal_m3_common_collections_SegmentedBitLane28_cardinality0"
+        ],
+        "sha256": "5a4ba31368df4b8c3f8e71275b4db583fcba0be37e5b39d07de8112db44319d5",
+        "git_blob_sha1": "20549bee772f30ffabdc406bb6ab52c7435d2b01",
+        "fingerprint": null,
+        "revision_role": "pinned"
+      }
+    ],
+    "targets": [
+      {
+        "repo": "hsoliwal/M3jdk21",
+        "commit": null,
+        "module": "java.base",
+        "path": "src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java",
+        "symbol": "jdk.internal.mindex.M3BitLane28",
+        "signatures": [
+          "jdk.internal.mindex.M3BitLane28"
+        ],
+        "sha256": "025556c17d0ce7879f63b75d04c30a3b16b6338ff73fa33f4ee49fdb1e196bb8",
+        "git_blob_sha1": "5942b1f46eedf83ad8c4ef8edee91f75e7424e7a",
+        "fingerprint": null,
+        "revision_role": "candidate"
+      },
+      {
+        "repo": "hsoliwal/M3jdk21",
+        "commit": null,
+        "module": "java.base",
+        "path": "src/java.base/share/native/libjava/M3BitLane28.c",
+        "symbol": "Java_jdk_internal_mindex_M3BitLane28_cardinality0",
+        "signatures": [
+          "Java_jdk_internal_mindex_M3BitLane28_cardinality0"
+        ],
+        "sha256": "7cce5d9e56e5308f130e4dfaa191c663c27afb3e35ed206347447cc925dec89f",
+        "git_blob_sha1": "e68e05555efbe2dbf1355e6820cc7795d9c33942",
+        "fingerprint": null,
+        "revision_role": "candidate"
+      }
+    ],
+    "owner": "jdk.internal.mindex.M3BitLane28",
+    "identity": {
+      "namespace": "Owner-local 28-bit logical slots; no pointer or global identity.",
+      "generation": "Mutable, single-threaded lane; lifecycle/concurrency belongs to its caller."
+    },
+    "contract": {
+      "differences": [
+        "JDK internal package and established M3 lane names.",
+        "Bit-lane JNI symbol and generated header target libjava rather than a host-loaded application library."
+      ],
+      "compatibility_obligations": [
+        "Preserve sparse zero reads and zero-write nonallocation, checked ranges and overlap-safe copies.",
+        "Preserve exact exclusive rank, zero-based select and post-preparation count maintenance.",
+        "No public java.util, String or Java SE behavior is replaced by this internal addition."
+      ],
+      "public_surface": [
+        "Unexported java.base internal package; no new Java SE API."
+      ]
+    },
+    "format": {
+      "schema": null,
+      "abi": "Private bit-lane JNI ([[[JII)I where applicable",
+      "bootstrap": "No Synexia or build-tool runtime dependencies; existing JDK native build discovers libjava source and generated header."
+    },
+    "dependencies": [
+      {
+        "id": "family.structural-owners",
+        "resolution": "pending",
+        "reason": "One bounded lane group; remaining collection and consumer closure is separate."
+      }
+    ],
+    "materialization": {
+      "admission": "Root directory allocation; nonzero writes allocate stable primitive pages.",
+      "joins": "Primitive lane copy uses existing arrays with overlap-safe semantics; no temporary flattened payload.",
+      "outputs": "Caller-array exports are explicit copies; internal rows have no entry wrapper.",
+      "cached_facts": "Bit rank/select lazily prepares exact region/page counts maintained by successful bit changes; metadata is not a second bitmap."
+    },
+    "recipe": {
+      "id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
+      "version": "1",
+      "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+      "sha256": "443353a0e986b0a284ad202fb85165994f31f9616993de7df9c0230f97b1c7fb",
+      "preconditions": [
+        "Explicit absent Java targets and exact source/template/dependency hashes.",
+        "Actual OpenRewrite Java/text execution, refusal/fixed-point and sealed custody gates."
+      ],
+      "rollback": "Existing sealed-install/1 restores exact preimages; foreign edits and mixed states refuse before writes."
+    },
+    "tests": [
+      {
+        "id": "lane28-port",
+        "receipt": "m3/tooling/lane28/evidence/receipt.json"
+      }
+    ],
+    "provenance": {
+      "license": "Apache-2.0; exact source, LICENSE and NOTICE retained under m3/tooling/lane28/donor. Existing JDK licenses retain their scope.",
+      "publication": "User requested incremental Synexia-to-JDK inlining and evidence-based upstream feedback.",
+      "copied_code": true
+    },
+    "sync": {
+      "source_revision": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
+      "target_revision": "b68391863561ce80169663cd2b49c2845e084b74",
+      "direction": "source-to-target",
+      "target_adaptations": [
+        "Internal package/name",
+        "JDK libjava ownership for bit count JNI"
+      ],
+      "pending": [
+        "Matched full-image JNI and compiled M3-enabled execution",
+        "Automatic use by appropriate JDK consumers",
+        "Cross-platform, memory and performance qualification",
+        "All remaining lean collection families"
+      ],
+      "conflicts": []
+    },
+    "lineage": {
+      "previous_sources": [],
+      "previous_targets": [],
+      "supersedes": []
+    },
+    "source_state": "implemented",
+    "observation": "The older jdk.m3.collections proof module is retained. New java.base owners are explicit internal capabilities, not a blanket java.util replacement."
+  },
+  {
+    "id": "m3.collections.PackedBitAtoms",
+    "kind": "adapter",
+    "status": "implemented-unverified",
+    "reason": "Complete bounded collection kernel in java.base; full-image and automatic JDK consumer admission remain open.",
+    "sources": [
+      {
+        "repo": "hsoliwal/com.synexia",
+        "commit": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
+        "module": "m3-common",
+        "path": "m3-common/src/main/java/jdk/internal/m3/common/collections/PackedBitAtoms.java",
+        "symbol": "jdk.internal.m3.common.collections.PackedBitAtoms",
+        "signatures": [
+          "jdk.internal.m3.common.collections.PackedBitAtoms"
+        ],
+        "sha256": "20bce3cf025430fea0351bdc4478b204d808cde04432437e689c2eddb55e0305",
+        "git_blob_sha1": "c463d9857d917263e88933a4d07902840c3f302e",
+        "fingerprint": null,
+        "revision_role": "pinned"
+      }
+    ],
+    "targets": [
+      {
+        "repo": "hsoliwal/M3jdk21",
+        "commit": null,
+        "module": "java.base",
+        "path": "src/java.base/share/classes/jdk/internal/mindex/M3Bits.java",
+        "symbol": "jdk.internal.mindex.M3Bits",
+        "signatures": [
+          "jdk.internal.mindex.M3Bits"
+        ],
+        "sha256": "c5d9d2797966a56b9c2ec97908f6b76a0ad370a72cb05edc2a55b62775ba22ab",
+        "git_blob_sha1": "2ad46058a5325483647af4af16858c329ae24665",
+        "fingerprint": null,
+        "revision_role": "candidate"
+      }
+    ],
+    "owner": "jdk.internal.mindex.M3Bits",
+    "identity": {
+      "namespace": "Owner-local 28-bit logical slots; no pointer or global identity.",
+      "generation": "Mutable, single-threaded lane; lifecycle/concurrency belongs to its caller."
+    },
+    "contract": {
+      "differences": [
+        "JDK internal package and established M3 lane names.",
+        "Bit-lane JNI symbol and generated header target libjava rather than a host-loaded application library."
+      ],
+      "compatibility_obligations": [
+        "Preserve sparse zero reads and zero-write nonallocation, checked ranges and overlap-safe copies.",
+        "Preserve exact exclusive rank, zero-based select and post-preparation count maintenance.",
+        "No public java.util, String or Java SE behavior is replaced by this internal addition."
+      ],
+      "public_surface": [
+        "Unexported java.base internal package; no new Java SE API."
+      ]
+    },
+    "format": {
+      "schema": null,
+      "abi": "Private bit-lane JNI ([[[JII)I where applicable",
+      "bootstrap": "No Synexia or build-tool runtime dependencies; existing JDK native build discovers libjava source and generated header."
+    },
+    "dependencies": [
+      {
+        "id": "family.structural-owners",
+        "resolution": "pending",
+        "reason": "One bounded lane group; remaining collection and consumer closure is separate."
+      }
+    ],
+    "materialization": {
+      "admission": "Root directory allocation; nonzero writes allocate stable primitive pages.",
+      "joins": "Primitive lane copy uses existing arrays with overlap-safe semantics; no temporary flattened payload.",
+      "outputs": "Caller-array exports are explicit copies; internal rows have no entry wrapper.",
+      "cached_facts": "Bit rank/select lazily prepares exact region/page counts maintained by successful bit changes; metadata is not a second bitmap."
+    },
+    "recipe": {
+      "id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
+      "version": "1",
+      "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+      "sha256": "443353a0e986b0a284ad202fb85165994f31f9616993de7df9c0230f97b1c7fb",
+      "preconditions": [
+        "Explicit absent Java targets and exact source/template/dependency hashes.",
+        "Actual OpenRewrite Java/text execution, refusal/fixed-point and sealed custody gates."
+      ],
+      "rollback": "Existing sealed-install/1 restores exact preimages; foreign edits and mixed states refuse before writes."
+    },
+    "tests": [
+      {
+        "id": "lane28-port",
+        "receipt": "m3/tooling/lane28/evidence/receipt.json"
+      }
+    ],
+    "provenance": {
+      "license": "Apache-2.0; exact source, LICENSE and NOTICE retained under m3/tooling/lane28/donor. Existing JDK licenses retain their scope.",
+      "publication": "User requested incremental Synexia-to-JDK inlining and evidence-based upstream feedback.",
+      "copied_code": true
+    },
+    "sync": {
+      "source_revision": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
+      "target_revision": "b68391863561ce80169663cd2b49c2845e084b74",
+      "direction": "source-to-target",
+      "target_adaptations": [
+        "Internal package/name",
+        "JDK libjava ownership for bit count JNI"
+      ],
+      "pending": [
+        "Matched full-image JNI and compiled M3-enabled execution",
+        "Automatic use by appropriate JDK consumers",
+        "Cross-platform, memory and performance qualification",
+        "All remaining lean collection families"
+      ],
+      "conflicts": []
+    },
+    "lineage": {
+      "previous_sources": [],
+      "previous_targets": [],
+      "supersedes": []
+    },
+    "source_state": "implemented",
+    "observation": "The older jdk.m3.collections proof module is retained. New java.base owners are explicit internal capabilities, not a blanket java.util replacement."
+  }
+]

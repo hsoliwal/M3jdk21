@@ -1,0 +1,7 @@
+LIB_INTAKE commons-text S0_VIEW PASS java=106 packages=8 resources=2 overlays=none upstream_descriptor=yes
+LIB_INTAKE commons-text S1_RELOCATE PASS map=org.apache.commons.text=com.m3.lib.text packages_moved=8 old_dirs_left=0 text_completed_files=38 parse_fallback_files=1 resources_moved=0 meta_mapped=0
+LIB_INTAKE commons-text S1b_BCP PASS java_equal_after_name_map=106 resources_byte_equal=2 differing=0
+LIB_INTAKE commons-text S2_RESIDUE PASS residue=0 (every kind) slash_form_files=0
+m3/tooling/lib-intake/lib_intake.sh: line 177: H:/m3-scratch/lib-intake/batch/commons-text/atoms/SUMMARY.txt: No such file or directory
+LIB_INTAKE commons-text S3_ATOMIZE FAIL rc=1
+LIB_INTAKE_FAIL commons-text S3_ATOMIZE

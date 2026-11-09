@@ -1,0 +1,11 @@
+test_actual_packet_check_apply_idempotent_rollback_and_replay (__main__.JccHandoffPacketTests.test_actual_packet_check_apply_idempotent_rollback_and_replay) ... ok
+test_actual_required_preimage_missing_or_drifted_refuses_atomically (__main__.JccHandoffPacketTests.test_actual_required_preimage_missing_or_drifted_refuses_atomically) ... ok
+test_each_actual_absent_output_occupied_refuses_atomically (__main__.JccHandoffPacketTests.test_each_actual_absent_output_occupied_refuses_atomically) ... ok
+test_each_actual_guard_missing_or_drifted_refuses_atomically (__main__.JccHandoffPacketTests.test_each_actual_guard_missing_or_drifted_refuses_atomically) ... ok
+test_each_foreign_postimage_edit_refuses_rollback_and_replay_atomically (__main__.JccHandoffPacketTests.test_each_foreign_postimage_edit_refuses_rollback_and_replay_atomically) ... ok
+test_each_single_postimage_mixed_with_preimages_refuses_atomically (__main__.JccHandoffPacketTests.test_each_single_postimage_mixed_with_preimages_refuses_atomically) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.629s
+
+OK

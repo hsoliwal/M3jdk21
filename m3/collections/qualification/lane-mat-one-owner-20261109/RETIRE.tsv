@@ -1,0 +1,5 @@
+duplicate	survivor	evidence
+jdk.internal.m3.collections.mat.MatIntPostingIndex	jdk.m3.arrays.IntPostingIndex	javap -c -p equal modulo names (master 72e8fd758303 classes)
+jdk.internal.m3.collections.mat.MatCsrIndex	jdk.m3.arrays.CsrIndex	javap -c -p equal modulo names (master 72e8fd758303 classes)
+jdk.internal.m3.collections.mat.MatHybridIntSet	jdk.m3.arrays.HybridIntSet	javap -c -p equal modulo names (master 72e8fd758303 classes)
+jdk.internal.m3.collections.mat.MatIntRingBuffer	jdk.m3.arrays.IntRingBuffer	javap -c -p equal modulo names (master 72e8fd758303 classes)

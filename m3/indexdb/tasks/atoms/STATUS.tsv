@@ -1,0 +1,17 @@
+item	state	evidence
+private_extraction	VERIFIED_AT_565bc02	Four private operations; actual runtime and exact recipe replay
+retained_tests	PRESERVED	All 51 existing DB tests retained
+new_tests	PASS_AT_565bc02	All 10 new DbAtomTest cases executed successfully
+static_config_hashes	PASS	Original POMs and guards preserved; ordered manifests checked
+Java21_compile	PASS_AT_565bc02	Local strict probes and actual hosted Maven compilation
+public_protected_API	PASS	Eight before/after javap descriptors identical
+wire_differential	PASS	Three Unicode/path fixtures byte-identical before/after
+corruption_differential	PASS	Four retained count/UTF8 probes pass before and after
+private_fault_probes	PASS	Real size failure, cross-provider move, short read, edge guards
+missing_digest_probe	PASS	Isolated 32MB JVM; expected exceptions; parent providers unchanged
+DB_JUnit	PASS_AT_565bc02	Run37186615402/job111389766782;61 tests;0 failures/errors/skips
+DbAtom_OpenRewrite	PASS_AT_565bc02	privateAtomsRepairExactlyAndComposeWithFinalRecovery passed
+coverage_99	PASS_AT_565bc02	685/687 lines;240/241 branches;both unchanged0.99 checks met
+focused_recipe_suite	FAILED_AT_565bc02	9/10 pass;one scheduler-marker test expectation failure
+marker_correction	PENDING	Source d9d090a supplied;see migration-recipes/tasks/db-mark
+whole_JDK	NOT_VERIFIED	No native/JNI/jtreg or exhaustive backport claim

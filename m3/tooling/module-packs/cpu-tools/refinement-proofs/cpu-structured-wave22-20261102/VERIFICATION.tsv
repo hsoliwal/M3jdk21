@@ -1,0 +1,9 @@
+stage	status	proof
+INVENTORY	PASS	Existing Wave21 C Git blob equals Wave22 canonical original recipe preimage; three absent added paths
+DOC_FIRST	PASS	This README/receipt/category source written before C17 modification
+DONOR_SOURCE	PASS	Original SHA-256 and Git blob readback of C and all three oracles/catalogue
+SOURCE_RECEIVER	PASS	GitHub original postimage 4/4 blob IDs equal donor source; C private atom prefix/suffix unchanged
+LINT_COMPILE	NOT_RUN	C17 gcc -pedantic -Werror; Java21 -Xlint:all -Werror
+RUNTIME	NOT_RUN	C scalar and JNI JIT/-Xint real tests; fault/GC
+MAVEN_OPENREWRITE	HOLD	Original canonical SDK Recipe.run/refusal/fixed point
+JMOD_JTREG	HOLD	Original linked image/ABI/platform and packaging

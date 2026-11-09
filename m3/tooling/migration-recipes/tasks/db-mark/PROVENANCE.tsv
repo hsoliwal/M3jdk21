@@ -1,0 +1,7 @@
+source	identity	role
+DB_artifact	11296887801	61-test and99percent proof
+DB_artifact_sha256	020a44aec4d5fed09d46f581db2c5ada326d01a55cf822310ea255fbdbb06725	Downloaded and verified
+recipe_artifact	11296909606	Exact focused compile/test failure
+recipe_artifact_sha256	331c6347909ccb75f2be1ac2a67c03b665fa760bef0bb3e55f7900e449fc3e01	Downloaded and verified
+OpenRewrite	v8.17.1	Primary Markers/BuildMetadata/RecipesThatMadeChanges source read; no donor body copied
+license	Apache-2.0	Original M3 test and existing licensed dependencies

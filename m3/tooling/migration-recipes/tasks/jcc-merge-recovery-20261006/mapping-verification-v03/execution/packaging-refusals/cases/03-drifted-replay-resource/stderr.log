@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/package_mapping.py", line 278, in <module>
+    main()
+  File "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/package_mapping.py", line 119, in main
+    add_tree(RESOURCE, bundle / "resources")
+  File "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/package_mapping.py", line 102, in add_tree
+    add(prefix + "/" + relative, file)
+  File "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/package_mapping.py", line 92, in add
+    assert sha(body) == sealed[path]["sha256"] and len(body) == sealed[path]["bytes"]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

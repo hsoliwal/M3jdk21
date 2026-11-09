@@ -1,0 +1,29 @@
+m3_class	probe	backing	policy	result
+com.m3.collections.apache.M3SynchronizedCollection	M3SyncProbe	list	-	exit=0 INFO: M3_SYNC_PROBE class=com.m3.collections.apache.M3SynchronizedCollection methods=22 checks=27 mismatches=0
+com.m3.collections.apache.M3SynchronizedCollection	M3LockTraceProbe	list	-	exit=0 INFO: M3_LOCK_TRACE class=com.m3.collections.apache.M3SynchronizedCollection methods=22 checks=22 mismatches=0
+com.m3.collections.apache.M3SynchronizedBag	M3SyncProbe	hashbag	-	exit=0 INFO: M3_SYNC_PROBE class=com.m3.collections.apache.M3SynchronizedBag methods=26 checks=55 mismatches=0
+com.m3.collections.apache.M3SynchronizedBag	M3LockTraceProbe	hashbag	-	exit=0 INFO: M3_LOCK_TRACE class=com.m3.collections.apache.M3SynchronizedBag methods=26 checks=47 mismatches=0
+com.m3.collections.apache.M3SynchronizedMultiSet	M3SyncProbe	hashmultiset	-	exit=0 INFO: M3_SYNC_PROBE class=com.m3.collections.apache.M3SynchronizedMultiSet methods=28 checks=80 mismatches=0
+com.m3.collections.apache.M3SynchronizedMultiSet	M3LockTraceProbe	hashmultiset	-	exit=0 INFO: M3_LOCK_TRACE class=com.m3.collections.apache.M3SynchronizedMultiSet methods=28 checks=70 mismatches=0
+com.m3.collections.apache.M3SynchronizedQueue	M3SyncProbe	deque	-	exit=0 INFO: M3_SYNC_PROBE class=com.m3.collections.apache.M3SynchronizedQueue methods=27 checks=33 mismatches=0
+com.m3.collections.apache.M3SynchronizedQueue	M3LockTraceProbe	deque	-	exit=0 INFO: M3_LOCK_TRACE class=com.m3.collections.apache.M3SynchronizedQueue methods=27 checks=27 mismatches=0
+com.m3.collections.apache.M3SynchronizedSortedBag	M3SyncProbe	treebag	-	exit=0 INFO: M3_SYNC_PROBE class=com.m3.collections.apache.M3SynchronizedSortedBag methods=29 checks=58 mismatches=0
+com.m3.collections.apache.M3SynchronizedSortedBag	M3LockTraceProbe	treebag	-	exit=0 INFO: M3_LOCK_TRACE class=com.m3.collections.apache.M3SynchronizedSortedBag methods=29 checks=50 mismatches=0
+com.m3.collections.apache.M3PredicatedList	M3PredicatedProbe	list	both	exit=0 INFO: M3_PREDICATED_PROBE class=com.m3.collections.apache.M3PredicatedList backing=list policy=both checks=5682 mismatches=0
+com.m3.collections.apache.M3PredicatedList	M3PredicatedProbe	deque	rejectnull	exit=0 INFO: M3_PREDICATED_PROBE class=com.m3.collections.apache.M3PredicatedList backing=deque policy=rejectnull checks=5682 mismatches=0
+com.m3.collections.apache.M3PredicatedQueue	M3PredicatedProbe	deque	both	exit=0 INFO: M3_PREDICATED_PROBE class=com.m3.collections.apache.M3PredicatedQueue backing=deque policy=both checks=168 mismatches=0
+com.m3.collections.apache.M3PredicatedSet	M3PredicatedProbe	hashset	both	exit=0 INFO: M3_PREDICATED_PROBE class=com.m3.collections.apache.M3PredicatedSet backing=hashset policy=both checks=159 mismatches=0
+com.m3.collections.apache.M3PredicatedSet	M3PredicatedProbe	treeset	rejectnull	exit=0 INFO: M3_PREDICATED_PROBE class=com.m3.collections.apache.M3PredicatedSet backing=treeset policy=rejectnull checks=159 mismatches=0
+com.m3.collections.apache.M3PredicatedSortedSet	M3PredicatedProbe	treeset	both	exit=0 INFO: M3_PREDICATED_PROBE class=com.m3.collections.apache.M3PredicatedSortedSet backing=treeset policy=both checks=10917 mismatches=0
+com.m3.collections.apache.M3PredicatedNavigableSet	M3PredicatedProbe	treeset	both	exit=0 INFO: M3_PREDICATED_PROBE class=com.m3.collections.apache.M3PredicatedNavigableSet backing=treeset policy=both checks=36603 mismatches=0
+com.m3.collections.apache.M3PredicatedBag	M3PredicatedProbe	hashbag	both	exit=0 INFO: M3_PREDICATED_PROBE class=com.m3.collections.apache.M3PredicatedBag backing=hashbag policy=both checks=342 mismatches=0
+com.m3.collections.apache.M3PredicatedBag	M3PredicatedProbe	treebag	both	exit=0 INFO: M3_PREDICATED_PROBE class=com.m3.collections.apache.M3PredicatedBag backing=treebag policy=both checks=342 mismatches=0
+com.m3.collections.apache.M3PredicatedSortedBag	M3PredicatedProbe	treebag	both	exit=0 INFO: M3_PREDICATED_PROBE class=com.m3.collections.apache.M3PredicatedSortedBag backing=treebag policy=both checks=351 mismatches=0
+com.m3.collections.apache.M3PredicatedMultiSet	M3PredicatedProbe	hashmultiset	both	exit=0 INFO: M3_PREDICATED_PROBE class=com.m3.collections.apache.M3PredicatedMultiSet backing=hashmultiset policy=both checks=507 mismatches=0
+com.m3.collections.apache.M3PredicatedMap	M3PredicatedProbe	hashmap	both	exit=0 INFO: M3_PREDICATED_PROBE class=com.m3.collections.apache.M3PredicatedMap backing=hashmap policy=both checks=781 mismatches=0
+com.m3.collections.apache.M3PredicatedMap	M3PredicatedProbe	treemap	keynull	exit=0 INFO: M3_PREDICATED_PROBE class=com.m3.collections.apache.M3PredicatedMap backing=treemap policy=keynull checks=781 mismatches=0
+com.m3.collections.apache.M3PredicatedMap	M3PredicatedProbe	linkedmap	valuenull	exit=0 INFO: M3_PREDICATED_PROBE class=com.m3.collections.apache.M3PredicatedMap backing=linkedmap policy=valuenull checks=781 mismatches=0
+com.m3.collections.apache.M3PredicatedMap	M3PredicatedProbe	hashmap	rejectnull	exit=0 INFO: M3_PREDICATED_PROBE class=com.m3.collections.apache.M3PredicatedMap backing=hashmap policy=rejectnull checks=781 mismatches=0
+com.m3.collections.apache.M3PredicatedSortedMap	M3PredicatedProbe	treemap	both	exit=0 INFO: M3_PREDICATED_PROBE class=com.m3.collections.apache.M3PredicatedSortedMap backing=treemap policy=both checks=20281 mismatches=0
+com.m3.collections.apache.M3PredicatedSortedMap	M3PredicatedProbe	treemap	keynull	exit=0 INFO: M3_PREDICATED_PROBE class=com.m3.collections.apache.M3PredicatedSortedMap backing=treemap policy=keynull checks=20281 mismatches=0
+com.m3.collections.apache.M3PredicatedSortedMap	M3PredicatedProbe	treemap	valuenull	exit=0 INFO: M3_PREDICATED_PROBE class=com.m3.collections.apache.M3PredicatedSortedMap backing=treemap policy=valuenull checks=20281 mismatches=0

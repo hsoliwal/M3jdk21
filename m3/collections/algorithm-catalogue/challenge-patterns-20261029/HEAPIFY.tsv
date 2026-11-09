@@ -1,0 +1,5 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+id	technique	incumbent_m3_owner	decision	proof_gate	primary_problem
+LC215	bottom-up-heapify	com.m3.collections.M3IntPriorityQueue	ADDITIVE_CANDIDATE	JDK-PQ differential / input isolation / size and capacity / strict Java21	https://leetcode.com/problems/kth-largest-element-in-an-array/
+LC215	bottom-up-heapify	com.m3.collections.M3LongPriorityQueue	ADDITIVE_CANDIDATE	JDK-PQ differential / input isolation / signed extremes / strict Java21	https://leetcode.com/problems/kth-largest-element-in-an-array/

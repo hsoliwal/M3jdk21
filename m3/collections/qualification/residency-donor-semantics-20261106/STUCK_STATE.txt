@@ -1,0 +1,27 @@
+# SPDX-License-Identifier: Apache-2.0
+# Second master livelock, reachable without any re-entry: an Error thrown once by Codec.encode (or SpillStore.write) during an eviction leaves the victim SWAPPING with its resident value (master's evict() restores the state on IOException/RuntimeException only); the next over-budget admission selects that victim, evict() returns at its first line, and admit() spins under the arena monitor. Probe oracle/ErrorThenAdmitProbe.java (public API only; 2 slots, LAZY_CREATE|LRU|SWAP_SECONDARY, budget 8, use(0,8), encode throws AssertionError once).
+
+## master 3beb791e741
+use(1) with the Error in encode: threw AssertionError: encode error states=SWAPPING,ABSENT residentBytes=8
+use(1) again: TIMEOUT_2000MS (worker still running) (arena monitor held by the worker)
+RESULT=LIVELOCK
+
+## leaf P1 #2610 (victims must be RESIDENT): no livelock, but slot 0 stays SWAPPING for good: counted, never evictable, every use() refused
+use(1) with the Error in encode: threw AssertionError: encode error states=SWAPPING,ABSENT residentBytes=8
+use(1) again: threw BudgetExceededException: residency budget exceeded: requested=8, resident=8, target=8 states=SWAPPING,ABSENT residentBytes=8
+use(0): threw IllegalStateException: reentrant residency transition for slot 0 states=SWAPPING,ABSENT residentBytes=8
+
+## this head (leaf A restores the state on Error)
+use(1) with the Error in encode: threw AssertionError: encode error states=RESIDENT,ABSENT residentBytes=8
+use(1) again: returned states=SWAPPED,RESIDENT residentBytes=8
+use(0): returned states=RESIDENT,SWAPPED residentBytes=8
+
+## jstack of the donor-semantics oracle on master (run abandoned after 180 s; main thread RUNNABLE, cpu 194656 ms of 197 s elapsed)
+"main" #1 [42228] prio=5 os_prio=0 cpu=194656.25ms elapsed=197.20s runnable
+   java.lang.Thread.State: RUNNABLE
+	at jdk.m3.collections.M3ObjectResidency.admit(M3ObjectResidency.java:451)
+	at jdk.m3.collections.M3ObjectResidency.ensureResident(M3ObjectResidency.java:404)
+	at jdk.m3.collections.M3ObjectResidency.use(M3ObjectResidency.java:168)
+	- locked <arena> (a jdk.m3.collections.M3ObjectResidency)
+	at jdk.m3.collections.ResidencyDonorSemanticsDifferential.episode(ResidencyDonorSemanticsDifferential.java:76)
+	at jdk.m3.collections.ResidencyDonorSemanticsDifferential.main(ResidencyDonorSemanticsDifferential.java:54)

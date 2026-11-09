@@ -1,0 +1,1 @@
+M3WrapperSemanticContract PASS assertions=3757

@@ -1,0 +1,17 @@
+REGION_CASE name=rejected mode=baseline rowCalls=0 stateCalls=8 outputCalls=0 rowElements=0 stateElements=1024 outputElements=0
+REGION_CASE name=single-hit mode=baseline rowCalls=1 stateCalls=8 outputCalls=1 rowElements=128 stateElements=1024 outputElements=1
+REGION_CASE name=contradictory mode=baseline rowCalls=0 stateCalls=0 outputCalls=0 rowElements=0 stateElements=0 outputElements=0
+REGION_CASE name=all-pass mode=baseline rowCalls=1 stateCalls=0 outputCalls=1 rowElements=24 stateElements=0 outputElements=24
+REGION_CASE name=one-tail-hit-per-chunk mode=baseline rowCalls=256 stateCalls=256 outputCalls=2 rowElements=32768 stateElements=32768 outputElements=256
+REGION_CASE name=sparse-early-limit mode=baseline rowCalls=1 stateCalls=1 outputCalls=1 rowElements=128 stateElements=128 outputElements=1
+REGION_CASE name=dense-window mode=baseline rowCalls=32 stateCalls=32 outputCalls=32 rowElements=4096 stateElements=4096 outputElements=4096
+REGION_CASE name=dense-early-limit mode=baseline rowCalls=1 stateCalls=1 outputCalls=1 rowElements=128 stateElements=128 outputElements=1
+REGION_CASE name=bounded-unaligned-three-tails mode=baseline rowCalls=3 stateCalls=3 outputCalls=1 rowElements=263 stateElements=263 outputElements=3
+REGION_CASE name=bounded-tail-early-limit mode=baseline rowCalls=1 stateCalls=1 outputCalls=1 rowElements=128 stateElements=128 outputElements=1
+REGION_CASE name=bounded-partial-chunk mode=baseline rowCalls=1 stateCalls=1 outputCalls=1 rowElements=62 stateElements=62 outputElements=1
+REGION_CASE name=bounded-rejected mode=baseline rowCalls=0 stateCalls=3 outputCalls=0 rowElements=0 stateElements=263 outputElements=0
+REGION_CASE name=bounded-zero-work mode=baseline rowCalls=0 stateCalls=0 outputCalls=0 rowElements=0 stateElements=0 outputElements=0
+REGION_CASE name=bounded-zero-limit mode=baseline rowCalls=0 stateCalls=0 outputCalls=0 rowElements=0 stateElements=0 outputElements=0
+REGION_CASE name=bounded-all-pass mode=baseline rowCalls=1 stateCalls=0 outputCalls=1 rowElements=2 stateElements=0 outputElements=2
+REGION_CASE name=bounded-contradictory mode=baseline rowCalls=0 stateCalls=0 outputCalls=0 rowElements=0 stateElements=0 outputElements=0
+PASS JNI region transfer and batching; actual JVM/JNI parity is a separate gate

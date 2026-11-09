@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: Apache-2.0
+# Gates of recipe FS_FIELD_PACKAGE_SHADOW v1 on base master 0909649e8f7 (WSL2 Ubuntu 24.04: OpenJDK 21.0.12, Maven 3.9.14,
+# gcc 13.3, CMake 3.28 via a wrapper setting JAVA_AWT_* for the headless JDK, SQLite 3.45.1 headers from libsqlite3-dev
+# extracted with dpkg -x; module copies on the WSL ext4 home). "baseline" = master plus a build-only overlay that renames
+# the same field (never committed), because master itself does not compile.
+gate	command	verdict	evidence
+master_compile	mvn -Dexec.skip=true compile (master 0909649e8f7)	FAIL (expected)	1 error: M3FS.java:[661,33] cannot find symbol, symbol: variable m3, location: variable jdk of type java.util.regex.Pattern
+head_build	mvn verify (head)	PASS	BUILD SUCCESS; warnings 78, set identical to the baseline (attributed VFS pass)
+module_tests	mvn verify, maven.test.failure.ignore	BASELINE	JUnit 429 run, 0 failures, 5 errors on head and baseline, the same 5 (M3MIndexFileTokenRangeSha256Test: SMFILE01 fingerprint mismatch); ctest 12/12 on both (11/12 on the DrvFs S: drive: m3fs-checked-io-test)
+class_files	sha256 of target/classes, head vs baseline	PASS	517/517 present; 510 byte-identical; 7 differ, all M3FS*.class (M3FS, $1, $2, $DefaultRegexFallback, $InventoryFrame, $InventoryLimits, $InventoryReceipt): javap -c -p -constants identical, line-table entry counts identical (the anchor line shifts line numbers only)
+recipe	python -I apply.py [--check]	PASS	master: --check changed=1 (exit 1); apply changed=1; second run changed=0; a drifted preimage refuses (exit 2) and is not written
+jdk_naming	python -I m3/tooling/jdk-naming/jdk_naming.py plan --only m3/fs/ --only m3/tooling/jdk-naming/	PASS	moves=0 rewrites=0 refusals=0 absent=0 shadows=0; the same plan on M3FS.java of fe35ea98841^ (pre-rename) reports SHADOW 646:jdk

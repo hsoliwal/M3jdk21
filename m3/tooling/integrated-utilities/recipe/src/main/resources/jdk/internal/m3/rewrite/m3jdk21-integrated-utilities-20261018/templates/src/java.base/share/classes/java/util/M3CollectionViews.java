@@ -1,0 +1,992 @@
+/*
+ * Copyright (c) 2026, Hitesh Soliwal and contributors. All rights reserved.
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ *
+ * This code is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 only, as
+ * published by the Free Software Foundation. Oracle designates this
+ * particular file as subject to the "Classpath" exception as provided
+ * by Oracle in the LICENSE file that accompanied this code.
+ *
+ * This code is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
+ * version 2 for more details (a copy is included in the LICENSE file that
+ * accompanied this code).
+ */
+package java.util;
+
+import java.util.function.BiPredicate;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
+
+/** Implementation atoms for the integrated Collections view factories. */
+final class M3CollectionViews {
+    private M3CollectionViews() { }
+
+    /* Predicates, not membership results, are shared by nested live views. */
+    private static final class Filter<E> implements Predicate<E> {
+        private record Term<E>(Term<E> previous, Predicate<? super E> predicate) { }
+        private final Term<E> tail;
+        private final int depth;
+        private volatile Predicate<? super E>[] prepared;
+
+        @SuppressWarnings("unchecked")
+        Filter(Predicate<? super E> first, Predicate<? super E> second) {
+            if (first instanceof Filter<?> old) {
+                Filter<E> previous = (Filter<E>) old;
+                tail = new Term<>(previous.tail, second);
+                depth = Math.addExact(previous.depth, 1);
+            } else {
+                tail = new Term<>(new Term<>(null, first), second);
+                depth = 2;
+            }
+        }
+
+        @SuppressWarnings("unchecked")
+        private Predicate<? super E>[] steps() {
+            Predicate<? super E>[] result = prepared;
+            if (result == null) {
+                result = (Predicate<? super E>[]) new Predicate<?>[depth];
+                Term<E> term = tail;
+                for (int i = depth; i-- > 0;) {
+                    result[i] = term.predicate();
+                    term = term.previous();
+                }
+                prepared = result;
+            }
+            return result;
+        }
+
+        @Override public boolean test(E value) {
+            for (Predicate<? super E> step : steps()) {
+                if (!step.test(value)) return false;
+            }
+            return true;
+        }
+    }
+
+    static <E> Predicate<? super E> combine(Predicate<? super E> first,
+                                            Predicate<? super E> second) {
+        return new Filter<>(first, second);
+    }
+
+    static <E> Iterator<E> filtering(Iterator<E> source, Predicate<? super E> test) {
+        return new Iterator<>() {
+            private boolean ready;
+            private E pending;
+            @Override public boolean hasNext() {
+                while (!ready && source.hasNext()) {
+                    E value = source.next();
+                    if (test.test(value)) { pending = value; ready = true; }
+                }
+                return ready;
+            }
+            @Override public E next() {
+                if (!hasNext()) throw new NoSuchElementException();
+                E value = pending;
+                pending = null;
+                ready = false;
+                return value;
+            }
+        };
+    }
+
+    static final class FilteredSpliterator<E> implements Spliterator<E> {
+        private final Spliterator<E> source;
+        private final Predicate<? super E> test;
+        private E pending;
+        FilteredSpliterator(Spliterator<E> source, Predicate<? super E> test) {
+            this.source = source;
+            this.test = test;
+        }
+        @Override public boolean tryAdvance(Consumer<? super E> action) {
+            Objects.requireNonNull(action);
+            while (source.tryAdvance(value -> pending = value)) {
+                E value = pending;
+                pending = null;
+                if (test.test(value)) { action.accept(value); return true; }
+            }
+            return false;
+        }
+        @Override public Spliterator<E> trySplit() {
+            Spliterator<E> split = source.trySplit();
+            return split == null ? null : new FilteredSpliterator<>(split, test);
+        }
+        @Override public long estimateSize() { return source.estimateSize(); }
+        @Override public int characteristics() {
+            return source.characteristics() & (DISTINCT | NONNULL | ORDERED | SORTED);
+        }
+        @Override public Comparator<? super E> getComparator() {
+            if (!hasCharacteristics(SORTED)) throw new IllegalStateException();
+            return source.getComparator();
+        }
+    }
+
+    static class FilteredCollection<E> extends AbstractCollection<E> {
+        final Collection<E> source;
+        final Predicate<? super E> test;
+        @SuppressWarnings("unchecked")
+        FilteredCollection(Collection<E> source, Predicate<? super E> test) {
+            Objects.requireNonNull(source, "source");
+            Objects.requireNonNull(test, "predicate");
+            if (source instanceof FilteredCollection<?> nested) {
+                FilteredCollection<E> old = (FilteredCollection<E>) nested;
+                this.source = old.source;
+                this.test = combine(old.test, test);
+            } else { this.source = source; this.test = test; }
+        }
+        final void accepted(E value) {
+            if (!test.test(value)) throw new IllegalArgumentException("element rejected by filter");
+        }
+        @Override public Iterator<E> iterator() { return filtering(source.iterator(), test); }
+        @Override public Spliterator<E> spliterator() {
+            return new FilteredSpliterator<>(source.spliterator(), test);
+        }
+        @Override public int size() {
+            int count = 0;
+            for (E value : source) if (test.test(value)) count++;
+            return count;
+        }
+        @Override public boolean isEmpty() { return !iterator().hasNext(); }
+        @Override public boolean contains(Object value) {
+            for (E stored : source) if (test.test(stored) && Objects.equals(value, stored)) return true;
+            return false;
+        }
+        private void acceptedAddition(E value) {
+            accepted(value);
+            if (source instanceof Set<?> && source.contains(value) && !contains(value))
+                throw new IllegalArgumentException("existing equivalent element is hidden");
+        }
+        @Override public boolean add(E value) { acceptedAddition(value); return source.add(value); }
+        @Override public boolean addAll(Collection<? extends E> values) {
+            Objects.requireNonNull(values);
+            ArrayList<E> captured = new ArrayList<>(values);
+            for (E value : captured) acceptedAddition(value);
+            return source.addAll(captured);
+        }
+        @Override public boolean remove(Object value) {
+            Iterator<E> iterator = source.iterator();
+            while (iterator.hasNext()) {
+                E stored = iterator.next();
+                if (test.test(stored) && Objects.equals(value, stored)) {
+                    iterator.remove();
+                    return true;
+                }
+            }
+            return false;
+        }
+        @Override public boolean removeIf(Predicate<? super E> predicate) {
+            Objects.requireNonNull(predicate);
+            return source.removeIf(value -> test.test(value) && predicate.test(value));
+        }
+        @Override public boolean removeAll(Collection<?> values) {
+            Objects.requireNonNull(values);
+            return removeIf(values::contains);
+        }
+        @Override public boolean retainAll(Collection<?> values) {
+            Objects.requireNonNull(values);
+            return removeIf(value -> !values.contains(value));
+        }
+        @Override public void clear() { source.removeIf(test); }
+    }
+
+    static class FilteredSet<E> extends FilteredCollection<E> implements Set<E> {
+        FilteredSet(Set<E> source, Predicate<? super E> test) { super(source, test); }
+        @Override public boolean equals(Object other) {
+            if (other == this) return true;
+            if (!(other instanceof Set<?> set)) return false;
+            try { return size() == set.size() && containsAll(set); }
+            catch (ClassCastException | NullPointerException failure) { return false; }
+        }
+        @Override public int hashCode() {
+            int hash = 0;
+            for (E value : this) if (value != null) hash += value.hashCode();
+            return hash;
+        }
+    }
+
+    static class FilteredSortedSet<E> extends FilteredSet<E> implements SortedSet<E> {
+        final SortedSet<E> sorted;
+        @SuppressWarnings("unchecked")
+        FilteredSortedSet(SortedSet<E> source, Predicate<? super E> test) {
+            super(source, test);
+            sorted = (SortedSet<E>) this.source;
+        }
+        @Override public Comparator<? super E> comparator() { return sorted.comparator(); }
+        @SuppressWarnings("unchecked")
+        final int compare(E stored, Object value) {
+            Comparator<? super E> comparator = comparator();
+            return comparator == null ? ((Comparable<Object>) stored).compareTo(value)
+                    : comparator.compare(stored, (E) value);
+        }
+        @SuppressWarnings("unchecked")
+        @Override public boolean contains(Object value) {
+            if (!sorted.contains(value)) return false;
+            Iterator<E> iterator = sorted.tailSet((E) value).iterator();
+            if (!iterator.hasNext()) return false;
+            E stored = iterator.next();
+            return compare(stored, value) == 0 && test.test(stored);
+        }
+        @SuppressWarnings("unchecked")
+        @Override public boolean remove(Object value) {
+            if (!sorted.contains(value)) return false;
+            Iterator<E> iterator = sorted.tailSet((E) value).iterator();
+            if (!iterator.hasNext()) return false;
+            E stored = iterator.next();
+            if (compare(stored, value) != 0 || !test.test(stored)) return false;
+            iterator.remove();
+            return true;
+        }
+        @Override public E first() { return iterator().next(); }
+        @Override public E last() {
+            Iterator<E> iterator = iterator();
+            if (!iterator.hasNext()) throw new NoSuchElementException();
+            E last = iterator.next();
+            while (iterator.hasNext()) last = iterator.next();
+            return last;
+        }
+        private E removeEndpoint(boolean reverse) {
+            Iterator<E> iterator = (reverse ? sorted.reversed() : sorted).iterator();
+            while (iterator.hasNext()) {
+                E value = iterator.next();
+                if (test.test(value)) { iterator.remove(); return value; }
+            }
+            throw new NoSuchElementException();
+        }
+        @Override public E removeFirst() { return removeEndpoint(false); }
+        @Override public E removeLast() { return removeEndpoint(true); }
+        @Override public SortedSet<E> subSet(E from, E to) {
+            return new FilteredSortedSet<>(sorted.subSet(from, to), test);
+        }
+        @Override public SortedSet<E> headSet(E to) {
+            return new FilteredSortedSet<>(sorted.headSet(to), test);
+        }
+        @Override public SortedSet<E> tailSet(E from) {
+            return new FilteredSortedSet<>(sorted.tailSet(from), test);
+        }
+        @Override public SortedSet<E> reversed() {
+            return new FilteredSortedSet<>(sorted.reversed(), test);
+        }
+    }
+
+    static final class FilteredNavigableSet<E> extends FilteredSortedSet<E>
+            implements NavigableSet<E> {
+        private final NavigableSet<E> navigable;
+        @SuppressWarnings("unchecked")
+        FilteredNavigableSet(NavigableSet<E> source, Predicate<? super E> test) {
+            super(source, test);
+            navigable = (NavigableSet<E>) this.source;
+        }
+        private E eligible(Iterator<E> iterator, boolean remove) {
+            while (iterator.hasNext()) {
+                E value = iterator.next();
+                if (test.test(value)) {
+                    if (remove) iterator.remove();
+                    return value;
+                }
+            }
+            return null;
+        }
+        private E navigate(E value, boolean above, boolean inclusive) {
+            Iterator<E> iterator = above ? navigable.iterator() : navigable.descendingIterator();
+            while (iterator.hasNext()) {
+                E stored = iterator.next();
+                int order = compare(stored, value);
+                boolean eligible = above ? order > 0 : order < 0;
+                if ((eligible || inclusive && order == 0) && test.test(stored)) return stored;
+            }
+            return null;
+        }
+        @Override public E lower(E value) { return navigate(value, false, false); }
+        @Override public E floor(E value) { return navigate(value, false, true); }
+        @Override public E ceiling(E value) { return navigate(value, true, true); }
+        @Override public E higher(E value) { return navigate(value, true, false); }
+        @Override public E last() { return descendingIterator().next(); }
+        @Override public E pollFirst() { return eligible(navigable.iterator(), true); }
+        @Override public E pollLast() { return eligible(navigable.descendingIterator(), true); }
+        @Override public Iterator<E> descendingIterator() {
+            return filtering(navigable.descendingIterator(), test);
+        }
+        @Override public NavigableSet<E> descendingSet() {
+            return new FilteredNavigableSet<>(navigable.descendingSet(), test);
+        }
+        @Override public NavigableSet<E> reversed() { return descendingSet(); }
+        @Override public NavigableSet<E> subSet(E from, boolean fromInclusive, E to, boolean toInclusive) {
+            return new FilteredNavigableSet<>(navigable.subSet(from, fromInclusive, to, toInclusive), test);
+        }
+        @Override public NavigableSet<E> headSet(E to, boolean inclusive) {
+            return new FilteredNavigableSet<>(navigable.headSet(to, inclusive), test);
+        }
+        @Override public NavigableSet<E> tailSet(E from, boolean inclusive) {
+            return new FilteredNavigableSet<>(navigable.tailSet(from, inclusive), test);
+        }
+        @Override public NavigableSet<E> subSet(E from, E to) { return subSet(from, true, to, false); }
+        @Override public NavigableSet<E> headSet(E to) { return headSet(to, false); }
+        @Override public NavigableSet<E> tailSet(E from) { return tailSet(from, true); }
+    }
+
+    static final class FilteredDeque<E> extends FilteredCollection<E> implements Deque<E> {
+        private final Deque<E> deque;
+        @SuppressWarnings("unchecked")
+        FilteredDeque(Deque<E> source, Predicate<? super E> test) {
+            super(source, test);
+            deque = (Deque<E>) this.source;
+        }
+        private E extreme(boolean reverse, boolean remove, boolean required) {
+            Iterator<E> iterator = reverse ? deque.descendingIterator() : deque.iterator();
+            while (iterator.hasNext()) {
+                E value = iterator.next();
+                if (test.test(value)) {
+                    if (remove) iterator.remove();
+                    return value;
+                }
+            }
+            if (required) throw new NoSuchElementException();
+            return null;
+        }
+        @Override public void addFirst(E value) { accepted(value); deque.addFirst(value); }
+        @Override public void addLast(E value) { accepted(value); deque.addLast(value); }
+        @Override public boolean offerFirst(E value) { accepted(value); return deque.offerFirst(value); }
+        @Override public boolean offerLast(E value) { accepted(value); return deque.offerLast(value); }
+        @Override public E removeFirst() { return extreme(false, true, true); }
+        @Override public E removeLast() { return extreme(true, true, true); }
+        @Override public E pollFirst() { return extreme(false, true, false); }
+        @Override public E pollLast() { return extreme(true, true, false); }
+        @Override public E getFirst() { return extreme(false, false, true); }
+        @Override public E getLast() { return extreme(true, false, true); }
+        @Override public E peekFirst() { return extreme(false, false, false); }
+        @Override public E peekLast() { return extreme(true, false, false); }
+        @Override public boolean removeFirstOccurrence(Object value) { return remove(value); }
+        @Override public boolean removeLastOccurrence(Object value) {
+            Iterator<E> iterator = deque.descendingIterator();
+            while (iterator.hasNext()) {
+                E stored = iterator.next();
+                if (test.test(stored) && Objects.equals(value, stored)) {
+                    iterator.remove(); return true;
+                }
+            }
+            return false;
+        }
+        @Override public boolean offer(E value) { return offerLast(value); }
+        @Override public E remove() { return removeFirst(); }
+        @Override public E poll() { return pollFirst(); }
+        @Override public E element() { return getFirst(); }
+        @Override public E peek() { return peekFirst(); }
+        @Override public void push(E value) { addFirst(value); }
+        @Override public E pop() { return removeFirst(); }
+        @Override public Iterator<E> descendingIterator() { return filtering(deque.descendingIterator(), test); }
+        @Override public Deque<E> reversed() { return new FilteredDeque<>(deque.reversed(), test); }
+    }
+
+    static final class FilteredList<E> extends AbstractList<E> {
+        private final List<E> source;
+        private final Predicate<? super E> test;
+        @SuppressWarnings("unchecked")
+        FilteredList(List<E> source, Predicate<? super E> test) {
+            Objects.requireNonNull(source, "source"); Objects.requireNonNull(test, "predicate");
+            if (source instanceof FilteredList<?> nested) {
+                FilteredList<E> old = (FilteredList<E>) nested;
+                this.source = old.source; this.test = combine(old.test, test);
+            } else { this.source = source; this.test = test; }
+        }
+        private void accepted(E value) {
+            if (!test.test(value)) throw new IllegalArgumentException("element rejected by filter");
+        }
+        private int physical(int logical, boolean end) {
+            if (logical < 0) throw new IndexOutOfBoundsException(logical);
+            ListIterator<E> iterator = source.listIterator();
+            int visible = 0;
+            while (iterator.hasNext()) {
+                E value = iterator.next();
+                if (test.test(value) && visible++ == logical) return iterator.previousIndex();
+            }
+            if (end && logical == visible) return source.size();
+            throw new IndexOutOfBoundsException(logical);
+        }
+        @Override public int size() {
+            int size = 0;
+            for (E value : source) if (test.test(value)) size++;
+            return size;
+        }
+        @Override public boolean isEmpty() { return !iterator().hasNext(); }
+        @Override public E get(int index) { return source.get(physical(index, false)); }
+        @Override public E set(int index, E value) {
+            int at = physical(index, false); accepted(value); return source.set(at, value);
+        }
+        @Override public void add(int index, E value) {
+            int at = physical(index, true); accepted(value); source.add(at, value);
+        }
+        @Override public boolean add(E value) { accepted(value); return source.add(value); }
+        @Override public boolean addAll(Collection<? extends E> values) {
+            ArrayList<E> captured = capture(values); return source.addAll(captured);
+        }
+        @Override public boolean addAll(int index, Collection<? extends E> values) {
+            int at = physical(index, true); ArrayList<E> captured = capture(values);
+            return source.addAll(at, captured);
+        }
+        private ArrayList<E> capture(Collection<? extends E> values) {
+            ArrayList<E> captured = new ArrayList<>(Objects.requireNonNull(values));
+            for (E value : captured) accepted(value);
+            return captured;
+        }
+        @Override public E remove(int index) { return source.remove(physical(index, false)); }
+        @Override public boolean remove(Object value) {
+            ListIterator<E> iterator = source.listIterator();
+            while (iterator.hasNext()) {
+                E stored = iterator.next();
+                if (test.test(stored) && Objects.equals(value, stored)) {
+                    iterator.remove(); return true;
+                }
+            }
+            return false;
+        }
+        @Override public boolean removeIf(Predicate<? super E> predicate) {
+            Objects.requireNonNull(predicate);
+            return source.removeIf(value -> test.test(value) && predicate.test(value));
+        }
+        @Override public boolean removeAll(Collection<?> values) {
+            Objects.requireNonNull(values); return removeIf(values::contains);
+        }
+        @Override public boolean retainAll(Collection<?> values) {
+            Objects.requireNonNull(values); return removeIf(value -> !values.contains(value));
+        }
+        @Override public void clear() { source.removeIf(test); }
+        @Override public List<E> subList(int from, int to) {
+            if (from > to) throw new IllegalArgumentException("from > to");
+            int begin = physical(from, true);
+            int end = from == to ? begin : physical(to, true);
+            return new FilteredList<>(source.subList(begin, end), test);
+        }
+        @Override public List<E> reversed() { return ReverseOrderListView.of(this, true); }
+        @Override public Iterator<E> iterator() { return listIterator(0); }
+        @Override public Spliterator<E> spliterator() {
+            return new FilteredSpliterator<>(source.spliterator(), test);
+        }
+        @Override public ListIterator<E> listIterator(int index) {
+            int start = physical(index, true);
+            return new ListIterator<>() {
+                final ListIterator<E> cursor = source.listIterator(start);
+                int logical = index;
+                int last = -1;
+                boolean lastForward;
+                private void move(int target) {
+                    while (cursor.nextIndex() < target) cursor.next();
+                    while (cursor.nextIndex() > target) cursor.previous();
+                }
+                private boolean available(boolean forward) {
+                    int saved = cursor.nextIndex();
+                    try {
+                        while (forward ? cursor.hasNext() : cursor.hasPrevious()) {
+                            E value = forward ? cursor.next() : cursor.previous();
+                            if (test.test(value)) return true;
+                        }
+                        return false;
+                    } finally { move(saved); }
+                }
+                @Override public boolean hasNext() { return available(true); }
+                @Override public boolean hasPrevious() { return available(false); }
+                @Override public E next() {
+                    while (cursor.hasNext()) {
+                        E value = cursor.next();
+                        if (test.test(value)) {
+                            last = cursor.previousIndex(); lastForward = true; logical++; return value;
+                        }
+                    }
+                    throw new NoSuchElementException();
+                }
+                @Override public E previous() {
+                    while (cursor.hasPrevious()) {
+                        E value = cursor.previous();
+                        if (test.test(value)) {
+                            last = cursor.nextIndex(); lastForward = false; logical--; return value;
+                        }
+                    }
+                    throw new NoSuchElementException();
+                }
+                @Override public int nextIndex() { return logical; }
+                @Override public int previousIndex() { return logical - 1; }
+                @Override public void remove() {
+                    if (last < 0) throw new IllegalStateException();
+                    int saved = cursor.nextIndex();
+                    move(last); cursor.next(); cursor.remove();
+                    move(saved > last ? saved - 1 : saved);
+                    if (lastForward) logical--;
+                    last = -1;
+                }
+                @Override public void set(E value) {
+                    if (last < 0) throw new IllegalStateException();
+                    accepted(value);
+                    int saved = cursor.nextIndex();
+                    move(last); cursor.next(); cursor.set(value); move(saved);
+                }
+                @Override public void add(E value) {
+                    accepted(value);
+                    int saved = cursor.nextIndex();
+                    int insertion = source.size();
+                    try {
+                        while (cursor.hasNext()) {
+                            E existing = cursor.next();
+                            if (test.test(existing)) { insertion = cursor.previousIndex(); break; }
+                        }
+                    } finally { move(saved); }
+                    move(insertion); cursor.add(value); logical++; last = -1;
+                }
+            };
+        }
+        @Override public void replaceAll(UnaryOperator<E> operator) {
+            Objects.requireNonNull(operator);
+            ListIterator<E> iterator = listIterator();
+            while (iterator.hasNext()) iterator.set(operator.apply(iterator.next()));
+        }
+    }
+
+    /* One captured reference array with offset/reverse windows; no retained pair/node per item. */
+    private static final class Snapshot<E> extends AbstractList<E> implements RandomAccess {
+        private final Object[] values;
+        private final int offset;
+        private final int length;
+        private final boolean reverse;
+        Snapshot(Object[] values, int offset, int length, boolean reverse) {
+            this.values = values; this.offset = offset;
+            this.length = length; this.reverse = reverse;
+        }
+        @Override public int size() { return length; }
+        @SuppressWarnings("unchecked")
+        @Override public E get(int index) {
+            Objects.checkIndex(index, length);
+            int logical = offset + (reverse ? length - 1 - index : index);
+            return (E) values[logical];
+        }
+        @Override public List<E> subList(int from, int to) {
+            Objects.checkFromToIndex(from, to, length);
+            return Collections.unmodifiableList(new Snapshot<>(values,
+                    offset + (reverse ? length - to : from), to - from, reverse));
+        }
+        @Override public List<E> reversed() {
+            return Collections.unmodifiableList(new Snapshot<>(values, offset, length, !reverse));
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    static <E> List<E> snapshot(Collection<? extends E> source, Predicate<? super E> filter,
+                                Comparator<? super E> comparator, boolean sort) {
+        Objects.requireNonNull(source, "source");
+        Object[] values = source.toArray();
+        if (filter != null) {
+            long[] mask = new long[(int) (((long) values.length + 63) >>> 6)];
+            for (int i = 0; i < values.length; i++) {
+                if (filter.test((E) values[i])) mask[i >>> 6] |= 1L << (i & 63);
+            }
+            int[] selected = M3CollectionMasks.selected(mask, 0, values.length);
+            Object[] kept = new Object[selected.length];
+            for (int i = 0; i < selected.length; i++) kept[i] = values[selected[i]];
+            values = kept;
+        }
+        // The captured values belong exclusively to this detached snapshot.
+        // Reuse the JDK stable sorter instead of retaining a redundant permutation.
+        if (sort) Arrays.sort(values, (Comparator<Object>) comparator);
+        return Collections.unmodifiableList(new Snapshot<>(values, 0, values.length, false));
+    }
+
+    static final class SortedList<E> extends AbstractList<E> {
+        private final List<? extends E> source;
+        private final Comparator<? super E> comparator;
+        private final int from;
+        private final int to;
+        private final boolean reverse;
+        SortedList(List<? extends E> source, Comparator<? super E> comparator) {
+            this(Objects.requireNonNull(source, "source"), comparator, 0, -1, false);
+        }
+        private SortedList(List<? extends E> source, Comparator<? super E> comparator,
+                           int from, int to, boolean reverse) {
+            this.source = source; this.comparator = comparator;
+            this.from = from; this.to = to; this.reverse = reverse;
+        }
+        private List<E> observed() {
+            List<E> result = snapshot(source, null, comparator, true);
+            if (to >= 0) result = result.subList(from, to);
+            return reverse ? result.reversed() : result;
+        }
+        @Override public int size() { return to < 0 ? source.size() : to - from; }
+        @Override public E get(int index) { return observed().get(index); }
+        @Override public Iterator<E> iterator() { return observed().iterator(); }
+        @Override public ListIterator<E> listIterator(int index) { return observed().listIterator(index); }
+        @Override public Spliterator<E> spliterator() { return observed().spliterator(); }
+        @Override public Object[] toArray() { return observed().toArray(); }
+        @Override public <T> T[] toArray(T[] target) { return observed().toArray(target); }
+        @Override public List<E> subList(int start, int end) {
+            int size = size(); Objects.checkFromToIndex(start, end, size);
+            int low = from + (reverse ? size - end : start);
+            int high = from + (reverse ? size - start : end);
+            return Collections.unmodifiableList(new SortedList<>(source, comparator, low, high, reverse));
+        }
+        @Override public List<E> reversed() {
+            return Collections.unmodifiableList(new SortedList<>(source, comparator, from, to, !reverse));
+        }
+    }
+
+    static class FilteredMap<K,V> extends AbstractMap<K,V> {
+        final Map<K,V> source;
+        final Predicate<Entry<K,V>> test;
+        private transient Set<Entry<K,V>> entries;
+        @SuppressWarnings("unchecked")
+        FilteredMap(Map<K,V> source, BiPredicate<? super K,? super V> predicate) {
+            this(source, entryPredicate(predicate));
+        }
+        private static <K,V> Predicate<Entry<K,V>> entryPredicate(BiPredicate<? super K,? super V> predicate) {
+            Objects.requireNonNull(predicate, "predicate");
+            return entry -> predicate.test(entry.getKey(), entry.getValue());
+        }
+        @SuppressWarnings("unchecked")
+        FilteredMap(Map<K,V> source, Predicate<Entry<K,V>> predicate) {
+            Objects.requireNonNull(source, "source"); Objects.requireNonNull(predicate, "predicate");
+            if (source instanceof FilteredMap<?,?> nested) {
+                FilteredMap<K,V> old = (FilteredMap<K,V>) nested;
+                this.source = old.source;
+                this.test = (Predicate<Entry<K,V>>) combine(old.test, predicate);
+            } else { this.source = source; this.test = predicate; }
+        }
+        /* Retrieve stored representatives for standard maps, including comparator/identity keys. */
+        @SuppressWarnings("unchecked")
+        final Entry<K,V> stored(Object key) {
+            if (source.getClass() == HashMap.class || source.getClass() == LinkedHashMap.class)
+                return ((HashMap<K,V>) source).getNode(key);
+            if (!source.containsKey(key)) return null;
+            if (source instanceof SortedMap<?,?> sorted) {
+                return ((SortedMap<K,V>) sorted).tailMap((K) key).entrySet().iterator().next();
+            }
+            for (Entry<K,V> entry : source.entrySet()) if (entry.getKey() == key) return entry;
+            for (Entry<K,V> entry : source.entrySet()) if (Objects.equals(entry.getKey(), key)) return entry;
+            // A custom map can hide its key equivalence. The public factory requires
+            // the predicate to be consistent with that equivalence.
+            return new SimpleImmutableEntry<>((K) key, source.get(key));
+        }
+        final boolean visible(Entry<K,V> entry) { return entry != null && test.test(entry); }
+        final void accepted(K key, V value) {
+            Entry<K,V> prior = stored(key);
+            K representative = prior == null ? key : prior.getKey();
+            if (!test.test(new SimpleImmutableEntry<>(representative, value)))
+                throw new IllegalArgumentException("entry rejected by filter");
+        }
+        @Override public int size() {
+            int count = 0;
+            for (Entry<K,V> entry : source.entrySet()) if (test.test(entry)) count++;
+            return count;
+        }
+        @Override public boolean isEmpty() { return !entrySet().iterator().hasNext(); }
+        @Override public boolean containsKey(Object key) { return visible(stored(key)); }
+        @Override public V get(Object key) {
+            Entry<K,V> entry = stored(key); return visible(entry) ? source.get(key) : null;
+        }
+        @Override public V getOrDefault(Object key, V fallback) {
+            Entry<K,V> entry = stored(key); return visible(entry) ? source.get(key) : fallback;
+        }
+        @Override public boolean equals(Object other) {
+            if (!Collections.m3IdentityKeys(source)) return super.equals(other);
+            return other == this || other instanceof Map<?,?> map && entrySet().equals(map.entrySet());
+        }
+        @Override public V put(K key, V value) {
+            Entry<K,V> previous = stored(key);
+            V old = visible(previous) ? previous.getValue() : null;
+            accepted(key, value); source.put(key, value); return old;
+        }
+        @Override public void putAll(Map<? extends K,? extends V> values) {
+            Objects.requireNonNull(values);
+            ArrayList<K> keys = new ArrayList<>(values.size());
+            ArrayList<V> captured = new ArrayList<>(values.size());
+            for (Entry<? extends K,? extends V> entry : values.entrySet()) {
+                K key = entry.getKey(); V value = entry.getValue();
+                accepted(key, value); keys.add(key); captured.add(value);
+            }
+            for (int i = 0; i < keys.size(); i++) source.put(keys.get(i), captured.get(i));
+        }
+        @Override public V remove(Object key) {
+            Entry<K,V> entry = stored(key);
+            return visible(entry) ? source.remove(key) : null;
+        }
+        @Override public boolean remove(Object key, Object value) {
+            Entry<K,V> entry = stored(key);
+            if (!visible(entry) || !source.entrySet().contains(new SimpleImmutableEntry<>(key, value))) return false;
+            return source.entrySet().remove(new SimpleImmutableEntry<>(key, value));
+        }
+        @Override public boolean replace(K key, V previous, V value) {
+            Entry<K,V> entry = stored(key);
+            if (!visible(entry) || !source.entrySet().contains(new SimpleImmutableEntry<>(key, previous))) return false;
+            accepted(key, value); source.put(key, value); return true;
+        }
+        @Override public V replace(K key, V value) {
+            Entry<K,V> entry = stored(key);
+            if (!visible(entry)) return null;
+            V old = entry.getValue(); accepted(key, value); source.put(key, value); return old;
+        }
+        @Override public void clear() { source.entrySet().removeIf(test); }
+        @Override public boolean containsValue(Object value) {
+            for (Entry<K,V> entry : source.entrySet())
+                if (test.test(entry) && valueMatches(entry, value)) return true;
+            return false;
+        }
+        final boolean valueMatches(Entry<K,V> entry, Object value) {
+            // Membership through the backing entry set retains identity-map value semantics.
+            return source.entrySet().contains(new SimpleImmutableEntry<>(entry.getKey(), value));
+        }
+        final class CheckedEntry implements Entry<K,V> {
+            private final Entry<K,V> entry;
+            CheckedEntry(Entry<K,V> entry) { this.entry = entry; }
+            @Override public K getKey() { return entry.getKey(); }
+            @Override public V getValue() { return entry.getValue(); }
+            @Override public V setValue(V value) {
+                if (!test.test(new SimpleImmutableEntry<>(getKey(), value)))
+                    throw new IllegalArgumentException("entry rejected by filter");
+                return entry.setValue(value);
+            }
+            @Override public boolean equals(Object other) { return entry.equals(other); }
+            @Override public int hashCode() { return entry.hashCode(); }
+            @Override public String toString() { return entry.toString(); }
+        }
+        @Override public Set<Entry<K,V>> entrySet() {
+            Set<Entry<K,V>> result = entries;
+            if (result == null) {
+                result = new AbstractSet<>() {
+                    @Override public int size() { return FilteredMap.this.size(); }
+                    @Override public void clear() { FilteredMap.this.clear(); }
+                    @Override public Iterator<Entry<K,V>> iterator() {
+                        Iterator<Entry<K,V>> original = filtering(source.entrySet().iterator(), test);
+                        return new Iterator<>() {
+                            @Override public boolean hasNext() { return original.hasNext(); }
+                            @Override public Entry<K,V> next() { return new CheckedEntry(original.next()); }
+                        };
+                    }
+                    @Override public Spliterator<Entry<K,V>> spliterator() {
+                        Spliterator<Entry<K,V>> selected = new FilteredSpliterator<>(source.entrySet().spliterator(), test);
+                        return checkedSpliterator(selected);
+                    }
+                    @Override public boolean contains(Object value) {
+                        if (!(value instanceof Entry<?,?> entry)) return false;
+                        return visible(stored(entry.getKey())) && source.entrySet().contains(entry);
+                    }
+                    @Override public boolean remove(Object value) {
+                        return contains(value) && source.entrySet().remove(value);
+                    }
+                    @Override public boolean removeIf(Predicate<? super Entry<K,V>> predicate) {
+                        Objects.requireNonNull(predicate);
+                        return source.entrySet().removeIf(entry -> test.test(entry)
+                                && predicate.test(new CheckedEntry(entry)));
+                    }
+                    @Override public boolean removeAll(Collection<?> values) {
+                        Objects.requireNonNull(values); return removeIf(values::contains);
+                    }
+                    @Override public boolean retainAll(Collection<?> values) {
+                        Objects.requireNonNull(values); return removeIf(entry -> !values.contains(entry));
+                    }
+                };
+                entries = result;
+            }
+            return result;
+        }
+        private Spliterator<Entry<K,V>> checkedSpliterator(Spliterator<Entry<K,V>> original) {
+            return new Spliterator<>() {
+                @Override public boolean tryAdvance(Consumer<? super Entry<K,V>> action) {
+                    Objects.requireNonNull(action);
+                    return original.tryAdvance(entry -> action.accept(new CheckedEntry(entry)));
+                }
+                @Override public Spliterator<Entry<K,V>> trySplit() {
+                    Spliterator<Entry<K,V>> split = original.trySplit();
+                    return split == null ? null : checkedSpliterator(split);
+                }
+                @Override public long estimateSize() { return original.estimateSize(); }
+                @Override public int characteristics() { return original.characteristics(); }
+                @Override public Comparator<? super Entry<K,V>> getComparator() { return original.getComparator(); }
+            };
+        }
+        @Override public Set<K> keySet() {
+            return new AbstractSet<>() {
+                @Override public int size() { return FilteredMap.this.size(); }
+                @Override public int hashCode() {
+                    if (!Collections.m3IdentityKeys(source)) return super.hashCode();
+                    int hash = 0;
+                    for (K key : this) hash += System.identityHashCode(key);
+                    return hash;
+                }
+                @Override public boolean contains(Object key) { return containsKey(key); }
+                @Override public boolean remove(Object key) {
+                    if (!containsKey(key)) return false;
+                    source.remove(key); return true;
+                }
+                @Override public void clear() { FilteredMap.this.clear(); }
+                @Override public Iterator<K> iterator() {
+                    Iterator<Entry<K,V>> original = entrySet().iterator();
+                    return new Iterator<>() {
+                        @Override public boolean hasNext() { return original.hasNext(); }
+                        @Override public K next() { return original.next().getKey(); }
+                    };
+                }
+                @Override public boolean removeIf(Predicate<? super K> predicate) {
+                    Objects.requireNonNull(predicate);
+                    return source.entrySet().removeIf(entry -> test.test(entry) && predicate.test(entry.getKey()));
+                }
+                @Override public boolean removeAll(Collection<?> keys) {
+                    Objects.requireNonNull(keys); return removeIf(keys::contains);
+                }
+                @Override public boolean retainAll(Collection<?> keys) {
+                    Objects.requireNonNull(keys); return removeIf(key -> !keys.contains(key));
+                }
+            };
+        }
+        @Override public Collection<V> values() {
+            return new AbstractCollection<>() {
+                @Override public int size() { return FilteredMap.this.size(); }
+                @Override public boolean contains(Object value) { return containsValue(value); }
+                @Override public void clear() { FilteredMap.this.clear(); }
+                @Override public Iterator<V> iterator() {
+                    Iterator<Entry<K,V>> original = entrySet().iterator();
+                    return new Iterator<>() {
+                        @Override public boolean hasNext() { return original.hasNext(); }
+                        @Override public V next() { return original.next().getValue(); }
+                    };
+                }
+                @Override public boolean remove(Object value) {
+                    Iterator<Entry<K,V>> iterator = source.entrySet().iterator();
+                    while (iterator.hasNext()) {
+                        Entry<K,V> entry = iterator.next();
+                        if (test.test(entry) && valueMatches(entry, value)) { iterator.remove(); return true; }
+                    }
+                    return false;
+                }
+                @Override public boolean removeIf(Predicate<? super V> predicate) {
+                    Objects.requireNonNull(predicate);
+                    return source.entrySet().removeIf(entry -> test.test(entry) && predicate.test(entry.getValue()));
+                }
+                @Override public boolean removeAll(Collection<?> values) {
+                    Objects.requireNonNull(values); return removeIf(values::contains);
+                }
+                @Override public boolean retainAll(Collection<?> values) {
+                    Objects.requireNonNull(values); return removeIf(value -> !values.contains(value));
+                }
+            };
+        }
+    }
+
+    static class FilteredSortedMap<K,V> extends FilteredMap<K,V> implements SortedMap<K,V> {
+        final SortedMap<K,V> sorted;
+        @SuppressWarnings("unchecked")
+        FilteredSortedMap(SortedMap<K,V> source, BiPredicate<? super K,? super V> predicate) {
+            super(source, predicate); sorted = (SortedMap<K,V>) this.source;
+        }
+        @SuppressWarnings("unchecked")
+        FilteredSortedMap(SortedMap<K,V> source, Predicate<Entry<K,V>> predicate) {
+            super(source, predicate); sorted = (SortedMap<K,V>) this.source;
+        }
+        @Override public Comparator<? super K> comparator() { return sorted.comparator(); }
+        @Override public K firstKey() { return entrySet().iterator().next().getKey(); }
+        @Override public K lastKey() {
+            Iterator<Entry<K,V>> iterator = entrySet().iterator();
+            if (!iterator.hasNext()) throw new NoSuchElementException();
+            K last = iterator.next().getKey();
+            while (iterator.hasNext()) last = iterator.next().getKey();
+            return last;
+        }
+        private Entry<K,V> endpoint(boolean reverse, boolean remove) {
+            Iterator<Entry<K,V>> iterator = (reverse ? sorted.reversed() : sorted).entrySet().iterator();
+            while (iterator.hasNext()) {
+                Entry<K,V> entry = iterator.next();
+                if (test.test(entry)) {
+                    Entry<K,V> result = new SimpleImmutableEntry<>(entry);
+                    if (remove) iterator.remove();
+                    return result;
+                }
+            }
+            return null;
+        }
+        @Override public Entry<K,V> firstEntry() { return endpoint(false, false); }
+        @Override public Entry<K,V> lastEntry() { return endpoint(true, false); }
+        @Override public Entry<K,V> pollFirstEntry() { return endpoint(false, true); }
+        @Override public Entry<K,V> pollLastEntry() { return endpoint(true, true); }
+        @Override public SortedMap<K,V> subMap(K from, K to) {
+            return new FilteredSortedMap<>(sorted.subMap(from, to), test);
+        }
+        @Override public SortedMap<K,V> headMap(K to) { return new FilteredSortedMap<>(sorted.headMap(to), test); }
+        @Override public SortedMap<K,V> tailMap(K from) { return new FilteredSortedMap<>(sorted.tailMap(from), test); }
+        @Override public SortedMap<K,V> reversed() { return new FilteredSortedMap<>(sorted.reversed(), test); }
+    }
+
+    static final class FilteredNavigableMap<K,V> extends FilteredSortedMap<K,V> implements NavigableMap<K,V> {
+        private final NavigableMap<K,V> navigable;
+        @SuppressWarnings("unchecked")
+        FilteredNavigableMap(NavigableMap<K,V> source, BiPredicate<? super K,? super V> predicate) {
+            super(source, predicate); navigable = (NavigableMap<K,V>) this.source;
+        }
+        @SuppressWarnings("unchecked")
+        private FilteredNavigableMap(NavigableMap<K,V> source, Predicate<Entry<K,V>> predicate) {
+            super(source, predicate); navigable = (NavigableMap<K,V>) this.source;
+        }
+        private Entry<K,V> eligible(Iterator<Entry<K,V>> iterator, boolean remove) {
+            while (iterator.hasNext()) {
+                Entry<K,V> entry = iterator.next();
+                if (test.test(entry)) {
+                    Entry<K,V> snapshot = new SimpleImmutableEntry<>(entry);
+                    if (remove) iterator.remove();
+                    return snapshot;
+                }
+            }
+            return null;
+        }
+        private K key(Entry<K,V> entry) { return entry == null ? null : entry.getKey(); }
+        private Entry<K,V> navigate(K key, boolean above, boolean inclusive) {
+            Entry<K,V> entry = above
+                    ? (inclusive ? navigable.ceilingEntry(key) : navigable.higherEntry(key))
+                    : (inclusive ? navigable.floorEntry(key) : navigable.lowerEntry(key));
+            while (entry != null) {
+                if (test.test(entry)) return new SimpleImmutableEntry<>(entry);
+                entry = above ? navigable.higherEntry(entry.getKey()) : navigable.lowerEntry(entry.getKey());
+            }
+            return null;
+        }
+        @Override public Entry<K,V> lowerEntry(K key) { return navigate(key, false, false); }
+        @Override public Entry<K,V> floorEntry(K key) { return navigate(key, false, true); }
+        @Override public Entry<K,V> ceilingEntry(K key) { return navigate(key, true, true); }
+        @Override public Entry<K,V> higherEntry(K key) { return navigate(key, true, false); }
+        @Override public K lowerKey(K key) { return key(lowerEntry(key)); }
+        @Override public K floorKey(K key) { return key(floorEntry(key)); }
+        @Override public K ceilingKey(K key) { return key(ceilingEntry(key)); }
+        @Override public K higherKey(K key) { return key(higherEntry(key)); }
+        @Override public Entry<K,V> firstEntry() { return eligible(navigable.entrySet().iterator(), false); }
+        @Override public Entry<K,V> lastEntry() {
+            return eligible(navigable.descendingMap().entrySet().iterator(), false);
+        }
+        @Override public K firstKey() {
+            Entry<K,V> entry = firstEntry(); if (entry == null) throw new NoSuchElementException(); return entry.getKey();
+        }
+        @Override public K lastKey() {
+            Entry<K,V> entry = lastEntry(); if (entry == null) throw new NoSuchElementException(); return entry.getKey();
+        }
+        @Override public Entry<K,V> pollFirstEntry() { return eligible(navigable.entrySet().iterator(), true); }
+        @Override public Entry<K,V> pollLastEntry() {
+            return eligible(navigable.descendingMap().entrySet().iterator(), true);
+        }
+        @Override public NavigableMap<K,V> descendingMap() {
+            return new FilteredNavigableMap<>(navigable.descendingMap(), test);
+        }
+        @Override public NavigableMap<K,V> reversed() { return descendingMap(); }
+        @Override public NavigableSet<K> navigableKeySet() {
+            return new FilteredNavigableSet<>(navigable.navigableKeySet(), this::containsKey);
+        }
+        @Override public NavigableSet<K> keySet() { return navigableKeySet(); }
+        @Override public NavigableSet<K> descendingKeySet() {
+            return new FilteredNavigableSet<>(navigable.descendingKeySet(), this::containsKey);
+        }
+        @Override public NavigableMap<K,V> subMap(K from, boolean fromInclusive, K to, boolean toInclusive) {
+            return new FilteredNavigableMap<>(navigable.subMap(from, fromInclusive, to, toInclusive), test);
+        }
+        @Override public NavigableMap<K,V> headMap(K to, boolean inclusive) {
+            return new FilteredNavigableMap<>(navigable.headMap(to, inclusive), test);
+        }
+        @Override public NavigableMap<K,V> tailMap(K from, boolean inclusive) {
+            return new FilteredNavigableMap<>(navigable.tailMap(from, inclusive), test);
+        }
+        @Override public NavigableMap<K,V> subMap(K from, K to) { return subMap(from, true, to, false); }
+        @Override public NavigableMap<K,V> headMap(K to) { return headMap(to, false); }
+        @Override public NavigableMap<K,V> tailMap(K from) { return tailMap(from, true); }
+    }
+}

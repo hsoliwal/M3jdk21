@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"><modelVersion>4.0.0</modelVersion>
+<groupId>com.m3.qualification</groupId><artifactId>joined-reference-workflow</artifactId><version>1</version>
+<properties><maven.compiler.release>21</maven.compiler.release><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<m3.python>python3</m3.python><m3.bash>bash</m3.bash><m3.receiver.root>${project.basedir}/../../../..</m3.receiver.root></properties>
+<dependencies><dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2</version><scope>test</scope></dependency>
+<dependency><groupId>org.yaml</groupId><artifactId>snakeyaml</artifactId><version>2.3</version><scope>test</scope></dependency></dependencies>
+<build><directory>${m3.build.root}</directory><plugins>
+<plugin><groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.5.0</version><executions><execution><id>require-fresh-explicit-output</id><phase>validate</phase><goals><goal>exec</goal></goals><configuration><executable>${m3.python}</executable><arguments><argument>-X</argument><argument>utf8</argument><argument>-I</argument><argument>-S</argument><argument>-B</argument><argument>-c</argument><argument>from pathlib import Path;import sys,shutil;p=Path(sys.argv[1]);assert '$' not in str(p) and p.is_absolute() and p.parent.is_dir() and not p.exists();assert all(not q.is_symlink() for q in [p,*p.parents]);assert shutil.disk_usage(p.parent).free-1024**2&gt;8*1024**3;p.mkdir();(p/'temp').mkdir();(p/'home').mkdir()</argument><argument>${m3.build.root}</argument></arguments></configuration></execution></executions></plugin>
+<plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-resources-plugin</artifactId><version>3.3.1</version></plugin>
+<plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version><configuration><compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs></configuration></plugin>
+<plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version><configuration><failIfNoTests>true</failIfNoTests><forkCount>1</forkCount><reuseForks>false</reuseForks><argLine>-Xmx192m -XX:-UsePerfData -Djava.io.tmpdir="${m3.build.root}/temp" -Duser.home="${m3.build.root}/home"</argLine><systemPropertyVariables><m3.receiver.root>${m3.receiver.root}</m3.receiver.root><m3.python>${m3.python}</m3.python><m3.bash>${m3.bash}</m3.bash><m3.yaml.sha256>63a76fe66b652360bd4c2c107e6f0258daa7d4bb492008ba8c26fcd230ff9146</m3.yaml.sha256></systemPropertyVariables><properties><configurationParameters>junit.jupiter.execution.parallel.enabled=false</configurationParameters></properties></configuration></plugin>
+</plugins></build></project>

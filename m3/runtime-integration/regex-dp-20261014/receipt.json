@@ -1,0 +1,64 @@
+{
+  "schema": "M3_PATTERN_DP_RECEIVER_V1",
+  "canonicalRepository": "hsoliwal/com.synexia",
+  "sourceBaseRevision": "9e975f81b9f937d9f2a4f86ef3e821f917d7938e",
+  "canonicalCrate": "synexia-openrewrite-recipes/recipes/m3-pattern-dp-20261014",
+  "recipe": "com.synexia.m3.PatternDp",
+  "recipeManifestSha256": "3f8ce5e6ab7d7ca25e848dcf8cd4b2bb954c39a5c374ec4bdac0efffa8cbac9f",
+  "recipeClassSha256": "2c2d2faa7f046c15ee8778b8b4082bf9cf8a048e0492cb795153426fc98a2987",
+  "targetBase": "f9b3a0ce84dcdbd0cc75df956def7710ac5d04fd",
+  "intake": "TARGET_OWNED_PORT",
+  "receivingStage": "STRING_QUALIFICATION",
+  "targetSources": [
+    {
+      "path": "src/java.base/share/classes/java/util/regex/M3PatternQuery.java",
+      "preimageSha256": "5712e094926b90f3be5356dea999e9d5dc2d13e0f1fb5082e943f8c0a2d5575f",
+      "postimageSha256": "d47d7eb25f3f2d370bf3e9596d7a1ef341b881c594761aac138bc2a8930bc857",
+      "template": "M3PatternQuery.java.txt"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/regex/Pattern.java",
+      "preimageSha256": "d2828f7a76ae172204abe56cdf4e9df4b5fc0133bb65936b4e82aa9f7b9d105f",
+      "postimageSha256": "b6dbec25d39bb18f08e66625b4063cb6848bf34c33fd43b1392ccaff8d35937a",
+      "template": "Pattern.java.txt"
+    },
+    {
+      "path": "test/jdk/java/util/regex/M3PatternDpTest.java",
+      "preimageSha256": "ABSENT",
+      "postimageSha256": "a6018a5c2184fee61b11cafba52a194b2b8acd1d64b7626e94b89eb4ac1d1d13",
+      "template": "M3PatternDpTest.java.txt"
+    }
+  ],
+  "evidence": {
+    "sdk": "Maven/OpenRewrite/JUnit real execution, 16 schedules and fixed point/refusals",
+    "runtime": "five-owner java.base patch on Temurin 21.0.8+9; stock String/VM",
+    "commonChecks": 115578,
+    "digest": "cf3625dd58a952be46c1746bf2f54b49d9c9da641173b3eda628446cd47b053a",
+    "modes": [
+      "mixed",
+      "interpreter",
+      "C1",
+      "C2"
+    ],
+    "mutantsKilled": 2,
+    "warmAllocationFixtureBytesPerCall": {
+      "before": 216,
+      "after": 24
+    },
+    "additionalRetainedBytesFixtures": [
+      104,
+      128
+    ]
+  },
+  "pending": [
+    "full candidate M3JDK21 image",
+    "canonical M3 backing/HotSpot/GC/CDS runtime",
+    "jtreg harness",
+    "full reactor/lint/static analysis",
+    "cross-platform",
+    "hosted CI",
+    "rewrite-maven-plugin dryRun (offline artifact unavailable)",
+    "full-borrow policy Git ancestry gate (extracted snapshot)"
+  ],
+  "rights": "Original target GPLv2+Classpath headers preserved. Synexia recipe tooling and receiver metadata Apache-2.0; Copyright 2026 Hitesh Soliwal and contributors. No private invention packet."
+}

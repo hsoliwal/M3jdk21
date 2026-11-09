@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: org.gradle.internal.m3.ast.M3GradleASTProviderTest
+-------------------------------------------------------------------------------
+Tests run: 20, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.614 s -- in org.gradle.internal.m3.ast.M3GradleASTProviderTest

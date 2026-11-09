@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/8cbeab1c181e/tooling/rx7/receiver-donor/isolated-a556gqag/symlink/crate/receive.py", line 195, in <module>
+    main()
+  File "/workspace/scratch/8cbeab1c181e/tooling/rx7/receiver-donor/isolated-a556gqag/symlink/crate/receive.py", line 190, in main
+    result = receive(crate, args.dataset, owner.absolute(), args.target.absolute(), args.check)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/8cbeab1c181e/tooling/rx7/receiver-donor/isolated-a556gqag/symlink/crate/receive.py", line 150, in receive
+    path = contained(target, relative)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/8cbeab1c181e/tooling/rx7/receiver-donor/isolated-a556gqag/symlink/crate/receive.py", line 50, in contained
+    raise ValueError("symlink target or parent is not admitted: " + relative)
+ValueError: symlink target or parent is not admitted: test/jdk/jdk/internal/mindex/M3RX7TokenIndexContract.java

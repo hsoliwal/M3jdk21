@@ -1,0 +1,14 @@
+old	new	status
+com.fasterxml.jackson.core.io.schubfach	com.m3.lib.core.io.schubfach	MOVE
+com.fasterxml.jackson.core.json.async	com.m3.lib.core.json.async	MOVE
+com.fasterxml.jackson.core.filter	com.m3.lib.core.filter	MOVE
+com.fasterxml.jackson.core.format	com.m3.lib.core.format	MOVE
+com.fasterxml.jackson.core.async	com.m3.lib.core.async	MOVE
+com.fasterxml.jackson.core.base	com.m3.lib.core.base	MOVE
+com.fasterxml.jackson.core.json	com.m3.lib.core.json	MOVE
+com.fasterxml.jackson.core.type	com.m3.lib.core.type	MOVE
+com.fasterxml.jackson.core.util	com.m3.lib.core.util	MOVE
+com.fasterxml.jackson.core.exc	com.m3.lib.core.exc	MOVE
+com.fasterxml.jackson.core.sym	com.m3.lib.core.sym	MOVE
+com.fasterxml.jackson.core.io	com.m3.lib.core.io	MOVE
+com.fasterxml.jackson.core	com.m3.lib.core	MOVE

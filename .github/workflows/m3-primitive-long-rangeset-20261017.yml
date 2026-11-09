@@ -1,0 +1,52 @@
+name: M3 primitive long RangeSet real array/mask owner Java21
+on:
+  push:
+    branches: ['m3/primitive-long-rangeset-receiver-20261017']
+  pull_request:
+    paths:
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongRangeSet.java'
+      - 'test/jdk/jdk/m3/collections/M3LongRangeSet*'
+      - 'm3/collections/qualification/range-atom/successor/**'
+      - 'm3/collections/algorithm-catalog/long-range-set-20261017/**'
+      - '.github/workflows/m3-primitive-long-rangeset-20261017.yml'
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  real-java21-indexed-masks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Replay historical immutable receipt and verify current source successor
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -S m3/collections/qualification/range-atom/successor/verify.py
+      - name: Compile actual M3 Java 21 owners and run differential
+        shell: bash
+        run: |
+          mkdir -p /tmp/m3-rangeset-classes
+          javac --release 21 -proc:none -Xlint:all -Werror -d /tmp/m3-rangeset-classes \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongLongConsumer.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexPathMasks.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LaneSearch.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongRangeSet.java \
+            test/jdk/jdk/m3/collections/M3LongRangeSetSelfTest.java
+          java -ea -Xmx64m -cp /tmp/m3-rangeset-classes jdk.m3.collections.M3LongRangeSetSelfTest
+      - name: Build required Java21 m3-arrays module before dependent tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/arrays/pom.xml -Dmaven.test.skip=true install
+          test -s m3/arrays/target/m3-arrays-0.1.0-SNAPSHOT.jar
+      - name: Full m3-collections Maven/JUnit contract proof
+        shell: bash
+        run: |
+          mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3LongRangeSetTest,M3LongRangeSetAtomTest test

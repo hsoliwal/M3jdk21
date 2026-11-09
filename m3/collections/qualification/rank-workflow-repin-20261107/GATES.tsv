@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: Apache-2.0
+# Re-pin of m3-long-rank-bounds-jni-java21.yml and m3-topk-frequency-jni-java21.yml (2026-11-07), master 0581643118d7ce05bfb9e884d80eb48d958a60df; WSL Ubuntu 24.04, OpenJDK 21, gcc 13.3 + UBSan.
+gate	command	state	evidence
+1_stale	git hash-object on master vs the pinned blobs	FOUND	M3LongRankBatchNative, M3LongRankIndex and m3_long_rank_batch_jni.c changed since the pins (#2616/#2693/#2714); contracts and tests unchanged; both workflows failed at their identity step
+2_replay	bash replay.sh (every build/run step of both workflows, verbatim flags)	PASS	rank: javac -Werror + JNI headers, C17 UBSan library and legacy-ABI library with the expected exports, fallback / missing-library / legacy JIT+Xint / native JIT+Xint all print 'PASS M3_LONG_RANK_BOUNDS checks=56973' and are byte-identical; topk: javac, UBSan library with topKFrequent0, 'PASS M3_LONG_TOPK_FREQUENCY checks=18561 nativeRequired=false' and '... checks=23198 nativeRequired=true', native == interpreter
+3_repin	the three owner hash-object lines in each workflow	PASS	2b34720f00d0 / 66a31672a814 / cb9473821876 (current master blobs); every expected marker in the workflows is unchanged

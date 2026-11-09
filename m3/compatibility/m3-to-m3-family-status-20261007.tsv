@@ -1,0 +1,14 @@
+family	synexia_authority	m3jdk21_owner	status_after_this_pr	next_hard_gate
+STRING_CORE	MIndexString/M3String reusable algorithms and recipes	java.lang.String + internal M3 String owners	PARTIAL_RECEIVED	full String/jtreg/interpreter-C1-C2-GC-CDS proof
+STRING_FACTS_PRECOMPUTE	MIndexString facts/plans/precompute	M3 String facts/precompute owners	PARTIAL_RECEIVED	consumer-by-consumer zero-regression proof
+REGEX_SEARCH	MIndex regex/search/precompute families	java.util.regex + M3 internal precompute	PARTIAL_RECEIVED	exact regex semantics + warm/cold evidence
+ARRAYS	Synexia array/view recipes	m3/arrays + JDK target owners	PROVING_MODULE_RECEIVED	promotion only after exact JDK consumer contract proof
+COLLECTIONS_DATA_STRUCTURES	MIndex collections/data-structure families	m3/collections + future target owners	IN_PROGRESS_RECEIVER_V1	Maven differential suite then concrete JDK consumer gates
+AST_COMPILER	MIndexAST/compiler/atomizer/patternizer	M3AST/M3ASTPC + javac/tooling owners	PARTIAL_SOURCE_AND_RECEIPTS	full consumer/dependency/effect closure
+DAG_GRAPH_RELATION	MIndexDag/graph/relation families	M3 DAG/graph planes	PENDING_FULL_RECEIVER	consumer-specific semantics and persistence proof
+FILE_SOURCE	MIndexFile/source/index families	M3 file/source plane	PENDING_FULL_RECEIVER	filesystem/lifetime/platform contract inventory
+PRECOMPUTE_GENERIC	MIndex generic precompute engine/API	M3 internal precompute	PARTIAL_RECEIVED	bounded keys/versioning/invalidation/serialization proof
+PRECOMPUTE_UNIVERSAL_IMAGES	MIndex universal/image/codec families	M3 internal/offline image owners	PENDING_FULL_RECEIVER	namespace/generation/version/malformed-artifact refusal
+DB_STORAGE	MIndexDB/storage providers	separate M3 product/storage plane	PENDING_PRODUCT_BOUNDARY	format/provider/runtime dependency decision
+JNI_NATIVE_ACCELERATORS	Synexia JNI/native kernels and provenance	HotSpot/JNI/optional M3 native	PARTIAL_RECEIVED	lifetime/GC/platform parity and Java fallback
+RECIPES	Synexia canonical Maven/OpenRewrite recipes	thin target receivers only	CANONICAL_SYNEXIA	fixed-point/source-drift/target-CI evidence for each crate

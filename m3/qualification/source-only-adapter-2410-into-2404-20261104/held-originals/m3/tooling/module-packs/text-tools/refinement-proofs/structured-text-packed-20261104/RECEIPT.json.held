@@ -1,0 +1,201 @@
+{
+  "schema": "m3.structured-text.receiving-proof/1",
+  "status": "BOUNDED_SOURCE_JAVA_JNI_AND_TWO_MODULE_QUALIFIED;FULL_M3_RECEIVING_HOLD",
+  "source_ref": "SOURCE_REF.json",
+  "outputs": [
+    {
+      "path": "m3/tooling/module-packs/text-tools/src/jdk.m3.structured/jdk/m3/structured/JsonLinesTools.java",
+      "before_sha256": "7bffd3d88dcba9e74f4e74f6f10720fbca607f5dc0e7c23251e6598c8bb4b445",
+      "after_sha256": "b2d8d4caf65216293214d06cc6a9703da6bd2abee526278c3056b968ded29507"
+    },
+    {
+      "path": "m3/tooling/module-packs/text-tools/src/jdk.m3.structured/jdk/m3/structured/StructuredTextTools.java",
+      "before_sha256": "c9516aa90e76c89b5db3d8aa15d4570088e0824eb54c75d4786db5976a38741e",
+      "after_sha256": "ee93e99b682afff657f959da0510ef918f66e422f5436774d1e2e452c17723b1"
+    },
+    {
+      "path": "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/CsvTools.java",
+      "before_sha256": "f07c5ef868f075ccae4b0732b20ecbb20634afbd73bd68a39e69a2ebf50d7a1b",
+      "after_sha256": "7292f2743415b1b8f369fd7afba668e4af39e33d4d9bcbb93fd051dfdae008c1"
+    },
+    {
+      "path": "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/NativeLineOps.java",
+      "before_sha256": "42850be2dade74bbc9847a926636917de3c7d652a0b4bdb09b81b3003bbee120",
+      "after_sha256": "a009e587a12c52222418afb11cf34826c4d2d1347da56a7dae9f4522aad28147"
+    },
+    {
+      "path": "m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/structured/FrozenJsonLinesTools.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "aee0ab9638b45afc329ce4b545fc343c2ba5e6b92a9e2b07e531eda33700d766"
+    },
+    {
+      "path": "m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/structured/FrozenStructuredTextTools.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "fd9ac641172230f4320c33fb88b78100908b6171b13bff47a5bfc8f8effc878a"
+    },
+    {
+      "path": "m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/structured/JsonLinesToolsContract.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "820b533a428189c29053aa4a182de86a1ff9dfa423709ef487231349c3ad1f26"
+    },
+    {
+      "path": "m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/structured/JsonLinesToolsDifferentialTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "c9c6543d71b8089a4819a9f594b0bb87129854b0faacb65d114a2155a9bb11e3"
+    },
+    {
+      "path": "m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/structured/StructuredTextToolsContract.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "a988f602d9a21227d7ec0f7ea39797293cbd08b2325f5fa58cc48accb828194a"
+    },
+    {
+      "path": "m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/structured/StructuredTextToolsDifferentialTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "b8511193cd15906c7f48e7525e82c28ac7e2b0b90597468b313066de4de9ac56"
+    },
+    {
+      "path": "m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/text/CsvDeniedNativeContract.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "30286c6f497cd1606bc8d0e82e4455bf4ee982eaed68f270a8afe7a51ac075c2"
+    },
+    {
+      "path": "m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/text/CsvNativeContract.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "3a8a2414089c03ae53b3dc3db1bc63592ba0ddd210f691b2a200d354f22d9e16"
+    },
+    {
+      "path": "m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/text/CsvNativeTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "275cc3772980eae61a4d94a25531eb4c1db488f76857bf28392ef7c4e3da79ad"
+    },
+    {
+      "path": "m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/text/CsvRangeContract.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "605a38ce8cc3885efd85c26b346d43a9e7548cc3fc3180c0787746d9b005847e"
+    },
+    {
+      "path": "m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/text/CsvToolsBefore.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "e419469556ec3ce314f1cf9110eb2b72455b7a36d6cbdd24f2c6657fd28ae3b5"
+    },
+    {
+      "path": "m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/text/CsvToolsDifferentialTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "785621285ab0a893ac9e14069ccbb7c2fe87dacbde9ea99c522550f38d8fcb89"
+    },
+    {
+      "path": "m3/docs/name-mapping.json",
+      "before_sha256": "406cefb62b79fc677972e9d76a77342c3999b41ef6594f9faf5bd06795235dc3",
+      "after_sha256": "299239b072f8d4e9cba4b1fb502153026ec7a6aad4bbda2c9c5ed101b52d73f0"
+    },
+    {
+      "path": "m3/tooling/module-packs/text-tools/native/m3textops.c",
+      "before_sha256": "88c7507b116f8a4116c34119caafe26666ce9094b116f19eb01527832cd5e46e",
+      "after_sha256": "7c7303ccf197ce058c7128fe0825c2619f27f6c8b28746f9a130e78ee5aed65d"
+    },
+    {
+      "path": "m3/tooling/name-contract/name-plan.json",
+      "before_sha256": "3f51a4975e9f423196a4ee5c715d4edc2c2e937c34d9d5a1e3d2276dcd47752e",
+      "after_sha256": "ce449a413258ce2ebd163afac3023c3348e8c5797984108734687f93a1e17759"
+    }
+  ],
+  "output_count": 19,
+  "source_receipt_sha256": "db565aecf1e89ee8d9769d9a0d7c6f24e7df307a33a963ca62c87f81690b6476",
+  "qualification": {
+    "java": "Temurin21.0.13+9;--release21 -proc:none -Xlint:all -Werror for product and test sources",
+    "native": "GCC13.3.0;C17 -Wall -Wextra -Werror -pedantic;actual current and legacy libraries",
+    "sdk": {
+      "tests": 10,
+      "failed": 0,
+      "skipped": 0,
+      "scope": "4 actual replay/fixed-point/refusal tests plus6 exact-path/context tests"
+    },
+    "structured_product_checks": 30,
+    "csv_product_checks": 77,
+    "case_counts": {
+      "json_differential_per_mode": 20755,
+      "json_independent_within_that_count": 4415,
+      "independent_json_prefix_cases": 404,
+      "environment_comparisons_per_mode": 131293,
+      "csv_assertions_per_mode": 28429,
+      "jni_assertions_per_mode": 1375346,
+      "jni_scan_configurations": 5124,
+      "old_sort_uniq_datasets": 256,
+      "unique_structured_junit_methods": 9,
+      "csv_fallback_junit": 4,
+      "csv_native_junit": 7,
+      "canonical_csv_junit": 4,
+      "repeated_modes_not_unique_inputs": true
+    },
+    "api_and_jni_parity": "PASS",
+    "load_modes": [
+      "missing library",
+      "current library",
+      "legacy library without new scanner",
+      "denied optional native load"
+    ],
+    "packaging": "Complete jdk.m3.text and jdk.m3.structured sources, JMOD creation, stock-Java21 jlink, and five CLI smoke tests PASS; native runtime tested separately",
+    "module_advisories": "Only exact pre-existing terminal-digit name warnings admitted for unchanged descriptors;all other diagnostics refuse"
+  },
+  "resource_observations": {
+    "scope": "Bounded candidate observations;header/package adaptations separately qualified on emitted outputs",
+    "json_warm_bytes_per_call": {
+      "small": [
+        1249,
+        1208
+      ],
+      "unused_64KiB_string": [
+        214544,
+        1392
+      ],
+      "1024_members": [
+        189384,
+        141848
+      ],
+      "256_escaped_keys": [
+        48040,
+        37080
+      ]
+    },
+    "json_fresh_jvm_tiny_bytes": [
+      40704,
+      47288
+    ],
+    "csv_1600_field_java_bytes": {
+      "unescaped": [
+        121198,
+        113088
+      ],
+      "one_doubled_quote_per_field": [
+        188768,
+        136032
+      ]
+    },
+    "csv_retained_escape_coordinates_when_selecting_one_escaped_cell": [
+      1,
+      1600
+    ],
+    "universal_speedup_claimed": false
+  },
+  "holds": [
+    "Full M3 HotSpot image,jdk.m3.io,jtreg/reactor and cross-platform qualification not executed",
+    "Inherited naming authority has15 old schema violations and existing Arrays pin drift;4 appended records individually validate",
+    "Canonical provenance gate fails inherited index byte/hash pin;task supplemental ledger does not establish global admission",
+    "No universal allocation improvement or JNI/search latency speedup;CSV escaped-cell retention and JSON cold-call regression retained",
+    "Focused29-test existing scope suite retains one identical pre-existing Guava double-slash failure; no new selected-test failures"
+  ],
+  "naming": "Four stable existing-owner records appended;all71 original records and other authority fields retained;plan changes only authority_blob;4 new records schema-valid and full baseline errors unchanged",
+  "donors": {
+    "catalogue": "151 entries;18 tags;253 overlapping tag memberships;full external tool compatibility not claimed",
+    "github": [
+      "simdjson/simdjson tape concepts",
+      "apache/commons-csv lexer comparison"
+    ],
+    "challenges": [
+      "LeetCode Mini Parser and first occurrence",
+      "HackerRank Balanced Brackets and Contacts",
+      "GeeksforGeeks open-addressing collision comparison"
+    ],
+    "external_implementation_or_submission_copied": false
+  }
+}

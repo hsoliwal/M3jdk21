@@ -1,0 +1,8 @@
+[
+  {"version":"baseline","pair":0,"java_ns_per_query":172.64905,"native_ns_per_query":304.79731,"payload_bytes":512,"blackhole":345684814},
+  {"version":"candidate","pair":0,"java_ns_per_query":19.86414,"native_ns_per_query":274.42195,"payload_bytes":512,"blackhole":345684814},
+  {"version":"candidate","pair":1,"java_ns_per_query":17.05819,"native_ns_per_query":271.85064,"payload_bytes":512,"blackhole":345684814},
+  {"version":"baseline","pair":1,"java_ns_per_query":173.84155,"native_ns_per_query":302.99499,"payload_bytes":512,"blackhole":345684814},
+  {"version":"baseline","pair":2,"java_ns_per_query":167.4806,"native_ns_per_query":304.96626,"payload_bytes":512,"blackhole":345684814},
+  {"version":"candidate","pair":2,"java_ns_per_query":18.92021,"native_ns_per_query":267.64826,"payload_bytes":512,"blackhole":345684814}
+]

@@ -1,0 +1,16 @@
+capability	upstream_behavior	java21_decision	state	reason
+CORE_MONITOR_UNPINNING	virtual thread may unmount while holding/contending/waiting on monitors	ADMIT_OPT_IN	DEPENDENCY_CLOSURE	compatible runtime enhancement when lightweight/monitor locking is selected
+LOCKING_DEFAULT	JDK24 environment uses lightweight locking as normal path	KEEP_JAVA21_LM_LEGACY_DEFAULT	LOCKED	changing Java21 runtime default is outside this JEP packet
+LM_LEGACY	JEP491 does not fix legacy-locking pinning	PRESERVE	LOCKED	Java21 default behavior must remain available and accurately described
+PINNED_TRACE_PROPERTY	remove jdk.tracePinnedThreads	REJECT_REMOVAL	LOCKED	Java21 diagnostic compatibility wins over upstream removal
+JAVA_IO_REVERTS	revert selected explicit locks back to synchronized	HOLD_UNLESS_REQUIRED	REVIEW	Java21 JEP444 lock-avoidance implementation already avoids pinning and is contract-compatible
+REFERENCE_QUEUE_REVERT	revert lock-based implementation	HOLD_UNLESS_REQUIRED	REVIEW	avoid unnecessary implementation churn
+SELECTOR_PREEMPTION	preempt blocking epoll/kqueue selects	ADMIT_SUPPORTING	REVIEW	useful to exercise unmounted synchronized callers but must preserve NIO behavior
+OBJECT_MONITOR_LOCK_ID	owner becomes stable Java thread/lock id	ADMIT_REQUIRED	HIGH_RISK	core mechanism enabling unmount across carrier changes
+CONTINUATION_LOCKSTACK_TRANSFER	freeze/thaw transfers held monitor oops	ADMIT_REQUIRED	HIGH_RISK	core mechanism
+VM_PREEMPT_MONITOR_ENTER	VM may preempt virtual thread on monitor contention	ADMIT_REQUIRED	HIGH_RISK	core mechanism
+VM_PREEMPT_OBJECT_WAIT	VM may preempt virtual thread during Object.wait	ADMIT_REQUIRED	HIGH_RISK	core mechanism
+JVMTI_MONITOR_OWNERSHIP	unmounted vthreads remain observable to JVMTI	ADMIT_REQUIRED	HIGH_RISK	serviceability contract
+JFR_PINNED_EVENT	move remaining-pinning recording into VM	ADMIT_REQUIRED	HIGH_RISK	preserve observable event semantics while reducing expected events
+SA_OBJECT_MONITOR	serviceability agent reads new owner model	ADMIT_REQUIRED	HIGH_RISK	must stay consistent with VM layout
+PUBLIC_JAVA_API	no intended public source API addition	PRESERVE	LOCKED	backport is runtime implementation not Java SE API expansion

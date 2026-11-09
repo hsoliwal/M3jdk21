@@ -1,0 +1,253 @@
+[
+  {
+    "argv": [
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/java",
+      "-version"
+    ],
+    "cwd": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass",
+    "exit_code": 0,
+    "label": "toolchain",
+    "log": {
+      "bytes": 205,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/toolchain.log",
+      "sha256": "5b4412738541184e84f6b2d7520d4f4a7c2a455f60650491464c61adcbbbdeb0"
+    },
+    "seconds": 0.037
+  },
+  {
+    "argv": [
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/jar",
+      "--describe-module",
+      "--file",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/test-dependencies/org/xerial/sqlite-jdbc/3.45.1.0/sqlite-jdbc-3.45.1.0.jar",
+      "--release",
+      "21"
+    ],
+    "cwd": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass",
+    "exit_code": 0,
+    "label": "describe-sqlite",
+    "log": {
+      "bytes": 626,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/describe-sqlite.log",
+      "sha256": "021da5bc250c0180b83631282f3b7d72c10e2c1c56151a81cbbbe9e7472aa888"
+    },
+    "seconds": 0.191
+  },
+  {
+    "argv": [
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/jar",
+      "--describe-module",
+      "--file",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-api/2.0.13/slf4j-api-2.0.13.jar",
+      "--release",
+      "21"
+    ],
+    "cwd": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass",
+    "exit_code": 0,
+    "label": "describe-slf4j",
+    "log": {
+      "bytes": 331,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/describe-slf4j.log",
+      "sha256": "d64eac1188405300eb8e9fad3bddf5bf3a34dde315d153ffc4a863ab45d26661"
+    },
+    "seconds": 0.135
+  },
+  {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/tooling/jmod-recipes/tools/jmod_pack.py",
+      "--image-tsv",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/JMOD_IMAGE.dependencies.tsv",
+      "--manifest",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/EMPTY_DESCRIPTOR_MANIFEST.tsv",
+      "--layer-root",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver",
+      "--out",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/dependency-pack",
+      "--jdk-home",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21",
+      "--release",
+      "21",
+      "--jmods-only",
+      "--legal-notices",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/legal"
+    ],
+    "cwd": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass",
+    "exit_code": 0,
+    "label": "pack-original-jdbc-modules",
+    "log": {
+      "bytes": 57,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/pack-original-jdbc-modules.log",
+      "sha256": "14ba6afe29d3d278facc9d351f202ea27a0b48c5adb7ee71135b9c6d76dc5dd0"
+    },
+    "seconds": 2.455
+  },
+  {
+    "argv": [
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/javac",
+      "--release",
+      "21",
+      "-Xlint:all",
+      "-Werror",
+      "-proc:none",
+      "-implicit:none",
+      "--module-path",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/fs/pack/jmods:/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/pack/jmods:/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/dependency-pack/jmods",
+      "-d",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/classes",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass/src/module-info.java",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass/src/proof/OnePassProof.java"
+    ],
+    "cwd": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass",
+    "exit_code": 0,
+    "label": "compile-proof",
+    "log": {
+      "bytes": 0,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/compile-proof.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "seconds": 2.022
+  },
+  {
+    "argv": [
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/jar",
+      "--create",
+      "--file",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/m3fs.onepass.proof.jar",
+      "--main-class",
+      "proof.OnePassProof",
+      "-C",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/classes",
+      "."
+    ],
+    "cwd": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass",
+    "exit_code": 0,
+    "label": "jar-proof",
+    "log": {
+      "bytes": 0,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/jar-proof.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "seconds": 0.213
+  },
+  {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/tooling/jmod-recipes/tools/jmod_pack.py",
+      "--image-tsv",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/JMOD_IMAGE.proof.tsv",
+      "--manifest",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/EMPTY_DESCRIPTOR_MANIFEST.tsv",
+      "--layer-root",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass",
+      "--out",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/proof-pack",
+      "--jdk-home",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21",
+      "--release",
+      "21",
+      "--jmods-only"
+    ],
+    "cwd": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass",
+    "exit_code": 0,
+    "label": "pack-proof",
+    "log": {
+      "bytes": 57,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/pack-proof.log",
+      "sha256": "d2fc9338b29aa8987f823887f49adcafbad30d9b9c86c82bf3ba07f6eae70881"
+    },
+    "seconds": 0.229
+  },
+  {
+    "argv": [
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/jlink",
+      "--module-path",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/jmods:/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/fs/pack/jmods:/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/pack/jmods:/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/dependency-pack/jmods:/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/proof-pack/jmods",
+      "--add-modules",
+      "m3fs.onepass.proof",
+      "--output",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/image",
+      "--no-header-files",
+      "--no-man-pages",
+      "--strip-debug"
+    ],
+    "cwd": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass",
+    "exit_code": 0,
+    "label": "jlink-composed-image",
+    "log": {
+      "bytes": 0,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/jlink-composed-image.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "seconds": 5.94
+  },
+  {
+    "argv": [
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/image/bin/java",
+      "--validate-modules"
+    ],
+    "cwd": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass",
+    "exit_code": 0,
+    "label": "validate-image",
+    "log": {
+      "bytes": 0,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/validate-image.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "seconds": 0.076
+  },
+  {
+    "argv": [
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/image/bin/java",
+      "--list-modules"
+    ],
+    "cwd": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass",
+    "exit_code": 0,
+    "label": "list-image-modules",
+    "log": {
+      "bytes": 594,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/list-image-modules.log",
+      "sha256": "b7d9de3d371ecc566019be926d015efefc62c150ee9f2c5e9258c3d23328e421"
+    },
+    "seconds": 0.148
+  },
+  {
+    "argv": [
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/jimage",
+      "extract",
+      "--dir",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/resource-check",
+      "--include",
+      "glob:/org.xerial.sqlitejdbc/META-INF/maven/org.xerial/sqlite-jdbc/LICENSE.zentus,glob:/org.xerial.sqlitejdbc/META-INF/maven/org.xerial/sqlite-jdbc/LICENSE,glob:/org.xerial.sqlitejdbc/org/sqlite/native/Linux/x86_64/libsqlitejdbc.so,glob:/org.slf4j/META-INF/LICENSE.txt",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/image/lib/modules"
+    ],
+    "cwd": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass",
+    "exit_code": 0,
+    "label": "extract-original-jdbc-resources",
+    "log": {
+      "bytes": 0,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/extract-original-jdbc-resources.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "seconds": 0.447
+  },
+  {
+    "argv": [
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/image/bin/java",
+      "-Xcheck:jni",
+      "-Djava.io.tmpdir=/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/native-tmp",
+      "-m",
+      "m3fs.onepass.proof/proof.OnePassProof",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/work"
+    ],
+    "cwd": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass",
+    "exit_code": 0,
+    "label": "one-pass-image",
+    "log": {
+      "bytes": 243,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/one-pass-image.log",
+      "sha256": "829817d55ad667d9e52ad59a73b4e9de853f16d8050e5a1f43ce48096a91643d"
+    },
+    "seconds": 0.954
+  }
+]

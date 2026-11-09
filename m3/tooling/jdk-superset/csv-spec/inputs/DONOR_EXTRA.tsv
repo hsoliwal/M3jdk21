@@ -1,0 +1,107 @@
+source	donor	key	methods	first_sentence
+gap-config	univocity-parsers	addInputAnalysisProcess	CommonParserSettings.addInputAnalysisProcess	Provides a custom InputAnalysisProcess to analyze the input buffer and potentially discover configuration options such as column separators is CSV, data formats, etc.
+gap-config	univocity-parsers	autoClosing	CommonParserSettings.isAutoClosingEnabled;CommonParserSettings.setAutoClosingEnabled	Indicates whether automatic closing of the input (reader, stream, etc) is enabled.
+gap-config	univocity-parsers	columnReordering	CommonParserSettings.isColumnReorderingEnabled;CommonParserSettings.setColumnReorderingEnabled;CommonWriterSettings.isColumnReorderingEnabled;CommonWriterSettings.setColumnReorderingEnabled	Indicates whether fields selected using the field selection methods (defined by the parent class CommonSettings) should be reordered (defaults to true).
+gap-config	univocity-parsers	commentCollection	CommonParserSettings.isCommentCollectionEnabled;CommonParserSettings.setCommentCollectionEnabled	Indicates that comments found in the input must be collected (disabled by default).
+gap-config	univocity-parsers	commentProcessing	CommonParserSettings.isCommentProcessingEnabled;CommonParserSettings.setCommentProcessingEnabled	Indicates whether code will check for comment line in the data file is enabled.
+gap-config	univocity-parsers	emptyValue	CommonWriterSettings.getEmptyValue;CommonWriterSettings.setEmptyValue	Returns the String representation of an empty value (defaults to null) When writing, if the writer has an empty String to write to the output, the emptyValue is used instead of an empty string
+gap-config	univocity-parsers	expandIncompleteRows	CommonWriterSettings.getExpandIncompleteRows;CommonWriterSettings.setExpandIncompleteRows	Indicates whether the writer should expand records with less columns than the number of headers.
+gap-config	univocity-parsers	headerExtraction	CommonParserSettings.isHeaderExtractionEnabled;CommonParserSettings.setHeaderExtractionEnabled	Indicates whether or not the first valid record parsed from the input should be considered as the row containing the names of each column
+gap-config	univocity-parsers	headerWriting	CommonWriterSettings.isHeaderWritingEnabled;CommonWriterSettings.setHeaderWritingEnabled	Returns a flag indicating whether automatic writing of headers is enabled.
+gap-config	univocity-parsers	inputAnalysisProcesses	CommonParserSettings.getInputAnalysisProcesses	Returns the sequence of InputAnalysisProcess to be used for analyzing the input buffer and potentially discover configuration options such as column separators is CSV, data formats, etc.
+gap-config	univocity-parsers	inputBufferSize	CommonParserSettings.getInputBufferSize;CommonParserSettings.setInputBufferSize	Informs the number of characters held by the parser's buffer when processing the input (defaults to 1024*1024 characters).
+gap-config	univocity-parsers	lineSeparatorDetection	CommonParserSettings.isLineSeparatorDetectionEnabled;CommonParserSettings.setLineSeparatorDetectionEnabled	Indicates whether the parser should detect the line separator automatically.
+gap-config	univocity-parsers	numberOfRecordsToRead	CommonParserSettings.getNumberOfRecordsToRead;CommonParserSettings.setNumberOfRecordsToRead	The number of valid records to be parsed before the process is stopped.
+gap-config	univocity-parsers	numberOfRowsToSkip	CommonParserSettings.getNumberOfRowsToSkip;CommonParserSettings.setNumberOfRowsToSkip	Returns the number of rows to skip from the input before the parser can begin to execute.
+gap-config	univocity-parsers	processor	CommonParserSettings.getProcessor;CommonParserSettings.setProcessor	Returns the callback implementation of the interface Processor which handles the lifecycle of the parsing process and processes each record extracted from the input
+gap-config	univocity-parsers	readInputOnSeparateThread	CommonParserSettings.getReadInputOnSeparateThread;CommonParserSettings.setReadInputOnSeparateThread	Indicates whether or not a separate thread will be used to read characters from the input while parsing (defaults true if the number of available processors at runtime is greater than 1) When enabled, a reading thread (i
+gap-config	univocity-parsers	rowProcessor	CommonParserSettings.getRowProcessor;CommonParserSettings.setRowProcessor	Returns the callback implementation of the interface RowProcessor which handles the lifecycle of the parsing process and processes each record extracted from the input Implementations based on RowProcessor allow only par
+gap-config	univocity-parsers	rowWriterProcessor	CommonWriterSettings.getRowWriterProcessor;CommonWriterSettings.setRowWriterProcessor	Returns the implementation of the interface RowWriterProcessor which processes input objects into a manageable format for writing.
+operation	commons-csv	characterPosition	CSVRecord.getCharacterPosition	Returns the start position of this record as a character position in the source stream.
+operation	commons-csv	close	CSVParser.close;CSVPrinter.close	Closes resources.
+operation	commons-csv	closed	CSVParser.isClosed	Tests whether this parser is closed.
+operation	commons-csv	comment	CSVRecord.getComment;CSVRecord.hasComment	Returns the comment for this record, if any.
+operation	commons-csv	consistent	CSVRecord.isConsistent	Tells whether the record size matches the header size.
+operation	commons-csv	currentLineNumber	CSVParser.getCurrentLineNumber	Gets the current line number in the input stream.
+operation	commons-csv	firstEndOfLine	CSVParser.getFirstEndOfLine	Gets the first end-of-line string encountered.
+operation	commons-csv	flush	CSVPrinter.flush	Flushes the underlying stream.
+operation	commons-csv	get	CSVRecord.get	Returns a value by Enum.
+operation	commons-csv	headerComment	CSVParser.getHeaderComment;CSVParser.hasHeaderComment	Gets the header comment, if any.
+operation	commons-csv	headerMap	CSVParser.getHeaderMap	Gets a copy of the header map as defined in the CSVFormat's header.
+operation	commons-csv	headerNames	CSVParser.getHeaderNames	Gets a read-only list of header names that iterates in column order as defined in the CSVFormat's header.
+operation	commons-csv	iterator	CSVParser.iterator;CSVRecord.iterator	Returns the record iterator.
+operation	commons-csv	mapped	CSVRecord.isMapped	Checks whether a given column is mapped, i.e.
+operation	commons-csv	out	CSVPrinter.getOut	Gets the target Appendable.
+operation	commons-csv	parse	CSVParser.parse	Creates a parser for the given File.
+operation	commons-csv	parser	CSVRecord.getParser	Returns the parser.
+operation	commons-csv	print	CSVPrinter.print	Prints the string as the next value on the line.
+operation	commons-csv	printComment	CSVPrinter.printComment	Prints a comment on a new line among the delimiter-separated values.
+operation	commons-csv	printHeaders	CSVPrinter.printHeaders	Prints headers for a result set based on its metadata.
+operation	commons-csv	printRecord	CSVPrinter.printRecord	Prints the given values as a single record of delimiter-separated values followed by the record separator.
+operation	commons-csv	printRecords	CSVPrinter.printRecords	Prints all the objects in the given Iterable handling nested collections/arrays as records.
+operation	commons-csv	println	CSVPrinter.println	Outputs the record separator.
+operation	commons-csv	putIn	CSVRecord.putIn	Puts all values of this record into the given Map.
+operation	commons-csv	recordNumber	CSVParser.getRecordNumber;CSVRecord.getRecordNumber	Gets the current record number in the input stream.
+operation	commons-csv	records	CSVParser.getRecords	Parses the CSV input according to the given format and returns the content as a list of CSVRecord CSVRecords.
+operation	commons-csv	set	CSVRecord.isSet	Checks whether a column with a given index has a value.
+operation	commons-csv	size	CSVRecord.size	Returns the number of values in this record.
+operation	commons-csv	stream	CSVParser.stream;CSVRecord.stream	Returns a sequential Stream with this collection as its source.
+operation	commons-csv	toList	CSVRecord.toList	Converts the values to a new List.
+operation	commons-csv	toMap	CSVRecord.toMap	Copies this record into a new Map of header name to record value.
+operation	commons-csv	trailerComment	CSVParser.getTrailerComment;CSVParser.hasTrailerComment	Gets the trailer comment, if any.
+operation	commons-csv	values	CSVRecord.values	Gets the values for this record.
+operation	univocity-parsers	addStringValues	AbstractWriter.addStringValues	Writes a sequence of Strings to a row in memory.
+operation	univocity-parsers	addValue	AbstractWriter.addValue	Writes a value to a row in memory.
+operation	univocity-parsers	addValues	AbstractWriter.addValues	Writes a sequence of values to a row in memory.
+operation	univocity-parsers	beginParsing	AbstractParser.beginParsing	Starts an iterator-style parsing cycle.
+operation	univocity-parsers	close	AbstractWriter.close	Closes the java.io.Writer given in this class constructor.
+operation	univocity-parsers	commentRow	AbstractWriter.commentRow	Writes a comment row to the output.
+operation	univocity-parsers	commentRowToString	AbstractWriter.commentRowToString	Writes a comment row to a String
+operation	univocity-parsers	context	AbstractParser.getContext	Returns the current parsing context with information about the status of the parser at any given time.
+operation	univocity-parsers	discardValues	AbstractWriter.discardValues	Discards the contents written to the internal in-memory row (using #addValues(Object...) or #writeValue().
+operation	univocity-parsers	flush	AbstractWriter.flush	Flushes the java.io.Writer given in this class constructor.
+operation	univocity-parsers	iterate	AbstractParser.iterate	Provides an IterableResult for iterating rows parsed from the input.
+operation	univocity-parsers	iterateRecords	AbstractParser.iterateRecords	Provides an IterableResult for iterating records parsed from the input.
+operation	univocity-parsers	parse	AbstractParser.parse	Parses the entirety of a given input and delegates each parsed row to an instance of RowProcessor, defined by CommonParserSettings#getRowProcessor().
+operation	univocity-parsers	parseAll	AbstractParser.parseAll	Parses all remaining rows from the input and returns them in a list.
+operation	univocity-parsers	parseAllRecords	AbstractParser.parseAllRecords	Parses all remaining Records from the input and returns them in a list.
+operation	univocity-parsers	parseLine	AbstractParser.parseLine	Parses a single line from a String in the format supported by the parser implementation.
+operation	univocity-parsers	parseNext	AbstractParser.parseNext	Parses the next record from the input.
+operation	univocity-parsers	parseNextRecord	AbstractParser.parseNextRecord	Parses the next record from the input.
+operation	univocity-parsers	parseRecord	AbstractParser.parseRecord	Parses a single line from a String in the format supported by the parser implementation.
+operation	univocity-parsers	processObjectRecords	AbstractWriter.processObjectRecords	Processes the data in all values of a map using the RowWriterProcessor provided by CommonWriterSettings#getRowWriterProcessor(), then writes all values to the output .
+operation	univocity-parsers	processObjectRecordsAndClose	AbstractWriter.processObjectRecordsAndClose	Processes the data in all values of a map using the RowWriterProcessor provided by CommonWriterSettings#getRowWriterProcessor(), then writes all values to the output and closes the writer.
+operation	univocity-parsers	processObjectRecordsToString	AbstractWriter.processObjectRecordsToString	Processes the data in all values of a map using the RowWriterProcessor provided by CommonWriterSettings#getRowWriterProcessor() and writes the result into a List of String formatted to according to the specified output f
+operation	univocity-parsers	processRecord	AbstractWriter.processRecord	Processes the data given for an individual record with the RowWriterProcessor provided by CommonWriterSettings#getRowWriterProcessor(), then writes it.
+operation	univocity-parsers	processRecordToString	AbstractWriter.processRecordToString	Processes the data given for an individual record with the RowWriterProcessor provided by CommonWriterSettings#getRowWriterProcessor(), then writes it to a String.
+operation	univocity-parsers	processRecords	AbstractWriter.processRecords	Iterates over all records, processes each one with the RowWriterProcessor provided by CommonWriterSettings#getRowWriterProcessor(), and writes them.
+operation	univocity-parsers	processRecordsAndClose	AbstractWriter.processRecordsAndClose	Iterates over all records, processes each one with the RowWriterProcessor provided by CommonWriterSettings#getRowWriterProcessor(), and writes them, then finally and closes the output A TextWritingException will be throw
+operation	univocity-parsers	processRecordsToString	AbstractWriter.processRecordsToString	Iterates over all records, processes each one with the RowWriterProcessor provided by CommonWriterSettings#getRowWriterProcessor(), and writes them to a List of String.
+operation	univocity-parsers	processValuesToRow	AbstractWriter.processValuesToRow	Writes the contents accumulated in an internal in-memory row (using #addValues(Object...) or #addValue() to a new record in the output.
+operation	univocity-parsers	processValuesToString	AbstractWriter.processValuesToString	Writes the contents accumulated in an internal in-memory row (using #addValues(Object...) or #addValue() to a String The objects added to this row will be processed with the RowWriterProcessor provided by CommonWriterSet
+operation	univocity-parsers	recordCount	AbstractWriter.getRecordCount	Returns the number of records written to the output so far
+operation	univocity-parsers	recordMetadata	AbstractParser.getRecordMetadata	Returns the metadata associated with Records parsed from the input using AbstractParser#parseAllRecords(File) or AbstractParser#parseNextRecord().
+operation	univocity-parsers	stopParsing	AbstractParser.stopParsing	Stops parsing and closes all open resources.
+operation	univocity-parsers	updateFieldExclusion	AbstractWriter.updateFieldExclusion	Updates the selection of fields to exclude when writing.
+operation	univocity-parsers	updateFieldSelection	AbstractWriter.updateFieldSelection	Updates the selection of fields to write.
+operation	univocity-parsers	writeEmptyRow	AbstractWriter.writeEmptyRow	Writes an empty line to the output, unless this is a com.univocity.parsers.fixed.FixedWidthWriter whose FixedWidthWriterSettings#getWriteLineSeparatorAfterRecord() evaluates to false.
+operation	univocity-parsers	writeHeaders	AbstractWriter.writeHeaders	Writes the headers defined in CommonSettings#getHeaders() A TextWritingException will be thrown if no headers were defined or if records were already written to the output.
+operation	univocity-parsers	writeHeadersToString	AbstractWriter.writeHeadersToString	Writes the headers defined in CommonSettings#getHeaders() to a String
+operation	univocity-parsers	writeObjectRows	AbstractWriter.writeObjectRows	Writes the values of a given map to multiple output records Each value is expected to be iterable and the result of this method will produce the number of records equal to the longest iterable.
+operation	univocity-parsers	writeObjectRowsAndClose	AbstractWriter.writeObjectRowsAndClose	Writes the values of a given map to multiple output records and closes the output when finished.
+operation	univocity-parsers	writeObjectRowsToString	AbstractWriter.writeObjectRowsToString	Writes the values of a given map to a List of String formatted to according to the specified output format.
+operation	univocity-parsers	writeRecord	AbstractWriter.writeRecord	Writes the data given for an individual record.
+operation	univocity-parsers	writeRecordToString	AbstractWriter.writeRecordToString	Writes the data given for an individual record to a String.
+operation	univocity-parsers	writeRecords	AbstractWriter.writeRecords	Iterates over all records and writes them to the output.
+operation	univocity-parsers	writeRecordsAndClose	AbstractWriter.writeRecordsAndClose	Iterates over all records, writes them and closes the output.
+operation	univocity-parsers	writeRecordsToString	AbstractWriter.writeRecordsToString	Iterates over all records and writes them to a List of String.
+operation	univocity-parsers	writeRow	AbstractWriter.writeRow	Writes the data given for an individual record.
+operation	univocity-parsers	writeRowToString	AbstractWriter.writeRowToString	Writes the data given for an individual record to a String.
+operation	univocity-parsers	writeRows	AbstractWriter.writeRows	Iterates over all records and writes them to the output.
+operation	univocity-parsers	writeRowsAndClose	AbstractWriter.writeRowsAndClose	Iterates over all records, writes them and closes the output.
+operation	univocity-parsers	writeRowsToString	AbstractWriter.writeRowsToString	Iterates over all records and writes them to a List of String.
+operation	univocity-parsers	writeStringRows	AbstractWriter.writeStringRows	Iterates over all records and writes them to the output.
+operation	univocity-parsers	writeStringRowsAndClose	AbstractWriter.writeStringRowsAndClose	Iterates over all records, writes them and closes the output.
+operation	univocity-parsers	writeStringRowsToString	AbstractWriter.writeStringRowsToString	Iterates over all records and writes them to a List of String.
+operation	univocity-parsers	writeValuesToRow	AbstractWriter.writeValuesToRow	Writes the contents accumulated in an internal in-memory row (using #addValues(Object...) or #writeValue() to a new record in the output.
+operation	univocity-parsers	writeValuesToString	AbstractWriter.writeValuesToString	Writes the contents accumulated in an internal in-memory row (using #addValues(Object...) or #addValue() as a String

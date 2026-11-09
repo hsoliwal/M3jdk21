@@ -1,0 +1,6 @@
+a069dbe231732fccf19ec6f16719bb65cbfb9d6e	main/jdk/internal/m3/collections/AlertException.java
+fb8eaacc9d7db36388ededc4188410b534e2c801	main/jdk/internal/m3/collections/BatchProcessor.java
+f71549dbdee5df314be40f24a7f6d43307f71661	main/jdk/internal/m3/collections/ICoalescingBuffer.java
+328eea35f22c20fb6ae0d2d61c674a52ed6281fd	main/jdk/internal/m3/collections/ISequenceBarrier.java
+297ff400f84d366baf898f3384d476253c13f8d9	main/jdk/internal/m3/collections/IWaitStrategy.java
+eff0bbaf6c78bf033f1911cfb432a9651d3ba5e6	test/jdk/internal/m3/collections/BatchProcessorTest.java

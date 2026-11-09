@@ -1,0 +1,5 @@
+m3/arrays/qualification/numeric-copy-20261018/src/test/java/jdk/m3/arrays/M3ArrayCopySizeAgent.java	ABSENT	f1d6631ddd126bbd9f8eed49fd4a3b1d02600675dabecec0ee2ddc849df525b3	0003-M3ArrayCopySizeAgent.java.txt
+m3/arrays/qualification/numeric-copy-20261018/src/test/java/jdk/m3/arrays/M3ArrayNumericCopyCostProbe.java	ABSENT	dde0c402e530b33be5c161e89e607da24557164b0270fa325722eff52ed83f3c	0004-M3ArrayNumericCopyCostProbe.java.txt
+m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java	87b3f76e04880c80a5bbf31e2cfe66fc7567d9b96ec5139cdf31536442ba58c7	a7f4c973aa2a29fd457365bad5faeb421f559b19a3a419694e86642edacf4bd4	0005-M3Arrays.java.txt
+m3/arrays/src/test/java/jdk/m3/arrays/M3ArrayNumericCopySelfTest.java	ABSENT	d55c1fbb487ae38ed2c9b07555dc784944b0bc8136272c6377be7cd2bf3d08dd	0006-M3ArrayNumericCopySelfTest.java.txt
+m3/arrays/src/test/java/jdk/m3/arrays/M3ArrayNumericCopyTest.java	ABSENT	2dec6e0405f8abbbcbbc8bc38f51f65464454b1d5336b6677dfe6b1b3152ab33	0007-M3ArrayNumericCopyTest.java.txt

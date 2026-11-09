@@ -1,0 +1,15 @@
+{
+  "base_commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "original_files": 1742,
+  "unchanged_original_files": 1741,
+  "changed_existing_sources": [
+    {
+      "path": "src/main/java/com/m3/collections/M3CollectionViews.java",
+      "before_blob": "258452f8442df0e257db791bdc99d1a7604ba7bc",
+      "after_blob": "a8470a26113a3f55e407a80bef95953146f3ce72"
+    }
+  ],
+  "new_sources": 2,
+  "source_change_origin": "actual OpenRewrite SDK Results, checked serial receiver",
+  "kernel_api_equal": true
+}

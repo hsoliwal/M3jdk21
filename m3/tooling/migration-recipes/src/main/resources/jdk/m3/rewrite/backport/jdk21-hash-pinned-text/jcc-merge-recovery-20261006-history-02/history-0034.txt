@@ -1,0 +1,25 @@
+{
+  "tool": "mcp__codex_apps__github_create_blob",
+  "request": {
+    "repository_full_name": "hsoliwal/com.synexia",
+    "content": "I8MoCg==",
+    "encoding": "base64"
+  },
+  "expected": {
+    "git_blob": "59b4ec83f687499a54f15695b9b246599f9579d7",
+    "bytes": 4,
+    "sha256": "823a8864668594f33fd21b51f42c08643d90be2f0d903653175047f5d0298e6c"
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "sha": "59b4ec83f687499a54f15695b9b246599f9579d7"
+    },
+    "isError": false
+  }
+}

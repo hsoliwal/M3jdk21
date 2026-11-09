@@ -1,0 +1,45 @@
+name: M3 java.base internals
+# Product code moved from the m3/ side tree into java.base (jdk.internal.m3.<area>), approved layout 2026-11-08.
+# One step per moved area runs make/m3/<area>/test-java-base.sh on a host JDK 21.
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - 'src/java.base/share/classes/jdk/internal/m3/**'
+      - 'src/java.base/share/native/libm3*/**'
+      - 'test/jdk/jdk/internal/m3/**'
+      - 'make/m3/**'
+      - '.github/workflows/m3-java-base-internals.yml'
+  push:
+    branches: [master]
+    paths:
+      - 'src/java.base/share/classes/jdk/internal/m3/**'
+      - 'src/java.base/share/native/libm3*/**'
+      - 'test/jdk/jdk/internal/m3/**'
+      - 'make/m3/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  internals:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: JUnit console launcher
+        run: mvn -B -ntp -q dependency:get -Dartifact=org.junit.platform:junit-platform-console-standalone:1.11.4
+      - name: compression (jdk.internal.m3.compression)
+        run: |
+          bash make/m3/compression/test-java-base.sh \
+            "$HOME/.m2/repository/org/junit/platform/junit-platform-console-standalone/1.11.4/junit-platform-console-standalone-1.11.4.jar" \
+            "$RUNNER_TEMP/m3-compression"

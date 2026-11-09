@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 -->
+<!--
+  Exact four-module source reactor. The driver copies this template and the
+  original vendor source trees into a fresh output/reactor namespace. Each child
+  retains its own published-source Maven integration, descriptor, shading and
+  license. This POM never becomes a parent that changes donor build semantics.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.m3.tooling</groupId>
+  <artifactId>m3-jackson-source-closure</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Jackson 2.19.2 and FastDoubleParser 1.0.90 source closure</name>
+  <modules>
+    <module>sources/fastdoubleparser-1.0.90</module>
+    <module>sources/jackson-annotations-2.19.2</module>
+    <module>sources/jackson-core-2.19.2</module>
+    <module>sources/jackson-databind-2.19.2</module>
+  </modules>
+</project>

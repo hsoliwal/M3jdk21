@@ -1,0 +1,12 @@
+{
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "before": "0b8ede7af0551b7afaa270b9723bb405fad315f4f0ddb6e8dfc4db3267e30b44",
+  "after": "df4f8498b1f633f2ffeae310f761ecaa0ea686e392557b8cfe2c684864a7f9b4",
+  "SDK_OUTPUT_CONSUMED": true,
+  "EXACT_RECEIVER": true,
+  "checksPerMode": 5723783,
+  "packagePublicDescriptors": "IDENTICAL",
+  "nativeWidgetTests": "NOT_RUN",
+  "SwtTychoBuild": "NOT_RUN",
+  "fullM3Runtime": "NOT_RUN"
+}

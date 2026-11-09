@@ -1,0 +1,10 @@
+stage	repository	pr	merge_commit	role	status	mutation_authority	promotion_authority	notes
+NEBULA_TRANSFER_GATE	hsoliwal/nebula	69	d1e2051f70e5a71c1a59da054e1cd07422d3b76c	PROVING_GROUND	MERGED	false	false	FILE DAG + fixed-point transfer gate
+NEBULA_99_COVERAGE_ORCHESTRATION	hsoliwal/nebula	71	e6e546f1565f9b4f3ebd965cee9a110692d3c515	PROVING_GROUND	MERGED	false	false	99% semantic recipe proof + Camel/Airflow/Drools projections
+NEBULA_FINAL_LAB	hsoliwal/nebula	78	08f91ed7de87c9843632375029d3ccd3e33d48b9	PROVING_GROUND	MERGED	false	false	Consolidated scope/custody/final transfer lab
+NEBULA_REPROOF	hsoliwal/nebula	80	0b7d475d0f46901620e4e54442b3fbf382d5a987	PROVING_GROUND	HOSTED_ACTIONS_STARTUP_BLOCKED_NO_JOBS	false	false	Both M3 workflows created zero jobs; no green-build claim
+NEBULA_CANONICAL_HOME	hsoliwal/nebula	81	f37748dc8130c814c3921cd1c7abddce0860ddc6	TARGET_BINDING	MERGED	false	false	Nebula binds reusable recipe authority to Synexia
+NEBULA_FILE_RECIPE_HANDOFF	hsoliwal/nebula	82	a0df2f974b6a15a5e40dffc6335b764838e40b4c	TARGET_BINDING	MERGED	false	false	Nebula FILE convergence switches to canonical Synexia recipe
+SYNEXIA_CANONICAL_OWNER	hsoliwal/com.synexia	9490	ac01d024c231bd2660e15a8edc79c31a4ea39cc0	CANONICAL_RECIPE_HOME	MERGED	false	false	Synexia owns reusable recipe authoring/mastery
+SYNEXIA_NEBULA_PROVEN_RECIPE	hsoliwal/com.synexia	9497	b7570e2f9d0d8d03b904f61896848584b3e99734	CANONICAL_RECIPE_HOME	MERGED	false	false	Nebula-proven pure-int inventory/atomize/patternize/IOP/document/fixed-point family
+M3JDK21_CONSUMER	hsoliwal/M3jdk21	227	659b91877a84f93fc7b5a78eef0f27e5e27890ed	RECEIVER	MERGED	false	false	Consumes exact Synexia canonical sources and freezes legacy mirrors

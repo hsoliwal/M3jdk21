@@ -1,0 +1,72 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 java.base JNI plus filtered/sorted integration
+
+on:
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java'
+      - 'src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java'
+      - 'src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java'
+      - 'test/jdk/jdk/internal/m3/M3FusedMaskedFilteredSortedViewTest.java'
+      - 'test/jdk/jdk/internal/mindex/M3CollectionMaskCompactorPrefixTest.java'
+      - 'm3/qualification/mask-prefix-scalar-20261021/**'
+      - 'test/jdk/jdk/internal/m3/M3MaskCollectionViewIntegrationTest.java'
+      - 'm3/qualification/superset-native-filtered-20261021/**'
+      - '.github/workflows/m3jdk21-original-native-filtered-integration-20261022.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  original-java-base-jni:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify exact-head source and patch files
+        shell: bash
+        run: |
+          set -euo pipefail
+          java -version
+          javac -version
+          gcc --version | head -1
+          git diff --check
+          python3 m3/qualification/superset-native-filtered-20261021/verify_received_blobs.py
+      - name: Run actual libjava JNI scan-count and java.util filtered/sorted contract gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash m3/qualification/superset-native-filtered-20261021/verify-integrated-java-jni.sh \
+            | tee "$RUNNER_TEMP/m3jdk21-integrated-mask-proof.log"
+      - name: Run the existing source-sealed original ArrayList Object-array mask atom proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash m3/qualification/mask-prefix-scalar-20261021/verify.sh \
+            | tee "$RUNNER_TEMP/m3jdk21-scalar-mask-proof.log"
+      - name: Require executed non-skipped behavioral receipts
+        shell: bash
+        run: |
+          set -euo pipefail
+          prefix="$RUNNER_TEMP/m3jdk21-scalar-mask-proof.log"
+          test -s "$prefix"
+          test "$(grep -c '^PASS M3JDK21 direct java.base mask-prefix checks=' "$prefix")" -ge 2
+          grep -q 'BootstrapViewsTest.*PASS' "$prefix"
+          grep -q 'CollectionViewsContract.*PASS' "$prefix"
+          receipt="$RUNNER_TEMP/m3jdk21-integrated-mask-proof.log"
+          test -s "$receipt"
+          grep -q '^M3_INTEGRATED_MASK_FILTER_PASS mode=java checks=' "$receipt"
+          grep -q '^M3_INTEGRATED_MASK_FILTER_PASS mode=native checks=' "$receipt"
+          grep -q '^COUNT_PASS ' "$receipt"
+          grep -q '^MASK_WINDOW_PASS ' "$receipt"
+          grep -q 'BootstrapViewsTest.*PASS' "$receipt"
+          grep -q 'CollectionViewsContract.*PASS' "$receipt"
+          test "$(grep -c '^PASS M3FusedMaskedFilteredSortedViewTest checks=' "$receipt")" -ge 2
+          grep -q '^PASS: exact integrated M3JDK21 Java21 array/mask fused views,' "$receipt"

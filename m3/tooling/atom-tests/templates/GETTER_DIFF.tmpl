@@ -1,0 +1,8 @@
+## SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+## Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+## optional label
+## One built receiver: ${expected} equals ${receiver}.${atom}(); ${setup} builds the receiver, ${extra} holds further checks.
+## label: optional trailing assertion-message argument, written with its leading comma (", d.toString()").
+${setup}
+assertEquals(${expected}, ${receiver}.${atom}()${label});
+${extra}

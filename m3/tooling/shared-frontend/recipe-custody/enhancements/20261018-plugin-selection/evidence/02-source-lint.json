@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "targets": 5,
+  "utf8": true,
+  "lf": true,
+  "final_newline": true,
+  "no_trailing_whitespace": true,
+  "compiler_diffs": "additions only",
+  "inventory_sha256": "8d536265eae962e6a943adbce003496b50e8f41e284b5a1df4c5eb0d83b09274"
+}

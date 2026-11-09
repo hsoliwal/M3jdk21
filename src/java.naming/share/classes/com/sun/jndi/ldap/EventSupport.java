@@ -33,6 +33,7 @@ import java.util.Map;
 
 import javax.naming.*;
 import javax.naming.event.*;
+import javax.naming.event.ObjectChangeListener;
 import javax.naming.directory.SearchControls;
 import javax.naming.ldap.UnsolicitedNotificationListener;
 import javax.naming.ldap.UnsolicitedNotificationEvent;

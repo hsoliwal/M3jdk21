@@ -1,0 +1,24 @@
+{
+  "schema": "jcc-source-ci-observation/v1",
+  "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+  "pull_request": 9285,
+  "observed_at": "2026-10-05 11:41:11 UTC",
+  "pr_triggered_workflow_runs_returned": 0,
+  "workflow_query_scope": "Connector first-page wrapper filtered to pull-request-triggered runs",
+  "commit_statuses_returned": 0,
+  "commit_check_runs_total": 0,
+  "qualification": "NO_CI_PASS_EVIDENCE_OBSERVED",
+  "local_test_qualification": "BLOCKED_AT_UPSTREAM_STAGE_46",
+  "raw_payloads": {
+    "workflows": {
+      "workflow_runs": []
+    },
+    "statuses": {
+      "statuses": []
+    },
+    "checks": {
+      "total_count": 0,
+      "check_runs": []
+    }
+  }
+}

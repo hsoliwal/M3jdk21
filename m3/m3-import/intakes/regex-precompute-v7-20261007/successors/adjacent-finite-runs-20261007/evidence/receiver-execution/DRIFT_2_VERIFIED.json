@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "status": "PASS_EXACT_DRIFT_REFUSAL_NO_RECIPE_MUTATION",
+  "case": 2,
+  "actualExitCode": 1,
+  "log": {
+    "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\native-preparation-06\\M3_REGEX_MAVEN_06_driftQuery.log",
+    "bytes": 8033,
+    "sha256": "605370c7f31277c876ecec434cc0817f4e5ffc3f9ab64499c891d695ece7f214"
+  },
+  "prepared": {
+    "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\native-preparation-06\\M3_REGEX_MAVEN_06_DRIFT_2_PREPARED.json",
+    "sha256": "1741e6f8dbda484dda38d65bc233208438b63e491826ee9a9f8aba49d7507c21"
+  },
+  "allTwoTargetsUnchangedDuringRefusal": true,
+  "onlyDeliberateDriftRestored": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexTrigramQuery.java",
+  "restoredSHA256": "9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e"
+}

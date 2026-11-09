@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Inputs to existing M3SerialFileAtomConvergenceRecipe.plan; never fabricated proofs",
+  "type": "object",
+  "required": [
+    "sourcePath",
+    "sourceRoot",
+    "interfaceRoot",
+    "behaviorRoot",
+    "problemShape",
+    "problemCategory",
+    "problemTerm",
+    "challengeLimit",
+    "jniFollowUp"
+  ],
+  "properties": {
+    "sourcePath": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceRoot": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "interfaceRoot": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "External compiler/API reference; inventory hypotheses do not prove interface parity"
+    },
+    "behaviorRoot": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "External executable oracle reference; inventory hypotheses do not prove behavior"
+    },
+    "problemShape": {
+      "type": "string"
+    },
+    "problemCategory": {
+      "type": "string"
+    },
+    "problemTerm": {
+      "type": "string"
+    },
+    "challengeLimit": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000
+    },
+    "jniFollowUp": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,10 @@
+stage	status	evidence
+INVENTORY	PASS	8/8 original target paths ABSENT; original Wave22 head and donor frozen
+CANONICAL_SOURCE	PASS	8/8 full SHA256 and original Git blob preflight source checks
+CATALOGUE_HISTORY	PASS	91 rows, preceding 14 Wave22 columns identical
+JAVA_RECEIVER	PASS	Original two Java classes and 3 Java oracles
+NATIVE_RECEIVER	PASS	Original C JNI intersection and C independent oracle
+STRICT_COMPILE	NOT_RUN	Java21 -Xlint:all -Werror and C17 warnings-as-errors
+RUNTIME_JNI	NOT_RUN	JIT/-Xint -Xcheck:jni, sorted interval parity
+MAVEN_SDK	HOLD	Original Synexia OpenRewrite Recipe.run/fixed-point/refusal
+M3JDK21_JMOD	HOLD	CPU-tools native sidecar not installed into original JMOD

@@ -1,0 +1,1 @@
+s/ch\.randelshofer\.fastdoubleparser([^A-Za-z0-9_$]|$)/com.m3.lib.fastdoubleparser\1/g;s#ch/randelshofer/fastdoubleparser([^A-Za-z0-9_$]|$)#com/m3/lib/fastdoubleparser\1#g;

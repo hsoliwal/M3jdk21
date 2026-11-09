@@ -1,0 +1,3 @@
+MINDEX_JDK_MAPPED_BACKING_PASS|utf16=1|utf8=1|alias=1|substring=1|jni=0
+MAP_GUARD_FD_PASS outer=16 inner=16 nested=4
+MAP_GUARD_PASS group=all checks=78

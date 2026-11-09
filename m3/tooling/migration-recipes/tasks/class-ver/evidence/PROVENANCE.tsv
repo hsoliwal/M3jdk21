@@ -1,0 +1,10 @@
+owner	identity	role
+M3-SCALE	v3 Locked Canon	Scope and evidence rules
+JVMS21	section4.1	Normative class-version semantics
+M3ModuleInspector.before	3330ab9fb43fc26bd55d191c9750c25fcbfd5659	Current original production source
+M3ModuleInspector.after	f76f7f2fb28098ec32cdd1a6462e3b2c14105f49	Exact saved conformance candidate
+M3ModuleClassVersionChecks	647f01bf4c7fadb88df833f1ec5e2f3625f06bb6	Exact saved behavioral corpus
+M3ModuleClassVersionTest	53914972a79b15abf64b02aa4e05428c97401d76	Exact saved JUnit wrapper
+M3Jdk21HashPinnedSnapshotRecipe	20492e1fe59f86be4171461317777585f985e706	Existing corrected engine reused
+ClassVerTest	1e9836569084bcfc4a2693101f234c0395d94917	New framework test; execution still required
+build_pack.py	cbf6b3defb5dacac622f38314868bdf428252958	Current diagnostic assembler reused unchanged

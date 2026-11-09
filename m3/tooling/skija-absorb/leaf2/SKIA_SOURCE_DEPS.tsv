@@ -1,0 +1,5 @@
+dependency	skia_path	git_origin	revision	DEPS_line	state
+expat	third_party/externals/expat	https://chromium.googlesource.com/external/github.com/libexpat/libexpat.git	8e49998f003d693213b538ef765814c7d21abada	47	SOURCE_PIN_ONLY
+freetype	third_party/externals/freetype	https://chromium.googlesource.com/chromium/src/third_party/freetype2.git	1518bc83d26b434031bd12c706ac3c7dab3902fd	48	SOURCE_PIN_ONLY
+harfbuzz	third_party/externals/harfbuzz	https://chromium.googlesource.com/external/github.com/harfbuzz/harfbuzz.git	08b52ae2e44931eef163dbad71697f911fadc323	49	SOURCE_PIN_ONLY
+libpng	third_party/externals/libpng	https://skia.googlesource.com/third_party/libpng.git	ed217e3e601d8e462f7fd1e04bed43ac42212429	59	SOURCE_PIN_ONLY

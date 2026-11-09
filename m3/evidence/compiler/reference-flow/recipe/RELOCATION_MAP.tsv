@@ -1,0 +1,18 @@
+kind	side	donor	target	sites_ProgressMonitor_import	sites_ProgressState_import	note
+MODULE	-	synexia-indexstring-compiler	m3/compiler/reference-flow	-	-	donor Maven module at the lineage commit (PROVENANCE.tsv)
+PACKAGE	-	com.synexia.indexstring.compiler	jdk.m3.compiler.reference	-	-	JDK naming rule PKG; module org.m3jdk.compiler.reference
+TYPE	-	com.synexia.common.progress.ProgressMonitor	jdk.m3.collections.M3ProgressMonitor	-	-	same members; the family calls checkCanceled() and state() only
+TYPE	-	com.synexia.common.progress.ProgressState	jdk.m3.collections.M3ProgressState	-	-	same 8 record components
+FILE	main	M3CRefPathCertainty	M3CRefPathCertainty	1	0	-
+FILE	main	M3CompilerFactsAudit	M3CompilerFactsAudit	1	0	-
+FILE	main	M3CompilerReferenceCensus	M3CompilerReferenceCensus	1	0	-
+FILE	main	M3Liveness	M3Liveness	1	0	-
+FILE	main	M3LoopFacts	M3LoopFacts	1	0	-
+FILE	main	M3ReferenceFlow	M3ReferenceFlow	1	0	-
+FILE	main	M3SourceLiveness	M3SourceLiveness	1	0	-
+FILE	test	M3CRefPathCertaintyProof	M3CRefPathCertaintyProof	0	0	-
+FILE	test	M3CRefPathCertaintyTest	M3CRefPathCertaintyTest	0	0	-
+FILE	test	M3CompilerReferenceCensusProof	M3CompilerReferenceCensusProof	0	0	-
+FILE	test	M3CompilerReferenceCensusTest	M3CompilerReferenceCensusTest	0	0	-
+FILE	test	M3ReferenceFlowQualification	M3ReferenceFlowQualification	1	1	-
+FILE	test	M3ReferenceFlowTest	M3ReferenceFlowTest	0	0	-

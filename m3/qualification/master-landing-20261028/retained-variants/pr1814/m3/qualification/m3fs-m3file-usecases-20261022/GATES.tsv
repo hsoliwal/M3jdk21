@@ -1,0 +1,14 @@
+gate	status	proof
+M3FS_19_PROVIDER_DONOR_BLOBS	PASS	Exact Git postimage comparison after serial receiving
+M3FILE_JAVA_POSTIMAGE	PASS	SHA256-pinned original class now has additive bounded capture API
+M3FILE_CAPTURE_TEST_POSTIMAGE	PASS	New source-owned test exact recipe blob
+M3_FILE_VERIFY_SOURCE_SEAL	PASS	Python original strict list pre/post exact source
+M3FS_ORIGINAL_PROVIDER_TESTS	HISTORICAL_DONOR_PASS	#1747 372 Java and 12 CTest; not rerun on this branch
+CAPTURE_BYTE_KERNEL_JAVA21	SCOPED_PASS	87270 checks in isolated class compiled with -Xlint:all -Werror
+JAVA_OPENREWRITE_ENGINE	NOT_RUN	Actual canonical SDK fixed point and source-drift refusal
+M3FILE_MODULE_HOST_AND_JLINK	NOT_RUN	Original m3/file/verify.py strict original+new contract
+M3FS_NATIVE_SQLITE	NOT_RUN	Original project JNI/JUnit/CTest and m3db VFS
+JDK21_HOTSPOT_JTREG	NOT_RUN	Complete M3JDK21 source-built image
+MAVEN_GRADLE_IDE	NOT_RUN	End-to-end one-stream source/semantic compiler reuse
+ANDROID_WINDOWS_MAC	NOT_RUN	Provider filesystem and native ABI
+PERFORMANCE	NOT_MEASURED	Whole-source byte capture vs two separate read/hash passes

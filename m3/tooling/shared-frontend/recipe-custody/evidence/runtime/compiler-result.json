@@ -1,0 +1,11 @@
+{
+  "schema": "M3_SHARED_FRONTEND_RUNTIME_PROOF_1",
+  "compiler_contracts": "PASS",
+  "checks": 70,
+  "openrewrite_contracts": "PASS",
+  "test_sha256": "47349ef82633f724f3ca694521250048ba70486b094b069fc51c13b5e64978a5",
+  "jdk_modules_sha256": "248d58e5ef29e42665ac540ffe30ba6e396f19e48b4b80e6b3d1dd865c4c4f9d",
+  "jdk_release_sha256": "c5f11e76a47ae5d477a17a999e8938bfb2c68090ee5aff2800e73cfc513432c7",
+  "scope": "Execution on the supplied image; source-build provenance is a separate receipt.",
+  "performance_claim": "NONE"
+}

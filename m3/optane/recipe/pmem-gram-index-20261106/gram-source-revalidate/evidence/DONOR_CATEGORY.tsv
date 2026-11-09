@@ -1,0 +1,6 @@
+category	problem	source	decision	contract
+byte-first-hit	LeetCode 28	https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/	REFERENCE_ONLY	first 0-based byte offset; reuse incumbent PMEMSDK
+overlap-count	HackerRank Find a String	https://www.hackerrank.com/challenges/find-a-string/problem	REJECT_SUBSTITUTION	counts all overlapping occurrences; first-hit contract differs
+linear-prefix-search	GeeksforGeeks KMP	https://www.geeksforgeeks.org/dsa/kmp-algorithm-for-pattern-searching/	TEST_SHAPE_ONLY	already-owned C17/JNI and Java FILE KMP
+source-integrity	Synexia PMEMSDK	commit:433a19772a84278dea5df71a0427df4bdd7f9bab	REUSE Apache-2.0	original PmemSourceImage.readSealed verifies full file digest
+rewrite	Synexia M3HashPinnedJavaSnapshotRecipe	commit:433a19772a84278dea5df71a0427df4bdd7f9bab	REUSE Apache-2.0	exact PRE->POST, fixed point and refused drift

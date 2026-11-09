@@ -1,0 +1,80 @@
+    /** Columns of the census SEMANTIC_CENSUS_&lt;repo&gt;.tsv ledger (contract/SEMANTIC_SOURCE_CENSUS_V1.md). */
+    private static final int CENSUS_COLUMNS = 12;
+    private static final String CENSUS_HEADER_PREFIX = "atom_id\trepo\tpath\tkind\towner\tname\tsignature\t";
+    private static final String CENSUS_CONTRACT = "m3/tooling/atom-census SEMANTIC_CENSUS_V1";
+
+    /** Runs the census CLI ({@code --semantic}) on the one file at its logical path; keeps executable Java atoms. */
+    private static List<M3AtomRecord> census(String module, String path, byte[] source, Path rules) {
+        Path work = null;
+        try {
+            work = Files.createTempDirectory("m3-atom-census-");
+            Path root = work.resolve("src");
+            Path file = root.resolve(path);
+            Files.createDirectories(file.getParent());
+            Files.write(file, source);
+            Path out = work.resolve("out");
+            M3AtomCensus.main(new String[] {"--semantic", module, rules.toString(), out.toString(), root.toString()});
+            return atoms(path, source, Files.readAllLines(
+                    out.resolve("SEMANTIC_CENSUS_" + module + ".tsv"), StandardCharsets.UTF_8));
+        } catch (IOException failure) {
+            throw new IllegalArgumentException("census atom parse failed", failure);
+        } finally {
+            if (work != null) deleteTree(work);
+        }
+    }
+
+    /** The census rows of one file, bound to its exact bytes through the FILE_CONTAINER source digest. */
+    private static List<M3AtomRecord> atoms(String path, byte[] source, List<String> rows) {
+        if (rows.isEmpty() || !rows.get(0).startsWith(CENSUS_HEADER_PREFIX)) {
+            throw new IllegalStateException("census ledger schema changed");
+        }
+        List<M3AtomRecord> all = rows.stream().skip(1).map(row -> row.split("\t", -1)).map(cells -> {
+            if (cells.length != CENSUS_COLUMNS || !path.equals(cells[2])) {
+                throw new IllegalStateException("census row outside the atomized file");
+            }
+            return new M3AtomRecord(cells[0], cells[2], M3AtomKind.valueOf(cells[3]), cells[4], cells[6],
+                    cells[9], cells[10], CENSUS_CONTRACT, Boolean.parseBoolean(cells[11]));
+        }).toList();
+        String digest = sha256(source);
+        if (all.stream().noneMatch(atom -> atom.kind() == M3AtomKind.FILE_CONTAINER
+                && atom.sourceSha256().equals(digest))) {
+            throw new IllegalStateException("census source identity drift");
+        }
+        return all.stream().filter(atom -> atom.kind().executable() && atom.kind().javaAtom()).toList();
+    }
+
+    private static void deleteTree(Path root) {
+        try (Stream<Path> walk = Files.walk(root)) {
+            for (Path path : walk.sorted(Comparator.reverseOrder()).toList()) {
+                Files.delete(path);
+            }
+        } catch (IOException failure) {
+            throw new UncheckedIOException("census scratch cleanup failed", failure);
+        }
+    }
+
+    /** SHA-256 of the bytes, lowercase hex (the donor's M3Hash.sha256, on java.security.MessageDigest). */
+    static String sha256(byte[] bytes) {
+        try {
+            return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(bytes));
+        } catch (NoSuchAlgorithmException exception) {
+            throw new IllegalStateException("SHA-256 unavailable", exception);
+        }
+    }
+
+    /** Domain-separated, length-framed SHA-256 of the values (the donor's M3Hash.canonical). */
+    private static String canonical(String domain, List<String> values) {
+        StringBuilder out = new StringBuilder();
+        append(out, domain);
+        for (String value : values) {
+            append(out, value);
+        }
+        return sha256(out.toString().getBytes(StandardCharsets.UTF_8));
+    }
+
+    private static void append(StringBuilder out, String value) {
+        String safe = value == null ? "" : value;
+        out.append(safe.length()).append(':').append(safe).append(';');
+    }
+
+    /** Fixed, independently repeatable arithmetic oracle; not a JDK product benchmark. */

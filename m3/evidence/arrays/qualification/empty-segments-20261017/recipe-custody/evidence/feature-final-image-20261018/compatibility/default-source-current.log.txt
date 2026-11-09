@@ -1,0 +1,2 @@
+LegacyAdapter.java:2:19: compiler.err.default.overrides.object.member: toAdapter, kindname.interface, LegacyAdapter
+1 error

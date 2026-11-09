@@ -1,0 +1,272 @@
+[
+  {
+    "path": "m3/unrelated-ast-proof-sibling.keep",
+    "sha256": "e547cff6efb9450264c048194ec641eb814aa13f944b929749f8659734a23fd3",
+    "bytes": 64,
+    "mtimeNs": 1791355277145467800
+  },
+  {
+    "path": "m3/vendor/m3/LICENSE",
+    "sha256": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6",
+    "bytes": 11558,
+    "mtimeNs": 1791355277144456300
+  },
+  {
+    "path": "m3/vendor/m3/NOTICE",
+    "sha256": "31cec4f2c4936b0e7a71a77847a3c20b0959e119a02ef5cf537f4f707fff9427",
+    "bytes": 14991,
+    "mtimeNs": 1791355277144456300
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexAssociativity.java",
+    "sha256": "f6f8da948390497381015fc6f835c069effc07c232e8caf37150af2fe1cf5da2",
+    "bytes": 209,
+    "mtimeNs": 1791354323724367000
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexAST.java",
+    "sha256": "8fb782080d19d7510511a69b36f20d091bf92fbf3fcb76ce719594fcd5fc4044",
+    "bytes": 8133,
+    "mtimeNs": 1791354323698447700
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTChildRole.java",
+    "sha256": "81b50894872192859408605dfba0ce6f3b36676ac18ab583527c5e539bc5c492",
+    "bytes": 253,
+    "mtimeNs": 1791354323699444400
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTDiagnostic.java",
+    "sha256": "f24f19f85a8a606921aff3fcb8cf196b0233735c2f1b1ea722ce046e5d623add",
+    "bytes": 648,
+    "mtimeNs": 1791354323703446300
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTDiff.java",
+    "sha256": "665efbc60c339ebbee9e1ff5a9bd544242a87f5b07d47b0fa67eb79c8d95b372",
+    "bytes": 1649,
+    "mtimeNs": 1791354323704353000
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTDispatchNative.java",
+    "sha256": "7eeef91f4acb52f9696d3e4aba899ac5d23013df7251adc20000888f523c0da5",
+    "bytes": 15349,
+    "mtimeNs": 1791354323705440000
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTDocument.java",
+    "sha256": "0d6e1fcd466b2299c2015a71e519922b01917790b63f8c24f0e7bea789f09f7a",
+    "bytes": 9220,
+    "mtimeNs": 1791354323705440000
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTEditSession.java",
+    "sha256": "4743ad7382e50608e46f59f226429af86bfbdc829f541c6c136edeea45b18d3c",
+    "bytes": 12767,
+    "mtimeNs": 1791354323706363200
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTKindAutomaton.java",
+    "sha256": "cf4372168428e93a99591ad559ec56dafa5fbbf6fe28861947f1bf3280d09324",
+    "bytes": 7459,
+    "mtimeNs": 1791354877943196000
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTKindPattern.java",
+    "sha256": "fe553a74062b1f494234775e3808a96e6db7fb85826e56f0bb8d9415b550e710",
+    "bytes": 3247,
+    "mtimeNs": 1791354877944245500
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTLcaSparseTable.java",
+    "sha256": "cfc15017a0facd4973beb227ed3536f2d0612f77eac773fe0939c3c70d807666",
+    "bytes": 12376,
+    "mtimeNs": 1791354323707432900
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTOccurrenceSource.java",
+    "sha256": "eb2de4f424c38229ee1b5f772682a30e17cb842e0c58a47e59a73e335c47822e",
+    "bytes": 1306,
+    "mtimeNs": 1791354323708405500
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTParser.java",
+    "sha256": "c8c5abb7c6499d406ed44c673e01e7d64c62e7f51567cc09aa5867384e29504a",
+    "bytes": 13575,
+    "mtimeNs": 1791354323709367000
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTPartialCache.java",
+    "sha256": "e0d77f2004919604e6dacca0830de01df55df1081974cda37190c9c57f8f109b",
+    "bytes": 36255,
+    "mtimeNs": 1791354323709367000
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTPool.java",
+    "sha256": "44c50bd015f4b92bdb9cbf29b4e0d4c9531423434c054eacd108618b5a4d8a8f",
+    "bytes": 24458,
+    "mtimeNs": 1791354323710387100
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTPoolPrecompute.java",
+    "sha256": "03cdf53a164072f91aad525ef7263d350197b908ed10c63c3564b11f07ffac34",
+    "bytes": 27965,
+    "mtimeNs": 1791354323711362300
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTPrecompute.java",
+    "sha256": "98a0e087877e8ed344a6b134a88b7294b30b0e30673b41197ef5ceb36a560808",
+    "bytes": 27124,
+    "mtimeNs": 1791354323712368800
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTPrecomputeCodec.java",
+    "sha256": "a41be3d51949e2e9e0318cddb38f9181d1d12b556aa9c62e0d8fdb1e1d3b2905",
+    "bytes": 10065,
+    "mtimeNs": 1791354323713423700
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTProductionDispatch.java",
+    "sha256": "b9ac323a590d97f3004a1d2a597119fd73039e90916a2f558f861b23a5d9bb2a",
+    "bytes": 19376,
+    "mtimeNs": 1791354323714457700
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTProductionPlans.java",
+    "sha256": "f3b512085d3729f78a128446388f319bc3d8c0ddfede52dcc261b244ae11a811",
+    "bytes": 27613,
+    "mtimeNs": 1791354323715390100
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTQuery.java",
+    "sha256": "23c113ddaf0bf05fe9771b5ea8a60cc57c92db916e8960ef79386c373bf40639",
+    "bytes": 9016,
+    "mtimeNs": 1791354323716553100
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTResidentCache.java",
+    "sha256": "6e6a5c8052e57aedaebcfbf20faa0c36b374f7d87d067165a86ca21c13140e02",
+    "bytes": 13527,
+    "mtimeNs": 1791354323717407100
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTReuseKey.java",
+    "sha256": "e21f57eba63c4e1b156fadefac0703c9f8ef80f4581fe1097d6ac515fd801395",
+    "bytes": 5691,
+    "mtimeNs": 1791354323718399200
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTSourceIndex.java",
+    "sha256": "d0b7eeb7bc57e840f96a4b24bc7ab767aed3408bcf3f67ed900e0452fd9bcc0c",
+    "bytes": 9345,
+    "mtimeNs": 1791354323718399200
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTSpecImage.java",
+    "sha256": "db171248f9f4c8b43fa7a4addc7fa7e61ea09cf0ce5266795c6a497a69d100d1",
+    "bytes": 31206,
+    "mtimeNs": 1791354323719471300
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTSpecImageView.java",
+    "sha256": "e022d5e3870ce067bb62ee1fe542611fc4212d32b1e56bee1e3d758095698113",
+    "bytes": 7612,
+    "mtimeNs": 1791354323720362800
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTSpecPrecompute.java",
+    "sha256": "afb1c316591eb464b0421798a8891438ef8578d6e2adf97c50fc5620bf06c640",
+    "bytes": 21477,
+    "mtimeNs": 1791354323721469200
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTSpecs.java",
+    "sha256": "dbbfcd501be9816376b0c3d9fa3bd564f1c566c8839f1146925e2a9678768524",
+    "bytes": 3772,
+    "mtimeNs": 1791354323723388700
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTSpecTreePrecompute.java",
+    "sha256": "094cf0a7913fe8ff85de9e81ba80c59aaa490fa4fec7955c6775d233b1c15cd8",
+    "bytes": 37941,
+    "mtimeNs": 1791354323722482800
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexFlagPolicy.java",
+    "sha256": "b077528772bd843ffd26dbc4022211ea3b3d7e518ef21e17fa101fe98a717e9b",
+    "bytes": 243,
+    "mtimeNs": 1791354323728437200
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexJava21LanguageSpec.java",
+    "sha256": "a7094f21078658b6eb9323eba4cee363e4c2fab8a17618b79150cf49ee9b714b",
+    "bytes": 16949,
+    "mtimeNs": 1791354323732473900
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexLabelPolicy.java",
+    "sha256": "7d1a86ca9673e93b8360e78fcb73b434ef39b9c6b907cba76146e6763b887d01",
+    "bytes": 483,
+    "mtimeNs": 1791354323732473900
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexLanguageRule.java",
+    "sha256": "9227e45be4e54a25203c255b8786807e42ce359b1034e29de8b020651e07f7f0",
+    "bytes": 1343,
+    "mtimeNs": 1791354323737361300
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexLanguageSpec.java",
+    "sha256": "82b9c756ebcfe20f8fc8ef88cfeea1c173a1cc0377b772c0a4a962dc34031cbe",
+    "bytes": 2833,
+    "mtimeNs": 1791354323737361300
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexLanguageSpecs.java",
+    "sha256": "b8f7ee89edc841e1b95d8ed336d372432e2b052feb81d82ad5dd19a32541360a",
+    "bytes": 589,
+    "mtimeNs": 1791354323739366000
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexOperatorRule.java",
+    "sha256": "7f5277d909e54a3d39ce334d0a8f5b9247f40c9f059b7a24639af987624c4bc9",
+    "bytes": 1154,
+    "mtimeNs": 1791354323739366000
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexSyntaxCategory.java",
+    "sha256": "798ad8901431c013a0b73ca5a129b2b9fd982ac9595ef7e96d70fd98b9e6bb8b",
+    "bytes": 418,
+    "mtimeNs": 1791354323740350500
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/test/java/jdk/internal/m3/indexstring/ast/MIndexASTCodecBoundedReadProof.java",
+    "sha256": "68e364b6ca5e934bc85a5145eef94764f41052cd0e6a5dec103996189459ec06",
+    "bytes": 7010,
+    "mtimeNs": 1791354323746442400
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/test/java/jdk/internal/m3/indexstring/ast/MIndexASTLcaCodecTest.java",
+    "sha256": "72d28f61a547df81ccba962498f353ff0ab8cde8230302fd6dd69370da9a8deb",
+    "bytes": 2559,
+    "mtimeNs": 1791354323748489400
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/test/java/jdk/internal/m3/indexstring/ast/MIndexASTPartialCacheErrorTest.java",
+    "sha256": "466b47c9e01e289f5b9c0d20ad8fe9369241cce093d4574efcbd10ffa787e044",
+    "bytes": 10727,
+    "mtimeNs": 1791354323748489400
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/test/java/jdk/internal/m3/indexstring/ast/MIndexASTPartialCacheTest.java",
+    "sha256": "4562cf9d2ed2d206b0167c8b68c5a2a5eef3ca838f4d7e3bfdc54beb772cd80a",
+    "bytes": 15402,
+    "mtimeNs": 1791354323749460600
+  },
+  {
+    "path": "m3/vendor/m3/m3-indexstring/src/test/java/jdk/internal/m3/indexstring/ast/MIndexASTPrecomputeTest.java",
+    "sha256": "db3df95deb158b4893bdc307e502a63bcb604736b1c73cc4796a0f872e57bcbc",
+    "bytes": 10081,
+    "mtimeNs": 1791354323750570500
+  }
+]

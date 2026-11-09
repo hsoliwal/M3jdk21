@@ -1,0 +1,22 @@
+class	reason	failures	errors	first_message_head
+jdk.m3.collections.M3BagRankIndexTest	JNI: m3_arrays native library absent (m3.arrays.native.path unset); re-included by -Pm3-collections-native	0	1	M3 array JNI library is not loaded
+jdk.m3.collections.M3ConcurrentContractTest	JNI: m3_arrays native library absent (m3.arrays.native.path unset); re-included by -Pm3-collections-native	0	2	M3 array JNI library is not loaded
+jdk.m3.collections.M3CountedBagTest	JNI: m3_arrays native library absent (m3.arrays.native.path unset); re-included by -Pm3-collections-native	0	1	M3 array JNI library is not loaded
+jdk.m3.collections.M3EntryFacadeCacheTest	JNI: m3_arrays native library absent (m3.arrays.native.path unset); re-included by -Pm3-collections-native	0	4	M3 array JNI library is not loaded
+jdk.m3.collections.M3FactoryContractTest	JNI: m3_arrays native library absent (m3.arrays.native.path unset); re-included by -Pm3-collections-native	0	2	M3 array JNI library is not loaded
+jdk.m3.collections.M3FootprintContractTest	JNI: m3_arrays native library absent (m3.arrays.native.path unset); re-included by -Pm3-collections-native	0	4	M3 array JNI library is not loaded
+jdk.m3.collections.M3IndexedMultiValueOccurrenceTest	JNI: m3_arrays native library absent (m3.arrays.native.path unset); re-included by -Pm3-collections-native	0	1	M3 array JNI library is not loaded
+jdk.m3.collections.M3IndexedOccurrenceArrayNativeTest	JNI: m3_arrays native library absent (m3.arrays.native.path unset); re-included by -Pm3-collections-native	4	0	real m3-arrays JNI library path required ==> expected: not <null>
+jdk.m3.collections.M3IndexedTableReentrantSortTest	JNI: m3_arrays native library absent (m3.arrays.native.path unset); re-included by -Pm3-collections-native	0	1	M3 array JNI library is not loaded
+jdk.m3.collections.M3IndexedTableReverseOffsetTest	JNI: m3_arrays native library absent (m3.arrays.native.path unset); re-included by -Pm3-collections-native	0	4	M3 array JNI library is not loaded
+jdk.m3.collections.M3IndexedTableTest	JNI: m3_arrays native library absent (m3.arrays.native.path unset); re-included by -Pm3-collections-native	0	1	M3 array JNI library is not loaded
+jdk.m3.collections.M3JdkCollectionDifferentialTest	JNI: m3_arrays native library absent (m3.arrays.native.path unset); re-included by -Pm3-collections-native	0	3	M3 array JNI library is not loaded
+jdk.m3.collections.M3LinkedHashBackshiftTest	JNI: m3_arrays native library absent (m3.arrays.native.path unset); re-included by -Pm3-collections-native	0	1	M3 array JNI library is not loaded
+jdk.m3.collections.M3LinkedHashMapCapacityTest	JNI: m3_arrays native library absent (m3.arrays.native.path unset); re-included by -Pm3-collections-native	0	4	M3 array JNI library is not loaded
+jdk.m3.collections.M3MapContractTest	JNI: m3_arrays native library absent (m3.arrays.native.path unset); re-included by -Pm3-collections-native	0	8	M3 array JNI library is not loaded
+jdk.m3.collections.M3NativeFiveLibrarySdkNoVendorTest	JNI: m3_arrays native library absent (m3.arrays.native.path unset); re-included by -Pm3-collections-native	0	1	M3 array JNI library is not loaded
+jdk.m3.collections.M3NoRetainedStructuralEntryTest	JNI: m3_arrays native library absent (m3.arrays.native.path unset); re-included by -Pm3-collections-native	0	1	M3 array JNI library is not loaded
+jdk.m3.collections.M3ObjectCountsTest	JNI: m3_arrays native library absent (m3.arrays.native.path unset); re-included by -Pm3-collections-native	0	6	M3 array JNI library is not loaded
+jdk.m3.collections.M3RelationForEachTest	JNI: m3_arrays native library absent (m3.arrays.native.path unset); re-included by -Pm3-collections-native	0	1	M3 array JNI library is not loaded
+jdk.m3.collections.M3SdkOwnerFactoryTest	JNI: m3_arrays native library absent (m3.arrays.native.path unset); re-included by -Pm3-collections-native	0	1	M3 array JNI library is not loaded
+jdk.m3.collections.M3SequenceContractTest	JNI: m3_arrays native library absent (m3.arrays.native.path unset); re-included by -Pm3-collections-native	0	2	M3 array JNI library is not loaded

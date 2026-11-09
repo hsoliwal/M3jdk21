@@ -1,0 +1,7 @@
+id	state	exit
+CATALOGUE_COMPOSITION_TESTS	BLOCKED	Eight actual scheduler JUnit tests on exact head pass
+MODULE_VERIFY	BLOCKED	Complete existing Maven verify and unchanged coverage gates pass
+ORIGINAL_IMPORT_STYLE	REVIEW	Establish original-project layout and wildcard policy before additional ordering recipes
+A3_APPLY	PENDING	Actual explicit-file candidate processing and fixed-point receipts
+JDK_ACCEPTANCE	PENDING	Modified configure/make/jtreg and applicable native/GC/JIT/platform tests
+WHOLE_PROGRAMME	OPEN	All discussed compatible backports, String integration and optional application/module packs

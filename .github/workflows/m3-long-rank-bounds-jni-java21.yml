@@ -1,0 +1,160 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 fused rank bounds original Java21 and JNI
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-long-rank-bounds-jni-java21.yml'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongRankBatchNative.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongRankIndex.java'
+      - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_long_rank_batch_jni.c'
+      - 'test/jdk/jdk/m3/collections/M3LongRankBoundsContract.java'
+      - 'test/jdk/jdk/m3/collections/M3LongRankBoundsTest.java'
+      - 'm3/collections/qualification/rank-bounds-jni-20261029/**'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  original-source-native-parity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify exact head and canonical product source identities
+        shell: bash
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          test "$(git hash-object src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongRankBatchNative.java)" = '2b34720f00d04ad05d8a164084dbda6af0773def'
+          test "$(git hash-object src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongRankIndex.java)" = '66a31672a814a5553c386e9c5496f350c3073a59'
+          test "$(git hash-object src/jdk.m3.collections/share/native/libm3collections/collections/m3_long_rank_batch_jni.c)" = 'cb947382187606dd2cccc5293932254e47fbe825'
+          test "$(git hash-object test/jdk/jdk/m3/collections/M3LongRankBoundsContract.java)" = '8c38bf88eab4de2b70385fb1225c1fbde1109921'
+          test "$(git hash-object test/jdk/jdk/m3/collections/M3LongRankBoundsTest.java)" = 'bc599f991ec8e313475c32fffd511fdf85aae76c'
+      - name: Compile real original Java21 bisection owner and emit JNI header
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3rank"
+          mkdir -p "$out/classes" "$out/headers" "$out/native"
+          javac --release 21 -Xlint:all -Werror -h "$out/headers" -d "$out/classes" \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LaneSearch.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongRankBatchNative.java \
+            test/jdk/jdk/m3/collections/M3LongRankBoundsContract.java
+          grep -Fq Java_jdk_m3_collections_M3LongRankBatchNative_lowerUpperBounds0 \
+            "$out/headers/jdk_m3_collections_M3LongRankBatchNative.h"
+          grep -Fq Java_jdk_m3_collections_M3LongRankBatchNative_capabilities0 \
+            "$out/headers/jdk_m3_collections_M3LongRankBatchNative.h"
+      - name: Build original C17 JNI library from generated headers
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3rank"
+          cc -std=c17 -Wall -Wextra -Werror -O2 -fPIC -shared \
+            -fsanitize=undefined -fno-sanitize-recover=undefined \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            -include "$out/headers/jdk_m3_collections_M3LongRankBatchNative.h" \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_long_rank_batch_jni.c \
+            -o "$out/native/libm3rankbatch.so"
+          nm -D "$out/native/libm3rankbatch.so" | grep -Fq Java_jdk_m3_collections_M3LongRankBatchNative_lowerBounds0
+          nm -D "$out/native/libm3rankbatch.so" | grep -Fq Java_jdk_m3_collections_M3LongRankBatchNative_lowerUpperBounds0
+          nm -D "$out/native/libm3rankbatch.so" | grep -Fq Java_jdk_m3_collections_M3LongRankBatchNative_capabilities0
+          # Build the same original C owner in legacy ABI mode: old lowerBounds0
+          # remains available, newer fused symbols are deliberately absent.
+          mkdir -p "$out/legacy"
+          cc -DM3_RANK_LEGACY_ABI_TEST -std=c17 -Wall -Wextra -Werror -O2 -fPIC -shared \
+            -fsanitize=undefined -fno-sanitize-recover=undefined \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            -include "$out/headers/jdk_m3_collections_M3LongRankBatchNative.h" \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_long_rank_batch_jni.c \
+            -o "$out/legacy/libm3rankbatch.so"
+          nm -D "$out/legacy/libm3rankbatch.so" | grep -Fq Java_jdk_m3_collections_M3LongRankBatchNative_lowerBounds0
+          if nm -D "$out/legacy/libm3rankbatch.so" | grep -Fq Java_jdk_m3_collections_M3LongRankBatchNative_capabilities0; then
+            echo 'Legacy ABI unexpectedly exports capabilities0' >&2; exit 1
+          fi
+          if nm -D "$out/legacy/libm3rankbatch.so" | grep -Fq Java_jdk_m3_collections_M3LongRankBatchNative_lowerUpperBounds0; then
+            echo 'Legacy ABI unexpectedly exports fused bounds' >&2; exit 1
+          fi
+      - name: Real Java fallback and checked JNI in JIT and interpreter
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3rank"
+          export UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1
+          java -ea -cp "$out/classes" jdk.m3.collections.M3LongRankBoundsContract | tee "$out/fallback.txt"
+          java -ea -Dm3.collections.rank.native=true \
+            -Djava.library.path="$out/missing" -cp "$out/classes" \
+            jdk.m3.collections.M3LongRankBoundsContract | tee "$out/missing-native-fallback.txt"
+          java -ea -Xcheck:jni -Dm3.collections.rank.native=true \
+            -Dm3.rank.expectLegacy=true -Djava.library.path="$out/legacy" \
+            -cp "$out/classes" jdk.m3.collections.M3LongRankBoundsContract | tee "$out/legacy-jit.txt"
+          java -ea -Xint -Xcheck:jni -Dm3.collections.rank.native=true \
+            -Dm3.rank.expectLegacy=true -Djava.library.path="$out/legacy" \
+            -cp "$out/classes" jdk.m3.collections.M3LongRankBoundsContract | tee "$out/legacy-int.txt"
+          java -ea -Xcheck:jni -Dm3.collections.rank.native=true \
+            -Dm3.rank.requireNative=true -Djava.library.path="$out/native" \
+            -cp "$out/classes" jdk.m3.collections.M3LongRankBoundsContract | tee "$out/native-jit.txt"
+          java -ea -Xint -Xcheck:jni -Dm3.collections.rank.native=true \
+            -Dm3.rank.requireNative=true -Djava.library.path="$out/native" \
+            -cp "$out/classes" jdk.m3.collections.M3LongRankBoundsContract | tee "$out/native-int.txt"
+          grep -Fxq 'PASS M3_LONG_RANK_BOUNDS checks=56973' "$out/fallback.txt"
+          cmp "$out/fallback.txt" "$out/missing-native-fallback.txt"
+          cmp "$out/fallback.txt" "$out/legacy-jit.txt"
+          cmp "$out/fallback.txt" "$out/legacy-int.txt"
+          cmp "$out/fallback.txt" "$out/native-jit.txt"
+          cmp "$out/fallback.txt" "$out/native-int.txt"
+      - name: Preserve actual Java/JNI proof
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3rank-bounds-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/m3rank/*.txt
+          if-no-files-found: warn
+          retention-days: 14
+
+  original-named-modules:
+    needs: original-source-native-parity
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile real arrays and collection module descriptors and contract
+        shell: bash
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          out="$RUNNER_TEMP/m3rank-modules"
+          mkdir -p "$out/arrays" "$out/collections"
+          find m3/arrays/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/arrays -type f -name '*.java' | LC_ALL=C sort > "$out/arrays.sources"
+          find m3/collections/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/collections src/jdk.m3.collections/share/classes/jdk/internal/m3/collections -type f -name '*.java' | LC_ALL=C sort > "$out/collections.sources"
+          test -s "$out/arrays.sources"
+          test -s "$out/collections.sources"
+          javac --release 21 -Xlint:all,-module -Werror -d "$out/arrays" @"$out/arrays.sources"
+          javac --release 21 -Xlint:all,-module -Werror --module-path "$out/arrays" \
+            -d "$out/collections" @"$out/collections.sources"
+          javap -classpath "$out/collections" jdk.m3.collections.M3LongRankIndex \
+            | grep -Fq 'int[] lowerUpperBounds(long[])'
+          javap -classpath "$out/collections" jdk.m3.collections.M3LongRankIndex \
+            | grep -Fq 'void fillLowerUpperBounds(long[], int[])'

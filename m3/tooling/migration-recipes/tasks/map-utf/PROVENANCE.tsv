@@ -1,0 +1,8 @@
+source	identity	role
+PR99	3a433416ae7981301844682896e5aefc6f0f8901	immutable parent
+MapFacts.patch	ed41ba0d7320c383b5caa39e82837ef9625c4a11a18f557eda479711510501ae	user Library recovered candidate
+MapGuard.patch	a512756514aa572e1f165674278d64c9227e9dd155a26d37b31a74b64ed049df	exact preimage recovery
+MIndexMappedStringBacking	070ab09ff689f63f15f91f57e9dd63e2cf839031	final tested Git blob
+MapFactsTest	69703b272a5f153eaf8d43d169a5151cb725e15d	recovered test unchanged
+MapUtfTest	1ea1951d053bfdde1413e7060cffaa9e7d215b6a	new tested fixture
+java.nio.charset	Java21 StandardCharsets.UTF_8 encoder	existing codec reuse

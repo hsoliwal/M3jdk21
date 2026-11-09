@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
+# Edit rows of recipe qualification/residency-pressure-alloc-20261107/apply.py v1 (RESIDENCY_PRESSURE_ALLOC), written by the recipe (fixed point). before_blob/before_sha256 pin the preimage, after_sha256 the postimage.
+file	before_blob	before_sha256	after_sha256	leaf	rule
+m3/collections/src/main/java/jdk/m3/collections/M3ObjectResidency.java	b8793d63a3cd9ee468b6188461261335fefff30e	70e1ee720fb0a5e8527702b7de4e7ec1ecc140cff2562a8b7151b8d53abb6bf0	7dfb31ac019661ee2626826265d0c83ee3a6595e58829f26cce5143d8968bdb7	PA	targetBudget() reads the PRESSURE_AWARE heap headroom into primitives (sampledHeadroomBytes: the Runtime reads of HeapSnapshot.current() in the same order, no record); no snapshot, cache or epoch, budgets unchanged

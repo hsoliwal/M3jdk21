@@ -1,0 +1,139 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----< com.synexia.verification:m3-rope-affix-effects-recipe-proof >-----
+[INFO] Building m3-rope-affix-effects-recipe-proof 1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ m3-rope-affix-effects-recipe-proof ---
+[INFO] Copying 28 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ m3-rope-affix-effects-recipe-proof ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ m3-rope-affix-effects-recipe-proof ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/edcb3bae74f7/synexia-task/synexia-openrewrite-recipes/recipe-crates/m3-rope-affix-effects-20261017/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ m3-rope-affix-effects-recipe-proof ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ m3-rope-affix-effects-recipe-proof ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.synexia.rewrite.M3TaskRecipeTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 27.45 s -- in com.synexia.rewrite.M3TaskRecipeTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.1:jar (default-jar) @ m3-rope-affix-effects-recipe-proof ---
+[INFO] Building jar: /workspace/scratch/edcb3bae74f7/synexia-task/synexia-openrewrite-recipes/recipe-crates/m3-rope-affix-effects-20261017/target/m3-rope-affix-effects-recipe-proof-1.jar
+[INFO] 
+[INFO] --- exec:3.5.0:exec (verify-string-sdk-contract) @ m3-rope-affix-effects-recipe-proof ---
+affix-complete-source-before-after exit=0 accepted=true M3_REGEX_AFFIX_CURSOR_WORK scalar_reads=24 root_wrapper_reads=11 affix_units=24
+M3_REGEX_AFFIX_COLD_WORK suffix_failure=false text_units=2057 before_reads=2059 after_reads=3
+M3_REGEX_AFFIX_COLD_WORK suffix_failure=true text_units=2057 before_reads=2059 after_reads=6
+M3_REGEX_AFFIX_CACHE_PASS key_lanes=5 warm_text_reads=0
+M3_REGEX_AFFIX_RETAINED_PRIMITIVES before=600064 after=602624 maximum_delta=2560
+M3_REGEX_AFFIX_DIFFERENTIAL_PASS checks=47904
+M3_REGEX_AFFIX_EXTRACTED_JAVA_PASS full_class=true cursor_exact=true mock_owner=true matched_m3jdk=false
+retained-amalgamation-source-seal exit=0 accepted=true M3_REGEX_AMALGAMATION_RECEIVER_PASS files=3 native_untouched=true m3_string_owner_unchanged=true
+retained-required-grams-source-seal exit=0 accepted=true M3_REQUIRED_NGRAMS_PRODUCT_SOURCE_PASS targets=3 source_first=true exact_matcher_preserved=true
+retained-rolling-source-seal exit=0 accepted=true M3_REGEX_ROLLING_RECEIVER_PASS targets=2 preserves_native=true full_m3jdk_unqualified=true
+retained-amalgamation-before-after exit=0 accepted=true es=9 stock_java21_fixture=true
+M3_REGEX_AMALGAMATION_AB_RAW case=missing-middle-prepared before=[239470, 239250, 285008, 157527, 121754, 94653, 144387, 94141, 93901] after=[218668, 228894, 190246, 83025, 79740, 76745, 75253, 75664, 75214]
+M3_REGEX_AMALGAMATION_AB case=minimum-length before_ns=57.777 after_ns=18.247 speedup=3.166x delta_pct=-68.42% iterations=5000 samples=9 stock_java21_fixture=true
+M3_REGEX_AMALGAMATION_AB_RAW case=minimum-length before=[307292, 276396, 308905, 288884, 307503, 277628, 297117, 281013, 280792] after=[141422, 142604, 86730, 115073, 86810, 116155, 79720, 77216, 91237]
+M3_REGEX_AMALGAMATION_AB case=fixed-first before_ns=29.464 after_ns=116.097 speedup=0.254x delta_pct=294.02% iterations=5000 samples=9 stock_java21_fixture=true
+M3_REGEX_AMALGAMATION_AB_RAW case=fixed-first before=[173371, 141723, 146921, 147712, 146420, 147322, 144307, 147572, 147722] after=[624339, 626692, 635936, 546552, 629767, 580483, 572541, 548064, 578169]
+M3_REGEX_AMALGAMATION_AB case=matching-prepared before_ns=28.326 after_ns=76.585 speedup=0.370x delta_pct=170.37% iterations=5000 samples=9 stock_java21_fixture=true
+M3_REGEX_AMALGAMATION_AB_RAW case=matching-prepared before=[152459, 78478, 78398, 163856, 139119, 141632, 140962, 147421, 146049] after=[382925, 1222858, 383767, 344157, 377858, 347011, 387623, 359570, 389004]
+M3_REGEX_AMALGAMATION_DIFFERENTIAL_PASS checks=24604
+M3_REGEX_AMALGAMATION_EXTRACTED_JAVA_PASS before_after_exact=true mock_owner=true matched_jdk=false
+retained-row-precompute exit=0 accepted=true M3_JDK_REGEX_ROW_PRECOMPUTE_PASS checks=637128 regexes=10034 rows=532
+M3JDK21_REGEX_ROW_RECEIVER_PASS sources_sha256=true patch_module=true
+retained-literal-matches exit=0 accepted=true M3_STRING_LITERAL_MATCHES_SOURCE_PASS|literal_only=true|pattern_fallback=true
+retained-regex-split exit=0 accepted=true M3_STRING_REGEX_SPLIT_CURRENT_SOURCE_PASS|pattern_subsequence=true|m3_slice=true
+retained-codepoint-geometry exit=0 accepted=true M3_STRING_CODEPOINT_GEOMETRY_SOURCE_PASS|bounded=true|fallback=true
+retained-rolling-before-after exit=0 accepted=true M3_REGEX_ROLLING_AB_RESULT case=flat-768 before_ns=53191.792 after_ns=53671.400 speedup=0.991x change_pct=0.90% samples=7 iterations=125 simulated_owner=true
+M3_REGEX_ROLLING_AB_RAW case=flat-768 before=[6779601, 6942155, 6749966, 6648974, 6552279, 6596105, 6585019] after=[6664247, 6708925, 7019101, 7342647, 6542675, 6536696, 6748174]
+M3_REGEX_ROLLING_AB_RESULT case=tuple-dag-768 before_ns=91310.776 after_ns=70577.288 speedup=1.294x change_pct=-22.71% samples=7 iterations=125 simulated_owner=true
+M3_REGEX_ROLLING_AB_RAW case=tuple-dag-768 before=[11733587, 11383501, 11413847, 11190571, 11420878, 11233786, 11455389] after=[8978005, 9261492, 8796473, 8822161, 8804875, 8703603, 8841521]
+M3_REGEX_ROLLING_AB_RESULT case=sliced-tuple-766 before_ns=85257.920 after_ns=69009.968 speedup=1.235x change_pct=-19.06% samples=7 iterations=125 simulated_owner=true
+M3_REGEX_ROLLING_AB_RAW case=sliced-tuple-766 before=[10657240, 10554215, 11369080, 10755498, 10741466, 10288015, 10380684] after=[8663984, 8642511, 8193736, 8599597, 8631575, 8626246, 8550573]
+M3_REGEX_ROLLING_DIFFERENTIAL_PASS checks=15601
+M3_REGEX_ROLLING_EXACT_JAVA_PASS source_extracted=true simulated_owner=true matched_m3jdk=false
+retained-native-utf16-oracle exit=0 accepted=true M3_STRING_REGEX_NATIVE_BRIDGE_PASS checks=39845
+M3_STRING_REGEX_NATIVE_BRIDGE_PASS checks=39845
+retained-ledger-refusals exit=0 accepted=true _without_promoting_holds (__main__.StringCompletenessTest.test_current_ledger_is_classified_without_promoting_holds) ... ok
+test_empty_malformed_and_changed_header_refuse (__main__.StringCompletenessTest.test_empty_malformed_and_changed_header_refuse) ... ok
+test_existing_required_disposition_cannot_be_promoted (__main__.StringCompletenessTest.test_existing_required_disposition_cannot_be_promoted) ... ok
+test_existing_string_runtime_and_implemented_owner_checks_survive (__main__.StringCompletenessTest.test_existing_string_runtime_and_implemented_owner_checks_survive) ... ok
+test_hold_and_advisory_keep_scope_owner_retention_and_oracle (__main__.StringCompletenessTest.test_hold_and_advisory_keep_scope_owner_retention_and_oracle) ... ok
+test_hold_or_advisory_cannot_be_promoted_or_reclassified (__main__.StringCompletenessTest.test_hold_or_advisory_cannot_be_promoted_or_reclassified) ... ok
+test_missing_hold_advisory_or_existing_required_responsibility_refuses (__main__.StringCompletenessTest.test_missing_hold_advisory_or_existing_required_responsibility_refuses) ... ok
+test_special_status_cannot_exempt_an_unrelated_responsibility (__main__.StringCompletenessTest.test_special_status_cannot_exempt_an_unrelated_responsibility) ... ok
+test_unknown_status_duplicate_and_unfinished_rows_refuse (__main__.StringCompletenessTest.test_unknown_status_duplicate_and_unfinished_rows_refuse) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.018s
+
+OK
+Traceback (most recent call last):
+  File "/workspace/scratch/edcb3bae74f7/synexia-task/synexia-openrewrite-recipes/recipe-crates/m3-rope-affix-effects-20261017/contract/verify_sdk_results.py", line 464, in <module>
+    main()
+  File "/workspace/scratch/edcb3bae74f7/synexia-task/synexia-openrewrite-recipes/recipe-crates/m3-rope-affix-effects-20261017/contract/verify_sdk_results.py", line 460, in main
+    execute(target, crate, output, Path(os.environ["JAVA_HOME"]).resolve(strict=True))
+  File "/workspace/scratch/edcb3bae74f7/synexia-task/synexia-openrewrite-recipes/recipe-crates/m3-rope-affix-effects-20261017/contract/verify_sdk_results.py", line 397, in execute
+    raise AssertionError("retained regex jtreg compile inventory changed")
+AssertionError: retained regex jtreg compile inventory changed
+[ERROR] Command execution failed.
+org.apache.commons.exec.ExecuteException: Process exited with an error: 1 (Exit value: 1)
+    at org.apache.commons.exec.DefaultExecutor.executeInternal (DefaultExecutor.java:355)
+    at org.apache.commons.exec.DefaultExecutor.execute (DefaultExecutor.java:253)
+    at org.codehaus.mojo.exec.ExecMojo.executeCommandLine (ExecMojo.java:903)
+    at org.codehaus.mojo.exec.ExecMojo.executeCommandLine (ExecMojo.java:863)
+    at org.codehaus.mojo.exec.ExecMojo.execute (ExecMojo.java:454)
+    at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo (DefaultBuildPluginManager.java:126)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute2 (MojoExecutor.java:328)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute (MojoExecutor.java:316)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:212)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:174)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.access$000 (MojoExecutor.java:75)
+    at org.apache.maven.lifecycle.internal.MojoExecutor$1.run (MojoExecutor.java:162)
+    at org.apache.maven.plugin.DefaultMojosExecutionStrategy.execute (DefaultMojosExecutionStrategy.java:39)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:159)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:105)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:73)
+    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:53)
+    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:118)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:261)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:173)
+    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:101)
+    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:906)
+    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:283)
+    at org.apache.maven.cli.MavenCli.main (MavenCli.java:206)
+    at jdk.internal.reflect.DirectMethodHandleAccessor.invoke (DirectMethodHandleAccessor.java:103)
+    at java.lang.reflect.Method.invoke (Method.java:580)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:255)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:201)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:361)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:314)
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  38.201 s
+[INFO] Finished at: 2026-10-17T03:44:25-06:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.codehaus.mojo:exec-maven-plugin:3.5.0:exec (verify-string-sdk-contract) on project m3-rope-affix-effects-recipe-proof: Command execution failed. Process exited with an error: 1 (Exit value: 1) -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException

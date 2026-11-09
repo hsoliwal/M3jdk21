@@ -1,0 +1,20 @@
+{
+  "schema": "M3_MAVEN4_PUBLICATION_SCOPE/1",
+  "status": "DRAFT_QUALIFIED_SUCCESSOR",
+  "parent_commit": "a5a7eaa644138ee62f6756f0d8e9b3957302a2d9",
+  "parent_tree": "949f5f459f6541eabe111833a8efc32b52fc67ff",
+  "parent_pull_request": "https://github.com/hsoliwal/com.synexia/pull/12654",
+  "core_lineage_commit": "a2b50cfe926c5c5f400c7f659a947a5020fb8d4d",
+  "engine_authoring_pin": "e02e7cb0f2e8e46db4c5b476d59aa26658fa4d07",
+  "receiving_authoring_pin": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "lineage": "Append only after the published core and SWT commits; neither packet is changed.",
+  "historical_status_fields": "Retained SOURCE_SEALS and initial lineage record their authoring-time not-run or pending status. QUALIFICATION_SUMMARY and dated actual SDK/receiver receipts provide the later result without overwriting historical records.",
+  "authorization": "The user authorized implementation and PRs for M3JDK21 and reuse of Synexia components. This is existing-owner Maven model ingress and recipe/test maintenance, with existing notices retained. No patent status or priority claim is made.",
+  "qualification": "QUALIFICATION_SUMMARY.json",
+  "memory": "memory/FINAL_RESULT-002.json",
+  "publication_provenance": "proof/PUBLICATION_PROVENANCE_CHECK.json",
+  "unchanged_sdk_source_inputs": 36,
+  "frozen_curation_file_count": 321,
+  "new_workflows": 0,
+  "runtime_or_ci_admission": "PENDING; local bounded qualification is not hosted CI or full product admission."
+}

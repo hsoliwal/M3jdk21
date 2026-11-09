@@ -1,0 +1,3 @@
+# Original owner that must remain unchanged; exact PR #15383 receiving path
+path	sha256	git_blob
+m3-pmem-sdk/campaign/src/main/java/com/synexia/m3/pmem/campaign/PmemCorpusSearch.java	3493a0f911023d8863d86cdf1b8f19c08d25d4aa5a76be8cfacb3bdc1bc64deb	31f6ab6e419033630c6b09a8700c6a064dea6339

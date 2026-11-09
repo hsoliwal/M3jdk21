@@ -1,0 +1,11 @@
+LIB_INTAKE commons-lang3-3.17.0 S0_VIEW PASS java=249 packages=18 resources=2 overlays=none upstream_descriptor=yes
+LIB_INTAKE commons-lang3-3.17.0 S1_RELOCATE PASS map=org.apache.commons.lang3=com.m3.lib.lang3 packages_moved=18 old_dirs_left=0 text_completed_files=19 parse_fallback_files=3 resources_moved=0 meta_mapped=0
+LIB_INTAKE commons-lang3-3.17.0 S1b_BCP PASS java_equal_after_name_map=249 resources_byte_equal=2 differing=0
+LIB_INTAKE commons-lang3-3.17.0 S2_RESIDUE PASS residue=0 (every kind) slash_form_files=0
+LIB_INTAKE commons-lang3-3.17.0 S3_ATOMIZE PASS atoms=5671 KNOWN_PATTERN=287 UNPROVEN_LEAF=3646 UNKNOWN_PATTERN=1738
+LIB_INTAKE commons-lang3-3.17.0 S4_CONSOLIDATE PASS owner_contract_atoms=335 (proposal queue)
+LIB_INTAKE commons-lang3-3.17.0 S5_REFACTOR_BASELINE PASS METHOD_15=334 LOOP=460 CONST_HOIST=97 (ratchet: MOP passes may only lower these)
+LIB_INTAKE commons-lang3-3.17.0 S6_MODULE PASS module=jdk.m3.lang3 requires=java.base,java.desktop exports=18 javac_warnings=100
+LIB_INTAKE commons-lang3-3.17.0 S7_JMOD_IMAGE PASS jmod=575709B image_modules=10 smoke='loaded=359 failed=0'
+LIB_INTAKE commons-lang3-3.17.0 S8_LAYER PASS files=255 layer=m3/vendor/third_party-m3/relocated/commons-lang3-3.17.0
+LIB_INTAKE_DONE commons-lang3-3.17.0 jdk.m3.lang3 H:/m3-scratch/lib-intake/batch/commons-lang3-3.17.0/jmods/jdk.m3.lang3.jmod

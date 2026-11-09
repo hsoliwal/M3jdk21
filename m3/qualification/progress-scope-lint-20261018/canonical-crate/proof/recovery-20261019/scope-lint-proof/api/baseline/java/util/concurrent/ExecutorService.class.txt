@@ -1,0 +1,17 @@
+public interface java.util.concurrent.ExecutorService extends java.util.concurrent.Executor,java.lang.AutoCloseable {
+  public abstract void shutdown();
+  public abstract java.util.List<java.lang.Runnable> shutdownNow();
+  public abstract boolean isShutdown();
+  public abstract boolean isTerminated();
+  public abstract boolean awaitTermination(long, java.util.concurrent.TimeUnit) throws java.lang.InterruptedException;
+  public abstract <T> java.util.concurrent.Future<T> submit(java.util.concurrent.Callable<T>);
+  public abstract <T> java.util.concurrent.Future<T> submit(java.lang.Runnable, T);
+  public abstract java.util.concurrent.Future<?> submit(java.lang.Runnable);
+  public abstract <T> java.util.List<java.util.concurrent.Future<T>> invokeAll(java.util.Collection<? extends java.util.concurrent.Callable<T>>) throws java.lang.InterruptedException;
+  public abstract <T> java.util.List<java.util.concurrent.Future<T>> invokeAll(java.util.Collection<? extends java.util.concurrent.Callable<T>>, long, java.util.concurrent.TimeUnit) throws java.lang.InterruptedException;
+  public abstract <T> T invokeAny(java.util.Collection<? extends java.util.concurrent.Callable<T>>) throws java.lang.InterruptedException, java.util.concurrent.ExecutionException;
+  public abstract <T> T invokeAny(java.util.Collection<? extends java.util.concurrent.Callable<T>>, long, java.util.concurrent.TimeUnit) throws java.lang.InterruptedException, java.util.concurrent.ExecutionException, java.util.concurrent.TimeoutException;
+  public default void close();
+  public default <T> java.util.concurrent.Future<T> submitMonitored(java.util.concurrent.Callable<T>, java.util.concurrent.ProgressMonitor);
+  public default java.util.concurrent.Future<?> submitMonitored(java.lang.Runnable, java.util.concurrent.ProgressMonitor);
+}

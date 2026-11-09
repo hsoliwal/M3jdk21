@@ -1,0 +1,260 @@
+Compiled from "Collections.java"
+public class java.util.Collections {
+  public static final java.util.Set EMPTY_SET;
+    descriptor: Ljava/util/Set;
+  public static final java.util.List EMPTY_LIST;
+    descriptor: Ljava/util/List;
+  public static final java.util.Map EMPTY_MAP;
+    descriptor: Ljava/util/Map;
+  public static <E> java.util.Collection<E> filteredCollection(java.util.Collection<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/Collection;Ljava/util/function/Predicate;)Ljava/util/Collection;
+
+  public static <E> java.util.List<E> filteredList(java.util.List<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/List;Ljava/util/function/Predicate;)Ljava/util/List;
+
+  public static <E> java.util.Set<E> filteredSet(java.util.Set<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/Set;Ljava/util/function/Predicate;)Ljava/util/Set;
+
+  public static <E> java.util.SortedSet<E> filteredSortedSet(java.util.SortedSet<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/SortedSet;Ljava/util/function/Predicate;)Ljava/util/SortedSet;
+
+  public static <E> java.util.NavigableSet<E> filteredNavigableSet(java.util.NavigableSet<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/NavigableSet;Ljava/util/function/Predicate;)Ljava/util/NavigableSet;
+
+  public static <E> java.util.Deque<E> filteredDeque(java.util.Deque<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/Deque;Ljava/util/function/Predicate;)Ljava/util/Deque;
+
+  public static <K, V> java.util.Map<K, V> filteredMap(java.util.Map<K, V>, java.util.function.BiPredicate<? super K, ? super V>);
+    descriptor: (Ljava/util/Map;Ljava/util/function/BiPredicate;)Ljava/util/Map;
+
+  public static <K, V> java.util.SortedMap<K, V> filteredSortedMap(java.util.SortedMap<K, V>, java.util.function.BiPredicate<? super K, ? super V>);
+    descriptor: (Ljava/util/SortedMap;Ljava/util/function/BiPredicate;)Ljava/util/SortedMap;
+
+  public static <K, V> java.util.NavigableMap<K, V> filteredNavigableMap(java.util.NavigableMap<K, V>, java.util.function.BiPredicate<? super K, ? super V>);
+    descriptor: (Ljava/util/NavigableMap;Ljava/util/function/BiPredicate;)Ljava/util/NavigableMap;
+
+  public static <E> java.util.List<E> sortedList(java.util.List<? extends E>, java.util.Comparator<? super E>);
+    descriptor: (Ljava/util/List;Ljava/util/Comparator;)Ljava/util/List;
+
+  public static <E> java.util.List<E> filteredSnapshot(java.util.Collection<? extends E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/Collection;Ljava/util/function/Predicate;)Ljava/util/List;
+
+  public static <E> java.util.List<E> sortedSnapshot(java.util.Collection<? extends E>, java.util.Comparator<? super E>);
+    descriptor: (Ljava/util/Collection;Ljava/util/Comparator;)Ljava/util/List;
+
+  public static <E> java.util.List<E> filteredSortedSnapshot(java.util.Collection<? extends E>, java.util.function.Predicate<? super E>, java.util.Comparator<? super E>);
+    descriptor: (Ljava/util/Collection;Ljava/util/function/Predicate;Ljava/util/Comparator;)Ljava/util/List;
+
+  public static <T extends java.lang.Comparable<? super T>> void sort(java.util.List<T>);
+    descriptor: (Ljava/util/List;)V
+
+  public static <T> void sort(java.util.List<T>, java.util.Comparator<? super T>);
+    descriptor: (Ljava/util/List;Ljava/util/Comparator;)V
+
+  public static <T> int binarySearch(java.util.List<? extends java.lang.Comparable<? super T>>, T);
+    descriptor: (Ljava/util/List;Ljava/lang/Object;)I
+
+  public static <T> int binarySearch(java.util.List<? extends T>, T, java.util.Comparator<? super T>);
+    descriptor: (Ljava/util/List;Ljava/lang/Object;Ljava/util/Comparator;)I
+
+  public static void reverse(java.util.List<?>);
+    descriptor: (Ljava/util/List;)V
+
+  public static void shuffle(java.util.List<?>);
+    descriptor: (Ljava/util/List;)V
+
+  public static void shuffle(java.util.List<?>, java.util.Random);
+    descriptor: (Ljava/util/List;Ljava/util/Random;)V
+
+  public static void shuffle(java.util.List<?>, java.util.random.RandomGenerator);
+    descriptor: (Ljava/util/List;Ljava/util/random/RandomGenerator;)V
+
+  public static void swap(java.util.List<?>, int, int);
+    descriptor: (Ljava/util/List;II)V
+
+  public static <T> void fill(java.util.List<? super T>, T);
+    descriptor: (Ljava/util/List;Ljava/lang/Object;)V
+
+  public static <T> void copy(java.util.List<? super T>, java.util.List<? extends T>);
+    descriptor: (Ljava/util/List;Ljava/util/List;)V
+
+  public static <T extends java.lang.Comparable<? super T>> T min(java.util.Collection<? extends T>);
+    descriptor: (Ljava/util/Collection;)Ljava/lang/Object;
+
+  public static <T> T min(java.util.Collection<? extends T>, java.util.Comparator<? super T>);
+    descriptor: (Ljava/util/Collection;Ljava/util/Comparator;)Ljava/lang/Object;
+
+  public static <T extends java.lang.Comparable<? super T>> T max(java.util.Collection<? extends T>);
+    descriptor: (Ljava/util/Collection;)Ljava/lang/Object;
+
+  public static <T> T max(java.util.Collection<? extends T>, java.util.Comparator<? super T>);
+    descriptor: (Ljava/util/Collection;Ljava/util/Comparator;)Ljava/lang/Object;
+
+  public static void rotate(java.util.List<?>, int);
+    descriptor: (Ljava/util/List;I)V
+
+  public static <T> boolean replaceAll(java.util.List<T>, T, T);
+    descriptor: (Ljava/util/List;Ljava/lang/Object;Ljava/lang/Object;)Z
+
+  public static int indexOfSubList(java.util.List<?>, java.util.List<?>);
+    descriptor: (Ljava/util/List;Ljava/util/List;)I
+
+  public static int lastIndexOfSubList(java.util.List<?>, java.util.List<?>);
+    descriptor: (Ljava/util/List;Ljava/util/List;)I
+
+  public static <T> java.util.Collection<T> unmodifiableCollection(java.util.Collection<? extends T>);
+    descriptor: (Ljava/util/Collection;)Ljava/util/Collection;
+
+  public static <T> java.util.SequencedCollection<T> unmodifiableSequencedCollection(java.util.SequencedCollection<? extends T>);
+    descriptor: (Ljava/util/SequencedCollection;)Ljava/util/SequencedCollection;
+
+  public static <T> java.util.Set<T> unmodifiableSet(java.util.Set<? extends T>);
+    descriptor: (Ljava/util/Set;)Ljava/util/Set;
+
+  public static <T> java.util.SequencedSet<T> unmodifiableSequencedSet(java.util.SequencedSet<? extends T>);
+    descriptor: (Ljava/util/SequencedSet;)Ljava/util/SequencedSet;
+
+  public static <T> java.util.SortedSet<T> unmodifiableSortedSet(java.util.SortedSet<T>);
+    descriptor: (Ljava/util/SortedSet;)Ljava/util/SortedSet;
+
+  public static <T> java.util.NavigableSet<T> unmodifiableNavigableSet(java.util.NavigableSet<T>);
+    descriptor: (Ljava/util/NavigableSet;)Ljava/util/NavigableSet;
+
+  public static <T> java.util.List<T> unmodifiableList(java.util.List<? extends T>);
+    descriptor: (Ljava/util/List;)Ljava/util/List;
+
+  public static <K, V> java.util.Map<K, V> unmodifiableMap(java.util.Map<? extends K, ? extends V>);
+    descriptor: (Ljava/util/Map;)Ljava/util/Map;
+
+  public static <K, V> java.util.SequencedMap<K, V> unmodifiableSequencedMap(java.util.SequencedMap<? extends K, ? extends V>);
+    descriptor: (Ljava/util/SequencedMap;)Ljava/util/SequencedMap;
+
+  public static <K, V> java.util.SortedMap<K, V> unmodifiableSortedMap(java.util.SortedMap<K, ? extends V>);
+    descriptor: (Ljava/util/SortedMap;)Ljava/util/SortedMap;
+
+  public static <K, V> java.util.NavigableMap<K, V> unmodifiableNavigableMap(java.util.NavigableMap<K, ? extends V>);
+    descriptor: (Ljava/util/NavigableMap;)Ljava/util/NavigableMap;
+
+  public static <T> java.util.Collection<T> synchronizedCollection(java.util.Collection<T>);
+    descriptor: (Ljava/util/Collection;)Ljava/util/Collection;
+
+  public static <T> java.util.Set<T> synchronizedSet(java.util.Set<T>);
+    descriptor: (Ljava/util/Set;)Ljava/util/Set;
+
+  public static <T> java.util.SortedSet<T> synchronizedSortedSet(java.util.SortedSet<T>);
+    descriptor: (Ljava/util/SortedSet;)Ljava/util/SortedSet;
+
+  public static <T> java.util.NavigableSet<T> synchronizedNavigableSet(java.util.NavigableSet<T>);
+    descriptor: (Ljava/util/NavigableSet;)Ljava/util/NavigableSet;
+
+  public static <T> java.util.List<T> synchronizedList(java.util.List<T>);
+    descriptor: (Ljava/util/List;)Ljava/util/List;
+
+  public static <K, V> java.util.Map<K, V> synchronizedMap(java.util.Map<K, V>);
+    descriptor: (Ljava/util/Map;)Ljava/util/Map;
+
+  public static <K, V> java.util.SortedMap<K, V> synchronizedSortedMap(java.util.SortedMap<K, V>);
+    descriptor: (Ljava/util/SortedMap;)Ljava/util/SortedMap;
+
+  public static <K, V> java.util.NavigableMap<K, V> synchronizedNavigableMap(java.util.NavigableMap<K, V>);
+    descriptor: (Ljava/util/NavigableMap;)Ljava/util/NavigableMap;
+
+  public static <E> java.util.Collection<E> checkedCollection(java.util.Collection<E>, java.lang.Class<E>);
+    descriptor: (Ljava/util/Collection;Ljava/lang/Class;)Ljava/util/Collection;
+
+  public static <E> java.util.Queue<E> checkedQueue(java.util.Queue<E>, java.lang.Class<E>);
+    descriptor: (Ljava/util/Queue;Ljava/lang/Class;)Ljava/util/Queue;
+
+  public static <E> java.util.Set<E> checkedSet(java.util.Set<E>, java.lang.Class<E>);
+    descriptor: (Ljava/util/Set;Ljava/lang/Class;)Ljava/util/Set;
+
+  public static <E> java.util.SortedSet<E> checkedSortedSet(java.util.SortedSet<E>, java.lang.Class<E>);
+    descriptor: (Ljava/util/SortedSet;Ljava/lang/Class;)Ljava/util/SortedSet;
+
+  public static <E> java.util.NavigableSet<E> checkedNavigableSet(java.util.NavigableSet<E>, java.lang.Class<E>);
+    descriptor: (Ljava/util/NavigableSet;Ljava/lang/Class;)Ljava/util/NavigableSet;
+
+  public static <E> java.util.List<E> checkedList(java.util.List<E>, java.lang.Class<E>);
+    descriptor: (Ljava/util/List;Ljava/lang/Class;)Ljava/util/List;
+
+  public static <K, V> java.util.Map<K, V> checkedMap(java.util.Map<K, V>, java.lang.Class<K>, java.lang.Class<V>);
+    descriptor: (Ljava/util/Map;Ljava/lang/Class;Ljava/lang/Class;)Ljava/util/Map;
+
+  public static <K, V> java.util.SortedMap<K, V> checkedSortedMap(java.util.SortedMap<K, V>, java.lang.Class<K>, java.lang.Class<V>);
+    descriptor: (Ljava/util/SortedMap;Ljava/lang/Class;Ljava/lang/Class;)Ljava/util/SortedMap;
+
+  public static <K, V> java.util.NavigableMap<K, V> checkedNavigableMap(java.util.NavigableMap<K, V>, java.lang.Class<K>, java.lang.Class<V>);
+    descriptor: (Ljava/util/NavigableMap;Ljava/lang/Class;Ljava/lang/Class;)Ljava/util/NavigableMap;
+
+  public static <T> java.util.Iterator<T> emptyIterator();
+    descriptor: ()Ljava/util/Iterator;
+
+  public static <T> java.util.ListIterator<T> emptyListIterator();
+    descriptor: ()Ljava/util/ListIterator;
+
+  public static <T> java.util.Enumeration<T> emptyEnumeration();
+    descriptor: ()Ljava/util/Enumeration;
+
+  public static final <T> java.util.Set<T> emptySet();
+    descriptor: ()Ljava/util/Set;
+
+  public static <E> java.util.SortedSet<E> emptySortedSet();
+    descriptor: ()Ljava/util/SortedSet;
+
+  public static <E> java.util.NavigableSet<E> emptyNavigableSet();
+    descriptor: ()Ljava/util/NavigableSet;
+
+  public static final <T> java.util.List<T> emptyList();
+    descriptor: ()Ljava/util/List;
+
+  public static final <K, V> java.util.Map<K, V> emptyMap();
+    descriptor: ()Ljava/util/Map;
+
+  public static final <K, V> java.util.SortedMap<K, V> emptySortedMap();
+    descriptor: ()Ljava/util/SortedMap;
+
+  public static final <K, V> java.util.NavigableMap<K, V> emptyNavigableMap();
+    descriptor: ()Ljava/util/NavigableMap;
+
+  public static <T> java.util.Set<T> singleton(T);
+    descriptor: (Ljava/lang/Object;)Ljava/util/Set;
+
+  public static <T> java.util.List<T> singletonList(T);
+    descriptor: (Ljava/lang/Object;)Ljava/util/List;
+
+  public static <K, V> java.util.Map<K, V> singletonMap(K, V);
+    descriptor: (Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+
+  public static <T> java.util.List<T> nCopies(int, T);
+    descriptor: (ILjava/lang/Object;)Ljava/util/List;
+
+  public static <T> java.util.Comparator<T> reverseOrder();
+    descriptor: ()Ljava/util/Comparator;
+
+  public static <T> java.util.Comparator<T> reverseOrder(java.util.Comparator<T>);
+    descriptor: (Ljava/util/Comparator;)Ljava/util/Comparator;
+
+  public static <T> java.util.Enumeration<T> enumeration(java.util.Collection<T>);
+    descriptor: (Ljava/util/Collection;)Ljava/util/Enumeration;
+
+  public static <T> java.util.ArrayList<T> list(java.util.Enumeration<T>);
+    descriptor: (Ljava/util/Enumeration;)Ljava/util/ArrayList;
+
+  public static int frequency(java.util.Collection<?>, java.lang.Object);
+    descriptor: (Ljava/util/Collection;Ljava/lang/Object;)I
+
+  public static boolean disjoint(java.util.Collection<?>, java.util.Collection<?>);
+    descriptor: (Ljava/util/Collection;Ljava/util/Collection;)Z
+
+  public static <T> boolean addAll(java.util.Collection<? super T>, T...);
+    descriptor: (Ljava/util/Collection;[Ljava/lang/Object;)Z
+
+  public static <E> java.util.Set<E> newSetFromMap(java.util.Map<E, java.lang.Boolean>);
+    descriptor: (Ljava/util/Map;)Ljava/util/Set;
+
+  public static <E> java.util.SequencedSet<E> newSequencedSetFromMap(java.util.SequencedMap<E, java.lang.Boolean>);
+    descriptor: (Ljava/util/SequencedMap;)Ljava/util/SequencedSet;
+
+  public static <T> java.util.Queue<T> asLifoQueue(java.util.Deque<T>);
+    descriptor: (Ljava/util/Deque;)Ljava/util/Queue;
+}

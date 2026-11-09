@@ -1,0 +1,130 @@
+{
+  "schema": "M3_JUNIT_LAUNCHER_CI_CLOSURE_REPAIR_V1",
+  "source_commit": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+  "source_repository": "hsoliwal/M3JDK21",
+  "changes": [
+    {
+      "path": "m3/collections/qualification/full-java-jni-20261018/verify.py",
+      "before_sha256": "bd94fd32ed00274f3f1581a401742e45a94af2054f99373acfc8224f33b06ab1",
+      "after_sha256": "ff4856bf3d68c63a059b7700631543a453fc5d7552efdcfb80ac3b7e4bd4dae1",
+      "before_git_blob": "c6e7bbe8de8b628e8e558454fb7efb1eae557c78",
+      "after_git_blob": "af4887a40f3bfcf0f5ff08af2c6994dde87d201e",
+      "before_bytes": 11623,
+      "after_bytes": 11673,
+      "license": "Apache-2.0 integration code",
+      "production_java_jni_or_junit_test_body_changed": false
+    },
+    {
+      "path": ".github/workflows/m3-collections.yml",
+      "before_sha256": "8d52122c6bd7bc4f52b0606704188a7040fc853c2dbefe6756b7b2a1792da504",
+      "after_sha256": "871d309a9e061205c1c6d3deff63568dfeac69155b89fc906ce32a482e8ea947",
+      "before_git_blob": "c42954ecf99a58893a76f3aee6dbe2d258e3a7fe",
+      "after_git_blob": "f15bfaeac2e96ec7a430cc9760170ac96cb6f921",
+      "before_bytes": 7464,
+      "after_bytes": 7596,
+      "license": "Apache-2.0 integration code",
+      "production_java_jni_or_junit_test_body_changed": false
+    },
+    {
+      "path": "m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py",
+      "before_sha256": "7ecd6418dcd4097ca23b3382c4d87d18ed2a02bc8df2a503421c23793fcfd10b",
+      "after_sha256": "62ee079c1c692c657d3ff9dd30120d91702fd93c9b2b6203536865d56bae9d9d",
+      "before_git_blob": "5057ea0df282f90b97114725128c2964e62647f2",
+      "after_git_blob": "f880435ace3c6caa6ce6ba43d1e794b45969a183",
+      "before_bytes": 1838,
+      "after_bytes": 2100,
+      "license": "Apache-2.0 integration code",
+      "production_java_jni_or_junit_test_body_changed": false
+    }
+  ],
+  "exact_input_files": 100,
+  "input_blobs_verified": 100,
+  "launcher_sealed_files": 88,
+  "launcher_production_java": 80,
+  "dependencies_before": [
+    "apiguardian-api",
+    "opentest4j",
+    "univocity-parsers",
+    "junit-platform-commons-1.10.2",
+    "junit-platform-engine-1.10.2",
+    "junit-jupiter-api-5.10.2",
+    "junit-jupiter-params-5.10.2",
+    "junit-jupiter-engine-5.10.2",
+    "junit-jupiter-5.10.2"
+  ],
+  "dependencies_after": [
+    "apiguardian-api",
+    "opentest4j",
+    "univocity-parsers",
+    "junit-platform-commons-1.10.2",
+    "junit-platform-engine-1.10.2",
+    "junit-platform-launcher-1.10.2",
+    "junit-jupiter-api-5.10.2",
+    "junit-jupiter-params-5.10.2",
+    "junit-jupiter-engine-5.10.2",
+    "junit-jupiter-5.10.2"
+  ],
+  "launcher_coordinate": "org.junit.platform:junit-platform-launcher:1.10.2-m3-source-1",
+  "launcher_direct_dependencies": [
+    {
+      "coordinate": "org.apiguardian:apiguardian-api:1.1.2-m3-source-1",
+      "module": "apiguardian-api",
+      "built_before_launcher": true
+    },
+    {
+      "coordinate": "org.junit.platform:junit-platform-commons:1.10.2-m3-source-1",
+      "module": "junit-platform-commons-1.10.2",
+      "built_before_launcher": true
+    },
+    {
+      "coordinate": "org.junit.platform:junit-platform-engine:1.10.2-m3-source-1",
+      "module": "junit-platform-engine-1.10.2",
+      "built_before_launcher": true
+    }
+  ],
+  "source_verifier_donor": {
+    "path": "m3/vendor/third_party/junit-platform-engine-1.10.2/verify_source.py",
+    "sha256": "f34c7f9ed6b8809920419fc7a3dc715c309f12575f730b3ec354873088e29318",
+    "git_blob": "4a961825eb1e70ca7e1fcc52d4bdcca5426e24eb",
+    "bytes": 2098,
+    "source_url": "https://github.com/hsoliwal/M3jdk21/blob/066b7a15c29388f3444ab3cf0550ecf1df698c6d/m3/vendor/third_party/junit-platform-engine-1.10.2/verify_source.py"
+  },
+  "execution": {
+    "type": "Python metadata/source-byte verification only",
+    "baseline_returncode": 1,
+    "baseline_witness": "FileNotFoundError from duplicated repository-relative path beneath m3/vendor",
+    "candidate_returncode": 0,
+    "candidate_receipt": {
+      "coordinate": "org.junit.platform:junit-platform-launcher:1.10.2-m3-source-1",
+      "exact_files": 88,
+      "exact_production_files": 80,
+      "sources_jar_sha256": "d3c84fbec86b224e0d2bd49e9335978bdeb6aead9f17cbee4f0e2e8885c7ab89"
+    },
+    "maven_execution": false,
+    "java_or_jni_execution": false,
+    "artifact_verifier_branch_executed": false
+  },
+  "static_checks": {
+    "all_input_git_blobs": true,
+    "all_88_source_seals": true,
+    "complete_remote_80_java_inventory": true,
+    "exact_dependency_order": true,
+    "full_qualifier_ast_unchanged_except_dependency_tuple": true,
+    "workflow_jobs_unchanged": true,
+    "both_event_path_filters": true,
+    "source_donor_pom_unchanged": true
+  },
+  "local_prerequisites": {
+    "java": "OpenJDK17.0.20 only",
+    "javac": null,
+    "maven": null,
+    "jdk21": null
+  },
+  "remaining": "Run the existing full Java21/Maven/JNI owning qualifier in CI; no runtime acceptance claim is made here.",
+  "observed_utc": "2026-10-20 02:36:34 UTC",
+  "failure_job": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658542/job/118410115990",
+  "failure_job_id": 118410115990,
+  "failure_log_local": "task-work/m3-collections-readback/full_logs.log",
+  "failure_log_sha256": "783d4c95a45ddb1675bf03205e0a4fec209db65cafd1cbd2e4dfe443c8ded4b6",
+  "qualification_command": "JAVA_HOME=<actual JDK 21> EXPECTED_HEAD=<receiving commit> python3 m3/collections/qualification/full-java-jni-20261018/verify.py"
+}

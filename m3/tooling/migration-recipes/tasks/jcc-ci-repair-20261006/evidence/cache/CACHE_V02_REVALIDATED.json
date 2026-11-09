@@ -1,0 +1,12 @@
+{
+  "schema": "m3-jcc-ci-cache-revalidation/1",
+  "status": "EXACT_FINITE_DIAGNOSTIC_CACHE_REVALIDATED",
+  "at_utc": "2026-10-06T04:22:30.140616+00:00",
+  "cache": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/execution/cache-v02",
+  "manifest": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/runtime-resolution/actual-acquisition/OFFLINE_DIAGNOSTIC_CACHE_V02.json",
+  "manifest_sha256": "034d226e546825818559e5517ce62bb00dd855f9ce59760fa607049388280da9",
+  "files_checked": 3033,
+  "unlisted_non_artifact_metadata": [],
+  "native_source_custody_pending": true,
+  "source_and_plugin_closure_admitted": false
+}

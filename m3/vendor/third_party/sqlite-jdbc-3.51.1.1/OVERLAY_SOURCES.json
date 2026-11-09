@@ -1,0 +1,27 @@
+{
+  "build_inputs": [],
+  "commit": "5e1a6a4c8897f6699eed259948a04fcdf44c242a",
+  "descriptors": [
+    {
+      "release": "9",
+      "sha256": "071ac4f9068c6724b115dafdb9e16cc57dbe747a0a53af24d4ab144cc78c9cb4",
+      "upstream_path": "src/main/java9/module-info.java",
+      "url": "https://raw.githubusercontent.com/xerial/sqlite-jdbc/5e1a6a4c8897f6699eed259948a04fcdf44c242a/src/main/java9/module-info.java"
+    }
+  ],
+  "donor": "sqlite-jdbc-3.51.1.1",
+  "files": [
+    {
+      "class": "org/sqlite/nativeimage/SqliteJdbcFeature",
+      "release": "9",
+      "sha256": "9e4695055b4cf85238c6a19f86f5072463ed241845850db071799ab54a15fb5a",
+      "upstream_path": "src/main/java9/org/sqlite/nativeimage/SqliteJdbcFeature.java",
+      "url": "https://raw.githubusercontent.com/xerial/sqlite-jdbc/5e1a6a4c8897f6699eed259948a04fcdf44c242a/src/main/java9/org/sqlite/nativeimage/SqliteJdbcFeature.java"
+    }
+  ],
+  "not_reproduced": [],
+  "published_jar": "K:\\m3-work\\donors\\maven-sources\\store\\org\\xerial\\sqlite-jdbc\\3.51.1.1\\sqlite-jdbc-3.51.1.1.jar",
+  "published_jar_sha256": "c0afdf949a27e76836e7d76c3e7bb4abf6b6c0079f93d8176db6cc12bc6bd6c7",
+  "repository": "github:xerial/sqlite-jdbc",
+  "tag": "3.51.1.1"
+}

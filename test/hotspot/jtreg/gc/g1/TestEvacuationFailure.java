@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021, 2022, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2021, 2025, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -31,10 +31,7 @@ package gc.g1;
  * @library /test/lib
  * @modules java.base/jdk.internal.misc
  *          java.management
- * @build jdk.test.whitebox.WhiteBox
- * @run driver jdk.test.lib.helpers.ClassFileInstaller jdk.test.whitebox.WhiteBox
- * @run main/othervm -Xbootclasspath/a:. -XX:+UnlockDiagnosticVMOptions -XX:+WhiteBoxAPI
- *                   gc.g1.TestEvacuationFailure
+ * @run driver gc.g1.TestEvacuationFailure
  */
 
 import jdk.test.lib.process.OutputAnalyzer;
@@ -43,17 +40,16 @@ import jdk.test.lib.process.ProcessTools;
 public class TestEvacuationFailure {
 
     public static void main(String[] args) throws Exception {
-        ProcessBuilder pb = ProcessTools.createJavaProcessBuilder("-XX:+UseG1GC",
-                                                                  "-Xmx32M",
-                                                                  "-Xmn16M",
-                                                                  "-XX:+G1EvacuationFailureALot",
-                                                                  "-XX:G1EvacuationFailureALotCount=100",
-                                                                  "-XX:G1EvacuationFailureALotInterval=1",
-                                                                  "-XX:+UnlockDiagnosticVMOptions",
-                                                                  "-Xlog:gc",
-                                                                  GCTestWithEvacuationFailure.class.getName());
+        OutputAnalyzer output = ProcessTools.executeLimitedTestJava("-XX:+UseG1GC",
+                                                                    "-Xmx32M",
+                                                                    "-Xmn16M",
+                                                                    "-XX:+G1EvacuationFailureALot",
+                                                                    "-XX:G1EvacuationFailureALotCount=100",
+                                                                    "-XX:G1EvacuationFailureALotInterval=1",
+                                                                    "-XX:+UnlockDiagnosticVMOptions",
+                                                                    "-Xlog:gc",
+                                                                    GCTestWithEvacuationFailure.class.getName());
 
-        OutputAnalyzer output = new OutputAnalyzer(pb.start());
         System.out.println(output.getStdout());
         output.shouldContain("(Evacuation Failure)");
         output.shouldHaveExitValue(0);

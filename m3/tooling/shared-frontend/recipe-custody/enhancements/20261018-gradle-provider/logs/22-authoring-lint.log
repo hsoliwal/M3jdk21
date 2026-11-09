@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "files": [
+    {
+      "path": "m3/tooling/module-packs/build-support/gradle-provider/LICENSE.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "bytes": 11358
+    },
+    {
+      "path": "m3/tooling/module-packs/build-support/gradle-provider/NOTICE.md",
+      "sha256": "7ffa188b355a83628f04b1a965e8d2c2a77f03c40ec1f79c921034a943125cfb",
+      "bytes": 983
+    },
+    {
+      "path": "m3/tooling/module-packs/build-support/gradle-provider/README.md",
+      "sha256": "65d57ce1fce1259ab083132d9f252ee8df038648d3c323858891002df95fec44",
+      "bytes": 6755
+    },
+    {
+      "path": "m3/tooling/module-packs/build-support/gradle-provider/pom.xml",
+      "sha256": "f3467d28d5184aa914652c01113033e122c816ed95ac4285ee2ca02572b14ca1",
+      "bytes": 4298
+    },
+    {
+      "path": "m3/tooling/module-packs/build-support/gradle-provider/src/main/java/org/gradle/internal/m3/ast/M3GradleASTProvider.java",
+      "sha256": "92a7700275af7759c6a8c80e636fc19e9ac1affa84c0cfa15b8063ae70244557",
+      "bytes": 6477
+    },
+    {
+      "path": "m3/tooling/module-packs/build-support/gradle-provider/src/test/java/org/gradle/internal/m3/ast/M3GradleASTProviderProbe.java",
+      "sha256": "6f09a77dd665891ecd495071fa2ddfbf68f3926492a493a9318e4cbefd0815b1",
+      "bytes": 17919
+    },
+    {
+      "path": "m3/tooling/module-packs/build-support/gradle-provider/src/test/java/org/gradle/internal/m3/ast/M3GradleASTProviderTest.java",
+      "sha256": "d9ecd98e605e4e40152d789a3c000843e03887da826ebfb79150d1708d0f7105",
+      "bytes": 17275
+    },
+    {
+      "path": "m3/tooling/module-packs/build-support/gradle-provider/src/test/resources/META-INF/services/com.sun.source.util.M3AST$Consumer",
+      "sha256": "61e75cf6961c585fec7c2a20d0fc35280c991989c0d06bb269abc04a74603553",
+      "bytes": 133
+    },
+    {
+      "path": "m3/tooling/module-packs/build-support/gradle-provider/src/test/resources/META-INF/services/com.sun.source.util.Plugin",
+      "sha256": "1fc21fa32338ed59f6b437e8066d59a2eb29e73d07021dcec72533efe1fe27b3",
+      "bytes": 68
+    }
+  ]
+}

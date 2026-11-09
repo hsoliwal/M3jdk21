@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1996, 2022, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1996, 2024, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -38,7 +38,7 @@ import java.security.*;
 import java.util.function.Function;
 
 import sun.security.jca.JCAUtil;
-import sun.security.provider.SHAKE256;
+import sun.security.provider.SHA3.SHAKE256;
 import sun.security.timestamp.*;
 import sun.security.util.*;
 import sun.security.x509.*;
@@ -151,6 +151,10 @@ public class PKCS7 {
         ContentInfo block = new ContentInfo(derin, oldStyle);
         ObjectIdentifier contentType = block.contentType;
         DerValue content = block.getContent();
+
+        if (content == null) {
+            throw new ParsingException("content is null");
+        }
 
         if (contentType.equals(ContentInfo.SIGNED_DATA_OID)) {
             parseSignedData(content);

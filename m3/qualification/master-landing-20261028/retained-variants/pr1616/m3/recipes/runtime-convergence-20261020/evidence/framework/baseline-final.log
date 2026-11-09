@@ -1,0 +1,182 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------< com.m3:m3-eclipse-framework-forward >-----------------
+[INFO] Building m3-eclipse-framework-forward 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ m3-eclipse-framework-forward ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/53bcd62c244c/work-framework-20261020/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ m3-eclipse-framework-forward ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 273 source files with javac [debug release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ m3-eclipse-framework-forward ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/53bcd62c244c/work-framework-20261020/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ m3-eclipse-framework-forward ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 4 source files with javac [debug release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ m3-eclipse-framework-forward ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.m3.eclipse.framework.M3EclipseDeltaIdentitySetTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.133 s -- in com.m3.eclipse.framework.M3EclipseDeltaIdentitySetTest
+[INFO] Running com.m3.eclipse.framework.M3EclipseEquinoxLifecycleTest
+[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.649 s <<< FAILURE! -- in com.m3.eclipse.framework.M3EclipseEquinoxLifecycleTest
+[ERROR] com.m3.eclipse.framework.M3EclipseEquinoxLifecycleTest.serviceRemainsUsableInsideSynchronousLifecycleEvents -- Time elapsed: 0.627 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: REGISTERED service was unusable ==> expected: <null> but was: <java.lang.IllegalStateException: M3 Eclipse forwarding bundle is stopped>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertNull.failNotNull(AssertNull.java:50)
+	at org.junit.jupiter.api.AssertNull.assertNull(AssertNull.java:35)
+	at org.junit.jupiter.api.Assertions.assertNull(Assertions.java:287)
+	at com.m3.eclipse.framework.M3EclipseEquinoxLifecycleTest.serviceRemainsUsableInsideSynchronousLifecycleEvents(M3EclipseEquinoxLifecycleTest.java:57)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[INFO] Running com.m3.eclipse.framework.M3EclipseFrameworkSnapshotsTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.148 s -- in com.m3.eclipse.framework.M3EclipseFrameworkSnapshotsTest
+[INFO] Running com.m3.eclipse.framework.M3EclipseRuntimeActivatorTest
+[ERROR] Tests run: 11, Failures: 4, Errors: 3, Skipped: 0, Time elapsed: 2.098 s <<< FAILURE! -- in com.m3.eclipse.framework.M3EclipseRuntimeActivatorTest
+[ERROR] com.m3.eclipse.framework.M3EclipseRuntimeActivatorTest.reentrantStopDuringRegistrationUnregistersExactlyOnce -- Time elapsed: 0.006 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.lang.IllegalStateException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:73)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
+	at com.m3.eclipse.framework.M3EclipseRuntimeActivatorTest.reentrantStopDuringRegistrationUnregistersExactlyOnce(M3EclipseRuntimeActivatorTest.java:90)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] com.m3.eclipse.framework.M3EclipseRuntimeActivatorTest.registeredCallbackCanUsePublishedService -- Time elapsed: 0.007 s <<< ERROR!
+java.lang.IllegalStateException: M3 Eclipse forwarding bundle is stopped
+	at com.m3.eclipse.framework.M3EclipseRuntimeActivator.requireActiveContext(M3EclipseRuntimeActivator.java:72)
+	at com.m3.eclipse.framework.M3EclipseRuntimeActivator.bundles(M3EclipseRuntimeActivator.java:51)
+	at com.m3.eclipse.framework.M3EclipseRuntimeActivatorTest.lambda$registeredCallbackCanUsePublishedService$6(M3EclipseRuntimeActivatorTest.java:62)
+	at com.m3.eclipse.framework.M3EclipseRuntimeActivatorTest.lambda$context$42(M3EclipseRuntimeActivatorTest.java:171)
+	at jdk.proxy2/jdk.proxy2.$Proxy12.registerService(Unknown Source)
+	at com.m3.eclipse.framework.M3EclipseRuntimeActivator.start(M3EclipseRuntimeActivator.java:33)
+	at com.m3.eclipse.framework.M3EclipseRuntimeActivatorTest.registeredCallbackCanUsePublishedService(M3EclipseRuntimeActivatorTest.java:63)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] com.m3.eclipse.framework.M3EclipseRuntimeActivatorTest.reentrantStartDuringRegistrationIsRefused -- Time elapsed: 0.004 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.lang.IllegalStateException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:73)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
+	at com.m3.eclipse.framework.M3EclipseRuntimeActivatorTest.lambda$reentrantStartDuringRegistrationIsRefused$19(M3EclipseRuntimeActivatorTest.java:99)
+	at com.m3.eclipse.framework.M3EclipseRuntimeActivatorTest.lambda$context$42(M3EclipseRuntimeActivatorTest.java:171)
+	at jdk.proxy2/jdk.proxy2.$Proxy12.registerService(Unknown Source)
+	at com.m3.eclipse.framework.M3EclipseRuntimeActivator.start(M3EclipseRuntimeActivator.java:33)
+	at com.m3.eclipse.framework.M3EclipseRuntimeActivatorTest.reentrantStartDuringRegistrationIsRefused(M3EclipseRuntimeActivatorTest.java:100)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] com.m3.eclipse.framework.M3EclipseRuntimeActivatorTest.reentrantStartDuringUnregistrationIsRefused -- Time elapsed: 0.002 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.lang.IllegalStateException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:73)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
+	at com.m3.eclipse.framework.M3EclipseRuntimeActivatorTest.lambda$reentrantStartDuringUnregistrationIsRefused$40(M3EclipseRuntimeActivatorTest.java:157)
+	at com.m3.eclipse.framework.M3EclipseRuntimeActivatorTest.lambda$context$41(M3EclipseRuntimeActivatorTest.java:165)
+	at jdk.proxy2/jdk.proxy2.$Proxy15.unregister(Unknown Source)
+	at com.m3.eclipse.framework.M3EclipseRuntimeActivator.stop(M3EclipseRuntimeActivator.java:46)
+	at com.m3.eclipse.framework.M3EclipseRuntimeActivatorTest.reentrantStartDuringUnregistrationIsRefused(M3EclipseRuntimeActivatorTest.java:159)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] com.m3.eclipse.framework.M3EclipseRuntimeActivatorTest.reentrantStopDuringUnregistrationIsIdempotent -- Time elapsed: 0.006 s <<< ERROR!
+java.lang.IllegalStateException: M3 Eclipse forwarding bundle is stopped
+	at com.m3.eclipse.framework.M3EclipseRuntimeActivator.requireActiveContext(M3EclipseRuntimeActivator.java:72)
+	at com.m3.eclipse.framework.M3EclipseRuntimeActivator.bundles(M3EclipseRuntimeActivator.java:51)
+	at com.m3.eclipse.framework.M3EclipseRuntimeActivatorTest.lambda$reentrantStopDuringUnregistrationIsIdempotent$22(M3EclipseRuntimeActivatorTest.java:110)
+	at com.m3.eclipse.framework.M3EclipseRuntimeActivatorTest.lambda$context$41(M3EclipseRuntimeActivatorTest.java:165)
+	at jdk.proxy2/jdk.proxy2.$Proxy15.unregister(Unknown Source)
+	at com.m3.eclipse.framework.M3EclipseRuntimeActivator.stop(M3EclipseRuntimeActivator.java:46)
+	at com.m3.eclipse.framework.M3EclipseRuntimeActivatorTest.reentrantStopDuringUnregistrationIsIdempotent(M3EclipseRuntimeActivatorTest.java:113)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] com.m3.eclipse.framework.M3EclipseRuntimeActivatorTest.unregisteringCallbackCanUsePublishedService -- Time elapsed: 0.015 s <<< ERROR!
+java.lang.IllegalStateException: M3 Eclipse forwarding bundle is stopped
+	at com.m3.eclipse.framework.M3EclipseRuntimeActivator.requireActiveContext(M3EclipseRuntimeActivator.java:72)
+	at com.m3.eclipse.framework.M3EclipseRuntimeActivator.bundles(M3EclipseRuntimeActivator.java:51)
+	at com.m3.eclipse.framework.M3EclipseRuntimeActivatorTest.lambda$unregisteringCallbackCanUsePublishedService$9(M3EclipseRuntimeActivatorTest.java:69)
+	at com.m3.eclipse.framework.M3EclipseRuntimeActivatorTest.lambda$context$41(M3EclipseRuntimeActivatorTest.java:165)
+	at jdk.proxy2/jdk.proxy2.$Proxy15.unregister(Unknown Source)
+	at com.m3.eclipse.framework.M3EclipseRuntimeActivator.stop(M3EclipseRuntimeActivator.java:46)
+	at com.m3.eclipse.framework.M3EclipseRuntimeActivatorTest.unregisteringCallbackCanUsePublishedService(M3EclipseRuntimeActivatorTest.java:71)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] com.m3.eclipse.framework.M3EclipseRuntimeActivatorTest.registrationCallbackDoesNotHoldLifecycleMonitor -- Time elapsed: 2.011 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Unexpected exception thrown: java.util.concurrent.TimeoutException
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
+	at org.junit.jupiter.api.AssertDoesNotThrow.createAssertionFailedError(AssertDoesNotThrow.java:84)
+	at org.junit.jupiter.api.AssertDoesNotThrow.assertDoesNotThrow(AssertDoesNotThrow.java:75)
+	at org.junit.jupiter.api.AssertDoesNotThrow.assertDoesNotThrow(AssertDoesNotThrow.java:58)
+	at org.junit.jupiter.api.Assertions.assertDoesNotThrow(Assertions.java:3228)
+	at com.m3.eclipse.framework.M3EclipseRuntimeActivatorTest.lambda$registrationCallbackDoesNotHoldLifecycleMonitor$25(M3EclipseRuntimeActivatorTest.java:120)
+	at com.m3.eclipse.framework.M3EclipseRuntimeActivatorTest.lambda$context$42(M3EclipseRuntimeActivatorTest.java:171)
+	at jdk.proxy2/jdk.proxy2.$Proxy12.registerService(Unknown Source)
+	at com.m3.eclipse.framework.M3EclipseRuntimeActivator.start(M3EclipseRuntimeActivator.java:33)
+	at com.m3.eclipse.framework.M3EclipseRuntimeActivatorTest.registrationCallbackDoesNotHoldLifecycleMonitor(M3EclipseRuntimeActivatorTest.java:123)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+Caused by: java.util.concurrent.TimeoutException
+	at java.base/java.util.concurrent.CompletableFuture.timedGet(CompletableFuture.java:1960)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2095)
+	at com.m3.eclipse.framework.M3EclipseRuntimeActivatorTest.lambda$registrationCallbackDoesNotHoldLifecycleMonitor$24(M3EclipseRuntimeActivatorTest.java:122)
+	at org.junit.jupiter.api.AssertDoesNotThrow.assertDoesNotThrow(AssertDoesNotThrow.java:71)
+	... 10 more
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   M3EclipseEquinoxLifecycleTest.serviceRemainsUsableInsideSynchronousLifecycleEvents:57 REGISTERED service was unusable ==> expected: <null> but was: <java.lang.IllegalStateException: M3 Eclipse forwarding bundle is stopped>
+[ERROR]   M3EclipseRuntimeActivatorTest.reentrantStartDuringRegistrationIsRefused:100->lambda$context$42:171->lambda$reentrantStartDuringRegistrationIsRefused$19:99 Expected java.lang.IllegalStateException to be thrown, but nothing was thrown.
+[ERROR]   M3EclipseRuntimeActivatorTest.reentrantStartDuringUnregistrationIsRefused:159->lambda$context$41:165->lambda$reentrantStartDuringUnregistrationIsRefused$40:157 Expected java.lang.IllegalStateException to be thrown, but nothing was thrown.
+[ERROR]   M3EclipseRuntimeActivatorTest.reentrantStopDuringRegistrationUnregistersExactlyOnce:90 Expected java.lang.IllegalStateException to be thrown, but nothing was thrown.
+[ERROR]   M3EclipseRuntimeActivatorTest.registrationCallbackDoesNotHoldLifecycleMonitor:123->lambda$context$42:171->lambda$registrationCallbackDoesNotHoldLifecycleMonitor$25:120 Unexpected exception thrown: java.util.concurrent.TimeoutException
+[ERROR] Errors: 
+[ERROR]   M3EclipseRuntimeActivatorTest.reentrantStopDuringUnregistrationIsIdempotent:113->lambda$context$41:165->lambda$reentrantStopDuringUnregistrationIsIdempotent$22:110 » IllegalState M3 Eclipse forwarding bundle is stopped
+[ERROR]   M3EclipseRuntimeActivatorTest.registeredCallbackCanUsePublishedService:63->lambda$context$42:171->lambda$registeredCallbackCanUsePublishedService$6:62 » IllegalState M3 Eclipse forwarding bundle is stopped
+[ERROR]   M3EclipseRuntimeActivatorTest.unregisteringCallbackCanUsePublishedService:71->lambda$context$41:165->lambda$unregisteringCallbackCanUsePublishedService$9:69 » IllegalState M3 Eclipse forwarding bundle is stopped
+[INFO] 
+[ERROR] Tests run: 21, Failures: 5, Errors: 3, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  16.131 s
+[INFO] Finished at: 2026-10-20T08:12:38+01:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test (default-test) on project m3-eclipse-framework-forward: There are test failures.
+[ERROR] 
+[ERROR] Please refer to /workspace/scratch/53bcd62c244c/work-framework-20261020/target/surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

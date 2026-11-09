@@ -1,0 +1,20 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf.",
+  "mappings": [
+    {
+      "source": "com.synexia.indexstring.MIndexRegexProgram.trigramQuery / trigramConcatQuery (f39709b6)",
+      "source_commit": "origin/develop 296323958b1",
+      "target": "java.util.regex.M3PatternQuery (TARGET_OWNED_PORT, GPLv2+CPE)",
+      "status": "implemented-locally-verified (G7, G7r, jtreg body on the patched module); Linux jtreg PENDING",
+      "target_rule": "ADAPT the planner rules onto the JDK node tree; no second parser; admission refuses requireEnd writers, non-Start/BnM roots, CANON_EQ, unknown nodes"
+    },
+    {
+      "source": "java.util.regex.Pattern.compile (master 8cbd4392)",
+      "source_commit": "c9b07049c5",
+      "target": "java.util.regex.Pattern.compile installs M3PatternQuery.derive for non-LITERAL, non-CANON_EQ patterns",
+      "status": "postimage d2828f7a; runtime recipe v2 re-sealed (65 targets)",
+      "target_rule": "LITERAL path unchanged; derivation failure of any kind keeps the engine unassisted"
+    }
+  ]
+}

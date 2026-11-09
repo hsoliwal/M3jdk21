@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+component	source	license	decision	reason
+MIndexTrieNavigation, MIndexLiteralSearchTree	hsoliwal/com.synexia synexia-indexstring (first party)	Apache-2.0	ADAPT	first-party donor; package, progress monitor and edit-distance owner mapped to M3JDK owners; no third-party code
+M3EditDistancePlan	M3JDK m3/ports/precompute (existing)	Apache-2.0	REUSE	existing owner of a compiled UTF-16 query; no second edit-distance plan is added
+Aho-Corasick / trie search	FOSS (e.g. ahocorasick libraries)	various	NO_FIT	the donor owner already exists with navigation coordinates and a bounded Levenshtein walk; nothing is copied

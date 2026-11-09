@@ -1,0 +1,7 @@
+kind	reference	use
+inventory	PR164	JEP484 denominator/policy authority
+path_map	PR185	deterministic JDK21 internal -> JDK24 public/internal descendants
+jdk21	openjdk/jdk@jdk-21+35	sealed source hashes
+jdk24	openjdk/jdk@jdk-24+36	final Class-File API donor hashes
+jep484	84ffb64cd73f8af11cf3670c6f19d282c2ac6961	final API transition lineage
+target	hsoliwal/M3jdk21 current checkout	occupancy/drift classification only

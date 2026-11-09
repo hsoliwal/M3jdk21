@@ -1,0 +1,27 @@
+{
+  "schema": "M3_CANONICAL_RECEIVER_PUBLICATION_V1",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_base": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "1124f5b72744b306884beedebafd8558d49d4c4c",
+  "canonical_pull_request": "https://github.com/hsoliwal/com.synexia/pull/12403",
+  "recipe": "com.synexia.m3.ArrayMaskLookup20261018",
+  "canonical_crate": "synexia-openrewrite-recipes/recipe-crates/m3-array-mask-lookup-20261018",
+  "source_seals_sha256": "eac14c0a231a7488d14176020ef7868c75c47c4eee66b3bc8bb806f22a655861",
+  "received_target_count": 6,
+  "canonical_sdk_tests_passed": 5,
+  "receiver_readback": "5388d3f3cc2516103be696e74c8abd46f979c8447559c8d166a249fc51f8436e",
+  "code_bytes_match_final_receiver": true,
+  "qualification_status": "BOUNDED_CORRECTNESS_PASS_NATIVE_PERFORMANCE_AND_LEGACY_LINEAGE_PENDING",
+  "evidence": {
+    "canonical_crate": "https://github.com/hsoliwal/com.synexia/tree/1124f5b72744b306884beedebafd8558d49d4c4c/synexia-openrewrite-recipes/recipe-crates/m3-array-mask-lookup-20261018",
+    "catalogue": "https://github.com/hsoliwal/com.synexia/blob/1124f5b72744b306884beedebafd8558d49d4c4c/synexia-openrewrite-recipes/catalogs/m3-string-index-reverse-20261018.md",
+    "primary": "https://github.com/hsoliwal/com.synexia/blob/1124f5b72744b306884beedebafd8558d49d4c4c/synexia-openrewrite-recipes/recipe-crates/m3-string-index-reverse-20261018/evidence/collections/received-qualification/GATE_RECEIPT.json"
+  },
+  "notes": [
+    "Thirty ordered received-source commands passed, including strict compilation of all 134 actual production Java sources and real JNI/UBSan oracles.",
+    "Warm sorted membership and eligible JNI stride batches improve; some small/unbatchable whole-owner controls regress.",
+    "Legacy receiver workflows pin prior blobs and require separately admitted successor lineage; live-wrapper completion is not claimed."
+  ],
+  "receipt_role": "Generated publication custody metadata. This file is not a transformation engine, runtime input, or admission/phase-advancement authority."
+}

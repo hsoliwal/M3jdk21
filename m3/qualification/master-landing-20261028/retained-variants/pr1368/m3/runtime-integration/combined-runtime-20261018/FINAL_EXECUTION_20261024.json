@@ -1,0 +1,75 @@
+{
+  "schema": "M3_FINAL_RUNTIME_EXECUTION_20261024_V1",
+  "SPDX-FileCopyrightText": "2026 Hitesh Soliwal and contributors",
+  "SPDX-License-Identifier": "Apache-2.0",
+  "source_epoch": "22c70a28966e2470352af34abf914d6917d941d5",
+  "github_source_commit": "eb49a2035cae469ae597c25b6f9209ae1436128c",
+  "initial_metadata_commit": "b2e293497ec1e57da261136ec8dc235dd074a4f6",
+  "canonical_initial_commit": "466838b65a27e937d699dd0ae9a72428fd2a4400",
+  "canonical_recipe_owner_pin": "bb58cf0090e1bfbe5cafcde44c6db980945d1b59",
+  "initial_receipt": {
+    "path": "m3/runtime-integration/combined-runtime-20261018/CURRENT_EXECUTION_20261024.json",
+    "sha256": "5dd179d61e8396cd2e104998cf3d194e3662e11eaa7be9ee7cf369d5d61b728b",
+    "preserved_status": "HOLD_RAW_VM_RC_UNRECORDED"
+  },
+  "final_enabled_collection_process_qualification": {
+    "status": "PASS",
+    "coverage": {
+      "found": 286,
+      "skipped": 0,
+      "started": 286,
+      "aborted": 0,
+      "successful": 286,
+      "failed": 0
+    },
+    "unique_id_closure": {
+      "expected": 286,
+      "actual": 286,
+      "unique": 286,
+      "overlap": 0,
+      "original_default_exact": true,
+      "final_default_exact": true
+    },
+    "raw_process_return_codes": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "consumed_inputs_unchanged": true,
+    "method": "Five original clean-exit disjoint shards plus the exact sole-ID clean-exit successor. Original unrecorded-RC run remains preserved; repeated ID is not additional coverage."
+  },
+  "composite_evidence": {
+    "path": "image-build-evidence/epochs/epoch-22c70a28966e/combined/m3-enabled-rc-recapture/COMPOSITE_QUALIFICATION.json",
+    "sha256": "7428a0872cc049fe6faaa5303b2aae12cc026555b24e2c9cec286911a6cbf2cb",
+    "original_hold_sha256": "161d11f406e7fe4097c1ba0c0ad4639c27dd89371943eb797dc4ca5eee41e16a",
+    "successor_run_sha256": "23f49a1fe113e04062ecedce4bd6d58b9610c3673f0da4a962d71404506e3493",
+    "successor_proof_sha256": "23f49a1fe113e04062ecedce4bd6d58b9610c3673f0da4a962d71404506e3493",
+    "raw_exit_status_sha256": "77a5b8f13972f6762d1b5bf697862aa58d1698b2628a975dd7e3fa65e190b3f0"
+  },
+  "previously_observed_unchanged_results": {
+    "strict_source_image": "PASS",
+    "supported_boot_modes": 5,
+    "standalone_owner_routing_runs": 34,
+    "default_image_collection_tests": 286,
+    "unchanged_Maven_POM_Surefire_tests": 286,
+    "skipped_aborted_failed": 0,
+    "collection_native_libraries": 10,
+    "generated_JNI_exports": 20
+  },
+  "retained_counterexamples": [
+    "Original image22/25 owner result",
+    "Original900-second monolithic interpreted-suite timeout",
+    "Original complete286JUnit-success reports with one raw VM exit status uncaptured",
+    "Duration parser failure, original driverRC1 and denied diagnostic attach attempt"
+  ],
+  "receiving_phase": "STRING_ACTIVE_NO_FAMILY_PROMOTION",
+  "pending": [
+    "Full current jtreg/platform/GC/compiler/family and resource/performance acceptance",
+    "Complete hosted runtime workflows and the exact-head complete indexed-ledger provenance gate",
+    "Existing filtered-spliterator reflection and historical metadata verifier holds"
+  ],
+  "followup_recipe": "m3-final-proof-20261024; target qualification and receiving evidence live in the canonical follow-up task."
+}

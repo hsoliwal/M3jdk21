@@ -1,0 +1,10 @@
+{
+  "schema": "M3_AST_HISTORICAL_PREIMAGE_REFUSAL_V1",
+  "historical_revision": "215f6b9b4bb0ffbd9539106e6e8e394105933138",
+  "historical_blob": "d9cb096f48f39bee6ef35658d777a021957b489f",
+  "historical_sha256": "a834fe19fdfdfa74f8641f3d02e552d19ed4eea97088d4739fb397ab5f36429b",
+  "result": "PASS",
+  "writes": 0,
+  "reason": "Different whole-file source refused before writes; historical observer hooks are not erased.",
+  "source_recovery": "NOT_PERFORMED"
+}

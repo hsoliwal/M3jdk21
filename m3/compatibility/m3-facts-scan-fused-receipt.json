@@ -1,0 +1,82 @@
+{
+  "schema": "M3JDK21_SYNEXIA_FACTS_SCAN_FUSED_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimage (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 test",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-facts-scan-fused-20261008",
+    "pullRequest": 9931,
+    "commit": "a485120e747",
+    "stackedOn": {
+      "pullRequest": 9916,
+      "crate": "m3-facts-mixed-consumers",
+      "note": "preimage is the A4 postimage c834e63534db..."
+    },
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.FactsScanFused",
+    "crate": "m3-facts-scan-fused",
+    "fossReuseDecisionRow": "string.facts.scan-fused",
+    "donors": [
+      {
+        "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexTextPrecomputedFacts.java",
+        "commit": "541a079cffd",
+        "target": "java.lang.M3StringFacts.scan",
+        "mechanics": "single loop over units (hashes, ASCII case hashes, prefix4/suffix4, bigram/trigram signals) extended with the M3-only code-point lane (one-unit surrogate delay), strip lane and trim lane; units from M3String.getChars into a transient 1024-unit window; LATIN1_UNIT_SIGNAL table folded at class initialization from the unchanged addSignal"
+      }
+    ],
+    "license": "Apache-2.0 donor shape into the GPLv2+CPE owner",
+    "disposition": "ADAPT: outputs byte-identical to the previous three-pass scan (differential dump); facts stay fixed-size and payload-free; the window is scratch, never a retained shadow",
+    "reapplied": {
+      "branch": "codex/m3-precompute-stack-reapply-20261009",
+      "commit": "adf21526919",
+      "note": "the original PR merges reached develop/master as zero-file superset merges; crate commits cherry-picked onto develop on 2026-10-09"
+    }
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "m3/facts-thick-20261008 (A4, #486) on master da6084c4ef",
+    "owners": [
+      "java.lang.M3StringFacts"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed against b9496a02e0: 66 targets, M3StringFacts.java after-image updated; apply.py --check state=after; test_recipe.py 8/8",
+    "reappliedBase": "master 5f68880c6f (A8 owner a37bf443f1, A9 owner c66aacba5f, A6 owner aec42c5a02, refusal-safe binary join 3c3d66694a); original base: m3/facts-thick-20261008 (A4, #486) on master da6084c4ef"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringFacts.java",
+      "before": "c834e63534db855f06e99bbfdf45caf0ecf36b88f5760bfe7fdaa8bcc355509f",
+      "after": "51635a2e8cc407f3f7166389f975442b1bf06857e8b8c548852cbc63eaf636b3",
+      "resource": "00-M3StringFacts.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringFactsScanWindowTest.java",
+      "before": "ABSENT",
+      "after": "0fa071d6e1e5c8372f4178d22e9d1d5a37a7f68d062ae511f08841f43bd02642",
+      "resource": "01-M3StringFactsScanWindowTest.java.txt",
+      "step": "hash-pinned-java"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base over the sealed M3 java.base subset (42 files, 149 classes)",
+    "differentialDump": "PASS_WINDOWS M3FactsDump: 6,000 rounds (atoms incl. 1,000..3,200 units, atom ranges, tuples) = 13,970 samples x 22 fields = 14,842 rows; A4 module vs A8 module byte-identical (sha256 30b745280d6acb17...); the charAt variant was identical too",
+    "oracleTestLocal": "PASS_WINDOWS M3StringFactsScanWindowTest flag-off on the patched module: 329,909 checks (compose fold of single-unit facts + public String/Character definitions; window-seam shapes at 1023..3071)",
+    "a4Regression": "PASS_WINDOWS M3StringFactsMixedConsumersTest on the A8 module: 90,118 checks, same 6,597/6,713 rejections",
+    "g8RuntimeRecipe": "PASS_WINDOWS reseal 66 targets; apply.py --check state=after; test_recipe.py 8/8",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3FactsScanFusedRecipeTest 2/2 (mvn log sha256 8e3c02db53ee72da...)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "timingLocal": "RECORDED (not a claim): scan in isolation, best of 15 rounds, min over 3 JVMs, two runs: 0.85..1.14x for 8..1024 units (host noise), 0.64..0.96x for 1,048,576 units; charAt variant not faster",
+    "flagOnDifferential": "PENDING_LINUX (M3StringFactsScanWindowTest and M3StringFactsCompositionTest under -XX:+UseM3StringStorage)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "no fact value changes: the differential dump and the compose-fold oracle pin every field, including the signal fields produced through the Latin-1 table",
+    "the window is transient scratch sized min(length, 1024); no byte[]/char[] shadow is retained (lineage invariants 7 and 10)",
+    "a high surrogate is resolved by its successor through a one-unit delay, so pairs that straddle a window seam are counted exactly as before",
+    "admitted on exactness and structure (one pass over native storage instead of three, no per-unit dispatch); no speedup is claimed",
+    "stacked on A4 (#486): merges after it, or the runtime.patch re-seal must be regenerated"
+  ]
+}

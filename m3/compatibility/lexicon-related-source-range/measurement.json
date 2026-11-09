@@ -1,0 +1,138 @@
+{
+  "schema": "M3_RELATED_SOURCE_OBSERVATION_V1",
+  "status": "COMPONENT_OBSERVATION_NOT_RUNTIME_ADMISSION",
+  "date": "2026-10-31",
+  "mappingId": "m3.lexicons.related-source-range",
+  "selectedImplementation": {
+    "targetRevision": "29feb5f14b5926649b8f1e972670c2a8390fb8e7",
+    "path": "m3/core/src/jdk/m3/text/SharedRelatedLexemeCatalog.java",
+    "sha256": "a84cf445add13641546fba917ec32077cbe7988b70e5d8d5e72e1c793288b321"
+  },
+  "referenceImplementation": {
+    "targetRevision": "52fb81c483c74448a12eecb63aa9465e42cdb82c",
+    "sha256": "bcf6d9216b549a4bf1c4c7a6bdb414c54f659be2567fcb99cdbadaafc964f049"
+  },
+  "observer": {
+    "forks": 3,
+    "samplesEachSizeAndVariant": 27,
+    "queriesPerSample": 4096,
+    "queryCycle": 128,
+    "queryMix": "75% source hits;25% same-length misses; fixed deterministic dataset",
+    "semanticQueryChecksEachFork": 384,
+    "inputBindings": 209,
+    "dispatchAndConsumer": "Same prelinked MethodHandle and escaping returned List sink",
+    "jvm": "Oracle JDK21.0.9+7-LTS-338; HotSpot64-Bit Server VM; Windows11 amd64;32 available processors",
+    "backgroundActivity": "Not controlled"
+  },
+  "summary": [
+    {
+      "groups": 256,
+      "rows": 1088,
+      "samplesEach": 27,
+      "baseline": {
+        "medianNsPerQuery": 6610.986328125,
+        "minNsPerQuery": 4799.6826171875,
+        "maxNsPerQuery": 9900.68359375,
+        "medianAllocatedBytesPerQuery": 354,
+        "minAllocatedBytesPerQuery": 354,
+        "maxAllocatedBytesPerQuery": 354.099609375
+      },
+      "candidate": {
+        "medianNsPerQuery": 304.1748046875,
+        "minNsPerQuery": 190.478515625,
+        "maxNsPerQuery": 453.2958984375,
+        "medianAllocatedBytesPerQuery": 68,
+        "minAllocatedBytesPerQuery": 68,
+        "maxAllocatedBytesPerQuery": 92
+      },
+      "allocationReductionFraction": 0.807909604519774
+    },
+    {
+      "groups": 2048,
+      "rows": 8704,
+      "samplesEach": 27,
+      "baseline": {
+        "medianNsPerQuery": 129131.6162109375,
+        "minNsPerQuery": 107210.9619140625,
+        "maxNsPerQuery": 163723.0712890625,
+        "medianAllocatedBytesPerQuery": 354,
+        "minAllocatedBytesPerQuery": 354,
+        "maxAllocatedBytesPerQuery": 354
+      },
+      "candidate": {
+        "medianNsPerQuery": 440.6005859375,
+        "minNsPerQuery": 226.1962890625,
+        "maxNsPerQuery": 772.7783203125,
+        "medianAllocatedBytesPerQuery": 68,
+        "minAllocatedBytesPerQuery": 68,
+        "maxAllocatedBytesPerQuery": 92
+      },
+      "allocationReductionFraction": 0.807909604519774
+    },
+    {
+      "groups": 8192,
+      "rows": 34816,
+      "samplesEach": 27,
+      "baseline": {
+        "medianNsPerQuery": 942480.6396484375,
+        "minNsPerQuery": 656887.6708984375,
+        "maxNsPerQuery": 1635578.7353515625,
+        "medianAllocatedBytesPerQuery": 354,
+        "minAllocatedBytesPerQuery": 354,
+        "maxAllocatedBytesPerQuery": 354
+      },
+      "candidate": {
+        "medianNsPerQuery": 388.916015625,
+        "minNsPerQuery": 264.1845703125,
+        "maxNsPerQuery": 719.0673828125,
+        "medianAllocatedBytesPerQuery": 68,
+        "minAllocatedBytesPerQuery": 68,
+        "maxAllocatedBytesPerQuery": 92
+      },
+      "allocationReductionFraction": 0.807909604519774
+    }
+  ],
+  "evidence": {
+    "canonicalRepository": "hsoliwal/com.synexia",
+    "canonicalPath": "m3-openrewrite-recipes/recipe-crates/m3-lexicon-selection-20261018/qualification/current-related-20261031/measurements/bounds",
+    "forks": [
+      {
+        "fork": 1,
+        "logSha256": "58ac494d84c5f8a9faeb1233b96b76163b9c49f266b282db8b834d27815cd293",
+        "tsvSha256": "409dbe02115f7cf02441a88f17d07310e9403ed4441440ceb57f672f9236c96e",
+        "rows": 60
+      },
+      {
+        "fork": 2,
+        "logSha256": "fac0b4ae41227223cffec2cbc30773f190da89b360c773d096b626853e7ec611",
+        "tsvSha256": "070d6098cbafff774d732c2c3f3296240a49a73b2ba6ef04aea851d413a072fe",
+        "rows": 60
+      },
+      {
+        "fork": 3,
+        "logSha256": "8acf4990aca919e47d1c0a6255570f25dffd4afba0fb3f041191bfeea6fdf414",
+        "tsvSha256": "79bdab866bb315be978958f12f35d1e5efc232dcad19230c8a352b3859ae2db8",
+        "rows": 60
+      }
+    ]
+  },
+  "complexity": {
+    "coordinateComparisonCount": "O(log R) comparisons for two bounds;O(K) result copy",
+    "stringComparisonCost": "A String comparison can inspect a shared UTF-16 prefix; worst-case query work is O(L log R + K), not O(1) raw-text lookup.",
+    "retainedIndex": "No added retained lookup index"
+  },
+  "firstOpen": "Top-level owner resolved before timing; transitive dependency class loading/JIT may still occur. First-open is not JVM/disk-cold startup evidence. This corrects the overly broad class-loading exclusion in the frozen work order.",
+  "limitations": [
+    "Standalone supplied-JDK component; not a matched source-built M3JDK21 image.",
+    "Allocation counters measure current-thread allocations, not retained heap or process/native memory.",
+    "Not JMH throughput/tail latency; timings include dispatch/consumer and vary with JIT/host activity.",
+    "Not disk-cold/JVM startup, cross-process interned addresses or other-platform proof."
+  ],
+  "evaluatedAlternative": {
+    "sha256": "df379886551326768afee0252a35aca3ba8bc7ef6bb5a42cc4197537da14f7cf",
+    "status": "QUALIFIED_NOT_SELECTED",
+    "reason": "Empty-result guard passed API/SDK/oracle checks, but default-JIT measurements showed the same warmed allocation at larger cases and variable timings; no consistent observed gain. Selected public code is unchanged.",
+    "canonicalRecipe": "m3-related-empty-source-range-20261031"
+  },
+  "phaseAdvanced": false
+}

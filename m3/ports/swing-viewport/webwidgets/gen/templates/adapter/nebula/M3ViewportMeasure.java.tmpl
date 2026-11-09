@@ -1,0 +1,28 @@
+package @WPKG@.adapter;
+
+import org.eclipse.swt.widgets.Control;
+
+/**
+ * Measure atom of the viewport adapters (pattern M3P-ADAPTER-1): reads the rows of an existing widget along
+ * its scroll axis without creating item objects. The widget is an SWT or Nebula widget or a non-widget owner
+ * (layout, display, dialog, animator); the host is the control whose pixels a redraw damages.
+ */
+public interface M3ViewportMeasure {
+	/** Items along the axis. */
+	int count(Object widget, Control host);
+
+	/** Pixels per item along the axis (at least 1). */
+	int extent(Object widget, Control host);
+
+	/** First visible item. */
+	int first(Object widget, Control host);
+
+	/** Visible items from {@link #first}. */
+	int visible(Object widget, Control host);
+
+	/** Pixels of the viewport along the axis. */
+	int viewport(Object widget, Control host);
+
+	/** Writes the item's bounds on the host {x, y, width, height}; an empty box when the item is not shown. */
+	void rect(Object widget, Control host, int item, int[] out);
+}

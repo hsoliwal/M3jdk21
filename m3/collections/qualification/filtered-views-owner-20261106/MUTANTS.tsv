@@ -1,0 +1,21 @@
+id	file	check	selftest	differential	repro	verdict
+RO-1	M3FilteredViews.java	B1/B2 read-only hasNext check before the step	PASS	DIFFERS(10+ lines)	SAME	KILLED
+RO-2	M3FilteredViews.java	B1/B2 read-only hasNext check after the step	FAIL(Exception in thread "main" java.lang.AssertionError: predicate mutation before accepting or following a map slot expected=class java.util.Co)	DIFFERS(43584+ lines)	SAME	KILLED
+RO-3	M3FilteredViews.java	B1 read-only next check before the step	PASS	DIFFERS(34+ lines)	SAME	KILLED
+RO-4	M3FilteredViews.java	B2 read-only next check after the step (entry copy comparator)	FAIL(Exception in thread "main" java.lang.AssertionError: bounded nextSlot comparator mutation expected=class java.util.ConcurrentModificationExc)	DIFFERS(50204+ lines)	SAME	KILLED
+RO-5	M3FilteredViews.java	B2 read-only epoch before the collection cursor opens	PASS	DIFFERS(50812+ lines)	SAME	KILLED
+RO-6	M3FilteredViews.java	B2 read-only epoch before the descending cursor opens	PASS	DIFFERS(9494+ lines)	SAME	KILLED
+RO-7	M3FilteredViews.java	B2 read-only epoch before the entry cursor opens	FAIL(Exception in thread "main" java.lang.AssertionError: capture epoch before firstSlot expected=class java.util.ConcurrentModificationException)	DIFFERS(29944+ lines)	SAME	KILLED
+RO-8	M3FilteredViews.java	B1/B2 read-only M3TreeSet owner resolution	FAIL(Exception in thread "main" java.lang.AssertionError: predicate mutation before accepting or following a set slot expected=class java.util.Co)	DIFFERS(56599+ lines)	SAME	KILLED
+MU-1	M3MutableFilteredViews.java	B1 mutable hasNext entry check	FAIL(Exception in thread "main" java.lang.AssertionError: exhausted cursor checks revision expected=class java.util.ConcurrentModificationExcepti)	DIFFERS(57082+ lines)	SAME	KILLED
+MU-2	M3MutableFilteredViews.java	B2 mutable check after the predicate	FAIL(Exception in thread "main" java.lang.AssertionError: predicate mutation before accepting or following a map slot expected=class java.util.Co)	DIFFERS(27143+ lines)	SAME	KILLED
+MU-3	M3MutableFilteredViews.java	B2 mutable check after a rejected slot step	PASS	DIFFERS(4+ lines)	SAME	KILLED
+MU-4	M3MutableFilteredViews.java	B2 mutable next check after the slot step (bounded comparator)	FAIL(Exception in thread "main" java.lang.AssertionError: bounded nextSlot comparator mutation expected=class java.util.ConcurrentModificationExc)	DIFFERS(14+ lines)	DIFFERS	KILLED
+MU-5	M3MutableFilteredViews.java	B1 mutable remove checks the revision before next-required	FAIL(Exception in thread "main" java.lang.AssertionError: remove checks revision expected=class java.util.ConcurrentModificationException actual=)	DIFFERS(49000+ lines)	SAME	KILLED
+MU-6	M3MutableFilteredViews.java	B1 mutable remove re-reads the epoch after its own slot erase	FAIL(Exception in thread "main" java.util.ConcurrentModificationException)	DIFFERS(57200+ lines)	SAME	KILLED
+MU-7	M3MutableFilteredViews.java	B2 mutable epoch before the first slot	FAIL(Exception in thread "main" java.lang.AssertionError: capture epoch before firstSlot expected=class java.util.ConcurrentModificationException)	DIFFERS(55578+ lines)	SAME	KILLED
+MU-9	M3MutableFilteredViews.java	B3 values() over the slot cursor	FAIL(Exception in thread "main" java.lang.AssertionError: ready mutable=true bounded=false descending=false values=true next consumes prepared se)	DIFFERS(40838+ lines)	SAME	KILLED
+MU-10	M3MutableFilteredViews.java	B3 own remove keeps the prepared successor	FAIL(Exception in thread "main" java.lang.AssertionError: remove keeps prepared visibility expected=[1, 2, 3, 4, 5] actual=[1, 2, 3, 4, 5, 5])	DIFFERS(81+ lines)	SAME	KILLED
+MU-11	M3MutableFilteredViews.java	B1/B2 mutable set slot cursor	FAIL(Exception in thread "main" java.lang.AssertionError: invalidated set next expected=class java.util.ConcurrentModificationException actual=ja)	DIFFERS(56843+ lines)	SAME	KILLED
+MU-12	M3MutableFilteredViews.java	B1/B2/B3 mutable map slot cursors	FAIL(Exception in thread "main" java.lang.AssertionError: ready mutable=true bounded=false descending=false values=true next consumes prepared se)	DIFFERS(56970+ lines)	DIFFERS	KILLED
+TM-1	M3TreeMap.java	B4b eraseAt refuses a released slot	PASS	DIFFERS(16+ lines)	DIFFERS	KILLED

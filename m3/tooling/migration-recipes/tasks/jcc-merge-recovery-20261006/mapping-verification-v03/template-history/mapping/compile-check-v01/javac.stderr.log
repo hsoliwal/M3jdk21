@@ -1,0 +1,6 @@
+/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping/java-template/compile-check-v01/src/com/m3/rewrite/backport/JccMergeMappingRecoveryTest.java:215: error: cannot find symbol
+                    .withFileAttributes(new FileAttributes(timestamp, timestamp, timestamp,
+                    ^
+  symbol:   method withFileAttributes(FileAttributes)
+  location: interface Tree
+1 error

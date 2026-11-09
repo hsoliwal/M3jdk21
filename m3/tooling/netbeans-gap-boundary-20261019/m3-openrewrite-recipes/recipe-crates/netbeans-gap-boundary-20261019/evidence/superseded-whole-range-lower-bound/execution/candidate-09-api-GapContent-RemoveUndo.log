@@ -1,0 +1,21 @@
+Compiled from "GapContent.java"
+class javax.swing.text.GapContent$RemoveUndo extends javax.swing.undo.AbstractUndoableEdit {
+  protected int offset;
+    descriptor: I
+  protected int length;
+    descriptor: I
+  protected java.lang.String string;
+    descriptor: Ljava/lang/String;
+  protected java.util.Vector<javax.swing.text.GapContent$UndoPosRef> posRefs;
+    descriptor: Ljava/util/Vector;
+  final javax.swing.text.GapContent this$0;
+    descriptor: Ljavax/swing/text/GapContent;
+  protected javax.swing.text.GapContent$RemoveUndo(javax.swing.text.GapContent, int, java.lang.String);
+    descriptor: (Ljavax/swing/text/GapContent;ILjava/lang/String;)V
+
+  public void undo() throws javax.swing.undo.CannotUndoException;
+    descriptor: ()V
+
+  public void redo() throws javax.swing.undo.CannotRedoException;
+    descriptor: ()V
+}

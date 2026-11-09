@@ -1,0 +1,14 @@
+old	new	status
+nonapi.io.github.classgraph.classloaderhandler	com.m3.lib.classgraph.nonapi.classloaderhandler	MOVE
+nonapi.io.github.classgraph.fastzipfilereader	com.m3.lib.classgraph.nonapi.fastzipfilereader	MOVE
+nonapi.io.github.classgraph.fileslice.reader	com.m3.lib.classgraph.nonapi.fileslice.reader	MOVE
+nonapi.io.github.classgraph.concurrency	com.m3.lib.classgraph.nonapi.concurrency	MOVE
+nonapi.io.github.classgraph.reflection	com.m3.lib.classgraph.nonapi.reflection	MOVE
+nonapi.io.github.classgraph.classpath	com.m3.lib.classgraph.nonapi.classpath	MOVE
+nonapi.io.github.classgraph.fileslice	com.m3.lib.classgraph.nonapi.fileslice	MOVE
+nonapi.io.github.classgraph.recycler	com.m3.lib.classgraph.nonapi.recycler	MOVE
+nonapi.io.github.classgraph.scanspec	com.m3.lib.classgraph.nonapi.scanspec	MOVE
+nonapi.io.github.classgraph.types	com.m3.lib.classgraph.nonapi.types	MOVE
+nonapi.io.github.classgraph.utils	com.m3.lib.classgraph.nonapi.utils	MOVE
+nonapi.io.github.classgraph.json	com.m3.lib.classgraph.nonapi.json	MOVE
+io.github.classgraph	com.m3.lib.classgraph	MOVE

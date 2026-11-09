@@ -1,0 +1,1 @@
+M3_ZERO_INDEX_WINDOW_PASS checks=22257 backend=JAVA nativeAvailable=true

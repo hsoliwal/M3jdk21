@@ -1,0 +1,137 @@
+/* *****************************************************************************
+ * Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Apache License, Version 2.0, or (at your option) the Eclipse
+ * Public License 2.0, which are available at
+ * https://www.apache.org/licenses/LICENSE-2.0 and
+ * https://www.eclipse.org/legal/epl-2.0/
+ *
+ * SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+ *
+ * Contributors:
+ *     Hitesh Soliwal (Synexia) - initial API and implementation
+ *******************************************************************************/
+package jdk.internal.m3.collections;
+
+import java.util.Arrays;
+
+/** Collection-level open-addressed index of primitive row ordinals, never entry objects.
+ * Single-key and two-key indexing share the probing/deletion mechanism, not boxed keys.
+ * Caller owns row lanes, ensures capacity before insertion and keeps indexed keys immutable.
+ *
+ * <p>Lineage: absorbed from Synexia {@code m3-common/src/main/java/jdk/internal/m3/common/collections/PackedLongRowIndex.java}
+ * blob {@code 411ffc1df3c89282f22608e1380930f43d478a67} at com.synexia develop {@code 5ab05fd0565303f8884b7deea8e309cea9cfef5f} by
+ * RELOCATE_M3_OWNER v4 (common collections batch: identifiers and package only; bytecode equal to the source modulo names).
+ */
+final class PackedLongRowIndex {
+    private static final int MAX_CAPACITY = 1 << 30;
+    private int[] slots;
+    private int size;
+
+    PackedLongRowIndex(int expected) { slots = new int[capacityFor(expected)]; }
+    int size() { return size; }
+    long payloadBytes() { return 4L * slots.length; }
+    void clear() { Arrays.fill(slots, 0); size = 0; }
+
+    static int capacityFor(int expected) {
+        if (expected < 0 || expected > (long) MAX_CAPACITY * 13 / 20)
+            throw new IllegalArgumentException("unsupported expected size: " + expected);
+        int n = 4;
+        while ((long) n * 13 / 20 < expected) n <<= 1;
+        return n;
+    }
+
+    static int grownLength(int current, int required) {
+        if (required < 0 || required > Integer.MAX_VALUE - 8)
+            throw new IllegalArgumentException("array capacity overflow");
+        return (int) Math.max(required, Math.min(Integer.MAX_VALUE - 8L,
+                Math.max(4L, current + (current >>> 1) + 1L)));
+    }
+
+    static int hash(long first, long second, boolean pair) {
+        long z = first;
+        if (pair) z ^= Long.rotateLeft(mix64(second + 0x9e3779b97f4a7c15L), 23);
+        return (int) mix64(z);
+    }
+
+    private static long mix64(long z) {
+        z = (z ^ (z >>> 30)) * 0xbf58476d1ce4e5b9L;
+        z = (z ^ (z >>> 27)) * 0x94d049bb133111ebL;
+        return z ^ (z >>> 31);
+    }
+
+    int find(long key, long[] first) { return find(key, 0, first, null); }
+    int find(long a, long b, long[] first, long[] second) {
+        int mask = slots.length - 1;
+        int at = hash(a, b, second != null) & mask;
+        while (slots[at] != 0) {
+            int row = slots[at] - 1;
+            if (first[row] == a && (second == null || second[row] == b)) return row;
+            at = (at + 1) & mask;
+        }
+        return -1;
+    }
+
+    void ensure(int expected, long[] first) { ensure(expected, first, null); }
+    void ensure(int expected, long[] first, long[] second) {
+        int capacity = capacityFor(expected);
+        if (capacity <= slots.length) return;
+        int[] replacement = new int[capacity];
+        for (int encoded : slots) {
+            if (encoded == 0) continue;
+            int row = encoded - 1;
+            int at = hash(first[row], second == null ? 0 : second[row], second != null)
+                    & (capacity - 1);
+            while (replacement[at] != 0) at = (at + 1) & (capacity - 1);
+            replacement[at] = encoded;
+        }
+        slots = replacement;
+    }
+
+    void insert(int row, long[] first) { insert(row, first, null); }
+    void insert(int row, long[] first, long[] second) {
+        if ((long) (size + 1) * 20 > (long) slots.length * 13)
+            throw new IllegalStateException("row index capacity was not reserved");
+        int mask = slots.length - 1;
+        int at = hash(first[row], second == null ? 0 : second[row], second != null) & mask;
+        while (slots[at] != 0) at = (at + 1) & mask;
+        slots[at] = row + 1;
+        size++;
+    }
+
+    void remove(long key, long[] first) { remove(key, 0, first, null); }
+    void remove(long a, long b, long[] first, long[] second) {
+        int mask = slots.length - 1;
+        int gap = hash(a, b, second != null) & mask;
+        while (slots[gap] != 0) {
+            int row = slots[gap] - 1;
+            if (first[row] == a && (second == null || second[row] == b)) break;
+            gap = (gap + 1) & mask;
+        }
+        if (slots[gap] == 0) throw new IllegalStateException("missing indexed row");
+        int scan = (gap + 1) & mask;
+        while (slots[scan] != 0) {
+            int row = slots[scan] - 1;
+            int home = hash(first[row], second == null ? 0 : second[row], second != null) & mask;
+            if (((scan - home) & mask) >= ((scan - gap) & mask)) {
+                slots[gap] = slots[scan];
+                gap = scan;
+            }
+            scan = (scan + 1) & mask;
+        }
+        slots[gap] = 0;
+        size--;
+    }
+
+    void relocate(int oldRow, int newRow, long[] first) { relocate(oldRow, newRow, first, null); }
+    void relocate(int oldRow, int newRow, long[] first, long[] second) {
+        int mask = slots.length - 1;
+        int at = hash(first[oldRow], second == null ? 0 : second[oldRow], second != null) & mask;
+        while (slots[at] != 0) {
+            if (slots[at] == oldRow + 1) { slots[at] = newRow + 1; return; }
+            at = (at + 1) & mask;
+        }
+        throw new IllegalStateException("missing relocation row");
+    }
+}

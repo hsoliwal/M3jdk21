@@ -1,0 +1,19 @@
+{
+  "schema": "MOP-RCM/1.0",
+  "event_type": "FAILED_ATTEMPT_RECORDED",
+  "atom": "scheduled-progress/public-API-reflection-oracle",
+  "trigger": "authoring-proof-01/mixed-candidate-M3ScheduledProgress.stderr.log: original declaration changed",
+  "cause": "The test classified compiler-generated private lambda bodies as original public interface methods. The separate javap -public descriptor gate already passed.",
+  "correction": "Limit the public API reflection census to public declared methods. Preserve all behavior and descriptor assertions.",
+  "pattern": "When checking callable public API additions, private synthetic implementation methods are not interface obligations.",
+  "applicability": [
+    "Java interface defaults compiled with lambdas"
+  ],
+  "excluded_claims": [
+    "No production behavior was changed to satisfy this test.",
+    "No result is relabeled as a pass."
+  ],
+  "evidence": "authoring-proof-01/RESULT.json",
+  "regression_source_before_sha256": "a57df3b673802259ae630eb083dcd1f3feb3e6c32d832afadcda4cb8370f2dd2",
+  "verification": "Correction pending rerun; original logs and input sources retained."
+}

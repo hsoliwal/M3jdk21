@@ -1,0 +1,9 @@
+check	expected	observed	verdict
+source.javac.exit	0	0	PASS
+relocated.javac.exit	0	0	PASS
+bytecode.class_files	>0	>0	PASS
+bytecode.differing_class_files	0	0	PASS
+bytecode_v.differing_class_files	0	0	PASS
+mutant.bytecode_caught	caught	caught	PASS
+junit.source	0 13 0	0 13 0	PASS
+junit.relocated	0 13 0	0 13 0	PASS

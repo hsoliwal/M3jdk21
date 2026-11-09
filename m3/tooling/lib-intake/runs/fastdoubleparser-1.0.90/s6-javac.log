@@ -1,0 +1,7 @@
+H:\m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\module-info.java:3: warning: [module] module name component m3 should avoid terminal digits
+module jdk.m3.fastdoubleparser {
+          ^
+H:\m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\FftMultiplier.java:335: warning: [lossy-conversions] implicit cast from long to int in compound assignment is possibly lossy
+                magComponent |= (fftElem & bitMask) << shift;
+                                                    ^
+2 warnings

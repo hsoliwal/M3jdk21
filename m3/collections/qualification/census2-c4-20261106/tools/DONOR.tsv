@@ -1,0 +1,5 @@
+key	value	note
+java_prefix	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/	hash-pinned Java templates of com.synexia (donor repository path; kept out of the .py so JDK naming leaves it alone)
+text_prefix	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/	hash-pinned text templates of com.synexia
+jni_from	Java_com_m3_collections_	the donor JNI symbol prefix (donor package com.m3.collections)
+jni_to	Java_jdk_m3_collections_	the JDK-naming rename of that package (fe35ea98841)

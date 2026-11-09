@@ -1,0 +1,11 @@
+# FOLD_MEMBERS v1.3 map (m3/tooling/jdk-naming/fold_members.py): PrimitiveArrayAlgorithms folds into ArrayAlgorithms, one owner per concept (2026-11-08).
+# Primitive overloads join the bare-named owner (java.util.Arrays holds int[] and Object[] overloads the same way); bodies byte for byte.
+kind	a	b	c	d
+OWNER	m3/algorithms/src/main/java/jdk/m3/algorithm/ArrayAlgorithms.java
+FILE	m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveArrayAlgorithms.java
+TAKE	PrimitiveArrayAlgorithms.*
+IMPORT	java.util.Arrays
+IMPORT	java.util.Objects
+SKIP	PrimitiveArrayAlgorithms.swap	owner declares swap(int[],int,int) with the same body up to one local name (temporary vs value, diff in GATES.tsv); the folded members call the owner's
+REFS	\bPrimitiveArrayAlgorithms\b	ArrayAlgorithms
+REMOVE	m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveArrayAlgorithms.java

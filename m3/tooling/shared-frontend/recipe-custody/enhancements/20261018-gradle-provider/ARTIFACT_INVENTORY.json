@@ -1,0 +1,45 @@
+{
+  "schema": "M3_GRADLE_PROVIDER_JAR_INVENTORY_V1",
+  "jar": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/generated-final/m3/tooling/module-packs/build-support/gradle-provider/target/m3-gradle-ast-provider-1.0-SNAPSHOT.jar",
+  "sha256": "7545639011d3a2c5a38d0d256ec98e2e6427753c2c24171b74552717d539957a",
+  "bytes": 7942,
+  "compiled_class_count": 3,
+  "entries": [
+    {
+      "path": "META-INF/MANIFEST.MF",
+      "sha256": "8ef19699a3672226baa7a2419c01b023200134eca343c1949255670ea1b30ade",
+      "bytes": 81
+    },
+    {
+      "path": "org/gradle/internal/m3/ast/M3GradleASTProvider.class",
+      "sha256": "ee31fa1ce690f6541e0e4d8f3cc96c4762588cb0158798d4c5c83abc58c339eb",
+      "bytes": 2276
+    },
+    {
+      "path": "org/gradle/internal/m3/ast/M3GradleASTProvider$Compilation.class",
+      "sha256": "44926b3323b055c9bc15a3cf4f14a66e30204783a4e30140e5fdbb5e98bef234",
+      "bytes": 5053
+    },
+    {
+      "path": "org/gradle/internal/m3/ast/M3GradleASTProvider$Compilation$Execution.class",
+      "sha256": "b7c901b546c331c9eb9f18bd6ee613a6b9a64ef6017c0ff351d0b6ccd7695836",
+      "bytes": 2292
+    },
+    {
+      "path": "META-INF/maven/org.m3jdk.tooling/m3-gradle-ast-provider/pom.xml",
+      "sha256": "f3467d28d5184aa914652c01113033e122c816ed95ac4285ee2ca02572b14ca1",
+      "bytes": 4298
+    },
+    {
+      "path": "META-INF/maven/org.m3jdk.tooling/m3-gradle-ast-provider/pom.properties",
+      "sha256": "21fe222d5d60c5d3a913d51953b7754b3f43c163ffcb83e6d7f8ad32dfeb4a30",
+      "bytes": 81
+    }
+  ],
+  "manifest": "Manifest-Version: 1.0\r\nCreated-By: Maven JAR Plugin 3.4.1\r\nBuild-Jdk-Spec: 21\r\n\r\n",
+  "bundles_gradle_spi": false,
+  "bundles_m3ast_api": false,
+  "bundles_test_consumers": false,
+  "class_bytes_match_tested_output": true,
+  "package_gate": "logs/30-provider-package.json"
+}

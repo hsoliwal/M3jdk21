@@ -1,0 +1,70 @@
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------< com.synexia:m3-pmem-sdk-recipes >-------------------
+[INFO] Building Synexia PMEMSDK Java 21 JNI recipe-first contract build 0.2.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO]
+[INFO] --- exec:3.5.0:exec (m3-pmem-sdk-recipe-gate) @ m3-pmem-sdk-recipes ---
+PASS PMEMSDK recipe API SHA-256 bdaedeb73b770435fe57656d4df2cce037318b084ae57bce52cf6e043523994e
+PASS M3 transfer recipe (--check): 4 files; 0 changes
+PASS M3 PMEM source-slices recipe (--check): 8 target seals, 0 created, 0 upgraded
+[INFO]
+[INFO] --- compiler:3.13.0:compile (compile-junit-subject) @ m3-pmem-sdk-recipes ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 11 source files with javac [debug release 21 module-path] to target/junit-classes
+[INFO]
+[INFO] --- compiler:3.13.0:testCompile (compile-junit-contracts) @ m3-pmem-sdk-recipes ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug release 21] to target/junit-test-classes
+[INFO]
+[INFO] --- exec:3.5.0:exec (m3-pmem-sdk-java-jni-verify) @ m3-pmem-sdk-recipes ---
+PASS PMEMSDK recipe API SHA-256 bdaedeb73b770435fe57656d4df2cce037318b084ae57bce52cf6e043523994e
+PASS M3 transfer recipe (--check): 4 files; 0 changes
+PASS M3 PMEM source-slices recipe (--check): 8 target seals, 0 created, 0 upgraded
+PASS PMEMSDK recipe API SHA-256 bdaedeb73b770435fe57656d4df2cce037318b084ae57bce52cf6e043523994e
+PASS M3 transfer recipe (--check): 4 files; 0 changes
+PASS M3 PMEM source-slices recipe (--check): 8 target seals, 0 created, 0 upgraded
+PASS M3 transfer recipe (--apply): 4 files; 0 changes
+PASS PMEMSDK transfer recipe idempotence and fail-closed drift tests
+PASS M3 PMEM source-slices recipe (--check): 8 target seals, 0 created, 0 upgraded
+PASS M3 PMEM source-slices recipe (--apply): 8 target seals, 8 created, 0 upgraded
+PASS M3 PMEM source-slices recipe (--apply): 8 target seals, 0 created, 0 upgraded
+PASS M3 PMEM source-slices recipe (--check): 8 target seals, 0 created, 0 upgraded
+PASS M3 PMEM source-slices recipe (--apply): 8 target seals, 1 created, 7 upgraded
+PASS M3 PMEM source-slices recipe (--apply): 8 target seals, 0 created, 0 upgraded
+PASS M3 PMEM source-slices recipe (--check): 8 target seals, 0 created, 0 upgraded
+PASS PMEM source-slices create / exact upgrade / mode preservation / fixed point / source and template drift / full preflight / baseline seal / symlink refusal
+PASS PMEMSDK smoke tests: 23 assertions; backend=PmemCapabilities[nativeAvailable=true, libpmem2Compiled=false, osPageSize=4096, platform=Linux]
+PASS PMEMSDK JNI zero-heap-transfer: 25 assertions
+PASS PMEMSDK source slices CPU: 22 assertions
+PASS PMEMSDK JNI source traversal: files=20000 bytes=1000000000 reusableBufferBytes=50000 elapsedMillis=749 modelCalls=0
+com.synexia.m3.pmem@0.2
+exports com.synexia.m3.pmem
+requires java.base mandated
+
+PASS PMEMSDK smoke tests: 23 assertions; backend=PmemCapabilities[nativeAvailable=true, libpmem2Compiled=false, osPageSize=4096, platform=Linux]
+PASS PMEMSDK JNI zero-heap-transfer: 25 assertions
+PASS PMEMSDK source slices CPU: 22 assertions
+PASS PMEMSDK JNI source traversal: files=20000 bytes=1000000000 reusableBufferBytes=50000 elapsedMillis=745 modelCalls=0
+PASS PMEMSDK build + tests + linked JMOD
+[INFO]
+[INFO] --- surefire:3.2.5:test (jni-junit-contracts) @ m3-pmem-sdk-recipes ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO]
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running test.PmemSourceSlicesJUnitTest
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.162 s -- in test.PmemSourceSlicesJUnitTest
+[INFO]
+[INFO] Results:
+[INFO]
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  22.056 s
+[INFO] Finished at: 2026-11-01T12:32:30+01:00
+[INFO] ------------------------------------------------------------------------

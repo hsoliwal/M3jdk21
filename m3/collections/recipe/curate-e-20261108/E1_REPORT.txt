@@ -1,0 +1,10 @@
+master 2f9fa20d5fa8
+map: carried 848, new on master 4, dropped 0
+placement STABLE (1 rounds)
+maven -Werror test-compile CLEAN
+bytecode: class files 1600: EQUAL 1597, problems 3
+tests base: Tests run: 2419, Failures: 0, Errors: 0, Skipped: 135 BUILD SUCCESS
+tests cur: Tests run: 2419, Failures: 0, Errors: 0, Skipped: 135 BUILD SUCCESS
+naming cur: JDK_NAMING moves=1 rewrites=6 refusals=0 absent=850 shadows=0 JNI_COM_M3=4 KEBAB=1 PKG_COM_M3=1 PKG_M3=1 TYPE=1
+naming base: JDK_NAMING moves=1 rewrites=7 refusals=0 absent=0 shadows=0 JNI_COM_M3=4 KEBAB=2 PKG_COM_M3=1 PKG_M3=1 SEGMENT_DOT=1 TYPE=1
+DONE

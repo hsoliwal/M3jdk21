@@ -1,0 +1,4 @@
+com.m3.tools.constraint.interval
+exports com.m3.tools.constraint.interval
+requires java.base mandated
+

@@ -1,0 +1,13 @@
+{
+  "schema": "m3-guava-receiving-transformation-catalogue-v1",
+  "problemCategory": "node-based or entry-object storage in received collect owners",
+  "rows": [
+    {"owner": "AbstractMapBasedMultiset, HashMultiset, LinkedHashMultiset", "selected": "ObjectCountHashMap / ObjectCountLinkedHashMap index lanes (as the Android flavour) instead of Map<E, Count>"},
+    {"owner": "HashBiMap", "selected": "int[] bucket and insertion-order links over key/value arrays"},
+    {"owner": "RegularImmutableMap, RegularImmutableBiMap, RegularImmutableMultiset", "selected": "int[] index tables instead of entry-object buckets"},
+    {"owner": "TreeMultiset", "selected": "AVL nodes in slot lanes"},
+    {"owner": "TopKSelector (JRE and Android)", "selected": "discarded tail cleared after selection (0 retained references vs 1,067)"}
+  ],
+  "donor": "hsoliwal/guava fork master 5a0ba1218ca6",
+  "next": "E6 (m3-jre21 native storage module, after the fork merges)"
+}

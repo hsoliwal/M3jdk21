@@ -1,0 +1,79 @@
+{
+  "oracle": {
+    "classification": "SOURCE_AWARE_PUBLIC_PROPERTY_PROOF",
+    "oracle": true,
+    "permutations": 5040,
+    "scenarios": 15165,
+    "randomOperations": 98304,
+    "trackedUpdates": 294322,
+    "checks": 1438195,
+    "invariantCalls": 0,
+    "setCovered": true,
+    "expectedDigest": "c04bba433f2bf19c0851d8a5cba874315ec258b47b4a447f026f7e32b6a1c8e5",
+    "nativeExecuted": false
+  },
+  "source_sha256": "19fa6026f3367d57dd009107635d20997632a64af6d161878f4a31075b13e1a4",
+  "commands_before_any_candidate": [
+    {
+      "label": "strict-property-compile",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javac.exe",
+        "-J-Xmx128m",
+        "-J-XX:ActiveProcessorCount=2",
+        "-J-XX:-UsePerfData",
+        "-J-Djava.io.tmpdir=S:\\codex-work\\m3-collections-next-20261018\\temp",
+        "-J-Duser.home=S:\\codex-work\\m3-collections-next-20261018\\m3-avl-insertion-frontier-20261018\\qualification-property-v1\\home",
+        "--release",
+        "21",
+        "-g",
+        "-proc:none",
+        "-Xlint:all,-module",
+        "-Werror",
+        "-d",
+        "S:\\codex-work\\m3-collections-next-20261018\\m3-avl-insertion-frontier-20261018\\qualification-property-v1\\classes",
+        "S:\\codex-work\\m3-collections-next-20261018\\m3-avl-growth-frontier-proof-20261018\\AvlGrowthFrontierProof.java"
+      ],
+      "returncode": 0,
+      "reason": "completed",
+      "pid": 51736,
+      "capturedBytes": 0,
+      "combinedLogLimitBytes": 131072,
+      "capacityChecks": 10,
+      "readerThreadsJoined": true,
+      "treeContainment": "Windows kill-on-close job with stdin-gated command",
+      "elapsedSeconds": 0.781,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "jdk-reference-oracle",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+        "-Xms128m",
+        "-Xmx256m",
+        "-Xss1m",
+        "-XX:+UseSerialGC",
+        "-XX:ActiveProcessorCount=2",
+        "-XX:-UsePerfData",
+        "-Djava.io.tmpdir=S:\\codex-work\\m3-collections-next-20261018\\temp",
+        "-Duser.home=S:\\codex-work\\m3-collections-next-20261018\\m3-avl-insertion-frontier-20261018\\qualification-property-v1\\home",
+        "-cp",
+        "S:\\codex-work\\m3-collections-next-20261018\\m3-avl-insertion-frontier-20261018\\qualification-property-v1\\classes",
+        "AvlGrowthFrontierProof",
+        "oracle",
+        "java.util.TreeSet"
+      ],
+      "returncode": 0,
+      "reason": "completed",
+      "pid": 7612,
+      "capturedBytes": 319,
+      "combinedLogLimitBytes": 105825,
+      "capacityChecks": 13,
+      "readerThreadsJoined": true,
+      "treeContainment": "Windows kill-on-close job with stdin-gated command",
+      "elapsedSeconds": 1.094,
+      "stdout_sha256": "4bcf8b8e0d13d03085279362235ca3e494510636bf2b2330f8aaf187976c25f6",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

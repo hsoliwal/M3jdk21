@@ -514,17 +514,24 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
     final int findMarkAdjustIndex(int searchIndex) {
         search.index = Math.max(searchIndex, 1);
         int index = findSortIndex(search);
-
-        // return the first in the series
-        // (ie. there may be duplicates).
-        for (int i = index - 1; i >= 0; i--) {
-            MarkData d = marks.elementAt(i);
-            if (d.index != search.index) {
-                break;
-            }
-            index -= 1;
+        if (index == 0 || marks.elementAt(index - 1).index != search.index) {
+            return index;
         }
-        return index;
+
+        // A deletion can collapse many positions onto one raw index. Retain
+        // the ordinary search fast path, then locate the first duplicate by
+        // lower bound instead of walking the equal run backwards.
+        int lower = 0;
+        int upper = index - 1;
+        while (lower < upper) {
+            int mid = lower + ((upper - lower) >>> 1);
+            if (marks.elementAt(mid).index < search.index) {
+                lower = mid + 1;
+            } else {
+                upper = mid;
+            }
+        }
+        return lower;
     }
 
     /**

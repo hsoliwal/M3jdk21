@@ -1,0 +1,308 @@
+{
+  "schema": "m3-a3-behavior-runtime-custody/1",
+  "java_home": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/toolchain/jdk-21+35",
+  "toolchain": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/toolchain/TOOLCHAIN.json",
+    "bytes": 119876,
+    "sha256": "78d32a40d2dcb8c8740345a5340d9bd290e87692b103b2fa6575b5f2d95cd3c9",
+    "git_blob": "9dc36c2488507d60488d711fbfe4a172443b6657"
+  },
+  "cache_copy": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/CACHE_COPY.json",
+    "bytes": 639400,
+    "sha256": "ca67b526bd15b5f2fd1e2fb814254288d7e7937b7020f8ce6aec78f19db6eb79",
+    "git_blob": "60cb97fe42574ed7d47fb0123655f80bd651ba33"
+  },
+  "immutable_source_cache_files_unchanged_after": 3033,
+  "classpath_artifacts": [
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/org/openrewrite/rewrite-java/8.17.1/rewrite-java-8.17.1.jar",
+      "bytes": 1613246,
+      "sha256": "32a3b27c0eafeb44c776500ae1378efdfb79d490a6afd7b58be07c6c0d6c55ff",
+      "git_blob": "46fe58ea62a68e8602b2c76220bb8dcf314962a6"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/org/openrewrite/rewrite-core/8.17.1/rewrite-core-8.17.1.jar",
+      "bytes": 3392625,
+      "sha256": "d7c07f91ab085a39bf1b40d7f2a7796a52619aaeefeca1481435e685aa663efa",
+      "git_blob": "be5d2927240030cb6065316fcb1a949d14b52a08"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/com/fasterxml/jackson/core/jackson-databind/2.16.1/jackson-databind-2.16.1.jar",
+      "bytes": 1637611,
+      "sha256": "baf8a8ebee8f45ef68cdd5e2dd3923b3e296c0937b96ec0b4806aa3a31bccd1d",
+      "git_blob": "5171b7a422b5f56ba6d600606869e202df1b74b2"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/com/fasterxml/jackson/dataformat/jackson-dataformat-smile/2.16.1/jackson-dataformat-smile-2.16.1.jar",
+      "bytes": 96079,
+      "sha256": "3767744f2e37e6e672c3a98174e68567907d18ea5c451b203a19e7b0ad934354",
+      "git_blob": "feb6c91dfe8cb4244c01a0f52c680084eff22e7b"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/com/fasterxml/jackson/module/jackson-module-parameter-names/2.16.1/jackson-module-parameter-names-2.16.1.jar",
+      "bytes": 10354,
+      "sha256": "9b333e7e69053807f42a9d92fc1e5da405938ecc4683146b8b1eb9c6967fea8e",
+      "git_blob": "83a08afbafcd2c7525fb34c09aa6ddf056348a19"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.16.1/jackson-datatype-jsr310-2.16.1.jar",
+      "bytes": 128295,
+      "sha256": "6281970682a8da3ddbac54bb203c9badf1c26f507f3ecaa48ef10318579bc9ad",
+      "git_blob": "d34b0ef14f23582eeda54492bc6d17ddd909a170"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/org/openrewrite/tools/java-object-diff/1.0.1/java-object-diff-1.0.1.jar",
+      "bytes": 163543,
+      "sha256": "8dcf0381d306c5223cea4c0acb84afd5691ec6eb41e0b6a36dda288a0c7ec4dc",
+      "git_blob": "797077116be941350cb6171058ac08537ec38893"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/io/quarkus/gizmo/gizmo/1.0.11.Final/gizmo-1.0.11.Final.jar",
+      "bytes": 101336,
+      "sha256": "a54bfbb6dcce9298134595b3cd1df961bc732468825f26ee5296f2b5f88c0b99",
+      "git_blob": "c9ba9a41d4cc2f9fa22c1548c30e9b347f429e7a"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/org/jboss/jandex/2.4.2.Final/jandex-2.4.2.Final.jar",
+      "bytes": 230776,
+      "sha256": "3f2ce55c7d71e744581488dc5105806aa8084c08e6e916a019bab8f8698994f0",
+      "git_blob": "8e17960e7f7164b1a6b0a98c968120027a50af62"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/net/java/dev/jna/jna-platform/5.14.0/jna-platform-5.14.0.jar",
+      "bytes": 1369287,
+      "sha256": "ae4caceb3840730c2537f9b7fb55a01baba580286b4122951488bcee558c2449",
+      "git_blob": "05984f71d46390796829d57ded16cdcdae877cb6"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/net/java/dev/jna/jna/5.14.0/jna-5.14.0.jar",
+      "bytes": 1878533,
+      "sha256": "34ed1e1f27fa896bca50dbc4e99cf3732967cec387a7a0d5e3486c09673fe8c6",
+      "git_blob": "e27f9c541f4c2ceb1f13ddd6186c9922bc9ff313"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/org/apache/commons/commons-compress/1.26.0/commons-compress-1.26.0.jar",
+      "bytes": 1078328,
+      "sha256": "051aceb8bbcc62d0f5b2b8ac72c53767f9c59bfbd050151e65bef6f51c8ed9c9",
+      "git_blob": "10f1e2b4916a428c397a2e10434b7dbf3a31c56d"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/commons-io/commons-io/2.15.1/commons-io-2.15.1.jar",
+      "bytes": 501218,
+      "sha256": "a58af12ee1b68cfd2ebb0c27caef164f084381a00ec81a48cc275fd7ea54e154",
+      "git_blob": "d53be1f140014dfd53099c57517f60bd7583aeaf"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/org/yaml/snakeyaml/2.2/snakeyaml-2.2.jar",
+      "bytes": 334352,
+      "sha256": "1467931448a0817696ae2805b7b8b20bfb082652bf9c4efaed528930dc49389b",
+      "git_blob": "275dd5700a389ba1902a02d49e465157942368ce"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/org/openrewrite/rewrite-yaml/8.17.1/rewrite-yaml-8.17.1.jar",
+      "bytes": 245085,
+      "sha256": "0203cc3b08f519975ed2dc2d20091f0b8e0ab20f72016871c05e50feb49e5a13",
+      "git_blob": "9f9b4a0e5ee7f08c8c3911e2dfa715fce4860d3e"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/org/openrewrite/rewrite-xml/8.17.1/rewrite-xml-8.17.1.jar",
+      "bytes": 231353,
+      "sha256": "89e9568e9e48bd2d3fbce5d9d23d1a828a54c97442590f8f77624cafb095785f",
+      "git_blob": "1de6514413921e098bb5d86725242d252fb1567c"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/io/micrometer/micrometer-core/1.9.17/micrometer-core-1.9.17.jar",
+      "bytes": 663613,
+      "sha256": "c350cfdc76c08356f12a60e840f2dbeaeea7540712d58b54becd6c302a86147a",
+      "git_blob": "22faa37a13cfa5a9d3f7e2a14f2903a794f29efd"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/org/hdrhistogram/HdrHistogram/2.1.12/HdrHistogram-2.1.12.jar",
+      "bytes": 173763,
+      "sha256": "9b47fbae444feaac4b7e04f0ea294569e4bc282bc69d8c2ce2ac3f23577281e2",
+      "git_blob": "1e43d5eb3dc9bf8ec537a4e5a2b690e101b0f338"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar",
+      "bytes": 29779,
+      "sha256": "a32a9ffa06b2f4e01c5360f8f9df7bc5d9454a5d373cd8f361347fa5a57165ec",
+      "git_blob": "e7251b7fa509794a9d0cb1ad7f12aa891db5d72f"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/org/jetbrains/annotations/24.1.0/annotations-24.1.0.jar",
+      "bytes": 30570,
+      "sha256": "27a770dc7ce50500918bb8c3c0660c98290630ec796b5e3cf6b90f403b3033c6",
+      "git_blob": "28d234f76581279b699da4eb56b449cb1eaff066"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/com/fasterxml/jackson/core/jackson-annotations/2.16.1/jackson-annotations-2.16.1.jar",
+      "bytes": 78480,
+      "sha256": "a4730771e6a495dd3793a42cdb8ce6bddb96c77e15f40c98fd8d9a7ae09e7286",
+      "git_blob": "b9c48e69ccd2e112a55b8a5bccdc8e26bb93c2a4"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/org/antlr/antlr4-runtime/4.11.1/antlr4-runtime-4.11.1.jar",
+      "bytes": 324039,
+      "sha256": "e06c6553c1ccc14d36052ec4b0fc6f13b808cf957b5b1dc3f61bf401996ada59",
+      "git_blob": "7d57b59c0ac6b1c5c64c377b1c3b93e419ebb364"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/org/apache/commons/commons-lang3/3.14.0/commons-lang3-3.14.0.jar",
+      "bytes": 657952,
+      "sha256": "7b96bf3ee68949abb5bc465559ac270e0551596fa34523fddf890ec418dde13c",
+      "git_blob": "da9302ff29a560b5f10d3184f25d699fe2d9c186"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/org/apache/commons/commons-text/1.11.0/commons-text-1.11.0.jar",
+      "bytes": 246659,
+      "sha256": "2acf30a070b19163d5a480eae411a281341e870020e3534c6d5d4c8472739e30",
+      "git_blob": "78154978a00830e1ccb5d55117939c37753cf1fc"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/io/github/classgraph/classgraph/4.8.165/classgraph-4.8.165.jar",
+      "bytes": 562061,
+      "sha256": "5258d9218fc6413f4d14218a5a6e784528e349f60f48883b77de74bb478ebafd",
+      "git_blob": "7b61ec6dd03d7f42004e580bb1488ba829b30bbb"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/org/xerial/snappy/snappy-java/1.1.10.5/snappy-java-1.1.10.5.jar",
+      "bytes": 2299797,
+      "sha256": "0f3f1857ed33116583f480b4df5c0218836c47bfbc9c6221c0d73f356decf37b",
+      "git_blob": "7707e5878b8525da8750949186a3ab1056ecb5c5"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/io/github/fastfilter/fastfilter/1.0.2/fastfilter-1.0.2.jar",
+      "bytes": 84703,
+      "sha256": "38f8824d07c8c932fa50cc0175f32c0fff2fafb3913cd2f9571ac349c9631149",
+      "git_blob": "f271119f124d2a4a5f91af07dbe344991d12e78c"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/org/ow2/asm/asm/9.6/asm-9.6.jar",
+      "bytes": 123598,
+      "sha256": "3c6fac2424db3d4a853b669f4e3d1d9c3c552235e19a319673f887083c2303a1",
+      "git_blob": "cc1c2cd8e4711bf97488e90f9d94bd2b0c98bd59"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/org/ow2/asm/asm-util/9.6/asm-util-9.6.jar",
+      "bytes": 91131,
+      "sha256": "c635a7402f4aa9bf66b2f4230cea62025a0fe1cd63e8729adefc9b1994fac4c3",
+      "git_blob": "cc109b03d0f42530936b11489d149ce511b577af"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/org/ow2/asm/asm-tree/9.6/asm-tree-9.6.jar",
+      "bytes": 51935,
+      "sha256": "c43ecf17b539c777e15da7b5b86553b377e2d39a683de6285567d5283888e7ef",
+      "git_blob": "9fe52758768a1fef2572e45fac19d1b782e319bc"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/org/ow2/asm/asm-analysis/9.6/asm-analysis-9.6.jar",
+      "bytes": 34041,
+      "sha256": "d92832d7c37edc07c60e2559ac6118b31d642e337a6671edcb7ba9fae68edbbb",
+      "git_blob": "f4e8691b976c734be9ad1af78da6da2d069ff345"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/org/openrewrite/rewrite-java-21/8.17.1/rewrite-java-21-8.17.1.jar",
+      "bytes": 109302,
+      "sha256": "7e654435905cf6afb9e659185773de0b75e4282c8e30c916ad15fd16b0fba9f4",
+      "git_blob": "e4450dcbe46cfa0bac2a2447da2bf74237d1b091"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/org/openrewrite/rewrite-test/8.17.1/rewrite-test-8.17.1.jar",
+      "bytes": 59659,
+      "sha256": "6c58b829706adfd3f561d7f199b365f8642a0ed3609070ee8bd3bda4dc808e29",
+      "git_blob": "be686c3b4f55b6796c3b3d21ffc0fcf1771fca52"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar",
+      "bytes": 210956,
+      "sha256": "afff77c186cd317275803872fa5133aa801fd6ac40bd91c78a6cf8009b4b17cc",
+      "git_blob": "b779e1bc2cd40bcbe265227bfecac463d747c3de"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar",
+      "bytes": 14304,
+      "sha256": "48e2df636cab6563ced64dcdff8abb2355627cb236ef0bf37598682ddf742f1b",
+      "git_blob": "7ec7bc5494c68899e504ddff32a671d78edcc592"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar",
+      "bytes": 106232,
+      "sha256": "b56a5ec000a479df4973b18bba24c98fe0db8faa14c8907d3ef451d8c71fd8ae",
+      "git_blob": "517db205aaab0687225a713c3377b3d17fd4e18b"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar",
+      "bytes": 6806,
+      "sha256": "b509448ac506d607319f182537f0b35d71007582ec741832a1f111e5b5b70b38",
+      "git_blob": "2b678e154dc72413f3ca9030034ce95db837c052"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.jar",
+      "bytes": 586027,
+      "sha256": "edb1e43ff0b8067626ffb55e5e9eeca1d9ab2478141a7c7f253d115b29cc7cf2",
+      "git_blob": "a5d3e7c5cef66c643d16d54b142891c03252b425"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/org/assertj/assertj-core/3.25.3/assertj-core-3.25.3.jar",
+      "bytes": 1372028,
+      "sha256": "7fbdffa1996d43cc08e2576e01008b07e57bbad2b4741aa6c3ab73ce8511130e",
+      "git_blob": "5bbac20a617a7c23085b9e29d490651ff1572d25"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/net/bytebuddy/byte-buddy/1.14.11/byte-buddy-1.14.11.jar",
+      "bytes": 4212623,
+      "sha256": "62ae28187ed2b062813da6a9d567bfee733c341582699b62dd980230729a0313",
+      "git_blob": "8c0ca7f1bf5c23463d78807dccdb8d5ba65ed9db"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/com/fasterxml/jackson/dataformat/jackson-dataformat-csv/2.16.1/jackson-dataformat-csv-2.16.1.jar",
+      "bytes": 102033,
+      "sha256": "eda05b1ea4e20f369a7e73d519b03c485497ec7cc924362268f06fbd7af7a1bd",
+      "git_blob": "d59e286a27fefbdce71587bb1ec6218d69cfb927"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+      "bytes": 578125,
+      "sha256": "f5f8ef90609e64fec82eb908e497dc7d81b2eb983fe509b870292a193cde4dfb",
+      "git_blob": "a8ff5e3cc74ea4a4f4d898de78e4427cb472855b"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar",
+      "bytes": 41125,
+      "sha256": "d3ef575e3e4979678dc01bf1dcce51021493b4d11fb7f1be8ad982877c16a1c0",
+      "git_blob": "7d3ce68d25e8b2237c3711145bbbea2c166d4767"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/org/eclipse/jgit/org.eclipse.jgit/5.13.3.202401111512-r/org.eclipse.jgit-5.13.3.202401111512-r.jar",
+      "bytes": 2849142,
+      "sha256": "dacb74c28b089bc378f8c2a1dcda5110c20f52124f5a020aef2684d70ef7f1bb",
+      "git_blob": "1fc9ef98235a416da5c85b8388ee789f6844726f"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/com/googlecode/javaewah/JavaEWAH/1.1.13/JavaEWAH-1.1.13.jar",
+      "bytes": 166895,
+      "sha256": "4c0fda2b1d317750d7ea324e36c70b2bc48310c0aaae67b98df0915d696d7111",
+      "git_blob": "52001c99aa309de379134adf2df0feedb5c766ff"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.jar",
+      "bytes": 6359,
+      "sha256": "263e43447f4b40f126ad6b1dcbd7df379448413bdedb8e0d240c5bcbba7c7a4f",
+      "git_blob": "635cbd53a0ad36b7dfdb9560ac59cfa52ad668b4"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar",
+      "bytes": 244690,
+      "sha256": "b6df35da750a546ae932376f11b3c0df841f0c90c7cb2944cd39adb432886e4b",
+      "git_blob": "112f5ab3bdd978ffbc8e0b7e9368f2991cc01e00"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/cache/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar",
+      "bytes": 204821,
+      "sha256": "905cba9b4998ccc29d1239085a7fb1fe0e28024d7526152356d810edec0a49a3",
+      "git_blob": "1f96270926985822644fcc3f56c74b6f337d8ddf"
+    }
+  ],
+  "full_native_or_repository_admission": false
+}

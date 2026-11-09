@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: Apache-2.0
+# Gates of census3-gaps-20261107 (m3/fs, leaf P3-001, record-only). Base = master 0581643118d7; donor = com.synexia develop 78cf2ad4c7e5.
+gate	scope	command	state	evidence
+1_decisions	P3-001	DECISION.tsv	PASS	9 rows, all PRESENT_EVOLVED (M3FsNative 1, M3SnapshotStore 8); 0 RESTORE, 0 HOLD_DEP, 0 HANDOFF
+2_no_edit	overall	git diff --name-only <base>..HEAD	PASS	only m3/fs/qualification/census3-gaps-20261107/** (DECISION.tsv, README.md, GATES.tsv); no source, test or pom change, so class files are identical by construction and the build/differential/mutant/javap gates do not apply
+3_naming_fixed_point	scope	python -I m3/tooling/jdk-naming/jdk_naming.py plan --only m3/fs/qualification/census3-gaps-20261107/	PASS	moves=0 rewrites=0 refusals=0
+4_protected	overall	brief list	PASS	no protected owner touched

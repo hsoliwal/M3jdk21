@@ -1,0 +1,7 @@
+Third-party provenance for this task
+
+OpenJDK JMH 1.37 core and annotation processor are imported unchanged from the existing Maven cache. The embedded core LICENSE is GPL version 2 with the Classpath exception; the official 1.37 Benchmark annotation header expressly designates the exception. LICENSE entry SHA256: 4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726. Preserve the original cached JARs and their notices; no JARs are copied or redistributed by this preparation.
+
+JMH runtime dependencies: jopt-simple 5.0.4 declares MIT in its embedded Maven POM; commons-math3 3.6.1 includes META-INF/LICENSE.txt (Apache2.0) and META-INF/NOTICE.txt. Exact cached JAR paths and hashes are in BENCHMARK_PLAN.json.
+
+Official provenance: https://github.com/openjdk/jmh/tree/1.37 and https://github.com/openjdk/jmh/blob/1.37/LICENSE . The new workload source implements this task's finite plan using public APIs. No JMH sample benchmark, LeetCode, HackerRank or other third-party benchmark implementation is copied.

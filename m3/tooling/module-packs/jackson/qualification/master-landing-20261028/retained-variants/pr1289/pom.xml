@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 -->
+<!--
+  Staged build contract, documented before the driver implementation:
+  build.py is the sole qualification entry point. Invoke lint, compile, test,
+  runtime in that order with the same explicit repository, Java 21, Maven,
+  Maven repository and fresh run-output arguments. Each successful stage seals
+  its exact source inventory and predecessor receipt. Edits or failed/incomplete
+  stages require a fresh run; neither stage replay nor skipped gates is accepted.
+
+  The compile stage copies the four locked vendor trees below the run output,
+  then uses their unchanged Maven POMs through source-build/pom.xml. Maven may
+  resolve its pinned build plugins in the explicitly supplied Maven repository.
+  It cannot write donor target directories or use an implicit user repository.
+  Published source JARs contain no donor tests, so only their test execution is
+  skipped. Receiver and all contract sources compile before the test stage.
+
+  The runtime stage alone creates the receiver JAR, invokes the existing M3 JMOD
+  packager with four published descriptors and an empty generated-descriptor
+  manifest, and runs the already-compiled contract in the linked image. The
+  four named modules retain complete donor classes and their release-21 resource
+  view, including the shaded FastDoubleParser implementation and legal/services
+  resources. No runtime javac or descriptor-selector compilation is requested.
+
+  This POM is an optional Maven invocation adapter, not a second build pipeline.
+  Run the Python CLI directly for qualification with no Maven work before lint.
+  The Maven adapter requires every m3.jackson.* argument to be supplied; it has
+  no output-directory, repository, user-home, Java or Maven defaults.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.m3.tooling</groupId>
+  <artifactId>m3-jackson-pack</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>M3 Jackson source JMOD qualification</name>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.build.outputTimestamp>2026-01-01T00:00:00Z</project.build.outputTimestamp>
+  </properties>
+  <profiles>
+    <profile>
+      <id>m3-jackson-stage</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.3.0</version>
+            <executions>
+              <execution>
+                <id>qualified-stage</id>
+                <phase>validate</phase>
+                <goals><goal>exec</goal></goals>
+                <configuration>
+                  <executable>${m3.jackson.python}</executable>
+                  <arguments>
+                    <argument>${project.basedir}/build.py</argument>
+                    <argument>--stage</argument><argument>${m3.jackson.stage}</argument>
+                    <argument>--repo-root</argument><argument>${m3.jackson.repo-root}</argument>
+                    <argument>--jdk-home</argument><argument>${m3.jackson.jdk-home}</argument>
+                    <argument>--maven</argument><argument>${m3.jackson.maven}</argument>
+                    <argument>--maven-repo</argument><argument>${m3.jackson.maven-repo}</argument>
+                    <argument>--maven-settings</argument><argument>${m3.jackson.maven-settings}</argument>
+                    <argument>--java-trust-store</argument><argument>${m3.jackson.java-trust-store}</argument>
+                    <argument>--out</argument><argument>${m3.jackson.out}</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>

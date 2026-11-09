@@ -135,9 +135,15 @@ final class LWListPeer extends LWComponentPeer<List, LWListPeer.ScrollableJList>
     @Override
     public void select(final int index) {
         synchronized (getDelegateLock()) {
-            getDelegate().setSkipStateChangedEvent(true);
-            getDelegate().getView().setSelectedIndex(index);
-            getDelegate().setSkipStateChangedEvent(false);
+            javax.swing.ListModel<String> model = getDelegate().getModel();
+            if (index >= 0 && index < model.getSize()) {
+                getDelegate().setSkipStateChangedEvent(true);
+                try {
+                    getDelegate().getView().addSelectionInterval(index, index);
+                } finally {
+                    getDelegate().setSkipStateChangedEvent(false);
+                }
+            }
         }
     }
 
@@ -159,9 +165,24 @@ final class LWListPeer extends LWComponentPeer<List, LWListPeer.ScrollableJList>
     @Override
     public void setMultipleMode(final boolean m) {
         synchronized (getDelegateLock()) {
-            getDelegate().getView().setSelectionMode(m ?
-                    ListSelectionModel.MULTIPLE_INTERVAL_SELECTION
-                    : ListSelectionModel.SINGLE_SELECTION);
+            JList<String> view = getDelegate().getView();
+            int newMode = m ? javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION
+                    : javax.swing.ListSelectionModel.SINGLE_SELECTION;
+            if (view.getSelectionMode() == newMode) {
+                return;
+            }
+            int lead = view.getLeadSelectionIndex();
+            boolean wasSelected = lead != -1 && view.isSelectedIndex(lead);
+            getDelegate().setSkipStateChangedEvent(true);
+            try {
+                view.clearSelection();
+                view.setSelectionMode(newMode);
+                if (wasSelected) {
+                    view.setSelectedIndex(lead);
+                }
+            } finally {
+                getDelegate().setSkipStateChangedEvent(false);
+            }
         }
     }
 

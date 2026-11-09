@@ -1,0 +1,5 @@
+category	donor	revision	license	decision	mechanism
+stream-fanout	apache/commons-io	f9de7a458b9ff70151994bbbacae3088047b8338	Apache-2.0	REFERENCE_ONLY	TeeInputStream/TeeOutputStream observer shape; no donor body copied
+hierarchical-progress	eclipse-platform/eclipse.platform	9b84700ba2a510f70e147229729aa656ef4c4320	EPL-2.0	REFERENCE_ONLY	SubMonitor weighted child-work semantics; independently implemented default-method contract
+filesystem-traversal	OpenJDK java.nio.file	M3JDK21 current master	GPL-2.0-with-Classpath-Exception	REUSE_EXISTING	Files.walk and provider-owned Path traversal
+challenge-taxonomy	LeetCode;HackerRank;GeeksforGeeks	2026-10-20	platform terms	CATEGORY_ONLY	No platform solution/editorial body copied; use categories only when an operation maps cleanly

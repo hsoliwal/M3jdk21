@@ -1,0 +1,3 @@
+CompileCommand: dontinline jdk/internal/mindex/M3IntLane28.fill bool dontinline = true
+CompileCommand: dontinline jdk/internal/mindex/M3LongLane28.fill bool dontinline = true
+PASS checks=286214 random_operations=3000 full_domain=268435456 API=unchanged

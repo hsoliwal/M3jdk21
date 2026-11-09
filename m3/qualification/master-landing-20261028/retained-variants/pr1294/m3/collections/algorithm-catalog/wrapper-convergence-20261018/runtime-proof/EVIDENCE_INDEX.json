@@ -1,0 +1,1553 @@
+{
+  "schema": "m3-wrapper-executed-evidence-index/v1",
+  "status": "BYTE_EXACT_COPIES_OF_EXECUTED_RECEIPTS",
+  "records": [
+    {
+      "path": "runtime-proof/sdk/r2/SDK_INPUTS.tsv",
+      "sha256": "eb20b2b1b532ca455f2010e6c5d1f6ed52d961e4893211957a7c8904a757976d",
+      "bytes": 11448,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-wrappers-r2-20261018/candidate/SDK_INPUTS.tsv",
+      "purpose": "r2 actual recipe/receiver qualification",
+      "original_catalogue_path": "runtime-proof/sdk/r2/SDK_INPUTS.tsv"
+    },
+    {
+      "path": "runtime-proof/sdk/r2/SDK_RESULTS.tsv",
+      "sha256": "209532c6926d81097deb6ba09a1aa0641afee7aa999ca06f470f41a7079b37fa",
+      "bytes": 4650,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-wrappers-r2-20261018/candidate/SDK_RESULTS.tsv",
+      "purpose": "r2 actual recipe/receiver qualification",
+      "original_catalogue_path": "runtime-proof/sdk/r2/SDK_RESULTS.tsv"
+    },
+    {
+      "path": "runtime-proof/sdk/r2/SDK_TEST_REPORT.xml",
+      "sha256": "ba942043e8242964ef1c3200128c1aab9288708f0686dd7b8579a901fed94797",
+      "bytes": 14447,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-wrappers-r2-20261018/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml",
+      "purpose": "r2 actual recipe/receiver qualification",
+      "original_catalogue_path": "runtime-proof/sdk/r2/SDK_TEST_REPORT.xml"
+    },
+    {
+      "path": "runtime-proof/sdk/r2/DATASET.json",
+      "sha256": "bca6f479710c62c12d060a7ab5d3a216552eaaaa3f97b4ea543da581f5fd4bbf",
+      "bytes": 507,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/DATASET.json",
+      "purpose": "r2 actual recipe/receiver qualification",
+      "original_catalogue_path": "runtime-proof/sdk/r2/DATASET.json"
+    },
+    {
+      "path": "runtime-proof/sdk/r2/ENGINE_EFFECTIVE.tsv",
+      "sha256": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23",
+      "bytes": 747,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/ENGINE_EFFECTIVE.tsv",
+      "purpose": "r2 actual recipe/receiver qualification",
+      "original_catalogue_path": "runtime-proof/sdk/r2/ENGINE_EFFECTIVE.tsv"
+    },
+    {
+      "path": "runtime-proof/sdk/r2/SDK_RECEIVER_RECEIPT.json",
+      "sha256": "1de42e6d8c2f1e6b61380125b6f26dfd3a2b41876e073e5ee3dd654baa314827",
+      "bytes": 1671,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-wrappers-r2-20261018/receiver-proof/evidence/RECEIVER_RECEIPT.json",
+      "purpose": "r2 actual recipe/receiver qualification",
+      "original_catalogue_path": "runtime-proof/sdk/r2/SDK_RECEIVER_RECEIPT.json"
+    },
+    {
+      "path": "runtime-proof/sdk/r2/SDK_MAVEN.log.txt",
+      "sha256": "0dc9bf993e0ade345f22927c27cc3c3294987af395b38d71dfe8b05ba9bd9c46",
+      "bytes": 3155,
+      "origin": "qualification/wrappers/corrected-recipe-maven.log",
+      "purpose": "r2 actual recipe/receiver qualification",
+      "original_catalogue_path": "runtime-proof/sdk/r2/SDK_MAVEN.log"
+    },
+    {
+      "path": "runtime-proof/sdk/r2/ACTUAL_RECEIVER.json",
+      "sha256": "08cd36ecbbe0f1255371639d7abf5b9c51215d6981aeb431a8fbe41f58ddfa6d",
+      "bytes": 606,
+      "origin": "qualification/wrappers/actual-r2-receiver.json",
+      "purpose": "r2 actual recipe/receiver qualification",
+      "original_catalogue_path": "runtime-proof/sdk/r2/ACTUAL_RECEIVER.json"
+    },
+    {
+      "path": "runtime-proof/sdk/long-bridge/SDK_INPUTS.tsv",
+      "sha256": "711e02a24091858ec7037df51b94160cd842395169747d2c56510a16677fa511",
+      "bytes": 2587,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-long-bridge-20261018/candidate/SDK_INPUTS.tsv",
+      "purpose": "long-bridge actual recipe/receiver qualification",
+      "original_catalogue_path": "runtime-proof/sdk/long-bridge/SDK_INPUTS.tsv"
+    },
+    {
+      "path": "runtime-proof/sdk/long-bridge/SDK_RESULTS.tsv",
+      "sha256": "e148f6c1632fa67a075ccd2ade96796ddcf0eb52e67597b654b71b4fe14b153a",
+      "bytes": 264,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-long-bridge-20261018/candidate/SDK_RESULTS.tsv",
+      "purpose": "long-bridge actual recipe/receiver qualification",
+      "original_catalogue_path": "runtime-proof/sdk/long-bridge/SDK_RESULTS.tsv"
+    },
+    {
+      "path": "runtime-proof/sdk/long-bridge/SDK_TEST_REPORT.xml",
+      "sha256": "dea48731c19fcef9d7f13ceace6317053d2ff9c48f03d8e24261aff16fe6f825",
+      "bytes": 14438,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-long-bridge-20261018/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml",
+      "purpose": "long-bridge actual recipe/receiver qualification",
+      "original_catalogue_path": "runtime-proof/sdk/long-bridge/SDK_TEST_REPORT.xml"
+    },
+    {
+      "path": "runtime-proof/sdk/long-bridge/DATASET.json",
+      "sha256": "a87f7b734e9a38d2dec7146d6265b4ec0e8d72c695f35aba24750da45dc84d17",
+      "bytes": 505,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-long-bridge-20261018/DATASET.json",
+      "purpose": "long-bridge actual recipe/receiver qualification",
+      "original_catalogue_path": "runtime-proof/sdk/long-bridge/DATASET.json"
+    },
+    {
+      "path": "runtime-proof/sdk/long-bridge/ENGINE_EFFECTIVE.tsv",
+      "sha256": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23",
+      "bytes": 747,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-long-bridge-20261018/ENGINE_EFFECTIVE.tsv",
+      "purpose": "long-bridge actual recipe/receiver qualification",
+      "original_catalogue_path": "runtime-proof/sdk/long-bridge/ENGINE_EFFECTIVE.tsv"
+    },
+    {
+      "path": "runtime-proof/sdk/long-bridge/SDK_RECEIVER_RECEIPT.json",
+      "sha256": "b221f4383fb2764a2122c5369215cd1c0870571d7d46adbb823136eaa37ec3c9",
+      "bytes": 1662,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/SDK_RECEIVER_RECEIPT.json",
+      "purpose": "long-bridge actual recipe/receiver qualification",
+      "original_catalogue_path": "runtime-proof/sdk/long-bridge/SDK_RECEIVER_RECEIPT.json"
+    },
+    {
+      "path": "runtime-proof/sdk/long-bridge/SDK_MAVEN.log.txt",
+      "sha256": "a96cf9ff9f5bbfe6b2680343030cde79e8ccb1f54770a9462b5bddff8c3f2d9c",
+      "bytes": 3152,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/sdk-maven.log",
+      "purpose": "long-bridge actual recipe/receiver qualification",
+      "original_catalogue_path": "runtime-proof/sdk/long-bridge/SDK_MAVEN.log"
+    },
+    {
+      "path": "runtime-proof/sdk/long-bridge/ACTUAL_RECEIVER.json",
+      "sha256": "48e87e45e5c102ec5139970714648a29f71c04ccddb392b82f09ef7c53cfbe97",
+      "bytes": 593,
+      "origin": "qualification/wrappers/actual-long-bridge-receiver.json",
+      "purpose": "long-bridge actual recipe/receiver qualification",
+      "original_catalogue_path": "runtime-proof/sdk/long-bridge/ACTUAL_RECEIVER.json"
+    },
+    {
+      "path": "runtime-proof/sdk/proof2/SDK_INPUTS.tsv",
+      "sha256": "1ca8db0485329ebc3a2ebc03e6a4879f7eb9d916cb106f34543db640c57bc1cb",
+      "bytes": 2849,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-wrapper-proof2-20261018/candidate/SDK_INPUTS.tsv",
+      "purpose": "proof2 actual recipe/receiver qualification",
+      "original_catalogue_path": "runtime-proof/sdk/proof2/SDK_INPUTS.tsv"
+    },
+    {
+      "path": "runtime-proof/sdk/proof2/SDK_RESULTS.tsv",
+      "sha256": "8b72b85e9e69d358adbbaf7dd7eb3ddb5e608cf04681bf06c4c14f7c8843bbb1",
+      "bytes": 488,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-wrapper-proof2-20261018/candidate/SDK_RESULTS.tsv",
+      "purpose": "proof2 actual recipe/receiver qualification",
+      "original_catalogue_path": "runtime-proof/sdk/proof2/SDK_RESULTS.tsv"
+    },
+    {
+      "path": "runtime-proof/sdk/proof2/SDK_TEST_REPORT.xml",
+      "sha256": "56dc92bc668478f4137ee7ee0eecfe54239e018101b04f3efbc9a0eb7fd59849",
+      "bytes": 14793,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-wrapper-proof2-20261018/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml",
+      "purpose": "proof2 actual recipe/receiver qualification",
+      "original_catalogue_path": "runtime-proof/sdk/proof2/SDK_TEST_REPORT.xml"
+    },
+    {
+      "path": "runtime-proof/sdk/proof2/DATASET.json",
+      "sha256": "18272174e7659b6b069a257c648bf5ec6a218a29cb6529ca9f971f1eab26ccb6",
+      "bytes": 511,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof2-20261018/DATASET.json",
+      "purpose": "proof2 actual recipe/receiver qualification",
+      "original_catalogue_path": "runtime-proof/sdk/proof2/DATASET.json"
+    },
+    {
+      "path": "runtime-proof/sdk/proof2/ENGINE_EFFECTIVE.tsv",
+      "sha256": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23",
+      "bytes": 747,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof2-20261018/ENGINE_EFFECTIVE.tsv",
+      "purpose": "proof2 actual recipe/receiver qualification",
+      "original_catalogue_path": "runtime-proof/sdk/proof2/ENGINE_EFFECTIVE.tsv"
+    },
+    {
+      "path": "runtime-proof/sdk/proof2/SDK_RECEIVER_RECEIPT.json",
+      "sha256": "a509325ffe2c114384d8e9ff42313436f612a5a0c85679d4aae49d07940baf57",
+      "bytes": 1651,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-verification-20261018/r2/proof/receiver-proof/evidence/RECEIVER_RECEIPT.json",
+      "purpose": "proof2 actual recipe/receiver qualification",
+      "original_catalogue_path": "runtime-proof/sdk/proof2/SDK_RECEIVER_RECEIPT.json"
+    },
+    {
+      "path": "runtime-proof/sdk/proof2/SDK_MAVEN.log.txt",
+      "sha256": "abfec6aec893693511ec6228ac43625f8b62a848cdad3180f5c0b1f1c00fece2",
+      "bytes": 3161,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-verification-20261018/r2/proof/sdk-execution.log",
+      "purpose": "proof2 actual recipe/receiver qualification",
+      "original_catalogue_path": "runtime-proof/sdk/proof2/SDK_MAVEN.log"
+    },
+    {
+      "path": "runtime-proof/sdk/proof2/ACTUAL_RECEIVER.json",
+      "sha256": "3a1f6db513293730f15e8da4dfef72628c4d07226fc344142f09263ef41aa48b",
+      "bytes": 544,
+      "origin": "qualification/wrappers/actual-proof2-receiver.json",
+      "purpose": "proof2 actual recipe/receiver qualification",
+      "original_catalogue_path": "runtime-proof/sdk/proof2/ACTUAL_RECEIVER.json"
+    },
+    {
+      "path": "runtime-proof/received/RECEIPT.json",
+      "sha256": "0eb711a56a3d5186404d6a30dc84b14273b20f9651e3363fdcf3c4830c26371d",
+      "bytes": 381707,
+      "origin": "qualification/wrappers/current-runtime/RECEIPT.json",
+      "purpose": "actual 2f receiver module/API/JNI evidence",
+      "original_catalogue_path": "runtime-proof/received/RECEIPT.json"
+    },
+    {
+      "path": "runtime-proof/received/SOURCE_MANIFEST.json",
+      "sha256": "e2486db16a20057e870e489a5e4b5eb85da84f2db61f9479d02aa6768eb67caa",
+      "bytes": 134405,
+      "origin": "qualification/wrappers/current-runtime/SOURCE_MANIFEST.json",
+      "purpose": "actual 2f receiver module/API/JNI evidence",
+      "original_catalogue_path": "runtime-proof/received/SOURCE_MANIFEST.json"
+    },
+    {
+      "path": "runtime-proof/received/TOOLCHAIN.json",
+      "sha256": "da4e235c68d3009c6a83722dda13795b941b9bdf1c4a731c62f83f4e41617798",
+      "bytes": 1212,
+      "origin": "qualification/wrappers/current-runtime/TOOLCHAIN.json",
+      "purpose": "actual 2f receiver module/API/JNI evidence",
+      "original_catalogue_path": "runtime-proof/received/TOOLCHAIN.json"
+    },
+    {
+      "path": "runtime-proof/received/API_COMPARISON.json",
+      "sha256": "5aea0bd9e58fbdf992c0f531c3f99b79283e1486b587740a3eb96c958577ee85",
+      "bytes": 1008,
+      "origin": "qualification/wrappers/current-runtime/API_COMPARISON.json",
+      "purpose": "actual 2f receiver module/API/JNI evidence",
+      "original_catalogue_path": "runtime-proof/received/API_COMPARISON.json"
+    },
+    {
+      "path": "runtime-proof/received/JNI_ABI.json",
+      "sha256": "41ec9f7b0fd2a4e2a7732b77b810fd5ceec2b9fff1fb0bba0021c0ac77a29d09",
+      "bytes": 4170,
+      "origin": "qualification/wrappers/current-runtime/JNI_ABI.json",
+      "purpose": "actual 2f receiver module/API/JNI evidence",
+      "original_catalogue_path": "runtime-proof/received/JNI_ABI.json"
+    },
+    {
+      "path": "runtime-proof/received/MAVEN_TESTS.json",
+      "sha256": "6a651189faaead92f38d20fc241eac0432224d28c9f3b9c338bf80755c98d7a9",
+      "bytes": 17704,
+      "origin": "qualification/wrappers/current-runtime/MAVEN_TESTS.json",
+      "purpose": "actual 2f receiver module/API/JNI evidence",
+      "original_catalogue_path": "runtime-proof/received/MAVEN_TESTS.json"
+    },
+    {
+      "path": "runtime-proof/received/RECEIVED_INPUTS.json",
+      "sha256": "e812c9aca61bf7b79c63156acb3458289c0e175e4f592905fb78139f691f084f",
+      "bytes": 62441,
+      "origin": "qualification/wrappers/current-runtime/RECEIVED_INPUTS.json",
+      "purpose": "actual 2f receiver module/API/JNI evidence",
+      "original_catalogue_path": "runtime-proof/received/RECEIVED_INPUTS.json"
+    },
+    {
+      "path": "runtime-proof/received/PREIMAGE_INPUTS.json",
+      "sha256": "f6e12cc5dda820478ac3f57093bc9784f619cb512e21e1133b084a7165219a37",
+      "bytes": 58184,
+      "origin": "qualification/wrappers/current-runtime/PREIMAGE_INPUTS.json",
+      "purpose": "actual 2f receiver module/API/JNI evidence",
+      "original_catalogue_path": "runtime-proof/received/PREIMAGE_INPUTS.json"
+    },
+    {
+      "path": "runtime-proof/received/FINAL_INPUTS.json",
+      "sha256": "e812c9aca61bf7b79c63156acb3458289c0e175e4f592905fb78139f691f084f",
+      "bytes": 62441,
+      "origin": "qualification/wrappers/current-runtime/FINAL_INPUTS.json",
+      "purpose": "actual 2f receiver module/API/JNI evidence",
+      "original_catalogue_path": "runtime-proof/received/FINAL_INPUTS.json"
+    },
+    {
+      "path": "runtime-proof/received/before-public-api.json",
+      "sha256": "47fa11b69ff8637c5b5d9880e6af3a2f65c6525001fe3a8976fb53b4cd913103",
+      "bytes": 244342,
+      "origin": "qualification/wrappers/current-runtime/before-public-api.json",
+      "purpose": "actual 2f receiver module/API/JNI evidence",
+      "original_catalogue_path": "runtime-proof/received/before-public-api.json"
+    },
+    {
+      "path": "runtime-proof/received/after-public-api.json",
+      "sha256": "cc55a8da077085c6713515104eaaf5111a41e08ae29228d32c91f33e7a4a342a",
+      "bytes": 244960,
+      "origin": "qualification/wrappers/current-runtime/after-public-api.json",
+      "purpose": "actual 2f receiver module/API/JNI evidence",
+      "original_catalogue_path": "runtime-proof/received/after-public-api.json"
+    },
+    {
+      "path": "runtime-proof/received/before-javac.args.txt",
+      "sha256": "2f88bf6644213422909d23e3d760971239e962e112b2a70561843b3a8cb3b293",
+      "bytes": 18773,
+      "origin": "qualification/wrappers/current-runtime/before-javac.args",
+      "purpose": "actual 2f receiver module/API/JNI evidence",
+      "original_catalogue_path": "runtime-proof/received/before-javac.args"
+    },
+    {
+      "path": "runtime-proof/received/after-javac.args.txt",
+      "sha256": "d2f7d41096e7da41d9022babe1a40d65c1030aaa483aece3d4548828888a0998",
+      "bytes": 20379,
+      "origin": "qualification/wrappers/current-runtime/after-javac.args",
+      "purpose": "actual 2f receiver module/API/JNI evidence",
+      "original_catalogue_path": "runtime-proof/received/after-javac.args"
+    },
+    {
+      "path": "runtime-proof/received/001-java-version.stdout.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/001-java-version.stdout.log",
+      "purpose": "actual command: java-version",
+      "original_catalogue_path": "runtime-proof/received/001-java-version.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/001-java-version.stderr.log.txt",
+      "sha256": "5b4412738541184e84f6b2d7520d4f4a7c2a455f60650491464c61adcbbbdeb0",
+      "bytes": 205,
+      "origin": "qualification/wrappers/current-runtime/001-java-version.stderr.log",
+      "purpose": "actual command: java-version",
+      "original_catalogue_path": "runtime-proof/received/001-java-version.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/002-javac-version.stdout.log.txt",
+      "sha256": "2df6b9c76e710158266aeaae8f3578eaed8ddd747a2272483506ad9a8a5e644a",
+      "bytes": 16,
+      "origin": "qualification/wrappers/current-runtime/002-javac-version.stdout.log",
+      "purpose": "actual command: javac-version",
+      "original_catalogue_path": "runtime-proof/received/002-javac-version.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/002-javac-version.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/002-javac-version.stderr.log",
+      "purpose": "actual command: javac-version",
+      "original_catalogue_path": "runtime-proof/received/002-javac-version.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/003-javap-version.stdout.log.txt",
+      "sha256": "a0b0b94f878fc94e451aec6fd10ce835b9cd419172f2da4f994dc7220a64d225",
+      "bytes": 10,
+      "origin": "qualification/wrappers/current-runtime/003-javap-version.stdout.log",
+      "purpose": "actual command: javap-version",
+      "original_catalogue_path": "runtime-proof/received/003-javap-version.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/003-javap-version.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/003-javap-version.stderr.log",
+      "purpose": "actual command: javap-version",
+      "original_catalogue_path": "runtime-proof/received/003-javap-version.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/004-maven-version.stdout.log.txt",
+      "sha256": "e6e4d70b5ac7e8e9ded7c6c0d0edc50b1f74379dbd151ba4e0025b3a8649c636",
+      "bytes": 323,
+      "origin": "qualification/wrappers/current-runtime/004-maven-version.stdout.log",
+      "purpose": "actual command: maven-version",
+      "original_catalogue_path": "runtime-proof/received/004-maven-version.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/004-maven-version.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/004-maven-version.stderr.log",
+      "purpose": "actual command: maven-version",
+      "original_catalogue_path": "runtime-proof/received/004-maven-version.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/005-gcc-version.stdout.log.txt",
+      "sha256": "cc08f972264fd3ba58abb3ebc6337013b225be267c91d2df9f29f066284fe2b6",
+      "bytes": 244,
+      "origin": "qualification/wrappers/current-runtime/005-gcc-version.stdout.log",
+      "purpose": "actual command: gcc-version",
+      "original_catalogue_path": "runtime-proof/received/005-gcc-version.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/005-gcc-version.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/005-gcc-version.stderr.log",
+      "purpose": "actual command: gcc-version",
+      "original_catalogue_path": "runtime-proof/received/005-gcc-version.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/006-nm-version.stdout.log.txt",
+      "sha256": "cdd2926db3359fc64e866ce795b6ac786975191007611989da83d5c58e6821ca",
+      "bytes": 283,
+      "origin": "qualification/wrappers/current-runtime/006-nm-version.stdout.log",
+      "purpose": "actual command: nm-version",
+      "original_catalogue_path": "runtime-proof/received/006-nm-version.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/006-nm-version.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/006-nm-version.stderr.log",
+      "purpose": "actual command: nm-version",
+      "original_catalogue_path": "runtime-proof/received/006-nm-version.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/007-after-strict-java21.stdout.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/007-after-strict-java21.stdout.log",
+      "purpose": "actual command: after-strict-java21",
+      "original_catalogue_path": "runtime-proof/received/007-after-strict-java21.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/007-after-strict-java21.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/007-after-strict-java21.stderr.log",
+      "purpose": "actual command: after-strict-java21",
+      "original_catalogue_path": "runtime-proof/received/007-after-strict-java21.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/008-after-javap.stdout.log.txt",
+      "sha256": "afa2f65076d4f0ea115a52ee5833eaa0089846568ecffc8e977b8e2a493809a3",
+      "bytes": 332548,
+      "origin": "qualification/wrappers/current-runtime/008-after-javap.stdout.log",
+      "purpose": "actual command: after-javap",
+      "original_catalogue_path": "runtime-proof/received/008-after-javap.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/008-after-javap.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/008-after-javap.stderr.log",
+      "purpose": "actual command: after-javap",
+      "original_catalogue_path": "runtime-proof/received/008-after-javap.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/009-before-strict-java21.stdout.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/009-before-strict-java21.stdout.log",
+      "purpose": "actual command: before-strict-java21",
+      "original_catalogue_path": "runtime-proof/received/009-before-strict-java21.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/009-before-strict-java21.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/009-before-strict-java21.stderr.log",
+      "purpose": "actual command: before-strict-java21",
+      "original_catalogue_path": "runtime-proof/received/009-before-strict-java21.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/010-before-javap.stdout.log.txt",
+      "sha256": "9d8f00fd44089521d1b536b13ba6b6a814a427fd68c23aa5a6c0a23a433b3a37",
+      "bytes": 320992,
+      "origin": "qualification/wrappers/current-runtime/010-before-javap.stdout.log",
+      "purpose": "actual command: before-javap",
+      "original_catalogue_path": "runtime-proof/received/010-before-javap.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/010-before-javap.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/010-before-javap.stderr.log",
+      "purpose": "actual command: before-javap",
+      "original_catalogue_path": "runtime-proof/received/010-before-javap.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/011-libm3_collections_pathmask.so-gcc-c17-ubsan.stdout.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/011-libm3_collections_pathmask.so-gcc-c17-ubsan.stdout.log",
+      "purpose": "actual command: libm3_collections_pathmask.so-gcc-c17-ubsan",
+      "original_catalogue_path": "runtime-proof/received/011-libm3_collections_pathmask.so-gcc-c17-ubsan.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/011-libm3_collections_pathmask.so-gcc-c17-ubsan.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/011-libm3_collections_pathmask.so-gcc-c17-ubsan.stderr.log",
+      "purpose": "actual command: libm3_collections_pathmask.so-gcc-c17-ubsan",
+      "original_catalogue_path": "runtime-proof/received/011-libm3_collections_pathmask.so-gcc-c17-ubsan.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/012-libm3_collections_pathmask.so-nm.stdout.log.txt",
+      "sha256": "38e0de51a27f136ea92ad29808d81a6a89cbc126cfc9c02488ec4d360af0770c",
+      "bytes": 150,
+      "origin": "qualification/wrappers/current-runtime/012-libm3_collections_pathmask.so-nm.stdout.log",
+      "purpose": "actual command: libm3_collections_pathmask.so-nm",
+      "original_catalogue_path": "runtime-proof/received/012-libm3_collections_pathmask.so-nm.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/012-libm3_collections_pathmask.so-nm.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/012-libm3_collections_pathmask.so-nm.stderr.log",
+      "purpose": "actual command: libm3_collections_pathmask.so-nm",
+      "original_catalogue_path": "runtime-proof/received/012-libm3_collections_pathmask.so-nm.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/013-libm3_collections_mask.so-gcc-c17-ubsan.stdout.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/013-libm3_collections_mask.so-gcc-c17-ubsan.stdout.log",
+      "purpose": "actual command: libm3_collections_mask.so-gcc-c17-ubsan",
+      "original_catalogue_path": "runtime-proof/received/013-libm3_collections_mask.so-gcc-c17-ubsan.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/013-libm3_collections_mask.so-gcc-c17-ubsan.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/013-libm3_collections_mask.so-gcc-c17-ubsan.stderr.log",
+      "purpose": "actual command: libm3_collections_mask.so-gcc-c17-ubsan",
+      "original_catalogue_path": "runtime-proof/received/013-libm3_collections_mask.so-gcc-c17-ubsan.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/014-libm3_collections_mask.so-nm.stdout.log.txt",
+      "sha256": "0d01eb1a3601fa21e12202403cbbe5b0395c78537d90032cf22802f0506f798e",
+      "bytes": 728,
+      "origin": "qualification/wrappers/current-runtime/014-libm3_collections_mask.so-nm.stdout.log",
+      "purpose": "actual command: libm3_collections_mask.so-nm",
+      "original_catalogue_path": "runtime-proof/received/014-libm3_collections_mask.so-nm.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/014-libm3_collections_mask.so-nm.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/014-libm3_collections_mask.so-nm.stderr.log",
+      "purpose": "actual command: libm3_collections_mask.so-nm",
+      "original_catalogue_path": "runtime-proof/received/014-libm3_collections_mask.so-nm.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/015-collections-full-module-tests.stdout.log.txt",
+      "sha256": "275b4f9b7d018bb387dc9679db2074d73db004c4f33b24fb3638151e54a5fe56",
+      "bytes": 21727,
+      "origin": "qualification/wrappers/current-runtime/015-collections-full-module-tests.stdout.log",
+      "purpose": "actual command: collections-full-module-tests",
+      "original_catalogue_path": "runtime-proof/received/015-collections-full-module-tests.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/015-collections-full-module-tests.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/015-collections-full-module-tests.stderr.log",
+      "purpose": "actual command: collections-full-module-tests",
+      "original_catalogue_path": "runtime-proof/received/015-collections-full-module-tests.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/016-M3IndexPathMasksSelfTest-java.stdout.log.txt",
+      "sha256": "4974a1ec1002fcb19d423cb0563e8243094c1b9dfb1c634af5f250b95942a2ae",
+      "bytes": 52,
+      "origin": "qualification/wrappers/current-runtime/016-M3IndexPathMasksSelfTest-java.stdout.log",
+      "purpose": "actual command: M3IndexPathMasksSelfTest-java",
+      "original_catalogue_path": "runtime-proof/received/016-M3IndexPathMasksSelfTest-java.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/016-M3IndexPathMasksSelfTest-java.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/016-M3IndexPathMasksSelfTest-java.stderr.log",
+      "purpose": "actual command: M3IndexPathMasksSelfTest-java",
+      "original_catalogue_path": "runtime-proof/received/016-M3IndexPathMasksSelfTest-java.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/017-M3IndexPathMasksLongSelfTest-java.stdout.log.txt",
+      "sha256": "a297ae7038ac67db29d10553dea67c41b9a3f7aca557baec6f0cb3b955579ef4",
+      "bytes": 56,
+      "origin": "qualification/wrappers/current-runtime/017-M3IndexPathMasksLongSelfTest-java.stdout.log",
+      "purpose": "actual command: M3IndexPathMasksLongSelfTest-java",
+      "original_catalogue_path": "runtime-proof/received/017-M3IndexPathMasksLongSelfTest-java.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/017-M3IndexPathMasksLongSelfTest-java.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/017-M3IndexPathMasksLongSelfTest-java.stderr.log",
+      "purpose": "actual command: M3IndexPathMasksLongSelfTest-java",
+      "original_catalogue_path": "runtime-proof/received/017-M3IndexPathMasksLongSelfTest-java.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/018-M3IndexPathMaskAliasSelfTest-java.stdout.log.txt",
+      "sha256": "1a2a623b038230670c3ba9196709612f0558669e585ac73181a57dcea3c4453f",
+      "bytes": 45,
+      "origin": "qualification/wrappers/current-runtime/018-M3IndexPathMaskAliasSelfTest-java.stdout.log",
+      "purpose": "actual command: M3IndexPathMaskAliasSelfTest-java",
+      "original_catalogue_path": "runtime-proof/received/018-M3IndexPathMaskAliasSelfTest-java.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/018-M3IndexPathMaskAliasSelfTest-java.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/018-M3IndexPathMaskAliasSelfTest-java.stderr.log",
+      "purpose": "actual command: M3IndexPathMaskAliasSelfTest-java",
+      "original_catalogue_path": "runtime-proof/received/018-M3IndexPathMaskAliasSelfTest-java.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/019-M3IndexPathImpossibleStageSelfTest-java.stdout.log.txt",
+      "sha256": "04a0a55e25ab63aa924cf3ff46b44184243e561d290b00c6a4faf90928a1ad94",
+      "bytes": 53,
+      "origin": "qualification/wrappers/current-runtime/019-M3IndexPathImpossibleStageSelfTest-java.stdout.log",
+      "purpose": "actual command: M3IndexPathImpossibleStageSelfTest-java",
+      "original_catalogue_path": "runtime-proof/received/019-M3IndexPathImpossibleStageSelfTest-java.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/019-M3IndexPathImpossibleStageSelfTest-java.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/019-M3IndexPathImpossibleStageSelfTest-java.stderr.log",
+      "purpose": "actual command: M3IndexPathImpossibleStageSelfTest-java",
+      "original_catalogue_path": "runtime-proof/received/019-M3IndexPathImpossibleStageSelfTest-java.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/020-M3IndexPathZeroStagesSelfTest-java.stdout.log.txt",
+      "sha256": "5e5cc17798c56aded58b75ccf423a29970c274f0d0370d6e74f0be94ced21ecc",
+      "bytes": 53,
+      "origin": "qualification/wrappers/current-runtime/020-M3IndexPathZeroStagesSelfTest-java.stdout.log",
+      "purpose": "actual command: M3IndexPathZeroStagesSelfTest-java",
+      "original_catalogue_path": "runtime-proof/received/020-M3IndexPathZeroStagesSelfTest-java.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/020-M3IndexPathZeroStagesSelfTest-java.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/020-M3IndexPathZeroStagesSelfTest-java.stderr.log",
+      "purpose": "actual command: M3IndexPathZeroStagesSelfTest-java",
+      "original_catalogue_path": "runtime-proof/received/020-M3IndexPathZeroStagesSelfTest-java.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/021-M3IndexPathZeroWindowSelfTest-java.stdout.log.txt",
+      "sha256": "b4d923e42cac29b5d8a1ff1deff52a7b003dd643d663a57d28b9b556954bc7c6",
+      "bytes": 74,
+      "origin": "qualification/wrappers/current-runtime/021-M3IndexPathZeroWindowSelfTest-java.stdout.log",
+      "purpose": "actual command: M3IndexPathZeroWindowSelfTest-java",
+      "original_catalogue_path": "runtime-proof/received/021-M3IndexPathZeroWindowSelfTest-java.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/021-M3IndexPathZeroWindowSelfTest-java.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/021-M3IndexPathZeroWindowSelfTest-java.stderr.log",
+      "purpose": "actual command: M3IndexPathZeroWindowSelfTest-java",
+      "original_catalogue_path": "runtime-proof/received/021-M3IndexPathZeroWindowSelfTest-java.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/022-M3IndexPathMaskWindowSelfTest-java.stdout.log.txt",
+      "sha256": "3ed6972df7d9084924aed9797a828b7fb7efee77478c5921a143dfd01f80b192",
+      "bytes": 73,
+      "origin": "qualification/wrappers/current-runtime/022-M3IndexPathMaskWindowSelfTest-java.stdout.log",
+      "purpose": "actual command: M3IndexPathMaskWindowSelfTest-java",
+      "original_catalogue_path": "runtime-proof/received/022-M3IndexPathMaskWindowSelfTest-java.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/022-M3IndexPathMaskWindowSelfTest-java.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/022-M3IndexPathMaskWindowSelfTest-java.stderr.log",
+      "purpose": "actual command: M3IndexPathMaskWindowSelfTest-java",
+      "original_catalogue_path": "runtime-proof/received/022-M3IndexPathMaskWindowSelfTest-java.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/023-M3IndexMaskWindowSelfTest-java.stdout.log.txt",
+      "sha256": "8c19e73f16f7872f3bd9bb799349fca1d8b3592550d4eed0cc8a4f2fbd3172ad",
+      "bytes": 52,
+      "origin": "qualification/wrappers/current-runtime/023-M3IndexMaskWindowSelfTest-java.stdout.log",
+      "purpose": "actual command: M3IndexMaskWindowSelfTest-java",
+      "original_catalogue_path": "runtime-proof/received/023-M3IndexMaskWindowSelfTest-java.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/023-M3IndexMaskWindowSelfTest-java.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/023-M3IndexMaskWindowSelfTest-java.stderr.log",
+      "purpose": "actual command: M3IndexMaskWindowSelfTest-java",
+      "original_catalogue_path": "runtime-proof/received/023-M3IndexMaskWindowSelfTest-java.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/024-M3OrderWindowProof-java-common.stdout.log.txt",
+      "sha256": "689aa5e634790140a0052575770b469617858bcd1e0111513a2b5893d5f4bffb",
+      "bytes": 123,
+      "origin": "qualification/wrappers/current-runtime/024-M3OrderWindowProof-java-common.stdout.log",
+      "purpose": "actual command: M3OrderWindowProof-java-common",
+      "original_catalogue_path": "runtime-proof/received/024-M3OrderWindowProof-java-common.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/024-M3OrderWindowProof-java-common.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/024-M3OrderWindowProof-java-common.stderr.log",
+      "purpose": "actual command: M3OrderWindowProof-java-common",
+      "original_catalogue_path": "runtime-proof/received/024-M3OrderWindowProof-java-common.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/025-M3IndexPathMasksSelfTest-native---native.stdout.log.txt",
+      "sha256": "9b4cc3f2dc97cb3c99aceabf3491549af7b08def00f24cf27ccdb6310887d019",
+      "bytes": 51,
+      "origin": "qualification/wrappers/current-runtime/025-M3IndexPathMasksSelfTest-native---native.stdout.log",
+      "purpose": "actual command: M3IndexPathMasksSelfTest-native---native",
+      "original_catalogue_path": "runtime-proof/received/025-M3IndexPathMasksSelfTest-native---native.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/025-M3IndexPathMasksSelfTest-native---native.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/025-M3IndexPathMasksSelfTest-native---native.stderr.log",
+      "purpose": "actual command: M3IndexPathMasksSelfTest-native---native",
+      "original_catalogue_path": "runtime-proof/received/025-M3IndexPathMasksSelfTest-native---native.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/026-M3IndexPathMasksLongSelfTest-native---native.stdout.log.txt",
+      "sha256": "7ccf92395b3e8c6ed883378d49920fb0c73cdcfd7b814bea2af6ad8dde5aa525",
+      "bytes": 55,
+      "origin": "qualification/wrappers/current-runtime/026-M3IndexPathMasksLongSelfTest-native---native.stdout.log",
+      "purpose": "actual command: M3IndexPathMasksLongSelfTest-native---native",
+      "original_catalogue_path": "runtime-proof/received/026-M3IndexPathMasksLongSelfTest-native---native.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/026-M3IndexPathMasksLongSelfTest-native---native.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/026-M3IndexPathMasksLongSelfTest-native---native.stderr.log",
+      "purpose": "actual command: M3IndexPathMasksLongSelfTest-native---native",
+      "original_catalogue_path": "runtime-proof/received/026-M3IndexPathMasksLongSelfTest-native---native.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/027-M3IndexPathMaskAliasSelfTest-native---native.stdout.log.txt",
+      "sha256": "ec77b54cf95fdbda5a79b4cb8c5828f023a3a11b708cb50d86fa9f629a760291",
+      "bytes": 56,
+      "origin": "qualification/wrappers/current-runtime/027-M3IndexPathMaskAliasSelfTest-native---native.stdout.log",
+      "purpose": "actual command: M3IndexPathMaskAliasSelfTest-native---native",
+      "original_catalogue_path": "runtime-proof/received/027-M3IndexPathMaskAliasSelfTest-native---native.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/027-M3IndexPathMaskAliasSelfTest-native---native.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/027-M3IndexPathMaskAliasSelfTest-native---native.stderr.log",
+      "purpose": "actual command: M3IndexPathMaskAliasSelfTest-native---native",
+      "original_catalogue_path": "runtime-proof/received/027-M3IndexPathMaskAliasSelfTest-native---native.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/028-M3IndexPathImpossibleStageSelfTest-native---native.stdout.log.txt",
+      "sha256": "9f6e5bda388d36dcb5c13dce4d8f6856b9a944ee2e830fd7cfcba997e66f3602",
+      "bytes": 52,
+      "origin": "qualification/wrappers/current-runtime/028-M3IndexPathImpossibleStageSelfTest-native---native.stdout.log",
+      "purpose": "actual command: M3IndexPathImpossibleStageSelfTest-native---native",
+      "original_catalogue_path": "runtime-proof/received/028-M3IndexPathImpossibleStageSelfTest-native---native.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/028-M3IndexPathImpossibleStageSelfTest-native---native.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/028-M3IndexPathImpossibleStageSelfTest-native---native.stderr.log",
+      "purpose": "actual command: M3IndexPathImpossibleStageSelfTest-native---native",
+      "original_catalogue_path": "runtime-proof/received/028-M3IndexPathImpossibleStageSelfTest-native---native.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/029-M3IndexPathZeroStagesSelfTest-native---native.stdout.log.txt",
+      "sha256": "b922636637080656dbc5c018deac901137937c4e67ec8c4f472177a4b6d6a8f9",
+      "bytes": 52,
+      "origin": "qualification/wrappers/current-runtime/029-M3IndexPathZeroStagesSelfTest-native---native.stdout.log",
+      "purpose": "actual command: M3IndexPathZeroStagesSelfTest-native---native",
+      "original_catalogue_path": "runtime-proof/received/029-M3IndexPathZeroStagesSelfTest-native---native.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/029-M3IndexPathZeroStagesSelfTest-native---native.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/029-M3IndexPathZeroStagesSelfTest-native---native.stderr.log",
+      "purpose": "actual command: M3IndexPathZeroStagesSelfTest-native---native",
+      "original_catalogue_path": "runtime-proof/received/029-M3IndexPathZeroStagesSelfTest-native---native.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/030-M3IndexPathZeroWindowSelfTest-native---native.stdout.log.txt",
+      "sha256": "c366dcf7c3d5eac87e85127cc4b64add67e9f06ba72cd3b6d48ddf8e1daa51e7",
+      "bytes": 84,
+      "origin": "qualification/wrappers/current-runtime/030-M3IndexPathZeroWindowSelfTest-native---native.stdout.log",
+      "purpose": "actual command: M3IndexPathZeroWindowSelfTest-native---native",
+      "original_catalogue_path": "runtime-proof/received/030-M3IndexPathZeroWindowSelfTest-native---native.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/030-M3IndexPathZeroWindowSelfTest-native---native.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/030-M3IndexPathZeroWindowSelfTest-native---native.stderr.log",
+      "purpose": "actual command: M3IndexPathZeroWindowSelfTest-native---native",
+      "original_catalogue_path": "runtime-proof/received/030-M3IndexPathZeroWindowSelfTest-native---native.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/031-M3IndexPathMaskWindowSelfTest-native---native.stdout.log.txt",
+      "sha256": "3020972973e12e9eb78b183a49bebfce34999a2de4eac8909107b7f9484b6b6c",
+      "bytes": 83,
+      "origin": "qualification/wrappers/current-runtime/031-M3IndexPathMaskWindowSelfTest-native---native.stdout.log",
+      "purpose": "actual command: M3IndexPathMaskWindowSelfTest-native---native",
+      "original_catalogue_path": "runtime-proof/received/031-M3IndexPathMaskWindowSelfTest-native---native.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/031-M3IndexPathMaskWindowSelfTest-native---native.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/031-M3IndexPathMaskWindowSelfTest-native---native.stderr.log",
+      "purpose": "actual command: M3IndexPathMaskWindowSelfTest-native---native",
+      "original_catalogue_path": "runtime-proof/received/031-M3IndexPathMaskWindowSelfTest-native---native.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/032-M3IndexMaskWindowSelfTest-native---native.stdout.log.txt",
+      "sha256": "2ab2a482cf8643ef49edd4db62293a3cdff9b6c6246956d44dcda32536230fd7",
+      "bytes": 51,
+      "origin": "qualification/wrappers/current-runtime/032-M3IndexMaskWindowSelfTest-native---native.stdout.log",
+      "purpose": "actual command: M3IndexMaskWindowSelfTest-native---native",
+      "original_catalogue_path": "runtime-proof/received/032-M3IndexMaskWindowSelfTest-native---native.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/032-M3IndexMaskWindowSelfTest-native---native.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/032-M3IndexMaskWindowSelfTest-native---native.stderr.log",
+      "purpose": "actual command: M3IndexMaskWindowSelfTest-native---native",
+      "original_catalogue_path": "runtime-proof/received/032-M3IndexMaskWindowSelfTest-native---native.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/033-M3OrderWindowProof-native-common-jni.stdout.log.txt",
+      "sha256": "771fd10200cc8b72bfaa66d95f99b3b824253f518dad9e1a2fcfc82877d6b197",
+      "bytes": 122,
+      "origin": "qualification/wrappers/current-runtime/033-M3OrderWindowProof-native-common-jni.stdout.log",
+      "purpose": "actual command: M3OrderWindowProof-native-common-jni",
+      "original_catalogue_path": "runtime-proof/received/033-M3OrderWindowProof-native-common-jni.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/033-M3OrderWindowProof-native-common-jni.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/033-M3OrderWindowProof-native-common-jni.stderr.log",
+      "purpose": "actual command: M3OrderWindowProof-native-common-jni",
+      "original_catalogue_path": "runtime-proof/received/033-M3OrderWindowProof-native-common-jni.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/034-M3IndexPathMaskAliasSelfTest-java---missing.stdout.log.txt",
+      "sha256": "a603fb72f08a1c5f381b02c1b3ffc3f8b30ccb9cedae11fdd090b3e9b1ed3702",
+      "bytes": 56,
+      "origin": "qualification/wrappers/current-runtime/034-M3IndexPathMaskAliasSelfTest-java---missing.stdout.log",
+      "purpose": "actual command: M3IndexPathMaskAliasSelfTest-java---missing",
+      "original_catalogue_path": "runtime-proof/received/034-M3IndexPathMaskAliasSelfTest-java---missing.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/034-M3IndexPathMaskAliasSelfTest-java---missing.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/034-M3IndexPathMaskAliasSelfTest-java---missing.stderr.log",
+      "purpose": "actual command: M3IndexPathMaskAliasSelfTest-java---missing",
+      "original_catalogue_path": "runtime-proof/received/034-M3IndexPathMaskAliasSelfTest-java---missing.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/035-M3FilteredNavigationBoundarySelfTest-java.stdout.log.txt",
+      "sha256": "f1b8475db0c4c5861b0ab1b6b345e208a5127cf1a900654a0bc8a1af790613f9",
+      "bytes": 113,
+      "origin": "qualification/wrappers/current-runtime/035-M3FilteredNavigationBoundarySelfTest-java.stdout.log",
+      "purpose": "actual command: M3FilteredNavigationBoundarySelfTest-java",
+      "original_catalogue_path": "runtime-proof/received/035-M3FilteredNavigationBoundarySelfTest-java.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/035-M3FilteredNavigationBoundarySelfTest-java.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/035-M3FilteredNavigationBoundarySelfTest-java.stderr.log",
+      "purpose": "actual command: M3FilteredNavigationBoundarySelfTest-java",
+      "original_catalogue_path": "runtime-proof/received/035-M3FilteredNavigationBoundarySelfTest-java.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/036-M3ReadOnlyViewBoundarySelfTest-java.stdout.log.txt",
+      "sha256": "0b03fa0ae93648fb8124b467f60252f14daf1ee63e2a79d776df13a65ac9d564",
+      "bytes": 49,
+      "origin": "qualification/wrappers/current-runtime/036-M3ReadOnlyViewBoundarySelfTest-java.stdout.log",
+      "purpose": "actual command: M3ReadOnlyViewBoundarySelfTest-java",
+      "original_catalogue_path": "runtime-proof/received/036-M3ReadOnlyViewBoundarySelfTest-java.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/036-M3ReadOnlyViewBoundarySelfTest-java.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/036-M3ReadOnlyViewBoundarySelfTest-java.stderr.log",
+      "purpose": "actual command: M3ReadOnlyViewBoundarySelfTest-java",
+      "original_catalogue_path": "runtime-proof/received/036-M3ReadOnlyViewBoundarySelfTest-java.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/037-M3WrapperConvergenceSelfTest-java.stdout.log.txt",
+      "sha256": "8e51693da9861371da95af4f364cf9a02e565fc1c6f324b42736f3fba84daf82",
+      "bytes": 53,
+      "origin": "qualification/wrappers/current-runtime/037-M3WrapperConvergenceSelfTest-java.stdout.log",
+      "purpose": "actual command: M3WrapperConvergenceSelfTest-java",
+      "original_catalogue_path": "runtime-proof/received/037-M3WrapperConvergenceSelfTest-java.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/037-M3WrapperConvergenceSelfTest-java.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/037-M3WrapperConvergenceSelfTest-java.stderr.log",
+      "purpose": "actual command: M3WrapperConvergenceSelfTest-java",
+      "original_catalogue_path": "runtime-proof/received/037-M3WrapperConvergenceSelfTest-java.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/038-M3DeepReadOnlyCollectionSelfTest-java.stdout.log.txt",
+      "sha256": "ccaf4bb0b42636d010c09ccedadc7922fcd0b67148f1a6d3b9b03e74d97fcfd6",
+      "bytes": 60,
+      "origin": "qualification/wrappers/current-runtime/038-M3DeepReadOnlyCollectionSelfTest-java.stdout.log",
+      "purpose": "actual command: M3DeepReadOnlyCollectionSelfTest-java",
+      "original_catalogue_path": "runtime-proof/received/038-M3DeepReadOnlyCollectionSelfTest-java.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/038-M3DeepReadOnlyCollectionSelfTest-java.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/038-M3DeepReadOnlyCollectionSelfTest-java.stderr.log",
+      "purpose": "actual command: M3DeepReadOnlyCollectionSelfTest-java",
+      "original_catalogue_path": "runtime-proof/received/038-M3DeepReadOnlyCollectionSelfTest-java.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/039-M3NavigationFailureContract-java.stdout.log.txt",
+      "sha256": "ac020446e417abf87f137d8dcaf55a7eacb09d493e5759d501ea6b74ae9f36da",
+      "bytes": 44,
+      "origin": "qualification/wrappers/current-runtime/039-M3NavigationFailureContract-java.stdout.log",
+      "purpose": "actual command: M3NavigationFailureContract-java",
+      "original_catalogue_path": "runtime-proof/received/039-M3NavigationFailureContract-java.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/039-M3NavigationFailureContract-java.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/039-M3NavigationFailureContract-java.stderr.log",
+      "purpose": "actual command: M3NavigationFailureContract-java",
+      "original_catalogue_path": "runtime-proof/received/039-M3NavigationFailureContract-java.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/040-M3BoundedFilteredNavigationContract-java.stdout.log.txt",
+      "sha256": "67e84f9b418741a613573c1361226626fb54e9824734ab8629b429898b53415f",
+      "bytes": 49,
+      "origin": "qualification/wrappers/current-runtime/040-M3BoundedFilteredNavigationContract-java.stdout.log",
+      "purpose": "actual command: M3BoundedFilteredNavigationContract-java",
+      "original_catalogue_path": "runtime-proof/received/040-M3BoundedFilteredNavigationContract-java.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/040-M3BoundedFilteredNavigationContract-java.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/040-M3BoundedFilteredNavigationContract-java.stderr.log",
+      "purpose": "actual command: M3BoundedFilteredNavigationContract-java",
+      "original_catalogue_path": "runtime-proof/received/040-M3BoundedFilteredNavigationContract-java.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/041-M3OrderWindowProof-java-nullable.stdout.log.txt",
+      "sha256": "a34475547d3de646748dfc05dc90e454440a7a70d18f597ff9202aaf642a73bb",
+      "bytes": 35,
+      "origin": "qualification/wrappers/current-runtime/041-M3OrderWindowProof-java-nullable.stdout.log",
+      "purpose": "actual command: M3OrderWindowProof-java-nullable",
+      "original_catalogue_path": "runtime-proof/received/041-M3OrderWindowProof-java-nullable.stdout.log"
+    },
+    {
+      "path": "runtime-proof/received/041-M3OrderWindowProof-java-nullable.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "qualification/wrappers/current-runtime/041-M3OrderWindowProof-java-nullable.stderr.log",
+      "purpose": "actual command: M3OrderWindowProof-java-nullable",
+      "original_catalogue_path": "runtime-proof/received/041-M3OrderWindowProof-java-nullable.stderr.log"
+    },
+    {
+      "path": "runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexPathMasks.h.txt",
+      "sha256": "477a947e172dfec5a858a6ac67a34a83673d8af8c4453c506f343d338475a440",
+      "bytes": 726,
+      "origin": "qualification/wrappers/current-runtime/before-jni-headers/com_m3_collections_M3IndexPathMasks.h",
+      "purpose": "actual generated JNI declaration used by ABI proof",
+      "original_catalogue_path": "runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexPathMasks.h"
+    },
+    {
+      "path": "runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexMaskCompactor.h.txt",
+      "sha256": "60284925265d8ec7300dcb1a97436db82ca29b18e902f8fb5835f0a9b933537e",
+      "bytes": 2116,
+      "origin": "qualification/wrappers/current-runtime/before-jni-headers/com_m3_collections_M3IndexMaskCompactor.h",
+      "purpose": "actual generated JNI declaration used by ABI proof",
+      "original_catalogue_path": "runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexMaskCompactor.h"
+    },
+    {
+      "path": "runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexMaskWindow.h.txt",
+      "sha256": "8a98ee9e6da71b86ffe84223fc0c09ab2e206f1f4ae1e49320e234206d172c11",
+      "bytes": 1006,
+      "origin": "qualification/wrappers/current-runtime/before-jni-headers/com_m3_collections_M3IndexMaskWindow.h",
+      "purpose": "actual generated JNI declaration used by ABI proof",
+      "original_catalogue_path": "runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexMaskWindow.h"
+    },
+    {
+      "path": "runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexPathMasks.h.txt",
+      "sha256": "4b36eef5e6a9cfa2b6dd1d896e92941d1a42e6c7054c396e009bf7e9ad3cb6ed",
+      "bytes": 1034,
+      "origin": "qualification/wrappers/current-runtime/after-jni-headers/com_m3_collections_M3IndexPathMasks.h",
+      "purpose": "actual generated JNI declaration used by ABI proof",
+      "original_catalogue_path": "runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexPathMasks.h"
+    },
+    {
+      "path": "runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexMaskCompactor.h.txt",
+      "sha256": "60284925265d8ec7300dcb1a97436db82ca29b18e902f8fb5835f0a9b933537e",
+      "bytes": 2116,
+      "origin": "qualification/wrappers/current-runtime/after-jni-headers/com_m3_collections_M3IndexMaskCompactor.h",
+      "purpose": "actual generated JNI declaration used by ABI proof",
+      "original_catalogue_path": "runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexMaskCompactor.h"
+    },
+    {
+      "path": "runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexMaskWindow.h.txt",
+      "sha256": "8a98ee9e6da71b86ffe84223fc0c09ab2e206f1f4ae1e49320e234206d172c11",
+      "bytes": 1006,
+      "origin": "qualification/wrappers/current-runtime/after-jni-headers/com_m3_collections_M3IndexMaskWindow.h",
+      "purpose": "actual generated JNI declaration used by ABI proof",
+      "original_catalogue_path": "runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexMaskWindow.h"
+    },
+    {
+      "path": "runtime-proof/long-selftest/actual-long-selftest.json",
+      "sha256": "2b554700dfce846cb7de20a268f11173fb58c2482e8b01a65bfffdb3b8fd10d3",
+      "bytes": 2777,
+      "origin": "qualification/wrappers/actual-long-selftest.json",
+      "purpose": "existing long facade test on actual receiver classes",
+      "original_catalogue_path": "runtime-proof/long-selftest/actual-long-selftest.json"
+    },
+    {
+      "path": "runtime-proof/long-selftest/actual-long-selftest.log.txt",
+      "sha256": "22ed0714ae1e45ad173a9b8b997a3098cc36908ff11619171ee1cb430915c623",
+      "bytes": 62,
+      "origin": "qualification/wrappers/actual-long-selftest.log",
+      "purpose": "existing long facade test on actual receiver classes",
+      "original_catalogue_path": "runtime-proof/long-selftest/actual-long-selftest.log"
+    },
+    {
+      "path": "runtime-proof/historical/HISTORICAL_DONATION_PREFLIGHT.json",
+      "sha256": "04c778e24be594365f27d5ad59cdb04d3a9e09aa8b25527a0366fd4e1c025489",
+      "bytes": 44598,
+      "origin": "qualification/wrappers/HISTORICAL_DONATION_PREFLIGHT.json",
+      "purpose": "unchanged historical guard static refusal; full historical verifier NOT EXECUTED",
+      "original_catalogue_path": "runtime-proof/historical/HISTORICAL_DONATION_PREFLIGHT.json"
+    },
+    {
+      "path": "runtime-proof/long-bridge/SOURCE_BINDINGS.json",
+      "sha256": "0e45a35e265d98b4978df5752ba20c197c17bb06862a0288c8e5e4b186e36b14",
+      "bytes": 1763,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/SOURCE_BINDINGS.json",
+      "purpose": "preserved bridge qualification epoch; current acceptance in FINAL_RECEIVING_STATUS.json",
+      "original_catalogue_path": "runtime-proof/long-bridge/SOURCE_BINDINGS.json"
+    },
+    {
+      "path": "runtime-proof/long-bridge/FINAL_METADATA.json",
+      "sha256": "05a85e6f8708dd771e954dea625f36a1d24888eeb71d17e70de63d88c4d5afc0",
+      "bytes": 946,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/FINAL_METADATA.json",
+      "purpose": "preserved bridge qualification epoch; current acceptance in FINAL_RECEIVING_STATUS.json",
+      "original_catalogue_path": "runtime-proof/long-bridge/FINAL_METADATA.json"
+    },
+    {
+      "path": "runtime-proof/long-bridge/CATALOGUE.tsv",
+      "sha256": "55cc99c4eef290a929f351d8da24ae313d730c23d2462be63312bb1ee6970e31",
+      "bytes": 1862,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/CATALOGUE.tsv",
+      "purpose": "preserved bridge qualification epoch; current acceptance in FINAL_RECEIVING_STATUS.json",
+      "original_catalogue_path": "runtime-proof/long-bridge/CATALOGUE.tsv"
+    },
+    {
+      "path": "runtime-proof/long-bridge/README.md",
+      "sha256": "dc5c1bfe2b2f9b5ee4796cab8fd53da0374320da18e702d44a8a11b4eb8caa02",
+      "bytes": 5894,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/README.md",
+      "purpose": "preserved bridge qualification epoch; current acceptance in FINAL_RECEIVING_STATUS.json",
+      "original_catalogue_path": "runtime-proof/long-bridge/README.md"
+    },
+    {
+      "path": "runtime-proof/long-bridge/proof/GATES.json",
+      "sha256": "5014e04e8dad8a9233cfa0864a31a4e94083c250d69c63b8b424f7be3f2083ed",
+      "bytes": 6258,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/GATES.json",
+      "purpose": "long bridge exact behavior, API and SDK evidence",
+      "original_catalogue_path": "runtime-proof/long-bridge/proof/GATES.json"
+    },
+    {
+      "path": "runtime-proof/long-bridge/proof/SDK_BINDINGS.json",
+      "sha256": "b6d9dd3fb84931dede53134f8956f2025f2c882f7e5f606204a0578530cafd41",
+      "bytes": 1542,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/SDK_BINDINGS.json",
+      "purpose": "long bridge exact behavior, API and SDK evidence",
+      "original_catalogue_path": "runtime-proof/long-bridge/proof/SDK_BINDINGS.json"
+    },
+    {
+      "path": "runtime-proof/long-bridge/proof/SDK_EXECUTION.json",
+      "sha256": "aa72f2bcf647b0bd463d73b22a1b50239fbc034983ab2dc8a5cab582a6b13367",
+      "bytes": 665,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/SDK_EXECUTION.json",
+      "purpose": "long bridge exact behavior, API and SDK evidence",
+      "original_catalogue_path": "runtime-proof/long-bridge/proof/SDK_EXECUTION.json"
+    },
+    {
+      "path": "runtime-proof/long-bridge/proof/SDK_INPUTS.tsv",
+      "sha256": "711e02a24091858ec7037df51b94160cd842395169747d2c56510a16677fa511",
+      "bytes": 2587,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/SDK_INPUTS.tsv",
+      "purpose": "long bridge exact behavior, API and SDK evidence",
+      "original_catalogue_path": "runtime-proof/long-bridge/proof/SDK_INPUTS.tsv"
+    },
+    {
+      "path": "runtime-proof/long-bridge/proof/SDK_RECEIVER_RECEIPT.json",
+      "sha256": "b221f4383fb2764a2122c5369215cd1c0870571d7d46adbb823136eaa37ec3c9",
+      "bytes": 1662,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/SDK_RECEIVER_RECEIPT.json",
+      "purpose": "long bridge exact behavior, API and SDK evidence",
+      "original_catalogue_path": "runtime-proof/long-bridge/proof/SDK_RECEIVER_RECEIPT.json"
+    },
+    {
+      "path": "runtime-proof/long-bridge/proof/SDK_RESULTS.tsv",
+      "sha256": "e148f6c1632fa67a075ccd2ade96796ddcf0eb52e67597b654b71b4fe14b153a",
+      "bytes": 264,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/SDK_RESULTS.tsv",
+      "purpose": "long bridge exact behavior, API and SDK evidence",
+      "original_catalogue_path": "runtime-proof/long-bridge/proof/SDK_RESULTS.tsv"
+    },
+    {
+      "path": "runtime-proof/long-bridge/proof/SDK_TEST_REPORT.xml",
+      "sha256": "dea48731c19fcef9d7f13ceace6317053d2ff9c48f03d8e24261aff16fe6f825",
+      "bytes": 14438,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/SDK_TEST_REPORT.xml",
+      "purpose": "long bridge exact behavior, API and SDK evidence",
+      "original_catalogue_path": "runtime-proof/long-bridge/proof/SDK_TEST_REPORT.xml"
+    },
+    {
+      "path": "runtime-proof/long-bridge/proof/baseline-behavior.log.txt",
+      "sha256": "d23825aed62d05aef89e36566919e971ac1084d29cb33802f51995b27fe32548",
+      "bytes": 110,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/baseline-behavior.log",
+      "purpose": "long bridge exact behavior, API and SDK evidence",
+      "original_catalogue_path": "runtime-proof/long-bridge/proof/baseline-behavior.log"
+    },
+    {
+      "path": "runtime-proof/long-bridge/proof/baseline-compile.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/baseline-compile.log",
+      "purpose": "long bridge exact behavior, API and SDK evidence",
+      "original_catalogue_path": "runtime-proof/long-bridge/proof/baseline-compile.log"
+    },
+    {
+      "path": "runtime-proof/long-bridge/proof/baseline-existing-self-test.log.txt",
+      "sha256": "22ed0714ae1e45ad173a9b8b997a3098cc36908ff11619171ee1cb430915c623",
+      "bytes": 62,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/baseline-existing-self-test.log",
+      "purpose": "long bridge exact behavior, API and SDK evidence",
+      "original_catalogue_path": "runtime-proof/long-bridge/proof/baseline-existing-self-test.log"
+    },
+    {
+      "path": "runtime-proof/long-bridge/proof/baseline-public-api.log.txt",
+      "sha256": "66d799b1daedbd2e4444733bb75821fbdf5c9a989aa7f966ed9d1efaed458f1e",
+      "bytes": 554,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/baseline-public-api.log",
+      "purpose": "long bridge exact behavior, API and SDK evidence",
+      "original_catalogue_path": "runtime-proof/long-bridge/proof/baseline-public-api.log"
+    },
+    {
+      "path": "runtime-proof/long-bridge/proof/candidate-behavior.log.txt",
+      "sha256": "d23825aed62d05aef89e36566919e971ac1084d29cb33802f51995b27fe32548",
+      "bytes": 110,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/candidate-behavior.log",
+      "purpose": "long bridge exact behavior, API and SDK evidence",
+      "original_catalogue_path": "runtime-proof/long-bridge/proof/candidate-behavior.log"
+    },
+    {
+      "path": "runtime-proof/long-bridge/proof/candidate-compile.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/candidate-compile.log",
+      "purpose": "long bridge exact behavior, API and SDK evidence",
+      "original_catalogue_path": "runtime-proof/long-bridge/proof/candidate-compile.log"
+    },
+    {
+      "path": "runtime-proof/long-bridge/proof/candidate-existing-self-test.log.txt",
+      "sha256": "22ed0714ae1e45ad173a9b8b997a3098cc36908ff11619171ee1cb430915c623",
+      "bytes": 62,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/candidate-existing-self-test.log",
+      "purpose": "long bridge exact behavior, API and SDK evidence",
+      "original_catalogue_path": "runtime-proof/long-bridge/proof/candidate-existing-self-test.log"
+    },
+    {
+      "path": "runtime-proof/long-bridge/proof/candidate-public-api.log.txt",
+      "sha256": "66d799b1daedbd2e4444733bb75821fbdf5c9a989aa7f966ed9d1efaed458f1e",
+      "bytes": 554,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/candidate-public-api.log",
+      "purpose": "long bridge exact behavior, API and SDK evidence",
+      "original_catalogue_path": "runtime-proof/long-bridge/proof/candidate-public-api.log"
+    },
+    {
+      "path": "runtime-proof/long-bridge/proof/sdk-maven.log.txt",
+      "sha256": "a96cf9ff9f5bbfe6b2680343030cde79e8ccb1f54770a9462b5bddff8c3f2d9c",
+      "bytes": 3152,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/sdk-maven.log",
+      "purpose": "long bridge exact behavior, API and SDK evidence",
+      "original_catalogue_path": "runtime-proof/long-bridge/proof/sdk-maven.log"
+    },
+    {
+      "path": "runtime-proof/proof2/QUALIFICATION.json",
+      "sha256": "0e39c3661239a1ee2200165c52da1a57c896685091da3a877183eb7d81c6c098",
+      "bytes": 2995,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-verification-20261018/r2/proof/QUALIFICATION.json",
+      "purpose": "source manifest and unchanged verification runner SDK evidence",
+      "original_catalogue_path": "runtime-proof/proof2/QUALIFICATION.json"
+    },
+    {
+      "path": "runtime-proof/proof2/SDK_EXECUTION.json",
+      "sha256": "835f5142b78e41e2bdadf657c1bfbe79fc47d82c5ac7ada6eda7cf7d20b97df1",
+      "bytes": 1275,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-verification-20261018/r2/proof/SDK_EXECUTION.json",
+      "purpose": "source manifest and unchanged verification runner SDK evidence",
+      "original_catalogue_path": "runtime-proof/proof2/SDK_EXECUTION.json"
+    },
+    {
+      "path": "runtime-proof/proof2/SEAL.json",
+      "sha256": "1c5cfe188d216c0c2ea811f5976999eb24d864c94ca1c736c909ab5555122301",
+      "bytes": 1442,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-verification-20261018/r2/proof/SEAL.json",
+      "purpose": "source manifest and unchanged verification runner SDK evidence",
+      "original_catalogue_path": "runtime-proof/proof2/SEAL.json"
+    },
+    {
+      "path": "runtime-proof/proof2/helpers/EXECUTION.json",
+      "sha256": "26f021ea3413e96a32299746bf07e61414182c5efe7633ba715f7f37be47f954",
+      "bytes": 1286,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-verification-20261018/r2/proof/helpers/EXECUTION.json",
+      "purpose": "supplemental helper replay; independent of original SDK/runtime gates",
+      "original_catalogue_path": "runtime-proof/proof2/helpers/EXECUTION.json"
+    },
+    {
+      "path": "runtime-proof/proof2/helpers/HELPER_RECEIPT.json",
+      "sha256": "780b5d3baced6f7ee9fb6d15721d0bdaf42fc47c19d2230e28c782841aae2e5c",
+      "bytes": 2105,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-verification-20261018/r2/proof/helpers/HELPER_RECEIPT.json",
+      "purpose": "supplemental helper replay; independent of original SDK/runtime gates",
+      "original_catalogue_path": "runtime-proof/proof2/helpers/HELPER_RECEIPT.json"
+    },
+    {
+      "path": "runtime-proof/proof2/helpers/stderr.log.txt",
+      "sha256": "7a43162d78428232335fc83924ae977ae787a9132a820a3b00c245cf5876acf8",
+      "bytes": 1979,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-verification-20261018/r2/proof/helpers/stderr.log",
+      "purpose": "supplemental helper replay; independent of original SDK/runtime gates",
+      "original_catalogue_path": "runtime-proof/proof2/helpers/stderr.log"
+    },
+    {
+      "path": "runtime-proof/proof2/helpers/stdout.log.txt",
+      "sha256": "1313c7ff140ba00eaf45d06682fc06dc494681adf06d0a37a597373acf7e6887",
+      "bytes": 46,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-verification-20261018/r2/proof/helpers/stdout.log",
+      "purpose": "supplemental helper replay; independent of original SDK/runtime gates",
+      "original_catalogue_path": "runtime-proof/proof2/helpers/stdout.log"
+    },
+    {
+      "path": "runtime-proof/proof2/helpers/verify_runner_helpers.py",
+      "sha256": "08565bfcb747708abccd76e27f38b8e0d2fbab9ec32c9d73f5c176f11d096bdb",
+      "bytes": 9433,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-verification-20261018/r2/proof/helpers/verify_runner_helpers.py",
+      "purpose": "supplemental helper replay; independent of original SDK/runtime gates",
+      "original_catalogue_path": "runtime-proof/proof2/helpers/verify_runner_helpers.py"
+    },
+    {
+      "path": "runtime-proof/performance/BEFORE_CODE.json",
+      "sha256": "73a1cea3426f4ec053cee44ca55b9f994ccfcd4e682988d946e9cf1647c295a4",
+      "bytes": 3724,
+      "origin": "ast-work/order-window-allocation/final/BEFORE_CODE.json",
+      "purpose": "matched existing order proof; invoking-thread allocation only",
+      "original_catalogue_path": "runtime-proof/performance/BEFORE_CODE.json"
+    },
+    {
+      "path": "runtime-proof/performance/COMMANDS.json",
+      "sha256": "7ab9c78df73bf396af3f3f76e91981949b15264038b4aad6858c31a999f7b6f1",
+      "bytes": 8467,
+      "origin": "ast-work/order-window-allocation/final/COMMANDS.json",
+      "purpose": "matched existing order proof; invoking-thread allocation only",
+      "original_catalogue_path": "runtime-proof/performance/COMMANDS.json"
+    },
+    {
+      "path": "runtime-proof/performance/ENVIRONMENT.json",
+      "sha256": "a5c3b1b6bb057707865f99d2e696e3b740dbdf5556b34925307167e1135829f6",
+      "bytes": 1566,
+      "origin": "ast-work/order-window-allocation/final/ENVIRONMENT.json",
+      "purpose": "matched existing order proof; invoking-thread allocation only",
+      "original_catalogue_path": "runtime-proof/performance/ENVIRONMENT.json"
+    },
+    {
+      "path": "runtime-proof/performance/PROOF_CUSTODY.json",
+      "sha256": "7a4fbe57b6c59bd1c786b565485e7c5dd2579a80dca180d13927eeee153600a5",
+      "bytes": 591,
+      "origin": "ast-work/order-window-allocation/final/PROOF_CUSTODY.json",
+      "purpose": "matched existing order proof; invoking-thread allocation only",
+      "original_catalogue_path": "runtime-proof/performance/PROOF_CUSTODY.json"
+    },
+    {
+      "path": "runtime-proof/performance/RAW_SAMPLES.json",
+      "sha256": "f7795a61612ab282aae36b419ed8e87d3bedc3068ede8a50d5af36a2e1f05149",
+      "bytes": 2991,
+      "origin": "ast-work/order-window-allocation/final/RAW_SAMPLES.json",
+      "purpose": "matched existing order proof; invoking-thread allocation only",
+      "original_catalogue_path": "runtime-proof/performance/RAW_SAMPLES.json"
+    },
+    {
+      "path": "runtime-proof/performance/RESULTS.json",
+      "sha256": "af6d762f4d6235cb6db2dbed75c61e9cc4cffd175596081d0d4bd5c922b28a61",
+      "bytes": 2491,
+      "origin": "ast-work/order-window-allocation/final/RESULTS.json",
+      "purpose": "matched existing order proof; invoking-thread allocation only",
+      "original_catalogue_path": "runtime-proof/performance/RESULTS.json"
+    },
+    {
+      "path": "runtime-proof/performance/baseline/MAIN_CLASSES.json",
+      "sha256": "c21635a67011a935d1227aacc0930b78d9b5f8c7c7e78573f4e9b50d7adc8418",
+      "bytes": 52113,
+      "origin": "ast-work/order-window-allocation/final/baseline/MAIN_CLASSES.json",
+      "purpose": "matched existing order proof; invoking-thread allocation only",
+      "original_catalogue_path": "runtime-proof/performance/baseline/MAIN_CLASSES.json"
+    },
+    {
+      "path": "runtime-proof/performance/baseline/MAIN_SOURCES.json",
+      "sha256": "530f6fe155cee3f02ec57537d2489475764554efabd7e5be7328777c49c51305",
+      "bytes": 20563,
+      "origin": "ast-work/order-window-allocation/final/baseline/MAIN_SOURCES.json",
+      "purpose": "matched existing order proof; invoking-thread allocation only",
+      "original_catalogue_path": "runtime-proof/performance/baseline/MAIN_SOURCES.json"
+    },
+    {
+      "path": "runtime-proof/performance/baseline/PROOF_CLASSES.json",
+      "sha256": "1edf835d0e43b780723038dcd7a0e32865f1f2496e241fb170b2c32a1fe68bd1",
+      "bytes": 324,
+      "origin": "ast-work/order-window-allocation/final/baseline/PROOF_CLASSES.json",
+      "purpose": "matched existing order proof; invoking-thread allocation only",
+      "original_catalogue_path": "runtime-proof/performance/baseline/PROOF_CLASSES.json"
+    },
+    {
+      "path": "runtime-proof/performance/baseline/compile-proof.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "ast-work/order-window-allocation/final/baseline/compile-proof.stderr.txt",
+      "purpose": "matched existing order proof; invoking-thread allocation only",
+      "original_catalogue_path": "runtime-proof/performance/baseline/compile-proof.stderr.txt"
+    },
+    {
+      "path": "runtime-proof/performance/baseline/compile-proof.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "ast-work/order-window-allocation/final/baseline/compile-proof.stdout.txt",
+      "purpose": "matched existing order proof; invoking-thread allocation only",
+      "original_catalogue_path": "runtime-proof/performance/baseline/compile-proof.stdout.txt"
+    },
+    {
+      "path": "runtime-proof/performance/environment/java.stderr.txt",
+      "sha256": "fac45862e9fb8a96293a4a5723128a99d3b8707f901814ee363f4f53bde722bc",
+      "bytes": 314,
+      "origin": "ast-work/order-window-allocation/final/environment/java.stderr.txt",
+      "purpose": "matched existing order proof; invoking-thread allocation only",
+      "original_catalogue_path": "runtime-proof/performance/environment/java.stderr.txt"
+    },
+    {
+      "path": "runtime-proof/performance/environment/java.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "ast-work/order-window-allocation/final/environment/java.stdout.txt",
+      "purpose": "matched existing order proof; invoking-thread allocation only",
+      "original_catalogue_path": "runtime-proof/performance/environment/java.stdout.txt"
+    },
+    {
+      "path": "runtime-proof/performance/environment/javac.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "ast-work/order-window-allocation/final/environment/javac.stderr.txt",
+      "purpose": "matched existing order proof; invoking-thread allocation only",
+      "original_catalogue_path": "runtime-proof/performance/environment/javac.stderr.txt"
+    },
+    {
+      "path": "runtime-proof/performance/environment/javac.stdout.txt",
+      "sha256": "2df6b9c76e710158266aeaae8f3578eaed8ddd747a2272483506ad9a8a5e644a",
+      "bytes": 16,
+      "origin": "ast-work/order-window-allocation/final/environment/javac.stdout.txt",
+      "purpose": "matched existing order proof; invoking-thread allocation only",
+      "original_catalogue_path": "runtime-proof/performance/environment/javac.stdout.txt"
+    },
+    {
+      "path": "runtime-proof/performance/receiver/MAIN_CLASSES.json",
+      "sha256": "dd35b907f75fbfafdf318ae81f62ebd183273100737c399b21e41df8efcecdef",
+      "bytes": 52457,
+      "origin": "ast-work/order-window-allocation/final/receiver/MAIN_CLASSES.json",
+      "purpose": "matched existing order proof; invoking-thread allocation only",
+      "original_catalogue_path": "runtime-proof/performance/receiver/MAIN_CLASSES.json"
+    },
+    {
+      "path": "runtime-proof/performance/receiver/MAIN_SOURCES.json",
+      "sha256": "baeb4e54c2fed60ab3d8a02406f2d1b8ac830b2f762075ad960231ff2e922a3e",
+      "bytes": 20564,
+      "origin": "ast-work/order-window-allocation/final/receiver/MAIN_SOURCES.json",
+      "purpose": "matched existing order proof; invoking-thread allocation only",
+      "original_catalogue_path": "runtime-proof/performance/receiver/MAIN_SOURCES.json"
+    },
+    {
+      "path": "runtime-proof/performance/receiver/PROOF_CLASSES.json",
+      "sha256": "1edf835d0e43b780723038dcd7a0e32865f1f2496e241fb170b2c32a1fe68bd1",
+      "bytes": 324,
+      "origin": "ast-work/order-window-allocation/final/receiver/PROOF_CLASSES.json",
+      "purpose": "matched existing order proof; invoking-thread allocation only",
+      "original_catalogue_path": "runtime-proof/performance/receiver/PROOF_CLASSES.json"
+    },
+    {
+      "path": "runtime-proof/performance/receiver/compile-proof.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "ast-work/order-window-allocation/final/receiver/compile-proof.stderr.txt",
+      "purpose": "matched existing order proof; invoking-thread allocation only",
+      "original_catalogue_path": "runtime-proof/performance/receiver/compile-proof.stderr.txt"
+    },
+    {
+      "path": "runtime-proof/performance/receiver/compile-proof.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "ast-work/order-window-allocation/final/receiver/compile-proof.stdout.txt",
+      "purpose": "matched existing order proof; invoking-thread allocation only",
+      "original_catalogue_path": "runtime-proof/performance/receiver/compile-proof.stdout.txt"
+    },
+    {
+      "path": "runtime-proof/performance/runs/baseline-1.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "ast-work/order-window-allocation/final/runs/baseline-1.stderr.txt",
+      "purpose": "matched existing order proof; invoking-thread allocation only",
+      "original_catalogue_path": "runtime-proof/performance/runs/baseline-1.stderr.txt"
+    },
+    {
+      "path": "runtime-proof/performance/runs/baseline-1.stdout.txt",
+      "sha256": "2b15d0a5eccf27c67d027689287ce3a023846444c3e763d1e21828743abedd0b",
+      "bytes": 201,
+      "origin": "ast-work/order-window-allocation/final/runs/baseline-1.stdout.txt",
+      "purpose": "matched existing order proof; invoking-thread allocation only",
+      "original_catalogue_path": "runtime-proof/performance/runs/baseline-1.stdout.txt"
+    },
+    {
+      "path": "runtime-proof/performance/runs/baseline-2.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "ast-work/order-window-allocation/final/runs/baseline-2.stderr.txt",
+      "purpose": "matched existing order proof; invoking-thread allocation only",
+      "original_catalogue_path": "runtime-proof/performance/runs/baseline-2.stderr.txt"
+    },
+    {
+      "path": "runtime-proof/performance/runs/baseline-2.stdout.txt",
+      "sha256": "2b15d0a5eccf27c67d027689287ce3a023846444c3e763d1e21828743abedd0b",
+      "bytes": 201,
+      "origin": "ast-work/order-window-allocation/final/runs/baseline-2.stdout.txt",
+      "purpose": "matched existing order proof; invoking-thread allocation only",
+      "original_catalogue_path": "runtime-proof/performance/runs/baseline-2.stdout.txt"
+    },
+    {
+      "path": "runtime-proof/performance/runs/baseline-3.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "ast-work/order-window-allocation/final/runs/baseline-3.stderr.txt",
+      "purpose": "matched existing order proof; invoking-thread allocation only",
+      "original_catalogue_path": "runtime-proof/performance/runs/baseline-3.stderr.txt"
+    },
+    {
+      "path": "runtime-proof/performance/runs/baseline-3.stdout.txt",
+      "sha256": "2b15d0a5eccf27c67d027689287ce3a023846444c3e763d1e21828743abedd0b",
+      "bytes": 201,
+      "origin": "ast-work/order-window-allocation/final/runs/baseline-3.stdout.txt",
+      "purpose": "matched existing order proof; invoking-thread allocation only",
+      "original_catalogue_path": "runtime-proof/performance/runs/baseline-3.stdout.txt"
+    },
+    {
+      "path": "runtime-proof/performance/runs/receiver-1.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "ast-work/order-window-allocation/final/runs/receiver-1.stderr.txt",
+      "purpose": "matched existing order proof; invoking-thread allocation only",
+      "original_catalogue_path": "runtime-proof/performance/runs/receiver-1.stderr.txt"
+    },
+    {
+      "path": "runtime-proof/performance/runs/receiver-1.stdout.txt",
+      "sha256": "93f454de1dcebc41c029f4d1d81e46410befdb285e18763b6d0acd50c2043da9",
+      "bytes": 201,
+      "origin": "ast-work/order-window-allocation/final/runs/receiver-1.stdout.txt",
+      "purpose": "matched existing order proof; invoking-thread allocation only",
+      "original_catalogue_path": "runtime-proof/performance/runs/receiver-1.stdout.txt"
+    },
+    {
+      "path": "runtime-proof/performance/runs/receiver-2.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "ast-work/order-window-allocation/final/runs/receiver-2.stderr.txt",
+      "purpose": "matched existing order proof; invoking-thread allocation only",
+      "original_catalogue_path": "runtime-proof/performance/runs/receiver-2.stderr.txt"
+    },
+    {
+      "path": "runtime-proof/performance/runs/receiver-2.stdout.txt",
+      "sha256": "93f454de1dcebc41c029f4d1d81e46410befdb285e18763b6d0acd50c2043da9",
+      "bytes": 201,
+      "origin": "ast-work/order-window-allocation/final/runs/receiver-2.stdout.txt",
+      "purpose": "matched existing order proof; invoking-thread allocation only",
+      "original_catalogue_path": "runtime-proof/performance/runs/receiver-2.stdout.txt"
+    },
+    {
+      "path": "runtime-proof/performance/runs/receiver-3.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origin": "ast-work/order-window-allocation/final/runs/receiver-3.stderr.txt",
+      "purpose": "matched existing order proof; invoking-thread allocation only",
+      "original_catalogue_path": "runtime-proof/performance/runs/receiver-3.stderr.txt"
+    },
+    {
+      "path": "runtime-proof/performance/runs/receiver-3.stdout.txt",
+      "sha256": "93f454de1dcebc41c029f4d1d81e46410befdb285e18763b6d0acd50c2043da9",
+      "bytes": 201,
+      "origin": "ast-work/order-window-allocation/final/runs/receiver-3.stdout.txt",
+      "purpose": "matched existing order proof; invoking-thread allocation only",
+      "original_catalogue_path": "runtime-proof/performance/runs/receiver-3.stdout.txt"
+    },
+    {
+      "path": "runtime-proof/performance/canonical/ALLOCATION_PUBLISH.json",
+      "sha256": "5503100e751aef7e6443030d57bc6f2e6a60823d9e1f8e3a0288a6dbbff5ac5b",
+      "bytes": 14567,
+      "origin": "ast-work/ORDER_WINDOW_ALLOCATION_PUBLISH.json",
+      "purpose": "frozen existing-proof allocation custody and premeasurement protocol",
+      "original_catalogue_path": "runtime-proof/performance/canonical/ALLOCATION_PUBLISH.json"
+    },
+    {
+      "path": "runtime-proof/performance/canonical/EVIDENCE_SHA256.tsv",
+      "sha256": "2b356a29ffad081db61de6f8fe271491aafd4bb02e5c747f4e5395320846a4a4",
+      "bytes": 4390,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/EVIDENCE_SHA256.tsv",
+      "purpose": "frozen existing-proof allocation custody and premeasurement protocol",
+      "original_catalogue_path": "runtime-proof/performance/canonical/EVIDENCE_SHA256.tsv"
+    },
+    {
+      "path": "runtime-proof/performance/canonical/BINDINGS.json",
+      "sha256": "9b465588b51e250f440b81ec1cf63e18f2e45beb5966790e77866f5e53683084",
+      "bytes": 1634,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/BINDINGS.json",
+      "purpose": "frozen existing-proof allocation custody and premeasurement protocol",
+      "original_catalogue_path": "runtime-proof/performance/canonical/BINDINGS.json"
+    },
+    {
+      "path": "runtime-proof/performance/canonical/ALGORITHM_CATALOGUE.tsv",
+      "sha256": "9f1c71a48845ca3b0b6cfa9ccf2fb5e76ef56096faf8c6deaeab3dd506bc13c4",
+      "bytes": 1713,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/ALGORITHM_CATALOGUE.tsv",
+      "purpose": "frozen existing-proof allocation custody and premeasurement protocol",
+      "original_catalogue_path": "runtime-proof/performance/canonical/ALGORITHM_CATALOGUE.tsv"
+    },
+    {
+      "path": "runtime-proof/performance/canonical/README.md",
+      "sha256": "5e45439fc3f7f587a0764f1b73c4b263ac77ac7db73a24ab59812c2d725b2da8",
+      "bytes": 5943,
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/README.md",
+      "purpose": "frozen existing-proof allocation custody and premeasurement protocol",
+      "original_catalogue_path": "runtime-proof/performance/canonical/README.md"
+    }
+  ],
+  "scope": "Text evidence retained in the canonical catalogue. Original logs may contain local execution paths; those are historical execution facts, not runtime dependencies.",
+  "delivery_path_mapping": "../DELIVERY_PATHS.json",
+  "immutable_receipt_paths": "Execution payloads remain byte-identical. Their original catalogue-relative delivery paths are resolved by DELIVERY_PATHS.json."
+}

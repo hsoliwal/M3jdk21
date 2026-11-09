@@ -1,0 +1,4 @@
+dependency_id	kind	commit	reason	authority
+JEP-497	SHARED_OWNER_LINEAGE	8b98f958dc1afedc02b9d9c98089d6cb1ca3a5b7	ML-DSA changes NamedParameterSpec KnownOIDs and shared deterministic tests	EVIDENCE_ONLY
+JDK-8345057	FOLLOWUP	8c2b4f62714f26ab3bc4808c734502af632a1eef	Reconciles ML-KEM NamedParameterSpec constants after ML-DSA integration	EVIDENCE_ONLY
+JDK24-GA	RELEASED_STATE	6705a9255d28f351950e7fbca9d05e73942a4e27	Authoritative cumulative released source state for FILE atom materialization	DONOR_STATE

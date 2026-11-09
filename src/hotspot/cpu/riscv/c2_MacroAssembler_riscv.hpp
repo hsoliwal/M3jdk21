@@ -39,6 +39,11 @@
                        VectorRegister vrs,
                        bool is_latin, Label& DONE);
  public:
+  // Code used by cmpFastLock and cmpFastUnlock mach instructions in .ad file.
+  // See full description in macroAssembler_riscv.cpp.
+  void fast_lock(Register object, Register box, Register tmp1, Register tmp2, Register tmp3);
+  void fast_unlock(Register object, Register box, Register tmp1, Register tmp2);
+
   void string_compare(Register str1, Register str2,
                       Register cnt1, Register cnt2, Register result,
                       Register tmp1, Register tmp2, Register tmp3,
@@ -46,6 +51,7 @@
 
   void string_indexof_char_short(Register str1, Register cnt1,
                                  Register ch, Register result,
+                                 Register start_index,
                                  bool isL);
 
   void string_indexof_char(Register str1, Register cnt1,
@@ -242,8 +248,6 @@
                         VectorRegister src, BasicType src_bt);
 
   void vfcvt_rtz_x_f_v_safe(VectorRegister dst, VectorRegister src);
-  void vfwcvt_rtz_x_f_v_safe(VectorRegister dst, VectorRegister src);
-  void vfncvt_rtz_x_f_w_safe(VectorRegister dst, VectorRegister src);
 
   void extract_v(Register dst, VectorRegister src, BasicType bt, int idx, VectorRegister tmp);
   void extract_fp_v(FloatRegister dst, VectorRegister src, BasicType bt, int idx, VectorRegister tmp);

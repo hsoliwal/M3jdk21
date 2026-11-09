@@ -1,0 +1,33 @@
+{
+  "collections_tree": "985d672bf250aa090b2399d626f0e3e1b541135d",
+  "owners": [
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java",
+      "git_blob": "39dde593da4de3d7caaa4c12afc3deae7ce6a9f3",
+      "sha256": "bb0ff9a8008521576530b0cea64d00b4f22e6e4b8424b8e5df7f416a6a8b6051",
+      "bytes": 19677,
+      "decision": "RETAIN_CURRENT_NO_PROPOSED_SOURCE_CHANGE"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
+      "git_blob": "baa23467163a0e9344fe3c1d78dcc87cb707fd56",
+      "sha256": "9ed1244ef90a72845d580b8919c670760434a81cf6dfc48f3aecbc8483726c02",
+      "bytes": 6433,
+      "decision": "RETAIN_CURRENT_NO_PROPOSED_SOURCE_CHANGE"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "git_blob": "f6471f52b0c001def6319542f01729620b0600ee",
+      "sha256": "ed13463a6972bd014a861635987e8aa6214bf7516789c4f41d4ec3d69692fe73",
+      "bytes": 16830,
+      "decision": "RETAIN_CURRENT_NO_PROPOSED_SOURCE_CHANGE"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_long_address_kernel.c",
+      "git_blob": "9f68bba46827db2cb53bdb597042829358663f91",
+      "sha256": "ba2e8a66c23bffa52e1b9e20eb9f1e890fb41ee13891dae0ed8d48cd6069f5ba",
+      "bytes": 3458,
+      "decision": "RETAIN_CURRENT_NO_PROPOSED_SOURCE_CHANGE"
+    }
+  ]
+}

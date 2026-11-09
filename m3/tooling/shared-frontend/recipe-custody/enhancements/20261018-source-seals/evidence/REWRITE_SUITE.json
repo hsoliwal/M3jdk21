@@ -1,0 +1,41 @@
+{
+  "schema": "M3_ACTUAL_SUREFIRE_SUITE_V1",
+  "xml_sha256": "e98be94e03112455e683318a9dbff4b871f0f84b96578bee8f4356813792d53a",
+  "suite": {
+    "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+    "version": "3.0",
+    "name": "org.m3jdk.tooling.rewrite.M3RewriteFrontendTest",
+    "time": "2.796",
+    "tests": "5",
+    "errors": "0",
+    "skipped": "0",
+    "failures": "0"
+  },
+  "cases": [
+    {
+      "name": "realCompilerTreeHasLosslessStructureTypesAndRecipeParity",
+      "classname": "org.m3jdk.tooling.rewrite.M3RewriteFrontendTest",
+      "time": "2.184"
+    },
+    {
+      "name": "defaultPerTypeCompilationRefusesIncompleteWholeUnit",
+      "classname": "org.m3jdk.tooling.rewrite.M3RewriteFrontendTest",
+      "time": "0.089"
+    },
+    {
+      "name": "projectionCannotShareTypesAcrossCompilerContexts",
+      "classname": "org.m3jdk.tooling.rewrite.M3RewriteFrontendTest",
+      "time": "0.386"
+    },
+    {
+      "name": "missingSyntaxRetentionIsRefused",
+      "classname": "org.m3jdk.tooling.rewrite.M3RewriteFrontendTest",
+      "time": "0.048"
+    },
+    {
+      "name": "parsePhaseCannotPretendToHaveSemanticTypes",
+      "classname": "org.m3jdk.tooling.rewrite.M3RewriteFrontendTest",
+      "time": "0.059"
+    }
+  ]
+}

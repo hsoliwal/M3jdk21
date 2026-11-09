@@ -1,0 +1,10 @@
+gate	command	result	note
+relocate_fixed_point	python recipe/relocate.py <donor> --check	changed=0	13 FILE rows; donor ded4a4acdffe; PROVENANCE.tsv donor blobs = donor tree blob ids
+build_werror	mvn -o clean package (JDK 21.0.9, Maven 3.9.14)	0 warnings; BUILD SUCCESS	main -Xlint:all -Werror in module mode; tests -Xlint:all,-lossy-conversions -Werror (RECIPE_MEMORY CREF-1)
+donor_proofs	surefire: M3CRefPathCertaintyTest, M3CompilerReferenceCensusTest, M3ReferenceFlowTest	Tests run: 3, Failures: 0	path certainty checks=309; census checks=709759 edges=10; reference flow checks=1578 runtimeTraces=256
+module_graph	java --module-path <jar, m3-collections, m3-arrays> --add-modules org.m3jdk.compiler.reference --list-modules	resolves	requires transitive java.compiler, jdk.compiler, jdk.m3.collections
+javap_shape	javap -p donor vs relocated, package and progress names normalised	62/62 identical	all top-level and nested classes
+differential_120	python recipe/differential.py <donor> <work> <cp> 0x4d3343524546 120	8/8 IDENTICAL (JIT and -Xint)	proofs byte-identical; probe units=120 methods=587 edges=14845 throws=0 digest 3885eb95eeece00d
+mutants	python recipe/mutants.py <work> <cp>	killed=6/6	liveness def kill, MUST join, unknown guard, census ending diff, census before lane, escaped mask; 3 also change the probe digest
+naming_fixed_point	a3/jn/jdk_naming.py rewrite_text over the module (lineage files excluded as the rewrite excludes them)	naming_changed_files=0 of 19	RECIPE_MEMORY CREF-2
+reactor	mvn -pl compiler/reference-flow -am from m3/pom.xml	NOT_RUN	no full m3 checkout on this machine (disks full); standalone build against the installed m3-collections/m3-arrays artifacts

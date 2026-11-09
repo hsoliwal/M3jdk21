@@ -1,0 +1,9 @@
+# V04 exact current canonical validation
+
+The unchanged canonical validator/schema pass at admitted receiving commit `09075810b55229662329a158923287e8a7118f86`, root `bba8647ea80d1cb4101394b4c0fc5a97f0b8eb52`, epoch SHA-256 `4fd3b3bd4fb09759d8bb02ca9ba45d0b2934625f24bcc4ae195f3e49394dff70`. Fresh `execution/baseline-v01/receipt.json` records exit 0, no diagnostics and `MIGRATION_MANIFEST_VALID completion=INCOMPLETE`.
+
+The 52-file fixture contains exactly 46 required artifacts plus the canonical validator/schema and four current mapping images. Forty-four immutable bodies are reused with exact connected tree/object proof; Matcher.java and the MR manifest are newly captured at 090. The tested receipt closure is unchanged. All declared hashes agree. No historical command, product test or repair was run.
+
+`ACQUISITION.json`, `FIXTURE_MANIFEST.json`, root envelopes and `acquisition/PROOF_MANIFEST.json` preserve the full body/path/tree proof. Both roots connect to identical mindex and libjava subtrees; all earlier m3 artifacts retain their object identities. Sixteen direct source tree captures and the latest recursive m3 tree are reconstructed. All prior 52 complete records and 25 mapping nodes are unchanged ordered prefixes of the new55/34map, including the three new global policy nodes. Earlier d1 failures and V03 actual results remain unchanged in their separately retained packets.
+
+For future actual afterimages, run `run_validator.py --python EXISTING_JSONSCHEMA_PYTHON --materialized ACTUAL_FOUR_RESULTS --mapping-resources ACTUAL_V04_BINDER_OUTPUT --output NEW_EVIDENCE_DIRECTORY`. The runner validates exact source/receiving identities and four Result hashes, copies this fixture, substitutes only those results, then invokes the unchanged canonical validator with `--previous` pointing to this090baseline. It preserves nonzero outcomes as failures. No dependency installation or acceptance promotion occurs.

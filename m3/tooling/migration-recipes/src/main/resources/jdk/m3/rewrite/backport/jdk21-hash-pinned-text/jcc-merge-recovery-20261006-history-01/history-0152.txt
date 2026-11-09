@@ -1,0 +1,11 @@
+{"id": "01-check-E3-preimages", "exit_code": 0, "expected": 0}
+{"id": "02-actual-text-recipe-maven", "exit_code": 0, "expected": 0}
+{"id": "03-actual-packet-contract", "exit_code": 0, "expected": 0}
+{"id": "04-apply", "exit_code": 0, "expected": 0}
+{"id": "05-apply-fixed-point", "exit_code": 0, "expected": 0}
+{"id": "06-rollback", "exit_code": 0, "expected": 0}
+{"id": "07-replay", "exit_code": 0, "expected": 0}
+{"id": "08-check-final", "exit_code": 0, "expected": 0}
+{"id": "09-whole-map-validate", "exit_code": 0, "expected": 0}
+{"id": "10-completion-remains-blocked", "exit_code": 2, "expected": 2}
+{"result": "PASS_WITH_COMPLETION_BLOCKED", "java_tests": 12, "python_tests": 6, "refusal_checks": 132, "receipt_sha256": "1f4ac9825d975520a04b7dc5ac1b282d96be32601c7abe2b0cfb676b0ff2df09"}
