@@ -14,6 +14,8 @@
  *******************************************************************************/
 package jdk.internal.m3.collections.mat;
 
+import jdk.m3.arrays.IntPostingIndex;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -139,10 +141,10 @@ public final class MatCollectionFactory {
         return new MatPlanned<>(map, receipt);
     }
 
-    public static MatPlanned<MatIntPostingIndex> postingIndex(
+    public static MatPlanned<IntPostingIndex> postingIndex(
             int[] keyByRow, MatCollectionRequirements requirements) {
         requireShape(requirements, MatCollectionRequirements.Shape.POSTING_INDEX);
-        MatIntPostingIndex index = MatIntPostingIndex.ofKeys(keyByRow);
+        IntPostingIndex index = IntPostingIndex.ofKeys(keyByRow);
         MatCollectionStats stats = MatCollectionStats.of(keyByRow);
         MatCollectionPlanReceipt receipt = MatCollectionPlanReceipt.of(
                 requirements,
