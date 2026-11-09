@@ -12,10 +12,11 @@ annotations/core/databind 2.19.2. `SOURCE_LOCK.json` pins their complete
 source/build/legal trees. Their exact Maven POMs perform the source builds and
 multi-release compilation in fresh staging directories. No upstream source or
 POM is patched by this build. Jackson core carries one recorded M3 overlay,
-`JACKSON_NUMBERS_TO_JDK v1` (`m3/tooling/jdk-superset/number-parse`): its
+`JACKSON_NUMBERS_TO_JDK v2` (`m3/tooling/jdk-superset/number-parse`): its
 `NumberInput`, `BigDecimalParser` and `BigIntegerParser` call `Double.parseDouble`,
-`Float.parseFloat`, `new BigDecimal` and `new BigInteger`, so Jackson and the JDK
-use one number parser, the one in java.base.
+`Float.parseFloat`, `new BigDecimal` and `new BigInteger`, and `NumberOutput` calls
+`Double.toString` and `Float.toString`, so Jackson and the JDK use one number parser
+and one Schubfach, the ones in java.base.
 
 The existing `m3/tooling/jmod-recipes/tools/jmod_pack.py` owns JMOD assembly and
 release-21 flattening. Its existing module graph checks the selected closure and

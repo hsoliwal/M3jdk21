@@ -8,9 +8,10 @@ existing M3JDK21 source inclusions at version 2.19.2 and retain their
 original Apache-2.0 legal texts and notices. This integration does not rename or
 relicense those implementations.
 
-Jackson core parses numbers with java.base (Double.parseDouble, Float.parseFloat,
-new BigDecimal, new BigInteger) through one recorded M3 source overlay,
-JACKSON_NUMBERS_TO_JDK v1; it no longer bundles Werner Randelshofer's
+Jackson core parses and writes numbers with java.base (Double.parseDouble,
+Float.parseFloat, new BigDecimal, new BigInteger, Double.toString, Float.toString)
+through one recorded M3 source overlay, JACKSON_NUMBERS_TO_JDK v2; its io.schubfach
+classes delegate to java.base, and it no longer bundles Werner Randelshofer's
 FastDoubleParser. M3JDK's java.base carries that parser's algorithm under its MIT
 license, with the notice in java.base's legal/fastdoubleparser.md. The notices that
 the published Jackson core JAR carries stay unchanged among its resources.

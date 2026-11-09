@@ -12,6 +12,6 @@ pack build.py --stage test: PASS stage test linked_runtime NOT_RUN
 PASS character-and-ast-overloads 
   M3TokenRegexContract PASS M3_TOKEN_REGEX_CONTRACT_PASS checks=197
   com.fasterxml.jackson.annotation.jar entries 91 FastDoubleParser classes 0 notice files []
-  com.fasterxml.jackson.core.jar entries 210 FastDoubleParser classes 0 notice files ['META-INF/FastDoubleParser-LICENSE', 'META-INF/FastDoubleParser-NOTICE']
+  com.fasterxml.jackson.core.jar entries 209 FastDoubleParser classes 0 notice files ['META-INF/FastDoubleParser-LICENSE', 'META-INF/FastDoubleParser-NOTICE']
   com.fasterxml.jackson.databind.jar entries 848 FastDoubleParser classes 0 notice files []
   jdk.m3.jackson.jar entries 47 FastDoubleParser classes 0 notice files []

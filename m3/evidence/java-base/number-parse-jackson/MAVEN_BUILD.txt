@@ -1,9 +1,9 @@
 mvn jackson-core 2.15.3 rc=0 1
-{"artifact_sha256": "cceda5365fa0e073abd9be33f20108f80c8d6dadb4228dfe11d32931ee7ae4fc", "exact_files": 147, "exact_production_files": 129, "m3_overlays": 3, "revision": "2.15.3"}
-  entries 185 parser classes 0
+{"artifact_sha256": "719e49232ed2a5745f9b4d6e716cbb74d678f4652c5a880d65a21b50ac1ba5a2", "exact_files": 150, "exact_production_files": 128, "m3_overlays": 6, "revision": "2.15.3"}
+  entries 184 FastDoubleParser classes 0 schubfach classes ['DoubleToDecimal.class', 'FloatToDecimal.class']
 mvn jackson-core 2.16.1 rc=0 1
-{"artifact_sha256": "fd95e8eac6fcec721e17b1e58f32e15b5acbbbf8281bac121f78d36f0ae4a193", "exact_files": 152, "exact_production_files": 134, "m3_overlays": 3, "revision": "2.16.1"}
-  entries 206 parser classes 0
+{"artifact_sha256": "6fc317f8daf44501efda435834cc95ed9cee4ec8279222f725345b7d24d59b5e", "exact_files": 155, "exact_production_files": 133, "m3_overlays": 6, "revision": "2.16.1"}
+  entries 205 FastDoubleParser classes 0 schubfach classes ['DoubleToDecimal.class', 'FloatToDecimal.class']
 mvn jackson-core 2.19.2 rc=0 1
-{"artifact_sha256": "0165b982b27119e94e362d3fee8a23031e10feccfa2fb3ace96131573b7806a9", "exact_files": 154, "exact_production_files": 136, "m3_overlays": 3, "revision": "2.19.2"}
-  entries 210 parser classes 0
+{"artifact_sha256": "e84b37ca8ec114effce6d28b38e75d64e5e16870dcae51c1e618fc2908f5c573", "exact_files": 157, "exact_production_files": 135, "m3_overlays": 6, "revision": "2.19.2"}
+  entries 209 FastDoubleParser classes 0 schubfach classes ['DoubleToDecimal.class', 'FloatToDecimal.class']

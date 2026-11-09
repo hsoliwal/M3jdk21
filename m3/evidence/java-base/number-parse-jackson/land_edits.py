@@ -13,6 +13,7 @@ import sys
 
 repo = Path(sys.argv[1])
 PACK = "m3/tooling/module-packs/jackson/"
+V1, V2 = "JACKSON_NUMBERS_TO_JDK v1", "JACKSON_NUMBERS_TO_JDK v2"  # a v1 edit that v2 rewrote counts as applied
 
 
 def edit(rel, old, new):
@@ -20,7 +21,7 @@ def edit(rel, old, new):
     text = path.read_bytes().decode("utf-8")
     if text.count(old) == 1:
         text = text.replace(old, new)
-    elif new not in text or (old and old in text and old not in new):
+    elif not (new in text or (V1 in new and V2 in text)) or (old in text and old not in new):
         raise SystemExit(f"{rel}: anchor found {text.count(old)} times")
     path.write_bytes(text.encode("utf-8"))
     print("EDIT", rel)
@@ -102,6 +103,28 @@ edit(PACK + "FOSS_REUSE_DECISION.tsv",
      "NUMBER_PARSE_ABSORB v1 and v2\tREUSE_JDK\tJackson core calls Double.parseDouble, Float.parseFloat, "
      "new BigDecimal and new BigInteger (recorded M3 overlay JACKSON_NUMBERS_TO_JDK v1, "
      "m3/tooling/jdk-superset/number-parse); no parser copy is built or shaded")
+
+# v2 (writing): Jackson core also renders doubles and floats with java.base.
+edit(PACK + "README.md",
+     "`JACKSON_NUMBERS_TO_JDK v1` (`m3/tooling/jdk-superset/number-parse`): its\n"
+     "`NumberInput`, `BigDecimalParser` and `BigIntegerParser` call `Double.parseDouble`,\n"
+     "`Float.parseFloat`, `new BigDecimal` and `new BigInteger`, so Jackson and the JDK\n"
+     "use one number parser, the one in java.base.\n",
+     "`JACKSON_NUMBERS_TO_JDK v2` (`m3/tooling/jdk-superset/number-parse`): its\n"
+     "`NumberInput`, `BigDecimalParser` and `BigIntegerParser` call `Double.parseDouble`,\n"
+     "`Float.parseFloat`, `new BigDecimal` and `new BigInteger`, and `NumberOutput` calls\n"
+     "`Double.toString` and `Float.toString`, so Jackson and the JDK use one number parser\n"
+     "and one Schubfach, the ones in java.base.\n")
+edit(PACK + "legal/NOTICE.txt",
+     "Jackson core parses numbers with java.base (Double.parseDouble, Float.parseFloat,\n"
+     "new BigDecimal, new BigInteger) through one recorded M3 source overlay,\n"
+     "JACKSON_NUMBERS_TO_JDK v1; it no longer bundles Werner Randelshofer's\n",
+     "Jackson core parses and writes numbers with java.base (Double.parseDouble,\n"
+     "Float.parseFloat, new BigDecimal, new BigInteger, Double.toString, Float.toString)\n"
+     "through one recorded M3 source overlay, JACKSON_NUMBERS_TO_JDK v2; its io.schubfach\n"
+     "classes delegate to java.base, and it no longer bundles Werner Randelshofer's\n")
+edit(PACK + "INTEGRATION.md", "numbers parse in java.base (JACKSON_NUMBERS_TO_JDK v1) |",
+     "numbers parse and render in java.base (JACKSON_NUMBERS_TO_JDK v2) |")
 
 provenance_path = repo / PACK / "PROVENANCE.json"
 provenance = json.loads(provenance_path.read_bytes())

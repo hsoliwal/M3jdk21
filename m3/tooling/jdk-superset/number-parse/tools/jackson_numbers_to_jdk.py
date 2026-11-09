@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
-"""JACKSON_NUMBERS_TO_JDK v1: Jackson core parses numbers with java.base, the JDK's one number parser.
+"""JACKSON_NUMBERS_TO_JDK v2: Jackson core parses and writes numbers with java.base, the JDK's one implementation.
 
 M3JDK absorbs FastDoubleParser 1.0.90 into java.base (jdk.internal.math.M3*): Double.parseDouble and
 Float.parseFloat since NUMBER_PARSE_ABSORB v1, new BigDecimal and new BigInteger since v2. Jackson core called
@@ -13,7 +13,13 @@ vendored jackson-core, so the four vendored FastDoubleParser copies have no cons
   non-fast branch uses.
 - BigDecimalParser: JavaBigDecimalParser.parseBigDecimal(...) -> new BigDecimal(...).
 - BigIntegerParser: JavaBigIntegerParser.parseBigInteger(...) -> new BigInteger(...).
-- The FastDoubleParser imports go; the first becomes a //FLLDCIM anchor. Nothing else changes.
+- The FastDoubleParser imports go; the first becomes a //FLLDCIM anchor.
+v2 (writing): JDK 19+ renders doubles and floats with Raffaello Giulietti's Schubfach (jdk.internal.math.DoubleToDecimal,
+FloatToDecimal); jackson-core carries a copy of the same algorithm (io.schubfach) whose output equals Double.toString and
+Float.toString on JDK 21 (m3/evidence/java-base/number-parse-jackson/SCHUBFACH_VS_JDK.txt).
+- NumberOutput: DoubleToDecimal.toString(v) -> Double.toString(v), FloatToDecimal.toString(v) -> Float.toString(v).
+- io.schubfach.DoubleToDecimal and FloatToDecimal keep their public members and delegate to java.base; the
+  package-private MathUtils tables go (retained under upstream-excluded/). Nothing else changes.
 
 Custody is the donors' existing overlay mechanism (FDP_DELEGATES_TO_JDK v1 introduced it): each upstream file
 stays byte-identical under upstream-excluded/ (kind unmodified-production-superseded-by-m3-overlay), the overlay
@@ -42,17 +48,22 @@ sys.dont_write_bytecode = True
 
 REPO = Path(__file__).resolve().parents[5]
 TOOL_REL = "m3/tooling/jdk-superset/number-parse/tools/jackson_numbers_to_jdk.py"
-RECIPE_ID = "JACKSON_NUMBERS_TO_JDK v1"
+RECIPE_ID = "JACKSON_NUMBERS_TO_JDK v2"
 VENDOR = "m3/vendor/third_party"
 DONORS = ("jackson-core-2.15.3", "jackson-core-2.16.1", "jackson-core-2.19.2")
 PACK_DONOR = "jackson-core-2.19.2"
 RELOCATED = "m3/vendor/third_party-m3/relocated/jackson-core-2.19.2"
 RELOCATIONS = (("com.fasterxml.jackson.core", "jdk.m3.lib.core"),
                ("ch.randelshofer.fastdoubleparser", "jdk.m3.lib.fastdoubleparser"))
-RELOCATED_PACKAGE = "jdk/m3/lib/core/io"
+RELOCATED_PATH = ("com/fasterxml/jackson/core", "jdk/m3/lib/core")
 RELOCATED_REQUIRES = "    requires jdk.m3.fastdoubleparser;\n"
 PACKAGE_PATH = "com/fasterxml/jackson/core/io"
-TARGETS = ("NumberInput", "BigDecimalParser", "BigIntegerParser")
+SCHUBFACH_PATH = "com/fasterxml/jackson/core/io/schubfach"
+PARSE_TARGETS = ("NumberInput", "BigDecimalParser", "BigIntegerParser")
+FACADES = {"DoubleToDecimal": ("double", "Double"), "FloatToDecimal": ("float", "Float")}
+REMOVED = ("MathUtils",)
+TARGETS = (tuple(f"{PACKAGE_PATH}/{name}.java" for name in PARSE_TARGETS + ("NumberOutput",))
+           + tuple(f"{SCHUBFACH_PATH}/{name}.java" for name in tuple(FACADES) + REMOVED))
 SOURCE_ROOT = "src/main/java"
 RETAINED_ROOT = "upstream-excluded"
 OVERLAY_KIND = "m3-overlay-source"
@@ -66,7 +77,43 @@ BASE_REVISION = "5c47b0edf08d7ecd12e5c2afecc5530ac6930209"
 ENCODING = "utf-8"
 EXIT_DIFFERS = 1
 
-ANCHOR = "//FLLDCIM: M3 - " + RECIPE_ID + ": numbers parse in java.base, the JDK's one number parser\n"
+# CNPCDA: anchors are never edited, so the v1 overlays keep their v1 anchor.
+ANCHOR = "//FLLDCIM: M3 - JACKSON_NUMBERS_TO_JDK v1: numbers parse in java.base, the JDK's one number parser\n"
+ANCHOR_WRITE = ("//FLLDCIM: M3 - JACKSON_NUMBERS_TO_JDK v2: doubles and floats render in java.base, the JDK's one "
+                "Schubfach\n")
+WRITE_IMPORT_RE = re.compile(r"^import [\w.]+\.schubfach\.(?:Double|Float)ToDecimal;\n", re.MULTILINE)
+WRITE_CALLS = ((re.compile(r"\bDoubleToDecimal\.toString\("), "Double.toString("),
+               (re.compile(r"\bFloatToDecimal\.toString\("), "Float.toString("))
+FACADE_HEADER_RE = re.compile(r"\A.*?^package [\w.]+;\n", re.MULTILINE | re.DOTALL)
+FACADE_SIZES_RE = re.compile(r"static final int H = (\d+);.*?public final int MAX_CHARS = H \+ (\d+);", re.DOTALL)
+FACADE = ("\n" + ANCHOR_WRITE + "\n"
+          "/**\n"
+          " * This class exposes a method to render a {{@code {prim}}} as a string.\n"
+          " *\n"
+          " * <p>M3JDK overlay JACKSON_NUMBERS_TO_JDK v2: {{@link #toString({prim})}} returns\n"
+          " * {{@link {box}#toString({prim})}}, which runs the same Schubfach algorithm in java.base. The copied\n"
+          " * algorithm is retained under upstream-excluded/.\n"
+          " *\n"
+          " * @author Raffaello Giulietti\n"
+          " */\n"
+          "final public class {name} {{\n"
+          "\n"
+          "    /** The longest string {{@link #toString({prim})}} returns (upstream: H + {extra}, H = {digits}). */\n"
+          "    public final int MAX_CHARS = {max_chars};\n"
+          "\n"
+          "    private {name}() {{\n"
+          "    }}\n"
+          "\n"
+          "    /**\n"
+          "     * Returns the string rendering of a {{@code {prim}}}: {{@link {box}#toString({prim})}}.\n"
+          "     *\n"
+          "     * @param v the {{@code {prim}}} to be rendered.\n"
+          "     * @return a string rendering of the argument.\n"
+          "     */\n"
+          "    public static String toString({prim} v) {{\n"
+          "        return {box}.toString(v);\n"
+          "    }}\n"
+          "}}\n")
 IMPORT_RE = re.compile(r"^import [\w.]+\.fastdoubleparser\.Java(?:Double|Float|BigDecimal|BigInteger)Parser;\n",
                        re.MULTILINE)
 CALLS = (
@@ -87,20 +134,36 @@ POM_EDITS = (
     re.compile(r"                <relocation>\n                  <pattern>[^<]*ch/randelshofer/fastdoubleparser"
                r"</pattern>\n                  <shadedPattern>[^<]*</shadedPattern>\n                </relocation>\n"),
 )
-POM_TEXT = (("- unchanged upstream source build for M3jdk21</name>",
-             "- upstream source build for M3jdk21, numbers parsed by java.base</name>"),
-            ("; no upstream implementation changes. See PROVENANCE.json.</description>",
-             "; one M3 overlay, " + RECIPE_ID + ": NumberInput, BigDecimalParser and BigIntegerParser call java.base "
-             "instead of the shaded FastDoubleParser. See PROVENANCE.json and OVERLAY_SOURCES.json.</description>"))
+POM_NAME = "- upstream source build for M3jdk21, numbers parsed and written by java.base</name>"
+POM_DESCRIPTION = ("; one M3 overlay, " + RECIPE_ID + ": NumberInput, BigDecimalParser, BigIntegerParser and NumberOutput "
+                   "call java.base instead of the shaded FastDoubleParser and the copied Schubfach; io.schubfach "
+                   "DoubleToDecimal and FloatToDecimal delegate to java.base. See PROVENANCE.json and "
+                   "OVERLAY_SOURCES.json.</description>")
+POM_TEXT = (("- unchanged upstream source build for M3jdk21</name>", POM_NAME),
+            ("- upstream source build for M3jdk21, numbers parsed by java.base</name>", POM_NAME),
+            ("; no upstream implementation changes. See PROVENANCE.json.</description>", POM_DESCRIPTION),
+            ("; one M3 overlay, JACKSON_NUMBERS_TO_JDK v1: NumberInput, BigDecimalParser and BigIntegerParser call "
+             "java.base instead of the shaded FastDoubleParser. See PROVENANCE.json and OVERLAY_SOURCES.json."
+             "</description>", POM_DESCRIPTION))
 README_OLD = "This directory compiles the unchanged {donor} sources from the published sources jar.\n"
+README_V1 = ("This directory compiles the {donor} sources from the published sources jar with one M3 overlay,\n"
+             "`JACKSON_NUMBERS_TO_JDK v1` (`" + TOOL_REL + "`): `NumberInput`, `BigDecimalParser` and\n"
+             "`BigIntegerParser` call `Double.parseDouble`, `Float.parseFloat`, `new BigDecimal` and `new BigInteger`\n"
+             "in java.base, the JDK's one number parser, instead of the shaded FastDoubleParser. The upstream files\n"
+             "stay byte-identical under `upstream-excluded/`; `verify_source.py` re-derives each overlay from them.\n")
 README_NEW = ("This directory compiles the {donor} sources from the published sources jar with one M3 overlay,\n"
               "`" + RECIPE_ID + "` (`" + TOOL_REL + "`): `NumberInput`, `BigDecimalParser` and\n"
-              "`BigIntegerParser` call `Double.parseDouble`, `Float.parseFloat`, `new BigDecimal` and `new BigInteger`\n"
-              "in java.base, the JDK's one number parser, instead of the shaded FastDoubleParser. The upstream files\n"
-              "stay byte-identical under `upstream-excluded/`; `verify_source.py` re-derives each overlay from them.\n")
+              "`BigIntegerParser` call `Double.parseDouble`, `Float.parseFloat`, `new BigDecimal` and `new BigInteger`,\n"
+              "and `NumberOutput` calls `Double.toString` and `Float.toString`: java.base parses and renders the numbers,\n"
+              "not the shaded FastDoubleParser or the copied Schubfach. `io.schubfach.DoubleToDecimal` and\n"
+              "`FloatToDecimal` keep their public members and delegate to java.base; `io.schubfach.MathUtils` is gone.\n"
+              "The upstream files stay byte-identical under `upstream-excluded/`; `verify_source.py` re-derives each\n"
+              "overlay from them.\n")
 MODIFICATIONS = ("M3 overlays " + RECIPE_ID + ": NumberInput, BigDecimalParser and BigIntegerParser call java.base "
                  "(Double.parseDouble, Float.parseFloat, new BigDecimal, new BigInteger) instead of the shaded "
-                 "FastDoubleParser, which the pom no longer depends on (recipe " + TOOL_REL + "; the unchanged "
+                 "FastDoubleParser, which the pom no longer depends on; NumberOutput calls Double.toString and "
+                 "Float.toString, io.schubfach.DoubleToDecimal and FloatToDecimal delegate to them, and "
+                 "io.schubfach.MathUtils is removed (recipe " + TOOL_REL + "; the unchanged "
                  "upstream files are retained under upstream-excluded/). No other upstream source changes; Maven "
                  "descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.")
 
@@ -191,7 +254,14 @@ def sha256(data: bytes) -> str:
 
 
 def overlay(original: bytes, upstream: str) -> bytes:
-    """The recipe: pinned upstream bytes of one jackson-core number parser -> its M3 overlay bytes."""
+    """The recipe: pinned upstream bytes of one jackson-core number class -> its M3 overlay bytes."""
+    name = upstream.rsplit("/", 1)[-1].removesuffix(".java")
+    if name == "NumberOutput":
+        return overlay_writer(original.decode(ENCODING), upstream).encode(ENCODING)
+    if name in FACADES:
+        return facade(original.decode(ENCODING), name).encode(ENCODING)
+    if name not in PARSE_TARGETS:
+        raise ValueError(upstream + ": not a recipe target")
     text = original.decode(ENCODING)
     imports = IMPORT_RE.findall(text)
     if not imports:
@@ -207,6 +277,30 @@ def overlay(original: bytes, upstream: str) -> bytes:
         raise ValueError(f"{upstream}: {calls} calls retargeted, FastDoubleParser use left: "
                          f"{LEFTOVER_RE.findall(text)}")
     return text.encode(ENCODING)
+
+
+def overlay_writer(text: str, upstream: str) -> str:
+    imports = WRITE_IMPORT_RE.findall(text)
+    if len(imports) != 2:
+        raise ValueError(upstream + f": {len(imports)} Schubfach imports, expected 2")
+    text = text.replace(imports[0], ANCHOR_WRITE, 1).replace(imports[1], "", 1)
+    for pattern, replacement in WRITE_CALLS:
+        text, count = pattern.subn(replacement, text)
+        if count != 1:
+            raise ValueError(f"{upstream}: {pattern.pattern} matched {count} times, expected 1")
+    if "schubfach." in text or "ToDecimal." in text:
+        raise ValueError(upstream + ": Schubfach use left")
+    return text
+
+
+def facade(text: str, name: str) -> str:
+    header, sizes = FACADE_HEADER_RE.match(text), FACADE_SIZES_RE.search(text)
+    if header is None or sizes is None or "public static String toString(" not in text:
+        raise ValueError(name + ": header, H/MAX_CHARS or toString not found")
+    prim, box = FACADES[name]
+    digits, extra = int(sizes.group(1)), int(sizes.group(2))
+    return header.group(0) + FACADE.format(name=name, prim=prim, box=box, digits=digits, extra=extra,
+                                           max_chars=digits + extra)
 
 
 def relocate(text: str) -> str:
@@ -227,15 +321,16 @@ def manifest_pins(donor: Path) -> dict[str, str]:
 def plan_donor(name: str) -> list[dict]:
     donor_rel = f"{VENDOR}/{name}"
     pins, tool_sha, plans = manifest_pins(REPO / donor_rel), sha256((REPO / TOOL_REL).read_bytes()), []
-    for target in TARGETS:
-        upstream = f"{PACKAGE_PATH}/{target}.java"
+    for upstream in TARGETS:
         source_rel = f"{donor_rel}/{SOURCE_ROOT}/{upstream}"
         retained_rel = f"{donor_rel}/{RETAINED_ROOT}/{upstream}"
         holder = REPO / (retained_rel if (REPO / retained_rel).is_file() else source_rel)
         original = holder.read_bytes()
         if sha256(original) != pins[upstream]:
             raise ValueError("Original is not the pinned upstream byte sequence: " + str(holder))
-        plans.append({"upstream": upstream, "original": original, "result": overlay(original, upstream),
+        removed = upstream.rsplit("/", 1)[-1].removesuffix(".java") in REMOVED
+        plans.append({"upstream": upstream, "original": original,
+                      "result": None if removed else overlay(original, upstream),
                       "source_rel": source_rel, "retained_rel": retained_rel, "tool_sha": tool_sha})
     return plans
 
@@ -249,14 +344,15 @@ def overlay_entry(plan: dict) -> dict:
 def desired_records(name: str, plans: list[dict]) -> tuple[bytes, bytes]:
     donor_rel = f"{VENDOR}/{name}"
     records = []
-    for plan in plans:
+    for plan in (plan for plan in plans if plan["result"] is not None):
         record = overlay_entry(plan)
         record.pop("kind")
         records.append(record)
     record_bytes = dump_json({"donor": name, "m3_overlays": records, "overlay": RECIPE_ID, "recipe": TOOL_REL})
     provenance = json.loads((REPO / donor_rel / "PROVENANCE.json").read_text(encoding=ENCODING))
-    by_source = {plan["source_rel"]: plan for plan in plans}
-    ours = {plan["retained_rel"] for plan in plans} | {f"{donor_rel}/{RECORD_FILE}"}
+    by_source = {plan["source_rel"]: plan for plan in plans if plan["result"] is not None}
+    ours = ({plan["retained_rel"] for plan in plans} | {f"{donor_rel}/{RECORD_FILE}"}
+            | {plan["source_rel"] for plan in plans if plan["result"] is None})
     files = [overlay_entry(by_source[item["repository"]]) if item["repository"] in by_source else item
              for item in provenance["files"] if item["repository"] not in ours]
     files.extend({"kind": RETAINED_KIND, "repository": plan["retained_rel"], "sha256": sha256(plan["original"]),
@@ -281,7 +377,8 @@ def edit_pom(text: str) -> str:
 
 def edit_readme(text: str, name: str) -> str:
     name = " ".join(name.rsplit("-", 1))  # the README spells the donor "jackson-core 2.19.2"
-    text = text.replace(README_OLD.format(donor=name), README_NEW.format(donor=name))
+    for old in (README_OLD, README_V1):
+        text = text.replace(old.format(donor=name), README_NEW.format(donor=name))
     if README_NEW.format(donor=name) not in text:
         raise ValueError(name + " README: anchor sentence not found")
     return text
@@ -327,6 +424,14 @@ def reconcile(path: Path, data: bytes, check: bool, changed: list[str]) -> None:
         path.write_bytes(data)
 
 
+def reconcile_absent(path: Path, check: bool, changed: list[str]) -> None:
+    if not path.exists():
+        return
+    changed.append(path.relative_to(REPO).as_posix())
+    if not check:
+        path.unlink()
+
+
 def text_of(path: Path) -> str:
     return path.read_bytes().decode(ENCODING)
 
@@ -342,7 +447,10 @@ def main(argv: list[str] | None = None) -> int:
         plans = plan_donor(name)
         for plan in plans:
             reconcile(REPO / plan["retained_rel"], plan["original"], args.check, changed)
-            reconcile(REPO / plan["source_rel"], plan["result"], args.check, changed)
+            if plan["result"] is None:
+                reconcile_absent(REPO / plan["source_rel"], args.check, changed)
+            else:
+                reconcile(REPO / plan["source_rel"], plan["result"], args.check, changed)
         record_bytes, provenance_bytes = desired_records(name, plans)
         reconcile(donor / RECORD_FILE, record_bytes, args.check, changed)
         reconcile(donor / "PROVENANCE.json", provenance_bytes, args.check, changed)
@@ -355,8 +463,11 @@ def main(argv: list[str] | None = None) -> int:
             pack_plans = plans
     relocated = REPO / RELOCATED
     for plan in pack_plans:
-        target = relocated / SOURCE_ROOT / RELOCATED_PACKAGE / plan["upstream"].rsplit("/", 1)[-1]
-        reconcile(target, relocate(plan["result"].decode(ENCODING)).encode(ENCODING), args.check, changed)
+        target = relocated / SOURCE_ROOT / plan["upstream"].replace(*RELOCATED_PATH)
+        if plan["result"] is None:
+            reconcile_absent(target, args.check, changed)
+        else:
+            reconcile(target, relocate(plan["result"].decode(ENCODING)).encode(ENCODING), args.check, changed)
     module_info = relocated / SOURCE_ROOT / "module-info.java"
     reconcile(module_info, text_of(module_info).replace(RELOCATED_REQUIRES, "").encode(ENCODING), args.check, changed)
     for record in ("PROVENANCE.json", "THIRD_PARTY_NOTICES.md"):

@@ -13,13 +13,13 @@
     },
     "jackson-core-2.19.2": {
       "coordinate": "com.fasterxml.jackson.core:jackson-core:2.19.2-m3-source-1",
-      "file_count": 160,
+      "file_count": 163,
       "license": "The Apache Software License, Version 2.0",
       "module": "com.fasterxml.jackson.core",
       "path": "m3/vendor/third_party/jackson-core-2.19.2",
-      "provenance_sha256": "5baaeb24866b8ee2fbcb1bea2952ad9a178b55613f3b03eb072499adf062244c",
+      "provenance_sha256": "2bc138e901f09ee340f3d0b617eebc121613e7cc4bd7760ef9ce81c3743e9050",
       "sources_jar_sha256": "e0f42e8ca172a74802f06683e14de59f5fc74d8d8f782ba97269adc5782527a3",
-      "tree_sha256": "fbeecde14e299c7806a06e08c4e239db792dbb720a096ef5c351139441f0110d"
+      "tree_sha256": "113a3cbc256b2ba9df36fcb71727f51c8d22fcf8a792dadd5b787944afa74fc3"
     },
     "jackson-databind-2.19.2": {
       "coordinate": "com.fasterxml.jackson.core:jackson-databind:2.19.2-m3-source-1",

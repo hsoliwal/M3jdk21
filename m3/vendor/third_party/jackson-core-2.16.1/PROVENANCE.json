@@ -406,9 +406,9 @@
       "base_repository": "m3/vendor/third_party/jackson-core-2.16.1/upstream-excluded/com/fasterxml/jackson/core/io/BigDecimalParser.java",
       "base_sha256": "25ec6c957e076d7ddf700aa97593528f4773d1fc84f3ba2e5a8c1fcb1b1fa590",
       "kind": "m3-overlay-source",
-      "overlay": "JACKSON_NUMBERS_TO_JDK v1",
+      "overlay": "JACKSON_NUMBERS_TO_JDK v2",
       "recipe": "m3/tooling/jdk-superset/number-parse/tools/jackson_numbers_to_jdk.py",
-      "recipe_sha256": "2c3e65e69b0eb6fe9bc6389be22eee01268c546034cef56b23efef2f9b178995",
+      "recipe_sha256": "7b9f0c8c0c703b69125db6cf53b77b235372746551ede7eb42402b215180955c",
       "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/io/BigDecimalParser.java",
       "sha256": "287875147952bca9f932dcf56a4278613eb70c85025708db24d36bb742e706bd",
       "upstream": "com/fasterxml/jackson/core/io/BigDecimalParser.java"
@@ -417,9 +417,9 @@
       "base_repository": "m3/vendor/third_party/jackson-core-2.16.1/upstream-excluded/com/fasterxml/jackson/core/io/BigIntegerParser.java",
       "base_sha256": "990983cd408f48d0f2d2692907997a0aa621cc95c8cd41e6547096a09bc24cb2",
       "kind": "m3-overlay-source",
-      "overlay": "JACKSON_NUMBERS_TO_JDK v1",
+      "overlay": "JACKSON_NUMBERS_TO_JDK v2",
       "recipe": "m3/tooling/jdk-superset/number-parse/tools/jackson_numbers_to_jdk.py",
-      "recipe_sha256": "2c3e65e69b0eb6fe9bc6389be22eee01268c546034cef56b23efef2f9b178995",
+      "recipe_sha256": "7b9f0c8c0c703b69125db6cf53b77b235372746551ede7eb42402b215180955c",
       "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/io/BigIntegerParser.java",
       "sha256": "fa0c5b9067c09dce770c28524f7836c6b23783692d73844c319268b8fec89948",
       "upstream": "com/fasterxml/jackson/core/io/BigIntegerParser.java"
@@ -482,17 +482,22 @@
       "base_repository": "m3/vendor/third_party/jackson-core-2.16.1/upstream-excluded/com/fasterxml/jackson/core/io/NumberInput.java",
       "base_sha256": "668eddecbb6796a221a3140e5215d383dc64af889a999e8719c4835eec9996aa",
       "kind": "m3-overlay-source",
-      "overlay": "JACKSON_NUMBERS_TO_JDK v1",
+      "overlay": "JACKSON_NUMBERS_TO_JDK v2",
       "recipe": "m3/tooling/jdk-superset/number-parse/tools/jackson_numbers_to_jdk.py",
-      "recipe_sha256": "2c3e65e69b0eb6fe9bc6389be22eee01268c546034cef56b23efef2f9b178995",
+      "recipe_sha256": "7b9f0c8c0c703b69125db6cf53b77b235372746551ede7eb42402b215180955c",
       "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/io/NumberInput.java",
       "sha256": "819d19300f034cd299b89057532cdc361babc145cc6b63c2874f28b9243f5251",
       "upstream": "com/fasterxml/jackson/core/io/NumberInput.java"
     },
     {
-      "kind": "unmodified-production",
+      "base_repository": "m3/vendor/third_party/jackson-core-2.16.1/upstream-excluded/com/fasterxml/jackson/core/io/NumberOutput.java",
+      "base_sha256": "dda87a19daece9a49a2548f953ef0b122880e784aef0fa26556669e003919739",
+      "kind": "m3-overlay-source",
+      "overlay": "JACKSON_NUMBERS_TO_JDK v2",
+      "recipe": "m3/tooling/jdk-superset/number-parse/tools/jackson_numbers_to_jdk.py",
+      "recipe_sha256": "7b9f0c8c0c703b69125db6cf53b77b235372746551ede7eb42402b215180955c",
       "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/io/NumberOutput.java",
-      "sha256": "dda87a19daece9a49a2548f953ef0b122880e784aef0fa26556669e003919739",
+      "sha256": "6655fb9acfe2d806fa9db39303aa11e231e5ae8579e663e8cc3bae409b6c4dba",
       "upstream": "com/fasterxml/jackson/core/io/NumberOutput.java"
     },
     {
@@ -526,22 +531,26 @@
       "upstream": "com/fasterxml/jackson/core/io/UTF8Writer.java"
     },
     {
-      "kind": "unmodified-production",
+      "base_repository": "m3/vendor/third_party/jackson-core-2.16.1/upstream-excluded/com/fasterxml/jackson/core/io/schubfach/DoubleToDecimal.java",
+      "base_sha256": "51cda78a6fee54cdfcd728f65b39e7f03ead53bd9731b5639abfe0d16a57a439",
+      "kind": "m3-overlay-source",
+      "overlay": "JACKSON_NUMBERS_TO_JDK v2",
+      "recipe": "m3/tooling/jdk-superset/number-parse/tools/jackson_numbers_to_jdk.py",
+      "recipe_sha256": "7b9f0c8c0c703b69125db6cf53b77b235372746551ede7eb42402b215180955c",
       "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/io/schubfach/DoubleToDecimal.java",
-      "sha256": "51cda78a6fee54cdfcd728f65b39e7f03ead53bd9731b5639abfe0d16a57a439",
+      "sha256": "4c3d685cc5c81953705c80e2fd4b75b8bd09ea01e2b6396404006de828a82cd6",
       "upstream": "com/fasterxml/jackson/core/io/schubfach/DoubleToDecimal.java"
     },
     {
-      "kind": "unmodified-production",
+      "base_repository": "m3/vendor/third_party/jackson-core-2.16.1/upstream-excluded/com/fasterxml/jackson/core/io/schubfach/FloatToDecimal.java",
+      "base_sha256": "0370476f767f4ee02aabbde6edf733d92c56d2e6daa05734789474a8be3e1f84",
+      "kind": "m3-overlay-source",
+      "overlay": "JACKSON_NUMBERS_TO_JDK v2",
+      "recipe": "m3/tooling/jdk-superset/number-parse/tools/jackson_numbers_to_jdk.py",
+      "recipe_sha256": "7b9f0c8c0c703b69125db6cf53b77b235372746551ede7eb42402b215180955c",
       "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/io/schubfach/FloatToDecimal.java",
-      "sha256": "0370476f767f4ee02aabbde6edf733d92c56d2e6daa05734789474a8be3e1f84",
+      "sha256": "26cfa1293a08f29608d4d9e0fc9b33667f9abd6be174ef0be25d85d1544f4912",
       "upstream": "com/fasterxml/jackson/core/io/schubfach/FloatToDecimal.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/io/schubfach/MathUtils.java",
-      "sha256": "97efad4fcd6967958adaa19bce3afe61fece1063178a04622b2e17bec36526ae",
-      "upstream": "com/fasterxml/jackson/core/io/schubfach/MathUtils.java"
     },
     {
       "kind": "unmodified-production",
@@ -939,9 +948,33 @@
       "upstream": "com/fasterxml/jackson/core/io/BigIntegerParser.java"
     },
     {
+      "kind": "unmodified-production-superseded-by-m3-overlay",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/upstream-excluded/com/fasterxml/jackson/core/io/NumberOutput.java",
+      "sha256": "dda87a19daece9a49a2548f953ef0b122880e784aef0fa26556669e003919739",
+      "upstream": "com/fasterxml/jackson/core/io/NumberOutput.java"
+    },
+    {
+      "kind": "unmodified-production-superseded-by-m3-overlay",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/upstream-excluded/com/fasterxml/jackson/core/io/schubfach/DoubleToDecimal.java",
+      "sha256": "51cda78a6fee54cdfcd728f65b39e7f03ead53bd9731b5639abfe0d16a57a439",
+      "upstream": "com/fasterxml/jackson/core/io/schubfach/DoubleToDecimal.java"
+    },
+    {
+      "kind": "unmodified-production-superseded-by-m3-overlay",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/upstream-excluded/com/fasterxml/jackson/core/io/schubfach/FloatToDecimal.java",
+      "sha256": "0370476f767f4ee02aabbde6edf733d92c56d2e6daa05734789474a8be3e1f84",
+      "upstream": "com/fasterxml/jackson/core/io/schubfach/FloatToDecimal.java"
+    },
+    {
+      "kind": "unmodified-production-superseded-by-m3-overlay",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/upstream-excluded/com/fasterxml/jackson/core/io/schubfach/MathUtils.java",
+      "sha256": "97efad4fcd6967958adaa19bce3afe61fece1063178a04622b2e17bec36526ae",
+      "upstream": "com/fasterxml/jackson/core/io/schubfach/MathUtils.java"
+    },
+    {
       "kind": "m3-overlay-record",
       "repository": "m3/vendor/third_party/jackson-core-2.16.1/OVERLAY_SOURCES.json",
-      "sha256": "4ceadb35814e075b0c7529499ed18f73fe5819335f1ebfbf23cd72cb010af4a4",
+      "sha256": "e65777917a39c7f12253d9c8d151e57f36c87bfc8a7e15e600313918070d7347",
       "upstream": "m3/tooling/jdk-superset/number-parse/tools/jackson_numbers_to_jdk.py"
     }
   ],
@@ -949,7 +982,7 @@
   "kind": "MODULE",
   "license": "The Apache Software License, Version 2.0",
   "license_file": "LICENSE",
-  "modifications": "M3 overlays JACKSON_NUMBERS_TO_JDK v1: NumberInput, BigDecimalParser and BigIntegerParser call java.base (Double.parseDouble, Float.parseFloat, new BigDecimal, new BigInteger) instead of the shaded FastDoubleParser, which the pom no longer depends on (recipe m3/tooling/jdk-superset/number-parse/tools/jackson_numbers_to_jdk.py; the unchanged upstream files are retained under upstream-excluded/). No other upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "modifications": "M3 overlays JACKSON_NUMBERS_TO_JDK v2: NumberInput, BigDecimalParser and BigIntegerParser call java.base (Double.parseDouble, Float.parseFloat, new BigDecimal, new BigInteger) instead of the shaded FastDoubleParser, which the pom no longer depends on; NumberOutput calls Double.toString and Float.toString, io.schubfach.DoubleToDecimal and FloatToDecimal delegate to them, and io.schubfach.MathUtils is removed (recipe m3/tooling/jdk-superset/number-parse/tools/jackson_numbers_to_jdk.py; the unchanged upstream files are retained under upstream-excluded/). No other upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
   "module_descriptors": [],
   "multi_release_overlays": {
     "not_reproduced": [],

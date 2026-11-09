@@ -1,7 +1,6 @@
 package jdk.m3.lib.core.io;
 
-import jdk.m3.lib.core.io.schubfach.DoubleToDecimal;
-import jdk.m3.lib.core.io.schubfach.FloatToDecimal;
+//FLLDCIM: M3 - JACKSON_NUMBERS_TO_JDK v2: doubles and floats render in java.base, the JDK's one Schubfach
 
 public final class NumberOutput
 {
@@ -301,7 +300,7 @@ public final class NumberOutput
      * @since 2.14
      */
     public static String toString(final double v, final boolean useFastWriter) {
-        return useFastWriter ? DoubleToDecimal.toString(v) : Double.toString(v);
+        return useFastWriter ? Double.toString(v) : Double.toString(v);
     }
 
     /**
@@ -320,7 +319,7 @@ public final class NumberOutput
      * @since 2.14
      */
     public static String toString(final float v, final boolean useFastWriter) {
-        return useFastWriter ? FloatToDecimal.toString(v) : Float.toString(v);
+        return useFastWriter ? Float.toString(v) : Float.toString(v);
     }
 
     /*
