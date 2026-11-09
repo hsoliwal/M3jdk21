@@ -29,6 +29,8 @@
 
 package java.math;
 
+import jdk.internal.math.M3BigNumbers;
+
 import static java.math.BigInteger.LONG_MASK;
 import java.io.IOException;
 import java.io.InvalidObjectException;
@@ -519,6 +521,25 @@ public class BigDecimal extends Number implements Comparable<BigDecimal> {
      * @since  1.5
      */
     public BigDecimal(char[] in, int offset, int len, MathContext mc) {
+        //FLLDCIM: M3 - one fast big-number parser in the JDK (FastDoubleParser 1.0.90 absorbed as jdk.internal.math.M3*,
+        // NUMBER_PARSE_ABSORB v2): a long literal it accepts takes the fast path when the precision is unlimited; every
+        // other literal, and any literal it rejects, the original parser below, so results and exceptions stay the JDK's
+        this(in, offset, len, mc,
+             mc != null && mc.precision == 0 ? M3BigNumbers.bigDecimalOrNull(in, offset, len) : null);
+    }
+
+    /**
+     * The parser of {@link #BigDecimal(char[], int, int, MathContext)}: {@code m3} is the value the JDK's fast
+     * big-number parser accepted, or {@code null} for the original parser below.
+     */
+    private BigDecimal(char[] in, int offset, int len, MathContext mc, BigDecimal m3) {
+        if (m3 != null) {
+            this.intVal = m3.intVal;
+            this.intCompact = m3.intCompact;
+            this.scale = m3.scale;
+            this.precision = m3.precision;
+            return;
+        }
         // protect against huge length, negative values, and integer overflow
         try {
             Objects.checkFromIndexSize(offset, len, in.length);

@@ -29,6 +29,8 @@
 
 package java.math;
 
+import jdk.internal.math.M3BigNumbers;
+
 import java.io.IOException;
 import java.io.InvalidObjectException;
 import java.io.ObjectInputStream;
@@ -488,6 +490,22 @@ public class BigInteger extends Number implements Comparable<BigInteger> {
      *         {@link Character#MAX_RADIX}, inclusive.
      */
     public BigInteger(String val, int radix) {
+        //FLLDCIM: M3 - one fast big-number parser in the JDK (FastDoubleParser 1.0.90 absorbed as jdk.internal.math.M3*,
+        // NUMBER_PARSE_ABSORB v2): a long decimal literal it accepts takes the fast path; every other literal, and any
+        // literal it rejects, the original parser below, so results and exceptions stay exactly the JDK's
+        this(val, radix, radix == M3BigNumbers.DECIMAL_RADIX ? M3BigNumbers.decimalBigIntegerOrNull(val) : null);
+    }
+
+    /**
+     * The parser of {@link #BigInteger(String, int)}: {@code m3} is the value the JDK's fast big-number parser
+     * accepted, or {@code null} for the original parser below.
+     */
+    private BigInteger(String val, int radix, BigInteger m3) {
+        if (m3 != null) {
+            signum = m3.signum;
+            mag = m3.mag;
+            return;
+        }
         int cursor = 0, numDigits;
         final int len = val.length();
 

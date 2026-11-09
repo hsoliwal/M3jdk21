@@ -1,0 +1,23 @@
+accept literals=20000 BigInteger=5994 BigDecimal=6276
+stock
+bench digits=32 BigInteger_ns=725 BigDecimal_ns=690
+bench digits=100 BigInteger_ns=746 BigDecimal_ns=1105
+bench digits=200 BigInteger_ns=974 BigDecimal_ns=2321
+bench digits=399 BigInteger_ns=3768 BigDecimal_ns=3644
+bench digits=400 BigInteger_ns=2740 BigDecimal_ns=3334
+bench digits=700 BigInteger_ns=6230 BigDecimal_ns=7921
+bench digits=1000 BigInteger_ns=12960 BigDecimal_ns=15732
+bench digits=5000 BigInteger_ns=298190 BigDecimal_ns=347578
+bench digits=100000 BigInteger_ns=114502524 BigDecimal_ns=138360070
+bench digits=1000000 BigInteger_ns=11474739125 BigDecimal_ns=13241940054
+m3
+bench digits=32 BigInteger_ns=639 BigDecimal_ns=688
+bench digits=100 BigInteger_ns=494 BigDecimal_ns=1161
+bench digits=200 BigInteger_ns=949 BigDecimal_ns=2283
+bench digits=399 BigInteger_ns=3379 BigDecimal_ns=5002
+bench digits=400 BigInteger_ns=4942 BigDecimal_ns=2835
+bench digits=700 BigInteger_ns=4836 BigDecimal_ns=5090
+bench digits=1000 BigInteger_ns=5807 BigDecimal_ns=7027
+bench digits=5000 BigInteger_ns=43973 BigDecimal_ns=53139
+bench digits=100000 BigInteger_ns=4254630 BigDecimal_ns=4415049
+bench digits=1000000 BigInteger_ns=62533173 BigDecimal_ns=64050568
