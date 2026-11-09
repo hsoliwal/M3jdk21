@@ -24,6 +24,7 @@
     <module>tooling/module-packs</module>
     <module>arrays</module>
     <module>collections</module>
+    <module>paradigm</module>
     <module>intern</module>
     <module>file</module>
     <module>compiler</module>

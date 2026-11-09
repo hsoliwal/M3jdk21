@@ -23,4 +23,6 @@ module jdk.m3.collections {
     exports jdk.m3.collections.range;
     exports jdk.m3.collections.sketch;
     exports jdk.m3.collections.text;
+    // jdk.m3.paradigm (user decision 2026-11-09): absorbed paradigm code logs through PlaceholderLogger
+    exports jdk.internal.m3.collections to jdk.m3.paradigm;
 }

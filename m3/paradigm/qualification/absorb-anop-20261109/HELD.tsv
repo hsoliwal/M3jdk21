@@ -1,0 +1,17 @@
+class	reason
+AnopDecoratorProcessor	annotation processor: names donor annotation FQNs as strings and needs java.compiler (LITERAL_FQN decision pending)
+AnopPolicyProcessor	annotation processor: names donor annotation FQNs as strings and needs java.compiler
+KafkaAdapterProcessor	annotation processor: needs java.compiler
+Data	HUB: same name as an existing M3 owner
+Profile	HUB: same name as an existing M3 owner
+Lazy	sprawl gate SECOND_OWNER: annotation Lazy vs jdk.internal.m3.collections.Lazy (lazy holder, b29); held with its dependency closure until the user decides the name
+HiveMind	sprawl gate SECOND_OWNER: annotation Lazy vs jdk.internal.m3.collections.Lazy (lazy holder, b29); held with its dependency closure until the user decides the name
+ISpec	sprawl gate SECOND_OWNER: annotation Lazy vs jdk.internal.m3.collections.Lazy (lazy holder, b29); held with its dependency closure until the user decides the name
+Broadcast	sprawl gate SECOND_OWNER: annotation Lazy vs jdk.internal.m3.collections.Lazy (lazy holder, b29); held with its dependency closure until the user decides the name
+Colony	sprawl gate SECOND_OWNER: annotation Lazy vs jdk.internal.m3.collections.Lazy (lazy holder, b29); held with its dependency closure until the user decides the name
+Queen	sprawl gate SECOND_OWNER: annotation Lazy vs jdk.internal.m3.collections.Lazy (lazy holder, b29); held with its dependency closure until the user decides the name
+Subscribe	sprawl gate SECOND_OWNER: annotation Lazy vs jdk.internal.m3.collections.Lazy (lazy holder, b29); held with its dependency closure until the user decides the name
+Worker	sprawl gate SECOND_OWNER: annotation Lazy vs jdk.internal.m3.collections.Lazy (lazy holder, b29); held with its dependency closure until the user decides the name
+IFieldSpec	sprawl gate SECOND_OWNER: annotation Lazy vs jdk.internal.m3.collections.Lazy (lazy holder, b29); held with its dependency closure until the user decides the name
+IMethodSpec	sprawl gate SECOND_OWNER: annotation Lazy vs jdk.internal.m3.collections.Lazy (lazy holder, b29); held with its dependency closure until the user decides the name
+IParamSpec	sprawl gate SECOND_OWNER: annotation Lazy vs jdk.internal.m3.collections.Lazy (lazy holder, b29); held with its dependency closure until the user decides the name
