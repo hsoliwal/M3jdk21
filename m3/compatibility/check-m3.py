@@ -13,7 +13,7 @@ def git_blob_sha(data):
     return hashlib.sha1(header+data).hexdigest()
 
 fixture=root/'compatibility'/'m3-reference'
-source_dir=fixture/'src'/'com'/'synexia'/'indexstring'
+source_dir=fixture/'src'/'jdk'/'internal'/'m3'/'indexstring'
 paths=[]
 for name,expected in pins.items():
     path=source_dir/name

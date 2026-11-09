@@ -1,0 +1,14 @@
+# source tree: candidate fe51a3c9ff2f (tree 30651922a8b3), m3/build from bash m3/build.sh
+# java: openjdk version "21" 2023-09-19 LTS
+$ python3 m3/compatibility/check-m3.py   # unchanged blob 8a4e836c8411
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/jdkb/src/m3/compatibility/m3-reference/src/com/synexia/indexstring/FrozenChars.java'
+exit=1
+$ python3 m3/compatibility/check-m3.py   # with this fix (blob 66c2f5dd9601e459d99beee4e713ebb4c63dd387)
+M3_CONTENT_RANGE_PASS checks=786432 allUtf16Units=65536 apiCompatibilityClaim=false
+M3_MAPPED_STORAGE_PASS checks=110 utf16Units=6 byteOrder=BIG_ENDIAN
+exit=0
+$ git hash-object of the referenced fixtures
+791fffa3f9938e5266663c1cb256cc4d00f8c0f5 compatibility/m3-reference/src/jdk/internal/m3/indexstring/FrozenChars.java
+22656cfaa3ccf0c6b214f214c92324d7f3ea55be compatibility/m3-reference/src/jdk/internal/m3/indexstring/FrozenBytes.java
