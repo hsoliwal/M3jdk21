@@ -125,6 +125,21 @@ m3_collections_jni(m3_value_bits REQUIRES M3_C_IEC_559 SOURCES collections/m3_va
   CLASSES jdk.internal.m3.collections.PrimitiveFloat16)
 m3_collections_jni(m3_primitive_order SOURCES collections/primitive_order_jni.c
   CLASSES jdk.m3.collections.PrimitivePartialSort$LongOrder)
+# NATIVE_ABSORB N3 (synexia-common packed C). The host loads one library for the packed owners and the bit lane
+# (ArrayStorageNativeContractTest: m3.native.path), as the donor packaged them; segmented_bit_lane.c is therefore
+# linked here and into m3bitlane.
+m3_collections_jni(m3_collections_packed
+  SOURCES collections/packed_array_bulk.c collections/packed_heap_selection.c collections/packed_sorted_sets.c
+    collections/packed_stable_filter.c collections/packed_long_mask_page.c collections/packed_swiss_probe_jni.c
+    collections/segmented_short_lane.c collections/segmented_bit_lane.c
+  CLASSES jdk.internal.m3.collections.packed.PackedArrayNative jdk.internal.m3.collections.packed.PackedSelectionNative
+    jdk.internal.m3.collections.packed.PackedLongMaskPageNative jdk.internal.m3.collections.packed.PackedSwissNative
+    jdk.internal.m3.collections.range.SegmentedShortLane28 jdk.m3.collections.BitLane28)
+if(MINGW)
+  # MinGW's signbit() macro instantiates its float branch for double arguments (packed_selection_jni.h
+  # ps_compare_Double), which -Wfloat-conversion rejects; glibc and clang use a type-generic builtin.
+  target_compile_options(m3_collections_packed PRIVATE -Wno-float-conversion)
+endif()
 
 # One javac -h run writes the headers of every declaring class; javac compiles their dependencies implicitly.
 list(REMOVE_DUPLICATES M3_JNI_DECLARATIONS)

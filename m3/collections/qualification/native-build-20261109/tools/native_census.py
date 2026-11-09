@@ -2,7 +2,7 @@
 # Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
 """native_census.py <repo root> <out NATIVE_CENSUS.tsv>
 
-NATIVE_CENSUS v1.1 (2026-11-09) is a method-level JNI binding census of src/jdk.m3.collections. For every declared
+NATIVE_CENSUS v1.2 (2026-11-09) is a method-level JNI binding census of src/jdk.m3.collections. For every declared
 `native` method of every class it records the expected short JNI symbol, Java_<mangled FQN>_<mangled method>. It then
 checks the C sources under src/jdk.m3.collections/share/native and m3/ (excluding evidence, qualification, vendor and
 docs trees) and assigns one status per method:
@@ -29,12 +29,15 @@ def mangle(s):
 C_SKIP = re.compile(r"/(evidence|qualification|vendor|docs|recipe|snapshots)/")
 files = subprocess.run(["git", "-C", root, "ls-files", "src/jdk.m3.collections/share/native", "m3"], capture_output=True,
                        text=True).stdout.split()
-syms, register = set(), set()
+syms, register, templates = set(), set(), []
 for f in files:
     if not f.endswith((".c", ".cc", ".cpp", ".h")) or C_SKIP.search("/" + f):
         continue
     t = open(os.path.join(root, f), encoding="utf-8", errors="replace").read()
     syms |= set(re.findall(r"\bJava_[A-Za-z0-9_]+", t))
+    # v1.2: token-pasting macros (Java_<owner>_bounds##NAME##0) export one symbol per instantiation.
+    templates += [re.compile(re.escape(head) + r"[A-Z][A-Za-z]*" + re.escape(tail) + "$")
+                  for head, tail in re.findall(r"\b(Java_[A-Za-z0-9_]+?)##\w+##([A-Za-z0-9_]*)", t)]
     if "RegisterNatives" in t:
         register.add(f)
 NAT = re.compile(r"\bnative\s+[\w<>\[\], .?]+?\s+(\w+)\s*\(")
@@ -81,7 +84,7 @@ for d, _, fs in os.walk(base):
             fqn = binary_name(package, spans, m.start())
             simple = fqn.rsplit(".", 1)[1].rsplit("$", 1)[-1]
             short = "Java_" + mangle(fqn).replace(".", "_") + "_" + mangle(name)
-            if short in syms or any(s.startswith(short + "__") for s in syms):
+            if short in syms or any(s.startswith(short + "__") for s in syms) or any(x.match(short) for x in templates):
                 status, other = "BOUND", ""
             else:
                 cands = sorted(s for s in syms if s.endswith("_" + mangle(name)) or ("_" + mangle(name) + "__") in s)
