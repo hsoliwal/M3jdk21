@@ -86,7 +86,7 @@ documented in [the release pack](README.md).
 
 ## 2026-11-09 measured candidate
 
-**Result: release admission HOLD.** `verify_release_admission.py --release` against the evidence manifest reports `policy_valid: false` and `release_ready: false`. The final release-mode run is in progress.
+**Result: release admission HOLD.** `verify_release_admission.py --release` against the evidence manifest reports `policy_valid: false` and `release_ready: false`. Exit 1. Of the 11 mandatory gates, 6 PASS with hash-verified artifacts, 3 have recorded FAIL receipts (`OPENJDK_SANITY_MATRIX`, `M3_FOUNDATION_TESTS`, `M3_CHANGED_ATOM_COVERAGE`) and 2 are PENDING without a receipt (`M3_MAVEN_CONTROL_REACTOR`, `STRING_UTF16_CONTRACT`). Policy BLOCKs: `name_queue` and `standalone.no_external_repo_dependency`; `legacy_recipe_custody` is HOLD; `git.single_release_commit` passes. Pack hashes (sha256): `admission-release.json` `319d92b73d95`, `evidence.json` `08f4a9cc0f07`, `SHA256SUMS` `1b99dc685364`.
 
 | Item | Value |
 | --- | --- |
@@ -117,7 +117,7 @@ log paths are relative to the pack.
 | `STRING_UTF16_CONTRACT` | **PENDING**: no candidate image. The foundation UTF-16 oracles pass in 4 VM modes, but they are not this gate | - |
 | `M3_CHANGED_ATOM_COVERAGE` | **FAIL** (measured, below threshold). JaCoCo 0.8.12 over the `jdk.m3.text` foundation suites: line 71.9% (2359/3279), branch 54.0% (1200/2224); 311 of 607 methods reach 90% on both. No reviewed changed-atom inventory exists | `logs/coverage/jacoco.xml` |
 | `RELEASE_CLAIMS_VALIDATION` | PASS: 7 checks; none of the contract's forbidden phrases appears in `RELEASE_NOTES.md` | `logs/policy/RELEASE_CLAIMS_VALIDATION.json` |
-| `PROOF_PACK_SHA256` | PENDING (final assembly) | `SHA256SUMS`, `logs/proof-pack-check.log` |
+| `PROOF_PACK_SHA256` | PASS: `SHA256SUMS` covers 2228 pack files; re-reading them gives 0 mismatches | `SHA256SUMS`, `logs/proof-pack-check.log` |
 
 Development admission on the candidate (exit 1, `policy_valid: false`):
 - `name_queue` BLOCK: `name-plan.json` pins `authority_blob` `3879a0f1fbc2`, but `9eb3a926ff`
@@ -146,7 +146,19 @@ Fix PRs opened from this measurement (draft, unmerged):
 | #2899 | `java.base` does not compile: changes `-encoding ascii` to UTF-8 (the javac part of JDK-8301971) and clears 7 `-Werror` warnings. `make java.base-java` then exits 0 with 0 warnings |
 | #2901 | `jdk.m3.collections` doclint: 42 errors to 0 (doc comments only) |
 
-Indicative jtreg runs on a diagnostic image (the candidate with #2899 and #2901, javac warnings non-fatal) are in progress. They are not candidate receipts.
+**Diagnostic image, indicative only (not a candidate receipt).** This image is the candidate tree with the #2899 and #2901 changes overlaid. It was built with `JAVA_WARNINGS_ARE_ERRORS=`, so javac warnings were non-fatal; `java -version` reports `21.0.14-internal`. With jtreg 8.2.1 on `test/jdk/java/lang/String`:
+
+| Mode | Upstream tests | M3-added tests |
+| --- | --- | --- |
+| default | 88/89 pass | 59/82 pass (15 failed, 8 errors) |
+| `-XX:-CompactStrings` | 87/88 pass | 62/82 pass |
+
+The one upstream error is `StringPlatformChars`, which needs `-nativepath`; the test image was not built. Notable M3 failures:
+- `M3StringConcatTupleTest` and `M3StringConcatReferenceDagTest`: a `null` operand is rendered as an empty string in concatenation.
+- `M3CanonicalApiBoundaryTest`: `exported JDK package exposes M3 class: java.lang.M3Object`.
+- `M3StringInternTest`, and `M3FlatNeedleGateTest` (timed out after 480 s).
+
+The `-Xint`, C1, C2, StringBuilder/Character and `test/jdk/jdk/internal/m3` runs were stopped before they finished. Logs are in `logs/jtreg-diag/` (not in `SHA256SUMS`). `STRING_UTF16_CONTRACT` therefore stays PENDING for this candidate, and these M3 String failures would also block it.
 
 ### HOLDs and the owner action each needs
 

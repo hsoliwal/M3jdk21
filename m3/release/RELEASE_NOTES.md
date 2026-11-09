@@ -81,7 +81,7 @@ The candidate is one commit over `890adb6410da` with the tree of `master` `80962
 | `PRECOMPUTE_JNI_NATIVE_PARITY` | PASS: precompute `-Pnative` 125/0; word-row JNI in 4 VM modes; collections native 2854 tests, 0 failures, 1 skipped |
 | `M3_FOUNDATION_TESTS` | FAIL: `check-m3.py` stale fixture path (fix #2893); `build.sh` and the extra contracts pass |
 | `OPENJDK_SANITY_MATRIX` | FAIL: the linux-x64 source build stops in `java.base` (fixes #2899, #2901; one owner decision remains) |
-| `STRING_UTF16_CONTRACT` | PENDING: no candidate image |
+| `STRING_UTF16_CONTRACT` | PENDING: no candidate image. On a diagnostic image, upstream `java/lang/String` passes 88/89 and the M3-added String tests pass 59/82 |
 | `M3_CHANGED_ATOM_COVERAGE` | FAIL: `jdk.m3.text` line 71.9%, branch 54.0%; no reviewed inventory |
 | `M3_MAVEN_CONTROL_REACTOR` | HOLD: owner decision (standalone rule vs Synexia-owned receipt) |
 
@@ -111,8 +111,9 @@ Recompute build, test and coverage evidence against the final candidate commit a
   `java.base`. The build compiles with `-encoding ascii`, and 53 M3 Java sources contain
   non-ASCII text. Next come 7 `-Werror` warnings in `java.base` and then 42 doclint errors
   in `jdk.m3.collections`; the fixes are #2899 and #2901. After those, `jdk.m3.collections`
-  stops on javac's dangling-documentation-comment lint (at least 100 warnings, from the
-  `/*****` license headers). That last one needs an owner decision.
+  stops on javac's dangling-documentation-comment lint: 743 module files open with a
+  `/*****` license header, which javac reads as a doc comment. That last one needs an
+  owner decision.
 - **Naming authority pin (measured 2026-11-09):** `name-plan.json` pins `name-mapping.json`
   blob `3879a0f1fbc2`, but `9eb3a926ff` moved it to `f191f5772b1d`. The documented re-pin
   path is the Synexia authority-pin recipe.
