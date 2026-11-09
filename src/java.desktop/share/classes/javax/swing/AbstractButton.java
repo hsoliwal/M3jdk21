@@ -2163,6 +2163,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      */
     public boolean imageUpdate(Image img, int infoflags,
                                int x, int y, int w, int h) {
+        if (JComponent.isImageObserverHidden(this)) {
+            // nobody can see the button: stop the frames; painting re-registers
+            return false;
+        }
         Icon iconDisplayed = null;
 
         if (!model.isEnabled()) {
