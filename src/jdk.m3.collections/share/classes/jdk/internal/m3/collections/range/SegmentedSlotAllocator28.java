@@ -14,7 +14,7 @@
  *******************************************************************************/
 package jdk.internal.m3.collections.range;
 
-import jdk.internal.m3.collections.bits.SegmentedBitLane28;
+import jdk.m3.collections.BitLane28;
 
 /**
  * Stable slot allocator over the 28-bit segmented address space.
@@ -33,7 +33,7 @@ public final class SegmentedSlotAllocator28 {
 
     private final SegmentedIntLane28 generations = new SegmentedIntLane28();
     private final SegmentedIntLane28 freeNextEncoded = new SegmentedIntLane28();
-    private final SegmentedBitLane28 live = new SegmentedBitLane28();
+    private final BitLane28 live = new BitLane28();
 
     private int highWater;
     private int freeHeadEncoded;

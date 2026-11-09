@@ -23,7 +23,7 @@ import jdk.internal.m3.collections.LongPairs;
 import jdk.internal.m3.collections.PackedLongLongBiMap;
 import jdk.internal.m3.collections.PackedLongLongOrderedMap;
 import jdk.internal.m3.collections.PackedLongLongTable;
-import jdk.internal.m3.collections.bits.SegmentedBitLane28;
+import jdk.m3.collections.BitLane28;
 import jdk.internal.m3.collections.packed.PackedLongBagContract;
 import jdk.internal.m3.collections.packed.PackedLongLongMap;
 import jdk.internal.m3.collections.packed.PackedMutableLongSet;
@@ -81,8 +81,8 @@ public final class CollectionFamilies {
             new CollectionFamily<>("long-lane-28", SegmentedLongLane28.class);
     public static final CollectionFamily<SegmentedIntLane28> INT_LANE_28 =
             new CollectionFamily<>("int-lane-28", SegmentedIntLane28.class);
-    public static final CollectionFamily<SegmentedBitLane28> BIT_LANE_28 =
-            new CollectionFamily<>("bit-lane-28", SegmentedBitLane28.class);
+    public static final CollectionFamily<BitLane28> BIT_LANE_28 =
+            new CollectionFamily<>("bit-lane-28", BitLane28.class);
 
     public static final CollectionFamily<PackedLongBagContract> LONG_BAG = new CollectionFamily<>("long-bag", PackedLongBagContract.class);
     public static final CollectionFamily<LongBitSet> BIT_SET = new CollectionFamily<>("bit-set", LongBitSet.class);
