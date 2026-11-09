@@ -1,0 +1,37 @@
+# naming authority re-pin evidence, base master e8e1e837a640 (2026-11-09)
+## before (master): check.py, audit.py --strict and name-contract tests
+M3JDK21_NAME_RECEIVER_REFUSED: canonical naming map drift: re-pin and review changes
+check exit=2
+audit-strict exit=2 M3JDK21_MAP_CENSUS_REFUSED: canonical name mapping has drifted
+ERROR: test_historical_and_current_source_reconstruction (test_arrays_source_successor.ArraysJdk8309665SourceTest.test_historical_and_current_source_reconstruction)
+ERROR: test_related_target_class_owner_retains_method_contract (test_audit.CanonicalRelatedOwnerTest.test_related_target_class_owner_retains_method_contract)
+FAIL: test_sparse_checkout_covers_concrete_canonical_target_paths (test_audit.WorkflowCoverageTest.test_sparse_checkout_covers_concrete_canonical_target_paths)
+FAIL: test_name_plan_pins_exact_authority_bytes (test_schema.NamingSchemaCompatibilityTests.test_name_plan_pins_exact_authority_bytes)
+Ran 121 tests in 8.694s
+FAILED (failures=2, errors=2)
+## re-pinned targets (record, old path, new path, old symbol, new symbol)
+REPIN	m3.prefix-z	m3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java	m3/algorithms/src/jdk/m3/algorithm/PrefixZ.java	jdk.m3.algorithm.M3PrefixZ	jdk.m3.algorithm.PrefixZ
+REPIN	m3.collections.indexed-snapshot.packed-filter-directory	m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java	src/jdk.m3.collections/share/classes/jdk/m3/collections/IndexedListSnapshot.java	jdk.m3.collections.M3IndexedListSnapshot	jdk.m3.collections.IndexedListSnapshot
+REPIN	synexia.collections.tree-window-sibling-shift	m3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java	src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/TreeWindowPlan.java	jdk.m3.collections.M3TreeWindowPlan	jdk.internal.m3.collections.TreeWindowPlan
+REPIN	m3.arrays.api-companion	m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java	src/jdk.m3.collections/share/classes/jdk/m3/arrays/M3Arrays.java	jdk.m3.arrays.M3Arrays	jdk.m3.arrays.M3Arrays
+REPIN	synexia.collections.long-long-add-to	m3/collections/src/main/java/jdk/m3/collections/M3LongLongHashMap.java	src/jdk.m3.collections/share/classes/jdk/m3/collections/LongLongHashMap.java	jdk.m3.collections.M3LongLongHashMap	jdk.m3.collections.LongLongHashMap
+REPIN	m3.arrays.packed.signed	m3/arrays/src/main/java/jdk/m3/arrays/packed/PackedCodec.java	src/jdk.m3.collections/share/classes/jdk/m3/arrays/packed/PackedCodec.java	jdk.m3.arrays.packed.PackedCodec	jdk.m3.arrays.packed.PackedCodec
+REPIN	m3.arrays.packed.signed	m3/arrays/src/main/java/jdk/m3/arrays/packed/PackedIntArray.java	src/jdk.m3.collections/share/classes/jdk/m3/arrays/packed/PackedIntArray.java	jdk.m3.arrays.packed.PackedIntArray	jdk.m3.arrays.packed.PackedIntArray
+REPIN	m3.arrays.packed.signed	m3/arrays/src/main/java/jdk/m3/arrays/packed/Int40Array.java	src/jdk.m3.collections/share/classes/jdk/m3/arrays/packed/Int40Array.java	jdk.m3.arrays.packed.Int40Array	jdk.m3.arrays.packed.Int40Array
+REPIN	m3.arrays.packed.signed	m3/arrays/src/main/java/jdk/m3/arrays/packed/Int48Array.java	src/jdk.m3.collections/share/classes/jdk/m3/arrays/packed/Int48Array.java	jdk.m3.arrays.packed.Int48Array	jdk.m3.arrays.packed.Int48Array
+REPIN	m3.arrays.packed.signed	m3/arrays/src/main/java/jdk/m3/arrays/packed/Int56Array.java	src/jdk.m3.collections/share/classes/jdk/m3/arrays/packed/Int56Array.java	jdk.m3.arrays.packed.Int56Array	jdk.m3.arrays.packed.Int56Array
+REPIN	m3.arrays.packed.vint64	m3/arrays/src/main/java/jdk/m3/arrays/packed/VInt.java	src/jdk.m3.collections/share/classes/jdk/m3/arrays/packed/VInt.java	jdk.m3.arrays.packed.VInt	jdk.m3.arrays.packed.VInt
+REPIN	m3.arrays.packed.native	m3/arrays/src/main/java/jdk/m3/arrays/M3ArrayNative.java	src/jdk.m3.collections/share/classes/jdk/m3/arrays/ArrayNative.java	jdk.m3.arrays.M3ArrayNative	jdk.m3.arrays.ArrayNative
+REPIN	m3.arrays.packed.native	m3/arrays/src/main/native/m3_packed_codec.c	src/jdk.m3.collections/share/native/libm3arrays/m3_packed_codec.c	target-owned signed-packed/unsigned64/ZigZag64 kernels	target-owned signed-packed/unsigned64/ZigZag64 kernels
+REPIN	m3.arrays.packed.native	m3/arrays/src/main/native/m3_packed_codec_jni.c	src/jdk.m3.collections/share/native/libm3arrays/m3_packed_codec_jni.c	M3ArrayNative packed/VInt JNI exports	M3ArrayNative packed/VInt JNI exports
+REPIN	m3.arrays.packed.native	m3/arrays/src/main/native/include/m3_packed_codec.h	src/jdk.m3.collections/share/native/libm3arrays/include/m3_packed_codec.h	target-owned packed codec declarations	target-owned packed codec declarations
+AUTHORITY_BLOB	3879a0f1fbc2ccf4a1e7c6643fceff8d85d43780	5dd1f5890ff3685db0661994b85c57660a09ceec	targets_repinned=15
+## after
+M3JDK21_NAME_RECEIVER_REFUSED: candidate not recorded as a canonical M3JDK21 target: jdk.m3.algorithm.M3PrefixZ
+check exit=2
+mapping_id	record_state	module	target_path	declared_symbol	path_refs	result
+audit-strict exit=0
+ERROR: test_historical_and_current_source_reconstruction (test_arrays_source_successor.ArraysJdk8309665SourceTest.test_historical_and_current_source_reconstruction)
+ValueError: companion/sync changed
+Ran 121 tests in 10.723s
+FAILED (errors=1)
