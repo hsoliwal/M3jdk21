@@ -57,8 +57,6 @@ import java.util.Collection;
  * }</pre>
  *
  * <h2>Inspired by</h2>
- * <p>
- * </p>
  *
  * @param <K>
  *            the key type (used for coalescing)

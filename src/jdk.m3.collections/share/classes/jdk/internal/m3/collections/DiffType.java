@@ -29,7 +29,7 @@ package jdk.internal.m3.collections;
  * }</pre>
  *
  * @author Hitesh Soliwal (hsoliwal@gmail.com)
- * @see ConvergenceMatcher
+ * @see "ConvergenceMatcher"
  * @see ConvergenceDiff
  *
  * <p>Lineage: absorbed from Synexia {@code m3-common/src/main/java/jdk/internal/m3/common/convergence/DiffType.java}
@@ -48,7 +48,7 @@ public enum DiffType {
     UNCHANGED,
 
     /**
-     * Chunk modified from memory (0 < similarity <= 0.85).
+     * Chunk modified from memory (0 &lt; similarity &lt;= 0.85).
      *
      * <p>
      * Generates ConsolidateEvent to update chunk.

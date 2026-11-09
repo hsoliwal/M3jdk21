@@ -35,8 +35,8 @@ import java.time.Instant;
  *
  * @author Hitesh Soliwal (hsoliwal@gmail.com)
  * @see ConvergenceChunk
- * @see ConvergenceEventLog
- * @see ConvergenceProjection
+ * @see "ConvergenceEventLog"
+ * @see "ConvergenceProjection"
  *
  * <p>Lineage: absorbed from Synexia {@code m3-common/src/main/java/jdk/internal/m3/common/convergence/ConvergenceEvent.java}
  * blob {@code 5831d510c392623b2b5c62c661e25b0654afc00a} at com.synexia develop {@code 8ab80ea57d9f} by

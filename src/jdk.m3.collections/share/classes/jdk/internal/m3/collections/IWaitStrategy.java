@@ -26,6 +26,7 @@ import java.util.function.LongSupplier;
  *
  * <h2>Strategy Selection Guide</h2>
  * <table>
+ * <caption>Wait strategy trade-offs</caption>
  * <tr>
  * <th>Strategy</th>
  * <th>CPU</th>
@@ -76,8 +77,6 @@ import java.util.function.LongSupplier;
  * }</pre>
  *
  * <h2>Inspired by</h2>
- * <p>
- * </p>
  *
  * @author Hitesh Soliwal
  * @version 1.0.0

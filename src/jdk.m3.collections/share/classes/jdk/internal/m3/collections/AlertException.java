@@ -39,8 +39,6 @@ import java.io.Serial;
  * }</pre>
  *
  * <h2>Inspired by</h2>
- * <p>
- * </p>
  *
  * @author Hitesh Soliwal
  * @version 1.0.0
