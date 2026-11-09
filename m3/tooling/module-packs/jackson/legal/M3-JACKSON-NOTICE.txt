@@ -16,7 +16,7 @@ M3File snapshot/hash atoms from hsoliwal/com.synexia revision
 document lifetime, String coordinates, hash domain and bounded JSON projection.
 See PROVENANCE.json for the exact original sources and excluded capabilities.
 
-Jackson annotations/core/databind and FastDoubleParser retain their original
+Jackson annotations/core/databind retain their original
 licenses, notices and authorship. Those complete notices remain embedded in
 their corresponding source-built modules and are copied beside this notice.
 This companion, recipe, or generated pack does not relicense Jackson,

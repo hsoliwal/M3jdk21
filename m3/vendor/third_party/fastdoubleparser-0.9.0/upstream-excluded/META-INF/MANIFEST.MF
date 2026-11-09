@@ -1,6 +1,0 @@
-Manifest-Version: 1.0
-Git-Commit-Id: fca8ab6ddfd2f6c2f0669fcba27b84cb0b0d0280
-Git-Commit-Time: 2023-04-30T05:00:49Z
-SCM-URL: https://github.com/wrandelshofer/fastdoubleparser/tree/master/f
- astdoubleparser
-

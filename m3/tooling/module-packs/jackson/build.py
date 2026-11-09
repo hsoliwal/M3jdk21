@@ -29,7 +29,6 @@ MODULE = "jdk.m3.jackson"
 VERSION = "2.19.2"
 OUTPUT_TIMESTAMP = "2026-01-01T00:00:00Z"
 DONORS = (
-    ("fastdoubleparser-1.0.90", "ch.randelshofer", "fastdoubleparser", "1.0.90-m3-source-1", None),
     ("jackson-annotations-2.19.2", "com.fasterxml.jackson.core", "jackson-annotations", "2.19.2-m3-source-1", "com.fasterxml.jackson.annotation"),
     ("jackson-core-2.19.2", "com.fasterxml.jackson.core", "jackson-core", "2.19.2-m3-source-1", "com.fasterxml.jackson.core"),
     ("jackson-databind-2.19.2", "com.fasterxml.jackson.core", "jackson-databind", "2.19.2-m3-source-1", "com.fasterxml.jackson.databind"),
@@ -147,22 +146,17 @@ def verify_built_jar(jar: Path, source: Path, name: str) -> None:
         if name == "jackson-annotations-2.19.2":
             required = {"module-info.class", "META-INF/LICENSE", "META-INF/NOTICE"}
         elif name == "jackson-core-2.19.2":
-            required = {
-                "META-INF/versions/9/module-info.class",
-                "com/fasterxml/jackson/core/internal/shaded/fdp/v2_19_2/JavaDoubleParser.class",
-                "META-INF/LICENSE", "META-INF/NOTICE",
-            }
-            if any(entry.startswith("ch/randelshofer/fastdoubleparser/") for entry in entries):
-                raise ValueError("Unshaded FastDoubleParser classes in Jackson core")
+            required = {"META-INF/versions/9/module-info.class", "META-INF/LICENSE", "META-INF/NOTICE"}
+            # JACKSON_NUMBERS_TO_JDK v1: Jackson core parses numbers with java.base, so no parser copy ships.
+            if any("fastdoubleparser/" in entry or "/shaded/fdp/" in entry for entry in entries):
+                raise ValueError("FastDoubleParser classes in Jackson core; java.base parses its numbers")
             if any(entry.startswith("META-INF/versions/22/") for entry in entries):
                 raise ValueError("JDK 22 overlay leaked into the JDK 21 Jackson build")
         elif name == "jackson-databind-2.19.2":
             required = {"META-INF/versions/9/module-info.class", "META-INF/LICENSE", "META-INF/NOTICE",
                         "com/fasterxml/jackson/databind/ObjectMapper.class"}
         else:
-            required = {"META-INF/versions/11/module-info.class",
-                        "META-INF/versions/17/module-info.class", "META-INF/versions/21/module-info.class",
-                        "META-INF/LICENSE", "META-INF/NOTICE", "META-INF/thirdparty-LICENSE"}
+            raise ValueError("No built-JAR contract for donor " + name)
         if not required.issubset(entries):
             raise ValueError("Source build omitted required entries in " + name + ": "
                              + ", ".join(sorted(required - entries)))

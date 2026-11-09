@@ -16,7 +16,6 @@
   <packaging>pom</packaging>
   <name>Jackson 2.19.2 and FastDoubleParser 1.0.90 source closure</name>
   <modules>
-    <module>sources/fastdoubleparser-1.0.90</module>
     <module>sources/jackson-annotations-2.19.2</module>
     <module>sources/jackson-core-2.19.2</module>
     <module>sources/jackson-databind-2.19.2</module>

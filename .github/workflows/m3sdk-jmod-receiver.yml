@@ -19,7 +19,6 @@ on:
       - 'm3/vendor/third_party/jackson-annotations-2.19.2/**'
       - 'm3/vendor/third_party/jackson-core-2.19.2/**'
       - 'm3/vendor/third_party/jackson-databind-2.19.2/**'
-      - 'm3/vendor/third_party/fastdoubleparser-1.0.90/**'
       - 'src/java.base/share/classes/java/lang/String.java'
       - 'src/java.base/share/classes/java/lang/M3String.java'
       - 'src/jdk.compiler/share/classes/com/sun/source/util/M3AST.java'

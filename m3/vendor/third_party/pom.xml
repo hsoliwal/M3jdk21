@@ -44,9 +44,6 @@
     <module>eclipse-collections-api</module>
     <module>error_prone_annotations</module>
     <module>failureaccess</module>
-    <module>fastdoubleparser-0.9.0</module>
-    <module>fastdoubleparser-1.0.0</module>
-    <module>fastdoubleparser-1.0.90</module>
     <module>fastfilter</module>
     <module>gizmo</module>
     <module>guava</module>
