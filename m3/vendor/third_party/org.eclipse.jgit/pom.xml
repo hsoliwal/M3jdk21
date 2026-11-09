@@ -4,8 +4,8 @@
   <groupId>org.eclipse.jgit</groupId>
   <artifactId>org.eclipse.jgit</artifactId>
   <version>5.13.3.202401111512-r-m3-source-1</version>
-  <name>org.eclipse.jgit 5.13.3.202401111512-r - unchanged upstream source build for M3jdk21</name>
-  <description>Source inclusion of the published org.eclipse.jgit:org.eclipse.jgit:5.13.3.202401111512-r sources jar (SHA-1 1e8cc0d2d0417b9683ee60b4eac306ee4e4ac8bd); no upstream implementation changes. See PROVENANCE.json.</description>
+  <name>org.eclipse.jgit 5.13.3.202401111512-r - upstream source build for M3jdk21, base64 by java.base</name>
+  <description>Source inclusion of the published org.eclipse.jgit:org.eclipse.jgit:5.13.3.202401111512-r sources jar (SHA-1 1e8cc0d2d0417b9683ee60b4eac306ee4e4ac8bd); one M3 overlay, JGIT_BASE64_TO_JDK v1: util.Base64 encodes, and decodes canonical input, with java.util.Base64. See PROVENANCE.json and OVERLAY_SOURCES.json.</description>
   <url>https://repo.maven.apache.org/maven2/org/eclipse/jgit/org.eclipse.jgit/5.13.3.202401111512-r/</url>
   <licenses>
     <license>

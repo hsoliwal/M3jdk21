@@ -8,6 +8,7 @@ package org.eclipse.jgit.util;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import java.nio.ByteBuffer;
 import java.text.MessageFormat;
 import java.util.Arrays;
 
@@ -22,11 +23,17 @@ import org.eclipse.jgit.internal.JGitText;
  * <a href="http://iharder.net/base64">http://iharder.net/base64</a>
  * periodically to check for updates or to contribute improvements.
  * </p>
+ * <p>
+ * M3JDK (JGIT_BASE64_TO_JDK v1): java.base's {@code java.util.Base64} encodes, and
+ * decodes input in the canonical form. Other input keeps JGit's lenient
+ * decoding loop, with its results and exceptions.
+ * </p>
  *
  * @author Robert Harder
  * @author rob@iharder.net
  */
 public class Base64 {
+	//FLLDCIM: M3 - JGIT_BASE64_TO_JDK v1: base64 is java.base's java.util.Base64, the JDK's one implementation
 	/** The equals sign (=) as a byte. */
 	private static final byte EQUALS_SIGN = (byte) '=';
 
@@ -75,71 +82,6 @@ public class Base64 {
 	}
 
 	/**
-	 * Encodes up to three bytes of the array <var>source</var> and writes the
-	 * resulting four Base64 bytes to <var>destination</var>. The source and
-	 * destination arrays can be manipulated anywhere along their length by
-	 * specifying <var>srcOffset</var> and <var>destOffset</var>. This method
-	 * does not check to make sure your arrays are large enough to accommodate
-	 * <var>srcOffset</var> + 3 for the <var>source</var> array or
-	 * <var>destOffset</var> + 4 for the <var>destination</var> array. The
-	 * actual number of significant bytes in your array is given by
-	 * <var>numSigBytes</var>.
-	 *
-	 * @param source
-	 *            the array to convert
-	 * @param srcOffset
-	 *            the index where conversion begins
-	 * @param numSigBytes
-	 *            the number of significant bytes in your array
-	 * @param destination
-	 *            the array to hold the conversion
-	 * @param destOffset
-	 *            the index where output will be put
-	 */
-	private static void encode3to4(byte[] source, int srcOffset,
-			int numSigBytes, byte[] destination, int destOffset) {
-		// We have to shift left 24 in order to flush out the 1's that appear
-		// when Java treats a value as negative that is cast from a byte.
-
-		int inBuff = 0;
-		switch (numSigBytes) {
-		case 3:
-			inBuff |= (source[srcOffset + 2] << 24) >>> 24;
-			//$FALL-THROUGH$
-
-		case 2:
-			inBuff |= (source[srcOffset + 1] << 24) >>> 16;
-			//$FALL-THROUGH$
-
-		case 1:
-			inBuff |= (source[srcOffset] << 24) >>> 8;
-		}
-
-		switch (numSigBytes) {
-		case 3:
-			destination[destOffset] = ENC[(inBuff >>> 18)];
-			destination[destOffset + 1] = ENC[(inBuff >>> 12) & 0x3f];
-			destination[destOffset + 2] = ENC[(inBuff >>> 6) & 0x3f];
-			destination[destOffset + 3] = ENC[(inBuff) & 0x3f];
-			break;
-
-		case 2:
-			destination[destOffset] = ENC[(inBuff >>> 18)];
-			destination[destOffset + 1] = ENC[(inBuff >>> 12) & 0x3f];
-			destination[destOffset + 2] = ENC[(inBuff >>> 6) & 0x3f];
-			destination[destOffset + 3] = EQUALS_SIGN;
-			break;
-
-		case 1:
-			destination[destOffset] = ENC[(inBuff >>> 18)];
-			destination[destOffset + 1] = ENC[(inBuff >>> 12) & 0x3f];
-			destination[destOffset + 2] = EQUALS_SIGN;
-			destination[destOffset + 3] = EQUALS_SIGN;
-			break;
-		}
-	}
-
-	/**
 	 * Encodes a byte array into Base64 notation.
 	 *
 	 * @param source
@@ -162,22 +104,9 @@ public class Base64 {
 	 * @return encoded base64 representation of source.
 	 */
 	public static String encodeBytes(byte[] source, int off, int len) {
-		final int len43 = len * 4 / 3;
-
-		byte[] outBuff = new byte[len43 + ((len % 3) > 0 ? 4 : 0)];
-		int d = 0;
-		int e = 0;
-		int len2 = len - 2;
-
-		for (; d < len2; d += 3, e += 4)
-			encode3to4(source, d + off, 3, outBuff, e);
-
-		if (d < len) {
-			encode3to4(source, d + off, len - d, outBuff, e);
-			e += 4;
-		}
-
-		return new String(outBuff, 0, e, UTF_8);
+		ByteBuffer encoded = java.util.Base64.getEncoder()
+				.encode(ByteBuffer.wrap(source, off, len));
+		return new String(encoded.array(), 0, encoded.limit(), UTF_8);
 	}
 
 	/**
@@ -250,6 +179,28 @@ public class Base64 {
 	 *             the input is not a valid Base64 sequence.
 	 */
 	public static byte[] decode(byte[] source, int off, int len) {
+		if (source != null && off >= 0 && len > 0 && len <= source.length - off
+				&& len % 4 == 0) {
+			try {
+				ByteBuffer decoded = java.util.Base64.getDecoder()
+						.decode(ByteBuffer.wrap(source, off, len));
+				byte[] out = decoded.array();
+				return out.length == decoded.limit() ? out
+						: Arrays.copyOf(out, decoded.limit());
+			} catch (IllegalArgumentException notCanonical) {
+				// Not the canonical form: JGit's lenient loop decodes it.
+			}
+		}
+		return decodeLenient(source, off, len);
+	}
+
+	/**
+	 * JGit's lenient decoding loop, the upstream body of
+	 * {@link #decode(byte[], int, int)}: white space is skipped, the high bit
+	 * of each byte is dropped, an unpadded final group is dropped and input
+	 * after the padding is ignored.
+	 */
+	private static byte[] decodeLenient(byte[] source, int off, int len) {
 		byte[] outBuff = new byte[len * 3 / 4]; // Upper limit on size of output
 		int outBuffPosn = 0;
 
