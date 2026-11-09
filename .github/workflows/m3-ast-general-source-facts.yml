@@ -2,8 +2,8 @@ name: M3 AST unnamed source facts
 on:
   pull_request:
     paths:
-      - 'm3/ast/src/main/java/jdk/m3/ast/M3ASTHierarchy.java'
-      - 'm3/ast/src/test/java/jdk/m3/ast/M3ASTHierarchyContract.java'
+      - 'm3/ast/src/main/java/jdk/m3/ast/ASTHierarchy.java'
+      - 'm3/ast/src/test/java/jdk/m3/ast/ASTHierarchyContract.java'
       - 'm3/ast/recipe-custody/hierarchy-encoding-20261018/**'
       - '.github/workflows/m3-ast-general-source-facts.yml'
   workflow_dispatch:
@@ -27,11 +27,11 @@ jobs:
         run: |
           mkdir -p /tmp/m3-ast-general/classes
           javac --release 21 -Xlint:all -Werror -d /tmp/m3-ast-general/classes \
-            m3/ast/src/main/java/jdk/m3/ast/M3ASTHierarchy.java \
-            m3/ast/src/test/java/jdk/m3/ast/M3ASTHierarchyContract.java \
-            m3/ast/src/test/java/jdk/m3/ast/M3ASTHierarchyEncodingTest.java
-          java -cp /tmp/m3-ast-general/classes jdk.m3.ast.M3ASTHierarchyContract 2000
-          java -cp /tmp/m3-ast-general/classes jdk.m3.ast.M3ASTHierarchyEncodingTest
+            m3/ast/src/main/java/jdk/m3/ast/ASTHierarchy.java \
+            m3/ast/src/test/java/jdk/m3/ast/ASTHierarchyContract.java \
+            m3/ast/src/test/java/jdk/m3/ast/ASTHierarchyEncodingTest.java
+          java -cp /tmp/m3-ast-general/classes jdk.m3.ast.ASTHierarchyContract 2000
+          java -cp /tmp/m3-ast-general/classes jdk.m3.ast.ASTHierarchyEncodingTest
       - name: Qualify exact canonical OpenRewrite recipe result and fixed point
         run: |
           cd m3/ast/recipe-custody/hierarchy-encoding-20261018

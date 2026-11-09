@@ -3,7 +3,7 @@
 package jdk.m3.eclipse.core;
 
 import jdk.m3.arrays.M3Utf16ArrayView;
-import jdk.m3.ast.M3ASTHierarchy;
+import jdk.m3.ast.ASTHierarchy;
 import jdk.m3.collections.LongIndexProjection;
 import jdk.m3.file.M3NioFile;
 import jdk.m3.text.M3StringPiece;
@@ -30,7 +30,7 @@ public interface M3EclipseCore {
     LongIndexProjection index(long[] source);
 
     /** Use the established M3 L0-L5 hierarchy, not another Eclipse AST store. */
-    M3ASTHierarchy hierarchy(String repository, Collection<M3ASTHierarchy.FileFact> facts);
+    ASTHierarchy hierarchy(String repository, Collection<ASTHierarchy.FileFact> facts);
 
     /** Wrap original provider-owned Path, with no new resource-tree state. */
     M3NioFile file(Path path);

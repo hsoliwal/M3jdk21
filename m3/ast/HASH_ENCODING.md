@@ -1,6 +1,6 @@
 # Hierarchy identifier hash encoding
 
-`M3ASTHierarchy` continues to use schema `m3.ast.l0-l5/1`, SHA-256,
+`ASTHierarchy` continues to use schema `m3.ast.l0-l5/1`, SHA-256,
 the same public interfaces, and the same accepted identifier domain.
 The existing four-byte big-endian payload-length framing remains in place.
 Identifiers with well-formed UTF-16 retain exactly the original UTF-8 payload
