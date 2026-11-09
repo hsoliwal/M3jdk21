@@ -2,8 +2,8 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 # M3AST parser-neutral indexing and coordinate admission (candidate v2)
 
-This change extends the existing `M3SyntaxTree` *without inventing a second syntax
-owner*. The L0-L5 `M3ASTHierarchy` remains the serial, source-receipt-bounded
+This change extends the existing `SyntaxTree` *without inventing a second syntax
+owner*. The L0-L5 `ASTHierarchy` remains the serial, source-receipt-bounded
 project/repository evidence plane. The original source image remains canonical.
 
 ## Small interface, exact native grammar
@@ -11,17 +11,17 @@ project/repository evidence plane. The original source image remains canonical.
 - Keep each parser's **own grammar kind**, child **field/role**, error/missing
   flags and half-open source **byte** spans. Do not falsely map foreign grammar
   nodes to a pretend universal Java AST enumeration.
-- `M3SyntaxCoordinates.byteAdapter(adapter, nativeOffsetToByte)` lets a provider
+- `SyntaxCoordinates.byteAdapter(adapter, nativeOffsetToByte)` lets a provider
   which reports UTF-16/code-point positions use the existing six-method adapter.
   The caller must supply an exact codec. The existing `M3FileSource.byteAtUtf16`
   is an appropriate checked UTF-8/JDT source codec; `CharSequence.length()` or
   an unverified cast is not.
-- `M3SyntaxIndex` adds primitive-indexed field/kind queries and O(source bytes +
+- `SyntaxIndex` adds primitive-indexed field/kind queries and O(source bytes +
   syntax occurrences) bottom-up subtree digests. Each byte is digested in one
   owner gap, not once per ancestor. Grammar and node kinds/fields/flags are
   included; absolute offsets are excluded from the subtree digest so that an
   unchanged subtree moved by an earlier edit can be nominated for reuse.
-- `M3SyntaxIndex.Facts` is a separately frozen, sparse, provider-namespaced
+- `SyntaxIndex.Facts` is a separately frozen, sparse, provider-namespaced
   metadata lane for types, symbols, diagnostics and other semantic facts. It
   refuses a different syntax **projection SHA-256**; it never labels a syntactic
   equality as semantic or ABI equivalence.

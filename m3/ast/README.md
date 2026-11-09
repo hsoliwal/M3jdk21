@@ -1,7 +1,7 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 # M3AST L0-L5 — independently built Java 21 receiving candidate
 
-The M3ASTHierarchy Java facade implements the canonical MIndexAST hierarchy
+The ASTHierarchy Java facade implements the canonical MIndexAST hierarchy
 level mapping L0 per-file facts/atoms, L1 file, L2 package, L3 module, L4
 project, L5 repository. It stores flat primitive atom handles and byte masks
 plus scope-offset arrays. The 13-family classification covers all named M3

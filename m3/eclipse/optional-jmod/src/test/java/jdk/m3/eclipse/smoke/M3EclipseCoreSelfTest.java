@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.eclipse.smoke;
 
-import jdk.m3.ast.M3ASTHierarchy;
+import jdk.m3.ast.ASTHierarchy;
 import jdk.m3.collections.LongIndexProjection;
 import jdk.m3.collections.IndexMaskCompactor;
 import java.util.Arrays;
@@ -63,10 +63,10 @@ public final class M3EclipseCoreSelfTest {
                     "missing M3 JNI must fail explicitly");
         }
 
-        M3ASTHierarchy.FileFact file = new M3ASTHierarchy.FileFact("p", "m", "pkg",
+        ASTHierarchy.FileFact file = new ASTHierarchy.FileFact("p", "m", "pkg",
                 "p/src/C.java", "a".repeat(64), "b".repeat(64),
-                M3ASTHierarchy.LIST, new int[] {7}, new byte[] {3});
-        M3ASTHierarchy ast = m3.hierarchy("repo", List.of(file));
+                ASTHierarchy.LIST, new int[] {7}, new byte[] {3});
+        ASTHierarchy ast = m3.hierarchy("repo", List.of(file));
         require(ast.totalFiles() == 1 && ast.totalOccurrences() == 1,
                 "M3 AST L0/L5 hierarchy delegate");
         require(ast.atomHandle(0) == 7 && ast.stateMask(0) == 3,
