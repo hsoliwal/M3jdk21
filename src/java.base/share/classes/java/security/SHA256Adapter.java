@@ -48,15 +48,28 @@ public interface SHA256Adapter {
     /** SHA-256 digest size in bytes. */
     int DIGEST_BYTES = 32;
 
-    /** Returns a fresh SHA-256 digest for the currently observed content. */
+    /**
+     * Returns a fresh SHA-256 digest for the currently observed content.
+     *
+     * @return a new array of {@value #DIGEST_BYTES} digest bytes
+     */
     byte[] digest();
 
-    /** Returns a lower-case hexadecimal SHA-256 digest. */
+    /**
+     * Returns a lower-case hexadecimal SHA-256 digest.
+     *
+     * @return the digest as lower-case hexadecimal text
+     */
     default String hexDigest() {
         return HexFormat.of().formatHex(digest());
     }
 
-    /** Compares against expected digest bytes using the JDK's digest comparator. */
+    /**
+     * Compares against expected digest bytes using the JDK's digest comparator.
+     *
+     * @param expected the expected digest bytes
+     * @return {@code true} if the current digest equals {@code expected}
+     */
     default boolean matches(byte[] expected) {
         Objects.requireNonNull(expected, "expected");
         return MessageDigest.isEqual(digest(), expected);
@@ -65,6 +78,9 @@ public interface SHA256Adapter {
     /**
      * Returns a typed SHA-256 capability when source bytes are defined,
      * otherwise {@code null}. No arbitrary object serialization is attempted.
+     *
+     * @param source the content owner to adapt
+     * @return the adapter, or {@code null} if {@code source} has no defined bytes
      */
     static SHA256Adapter of(Object source) {
         Objects.requireNonNull(source, "source");

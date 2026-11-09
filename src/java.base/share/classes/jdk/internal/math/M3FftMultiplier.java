@@ -435,7 +435,7 @@ class M3FftMultiplier {
                 int idx = Math.min(Math.max(0, bitIdx >> BITS_TO_BYTES_SHIFT), mag.length - INT_BYTES);
                 magComponent >>>= (prevIdx - idx) << BITS_TO_BYTES_SHIFT;
                 int shift = bitPadding - bitIdx + (idx << BITS_TO_BYTES_SHIFT);
-                magComponent |= (fftElem & bitMask) << shift;
+                magComponent = (int) (magComponent | ((fftElem & bitMask) << shift)); // JLS 15.26.2 narrowing of |=, made explicit
                 M3FastDoubleSwar.writeIntBE(mag, idx, magComponent);
 
                 prevIdx = idx;
