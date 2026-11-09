@@ -17,9 +17,12 @@
  * @summary Lazy authorized object locations, async invalidation and graph lifetime
  * @modules java.base/java.lang:open
  * @build access.M3ObjectAccessBase
- * @run main/othervm -Xmx64m -Djdk.m3.objectEvents.enabled=false M3ObjectTest disabled
- * @run main/othervm -Xmx64m -Djdk.m3.objectEvents.enabled=true M3ObjectTest enabled
+ * @compile --patch-module java.base=${test.src} --add-reads java.base=ALL-UNNAMED M3ObjectTest.java
+ * @run main/othervm --patch-module java.base=${test.classes} --add-reads java.base=ALL-UNNAMED -Xmx64m -Djdk.m3.objectEvents.enabled=false java.lang.M3ObjectTest disabled
+ * @run main/othervm --patch-module java.base=${test.classes} --add-reads java.base=ALL-UNNAMED -Xmx64m -Djdk.m3.objectEvents.enabled=true java.lang.M3ObjectTest enabled
  */
+
+package java.lang;
 
 import access.M3ObjectAccessBase;
 

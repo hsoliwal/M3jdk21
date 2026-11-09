@@ -23,7 +23,7 @@ package java.lang;
  *
  * @since 21
  */
-public final class ObjectSubscription implements AutoCloseable {
+final class ObjectSubscription implements AutoCloseable {
     static final ObjectSubscription CLOSED = new ObjectSubscription(null, -1);
 
     volatile M3ObjectRuntime.State state;
