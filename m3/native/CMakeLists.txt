@@ -21,11 +21,11 @@ target_compile_features(m3_jni_core INTERFACE c_std_11)
 # target, including Android cross-compiles. The generated-header residency owner
 # continues to use its own javac -h / matched JNI integration workflow.
 add_library(m3_jni_existing_owners OBJECT
-  ${CMAKE_CURRENT_SOURCE_DIR}/../arrays/src/main/native/m3_arrays_jni.c
-  ${CMAKE_CURRENT_SOURCE_DIR}/../collections/src/main/native/collections/m3_index_path_masks.c)
+  ${CMAKE_CURRENT_SOURCE_DIR}/../../src/jdk.m3.collections/share/native/libm3arrays/m3_arrays_jni.c
+  ${CMAKE_CURRENT_SOURCE_DIR}/../../src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_path_masks.c)
 target_link_libraries(m3_jni_existing_owners PRIVATE m3_jni_core)
 target_include_directories(m3_jni_existing_owners PRIVATE
-  ${CMAKE_CURRENT_SOURCE_DIR}/../arrays/src/main/native/include)
+  ${CMAKE_CURRENT_SOURCE_DIR}/../../src/jdk.m3.collections/share/native/libm3arrays/include)
 target_compile_features(m3_jni_existing_owners PRIVATE c_std_11)
 if(MSVC)
   target_compile_options(m3_jni_existing_owners PRIVATE /W4 /WX)

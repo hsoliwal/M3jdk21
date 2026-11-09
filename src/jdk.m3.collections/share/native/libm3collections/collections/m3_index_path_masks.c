@@ -9,7 +9,7 @@
  */
 #include <jni.h>
 #include <stddef.h>
-#include "../../../../../native/include/m3_jni_core.h"
+#include "m3_jni_core.h"
 
 static void m3_throw(JNIEnv *env, const char *type, const char *message) {
     m3_jni_throw_new(env, type, message);
