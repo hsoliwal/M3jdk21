@@ -630,11 +630,10 @@ public final class StringConcatFactory {
     }
 
     // Typed gateways: String.valueOf(primitive) for primitives (byte and short widen to int),
-    // the float/double stringifiers, stringOf for every reference type; null for String itself.
+    // the float/double stringifiers, stringOf for every reference type including String: a null
+    // String operand must become "null" (JLS 15.18.1), as in the stock inline-copy strategy, and
+    // javac already passes String.valueOf(Object) results, which may be null, as String operands.
     private static MethodHandle m3Stringifier(Class<?> type) {
-        if (type == String.class) {
-            return null;
-        }
         if (type == int.class || type == long.class || type == char.class || type == boolean.class) {
             return stringValueOf(type);
         }
