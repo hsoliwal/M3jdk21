@@ -14,6 +14,8 @@
  *******************************************************************************/
 package jdk.internal.m3.collections.mat;
 
+import jdk.m3.arrays.SelectionBits;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.IntUnaryOperator;
@@ -38,20 +40,20 @@ public final class MatIntVector {
     public int[] toArray() { return values.clone(); }
     public long payloadBytes() { return 4L * values.length; }
 
-    public MatBits equalTo(int target) {
-        MatBits.Builder bits=MatBits.builder(values.length);
+    public SelectionBits equalTo(int target) {
+        SelectionBits.Builder bits=SelectionBits.builder(values.length);
         for(int i=0;i<values.length;i++) if(values[i]==target) bits.set(i);
         return bits.build();
     }
 
-    public MatBits lessThan(int target) {
-        MatBits.Builder bits=MatBits.builder(values.length);
+    public SelectionBits lessThan(int target) {
+        SelectionBits.Builder bits=SelectionBits.builder(values.length);
         for(int i=0;i<values.length;i++) if(values[i]<target) bits.set(i);
         return bits.build();
     }
 
-    public MatBits greaterOrEqual(int target) {
-        MatBits.Builder bits=MatBits.builder(values.length);
+    public SelectionBits greaterOrEqual(int target) {
+        SelectionBits.Builder bits=SelectionBits.builder(values.length);
         for(int i=0;i<values.length;i++) if(values[i]>=target) bits.set(i);
         return bits.build();
     }

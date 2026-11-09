@@ -30,3 +30,9 @@ DOC_BANNER_OPENER_APPLY rewritten=1
 DOC_BANNER_OPENER_CHECK matches=0
 DOC_BANNER_OPENER_APPLY rewritten=0
 diff shape: 1 files 1+/1-, 1 files total
+
+## v1.1 rerun after merging master a6cd974f03d82a1d7ed08f8a80544ac9b3c5ffe0 (2026-11-09T16:20:22Z): conflicts take master's bytes, then the recipe
+conflicted files: 2
+DOC_BANNER_OPENER_APPLY rewritten=0
+DOC_BANNER_OPENER_CHECK matches=0
+DOC_BANNER_OPENER_APPLY rewritten=0

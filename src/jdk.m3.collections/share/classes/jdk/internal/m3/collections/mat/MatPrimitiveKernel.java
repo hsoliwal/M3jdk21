@@ -14,6 +14,8 @@
  *******************************************************************************/
 package jdk.internal.m3.collections.mat;
 
+import jdk.m3.arrays.SelectionBits;
+
 import java.util.Objects;
 
 /**
@@ -29,14 +31,14 @@ import java.util.Objects;
 public final class MatPrimitiveKernel {
     private MatPrimitiveKernel() { }
 
-    public static MatBits selectFlags(
+    public static SelectionBits selectFlags(
             MatFlagVector flags, long requireAll, long requireAny, long rejectAny) {
         Objects.requireNonNull(flags, "flags");
         return selectFlags(null, flags, requireAll, requireAny, rejectAny);
     }
 
-    public static MatBits selectFlags(
-            MatBits candidates,
+    public static SelectionBits selectFlags(
+            SelectionBits candidates,
             MatFlagVector flags,
             long requireAll,
             long requireAny,
@@ -62,11 +64,11 @@ public final class MatPrimitiveKernel {
             }
             selected[word] = out;
         }
-        return MatBits.ofWords(size, selected);
+        return SelectionBits.ofWords(size, selected);
     }
 
     public static int countFlags(
-            MatBits candidates,
+            SelectionBits candidates,
             MatFlagVector flags,
             long requireAll,
             long requireAny,
@@ -93,8 +95,8 @@ public final class MatPrimitiveKernel {
     /**
      * One-pass flag + signed-int range filter. This replaces separate filter/filter/bitmap stages.
      */
-    public static MatBits selectFlagsAndIntRange(
-            MatBits candidates,
+    public static SelectionBits selectFlagsAndIntRange(
+            SelectionBits candidates,
             MatFlagVector flags,
             MatIntVector values,
             long requireAll,
@@ -132,10 +134,10 @@ public final class MatPrimitiveKernel {
             }
             selected[word] = out;
         }
-        return MatBits.ofWords(size, selected);
+        return SelectionBits.ofWords(size, selected);
     }
 
-    public static long sumLong(MatLongVector values, MatBits selection) {
+    public static long sumLong(MatLongVector values, SelectionBits selection) {
         Objects.requireNonNull(values, "values");
         Objects.requireNonNull(selection, "selection");
         if (values.size() != selection.size()) {
@@ -148,7 +150,7 @@ public final class MatPrimitiveKernel {
         return sum;
     }
 
-    public static int[] gatherInt(MatIntVector values, MatBits selection) {
+    public static int[] gatherInt(MatIntVector values, SelectionBits selection) {
         Objects.requireNonNull(values, "values");
         Objects.requireNonNull(selection, "selection");
         if (values.size() != selection.size()) {
@@ -162,7 +164,7 @@ public final class MatPrimitiveKernel {
         return result;
     }
 
-    public static int[] selectedRows(MatBits selection) {
+    public static int[] selectedRows(SelectionBits selection) {
         Objects.requireNonNull(selection, "selection");
         return selection.toIntArray();
     }

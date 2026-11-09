@@ -14,6 +14,8 @@
  *******************************************************************************/
 package jdk.internal.m3.collections.mat;
 
+import jdk.m3.arrays.SelectionBits;
+
 import java.util.Objects;
 
 /**
@@ -28,16 +30,16 @@ import java.util.Objects;
  * blob {@code 5b28947ef6bab63201d78a89284913778582c0cf} at com.synexia develop {@code 35474ccf} by
  * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
  */
-public final class MatBitsCodec implements MatCodec<MatBits> {
+public final class MatBitsCodec implements MatCodec<SelectionBits> {
     public static final MatBitsCodec INSTANCE = new MatBitsCodec();
 
     private MatBitsCodec() { }
 
     @Override public String typeId() { return "synex:bits-universe/1"; }
-    @Override public Class<MatBits> javaType() { return MatBits.class; }
+    @Override public Class<SelectionBits> javaType() { return SelectionBits.class; }
 
     @Override
-    public void encode(MatBits value, MatSink sink) {
+    public void encode(SelectionBits value, MatSink sink) {
         Objects.requireNonNull(value, "value");
         Objects.requireNonNull(sink, "sink");
         sink.i32(value.size());
@@ -47,11 +49,11 @@ public final class MatBitsCodec implements MatCodec<MatBits> {
     }
 
     @Override
-    public MatBits decode(MatSource source) {
+    public SelectionBits decode(MatSource source) {
         Objects.requireNonNull(source, "source");
         int universe = source.i32();
         if (universe < 0) throw new IllegalArgumentException("negative bitmap universe");
-        int wordCount = MatBits.wordsFor(universe);
+        int wordCount = SelectionBits.wordsFor(universe);
         if ((long) wordCount * Long.BYTES > source.remaining()) {
             throw new IllegalArgumentException("truncated canonical bitmap words");
         }
@@ -64,6 +66,6 @@ public final class MatBitsCodec implements MatCodec<MatBits> {
                 && (words[wordCount - 1] >>> partialBits) != 0L) {
             throw new IllegalArgumentException("noncanonical bitmap padding bits");
         }
-        return MatBits.ofWords(universe, words);
+        return SelectionBits.ofWords(universe, words);
     }
 }

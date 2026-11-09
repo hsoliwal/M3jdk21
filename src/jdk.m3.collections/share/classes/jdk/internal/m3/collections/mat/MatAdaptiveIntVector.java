@@ -13,6 +13,8 @@
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
 package jdk.internal.m3.collections.mat;
+
+import jdk.m3.arrays.SelectionBits;
 import java.util.Arrays;
 import java.util.Objects;
 /**
@@ -44,9 +46,9 @@ public final class MatAdaptiveIntVector{
     public MatCollectionPlan plan(){return plan;}public long primitivePayloadBytes(){return plan.primitivePayloadBytes();}
     public int get(int index){Objects.checkIndex(index,size);return switch(encoding){case CONSTANT->base;case PLAIN->plain[index];case PACKED->Math.toIntExact((long)base+read(packed,(long)index*width,width));};}
     public int[] toArray(){if(encoding==Encoding.PLAIN)return plain.clone();int[] r=new int[size];for(int i=0;i<size;i++)r[i]=get(i);return r;}
-    public MatBits equalTo(int value){MatBits.Builder b=MatBits.builder(size);for(int i=0;i<size;i++)if(get(i)==value)b.set(i);return b.build();}
-    public MatBits greaterOrEqual(int value){MatBits.Builder b=MatBits.builder(size);for(int i=0;i<size;i++)if(get(i)>=value)b.set(i);return b.build();}
-    public MatBits lessThan(int value){MatBits.Builder b=MatBits.builder(size);for(int i=0;i<size;i++)if(get(i)<value)b.set(i);return b.build();}
+    public SelectionBits equalTo(int value){SelectionBits.Builder b=SelectionBits.builder(size);for(int i=0;i<size;i++)if(get(i)==value)b.set(i);return b.build();}
+    public SelectionBits greaterOrEqual(int value){SelectionBits.Builder b=SelectionBits.builder(size);for(int i=0;i<size;i++)if(get(i)>=value)b.set(i);return b.build();}
+    public SelectionBits lessThan(int value){SelectionBits.Builder b=SelectionBits.builder(size);for(int i=0;i<size;i++)if(get(i)<value)b.set(i);return b.build();}
     @Override public boolean equals(Object other){if(this==other)return true;if(!(other instanceof MatAdaptiveIntVector v)||size!=v.size)return false;for(int i=0;i<size;i++)if(get(i)!=v.get(i))return false;return true;}
     @Override public int hashCode(){return Arrays.hashCode(toArray());}
     private static long mask(int width){if(width<=0||width>63)throw new IllegalArgumentException("width");return(1L<<width)-1L;}

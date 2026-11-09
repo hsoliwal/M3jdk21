@@ -1166,7 +1166,7 @@
   "module_source_successor_20261109": {
     "schema": "M3_COLLECTION_EXACT_SOURCE_REFINEMENT_V2",
     "successor_receipt": "qualification/module-source-successor-20261109.tsv",
-    "successor_receipt_sha256": "9b175eff051a9644eaffa1c4482c74ea81e91db34bd427f19f834ca15ac6d138",
+    "successor_receipt_sha256": "ef175c2eaed3cd25a895e7c15e07add42c4cf2da27f97419e3a9ced3cc1c9a8c",
     "receipt_columns": [
       "path",
       "inherited_sha256",

@@ -14,6 +14,8 @@
  *******************************************************************************/
 package jdk.internal.m3.collections.mat;
 
+import jdk.m3.arrays.SelectionBits;
+
 import java.util.Objects;
 
 /**
@@ -26,9 +28,9 @@ import java.util.Objects;
 public final class MatIdIntMap<T> {
     private final MatPool<T> pool;
     private final int[] values;
-    private final MatBits present;
+    private final SelectionBits present;
 
-    private MatIdIntMap(MatPool<T> pool, int[] values, MatBits present) {
+    private MatIdIntMap(MatPool<T> pool, int[] values, SelectionBits present) {
         this.pool = pool;
         this.values = values.clone();
         this.present = present;
@@ -54,11 +56,11 @@ public final class MatIdIntMap<T> {
     public static final class Builder<T> {
         private final MatPool<T> pool;
         private final int[] values;
-        private final MatBits.Builder present;
+        private final SelectionBits.Builder present;
         private Builder(MatPool<T> pool) {
             this.pool = Objects.requireNonNull(pool, "pool");
             this.values = new int[pool.size()];
-            this.present = MatBits.builder(pool.size());
+            this.present = SelectionBits.builder(pool.size());
         }
         public Builder<T> put(MatRef<T> ref, int value) {
             Objects.requireNonNull(ref, "ref");

@@ -14,6 +14,8 @@
  *******************************************************************************/
 package jdk.internal.m3.collections.mat;
 
+import jdk.m3.arrays.IntSelection;
+
 import java.util.Objects;
 
 /**
@@ -25,9 +27,9 @@ import java.util.Objects;
  */
 public final class MatNullableIntVector {
     private final int[] values;
-    private final MatSelection present;
+    private final IntSelection present;
 
-    public MatNullableIntVector(int[] values, MatSelection present) {
+    public MatNullableIntVector(int[] values, IntSelection present) {
         this.values = Objects.requireNonNull(values, "values").clone();
         this.present = Objects.requireNonNull(present, "present");
         if (present.rows() != values.length) throw new IllegalArgumentException("universe mismatch");
@@ -44,6 +46,6 @@ public final class MatNullableIntVector {
         Objects.checkIndex(index, values.length);
         return present.contains(index) ? values[index] : fallback;
     }
-    public MatSelection present() { return present; }
+    public IntSelection present() { return present; }
     public long primitivePayloadBytes() { return 4L * values.length + present.primitivePayloadBytes(); }
 }

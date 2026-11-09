@@ -14,6 +14,8 @@
  *******************************************************************************/
 package jdk.internal.m3.collections.mat;
 
+import jdk.m3.arrays.SelectionBits;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -41,10 +43,10 @@ public final class MatIdVector<T> {
     public int[] ids() { return ids.clone(); }
     public long payloadBytes() { return 4L * ids.length; }
 
-    public MatBits equalTo(MatRef<T> value) {
+    public SelectionBits equalTo(MatRef<T> value) {
         Objects.requireNonNull(value, "value");
         if (value.pool() != pool) throw new IllegalArgumentException("different pool");
-        MatBits.Builder bits = MatBits.builder(ids.length);
+        SelectionBits.Builder bits = SelectionBits.builder(ids.length);
         for (int i = 0; i < ids.length; i++) if (ids[i] == value.id()) bits.set(i);
         return bits.build();
     }

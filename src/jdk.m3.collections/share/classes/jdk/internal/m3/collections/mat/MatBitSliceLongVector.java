@@ -14,6 +14,8 @@
  *******************************************************************************/
 package jdk.internal.m3.collections.mat;
 
+import jdk.m3.arrays.SelectionBits;
+
 import java.util.Objects;
 
 /**
@@ -25,7 +27,7 @@ import java.util.Objects;
  * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
  */
 public final class MatBitSliceLongVector {
-    public record Addition(MatBitSliceLongVector values, MatBits overflow) { }
+    public record Addition(MatBitSliceLongVector values, SelectionBits overflow) { }
 
     private final int size;
     private final int width;
@@ -66,7 +68,7 @@ public final class MatBitSliceLongVector {
         return value;
     }
 
-    public MatBits equalTo(long value){
+    public SelectionBits equalTo(long value){
         check(value);
         long[] result=new long[words];
         for(int w=0;w<words;w++){
@@ -77,10 +79,10 @@ public final class MatBitSliceLongVector {
             }
             result[w]=equal & valid(w);
         }
-        return MatBits.ofWords(size,result);
+        return SelectionBits.ofWords(size,result);
     }
 
-    public MatBits unsignedGreaterOrEqual(long value){
+    public SelectionBits unsignedGreaterOrEqual(long value){
         check(value);
         long[] result=new long[words];
         for(int w=0;w<words;w++){
@@ -97,13 +99,13 @@ public final class MatBitSliceLongVector {
             }
             result[w]=(greater|equal)&valid(w);
         }
-        return MatBits.ofWords(size,result);
+        return SelectionBits.ofWords(size,result);
     }
 
     /**
      * Treats the bit-sliced value as a flag word and evaluates predicates 64 rows at a time.
      */
-    public MatBits matchFlags(long requireAll,long requireAny,long rejectAny){
+    public SelectionBits matchFlags(long requireAll,long requireAny,long rejectAny){
         long referenced=requireAll|requireAny|rejectAny;
         check(referenced);
         long[] result=new long[words];
@@ -141,7 +143,7 @@ public final class MatBitSliceLongVector {
 
             result[w]=selected&valid(w);
         }
-        return MatBits.ofWords(size,result);
+        return SelectionBits.ofWords(size,result);
     }
 
     public Addition add(MatBitSliceLongVector other,boolean saturating){
@@ -164,7 +166,7 @@ public final class MatBitSliceLongVector {
                 for(int p=0;p<width;p++) out.planes[p*words+w]|=carry;
             }
         }
-        return new Addition(out,MatBits.ofWords(size,overflowWords));
+        return new Addition(out,SelectionBits.ofWords(size,overflowWords));
     }
 
     private long valid(int word){
