@@ -16,7 +16,10 @@ import jdk.internal.mindex.M3TQ;
 
 public final class M3RegexShortCircuitTest {
     private static final Field QUERY;
-    private static final Field CACHED_QUERY;
+    // 954fcf1234bc (merge-loss leaf 71) removed Matcher.m3TqScanQuery: the Boolean scan verdict now lives in the
+    // Facts stamp slots while no Facts are retained (from = allowed ? regionStart : ~regionStart, to = regionEnd).
+    private static final Field STAMP_FROM;
+    private static final Field STAMP_TO;
     private static final Field CACHED_FACTS;
     private static long comparisons;
 
@@ -24,8 +27,10 @@ public final class M3RegexShortCircuitTest {
         try {
             QUERY = Pattern.class.getDeclaredField("m3Tq");
             QUERY.setAccessible(true);
-            CACHED_QUERY = Matcher.class.getDeclaredField("m3TqScanQuery");
-            CACHED_QUERY.setAccessible(true);
+            STAMP_FROM = Matcher.class.getDeclaredField("m3TqFactsFrom");
+            STAMP_FROM.setAccessible(true);
+            STAMP_TO = Matcher.class.getDeclaredField("m3TqFactsTo");
+            STAMP_TO.setAccessible(true);
             CACHED_FACTS = Matcher.class.getDeclaredField("m3TqFacts");
             CACHED_FACTS.setAccessible(true);
         } catch (ReflectiveOperationException problem) {
@@ -108,8 +113,9 @@ public final class M3RegexShortCircuitTest {
         Pattern second = Pattern.compile("qqq|zzz");
         Matcher reused = first.matcher("abc........qqq");
         if (!reused.find()) throw new AssertionError("first pattern");
-        if (CACHED_QUERY.get(reused) != QUERY.get(first)) {
-            throw new AssertionError("compiled scan cache not populated");
+        if (QUERY.get(first) == null || CACHED_FACTS.get(reused) != null
+                || STAMP_FROM.getInt(reused) != 0 || STAMP_TO.getInt(reused) != 14) {
+            throw new AssertionError("compiled scan verdict not stamped");
         }
         reused.usePattern(second).reset();
         if (!reused.find() || !"qqq".equals(reused.group())) {
@@ -118,16 +124,16 @@ public final class M3RegexShortCircuitTest {
         reused.reset("no candidate here");
         if (reused.find()) throw new AssertionError("new subject leaked old cache");
         Matcher sliced = first.matcher("abc---qqq").region(3, 9);
-        if (sliced.find() || CACHED_QUERY.get(sliced) != QUERY.get(first)) {
-            throw new AssertionError("region absence was not cached");
+        if (sliced.find() || STAMP_FROM.getInt(sliced) != ~3 || STAMP_TO.getInt(sliced) != 9) {
+            throw new AssertionError("region absence was not stamped");
         }
         sliced.region(0, 9);
         if (!sliced.find() || !"abc".equals(sliced.group())) {
             throw new AssertionError("region expansion reused a stale negative");
         }
         Matcher mutable = first.matcher(new StringBuilder("abc---qqq"));
-        if (!mutable.find() || CACHED_QUERY.get(mutable) != null) {
-            throw new AssertionError("mutable input must bypass the candidate cache");
+        if (!mutable.find() || STAMP_FROM.getInt(mutable) != -1 || STAMP_TO.getInt(mutable) != -1) {
+            throw new AssertionError("mutable input must bypass the candidate stamps");
         }
         // Pattern.LITERAL must retain the older shared facts cache for reuse
         // across a usePattern() transition, even when a scan plan is available.
