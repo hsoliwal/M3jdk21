@@ -916,6 +916,9 @@ m3/collections/src/main/java/jdk/internal/m3/collections/LongLfuCache.java	ABSEN
 m3/collections/src/main/java/jdk/internal/m3/collections/LongLinkedSequence.java	ABSENT	2750757f93d1ce5984dfa3c81089c086f3073c6c3dc5154636586aa75e389417
 m3/collections/src/main/java/jdk/internal/m3/collections/LongLongLongConsumer.java	ABSENT	1ec21c72f3215fa4802617925fc64558413de48a6692c84f03a35aec714db4b8
 m3/collections/src/main/java/jdk/internal/m3/collections/LongLongLongPredicate.java	ABSENT	1b8c372ceb654e4795d9cb8d7b750d9eb7fae758f23a734438f0d52b5f8c9e80
+m3/collections/src/main/java/jdk/internal/m3/collections/LongLongMapCompiler.java	ABSENT	7ad26e000352e391e7805ae4ebaa3e8ff11aae1c3b5c5895c38146b30b67bc09
+m3/collections/src/main/java/jdk/internal/m3/collections/LongLongMapHandle.java	ABSENT	45892a4d54eef3636b9ab32d21eca2c6b388768592ac9250743cbdae2eae9ee7
+m3/collections/src/main/java/jdk/internal/m3/collections/LongLongMapPlan.java	ABSENT	f8a190a833ea97e2bf7c1a88516f66d73670ef27435a41a326ea9073f0bda2ba
 m3/collections/src/main/java/jdk/internal/m3/collections/LongLongMapRepresentation.java	ABSENT	1b6771a3a6c243180deae16e82edb1e6ffe6368cbd6070818ecafa3d018e706e
 m3/collections/src/main/java/jdk/internal/m3/collections/LongLongMapSpec.java	ABSENT	331f6006c63801f4a243b2345d0106fc976e457d7a6f987b53e8281d9284c7a0
 m3/collections/src/main/java/jdk/internal/m3/collections/LongLongMultiMap.java	ABSENT	99e32f66ec8fd8dbc84c26ce625d94b0736f6b5aa9841774111e64b820022729

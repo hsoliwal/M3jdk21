@@ -15,7 +15,10 @@ usage: python3 m3/collections/qualification/module-source-successor-20261109.py 
    recorded() of verify_donation.py map them to the JDK module layout of #2849.
 3. Writes qualification/module-source-successor-20261109.tsv, seals it in verify_donation.py (_MODULE_* constants) and
    in m3-donation.json (module_source_successor_20261109, now source_set_successor_current).
-Idempotent: a second run changes nothing; --check writes nothing and exits 1 when a run would change a file."""
+Idempotent: a second run changes nothing; --check writes nothing and exits 1 when a run would change a file.
+Tip rule: this successor is the chain's tip (source_set_successor_current) and describes the current tree, so a lane that
+adds, renames or removes module sources reruns this generator in the same PR and the tip is re-sealed in place; the
+earlier receipts (installed manifest .. Master 20261031) are never modified."""
 import hashlib
 import importlib.util
 import json
