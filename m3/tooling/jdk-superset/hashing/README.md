@@ -374,3 +374,10 @@ SPDX lines as `#` comments, which every reader skips (`PERF.tsv`'s own conventio
    donor kernels (as XXH3_SPLIT did for XXH3; CityHash already has its short classes as methods) and the 128-bit
    XXH3 classes below 325 bytes, so that a hot caller can inline a short input's whole hash. Today these cost one
    call per hash, as in the vendored library.
+
+## Library checksums go to java.base
+
+`tools/checksums_to_jdk.py` (CHECKSUMS_TO_JDK v1) makes commons-codec's `PureJavaCrc32` and `PureJavaCrc32C`
+(1.17.1, 1.22.1 and the relocated `jdk.m3.codec`) delegate to `java.util.zip.CRC32` and `CRC32C`, whose lookup tables
+they used to copy. Values are identical to the upstream classes on every valid call; see
+`m3/evidence/java-base/CHECKSUMS_CODEC.md`.
