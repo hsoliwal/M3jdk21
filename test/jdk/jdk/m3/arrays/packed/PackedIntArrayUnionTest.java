@@ -14,29 +14,21 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.concurrent.CancellationException;
 import java.util.function.LongConsumer;
 import jdk.m3.arrays.IntWidth;
-import jdk.m3.collections.DefaultProgressMonitor;
-import jdk.m3.collections.ProgressMonitor;
-import jdk.m3.collections.ProgressState;
+import jdk.m3.arrays.WorkMonitor;
 import org.junit.jupiter.api.Test;
 
 /** PACKED_UNION U9: the Synexia common-collections PackedIntArray API on the M3 owner. */
 class PackedIntArrayUnionTest {
 
-    /** Counts worked units; optionally runs an action on each worked callback. */
-    private static final class Probe implements ProgressMonitor {
-        private final DefaultProgressMonitor d = new DefaultProgressMonitor();
+    /** Counts worked units; optionally runs an action on each worked callback (arrays layer: a WorkMonitor). */
+    private static final class Probe implements WorkMonitor {
         long worked;
+        boolean canceled;
         LongConsumer onWorked = w -> { };
 
-        @Override public void beginTask(String taskName, long totalWork) { d.beginTask(taskName, totalWork); }
-        @Override public void done() { d.done(); }
         @Override public void worked(long work) { worked += work; onWorked.accept(work); }
-        @Override public void setProgress(long w, long totalWork) { d.setProgress(w, totalWork); }
-        @Override public void setTaskName(String taskName) { d.setTaskName(taskName); }
-        @Override public void subTask(String subTaskName) { d.subTask(subTaskName); }
-        @Override public boolean isCanceled() { return d.isCanceled(); }
-        @Override public void setCanceled(boolean canceled) { d.setCanceled(canceled); }
-        @Override public ProgressState state() { return d.state(); }
+        @Override public boolean isCanceled() { return canceled; }
+        void setCanceled(boolean value) { canceled = value; }
     }
 
     @Test
