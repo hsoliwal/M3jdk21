@@ -337,15 +337,25 @@
       "upstream": "org/apache/commons/codec/digest/MurmurHash3.java"
     },
     {
-      "kind": "unmodified-production",
+      "base_repository": "m3/vendor/third_party/commons-codec-1.22.1/upstream-excluded/org/apache/commons/codec/digest/PureJavaCrc32.java",
+      "base_sha256": "c0df0c43aac27b857152831938d24e1bbc365a5ee8264adafb831db0e92ecb42",
+      "kind": "m3-overlay-source",
+      "overlay": "CHECKSUMS_TO_JDK v1",
+      "recipe": "m3/tooling/jdk-superset/hashing/tools/checksums_to_jdk.py",
+      "recipe_sha256": "fba0923b038765a27b7fd428ad295b8e4fe1a1d87ab674d47298ba25f4e1cf36",
       "repository": "m3/vendor/third_party/commons-codec-1.22.1/src/main/java/org/apache/commons/codec/digest/PureJavaCrc32.java",
-      "sha256": "c0df0c43aac27b857152831938d24e1bbc365a5ee8264adafb831db0e92ecb42",
+      "sha256": "029d6a35afca4c96792cb558b9e5c09525f91dc19d9614f1641e7fefa8f3bcc0",
       "upstream": "org/apache/commons/codec/digest/PureJavaCrc32.java"
     },
     {
-      "kind": "unmodified-production",
+      "base_repository": "m3/vendor/third_party/commons-codec-1.22.1/upstream-excluded/org/apache/commons/codec/digest/PureJavaCrc32C.java",
+      "base_sha256": "fc3fa167e9eca96eb362c17d582138f52d8751ccd421f19e0860816465e1cf7e",
+      "kind": "m3-overlay-source",
+      "overlay": "CHECKSUMS_TO_JDK v1",
+      "recipe": "m3/tooling/jdk-superset/hashing/tools/checksums_to_jdk.py",
+      "recipe_sha256": "fba0923b038765a27b7fd428ad295b8e4fe1a1d87ab674d47298ba25f4e1cf36",
       "repository": "m3/vendor/third_party/commons-codec-1.22.1/src/main/java/org/apache/commons/codec/digest/PureJavaCrc32C.java",
-      "sha256": "fc3fa167e9eca96eb362c17d582138f52d8751ccd421f19e0860816465e1cf7e",
+      "sha256": "7ddebb063b2f6cbcabbf0a58f76d7121022462d70dc00a3596a7e9e6156fd753",
       "upstream": "org/apache/commons/codec/digest/PureJavaCrc32C.java"
     },
     {
@@ -1362,13 +1372,31 @@
       "repository": "m3/vendor/third_party/commons-codec-1.22.1/src/main/descriptor/9/module-info.java",
       "sha256": "cf3c1aa48b815b1a85c5df6c5790e0603271498420ff634b3186606e564bc03a",
       "upstream": "META-INF/versions/9/module-info.class"
+    },
+    {
+      "kind": "unmodified-production-superseded-by-m3-overlay",
+      "repository": "m3/vendor/third_party/commons-codec-1.22.1/upstream-excluded/org/apache/commons/codec/digest/PureJavaCrc32.java",
+      "sha256": "c0df0c43aac27b857152831938d24e1bbc365a5ee8264adafb831db0e92ecb42",
+      "upstream": "org/apache/commons/codec/digest/PureJavaCrc32.java"
+    },
+    {
+      "kind": "unmodified-production-superseded-by-m3-overlay",
+      "repository": "m3/vendor/third_party/commons-codec-1.22.1/upstream-excluded/org/apache/commons/codec/digest/PureJavaCrc32C.java",
+      "sha256": "fc3fa167e9eca96eb362c17d582138f52d8751ccd421f19e0860816465e1cf7e",
+      "upstream": "org/apache/commons/codec/digest/PureJavaCrc32C.java"
+    },
+    {
+      "kind": "m3-overlay-record",
+      "repository": "m3/vendor/third_party/commons-codec-1.22.1/OVERLAY_SOURCES.json",
+      "sha256": "2f6a4df8c57ace6fcdc57672568318885e497969cf1b8691b62996264418b41e",
+      "upstream": "m3/tooling/jdk-superset/hashing/tools/checksums_to_jdk.py"
     }
   ],
   "group": "commons-codec",
   "kind": "MODULE",
   "license": "Apache License, Version 2.0 (from the license text; pom declares none)",
   "license_file": "LICENSE",
-  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "modifications": "M3 overlays CHECKSUMS_TO_JDK v1: digest.PureJavaCrc32 and PureJavaCrc32C keep their public members and delegate to java.base (java.util.zip.CRC32, CRC32C; PureJavaCrc32C through one MethodHandle because the donor compiles with --release 8), so their lookup tables are gone (recipe m3/tooling/jdk-superset/hashing/tools/checksums_to_jdk.py; the unchanged upstream files are retained under upstream-excluded/). No other upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
   "module_descriptors": [],
   "multi_release_overlays": {
     "not_reproduced": [],
