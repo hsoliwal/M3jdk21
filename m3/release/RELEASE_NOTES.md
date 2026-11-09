@@ -70,6 +70,21 @@ retain their original source pins and cannot fill these current-source rows.
 | `STRING_UTF16_CONTRACT` | no workflow job or command is bound to this gate yet |
 | `M3_CHANGED_ATOM_COVERAGE` | **PENDING** — instrumented, source-hash-checked >=90% line and branch coverage of changed contract-bearing M3 atoms, with complete inventory and raw report hashes; does not assert whole-JDK coverage |
 
+### Measured on candidate `fe51a3c9ff2f` (2026-11-09)
+
+The candidate is one commit over `890adb6410da` with the tree of `master` `809625db76e9` (`30651922a8b3`). It was measured locally on Windows 11 with WSL2 Ubuntu 24.04, x86_64; GitHub Actions runs were queued. Release admission is **HOLD**. The full table, log names and owner actions are in [RELEASE_PREPARATION.md](RELEASE_PREPARATION.md#2026-11-09-measured-candidate).
+
+| Gate | State |
+| --- | --- |
+| `RIGHTS_AND_LICENSE_BOUNDARY`, `SOURCE_TREE_AND_UPSTREAM_BASELINE`, `RELEASE_CLAIMS_VALIDATION`, `PROOF_PACK_SHA256` | PASS |
+| `PRECOMPUTE_JAVA_DIFFERENTIAL` | PASS: 125 tests, 0 failures |
+| `PRECOMPUTE_JNI_NATIVE_PARITY` | PASS: precompute `-Pnative` 125/0; word-row JNI in 4 VM modes; collections native 2854 tests, 0 failures, 1 skipped |
+| `M3_FOUNDATION_TESTS` | FAIL: `check-m3.py` stale fixture path (fix #2893); `build.sh` and the extra contracts pass |
+| `OPENJDK_SANITY_MATRIX` | FAIL: the linux-x64 source build stops in `java.base` (fixes #2899, #2901; one owner decision remains) |
+| `STRING_UTF16_CONTRACT` | PENDING: no candidate image |
+| `M3_CHANGED_ATOM_COVERAGE` | FAIL: `jdk.m3.text` line 71.9%, branch 54.0%; no reviewed inventory |
+| `M3_MAVEN_CONTROL_REACTOR` | HOLD: owner decision (standalone rule vs Synexia-owned receipt) |
+
 ## Platform matrix
 
 **Historical CI snapshot only:** the entries below describe 2026-10-31 observations
@@ -91,6 +106,19 @@ Recompute build, test and coverage evidence against the final candidate commit a
 | C11 JNI contract (windows-2022, ubuntu-24.04, ubuntu-24.04-arm, macos-15, macos-15-intel) | `m3-jni-common.yml` | run 41019153845: all jobs success | header contract only |
 
 ## Known issues
+
+- **Source-built JDK image (measured 2026-11-09):** `make images` on the candidate stops in
+  `java.base`. The build compiles with `-encoding ascii`, and 53 M3 Java sources contain
+  non-ASCII text. Next come 7 `-Werror` warnings in `java.base` and then 42 doclint errors
+  in `jdk.m3.collections`; the fixes are #2899 and #2901. After those, `jdk.m3.collections`
+  stops on javac's dangling-documentation-comment lint (at least 100 warnings, from the
+  `/*****` license headers). That last one needs an owner decision.
+- **Naming authority pin (measured 2026-11-09):** `name-plan.json` pins `name-mapping.json`
+  blob `3879a0f1fbc2`, but `9eb3a926ff` moved it to `f191f5772b1d`. The documented re-pin
+  path is the Synexia authority-pin recipe.
+- **Standalone ratchet (measured 2026-11-09):** the dependency counts grew past
+  `STANDALONE_BASELINE.tsv`. 152 of the 428 `D_REPO_REF` rows, and all 8 `D_SECRET` rows,
+  are in archived `retained-variants` copies.
 
 - **Platform builds (snapshot 2026-10-31):** the last recorded completed OpenJDK
   sanity run in this audit was from 2026-10-19; 305 Action runs were queued
