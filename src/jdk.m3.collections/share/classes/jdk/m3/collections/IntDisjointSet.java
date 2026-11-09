@@ -15,83 +15,41 @@
 package jdk.m3.collections;
 
 /**
- * Union-find over int ordinals using only {@code parent[]} and {@code componentSize[]} lanes: union by size,
- * one-pass path halving in {@link #find(int)}, no node or entry objects. Ordinals outside
- * {@code [0, size())} throw {@link IndexOutOfBoundsException}; a negative size throws
- * {@link IllegalArgumentException}.
+ * Union-find over int ordinals {@code [0, elements())}. Ordinals outside that range throw
+ * {@link IndexOutOfBoundsException}.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/IntDisjointSet.java}
- * blob {@code 93786bf4e4c4b4e308c32a6d1d12b2e95f04f871} at com.synexia develop {@code ded4a4acdffe5a27e1f2cedb02126762816b9850}
- * by RELOCATE_M3_OWNER v1 (pattern DSU_UNION_BY_SIZE_PATH_HALVING v1, Synexia recipe dataset
- * {@code m3-project-delta-20261021/datasets/dsu-path-halving-20261030}).
+ * <p>API_UNION U4 (2026-11-09): one owner for the concept. The Synexia contract (the common-collections
+ * IntDisjointSet) and the members of the former M3 class meet here; {@link #of(int)} returns the array
+ * implementation (union by size, path halving).</p>
  */
-public final class IntDisjointSet {
-    /** Number of int lanes per ordinal: {@code parent[]} and {@code componentSize[]}. */
-    private static final long PAYLOAD_LANES = 2L;
+public interface IntDisjointSet {
+    /** Returns {@code size} singleton components; a negative size throws IllegalArgumentException. */
+    static IntDisjointSet of(int size) { return new ArrayIntDisjointSet(size); }
 
-    private final int[] parent;
-    private final int[] componentSize;
-    private int components;
+    /** Returns the number of ordinals. */
+    int elements();
 
-    public IntDisjointSet(int size) {
-        if (size < 0) throw new IllegalArgumentException("size < 0");
-        parent = new int[size];
-        componentSize = new int[size];
-        reset();
-    }
+    /** Returns the number of components. */
+    int components();
 
-    public int size() { return parent.length; }
-    public int components() { return components; }
-    public long payloadBytes() {
-        return (long) parent.length * Integer.BYTES * PAYLOAD_LANES;
-    }
+    /** Returns the representative of {@code value}'s component. */
+    int find(int value);
 
-    public int find(int value) {
-        check(value);
-        // One-pass path halving: preserve the original union-by-size root while
-        // reducing parent hops without a separate root-discovery walk.
-        int next = parent[value];
-        while (next != value) {
-            int grandparent = parent[next];
-            parent[value] = grandparent;
-            value = grandparent;
-            next = parent[value];
-        }
-        return value;
-    }
+    /** Returns the size of {@code value}'s component. */
+    int componentSize(int value);
 
-    public boolean union(int left, int right) {
-        int a = find(left);
-        int b = find(right);
-        if (a == b) return false;
-        if (componentSize[a] < componentSize[b]) {
-            int swap = a;
-            a = b;
-            b = swap;
-        }
-        parent[b] = a;
-        componentSize[a] += componentSize[b];
-        components--;
-        return true;
-    }
+    /** Returns whether {@code left} and {@code right} are in one component. */
+    boolean connected(int left, int right);
 
-    public boolean connected(int left, int right) {
-        return find(left) == find(right);
-    }
+    /** Joins the components of {@code left} and {@code right}; returns whether they were separate. */
+    boolean union(int left, int right);
 
-    public int componentSize(int value) {
-        return componentSize[find(value)];
-    }
+    /** Restores every ordinal to a singleton component. */
+    void reset();
 
-    public void reset() {
-        components = parent.length;
-        for (int i = 0; i < parent.length; i++) {
-            parent[i] = i;
-            componentSize[i] = 1;
-        }
-    }
+    /** Returns the payload size in bytes. */
+    long payloadBytes();
 
-    private void check(int value) {
-        if (value < 0 || value >= parent.length) throw new IndexOutOfBoundsException(value);
-    }
+    /** Returns the number of ordinals (M3 name of {@link #elements()}). */
+    default int size() { return elements(); }
 }

@@ -68,7 +68,7 @@ public final class IntMinimumSpanningForest {
         }
         sort(order, weight, from, to, 0, m - 1);
 
-        IntDisjointSet dsu = new IntDisjointSet(vertexCount);
+        IntDisjointSet dsu = IntDisjointSet.of(vertexCount);
         int[] selected = new int[Math.min(m, Math.max(0, vertexCount - 1))];
         int selectedCount = 0;
         long total = 0L;
