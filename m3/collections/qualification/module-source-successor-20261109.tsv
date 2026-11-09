@@ -760,12 +760,14 @@ m3/collections/src/test/java/jdk/m3/collections/M3ObjectResidencyReuseTest.java	
 m3/collections/src/main/java/jdk/internal/m3/collections/AdaptiveEnumLongMap.java	ABSENT	e5cfb02110cd8a5c9acfd505db0b85f9de72a195f1e4bc1dc10b21335d35ae9a
 m3/collections/src/main/java/jdk/internal/m3/collections/AdaptiveIntArray.java	ABSENT	8ec58e47a60dbd6dc5fef2c5a2b3f2fbec76be0b8d93629046e547e1e1ffaa0f
 m3/collections/src/main/java/jdk/internal/m3/collections/Admission.java	ABSENT	4a3669d8fd566b48454a56a9adeec5c3c5b881c2c18bc340c504c5ffcdce6221
+m3/collections/src/main/java/jdk/internal/m3/collections/AlertException.java	ABSENT	556e03e2eee4ec13e41b08d6800b35fc0913ebbdab85498d977504b331d47539
 m3/collections/src/main/java/jdk/internal/m3/collections/AlgorithmCandidate.java	ABSENT	7069c1196d71a05cf5c1bc66103f45802bfa9bb8223000074168ad6642d51ccf
 m3/collections/src/main/java/jdk/internal/m3/collections/AlgorithmKernels.java	ABSENT	90e4a44bf2ad4834238291563515f9f36119679beb1072caed5c54ecf676da35
 m3/collections/src/main/java/jdk/internal/m3/collections/AlgorithmRequirements.java	ABSENT	17d275e83aeb162c12788193e55222ad37324add2259fe8d3ffe3c3b644710c6
 m3/collections/src/main/java/jdk/internal/m3/collections/AlgorithmSelection.java	ABSENT	41f0094467a0692ffe9e2df4e5b983681b0c9f19da541313b66adb8796c1501e
 m3/collections/src/main/java/jdk/internal/m3/collections/ArrayTable.java	ABSENT	f7ce0745b5c73253090932eb51f7de4c67257146756a5f7d701c64f724815182
 m3/collections/src/main/java/jdk/internal/m3/collections/BagRankIndex.java	ABSENT	550a6186b01d7814dd6a59655eb1cdb2052dd7b4f24128b13cc09d8788192e53
+m3/collections/src/main/java/jdk/internal/m3/collections/BatchProcessor.java	ABSENT	9028dd6cee3c73ef2946f3d9cd5c43e07afb8980cc812b6eeb2e194e70436caa
 m3/collections/src/main/java/jdk/internal/m3/collections/BlockCache.java	ABSENT	769842686427a8f31d8fde77da65a96e5a269f5df5420ff10a56f6b158029b67
 m3/collections/src/main/java/jdk/internal/m3/collections/BlockStore.java	ABSENT	54871a0997229a2942f691451cdf0b13ee08ef76598722aa4297a65b3d435e46
 m3/collections/src/main/java/jdk/internal/m3/collections/BooleanKeyMaps.java	ABSENT	449f6e41c715c980f543286dc283c226ba06e5918d4dd5b945b62a75a438b27a
@@ -864,6 +866,9 @@ m3/collections/src/main/java/jdk/internal/m3/collections/GenericCollections.java
 m3/collections/src/main/java/jdk/internal/m3/collections/GrowthListView.java	ABSENT	ffbe177b74f204a59d7ee692e311ca653f37b7ba0c30d305100415b05522c30e
 m3/collections/src/main/java/jdk/internal/m3/collections/HeapGrowth.java	ABSENT	2ba30b2a39990d88615177ee0151c3c4a9a9278ab01e75d36ca8433e998ef16c
 m3/collections/src/main/java/jdk/internal/m3/collections/HierarchyCover.java	ABSENT	36e3ec4af038fa0e3ae481c806450e7bf473bc84e65346b4390f812c737d04d8
+m3/collections/src/main/java/jdk/internal/m3/collections/ICoalescingBuffer.java	ABSENT	1ae2f9bc7af0748d19536230b524fadb68ace696b299f1bb99df870907bb65ac
+m3/collections/src/main/java/jdk/internal/m3/collections/ISequenceBarrier.java	ABSENT	5c1c9a42540b473335dab3e16ced6054f152c8e522852e109829fab00fc09ee6
+m3/collections/src/main/java/jdk/internal/m3/collections/IWaitStrategy.java	ABSENT	0d2b234c792f7062b48f4f78494887b2f500d276970626d383d2c896dbcdc292
 m3/collections/src/main/java/jdk/internal/m3/collections/ImmutableId.java	ABSENT	0d3fe928aa299ef04d10e331b15b3bfab7321a7bb672d223ffd98688f74e6038
 m3/collections/src/main/java/jdk/internal/m3/collections/IndexPartitions.java	ABSENT	ca24a180debaefcb8a04cc26d4174927d361f2297697a24afd3911aeb8f8fa5f
 m3/collections/src/main/java/jdk/internal/m3/collections/IndexedBiMap.java	ABSENT	8671ed50563d8e674fdf7f5a5679b3747c5edafd98743e22ddeb0d141a9ebc44
@@ -1767,6 +1772,7 @@ m3/collections/src/test/java/jdk/internal/m3/collections/AdvancedAlgorithmShapes
 m3/collections/src/test/java/jdk/internal/m3/collections/ArrayStorageNativeContractTest.java	ABSENT	2187a71a607428f4921e39cf5da2f21163631294d3d6443dcf6b4ac1a37d81c7
 m3/collections/src/test/java/jdk/internal/m3/collections/BagAlgebraProof.java	ABSENT	69d2ac96faedec894f7a7379e740c24c68e67f1886cbb309e3a966de48770d67
 m3/collections/src/test/java/jdk/internal/m3/collections/BagMapFailureProof.java	ABSENT	0bddf211655cb4921ccd88ab137ae52b562d284e0960e53ddd8a76fa01ffdcc9
+m3/collections/src/test/java/jdk/internal/m3/collections/BatchProcessorTest.java	ABSENT	ec4c634668e2f6e3f592011ee5cdfbc914fe92d70567068adbfb37a8d3a6a95f
 m3/collections/src/test/java/jdk/internal/m3/collections/BlockCacheTest.java	ABSENT	cf850cd75a536fee1f3531c0c3dc6afd12ddec14af34927ddeaa0dfd823f01a1
 m3/collections/src/test/java/jdk/internal/m3/collections/ChangeJournalTest.java	ABSENT	cb6c734a4de67a77df7441d4127be3c06c59bc0feadb9a8944f5bb1c973d092b
 m3/collections/src/test/java/jdk/internal/m3/collections/CollectionSdkCatalogSelfTest.java	ABSENT	a5609e4e2481ba702bcf80a78d45b0ee0aa5857a824ee8596eaac13de5672132
