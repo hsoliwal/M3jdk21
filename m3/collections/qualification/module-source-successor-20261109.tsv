@@ -906,6 +906,7 @@ m3/collections/src/main/java/jdk/internal/m3/collections/LongCompositeViews.java
 m3/collections/src/main/java/jdk/internal/m3/collections/LongCoordinateCompression.java	ABSENT	54a476e12f2d1681804362e68b472df1300c2ce6bb22d18ad89d40c36bfef183
 m3/collections/src/main/java/jdk/internal/m3/collections/LongDag.java	ABSENT	ceb0cd063f735c8263285a673288b1e9d55e81be53739731a8c9457ad7418f0b
 m3/collections/src/main/java/jdk/internal/m3/collections/LongDomainMap.java	ABSENT	c9de1e3d953c43aaf5673d7389d1441655106e2f70a2cf49487c37454cffa3a8
+m3/collections/src/main/java/jdk/internal/m3/collections/LongFilteredSortedSetView.java	ABSENT	4498c92bc427293ae23cf3475e413a15b3d27b4787d7d5aa95689d145771a4b2
 m3/collections/src/main/java/jdk/internal/m3/collections/LongIndexPathBudget.java	ABSENT	f2793feae047ee2c6bcda648ebecb2365329f43ab1bc2307be8a7759e5364db5
 m3/collections/src/main/java/jdk/internal/m3/collections/LongIndexPathMasksJNI.java	ABSENT	bd338c36c5fc87e72c6573a2c18c683f1ffb0160017246a11fcdca534dc2f66f
 m3/collections/src/main/java/jdk/internal/m3/collections/LongKeyOrder.java	ABSENT	e7aa2fb0dcea49e75a2974a997f340ce135fe39b14cc50ab3167011d4c085793
@@ -1811,6 +1812,7 @@ m3/collections/src/test/java/jdk/internal/m3/collections/ListModelLazyTest.java	
 m3/collections/src/test/java/jdk/internal/m3/collections/LongCountSmallerRightContract.java	ABSENT	7e263393409e74f1497adc9ef30251d2ac89d09d64b60d15bbc6cf435d795021
 m3/collections/src/test/java/jdk/internal/m3/collections/LongCountSmallerRightTest.java	ABSENT	1ba7e6bb52ad8cea8ef8d94b2bbba4fa7e3cca1cca6ec480e00abbe0c4901361
 m3/collections/src/test/java/jdk/internal/m3/collections/LongDifferenceContract.java	ABSENT	5a779ada30410ce562680d6e6b829a7d871f618ab3b4fe018b3bb88e5c34e6e0
+m3/collections/src/test/java/jdk/internal/m3/collections/LongFilteredSortedSetViewTest.java	ABSENT	eaeb69b5e6575c8e0851c343047e8dde9ba1e11818fa01ee505ce728bf81944b
 m3/collections/src/test/java/jdk/internal/m3/collections/LongFloorIndicesContract.java	ABSENT	a8d28ef72747a56dbaf954253105b4b490fc347bbadffa5e1fe9c74062377118
 m3/collections/src/test/java/jdk/internal/m3/collections/LongLazyPriorityFrontierTest.java	ABSENT	0ee574821c60d62d77662fd181169525d4220d1c24129571fbebdf304037e3e4
 m3/collections/src/test/java/jdk/internal/m3/collections/LongLowerBoundWindowContract.java	ABSENT	0597c1a4f9b7bb9e338f034bfa2c23d322c9ef2ae7e2e65809fe4f50fa92d5c2
