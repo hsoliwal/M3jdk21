@@ -18,6 +18,17 @@ HISTORICAL_SUCCESSOR = (
 )
 
 
+# The rows above stay byte-identical history. The files themselves moved on: CURATE_E E2 (#2848) dropped the redundant
+# M3 prefix and the JDK module move (#2849) gave them their home in src/jdk.m3.collections and test/jdk. The existence
+# check follows each file to that home; nothing in the receipt changes.
+CURRENT_HOME = {
+    'm3/collections/src/main/java/jdk/m3/collections/M3ObjectStateSlots28.java':
+        'src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStateSlots28.java',
+    'm3/collections/src/test/java/jdk/m3/collections/M3ObjectStateSlots28SelfTest.java':
+        'test/jdk/jdk/m3/collections/ObjectStateSlots28SelfTest.java',
+}
+
+
 class ObjectStateOffsetReceivingTest(unittest.TestCase):
     def test_exact_two_java_postimages_and_unmodified_historical_rows(self):
         approved = approved_successor()
@@ -32,8 +43,9 @@ class ObjectStateOffsetReceivingTest(unittest.TestCase):
         self.assertEqual({row[0] for row in EXPECTED}, {p for p, _ in result[1:]})
         for path, before, after in EXPECTED:
             self.assertEqual(after, dict(result)[path])
-            self.assertTrue((ROOT / path).is_file())
-            self.assertFalse((ROOT / path).is_symlink())
+            home = ROOT / CURRENT_HOME.get(path, path)
+            self.assertTrue(home.is_file())
+            self.assertFalse(home.is_symlink())
 
     def test_preimage_must_match_if_historical_row_already_exists(self):
         approved = approved_successor()
