@@ -1,5 +1,5 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
-/*******************************************************************************
+/* *****************************************************************************
  * Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others.
  *
  * This program and the accompanying materials are made available under the

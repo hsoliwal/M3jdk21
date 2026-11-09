@@ -21,3 +21,12 @@ mode changes: 0
 files by module:     787 jdk.m3.collections 
 ## fixed point after staging
 DOC_BANNER_OPENER_CHECK matches=0
+
+## v1.1 (2026-11-09T13:45:34Z): banner after leading // lines
+MATCH src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/packed/PackedUnsignedLongVector.java
+DOC_BANNER_OPENER_CHECK matches=1
+REWROTE src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/packed/PackedUnsignedLongVector.java
+DOC_BANNER_OPENER_APPLY rewritten=1
+DOC_BANNER_OPENER_CHECK matches=0
+DOC_BANNER_OPENER_APPLY rewritten=0
+diff shape: 1 files 1+/1-, 1 files total
