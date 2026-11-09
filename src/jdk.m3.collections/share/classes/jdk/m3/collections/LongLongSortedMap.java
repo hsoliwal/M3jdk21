@@ -33,6 +33,9 @@ public interface LongLongSortedMap {
 
     long getOrThrow(long key);
 
+    /** Returns the value of {@code key}, or 0 when absent (Synexia name; API_UNION U8). */
+    default long get(long key) { return getOrDefault(key, 0L); }
+
     boolean remove(long key);
 
     long firstKey();
