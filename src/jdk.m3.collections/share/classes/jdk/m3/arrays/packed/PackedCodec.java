@@ -16,6 +16,14 @@ final class PackedCodec {
         return (raw << shift) >> shift;
     }
 
+    static long readUnsigned(byte[] data, int offset, int bytes) {
+        long raw = 0;
+        for (int i = 0; i < bytes; i++) {
+            raw |= (data[offset + i] & 0xffL) << (i * Byte.SIZE);
+        }
+        return raw;
+    }
+
     static void writeSigned(byte[] data, int offset, int bytes, long value) {
         for (int i = 0; i < bytes; i++) {
             data[offset + i] = (byte) (value >>> (i * Byte.SIZE));
