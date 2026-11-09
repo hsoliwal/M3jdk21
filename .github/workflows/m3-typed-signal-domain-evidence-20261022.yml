@@ -3,9 +3,9 @@ name: M3JDK21 typed domain progressive evidence Java21
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3SignalColumns.java'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3SignalDomainPolicy.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3SignalDomainPolicy*.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalColumns.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalDomainPolicy.java'
+      - 'test/jdk/jdk/m3/collections/M3SignalDomainPolicy*.java'
       - 'm3/collections/qualification/typed-signal-domain-evidence-20261022/**'
       - '.github/workflows/m3-typed-signal-domain-evidence-20261022.yml'
   workflow_dispatch:
@@ -41,13 +41,13 @@ jobs:
           out="$RUNNER_TEMP/m3-domain-evidence"
           mkdir -p "$out/classes" "$out/plugin/META-INF/services" "$out/demo-classes"
           javac --release 21 -proc:none -Xlint:all -Werror -d "$out/classes" \
-            m3/collections/src/main/java/jdk/m3/collections/M3SignalColumns.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3SignalTopK.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3SignalRelations.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3SourceSignalImage.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3ProgressiveSignalEvidence.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3SignalDomainPolicy.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3SignalDomainPolicySelfTest.java
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalColumns.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalTopK.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalRelations.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SourceSignalImage.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ProgressiveSignalEvidence.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalDomainPolicy.java \
+            test/jdk/jdk/m3/collections/M3SignalDomainPolicySelfTest.java
           java -cp "$out/classes" jdk.m3.collections.M3SignalDomainPolicySelfTest
       - name: Original javac M3SourceSignals Plugin -> SHA-256 image -> original policy
         shell: bash

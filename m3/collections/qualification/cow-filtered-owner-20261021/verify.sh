@@ -4,10 +4,10 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
 cd "$ROOT"
-SOURCE="m3/collections/src/main/java/jdk/m3/collections/M3CollectionViews.java"
-COW="m3/collections/src/test/java/jdk/m3/collections/M3FilteredCowOwnerContract.java"
-JUNIT="m3/collections/src/test/java/jdk/m3/collections/M3FilteredCowOwnerTest.java"
-ISEMPTY="m3/collections/src/test/java/jdk/m3/collections/M3FilteredIsEmptyContract.java"
+SOURCE="src/jdk.m3.collections/share/classes/jdk/m3/collections/M3CollectionViews.java"
+COW="test/jdk/jdk/m3/collections/M3FilteredCowOwnerContract.java"
+JUNIT="test/jdk/jdk/m3/collections/M3FilteredCowOwnerTest.java"
+ISEMPTY="test/jdk/jdk/m3/collections/M3FilteredIsEmptyContract.java"
 BASELINE_BLOB="a99cd0355879a2f941079e8401de00b51cd0093e"
 WORK="$(mktemp -d)"
 trap 'rm -rf "$WORK"' EXIT

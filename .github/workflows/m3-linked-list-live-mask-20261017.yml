@@ -5,8 +5,8 @@ on:
     branches: ['m3/linked-list-live-mask-20261017']
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3LinkedList.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3LinkedListLiveMaskContract.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LinkedList.java'
+      - 'test/jdk/jdk/m3/collections/M3LinkedListLiveMaskContract.java'
       - 'm3/collections/qualification/m3-linked-list-live-mask-20261017/**'
       - '.github/workflows/m3-linked-list-live-mask-20261017.yml'
   workflow_dispatch:
@@ -38,8 +38,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          pkg=m3/collections/src/main/java/jdk/m3/collections
-          test=m3/collections/src/test/java/jdk/m3/collections
+          pkg=src/jdk.m3.collections/share/classes/jdk/m3/collections
+          test=test/jdk/jdk/m3/collections
           classes="$RUNNER_TEMP/m3-linked-list-classes"
           mkdir -p "$classes"
           javac --release 21 -proc:none -Xlint:all -Werror -d "$classes" \
@@ -50,8 +50,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for c in m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
-                   m3/collections/src/main/native/collections/m3_index_mask_window.c; do
+          for c in src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c \
+                   src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_window.c; do
             gcc -std=c17 -Wall -Wextra -Werror -pedantic -fsyntax-only \
               -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" "$c"
           done

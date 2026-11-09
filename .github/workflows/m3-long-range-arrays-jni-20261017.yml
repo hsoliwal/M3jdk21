@@ -3,8 +3,8 @@ name: M3 long-range arrays with real JNI masks
 on:
   pull_request:
     paths:
-      - "m3/collections/src/main/java/jdk/m3/collections/M3LongRangeSet.java"
-      - "m3/collections/src/test/java/jdk/m3/collections/M3LongRangeSet*.java"
+      - "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongRangeSet.java"
+      - "test/jdk/jdk/m3/collections/M3LongRangeSet*.java"
       - "m3/collections/qualification/range-atom/successor/**"
       - "m3/collections/qualification/long-range-set-20261017/**"
       - "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-long-range-array-flags-20261017/**"
@@ -52,14 +52,14 @@ jobs:
         run: |
           set -euxo pipefail
           mkdir -p proof/classes proof/native
-          find m3/collections/src/main/java -name '*.java' -print0 | sort -z | \
+          find m3/collections/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/collections src/jdk.m3.collections/share/classes/jdk/internal/m3/collections -name '*.java' -print0 | sort -z | \
             xargs -0 javac --release 21 -proc:none -Xlint:all,-module -Werror \
               --module-path m3/arrays/target/m3-arrays-0.1.0-SNAPSHOT.jar -d proof/classes
           javac --release 21 -proc:none -Xlint:all -Werror \
             --module-path m3/arrays/target/m3-arrays-0.1.0-SNAPSHOT.jar \
             -cp proof/classes -d proof/classes \
-            m3/collections/src/test/java/jdk/m3/collections/M3LongRangeSetSelfTest.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3IndexPathMasksSelfTest.java
+            test/jdk/jdk/m3/collections/M3LongRangeSetSelfTest.java \
+            test/jdk/jdk/m3/collections/M3IndexPathMasksSelfTest.java
           java -Xmx128m -cp proof/classes jdk.m3.collections.M3LongRangeSetSelfTest | tee proof/long-range-java.log
           grep -q 'PASS M3LongRangeSetSelfTest oracleChecks=' proof/long-range-java.log
           java -Xint -Xmx128m -cp proof/classes jdk.m3.collections.M3LongRangeSetSelfTest
@@ -71,11 +71,11 @@ jobs:
           javac --release 21 -proc:none -h proof/native \
             --module-path m3/arrays/target/m3-arrays-0.1.0-SNAPSHOT.jar \
             -cp proof/classes \
-            -d proof/classes m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java
+            -d proof/classes src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexPathMasks.java
           gcc -std=c17 -Wall -Wextra -Wconversion -Wshadow -Werror -pedantic \
             -fPIC -shared -fsanitize=undefined -fno-sanitize-recover=all \
             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
-            m3/collections/src/main/native/collections/m3_index_path_masks.c \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_path_masks.c \
             -o proof/native/libm3_collections_pathmask.so
           nm -D proof/native/libm3_collections_pathmask.so | \
             grep Java_jdk_m3_collections_M3IndexPathMasks_selectNative

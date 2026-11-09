@@ -3,8 +3,8 @@ on:
   pull_request:
     paths:
       - 'm3/collections/qualification/m3-long-path-input-budget-20261018/**'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongIndexPathBudget.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3LongIndexPathBudgetSelfTest.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongIndexPathBudget.java'
+      - 'test/jdk/jdk/m3/collections/M3LongIndexPathBudgetSelfTest.java'
       - '.github/workflows/m3-long-path-input-budget-20261018.yml'
   workflow_dispatch:
 permissions:
@@ -35,8 +35,8 @@ jobs:
           set -euo pipefail
           OUT="$RUNNER_TEMP/m3-budget-proof"
           mkdir -p "$OUT/classes" "$OUT/native"
-          PKG=m3/collections/src/main/java/jdk/m3/collections
-          TEST=m3/collections/src/test/java/jdk/m3/collections
+          PKG=src/jdk.m3.collections/share/classes/jdk/m3/collections
+          TEST=test/jdk/jdk/m3/collections
           javac --release 21 -proc:none -Xlint:all -Werror -d "$OUT/classes" \
             "$PKG/M3LongIndexPathMasks.java" "$PKG/M3LongIndexPathMasksJNI.java" \
             "$PKG/M3LongIndexPathBudget.java" "$TEST/M3LongIndexPathBudgetSelfTest.java"
@@ -46,7 +46,7 @@ jobs:
           set -euo pipefail
           OUT="$RUNNER_TEMP/m3-budget-proof"
           JAVA_HOME="$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")"
-          SRC=m3/collections/src/main/native/collections/m3_long_index_path_masks_jni.c
+          SRC=src/jdk.m3.collections/share/native/libm3collections/collections/m3_long_index_path_masks_jni.c
           for MODE in strict ubsan; do
             case "$MODE" in
               strict) FLAGS='';;

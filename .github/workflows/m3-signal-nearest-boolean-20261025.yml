@@ -3,10 +3,10 @@ name: M3JDK21 consolidated source-sealed signal acceptance
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3Signal*.java'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3SourceSignalQualityFactory.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3Signal*.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3LongTreeSetMaskCompactionContract.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3Signal*.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SourceSignalQualityFactory.java'
+      - 'test/jdk/jdk/m3/collections/M3Signal*.java'
+      - 'test/jdk/jdk/m3/collections/M3LongTreeSetMaskCompactionContract.java'
       - 'm3/collections/qualification/signal-*/**'
       - '.github/workflows/m3-signal-nearest-boolean-20261025.yml'
   workflow_dispatch:
@@ -64,33 +64,33 @@ jobs:
           out="$RUNNER_TEMP/m3-signal-consolidated"
           mkdir -p "$out/classes"
           javac --release 21 -proc:none -Xlint:all -Werror -d "$out/classes" \
-            m3/collections/src/main/java/jdk/m3/collections/M3ChildProgressMonitor.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3ProgressMonitor.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3ProgressState.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3ShadowStreams.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3SignalBooleanQuery.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3SignalColumns.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3SignalDependencyEpochs.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3SignalExactIntegerDistance.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3SignalExactRangeIndex.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3SignalQualitySchema.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3SignalRelations.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3SignalTopK.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3SourceSignalImage.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3SourceSignalQualityFactory.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3SignalColumnsSelfTest.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3SignalTopKSelfTest.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3SourceSignalImageSelfTest.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3SignalDependencyEpochsSelfTest.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3SignalQualitySchemaSelfTest.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3SourceSignalQualityFactorySelfTest.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3SignalExactRangeIndexSelfTest.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3SignalBooleanQuerySelfTest.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3SignalExecutionPressureSelfTest.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3SignalViewportWindowSelfTest.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3SignalRankedQuerySelfTest.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3SignalExactIntegerDistanceSelfTest.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3SignalNearestBooleanSelfTest.java
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ChildProgressMonitor.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ProgressMonitor.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ProgressState.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ShadowStreams.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalBooleanQuery.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalColumns.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalDependencyEpochs.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalExactIntegerDistance.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalExactRangeIndex.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalQualitySchema.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalRelations.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalTopK.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SourceSignalImage.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SourceSignalQualityFactory.java \
+            test/jdk/jdk/m3/collections/M3SignalColumnsSelfTest.java \
+            test/jdk/jdk/m3/collections/M3SignalTopKSelfTest.java \
+            test/jdk/jdk/m3/collections/M3SourceSignalImageSelfTest.java \
+            test/jdk/jdk/m3/collections/M3SignalDependencyEpochsSelfTest.java \
+            test/jdk/jdk/m3/collections/M3SignalQualitySchemaSelfTest.java \
+            test/jdk/jdk/m3/collections/M3SourceSignalQualityFactorySelfTest.java \
+            test/jdk/jdk/m3/collections/M3SignalExactRangeIndexSelfTest.java \
+            test/jdk/jdk/m3/collections/M3SignalBooleanQuerySelfTest.java \
+            test/jdk/jdk/m3/collections/M3SignalExecutionPressureSelfTest.java \
+            test/jdk/jdk/m3/collections/M3SignalViewportWindowSelfTest.java \
+            test/jdk/jdk/m3/collections/M3SignalRankedQuerySelfTest.java \
+            test/jdk/jdk/m3/collections/M3SignalExactIntegerDistanceSelfTest.java \
+            test/jdk/jdk/m3/collections/M3SignalNearestBooleanSelfTest.java
           for test in M3SignalColumnsSelfTest M3SignalTopKSelfTest M3SourceSignalImageSelfTest M3SignalDependencyEpochsSelfTest M3SignalQualitySchemaSelfTest M3SourceSignalQualityFactorySelfTest M3SignalExactRangeIndexSelfTest M3SignalBooleanQuerySelfTest M3SignalExecutionPressureSelfTest M3SignalViewportWindowSelfTest M3SignalRankedQuerySelfTest M3SignalExactIntegerDistanceSelfTest M3SignalNearestBooleanSelfTest; do
             java -Xss256k -cp "$out/classes" "jdk.m3.collections.$test"
             java -Xint -Xss256k -cp "$out/classes" "jdk.m3.collections.$test"

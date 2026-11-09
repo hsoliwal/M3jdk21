@@ -6,8 +6,8 @@ on:
       - 'm3/collections/qualification/owned-spring-case-insensitive-map-20261018/**'
       - 'm3/collections/qualification/owned-spring-case-insensitive-map-20261024/**'
       - 'm3/collections/recipe/owned-spring-case-insensitive-map-20261018/**'
-      - 'm3/collections/src/main/java/**'
-      - 'm3/collections/src/main/native/collections/m3_index_mask_compactor.c'
+      - 'src/jdk.m3.collections/share/classes/**'
+      - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c'
       - '.github/workflows/m3-owned-spring-case-insensitive-map.yml'
   workflow_dispatch:
 permissions:
@@ -27,6 +27,9 @@ jobs:
           persist-credentials: false
           sparse-checkout: |
             m3/collections
+            src/jdk.m3.collections/share
+            test/jdk/jdk/m3/collections
+            test/jdk/jdk/internal/m3/collections
             .github/workflows
       - uses: actions/setup-java@v4
         with:
@@ -45,7 +48,7 @@ jobs:
           M3_PROVIDER="$M3_TASK_OUT/spring-core-6.2.0.jar"
           curl --fail --location --silent --show-error --output "$M3_PROVIDER" https://repo.maven.apache.org/maven2/org/springframework/spring-core/6.2.0/spring-core-6.2.0.jar
           python -I -S -B "$M3_Q/verify.py" --jar "$M3_PROVIDER"
-          gcc -std=c17 -O2 -Wall -Wextra -Werror -fPIC -shared -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" m3/collections/src/main/native/collections/m3_index_mask_compactor.c -o "$M3_TASK_OUT/native/libm3_collections_mask.so"
+          gcc -std=c17 -O2 -Wall -Wextra -Werror -fPIC -shared -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c -o "$M3_TASK_OUT/native/libm3_collections_mask.so"
           python -I -S -B "$M3_Q/run_contracts.py" --jar "$M3_PROVIDER" --out "$M3_TASK_OUT/contracts" --temp "$M3_TASK_OUT/tmp" --native-library-dir "$M3_TASK_OUT/native"
           python -I -S -B "$M3_Q/verify.py" --jar "$M3_PROVIDER"
           M3_BUDGET_OUT="$M3_TASK_OUT" python -I -S -B -c 'import os,shutil; from pathlib import Path; p=Path(os.environ["M3_BUDGET_OUT"]); assert sum(f.stat().st_size for f in p.rglob("*") if f.is_file())<=512*1024**2; assert shutil.disk_usage(p).free>=8*1024**3'
@@ -60,6 +63,9 @@ jobs:
           persist-credentials: false
           sparse-checkout: |
             m3/collections
+            src/jdk.m3.collections/share
+            test/jdk/jdk/m3/collections
+            test/jdk/jdk/internal/m3/collections
             .github/workflows
       - uses: actions/setup-java@v4
         with:
@@ -90,6 +96,9 @@ jobs:
           persist-credentials: false
           sparse-checkout: |
             m3/collections
+            src/jdk.m3.collections/share
+            test/jdk/jdk/m3/collections
+            test/jdk/jdk/internal/m3/collections
             .github/workflows
       - uses: actions/setup-java@v4
         with:

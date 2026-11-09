@@ -8,7 +8,7 @@ import hashlib,sys
 root=Path(sys.argv[1]).resolve()
 crate=root/'m3/collections/qualification/state-slots-constructor-20261017/recipe/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-state-slots-constructor-20261017'
 row=(crate/'manifest.tsv').read_text(encoding='utf-8').strip().split('\t')
-assert len(row)==4 and row[0]=='m3/collections/src/main/java/jdk/m3/collections/M3ObjectStateSlots28.java'
+assert len(row)==4 and row[0]=='src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectStateSlots28.java'
 before=(crate/'pre'/row[3]).read_bytes()
 after=(crate/row[3]).read_bytes()
 actual=(root/row[0]).read_bytes()
@@ -24,8 +24,8 @@ PY
 work=$(mktemp -d)
 trap 'rm -rf "$work"' EXIT HUP INT TERM
 mkdir -p "$work/old-src/jdk/m3/collections" "$work/old" "$work/new"
-main="$repo/m3/collections/src/main/java/jdk/m3/collections"
-test="$repo/m3/collections/src/test/java/jdk/m3/collections"
+main="$repo/src/jdk.m3.collections/share/classes/jdk/m3/collections"
+test="$repo/test/jdk/jdk/m3/collections"
 cp "$repo/m3/collections/qualification/state-slots-constructor-20261017/recipe/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-state-slots-constructor-20261017/pre/M3ObjectStateSlots28.java.txt" \
     "$work/old-src/jdk/m3/collections/M3ObjectStateSlots28.java"
 javac --release 21 -proc:none -Xlint:all,-missing-explicit-ctor,-serial -Werror -d "$work/old" \

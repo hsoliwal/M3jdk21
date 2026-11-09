@@ -30,6 +30,41 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+# The module move of 2026-11-08 (MOVE_TO_JDK_MODULE v3, m3/tooling/jdk-naming/move_module_area.py) gives each recorded
+# custody path a new home; recorded paths stay the keys of the hash-pinned manifests. Specific entries come first.
+MOVED_PREFIXES = (
+    ('m3/collections/src/test/java/MaskWindowConvergence.java',
+     'test/jdk/jdk/m3/collections/MaskWindowConvergence.java'),
+    ('m3/collections/src/main/java/jdk/', 'src/jdk.m3.collections/share/classes/jdk/'),
+    ('m3/collections/src/test/java/jdk/', 'test/jdk/jdk/'),
+    ('m3/collections/src/main/native/', 'src/jdk.m3.collections/share/native/libm3collections/'),
+    ('m3/collections/src/main/c/', 'src/jdk.m3.collections/share/native/libm3collections/'),
+    ('m3/collections/src/test/native/', 'test/jdk/jdk/m3/collections/native/'),
+    ('m3/collections/src/main/resources/', 'src/jdk.m3.collections/share/classes/'),
+    ('m3/collections/src/test/resources/', 'test/jdk/jdk/m3/collections/resources/'),
+)
+MOVED_JAVA_ROOTS = ('src/jdk.m3.collections/share/classes/jdk/m3/collections',
+                    'src/jdk.m3.collections/share/classes/jdk/internal/m3/collections',
+                    'test/jdk/jdk/m3/collections', 'test/jdk/jdk/internal/m3/collections')
+
+
+def located(path):
+    """The file of a recorded custody path, at its home after the module move."""
+    for old, new in MOVED_PREFIXES:
+        if path.startswith(old):
+            return REPO / (new + path[len(old):])
+    return REPO / path
+
+
+def recorded(path):
+    """The recorded custody key of a moved Java file (inverse of located)."""
+    relative = path.relative_to(REPO).as_posix()
+    for old, new in MOVED_PREFIXES:
+        if relative.startswith(new):
+            return old + relative[len(new):]
+    return relative
+
+
 def unique_json_object(pairs):
     """Reject duplicate metadata keys before historical fields can shadow live pins."""
     result = {}
@@ -374,18 +409,19 @@ def main():
         relative = Path(path)
         if relative.is_absolute() or '..' in relative.parts or not path.startswith('m3/collections/'):
             raise SystemExit('Invalid receiver path: ' + path)
-        source = REPO / relative
+        source = located(path)
         if (not source.is_file()
                 or (path.endswith("/M3ObjectStateSlots28.java")
                     or path.endswith("/M3ObjectStateSlots28SelfTest.java")) and source.is_symlink()
                 or digest(source) != expected):
             raise SystemExit('Installed source drift: ' + path)
     declared_java = {path for path, _ in rows if path.endswith('.java') and '/src/' in path}
-    actual_java = {str(path.relative_to(REPO)) for path in (HERE / 'src').rglob('*.java')}
+    actual_java = {recorded(path) for path in (HERE / 'src').rglob('*.java')}
+    actual_java |= {recorded(path) for root in MOVED_JAVA_ROOTS for path in (REPO / root).rglob('*.java')}
     if declared_java != actual_java:
         raise SystemExit('Java source set changed; qualify a successor packet')
-    mains = sorted(REPO / path for path in declared_java if '/src/main/' in path)
-    tests = sorted(REPO / path for path in declared_java if '/src/test/' in path)
+    mains = sorted(located(path) for path in declared_java if '/src/main/' in path)
+    tests = sorted(located(path) for path in declared_java if '/src/test/' in path)
     probes = [HERE / 'verification' / (name + '.java') for name in
               ('SegmentedLaneNativeProbe', 'PreparedLaneAllocationProbe')]
     classes, test_classes = target / 'classes', target / 'test-classes'

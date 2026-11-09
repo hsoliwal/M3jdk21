@@ -53,7 +53,7 @@ jobs:
           cc -std=c17 -O1 -g -fPIC -shared -Wall -Wextra -Werror \
             -fsanitize=undefined -fno-sanitize-recover=all \
             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
-            m3/collections/src/main/native/collections/m3_index_path_masks.c \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_path_masks.c \
             -o "$RUNNER_TEMP/m3-guava-setmask-native/libm3_collections_pathmask.so"
       - name: Rerun real Guava donor oracle with checked JNI and fatal UBSan
         run: |

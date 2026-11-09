@@ -4,8 +4,8 @@ name: M3 primitive map empty-value source-sealed recipe
 on:
   pull_request:
     paths:
-      - "m3/collections/src/main/java/jdk/m3/collections/M3LongLongHashMap.java"
-      - "m3/collections/src/test/java/jdk/m3/collections/M3LongLongHashMapEmptyValue*"
+      - "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongLongHashMap.java"
+      - "test/jdk/jdk/m3/collections/M3LongLongHashMapEmptyValue*"
       - "m3/collections/qualification/leetcodify-empty-value-20261105/**"
       - "m3/collections/recipe/pom.xml"
       - "m3/collections/recipe/src/test/java/jdk/internal/m3/rewrite/M3LongLongHashMapEmptyValueRecipeTest.java"

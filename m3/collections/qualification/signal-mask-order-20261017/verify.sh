@@ -3,9 +3,9 @@
 set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
 TASK="$ROOT/m3/collections/qualification/signal-mask-order-20261017"
-MAIN="$ROOT/m3/collections/src/main/java/jdk/m3/collections"
-TEST="$ROOT/m3/collections/src/test/java/jdk/m3/collections"
-NATIVE="$ROOT/m3/collections/src/main/native/collections/m3_signal_order_jni.c"
+MAIN="$ROOT/src/jdk.m3.collections/share/classes/jdk/m3/collections"
+TEST="$ROOT/test/jdk/jdk/m3/collections"
+NATIVE="$ROOT/src/jdk.m3.collections/share/native/libm3collections/collections/m3_signal_order_jni.c"
 (cd "$ROOT" && sha256sum -c "$TASK/SOURCE_SHA256.txt")
 WORK="$(mktemp -d)"
 trap 'rm -rf "$WORK"' EXIT

@@ -3,17 +3,17 @@
 set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
 cd "$ROOT"
-MAIN="m3/collections/src/main/java/jdk/m3/collections"
-TEST="m3/collections/src/test/java/jdk/m3/collections"
+MAIN="src/jdk.m3.collections/share/classes/jdk/m3/collections"
+TEST="test/jdk/jdk/m3/collections"
 BASELINE_BLOB="d98d8a45725f102292a63180a44e6054bf9b57c8"
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
 mkdir -p "$TMP/baseline" "$TMP/baseline-classes" "$TMP/candidate-classes"
 
 # This refuses a re-targeted/newer owner without a new canonical recipe admission.
-echo '0019e28bcff8d7dc80bcd82731c7b7f610a3471bf464e8f81edb4224a659c0dc  m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java' | sha256sum -c -
-echo '8507af2a701bcfa85f30d5a7c71baa6e4fc3c2e84c69b2b5a48610c55e100136  m3/collections/src/test/java/jdk/m3/collections/M3LongIndexNaturalRunContract.java' | sha256sum -c -
-echo 'e7b4729a9ea509e42117ffb8d5f542488a2dddb196ad69e9c9173048958ee78a  m3/collections/src/test/java/jdk/m3/collections/M3LongIndexNaturalRunTest.java' | sha256sum -c -
+echo '0019e28bcff8d7dc80bcd82731c7b7f610a3471bf464e8f81edb4224a659c0dc  src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongIndexProjection.java' | sha256sum -c -
+echo '8507af2a701bcfa85f30d5a7c71baa6e4fc3c2e84c69b2b5a48610c55e100136  test/jdk/jdk/m3/collections/M3LongIndexNaturalRunContract.java' | sha256sum -c -
+echo 'e7b4729a9ea509e42117ffb8d5f542488a2dddb196ad69e9c9173048958ee78a  test/jdk/jdk/m3/collections/M3LongIndexNaturalRunTest.java' | sha256sum -c -
 git cat-file blob "$BASELINE_BLOB" > "$TMP/baseline/M3LongIndexProjection.java"
 echo 'bf601d711667e1078ca30246da6fa89b43d7ed951a3179e0a161365526581959  '"$TMP/baseline/M3LongIndexProjection.java" | sha256sum -c -
 

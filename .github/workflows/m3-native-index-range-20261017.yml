@@ -4,11 +4,11 @@ name: M3 native index-range qualification
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java'
-      - 'm3/collections/src/main/native/collections/m3_index_mask_compactor.c'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexMaskCompactor.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongIndexProjection.java'
+      - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c'
       - 'm3/collections/recipes/native-index-range-20261017/**'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3NativeIndexRange*'
+      - 'test/jdk/jdk/m3/collections/M3NativeIndexRange*'
       - '.github/workflows/m3-native-index-range-20261017.yml'
   workflow_dispatch:
 permissions:

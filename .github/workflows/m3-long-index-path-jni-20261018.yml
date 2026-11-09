@@ -5,10 +5,10 @@ on:
   pull_request:
     paths:
       - 'm3/collections/qualification/m3-long-index-path-jni-20261018/**'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongIndexPathMasksJNI.java'
-      - 'm3/collections/src/main/native/collections/m3_long_index_path_masks_jni.c'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3LongIndexPathMasksJNISelfTest.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexPathMasks.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongIndexPathMasksJNI.java'
+      - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_long_index_path_masks_jni.c'
+      - 'test/jdk/jdk/m3/collections/M3LongIndexPathMasksJNISelfTest.java'
       - '.github/workflows/m3-long-index-path-jni-20261018.yml'
   workflow_dispatch:
 permissions:
@@ -27,6 +27,9 @@ jobs:
           fetch-depth: 1
           sparse-checkout: |
             m3/collections
+            src/jdk.m3.collections/share
+            test/jdk/jdk/m3/collections
+            test/jdk/jdk/internal/m3/collections
             .github/workflows
       - uses: actions/setup-java@v4
         with:
@@ -36,7 +39,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          JAVA_OWNER=m3/collections/src/main/java/jdk/m3/collections/M3LongIndexPathMasks.java
+          JAVA_OWNER=src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongIndexPathMasks.java
           # FLLDCIM: MRL - p2-057-20261107 P2: re-pinned to the census2 P2-057 owner (was 278f63e3bdc6)
           test "$(git hash-object "$JAVA_OWNER")" = 58c87920ae0f02328dcb0281a5cea90e6625e4e0
       - name: Build canonical source-sealed Maven generator
@@ -51,10 +54,10 @@ jobs:
           java -cp "$CRATE/target/classes" jdk.internal.m3.M3LongIndexPathJNIRecipe --apply "$FRESH" "$CRATE/templates"
           java -cp "$CRATE/target/classes" jdk.internal.m3.M3LongIndexPathJNIRecipe --check "$FRESH" "$CRATE/templates"
           java -cp "$CRATE/target/classes" jdk.internal.m3.M3LongIndexPathJNIRecipe --apply "$FRESH" "$CRATE/templates"
-          cmp "$CRATE/templates/M3LongIndexPathMasksJNI.java" "$FRESH/m3/collections/src/main/java/jdk/m3/collections/M3LongIndexPathMasksJNI.java"
-          cmp "$CRATE/templates/M3LongIndexPathMasksJNISelfTest.java" "$FRESH/m3/collections/src/test/java/jdk/m3/collections/M3LongIndexPathMasksJNISelfTest.java"
-          cmp "$CRATE/templates/m3_long_index_path_masks_jni.c" "$FRESH/m3/collections/src/main/native/collections/m3_long_index_path_masks_jni.c"
-          printf '\n// deliberate drift\n' >> "$FRESH/m3/collections/src/main/java/jdk/m3/collections/M3LongIndexPathMasksJNI.java"
+          cmp "$CRATE/templates/M3LongIndexPathMasksJNI.java" "$FRESH/src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongIndexPathMasksJNI.java"
+          cmp "$CRATE/templates/M3LongIndexPathMasksJNISelfTest.java" "$FRESH/test/jdk/jdk/m3/collections/M3LongIndexPathMasksJNISelfTest.java"
+          cmp "$CRATE/templates/m3_long_index_path_masks_jni.c" "$FRESH/src/jdk.m3.collections/share/native/libm3collections/collections/m3_long_index_path_masks_jni.c"
+          printf '\n// deliberate drift\n' >> "$FRESH/src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongIndexPathMasksJNI.java"
           if java -cp "$CRATE/target/classes" jdk.internal.m3.M3LongIndexPathJNIRecipe --check "$FRESH" "$CRATE/templates"; then
             echo 'ERROR: changed generated source was accepted' >&2
             exit 1
@@ -65,8 +68,8 @@ jobs:
           set -euo pipefail
           OUT="$RUNNER_TEMP/m3-long-path-jni"
           mkdir -p "$OUT/classes" "$OUT/headers"
-          MAIN=m3/collections/src/main/java/jdk/m3/collections
-          TEST=m3/collections/src/test/java/jdk/m3/collections
+          MAIN=src/jdk.m3.collections/share/classes/jdk/m3/collections
+          TEST=test/jdk/jdk/m3/collections
           javac --release 21 -proc:none -Xlint:all -Werror -h "$OUT/headers" -d "$OUT/classes" \
             "$MAIN/M3IndexPathMasks.java" \
             "$MAIN/M3LongIndexPathMasks.java" "$MAIN/M3LongIndexPathMasksJNI.java" \
@@ -78,7 +81,7 @@ jobs:
         run: |
           set -euo pipefail
           OUT="$RUNNER_TEMP/m3-long-path-jni"
-          SRC=m3/collections/src/main/native/collections/m3_long_index_path_masks_jni.c
+          SRC=src/jdk.m3.collections/share/native/libm3collections/collections/m3_long_index_path_masks_jni.c
           JDK_HOME=$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")
           gcc -std=c17 -fPIC -shared -O2 -Wall -Wextra -Wconversion -Wshadow -Werror -pedantic \
             -I"$JDK_HOME/include" -I"$JDK_HOME/include/linux" \

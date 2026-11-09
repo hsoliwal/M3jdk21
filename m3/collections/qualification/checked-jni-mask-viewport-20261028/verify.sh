@@ -17,20 +17,20 @@ verify_blob() {
 }
 
 verify_blob b0d387f2612a315c6b53a50a814432c916ca61c8 \
-  m3/collections/src/main/c/m3maskviewport.c
+  src/jdk.m3.collections/share/native/libm3collections/m3maskviewport.c
 verify_blob 4f73ddb9aae36dadb8003257d3a6988536a18066 \
-  m3/collections/src/main/java/jdk/m3/collections/M3MaskViewportNative.java
+  src/jdk.m3.collections/share/classes/jdk/m3/collections/M3MaskViewportNative.java
 verify_blob 5966bffacc730b3ef7102d615a2331a42ae4a22b \
-  m3/collections/src/main/java/jdk/m3/collections/M3MaskViewportKernel.java
+  src/jdk.m3.collections/share/classes/jdk/m3/collections/M3MaskViewportKernel.java
 verify_blob 27d1b0f38164369f49919f83bfc1a960061fa043 \
-  m3/collections/src/test/java/jdk/m3/collections/M3MaskViewportCheckedJniContract.java
+  test/jdk/jdk/m3/collections/M3MaskViewportCheckedJniContract.java
 
 build=$(mktemp -d)
 trap 'rm -rf -- "$build"' EXIT
 cc -std=c11 -O1 -Wall -Wextra -Werror -Wpedantic \
   -fsanitize=undefined -fno-sanitize-recover=all -shared -fPIC \
   -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
-  m3/collections/src/main/c/m3maskviewport.c -o "$build/libm3maskviewport.so"
+  src/jdk.m3.collections/share/native/libm3collections/m3maskviewport.c -o "$build/libm3maskviewport.so"
 
 # The Java owner is a real first-party Maven module, not a mocked proxy.
 mvn -B -ntp -f m3/arrays/pom.xml -Dmaven.test.skip=true install

@@ -38,11 +38,11 @@ jni_home="$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")"
 cc -std=c17 -g -O1 -fPIC -shared -Wall -Wextra -Wpedantic -Werror \
   -fsanitize=undefined -fno-sanitize-recover=undefined \
   -I"$jni_home/include" -I"$jni_home/include/linux" \
-  "$root/m3/collections/src/main/native/collections/m3_index_path_masks.c" \
+  "$root/src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_path_masks.c" \
   -o "$work/libm3_collections_pathmask.so"
 mkdir -p "$work/classes"
 javac -Xlint:all -Werror -d "$work/classes" \
-  "$root/m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java" \
+  "$root/src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexPathMasks.java" \
   "$root/m3/collections/qualification/pathmask-stage-cache-20261020/src/test/java/jdk/m3/collections/M3PathMaskStageCacheParity.java"
 java -Xcheck:jni -Djava.library.path="$work" -cp "$work/classes" \
   jdk.m3.collections.M3PathMaskStageCacheParity

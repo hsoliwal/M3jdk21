@@ -33,6 +33,8 @@ jobs:
             test/jdk/jdk/m3/arrays
             m3/ast
             m3/collections
+            test/jdk/jdk/m3/collections
+            test/jdk/jdk/internal/m3/collections
             m3/file
             m3/eclipse/optional-jmod
             m3/tooling/migration-recipes
@@ -122,7 +124,7 @@ jobs:
           mkdir -p proof/native
           cc -std=c17 -O2 -shared -fPIC -Wall -Wextra -Werror \
             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
-            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c \
             -o proof/native/libm3_collections_mask.so 2>&1 | tee proof/native-compile.txt
           sha256sum proof/native/libm3_collections_mask.so > proof/native-sha256.txt
       - name: Package all REAL M3 owner sources as JPMS/JMOD; check JNI, jlink, replay

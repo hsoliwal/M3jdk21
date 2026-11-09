@@ -4,9 +4,9 @@ on:
   pull_request:
     paths:
       - 'm3/collections/qualification/m3jdk21-indexed-object-position-20261018/**'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3IndexedSnapshotPositionProof.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3IndexedSnapshotPositionTest.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexedListSnapshot.java'
+      - 'test/jdk/jdk/m3/collections/M3IndexedSnapshotPositionProof.java'
+      - 'test/jdk/jdk/m3/collections/M3IndexedSnapshotPositionTest.java'
       - '.github/workflows/m3-indexed-object-position-20261018.yml'
   workflow_dispatch:
 concurrency:
@@ -28,12 +28,12 @@ jobs:
           Q=m3/collections/qualification/m3jdk21-indexed-object-position-20261018/recipe
           awk -F '\t' '{print $3 "  " $1}' "$Q/manifest.tsv" | sha256sum -c -
           awk -F '\t' -v q="$Q" '{print $3 "  " q "/" $4}' "$Q/manifest.tsv" | sha256sum -c -
-          cmp "$Q/M3IndexedListSnapshot.java.txt" m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java
+          cmp "$Q/M3IndexedListSnapshot.java.txt" src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexedListSnapshot.java
       - name: Strict Java21 core plus standalone JDK reference-object contracts
         run: |
           set -eu
-          PKG=m3/collections/src/main/java/jdk/m3/collections
-          TST=m3/collections/src/test/java/jdk/m3/collections
+          PKG=src/jdk.m3.collections/share/classes/jdk/m3/collections
+          TST=test/jdk/jdk/m3/collections
           OUT="$RUNNER_TEMP/m3-positions/classes"
           mkdir -p "$OUT"
           javac --release 21 -proc:none -Xlint:all,-serial -Werror -d "$OUT" \
@@ -51,7 +51,7 @@ jobs:
           cc -std=c17 -O1 -g -Wall -Wextra -Werror -fPIC -shared \
             -fsanitize=undefined -fno-sanitize-recover=all \
             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
-            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c \
             -o "$BIN/libm3_collections_mask.so"
           java -Xcheck:jni -Djava.library.path="$BIN" -cp "$OUT" \
             jdk.m3.collections.M3IndexedSnapshotPositionProof --native

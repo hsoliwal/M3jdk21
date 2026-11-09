@@ -4,8 +4,8 @@
 set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
 cd "$ROOT"
-SRC="m3/collections/src/main/java/jdk/m3/collections"
-TEST="m3/collections/src/test/java/jdk/m3/collections"
+SRC="src/jdk.m3.collections/share/classes/jdk/m3/collections"
+TEST="test/jdk/jdk/m3/collections"
 TARGET="m3/collections/target/m3-empty-value-20261105"
 PRE="9a84487f7a66257ce5e42e2e31698068496f49d9"
 POST="4ebceb9bf2f66a15c1ebc931169af8a5913fc6f5"

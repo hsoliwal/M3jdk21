@@ -3,8 +3,8 @@ name: Indexed live sorted Spliterator contract
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3IndexedLiveView.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/IndexedLiveSortedSpliterator*.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexedLiveView.java'
+      - 'test/jdk/jdk/m3/collections/IndexedLiveSortedSpliterator*.java'
       - 'm3/pom.xml'
       - '.github/workflows/indexed-live-sorted-spliterator.yml'
   workflow_dispatch:

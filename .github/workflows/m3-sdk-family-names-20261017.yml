@@ -5,7 +5,7 @@ on:
     branches: [master]
     paths:
       - 'm3/collections/interop/**'
-      - 'm3/collections/src/main/java/**'
+      - 'src/jdk.m3.collections/share/classes/**'
       - 'src/jdk.m3.collections/share/**'
       - 'm3/native/**'
       - 'm3/qualification/sdk-native-owner/**'
@@ -32,6 +32,8 @@ jobs:
             test/jdk/jdk/m3/arrays
             m3/native
             m3/collections
+            test/jdk/jdk/m3/collections
+            test/jdk/jdk/internal/m3/collections
             m3/qualification/sdk-native-owner
           persist-credentials: false
       - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
@@ -47,7 +49,7 @@ jobs:
           javac --release 21 -Xlint:all,-module -Werror -d proof/arrays @proof/array-sources.txt
           cp m3/arrays/{LICENSE,NOTICE,provenance.json} proof/arrays/META-INF/
           jar --create --file proof/m3-arrays.jar -C proof/arrays .
-          find m3/collections/src/main/java -name '*.java' | sort > proof/core-sources.txt
+          find m3/collections/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/collections src/jdk.m3.collections/share/classes/jdk/internal/m3/collections -name '*.java' | sort > proof/core-sources.txt
           javac --release 21 -Xlint:all,-module -Werror --module-path proof/m3-arrays.jar \
             -d proof/collections @proof/core-sources.txt
           cp m3/collections/{LICENSE,NOTICE,provenance.json,name-mapping.json} proof/collections/META-INF/

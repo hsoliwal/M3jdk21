@@ -11,13 +11,13 @@ HERE = Path(__file__).resolve().parent
 MIRROR = ROOT / "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017"
 
 TARGETS = {
-    "m3/collections/src/main/java/jdk/m3/collections/M3ObjectIndexSnapshot.java":
+    "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectIndexSnapshot.java":
         "67116969a93d0da9beffafdb36a8310247a206a96d7cb58ffbce3c053e1ad4f1",
-    "m3/collections/src/main/java/jdk/m3/collections/M3ObjectSlotStore28.java":
+    "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectSlotStore28.java":
         "032f837fea2e97b166fc08e7f7601d66e5d31513897a03632a08ec17bcf407bb",
-    "m3/collections/src/test/java/jdk/m3/collections/M3ObjectSlotIndexSelfTest.java":
+    "test/jdk/jdk/m3/collections/M3ObjectSlotIndexSelfTest.java":
         "976975d979ffbde17bdf877349d60950da984b5f7207dc9f28ffeff6fe060ff7",
-    "m3/collections/src/test/java/jdk/m3/collections/M3ObjectSlotIndexTest.java":
+    "test/jdk/jdk/m3/collections/M3ObjectSlotIndexTest.java":
         "6f2b492c0be59b4c6d784b3d3be3623d5da69e7217047657c36635852b14d3b7",
 }
 

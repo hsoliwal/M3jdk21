@@ -4,9 +4,9 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
 cd "$ROOT"
-SRC="m3/collections/src/main/java/jdk/m3/collections/M3CollectionViews.java"
-CONTRACT="m3/collections/src/test/java/jdk/m3/collections/M3FilteredIsEmptyContract.java"
-TEST="m3/collections/src/test/java/jdk/m3/collections/M3FilteredIsEmptyTest.java"
+SRC="src/jdk.m3.collections/share/classes/jdk/m3/collections/M3CollectionViews.java"
+CONTRACT="test/jdk/jdk/m3/collections/M3FilteredIsEmptyContract.java"
+TEST="test/jdk/jdk/m3/collections/M3FilteredIsEmptyTest.java"
 BASELINE_BLOB="a8470a26113a3f55e407a80bef95953146f3ce72"
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT

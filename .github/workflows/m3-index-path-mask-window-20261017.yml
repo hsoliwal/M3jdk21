@@ -4,8 +4,8 @@ name: M3 indexed path mask bounded windows Java JNI
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3IndexPathMaskWindowSelfTest.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexPathMasks.java'
+      - 'test/jdk/jdk/m3/collections/M3IndexPathMaskWindowSelfTest.java'
       - 'm3/collections/qualification/M3_INDEX_PATH_MASK_WINDOW_20261017.md'
       - '.github/workflows/m3-index-path-mask-window-20261017.yml'
   workflow_dispatch:
@@ -33,10 +33,10 @@ jobs:
           set -euo pipefail
           work="$(mktemp -d)"
           trap 'rm -rf "$work"' EXIT
-          main=m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java
-          test=m3/collections/src/test/java/jdk/m3/collections/M3IndexPathMaskWindowSelfTest.java
-          inherited=m3/collections/src/test/java/jdk/m3/collections/M3IndexPathMasksSelfTest.java
-          native=m3/collections/src/main/native/collections/m3_index_path_masks.c
+          main=src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexPathMasks.java
+          test=test/jdk/jdk/m3/collections/M3IndexPathMaskWindowSelfTest.java
+          inherited=test/jdk/jdk/m3/collections/M3IndexPathMasksSelfTest.java
+          native=src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_path_masks.c
           javac --release 21 -proc:none -Xlint:all -Werror -h "$work" \
             -d "$work" "$main" "$test" "$inherited"
           gcc -std=c17 -O2 -fPIC -shared -Wall -Wextra -Werror \

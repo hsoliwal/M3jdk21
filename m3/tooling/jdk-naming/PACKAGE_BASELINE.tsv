@@ -1,11 +1,9 @@
 ROOT	.m3/openrewrite-recipes	REAL
-ROOT	m3/algorithms	REAL
 ROOT	m3/evidence/arrays/qualification/empty-segments-20261017/recipe-custody/sdk-owner	COPY
 ROOT	m3/ast	REAL
 ROOT	m3/ast/recipe-custody/hierarchy-encoding-20261018/qualified/ast-hierarchy-20261018/candidate/m3-indexstring	COPY
 ROOT	m3/ast/recipe-custody/hierarchy-encoding-20261018/qualified/ast-hierarchy-target-20261018/candidate/m3/ast	COPY
 ROOT	m3/ast/recipe-custody/hierarchy-encoding-20261018/sdk-owner	COPY
-ROOT	m3/collections	REAL
 ROOT	m3/collections/gc-interop	REAL
 ROOT	m3/collections/implementations/apache	LOOSE
 ROOT	m3/collections/implementations/apache-abstract-hashed-map	REAL
@@ -759,9 +757,7 @@ PACKAGE	jdk.internal.m3.rewrite.sealed
 PACKAGE	jdk.internal.m3.rewrite.semantic
 PACKAGE	jdk.internal.m3.rewrite.sorts
 PACKAGE	jdk.m3.a3
-PACKAGE	jdk.m3.algorithm
 PACKAGE	jdk.m3.ast
-PACKAGE	jdk.m3.collections
 PACKAGE	jdk.m3.collections.apache
 PACKAGE	jdk.m3.collections.apache.bag
 PACKAGE	jdk.m3.collections.apache.bidimap
@@ -782,8 +778,6 @@ PACKAGE	jdk.m3.collections.apache.set
 PACKAGE	jdk.m3.collections.apache.splitmap
 PACKAGE	jdk.m3.collections.apache.trie
 PACKAGE	jdk.m3.collections.apache.trie.analyzer
-PACKAGE	jdk.m3.collections.bits
-PACKAGE	jdk.m3.collections.concurrent
 PACKAGE	jdk.m3.collections.eclipse
 PACKAGE	jdk.m3.collections.eclipse.api
 PACKAGE	jdk.m3.collections.eclipse.api.annotation
@@ -939,7 +933,6 @@ PACKAGE	jdk.m3.collections.eclipse.impl.tuple
 PACKAGE	jdk.m3.collections.eclipse.impl.tuple.primitive
 PACKAGE	jdk.m3.collections.eclipse.impl.utility
 PACKAGE	jdk.m3.collections.eclipse.impl.utility.internal
-PACKAGE	jdk.m3.collections.graph
 PACKAGE	jdk.m3.collections.guava
 PACKAGE	jdk.m3.collections.id
 PACKAGE	jdk.m3.collections.interop
@@ -947,14 +940,10 @@ PACKAGE	jdk.m3.collections.jdk
 PACKAGE	jdk.m3.collections.jdk.util
 PACKAGE	jdk.m3.collections.jdk.util.concurrent
 PACKAGE	jdk.m3.collections.jdk.util.jar
-PACKAGE	jdk.m3.collections.packed
 PACKAGE	jdk.m3.collections.queue
-PACKAGE	jdk.m3.collections.range
 PACKAGE	jdk.m3.collections.runtime
-PACKAGE	jdk.m3.collections.sketch
 PACKAGE	jdk.m3.collections.sortable
 PACKAGE	jdk.m3.collections.spring
-PACKAGE	jdk.m3.collections.text
 PACKAGE	jdk.m3.collections.tooling
 PACKAGE	jdk.m3.compiler
 PACKAGE	jdk.m3.compiler.signals
@@ -4522,6 +4511,25 @@ PREFIXED	m3/viewport-core/src/main/java/jdk/m3/viewport/M3RowEvents.java
 PREFIXED	m3/viewport-core/src/main/java/jdk/m3/viewport/M3RowHost.java
 PREFIXED	m3/viewport-core/src/main/java/jdk/m3/viewport/M3RowPainter.java
 PREFIXED	src/java.base/share/classes/jdk/internal/m3/io/M3IO.java
+PREFIXED	src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/M3DelayQueue.java
+PREFIXED	src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/M3SynchronousQueue.java
+PREFIXED	src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/shape/M3KeyStore.java
+PREFIXED	src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ArrayDeque.java
+PREFIXED	src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ArrayList.java
+PREFIXED	src/jdk.m3.collections/share/classes/jdk/m3/collections/M3BlockingDeque.java
+PREFIXED	src/jdk.m3.collections/share/classes/jdk/m3/collections/M3Collections.java
+PREFIXED	src/jdk.m3.collections/share/classes/jdk/m3/collections/M3EnumSet.java
+PREFIXED	src/jdk.m3.collections/share/classes/jdk/m3/collections/M3HashMap.java
+PREFIXED	src/jdk.m3.collections/share/classes/jdk/m3/collections/M3HashSet.java
+PREFIXED	src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LinkedHashMap.java
+PREFIXED	src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LinkedHashSet.java
+PREFIXED	src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LinkedList.java
+PREFIXED	src/jdk.m3.collections/share/classes/jdk/m3/collections/M3PriorityQueue.java
+PREFIXED	src/jdk.m3.collections/share/classes/jdk/m3/collections/M3TransferQueue.java
+PREFIXED	src/jdk.m3.collections/share/classes/jdk/m3/collections/M3TreeMap.java
+PREFIXED	src/jdk.m3.collections/share/classes/jdk/m3/collections/M3TreeSet.java
+PREFIXED	src/jdk.m3.collections/share/classes/jdk/m3/collections/M3WeakHashMap.java
+PREFIXED	src/jdk.m3.collections/share/classes/jdk/m3/collections/tooling/M3CountedCatalogue.java
 PREFIXED	src/jdk.m3.graphics/share/classes/jdk/m3/graphics/M3AnimationDisposalMode.java
 PREFIXED	src/jdk.m3.graphics/share/classes/jdk/m3/graphics/M3AnimationFrameInfo.java
 PREFIXED	src/jdk.m3.graphics/share/classes/jdk/m3/graphics/M3BackendRenderTarget.java
@@ -4748,6 +4756,22 @@ PREFIXED	src/jdk.m3.graphics/share/classes/jdk/m3/graphics/svg/M3SVGSVG.java
 PREFIXED	src/jdk.m3.graphics/share/classes/jdk/m3/graphics/svg/M3SVGTag.java
 PREFIXED	src/jdk.m3.graphics/share/classes/jdk/m3/graphics/svg/M3SVGTransformableNode.java
 PREFIXED	src/jdk.m3.logging/share/classes/jdk/m3/logging/M3StructuredFormatter.java
+PREFIXED	test/jdk/jdk/m3/collections/M3ArrayDequeGrowthContract.java
+PREFIXED	test/jdk/jdk/m3/collections/M3ArrayListFilterRunsTest.java
+PREFIXED	test/jdk/jdk/m3/collections/M3ArrayListRemoveIfProof.java
+PREFIXED	test/jdk/jdk/m3/collections/M3ArrayListRemoveIfTest.java
+PREFIXED	test/jdk/jdk/m3/collections/M3ArrayListShortWordMaskContract.java
+PREFIXED	test/jdk/jdk/m3/collections/M3ArrayListShortWordMaskTest.java
+PREFIXED	test/jdk/jdk/m3/collections/M3ArrayListTrimEpochTest.java
+PREFIXED	test/jdk/jdk/m3/collections/M3EnumSetTest.java
+PREFIXED	test/jdk/jdk/m3/collections/M3HashMapSetTest.java
+PREFIXED	test/jdk/jdk/m3/collections/M3LinkedHashMapCapacityTest.java
+PREFIXED	test/jdk/jdk/m3/collections/M3LinkedListLiveMaskContract.java
+PREFIXED	test/jdk/jdk/m3/collections/M3PriorityQueueHeapifyTest.java
+PREFIXED	test/jdk/jdk/m3/collections/M3TreeMapEmptyLookupTest.java
+PREFIXED	test/jdk/jdk/m3/collections/M3TreeMapGetOrDefaultTest.java
+PREFIXED	test/jdk/jdk/m3/collections/M3TreeMapReentrantLookupSelfTest.java
+PREFIXED	test/jdk/jdk/m3/collections/M3TreeMapReentrantLookupTest.java
 PREFIXED	test/jdk/jdk/m3/graphics/M3GraphicsAtoms.java
 PREFIXED	test/jdk/jdk/m3/graphics/M3GraphicsAtomsCompare.java
 PREFIXED	test/jdk/jdk/m3/graphics/M3GraphicsAtomsContractTest.java

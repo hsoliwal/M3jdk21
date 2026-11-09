@@ -3,7 +3,7 @@ name: M3 sparse viewport geometry Java21 oracle
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3SparseExtents.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SparseExtents.java'
       - 'm3/collections/viewport-proof/fixtures/M3ViewportGeometryTest.txt'
       - '.github/workflows/m3-sparse-viewport-geometry.yml'
 permissions:
@@ -35,9 +35,9 @@ jobs:
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$HEAD_SHA"
           git cat-file -e '9dd1df62f3d5406760427cb5e840a36c9e7a59ea^{commit}'
-          SOURCE=m3/collections/src/main/java/jdk/m3/collections/M3SparseExtents.java
-          HEAP=m3/collections/src/main/java/jdk/m3/collections/M3HeapGrowth.java
-          WINDOW=m3/collections/src/main/java/jdk/m3/collections/M3WindowPlan.java
+          SOURCE=src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SparseExtents.java
+          HEAP=src/jdk.m3.collections/share/classes/jdk/m3/collections/M3HeapGrowth.java
+          WINDOW=src/jdk.m3.collections/share/classes/jdk/m3/collections/M3WindowPlan.java
           FIXTURE=m3/collections/viewport-proof/fixtures/M3ViewportGeometryTest.txt
           test "$(git hash-object "$SOURCE")" = ea42717003948d450a606b827628964c58896a23
           test "$(git hash-object "$HEAP")" = bee6711572ebc905a3a14cca303acf2491fed1b2
@@ -55,13 +55,13 @@ jobs:
           for state in before after; do
             MODULE="$ROOT/$state"
             mkdir -p "$MODULE/src/main/java/jdk/m3/collections" "$MODULE/src/test/java/jdk/m3/collections"
-            cp m3/collections/src/main/java/jdk/m3/collections/M3HeapGrowth.java "$MODULE/src/main/java/jdk/m3/collections/"
-            cp m3/collections/src/main/java/jdk/m3/collections/M3WindowPlan.java "$MODULE/src/main/java/jdk/m3/collections/"
+            cp src/jdk.m3.collections/share/classes/jdk/m3/collections/M3HeapGrowth.java "$MODULE/src/main/java/jdk/m3/collections/"
+            cp src/jdk.m3.collections/share/classes/jdk/m3/collections/M3WindowPlan.java "$MODULE/src/main/java/jdk/m3/collections/"
             cp m3/collections/viewport-proof/fixtures/M3ViewportGeometryTest.txt "$MODULE/src/test/java/jdk/m3/collections/M3ViewportGeometryTest.java"
             if [[ "$state" == before ]]; then
               cp "$RUNNER_TEMP/M3SparseExtents-before.java" "$MODULE/src/main/java/jdk/m3/collections/M3SparseExtents.java"
             else
-              cp m3/collections/src/main/java/jdk/m3/collections/M3SparseExtents.java "$MODULE/src/main/java/jdk/m3/collections/M3SparseExtents.java"
+              cp src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SparseExtents.java "$MODULE/src/main/java/jdk/m3/collections/M3SparseExtents.java"
             fi
             cat > "$MODULE/pom.xml" <<'POM'
           <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"

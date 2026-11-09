@@ -10,8 +10,8 @@ on:
       - 'm3/collections/qualification/filtered-list-mutation-20261018/**'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-filtered-list-mutation-20261018/**'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3jdk21-filtered-list-mutation-20261018.yml'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3FilteredListMutation*.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredLists.java'
+      - 'test/jdk/jdk/m3/collections/M3FilteredListMutation*.java'
   workflow_dispatch:
 permissions:
   contents: read
@@ -30,6 +30,9 @@ jobs:
           persist-credentials: false
           sparse-checkout: |
             m3/collections
+            src/jdk.m3.collections/share
+            test/jdk/jdk/m3/collections
+            test/jdk/jdk/internal/m3/collections
             m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite
             m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-filtered-list-mutation-20261018
             m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite
@@ -72,13 +75,13 @@ jobs:
           javap -classpath "$P/target/red" -public -s jdk.m3.collections.M3FilteredLists > "$P/target/api-before.txt"
           javap -classpath "$P/target/green" -public -s jdk.m3.collections.M3FilteredLists > "$P/target/api-after.txt"
           diff -u "$P/target/api-before.txt" "$P/target/api-after.txt"
-          if cmp -s m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java "$P/target/pre/M3FilteredLists.java"; then
-            test ! -e m3/collections/src/test/java/jdk/m3/collections/M3FilteredListMutationProof.java
-            test ! -e m3/collections/src/test/java/jdk/m3/collections/M3FilteredListMutationTest.java
+          if cmp -s src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredLists.java "$P/target/pre/M3FilteredLists.java"; then
+            test ! -e test/jdk/jdk/m3/collections/M3FilteredListMutationProof.java
+            test ! -e test/jdk/jdk/m3/collections/M3FilteredListMutationTest.java
             echo GENERATED_NOT_RECEIVED | tee "$P/target/receiver-state.txt"
           else
             for REL in main/java/jdk/m3/collections/M3FilteredLists.java test/java/jdk/m3/collections/M3FilteredListMutationProof.java test/java/jdk/m3/collections/M3FilteredListMutationTest.java; do cmp "m3/collections/src/$REL" "$G/$REL"; done
-            javac --release 21 -proc:none -Xlint:all -Werror -d "$P/target/receiver" m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java m3/collections/src/test/java/jdk/m3/collections/M3FilteredListMutationProof.java
+            javac --release 21 -proc:none -Xlint:all -Werror -d "$P/target/receiver" src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredLists.java test/jdk/jdk/m3/collections/M3FilteredListMutationProof.java
             java -ea -Xmx128m -cp "$P/target/receiver" jdk.m3.collections.M3FilteredListMutationProof | tee "$P/target/receiver.log"
             echo RECEIVED_AND_VERIFIED | tee "$P/target/receiver-state.txt"
           fi

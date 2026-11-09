@@ -19,8 +19,8 @@ SCHEMA = "M3JDK21_NATIVE_TREE_PLAN_COMMIT_RECEIVER_V1"
 SHA1 = re.compile(r"^[0-9a-f]{40}$")
 SHA256 = re.compile(r"^[0-9a-f]{64}$")
 EXPECTED = {
-    "m3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java",
-    "m3/collections/src/test/java/jdk/m3/collections/M3TreeCommitPlanIdentityTest.java",
+    "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3TreeWindowPlan.java",
+    "test/jdk/jdk/m3/collections/M3TreeCommitPlanIdentityTest.java",
 }
 CANONICAL_CATALOGUE = {
     "repository": "hsoliwal/com.synexia",

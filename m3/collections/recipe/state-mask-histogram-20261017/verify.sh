@@ -25,9 +25,9 @@ print('source-sealed Java21/C17 receiver: PASS')
 PY
 mkdir -p "$OUT/classes" "$OUT/native" "$OUT/headers"
 JH=${JAVA_HOME:-$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")}
-SRC="$ROOT/m3/collections/src/main/java/jdk/m3/collections"
-TEST="$ROOT/m3/collections/src/test/java/jdk/m3/collections"
-C="$ROOT/m3/collections/src/main/native/collections/m3_state_mask_histogram.c"
+SRC="$ROOT/src/jdk.m3.collections/share/classes/jdk/m3/collections"
+TEST="$ROOT/test/jdk/jdk/m3/collections"
+C="$ROOT/src/jdk.m3.collections/share/native/libm3collections/collections/m3_state_mask_histogram.c"
 javac --release 21 -proc:none -Xlint:all -Werror -h "$OUT/headers" \
   -d "$OUT/classes" "$SRC/M3StateMaskHistogram.java" "$TEST/M3StateMaskHistogramSelfTest.java"
 java -Djava.library.path="$OUT/native" -cp "$OUT/classes" \

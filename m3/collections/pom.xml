@@ -42,7 +42,6 @@
         <targetPath>META-INF</targetPath>
         <includes>
           <include>LICENSE</include>
-          <include>NOTICE</include>
           <include>provenance.json</include>
           <include>m3-donation.json</include>
           <include>name-mapping.json</include>
@@ -52,6 +51,79 @@
       </resource>
     </resources>
     <plugins>
+      <!-- MOVE_TO_JDK_MODULE v3 (keep-pom mode, m3/tooling/jdk-naming/move_module_area.py): the sources live in the
+           JDK module src/jdk.m3.collections and the tests in test/jdk; this pom keeps its own configuration and adds them. -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>3.6.1</version>
+        <executions>
+          <execution>
+            <id>jdk-module-sources</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${project.basedir}/../../src/jdk.m3.collections/share/classes/jdk/internal/m3/collections</source>
+                <source>${project.basedir}/../../src/jdk.m3.collections/share/classes/jdk/m3/collections</source>
+              </sources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>jdk-module-test-sources</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-test-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${project.basedir}/../../test/jdk/jdk/internal/m3/collections</source>
+                <source>${project.basedir}/../../test/jdk/jdk/m3/collections</source>
+              </sources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>jdk-module-resources</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-resource</goal>
+            </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>${project.basedir}/../../src/jdk.m3.collections/share/classes</directory>
+                  <includes>
+                    <include>jdk/m3/collections/M3_SDK_FAMILY_CATALOG.tsv</include>
+                  </includes>
+                </resource>
+                <resource>
+                  <directory>${project.basedir}/../../src/jdk.m3.collections/share/legal</directory>
+                  <targetPath>META-INF</targetPath>
+                  <includes>
+                    <include>m3collections.md</include>
+                  </includes>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>jdk-module-test-resources</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-test-resource</goal>
+            </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>${project.basedir}/../../test/jdk/jdk/m3/collections/resources</directory>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>

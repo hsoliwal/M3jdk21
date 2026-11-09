@@ -26,6 +26,8 @@ jobs:
             make/m3/arrays
             test/jdk/jdk/m3/arrays
             m3/collections
+            test/jdk/jdk/m3/collections
+            test/jdk/jdk/internal/m3/collections
             .github/workflows
       - uses: actions/setup-java@v4
         with:

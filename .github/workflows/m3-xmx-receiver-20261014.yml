@@ -3,7 +3,7 @@ name: M3 Actual Xmx Source Receiver
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3ObjectResidencyRuntimePressureTest.java'
+      - 'test/jdk/jdk/m3/collections/M3ObjectResidencyRuntimePressureTest.java'
       - 'm3/compatibility/m3-xmx-memory-receiver-20261014.tsv'
       - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3XmxReceiverRecipe.java'
       - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3XmxReceiverRecipeTest.java'
@@ -33,7 +33,7 @@ jobs:
           from pathlib import Path
           r=Path('.')
           pairs=[
-              ('m3/collections/src/test/java/jdk/m3/collections/M3ObjectResidencyRuntimePressureTest.java',
+              ('test/jdk/jdk/m3/collections/M3ObjectResidencyRuntimePressureTest.java',
                'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-xmx-receiver/M3ObjectResidencyRuntimePressureTest.java.txt',
                'a1853edb4d5cc50bb06febea0b6d3ad80552e331820dd89cd577cea1caae13bf'),
               ('m3/compatibility/m3-xmx-memory-receiver-20261014.tsv',

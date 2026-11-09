@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
  * absorption. firstEqualBits is checked against a naive scan with the documented equality (nonzero booleans, Java
  * narrowing for integral carriers, canonical NaNs, distinct signed zeros); count against selectedCount.
  */
-final class IndexMaskCompactorSynexiaApiTest {
+final class IndexMaskCompactorM3ApiTest {
     private static final IndexMaskCompactor.Backend JAVA = IndexMaskCompactor.Backend.JAVA;
 
     @Test void firstEqualBitsMatchesNaiveScanForEveryKind() {

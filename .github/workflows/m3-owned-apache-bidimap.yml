@@ -3,11 +3,11 @@ name: M3 owned Apache BidiMap
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/**'
+      - 'src/jdk.m3.collections/share/classes/**'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/arrays/**'
       - 'src/jdk.m3.collections/share/native/libm3arrays/**'
       - 'test/jdk/jdk/m3/arrays/**'
-      - 'm3/collections/src/test/**'
+      - 'test/jdk/jdk/**/collections/**'
       - 'm3/native/include/**'
       - 'm3/collections/implementations/apache/**'
       - 'm3/collections/recipe/owned-apache-bidimap-20261017/**'
@@ -54,7 +54,7 @@ jobs:
           mvn -B -ntp -f m3/collections/recipe/owned-apache-bidimap-20261017/pom.xml org.apache.maven.plugins:maven-dependency-plugin:3.6.1:get -Dartifact=org.apache.commons:commons-collections4:4.5.0 -Dtransitive=false
           PROVIDER="$HOME/.m2/repository/org/apache/commons/commons-collections4/4.5.0/commons-collections4-4.5.0.jar"
           find m3/arrays/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/arrays -name '*.java' -print0 | sort -z | xargs -0 javac --release 21 -proc:none -Xlint:all,-module -Werror -d proof/arrays
-          find m3/collections/src/main/java -name '*.java' -print0 | sort -z | xargs -0 javac --release 21 --module-path proof/arrays -proc:none -Xlint:all,-module -Werror -d proof/core
+          find m3/collections/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/collections src/jdk.m3.collections/share/classes/jdk/internal/m3/collections -name '*.java' -print0 | sort -z | xargs -0 javac --release 21 --module-path proof/arrays -proc:none -Xlint:all,-module -Werror -d proof/core
           NATIVE="$GITHUB_WORKSPACE/proof/array-native-build/libm3_arrays.so"
           test -s "$NATIVE"
           CP="proof/owned:proof/core:proof/arrays:$PROVIDER"

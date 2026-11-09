@@ -5,8 +5,8 @@ on:
   pull_request:
     paths:
       - 'm3/arrays/pom.xml'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3ArrayListShortWordMaskContract.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ArrayList.java'
+      - 'test/jdk/jdk/m3/collections/M3ArrayListShortWordMaskContract.java'
       - 'm3/collections/qualification/array-mask-current-20261026/**'
       - '.github/workflows/m3jdk21-array-mask-current-20261026.yml'
   workflow_dispatch:
@@ -32,6 +32,8 @@ jobs:
             test/jdk/jdk/m3/arrays/**
             m3/native/include/m3_jni_core.h
             m3/collections/**
+            test/jdk/jdk/m3/collections/**
+            test/jdk/jdk/internal/m3/collections/**
             .github/workflows/m3jdk21-array-mask-current-20261026.yml
       - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
         with:
@@ -65,8 +67,8 @@ jobs:
         run: |
           gcc -std=c11 -O2 -fPIC -shared -Wall -Wextra -Werror \
             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
-            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
-            m3/collections/src/main/native/collections/m3_index_mask_window.c \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_window.c \
             -o "$RUNNER_TEMP/libm3_collections_mask.so"
       - name: Execute existing JNI mask-window real-native parity
         run: |

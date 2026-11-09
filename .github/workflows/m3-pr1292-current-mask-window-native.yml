@@ -2,8 +2,8 @@ name: PR1292 current JNI mask-window source oracle
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/native/collections/m3_index_mask_window.c'
-      - 'm3/collections/src/test/native/m3_mask_window_current_master_contract.c'
+      - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_window.c'
+      - 'test/jdk/jdk/m3/collections/native/m3_mask_window_current_master_contract.c'
       - '.github/workflows/m3-pr1292-current-mask-window-native.yml'
   workflow_dispatch:
 permissions:

@@ -12,8 +12,8 @@ import sys
 root = Path(sys.argv[1])
 crate = root / "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-index-pathmask-classification-20261021"
 expected_paths = [
-  "m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java",
-  "m3/collections/src/test/java/jdk/m3/collections/M3IndexPathMaskClassificationProof.java",
+  "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexPathMasks.java",
+  "test/jdk/jdk/m3/collections/M3IndexPathMaskClassificationProof.java",
 ]
 rows = [line.split("\t") for line in (crate / "manifest.tsv").read_text(encoding="utf-8").splitlines()
         if line and not line.startswith("#")]
@@ -31,9 +31,9 @@ for path, before, after, name in rows:
 print("Source-sealed Java 21 product owner and test: 2/2", flush=True)
 PY
 
-src="$root/m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java"
-test="$root/m3/collections/src/test/java/jdk/m3/collections/M3IndexPathMaskClassificationProof.java"
-native="$root/m3/collections/src/main/native/collections/m3_index_path_masks.c"
+src="$root/src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexPathMasks.java"
+test="$root/test/jdk/jdk/m3/collections/M3IndexPathMaskClassificationProof.java"
+native="$root/src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_path_masks.c"
 mkdir -p "$work/classes" "$work/missing" "$work/native"
 javac --release 21 -Xlint:all -Werror -d "$work/classes" "$src" "$test"
 java -Xcheck:jni -Djava.library.path="$work/missing" -cp "$work/classes" \

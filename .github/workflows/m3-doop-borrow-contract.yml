@@ -3,10 +3,10 @@ name: M3 DOOP generation-safe borrow contract
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3ObjectResidency.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3ObjectResidencyBorrowTest.java'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3SlotAllocator28.java'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3IntLane28.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectResidency.java'
+      - 'test/jdk/jdk/m3/collections/M3ObjectResidencyBorrowTest.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SlotAllocator28.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IntLane28.java'
       - '.github/workflows/m3-doop-borrow-contract.yml'
   workflow_dispatch:
 
@@ -44,8 +44,8 @@ jobs:
         run: |
           set -euo pipefail
           OUT="$RUNNER_TEMP/m3-doop-borrow"
-          MAIN="m3/collections/src/main/java/jdk/m3/collections"
-          TEST="m3/collections/src/test/java/jdk/m3/collections"
+          MAIN="src/jdk.m3.collections/share/classes/jdk/m3/collections"
+          TEST="test/jdk/jdk/m3/collections"
           mkdir -p "$OUT/main" "$OUT/test"
           javac --release 21 -Xlint:all -Werror -d "$OUT/main" \
             "$MAIN/M3Address28.java" \

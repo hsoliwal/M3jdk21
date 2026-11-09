@@ -70,11 +70,11 @@ jobs:
           mkdir -p "$out/classes" "$out/native"
           gcc -std=c11 -Wall -Wextra -Werror -fPIC -shared \
             -I "$JAVA_HOME/include" -I "$JAVA_HOME/include/linux" \
-            m3/collections/src/main/native/collections/m3_signal_order_jni.c \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_signal_order_jni.c \
             -o "$out/native/libm3signalorder.so"
           javac --release 21 -proc:none -Xlint:all -Werror -d "$out/classes" \
-            m3/collections/src/main/java/jdk/m3/collections/M3SignalOrderNative.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3SignalOrder.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalOrderNative.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalOrder.java \
             m3/collections/signal-codegen/src/main/java/jdk/m3/collections/sortable/M3CompilerFacts.java \
             m3/collections/signal-codegen/qualification/m3-compiler-signal-facts-20261022/M3CompilerFactsJniProof.java
           java -Xcheck:jni -Dm3.collections.signal.native=true \

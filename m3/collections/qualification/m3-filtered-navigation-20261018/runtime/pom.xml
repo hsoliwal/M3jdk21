@@ -25,8 +25,8 @@
   </dependencies>
   <build>
     <directory>${m3.runtime.output}</directory>
-    <sourceDirectory>${m3.target}/m3/collections/src/main/java</sourceDirectory>
-    <testSourceDirectory>${m3.target}/m3/collections/src/test/java</testSourceDirectory>
+    <sourceDirectory>${m3.target}/src/jdk.m3.collections/share/classes</sourceDirectory>
+    <testSourceDirectory>${m3.target}/test/jdk</testSourceDirectory>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

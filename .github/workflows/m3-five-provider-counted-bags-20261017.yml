@@ -46,7 +46,7 @@ jobs:
         run: |
           set -euxo pipefail
           mkdir -p proof/core proof/native
-          find m3/collections/src/main/java -name '*.java' | sort > proof/core-sources.txt
+          find m3/collections/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/collections src/jdk.m3.collections/share/classes/jdk/internal/m3/collections -name '*.java' | sort > proof/core-sources.txt
           javac --release 21 -proc:none -Xlint:all,-module -Werror -d proof/core @proof/core-sources.txt
           jar --create --file proof/m3-collections.jar -C proof/core .
           mvn -B -ntp org.apache.maven.plugins:maven-install-plugin:3.1.3:install-file \
@@ -66,14 +66,14 @@ jobs:
         run: |
           set -euxo pipefail
           javac --release 21 -proc:none -h proof/native -cp proof/core -d proof/core \
-            m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexMaskCompactor.java
           gcc -std=c17 -Wall -Wextra -Wconversion -Wshadow -Werror -pedantic \
             -fPIC -shared -fsanitize=undefined -fno-sanitize-recover=all \
             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
-            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c \
             -o proof/native/libm3_collections_mask.so
           javac --release 21 -proc:none -cp proof/core -d proof/core \
-            m3/collections/src/test/java/jdk/m3/collections/M3IndexMaskCompactorSelfTest.java
+            test/jdk/jdk/m3/collections/M3IndexMaskCompactorSelfTest.java
           UBSAN_OPTIONS=halt_on_error=1 java -Xmx256m -Xcheck:jni \
             -Djava.library.path="$PWD/proof/native" -cp proof/core \
             jdk.m3.collections.M3IndexMaskCompactorSelfTest --native

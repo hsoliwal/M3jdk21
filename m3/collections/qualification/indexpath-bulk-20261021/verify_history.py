@@ -19,16 +19,16 @@ OLD_DIR = (ROOT / "m3/tooling/migration-recipes/src/main/resources"
            "/jdk/internal/m3/rewrite/hash-pinned-java/m3-index-path-rank-20261017")
 NEW_DIR = ROOT / "m3/collections/qualification/indexpath-bulk-20261021"
 OLD_NAMES = {
-    "m3/collections/src/main/java/jdk/m3/collections/M3IndexPathRank.java",
-    "m3/collections/src/test/java/jdk/m3/collections/M3IndexPathRankNativeSelfTest.java",
-    "m3/collections/src/test/java/jdk/m3/collections/M3IndexPathRankSelfTest.java",
-    "m3/collections/src/test/java/jdk/m3/collections/M3IndexPathRankTest.java",
+    "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexPathRank.java",
+    "test/jdk/jdk/m3/collections/M3IndexPathRankNativeSelfTest.java",
+    "test/jdk/jdk/m3/collections/M3IndexPathRankSelfTest.java",
+    "test/jdk/jdk/m3/collections/M3IndexPathRankTest.java",
 }
 SUCCESSOR_NAMES = {
-    "m3/collections/src/main/java/jdk/m3/collections/M3IndexPathRank.java",
-    "m3/collections/src/test/java/jdk/m3/collections/M3IndexPathRankBulkSelfTest.java",
-    "m3/collections/src/test/java/jdk/m3/collections/M3IndexPathRankBulkTest.java",
-    "m3/collections/src/test/java/jdk/m3/collections/M3IndexPathRankNativeSelfTest.java",
+    "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexPathRank.java",
+    "test/jdk/jdk/m3/collections/M3IndexPathRankBulkSelfTest.java",
+    "test/jdk/jdk/m3/collections/M3IndexPathRankBulkTest.java",
+    "test/jdk/jdk/m3/collections/M3IndexPathRankNativeSelfTest.java",
 }
 HEX64 = re.compile(r"[0-9a-f]{64}\Z")
 

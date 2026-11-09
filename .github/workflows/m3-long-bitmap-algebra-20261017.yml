@@ -3,8 +3,8 @@ name: M3 long bitmap algebra Java/JNI receiver
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongBitmapFilterPlan.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3LongBitmapFilterPlanSelfTest.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongBitmapFilterPlan.java'
+      - 'test/jdk/jdk/m3/collections/M3LongBitmapFilterPlanSelfTest.java'
       - 'm3/collections/qualification/m3-long-bitmap-algebra-20261017/**'
       - '.github/workflows/m3-long-bitmap-algebra-20261017.yml'
   workflow_dispatch:
@@ -37,19 +37,19 @@ jobs:
           CLASSES="$RUNNER_TEMP/m3-bitmap-algebra/classes"
           NATIVE="$RUNNER_TEMP/m3-bitmap-algebra/native"
           mkdir -p "$CLASSES" "$NATIVE"
-          PKG=m3/collections/src/main/java/jdk/m3/collections
+          PKG=src/jdk.m3.collections/share/classes/jdk/m3/collections
           javac --release 21 -proc:none -Xlint:all -Werror -d "$CLASSES" \
             "$PKG/M3LongIterator.java" \
             "$PKG/M3LongCollection.java" \
             "$PKG/M3IndexMaskCompactor.java" \
             "$PKG/M3LongIndexProjection.java" \
             "$PKG/M3LongBitmapFilterPlan.java" \
-            m3/collections/src/test/java/jdk/m3/collections/M3LongBitmapFilterPlanSelfTest.java
+            test/jdk/jdk/m3/collections/M3LongBitmapFilterPlanSelfTest.java
           java -cp "$CLASSES" jdk.m3.collections.M3LongBitmapFilterPlanSelfTest
           cc -std=c17 -fPIC -shared -O1 -g -Wall -Wextra -Werror \
             -fsanitize=undefined -fno-sanitize-recover=all \
             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
-            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c \
             -o "$NATIVE/libm3_collections_mask.so"
           java -Xcheck:jni -Djava.library.path="$NATIVE" -cp "$CLASSES" \
             jdk.m3.collections.M3LongBitmapFilterPlanSelfTest

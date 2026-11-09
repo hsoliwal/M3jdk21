@@ -7,11 +7,11 @@ on:
       - '.github/workflows/doops-entryless-receiver.yml'
       - 'm3/collections/qualification/doops-entryless-verify.sh'
       - 'm3/collections/qualification/doops-entryless-receiver.tsv'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3TreeMap.java'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java'
-      - 'm3/collections/src/main/native/collections/m3_index_mask_compactor.c'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3*Proof.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredViews.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3TreeMap.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexMaskCompactor.java'
+      - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c'
+      - 'test/jdk/jdk/m3/collections/M3*Proof.java'
   workflow_dispatch:
 permissions:
   contents: read

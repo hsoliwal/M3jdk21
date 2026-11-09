@@ -4,9 +4,9 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
-MAIN="$ROOT/m3/collections/src/main/java/jdk/m3/collections"
-TEST="$ROOT/m3/collections/src/test/java/jdk/m3/collections"
-NATIVE="$ROOT/m3/collections/src/main/native/collections"
+MAIN="$ROOT/src/jdk.m3.collections/share/classes/jdk/m3/collections"
+TEST="$ROOT/test/jdk/jdk/m3/collections"
+NATIVE="$ROOT/src/jdk.m3.collections/share/native/libm3collections/collections"
 BUILD="$(mktemp -d)"
 trap 'rm -rf "$BUILD"' EXIT
 mkdir -p "$BUILD/classes"

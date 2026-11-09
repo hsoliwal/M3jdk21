@@ -4,8 +4,8 @@ on:
     branches: ['m3/native-five-family-no-vendor-runtime-20261027']
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3NativeFiveLibrarySdk.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3NativeFiveLibrarySdkNoVendorTest.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3NativeFiveLibrarySdk.java'
+      - 'test/jdk/jdk/m3/collections/M3NativeFiveLibrarySdkNoVendorTest.java'
       - 'm3/collections/qualification/no-vendor-runtime-20261027/**'
       - '.github/workflows/native-five-family-contract.yml'
 permissions:
@@ -30,8 +30,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          echo '90d641f3cd322f0b02c2675e6c1f10af13406a6a76175684d566c5d811c09743  m3/collections/src/main/java/jdk/m3/collections/M3NativeFiveLibrarySdk.java' | sha256sum -c -
-          echo '692395015e40c6dca69808312c31de95652a4d85d6b0e5a0cf9d26343faab150  m3/collections/src/test/java/jdk/m3/collections/M3NativeFiveLibrarySdkNoVendorTest.java' | sha256sum -c -
+          echo '90d641f3cd322f0b02c2675e6c1f10af13406a6a76175684d566c5d811c09743  src/jdk.m3.collections/share/classes/jdk/m3/collections/M3NativeFiveLibrarySdk.java' | sha256sum -c -
+          echo '692395015e40c6dca69808312c31de95652a4d85d6b0e5a0cf9d26343faab150  test/jdk/jdk/m3/collections/M3NativeFiveLibrarySdkNoVendorTest.java' | sha256sum -c -
       - name: Compile complete M3 arrays and collections modules with Java 21 JPMS
         shell: bash
         run: |
@@ -43,7 +43,7 @@ jobs:
           test -s "$RUNNER_TEMP/arrays-sources.txt"
           javac --release 21 -proc:none -Xlint:all,-module -Werror \
             -d "$RUNNER_TEMP/arrays" @"$RUNNER_TEMP/arrays-sources.txt"
-          find m3/collections/src/main/java -name '*.java' | sort > "$RUNNER_TEMP/sources.txt"
+          find m3/collections/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/collections src/jdk.m3.collections/share/classes/jdk/internal/m3/collections -name '*.java' | sort > "$RUNNER_TEMP/sources.txt"
           test -s "$RUNNER_TEMP/sources.txt"
           javac --release 21 -proc:none -Xlint:all,-module -Werror \
             --module-path "$RUNNER_TEMP/arrays" \

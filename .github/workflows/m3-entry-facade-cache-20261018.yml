@@ -3,25 +3,25 @@ name: M3 array-backed entry facade cache
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3LFUCache.java'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3SlotMap.java'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3OrderedSlotMap.java'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3LinkedHashMap.java'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3TreeMap.java'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3WeakHashMap.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3EntryFacadeCacheTest.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LFUCache.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SlotMap.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3OrderedSlotMap.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LinkedHashMap.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3TreeMap.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3WeakHashMap.java'
+      - 'test/jdk/jdk/m3/collections/M3EntryFacadeCacheTest.java'
       - 'm3/collections/qualification/m3-entry-facade-cache-20261018/**'
   push:
     branches:
       - m3/lfu-entry-facades-20261018
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3LFUCache.java'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3SlotMap.java'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3OrderedSlotMap.java'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3LinkedHashMap.java'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3TreeMap.java'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3WeakHashMap.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3EntryFacadeCacheTest.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LFUCache.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SlotMap.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3OrderedSlotMap.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LinkedHashMap.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3TreeMap.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3WeakHashMap.java'
+      - 'test/jdk/jdk/m3/collections/M3EntryFacadeCacheTest.java'
       - 'm3/collections/qualification/m3-entry-facade-cache-20261018/**'
 
 permissions:

@@ -3,9 +3,9 @@ name: M3JDK21 exact Boolean query cancellation and mask fusion Java21
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3SignalBooleanQuery.java'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3SignalExactRangeIndex.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3SignalExecutionPressure*.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalBooleanQuery.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalExactRangeIndex.java'
+      - 'test/jdk/jdk/m3/collections/M3SignalExecutionPressure*.java'
       - 'm3/collections/qualification/signal-execution-pressure-20261024/**'
       - '.github/workflows/m3-signal-execution-pressure-20261024.yml'
   workflow_dispatch:

@@ -15,16 +15,16 @@ assert root.is_file(), 'missing receiving provenance ledger'
 with root.open(encoding='utf-8', newline='') as stream:
     rows = list(csv.DictReader(stream, delimiter='\t'))
 expected = {
-    'm3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java',
-    'm3/collections/src/main/java/jdk/m3/collections/M3TreeMap.java',
-    'm3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java',
-    'm3/collections/src/main/native/collections/m3_index_mask_compactor.c',
-    'm3/collections/src/test/java/jdk/m3/collections/M3FilteredTreeSlotScanProof.java',
-    'm3/collections/src/test/java/jdk/m3/collections/M3FilteredTreeSlotScanTest.java',
-    'm3/collections/src/test/java/jdk/m3/collections/M3EntrylessSortedBulkProof.java',
-    'm3/collections/src/test/java/jdk/m3/collections/M3EntrylessSortedBulkTest.java',
-    'm3/collections/src/test/java/jdk/m3/collections/M3IndexMaskPositionPageProof.java',
-    'm3/collections/src/test/java/jdk/m3/collections/M3IndexMaskPositionPageTest.java',
+    'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredViews.java',
+    'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3TreeMap.java',
+    'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexMaskCompactor.java',
+    'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c',
+    'test/jdk/jdk/m3/collections/M3FilteredTreeSlotScanProof.java',
+    'test/jdk/jdk/m3/collections/M3FilteredTreeSlotScanTest.java',
+    'test/jdk/jdk/m3/collections/M3EntrylessSortedBulkProof.java',
+    'test/jdk/jdk/m3/collections/M3EntrylessSortedBulkTest.java',
+    'test/jdk/jdk/m3/collections/M3IndexMaskPositionPageProof.java',
+    'test/jdk/jdk/m3/collections/M3IndexMaskPositionPageTest.java',
 }
 assert len(rows) == len(expected), 'receiving manifest length mismatch'
 assert {r['path'] for r in rows} == expected, 'unexpected or repeated receiver target'
@@ -42,9 +42,9 @@ export LANG=C.UTF-8
 OUT="${RUNNER_TEMP:-$(mktemp -d)}/m3-doops-entryless"
 mkdir -p "$OUT/classes" "$OUT/native"
 
-SRC=m3/collections/src/main/java
+SRC=src/jdk.m3.collections/share/classes
 ARRAYS=src/jdk.m3.collections/share/classes
-TEST=m3/collections/src/test/java/jdk/m3/collections
+TEST=test/jdk/jdk/m3/collections
 
 # Compile the real first-party packages in a bounded unnamed-module test
 # universe. The reactor's module-info.java requires jdk.m3.arrays and would
@@ -69,7 +69,7 @@ java -ea -cp "$OUT/classes" jdk.m3.collections.M3IndexMaskCompactorSelfTest
 # Compile the EXISTING M3 JNI owner, not a new native allocator or runtime.
 cc -std=c17 -O2 -Wall -Wextra -Werror -Wpedantic -fPIC -shared \
   -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
-  "$SRC/../native/collections/m3_index_mask_compactor.c" \
+  "src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c" \
   -o "$OUT/native/libm3_collections_mask.so"
 test -s "$OUT/native/libm3_collections_mask.so"
 nm -D "$OUT/native/libm3_collections_mask.so" | grep -Fq Java_jdk_m3_collections_M3IndexMaskCompactor_positionsPageAbiNative

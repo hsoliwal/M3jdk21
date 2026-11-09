@@ -41,7 +41,7 @@ jobs:
           cc -std=c17 -O1 -g -Wall -Wextra -Werror -fPIC -shared \
              -fsanitize=undefined -fno-sanitize-recover=all \
              -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
-             m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+             src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c \
              -o "$NATIVE/libm3_collections_mask.so"
           mvn -B -ntp -f m3/collections/interop/pom.xml \
              -Dtest=M3FiveLibraryPreparedRowsTest \

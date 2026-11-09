@@ -6,16 +6,16 @@ on:
     branches:
       - m3/bitlane-indexed-navigation-receiver-20261017
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3BitLane28.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3BitLaneJumpProof.java'
-      - 'm3/collections/src/test/native/m3_bitlane_jump_jni.c'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3BitLane28.java'
+      - 'test/jdk/jdk/m3/collections/M3BitLaneJumpProof.java'
+      - 'test/jdk/jdk/m3/collections/native/m3_bitlane_jump_jni.c'
       - 'm3/collections/qualification/bitlane-indexed-navigation-20261017/**'
       - '.github/workflows/m3-bitlane-indexed-navigation-20261017.yml'
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3BitLane28.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3BitLaneJumpProof.java'
-      - 'm3/collections/src/test/native/m3_bitlane_jump_jni.c'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3BitLane28.java'
+      - 'test/jdk/jdk/m3/collections/M3BitLaneJumpProof.java'
+      - 'test/jdk/jdk/m3/collections/native/m3_bitlane_jump_jni.c'
       - 'm3/collections/qualification/bitlane-indexed-navigation-20261017/**'
       - '.github/workflows/m3-bitlane-indexed-navigation-20261017.yml'
 concurrency:
@@ -32,6 +32,9 @@ jobs:
         with:
           sparse-checkout: |
             m3/collections
+            src/jdk.m3.collections/share
+            test/jdk/jdk/m3/collections
+            test/jdk/jdk/internal/m3/collections
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -51,6 +54,9 @@ jobs:
         with:
           sparse-checkout: |
             m3/collections
+            src/jdk.m3.collections/share
+            test/jdk/jdk/m3/collections
+            test/jdk/jdk/internal/m3/collections
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
