@@ -90,6 +90,7 @@ documented in [the release pack](README.md).
 - Gates: 7 PASS, 3 recorded FAIL (`OPENJDK_SANITY_MATRIX`, `STRING_UTF16_CONTRACT`, `M3_CHANGED_ATOM_COVERAGE`), 1 PENDING (`M3_MAVEN_CONTROL_REACTOR`).
 - Policy: `standalone.no_external_repo_dependency` BLOCK; `legacy_recipe_custody` HOLD. `name_queue` now passes.
 - Pack hashes (sha256): `admission-release.json` `3bcd3b03fcf7`, `evidence.json` `644cd89ab2b9`, `SHA256SUMS` `7a60adeea1a8`.
+- Results gathered after admission (gtest and the direct `-Xint` runs) are listed in `ADDENDUM-SHA256SUMS`. The admission receipt does not include them.
 
 | Item | Value |
 | --- | --- |
@@ -103,12 +104,12 @@ documented in [the release pack](README.md).
 | --- | --- | --- |
 | `RIGHTS_AND_LICENSE_BOUNDARY` | PASS | `logs/policy/RIGHTS_AND_LICENSE_BOUNDARY.json` |
 | `SOURCE_TREE_AND_UPSTREAM_BASELINE` | PASS: single commit, clean, merge base `890adb6410da`; build tree hashes to `59ea4931` | `logs/policy/SOURCE_TREE_AND_UPSTREAM_BASELINE.json` |
-| `OPENJDK_SANITY_MATRIX` | **FAIL** (linux-x64 only). The source-built image now builds with javac warnings fatal and doclint on. jtreg tier1 subset 91/92: the one failure, `M3RegexShortCircuitTest`, is a stale white-box test, fixed in #2914 and passing on this image. hs `tier1_common` 1/1 non-gtest; the 8 gtest wrappers are ENVIRONMENT_NOT_BUILT (no `--with-gtest`). The multi-platform matrix was not run | `logs/jdk-make-integration3-images.log`, `logs/jtreg-int/tier1-subset*`, `logs/jtreg-int/hs-tier1-common*` |
+| `OPENJDK_SANITY_MATRIX` | **FAIL** (linux-x64 only). The source-built image now builds with javac warnings fatal and doclint on. jtreg tier1 subset 91/92: the one failure, `M3RegexShortCircuitTest`, is a stale white-box test, fixed in #2914 and passing on this image. hs `tier1_common` after reconfiguring with `--with-gtest` (googletest 1.14.0) and rebuilding the same product sources (only `test/` differs: tree `c7b095ef`, which adds the #2910 and #2914 test commits): 9 passed, 3 did not meet platform requirements; `GTestWrapper` passed all 979 gtests. The multi-platform matrix was not run | `logs/jdk-make-integration3-images.log`, `logs/jtreg-int/tier1-subset*`, `logs/jtreg-int/hs-tier1-common-gtest*`, `logs/gtest-build-tree.txt`, `ADDENDUM-SHA256SUMS` |
 | `M3_FOUNDATION_TESTS` | PASS: `build.sh`, the extra contracts in 4 VM modes, `check-m3.py` and `verify-shared-mapping.py` | `logs/foundation-*.log` |
 | `PRECOMPUTE_JAVA_DIFFERENTIAL` | PASS | `logs/precompute-java.log` |
 | `PRECOMPUTE_JNI_NATIVE_PARITY` | PASS: precompute `-Pnative`, word-row JNI in 4 modes, collections native and default suites | `logs/precompute-native.log`, `logs/collections-*.log` |
 | `M3_MAVEN_CONTROL_REACTOR` | **PENDING/HOLD**: policy conflict; #2905 is waiting for user review | - |
-| `STRING_UTF16_CONTRACT` | **FAIL** (one timeout). Upstream `java/lang/String` with Character/StringBuilder/StringBuffer passes in default mode; `-XX:-CompactStrings` and C2-only pass. Under `-Xint`, 87/88: `UnicodeCasingTest` exceeds its 800 s timeout, and stock Temurin 21+35 under `-Xint` also runs past 30 minutes on that test | `logs/jtreg-int/utf16-*` |
+| `STRING_UTF16_CONTRACT` | **FAIL** (one timeout). Upstream `java/lang/String` with Character/StringBuilder/StringBuffer passes in default mode; `-XX:-CompactStrings` and C2-only pass. Under `-Xint`, 87/88: `UnicodeCasingTest` exceeds its 800 s timeout, and stock Temurin 21+35 under jtreg `-Xint` times out the same way. Run directly without jtreg, both pass: stock in 1238 s and this image in 1707 s; for 16 of those minutes a 16-job build was running on the same machine | `logs/jtreg-int/utf16-*`, `logs/jtreg-int/*xint-unicodecasing*` |
 | `M3_CHANGED_ATOM_COVERAGE` | **FAIL**: below 90%; no reviewed inventory | `logs/coverage/jacoco.xml` |
 | `RELEASE_CLAIMS_VALIDATION` | PASS | `logs/policy/RELEASE_CLAIMS_VALIDATION.json` |
 | `PROOF_PACK_SHA256` | PASS: 2279 files, 0 mismatches | `SHA256SUMS` |

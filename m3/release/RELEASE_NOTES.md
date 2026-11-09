@@ -74,8 +74,8 @@ retain their original source pins and cannot fill these current-source rows.
 
 This candidate is `master` `e8e1e837a640` plus the open fix PRs, in tree `59ea4931c1c4`.
 - PASS (7 gates): rights, source, foundation, precompute Java and JNI, claims, proof pack.
-- FAIL: OpenJDK sanity, which is linux-x64 only, with tier1 subset 91/92 and gtest not built.
-- FAIL: STRING_UTF16. All upstream String modes pass except one `-Xint` timeout, and stock 21+35 is also over 30 min on that test.
+- FAIL: OpenJDK sanity. Only linux-x64 ran: tier1 subset 91/92, and hs `tier1_common` passed, including all 979 gtests.
+- FAIL: STRING_UTF16. All upstream String modes pass except one `-Xint` timeout. Stock 21+35 has the same timeout, and run directly both pass (1238 s stock, 1707 s M3, measured under build load).
 - FAIL: changed-atom coverage.
 - PENDING: the Maven control reactor (#2905).
 - The source-built image now builds with javac warnings fatal and doclint on.
