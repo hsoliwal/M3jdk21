@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
+# RECIPE_MEMORY.tsv - append-only lesson memory of recipe DOC_BANNER_OPENER: one row per lesson, appended in the same commit as the correction.
+date	recipe	version	lesson	evidence
+2026-11-09	DOC_BANNER_OPENER	v1	A license banner whose line 1 is "/" plus only asterisks opens a doc comment; doclint reports dc.unexpected.comment before package and -Werror fails the JDK build. Change only the opener "/**" to "/* " (same length) where line 2 is a Synexia copyright line, and fix the generators that emit the banner (ARRAY_MAP.java.tmpl, stale-contracts apply.py HEADER) in the same commit.	m3/release/audit-20261109/doc-banner-opener.log
