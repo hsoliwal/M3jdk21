@@ -159,7 +159,7 @@ final class JdkShapedPrimitiveCollectionsTest {
     @Test
     void priorityQueueMatchesJdkHeadContentsAndRemoval() {
         Random random = new Random(0x4d335051L);
-        LongPriorityQueue actual = new LongPriorityQueue();
+        LongPriorityQueue actual = LongPriorityQueue.of();
         PriorityQueue<Long> expected = new PriorityQueue<>();
 
         for (int step = 0; step < 20_000; step++) {
@@ -228,7 +228,7 @@ final class JdkShapedPrimitiveCollectionsTest {
         deque.addFirst(2);
         assertThrows(java.util.ConcurrentModificationException.class, dequeIterator::hasNext);
 
-        LongPriorityQueue queue = new LongPriorityQueue();
+        LongPriorityQueue queue = LongPriorityQueue.of();
         queue.add(1);
         LongIterator queueIterator = queue.iterator();
         queue.add(0);

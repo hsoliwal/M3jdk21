@@ -194,5 +194,5 @@ public final class M3Collections {
     public static LongLongHashMap longLongHashMap() { return new LongLongHashMap(); }
 
     /** Primitive-long binary min-heap in natural order. */
-    public static LongPriorityQueue longPriorityQueue() { return new LongPriorityQueue(); }
+    public static LongPriorityQueue longPriorityQueue() { return LongPriorityQueue.of(); }
 }

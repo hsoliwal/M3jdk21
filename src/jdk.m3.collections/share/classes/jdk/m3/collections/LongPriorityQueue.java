@@ -5,214 +5,65 @@
 package jdk.m3.collections;
 
 import java.util.Arrays;
-import java.util.ConcurrentModificationException;
-import java.util.NoSuchElementException;
-import java.util.Objects;
+import java.util.function.LongPredicate;
 
 /**
- * Primitive-long natural-order binary min-heap analogous to {@link java.util.PriorityQueue}.
+ * Primitive-long priority queue: repeated removal yields ascending priority order.
  *
- * <p>The heap is intentionally primitive and internal. Iteration exposes heap order, matching
- * the fact that JDK priority-queue iteration is not sorted; repeated removal yields ascending
- * priority order.</p>
+ * <p>API_UNION U3 (2026-11-09): one owner for the concept. The Synexia contract (the common-collections
+ * LongPriorityQueue) and the members of the former M3 class meet here; {@link #of()} returns the natural-order
+ * array min-heap.</p>
  */
-public final class LongPriorityQueue implements LongCollection {
-    private static final long[] EMPTY = new long[0];
+public interface LongPriorityQueue extends LongCollection {
+    /** Returns an empty natural-order min-heap. */
+    static LongPriorityQueue of() { return new ArrayLongPriorityQueue(); }
 
-    private long[] heap;
-    private int size;
-    private int modCount;
+    /** Returns an empty natural-order min-heap with room for {@code initialCapacity} values. */
+    static LongPriorityQueue of(int initialCapacity) { return new ArrayLongPriorityQueue(initialCapacity); }
 
-    public LongPriorityQueue() {
-        heap = EMPTY;
-    }
+    /** Returns a natural-order min-heap of a copy of {@code values}, built bottom-up in O(n). */
+    static LongPriorityQueue of(long[] values) { return new ArrayLongPriorityQueue(values); }
 
-    public LongPriorityQueue(int initialCapacity) {
-        if (initialCapacity < 0) {
-            throw new IllegalArgumentException("negative initialCapacity");
-        }
-        heap = initialCapacity == 0 ? EMPTY : new long[initialCapacity];
-    }
+    /** Inserts {@code value}; returns true (the receipt contract: Synexia returns void). */
+    boolean offer(long value);
 
-    /**
-     * Copies the caller's primitive lane and constructs a min-heap bottom-up in O(n).
-     * Input values are never retained or modified; duplicates and extremes are valid.
-     */
-    //FLLDCIM: ALG - LC215 bottom-up binary heap construction
-    public LongPriorityQueue(long[] values) {
-        Objects.requireNonNull(values, "values");
-        heap = Arrays.copyOf(values, values.length);
-        size = heap.length;
-        for (int parent = (size >>> 1) - 1; parent >= 0; parent--) {
-            siftDown(parent, heap[parent]);
-        }
-    }
+    /** Inserts {@code value} when {@code predicate} accepts it; returns whether it was inserted. */
+    boolean offerIf(long value, LongPredicate predicate);
 
-    public boolean offer(long value) {
-        ensureCapacity(size + 1);
-        siftUp(size++, value);
-        modCount++;
-        return true;
-    }
+    /** Returns the head without removing it; throws NoSuchElementException when empty. */
+    long peek();
 
-    public boolean add(long value) {
-        return offer(value);
-    }
+    /** Removes and returns the head; throws NoSuchElementException when empty. */
+    long poll();
 
-    public long firstLong() {
-        if (size == 0) {
-            throw new NoSuchElementException();
-        }
-        return heap[0];
-    }
+    /** Replaces the head with {@code value} and returns the previous head; throws NoSuchElementException when empty. */
+    long replaceTop(long value);
 
-    public long removeFirstLong() {
-        if (size == 0) {
-            throw new NoSuchElementException();
-        }
-        long result = heap[0];
-        int lastIndex = --size;
-        long replacement = heap[lastIndex];
-        heap[lastIndex] = 0L;
-        if (lastIndex != 0) {
-            siftDown(0, replacement);
-        }
-        modCount++;
-        return result;
-    }
+    /** Keeps the values {@code predicate} accepts; returns how many were removed. */
+    int filterInPlace(LongPredicate predicate);
 
-    public boolean remove(long value) {
-        for (int i = 0; i < size; i++) {
-            if (heap[i] == value) {
-                removeAt(i);
-                return true;
-            }
-        }
-        return false;
-    }
+    /** Returns the current backing capacity. */
+    int capacity();
 
-    @Override
-    public boolean contains(long value) {
-        for (int i = 0; i < size; i++) {
-            if (heap[i] == value) {
-                return true;
-            }
-        }
-        return false;
-    }
+    /** Inserts {@code value} (M3 name of {@link #offer(long)}). */
+    default boolean add(long value) { return offer(value); }
 
-    @Override
-    public int size() {
-        return size;
-    }
+    /** Returns the head (M3 name of {@link #peek()}). */
+    default long firstLong() { return peek(); }
 
-    public int capacity() {
-        return heap.length;
-    }
+    /** Removes and returns the head (M3 name of {@link #poll()}). */
+    default long removeFirstLong() { return poll(); }
 
-    @Override
-    public void clear() {
-        if (size == 0) {
-            return;
-        }
-        Arrays.fill(heap, 0, size, 0L);
-        size = 0;
-        modCount++;
-    }
-
-    @Override
-    public long[] toArray() {
-        return Arrays.copyOf(heap, size);
+    /** Removes one occurrence of {@code value}; returns whether one was present. */
+    default boolean remove(long value) {
+        boolean[] removed = new boolean[1];
+        return filterInPlace(v -> removed[0] || v != value || !(removed[0] = true)) == 1;
     }
 
     /** Returns a sorted snapshot without mutating this queue. */
-    public long[] toSortedArray() {
+    default long[] toSortedArray() {
         long[] result = toArray();
         Arrays.sort(result);
         return result;
-    }
-
-    @Override
-    public LongIterator iterator() {
-        int expectedModCount = modCount;
-        return new LongIterator() {
-            private int cursor;
-
-            @Override
-            public boolean hasNext() {
-                checkForComodification(expectedModCount);
-                return cursor < size;
-            }
-
-            @Override
-            public long nextLong() {
-                checkForComodification(expectedModCount);
-                if (cursor >= size) {
-                    throw new NoSuchElementException();
-                }
-                return heap[cursor++];
-            }
-        };
-    }
-
-    private void removeAt(int index) {
-        int lastIndex = --size;
-        long moved = heap[lastIndex];
-        heap[lastIndex] = 0L;
-        if (index != lastIndex) {
-            int parent = (index - 1) >>> 1;
-            if (index > 0 && moved < heap[parent]) {
-                siftUp(index, moved);
-            } else {
-                siftDown(index, moved);
-            }
-        }
-        modCount++;
-    }
-
-    private void siftUp(int index, long value) {
-        while (index > 0) {
-            int parent = (index - 1) >>> 1;
-            long parentValue = heap[parent];
-            if (value >= parentValue) {
-                break;
-            }
-            heap[index] = parentValue;
-            index = parent;
-        }
-        heap[index] = value;
-    }
-
-    private void siftDown(int index, long value) {
-        int half = size >>> 1;
-        while (index < half) {
-            int child = (index << 1) + 1;
-            long childValue = heap[child];
-            int right = child + 1;
-            if (right < size && heap[right] < childValue) {
-                child = right;
-                childValue = heap[right];
-            }
-            if (value <= childValue) {
-                break;
-            }
-            heap[index] = childValue;
-            index = child;
-        }
-        heap[index] = value;
-    }
-
-    private void ensureCapacity(int minimumCapacity) {
-        if (minimumCapacity <= heap.length) {
-            return;
-        }
-        heap = Arrays.copyOf(heap,
-                PriorityQueueGrowth.nextCapacity(heap.length, minimumCapacity));
-    }
-
-    private void checkForComodification(int expectedModCount) {
-        if (modCount != expectedModCount) {
-            throw new ConcurrentModificationException();
-        }
     }
 }
