@@ -1,0 +1,23 @@
+# DOC_BANNER_OPENER v1 evidence, base master e8e1e837a640f6b5a92226271a60cc9821d44cc0 (2026-11-09T12:31:00Z)
+## pins on the two generators before the change (git grep of their blob ids and sha256)
+m3/collections/qualification/array-map-fill-20261031/templates/ARRAY_MAP.java.tmpl blob=1fb1e5ccb2ca85f3e1d146a6aea2f696c14d9aa5 sha256=244e860668406c0d3b3266428330193e165c40e59d458ca84aabff0818b335c9 refs=2
+m3/collections/qualification/stale-contracts-20261106/apply.py blob=0c2b259c3e612480faaba95a7e27c4c0bda962ad sha256=33fa683015fbbe699784cab5af14b057df0d2d688213db612602140e8f34d01b refs=0
+## before
+DOC_BANNER_OPENER_CHECK matches=788
+## apply
+DOC_BANNER_OPENER_APPLY rewritten=788
+REWROTE m3/collections/qualification/stale-contracts-20261106/apply.py (HEADER literal line 1)
+## fixed point (second run changes nothing)
+DOC_BANNER_OPENER_CHECK matches=0
+DOC_BANNER_OPENER_APPLY rewritten=0
+## generator literal (same-length edit): 1	1	m3/collections/qualification/stale-contracts-20261106/apply.py
+## pins on the template outside history: only loss-guard ledgers (historical records) carry its old hash
+## diff shape (staged)
+files changed: 792 (788 recipe files + apply.py + 3 new tool files)
+recipe files with exactly 1 line added and 1 removed: 788
+hunks not at line 1 in recipe files: 0
+byte-length changes outside the tool dir: 0
+mode changes: 0
+files by module:     787 jdk.m3.collections 
+## fixed point after staging
+DOC_BANNER_OPENER_CHECK matches=0
