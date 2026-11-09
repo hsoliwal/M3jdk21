@@ -7,7 +7,7 @@
 
 package org.HdrHistogram;
 
-import java.lang.reflect.Method;
+import java.util.Base64;
 
 /**
  * Base64Helper exists to bridge inconsistencies in Java SE support of Base64 encoding and decoding.
@@ -25,8 +25,14 @@ import java.lang.reflect.Method;
  * uses late binding (Reflection) internally to avoid javac-compile-time dependencies on a specific
  * Java SE version (e.g. beyond 7 or before 9).
  *
+ * <p>
+ * M3JDK (BASE64_TO_JDK v1): M3JDK is Java SE 21, so this class calls {@code java.util.Base64} directly,
+ * with no reflection and no javax.xml.bind fallback.
+ * </p>
  */
 class Base64Helper {
+
+    //FLLDCIM: M3 - BASE64_TO_JDK v1: base64 is java.base's java.util.Base64, the JDK's one implementation
 
     /**
      * Converts an array of bytes into a Base64 string.
@@ -35,11 +41,7 @@ class Base64Helper {
      * @return a String containing the Base64 encoded equivalent of the binary input
      */
     static String printBase64Binary(byte [] binaryArray) {
-        try {
-            return (String) encodeMethod.invoke(encoderObj, binaryArray);
-        } catch (Throwable e) {
-            throw new UnsupportedOperationException("Failed to use platform's base64 encode method");
-        }
+        return Base64.getEncoder().encodeToString(binaryArray);
     }
 
     /**
@@ -49,49 +51,7 @@ class Base64Helper {
      * @return a byte array containing the binary representation equivalent of the Base64 encoded input
      */
     static byte[] parseBase64Binary(String base64input) {
-        try {
-            return (byte []) decodeMethod.invoke(decoderObj, base64input);
-        } catch (Throwable e) {
-            throw new UnsupportedOperationException("Failed to use platform's base64 decode method");
-        }
+        return Base64.getDecoder().decode(base64input);
     }
 
-
-    private static Method decodeMethod;
-    private static Method encodeMethod;
-
-    // encoderObj and decoderObj are used in non-static method forms, and
-    // irrelevant for static method forms:
-    private static Object decoderObj;
-    private static Object encoderObj;
-
-    static {
-        try {
-            Class<?> javaUtilBase64Class = Class.forName("java.util.Base64");
-
-            Method getDecoderMethod =  javaUtilBase64Class.getMethod("getDecoder");
-            decoderObj = getDecoderMethod.invoke(null);
-            decodeMethod = decoderObj.getClass().getMethod("decode", String.class);
-
-            Method getEncoderMethod =  javaUtilBase64Class.getMethod("getEncoder");
-            encoderObj = getEncoderMethod.invoke(null);
-            encodeMethod = encoderObj.getClass().getMethod("encodeToString", byte[].class);
-        } catch (Throwable e) {
-            decodeMethod = null;
-            encodeMethod = null;
-        }
-
-        if (encodeMethod == null) {
-            decoderObj = null;
-            encoderObj = null;
-            try {
-                Class<?> javaxXmlBindDatatypeConverterClass = Class.forName("javax.xml.bind.DatatypeConverter");
-                decodeMethod = javaxXmlBindDatatypeConverterClass.getMethod("parseBase64Binary", String.class);
-                encodeMethod = javaxXmlBindDatatypeConverterClass.getMethod("printBase64Binary", byte[].class);
-            } catch (Throwable e) {
-                decodeMethod = null;
-                encodeMethod = null;
-            }
-        }
-    }
 }

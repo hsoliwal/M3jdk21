@@ -43,9 +43,14 @@
       "upstream": "org/HdrHistogram/AtomicHistogram.java"
     },
     {
-      "kind": "unmodified-production",
+      "base_repository": "m3/vendor/third_party/HdrHistogram/upstream-excluded/org/HdrHistogram/Base64Helper.java",
+      "base_sha256": "9d74dae48f852cf2d7e7bb217c3ffb9716c5b74f9a4fd20817b256a167ec1d80",
+      "kind": "m3-overlay-source",
+      "overlay": "BASE64_TO_JDK v1",
+      "recipe": "m3/tooling/jdk-superset/retarget/tools/base64_to_jdk.py",
+      "recipe_sha256": "022dd2df22e7f5b720b6b6e0c50ea0645a1a225fcb6d8abc9d8b8ee341775526",
       "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/Base64Helper.java",
-      "sha256": "9d74dae48f852cf2d7e7bb217c3ffb9716c5b74f9a4fd20817b256a167ec1d80",
+      "sha256": "3adade20731b3a3b011a0dc8581338de3d24fea1fd20f8cae1db0f3dc636cae6",
       "upstream": "org/HdrHistogram/Base64Helper.java"
     },
     {
@@ -365,13 +370,25 @@
       "repository": "m3/vendor/third_party/HdrHistogram/LICENSE",
       "sha256": "ba550515c77c9e6f8b6a400381eacd3c47569297f8f27884801a95dff5309483",
       "upstream": "UPSTREAM_LICENSE.txt"
+    },
+    {
+      "kind": "unmodified-production-superseded-by-m3-overlay",
+      "repository": "m3/vendor/third_party/HdrHistogram/upstream-excluded/org/HdrHistogram/Base64Helper.java",
+      "sha256": "9d74dae48f852cf2d7e7bb217c3ffb9716c5b74f9a4fd20817b256a167ec1d80",
+      "upstream": "org/HdrHistogram/Base64Helper.java"
+    },
+    {
+      "kind": "m3-overlay-record",
+      "repository": "m3/vendor/third_party/HdrHistogram/OVERLAY_SOURCES.json",
+      "sha256": "1a3320462d2a3f7bb5c7fafe8ac5df008a2cf9055747946460da9ac09f758331",
+      "upstream": "m3/tooling/jdk-superset/retarget/tools/base64_to_jdk.py"
     }
   ],
   "group": "org.hdrhistogram",
   "kind": "MODULE",
   "license": "Public Domain, per Creative Commons CC0",
   "license_file": "LICENSE",
-  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "modifications": "M3 overlays BASE64_TO_JDK v1: Base64Helper calls java.util.Base64 directly instead of finding it by reflection with a javax.xml.bind fallback (recipe m3/tooling/jdk-superset/retarget/tools/base64_to_jdk.py; the unchanged upstream file is retained under upstream-excluded/). No other upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
   "module_descriptors": [],
   "multi_release_overlays": {
     "not_reproduced": [],
