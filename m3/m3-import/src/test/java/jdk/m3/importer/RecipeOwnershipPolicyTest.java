@@ -11,7 +11,7 @@ import java.nio.file.Path;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
-final class M3RecipeOwnershipPolicyTest {
+final class RecipeOwnershipPolicyTest {
     private static final String INTAKE =
             "m3/m3-import/intakes/recipe-ownership-20261007/";
     private static final String BORROWING =
@@ -20,15 +20,15 @@ final class M3RecipeOwnershipPolicyTest {
     @Test
     void checkedInM3LedgerAuditsEveryCurrentRecipeSource() throws Exception {
         Path repository = repositoryRoot();
-        M3RecipeOwnershipPolicy policy =
-                M3RecipeOwnershipPolicy.load(repository.resolve(BORROWING));
+        RecipeOwnershipPolicy policy =
+                RecipeOwnershipPolicy.load(repository.resolve(BORROWING));
 
-        List<M3RecipeOwnershipPolicy.AuditRow> rows =
+        List<RecipeOwnershipPolicy.AuditRow> rows =
                 policy.auditRecipeTree(repository);
 
         assertFalse(rows.isEmpty());
         assertTrue(rows.stream().allMatch(row ->
-                row.sourcePath().startsWith(M3RecipeOwnershipPolicy.RECIPE_SOURCE_ROOT)));
+                row.sourcePath().startsWith(RecipeOwnershipPolicy.RECIPE_SOURCE_ROOT)));
         assertTrue(rows.stream().allMatch(row -> row.targetOwner().startsWith("jdk.m3.rewrite.")));
 
         assertTrue(rows.stream().anyMatch(row ->
@@ -55,7 +55,7 @@ final class M3RecipeOwnershipPolicyTest {
 
         long currentJavaFiles;
         try (var paths = Files.walk(repository.resolve(
-                M3RecipeOwnershipPolicy.RECIPE_SOURCE_ROOT))) {
+                RecipeOwnershipPolicy.RECIPE_SOURCE_ROOT))) {
             currentJavaFiles = paths.filter(Files::isRegularFile)
                     .filter(file -> file.getFileName().toString().endsWith(".java"))
                     .count();
@@ -65,7 +65,7 @@ final class M3RecipeOwnershipPolicyTest {
 
     @Test
     void exactRulesWinBeforeWildcardRulesAndEvolutionFenceMatchesDisposition() {
-        M3RecipeOwnershipPolicy policy = M3RecipeOwnershipPolicy.parse(
+        RecipeOwnershipPolicy policy = RecipeOwnershipPolicy.parse(
                 header()
                         + row(
                                 "jdk.m3.rewrite.scope.*",
@@ -82,21 +82,21 @@ final class M3RecipeOwnershipPolicyTest {
 
         var exact = policy.require("jdk.m3.rewrite.scope.Special");
         assertEquals(
-                M3RecipeOwnershipPolicy.Disposition.TARGET_ADAPTER_ONLY,
+                RecipeOwnershipPolicy.Disposition.TARGET_ADAPTER_ONLY,
                 exact.disposition());
         assertTrue(exact.thinAdapterOnly());
         assertFalse(exact.reusableEvolutionAllowed());
 
         var wildcard = policy.require("jdk.m3.rewrite.scope.Other");
         assertEquals(
-                M3RecipeOwnershipPolicy.Disposition.M3_CANONICAL,
+                RecipeOwnershipPolicy.Disposition.M3_CANONICAL,
                 wildcard.disposition());
         assertTrue(wildcard.synexiaCanonicalResidue());
         assertFalse(wildcard.reusableEvolutionAllowed());
 
         var jdk = policy.require("jdk.m3.rewrite.backport.M3Jep999");
         assertEquals(
-                M3RecipeOwnershipPolicy.Disposition.JDK_TARGET_SPECIFIC,
+                RecipeOwnershipPolicy.Disposition.JDK_TARGET_SPECIFIC,
                 jdk.disposition());
         assertTrue(jdk.reusableEvolutionAllowed());
 
@@ -116,7 +116,7 @@ final class M3RecipeOwnershipPolicyTest {
 
     @Test
     void wildcardResolutionUsesLongestPrefix() {
-        M3RecipeOwnershipPolicy policy = M3RecipeOwnershipPolicy.parse(
+        RecipeOwnershipPolicy policy = RecipeOwnershipPolicy.parse(
                 header()
                         + row(
                                 "jdk.m3.rewrite.*",
@@ -135,25 +135,25 @@ final class M3RecipeOwnershipPolicyTest {
     void ownerPathMappingIsExactAndRejectsEscapesOrNonRecipeFiles() {
         assertEquals(
                 "jdk.m3.rewrite.scope.M3EditScope",
-                M3RecipeOwnershipPolicy.ownerFromPath(
+                RecipeOwnershipPolicy.ownerFromPath(
                         "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/"
                                 + "scope/M3EditScope.java"));
         assertEquals(
                 "jdk.m3.rewrite.InstallIndexStringCompatibility",
-                M3RecipeOwnershipPolicy.ownerFromPath(
+                RecipeOwnershipPolicy.ownerFromPath(
                         "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/"
                                 + "InstallIndexStringCompatibility.java"));
 
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3RecipeOwnershipPolicy.ownerFromPath("../A.java"));
+                () -> RecipeOwnershipPolicy.ownerFromPath("../A.java"));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3RecipeOwnershipPolicy.ownerFromPath(
+                () -> RecipeOwnershipPolicy.ownerFromPath(
                         "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/A.txt"));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3RecipeOwnershipPolicy.ownerFromPath(
+                () -> RecipeOwnershipPolicy.ownerFromPath(
                         "src/main/java/jdk/m3/rewrite/A.java"));
     }
 
@@ -161,69 +161,69 @@ final class M3RecipeOwnershipPolicyTest {
     void ledgerParserFailsClosedOnSchemaTargetDispositionLicenseAndRows() {
         assertThrows(
                 NullPointerException.class,
-                () -> M3RecipeOwnershipPolicy.parse(null));
+                () -> RecipeOwnershipPolicy.parse(null));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3RecipeOwnershipPolicy.parse(""));
+                () -> RecipeOwnershipPolicy.parse(""));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3RecipeOwnershipPolicy.parse("bad\n"));
+                () -> RecipeOwnershipPolicy.parse("bad\n"));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3RecipeOwnershipPolicy.parse(
+                () -> RecipeOwnershipPolicy.parse(
                         header()
                                 + "OTHER\t"
-                                + M3RecipeOwnershipPolicy.EXPECTED_TARGET
+                                + RecipeOwnershipPolicy.EXPECTED_TARGET
                                 + "\tjdk.m3.rewrite.A\tSYNEXIA_CANONICAL\t"
                                 + "jdk.internal.m3.A\tApache-2.0\tx\n"));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3RecipeOwnershipPolicy.parse(
+                () -> RecipeOwnershipPolicy.parse(
                         header()
-                                + M3RecipeOwnershipPolicy.EXPECTED_SCHEMA
+                                + RecipeOwnershipPolicy.EXPECTED_SCHEMA
                                 + "\tother/repo\tjdk.m3.rewrite.A\tSYNEXIA_CANONICAL\t"
                                 + "jdk.internal.m3.A\tApache-2.0\tx\n"));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3RecipeOwnershipPolicy.parse(
+                () -> RecipeOwnershipPolicy.parse(
                         header()
-                                + M3RecipeOwnershipPolicy.EXPECTED_SCHEMA
+                                + RecipeOwnershipPolicy.EXPECTED_SCHEMA
                                 + "\t"
-                                + M3RecipeOwnershipPolicy.EXPECTED_TARGET
+                                + RecipeOwnershipPolicy.EXPECTED_TARGET
                                 + "\tjdk.m3.rewrite.A\tUNKNOWN\t"
                                 + "jdk.internal.m3.A\tApache-2.0\tx\n"));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3RecipeOwnershipPolicy.parse(
+                () -> RecipeOwnershipPolicy.parse(
                         header()
-                                + M3RecipeOwnershipPolicy.EXPECTED_SCHEMA
+                                + RecipeOwnershipPolicy.EXPECTED_SCHEMA
                                 + "\t"
-                                + M3RecipeOwnershipPolicy.EXPECTED_TARGET
+                                + RecipeOwnershipPolicy.EXPECTED_TARGET
                                 + "\tjdk.m3.rewrite.A\tSYNEXIA_CANONICAL\t"
                                 + "jdk.internal.m3.A\tMIT\tx\n"));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3RecipeOwnershipPolicy.parse(
+                () -> RecipeOwnershipPolicy.parse(
                         header()
                                 + "too\tfew\tcells\n"));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3RecipeOwnershipPolicy.parse(header()));
+                () -> RecipeOwnershipPolicy.parse(header()));
     }
 
     @Test
     void ruleAndClassificationContractsRejectUnsafeMetadata() {
         assertThrows(
                 IllegalArgumentException.class,
-                () -> new M3RecipeOwnershipPolicy.Rule(
+                () -> new RecipeOwnershipPolicy.Rule(
                         "",
-                        M3RecipeOwnershipPolicy.Disposition.M3_CANONICAL,
+                        RecipeOwnershipPolicy.Disposition.M3_CANONICAL,
                         "jdk.internal.m3.A",
                         "Apache-2.0",
                         "x"));
         assertThrows(
                 NullPointerException.class,
-                () -> new M3RecipeOwnershipPolicy.Rule(
+                () -> new RecipeOwnershipPolicy.Rule(
                         "jdk.m3.rewrite.A",
                         null,
                         "jdk.internal.m3.A",
@@ -231,15 +231,15 @@ final class M3RecipeOwnershipPolicyTest {
                         "x"));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> new M3RecipeOwnershipPolicy.Classification(
+                () -> new RecipeOwnershipPolicy.Classification(
                         "jdk.m3.rewrite.A",
-                        M3RecipeOwnershipPolicy.Disposition.M3_CANONICAL,
+                        RecipeOwnershipPolicy.Disposition.M3_CANONICAL,
                         "",
                         "x"));
 
-        var wildcard = new M3RecipeOwnershipPolicy.Rule(
+        var wildcard = new RecipeOwnershipPolicy.Rule(
                 "jdk.m3.rewrite.scope.*",
-                M3RecipeOwnershipPolicy.Disposition.M3_CANONICAL,
+                RecipeOwnershipPolicy.Disposition.M3_CANONICAL,
                 "jdk.internal.m3.rewrite.M3RecipeFirstInvariant",
                 "Apache-2.0",
                 "scope");
@@ -248,9 +248,9 @@ final class M3RecipeOwnershipPolicyTest {
         assertTrue(wildcard.matches("jdk.m3.rewrite.scope.A"));
         assertFalse(wildcard.matches("jdk.m3.rewrite.semantic.A"));
 
-        var exact = new M3RecipeOwnershipPolicy.Rule(
+        var exact = new RecipeOwnershipPolicy.Rule(
                 "jdk.m3.rewrite.A",
-                M3RecipeOwnershipPolicy.Disposition.TARGET_ADAPTER_ONLY,
+                RecipeOwnershipPolicy.Disposition.TARGET_ADAPTER_ONLY,
                 "jdk.internal.m3.A",
                 "Apache-2.0",
                 "adapter");
@@ -298,9 +298,9 @@ final class M3RecipeOwnershipPolicyTest {
             String targetOwner,
             String disposition,
             String canonicalOwner) {
-        return M3RecipeOwnershipPolicy.EXPECTED_SCHEMA
+        return RecipeOwnershipPolicy.EXPECTED_SCHEMA
                 + "\t"
-                + M3RecipeOwnershipPolicy.EXPECTED_TARGET
+                + RecipeOwnershipPolicy.EXPECTED_TARGET
                 + "\t"
                 + targetOwner
                 + "\t"

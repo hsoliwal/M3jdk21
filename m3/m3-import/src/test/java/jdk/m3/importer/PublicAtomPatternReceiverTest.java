@@ -31,10 +31,10 @@ final class PublicAtomPatternReceiverTest {
         assertTrue(run.contains("maintainer)"));
         assertTrue(run.contains("jdk.internal.m3.EveryModuleAtomPatternMastery"));
 
-        assertTrue(verify.contains("M3CanonicalFamilyPolicy.java"));
-        assertTrue(verify.contains("M3ImportManifest.java"));
-        assertTrue(verify.contains("M3Importer.java"));
-        assertTrue(verify.contains("M3ImportCli.java"));
+        assertTrue(verify.contains("CanonicalFamilyPolicy.java"));
+        assertTrue(verify.contains("ImportManifest.java"));
+        assertTrue(verify.contains("Importer.java"));
+        assertTrue(verify.contains("ImportCli.java"));
         assertTrue(verify.contains("verify-target"));
         assertTrue(verify.contains("--release 21"));
         assertTrue(verify.contains("-Xlint:all"));

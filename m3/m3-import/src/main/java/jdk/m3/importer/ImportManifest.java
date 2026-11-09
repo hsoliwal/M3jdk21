@@ -12,7 +12,7 @@ import java.util.Locale;
 import java.util.Objects;
 
 /** Independent M3JDK 21 verifier for a concrete Synexia delivery-export TSV. */
-public record M3ImportManifest(
+public record ImportManifest(
         String sourceRevision,
         String targetId,
         List<Entry> entries,
@@ -21,7 +21,7 @@ public record M3ImportManifest(
     public static final String HEADER =
             "source_revision\ttarget_id\tcategory\tsource_path\ttarget_path\tsha256\tlicense\tmode";
 
-    public M3ImportManifest {
+    public ImportManifest {
         sourceRevision = commit(sourceRevision);
         targetId = token(targetId, "targetId");
         if (!"m3jdk21".equals(targetId)) {
@@ -45,7 +45,7 @@ public record M3ImportManifest(
         }
     }
 
-    public static M3ImportManifest parse(String tsv) {
+    public static ImportManifest parse(String tsv) {
         List<String> lines = Objects.requireNonNull(tsv, "tsv").lines().toList();
         if (lines.isEmpty() || !HEADER.equals(lines.getFirst())) {
             throw new IllegalArgumentException("invalid Synexia import header");
@@ -85,7 +85,7 @@ public record M3ImportManifest(
         if (revision == null || target == null || declaredRoot == null) {
             throw new IllegalArgumentException("incomplete Synexia import manifest");
         }
-        return new M3ImportManifest(revision, target, entries, declaredRoot);
+        return new ImportManifest(revision, target, entries, declaredRoot);
     }
 
     public String toTsv() {
@@ -129,8 +129,8 @@ public record M3ImportManifest(
                 throw new IllegalArgumentException("automatic Synexia import requires Apache-2.0");
             }
             mode = Objects.requireNonNull(mode, "mode");
-            M3CanonicalFamilyPolicy.requireMirrorTarget(sourcePath, targetPath);
-            M3CanonicalFamilyPolicy.requireCategoryFamily(category, sourcePath);
+            CanonicalFamilyPolicy.requireMirrorTarget(sourcePath, targetPath);
+            CanonicalFamilyPolicy.requireCategoryFamily(category, sourcePath);
         }
     }
 

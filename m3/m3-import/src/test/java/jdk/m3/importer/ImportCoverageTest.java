@@ -14,7 +14,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-final class M3ImportCoverageTest {
+final class ImportCoverageTest {
     @TempDir
     Path temp;
 
@@ -24,14 +24,14 @@ final class M3ImportCoverageTest {
         Path manifest = temp.resolve("manifest.tsv");
         Files.writeString(manifest, fixture.manifest().toTsv());
 
-        M3ImportCli.main(
+        ImportCli.main(
                 new String[] {
                     "verify",
                     manifest.toString(),
                     fixture.m3().toString(),
                     fixture.m3jdk().toString()
                 });
-        M3ImportCli.main(
+        ImportCli.main(
                 new String[] {
                     "materialize",
                     manifest.toString(),
@@ -40,7 +40,7 @@ final class M3ImportCoverageTest {
                 });
         assertTrue(Files.isRegularFile(fixture.m3jdk().resolve(fixture.targetPath())));
 
-        M3ImportCli.main(
+        ImportCli.main(
                 new String[] {
                     "verify-target",
                     manifest.toString(),
@@ -51,7 +51,7 @@ final class M3ImportCoverageTest {
         assertThrows(
                 IllegalArgumentException.class,
                 () ->
-                        M3ImportCli.main(
+                        ImportCli.main(
                                 new String[] {
                                     "unknown",
                                     manifest.toString(),
@@ -66,20 +66,20 @@ final class M3ImportCoverageTest {
         String valid = fixture.manifest().toTsv();
         String withComment =
                 valid.replace(
-                        M3ImportManifest.HEADER + "\n",
-                        M3ImportManifest.HEADER + "\n# evidence only\n");
-        assertEquals(fixture.manifest(), M3ImportManifest.parse(withComment));
+                        ImportManifest.HEADER + "\n",
+                        ImportManifest.HEADER + "\n# evidence only\n");
+        assertEquals(fixture.manifest(), ImportManifest.parse(withComment));
 
         assertThrows(
                 IllegalArgumentException.class,
                 () ->
-                        M3ImportManifest.parse(
+                        ImportManifest.parse(
                                 valid + "# root\t" + fixture.manifest().root() + "\n"));
         assertThrows(
                 IllegalArgumentException.class,
                 () ->
-                        M3ImportManifest.parse(
-                                M3ImportManifest.HEADER
+                        ImportManifest.parse(
+                                ImportManifest.HEADER
                                         + "\n"
                                         + "a".repeat(40)
                                         + "\tm3jdk21\tseed\ttoo\tfew\tcells\n"
@@ -89,22 +89,22 @@ final class M3ImportCoverageTest {
         assertThrows(
                 IllegalArgumentException.class,
                 () ->
-                        M3ImportManifest.parse(
+                        ImportManifest.parse(
                                 valid.replaceFirst(
                                         "a{40}\\tm3jdk21",
                                         "a".repeat(40) + "\tother")));
         assertThrows(
                 IllegalArgumentException.class,
                 () ->
-                        M3ImportManifest.parse(
+                        ImportManifest.parse(
                                 valid.replace(
                                         "\tAPACHE_SOURCE\n",
                                         "\tUNKNOWN_MODE\n")));
         assertThrows(
                 IllegalArgumentException.class,
                 () ->
-                        M3ImportManifest.parse(
-                                M3ImportManifest.HEADER
+                        ImportManifest.parse(
+                                ImportManifest.HEADER
                                         + "\n# comment only\n# root\t"
                                         + "1".repeat(64)
                                         + "\n"));
@@ -115,7 +115,7 @@ final class M3ImportCoverageTest {
         assertThrows(
                 IllegalArgumentException.class,
                 () ->
-                        new M3ImportManifest(
+                        new ImportManifest(
                                 "short",
                                 "m3jdk21",
                                 List.of(validEntry()),
@@ -123,7 +123,7 @@ final class M3ImportCoverageTest {
         assertThrows(
                 IllegalArgumentException.class,
                 () ->
-                        new M3ImportManifest(
+                        new ImportManifest(
                                 "a".repeat(40),
                                 "m3jdk21",
                                 List.of(),
@@ -131,17 +131,17 @@ final class M3ImportCoverageTest {
         assertThrows(
                 IllegalArgumentException.class,
                 () ->
-                        new M3ImportManifest.Entry(
+                        new ImportManifest.Entry(
                                 "seed",
                                 "A.java",
                                 "m3/vendor/m3/A.java",
                                 "bad",
                                 "Apache-2.0",
-                                M3ImportManifest.Mode.APACHE_SOURCE));
+                                ImportManifest.Mode.APACHE_SOURCE));
         assertThrows(
                 NullPointerException.class,
                 () ->
-                        new M3ImportManifest.Entry(
+                        new ImportManifest.Entry(
                                 "seed",
                                 "A.java",
                                 "m3/vendor/m3/A.java",
@@ -151,23 +151,23 @@ final class M3ImportCoverageTest {
         assertThrows(
                 IllegalArgumentException.class,
                 () ->
-                        new M3ImportManifest.Entry(
+                        new ImportManifest.Entry(
                                 "bad\tcategory",
                                 "A.java",
                                 "m3/vendor/m3/A.java",
                                 "1".repeat(64),
                                 "Apache-2.0",
-                                M3ImportManifest.Mode.APACHE_SOURCE));
+                                ImportManifest.Mode.APACHE_SOURCE));
         assertThrows(
                 IllegalArgumentException.class,
                 () ->
-                        new M3ImportManifest.Entry(
+                        new ImportManifest.Entry(
                                 "seed",
                                 "../A.java",
                                 "m3/vendor/m3/A.java",
                                 "1".repeat(64),
                                 "Apache-2.0",
-                                M3ImportManifest.Mode.APACHE_SOURCE));
+                                ImportManifest.Mode.APACHE_SOURCE));
     }
 
     @Test
@@ -176,29 +176,29 @@ final class M3ImportCoverageTest {
 
         assertThrows(
                 IllegalStateException.class,
-                () -> M3Importer.verifyTargetSnapshot(fixture.m3jdk(), fixture.manifest()));
+                () -> Importer.verifyTargetSnapshot(fixture.m3jdk(), fixture.manifest()));
 
         Path target = fixture.m3jdk().resolve(fixture.targetPath());
         Files.createDirectories(target);
         assertThrows(
                 IllegalStateException.class,
-                () -> M3Importer.verify(fixture.m3(), fixture.m3jdk(), fixture.manifest()));
+                () -> Importer.verify(fixture.m3(), fixture.m3jdk(), fixture.manifest()));
         assertThrows(
                 IllegalStateException.class,
-                () -> M3Importer.verifyTargetSnapshot(fixture.m3jdk(), fixture.manifest()));
+                () -> Importer.verifyTargetSnapshot(fixture.m3jdk(), fixture.manifest()));
     }
 
     @Test
     void borrowingLedgerLoadRejectsMissingAndDirectoryInputs() throws Exception {
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3RecipeOwnershipPolicy.load(temp.resolve("missing.tsv")));
+                () -> RecipeOwnershipPolicy.load(temp.resolve("missing.tsv")));
 
         Path directory = temp.resolve("ledger-directory");
         Files.createDirectories(directory);
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3RecipeOwnershipPolicy.load(directory));
+                () -> RecipeOwnershipPolicy.load(directory));
     }
 
     private Fixture fixture(String name) throws Exception {
@@ -218,16 +218,16 @@ final class M3ImportCoverageTest {
         Files.createDirectories(source.getParent());
         Files.write(source, bytes);
 
-        M3ImportManifest.Entry entry =
-                new M3ImportManifest.Entry(
+        ImportManifest.Entry entry =
+                new ImportManifest.Entry(
                         "openrewrite-java",
                         sourcePath,
                         targetPath,
                         sha256(bytes),
                         "Apache-2.0",
-                        M3ImportManifest.Mode.APACHE_SOURCE);
-        M3ImportManifest manifest =
-                new M3ImportManifest(
+                        ImportManifest.Mode.APACHE_SOURCE);
+        ImportManifest manifest =
+                new ImportManifest(
                         "a".repeat(40),
                         "m3jdk21",
                         List.of(entry),
@@ -235,14 +235,14 @@ final class M3ImportCoverageTest {
         return new Fixture(m3, m3jdk, targetPath, manifest);
     }
 
-    private static M3ImportManifest.Entry validEntry() {
-        return new M3ImportManifest.Entry(
+    private static ImportManifest.Entry validEntry() {
+        return new ImportManifest.Entry(
                 "seed",
                 "A.java",
                 "m3/vendor/m3/A.java",
                 "1".repeat(64),
                 "Apache-2.0",
-                M3ImportManifest.Mode.APACHE_SOURCE);
+                ImportManifest.Mode.APACHE_SOURCE);
     }
 
     private static String sha256(byte[] bytes) throws Exception {
@@ -254,5 +254,5 @@ final class M3ImportCoverageTest {
             Path m3,
             Path m3jdk,
             String targetPath,
-            M3ImportManifest manifest) {}
+            ImportManifest manifest) {}
 }

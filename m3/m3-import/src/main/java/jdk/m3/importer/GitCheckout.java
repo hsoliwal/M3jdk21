@@ -12,12 +12,12 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /** Operational Git seal for real Synexia source checkouts. */
-final class M3GitCheckout {
+final class GitCheckout {
     private static final int MAX_OUTPUT_BYTES = 512 * 1024;
     private static final int TRACKED_PATH_BATCH = 32;
     private static final long TIMEOUT_SECONDS = 10L;
 
-    private M3GitCheckout() {}
+    private GitCheckout() {}
 
     static void requireExactCleanHead(Path repositoryRoot, String expectedRevision) {
         requireExactCleanHead(repositoryRoot, expectedRevision, List.of());
@@ -54,7 +54,7 @@ final class M3GitCheckout {
     private static void requireTrackedPaths(Path root, List<String> suppliedPaths) {
         List<String> paths =
                 Objects.requireNonNull(suppliedPaths, "sourcePaths").stream()
-                        .map(M3GitCheckout::relativePath)
+                        .map(GitCheckout::relativePath)
                         .distinct()
                         .sorted()
                         .toList();

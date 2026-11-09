@@ -49,7 +49,7 @@ jobs:
         run: >
           mvn -B -ntp -f m3/pom.xml
           -pl m3-import -am
-          -Dtest=M3ImportPlanTest,M3ImporterTest,M3SeedSnapshotTest
+          -Dtest=ImportPlanTest,ImporterTest,SeedSnapshotTest
           -Dsurefire.failIfNoSpecifiedTests=false test
       - name: Import module full verify and 99 percent coverage gate
         run: >
