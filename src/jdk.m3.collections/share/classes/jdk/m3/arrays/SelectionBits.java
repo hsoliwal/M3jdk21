@@ -35,7 +35,13 @@ public final class SelectionBits {
     }
 
     public static Builder builder(int size) { return new Builder(size); }
-    static SelectionBits ofWords(int size, long[] words) { return new SelectionBits(size, words); }
+    /**
+     * Returns a selection over a {@code size}-bit universe from a copy of {@code words}: bit {@code i} is
+     * {@code words[i >>> 6]} bit {@code i & 63}, and bits at or past {@code size} are cleared.
+     *
+     * @throws IllegalArgumentException if {@code words.length != wordsFor(size)}
+     */
+    public static SelectionBits ofWords(int size, long[] words) { return new SelectionBits(size, words); }
 
     public int size() { return size; }
     public long payloadBytes() { return 8L * words.length; }
@@ -139,9 +145,12 @@ public final class SelectionBits {
         return new SelectionBits(size, result);
     }
 
-    long word(int index) { return words[Objects.checkIndex(index, words.length)]; }
-    int wordCount() { return words.length; }
-    long[] wordsCopy() { return words.clone(); }
+    /** Returns bitmap word {@code index} (bits {@code 64 * index} to {@code 64 * index + 63}). */
+    public long word(int index) { return words[Objects.checkIndex(index, words.length)]; }
+    /** Returns the number of bitmap words, {@code wordsFor(size())}. */
+    public int wordCount() { return words.length; }
+    /** Returns a copy of the bitmap words; {@link #ofWords(int, long[])} accepts it back. */
+    public long[] wordsCopy() { return words.clone(); }
 
     private SelectionBits binary(SelectionBits other, int operation) {
         Objects.requireNonNull(other, "other");
@@ -159,8 +168,12 @@ public final class SelectionBits {
         return new SelectionBits(size, result);
     }
 
-    /** Ceil(bits/64) without overflowing a valid nonnegative int bit universe. */
-    static int wordsFor(int size) {
+    /**
+     * Returns ceil(size / 64), the word count of a {@code size}-bit universe, without overflow.
+     *
+     * @throws IllegalArgumentException if {@code size} is negative
+     */
+    public static int wordsFor(int size) {
         if (size < 0) throw new IllegalArgumentException("negative bit size");
         return (size >>> 6) + ((size & 63) == 0 ? 0 : 1);
     }

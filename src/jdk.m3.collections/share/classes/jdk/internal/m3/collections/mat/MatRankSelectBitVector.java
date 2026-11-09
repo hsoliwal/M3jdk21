@@ -14,6 +14,8 @@
  *******************************************************************************/
 package jdk.internal.m3.collections.mat;
 
+import jdk.m3.arrays.SelectionBits;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.stream.IntStream;
@@ -61,7 +63,7 @@ public final class MatRankSelectBitVector {
         return builder.build();
     }
 
-    public static MatRankSelectBitVector from(MatBits bits) {
+    public static MatRankSelectBitVector from(SelectionBits bits) {
         Objects.requireNonNull(bits, "bits");
         Builder builder = builder(bits.size());
         bits.setBits().forEach(builder::set);

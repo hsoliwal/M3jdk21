@@ -14,6 +14,8 @@
  *******************************************************************************/
 package jdk.internal.m3.collections.mat;
 
+import jdk.m3.arrays.SelectionBits;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -52,23 +54,23 @@ public final class MatFlagVector {
         return (get(row) & mask) == 0L;
     }
 
-    public MatBits all(long mask) {
+    public SelectionBits all(long mask) {
         return MatPrimitiveKernel.selectFlags(this, mask, 0L, 0L);
     }
 
-    public MatBits any(long mask) {
+    public SelectionBits any(long mask) {
         return MatPrimitiveKernel.selectFlags(this, 0L, mask, 0L);
     }
 
-    public MatBits none(long mask) {
+    public SelectionBits none(long mask) {
         return MatPrimitiveKernel.selectFlags(this, 0L, 0L, mask);
     }
 
-    public MatBits maskedEquals(long mask, long expected) {
+    public SelectionBits maskedEquals(long mask, long expected) {
         if ((expected & ~mask) != 0L) {
             throw new IllegalArgumentException("expected contains bits outside mask");
         }
-        MatBits.Builder result = MatBits.builder(flags.length);
+        SelectionBits.Builder result = SelectionBits.builder(flags.length);
         for (int row = 0; row < flags.length; row++) {
             if ((flags[row] & mask) == expected) result.set(row);
         }

@@ -14,6 +14,8 @@
  *******************************************************************************/
 package jdk.internal.m3.collections.mat;
 
+import jdk.m3.arrays.SelectionBits;
+
 import java.util.Objects;
 import java.util.UUID;
 
@@ -101,8 +103,8 @@ public final class MatUuidVector {
         return present == null ? valueBytes : Math.addExact(valueBytes, 8L * present.length);
     }
 
-    public MatBits equalTo(UUID target) {
-        MatBits.Builder matches = MatBits.builder(most.length);
+    public SelectionBits equalTo(UUID target) {
+        SelectionBits.Builder matches = SelectionBits.builder(most.length);
         if (target == null) {
             if (present == null) return matches.build();
             for (int index = 0; index < most.length; index++) {

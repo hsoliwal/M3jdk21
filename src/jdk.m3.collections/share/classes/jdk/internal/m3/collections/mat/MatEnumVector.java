@@ -14,6 +14,8 @@
  *******************************************************************************/
 package jdk.internal.m3.collections.mat;
 
+import jdk.m3.arrays.SelectionBits;
+
 import java.util.Objects;
 
 /**
@@ -44,7 +46,7 @@ public final class MatEnumVector<E extends Enum<E>> {
         if(value.getDeclaringClass()!=type) throw new IllegalArgumentException("different enum type");
         ordinals.set(index,value.ordinal());
     }
-    public MatBits equalTo(E value){
+    public SelectionBits equalTo(E value){
         Objects.requireNonNull(value,"value");
         if(value.getDeclaringClass()!=type) throw new IllegalArgumentException("different enum type");
         return ordinals.equalTo(value.ordinal());

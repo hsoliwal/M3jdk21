@@ -14,6 +14,8 @@
  *******************************************************************************/
 package jdk.internal.m3.collections.mat;
 
+import jdk.m3.arrays.SelectionBits;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.RecordComponent;
 import java.util.List;
@@ -31,7 +33,7 @@ import java.util.UUID;
 public final class MatRecordStore<R extends Record> {
     private interface Column {
         Object value(int row);
-        MatBits equalTo(Object target);
+        SelectionBits equalTo(Object target);
         long payloadBytes();
     }
 
@@ -117,7 +119,7 @@ public final class MatRecordStore<R extends Record> {
         }
     }
 
-    public MatBits equal(String component, Object target) {
+    public SelectionBits equal(String component, Object target) {
         return columns[index(component)].equalTo(target);
     }
 
@@ -153,14 +155,14 @@ public final class MatRecordStore<R extends Record> {
     @SuppressWarnings({"unchecked", "rawtypes"})
     private static Column column(Class<?> type, Object[] values, MatLimits limits) {
         if (type == boolean.class) {
-            MatBits.Builder bits = MatBits.builder(values.length);
+            SelectionBits.Builder bits = SelectionBits.builder(values.length);
             for (int index = 0; index < values.length; index++) {
                 bits.set(index, (Boolean) values[index]);
             }
-            MatBits frozen = bits.build();
+            SelectionBits frozen = bits.build();
             return new Column() {
                 @Override public Object value(int row) { return frozen.get(row); }
-                @Override public MatBits equalTo(Object target) {
+                @Override public SelectionBits equalTo(Object target) {
                     if (!(target instanceof Boolean value)) {
                         throw new IllegalArgumentException("boolean target");
                     }
@@ -187,7 +189,7 @@ public final class MatRecordStore<R extends Record> {
                     if (type == char.class) return (char) value;
                     return value;
                 }
-                @Override public MatBits equalTo(Object target) {
+                @Override public SelectionBits equalTo(Object target) {
                     int value =
                             type == char.class
                                     ? (Character) target
@@ -219,7 +221,7 @@ public final class MatRecordStore<R extends Record> {
                     if (type == double.class) return Double.longBitsToDouble(value);
                     return value;
                 }
-                @Override public MatBits equalTo(Object target) {
+                @Override public SelectionBits equalTo(Object target) {
                     long value =
                             type == float.class
                                     ? Integer.toUnsignedLong(
@@ -241,7 +243,7 @@ public final class MatRecordStore<R extends Record> {
             MatUuidVector vector = new MatUuidVector(data);
             return new Column() {
                 @Override public Object value(int row) { return vector.get(row); }
-                @Override public MatBits equalTo(Object target) {
+                @Override public SelectionBits equalTo(Object target) {
                     if (target != null && !(target instanceof UUID)) {
                         throw new IllegalArgumentException("UUID target");
                     }
@@ -259,7 +261,7 @@ public final class MatRecordStore<R extends Record> {
             }
             return new Column() {
                 @Override public Object value(int row) { return enumVector.get(row); }
-                @Override public MatBits equalTo(Object target) {
+                @Override public SelectionBits equalTo(Object target) {
                     return enumVector.equalTo((Enum) target);
                 }
                 @Override public long payloadBytes() { return enumVector.payloadBytes(); }
@@ -278,9 +280,9 @@ public final class MatRecordStore<R extends Record> {
         MatIdVector<Object> vector = new MatIdVector<>(pool, ids);
         return new Column() {
             @Override public Object value(int row) { return vector.get(row).value(); }
-            @Override public MatBits equalTo(Object target) {
+            @Override public SelectionBits equalTo(Object target) {
                 int id = pool.idOf(target);
-                if (id < 0) return new MatBits(values.length);
+                if (id < 0) return new SelectionBits(values.length);
                 return vector.equalTo(pool.ref(id));
             }
             @Override public long payloadBytes() {
