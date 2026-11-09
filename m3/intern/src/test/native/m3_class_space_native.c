@@ -10,7 +10,7 @@
  * stack copy. Unlike GetPrimitiveArrayCritical, this does not pin Java heap arrays.
  */
 JNIEXPORT jboolean JNICALL
-Java_jdk_m3_intern_M3ClassSpaceNative_equalBytes(
+Java_jdk_m3_intern_ClassSpaceNative_equalBytes(
         JNIEnv *env, jclass owner, jbyteArray left, jbyteArray right) {
     (void) owner;
     if ((*env)->IsSameObject(env, left, right)) {

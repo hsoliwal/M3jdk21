@@ -7,7 +7,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Objects;
-import jdk.m3.intern.M3InternSpace;
+import jdk.m3.intern.InternSpace;
 
 /**
  * Append-only canonical arena for Java class metadata.
@@ -25,7 +25,7 @@ public final class MIndexClassPool {
   private static final MIndexClassKind[] CLASS_KINDS = MIndexClassKind.values();
   private static final MIndexMemberKind[] MEMBER_KINDS = MIndexMemberKind.values();
 
-  private final M3InternSpace textSpace;
+  private final InternSpace textSpace;
   private final int languageId;
 
   private volatile int[] namespaceIds;
@@ -68,11 +68,11 @@ public final class MIndexClassPool {
 
   /** A pool over its own fresh text space. */
   public MIndexClassPool(int languageId) {
-    this(new M3InternSpace(), languageId);
+    this(new InternSpace(), languageId);
   }
 
   /** A pool over a caller-owned text space; text handles are atom ids of that space. */
-  public MIndexClassPool(M3InternSpace textSpace, int languageId) {
+  public MIndexClassPool(InternSpace textSpace, int languageId) {
     this.textSpace = Objects.requireNonNull(textSpace, "textSpace");
     if (languageId < 0) throw new IllegalArgumentException("negative languageId");
     this.languageId = languageId;
@@ -111,7 +111,7 @@ public final class MIndexClassPool {
     memberSimHashes = new long[32];
   }
 
-  public M3InternSpace textSpace() { return textSpace; }
+  public InternSpace textSpace() { return textSpace; }
   public int languageId() { return languageId; }
   public int size() { return size; }
   public int retainedInterfaceHandleCount() { return interfaceSize; }
@@ -539,7 +539,7 @@ public final class MIndexClassPool {
     return textSpace.string(textHandle);
   }
 
-  /** Atom ids of an M3InternSpace are dense (1..2^24), so they fit the int handle lanes. */
+  /** Atom ids of an InternSpace are dense (1..2^24), so they fit the int handle lanes. */
   private int textHandle(String value) {
     return Math.toIntExact(textSpace.internString(value));
   }
