@@ -18,6 +18,7 @@
  *          retained fields remain authorized and usable after cache eviction
  * @requires vm.gc.Serial
  * @modules java.base/java.lang:open
+ * @build M3ObjectLoaderLifetimePayload
  * @compile --patch-module java.base=${test.src} --add-reads java.base=ALL-UNNAMED M3ObjectLoaderLifetimeTest.java
  * @run main/othervm --patch-module java.base=${test.classes} --add-reads java.base=ALL-UNNAMED -Xmx64m -XX:+UseSerialGC -XX:+ClassUnloading java.lang.M3ObjectLoaderLifetimeTest
  */
@@ -28,6 +29,7 @@
  *          retained fields remain authorized and usable after cache eviction
  * @requires vm.gc.G1
  * @modules java.base/java.lang:open
+ * @build M3ObjectLoaderLifetimePayload
  * @compile --patch-module java.base=${test.src} --add-reads java.base=ALL-UNNAMED M3ObjectLoaderLifetimeTest.java
  * @run main/othervm --patch-module java.base=${test.classes} --add-reads java.base=ALL-UNNAMED -Xmx64m -XX:+UseG1GC -XX:+ClassUnloading java.lang.M3ObjectLoaderLifetimeTest
  */
@@ -44,7 +46,7 @@ import java.util.List;
 
 public final class M3ObjectLoaderLifetimeTest {
     private static final String PAYLOAD_NAME =
-            "M3ObjectLoaderLifetimeTest$Payload";
+            "M3ObjectLoaderLifetimePayload"; // unnamed package, see that file
     private static final int INITIAL_VALUE = 41;
     private static final int UPDATED_VALUE = 42;
     private static final int FINAL_VALUE = 43;
@@ -61,16 +63,6 @@ public final class M3ObjectLoaderLifetimeTest {
     private static volatile Object allocationSink;
     private static int checks;
 
-    /** Its bytes, rather than its Class object, are defined by each child loader. */
-    public static final class Payload {
-        private volatile int value = INITIAL_VALUE;
-
-        public Payload() { }
-
-        public static MethodHandles.Lookup authority() {
-            return MethodHandles.lookup();
-        }
-    }
 
     private static final class Filler {
         private volatile int value;
@@ -113,8 +105,8 @@ public final class M3ObjectLoaderLifetimeTest {
 
     public static void main(String[] args) throws Exception {
         byte[] bytes;
-        try (InputStream input = M3ObjectLoaderLifetimeTest.class.getResourceAsStream(
-                "/" + PAYLOAD_NAME + ".class")) {
+        try (InputStream input = ClassLoader.getSystemResourceAsStream(
+                PAYLOAD_NAME + ".class")) {
             check(input != null, "compiled nested payload resource is missing");
             bytes = input.readAllBytes();
         }
