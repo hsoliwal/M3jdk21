@@ -1001,6 +1001,7 @@ m3/collections/src/main/java/jdk/internal/m3/collections/PrimitiveFilteredSet.ja
 m3/collections/src/main/java/jdk/internal/m3/collections/PrimitiveFloat16.java	ABSENT	51d6ce4e5db5623e6b28a6c08f7283ff5bb589f1d89ddb93d331200515252e87
 m3/collections/src/main/java/jdk/internal/m3/collections/PrimitiveOrderedMap.java	ABSENT	d4fc746d7836bad20ab888ea3e7bf9532e19ca3c37f888d08b0eeb450b6f736b
 m3/collections/src/main/java/jdk/internal/m3/collections/PrimitiveOrderedSet.java	ABSENT	a4aea30d74ae6a298810552cae83151bd63e49e660b2fe8b1ac020834fa4532c
+m3/collections/src/main/java/jdk/internal/m3/collections/PrimitiveQueue.java	ABSENT	fb6950daf95f0505cec3e3ecb77def4dc3db07c2369cdb9f7268bc9627b2d127
 m3/collections/src/main/java/jdk/internal/m3/collections/PrimitiveRowProvider.java	ABSENT	3a502af9f4906700e4e0266eb42afa8ca3dbe6625fafe4c8d13c9669fcd85972
 m3/collections/src/main/java/jdk/internal/m3/collections/PrimitiveScalarCodec.java	ABSENT	db9209a3ba33d197b4974a24dd36fcaa9f245ffe5ef0dff6e9a2d08374cd554a
 m3/collections/src/main/java/jdk/internal/m3/collections/PrimitiveSortedBag.java	ABSENT	5d4cf26794da747f029ca870d39d4fbf09ed00db706bd126d15d1be01c435f75
