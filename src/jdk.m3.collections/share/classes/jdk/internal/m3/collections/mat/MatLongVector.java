@@ -14,6 +14,8 @@
  *******************************************************************************/
 package jdk.internal.m3.collections.mat;
 
+import jdk.m3.arrays.SelectionBits;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.LongUnaryOperator;
@@ -38,18 +40,18 @@ public final class MatLongVector {
     public long[] toArray(){ return values.clone(); }
     public long payloadBytes(){ return 8L*values.length; }
 
-    public MatBits equalTo(long target){
-        MatBits.Builder bits=MatBits.builder(values.length);
+    public SelectionBits equalTo(long target){
+        SelectionBits.Builder bits=SelectionBits.builder(values.length);
         for(int i=0;i<values.length;i++) if(values[i]==target) bits.set(i);
         return bits.build();
     }
-    public MatBits signedGreaterOrEqual(long target){
-        MatBits.Builder bits=MatBits.builder(values.length);
+    public SelectionBits signedGreaterOrEqual(long target){
+        SelectionBits.Builder bits=SelectionBits.builder(values.length);
         for(int i=0;i<values.length;i++) if(values[i]>=target) bits.set(i);
         return bits.build();
     }
-    public MatBits unsignedGreaterOrEqual(long target){
-        MatBits.Builder bits=MatBits.builder(values.length);
+    public SelectionBits unsignedGreaterOrEqual(long target){
+        SelectionBits.Builder bits=SelectionBits.builder(values.length);
         for(int i=0;i<values.length;i++) if(Long.compareUnsigned(values[i],target)>=0) bits.set(i);
         return bits.build();
     }

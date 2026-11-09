@@ -14,6 +14,8 @@
  *******************************************************************************/
 package jdk.internal.m3.collections.mat;
 
+import jdk.m3.arrays.SelectionBits;
+
 import java.util.Objects;
 
 /**
@@ -25,9 +27,9 @@ import java.util.Objects;
  */
 public final class MatIdSet<T> {
     private final MatPool<T> pool;
-    private final MatBits bits;
+    private final SelectionBits bits;
 
-    private MatIdSet(MatPool<T> pool, MatBits bits) {
+    private MatIdSet(MatPool<T> pool, SelectionBits bits) {
         this.pool = Objects.requireNonNull(pool, "pool");
         this.bits = Objects.requireNonNull(bits, "bits");
         if (bits.size() != pool.size()) throw new IllegalArgumentException("set universe != pool");
@@ -40,7 +42,7 @@ public final class MatIdSet<T> {
         Objects.requireNonNull(ref, "ref");
         return ref.pool() == pool && bits.get(ref.id());
     }
-    public MatBits bits() { return MatBits.ofWords(bits.size(), bits.wordsCopy()); }
+    public SelectionBits bits() { return SelectionBits.ofWords(bits.size(), bits.wordsCopy()); }
     public MatIdSet<T> union(MatIdSet<T> other) { require(other); return new MatIdSet<>(pool, bits.or(other.bits)); }
     public MatIdSet<T> intersect(MatIdSet<T> other) { require(other); return new MatIdSet<>(pool, bits.and(other.bits)); }
     public MatIdSet<T> xor(MatIdSet<T> other) { require(other); return new MatIdSet<>(pool, bits.xor(other.bits)); }
@@ -53,10 +55,10 @@ public final class MatIdSet<T> {
 
     public static final class Builder<T> {
         private final MatPool<T> pool;
-        private final MatBits.Builder bits;
+        private final SelectionBits.Builder bits;
         private Builder(MatPool<T> pool) {
             this.pool = Objects.requireNonNull(pool, "pool");
-            this.bits = MatBits.builder(pool.size());
+            this.bits = SelectionBits.builder(pool.size());
         }
         public Builder<T> add(MatRef<T> ref) {
             Objects.requireNonNull(ref, "ref");

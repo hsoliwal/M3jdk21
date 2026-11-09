@@ -46,3 +46,22 @@ renames (686 lines; one generic signature differs only in normalization).
 
 ABSENT 14 -> 7, and 196 native methods remain. The rest is MatBitMatrix 2, MatIntRowKernel 2, MemoryPressure 2 and
 MarkerTopKNative 1.
+
+## N7c (2026-11-09): MatBits and MatSelection retired
+
+The user admitted on 2026-11-09 ("SelectionBits accessors") making `jdk.m3.arrays.SelectionBits`' word accessors
+public: `wordCount()`, `word(int)`, `wordsFor(int)` and `ofWords(int, long[])`.
+
+A fifth accessor of the same family, `wordsCopy()`, is also made public. `MatIdSet` uses it; the first compile's
+truncated error list hid that call. It is named here so the admission can be checked.
+
+With these accessors public, `MatBits` retires into `SelectionBits`, and `MatSelection` into `IntSelection`
+(`RETIRE_N7c.tsv`; RETIRE_DUPLICATE_OWNER v1.1).
+
+- **Deleted / rewritten:** 2 classes deleted, 17 files rewritten.
+- **Bytecode:** javap -c -p of all 30 rewritten mat classes, nested ones included, is equal modulo the two renames.
+- **Build:** the module compiles under -Xlint:all -Werror.
+- **Default suite:** 2836 tests, 0 failures, 0 errors, 151 skipped.
+- **Custody:** resealed; --check reports changed=0.
+
+MatBitMatrix and MatIntList stay as they are; changing them was not admitted.

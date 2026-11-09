@@ -14,6 +14,8 @@
  *******************************************************************************/
 package jdk.internal.m3.collections.mat;
 
+import jdk.m3.arrays.SelectionBits;
+
 import java.util.Objects;
 
 /**
@@ -62,16 +64,16 @@ public final class MatPackedLongVector {
         writeRaw(index,value & mask(width));
     }
 
-    public MatBits equalTo(long value){
+    public SelectionBits equalTo(long value){
         checkValue(value);
-        MatBits.Builder bits=MatBits.builder(size);
+        SelectionBits.Builder bits=SelectionBits.builder(size);
         for(int i=0;i<size;i++) if(get(i)==value) bits.set(i);
         return bits.build();
     }
 
-    public MatBits greaterOrEqual(long value){
+    public SelectionBits greaterOrEqual(long value){
         checkValue(value);
-        MatBits.Builder bits=MatBits.builder(size);
+        SelectionBits.Builder bits=SelectionBits.builder(size);
         for(int i=0;i<size;i++){
             long current=get(i);
             boolean match=signed ? current>=value : Long.compareUnsigned(current,value)>=0;

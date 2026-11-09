@@ -14,6 +14,8 @@
  *******************************************************************************/
 package jdk.internal.m3.collections.mat;
 
+import jdk.m3.arrays.SelectionBits;
+
 import java.util.Objects;
 
 /**
@@ -28,7 +30,7 @@ import java.util.Objects;
  * blob {@code 45fc409b6ec0d27db9159dee127232651387bae4} at com.synexia develop {@code 35474ccf} by
  * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
  */
-public final class MatBitsAdaptiveCodec implements MatCodec<MatBits> {
+public final class MatBitsAdaptiveCodec implements MatCodec<SelectionBits> {
     private static final int MODE_DENSE = 0;
     private static final int MODE_SPARSE = 1;
     private static final int DEFAULT_MAX_UNIVERSE_BITS = 1 << 24;
@@ -51,10 +53,10 @@ public final class MatBitsAdaptiveCodec implements MatCodec<MatBits> {
     public int maxUniverseBits() { return maxUniverseBits; }
 
     @Override public String typeId() { return "synex:bits-adaptive/1"; }
-    @Override public Class<MatBits> javaType() { return MatBits.class; }
+    @Override public Class<SelectionBits> javaType() { return SelectionBits.class; }
 
     @Override
-    public void encode(MatBits value, MatSink sink) {
+    public void encode(SelectionBits value, MatSink sink) {
         Objects.requireNonNull(value, "value");
         Objects.requireNonNull(sink, "sink");
         requireUniverse(value.size());
@@ -76,13 +78,13 @@ public final class MatBitsAdaptiveCodec implements MatCodec<MatBits> {
     }
 
     @Override
-    public MatBits decode(MatSource source) {
+    public SelectionBits decode(MatSource source) {
         Objects.requireNonNull(source, "source");
         int universe = source.i32();
         requireUniverse(universe);
         int mode = source.u8();
         if (mode == MODE_DENSE) {
-            int wordCount = MatBits.wordsFor(universe);
+            int wordCount = SelectionBits.wordsFor(universe);
             if (8L * wordCount > source.remaining()) {
                 throw new IllegalArgumentException("truncated dense bitmap");
             }
@@ -93,7 +95,7 @@ public final class MatBitsAdaptiveCodec implements MatCodec<MatBits> {
                     && (words[wordCount - 1] >>> remainder) != 0) {
                 throw new IllegalArgumentException("noncanonical dense tail bits");
             }
-            MatBits bitmap = MatBits.ofWords(universe, words);
+            SelectionBits bitmap = SelectionBits.ofWords(universe, words);
             if (sparseWins(bitmap, denseSize(universe))) {
                 throw new IllegalArgumentException("nonminimal dense representation");
             }
@@ -104,7 +106,7 @@ public final class MatBitsAdaptiveCodec implements MatCodec<MatBits> {
             if (count < 0 || count > universe || count > source.remaining()) {
                 throw new IllegalArgumentException("sparse cardinality or length");
             }
-            MatBits.Builder bits = MatBits.builder(universe);
+            SelectionBits.Builder bits = SelectionBits.builder(universe);
             long previous = -1;
             long length = 9L;
             for (int index = 0; index < count; index++) {
@@ -130,11 +132,11 @@ public final class MatBitsAdaptiveCodec implements MatCodec<MatBits> {
     }
 
     private static long denseSize(int universe) {
-        return 5L + 8L * MatBits.wordsFor(universe);
+        return 5L + 8L * SelectionBits.wordsFor(universe);
     }
 
     /** Fail fast on high cardinality; exact gap lengths only matter below the dense cost. */
-    private static boolean sparseWins(MatBits bits, long denseBytes) {
+    private static boolean sparseWins(SelectionBits bits, long denseBytes) {
         long count = bits.cardinality();
         if (9L + count >= denseBytes) return false;
         long bytes = 9L;
