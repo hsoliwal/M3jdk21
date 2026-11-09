@@ -11,7 +11,7 @@
 #include "m3_object.h"
 
 JNIEXPORT jboolean JNICALL
-Java_M3ObjectCacheNativeStressTest_notifyContent(JNIEnv *env, jclass ignored,
+Java_java_lang_M3ObjectCacheNativeStressTest_notifyContent(JNIEnv *env, jclass ignored,
                                                   jobject source)
 {
     (void)ignored;

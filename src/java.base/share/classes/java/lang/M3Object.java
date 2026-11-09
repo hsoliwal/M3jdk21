@@ -39,7 +39,7 @@ import java.util.Objects;
  *
  * @since 21
  */
-public final class M3Object {
+final class M3Object {
     final Object source;
     volatile M3ObjectRuntime.State state;
 
@@ -132,7 +132,7 @@ public final class M3Object {
     }
 
     /** An authorized lazy instance-field location. */
-    public static final class Field {
+    static final class Field {
         final M3Object owner;
         final M3ObjectRuntime.AccessPlan plan;
 

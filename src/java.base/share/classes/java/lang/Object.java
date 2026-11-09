@@ -53,17 +53,16 @@ public class Object {
     /**
      * Adapt this object to a requested Java type or M3JDK object capability.
      * Assignable types return this receiver without allocation or conversion.
-     * An exact request for {@link M3Object} returns its lazy capability; unsupported
-     * types return null. Creating that capability does not read fields, index an
-     * object graph, or start observation delivery. Retain the capability or its
-     * subscription for the required observation lifetime.
+     * An exact request for a JDK-internal object capability type returns its lazy
+     * capability; unsupported types return null. Creating that capability does not
+     * read fields, index an object graph, or start observation delivery.
      *
      * <p>Capability-bearing subclasses may override this method. No resident
      * state is added to Object, and a nonmatching type is never cast unsafely.
      *
      * @param clazz the requested type
      * @param <T> requested result type
-     * @return this instance when assignable, its M3Object capability for that
+     * @return this instance when assignable, its JDK-internal capability for that
      *         exact type, otherwise null
      * @throws NullPointerException if clazz is null
      */

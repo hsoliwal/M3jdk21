@@ -6,9 +6,12 @@
 /*
  * @test
  * @summary JNI notifications preserve weak owner identity after hash-index churn
- * @run main/othervm/native -Xcheck:jni -Djdk.m3.objectEvents.enabled=false M3ObjectCacheNativeStressTest disabled
- * @run main/othervm/native -Xcheck:jni -Djdk.m3.objectEvents.enabled=true M3ObjectCacheNativeStressTest enabled
+ * @compile --patch-module java.base=${test.src} --add-reads java.base=ALL-UNNAMED M3ObjectCacheNativeStressTest.java
+ * @run main/othervm/native --patch-module java.base=${test.classes} --add-reads java.base=ALL-UNNAMED -Xcheck:jni -Djdk.m3.objectEvents.enabled=false java.lang.M3ObjectCacheNativeStressTest disabled
+ * @run main/othervm/native --patch-module java.base=${test.classes} --add-reads java.base=ALL-UNNAMED -Xcheck:jni -Djdk.m3.objectEvents.enabled=true java.lang.M3ObjectCacheNativeStressTest enabled
  */
+package java.lang;
+
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
