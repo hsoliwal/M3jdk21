@@ -58,14 +58,13 @@ class ReleaseMetadataTest(unittest.TestCase):
         self.assertIn("Non-claims", self.notes)
 
     def test_release_notes_do_not_claim_a_contradictory_recipe_producer(self):
+        # Standalone rule (2026-10-31): the receipt is produced inside M3jdk21.
         owner = self.contract["execution_evidence"]["gate_owners"]["M3_MAVEN_CONTROL_REACTOR"]
-        self.assertEqual("hsoliwal/com.synexia", owner)
+        self.assertEqual("hsoliwal/M3jdk21", owner)
         self.assertIn("`" + owner + "`", self.notes)
         self.assertNotIn("owner per contract); imported receipt", self.notes)
-        self.assertNotIn("release-contract.json` assigns this gate to `hsoliwal/M3jdk21`",
-                         self.notes)
-        self.assertIn("passive data", self.notes)
-        self.assertIn("PENDING — exact canonical receipt required", self.notes)
+        self.assertNotIn("receipt from `hsoliwal/com.synexia`", self.notes)
+        self.assertIn("PENDING — receipt produced inside M3jdk21 required", self.notes)
         self.assertIn("HOLD", self.notes)
 
     def test_release_readme_agrees_on_recipe_execution_owner(self):
@@ -73,11 +72,11 @@ class ReleaseMetadataTest(unittest.TestCase):
         preparation = (PACK / "RELEASE_PREPARATION.md").read_text(encoding="utf-8")
         triage = (PACK / "CI_FAILURE_TRIAGE_20261107.md").read_text(encoding="utf-8")
         self.assertEqual(
-            "hsoliwal/com.synexia",
+            "hsoliwal/M3jdk21",
             self.contract["execution_evidence"]["gate_owners"]["M3_MAVEN_CONTROL_REACTOR"])
-        self.assertIn("authored and executed in `hsoliwal/com.synexia`", readme)
-        self.assertIn("produced in Synexia", readme)
-        self.assertIn("M3JDK21 consumes an exact, hash-verified", preparation)
+        self.assertIn("receipt is produced inside `hsoliwal/M3jdk21`", readme)
+        self.assertIn("produced inside M3jdk21", readme)
+        self.assertIn("`M3_MAVEN_CONTROL_REACTOR` receipt to `hsoliwal/M3jdk21`", preparation)
         self.assertIn("agree that canonical", triage)
         self.assertNotIn("control-reactor evidence are executed here", readme)
         self.assertNotIn("control-reactor execution and replay receipts produced in this repository", readme)

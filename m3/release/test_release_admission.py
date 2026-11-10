@@ -700,15 +700,16 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
         del entry["canonical_recipe"]
         self.assert_blocked(self.result(), "gate:" + release.MAVEN_GATE)
 
-    def test_product_cannot_self_attest_the_canonical_recipe_execution(self):
+    def test_external_repository_cannot_attest_the_recipe_execution(self):
+        # Standalone rule (2026-10-31): the receipt is produced inside M3jdk21, not by another repository.
         entry = next(g for g in self.evidence["gates"] if g["id"] == release.MAVEN_GATE)
-        entry["owner_repository"] = release.PRODUCT_REPOSITORY
-        entry["canonical_recipe"]["repository"] = release.PRODUCT_REPOSITORY
+        entry["owner_repository"] = "hsoliwal/com.synexia"
+        entry["canonical_recipe"]["repository"] = "hsoliwal/com.synexia"
         self.assert_blocked(self.result(), "gate:" + release.MAVEN_GATE)
 
     def test_canonical_recipe_receipt_cannot_attest_a_product_gate(self):
         entry = next(g for g in self.evidence["gates"] if g["id"] == "STRING_UTF16_CONTRACT")
-        entry["owner_repository"] = release.CANONICAL_RECIPE_REPOSITORY
+        entry["owner_repository"] = "hsoliwal/com.synexia"
         self.assert_blocked(self.result(), "gate:" + entry["id"])
 
     def test_contract_naming_another_maven_gate_owner_is_refused(self):

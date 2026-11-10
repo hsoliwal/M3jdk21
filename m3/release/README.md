@@ -47,9 +47,9 @@ The current public P0 foundation is intentionally narrower than the full M3 prog
 - an independently authored immutable-text/precompute foundation exists under the explicit
   first-party licensing boundary;
 - product verification machinery, Java precompute differential tests and JNI/native
-  parity tests exist here; canonical Maven/OpenRewrite transformation recipes are
-  authored and executed in `hsoliwal/com.synexia`, while M3JDK21 retains passive,
-  source-bound receipt data and independently executes product acceptance;
+  parity tests exist here; under the 2026-10-31 standalone rule the
+  `M3_MAVEN_CONTROL_REACTOR` receipt is produced inside `hsoliwal/M3jdk21`, and
+  M3JDK21 independently executes product acceptance;
 - the project has a deterministic release contract, rights/provenance record, and proof-pack
   checksum process.
 
@@ -154,8 +154,8 @@ A release candidate must preserve:
   raw JaCoCo XML where applicable, each source SHA-256, >=90% per measured
   contract atom (99% objective for critical atoms), and explicit exclusions/HOLD;
 - JNI/native parity results where JNI/native is used;
-- Maven/OpenRewrite control-reactor execution receipt **produced in Synexia** and
-  consumed here as passive source-bound data, never an executed target recipe;
+- Maven/OpenRewrite control-reactor execution receipt **produced inside M3jdk21**
+  from M3jdk21 sources, with its exact repository, commit and recipe ID;
 - product compilation and applicable installed-image/module tests;
 - release-contract validation;
 - generated SHA-256 manifest;
@@ -242,9 +242,10 @@ creation, execution, qualification and improvement memory in canonical Synexia.
 This target receives executed product postimages, target tests and passive
 provenance receipts. It does not run a recipe command supplied in a receipt.
 
-The existing mandatory gate `M3_MAVEN_CONTROL_REACTOR` therefore consumes an
-execution receipt owned by `hsoliwal/com.synexia`, including its exact canonical
-commit and recipe ID. Every other mandatory gate is M3JDK21-owned. The
+Under the 2026-10-31 standalone rule the existing mandatory gate
+`M3_MAVEN_CONTROL_REACTOR` requires an execution receipt produced inside
+`hsoliwal/M3jdk21`, including its exact commit and recipe ID. Every mandatory
+gate is M3JDK21-owned. The
 standalone dependency check exempts only the structured canonical gate-owner
 metadata; actual external checkout/build/runtime references remain blockers.
 Historical target-local recipe roots remain custody debt. Preserve their source

@@ -66,7 +66,7 @@ retain their original source pins and cannot fill these current-source rows.
 | `PRECOMPUTE_JAVA_DIFFERENTIAL` | `mvn -B -ntp -f m3/ports/precompute/pom.xml test` (job `precompute`) |
 | `PRECOMPUTE_JNI_NATIVE_PARITY` | `mvn -B -ntp -f m3/ports/precompute/pom.xml -Pnative test` (job `precompute`) |
 | `OPENJDK_SANITY_MATRIX` | `.github/workflows/main.yml` (OpenJDK GHA Sanity Checks), CI only |
-| `M3_MAVEN_CONTROL_REACTOR` | **PENDING — exact canonical receipt required.** `AGENTS.md` and `release-contract.json` assign canonical recipe execution to `hsoliwal/com.synexia`. M3JDK21 verifies its source-bound, hash-verified receipt as passive data and independently owns product acceptance gates; this table records no execution or product admission. |
+| `M3_MAVEN_CONTROL_REACTOR` | **PENDING — receipt produced inside M3jdk21 required.** Under the 2026-10-31 standalone rule `release-contract.json` assigns this gate to `hsoliwal/M3jdk21`; the receipt records its exact commit and recipe ID. This table records no execution or product admission. |
 | `STRING_UTF16_CONTRACT` | no workflow job or command is bound to this gate yet |
 | `M3_CHANGED_ATOM_COVERAGE` | **PENDING** — instrumented, source-hash-checked >=90% line and branch coverage of changed contract-bearing M3 atoms, with complete inventory and raw report hashes; does not assert whole-JDK coverage |
 
@@ -101,10 +101,9 @@ Recompute build, test and coverage evidence against the final candidate commit a
   with 811 executable candidates across historical recipe roots. Re-run the current
   verifier and inventory at the final source tree; do not assume that count remains
   current, remove candidates without sealing provenance/callers, or waive the gate.
-- **Maven control-reactor evidence:** **PENDING.** Synexia owns canonical recipe
-  authoring/execution; `M3_MAVEN_CONTROL_REACTOR` requires an exact source-bound,
-  hash-verified receipt from `hsoliwal/com.synexia`. M3JDK21 consumes that receipt
-  as passive data, never executes its recorded command, and independently owns
+- **Maven control-reactor evidence:** **PENDING.** Under the 2026-10-31 standalone
+  rule `M3_MAVEN_CONTROL_REACTOR` requires an exact source-bound, hash-verified
+  receipt produced inside `hsoliwal/M3jdk21`. M3JDK21 owns this gate and the
   product build, runtime and target acceptance gates. The target still requires
   zero executable dependencies on another repository. The actual receipt must
   match the final receiving bytes; this release note is not that receipt.

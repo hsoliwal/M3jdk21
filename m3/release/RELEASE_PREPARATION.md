@@ -104,12 +104,13 @@ documented in [the release pack](README.md).
   contract-bearing atom. See the upstream
   [naming/documentation/coverage specification](NAMING_DOCUMENTATION_COVERAGE.md).
   No instrumented result is claimed in this PR; the gate remains PENDING.
-- [`AGENTS.md`](../../AGENTS.md) and the current
-  [machine release contract](release-contract.json) agree that Synexia is
-  the exclusive canonical Maven/OpenRewrite recipe-authoring and execution
-  owner. M3JDK21 consumes an exact, hash-verified
-  `M3_MAVEN_CONTROL_REACTOR` receipt as passive data; its runtime, JDK,
-  JNI and installed-image gates remain M3JDK21-owned. The custody policy
+- Under the 2026-10-31 standalone rule the
+  [machine release contract](release-contract.json) assigns the
+  `M3_MAVEN_CONTROL_REACTOR` receipt to `hsoliwal/M3jdk21`: it is produced
+  inside this repository from its own sources, with an exact, hash-verified
+  record of commit and recipe ID. Runtime, JDK, JNI and installed-image gates
+  remain M3JDK21-owned. [`AGENTS.md`](../../AGENTS.md) still names Synexia as
+  the recipe owner and needs the same decision. The custody policy
   agreement **does not supply a matching execution receipt**. That gate
   and legacy recipe-source migration debt remain HOLD until proven.
 - The updated admission workflow now uploads raw
