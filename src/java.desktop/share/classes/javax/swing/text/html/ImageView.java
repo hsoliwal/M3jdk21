@@ -32,6 +32,8 @@ import java.awt.Color;
 import java.awt.Shape;
 import java.awt.Graphics;
 import java.awt.Toolkit;
+import java.awt.Frame;
+import java.awt.Window;
 
 import java.awt.image.ImageObserver;
 import java.net.URL;
@@ -352,6 +354,24 @@ public class ImageView extends View {
                 state = (state | LINK_FLAG) ^ LINK_FLAG;
             }
         }
+    }
+
+    /**
+     * Returns true when the host component is not showing or its frame is
+     * iconified (an iconified frame is still showing), so animation frames
+     * would only be repainted for nobody.
+     */
+    private boolean isHostHidden() {
+        Container host = container;
+        if (host == null) {
+            return false;
+        }
+        if (!host.isShowing()) {
+            return true;
+        }
+        Window window = SwingUtilities.getWindowAncestor(host);
+        return window instanceof Frame frame
+                && (frame.getExtendedState() & Frame.ICONIFIED) != 0;
     }
 
     /**
@@ -1038,6 +1058,11 @@ public class ImageView extends View {
                     safePreferenceChanged();
                     return true;
                 }
+            }
+
+            // An animation frame nobody can see: stop the frames; painting the view again restarts them //FLLDCIM: MARK — every-widget HTML ImageView H
+            if ((flags & FRAMEBITS) != 0 && isHostHidden()) {
+                return false;
             }
 
             // Repaint when done or when new pixels arrive:
