@@ -780,7 +780,7 @@ public final class SharedLexiconCatalog {
             try (InputStream input = Files.newInputStream(path)) {
                 byte[] buffer = new byte[8192];
                 for (int read; (read = input.read(buffer)) >= 0;) {
-                    digest.update(buffer, 0, read); // a non-empty buffer read returns >= 1 byte or -1
+                    digest.update(buffer, 0, read); // read() of a non-empty buffer is >= 1 or -1
                 }
             }
             return digest.digest();
