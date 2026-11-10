@@ -210,7 +210,7 @@ jobs:
           retention-days: 90
 
   control-reactor:
-    name: Canonical Synexia recipe execution evidence
+    name: M3jdk21 Maven control-reactor receipt
     runs-on: ubuntu-22.04
     timeout-minutes: 15
     steps:
@@ -221,12 +221,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Require executed Synexia control-reactor recipe evidence
+      - name: Require the M3jdk21-produced Maven control-reactor receipt
         shell: bash
         run: |
           set -euo pipefail
-          # Historical target-local recipes remain inventoried source, never execution authority.
-          # This read-only consumer requires the same mandatory Maven gate; missing proof fails.
+          # release-contract.json execution_evidence.gate_owners: M3_MAVEN_CONTROL_REACTOR is produced inside
+          # hsoliwal/M3jdk21 from M3jdk21 sources (standalone rule, 2026-10-31). This read-only consumer requires
+          # the same mandatory Maven gate; missing proof fails. It checks out and fetches nothing else.
           python3 - <<'PYCODE'
           import importlib.util
           import json
@@ -241,7 +242,7 @@ jobs:
           print(json.dumps({'source_commit': result['source_commit'],
                             'canonical_maven_gate': checks}, sort_keys=True))
           if not result['policy_valid'] or len(checks) != 1 or checks[0]['status'] != 'PASS':
-              raise SystemExit('HOLD: execute and qualify the source-bound Maven/OpenRewrite control reactor in hsoliwal/com.synexia; attach the exact command, source pins and raw artifact hashes. This target consumes evidence and never executes recipe sources.')
+              raise SystemExit('HOLD: execute and qualify the source-bound Maven/OpenRewrite control reactor inside hsoliwal/M3jdk21 from M3jdk21 sources (release-contract.json execution_evidence.gate_owners); attach the exact command, source pins and raw artifact hashes. This job consumes the receipt and never executes recipe sources.')
           PYCODE
       - name: Full-family and receiving-policy verification
         if: always()
@@ -272,7 +273,7 @@ jobs:
             echo "| contract/provenance | ${{ needs.contract.result }} |"
             echo "| immutable text foundation | ${{ needs.foundation.result }} |"
             echo "| Java + JNI precompute parity | ${{ needs.precompute.result }} |"
-            echo "| Canonical Synexia recipe execution evidence | ${{ needs.control-reactor.result }} |"
+            echo "| M3jdk21 Maven control-reactor receipt | ${{ needs.control-reactor.result }} |"
             echo
             echo 'The existing OpenJDK GHA sanity workflow remains the product-build/platform matrix.'
             echo 'A passing proof summary does not upgrade any claim marked NOT_CLAIMED in release-contract.json.'

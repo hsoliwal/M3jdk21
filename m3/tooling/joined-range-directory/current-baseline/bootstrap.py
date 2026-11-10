@@ -85,7 +85,7 @@ def main():
         assert out.resolve().is_relative_to(root.resolve()) and not out.exists()
         out.write_bytes(raw)
     def blob(repo,row):
-        assert repo in ('hsoliwal/M3jdk21','hsoliwal/com.synexia') and re.fullmatch('[0-9a-f]{40}',row['gitBlob'])
+        assert repo=='hsoliwal/M3jdk21' and re.fullmatch('[0-9a-f]{40}',row['gitBlob'])
         headers={'Accept':'application/vnd.github+json','User-Agent':'M3-core-baseline-qualification'}
         token=os.environ.get('GH_TOKEN')
         if token:headers['Authorization']='Bearer '+token
