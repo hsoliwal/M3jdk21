@@ -4,7 +4,7 @@
 # spatial_gate.sh <master-sha> <donor-checkout> <donor-rev> <scratch-dir>
 # CPU_TOOLS_PACK_GATE v2 (../cpu-structured-waves-20261106/waves_gate.sh) for one leaf, plus the split and differential
 # gates of M3PackedSpatialIndex. Run from a checkout of the leaf (the working copy is the leaf side). Steps:
-#   0 recipe: crate_chain2.py (gh api, com.synexia develop) reproduces the class bytes; split_contract.py --check is a
+#   0 recipe (CRATE_CHAIN set): crate_chain2.py reproduces the class bytes; split_contract.py --check is a
 #     fixed point; a tampered SPLIT.tsv pin refuses with exit 2 and writes nothing
 #   1 live (master packs) and leaf (working copy packs), each: java.base Progress*/Monitored* patch, jdk.compiler M3
 #     owner patch, modules javac -Xlint:all,-module -Werror, gcc -Werror m3textio/m3textops, build.py FIXTURES with
@@ -26,8 +26,12 @@ rm -rf "$X"; mkdir -p "$X"; A=$(cygpath -m "$X")
 row() { awk -F'\t' -v r="$1" -v c="$2" '$1 == r {print $c}' "$HERE/PROVENANCE.tsv"; }
 
 echo "== 0 recipe"
+# crate_chain2.py read the crate over gh api from the donor's develop branch. It was retired on 2026-11-10 (standalone
+# rule) to m3/qualification/master-landing-20261028/retained-variants/pr2932/m3/qualification/cpu-structured-waves-
+# 20261106/crate_chain2.py; its verdict stays in VERDICTS.tsv. Step 0 runs only when CRATE_CHAIN names a copy of it.
+if [ -n "${CRATE_CHAIN:-}" ]; then
 CRATE=$(dirname "$(row CLASS 4)"); CRATE_TEXT=$(echo "$CRATE" | sed 's#/hash-pinned-java/#/hash-pinned-text/#')
-python -I "$ROOT/m3/qualification/cpu-structured-waves-20261106/crate_chain2.py" "$CRATE,$CRATE_TEXT" \
+python -I "$CRATE_CHAIN" "$CRATE,$CRATE_TEXT" \
   "$(git -C "$ROOT" rev-parse --path-format=absolute --git-common-dir)" "$R" \
   "$(git -C "$ROOT" rev-parse fe35ea98841^)" "$ROOT/m3/tooling/jdk-naming" "$X/chain" > "$X/chain.out"
 grep -F "$(basename "$(row CLASS 7)")" "$X/chain.out"
@@ -39,6 +43,7 @@ sed 's/^\(DROP\tD3_FLOW_CASES\t55-94\t1\t\)780d364480c5699a/\1780d364480c5699b/'
 python -I "$X/tamper/split_contract.py" "$CIN" "$X/tamper/out.java"; r=$?
 echo "tampered pin rc=$r written=$([ -e "$X/tamper/out.java" ] && echo yes || echo no)"
 
+else echo "step 0 skipped: CRATE_CHAIN unset (standalone rule; verdict in VERDICTS.tsv)"; fi
 echo "== 1 live/leaf"
 W=$X/g; mkdir -p "$W/live" "$W/leaf/$T" "$W/jb/java/util/concurrent" "$W/csrc" "$W/empty"
 git -C "$ROOT" archive "$R" $T/text-tools/src $T/text-tools/native $T/text-tools/fixtures $CT/src $CT/fixtures \
