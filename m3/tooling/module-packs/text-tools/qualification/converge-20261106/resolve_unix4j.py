@@ -1,7 +1,7 @@
 """resolve_unix4j.py <m3-root> <dev-dir> <mout> <merge.tsv> <final-root> : M3_TEXT_TOOLS_CONVERGE v1 decisions.
 - EQUIVALENT (JsonLinesTools, StructuredCli): M3 copy stays (differences are header/imports only).
 - KEEP_OURS_RETAIN (NativeUtf16Literal): M3's paged CharSequence kernel stays live; the donor's String kernel is kept
-  byte for byte under m3/qualification/master-landing-20261028/retained-variants/text-tools-20261106/.
+  byte for byte under m3/qualification/master-landing-20261028/retained-variants/pr2498/.
 - UNION (TextTools, m3textio.c): both appended regions are kept, M3's first.
 Writes every ADD/MERGED/SAME/resolved file under <final-root> at its M3 path; prints one decision row per file."""
 import sys
@@ -10,7 +10,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 from merge_unix4j import relocate, set_package, target  # noqa: E402
 
-RETAIN = "m3/qualification/master-landing-20261028/retained-variants/text-tools-20261106/"
+RETAIN = "m3/qualification/master-landing-20261028/retained-variants/pr2498/"
 DECIDE = {"JsonLinesTools.java": "OURS", "StructuredCli.java": "OURS", "NativeUtf16Literal.java": "OURS_RETAIN",
           "TextTools.java": "UNION", "m3textio.c": "UNION"}
 

@@ -20,7 +20,7 @@ MERGED	m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Limits.jav
 ADD	m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/M3NativeTextWindow.java
 ADD	m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/M3TextOperators.java
 ADD	m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/M3TextToolCatalog.java
-HOLD	m3/qualification/master-landing-20261028/retained-variants/text-tools-20261106/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/M3TextToolExecutor.java
+HOLD	m3/qualification/master-landing-20261028/retained-variants/pr2498/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/M3TextToolExecutor.java
 ADD	m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/M3TextToolRequest.java
 ADD	m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/M3TextToolResult.java
 MERGED	m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/M3UnixRuntime.java
@@ -31,7 +31,7 @@ ADD	m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/M3RegexRequir
 ADD	m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/M3Utf8PackedRows.java
 ADD	m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/NativeLineBatch.java
 ADD	m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/NativeTextAtom.java
-RETAINED	m3/qualification/master-landing-20261028/retained-variants/text-tools-20261106/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/NativeUtf16Literal.java
+RETAINED	m3/qualification/master-landing-20261028/retained-variants/pr2498/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/NativeUtf16Literal.java
 OURS_RETAIN	m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/NativeUtf16Literal.java
 ADD	m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/NativeUtf8Lines.java
 MERGED	m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Node.java

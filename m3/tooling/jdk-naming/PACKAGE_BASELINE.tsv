@@ -467,10 +467,10 @@ ROOT	m3/qualification/master-landing-20261028/retained-variants/pr2163/m3/collec
 ROOT	m3/qualification/master-landing-20261028/retained-variants/pr2163/m3/m3-import/pure-int-recipe-custody	COPY
 ROOT	m3/qualification/master-landing-20261028/retained-variants/pr2214/m3/tooling/jdk-naming/conformance	COPY
 ROOT	m3/qualification/master-landing-20261028/retained-variants/pr2390/m3/lexicon/receiver	COPY
-ROOT	m3/qualification/master-landing-20261028/retained-variants/rename-collision/m3/collections/implementations/apache-hashed-map	COPY
-ROOT	m3/qualification/master-landing-20261028/retained-variants/rename-collision/m3/collections/implementations/apache-linked-map	COPY
-ROOT	m3/qualification/master-landing-20261028/retained-variants/rename-collision/m3/collections/implementations/apache-lru-map	COPY
-ROOT	m3/qualification/master-landing-20261028/retained-variants/superset-31j/m3/tooling/atom-census	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr2489/m3/collections/implementations/apache-hashed-map	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr2489/m3/collections/implementations/apache-linked-map	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr2489/m3/collections/implementations/apache-lru-map	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr2489/m3/tooling/atom-census	COPY
 ROOT	m3/qualification/progress-scope-lint-20261018/canonical-owner	COPY
 ROOT	m3/qualification/retained-twins-core-lanes-20261106/held/m3/collections	COPY
 ROOT	m3/runtime-integration/qualification/bitlane-count-skip-20261019	COPY

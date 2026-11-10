@@ -15,7 +15,7 @@ Three-way receive. **ours** is this pack on M3jdk21 master. **base** is the rece
 | SAME | 4 |
 | UNION (both sides' appended code, duplicate blocks dropped) | TextTools (M3's native line ops plus the donor's `grepLiteral(ByteBuffer, …)`), m3textio.c (M3's literal extension plus the donor's UTF-8 line scans; duplicate C functions de-duplicated, M3's first) |
 | OURS (equivalent, header/import differences only) | JsonLinesTools, StructuredCli |
-| OURS + RETAINED | NativeUtf16Literal: M3's paged CharSequence kernel stays live, and the donor's String kernel is retained under `m3/qualification/master-landing-20261028/retained-variants/text-tools-20261106/` |
+| OURS + RETAINED | NativeUtf16Literal: M3's paged CharSequence kernel stays live, and the donor's String kernel is retained under `m3/qualification/master-landing-20261028/retained-variants/pr2498/` |
 | HOLD (retained, not compiled) | M3TextToolExecutor: it needs both `jdk.m3.structured` and package-private `jdk.m3.text` members, so it fits neither module and needs a module decision |
 
 Module and build changes:
