@@ -25,6 +25,8 @@ from pathlib import Path
 from unittest import mock
 
 MODULE_PATH = Path(__file__).with_name("verify_release_admission.py")
+# The former recipe home, planted below only to prove that release admission refuses it (lineage data).
+DONOR_REPOSITORY = "hsoliwal/com.synexia"
 spec = importlib.util.spec_from_file_location("m3_release_admission", MODULE_PATH)
 release = importlib.util.module_from_spec(spec)
 assert spec.loader is not None
@@ -703,13 +705,13 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
     def test_external_repository_cannot_attest_the_recipe_execution(self):
         # Standalone rule (2026-10-31): the receipt is produced inside M3jdk21, not by another repository.
         entry = next(g for g in self.evidence["gates"] if g["id"] == release.MAVEN_GATE)
-        entry["owner_repository"] = "hsoliwal/com.synexia"
-        entry["canonical_recipe"]["repository"] = "hsoliwal/com.synexia"
+        entry["owner_repository"] = DONOR_REPOSITORY
+        entry["canonical_recipe"]["repository"] = DONOR_REPOSITORY
         self.assert_blocked(self.result(), "gate:" + release.MAVEN_GATE)
 
     def test_canonical_recipe_receipt_cannot_attest_a_product_gate(self):
         entry = next(g for g in self.evidence["gates"] if g["id"] == "STRING_UTF16_CONTRACT")
-        entry["owner_repository"] = "hsoliwal/com.synexia"
+        entry["owner_repository"] = DONOR_REPOSITORY
         self.assert_blocked(self.result(), "gate:" + entry["id"])
 
     def test_contract_naming_another_maven_gate_owner_is_refused(self):
@@ -970,7 +972,7 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
         self.write("m3/release/release-contract.json", json.dumps(self.contract))
         self.write(".github/workflows/external-runtime.yml",
                    "jobs:\n  build:\n    steps:\n      - uses: actions/checkout@v4\n"
-                   "        with:\n          repository: hsoliwal/com.synexia\n")
+                   "        with:\n          repository: " + DONOR_REPOSITORY + "\n")
         self.repin_queue()
         self.git("add", ".")
         self.git("commit", "--amend", "-qm", "synthetic tree requiring external runtime")

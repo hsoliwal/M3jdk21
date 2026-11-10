@@ -8,6 +8,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 PACK = ROOT / "m3" / "release"
+# The former recipe home; the release notes must not present a receipt from it (lineage data).
+DONOR_REPOSITORY = "hsoliwal/com.synexia"
 
 
 class ReleaseMetadataTest(unittest.TestCase):
@@ -63,7 +65,7 @@ class ReleaseMetadataTest(unittest.TestCase):
         self.assertEqual("hsoliwal/M3jdk21", owner)
         self.assertIn("`" + owner + "`", self.notes)
         self.assertNotIn("owner per contract); imported receipt", self.notes)
-        self.assertNotIn("receipt from `hsoliwal/com.synexia`", self.notes)
+        self.assertNotIn(f"receipt from `{DONOR_REPOSITORY}`", self.notes)
         self.assertIn("PENDING — receipt produced inside M3jdk21 required", self.notes)
         self.assertIn("HOLD", self.notes)
 

@@ -9,7 +9,8 @@
 # Logs go to the scratch directory; only summaries are printed. Exit 0 = VERIFY PASS.
 # usage: verify.sh <donor-git-dir> <donor-rev> <scratch-dir> [maven-repo-local] [corpus-rev ...]   (JAVA_HOME = JDK 21)
 # corpus-rev: extra donor revisions searched for the oracle-time corpus files (a shallow donor clone lacks the older
-# ones; corpus.py then asks GitHub for them).
+# ones). CORPUS_GITHUB=OWNER/REPO (optional, unset by default) lets corpus.py fetch the files a shallow donor clone
+# lacks over `gh api`; unset, only the local donor git directory is read and nothing is fetched (standalone rule).
 set -euo pipefail
 RECIPE_DIR=$(cd "$(dirname "$0")" && pwd)
 REPO=$(cd "$RECIPE_DIR/../../../.." && pwd)
@@ -27,8 +28,8 @@ python -I m3/tooling/jdk-naming/jdk_naming.py plan --root . --only m3/indexdb/ |
 grep -q 'moves=0 rewrites=0 refusals=0' "$SCRATCH/naming-plan.txt"
 revs=(--rev "$REV")
 for rev in "$@"; do revs+=(--rev "$rev"); done
-python -I "$RECIPE/corpus.py" --donor-git "$DONOR_GIT" --out "$SCRATCH/corpus" "${revs[@]}" --github hsoliwal/com.synexia \
-    | tee "$SCRATCH/corpus.txt" | tail -n 1
+python -I "$RECIPE/corpus.py" --donor-git "$DONOR_GIT" --out "$SCRATCH/corpus" "${revs[@]}" \
+    ${CORPUS_GITHUB:+--github "$CORPUS_GITHUB"} | tee "$SCRATCH/corpus.txt" | tail -n 1
 if ! mvn -B -ntp ${REPO_LOCAL:+-Dmaven.repo.local=$REPO_LOCAL} -f m3/indexdb/pom.xml package > "$SCRATCH/mvn-package.log" 2>&1 \
     || ! grep -q 'BUILD SUCCESS' "$SCRATCH/mvn-package.log"; then
     tail -n 40 "$SCRATCH/mvn-package.log"
