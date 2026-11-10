@@ -46,6 +46,11 @@ done
 # Reflective ownership proof has an explicit test-only module open.
 "$M3JDK/bin/java" -ea -esa --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text --add-opens jdk.m3.text/jdk.m3.text=ALL-UNNAMED -cp build/tests M3PrecomputePayloadFieldPatternTest | tee build/logs/extra-payload-field-pattern.log
 
+# Streaming contracts: rope appendTo windows and blockwise catalog shard digests.
+"$M3JDK/bin/javac" --release 21 --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text \
+  -d build/tests core/test/M3StreamingContractTest.java >> build/logs/extra-core-compile.log 2>&1
+"$M3JDK/bin/java" -ea -esa --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests M3StreamingContractTest | tee build/logs/extra-streaming-contract.log
+
 # Word-row fixture worker copies java.class.path, not --module-path. Keep the
 # complete released module JAR on this one test's classpath for child parity.
 "$M3JDK/bin/java" -ea -esa -cp build/tests:build/jdk.m3.text.jar M3WordRowsContractTest | tee build/logs/extra-word-rows-contract.log
