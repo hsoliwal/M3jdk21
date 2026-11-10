@@ -51,12 +51,12 @@ import java.util.Locale;
  * <li>Ollama-backed - LLM-based rewriting (external)</li>
  * </ul>
  *
- * @author Hitesh Soliwal (hsoliwal@gmail.com)
- * @see ConvergenceChunker
- *
  * <p>Lineage: absorbed from Synexia {@code m3-common/src/main/java/jdk/internal/m3/common/convergence/TextSmoother.java}
  * blob {@code 0b2d4d9c3aabbc9c19ab069ffb5fe7ab52444cc2} at com.synexia develop {@code 8ab80ea57d9f} by
  * RELOCATE_M3_OWNER v4 (common non-language batch b28 (canonical, utils, semantic, convergence, io, extracted, validation, relationbits) v6.3: identifiers and package only; bytecode equal to the source modulo names).
+ *
+ * @author Hitesh Soliwal (hsoliwal@gmail.com)
+ * @see "ConvergenceChunker"
  */
 @FunctionalInterface
 public interface TextSmoother {

@@ -33,14 +33,14 @@ import java.time.Instant;
  * <li>Recall biases computation; it never injects facts.</li>
  * </ol>
  *
- * @author Hitesh Soliwal (hsoliwal@gmail.com)
- * @see ConvergenceChunk
- * @see ConvergenceEventLog
- * @see ConvergenceProjection
- *
  * <p>Lineage: absorbed from Synexia {@code m3-common/src/main/java/jdk/internal/m3/common/convergence/ConvergenceEvent.java}
  * blob {@code 5831d510c392623b2b5c62c661e25b0654afc00a} at com.synexia develop {@code 8ab80ea57d9f} by
  * RELOCATE_M3_OWNER v4 (common non-language batch b28 (canonical, utils, semantic, convergence, io, extracted, validation, relationbits) v6.3: identifiers and package only; bytecode equal to the source modulo names).
+ *
+ * @author Hitesh Soliwal (hsoliwal@gmail.com)
+ * @see ConvergenceChunk
+ * @see "ConvergenceEventLog"
+ * @see "ConvergenceProjection"
  */
 public sealed interface ConvergenceEvent
         permits ConvergenceEvent.AddEvent, ConvergenceEvent.DropEvent, ConvergenceEvent.ConsolidateEvent {

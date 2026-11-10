@@ -19,7 +19,7 @@ package jdk.internal.m3.collections;
  * Constants for Discrete Integral Convergence Engine.
  *
  * <p>
- * Extracted from {@link DiscreteIntegralEngine} to separate concerns and
+ * Extracted from {@code DiscreteIntegralEngine} to separate concerns and
  * improve maintainability. All strings are interned for memory efficiency.
  *
  * @author Hitesh Soliwal (hsoliwal@gmail.com)
