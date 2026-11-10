@@ -4,7 +4,11 @@
 ## Hard boundary: postimages only, never recipes
 
 **Synexia (`hsoliwal/com.synexia`) is the exclusive convergence, Maven/OpenRewrite
-recipe-authoring, recipe-storage, recipe-execution and qualification workspace.**
+recipe-authoring, recipe-storage and recipe-execution workspace.**
+Release qualification is not: every mandatory release gate, including the
+`M3_MAVEN_CONTROL_REACTOR` receipt, is produced inside `hsoliwal/M3jdk21` from M3JDK21
+sources (`execution_evidence.gate_owners` in
+[`m3/release/release-contract.json`](m3/release/release-contract.json)).
 This public M3JDK21 repository is a **receiver**: it may contain only the actual
 executed Java/HotSpot/JNI/native/product postimages, target-authoritative tests,
 license/NOTICE material and data-only source/recipe-ID/execution-gate receipts.
