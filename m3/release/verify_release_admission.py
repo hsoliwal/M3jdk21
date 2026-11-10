@@ -56,6 +56,14 @@ RECIPE_ROOTS = (
     "m3/runtime-integration/char-array-copy/recipe",
     "m3/runtime-integration/utf8-cursor-20261014/recipe/canonical",
 )
+# Custody of every executable candidate under RECIPE_ROOTS is decided in one committed ledger
+# (ABSORB | MOVE | RETIRE). MOVE/RETIRE rows must be applied (blob at destination, source gone);
+# ABSORB keeps a blob-pinned file in place or folds it into an owner outside the legacy roots.
+CUSTODY_LEDGER = "m3/release/LEGACY_RECIPE_CUSTODY_LEDGER.tsv"
+CUSTODY_COLUMNS = ("path", "blob", "mode", "decision", "destination", "reason", "callers")
+CUSTODY_DECISIONS = frozenset({"ABSORB", "MOVE", "RETIRE"})
+RETIRE_ARCHIVE = "m3/qualification/master-landing-20261028/retained-variants/"
+RETIRE_ENTRY = re.compile(r"pr[1-9][0-9]*/(.+)\Z")
 NAME_MAP = "m3/docs/name-mapping.json"
 NAME_PLAN = "m3/tooling/name-contract/name-plan.json"
 EVIDENCE_SCHEMA = "M3_RELEASE_EVIDENCE_V1"
@@ -305,6 +313,91 @@ def recipe_candidate(path: str) -> bool:
             or name == "pom.xml" or name.startswith("pom-") and name.endswith(".xml"))
 
 
+def under_recipe_roots(path: str) -> bool:
+    return any(path == root or path.startswith(root + "/") for root in RECIPE_ROOTS)
+
+
+def tree_path(path: str) -> bool:
+    return (bool(path) and not any(c in path for c in "\\\r\n\t\0")
+            and all(part and part not in (".", "..", ".git") for part in path.split("/")))
+
+
+def load_custody_ledger(root: Path) -> list[dict] | None:
+    """Parse the ledger committed at HEAD; None when absent, ValueError when malformed."""
+    try:
+        raw = subprocess.check_output(["git", "-C", str(root), "cat-file", "blob",
+                                       "HEAD:" + CUSTODY_LEDGER], stderr=subprocess.PIPE)
+    except subprocess.CalledProcessError:
+        return None
+    lines = raw.decode("utf-8").split("\n")
+    if lines[-1] == "":
+        lines.pop()
+    if not lines or tuple(lines[0].split("\t")) != CUSTODY_COLUMNS:
+        raise ValueError("custody ledger header drifted")
+    rows, seen = [], set()
+    for number, line in enumerate(lines[1:], 2):
+        fields = line.split("\t")
+        if len(fields) != len(CUSTODY_COLUMNS):
+            raise ValueError(f"custody ledger row {number}: expected {len(CUSTODY_COLUMNS)} columns")
+        row = dict(zip(CUSTODY_COLUMNS, fields))
+        path, dest, decision = row["path"], row["destination"], row["decision"]
+        if (not tree_path(path) or not under_recipe_roots(path) or not recipe_candidate(path)
+                or path in seen):
+            raise ValueError(f"custody ledger row {number}: path is not a unique legacy recipe candidate")
+        if (not SHA1.fullmatch(row["blob"]) or row["mode"] not in ("100644", "100755")
+                or decision not in CUSTODY_DECISIONS or not tree_path(dest)
+                or not row["reason"].strip() or not row["callers"].strip()):
+            raise ValueError(f"custody ledger row {number}: invalid blob, mode, decision, destination or evidence")
+        entry = RETIRE_ENTRY.fullmatch(dest[len(RETIRE_ARCHIVE):]) if dest.startswith(RETIRE_ARCHIVE) else None
+        if decision == "RETIRE":
+            valid = entry is not None and entry.group(1) == path
+        elif decision == "MOVE":
+            valid = not under_recipe_roots(dest) and not dest.startswith(RETIRE_ARCHIVE)
+        else:
+            valid = dest == path or not (under_recipe_roots(dest) or dest.startswith(RETIRE_ARCHIVE))
+        if not valid:
+            raise ValueError(f"custody ledger row {number}: {decision} destination is outside its custody layout")
+        seen.add(path)
+        rows.append(row)
+    return rows
+
+
+def tree_entries(root: Path, paths: list[str]) -> dict[str, tuple[str, str]]:
+    """Mode and blob of the given HEAD paths, read through a few directory pathspecs."""
+    specs = sorted({"/".join(p.split("/")[:min(3, p.count("/"))]) or p for p in paths})
+    entries = {}
+    for item in git_paths(root, "ls-tree", "-r", "-z", "HEAD", "--", *specs):
+        metadata, path = item.split("\t", 1)
+        mode, _, oid = metadata.split(" ")
+        entries[path] = (mode, oid)
+    return {p: entries[p] for p in paths if p in entries}
+
+
+def recipe_custody(root: Path, residue: list[str]) -> tuple[bool, str, list[str]]:
+    """Legacy-root custody at HEAD: every candidate ledgered, every decision applied."""
+    ledger = load_custody_ledger(root)
+    if ledger is None and not residue:
+        return True, "no executable candidates in the enumerated legacy roots; not a full-tree ownership proof", []
+    if ledger is None:
+        return (False, f"{len(residue)} executable candidates remain under legacy recipe roots; "
+                "seal Synexia custody and callers before a reviewed migration", residue)
+    ledgered = {row["path"] for row in ledger}
+    present = set(residue)
+    tree = tree_entries(root, sorted({row["destination"] for row in ledger}))
+    unledgered = [p for p in residue if p not in ledgered]
+    unresolved = [row["path"] + " -> " + row["destination"] for row in ledger
+                  if tree.get(row["destination"]) != (row["mode"], row["blob"])
+                  or (row["destination"] != row["path"]) == (row["path"] in present)]
+    if unledgered or unresolved:
+        return (False, f"{len(unledgered)} unledgered candidates and {len(unresolved)} unapplied or drifted "
+                f"ledger rows under legacy recipe roots ({CUSTODY_LEDGER})", unledgered + unresolved)
+    counts = {d: sum(row["decision"] == d for row in ledger) for d in sorted(CUSTODY_DECISIONS)}
+    return (True, f"{len(ledger)} ledgered candidates applied at HEAD ("
+            + ", ".join(f"{d} {n}" for d, n in counts.items())
+            + f"); {len(residue)} remain under legacy roots only as blob-pinned ABSORB-in-place custody; "
+            "not a full-tree ownership proof", [])
+
+
 def validate(root: Path, release_mode: bool = False,
              evidence_path: Path | None = None) -> dict:
     root = Path(root).resolve()
@@ -522,17 +615,25 @@ def validate(root: Path, release_mode: bool = False,
             else:
                 block("git.single_release_commit", f"ahead={ahead} parent={parent}; no history rewrite performed",
                       policy=release_mode, status="HOLD")
-        tracked = git_paths(root, "ls-tree", "-r", "--name-only", "-z", "HEAD", "--", *RECIPE_ROOTS)
-        residue = [p for p in tracked if recipe_candidate(p)]
-        if residue:
-            block("legacy_recipe_custody", f"{len(residue)} executable candidates remain under legacy recipe roots; "
-                  "seal Synexia custody and callers before a reviewed migration",
-                  policy=False, status="HOLD")
-            queue[-1]["paths"] = residue
-        else:
-            passed("legacy_recipe_custody", "no executable candidates in the enumerated legacy roots; not a full-tree ownership proof")
     except (subprocess.CalledProcessError, FileNotFoundError, ValueError, OSError) as exc:
         block("git.inspect", str(exc))
+
+    # Custody reads only the HEAD tree, so an unavailable upstream ancestry (shallow clone) cannot hide it.
+    if source["commit"]:
+        open_paths = []
+        try:
+            tracked = git_paths(root, "ls-tree", "-r", "--name-only", "-z", "HEAD", "--", *RECIPE_ROOTS)
+            open_paths = [p for p in tracked if recipe_candidate(p)]
+            sealed, detail, open_paths = recipe_custody(root, open_paths)
+        except (ValueError, UnicodeError) as exc:
+            sealed, detail = False, "custody ledger invalid: " + str(exc)
+        except (subprocess.CalledProcessError, OSError) as exc:
+            sealed, detail = False, "HEAD tree unreadable: " + str(exc)
+        if sealed:
+            passed("legacy_recipe_custody", detail)
+        else:
+            block("legacy_recipe_custody", detail, policy=False, status="HOLD")
+            queue[-1]["paths"] = open_paths
 
     # Standalone rule (2026-10-31): M3JDK 21 needs no other repository to build, test, gate or release
     # (check_standalone.py). Development mode is a ratchet against STANDALONE_BASELINE.tsv; release mode refuses any

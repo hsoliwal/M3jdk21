@@ -24,6 +24,11 @@ PR_PREFIX = re.compile(r"pr([1-9][0-9]*)/(.+)\Z")
 HEADER = ("priority\tpr\toriginal_path\tarchive_path\tarchive_mode\tarchive_oid"
           "\tactive_mode\tactive_oid\tpath_state\tnext_gate\n")
 MAX_TREE_BYTES = 128 * 1024 * 1024
+# Archive rows that m3/release/LEGACY_RECIPE_CUSTODY_LEDGER.tsv records as RETIRE (same path, mode and
+# blob) are resolved lineage: the legacy recipe source was retired here on purpose, not lost.
+CUSTODY_LEDGER = "m3/release/LEGACY_RECIPE_CUSTODY_LEDGER.tsv"
+CUSTODY_HEADER = "path\tblob\tmode\tdecision\tdestination\treason\tcallers"
+RESOLVED_STATES = frozenset({"EXACT_ACTIVE_PATH", "RETIRED_LEGACY_RECIPE"})
 MAX_SOURCE_ROWS = 100_000
 
 
@@ -61,6 +66,25 @@ def _tree_at(root: Path, revision: str, *paths: str) -> dict[str, tuple[str, str
     return entries
 
 
+def retired_by_ledger(root: Path, revision: str) -> set[tuple[str, str, str]]:
+    """(archive path, mode, blob) of the RETIRE rows in the ledger committed at the revision."""
+    try:
+        data = git(root, "cat-file", "blob", f"{revision}:{CUSTODY_LEDGER}")
+    except subprocess.CalledProcessError:
+        return set()
+    lines = data.decode("utf-8", "strict").split("\n")
+    if lines[0] != CUSTODY_HEADER:
+        raise ValueError("CUSTODY_LEDGER_HEADER_DRIFT")
+    retired = set()
+    for line in filter(None, lines[1:]):
+        fields = line.split("\t")
+        if len(fields) != 7:
+            raise ValueError("CUSTODY_LEDGER_ROW_MALFORMED")
+        if fields[3] == "RETIRE":
+            retired.add((fields[4], fields[2], fields[1]))
+    return retired
+
+
 def valid_path(path: str) -> bool:
     return (bool(path) and "\\" not in path and "\r" not in path and "\n" not in path
             and "\t" not in path and "\0" not in path
@@ -80,6 +104,7 @@ def scan(root: Path) -> tuple[str, str, dict[str, object]]:
         raise ValueError("RETAINED_VARIANTS_TREE_MISSING")
     # One all-path index, not a subprocess for every donor source file.
     active = _tree_at(root, head)
+    retired = retired_by_ledger(root, head)
     lines: list[str] = []
     seen: set[tuple[int, str]] = set()
     counts: Counter[str] = Counter()
@@ -105,6 +130,8 @@ def scan(root: Path) -> tuple[str, str, dict[str, object]]:
         priority = "P0" if original_path.startswith("src/java.base/") else "P1"
         if archive_mode not in ("100644", "100755"):
             state, next_gate = "HOLD_ARCHIVE_MODE", "review-source-type-and-mode"
+        elif present is None and (archived_path, archive_mode, archive_oid) in retired:
+            state, next_gate = "RETIRED_LEGACY_RECIPE", "none-ledgered-retirement"
         elif present is None:
             state, next_gate = "REVIEW_ABSENT_ACTIVE_PATH", "resolve-rename-or-intentional-exclusion"
         elif present[0] != archive_mode:
@@ -126,7 +153,7 @@ def scan(root: Path) -> tuple[str, str, dict[str, object]]:
         "source_rows": len(lines),
         "non_source_rows_skipped": skipped,
         "states": dict(sorted(counts.items())),
-        "unresolved_rows": sum(n for status, n in counts.items() if status != "EXACT_ACTIVE_PATH"),
+        "unresolved_rows": sum(n for status, n in counts.items() if status not in RESOLVED_STATES),
         "tsv_sha256": hashlib.sha256(rows.encode("utf-8")).hexdigest(),
         "merge_authorized": False,
         "rename_authorized": False,
