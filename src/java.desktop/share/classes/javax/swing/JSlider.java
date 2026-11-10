@@ -765,7 +765,7 @@ public class JSlider extends JComponent implements SwingConstants, Accessible {
      * @since 1.7
      */
     public boolean imageUpdate(Image img, int infoflags, int x, int y, int w, int h) {
-        if (!isShowing()) {
+        if (JComponent.isImageObserverHidden(this)) {
             return false;
         }
 
