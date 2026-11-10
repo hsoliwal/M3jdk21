@@ -21,3 +21,4 @@ retired_on	action	original_path	retained_path	git_blob	reason	pr
 2026-11-10	PROFILE_RETIRED	make/m3/recipes/pom.xml#m3-recipe-boot	-	9eea0a33339e010d0b5b2758ed9ad028da7ac3fc	EXTERNAL_PLUGIN_ARTIFACT	2932
 2026-11-10	PROFILE_RETIRED	src/utils/IdealGraphVisualizer/pom.xml#m3-recipe-boot	-	42c81cb72598692d0ed1f579b008b40e4ae1b4e6	EXTERNAL_PLUGIN_ARTIFACT	2932
 2026-11-10	PROFILE_RETIRED	src/utils/LogCompilation/pom.xml#m3-recipe-boot	-	7c635e6b0c80f0cf8d2bc8d7adc5b04aa8d0cd48	EXTERNAL_PLUGIN_ARTIFACT	2932
+2026-11-10	PROFILE_RETIRED	.m3/openrewrite-recipes/pom.xml#m3-recipe-boot	-	536b013f1ec2c6ff2d4f908d7507baf92df3a22f	EXTERNAL_PLUGIN_ARTIFACT	2932
