@@ -2830,6 +2830,10 @@ public class BasicListUI extends ListUI
 
 
         public void contentsChanged(ListDataEvent e) {
+            // a combo box model's -1..-1 event is its selection change: no cell changed, nothing to measure //FLLDCIM: MARK — every-widget BasicListUI D
+            if (e.getIndex0() == -1 && e.getIndex1() == -1 && e.getSource() instanceof ComboBoxModel) {
+                return;
+            }
             m3Measure.changed(e.getIndex0(), e.getIndex1());
             updateLayoutStateNeeded = modelChanged;
             redrawList();
