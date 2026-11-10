@@ -302,4 +302,34 @@ public @interface AIGenerated {
         /** No registry (not recommended for production) */
         NONE
     }
+
+    // MEMBER_UNION (user decision 2026-11-10, "Union into AnOP owners"): members of the IOP twin
+    /**
+     * Whether tests passed after generation.
+     *
+     * @return true if tests passed
+     */
+    boolean testsPassed() default false;
+
+    /**
+     * Generation iteration count. Incremented each time the spec is
+     * regenerated.
+     *
+     * @return generation count
+     */
+    int genCount() default 1;
+
+    /**
+     * Generator version.
+     *
+     * @return generator version
+     */
+    String generatorVersion() default "";
+
+    /**
+     * Generation timestamp. Format: ISO-8601 (e.g., "2026-01-15T10:30:00Z")
+     *
+     * @return timestamp
+     */
+    String timestamp();
 }

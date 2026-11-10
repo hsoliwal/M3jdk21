@@ -224,4 +224,159 @@ public @interface IParamSpec {
      * @return test class (Void.class = no test)
      */
     Class<?> test() default Void.class;
+
+    // MEMBER_UNION (user decision 2026-11-10, "Union into AnOP owners"): members of the IOP twin
+    /**
+     * Technical debt level identified by LLM.
+     *
+     * @return debt level
+     * @m3.pattern synexia:aiop
+     * @m3.algorithm Declares IParamSpec#debt intent: Technical debt level identified by LLM. Interpretation belongs to consuming configuration or verification tooling; the element has no executable body.
+     * @m3.dataStructures Annotation element of type {@code DebtLevel}; default expression {@code DebtLevel.NONE}.
+     */
+    DebtLevel debt() default DebtLevel.NONE;
+
+    /**
+     * Whether to generate logging statements in the method.
+     *
+     * @return true to generate logging (default: false)
+     * @m3.pattern synexia:aiop
+     * @m3.algorithm Declares IParamSpec#generateLogging intent: Whether to generate logging statements in the method. Interpretation belongs to consuming configuration or verification tooling; the element has no executable body.
+     * @m3.dataStructures Annotation element of type {@code boolean}; default expression {@code false}.
+     */
+    boolean generateLogging() default false;
+
+    /**
+     * Improvement suggestions for future iterations.
+     *
+     * @return improvement suggestions
+     * @m3.pattern synexia:aiop
+     * @m3.algorithm Declares IParamSpec#improvements intent: Improvement suggestions for future iterations. Interpretation belongs to consuming configuration or verification tooling; the element has no executable body.
+     * @m3.dataStructures Annotation element of type {@code String[]}; default expression {@code {}}.
+     */
+    String[] improvements() default {};
+
+    /**
+     * Maximum complexity score allowed for generated method. 0 means no limit. Uses
+     * cyclomatic complexity.
+     *
+     * @return max complexity (default: 10)
+     * @m3.pattern synexia:aiop
+     * @m3.algorithm Declares IParamSpec#maxComplexity intent: Maximum complexity score allowed for generated method. 0 means no limit. Uses cyclomatic complexity. Interpretation belongs to consuming configuration or verification tooling; the element has no executable body.
+     * @m3.dataStructures Annotation element of type {@code int}; default expression {@code 10}.
+     */
+    int maxComplexity() default 10;
+
+    /**
+     * Whether to generate null checks for parameters.
+     *
+     * @return true to generate null checks (default: true)
+     * @m3.pattern synexia:aiop
+     * @m3.algorithm Declares IParamSpec#nullChecks intent: Whether to generate null checks for parameters. Interpretation belongs to consuming configuration or verification tooling; the element has no executable body.
+     * @m3.dataStructures Annotation element of type {@code boolean}; default expression {@code true}.
+     */
+    boolean nullChecks() default true;
+
+    /**
+     * Post-conditions that must be true after method execution. These become
+     * validation checks before return.
+     *
+     * @return post-condition expressions
+     * @m3.pattern synexia:aiop
+     * @m3.algorithm Declares IParamSpec#postconditions intent: Post-conditions that must be true after method execution. These become validation checks before return. Interpretation belongs to consuming configuration or verification tooling; the element has no executable body.
+     * @m3.dataStructures Annotation element of type {@code String[]}; default expression {@code {}}.
+     */
+    String[] postconditions() default {};
+
+    /**
+     * Pre-conditions that must be true before method execution. These become
+     * validation checks at method entry.
+     *
+     * @return pre-condition expressions
+     * @m3.pattern synexia:aiop
+     * @m3.algorithm Declares IParamSpec#preconditions intent: Pre-conditions that must be true before method execution. These become validation checks at method entry. Interpretation belongs to consuming configuration or verification tooling; the element has no executable body.
+     * @m3.dataStructures Annotation element of type {@code String[]}; default expression {@code {}}.
+     */
+    String[] preconditions() default {};
+
+    /**
+     * Known shortcomings in the current implementation. LLM identifies these during
+     * generation.
+     *
+     * @return identified shortcomings
+     * @m3.pattern synexia:aiop
+     * @m3.algorithm Declares IParamSpec#shortcomings intent: Known shortcomings in the current implementation. LLM identifies these during generation. Interpretation belongs to consuming configuration or verification tooling; the element has no executable body.
+     * @m3.dataStructures Annotation element of type {@code String[]}; default expression {@code {}}.
+     */
+    String[] shortcomings() default {};
+
+    /**
+     * Whether the method should be synchronized.
+     *
+     * @return true for synchronized method
+     * @m3.pattern synexia:aiop
+     * @m3.algorithm Declares IParamSpec#synchronizedMethod intent: Whether the method should be synchronized. Interpretation belongs to consuming configuration or verification tooling; the element has no executable body.
+     * @m3.dataStructures Annotation element of type {@code boolean}; default expression {@code false}.
+     */
+    boolean synchronizedMethod() default false;
+
+    /**
+     * Test method name to verify generated implementation. Must be in the test
+     * class specified by @ISpec.test() or @IClassSpec.test().
+     *
+     * @return test method name (empty = no test)
+     * @m3.pattern synexia:aiop
+     * @m3.algorithm Declares IParamSpec#testMethod intent: Test method name to verify generated implementation. Must be in the test class specified by @ISpec.test() or @IClassSpec.test(). Interpretation belongs to consuming configuration or verification tooling; the element has no executable body.
+     * @m3.dataStructures Annotation element of type {@code String}; default expression {@code ""}.
+     */
+    String testMethod() default "";
+
+    /**
+     * Timeout in milliseconds for method execution. 0 means no timeout. Used
+     * for @Timed annotation generation.
+     *
+     * @return timeout in ms
+     * @m3.pattern synexia:aiop
+     * @m3.algorithm Declares IParamSpec#timeoutMs intent: Timeout in milliseconds for method execution. 0 means no timeout. Used for @Timed annotation generation. Interpretation belongs to consuming configuration or verification tooling; the element has no executable body.
+     * @m3.dataStructures Annotation element of type {@code long}; default expression {@code 0}.
+     */
+    long timeoutMs() default 0;
+
+    /** Technical debt levels for tracking code quality.
+     * @m3.pattern synexia:aiop
+     * @m3.algorithm Enumerates the IParamSpec.DebtLevel choices described as Technical debt levels for tracking code quality. Selection records an annotation value; execution remains the consumer responsibility.
+     * @m3.dataStructures Nested enum containing 5 constants in the existing source order.
+     */
+    enum DebtLevel {
+        /** No technical debt identified.
+         * @m3.pattern synexia:aiop
+         * @m3.algorithm Names the IParamSpec.DebtLevel#NONE policy choice: No technical debt identified. This enum token does not implement the selected runtime behavior.
+         * @m3.dataStructures Existing constant of IParamSpec.DebtLevel; its declared order and identity are preserved.
+         */
+        NONE,
+        /** Minor issues - cosmetic, non-urgent.
+         * @m3.pattern synexia:aiop
+         * @m3.algorithm Names the IParamSpec.DebtLevel#LOW policy choice: Minor issues - cosmetic, non-urgent. This enum token does not implement the selected runtime behavior.
+         * @m3.dataStructures Existing constant of IParamSpec.DebtLevel; its declared order and identity are preserved.
+         */
+        LOW,
+        /** Moderate issues - should address soon.
+         * @m3.pattern synexia:aiop
+         * @m3.algorithm Names the IParamSpec.DebtLevel#MEDIUM policy choice: Moderate issues - should address soon. This enum token does not implement the selected runtime behavior.
+         * @m3.dataStructures Existing constant of IParamSpec.DebtLevel; its declared order and identity are preserved.
+         */
+        MEDIUM,
+        /** Significant issues - address in next iteration.
+         * @m3.pattern synexia:aiop
+         * @m3.algorithm Names the IParamSpec.DebtLevel#HIGH policy choice: Significant issues - address in next iteration. This enum token does not implement the selected runtime behavior.
+         * @m3.dataStructures Existing constant of IParamSpec.DebtLevel; its declared order and identity are preserved.
+         */
+        HIGH,
+        /** Critical issues - requires immediate attention.
+         * @m3.pattern synexia:aiop
+         * @m3.algorithm Names the IParamSpec.DebtLevel#CRITICAL policy choice: Critical issues - requires immediate attention. This enum token does not implement the selected runtime behavior.
+         * @m3.dataStructures Existing constant of IParamSpec.DebtLevel; its declared order and identity are preserved.
+         */
+        CRITICAL
+    }
 }

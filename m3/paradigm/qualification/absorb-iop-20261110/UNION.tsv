@@ -1,0 +1,13 @@
+iop_class	anop_owner	result	detail
+AIGenClass	annotation.AIGenClass	UNION	+2 elements (regenerable, tags)
+AIGenMethod	annotation.AIGenMethod	UNION	+3 elements (deterministic, idempotent, nonBlocking)
+AIGenerated	annotation.AIGenerated	UNION	+4 elements (testsPassed, genCount, generatorVersion, timestamp); model() conflict: owner keeps Model.ModelType model(), IOP String model() not copied (no IOP code reads it)
+HashOps	annotation.HashOps	UNION	+4 members (CompareResult enum, compare, equals, isDifferent)
+ValidationUtils	annotation.ValidationUtils	UNION	+11 methods, import java.util.Collection
+Model	annotation.Model	EQUAL	javap -p identical modulo package
+LLM	annotation.LLM	SUBSET	IOP members subset of owner (owner +4)
+Listener	annotation.Listener	SUBSET	IOP members subset of owner (owner +4)
+Stability	annotation.Stability	SUBSET	IOP members subset of owner (owner +1)
+IFieldSpec	annotation.IFieldSpec	UNION	+25 elements and nested Lifecycle, Option, Source (found after LazyInit landed these owners)
+IMethodSpec	annotation.IMethodSpec	UNION	+9 elements and nested DebtLevel
+IParamSpec	annotation.IParamSpec	UNION	+11 elements and nested DebtLevel

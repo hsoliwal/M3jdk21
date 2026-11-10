@@ -342,4 +342,26 @@ public @interface AIGenMethod {
         /** Critical issues - requires immediate attention. */
         CRITICAL
     }
+
+    // MEMBER_UNION (user decision 2026-11-10, "Union into AnOP owners"): members of the IOP twin
+    /**
+     * Whether this method is deterministic.
+     *
+     * @return true if deterministic
+     */
+    boolean deterministic() default true;
+
+    /**
+     * Whether this method must be idempotent.
+     *
+     * @return true if idempotent
+     */
+    boolean idempotent() default false;
+
+    /**
+     * Whether this method must be non-blocking.
+     *
+     * @return true if non-blocking
+     */
+    boolean nonBlocking() default false;
 }
