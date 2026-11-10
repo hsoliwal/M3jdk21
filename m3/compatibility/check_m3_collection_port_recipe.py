@@ -5,6 +5,7 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import re
 import sys
 from pathlib import Path
@@ -12,29 +13,36 @@ from pathlib import Path
 PIN = Path(__file__).resolve().parent / "m3-collection-port-recipe-pin.tsv"
 HEX40 = re.compile(r"^[0-9a-f]{40}$")
 
-EXPECTED = {
-    "schema": "M3JDK21_M3_COLLECTION_PORT_RECIPE_PIN_V1",
+# The pin TSV is the record of a donor handoff: the donor commit, paths and blobs are history as they were at that
+# commit, so the record is pinned whole by SHA-256 (LF bytes) and only the receiver policy is spelled out here.
+PIN_SHA256 = "82defc0045ac0fa98ca233de722c2edbf5947bf84b55635d5a4ef65610c081ab"
+PIN_FIELDS = (
+    "schema",
+    "source_repository",
+    "source_pr",
+    "source_commit",
+    "recipe_name",
+    "recipe_yaml_path",
+    "recipe_yaml_blob",
+    "java_manifest_path",
+    "java_manifest_blob",
+    "text_manifest_path",
+    "text_manifest_blob",
+    "recipe_test_path",
+    "recipe_test_blob",
+    "recipe_workflow_path",
+    "recipe_workflow_blob",
+    "first_party_license",
+    "reusable_recipe_owner",
+    "target_repository",
+    "target_mode",
+    "java_base_promotion",
+    "public_jdk_api_change",
+)
+EXPECTED = {  # receiver policy and donor identity of the handoff
     "source_repository": "hsoliwal/com.synexia",
     "source_pr": "9778",
     "source_commit": "a2b8440330c7265a9c94f7ba78e361976d011bab",
-    "recipe_name": "jdk.internal.m3.rewrite.M3JdkCollectionPortWave1",
-    "recipe_yaml_path":
-        "m3-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3jdk-collection-port-wave1.yml",
-    "recipe_yaml_blob": "173a6cff09f451e7aa32984f469b72330a47a516",
-    "java_manifest_path":
-        "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/"
-        "m3jdk-collection-port-wave1/manifest.tsv",
-    "java_manifest_blob": "aa2c619dd8711d6ae0f445afabd6809b588e9599",
-    "text_manifest_path":
-        "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/"
-        "m3jdk-collection-port-wave1/manifest.tsv",
-    "text_manifest_blob": "c7eb709bc02364dd75ea9800f34455b8a9f2894a",
-    "recipe_test_path":
-        "m3-openrewrite-recipes/src/test/java/jdk/internal/m3/rewrite/"
-        "M3JdkCollectionPortWave1RecipeTest.java",
-    "recipe_test_blob": "95bffe90b60945d4ccd668414d277a157d023f21",
-    "recipe_workflow_path": ".github/workflows/m3jdk-collection-port-wave1.yml",
-    "recipe_workflow_blob": "b5570914eaf7c2e7030469cdd66180fad8ca46fd",
     "first_party_license": "Apache-2.0",
     "reusable_recipe_owner": "hsoliwal/com.synexia",
     "target_repository": "hsoliwal/M3jdk21",
@@ -51,6 +59,10 @@ GIT_IDENTITIES = {
     "recipe_test_blob",
     "recipe_workflow_blob",
 }
+
+
+def pin_sha256() -> str:
+    return hashlib.sha256(PIN.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
 
 
 def read_pin() -> dict[str, str]:
@@ -73,14 +85,11 @@ def main(argv: list[str]) -> int:
         print("usage: check_m3_collection_port_recipe.py", file=sys.stderr)
         return 2
     actual = read_pin()
-    if actual != EXPECTED:
-        changed = {
-            key: expected
-            for key, expected in EXPECTED.items()
-            if actual.get(key) != expected
-        }
-        extra = {key: value for key, value in actual.items() if key not in EXPECTED}
-        raise ValueError(f"Synexia collection-port recipe pin drift changed={changed!r} extra={extra!r}")
+    changed = {key: expected for key, expected in EXPECTED.items() if actual.get(key) != expected}
+    if tuple(actual) != PIN_FIELDS or changed or pin_sha256() != PIN_SHA256:
+        extra = sorted(set(actual) ^ set(PIN_FIELDS))
+        raise ValueError(f"Synexia collection-port recipe pin drift changed={changed!r} fields={extra!r} "
+                         f"sha256={pin_sha256()}")
     for field in GIT_IDENTITIES:
         if not HEX40.fullmatch(actual[field]):
             raise ValueError(f"invalid Git identity: {field}")
