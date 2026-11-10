@@ -23,7 +23,7 @@ import jdk.internal.m3.collections.TokenInterner;
  *
  * <p>
  * Centralizes the creation and management of interned string constants used
- * throughout the synexia-cop module. Provides:
+ * throughout the m3-cop module. Provides:
  * <ul>
  * <li>Single TokenInterner instance (singleton pattern)</li>
  * <li>Common string constant definitions (errors, prefixes, suffixes)</li>

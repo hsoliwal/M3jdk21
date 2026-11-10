@@ -23,7 +23,7 @@ import java.lang.invoke.VarHandle;
  *
  * <p>
  * Centralizes VarHandle creation and atomic access patterns used throughout the
- * synexia-cop module. Provides common operations:
+ * m3-cop module. Provides common operations:
  * <ul>
  * <li>VarHandle lookup creation with exception handling</li>
  * <li>Common atomic access patterns (getAcquire, setRelease, CAS)</li>

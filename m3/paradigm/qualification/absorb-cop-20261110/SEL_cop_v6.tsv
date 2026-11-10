@@ -3,7 +3,6 @@ AbstractFactoryEventPublisher	synexia-cop	ELIGIBLE	jdk.internal.m3.paradigm.cont
 AbstractRegistryEventPublisher	synexia-cop	ELIGIBLE	jdk.internal.m3.paradigm.context.AbstractRegistryEventPublisher
 AbstractSelfContainedDb	synexia-cop	ELIGIBLE	jdk.internal.m3.paradigm.context.AbstractSelfContainedDb
 AnopSpec	synexia-cop	ELIGIBLE	jdk.internal.m3.paradigm.context.AnopSpec
-AsyncObjectEvents	synexia-cop	ELIGIBLE	jdk.internal.m3.paradigm.context.AsyncObjectEvents
 CapabilityProfile	synexia-cop	ELIGIBLE	jdk.internal.m3.paradigm.context.CapabilityProfile
 Chrome2ApiJson	synexia-cop	ELIGIBLE	jdk.internal.m3.paradigm.context.Chrome2ApiJson
 Chrome2ApiProvider	synexia-cop	ELIGIBLE	jdk.internal.m3.paradigm.context.Chrome2ApiProvider
@@ -168,11 +167,8 @@ MementoRevision	synexia-cop	ELIGIBLE	jdk.internal.m3.paradigm.context.MementoRev
 MementoValues	synexia-cop	ELIGIBLE	jdk.internal.m3.paradigm.context.MementoValues
 MemorySql	synexia-cop	ELIGIBLE	jdk.internal.m3.paradigm.context.MemorySql
 NarrativeAdversaryAudit	synexia-cop	ELIGIBLE	jdk.internal.m3.paradigm.context.NarrativeAdversaryAudit
-ObjectEvent	synexia-cop	ELIGIBLE	jdk.internal.m3.paradigm.context.ObjectEvent
-ObjectListener	synexia-cop	ELIGIBLE	jdk.internal.m3.paradigm.context.ObjectListener
 OpenVerdict	synexia-cop	ELIGIBLE	jdk.internal.m3.paradigm.context.OpenVerdict
 PatternTaxonomy	synexia-cop	ELIGIBLE	jdk.internal.m3.paradigm.context.PatternTaxonomy
-PlanResourceBudget	synexia-cop	ELIGIBLE	jdk.internal.m3.paradigm.context.PlanResourceBudget
 PrecomputeCatalogSnapshot	synexia-cop	ELIGIBLE	jdk.internal.m3.paradigm.context.PrecomputeCatalogSnapshot
 PrecomputeHashes	synexia-cop	ELIGIBLE	jdk.internal.m3.paradigm.context.PrecomputeHashes
 PrecomputeMetrics	synexia-cop	ELIGIBLE	jdk.internal.m3.paradigm.context.PrecomputeMetrics
@@ -183,13 +179,7 @@ PrecomputeReceipt	synexia-cop	ELIGIBLE	jdk.internal.m3.paradigm.context.Precompu
 Proceed	synexia-cop	ELIGIBLE	jdk.internal.m3.paradigm.context.Proceed
 ProgressBridge	synexia-cop	ELIGIBLE	jdk.internal.m3.paradigm.context.ProgressBridge
 QuantizedBytes	synexia-cop	ELIGIBLE	jdk.internal.m3.paradigm.context.QuantizedBytes
-QuantizedCodec	synexia-cop	ELIGIBLE	jdk.internal.m3.paradigm.context.QuantizedCodec
 QuantizedContextValues	synexia-cop	ELIGIBLE	jdk.internal.m3.paradigm.context.QuantizedContextValues
-QuantizedMerge	synexia-cop	ELIGIBLE	jdk.internal.m3.paradigm.context.QuantizedMerge
-QuantizedOps	synexia-cop	ELIGIBLE	jdk.internal.m3.paradigm.context.QuantizedOps
-QuantizedPatch	synexia-cop	ELIGIBLE	jdk.internal.m3.paradigm.context.QuantizedPatch
-QuantizedSchema	synexia-cop	ELIGIBLE	jdk.internal.m3.paradigm.context.QuantizedSchema
-QuantizedTransactions	synexia-cop	ELIGIBLE	jdk.internal.m3.paradigm.context.QuantizedTransactions
 RankedCandidates	synexia-cop	ELIGIBLE	jdk.internal.m3.paradigm.context.RankedCandidates
 RepresentationAudit	synexia-cop	ELIGIBLE	jdk.internal.m3.paradigm.context.RepresentationAudit
 Reverset	synexia-cop	ELIGIBLE	jdk.internal.m3.paradigm.context.Reverset

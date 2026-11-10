@@ -551,3 +551,15 @@ ValueContext	-	needs IContext
 WorkspaceArtifactLedger	-	needs ContextCanonical
 WorkspaceArtifactReceipt	-	needs ContextCanonical
 doc-info	-	no type declaration
+AsyncObjectEvents	AsyncObjectEvents	jdk_naming would rewrite a runtime string (thread name, serialization header, property key or hash domain); held for the naming decision
+PlanResourceBudget	PlanResourceBudget	jdk_naming would rewrite a runtime string (thread name, serialization header, property key or hash domain); held for the naming decision
+ProgressMonitors	ProgressMonitors	jdk_naming would rewrite a runtime string (thread name, serialization header, property key or hash domain); held for the naming decision
+QuantizedSchema	QuantizedSchema	jdk_naming would rewrite a runtime string (thread name, serialization header, property key or hash domain); held for the naming decision
+ObjectEvent	ObjectEvent	needs a class held for the naming decision
+QuantizedCodec	QuantizedCodec	needs a class held for the naming decision
+QuantizedMerge	QuantizedMerge	needs a class held for the naming decision
+QuantizedOps	QuantizedOps	needs a class held for the naming decision
+QuantizedPatch	QuantizedPatch	needs a class held for the naming decision
+QuantizedTransactions	QuantizedTransactions	needs a class held for the naming decision
+ObjectListener	ObjectListener	needs a class held for the naming decision
+AsyncObjectEventsTest	AsyncObjectEventsTest	test of a class held for the naming decision

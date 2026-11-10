@@ -24,7 +24,7 @@ import java.util.function.Supplier;
  *
  * <p>
  * Centralizes the lock-free, compare-and-swap based lazy initialization
- * patterns used throughout the synexia-cop module. Provides:
+ * patterns used throughout the m3-cop module. Provides:
  * <ul>
  * <li>Safe lazy initialization with CAS (Compare-And-Set)</li>
  * <li>Double-checked locking via VarHandle acquire/release semantics</li>

@@ -1,8 +1,8 @@
 # absorb-cop-20261110
 
 The third jdk.m3.paradigm batch moves synexia-cop (packages com.synexia.context.* and com.synexia.cop.*) into
-`jdk.internal.m3.paradigm.context`. The package is internal and not exported. The batch lands 212 main sources and
-12 tests. It builds on the IOP landing (absorb-iop-20261110).
+`jdk.internal.m3.paradigm.context`. The package is internal and not exported. The batch lands 201 main sources and
+11 tests. It builds on the IOP landing (absorb-iop-20261110).
 
 ## Naming (RENAMES.tsv)
 
@@ -32,8 +32,25 @@ class keep their names.
 | 31 | eligible, but the donor source does not compile in com.synexia develop |
 | 11 | eligible, but need one of those 31 |
 | 5 | use java.sql (4) or javax.xml.stream (1); jdk.m3.paradigm requires only jdk.m3.collections, and new module wiring needs admission |
-| 212 | main sources landed |
-| 12 | tests landed; JsonMementoStoreTest is held with its subject |
+| 4 | held because jdk_naming would rewrite runtime strings (see below) |
+| 7 | need one of those 4 |
+| 201 | main sources landed |
+| 11 | tests landed; JsonMementoStoreTest and AsyncObjectEventsTest are held with their subjects |
+
+### Held for a naming decision (4 + 7)
+
+jdk_naming would rewrite these strings. They are data, not names (SFA), so the classes are held for the same naming
+decision as IOP's 17:
+
+| Class | String | Role |
+|-------|--------|------|
+| AsyncObjectEvents | `"synexia-object-events"` | thread name |
+| PlanResourceBudget | `"SYNEXIA-COP-RESOURCE-SELECTION/1"` | serialization header |
+| ProgressMonitors | `"synexia.progress.monitor"` | legacy system-property key, named `LEGACY_PROPERTY_KEY` |
+| QuantizedSchema | `"synexia.quantized-schema/v1"` | hash domain |
+
+Their dependents are held too: ObjectEvent, ObjectListener, QuantizedCodec, QuantizedMerge, QuantizedOps,
+QuantizedPatch and QuantizedTransactions.
 
 The 31 donor defects are in com.synexia itself:
 - missing imports: java.nio.file.Path, TimeUnit, UUID, java.util.concurrent types, lombok `Slf4j`;
@@ -55,7 +72,9 @@ round held every file with an error, until a round had 0 errors.
   has source retention, so no serialVersionUID field is added and the class file is unchanged.
 - **DOCLINT_REPAIR v1.5.** An unclosed `<ul>`/`<ol>` is closed before the next block element. The doclint error
   count went 41 → 0.
-- **Banner.** `/*****` becomes `/* ****` on all 212 files.
+- **Banner.** `/*****` becomes `/* ****` on all landed files.
+- **jdk_naming (comments only).** In LazyInitializationUtils, LocalityProgressMonitor, StringConstantUtils and
+  VarHandleUtils, `synexia-cop` / `synexia-job` in javadoc becomes `m3-cop` / `m3-job`.
 - **DONOR_BUG_FIX (main code).** `ContextProgressMonitor.checkCancelled` threw a plain `CancellationException`.
   CancelledException (donor ContextCancelledException) extends it and has a package-private `(String)`
   constructor written for this throw. The method now throws that subtype again, which fixes 2 tests in
@@ -63,6 +82,9 @@ round held every file with an error, until a round had 0 errors.
   awaiting merge. The proof's donor snapshot uses that PR's blob 2f676d5c.
 
 ## Proof (PROOF.tsv)
+
+The proof ran on the 212 classes and 12 tests from before the naming hold. The landed 201 classes and 11 tests are a
+subset, and the 11 held classes change only by being left out.
 
 The donor side compiles with lombok 1.18.46 and slf4j-api 2.0.17. Its ContextProgressMonitor is the #16982 blob.
 `norm_cop.sed` maps the landed map plus this batch. Its 90 rename-back rules map each new simple name to its
@@ -76,9 +98,9 @@ The donor side compiles with lombok 1.18.46 and slf4j-api 2.0.17. Its ContextPro
 
 | Gate | Result |
 |------|--------|
-| Compile | jdk.m3.paradigm with annotation, contract and context (607 sources before the hold) compiles under `-Xlint:all,-module -Werror -Xdoclint:all/protected,-missing` with 0 diagnostics |
-| jdk_naming | Fixed point on src/jdk.m3.paradigm (0 moves, 0 rewrites) |
-| Sprawl gate | new=212, refused=0 |
+| Compile | jdk.m3.paradigm with annotation, contract and context (596 sources in this landing) compiles under `-Xlint:all,-module -Werror -Xdoclint:all/protected,-missing` with 0 diagnostics |
+| jdk_naming | Fixed point on src/jdk.m3.paradigm (0 moves, 0 rewrites) after the 4 comment rewrites and the naming hold. The first head of this PR (db4ca30b) claimed a fixed point by mistake: jdk_naming reads only tracked files, and the context files were not yet intent-to-add when it ran. |
+| Sprawl gate | new=201, refused=0 |
 | One owner (module) | No simple name is declared in more than one jdk.m3.paradigm package |
 | Custody | jdk.m3.collections sources are untouched |
-| Default suite | The werror reactor (m3/arrays, m3/collections, m3/paradigm) passes on the IOP and COP tree. m3/collections: 2841 tests, 0 failures, 0 errors, 151 skipped. m3/paradigm: 310 tests, 0 failures, 0 errors. The first run failed 2 tests; that is the DONOR_BUG_FIX above. |
+| Default suite | The werror reactor (m3/arrays, m3/collections, m3/paradigm) passes on the IOP and COP tree. m3/collections: 2841 tests, 0 failures, 0 errors, 151 skipped. m3/paradigm: 288 tests, 0 failures, 0 errors (after the naming hold; before it, 310 tests). The first run failed 2 tests; that is the DONOR_BUG_FIX above. |

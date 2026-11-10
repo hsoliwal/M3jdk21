@@ -3,7 +3,6 @@ ContextCancellationCompatibilityTest	jdk.internal.m3.paradigm.context.ContextCan
 ContextCompactApiMigrationTest	jdk.internal.m3.paradigm.context.ContextCompactApiMigrationTest
 ContextControlWordTest	jdk.internal.m3.paradigm.context.ControlWordTest
 ContextImmutablePoolTest	jdk.internal.m3.paradigm.context.ContextImmutablePoolTest
-AsyncObjectEventsTest	jdk.internal.m3.paradigm.context.AsyncObjectEventsTest
 SmallVarHandleContextTest	jdk.internal.m3.paradigm.context.SmallVarHandleContextTest
 ContextSkillInventoryTest	jdk.internal.m3.paradigm.context.ContextSkillInventoryTest
 HierarchicalContextDagTest	jdk.internal.m3.paradigm.context.HierarchicalContextDagTest

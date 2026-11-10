@@ -15,7 +15,7 @@
 package jdk.internal.m3.paradigm.context;
 
 /**
- * Minimal progress callback that does not introduce a synexia-job dependency cycle.
+ * Minimal progress callback that does not introduce a m3-job dependency cycle.
  *
  * <p>Lineage: absorbed from Synexia {@code m3-cop/src/main/java/jdk/internal/m3/cop/locality/LocalityProgressMonitor.java}
  * blob {@code 38c3ed2b9b9e87ba893a92e037f781a536a82965} at com.synexia develop {@code 8ab80ea57d9f} by
