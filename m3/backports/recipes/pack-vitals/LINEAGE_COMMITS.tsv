@@ -1,0 +1,24 @@
+f831cc777ecbf36ab2286f7f5e47ea7a10871bd7	2026-10-30	SapMachine #2427 #2430 #2431 #2432: Various improvements for vitals
+f1549e306db38fdd8085037f121da22a2c2a402d	2026-09-22	SapMachine #2392: Add load average to vitals (#2423)
+6d955e76ebce45609dcda80a285d6f05e9fdc8b8	2023-11-29	SapMachine #1540: Fix incorrect handling of invalid values in vitals extremas
+e64af6cbe6e14cd3c332607eac6a8508bcfa4c1e	2023-09-05	SapMachine #1465: Make vitals more configurable
+c583776d458b8fd80465f5034b850735dd763cf1	2023-07-27	SapMachine #1449: Store vitals samples for max/min values
+8fe96de5cfecf9114a2d9249a7636e93d5c40a93	2023-07-06	SapMachine #1438: Vitals: ClassLoaderDataGraph by SamplerThread is unsynchronized
+69e161cdae6f2f87aa01131ecde127b8d5d8b6a6	2023-05-09	Merge branch 'sapmachine' into pr-jdk-21+21
+20322f05458cfd25a3b86bbe09501a8586d008fc	2023-03-27	Merge pull request #1378 from SAP/pr-jdk-21+15
+b41bf1cafe4beec630ee81f506e3ceed1259824b	2023-03-26	SapMachine #1370: Fix Vitals: Long term table does not show one sample per hour
+fbe314dca2efbcb27606fd48e769f2e02dd37600	2023-03-24	Merge branch 'sapmachine' into pr-jdk-21+15
+bfec26bede5264800521e3c054bc1db60f825a74	2023-02-14	SapMachine #1332: Vitals log should be less chatty
+f7f765cd7119fe0544c9cfcc1ec69d01c1c2c6a0	2022-08-26	SapMachine #1241: Vitals NMT "mlc" value can be too high
+4248b9c6e9d2b8d1be0880bbedbf80cc6837af27	2022-08-22	Merge branch 'sapmachine' into pr-jdk-20+11
+a988bf033d8ee2d6ca80ee9a2f3479fd7c50c45b	2022-07-05	SapMachine #1162: Vitals: Initialization should not rely on &= short-circuiting
+fae614ed90fbbcd5232509a883752b784d7e933e	2022-07-04	SapMachine #1161: SapMachine 17, 11 do not build in minimal
+2115f01f3f26e24e89188c1dd11d5500aaa54242	2022-06-30	SapMachine #1124: Vitals: June 22 package
+40597c43334b746b29683bcbee8004ce9240a230	2022-06-27	Merge branch 'sapmachine' into pr-jdk-20+3
+4c14014f77625f18a5012581f51dd7901da33a9c	2022-05-05	SapMachine #1097: Vitals: April 22 Update
+a7782411e239b524db13c6d2ba8558d4a60f1cef	2022-03-21	Sapmachine #1058: Vitals: Integrate March 2022 updates
+423d344e2a879b5f74536b359614150c65a05481	2022-02-04	Fix Vitals build after INCLUDE_NMT removal
+439ae50103c941b8360629ddceba4689c7523df0	2021-10-14	SapMachine #975: Vitals: use native lock instead of hotspot Mutex
+e02380f568f33572bb7bf63db9b41944c586ff99	2021-09-28	SapMachine #963: Vitals: lock creation asserts after JDK-8273915 was merged
+c109b13d8d67c4e1bea28ace90f7b35fab3a3a53	2021-09-03	fix build after 8272797 changed Mutex constructor parameters
+0aad4b7a325162248899162258a31a02cd5951dd	2021-07-12	SapMachine #820: Bring Vitals up to date (#880)
