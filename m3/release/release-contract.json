@@ -36,6 +36,28 @@
     "collections_qualified": "NOT_CLAIMED",
     "swt_eclipse_ide_qualified": "NOT_CLAIMED"
   },
+  "platform_selection": {
+    "mechanism": ".github/workflows/m3-release.yml workflow_dispatch input `platforms`",
+    "selected": [
+      "linux-x64"
+    ],
+    "platforms": {
+      "linux-x64": "SELECTED",
+      "macos-x64": "NOT_CLAIMED",
+      "macos-aarch64": "NOT_CLAIMED",
+      "windows-x64": "NOT_CLAIMED",
+      "windows-aarch64": "NOT_CLAIMED",
+      "linux-x86": "NOT_CLAIMED",
+      "linux-aarch64": "NOT_CLAIMED",
+      "linux-arm": "NOT_CLAIMED",
+      "linux-ppc64le": "NOT_CLAIMED",
+      "linux-riscv64": "NOT_CLAIMED",
+      "linux-s390x": "NOT_CLAIMED",
+      "android-arm64": "NOT_CLAIMED",
+      "ios-arm64": "NOT_CLAIMED"
+    },
+    "sanity_gate": "OPENJDK_SANITY_MATRIX stays mandatory. With this selection it passes only when the linux-x64 runs pass on the exact final candidate; a NOT_CLAIMED platform is neither built for the release nor asserted."
+  },
   "mandatory_release_gates": [
     "RIGHTS_AND_LICENSE_BOUNDARY",
     "SOURCE_TREE_AND_UPSTREAM_BASELINE",
