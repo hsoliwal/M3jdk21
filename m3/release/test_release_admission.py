@@ -392,6 +392,43 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
         result = self.result()
         self.assertTrue(result["release_ready"], result)
 
+    def test_below_threshold_atom_passes_only_as_a_proven_reviewed_exemption(self):
+        gate = self.coverage_gate()
+        report = self.evidence_dir / gate["coverage"]["report_artifact"]
+        self.write_coverage_artifact("report_artifact", report.read_text().replace(
+            '<counter type="LINE" covered="99" missed="1"/>',
+            '<counter type="LINE" covered="5" missed="5"/>'))
+        atom = gate["coverage"]["atoms"][0]
+        atom.update(line_covered=5, line_missed=5)
+        inventory = self.evidence_dir / gate["coverage"]["inventory_artifact"]
+        header, row = inventory.read_text().splitlines()
+
+        def exempt(tsv_proof, atom_proof):
+            self.write_coverage_artifact("inventory_artifact",
+                                         header + "\texemption\n" + row + "\t" + tsv_proof + "\n")
+            if atom_proof is None:
+                atom.pop("exemption", None)
+            else:
+                atom["exemption"] = atom_proof
+
+        proof = "run() re-checks the caller invariant at src/example.java:1"
+        with self.subTest("unexempted atom below 90% still fails"):
+            exempt("", None)
+            self.assert_coverage_refused("line coverage below 90%")
+        with self.subTest("exemption without file:line proof fails"):
+            exempt("unreachable guard, reviewed", "unreachable guard, reviewed")
+            self.assert_coverage_refused("must cite file:line evidence")
+        with self.subTest("exemption citing a line beyond the file fails"):
+            exempt("guard at src/example.java:9", "guard at src/example.java:9")
+            self.assert_coverage_refused("cites a line beyond src/example.java")
+        with self.subTest("receipt exemption absent from the reviewed inventory fails"):
+            exempt("", proof)
+            self.assert_coverage_refused("differs from the inventory TSV")
+        with self.subTest("exemption with proof passes"):
+            exempt(proof, proof)
+            result = self.result()
+            self.assertTrue(result["release_ready"], result)
+
     def test_malformed_coverage_container_fields_are_reported_without_crash(self):
         item = next(g for g in self.evidence["gates"] if g["id"] == release.COVERAGE_GATE)
         original = copy.deepcopy(item)

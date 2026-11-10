@@ -74,6 +74,21 @@ class DeriveInventoryTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "repository-relative"):
             derive.derive(self.report, self.root, "../m3/core/src")
 
+    def test_reviewed_exemptions_are_carried_by_id_and_never_go_stale(self):
+        reviewed = self.root / "reviewed.tsv"
+        proof = "guard re-checks the caller invariant at m3/core/src/com/m3/Example.java:1"
+        reviewed.write_text("id" + chr(9) + "exemption" + chr(10)
+                            + "com.m3.Example#run()Z" + chr(9) + proof + chr(10)
+                            + "com.m3.Example#<init>()V" + chr(9) + chr(10), encoding="utf-8")
+        rows = derive.derive(self.report, self.root, "m3/core/src")
+        self.assertEqual(1, derive.carry_exemptions(rows, reviewed))
+        self.assertEqual(["", proof], [row["exemption"] for row in rows])
+        self.assertTrue(derive.render(rows).splitlines()[0].endswith(chr(9) + "exemption"))
+        reviewed.write_text("id" + chr(9) + "exemption" + chr(10)
+                            + "com.m3.Gone#run()Z" + chr(9) + proof + chr(10), encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "no longer in the report"):
+            derive.carry_exemptions(derive.derive(self.report, self.root, "m3/core/src"), reviewed)
+
 
 if __name__ == "__main__":
     unittest.main()

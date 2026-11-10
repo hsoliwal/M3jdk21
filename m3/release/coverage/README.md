@@ -26,14 +26,17 @@ bash ./m3/release/run_extra_core_contracts.sh
 java -jar org.jacoco.cli-0.8.12-nodeps.jar report jacoco.exec \
   --classfiles m3/build/classes --sourcefiles m3/core/src --xml jacoco.xml --csv jacoco.csv
 python3 m3/release/derive_changed_atom_inventory.py --report jacoco.xml --root . \
-  --classfiles m3/build/classes --out m3/release/coverage/changed-atoms.tsv
+  --classfiles m3/build/classes --carry-exemptions m3/release/coverage/changed-atoms.tsv \
+  --out m3/release/coverage/changed-atoms.tsv
 ```
 
 JaCoCo analyzes every class in `--classfiles` whether or not it ran, so the method
 set does not depend on which tests executed; `--classfiles` also refuses a compiled
 class missing from the report. Re-run with `--check m3/release/coverage/changed-atoms.tsv`
 to prove the committed file is byte-identical. Result: 607 atoms in 82 classes;
-341 have no JaCoCo `BRANCH` counter and carry the explicit `branchless_explanation`.
+341 have no JaCoCo `BRANCH` counter and carry the explicit `branchless_explanation`;
+18 carry a reviewed `exemption` (below). Exemptions are review data: `--carry-exemptions`
+copies them by id and refuses one whose atom disappeared.
 `id` is `<binary class name>#<method><JVM descriptor>`.
 
 The measurement environment is the gate's: JaCoCo 0.8.12 runtime agent via
@@ -41,34 +44,39 @@ The measurement environment is the gate's: JaCoCo 0.8.12 runtime agent via
 `M3JDK`/`JAVA_HOME` set to a JDK 21, and a C compiler (`CC`, default `cc`) for the
 JNI-backed owners built by `run_extra_core_contracts.sh`.
 
-## Atoms that cannot reach 90% without a product change
+## Gate rule and the atoms below 90%
 
-These methods hold defensive branches that no input can reach through any caller,
-or only after 2^63 allocations. They are reported, not covered by test tricks:
+An atom passes at >=90% instrumented line and branch coverage, or as a reviewed
+exemption: its `exemption` cell proves, with existing `path:line` citations, that the
+uncovered branch only re-checks an invariant its callers already enforce. The check
+stays in the product. `build_changed_atom_coverage.py --require-pass` and
+`verify_release_admission.py` both apply the rule.
 
-| Atom | Line / branch | Unreachable part |
+The 21 atoms below 90% in the first measurement were routed as follows.
+
+| Atom | Route | Invariant (full proof with citations in `changed-atoms.tsv`) |
 |---|---|---|
-| `LocalM3Arena#lambda$identity$0` | 2/2, 1/2 | identity exhausted after `Long.MAX_VALUE` records |
-| `M3BigString#<init>(Storage,long,long)` | 6/7, 3/6 | range check; every caller passes a valid range |
-| `M3BigString#appendTo` | 10/10, 7/8 | `from < to` is always true |
-| `M3BigString#concat` | 49/50, 19/22 | >2^31 pieces; `from >= to`; census drift |
-| `M3BigString$Storage#<init>` | 80/82, 35/46 | unaligned arrays, empty chunk, >2^31 nodes, child census |
-| `M3BigString$Storage#findChild` | 10/10, 5/6 | coordinate beyond the summary |
-| `M3BigString$Storage#rootSummary` | 2/2, 1/2 | empty storage never asks for a root summary |
-| `M3LangDexSourceEnvelope#increment` | 1/3, - | row count overflow at `Long.MAX_VALUE` rows |
-| `M3LangDexSourceEnvelope#requireCanonicalLong` | 8/8, 5/6 | every call site passes `nullable=true` |
-| `M3LanguageCorpusManifest#safeHttps` | 5/5, 7/8 | an opaque URI has no host, refused earlier |
-| `M3RopeTextIndex#findChar` | 24/25, 19/22 | corrupt-geometry assertions |
-| `M3WordRows#open` | 7/9, 4/4 | `ArithmeticException`/`IndexOutOfBoundsException` already caught in `decode` |
-| `SharedLexiconCatalog#imageAt` | 15/15, 5/8 | `closed` under the lifecycle read lock; lost lazy-open race |
-| `SharedLexiconCatalog#imageText` | 3/3, 1/2 | images are opened before sidecar validation |
-| `SharedLexiconCatalog#sha256(Path)` | 8/8, 3/4 | a file `InputStream` never reads 0 bytes into a non-empty buffer |
-| `SharedLexiconFamilySidecarCatalog#digestBytes` | 1/2, - | `digest()` already admitted 64 lower-case hex digits |
-| `SharedLexiconFamilySidecarCatalog#fileHeader` | 6/7, 5/6 | `default` of a closed family list |
-| `SharedLexiconFamilySidecarCatalog#key` | 8/8, 5/6 | `default` of a closed family list |
-| `SharedLexiconFamilySidecarCatalog#readIndex` | 9/10, 10/12 | row count and duplicates already fixed by `rows()` and positions |
-| `SharedLexiconFamilySidecarCatalog#safeChild` | 3/4, 8/14 | file names come from the fixed `FILES` map |
-| `SharedLexiconFamilySidecarCatalog$SpellAccumulator#build` | 3/3, 1/2 | `add()` always sets `frequencies` first |
+| `M3BigString#concat` | covered | new `chunkDirectoryLimit` case reaches the 2^31 directory refusal; 20/22 branches |
+| `M3BigString#appendTo` | B | `from < to` always true; guard removed in a separate PR |
+| `SharedLexiconCatalog#sha256(Path)` | B | `read != 0` always true; guard removed in a separate PR |
+| `LocalM3Arena#lambda$identity$0` | A | identity counter needs 2^63-1 copies |
+| `M3BigString#<init>` | A | every caller passes an admitted range |
+| `M3BigString$Storage#<init>` | A | callers build aligned arrays of positive chunks, bounded piece count |
+| `M3BigString$Storage#findChild` | A | public `charAt` bounds the offset |
+| `M3BigString$Storage#rootSummary` | A | `summary()` returns early for empty ranges |
+| `M3LangDexSourceEnvelope#increment` | A | counter is below the receipt's long count |
+| `M3LangDexSourceEnvelope#requireCanonicalLong` | A | all call sites pass `nullable=true` |
+| `M3LanguageCorpusManifest#safeHttps` | A | an opaque URI has no host, refused earlier |
+| `M3RopeTextIndex#findChar` | A | position checked; constructor builds consistent spans |
+| `M3WordRows#open` | A | size check and `decode`'s own catch |
+| `SharedLexiconCatalog#imageAt` | A | lifecycle locks; lazy-open race only |
+| `SharedLexiconCatalog#imageText` | A | only `open()` verifies text, after mapping all shards |
+| `SharedLexiconFamilySidecarCatalog#digestBytes` | A | `digest()` admitted 64 lower-case hex digits |
+| `SharedLexiconFamilySidecarCatalog#fileHeader` | A | closed family list |
+| `SharedLexiconFamilySidecarCatalog#key` | A | closed family list |
+| `SharedLexiconFamilySidecarCatalog#readIndex` | A | `rows()` count and positional family check |
+| `SharedLexiconFamilySidecarCatalog#safeChild` | A | file names fixed by `FILES` |
+| `SharedLexiconFamilySidecarCatalog$SpellAccumulator#build` | A | `add()` sets `frequencies` on creation |
 
-The gate can pass only after these branches are removed or rewritten in product
-code. That is a release-owner decision; this inventory and its tests change no product code.
+Route B atoms reach 100% once the separate guard-removal PR lands; until then
+those two atoms are the only ones below the gate rule.

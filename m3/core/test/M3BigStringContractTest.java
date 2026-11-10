@@ -5,6 +5,7 @@ import jdk.m3.text.M3BigString;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -171,11 +172,30 @@ public final class M3BigStringContractTest {
                                 false, false));
     }
 
+    /**
+     * Concatenation refuses a chunk directory beyond Java array limits before allocating it:
+     * 32768 references to one 65536-chunk rope need 2^31 directory slots.
+     */
+    private static void chunkDirectoryLimit() {
+        String[] chunks = new String[1 << 16];
+        Arrays.fill(chunks, "a");
+        M3BigString wide = M3BigString.of(chunks);
+        int copies = (int) ((Integer.MAX_VALUE - 8L) / chunks.length) + 1;
+        M3BigString[] repeated = new M3BigString[copies];
+        Arrays.fill(repeated, wide);
+        refused(
+                IllegalArgumentException.class,
+                "chunk directory exceeds Java array limits",
+                () -> M3BigString.concat(repeated));
+        same(1L << 17, M3BigString.concat(wide, wide).length(), "the same rope below the limit");
+    }
+
     public static void main(String[] args) throws Exception {
         boundarySlices();
         literalSearch();
         facades();
         summaryRecord();
+        chunkDirectoryLimit();
         System.out.println("M3_BIG_STRING_CONTRACT_PASS checks=" + checks);
     }
 }
