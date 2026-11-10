@@ -100,6 +100,10 @@ python3 m3/release/build_changed_atom_coverage.py \
   --out /absolute/evidence/changed-atom-coverage-fragment.json
 ```
 
+The reviewed inventory for the `jdk.m3.text` scope is committed as
+`m3/release/coverage/changed-atoms.tsv`; `m3/release/coverage/README.md` records its
+scope proof and the `derive_changed_atom_inventory.py` command that regenerates it.
+
 The tab-separated inventory contains columns
 `id`, `class`, `method`, `descriptor`, `source_path` and optional
 `branchless_explanation`. JaCoCo class names use JVM slashes,
