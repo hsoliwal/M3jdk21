@@ -37,3 +37,16 @@ Flags: `EnableVitals`, `VitalsSampleInterval`, `HiMemReport` and related, all in
 | `make images` on linux-x64, plus the windows and macOS builds that compile the os backends | PENDING: needs WSL, which the RC freeze occupies |
 | gtest `vitals`; jtreg `runtime/Vitals` (16 tests) | PENDING: local execution of donor-derived code is blocked by the session classifier |
 | `jcmd VM.vitals` smoke test, hs_err Vitals section, `-XX:-EnableVitals` (VitalsOff) | PENDING |
+
+## Manual adjustments after HUNK_SELECT
+
+- `test/hotspot/jtreg/TEST.groups`: stripping the malloc-trace block removed the group's last entry
+  (`runtime/malloctrace`) and the blank line after it. That left `runtime/Vitals \` continuing into `tier1 = \`, and
+  jtreg failed with "One or more groups are invalid". The trailing `\` is dropped and the blank line is restored.
+- `vmError.cpp`: the `#endif` closing `#ifdef LINUX` was lost. It is restored by HUNK_SELECT v1.2.
+
+## Linux x64 results (2026-11-10; WSL Ubuntu 24.04, i9-14900HX)
+
+- HotSpot built with Vitals (`make hotspot exploded-image-base` plus the jcmd modules, no native debug symbols).
+- `jcmd <pid> VM.vitals`: works, printing the system/process/jvm tables.
+- jtreg `runtime/Vitals`: NOT COMPLETED. The run was stopped when the build disk was handed back to the release lane.
