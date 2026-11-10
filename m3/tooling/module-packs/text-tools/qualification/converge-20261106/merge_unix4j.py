@@ -106,7 +106,7 @@ def main() -> int:
         ours = ofile.read_text(encoding="utf-8") if ofile.exists() else None
         dst = out / tpath
         if Path(tpath).stem in HOLD:
-            rows.append(("HOLD", rel, "m3/qualification/master-landing-20261028/retained-variants/text-tools-20261106/" + tpath))
+            rows.append(("HOLD", rel, "m3/qualification/master-landing-20261028/retained-variants/pr2498/" + tpath))
             hold = out / "hold" / tpath
             hold.parent.mkdir(parents=True, exist_ok=True)
             hold.write_text(theirs, encoding="utf-8", newline="")
