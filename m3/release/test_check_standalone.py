@@ -328,6 +328,85 @@ class StandaloneCheckTest(unittest.TestCase):
         self.assertEqual([("L_PROVENANCE", 3), ("L_PROVENANCE", 6), ("D_REPO_REF", 9)],
                          [(k, n) for k, p, n in findings if p == "m3/r/META-INF/rewrite/r.yml"])
 
+    # Sealed lineage (2026-11-10): a listed file at its pinned blob is data; edited, unlisted or networked it counts.
+    SEALED = ('EXPECTED = ("M3JDK21_HANDOFF", "hsoliwal/com.synexia#12951")\n'
+              'ROWS = ["a\\thsoliwal/com.synexia\\tb"]\n'
+              "assert call['url'] == 'https://api.github.com/repos/hsoliwal/com.synexia/git/trees/' + OID\n")
+
+    def seal(self, *paths, blob=None):
+        rows = ["# notes", cs.LINEAGE_FILES_HEADER]
+        for rel in paths:
+            pinned = blob or subprocess.run(["git", "-C", str(self.root), "hash-object", rel], check=True,
+                                            capture_output=True, text=True).stdout.strip()
+            rows.append(f"{rel}\t{pinned}\tfixture")
+        self.put(cs.LINEAGE_FILES, "\n".join(rows) + "\n")
+
+    def commit(self):
+        subprocess.run(["git", "-C", str(self.root), "-c", "user.name=t", "-c", "user.email=t@example.com",
+                        "commit", "-q", "-m", "fixture"], check=True)
+
+    def test_a_listed_file_at_its_pinned_blob_is_sealed_lineage_until_edited(self):
+        self.put("m3/history/verify_handoff.py", self.SEALED)
+        self.assertEqual(3, self.lineage()[0]["D_REPO_REF"])
+        self.seal("m3/history/verify_handoff.py")
+        counts, lineage = self.lineage()
+        self.assertEqual((0, 3), (counts["D_REPO_REF"], lineage["L_SEALED"]))
+        self.commit()
+        tree = cs.scan(self.root, "HEAD")
+        self.assertEqual((0, 3, []), (tree["counts"]["D_REPO_REF"], tree["lineage"]["L_SEALED"], tree["lineage_not_sealed"]))
+        (self.root / "m3/history/verify_handoff.py").write_bytes(self.SEALED.replace("\n", "\r\n").encode())
+        self.assertEqual(3, cs.scan(self.root)["lineage"]["L_SEALED"])  # a CRLF checkout is the same blob
+        self.put("m3/history/verify_handoff.py", self.SEALED + "# edited\n")
+        result = cs.scan(self.root)
+        self.assertEqual((3, 0), (result["counts"]["D_REPO_REF"], result["lineage"]["L_SEALED"]))
+        self.assertEqual(["m3/history/verify_handoff.py"], result["lineage_not_sealed"])
+        self.assertEqual(3, cs.scan(self.root, "HEAD")["lineage"]["L_SEALED"])  # the revision keeps its own pin
+
+    def test_a_listed_file_that_can_reach_the_network_is_never_sealed(self):
+        networked = {
+            "m3/a/bootstrap.py": "import urllib.request\nREPOS = ('hsoliwal/M3jdk21', 'hsoliwal/com.synexia')\n"
+                                 "def blob(repo, oid):\n    assert repo in REPOS\n"
+                                 "    return urllib.request.urlopen('https://api.github.com/repos/' + repo + '/git/blobs/' + oid)\n",
+            "m3/a/from_import.py": "from urllib import request\nSRC = ('x', 'hsoliwal/com.synexia')\n",
+            "m3/a/clone.py": "import subprocess\nsubprocess.run(['git', 'clone', 'https://github.com/' + 'hsoliwal/com.synexia'])\n",
+            "m3/a/gh.py": "import subprocess\nsubprocess.run(['gh', 'api', 'repos/hsoliwal/com.synexia/contents'])\n",
+            "m3/a/fetch.sh": "curl -L https://github.com/hsoliwal/com.synexia/archive/x.zip -o x.zip\n",
+        }
+        for path, text in networked.items():
+            self.put(path, text)
+        self.seal(*networked)
+        result = cs.scan(self.root)
+        self.assertEqual((len(networked), 0), (result["counts"]["D_REPO_REF"], result["lineage"]["L_SEALED"]))
+        self.assertEqual(sorted(networked), result["lineage_not_sealed"])
+
+    def test_a_live_checkout_fetch_or_build_reference_outside_lineage_still_counts(self):
+        self.put("m3/history/verify_handoff.py", self.SEALED)
+        self.put(".github/workflows/w.yml", WORKFLOW)
+        self.put("m3/b/pom.xml", POM.format(group="com.m3", artifact="b", deps=DEP.format(group="com.synexia.m3", artifact="a")))
+        self.seal("m3/history/verify_handoff.py", ".github/workflows/w.yml", "m3/b/pom.xml")
+        self.put("m3/a/clone.py", "import subprocess\nsubprocess.run(['git', 'clone', 'https://github.com/hsoliwal/com.synexia'])\n")
+        self.put("m3/a/build.sh", "mvn -f ../hsoliwal/com.synexia/pom.xml install\n")
+        self.put("m3/a/receipt.py", self.SEALED)  # the same bytes under a path that is not listed
+        counts, lineage = self.lineage()
+        self.assertEqual((1, 1, 1), (counts["D_CHECKOUT"], counts["D_SECRET"], counts["D_MAVEN"]))
+        self.assertEqual((5, 3), (counts["D_REPO_REF"], lineage["L_SEALED"]))
+        self.assertEqual("BLOCK", cs.verdict(cs.scan(self.root), {k: 99 for k in cs.KINDS}, True)[0])
+
+    def test_a_malformed_or_out_of_scope_lineage_list_refuses(self):
+        self.put("m3/history/verify_handoff.py", self.SEALED)
+        oid = "0" * 40
+        for text in ("path\tblob\n", "nope\n", f"path\tblob\treason\nm3/history/verify_handoff.py\t{oid}\tr",
+                     f"path\tblob\treason\nm3/history/verify_handoff.py\tXYZ\tr\n",
+                     f"path\tblob\treason\nm3/history/verify_handoff.py\t{oid}\t \n",
+                     f"path\tblob\treason\nm3/history/verify_handoff.py\t{oid}\tr\nm3/history/verify_handoff.py\t{oid}\tr\n",
+                     f"path\tblob\treason\nm3/docs/notes.md\t{oid}\tr\n",
+                     f"path\tblob\treason\nm3/release/check_standalone.py\t{oid}\tr\n",
+                     f"path\tblob\treason\nm3/qualification/r/retained-variants/pr1/x.py\t{oid}\tr\n"):
+            with self.subTest(text=text):
+                self.put(cs.LINEAGE_FILES, text)
+                with self.assertRaises(ValueError):
+                    cs.scan(self.root)
+
     def test_unscanned_scoped_file_holds_release(self):
         self.put("m3/x/run.sh", "echo ok\n")
         result = cs.scan(self.root)

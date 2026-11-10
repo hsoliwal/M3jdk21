@@ -34,6 +34,11 @@ inside a scoped file; it is listed in the TSV and summary under its own kind and
                     displayName:);
                 (d) elsewhere: a comparison field == / != donor (LINEAGE_COMPARISON) on a line with no REMOTE_ACCESS.
                 Any other use of the same string (an argument, a URL to fetch, a command line) stays D_REPO_REF.
+  L_SEALED      a D_REPO_REF line of a file listed with its Git blob in STANDALONE_LINEAGE.tsv: sealed or hash-pinned
+                lineage (expected receipt rows, re-seal and relocation scripts, offline verifiers of recorded donor
+                requests) whose bytes other evidence pins, so the donor names cannot be edited out without breaking a
+                seal. The listing holds only while the file is byte-identical to its pinned blob and has no
+                NETWORK_CAPABILITY anywhere in it; an edited, unlisted or network-capable file counts as before.
 D_CHECKOUT, D_SECRET and D_MAVEN are never lineage outside the archive. The baseline (STANDALONE_BASELINE.tsv) pins
 the count per kind: development mode fails when a kind grows; release mode fails unless every DEPENDENCY kind is 0.
 Only the exact structured canonical Maven receipt owner in release-contract.json is passive metadata; other
@@ -46,6 +51,7 @@ from __future__ import annotations
 
 import argparse
 import ast
+import hashlib
 import io
 import json
 import os
@@ -59,10 +65,14 @@ from pathlib import Path
 DEPENDENCY_KINDS = ("D_CHECKOUT", "D_SECRET", "D_MAVEN", "D_REPO_REF")
 NAMING_KINDS = ("N_PACKAGE", "N_PATH", "N_NAME")
 KINDS = DEPENDENCY_KINDS + NAMING_KINDS
-LINEAGE_KINDS = ("L_ARCHIVE", "L_PROVENANCE")
+LINEAGE_KINDS = ("L_ARCHIVE", "L_PROVENANCE", "L_SEALED")
 # the donor repository, the one identity this check looks for (m3/tooling/standalone/LINEAGE_SOURCES.tsv: lineage only)
 DONOR = "hsoliwal/com.synexia"
 BASELINE = "m3/release/STANDALONE_BASELINE.tsv"
+# Sealed lineage files (L_SEALED): path, pinned Git blob, reason; '#' lines before the header are notes.
+LINEAGE_FILES = "m3/release/STANDALONE_LINEAGE.tsv"
+LINEAGE_FILES_HEADER = "path\tblob\treason"
+OID = re.compile(r"[0-9a-f]{40}\Z")
 # the files that define the patterns they look for or rewrite (this check and the JDK naming recipe crate)
 SELF = {"m3/release/check_standalone.py", "m3/release/test_check_standalone.py", BASELINE}
 SELF_PREFIX = "m3/tooling/jdk-naming/"
@@ -100,6 +110,16 @@ REMOTE_ACCESS = re.compile(
     r"|\burlopen\b|\burllib\.request\b|\brequests\.\w+\(|\bhttp\.client\b|\bhttpx\b|\bwget\b|\bcurl\b"
     r"|api\.github\.com|raw\.githubusercontent\.com|codeload\.github\.com|\bgit\+https?:"
     r"|github\.com/[\w.-]+/[\w.-]+\.git\b")
+# A listed file is sealed lineage only if it cannot reach a network or another repository by itself: no network module,
+# no urlopen, and none of the REMOTE_ACCESS commands. A host name inside a literal (a recorded request URL compared with
+# an expected value) is not a capability; it is what an offline verifier of recorded requests holds.
+NETWORK_CAPABILITY = re.compile(
+    r"^\s*(?:import|from)\s+(?:urllib\.request|urllib3|requests|http\.client|httpx|aiohttp|socket|pycurl|ftplib)\b"
+    r"|^\s*from\s+urllib\s+import\s+[^\n]*\brequest\b|\burlopen\b|\burllib\.request\b"
+    r"|\bgit\s+(?:clone|fetch|pull|push|ls-remote|submodule|remote\s+add)\b"
+    r"|[\"'](?:clone|fetch|pull|push|ls-remote|submodule)[\"']"
+    r"|[\"']gh[\"']|\bgh\s+(?:api|repo|pr|release|run|workflow|auth)\b|\bwget\b|\bcurl\b|\bgit\+https?:"
+    r"|github\.com/[\w.-]+/[\w.-]+\.git\b", re.M)
 # Owner fields are policy (who may change a recipe), not provenance: a literal under one stays counted.
 OWNER_FIELD = re.compile(r"(?i)owner")
 # The donor named as an identity: the repository, its web URL, a pull request, or a browse link to a blob/tree/commit.
@@ -322,7 +342,7 @@ def tracked(root: Path, rev: str | None = None) -> list[str]:
 
 
 def tree_texts(root: Path, rev: str, paths: list[str]):
-    """Yield (path, text) for each path of REV from one git cat-file --batch; a missing blob refuses (no lazy
+    """Yield (path, text, blob) for each path of REV from one git cat-file --batch; a missing blob refuses (no lazy
     fetch: a partial clone must hold the blobs it is asked to check)."""
     proc = subprocess.Popen(["git", "-C", str(root), "cat-file", "--batch"], stdin=subprocess.PIPE,
                             stdout=subprocess.PIPE, env=dict(os.environ, GIT_NO_LAZY_FETCH="1"))
@@ -336,7 +356,7 @@ def tree_texts(root: Path, rev: str, paths: list[str]):
             raise SystemExit("REFUSED: blob not available locally: " + path)
         data = proc.stdout.read(int(header[2]))
         proc.stdout.read(1)
-        yield path, data.decode("utf-8", errors="replace")
+        yield path, data.decode("utf-8", errors="replace"), header[0].decode("ascii")
     feeder.join()
     proc.stdout.close()
     proc.wait()
@@ -430,10 +450,58 @@ def as_archive(findings: list[tuple[str, str, int, str]]) -> list[tuple[str, str
     return [("L_ARCHIVE", p, n, t if k == "L_PROVENANCE" else k + " " + t) for k, p, n, t in findings]
 
 
+def as_sealed(findings: list[tuple[str, str, int, str]]) -> list[tuple[str, str, int, str]]:
+    """L_SEALED: the D_REPO_REF findings of a sealed lineage file; every other kind is kept as it is."""
+    return [("L_SEALED", p, n, k + " " + t) if k == "D_REPO_REF" else (k, p, n, t) for k, p, n, t in findings]
+
+
+def git_blob_id(data: bytes) -> str:
+    return hashlib.sha1(b"blob %d\0" % len(data) + data).hexdigest()
+
+
+def read_lineage_files(root: Path, rev: str | None = None) -> dict[str, str]:
+    """{path: pinned blob} of STANDALONE_LINEAGE.tsv in the working tree, or with REV the one committed in that revision;
+    empty when there is none. An exemption list is never read loosely: a malformed one refuses (ValueError)."""
+    if rev is None:
+        path = Path(root) / LINEAGE_FILES
+        if not path.is_file():
+            return {}
+        data = path.read_bytes()
+    else:
+        shown = subprocess.run(["git", "-C", str(root), "show", f"{rev}:{LINEAGE_FILES}"], capture_output=True)
+        if shown.returncode != 0:
+            return {}
+        data = shown.stdout
+    lines = data.decode("utf-8").split("\n")
+    while lines and lines[0].startswith("#"):
+        lines.pop(0)
+    if not lines or lines[0] != LINEAGE_FILES_HEADER or lines[-1] != "":
+        raise ValueError(f"{LINEAGE_FILES} malformed: header or final newline")
+    pinned: dict[str, str] = {}
+    for number, line in enumerate(lines[1:-1], 2):
+        fields = line.split("\t")
+        if (len(fields) != 3 or fields[0] in pinned or not in_scope(fields[0]) or is_archive(fields[0])
+                or not OID.match(fields[1]) or not fields[2].strip()):
+            raise ValueError(f"{LINEAGE_FILES} malformed: row {number} after the notes")
+        pinned[fields[0]] = fields[1]
+    return pinned
+
+
+def is_sealed(root: Path, path: str, text: str, blob: str | None, pinned: str) -> bool:
+    """The file is byte-identical to its pinned blob (a working-tree file also as checked out with CRLF) and has no
+    NETWORK_CAPABILITY."""
+    if NETWORK_CAPABILITY.search(text):
+        return False
+    if blob is None:
+        data = (root / path).read_bytes()
+        return pinned in (git_blob_id(data), git_blob_id(data.replace(b"\r\n", b"\n")))
+    return pinned == blob
+
+
 def worktree_texts(root: Path, paths: list[str]):
     for path in paths:
         try:
-            yield path, (root / path).read_text(encoding="utf-8", errors="replace")
+            yield path, (root / path).read_text(encoding="utf-8", errors="replace"), None
         except OSError:
             continue
 
@@ -445,9 +513,13 @@ def scan(root: Path, rev: str | None = None) -> dict:
     scoped = [p for p in paths if in_scope(p)]
     present = scoped if rev is not None else [p for p in scoped if (root / p).is_file()]
     texts = tree_texts(root, rev, present) if rev is not None else worktree_texts(root, present)
-    findings, poms, archived_poms = [], {}, {}
-    for path, text in texts:
+    sealed_files = read_lineage_files(root, rev)
+    findings, poms, archived_poms, sealed = [], {}, {}, set()
+    for path, text, blob in texts:
         found = scan_text(path, text)
+        if path in sealed_files and is_sealed(root, path, text, blob, sealed_files[path]):
+            found = as_sealed(found)
+            sealed.add(path)
         findings += as_archive(found) if is_archive(path) else found
         if is_pom(path):
             (archived_poms if is_archive(path) else poms)[path] = text
@@ -460,8 +532,10 @@ def scan(root: Path, rev: str | None = None) -> dict:
     for kind, *_ in findings:
         counts[kind] += 1
     lineage = {kind: counts.pop(kind) for kind in LINEAGE_KINDS}
+    # listed files that are not sealed here (edited, missing, not checked out or network-capable): their lines count
+    stale = sorted(set(sealed_files) - sealed)
     return {"counts": counts, "lineage": lineage, "findings": findings, "scanned": len(present),
-            "unscanned": len(scoped) - len(present)}
+            "unscanned": len(scoped) - len(present), "lineage_not_sealed": stale}
 
 
 def read_baseline(root: Path, rev: str | None = None) -> dict | None:
@@ -530,6 +604,9 @@ def main(argv=None) -> int:
         write_baseline(root, result)
     status, detail = verdict(result, read_baseline(root, args.tree), args.release)
     print(f"standalone.no_external_repo_dependency\t{status}\t{detail}")
+    for path in result["lineage_not_sealed"]:
+        print(f"standalone.lineage_not_sealed\t{path}\tcounted: not byte-identical to its pinned blob, absent or "
+              "network-capable", file=sys.stderr)
     return 0 if status == "PASS" else 1
 
 
