@@ -8,6 +8,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 PACK = ROOT / "m3" / "release"
+# The former recipe home; the release notes must not present a receipt from it (lineage data).
+DONOR_REPOSITORY = "hsoliwal/com.synexia"
 
 
 class ReleaseMetadataTest(unittest.TestCase):
@@ -57,13 +59,30 @@ class ReleaseMetadataTest(unittest.TestCase):
             self.assertEqual("NOT_CLAIMED", claims[name], name)
         self.assertIn("Non-claims", self.notes)
 
+    def test_preview_platform_selection_is_linux_x64_only(self):
+        selection = self.contract["platform_selection"]
+        self.assertEqual(["linux-x64"], selection["selected"])
+        platforms = selection["platforms"]
+        self.assertEqual("SELECTED", platforms["linux-x64"])
+        workflow = (ROOT / ".github" / "workflows" / "m3-release.yml").read_text(encoding="utf-8")
+        # The workflow's supported platform list is the selection vocabulary.
+        self.assertIn("linux-x64|macos-x64|macos-aarch64|windows-x64|", workflow)
+        for platform in ("linux-x64", "macos-x64", "macos-aarch64", "windows-x64"):
+            self.assertIn(platform, platforms)
+        for platform, state in platforms.items():
+            if platform not in selection["selected"]:
+                self.assertEqual("NOT_CLAIMED", state, platform)
+                self.assertIn(platform, self.notes)
+        self.assertIn("OPENJDK_SANITY_MATRIX", self.contract["mandatory_release_gates"])
+        self.assertIn("ships **linux-x64 only**", self.notes)
+
     def test_release_notes_do_not_claim_a_contradictory_recipe_producer(self):
         # Standalone rule (2026-10-31): the receipt is produced inside M3jdk21.
         owner = self.contract["execution_evidence"]["gate_owners"]["M3_MAVEN_CONTROL_REACTOR"]
         self.assertEqual("hsoliwal/M3jdk21", owner)
         self.assertIn("`" + owner + "`", self.notes)
         self.assertNotIn("owner per contract); imported receipt", self.notes)
-        self.assertNotIn("receipt from `hsoliwal/com.synexia`", self.notes)
+        self.assertNotIn(f"receipt from `{DONOR_REPOSITORY}`", self.notes)
         self.assertIn("PENDING — receipt produced inside M3jdk21 required", self.notes)
         self.assertIn("HOLD", self.notes)
 

@@ -25,6 +25,8 @@ from pathlib import Path
 from unittest import mock
 
 MODULE_PATH = Path(__file__).with_name("verify_release_admission.py")
+# The former recipe home, planted below only to prove that release admission refuses it (lineage data).
+DONOR_REPOSITORY = "hsoliwal/com.synexia"
 spec = importlib.util.spec_from_file_location("m3_release_admission", MODULE_PATH)
 release = importlib.util.module_from_spec(spec)
 assert spec.loader is not None
@@ -392,6 +394,43 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
         result = self.result()
         self.assertTrue(result["release_ready"], result)
 
+    def test_below_threshold_atom_passes_only_as_a_proven_reviewed_exemption(self):
+        gate = self.coverage_gate()
+        report = self.evidence_dir / gate["coverage"]["report_artifact"]
+        self.write_coverage_artifact("report_artifact", report.read_text().replace(
+            '<counter type="LINE" covered="99" missed="1"/>',
+            '<counter type="LINE" covered="5" missed="5"/>'))
+        atom = gate["coverage"]["atoms"][0]
+        atom.update(line_covered=5, line_missed=5)
+        inventory = self.evidence_dir / gate["coverage"]["inventory_artifact"]
+        header, row = inventory.read_text().splitlines()
+
+        def exempt(tsv_proof, atom_proof):
+            self.write_coverage_artifact("inventory_artifact",
+                                         header + "\texemption\n" + row + "\t" + tsv_proof + "\n")
+            if atom_proof is None:
+                atom.pop("exemption", None)
+            else:
+                atom["exemption"] = atom_proof
+
+        proof = "run() re-checks the caller invariant at src/example.java:1"
+        with self.subTest("unexempted atom below 90% still fails"):
+            exempt("", None)
+            self.assert_coverage_refused("line coverage below 90%")
+        with self.subTest("exemption without file:line proof fails"):
+            exempt("unreachable guard, reviewed", "unreachable guard, reviewed")
+            self.assert_coverage_refused("must cite file:line evidence")
+        with self.subTest("exemption citing a line beyond the file fails"):
+            exempt("guard at src/example.java:9", "guard at src/example.java:9")
+            self.assert_coverage_refused("cites a line beyond src/example.java")
+        with self.subTest("receipt exemption absent from the reviewed inventory fails"):
+            exempt("", proof)
+            self.assert_coverage_refused("differs from the inventory TSV")
+        with self.subTest("exemption with proof passes"):
+            exempt(proof, proof)
+            result = self.result()
+            self.assertTrue(result["release_ready"], result)
+
     def test_malformed_coverage_container_fields_are_reported_without_crash(self):
         item = next(g for g in self.evidence["gates"] if g["id"] == release.COVERAGE_GATE)
         original = copy.deepcopy(item)
@@ -703,13 +742,13 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
     def test_external_repository_cannot_attest_the_recipe_execution(self):
         # Standalone rule (2026-10-31): the receipt is produced inside M3jdk21, not by another repository.
         entry = next(g for g in self.evidence["gates"] if g["id"] == release.MAVEN_GATE)
-        entry["owner_repository"] = "hsoliwal/com.synexia"
-        entry["canonical_recipe"]["repository"] = "hsoliwal/com.synexia"
+        entry["owner_repository"] = DONOR_REPOSITORY
+        entry["canonical_recipe"]["repository"] = DONOR_REPOSITORY
         self.assert_blocked(self.result(), "gate:" + release.MAVEN_GATE)
 
     def test_canonical_recipe_receipt_cannot_attest_a_product_gate(self):
         entry = next(g for g in self.evidence["gates"] if g["id"] == "STRING_UTF16_CONTRACT")
-        entry["owner_repository"] = "hsoliwal/com.synexia"
+        entry["owner_repository"] = DONOR_REPOSITORY
         self.assert_blocked(self.result(), "gate:" + entry["id"])
 
     def test_contract_naming_another_maven_gate_owner_is_refused(self):
@@ -750,6 +789,97 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
         row = next(q for q in result["queue"] if q["id"] == "legacy_recipe_custody")
         self.assertEqual(row["state"], "HOLD")
         self.assertEqual(row["paths"], ["m3/recipes/apply.py"])
+
+    def amend(self):
+        self.git("add", "-A", ".")
+        self.git("commit", "--amend", "-qm", "synthetic custody tree")
+        self.evidence["source_commit"] = self.git("rev-parse", "HEAD")
+        self.evidence["source_tree"] = self.git("rev-parse", "HEAD^{tree}")
+
+    def custody_fixture(self):
+        """One RETIRE, one MOVE and one in-place ABSORB candidate, applied at HEAD."""
+        self.write("m3/recipes/apply.py", "# retired legacy recipe\n")
+        self.write("m3/recipes/README.md", "not an executable candidate\n")
+        self.write(".m3/openrewrite-recipes/Boot.java", "class Boot {}\n")
+        self.write("m3/tooling/migration-recipes/pom.xml", "<project/>\n")
+        self.amend()
+        retired = release.RETIRE_ARCHIVE + "pr7/m3/recipes/apply.py"
+        rows = [("m3/recipes/apply.py", "RETIRE", retired),
+                (".m3/openrewrite-recipes/Boot.java", "MOVE", "m3/tooling/bootstrap/Boot.java"),
+                ("m3/tooling/migration-recipes/pom.xml", "ABSORB", "m3/tooling/migration-recipes/pom.xml")]
+        self.ledger = [(path, self.git("rev-parse", "HEAD:" + path), "100644", decision, dest,
+                        "synthetic reason", "synthetic callers") for path, decision, dest in rows]
+        (self.root / retired).parent.mkdir(parents=True)
+        (self.root / "m3/tooling/bootstrap").mkdir(parents=True)
+        self.git("mv", "m3/recipes/apply.py", retired)
+        self.git("mv", ".m3/openrewrite-recipes/Boot.java", "m3/tooling/bootstrap/Boot.java")
+        self.write_ledger(self.ledger)
+
+    def write_ledger(self, rows, header=release.CUSTODY_COLUMNS):
+        self.write(release.CUSTODY_LEDGER, "".join("\t".join(r) + "\n" for r in [header, *rows]))
+        self.amend()
+
+    def custody(self):
+        result = self.result()
+        self.assertTrue(result["policy_valid"], result)
+        check = next(c for c in result["checks"] if c["name"] == "legacy_recipe_custody")
+        return check, next((q for q in result["queue"] if q["id"] == "legacy_recipe_custody"), None)
+
+    def test_applied_custody_ledger_passes_legacy_recipe_custody(self):
+        self.custody_fixture()
+        check, row = self.custody()
+        self.assertEqual(check["status"], "PASS", check)
+        self.assertIsNone(row)
+        self.assertIn("ABSORB 1, MOVE 1, RETIRE 1", check["detail"])
+
+    def test_unledgered_candidate_beside_an_applied_ledger_still_holds(self):
+        self.custody_fixture()
+        self.write("m3/recipes/new_runner.py", "# arrived after the ledger\n")
+        self.amend()
+        check, row = self.custody()
+        self.assertEqual(check["status"], "HOLD")
+        self.assertEqual(row["paths"], ["m3/recipes/new_runner.py"])
+
+    def test_unapplied_drifted_or_copied_custody_rows_hold(self):
+        self.custody_fixture()
+        base = self.git("rev-parse", "HEAD")
+        retired = self.ledger[0][4]
+        cases = {
+            "drifted-move": lambda: self.write("m3/tooling/bootstrap/Boot.java", "class Drifted {}\n"),
+            "copied-not-moved": lambda: self.write("m3/recipes/apply.py", "# retired legacy recipe\n"),
+            "unapplied-retire": lambda: self.git("mv", retired, "m3/recipes/apply.py"),
+            "absorbed-in-place-drift": lambda: self.write("m3/tooling/migration-recipes/pom.xml", "<p/>\n"),
+        }
+        for label, mutate in cases.items():
+            with self.subTest(label):
+                self.git("reset", "-q", "--hard", base)
+                mutate()
+                self.amend()
+                check, row = self.custody()
+                self.assertEqual(check["status"], "HOLD", check)
+                self.assertIn("unapplied or drifted", check["detail"])
+                self.assertTrue(any(" -> " in p for p in row["paths"]), row)
+
+    def test_malformed_custody_ledger_is_a_hold_not_a_crash(self):
+        self.custody_fixture()
+        good = list(self.ledger)
+        retire, move, absorb = good
+        cases = {
+            "header": (good, ("path", "blob")),
+            "retire-outside-archive": ([retire[:4] + ("m3/attic/m3/recipes/apply.py",) + retire[5:], move, absorb], None),
+            "move-into-legacy-root": ([retire, move[:4] + ("m3/recipes/Boot.java",) + move[5:], absorb], None),
+            "duplicate-path": ([retire, move, absorb, absorb], None),
+            "non-candidate": ([retire, move, absorb, ("m3/recipes/README.md",) + absorb[1:]], None),
+            "unknown-decision": ([retire, move, absorb[:3] + ("KEEP",) + absorb[4:]], None),
+            "missing-evidence": ([retire, move, absorb[:6] + (" ",)], None),
+        }
+        for label, (rows, header) in cases.items():
+            with self.subTest(label):
+                self.write_ledger(rows, header or release.CUSTODY_COLUMNS)
+                check, row = self.custody()
+                self.assertEqual(check["status"], "HOLD", check)
+                self.assertIn("custody ledger invalid", check["detail"])
+                self.assertEqual(row["paths"], ["m3/tooling/migration-recipes/pom.xml"])
 
     def test_name_queue_map_drift_and_self_promotion_are_refused(self):
         plan = json.loads((self.root / release.NAME_PLAN).read_text())
@@ -970,7 +1100,7 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
         self.write("m3/release/release-contract.json", json.dumps(self.contract))
         self.write(".github/workflows/external-runtime.yml",
                    "jobs:\n  build:\n    steps:\n      - uses: actions/checkout@v4\n"
-                   "        with:\n          repository: hsoliwal/com.synexia\n")
+                   "        with:\n          repository: " + DONOR_REPOSITORY + "\n")
         self.repin_queue()
         self.git("add", ".")
         self.git("commit", "--amend", "-qm", "synthetic tree requiring external runtime")

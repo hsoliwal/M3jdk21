@@ -152,7 +152,7 @@ public final class ThreadOps {
     /** Execute with timeout, return default if timeout exceeded. */
     public static <T> T withTimeout(Supplier<T> supplier, Duration timeout, T defaultValue) {
         try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
-            Future<T> future = executor.submit(supplier::get);
+            Future<T> future = executor.submit((Callable<T>) supplier::get);
             try {
                 return future.get(timeout.toMillis(), TimeUnit.MILLISECONDS);
             } catch (TimeoutException e) {
