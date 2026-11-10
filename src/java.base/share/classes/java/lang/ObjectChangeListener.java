@@ -23,7 +23,7 @@ package java.lang;
  * @since 21
  */
 @FunctionalInterface
-public interface ObjectChangeListener {
+interface ObjectChangeListener {
     /**
      * Receives an immutable invalidation envelope. Its current value is read
      * lazily and may already reflect later mutations.

@@ -25,9 +25,12 @@
 /*
  * @test
  * @summary M3Object explicit JNI producers share asynchronous Java observation
- * @run main/othervm/native -Xcheck:jni -Djdk.m3.objectEvents.enabled=false M3ObjectNativeTest disabled
- * @run main/othervm/native -Xcheck:jni -Djdk.m3.objectEvents.enabled=true M3ObjectNativeTest enabled
+ * @compile --patch-module java.base=${test.src} --add-reads java.base=ALL-UNNAMED M3ObjectNativeTest.java
+ * @run main/othervm/native --patch-module java.base=${test.classes} --add-reads java.base=ALL-UNNAMED -Xcheck:jni -Djdk.m3.objectEvents.enabled=false java.lang.M3ObjectNativeTest disabled
+ * @run main/othervm/native --patch-module java.base=${test.classes} --add-reads java.base=ALL-UNNAMED -Xcheck:jni -Djdk.m3.objectEvents.enabled=true java.lang.M3ObjectNativeTest enabled
  */
+
+package java.lang;
 
 import java.lang.invoke.MethodHandles;
 import java.util.Objects;
@@ -82,7 +85,9 @@ public class M3ObjectNativeTest {
     private static native int mutateMany(byte[] source, int count);
 
     public static void main(String[] args) throws Exception {
-        System.loadLibrary("M3ObjectNativeTest");
+        // Boot-layer test class: System.loadLibrary would search sun.boot.library.path.
+        System.load(java.nio.file.Path.of(System.getProperty("java.library.path"),
+                System.mapLibraryName("M3ObjectNativeTest")).toString());
         boolean enabled = args.length == 1 && args[0].equals("enabled");
         check(M3Object.observationEnabled() == enabled, "startup observation setting");
         validateNativeArguments();

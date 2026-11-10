@@ -6,9 +6,12 @@
 /*
  * @test
  * @summary M3Object weak-index identity and bounded-heap strong-retention leak refusal
- * @run main/othervm -Xmx96m M3ObjectWeakLifetimeTest
- * @run main/othervm -Xint -Xmx96m M3ObjectWeakLifetimeTest
+ * @compile --patch-module java.base=${test.src} --add-reads java.base=ALL-UNNAMED M3ObjectWeakLifetimeTest.java
+ * @run main/othervm --patch-module java.base=${test.classes} --add-reads java.base=ALL-UNNAMED -Xmx96m java.lang.M3ObjectWeakLifetimeTest
+ * @run main/othervm --patch-module java.base=${test.classes} --add-reads java.base=ALL-UNNAMED -Xint -Xmx96m java.lang.M3ObjectWeakLifetimeTest
  */
+package java.lang;
+
 import java.lang.ref.WeakReference;
 import java.util.Random;
 

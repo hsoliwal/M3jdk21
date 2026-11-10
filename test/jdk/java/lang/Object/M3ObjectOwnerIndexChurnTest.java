@@ -6,15 +6,18 @@
  * @test
  * @summary Bound weak-owner index churn and preserve sparse/75-percent resize boundaries
  * @modules java.base/java.lang
- * @run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED M3ObjectOwnerIndexChurnTest near-full
- * @run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -Xint M3ObjectOwnerIndexChurnTest near-full
- * @run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED M3ObjectOwnerIndexChurnTest sparse
- * @run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -Xint M3ObjectOwnerIndexChurnTest sparse
- * @run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED M3ObjectOwnerIndexChurnTest threshold-75
- * @run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -Xint M3ObjectOwnerIndexChurnTest threshold-75
- * @run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED M3ObjectOwnerIndexChurnTest threshold-above-75
- * @run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -Xint M3ObjectOwnerIndexChurnTest threshold-above-75
+ * @compile --patch-module java.base=${test.src} --add-reads java.base=ALL-UNNAMED M3ObjectOwnerIndexChurnTest.java
+ * @run main/othervm --patch-module java.base=${test.classes} --add-reads java.base=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED java.lang.M3ObjectOwnerIndexChurnTest near-full
+ * @run main/othervm --patch-module java.base=${test.classes} --add-reads java.base=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED -Xint java.lang.M3ObjectOwnerIndexChurnTest near-full
+ * @run main/othervm --patch-module java.base=${test.classes} --add-reads java.base=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED java.lang.M3ObjectOwnerIndexChurnTest sparse
+ * @run main/othervm --patch-module java.base=${test.classes} --add-reads java.base=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED -Xint java.lang.M3ObjectOwnerIndexChurnTest sparse
+ * @run main/othervm --patch-module java.base=${test.classes} --add-reads java.base=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED java.lang.M3ObjectOwnerIndexChurnTest threshold-75
+ * @run main/othervm --patch-module java.base=${test.classes} --add-reads java.base=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED -Xint java.lang.M3ObjectOwnerIndexChurnTest threshold-75
+ * @run main/othervm --patch-module java.base=${test.classes} --add-reads java.base=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED java.lang.M3ObjectOwnerIndexChurnTest threshold-above-75
+ * @run main/othervm --patch-module java.base=${test.classes} --add-reads java.base=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED -Xint java.lang.M3ObjectOwnerIndexChurnTest threshold-above-75
  */
+package java.lang;
+
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
