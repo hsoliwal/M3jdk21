@@ -23,7 +23,7 @@ The base is M3jdk21 master 16e35bee. The patch has 36 paths, +3890 / -506 lines.
 | Check | State |
 |-------|-------|
 | javac `-Xlint:all -Werror` of the new DualPivotQuicksort, patched into java.base (JDK 21) | PASS |
-| `Sorting` (jtreg test) on the Java fallback path, `--patch-module java.base` | PENDING: the session's auto-mode classifier blocked local execution of donor-derived code |
+| `Sorting` on the Java fallback path, JDK 21.0.x Windows x64, `--patch-module java.base` with the new DualPivotQuicksort and the test's SortingHelper | PASS 2026-11-10: `-shortrun` in 2 s; the C2 variant (`-XX:-TieredCompilation`, CompileThresholdScaling on DualPivotQuicksort::sort) in 3 s; the full run in 306 s |
 | Linux x86_64 image build: HotSpot + libsimdsort (`make images`) | PENDING: needs WSL, which the release lane is using during the RC freeze |
 | `Sorting` with intrinsics (AVX2 / AVX512 host), `-XX:DisableIntrinsic=_arraySort,_arrayPartition` variant, and the C2 variant | PENDING |
 | JMH `ArraysSort` against the stock 21.0.14 image | PENDING |
