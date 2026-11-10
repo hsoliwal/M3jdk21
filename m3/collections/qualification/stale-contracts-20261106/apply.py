@@ -38,7 +38,7 @@ TEST = "m3/collections/src/test/java/jdk/m3/collections/"
 ABSENT = "-"
 
 HEADER = (
-    "/*******************************************************************************\n"
+    "/* *****************************************************************************\n"
     " * Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others.\n"
     " *\n"
     " * This program and the accompanying materials are made available under the\n"
