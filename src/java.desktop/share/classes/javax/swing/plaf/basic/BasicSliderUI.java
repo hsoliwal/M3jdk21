@@ -1291,10 +1291,15 @@ public class BasicSliderUI extends SliderUI{
 
             if (slider.getMinorTickSpacing() > 0) {
                 int value = slider.getMinimum();
+                // one tick per pixel column: a tick at the last painted position paints the same pixels //FLLDCIM: MARK — every-widget BasicSliderUI ticks D
+                int painted = Integer.MIN_VALUE;
 
                 while ( value <= slider.getMaximum() ) {
                     int xPos = xPositionForValue(value);
-                    paintMinorTickForHorizSlider( g, tickBounds, xPos );
+                    if (xPos != painted) {
+                        paintMinorTickForHorizSlider( g, tickBounds, xPos );
+                        painted = xPos;
+                    }
 
                     // Overflow checking
                     if (Integer.MAX_VALUE - slider.getMinorTickSpacing() < value) {
@@ -1307,10 +1312,14 @@ public class BasicSliderUI extends SliderUI{
 
             if (slider.getMajorTickSpacing() > 0) {
                 int value = slider.getMinimum();
+                int painted = Integer.MIN_VALUE;
 
                 while ( value <= slider.getMaximum() ) {
                     int xPos = xPositionForValue(value);
-                    paintMajorTickForHorizSlider( g, tickBounds, xPos );
+                    if (xPos != painted) {
+                        paintMajorTickForHorizSlider( g, tickBounds, xPos );
+                        painted = xPos;
+                    }
 
                     // Overflow checking
                     if (Integer.MAX_VALUE - slider.getMajorTickSpacing() < value) {
@@ -1333,10 +1342,14 @@ public class BasicSliderUI extends SliderUI{
                 }
 
                 int value = slider.getMinimum();
+                int painted = Integer.MIN_VALUE;
 
                 while (value <= slider.getMaximum()) {
                     int yPos = yPositionForValue(value);
-                    paintMinorTickForVertSlider( g, tickBounds, yPos );
+                    if (yPos != painted) {
+                        paintMinorTickForVertSlider( g, tickBounds, yPos );
+                        painted = yPos;
+                    }
 
                     // Overflow checking
                     if (Integer.MAX_VALUE - slider.getMinorTickSpacing() < value) {
@@ -1357,10 +1370,14 @@ public class BasicSliderUI extends SliderUI{
                 }
 
                 int value = slider.getMinimum();
+                int painted = Integer.MIN_VALUE;
 
                 while (value <= slider.getMaximum()) {
                     int yPos = yPositionForValue(value);
-                    paintMajorTickForVertSlider( g, tickBounds, yPos );
+                    if (yPos != painted) {
+                        paintMajorTickForVertSlider( g, tickBounds, yPos );
+                        painted = yPos;
+                    }
 
                     // Overflow checking
                     if (Integer.MAX_VALUE - slider.getMajorTickSpacing() < value) {
