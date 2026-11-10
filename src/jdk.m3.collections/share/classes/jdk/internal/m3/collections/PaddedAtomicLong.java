@@ -62,10 +62,6 @@ import java.lang.invoke.VarHandle;
  * long val = counter.getVolatile(); // Acquire semantics
  * }</pre>
  *
- * <h2>Inspired by</h2>
- * <p>
- * </p>
- *
  * @author Hitesh Soliwal
  * @version 1.0.0
  *
