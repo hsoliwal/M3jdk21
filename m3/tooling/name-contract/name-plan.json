@@ -1,7 +1,7 @@
 {
   "schema": "M3JDK21_NAME_CONTRACT_PLAN_V1",
   "authority": "m3/docs/name-mapping.json",
-  "authority_blob": "3879a0f1fbc2ccf4a1e7c6643fceff8d85d43780",
+  "authority_blob": "5dd1f5890ff3685db0661994b85c57660a09ceec",
   "operations": [
     {
       "mapping_id": "synexia.counterpart.MIndexClass",
@@ -23,9 +23,9 @@
       "mapping_id": "m3.prefix-z",
       "kind": "INTERNAL_MOVE",
       "state": "QUEUED",
-      "before_type": "jdk.m3.algorithm.M3PrefixZ",
-      "after_type": "jdk.m3.algorithms.M3PrefixZ",
-      "reason": "Potential package consolidation for algorithm-only candidate; do not relocate until the canonical name map adds an approved destination symbol, all users/imports/service/reflection/serialization are inventoried and a proven Synexia typed recipe is replayed."
+      "before_type": "jdk.m3.algorithm.PrefixZ",
+      "after_type": "jdk.m3.algorithms.PrefixZ",
+      "reason": "Potential package consolidation for algorithm-only candidate; do not relocate until the canonical name map adds an approved destination symbol, all users/imports/service/reflection/serialization are inventoried and a proven Synexia typed recipe is replayed. Types follow the in-place rename M3PrefixZ -> PrefixZ (name-mapping target re-pinned 2026-11-09); the package move stays queued."
     },
     {
       "mapping_id": "m3.collections.evicting-queue.owner-naming",

@@ -1102,10 +1102,10 @@
         "targets": [
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "b9cc756f726de31af10652b5583d9bba58ba27b2",
+            "commit": "e8e1e837a640f6b5a92226271a60cc9821d44cc0",
             "module": "m3",
-            "path": "m3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java",
-            "symbol": "jdk.m3.algorithm.M3PrefixZ",
+            "path": "m3/algorithms/src/jdk/m3/algorithm/PrefixZ.java",
+            "symbol": "jdk.m3.algorithm.PrefixZ",
             "signatures": [
               "M3PrefixZ analyze(M3StringPiece)",
               "M3PrefixZ analyze(M3StringPiece,long,BooleanSupplier)",
@@ -1116,8 +1116,8 @@
               "int longestProperBorderLength()",
               "long metadataPayloadBytes()"
             ],
-            "sha256": "5f936a3c6e69ca487eff6a0665ada01546750d9d87ce85ee50a337a4236233d0",
-            "git_blob_sha1": "317108234d7692410517731b325f7d28de99354e",
+            "sha256": "e079b718ed595540f8c0afafe8642b2475939cf32f70771152181abd9c7ae5af",
+            "git_blob_sha1": "aaf42a1e864ef90ecd8f70ec35efb1e2bffc1a0c",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/m3/migration-pass1-prefix-evidence-20261002"
@@ -1215,6 +1215,28 @@
               "module": "m3",
               "path": "m3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java",
               "symbol": "com.m3.algorithm.M3PrefixZ",
+              "signatures": [
+                "M3PrefixZ analyze(M3StringPiece)",
+                "M3PrefixZ analyze(M3StringPiece,long,BooleanSupplier)",
+                "long requiredMetadataPayloadBytes(int)",
+                "int length()",
+                "int prefixLengthAt(int)",
+                "long similaritySum()",
+                "int longestProperBorderLength()",
+                "long metadataPayloadBytes()"
+              ],
+              "sha256": "5f936a3c6e69ca487eff6a0665ada01546750d9d87ce85ee50a337a4236233d0",
+              "git_blob_sha1": "317108234d7692410517731b325f7d28de99354e",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/m3/migration-pass1-prefix-evidence-20261002"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "b9cc756f726de31af10652b5583d9bba58ba27b2",
+              "module": "m3",
+              "path": "m3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java",
+              "symbol": "jdk.m3.algorithm.M3PrefixZ",
               "signatures": [
                 "M3PrefixZ analyze(M3StringPiece)",
                 "M3PrefixZ analyze(M3StringPiece,long,BooleanSupplier)",
@@ -9516,16 +9538,16 @@
         "targets": [
           {
             "repo": "hsoliwal/M3JDK21",
-            "commit": "b9cc756f726de31af10652b5583d9bba58ba27b2",
+            "commit": "e8e1e837a640f6b5a92226271a60cc9821d44cc0",
             "module": "jdk.m3.collections",
-            "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java",
-            "symbol": "jdk.m3.collections.M3IndexedListSnapshot",
+            "path": "src/jdk.m3.collections/share/classes/jdk/m3/collections/IndexedListSnapshot.java",
+            "symbol": "jdk.m3.collections.IndexedListSnapshot",
             "signatures": [
               "M3IndexedListSnapshot<E> filtered(Predicate<? super E>)",
               "M3IndexedListSnapshot<E> filteredSorted(Predicate<? super E>,Comparator<? super E>)"
             ],
-            "sha256": "d1d2b56affd6f58362039e95141e8582e110edbd45fb42e40acf7a616bb7f170",
-            "git_blob_sha1": "803f5b911343d109c9ed2ef7ebf3918e7cbe0693",
+            "sha256": "46e55d11ae003f0dacf91e4edc235f992e8bf6d524f95ac9a6f9ee1fa9a6dc7f",
+            "git_blob_sha1": "cfa3212d252992692eb3a6bbd8f9c965726acc01",
             "fingerprint": null,
             "revision_role": "pinned"
           }
@@ -9643,6 +9665,21 @@
               "git_blob_sha1": "9f3e7c26acec590a796c5897cfe0fa7c47a25b89",
               "fingerprint": null,
               "revision_role": "pinned"
+            },
+            {
+              "repo": "hsoliwal/M3JDK21",
+              "commit": "b9cc756f726de31af10652b5583d9bba58ba27b2",
+              "module": "jdk.m3.collections",
+              "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java",
+              "symbol": "jdk.m3.collections.M3IndexedListSnapshot",
+              "signatures": [
+                "M3IndexedListSnapshot<E> filtered(Predicate<? super E>)",
+                "M3IndexedListSnapshot<E> filteredSorted(Predicate<? super E>,Comparator<? super E>)"
+              ],
+              "sha256": "d1d2b56affd6f58362039e95141e8582e110edbd45fb42e40acf7a616bb7f170",
+              "git_blob_sha1": "803f5b911343d109c9ed2ef7ebf3918e7cbe0693",
+              "fingerprint": null,
+              "revision_role": "pinned"
             }
           ],
           "supersedes": []
@@ -9674,15 +9711,15 @@
         "targets": [
           {
             "repo": "hsoliwal/M3JDK21",
-            "commit": "b9cc756f726de31af10652b5583d9bba58ba27b2",
+            "commit": "e8e1e837a640f6b5a92226271a60cc9821d44cc0",
             "module": "jdk.m3.collections",
-            "path": "m3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java",
-            "symbol": "jdk.m3.collections.M3TreeWindowPlan",
+            "path": "src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/TreeWindowPlan.java",
+            "symbol": "jdk.internal.m3.collections.TreeWindowPlan",
             "signatures": [
               "void shiftSiblings(int,int,int)"
             ],
-            "sha256": "8632721e214a20e82376fa68dd4e4b882719c57297c650e07d1c9daad08f4dc3",
-            "git_blob_sha1": "cf2a95db6bcd5729437dcf403252464822800254",
+            "sha256": "e014c8e2a8abfa808535a9dbd3271034653baaefd2f903575a7eeb1fb47a75cd",
+            "git_blob_sha1": "42615b1b57f0baac03d8c38d4e1b2ed75d734170",
             "fingerprint": null,
             "revision_role": "pinned"
           }
@@ -9792,6 +9829,20 @@
               ],
               "sha256": "a1a7e24982504e08ded4c156a3d54606ebb1c5f29cdc3cd195a0a5852a475fa1",
               "git_blob_sha1": "076f655b96a09be7cbf3ef38d47fe8d2a2d0d2c5",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            },
+            {
+              "repo": "hsoliwal/M3JDK21",
+              "commit": "b9cc756f726de31af10652b5583d9bba58ba27b2",
+              "module": "jdk.m3.collections",
+              "path": "m3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java",
+              "symbol": "jdk.m3.collections.M3TreeWindowPlan",
+              "signatures": [
+                "void shiftSiblings(int,int,int)"
+              ],
+              "sha256": "8632721e214a20e82376fa68dd4e4b882719c57297c650e07d1c9daad08f4dc3",
+              "git_blob_sha1": "cf2a95db6bcd5729437dcf403252464822800254",
               "fingerprint": null,
               "revision_role": "pinned"
             }
@@ -10438,9 +10489,9 @@
         "targets": [
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "b9cc756f726de31af10652b5583d9bba58ba27b2",
-            "module": "jdk.m3.arrays",
-            "path": "m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java",
+            "commit": "e8e1e837a640f6b5a92226271a60cc9821d44cc0",
+            "module": "jdk.m3.collections",
+            "path": "src/jdk.m3.collections/share/classes/jdk/m3/arrays/M3Arrays.java",
             "symbol": "jdk.m3.arrays.M3Arrays",
             "signatures": [
               "bytes(byte[])",
@@ -10453,8 +10504,8 @@
               "join(M3IntArrayView...)",
               "join(M3LongArrayView...)"
             ],
-            "sha256": "1d4751b26c5919707caa5d1f478cecd4870a073409bc7616b45606ff930a658a",
-            "git_blob_sha1": "74df0916dd8d20c300ee4f0fa89ffd7f8a1614c2",
+            "sha256": "d1e9bbf89d41c5008b83cfcbdb47a74d0ce03f7433d7cccdba9b0c5ccdd3c033",
+            "git_blob_sha1": "d38722c3091aaedc62d491b780d6c146a35200cd",
             "fingerprint": null,
             "revision_role": "pinned"
           }
@@ -10614,6 +10665,28 @@
               "git_blob_sha1": "ffece349f5ef3f1c48191fb54a8b037f8e635d63",
               "fingerprint": null,
               "revision_role": "pinned"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "b9cc756f726de31af10652b5583d9bba58ba27b2",
+              "module": "jdk.m3.arrays",
+              "path": "m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java",
+              "symbol": "jdk.m3.arrays.M3Arrays",
+              "signatures": [
+                "bytes(byte[])",
+                "chars(char[])",
+                "chars(CharSequence)",
+                "ints(int[])",
+                "longs(long[])",
+                "join(M3ByteArrayView...)",
+                "join(M3Utf16ArrayView...)",
+                "join(M3IntArrayView...)",
+                "join(M3LongArrayView...)"
+              ],
+              "sha256": "1d4751b26c5919707caa5d1f478cecd4870a073409bc7616b45606ff930a658a",
+              "git_blob_sha1": "74df0916dd8d20c300ee4f0fa89ffd7f8a1614c2",
+              "fingerprint": null,
+              "revision_role": "pinned"
             }
           ],
           "supersedes": []
@@ -10654,15 +10727,15 @@
         "targets": [
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "b9cc756f726de31af10652b5583d9bba58ba27b2",
+            "commit": "e8e1e837a640f6b5a92226271a60cc9821d44cc0",
             "module": "jdk.m3.collections",
-            "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongLongHashMap.java",
-            "symbol": "jdk.m3.collections.M3LongLongHashMap",
+            "path": "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongLongHashMap.java",
+            "symbol": "jdk.m3.collections.LongLongHashMap",
             "signatures": [
               "long addTo(long,long)"
             ],
-            "sha256": "d8fe7e6039027edea4e58990f42b1b79cacd33c0b234c8d98bfdc7b4d85fdf64",
-            "git_blob_sha1": "05f940afd343aae7f6fba10200ca17b87da48059",
+            "sha256": "937c680743188332973d191a4bac47a92b95f2fddd3116459d7b863d2f13d338",
+            "git_blob_sha1": "13241b67cf9e92db2932d2d419e17c2e609b614a",
             "fingerprint": null,
             "revision_role": "candidate"
           }
@@ -10748,6 +10821,20 @@
               ],
               "sha256": "595d8a964b392c96510a5c39e19377fc070328bca7db1fa34d8ef46d04b9d07b",
               "git_blob_sha1": "1dd6988e97e61419b17f209751deb935baa83164",
+              "fingerprint": null,
+              "revision_role": "candidate"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "b9cc756f726de31af10652b5583d9bba58ba27b2",
+              "module": "jdk.m3.collections",
+              "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongLongHashMap.java",
+              "symbol": "jdk.m3.collections.M3LongLongHashMap",
+              "signatures": [
+                "long addTo(long,long)"
+              ],
+              "sha256": "d8fe7e6039027edea4e58990f42b1b79cacd33c0b234c8d98bfdc7b4d85fdf64",
+              "git_blob_sha1": "05f940afd343aae7f6fba10200ca17b87da48059",
               "fingerprint": null,
               "revision_role": "candidate"
             }
@@ -10837,37 +10924,37 @@
         "targets": [
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "b9cc756f726de31af10652b5583d9bba58ba27b2",
-            "module": "jdk.m3.arrays",
-            "path": "m3/arrays/src/main/java/jdk/m3/arrays/packed/PackedCodec.java",
+            "commit": "e8e1e837a640f6b5a92226271a60cc9821d44cc0",
+            "module": "jdk.m3.collections",
+            "path": "src/jdk.m3.collections/share/classes/jdk/m3/arrays/packed/PackedCodec.java",
             "symbol": "jdk.m3.arrays.packed.PackedCodec",
             "signatures": [
               "com.m3.arrays.packed.PackedCodec"
             ],
-            "sha256": "1a3d44719a760da416077e1a995997fb19074a49c8d79e246c4ca755586f3e27",
-            "git_blob_sha1": "a8b09e14c3d4a146d8620dee4d65652cbbe6fcaf",
+            "sha256": "1ff77cba9f3991160596833f5317086cb33a5377bcea7c3cadf8a10d475c0365",
+            "git_blob_sha1": "ca0da83f243d42979c57a7f28693b9b4298ffe39",
             "fingerprint": null,
             "revision_role": "candidate"
           },
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "b9cc756f726de31af10652b5583d9bba58ba27b2",
-            "module": "jdk.m3.arrays",
-            "path": "m3/arrays/src/main/java/jdk/m3/arrays/packed/PackedIntArray.java",
+            "commit": "e8e1e837a640f6b5a92226271a60cc9821d44cc0",
+            "module": "jdk.m3.collections",
+            "path": "src/jdk.m3.collections/share/classes/jdk/m3/arrays/packed/PackedIntArray.java",
             "symbol": "jdk.m3.arrays.packed.PackedIntArray",
             "signatures": [
               "com.m3.arrays.packed.PackedIntArray"
             ],
-            "sha256": "483ae5c1e077eec95da5734c02d36ee46aaf3c879a889356f5fb7ac6e57af9e3",
-            "git_blob_sha1": "0a134d193178b3d82ae41f436da4b7c346453674",
+            "sha256": "0525392bf479e6bb075fd459084188f81778f87e5508e0589e82a7c7fa3b2f0e",
+            "git_blob_sha1": "74809b193dd0dbe0f81c3d98a9207c246971d43d",
             "fingerprint": null,
             "revision_role": "candidate"
           },
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "b9cc756f726de31af10652b5583d9bba58ba27b2",
-            "module": "jdk.m3.arrays",
-            "path": "m3/arrays/src/main/java/jdk/m3/arrays/packed/Int40Array.java",
+            "commit": "e8e1e837a640f6b5a92226271a60cc9821d44cc0",
+            "module": "jdk.m3.collections",
+            "path": "src/jdk.m3.collections/share/classes/jdk/m3/arrays/packed/Int40Array.java",
             "symbol": "jdk.m3.arrays.packed.Int40Array",
             "signatures": [
               "com.m3.arrays.packed.Int40Array"
@@ -10879,9 +10966,9 @@
           },
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "b9cc756f726de31af10652b5583d9bba58ba27b2",
-            "module": "jdk.m3.arrays",
-            "path": "m3/arrays/src/main/java/jdk/m3/arrays/packed/Int48Array.java",
+            "commit": "e8e1e837a640f6b5a92226271a60cc9821d44cc0",
+            "module": "jdk.m3.collections",
+            "path": "src/jdk.m3.collections/share/classes/jdk/m3/arrays/packed/Int48Array.java",
             "symbol": "jdk.m3.arrays.packed.Int48Array",
             "signatures": [
               "com.m3.arrays.packed.Int48Array"
@@ -10893,9 +10980,9 @@
           },
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "b9cc756f726de31af10652b5583d9bba58ba27b2",
-            "module": "jdk.m3.arrays",
-            "path": "m3/arrays/src/main/java/jdk/m3/arrays/packed/Int56Array.java",
+            "commit": "e8e1e837a640f6b5a92226271a60cc9821d44cc0",
+            "module": "jdk.m3.collections",
+            "path": "src/jdk.m3.collections/share/classes/jdk/m3/arrays/packed/Int56Array.java",
             "symbol": "jdk.m3.arrays.packed.Int56Array",
             "signatures": [
               "com.m3.arrays.packed.Int56Array"
@@ -11051,6 +11138,76 @@
               "git_blob_sha1": null,
               "fingerprint": null,
               "revision_role": "candidate"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "b9cc756f726de31af10652b5583d9bba58ba27b2",
+              "module": "jdk.m3.arrays",
+              "path": "m3/arrays/src/main/java/jdk/m3/arrays/packed/PackedCodec.java",
+              "symbol": "jdk.m3.arrays.packed.PackedCodec",
+              "signatures": [
+                "com.m3.arrays.packed.PackedCodec"
+              ],
+              "sha256": "1a3d44719a760da416077e1a995997fb19074a49c8d79e246c4ca755586f3e27",
+              "git_blob_sha1": "a8b09e14c3d4a146d8620dee4d65652cbbe6fcaf",
+              "fingerprint": null,
+              "revision_role": "candidate"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "b9cc756f726de31af10652b5583d9bba58ba27b2",
+              "module": "jdk.m3.arrays",
+              "path": "m3/arrays/src/main/java/jdk/m3/arrays/packed/PackedIntArray.java",
+              "symbol": "jdk.m3.arrays.packed.PackedIntArray",
+              "signatures": [
+                "com.m3.arrays.packed.PackedIntArray"
+              ],
+              "sha256": "483ae5c1e077eec95da5734c02d36ee46aaf3c879a889356f5fb7ac6e57af9e3",
+              "git_blob_sha1": "0a134d193178b3d82ae41f436da4b7c346453674",
+              "fingerprint": null,
+              "revision_role": "candidate"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "b9cc756f726de31af10652b5583d9bba58ba27b2",
+              "module": "jdk.m3.arrays",
+              "path": "m3/arrays/src/main/java/jdk/m3/arrays/packed/Int40Array.java",
+              "symbol": "jdk.m3.arrays.packed.Int40Array",
+              "signatures": [
+                "com.m3.arrays.packed.Int40Array"
+              ],
+              "sha256": "1268404ce81e9cecccd7cb38a68f1d92a584bdc46cef45e066e1933bb7fa6efa",
+              "git_blob_sha1": "a3e8f262968b81b3f70abfbf7c8c6b5e37454969",
+              "fingerprint": null,
+              "revision_role": "candidate"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "b9cc756f726de31af10652b5583d9bba58ba27b2",
+              "module": "jdk.m3.arrays",
+              "path": "m3/arrays/src/main/java/jdk/m3/arrays/packed/Int48Array.java",
+              "symbol": "jdk.m3.arrays.packed.Int48Array",
+              "signatures": [
+                "com.m3.arrays.packed.Int48Array"
+              ],
+              "sha256": "73bb294e30260d755a2f888c0c380a63847acadf49181b96efb108a0cfdc7445",
+              "git_blob_sha1": "3b0155725748739405a80bff7df9c6a166de19f3",
+              "fingerprint": null,
+              "revision_role": "candidate"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "b9cc756f726de31af10652b5583d9bba58ba27b2",
+              "module": "jdk.m3.arrays",
+              "path": "m3/arrays/src/main/java/jdk/m3/arrays/packed/Int56Array.java",
+              "symbol": "jdk.m3.arrays.packed.Int56Array",
+              "signatures": [
+                "com.m3.arrays.packed.Int56Array"
+              ],
+              "sha256": "dabf5f8b0932977bcdbc4161de97861189eab7898fc6ead5843e2cad0451a251",
+              "git_blob_sha1": "eba7944ea36e14119789b260f0787ac0d8ee5786",
+              "fingerprint": null,
+              "revision_role": "candidate"
             }
           ],
           "supersedes": []
@@ -11082,9 +11239,9 @@
         "targets": [
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "b9cc756f726de31af10652b5583d9bba58ba27b2",
-            "module": "jdk.m3.arrays",
-            "path": "m3/arrays/src/main/java/jdk/m3/arrays/packed/VInt.java",
+            "commit": "e8e1e837a640f6b5a92226271a60cc9821d44cc0",
+            "module": "jdk.m3.collections",
+            "path": "src/jdk.m3.collections/share/classes/jdk/m3/arrays/packed/VInt.java",
             "symbol": "jdk.m3.arrays.packed.VInt",
             "signatures": [
               "byte[] encodeUnsigned64(long[])",
@@ -11092,8 +11249,8 @@
               "byte[] encodeZigZag64(long[])",
               "long[] decodeZigZag64(byte[])"
             ],
-            "sha256": "fa5a7c5554000db43961536e09c82f6c0752c42f58f0a298092ba9fde8758f73",
-            "git_blob_sha1": "346c05694f6921b8211d15fd5fc1da0cd01bae83",
+            "sha256": "ba859675ee82fc6afac4e23002376a3e197b712e8b45bcd236f0ddb37e28f59f",
+            "git_blob_sha1": "4a6c2574c7358fa221b93dd9f6ba2bd78f80acdf",
             "fingerprint": null,
             "revision_role": "candidate"
           }
@@ -11186,6 +11343,23 @@
               "git_blob_sha1": null,
               "fingerprint": null,
               "revision_role": "candidate"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "b9cc756f726de31af10652b5583d9bba58ba27b2",
+              "module": "jdk.m3.arrays",
+              "path": "m3/arrays/src/main/java/jdk/m3/arrays/packed/VInt.java",
+              "symbol": "jdk.m3.arrays.packed.VInt",
+              "signatures": [
+                "byte[] encodeUnsigned64(long[])",
+                "long[] decodeUnsigned64(byte[])",
+                "byte[] encodeZigZag64(long[])",
+                "long[] decodeZigZag64(byte[])"
+              ],
+              "sha256": "fa5a7c5554000db43961536e09c82f6c0752c42f58f0a298092ba9fde8758f73",
+              "git_blob_sha1": "346c05694f6921b8211d15fd5fc1da0cd01bae83",
+              "fingerprint": null,
+              "revision_role": "candidate"
             }
           ],
           "supersedes": []
@@ -11259,10 +11433,10 @@
         "targets": [
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "b9cc756f726de31af10652b5583d9bba58ba27b2",
-            "module": "jdk.m3.arrays",
-            "path": "m3/arrays/src/main/java/jdk/m3/arrays/M3ArrayNative.java",
-            "symbol": "jdk.m3.arrays.M3ArrayNative",
+            "commit": "e8e1e837a640f6b5a92226271a60cc9821d44cc0",
+            "module": "jdk.m3.collections",
+            "path": "src/jdk.m3.collections/share/classes/jdk/m3/arrays/ArrayNative.java",
+            "symbol": "jdk.m3.arrays.ArrayNative",
             "signatures": [
               "byte[] encodePackedRequired(long[],int)",
               "long[] decodePackedRequired(byte[],int)",
@@ -11271,50 +11445,50 @@
               "byte[] encodeZigZag64Required(long[])",
               "long[] decodeZigZag64Required(byte[])"
             ],
-            "sha256": "882cb9c52d4247dc23a7a00fd658867a4968ef99884ad939ca932b3c217cfb95",
-            "git_blob_sha1": "71806f64bafa5a7e5a90ecc0eda8478546698074",
+            "sha256": "632dc2d759d608c98ac1d44e441d03afe9a0d454b9dd6c7601eb22e7c8c49b43",
+            "git_blob_sha1": "8e8e2dc6e6e8b0299472f512ac1bb26f044c648f",
             "fingerprint": null,
             "revision_role": "candidate"
           },
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": null,
-            "module": "jdk.m3.arrays",
-            "path": "m3/arrays/src/main/native/m3_packed_codec.c",
+            "commit": "e8e1e837a640f6b5a92226271a60cc9821d44cc0",
+            "module": "jdk.m3.collections",
+            "path": "src/jdk.m3.collections/share/native/libm3arrays/m3_packed_codec.c",
             "symbol": "target-owned signed-packed/unsigned64/ZigZag64 kernels",
             "signatures": [
               "target-owned signed-packed/unsigned64/ZigZag64 kernels"
             ],
-            "sha256": null,
-            "git_blob_sha1": null,
+            "sha256": "fbcf733e357d3bb66474a0f65924e72c4bf11df736216636f1c4f8e6b4006437",
+            "git_blob_sha1": "e9351bb60cac0942a4cac3650aa926ac622b33be",
             "fingerprint": null,
             "revision_role": "candidate"
           },
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": null,
-            "module": "jdk.m3.arrays",
-            "path": "m3/arrays/src/main/native/m3_packed_codec_jni.c",
+            "commit": "e8e1e837a640f6b5a92226271a60cc9821d44cc0",
+            "module": "jdk.m3.collections",
+            "path": "src/jdk.m3.collections/share/native/libm3arrays/m3_packed_codec_jni.c",
             "symbol": "M3ArrayNative packed/VInt JNI exports",
             "signatures": [
               "M3ArrayNative packed/VInt JNI exports"
             ],
-            "sha256": null,
-            "git_blob_sha1": null,
+            "sha256": "8ae3954811624e79f5e3bd035a92680919db716bd6d41250805f2fd06d898b03",
+            "git_blob_sha1": "dd3da8bd72cc30eebf2d3622e795f94ebfa1d973",
             "fingerprint": null,
             "revision_role": "candidate"
           },
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": null,
-            "module": "jdk.m3.arrays",
-            "path": "m3/arrays/src/main/native/include/m3_packed_codec.h",
+            "commit": "e8e1e837a640f6b5a92226271a60cc9821d44cc0",
+            "module": "jdk.m3.collections",
+            "path": "src/jdk.m3.collections/share/native/libm3arrays/include/m3_packed_codec.h",
             "symbol": "target-owned packed codec declarations",
             "signatures": [
               "target-owned packed codec declarations"
             ],
-            "sha256": null,
-            "git_blob_sha1": null,
+            "sha256": "238caab653c88fd34fd5a1a8d08b40ec061ea08059f9fa9bbb0edd6d07cdd3c5",
+            "git_blob_sha1": "646de8ef093639cf553a505c9d49f5a056df51bf",
             "fingerprint": null,
             "revision_role": "candidate"
           }
@@ -11469,6 +11643,67 @@
               "repo": "hsoliwal/M3jdk21",
               "commit": null,
               "module": "com.m3.arrays",
+              "path": "m3/arrays/src/main/native/include/m3_packed_codec.h",
+              "symbol": "target-owned packed codec declarations",
+              "signatures": [
+                "target-owned packed codec declarations"
+              ],
+              "sha256": null,
+              "git_blob_sha1": null,
+              "fingerprint": null,
+              "revision_role": "candidate"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "b9cc756f726de31af10652b5583d9bba58ba27b2",
+              "module": "jdk.m3.arrays",
+              "path": "m3/arrays/src/main/java/jdk/m3/arrays/M3ArrayNative.java",
+              "symbol": "jdk.m3.arrays.M3ArrayNative",
+              "signatures": [
+                "byte[] encodePackedRequired(long[],int)",
+                "long[] decodePackedRequired(byte[],int)",
+                "byte[] encodeUnsigned64Required(long[])",
+                "long[] decodeUnsigned64Required(byte[])",
+                "byte[] encodeZigZag64Required(long[])",
+                "long[] decodeZigZag64Required(byte[])"
+              ],
+              "sha256": "882cb9c52d4247dc23a7a00fd658867a4968ef99884ad939ca932b3c217cfb95",
+              "git_blob_sha1": "71806f64bafa5a7e5a90ecc0eda8478546698074",
+              "fingerprint": null,
+              "revision_role": "candidate"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": null,
+              "module": "jdk.m3.arrays",
+              "path": "m3/arrays/src/main/native/m3_packed_codec.c",
+              "symbol": "target-owned signed-packed/unsigned64/ZigZag64 kernels",
+              "signatures": [
+                "target-owned signed-packed/unsigned64/ZigZag64 kernels"
+              ],
+              "sha256": null,
+              "git_blob_sha1": null,
+              "fingerprint": null,
+              "revision_role": "candidate"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": null,
+              "module": "jdk.m3.arrays",
+              "path": "m3/arrays/src/main/native/m3_packed_codec_jni.c",
+              "symbol": "M3ArrayNative packed/VInt JNI exports",
+              "signatures": [
+                "M3ArrayNative packed/VInt JNI exports"
+              ],
+              "sha256": null,
+              "git_blob_sha1": null,
+              "fingerprint": null,
+              "revision_role": "candidate"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": null,
+              "module": "jdk.m3.arrays",
               "path": "m3/arrays/src/main/native/include/m3_packed_codec.h",
               "symbol": "target-owned packed codec declarations",
               "signatures": [
