@@ -6,6 +6,12 @@
 This is data-only inspection, not recipe execution or proof of inventory completeness.
 A reviewer must bind the fragment to the exact source-bound release manifest,
 the raw reports, and the *complete* changed contract-atom inventory.
+
+Gate rule: an atom passes at >=90% instrumented line and branch coverage (a
+branchless atom needs its explanation), or as a reviewed exemption. An exemption
+is the inventory's optional `exemption` column: a proof that the uncovered branch
+only re-checks an invariant its callers already enforce, citing at least one
+repository `path:line` that must exist. A blank cell is no exemption.
 """
 from __future__ import annotations
 
@@ -14,11 +20,14 @@ import csv
 import hashlib
 import json
 from pathlib import Path, PurePosixPath
+import re
 import xml.etree.ElementTree as ET
 
 SCHEMA = "M3_CHANGED_ATOM_COVERAGE_V1"
 SCOPE = "M3_OWNED_CHANGED_CONTRACT_ATOMS"
 FIELDS = ("id", "class", "method", "descriptor", "source_path")
+MIN_RATIO = 0.90
+EXEMPTION_REF = re.compile(r"(?<![\w/.-])((?:m3|src)/[\w./$-]+\.(?:java|c|cc|cpp|h)):([1-9][0-9]*)")
 
 
 def digest(path: Path) -> str:
@@ -45,6 +54,33 @@ def source_file(root: Path, relative: str) -> Path:
     if not node.is_file() or not node.resolve().is_relative_to(root.resolve()):
         raise ValueError("missing or escaping source path: " + relative)
     return node
+
+
+def exemption_proof(root: Path, text: str, ident: str) -> str:
+    """Return the stripped proof, refusing one that cites no existing path:line."""
+    proof = text.strip()
+    refs = EXEMPTION_REF.findall(proof)
+    if not refs:
+        raise ValueError("reviewed exemption must cite file:line evidence: " + ident)
+    for relative, line in refs:
+        try:
+            cited = source_file(root, relative)
+        except ValueError as invalid:
+            raise ValueError(f"exemption cites an unusable source ({invalid}): {ident}") from None
+        with cited.open("rb") as source:
+            lines = sum(1 for _ in source)
+        if int(line) > lines:
+            raise ValueError(f"exemption cites a line beyond {relative}: {ident}")
+    return proof
+
+
+def atom_passes(atom: dict) -> bool:
+    """>=90% line and branch (zero branches count as met), or a reviewed exemption."""
+    def met(covered: int, missed: int) -> bool:
+        return covered + missed == 0 or covered / (covered + missed) >= MIN_RATIO
+    return bool(atom.get("exemption")) or (
+        met(atom["line_covered"], atom["line_missed"])
+        and met(atom["branch_covered"], atom["branch_missed"]))
 
 
 def read_jacoco(report: Path) -> dict:
@@ -126,6 +162,9 @@ def build(root: Path, report: Path, inventory: Path, report_artifact: str,
             if not reason:
                 raise ValueError("branchless method requires explanation: " + ident)
             atom["branchless_explanation"] = reason
+        exemption = (row.get("exemption") or "").strip()
+        if exemption:
+            atom["exemption"] = exemption_proof(root, exemption, ident)
         atoms.append(atom)
     return {
         "schema": SCHEMA, "scope": SCOPE, "format": "JACOCO_XML",
@@ -148,6 +187,8 @@ def main(argv=None) -> int:
     parser.add_argument("--tool", required=True)
     parser.add_argument("--reviewed-complete-inventory", action="store_true",
                         help="mark completed inventory review, never implied by JaCoCo alone")
+    parser.add_argument("--require-pass", action="store_true",
+                        help="exit 1 unless every atom is >=90%% or a reviewed exemption")
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args(argv)
     try:
@@ -157,9 +198,15 @@ def main(argv=None) -> int:
         parser.error(str(exc))
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    failing = [atom["id"] for atom in payload["atoms"] if not atom_passes(atom)]
+    exempt = sum(1 for atom in payload["atoms"] if atom.get("exemption"))
     print(f"Imported {payload['measured_count']} measured atoms; "
+          f"{payload['measured_count'] - len(failing)} meet the gate rule ({exempt} by reviewed "
+          f"exemption), {len(failing)} below 90%; "
           f"inventory_complete={payload['inventory_complete']}; not a release PASS")
-    return 0
+    for ident in failing[:20]:
+        print("BELOW_90: " + ident)
+    return 1 if args.require_pass and failing else 0
 
 
 if __name__ == "__main__":

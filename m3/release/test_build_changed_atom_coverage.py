@@ -225,5 +225,54 @@ class ImporterTest(unittest.TestCase):
                                   receipt["atoms"][0]["branch_missed"]))
 
 
+    def below_threshold_with_exemption(self, exemption):
+        """Rewrite the fixture to 50% line coverage and set the inventory exemption cell."""
+        self.report.write_text(self.report.read_text().replace(
+            '<counter type="LINE" missed="1" covered="19"/>',
+            '<counter type="LINE" missed="10" covered="10"/>'))
+        self.inventory.write_text(
+            "id\tclass\tmethod\tdescriptor\tsource_path\tbranchless_explanation\texemption\n"
+            "example.run\tcom/m3/Example\trun\t()Z\tm3/core/src/com/m3/Example.java\t\t"
+            + exemption + "\n")
+
+    def require_pass(self):
+        import contextlib
+        import io
+        args = ["--root", str(self.root), "--report", str(self.report),
+                "--inventory", str(self.inventory), "--report-artifact", "coverage.xml",
+                "--inventory-artifact", "atoms.tsv", "--tool", "JaCoCo fixture",
+                "--reviewed-complete-inventory", "--require-pass",
+                "--out", str(self.root / "gate.json")]
+        with contextlib.redirect_stdout(io.StringIO()):
+            return importer.main(args)
+
+    def test_unexempted_atom_below_threshold_fails_the_gate_rule(self):
+        for blank in ("", "   "):
+            with self.subTest(exemption=repr(blank)):
+                self.below_threshold_with_exemption(blank)
+                atom = self.build(True)["atoms"][0]
+                self.assertNotIn("exemption", atom)
+                self.assertFalse(importer.atom_passes(atom))
+                self.assertEqual(1, self.require_pass())
+
+    def test_exemption_without_file_line_proof_is_refused(self):
+        for proof in ("unreachable guard, reviewed",
+                      "guard re-checks caller invariant m3/core/src/com/m3/Missing.java:1",
+                      "guard re-checks caller invariant m3/core/src/com/m3/Example.java:2"):
+            with self.subTest(proof=proof):
+                self.below_threshold_with_exemption(proof)
+                with self.assertRaisesRegex(ValueError, "exemption"):
+                    self.build(True)
+
+    def test_exemption_with_file_line_proof_passes(self):
+        proof = "run() re-checks the invariant its caller enforces at m3/core/src/com/m3/Example.java:1"
+        self.below_threshold_with_exemption(proof)
+        atom = self.build(True)["atoms"][0]
+        self.assertEqual(proof, atom["exemption"])
+        self.assertEqual((10, 10), (atom["line_covered"], atom["line_missed"]))
+        self.assertTrue(importer.atom_passes(atom))
+        self.assertEqual(0, self.require_pass())
+
+
 if __name__ == "__main__":
     unittest.main()

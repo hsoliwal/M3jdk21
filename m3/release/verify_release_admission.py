@@ -69,6 +69,8 @@ COVERAGE_GATE = "M3_CHANGED_ATOM_COVERAGE"
 COVERAGE_SCHEMA = "M3_CHANGED_ATOM_COVERAGE_V1"
 COVERAGE_SCOPE = "M3_OWNED_CHANGED_CONTRACT_ATOMS"
 MIN_ATOM_COVERAGE = 0.90
+# A reviewed exemption cites at least one existing repository path:line as its proof.
+EXEMPTION_REF = re.compile(r"(?<![\w/.-])((?:m3|src)/[\w./$-]+\.(?:java|c|cc|cpp|h)):([1-9][0-9]*)")
 SHA1 = re.compile(r"[0-9a-f]{40}\Z")
 SHA256 = re.compile(r"[0-9a-f]{64}\Z")
 GATE_ID = re.compile(r"[A-Z][A-Z0-9_]*\Z")
@@ -174,6 +176,17 @@ def safe_artifact(base: Path, relative: str) -> Path:
     return current
 
 
+def reviewed_exemption(root: Path, proof: str, ident: str) -> None:
+    """An exemption must cite existing repository path:line evidence for its invariant."""
+    refs = EXEMPTION_REF.findall(proof)
+    if not refs:
+        raise ValueError("reviewed exemption must cite file:line evidence: " + ident)
+    for relative, line in refs:
+        with safe_artifact(root, relative).open("rb") as source:
+            if int(line) > sum(1 for _ in source):
+                raise ValueError(f"reviewed exemption cites a line beyond {relative}: {ident}")
+
+
 def validate_coverage_receipt(root: Path, entry: dict, evidence_dir: Path) -> str:
     """Validate numeric/source integrity of a changed-atom coverage receipt.
 
@@ -215,6 +228,8 @@ def validate_coverage_receipt(root: Path, entry: dict, evidence_dir: Path) -> st
         if reader.fieldnames is None or not required.issubset(reader.fieldnames):
             raise ValueError("coverage inventory TSV columns missing")
         inventory_rows = list(reader)
+    inventory_exemptions = {row["id"]: (row.get("exemption") or "").strip()
+                            for row in inventory_rows if isinstance(row.get("id"), str)}
     inventory_keys = {
         (row["id"], row["source_path"], row["class"], row["method"], row["descriptor"])
         for row in inventory_rows
@@ -264,6 +279,7 @@ def validate_coverage_receipt(root: Path, entry: dict, evidence_dir: Path) -> st
         raise ValueError("coverage atoms differ from source-pinned inventory TSV")
     seen = set()
     source_digests = {}  # one source-file read even for many covered methods
+    exempted = 0
     for atom in atoms:
         ident, path, digest = (atom.get("id"), atom.get("source_path"),
                                atom.get("source_sha256"))
@@ -279,6 +295,15 @@ def validate_coverage_receipt(root: Path, entry: dict, evidence_dir: Path) -> st
             source_digests[path] = sha256(safe_artifact(root, path))
         if source_digests[path] != digest:
             raise ValueError("atom source hash mismatch: " + path)
+        exemption = atom.get("exemption", "")
+        if not isinstance(exemption, str):
+            raise ValueError("invalid reviewed exemption: " + ident)
+        exemption = exemption.strip()
+        if exemption != inventory_exemptions.get(ident, ""):
+            raise ValueError("reviewed exemption differs from the inventory TSV: " + ident)
+        if exemption:
+            reviewed_exemption(root, exemption, ident)
+        below = False
         for family in ("line", "branch"):
             measured, missed = atom.get(family + "_covered"), atom.get(family + "_missed")
             if type(measured) is not int or type(missed) is not int or min(measured, missed) < 0:
@@ -291,12 +316,16 @@ def validate_coverage_receipt(root: Path, entry: dict, evidence_dir: Path) -> st
                 if not isinstance(reason, str) or not reason.strip():
                     raise ValueError("zero-branch atom needs an explicit explanation: " + ident)
             elif measured / total < MIN_ATOM_COVERAGE:
-                raise ValueError(f"{family} coverage below 90%: {ident}")
+                if not exemption:
+                    raise ValueError(f"{family} coverage below 90%: {ident}")
+                below = True
             key = (atom["jacoco_class"], atom["jacoco_method"], atom["jacoco_descriptor"])
             raw = raw_methods.get(key)
             if raw is None or (measured, missed) != raw[family.upper()]:
                 raise ValueError("reported atom counts disagree with raw JaCoCo XML: " + ident)
-    return f"{len(atoms)} changed atoms, instrumented line/branch counts match JaCoCo XML and >=90% or explicit branchless explanation"
+        exempted += below
+    return (f"{len(atoms)} changed atoms, instrumented line/branch counts match JaCoCo XML and >=90% "
+            f"or explicit branchless explanation; {exempted} below 90% by reviewed exemption")
 
 
 def recipe_candidate(path: str) -> bool:

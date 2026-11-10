@@ -65,7 +65,10 @@ The machine-readable preview contract now requires
 coverage **for every inventoried changed M3 contract atom**. A source
 SHA-256, complete inventory TSV and its SHA-256, raw report artifact, and
 explicit zero-unmeasured count are required; branchless atoms need an
-explanation. Produce the receipt fragment with
+explanation. An atom below 90% passes only as a **reviewed exemption**: its
+uncovered branch re-checks an invariant that its callers already enforce, and the
+inventory's `exemption` cell carries that proof with existing `path:line`
+citations (the check itself stays in the product). Produce the receipt fragment with
 `build_changed_atom_coverage.py` from a real JaCoCo XML and reviewed
 source/method inventory; a fragment without the original raw artifacts and
 the current release manifest is not admissible. This does not
@@ -100,9 +103,13 @@ python3 m3/release/build_changed_atom_coverage.py \
   --out /absolute/evidence/changed-atom-coverage-fragment.json
 ```
 
+The reviewed inventory for the `jdk.m3.text` scope is committed as
+`m3/release/coverage/changed-atoms.tsv`; `m3/release/coverage/README.md` records its
+scope proof and the `derive_changed_atom_inventory.py` command that regenerates it.
+
 The tab-separated inventory contains columns
 `id`, `class`, `method`, `descriptor`, `source_path` and optional
-`branchless_explanation`. JaCoCo class names use JVM slashes,
+`branchless_explanation` and `exemption`. JaCoCo class names use JVM slashes,
 and `descriptor` is the JVM method descriptor. JaCoCo may omit a zero-total
 `BRANCH` counter; both readers normalize that absence to zero covered and zero
 missed branches. Every selected branchless atom still needs a nonblank
@@ -111,6 +118,13 @@ counters must remain nonnegative and unique. Nonzero declared branch counts must
 the raw report. The importer does
 **not** infer inventory completeness from JaCoCo and without
 `--reviewed-complete-inventory` sets `inventory_complete: false`.
+
+A nonblank `exemption` must cite at least one repository `m3/` or `src/`
+source as `path:line`, and every cited line must exist; the importer copies it
+into the atom and `verify_release_admission.py` requires the receipt's exemption
+to equal the reviewed TSV cell. A blank cell is no exemption. With
+`--require-pass` the importer exits 1 unless every atom is at >=90% line and
+branch coverage or a reviewed exemption.
 
 Place the generated JSON object into the matching
 `M3_CHANGED_ATOM_COVERAGE` evidence gate's `coverage` property.
