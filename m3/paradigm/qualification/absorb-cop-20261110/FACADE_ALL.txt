@@ -1,0 +1,14 @@
+FACADE_ONLY AbstractFactoryEventPublisher.class
+FACADE_ONLY AbstractRegistryEventPublisher.class
+FACADE_ONLY AbstractSelfContainedDb.class
+FACADE_ONLY ICacheEventPublisher.class
+FACADE_ONLY IEmotionDetector.class
+FACADE_ONLY IFactoryEventPublisher.class
+FACADE_ONLY IIntentExtractor.class
+FACADE_ONLY IOutcome.class
+FACADE_ONLY IRegistryEventPublisher.class
+FACADE_ONLY ISessionAnalyzer.class
+FACADE_ONLY LazyInitializationUtils.class
+FACADE_ONLY StringConstantUtils.class
+FACADE_ONLY VarHandleUtils.class
+FACADE_ALL equal=431 facade_only=13 residual=0

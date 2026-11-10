@@ -1,0 +1,553 @@
+class	m3_name	reason
+AbstractBaton	AbstractBaton	the donor source does not compile in com.synexia develop 8ab80ea57d9f (e.g. nested types of IContextMemento used unqualified)
+AbstractCacheEventPublisher	AbstractCacheEventPublisher	the donor source does not compile in com.synexia develop 8ab80ea57d9f (e.g. nested types of IContextMemento used unqualified)
+AbstractCircuitBreaker	AbstractCircuitBreaker	the donor source does not compile in com.synexia develop 8ab80ea57d9f (e.g. nested types of IContextMemento used unqualified)
+AbstractContainer	AbstractContainer	the donor source does not compile in com.synexia develop 8ab80ea57d9f (e.g. nested types of IContextMemento used unqualified)
+AbstractContextCollapse	AbstractContextCollapse	the donor source does not compile in com.synexia develop 8ab80ea57d9f (e.g. nested types of IContextMemento used unqualified)
+AbstractContextComponent	AbstractContextComponent	the donor source does not compile in com.synexia develop 8ab80ea57d9f (e.g. nested types of IContextMemento used unqualified)
+AbstractContextKernel	AbstractContextKernel	the donor source does not compile in com.synexia develop 8ab80ea57d9f (e.g. nested types of IContextMemento used unqualified)
+AbstractEventStore	AbstractEventStore	the donor source does not compile in com.synexia develop 8ab80ea57d9f (e.g. nested types of IContextMemento used unqualified)
+AbstractGlyphPool	AbstractGlyphPool	the donor source does not compile in com.synexia develop 8ab80ea57d9f (e.g. nested types of IContextMemento used unqualified)
+AbstractGlyphifiable	AbstractGlyphifiable	the donor source does not compile in com.synexia develop 8ab80ea57d9f (e.g. nested types of IContextMemento used unqualified)
+AbstractInteractable	AbstractInteractable	the donor source does not compile in com.synexia develop 8ab80ea57d9f (e.g. nested types of IContextMemento used unqualified)
+AbstractInteractableEvent	AbstractInteractableEvent	the donor source does not compile in com.synexia develop 8ab80ea57d9f (e.g. nested types of IContextMemento used unqualified)
+AbstractSequencer	AbstractSequencer	the donor source does not compile in com.synexia develop 8ab80ea57d9f (e.g. nested types of IContextMemento used unqualified)
+AbstractStringifiable	AbstractStringifiable	the donor source does not compile in com.synexia develop 8ab80ea57d9f (e.g. nested types of IContextMemento used unqualified)
+AbstractVisitable	AbstractVisitable	the donor source does not compile in com.synexia develop 8ab80ea57d9f (e.g. nested types of IContextMemento used unqualified)
+IAlgebraicEffect	IAlgebraicEffect	the donor source does not compile in com.synexia develop 8ab80ea57d9f (e.g. nested types of IContextMemento used unqualified)
+IBulkhead	IBulkhead	the donor source does not compile in com.synexia develop 8ab80ea57d9f (e.g. nested types of IContextMemento used unqualified)
+ICommand	ICommand	the donor source does not compile in com.synexia develop 8ab80ea57d9f (e.g. nested types of IContextMemento used unqualified)
+IContainer	IContainer	the donor source does not compile in com.synexia develop 8ab80ea57d9f (e.g. nested types of IContextMemento used unqualified)
+IContextKernel	IContextKernel	the donor source does not compile in com.synexia develop 8ab80ea57d9f (e.g. nested types of IContextMemento used unqualified)
+IContextMemento	IContextMemento	the donor source does not compile in com.synexia develop 8ab80ea57d9f (e.g. nested types of IContextMemento used unqualified)
+IEvent	IEvent	the donor source does not compile in com.synexia develop 8ab80ea57d9f (e.g. nested types of IContextMemento used unqualified)
+IEventStore	IEventStore	the donor source does not compile in com.synexia develop 8ab80ea57d9f (e.g. nested types of IContextMemento used unqualified)
+IFileWatcher	IFileWatcher	the donor source does not compile in com.synexia develop 8ab80ea57d9f (e.g. nested types of IContextMemento used unqualified)
+IGlyphPool	IGlyphPool	the donor source does not compile in com.synexia develop 8ab80ea57d9f (e.g. nested types of IContextMemento used unqualified)
+IObservableContext	IObservableContext	the donor source does not compile in com.synexia develop 8ab80ea57d9f (e.g. nested types of IContextMemento used unqualified)
+IPointer	IPointer	the donor source does not compile in com.synexia develop 8ab80ea57d9f (e.g. nested types of IContextMemento used unqualified)
+IRateLimiter	IRateLimiter	the donor source does not compile in com.synexia develop 8ab80ea57d9f (e.g. nested types of IContextMemento used unqualified)
+IRetryPolicy	IRetryPolicy	the donor source does not compile in com.synexia develop 8ab80ea57d9f (e.g. nested types of IContextMemento used unqualified)
+ISessionConsolidator	ISessionConsolidator	the donor source does not compile in com.synexia develop 8ab80ea57d9f (e.g. nested types of IContextMemento used unqualified)
+IVirtualExecutor	IVirtualExecutor	the donor source does not compile in com.synexia develop 8ab80ea57d9f (e.g. nested types of IContextMemento used unqualified)
+QualityEvidenceReports	QualityEvidenceReports	uses java.xml, which jdk.m3.paradigm does not require (module wiring needs admission)
+AbstractContextBloom	AbstractContextBloom	needs a held class
+IContextComponent	IContextComponent	needs a held class
+GrailEventJournal	GrailEventJournal	uses java.sql, which jdk.m3.paradigm does not require (module wiring needs admission)
+IContextBloom	IContextBloom	needs a held class
+AbstractObservableContext	AbstractObservableContext	needs a held class
+IContextCollapse	IContextCollapse	needs a held class
+BoundedResourcePool	BoundedResourcePool	uses java.sql, which jdk.m3.paradigm does not require (module wiring needs admission)
+MemoryDatabase	MemoryDatabase	uses java.sql, which jdk.m3.paradigm does not require (module wiring needs admission)
+JsonMementoStore	JsonMementoStore	uses java.sql, which jdk.m3.paradigm does not require (module wiring needs admission)
+GrailThesaurus	GrailThesaurus	needs a held class
+GrailYamlPolicies	GrailYamlPolicies	needs a held class
+GrailPolicy	GrailPolicy	needs a held class
+GrailNaturalPolicy	GrailNaturalPolicy	needs a held class
+GrailPolicyInputs	GrailPolicyInputs	needs a held class
+MavenToolBindings	MavenToolBindings	needs a held class
+JsonMementoStoreTest	JsonMementoStoreTest	test of the held JsonMementoStore
+AbstractAdaptable	-	imports lombok,lombok.experimental
+AbstractAggregator	-	needs IAggregator
+AbstractAlgebraicEffect	-	imports lombok,lombok.experimental
+AbstractAspect	-	needs IExecutionContext,IResult
+AbstractBThread	-	needs ILayer,ILayerActivation
+AbstractBinding	-	needs AbstractContext
+AbstractBuilder	-	imports lombok,lombok.experimental
+AbstractChainHandler	-	imports lombok,lombok.experimental
+AbstractColony	-	needs AbstractContext,IContext
+AbstractCommand	-	imports lombok,lombok.experimental
+AbstractCompactContext	-	needs IContext
+AbstractComponent	-	needs IExecutionContext,IResult
+AbstractComponentFactory	-	needs IComponent,IComponentFactory
+AbstractContentRouter	-	needs IContentRouter
+AbstractContext	-	needs ContextBits,ContextMIndex,ContextSignalWords,ContextUid,DenseConcurrentMap
+AbstractContextAlgebra	-	needs AbstractContext
+AbstractContextCache	-	needs AbstractContext
+AbstractContextDimension	-	needs IContextDimension,ITemporal
+AbstractContextEvent	-	needs IContext
+AbstractContextEventPublisher	-	needs IContext
+AbstractContextFactory	-	needs IContext
+AbstractContextGate	-	needs AbstractContext
+AbstractContextHandle	-	needs AbstractContext
+AbstractContextListener	-	needs AbstractContext,IContext
+AbstractContextMemento	-	imports lombok,lombok.experimental
+AbstractContextNode	-	needs AbstractContext
+AbstractContextProvider	-	needs IContext
+AbstractContextRegistry	-	needs IContext
+AbstractContextRole	-	imports lombok,lombok.experimental
+AbstractContextRule	-	needs IContext
+AbstractContextTunnel	-	needs AbstractContext
+AbstractContextTuple	-	needs IContextTuple,ITemporal
+AbstractContextUnion	-	imports lombok,lombok.experimental
+AbstractContextual	-	simple name collides with another synexia main class
+AbstractContextual	-	simple name collides with another synexia main class
+AbstractCreational	-	imports lombok,lombok.experimental
+AbstractDeadLetterChannel	-	needs AbstractContext
+AbstractEffect	-	imports lombok,lombok.experimental
+AbstractEmotionDetector	-	imports lombok,lombok.experimental
+AbstractEvent	-	simple name collides with another synexia main class
+AbstractEvent	-	simple name collides with another synexia main class
+AbstractEventBus	-	needs IEffect
+AbstractEventDispatcher	-	imports lombok,lombok.experimental
+AbstractExecutionContext	-	needs IExecutionContext
+AbstractFactory	-	needs IBinding,IFactory,IKey,IProvider,IScope
+AbstractFileWatcher	-	imports lombok,lombok.experimental
+AbstractFilter	-	imports lombok,lombok.experimental
+AbstractFlyweight	-	imports lombok,lombok.experimental
+AbstractGlyph	-	imports lombok,lombok.experimental
+AbstractGraph	-	needs IGraph,INode
+AbstractHiveMind	-	needs AbstractContext
+AbstractIndexedContext	-	needs IContext
+AbstractInjectionPoint	-	needs IKey
+AbstractIntentExtractor	-	imports lombok,lombok.experimental
+AbstractInterpreter	-	needs IExecutionContext,IResult
+AbstractKey	-	needs AbstractContext
+AbstractLaw	-	needs ILaw,IResult
+AbstractLayer	-	needs AbstractContext,IContext
+AbstractLayerActivation	-	imports lombok,lombok.experimental
+AbstractLayerContext	-	imports lombok,lombok.experimental
+AbstractLayerEvent	-	needs AbstractContext
+AbstractLayerEventPublisher	-	needs ILayerEventPublisher
+AbstractLayerTransitionRule	-	needs ILayer,ILayerActivation,ILayerEvent,ILayerTransitionRule
+AbstractLazyComponent	-	needs ILazyComponent
+AbstractLifecycle	-	needs IFactory,IKey,ILifecycle,IScope
+AbstractMandelbrotContext	-	needs IMandelbrotContext
+AbstractMemento	-	needs IMemento
+AbstractMemoryAdapter	-	needs IMemoryAdapter
+AbstractModule	-	imports lombok,lombok.experimental
+AbstractNode	-	needs IContext,IResult
+AbstractObservableCollection	-	needs IObservableCollection
+AbstractObservableMemory	-	needs IObservableMemory
+AbstractObservableValue	-	needs IObservableValue
+AbstractObservableValueContext	-	needs AbstractContext
+AbstractOperation	-	needs AbstractContext
+AbstractPartialMethod	-	imports lombok,lombok.experimental
+AbstractPerInstanceLayer	-	imports lombok,lombok.experimental
+AbstractPipeline	-	imports lombok,lombok.experimental
+AbstractPostProcessor	-	needs IPostProcessor
+AbstractProceed	-	imports lombok,lombok.experimental
+AbstractProvider	-	imports lombok,lombok.experimental
+AbstractResequencer	-	needs IResequencer
+AbstractResult	-	needs IEffect,IResult
+AbstractScatterGather	-	needs IScatterGather
+AbstractScope	-	needs IKey,IProvider,IScope
+AbstractSessionAnalyzer	-	imports lombok,lombok.experimental
+AbstractSessionConsolidator	-	imports lombok,lombok.experimental
+AbstractSpecialSlot	-	needs AbstractContext
+AbstractSplitter	-	imports lombok,lombok.experimental
+AbstractSystemState	-	needs AbstractContext
+AbstractTemporal	-	needs ITemporal
+AbstractTunnelRegistry	-	needs IContextGate,IContextTunnel,ILayerContext,ITunnelRegistry
+AbstractVirtualExecutor	-	imports lombok,lombok.experimental
+AbstractVisitor	-	imports lombok,lombok.experimental
+AmalgamatedDemo	-	needs IEventBus,IRuntime
+BehaviorExecutor	-	needs IContext
+CapabilityContext	-	needs AbstractContext
+Chrome2ApiStructureAdvisor	-	needs ContextCapabilityRef,ContextPromptResult,ContextProviderRuntime,ContextStructureSample
+Chrome2ApiTransport	-	needs ContextCapabilityRef,ContextPromptResult,ContextPromptTransport
+CognitiveContext	-	needs AbstractContext,ContextFrame
+CollectorMapper	-	needs ContextRuntime,IContext
+CompactBits	-	imports com.synexia.bitop
+CompactContext	-	needs AbstractCompactContext
+CompactPerceptron	-	needs CompactSignals
+CompactSignalDelta	-	needs CompactSignals
+CompactSignalOps	-	needs CompactSignals
+CompactSignalPages	-	needs CompactSignals
+CompactSignals	-	needs CompactBits
+CompactSignalsCodec	-	needs CompactSignals
+CompactSignalsGrailCodec	-	needs CompactSignals,CompactSignalsJson
+CompactSignalsJson	-	needs CompactSignals,CompactSignalsCodec
+CompilerPass	-	needs Mapper
+ConceptContext	-	needs ContextEnvelope,ContextFacet
+ContextActionSpace	-	needs ContextAuthority,ContextEnvelope,ContextFacet
+ContextAdapterBinding	-	needs PatternContext
+ContextAdapterProvider	-	needs IContext
+ContextAdapters	-	needs ContextAdapterProvider,IContext
+ContextAddress	-	needs ContextUid,ContextUid
+ContextAddressSpace	-	needs ContextAddress,ContextUid
+ContextAlgebra	-	simple name collides with another synexia main class
+ContextAlgebra	-	simple name collides with another synexia main class
+ContextAttention	-	needs ContextAuthority,ContextEnvelope,ContextFacet
+ContextAuthority	-	simple name collides with another synexia main class
+ContextAuthority	-	simple name collides with another synexia main class
+ContextBehavior	-	simple name collides with another synexia main class
+ContextBehavior	-	simple name collides with another synexia main class
+ContextBehaviorEngine	-	simple name collides with another synexia main class
+ContextBehaviorEngine	-	simple name collides with another synexia main class
+ContextBehaviorEngines	-	needs ContextBehaviorEngine
+ContextBehaviors	-	needs ContextBehaviorEngine
+ContextBits	-	imports com.synexia.bitop
+ContextBitwiseStructureIndex	-	needs ContextStructuralFingerprint
+ContextBoundary	-	needs ContextAuthority,ContextEnvelope,ContextFacet
+ContextCanonical	-	needs ContextKey,IContext
+ContextCanonicalPool	-	needs ContextUtils,IContext
+ContextCapabilityRef	-	needs IContext
+ContextCausalClock	-	needs ContextAuthority,ContextEnvelope,ContextFacet
+ContextChange	-	needs ContextCanonical
+ContextCompactState	-	needs AbstractContext,ContextEnvelope,ContextFacet,ContextFlags,ContextSnapshot,ContextStrengths
+ContextCompatibility	-	needs ContextBoundary,ContextEnvelope,ContextFacet,ContextSnapshot
+ContextConfidence	-	needs ContextEnvelope,ContextFacet,ContextStrengths
+ContextConsistency	-	needs ContextEnvelope,ContextFacet
+ContextConsolidator	-	needs ContextEnvelope,ContextFacet
+ContextContinuity	-	needs ContextActionSpace,ContextBoundary,ContextEnvelope,ContextFacet
+ContextContinuityAssessment	-	needs ContextEnvelope,ContextFacet
+ContextContract	-	simple name collides with another synexia main class
+ContextContract	-	simple name collides with another synexia main class
+ContextDagPlanner	-	simple name collides with another synexia main class
+ContextDagPlanner	-	simple name collides with another synexia main class
+ContextDagSession	-	imports com.synexia.cop.dag.ContextDagModel
+ContextDimension	-	needs CompactBits
+ContextDisclosure	-	needs ContextAuthority,ContextEnvelope,ContextFacet
+ContextDoubleTable	-	imports org.eclipse.collections.impl.map.mutable,org.eclipse.collections.impl.map.mutable.primitive
+ContextEffectHandlers	-	needs ContextAuthority,ContextEnvelope,ContextFacet
+ContextEnvelope	-	imports org.eclipse.collections.impl.map.mutable
+ContextEnvironment	-	needs ContextEnvelope,ContextFacet
+ContextEvolution	-	needs AbstractContext,ContextAuthority,ContextEnvelope
+ContextExecution	-	simple name collides with another synexia main class
+ContextExecution	-	simple name collides with another synexia main class
+ContextFacet	-	imports com.synexia.bitop
+ContextFeedback	-	needs ContextAuthority,ContextEnvelope,ContextFacet
+ContextFlags	-	imports com.synexia.bitop
+ContextFlatTable	-	needs ContextAuthority
+ContextFocus	-	needs ContextEnvelope,ContextFacet
+ContextFrame	-	simple name collides with another synexia main class
+ContextFrame	-	simple name collides with another synexia main class
+ContextFrame	-	simple name collides with another synexia main class
+ContextGrailPacks	-	needs Grail,GrailLexicon
+ContextIdentity	-	needs AbstractContext
+ContextInspection	-	needs ContextPointer
+ContextInspectionState	-	needs ContextEnvelope,ContextSnapshot
+ContextInvariant	-	simple name collides with another synexia main class
+ContextInvariant	-	simple name collides with another synexia main class
+ContextInvocation	-	needs ContextExecution
+ContextJurisdiction	-	needs ContextAuthority,ContextBoundary,ContextEnvelope,ContextFacet
+ContextKey	-	simple name collides with another synexia main class
+ContextKey	-	simple name collides with another synexia main class
+ContextKeys	-	needs ContextConsistency,ContextKey,ContextRuleSet
+ContextLens	-	needs ContextAlgebra,ContextAuthority,ContextConsistency,ContextContract,ContextEnvelope,ContextFacet,ContextInvariant,ContextKey,ContextKeys,Cont
+ContextLifecycle	-	needs ContextEnvelope,ContextFacet,ContextKeys
+ContextLineage	-	needs ContextAuthority,ContextCausalClock,ContextEnvelope,ContextFacet,ContextIdentity
+ContextLlm	-	needs IContext
+ContextLocalLaws	-	needs ContextAuthority,ContextEnvelope,ContextFacet
+ContextMIndex	-	imports com.synexia.mindex
+ContextMIndexAdapterProvider	-	imports com.synexia.mindex
+ContextMemento	-	needs AbstractContext,ContextAuthority,ContextCompactState,ContextEnvelope,ContextFacet,ContextFlags,ContextIdentity,ContextKeys,ContextSnapshot,C
+ContextMementoCodec	-	needs ContextAuthority,ContextContract,ContextFacet,ContextInvariant,ContextMemoryStore,ContextSnapshot,ContextStrengths,ContextUid
+ContextMementoStore	-	simple name collides with another synexia main class
+ContextMementoStore	-	simple name collides with another synexia main class
+ContextMemory	-	simple name collides with another synexia main class
+ContextMemory	-	simple name collides with another synexia main class
+ContextMemoryCapture	-	needs AbstractContext,ContextCompactState,ContextEnvelope,ContextFacet,ContextIdentity,ContextMemento,ContextSnapshot
+ContextMemoryIndex	-	needs ContextCompactState,ContextEnvelope,ContextFacet,ContextTree,ContextUid,IContext
+ContextMemoryRecovery	-	needs AbstractContext,ContextEnvelope,ContextIdentity,ContextMemento,ContextMemory
+ContextMemoryState	-	needs ContextAuthority,ContextEnvelope,ContextFacet
+ContextMemoryStore	-	simple name collides with another synexia main class
+ContextMemoryStore	-	simple name collides with another synexia main class
+ContextMergePolicy	-	needs ContextAlgebra,ContextEnvelope,ContextFacet,ContextSnapshot
+ContextMergeResult	-	needs ContextEnvelope,ContextFacet,ContextMergePolicy,ContextSnapshot
+ContextMethodBinding	-	needs ContextCanonical,PatternContext
+ContextOS$Container	-	needs IContextFactory,IContextRegistry
+ContextObject	-	needs AbstractContext,ContextKey
+ContextObjectMapper	-	simple name collides with another synexia main class
+ContextObjectMapper	-	simple name collides with another synexia main class
+ContextOperation	-	needs ContextPermission
+ContextOperator	-	needs ContextEnvelope,ContextFacet
+ContextPatch	-	needs ContextAuthority,ContextContract,ContextFacet,ContextInvariant
+ContextPatchBuilder	-	needs ContextAuthority,ContextContract,ContextFacet,ContextInvariant,ContextKey,ContextPatch
+ContextPath	-	needs IContext
+ContextPerception	-	needs AbstractContext
+ContextPerceptionFabric	-	needs AbstractContext,ContextPerception
+ContextPerceptionFrame	-	needs IContext
+ContextPerceptionTransition	-	needs IContext
+ContextPermission	-	needs CompactBits
+ContextPersistent	-	needs ContextEnvelope,ContextFacet,ContextIdentity,ContextMemento
+ContextPlanningPolicy	-	needs ContextAuthority,ContextEnvelope,ContextKeys,ContextRule,ContextRuleSet,ContextSnapshot
+ContextPointer	-	needs ContextPath
+ContextPreference	-	needs ContextCanonical,ContextKey
+ContextProfile	-	needs CompactSignals,ContextDimension
+ContextProgress	-	simple name collides with another synexia main class
+ContextProgress	-	simple name collides with another synexia main class
+ContextProjection	-	needs ContextEnvelope,ContextFacet,ContextKey,ContextSnapshot
+ContextPromptResult	-	needs ContextCapabilityRef
+ContextPromptTransport	-	needs ContextCapabilityRef,ContextPromptResult
+ContextProperties	-	needs ContextKey
+ContextPropertyDefaults	-	needs ContextProperties
+ContextProvenance	-	needs ContextEnvelope,ContextFacet
+ContextProviderRegistry	-	needs ContextCapabilityRef
+ContextProviderRuntime	-	needs ContextCapabilityRef,ContextPromptResult,ContextPromptTransport,ContextProviderRegistry
+ContextQuery	-	needs ContextPath
+ContextReceipt	-	needs ContextCanonical
+ContextRecordedView	-	needs ContextMemento,ContextMemoryCapture
+ContextRecurrence	-	needs ContextEnvelope,ContextFacet,ContextOperator
+ContextRecurrenceResult	-	needs ContextEnvelope,ContextFacet,ContextRecurrence
+ContextReference	-	needs ContextUid
+ContextReferenceView	-	needs IContext
+ContextReflection	-	needs ContextAddress,ContextUid,ContextUid
+ContextReflectionField	-	needs AbstractContext,ContextProgress,IContext
+ContextReflectionFrame	-	needs ContextPath
+ContextReflectionMethod	-	needs AbstractContext,ContextInvocation,IContext
+ContextReflectionNode	-	needs IContext
+ContextReflectionObject	-	needs AbstractContext,IContext
+ContextReflectionReference	-	needs AbstractContext,IContext
+ContextReflectionValue	-	needs ContextPath
+ContextReflectionView	-	needs ContextAuthority,ContextEnvelope,ContextKeys,ContextRuleSet,ContextSnapshot
+ContextReflector	-	needs ContextInspectionState
+ContextRegeneration	-	needs ContextContinuity,ContextContinuityAssessment,ContextEnvelope,ContextFacet,ContextLineage
+ContextRegenerationResult	-	needs ContextContinuityAssessment,ContextEnvelope,ContextFacet,ContextLineage
+ContextRejectedException	-	needs ContextReceipt
+ContextRelations	-	needs ContextEnvelope,ContextFacet,ContextIdentity
+ContextResearchMemoryBridge	-	needs AbstractContext,ContextEnvelope,ContextMemoryStore
+ContextResource	-	needs ContextAuthority,ContextEnvelope,ContextFacet
+ContextRestoredGraph	-	needs ContextEnvelope
+ContextRule	-	simple name collides with another synexia main class
+ContextRule	-	simple name collides with another synexia main class
+ContextRuleSet	-	imports org.eclipse.collections.impl.list.mutable,org.eclipse.collections.impl.map.mutable
+ContextRuntime	-	needs ContextExecution,ContextKeys,ContextObjectMapper,ContextObjectMapper,ContextProgress,ContextProperties,ContextPropertyDefaults
+ContextRuntimeBindings	-	needs ContextContract,ContextEnvelope,ContextInvariant,ContextSnapshot
+ContextScalarTable	-	needs ContextAuthority
+ContextScope	-	simple name collides with another synexia main class
+ContextScope	-	simple name collides with another synexia main class
+ContextScopeBinding	-	needs ContextEnvelope,ContextFacet,ContextScope
+ContextSelection	-	needs ContextAuthority,ContextEnvelope,ContextFacet,ContextIdentity
+ContextSemanticAudit	-	needs ContextEnvelope,ContextFacet
+ContextSemanticAuditReceipt	-	needs ContextEnvelope,ContextFacet
+ContextSemanticClosure	-	needs ContextEnvelope,ContextFacet,ContextSemanticAudit,ContextSemanticAuditReceipt
+ContextSemanticIdentity	-	needs IContext
+ContextSemanticLimits	-	needs ContextSemanticIdentity,ContextUtils,IContext
+ContextSemanticMaterializer	-	needs ContextPatch,ContextRuleSet
+ContextSemanticNode	-	needs ContextSemanticIdentity,ContextUtils,IContext,ValueContext
+ContextSemanticValues	-	needs ContextKey,ContextPatch,ContextRuleSet
+ContextSignalWords	-	imports com.synexia.bitop
+ContextSnapshot	-	simple name collides with another synexia main class
+ContextSnapshot	-	simple name collides with another synexia main class
+ContextSnapshotCells	-	needs CompactSignals,CompactSignalsCodec,ContextAuthority,ContextCompactState,ContextEnvelope,ContextFacet,ContextSnapshot,ContextUid,IContext
+ContextSqliteMementoStore	-	needs ContextEnvelope,ContextFacet,ContextIdentity,ContextMemento,ContextMementoStore,ContextStrengths
+ContextStateSpace	-	needs ContextAuthority,ContextEnvelope,ContextFacet,ContextIdentity
+ContextStrengthMap	-	needs ContextStrengths
+ContextStrengthTable	-	needs ContextAuthority
+ContextStrengths	-	imports com.synexia.bitop,org.eclipse.collections.impl.list.mutable,org.eclipse.collections.impl.map.mutable
+ContextStructuralFingerprint	-	needs ContextObjectMapper
+ContextStructureAdvisor	-	needs ContextStructureSample
+ContextStructureSample	-	needs ContextStructuralFingerprint
+ContextTask	-	needs ContextBehavior,IContext
+ContextTemporal	-	needs ContextEnvelope,ContextFacet
+ContextTokenSet	-	needs ContextAuthority
+ContextTransaction	-	simple name collides with another synexia main class
+ContextTransaction	-	simple name collides with another synexia main class
+ContextTree	-	needs AbstractContext
+ContextUid	-	simple name collides with another synexia main class
+ContextUid	-	simple name collides with another synexia main class
+ContextUidPath	-	needs ContextEnvelope,ContextUid,IContext
+ContextUtils	-	needs ContextObjectMapper,ContextObjectMapper,ContextSemanticAudit,ContextSemanticAuditReceipt,ContextSemanticClosure
+ContextVersion	-	needs ContextEnvelope,ContextFacet
+ContextWrappers	-	needs ConceptContext,ContextActionSpace,ContextAttention,ContextAuthority,ContextBoundary,ContextCausalClock,ContextCompactState,ContextCompatibil
+ContractContext	-	needs ContextContract,ContextEnvelope,ContextFacet,ContextInvariant
+Converter	-	needs Mapper
+CopToolchain	-	needs ContextAuthority,Grail,JavaSourceInventory
+DagNodeContext	-	needs AbstractContext,CapabilityContext
+DefaultColony	-	needs IContext
+DefaultHiveMind	-	needs IContext,IHiveMind
+DenseConcurrentMap	-	imports org.eclipse.collections.impl.map.mutable
+DenseContext	-	needs AbstractContext
+DenseContextMemory	-	needs AbstractContext,ContextSignalWords
+DonorCatalog	-	needs LanguageScan,QualityReports
+DynamicContext	-	needs ContextEnvelope
+DynamicDag	-	needs SkillAtom
+DynamicDagContext	-	needs AbstractContext,CapabilityContext,ContextProgress,DagNodeContext,IContextEvent
+DynamicDagPlan	-	needs DynamicDag
+DynamicDagPlanner	-	needs CognitiveContext,ContextFrame
+Emit	-	needs IEffect
+FixedContext	-	needs ContextEnvelope
+FlatConcurrentMap	-	needs FlatHashMap
+FlatHashMap	-	needs LongLongConsumer
+FlatMapper	-	needs IContext
+FlatSet	-	needs FlatHashMap
+FrozenContext	-	needs ContextEnvelope
+FuzzyCapabilityInventory	-	needs CapabilityContext,ContextPlanningPolicy
+FuzzySkillRanker	-	needs ContextFrame
+Grail	-	needs ContextAuthority
+GrailCapabilities	-	needs ContextAuthority,ContextEnvelope,ContextIdentity,ContextSnapshot,Grail
+GrailCheckpoint	-	needs Grail
+GrailCodecs	-	needs Grail
+GrailCommandStore	-	needs GrailCodecs
+GrailContext	-	needs AbstractContext,IContext,IContextListener
+GrailContextMemory	-	needs ContextAuthority,ContextEnvelope,ContextIdentity,GrailCapabilities,IContextListener
+GrailContexts	-	needs CompactSignals,CompactSignalsGrailCodec,GrailCodecs,GrailCommandStore
+GrailCycle	-	needs ContextAuthority,Grail
+GrailDelta	-	needs Grail
+GrailEvolution	-	needs ContextAuthority,Grail,GrailCheckpoint,GrailDelta
+GrailJournalSession	-	needs GrailMementos,GrailStorageScope
+GrailLanguageCapabilities	-	needs ContextAuthority,ContextEnvelope,Grail
+GrailLease	-	needs ContextAuthority
+GrailLexicon	-	needs Grail
+GrailMementos	-	needs Grail,GrailCheckpoint
+GrailMerge	-	needs Grail
+GrailOutbox	-	needs Grail,GrailCodecs,GrailMementos
+GrailPolicyBridge	-	needs ContextAuthority,Grail,GrailLease
+GrailRecurrence	-	needs ContextAuthority,Grail,GrailLease
+GrailSnapshotCodec	-	needs ContextIdentity,ContextSnapshot,IContext
+GrailStorageCapabilities	-	needs ContextAuthority,ContextEnvelope,ContextSnapshot,GrailCapabilities,GrailMementos
+GrailStorageScope	-	needs GrailMementos
+GrailTrace	-	needs Grail
+IAdaptable	-	needs ContextKey
+IAggregator	-	needs IContext
+IAspect	-	needs IContext,IExecutionContext,IResult
+IBThread	-	needs ILayer,ILayerActivation
+IBinding	-	needs IContext
+IBuilder	-	needs IContext
+IChainHandler	-	needs IContext
+IColony	-	needs DefaultColony,IContext
+IComponent	-	needs IContext,IExecutionContext,IResult
+IComponentFactory	-	needs IComponent,IContext
+IContentRouter	-	needs IContext
+IContext	-	needs ContextAddress,ContextCompactState,ContextExecution,ContextExecution,ContextIdentity,ContextKey,ContextMemento,ContextMemory,ContextMemorySt
+IContextAlgebra	-	needs IContext
+IContextCache	-	needs IContext
+IContextDimension	-	needs IContext
+IContextEvent	-	needs IContext
+IContextEventPublisher	-	needs IContext,IContextEvent
+IContextFactory	-	needs IContext
+IContextGate	-	needs IContext
+IContextHandle	-	needs IContext
+IContextListener	-	needs IContext,IContextEvent
+IContextNode	-	needs IContext,IContextDimension
+IContextPointer	-	needs IMandelbrotContext
+IContextProvider	-	needs IContext
+IContextRegistry	-	needs IContext
+IContextRule	-	needs IContext
+IContextTunnel	-	needs IContext
+IContextTuple	-	needs IContext,IContextDimension
+IContextView	-	needs ContextDimension,ContextKey,ContextSnapshot
+IContextual	-	needs IContext
+ICreational	-	needs IContext
+IDeadLetterChannel	-	needs IContext
+IEffect	-	needs Log
+IEventBus	-	needs IEffect
+IEventDispatcher	-	needs IContext
+IExecutionContext	-	needs ContextExecution,ContextKeys
+IFactory	-	needs IBinding,IContext
+IFilter	-	needs IContext,IDeadLetterChannel
+IFlyweight	-	needs IContext
+IGraph	-	needs IContext
+IHiveMind	-	needs IContext
+IInjectionPoint	-	needs IKey
+IInterpreter	-	needs IComponent,IContext,IExecutionContext,IResult
+IKey	-	needs IContext
+ILaw	-	needs IContext
+ILayer	-	needs IContext
+ILayerActivation	-	needs ILayer
+ILayerContext	-	needs ILayer,ILayerActivation
+ILayerEvent	-	needs IContext
+ILayerEventPublisher	-	needs ILayer
+ILayerTransitionRule	-	needs ILayer,ILayerActivation,ILayerEvent
+ILazyComponent	-	needs IContext
+ILifecycle	-	needs IFactory,IKey
+IMandelbrotContext	-	needs IContext
+IMediator	-	needs IContext
+IMemento	-	needs IContext
+IMemoryAdapter	-	needs IContext
+IModifiableContext	-	needs ContextKey,ContextPreference,ContextReceipt,ContextTransaction,IContext,IContextView
+IModule	-	needs IBinding,IKey
+INode	-	needs IContext,IResult
+IObservableCollection	-	needs IContext
+IObservableMemory	-	needs IContext,IMemoryAdapter
+IObservableValue	-	needs IContext
+IObservableValueContext	-	needs IContext
+IOperation	-	needs IContext
+IPartialMethod	-	needs IContext,ILayer
+IPerInstanceLayer	-	needs ILayer,ILayerActivation
+IPipeline	-	needs IContext,IFilter
+IPostProcessor	-	needs IFactory
+IProceed	-	needs IContext
+IProvider	-	needs IContext
+IResequencer	-	needs IContext
+IResult	-	needs IContext
+IRuntime	-	needs IEventBus,IResult
+IScatterGather	-	needs IContext
+IScope	-	needs IKey,IProvider
+ISpecialSlot	-	needs IContext,ILayer,ILayerActivation
+ISplitter	-	needs IContext
+IState	-	needs IContext
+ITemporal	-	needs IContext
+ITunnelRegistry	-	needs IContextGate,IContextTunnel,ILayerContext
+IUndoableCommand	-	needs IContext
+IVisitor	-	needs IContext
+IndexedContext	-	needs AbstractIndexedContext
+InvocationPolicy	-	needs IContext
+IopParadigm	-	simple name collides with another synexia main class
+IopWorkflow	-	simple name collides with another synexia main class
+JanenceArtifactFamilies	-	needs LocalityDynamics,LocalityRuntime,ProductiveFriction,StructureEntropy
+JanenceFullScaleAudit	-	needs JanenceArtifactFamilies,LocalityRuntime
+JavaSourceInventory	-	imports com.sun.source.tree,com.sun.source.util
+JiniPrecomputeRemoteService	-	needs PrecomputeRequest
+LanguageScan	-	imports com.sun.source.tree,com.sun.source.util
+LanguageTools	-	needs DonorCatalog,LanguageScan
+LayerContext	-	needs ILayer,ILayerActivation
+ListContext	-	needs IContext
+LlmContext	-	needs AbstractContext,ContextPerception,IContext
+LocalJiniPrecomputeService	-	needs JiniPrecomputeRemoteService,PrecomputeCatalog,PrecomputeRequest
+LocalityConstraint	-	needs ContextCanonical
+LocalityDynamics	-	needs ContextCanonical
+LocalityEvent	-	needs ContextCanonical
+LocalityRuntime	-	needs ContextCanonical,LocalityConstraint,LocalityEvent
+Log	-	hub over M3Log
+LongLongConsumer	-	hub over M3LongLongConsumer
+MapContext	-	needs IContext
+Mapper	-	needs ContextRuntime,IContext
+MapperProvider	-	needs MapperRegistration
+MapperRegistration	-	needs IContext,Mapper
+MapperRegistry	-	needs MapperRegistration
+MapperService	-	needs ContextRuntime,IContext,MapperRegistry
+MappingPlan	-	needs ContextExecution,ContextRuntime,IContext,MapperRegistration
+MemorySession	-	needs SqliteContextMemory
+MethodContext	-	needs ContextEnvelope,ContextFacet,IContext
+MutableListContext	-	needs IContext
+MutableMapContext	-	needs IContext
+MutableValueContext	-	needs IContext
+Normalizer	-	needs Mapper
+PackedContext	-	needs AbstractCompactContext
+PackedContextFrame	-	imports com.synexia.bitop
+PackedContextMemento	-	imports com.synexia.bitop
+PackedContextMethod	-	needs PackedContextFrame
+PackedContextPolicy	-	imports com.synexia.bitop
+PackedContextState	-	imports com.synexia.bitop
+PackedContextTransitions	-	needs PackedContextFrame,PackedContextMemento,PackedContextMethod,PackedContextPolicy
+PackedStrengths	-	imports com.synexia.bitop
+Parser	-	hub over M3Parser
+PatternContext	-	simple name collides with another synexia main class
+PatternContext	-	simple name collides with another synexia main class
+PatternContextMemory	-	needs ContextAdapterBinding,ContextAuthority,ContextAuthority,ContextCanonical,ContextContract,ContextDimension,ContextFacet,ContextIdentity,Conte
+Persist	-	needs IEffect
+PrecomputeCatalog	-	needs ContextExecution,ContextPlanningPolicy,FuzzyCapabilityInventory,IContext,TaskContext
+PrecomputeExecution	-	needs IContext
+PrecomputeKernel	-	needs PrecomputeExecution
+PrecomputeKernelDescriptor	-	needs CapabilityContext
+PrecomputeProvider	-	needs PrecomputeKernel
+PrecomputeRequest	-	needs TaskContext
+PreferenceContext	-	needs ContextEnvelope,ContextFacet,IContext
+ProductiveFriction	-	needs ContextCanonical
+PropertyContext	-	needs ContextKey,IContext
+Publish	-	needs IEffect
+QualityPipeline	-	needs DonorCatalog,LanguageScan,QualityReports
+QualityReports	-	imports org.w3c.dom,org.xml.sax
+ReflectionContext	-	needs AbstractContext,ContextExecution,IContext
+ReflectionContextMapper	-	needs ContextProgress,IContext,ReflectionContext
+ReflectionMapper	-	needs ContextExecution,ContextExecution,ContextProgress,IContext,InvocationPolicy,ReflectionContext
+ReflectionMethod	-	needs InvocationPolicy,ReflectionContext
+RoleContext	-	needs ContextAuthority,ContextEnvelope,ContextFacet,IContext
+ScalarContext	-	needs ContextEnvelope,ContextFacet,IContext
+Serializer	-	needs Mapper
+SkillAtom	-	needs SkillProfile
+SkillInventory	-	needs SkillAtom
+SkillProfile	-	needs ContextFrame
+SqliteContextMemory	-	needs ContextSignalWords
+StatefulContext	-	needs ContextEnvelope,ContextFacet,IContext
+StructureEntropy	-	needs ContextCanonical
+TaskContext	-	needs AbstractContext
+UniversalContextDagPlanner	-	needs CapabilityContext,ContextDagPlanner,ContextEnvelope,ContextKey,ContextKeys,ContextSnapshot,FuzzyCapabilityInventory,TaskContext
+ValidationUtils	-	simple name collides with another synexia main class
+ValueContext	-	needs IContext
+WorkspaceArtifactLedger	-	needs ContextCanonical
+WorkspaceArtifactReceipt	-	needs ContextCanonical
+doc-info	-	no type declaration
