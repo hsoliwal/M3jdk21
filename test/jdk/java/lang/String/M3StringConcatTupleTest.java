@@ -51,7 +51,9 @@ public class M3StringConcatTupleTest {
         for (Class<?> type : TYPES) {
             MethodHandle mh = (MethodHandle) stringifier.invoke(null, type);
             if (type == String.class) {
-                check(mh == null, "String needs no stringifier");
+                // JLS 15.18.1: like every reference operand, a null String becomes "null" (stock stringOf).
+                check(mh != null && "null".equals((String) mh.invoke((String) null))
+                        && "x".equals((String) mh.invoke("x")), "String stringifier keeps null as \"null\"");
                 continue;
             }
             check(mh.type().returnType() == String.class && mh.type().parameterCount() == 1, "stringifier type " + mh.type());
