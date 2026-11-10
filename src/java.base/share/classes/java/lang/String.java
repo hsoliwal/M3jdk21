@@ -5489,7 +5489,7 @@ public final class String
                 && jdk.internal.misc.VM.isBooted()
                 && M3String.admissionEnabled()
                 && count != 0
-                ? M3String.admitCodePoints(value, offset, count)
+                ? M3String.admitCodePoints(Arrays.copyOfRange(value, offset, offset + count), 0, count)
                 : null;
     }
 
@@ -5503,12 +5503,14 @@ public final class String
                 : null;
     }
 
+    // The caller's array may be modified during construction (JDK-8311906): the M3 pool decides the coder
+    // and copies the units in separate passes, so it admits a private snapshot read exactly once.
     private static M3String maybeAdmit(char[] value, int offset, int length) {
         return M3_JOINED_STRINGS
                 && jdk.internal.misc.VM.isBooted()
                 && M3String.admissionEnabled()
                 && length != 0
-                ? M3String.admit(value, offset, length)
+                ? M3String.admit(Arrays.copyOfRange(value, offset, offset + length), 0, length)
                 : null;
     }
 
