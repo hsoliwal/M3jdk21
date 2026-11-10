@@ -27,7 +27,7 @@ import jdk.m3.collections.IndexedListSnapshot;
 
 /**
  * Opt-in generic-object List SDK entry points, distinct from existing
- * {@link M3Collections#arrayList()} which retains its JDK ArrayList return type.
+ * {@code M3Collections#arrayList()} which retains its JDK ArrayList return type.
  * These methods create actual M3-backed objects rather than pretending that a
  * primitive-long lane implements an arbitrary generic List contract.
  */

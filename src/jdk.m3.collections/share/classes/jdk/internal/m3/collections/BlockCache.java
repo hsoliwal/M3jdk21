@@ -20,7 +20,7 @@
 package jdk.internal.m3.collections;
 
 /**
- * Bounded block table behind {@link VirtualPageSource}: a fixed number of slots, each
+ * Bounded block table behind {@code VirtualPageSource}: a fixed number of slots, each
  * holding one block of <code>blockSize</code> rows of one parent key.
  *
  * <p>All state is packed into <code>int</code> lanes and one reusable cell array; no

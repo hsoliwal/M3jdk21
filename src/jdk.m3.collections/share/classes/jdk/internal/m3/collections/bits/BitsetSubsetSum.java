@@ -19,7 +19,7 @@ import jdk.m3.collections.bits.PackedBitVector;
 
 /**
  * 0/1 subset-sum reachability for nonnegative integer weights and a bounded sum domain.
- * Template transition R |= R << weight, descending words so one item is never reused.
+ * Template transition R |= R &lt;&lt; weight, descending words so one item is never reused.
  * Handles zero shifts and cross-word carry explicitly; unused tail bits are always zero.
  * O(ceil((limit+1)/64)) per accepted weight; one long[] retained, no per-sum objects.
  *

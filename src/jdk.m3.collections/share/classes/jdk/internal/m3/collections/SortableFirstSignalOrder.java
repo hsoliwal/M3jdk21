@@ -19,7 +19,7 @@ import java.util.function.IntBinaryOperator;
 import java.util.function.IntToLongFunction;
 
 /**
- * First-pass {@link Sortable} signal ordering over stable primitive IDs.
+ * First-pass {@code Sortable} signal ordering over stable primitive IDs.
  *
  * <p>The existing {@link SortSignalLane} owns cached primitive signals and
  * dependency revision evidence. This adapter never retains Entry, Node, boxed

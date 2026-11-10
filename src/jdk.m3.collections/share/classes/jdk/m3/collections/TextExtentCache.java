@@ -22,7 +22,7 @@ import java.util.Objects;
  *
  * <p>Rows that share a label share its measurement: computing the widest row
  * of a column measures every distinct label once, not every row. A label is an
- * {@link LabelPool} id or an {@link M3ShortLabel} value (both non-negative
+ * {@code LabelPool} id or an {@code M3ShortLabel} value (both non-negative
  * {@code long}s); values pack width and height into one {@code long}
  * ({@link #pack(int, int)}). Lookup is open addressing with linear probing and
  * backward-shift deletion over parallel label, font and extent lanes; when the

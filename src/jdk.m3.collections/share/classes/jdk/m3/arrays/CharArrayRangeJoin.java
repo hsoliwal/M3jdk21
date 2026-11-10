@@ -4,7 +4,7 @@ package jdk.m3.arrays;
 
 /**
  * M3 SDK scaffold of {@code jdk.internal.m3.indexstring.MIndexCharArrayRangeJoin}: declarations received, atoms not yet received.
- * Every member body throws {@link M3NotYetReceived}.
+ * Every member body throws {@code M3NotYetReceived}.
  *
  * <p>Lineage: Synexia {@code m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexCharArrayRangeJoin.java}
  * blob {@code 70db4fbd97b9c70652cccfb30bae5004dd327d59} at develop {@code 11c94feb18155a53cc213708c353791132edc4a7},

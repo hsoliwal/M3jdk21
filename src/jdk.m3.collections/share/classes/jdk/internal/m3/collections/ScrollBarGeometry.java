@@ -25,7 +25,7 @@ package jdk.internal.m3.collections;
  * (docs/m3/SCROLLBAR_GEOMETRY.md, measured by <code>ScrollBarGeometryOracle</code>).
  * <p>
  * All methods work on one axis, in pixels, relative to the start of the track (the shaft between the
- * arrow buttons), with the values of {@link ScrollBar}: <code>minimum</code>, <code>maximum</code>,
+ * arrow buttons), with the values of {@code ScrollBar}: <code>minimum</code>, <code>maximum</code>,
  * <code>thumb</code> and <code>selection</code>. The native bar receives them as
  * <code>nMin = minimum</code>, <code>nMax = maximum</code>, <code>nPage = thumb + 1</code>.
  * Measured rules (win32, 100 %):

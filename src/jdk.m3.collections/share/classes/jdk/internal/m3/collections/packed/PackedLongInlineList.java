@@ -18,7 +18,7 @@ import jdk.internal.m3.collections.HeapGrowth;
  *
  * <p>The first four values live in scalar fields, so an empty or tiny list retains no separate
  * primitive payload array. The fifth value spills once into the ordinary primitive-array regime.
- * Existing {@link M3LongArrayList} remains the general one-array owner.</p>
+ * Existing {@code M3LongArrayList} remains the general one-array owner.</p>
  */
 //FLLDCIM: RELOCATE - donor blob c0b02969ffe9 at d5ad5090d87e; recipe m3/collections/qualification/census2-t2-20261106/relocate.py v6
 public final class PackedLongInlineList implements LongSequence, LongStack {

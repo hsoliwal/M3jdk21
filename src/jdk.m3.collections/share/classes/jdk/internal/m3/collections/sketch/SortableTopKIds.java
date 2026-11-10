@@ -23,7 +23,7 @@ import jdk.internal.m3.collections.SortableFirstSignalOrder;
  * Exact top-K sorting over primitive stable IDs without materializing any item or Entry object.
  *
  * <p>The caller's {@code exactOrder} may be {@link SortableFirstSignalOrder}:
- * it evaluates the first {@link Sortable} signal, reuses versioned precompute from
+ * it evaluates the first {@code Sortable} signal, reuses versioned precompute from
  * {@link SortSignalLane}, and uses exact comparison unless a compiler-qualified
  * lexicographic-prefix proof permits an early decision. This class never treats an
  * unverified first signal as an exact ordering key.</p>

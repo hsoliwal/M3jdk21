@@ -6,7 +6,7 @@ package jdk.m3.arrays;
  * The signed 48-bit lint numerical contract, exposed through primitive {@code long} values.
  *
  * <p>These helpers allocate no value objects. Physical six-byte element storage is provided by
- * {@link PackedIntArray#lint(int)}. Exact operations validate every operand and reject a result
+ * {@code PackedIntArray#lint(int)}. Exact operations validate every operand and reject a result
  * outside the signed 48-bit range. Wrapping and saturation are explicit operations.
  */
 //FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/165ceb5a020291e99ebeb89783b88e8a9686ae5c/synexia-common/src/main/java/com/synexia/common/collections/Lint.java blob a95f6ae3e10f; recipe m3/arrays/recipe/lint-storage-20261107/relocate.py v3

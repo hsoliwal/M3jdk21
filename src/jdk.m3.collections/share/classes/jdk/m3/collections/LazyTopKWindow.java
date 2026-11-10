@@ -25,7 +25,7 @@ import java.util.function.BooleanSupplier;
  * is an EXACT @Sortable-qualified ordering signal, not an unproved fuzzy score.
  * A secondary lane may refine ties; final ties follow source-row order.
  *
- * A miss takes O(n log k) comparisons and O(k) primitive scratch, k <= 4096.
+ * A miss takes O(n log k) comparisons and O(k) primitive scratch, k &lt;= 4096.
  * Cached exact prefixes are O(k) to reread and can be discarded under heap
  * pressure without losing source items. Deep pages should use an indexed AVL
  * source rather than repeatedly requesting increasing K.
