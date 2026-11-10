@@ -19,7 +19,22 @@ in the working tree, two families of findings:
   N_NAME      another Synexia identifier (Synexia*, SYNEXIA_*, synexia-*) in an executable or configuration file
 
 Documentation and ledgers (Markdown, text, TSV, NOTICE/LICENSE, m3/docs, release audits) record lineage and
-attribution, which the absorb-first rule keeps; they are not counted. The baseline (STANDALONE_BASELINE.tsv) pins
+attribution, which the absorb-first rule keeps; they are not counted. LINEAGE (2026-11-10) is data that names the donor
+inside a scoped file; it is listed in the TSV and summary under its own kind and never counted as a dependency or name:
+  L_ARCHIVE     every finding of a file under m3/qualification/<run>/.../retained-variants/ (the archive of
+                retained_source_queue.py: copies kept as history; no workflow, build or test runs them)
+  L_PROVENANCE  a D_REPO_REF line whose every donor reference is
+                (a) in a Python file with no REMOTE_ACCESS anywhere in it: a comment, a docstring, or the donor identity
+                    (DONOR_IDENTITY: the repository, its URL, #PR, or a blob/tree/commit/pull link) assigned to, keyed
+                    by, compared with or asserted against a provenance field (PROVENANCE_FIELD: *repo, *repository,
+                    *workspace, *url, *pr; never an *owner* field, which is ownership policy and stays counted);
+                (b) in a pom: inside <description> or an XML comment;
+                (c) in a YAML file outside any .github/ directory with no REMOTE_ACCESS anywhere in it: a provenance
+                    key holding only a donor identity, or the prose of an OpenRewrite recipe (description:,
+                    displayName:);
+                (d) elsewhere: a comparison field == / != donor (LINEAGE_COMPARISON) on a line with no REMOTE_ACCESS.
+                Any other use of the same string (an argument, a URL to fetch, a command line) stays D_REPO_REF.
+D_CHECKOUT, D_SECRET and D_MAVEN are never lineage outside the archive. The baseline (STANDALONE_BASELINE.tsv) pins
 the count per kind: development mode fails when a kind grows; release mode fails unless every DEPENDENCY kind is 0.
 Only the exact structured canonical Maven receipt owner in release-contract.json is passive metadata; other
 references in that contract and all executable checkout/build references remain scanned.
@@ -30,17 +45,23 @@ CLI: python -I check_standalone.py [--root DIR] [--tree REV] [--release] [--tsv 
 from __future__ import annotations
 
 import argparse
+import ast
+import io
 import json
 import os
 import re
 import subprocess
 import sys
 import threading
+import tokenize
 from pathlib import Path
 
 DEPENDENCY_KINDS = ("D_CHECKOUT", "D_SECRET", "D_MAVEN", "D_REPO_REF")
 NAMING_KINDS = ("N_PACKAGE", "N_PATH", "N_NAME")
 KINDS = DEPENDENCY_KINDS + NAMING_KINDS
+LINEAGE_KINDS = ("L_ARCHIVE", "L_PROVENANCE")
+# the donor repository, the one identity this check looks for (m3/tooling/standalone/LINEAGE_SOURCES.tsv: lineage only)
+DONOR = "hsoliwal/com.synexia"
 BASELINE = "m3/release/STANDALONE_BASELINE.tsv"
 # the files that define the patterns they look for or rewrite (this check and the JDK naming recipe crate)
 SELF = {"m3/release/check_standalone.py", "m3/release/test_check_standalone.py", BASELINE}
@@ -58,16 +79,46 @@ DOC_SUFFIXES = {".md", ".txt", ".tsv", ".rst", ".adoc", ".html", ".log", ".patch
 DOC_NAMES = {"NOTICE", "LICENSE", "COPYRIGHT", "AUTHORS", "THIRD_PARTY_NOTICES"}
 DOC_DIRS = ("m3/docs/", "m3/release/audit-", "doc/")
 GROUP_ID_LINE = re.compile(r"<groupId>\s*com\.synexia[\w.]*\s*</groupId>")
+DONOR_REF = re.compile(re.escape(DONOR) + r"\b")
 RULES = (
-    ("D_CHECKOUT", re.compile(r"repository:\s*['\"]?hsoliwal/com\.synexia\b")),
+    ("D_CHECKOUT", re.compile(r"repository:\s*['\"]?" + DONOR_REF.pattern)),
     ("D_SECRET", re.compile(r"secrets\.SYNEXIA_\w+")),
-    ("D_REPO_REF", re.compile(r"hsoliwal/com\.synexia\b")),
+    ("D_REPO_REF", DONOR_REF),
     ("N_PACKAGE", re.compile(r"^\s*(?:package|import)\s+(?:static\s+)?com\.synexia\.")),
     ("N_NAME", re.compile(r"\bSynexia\w*|\bSYNEXIA_\w+|\bsynexia[-_]\w+|\bcom\.synexia\b")),
 )
 POM_NS = re.compile(r"^\{[^}]*\}")
 PASSIVE_MAVEN_OWNER = re.compile(
     r'"M3_MAVEN_CONTROL_REACTOR"\s*:\s*"(?P<owner>hsoliwal/com\.synexia)"')
+# Lineage rules (module docstring). The archive is the one retained_source_queue.py writes, at any run directory.
+LINEAGE_ARCHIVE = re.compile(r"^m3/qualification/(?:[^/]+/)+retained-variants/")
+# Any of these anywhere in a Python file means it can reach another repository: none of its references are lineage.
+REMOTE_ACCESS = re.compile(
+    r"\bgit\s+(?:clone|fetch|pull|push|ls-remote|submodule|remote\s+add)\b"
+    r"|[\"'](?:clone|fetch|pull|push|ls-remote|submodule)[\"']"
+    r"|[\"']gh[\"']|\bgh\s+(?:api|repo|pr|release|run|workflow|auth)\b"
+    r"|\burlopen\b|\burllib\.request\b|\brequests\.\w+\(|\bhttp\.client\b|\bhttpx\b|\bwget\b|\bcurl\b"
+    r"|api\.github\.com|raw\.githubusercontent\.com|codeload\.github\.com|\bgit\+https?:"
+    r"|github\.com/[\w.-]+/[\w.-]+\.git\b")
+# Owner fields are policy (who may change a recipe), not provenance: a literal under one stays counted.
+OWNER_FIELD = re.compile(r"(?i)owner")
+# The donor named as an identity: the repository, its web URL, a pull request, or a browse link to a blob/tree/commit.
+DONOR_IDENTITY = re.compile(r"(?:https://github\.com/)?" + re.escape(DONOR)
+                            + r"(?:#\d+|/(?:blob|tree|commit|pull)/.*)?\Z", re.S)
+# A field or name that records provenance: repo, repository, workspace, url or pr, optionally prefixed (DONOR_REPO,
+# source_repository, canonical_repository, html_url). Owner fields are policy, not provenance: they stay counted.
+PROVENANCE_FIELD = re.compile(r"(?i)(?:[a-z0-9]+_)*(?:repo|repository|workspace|url|pr)\Z")
+ASSERT_CALLS = frozenset({"assertEqual", "assertNotEqual", "assertIn", "assertNotIn"})
+LINEAGE_COMPARISON = re.compile(
+    r"""(?:\[\s*(["'])(?:\w+_)?(?:repo|repository)\1\s*\]|\.get\(\s*(["'])(?:\w+_)?(?:repo|repository)\2\s*\))"""
+    r"""\s*(?:==|!=)\s*(["'])""" + re.escape(DONOR) + r"""\3""")
+MARKUP_LINEAGE = re.compile(r"<description>.*?</description>|<!--.*?-->", re.S)
+# YAML outside any .github/ directory (c): a provenance key whose whole value is a donor identity, or the prose of an
+# OpenRewrite recipe (type specs.openrewrite.org/...) under description: or displayName:, inline or as a block scalar.
+YAML_PROVENANCE = re.compile(r"""^\s*(?:-\s+)?(?P<key>[\w-]+):\s+"""
+                             r"""(?:"(?P<dq>[^"]*)"|'(?P<sq>[^']*)'|(?P<plain>[^\s"'#]\S*))(?:\s+#.*)?\s*$""")
+YAML_RECIPE = re.compile(r"^type:\s*['\"]?specs\.openrewrite\.org/", re.M)
+YAML_PROSE = re.compile(r"^(?P<indent>\s*)(?:-\s+)?(?:description|displayName):(?P<rest>.*)$")
 
 
 def dependency_scan_text(path: str, text: str) -> str:
@@ -120,6 +171,148 @@ def dependency_scan_text(path: str, text: str) -> str:
         return text[:start] + " " * (end - start) + text[end:]
     except (ValueError, RecursionError):
         return text
+
+
+def is_archive(path: str) -> bool:
+    return bool(LINEAGE_ARCHIVE.match(path))
+
+
+def provenance_field(node: ast.AST) -> bool:
+    """A name, attribute, subscript key or .get(key) whose name is a PROVENANCE_FIELD."""
+    if isinstance(node, ast.Name):
+        name = node.id
+    elif isinstance(node, ast.Attribute):
+        name = node.attr
+    elif isinstance(node, ast.Subscript) and isinstance(node.slice, ast.Constant):
+        name = node.slice.value
+    elif (isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute) and node.func.attr == "get"
+          and node.args and isinstance(node.args[0], ast.Constant)):
+        name = node.args[0].value
+    else:
+        return False
+    return isinstance(name, str) and bool(PROVENANCE_FIELD.match(name)) and not OWNER_FIELD.search(name)
+
+
+def donor_identity(node: ast.AST) -> bool:
+    """The literal names the donor only as an identity (an f-string by its leading text)."""
+    if isinstance(node, ast.JoinedStr):
+        rest = [v for v in node.values[1:] if isinstance(v, ast.Constant) and DONOR_REF.search(str(v.value))]
+        node = node.values[0] if node.values and not rest else None
+    return isinstance(node, ast.Constant) and isinstance(node.value, str) and bool(DONOR_IDENTITY.match(node.value))
+
+
+def lineage_string(node: ast.AST, parents: dict) -> bool:
+    """A docstring, or a donor identity bound to, keyed by or compared with a provenance field. Concatenation (+) and,
+    inside a comparison, a tuple/list/set of candidates are looked through; any other use is not lineage."""
+    child, parent = node, parents.get(node)
+    while (isinstance(parent, ast.BinOp) and isinstance(parent.op, ast.Add)
+           or isinstance(parent, (ast.Tuple, ast.List, ast.Set)) and isinstance(parents.get(parent), ast.Compare)):
+        child, parent = parent, parents.get(parent)
+    if isinstance(parent, ast.Expr):
+        return child is node and isinstance(node, ast.Constant)
+    if not donor_identity(node):
+        return False
+    if isinstance(parent, ast.Assign):
+        return parent.value is child and all(provenance_field(t) for t in parent.targets)
+    if isinstance(parent, ast.AnnAssign):
+        return parent.value is child and provenance_field(parent.target)
+    if isinstance(parent, ast.Dict):
+        keys = [k for k, v in zip(parent.keys, parent.values) if v is child]
+        return len(keys) == 1 and isinstance(keys[0], ast.Constant) and provenance_field(ast.Name(id=str(keys[0].value)))
+    if isinstance(parent, ast.keyword):
+        return parent.arg is not None and provenance_field(ast.Name(id=parent.arg))
+    if isinstance(parent, ast.Compare):
+        operands = [parent.left, *parent.comparators]
+        return (all(isinstance(op, (ast.Eq, ast.NotEq, ast.In, ast.NotIn)) for op in parent.ops)
+                and any(provenance_field(o) for o in operands if o is not child))
+    if isinstance(parent, ast.Call) and isinstance(parent.func, ast.Attribute) and parent.func.attr in ASSERT_CALLS:
+        return child in parent.args and any(provenance_field(a) for a in parent.args if a is not child)
+    return False
+
+
+def python_lineage_lines(text: str) -> set[int]:
+    """Lines of a Python file whose every donor reference is a comment or a lineage_string. A file that can reach
+    another repository (REMOTE_ACCESS anywhere in it) or that does not parse has none."""
+    lines = text.split("\n")
+    if REMOTE_ACCESS.search(text) or len(text.splitlines()) != len(io.StringIO(text).readlines()):
+        return set()
+    try:
+        tree = ast.parse(text)
+        tokens = list(tokenize.generate_tokens(io.StringIO(text).readline))
+    except (SyntaxError, ValueError, tokenize.TokenError, RecursionError):
+        return set()
+    covered: dict[int, int] = {}
+    refused: set[int] = set()
+    for token in tokens:
+        if token.type == tokenize.COMMENT:
+            covered[token.start[0]] = covered.get(token.start[0], 0) + len(DONOR_REF.findall(token.string))
+    parents = {child: node for node in ast.walk(tree) for child in ast.iter_child_nodes(node)}
+    for node in ast.walk(tree):
+        literal = isinstance(node, ast.JoinedStr) or isinstance(node, ast.Constant) and isinstance(node.value, str)
+        if not literal or isinstance(parents.get(node), ast.JoinedStr):
+            continue
+        lineage = lineage_string(node, parents)
+        for number in range(node.lineno, node.end_lineno + 1):
+            raw = lines[number - 1].encode("utf-8")
+            start = node.col_offset if number == node.lineno else 0
+            end = node.end_col_offset if number == node.end_lineno else len(raw)
+            hits = len(DONOR_REF.findall(raw[start:end].decode("utf-8", errors="replace")))
+            if hits and lineage:
+                covered[number] = covered.get(number, 0) + hits
+            elif hits:
+                refused.add(number)
+    return {n for n, hits in covered.items()
+            if n not in refused and hits == len(DONOR_REF.findall(lines[n - 1]))}
+
+
+def markup_lineage_lines(text: str) -> set[int]:
+    """Lines of a pom whose every donor reference is inside <description> or an XML comment."""
+    spans = [m.span() for m in MARKUP_LINEAGE.finditer(text)]
+    inside: dict[int, bool] = {}
+    for match in DONOR_REF.finditer(text):
+        number = text.count("\n", 0, match.start()) + 1
+        inside[number] = inside.get(number, True) and any(a <= match.start() and match.end() <= b for a, b in spans)
+    return {n for n, ok in inside.items() if ok}
+
+
+def yaml_lineage_lines(text: str) -> set[int]:
+    """Lines of a YAML file (outside any .github/ directory) with no REMOTE_ACCESS whose donor reference is a provenance key holding
+    only a donor identity, or (in an OpenRewrite recipe) prose under description: or displayName:."""
+    if REMOTE_ACCESS.search(text):
+        return set()
+    recipe, found, block = bool(YAML_RECIPE.search(text)), set(), None
+    for number, line in enumerate(text.splitlines(), 1):
+        indent = len(line) - len(line.lstrip())
+        if block is not None and line.strip() and indent <= block:
+            block = None
+        prose = YAML_PROSE.match(line) if recipe else None
+        if prose and prose.group("rest").strip()[:1] in (">", "|"):
+            block = len(prose.group("indent"))
+        if not DONOR_REF.search(line):
+            continue
+        field = YAML_PROVENANCE.match(line)
+        if (block is not None and not prose or prose and block is None
+                or field and provenance_field(ast.Name(id=field.group("key").replace("-", "_")))
+                and DONOR_IDENTITY.match(next(v for v in field.group("dq", "sq", "plain") if v is not None))):
+            found.add(number)
+    return found
+
+
+def lineage_lines(path: str, text: str) -> set[int]:
+    """Line numbers (1-based, as scan_text counts) whose D_REPO_REF finding is L_PROVENANCE."""
+    if path.endswith(".py"):
+        return python_lineage_lines(text)
+    if is_pom(path):
+        return markup_lineage_lines(text)
+    if Path(path).suffix.lower() in (".yml", ".yaml") and ".github/" not in "/" + path:
+        found = yaml_lineage_lines(text)
+    else:
+        found = set()
+    for number, line in enumerate(text.splitlines(), 1):
+        if (DONOR_REF.search(line) and not REMOTE_ACCESS.search(line)
+                and len(DONOR_REF.findall(line)) == len(LINEAGE_COMPARISON.findall(line))):
+            found.add(number)
+    return found
 
 
 def tracked(root: Path, rev: str | None = None) -> list[str]:
@@ -225,7 +418,16 @@ def scan_text(path: str, text: str) -> list[tuple[str, str, int, str]]:
             if rule.search(line):
                 found.append((kind, path, number, original_lines[number - 1].strip()[:200]))
                 break
+    if any(kind == "D_REPO_REF" for kind, *_ in found):
+        lineage = lineage_lines(path, text)
+        found = [("L_PROVENANCE", p, n, kind + " " + t) if kind == "D_REPO_REF" and n in lineage else (kind, p, n, t)
+                 for kind, p, n, t in found]
     return found
+
+
+def as_archive(findings: list[tuple[str, str, int, str]]) -> list[tuple[str, str, int, str]]:
+    """L_ARCHIVE: every finding of an archived copy, its own kind kept in the text."""
+    return [("L_ARCHIVE", p, n, t if k == "L_PROVENANCE" else k + " " + t) for k, p, n, t in findings]
 
 
 def worktree_texts(root: Path, paths: list[str]):
@@ -243,18 +445,23 @@ def scan(root: Path, rev: str | None = None) -> dict:
     scoped = [p for p in paths if in_scope(p)]
     present = scoped if rev is not None else [p for p in scoped if (root / p).is_file()]
     texts = tree_texts(root, rev, present) if rev is not None else worktree_texts(root, present)
-    findings, poms = [], {}
+    findings, poms, archived_poms = [], {}, {}
     for path, text in texts:
-        findings += scan_text(path, text)
+        found = scan_text(path, text)
+        findings += as_archive(found) if is_archive(path) else found
         if is_pom(path):
-            poms[path] = text
-    findings += maven_findings(poms)
-    findings += [("N_PATH", p, 0, p) for p in paths if "synexia" in p.lower() and not in_scope(p) and not is_doc(p)
-                 and not is_self(p)]
-    counts = {kind: 0 for kind in KINDS}
+            (archived_poms if is_archive(path) else poms)[path] = text
+    findings += maven_findings(poms)  # an archived pom is no reactor module: it produces nothing a live pom resolves
+    findings += as_archive(maven_findings(archived_poms))
+    unscoped = [("N_PATH", p, 0, p) for p in paths if "synexia" in p.lower() and not in_scope(p) and not is_doc(p)
+                and not is_self(p)]
+    findings += [f for f in unscoped if not is_archive(f[1])] + as_archive([f for f in unscoped if is_archive(f[1])])
+    counts = {kind: 0 for kind in KINDS + LINEAGE_KINDS}
     for kind, *_ in findings:
         counts[kind] += 1
-    return {"counts": counts, "findings": findings, "scanned": len(present), "unscanned": len(scoped) - len(present)}
+    lineage = {kind: counts.pop(kind) for kind in LINEAGE_KINDS}
+    return {"counts": counts, "lineage": lineage, "findings": findings, "scanned": len(present),
+            "unscanned": len(scoped) - len(present)}
 
 
 def read_baseline(root: Path, rev: str | None = None) -> dict | None:
@@ -279,6 +486,7 @@ def verdict(result: dict, baseline: dict | None, release: bool) -> tuple[str, st
     counts = result["counts"]
     dependency = sum(counts[k] for k in DEPENDENCY_KINDS)
     summary = " ".join(f"{k}={counts[k]}" for k in KINDS) + f" scanned={result['scanned']} unscanned={result['unscanned']}"
+    summary += "".join(f" {k}={v}" for k, v in result.get("lineage", {}).items())
     if baseline is None:
         return "BLOCK", "no baseline " + BASELINE + "; " + summary
     grown = [f"{k} {baseline.get(k, 0)}->{counts[k]}" for k in KINDS if counts[k] > baseline.get(k, 0)]
