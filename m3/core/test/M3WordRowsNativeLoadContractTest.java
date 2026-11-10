@@ -6,17 +6,17 @@ import jdk.m3.text.M3WordRowsNative;
 import java.nio.file.Path;
 
 /**
- * Explicit JNI opt-in contract of the word-row bulk reader: nothing is loaded
- * implicitly, a null library is refused, and once the verified library is bound
- * further explicit loads are no-ops that never rebind another file. The bulk
- * parity itself is proved by M3WordRowsContractTest with the same library.
+ * Explicit JNI opt-in contract of the word-row bulk reader: nothing is loaded implicitly, a null
+ * library is refused, and once the verified library is bound further explicit loads are no-ops that
+ * never rebind another file. The bulk parity itself is proved by M3WordRowsContractTest with the
+ * same library.
  *
- * <p>Usage: {@code <m3_wordrows_jni library>}.</p>
+ * <p>Usage: {@code <m3_wordrows_jni library>}.
  */
 public final class M3WordRowsNativeLoadContractTest {
     private static long checks;
 
-    private M3WordRowsNativeLoadContractTest() { }
+    private M3WordRowsNativeLoadContractTest() {}
 
     private static void check(boolean condition, String message) {
         checks++;
@@ -31,7 +31,9 @@ public final class M3WordRowsNativeLoadContractTest {
             M3WordRowsNative.load(null);
             throw new IllegalStateException("null library accepted");
         } catch (NullPointerException expected) {
-            check("library".equals(expected.getMessage()), "null library refusal names the argument");
+            check(
+                    "library".equals(expected.getMessage()),
+                    "null library refusal names the argument");
         }
         check(!M3WordRowsNative.available(), "a refused load binds nothing");
         M3WordRowsNative.load(library);

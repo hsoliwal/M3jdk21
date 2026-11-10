@@ -9,17 +9,18 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Exported-API contract of the long-indexed rope: boundary-slice reuse in
- * {@code concat}, slices of slices, Writer streaming, KMP literal search edges,
- * regex/CharSequence facades and summary-record refusals. Every result is
- * compared with the equivalent {@link String} oracle.
+ * Exported-API contract of the long-indexed rope: boundary-slice reuse in {@code concat}, slices of
+ * slices, Writer streaming, KMP literal search edges, regex/CharSequence facades and summary-record
+ * refusals. Every result is compared with the equivalent {@link String} oracle.
  */
 public final class M3BigStringContractTest {
     private static long checks;
 
-    private M3BigStringContractTest() { }
+    private M3BigStringContractTest() {}
 
-    private interface Action { void run() throws Exception; }
+    private interface Action {
+        void run() throws Exception;
+    }
 
     private static void check(boolean condition, String message) {
         checks++;
@@ -27,14 +28,18 @@ public final class M3BigStringContractTest {
     }
 
     private static void same(Object expected, Object actual, String message) {
-        check(expected.equals(actual), message + ": expected <" + expected + "> but was <" + actual + ">");
+        check(
+                expected.equals(actual),
+                message + ": expected <" + expected + "> but was <" + actual + ">");
     }
 
     private static void refused(Class<? extends Throwable> type, String reason, Action action) {
         try {
             action.run();
         } catch (Throwable thrown) {
-            check(type.isInstance(thrown) && (reason == null || reason.equals(thrown.getMessage())),
+            check(
+                    type.isInstance(thrown)
+                            && (reason == null || reason.equals(thrown.getMessage())),
                     "wrong refusal " + thrown);
             return;
         }
@@ -50,7 +55,10 @@ public final class M3BigStringContractTest {
         }
         M3BigString.Summary summary = rope.summary();
         same(oracle.hashCode(), summary.javaStringHash(), message + " hash");
-        same((long) oracle.codePointCount(0, oracle.length()), summary.codePointCount(), message + " code points");
+        same(
+                (long) oracle.codePointCount(0, oracle.length()),
+                summary.codePointCount(),
+                message + " code points");
         same(oracle.chars().allMatch(c -> c <= 0x7f), summary.ascii(), message + " ascii");
     }
 
@@ -80,11 +88,17 @@ public final class M3BigStringContractTest {
         same(twice.flatten(), builder.toString(), "StringBuilder streaming of slices");
         // Ranges ending before the last chunk, at the last chunk, and empty ropes.
         sameText("hel", M3BigString.concat(rope.subSequence(0, 3)), "range before last chunk");
-        sameText(text, M3BigString.concat(M3BigString.of(), rope, rope.subSequence(4, 4)), "empty neighbours");
-        check(M3BigString.concat(M3BigString.of(), rope.subSequence(3, 3)).isEmpty(), "only empty inputs");
+        sameText(
+                text,
+                M3BigString.concat(M3BigString.of(), rope, rope.subSequence(4, 4)),
+                "empty neighbours");
+        check(
+                M3BigString.concat(M3BigString.of(), rope.subSequence(3, 3)).isEmpty(),
+                "only empty inputs");
         check(M3BigString.concat().isEmpty(), "no inputs");
         refused(NullPointerException.class, "rope", () -> M3BigString.concat(rope, null));
-        refused(IllegalArgumentException.class,
+        refused(
+                IllegalArgumentException.class,
                 "chunks must be immutable String or M3StringPiece values",
                 () -> M3BigString.of(new StringBuilder("mutable")));
     }
@@ -96,7 +110,10 @@ public final class M3BigStringContractTest {
         same((long) text.indexOf("aab"), rope.indexOf("aab", 0), "KMP restart across chunks");
         same((long) text.indexOf("aab", 3), rope.indexOf("aab", 3), "later occurrence");
         same(-1L, rope.indexOf("aab", 6), "suffix too short");
-        same(-1L, M3BigString.of("ab", "ca").indexOf("ac", 0), "bloom candidate scanned to the end");
+        same(
+                -1L,
+                M3BigString.of("ab", "ca").indexOf("ac", 0),
+                "bloom candidate scanned to the end");
         M3BigString window = M3BigString.of("abc", "def", "ghi").subSequence(0, 4);
         same(-1L, window.indexOf("da", 0), "scan stops at the range end");
         same(3L, window.indexOf("d", -5), "negative start clamps to zero");
@@ -126,15 +143,32 @@ public final class M3BigStringContractTest {
     }
 
     private static void summaryRecord() {
-        M3BigString.Summary valid = new M3BigString.Summary(0, 0, 0, 0, 0, true,
-                false, false, false, false, false, false, false, false);
+        M3BigString.Summary valid =
+                new M3BigString.Summary(
+                        0, 0, 0, 0, 0, true, false, false, false, false, false, false, false,
+                        false);
         same(valid, M3BigString.of().summary(), "empty summary value");
-        refused(IllegalArgumentException.class, "negative text summary", () -> new M3BigString.Summary(-1, 0, 0,
-                0, 0, true, false, false, false, false, false, false, false, false));
-        refused(IllegalArgumentException.class, "negative text summary", () -> new M3BigString.Summary(1, -1, 0,
-                0, 0, true, false, false, false, false, false, false, false, false));
-        refused(IllegalArgumentException.class, "negative text summary", () -> new M3BigString.Summary(1, 1, -1,
-                0, 0, true, false, false, false, false, false, false, false, false));
+        refused(
+                IllegalArgumentException.class,
+                "negative text summary",
+                () ->
+                        new M3BigString.Summary(
+                                -1, 0, 0, 0, 0, true, false, false, false, false, false, false,
+                                false, false));
+        refused(
+                IllegalArgumentException.class,
+                "negative text summary",
+                () ->
+                        new M3BigString.Summary(
+                                1, -1, 0, 0, 0, true, false, false, false, false, false, false,
+                                false, false));
+        refused(
+                IllegalArgumentException.class,
+                "negative text summary",
+                () ->
+                        new M3BigString.Summary(
+                                1, 1, -1, 0, 0, true, false, false, false, false, false, false,
+                                false, false));
     }
 
     public static void main(String[] args) throws Exception {
