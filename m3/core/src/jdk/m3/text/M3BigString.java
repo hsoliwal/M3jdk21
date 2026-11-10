@@ -273,7 +273,8 @@ public final class M3BigString {
             if (chunkStart >= end) break;
             int from = (int) Math.max(0L, start - chunkStart);
             int to = (int) Math.min((long) storage.chunkLengths[i], end - chunkStart);
-            if (from < to) destination.append(storage.chunks[i], from, to);
+            // firstChunk(start) and the break above make every visited range non-empty.
+            destination.append(storage.chunks[i], from, to);
         }
     }
 
