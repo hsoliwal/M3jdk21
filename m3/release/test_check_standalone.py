@@ -407,6 +407,69 @@ class StandaloneCheckTest(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     cs.scan(self.root)
 
+    # Recipe-ownership policy (2026-11-10): a listed guard line is P_POLICY; a guard that fetches or builds counts.
+    GUARD = ('POLICY = {"reusable_recipe_owner": "hsoliwal/com.synexia"}\n'
+             'def check(row):\n'
+             '    if row["target_scope"] != "hsoliwal/com.synexia only":\n'
+             '        raise SystemExit("recipe authoring and execution must remain exclusively in the donor")\n')
+
+    def policy(self, rows):
+        self.put(cs.POLICY_ROWS, "# notes\n" + cs.POLICY_ROWS_HEADER + "\n"
+                 + "".join(f"{path}\t{line}\tfixture\n" for path, line in rows))
+
+    def guard_rows(self, path):
+        return [(path, 'POLICY = {"reusable_recipe_owner": "hsoliwal/com.synexia"}'),
+                (path, 'if row["target_scope"] != "hsoliwal/com.synexia only":')]
+
+    def test_a_listed_ownership_guard_is_policy_not_a_dependency(self):
+        self.put("m3/compatibility/check_owner.py", self.GUARD)
+        self.assertEqual(2, self.lineage()[0]["D_REPO_REF"])
+        self.policy(self.guard_rows("m3/compatibility/check_owner.py"))
+        result = cs.scan(self.root)
+        self.assertEqual((0, 2, []), (result["counts"]["D_REPO_REF"], result["policy"]["P_POLICY"],
+                                      result["policy_not_matched"]))
+        self.assertEqual("PASS", cs.verdict(result, {k: 0 for k in cs.KINDS}, True)[0])
+        self.assertIn("P_POLICY=2", cs.verdict(result, {k: 0 for k in cs.KINDS}, True)[1])
+        self.commit()
+        self.assertEqual(2, cs.scan(self.root, "HEAD")["policy"]["P_POLICY"])
+        self.put("m3/compatibility/check_owner.py", self.GUARD.replace("only", "only, again"))
+        result = cs.scan(self.root)  # one edited guard line: the file is no longer a pure policy guard
+        self.assertEqual((2, 0), (result["counts"]["D_REPO_REF"], result["policy"]["P_POLICY"]))
+        self.assertEqual(2, len(result["policy_not_matched"]))
+
+    def test_an_ownership_guard_that_fetches_checks_out_or_builds_from_the_donor_still_counts(self):
+        live = {
+            "m3/compatibility/fetch_owner.py": self.GUARD + "import urllib.request\n"
+                                               "urllib.request.urlopen('https://api.github.com/repos/hsoliwal/com.synexia')\n",
+            "m3/compatibility/clone_owner.py": self.GUARD + "import subprocess\n"
+                                               "subprocess.run(['git', 'clone', 'https://github.com/hsoliwal/com.synexia'])\n",
+            "m3/compatibility/build_owner.py": self.GUARD + "import subprocess\n"
+                                               "subprocess.run(['mvn', '-f', '../hsoliwal/com.synexia/pom.xml', 'install'])\n",
+        }
+        rows = []
+        for path, text in live.items():
+            self.put(path, text)
+            rows += self.guard_rows(path)
+        self.put("m3/compatibility/other.py", self.GUARD)  # the same guard text, not listed for this path
+        self.policy(rows)
+        result = cs.scan(self.root)
+        self.assertEqual((3 * 3 + 2, 0), (result["counts"]["D_REPO_REF"], result["policy"]["P_POLICY"]))
+        self.assertEqual(6, len(result["policy_not_matched"]))
+        self.assertEqual("BLOCK", cs.verdict(result, {k: 99 for k in cs.KINDS}, True)[0])
+
+    def test_a_malformed_policy_list_refuses(self):
+        self.put("m3/compatibility/check_owner.py", self.GUARD)
+        path = "m3/compatibility/check_owner.py"
+        for text in (f"path\tline\n{path}\tx\n", f"path\tline\treason\n{path}\tPOLICY = 1\tr\n",
+                     f"path\tline\treason\n{path}\t hsoliwal/com.synexia\tr\n",
+                     f"path\tline\treason\n{path}\thsoliwal/com.synexia\t\n",
+                     f"path\tline\treason\n{path}\thsoliwal/com.synexia\tr\n{path}\thsoliwal/com.synexia\tr\n",
+                     f"path\tline\treason\nm3/docs/x.md\thsoliwal/com.synexia\tr\n"):
+            with self.subTest(text=text):
+                self.put(cs.POLICY_ROWS, text)
+                with self.assertRaises(ValueError):
+                    cs.scan(self.root)
+
     def test_unscanned_scoped_file_holds_release(self):
         self.put("m3/x/run.sh", "echo ok\n")
         result = cs.scan(self.root)

@@ -39,7 +39,13 @@ inside a scoped file; it is listed in the TSV and summary under its own kind and
                 requests) whose bytes other evidence pins, so the donor names cannot be edited out without breaking a
                 seal. The listing holds only while the file is byte-identical to its pinned blob and has no
                 NETWORK_CAPABILITY anywhere in it; an edited, unlisted or network-capable file counts as before.
-D_CHECKOUT, D_SECRET and D_MAVEN are never lineage outside the archive. The baseline (STANDALONE_BASELINE.tsv) pins
+POLICY (2026-11-10) is a guard that only asserts the recipe-ownership policy of AGENTS.md (recipes are authored and
+stored in the donor; this repository receives postimages): it names the donor without needing it to build, test, gate
+or release. It is listed in the TSV and summary under its own kind and never counted as a dependency:
+  P_POLICY      a D_REPO_REF line whose exact text is listed for its file in STANDALONE_POLICY.tsv, in a file with no
+                NETWORK_CAPABILITY and no other counted donor reference; a file that fetches, checks out or builds
+                from the donor counts every line, and an edited line counts again.
+D_CHECKOUT, D_SECRET and D_MAVEN are never lineage outside the archive, and never policy. The baseline (STANDALONE_BASELINE.tsv) pins
 the count per kind: development mode fails when a kind grows; release mode fails unless every DEPENDENCY kind is 0.
 Only the exact structured canonical Maven receipt owner in release-contract.json is passive metadata; other
 references in that contract and all executable checkout/build references remain scanned.
@@ -73,6 +79,10 @@ BASELINE = "m3/release/STANDALONE_BASELINE.tsv"
 LINEAGE_FILES = "m3/release/STANDALONE_LINEAGE.tsv"
 LINEAGE_FILES_HEADER = "path\tblob\treason"
 OID = re.compile(r"[0-9a-f]{40}\Z")
+# Recipe-ownership policy guards (P_POLICY): path, the exact stripped line, reason; '#' lines before the header are notes.
+POLICY_KINDS = ("P_POLICY",)
+POLICY_ROWS = "m3/release/STANDALONE_POLICY.tsv"
+POLICY_ROWS_HEADER = "path\tline\treason"
 # the files that define the patterns they look for or rewrite (this check and the JDK naming recipe crate)
 SELF = {"m3/release/check_standalone.py", "m3/release/test_check_standalone.py", BASELINE}
 SELF_PREFIX = "m3/tooling/jdk-naming/"
@@ -459,32 +469,63 @@ def git_blob_id(data: bytes) -> str:
     return hashlib.sha1(b"blob %d\0" % len(data) + data).hexdigest()
 
 
-def read_lineage_files(root: Path, rev: str | None = None) -> dict[str, str]:
-    """{path: pinned blob} of STANDALONE_LINEAGE.tsv in the working tree, or with REV the one committed in that revision;
-    empty when there is none. An exemption list is never read loosely: a malformed one refuses (ValueError)."""
+def read_exemption_rows(root: Path, rev: str | None, name: str, header: str) -> list[list[str]]:
+    """The three-column rows of an exemption list in the working tree, or with REV the one committed in that revision;
+    none when it is absent. An exemption list is never read loosely: a malformed one refuses (ValueError)."""
     if rev is None:
-        path = Path(root) / LINEAGE_FILES
+        path = Path(root) / name
         if not path.is_file():
-            return {}
+            return []
         data = path.read_bytes()
     else:
-        shown = subprocess.run(["git", "-C", str(root), "show", f"{rev}:{LINEAGE_FILES}"], capture_output=True)
+        shown = subprocess.run(["git", "-C", str(root), "show", f"{rev}:{name}"], capture_output=True)
         if shown.returncode != 0:
-            return {}
+            return []
         data = shown.stdout
     lines = data.decode("utf-8").split("\n")
     while lines and lines[0].startswith("#"):
         lines.pop(0)
-    if not lines or lines[0] != LINEAGE_FILES_HEADER or lines[-1] != "":
-        raise ValueError(f"{LINEAGE_FILES} malformed: header or final newline")
-    pinned: dict[str, str] = {}
+    if not lines or lines[0] != header or lines[-1] != "":
+        raise ValueError(f"{name} malformed: header or final newline")
+    rows = []
     for number, line in enumerate(lines[1:-1], 2):
         fields = line.split("\t")
-        if (len(fields) != 3 or fields[0] in pinned or not in_scope(fields[0]) or is_archive(fields[0])
-                or not OID.match(fields[1]) or not fields[2].strip()):
+        if (len(fields) != 3 or not in_scope(fields[0]) or is_archive(fields[0]) or not fields[2].strip()
+                or fields[:2] in [r[:2] for r in rows]):
+            raise ValueError(f"{name} malformed: row {number} after the notes")
+        rows.append(fields)
+    return rows
+
+
+def read_lineage_files(root: Path, rev: str | None = None) -> dict[str, str]:
+    """{path: pinned blob} of STANDALONE_LINEAGE.tsv (one row per path)."""
+    pinned: dict[str, str] = {}
+    for number, (path, blob, _reason) in enumerate(read_exemption_rows(root, rev, LINEAGE_FILES, LINEAGE_FILES_HEADER), 2):
+        if path in pinned or not OID.match(blob):
             raise ValueError(f"{LINEAGE_FILES} malformed: row {number} after the notes")
-        pinned[fields[0]] = fields[1]
+        pinned[path] = blob
     return pinned
+
+
+def read_policy_rows(root: Path, rev: str | None = None) -> dict[str, set[str]]:
+    """{path: {exact stripped line}} of STANDALONE_POLICY.tsv; every listed line names the donor."""
+    listed: dict[str, set[str]] = {}
+    for number, (path, line, _reason) in enumerate(read_exemption_rows(root, rev, POLICY_ROWS, POLICY_ROWS_HEADER), 2):
+        if line != line.strip() or not DONOR_REF.search(line):
+            raise ValueError(f"{POLICY_ROWS} malformed: row {number} after the notes")
+        listed.setdefault(path, set()).add(line)
+    return listed
+
+
+def as_policy(text: str, listed: set[str], findings: list[tuple[str, str, int, str]]):
+    """(findings with the listed D_REPO_REF lines as P_POLICY, listed lines not found). Nothing is policy in a file
+    with NETWORK_CAPABILITY or with a counted donor reference that is not listed (an argument, a checkout path)."""
+    lines = text.splitlines()
+    exact = {n: lines[n - 1].strip() for k, _p, n, _t in findings if k == "D_REPO_REF"}
+    if NETWORK_CAPABILITY.search(text) or any(line not in listed for line in exact.values()):
+        return findings, sorted(listed)
+    found = [("P_POLICY", p, n, k + " " + t) if k == "D_REPO_REF" else (k, p, n, t) for k, p, n, t in findings]
+    return found, sorted(listed - set(exact.values()))
 
 
 def is_sealed(root: Path, path: str, text: str, blob: str | None, pinned: str) -> bool:
@@ -514,12 +555,16 @@ def scan(root: Path, rev: str | None = None) -> dict:
     present = scoped if rev is not None else [p for p in scoped if (root / p).is_file()]
     texts = tree_texts(root, rev, present) if rev is not None else worktree_texts(root, present)
     sealed_files = read_lineage_files(root, rev)
+    policy_rows = read_policy_rows(root, rev)
     findings, poms, archived_poms, sealed = [], {}, {}, set()
+    unmatched = {path: sorted(lines) for path, lines in policy_rows.items()}
     for path, text, blob in texts:
         found = scan_text(path, text)
         if path in sealed_files and is_sealed(root, path, text, blob, sealed_files[path]):
             found = as_sealed(found)
             sealed.add(path)
+        if path in policy_rows:
+            found, unmatched[path] = as_policy(text, policy_rows[path], found)
         findings += as_archive(found) if is_archive(path) else found
         if is_pom(path):
             (archived_poms if is_archive(path) else poms)[path] = text
@@ -528,14 +573,16 @@ def scan(root: Path, rev: str | None = None) -> dict:
     unscoped = [("N_PATH", p, 0, p) for p in paths if "synexia" in p.lower() and not in_scope(p) and not is_doc(p)
                 and not is_self(p)]
     findings += [f for f in unscoped if not is_archive(f[1])] + as_archive([f for f in unscoped if is_archive(f[1])])
-    counts = {kind: 0 for kind in KINDS + LINEAGE_KINDS}
+    counts = {kind: 0 for kind in KINDS + LINEAGE_KINDS + POLICY_KINDS}
     for kind, *_ in findings:
         counts[kind] += 1
     lineage = {kind: counts.pop(kind) for kind in LINEAGE_KINDS}
+    policy = {kind: counts.pop(kind) for kind in POLICY_KINDS}
     # listed files that are not sealed here (edited, missing, not checked out or network-capable): their lines count
     stale = sorted(set(sealed_files) - sealed)
-    return {"counts": counts, "lineage": lineage, "findings": findings, "scanned": len(present),
-            "unscanned": len(scoped) - len(present), "lineage_not_sealed": stale}
+    not_policy = [f"{path}: {line}" for path, lines in sorted(unmatched.items()) for line in lines]
+    return {"counts": counts, "lineage": lineage, "policy": policy, "findings": findings, "scanned": len(present),
+            "unscanned": len(scoped) - len(present), "lineage_not_sealed": stale, "policy_not_matched": not_policy}
 
 
 def read_baseline(root: Path, rev: str | None = None) -> dict | None:
@@ -561,6 +608,7 @@ def verdict(result: dict, baseline: dict | None, release: bool) -> tuple[str, st
     dependency = sum(counts[k] for k in DEPENDENCY_KINDS)
     summary = " ".join(f"{k}={counts[k]}" for k in KINDS) + f" scanned={result['scanned']} unscanned={result['unscanned']}"
     summary += "".join(f" {k}={v}" for k, v in result.get("lineage", {}).items())
+    summary += "".join(f" {k}={v}" for k, v in result.get("policy", {}).items())
     if baseline is None:
         return "BLOCK", "no baseline " + BASELINE + "; " + summary
     grown = [f"{k} {baseline.get(k, 0)}->{counts[k]}" for k in KINDS if counts[k] > baseline.get(k, 0)]
@@ -607,6 +655,9 @@ def main(argv=None) -> int:
     for path in result["lineage_not_sealed"]:
         print(f"standalone.lineage_not_sealed\t{path}\tcounted: not byte-identical to its pinned blob, absent or "
               "network-capable", file=sys.stderr)
+    for row in result["policy_not_matched"]:
+        print(f"standalone.policy_not_matched\t{row}\tcounted or absent: line edited, file absent or "
+              "network-capable, or another donor reference in the file is counted", file=sys.stderr)
     return 0 if status == "PASS" else 1
 
 
