@@ -120,7 +120,7 @@ class RetainedSourceQueueTest(unittest.TestCase):
     def test_ledgered_retirement_is_resolved_lineage_only_for_its_exact_blob(self):
         self.archive("2930", "m3/recipes/Legacy.java", "legacy recipe\n")
         self.archive("2930", "m3/recipes/Other.java", "other recipe\n")
-        git(self.root, "add", ".")
+        git(self.root, "add", "--", self.prefix)
         git(self.root, "commit", "-qm", "retire legacy recipes")
         blob = subprocess.run(["git", "-C", str(self.root), "rev-parse",
                                f"HEAD:{self.prefix}pr2930/m3/recipes/Legacy.java"],
@@ -131,7 +131,7 @@ class RetainedSourceQueueTest(unittest.TestCase):
                 "\t".join(["m3/recipes/Other.java", "0" * 40, "100644", "RETIRE",
                            self.prefix + "pr2930/m3/recipes/Other.java", "unused", "none"])]
         put(self.root, QUEUE.CUSTODY_LEDGER, "\n".join(rows) + "\n")
-        git(self.root, "add", ".")
+        git(self.root, "add", "--", QUEUE.CUSTODY_LEDGER)
         git(self.root, "commit", "-qm", "custody ledger")
         tsv, _, summary = QUEUE.scan(self.root)
         self.assertEqual(summary["states"]["RETIRED_LEGACY_RECIPE"], 1)
@@ -139,7 +139,7 @@ class RetainedSourceQueueTest(unittest.TestCase):
         self.assertEqual(summary["unresolved_rows"], 4)
         self.assertIn("pr2930/m3/recipes/Legacy.java\t100644\t" + blob + "\t-\t-\tRETIRED_LEGACY_RECIPE\t", tsv)
         put(self.root, QUEUE.CUSTODY_LEDGER, "path\tblob\n")
-        git(self.root, "add", ".")
+        git(self.root, "add", "--", QUEUE.CUSTODY_LEDGER)
         git(self.root, "commit", "-qm", "drifted ledger header")
         with self.assertRaisesRegex(ValueError, "CUSTODY_LEDGER_HEADER_DRIFT"):
             QUEUE.scan(self.root)
