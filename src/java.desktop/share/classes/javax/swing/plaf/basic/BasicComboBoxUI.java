@@ -1980,7 +1980,11 @@ public class BasicComboBoxUI extends ComboBoxUI {
                                           comboBox.getSelectedItem() );
             }
 
-            isDisplaySizeDirty = true;
+            // a selection change (-1..-1) of a combo without an editor changes no item: the display size, which
+            // measures every item, stays valid (the next baseline or size query does not measure them again) //FLLDCIM: MARK — every-widget BasicComboBoxUI D
+            if (!(e.getIndex0() == -1 && e.getIndex1() == -1) || comboBox.isEditable()) {
+                isDisplaySizeDirty = true;
+            }
             comboBox.repaint();
         }
 
