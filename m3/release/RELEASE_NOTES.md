@@ -99,6 +99,14 @@ The candidate is one commit over `890adb6410da` with the tree of `master` `80962
 
 ## Platform matrix
 
+**Preview platform selection:** this preview ships **linux-x64 only**
+(`platform_selection` in [release-contract.json](release-contract.json); the
+`platforms` input of `m3-release.yml`). Every other platform is `NOT_CLAIMED`:
+macos-x64, macos-aarch64, windows-x64, windows-aarch64, linux-x86,
+linux-aarch64, linux-arm, linux-ppc64le, linux-riscv64, linux-s390x,
+android-arm64 and ios-arm64. No gate is dropped: `OPENJDK_SANITY_MATRIX`
+passes only when the linux-x64 runs pass on the exact final candidate.
+
 **Historical CI snapshot only:** the entries below describe 2026-10-31 observations
 at master `bb66a8c16642`, not 2026-11-07 current `master` and not a release candidate.
 Recompute build, test and coverage evidence against the final candidate commit and tree.
@@ -106,15 +114,15 @@ Recompute build, test and coverage evidence against the final candidate commit a
 
 | Platform | JDK build lane | Latest evidence | Preview state |
 | --- | --- | --- | --- |
-| linux-x64 | `main.yml` -> `build-linux.yml`, tier1 `test.yml` | Last green build: run 39250083857 (`bb6b279495ce`, 2026-10-19, another branch). `main.yml` creates jobs again (run 41153588755 at `bb66a8c16642`: 17 jobs created, run cancelled). | build pending |
-| linux-x86 | `build-linux.yml` (hs) | run 39250083857 | build pending |
-| linux-aarch64, ppc64le, riscv64, s390x, arm | `build-cross-compile.yml` (cross build only, no tests) | run 39250083857 | cross build pending |
-| windows-x64 | `build-windows.yml`, tier1 | run 39250083857 | build pending |
-| windows-aarch64 | `build-windows.yml` (HotSpot only, cross) | run 39250083857 | build pending |
-| macos-x64 | `build-macos.yml`, tier1 | run 39250083857 | build pending |
-| macos-aarch64 | `build-macos.yml` (cross from macos-15-intel) | run 39250083857 | build pending |
-| android-arm64 | none (only the C11/JNI header compile in `m3-jni-common.yml`) | run 41019153845: success | not claimed |
-| ios-arm64 | none (only the C11 source cross-compile in `m3-jni-common.yml`) | run 41019153845: success | not claimed |
+| linux-x64 | `main.yml` -> `build-linux.yml`, tier1 `test.yml` | Last green build: run 39250083857 (`bb6b279495ce`, 2026-10-19, another branch). `main.yml` creates jobs again (run 41153588755 at `bb66a8c16642`: 17 jobs created, run cancelled). | selected; build pending |
+| linux-x86 | `build-linux.yml` (hs) | run 39250083857 | NOT_CLAIMED |
+| linux-aarch64, ppc64le, riscv64, s390x, arm | `build-cross-compile.yml` (cross build only, no tests) | run 39250083857 | NOT_CLAIMED |
+| windows-x64 | `build-windows.yml`, tier1 | run 39250083857 | NOT_CLAIMED |
+| windows-aarch64 | `build-windows.yml` (HotSpot only, cross) | run 39250083857 | NOT_CLAIMED |
+| macos-x64 | `build-macos.yml`, tier1 | run 39250083857 | NOT_CLAIMED |
+| macos-aarch64 | `build-macos.yml` (cross from macos-15-intel) | run 39250083857 | NOT_CLAIMED |
+| android-arm64 | none (only the C11/JNI header compile in `m3-jni-common.yml`) | run 41019153845: success | NOT_CLAIMED |
+| ios-arm64 | none (only the C11 source cross-compile in `m3-jni-common.yml`) | run 41019153845: success | NOT_CLAIMED |
 | C11 JNI contract (windows-2022, ubuntu-24.04, ubuntu-24.04-arm, macos-15, macos-15-intel) | `m3-jni-common.yml` | run 41019153845: all jobs success | header contract only |
 
 ## Known issues

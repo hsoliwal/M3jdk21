@@ -57,6 +57,23 @@ class ReleaseMetadataTest(unittest.TestCase):
             self.assertEqual("NOT_CLAIMED", claims[name], name)
         self.assertIn("Non-claims", self.notes)
 
+    def test_preview_platform_selection_is_linux_x64_only(self):
+        selection = self.contract["platform_selection"]
+        self.assertEqual(["linux-x64"], selection["selected"])
+        platforms = selection["platforms"]
+        self.assertEqual("SELECTED", platforms["linux-x64"])
+        workflow = (ROOT / ".github" / "workflows" / "m3-release.yml").read_text(encoding="utf-8")
+        # The workflow's supported platform list is the selection vocabulary.
+        self.assertIn("linux-x64|macos-x64|macos-aarch64|windows-x64|", workflow)
+        for platform in ("linux-x64", "macos-x64", "macos-aarch64", "windows-x64"):
+            self.assertIn(platform, platforms)
+        for platform, state in platforms.items():
+            if platform not in selection["selected"]:
+                self.assertEqual("NOT_CLAIMED", state, platform)
+                self.assertIn(platform, self.notes)
+        self.assertIn("OPENJDK_SANITY_MATRIX", self.contract["mandatory_release_gates"])
+        self.assertIn("ships **linux-x64 only**", self.notes)
+
     def test_release_notes_do_not_claim_a_contradictory_recipe_producer(self):
         # Standalone rule (2026-10-31): the receipt is produced inside M3jdk21.
         owner = self.contract["execution_evidence"]["gate_owners"]["M3_MAVEN_CONTROL_REACTOR"]
