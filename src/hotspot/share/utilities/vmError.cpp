@@ -68,12 +68,17 @@
 #include "utilities/macros.hpp"
 #include "utilities/ostream.hpp"
 #include "utilities/vmError.hpp"
+// SapMachine 2019-02-20: Vitals
+#include "vitals/vitals.hpp"
 #if INCLUDE_JFR
 #include "jfr/jfr.hpp"
 #endif
 #if INCLUDE_JVMCI
 #include "jvmci/jvmci.hpp"
 #endif
+#ifdef LINUX
+// SapMachine 2019-02-20: Vitals
+#include "vitals_linux_himemreport.hpp"
 
 #ifndef PRODUCT
 #include <signal.h>
@@ -1320,6 +1325,23 @@ void VMError::report(outputStream* st, bool _verbose) {
     NativeHeapTrimmer::print_state(st);
     st->cr();
 
+  // SapMachine 2019-02-20: Vitals
+  STEP("Vitals")
+     if (_verbose) {
+       sapmachine_vitals::print_info_t info;
+       sapmachine_vitals::default_settings(&info);
+       info.sample_now = true;
+       st->print_cr("Vitals:");
+       sapmachine_vitals::print_report(st, &info);
+     }
+
+#ifdef LINUX
+  STEP("Vitals HiMemReport")
+    st->cr();
+    sapmachine_vitals::print_himemreport_state(st);
+    st->cr();
+#endif // LINUX
+
   STEP_IF("printing system", _verbose)
     st->print_cr("---------------  S Y S T E M  ---------------");
     st->cr();
@@ -1511,6 +1533,21 @@ void VMError::print_vm_info(outputStream* st) {
   NativeHeapTrimmer::print_state(st);
   st->cr();
 
+
+  // SapMachine 2019-02-20: Vitals
+  // STEP("Vitals")
+  sapmachine_vitals::print_info_t info;
+  sapmachine_vitals::default_settings(&info);
+  info.sample_now = true;
+  st->print_cr("Vitals:");
+  sapmachine_vitals::print_report(st, &info);
+
+#ifdef LINUX
+  // STEP("Vitals HiMemReport")
+  st->cr();
+  sapmachine_vitals::print_himemreport_state(st);
+  st->cr();
+#endif // LINUX
 
   // STEP("printing system")
   st->print_cr("---------------  S Y S T E M  ---------------");

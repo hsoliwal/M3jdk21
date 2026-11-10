@@ -1,0 +1,537 @@
+diff --git a/src/hotspot/os/linux/globals_linux.hpp b/src/hotspot/os/linux/globals_linux.hpp
+index 70768b4..8d3f66d 100644
+--- a/src/hotspot/os/linux/globals_linux.hpp
++++ b/src/hotspot/os/linux/globals_linux.hpp
+@@ -74,7 +74,37 @@
+           "be dumped into the corefile.")                               \
+                                                                         \
++  /* SapMachine 2022-05-01: HiMemReport */                              \
++  product(bool, HiMemReport, false,                                     \
++         "VM writes a high memory report and optionally execute "       \
++         "additional jcmds if its rss+swap reaches 66%, 75% or 90% of " \
++         "a maximum. If the VM is containerized, that maximum is the "  \
++         "container memory limit at VM start. If the VM is not "        \
++         "containerized, that maximum is half of the total physical "   \
++         "memory. The maximum can be overridden with "                  \
++         "-XX:HiMemReportMaximum=<size>. Per default, the report is "   \
++         "printed to stderr. If HiMemReportDir is specified, that "     \
++         "report is redirected to \"<report directory>/"                \
++         "<sapmachine_himemalert>_pid<pid>_<timestamp>.log\".")         \
++  product(size_t, HiMemReportMax, 0,                                    \
++         "Overrides the maximum reference size for HiMemReport.")       \
++  product(ccstr, HiMemReportDir, NULL,                                  \
++         "Specifies a directory into which reports are written. Gets "  \
++         "created (one level only) if it does not exist.")              \
++  product(ccstr, HiMemReportExec, NULL,                                 \
++         "Specifies one or more jcmds to be executed after a high "     \
++         "memory report has been written. Multiple commands are "       \
++         "separated by ';'. Command output is written to stderr. If "   \
++         "HiMemReportDir is specified, command output is redirected to " \
++         "\"<report directory>/<command>_pid<pid>_timestamp.(out|err)\"." \
++         "If one of the commands is \"GC.heap_dump\" and its "         \
++         "arguments are omitted, the heap dump is written as "         \
++         "\"GC.heap_dump_pid<pid>_timestamp\" to either report "       \
++         "directory or current directory if HiMemReportDir is "        \
++         "omitted.\n"                                                  \
++         "Example: \"-XX:HiMemReportExec=GC.class_histogram -all;GC.heap_dump\"") \
++                                                                        \
+   product(bool, UseCpuAllocPath, false, DIAGNOSTIC,                     \
+           "Use CPU_ALLOC code path in os::active_processor_count ")     \
+                                                                         \
+   product(bool, DumpPerfMapAtExit, false, DIAGNOSTIC,                   \
+           "Write map file for Linux perf tool at exit")                 \
+diff --git a/src/hotspot/os/linux/osContainer_linux.cpp b/src/hotspot/os/linux/osContainer_linux.cpp
+index 8b91486..f88a5c6 100644
+--- a/src/hotspot/os/linux/osContainer_linux.cpp
++++ b/src/hotspot/os/linux/osContainer_linux.cpp
+@@ -38,4 +38,22 @@ bool  OSContainer::_is_containerized = false;
+ CgroupSubsystem* cgroup_subsystem;
+ 
++// SapMachine 2022-05-01: Vitals
++// This is an ugly hack aimed at having as little merge surface as possible across JDK versions.
++// We use the OsContainer class just for its ability to figure out the controller path; we expose
++// that and read the data ourselves (since OsContainer omits certain data and does things I don't
++// want to happen in the Vitals sampler thread).
++extern const char* sapmachine_get_memory_controller_path() {
++  if (cgroup_subsystem != nullptr) {
++    CachingCgroupController<CgroupMemoryController>* cc = cgroup_subsystem->memory_controller();
++    if (cc != nullptr) {
++      CgroupMemoryController* c = cc->controller();
++      if (c != nullptr) {
++        return c->subsystem_path();
++      }
++    }
++  }
++  return nullptr;
++}
++
+ /* init
+  *
+diff --git a/src/hotspot/os/linux/os_linux.cpp b/src/hotspot/os/linux/os_linux.cpp
+index 5ae4160..9392d5c 100644
+--- a/src/hotspot/os/linux/os_linux.cpp
++++ b/src/hotspot/os/linux/os_linux.cpp
+@@ -64,4 +64,6 @@
+ #include "runtime/threadSMR.hpp"
+ #include "runtime/timer.hpp"
++// SapMachine 2026-10-01
++#include "runtime/timerTrace.hpp"
+ #include "runtime/vm_version.hpp"
+ #include "signals_posix.hpp"
+@@ -1013,10 +1018,30 @@ bool os::create_thread(Thread* thread, ThreadType thr_type,
+                               thread->name(), os::errno_name(ret), os::Posix::describe_pthread_attr(buf, sizeof(buf), &attr));
+       // Log some OS information which might explain why creating the thread failed.
+-      log_info(os, thread)("Number of threads approx. running in the VM: %d", Threads::number_of_threads());
+-      LogStream st(Log(os, thread)::info());
+-      os::Posix::print_rlimit_info(&st);
+-      os::print_memory_info(&st);
+-      os::Linux::print_proc_sys_info(&st);
+-      os::Linux::print_container_info(&st);
++
++      // SapMachine 2026-10-01: Since this is a lot of output we only use warning level first and
++      // then turn it down to Info.
++      static bool is_first = true;
++
++      if (is_first || log_is_enabled(Info, os, thread)) {
++          uint64_t procs, threads;
++
++          LogStream stw(Log(os, thread)::warning());
++          LogStream sti(Log(os, thread)::info());
++          LogStream* st = is_first ? &stw : &sti;
++
++          st->print_cr("Number of threads approx. running in the VM: %d", Threads::number_of_threads());
++
++          if (os::Linux::get_total_procs_and_threads(&procs, &threads)) {
++              st->print_cr("Number of processes on the system: " UINT64_FORMAT, procs);
++              st->print_cr("Number of threads on the system: " UINT64_FORMAT, threads);
++          }
++
++          os::Posix::print_rlimit_info(st);
++          os::print_memory_info(st);
++          os::Linux::print_proc_sys_info(st);
++          os::Linux::print_container_info(st);
++
++          is_first = false;
++      }
+     }
+ 
+@@ -2251,4 +2279,59 @@ bool os::Linux::query_process_memory_info(os::Linux::meminfo_t* info) {
+ }
+ 
++// SapMachine 2026-10-15
++// Helper function, returns true if string is a numerical id
++static bool is_numerical_id(const char* s) {
++    const char* p = s;
++    while (*p >= '0' && *p <= '9') {
++        p++;
++    }
++    return *p == '\0' ? true : false;
++}
++
++// SapMachine 2026-10-01
++bool os::Linux::get_total_procs_and_threads(uint64_t* procs, uint64_t* threads) {
++    TraceTime timer("Iterating all processes", TRACETIME_LOG(Trace, os, timer));
++    DIR* d = ::opendir("/proc");
++    if (d != nullptr) {
++        uint64_t procs_count = 0;
++        uint64_t threads_count = 0;
++        struct dirent* en = nullptr;
++        do {
++            en = ::readdir(d);
++            if (en != nullptr) {
++                if (is_numerical_id(en->d_name)) {
++                    procs_count++;
++                    if (threads == nullptr) {
++                        continue;
++                    }
++                    char tmp[128];
++                    jio_snprintf(tmp, sizeof(tmp), "/proc/%s/stat", en->d_name);
++                    FILE* fp = os::fopen(tmp, "r");
++                    if (fp != nullptr) {
++                        // See man proc(5)
++                        // (20) num_threads  %ld
++                        long num_threads = 0;
++                        if (fscanf(fp, "%*d %*s %*c %*d %*d %*d %*d %*d %*u %*u %*u %*u %*u %*u %*u %*d %*d %*d %*d %ld", &num_threads) == 1) {
++                            threads_count += num_threads;
++                        }
++                        ::fclose(fp);
++                    }
++                }
++            }
++        } while (en != nullptr);
++        ::closedir(d);
++        if (procs != nullptr) {
++            *procs = procs_count;
++        }
++        if (threads != nullptr) {
++            *threads = threads_count;
++        }
++
++        return true;
++    }
++
++    return false;
++}
++
+ #ifdef __GLIBC__
+ // For Glibc, print a one-liner with the malloc tunables.
+diff --git a/src/hotspot/os/linux/os_linux.hpp b/src/hotspot/os/linux/os_linux.hpp
+index 799d98d..f4ab25d 100644
+--- a/src/hotspot/os/linux/os_linux.hpp
++++ b/src/hotspot/os/linux/os_linux.hpp
+@@ -191,4 +193,8 @@ class os::Linux {
+   static bool query_process_memory_info(meminfo_t* info);
+ 
++  // SapMachine 2026-10-01: Gets the total number of processes and threads on the system. If a parameter is nullptr
++  // the value isn't determined. This is useful since the thread count is somewhat expensive.
++  static bool get_total_procs_and_threads(uint64_t* procs, uint64_t* threads);
++
+   // Stack repair handling
+ 
+diff --git a/src/hotspot/share/classfile/classLoaderData.cpp b/src/hotspot/share/classfile/classLoaderData.cpp
+index be91f26..c5539f0 100644
+--- a/src/hotspot/share/classfile/classLoaderData.cpp
++++ b/src/hotspot/share/classfile/classLoaderData.cpp
+@@ -179,4 +179,9 @@ ClassLoaderData::ClassLoaderData(Handle h_class_loader, bool has_class_mirror_ho
+ 
+   JFR_ONLY(INIT_ID(this);)
++
++  // SapMachine 2023-07-04: Vitals
++  if (EnableVitals) {
++      sapmachine_vitals::counters::inc_cld_count(has_class_mirror_holder);
++  }
+ }
+ 
+diff --git a/src/hotspot/share/classfile/classLoaderDataGraph.cpp b/src/hotspot/share/classfile/classLoaderDataGraph.cpp
+index 2046286..4ebcfba 100644
+--- a/src/hotspot/share/classfile/classLoaderDataGraph.cpp
++++ b/src/hotspot/share/classfile/classLoaderDataGraph.cpp
+@@ -425,4 +425,9 @@ bool ClassLoaderDataGraph::do_unloading() {
+       ClassUnloadingContext::context()->register_unloading_class_loader_data(data);
+ 
++      // SapMachine 2023-07-04: Vitals
++      if (EnableVitals) {
++        sapmachine_vitals::counters::dec_cld_count(data->has_class_mirror_holder());
++      }
++
+       // Move dead CLD to unloading list.
+       if (prev != nullptr) {
+diff --git a/src/hotspot/share/classfile/classLoaderDataGraph.inline.hpp b/src/hotspot/share/classfile/classLoaderDataGraph.inline.hpp
+index 6880194..6391a72 100644
+--- a/src/hotspot/share/classfile/classLoaderDataGraph.inline.hpp
++++ b/src/hotspot/share/classfile/classLoaderDataGraph.inline.hpp
+@@ -33,4 +33,8 @@
+ #include "runtime/orderAccess.hpp"
+ 
++// SapMachine 2019-09-01: Vitals
++#include "runtime/globals.hpp"
++#include "vitals/vitals.hpp"
++
+ inline ClassLoaderData *ClassLoaderDataGraph::find_or_create(Handle loader) {
+   guarantee(loader() != nullptr && oopDesc::is_oop(loader()), "Loader must be oop");
+@@ -54,4 +58,8 @@ size_t ClassLoaderDataGraph::num_array_classes() {
+ void ClassLoaderDataGraph::inc_instance_classes(size_t count) {
+   Atomic::add(&_num_instance_classes, count, memory_order_relaxed);
++  // SapMachine 2019-02-20: Vitals
++  if (EnableVitals) {
++    sapmachine_vitals::counters::inc_classes_loaded(count);
++  }
+ }
+ 
+@@ -59,8 +67,16 @@ void ClassLoaderDataGraph::dec_instance_classes(size_t count) {
+   size_t old_count = Atomic::fetch_then_add(&_num_instance_classes, -count, memory_order_relaxed);
+   assert(old_count >= count, "Sanity");
++  // SapMachine 2019-02-20: Vitals
++  if (EnableVitals) {
++    sapmachine_vitals::counters::inc_classes_unloaded(count);
++  }
+ }
+ 
+ void ClassLoaderDataGraph::inc_array_classes(size_t count) {
+   Atomic::add(&_num_array_classes, count, memory_order_relaxed);
++  // SapMachine 2019-02-20: Vitals
++  if (EnableVitals) {
++    sapmachine_vitals::counters::inc_classes_loaded(count);
++  }
+ }
+ 
+@@ -68,4 +84,8 @@ void ClassLoaderDataGraph::dec_array_classes(size_t count) {
+   size_t old_count = Atomic::fetch_then_add(&_num_array_classes, -count, memory_order_relaxed);
+   assert(old_count >= count, "Sanity");
++  // SapMachine 2019-02-20: Vitals
++  if (EnableVitals) {
++    sapmachine_vitals::counters::inc_classes_unloaded(count);
++  }
+ }
+ 
+diff --git a/src/hotspot/share/logging/logTag.hpp b/src/hotspot/share/logging/logTag.hpp
+index 99adff4..db9fea6 100644
+--- a/src/hotspot/share/logging/logTag.hpp
++++ b/src/hotspot/share/logging/logTag.hpp
+@@ -206,4 +206,5 @@ class outputStream;
+   LOG_TAG(verification) \
+   LOG_TAG(verify) \
++  LOG_TAG(vitals) /* SapMachine 2022-06-01: Vitals */ \
+   LOG_TAG(vmmutex) \
+   LOG_TAG(vmoperation) \
+diff --git a/src/hotspot/share/runtime/globals.hpp b/src/hotspot/share/runtime/globals.hpp
+index d6c41bd..8b21c32 100644
+--- a/src/hotspot/share/runtime/globals.hpp
++++ b/src/hotspot/share/runtime/globals.hpp
+@@ -518,4 +519,45 @@ const int ObjectAlignmentInBytes = 8;
+           "Print additional debugging information from other modes")        \
+                                                                             \
++  /* SapMachine 2019-02-20 : vitals */                                      \
++  product(bool, EnableVitals, true,                                         \
++          "Enable sampling of vitals: memory, cpu utilization and various " \
++          "VM core statistics; display via jcmd \"VM.vitals\".")            \
++                                                                            \
++  product(uintx, VitalsSampleInterval, 10,                                  \
++          "Vitals sample rate interval in seconds (default 10)")            \
++          range(1, 24 * 3600)                                               \
++                                                                            \
++  product(uintx, VitalsShortTermTableHours, 1,                              \
++          "The size of the short term vitals table in hours")               \
++          range(1, 365 * 24)                                                \
++                                                                            \
++  product(uintx, VitalsLongTermSampleIntervalMinutes, 10,                   \
++          "Vitals sample rate interval in minutes for the long term table " \
++          "(default 10)")                                                   \
++          range(1, 365 * 24 * 60)                                           \
++                                                                            \
++  product(uintx, VitalsLongTermTableDays, 7,                                \
++          "The size of the long term vitals table in days (default 7)")     \
++          range(1, 10 * 365)                                                \
++                                                                            \
++  product(bool, VitalsLockFreeSampling, false, DIAGNOSTIC,                  \
++          "When sampling vitals, omit any actions which require locking.")  \
++                                                                            \
++  product(bool, DumpVitalsAtExit, false,                                    \
++          "Dump vitals at VM exit into two files, by default called "       \
++          "sapmachine_vitals_<pid>.txt and sapmachine_vitals_<pid>.csv. "   \
++          "Use -XX:VitalsFile option to change the file names.")            \
++                                                                            \
++  product(bool, PrintVitalsAtExit, false,                                   \
++          "Prints vitals at VM exit to tty.")                               \
++                                                                            \
++  product(bool, StoreVitalsExtremas, true,                                  \
++          "If enabled we store the samples for extremum values of "         \
++          "selected types.")                                                \
++                                                                            \
++  product(ccstr, VitalsFile, NULL,                                          \
++          "When DumpVitalsAtExit is set, the file name prefix for the "     \
++          "output files (default is sapmachine_vitals_<pid>).")             \
++                                                                            \
+   develop(bool, PrintMiscellaneous, false,                                  \
+           "Print uncategorized debugging information (requires +Verbose)")  \
+diff --git a/src/hotspot/share/runtime/java.cpp b/src/hotspot/share/runtime/java.cpp
+index a92a1c5..397af3e 100644
+--- a/src/hotspot/share/runtime/java.cpp
++++ b/src/hotspot/share/runtime/java.cpp
+@@ -99,4 +99,9 @@
+ #endif
+ 
++// SapMachine 2019-09-01: Vitals
++#include "runtime/globals.hpp"
++#include "vitals/vitals.hpp"
++
++
+ GrowableArray<Method*>* collected_profiled_methods;
+ 
+@@ -335,4 +344,13 @@ void print_statistics() {
+   }
+ 
++  // SapMachine 2019-09-01: Vitals
++  if (DumpVitalsAtExit) {
++    sapmachine_vitals::dump_reports();
++  }
++  if (PrintVitalsAtExit) {
++    tty->print_cr("Vitals:");
++    sapmachine_vitals::print_report(tty);
++  }
++
+   ThreadsSMRSupport::log_statistics();
+ }
+@@ -383,4 +401,12 @@ void print_statistics() {
+   }
+ 
++  // SapMachine 2019-09-01: Vitals
++  if (DumpVitalsAtExit) {
++    sapmachine_vitals::dump_reports();
++  }
++  if (PrintVitalsAtExit) {
++    sapmachine_vitals::print_report(tty);
++  }
++
+   ThreadsSMRSupport::log_statistics();
+ }
+@@ -539,4 +571,9 @@ void before_exit(JavaThread* thread, bool halt) {
+   }
+ 
++  // SapMachine 2021-09-01: shutdown vitals thread
++  if (EnableVitals) {
++    sapmachine_vitals::cleanup();
++  }
++
+   #undef BEFORE_EXIT_NOT_RUN
+   #undef BEFORE_EXIT_RUNNING
+diff --git a/src/hotspot/share/runtime/threads.cpp b/src/hotspot/share/runtime/threads.cpp
+index 1fbe668..13cf61e 100644
+--- a/src/hotspot/share/runtime/threads.cpp
++++ b/src/hotspot/share/runtime/threads.cpp
+@@ -116,4 +116,11 @@
+ #endif
+ 
++// SapMachine 2019-02-20: Vitals
++#include "vitals/vitals.hpp"
++#ifdef LINUX
++#include "vitals_linux_himemreport.hpp"
++#endif
++
++
+ // Initialization after module runtime initialization
+ void universe_post_module_init();  // must happen after call_initPhase2
+@@ -801,4 +821,17 @@ jint Threads::create_vm(JavaVMInitArgs* args, bool* canTryAgain) {
+   JFR_ONLY(Jfr::on_create_vm_3();)
+ 
++  // SapMachine 2019-02-20: Vitals
++  if (EnableVitals) {
++    sapmachine_vitals::initialize();
++  }
++#ifdef LINUX
++  if (HiMemReport) {
++    sapmachine_vitals::initialize_himem_report_facility();
++  }
++#endif // LINUX
++  if (EnableVitals) {
++    sapmachine_vitals::begin_sampling();
++  }
++
+ #if INCLUDE_MANAGEMENT
+   Management::initialize(THREAD);
+@@ -1036,4 +1069,7 @@ void Threads::add(JavaThread* p, bool force_daemon) {
+   // Make new thread known to active EscapeBarrier
+   EscapeBarrier::thread_added(p);
++
++  // SapMachine 2019-02-20: Vitals
++  sapmachine_vitals::counters::inc_threads_created(1);
+ }
+ 
+@@ -1424,4 +1460,13 @@ void Threads::print_on_error(outputStream* st, Thread* current, char* buf,
+   print_on_error(AsyncLogWriter::instance(), st, current, buf, buflen, &found_current);
+ 
++  // SapMachine 2019-11-07: Vitals
++  print_on_error(const_cast<Thread*>(sapmachine_vitals::samplerthread()),
++                 st, current, buf, buflen, &found_current);
++#ifdef LINUX
++  // SapMachine 2022-05-07: HiMemReport
++  print_on_error(const_cast<Thread*>(sapmachine_vitals::himem_reporter_thread()),
++                 st, current, buf, buflen, &found_current);
++#endif
++
+   if (Universe::heap() != nullptr) {
+     PrintOnErrorClosure print_closure(st, current, buf, buflen, &found_current);
+diff --git a/src/hotspot/share/services/diagnosticCommand.cpp b/src/hotspot/share/services/diagnosticCommand.cpp
+index 4ea3d33..d579835 100644
+--- a/src/hotspot/share/services/diagnosticCommand.cpp
++++ b/src/hotspot/share/services/diagnosticCommand.cpp
+@@ -70,6 +70,9 @@
+ #include "trimCHeapDCmd.hpp"
+ #include "mallocInfoDcmd.hpp"
+ #include <errno.h>
+ #endif
++
++// SapMachine 2019-02-20: Vitals
++#include "vitals/vitalsDCmd.hpp"
+ 
+ static void loadAgentModule(TRAPS) {
+@@ -107,4 +116,6 @@ void DCmd::register_dcmds(){
+   DCmdFactory::register_DCmdFactory(new DCmdFactoryImpl<HeapInfoDCmd>(full_export, true, false));
+   DCmdFactory::register_DCmdFactory(new DCmdFactoryImpl<FinalizerInfoDCmd>(full_export, true, false));
++  // SapMachine 2019-02-20: Vitals
++  DCmdFactory::register_DCmdFactory(new DCmdFactoryImpl<sapmachine_vitals::VitalsDCmd>(full_export, true, false));
+ #if INCLUDE_SERVICES
+   DCmdFactory::register_DCmdFactory(new DCmdFactoryImpl<HeapDumpDCmd>(DCmd_Source_Internal | DCmd_Source_AttachAPI, true, false));
+diff --git a/src/hotspot/share/utilities/vmError.cpp b/src/hotspot/share/utilities/vmError.cpp
+index 65a52a0..ee30a23 100644
+--- a/src/hotspot/share/utilities/vmError.cpp
++++ b/src/hotspot/share/utilities/vmError.cpp
+@@ -69,4 +69,6 @@
+ #include "utilities/ostream.hpp"
+ #include "utilities/vmError.hpp"
++// SapMachine 2019-02-20: Vitals
++#include "vitals/vitals.hpp"
+ #if INCLUDE_JFR
+ #include "jfr/jfr.hpp"
+@@ -75,4 +77,7 @@
+ #include "jvmci/jvmci.hpp"
+ #endif
++#ifdef LINUX
++// SapMachine 2019-02-20: Vitals
++#include "vitals_linux_himemreport.hpp"
+ 
+ #ifndef PRODUCT
+@@ -1321,4 +1336,21 @@ void VMError::report(outputStream* st, bool _verbose) {
+     st->cr();
+ 
++  // SapMachine 2019-02-20: Vitals
++  STEP("Vitals")
++     if (_verbose) {
++       sapmachine_vitals::print_info_t info;
++       sapmachine_vitals::default_settings(&info);
++       info.sample_now = true;
++       st->print_cr("Vitals:");
++       sapmachine_vitals::print_report(st, &info);
++     }
++
++#ifdef LINUX
++  STEP("Vitals HiMemReport")
++    st->cr();
++    sapmachine_vitals::print_himemreport_state(st);
++    st->cr();
++#endif // LINUX
++
+   STEP_IF("printing system", _verbose)
+     st->print_cr("---------------  S Y S T E M  ---------------");
+@@ -1506,4 +1549,19 @@ void VMError::print_vm_info(outputStream* st) {
+ 
+ 
++  // SapMachine 2019-02-20: Vitals
++  // STEP("Vitals")
++  sapmachine_vitals::print_info_t info;
++  sapmachine_vitals::default_settings(&info);
++  info.sample_now = true;
++  st->print_cr("Vitals:");
++  sapmachine_vitals::print_report(st, &info);
++
++#ifdef LINUX
++  // STEP("Vitals HiMemReport")
++  st->cr();
++  sapmachine_vitals::print_himemreport_state(st);
++  st->cr();
++#endif // LINUX
++
+   // STEP("printing system")
+   st->print_cr("---------------  S Y S T E M  ---------------");
+diff --git a/test/hotspot/jtreg/TEST.groups b/test/hotspot/jtreg/TEST.groups
+index 6fb2e2b..5e3387b 100644
+--- a/test/hotspot/jtreg/TEST.groups
++++ b/test/hotspot/jtreg/TEST.groups
+@@ -384,5 +384,8 @@ hotspot_gc_shenandoah = \
+   :tier3_gc_shenandoah
+ 
++# SapMachine 2019-02-24 : Add tests where SAPMachine has different behavior to tier1,
++#  or which tests downstream-only features.
+ tier1_runtime = \
++  :tier1_sapmachine \
+   runtime/ \
+  -runtime/6626217/bug_21227.java \
+@@ -569,4 +572,8 @@ tier1_serviceability = \
+   -serviceability/sa/TestJmapCoreMetaspace.java
+ 
++# SapMachine 2019-02-24 : Add tests where SAPMachine has different behavior to tier1,
++#  or which tests downstream-only features.
++tier1_sapmachine = \
++  runtime/Vitals \
+ tier1 = \
+   :tier1_common \

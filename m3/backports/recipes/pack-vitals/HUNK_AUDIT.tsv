@@ -1,0 +1,67 @@
+file	old_start	decision	first_changed_line
+src/hotspot/os/linux/globals_linux.hpp	-74,7	KEEP	/* SapMachine 2022-05-01: HiMemReport */                              \
+src/hotspot/os/linux/globals_linux.hpp	-74,7	STRIP_BLOCK	/* SapMachine 2025-11-24: Configurable limit of malloc arenas */      \
+src/hotspot/os/linux/globals_linux.hpp	-74,7	STRIP_BLOCK	/* SapMachine 2021-09-01: malloc-trace */                             \
+src/hotspot/os/linux/osContainer_linux.cpp	-38,4	KEEP	// SapMachine 2022-05-01: Vitals
+src/hotspot/os/linux/os_linux.cpp	-64,4	KEEP	// SapMachine 2026-10-01
+src/hotspot/os/linux/os_linux.cpp	-83,4	DROP	// SapMachine 2021-09-01: malloc-trace
+src/hotspot/os/linux/os_linux.cpp	-1013,10	KEEP	log_info(os, thread)("Number of threads approx. running in the VM: %d", Threads::number_of_threads()
+src/hotspot/os/linux/os_linux.cpp	-2065,4	DROP	// SapMachine 2019-07-02: 8225345: Provide Cloud IAAS related info on Linux in the hs_err file
+src/hotspot/os/linux/os_linux.cpp	-2251,4	KEEP	// SapMachine 2026-10-15
+src/hotspot/os/linux/os_linux.cpp	-2523,4	DROP	// SapMachine 2019-07-02: 8225345: Provide Cloud IAAS related info on Linux in the hs_err file
+src/hotspot/os/linux/os_linux.cpp	-4840,4	DROP	// SapMachine 2025-11-24:
+src/hotspot/os/linux/os_linux.cpp	-4940,4	DROP	#ifdef HAVE_GLIBC_MALLOC_HOOKS
+src/hotspot/os/linux/os_linux.hpp	-90,4	DROP	// SapMachine 2019-07-02: 8225345: Provide Cloud IAAS related info on Linux in the hs_err file
+src/hotspot/os/linux/os_linux.hpp	-191,4	KEEP	// SapMachine 2026-10-01: Gets the total number of processes and threads on the system. If a paramet
+src/hotspot/share/classfile/classLoaderData.cpp	-179,4	KEEP	// SapMachine 2023-07-04: Vitals
+src/hotspot/share/classfile/classLoaderDataGraph.cpp	-425,4	KEEP	// SapMachine 2023-07-04: Vitals
+src/hotspot/share/classfile/classLoaderDataGraph.inline.hpp	-33,4	KEEP	// SapMachine 2019-09-01: Vitals
+src/hotspot/share/classfile/classLoaderDataGraph.inline.hpp	-54,4	KEEP	// SapMachine 2019-02-20: Vitals
+src/hotspot/share/classfile/classLoaderDataGraph.inline.hpp	-59,8	KEEP	// SapMachine 2019-02-20: Vitals
+src/hotspot/share/classfile/classLoaderDataGraph.inline.hpp	-68,4	KEEP	// SapMachine 2019-02-20: Vitals
+src/hotspot/share/logging/logTag.hpp	-206,4	KEEP	LOG_TAG(vitals) /* SapMachine 2022-06-01: Vitals */ \
+src/hotspot/share/runtime/globals.hpp	-455,5	DROP	product(uintx, LogEventsBufferEntries, 20, DIAGNOSTIC,                    \
+src/hotspot/share/runtime/globals.hpp	-518,4	KEEP	/* SapMachine 2019-02-20 : vitals */                                      \
+src/hotspot/share/runtime/globals.hpp	-518,4	STRIP_BLOCK	/* SapMachine 2023-09-18: malloc trace */                                 \
+src/hotspot/share/runtime/globals.hpp	-563,8	DROP	/* SapMachine 2024-05-10: HeapDumpPath for jcmd */                        \
+src/hotspot/share/runtime/globals.hpp	-574,4	DROP	/* SapMachine 2026-06-16: Allow to overwrite the heap dump file. */         \
+src/hotspot/share/runtime/globals.hpp	-590,5	DROP	product(bool, PrintExtendedThreadInfo, false,                             \
+src/hotspot/share/runtime/globals.hpp	-846,7	DROP	/* SapMachine 2021-05-21: Changed comment (we do not core on OOM) */      \
+src/hotspot/share/runtime/globals.hpp	-1053,6	DROP	/* SapMachine 2018-12-18 Enable this per default. */                      \
+src/hotspot/share/runtime/java.cpp	-99,4	KEEP	// SapMachine 2019-09-01: Vitals
+src/hotspot/share/runtime/java.cpp	-99,4	STRIP_BLOCK	// SapMachine 2021-09-01: malloc-trace
+src/hotspot/share/runtime/java.cpp	-335,4	KEEP	// SapMachine 2019-09-01: Vitals
+src/hotspot/share/runtime/java.cpp	-383,4	KEEP	// SapMachine 2019-09-01: Vitals
+src/hotspot/share/runtime/java.cpp	-508,4	DROP	#ifdef HAVE_GLIBC_MALLOC_HOOKS
+src/hotspot/share/runtime/java.cpp	-539,4	KEEP	// SapMachine 2021-09-01: shutdown vitals thread
+src/hotspot/share/runtime/threads.cpp	-116,4	KEEP	// SapMachine 2019-02-20: Vitals
+src/hotspot/share/runtime/threads.cpp	-116,4	STRIP_BLOCK	// SapMachine 2023-08-15: malloc trace
+src/hotspot/share/runtime/threads.cpp	-599,4	DROP	// SapMachine 2023-09-20: malloc trace2
+src/hotspot/share/runtime/threads.cpp	-801,4	KEEP	// SapMachine 2019-02-20: Vitals
+src/hotspot/share/runtime/threads.cpp	-1036,4	KEEP	// SapMachine 2019-02-20: Vitals
+src/hotspot/share/runtime/threads.cpp	-1424,4	KEEP	// SapMachine 2019-11-07: Vitals
+src/hotspot/share/services/diagnosticCommand.cpp	-70,6	KEEP	// SapMachine 2021-09-01: malloc-trace
+src/hotspot/share/services/diagnosticCommand.cpp	-70,6	STRIP_BLOCK	// SapMachine 2021-09-01: malloc-trace
+src/hotspot/share/services/diagnosticCommand.cpp	-70,6	STRIP_BLOCK	// SapMachine 2023-08-15: malloc trace2
+src/hotspot/share/services/diagnosticCommand.cpp	-107,4	KEEP	// SapMachine 2019-02-20: Vitals
+src/hotspot/share/services/diagnosticCommand.cpp	-119,4	DROP	// SapMachine 2025-08-11: Add support for SAP JMC agent if requested.
+src/hotspot/share/services/diagnosticCommand.cpp	-137,5	DROP	// SapMachine 2021-09-01: malloc-trace
+src/hotspot/share/services/diagnosticCommand.cpp	-156,5	DROP	DCmdFactory::register_DCmdFactory(new DCmdFactoryImpl<DebugOnCmdStartDCmd>(full_export, true, true))
+src/hotspot/share/services/diagnosticCommand.cpp	-331,4	DROP	// SapMachine 2025-08-11: Add support for SAP JMC agent if requested.
+src/hotspot/share/services/diagnosticCommand.cpp	-469,5	DROP	_filename("filename","Name of the dump file", "STRING",true),
+src/hotspot/share/services/diagnosticCommand.cpp	-485,4	DROP	// SapMachine 2024-05-10: HeapDumpPath for jcmd
+src/hotspot/share/services/diagnosticCommand.cpp	-495,9	DROP	// SapMachine 2024-05-10: HeapDumpPath for jcmd
+src/hotspot/share/utilities/vmError.cpp	-69,4	KEEP	// SapMachine 2019-02-20: Vitals
+src/hotspot/share/utilities/vmError.cpp	-75,4	KEEP	#ifdef LINUX
+src/hotspot/share/utilities/vmError.cpp	-75,4	STRIP_BLOCK	// SapMachine 2021-09-01: malloc-trace
+src/hotspot/share/utilities/vmError.cpp	-75,4	STRIP_BLOCK	// SapMachine 2023-08-15: malloc trace
+src/hotspot/share/utilities/vmError.cpp	-1280,10	DROP	// SapMachine 2021-09-07:
+src/hotspot/share/utilities/vmError.cpp	-1321,4	KEEP	// SapMachine 2019-02-20: Vitals
+src/hotspot/share/utilities/vmError.cpp	-1341,4	DROP	// SapMachine 2021-09-01: malloc-trace
+src/hotspot/share/utilities/vmError.cpp	-1506,4	KEEP	// SapMachine 2019-02-20: Vitals
+src/hotspot/share/utilities/vmError.cpp	-1530,4	DROP	#if defined(LINUX) && defined(HAVE_GLIBC_MALLOC_HOOKS)
+src/hotspot/share/utilities/vmError.cpp	-1629,4	DROP	#if defined(LINUX) || defined(__APPLE__)
+src/hotspot/share/utilities/vmError.cpp	-2178,2	DROP	// SapMachine 2021-05-21: A wrapper for VMError::print_stack_trace(..), public, for printing stacks
+test/hotspot/jtreg/TEST.groups	-384,5	KEEP	# SapMachine 2019-02-24 : Add tests where SAPMachine has different behavior to tier1,
+test/hotspot/jtreg/TEST.groups	-569,4	KEEP	# SapMachine 2019-02-24 : Add tests where SAPMachine has different behavior to tier1,
+test/hotspot/jtreg/TEST.groups	-569,4	STRIP_BLOCK	runtime/malloctrace
