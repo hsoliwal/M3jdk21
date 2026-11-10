@@ -1,0 +1,49 @@
+{
+  "checks": [
+    {
+      "detail": "",
+      "name": "file:make/conf/version-numbers.conf",
+      "status": "PASS"
+    },
+    {
+      "detail": "m3jdk-21.0.14-m3.1-preview",
+      "name": "contract.release_identity",
+      "status": "PASS"
+    },
+    {
+      "detail": "890adb6410dab4606a4f26a942aed02fb2f55387",
+      "name": "git.upstream_baseline",
+      "status": "PASS"
+    },
+    {
+      "detail": "1528a255c4773a54d9d89f7448690113e8559f9e",
+      "name": "git.head",
+      "status": "PASS"
+    },
+    {
+      "detail": "59ea4931c1c4f5f3782294c74552ad1e3d5fd18f",
+      "name": "git.tree",
+      "status": "PASS"
+    },
+    {
+      "detail": "tracked tree and untracked source inputs are clean",
+      "name": "git.clean_source",
+      "status": "PASS"
+    },
+    {
+      "detail": "890adb6410dab4606a4f26a942aed02fb2f55387",
+      "name": "git.merge_base",
+      "status": "PASS"
+    },
+    {
+      "detail": "1528a255c4773a54d9d89f7448690113e8559f9e",
+      "name": "git.single_release_commit",
+      "status": "PASS"
+    }
+  ],
+  "gate": "SOURCE_TREE_AND_UPSTREAM_BASELINE",
+  "missing_checks": [],
+  "source_commit": "1528a255c4773a54d9d89f7448690113e8559f9e",
+  "source_tree": "59ea4931c1c4f5f3782294c74552ad1e3d5fd18f",
+  "status": "PASS"
+}

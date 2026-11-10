@@ -1,0 +1,45 @@
+{
+  "checks": [
+    {
+      "detail": "",
+      "name": "contract.schema",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "name": "contract.priority_order",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "name": "contract.claim_policy",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "name": "contract.unqualified_claims",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "name": "claims.current_string_boundary",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "name": "claims.no_unproved_performance",
+      "status": "PASS"
+    },
+    {
+      "detail": "none of the contract's forbidden phrases occur in RELEASE_NOTES.md",
+      "name": "notes.forbidden_phrases",
+      "status": "PASS"
+    }
+  ],
+  "forbidden_phrases_in_release_notes": [],
+  "gate": "RELEASE_CLAIMS_VALIDATION",
+  "missing_checks": [],
+  "source_commit": "1528a255c4773a54d9d89f7448690113e8559f9e",
+  "source_tree": "59ea4931c1c4f5f3782294c74552ad1e3d5fd18f",
+  "status": "PASS"
+}

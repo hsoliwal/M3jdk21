@@ -70,6 +70,33 @@ retain their original source pins and cannot fill these current-source rows.
 | `STRING_UTF16_CONTRACT` | no workflow job or command is bound to this gate yet |
 | `M3_CHANGED_ATOM_COVERAGE` | **PENDING** — instrumented, source-hash-checked >=90% line and branch coverage of changed contract-bearing M3 atoms, with complete inventory and raw report hashes; does not assert whole-JDK coverage |
 
+### Integration candidate `1528a255c477` (2026-11-09)
+
+This candidate is `master` `e8e1e837a640` plus the open fix PRs, in tree `59ea4931c1c4`.
+- PASS (7 gates): rights, source, foundation, precompute Java and JNI, claims, proof pack.
+- FAIL: OpenJDK sanity. Only linux-x64 ran: tier1 subset 91/92, and hs `tier1_common` passed, including all 979 gtests.
+- FAIL: STRING_UTF16. All upstream String modes pass except one `-Xint` timeout. Stock 21+35 has the same timeout, and run directly both pass (1238 s stock, 1707 s M3, measured under build load).
+- FAIL: changed-atom coverage.
+- PENDING: the Maven control reactor (#2905).
+- The source-built image now builds with javac warnings fatal and doclint on.
+
+Admission remains **HOLD**; details are in [RELEASE_PREPARATION.md](RELEASE_PREPARATION.md#2026-11-09-integration-candidate).
+
+### Measured on candidate `fe51a3c9ff2f` (2026-11-09)
+
+The candidate is one commit over `890adb6410da` with the tree of `master` `809625db76e9` (`30651922a8b3`). It was measured locally on Windows 11 with WSL2 Ubuntu 24.04, x86_64; GitHub Actions runs were queued. Release admission is **HOLD**. The full table, log names and owner actions are in [RELEASE_PREPARATION.md](RELEASE_PREPARATION.md#2026-11-09-measured-candidate).
+
+| Gate | State |
+| --- | --- |
+| `RIGHTS_AND_LICENSE_BOUNDARY`, `SOURCE_TREE_AND_UPSTREAM_BASELINE`, `RELEASE_CLAIMS_VALIDATION`, `PROOF_PACK_SHA256` | PASS |
+| `PRECOMPUTE_JAVA_DIFFERENTIAL` | PASS: 125 tests, 0 failures |
+| `PRECOMPUTE_JNI_NATIVE_PARITY` | PASS: precompute `-Pnative` 125/0; word-row JNI in 4 VM modes; collections native 2854 tests, 0 failures, 1 skipped |
+| `M3_FOUNDATION_TESTS` | FAIL: `check-m3.py` stale fixture path (fix #2893); `build.sh` and the extra contracts pass |
+| `OPENJDK_SANITY_MATRIX` | FAIL: the linux-x64 source build stops in `java.base` (fixes #2899, #2901; one owner decision remains) |
+| `STRING_UTF16_CONTRACT` | PENDING: no candidate image. On a diagnostic image, upstream `java/lang/String` passes 88/89 and the M3-added String tests pass 59/82 |
+| `M3_CHANGED_ATOM_COVERAGE` | FAIL: `jdk.m3.text` line 71.9%, branch 54.0%; no reviewed inventory |
+| `M3_MAVEN_CONTROL_REACTOR` | HOLD: owner decision (standalone rule vs Synexia-owned receipt) |
+
 ## Platform matrix
 
 **Historical CI snapshot only:** the entries below describe 2026-10-31 observations
@@ -91,6 +118,34 @@ Recompute build, test and coverage evidence against the final candidate commit a
 | C11 JNI contract (windows-2022, ubuntu-24.04, ubuntu-24.04-arm, macos-15, macos-15-intel) | `m3-jni-common.yml` | run 41019153845: all jobs success | header contract only |
 
 ## Known issues
+
+- **M3Object observation API: internal, pending user admission as public API.** `java.lang.M3Object`
+  (with `M3Object.Field`), `ObjectEvent`, `ObjectSubscription` and `ObjectChangeListener` are
+  package-private once #2910 lands. `Object.toAdapter` keeps its capability case, and its public
+  Javadoc no longer names the type.
+- **Experimental `-XX:+UseM3StringStorage` (off by default; String backed by M3 is NOT_CLAIMED).**
+  - Measured 2026-11-09, upstream `java/lang/String` jtreg with the flag: 83 of 88 pass.
+  - Correctness fixes are open: #2904 (null concat operand), #2911 (String length limit
+    `OutOfMemoryError`) and #2912 (racy `char[]`/`int[]` constructors).
+  - Known performance limitation: search reads one code unit at a time
+    (`M3StringSearchPrecompute` -> `CodeUnitCursor.at` -> `M3StringAtom.unitAt`).
+    `M3FlatNeedleGateTest` takes 19.6 s in default mode but exceeds its 480 s timeout with the
+    flag, more than 24x slower. Upstream `LiteralReplace`, `StringRepeat#id1` and
+    `UnicodeCasingTest` time out with the flag (480 s, 480 s and 800 s).
+
+- **Source-built JDK image (measured 2026-11-09):** `make images` on the candidate stops in
+  `java.base`. The build compiles with `-encoding ascii`, and 53 M3 Java sources contain
+  non-ASCII text. Next come 7 `-Werror` warnings in `java.base` and then 42 doclint errors
+  in `jdk.m3.collections`; the fixes are #2899 and #2901. After those, `jdk.m3.collections`
+  stops on javac's dangling-documentation-comment lint: 743 module files open with a
+  `/*****` license header, which javac reads as a doc comment. That last one needs an
+  owner decision.
+- **Naming authority pin (measured 2026-11-09):** `name-plan.json` pins `name-mapping.json`
+  blob `3879a0f1fbc2`, but `9eb3a926ff` moved it to `f191f5772b1d`. The documented re-pin
+  path is the Synexia authority-pin recipe.
+- **Standalone ratchet (measured 2026-11-09):** the dependency counts grew past
+  `STANDALONE_BASELINE.tsv`. 152 of the 428 `D_REPO_REF` rows, and all 8 `D_SECRET` rows,
+  are in archived `retained-variants` copies.
 
 - **Platform builds (snapshot 2026-10-31):** the last recorded completed OpenJDK
   sanity run in this audit was from 2026-10-19; 305 Action runs were queued
