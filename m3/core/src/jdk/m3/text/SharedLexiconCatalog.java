@@ -779,8 +779,9 @@ public final class SharedLexiconCatalog {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             try (InputStream input = Files.newInputStream(path)) {
                 byte[] buffer = new byte[8192];
-                // A non-empty buffer read returns at least one byte or -1 at end of file.
-                for (int read; (read = input.read(buffer)) >= 0;) digest.update(buffer, 0, read);
+                for (int read; (read = input.read(buffer)) >= 0;) {
+                    digest.update(buffer, 0, read); // a non-empty buffer read returns >= 1 byte or -1
+                }
             }
             return digest.digest();
         } catch (NoSuchAlgorithmException impossible) {
