@@ -79,6 +79,7 @@
 #ifdef LINUX
 // SapMachine 2019-02-20: Vitals
 #include "vitals_linux_himemreport.hpp"
+#endif
 
 #ifndef PRODUCT
 #include <signal.h>

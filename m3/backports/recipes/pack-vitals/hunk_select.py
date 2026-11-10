@@ -2,15 +2,16 @@
 # Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
 """hunk_select.py <unified diff> <keep regex> <out patch> <audit tsv> [drop-block regex] [marker file]
 
-HUNK_SELECT v1.1 (2026-11-10) is a declared donor-feature extractor. From a vendor's diff (base -> vendor) it takes
+HUNK_SELECT v1.2 (2026-11-10) is a declared donor-feature extractor. From a vendor's diff (base -> vendor) it takes
 one feature family without the vendor's other changes.
 
 - A hunk is KEPT when one of its changed lines matches the keep regex (case-insensitive), or contains a vendor date
   marker listed in the marker file (one marker per line, such as "SapMachine 2026-10-01"). The marker file holds the
   markers found in the feature's own commits.
 - v1.1, mixed hunks: inside a kept hunk, a block of added lines that starts with a line matching the drop-block
-  regex is removed. The block runs through the following added lines up to and including the first blank or
-  closing (#endif) added line. The hunk header's new-line count is recomputed. A kept hunk left with no change is
+  regex is removed. The block runs through the following added lines up to and including the first blank line at
+  #if depth 0. v1.2: an #endif closes only an #if opened inside the block; an #endif that closes an outer #if ends
+  the block and is kept. The hunk header's new-line count is recomputed. A kept hunk left with no change is
   dropped.
 - The audit TSV lists every hunk with its decision and first changed line, plus every stripped block."""
 import re
@@ -39,11 +40,21 @@ def strip_blocks(h, name, rows):
     while i < len(body):
         l = body[i]
         if drop_rx and l.startswith("+") and drop_rx.search(l[1:]):
-            j = i
+            j, depth = i, 0
             while j < len(body) and body[j].startswith("+"):
-                end = body[j][1:].strip() in ("", "#endif") or body[j][1:].lstrip().startswith("#endif")
+                s = body[j][1:].lstrip()
+                if s.startswith("#if"):
+                    depth += 1
+                elif s.startswith("#endif"):
+                    if depth == 0:
+                        break  # v1.2: this #endif closes an #if opened before the block; keep it
+                    depth -= 1
+                    j += 1
+                    if depth == 0:
+                        break
+                    continue
                 j += 1
-                if end and j - 1 > i:
+                if s.strip() == "" and depth == 0 and j - 1 > i:
                     break
             rows.append(f"{name}\t{h[0].split(' ')[1]}\tSTRIP_BLOCK\t{l[1:].strip()[:100]}")
             i = j

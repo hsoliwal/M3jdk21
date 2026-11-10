@@ -463,12 +463,13 @@ index 65a52a0..ee30a23 100644
 +#include "vitals/vitals.hpp"
  #if INCLUDE_JFR
  #include "jfr/jfr.hpp"
-@@ -75,4 +77,7 @@
+@@ -75,4 +77,8 @@
  #include "jvmci/jvmci.hpp"
  #endif
 +#ifdef LINUX
 +// SapMachine 2019-02-20: Vitals
 +#include "vitals_linux_himemreport.hpp"
++#endif
  
  #ifndef PRODUCT
 @@ -1321,4 +1336,21 @@ void VMError::report(outputStream* st, bool _verbose) {
