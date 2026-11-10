@@ -182,11 +182,13 @@ public final class SharedLexiconCatalogRefusalContractTest {
     /** Windows drive-relative names resolve outside the export; elsewhere they are plain names. */
     private static void driveRelativeFileNames(Export e) throws Exception {
         String row0 = e.shards().get(0);
-        char drive = Character.toUpperCase(e.root().getRoot() == null ? 'C'
-                : e.root().getRoot().toString().charAt(0));
+        // POSIX roots are "/", not a drive letter; any letter is an ordinary name character there.
+        boolean windows = java.io.File.separatorChar == '\\';
+        char drive = windows && e.root().getRoot() != null
+                ? Character.toUpperCase(e.root().getRoot().toString().charAt(0)) : 'C';
         char other = drive == 'Q' ? 'R' : 'Q';
         for (String name : List.of(other + ":part-0.m3lex", drive + ":part-0.m3lex")) {
-            if (java.io.File.separatorChar == '\\') {
+            if (windows) {
                 refuse(e, SHARDS, set(e.shards(), 0, cell(row0, 1, name)), "unsafe shard file");
             } else {
                 e.restore();

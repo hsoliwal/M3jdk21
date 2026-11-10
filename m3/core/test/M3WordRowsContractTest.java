@@ -334,8 +334,6 @@ public final class M3WordRowsContractTest {
         if (args.length != 0) {
             M3WordRowsNative.load(Path.of(args[0]));
             check(M3WordRowsNative.available(), "native library loaded");
-            M3WordRowsNative.load(Path.of(args[0]));
-            check(M3WordRowsNative.available(), "repeated explicit load is idempotent");
             check(Arrays.equals(expected, M3WordRowsNative.flagsBatch(rows, ids)), "JNI full-batch parity");
             check(Arrays.equals(new int[0], M3WordRowsNative.flagsBatch(rows, new int[0])), "JNI empty");
         }

@@ -24,6 +24,7 @@ mkdir -p build/tests build/logs
   core/test/M3PrecomputePayloadParserContractTest.java \
   core/test/M3Sha256UnavailableContractTest.java \
   core/test/M3StringPieceContractTest.java \
+  core/test/M3WordRowsNativeLoadContractTest.java \
   core/test/SharedLexiconCatalogRefusalContractTest.java \
   core/test/SharedLexiconFamilySidecarRefusalContractTest.java \
   core/test/SharedLexiconImageContractTest.java \
@@ -110,3 +111,4 @@ printf '# no security.provider.N entries: no MessageDigest SHA-256\n' > build/na
 "$M3JDK/bin/java" -ea -esa -Djava.security.properties==build/native/provider-free.security --module-path build/jdk.m3.text.jar --patch-module jdk.m3.text=build/whitebox -m jdk.m3.text/jdk.m3.text.M3FixedAddressMappingRefusalContractTest nosha "$mapping_lib" build/native/fixed-address-nosha | tee build/logs/extra-fixed-address-nosha.log
 "$M3JDK/bin/java" -ea -esa -Xcheck:jni --module-path build/jdk.m3.text.jar --patch-module jdk.m3.text=build/whitebox -m jdk.m3.text/jdk.m3.text.M3GvasLiteralImageJniContractTest "$mapping_lib" build/native/gvas-literal | tee build/logs/extra-gvas-literal-jni.log
 "$M3JDK/bin/java" -ea -esa -Xcheck:jni -cp build/tests:build/jdk.m3.text.jar M3WordRowsContractTest "build/native/m3_wordrows_jni.$jni_ext" | tee build/logs/extra-word-rows-jni-contract.log
+"$M3JDK/bin/java" -ea -esa -Xcheck:jni --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests M3WordRowsNativeLoadContractTest "build/native/m3_wordrows_jni.$jni_ext" | tee build/logs/extra-word-rows-native-load.log
