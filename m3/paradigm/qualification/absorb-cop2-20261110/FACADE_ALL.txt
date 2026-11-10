@@ -1,0 +1,18 @@
+FACADE_ONLY AbstractBaton.class
+FACADE_ONLY AbstractCacheEventPublisher.class
+FACADE_ONLY AbstractCircuitBreaker.class
+FACADE_ONLY AbstractContainer.class
+FACADE_ONLY AbstractContextBloom.class
+FACADE_ONLY AbstractContextCollapse.class
+FACADE_ONLY AbstractContextComponent.class
+FACADE_ONLY AbstractContextKernel.class
+FACADE_ONLY AbstractGlyphPool.class
+FACADE_ONLY AbstractGlyphifiable.class
+FACADE_ONLY AbstractInteractable.class
+FACADE_ONLY AbstractInteractableEvent.class
+FACADE_ONLY AbstractObservableContext.class
+FACADE_ONLY AbstractSequencer.class
+FACADE_ONLY AbstractStringifiable.class
+FACADE_ONLY AbstractVisitable.class
+FACADE_ONLY IFileWatcher$NioFileWatcher.class
+FACADE_ALL equal=126 facade_only=17 residual=0

@@ -1,0 +1,7 @@
+class	reason
+GrailNaturalPolicy	needs GrailEventJournal, which uses java.sql (module wiring needs admission)
+GrailPolicy	needs GrailEventJournal, which uses java.sql (module wiring needs admission)
+GrailPolicyInputs	needs GrailEventJournal, which uses java.sql (module wiring needs admission)
+GrailThesaurus	needs GrailEventJournal, which uses java.sql (module wiring needs admission)
+GrailYamlPolicies	needs GrailEventJournal, which uses java.sql (module wiring needs admission)
+MavenToolBindings	needs QualityEvidenceReports, which uses javax.xml.stream (module wiring needs admission)
