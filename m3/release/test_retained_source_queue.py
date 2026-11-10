@@ -117,6 +117,33 @@ class RetainedSourceQueueTest(unittest.TestCase):
         self.assertEqual(QUEUE.main(["--root", str(self.root),
                                      "--tsv-out", str(path), "--summary-out", str(summary)]), 0)
 
+    def test_ledgered_retirement_is_resolved_lineage_only_for_its_exact_blob(self):
+        self.archive("2930", "m3/recipes/Legacy.java", "legacy recipe\n")
+        self.archive("2930", "m3/recipes/Other.java", "other recipe\n")
+        git(self.root, "add", "--", self.prefix)
+        git(self.root, "commit", "-qm", "retire legacy recipes")
+        blob = subprocess.run(["git", "-C", str(self.root), "rev-parse",
+                               f"HEAD:{self.prefix}pr2930/m3/recipes/Legacy.java"],
+                              check=True, capture_output=True, text=True).stdout.strip()
+        rows = [QUEUE.CUSTODY_HEADER,
+                "\t".join(["m3/recipes/Legacy.java", blob, "100644", "RETIRE",
+                           self.prefix + "pr2930/m3/recipes/Legacy.java", "unused", "none"]),
+                "\t".join(["m3/recipes/Other.java", "0" * 40, "100644", "RETIRE",
+                           self.prefix + "pr2930/m3/recipes/Other.java", "unused", "none"])]
+        put(self.root, QUEUE.CUSTODY_LEDGER, "\n".join(rows) + "\n")
+        git(self.root, "add", "--", QUEUE.CUSTODY_LEDGER)
+        git(self.root, "commit", "-qm", "custody ledger")
+        tsv, _, summary = QUEUE.scan(self.root)
+        self.assertEqual(summary["states"]["RETIRED_LEGACY_RECIPE"], 1)
+        self.assertEqual(summary["states"]["REVIEW_ABSENT_ACTIVE_PATH"], 2)
+        self.assertEqual(summary["unresolved_rows"], 4)
+        self.assertIn("pr2930/m3/recipes/Legacy.java\t100644\t" + blob + "\t-\t-\tRETIRED_LEGACY_RECIPE\t", tsv)
+        put(self.root, QUEUE.CUSTODY_LEDGER, "path\tblob\n")
+        git(self.root, "add", "--", QUEUE.CUSTODY_LEDGER)
+        git(self.root, "commit", "-qm", "drifted ledger header")
+        with self.assertRaisesRegex(ValueError, "CUSTODY_LEDGER_HEADER_DRIFT"):
+            QUEUE.scan(self.root)
+
     def test_archived_path_malformed_is_refused_not_misclassified(self):
         self.archive("0", "m3/tools/Wrong.java", "not a valid PR\n")
         git(self.root, "add", ".")

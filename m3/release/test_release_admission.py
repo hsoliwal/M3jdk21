@@ -790,6 +790,97 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
         self.assertEqual(row["state"], "HOLD")
         self.assertEqual(row["paths"], ["m3/recipes/apply.py"])
 
+    def amend(self):
+        self.git("add", "-A", ".")
+        self.git("commit", "--amend", "-qm", "synthetic custody tree")
+        self.evidence["source_commit"] = self.git("rev-parse", "HEAD")
+        self.evidence["source_tree"] = self.git("rev-parse", "HEAD^{tree}")
+
+    def custody_fixture(self):
+        """One RETIRE, one MOVE and one in-place ABSORB candidate, applied at HEAD."""
+        self.write("m3/recipes/apply.py", "# retired legacy recipe\n")
+        self.write("m3/recipes/README.md", "not an executable candidate\n")
+        self.write(".m3/openrewrite-recipes/Boot.java", "class Boot {}\n")
+        self.write("m3/tooling/migration-recipes/pom.xml", "<project/>\n")
+        self.amend()
+        retired = release.RETIRE_ARCHIVE + "pr7/m3/recipes/apply.py"
+        rows = [("m3/recipes/apply.py", "RETIRE", retired),
+                (".m3/openrewrite-recipes/Boot.java", "MOVE", "m3/tooling/bootstrap/Boot.java"),
+                ("m3/tooling/migration-recipes/pom.xml", "ABSORB", "m3/tooling/migration-recipes/pom.xml")]
+        self.ledger = [(path, self.git("rev-parse", "HEAD:" + path), "100644", decision, dest,
+                        "synthetic reason", "synthetic callers") for path, decision, dest in rows]
+        (self.root / retired).parent.mkdir(parents=True)
+        (self.root / "m3/tooling/bootstrap").mkdir(parents=True)
+        self.git("mv", "m3/recipes/apply.py", retired)
+        self.git("mv", ".m3/openrewrite-recipes/Boot.java", "m3/tooling/bootstrap/Boot.java")
+        self.write_ledger(self.ledger)
+
+    def write_ledger(self, rows, header=release.CUSTODY_COLUMNS):
+        self.write(release.CUSTODY_LEDGER, "".join("\t".join(r) + "\n" for r in [header, *rows]))
+        self.amend()
+
+    def custody(self):
+        result = self.result()
+        self.assertTrue(result["policy_valid"], result)
+        check = next(c for c in result["checks"] if c["name"] == "legacy_recipe_custody")
+        return check, next((q for q in result["queue"] if q["id"] == "legacy_recipe_custody"), None)
+
+    def test_applied_custody_ledger_passes_legacy_recipe_custody(self):
+        self.custody_fixture()
+        check, row = self.custody()
+        self.assertEqual(check["status"], "PASS", check)
+        self.assertIsNone(row)
+        self.assertIn("ABSORB 1, MOVE 1, RETIRE 1", check["detail"])
+
+    def test_unledgered_candidate_beside_an_applied_ledger_still_holds(self):
+        self.custody_fixture()
+        self.write("m3/recipes/new_runner.py", "# arrived after the ledger\n")
+        self.amend()
+        check, row = self.custody()
+        self.assertEqual(check["status"], "HOLD")
+        self.assertEqual(row["paths"], ["m3/recipes/new_runner.py"])
+
+    def test_unapplied_drifted_or_copied_custody_rows_hold(self):
+        self.custody_fixture()
+        base = self.git("rev-parse", "HEAD")
+        retired = self.ledger[0][4]
+        cases = {
+            "drifted-move": lambda: self.write("m3/tooling/bootstrap/Boot.java", "class Drifted {}\n"),
+            "copied-not-moved": lambda: self.write("m3/recipes/apply.py", "# retired legacy recipe\n"),
+            "unapplied-retire": lambda: self.git("mv", retired, "m3/recipes/apply.py"),
+            "absorbed-in-place-drift": lambda: self.write("m3/tooling/migration-recipes/pom.xml", "<p/>\n"),
+        }
+        for label, mutate in cases.items():
+            with self.subTest(label):
+                self.git("reset", "-q", "--hard", base)
+                mutate()
+                self.amend()
+                check, row = self.custody()
+                self.assertEqual(check["status"], "HOLD", check)
+                self.assertIn("unapplied or drifted", check["detail"])
+                self.assertTrue(any(" -> " in p for p in row["paths"]), row)
+
+    def test_malformed_custody_ledger_is_a_hold_not_a_crash(self):
+        self.custody_fixture()
+        good = list(self.ledger)
+        retire, move, absorb = good
+        cases = {
+            "header": (good, ("path", "blob")),
+            "retire-outside-archive": ([retire[:4] + ("m3/attic/m3/recipes/apply.py",) + retire[5:], move, absorb], None),
+            "move-into-legacy-root": ([retire, move[:4] + ("m3/recipes/Boot.java",) + move[5:], absorb], None),
+            "duplicate-path": ([retire, move, absorb, absorb], None),
+            "non-candidate": ([retire, move, absorb, ("m3/recipes/README.md",) + absorb[1:]], None),
+            "unknown-decision": ([retire, move, absorb[:3] + ("KEEP",) + absorb[4:]], None),
+            "missing-evidence": ([retire, move, absorb[:6] + (" ",)], None),
+        }
+        for label, (rows, header) in cases.items():
+            with self.subTest(label):
+                self.write_ledger(rows, header or release.CUSTODY_COLUMNS)
+                check, row = self.custody()
+                self.assertEqual(check["status"], "HOLD", check)
+                self.assertIn("custody ledger invalid", check["detail"])
+                self.assertEqual(row["paths"], ["m3/tooling/migration-recipes/pom.xml"])
+
     def test_name_queue_map_drift_and_self_promotion_are_refused(self):
         plan = json.loads((self.root / release.NAME_PLAN).read_text())
         plan["authority_blob"] = "a" * 40
