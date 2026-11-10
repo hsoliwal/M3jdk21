@@ -1,0 +1,40 @@
+# M3_INTEGRATE rule table (pattern M3_TO_JDK_LAYOUT v1): one row per rule, first match wins, order is significant.
+# Every m3/ path gets exactly one MAPPING.tsv row from the first rule that matches it; a path no rule matches is a
+# finding (the tool refuses). Columns (tab separated):
+#   rule_id  kind(prefix|regex)  pattern  target  phase  status  reason
+# target: RETIRE, or a template; {rest} = the path after a prefix pattern, {1}..{9} = regex groups,
+#   {lib} = regex group 1 normalised to a module-name segment (lower case, [a-z0-9] only, version suffix dropped).
+# status: MOVE (moved by this phase's PR), RETIRE (removal, separate approval PR), HOLD_APPROVAL (target module root does
+#   not exist: needs the user's approval before anything moves), HOLD_P1 (product code: moves with its area's
+#   move_area.py / move_module_area.py run and gates, one area per PR), AMBIGUOUS (moved by default, listed for review).
+#
+# ---- P4: not JDK source; absorb-first rule (user 2026-10-30): removal needs the user's approval, history keeps it.
+#      RETIRE = no live build reads it; HOLD_APPROVAL = still read by workflows/tools (absorb first, then retire).
+R4-DONOR-SRC	prefix	m3/vendor/third_party/	RETIRE	P4	HOLD_APPROVAL	STILL USED: 44 workflows build it (third-party-sources reactor: JUnit, ASM, ... installed offline under the standalone rule). Absorb first (user 2026-10-30), or keep as build inputs at make/m3/vendor/third_party (user decision). Was: unchanged donor source projects (published sources, not built into the JDK image); history keeps them; RETIRED.tsv pins each blob
+R4-DONOR-IMAGES	prefix	m3/vendor/third_party-images/	RETIRE	P4	RETIRE	donor image-build inputs; not JDK source
+R4-TORNADO	prefix	m3/vendor/tornadovm/	RETIRE	P4	HOLD_APPROVAL	STILL USED: release-contract.json source and runtime-integration/tornado/build_runtime.py (source-lock.json root). Absorb first. Was: TornadoVM donor tree; not JDK source, not in the image
+R4-DESCRIPTORS	prefix	m3/vendor/third_party-m3/descriptors/	RETIRE	P4	HOLD_APPROVAL	follows m3/vendor/third_party (jmod-recipes DESCRIPTOR_MANIFEST pins them). Was: jmod descriptors for the donor libraries under m3/vendor/third_party; retire together with them
+R4-SNAPSHOTS	prefix	m3/vendor/m3/snapshots/	RETIRE	P4	RETIRE	dated build snapshots of M3 collections (archive)
+R4-RETAINED	regex	^m3/qualification/[^/]+/retained-variants/	RETIRE	P4	RETIRE	retained-variants archive of PR heads (custody archive; git history keeps every blob)
+R4-IMPL-DONOR	prefix	m3/collections/implementations/	RETIRE	P4	HOLD_APPROVAL	STILL USED: 20 workflows run collections recipe tests against them. Absorb first. Was: 150 donor-shaped collection projects, in no reactor and not in src/jdk.m3.collections; absorb-first: no absorption PASS ledger yet
+R4-CRASHLOG	regex	^m3/.*/(hs_err_pid|replay_pid)[0-9]+\.log$	RETIRE	P4	RETIRE	JVM crash/replay dump (not source, not evidence of a gate)
+#
+# ---- P3: libraries relocated into com.m3.lib.* (optional JMODs built by lib-intake; NOT in make's image today)
+R3-LIB-CLASSES	regex	^m3/vendor/third_party-m3/relocated/([^/]+)/src/main/java/(.*)$	src/jdk.m3.lib.{lib}/share/classes/{2}	P3	HOLD_APPROVAL	new module root jdk.m3.lib.{lib}; joins the image build (today an optional JMOD); descriptor name must change (jdk.m3.io etc. collide)
+R3-LIB-RES	regex	^m3/vendor/third_party-m3/relocated/([^/]+)/src/main/resources/(.*)$	src/jdk.m3.lib.{lib}/share/classes/{2}	P3	HOLD_APPROVAL	resources of the relocated library (same module root)
+R3-LIB-LEGAL	regex	^m3/vendor/third_party-m3/relocated/([^/]+)/(LICENSE[^/]*|NOTICE[^/]*|THIRD_PARTY_NOTICES\.md)$	src/jdk.m3.lib.{lib}/share/legal/{lib}-{2}	P3	HOLD_APPROVAL	third-party notice of the relocated library (OpenJDK legal directory)
+R3-LIB-OTHER	regex	^m3/vendor/third_party-m3/relocated/([^/]+)/(.*)$	make/m3/lib-intake/relocated/{1}/{2}	P3	HOLD_APPROVAL	intake records of the relocated library (provenance, pom, tests) with the lib-intake tooling
+R3-LAYER-DOC	regex	^m3/vendor/third_party-m3/([^/]+)$	make/m3/lib-intake/third_party-m3/{1}	P3	HOLD_APPROVAL	README/NOTICE of the M3 refactor layer
+R3-LAYER-NLP	prefix	m3/vendor/third_party-m3/nlp-search/	make/m3/lib-intake/third_party-m3/nlp-search/{rest}	P3	HOLD_APPROVAL	nlp-search third-party layer records
+#
+# ---- P1: product code of the m3/ Maven modules (approved layout 2026-11-08); one area per PR with its gates
+# generated from AREAS.tsv by the tool (rules P1-<area>-*); see AREAS.tsv
+#
+# ---- P2: documentation corpus -> doc/m3 (same depth: relative links keep their shape)
+R2-DOCS	prefix	m3/docs/	doc/m3/{rest}	P2	MOVE	documentation corpus (OpenJDK doc/ is markdown; data files referenced by the docs travel with them)
+R2-PAPERS	prefix	m3/papers/	doc/m3/papers/{rest}	P2	MOVE	papers (markdown)
+R2-LEGAL-ROOT	regex	^m3/(LICENSE|NOTICE|THIRD_PARTY_NOTICES\.md)$	make/m3/{1}	P2	HOLD_APPROVAL	stays while m3/ still holds vendored and product code it covers; at the end: licence/notice of the former m3/ tree; kept with the build tooling it covers; alternative: merge into root LICENSE-M3-APACHE-2.0.txt / M3-SYNEXIA-NOTICE.md (user decision)
+# ---- P2: build, release, recipe and qualification tooling and their records -> make/m3 (approved 2026-11-08:
+#      "build tooling -> make/m3"); the m3/ prefix becomes make/m3/, so every sibling relation inside it is unchanged
+R2-VENDOR-M3	prefix	m3/vendor/m3/	make/m3/vendor/m3/{rest}	P2	HOLD_APPROVAL	stays with m3/vendor until the vendor decision (package_gate VENDOR class is m3/vendor/; the reactor builds m3-openrewrite-recipes from it); M3-owned build inputs kept under vendor (openrewrite recipes used by the reactor, mindex/indexstring snapshots); review: absorb or retire
+R2-TOOLING	prefix	m3/	make/m3/{rest}	P2	MOVE	build/release/recipe/qualification tooling and its records (default for m3/ paths that are not product code)

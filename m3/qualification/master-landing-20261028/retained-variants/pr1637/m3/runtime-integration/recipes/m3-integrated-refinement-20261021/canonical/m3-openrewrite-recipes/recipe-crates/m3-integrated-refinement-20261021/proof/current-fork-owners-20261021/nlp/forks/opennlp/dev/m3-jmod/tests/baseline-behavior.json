@@ -1,5 +1,0 @@
-{
-  "baseline": "All 923 unmodified current-fork Java production sources compiled with javac --release 21; original resources and pinned external dependency closure.",
-  "core_behavior": "7804973b6b61be810c24e0fa2fac8c408e34c72c5b96341cad2ff2d0148613c4",
-  "donor_commit": "368337311ad94b665fd178f8d3ced005a73b2370"
-}

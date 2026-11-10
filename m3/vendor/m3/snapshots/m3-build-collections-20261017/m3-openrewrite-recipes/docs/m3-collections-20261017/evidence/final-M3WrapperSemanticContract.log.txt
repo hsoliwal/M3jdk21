@@ -1,4 +1,0 @@
-$ ["/workspace/scratch/4f99f40718f0/m3-implementation/toolchain/jdk-21.0.2+13/bin/java", "-cp", "/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/final-classes", "com.synexia.common.collections.M3WrapperSemanticContract"]
-M3WrapperSemanticContract PASS assertions=3757
-
-EXIT 0

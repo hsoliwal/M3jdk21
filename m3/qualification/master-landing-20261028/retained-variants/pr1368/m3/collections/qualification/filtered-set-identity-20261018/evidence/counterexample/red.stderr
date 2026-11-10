@@ -1,4 +1,0 @@
-Exception in thread "main" java.lang.AssertionError: foreign identity alias is absent: expected false but got true
-	at com.m3.collections.M3FilteredSetIdentityContract.check(M3FilteredSetIdentityContract.java:39)
-	at com.m3.collections.M3FilteredSetIdentityContract.foreignIdentityProbe(M3FilteredSetIdentityContract.java:53)
-	at com.m3.collections.M3FilteredSetIdentityContract.main(M3FilteredSetIdentityContract.java:164)

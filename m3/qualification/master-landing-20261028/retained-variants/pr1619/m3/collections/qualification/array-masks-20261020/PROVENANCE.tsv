@@ -1,7 +1,0 @@
-path	before_sha256	after_sha256	recipe	license
-m3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java	78340d2c41e0ade88474171636a02da07ecae0860c6988acaefac5c1fdf0fa03	cf9b0c816d5390917d6acc417d0697b020b6efcb8260b15c79ee1a436bd729a4	array-removal-20261020	Apache-2.0
-m3/collections/src/test/java/com/m3/collections/M3ArrayRemovalContract.java	ABSENT	f350e04b1c80aca40ae6cd621319a713c52253e7159c8c7123abc4522b637c97	array-removal-20261020	Apache-2.0
-m3/collections/src/test/java/com/m3/collections/M3ArrayRemovalTest.java	ABSENT	06a11d8b0f741b2dbc58a45dd972cac119ddd154f5f2ea04e94554a92d820f13	array-removal-20261020	Apache-2.0
-m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java	3d6d6bfb82e9030a91da386e38bdec6a9bf41c268ff15c83d7c122db983f2a28	df976ffa7659df6b5b6ea938826f5dca51d3a6ddfcf66c8968d2c3fafe97d620	masked-sort-20261020	Apache-2.0
-m3/collections/src/test/java/com/m3/collections/M3MaskedSortContract.java	ABSENT	2ad7d40af9c52238df6365f9250a37d73f951cf62029333f415beea6c018f283	masked-sort-20261020	Apache-2.0
-m3/collections/src/test/java/com/m3/collections/M3MaskedSortTest.java	ABSENT	cd2ba94b036763958bfd28850120e32aa03631501c65c55c6c5d3e5f7681a48c	masked-sort-20261020	Apache-2.0

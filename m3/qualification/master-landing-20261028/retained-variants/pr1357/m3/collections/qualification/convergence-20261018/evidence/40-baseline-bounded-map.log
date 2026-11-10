@@ -1,3 +1,0 @@
-PASS M3WrapperConvergenceContract mode=bounded-map checks=64
-
-EXIT=0

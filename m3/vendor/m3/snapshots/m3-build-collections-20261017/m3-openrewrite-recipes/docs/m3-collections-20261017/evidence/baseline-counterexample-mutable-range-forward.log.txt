@@ -1,5 +1,0 @@
-COMMAND ["/workspace/scratch/4f99f40718f0/m3-implementation/toolchain/jdk-21.0.2+13/bin/java", "-cp", "/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/baseline-classes", "com.synexia.common.collections.M3WrapperNavigationCounterexample", "mutable-range-forward"]
-Exception in thread "main" java.lang.AssertionError: NAVIGATION/JDK_ORACLE_MISMATCH/mutable-range-forward expected=4 observed=java.lang.IllegalArgumentException
-	at com.synexia.common.collections.M3WrapperNavigationCounterexample.main(M3WrapperNavigationCounterexample.java:51)
-
-EXIT 1

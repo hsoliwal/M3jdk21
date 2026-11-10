@@ -1,1 +1,0 @@
-PASS M3WrapperConvergenceSelfTest case=all checks=35

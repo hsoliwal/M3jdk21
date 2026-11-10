@@ -1,8 +1,0 @@
-{
-  "artifact": "zstd-jni",
-  "version": "1.5.6-4",
-  "origin": "https://raw.githubusercontent.com/luben/zstd-jni/v1.5.6-4/LICENSE",
-  "sha256": "c6a6a8926f2f1732603e4b75779a5f6ce79238eb79bc36dcc5b7feb509bc6cd9",
-  "bytes": 1360,
-  "pom_license": "BSD 2-Clause License <https://opensource.org/licenses/BSD-2-Clause>"
-}

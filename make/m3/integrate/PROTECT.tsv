@@ -1,0 +1,9 @@
+# M3_TO_JDK_LAYOUT content protection: files whose bytes refs does not rewrite (they still move like any other file).
+# A recipe's rule tables, rename ledgers and replayed fixtures record the transformation they made: the old paths in
+# them are data, and rewriting them breaks the replay. Columns (tab separated):
+#   regex over the old or the new path	mode	reason
+# mode bytes: never rewritten. mode fixture: a test whose m3/... literals are inputs of the recorded rename (synthetic
+# trees), so only its own location (relative forms, __file__ parents) follows the move.
+^make/m3/integrate/	bytes	this recipe: MAPPING.tsv and the ledgers name old paths and base blob ids on purpose
+^(make/)?m3/tooling/jdk-naming/(NAMING_RULES\.tsv|NAMING_STANDARD\.md|RENAME_MAP\.tsv|RENAME_RESEAL\.tsv|RENAME_PLAN_SUMMARY\.tsv|RECIPE_MEMORY\.tsv|MOVE_REFS_[^/]+\.tsv)$	bytes	JDK naming recipe corpus: rules, rename ledgers and the replayed standard
+^(make/)?m3/tooling/jdk-naming/test_(jdk_naming|fold_package|move_refs|rename_types|product_name|reseal)\.py$	fixture	JDK naming recipe tests: their synthetic trees are the inputs of the recorded rename

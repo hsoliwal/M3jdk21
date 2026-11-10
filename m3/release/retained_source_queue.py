@@ -3,7 +3,9 @@
 """Read-only candidate queue for original source paths preserved by PR landings.
 
 This is a repository-tree census, not a semantic loss detector or a merge recipe.
-Only the pinned HEAD tree is examined; working-tree files are never consulted.
+Only the pinned HEAD tree is examined; working-tree files are never consulted. When the archive has been retired from
+the tree (M3_TO_JDK_LAYOUT P4, make/m3/integrate/MAPPING.tsv rule R4-RETAINED), it is read from ARCHIVE_COMMIT, the
+last commit whose tree holds it, so the queue keeps every row; the active side is still the HEAD tree.
 """
 from __future__ import annotations
 
@@ -18,6 +20,9 @@ import sys
 import tempfile
 
 ARCHIVE_ROOT = "m3/qualification/master-landing-20261028/retained-variants/"
+# FLLDCIM: MRL - M3_TO_JDK_LAYOUT P4: the archive leaves the tree; history keeps it at this commit (blob ids pinned
+# in make/m3/integrate/MAPPING.tsv)
+ARCHIVE_COMMIT = "16e35bee827e585cfb6fa38bc4a78671972ddb80"
 SOURCE_SUFFIXES = (".java", ".c", ".h", ".cc", ".cpp", ".hpp", ".S", ".s")
 OID = re.compile(r"[0-9a-f]{40}\Z")
 PR_PREFIX = re.compile(r"pr([1-9][0-9]*)/(.+)\Z")
@@ -66,6 +71,10 @@ def _tree_at(root: Path, revision: str, *paths: str) -> dict[str, tuple[str, str
     return entries
 
 
+def _has_commit(root: Path, revision: str) -> bool:
+    done = subprocess.run(["git", "-C", str(root), "cat-file", "-e", revision + "^{commit}"],
+                          stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    return done.returncode == 0
 def retired_by_ledger(root: Path, revision: str) -> set[tuple[str, str, str]]:
     """(archive path, mode, blob) of the RETIRE rows in the ledger committed at the revision."""
     try:
@@ -100,6 +109,9 @@ def scan(root: Path) -> tuple[str, str, dict[str, object]]:
     if not OID.fullmatch(head):
         raise ValueError("HEAD_NOT_SHA1_COMMIT")
     archived = _tree_at(root, head, ARCHIVE_ROOT)
+    archive_tree = head
+    if not archived and _has_commit(root, ARCHIVE_COMMIT):
+        archived, archive_tree = _tree_at(root, ARCHIVE_COMMIT, ARCHIVE_ROOT), ARCHIVE_COMMIT
     if not archived:
         raise ValueError("RETAINED_VARIANTS_TREE_MISSING")
     # One all-path index, not a subprocess for every donor source file.
@@ -150,6 +162,7 @@ def scan(root: Path) -> tuple[str, str, dict[str, object]]:
         "schema": "M3_RETAINED_SOURCE_QUEUE_V1",
         "tree_head": head,
         "scope": ARCHIVE_ROOT,
+        **({"archive_tree": archive_tree} if archive_tree != head else {}),
         "source_rows": len(lines),
         "non_source_rows_skipped": skipped,
         "states": dict(sorted(counts.items())),

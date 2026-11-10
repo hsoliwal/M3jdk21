@@ -1,8 +1,0 @@
-path	sha256	git_blob	mode	pr	note
-.github/workflows/m3-identity-rank-20261021.yml	f355ae96bd82818f44b182e8257ab220e6ab7d18e22cadd13aa70b1f5d172352	0126a9ba55442cde5ecf21487edbae962ba25d59	100644	1753	PR version, not live
-m3/collections/algorithm-catalogue/identity-index-rank-20261021/CATALOGUE.tsv	3cca00dc91d26dfe948d750548619e66bed038b959cb3d6df86d8a8560ad7697	490d869d3232527832de078140e4fc2342aa0536	100644	1753	PR version, not live
-m3/collections/algorithm-catalogue/identity-index-rank-20261021/README.md	5e0641904b7fa7fb1b7bd8ed4edaf3f352779dff9c18cfdb85f2f0e84dac9d2e	b9ac6e6763edb8ae6c1b349c1bd0b370b75ead36	100644	1753	PR version, not live
-m3/collections/src/main/java/jdk/m3/collections/M3IndexPathRank.java	277deb05359acef248972a3b7b4d5a6c4c3eed6d7c2e27c6fb613b6956664975	237f12b5a22900086fc110936ab642e7e6583ebe	100644	1753	PR version, not live
-m3/collections/src/main/java/jdk/m3/collections/M3LongStateArray.java	e67c66803343afa6fb59236247642e0727d19472a9b50fc57ce3f49b8bf3713b	ec7a17d2b375fa432b21a2fba4fbce0073b6daa6	100644	1753	PR version, not live
-m3/collections/src/test/java/com/m3/collections/M3IndexPathIdentitySelfTest.java	8dec52f9a5c596aa04d2e4927209ddd10bee211fe55e7250e90ac19b2d0c0659	4a093cce13778612f57bcd5959da72bfeb12c319	100644	1753	PR version, not live
-m3/collections/src/test/java/com/m3/collections/M3IndexPathIdentityTest.java	08e41bc22e79270bcfe99e6a08907c7e61ea6935d24b5c4f8f20a0bcbe2a9180	d9bf058b77b450efae867a3e38790c28e7af13f9	100644	1753	PR version, not live

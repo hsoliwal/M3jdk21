@@ -1,1 +1,0 @@
-PASS M3DeepReadOnlyCollectionSelfTest checks=84 depth=65536
