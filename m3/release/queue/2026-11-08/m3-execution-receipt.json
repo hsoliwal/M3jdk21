@@ -310,9 +310,9 @@
     {
       "path": "m3/release/retained_source_queue.py",
       "before_sha256": "182ad6d7b1336d3301621c58817621aecacf79c6491930a5bfc5f9d9bb4cc5c5",
-      "after_sha256": "ffe514cf3a4f7b2dd9559f6f4fb3c42642b6b67249be9296d550f31ca5be8f30",
+      "after_sha256": "b80988a03ac297c4dec926235dc02048089bab0bb44cd4760044c3f578af991d",
       "source_git_blob_sha1": "d4dae36652876d438076b1af4a80e1a8b7818b57",
-      "postimage_git_blob_sha1": "eb0f11848727aa26d3ad103a0127dfbb40885c02",
+      "postimage_git_blob_sha1": "ca21da1a3a7f849c8a96b3c5f95e76b8e4fafc46",
       "source_mode": "100644",
       "mode": "100644",
       "dataset": "m3-release-preparation"
@@ -350,9 +350,9 @@
     {
       "path": "m3/release/test_retained_source_queue.py",
       "before_sha256": "7da5d0d8dd3ba106e4c73dcfff183d388ed8d50100221fe29494da4bfb858657",
-      "after_sha256": "af9e567436265089f1754629144221638f0c6b5d1b3b9c135e3068e4e3e0bf17",
+      "after_sha256": "52167a404e9d7f08aa48f5700b7140ceb544e3dc59627e772d849538644d30ed",
       "source_git_blob_sha1": "35ec7d4f75bb0f9013bbe9752e9062e2f8566176",
-      "postimage_git_blob_sha1": "47f3a3c5b0a25df7d0afab91303ccdb0c27b02fc",
+      "postimage_git_blob_sha1": "7b62d58a4a85f5297851be74b6e005c18614e5a8",
       "source_mode": "100644",
       "mode": "100644",
       "dataset": "m3-release-preparation"
