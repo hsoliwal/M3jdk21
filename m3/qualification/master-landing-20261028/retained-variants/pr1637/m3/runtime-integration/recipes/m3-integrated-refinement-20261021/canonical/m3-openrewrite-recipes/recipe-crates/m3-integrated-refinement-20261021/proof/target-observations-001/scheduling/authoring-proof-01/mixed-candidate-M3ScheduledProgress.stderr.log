@@ -1,3 +1,0 @@
-Exception in thread "main" java.lang.AssertionError: original declaration changed
-	at M3ScheduledProgress.apiShape(Unknown Source)
-	at M3ScheduledProgress.main(Unknown Source)

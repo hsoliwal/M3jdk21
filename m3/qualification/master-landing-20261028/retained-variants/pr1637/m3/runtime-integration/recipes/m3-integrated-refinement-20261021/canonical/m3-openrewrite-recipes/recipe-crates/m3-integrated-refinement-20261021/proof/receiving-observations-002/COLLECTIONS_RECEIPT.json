@@ -1,9 +1,0 @@
-{
-  "exit": 0,
-  "input_drift": [],
-  "log_sha256": "37dcca6b72ae982b73469f3fc6ca8c32cccbbf8715a14368934520830ac9926e",
-  "invocation_sha256": "a212e6cc1d956a110a926307370c83d1f81e83723c75587e4003c62af3eda855",
-  "gate_sha256": "ff4856bf3d68c63a059b7700631543a453fc5d7552efdcfb80ac3b7e4bd4dae1",
-  "proof_sha256": "ccf882add04fa502376a279e97a7615cf3f667a66fd80ddb292d95be3788a917",
-  "status": "PASS"
-}

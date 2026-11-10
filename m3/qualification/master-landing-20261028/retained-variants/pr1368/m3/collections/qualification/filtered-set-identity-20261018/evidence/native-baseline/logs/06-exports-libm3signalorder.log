@@ -1,4 +1,0 @@
-$ ["nm", "-D", "--defined-only", "/workspace/scratch/f8287c652798/proof/native-collections/lib/libm3signalorder.so"]
-0000000000001280 T Java_com_m3_collections_M3SignalOrderNative_sort0
-
-EXIT=0

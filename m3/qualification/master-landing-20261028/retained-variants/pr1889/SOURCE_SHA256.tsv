@@ -1,4 +1,0 @@
-path	sha256	git_blob	mode	pr	note
-.github/workflows/m3-changejournal-doclint.yml	b8c07d023a6afb9e855dc5292af49cd4e35e2dab1cdf04aafff92c269b01a090	9825ad018f6ec0bf438282c2b8d51ef8b0c7160d	100644	1889	PR version, not live
-m3/qualification/changejournal-doclint/SOURCE_RECEIPT.tsv	2fb51212395cbc9b2f5841a84c9a9fb9407b7b755e120dd23ddcf57d31ebc3a4	46e06496367ca4630026f767fd8f9e8837f49ac9	100644	1889	PR version, not live
-src/java.base/share/classes/java/util/ChangeJournal.java	2d9c2589aee071b66eb069bf421664b8d0a6794673f0f3050cbab19cf99f9ae5	380667b18341d3b3405eff966e9b19bdacb233db	100644	1889	PR version, not live

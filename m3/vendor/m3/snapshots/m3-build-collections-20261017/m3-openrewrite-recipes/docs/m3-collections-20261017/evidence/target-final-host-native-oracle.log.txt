@@ -1,4 +1,0 @@
-$ ["/workspace/scratch/4f99f40718f0/m3-implementation/toolchain/jdk-21.0.2+13/bin/java", "-Xcheck:jni", "-Djava.library.path=/workspace/scratch/4f99f40718f0/m3-implementation/checkouts/M3jdk21/m3/tooling/module-packs/collections/target/m3-collections-image/native", "--add-modules", "jdk.m3.collections,com.m3.collections", "--module-path", "/workspace/scratch/4f99f40718f0/m3-implementation/checkouts/M3jdk21/m3/tooling/module-packs/collections/target/m3-collections-image/modules", "--patch-module", "com.m3.collections=/workspace/scratch/4f99f40718f0/m3-implementation/checkouts/M3jdk21/m3/tooling/module-packs/collections/target/m3-collections-image/host-native-contracts", "-m", "com.m3.collections/com.m3.collections.M3IndexMaskCompactorSelfTest", "--native"]
-PASS M3IndexMaskCompactorSelfTest checks=16925 JNI=true
-
-EXIT 0

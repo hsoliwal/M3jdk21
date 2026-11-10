@@ -1,3 +1,0 @@
-# path	before_git_blob	after_git_blob	canonical_recipe	role
-m3/fs/src/main/java/jdk/m3/fs/MFileStreams.java	7475a5394147156a9c68b52e8046573c9b280be9	39f1c3a3b9d111d00d2cc97132ce837e8bf386c8	com.synexia.m3.M3FsReusableRangeScratch20261022	one-original-provider-range-engine
-m3/fs/src/test/java/jdk/m3/fs/MFileRangeTransferTest.java	c49b947e3a2bf9d4511fb307813de5ea6493da80	e198e32697d2eea2957fd95e289ee232ed2a4f82	com.synexia.m3.M3FsReusableRangeScratch20261022	owning-junit-randomized-conformance

@@ -1,3 +1,0 @@
-path	sha256	git_blob	mode	pr	note
-m3/qualification/superset-native-filtered-20261021/EXACT_SOURCE_JAVA_JNI_RECEIPT_20261023.tsv	8dbebaf3527b661e54561bd36c6ed109b99e68dc4d0fe9fb2d260a47dd07cc33	92f04fd2ca569c70c1af2b5af533b03cb8925575	100644	1878	PR version, not live
-m3/qualification/superset-native-filtered-20261021/verify-integrated-java-jni.sh	e536630942c95cd229cf354036d80f1e295b7e9084507c8b8c5499e2f7a6ee2e	e23d16335611ac777938f654bfeeba8766dc5a62	100644	1878	PR version, not live

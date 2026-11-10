@@ -1,3 +1,0 @@
-$ ["gcc", "-std=c17", "-O2", "-Wall", "-Wextra", "-Werror", "-Wpedantic", "-fsanitize=undefined", "-fno-sanitize-recover=all", "-fPIC", "-I/workspace/scratch/f8287c652798/proof/native-collections/headers", "-I/tmp/m3-toolchain/jdk-21.0.12.1+1/include", "-I/tmp/m3-toolchain/jdk-21.0.12.1+1/include/linux", "-shared", "/workspace/scratch/f8287c652798/proof/native-collections/source/src/main/native/collections/m3_long_address_kernel.c", "-o", "/workspace/scratch/f8287c652798/proof/native-collections/lib/libm3_collections_address.so"]
-
-EXIT=0

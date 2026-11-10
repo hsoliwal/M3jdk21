@@ -132,6 +132,18 @@ class RetainedSourceQueueTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "RETAINED_VARIANTS_TREE_MISSING"):
             QUEUE.scan(self.root)
 
+    def test_retired_archive_is_read_from_its_last_commit(self):
+        _rows, _summary, before = QUEUE.scan(self.root)
+        last = subprocess.check_output(["git", "-C", str(self.root), "rev-parse", "HEAD"], text=True).strip()
+        git(self.root, "rm", "-qr", self.prefix)
+        git(self.root, "commit", "-qm", "retire archive")
+        with mock.patch.object(QUEUE, "ARCHIVE_COMMIT", last):
+            rows, _summary, after = QUEUE.scan(self.root)
+        self.assertEqual(after["archive_tree"], last)
+        self.assertEqual(after["source_rows"], before["source_rows"])
+        self.assertEqual(after["states"], before["states"])
+        self.assertIn("pr1888", rows)
+
 
 if __name__ == "__main__":
     unittest.main()
