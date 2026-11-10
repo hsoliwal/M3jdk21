@@ -109,8 +109,64 @@ public final class M3CanonicalApiBoundaryTest {
         }) {
             verifyCanonical(canonical);
         }
+        verifyExportClassification();
         auditExportedJavaPackages();
         System.out.println("M3JDK_CANONICAL_API_BOUNDARY_PASS 19 canonical owners, 2 required internal owners");
+    }
+
+    /**
+     * Regression case for the export classification: a public M3 type is internal in a package
+     * exported or opened only to named modules, and is still rejected in a package exported
+     * or opened to every module.
+     */
+    private static void verifyExportClassification() {
+        ModuleDescriptor probe = ModuleDescriptor.newModule("m3.boundary.probe")
+                .exports("p.everyone")
+                .exports(Set.of(), "p.named", Set.of("java.base"))
+                .opens("p.reflect")
+                .opens(Set.of(), "p.namedreflect", Set.of("java.base"))
+                .build();
+        Set<String> visible = unqualifiedPackages(probe);
+        if (!visible.equals(Set.of("p.everyone", "p.reflect"))) {
+            throw new AssertionError("export classification self-test: " + visible);
+        }
+        for (String pkg : new String[] {"p.everyone", "p.reflect"}) {
+            if (!exposesM3Class(pkg, "M3Probe", true, visible)) {
+                throw new AssertionError("public M3 type in unqualified package not caught: " + pkg);
+            }
+        }
+        if (exposesM3Class("p.named", "M3Probe", true, visible)
+                || exposesM3Class("p.namedreflect", "M3Probe", true, visible)
+                || exposesM3Class("p.everyone", "M3Probe", false, visible)
+                || exposesM3Class("p.everyone", "Probe", true, visible)) {
+            throw new AssertionError("export classification self-test: internal type rejected");
+        }
+    }
+
+    /**
+     * Packages every module can use: unqualified exports and unqualified opens. A package that
+     * is exported or opened only to named modules (for example {@code jdk.internal.misc}) is
+     * not Java SE API, so its public types count as internal.
+     */
+    private static Set<String> unqualifiedPackages(ModuleDescriptor descriptor) {
+        Set<String> visible = new HashSet<>();
+        for (ModuleDescriptor.Exports exp : descriptor.exports()) {
+            if (!exp.isQualified()) {
+                visible.add(exp.source());
+            }
+        }
+        for (ModuleDescriptor.Opens op : descriptor.opens()) {
+            if (!op.isQualified()) {
+                visible.add(op.source());
+            }
+        }
+        return visible;
+    }
+
+    /** A public, M3-spelled top-level type in a package every module can use. */
+    private static boolean exposesM3Class(String packageName, String simpleName, boolean isPublic,
+                                          Set<String> unqualified) {
+        return isPublic && internalSpelling(simpleName) && unqualified.contains(packageName);
     }
 
     /** Fail closed for M3 internal implementation modules, including qualified exports. */
@@ -140,16 +196,9 @@ public final class M3CanonicalApiBoundaryTest {
         return false;
     }
 
-    /** Validate top-level M3 classes in every exported or opened java.base package. */
+    /** Validate top-level M3 classes in every java.base package exported or opened to all modules. */
     private static void auditExportedJavaPackages() throws Exception {
-        ModuleDescriptor descriptor = String.class.getModule().getDescriptor();
-        Set<String> visiblePackages = new HashSet<>();
-        for (ModuleDescriptor.Exports exp : descriptor.exports()) {
-            visiblePackages.add(exp.source());
-        }
-        for (ModuleDescriptor.Opens op : descriptor.opens()) {
-            visiblePackages.add(op.source());
-        }
+        Set<String> visiblePackages = unqualifiedPackages(String.class.getModule().getDescriptor());
         try (ModuleReader reader = ModuleFinder.ofSystem().find("java.base")
                 .orElseThrow().open();
              var entries = reader.list()) {
@@ -170,7 +219,8 @@ public final class M3CanonicalApiBoundaryTest {
                 }
                 String binaryName = packageName + "." + simple;
                 Class<?> internal = Class.forName(binaryName, false, null);
-                if (Modifier.isPublic(internal.getModifiers())) {
+                if (exposesM3Class(packageName, simple, Modifier.isPublic(internal.getModifiers()),
+                        visiblePackages)) {
                     throw new AssertionError("exported JDK package exposes M3 class: " + binaryName);
                 }
             }
