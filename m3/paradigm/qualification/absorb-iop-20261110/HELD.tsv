@@ -1,0 +1,68 @@
+class	reason
+AllPatternFamilyRuntime	jdk_naming would rewrite code (SynexiaPattern -> M3Pattern file moves and hash-domain string constants); held for a naming decision
+AopPatternRuntime	jdk_naming would rewrite code (SynexiaPattern -> M3Pattern file moves and hash-domain string constants); held for a naming decision
+DagPatternRuntime	jdk_naming would rewrite code (SynexiaPattern -> M3Pattern file moves and hash-domain string constants); held for a naming decision
+DistributedPatternRuntime	jdk_naming would rewrite code (SynexiaPattern -> M3Pattern file moves and hash-domain string constants); held for a naming decision
+EipPatternRuntime	jdk_naming would rewrite code (SynexiaPattern -> M3Pattern file moves and hash-domain string constants); held for a naming decision
+IAnOPAnnotation	jdk_naming would rewrite code (SynexiaPattern -> M3Pattern file moves and hash-domain string constants); held for a naming decision
+MicroservicePatternRuntime	jdk_naming would rewrite code (SynexiaPattern -> M3Pattern file moves and hash-domain string constants); held for a naming decision
+PatternCatalog	jdk_naming would rewrite code (SynexiaPattern -> M3Pattern file moves and hash-domain string constants); held for a naming decision
+PatternDescriptor	jdk_naming would rewrite code (SynexiaPattern -> M3Pattern file moves and hash-domain string constants); held for a naming decision
+PatternEngine	jdk_naming would rewrite code (SynexiaPattern -> M3Pattern file moves and hash-domain string constants); held for a naming decision
+PatternInvocation	jdk_naming would rewrite code (SynexiaPattern -> M3Pattern file moves and hash-domain string constants); held for a naming decision
+PatternOutcome	jdk_naming would rewrite code (SynexiaPattern -> M3Pattern file moves and hash-domain string constants); held for a naming decision
+PatternRecipe	jdk_naming would rewrite code (SynexiaPattern -> M3Pattern file moves and hash-domain string constants); held for a naming decision
+PatternRecipeBook	jdk_naming would rewrite code (SynexiaPattern -> M3Pattern file moves and hash-domain string constants); held for a naming decision
+SpringPatternRuntime	jdk_naming would rewrite code (SynexiaPattern -> M3Pattern file moves and hash-domain string constants); held for a naming decision
+SynexiaPattern	jdk_naming would rewrite code (SynexiaPattern -> M3Pattern file moves and hash-domain string constants); held for a naming decision
+SynexiaPatternRuntime	jdk_naming would rewrite code (SynexiaPattern -> M3Pattern file moves and hash-domain string constants); held for a naming decision
+AIInteraction	needs held class InteractionMode
+AbstractCodeGenerator	needs held class ICodeGenerator
+AbstractGenerationRegistry	needs held class IGenerationRegistry
+AbstractHybridGenerator	needs held class IHybridGenerator
+AbstractInterfaceContext	imports com.synexia.anop,com.synexia.context.core
+AbstractSpecHashCalculator	needs held class ISpecHashCalculator
+AbstractTemplateFactory	needs held class ITemplateFactory
+AgentTipErrorHandler	imports lombok.experimental
+AgentTipOffers	imports lombok.experimental
+AgentTipUnixOffers	imports lombok.experimental
+AgentTips	imports lombok
+AmorphousDecision	imports lombok.experimental
+AmorphousFuzzy	imports lombok.experimental
+AmorphousMandelbrot	needs held class AmorphousDecision,AmorphousFuzzy,AmorphousStatistics,AmorphousStochastic
+AmorphousStatistics	imports lombok.experimental
+AmorphousStochastic	imports lombok.experimental
+CrystallineBridge	imports lombok.experimental
+CrystallineChemistry	imports lombok.experimental
+CrystallineInformationTheory	imports lombok.experimental
+CrystallineInvariants	imports lombok.experimental
+CrystallineMandelbrot	imports lombok.experimental
+CrystallineMathematics	imports lombok.experimental
+CrystallinePhysics	imports lombok.experimental
+IAIInteraction	needs held class InteractionMode
+IClassSpec	needs held class ISpec
+ICodeGenerator	imports com.synexia.context.core
+IDataSpec	needs held class ISpec
+IGenerationRegistry	imports com.synexia.context.core
+IHybridGenerator	imports com.synexia.context.core
+IImplementationHint	needs held class Library
+IImplementationHints	needs held class IImplementationHint
+IInterfaceContext	imports com.synexia.anop,com.synexia.context.core
+ISpec	needs held class Library
+ISpecHashCalculator	imports com.synexia.context.core
+ITemplateFactory	imports com.synexia.context.core
+IntentIR	needs held class InteractionMode
+InteractionMode	hub over M3InteractionMode
+IopAnalyzer	needs held class IopAnalyzerDb,IopAnalyzerScanner
+IopAnalyzerDb	imports lombok.experimental
+IopAnalyzerScanner	imports lombok.experimental
+Library	hub over M3Library
+MandelbrotContext	needs held class MandelbrotHuman,MandelbrotPhysics,MandelbrotSimulation
+MandelbrotContextProcessor	needs held class MandelbrotContext,ProcessorDemo,ProcessorValidator
+MandelbrotHuman	imports lombok.experimental
+MandelbrotPhysics	imports lombok.experimental
+MandelbrotSimulation	imports lombok.experimental
+PatternSkillInventoryAdapter	imports com.synexia.cop.cognition
+ProcessorAmorphousTypes	needs held class MandelbrotContextProcessor
+ProcessorDemo	imports lombok.experimental
+ProcessorValidator	imports lombok.experimental

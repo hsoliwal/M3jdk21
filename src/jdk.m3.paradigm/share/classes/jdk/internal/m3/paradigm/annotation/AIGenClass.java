@@ -312,4 +312,20 @@ public @interface AIGenClass {
          */
         NONE
     }
+
+    // MEMBER_UNION (user decision 2026-11-10, "Union into AnOP owners"): members of the IOP twin
+    /**
+     * Whether generated code can be overwritten. Default true - generated code
+     * is cache, not treasure.
+     *
+     * @return true if regeneration is allowed
+     */
+    boolean regenerable() default true;
+
+    /**
+     * Optional tags for categorization.
+     *
+     * @return category tags
+     */
+    String[] tags() default {};
 }

@@ -1,0 +1,4 @@
+AnnotationsTest	jdk.internal.m3.paradigm.contract.AnnotationsTest
+CourseClassifierTest	jdk.internal.m3.paradigm.contract.CourseClassifierTest
+ParsingUtilsTest	jdk.internal.m3.paradigm.contract.ParsingUtilsTest
+StringFormatUtilsTest	jdk.internal.m3.paradigm.contract.StringFormatUtilsTest

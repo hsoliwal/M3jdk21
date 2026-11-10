@@ -228,5 +228,190 @@ public final class HashOps {
         }
         return hash;
     }
-}
 
+    // MEMBER_UNION (user decision 2026-11-10, "Union into AnOP owners"): members of the IOP twin
+    /** Spec comparison results.
+     * @m3.pattern synexia:iop
+     * @m3.algorithm Defines NEW_SPEC, UNCHANGED and CHANGED with descriptive text and generation-decision predicates.
+     * @m3.dataStructures Three enum singleton values, their String descriptions and boolean predicate results.
+     * @m3.description Stable comparison-outcome contract shared by hash utilities and their callers.
+     */
+    public enum CompareResult {
+
+        /** New specification - no previous implementation.
+         * @m3.pattern synexia:iop
+         * @m3.algorithm Constructs the NEW_SPEC enum singleton with the New specification description.
+         * @m3.dataStructures One CompareResult enum singleton and one String description.
+         * @m3.description Enum outcome for absent previous specification labels.
+         */
+        NEW_SPEC("New specification"),
+
+        /** Spec unchanged - skip regeneration.
+         * @m3.pattern synexia:iop
+         * @m3.algorithm Constructs the UNCHANGED enum singleton with the Specification unchanged description.
+         * @m3.dataStructures One CompareResult enum singleton and one String description.
+         * @m3.description Enum outcome for equal specification labels.
+         */
+        UNCHANGED("Specification unchanged"),
+
+        /** Spec changed - trigger regeneration.
+         * @m3.pattern synexia:iop
+         * @m3.algorithm Constructs the CHANGED enum singleton with the Specification changed description.
+         * @m3.dataStructures One CompareResult enum singleton and one String description.
+         * @m3.description Enum outcome for unequal specification labels.
+         */
+        CHANGED("Specification changed");
+
+        /**
+         * @m3.pattern synexia:iop
+         * @m3.algorithm Retains the constructor-supplied String reference without an inline initializer.
+         * @m3.dataStructures One final String field per CompareResult enum singleton.
+         * @m3.description Immutable human-readable text associated with an enum outcome.
+         */
+        private final String description;
+
+        /**
+         * @m3.pattern synexia:iop
+         * @m3.algorithm Assigns the provided String reference to the final description field.
+         * @m3.dataStructures One String parameter and one final String field.
+         * @m3.description Initializes the descriptive state of one comparison outcome.
+         */
+        CompareResult(final String description) {
+            this.description = description;
+        }
+
+        /**
+         * Gets the human-readable description of this comparison result.
+         *
+         * @return the description text
+         * @m3.pattern synexia:iop
+         * @m3.algorithm Returns the existing description field directly.
+         * @m3.dataStructures One stored String reference returned without copying.
+         * @m3.description Accessor for an outcome description.
+         */
+        public String description() {
+            return description;
+        }
+
+        /**
+         * Checks if regeneration is needed.
+         *
+         * @return true if NEW_SPEC or CHANGED
+         * @m3.pattern synexia:iop
+         * @m3.algorithm Returns true only when this is NEW_SPEC or CHANGED using enum identity comparison.
+         * @m3.dataStructures Enum singleton references and a boolean result.
+         * @m3.description Generation decision predicate on comparison outcomes.
+         */
+        public boolean needsRegeneration() {
+            return this == NEW_SPEC || this == CHANGED;
+        }
+
+        /**
+         * Checks if generation should be skipped.
+         *
+         * @return true if UNCHANGED
+         * @m3.pattern synexia:iop
+         * @m3.algorithm Returns true only when this is UNCHANGED using enum identity comparison.
+         * @m3.dataStructures Enum singleton references and a boolean result.
+         * @m3.description Skip decision predicate on comparison outcomes.
+         */
+        public boolean shouldSkip() {
+            return this == UNCHANGED;
+        }
+    }
+
+    /**
+     * Compares two hashes and returns the comparison result.
+     *
+     * <p>
+     * Replaces pattern:
+     *
+     * <pre>{@code
+     * if (oldHash == null || oldHash.isEmpty()) {
+     * 	return NEW_SPEC;
+     * }
+     * if (oldHash.equals(newHash)) {
+     * 	return UNCHANGED;
+     * }
+     * return CHANGED;
+     * }</pre>
+     *
+     * @param oldHash
+     *            the previous hash (may be null or empty)
+     * @param newHash
+     *            the new hash
+     * @return the comparison result
+     * @m3.pattern synexia:bop
+     * @m3.algorithm Returns NEW_SPEC for absent oldHash, UNCHANGED for exact equality, otherwise CHANGED; newHash is not validated.
+     * @m3.dataStructures Two String references and a CompareResult enum result.
+     * @m3.description Three-way specification hash-label comparison.
+     */
+    public static CompareResult compare(final String oldHash, final String newHash) {
+        if (!isValidHash(oldHash)) {
+            return CompareResult.NEW_SPEC;
+        }
+        if (oldHash.equals(newHash)) {
+            return CompareResult.UNCHANGED;
+        }
+        return CompareResult.CHANGED;
+    }
+
+    /**
+     * Checks if two hashes are equal.
+     *
+     * <p>
+     * Handles null/empty cases safely.
+     * </p>
+     *
+     * @param hash1
+     *            the first hash
+     * @param hash2
+     *            the second hash
+     * @return true if both hashes are equal
+     * @m3.pattern synexia:bop
+     * @m3.algorithm Treats two missing labels as equal, one missing label as unequal, and compares two present labels with String.equals.
+     * @m3.dataStructures Two String references and a boolean result.
+     * @m3.description Null/empty-normalized equality operation.
+     */
+    public static boolean equals(final String hash1, final String hash2) {
+        if (!isValidHash(hash1) && !isValidHash(hash2)) {
+            return true;
+        }
+        if (!isValidHash(hash1) || !isValidHash(hash2)) {
+            return false;
+        }
+        return hash1.equals(hash2);
+    }
+
+    /**
+     * Checks if hashes are different.
+     *
+     * @param hash1
+     *            the first hash
+     * @param hash2
+     *            the second hash
+     * @return true if hashes are different
+     * @m3.pattern synexia:bop
+     * @m3.algorithm Negates the existing equals operation including its null/empty equivalence.
+     * @m3.dataStructures Two String references and a boolean result.
+     * @m3.description Negated hash-label equality operation.
+     */
+    public static boolean isDifferent(final String hash1, final String hash2) {
+        return !equals(hash1, hash2);
+    }
+
+    /**
+     * Checks if a hash is empty or missing.
+     *
+     * @param hash
+     *            the hash to check
+     * @return true if hash is null or empty
+     * @m3.pattern synexia:bop
+     * @m3.algorithm Negates isValidHash so both null and empty strings count as missing.
+     * @m3.dataStructures One String reference and a boolean result.
+     * @m3.description Missing-hash predicate.
+     */
+    public static boolean isEmpty(final String hash) {
+        return !isValidHash(hash);
+    }
+}
