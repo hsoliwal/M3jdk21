@@ -19,17 +19,51 @@ DAG = BASE / "m3-dag.tsv"
 PHASES = BASE / "promotion-phases.tsv"
 HEX40 = re.compile(r"^[0-9a-f]{40}$")
 
-PIN_EXPECTED = {
-    "schema": "M3JDK21_M3_FULL_BORROW_INTAKE_V1",
+# The pin TSV is the record of a donor intake: the donor commit, paths and blobs are history as they were at that
+# commit, so the record is pinned whole by SHA-256 (LF bytes) and only the receiver policy is spelled out here.
+PIN_SHA256 = "8bfda1f10efe07ec8482ca79efbcc0e7f71fc53e8472b750b31b762d4fb672fc"
+PIN_FIELDS = (
+    "schema",
+    "source_repository",
+    "source_pr",
+    "source_revision",
+    "source_handoff_commit",
+    "source_estate_path",
+    "source_estate_git_blob",
+    "source_dag_path",
+    "source_dag_git_blob",
+    "source_phase_path",
+    "source_phase_git_blob",
+    "source_family_count",
+    "target_repository",
+    "target_baseline",
+    "target_branch",
+    "target_estate_copy",
+    "target_dag_copy",
+    "target_phase_copy",
+    "copyright_notice",
+    "first_party_license",
+    "openjdk_policy",
+    "third_party_policy",
+    "canonical_owner",
+    "canonical_invariant",
+    "receiver_role",
+    "generic_ownership_transfer",
+    "target_generic_reusable_owner",
+    "reusable_change_return_path",
+    "target_specific_authority",
+    "initial_target_state",
+    "automatic_application",
+    "promotion_authority",
+    "repository_completion",
+)
+PIN_EXPECTED = {  # receiver policy and donor identity of the intake
     "source_repository": "hsoliwal/com.synexia",
     "source_pr": "10336",
     "source_revision": "37e4edabea6af918a4dc9a7eabd45fbdcf101881",
     "source_handoff_commit": "3a87d17df7e5d825aa1b071c5fb05c64b854c798",
-    "source_estate_path": ".m3/m3jdk21-full-borrow-estate.tsv",
     "source_estate_git_blob": "f637e78db34ab86d3e0d3fc717f03e05867d9d53",
-    "source_dag_path": ".m3/m3jdk21-full-borrow-dag.tsv",
     "source_dag_git_blob": "3e6c56b8555231fb36d0ac620ab112aa5970d45a",
-    "source_phase_path": ".m3/m3jdk21-promotion-phases.tsv",
     "source_phase_git_blob": "c4e8582f99caba32d718b2c1e86dae0854cdce3d",
     "source_family_count": "32",
     "target_repository": "hsoliwal/M3jdk21",
@@ -43,17 +77,20 @@ PIN_EXPECTED = {
     "openjdk_policy": "PRESERVE_EXISTING_OPENJDK_LICENSE_NOTICE",
     "third_party_policy": "SEPARATE_ARTIFACT_LICENSE_REVIEW",
     "canonical_owner": "hsoliwal/com.synexia",
-    "canonical_invariant": "M3-M3JDK21-CANONICAL-OWNERSHIP-1",
     "receiver_role": "TARGET_RECEIVER_ONLY",
     "generic_ownership_transfer": "false",
     "target_generic_reusable_owner": "false",
-    "reusable_change_return_path": "TARGET_DISCOVERY_TO_M3_MASTER_THEN_RESEALED_TARGET",
     "target_specific_authority": "OPENJDK_INTEGRATION_JTREG_RUNTIME_AND_FINAL_PROMOTION",
     "initial_target_state": "SOURCE_PIN_ONLY",
     "automatic_application": "false",
     "promotion_authority": "false",
     "repository_completion": "false",
 }
+# The estate, DAG and phase copies are the donor's bytes (pinned by their donor Git blobs in the pin): their schema
+# values are the donor's, so each file must carry one schema value ending with its suffix below.
+ESTATE_SCHEMA = "_M3JDK21_FULL_BORROW_V1"
+DAG_SCHEMA = "_M3JDK21_FULL_BORROW_DAG_V1"
+PHASE_SCHEMA = "_M3JDK21_PROMOTION_PHASE_V1"
 
 ESTATE_HEADER = [
     "schema",
@@ -128,12 +165,11 @@ def load_pin() -> dict[str, str]:
         if cells[0] in values:
             raise ValueError(f"duplicate successor intake pin field: {cells[0]}")
         values[cells[0]] = cells[1]
-    if values != PIN_EXPECTED:
-        changed = {key: expected for key, expected in PIN_EXPECTED.items()
-                   if values.get(key) != expected}
-        extra = {key: value for key, value in values.items()
-                 if key not in PIN_EXPECTED}
-        raise ValueError(f"successor intake pin drift changed={changed!r} extra={extra!r}")
+    digest = hashlib.sha256(PIN.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+    changed = {key: expected for key, expected in PIN_EXPECTED.items() if values.get(key) != expected}
+    if tuple(values) != PIN_FIELDS or changed or digest != PIN_SHA256:
+        extra = sorted(set(values) ^ set(PIN_FIELDS))
+        raise ValueError(f"successor intake pin drift changed={changed!r} fields={extra!r} sha256={digest}")
     for field in (
         "source_revision",
         "source_handoff_commit",
@@ -161,7 +197,7 @@ def load_estate(pin: dict[str, str]) -> dict[str, dict[str, str]]:
     for physical, row in enumerate(rows, start=2):
         if any(not row[field] for field in ESTATE_HEADER):
             raise ValueError(f"blank successor estate field at row {physical}")
-        if row["schema"] != "M3_M3JDK21_FULL_BORROW_V1":
+        if row["schema"] != rows[0]["schema"] or not row["schema"].endswith(ESTATE_SCHEMA):
             raise ValueError(f"invalid successor estate schema at row {physical}")
         if row["snapshot_revision"] != pin["source_revision"]:
             raise ValueError(f"successor estate revision drift at row {physical}")
@@ -195,7 +231,7 @@ def load_dag(pin: dict[str, str], estate: dict[str, dict[str, str]]) -> None:
         if any(not row[field] for field in DAG_HEADER):
             raise ValueError(f"blank successor DAG field at row {physical}")
         family = row["family"]
-        if row["schema"] != "M3_M3JDK21_FULL_BORROW_DAG_V1":
+        if row["schema"] != rows[0]["schema"] or not row["schema"].endswith(DAG_SCHEMA):
             raise ValueError(f"invalid successor DAG schema at row {physical}")
         if family in graph or family not in families:
             raise ValueError(f"duplicate/unknown successor DAG family: {family}")
@@ -242,7 +278,7 @@ def load_phases(pin: dict[str, str], estate: dict[str, dict[str, str]]) -> None:
     referenced: set[str] = set()
     previous = "-"
     for row in rows:
-        if row["schema"] != "M3_M3JDK21_PROMOTION_PHASE_V1":
+        if row["schema"] != rows[0]["schema"] or not row["schema"].endswith(PHASE_SCHEMA):
             raise ValueError("invalid successor promotion schema")
         if row["predecessor"] != previous:
             raise ValueError(f"successor phase predecessor drift: {row['phase']}")

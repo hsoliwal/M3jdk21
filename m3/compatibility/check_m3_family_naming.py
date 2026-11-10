@@ -5,6 +5,7 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import re
 import sys
 from pathlib import Path
@@ -16,26 +17,46 @@ DISPOSITION = HERE / "m3-family-naming-target-disposition.tsv"
 PORTING = ROOT / "m3/docs/M3JDK_M3_PORTING_INVARIANT.md"
 HEX40 = re.compile(r"^[0-9a-f]{40}$")
 
-EXPECTED = {
-    "schema": "M3JDK21_M3_FAMILY_NAMING_PIN_V1",
+# The pin TSV is the record of a donor handoff: the donor commit, paths and blobs are history as they were at that
+# commit, so the record is pinned whole by SHA-256 (LF bytes) and only the receiver policy is spelled out here.
+PIN_SHA256 = "35ebfcb690060dc3edd512737f70738a42aadd9994eed1b580f8cbe1866252db"
+PIN_FIELDS = (
+    "schema",
+    "source_repository",
+    "source_pr",
+    "source_commit",
+    "source_policy_md_path",
+    "source_policy_md_blob",
+    "source_policy_json_path",
+    "source_policy_json_blob",
+    "source_seed_map_path",
+    "source_seed_map_blob",
+    "source_invariant_table_path",
+    "source_invariant_table_blob",
+    "source_agents_path",
+    "source_agents_blob",
+    "source_recipe_path",
+    "source_recipe_blob",
+    "source_recipe_test_path",
+    "source_recipe_test_blob",
+    "recipe_name",
+    "reusable_recipe_owner",
+    "target_repository",
+    "copyright_notice",
+    "first_party_license",
+    "abstract_idea_policy",
+    "third_party_policy",
+    "openjdk_policy",
+    "blind_mindex_to_m3_rename",
+    "global_fastest_collection_claim",
+    "automatic_materialization",
+    "target_runtime_admission",
+    "public_jdk_api_change",
+)
+EXPECTED = {  # receiver policy and donor identity of the handoff
     "source_repository": "hsoliwal/com.synexia",
     "source_pr": "9773",
     "source_commit": "a2f1e9e6f84969c04f87cbc5c921d0add8ff71a3",
-    "source_policy_md_path": "docs/M3-SCALE/invariants/M3-FAMILY-NAMING-COLLECTIONS-1.md",
-    "source_policy_md_blob": "6ce4ad0811717080abdb128613900f5dfc719db4",
-    "source_policy_json_path": "docs/M3-SCALE/invariants/M3-FAMILY-NAMING-COLLECTIONS-1.json",
-    "source_policy_json_blob": "ed1a706ccda978309f3cfd0afc40c64b0775a818",
-    "source_seed_map_path": "docs/M3-SCALE/invariants/M3-FAMILY-NAMING-COLLECTIONS-1.tsv",
-    "source_seed_map_blob": "8c0506ed0c7eb490c3b2b79484a21035afc805e2",
-    "source_invariant_table_path": ".m3/m3-recipe-first-invariants.tsv",
-    "source_invariant_table_blob": "5b78f91e1b5aa72bf464f562be947530f0758849",
-    "source_agents_path": "AGENTS.md",
-    "source_agents_blob": "0c40bed9f49a46418507841744aab01f1ea66a44",
-    "source_recipe_path": "m3-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-family-naming-collections.yml",
-    "source_recipe_blob": "441aa655a14739b1a544a5b1e77cdfc6cb1145c0",
-    "source_recipe_test_path": "m3-openrewrite-recipes/src/test/java/jdk/internal/m3/rewrite/M3FamilyNamingCollectionsRecipeTest.java",
-    "source_recipe_test_blob": "65c802a0f4e42bc697fc131fbf60d8f7628d3e20",
-    "recipe_name": "jdk.internal.m3.rewrite.M3FamilyNamingCollections",
     "reusable_recipe_owner": "hsoliwal/com.synexia",
     "target_repository": "hsoliwal/M3jdk21",
     "copyright_notice": "Copyright 2026 Hitesh Soliwal and contributors",
@@ -82,11 +103,11 @@ def read_two_column(path: Path) -> dict[str, str]:
 
 def validate_pin() -> dict[str, str]:
     values = read_two_column(PIN)
-    if values != EXPECTED:
-        changed = {key: expected for key, expected in EXPECTED.items()
-                   if values.get(key) != expected}
-        extra = {key: value for key, value in values.items() if key not in EXPECTED}
-        raise ValueError(f"Synexia family naming pin drift changed={changed!r} extra={extra!r}")
+    digest = hashlib.sha256(PIN.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+    changed = {key: expected for key, expected in EXPECTED.items() if values.get(key) != expected}
+    if tuple(values) != PIN_FIELDS or changed or digest != PIN_SHA256:
+        extra = sorted(set(values) ^ set(PIN_FIELDS))
+        raise ValueError(f"Synexia family naming pin drift changed={changed!r} fields={extra!r} sha256={digest}")
     for field in (
         "source_commit",
         "source_policy_md_blob",
