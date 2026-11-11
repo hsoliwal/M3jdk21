@@ -60,6 +60,36 @@ SHA-256 evidence to the final product commit after the last merge.
 | Arrays and collections | module tests and independent provider-contract tests | contract-by-contract JUnit, mutations/views/concurrency/serialization and ABI |
 | Swing/SWT coupling | separate SWT backend matrix | exact SWT revision, matched Java/native artifacts, GUI, resource and JNI evidence |
 
+### Observable collections Java 21 naming and coverage repair (2026-11-11)
+
+The actual internal Java owner is
+[`jdk.internal.m3.collections.ObservableList`](../../src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ObservableList.java),
+with tests
+[`ObservableListContract`](../../test/jdk/jdk/internal/m3/collections/ObservableListContract.java)
+and
+[`ObservableIndexedViewsContract`](../../test/jdk/jdk/m3/collections/ObservableIndexedViewsContract.java).
+The `M3Observable*` names retained in the old
+[`m3-observable-indexed-views-20261021.yml`](../../.github/workflows/m3-observable-indexed-views-20261021.yml)
+are no longer real product/test paths. Treat this as **stale test wiring**, not
+permission to rename public or internal Java types blindly.
+
+The refreshed Java 21 workflow compiles the full
+`src/jdk.m3.collections/share/classes` tree plus the canonical module
+descriptor, then explicitly compiles and launches both standalone differential
+contract classes using their **declared class names**. Its source audit is
+[`m3/collections/test_observable_workflow.py`](../collections/test_observable_workflow.py);
+that audit rejects missing modules, narrowed finders, stale names, incorrect
+package-to-path relations, missing PR triggers and a contract that was compiled
+but not executed. Exact source class names and module inputs are the acceptance
+authority; no source-body or ABI rename is part of this repair.
+
+The prior [CI run 42821834773](https://github.com/hsoliwal/M3jdk21/actions/runs/42821834773)
+failed with `file not found: .../M3ObservableListContract.java`. This patch
+addresses the missing input names, but **actual Java 21 compile/run success
+on the new PR head remains to be established**. Separately, the
+[latest naming fixed-point run](https://github.com/hsoliwal/M3jdk21/actions/runs/42821834853)
+failed, so release remains HOLD even if this focused test becomes green.
+
 The machine-readable preview contract now requires
 `M3_CHANGED_ATOM_COVERAGE` with at least 90% instrumented line and branch
 coverage **for every inventoried changed M3 contract atom**. A source
