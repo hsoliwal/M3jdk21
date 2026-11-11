@@ -12073,6 +12073,313 @@
         },
         "source_state": "implemented",
         "observation": "One existing receiver atom, exact original name and mapping retained. Five SDK groups and bounded Java/API oracle passed. This record is an unverified product candidate, not whole-family admission; the existing family.word-facts record is unchanged. Canonical target census correction 2026-11-01: the current Java target.symbol names the class owner com.m3.text.SharedRelatedLexemeCatalog; the previous target symbol com.m3.text.SharedRelatedLexemeCatalog.findBySource remains recorded here and in the unchanged source artifacts, method signatures and previous_targets history. This changes metadata only; source bytes, status, receipts and receiving phases are unchanged. Release preparation 2026-11-07 restores the same stable capability record from historical M3JDK21 commit 7c23ff3612ef08dc265bd3bab5461e4dcf3ee47c, map Git blob 238a1eb89294570ae126e2e803f4dc687cc05fae. Current target class and module inspected at b9cc756f726de31af10652b5583d9bba58ba27b2; donor spellings and historical receipts are retained, not rerun or promoted. Original canonical recipe digest 3d40d11c21eb3ee6c8be9839a4bc051ef66765e51ab1b6ccbb49392b0c99304c is historical provenance only; the recipe is not stored or executed in this target."
+      },
+      {
+        "id": "jdk-concurrency-cancelled-tail-livelock",
+        "kind": "direct-port",
+        "status": "pending",
+        "reason": "Source-sealed candidate for Corretto JDK-8386085 in the three existing JDK synchronization owners. Local Java21 qualification is bounded; Synexia recipe emission and independent M3JDK21 acceptance remain separate. No receiving phase or family advances.",
+        "sources": [
+          {
+            "repo": "corretto/corretto-21",
+            "commit": "815ea741f5b1c73e2447c7cb23072a8c29fa7f61",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/java/util/concurrent/locks/AbstractQueuedLongSynchronizer.java",
+            "symbol": "java.util.concurrent.locks.AbstractQueuedLongSynchronizer",
+            "signatures": [
+              "private void cleanQueue()"
+            ],
+            "sha256": "fd0add80b3a95c71700a8a4f2ab7f354dc47ad188280ba2e972d8432786ef6a4",
+            "git_blob_sha1": "950e4788d52d4f37b46bacd2387b818684372e2d",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "corretto/corretto-21",
+            "commit": "815ea741f5b1c73e2447c7cb23072a8c29fa7f61",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/java/util/concurrent/locks/AbstractQueuedSynchronizer.java",
+            "symbol": "java.util.concurrent.locks.AbstractQueuedSynchronizer",
+            "signatures": [
+              "private void cleanQueue()"
+            ],
+            "sha256": "5787ebffe734a4a9eb145c95fe7420d9fdfe8e42377f9d54617d402fc48b0b94",
+            "git_blob_sha1": "78a4ad5a5bc4501ba7e8fc860a31387f2cadba03",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "corretto/corretto-21",
+            "commit": "815ea741f5b1c73e2447c7cb23072a8c29fa7f61",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/java/util/concurrent/locks/StampedLock.java",
+            "symbol": "java.util.concurrent.locks.StampedLock",
+            "signatures": [
+              "private void cleanQueue()"
+            ],
+            "sha256": "ce91e27c3b4d2aa93bddd616aa8a7ae6a0d2e3b17ca740ccffb63dda85eff34e",
+            "git_blob_sha1": "8e6fcaae22a24cd36d88c8a437d7d4463c27718e",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "corretto/corretto-21",
+            "commit": "815ea741f5b1c73e2447c7cb23072a8c29fa7f61",
+            "module": "jtreg",
+            "path": "test/jdk/java/util/concurrent/tck/SemaphoreTest.java",
+            "symbol": "SemaphoreTest",
+            "signatures": [
+              "public void testShortTimeoutAcquisition() throws InterruptedException"
+            ],
+            "sha256": "32406b06eda4b00ae4e7f87e9a4e13a4aefe4ca9161ff89f24a5d0770db80876",
+            "git_blob_sha1": "38ba54645b9e65888ca1bf020d0d81e587908d24",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "corretto/corretto-21",
+            "commit": "815ea741f5b1c73e2447c7cb23072a8c29fa7f61",
+            "module": "jtreg",
+            "path": "test/jdk/java/util/concurrent/tck/StampedLockTest.java",
+            "symbol": "StampedLockTest",
+            "signatures": [
+              "public void testShortTimeoutAcquisition() throws InterruptedException"
+            ],
+            "sha256": "c0e0056639be810d7c2433bc05df19d07a9e2b9c9c20696b8f7db9e10f21649a",
+            "git_blob_sha1": "a6b6835771255ef600b3268fd3edc4ce44edc053",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "java.base",
+            "path": "src/java.base/share/classes/java/util/concurrent/locks/AbstractQueuedLongSynchronizer.java",
+            "symbol": "java.util.concurrent.locks.AbstractQueuedLongSynchronizer",
+            "signatures": [
+              "private void cleanQueue()"
+            ],
+            "sha256": "fd0add80b3a95c71700a8a4f2ab7f354dc47ad188280ba2e972d8432786ef6a4",
+            "git_blob_sha1": "950e4788d52d4f37b46bacd2387b818684372e2d",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "java.base",
+            "path": "src/java.base/share/classes/java/util/concurrent/locks/AbstractQueuedSynchronizer.java",
+            "symbol": "java.util.concurrent.locks.AbstractQueuedSynchronizer",
+            "signatures": [
+              "private void cleanQueue()"
+            ],
+            "sha256": "5787ebffe734a4a9eb145c95fe7420d9fdfe8e42377f9d54617d402fc48b0b94",
+            "git_blob_sha1": "78a4ad5a5bc4501ba7e8fc860a31387f2cadba03",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "java.base",
+            "path": "src/java.base/share/classes/java/util/concurrent/locks/StampedLock.java",
+            "symbol": "java.util.concurrent.locks.StampedLock",
+            "signatures": [
+              "private void cleanQueue()"
+            ],
+            "sha256": "ce91e27c3b4d2aa93bddd616aa8a7ae6a0d2e3b17ca740ccffb63dda85eff34e",
+            "git_blob_sha1": "8e6fcaae22a24cd36d88c8a437d7d4463c27718e",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jtreg",
+            "path": "test/jdk/java/util/concurrent/tck/SemaphoreTest.java",
+            "symbol": "SemaphoreTest",
+            "signatures": [
+              "public void testShortTimeoutAcquisition() throws InterruptedException"
+            ],
+            "sha256": "32406b06eda4b00ae4e7f87e9a4e13a4aefe4ca9161ff89f24a5d0770db80876",
+            "git_blob_sha1": "38ba54645b9e65888ca1bf020d0d81e587908d24",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jtreg",
+            "path": "test/jdk/java/util/concurrent/tck/StampedLockTest.java",
+            "symbol": "StampedLockTest",
+            "signatures": [
+              "public void testShortTimeoutAcquisition() throws InterruptedException"
+            ],
+            "sha256": "c0e0056639be810d7c2433bc05df19d07a9e2b9c9c20696b8f7db9e10f21649a",
+            "git_blob_sha1": "a6b6835771255ef600b3268fd3edc4ce44edc053",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "Existing java.util.concurrent.locks.AbstractQueuedSynchronizer, AbstractQueuedLongSynchronizer and StampedLock in java.base; existing JSR166 TCK owners SemaphoreTest and StampedLockTest.",
+        "identity": {
+          "namespace": "Existing synchronizer, wait-node and Thread identities remain owned by the original JDK classes; no M3 facade, new payload owner or naming namespace.",
+          "generation": "Existing queue insertion, cancellation, release and acquisition lifetimes; no new generation, cached fact or retained state."
+        },
+        "contract": {
+          "differences": [
+            "In each existing private cleanQueue(), attempt predecessor next-link repair only when successor s is non-null; retain the donor fix for cancelled-tail livelock under short timed acquisition.",
+            "Retain exact donor testShortTimeoutAcquisition regressions for Semaphore and StampedLock; this is a correctness/liveness repair, not a promise that buggy historical behavior is unchanged."
+          ],
+          "compatibility_obligations": [
+            "Preserve all existing public Java SE names, packages, constructors, methods, fields, inheritance and module exports.",
+            "Preserve exclusive/shared synchronization, interrupt and timeout handling, conditions, fairness contracts, serialization and Java memory-model obligations.",
+            "Full installed-image, jtreg, platform, native/GC interaction and CPU/heap/native-memory qualification remain required or explicitly scoped by the receiving gate owner."
+          ],
+          "public_surface": [
+            "java.util.concurrent.locks.AbstractQueuedSynchronizer",
+            "java.util.concurrent.locks.AbstractQueuedLongSynchronizer",
+            "java.util.concurrent.locks.StampedLock",
+            "No added or renamed public Java type, member, module export or native symbol."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "No source declaration changes in the three runtime owners; isolated Java21 javap -p -s matches for all 19 emitted owner/nested classes. Complete SDK/JNI ABI acceptance is not claimed.",
+          "bootstrap": "Existing java.base owners and VM Unsafe linkage retained; no Synexia runtime service, module or package dependency."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Exact five Java source preimages at M3JDK21 commit 43d7df5fa868442a33fb8943189d096a00d779ba; recipe-produced candidate postimages must match pinned per-file source hashes.",
+          "joins": "No new storage joins, payload copies, wrappers or native allocations.",
+          "outputs": "Three existing runtime source files and two existing TCK source files, plus passive naming/provenance metadata.",
+          "cached_facts": "No added caches or retained fields; preserve existing queue and node owners."
+        },
+        "recipe": {
+          "id": "com.synexia.m3.JdkAqsTail20261111",
+          "version": "20261111",
+          "path": null,
+          "sha256": null,
+          "preconditions": [
+            "Execute only in canonical hsoliwal/com.synexia; receive actual hash-pinned emitted postimages and passive receipts in M3JDK21.",
+            "Seal exact target preimages and all seven Java/metadata postimages; preserve all prior 74 migration records and existing naming queue operations.",
+            "Require fixed point, drift refusal and partial-state refusal; do not infer acceptance from recipe execution or this pending record."
+          ],
+          "rollback": "Restore the exact reviewed preimages of this candidate atom through its Synexia recipe; refuse drift and preserve unrelated target changes.",
+          "canonical_repository": "hsoliwal/com.synexia",
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-jdk-aqs-tail-20261111"
+        },
+        "tests": [
+          {
+            "id": "java21-strict-patched-module-compile-and-19-class-signatures",
+            "receipt": "m3/qualification/jdk-concurrency-cancelled-tail-livelock-20261111/receipt.json"
+          },
+          {
+            "id": "direct-jsr166-four-owner-suites-238-tests",
+            "receipt": "m3/qualification/jdk-concurrency-cancelled-tail-livelock-20261111/receipt.json"
+          },
+          {
+            "id": "full-jtreg-and-source-built-target-image-pending",
+            "receipt": "m3/qualification/jdk-concurrency-cancelled-tail-livelock-20261111/receipt.json"
+          }
+        ],
+        "provenance": {
+          "license": "Runtime sources retain GPL-2.0-only WITH Classpath-exception-2.0; TCK sources retain GPL-2.0-only and original notices. First-party mapping/recipe expression is Apache-2.0, Copyright 2026 Hitesh Soliwal and contributors; the recipe does not relicense OpenJDK-derived source.",
+          "publication": "Exact public Corretto commit 815ea741f5b1c73e2447c7cb23072a8c29fa7f61, JDK-8386085, with source/test hashes and original notices retained. No Harmony or other Apache-only implementation is imported into these GPL source owners.",
+          "copied_code": true,
+          "donor_boundary": "Same-ancestry OpenJDK PATCH candidate; five source/test postimages remain under their original per-file licences, separate from Synexia Apache core."
+        },
+        "sync": {
+          "source_revision": "815ea741f5b1c73e2447c7cb23072a8c29fa7f61",
+          "target_revision": null,
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "No Java adaptation: exact donor fixed source/test bytes apply to the unchanged target baseline owners; all public owner names remain unchanged."
+          ],
+          "pending": [
+            "Exact canonical Synexia recipe revision, executed postimage/fixed-point/refusal evidence and receiving commit are recorded in the passive receiver receipt; this mapping does not fabricate future commit IDs.",
+            "Full source-built M3JDK21 image and installed runtime; authoritative JSR166TestCase jtreg variants, broader affected java.util.concurrent integration and applicable compiler/native/GC/platform gates.",
+            "Matched CPU, retained-heap and native/process-memory measurements and repeatable failing-baseline liveness witness; the finite local baseline run also passed.",
+            "Independent receiving review and release gates. Existing STRING active phase and all downstream phase/family states remain unchanged."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "43d7df5fa868442a33fb8943189d096a00d779ba",
+              "module": "java.base",
+              "path": "src/java.base/share/classes/java/util/concurrent/locks/AbstractQueuedLongSynchronizer.java",
+              "symbol": "java.util.concurrent.locks.AbstractQueuedLongSynchronizer",
+              "signatures": [
+                "private void cleanQueue()"
+              ],
+              "sha256": "703ef8f66c06c6af7b143d5620d92ff4af8b2089064ff0e164e777b312c0a3a6",
+              "git_blob_sha1": "af0f128efc33d8beaf3f504a49615a812c5da901",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "43d7df5fa868442a33fb8943189d096a00d779ba",
+              "module": "java.base",
+              "path": "src/java.base/share/classes/java/util/concurrent/locks/AbstractQueuedSynchronizer.java",
+              "symbol": "java.util.concurrent.locks.AbstractQueuedSynchronizer",
+              "signatures": [
+                "private void cleanQueue()"
+              ],
+              "sha256": "d283f30ede5819ac17f90e2f781198361bf1d528614f59a1eed2d85ff076847f",
+              "git_blob_sha1": "e1d5305cd83ba6598e0b6a93eb446b899785574c",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "43d7df5fa868442a33fb8943189d096a00d779ba",
+              "module": "java.base",
+              "path": "src/java.base/share/classes/java/util/concurrent/locks/StampedLock.java",
+              "symbol": "java.util.concurrent.locks.StampedLock",
+              "signatures": [
+                "private void cleanQueue()"
+              ],
+              "sha256": "2591b3f110de788952d696dc5ec8ee0483524c4f26bd4a15c66140445d867d28",
+              "git_blob_sha1": "b9f0e9340b7d9a8fb1f6dd31f3288b43a467bb22",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "43d7df5fa868442a33fb8943189d096a00d779ba",
+              "module": "jtreg",
+              "path": "test/jdk/java/util/concurrent/tck/SemaphoreTest.java",
+              "symbol": "SemaphoreTest",
+              "signatures": [],
+              "sha256": "364c985cd54f11dd0c245dcf379c8eb0172555b37e4c86611aedd56059fcd453",
+              "git_blob_sha1": "5d45dc21a8ec3c1996a1358fa16991b6a4b29450",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "43d7df5fa868442a33fb8943189d096a00d779ba",
+              "module": "jtreg",
+              "path": "test/jdk/java/util/concurrent/tck/StampedLockTest.java",
+              "symbol": "StampedLockTest",
+              "signatures": [],
+              "sha256": "8e353ce0a730f41f16f96e7bade9a934d5a1709dd1885b539b92159558d2f72c",
+              "git_blob_sha1": "673047ccf12fad1bffe1a5e76da1c292884351e1",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "implemented",
+        "observation": "Exact isolated source candidates passed Temurin 21.0.13+9 strict three-owner compilation (-Xlint:all -Werror) and direct JUnit execution of 238 retained/new tests across AQS, AQLS, Semaphore and StampedLock with ActiveProcessorCount=4. All 19 emitted class signatures/descriptors matched baseline. Unchanged 108-Java TCK dependency closure was source-verified; its compilation emitted 8 existing removal warnings. Baseline also passed this finite run, so no failing-baseline witness or performance improvement is claimed. This preliminary --patch-module run is not jtreg, a source-built M3JDK21 image or proof of actual recipe-emitted-source execution. Status remains pending and every existing receiving phase remains unchanged."
       }
     ]
   },

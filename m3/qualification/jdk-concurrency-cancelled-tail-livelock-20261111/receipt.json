@@ -1,0 +1,178 @@
+{
+  "schema": "M3_RESULT_ONLY_EXECUTED_CANDIDATE_RECEIPT_V1",
+  "copyright": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "license": "Apache-2.0",
+  "status": "PENDING_TARGET_NATIVE_QUALIFICATION",
+  "capability_id": "jdk-concurrency-cancelled-tail-livelock",
+  "recipe_id": "com.synexia.m3.JdkAqsTail20261111",
+  "canonical_repository": "https://github.com/hsoliwal/com.synexia",
+  "canonical_revision": "6f0f960378a25a1ff254c2384571fc269e6325df",
+  "canonical_crate": "synexia-openrewrite-recipes/recipes/m3-jdk-aqs-tail-20261111",
+  "canonical_pull_request": "https://github.com/hsoliwal/com.synexia/pull/17067",
+  "target_repository": "https://github.com/hsoliwal/M3jdk21",
+  "target_base_commit": "43d7df5fa868442a33fb8943189d096a00d779ba",
+  "donor_repository": "https://github.com/corretto/corretto-21",
+  "donor_commit": "815ea741f5b1c73e2447c7cb23072a8c29fa7f61",
+  "upstream_issue": "JDK-8386085",
+  "intent": "Repair cancelled-tail queue-cleanup liveness by guarding predecessor next-link repair with a live successor.",
+  "public_contract_changed": false,
+  "intended_correctness_behavior_change": true,
+  "family_phase_advanced": false,
+  "product_promotion_authority": false,
+  "result_only": true,
+  "recipe_or_template_code_copied": false,
+  "outputs": [
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/locks/AbstractQueuedLongSynchronizer.java",
+      "before_sha256": "703ef8f66c06c6af7b143d5620d92ff4af8b2089064ff0e164e777b312c0a3a6",
+      "before_blob": "af0f128efc33d8beaf3f504a49615a812c5da901",
+      "after_sha256": "fd0add80b3a95c71700a8a4f2ab7f354dc47ad188280ba2e972d8432786ef6a4",
+      "after_blob": "950e4788d52d4f37b46bacd2387b818684372e2d",
+      "source_revision": "815ea741f5b1c73e2447c7cb23072a8c29fa7f61",
+      "target_revision": "43d7df5fa868442a33fb8943189d096a00d779ba",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/locks/AbstractQueuedSynchronizer.java",
+      "before_sha256": "d283f30ede5819ac17f90e2f781198361bf1d528614f59a1eed2d85ff076847f",
+      "before_blob": "e1d5305cd83ba6598e0b6a93eb446b899785574c",
+      "after_sha256": "5787ebffe734a4a9eb145c95fe7420d9fdfe8e42377f9d54617d402fc48b0b94",
+      "after_blob": "78a4ad5a5bc4501ba7e8fc860a31387f2cadba03",
+      "source_revision": "815ea741f5b1c73e2447c7cb23072a8c29fa7f61",
+      "target_revision": "43d7df5fa868442a33fb8943189d096a00d779ba",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/locks/StampedLock.java",
+      "before_sha256": "2591b3f110de788952d696dc5ec8ee0483524c4f26bd4a15c66140445d867d28",
+      "before_blob": "b9f0e9340b7d9a8fb1f6dd31f3288b43a467bb22",
+      "after_sha256": "ce91e27c3b4d2aa93bddd616aa8a7ae6a0d2e3b17ca740ccffb63dda85eff34e",
+      "after_blob": "8e6fcaae22a24cd36d88c8a437d7d4463c27718e",
+      "source_revision": "815ea741f5b1c73e2447c7cb23072a8c29fa7f61",
+      "target_revision": "43d7df5fa868442a33fb8943189d096a00d779ba",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+    },
+    {
+      "path": "test/jdk/java/util/concurrent/tck/SemaphoreTest.java",
+      "before_sha256": "364c985cd54f11dd0c245dcf379c8eb0172555b37e4c86611aedd56059fcd453",
+      "before_blob": "5d45dc21a8ec3c1996a1358fa16991b6a4b29450",
+      "after_sha256": "32406b06eda4b00ae4e7f87e9a4e13a4aefe4ca9161ff89f24a5d0770db80876",
+      "after_blob": "38ba54645b9e65888ca1bf020d0d81e587908d24",
+      "source_revision": "815ea741f5b1c73e2447c7cb23072a8c29fa7f61",
+      "target_revision": "43d7df5fa868442a33fb8943189d096a00d779ba",
+      "license": "GPL-2.0-only"
+    },
+    {
+      "path": "test/jdk/java/util/concurrent/tck/StampedLockTest.java",
+      "before_sha256": "8e353ce0a730f41f16f96e7bade9a934d5a1709dd1885b539b92159558d2f72c",
+      "before_blob": "673047ccf12fad1bffe1a5e76da1c292884351e1",
+      "after_sha256": "c0e0056639be810d7c2433bc05df19d07a9e2b9c9c20696b8f7db9e10f21649a",
+      "after_blob": "a6b6835771255ef600b3268fd3edc4ce44edc053",
+      "source_revision": "815ea741f5b1c73e2447c7cb23072a8c29fa7f61",
+      "target_revision": "43d7df5fa868442a33fb8943189d096a00d779ba",
+      "license": "GPL-2.0-only"
+    },
+    {
+      "path": "m3/docs/name-mapping.json",
+      "before_sha256": "96b9a958a5a083c3b6b86383afd90791dbd18d7ac8cee55041235716cc852e47",
+      "before_blob": "5dd1f5890ff3685db0661994b85c57660a09ceec",
+      "after_sha256": "d47986f9e64a16e406f76ca1c9dcdb7aa543e3ce77e89abb3f906cb4fa26882e",
+      "after_blob": "1c861c463892b7ee62cb419d6c2daccff8f15a1c",
+      "source_revision": null,
+      "target_revision": "43d7df5fa868442a33fb8943189d096a00d779ba",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "m3/tooling/name-contract/name-plan.json",
+      "before_sha256": "de6af3cc4cfaf6a91b0f461e653a9a9aaf123b0a6b2d371fc4782a4541f4c4d9",
+      "before_blob": "46046f47a90c7125e47c6ca69940316b27ae3de4",
+      "after_sha256": "b835e88bd08c4fcfde5a2ba08caad9fab884db1e94c5bfc876967d1090b57ffe",
+      "after_blob": "cbaa6f476637aed4310135b1d6904ac3b2a48d8b",
+      "source_revision": null,
+      "target_revision": "43d7df5fa868442a33fb8943189d096a00d779ba",
+      "license": "Apache-2.0"
+    }
+  ],
+  "passive_receipt_path": "m3/qualification/jdk-concurrency-cancelled-tail-livelock-20261111/receipt.json",
+  "receipt_identity": "The receiving Git tree binds this passive receipt; no circular self-hash or invented future receiving commit is recorded.",
+  "sdk_execution": {
+    "status": "PASS",
+    "tests": 6,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "actual_emitted_outputs": 7,
+    "report_path": "synexia-openrewrite-recipes/recipes/m3-jdk-aqs-tail-20261111/proof/emitted/TEST-com.synexia.rewrite.M3JdkDonorRefinementRecipeTest.xml",
+    "report_sha256": "2f3df946db2d87e4e349d3cd1588efaaac08fdf2feff62be6dcacbb3dd50e4c4",
+    "checks": [
+      "exact postimages",
+      "fixed point",
+      "drift/missing/duplicate/occupied input refusal",
+      "partial application",
+      "input and worker schedule invariance"
+    ]
+  },
+  "canonical_emitted_qualification": {
+    "path": "synexia-openrewrite-recipes/recipes/m3-jdk-aqs-tail-20261111/proof/emitted/emitted-receipt.json",
+    "sha256": "ba0603b538a63853f55087957b2398b21e8994860e4de0bdc8378db96493cda8",
+    "git_blob": "b3dc418cded80042f99d7b8ca5ec6f40c394298e",
+    "url": "https://github.com/hsoliwal/com.synexia/blob/6f0f960378a25a1ff254c2384571fc269e6325df/synexia-openrewrite-recipes/recipes/m3-jdk-aqs-tail-20261111/proof/emitted/emitted-receipt.json",
+    "status": "PASS_SCOPED_EMITTED_QUALIFICATION",
+    "runner_sha256": "05ef655a2e6a80f909b41ba288dfdaafeb36c399ed237af8fedae7dab8a751dd"
+  },
+  "runtime_validation": {
+    "jdk": "Temurin 21.0.13+9",
+    "mode": "patch-module java.base using actual SDK-emitted owners",
+    "runtime_owners": 3,
+    "strict_flags": [
+      "-source",
+      "21",
+      "-target",
+      "21",
+      "-proc:none",
+      "-implicit:none",
+      "-Xlint:all",
+      "-Werror"
+    ],
+    "runtime_compile_warnings": 0,
+    "direct_tck": {
+      "suites": [
+        "AbstractQueuedSynchronizerTest",
+        "AbstractQueuedLongSynchronizerTest",
+        "SemaphoreTest",
+        "StampedLockTest"
+      ],
+      "tests": 238,
+      "failures": 0,
+      "active_processor_count": 4
+    },
+    "tck_compile_preexisting_removal_warnings": 8,
+    "signature_comparison": {
+      "all_class_files": 19,
+      "flags": [
+        "-p",
+        "-s"
+      ],
+      "exact_match": true,
+      "sha256": "eab6b16a15a03c496fce88b14471a0499965025bc18f2d8ef55c613130d915e9"
+    },
+    "class_load_log_proves_emitted_owners": true,
+    "class_load_log_sha256": "33be317acb3f5367efba9bc068c86fe2cffd76242dd7534f4c66dac13bb92441",
+    "naming_preflight": "PASS on staged actual emitted metadata",
+    "source_built_target_image": false,
+    "jtreg_executed": false,
+    "baseline_direct_tck_tests": 238,
+    "baseline_direct_tck_passed": true,
+    "pre_fix_failure_reproduced": false,
+    "performance_improvement_measured": false
+  },
+  "pending": [
+    "Full authoritative jtreg variants at test/jdk/java/util/concurrent/tck/JSR166TestCase.java",
+    "Source-built and installed M3JDK21 image",
+    "Broader concurrency/native/GC/platform acceptance",
+    "Comparative CPU, heap and native-memory measurements",
+    "Repeatable failing-baseline liveness witness",
+    "Repository review and receiving/release gates"
+  ],
+  "licensing": "The three runtime source files retain GPL-2.0-only WITH Classpath-exception-2.0; the two tests retain GPL-2.0-only. This receipt and existing naming metadata are first-party Apache-2.0. The receipt does not relicense the source/test outputs."
+}
