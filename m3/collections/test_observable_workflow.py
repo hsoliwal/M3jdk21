@@ -14,7 +14,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[2]
 WORKFLOW = Path(".github/workflows/m3-observable-indexed-views-20261021.yml")
-CONTRACTS = {"M3ObservableListContract", "M3ObservableIndexedViewsContract"}
+CONTRACTS = {"ObservableListContract", "ObservableIndexedViewsContract"}
 
 
 def require(condition, message):
@@ -87,16 +87,17 @@ def java_identity(root, relative, source_roots):
 
 
 def module_source_inputs(root, workflow, compiler, descriptor):
-    """Bind the real sorted main-source finder to the collections javac operand.
+    """Verify the complete actual Java21 module tree is an explicit javac input.
 
-    A source path alone lets javac accept exported packages without emitting
-    them. The actual module build must compile the complete main-source set.
-    This reader intentionally accepts only the workflow's explicit finder form.
+    Both declared source roots must be scanned; selecting only collections
+    and internal.collections hides exported packages and weakens the build.
+    The sorted, zero-terminated full finder is the sole accepted grammar.
     """
     pattern = (r"(?m)^\s*mapfile -d '' -t ([A-Za-z_][A-Za-z_0-9]*) < <\(\s*\n"
                r"\s*(find [^\n]+)\n\s*\)")
     blocks = re.findall(r"(?m)^        run: \|\n((?:          [^\n]*\n|\n)*)", workflow)
-    compile_blocks = [block for block in blocks if compiler in run_commands("        run: |\n" + block)]
+    compile_blocks = [block for block in blocks
+                      if compiler in run_commands("        run: |\n" + block)]
     require(len(compile_blocks) == 1, "expected one literal collections compile block")
     declarations = []
     for variable, finder in re.findall(pattern, compile_blocks[0]):
@@ -105,32 +106,41 @@ def module_source_inputs(root, workflow, compiler, descriptor):
             declarations.append((variable, arguments))
     require(len(declarations) == 1, "expected one complete module-source finder")
     variable, finder = declarations[0]
-    require(compiler.count("${" + variable + "[@]}") == 1,
+    require(compiler.count("$" + "{" + variable + "[@]}") == 1,
             "full module sources must be actual javac operands")
-    source_root = descriptor.parent
-    require(finder[1] == source_root.as_posix(), "finder must use the complete module source root")
-    require(source_root.as_posix() + "/**" in pull_request_paths(workflow),
-            "complete module source tree needs a PR path filter")
-    require(finder[2:] == ["-type", "f", "-name", "*.java", "!", "-name", "module-info.java",
-                           "-print0", "|", "sort", "-z"], "unsupported module-source finder")
-    sources = sorted(p for p in (root / source_root).rglob("*.java")
-                     if p.is_file() and not p.is_symlink() and p.name != "module-info.java")
+    expected_roots = ["m3/collections/src/main/java",
+                      "src/jdk.m3.collections/share/classes"]
+    require(finder[0] == "find" and finder[1:3] == expected_roots,
+            "finder must use the complete module source roots")
+    require(finder[3:] == ["-type", "f", "-name", "*.java", "!", "-name",
+                           "module-info.java", "-print0", "|", "sort", "-z"],
+            "unsupported module-source finder")
+    require(descriptor.parent.as_posix() == expected_roots[0],
+            "module descriptor outside the canonical source root")
+    filters = pull_request_paths(workflow)
+    for source_root in expected_roots:
+        require(source_root + "/**" in filters,
+                "complete module source tree needs a PR path filter")
+    sources = sorted({source for source_root in expected_roots
+                      for source in (root / source_root).rglob("*.java")
+                      if source.is_file() and not source.is_symlink()
+                      and source.name != "module-info.java"})
     require(sources, "module-source finder must select real sources")
     packages = set()
     for source in sources:
         if source.name == "package-info.java":
             continue
-        package = re.search(r"(?m)^\s*package\s+([\w.]+)\s*;", source.read_text(encoding="utf-8"))
+        package = re.search(r"(?m)^\s*package\s+([\w.]+)\s*;",
+                            source.read_text(encoding="utf-8"))
         if package:
             packages.add(package.group(1))
-    exports = set(re.findall(r"(?m)^\s*exports\s+([\w.]+)\s*;",
+    exports = set(re.findall(r"(?m)^\s*exports\s+([\w.]+)(?:\s+to\s+[^;]+)?\s*;",
                              (root / descriptor).read_text(encoding="utf-8")))
     require(exports <= packages, "every exported package must have actual compiled source")
-    return {"source_array": variable, "module_source_root": source_root.as_posix(),
+    return {"source_array": variable, "module_source_roots": expected_roots,
             "module_inputs": [p.relative_to(root).as_posix() for p in sources]}
 
-
-def inspect_wiring(root, workflow=None):
+def inspect_wiring(root, workflow=None, *, verify_module=True):
     """Cross-check actual compile operands, declarations, launches and filters."""
     if workflow is None:
         workflow = (root / WORKFLOW).read_text(encoding="utf-8")
@@ -139,6 +149,10 @@ def inspect_wiring(root, workflow=None):
     require(len(compilers) == 1, "expected one collections compile command")
     compiler = compilers[0]
     source_roots = [Path(p) for p in compiler[compiler.index("-sourcepath") + 1].split(":")]
+    require(source_roots == [Path("m3/collections/src/main/java"),
+                             Path("src/jdk.m3.collections/share/classes"),
+                             Path("test/jdk")],
+            "sourcepath must include the two full product roots and test/jdk")
     explicit = [Path(arg) for arg in compiler if arg.endswith(".java")]
     require(len(explicit) == len(set(explicit)), "duplicate explicit Java input")
     descriptors = [p for p in explicit if p.name == "module-info.java"]
@@ -170,7 +184,7 @@ def inspect_wiring(root, workflow=None):
             "every compiled contract must be launched")
 
     # The List contract shares its package with its actual implementation owner.
-    list_identity = next(name for name in inputs if name.endswith(".M3ObservableListContract"))
+    list_identity = next(name for name in inputs if name.endswith(".ObservableListContract"))
     owner_identity = list_identity.removesuffix("Contract")
     owner_suffix = Path(*owner_identity.split(".")).with_suffix(".java")
     owners = [source_root / owner_suffix for source_root in source_roots
@@ -183,7 +197,12 @@ def inspect_wiring(root, workflow=None):
                 Path("m3/collections/test_observable_workflow.py")]
     for relative in required:
         require(relative.as_posix() in filters, f"missing exact PR path filter: {relative}")
-    module_inputs = module_source_inputs(root, workflow, compiler, descriptors[0])
+    module_inputs = (module_source_inputs(root, workflow, compiler, descriptors[0])
+                     if verify_module else {"source_array": "collection_sources",
+                                            "module_source_roots": [
+                                                "m3/collections/src/main/java",
+                                                "src/jdk.m3.collections/share/classes"],
+                                            "module_inputs": []})
     return {"module": module, "compiled_inputs": [p.as_posix() for p in explicit],
             "launches": launches, "owner": owners[0].as_posix(),
             "qualification": "source_wiring_only_java21_not_executed", **module_inputs}
@@ -198,7 +217,7 @@ class ObservableWorkflowWiringTest(unittest.TestCase):
 
     def test_compile_omission_is_not_masked_by_path_filter(self):
         paths = inspect_wiring(ROOT, self.workflow)["compiled_inputs"]
-        contract = next(p for p in paths if p.endswith("M3ObservableIndexedViewsContract.java"))
+        contract = next(p for p in paths if p.endswith("ObservableIndexedViewsContract.java"))
         self.assertIn("      - '" + contract + "'", self.workflow)
         changed = self.workflow.replace("            " + contract + "\n", "\n", 1)
         self.assertNotEqual(changed, self.workflow)
@@ -207,7 +226,7 @@ class ObservableWorkflowWiringTest(unittest.TestCase):
 
     def test_absent_compile_path_is_rejected(self):
         paths = inspect_wiring(ROOT, self.workflow)["compiled_inputs"]
-        contract = next(p for p in paths if p.endswith("M3ObservableListContract.java"))
+        contract = next(p for p in paths if p.endswith("ObservableListContract.java"))
         changed = self.workflow.replace("            " + contract,
                                         "            " + contract + ".absent.java", 1)
         with self.assertRaisesRegex(AssertionError, "missing compile source"):
@@ -229,11 +248,11 @@ class ObservableWorkflowWiringTest(unittest.TestCase):
                 target.parent.mkdir(parents=True, exist_ok=True)
                 target.write_bytes((ROOT / relative).read_bytes())
             contract = root / next(p for p in wiring["compiled_inputs"]
-                                   if p.endswith("M3ObservableListContract.java"))
+                                   if p.endswith("ObservableListContract.java"))
             contract.write_text(re.sub(r"(?m)^(package\s+)[\w.]+;", r"\1stale.package;",
                                        contract.read_text(encoding="utf-8")), encoding="utf-8")
             with self.assertRaisesRegex(AssertionError, "source identity path mismatch"):
-                inspect_wiring(root, self.workflow)
+                inspect_wiring(root, self.workflow, verify_module=False)
 
     def test_wrong_launch_module_is_rejected(self):
         launch = inspect_wiring(ROOT, self.workflow)["launches"][0]
@@ -243,7 +262,7 @@ class ObservableWorkflowWiringTest(unittest.TestCase):
 
     def test_missing_contract_trigger_is_rejected(self):
         wiring = inspect_wiring(ROOT, self.workflow)
-        contract = next(p for p in wiring["compiled_inputs"] if p.endswith("M3ObservableListContract.java"))
+        contract = next(p for p in wiring["compiled_inputs"] if p.endswith("ObservableListContract.java"))
         changed = self.workflow.replace("      - '" + contract + "'\n", "", 1)
         with self.assertRaisesRegex(AssertionError, "missing exact PR path filter"):
             inspect_wiring(ROOT, changed)
@@ -259,7 +278,7 @@ class ObservableWorkflowWiringTest(unittest.TestCase):
 
     def test_narrowed_module_source_root_is_rejected(self):
         wiring = inspect_wiring(ROOT, self.workflow)
-        source_root = wiring["module_source_root"]
+        source_root = wiring["module_source_roots"][0]
         changed = self.workflow.replace("find " + source_root,
                                         "find " + source_root + "/jdk/m3/collections", 1)
         self.assertNotEqual(changed, self.workflow)
@@ -284,7 +303,7 @@ class ObservableWorkflowWiringTest(unittest.TestCase):
 
     def test_missing_complete_module_trigger_is_rejected(self):
         wiring = inspect_wiring(ROOT, self.workflow)
-        trigger = "      - '" + wiring["module_source_root"] + "/**'\n"
+        trigger = "      - '" + wiring["module_source_roots"][0] + "/**'\n"
         changed = self.workflow.replace(trigger, "", 1)
         self.assertNotEqual(changed, self.workflow)
         with self.assertRaisesRegex(AssertionError, "complete module source tree needs a PR path filter"):
