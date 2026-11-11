@@ -73,20 +73,26 @@ The `M3Observable*` names retained in the old
 are no longer real product/test paths. Treat this as **stale test wiring**, not
 permission to rename public or internal Java types blindly.
 
-The refreshed Java 21 workflow compiles the full
-`src/jdk.m3.collections/share/classes` tree plus the canonical module
-descriptor, then explicitly compiles and launches both standalone differential
+The refreshed Java 21 workflow compiles **only the collections-owned**
+`jdk/m3/collections/**` and `jdk/internal/m3/collections/**` subtrees
+with the canonical `jdk.m3.collections` module descriptor, then explicitly
+compiles and launches both standalone differential
 contract classes using their **declared class names**. Its source audit is
 [`m3/collections/test_observable_workflow.py`](../collections/test_observable_workflow.py);
-that audit rejects missing modules, narrowed finders, stale names, incorrect
-package-to-path relations, missing PR triggers and a contract that was compiled
-but not executed. Exact source class names and module inputs are the acceptance
+that audit rejects missing modules, dropped collections package subtrees,
+accidental inclusion of the sibling `jdk.m3.arrays` owner, stale names,
+incorrect package-to-path relations, missing PR triggers and a contract that was
+compiled but not executed. Exact source class names and module inputs are the acceptance
 authority; no source-body or ABI rename is part of this repair.
 
 The prior [CI run 42821834773](https://github.com/hsoliwal/M3jdk21/actions/runs/42821834773)
 failed with `file not found: .../M3ObservableListContract.java`. This patch
-addresses the missing input names, but **actual Java 21 compile/run success
-on the new PR head remains to be established**. Separately, the
+addresses the missing input names. The first candidate run
+[42959738187](https://github.com/hsoliwal/M3jdk21/actions/runs/42959738187)
+exposed an additional split-package failure from including the arrays owner in
+the collections module; the finder is now narrowed and regression-tested.
+**Actual Java 21 compile/run success on the new PR head remains to be established**.
+Separately, the
 [latest naming fixed-point run](https://github.com/hsoliwal/M3jdk21/actions/runs/42821834853)
 failed, so release remains HOLD even if this focused test becomes green.
 
