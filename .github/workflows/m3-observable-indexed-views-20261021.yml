@@ -4,13 +4,12 @@ name: M3 observable filtered and sorted indexed views Java21
 on:
   pull_request:
     paths:
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/arrays/**'
       - 'src/jdk.m3.collections/share/classes/**'
-      - 'm3/collections/src/main/java/module-info.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/M3ObservableList.java'
-      - 'test/jdk/jdk/internal/m3/collections/M3ObservableListContract.java'
+      - 'm3/collections/src/main/java/**'
+      - 'src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ObservableList.java'
+      - 'test/jdk/jdk/internal/m3/collections/ObservableListContract.java'
       - 'm3/collections/test_observable_workflow.py'
-      - 'test/jdk/jdk/m3/collections/M3ObservableIndexedViewsContract.java'
+      - 'test/jdk/jdk/m3/collections/ObservableIndexedViewsContract.java'
       - '.github/workflows/m3-observable-indexed-views-20261021.yml'
   push:
     branches:
@@ -60,20 +59,20 @@ jobs:
           test -f "$modules/jdk.m3.arrays/module-info.class"
           mkdir -p "$modules/jdk.m3.collections"
           mapfile -d '' -t collection_sources < <(
-            find m3/collections/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/collections src/jdk.m3.collections/share/classes/jdk/internal/m3/collections -type f -name '*.java' ! -name module-info.java -print0 | sort -z
+            find m3/collections/src/main/java src/jdk.m3.collections/share/classes -type f -name '*.java' ! -name module-info.java -print0 | sort -z
           )
           test "${#collection_sources[@]}" -ge 1
           javac --release 21 -Xlint:all,-module -Werror \
             --module-path "$modules" \
-            -sourcepath m3/collections/src/main/java:src/jdk.m3.collections/share/classes:m3/collections/src/test/java \
+            -sourcepath m3/collections/src/main/java:src/jdk.m3.collections/share/classes:test/jdk \
             -d "$modules/jdk.m3.collections" \
             m3/collections/src/main/java/module-info.java \
             "${collection_sources[@]}" \
-            test/jdk/jdk/internal/m3/collections/M3ObservableListContract.java \
-            test/jdk/jdk/m3/collections/M3ObservableIndexedViewsContract.java
+            test/jdk/jdk/internal/m3/collections/ObservableListContract.java \
+            test/jdk/jdk/m3/collections/ObservableIndexedViewsContract.java
       - name: Check observable workflow source wiring
         run: python3 -m unittest discover -s m3/collections -p test_observable_workflow.py -v
       - name: Existing observable List contract
-        run: java -Xcheck:jni --module-path "$RUNNER_TEMP/m3-observable/modules" -m jdk.m3.collections/jdk.internal.m3.collections.M3ObservableListContract
+        run: java -Xcheck:jni --module-path "$RUNNER_TEMP/m3-observable/modules" -m jdk.m3.collections/jdk.internal.m3.collections.ObservableListContract
       - name: Observable filtered/sorted primitive-index contract
-        run: java -Xcheck:jni --module-path "$RUNNER_TEMP/m3-observable/modules" -m jdk.m3.collections/jdk.m3.collections.M3ObservableIndexedViewsContract
+        run: java -Xcheck:jni --module-path "$RUNNER_TEMP/m3-observable/modules" -m jdk.m3.collections/jdk.m3.collections.ObservableIndexedViewsContract
