@@ -13,7 +13,7 @@ done
 javac -source 21 -target 21 -proc:none -Xlint:all,-module -Werror \
   --patch-module "java.base=$BUILD/patch-src" -d "$BUILD/patch" \
   "$BUILD"/patch-src/jdk/internal/vm/parallel/*.java
-mapfile -d '' SOURCES < <(find "$PARALLEL/src/main/java/com" -name '*.java' -print0 | sort -z)
+mapfile -d '' SOURCES < <(find "$PARALLEL/src/main/java/jdk" -name '*.java' -print0 | sort -z)
 javac --release 21 -proc:none -Xlint:all,-module -Werror -d "$BUILD/classes" "${SOURCES[@]}"
 javac -source 21 -target 21 -proc:none -Xlint:all,-module -Werror \
   --patch-module "java.base=$BUILD/patch" \

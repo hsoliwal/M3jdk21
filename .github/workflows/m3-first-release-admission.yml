@@ -249,7 +249,7 @@ jobs:
         run: |
           if test -f m3/compatibility/check_m3_full_family.py; then
             python3 m3/compatibility/check_m3_full_family.py
-            python3 -m unittest -v m3/compatibility/test_m3_full_family.py
+            python3 -m unittest discover -s m3/compatibility -p 'test_m3_full_family.py' -v
           fi
 
   release-proof-summary:

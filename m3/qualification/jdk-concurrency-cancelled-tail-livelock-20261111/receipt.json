@@ -160,19 +160,55 @@
     "class_load_log_sha256": "33be317acb3f5367efba9bc068c86fe2cffd76242dd7534f4c66dac13bb92441",
     "naming_preflight": "PASS on staged actual emitted metadata",
     "source_built_target_image": false,
-    "jtreg_executed": false,
+    "jtreg_executed": true,
     "baseline_direct_tck_tests": 238,
     "baseline_direct_tck_passed": true,
     "pre_fix_failure_reproduced": false,
-    "performance_improvement_measured": false
+    "performance_improvement_measured": false,
+    "authoritative_jtreg": {
+      "status": "PASS_PATCHED_REFERENCE_JTREG",
+      "process_exit_code": 0,
+      "target_commit": "caff5b3864be33eb705f253d29c325decd738abb",
+      "authoritative_entry": "test/jdk/java/util/concurrent/tck/JSR166TestCase.java",
+      "jtreg_cases": 4,
+      "junit_actions": 6,
+      "started_and_succeeded_action_test_executions": 24414,
+      "tests_per_action": 4069,
+      "discovered_tests_per_action": 4090,
+      "failed": 0,
+      "aborted": 0,
+      "reported_skipped": 0,
+      "discovered_not_started_per_action": 21,
+      "source_built_target_image": false,
+      "discovered_action_test_occurrences": 24540,
+      "discovered_not_started_action_test_occurrences": 126,
+      "actual_test_vms_with_all_three_published_owners": 6,
+      "count_note": "24,414 aggregate started/succeeded executions across six configurations, not distinct methods. Each action discovers 4,090 tests, starts and succeeds 4,069, and leaves 21 not started; reported skips remain a separate zero count.",
+      "evidence": {
+        "path": "synexia-openrewrite-recipes/recipes/m3-jdk-aqs-tail-20261111/proof/jtreg-20261111/summary.json",
+        "bytes": 10951,
+        "sha256": "e38104de71c45885e4c5f4108531f30ff01ec5d418d2b55a4b481ac13c2e3d80",
+        "git_blob": "75f1867825387f1efd23ccd226dd910a802a965a"
+      },
+      "retained_packet": {
+        "path": "synexia-openrewrite-recipes/recipes/m3-jdk-aqs-tail-20261111/proof/jtreg-20261111/evidence.zip",
+        "bytes": 441205,
+        "sha256": "1a71dacf361a9ab152940fb4a14950752d4fb2222ea3288cdaf6c9c9f8f36100",
+        "git_blob": "af28f25782e5304ac987a5dbebc87b9277ff3c35"
+      },
+      "canonical_publication_revision": "b0c6c8512d03d189b68b65c39f7a972c1dbeccf9",
+      "publication_binding": "BOUND_TO_PUBLISHED_CANONICAL_COMMIT",
+      "historical_direct_tck_result_retained": true,
+      "pre_fix_failure_reproduced": false,
+      "performance_improvement_measured": false
+    }
   },
   "pending": [
-    "Full authoritative jtreg variants at test/jdk/java/util/concurrent/tck/JSR166TestCase.java",
-    "Source-built and installed M3JDK21 image",
     "Broader concurrency/native/GC/platform acceptance",
     "Comparative CPU, heap and native-memory measurements",
     "Repeatable failing-baseline liveness witness",
-    "Repository review and receiving/release gates"
+    "Repository review and receiving/release gates",
+    "Receiving publication and a separate full-tree equivalence binding for the installed caff-plus-eight-output image."
   ],
   "licensing": "The three runtime source files retain GPL-2.0-only WITH Classpath-exception-2.0; the two tests retain GPL-2.0-only. This receipt and existing naming metadata are first-party Apache-2.0. The receipt does not relicense the source/test outputs.",
   "receiving_emitted_output_count": 8,
@@ -226,5 +262,250 @@
     "candidate_related_failure": "New mapping required five missing checkout paths; corrected by supporting recipe.",
     "triage_limits": "Selected existing binding/path defects were independently attributed; other failures and full target qualification remain unresolved.",
     "canonical_triage_path": "synexia-openrewrite-recipes/recipes/m3-jdk-aqs-checkout-20261111/proof/initial-hosted-ci-triage.json"
+  },
+  "qualification_updates": [
+    {
+      "date": "2026-11-11",
+      "kind": "PASSIVE_AUTHORITATIVE_JTREG_EVIDENCE_EXTENSION",
+      "canonical_repository": "https://github.com/hsoliwal/com.synexia",
+      "canonical_revision": "b0c6c8512d03d189b68b65c39f7a972c1dbeccf9",
+      "canonical_crate": "synexia-openrewrite-recipes/recipes/m3-jdk-aqs-tail-20261111",
+      "publication_binding": "BOUND_TO_PUBLISHED_CANONICAL_COMMIT",
+      "receiving_source_commit": "caff5b3864be33eb705f253d29c325decd738abb",
+      "receiving_source_tree": "9c5c67564871451a45527ec9741f29949bd153fb",
+      "previous_receipt": {
+        "path": "m3/qualification/jdk-concurrency-cancelled-tail-livelock-20261111/receipt.json",
+        "commit": "caff5b3864be33eb705f253d29c325decd738abb",
+        "bytes": 11754,
+        "sha256": "a3a49b9c91d33c93a05be900ccdb48d225415373bf9253a9bd819536682a2679",
+        "git_blob": "38b3b4ee7b43dce82322f1d96b50dd962ba0869c"
+      },
+      "original_owner_publication_revision_retained": "6f0f960378a25a1ff254c2384571fc269e6325df",
+      "original_output_and_supporting_recipe_identities_retained": true,
+      "scope": "Actual authoritative jtreg on the three exact published owners patched into Temurin 21.0.13+9; no source-built or installed-image claim.",
+      "evidence": {
+        "path": "synexia-openrewrite-recipes/recipes/m3-jdk-aqs-tail-20261111/proof/jtreg-20261111/summary.json",
+        "bytes": 10951,
+        "sha256": "e38104de71c45885e4c5f4108531f30ff01ec5d418d2b55a4b481ac13c2e3d80",
+        "git_blob": "75f1867825387f1efd23ccd226dd910a802a965a"
+      },
+      "retained_packet": {
+        "path": "synexia-openrewrite-recipes/recipes/m3-jdk-aqs-tail-20261111/proof/jtreg-20261111/evidence.zip",
+        "bytes": 441205,
+        "sha256": "1a71dacf361a9ab152940fb4a14950752d4fb2222ea3288cdaf6c9c9f8f36100",
+        "git_blob": "af28f25782e5304ac987a5dbebc87b9277ff3c35"
+      },
+      "runtime_owners": [
+        {
+          "path": "src/java.base/share/classes/java/util/concurrent/locks/AbstractQueuedSynchronizer.java",
+          "sha256": "5787ebffe734a4a9eb145c95fe7420d9fdfe8e42377f9d54617d402fc48b0b94",
+          "git_blob": "78a4ad5a5bc4501ba7e8fc860a31387f2cadba03"
+        },
+        {
+          "path": "src/java.base/share/classes/java/util/concurrent/locks/AbstractQueuedLongSynchronizer.java",
+          "sha256": "fd0add80b3a95c71700a8a4f2ab7f354dc47ad188280ba2e972d8432786ef6a4",
+          "git_blob": "950e4788d52d4f37b46bacd2387b818684372e2d"
+        },
+        {
+          "path": "src/java.base/share/classes/java/util/concurrent/locks/StampedLock.java",
+          "sha256": "ce91e27c3b4d2aa93bddd616aa8a7ae6a0d2e3b17ca740ccffb63dda85eff34e",
+          "git_blob": "8e6fcaae22a24cd36d88c8a437d7d4463c27718e"
+        }
+      ],
+      "not_started_tests_are_not_reported_as_skipped": true,
+      "source_built_target_image": false,
+      "family_phase_advanced": false,
+      "product_promotion_authority": false
+    },
+    {
+      "date": "2026-11-11",
+      "kind": "PASSIVE_SOURCE_BUILT_INSTALLED_IMAGE_EVIDENCE_EXTENSION",
+      "canonical_repository": "https://github.com/hsoliwal/com.synexia",
+      "canonical_revision": "b0c6c8512d03d189b68b65c39f7a972c1dbeccf9",
+      "canonical_crate": "synexia-openrewrite-recipes/recipes/m3-jdk-aqs-tail-20261111",
+      "publication_binding": "BOUND_TO_PUBLISHED_CANONICAL_COMMIT",
+      "receiving_source_commit": "caff5b3864be33eb705f253d29c325decd738abb",
+      "receiving_source_tree": "9c5c67564871451a45527ec9741f29949bd153fb",
+      "scope": "Exact clean caff source-built image, independent install, compiler and test JVM from that install, no module patch.",
+      "evidence": {
+        "path": "synexia-openrewrite-recipes/recipes/m3-jdk-aqs-tail-20261111/proof/installed-caff-20261111/summary.json",
+        "bytes": 12408,
+        "sha256": "d3bf07f2a5535c2f865da6cb705a1a4341675dd665039aedcfe400e3d8575776",
+        "git_blob": "4925e851192dd97d685577a652fd5e51e43bcce9"
+      },
+      "retained_packet": {
+        "path": "synexia-openrewrite-recipes/recipes/m3-jdk-aqs-tail-20261111/proof/installed-caff-20261111/evidence.zip",
+        "bytes": 456581,
+        "sha256": "e9d71d080c22bf1c2a796d75052ef6dc2cd75e30ce9b303dc7f50296eb578c83",
+        "git_blob": "2c6069ae772f080a53ecb9c278bb105b83fee447"
+      },
+      "source_built_target_image": true,
+      "family_phase_advanced": false,
+      "product_promotion_authority": false,
+      "excludes_cldr_and_ci_candidate_image": true
+    },
+    {
+      "date": "2026-11-11",
+      "kind": "PASSIVE_COMBINED_SDK8_INSTALLED_IMAGE_EVIDENCE_EXTENSION",
+      "canonical_repository": "https://github.com/hsoliwal/com.synexia",
+      "canonical_revision": "b0c6c8512d03d189b68b65c39f7a972c1dbeccf9",
+      "canonical_crate": "synexia-openrewrite-recipes/recipes/m3-jdk-cldr-cache-20261111",
+      "publication_binding": "BOUND_TO_PUBLISHED_CANONICAL_COMMIT",
+      "receiving_base_commit": "caff5b3864be33eb705f253d29c325decd738abb",
+      "receiving_source_tree": "28019fb7f0b4ce805d29bfc050f1d5f994f62121",
+      "published_commit_at_build": null,
+      "scope": "Independent installed image built from caff plus eight sealed SDK outputs; compiler and test JVMs from that install, no module patch. Receiving publication equivalence remains separate.",
+      "evidence": {
+        "path": "synexia-openrewrite-recipes/recipes/m3-jdk-cldr-cache-20261111/proof/installed-sdk8-20261111/summary.json",
+        "bytes": 48768,
+        "sha256": "31a2ff958eac86e369dbde31ab5d2d536bfbb723c8386920ac6b0946705c9014",
+        "git_blob": "84d3f20e27ebb6e08fe94ea93ea0e56475073a06"
+      },
+      "retained_packet": {
+        "path": "synexia-openrewrite-recipes/recipes/m3-jdk-cldr-cache-20261111/proof/installed-sdk8-20261111/evidence.zip",
+        "bytes": 733084,
+        "sha256": "447e792a4d6380f90e0500f2f2ea9ec67a4dc6a4a7e2ced5d335a87c410c6102",
+        "git_blob": "6f259b49da540f49638c8afe1b231c14eca12812"
+      },
+      "source_built_target_image": true,
+      "family_phase_advanced": false,
+      "product_promotion_authority": false
+    }
+  ],
+  "source_built_runtime_validation": {
+    "schema": "M3_AQS_SOURCE_BUILT_INSTALLED_JTREG_V1",
+    "status": "PASS_SOURCE_BUILT_INSTALLED_JTREG",
+    "target_commit": "caff5b3864be33eb705f253d29c325decd738abb",
+    "source_clean_after_run": true,
+    "source_built_target_image": true,
+    "image_entries_unchanged_after_run": 564,
+    "java_version": "openjdk version \"21.0.14-internal\" 2027-01-19\nOpenJDK Runtime Environment (build 21.0.14-internal-adhoc.agent.m3jdk21)\nOpenJDK 64-Bit Server VM (build 21.0.14-internal-adhoc.agent.m3jdk21, mixed mode, sharing)\n",
+    "javac_version": "javac 21.0.14-internal\n",
+    "modules": 75,
+    "jtreg_exit_code": 0,
+    "jtreg_cases": 4,
+    "junit_actions": 6,
+    "started_and_succeeded_executions": 24414,
+    "discovered_executions": 24540,
+    "discovered_not_started_per_action": 21,
+    "failed": 0,
+    "aborted": 0,
+    "reported_skipped": 0,
+    "patch_module_used": false,
+    "compiler_and_test_jvm_from_installed_image": true,
+    "cds_note": "AQS is loaded from the installed image CDS archive; AQLS and StampedLock from jrt:/java.base. Installed modules and CDS files are sealed and byte-identical to the source build; all19owner/nested class bytes extracted from lib/modules match source-build outputs.",
+    "evidence": {
+      "path": "synexia-openrewrite-recipes/recipes/m3-jdk-aqs-tail-20261111/proof/installed-caff-20261111/summary.json",
+      "bytes": 12408,
+      "sha256": "d3bf07f2a5535c2f865da6cb705a1a4341675dd665039aedcfe400e3d8575776",
+      "git_blob": "4925e851192dd97d685577a652fd5e51e43bcce9"
+    },
+    "retained_packet": {
+      "path": "synexia-openrewrite-recipes/recipes/m3-jdk-aqs-tail-20261111/proof/installed-caff-20261111/evidence.zip",
+      "bytes": 456581,
+      "sha256": "e9d71d080c22bf1c2a796d75052ef6dc2cd75e30ce9b303dc7f50296eb578c83",
+      "git_blob": "2c6069ae772f080a53ecb9c278bb105b83fee447"
+    },
+    "canonical_publication_revision": "b0c6c8512d03d189b68b65c39f7a972c1dbeccf9",
+    "publication_binding": "BOUND_TO_PUBLISHED_CANONICAL_COMMIT",
+    "independently_installed_image": true,
+    "actual_test_vms_with_installed_owners": 6,
+    "class_binding": {
+      "path": "evidence/installed-aqs-class-bindings.json",
+      "bytes": 4790,
+      "sha256": "f231c81277aadf13bd5beb8b695691880ccc90afa86da34ecf152a073d35afa7"
+    },
+    "install_receipt": {
+      "path": "evidence/source-built-install.json",
+      "bytes": 103034,
+      "sha256": "cf54d228d7d577bf4311b630000b51791a659df6000e0421225a4f473f81472c"
+    },
+    "image_verification": {
+      "exit_code": 0,
+      "log": {
+        "path": "logs/installed-jimage-verify.log",
+        "bytes": 184,
+        "sha256": "62695d3058b418b9263af1611860804e7a748f1fffa1e133d556ec6a7d0bc48b"
+      },
+      "nonfatal_warning": "hsperfdata lock warning retained from concurrent namespace process PID collision"
+    },
+    "count_note": "A separate source-built installed-image run: 24,414 successful executions across six actions, with 21 discovered but not started per action. Counts are not combined with the earlier patched-reference run.",
+    "qualification_scope": "Exact caff receiving image only; the separately qualified eight-output CI/CLDR image is recorded in combined_image_runtime_validation."
+  },
+  "combined_image_runtime_validation": {
+    "schema": "M3_AQS_CLDR_SOURCE_BUILT_INSTALLED_JTREG_V1",
+    "status": "PASS_SOURCE_BUILT_INSTALLED_JTREG",
+    "source_state_at_build": "caff plus8sealed actual SDK outputs; not yet a published receiving commit",
+    "base_commit": "caff5b3864be33eb705f253d29c325decd738abb",
+    "source_tree": "28019fb7f0b4ce805d29bfc050f1d5f994f62121",
+    "published_commit_at_build": null,
+    "source_built_target_image": true,
+    "modules": 75,
+    "jtreg_exit_code": 0,
+    "jtreg_cases": 6,
+    "aqs_jtreg_cases": 4,
+    "aqs_junit_actions": 6,
+    "aqs_started_and_succeeded_executions": 24414,
+    "aqs_discovered_executions": 24540,
+    "aqs_discovered_not_started_per_action": 21,
+    "aqs_failed": 0,
+    "aqs_aborted": 0,
+    "aqs_reported_skipped": 0,
+    "cldr_jtreg_cases": 2,
+    "cldr_main_actions": 3,
+    "cldr_fresh_child_jvms": 21,
+    "cldr_concurrent_forks": 8,
+    "cldr_workers_per_concurrent_fork": 32,
+    "patch_module_used": false,
+    "compiler_and_test_jvms_from_installed_image": true,
+    "post_run_integrity": {
+      "recorded_utc": "2026-11-11T16:30:36.314467+00:00",
+      "source_tree": "28019fb7f0b4ce805d29bfc050f1d5f994f62121",
+      "both_installed_images_unchanged": true,
+      "candidate_source_status_unchanged": true,
+      "eight_sdk_output_hashes_unchanged": true,
+      "jtreg_exit_code": 0
+    },
+    "all_21_owner_and_nested_classes_match_source_build": true,
+    "all_19_aqs_classes_identical_to_caff_image": true,
+    "evidence": {
+      "path": "synexia-openrewrite-recipes/recipes/m3-jdk-cldr-cache-20261111/proof/installed-sdk8-20261111/summary.json",
+      "bytes": 48768,
+      "sha256": "31a2ff958eac86e369dbde31ab5d2d536bfbb723c8386920ac6b0946705c9014",
+      "git_blob": "84d3f20e27ebb6e08fe94ea93ea0e56475073a06"
+    },
+    "retained_packet": {
+      "path": "synexia-openrewrite-recipes/recipes/m3-jdk-cldr-cache-20261111/proof/installed-sdk8-20261111/evidence.zip",
+      "bytes": 733084,
+      "sha256": "447e792a4d6380f90e0500f2f2ea9ec67a4dc6a4a7e2ced5d335a87c410c6102",
+      "git_blob": "6f259b49da540f49638c8afe1b231c14eca12812"
+    },
+    "canonical_publication_revision": "b0c6c8512d03d189b68b65c39f7a972c1dbeccf9",
+    "publication_binding": "BOUND_TO_PUBLISHED_CANONICAL_COMMIT",
+    "independently_installed_image": true,
+    "installed_owner_class_load_logs": 27,
+    "cldr_installed_provider_origin": "jrt:/java.base in all 21 fresh CLDR child JVMs",
+    "counts_not_combined_with_other_runs": true,
+    "class_binding": {
+      "path": "sdk8/evidence/installed-class-bindings.json",
+      "bytes": 4601,
+      "sha256": "248db1d451ab7e4db4e9772708c511fc44cd69bb7a9a8e709d50ebbe268f482a"
+    },
+    "materialization": {
+      "path": "sdk8/evidence/materialization.json",
+      "bytes": 9026,
+      "sha256": "b9815bac00c891e8b81b41ce258300fbe4707565db79afad4af396c6854989ae"
+    },
+    "install_receipt": {
+      "path": "sdk8/evidence/source-built-install.json",
+      "bytes": 103286,
+      "sha256": "22225edf64deb302be93fc7850abfad01250d67efc208d9f5c1f825ef2b8ff09"
+    },
+    "receiving_publication_equivalence": {
+      "status": "PENDING_SEPARATE_POST_PUBLICATION_BINDING",
+      "published_commit": null,
+      "note": "The build qualified caff plus eight sealed SDK outputs, not a published final receiving commit. Preserve published_commit_at_build=null as historical fact."
+    },
+    "qualification_scope": "Installed caff plus eight actual sealed CI/CLDR SDK outputs, exact tree 28019fb7f0b4ce805d29bfc050f1d5f994f62121; unpublished at build."
   }
 }

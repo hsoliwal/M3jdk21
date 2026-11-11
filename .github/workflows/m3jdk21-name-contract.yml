@@ -60,6 +60,9 @@ jobs:
             src/java.base/share/classes/java/util/concurrent/locks/StampedLock.java
             test/jdk/java/util/concurrent/tck/SemaphoreTest.java
             test/jdk/java/util/concurrent/tck/StampedLockTest.java
+            src/java.base/share/classes/sun/util/cldr/CLDRTimeZoneNameProviderImpl.java
+            test/jdk/sun/util/locale/provider/TimeZoneNameConcurrencyTest.java
+            test/jdk/sun/util/locale/provider/TimeZoneNameOrderTest.java
             src/java.base/share/classes/java/lang/Object.java
             src/java.base/share/classes/java/security/SHA256Adapter.java
             test/jdk/java/lang/Object/SHA256ObjectAdapterTest.java

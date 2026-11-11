@@ -12380,6 +12380,201 @@
         },
         "source_state": "implemented",
         "observation": "Exact isolated source candidates passed Temurin 21.0.13+9 strict three-owner compilation (-Xlint:all -Werror) and direct JUnit execution of 238 retained/new tests across AQS, AQLS, Semaphore and StampedLock with ActiveProcessorCount=4. All 19 emitted class signatures/descriptors matched baseline. Unchanged 108-Java TCK dependency closure was source-verified; its compilation emitted 8 existing removal warnings. Baseline also passed this finite run, so no failing-baseline witness or performance improvement is claimed. This preliminary --patch-module run is not jtreg, a source-built M3JDK21 image or proof of actual recipe-emitted-source execution. Status remains pending and every existing receiving phase remains unchanged."
+      },
+      {
+        "id": "jdk-cldr-timezone-cache-isolation",
+        "kind": "direct-port",
+        "status": "pending",
+        "reason": "Exact Corretto JDK-8392223 maintenance candidate in the existing CLDR time-zone provider; preserve shared cached resource arrays while deriving locale-specific names. No receiving phase or family advances.",
+        "sources": [
+          {
+            "repo": "corretto/corretto-21",
+            "commit": "33fe92bc219731e94d3b5f3da8149e0db4854edc",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/sun/util/cldr/CLDRTimeZoneNameProviderImpl.java",
+            "symbol": "sun.util.cldr.CLDRTimeZoneNameProviderImpl",
+            "signatures": [
+              "protected String[] getDisplayNameArray(String, Locale)"
+            ],
+            "sha256": "1679eceda98463778979d96b781be4afffb5eb2a19163addd0c68f3a6cc97020",
+            "git_blob_sha1": "d6693eba6ad81f3743072bc84b4f11cfe754760c",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "corretto/corretto-21",
+            "commit": "33fe92bc219731e94d3b5f3da8149e0db4854edc",
+            "module": "jtreg",
+            "path": "test/jdk/sun/util/locale/provider/TimeZoneNameConcurrencyTest.java",
+            "symbol": "TimeZoneNameConcurrencyTest",
+            "signatures": [
+              "public static void main(String[]) throws Exception"
+            ],
+            "sha256": "67940493912356741bd8dafb95a781737c3693c9250f750c4886ac6650451fc2",
+            "git_blob_sha1": "9756386b12882196b205e71615096fc80ce21ae1",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "corretto/corretto-21",
+            "commit": "33fe92bc219731e94d3b5f3da8149e0db4854edc",
+            "module": "jtreg",
+            "path": "test/jdk/sun/util/locale/provider/TimeZoneNameOrderTest.java",
+            "symbol": "TimeZoneNameOrderTest",
+            "signatures": [
+              "public static void main(String[]) throws Exception"
+            ],
+            "sha256": "ccbbc53977b802b70cdb3bc97476a02cbae19a2dfa34d64f1f2cd72e4b98d4e2",
+            "git_blob_sha1": "f25aac52d82e4219308726a73760253ab4077d24",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "java.base",
+            "path": "src/java.base/share/classes/sun/util/cldr/CLDRTimeZoneNameProviderImpl.java",
+            "symbol": "sun.util.cldr.CLDRTimeZoneNameProviderImpl",
+            "signatures": [
+              "protected String[] getDisplayNameArray(String, Locale)"
+            ],
+            "sha256": "1679eceda98463778979d96b781be4afffb5eb2a19163addd0c68f3a6cc97020",
+            "git_blob_sha1": "d6693eba6ad81f3743072bc84b4f11cfe754760c",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jtreg",
+            "path": "test/jdk/sun/util/locale/provider/TimeZoneNameConcurrencyTest.java",
+            "symbol": "TimeZoneNameConcurrencyTest",
+            "signatures": [
+              "public static void main(String[]) throws Exception"
+            ],
+            "sha256": "67940493912356741bd8dafb95a781737c3693c9250f750c4886ac6650451fc2",
+            "git_blob_sha1": "9756386b12882196b205e71615096fc80ce21ae1",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jtreg",
+            "path": "test/jdk/sun/util/locale/provider/TimeZoneNameOrderTest.java",
+            "symbol": "TimeZoneNameOrderTest",
+            "signatures": [
+              "public static void main(String[]) throws Exception"
+            ],
+            "sha256": "ccbbc53977b802b70cdb3bc97476a02cbae19a2dfa34d64f1f2cd72e4b98d4e2",
+            "git_blob_sha1": "f25aac52d82e4219308726a73760253ab4077d24",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "Existing sun.util.cldr.CLDRTimeZoneNameProviderImpl in java.base and two original donor jtreg regression tests; no new public owner.",
+        "identity": {
+          "namespace": "Original JDK provider, locale and TimeZone identities; no new namespace or canonical text owner.",
+          "generation": "Existing resource-cache lifecycle remains unchanged; a shallow array copy isolates derived slot values before mutation."
+        },
+        "contract": {
+          "differences": [
+            "Copy the cached String[] before replacing the timezone ID or deriving locale-specific fallback names.",
+            "Repair lookup-order and concurrent-first-lookup contamination; buggy prior results are intentionally corrected."
+          ],
+          "compatibility_obligations": [
+            "Preserve all JDK public/protected names, descriptors, inheritance, module exports and native interfaces.",
+            "Retain CLDR/COMPAT provider selection, locale fallback, null/error behavior and the existing resource cache.",
+            "Keep default-provider and explicit-CLDR order variants and concurrent child-JVM checks; prove the emitted provider is loaded."
+          ],
+          "public_surface": [
+            "Existing TimeZone display-name APIs and sun.util.cldr.CLDRTimeZoneNameProviderImpl signatures remain unchanged."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "All emitted provider class member signatures match the compiled baseline under javap -p -s.",
+          "bootstrap": "Existing java.base owner and Arrays.copyOf; no added runtime service, dependency, field or module edge."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "One exact existing target source preimage and two explicit absent test paths at caff5b3864be33eb705f253d29c325decd738abb.",
+          "joins": "One shallow copy of the existing String-reference array; immutable String payloads are reused.",
+          "outputs": "One runtime owner, two jtreg tests, this pending mapping record, its name-plan authority pin and three naming-checkout entries.",
+          "cached_facts": "No additional cache; shared resource arrays retain their original contents."
+        },
+        "recipe": {
+          "id": "com.synexia.m3.JdkCldrCache20261111",
+          "version": "20261111",
+          "path": null,
+          "sha256": null,
+          "preconditions": [
+            "Execute only in canonical Synexia and transfer exact emitted postimages with passive receipts.",
+            "Retain all prior 75 mapping records, all existing queue operations and every other naming-workflow byte.",
+            "Require fixed point, source drift/missing/duplicate and occupied-new-path refusals."
+          ],
+          "rollback": "An additive source-sealed recipe may restore the reviewed preimage while preserving independent receiving changes.",
+          "canonical_repository": "hsoliwal/com.synexia",
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-jdk-cldr-cache-20261111"
+        },
+        "tests": [
+          {
+            "id": "strict-java21-provider-compile-and-member-parity",
+            "receipt": "m3/qualification/jdk-cldr-timezone-cache-isolation-20261111/receipt.json"
+          },
+          {
+            "id": "actual-emitted-jtreg-order-and-concurrency",
+            "receipt": "m3/qualification/jdk-cldr-timezone-cache-isolation-20261111/receipt.json"
+          },
+          {
+            "id": "source-built-image-and-broader-platform-review",
+            "receipt": "m3/qualification/jdk-cldr-timezone-cache-isolation-20261111/receipt.json"
+          }
+        ],
+        "provenance": {
+          "license": "Runtime GPL-2.0-only WITH Classpath-exception-2.0; two tests GPL-2.0-only, with original Oracle headers. First-party mapping and recipe metadata are Apache-2.0.",
+          "publication": "Exact public Corretto 33fe92bc219731e94d3b5f3da8149e0db4854edc source and tests, JDK-8392223; all original notices retained.",
+          "copied_code": true,
+          "donor_boundary": "Same-ancestry PATCH; donor resources remain separately licensed from the Apache recipe engines."
+        },
+        "sync": {
+          "source_revision": "33fe92bc219731e94d3b5f3da8149e0db4854edc",
+          "target_revision": null,
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "No Java adaptation: all three outputs exactly match the reviewed donor files."
+          ],
+          "pending": [
+            "Exact final receiving image, broader affected locale/platform coverage and independent receiving review are recorded separately from this mapping.",
+            "One array allocation is introduced on resource hits; comparative CPU/heap/native measurements and universal performance claims are not established.",
+            "Existing String qualification stage and every family/release gate remain authoritative; no phase advances."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "caff5b3864be33eb705f253d29c325decd738abb",
+              "module": "java.base",
+              "path": "src/java.base/share/classes/sun/util/cldr/CLDRTimeZoneNameProviderImpl.java",
+              "symbol": "sun.util.cldr.CLDRTimeZoneNameProviderImpl",
+              "signatures": [
+                "protected String[] getDisplayNameArray(String, Locale)"
+              ],
+              "sha256": "32ef1aa8586bf2d4746fbd7c0f040272a06f4ff276ef6acb5fcad377c6397d78",
+              "git_blob_sha1": "ace396d4aa8313239f8dbafa330eaf9b63cf3f6c",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "implemented",
+        "observation": "The three actual SDK-emitted Java files pass the six-test canonical recipe harness. Exact baseline and emitted providers compile with strict Java21 lint and unchanged member descriptors. Original donor jtreg order and concurrency tests fail against the baseline and pass against emitted source; child VM logs prove patched provider loading. This scoped patch-module evidence is distinct from source-built target image and full release acceptance."
       }
     ]
   },
