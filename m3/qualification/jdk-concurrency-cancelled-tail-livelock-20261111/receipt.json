@@ -174,5 +174,57 @@
     "Repeatable failing-baseline liveness witness",
     "Repository review and receiving/release gates"
   ],
-  "licensing": "The three runtime source files retain GPL-2.0-only WITH Classpath-exception-2.0; the two tests retain GPL-2.0-only. This receipt and existing naming metadata are first-party Apache-2.0. The receipt does not relicense the source/test outputs."
+  "licensing": "The three runtime source files retain GPL-2.0-only WITH Classpath-exception-2.0; the two tests retain GPL-2.0-only. This receipt and existing naming metadata are first-party Apache-2.0. The receipt does not relicense the source/test outputs.",
+  "receiving_emitted_output_count": 8,
+  "receiving_total_changed_paths_including_passive_receipt": 9,
+  "supporting_recipe_executions": [
+    {
+      "recipe_id": "com.synexia.m3.JdkAqsCheckout20261111",
+      "canonical_repository": "https://github.com/hsoliwal/com.synexia",
+      "canonical_revision": "05f4bdcb50872514a7b41a965e68d6a8453d4fcd",
+      "canonical_crate": "synexia-openrewrite-recipes/recipes/m3-jdk-aqs-checkout-20261111",
+      "receiving_parent_commit": "60a9b94efc217e9b66e768485179c1bb9c08f8d0",
+      "intent": "Include exactly the five newly mapped runtime/test paths in the existing naming audit sparse checkout.",
+      "outputs": [
+        {
+          "path": ".github/workflows/m3jdk21-name-contract.yml",
+          "before_git_blob": "5c8b2ffd13980c61b2c20aba7ba79f533d6226de",
+          "before_sha256": "cada3ee51eaf408e8045713febc53e2990e16fefe1268e8eba13bf6e560af037",
+          "after_git_blob": "1c49f05ea462d60ee3f8025e493bb911defef4ac",
+          "after_sha256": "26ff560f4221fbd08647ed706e500bf14236ff45ca5917f42c08584ca2f1d91e",
+          "license": "Apache-2.0",
+          "all_other_workflow_bytes_preserved": true
+        }
+      ],
+      "execution_proof": {
+        "path": "synexia-openrewrite-recipes/recipes/m3-jdk-aqs-checkout-20261111/proof/summary.json",
+        "sha256": "649536fd6949e3a500901c5c2c4daaa6de13fb4c51140edc4fab6c45c181cc7b",
+        "git_blob": "e6d8238e21c5190c92fcff8b6072e24595388484",
+        "sdk_report_path": "synexia-openrewrite-recipes/recipes/m3-jdk-aqs-checkout-20261111/proof/sdk-report.xml",
+        "sdk_report_sha256": "2c4e9c538de2b92ee1182465cae7f39c9b839b406c7e1aacb0f6b43f116434ef",
+        "sdk_tests": 6,
+        "final_metadata_sdk_log": "synexia-openrewrite-recipes/recipes/m3-jdk-aqs-checkout-20261111/proof/sdk.txt",
+        "final_metadata_sdk_log_sha256": "d68905884fba05b0fdcd4072c94156f4cc8ae3e2dd107f7cdff852894803b519",
+        "actual_emitted_workflow_tested": true,
+        "existing_input_files_pinned": 44,
+        "unchanged_tests": true,
+        "before_suite_tests": 121,
+        "before_suite_failures": 1,
+        "after_suite_tests": 121,
+        "after_suite_failures": 0,
+        "after_suite_errors": 0,
+        "after_suite_skipped": 0
+      },
+      "scope": "Checkout coverage correction only; primary Java outputs and their original qualification are unchanged."
+    }
+  ],
+  "initial_hosted_ci_observation": {
+    "head": "60a9b94efc217e9b66e768485179c1bb9c08f8d0",
+    "completed_runs": 27,
+    "successful_runs": 10,
+    "failed_runs": 17,
+    "candidate_related_failure": "New mapping required five missing checkout paths; corrected by supporting recipe.",
+    "triage_limits": "Selected existing binding/path defects were independently attributed; other failures and full target qualification remain unresolved.",
+    "canonical_triage_path": "synexia-openrewrite-recipes/recipes/m3-jdk-aqs-checkout-20261111/proof/initial-hosted-ci-triage.json"
+  }
 }
