@@ -90,9 +90,13 @@ failed with `file not found: .../M3ObservableListContract.java`. This patch
 addresses the missing input names. The first candidate run
 [42959738187](https://github.com/hsoliwal/M3jdk21/actions/runs/42959738187)
 exposed an additional split-package failure from including the arrays owner in
-the collections module; the finder is now narrowed and regression-tested.
-**Actual Java 21 compile/run success on the new PR head remains to be established**.
-Separately, the
+the collections module. The corrected finder subsequently passed
+[Java 21 observable workflow 42960410466](https://github.com/hsoliwal/M3jdk21/actions/runs/42960410466)
+on source commit `8bbfb828f14a228285ebe441fd967544db5dc871`:
+both module compilation steps, the wiring refusal tests, and both
+standalone contract executions were green. **This is a focused receipt for
+that exact source revision, not an installed-JDK/ABI/jtreg certification or
+an automatic PASS for later documentation commits.** Separately, the
 [latest naming fixed-point run](https://github.com/hsoliwal/M3jdk21/actions/runs/42821834853)
 failed, so release remains HOLD even if this focused test becomes green.
 
