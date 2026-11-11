@@ -5,6 +5,8 @@ on:
   pull_request:
     paths:
       - 'src/jdk.m3.collections/share/classes/**'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/**'
+      - 'src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/**'
       - 'm3/collections/src/main/java/**'
       - 'src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ObservableList.java'
       - 'test/jdk/jdk/internal/m3/collections/ObservableListContract.java'
@@ -59,7 +61,7 @@ jobs:
           test -f "$modules/jdk.m3.arrays/module-info.class"
           mkdir -p "$modules/jdk.m3.collections"
           mapfile -d '' -t collection_sources < <(
-            find m3/collections/src/main/java src/jdk.m3.collections/share/classes -type f -name '*.java' ! -name module-info.java -print0 | sort -z
+            find m3/collections/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/collections src/jdk.m3.collections/share/classes/jdk/internal/m3/collections -type f -name '*.java' ! -name module-info.java -print0 | sort -z
           )
           test "${#collection_sources[@]}" -ge 1
           javac --release 21 -Xlint:all,-module -Werror \
