@@ -8,6 +8,7 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/**'
       - 'src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/**'
       - 'm3/collections/src/main/java/**'
+      - 'm3/collections/src/main/java/module-info.java'
       - 'src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ObservableList.java'
       - 'test/jdk/jdk/internal/m3/collections/ObservableListContract.java'
       - 'm3/collections/test_observable_workflow.py'
