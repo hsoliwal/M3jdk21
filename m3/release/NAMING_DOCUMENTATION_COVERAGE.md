@@ -96,6 +96,19 @@ Separately, the
 [latest naming fixed-point run](https://github.com/hsoliwal/M3jdk21/actions/runs/42821834853)
 failed, so release remains HOLD even if this focused test becomes green.
 
+### Independent OpenJDK sanity blocker at the current review baseline
+
+[OpenJDK GHA Sanity run 42959659585](https://github.com/hsoliwal/M3jdk21/actions/runs/42959659585)
+failed in the `Build JTReg` preparation job on 2026-11-11:
+the pinned JTHarness source download from
+`https://git.openjdk.org/jtharness/archive/jt6.0-b24.zip`
+returned `wget` exit code 8. Downstream JDK platform/tier1 jobs were
+**skipped**, not passed. This is an external test-tool acquisition failure,
+not a proven compiler/runtime failure, and the release gate
+`OPENJDK_SANITY_MATRIX` remains **PENDING/FAILED** until the same candidate
+commit has a complete reproducible build and test matrix. Do not replace
+this gate with an unrelated stock-JDK run or omit it from the proof pack.
+
 The machine-readable preview contract now requires
 `M3_CHANGED_ATOM_COVERAGE` with at least 90% instrumented line and branch
 coverage **for every inventoried changed M3 contract atom**. A source
