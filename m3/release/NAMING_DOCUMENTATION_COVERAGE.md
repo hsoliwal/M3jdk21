@@ -100,6 +100,31 @@ an automatic PASS for later documentation commits.** Separately, the
 [latest naming fixed-point run](https://github.com/hsoliwal/M3jdk21/actions/runs/42821834853)
 failed, so release remains HOLD even if this focused test becomes green.
 
+### Additional exact-head release blockers (2026-11-11)
+
+The broad pull-request event also reruns existing ownership gates outside the
+focused observable-collections slice. On commit
+`fd6994ce732fccbe5d38f0b16d9b7781ec318410`, the foundation workflow exposed
+a stale M3File test expectation: it looked for `requires jdk.m3.arrays;`
+although the actual descriptor declares `requires transitive jdk.m3.arrays;`.
+The regression assertion is corrected on the current PR branch; the
+rerun on that new head is still pending.
+
+Other failures are **not waived or “fixed” by rewriting hashes**:
+- The M3File char-array-copy recipe refuses a superseded `M3String.java`
+  postimage (`expected 8ddd767e… actual 8e621078…`). Reconcile the recipe
+  against the current owner source and its transformation/test evidence.
+- The Guava MinMaxPriorityQueue receiver refuses a historic source-packet
+  identity mismatch. Preserve the frozen donor packet and provenance; inspect
+  the successor source-binding manifest and establish a reviewed transition.
+- The optional Eclipse core JMOD refuses a changed `M3EclipseCore.java`
+  postimage. Reconcile the owner change with its eight-source custody proof
+  before admitting it.
+
+These are source ownership/provenance gates, not mere naming warnings. The
+expected and actual digests must never be made equal by blindly accepting the
+new value. The latest full PR workflow event must be green before release.
+
 ### Independent OpenJDK sanity blocker at the current review baseline
 
 [OpenJDK GHA Sanity run 42959659585](https://github.com/hsoliwal/M3jdk21/actions/runs/42959659585)
