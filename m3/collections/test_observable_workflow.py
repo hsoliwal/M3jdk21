@@ -109,10 +109,13 @@ def module_source_inputs(root, workflow, compiler, descriptor):
     require(compiler.count("$" + "{" + variable + "[@]}") == 1,
             "full module sources must be actual javac operands")
     expected_roots = ["m3/collections/src/main/java",
-                      "src/jdk.m3.collections/share/classes"]
-    require(finder[0] == "find" and finder[1:3] == expected_roots,
+                      "src/jdk.m3.collections/share/classes/jdk/m3/collections",
+                      "src/jdk.m3.collections/share/classes/jdk/internal/m3/collections"]
+    # Never admit the sibling jdk.m3.arrays package from the old flattened
+    # directory: it belongs to an independently built module.
+    require(finder[0] == "find" and finder[1:4] == expected_roots,
             "finder must use the complete module source roots")
-    require(finder[3:] == ["-type", "f", "-name", "*.java", "!", "-name",
+    require(finder[4:] == ["-type", "f", "-name", "*.java", "!", "-name",
                            "module-info.java", "-print0", "|", "sort", "-z"],
             "unsupported module-source finder")
     require(descriptor.parent.as_posix() == expected_roots[0],
@@ -201,7 +204,8 @@ def inspect_wiring(root, workflow=None, *, verify_module=True):
                      if verify_module else {"source_array": "collection_sources",
                                             "module_source_roots": [
                                                 "m3/collections/src/main/java",
-                                                "src/jdk.m3.collections/share/classes"],
+                                                "src/jdk.m3.collections/share/classes/jdk/m3/collections",
+                                                "src/jdk.m3.collections/share/classes/jdk/internal/m3/collections"],
                                             "module_inputs": []})
     return {"module": module, "compiled_inputs": [p.as_posix() for p in explicit],
             "launches": launches, "owner": owners[0].as_posix(),
@@ -283,6 +287,18 @@ class ObservableWorkflowWiringTest(unittest.TestCase):
                                         "find " + source_root + "/jdk/m3/collections", 1)
         self.assertNotEqual(changed, self.workflow)
         with self.assertRaisesRegex(AssertionError, "complete module source root"):
+            inspect_wiring(ROOT, changed)
+
+    def test_arrays_owner_subtree_must_not_enter_collections_module(self):
+        inspect_wiring(ROOT, self.workflow)
+        separate = (
+            "src/jdk.m3.collections/share/classes/jdk/m3/collections "
+            "src/jdk.m3.collections/share/classes/jdk/internal/m3/collections"
+        )
+        self.assertIn(separate, self.workflow)
+        changed = self.workflow.replace(
+            separate, "src/jdk.m3.collections/share/classes", 1)
+        with self.assertRaisesRegex(AssertionError, "complete module source roots"):
             inspect_wiring(ROOT, changed)
 
     def test_unbacked_exported_package_is_rejected(self):
