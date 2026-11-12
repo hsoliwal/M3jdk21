@@ -69,6 +69,14 @@ public final class MatAdaptiveLongLongMap {
     }
 
     public long[] valuesBySortedKey(){
+        // The sorted representation already aligns both primitive lanes.
+        if(encoding==Encoding.SORTED)return values.clone();
+        // Direct addresses are enumerated in signed key order without a sort or lookup.
+        if(encoding==Encoding.DIRECT){
+            long[] out=new long[size];int p=0;
+            for(int i=0;i<values.length;i++)if(bit(presence,i))out[p++]=values[i];
+            return out;
+        }
         long[] ks=keys(),out=new long[ks.length];
         for(int i=0;i<ks.length;i++)out[i]=get(ks[i]);
         return out;
