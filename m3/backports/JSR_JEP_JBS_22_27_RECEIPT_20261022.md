@@ -136,3 +136,96 @@ Root cause observed in the authoritative donor patch: JDK-8309665 removed a `che
 4. Promote only reviewed results by PR after gates execute; never equate JEP inventory, source hash, GitHub merge ancestry or queued/zero-job CI with passing product proof.
 
 **This receipt changes no OpenJDK source, Java API, class-file version, runtime flag, recipe, Maven build, or existing authority file.** Its receiver snapshot remains the exact original `master` SHA above. Verification: 85-JEP TSV cross-check, all 14,948 upstream GA commits and candidate queue reconciled with exact hashes, and Bash completion smoke as recorded below. Not performed: canonical Synexia recipe execution, Maven/JDK image build, jtreg, JNI/HotSpot runtime or performance testing.
+
+## Current-source reconciliation — 2026-11-12
+
+This is an append-only update to the historical observations above. The inspected
+receiver is [M3JDK21 `b98bf8c065818aac3447be165909e2a013325d9a`](https://github.com/hsoliwal/M3jdk21/commit/b98bf8c065818aac3447be165909e2a013325d9a).
+The canonical intake recipe, resources and existing tests were read from private
+Synexia revision `510a640feb877b1b7e69d346ae2e4e1a10628506`, family
+`m3jdk21-jbs-census-intake-20261024`. This update records observed source and
+bounded execution; it changes no JEP disposition or runtime receiving phase.
+
+### The two ingestion repairs are now present and tested
+
+All four current receiver files equal the canonical family's exact postimage
+bytes. The historical statements that the following two defects need source
+repair describe the October snapshot; they are no longer the current source
+state.
+
+| Source | Verified current behavior | SHA-256 |
+| --- | --- | --- |
+| `inventory.py` | Anchored seven-digit subject prefixes, comma/slash lists and explicit `[BACKOUT]` lineage are normalized with ordered deduplication. Explicit `JDK-` identifiers remain supported. | `0f0fc54805d54d2e17aa65ce489536ffedf7d43c7590d9b9fbe578ca4f8a0533` |
+| `compatibility_queue.py` | The inventory reader permits fields up to 4 MiB and restores the previous CSV field limit on success or failure. | `bb8fc00b5821bf49343d75f475d7912b1e9346f02d399ec4422665e95fbce524` |
+| `test_inventory.py` | Real temporary-Git inventory, supported subject forms and unrelated-number decoys remain covered. | `f950084cc94b52df228f5d6ef4b49b61604140436b2697ff57160ce21da33486` |
+| `test_compatibility_queue.py` | Wide-field roundtrip, oversized-field refusal, limit restoration and retained classification behavior remain covered. | `ae5aa733bc812dbde1593e6d17cdc76fd16bf77a1fddf78fe5b02d61cff1c38e` |
+
+Executed against those exact receiver bytes, from `m3/backports`:
+
+```sh
+python3 -m unittest test_inventory test_compatibility_queue -v
+```
+
+Result: **10 tests passed; zero failures, errors or skips**. These tests exercise
+the inventory and queue behavior, including real temporary Git commits. Extracted
+subject identifiers remain candidate links requiring individual JBS review.
+
+The canonical family's **33 existing JUnit tests also passed**, including real
+OpenRewrite `Recipe.run` applications, exact postimages, a zero-change replay,
+per-file source-drift and missing-source refusal, and source-presence witnesses.
+The executed successor proof lane used Java 21.0.13+9, Maven 3.9.9, OpenRewrite
+8.90.4, JUnit 5.11.4 and Surefire 3.5.4. The original family's older POM remains
+unchanged; these results belong to this explicitly versioned proof environment.
+The 33 Java recipe tests and ten Python behavior tests establish different
+obligations and must not be counted as 43 distinct upstream fixes.
+
+This documentation append is materialized by the canonical Synexia text recipe
+`com.synexia.m3.Jdk21JbsReceiptReconciliation20261112`. Its input is this exact
+historical document, with no replacement of prior observations. The receiving PR
+binds the generated document to its canonical recipe execution and output hash.
+
+### Existing authorities remain the work queue
+
+The following counts were independently read from the inspected receiver. They
+are sizes of the existing ledgers, without a whole-repository coverage claim.
+
+| Existing authority | Rows at the inspected revision | Interpretation |
+| --- | ---: | --- |
+| [JEP catalogue](JEP_CATALOGUE.tsv) | 85 | 10 ordinary candidates, 19 high-risk candidates, 13 holds, 23 Java-21-baseline rejections and 20 superseded lineage rows. |
+| [JEP residue queue](JEP_RESIDUE_QUEUE.tsv) | 42 | 29 candidates and 13 holds; ten `MATERIALIZED_PACKET`, five `PACKET_EVIDENCE` and 27 `NO_RECIPE_EVIDENCE` labels. Materialization still requires the recorded target gates. |
+| [Operational migration map](../docs/name-mapping.json) | 76 records | Two `implemented-tested`, 32 `implemented-unverified`, 40 `pending` and two `blocked` labels. Each label retains its own recorded scope and evidence. |
+
+Continue through those authorities and their existing DAG, execution-wave and
+programme-status owners. Some historical evidence paths refer to target-side
+recipe copies. The current [repository instructions](../../AGENTS.md) classify
+those copies as migration residue; canonical recipes remain in Synexia.
+
+Resolve the exact capability record before each package move. For example,
+`m3.arrays.packed.signed` and `m3.arrays.packed.vint64` currently name receiver
+paths under `src/jdk.m3.collections/share/classes/jdk/m3/arrays/packed/`.
+Their `implemented-unverified` status and remaining module/runtime gates carry
+forward. The existing [name and package contract](../docs/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md)
+retains public Java SE names and separate provider contracts.
+
+### Compatibility and remaining proof
+
+[JCP's Java SE 21 specification is JSR 396](https://jcp.org/en/jsr/detail?id=396).
+The [Java platform process](https://ops.java/releases/) distinguishes the platform
+specification, its reference implementation and compatibility kit. SE-scoped JEPs
+are incorporated into a platform JSR; the [JDK Bug System](https://wiki.openjdk.org/display/general/JBS+Overview)
+records individual bugs and enhancements. Keep each JSR, JEP, JBS issue, source
+commit and generated target output linked by its own identity.
+
+The historical 14,948-commit census, 14,726 candidate issue-ID count, 435,987
+release/path comparisons and Arrays overflow counterexample above have **not**
+been rerun in this reconciliation. Their original pins and qualifications remain
+in force. Next work is complete GA-census regeneration through the repaired
+intake, individual issue/source dependency review, source-sealed candidate
+execution and applicable target acceptance. Java 21 grammar/API/class-file and
+JVM/JNI obligations remain authoritative; separately specified M3 extensions
+retain their own admission requirements.
+
+No full M3JDK image build, jtreg/HotSpot suite, JNI execution, performance campaign
+or JBS database-wide validation was performed for this document update. Those
+unexecuted obligations remain open. The String -> arrays -> collections ->
+AST/compiler -> remaining-families receiving sequence is unchanged.
