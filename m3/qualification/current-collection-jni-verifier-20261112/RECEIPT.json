@@ -1,0 +1,63 @@
+{
+  "schema": "m3.receiver-postimage-reference/v1",
+  "status": "DRAFT_UNADMITTED",
+  "repository": "hsoliwal/M3jdk21",
+  "preimage": "b98bf8c065818aac3447be165909e2a013325d9a",
+  "canonical": {
+    "repository": "hsoliwal/com.synexia",
+    "pullRequest": 17189,
+    "revision": "0f15a55a8c47dc12974902213320d9eae36a30fa",
+    "path": "synexia-openrewrite-recipes/recipe-crates/current-collection-jni-verifier-20261112",
+    "recipeId": "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe",
+    "crateId": "m3-current-collection-jni-verifier-20261112",
+    "qualification": "synexia-openrewrite-recipes/recipe-crates/current-collection-jni-verifier-20261112/proof/MAVEN_VERIFY.json"
+  },
+  "postimages": [
+    {
+      "path": "m3/collections/qualification/full-java-jni-20261018/verify.py",
+      "sha256": "ad7751a1a930a31110a771388cf5446acf544b622abc80ad0abf4bbdc4077119",
+      "gitBlob": "9283e6c65a46ac5814aca4d43c16fcf08d2eae6a"
+    }
+  ],
+  "scope": "One existing full-collection Java/JNI verifier; current POM roots, CMake library/class registry and all 20 explicit contract binaries/arguments; existing public helpers, strict compilation, required JNI and failure/fallback controls retained. No product Java/native/storage implementation change.",
+  "componentEvidence": {
+    "runtime": "Windows x64 Java21.0.9/Python3.12.6/JPype1.5.2",
+    "strictSourceUnits": 6,
+    "strictClasses": 18,
+    "strictCompileWarnings": 0,
+    "candidateJUnit": {
+      "found": 8,
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0
+    },
+    "CPUContracts": 20,
+    "actualSDK": {
+      "outputs": 1,
+      "replayChanges": 0,
+      "identityAndMetadataPreserved": true,
+      "unrelatedSourcePreserved": true
+    },
+    "Maven": "PASS_INSTALLED_MAVEN_3_9_14_SDK_VERIFY_EXIT_0",
+    "CWriteDenied": true,
+    "networkConnectDenied": true,
+    "cacheCopies": 0,
+    "sourceGenerationCalls": 0
+  },
+  "targetGates": {
+    "fullCollectionsJavaAndJNI": "NOT_RUN",
+    "installedSourceCustody": "OPEN",
+    "liveOwnerDifferential": "OPEN",
+    "fullProductImageGcJtregPerformance": "OPEN",
+    "globalPerAtomCoverage": "OPEN",
+    "repositoryCompletion": false,
+    "automaticApplication": false,
+    "namingMappingChange": "NOT_APPLICABLE_EXISTING_VERIFIER_REFERENCES_FOLLOW_CURRENT_SOURCE_WITNESSES"
+  },
+  "phase": {
+    "STRING": "QUALIFICATION_REQUIRED",
+    "ARRAYS": "WAITING_FOR_PREDECESSOR",
+    "COLLECTIONS": "WAITING_FOR_PREDECESSOR"
+  },
+  "custody": "Only one exact canonical SDK Python postimage plus this passive receipt. Recipes, templates, fixtures, Maven/validation code and improvement memory remain exclusively in Synexia."
+}
