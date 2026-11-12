@@ -1,0 +1,6 @@
+category	problem_shape	source	revision_or_category	license_policy	decision
+EXACT_LOOKUP	First duplicate source row	hsoliwal/com.synexia PR17056	https://github.com/hsoliwal/com.synexia/pull/17056	First-party Apache-2.0	Product source-seal and original behavior oracle
+EXACT_LOOKUP	Repeated string query	LeetCode First Unique Character	https://leetcode.com/problems/first-unique-character-in-a-string/	TAXONOMY_ONLY_NO_SOLUTION_COPY	Different problem contract; use no submission implementation
+EXACT_LOOKUP	Repeated string match	HackerRank Sparse Arrays	https://www.hackerrank.com/challenges/sparse-arrays/problem	TAXONOMY_ONLY_NO_SOLUTION_COPY	Different count output; use adversarial query shapes only
+EXACT_LOOKUP	Hash collision fallback	GeeksforGeeks hashing category	https://www.geeksforgeeks.org/dsa/hashing-data-structure/	TAXONOMY_ONLY_NO_ARTICLE_CODE_COPY	Probe refusal and exact equality negative tests
+EXACT_LOOKUP	Primitive open-addressed hash slots	aeron-io/agrona Int2IntHashMap	https://github.com/aeron-io/agrona/blob/e2c9047fa09087ad41198db2d614c792f176fa87/agrona/src/main/java/org/agrona/collections/Int2IntHashMap.java	Apache-2.0; source_blob=7e469ef5124fb1d514e02f3ac9d8d6f81f1c7fd2; license_blob=27ff85aa183a80f7370b908e837721a02f33b5da	Conceptual donor only; no imported implementation
