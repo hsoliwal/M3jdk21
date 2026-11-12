@@ -156,7 +156,7 @@ class FileWorkflowWiringTest(unittest.TestCase):
         file_descriptor = (FILE / 'src/main/java/module-info.java').read_text(encoding='utf-8')
         collection_descriptor = (ROOT / 'm3/collections/src/main/java/module-info.java').read_text(encoding='utf-8')
         self.assertIn('requires transitive jdk.m3.collections;', file_descriptor)
-        self.assertIn('requires jdk.m3.arrays;', collection_descriptor)
+        self.assertIn('requires transitive jdk.m3.arrays;', collection_descriptor)
         builder = (FILE / 'compile-dependencies.sh').read_text(encoding='utf-8')
         self.assertIn('for family in arrays collections; do', builder)
         self.assertIn('find "$repo/m3/$family/src/main/java"', builder)

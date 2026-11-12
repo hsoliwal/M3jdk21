@@ -60,6 +60,84 @@ SHA-256 evidence to the final product commit after the last merge.
 | Arrays and collections | module tests and independent provider-contract tests | contract-by-contract JUnit, mutations/views/concurrency/serialization and ABI |
 | Swing/SWT coupling | separate SWT backend matrix | exact SWT revision, matched Java/native artifacts, GUI, resource and JNI evidence |
 
+### Observable collections Java 21 naming and coverage repair (2026-11-11)
+
+The actual internal Java owner is
+[`jdk.internal.m3.collections.ObservableList`](../../src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ObservableList.java),
+with tests
+[`ObservableListContract`](../../test/jdk/jdk/internal/m3/collections/ObservableListContract.java)
+and
+[`ObservableIndexedViewsContract`](../../test/jdk/jdk/m3/collections/ObservableIndexedViewsContract.java).
+The `M3Observable*` names retained in the old
+[`m3-observable-indexed-views-20261021.yml`](../../.github/workflows/m3-observable-indexed-views-20261021.yml)
+are no longer real product/test paths. Treat this as **stale test wiring**, not
+permission to rename public or internal Java types blindly.
+
+The refreshed Java 21 workflow compiles **only the collections-owned**
+`jdk/m3/collections/**` and `jdk/internal/m3/collections/**` subtrees
+with the canonical `jdk.m3.collections` module descriptor, then explicitly
+compiles and launches both standalone differential
+contract classes using their **declared class names**. Its source audit is
+[`m3/collections/test_observable_workflow.py`](../collections/test_observable_workflow.py);
+that audit rejects missing modules, dropped collections package subtrees,
+accidental inclusion of the sibling `jdk.m3.arrays` owner, stale names,
+incorrect package-to-path relations, missing PR triggers and a contract that was
+compiled but not executed. Exact source class names and module inputs are the acceptance
+authority; no source-body or ABI rename is part of this repair.
+
+The prior [CI run 42821834773](https://github.com/hsoliwal/M3jdk21/actions/runs/42821834773)
+failed with `file not found: .../M3ObservableListContract.java`. This patch
+addresses the missing input names. The first candidate run
+[42959738187](https://github.com/hsoliwal/M3jdk21/actions/runs/42959738187)
+exposed an additional split-package failure from including the arrays owner in
+the collections module. The corrected finder subsequently passed
+[Java 21 observable workflow 42960410466](https://github.com/hsoliwal/M3jdk21/actions/runs/42960410466)
+on source commit `8bbfb828f14a228285ebe441fd967544db5dc871`:
+both module compilation steps, the wiring refusal tests, and both
+standalone contract executions were green. **This is a focused receipt for
+that exact source revision, not an installed-JDK/ABI/jtreg certification or
+an automatic PASS for later documentation commits.** Separately, the
+[latest naming fixed-point run](https://github.com/hsoliwal/M3jdk21/actions/runs/42821834853)
+failed, so release remains HOLD even if this focused test becomes green.
+
+### Additional exact-head release blockers (2026-11-11)
+
+The broad pull-request event also reruns existing ownership gates outside the
+focused observable-collections slice. On commit
+`fd6994ce732fccbe5d38f0b16d9b7781ec318410`, the foundation workflow exposed
+a stale M3File test expectation: it looked for `requires jdk.m3.arrays;`
+although the actual descriptor declares `requires transitive jdk.m3.arrays;`.
+The regression assertion is corrected on the current PR branch; the
+rerun on that new head is still pending.
+
+Other failures are **not waived or “fixed” by rewriting hashes**:
+- The M3File char-array-copy recipe refuses a superseded `M3String.java`
+  postimage (`expected 8ddd767e… actual 8e621078…`). Reconcile the recipe
+  against the current owner source and its transformation/test evidence.
+- The Guava MinMaxPriorityQueue receiver refuses a historic source-packet
+  identity mismatch. Preserve the frozen donor packet and provenance; inspect
+  the successor source-binding manifest and establish a reviewed transition.
+- The optional Eclipse core JMOD refuses a changed `M3EclipseCore.java`
+  postimage. Reconcile the owner change with its eight-source custody proof
+  before admitting it.
+
+These are source ownership/provenance gates, not mere naming warnings. The
+expected and actual digests must never be made equal by blindly accepting the
+new value. The latest full PR workflow event must be green before release.
+
+### Independent OpenJDK sanity blocker at the current review baseline
+
+[OpenJDK GHA Sanity run 42959659585](https://github.com/hsoliwal/M3jdk21/actions/runs/42959659585)
+failed in the `Build JTReg` preparation job on 2026-11-11:
+the pinned JTHarness source download from
+`https://git.openjdk.org/jtharness/archive/jt6.0-b24.zip`
+returned `wget` exit code 8. Downstream JDK platform/tier1 jobs were
+**skipped**, not passed. This is an external test-tool acquisition failure,
+not a proven compiler/runtime failure, and the release gate
+`OPENJDK_SANITY_MATRIX` remains **PENDING/FAILED** until the same candidate
+commit has a complete reproducible build and test matrix. Do not replace
+this gate with an unrelated stock-JDK run or omit it from the proof pack.
+
 The machine-readable preview contract now requires
 `M3_CHANGED_ATOM_COVERAGE` with at least 90% instrumented line and branch
 coverage **for every inventoried changed M3 contract atom**. A source
