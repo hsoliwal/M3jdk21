@@ -246,6 +246,14 @@ def main():
     run(cc + [native / 'collections/m3_long_address_kernel.c', ROOT / 'test/jdk/jdk/m3/collections/native/m3_gather_spans.c',
               '-o', gather_fixture])
     run([gather_fixture])
+    native_properties = [
+        '-Dm3.counted.native=' + str(OUT / 'native/libm3_count_lanes.so'),
+        '-Dm3.totals.native=' + str(OUT / 'native/libm3_count_totals.so'),
+        '-Dm3.native.path=' + str(OUT / 'native/libm3_collections_packed.so'),
+        '-Dlint.native.path=' + str(OUT / 'native/libm3_packed_int_width.so'),
+        '-Dm3.collections.rank.pairdistance.native=true',
+        '-Dm3.collections.lane.native=true',
+    ]
     common = ['-Xmx768m', '-XX:ActiveProcessorCount=2', '-Xcheck:jni', array_native_option,
               '-Dm3.collections.rank.native=true', '-Dm3.collections.signal.native=true']
     results = {}
@@ -254,9 +262,11 @@ def main():
         vm = common + ['-Djava.library.path=' + str(library),
                        '-Dm3.mask.spans.native.required=' + required,
                        '-Dm3.collections.all.native.required=' + required]
+        if mode == 'native':
+            vm += native_properties
         old_reports = MODULE / 'target/surefire-reports'
         if old_reports.exists(): shutil.rmtree(old_reports)
-        maven(MODULE / 'pom.xml', '-DargLine=' + ' '.join(vm), '-DfailIfNoTests=true', 'verify')
+        maven(MODULE / 'pom.xml', '-Dtest=*', '-DargLine=' + ' '.join(vm), '-DfailIfNoTests=true', 'verify')
         results[mode] = reports(mode)
     jar = MODULE / 'target/m3-collections-0.1.0-SNAPSHOT.jar'
     with zipfile.ZipFile(jar) as archive:
@@ -306,6 +316,8 @@ def main():
                        ('m3_mask_window_spans.c', 'm3_mask_window_regions.c', 'm3_bitlane_jump_jni.c', 'm3_gather_spans.c')]
     proof = {'status': 'PASS_OWNING_COLLECTION_JAVA_AND_JNI', 'head_sha': head,
              'scope': 'independent m3/collections; no JDK phase or challenge-corpus promotion',
+             'owning_test_selection': '-Dtest=* overrides default includes/excludes',
+             'native_host_properties': 'existing m3-collections-native POM bindings, native mode only',
              'worktree_dirty': bool(subprocess.check_output(['git', 'status', '--porcelain', '--untracked-files=no'], cwd=ROOT)),
              'jar_sha256': sha(jar), 'jar_classes': len(expected_classes), 'runtime_modules': runtime_modules,
              'java_sources': len(sources), 'test_sources': len(tests), 'junit': results,

@@ -2,24 +2,25 @@
   "schema": "m3.receiver-postimage-reference/v1",
   "status": "DRAFT_UNADMITTED",
   "repository": "hsoliwal/M3jdk21",
-  "preimage": "b98bf8c065818aac3447be165909e2a013325d9a",
+  "preimage": "534a2d3d1158abc5342b5386db296cff1d10edbd",
   "canonical": {
     "repository": "hsoliwal/com.synexia",
-    "pullRequest": 17189,
-    "revision": "0f15a55a8c47dc12974902213320d9eae36a30fa",
-    "path": "synexia-openrewrite-recipes/recipe-crates/current-collection-jni-verifier-20261112",
+    "pullRequest": 17211,
+    "revision": "3e2cbdb3685fe12df3e77d4191945282bfa02583",
+    "stateAtQualification": "OPEN_DRAFT",
+    "path": "synexia-openrewrite-recipes/recipe-crates/collection-jni-suite-completeness-20261112",
     "recipeId": "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe",
-    "crateId": "m3-current-collection-jni-verifier-20261112",
-    "qualification": "synexia-openrewrite-recipes/recipe-crates/current-collection-jni-verifier-20261112/proof/MAVEN_VERIFY.json"
+    "crateId": "m3-collection-jni-suite-completeness-20261112",
+    "qualification": "synexia-openrewrite-recipes/recipe-crates/collection-jni-suite-completeness-20261112/proof/MAVEN_VERIFY.json"
   },
   "postimages": [
     {
       "path": "m3/collections/qualification/full-java-jni-20261018/verify.py",
-      "sha256": "ad7751a1a930a31110a771388cf5446acf544b622abc80ad0abf4bbdc4077119",
-      "gitBlob": "9283e6c65a46ac5814aca4d43c16fcf08d2eae6a"
+      "sha256": "87141db0336fcc135ba85fb7f43a351aba8e0edc6890ab3c04d1235e43aa2dd3",
+      "gitBlob": "7c2bfa47b925a93e48cb444d95364779c1ad0266"
     }
   ],
-  "scope": "One existing full-collection Java/JNI verifier; current POM roots, CMake library/class registry and all 20 explicit contract binaries/arguments; existing public helpers, strict compilation, required JNI and failure/fallback controls retained. No product Java/native/storage implementation change.",
+  "scope": "One existing full-collection Java/JNI verifier. Explicit complete owning-module Surefire selection in both modes; native-only host properties derived from the existing POM profile. Existing ABI, source roots, strict compile, C17/UBSan, required JNI and Java failure/fallback controls retained.",
   "componentEvidence": {
     "runtime": "Windows x64 Java21.0.9/Python3.12.6/JPype1.5.2",
     "strictSourceUnits": 6,
@@ -31,7 +32,7 @@
       "failed": 0,
       "skipped": 0
     },
-    "CPUContracts": 20,
+    "CPUContracts": 23,
     "actualSDK": {
       "outputs": 1,
       "replayChanges": 0,
@@ -42,7 +43,22 @@
     "CWriteDenied": true,
     "networkConnectDenied": true,
     "cacheCopies": 0,
-    "sourceGenerationCalls": 0
+    "sourceGenerationCalls": 0,
+    "suiteSelectionDiscriminator": {
+      "default": {
+        "tests": 1,
+        "failures": 0,
+        "exit": 0
+      },
+      "explicit": {
+        "tests": 2,
+        "failures": 1,
+        "exit": 1
+      },
+      "expectedFailure": "INVARIANT_MUST_NOT_BE_HIDDEN",
+      "result": "PASS_SELECTION_DISCRIMINATOR"
+    },
+    "freshReplay": "PASS_FROZEN_INPUTS"
   },
   "targetGates": {
     "fullCollectionsJavaAndJNI": "NOT_RUN",
@@ -59,5 +75,12 @@
     "ARRAYS": "WAITING_FOR_PREDECESSOR",
     "COLLECTIONS": "WAITING_FOR_PREDECESSOR"
   },
-  "custody": "Only one exact canonical SDK Python postimage plus this passive receipt. Recipes, templates, fixtures, Maven/validation code and improvement memory remain exclusively in Synexia."
+  "custody": "Only one exact canonical SDK Python postimage plus this passive receipt. Recipes, templates, fixtures, Maven/validation code and improvement memory remain exclusively in Synexia.",
+  "predecessor": {
+    "canonicalPR": 17189,
+    "receiver": "534a2d3d1158abc5342b5386db296cff1d10edbd",
+    "run": 43230763256,
+    "fullCoverage": "NOT_PROVEN",
+    "knownCoverageGap": "Default owning POM excludes 21 tests; corrected by exact follow-on postimage."
+  }
 }
