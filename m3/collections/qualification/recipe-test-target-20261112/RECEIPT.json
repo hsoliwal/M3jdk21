@@ -10,7 +10,14 @@
     "path": "synexia-openrewrite-recipes/recipe-crates/longlong-test-target-20261112",
     "recipeId": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
     "crateId": "m3-longlong-test-target-20261112",
-    "qualification": "synexia-openrewrite-recipes/recipe-crates/longlong-test-target-20261112/proof/RAM_QUALIFICATION.json"
+    "qualification": "synexia-openrewrite-recipes/recipe-crates/longlong-test-target-20261112/proof/RAM_QUALIFICATION.json",
+    "improvementMemory": {
+      "repository": "hsoliwal/com.synexia",
+      "revision": "130e54b1f88eb932e4591370d148e12652e834fc",
+      "eventPath": "synexia-openrewrite-recipes/recipe-crates/longlong-test-target-20261112/memory/events/8c9e29e5b23986ba5b73eae8e5e4c92affd08406085591260f7cbc11ebd81815.json",
+      "eventSHA256": "8c9e29e5b23986ba5b73eae8e5e4c92affd08406085591260f7cbc11ebd81815",
+      "status": "RECORDED_COMPONENT_EVIDENCE_ONLY"
+    }
   },
   "postimages": [
     {
@@ -66,7 +73,10 @@
     "fullProductImageGcJtregPerformance": "OPEN",
     "globalPerAtomCoverage": "OPEN",
     "repositoryCompletion": false,
-    "automaticApplication": false
+    "automaticApplication": false,
+    "nameContractPreflight": "NOT_RUN",
+    "nameContractPreflightReason": "Root-wide checker requires exact current target source tree; inspected local worktree heads differ from the pinned target",
+    "namingMappingChange": "NOT_APPLICABLE_PRIVATE_FIXTURE_LOCATOR_ONLY; implementation class/package/API names unchanged"
   },
   "phase": {
     "STRING": "QUALIFICATION_REQUIRED",
