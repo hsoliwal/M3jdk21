@@ -1,3 +1,4 @@
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // Copyright 2026 Hitesh Soliwal and contributors
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.optane;
@@ -63,5 +64,16 @@ public final class PmemAtomCorrectnessJUnitTest {
 
     @Test
     void test_PmemSearch_upperBoundLongLE() throws Exception { PmemAtomCases.verify("upperBoundLongLE"); }
+
+    @Test
+    void testCosineTopK() throws Exception {
+        PmemAtomCases.verify("topKCosineFloatLE(PmemRegion,long,long,float[],int)");
+    }
+
+    @Test
+    void testCosineTopKProgress() throws Exception {
+        PmemAtomCases.verify(
+        "topKCosineFloatLE(PmemRegion,long,long,float[],int,java.util.function.LongConsumer)");
+    }
 
 }
