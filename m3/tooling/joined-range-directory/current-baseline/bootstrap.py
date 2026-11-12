@@ -33,6 +33,7 @@ def main():
         v8='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V8.json'
         v9='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V9.json'
         v10='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V10.json'
+        v11='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V11.json'
         allowed={v1:'1a827ea287629995ee0eb62cd2ffa35d3c0b48c680b67da592cb0a37305d0853',
                  v2:'0f7c12d9f170c0290db4a114dc3f32d2e08af9090b9be14d86b2e46576899afd',
                  v3:'819b65189f71f0776ca85bdf05bd1cc92494a0a661e67e10a30ea529f4839364',
@@ -42,7 +43,8 @@ def main():
                  v7:'4f6aa0fa97dc0e7ba6e9eb89afd95a3f4bc50180fba4c937d3c53efeb4f93936',
                  v8:'6f90d22fb6db68af59668138e3757f3c29826af552592b14322c927b372c3873',
                  v9:'8405960a98d2632bcfa45e9c93c90930fd8f8955ee0720c126421a856efc1c47',
-                 v10:'48a2cdabd2093b8e18635b898d7294c3bb1accf14f8db0787ef636ca46935c4c'}
+                 v10:'48a2cdabd2093b8e18635b898d7294c3bb1accf14f8db0787ef636ca46935c4c',
+                 v11:'86382f8143dea0fb608e1895987feb85f54e2b27f182d2cdc21a68fd4d5affdc'}
         matches=[name for name in allowed if a.declared_transition.resolve()==(a.receiver/name).resolve()]
         assert len(matches)==1
         name=matches[0];declared=a.receiver/name
@@ -73,6 +75,24 @@ def main():
                 'm3/core/src/jdk/m3/text/SharedLexiconCatalog.java',
                 'm3/core/test/FoundationTest.java'})
             if name in (v8,v9,v10):expected_paths.add('m3/core/src/jdk/m3/text/M3PrecomputePayload.java')
+            if name==v11:expected_paths={
+                'm3/build.sh',
+                'm3/core/src/jdk/m3/text/JoinedM3StringPiece.java',
+                'm3/core/src/jdk/m3/text/M3BigString.java',
+                'm3/core/src/jdk/m3/text/M3PrecomputePayload.java',
+                'm3/core/src/jdk/m3/text/SharedLexiconCatalog.java',
+                'm3/core/src/jdk/m3/text/SharedLexiconImage.java',
+                'm3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java',
+                'm3/core/src/jdk/m3/text/SharedRelatedLexemeCatalog.java',
+                'm3/core/test/FoundationTest.java',
+                'm3/core/test/LangDexProjectionReceiverTest.java',
+                'm3/core/test/M3LexiconPrecomputeTest.java',
+                'm3/core/test/M3NumberSpaceContractTest.java',
+                'm3/core/test/M3TranslationReceiverMapTest.java',
+                'm3/core/test/SharedLexiconCatalogFamilyAdmissionTest.java',
+                'm3/core/test/java/lang/M3CodeTextSignalBatchTest.java',
+                'm3/lexicon/m3-number-target-map.tsv',
+                'm3/lexicon/m3-precompute-field-map.tsv'}
             assert len(rows)==len(expected_paths) and {r['path'] for r in rows}==expected_paths
         assert all(indexed[p]['sha256']==digest for p,digest in document['custodySha256'].items())
         transition={r['path']:r for r in rows};assert len(transition)==len(rows)
