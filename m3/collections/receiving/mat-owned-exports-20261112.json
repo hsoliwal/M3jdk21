@@ -1,0 +1,260 @@
+{
+  "SPDX-FileCopyrightText": "2026 Hitesh Soliwal and contributors",
+  "SPDX-License-Identifier": "Apache-2.0",
+  "schema_version": 1,
+  "kind": "PASSIVE_RECEIVING_RECEIPT",
+  "capability": "existing-mat-immutable-primitive-exports",
+  "recorded_date": "2026-11-12",
+  "source": {
+    "repository": "hsoliwal/com.synexia",
+    "recipe_commit": "930c1110e475e9c5f1cfd1171750ace8b479e528",
+    "recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+    "dataset": "mat-jdk-owned-export-20261112",
+    "donor_pull_request": "https://github.com/hsoliwal/com.synexia/pull/17163",
+    "donor_head": "11d030de097f4db167610fe642f3835dcfb8cc4c",
+    "execution_receipt_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/qualification/mat-jdk-owned-export-20261112/EXECUTION_RECEIPT.json",
+    "execution_receipt_sha256": "35c8c5a0adb8392460b38f3dd9f6ae894be03cb21d2fda83a4a4c81f1be19ea2",
+    "sdk_inputs_sha256": "20c54ad1492456d60805b8c082d79ffab8efafc3524dfade043a70a29d0914c6",
+    "sdk_results_sha256": "01dcd1b4836b70c81964519868fad6c056db038648de7b9be7ecbae7f553de3a"
+  },
+  "receiver": {
+    "repository": "hsoliwal/M3jdk21",
+    "application_base": "b98bf8c065818aac3447be165909e2a013325d9a",
+    "owners": [
+      "jdk.internal.m3.collections.mat.MatSparseIntVector",
+      "jdk.internal.m3.collections.mat.MatAdaptiveIntIntMap"
+    ],
+    "new_production_types": 0,
+    "new_module_exports": 0,
+    "native_abi_change": false
+  },
+  "files": [
+    {
+      "path": "src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/mat/MatAdaptiveIntIntMap.java",
+      "before_sha256": "9740ac2e8498bf4f99dc3e5b9d7cc3dde5c74caf392309a63862a3b42fea8dc2",
+      "after_sha256": "dba716518706d701519714c4ba569b419b76a4fec15d3d70be659b2f99331413"
+    },
+    {
+      "path": "src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/mat/MatSparseIntVector.java",
+      "before_sha256": "6e2bef80d43aeb34f1627ad57198551165214fad9b29a901355a94fed8d1018f",
+      "after_sha256": "08d090c70bb7712725ae74dbf1e65a0f683f3d32bfa0c09a49e38cdfe68a56b9"
+    },
+    {
+      "path": "test/jdk/jdk/internal/m3/collections/mat/MatPrimitiveExportContract.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "6aea74fb2f16b4a1ac41c0de2925925ea4f8b9c50701c634b1dd598d5a1ebd10"
+    },
+    {
+      "path": "test/jdk/jdk/internal/m3/collections/mat/MatPrimitiveExportContractTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "8330d96ccc92d5dc6afbccd777cf3452474f39a7e7d9311028a4a9a72be493c8"
+    },
+    {
+      "path": ".github/workflows/m3-collections.yml",
+      "before_sha256": "d388c56ade4fcebed88f0a43f9532a9abb513adac22a14dbe464f6984d5f08fd",
+      "after_sha256": "4b4d4ddabf4f7029daabcde1e5ac0102131e5557a14cf305befd1e884cb8d49e"
+    },
+    {
+      "path": ".github/workflows/m3jdk-modules.yml",
+      "before_sha256": "639cc1934c573e59af5c5828304be92a61be07b27f4a5048095c08d2d5d30ceb",
+      "after_sha256": "5522e7faa5feee1bdf1d936375ccd4cd83bef5e240eaa490e2f7a72347c19973"
+    },
+    {
+      "path": "m3/collections/receiving/mat-owned-exports-20261112.md",
+      "before_sha256": "ABSENT",
+      "after_sha256": "776fe9d85a46ea45cd58465c4afffb4e755c54d10f25f57a060eae0d0b000f2d"
+    }
+  ],
+  "gates": {
+    "actual_maven_openrewrite": "PASS_11_OF_11_ZERO_SKIPS_CACHED_SYNEXIA_SDK",
+    "preparation_contract": "PASS_18_OF_18_ZERO_SKIPS_24_DATASETS_66_TARGETS",
+    "receiver_integrity": "PASS_NINE_CASES",
+    "exact_output_transfer": "PASS_SEVEN_FILES",
+    "fixed_point": "PASS_ZERO_CHANGES",
+    "java21_scoped_compile": "PASS_RELEASE_21_PROC_NONE_XLINT_ALL_WERROR",
+    "actual_target_contract": "PASS_212968_CHECKS_IN_NORMAL_AND_XINT",
+    "actual_target_jupiter": "PASS_1_OF_1_ZERO_SKIPS_IN_NORMAL_AND_XINT",
+    "public_protected_descriptors": "UNCHANGED",
+    "workflow_route_checks": "PASS_12_REPRESENTATIVE_EVENT_PATH_CASES",
+    "maven_contract_profile": "BLOCKED_UNCACHED_EXEC_PLUGIN_3_5_0; ORIGINAL_PYTHON_CONTRACTS_EXECUTED_SEPARATELY",
+    "canonical_provenance": "HOLD_INHERITED_INVALID_POLICY_AND_INDEX_JSON",
+    "full_collections_module": "NOT_RUN",
+    "installed_jdk_image": "NOT_RUN",
+    "jtreg": "NOT_RUN",
+    "native_platform": "NOT_RUN_NO_NATIVE_CODE_CHANGE",
+    "ci": "PENDING_AT_PUBLICATION",
+    "ordered_receiving_stage_promotion": "HOLD_STRING_QUALIFICATION"
+  },
+  "allocation_diagnostic": {
+    "metric": "current-thread allocated bytes per operation",
+    "warmup_calls": 5000,
+    "measured_batches": 5,
+    "calls_per_batch": 5000,
+    "jvm": "Temurin21.0.13+9 -Xbatch -Xms128m -Xmx256m",
+    "workloads": {
+      "counter_control": {
+        "before": {
+          "samples_bytes_per_operation": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "median": 0.0,
+          "minimum": 0.0,
+          "maximum": 0.0
+        },
+        "after": {
+          "samples_bytes_per_operation": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "median": 0.0,
+          "minimum": 0.0,
+          "maximum": 0.0
+        }
+      },
+      "sparse_fromDense_4096_1024_explicit": {
+        "before": {
+          "samples_bytes_per_operation": [
+            16480.0,
+            16480.0,
+            16480.0,
+            16480.0,
+            16480.0
+          ],
+          "median": 16480.0,
+          "minimum": 16480.0,
+          "maximum": 16480.0
+        },
+        "after": {
+          "samples_bytes_per_operation": [
+            8256.0,
+            8256.0,
+            8256.0,
+            8256.0,
+            8256.0
+          ],
+          "median": 8256.0,
+          "minimum": 8256.0,
+          "maximum": 8256.0
+        }
+      },
+      "sorted_values_24": {
+        "before": {
+          "samples_bytes_per_operation": [
+            224.0,
+            224.0,
+            224.0,
+            224.0,
+            224.0
+          ],
+          "median": 224.0,
+          "minimum": 224.0,
+          "maximum": 224.0
+        },
+        "after": {
+          "samples_bytes_per_operation": [
+            112.0,
+            112.0,
+            112.0,
+            112.0,
+            112.0
+          ],
+          "median": 112.0,
+          "minimum": 112.0,
+          "maximum": 112.0
+        }
+      },
+      "direct_values_512_consecutive": {
+        "before": {
+          "samples_bytes_per_operation": [
+            4128.0,
+            4128.163,
+            4128.0,
+            4128.0,
+            4128.0
+          ],
+          "median": 4128.0,
+          "minimum": 4128.0,
+          "maximum": 4128.163
+        },
+        "after": {
+          "samples_bytes_per_operation": [
+            2064.0,
+            2064.154,
+            2064.0,
+            2064.0,
+            2064.0
+          ],
+          "median": 2064.0,
+          "minimum": 2064.0,
+          "maximum": 2064.154
+        }
+      },
+      "direct_values_512_holes": {
+        "before": {
+          "samples_bytes_per_operation": [
+            4128.0,
+            4128.0,
+            4128.0,
+            4128.0,
+            4128.0
+          ],
+          "median": 4128.0,
+          "minimum": 4128.0,
+          "maximum": 4128.0
+        },
+        "after": {
+          "samples_bytes_per_operation": [
+            2064.0,
+            2064.0,
+            2064.0,
+            2064.0,
+            2064.0
+          ],
+          "median": 2064.0,
+          "minimum": 2064.0,
+          "maximum": 2064.0
+        }
+      },
+      "hash_values_512_unchanged": {
+        "before": {
+          "samples_bytes_per_operation": [
+            4128.0,
+            4128.0,
+            4128.0,
+            4128.0,
+            4128.0
+          ],
+          "median": 4128.0,
+          "minimum": 4128.0,
+          "maximum": 4128.0
+        },
+        "after": {
+          "samples_bytes_per_operation": [
+            4128.0,
+            4128.0,
+            4128.0,
+            4128.0,
+            4128.0
+          ],
+          "median": 4128.0,
+          "minimum": 4128.0,
+          "maximum": 4128.0
+        }
+      }
+    },
+    "source_result_sha256": "be39f80ba3e582a10f15baca1bd7b45ccad19ad666ea93f61f913f33e075c965",
+    "boundary": "Bounded allocation diagnostic only; no JMH, CPU, latency, retained-heap or process-memory claim."
+  },
+  "naming_disposition": "EXISTING_OWNER_REFINEMENT_NO_RENAME; exact per-type canonical name-map gap DEFERRED under naming law9, no accepted ID invented",
+  "source_license_disposition": "Existing Apache-2.0 OR EPL-2.0 owner headers and lineage preserved; new test/docs have their own notices",
+  "receipt_generation": "The final receipt is generated by the same canonical host in a separate mat-jdk-export-receipt-20261112 text dataset. Its own hash and all eight receiving paths are bound by the private final handoff record; this file does not contain a self-inclusive hash.",
+  "admission": "DRAFT_BOUNDED_COMPONENT_QUALIFICATION",
+  "evidence_boundary": "Finite host-JDK source, SDK, API and component tests do not establish full M3JDK/module/image/platform/phase acceptance."
+}

@@ -9,6 +9,11 @@ on:
     paths:
       - '.github/workflows/m3-collections.yml'
       - 'm3/collections/**'
+      - 'src/jdk.m3.collections/**'
+      - 'test/jdk/jdk/m3/collections/**'
+      - 'test/jdk/jdk/internal/m3/collections/**'
+      - 'make/m3/collections/**'
+      - 'make/modules/jdk.m3.collections/**'
       - 'm3/tooling/migration-recipes/**'
       - 'm3/vendor/third_party/apiguardian-api/**'
       - 'm3/vendor/third_party/opentest4j/**'
@@ -24,6 +29,11 @@ on:
     paths:
       - '.github/workflows/m3-collections.yml'
       - 'm3/collections/**'
+      - 'src/jdk.m3.collections/**'
+      - 'test/jdk/jdk/m3/collections/**'
+      - 'test/jdk/jdk/internal/m3/collections/**'
+      - 'make/m3/collections/**'
+      - 'make/modules/jdk.m3.collections/**'
       - 'm3/tooling/migration-recipes/**'
       - 'm3/vendor/third_party/apiguardian-api/**'
       - 'm3/vendor/third_party/opentest4j/**'

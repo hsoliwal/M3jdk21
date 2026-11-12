@@ -29,9 +29,16 @@ public final class MatSparseIntVector {
     private final int[] positions,values;
 
     public MatSparseIntVector(int size,int defaultValue,int[] positions,int[] values){
+        this(size,defaultValue,positions,values,false);
+    }
+
+    /** Transfer only fresh, private factory arrays. Public callers still receive snapshots. */
+    private MatSparseIntVector(int size,int defaultValue,int[] positions,int[] values,boolean owned){
         if(size<0)throw new IllegalArgumentException("size");
         if(positions.length!=values.length)throw new IllegalArgumentException("length mismatch");
-        this.size=size;this.defaultValue=defaultValue;this.positions=positions.clone();this.values=values.clone();
+        this.size=size;this.defaultValue=defaultValue;
+        this.positions=owned?positions:positions.clone();
+        this.values=owned?values:values.clone();
         for(int i=0;i<this.positions.length;i++){
             int p=this.positions[i];
             if(p<0||p>=size||i>0&&p<=this.positions[i-1])throw new IllegalArgumentException("positions must be strict sorted");
@@ -44,13 +51,13 @@ public final class MatSparseIntVector {
         int n=0;for(int v:dense)if(v!=defaultValue)n++;
         int[] p=new int[n],v=new int[n];int k=0;
         for(int i=0;i<dense.length;i++)if(dense[i]!=defaultValue){p[k]=i;v[k++]=dense[i];}
-        return new MatSparseIntVector(dense.length,defaultValue,p,v);
+        return new MatSparseIntVector(dense.length,defaultValue,p,v,true);
     }
 
     public int size(){return size;}
     public int defaultValue(){return defaultValue;}
     public int explicitCount(){return positions.length;}
     public int get(int index){Objects.checkIndex(index,size);int i=Arrays.binarySearch(positions,index);return i<0?defaultValue:values[i];}
-    public int[] toArray(){int[] a=new int[size];Arrays.fill(a,defaultValue);for(int i=0;i<positions.length;i++)a[positions[i]]=values[i];return a;}
+    public int[] toArray(){int[] a=new int[size];if(defaultValue!=0)Arrays.fill(a,defaultValue);for(int i=0;i<positions.length;i++)a[positions[i]]=values[i];return a;}
     public long primitivePayloadBytes(){return 4L+8L*positions.length;}
 }

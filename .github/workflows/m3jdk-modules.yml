@@ -9,6 +9,11 @@ on:
     paths:
       - 'src/jdk.m3.collections/**'
       - 'test/jdk/jdk/m3/arrays/**'
+      - 'test/jdk/jdk/m3/collections/**'
+      - 'test/jdk/jdk/internal/m3/collections/**'
+      - 'make/m3/collections/**'
+      - 'm3/arrays/pom.xml'
+      - 'm3/collections/pom.xml'
       - 'make/m3/arrays/**'
       - 'make/modules/jdk.m3.collections/**'
       - '.github/workflows/m3jdk-modules.yml'
@@ -17,6 +22,11 @@ on:
     paths:
       - 'src/jdk.m3.collections/**'
       - 'test/jdk/jdk/m3/arrays/**'
+      - 'test/jdk/jdk/m3/collections/**'
+      - 'test/jdk/jdk/internal/m3/collections/**'
+      - 'make/m3/collections/**'
+      - 'm3/arrays/pom.xml'
+      - 'm3/collections/pom.xml'
       - 'make/m3/arrays/**'
       - 'make/modules/jdk.m3.collections/**'
   workflow_dispatch:
@@ -46,3 +56,7 @@ jobs:
         run: |
           mvn -B -ntp -q -f m3/arrays/pom.xml install
           mvn -B -ntp -q -f m3/collections/pom.xml -DskipTests package
+      - name: Verify MAT primitive export contracts in the owning collection module
+        run: >-
+          mvn -B -ntp -f m3/collections/pom.xml
+          -Dtest=MatPrimitiveExportContractTest -DfailIfNoTests=true test
