@@ -1,11 +1,20 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
-# jdk.m3.optane (module org.m3jdk.optane): Memory Mode planning, mapped-read advice and the PMem region core
+# PMem in jdk.m3.io: Memory Mode planning, mapped-read advice and the PMem region core
+
+The current product sources are in `src/jdk.m3.io`, with public package
+`jdk.m3.optane` and internal tensor kernels in `jdk.internal.m3.optane`.
+`m3/optane` is the retained Maven bridge (`org.m3jdk.optane`). See the
+[current native build and installed-image contract](docs/NATIVE_BUILD_CONTRACT.md)
+for the three-library build, FILE/native test selections and product image gate.
+Historical relocation records below retain their original provenance; recipes
+are authored and executed exclusively in Synexia, never from receiver copies.
 
 Copyright 2026 Hitesh Soliwal and contributors.
 
-Maven `com.m3:m3-optane:0.1.0-SNAPSHOT` (a default module of `m3/pom.xml`), Java 21, no dependency outside
-`java.base`, two optional Linux JNI libraries under `src/main/native` (`m3optane`, `m3pmemsdk`; CMake project with the
-option `M3_OPTANE_PMDK`, default OFF). Every FILE and planning path is exact without them.
+Maven `com.m3:m3-optane:0.1.0-SNAPSHOT` retains the Java 21 control bridge, with no runtime dependency outside
+`java.base`. The three JNI libraries (`m3optane`, `m3pmemsdk`, `m3pmemaccel`) have their native sources under
+`src/jdk.m3.io/share/native/libm3optane`. The CMake project is `make/m3/optane`, with option `M3_OPTANE_PMDK`
+defaulting to OFF. Every FILE and planning path is exact without native libraries.
 
 ## What this delivers
 

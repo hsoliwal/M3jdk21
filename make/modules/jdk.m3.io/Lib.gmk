@@ -1,0 +1,51 @@
+# Copyright 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+# Existing PMem JNI owners, packaged by the ordinary JDK module library phase.
+# The qualified native platform remains Linux x86-64. Other platforms retain
+# the Java FILE backend and the existing explicit native-unavailable behavior.
+
+include LibCommon.gmk
+
+ifeq ($(call isTargetOs, linux), true)
+  ifeq ($(call isTargetCpu, x86_64), true)
+    M3_OPTANE_NATIVE_SRC := $(TOPDIR)/src/jdk.m3.io/share/native/libm3optane
+    # The existing native owners define their feature-test macros before
+    # includes. Avoid redefining _GNU_SOURCE from the JDK's Linux flags.
+    M3_OPTANE_NATIVE_CFLAGS := $(filter-out -D_GNU_SOURCE,$(CFLAGS_JDKLIB)) -std=c17 \
+        -Wall -Wextra -Wpedantic -Werror
+
+    $(eval $(call SetupJdkLibrary, BUILD_LIBM3OPTANE, \
+        NAME := m3optane, \
+        SRC := $(M3_OPTANE_NATIVE_SRC), \
+        INCLUDE_FILES := m3optane.c, \
+        OPTIMIZATION := HIGH, \
+        CFLAGS := $(M3_OPTANE_NATIVE_CFLAGS), \
+        LDFLAGS := $(LDFLAGS_JDKLIB) $(call SET_SHARED_LIBRARY_ORIGIN), \
+    ))
+
+    # The integrated product uses the dependency-free POSIX backend. PMDK is
+    # never required or bundled; the separate CMake option remains available
+    # for an explicitly requested build-host libpmem2 experiment.
+    $(eval $(call SetupJdkLibrary, BUILD_LIBM3PMEMSDK, \
+        NAME := m3pmemsdk, \
+        SRC := $(M3_OPTANE_NATIVE_SRC), \
+        INCLUDE_FILES := m3pmemsdk.c, \
+        OPTIMIZATION := HIGH, \
+        CFLAGS := $(M3_OPTANE_NATIVE_CFLAGS), \
+        LDFLAGS := $(LDFLAGS_JDKLIB) $(call SET_SHARED_LIBRARY_ORIGIN), \
+    ))
+
+    # The existing signed-Q8 operation promises strict FP32 column order.
+    # Do not contract products into FMA or enable reassociation/fast math.
+    $(eval $(call SetupJdkLibrary, BUILD_LIBM3PMEMACCEL, \
+        NAME := m3pmemaccel, \
+        SRC := $(M3_OPTANE_NATIVE_SRC), \
+        INCLUDE_FILES := m3pmemaccel.c, \
+        OPTIMIZATION := HIGH, \
+        CFLAGS := $(M3_OPTANE_NATIVE_CFLAGS) -ffp-contract=off -fno-fast-math, \
+        LDFLAGS := $(LDFLAGS_JDKLIB) $(call SET_SHARED_LIBRARY_ORIGIN), \
+    ))
+
+    TARGETS += $(BUILD_LIBM3OPTANE) $(BUILD_LIBM3PMEMSDK) $(BUILD_LIBM3PMEMACCEL)
+  endif
+endif

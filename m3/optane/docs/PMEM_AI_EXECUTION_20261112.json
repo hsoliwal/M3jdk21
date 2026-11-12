@@ -1,0 +1,126 @@
+{
+  "schema": "m3-pmem-ai-product-execution-v1",
+  "copyright": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "license": "Apache-2.0",
+  "status": "IMPLEMENTED_SCOPED_PRODUCT_GATES_PASS_DRAFT_FULL_GATES_OPEN",
+  "source_repository": "hsoliwal/com.synexia",
+  "source_commit": "e5dbf64c05611660c71070dc26580cadb33a47e0",
+  "source_crate": "m3-pmem-ai-20261112",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_base": "d956e3eaa8642dc3029d0b5fefb99a6fe115672d",
+  "delivery_boundary": "Executed product postimages, product tests, documentation and passive receipt. Canonical recipe sources and mastery evidence remain private.",
+  "runtime_dependencies_added": [],
+  "postimages": [
+    {
+      "path": "m3/optane/README.md",
+      "sha256": "344a4a248454f1f5bf888653a9ad41c3407c02671f8fb5d12d866bdbbac0d69d",
+      "git_blob": "62d248a9ee6f5d45eb12a9e220be7d6fad045e33",
+      "bytes": 14927
+    },
+    {
+      "path": "m3/optane/docs/NATIVE_BUILD_CONTRACT.md",
+      "sha256": "989f6e4a939544ca8a786bdc854a185d620878abc935456bcf0de500be713eca",
+      "git_blob": "2771c20fb143899cd6f3a33aa7e5c0c4e31c1aa8",
+      "bytes": 3644
+    },
+    {
+      "path": "m3/optane/pom.xml",
+      "sha256": "2fbc65fab581c5a9e90ff9b30d02d60fc81255ca6cd854001e0846bd76956bfd",
+      "git_blob": "885ffb158eb007cfef2aa3b0c57bcd44872e2a0c",
+      "bytes": 8849
+    },
+    {
+      "path": "make/m3/optane/CMakeLists.txt",
+      "sha256": "2e24fe0c1d3e320fe263a24e4862c65cd87d4d5a67e7d54e2ec859c07e28abe3",
+      "git_blob": "acc63b4db734ab20661aeb0eb4729520834779c1",
+      "bytes": 5779
+    },
+    {
+      "path": "make/modules/jdk.m3.io/Lib.gmk",
+      "sha256": "1a00900b80f763c28cdc867494a65996180150efd5bdadd07df12c1b735c97ff",
+      "git_blob": "1baf5785b4c3360cc51924232f62d2169327f6bf",
+      "bytes": 2271
+    },
+    {
+      "path": "src/jdk.m3.io/share/classes/jdk/m3/optane/PmemSearch.java",
+      "sha256": "adef935b667626238093943a9b71d3226a824981a6347183b9d6acf9d2e5f0df",
+      "git_blob": "10eff4f0c72c3399811447b6b18a780eed61685d",
+      "bytes": 11583
+    },
+    {
+      "path": "test/jdk/jdk/m3/optane/PmemAtomCases.java",
+      "sha256": "2a8025aeb07f25d10a5169c0e62ee2d49cfa4f70fd95dfe33f65255ddeb2a9d8",
+      "git_blob": "9e9d4c2f69dfc0afe368f80aaaae11ece3033203",
+      "bytes": 21602
+    },
+    {
+      "path": "test/jdk/jdk/m3/optane/PmemAtomCorrectnessJUnitTest.java",
+      "sha256": "f8c7547bd54af8ebe6d93b7486817fc107194f9eaab9935695da361c420362d3",
+      "git_blob": "9aab5c1fd0d1b4a8691d64882ceed4be7054522e",
+      "bytes": 3005
+    },
+    {
+      "path": "test/jdk/jdk/m3/optane/PmemNativePackaging.java",
+      "sha256": "ca7bdac26a590b6dd9295e15b63fa0e7493ebb5ce02380edea6ff55e745218df",
+      "git_blob": "7b69f6272c5c9e2a3af4d834d69d123fb08e308b",
+      "bytes": 3087
+    },
+    {
+      "path": "test/jdk/jdk/m3/optane/PmemVectorSearchJUnitTest.java",
+      "sha256": "a0a29e696c6258fa8b0da33aa2ffea1bafbfe183d7fc06aebc38de2262b7f9d0",
+      "git_blob": "c1f4ebbf4eda54fdef836ab7914440d0683f904f",
+      "bytes": 537
+    },
+    {
+      "path": "test/jdk/jdk/m3/optane/PmemVectorSearchSmokeTest.java",
+      "sha256": "aa32ceabcbf387a81d648d96169906748726374137b274f80c1f4cc5fd921ff2",
+      "git_blob": "13e93138e46d7777afa8b7eead124aba50c24c9c",
+      "bytes": 12084
+    }
+  ],
+  "qualified": {
+    "receiver_copy": {
+      "files": 102,
+      "executed_postimages": 11,
+      "unchanged_pinned_inputs": 91
+    },
+    "jdk": "Temurin 21.0.13+9",
+    "cmake": "PASS; three real JNI libraries",
+    "maven_default": {
+      "tests": 63,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 4
+    },
+    "maven_native": {
+      "tests": 101,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 4
+    },
+    "skips": "Four explicitly opt-in 20000-file scale experiments",
+    "vector_assertions_per_backend_per_mode": 1212,
+    "vector_backends": [
+      "FILE",
+      "POSIX"
+    ],
+    "jvm_modes": [
+      "normal",
+      "-Xint"
+    ],
+    "installed_image": "PASS; actual jdk.m3.io JMOD linked with stock Java 21 base modules; JNI libraries load without a development java.library.path",
+    "public_entrypoint_atoms": 21,
+    "api": "Previous PmemSearch public descriptors preserved; two additive topKCosineFloatLE overloads",
+    "native_dependencies": "Platform libc only; PMDK disabled",
+    "cached_scoped_offline_maven_lanes": "PASS"
+  },
+  "open_gates": [
+    "Normal review and canonical source provenance baseline HOLD",
+    "Configured source-built complete M3JDK21 and actual jtreg harness",
+    "Complete owned offline dependency closure",
+    "Four opt-in 20000-file scale experiments",
+    "Physical PMem, PMDK/DAX, NUMA placement and power-loss durability",
+    "Trained-model, production-scale and throughput qualification"
+  ],
+  "limitations": "Ordinary mapped files and functional correctness evidence. No physical persistent-memory, power-loss durability or workload speedup claim."
+}

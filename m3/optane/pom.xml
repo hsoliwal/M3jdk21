@@ -9,15 +9,16 @@
   <artifactId>m3-optane</artifactId>
   <version>0.1.0-SNAPSHOT</version>
   <name>M3JDK :: Optane</name>
-  <description>jdk.m3.optane (module org.m3jdk.optane): Memory Mode planning (MemoryModeProfile, ScanPlan,
+  <description>Maven control bridge org.m3jdk.optane over the jdk.m3.io product sources: Memory Mode planning (MemoryModeProfile, ScanPlan,
     ProgressMonitor), mapped-read advice (MappedReadAdvice, optional Linux JNI library m3optane) and the fail-closed,
-    file-backed persistent-memory region family M3PmemSdk, M3PmemRegion, M3PmemMapping, M3PmemTransfer, M3PmemSearch
+    file-backed persistent-memory region family PmemSdk, PmemRegion, PmemMapping, PmemTransfer, PmemSearch
     (FILE backend in pure Java; POSIX and optional PMDK backends through the JNI library m3pmemsdk, C17, Linux). Java
-    21, no dependency outside java.base. The JNI libraries under src/main/native are built by their CMakeLists.txt
+    21, no runtime dependency outside java.base. The JNI libraries under src/jdk.m3.io/share/native/libm3optane
+    are built by make/m3/optane/CMakeLists.txt or the product module's ordinary JDK native build phase
     (option M3_OPTANE_PMDK, default OFF: libpmem2 is never required and never shipped) and loaded at run time through
-    System.loadLibrary; every FILE path is exact without them. The PMem family is relocated by recipe
-    (recipe/pmem-region-core-20261106/relocate.py, RELOCATION_MAP.tsv, PROVENANCE.tsv) from the donor
-    hsoliwal/com.synexia m3-pmem-sdk; its JUnit oracles run in the test phase (the native lanes only with the
+    System.loadLibrary; every FILE path is exact without them. Historical PMem relocation provenance from
+    hsoliwal/com.synexia m3-pmem-sdk remains under recipe/pmem-region-core-20261106; current recipe authoring and
+    execution belong to Synexia. The JUnit oracles run in the test phase (the native lanes only with the
     profile m3-optane-native and the library on java.library.path).</description>
   <properties>
     <maven.compiler.release>21</maven.compiler.release>
@@ -29,8 +30,8 @@
          methods that also open a POSIX region; excluded (surefire test filter, the only parameter that takes method
          patterns) unless the profile m3-optane-native supplies the library; the source-slices oracles
          (recipe/pmem-source-image-20261106) map POSIX regions only -->
-    <!-- M3PmemAcceleratorJUnitTest (recipe/pmem-accelerator-20261107) needs libm3pmemaccel.so: native profile only -->
-    <m3.optane.test.filter>!M3PmemAcceleratorJUnitTest, !M3PmemAtomCorrectnessJUnitTest, !M3PmemNativeKmpPrefix32JUnitTest, !M3PmemSourceSlicesJUnitTest, !M3PmemSourceSlicesLifecycleJUnitTest, !M3PmemFileBackendJUnitTest#randomizedSearchTransferAndNativeDifferential+overlappingMemmoveAliasesAndFileToFile+pathReplacementDoesNotBypassAliasRefusal</m3.optane.test.filter>
+    <!-- PmemAcceleratorJUnitTest (recipe/pmem-accelerator-20261107) needs libm3pmemaccel.so: native profile only -->
+    <m3.optane.test.filter>!PmemAcceleratorJUnitTest, !PmemAtomCorrectnessJUnitTest, !PmemNativeKmpPrefix32JUnitTest, !PmemSourceSlicesJUnitTest, !PmemSourceSlicesLifecycleJUnitTest, !PmemFileBackendJUnitTest#randomizedSearchTransferAndNativeDifferential+overlappingMemmoveAliasesAndFileToFile+pathReplacementDoesNotBypassAliasRefusal</m3.optane.test.filter>
     <!-- the oracles write sparse files above 2 GiB (NTFS fills the gap): temporary files go next to the build output,
          never to the system temporary directory; implicit exceptions keep their messages (no fast throw), so the
          replay digests of the dump drivers are reproducible -->
@@ -125,7 +126,7 @@
   </build>
   <profiles>
     <profile>
-      <!-- the native lanes (Linux, libm3pmemsdk.so built by src/main/native/CMakeLists.txt into
+      <!-- the native lanes (Linux, all three JNI libraries built by make/m3/optane/CMakeLists.txt into
            ${m3.optane.library.path}): mvn -Pm3-optane-native -Dm3.optane.library.path=DIR -f m3/optane/pom.xml test -->
       <id>m3-optane-native</id>
       <properties>
