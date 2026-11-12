@@ -1,0 +1,6 @@
+priority	category	owner	planned_atom	admission
+P0	EXACT_LOOKUP	jdk.m3.ast.SyntaxIndex.Facts.first	Run repeat-aware warmed first-value profiles	Java21 source-seal, semantic parity, GitHub CI, no fixed speed threshold
+P1	EXACT_LOOKUP	jdk.m3.ast.SyntaxIndex.Facts.first	Setup-inclusive cache manufacture latency and allocations	Warm/cold baseline on same CPU, JFR/ThreadMXBean, pinned environment
+P1	LRU_MEMORY_PRESSURE	jdk.m3.ast.SyntaxIndex.Facts	Quantify cache build and retained primitive int slots	RSS/heap and low-headroom profile before memory-pressure logic
+P1	EXACT_LOOKUP	jdk.m3.ast.SyntaxIndex.Facts.first	Evaluate high-cardinality and collision guard overhead	Representative real AST fact distributions, more corpora, no speedup claim
+P2	JNI_ABI	jdk.m3.ast.SyntaxIndex.Facts.first	Evaluate JNI batch primitive lookup only if Java timing justifies it	Java/native batch parity, setup-inclusive latency, GC/ABI, Win/Linux/macOS
