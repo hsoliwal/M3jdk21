@@ -1,0 +1,36 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3AST Facts.first Java21 exact-source performance admission
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - 'm3/ast/recipe/facts-first-performance-20261112/**'
+      - '.github/workflows/m3ast-facts-first-performance-admission-20261112.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: m3ast-first-perf-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  exact-source-profile:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exact Git blob, Java21 compilation and semantic/profile gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          sh m3/ast/recipe/facts-first-performance-20261112/verify.sh
+      - name: Isolated Maven recipe gate on the same original product classes
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/ast/recipe/facts-first-performance-20261112/pom.xml verify
