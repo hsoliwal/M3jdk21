@@ -1,0 +1,58 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3AST primitive Facts first receiver Java21 exact-source gate
+
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - 'm3/ast/src/main/java/jdk/m3/ast/SyntaxIndex.java'
+      - 'm3/ast/src/test/java/jdk/m3/ast/SyntaxIndexFactsFirstContract.java'
+      - 'm3/ast/src/test/java/jdk/m3/ast/ProbeGuardContract.java'
+      - 'm3/ast/src/test/java/jdk/m3/ast/SyntaxIndexFactsFirstTest.java'
+      - 'm3/ast/recipe/facts-first-primitive-20261112/**'
+      - '.github/workflows/m3ast-facts-first-exact-receiver-20261112.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: m3ast-facts-first-exact-receiver-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  exact-source-java21:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Source seal, real original-owner contract, and adversarial hash-collision fallback
+        shell: bash
+        run: |
+          set -euo pipefail
+          sh m3/ast/recipe/facts-first-primitive-20261112/verify.sh
+
+  isolated-m3ast-maven-junit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Maven/JUnit original SyntaxIndex plus first-fact and probe-guard tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/ast/pom.xml \
+            -Dtest=SyntaxIndexTest,SyntaxIndexKindPostingsTest,SyntaxIndexStableScatterTest,SyntaxIndexFactsFirstTest \
+            -Dsurefire.failIfNoSpecifiedTests=false test
