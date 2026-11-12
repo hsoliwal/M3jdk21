@@ -4,7 +4,7 @@
   "license": "Apache-2.0",
   "status": "IMPLEMENTED_SCOPED_PRODUCT_GATES_PASS_DRAFT_FULL_GATES_OPEN",
   "source_repository": "hsoliwal/com.synexia",
-  "source_commit": "e5dbf64c05611660c71070dc26580cadb33a47e0",
+  "source_commit": "ccead08fae5cdf4a9100da7a6c6bb8ee335833bf",
   "source_crate": "m3-pmem-ai-20261112",
   "target_repository": "hsoliwal/M3jdk21",
   "target_base": "d956e3eaa8642dc3029d0b5fefb99a6fe115672d",
@@ -43,21 +43,21 @@
     },
     {
       "path": "src/jdk.m3.io/share/classes/jdk/m3/optane/PmemSearch.java",
-      "sha256": "adef935b667626238093943a9b71d3226a824981a6347183b9d6acf9d2e5f0df",
-      "git_blob": "10eff4f0c72c3399811447b6b18a780eed61685d",
-      "bytes": 11583
+      "sha256": "d413f6229e3cbd66597123347b25e6cefaacd2787ccf9889ceefd01e0e7e1903",
+      "git_blob": "f2e0e8a648eaa3a9c78df470858ac8cd1597b20f",
+      "bytes": 11698
     },
     {
       "path": "test/jdk/jdk/m3/optane/PmemAtomCases.java",
-      "sha256": "2a8025aeb07f25d10a5169c0e62ee2d49cfa4f70fd95dfe33f65255ddeb2a9d8",
-      "git_blob": "9e9d4c2f69dfc0afe368f80aaaae11ece3033203",
-      "bytes": 21602
+      "sha256": "b58c40bc6442def57e667001ada8dbe70900136e85f5d4d6a07fa229b7f841e1",
+      "git_blob": "b8704a8196e693baa367ed4faec18346c9a610b3",
+      "bytes": 21957
     },
     {
       "path": "test/jdk/jdk/m3/optane/PmemAtomCorrectnessJUnitTest.java",
-      "sha256": "f8c7547bd54af8ebe6d93b7486817fc107194f9eaab9935695da361c420362d3",
-      "git_blob": "9aab5c1fd0d1b4a8691d64882ceed4be7054522e",
-      "bytes": 3005
+      "sha256": "37d2b8327d580ba4e86127e18472a0a49e22c62f9866db356c99382b65a338eb",
+      "git_blob": "8f3475bb678591d36de20e6bece60d17239da47a",
+      "bytes": 2904
     },
     {
       "path": "test/jdk/jdk/m3/optane/PmemNativePackaging.java",
@@ -67,15 +67,15 @@
     },
     {
       "path": "test/jdk/jdk/m3/optane/PmemVectorSearchJUnitTest.java",
-      "sha256": "a0a29e696c6258fa8b0da33aa2ffea1bafbfe183d7fc06aebc38de2262b7f9d0",
-      "git_blob": "c1f4ebbf4eda54fdef836ab7914440d0683f904f",
-      "bytes": 537
+      "sha256": "6400bdb8cf9f13bc8170e6c1ddab42a2168383db1df355e502bc62a68a8f1674",
+      "git_blob": "11cc46053164d885dc26aa490d177e63aee3135c",
+      "bytes": 554
     },
     {
       "path": "test/jdk/jdk/m3/optane/PmemVectorSearchSmokeTest.java",
-      "sha256": "aa32ceabcbf387a81d648d96169906748726374137b274f80c1f4cc5fd921ff2",
-      "git_blob": "13e93138e46d7777afa8b7eead124aba50c24c9c",
-      "bytes": 12084
+      "sha256": "62bb1578d1dd050c868db646d2a4eb85ba37248f37e46fdef3799498bd9999ee",
+      "git_blob": "9301ef4d223ee2f5a133977562e12cea94d3d015",
+      "bytes": 12853
     }
   ],
   "qualified": {
@@ -112,7 +112,9 @@
     "public_entrypoint_atoms": 21,
     "api": "Previous PmemSearch public descriptors preserved; two additive topKCosineFloatLE overloads",
     "native_dependencies": "Platform libc only; PMDK disabled",
-    "cached_scoped_offline_maven_lanes": "PASS"
+    "cached_scoped_offline_maven_lanes": "PASS",
+    "java_changed_name_gate": "PASS; unchanged upstream checker; original 58 findings reproduced, corrected changed-line findings 0 across six Java files",
+    "corrected_receiving_rerun": "PASS; default 63/native 101 tests, each zero failures/errors and four scale skips; installed JNI/vector image passed normal and Xint"
   },
   "open_gates": [
     "Normal review and canonical source provenance baseline HOLD",
@@ -120,7 +122,13 @@
     "Complete owned offline dependency closure",
     "Four opt-in 20000-file scale experiments",
     "Physical PMem, PMDK/DAX, NUMA placement and power-loss durability",
-    "Trained-model, production-scale and throughput qualification"
+    "Trained-model, production-scale and throughput qualification",
+    "Existing unrelated collections verification references a file absent at the pinned base; current full control-reactor execution receipt is still required"
   ],
-  "limitations": "Ordinary mapped files and functional correctness evidence. No physical persistent-memory, power-loss durability or workload speedup claim."
+  "limitations": "Ordinary mapped files and functional correctness evidence. No physical persistent-memory, power-loss durability or workload speedup claim.",
+  "initial_ci_disposition": {
+    "source_names": "58 task-caused findings corrected through canonical recipe; unchanged local gate now passes",
+    "collections": "Inherited missing source path; unchanged verification script",
+    "control_reactor": "No current full execution receipt; scoped PMem evidence is insufficient"
+  }
 }

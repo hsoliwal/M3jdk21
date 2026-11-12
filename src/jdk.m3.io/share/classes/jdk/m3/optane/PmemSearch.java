@@ -62,7 +62,10 @@ public final class PmemSearch {
         public double score(int index) { return scores[index]; }
     }
 
-    /** See {@link #topKCosineFloatLE(PmemRegion, long, long, float[], int, java.util.function.LongConsumer)}. */
+    /**
+     * See {@link #topKCosineFloatLE(PmemRegion, long, long, float[], int,
+     * java.util.function.LongConsumer)}.
+     */
     public static VectorMatches topKCosineFloatLE(PmemRegion region, long byteOffset,
                                                  long rowCount, float[] query, int k) {
         return topKCosineFloatLE(region, byteOffset, rowCount, query, k, ignored -> { });
@@ -87,7 +90,8 @@ public final class PmemSearch {
      * copy, row object, vector index format, or approximate search is introduced.
      * Cooperative interruption checks throw {@link java.util.concurrent.CancellationException}
      * without clearing the interrupt flag. Lease acquisition follows the region lock contract;
-     * an interrupted FILE read may also fail through the underlying channel I/O contract. Progress receives completed rows at zero,
+     * an interrupted FILE read may also fail through the underlying channel I/O contract.
+     * Progress receives completed rows at zero,
      * every 256 rows and completion. It runs under the read lease and must not write
      * persist or close this region. Callback failure aborts the scan without a partial result.
      */
@@ -109,7 +113,8 @@ public final class PmemSearch {
         float[] ownedQuery = query.clone();
         double queryNormSquared = 0;
         for (float component : ownedQuery) {
-            if (!Float.isFinite(component)) throw new IllegalArgumentException("nonfinite query component");
+            if (!Float.isFinite(component)) throw new IllegalArgumentException(
+                    "nonfinite query component");
             queryNormSquared += (double) component * component;
         }
         if (queryNormSquared == 0) throw new IllegalArgumentException("zero query norm");
@@ -153,7 +158,8 @@ public final class PmemSearch {
                 dot += (double) query[column] * component;
                 normSquared += (double) component * component;
             }
-            if (normSquared == 0) throw new IllegalArgumentException("zero vector norm at row " + row);
+            if (normSquared == 0) throw new IllegalArgumentException("zero vector norm at row " +
+                    row);
             double score = Math.max(-1d, Math.min(1d, dot / queryNorm / Math.sqrt(normSquared)));
             if (score == 0d) score = 0d; // Canonicalize signed zero before deterministic ties.
             if (size < limit) {
@@ -162,7 +168,8 @@ public final class PmemSearch {
                 scores[index] = score;
                 while (index > 0) {
                     int parent = (index - 1) >>> 1;
-                    if (!vectorWorse(scores[index], rows[index], scores[parent], rows[parent])) break;
+                    if (!vectorWorse(scores[index], rows[index], scores[parent], rows[parent]))
+                            break;
                     swapVector(rows, scores, index, parent);
                     index = parent;
                 }
@@ -204,7 +211,8 @@ public final class PmemSearch {
         int parent = 0;
         while (parent < size / 2) {
             int child = parent * 2 + 1;
-            if (child + 1 < size && vectorWorse(scores[child + 1], rows[child + 1], scores[child], rows[child]))
+            if (child + 1 < size && vectorWorse(scores[child + 1], rows[child + 1], scores[child],
+                    rows[child]))
                 child++;
             if (!vectorWorse(scores[child], rows[child], scores[parent], rows[parent])) break;
             swapVector(rows, scores, parent, child);

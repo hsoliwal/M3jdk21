@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 public final class PmemVectorSearchJUnitTest {
     @Test void fileVectors() throws Exception { PmemVectorSearchSmokeTest.run(PmemBackend.FILE); }
     @Test void nativeVectors() throws Exception {
-        if (Boolean.getBoolean("pmem.streaming.native")) PmemVectorSearchSmokeTest.run(PmemBackend.POSIX);
+        if (Boolean.getBoolean("pmem.streaming.native")) PmemVectorSearchSmokeTest.run(
+                PmemBackend.POSIX);
     }
 }

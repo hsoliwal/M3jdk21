@@ -63,7 +63,8 @@ public final class PmemAtomCases {
                         java.util.function.LongConsumer.class})) {
                     atom=VECTOR_PROGRESS_ATOM;
                 } else {
-                    throw new AssertionError("unregistered vector overload requires per-signature atom: " + m);
+                    throw new AssertionError(
+                            "unregistered vector overload requires per-signature atom: " + m);
                 }
             }
             if (!names.add(atom)) {
@@ -203,7 +204,8 @@ public final class PmemAtomCases {
                         byte[] encoded=new byte[vectors.length*query.length*Float.BYTES];
                         java.nio.ByteBuffer buffer=java.nio.ByteBuffer.wrap(encoded)
                                 .order(java.nio.ByteOrder.LITTLE_ENDIAN);
-                        for(float[] row:vectors) for(float component:row) buffer.putFloat(component);
+                        for(float[] row:vectors) for(float component:row) buffer.putFloat(component)
+                                ;
                         a.write(111,encoded,0,encoded.length);
                         java.util.List<Long> completed=new java.util.ArrayList<>();
                         PmemSearch.VectorMatches matches=vectorSearch(a,111,vectors.length,
@@ -218,13 +220,17 @@ public final class PmemAtomCases {
                         }
                         check(Arrays.equals(query,new float[]{1,0,0}),"vector query mutated");
                         if(progress) {
-                            check(completed.equals(java.util.List.of(0L,6L)),"vector progress extent");
-                            expect(IllegalStateException.class,()->vectorSearch(a,111,6,query,5,true,
-                                    ignored->{throw new IllegalStateException("progress refused");}));
+                            check(completed.equals(java.util.List.of(0L,6L)),
+                                    "vector progress extent");
+                            expect(IllegalStateException.class,()->vectorSearch(a,111,6,query,5,
+                                    true,
+                                    ignored->{throw new IllegalStateException("progress refused");})
+                                            );
                             expect(NullPointerException.class,
                                     ()->PmemSearch.topKCosineFloatLE(a,111,6,query,5,null));
                         } else {
-                            check(completed.isEmpty(),"convenience overload unexpectedly used caller progress");
+                            check(completed.isEmpty(),
+                                    "convenience overload unexpectedly used caller progress");
                         }
                         check(vectorSearch(a,a.length(),0,query,5,progress,ignored->{}).size()==0,
                                 "empty vector run at end");
@@ -233,7 +239,8 @@ public final class PmemAtomCases {
                         expect(IllegalArgumentException.class,
                                 ()->vectorSearch(a,111,6,query,0,progress,ignored->{}));
                         expect(IllegalArgumentException.class,
-                                ()->vectorSearch(a,111,6,new float[]{0,0,0},5,progress,ignored->{}));
+                                ()->vectorSearch(a,111,6,new float[]{0,0,0},5,progress,ignored->{}))
+                                        ;
                         buffer.putFloat(0,Float.NaN);a.write(111,encoded,0,encoded.length);
                         expect(IllegalArgumentException.class,
                                 ()->vectorSearch(a,111,6,query,5,progress,ignored->{}));
@@ -310,7 +317,8 @@ public final class PmemAtomCases {
                         case VECTOR_ATOM -> {
                             PmemSearch.VectorMatches matches=PmemSearch.topKCosineFloatLE(
                                     a,4096,128,vectorQuery,7);
-                            checksum+=matches.size()+matches.row(0)+Double.doubleToRawLongBits(matches.score(0));
+                            checksum+=matches.size()+matches.row(0)+Double.doubleToRawLongBits(
+                                    matches.score(0));
                         }
                         case VECTOR_PROGRESS_ATOM -> {
                             PmemSearch.VectorMatches matches=PmemSearch.topKCosineFloatLE(
@@ -333,7 +341,9 @@ public final class PmemAtomCases {
     public static void main(String[] args) throws Exception {
         Set<String> atoms=new TreeSet<>(Arrays.asList(
                 "capabilities","open","length","fileOffset","path","access","backend",
-                "persistenceGranularity","isOpen","read","write","persist","close","copy","equalRange","copyIfDifferent","indexOf","lowerBoundLongLE","upperBoundLongLE",
+                "persistenceGranularity","isOpen","read","write","persist","close","copy",
+                        "equalRange","copyIfDifferent","indexOf","lowerBoundLongLE",
+                        "upperBoundLongLE",
                 VECTOR_ATOM,VECTOR_PROGRESS_ATOM));
         verifyApiAtoms(atoms);
         for(String atom:atoms) {verify(atom);System.out.println("PASS atom "+atom);}
@@ -342,6 +352,7 @@ public final class PmemAtomCases {
             long nanos=benchmark(atom,atom.equals("persist")?2:8);
             System.out.printf("PERF-SMOKE %s: %d ns / 8-or-fewer invocations%n",atom,nanos);
         }
-        System.out.println("PASS 21/21 public API atoms with individual correctness and performance workloads");
+        System.out.println(
+        "PASS 21/21 public API atoms with individual correctness and performance workloads");
     }
 }

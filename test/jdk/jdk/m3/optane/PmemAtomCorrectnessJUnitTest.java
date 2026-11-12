@@ -66,9 +66,14 @@ public final class PmemAtomCorrectnessJUnitTest {
     void test_PmemSearch_upperBoundLongLE() throws Exception { PmemAtomCases.verify("upperBoundLongLE"); }
 
     @Test
-    void test_PmemSearch_topKCosineFloatLE_PmemRegion_long_long_floatArray_int() throws Exception { PmemAtomCases.verify("topKCosineFloatLE(PmemRegion,long,long,float[],int)"); }
+    void testCosineTopK() throws Exception {
+        PmemAtomCases.verify("topKCosineFloatLE(PmemRegion,long,long,float[],int)");
+    }
 
     @Test
-    void test_PmemSearch_topKCosineFloatLE_PmemRegion_long_long_floatArray_int_java_util_function_LongConsumer() throws Exception { PmemAtomCases.verify("topKCosineFloatLE(PmemRegion,long,long,float[],int,java.util.function.LongConsumer)"); }
+    void testCosineTopKProgress() throws Exception {
+        PmemAtomCases.verify(
+        "topKCosineFloatLE(PmemRegion,long,long,float[],int,java.util.function.LongConsumer)");
+    }
 
 }
