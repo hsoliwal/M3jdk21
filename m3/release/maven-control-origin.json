@@ -1,0 +1,10 @@
+{
+  "schema": "M3_MAVEN_CANONICAL_ORIGIN_V1",
+  "repository": "hsoliwal/com.synexia",
+  "commit": "735965a0ef09bca2fb618d28fc23b7b9a280aa82",
+  "recipe_id": "com.synexia.m3.M3Jdk21MavenProductEvidence20261112",
+  "qualification_path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-release-admission-20261029/revisions/20261112-maven-producer/proof/QUALIFICATION.json",
+  "qualification_sha256": "263b84677fe8a8c7eff1f46d71bd629325205aa3327c3365512df6aa32eef553",
+  "target_preimage_commit": "b98bf8c065818aac3447be165909e2a013325d9a",
+  "meaning": "Passive recipe-origin record only. M3JDK21 owns and must execute its product acceptance gate."
+}
