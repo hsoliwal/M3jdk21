@@ -43,7 +43,7 @@ def main():
         raise ValueError("owned runner output required")
     manifest = json.loads(regular(source/"m3/tooling/core-contract-matrix/CURRENT_INPUTS.json"))
     assert manifest["schema"] == "M3_CURRENT_CORE_CONTRACT_INPUTS_V1"
-    assert manifest["repository"] == "hsoliwal/M3jdk21" and len(manifest["files"]) == 61
+    assert manifest["repository"] == "hsoliwal/M3jdk21" and len(manifest["files"]) == 81
     rows = manifest["files"]
     before = {r["path"]: regular(source/relative(r["path"])) for r in rows}
     admit(rows, before)
