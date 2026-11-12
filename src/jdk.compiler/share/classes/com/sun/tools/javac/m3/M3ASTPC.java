@@ -1320,6 +1320,19 @@ public final class M3ASTPC implements Plugin {
             Throwable first = null;
             try {
                 for (M3AST.Consumer consumer : consumers) {
+                    if (consumer instanceof M3PrimitiveImageCompiler.ImageConsumer) continue;
+                    try { consumer.finished(summary()); }
+                    catch (Throwable failure) {
+                        failed = true;
+                        if (first == null) first = failure;
+                        else if (failure != first) first.addSuppressed(failure);
+                    }
+                }
+                // Image publication, like facts, must observe every ordinary
+                // consumer's completion result. Failed completion still clears
+                // each image consumer's detached values exactly once.
+                for (M3AST.Consumer consumer : consumers) {
+                    if (!(consumer instanceof M3PrimitiveImageCompiler.ImageConsumer)) continue;
                     try { consumer.finished(summary()); }
                     catch (Throwable failure) {
                         failed = true;

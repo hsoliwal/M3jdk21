@@ -210,6 +210,7 @@ public final class M3PrimitiveImageCompiler {
      * No new task, source parse, attribution, or processor run is created.
      * Publication requires a successful Task.call() COMPILATION event; closing
      * a parse/analyze-only session does not authorize a partial image.
+     * Ordinary M3 consumers must finish successfully before image publication.
      */
     public static M3AST.Consumer consumer(Path out, Path slots,
                                          boolean foldExpressions) throws IOException {
@@ -218,34 +219,46 @@ public final class M3PrimitiveImageCompiler {
         if (sidecar != null && (aliases(image, sidecar)
                 || image.startsWith(sidecar) || sidecar.startsWith(image)))
             throw new IOException("image and sidecar outputs overlap");
-        return new M3AST.Consumer() {
-            private final TreeSet<Entry> values = new TreeSet<>(ORDER);
+        return new ImageConsumer(image, sidecar, foldExpressions);
+    }
 
-            @Override public void parsed(M3AST.Unit unit) throws IOException {
-                var uri = unit.tree().getSourceFile().toUri();
-                if ("file".equalsIgnoreCase(uri.getScheme())) {
-                    Path source = Path.of(uri);
-                    if (aliases(image, source) || (sidecar != null && aliases(sidecar, source)))
-                        throw new IOException("output aliases input source: " + source);
-                }
-                collect(values, new TreePath(unit.tree()), null, false);
-            }
+    /** Owned publisher; the session defers completion until ordinary consumers finish. */
+    static final class ImageConsumer implements M3AST.Consumer {
+        private final Path image;
+        private final Path sidecar;
+        private final boolean foldExpressions;
+        private final TreeSet<Entry> values = new TreeSet<>(ORDER);
 
-            @Override public void analyzed(M3AST.Unit unit) {
-                TreePath path = unit.trees().getPath(unit.analyzedType());
-                if (path == null) throw new IllegalStateException("missing analyzed type path");
-                collect(values, path, unit.trees(), foldExpressions);
-            }
+        ImageConsumer(Path image, Path sidecar, boolean foldExpressions) {
+            this.image = image;
+            this.sidecar = sidecar;
+            this.foldExpressions = foldExpressions;
+        }
 
-            @Override public void finished(M3AST.Summary summary) throws IOException {
-                try {
-                    if (summary.completed() && summary.compilerErrors() == 0
-                            && !summary.consumerFailed()) emitValues(image, sidecar, values);
-                } finally {
-                    values.clear();
-                }
+        @Override public void parsed(M3AST.Unit unit) throws IOException {
+            var uri = unit.tree().getSourceFile().toUri();
+            if ("file".equalsIgnoreCase(uri.getScheme())) {
+                Path source = Path.of(uri);
+                if (aliases(image, source) || (sidecar != null && aliases(sidecar, source)))
+                    throw new IOException("output aliases input source: " + source);
             }
-        };
+            collect(values, new TreePath(unit.tree()), null, false);
+        }
+
+        @Override public void analyzed(M3AST.Unit unit) {
+            TreePath path = unit.trees().getPath(unit.analyzedType());
+            if (path == null) throw new IllegalStateException("missing analyzed type path");
+            collect(values, path, unit.trees(), foldExpressions);
+        }
+
+        @Override public void finished(M3AST.Summary summary) throws IOException {
+            try {
+                if (summary.completed() && summary.compilerErrors() == 0
+                        && !summary.consumerFailed()) emitValues(image, sidecar, values);
+            } finally {
+                values.clear();
+            }
+        }
     }
 
     private static void emitValues(Path out, Path slots, TreeSet<Entry> values) throws IOException {
