@@ -108,7 +108,8 @@ public class M3PrimitiveImageCompletionTest {
                         "late finished failure replaced a prior primitive sidecar");
             } else {
                 check(!Files.exists(image), "late finished failure published a primitive image");
-                check(!Files.exists(sidecar), "late finished failure published a primitive sidecar");
+                check(!Files.exists(sidecar),
+                        "late finished failure published a primitive sidecar");
             }
             fixture.session.close();
             check(order.size() == 3, "failed session close is idempotent");
@@ -138,8 +139,10 @@ public class M3PrimitiveImageCompletionTest {
             fixture.session.addConsumer(new M3AST.Consumer() {
                 @Override public void finished(M3AST.Summary summary) { throw failure; }
             });
-            check(hasCause(expectFailure(fixture.task), failure), "multiple-image failure identity");
-            check(!Files.exists(first) && !Files.exists(second), "all built-in images await completion");
+            check(hasCause(expectFailure(fixture.task), failure),
+                    "multiple-image failure identity");
+            check(!Files.exists(first) && !Files.exists(second),
+                    "all built-in images await completion");
         }
     }
 
@@ -190,7 +193,8 @@ public class M3PrimitiveImageCompletionTest {
     }
 
     private static void rejectedCompilation() throws Exception {
-        try (Fixture fixture = new Fixture("rejected", "class Program { int value() { return \"bad\"; } }")) {
+        try (Fixture fixture = new Fixture("rejected",
+                "class Program { int value() { return \"bad\"; } }")) {
             Path image = fixture.directory.resolve("constants.m3prim");
             register(fixture, image, null, false, true);
             check(!fixture.task.call(), "invalid source rejected");
@@ -211,9 +215,11 @@ public class M3PrimitiveImageCompletionTest {
                 }
             });
             Throwable failure = expectFailure(fixture.task);
-            check(hasType(failure, IOException.class), "image publication IO failure remains visible");
+            check(hasType(failure, IOException.class),
+                    "image publication IO failure remains visible");
             check(fixture.session.summary().consumerFailed(), "image publication marks failure");
-            check(!Files.exists(image) && !Files.exists(second), "image publication failure stops later images");
+            check(!Files.exists(image) && !Files.exists(second),
+                    "image publication failure stops later images");
         }
     }
 

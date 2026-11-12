@@ -20,17 +20,17 @@
   "change": "Defer directly registered built-in primitive-image consumers until all ordinary M3 completion callbacks finish; retain first failure and suppressed exceptions, and skip image publication after any recorded consumer failure.",
   "convergence": {
     "repository": "hsoliwal/com.synexia",
-    "revision": "46bcd1e71d4bd082f6c9ff14a55d68d79dd65a40",
+    "revision": "1806f998190d028a483591ec0d73058712248b6b",
     "path": "synexia-openrewrite-recipes/recipe-crates/m3-jdk-donor-corpus-execution-20261112",
     "recipe_id": "com.synexia.m3.JdkDonorCorpusCompiler20261112",
     "recipe_engine": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
     "compiler_manifest": {
       "path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-jdk-donor-corpus-execution-20261112-compiler/manifest.tsv",
-      "sha256": "b53e852f555899563d2ea0104ac048022ceb53f4c25ccec29f9c26b64d51c562"
+      "sha256": "18f03279ba07a1e82f34686f980b0243217d3ab8af9da49dbcd1323c362ebc90"
     },
     "compiler_execution": {
-      "path": "qualification/EXECUTION-compiler.tsv",
-      "sha256": "4b2b1fded3bd560f16fa1dd088a32f85586df586ab04ce646f3a207d9c93c3f9"
+      "path": "qualification/ci-source-style/EXECUTION-compiler.tsv",
+      "sha256": "97160a50d1bda6059b3b1375e0f683e92129cfef8e23e84b30184865e320dfce"
     },
     "mapping_recipe_engine": "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe",
     "mapping_crate": "m3-jdk-donor-corpus-execution-20261112-mapping",
@@ -73,9 +73,9 @@
         "state": "ABSENT"
       },
       "postimage": {
-        "bytes": 13917,
-        "git_blob_sha1": "2e446c9a4a780e6e158f2a489ff10bfa084f6b43",
-        "sha256": "2abc89a1ebccc7684e94b755919a5b22e957fcae6ee64fd69fcab74d7e58dca0"
+        "bytes": 14037,
+        "git_blob_sha1": "557de9310a62508622b300d155ca7e3cf019cf86",
+        "sha256": "bfd2ea9fa78b36c1c1f35bb4a9e236f405375282a615739db8c5de2b8ed869e5"
       }
     },
     {
@@ -113,8 +113,8 @@
     "compiler": {
       "result": "PASS_SCOPED_COMPILER_QUALIFICATION",
       "evidence": {
-        "path": "qualification/compiler-emitted/run-x0ray6fx/qualification-receipt.json",
-        "sha256": "fcbc58ba6c454f58c805858d07c74a27d78af63352d472b035b5ec62f6b1fa9d"
+        "path": "qualification/compiler-emitted/run-h8yf4e2k/qualification-receipt.json",
+        "sha256": "0d2f8b011dff44759f855e65f4493bd36ab4e682711b58e63509e07efc5563df"
       },
       "command_steps": 20,
       "all_expected_outcomes_matched": true,
@@ -138,7 +138,7 @@
           "name": "M3PrimitiveImageCompletionTest",
           "result": "PASS",
           "reported_checks": 80,
-          "source_sha256": "2abc89a1ebccc7684e94b755919a5b22e957fcae6ee64fd69fcab74d7e58dca0"
+          "source_sha256": "bfd2ea9fa78b36c1c1f35bb4a9e236f405375282a615739db8c5de2b8ed869e5"
         },
         {
           "name": "M3ASTProjectionStateTest",
@@ -204,6 +204,14 @@
       "records_preserved": 76,
       "change": "Append one observation to the existing pending compiler capability and re-pin name-plan authority_blob; retain earlier observations, kind/status, targets, source lineage, provenance and all queued gates.",
       "support_helper": "M3PrimitiveImageCompiler remains support for the existing compiler capability; nested ImageConsumer is package-private, with no new capability ID."
+    },
+    "changed_source_naming": {
+      "result": "PASS",
+      "evidence": {
+        "path": "qualification/ci-source-style/native-check.json",
+        "sha256": "eb8b1d372a4a9bc5dc366674dd6252255f68ecbd2e9f21783b04db3635dce2e0"
+      },
+      "scope": "Unchanged ChangedNameGate on exact three-file Java projection; zero introduced findings. Hosted successor execution is not claimed by this receipt."
     }
   },
   "unresolved": {
@@ -244,5 +252,13 @@
     "path": "m3/qualification/primitive-image-completion-20261112/RECEIVER_RECEIPT.json",
     "self_hash": "EXTERNAL_CUSTODY",
     "rule": "The receipt's final bytes and receiving commit are bound by separate canonical execution/provenance records after materialization; this file does not contain or approve its own hash."
+  },
+  "correction_history": {
+    "previous_product_commit": "2152dbf9a79f32de671ed09f6e725cfa40b7c116",
+    "previous_receipt_sha256": "0a8dd3d71cb3dd9395b5f26e7c68f67f6b601e77000978684dbf2a23231a2b1e",
+    "original_source_revision": "46bcd1e71d4bd082f6c9ff14a55d68d79dd65a40",
+    "original_common_execution_revision": "3cf8c3db6b7de7c7ffa17c352914134615dd91f7",
+    "hosted_counterexample": "https://github.com/hsoliwal/M3jdk21/actions/runs/43162195956",
+    "correction": "Wrap six overlong regression lines; preserve every non-whitespace token and literal. Both production files are unchanged. Repeat all twenty scoped compiler qualification steps and preserve prior receipts."
   }
 }
