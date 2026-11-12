@@ -1,0 +1,33 @@
+{
+  "schema": "m3.selected-producer-qualification/v1",
+  "status": "NOT_RUN",
+  "receiverHead": "b98bf8c065818aac3447be165909e2a013325d9a",
+  "receivingModuleTree": "99df8aabde5240fede2613e6e139acf380f80550",
+  "historicalEvidence": {
+    "selectedGenerator": "PASS; historical exact two-file emission, same/fresh zero-write replay",
+    "protectedApi": "PASS; historical M3WebLanes before/after javap equality",
+    "original14Tests": "Historical 6 failures before / 2 failures after; four caller regressions fixed, accumulator failures retained"
+  },
+  "executedCurrentChecks": {
+    "contextIdentity": "PASS; fifteen namespace-derived dependencies equal current receiving Git blobs; output-free CPU check",
+    "newProducerController": "NOT_RUN",
+    "newNamespaceCompiler": "NOT_RUN",
+    "callerJUnit": "NOT_RUN",
+    "publicJUnit": "NOT_RUN",
+    "approved18Oracle": "NOT_RUN"
+  },
+  "approved18": {
+    "sha256": "ba22b2bf42b059ab93d906383d52c16b96be6f2cdbd3e49bade4ed3d473e8522",
+    "methods": 18,
+    "unchanged": true,
+    "baseline": {
+      "passed": 8,
+      "assertionFailures": 3,
+      "errors": 7,
+      "skipped": 0
+    },
+    "scope": "Local baseline against current receiving source; not a post-repair result"
+  },
+  "fullDomainAccumulator": "HOLD; exact wide union and takeWide contract unimplemented in this caller repair",
+  "productionPromotion": false
+}
