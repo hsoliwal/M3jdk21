@@ -7,6 +7,13 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Selected caller producer qualification and apply</name>
+  <dependencies>
+    <dependency>
+      <groupId>org.openrewrite</groupId>
+      <artifactId>rewrite-core</artifactId>
+      <version>8.17.1</version>
+    </dependency>
+  </dependencies>
   <build>
     <directory>${m3.caller.outputRoot}/maven-controller</directory>
     <plugins>
@@ -35,6 +42,13 @@
           <id>selected-producer-and-result-check</id><phase>test</phase>
           <goals><goal>run</goal></goals>
           <configuration><target>
+            <checksum file="${m3.caller.receiverRoot}/m3/ports/swing-viewport/webwidgets/GENERATED.tsv" algorithm="SHA-256" property="caller.ledger.before"/>
+            <condition property="caller.ledger.admitted"><or>
+              <equals arg1="${caller.ledger.before}" arg2="8cb45f082b5c18347549b486d84ca311cdc6aef5476e6446677a1efaf3b6f205"/>
+              <equals arg1="${caller.ledger.before}" arg2="bf0f4a8ae085f115c4691aac6f4d95041157040c4ecf75bc1e33cffbe73b4e42"/>
+            </or></condition>
+            <fail unless="caller.ledger.admitted">Unadmitted GENERATED.tsv preimage.</fail>
+            <checksum file="${m3.caller.recipeRoot}/resources/manifest-pins.tsv" algorithm="SHA-256" property="caller.manifest.pins.before"/>
             <available file="${m3.caller.recipeRoot}/validation/selected-producer.jsh" type="file" property="caller.driver.present"/>
             <fail unless="caller.driver.present">Missing selected producer driver.</fail>
             <checksum file="${m3.caller.recipeRoot}/bindings.tsv" algorithm="SHA-256" property="caller.bindings.before"/>
@@ -48,6 +62,9 @@
               <arg value="-J-Djava.util.prefs.userRoot=${m3.caller.outputRoot}/maven-controller/jshell-home/prefs"/>
               <arg value="-J-Djava.util.prefs.systemRoot=${m3.caller.outputRoot}/maven-controller/jshell-home/system-prefs"/>
               <arg value="-J-Djava.io.tmpdir=${m3.caller.outputRoot}/maven-controller/tmp"/>
+              <arg value="-R-Duser.home=${m3.caller.outputRoot}/maven-controller/jshell-home"/>
+              <arg value="-R-Djava.util.prefs.userRoot=${m3.caller.outputRoot}/maven-controller/jshell-home/prefs"/>
+              <arg value="-R-Djava.util.prefs.systemRoot=${m3.caller.outputRoot}/maven-controller/jshell-home/system-prefs"/>
               <arg value="-R-Djava.io.tmpdir=${m3.caller.outputRoot}/maven-controller/tmp"/>
               <arg value="-R-Dm3.caller.receiverRoot=${m3.caller.receiverRoot}"/>
               <arg value="-R-Dm3.caller.recipeRoot=${m3.caller.recipeRoot}"/>
@@ -65,6 +82,42 @@
               <equals arg1="${caller.pass.actual}" arg2="M3_CALLER_SELECTED_PRODUCER_PASS&#10;mode=${m3.caller.mode}&#10;bindingsSha256=${caller.bindings.before}&#10;" trim="false" casesensitive="true"/>
             </and></condition>
             <fail unless="caller.pass.valid">Missing or mismatched selected-producer completion proof.</fail>
+            <mkdir dir="${project.build.outputDirectory}"/>
+            <path id="caller.metadata.classpath">
+              <path refid="maven.runtime.classpath"/>
+              <pathelement location="${m3.caller.recipeRoot}/resources"/>
+            </path>
+            <property name="caller.metadata.cp" refid="caller.metadata.classpath"/>
+            <exec executable="${java.home}/bin/jshell" inputstring="" timeout="120000" failonerror="true" failifexecutionfails="true"
+                  output="${m3.caller.outputRoot}/ledger.stdout.log" error="${m3.caller.outputRoot}/ledger.stderr.log">
+              <arg value="-J-Xmx256m"/>
+              <arg value="-R-Xmx256m"/>
+              <arg value="-J-Duser.home=${m3.caller.outputRoot}/maven-controller/jshell-home"/>
+              <arg value="-J-Djava.util.prefs.userRoot=${m3.caller.outputRoot}/maven-controller/jshell-home/prefs"/>
+              <arg value="-J-Djava.util.prefs.systemRoot=${m3.caller.outputRoot}/maven-controller/jshell-home/system-prefs"/>
+              <arg value="-J-Djava.io.tmpdir=${m3.caller.outputRoot}/maven-controller/tmp"/>
+              <arg value="-R-Duser.home=${m3.caller.outputRoot}/maven-controller/jshell-home"/>
+              <arg value="-R-Djava.util.prefs.userRoot=${m3.caller.outputRoot}/maven-controller/jshell-home/prefs"/>
+              <arg value="-R-Djava.util.prefs.systemRoot=${m3.caller.outputRoot}/maven-controller/jshell-home/system-prefs"/>
+              <arg value="-R-Djava.io.tmpdir=${m3.caller.outputRoot}/maven-controller/tmp"/>
+              <arg value="-R-Dm3.caller.receiverRoot=${m3.caller.receiverRoot}"/>
+              <arg value="-R-Dm3.caller.recipeRoot=${m3.caller.recipeRoot}"/>
+              <arg value="-R-Dm3.caller.outputRoot=${m3.caller.outputRoot}"/>
+              <arg value="-R-Dm3.caller.mode=${m3.caller.mode}"/>
+              <arg value="--class-path"/><arg value="${caller.metadata.cp}"/>
+              <arg value="--no-startup"/>
+              <arg value="--feedback"/><arg value="silent"/>
+              <arg value="--add-modules"/><arg value="jdk.compiler,jdk.jdeps"/>
+              <arg value="${m3.caller.recipeRoot}/validation/generated-ledger.jsh"/>
+            </exec>
+            <checksum file="${m3.caller.recipeRoot}/resources/manifest-pins.tsv" algorithm="SHA-256" property="caller.manifest.pins.after"/>
+            <loadfile property="caller.manifest.pass" srcFile="${m3.caller.outputRoot}/manifest/PASS.sentinel" encoding="UTF-8"/>
+            <condition property="caller.manifest.valid"><and>
+              <equals arg1="${caller.manifest.pins.before}" arg2="${caller.manifest.pins.after}"/>
+              <equals arg1="${caller.manifest.pass}" arg2="M3_CALLER_GENERATED_LEDGER_PASS&#10;mode=${m3.caller.mode}&#10;manifestPinsSha256=${caller.manifest.pins.before}&#10;ledgerAfterSha256=bf0f4a8ae085f115c4691aac6f4d95041157040c4ecf75bc1e33cffbe73b4e42&#10;" trim="false" casesensitive="true"/>
+            </and></condition>
+            <fail unless="caller.manifest.valid">Missing or mismatched ledger completion proof.</fail>
+
           </target></configuration>
         </execution></executions>
       </plugin>

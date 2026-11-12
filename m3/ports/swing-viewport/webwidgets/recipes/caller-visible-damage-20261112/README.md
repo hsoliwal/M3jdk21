@@ -14,10 +14,11 @@ The template after-images come unchanged from the previously qualified Synexia c
 
 ## Running
 
-Use JDK 21 and Maven. All three roots must be absolute paths. Use a fresh output root for each invocation and keep its temporary files on that same admitted output lane.
+Use JDK 21 and Maven through an admitted storage/process runner. All three roots must be absolute paths. Use a fresh output root for each invocation and keep temporary files, JVM home/preferences and build output on that same admitted lane. Local runs use provisioned offline artifacts and the existing reserve/output guards. The hosted workflow resolves pinned Maven artifacts inside its bounded runner repository.
 
 ```sh
-mvn -B -ntp -f /absolute/recipe/pom.xml verify \
+mvn -o -B -ntp -f /absolute/recipe/pom.xml verify \
+  -Dmaven.repo.local=/admitted/provisioned-repository \
   -Dm3.caller.receiverRoot=/absolute/M3jdk21 \
   -Dm3.caller.recipeRoot=/absolute/recipe \
   -Dm3.caller.outputRoot=/admitted/fresh/qualification \
@@ -26,7 +27,9 @@ mvn -B -ntp -f /absolute/recipe/pom.xml verify \
 
 Run again with another fresh output root and `-Dm3.caller.mode=apply` after qualification. Commit only the exact two generator outputs, together with the owning template edits and this recipe. Repeating apply must leave their bytes and modification times unchanged.
 
-Qualification emits before and after sources in isolation, compares exact hashes, verifies same-instance and fresh-instance zero-write replay, compiles each seventeen-source closure with `--release 21 -Xlint:all -Werror`, and compares the protected API of `M3WebLanes`. A failed preflight must not modify receiving Java.
+Qualification emits before and after sources in isolation, compares exact hashes, verifies same-instance and fresh-instance zero-write replay, compiles each seventeen-source closure with `--release 21 -Xlint:all -Werror`, and compares the protected API of `M3WebLanes`. A failed preflight must not modify receiving Java. The compiler uses an explicitly empty classpath and sourcepath directory, so the selected seventeen-source closure cannot borrow the recipe's libraries.
+
+The generated-file ledger has a separate seal in `resources/manifest-pins.tsv`. Maven checks that ledger before generating Java. The existing OpenRewrite `FindAndReplace` recipe then updates only the two selected full rows, including their current namespace paths and actual emitted source hashes. Qualification verifies exact after-bytes, unchanged header/order/every other byte, fresh replay and refusal of missing, duplicated or changed rows. Apply retains ledger bytes and modification time when already current. The producer's whole-ledger `manifest()` operation is never called with a two-file map.
 
 ## Qualification limits
 

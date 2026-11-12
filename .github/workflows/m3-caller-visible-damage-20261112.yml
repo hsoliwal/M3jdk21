@@ -151,6 +151,37 @@ jobs:
           test "$status" -ne 75
           test ! -e "$ROOT/negative-output/selected-producer"
           grep -q 'input drift' "$ROOT/negative-output/jshell.stderr.log"
+      - name: Refuse ledger drift before generating Java
+        if: matrix.lane == 'caller'
+        shell: bash
+        run: |
+          set -euo pipefail
+          fixture="$ROOT/ledger-drift-receiver"
+          ledger="$MODULE/webwidgets/GENERATED.tsv"
+          main="$MODULE/src/main/java/jdk/m3/swing/web/model/M3WebLanes.java"
+          checks="$MODULE/src/test/java/jdk/m3/swing/web/model/M3WebChecks.java"
+          for file in "$ledger" "$main" "$checks"; do
+            mkdir -p "$fixture/$(dirname "$file")"
+            cp "$file" "$fixture/$file"
+          done
+          printf '# deliberate unrelated-byte drift\n' >> "$fixture/$ledger"
+          sha256sum "$fixture/$main" "$fixture/$checks" > "$ROOT/logs/ledger-drift-source-before.sha256"
+          if run_budgeted ledger-preflight mvn -B -ntp -f "$RECIPE/pom.xml" \
+            "-Dmaven.repo.local=$ROOT/repository" \
+            "-Dm3.caller.receiverRoot=$fixture" \
+            "-Dm3.caller.recipeRoot=$GITHUB_WORKSPACE/$RECIPE" \
+            "-Dm3.caller.outputRoot=$ROOT/ledger-drift-output" \
+            -Dm3.caller.mode=apply verify
+          then
+            echo "Drifted ledger was incorrectly admitted" >&2
+            exit 1
+          else
+            status=$?
+          fi
+          test "$status" -ne 75
+          grep -q 'Unadmitted GENERATED.tsv preimage' "$ROOT/logs/ledger-preflight.log"
+          test ! -e "$ROOT/ledger-drift-output/selected-producer"
+          sha256sum -c "$ROOT/logs/ledger-drift-source-before.sha256"
       - name: Apply selected outputs through the existing producer
         id: apply
         shell: bash
@@ -169,7 +200,9 @@ jobs:
           cp "$checks" "$ROOT/generated-known/M3WebChecks.java"
           cmp "$main" "$ROOT/generated-known/M3WebLanes.java"
           cmp "$checks" "$ROOT/generated-known/M3WebChecks.java"
-          sha256sum "$ROOT/generated-known/"*.java > "$ROOT/logs/generated-sha256.txt"
+          cp "$MODULE/webwidgets/GENERATED.tsv" "$ROOT/generated-known/GENERATED.tsv"
+          cmp "$MODULE/webwidgets/GENERATED.tsv" "$ROOT/generated-known/GENERATED.tsv"
+          sha256sum "$ROOT/generated-known/"*.java "$ROOT/generated-known/GENERATED.tsv" > "$ROOT/logs/generated-sha256.txt"
           git hash-object "$main" "$checks" > "$ROOT/logs/generated-git-blobs.txt"
           cat "$ROOT/logs/generated-sha256.txt"
           budget_ok
@@ -179,7 +212,7 @@ jobs:
         run: |
           set -euo pipefail
           for dir in qualify apply negative-output; do
-            for name in jshell.stdout.log jshell.stderr.log selected-producer/RESULT.tsv; do
+            for name in jshell.stdout.log jshell.stderr.log ledger.stdout.log ledger.stderr.log selected-producer/RESULT.tsv manifest/RESULT.tsv; do
               file="$ROOT/$dir/$name"
               if test -f "$file"; then
                 echo "$dir/$name"
@@ -249,7 +282,8 @@ jobs:
           git diff --check
           run_budgeted committed-postimages git diff --exit-code -- \
             "$MODULE/src/main/java/jdk/m3/swing/web/model/M3WebLanes.java" \
-            "$MODULE/src/test/java/jdk/m3/swing/web/model/M3WebChecks.java"
+            "$MODULE/src/test/java/jdk/m3/swing/web/model/M3WebChecks.java" \
+            "$MODULE/webwidgets/GENERATED.tsv"
       - name: Retain actual generated files, receipts and failure status
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -263,3 +297,4 @@ jobs:
             ${{ runner.temp }}/m3-caller-${{ matrix.lane }}/qualify/
             ${{ runner.temp }}/m3-caller-${{ matrix.lane }}/apply/
             ${{ runner.temp }}/m3-caller-${{ matrix.lane }}/negative-output/
+            ${{ runner.temp }}/m3-caller-${{ matrix.lane }}/ledger-drift-output/
