@@ -284,3 +284,33 @@ A whole-JDK migration record should additionally identify, when applicable:
 - exact platform/collector scope.
 
 Promotion still requires exact candidate evidence. An inventory row, a retained file, a successful recipe replay, a compiling tree, a benchmark win and an accepted runtime are distinct states.
+
+
+## Current-source verification continuation (2026-11-12)
+
+The continuation of [migration verification PR #2953](https://github.com/hsoliwal/M3jdk21/pull/2953)
+uses the exact target input `0163b1474862ca463a64f24b45b0c6ca36aa4e73`.
+The [passive continuation receipt](../qualification/migration-verification-20261112/continuation-receipt.json)
+binds each emitted file to its canonical recipe, immutable Synexia execution source
+and before/after digest. The canonical task remains
+`synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112`;
+ordinary Java outputs use its typed Java recipe and acceptance/build/data outputs
+use its text recipe. No task recipe or execution harness is delivered here.
+
+| Existing owner | Implemented result | Evidence boundary |
+| --- | --- | --- |
+| `M3StringPositionPrecompute` | Counts the existing byte-offset and long-mask lanes once in retained primitive-byte accounting. | The original invariant-6 budget regression fails before and passes after; field/method descriptors match. Compile-only dependencies isolate layout/accounting, so this does not establish installed String/native behavior or a measured storage reduction. |
+| String source and route guards | Checks current mutable-input snapshots, exact cursor/key comparisons, fallback routes, overflow effects and exception-safe publication. | 58 target test methods pass; formerly accepted harmful source mutations remain counterexamples. The unchanged frozen-index owner passes construction and prepared-geometry contracts in normal and interpreted modes. |
+| Filtered deque and primitive-sequence verification | Uses current product names and compiles the complete 1,185-source collection module with its original module descriptor. | The object-deque contract performs 140,734 checks and the primitive contract performs 164,104 checks. These finite contracts do not promote other collection/provider families. |
+| Existing build workflows | Enables command-scoped Windows long paths, bootstraps the existing pinned JUnit launcher, builds JTReg before consumption, and runs regex Maven verification against the same job's new JDK image. | The 55-module prerequisite reactor was compiled, packaged and installed offline. Full Maven lifecycle, coverage and installed-image results remain separate required evidence. |
+| Existing String phase records | Preserves historical ledger prefixes and records exact observed source succession, with strict record widths and immutable provenance names. | Source chronology is not semantic reconstruction or phase acceptance. Unsupported historical transitions retain explicit unresolved dispositions. |
+| Recipe ownership classification | Restores canonical schema/predicate values and inventories every current Java file. | 16 acceptance tests pass. The production check still fails for 47 unclassified current classes and two stale historical paths; no classification is inferred from a similar name or a renamed body. |
+
+Use the existing source checks and runtime gates above on the actual receiving
+commit. Previously built images at `0163b147...` cannot qualify a later String
+postimage. The same-job image verification step records its own source identity,
+image and per-mode product receipts. Retain missing Maven plugins, seed snapshot
+drift, unresolved public recipe custody and any failing native/runtime gate as
+blocking evidence. This continuation does not advance the String → arrays →
+collections → AST/compiler sequence, accept every JDK/JSR/JEP/JBS candidate, or
+grant release authority.
