@@ -65,6 +65,40 @@ construction is a hard error. The test has **no minimum speed ratio**.
 No reliance on random seeded string hashing, private reflection or
 external benchmark output.
 
+## Executed Java21 workflow evidence — 2026-11-12
+
+[GitHub Actions run #43140897495](https://github.com/hsoliwal/M3jdk21/actions/runs/43140897495)
+completed **SUCCESS** on PR commit
+`45a77402210ed3ba1664eb2dc7c63bcf40e88447`.
+The job executed both the strict source-sealed `verify.sh` and the isolated
+Maven `verify` lifecycle, including Java21 compilation and correctness
+parity. The runner reported `21.0.13+9-LTS`; its logs contain two
+independent performance-profile executions.
+
+Median nanoseconds per query, five samples of 4,096 queries each:
+
+| Workload | Strict Java scan / first | Ratio | Maven scan / first | Ratio |
+|---|---|---:|---|---:|
+| small-cold (no index) | 74.9 / 146.4 ns | 0.51× | 367.8 / 245.7 ns | 1.50× |
+| normal-repeated | 750.8 / 19.1 ns | 39.26× | 1,174.0 / 30.4 ns | 38.62× |
+| high-cardinality | 1,649.8 / 21.4 ns | 77.01× | 2,160.8 / 23.5 ns | 91.80× |
+| equal-hash-adversarial | 1,328.7 / 1,741.7 ns | 0.76× | 1,633.7 / 1,490.0 ns | 1.10× |
+
+**Interpretation:** The warmed optional primitive lookup shows large
+improvement relative to this accessor-based public scan in the ordinary
+repeated and high-cardinality workloads. Small arrays and hostile equal-hash
+inputs are mixed, so the existing no-index path and 32-probe refusal/fallback
+remain necessary. No universal speedup is claimed. The reference scan uses
+public `Facts.key/value` APIs, so it has extra checks compared with the
+old private-array implementation; this is **not an exact original-vs-new
+microbenchmark**. The two executions differ materially in baseline
+timing, illustrating shared-runner/JIT variability.
+
+This experiment **does not measure** full setup/index-manufacture latency,
+GC/allocation, heap/RSS, native JNI transition, cross-platform performance
+or realistic multi-source AST datasets. Their admission gates remain open.
+No hard speedup ratio is used as a pass/fail criterion.
+
 ## Donor catalogue, licences, and JNI decision
 
 `CATEGORY_REVIEW.tsv` records the EXACT_LOOKUP problem category
