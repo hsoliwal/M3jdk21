@@ -235,3 +235,8 @@ if(BUILD_TESTING)
   endif()
   add_test(NAME m3_adaptive_bitpack_checks COMMAND m3_adaptive_bitpack_checks)
 endif()
+
+# JNI refusal fixtures follow Java System.mapLibraryName on Windows too.
+if(BUILD_TESTING AND WIN32)
+  set_target_properties(m3_packed_null_fixture m3_array_allocation_null_fixture PROPERTIES PREFIX "")
+endif()

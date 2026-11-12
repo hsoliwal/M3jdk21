@@ -1,0 +1,63 @@
+{
+  "schema": "m3.receiver-postimage-reference/v1",
+  "status": "DRAFT_UNADMITTED",
+  "repository": "hsoliwal/M3jdk21",
+  "preimage": "e6710226d81a0ed9a05f05f72e90555041362bc4",
+  "canonical": {
+    "repository": "hsoliwal/com.synexia",
+    "PR": 17222,
+    "head": "14230c7119896f66f6acd1cfda63a2560c4bc4c2",
+    "path": "synexia-openrewrite-recipes/recipe-crates/array-native-fixture-prefix-20261112",
+    "recipeId": "m3-array-native-fixture-prefix-20261112",
+    "GAV": "com.synexia.verification:m3-array-native-fixture-prefix-recipe:1.0.0"
+  },
+  "postimages": [
+    {
+      "path": "make/m3/arrays/CMakeLists.txt",
+      "beforeGitBlob": "f46a6f05d2d71187d22ba24902d2940611717604",
+      "gitBlob": "1dc0113b277108ac9aa04313d79d4fbab13e5f0a",
+      "sha256": "8b993df159b8fca0d2f215bde89e2183dfcc438ffbf5bcb46badb3771b27feb0"
+    }
+  ],
+  "scope": "Existing Windows JNI refusal fixture filenames match Java System.mapLibraryName when testing is enabled. One CMake owner; production target and Java/native source bytes retained.",
+  "componentEvidence": {
+    "SDKJUnit": 8,
+    "CPU": 8,
+    "Maven": "PASS_REAL_OFFLINE_3_9_14_SDK",
+    "freshReplay": "PASS_17_FROZEN_INPUTS",
+    "WindowsStrictC17CTest": 12,
+    "WindowsRequiredCheckedJNIJUnit": 36,
+    "JNIWarnings": 0,
+    "strictJava21Units": 22,
+    "allocationAtoms": 9,
+    "performanceProtocols": [
+      "XcheckJNI",
+      "normal"
+    ],
+    "medianRows": 54,
+    "coldJavaFallback": {
+      "tests": 1,
+      "nativeOwnerLoadedBefore": false,
+      "nativeOwnerLoadedAfter": false
+    },
+    "stockJDK": "21.0.9 Windows",
+    "platformConsole": "1.10.1",
+    "cacheCopies": 0,
+    "sourceGenerationCalls": 0
+  },
+  "limits": {
+    "fullLinuxFatalUBSanCollections": "NOT_RUN",
+    "owningModuleMaven": "NOT_RUN",
+    "installedM3JdkGcJtreg": "NOT_RUN",
+    "globalPerAtomCoverage": "OPEN",
+    "globalProvenance": "NOT_ADMITTED",
+    "productPhasePromotion": false,
+    "repositoryComplete": false
+  },
+  "phase": {
+    "STRING": "QUALIFICATION_REQUIRED",
+    "ARRAYS": "WAITING_FOR_PREDECESSOR",
+    "COLLECTIONS": "WAITING_FOR_PREDECESSOR"
+  },
+  "custody": "Only the exact executed CMake postimage and this passive reference belong in the receiver. Recipes, fixtures, validation and improvement memory remain exclusively in Synexia."
+}
