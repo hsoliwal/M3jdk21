@@ -1,0 +1,134 @@
+{
+  "schema": "M3_HIERARCHY_HEADER_RECEIVING_RECEIPT_V1",
+  "status": "QUALIFIED_HEADER_ONLY",
+  "targetRepository": "hsoliwal/M3jdk21",
+  "targetBase": "b98bf8c065818aac3447be165909e2a013325d9a",
+  "canonicalRepository": "hsoliwal/com.synexia",
+  "canonicalPr": "https://github.com/hsoliwal/com.synexia/pull/17178",
+  "canonicalCommit": "32876b4fb9d6154db427d67d5fc87fa3e52180f0",
+  "canonicalCrate": "synexia-openrewrite-recipes/recipe-crates/hierarchy-header-20261112",
+  "recipeInput": "8343ec359a545031f1d7f41af19814c6ca1cc0c0",
+  "qualifiedOutputs": {
+    "m3/lexicon/receiver/src/main/java/jdk/m3/lexicon/M3LexiconFormat.java": {
+      "bytes": 5426,
+      "sha256": "6e3bd37d6e5f286315023bf350c6b0dd25fbdb940504498c280600aca4402b53",
+      "gitBlob": "b2d3233522aeab1c72a377e68feba531860eba63"
+    },
+    "m3/lexicon/receiver/src/test/java/jdk/m3/lexicon/HierarchyHeaderTest.java": {
+      "bytes": 6131,
+      "sha256": "163dd3b124a670bcb1a9394557ec0aa2a6183e77911ec43bb65c228ea33ffc5e",
+      "gitBlob": "04ab41fb041e0863ca514083591db1a61c267dfa"
+    },
+    "m3/lexicon/LEXICON_RECEIVER_LEDGER.tsv": {
+      "bytes": 5197,
+      "sha256": "305241db28471aab6f883752b3fcd450a68467266dcaaccc3c73438a0bbfe022",
+      "gitBlob": "2b542c5c2dd37e235bf10f896c118ead5aad95e0"
+    }
+  },
+  "mapping": {
+    "sourceOwners": [
+      {
+        "repository": "hsoliwal/com.synexia",
+        "path": "synexia-dictlang/shared/core/src/main/java/com/synexia/dictshared/core/MappedHierarchicalLexicon.java",
+        "gitBlob": "4d08f568e0c44c717dc3595d5de5965bfc31b835"
+      },
+      {
+        "repository": "hsoliwal/com.synexia",
+        "path": "synexia-dictlang/shared/core/src/main/java/com/synexia/dictshared/core/Format.java",
+        "gitBlob": "25a1b5e2b8fd3ffbd4c3d6da0eaeb6df3c8344b3"
+      }
+    ],
+    "target": "jdk.m3.lexicon.M3LexiconFormat.SYNHIER1",
+    "magicAscii": "SYNHIER1",
+    "magicBigEndian": "53594e4849455231",
+    "byteOrder": "LITTLE_ENDIAN",
+    "headerBytes": 128,
+    "versionOffset": 8,
+    "version": 1,
+    "bodyReaderOwner": "NONE",
+    "rights": "Apache-2.0; Hitesh Soliwal/Synexia and contributors"
+  },
+  "precompute": {
+    "pattern": "private-enum-snapshot-v1",
+    "privateEnumReferenceCount": 15,
+    "publicValuesDefensive": true,
+    "legacyFormatNamesAndOrdinalsPreserved": 14,
+    "legacyPublicDeclarationsPreserved": 22,
+    "newPublicApi": "one appended SYNHIER1 enum constant",
+    "apiFingerprint": "183915ebdfe31f88c652d49e285e3515079da7499d994cebdd98d04da83b84a8"
+  },
+  "executed": {
+    "javaRecipeTests": 2,
+    "textRecipeTests": 4,
+    "baselineDonorOracleTests": 9,
+    "candidateDonorAndReceivingTests": 18,
+    "receivingOnlyTests": 9,
+    "receivingOnlySourceCount": 27,
+    "privateDonorClassesAvailable": 0,
+    "existingReceiverChecksBaseline": 806797,
+    "existingReceiverChecksCandidate": 806799,
+    "negativeControls": [
+      "new standalone tests reject old registry",
+      "wrong hierarchy byte order",
+      "undersized minimum header"
+    ],
+    "strictCompiler": [
+      "--release",
+      "21",
+      "-proc:none",
+      "-g:none",
+      "-Xlint:all",
+      "-Werror"
+    ],
+    "oracleVersions": {
+      "commonsLang": "3.17.0",
+      "commonsCsv": "1.12.0",
+      "junit": "5.11.4"
+    },
+    "offlineJarPins": 47,
+    "defaultReceipt": "f42aedca5b5fe972d31b751f68f5ae07b06c83fe",
+    "fixedReceipt": "adbcc7aa53b1708ee4e61506b3937cf0a44710f8",
+    "fixedFlags": [
+      "-Xbatch",
+      "-XX:-TieredCompilation"
+    ],
+    "runtimeScope": "receiving sources compiled/executed in RAM on recorded system Java21 Windows AMD64; not installed M3JDK execution"
+  },
+  "allocationObservation": {
+    "samples": 3,
+    "iterationsPerSample": 20000,
+    "profiles": [
+      "default",
+      "non-tiered batch"
+    ],
+    "knownBytesPerCall": [
+      144,
+      72
+    ],
+    "unknownBytesPerCall": [
+      128,
+      56
+    ],
+    "shortBytesPerCall": [
+      0,
+      0
+    ],
+    "scope": "thread allocation after initialization; no startup/retained-memory/latency/throughput or other-platform claim"
+  },
+  "naming": {
+    "receipt": "979563269ce4954319adb63dfcce78698145321b",
+    "scope": "canonical functions on selected files; not whole-tree CLI or release"
+  },
+  "open": [
+    "SYNHIER1/SYNDICT1 body readers and semantic/checksum/snapshot validation",
+    "hierarchical namespace16/entry48 identity and lossless runtime mapping",
+    "standard dictionary, mmap/process lifetime, authoritative storage/JNI/LFU projection fit",
+    "full target Maven lifecycle/module/JDK build and release",
+    "Android/ARM/embedded, cold startup and throughput"
+  ],
+  "localOutputBytesAdded": 0,
+  "taskCapBytes": 571473920,
+  "taskAllocatedBytes": 571469824,
+  "reserveBytes": 8589934592,
+  "generationCalls": 0
+}

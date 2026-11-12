@@ -39,7 +39,12 @@ public enum M3LexiconFormat {
     /** PROPOSED (pattern, word id) regex transfer rows (this receiver). */
     M3RXW001(0x4d33525857303031L, ByteOrder.BIG_ENDIAN, 128, 8, 1, 1, "jdk.m3.lexicon.M3RegexWordTransferRows"),
     /** PROPOSED separator boundary sidecar (this receiver). */
-    M3SEPB01(0x4d33534550423031L, ByteOrder.BIG_ENDIAN, 64, 8, 1, 1, "jdk.m3.lexicon.M3SeparatorLexicon");
+    M3SEPB01(0x4d33534550423031L, ByteOrder.BIG_ENDIAN, 64, 8, 1, 1, "jdk.m3.lexicon.M3SeparatorLexicon"),
+    /** dictshared frozen hierarchy; header recognition only, body reader not yet admitted. */
+    SYNHIER1(0x53594e4849455231L, ByteOrder.LITTLE_ENDIAN, 128, 8, 1, 1, "NONE");
+
+    // Private array snapshot: values() remains defensive for callers.
+    private static final M3LexiconFormat[] FORMATS = values();
 
     private final long magic;
     private final ByteOrder order;
@@ -86,7 +91,7 @@ public enum M3LexiconFormat {
             return Optional.empty();
         }
         long head = image.duplicate().order(ByteOrder.BIG_ENDIAN).getLong(0);
-        for (M3LexiconFormat format : values()) {
+        for (M3LexiconFormat format : FORMATS) {
             if (format.magic == head) {
                 return Optional.of(format);
             }
