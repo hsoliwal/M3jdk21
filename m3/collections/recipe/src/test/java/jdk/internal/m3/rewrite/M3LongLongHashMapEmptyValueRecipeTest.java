@@ -27,7 +27,7 @@ final class M3LongLongHashMapEmptyValueRecipeTest {
     private static final String ROOT =
             "/jdk/internal/m3/rewrite/hash-pinned-java/" + CRATE + "/";
     private static final String TARGET =
-            "m3/collections/src/main/java/jdk/m3/collections/LongLongHashMap.java";
+            "m3/collections/src/main/java/jdk/m3/collections/M3LongLongHashMap.java";
     private static final String ANCHOR =
             "    public boolean containsValue(long value) {\n"
             + "        for (int i = 0; i < states.length; i++) {\n";
