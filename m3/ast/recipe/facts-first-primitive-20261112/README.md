@@ -50,7 +50,7 @@ current file is not the exact candidate Git blob:
 
 ```sh
 sh m3/ast/recipe/facts-first-primitive-20261112/verify.sh
-mvn -B -ntp -f m3/ast/pom.xml test
+mvn -B -ntp -f m3/ast/recipe/facts-first-primitive-20261112/pom.xml verify
 ```
 
 Do not merge this draft until the actual Java21 compiler, original-owner
@@ -66,3 +66,25 @@ implementation needs independently measured benefit, GC safety and
 cross-platform Java fallback parity. This candidate respects
 M3Scale inventory -> catalogue -> exact source recipe -> serial atom
 -> contract proof -> product handoff without replacing another owner.
+
+## Isolated Maven dependency reconciliation
+
+The first product workflow attempt compiled and **passed** the strict
+Java 21 full-current-owner source/contract/collision test. Its Maven job
+failed *before compilation* while resolving the existing module's
+`junit-jupiter:5.10.2-m3-source-1` dependency, which Maven Central
+does not publish. This is a dependency-admission blocker, **not** a failed
+contract assertion.
+
+To avoid changing that curated product module dependency, this receiver
+adds an **isolated Maven recipe crate** at
+`m3/ast/recipe/facts-first-primitive-20261112/pom.xml`.
+It references the **same source and test files in the product module**,
+compiles only `SyntaxTree`/`SyntaxIndex` and the exact original-owner
+contract/test classes under Java 21 `-Xlint:all -Werror`, and uses
+published JUnit 5.10.2. It does not substitute a copied facade or
+claim the full module Maven dependency issue is repaired.
+
+The original `m3/ast/pom.xml` remains intact. Full product Maven
+tests using its curated dependency are still HOLD until that
+dependency is supplied or independently qualified.

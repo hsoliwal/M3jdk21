@@ -49,10 +49,8 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-      - name: Maven/JUnit original SyntaxIndex plus first-fact and probe-guard tests
+      - name: Isolated Maven/JUnit of exact current SyntaxIndex and original-owner contracts
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f m3/ast/pom.xml \
-            -Dtest=SyntaxIndexTest,SyntaxIndexKindPostingsTest,SyntaxIndexStableScatterTest,SyntaxIndexFactsFirstTest \
-            -Dsurefire.failIfNoSpecifiedTests=false test
+          mvn -B -ntp -f m3/ast/recipe/facts-first-primitive-20261112/pom.xml verify
