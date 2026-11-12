@@ -1,0 +1,133 @@
+{
+  "schema": "M3_PASSIVE_EXECUTION_RECEIPT_V1",
+  "spdx_file_copyright_text": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "spdx_license_identifier": "Apache-2.0",
+  "kind": "passive_product_output_traceability",
+  "status": "HOLD",
+  "release_ready": false,
+  "provides_release_gate_evidence": false,
+  "purpose": "Trace the separately owned one-output jtreg archive transport correction and its exact execution evidence.",
+  "publication_binding": {
+    "status": "BOUND_TO_PUBLISHED_CANONICAL_COMMIT",
+    "canonical_commit_required": true
+  },
+  "canonical_task": {
+    "repository": "hsoliwal/com.synexia",
+    "commit": "b0c6c8512d03d189b68b65c39f7a972c1dbeccf9",
+    "review": "https://github.com/hsoliwal/com.synexia/pull/17067",
+    "task_path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-release-admission-20261029/revisions/20261111-jtreg-mirror",
+    "recipe_id": "com.synexia.m3.JdkJtregMirror20261111",
+    "qualification_base_commit": "05f4bdcb50872514a7b41a965e68d6a8453d4fcd",
+    "source_bindings": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-release-admission-20261029/revisions/20261111-jtreg-mirror/SOURCE_BINDINGS.tsv",
+      "bytes": 1793,
+      "sha256": "b7e472bcc0a04acb0d8cecc12e8ccb29c5e07333ba5ae22a1c5d7d642d6c4f9b",
+      "git_blob": "3216e741018998ecfffffd4b624bdc036766a816"
+    },
+    "output_manifest": {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-jdk-jtreg-mirror-20261111/manifest.tsv",
+      "bytes": 311,
+      "sha256": "c6f050c1ce95633ae7482cf733dab474f9641122cd29353eb3f0b7ebe3ab0f06",
+      "git_blob": "fc3aaa59cc07ba23d638ce51d5022c5069995067"
+    }
+  },
+  "target_source": {
+    "repository": "hsoliwal/M3jdk21",
+    "commit": "caff5b3864be33eb705f253d29c325decd738abb",
+    "tree": "9c5c67564871451a45527ec9741f29949bd153fb",
+    "role": "exact qualified receiving preimage"
+  },
+  "candidate_output_count": 1,
+  "candidate_outputs": [
+    {
+      "path": ".github/actions/build-jtreg/action.yml",
+      "before_blob": "d00b297c1600b405701dfcf620eaec6a5fa9bccb",
+      "before_sha256": "024329278fa78a5cb12cdde6295e2133cbf3e87b11db80e6b86b9659d9459a67",
+      "after_blob": "1d22936def66b0a502201c649df2d1976261d90c",
+      "after_sha256": "0f5beeddee72c440d7e17b610abb6a68073ad30b6cce25a25b5269b189732b5c",
+      "after_bytes": 2452,
+      "target_revision": "caff5b3864be33eb705f253d29c325decd738abb",
+      "source_revision": null,
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+    }
+  ],
+  "covered_output_count": 1,
+  "covered_outputs": [
+    {
+      "path": ".github/actions/build-jtreg/action.yml",
+      "before_sha256": "024329278fa78a5cb12cdde6295e2133cbf3e87b11db80e6b86b9659d9459a67",
+      "before_blob": "d00b297c1600b405701dfcf620eaec6a5fa9bccb",
+      "after_sha256": "0f5beeddee72c440d7e17b610abb6a68073ad30b6cce25a25b5269b189732b5c",
+      "after_blob": "1d22936def66b0a502201c649df2d1976261d90c",
+      "after_bytes": 2452,
+      "source_revision": null,
+      "target_revision": "caff5b3864be33eb705f253d29c325decd738abb",
+      "mode": "100644",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+    }
+  ],
+  "execution": {
+    "status": "PASS",
+    "tests": 6,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "report": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-release-admission-20261029/revisions/20261111-jtreg-mirror/proof/sdk.xml",
+      "bytes": 16022,
+      "sha256": "8b6f84fd9c8c85a9e8e970d26e8c5350d86c5c33b5dee2b4a12487fe9d51f150",
+      "git_blob": "e267ed3e5a4e84a16c8705faf517435f192aea37"
+    },
+    "test_cases": [
+      "everyRequiredPreimageRefusesMissingDriftAndDuplicates",
+      "namedSdkExecutionAndExactFixedPoint",
+      "reversedInputsAndCodeLookingDecoysProduceIdenticalChanges",
+      "occupiedNewPathsAndJavaAsTextAreRefused",
+      "eachAlreadyAppliedFilePreservesTheRemainingSerialWork",
+      "isolatedWorkerWidthsAndInputPermutationsHaveTheSameOutputs"
+    ],
+    "actual_openrewrite_sdk": true,
+    "actual_emitted_outputs": 1,
+    "exact_postimage_hashes_verified": true,
+    "complete_fixed_point": true
+  },
+  "recorded_product_gates": {
+    "archive_transport": {
+      "status": "PASS_BOUNDED_TRANSPORT_CHECK",
+      "evidence": {
+        "path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-release-admission-20261029/revisions/20261111-jtreg-mirror/proof/emitted-transport/summary.json",
+        "bytes": 7993,
+        "sha256": "50a4fd3931e41ed592733e64a4d8e2e0805b3d4c3b7d96794f32331d83d3eef6",
+        "git_blob": "1b8441f515d93efc00353a607a4d115b92b8ace7"
+      },
+      "source_versions_and_checksums_unchanged": true,
+      "actual_default_endpoint_outcomes": [
+        {
+          "dependency": "jtharness",
+          "exit_code": 1
+        },
+        {
+          "dependency": "asmtools",
+          "exit_code": 1
+        }
+      ],
+      "actual_github_downloads": 2,
+      "unchanged_upstream_checksum_matches": 2,
+      "corrupted_archive_rejections": 2,
+      "hosted_composite_action_executed": false,
+      "scope": "Actual SDK-emitted action bytes select the checked upstream GitHub archives; checksum guards remain unchanged. This is not a hosted-action run or an installed-JDK qualification."
+    }
+  },
+  "self_provenance": {
+    "path": "m3/release/queue/2026-11-11/m3-jtreg-mirror-execution-receipt.json",
+    "covered_by_this_receipt": false,
+    "explanation": "The receiving Git tree binds this passive receipt; no recursive self-hash or future receiving commit is asserted."
+  },
+  "remaining_release_holds": [
+    "Required current target-owned Maven control-reactor receipt remains independently absent.",
+    "Legacy target-local recipe custody and stale foundation owner evidence remain separate unresolved work.",
+    "No hosted-action execution, installed-JDK qualification, release admission or family completion follows from this transport correction."
+  ],
+  "family_phase_advanced": false,
+  "authority": "This passive data file grants no release/tag, merge, transformation, publication or mutation authority."
+}
