@@ -156,6 +156,8 @@ JNIEXPORT jlong JNICALL Java_jdk_m3_optane_NativePmem_open
 #ifdef M3_HAVE_LIBPMEM2
     if (requested_backend!=1) {
         int rc=pmem2_config_new(&r->pmem_config);
+        if (!rc) rc=pmem2_config_set_protection(r->pmem_config,
+                PMEM2_PROT_READ | (r->writable ? PMEM2_PROT_WRITE : 0));
         if (!rc) rc=pmem2_source_from_fd(&r->pmem_source,r->fd);
         if (!rc) rc=pmem2_config_set_required_store_granularity(r->pmem_config,PMEM2_GRANULARITY_PAGE);
         if (!rc) rc=pmem2_config_set_offset(r->pmem_config,(size_t)offset);
