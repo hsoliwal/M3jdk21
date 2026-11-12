@@ -1,0 +1,939 @@
+{
+  "schema": "M3_SI_WARM_PAIRED_FORK_RECEIVING_V1",
+  "status": "PASS_RECONCILED_MEASUREMENTS",
+  "sourceHead": "0f80ed69a89a8d0a32f04f0824fab2f0c1457525",
+  "sourceBefore": {
+    "bytes": 44126,
+    "sha256": "efaf8b1e861682100a61fca31f774f71978f9a6cc7b8abe01c893b79e82ff1ba",
+    "gitBlob": "ef99594a076ed23c162d40e97e423d961869b30e"
+  },
+  "sourceAfter": {
+    "bytes": 44256,
+    "sha256": "da50c2acf4e6125d72af6ae374ef5e2281ed7b653af9f90578eccbb48da3029a",
+    "gitBlob": "598a67a25a6d8edd36d495aa692578f79c0f5879"
+  },
+  "test": {
+    "bytes": 17195,
+    "sha256": "f7845e7d7ebc165ca13eb76f677ab050080bd6b12fa509abe35e35962d69b79c",
+    "gitBlob": "22be10f7028eb6983c36126454fe4f36790277b8"
+  },
+  "originalRuntimeQualification": "c245681aca9eba7a79d3c7dc0290f097734d6b53",
+  "benchmarkInput": "fecec6aff3609445e2de067643c2afab0d4947c7",
+  "rawForkReceipt": "a75f769f00943c0499258d4e29143da09f2dde95",
+  "reconciliationInput": "414a68f0d0f3550ba727516c5af34876e7ddb75f",
+  "measurementReceipt": "96685f8dcccec9e96e0e74accd028649295c71ff",
+  "forks": 16,
+  "samples": 80,
+  "profileSummaries": {
+    "normal": {
+      "pairCount": 6,
+      "fasterPairs": 5,
+      "slowerPairs": 1,
+      "minimumRatio": 0.8251684719331052,
+      "maximumRatio": 1.0341320168532153,
+      "medianPairedRatio": 0.8716692081612275,
+      "geometricMeanRatio": 0.8842317307008796,
+      "allocationBytesPerCall": {
+        "baseline": [
+          96
+        ],
+        "candidate": [
+          80
+        ]
+      }
+    },
+    "no-escape": {
+      "pairCount": 2,
+      "fasterPairs": 2,
+      "slowerPairs": 0,
+      "minimumRatio": 0.8330555045417942,
+      "maximumRatio": 0.9612982215858391,
+      "medianPairedRatio": 0.8971768630638166,
+      "geometricMeanRatio": 0.8948825481583159,
+      "allocationBytesPerCall": {
+        "baseline": [
+          160
+        ],
+        "candidate": [
+          144
+        ]
+      }
+    }
+  },
+  "pairedSummaries": [
+    {
+      "profile": "normal",
+      "pair": 0,
+      "order": "baseline-first",
+      "baseline": {
+        "medianNsPerCall": 57.989,
+        "allocationBytesPerCall": [
+          96,
+          96,
+          96,
+          96,
+          96
+        ]
+      },
+      "candidate": {
+        "medianNsPerCall": 50.738,
+        "allocationBytesPerCall": [
+          80,
+          80,
+          80,
+          80,
+          80
+        ]
+      },
+      "medianRatio": 0.8749590439566125
+    },
+    {
+      "profile": "normal",
+      "pair": 1,
+      "order": "candidate-first",
+      "baseline": {
+        "medianNsPerCall": 55.2555,
+        "allocationBytesPerCall": [
+          96,
+          96,
+          96,
+          96,
+          96
+        ]
+      },
+      "candidate": {
+        "medianNsPerCall": 45.7615,
+        "allocationBytesPerCall": [
+          80,
+          80,
+          80,
+          80,
+          80
+        ]
+      },
+      "medianRatio": 0.8281800001809775
+    },
+    {
+      "profile": "normal",
+      "pair": 2,
+      "order": "baseline-first",
+      "baseline": {
+        "medianNsPerCall": 46.994,
+        "allocationBytesPerCall": [
+          96,
+          96,
+          96,
+          96,
+          96
+        ]
+      },
+      "candidate": {
+        "medianNsPerCall": 48.598,
+        "allocationBytesPerCall": [
+          80,
+          80,
+          80,
+          80,
+          80
+        ]
+      },
+      "medianRatio": 1.0341320168532153
+    },
+    {
+      "profile": "normal",
+      "pair": 3,
+      "order": "candidate-first",
+      "baseline": {
+        "medianNsPerCall": 52.642,
+        "allocationBytesPerCall": [
+          96,
+          96,
+          96,
+          96,
+          96
+        ]
+      },
+      "candidate": {
+        "medianNsPerCall": 46.8585,
+        "allocationBytesPerCall": [
+          80,
+          80,
+          80,
+          80,
+          80
+        ]
+      },
+      "medianRatio": 0.8901352532198624
+    },
+    {
+      "profile": "normal",
+      "pair": 4,
+      "order": "baseline-first",
+      "baseline": {
+        "medianNsPerCall": 56.686,
+        "allocationBytesPerCall": [
+          96,
+          96,
+          96,
+          96,
+          96
+        ]
+      },
+      "candidate": {
+        "medianNsPerCall": 46.7755,
+        "allocationBytesPerCall": [
+          80,
+          80,
+          80,
+          80,
+          80
+        ]
+      },
+      "medianRatio": 0.8251684719331052
+    },
+    {
+      "profile": "normal",
+      "pair": 5,
+      "order": "candidate-first",
+      "baseline": {
+        "medianNsPerCall": 55.8765,
+        "allocationBytesPerCall": [
+          96,
+          96,
+          96,
+          96,
+          96
+        ]
+      },
+      "candidate": {
+        "medianNsPerCall": 48.522,
+        "allocationBytesPerCall": [
+          80,
+          80,
+          80,
+          80,
+          80
+        ]
+      },
+      "medianRatio": 0.8683793723658425
+    },
+    {
+      "profile": "no-escape",
+      "pair": 0,
+      "order": "baseline-first",
+      "baseline": {
+        "medianNsPerCall": 70.787,
+        "allocationBytesPerCall": [
+          160,
+          160,
+          160,
+          160,
+          160
+        ]
+      },
+      "candidate": {
+        "medianNsPerCall": 58.9695,
+        "allocationBytesPerCall": [
+          144,
+          144,
+          144,
+          144,
+          144
+        ]
+      },
+      "medianRatio": 0.8330555045417942
+    },
+    {
+      "profile": "no-escape",
+      "pair": 1,
+      "order": "candidate-first",
+      "baseline": {
+        "medianNsPerCall": 72.2835,
+        "allocationBytesPerCall": [
+          160,
+          160,
+          160,
+          160,
+          160
+        ]
+      },
+      "candidate": {
+        "medianNsPerCall": 69.486,
+        "allocationBytesPerCall": [
+          144,
+          144,
+          144,
+          144,
+          144
+        ]
+      },
+      "medianRatio": 0.9612982215858391
+    }
+  ],
+  "measurements": {
+    "normal-pair0-baseline": [
+      {
+        "sample": 0,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 9707700
+      },
+      {
+        "sample": 1,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 9562400
+      },
+      {
+        "sample": 2,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 13309100
+      },
+      {
+        "sample": 3,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 11930700
+      },
+      {
+        "sample": 4,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 11597800
+      }
+    ],
+    "normal-pair0-candidate": [
+      {
+        "sample": 0,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 10615200
+      },
+      {
+        "sample": 1,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 10147600
+      },
+      {
+        "sample": 2,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 10184500
+      },
+      {
+        "sample": 3,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 9147400
+      },
+      {
+        "sample": 4,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 8932000
+      }
+    ],
+    "normal-pair1-candidate": [
+      {
+        "sample": 0,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 9432500
+      },
+      {
+        "sample": 1,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 9204700
+      },
+      {
+        "sample": 2,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 9152300
+      },
+      {
+        "sample": 3,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 9131700
+      },
+      {
+        "sample": 4,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 9053100
+      }
+    ],
+    "normal-pair1-baseline": [
+      {
+        "sample": 0,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 11064500
+      },
+      {
+        "sample": 1,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 11051100
+      },
+      {
+        "sample": 2,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 10920000
+      },
+      {
+        "sample": 3,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 10728100
+      },
+      {
+        "sample": 4,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 11901500
+      }
+    ],
+    "normal-pair2-baseline": [
+      {
+        "sample": 0,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 9347500
+      },
+      {
+        "sample": 1,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 9088000
+      },
+      {
+        "sample": 2,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 9398800
+      },
+      {
+        "sample": 3,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 10417900
+      },
+      {
+        "sample": 4,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 11071700
+      }
+    ],
+    "normal-pair2-candidate": [
+      {
+        "sample": 0,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 10055900
+      },
+      {
+        "sample": 1,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 9567500
+      },
+      {
+        "sample": 2,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 9515700
+      },
+      {
+        "sample": 3,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 9719600
+      },
+      {
+        "sample": 4,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 9741400
+      }
+    ],
+    "normal-pair3-candidate": [
+      {
+        "sample": 0,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 9206700
+      },
+      {
+        "sample": 1,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 10141200
+      },
+      {
+        "sample": 2,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 9562500
+      },
+      {
+        "sample": 3,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 9333900
+      },
+      {
+        "sample": 4,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 9371700
+      }
+    ],
+    "normal-pair3-baseline": [
+      {
+        "sample": 0,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 10804900
+      },
+      {
+        "sample": 1,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 10615800
+      },
+      {
+        "sample": 2,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 10083300
+      },
+      {
+        "sample": 3,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 9595100
+      },
+      {
+        "sample": 4,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 10528400
+      }
+    ],
+    "normal-pair4-baseline": [
+      {
+        "sample": 0,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 11337200
+      },
+      {
+        "sample": 1,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 10876300
+      },
+      {
+        "sample": 2,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 10788300
+      },
+      {
+        "sample": 3,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 13054400
+      },
+      {
+        "sample": 4,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 13405300
+      }
+    ],
+    "normal-pair4-candidate": [
+      {
+        "sample": 0,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 10030700
+      },
+      {
+        "sample": 1,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 9255600
+      },
+      {
+        "sample": 2,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 9132000
+      },
+      {
+        "sample": 3,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 9355100
+      },
+      {
+        "sample": 4,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 11095200
+      }
+    ],
+    "normal-pair5-candidate": [
+      {
+        "sample": 0,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 9667000
+      },
+      {
+        "sample": 1,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 9865000
+      },
+      {
+        "sample": 2,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 9389700
+      },
+      {
+        "sample": 3,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 9704400
+      },
+      {
+        "sample": 4,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 13019900
+      }
+    ],
+    "normal-pair5-baseline": [
+      {
+        "sample": 0,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 11103900
+      },
+      {
+        "sample": 1,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 11175300
+      },
+      {
+        "sample": 2,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 10537700
+      },
+      {
+        "sample": 3,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 11644400
+      },
+      {
+        "sample": 4,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 11709700
+      }
+    ],
+    "no-escape-pair0-baseline": [
+      {
+        "sample": 0,
+        "calls": 200000,
+        "bytes": 32000000,
+        "nanos": 14157400
+      },
+      {
+        "sample": 1,
+        "calls": 200000,
+        "bytes": 32000000,
+        "nanos": 13339500
+      },
+      {
+        "sample": 2,
+        "calls": 200000,
+        "bytes": 32000000,
+        "nanos": 16060300
+      },
+      {
+        "sample": 3,
+        "calls": 200000,
+        "bytes": 32000000,
+        "nanos": 17060700
+      },
+      {
+        "sample": 4,
+        "calls": 200000,
+        "bytes": 32000000,
+        "nanos": 11528700
+      }
+    ],
+    "no-escape-pair0-candidate": [
+      {
+        "sample": 0,
+        "calls": 200000,
+        "bytes": 28800000,
+        "nanos": 11475100
+      },
+      {
+        "sample": 1,
+        "calls": 200000,
+        "bytes": 28800000,
+        "nanos": 11508500
+      },
+      {
+        "sample": 2,
+        "calls": 200000,
+        "bytes": 28800000,
+        "nanos": 11840600
+      },
+      {
+        "sample": 3,
+        "calls": 200000,
+        "bytes": 28800000,
+        "nanos": 11793900
+      },
+      {
+        "sample": 4,
+        "calls": 200000,
+        "bytes": 28800000,
+        "nanos": 13539200
+      }
+    ],
+    "no-escape-pair1-candidate": [
+      {
+        "sample": 0,
+        "calls": 200000,
+        "bytes": 28800000,
+        "nanos": 14627400
+      },
+      {
+        "sample": 1,
+        "calls": 200000,
+        "bytes": 28800000,
+        "nanos": 13982600
+      },
+      {
+        "sample": 2,
+        "calls": 200000,
+        "bytes": 28800000,
+        "nanos": 13642100
+      },
+      {
+        "sample": 3,
+        "calls": 200000,
+        "bytes": 28800000,
+        "nanos": 13845200
+      },
+      {
+        "sample": 4,
+        "calls": 200000,
+        "bytes": 28800000,
+        "nanos": 13897200
+      }
+    ],
+    "no-escape-pair1-baseline": [
+      {
+        "sample": 0,
+        "calls": 200000,
+        "bytes": 32000000,
+        "nanos": 13783600
+      },
+      {
+        "sample": 1,
+        "calls": 200000,
+        "bytes": 32000000,
+        "nanos": 14548200
+      },
+      {
+        "sample": 2,
+        "calls": 200000,
+        "bytes": 32000000,
+        "nanos": 14456700
+      },
+      {
+        "sample": 3,
+        "calls": 200000,
+        "bytes": 32000000,
+        "nanos": 16096400
+      },
+      {
+        "sample": 4,
+        "calls": 200000,
+        "bytes": 32000000,
+        "nanos": 11370000
+      }
+    ]
+  },
+  "apiShapes": {
+    "normal-pair0-baseline": [
+      [
+        "99672049e41a90fe13f4d607bffa94aa8af2661222f85b26d568bf9a28c1a3a8",
+        "19"
+      ]
+    ],
+    "normal-pair0-candidate": [
+      [
+        "99672049e41a90fe13f4d607bffa94aa8af2661222f85b26d568bf9a28c1a3a8",
+        "19"
+      ]
+    ],
+    "normal-pair1-candidate": [
+      [
+        "99672049e41a90fe13f4d607bffa94aa8af2661222f85b26d568bf9a28c1a3a8",
+        "19"
+      ]
+    ],
+    "normal-pair1-baseline": [
+      [
+        "99672049e41a90fe13f4d607bffa94aa8af2661222f85b26d568bf9a28c1a3a8",
+        "19"
+      ]
+    ],
+    "normal-pair2-baseline": [
+      [
+        "99672049e41a90fe13f4d607bffa94aa8af2661222f85b26d568bf9a28c1a3a8",
+        "19"
+      ]
+    ],
+    "normal-pair2-candidate": [
+      [
+        "99672049e41a90fe13f4d607bffa94aa8af2661222f85b26d568bf9a28c1a3a8",
+        "19"
+      ]
+    ],
+    "normal-pair3-candidate": [
+      [
+        "99672049e41a90fe13f4d607bffa94aa8af2661222f85b26d568bf9a28c1a3a8",
+        "19"
+      ]
+    ],
+    "normal-pair3-baseline": [
+      [
+        "99672049e41a90fe13f4d607bffa94aa8af2661222f85b26d568bf9a28c1a3a8",
+        "19"
+      ]
+    ],
+    "normal-pair4-baseline": [
+      [
+        "99672049e41a90fe13f4d607bffa94aa8af2661222f85b26d568bf9a28c1a3a8",
+        "19"
+      ]
+    ],
+    "normal-pair4-candidate": [
+      [
+        "99672049e41a90fe13f4d607bffa94aa8af2661222f85b26d568bf9a28c1a3a8",
+        "19"
+      ]
+    ],
+    "normal-pair5-candidate": [
+      [
+        "99672049e41a90fe13f4d607bffa94aa8af2661222f85b26d568bf9a28c1a3a8",
+        "19"
+      ]
+    ],
+    "normal-pair5-baseline": [
+      [
+        "99672049e41a90fe13f4d607bffa94aa8af2661222f85b26d568bf9a28c1a3a8",
+        "19"
+      ]
+    ],
+    "no-escape-pair0-baseline": [
+      [
+        "99672049e41a90fe13f4d607bffa94aa8af2661222f85b26d568bf9a28c1a3a8",
+        "19"
+      ]
+    ],
+    "no-escape-pair0-candidate": [
+      [
+        "99672049e41a90fe13f4d607bffa94aa8af2661222f85b26d568bf9a28c1a3a8",
+        "19"
+      ]
+    ],
+    "no-escape-pair1-candidate": [
+      [
+        "99672049e41a90fe13f4d607bffa94aa8af2661222f85b26d568bf9a28c1a3a8",
+        "19"
+      ]
+    ],
+    "no-escape-pair1-baseline": [
+      [
+        "99672049e41a90fe13f4d607bffa94aa8af2661222f85b26d568bf9a28c1a3a8",
+        "19"
+      ]
+    ]
+  },
+  "negativeReportingControls": [
+    {
+      "case": "missing",
+      "status": "REFUSED"
+    },
+    {
+      "case": "duplicate",
+      "status": "REFUSED"
+    },
+    {
+      "case": "exit",
+      "status": "REFUSED"
+    },
+    {
+      "case": "unreaped",
+      "status": "REFUSED"
+    },
+    {
+      "case": "allocation",
+      "status": "REFUSED"
+    },
+    {
+      "case": "loghash",
+      "status": "REFUSED"
+    },
+    {
+      "case": "source",
+      "status": "REFUSED"
+    },
+    {
+      "case": "packet",
+      "status": "REFUSED"
+    },
+    {
+      "case": "sample",
+      "status": "REFUSED"
+    },
+    {
+      "case": "label",
+      "status": "REFUSED"
+    },
+    {
+      "case": "api",
+      "status": "REFUSED"
+    }
+  ],
+  "storage": {
+    "before": 571469824,
+    "after": 571469824,
+    "cap": 571473920
+  },
+  "generationCalls": 0,
+  "scope": "Unchanged qualified implementation and standalone proof; same read-only two-record mapped image/four hot identities; six normal and two no-escape alternating pairs on one Windows host; no new native or full-admission/module/release proof",
+  "conclusion": "16B lower allocation in all80 samples;5/6 normal pairs and2/2 no-escape pairs faster, one normal pair slower; portable timing improvement not established; keep draft pending CI/review"
+}
