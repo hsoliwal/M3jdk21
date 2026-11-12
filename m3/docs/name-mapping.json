@@ -10707,7 +10707,7 @@
         "id": "synexia.collections.long-long-add-to",
         "kind": "specialization",
         "status": "pending",
-        "reason": "Recipe-executed existing-owner candidate with bounded Java21 evidence; installed M3JDK21 and broader collection admission remain open.",
+        "reason": "Source-sealed existing-owner probe refinement; the executed Java recipe emits the candidate bytes. Installed M3JDK21, broader collection admission and global migration completion remain open.",
         "sources": [
           {
             "repo": "hsoliwal/com.synexia",
@@ -10722,45 +10722,67 @@
             "git_blob_sha1": "1dd6988e97e61419b17f209751deb935baa83164",
             "fingerprint": null,
             "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "dea06b3893982bef2d523c8bb4199fbfff467408",
+            "module": "synexia-primitives",
+            "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongLongHashMap.java",
+            "symbol": "com.synexia.primitives.LongLongHashMap",
+            "signatures": [
+              "long put(long,long)",
+              "long addTo(long,long)"
+            ],
+            "sha256": "2d5eea2d6722b9678b45147ac60bb62eaa15ba1db72733f64a682ec091f8174d",
+            "git_blob_sha1": "051bdfce1dcf63466ac979e78755066c165594e7",
+            "fingerprint": null,
+            "revision_role": "pinned"
           }
         ],
         "targets": [
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "e8e1e837a640f6b5a92226271a60cc9821d44cc0",
+            "commit": null,
             "module": "jdk.m3.collections",
             "path": "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongLongHashMap.java",
             "symbol": "jdk.m3.collections.LongLongHashMap",
             "signatures": [
+              "boolean put(long,long)",
               "long addTo(long,long)"
             ],
-            "sha256": "937c680743188332973d191a4bac47a92b95f2fddd3116459d7b863d2f13d338",
-            "git_blob_sha1": "13241b67cf9e92db2932d2d419e17c2e609b614a",
+            "sha256": "bbac634a728c2d0c6ffe51a84fea181a9d205ec97d4452e6d13e432fe912fc78",
+            "git_blob_sha1": "2a446ed6cafc81cf2bb3558479dd2ca4aa4c0b92",
             "fingerprint": null,
             "revision_role": "candidate"
           }
         ],
-        "owner": "jdk.m3.collections.M3LongLongHashMap",
+        "owner": "jdk.m3.collections.LongLongHashMap",
         "identity": {
           "namespace": "Existing M3 owner and package retained; public java.util names remain unchanged.",
           "generation": "Existing primitive payload/state arrays and modification epoch; no new retained per-entry objects."
         },
         "contract": {
           "differences": [
-            "Additive addTo(long,long): absence starts at zero, zero delta inserts, Java long overflow wraps."
+            "Additive addTo(long,long): absence starts at zero, zero delta inserts, Java long overflow wraps.",
+            "The receiver reuses a known insertion coordinate for absent put/addTo while retaining its occupancy/tombstone policy; no new public API or storage layout is introduced."
           ],
           "compatibility_obligations": [
             "Preserve every pre-existing public/protected descriptor and class/package identity.",
             "Preserve capacity, ordering, tombstone/occupancy or ring-head semantics and iterator epochs.",
-            "No runtime dependency, new JNI symbol, new storage hierarchy or public Java SE replacement."
+            "No runtime dependency, new JNI symbol, new storage hierarchy or public Java SE replacement.",
+            "put(long,long) retains its boolean insertion result; the donor long previous-value result is not adopted.",
+            "Continue past deleted slots to find an existing key, retain the first reusable slot, and preserve size, occupied, capacity, physical iteration order and modification epochs.",
+            "Java SE 21 baseline is JSR 396; Java 21 JLS 4.2.2 governs long wraparound. JSR 337 is historical Java SE 8 provenance, not this receiver baseline.",
+            "JEP 431 and JDK-8266571/CSR JDK-8266572 are not applicable to this primitive owner, which implements neither java.util.Map nor SequencedMap; no JBS bug-fix claim is made. See m3/docs/collections-replacement-spec.md section 23."
           ],
           "public_surface": [
+            "boolean put(long,long)",
             "long addTo(long,long)"
           ]
         },
         "format": {
           "schema": null,
-          "abi": "Existing Java descriptors retained; one additive map method.",
+          "abi": "Existing Java descriptors retained; the original additive addTo is preserved and this refinement adds no public method.",
           "bootstrap": "Existing jdk.m3.collections proving module; installed JDK admission is not claimed."
         },
         "dependencies": [],
@@ -10771,33 +10793,74 @@
           "cached_facts": "No additional cache or payload owner."
         },
         "recipe": {
-          "id": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
-          "version": "m3-long-receiver-map-20261029",
-          "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-long-receiver-20261029/resources/com/synexia/rewrite/hash-pinned-java/m3-long-receiver-map-20261029/manifest.tsv",
-          "sha256": "2f8d7076176277c2b372f8b238f3058b4ba86b8736feedf72baf5e33a243595d",
+          "id": "com.synexia.rewrite.M3LongLongProductOneProbe20261112",
+          "version": "m3-longlong-product-oneprobe-20261112",
+          "path": null,
+          "sha256": null,
           "preconditions": [
-            "Exact target preimage and closure seals",
-            "SDK fixed point, refusal and serial compiler/behavior evidence"
+            "Exact receiver preimage and parser-context seals at M3jdk21 b98bf8c065818aac3447be165909e2a013325d9a",
+            "Actual Maven/OpenRewrite execution, fixed-point replay and stale-preimage refusal",
+            "Exact emitted-source Java 21 compiler, API and behavioral proof; broader installed-image acceptance remains separate"
           ],
-          "rollback": "Restore the exact preimage through a separately reviewed sealed recipe; preserve unrelated edits."
+          "rollback": "Restore the exact preimage through a separately reviewed sealed recipe; preserve unrelated edits.",
+          "canonical_repository": "hsoliwal/com.synexia",
+          "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-longlong-oneprobe-20261029/resources/com/synexia/rewrite/hash-pinned-java/m3-longlong-product-oneprobe-20261112/manifest.tsv"
         },
         "tests": [
           {
-            "id": "long-collection-component-acceptance",
-            "receipt": "m3/collections/qualification/long-consolidation-20261029/RECEIPT.json"
+            "id": "longlong-sdk-emitted-maven",
+            "receipt": "m3/compatibility/longlong-known-slot-20261112-receipt.json"
+          },
+          {
+            "id": "longlong-sdk-emitted-real-oome-direct",
+            "receipt": "m3/compatibility/longlong-known-slot-20261112-receipt.json"
+          },
+          {
+            "id": "longlong-sdk-emitted-real-oome-conditional",
+            "receipt": "m3/compatibility/longlong-known-slot-20261112-receipt.json"
+          },
+          {
+            "id": "longlong-sdk-emitted-shared-trace-interpreter",
+            "receipt": "m3/compatibility/longlong-known-slot-20261112-receipt.json"
+          },
+          {
+            "id": "longlong-sdk-emitted-compaction-interpreter",
+            "receipt": "m3/compatibility/longlong-known-slot-20261112-receipt.json"
+          },
+          {
+            "id": "longlong-sdk-emitted-shared-trace-c1",
+            "receipt": "m3/compatibility/longlong-known-slot-20261112-receipt.json"
+          },
+          {
+            "id": "longlong-sdk-emitted-compaction-c1",
+            "receipt": "m3/compatibility/longlong-known-slot-20261112-receipt.json"
+          },
+          {
+            "id": "longlong-sdk-emitted-shared-trace-c2",
+            "receipt": "m3/compatibility/longlong-known-slot-20261112-receipt.json"
+          },
+          {
+            "id": "longlong-sdk-emitted-compaction-c2",
+            "receipt": "m3/compatibility/longlong-known-slot-20261112-receipt.json"
+          },
+          {
+            "id": "longlong-sdk-emitted-public-api",
+            "receipt": "m3/compatibility/longlong-known-slot-20261112-receipt.json"
           }
         ],
         "provenance": {
           "license": "Apache-2.0; original Hitesh Soliwal and contributors headers retained.",
           "publication": "Routine refinement of already-public primitive owners; public problem-pattern references, no challenge solution bodies.",
-          "copied_code": true
+          "copied_code": true,
+          "donor_boundary": "Original Apache-2.0 copied-code lineage and contributor headers are retained. The current first-party donor supplies known-slot reuse as an algorithm; its zero-key sentinel, previous-value put return and shift-deletion layout are not transplanted into the occupancy-state receiver."
         },
         "sync": {
-          "source_revision": "59c6cf1defa8d407a3c6876af3fe3198a777a90d",
-          "target_revision": "b9cc756f726de31af10652b5583d9bba58ba27b2",
+          "source_revision": "dea06b3893982bef2d523c8bb4199fbfff467408",
+          "target_revision": "b98bf8c065818aac3447be165909e2a013325d9a",
           "direction": "source-to-target",
           "target_adaptations": [
-            "Adapt LongLongHashMap operation to the existing target owner; do not transplant its full storage contract."
+            "Adapt LongLongHashMap operation to the existing target owner; do not transplant its full storage contract.",
+            "Adapt the existing Synexia known-slot operation to independent receiver occupancy states; preserve first tombstone, growth re-probing and existing-key iterator validity."
           ],
           "pending": [
             "Installed M3JDK21 acceptance",
@@ -10837,12 +10900,45 @@
               "git_blob_sha1": "05f940afd343aae7f6fba10200ca17b87da48059",
               "fingerprint": null,
               "revision_role": "candidate"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "e8e1e837a640f6b5a92226271a60cc9821d44cc0",
+              "module": "jdk.m3.collections",
+              "path": "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongLongHashMap.java",
+              "symbol": "jdk.m3.collections.LongLongHashMap",
+              "signatures": [
+                "long addTo(long,long)"
+              ],
+              "sha256": "937c680743188332973d191a4bac47a92b95f2fddd3116459d7b863d2f13d338",
+              "git_blob_sha1": "13241b67cf9e92db2932d2d419e17c2e609b614a",
+              "fingerprint": null,
+              "revision_role": "candidate"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "b98bf8c065818aac3447be165909e2a013325d9a",
+              "module": "jdk.m3.collections",
+              "path": "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongLongHashMap.java",
+              "symbol": "jdk.m3.collections.LongLongHashMap",
+              "signatures": [
+                "boolean put(long,long)",
+                "long addTo(long,long)"
+              ],
+              "sha256": "937c680743188332973d191a4bac47a92b95f2fddd3116459d7b863d2f13d338",
+              "git_blob_sha1": "13241b67cf9e92db2932d2d419e17c2e609b614a",
+              "fingerprint": null,
+              "revision_role": "pinned"
             }
           ],
           "supersedes": []
         },
         "source_state": "partial",
-        "observation": "Finite component proofs and diagnostic timing do not establish estate-wide collection parity or universal superiority. Release naming census 2026-11-07: current target class/package/path and applicable module descriptor inspected at b9cc756f726de31af10652b5583d9bba58ba27b2; prior target metadata retained in lineage. Metadata alignment is not compiler, runtime, native or installed-image qualification; status and receiving phase are unchanged."
+        "observation": "Finite component proofs and diagnostic timing do not establish estate-wide collection parity or universal superiority. Release naming census 2026-11-07: current target class/package/path and applicable module descriptor inspected at b9cc756f726de31af10652b5583d9bba58ba27b2; prior target metadata retained in lineage. Metadata alignment is not compiler, runtime, native or installed-image qualification; status and receiving phase are unchanged. 2026-11-12: owner spelling reconciled to the current jdk.m3.collections.LongLongHashMap target. Exact candidate bytes are recorded with a null target commit until publication; the pinned b98bf8c receiver and former target entries are retained in lineage. Original additive recipe: com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe / m3-long-receiver-map-20261029; manifest synexia-openrewrite-recipes/recipe-crates/m3-collections-long-receiver-20261029/resources/com/synexia/rewrite/hash-pinned-java/m3-long-receiver-map-20261029/manifest.tsv; SHA-256 2f8d7076176277c2b372f8b238f3058b4ba86b8736feedf72baf5e33a243595d. Current reusable recipe remains exclusively in canonical Synexia under m3-longlong-oneprobe-20261029; product receives emitted sources, the regression test and passive evidence only. Exact-source Java recipe execution is distinct from installed-image or production-performance acceptance. Executed receiver proof at the recorded postimage: selected Maven/JUnit closure 17 tests, zero failures/errors/skips; direct and conditional real-OOME preservation; shared/compaction traces match the baseline in interpreter, C1 and C2 modes; javap public descriptors match. These are source-component results, not a full module or installed JDK build. Canonical Java recipe, sealed resources and executed SDK/receiver evidence are published at hsoliwal/com.synexia@ea74a2c2e5f9b9ceee3d849a3cef652dccae6baa (PR 17186); the exact Java manifest SHA-256 is 520e1e752d98dbc6cd23a9f28cdc8d35ae6991fce6dd1cad69aaefb208ca7ce1.",
+        "test_descriptions": [
+          "Historical component evidence retained for lineage: long-collection-component-acceptance at m3/collections/qualification/long-consolidation-20261029/RECEIPT.json; not proof of the current candidate.",
+          "Current regression source: test/jdk/jdk/m3/collections/LongLongHashMapKnownSlotTest.java, SHA-256 01f53e7cd94d7285f48346bdd3c88bf815e07d45185819bbdcf244c18e058be5. The passive receipt contains exact emitted-source Maven/JUnit, real allocation-failure, runtime-trace and public-descriptor run evidence; these bounded component results do not advance broader admission gates."
+        ]
       },
       {
         "id": "m3.arrays.packed.signed",
@@ -12575,6 +12671,162 @@
         },
         "source_state": "implemented",
         "observation": "The three actual SDK-emitted Java files pass the six-test canonical recipe harness. Exact baseline and emitted providers compile with strict Java21 lint and unchanged member descriptors. Original donor jtreg order and concurrency tests fail against the baseline and pass against emitted source; child VM logs prove patched provider loading. This scoped patch-module evidence is distinct from source-built target image and full release acceptance."
+      },
+      {
+        "id": "synexia.collections.int-long-conditional-remove",
+        "kind": "specialization",
+        "status": "pending",
+        "reason": "Executed canonical SDK and selected receiver proofs support known-slot conditional deletion in the existing primitive owner. Installed-image, whole-module, all-platform and production-performance admission remain open.",
+        "sources": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "b98bf8c065818aac3447be165909e2a013325d9a",
+            "module": "jdk.m3.collections",
+            "path": "src/jdk.m3.collections/share/classes/jdk/m3/collections/IntLongHashMap.java",
+            "symbol": "jdk.m3.collections.IntLongHashMap",
+            "signatures": [
+              "boolean remove(int,long)"
+            ],
+            "sha256": "01439d800feee41631fd257e18ceca9b558d0a8dd8fad5686539c90916fe34ab",
+            "git_blob_sha1": "78a4f8c5c70f93f68122fcf9fef0ac28a550c9cc",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "c10d88bca18d4f1690dc2484bd6f052eec21c8ca",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/crates/m3-intint-conditional-remove-20261030/resources/com/synexia/rewrite/hash-pinned-java/m3-intlong-product-conditional-remove-20261112/IntLongHashMap.java.txt",
+            "symbol": "jdk.m3.collections.IntLongHashMap",
+            "signatures": [
+              "boolean remove(int,long)"
+            ],
+            "sha256": "8fd5e67c5b135da4ebac4c87c3d30e3e1b39d6ca0b91c2ad0dd3370d66a9e3e9",
+            "git_blob_sha1": "88c16a063e0f4e5621ce10a477ee4c8e0847471d",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.collections",
+            "path": "src/jdk.m3.collections/share/classes/jdk/m3/collections/IntLongHashMap.java",
+            "symbol": "jdk.m3.collections.IntLongHashMap",
+            "signatures": [
+              "boolean remove(int,long)"
+            ],
+            "sha256": "8fd5e67c5b135da4ebac4c87c3d30e3e1b39d6ca0b91c2ad0dd3370d66a9e3e9",
+            "git_blob_sha1": "88c16a063e0f4e5621ce10a477ee4c8e0847471d",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "jdk.m3.collections.IntLongHashMap",
+        "identity": {
+          "namespace": "Existing jdk.m3.collections.IntLongHashMap; public java.util.HashMap and all existing Java descriptors remain unchanged.",
+          "generation": "Existing int[] keys, long[] values, zero-key side state and modification epoch; no added retained objects or occupancy hierarchy."
+        },
+        "contract": {
+          "differences": [
+            "Reuse the first nonzero key match for value comparison and successful back-shift deletion, eliminating redundant lookups without adding public API."
+          ],
+          "compatibility_obligations": [
+            "Preserve false on absence or mismatched expected value, including mapped zero values; mismatch performs no mutation.",
+            "Preserve zero-key side state and delegation to existing zero-key removal; preserve every int key and long value.",
+            "Successful removal uses existing shiftKeys at the matched slot and updates size/modification accounting exactly as before; preserve physical array state, capacity and iterator behavior.",
+            "Preserve all public/protected descriptors, exception behavior, clear/trim/growth behavior, ordering and existing per-file licences.",
+            "JSR 396 is the Java SE 21 platform baseline. This primitive owner implements neither Map nor SequencedMap; JEP 431 and JDK-8266571/CSR JDK-8266572 do not qualify this refinement, and no JBS bug fix is claimed. See collections-replacement-spec.md section 23.2."
+          ],
+          "public_surface": [
+            "boolean remove(int,long)"
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "All existing Java descriptors retained; no new public API, JNI symbol or runtime dependency.",
+          "bootstrap": "Existing jdk.m3.collections receiver; source-component proof does not establish installed JDK acceptance."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Execute source-sealed class-backed Java recipes in canonical Synexia, then receive exact emitted source/test and passive evidence.",
+          "joins": "Reuse existing find/shiftKeys and primitive lanes; retain the distinct zero-key state.",
+          "outputs": "Existing IntLongHashMap owner and existing IntLongHashMapTest, with an appended regression method and passive acceptance evidence.",
+          "cached_facts": "No new payload owner, cache, sentinel convention or storage hierarchy."
+        },
+        "recipe": {
+          "id": "com.synexia.rewrite.M3IntLongProductConditionalRemove20261112",
+          "version": "m3-intlong-product-conditional-remove-20261112",
+          "path": null,
+          "sha256": null,
+          "preconditions": [
+            "Exact b98bf8c receiver/source/test preimages and co-parser dependencies",
+            "Actual Maven/OpenRewrite SDK execution, fixed point, stale/duplicate/wrong-kind/path refusals and independent worker/source-order checks",
+            "Exact emitted-source Java 21 selected Maven/JUnit, independent physical/model differential and API proof; full receiver admission remains separate"
+          ],
+          "rollback": "Restore the exact receiver and test preimages through a separately reviewed sealed canonical recipe; preserve LongLong and unrelated changes.",
+          "canonical_repository": "hsoliwal/com.synexia",
+          "canonical_path": "synexia-openrewrite-recipes/crates/m3-intint-conditional-remove-20261030/resources/com/synexia/rewrite/hash-pinned-java/m3-intlong-product-conditional-remove-20261112/manifest.tsv"
+        },
+        "tests": [
+          {
+            "id": "intlong-sdk-emitted-maven",
+            "receipt": "m3/compatibility/intlong-known-slot-20261112-receipt.json"
+          },
+          {
+            "id": "intlong-sdk-emitted-physical-model",
+            "receipt": "m3/compatibility/intlong-known-slot-20261112-receipt.json"
+          },
+          {
+            "id": "intlong-sdk-emitted-public-api",
+            "receipt": "m3/compatibility/intlong-known-slot-20261112-receipt.json"
+          }
+        ],
+        "provenance": {
+          "license": "Apache-2.0; original Copyright 2026 Hitesh Soliwal and contributors headers retained and modification date recorded.",
+          "publication": "First-party existing receiver refinement; canonical source/template and proof ownership remain in Synexia.",
+          "copied_code": true,
+          "donor_boundary": "The sealed canonical template derives from the existing Apache-2.0 receiver. No third-party JDK/Harmony/ART implementation is imported. Historical IntInt known-slot work supplies comparison evidence only; its fused product candidate is rejected."
+        },
+        "sync": {
+          "source_revision": "c10d88bca18d4f1690dc2484bd6f052eec21c8ca",
+          "target_revision": "b98bf8c065818aac3447be165909e2a013325d9a",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Retain the IntLong receiver zero sentinel, back-shift deletion and primitive boolean-removal contract; do not adopt LongLong occupancy/tombstone storage."
+          ],
+          "pending": [
+            "Installed M3JDK21 and jtreg acceptance",
+            "Whole-module/reactor and all-platform qualification",
+            "Representative production performance",
+            "Global migration manifest acceptance",
+            "String -> arrays -> collections phase unchanged"
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "b98bf8c065818aac3447be165909e2a013325d9a",
+              "module": "jdk.m3.collections",
+              "path": "src/jdk.m3.collections/share/classes/jdk/m3/collections/IntLongHashMap.java",
+              "symbol": "jdk.m3.collections.IntLongHashMap",
+              "signatures": [
+                "boolean remove(int,long)"
+              ],
+              "sha256": "01439d800feee41631fd257e18ceca9b558d0a8dd8fad5686539c90916fe34ab",
+              "git_blob_sha1": "78a4f8c5c70f93f68122fcf9fef0ac28a550c9cc",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "partial",
+        "observation": "Canonical Java recipe/templates published in hsoliwal/com.synexia@c10d88bca18d4f1690dc2484bd6f052eec21c8ca; manifest SHA-256 ec5dcf2910845783e319a489b4027cf30987fcb0971dc51b1f664b6cebad81b9. Exact SDK four-test qualification passed. Selected receiver Maven baseline 2/emitted 3 tests, independent 65,536-operation physical/model comparison across 16 seeds and identical javap public descriptors passed. Runtime receipts bind exact emitted postimages. Candidate target commit remains null until publication; no full image or universal performance claim. Historical fused IntInt candidate remains rejected after about 26% matched-remove/reinsert timing regressions at 32/96 collision keys; no IntInt source/test/target record is included. Completed portable receiver verification and the historical rejection diagnostic are published at hsoliwal/com.synexia@45f40a8fd3691e33cf5b7c3913375487c2add94b. The 65,536 operations are the total across 16 seeds, including 2,300 successful conditional removals."
       }
     ]
   },

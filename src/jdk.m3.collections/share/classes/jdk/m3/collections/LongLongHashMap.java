@@ -1,6 +1,7 @@
 /*
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
+ * Modified 2026-11-12: reuse the lookup insertion slot while preserving occupancy and tombstone policy.
  */
 package jdk.m3.collections;
 
@@ -47,12 +48,12 @@ public final class LongLongHashMap {
 
     /** Puts a value and returns true only when a new key was inserted. */
     public boolean put(long key, long value) {
-        int existing = findIndex(key);
+        int existing = findInsertionIndex(key);
         if (existing >= 0) {
             values[existing] = value;
             return false;
         }
-        insertAbsent(key, value);
+        insertAbsent(~existing, key, value);
         return true;
     }
 
@@ -66,56 +67,51 @@ public final class LongLongHashMap {
      * {@link #put(long, long)}.</p>
      */
     public long addTo(long key, long delta) {
-        int existing = findIndex(key);
+        int existing = findInsertionIndex(key);
         if (existing >= 0) {
             long next = values[existing] + delta;
             values[existing] = next;
             return next;
         }
-        insertAbsent(key, delta);
+        insertAbsent(~existing, key, delta);
         return delta;
     }
 
-    /** Inserts a key already proved absent, preserving the owner's physical-slot policy. */
-    private void insertAbsent(long key, long value) {
-        if (needsGrowth(occupied + 1, keys.length)) {
-            // The lookup above proved this key absent. A tombstone reached
-            // before the first EMPTY slot is a legal insertion coordinate.
-            // Only probe again on the growth boundary; keep primitive lanes.
-            int mask = keys.length - 1;
-            int probe = mix(key) & mask;
-            while (states[probe] != EMPTY) {
-                if (states[probe] == DELETED) {
-                    keys[probe] = key;
-                    values[probe] = value;
-                    states[probe] = USED;
-                    size++;
-                    modCount++;
-                    return;
-                }
-                probe = (probe + 1) & mask;
-            }
+    /**
+     * Reuses the slot discovered while proving absence. A tombstone does not increase occupied
+     * slots and therefore bypasses growth, including at the load boundary. Only a successful
+     * rehash invalidates the discovered coordinate and requires a probe of the new lanes.
+     */
+    private void insertAbsent(int index, long key, long value) {
+        if (states[index] == EMPTY && needsGrowth(occupied + 1, keys.length)) {
             if (keys.length >= (1 << 30)) {
                 throw new IllegalStateException("maximum hash-table capacity reached");
             }
             rehash(keys.length << 1);
+            index = ~findInsertionIndex(key);
         }
+        keys[index] = key;
+        values[index] = value;
+        if (states[index] == EMPTY) {
+            occupied++;
+        }
+        states[index] = USED;
+        size++;
+        modCount++;
+    }
+
+    /** Returns an existing slot, or the complement of the first reusable slot on absence. */
+    private int findInsertionIndex(long key) {
         int mask = keys.length - 1;
         int index = mix(key) & mask;
         int firstDeleted = -1;
         for (;;) {
             byte state = states[index];
             if (state == EMPTY) {
-                int target = firstDeleted >= 0 ? firstDeleted : index;
-                keys[target] = key;
-                values[target] = value;
-                if (states[target] == EMPTY) {
-                    occupied++;
-                }
-                states[target] = USED;
-                size++;
-                modCount++;
-                return;
+                return ~(firstDeleted >= 0 ? firstDeleted : index);
+            }
+            if (state == USED && keys[index] == key) {
+                return index;
             }
             if (state == DELETED && firstDeleted < 0) {
                 firstDeleted = index;

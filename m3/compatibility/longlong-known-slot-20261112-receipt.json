@@ -1,0 +1,459 @@
+{
+  "schema": "M3_COLLECTION_RECEIVER_SCOPED_EVIDENCE_V1",
+  "record_id": "synexia.collections.long-long-add-to",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_baseline": "b98bf8c065818aac3447be165909e2a013325d9a",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_source_revision": "ea74a2c2e5f9b9ceee3d849a3cef652dccae6baa",
+  "canonical_recipe": "com.synexia.rewrite.M3LongLongProductOneProbe20261112",
+  "canonical_recipe_path": "synexia-openrewrite-recipes/recipe-crates/m3-longlong-oneprobe-20261029",
+  "postimages": {
+    "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongLongHashMap.java": "bbac634a728c2d0c6ffe51a84fea181a9d205ec97d4452e6d13e432fe912fc78",
+    "test/jdk/jdk/m3/collections/LongLongHashMapKnownSlotTest.java": "01f53e7cd94d7285f48346bdd3c88bf815e07d45185819bbdcf244c18e058be5"
+  },
+  "runs": [
+    {
+      "id": "longlong-sdk-emitted-maven",
+      "status": "passed",
+      "exit_code": 0,
+      "command": [
+        "/workspace/scratch/ae237a45f3d0/toolchain/apache-maven-3.9.9/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-Dmaven.repo.local=/workspace/scratch/f7adbdd86bb3/migration-20261112/maven-closure/m2",
+        "-f",
+        "/workspace/scratch/f7adbdd86bb3/migration-20261112/maven-closure/selected-target-tests-pom.xml",
+        "-Dm3.variant=sdk-emitted",
+        "-Dm3.testsRoot=/workspace/scratch/f7adbdd86bb3/migration-20261112/maven-closure/execution/maven-sdk-emitted/selected-tests",
+        "test"
+      ],
+      "stdout_sha256": "ad55b3713aed9a3bdcc7494b6042f1d9bfd0cadc78e6f4ae853ccc5be22f4dc5",
+      "inputs": {
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongIterator.java": "b72e1596ff2a950c09a6525fdf5714f51bea4d74c31e5250b451638a708d2176",
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongLongConsumer.java": "e1c892ba60927af3e2ab6148cd6505b75002290b67f4bcd762400de9179fbd37",
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongLongHashMap.java": "bbac634a728c2d0c6ffe51a84fea181a9d205ec97d4452e6d13e432fe912fc78",
+        "test/jdk/jdk/m3/collections/AtomicDeleteFailureOracle.java": "f5f13d2173e4a5ac7b24624233c36999cc19db7151ded6f5ce473f35edbd4694",
+        "test/jdk/jdk/m3/collections/LongLongAtomicCompactionTest.java": "71bfe90cd43dcbb006a4a17ac13f24fd429df36db3e973f491eea044e049d6aa",
+        "test/jdk/jdk/m3/collections/LongLongHashMapAddToTest.java": "8ee140598b437a4674a587f73c6f4fd13cc5e0e21916fc3fe3e3dc0a496c5265",
+        "test/jdk/jdk/m3/collections/LongLongHashMapEmptyValueProof.java": "0d423c1b4927b0fb86731a91a7756028e4164879e03e631e11cbacf940f63b59",
+        "test/jdk/jdk/m3/collections/LongLongHashMapEmptyValueTest.java": "5438bde5dfcb190c3c0fb6c09fa315a34db7ddd7939f4f23c855a11ca2bc303e",
+        "test/jdk/jdk/m3/collections/LongLongHashMapKnownSlotTest.java": "01f53e7cd94d7285f48346bdd3c88bf815e07d45185819bbdcf244c18e058be5",
+        "test/jdk/jdk/m3/collections/LongLongMapSharedTrace.java": "eba0150fc92f2abee4fa4558d3f8d215daa8d8d99b769ddeae23bcd55e773968",
+        "test/jdk/jdk/m3/collections/LongLongMapSharedTraceTest.java": "92844fbfdbdfcc84720cb400a73af35f64327585db5760f822355b9f60ce5efa",
+        "test/jdk/jdk/m3/collections/LongLongSharedTrace.java": "8a23f0c5a7c3b40c2d6d8e30c26218f0b3c5fe83fbadf25441174d8508848f46",
+        "test/jdk/jdk/m3/collections/LongMapCompactionSuccessOracle.java": "2a386549065c9e978848601fb67830bdb00bfa1144e046e369204e2df49e0a92",
+        "test/jdk/jdk/m3/collections/LongMapRealOomeTest.java": "70464dcef20564c62f40b34cfd09e69c5e9e0fb2bf73c3c5cffdb484fe6ad54a",
+        "test/jdk/jdk/m3/collections/LongMapRecoverySmoke.java": "b4935b55792254f7944b64535e2a21f1fcd48deca00f3d798a9c8b347ffca252",
+        "test/jdk/jdk/m3/collections/LongMapRecoverySmokeTest.java": "3dddd7643c802898dde2fa3672efb155b12d336819b56ac75e9544bc37265a08"
+      },
+      "stdout": "[0.002s][warning][perf,memops] Cannot use file /tmp/hsperfdata_agent/5 because it is locked by another process (errno = 11)\n[INFO] Scanning for projects...\n[INFO] \n[INFO] -----< com.synexia.verification:m3-longlong-selected-target-tests >-----\n[INFO] Building Selected current M3JDK LongLongHashMap source and target-native tests 1\n[INFO]   from selected-target-tests-pom.xml\n[INFO] --------------------------------[ jar ]---------------------------------\n[INFO] \n[INFO] --- resources:3.3.1:resources (default-resources) @ m3-longlong-selected-target-tests ---\n[INFO] skip non existing resourceDirectory /workspace/scratch/f7adbdd86bb3/migration-20261112/maven-closure/src/main/resources\n[INFO] \n[INFO] --- compiler:3.13.0:compile (default-compile) @ m3-longlong-selected-target-tests ---\n[INFO] Recompiling the module because of changed source code.\n[INFO] Compiling 3 source files with javac [debug release 21] to execution/maven-sdk-emitted/target/classes\n[INFO] \n[INFO] --- resources:3.3.1:testResources (default-testResources) @ m3-longlong-selected-target-tests ---\n[INFO] skip non existing resourceDirectory /workspace/scratch/f7adbdd86bb3/migration-20261112/maven-closure/src/test/resources\n[INFO] \n[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ m3-longlong-selected-target-tests ---\n[INFO] Recompiling the module because of changed dependency.\n[INFO] Compiling 13 source files with javac [debug release 21] to execution/maven-sdk-emitted/target/test-classes\n[INFO] \n[INFO] --- surefire:3.2.5:test (default-test) @ m3-longlong-selected-target-tests ---\n[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider\n[INFO] \n[INFO] -------------------------------------------------------\n[INFO]  T E S T S\n[INFO] -------------------------------------------------------\n[INFO] Running jdk.m3.collections.LongLongHashMapEmptyValueTest\nM3_EMPTY_VALUE_LOOKUP_PASS checks=90639 checksum=01be23927d40b781\n[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.114 s -- in jdk.m3.collections.LongLongHashMapEmptyValueTest\n[INFO] Running jdk.m3.collections.LongLongAtomicCompactionTest\nM3_COMPACTION_SUCCESS_PASS checks=6109 compactions=12 sha256=acb31e026726a5c016ece77b08f57a78de6641c93c42d42838afda213a834a37\nM3_PHYSICAL_TRACE_PASS checks=212882 sha256=32d5e783389afde983a78b2d226e9653238ff34efbed14bfd169d5944987a39e\nM3_ATOMIC_DELETE_FAILURE_PASS checks=16\n[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.319 s -- in jdk.m3.collections.LongLongAtomicCompactionTest\n[INFO] Running jdk.m3.collections.LongLongMapSharedTraceTest\nM3_LONG_MAP_SHARED_TRACE checks=302311 sha256=c13579351e14187bea41fde5181c944e7873b35bccda3f1391b604f7729492e4\n[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.574 s -- in jdk.m3.collections.LongLongMapSharedTraceTest\n[INFO] Running jdk.m3.collections.LongLongHashMapKnownSlotTest\n[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 s -- in jdk.m3.collections.LongLongHashMapKnownSlotTest\n[INFO] Running jdk.m3.collections.LongLongHashMapAddToTest\n[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.107 s -- in jdk.m3.collections.LongLongHashMapAddToTest\n[INFO] Running jdk.m3.collections.LongMapRecoverySmokeTest\nM3_LONGMAP_HISTORY_RECOVERY_SMOKE_PASS checks=240012\n[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.031 s -- in jdk.m3.collections.LongMapRecoverySmokeTest\n[INFO] \n[INFO] Results:\n[INFO] \n[INFO] Tests run: 17, Failures: 0, Errors: 0, Skipped: 0\n[INFO] \n[INFO] ------------------------------------------------------------------------\n[INFO] BUILD SUCCESS\n[INFO] ------------------------------------------------------------------------\n[INFO] Total time:  4.938 s\n[INFO] Finished at: 2026-11-12T13:22:57Z\n[INFO] ------------------------------------------------------------------------\n",
+      "scope": "Selected exact receiving-source closure on Java 21; not full reactor, jtreg, installed JDK image or all-platform qualification.",
+      "junit": {
+        "tests": 17,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "id": "longlong-sdk-emitted-real-oome-direct",
+      "status": "passed",
+      "exit_code": 0,
+      "command": [
+        "/workspace/scratch/ae237a45f3d0/toolchain/jdk-21.0.13+9/bin/java",
+        "-ea",
+        "-Xms16m",
+        "-Xmx16m",
+        "-cp",
+        "/workspace/scratch/f7adbdd86bb3/migration-20261112/maven-closure/execution/maven-sdk-emitted/target/classes:/workspace/scratch/f7adbdd86bb3/migration-20261112/maven-closure/execution/maven-sdk-emitted/target/test-classes",
+        "jdk.m3.collections.LongMapRealOomeTest",
+        "direct"
+      ],
+      "stdout_sha256": "d65b7ee9c6f42549b940c36f31b0c32f6781a980eccf4c56e9083acbe4223414",
+      "inputs": {
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongIterator.java": "b72e1596ff2a950c09a6525fdf5714f51bea4d74c31e5250b451638a708d2176",
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongLongConsumer.java": "e1c892ba60927af3e2ab6148cd6505b75002290b67f4bcd762400de9179fbd37",
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongLongHashMap.java": "bbac634a728c2d0c6ffe51a84fea181a9d205ec97d4452e6d13e432fe912fc78",
+        "test/jdk/jdk/m3/collections/AtomicDeleteFailureOracle.java": "f5f13d2173e4a5ac7b24624233c36999cc19db7151ded6f5ce473f35edbd4694",
+        "test/jdk/jdk/m3/collections/LongLongAtomicCompactionTest.java": "71bfe90cd43dcbb006a4a17ac13f24fd429df36db3e973f491eea044e049d6aa",
+        "test/jdk/jdk/m3/collections/LongLongHashMapAddToTest.java": "8ee140598b437a4674a587f73c6f4fd13cc5e0e21916fc3fe3e3dc0a496c5265",
+        "test/jdk/jdk/m3/collections/LongLongHashMapEmptyValueProof.java": "0d423c1b4927b0fb86731a91a7756028e4164879e03e631e11cbacf940f63b59",
+        "test/jdk/jdk/m3/collections/LongLongHashMapEmptyValueTest.java": "5438bde5dfcb190c3c0fb6c09fa315a34db7ddd7939f4f23c855a11ca2bc303e",
+        "test/jdk/jdk/m3/collections/LongLongHashMapKnownSlotTest.java": "01f53e7cd94d7285f48346bdd3c88bf815e07d45185819bbdcf244c18e058be5",
+        "test/jdk/jdk/m3/collections/LongLongMapSharedTrace.java": "eba0150fc92f2abee4fa4558d3f8d215daa8d8d99b769ddeae23bcd55e773968",
+        "test/jdk/jdk/m3/collections/LongLongMapSharedTraceTest.java": "92844fbfdbdfcc84720cb400a73af35f64327585db5760f822355b9f60ce5efa",
+        "test/jdk/jdk/m3/collections/LongLongSharedTrace.java": "8a23f0c5a7c3b40c2d6d8e30c26218f0b3c5fe83fbadf25441174d8508848f46",
+        "test/jdk/jdk/m3/collections/LongMapCompactionSuccessOracle.java": "2a386549065c9e978848601fb67830bdb00bfa1144e046e369204e2df49e0a92",
+        "test/jdk/jdk/m3/collections/LongMapRealOomeTest.java": "70464dcef20564c62f40b34cfd09e69c5e9e0fb2bf73c3c5cffdb484fe6ad54a",
+        "test/jdk/jdk/m3/collections/LongMapRecoverySmoke.java": "b4935b55792254f7944b64535e2a21f1fcd48deca00f3d798a9c8b347ffca252",
+        "test/jdk/jdk/m3/collections/LongMapRecoverySmokeTest.java": "3dddd7643c802898dde2fa3672efb155b12d336819b56ac75e9544bc37265a08"
+      },
+      "stdout": "M3_LONGMAP_REAL_OOME_PASS mode=direct assertions=3007 ballast=195\n",
+      "scope": "Selected exact receiving-source closure on Java 21; not full reactor, jtreg, installed JDK image or all-platform qualification."
+    },
+    {
+      "id": "longlong-sdk-emitted-real-oome-conditional",
+      "status": "passed",
+      "exit_code": 0,
+      "command": [
+        "/workspace/scratch/ae237a45f3d0/toolchain/jdk-21.0.13+9/bin/java",
+        "-ea",
+        "-Xms16m",
+        "-Xmx16m",
+        "-cp",
+        "/workspace/scratch/f7adbdd86bb3/migration-20261112/maven-closure/execution/maven-sdk-emitted/target/classes:/workspace/scratch/f7adbdd86bb3/migration-20261112/maven-closure/execution/maven-sdk-emitted/target/test-classes",
+        "jdk.m3.collections.LongMapRealOomeTest",
+        "conditional"
+      ],
+      "stdout_sha256": "ec5f16af13513db2985404bd9316df2b40617ab3552e538da28df5369256b395",
+      "inputs": {
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongIterator.java": "b72e1596ff2a950c09a6525fdf5714f51bea4d74c31e5250b451638a708d2176",
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongLongConsumer.java": "e1c892ba60927af3e2ab6148cd6505b75002290b67f4bcd762400de9179fbd37",
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongLongHashMap.java": "bbac634a728c2d0c6ffe51a84fea181a9d205ec97d4452e6d13e432fe912fc78",
+        "test/jdk/jdk/m3/collections/AtomicDeleteFailureOracle.java": "f5f13d2173e4a5ac7b24624233c36999cc19db7151ded6f5ce473f35edbd4694",
+        "test/jdk/jdk/m3/collections/LongLongAtomicCompactionTest.java": "71bfe90cd43dcbb006a4a17ac13f24fd429df36db3e973f491eea044e049d6aa",
+        "test/jdk/jdk/m3/collections/LongLongHashMapAddToTest.java": "8ee140598b437a4674a587f73c6f4fd13cc5e0e21916fc3fe3e3dc0a496c5265",
+        "test/jdk/jdk/m3/collections/LongLongHashMapEmptyValueProof.java": "0d423c1b4927b0fb86731a91a7756028e4164879e03e631e11cbacf940f63b59",
+        "test/jdk/jdk/m3/collections/LongLongHashMapEmptyValueTest.java": "5438bde5dfcb190c3c0fb6c09fa315a34db7ddd7939f4f23c855a11ca2bc303e",
+        "test/jdk/jdk/m3/collections/LongLongHashMapKnownSlotTest.java": "01f53e7cd94d7285f48346bdd3c88bf815e07d45185819bbdcf244c18e058be5",
+        "test/jdk/jdk/m3/collections/LongLongMapSharedTrace.java": "eba0150fc92f2abee4fa4558d3f8d215daa8d8d99b769ddeae23bcd55e773968",
+        "test/jdk/jdk/m3/collections/LongLongMapSharedTraceTest.java": "92844fbfdbdfcc84720cb400a73af35f64327585db5760f822355b9f60ce5efa",
+        "test/jdk/jdk/m3/collections/LongLongSharedTrace.java": "8a23f0c5a7c3b40c2d6d8e30c26218f0b3c5fe83fbadf25441174d8508848f46",
+        "test/jdk/jdk/m3/collections/LongMapCompactionSuccessOracle.java": "2a386549065c9e978848601fb67830bdb00bfa1144e046e369204e2df49e0a92",
+        "test/jdk/jdk/m3/collections/LongMapRealOomeTest.java": "70464dcef20564c62f40b34cfd09e69c5e9e0fb2bf73c3c5cffdb484fe6ad54a",
+        "test/jdk/jdk/m3/collections/LongMapRecoverySmoke.java": "b4935b55792254f7944b64535e2a21f1fcd48deca00f3d798a9c8b347ffca252",
+        "test/jdk/jdk/m3/collections/LongMapRecoverySmokeTest.java": "3dddd7643c802898dde2fa3672efb155b12d336819b56ac75e9544bc37265a08"
+      },
+      "stdout": "M3_LONGMAP_REAL_OOME_PASS mode=conditional assertions=3007 ballast=195\n",
+      "scope": "Selected exact receiving-source closure on Java 21; not full reactor, jtreg, installed JDK image or all-platform qualification."
+    },
+    {
+      "id": "longlong-sdk-emitted-shared-trace-interpreter",
+      "status": "passed",
+      "exit_code": 0,
+      "command": [
+        "/workspace/scratch/ae237a45f3d0/toolchain/jdk-21.0.13+9/bin/java",
+        "-ea",
+        "-Xverify:all",
+        "-Xmx512m",
+        "-Xint",
+        "-cp",
+        "/workspace/scratch/f7adbdd86bb3/migration-20261112/maven-closure/execution/maven-sdk-emitted/target/classes:/workspace/scratch/f7adbdd86bb3/migration-20261112/maven-closure/execution/maven-sdk-emitted/target/test-classes",
+        "jdk.m3.collections.LongLongMapSharedTrace"
+      ],
+      "stdout_sha256": "41ed27f56ebf19d2859486e934b90b3446e7948fb59fa624ca37b12e5c0fdec7",
+      "inputs": {
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongIterator.java": "b72e1596ff2a950c09a6525fdf5714f51bea4d74c31e5250b451638a708d2176",
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongLongConsumer.java": "e1c892ba60927af3e2ab6148cd6505b75002290b67f4bcd762400de9179fbd37",
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongLongHashMap.java": "bbac634a728c2d0c6ffe51a84fea181a9d205ec97d4452e6d13e432fe912fc78",
+        "test/jdk/jdk/m3/collections/AtomicDeleteFailureOracle.java": "f5f13d2173e4a5ac7b24624233c36999cc19db7151ded6f5ce473f35edbd4694",
+        "test/jdk/jdk/m3/collections/LongLongAtomicCompactionTest.java": "71bfe90cd43dcbb006a4a17ac13f24fd429df36db3e973f491eea044e049d6aa",
+        "test/jdk/jdk/m3/collections/LongLongHashMapAddToTest.java": "8ee140598b437a4674a587f73c6f4fd13cc5e0e21916fc3fe3e3dc0a496c5265",
+        "test/jdk/jdk/m3/collections/LongLongHashMapEmptyValueProof.java": "0d423c1b4927b0fb86731a91a7756028e4164879e03e631e11cbacf940f63b59",
+        "test/jdk/jdk/m3/collections/LongLongHashMapEmptyValueTest.java": "5438bde5dfcb190c3c0fb6c09fa315a34db7ddd7939f4f23c855a11ca2bc303e",
+        "test/jdk/jdk/m3/collections/LongLongHashMapKnownSlotTest.java": "01f53e7cd94d7285f48346bdd3c88bf815e07d45185819bbdcf244c18e058be5",
+        "test/jdk/jdk/m3/collections/LongLongMapSharedTrace.java": "eba0150fc92f2abee4fa4558d3f8d215daa8d8d99b769ddeae23bcd55e773968",
+        "test/jdk/jdk/m3/collections/LongLongMapSharedTraceTest.java": "92844fbfdbdfcc84720cb400a73af35f64327585db5760f822355b9f60ce5efa",
+        "test/jdk/jdk/m3/collections/LongLongSharedTrace.java": "8a23f0c5a7c3b40c2d6d8e30c26218f0b3c5fe83fbadf25441174d8508848f46",
+        "test/jdk/jdk/m3/collections/LongMapCompactionSuccessOracle.java": "2a386549065c9e978848601fb67830bdb00bfa1144e046e369204e2df49e0a92",
+        "test/jdk/jdk/m3/collections/LongMapRealOomeTest.java": "70464dcef20564c62f40b34cfd09e69c5e9e0fb2bf73c3c5cffdb484fe6ad54a",
+        "test/jdk/jdk/m3/collections/LongMapRecoverySmoke.java": "b4935b55792254f7944b64535e2a21f1fcd48deca00f3d798a9c8b347ffca252",
+        "test/jdk/jdk/m3/collections/LongMapRecoverySmokeTest.java": "3dddd7643c802898dde2fa3672efb155b12d336819b56ac75e9544bc37265a08"
+      },
+      "stdout": "M3_LONG_MAP_SHARED_TRACE checks=302311 sha256=c13579351e14187bea41fde5181c944e7873b35bccda3f1391b604f7729492e4\n",
+      "scope": "Selected exact receiving-source closure on Java 21; not full reactor, jtreg, installed JDK image or all-platform qualification."
+    },
+    {
+      "id": "longlong-sdk-emitted-compaction-interpreter",
+      "status": "passed",
+      "exit_code": 0,
+      "command": [
+        "/workspace/scratch/ae237a45f3d0/toolchain/jdk-21.0.13+9/bin/java",
+        "-ea",
+        "-Xverify:all",
+        "-Xmx512m",
+        "-Xint",
+        "-cp",
+        "/workspace/scratch/f7adbdd86bb3/migration-20261112/maven-closure/execution/maven-sdk-emitted/target/classes:/workspace/scratch/f7adbdd86bb3/migration-20261112/maven-closure/execution/maven-sdk-emitted/target/test-classes",
+        "jdk.m3.collections.LongMapCompactionSuccessOracle"
+      ],
+      "stdout_sha256": "1135924e7d16bf43d400c36e07140fd88897117332dd220606c1b8b17402fbe4",
+      "inputs": {
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongIterator.java": "b72e1596ff2a950c09a6525fdf5714f51bea4d74c31e5250b451638a708d2176",
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongLongConsumer.java": "e1c892ba60927af3e2ab6148cd6505b75002290b67f4bcd762400de9179fbd37",
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongLongHashMap.java": "bbac634a728c2d0c6ffe51a84fea181a9d205ec97d4452e6d13e432fe912fc78",
+        "test/jdk/jdk/m3/collections/AtomicDeleteFailureOracle.java": "f5f13d2173e4a5ac7b24624233c36999cc19db7151ded6f5ce473f35edbd4694",
+        "test/jdk/jdk/m3/collections/LongLongAtomicCompactionTest.java": "71bfe90cd43dcbb006a4a17ac13f24fd429df36db3e973f491eea044e049d6aa",
+        "test/jdk/jdk/m3/collections/LongLongHashMapAddToTest.java": "8ee140598b437a4674a587f73c6f4fd13cc5e0e21916fc3fe3e3dc0a496c5265",
+        "test/jdk/jdk/m3/collections/LongLongHashMapEmptyValueProof.java": "0d423c1b4927b0fb86731a91a7756028e4164879e03e631e11cbacf940f63b59",
+        "test/jdk/jdk/m3/collections/LongLongHashMapEmptyValueTest.java": "5438bde5dfcb190c3c0fb6c09fa315a34db7ddd7939f4f23c855a11ca2bc303e",
+        "test/jdk/jdk/m3/collections/LongLongHashMapKnownSlotTest.java": "01f53e7cd94d7285f48346bdd3c88bf815e07d45185819bbdcf244c18e058be5",
+        "test/jdk/jdk/m3/collections/LongLongMapSharedTrace.java": "eba0150fc92f2abee4fa4558d3f8d215daa8d8d99b769ddeae23bcd55e773968",
+        "test/jdk/jdk/m3/collections/LongLongMapSharedTraceTest.java": "92844fbfdbdfcc84720cb400a73af35f64327585db5760f822355b9f60ce5efa",
+        "test/jdk/jdk/m3/collections/LongLongSharedTrace.java": "8a23f0c5a7c3b40c2d6d8e30c26218f0b3c5fe83fbadf25441174d8508848f46",
+        "test/jdk/jdk/m3/collections/LongMapCompactionSuccessOracle.java": "2a386549065c9e978848601fb67830bdb00bfa1144e046e369204e2df49e0a92",
+        "test/jdk/jdk/m3/collections/LongMapRealOomeTest.java": "70464dcef20564c62f40b34cfd09e69c5e9e0fb2bf73c3c5cffdb484fe6ad54a",
+        "test/jdk/jdk/m3/collections/LongMapRecoverySmoke.java": "b4935b55792254f7944b64535e2a21f1fcd48deca00f3d798a9c8b347ffca252",
+        "test/jdk/jdk/m3/collections/LongMapRecoverySmokeTest.java": "3dddd7643c802898dde2fa3672efb155b12d336819b56ac75e9544bc37265a08"
+      },
+      "stdout": "M3_COMPACTION_SUCCESS_PASS checks=6109 compactions=12 sha256=acb31e026726a5c016ece77b08f57a78de6641c93c42d42838afda213a834a37\n",
+      "scope": "Selected exact receiving-source closure on Java 21; not full reactor, jtreg, installed JDK image or all-platform qualification."
+    },
+    {
+      "id": "longlong-sdk-emitted-shared-trace-c1",
+      "status": "passed",
+      "exit_code": 0,
+      "command": [
+        "/workspace/scratch/ae237a45f3d0/toolchain/jdk-21.0.13+9/bin/java",
+        "-ea",
+        "-Xverify:all",
+        "-Xmx512m",
+        "-XX:TieredStopAtLevel=1",
+        "-cp",
+        "/workspace/scratch/f7adbdd86bb3/migration-20261112/maven-closure/execution/maven-sdk-emitted/target/classes:/workspace/scratch/f7adbdd86bb3/migration-20261112/maven-closure/execution/maven-sdk-emitted/target/test-classes",
+        "jdk.m3.collections.LongLongMapSharedTrace"
+      ],
+      "stdout_sha256": "41ed27f56ebf19d2859486e934b90b3446e7948fb59fa624ca37b12e5c0fdec7",
+      "inputs": {
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongIterator.java": "b72e1596ff2a950c09a6525fdf5714f51bea4d74c31e5250b451638a708d2176",
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongLongConsumer.java": "e1c892ba60927af3e2ab6148cd6505b75002290b67f4bcd762400de9179fbd37",
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongLongHashMap.java": "bbac634a728c2d0c6ffe51a84fea181a9d205ec97d4452e6d13e432fe912fc78",
+        "test/jdk/jdk/m3/collections/AtomicDeleteFailureOracle.java": "f5f13d2173e4a5ac7b24624233c36999cc19db7151ded6f5ce473f35edbd4694",
+        "test/jdk/jdk/m3/collections/LongLongAtomicCompactionTest.java": "71bfe90cd43dcbb006a4a17ac13f24fd429df36db3e973f491eea044e049d6aa",
+        "test/jdk/jdk/m3/collections/LongLongHashMapAddToTest.java": "8ee140598b437a4674a587f73c6f4fd13cc5e0e21916fc3fe3e3dc0a496c5265",
+        "test/jdk/jdk/m3/collections/LongLongHashMapEmptyValueProof.java": "0d423c1b4927b0fb86731a91a7756028e4164879e03e631e11cbacf940f63b59",
+        "test/jdk/jdk/m3/collections/LongLongHashMapEmptyValueTest.java": "5438bde5dfcb190c3c0fb6c09fa315a34db7ddd7939f4f23c855a11ca2bc303e",
+        "test/jdk/jdk/m3/collections/LongLongHashMapKnownSlotTest.java": "01f53e7cd94d7285f48346bdd3c88bf815e07d45185819bbdcf244c18e058be5",
+        "test/jdk/jdk/m3/collections/LongLongMapSharedTrace.java": "eba0150fc92f2abee4fa4558d3f8d215daa8d8d99b769ddeae23bcd55e773968",
+        "test/jdk/jdk/m3/collections/LongLongMapSharedTraceTest.java": "92844fbfdbdfcc84720cb400a73af35f64327585db5760f822355b9f60ce5efa",
+        "test/jdk/jdk/m3/collections/LongLongSharedTrace.java": "8a23f0c5a7c3b40c2d6d8e30c26218f0b3c5fe83fbadf25441174d8508848f46",
+        "test/jdk/jdk/m3/collections/LongMapCompactionSuccessOracle.java": "2a386549065c9e978848601fb67830bdb00bfa1144e046e369204e2df49e0a92",
+        "test/jdk/jdk/m3/collections/LongMapRealOomeTest.java": "70464dcef20564c62f40b34cfd09e69c5e9e0fb2bf73c3c5cffdb484fe6ad54a",
+        "test/jdk/jdk/m3/collections/LongMapRecoverySmoke.java": "b4935b55792254f7944b64535e2a21f1fcd48deca00f3d798a9c8b347ffca252",
+        "test/jdk/jdk/m3/collections/LongMapRecoverySmokeTest.java": "3dddd7643c802898dde2fa3672efb155b12d336819b56ac75e9544bc37265a08"
+      },
+      "stdout": "M3_LONG_MAP_SHARED_TRACE checks=302311 sha256=c13579351e14187bea41fde5181c944e7873b35bccda3f1391b604f7729492e4\n",
+      "scope": "Selected exact receiving-source closure on Java 21; not full reactor, jtreg, installed JDK image or all-platform qualification."
+    },
+    {
+      "id": "longlong-sdk-emitted-compaction-c1",
+      "status": "passed",
+      "exit_code": 0,
+      "command": [
+        "/workspace/scratch/ae237a45f3d0/toolchain/jdk-21.0.13+9/bin/java",
+        "-ea",
+        "-Xverify:all",
+        "-Xmx512m",
+        "-XX:TieredStopAtLevel=1",
+        "-cp",
+        "/workspace/scratch/f7adbdd86bb3/migration-20261112/maven-closure/execution/maven-sdk-emitted/target/classes:/workspace/scratch/f7adbdd86bb3/migration-20261112/maven-closure/execution/maven-sdk-emitted/target/test-classes",
+        "jdk.m3.collections.LongMapCompactionSuccessOracle"
+      ],
+      "stdout_sha256": "1135924e7d16bf43d400c36e07140fd88897117332dd220606c1b8b17402fbe4",
+      "inputs": {
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongIterator.java": "b72e1596ff2a950c09a6525fdf5714f51bea4d74c31e5250b451638a708d2176",
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongLongConsumer.java": "e1c892ba60927af3e2ab6148cd6505b75002290b67f4bcd762400de9179fbd37",
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongLongHashMap.java": "bbac634a728c2d0c6ffe51a84fea181a9d205ec97d4452e6d13e432fe912fc78",
+        "test/jdk/jdk/m3/collections/AtomicDeleteFailureOracle.java": "f5f13d2173e4a5ac7b24624233c36999cc19db7151ded6f5ce473f35edbd4694",
+        "test/jdk/jdk/m3/collections/LongLongAtomicCompactionTest.java": "71bfe90cd43dcbb006a4a17ac13f24fd429df36db3e973f491eea044e049d6aa",
+        "test/jdk/jdk/m3/collections/LongLongHashMapAddToTest.java": "8ee140598b437a4674a587f73c6f4fd13cc5e0e21916fc3fe3e3dc0a496c5265",
+        "test/jdk/jdk/m3/collections/LongLongHashMapEmptyValueProof.java": "0d423c1b4927b0fb86731a91a7756028e4164879e03e631e11cbacf940f63b59",
+        "test/jdk/jdk/m3/collections/LongLongHashMapEmptyValueTest.java": "5438bde5dfcb190c3c0fb6c09fa315a34db7ddd7939f4f23c855a11ca2bc303e",
+        "test/jdk/jdk/m3/collections/LongLongHashMapKnownSlotTest.java": "01f53e7cd94d7285f48346bdd3c88bf815e07d45185819bbdcf244c18e058be5",
+        "test/jdk/jdk/m3/collections/LongLongMapSharedTrace.java": "eba0150fc92f2abee4fa4558d3f8d215daa8d8d99b769ddeae23bcd55e773968",
+        "test/jdk/jdk/m3/collections/LongLongMapSharedTraceTest.java": "92844fbfdbdfcc84720cb400a73af35f64327585db5760f822355b9f60ce5efa",
+        "test/jdk/jdk/m3/collections/LongLongSharedTrace.java": "8a23f0c5a7c3b40c2d6d8e30c26218f0b3c5fe83fbadf25441174d8508848f46",
+        "test/jdk/jdk/m3/collections/LongMapCompactionSuccessOracle.java": "2a386549065c9e978848601fb67830bdb00bfa1144e046e369204e2df49e0a92",
+        "test/jdk/jdk/m3/collections/LongMapRealOomeTest.java": "70464dcef20564c62f40b34cfd09e69c5e9e0fb2bf73c3c5cffdb484fe6ad54a",
+        "test/jdk/jdk/m3/collections/LongMapRecoverySmoke.java": "b4935b55792254f7944b64535e2a21f1fcd48deca00f3d798a9c8b347ffca252",
+        "test/jdk/jdk/m3/collections/LongMapRecoverySmokeTest.java": "3dddd7643c802898dde2fa3672efb155b12d336819b56ac75e9544bc37265a08"
+      },
+      "stdout": "M3_COMPACTION_SUCCESS_PASS checks=6109 compactions=12 sha256=acb31e026726a5c016ece77b08f57a78de6641c93c42d42838afda213a834a37\n",
+      "scope": "Selected exact receiving-source closure on Java 21; not full reactor, jtreg, installed JDK image or all-platform qualification."
+    },
+    {
+      "id": "longlong-sdk-emitted-shared-trace-c2",
+      "status": "passed",
+      "exit_code": 0,
+      "command": [
+        "/workspace/scratch/ae237a45f3d0/toolchain/jdk-21.0.13+9/bin/java",
+        "-ea",
+        "-Xverify:all",
+        "-Xmx512m",
+        "-XX:-TieredCompilation",
+        "-cp",
+        "/workspace/scratch/f7adbdd86bb3/migration-20261112/maven-closure/execution/maven-sdk-emitted/target/classes:/workspace/scratch/f7adbdd86bb3/migration-20261112/maven-closure/execution/maven-sdk-emitted/target/test-classes",
+        "jdk.m3.collections.LongLongMapSharedTrace"
+      ],
+      "stdout_sha256": "41ed27f56ebf19d2859486e934b90b3446e7948fb59fa624ca37b12e5c0fdec7",
+      "inputs": {
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongIterator.java": "b72e1596ff2a950c09a6525fdf5714f51bea4d74c31e5250b451638a708d2176",
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongLongConsumer.java": "e1c892ba60927af3e2ab6148cd6505b75002290b67f4bcd762400de9179fbd37",
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongLongHashMap.java": "bbac634a728c2d0c6ffe51a84fea181a9d205ec97d4452e6d13e432fe912fc78",
+        "test/jdk/jdk/m3/collections/AtomicDeleteFailureOracle.java": "f5f13d2173e4a5ac7b24624233c36999cc19db7151ded6f5ce473f35edbd4694",
+        "test/jdk/jdk/m3/collections/LongLongAtomicCompactionTest.java": "71bfe90cd43dcbb006a4a17ac13f24fd429df36db3e973f491eea044e049d6aa",
+        "test/jdk/jdk/m3/collections/LongLongHashMapAddToTest.java": "8ee140598b437a4674a587f73c6f4fd13cc5e0e21916fc3fe3e3dc0a496c5265",
+        "test/jdk/jdk/m3/collections/LongLongHashMapEmptyValueProof.java": "0d423c1b4927b0fb86731a91a7756028e4164879e03e631e11cbacf940f63b59",
+        "test/jdk/jdk/m3/collections/LongLongHashMapEmptyValueTest.java": "5438bde5dfcb190c3c0fb6c09fa315a34db7ddd7939f4f23c855a11ca2bc303e",
+        "test/jdk/jdk/m3/collections/LongLongHashMapKnownSlotTest.java": "01f53e7cd94d7285f48346bdd3c88bf815e07d45185819bbdcf244c18e058be5",
+        "test/jdk/jdk/m3/collections/LongLongMapSharedTrace.java": "eba0150fc92f2abee4fa4558d3f8d215daa8d8d99b769ddeae23bcd55e773968",
+        "test/jdk/jdk/m3/collections/LongLongMapSharedTraceTest.java": "92844fbfdbdfcc84720cb400a73af35f64327585db5760f822355b9f60ce5efa",
+        "test/jdk/jdk/m3/collections/LongLongSharedTrace.java": "8a23f0c5a7c3b40c2d6d8e30c26218f0b3c5fe83fbadf25441174d8508848f46",
+        "test/jdk/jdk/m3/collections/LongMapCompactionSuccessOracle.java": "2a386549065c9e978848601fb67830bdb00bfa1144e046e369204e2df49e0a92",
+        "test/jdk/jdk/m3/collections/LongMapRealOomeTest.java": "70464dcef20564c62f40b34cfd09e69c5e9e0fb2bf73c3c5cffdb484fe6ad54a",
+        "test/jdk/jdk/m3/collections/LongMapRecoverySmoke.java": "b4935b55792254f7944b64535e2a21f1fcd48deca00f3d798a9c8b347ffca252",
+        "test/jdk/jdk/m3/collections/LongMapRecoverySmokeTest.java": "3dddd7643c802898dde2fa3672efb155b12d336819b56ac75e9544bc37265a08"
+      },
+      "stdout": "M3_LONG_MAP_SHARED_TRACE checks=302311 sha256=c13579351e14187bea41fde5181c944e7873b35bccda3f1391b604f7729492e4\n",
+      "scope": "Selected exact receiving-source closure on Java 21; not full reactor, jtreg, installed JDK image or all-platform qualification."
+    },
+    {
+      "id": "longlong-sdk-emitted-compaction-c2",
+      "status": "passed",
+      "exit_code": 0,
+      "command": [
+        "/workspace/scratch/ae237a45f3d0/toolchain/jdk-21.0.13+9/bin/java",
+        "-ea",
+        "-Xverify:all",
+        "-Xmx512m",
+        "-XX:-TieredCompilation",
+        "-cp",
+        "/workspace/scratch/f7adbdd86bb3/migration-20261112/maven-closure/execution/maven-sdk-emitted/target/classes:/workspace/scratch/f7adbdd86bb3/migration-20261112/maven-closure/execution/maven-sdk-emitted/target/test-classes",
+        "jdk.m3.collections.LongMapCompactionSuccessOracle"
+      ],
+      "stdout_sha256": "1135924e7d16bf43d400c36e07140fd88897117332dd220606c1b8b17402fbe4",
+      "inputs": {
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongIterator.java": "b72e1596ff2a950c09a6525fdf5714f51bea4d74c31e5250b451638a708d2176",
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongLongConsumer.java": "e1c892ba60927af3e2ab6148cd6505b75002290b67f4bcd762400de9179fbd37",
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongLongHashMap.java": "bbac634a728c2d0c6ffe51a84fea181a9d205ec97d4452e6d13e432fe912fc78",
+        "test/jdk/jdk/m3/collections/AtomicDeleteFailureOracle.java": "f5f13d2173e4a5ac7b24624233c36999cc19db7151ded6f5ce473f35edbd4694",
+        "test/jdk/jdk/m3/collections/LongLongAtomicCompactionTest.java": "71bfe90cd43dcbb006a4a17ac13f24fd429df36db3e973f491eea044e049d6aa",
+        "test/jdk/jdk/m3/collections/LongLongHashMapAddToTest.java": "8ee140598b437a4674a587f73c6f4fd13cc5e0e21916fc3fe3e3dc0a496c5265",
+        "test/jdk/jdk/m3/collections/LongLongHashMapEmptyValueProof.java": "0d423c1b4927b0fb86731a91a7756028e4164879e03e631e11cbacf940f63b59",
+        "test/jdk/jdk/m3/collections/LongLongHashMapEmptyValueTest.java": "5438bde5dfcb190c3c0fb6c09fa315a34db7ddd7939f4f23c855a11ca2bc303e",
+        "test/jdk/jdk/m3/collections/LongLongHashMapKnownSlotTest.java": "01f53e7cd94d7285f48346bdd3c88bf815e07d45185819bbdcf244c18e058be5",
+        "test/jdk/jdk/m3/collections/LongLongMapSharedTrace.java": "eba0150fc92f2abee4fa4558d3f8d215daa8d8d99b769ddeae23bcd55e773968",
+        "test/jdk/jdk/m3/collections/LongLongMapSharedTraceTest.java": "92844fbfdbdfcc84720cb400a73af35f64327585db5760f822355b9f60ce5efa",
+        "test/jdk/jdk/m3/collections/LongLongSharedTrace.java": "8a23f0c5a7c3b40c2d6d8e30c26218f0b3c5fe83fbadf25441174d8508848f46",
+        "test/jdk/jdk/m3/collections/LongMapCompactionSuccessOracle.java": "2a386549065c9e978848601fb67830bdb00bfa1144e046e369204e2df49e0a92",
+        "test/jdk/jdk/m3/collections/LongMapRealOomeTest.java": "70464dcef20564c62f40b34cfd09e69c5e9e0fb2bf73c3c5cffdb484fe6ad54a",
+        "test/jdk/jdk/m3/collections/LongMapRecoverySmoke.java": "b4935b55792254f7944b64535e2a21f1fcd48deca00f3d798a9c8b347ffca252",
+        "test/jdk/jdk/m3/collections/LongMapRecoverySmokeTest.java": "3dddd7643c802898dde2fa3672efb155b12d336819b56ac75e9544bc37265a08"
+      },
+      "stdout": "M3_COMPACTION_SUCCESS_PASS checks=6109 compactions=12 sha256=acb31e026726a5c016ece77b08f57a78de6641c93c42d42838afda213a834a37\n",
+      "scope": "Selected exact receiving-source closure on Java 21; not full reactor, jtreg, installed JDK image or all-platform qualification."
+    },
+    {
+      "id": "longlong-sdk-emitted-public-api",
+      "status": "passed",
+      "exit_code": 0,
+      "command": [
+        "/workspace/scratch/ae237a45f3d0/toolchain/jdk-21.0.13+9/bin/javap",
+        "-classpath",
+        "/workspace/scratch/f7adbdd86bb3/migration-20261112/maven-closure/execution/maven-sdk-emitted/target/classes",
+        "-public",
+        "-s",
+        "jdk.m3.collections.LongLongHashMap"
+      ],
+      "stdout_sha256": "8fddc289aa682719abfd23648900b99af012a85d106fde92a7c85c1caa71b42f",
+      "inputs": {
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongIterator.java": "b72e1596ff2a950c09a6525fdf5714f51bea4d74c31e5250b451638a708d2176",
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongLongConsumer.java": "e1c892ba60927af3e2ab6148cd6505b75002290b67f4bcd762400de9179fbd37",
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongLongHashMap.java": "bbac634a728c2d0c6ffe51a84fea181a9d205ec97d4452e6d13e432fe912fc78",
+        "test/jdk/jdk/m3/collections/AtomicDeleteFailureOracle.java": "f5f13d2173e4a5ac7b24624233c36999cc19db7151ded6f5ce473f35edbd4694",
+        "test/jdk/jdk/m3/collections/LongLongAtomicCompactionTest.java": "71bfe90cd43dcbb006a4a17ac13f24fd429df36db3e973f491eea044e049d6aa",
+        "test/jdk/jdk/m3/collections/LongLongHashMapAddToTest.java": "8ee140598b437a4674a587f73c6f4fd13cc5e0e21916fc3fe3e3dc0a496c5265",
+        "test/jdk/jdk/m3/collections/LongLongHashMapEmptyValueProof.java": "0d423c1b4927b0fb86731a91a7756028e4164879e03e631e11cbacf940f63b59",
+        "test/jdk/jdk/m3/collections/LongLongHashMapEmptyValueTest.java": "5438bde5dfcb190c3c0fb6c09fa315a34db7ddd7939f4f23c855a11ca2bc303e",
+        "test/jdk/jdk/m3/collections/LongLongHashMapKnownSlotTest.java": "01f53e7cd94d7285f48346bdd3c88bf815e07d45185819bbdcf244c18e058be5",
+        "test/jdk/jdk/m3/collections/LongLongMapSharedTrace.java": "eba0150fc92f2abee4fa4558d3f8d215daa8d8d99b769ddeae23bcd55e773968",
+        "test/jdk/jdk/m3/collections/LongLongMapSharedTraceTest.java": "92844fbfdbdfcc84720cb400a73af35f64327585db5760f822355b9f60ce5efa",
+        "test/jdk/jdk/m3/collections/LongLongSharedTrace.java": "8a23f0c5a7c3b40c2d6d8e30c26218f0b3c5fe83fbadf25441174d8508848f46",
+        "test/jdk/jdk/m3/collections/LongMapCompactionSuccessOracle.java": "2a386549065c9e978848601fb67830bdb00bfa1144e046e369204e2df49e0a92",
+        "test/jdk/jdk/m3/collections/LongMapRealOomeTest.java": "70464dcef20564c62f40b34cfd09e69c5e9e0fb2bf73c3c5cffdb484fe6ad54a",
+        "test/jdk/jdk/m3/collections/LongMapRecoverySmoke.java": "b4935b55792254f7944b64535e2a21f1fcd48deca00f3d798a9c8b347ffca252",
+        "test/jdk/jdk/m3/collections/LongMapRecoverySmokeTest.java": "3dddd7643c802898dde2fa3672efb155b12d336819b56ac75e9544bc37265a08"
+      },
+      "stdout": "Compiled from \"LongLongHashMap.java\"\npublic final class jdk.m3.collections.LongLongHashMap {\n  public jdk.m3.collections.LongLongHashMap();\n    descriptor: ()V\n\n  public jdk.m3.collections.LongLongHashMap(int);\n    descriptor: (I)V\n\n  public boolean put(long, long);\n    descriptor: (JJ)Z\n\n  public long addTo(long, long);\n    descriptor: (JJ)J\n\n  public long getOrDefault(long, long);\n    descriptor: (JJ)J\n\n  public boolean containsKey(long);\n    descriptor: (J)Z\n\n  public boolean containsValue(long);\n    descriptor: (J)Z\n\n  public boolean replace(long, long, long);\n    descriptor: (JJJ)Z\n\n  public boolean remove(long);\n    descriptor: (J)Z\n\n  public boolean remove(long, long);\n    descriptor: (JJ)Z\n\n  public int size();\n    descriptor: ()I\n\n  public boolean isEmpty();\n    descriptor: ()Z\n\n  public int capacity();\n    descriptor: ()I\n\n  public void clear();\n    descriptor: ()V\n\n  public void trimToSize();\n    descriptor: ()V\n\n  public void forEach(jdk.m3.collections.LongLongConsumer);\n    descriptor: (Ljdk/m3/collections/LongLongConsumer;)V\n\n  public jdk.m3.collections.LongIterator keyIterator();\n    descriptor: ()Ljdk/m3/collections/LongIterator;\n\n  public long[] keysToArray();\n    descriptor: ()[J\n}\n",
+      "scope": "Selected exact receiving-source closure on Java 21; not full reactor, jtreg, installed JDK image or all-platform qualification.",
+      "comparison": {
+        "baseline_commit": "b98bf8c065818aac3447be165909e2a013325d9a",
+        "baseline_source_sha256": "937c680743188332973d191a4bac47a92b95f2fddd3116459d7b863d2f13d338",
+        "baseline_command": [
+          "/workspace/scratch/ae237a45f3d0/toolchain/jdk-21.0.13+9/bin/javap",
+          "-classpath",
+          "/workspace/scratch/f7adbdd86bb3/migration-20261112/maven-closure/execution/baseline/classes",
+          "-public",
+          "-s",
+          "jdk.m3.collections.LongLongHashMap"
+        ],
+        "baseline_stdout_sha256": "8fddc289aa682719abfd23648900b99af012a85d106fde92a7c85c1caa71b42f",
+        "identical": true,
+        "surface": "javap -public -s"
+      }
+    }
+  ],
+  "capture": {
+    "combined_stdout_stderr": true,
+    "recorded_log_sha256": "25889a757bf616e486125f939aa90da1215aa9d3d785a0436e9df80d27f2c770",
+    "recorded_results_sha256": "1d971b2234aca0f3cde9f374bff03261564780b4836a5b589395f8ebed722fa3",
+    "recorded_driver_sha256": "b23687b40cedfec2f3e73430eee0f94c0cf1b8e5c34caafb6123facea4c2dccb",
+    "recorded_pom_sha256": "fa205deca45950c0c86ab913e75691e57b7a25a53dc7f334ae372382c5868473",
+    "rule": "Run command/output pairs extracted from the successful recorded driver execution; hashes bind actual receiving sources. Portable canonical replay assets are a separate custody record.",
+    "recorded_driver_scope": "Hashes bind the actual task-local driver and POM used for these captured runs; portable replay assets are maintained separately in canonical Synexia."
+  },
+  "remaining_gates": [
+    "Installed M3JDK21 image acceptance and jtreg execution",
+    "Whole-module/reactor and all-platform qualification",
+    "Representative production performance",
+    "Global migration manifest acceptance; 40 pre-existing validator errors remain",
+    "STRING -> arrays -> collections receiving phase remains unchanged"
+  ],
+  "qualification": "Completed scoped component evidence only; migration record remains pending.",
+  "canonical_evidence": [
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "ea74a2c2e5f9b9ceee3d849a3cef652dccae6baa",
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-longlong-oneprobe-20261029/evidence/product-20261112/target-emitted-results.json",
+      "sha256": "1d971b2234aca0f3cde9f374bff03261564780b4836a5b589395f8ebed722fa3"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "ea74a2c2e5f9b9ceee3d849a3cef652dccae6baa",
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-longlong-oneprobe-20261029/evidence/product-20261112/target-emitted-maven-runtime.log",
+      "sha256": "25889a757bf616e486125f939aa90da1215aa9d3d785a0436e9df80d27f2c770"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "ea74a2c2e5f9b9ceee3d849a3cef652dccae6baa",
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-longlong-oneprobe-20261029/evidence/product-20261112/maven-openrewrite-java.log",
+      "sha256": "e69e752a220a5be576894dd068b1280043eced4f51d19186fef183d2ea4e57c5"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "ea74a2c2e5f9b9ceee3d849a3cef652dccae6baa",
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-longlong-oneprobe-20261029/evidence/product-20261112/RESOURCE_SEALS.json",
+      "sha256": "ceebc501ad8d90b920dc89dc656f63ede0cb186037608921c312eff60e3e17de"
+    }
+  ],
+  "canonical_manifest": {
+    "repository": "hsoliwal/com.synexia",
+    "commit": "ea74a2c2e5f9b9ceee3d849a3cef652dccae6baa",
+    "path": "synexia-openrewrite-recipes/recipe-crates/m3-longlong-oneprobe-20261029/resources/com/synexia/rewrite/hash-pinned-java/m3-longlong-product-oneprobe-20261112/manifest.tsv",
+    "sha256": "520e1e752d98dbc6cd23a9f28cdc8d35ae6991fce6dd1cad69aaefb208ca7ce1"
+  },
+  "recipe_execution": {
+    "tests": 8,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "evidence": {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "ea74a2c2e5f9b9ceee3d849a3cef652dccae6baa",
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-longlong-oneprobe-20261029/evidence/product-20261112/maven-openrewrite-java.log",
+      "sha256": "e69e752a220a5be576894dd068b1280043eced4f51d19186fef183d2ea4e57c5"
+    },
+    "scope": "Hash-pinned Java SDK execution, fixed point and refusal tests; separate from receiver-runtime runs."
+  }
+}
