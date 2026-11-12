@@ -1,0 +1,137 @@
+{
+  "schema": "M3_PMEM_RESULT_ONLY_RECEIPT_V1",
+  "canonicalRepository": "hsoliwal/com.synexia",
+  "canonicalRevision": "655b0a81944becf0b10699944a5cf134a2d2ccbf",
+  "canonicalCrate": "synexia-openrewrite-recipes/recipe-crates/m3-pmem-donor-convergence-20261112",
+  "targetRepository": "hsoliwal/M3jdk21",
+  "targetPreimage": "d956e3eaa8642dc3029d0b5fefb99a6fe115672d",
+  "recipeIds": [
+    "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe(pmem-donor-m3jdk-java-20261112)",
+    "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe(pmem-donor-m3jdk-text-20261112)"
+  ],
+  "executionKind": "KERNEL_REPLAY_WITH_ACTUAL_OPENREWRITE",
+  "executed": true,
+  "outputs": [
+    {
+      "path": "src/jdk.m3.io/share/classes/jdk/m3/optane/NativePmem.java",
+      "before": "42e902ba71172f22281292543b743b2e328f2f9d5e0602f4981d49b682b9e139",
+      "sha256": "daee8959a23723abb666836f97b6eb98614c0afa5cf3917942ada2a00edb1348",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "src/jdk.m3.io/share/classes/jdk/m3/optane/PmemBlockStore.java",
+      "before": "ABSENT",
+      "sha256": "36cfc320e3681a449c9dd39caeec54f350eb6104bb50131bb7d0b6661f65d896",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "src/jdk.m3.io/share/classes/jdk/m3/optane/PmemCheckpoint.java",
+      "before": "ABSENT",
+      "sha256": "89541c886e3f8a66adc8e98e654b8246715ad4e21f75a355b63c0d62d366562e",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "src/jdk.m3.io/share/classes/jdk/m3/optane/PmemFloatRows.java",
+      "before": "ABSENT",
+      "sha256": "f09bb38b4fc9eb851938ee7c46a1948373485c8ed8ee502670fe6907365ecfc1",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "src/jdk.m3.io/share/classes/jdk/m3/optane/PmemMapping.java",
+      "before": "f2b9a00b795049aa2b5f24d788529b5a623f1fea51799dcbb62099f23c56711e",
+      "sha256": "cc7c59e6452a834d026994f5e34fb9cb652d9a2e23686788ece903f36473b6ab",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "src/jdk.m3.io/share/classes/jdk/m3/optane/PmemPrefixCache.java",
+      "before": "ABSENT",
+      "sha256": "0b45eb29595b02f5e2fad5c1cfe6a30788febc2f1c14e3a75f8a6a6c57061b17",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "src/jdk.m3.io/share/classes/jdk/m3/optane/PmemPrefixKey.java",
+      "before": "ABSENT",
+      "sha256": "95d8cc1d755cb34e577388470e766b3da5ba4da3c906c4afe9f188de6b96b5a7",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "src/jdk.m3.io/share/native/libm3optane/m3pmemsdk.c",
+      "before": "c18057c642ed360bc71be2062a30d9ea887de0b608d8c62b5f39156de8e47782",
+      "sha256": "5d5e12f449ce5d1eddc0b74964d7b1b205b4383798341cb583f55650a9e9f7e5",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "test/jdk/jdk/m3/optane/PmemDurableBlocksSmokeTest.java",
+      "before": "ABSENT",
+      "sha256": "d50f56ad95ca2bbbbceda92e41bfd6aa444d20bc68c525cf945d5b617179b41a",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "test/jdk/jdk/m3/optane/PmemFloatRowsContractTest.java",
+      "before": "ABSENT",
+      "sha256": "fa5bef01e4b00589ff12e6e57c4ed9846b9f9845aa6e35662fa233e562bfe76c",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "test/jdk/jdk/m3/optane/PmemFloatRowsSmokeTest.java",
+      "before": "ABSENT",
+      "sha256": "d5f950e93ccfe473410e6ff7c21c9044c5d4eddb5ec3a92bf137b68bef6b733f",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "test/jdk/jdk/m3/optane/native/PmemFloatRowsOracle.c",
+      "before": "ABSENT",
+      "sha256": "ef70d72e03176e80fd26f6fe5dbed5997969c937f52b948e32013dcab37756d2",
+      "license": "Apache-2.0"
+    }
+  ],
+  "sourceSealsSha256": "704abeeb49a88ee6b97d74c24931eff4f51d13d6109509115805c27dcc2454e9",
+  "evidence": [
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-pmem-donor-convergence-20261112/evidence/recipe-target-apply.log",
+      "sha256": "65de1652be86723db4f9844f7f4a09f7e010527739f29064ef696c035f313cca",
+      "bytes": 2793
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-pmem-donor-convergence-20261112/evidence/recipe-target-verify.log",
+      "sha256": "02bbbae502a1fce99396581ece4b2813540917a3a90b9e2b35d53b8ae0d42abb",
+      "bytes": 2547
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-pmem-donor-convergence-20261112/evidence/target-final/acceptance-summary.json",
+      "sha256": "3497aa0eb346d3273e8e21e4e697cda42109c1a812b2d9ffd9c58dbe957d5598",
+      "bytes": 1493
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-pmem-donor-convergence-20261112/evidence/target-final/execution-receipts.json",
+      "sha256": "8014bdc45658a1b9d16808eada5fc68bdd36baebab504cd44dcbf49f3ab6c282",
+      "bytes": 7728
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-pmem-donor-convergence-20261112/evidence/target-final/executed-source-manifest.json",
+      "sha256": "c74d14c88ce08697ddc86035d470cc326c8d4c3e8caf14b991ff9f267bd53b62",
+      "bytes": 6167
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-pmem-donor-convergence-20261112/evidence/target-final/executed-artifact-manifest.json",
+      "sha256": "9f02ce6bc501a54d81f9a053a20dc9c45c30b46cea652b958991cc023e279919",
+      "bytes": 13136
+    }
+  ],
+  "passed": [
+    "actual OpenRewrite output, fixed point and source/template refusal",
+    "complete target module compilation and generated JNI headers",
+    "strict C17 native compilation and ABI parity; original14 JNI exports retained; one addition",
+    "FILE/POSIX float-row, durable-block and lease contracts on host and linked JMOD"
+  ],
+  "pending": {
+    "optionalModuleAdmission": "PENDING_OPTIONAL_MODULE_ADMISSION",
+    "orderedTargetFamilyPromotion": "HOLD; String qualification remains active",
+    "fullSourceBuiltModifiedJdkHotSpotJtreg": "NOT_RUN",
+    "physicalPmemDaxPmdkPowerLossNumaPerformance": "NOT_RUN",
+    "canonicalResultOnlyHandoffAdmission": "NOT_RUN; separate from executed output equivalence"
+  },
+  "passiveReceiptOnly": true,
+  "recipeSourcesOrRunnersDelivered": false,
+  "promotionAuthorized": false
+}

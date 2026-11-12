@@ -8,6 +8,7 @@
 #include <jni.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <float.h>
 #include <limits.h>
 #include <stddef.h>
 #include <stdint.h>
@@ -265,6 +266,100 @@ JNIEXPORT void JNICALL Java_jdk_m3_optane_NativePmem_close
     free(r);
     if (err) throw_errno(env,"close",err);
 }
+
+/* M3_FLOAT_ROWS_C_BEGIN: additive typed-copy atom; existing JNI ABI is retained. */
+_Static_assert(CHAR_BIT == 8 && sizeof(jfloat) == sizeof(uint32_t)
+        && FLT_RADIX == 2 && FLT_MANT_DIG == 24 && FLT_MAX_EXP == 128,
+        "PMem float rows require IEEE 754 binary32 JNI floats");
+
+/* Byte loads avoid alignment/aliasing assumptions; memcpy performs no FP arithmetic. */
+static void m3_float_rows_decode(const unsigned char *bytes, jfloat *values, size_t count) {
+    for (size_t i = 0; i < count; i++) {
+        const unsigned char *p = bytes + i * sizeof(uint32_t);
+        uint32_t bits = (uint32_t)p[0] | ((uint32_t)p[1] << 8)
+                | ((uint32_t)p[2] << 16) | ((uint32_t)p[3] << 24);
+        memcpy(values + i, &bits, sizeof(bits));
+    }
+}
+
+/* Null selection means consecutive rows. Non-null selection is a private Java
+   snapshot. Validate the entire request before the first output store; bounded
+   JNI regions avoid critical pins and any native pointer/heap pointer escape. */
+JNIEXPORT void JNICALL Java_jdk_m3_optane_NativePmem_floatRowsLE
+(JNIEnv *env, jclass cls, jlong handle, jlong offset, jlong rows, jint columns,
+ jlong first_row, jlongArray row_ids, jint count, jfloatArray target, jint target_offset) {
+    (void)cls;
+    region *r = validated(env, handle);
+    if (!r) return;
+    if (columns <= 0) {
+        throw_named(env, "java/lang/IllegalArgumentException", "columns must be positive");
+        return;
+    }
+    uint64_t row_bytes = (uint64_t)columns * sizeof(uint32_t);
+    if (rows < 0 || (uint64_t)rows > (uint64_t)INT64_MAX / row_bytes || count < 0) {
+        throw_named(env, "java/lang/IndexOutOfBoundsException", "native float table shape");
+        return;
+    }
+    if (!bounded(env, r, offset, rows * (jlong)row_bytes)) return;
+    if (!target) {
+        throw_named(env, "java/lang/NullPointerException", "target");
+        return;
+    }
+    jsize target_length = (*env)->GetArrayLength(env, target);
+    if (target_offset < 0 || target_offset > target_length
+            || count > (target_length - target_offset) / columns) {
+        throw_named(env, "java/lang/IndexOutOfBoundsException", "native float output bounds");
+        return;
+    }
+    enum { ID_WINDOW = 512, VALUE_WINDOW = 4096 };
+    jlong selected[ID_WINDOW];
+    if (row_ids) {
+        jsize ids_length = (*env)->GetArrayLength(env, row_ids);
+        if (count > ids_length) {
+            throw_named(env, "java/lang/IndexOutOfBoundsException", "native row selection bounds");
+            return;
+        }
+        for (jint done = 0; done < count;) {
+            jint amount = count - done < ID_WINDOW ? count - done : ID_WINDOW;
+            (*env)->GetLongArrayRegion(env, row_ids, done, amount, selected);
+            if ((*env)->ExceptionCheck(env)) return;
+            for (jint i = 0; i < amount; i++) {
+                if (selected[i] < 0 || selected[i] >= rows) {
+                    throw_named(env, "java/lang/IndexOutOfBoundsException", "native float row ID");
+                    return;
+                }
+            }
+            done += amount;
+        }
+    } else if (first_row < 0 || first_row > rows || (jlong)count > rows - first_row) {
+        throw_named(env, "java/lang/IndexOutOfBoundsException", "native consecutive row range");
+        return;
+    }
+    jfloat values[VALUE_WINDOW];
+    jint output = target_offset;
+    for (jint done = 0; done < count;) {
+        jint amount = count - done < ID_WINDOW ? count - done : ID_WINDOW;
+        if (row_ids) {
+            (*env)->GetLongArrayRegion(env, row_ids, done, amount, selected);
+            if ((*env)->ExceptionCheck(env)) return;
+        }
+        for (jint i = 0; i < amount; i++) {
+            jlong row = row_ids ? selected[i] : first_row + done + i;
+            size_t base = (size_t)offset + (size_t)((uint64_t)row * row_bytes);
+            for (jint column = 0; column < columns;) {
+                jint width = columns - column < VALUE_WINDOW ? columns - column : VALUE_WINDOW;
+                m3_float_rows_decode(r->data + base + (size_t)column * sizeof(uint32_t),
+                        values, (size_t)width);
+                (*env)->SetFloatArrayRegion(env, target, output, width, values);
+                if ((*env)->ExceptionCheck(env)) return;
+                column += width;
+                output += width;
+            }
+        }
+        done += amount;
+    }
+}
+/* M3_FLOAT_ROWS_C_END */
 
 /* M3_TRANSFER_C_BEGIN: recipe-owned JNI copy and compare atom. */
 static int m3_same_file_overlap(const region *src, jlong src_offset,
