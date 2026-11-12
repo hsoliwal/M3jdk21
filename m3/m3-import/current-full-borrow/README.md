@@ -110,3 +110,37 @@ not define public JDK ABI.
 This receiver never creates a Synexia runtime service or Maven dependency behind java.base,
 HotSpot, JNI or ordinary String. Qualified source/mechanics are materialized into target-owned
 runtime boundaries and independently verified there.
+
+## Immutable source identifiers and receiver verification
+
+The source schemas and canonical invariant path in this packet describe the
+recorded Synexia revision. Their `SYNEXIA` spelling is provenance data. Renaming
+M3JDK21 implementation packages, classes or directories does not rename those
+historical source identifiers. The receiver checker must compare them with the
+original values while retaining the exact donor Git blob checks.
+
+The receiver accepts `M3JDK21_SYNEXIA_FULL_BORROW_PIN_V1` in `pin.tsv`, the
+`SYNEXIA_M3JDK21_FULL_BORROW_V1` estate schema,
+`SYNEXIA_M3JDK21_FULL_BORROW_DAG_V1` DAG schema and
+`SYNEXIA_M3JDK21_PROMOTION_PHASE_V1` phase schema. Its canonical source invariant
+remains `docs/M3-SCALE/invariants/SYNEXIA-M3JDK21-CANONICAL-OWNERSHIP-1.md`.
+The target paths retain their current `m3/m3-import/` names.
+
+Run the receiver from a target checkout with the recorded baseline in its Git
+history, then run its independent regression tests:
+
+```sh
+python3 -B m3/compatibility/check_m3_full_borrow_receiver.py
+python3 -B m3/compatibility/test_m3_full_borrow_receiver.py
+```
+
+The first command checks real target ancestry and the complete packet. The
+regression suite reads the checked-in source bytes and exercises schema/hash
+drift, cycles, phase order, self-promotion and missing historical evidence.
+Its ancestry unit cases explicitly mock success, unrelated history and missing
+history, and check the exact Git arguments. These unit cases do not replace the
+first command's actual ancestry check.
+
+Passing either check does not advance `SOURCE_PIN_ONLY`, create a runtime port,
+or qualify a JDK image. It establishes that this immutable receiving record is
+internally consistent and remains within its original scope.

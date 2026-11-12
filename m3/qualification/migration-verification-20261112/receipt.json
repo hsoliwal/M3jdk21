@@ -1,0 +1,79 @@
+{
+  "schema": "M3_MIGRATION_VERIFICATION_RECEIVER_V1",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_base_revision": "b98bf8c065818aac3447be165909e2a013325d9a",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_source_base_revision": "510a640feb877b1b7e69d346ae2e4e1a10628506",
+  "recipe_id": "com.synexia.m3.MigrationVerificationProduct20261112",
+  "recipe_path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112",
+  "recipe_source_revision": "0321367e08122996d1482a61c888e78036b90de8",
+  "product_manifest_sha256": "e145c3040286aeec205ea9a653971ef2e2fb7f23e083c2a1ef2cc6ad96e4cee5",
+  "status": "RECIPE_EXECUTED_SCOPED_TARGET_VERIFICATION_PASS_RELEASE_PENDING",
+  "outputs": [
+    {
+      "path": "m3/compatibility/check_m3_full_borrow_receiver.py",
+      "before_sha256": "444514e43ba0805375cd1894c372ad3493aea7291604103b700c37e741b0ff68",
+      "after_sha256": "f67fcb19fdd6e65b55c15dfaa45dcf428f069fa292df2f225226b8818cb7b592"
+    },
+    {
+      "path": "m3/compatibility/test_m3_full_borrow_receiver.py",
+      "before_sha256": null,
+      "after_sha256": "4bacf2ff3784caa20f92ea44156dc6b4364227dd5773cf25f4dfb3edeb1e18f8"
+    },
+    {
+      "path": "m3/m3-import/current-full-borrow/README.md",
+      "before_sha256": "8a010b39ee657098078ddc8e9502a545b6628c9b23c0b3f63526423ba36a4b55",
+      "after_sha256": "441f6142b1f5fd3ed624bbf43781e28e9a05a45a4eac4939ff9aa894bb5b60ea"
+    },
+    {
+      "path": "m3/runtime-integration/regex-precompute/pom.xml",
+      "before_sha256": "cd4265e106f6f1061349b779d7b752fb9aed4bd322a984de06bed4ca9603bc99",
+      "after_sha256": "18cebcc38f394a43f6996a5a57f997f48806c74863168ff2fef007032983812e"
+    },
+    {
+      "path": "m3/runtime-integration/regex-precompute/README.md",
+      "before_sha256": "fabfe8b2854d6f51b5a0d4c5ccf9961628be81860a1c1ba1f55d25499874b621",
+      "after_sha256": "0d39956c89538204e9c9a2ac4e7a720d788f3ed3794d8d3354e718d546f27f11"
+    },
+    {
+      "path": "m3/runtime-integration/regex-precompute/verify.py",
+      "before_sha256": null,
+      "after_sha256": "ac29d9dd6c03adf12349a897a69c411a201f3d158b4b0f797dd9dd19331e82a2"
+    },
+    {
+      "path": "m3/runtime-integration/regex-precompute/test_verify.py",
+      "before_sha256": null,
+      "after_sha256": "26f9497f03f6be3726ac409008b8c55b160bf78f13368608009fed3d92548fb2"
+    },
+    {
+      "path": "m3/docs/migration-mapping-lifecycle.md",
+      "before_sha256": "773f1939ba24e80cf7d67f85ed570de695c4e4e2f9f0547ce28c7b942c268e2c",
+      "after_sha256": "dae93d5aaa1d404e94adb5d877a95249d90dbbcc14d72989d88ae45bd919bb57"
+    }
+  ],
+  "acceptance": {
+    "family_state": "SOURCE_PIN_ONLY",
+    "phase_advanced": false,
+    "complete_migration": false,
+    "installed_M3JDK21_regex_execution": "NOT_RUN",
+    "full_Maven_control_reactor": "NOT_RUN",
+    "jtreg_harness": "NOT_RUN",
+    "release_admission": "NOT_GRANTED"
+  },
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "recipe_execution_evidence": "qualification/summary.json",
+  "gates": {
+    "Maven_OpenRewrite_Java21": "PASS_36_TESTS",
+    "receiver_unit_tests": "PASS_12",
+    "regex_verifier_unit_tests": "PASS_16",
+    "full_receiver_checker": "PASS_REAL_HISTORY_32_FAMILIES",
+    "Maven_module_model": "PASS",
+    "product_test_Java21_compile": "PASS",
+    "stock_JDK_required_mode": "EXPECTED_REFUSAL",
+    "positive_installed_M3_runtime": "NOT_RUN",
+    "full_Maven_control_reactor": "NOT_RUN",
+    "full_canonical_provenance_set": "NOT_RUN",
+    "hosted_CI": "PENDING"
+  }
+}
