@@ -1,0 +1,211 @@
+{
+  "schema": "M3_SI_WARM_RECEIVING_RECEIPT_V1",
+  "canonicalRecipe": "si-warm-cache-20261112",
+  "sourceHead": "b98bf8c065818aac3447be165909e2a013325d9a",
+  "source": {
+    "bytes": 44256,
+    "sha256": "da50c2acf4e6125d72af6ae374ef5e2281ed7b653af9f90578eccbb48da3029a",
+    "gitBlob": "598a67a25a6d8edd36d495aa692578f79c0f5879"
+  },
+  "sourceBefore": {
+    "bytes": 44126,
+    "sha256": "efaf8b1e861682100a61fca31f774f71978f9a6cc7b8abe01c893b79e82ff1ba",
+    "gitBlob": "ef99594a076ed23c162d40e97e423d961869b30e"
+  },
+  "testPath": "m3/tooling/lexicon-qualification/src/test/java/jdk/m3/text/SharedLexiconCatalogSiWarmTest.java",
+  "test": {
+    "bytes": 17195,
+    "sha256": "f7845e7d7ebc165ca13eb76f677ab050080bd6b12fa509abe35e35962d69b79c",
+    "gitBlob": "22be10f7028eb6983c36126454fe4f36790277b8"
+  },
+  "current81Manifest": {
+    "bytes": 22258,
+    "sha256": "cc69f1c6aaf01f92347048afc52f05bad219fa48f85bb7aca3046f357b353958",
+    "gitBlob": "a1612bb2d2c2984d3333d8cff8df0c4c58184a8e"
+  },
+  "proofs": {
+    "pathAdmission": "7b9e1d5ac6686f912ea3cbc60b1be4d11600ea8d",
+    "runtimeRecipe": "c245681aca9eba7a79d3c7dc0290f097734d6b53",
+    "sourceSeal": "b5c27350c9803835ff9b09bb762da41a6d453c1e"
+  },
+  "apiShapes": {
+    "baseline-semantics": [
+      [
+        "99672049e41a90fe13f4d607bffa94aa8af2661222f85b26d568bf9a28c1a3a8",
+        "19"
+      ]
+    ],
+    "candidate-semantics": [
+      [
+        "99672049e41a90fe13f4d607bffa94aa8af2661222f85b26d568bf9a28c1a3a8",
+        "19"
+      ]
+    ]
+  },
+  "measurements": {
+    "baseline-default": [
+      {
+        "sample": 0,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 11188400
+      },
+      {
+        "sample": 1,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 10273900
+      },
+      {
+        "sample": 2,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 10030400
+      },
+      {
+        "sample": 3,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 10058300
+      },
+      {
+        "sample": 4,
+        "calls": 200000,
+        "bytes": 19200000,
+        "nanos": 9726800
+      }
+    ],
+    "candidate-default": [
+      {
+        "sample": 0,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 10410700
+      },
+      {
+        "sample": 1,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 10637500
+      },
+      {
+        "sample": 2,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 10508800
+      },
+      {
+        "sample": 3,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 10377500
+      },
+      {
+        "sample": 4,
+        "calls": 200000,
+        "bytes": 16000000,
+        "nanos": 10093700
+      }
+    ],
+    "baseline-fixed": [
+      {
+        "sample": 0,
+        "calls": 200000,
+        "bytes": 32000000,
+        "nanos": 14022200
+      },
+      {
+        "sample": 1,
+        "calls": 200000,
+        "bytes": 32000000,
+        "nanos": 14432000
+      },
+      {
+        "sample": 2,
+        "calls": 200000,
+        "bytes": 32000000,
+        "nanos": 14244100
+      },
+      {
+        "sample": 3,
+        "calls": 200000,
+        "bytes": 32000000,
+        "nanos": 16145700
+      },
+      {
+        "sample": 4,
+        "calls": 200000,
+        "bytes": 32000000,
+        "nanos": 11378100
+      }
+    ],
+    "candidate-fixed": [
+      {
+        "sample": 0,
+        "calls": 200000,
+        "bytes": 28800000,
+        "nanos": 9969300
+      },
+      {
+        "sample": 1,
+        "calls": 200000,
+        "bytes": 28800000,
+        "nanos": 11346200
+      },
+      {
+        "sample": 2,
+        "calls": 200000,
+        "bytes": 28800000,
+        "nanos": 12366400
+      },
+      {
+        "sample": 3,
+        "calls": 200000,
+        "bytes": 28800000,
+        "nanos": 12545800
+      },
+      {
+        "sample": 4,
+        "calls": 200000,
+        "bytes": 28800000,
+        "nanos": 12655000
+      }
+    ]
+  },
+  "summary": {
+    "baseline-default": {
+      "allocBytesPerCall": [
+        96
+      ],
+      "medianNsPerCall": 50.2915
+    },
+    "candidate-default": {
+      "allocBytesPerCall": [
+        80
+      ],
+      "medianNsPerCall": 52.0535
+    },
+    "baseline-fixed": {
+      "allocBytesPerCall": [
+        160
+      ],
+      "medianNsPerCall": 71.2205
+    },
+    "candidate-fixed": {
+      "allocBytesPerCall": [
+        144
+      ],
+      "medianNsPerCall": 61.832
+    }
+  },
+  "scope": "Post-admission cache atom and exact recipe/data admission; standalone reflection fixture reads an existing immutable V2 mapped image; full open/openLazy/sidecar/whole-module/native/platform/release validation separate",
+  "performance": "16 fewer allocated bytes per warmed lookup in both sampled profiles; normal median about3.5% slower in this one comparison; portable latency improvement not established; keep draft pending CI/review",
+  "storage": {
+    "allocationBefore": 571469824,
+    "allocationAfter": 571469824,
+    "capBytes": 571473920,
+    "temporaryRouting": "verified F only",
+    "nativeCleanHeld": true
+  },
+  "generationCalls": 0
+}

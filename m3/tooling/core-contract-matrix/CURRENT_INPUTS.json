@@ -119,9 +119,9 @@
     },
     {
       "path": "m3/core/src/jdk/m3/text/SharedLexiconCatalog.java",
-      "gitBlob": "ef99594a076ed23c162d40e97e423d961869b30e",
-      "bytes": 44126,
-      "sha256": "efaf8b1e861682100a61fca31f774f71978f9a6cc7b8abe01c893b79e82ff1ba"
+      "gitBlob": "598a67a25a6d8edd36d495aa692578f79c0f5879",
+      "bytes": 44256,
+      "sha256": "da50c2acf4e6125d72af6ae374ef5e2281ed7b653af9f90578eccbb48da3029a"
     },
     {
       "path": "m3/core/src/jdk/m3/text/SharedLexiconFamilySidecarCatalog.java",
