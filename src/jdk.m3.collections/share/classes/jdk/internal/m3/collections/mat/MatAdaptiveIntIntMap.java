@@ -33,7 +33,17 @@ public final class MatAdaptiveIntIntMap {
   public boolean containsKey(int key){return switch(encoding){case DIRECT->directPresent(key);case SORTED->Arrays.binarySearch(keys,key)>=0;case HASH->hashSlot(key)>=0;};}
   public int get(int key){return get0(key,false,0);} public int getOrDefault(int key,int fallback){return get0(key,true,fallback);}
   public int[] keys(){return switch(encoding){case SORTED->keys.clone();case DIRECT->directKeys();case HASH->hashKeys();};}
-  public int[] valuesBySortedKey(){int[] k=keys(),r=new int[k.length];for(int i=0;i<k.length;i++)r[i]=get(k[i]);return r;}
+  public int[] valuesBySortedKey(){
+    // Parallel sorted keys and values are already aligned: copy once, no point lookups.
+    if(encoding==Encoding.SORTED)return values.clone();
+    if(encoding==Encoding.DIRECT){
+      // Ascending occupied physical slots are ascending signed int keys.
+      int[] result=new int[size];int next=0;
+      for(int slot=0;slot<values.length;slot++)if(bit(presence,slot))result[next++]=values[slot];
+      return result;
+    }
+    int[] k=keys(),r=new int[k.length];for(int i=0;i<k.length;i++)r[i]=get(k[i]);return r;
+  }
   private int get0(int key,boolean def,int fallback){
     if(encoding==Encoding.DIRECT){long o=(long)key-minKey;if(o>=0&&o<values.length&&bit(presence,(int)o))return values[(int)o];}
     else if(encoding==Encoding.SORTED){int i=Arrays.binarySearch(keys,key);if(i>=0)return values[i];}
