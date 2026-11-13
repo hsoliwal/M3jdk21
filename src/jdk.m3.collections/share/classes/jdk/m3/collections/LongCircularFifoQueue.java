@@ -18,7 +18,8 @@ import java.util.Objects;
  * geometry; no boxed entries, nodes, or third-party runtime classes are stored.
  * One-element offer/poll are O(1); copying a detached snapshot is O(size).
  * The bulk suffix path is O(capacity) when the source window is at least as
- * large as capacity, regardless of the input window length.
+ * large as capacity, regardless of the input window length. Medium-sized
+ * input windows use at most two array-copy spans.
  *
  * <p>This class is not thread-safe. Iterators are fail-fast on structural
  * changes and do not support removal. No Java callback crosses JNI.
@@ -92,10 +93,32 @@ public final class LongCircularFifoQueue implements LongQueue {
             head = 0;
             size = elements.length;
             modCount++;
-        } else {
+        } else if (length < 8) {
+            // A bounded scalar lane avoids arraycopy setup for tiny windows.
             for (int i = offset, end = offset + length; i < end; i++) {
                 offer(source[i]);
             }
+        } else {
+            // Append at the physical tail using at most two disjoint copy spans.
+            // The array is exclusively owned; source cannot alias it via this API.
+            int capacity = elements.length;
+            int untilWrap = capacity - head;
+            int tail = size >= untilWrap ? size - untilWrap : head + size;
+            int first = Math.min(length, capacity - tail);
+            System.arraycopy(source, offset, elements, tail, first);
+            if (first < length) {
+                System.arraycopy(source, offset + first, elements, 0, length - first);
+            }
+            int free = capacity - size;
+            if (length <= free) {
+                size += length;
+            } else {
+                int evicted = length - free;
+                head = evicted >= untilWrap ? evicted - untilWrap : head + evicted;
+                size = capacity;
+            }
+            // Match repeated offer() counter progression exactly, including int wraparound.
+            modCount += length;
         }
         return length;
     }

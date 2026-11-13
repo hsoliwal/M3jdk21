@@ -1,0 +1,454 @@
+{
+  "schema": "M3_FIFO_BITSET_COMPONENT_RECEIPT_V1",
+  "copyright": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "license": "Apache-2.0",
+  "status": "COMPONENT_QUALIFIED_PENDING_REPOSITORY_AND_PLATFORM_GATES",
+  "receiving_repository": "hsoliwal/M3jdk21",
+  "receiving_history": {
+    "prior_branch_commit": "fff5dea84d1b44c47ea58f84a75b8ff67f9632a6",
+    "forward_master_commit": "65d2636ee26956bc638d56e5433c9e275f70997d",
+    "mode": "append-only two-parent forward merge; no rebase",
+    "unchanged_master_files": 17
+  },
+  "canonical_publication": {
+    "repository": "hsoliwal/com.synexia",
+    "commit": "b4828f33e42d8fa1eb7f566ecaeabf4dd1d2c891",
+    "pull_request": "https://github.com/hsoliwal/com.synexia/pull/17300",
+    "qualification_scope": "Immutable final leaf templates/POMs and separate source-bound historical execution epochs. No final-commit leaf rerun is implied."
+  },
+  "canonical_leaves": [
+    {
+      "id": "m3jdk21-ring-bulk-two-span-20261113",
+      "crate": "synexia-openrewrite-recipes/crates/m3jdk21-ring-bulk-two-span-20261113",
+      "recipe_class": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+      "original_pr": "https://github.com/hsoliwal/com.synexia/pull/17259",
+      "engine_execution_revision": "f6098af07c8ed22d3814a4dea2946fb086246a73",
+      "compiled_engine_pins": [
+        {
+          "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+          "sha256": "254df9622aa099c93136e5615012b23adc5e93d93dca472b58332d5b094c2730",
+          "git_blob": "3da0e5fc43b491e79ab71ee375146193d9628164",
+          "bytes": 47665
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ResourceEnvelope.java",
+          "sha256": "2f5f0a1dd1fabe07c97bf7acf4ead51e1853d302a2b21f6fe011d019cc496c57",
+          "git_blob": "1b0b84ab1dd08aab4c8edb5835bd00615d0cf908",
+          "bytes": 3849
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java",
+          "sha256": "0dc762ef802b32ad0a40ff23e21cfbb67ad4bbd8a251b46b8a5954b647927824",
+          "git_blob": "5e4cf8ea8df34090b5a17494ace72ab907161b9c",
+          "bytes": 1139
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+          "sha256": "09c53223424ca10acdb8cc6d7550a89cf40d6776afcab1195886ad0487f695a8",
+          "git_blob": "d8d0d75cb42aa602c149e61026cd11b6fa702225",
+          "bytes": 27113
+        }
+      ],
+      "candidate_source_pins": [
+        {
+          "path": "synexia-openrewrite-recipes/crates/m3jdk21-ring-bulk-two-span-20261113/pom.xml",
+          "sha256": "fae58a9d9c40b0f4cead290ae28e55ee56d6785444e35d31e5d9d9b3dffb4ccb",
+          "git_blob": "d71738a61a2851e0861e18fb020d50cda9add470",
+          "bytes": 2571
+        },
+        {
+          "path": "synexia-openrewrite-recipes/crates/m3jdk21-ring-bulk-two-span-20261113/src/test/java/com/synexia/rewrite/M3JdkRingBulkCopyRecipeTest.java",
+          "sha256": "8b944ad9d13d963588baf12c87f692898269fadc98412e16930e9e343d23b30e",
+          "git_blob": "588674457b4c43fd92764c20e3f9bf372028302e",
+          "bytes": 6141
+        },
+        {
+          "path": "synexia-openrewrite-recipes/crates/m3jdk21-ring-bulk-two-span-20261113/src/test/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-ring-bulk-two-span-20261113/manifest.tsv",
+          "sha256": "c87d3fdd4a9cfef0c207419ff7ba9252b74dc9a77699fc4a2a5754fe39eee0c9",
+          "git_blob": "7541ff334baf3f75c1b04e03c3b2e11883009681",
+          "bytes": 244
+        },
+        {
+          "path": "synexia-openrewrite-recipes/crates/m3jdk21-ring-bulk-two-span-20261113/src/test/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-ring-bulk-two-span-20261113/LongCircularFifoQueue.java.txt",
+          "sha256": "f84728e393f5cbcd88aa289e9a04f3a022ba5561734f272b8506f492e0bf2d5e",
+          "git_blob": "80dfc2a7f44afe514f333976f9cee13d58675028",
+          "bytes": 7426
+        }
+      ],
+      "qualification": {
+        "path": "synexia-openrewrite-recipes/crates/m3jdk21-ring-bulk-two-span-20261113/qualification/20261113/RESULTS.json",
+        "sha256": "f428653890ce39d78d80259c8b7cf4845175295b02083c3cd0babade86b46afb",
+        "git_blob": "952c5431c11d1d7fa5fbc887c66d114df0da648d",
+        "bytes": 2550
+      },
+      "actual_sdk_tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "fixed_point_and_refusals": "PASS"
+    },
+    {
+      "id": "m3jdk-longbitset-max-boundary-20261113",
+      "crate": "synexia-openrewrite-recipes/recipe-crates/m3jdk-longbitset-max-boundary-20261113",
+      "recipe_class": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+      "original_pr": "https://github.com/hsoliwal/com.synexia/pull/17264",
+      "engine_execution_revision": "adc4fdd41e5dd047ec256ebe6880275be5bdea40",
+      "compiled_engine_pins": [
+        {
+          "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+          "sha256": "254df9622aa099c93136e5615012b23adc5e93d93dca472b58332d5b094c2730",
+          "git_blob": "3da0e5fc43b491e79ab71ee375146193d9628164",
+          "bytes": 47665
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ResourceEnvelope.java",
+          "sha256": "2f5f0a1dd1fabe07c97bf7acf4ead51e1853d302a2b21f6fe011d019cc496c57",
+          "git_blob": "1b0b84ab1dd08aab4c8edb5835bd00615d0cf908",
+          "bytes": 3849
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java",
+          "sha256": "0dc762ef802b32ad0a40ff23e21cfbb67ad4bbd8a251b46b8a5954b647927824",
+          "git_blob": "5e4cf8ea8df34090b5a17494ace72ab907161b9c",
+          "bytes": 1139
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+          "sha256": "09c53223424ca10acdb8cc6d7550a89cf40d6776afcab1195886ad0487f695a8",
+          "git_blob": "d8d0d75cb42aa602c149e61026cd11b6fa702225",
+          "bytes": 27113
+        }
+      ],
+      "candidate_source_pins": [
+        {
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3jdk-longbitset-max-boundary-20261113/pom.xml",
+          "sha256": "ac457621cd55ed3e1f2ba6f3fd42390f2306b699f9c2426c69fa83c063d3f5ae",
+          "git_blob": "cbbd07eb511061a55ec2f9b86f58d21f6546bc9a",
+          "bytes": 2925
+        },
+        {
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3jdk-longbitset-max-boundary-20261113/src/test/java/com/synexia/rewrite/LongBitSetMaxBoundaryRecipeTest.java",
+          "sha256": "98f00024c6faa2f6cbd03034c337b372df1224fdd39f733e83490a2179c133b5",
+          "git_blob": "9504f9ff445273d0579023ad704626bcb3206a32",
+          "bytes": 8864
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk-longbitset-max-boundary-20261113/manifest.tsv",
+          "sha256": "4004029aaf33a51f5dc661610144c8b2b1ef5bd6f1c11bc0c5fdf74794816957",
+          "git_blob": "22d11fabe1f9701ebece98bc7cb33bc25539f941",
+          "bytes": 449
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk-longbitset-max-boundary-20261113/after.java.txt",
+          "sha256": "e7df2a450ab47ec78d07f639f2248eafcca2d98667c82f08440c58a81807b4f6",
+          "git_blob": "64b1ace537704cb188064a387e773eaf2cf34b3e",
+          "bytes": 11746
+        }
+      ],
+      "qualification": {
+        "path": "synexia-openrewrite-recipes/recipe-crates/m3jdk-longbitset-max-boundary-20261113/qualification-20261113/SDK_REPORT.json",
+        "sha256": "42017a3e20538f5a9961c9655d60b0d3fe354daa6cad15a8faf69edf26cc76c1",
+        "git_blob": "f939e74e897759b55a2a54b3c47e6657946b9120",
+        "bytes": 11819
+      },
+      "actual_sdk_tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "fixed_point_and_refusals": "PASS",
+      "selected_target_output": "PackedLongBitSet production owner only; the target-owned traversal regression was received through fifo-bitset-target-20261113."
+    }
+  ],
+  "canonical_shared_datasets": [
+    {
+      "id": "fifo-bitset-target-20261113",
+      "host_execution_revision": "34101f472de06e416fcc31003100bbe4057515b8",
+      "crate": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "recipe_name": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+      "targets": 4,
+      "pins": [
+        {
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/fifo-bitset-target-20261113/DATASET.json",
+          "sha256": "1cec06a37d59c81fd20bdd0cf76966c136567b9755e3cfe71135c1b1f1bd3f0e",
+          "git_blob": "0ff1074b03fbe121136271c029253fd72216825f",
+          "bytes": 892
+        },
+        {
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/fifo-bitset-target-20261113/ENGINE_EFFECTIVE.tsv",
+          "sha256": "2b581dc062386c9c5c9bae42bc246004df69a282075f1622886034bd8c9baf30",
+          "git_blob": "71ce2e0693c1b112316044d50dc2abc52f9e555e",
+          "bytes": 911
+        },
+        {
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/fifo-bitset-target-20261113/MODES.tsv",
+          "sha256": "4dfc6f63c879517176ac216c6c0c66bfb0c16e3952ee713355e200a3cad42621",
+          "git_blob": "8171bf3863301334ad83abecfb778ac5cd6563bb",
+          "bytes": 214
+        },
+        {
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/fifo-bitset-target-20261113/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-fifo-bitset-target-20261113/manifest.tsv",
+          "sha256": "990266cda884a82599d9917e6d560b7f6ec82b976e6a783d389a5d9486483c8e",
+          "git_blob": "9c454177fed6d03ab3008f2eeea9ba43058e375a",
+          "bytes": 362
+        },
+        {
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/fifo-bitset-target-20261113/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-fifo-bitset-target-20261113/manifest.tsv",
+          "sha256": "d213d96824df99dac96292d54e1abe14ca7556197ac5f08343aaaa4c043a342f",
+          "git_blob": "06fc50e658fbaeeac89f6513185653b2223495fe",
+          "bytes": 377
+        },
+        {
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/qualification/fifo-bitset-target-20261113/SDK_INPUTS.tsv",
+          "sha256": "a3a89cf6f92aa90e6ae463b46666d8d3a884ab11cc385f3f13c752a45273a9f4",
+          "git_blob": "10a6adb0c8c51dd321bb0e63357abb64df21a72b",
+          "bytes": 6157
+        },
+        {
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/qualification/fifo-bitset-target-20261113/SDK_RESULTS.tsv",
+          "sha256": "65739a4792f51dadb536ba7fe643b908f2f645c8dffeebd17560dbc8d42da8e3",
+          "git_blob": "1b886702f520f8d994de27cf3fb306162af4513a",
+          "bytes": 658
+        }
+      ],
+      "actual_sdk_tests": 17,
+      "preparation_contract_tests": 23,
+      "receiver_contract_cases": 9,
+      "sdk_failures_errors_skips": 0,
+      "first_receive_changes": 4,
+      "fixed_point_changes": 0
+    },
+    {
+      "id": "fifo-bitset-forward-20261113",
+      "host_execution_revision": "76fc33c67ab4c8a8efc016e042a4e02355aabd2e",
+      "crate": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "recipe_name": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+      "targets": 2,
+      "pins": [
+        {
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/fifo-bitset-forward-20261113/DATASET.json",
+          "sha256": "558439366bea17342959856c775688b348936109367aa202dc5496d74281ca17",
+          "git_blob": "aef882807204a32d382acbbdf6d81e76ed5692b3",
+          "bytes": 931
+        },
+        {
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/fifo-bitset-forward-20261113/ENGINE_EFFECTIVE.tsv",
+          "sha256": "1e64170df177be91be7e0af2b46c10891a31038597756e6669889b3f94faea81",
+          "git_blob": "a717d6e15ab2186f83d12a4c9de83d3f59c4d87a",
+          "bytes": 911
+        },
+        {
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/fifo-bitset-forward-20261113/MODES.tsv",
+          "sha256": "009b732d29732433af4ca1f7c0df1b5d9486b919c9ea3ec50a4c480a6f99be3f",
+          "git_blob": "ae5b0b397c43be471c404f8da9cc6048491e2268",
+          "bytes": 76
+        },
+        {
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/fifo-bitset-forward-20261113/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-fifo-bitset-forward-20261113/manifest.tsv",
+          "sha256": "add6ab59ed1cd3be3abbd6fc94f9d491787a50b5d8a78d61fe0db972ca48ef83",
+          "git_blob": "8cadee2bc7f51a24992b44123701722a2f850e83",
+          "bytes": 377
+        },
+        {
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/qualification/fifo-bitset-forward-20261113/SDK_INPUTS.tsv",
+          "sha256": "cc997fec4ff8897bfe83865dfa14ccf08d522d2d5cf6b353bba75536df8f1fe1",
+          "git_blob": "ef1eb1a43ffd92795b29fae77f85b1a536df4166",
+          "bytes": 5388
+        },
+        {
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/qualification/fifo-bitset-forward-20261113/SDK_RESULTS.tsv",
+          "sha256": "b3d3296cae08d5eca9c13a254be908f7b921502c5ca206b5c609ecc76de12861",
+          "git_blob": "693becde7052d65dd0061cc5279bc2441be21618",
+          "bytes": 386
+        }
+      ],
+      "actual_sdk_tests": 17,
+      "preparation_contract_tests": 23,
+      "receiver_contract_cases": 9,
+      "sdk_failures_errors_skips": 0,
+      "first_receive_changes": 2,
+      "fixed_point_changes": 0
+    }
+  ],
+  "executed_product_files": [
+    {
+      "path": "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongCircularFifoQueue.java",
+      "sha256": "f84728e393f5cbcd88aa289e9a04f3a022ba5561734f272b8506f492e0bf2d5e",
+      "git_blob": "80dfc2a7f44afe514f333976f9cee13d58675028",
+      "bytes": 7426,
+      "before_sha256": "2cebc170b5b3bcf76904a5b4ef6cb8d64173b34903d42c5863f89678335ce95e"
+    },
+    {
+      "path": "src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/bits/PackedLongBitSet.java",
+      "sha256": "e7df2a450ab47ec78d07f639f2248eafcca2d98667c82f08440c58a81807b4f6",
+      "git_blob": "64b1ace537704cb188064a387e773eaf2cf34b3e",
+      "bytes": 11746,
+      "before_sha256": "7df86459e62a3fd979fad73955c49892c3bfaa610bb640291790a0e33c05516e"
+    },
+    {
+      "path": "test/jdk/jdk/m3/collections/LongCircularFifoQueueBulkTest.java",
+      "sha256": "de037d85a0aa1c491282da43b55f9a173ce6009372e99da4cdd7aae331188335",
+      "git_blob": "8a5e5c6f1ca37af2517bf46193ec24b93bfefbfc",
+      "bytes": 9422,
+      "before_sha256": "ABSENT"
+    },
+    {
+      "path": "test/jdk/jdk/m3/collections/LongBitSetTraversalBoundaryTest.java",
+      "sha256": "f173ac6585e9bc45a9b56b89ea7267858c3752a4e0d303e3e104e50907b948ab",
+      "git_blob": "9029cf2971c4de66664bcde7ebc99b24662ea00d",
+      "bytes": 5973,
+      "before_sha256": "ABSENT"
+    },
+    {
+      "path": "m3/docs/name-mapping.json",
+      "sha256": "c09c1a4b462c45c1cd4cbf684808143e2408a87ee990edb73bd8f7780c91bce8",
+      "git_blob": "fff40434f900c92085bea43e63570727a5793b5d",
+      "bytes": 789441
+    },
+    {
+      "path": "m3/tooling/name-contract/name-plan.json",
+      "sha256": "2f7ed0208b7330db337a9587b15e220eb00ae4cc2f5d9b6e06a956ee30de05fa",
+      "git_blob": "4ab64db85e71f38ebcf7c0f2dc10b745caeba7d2",
+      "bytes": 2444
+    }
+  ],
+  "combined_component": {
+    "source_built_module": "jdk.m3.collections",
+    "source_count": 1185,
+    "strict_compiler": "Java 21 --release 21 -proc:none -Xlint:all,-module -Werror",
+    "selected_junit_tests": 25,
+    "junit_failures_errors_aborts_skips": 0,
+    "new_regression_main_modes": [
+      "normal",
+      "-Xint"
+    ],
+    "fifo_cases_per_main": 218392,
+    "fifo_checks_per_main": 2181707,
+    "bitset_cases_per_main": 4,
+    "jrt_origins_verified": [
+      "jdk.m3.collections.LongCircularFifoQueue",
+      "jdk.internal.m3.collections.bits.PackedLongBitSet"
+    ],
+    "image_scope": "Source-built jdk.m3.collections linked with host JDK 21 modules; not a full source-built M3JDK/HotSpot",
+    "evidence": [
+      {
+        "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/qualification/fifo-bitset-20261113/component-forward/qualification.json",
+        "sha256": "b6e1776a5bd64e663eb7e62d6931dcb93c5454c1ac3205103bf37daad482663f",
+        "git_blob": "a04cb326447679b87ce600905bb760e25b6de863",
+        "bytes": 257193
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/qualification/fifo-bitset-20261113/component-forward/commands.json",
+        "sha256": "066b0fbfd6c5cec885fe757b829e6cc1d13090405342018800e69cdbb9b943da",
+        "git_blob": "f06785f825b1f4bb3c4eeecc2d707931c3ece956",
+        "bytes": 7520
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/qualification/fifo-bitset-20261113/component-forward/junit.log",
+        "sha256": "712b00456698623f77fccaaa916d8c3cd8ce07fd0a5b9c3eeec6cdcd9531c852",
+        "git_blob": "1ebbdef14618aef869e9bd7a5e294151f15a6dbd",
+        "bytes": 577
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/qualification/fifo-bitset-20261113/component-forward/origins-runtime.log",
+        "sha256": "d1dc55e61ec522f5d870f35d6e5b90a622dd9f3c359bc177048f1d4821b421a9",
+        "git_blob": "ef3ef018f2fded38562c8865d18502585a76c58e",
+        "bytes": 266
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/qualification/fifo-bitset-20261113/component-forward/image-LongCircularFifoQueueBulkTest-normal.log",
+        "sha256": "b86ab464ef094544a786339303eccb0deeb814d86c964d8e23c2282ad4ee79f6",
+        "git_blob": "b350bfa1287e1b8649aa2dd0b746359bd24a1de8",
+        "bytes": 53
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/qualification/fifo-bitset-20261113/component-forward/image-LongCircularFifoQueueBulkTest-xint.log",
+        "sha256": "b86ab464ef094544a786339303eccb0deeb814d86c964d8e23c2282ad4ee79f6",
+        "git_blob": "b350bfa1287e1b8649aa2dd0b746359bd24a1de8",
+        "bytes": 53
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/qualification/fifo-bitset-20261113/component-forward/image-LongBitSetTraversalBoundaryTest-normal.log",
+        "sha256": "3331c58e47aa7d643d87f65da068564882f83fd635c1a4a094267229c6230a20",
+        "git_blob": "879e3c5e0b9ce9f8377ec5a378827c8f4f3ff46d",
+        "bytes": 52
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/qualification/fifo-bitset-20261113/component-forward/image-LongBitSetTraversalBoundaryTest-xint.log",
+        "sha256": "3331c58e47aa7d643d87f65da068564882f83fd635c1a4a094267229c6230a20",
+        "git_blob": "879e3c5e0b9ce9f8377ec5a378827c8f4f3ff46d",
+        "bytes": 52
+      }
+    ]
+  },
+  "api_abi": {
+    "fifo": "Exact javap public/protected descriptor equality against full actual baseline and emitted candidate.",
+    "bitset": "Exact javap protected descriptor equality for owner/interface and private owner equality against full actual baseline and emitted candidate.",
+    "production_jni_symbols": "unchanged; no new symbols or native implementation"
+  },
+  "naming": {
+    "records": 87,
+    "retained_current_records": 81,
+    "appended_master_records": 6,
+    "primitive_map_growth_retained": true,
+    "queued_operations": 4,
+    "qualified_jdk_promotions": 0,
+    "phase_advance": false,
+    "active_phase": "String"
+  },
+  "resource_observations": {
+    "fifo": "Bounded medium-window CPU improved; the original mixed-shape full-capacity run regressed 42.7%; the isolated steady full-capacity median regressed 1.76% with mixed per-pair results. No broad speed or non-regression acceptance. No hot-path allocation added; bounded median allocated bytes zero.",
+    "bitset": "Final candidate/baseline CPU ratios 0.915, 0.921, 0.880, 0.988, 1.004 across five measured densities; every sample 0 allocated bytes/traversal; same 32,768-byte owner payload. Single-host observations only.",
+    "evidence": [
+      {
+        "path": "synexia-openrewrite-recipes/crates/m3jdk21-ring-bulk-two-span-20261113/qualification/20261113/evidence/cost/RESULTS.json",
+        "sha256": "9596633d85d1f0f0be57f198ebbd92d7c76877a1ae7d1ae337d17b1a88611a6a",
+        "git_blob": "f6801399d8d22ba5c2a6756adb4d600ab74fef9b",
+        "bytes": 37903
+      },
+      {
+        "path": "synexia-openrewrite-recipes/crates/m3jdk21-ring-bulk-two-span-20261113/qualification/20261113/evidence/cost-steady/RESULTS.json",
+        "sha256": "bb84d1eb4ce324e0636926c4dd7b906097670428ceb0b215130a0d09e35779af",
+        "git_blob": "4784dcd1253b1913ab5972d633e5cc193a862311",
+        "bytes": 49326
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipe-crates/m3jdk-longbitset-max-boundary-20261113/qualification-20261113/COST_RESULTS.json",
+        "sha256": "a86b3b077878dedebe15c2ca1f57ec55358f97b495b5412cd58f1b26c8c14bb5",
+        "git_blob": "d26e10e3652a25c0da772630704030e8a7b5d4cc",
+        "bytes": 8888
+      }
+    ]
+  },
+  "global_provenance": {
+    "status": "UNVERIFIED",
+    "global_attempt": "BLOCKED_MISSING_INPUT",
+    "scoped_new_rows": 587,
+    "scoped_new_row_validation": "PASS",
+    "baseline_missing_members": 111,
+    "baseline_available_parse_fail": 57,
+    "evidence": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/qualification/fifo-bitset-provenance-20261113/PROVENANCE_QUALIFICATION.json",
+      "sha256": "d08e356de4ae40527f1baec272addb7b6089ced8c8135a33bf5682032776a026",
+      "git_blob": "3f4193a2bf11d3032e1a0d89c4bfdd414ae3ea9b",
+      "bytes": 3380
+    }
+  },
+  "holds": [
+    "Full source-built M3JDK21/HotSpot release image and repository release contract, including M3_MAVEN_CONTROL_REACTOR.",
+    "Full jtreg/JCK, JNI/GC/native lifecycle and cross-platform gates.",
+    "Production-workload CPU, retained-heap/native-process-memory and release performance acceptance.",
+    "Hosted CI and whole Synexia reactor; finite local tests are not those gates.",
+    "Canonical repository-wide provenance gate remains separate from scoped changed-file checks.",
+    "Ordered String -> arrays -> collections admission is unchanged; no five-family completion claim."
+  ],
+  "public_payload": "Existing runtime owners, two independent target-owned regression tests, data-only naming outputs and this passive receipt. Recipe Java/YAML/POM, engines, fixtures and improvement memory stay in Synexia.",
+  "receipt_materialization": {
+    "canonical_owner": "hsoliwal/com.synexia",
+    "crate": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+    "recipe_name": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+    "dataset": "fifo-bitset-receipt-20261113",
+    "target": "m3/compatibility/fifo-bitset-20261113.json",
+    "before": "ABSENT",
+    "self_seal": "The subsequent private dataset binds receipt bytes and its actual SDK/receiver evidence without a self-referential hash."
+  }
+}
