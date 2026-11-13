@@ -103,12 +103,12 @@
     {
       "bytes": 79672,
       "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/packaging-authoring-v1/extracted/rf0/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/rf0-rfc/target-3.txt",
-      "gitBlob": "5c3f8836c697f2b03b112140a2b190e6a1cba33b",
+      "gitBlob": "3dc90dfe82e994dace26778b3755288a4ce33ed9",
       "m3Path": "make/m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/runtime-checker/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/rf0-rfc/target-3.txt",
       "mode": "100644",
       "projectPath": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/rf0-rfc/target-3.txt",
       "role": "qualified-project-flat",
-      "sha256": "e90a850d9a8946ad3c741b99a81bc823a65415110ec32aabffd25da15f530e59",
+      "sha256": "4a1ca22beead3a1dafe2dde4bdf5b65af63c5981b4616f12f7c373cafe4b2c06",
       "synexiaPath": "m3-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/runtime-checker/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/rf0-rfc/target-3.txt"
     },
     {
@@ -169,12 +169,12 @@
     {
       "bytes": 79659,
       "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/packaging-authoring-v1/extracted/rf0/project/src/test/resources/before/m3/tooling/image-gates/current-c0.json",
-      "gitBlob": "6f6c7a53565d770b385ad00dd865f557a73b51c4",
+      "gitBlob": "395d6fce44321678b1c1b3ca9504af4cc5f5093e",
       "m3Path": "make/m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/runtime-checker/src/test/resources/before/m3/tooling/image-gates/current-c0.json",
       "mode": "100644",
       "projectPath": "src/test/resources/before/m3/tooling/image-gates/current-c0.json",
       "role": "qualified-project-flat",
-      "sha256": "597b99f17221abf7b7301cf82a96c113f7fc9e9fd26a24145a9e6e973198be30",
+      "sha256": "91230a53dfadc5dff3d957fbdfe8ff4caec3b9eb321fb9dd3f229abfe6c43f97",
       "synexiaPath": "m3-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/runtime-checker/src/test/resources/before/m3/tooling/image-gates/current-c0.json"
     }
   ],

@@ -18,7 +18,7 @@ TEXT	doc/m3/name-mapping.d/m3-java-util-sorts.json	ABSENT	ABSENT	c58767291e3a140
 TEXT	doc/m3/sorting/README.md	ABSENT	ABSENT	d0b3ba4d459e5ad92cde1cdd1fe1509ba3767140e728c49004aad4c929bcad34	true
 TEXT	doc/m3/sorting/USAGE.md	ABSENT	ABSENT	9c4101c33f320ff55d53c4c34488261b18dd8f57d3baa44492e86532d4182f3a	true
 TEXT	doc/m3/sorting/algorithms.tsv	ABSENT	ABSENT	fdd13991d79f91091b7633983e1dedaff2896aef7f308c5af9b9df9297d8b7a1	true
-TEXT	make/m3/verification/sorting/verify.py	ABSENT	ABSENT	96e4ed9e928691bf26353d051b3bd219772133dd571a0382877ae6d60dbd0a5f	true
+TEXT	make/m3/verification/sorting/verify.py	ABSENT	ABSENT	8ab98ca9e1188b7ebc05d100f8d989d442c054d29cb8faa98ad9b48e44ca818c	true
 JAVA	src/java.base/share/classes/java/util/M3ComparisonSorts.java	ABSENT	ABSENT	26d2607b568822c589076c5f8eebb8b9cf970dd5f082eb587aea04d2311b9540	true
 JAVA	src/java.base/share/classes/java/util/M3DistributionSorts.java	ABSENT	ABSENT	0f8a3d4205b0e25319cfe1e8ef3ab066727f8c713fbcca7413b7c3a806dbbdf9	true
 JAVA	src/java.base/share/classes/java/util/M3SortContext.java	ABSENT	ABSENT	ca8ac207624e1965532d4c09a00b0abe8cc8e10721fd736290c2a200a9c44239	true

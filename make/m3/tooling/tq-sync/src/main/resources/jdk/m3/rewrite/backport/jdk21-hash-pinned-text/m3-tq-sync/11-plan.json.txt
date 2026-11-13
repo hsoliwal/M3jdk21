@@ -53,7 +53,7 @@
       "before": null,
       "after": {
         "resource": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/verify-image.sh.txt",
-        "sha256": "fddf22592f0461fa91bd25753d8d41aa444ac1406fa74a9d04351f2b8585803d"
+        "sha256": "c786a95ca43ad5d31979681bf012e534f115c6b7863cb9b82c6e0100798a91a9"
       }
     },
     {

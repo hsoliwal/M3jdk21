@@ -2,4 +2,4 @@ doc/m3/name-mapping.d/m3-shared-frontend.json	ABSENT	463102c3c23c7f1e3d7ee483421
 make/m3/tooling/shared-frontend/README.md	ABSENT	d6b621764687d8ae681a32ed36fe7331a876057bd02ae43e0f5fc1456f5e9a4f	0002-README.md.txt
 make/m3/tooling/shared-frontend/algorithm-catalogue.tsv	ABSENT	ba714f38f4dda33aff6cf14595c1921e0da6a4454dcfa0b793684e0d99c689ef	0003-algorithm-catalogue.tsv.txt
 make/m3/tooling/shared-frontend/openrewrite/pom.xml	ABSENT	f6dd1edf87821933d42e0adf549c7c180506455c52526a2d3e46471b58a17382	0004-pom.xml.txt
-make/m3/tooling/shared-frontend/verify_frontend.py	ABSENT	464f6c5c43af3d4a3f24c63c63144fbe9430f131dcdd3741c91472714ddf9a50	0007-verify_frontend.py.txt
+make/m3/tooling/shared-frontend/verify_frontend.py	ABSENT	c77308b4b61c2e16f74748c65e1223b91d3fc5e1b95feca56012ce4db10e7494	0007-verify_frontend.py.txt

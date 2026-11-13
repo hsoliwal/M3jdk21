@@ -17,28 +17,28 @@
       "path": "doc/m3/name-mapping.d/m3-integrated-utility-families-20261018.json",
       "candidate_file": "/workspace/scratch/0125adabf4e6/m3jdk21-work/catalogue-token-recovery-candidates/m3/docs/name-mapping.d/m3-integrated-utility-families-20261018.json",
       "before_sha256": "0271ca2761cb871091fb22c5d7989ff11822ff2deb65d67d2c58080878948ff5",
-      "after_sha256": "82a00fe960e49e1aed8141bf1330e4d2fc86fe765c1153f6d980cd98dd965f33",
+      "after_sha256": "4ea9703b52ed9c3525fabffca73464372761fdddcecc15088960c2436ce96138",
       "before_source": "CANONICAL_CORE_RECIPE_TEMPLATE_AT_4de06d536308121b64bbe714096f7cad6bc0b908"
     },
     {
       "path": "make/m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv",
       "candidate_file": "/workspace/scratch/0125adabf4e6/m3jdk21-work/catalogue-token-recovery-candidates/m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv",
       "before_sha256": "8fb0beb19ca5b45ce08f836cef64a243695a3920f19d6099e93a27c674f24f23",
-      "after_sha256": "46f7e0aa4f9c68c1959efb96b62916f5fe9abcaca6e8b3383255ccc27a6587e6",
+      "after_sha256": "de68e4b1cc93d502d813d8d1e647db610542adb7a38ed1f0996e6c94281c4141",
       "before_source": "CANONICAL_CORE_RECIPE_TEMPLATE_AT_4de06d536308121b64bbe714096f7cad6bc0b908"
     },
     {
       "path": "doc/m3/INTEGRATED_UTILITY_COVERAGE_20261018.md",
       "candidate_file": "/workspace/scratch/0125adabf4e6/m3jdk21-work/catalogue-token-recovery-candidates/m3/docs/INTEGRATED_UTILITY_COVERAGE_20261018.md",
       "before_sha256": "301320272695a993769df1164709d2c5fbe469e45543139ecbbece8bf824fbf2",
-      "after_sha256": "8592c7633e799d65e3f49799826d95e2f889c0225ff5432d298e445765b75502",
+      "after_sha256": "130d6daf9845251d78916089273c44bcc96e2c295b336a2d633faa7e3f0aa89b",
       "before_source": "CANONICAL_CORE_RECIPE_TEMPLATE_AT_4de06d536308121b64bbe714096f7cad6bc0b908"
     },
     {
       "path": "make/m3/compatibility/check_integrated_utility_coverage.py",
       "candidate_file": "/workspace/scratch/0125adabf4e6/m3jdk21-work/catalogue-token-recovery-candidates/m3/compatibility/check_integrated_utility_coverage.py",
       "before_sha256": "75a089b2ef4bce9beb75f88869c4f613c530df528c872af33df9e8440914d9c1",
-      "after_sha256": "755331c282200ded3841e533de0f376cc05faec355f37f8de6ca9c1a0b504d12",
+      "after_sha256": "572bd8b180b1020d49580bc7e0371ddd5cf4d03b875ecaad1ac412b735d4284c",
       "before_source": "CANONICAL_CORE_RECIPE_TEMPLATE_AT_4de06d536308121b64bbe714096f7cad6bc0b908"
     },
     {

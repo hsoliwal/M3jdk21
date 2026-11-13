@@ -8,7 +8,7 @@
     "doc/m3/string-precompute-completeness.tsv": "12c4360171180e53e77d41761f685ac64876f422b7a6bb38e31f9d8df98a93fe",
     "doc/m3/m3-string-precompute-port-map.tsv": "c53032a3f62464f695d9c4cf35565567545a08edd6c70e1b42d0bd5198d0f20f",
     "make/m3/runtime-integration/check-m3string-invariants.py": "6998f1442190b439f65434ee979b0501357c359836484de60cba3b51c96e43f9",
-    "make/m3/tooling/tq-sync/verify-plan.py": "72789b815e8dec9b6f26930952fd16d715d8588c3f5ea442b432842558647e6f",
+    "make/m3/tooling/tq-sync/verify-plan.py": "e5e63462b441a07022709a936c671d25d6fa93ee7122e06eb45af9cfa896223b",
     "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java": "fd376487d4497fef3f3f058584cd04abb5622abcff14364600b96a53df588862",
     "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
     "src/java.base/share/classes/java/util/regex/Pattern.java": "8cbd439235c592ecc98eb2a26f8494108c18a6521e715431ca1bec6db1e0b170",

@@ -14,12 +14,12 @@
     {
       "path": "make/m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv",
       "before_sha256": "8fb0beb19ca5b45ce08f836cef64a243695a3920f19d6099e93a27c674f24f23",
-      "after_sha256": "46f7e0aa4f9c68c1959efb96b62916f5fe9abcaca6e8b3383255ccc27a6587e6"
+      "after_sha256": "de68e4b1cc93d502d813d8d1e647db610542adb7a38ed1f0996e6c94281c4141"
     },
     {
       "path": "make/m3/compatibility/check_integrated_utility_coverage.py",
       "before_sha256": "75a089b2ef4bce9beb75f88869c4f613c530df528c872af33df9e8440914d9c1",
-      "after_sha256": "755331c282200ded3841e533de0f376cc05faec355f37f8de6ca9c1a0b504d12"
+      "after_sha256": "572bd8b180b1020d49580bc7e0371ddd5cf4d03b875ecaad1ac412b735d4284c"
     },
     {
       "path": "make/m3/compatibility/test_integrated_utility_coverage.py",
@@ -29,12 +29,12 @@
     {
       "path": "doc/m3/INTEGRATED_UTILITY_COVERAGE_20261018.md",
       "before_sha256": "301320272695a993769df1164709d2c5fbe469e45543139ecbbece8bf824fbf2",
-      "after_sha256": "8592c7633e799d65e3f49799826d95e2f889c0225ff5432d298e445765b75502"
+      "after_sha256": "130d6daf9845251d78916089273c44bcc96e2c295b336a2d633faa7e3f0aa89b"
     },
     {
       "path": "doc/m3/name-mapping.d/m3-integrated-utility-families-20261018.json",
       "before_sha256": "0271ca2761cb871091fb22c5d7989ff11822ff2deb65d67d2c58080878948ff5",
-      "after_sha256": "82a00fe960e49e1aed8141bf1330e4d2fc86fe765c1153f6d980cd98dd965f33"
+      "after_sha256": "4ea9703b52ed9c3525fabffca73464372761fdddcecc15088960c2436ce96138"
     },
     {
       "path": "doc/m3/name-mapping.json",
@@ -44,7 +44,7 @@
     {
       "path": "make/m3/runtime-integration/token-regex/README.md",
       "before_sha256": "ABSENT",
-      "after_sha256": "695ed953a1b31c3b382dca3cac2901e3d5071fe8328212a8ca166c3072db9a19"
+      "after_sha256": "b798c4b610123825b19f971063d5261f07ec7f34e39cced4081482949aca4e91"
     },
     {
       "path": "make/m3/runtime-integration/token-regex/behavioral-atoms.json",
@@ -54,12 +54,12 @@
     {
       "path": "make/m3/runtime-integration/token-regex/contract-catalogue.json",
       "before_sha256": "ABSENT",
-      "after_sha256": "b4b5279f88bed412a78cd533563b417b86b25fc19e9a0283f64d20ab8e686491"
+      "after_sha256": "0ea2a5c33a9d05252fddd7e1de92b718a3d4d9a2a5bbfdc817578c56ca4a9b73"
     },
     {
       "path": "make/m3/runtime-integration/token-regex/verify.py",
       "before_sha256": "ABSENT",
-      "after_sha256": "0d605a28b5fd82374dbb19b2ae9f3d1fdc13dddb1dda52ccaed10bd780e39849"
+      "after_sha256": "851bc9542136ece7624f1c11b2d86518853c566b4a64c3cda1564314c4bbda24"
     },
     {
       "path": "src/java.base/share/classes/java/util/regex/TokenMatcher.java",

@@ -1196,12 +1196,12 @@
     {
       "bytes": 10881,
       "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/extracted/ic0/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-awb/target-5.txt",
-      "gitBlob": "c1c92c23ebf33688568e5810d62f60a41c712417",
+      "gitBlob": "d9591e339f1631a5ee3388e0be07885bb480c9fc",
       "m3Path": "make/m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-awb/target-5.txt",
       "mode": "100644",
       "projectPath": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-awb/target-5.txt",
       "role": "qualified-project-flat",
-      "sha256": "844e283c4928e8be0a0bf5ab40c8de4bf9da187292b557319f8e599a7102ab73",
+      "sha256": "4d8befcaf952da345e5ce22666e11b21419cac235dc10fb8d214d2ce8986391d",
       "synexiaPath": "m3-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-awb/target-5.txt"
     },
     {
@@ -1515,12 +1515,12 @@
     {
       "bytes": 15213,
       "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/extracted/ic0/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-ciw/target-4.txt",
-      "gitBlob": "c9f9eafe499ec12fc2c2ed16f8cbe7162f4b9ad5",
+      "gitBlob": "023eb7c3e944ffb335bf140107e4ccdff242f7c9",
       "m3Path": "make/m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-ciw/target-4.txt",
       "mode": "100644",
       "projectPath": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-ciw/target-4.txt",
       "role": "qualified-project-flat",
-      "sha256": "fc0e4aa46859f49c3c8e914b95243b279bbd2a0e7737f6535d8947b769153a2f",
+      "sha256": "d2e515eed3f2792189e47577eafc2c894b3437fa2c7c2282499f9131f556a1be",
       "synexiaPath": "m3-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-ciw/target-4.txt"
     },
     {
@@ -1702,12 +1702,12 @@
     {
       "bytes": 79534,
       "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/extracted/ic0/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-fnd/target-2.txt",
-      "gitBlob": "87a8c2aa4c977ba9429ef0965338615d6b170b5f",
+      "gitBlob": "da014583fcc780fb0792eb1b29a89a38d2178fed",
       "m3Path": "make/m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-fnd/target-2.txt",
       "mode": "100644",
       "projectPath": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-fnd/target-2.txt",
       "role": "qualified-project-flat",
-      "sha256": "021e4dff92d1fe78e015c7538c5d28e503dac8c62f43d09df3c831bdf3ddccf1",
+      "sha256": "21f306753771d81f5fcfe551b76b8c9e4580f75d847744154032863de24c5404",
       "synexiaPath": "m3-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-fnd/target-2.txt"
     },
     {
@@ -1911,34 +1911,34 @@
     {
       "bytes": 3341,
       "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/extracted/ic0/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-hts/target-2.txt",
-      "gitBlob": "b60f4b0d0b549f16916fa61080d541491eb190da",
+      "gitBlob": "d4fd46fad87e7bf1df8d5a58d6b8a90784a95a1c",
       "m3Path": "make/m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-hts/target-2.txt",
       "mode": "100644",
       "projectPath": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-hts/target-2.txt",
       "role": "qualified-project-flat",
-      "sha256": "cfe8e8930916ef96c7d23dd9d0942f082c5eb1d6cf4b2a2f6e9f3d69d8fa3e41",
+      "sha256": "24178966e5ea143317dfa182c595696bc5f9976b8fdfc585acf938e7d0a7fe5e",
       "synexiaPath": "m3-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-hts/target-2.txt"
     },
     {
       "bytes": 16119,
       "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/extracted/ic0/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-hts/target-3.txt",
-      "gitBlob": "6274b16d8d560f06a96205692fc6d85bb984e91f",
+      "gitBlob": "fbc6e38737267027d39918b4ec3460053e68cb31",
       "m3Path": "make/m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-hts/target-3.txt",
       "mode": "100644",
       "projectPath": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-hts/target-3.txt",
       "role": "qualified-project-flat",
-      "sha256": "ae05a158f6f68124276241f5927ad5b77cc786c25b478a69b2c1a7f34353c141",
+      "sha256": "2d2c8c0489bc2b7e47106bb3c95ffcc512fd330658a8aee2553d310436b9a4d9",
       "synexiaPath": "m3-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-hts/target-3.txt"
     },
     {
       "bytes": 7629,
       "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/extracted/ic0/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-hts/target-4.txt",
-      "gitBlob": "453cd601ca80a8fb87509538e02606f5fd925dcb",
+      "gitBlob": "417500d6c9edbae7a1c80ac5e2be78c5b642cd7d",
       "m3Path": "make/m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-hts/target-4.txt",
       "mode": "100644",
       "projectPath": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-hts/target-4.txt",
       "role": "qualified-project-flat",
-      "sha256": "30a838a363fb05f9c1caf48fd36c0a67de0767708e4b198b77af37ee0c41eb63",
+      "sha256": "fcbb3f4591eff00f1a7540a766fc74bf0eed5c510543a0638dd8a3037020832e",
       "synexiaPath": "m3-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-hts/target-4.txt"
     },
     {

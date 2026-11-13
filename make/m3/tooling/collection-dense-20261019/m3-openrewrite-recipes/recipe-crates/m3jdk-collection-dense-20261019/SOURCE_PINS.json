@@ -37,8 +37,8 @@
     },
     {
       "path": "make/m3/runtime-integration/integrated-collections/verify.py",
-      "git_blob": "e36d5d8461b1d28ffe021e0a51734583945aad6f",
-      "sha256": "89540bb2b2deff0d3d8a7f371f1874fb65c96ee397478f1e0254a16eea889726"
+      "git_blob": "ebe163fee3f56bf22cc7b1580d9da158066b8db9",
+      "sha256": "1c8ffffee4d641aa3b448bb4ed23c1a8ea90af5d4ef150105740a5ff6ff065c6"
     },
     {
       "path": "src/java.base/share/classes/java/util/Collections.java",

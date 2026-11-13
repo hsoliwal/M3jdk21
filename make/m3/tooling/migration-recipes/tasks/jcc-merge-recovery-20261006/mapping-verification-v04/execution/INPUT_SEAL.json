@@ -32,9 +32,9 @@
     },
     {
       "bytes": 23333,
-      "git_blob": "d976f4a5d7f8983ade85d5d2cf608e3f6b2885d7",
+      "git_blob": "de0beb7834b9fa9fa57b78f18c8d35b715a5fa57",
       "path": "make/m3/migration/migration.py",
-      "sha256": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e"
+      "sha256": "1577ee9ca800e32fcad108957990588c8b38a50c3e0369b3cfa419439ff9eda5"
     },
     {
       "bytes": 9860,
@@ -98,9 +98,9 @@
     },
     {
       "bytes": 308294,
-      "git_blob": "44c966eca8e52d8c86925478d5b3ffbb45882e82",
+      "git_blob": "8d68acb5043770fd2351b4e4a1f9aa1c807c2bd1",
       "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/before-00.txt",
-      "sha256": "e76133a4d1bb472dfc88a41e8d8560d5ac0e08ba4d227b3b6c8fbd95915e6ebc"
+      "sha256": "867301069f36e8f1b999f059b896cd0d7834c59d49e9e8dfc268edb875aeac36"
     },
     {
       "bytes": 17031,

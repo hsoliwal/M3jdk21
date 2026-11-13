@@ -24,7 +24,7 @@
           "afterBytes": 778,
           "afterSHA256": "c0af7bc99ace3f9dcc5e0e9085d9bac66eeb1a497b2153a54bb11ca250916c14",
           "beforeBytes": 778,
-          "beforeSHA256": "55cf0228bc55016de89f71104895e3c9fd408ec05dc32640452914ca53f42170",
+          "beforeSHA256": "624eea15c6e03ccc3e173110357e44c35cbe368c7d6a8b2661a74e61f15fd2fb",
           "operation": "REPLACE",
           "path": "make/m3/runtime-integration/fix-root-ascii-case/manifest.json"
         },

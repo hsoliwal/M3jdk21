@@ -174,7 +174,7 @@
       "path": "make/m3/migration/run-tests.py",
       "references": [
         {
-          "expected_sha256": "491041a68163a6a6c53908f685d1bee3153c782d150057d7235a3d4dc61c00dd",
+          "expected_sha256": "4cef565b47f9c262719d09c71d9788b56415ee7e43bbc2f592de8e4b3cfa1300",
           "role": "receipt-input",
           "test_id": "prefix-z-interpreter"
         },
@@ -189,7 +189,7 @@
       "path": "make/m3/migration/src/jdk/m3/migration/ExactFileRecipe.java",
       "references": [
         {
-          "expected_sha256": "d094fc40909639119828b78f5f1635c51263e6aa177a159ac05de7ee8b8871ee",
+          "expected_sha256": "4d19d4feddb80eb8fbe2c92b367c79a78b322f052522acddfe94cc15ee4a55f1",
           "role": "receipt-input",
           "test_id": "prefix-z-interpreter"
         },
@@ -204,7 +204,7 @@
       "path": "make/m3/migration/test/RecipeContractTest.java",
       "references": [
         {
-          "expected_sha256": "4720a7d949654c5fcc536703b272c31d8b38d9ef7b9b0d5bd4309e63daaac745",
+          "expected_sha256": "a23f2823caaf941ac70dacd08a0dec4691c35dd8f22f30e58e9a1d46ae998228",
           "role": "receipt-input",
           "test_id": "prefix-z-interpreter"
         },

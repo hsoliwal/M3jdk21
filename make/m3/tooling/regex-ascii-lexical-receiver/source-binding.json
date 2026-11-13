@@ -71,7 +71,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/m3/docs/name-mapping.json",
       "targetPath": "make/m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/m3/docs/name-mapping.json",
-      "gitBlob": "ce76431af299d15823c1cd30f9083ab1a9186f03",
+      "gitBlob": "88c789ec94abbbaaffac9c2e1e15e37a4e7377c3",
       "bytes": 451339
     },
     {
@@ -125,7 +125,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/m3/docs/name-mapping.json",
       "targetPath": "make/m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/m3/docs/name-mapping.json",
-      "gitBlob": "ffaa8dd8e5d707bffcecc7b43e7be27b8fd53960",
+      "gitBlob": "307ce8480053ab830f01caa06909741f3c5d0d5c",
       "bytes": 461599
     },
     {
@@ -173,7 +173,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/m3/docs/name-mapping.json",
       "targetPath": "make/m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/m3/docs/name-mapping.json",
-      "gitBlob": "ffaa8dd8e5d707bffcecc7b43e7be27b8fd53960",
+      "gitBlob": "9d6ab0ba2ba2facd20a1f2975886d2be52858c1f",
       "bytes": 461599
     },
     {
@@ -227,7 +227,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/m3/docs/name-mapping.json",
       "targetPath": "make/m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/m3/docs/name-mapping.json",
-      "gitBlob": "ce76431af299d15823c1cd30f9083ab1a9186f03",
+      "gitBlob": "db184270ed28bc80fbec47853e2c381c13010ae7",
       "bytes": 451339
     },
     {
@@ -281,7 +281,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/verify.py",
       "targetPath": "make/m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py",
-      "gitBlob": "3b388c656fc0af06173735c8d9dc16f641b51de6",
+      "gitBlob": "c0cb9aa31746d52f1596f0423d8ffe69f7bb95a6",
       "bytes": 23045
     },
     {
@@ -299,7 +299,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-hosted/qualify.py",
       "targetPath": "make/m3/tooling/regex-ascii-lexical-receiver/qualify.py",
-      "gitBlob": "eb47ae9f9343948b0d93e3a01682ff980835587b",
+      "gitBlob": "3ed2383d2eb204fe5dc56a1b5e5d5f4effca6d01",
       "bytes": 12664
     }
   ],

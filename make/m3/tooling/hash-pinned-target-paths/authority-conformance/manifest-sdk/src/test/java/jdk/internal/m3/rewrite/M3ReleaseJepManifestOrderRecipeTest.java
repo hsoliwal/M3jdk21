@@ -33,7 +33,7 @@ final class M3ReleaseJepManifestOrderRecipeTest {
     private static final String INVERSE_DESCRIPTOR_SHA = "9f189d2aa0e2f1cf1f0c74a63c8eebc7a346321d6a67cc8ba1ac743d1a29628e";
     private static final String TARGET = "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/manifest.tsv";
     private static final String AFTER = "fb41cd4126bd154fb5c3da02a49758916235586c524e47e8c91a089f99b4cba7";
-    private static final Map<String, String> BEFORE = Map.of(TARGET, "fca288fddb97ea486df2f21d6601848dad6df016aae0bd53c291d16e8181efd3");
+    private static final Map<String, String> BEFORE = Map.of(TARGET, "e94a85ef6c9cb8466503c011da6668ba86cc48c6518e9cbf00be8f4a3a479c3d");
     private static final Set<String> PASSED = new LinkedHashSet<>();
     private static final Map<Boolean, String> EMITTED = new HashMap<>();
     private static int successfulRuns;

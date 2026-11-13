@@ -1,4 +1,4 @@
 .github/workflows/m3-class-ver.yml	0f356f94750290c525814998dd0a5fe57658e0d29d5d5c840d8e018dbe043953	377af5973a6ae83c8d0af9e21794fd375f53d5af9030c9634765a97210da0eb0	target-1.txt
 make/m3/migration/classver-evidence.json	ABSENT	da68bc2e110f1e6cfcadef240393c121c86a8bcc3341202a900e2c8e3466e1b5	target-2.txt
 make/m3/migration/classver.py	ABSENT	28c6a263240bc28866566d65e92aeee58af328e5bc418de0d4e594e20d71a244	target-3.txt
-make/m3/migration/test/test_classver.py	ABSENT	fc0e4aa46859f49c3c8e914b95243b279bbd2a0e7737f6535d8947b769153a2f	target-4.txt
+make/m3/migration/test/test_classver.py	ABSENT	401c4e1d71bf69b9a99b122f13e66c25b52ab27f0be9ac4521b53f43cc77a914	target-4.txt

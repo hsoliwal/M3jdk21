@@ -22,19 +22,19 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/hosted/qualify.py",
       "targetPath": "make/m3/tooling/backport-contract-current-owner/qualify.py",
-      "gitBlob": "735f880afd81739cd21313302de947d49626d202",
+      "gitBlob": "e776d874e5491d74e95405858f60afcc67147d02",
       "bytes": 18290
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/runtime/INPUTS.json",
       "targetPath": "make/m3/tooling/backport-contract-current-owner/runtime/INPUTS.json",
-      "gitBlob": "8ac731367e254e1ed9b49813f9d109d3f06eb5e0",
+      "gitBlob": "7c7b0900a7a030c835a44110a390d6df82cf6d62",
       "bytes": 9330
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/runtime/README.md",
       "targetPath": "make/m3/tooling/backport-contract-current-owner/runtime/README.md",
-      "gitBlob": "67d987cbad0af4aa3de0ed17a56dc69b2a1afc7b",
+      "gitBlob": "ab6625c4b562de5e4ea55a507751e398aa7aa5a1",
       "bytes": 7436
     },
     {
@@ -46,7 +46,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/runtime/qualify.py",
       "targetPath": "make/m3/tooling/backport-contract-current-owner/runtime/qualify.py",
-      "gitBlob": "a3f8492416876547eefed9c5a2d8bc5583ddd8ec",
+      "gitBlob": "98a94245c7e5ee32bb7cdba65119252410100110",
       "bytes": 40785
     },
     {
@@ -166,7 +166,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-contract-current-owner-20261019/forward/out/m3/backports/BACKPORT_EXECUTION_WAVES.md",
       "targetPath": "make/m3/tooling/backport-contract-current-owner/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-contract-current-owner-20261019/forward/out/m3/backports/BACKPORT_EXECUTION_WAVES.md",
-      "gitBlob": "428d775ca476b187dceb26a012401b11b975bbbb",
+      "gitBlob": "ffefc34f8ac1f72288343fbb0f0e0c403a3b98af",
       "bytes": 6247
     },
     {
@@ -190,7 +190,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-contract-current-owner-20261019/forward/out/m3/backports/backport_execution_waves.py",
       "targetPath": "make/m3/tooling/backport-contract-current-owner/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-contract-current-owner-20261019/forward/out/m3/backports/backport_execution_waves.py",
-      "gitBlob": "cc2a6ceb90b56d3b05d1307e705586c8d7cf1b40",
+      "gitBlob": "d92a713709e1f82f5286dbb340998e6fb050fb8e",
       "bytes": 12177
     },
     {
@@ -268,7 +268,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-contract-current-owner-20261019/inverse/out/m3/backports/BACKPORT_EXECUTION_WAVES.md",
       "targetPath": "make/m3/tooling/backport-contract-current-owner/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-contract-current-owner-20261019/inverse/out/m3/backports/BACKPORT_EXECUTION_WAVES.md",
-      "gitBlob": "a5421ae43c55cbcce025f95cf49838a112a507bc",
+      "gitBlob": "afb79515cd516f385dd71add49acdb63f99e971f",
       "bytes": 5680
     },
     {
@@ -292,7 +292,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-contract-current-owner-20261019/inverse/out/m3/backports/backport_execution_waves.py",
       "targetPath": "make/m3/tooling/backport-contract-current-owner/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-contract-current-owner-20261019/inverse/out/m3/backports/backport_execution_waves.py",
-      "gitBlob": "cc2a6ceb90b56d3b05d1307e705586c8d7cf1b40",
+      "gitBlob": "d92a713709e1f82f5286dbb340998e6fb050fb8e",
       "bytes": 12177
     },
     {
@@ -322,7 +322,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/sdk/verify.py",
       "targetPath": "make/m3/tooling/backport-contract-current-owner/sdk/verify.py",
-      "gitBlob": "8ad669b3954a0958820f6962de2e55f6b1988bc2",
+      "gitBlob": "caaf681a7d1dfbda38abf0cc1036d243f9197648",
       "bytes": 25355
     }
   ],
@@ -377,9 +377,9 @@
     },
     {
       "path": "make/m3/backports/backport_execution_waves.py",
-      "gitBlob": "cc2a6ceb90b56d3b05d1307e705586c8d7cf1b40",
+      "gitBlob": "3442177de6ec49dfffcba893171d713ea9cc2688",
       "bytes": 12177,
-      "sha256": "2cb19465a6a0d4f24dc228921eb1a2d7c2bbc4e53ce68e635b0e60ddb2a563dc",
+      "sha256": "80402e5b17b3972e743a7e5053f1de26d361c109a3b9232dd66ad979744c1ab0",
       "role": "KEEP",
       "license": "Apache-2.0"
     },
@@ -447,17 +447,17 @@
     },
     {
       "path": "make/m3/backports/backport_execution_waves.py",
-      "gitBlob": "cc2a6ceb90b56d3b05d1307e705586c8d7cf1b40",
+      "gitBlob": "3442177de6ec49dfffcba893171d713ea9cc2688",
       "bytes": 12177,
-      "sha256": "2cb19465a6a0d4f24dc228921eb1a2d7c2bbc4e53ce68e635b0e60ddb2a563dc",
+      "sha256": "80402e5b17b3972e743a7e5053f1de26d361c109a3b9232dd66ad979744c1ab0",
       "role": "KEEP",
       "license": "Apache-2.0"
     },
     {
       "path": "make/m3/backports/BACKPORT_EXECUTION_WAVES.md",
-      "gitBlob": "428d775ca476b187dceb26a012401b11b975bbbb",
+      "gitBlob": "ffefc34f8ac1f72288343fbb0f0e0c403a3b98af",
       "bytes": 6247,
-      "sha256": "df2aca41ab120bdbc8c165d4abe3552c54a91c591aab116b718b94283ae23f28",
+      "sha256": "a63685cbceb745b02e366202386d185b9c3901c4893575528d237d8178ac2a25",
       "role": "REPLACE",
       "license": "PRESERVED_RECEIVER_NOTICE_NO_RELICENSING"
     }

@@ -125,7 +125,7 @@
       "before": null,
       "after": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/verify-image.sh.txt",
-        "sha256": "78ab9aa7a036687b303007fb2395b1a282da38dfb6129fab62b4ce92944d4331"
+        "sha256": "91dc9df4c6b19e2669bde98a50a05984a60f751ad54c87cbafda01bfd53c1788"
       }
     },
     {

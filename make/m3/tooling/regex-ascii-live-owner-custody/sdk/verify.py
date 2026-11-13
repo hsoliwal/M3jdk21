@@ -21,18 +21,18 @@ CHANGE_PATHS = ["make/m3/tooling/regex-ascii-lexical-receiver/qualify.py","make/
 KEEP_PATHS = ["make/m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json","make/m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py"]
 TARGET_PATHS = CHANGE_PATHS + KEEP_PATHS
 OWNER_BEFORE_GIT = {
-    "make/m3/tooling/regex-ascii-lexical-receiver/qualify.py": "eb47ae9f9343948b0d93e3a01682ff980835587b",
+    "make/m3/tooling/regex-ascii-lexical-receiver/qualify.py": "3ed2383d2eb204fe5dc56a1b5e5d5f4effca6d01",
     "make/m3/tooling/regex-ascii-lexical-receiver/README.md": "28f4187fd8470dc0d036cb77ec24d471eebb3941",
     ".github/workflows/m3-regex-ascii-lexical-receiver.yml": "43282c4c40dfd5f195fa2b6380d69ff4a7ce2d3c",
     "make/m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json": "69dd910434902bb9d80c0671e9c9189fcc25c0ee",
-    "make/m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py": "3b388c656fc0af06173735c8d9dc16f641b51de6"
+    "make/m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py": "c0cb9aa31746d52f1596f0423d8ffe69f7bb95a6"
 }
 OWNER_AFTER_GIT = {
     "make/m3/tooling/regex-ascii-lexical-receiver/qualify.py": "5b733379de482250fb0ef23f62db4dbc62aab455",
     "make/m3/tooling/regex-ascii-lexical-receiver/README.md": "d73a374eff026de3557f6163a4094d1c69222355",
     ".github/workflows/m3-regex-ascii-lexical-receiver.yml": "543bed1285bb8903db5fb67ac89f6b6cf4183d93",
     "make/m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json": "69dd910434902bb9d80c0671e9c9189fcc25c0ee",
-    "make/m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py": "3b388c656fc0af06173735c8d9dc16f641b51de6"
+    "make/m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py": "c0cb9aa31746d52f1596f0423d8ffe69f7bb95a6"
 }
 DIRECTIONS = ("forward", "inverse")
 RECEIVER_OUTPUTS: dict[str, str] = {}

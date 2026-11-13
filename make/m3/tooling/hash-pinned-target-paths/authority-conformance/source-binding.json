@@ -109,9 +109,9 @@
     {
       "targetPath": "make/m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/main/resources/jdk/internal/m3/rewrite/release-jep-manifest-order-20261020/before/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/manifest.tsv",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/src/main/resources/jdk/internal/m3/rewrite/release-jep-manifest-order-20261020/before/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/manifest.tsv",
-      "gitBlob": "3ade13f02591c33ee106db4b9295c7f663d35eab",
+      "gitBlob": "72c7c0bfeac33ee645b814114f93c49efe9be541",
       "bytes": 1966,
-      "sha256": "fca288fddb97ea486df2f21d6601848dad6df016aae0bd53c291d16e8181efd3"
+      "sha256": "99609c5fa0d1a680077ed3801cd75699a9ddaee1b456986587de32579c710c51"
     },
     {
       "targetPath": "make/m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/main/resources/jdk/internal/m3/rewrite/release-jep-manifest-order-20261020/inverse/manifest.tsv",
@@ -130,9 +130,9 @@
     {
       "targetPath": "make/m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/main/resources/jdk/internal/m3/rewrite/release-jep-manifest-order-20261020/inverse/out/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/manifest.tsv",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/src/main/resources/jdk/internal/m3/rewrite/release-jep-manifest-order-20261020/inverse/out/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/manifest.tsv",
-      "gitBlob": "3ade13f02591c33ee106db4b9295c7f663d35eab",
+      "gitBlob": "57002c2ef6bc2529a96a2ad3518f53933b4b5b16",
       "bytes": 1966,
-      "sha256": "fca288fddb97ea486df2f21d6601848dad6df016aae0bd53c291d16e8181efd3"
+      "sha256": "e94a85ef6c9cb8466503c011da6668ba86cc48c6518e9cbf00be8f4a3a479c3d"
     },
     {
       "targetPath": "make/m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/main/resources/jdk/internal/m3/rewrite/release-jep-manifest-order-20261020/manifest.tsv",
@@ -200,9 +200,9 @@
     {
       "targetPath": "make/m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/test/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-original-order/manifest.tsv",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/src/test/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-original-order/manifest.tsv",
-      "gitBlob": "3ade13f02591c33ee106db4b9295c7f663d35eab",
+      "gitBlob": "57002c2ef6bc2529a96a2ad3518f53933b4b5b16",
       "bytes": 1966,
-      "sha256": "fca288fddb97ea486df2f21d6601848dad6df016aae0bd53c291d16e8181efd3"
+      "sha256": "e94a85ef6c9cb8466503c011da6668ba86cc48c6518e9cbf00be8f4a3a479c3d"
     },
     {
       "targetPath": "make/m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/test/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/00-JEP_CATALOGUE.tsv.txt",
@@ -256,9 +256,9 @@
     {
       "targetPath": "make/m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/test/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/07-test_release_jep_authority.py.txt",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/src/test/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/07-test_release_jep_authority.py.txt",
-      "gitBlob": "4dcd36ee4f9a78563e4596cf2d37d59b2f0b9e66",
+      "gitBlob": "47ca6d61409c5a68757f1ca89af8f291222bfb4c",
       "bytes": 3581,
-      "sha256": "71852df910638226130c52cd740164bc7d22a82f24ca45ac7cbcc4d7b263ea47"
+      "sha256": "f6a45439a4b12fffd2f7c4270cbf590e1ecdf1a220dc03c7545f3f4971f1f969"
     },
     {
       "targetPath": "make/m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/test/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/08-verify.py.txt",

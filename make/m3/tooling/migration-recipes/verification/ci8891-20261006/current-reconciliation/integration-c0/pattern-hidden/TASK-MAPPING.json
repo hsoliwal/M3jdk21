@@ -169,12 +169,12 @@
     {
       "bytes": 79672,
       "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/packaging-authoring-v1/extracted/ph0/project/src/test/resources/before/m3/tooling/image-gates/current-c0.json",
-      "gitBlob": "5c3f8836c697f2b03b112140a2b190e6a1cba33b",
+      "gitBlob": "2294143016f6093737747cca3d6d9c035826ca49",
       "m3Path": "make/m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/pattern-hidden/src/test/resources/before/m3/tooling/image-gates/current-c0.json",
       "mode": "100644",
       "projectPath": "src/test/resources/before/m3/tooling/image-gates/current-c0.json",
       "role": "qualified-project-flat",
-      "sha256": "e90a850d9a8946ad3c741b99a81bc823a65415110ec32aabffd25da15f530e59",
+      "sha256": "7d91a0b2c41329acc7f7e36e65e7277d1d0d580b0b126c587377ab654466b474",
       "synexiaPath": "m3-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/pattern-hidden/src/test/resources/before/m3/tooling/image-gates/current-c0.json"
     },
     {

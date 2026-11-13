@@ -51,7 +51,7 @@
           "afterBytes": 344,
           "afterSHA256": "3fcca76fb447dd18fb50c9d0f7c571f4d6d91ef137776a3cbd7a98d2babe1606",
           "beforeBytes": 337,
-          "beforeSHA256": "8c928979dcdf7bf7e4ec8b5bc6b339d7344c75a8213f101ec4ad58a659775811",
+          "beforeSHA256": "ba20961224d2489ddcdeac438e7ff9bae2cf68f06a6f3cd155805818a98ad0c8",
           "operation": "REPLACE",
           "path": "make/m3/backports/recipes/jep-485-gatherers/atom-evidence.tsv"
         },
@@ -307,7 +307,7 @@
         },
         {
           "afterBytes": 15213,
-          "afterSHA256": "fc0e4aa46859f49c3c8e914b95243b279bbd2a0e7737f6535d8947b769153a2f",
+          "afterSHA256": "401c4e1d71bf69b9a99b122f13e66c25b52ab27f0be9ac4521b53f43cc77a914",
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
@@ -672,7 +672,7 @@
           "afterBytes": 56771,
           "afterSHA256": "9c09cc60a1825aa9b4d4c20cd81edb61fb0b4af24730e357e0d73241e58b48c3",
           "beforeBytes": 23333,
-          "beforeSHA256": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e",
+          "beforeSHA256": "1577ee9ca800e32fcad108957990588c8b38a50c3e0369b3cfa419439ff9eda5",
           "operation": "REPLACE",
           "path": "make/m3/migration/migration.py"
         },
@@ -680,7 +680,7 @@
           "afterBytes": 13634,
           "afterSHA256": "09e47093f76b48ffdc03d1dfb070f4b345d29c35521998ce74678d9dc7f51416",
           "beforeBytes": 11255,
-          "beforeSHA256": "0679e89f51b5fa4e52f798c8027f62687c1b3246d382c745816b55e705e4f7f9",
+          "beforeSHA256": "61a8c12de65235a05764c1a7821ad33a860e4803d06d7910c1da5a905d2340ed",
           "operation": "REPLACE",
           "path": "make/m3/migration/test/test_jcc_handoff_packet.py"
         },
@@ -729,7 +729,7 @@
         },
         {
           "afterBytes": 3341,
-          "afterSHA256": "cfe8e8930916ef96c7d23dd9d0942f082c5eb1d6cf4b2a2f6e9f3d69d8fa3e41",
+          "afterSHA256": "94eda7610b9fd1dd119ac54f16130eb88228f125252f828367821308713b91d4",
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
@@ -737,7 +737,7 @@
         },
         {
           "afterBytes": 16119,
-          "afterSHA256": "ae05a158f6f68124276241f5927ad5b77cc786c25b478a69b2c1a7f34353c141",
+          "afterSHA256": "a45802bd97cead83e0104e2cbdf54ea194bba0f6580631a28ecf65275c2b92bb",
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
@@ -745,7 +745,7 @@
         },
         {
           "afterBytes": 7629,
-          "afterSHA256": "30a838a363fb05f9c1caf48fd36c0a67de0767708e4b198b77af37ee0c41eb63",
+          "afterSHA256": "8fc5eee8052b4323dfef5adc3621537fcb6e13bc2917afb6ba989f5add4e1e0f",
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
@@ -785,7 +785,7 @@
           "afterBytes": 10008,
           "afterSHA256": "2b58a3f62460721b858e286a6c78c992ab4fefac9f99d614fa2c872635ee2c97",
           "beforeBytes": 9492,
-          "beforeSHA256": "b164fa620401193a0b5c4a55e0d84e1d770aeb24a71092d38203d02a257d4250",
+          "beforeSHA256": "ccb3ab93afe6b81fddf343be8f454d9bf83eb09973318ad68f3301e798d0a782",
           "operation": "REPLACE",
           "path": "make/m3/tooling/a3/src/main/java/jdk/m3/a3/A3Alg.java"
         },
@@ -793,7 +793,7 @@
           "afterBytes": 4466,
           "afterSHA256": "49c9e743bfa785919aebc17e6721c2110c55d818ffddbfa15e854b641493ef65",
           "beforeBytes": 4462,
-          "beforeSHA256": "213d3f3ee70e7eefb05192b8e73e2aa2dc652cec3fcf9c3b78a0d9893ddcc3f6",
+          "beforeSHA256": "aa08ec55a2238156f3d3066e77c3d7c34c41ce5582ab93d751e54838335016f7",
           "operation": "REPLACE",
           "path": "make/m3/tooling/a3/src/test/java/jdk/m3/a3/A3PlanTest.java"
         },
@@ -1543,7 +1543,7 @@
         },
         {
           "afterBytes": 4339,
-          "afterSHA256": "097dd1b794593570fdf3eb51b00a9be4c6a83a274fd6ef97c350251d20065fbc",
+          "afterSHA256": "81518280d547d7b96373313a81396e6998cfd2a5e89a73cf422e8ed78522f377",
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",

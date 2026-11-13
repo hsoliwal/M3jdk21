@@ -93,15 +93,15 @@
     },
     {
       "bytes": 15056,
-      "git_blob_sha1": "7255f73393d934e50295fa60892267fa259239ba",
+      "git_blob_sha1": "4efbade191578d259fc7f995b2ed4629a9c385de",
       "path": "make/m3/migration/evidence/local-20261002-final/receipt.json",
-      "sha256": "34ff84b795b004e1d69b26bf3df95e554ce90b67ac16b0169a61f0877fd50181"
+      "sha256": "7fa43907013c5e65e0e911546d99f77555743914233dcbae700ce95edb2c0dfc"
     },
     {
       "bytes": 23333,
-      "git_blob_sha1": "d976f4a5d7f8983ade85d5d2cf608e3f6b2885d7",
+      "git_blob_sha1": "de0beb7834b9fa9fa57b78f18c8d35b715a5fa57",
       "path": "make/m3/migration/migration.py",
-      "sha256": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e"
+      "sha256": "1577ee9ca800e32fcad108957990588c8b38a50c3e0369b3cfa419439ff9eda5"
     },
     {
       "bytes": 1748,
@@ -117,21 +117,21 @@
     },
     {
       "bytes": 5265,
-      "git_blob_sha1": "e384ac1b82b94a68b97781574e845e208a7ed525",
+      "git_blob_sha1": "59cb9d510cbb6c76dea944aa8f842b28ead4e6d1",
       "path": "make/m3/migration/run-tests.py",
-      "sha256": "491041a68163a6a6c53908f685d1bee3153c782d150057d7235a3d4dc61c00dd"
+      "sha256": "4cef565b47f9c262719d09c71d9788b56415ee7e43bbc2f592de8e4b3cfa1300"
     },
     {
       "bytes": 15906,
-      "git_blob_sha1": "f260e3df182f3d8f42f98baf6a9cdb9f2fc00702",
+      "git_blob_sha1": "6edbe2d99f7e9cd52e82d12857b48c017e40fd5b",
       "path": "make/m3/migration/src/jdk/m3/migration/ExactFileRecipe.java",
-      "sha256": "d094fc40909639119828b78f5f1635c51263e6aa177a159ac05de7ee8b8871ee"
+      "sha256": "4d19d4feddb80eb8fbe2c92b367c79a78b322f052522acddfe94cc15ee4a55f1"
     },
     {
       "bytes": 10089,
-      "git_blob_sha1": "ad4f0e6d8fbfa7c1cdae776df1a44549ebc21346",
+      "git_blob_sha1": "a889ddbdbcb9ee3d177b4400afd4c4a03f6ca477",
       "path": "make/m3/migration/test/RecipeContractTest.java",
-      "sha256": "4720a7d949654c5fcc536703b272c31d8b38d9ef7b9b0d5bd4309e63daaac745"
+      "sha256": "a23f2823caaf941ac70dacd08a0dec4691c35dd8f22f30e58e9a1d46ae998228"
     },
     {
       "bytes": 2451,

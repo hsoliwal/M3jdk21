@@ -50,9 +50,9 @@
     {
       "path": "make/m3/history/retention-pom.xml",
       "before_sha256": "94466607f0376f0964b3895f4ae248d9bc0e72728c1f7b758f27b1dadcac7e22",
-      "after_sha256": "b4f00263594158b47e76ccb34000095f46bc3f66a69151304fe7b544dad6ca15",
+      "after_sha256": "d1586b9525a453a45a7219392a8a76d1c22fc6f098c6571016a0c81efd880dae",
       "before_git_blob": "df5af079f9bf788b13d0c39ea168d58a8bcd85df",
-      "after_git_blob": "e2485c372f5cac990e4920e4fb83c65b5be77e50",
+      "after_git_blob": "9c5846cc28deb4cd722bb953acf571769ab7a087",
       "before_bytes": 2726,
       "after_bytes": 3716,
       "before_resource": "before-03.txt",

@@ -573,7 +573,7 @@
     },
     {
       "path": "make/m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/verify-image.sh.txt",
-      "sha": "6ff15d0d418f070f7f4d3627b547d7bea0be42cd"
+      "sha": "c9cf8848c2c2e1b08e2b60accd3b94135eb2d5d6"
     },
     {
       "path": "make/m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/workflow.yml.txt",
@@ -653,7 +653,7 @@
     },
     {
       "path": "make/m3/tooling/lane28/verify-image.sh",
-      "sha": "6ff15d0d418f070f7f4d3627b547d7bea0be42cd"
+      "sha": "c011ceda5273705ca842cfd085a9e5e430db9598"
     },
     {
       "path": "make/m3/tooling/lane28/verify-plan.py",

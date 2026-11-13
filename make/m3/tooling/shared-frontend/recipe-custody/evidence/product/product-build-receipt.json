@@ -107,8 +107,8 @@
     {
       "dataset": "m3jdk21-compiler",
       "path": "make/m3/tooling/shared-frontend/verify_frontend.py",
-      "sha256": "464f6c5c43af3d4a3f24c63c63144fbe9430f131dcdd3741c91472714ddf9a50",
-      "git_blob_sha1": "399cdbad2b3e7c85c41aa0ef473720720a5c76ef"
+      "sha256": "c77308b4b61c2e16f74748c65e1223b91d3fc5e1b95feca56012ce4db10e7494",
+      "git_blob_sha1": "d1c4ef7485a180633ebff37e2f2cae056e1575eb"
     },
     {
       "dataset": "m3jdk21-compiler",

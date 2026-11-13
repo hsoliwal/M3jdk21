@@ -23,13 +23,13 @@
         "path": "make/m3/migration/test/test_jcc_source_final_handoff_packet.py",
         "mode": "100644",
         "type": "blob",
-        "sha": "78f74d0f43fcdaed3c4a3bbfc5600654cc688b8b"
+        "sha": "969b47e81a0d0e936893aa9832fe2eb7e8456b61"
       },
       {
         "path": "make/m3/migration/test/test_jcc_source_recovery_handoff_packet.py",
         "mode": "100644",
         "type": "blob",
-        "sha": "94cf0fd6b2e79126bf629feb223cefdc1405eeed"
+        "sha": "4d8dd8ff345c47663dbb6d0481d254c6ced53cbc"
       },
       {
         "path": "make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jcc-source-final-handoff.yml",

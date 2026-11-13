@@ -101,7 +101,7 @@ final class JccMergeMappingRecoveryV02Test {
                     "__UNRESOLVED_ACTUAL_AFTER_03_SHA256__"));
     private static final List<Guard> GUARDS = List.of(
             new Guard("doc/m3/name-mapping.schema.json", "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b"),
-            new Guard("make/m3/migration/migration.py", "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e"),
+            new Guard("make/m3/migration/migration.py", "1577ee9ca800e32fcad108957990588c8b38a50c3e0369b3cfa419439ff9eda5"),
             new Guard("make/m3/migration/recipe.py", "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"),
             new Guard(TEXT_OWNER, TEXT_OWNER_SHA256),
             new Guard("make/m3/tooling/migration-recipes/pom.xml", "3eb73bbf38c0c591b8f714f6e9923eaa25a35b5ffc7f0512b8ec7fd3602b5531"),

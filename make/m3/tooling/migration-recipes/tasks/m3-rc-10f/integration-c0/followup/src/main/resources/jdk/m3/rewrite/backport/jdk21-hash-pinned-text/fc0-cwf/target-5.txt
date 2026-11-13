@@ -23,7 +23,7 @@ CURRENT_MAP_SHA = '632534ea2941b679bd9c582a62e351f56a7a3055440b6a9f5a80554148944
 CURRENT_SOURCE_SHA = {
     WORKFLOW: CURRENT_WORKFLOW_SHA,
     '.github/workflows/m3-tq.yml': '6f344f100d044a55afd545f4b0faa50f4bb7988cfca306fb709bd2151a5d47a3',
-    'make/m3/tooling/tq/verify-plan.py': '4bbcd11479a302c65944e44de96be8b2e70fc128376cb03423649dbb0e7d8125',
+    'make/m3/tooling/tq/verify-plan.py': 'fb55a213f48ec53005d9ddb7d095de58f6a05fea5fcb764a23816dd9b2dce9d8',
 }
 
 

@@ -24,7 +24,7 @@ current_workflow_sha256 = '2d0f9d5237c25711ff27f99cc3fd8cd6c6e3bcb43ca41cf63a19f
 current_source_sha256 = {
     '.github/workflows/m3-lane28.yml': current_workflow_sha256,
     '.github/workflows/m3-tq.yml': '6f344f100d044a55afd545f4b0faa50f4bb7988cfca306fb709bd2151a5d47a3',
-    'make/m3/tooling/tq/verify-plan.py': '4bbcd11479a302c65944e44de96be8b2e70fc128376cb03423649dbb0e7d8125',
+    'make/m3/tooling/tq/verify-plan.py': 'fb55a213f48ec53005d9ddb7d095de58f6a05fea5fcb764a23816dd9b2dce9d8',
 }
 if args.context == 'historical':
     assert sealed.execute(plan_path, ROOT, 'check')['state'] == 'after'

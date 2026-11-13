@@ -33,8 +33,8 @@
       "path": "make/m3/history/RETAINED_CAPABILITIES.tsv"
     },
     {
-      "sha256": "b4f00263594158b47e76ccb34000095f46bc3f66a69151304fe7b544dad6ca15",
-      "git_blob": "e2485c372f5cac990e4920e4fb83c65b5be77e50",
+      "sha256": "d1586b9525a453a45a7219392a8a76d1c22fc6f098c6571016a0c81efd880dae",
+      "git_blob": "9c5846cc28deb4cd722bb953acf571769ab7a087",
       "bytes": 3716,
       "role": "current-retention-update",
       "path": "make/m3/history/retention-pom.xml"
@@ -54,15 +54,15 @@
       "path": "make/m3/history/test_retention.py"
     },
     {
-      "sha256": "cd42ae20ec055c10bb90f17647331e930174cc6926d0cd87de90c2d3feb27638",
-      "git_blob": "78f74d0f43fcdaed3c4a3bbfc5600654cc688b8b",
+      "sha256": "85921eebe129d7e7f67279b33fe739ec356d1bfc9efdc59f4523aa0fc936b961",
+      "git_blob": "969b47e81a0d0e936893aa9832fe2eb7e8456b61",
       "bytes": 16951,
       "role": "already-restored-history-fixed-point",
       "path": "make/m3/migration/test/test_jcc_source_final_handoff_packet.py"
     },
     {
-      "sha256": "b2194b2721b207eb65b0043352599e112018108cc4eb525e30082582410b1195",
-      "git_blob": "94cf0fd6b2e79126bf629feb223cefdc1405eeed",
+      "sha256": "205a29f734e6c9550e1630018505cd3fae560241ed9e125e50fb8e0fa352b989",
+      "git_blob": "4d8dd8ff345c47663dbb6d0481d254c6ced53cbc",
       "bytes": 17089,
       "role": "already-restored-history-fixed-point",
       "path": "make/m3/migration/test/test_jcc_source_recovery_handoff_packet.py"

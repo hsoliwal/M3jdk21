@@ -11,7 +11,7 @@
       "path": "make/m3/runtime-integration/integrated-collections/README.md",
       "candidate": "/dev/shm/m3jdk21-work/collection-candidates/postimages/m3/runtime-integration/integrated-collections/README.md",
       "pre_sha256": null,
-      "post_sha256": "dc79aace9491a7ab1755d52076fdc08844109388405fe10802ba5cb85cbb5287"
+      "post_sha256": "408820cfbe35578dec7d8e3c0d195c3ebc253fe5e30f5b44de32e249055fa99a"
     },
     {
       "path": "make/m3/runtime-integration/integrated-collections/behavioral-atoms.json",
@@ -41,7 +41,7 @@
       "path": "make/m3/runtime-integration/integrated-collections/verify.py",
       "candidate": "/dev/shm/m3jdk21-work/collection-candidates/postimages/m3/runtime-integration/integrated-collections/verify.py",
       "pre_sha256": null,
-      "post_sha256": "89540bb2b2deff0d3d8a7f371f1874fb65c96ee397478f1e0254a16eea889726"
+      "post_sha256": "1c8ffffee4d641aa3b448bb4ed23c1a8ea90af5d4ef150105740a5ff6ff065c6"
     },
     {
       "path": "src/java.base/share/classes/java/util/Collections.java",

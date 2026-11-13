@@ -28,17 +28,17 @@ OWNER_BEFORE_GIT = {
     "make/m3/tooling/backport-contract-current-owner/runtime/README.md": "0dfce38a83bfcc3abee720bf38d07e79d056abfb",
     ".github/workflows/m3-backport-contract-current-owner.yml": "5ab3cba8a55c95095e3db09b8c959938aeab91e1",
     "make/m3/tooling/backport-contract-current-owner/sdk/pins.json": "fb98cc20f65f4722292fe8a953075fa991deacdd",
-    "make/m3/tooling/backport-contract-current-owner/sdk/verify.py": "8ad669b3954a0958820f6962de2e55f6b1988bc2"
+    "make/m3/tooling/backport-contract-current-owner/sdk/verify.py": "caaf681a7d1dfbda38abf0cc1036d243f9197648"
 }
 OWNER_AFTER_GIT = {
-    "make/m3/tooling/backport-contract-current-owner/qualify.py": "735f880afd81739cd21313302de947d49626d202",
+    "make/m3/tooling/backport-contract-current-owner/qualify.py": "e776d874e5491d74e95405858f60afcc67147d02",
     "make/m3/tooling/backport-contract-current-owner/README.md": "0be188a28a3575c7af4bb574e7e741a12101d083",
-    "make/m3/tooling/backport-contract-current-owner/runtime/INPUTS.json": "8ac731367e254e1ed9b49813f9d109d3f06eb5e0",
-    "make/m3/tooling/backport-contract-current-owner/runtime/qualify.py": "a3f8492416876547eefed9c5a2d8bc5583ddd8ec",
-    "make/m3/tooling/backport-contract-current-owner/runtime/README.md": "67d987cbad0af4aa3de0ed17a56dc69b2a1afc7b",
+    "make/m3/tooling/backport-contract-current-owner/runtime/INPUTS.json": "7c7b0900a7a030c835a44110a390d6df82cf6d62",
+    "make/m3/tooling/backport-contract-current-owner/runtime/qualify.py": "98a94245c7e5ee32bb7cdba65119252410100110",
+    "make/m3/tooling/backport-contract-current-owner/runtime/README.md": "ab6625c4b562de5e4ea55a507751e398aa7aa5a1",
     ".github/workflows/m3-backport-contract-current-owner.yml": "b992bdbfb5187f868fbf3388d01edb7d9e9d905c",
     "make/m3/tooling/backport-contract-current-owner/sdk/pins.json": "fb98cc20f65f4722292fe8a953075fa991deacdd",
-    "make/m3/tooling/backport-contract-current-owner/sdk/verify.py": "8ad669b3954a0958820f6962de2e55f6b1988bc2"
+    "make/m3/tooling/backport-contract-current-owner/sdk/verify.py": "caaf681a7d1dfbda38abf0cc1036d243f9197648"
 }
 DIRECTIONS = ("forward", "inverse")
 RECEIVER_OUTPUTS: dict[str, str] = {}

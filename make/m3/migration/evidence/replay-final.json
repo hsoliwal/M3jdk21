@@ -5,10 +5,10 @@
   "tool_code_commit": "35c2787e2222e9ce894f6255ca9a9c1c44c5a6c0",
   "source_input_sha256": "d2ccefe7aceb9797913fd1ec9daf5aba976bf4e86aefdbd9decc86d348d2cb56",
   "inputs": {
-    "make/m3/migration/src/jdk/m3/migration/ExactFileRecipe.java": "d094fc40909639119828b78f5f1635c51263e6aa177a159ac05de7ee8b8871ee",
+    "make/m3/migration/src/jdk/m3/migration/ExactFileRecipe.java": "4d19d4feddb80eb8fbe2c92b367c79a78b322f052522acddfe94cc15ee4a55f1",
     "make/m3/migration/recipes/prefix-z-v1.tsv": "54251ed210b9ed280919968a6ea13f0b6ed6e590fbf92090d13b4495f05f4217",
-    "make/m3/migration/recipes/postimages/M3PrefixZ.java.txt": "5f936a3c6e69ca487eff6a0665ada01546750d9d87ce85ee50a337a4236233d0",
-    "make/m3/migration/migration.py": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e",
+    "make/m3/migration/recipes/postimages/M3PrefixZ.java.txt": "33c6ad8f5ab6a328e5c77900e392b4231cef79f650bffad3d49b0434151e4d88",
+    "make/m3/migration/migration.py": "1577ee9ca800e32fcad108957990588c8b38a50c3e0369b3cfa419439ff9eda5",
     "doc/m3/name-mapping.json": "1b609e25c4c588bda2a4da955ea5982ff0e70bc4aa9ece61f92de707b69727b4",
     "doc/m3/name-mapping.schema.json": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
     "m3/recipes/manifest.json": "a676ba7f32e406c12cbe120665a914130ed79e11fe8e43d005cb40b90d6f29f2"

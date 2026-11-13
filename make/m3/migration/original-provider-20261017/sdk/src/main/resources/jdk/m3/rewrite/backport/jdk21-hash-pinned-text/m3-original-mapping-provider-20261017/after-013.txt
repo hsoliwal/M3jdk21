@@ -46,9 +46,9 @@
         "m3/core/src/jdk/m3/text/M3StringPiece.java": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755",
         "m3/core/src/jdk/m3/text/StorageIdentity.java": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354",
         "make/m3/migration/pinned-dependencies.json": "3e1365e45d01177a1e1b4793c208e1f6c5d2547a21c22a0521b73e012ffcfd6e",
-        "make/m3/migration/run-tests.py": "491041a68163a6a6c53908f685d1bee3153c782d150057d7235a3d4dc61c00dd",
-        "make/m3/migration/src/jdk/m3/migration/ExactFileRecipe.java": "d094fc40909639119828b78f5f1635c51263e6aa177a159ac05de7ee8b8871ee",
-        "make/m3/migration/test/RecipeContractTest.java": "4720a7d949654c5fcc536703b272c31d8b38d9ef7b9b0d5bd4309e63daaac745"
+        "make/m3/migration/run-tests.py": "4cef565b47f9c262719d09c71d9788b56415ee7e43bbc2f592de8e4b3cfa1300",
+        "make/m3/migration/src/jdk/m3/migration/ExactFileRecipe.java": "4d19d4feddb80eb8fbe2c92b367c79a78b322f052522acddfe94cc15ee4a55f1",
+        "make/m3/migration/test/RecipeContractTest.java": "a23f2823caaf941ac70dacd08a0dec4691c35dd8f22f30e58e9a1d46ae998228"
       },
       "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "stdout_path": "make/m3/migration/evidence/local-20261002-final/javac21.log"
@@ -74,9 +74,9 @@
         "m3/core/src/jdk/m3/text/M3StringPiece.java": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755",
         "m3/core/src/jdk/m3/text/StorageIdentity.java": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354",
         "make/m3/migration/pinned-dependencies.json": "3e1365e45d01177a1e1b4793c208e1f6c5d2547a21c22a0521b73e012ffcfd6e",
-        "make/m3/migration/run-tests.py": "491041a68163a6a6c53908f685d1bee3153c782d150057d7235a3d4dc61c00dd",
-        "make/m3/migration/src/jdk/m3/migration/ExactFileRecipe.java": "d094fc40909639119828b78f5f1635c51263e6aa177a159ac05de7ee8b8871ee",
-        "make/m3/migration/test/RecipeContractTest.java": "4720a7d949654c5fcc536703b272c31d8b38d9ef7b9b0d5bd4309e63daaac745"
+        "make/m3/migration/run-tests.py": "4cef565b47f9c262719d09c71d9788b56415ee7e43bbc2f592de8e4b3cfa1300",
+        "make/m3/migration/src/jdk/m3/migration/ExactFileRecipe.java": "4d19d4feddb80eb8fbe2c92b367c79a78b322f052522acddfe94cc15ee4a55f1",
+        "make/m3/migration/test/RecipeContractTest.java": "a23f2823caaf941ac70dacd08a0dec4691c35dd8f22f30e58e9a1d46ae998228"
       },
       "stdout_sha256": "67eee524a18f5dcbb9793a54c338504293fbc8a8f01baba714029966c02ae780",
       "stdout_path": "make/m3/migration/evidence/local-20261002-final/prefix-z-normal.log"
@@ -102,9 +102,9 @@
         "m3/core/src/jdk/m3/text/M3StringPiece.java": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755",
         "m3/core/src/jdk/m3/text/StorageIdentity.java": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354",
         "make/m3/migration/pinned-dependencies.json": "3e1365e45d01177a1e1b4793c208e1f6c5d2547a21c22a0521b73e012ffcfd6e",
-        "make/m3/migration/run-tests.py": "491041a68163a6a6c53908f685d1bee3153c782d150057d7235a3d4dc61c00dd",
-        "make/m3/migration/src/jdk/m3/migration/ExactFileRecipe.java": "d094fc40909639119828b78f5f1635c51263e6aa177a159ac05de7ee8b8871ee",
-        "make/m3/migration/test/RecipeContractTest.java": "4720a7d949654c5fcc536703b272c31d8b38d9ef7b9b0d5bd4309e63daaac745"
+        "make/m3/migration/run-tests.py": "4cef565b47f9c262719d09c71d9788b56415ee7e43bbc2f592de8e4b3cfa1300",
+        "make/m3/migration/src/jdk/m3/migration/ExactFileRecipe.java": "4d19d4feddb80eb8fbe2c92b367c79a78b322f052522acddfe94cc15ee4a55f1",
+        "make/m3/migration/test/RecipeContractTest.java": "a23f2823caaf941ac70dacd08a0dec4691c35dd8f22f30e58e9a1d46ae998228"
       },
       "stdout_sha256": "1cf2a7fc2a2b063391e8ec65dc1b36e0b2516162e53bb656607d9c4d1c70dc5e",
       "stdout_path": "make/m3/migration/evidence/local-20261002-final/view-interop-normal.log"
@@ -131,9 +131,9 @@
         "m3/core/src/jdk/m3/text/M3StringPiece.java": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755",
         "m3/core/src/jdk/m3/text/StorageIdentity.java": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354",
         "make/m3/migration/pinned-dependencies.json": "3e1365e45d01177a1e1b4793c208e1f6c5d2547a21c22a0521b73e012ffcfd6e",
-        "make/m3/migration/run-tests.py": "491041a68163a6a6c53908f685d1bee3153c782d150057d7235a3d4dc61c00dd",
-        "make/m3/migration/src/jdk/m3/migration/ExactFileRecipe.java": "d094fc40909639119828b78f5f1635c51263e6aa177a159ac05de7ee8b8871ee",
-        "make/m3/migration/test/RecipeContractTest.java": "4720a7d949654c5fcc536703b272c31d8b38d9ef7b9b0d5bd4309e63daaac745"
+        "make/m3/migration/run-tests.py": "4cef565b47f9c262719d09c71d9788b56415ee7e43bbc2f592de8e4b3cfa1300",
+        "make/m3/migration/src/jdk/m3/migration/ExactFileRecipe.java": "4d19d4feddb80eb8fbe2c92b367c79a78b322f052522acddfe94cc15ee4a55f1",
+        "make/m3/migration/test/RecipeContractTest.java": "a23f2823caaf941ac70dacd08a0dec4691c35dd8f22f30e58e9a1d46ae998228"
       },
       "stdout_sha256": "67eee524a18f5dcbb9793a54c338504293fbc8a8f01baba714029966c02ae780",
       "stdout_path": "make/m3/migration/evidence/local-20261002-final/prefix-z-interpreter.log"
@@ -160,9 +160,9 @@
         "m3/core/src/jdk/m3/text/M3StringPiece.java": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755",
         "m3/core/src/jdk/m3/text/StorageIdentity.java": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354",
         "make/m3/migration/pinned-dependencies.json": "3e1365e45d01177a1e1b4793c208e1f6c5d2547a21c22a0521b73e012ffcfd6e",
-        "make/m3/migration/run-tests.py": "491041a68163a6a6c53908f685d1bee3153c782d150057d7235a3d4dc61c00dd",
-        "make/m3/migration/src/jdk/m3/migration/ExactFileRecipe.java": "d094fc40909639119828b78f5f1635c51263e6aa177a159ac05de7ee8b8871ee",
-        "make/m3/migration/test/RecipeContractTest.java": "4720a7d949654c5fcc536703b272c31d8b38d9ef7b9b0d5bd4309e63daaac745"
+        "make/m3/migration/run-tests.py": "4cef565b47f9c262719d09c71d9788b56415ee7e43bbc2f592de8e4b3cfa1300",
+        "make/m3/migration/src/jdk/m3/migration/ExactFileRecipe.java": "4d19d4feddb80eb8fbe2c92b367c79a78b322f052522acddfe94cc15ee4a55f1",
+        "make/m3/migration/test/RecipeContractTest.java": "a23f2823caaf941ac70dacd08a0dec4691c35dd8f22f30e58e9a1d46ae998228"
       },
       "stdout_sha256": "1cf2a7fc2a2b063391e8ec65dc1b36e0b2516162e53bb656607d9c4d1c70dc5e",
       "stdout_path": "make/m3/migration/evidence/local-20261002-final/view-interop-interpreter.log"
@@ -188,9 +188,9 @@
         "m3/core/src/jdk/m3/text/M3StringPiece.java": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755",
         "m3/core/src/jdk/m3/text/StorageIdentity.java": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354",
         "make/m3/migration/pinned-dependencies.json": "3e1365e45d01177a1e1b4793c208e1f6c5d2547a21c22a0521b73e012ffcfd6e",
-        "make/m3/migration/run-tests.py": "491041a68163a6a6c53908f685d1bee3153c782d150057d7235a3d4dc61c00dd",
-        "make/m3/migration/src/jdk/m3/migration/ExactFileRecipe.java": "d094fc40909639119828b78f5f1635c51263e6aa177a159ac05de7ee8b8871ee",
-        "make/m3/migration/test/RecipeContractTest.java": "4720a7d949654c5fcc536703b272c31d8b38d9ef7b9b0d5bd4309e63daaac745"
+        "make/m3/migration/run-tests.py": "4cef565b47f9c262719d09c71d9788b56415ee7e43bbc2f592de8e4b3cfa1300",
+        "make/m3/migration/src/jdk/m3/migration/ExactFileRecipe.java": "4d19d4feddb80eb8fbe2c92b367c79a78b322f052522acddfe94cc15ee4a55f1",
+        "make/m3/migration/test/RecipeContractTest.java": "a23f2823caaf941ac70dacd08a0dec4691c35dd8f22f30e58e9a1d46ae998228"
       },
       "stdout_sha256": "03768da3eb30d806aec3fbbfd7e7d02f19678cc6a9ddf408e23c104f03deea6f",
       "stdout_path": "make/m3/migration/evidence/local-20261002-final/exact-recipe-contract.log"
@@ -212,10 +212,10 @@
       "status": "passed",
       "inputs": {
         "doc/m3/name-mapping.schema.json": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
-        "make/m3/migration/migration.py": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e",
+        "make/m3/migration/migration.py": "1577ee9ca800e32fcad108957990588c8b38a50c3e0369b3cfa419439ff9eda5",
         "make/m3/migration/pinned-dependencies.json": "3e1365e45d01177a1e1b4793c208e1f6c5d2547a21c22a0521b73e012ffcfd6e",
         "make/m3/migration/requirements.txt": "bdba948e9222f540dff178ccceebf97e496e1c360257c6434b8eac8cabf154a5",
-        "make/m3/migration/run-tests.py": "491041a68163a6a6c53908f685d1bee3153c782d150057d7235a3d4dc61c00dd",
+        "make/m3/migration/run-tests.py": "4cef565b47f9c262719d09c71d9788b56415ee7e43bbc2f592de8e4b3cfa1300",
         "make/m3/migration/test/test_migration.py": "9ab63e43c5a72345783a08dd09ee986daf5e688e02a6d50ab17153af41b47955"
       },
       "stdout_sha256": "b2fb0fd773357eb654847bfd77abe86eb8e13a942beade0561ef941a313f2506",
@@ -233,7 +233,7 @@
       "status": "passed",
       "inputs": {
         "make/m3/migration/pinned-dependencies.json": "3e1365e45d01177a1e1b4793c208e1f6c5d2547a21c22a0521b73e012ffcfd6e",
-        "make/m3/migration/run-tests.py": "491041a68163a6a6c53908f685d1bee3153c782d150057d7235a3d4dc61c00dd"
+        "make/m3/migration/run-tests.py": "4cef565b47f9c262719d09c71d9788b56415ee7e43bbc2f592de8e4b3cfa1300"
       },
       "stdout_sha256": "f445224da51272448a0bb476fa03be6660f4bcce88c656580330cc3d1abd1f12",
       "stdout_path": "make/m3/migration/evidence/local-20261002-final/stock-string-surface.log"

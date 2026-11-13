@@ -288,7 +288,7 @@
     },
     {
       "path": "make/m3/migration/evidence/local-20261002-final/receipt.json",
-      "git_entry": "100644 blob 7255f73393d934e50295fa60892267fa259239ba",
+      "git_entry": "100644 blob 4efbade191578d259fc7f995b2ed4629a9c385de",
       "proof": "identical Git mode/type/object in merged tree and incoming master"
     },
     {
@@ -328,7 +328,7 @@
     },
     {
       "path": "make/m3/migration/migration.py",
-      "git_entry": "100644 blob d976f4a5d7f8983ade85d5d2cf608e3f6b2885d7",
+      "git_entry": "100644 blob de0beb7834b9fa9fa57b78f18c8d35b715a5fa57",
       "proof": "identical Git mode/type/object in merged tree and incoming master"
     },
     {
@@ -358,7 +358,7 @@
     },
     {
       "path": "make/m3/migration/recipes/postimages/M3PrefixZ.java.txt",
-      "git_entry": "100644 blob 317108234d7692410517731b325f7d28de99354e",
+      "git_entry": "100644 blob 14aa61b35c3209550db1e1fcbfe0ce425b25cc6a",
       "proof": "identical Git mode/type/object in merged tree and incoming master"
     },
     {
@@ -373,7 +373,7 @@
     },
     {
       "path": "make/m3/migration/run-tests.py",
-      "git_entry": "100644 blob e384ac1b82b94a68b97781574e845e208a7ed525",
+      "git_entry": "100644 blob 59cb9d510cbb6c76dea944aa8f842b28ead4e6d1",
       "proof": "identical Git mode/type/object in merged tree and incoming master"
     },
     {
@@ -403,12 +403,12 @@
     },
     {
       "path": "make/m3/migration/src/jdk/m3/migration/ExactFileRecipe.java",
-      "git_entry": "100644 blob f260e3df182f3d8f42f98baf6a9cdb9f2fc00702",
+      "git_entry": "100644 blob 6edbe2d99f7e9cd52e82d12857b48c017e40fd5b",
       "proof": "identical Git mode/type/object in merged tree and incoming master"
     },
     {
       "path": "make/m3/migration/test/RecipeContractTest.java",
-      "git_entry": "100644 blob ad4f0e6d8fbfa7c1cdae776df1a44549ebc21346",
+      "git_entry": "100644 blob a889ddbdbcb9ee3d177b4400afd4c4a03f6ca477",
       "proof": "identical Git mode/type/object in merged tree and incoming master"
     },
     {
@@ -997,7 +997,7 @@
         },
         {
           "path": "make/m3/migration/evidence/local-20261002-final/receipt.json",
-          "git_entry": "100644 blob 7255f73393d934e50295fa60892267fa259239ba",
+          "git_entry": "100644 blob 4efbade191578d259fc7f995b2ed4629a9c385de",
           "proof": "identical Git mode/type/object in merged tree and incoming master"
         },
         {
@@ -1022,7 +1022,7 @@
         },
         {
           "path": "make/m3/migration/migration.py",
-          "git_entry": "100644 blob d976f4a5d7f8983ade85d5d2cf608e3f6b2885d7",
+          "git_entry": "100644 blob de0beb7834b9fa9fa57b78f18c8d35b715a5fa57",
           "proof": "identical Git mode/type/object in merged tree and incoming master"
         },
         {
@@ -1047,7 +1047,7 @@
         },
         {
           "path": "make/m3/migration/recipes/postimages/M3PrefixZ.java.txt",
-          "git_entry": "100644 blob 317108234d7692410517731b325f7d28de99354e",
+          "git_entry": "100644 blob 14aa61b35c3209550db1e1fcbfe0ce425b25cc6a",
           "proof": "identical Git mode/type/object in merged tree and incoming master"
         },
         {
@@ -1062,17 +1062,17 @@
         },
         {
           "path": "make/m3/migration/run-tests.py",
-          "git_entry": "100644 blob e384ac1b82b94a68b97781574e845e208a7ed525",
+          "git_entry": "100644 blob 59cb9d510cbb6c76dea944aa8f842b28ead4e6d1",
           "proof": "identical Git mode/type/object in merged tree and incoming master"
         },
         {
           "path": "make/m3/migration/src/jdk/m3/migration/ExactFileRecipe.java",
-          "git_entry": "100644 blob f260e3df182f3d8f42f98baf6a9cdb9f2fc00702",
+          "git_entry": "100644 blob 6edbe2d99f7e9cd52e82d12857b48c017e40fd5b",
           "proof": "identical Git mode/type/object in merged tree and incoming master"
         },
         {
           "path": "make/m3/migration/test/RecipeContractTest.java",
-          "git_entry": "100644 blob ad4f0e6d8fbfa7c1cdae776df1a44549ebc21346",
+          "git_entry": "100644 blob a889ddbdbcb9ee3d177b4400afd4c4a03f6ca477",
           "proof": "identical Git mode/type/object in merged tree and incoming master"
         },
         {

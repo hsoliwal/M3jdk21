@@ -3830,7 +3830,7 @@
       "operation": "add",
       "origin_path": null,
       "repository_path": "make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/epoch-review-v01/input-epoch/guards/m3/migration/migration.py",
-      "sha256": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e"
+      "sha256": "1577ee9ca800e32fcad108957990588c8b38a50c3e0369b3cfa419439ff9eda5"
     },
     {
       "bytes": 9860,
@@ -4853,7 +4853,7 @@
       "operation": "add",
       "origin_path": null,
       "repository_path": "make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/receiving-input/guards/m3/migration/migration.py",
-      "sha256": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e"
+      "sha256": "1577ee9ca800e32fcad108957990588c8b38a50c3e0369b3cfa419439ff9eda5"
     },
     {
       "bytes": 9860,

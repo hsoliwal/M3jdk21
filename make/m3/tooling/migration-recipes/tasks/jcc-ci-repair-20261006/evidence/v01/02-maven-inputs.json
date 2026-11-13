@@ -98,7 +98,7 @@
     {
       "source": "overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/before-00-m3-foundation.yml.txt",
       "destination": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/before-00-m3-foundation.yml.txt",
-      "sha256": "1a1ddd014a5cce76e75b1e4fce5c4cd0c746a3dbf5f18ef3a1bc9dad7d8fbdd1",
+      "sha256": "ac770d0d3e0c26691dd48efe197efbfe7564916f97d2d3e634ab3f3e10335b17",
       "bytes": 2205,
       "mode": "0o644"
     },
@@ -112,7 +112,7 @@
     {
       "source": "overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/before-02-M3A3RegexMemoryWorkflowRecipeTest.java.txt",
       "destination": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/before-02-M3A3RegexMemoryWorkflowRecipeTest.java.txt",
-      "sha256": "6d6f4257d18c5e5a016a6c876bffcc8f5c202a65b8f019f2cf3ec1f26bfc84e8",
+      "sha256": "083e62d30ff4f28b6d126938961b0ea07d42b64d2cff66ed43443a84f562d3f0",
       "bytes": 4974,
       "mode": "0o644"
     },

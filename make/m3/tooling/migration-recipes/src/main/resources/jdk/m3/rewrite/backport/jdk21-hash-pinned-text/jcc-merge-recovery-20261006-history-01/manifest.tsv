@@ -1,5 +1,5 @@
-make/m3/migration/test/test_jcc_source_final_handoff_packet.py	ABSENT	cd42ae20ec055c10bb90f17647331e930174cc6926d0cd87de90c2d3feb27638	history-0000.txt
-make/m3/migration/test/test_jcc_source_recovery_handoff_packet.py	ABSENT	b2194b2721b207eb65b0043352599e112018108cc4eb525e30082582410b1195	history-0001.txt
+make/m3/migration/test/test_jcc_source_final_handoff_packet.py	ABSENT	85921eebe129d7e7f67279b33fe739ec356d1bfc9efdc59f4523aa0fc936b961	history-0000.txt
+make/m3/migration/test/test_jcc_source_recovery_handoff_packet.py	ABSENT	205a29f734e6c9550e1630018505cd3fae560241ed9e125e50fb8e0fa352b989	history-0001.txt
 make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jcc-source-final-handoff.yml	ABSENT	1193dad47eb57c1a2ce5fdc1923c73de1fa6441b17423f9eefcd343f8225522b	history-0002.txt
 make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jcc-source-recovery-handoff.yml	ABSENT	e2236c61188abf2720329cd2dd497457ed2c849e912a4607cf71d31bf6e3f7b5	history-0003.txt
 make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after00-name-mapping.json.txt	ABSENT	aeec3cfe84e57aadf7fa855a5f2174dd73749ccc8f6cd8f4409f0bb8a25e3d53	history-0004.txt

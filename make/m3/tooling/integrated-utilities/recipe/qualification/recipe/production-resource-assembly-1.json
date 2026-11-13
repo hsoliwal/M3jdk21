@@ -55,7 +55,7 @@
     {
       "path": "doc/m3/name-mapping.d/m3jdk-module-owners-20261018.json",
       "before_sha256": "ABSENT",
-      "after_sha256": "7ec04178398539f8f27459d0d754a294af275f5469fcfa51db6ce58d872d47b1",
+      "after_sha256": "97618c4076a5c93479a7b4a7407745cd2011d29af9cbcf11625092a6cb5a08d7",
       "template": "templates/m3/docs/name-mapping.d/m3jdk-module-owners-20261018.json"
     },
     {
@@ -73,7 +73,7 @@
     {
       "path": "make/m3/runtime-integration/integrated-collections/README.md",
       "before_sha256": "ABSENT",
-      "after_sha256": "dc79aace9491a7ab1755d52076fdc08844109388405fe10802ba5cb85cbb5287",
+      "after_sha256": "408820cfbe35578dec7d8e3c0d195c3ebc253fe5e30f5b44de32e249055fa99a",
       "template": "templates/m3/runtime-integration/integrated-collections/README.md"
     },
     {
@@ -103,13 +103,13 @@
     {
       "path": "make/m3/runtime-integration/integrated-collections/verify.py",
       "before_sha256": "ABSENT",
-      "after_sha256": "89540bb2b2deff0d3d8a7f371f1874fb65c96ee397478f1e0254a16eea889726",
+      "after_sha256": "1c8ffffee4d641aa3b448bb4ed23c1a8ea90af5d4ef150105740a5ff6ff065c6",
       "template": "templates/m3/runtime-integration/integrated-collections/verify.py"
     },
     {
       "path": "make/m3/runtime-integration/integrated-utilities/README.md",
       "before_sha256": "ABSENT",
-      "after_sha256": "cd8b7985fed714c09893305e585a39b4272e0e54c0fc2b78465a3a1a530d2db1",
+      "after_sha256": "17d4133eb6955f569a6bbadbc3bb14d3284de2f2ea19612f31aa0adf86717165",
       "template": "templates/m3/runtime-integration/integrated-utilities/README.md"
     },
     {
@@ -127,7 +127,7 @@
     {
       "path": "make/m3/runtime-integration/integrated-utilities/verify.py",
       "before_sha256": "ABSENT",
-      "after_sha256": "b85e062ff6a5d6b227cbd0940dff75737ac52120800c28f16c8273191a324991",
+      "after_sha256": "ceba29c1825b18393d3e42fef97d1e4d70179b4c018230a858f11fbf725ab6e6",
       "template": "templates/m3/runtime-integration/integrated-utilities/verify.py"
     },
     {

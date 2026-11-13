@@ -5,7 +5,7 @@
       "path": "make/m3/runtime-integration/token-regex/README.md",
       "candidate": "/workspace/scratch/0125adabf4e6/m3jdk21-work/token-candidates/postimages/m3/runtime-integration/token-regex/README.md",
       "pre_sha256": null,
-      "post_sha256": "695ed953a1b31c3b382dca3cac2901e3d5071fe8328212a8ca166c3072db9a19"
+      "post_sha256": "b798c4b610123825b19f971063d5261f07ec7f34e39cced4081482949aca4e91"
     },
     {
       "path": "make/m3/runtime-integration/token-regex/behavioral-atoms.json",
@@ -17,13 +17,13 @@
       "path": "make/m3/runtime-integration/token-regex/contract-catalogue.json",
       "candidate": "/workspace/scratch/0125adabf4e6/m3jdk21-work/token-candidates/postimages/m3/runtime-integration/token-regex/contract-catalogue.json",
       "pre_sha256": null,
-      "post_sha256": "b4b5279f88bed412a78cd533563b417b86b25fc19e9a0283f64d20ab8e686491"
+      "post_sha256": "0ea2a5c33a9d05252fddd7e1de92b718a3d4d9a2a5bbfdc817578c56ca4a9b73"
     },
     {
       "path": "make/m3/runtime-integration/token-regex/verify.py",
       "candidate": "/workspace/scratch/0125adabf4e6/m3jdk21-work/token-candidates/postimages/m3/runtime-integration/token-regex/verify.py",
       "pre_sha256": null,
-      "post_sha256": "0d605a28b5fd82374dbb19b2ae9f3d1fdc13dddb1dda52ccaed10bd780e39849"
+      "post_sha256": "851bc9542136ece7624f1c11b2d86518853c566b4a64c3cda1564314c4bbda24"
     },
     {
       "path": "src/java.base/share/classes/java/util/regex/TokenMatcher.java",
