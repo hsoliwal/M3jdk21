@@ -297,6 +297,8 @@ def verify_security_properties_8364182_backport(root: Path) -> None:
         if row["target_path"] == "src/hotspot/share/classfile/vmSymbols.hpp":
             if row["target_sha256"] != JDK_8364182_HISTORICAL_SHA256:
                 raise AssertionError("JDK-8364182 historical vmSymbols pin drift")
+            if baseline in (JDK_8364182_21U_SHA256, JDK_8364182_SIMDSORT_SHA256):
+                raise AssertionError("JDK-8364182 successor aliases a pinned state: " + row["target_path"])
             expected_superseded = (
                 "4f752ab79abf854d144e53118a2cc57a4b3cc2432140e9297079cca86dd2abab"
             )
