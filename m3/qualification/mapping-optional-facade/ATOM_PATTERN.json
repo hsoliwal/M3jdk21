@@ -1,0 +1,87 @@
+{
+  "schema": "M3_MAPPING_OPTIONAL_ATOM_PATTERN_V1",
+  "version": 1,
+  "reuseGate": {
+    "schema": "M3_OPTIONAL_LOOKUP_FACADE_REUSE_V1",
+    "owner": "m3/core/src/jdk/m3/text/SharedLexiconCatalog.java",
+    "currentRevision": "778cd3eac266974e7b5155e79838f74ee516b535",
+    "currentBlob": "a0cbbcedebc00cf886a611aff193ae8f47301e92",
+    "secondaryContext": {
+      "rangePr": 3011,
+      "blob": "bb6c0eb0b5ea0dd134e2377dfa83dc85ee6f060e"
+    },
+    "classification": "ADAPT_EXISTING_OWNER_AND_REUSE_EXISTING_OPTIONAL_FACADE_SHAPE",
+    "patternDonor": {
+      "repository": "hsoliwal/M3jdk21",
+      "blob": "e1ddad0d8a00b582ceab4fa57ed60c96bfa73e1d",
+      "path": "m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java",
+      "methods": [
+        "translationAt",
+        "spellAt",
+        "tokenHashesAt",
+        "prefixCountsAt",
+        "tokenFrequencyAt",
+        "wordFactsAt",
+        "wordSignalAt"
+      ],
+      "license": "Apache-2.0",
+      "fit": "Public Optional.ofNullable facade over nullable lookup; no lock/private-helper precedent asserted."
+    },
+    "platform": {
+      "api": "java.util.Optional.ofNullable",
+      "classification": "EXISTING_PLATFORM_API_USE",
+      "sourceRedistribution": false,
+      "notes": "Installed source inspected only; no Oracle source copied. Runtime behavior will be checked against actual provisioned JDK."
+    },
+    "typedAtoms": [
+      {
+        "name": "locked mapping value lookup",
+        "input": "sourceId,recordId; caller owns catalog lifecycle read lock",
+        "output": "immutable existing SourceMapping or null",
+        "effects": "ensureOpen/null checks; identity lookup; lazy image validation in incumbent order",
+        "ownership": "No new owner/reference retention"
+      },
+      {
+        "name": "lock+Optional result boundary",
+        "input": "same public Strings",
+        "output": "existing public Optional<SourceMapping>",
+        "effects": "acquire read lock; invoke value atom; construct Optional while locked; release in finally",
+        "failure": "Preserve exception/null/error order and close fencing"
+      }
+    ],
+    "alternatives": [
+      {
+        "name": "retain Optional per identity",
+        "classification": "NO_FIT_THIS_SLICE",
+        "reason": "Adds cache/retention; user requires managed M3LFU for API projections. Try compiler composition without storage changes first."
+      },
+      {
+        "name": "wrap Optional after releasing lock",
+        "classification": "REJECTED_CONTROL_CHANGE",
+        "reason": "Changes factory/lock ordering; not needed for the selected contract-preserving extraction."
+      }
+    ],
+    "qualification": {
+      "recipe": "Two exact hash-pinned existing Java recipe variants: incumbent and pending range context; fixedpoint/refusal/source-atom checks",
+      "behavior": "Existing SI warm/concurrency, fullidentity/source isolation, null/error order, actual Optional factory under lock plus blocked closer, escaping container results",
+      "allocation": "Actual public escaping/non-escaping warm loops; source arithmetic control and combined-context measurements beforeselection"
+    },
+    "status": "INVENTORIED_BEFORE_CANDIDATE",
+    "generationCalls": 0,
+    "scope": "Bounded extraction inside existing implementation under existing public contract; no new production interface/cache/fields. No external generation call."
+  },
+  "reuseGateBlob": "51a44b4afcf222443f2cb917f8e13e6819e52291",
+  "contractAgent": {
+    "readOnly": true,
+    "agent": "Kant",
+    "generationCalls": 0,
+    "findings": "Same lock/check/failure/value semantics; private helper adds stack frame. Performance must be measured.",
+    "discriminators": [
+      "closed/null precedence",
+      "hit/miss/image failure",
+      "factory lock/close exclusion"
+    ]
+  },
+  "admission": "NOT_SELECTED",
+  "reason": "All tests pass but allocation objective fails; no production patch or public registry entry admitted."
+}

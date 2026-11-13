@@ -1,0 +1,13 @@
+problem_category	operation	candidate	context	consumer	median_before_ns_per_million	median_after_ns_per_million	allocated_before_bytes	allocated_after_bytes	selection	rationale
+allocation-boundary/numeric-hits	findMapping	locked-nullable-helper	base	non-escaping	243415550	222303100	16000000	16000000	NOT_SELECTED	No allocation reduction; noisy timing is not a substitute for the failed objective
+allocation-boundary/numeric-hits	findMapping	locked-nullable-helper	range	non-escaping	169274800	168689300	16000000	16000000	NOT_SELECTED	No allocation reduction; noisy timing is not a substitute for the failed objective
+allocation-boundary/numeric-hits	findMapping	locked-nullable-helper	base	escaping	279925850	242317100	16000000	16000000	NOT_SELECTED	No allocation reduction; noisy timing is not a substitute for the failed objective
+allocation-boundary/numeric-hits	findMapping	locked-nullable-helper	range	escaping	221103250	187365650	16000000	16000000	NOT_SELECTED	No allocation reduction; noisy timing is not a substitute for the failed objective
+allocation-boundary/numeric-misses	findMapping	locked-nullable-helper	base	non-escaping	161472550	150935450	0	0	NOT_SELECTED	No allocation reduction; noisy timing is not a substitute for the failed objective
+allocation-boundary/numeric-misses	findMapping	locked-nullable-helper	range	non-escaping	139575400	130654600	0	0	NOT_SELECTED	No allocation reduction; noisy timing is not a substitute for the failed objective
+allocation-boundary/numeric-misses	findMapping	locked-nullable-helper	base	escaping	179315850	167905750	0	0	NOT_SELECTED	No allocation reduction; noisy timing is not a substitute for the failed objective
+allocation-boundary/numeric-misses	findMapping	locked-nullable-helper	range	escaping	141219400	139622900	0	0	NOT_SELECTED	No allocation reduction; noisy timing is not a substitute for the failed objective
+allocation-boundary/mixed-language	findMapping	locked-nullable-helper	base	non-escaping	220730250	270986850	16000000	16000000	NOT_SELECTED	No allocation reduction; noisy timing is not a substitute for the failed objective
+allocation-boundary/mixed-language	findMapping	locked-nullable-helper	range	non-escaping	197145450	187894800	16000000	16000000	NOT_SELECTED	No allocation reduction; noisy timing is not a substitute for the failed objective
+allocation-boundary/mixed-language	findMapping	locked-nullable-helper	base	escaping	255653600	303401700	16000000	16000000	NOT_SELECTED	No allocation reduction; noisy timing is not a substitute for the failed objective
+allocation-boundary/mixed-language	findMapping	locked-nullable-helper	range	escaping	203380250	204502800	16000000	16000000	NOT_SELECTED	No allocation reduction; noisy timing is not a substitute for the failed objective

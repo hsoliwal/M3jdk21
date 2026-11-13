@@ -1,0 +1,3 @@
+capability	classification	repository	revision	path	license	fit	selection	proof
+mapping-optional-facade	ADAPT_EXISTING_OWNER	hsoliwal/M3jdk21	778cd3eac266974e7b5155e79838f74ee516b535	m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java	Apache-2.0	Optional.ofNullable facade only; no lock precedent inferred	NOT_SELECTED	7ccfc5e1cceb469e232273d8ed18b0a4309a36898b1597a79471349b6f4d8821
+source-range-oracle	REUSE_QUALIFIED_PORT_ORACLE	lemire/fastrange	a70431b21c943506f2bf790693502160d274b939	fastrange.h/fastrange32	Apache-2.0	Unchanged arithmetic context control only	REFERENCE_ONLY	7ccfc5e1cceb469e232273d8ed18b0a4309a36898b1597a79471349b6f4d8821

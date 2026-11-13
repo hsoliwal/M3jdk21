@@ -1,0 +1,9 @@
+{
+  "schema": "M3_MAPPING_OPTIONAL_WORK_ORDER_V1",
+  "sourceOwner": "m3/core/src/jdk/m3/text/SharedLexiconCatalog.java",
+  "pattern": "M3_LOCKED_OPTIONAL_FACADE_EXTRACTION_V1",
+  "reuseGateBlob": "51a44b4afcf222443f2cb917f8e13e6819e52291",
+  "scope": "One existing owner, no field/cache/representation/public API change. Exact recipe in master and pending range contexts; Optional factory remains under lifecycle read lock.",
+  "qualification": "Two exact recipe variants plus eight fresh JVMs; actual closure, oracle, SI methods, bytecode lock instrumentation and escaping/non-escaping allocation.",
+  "generationCalls": 0
+}
