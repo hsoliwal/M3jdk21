@@ -1,0 +1,56 @@
+{
+  "schema": "m3.receiver-postimage-reference/v1",
+  "status": "DRAFT_UNADMITTED",
+  "repository": "hsoliwal/M3jdk21",
+  "parent": "a8a0e5afe6a279e0ec337108944deb8b3bedddd6",
+  "canonical": {
+    "repository": "hsoliwal/com.synexia",
+    "PR": 17262,
+    "head": "3de8e93f06012cc5b2ec022a0f48f8b3c632f340",
+    "path": "synexia-openrewrite-recipes/recipe-crates/count-totals-native-load-20261113",
+    "GAV": "com.synexia.verification:m3-count-totals-native-load-recipe:1.0.0",
+    "engine": "M3HashPinnedJavaSnapshotRecipe",
+    "crateId": "m3-count-totals-native-load-20261113"
+  },
+  "postimages": [
+    {
+      "path": "test/jdk/jdk/m3/collections/CountTotalsTest.java",
+      "beforeGitBlob": "32aec61f979a98d0af3e93939dcb3c35b29f371a",
+      "gitBlob": "a6b81748ff0337e56f1a15f993246c1383adb8ed",
+      "sha256": "e092c7160e4b8f6791c26e95f018c5ee23099a1db181b088073d7b9bdb477cf6"
+    }
+  ],
+  "proof": {
+    "recipeJUnit": 9,
+    "sourceDeltaChecks": 0,
+    "freshVMModeCases": 9,
+    "Maven": "PASS_REAL_OFFLINE_SDK3_9_14",
+    "artifactCacheCopies": 0,
+    "freshReplayUnchangedInputs": 25,
+    "unchangedTestMethods": 10,
+    "standaloneNativeTestsPassed": 10,
+    "bothObservedClassOrdersTestsPassed": 13,
+    "JavaFallbackTestsPassed": 10,
+    "missingInvalidWrongProviderControls": "EXPECTED_REFUSALS",
+    "XcheckJNI": true,
+    "jniWarnings": 0,
+    "productionInterfacesChanged": false,
+    "productionNativeSourceChanges": 0
+  },
+  "scope": "Only the existing CountTotalsTest BeforeAll loader explicitly admits and loads both already used native providers. Ten test methods and all production Java/native owners retain exact source bytes.",
+  "holds": {
+    "fullLinuxCollections": "PREDECESSOR_RUN43349173178_FAILED_NATIVE_4_FAILURES_2_ERRORS_OF2941",
+    "nativeSkippedOwner": "MatBitMatrixTileJUnitTest",
+    "installedModule": "M3EnumSet_SOURCE_CUSTODY_DRIFT",
+    "productPhasePromotion": false,
+    "globalCatalogueAdmission": "OPEN",
+    "globalPerAtomRuntimePerformance": "OPEN",
+    "repositoryComplete": false
+  },
+  "phase": {
+    "STRING": "QUALIFICATION_REQUIRED",
+    "ARRAYS": "WAITING_FOR_PREDECESSOR",
+    "COLLECTIONS": "WAITING_FOR_PREDECESSOR"
+  },
+  "custody": "Only exact executed postimage plus passive reference. Recipes, fixtures, Maven qualification and improvement memory stay exclusively in Synexia."
+}
