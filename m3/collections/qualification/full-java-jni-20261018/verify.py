@@ -112,6 +112,9 @@ LIBRARIES = {'m3_disjoint_index': {'sources': ['collections/m3_disjoint_index.c'
  'm3_mat_row': {'sources': ['collections/mat_int_row_jni.c'],
                 'owners': ['jdk.internal.m3.collections.mat.MatIntRowKernel'],
                 'requires': None},
+ 'm3_mat_bitmatrix': {'sources': ['collections/mat_bit_matrix.c'],
+                       'owners': ['jdk.internal.m3.collections.mat.MatBitMatrix'],
+                       'requires': None},
  'm3_packed_int_width': {'sources': ['collections/packed_int_width.c'],
                          'owners': ['jdk.internal.m3.collections.packed.PackedIntNative'],
                          'requires': None}}
@@ -247,6 +250,8 @@ def main():
               '-o', gather_fixture])
     run([gather_fixture])
     native_properties = [
+        '-Dm3.matmatrix.native.path=' + str(OUT / 'native/libm3_mat_bitmatrix.so'),
+        '-Dm3.bitmatrix.requireNative=true',
         '-Dm3.counted.native=' + str(OUT / 'native/libm3_count_lanes.so'),
         '-Dm3.totals.native=' + str(OUT / 'native/libm3_count_totals.so'),
         '-Dm3.native.path=' + str(OUT / 'native/libm3_collections_packed.so'),
@@ -319,7 +324,7 @@ def main():
     proof = {'status': 'PASS_OWNING_COLLECTION_JAVA_AND_JNI', 'head_sha': head,
              'scope': 'independent m3/collections; no JDK phase or challenge-corpus promotion',
              'owning_test_selection': '-Dtest=* overrides default includes/excludes',
-             'native_host_properties': 'existing m3-collections-native POM bindings, native mode only',
+             'native_host_properties': 'existing native bindings plus explicit MatBitMatrix provider and required gate, native mode only',
              'worktree_dirty': bool(subprocess.check_output(['git', 'status', '--porcelain', '--untracked-files=no'], cwd=ROOT)),
              'jar_sha256': sha(jar), 'jar_classes': len(expected_classes), 'runtime_modules': runtime_modules,
              'java_sources': len(sources), 'test_sources': len(tests), 'junit': results,
