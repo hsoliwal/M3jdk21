@@ -95,6 +95,41 @@ def verify_jcmd_backport(root: Path) -> None:
 
 JDK_8347112_COMMIT = "b221cb6ba138672802644f37eebf368521a0a6f4"
 
+# The JDK21u update merge (f97e75f2; parents 3569c790, 8b241db2)
+# retained the adapted recursive-copy leaf and introduced the upstream
+# isIndexable() override and updated copyright header. The historical
+# adaptation TSV remains immutable. This exact hash pair authorizes only
+# the observed merged-successor source, not an arbitrary regenerated hash.
+JDK_8347112_HANDLER_PATH = (
+    "src/jdk.javadoc/share/classes/jdk/javadoc/internal/doclets/"
+    "formats/html/DocFilesHandlerImpl.java"
+)
+JDK_8347112_HANDLER_HISTORICAL_SHA256 = (
+    "374269a8f8913fd88954c89cb55efbf14cc93ac1ecda8c290092cddb4036ebe7"
+)
+JDK_8347112_HANDLER_21U_SHA256 = (
+    "e6a27731b1d92aaae05e9c64dd231fe3b5791759fb6022a009b104bd7b176d41"
+)
+JDK_8347112_HANDLER_21U_GIT_BLOB = (
+    "e86016480f297dadc2ce5c729b10e8d2594dd787"
+)
+
+
+def _verified_javadoc_21u_successor(
+    row: dict[str, str], actual: str, data: bytes
+) -> bool:
+    """Admit only the exact upstream-update successor of one historic Javadoc leaf."""
+    return (
+        row["target_path"] == JDK_8347112_HANDLER_PATH
+        and row["target_sha256"] == JDK_8347112_HANDLER_HISTORICAL_SHA256
+        and actual == JDK_8347112_HANDLER_21U_SHA256
+        and hashlib.sha256(data).hexdigest() == actual
+        and git_blob_sha1(data) == JDK_8347112_HANDLER_21U_GIT_BLOB
+        and b"if (!configuration.shouldExcludeDocFileDir(srcfile.getName()))" in data
+        and b"options.copyDocfileSubdirs()" not in data
+        and b"public boolean isIndexable()" in data
+    )
+
 
 def verify_javadoc_8347112_backport(root: Path) -> None:
     rows = read_tsv(root / "m3/backports/recipes/jdk-8347112/adaptation.tsv")
@@ -113,8 +148,11 @@ def verify_javadoc_8347112_backport(root: Path) -> None:
         path = root / row["target_path"]
         if not path.is_file():
             raise AssertionError(f"missing JDK-8347112 target: {row['target_path']}")
-        actual = hashlib.sha256(path.read_bytes()).hexdigest()
-        if actual != row["target_sha256"]:
+        data = path.read_bytes()
+        actual = hashlib.sha256(data).hexdigest()
+        if actual != row["target_sha256"] and not _verified_javadoc_21u_successor(
+            row, actual, data
+        ):
             raise AssertionError(
                 f"JDK-8347112 target drift for {row['target_path']}: "
                 f"expected {row['target_sha256']}, actual {actual}"
