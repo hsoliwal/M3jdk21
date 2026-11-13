@@ -173,6 +173,22 @@ class Jdk8364182LineageTest(unittest.TestCase):
         with self.assertRaisesRegex(AssertionError, "unexpected.*superseded"):
             self.verify.verify_security_properties_8364182_backport(self.root)
 
+    def test_exact_jdk21u_source_cannot_be_reassigned_as_baseline(self) -> None:
+        for row in self.records:
+            if row["target_path"] == TARGET:
+                row["baseline_sha256"] = PREVIOUS_21U
+        write_rows(self.root / LEDGER, self.columns, self.records)
+        with self.assertRaisesRegex(AssertionError, "aliases a pinned state"):
+            self.verify.verify_security_properties_8364182_backport(self.root)
+
+    def test_old_m3_string_successor_cannot_be_reassigned_as_baseline(self) -> None:
+        for row in self.records:
+            if row["target_path"] == TARGET:
+                row["baseline_sha256"] = HISTORICAL_SUPERSEDED
+        write_rows(self.root / LEDGER, self.columns, self.records)
+        with self.assertRaisesRegex(AssertionError, "aliases a pinned state"):
+            self.verify.verify_security_properties_8364182_backport(self.root)
+
     def test_baseline_and_original_target_cannot_alias_successor(self) -> None:
         for row in self.records:
             if row["target_path"] == TARGET:
