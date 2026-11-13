@@ -14228,7 +14228,7 @@
         "dependencies": [
           {
             "id": "eclipse-collections-14-source-closure",
-            "resolution": "component-qualified",
+            "resolution": "pending",
             "reason": "Finite namespace-correct generator/API/implementation source closure is separately evidenced; whole-runtime admission remains pending."
           }
         ],

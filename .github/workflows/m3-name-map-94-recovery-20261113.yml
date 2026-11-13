@@ -7,6 +7,7 @@ on:
       - 'm3/docs/name-mapping.json'
       - 'm3/tooling/name-contract/name-plan.json'
       - 'm3/compatibility/name-map-94-recovery-20261113.json'
+      - 'm3/compatibility/name-map-94-dependency-pending-20261113.json'
       - '.github/workflows/m3-name-map-94-recovery-20261113.yml'
   workflow_dispatch:
 
@@ -42,19 +43,38 @@ jobs:
               return hashlib.sha1(b"blob " + str(len(data)).encode("ascii")
                                   + b"\x00" + data).hexdigest()
           map_bytes, mapping = load("m3/docs/name-mapping.json")
-          _, plan = load("m3/tooling/name-contract/name-plan.json")
+          plan_bytes, plan = load("m3/tooling/name-contract/name-plan.json")
           _, receipt = load("m3/compatibility/name-map-94-recovery-20261113.json")
+          _, successor = load("m3/compatibility/name-map-94-dependency-pending-20261113.json")
           values = mapping["migration"]["records"]
           ids = [entry["id"] for entry in values]
           assert len(ids) == len(set(ids)) == 94, "migration record loss/duplication"
-          assert blob(map_bytes) == "7f70f9a6153fe1e79f95d709aae611816dac4aa5"
+          assert blob(map_bytes) == "0e46cb93d1f83a721910525563355e07f6a38c27"
+          assert blob(plan_bytes) == "d4419fe9982266a43ab5db253c51574de4486ffc"
           assert plan["authority_blob"] == blob(map_bytes), "authority source drift"
           assert len(plan["operations"]) == 4
           assert all(entry["state"] == "QUEUED" for entry in plan["operations"])
           assert receipt["record_count"] == len(values)
           assert set(receipt["postimages"]) == {
               "m3/docs/name-mapping.json", "m3/tooling/name-contract/name-plan.json"}
-          assert receipt["postimages"]["m3/docs/name-mapping.json"] == blob(map_bytes)
+          # Previous receipt is immutable historical evidence, not a current blob.
+          assert receipt["postimages"]["m3/docs/name-mapping.json"] == "7f70f9a6153fe1e79f95d709aae611816dac4aa5"
+          assert receipt["postimages"]["m3/tooling/name-contract/name-plan.json"] == "867ed9914140237a158deb0d69982aaeb012b12f"
+          assert successor["preimages"] == receipt["postimages"]
+          assert successor["postimages"] == {
+              "m3/docs/name-mapping.json": blob(map_bytes),
+              "m3/tooling/name-contract/name-plan.json": blob(plan_bytes),
+          }
+          assert successor["record_count"] == 94
+          assert successor["queued_naming_operations"] == 4
+          owners = [item for item in values
+                    if item["id"] == "synexia.collections.eclipse-unified-set-bulk-clear"]
+          assert len(owners) == 1
+          owner = owners[0]
+          assert owner["dependencies"][0]["resolution"] == "pending"
+          assert "Finite namespace-correct generator/API/implementation" in owner["dependencies"][0]["reason"]
+          assert owner["source_state"] == "partial"
+          assert successor["qualified_jdk_promotions"] == 0
           print("M3_94_NAME_MAP_STRICT_JSON_PASS records=94 queued=4")
           PY
       - name: Existing M3JDK21 naming contract checker
