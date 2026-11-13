@@ -1,0 +1,1609 @@
+{
+  "schema": "M3_PAYLOAD_RENDER_RECEIVING_V1",
+  "license": "Apache-2.0",
+  "copyright": "2026 Hitesh Soliwal and Synexia",
+  "canonical": {
+    "repository": "hsoliwal/com.synexia",
+    "pullRequest": 17286,
+    "commit": "58a77ae8d818ca62fb9dffabcd9e0606ebad3910",
+    "recipe": "payload-render-precompute",
+    "scopeRecipe": "core-text-owner-scope",
+    "input": "91bd862edbd4cdf7dd9451b67a52f02642deb000",
+    "proof": "1e02649f8d2300945539fe70ae0823ddf646d32f",
+    "cpuProof": "fd31e3484bbeca0cddb8029940a00b51eb5c4e60"
+  },
+  "receiving": {
+    "repository": "hsoliwal/M3jdk21",
+    "parent": "0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb",
+    "target": "m3/core/src/jdk/m3/text/M3PrecomputePayload.java",
+    "before": {
+      "bytes": 18221,
+      "sha256": "741dc7259cf79d6c305719fe0a18a8c084f3a8563e2af2b7c8d41a1ccb7cd08d",
+      "gitBlob": "189515e6218e09f640fc4f4d6bdb320884daea13"
+    },
+    "after": {
+      "bytes": 18917,
+      "sha256": "c648107f6188ae13f3fa7281d3244dcee09d770aa2b6da455d7d12a90abee3c0",
+      "gitBlob": "53f0387e1574b186bbc346db53def263abb75f0f"
+    }
+  },
+  "payloadRecipe": {
+    "schema": "M3_PAYLOAD_RENDER_QUALIFICATION_V1",
+    "status": "PASS",
+    "reports": [
+      {
+        "stage": "recipe",
+        "exit": 0,
+        "reaped": true,
+        "elapsedSeconds": 23.047,
+        "argv": [
+          "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin\\mvn.cmd",
+          "-o",
+          "-B",
+          "-ntp",
+          "-f",
+          "F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\project\\pom.xml",
+          "-Dmaven.repo.local=F:\\codex-work\\lexicon-migration-20261031\\range-current-qualification\\proof\\repo-head",
+          "-Dmaven.repo.local.tail=C:/Users/hsoliwal/.m2/repository",
+          "-Dmaven.repo.local.tail.ignoreAvailability=false",
+          "-Dexec.args=\"--add-opens=java.base/java.lang=ALL-UNNAMED\" \"-XX:-UsePerfData\" \"-Xmx512m\" \"-Djava.io.tmpdir=F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\temp\" \"-Duser.home=F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\home\" \"-Djunit.jupiter.execution.parallel.enabled=false\" \"-Dorg.xerial.snappy.lib.path=F:\\codex-work\\lexicon-migration-20261031\\code-text-oracle-recipe\\proof\\temp\" \"-Dorg.xerial.snappy.lib.name=snappy-1.1.10-6e0cfc58-474b-47d4-bdb8-4cb270ee6e0e-snappyjava.dll\" \"-cp\" \"C:\\Users\\hsoliwal\\.m2\\repository\\org\\yaml\\snakeyaml\\2.2\\snakeyaml-2.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java\\8.17.1\\rewrite-java-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-core\\8.17.1\\rewrite-core-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-databind\\2.16.1\\jackson-databind-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-core\\2.16.1\\jackson-core-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\dataformat\\jackson-dataformat-smile\\2.16.1\\jackson-dataformat-smile-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\module\\jackson-module-parameter-names\\2.16.1\\jackson-module-parameter-names-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\datatype\\jackson-datatype-jsr310\\2.16.1\\jackson-datatype-jsr310-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\tools\\java-object-diff\\1.0.1\\java-object-diff-1.0.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\quarkus\\gizmo\\gizmo\\1.0.11.Final\\gizmo-1.0.11.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jboss\\jandex\\2.4.2.Final\\jandex-2.4.2.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna-platform\\5.14.0\\jna-platform-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna\\5.14.0\\jna-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-compress\\1.26.0\\commons-compress-1.26.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-yaml\\8.17.1\\rewrite-yaml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-xml\\8.17.1\\rewrite-xml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\micrometer\\micrometer-core\\1.9.17\\micrometer-core-1.9.17.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\hdrhistogram\\HdrHistogram\\2.1.12\\HdrHistogram-2.1.12.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\latencyutils\\LatencyUtils\\2.0.3\\LatencyUtils-2.0.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jetbrains\\annotations\\24.1.0\\annotations-24.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-annotations\\2.16.1\\jackson-annotations-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\antlr\\antlr4-runtime\\4.11.1\\antlr4-runtime-4.11.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-text\\1.11.0\\commons-text-1.11.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\classgraph\\classgraph\\4.8.165\\classgraph-4.8.165.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\xerial\\snappy\\snappy-java\\1.1.10.5\\snappy-java-1.1.10.5.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\fastfilter\\fastfilter\\1.0.2\\fastfilter-1.0.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm\\9.6\\asm-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-util\\9.6\\asm-util-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-tree\\9.6\\asm-tree-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-analysis\\9.6\\asm-analysis-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java-21\\8.17.1\\rewrite-java-21-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0\\opentest4j-1.3.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2\\apiguardian-api-1.1.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-simple\\2.0.13\\slf4j-simple-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-api\\2.0.13\\slf4j-api-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\projectlombok\\lombok\\1.18.30\\lombok-1.18.30.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-lang3\\3.17.0\\commons-lang3-3.17.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-io\\commons-io\\2.17.0\\commons-io-2.17.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-codec\\commons-codec\\1.17.1\\commons-codec-1.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-csv\\1.12.0\\commons-csv-1.12.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\5.11.4\\junit-jupiter-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.11.4\\junit-jupiter-api-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\5.11.4\\junit-jupiter-params-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\5.11.4\\junit-jupiter-engine-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.11.4\\junit-platform-commons-1.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\1.11.4\\junit-platform-engine-1.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-launcher\\1.11.4\\junit-platform-launcher-1.11.4.jar\" \"--source\" \"21\" \"F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\project\\M3LexiconCpuProof.java\" \"http://127.0.0.1:62822/488461947f344273bc6c73bd79050bd1/recipe\" \"2ecd848669d2953cdd96b33d5705f2e3ca6b69c157987815c300b8b0ddbf479d\" \"com.synexia.rewrite.M3SnapshotCatalogueRecipeQualification\" \"http://127.0.0.1:62822/488461947f344273bc6c73bd79050bd1/recipe\"",
+          "org.codehaus.mojo:exec-maven-plugin:3.3.0:exec"
+        ],
+        "packetIdentity": {
+          "bytes": 169196,
+          "sha256": "2ecd848669d2953cdd96b33d5705f2e3ca6b69c157987815c300b8b0ddbf479d",
+          "gitBlob": "59b8a8a0dcd43d5598179042ca9c34d84816d701"
+        },
+        "sourcePins": {
+          "com.synexia.rewrite.M3ResourceEnvelope": {
+            "bytes": 3849,
+            "sha256": "2f5f0a1dd1fabe07c97bf7acf4ead51e1853d302a2b21f6fe011d019cc496c57",
+            "gitBlob": "1b0b84ab1dd08aab4c8edb5835bd00615d0cf908"
+          },
+          "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe": {
+            "bytes": 47665,
+            "sha256": "254df9622aa099c93136e5615012b23adc5e93d93dca472b58332d5b094c2730",
+            "gitBlob": "3da0e5fc43b491e79ab71ee375146193d9628164"
+          },
+          "com.synexia.rewrite.M3SnapshotCatalogueRecipeTest": {
+            "bytes": 5757,
+            "sha256": "46235b66ea9cadf58723df7a9ec7210318cab5b3df1f46f6baab0f956f66d15e",
+            "gitBlob": "78a2be2071b1137dec1fa6a939b57e62c7b56d98"
+          },
+          "com.synexia.rewrite.M3SnapshotCatalogueRecipeQualification": {
+            "bytes": 2026,
+            "sha256": "8d082908ad1d28944abfa8499bcd0c1a7fb0644a438ab95a30ded5c9360142dd",
+            "gitBlob": "376c9a438b04015202518e2562b60ab3a05acb90"
+          },
+          "com.synexia.rewrite.M3ScopeInference": {
+            "bytes": 28101,
+            "sha256": "6c3a5484d069a4d4d318bd4d84c3a9c253135c188b471cf9ca43578a96baf29b",
+            "gitBlob": "db914de1b292ef737fe41f817a3f7a8522682112"
+          },
+          "com.synexia.rewrite.M3EditScope": {
+            "bytes": 1139,
+            "sha256": "0dc762ef802b32ad0a40ff23e21cfbb67ad4bbd8a251b46b8a5954b647927824",
+            "gitBlob": "5e4cf8ea8df34090b5a17494ace72ab907161b9c"
+          }
+        },
+        "log": "[INFO] Scanning for projects...\r\n[INFO] \r\n[INFO] ---< com.synexia.verification:m3-shared-array-binding-qualification >---\r\n[INFO] Building m3-shared-array-binding-qualification 1\r\n[INFO]   from pom.xml\r\n[INFO] --------------------------------[ pom ]---------------------------------\r\n[INFO] \r\n[INFO] --- exec:3.3.0:exec (default-cli) @ m3-shared-array-binding-qualification ---\r\n\r\nTest run finished after 19506 ms\r\n[         2 containers found      ]\r\n[         0 containers skipped    ]\r\n[         2 containers started    ]\r\n[         0 containers aborted    ]\r\n[         2 containers successful ]\r\n[         0 containers failed     ]\r\n[         2 tests found           ]\r\n[         0 tests skipped         ]\r\n[         2 tests started         ]\r\n[         0 tests aborted         ]\r\n[         2 tests successful      ]\r\n[         0 tests failed          ]\r\n\r\nM3_SNAPSHOT_CATALOGUE_RECIPE_PASS tests=2 outputs=1\r\nM3_CPU_RAM_COMPILE_PASS sources=6 classes=14\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] BUILD SUCCESS\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] Total time:  21.904 s\r\n[INFO] Finished at: 2026-11-13T09:03:53+05:30\r\n[INFO] ------------------------------------------------------------------------\r\n",
+        "logIdentity": {
+          "bytes": 1302,
+          "sha256": "0615cb8bfd8cc62196e410b6f05a8408323dbf26b5fcf2a705afed8badf5eb66",
+          "gitBlob": "c373756d22e3d018bf9dad3722c3f6204b7b88f0"
+        },
+        "allocationAfter": 571469824,
+        "issues": []
+      },
+      {
+        "stage": "product-0-before",
+        "exit": 0,
+        "reaped": true,
+        "elapsedSeconds": 7.516,
+        "argv": [
+          "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin\\mvn.cmd",
+          "-o",
+          "-B",
+          "-ntp",
+          "-f",
+          "F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\project\\pom.xml",
+          "-Dmaven.repo.local=F:\\codex-work\\lexicon-migration-20261031\\range-current-qualification\\proof\\repo-head",
+          "-Dmaven.repo.local.tail=C:/Users/hsoliwal/.m2/repository",
+          "-Dmaven.repo.local.tail.ignoreAvailability=false",
+          "-Dexec.args=\"--add-opens=java.base/java.lang=ALL-UNNAMED\" \"-XX:-UsePerfData\" \"-Xmx512m\" \"-Djava.io.tmpdir=F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\temp\" \"-Duser.home=F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\home\" \"-Djunit.jupiter.execution.parallel.enabled=false\" \"-Dorg.xerial.snappy.lib.path=F:\\codex-work\\lexicon-migration-20261031\\code-text-oracle-recipe\\proof\\temp\" \"-Dorg.xerial.snappy.lib.name=snappy-1.1.10-6e0cfc58-474b-47d4-bdb8-4cb270ee6e0e-snappyjava.dll\" \"-cp\" \"C:\\Users\\hsoliwal\\.m2\\repository\\org\\yaml\\snakeyaml\\2.2\\snakeyaml-2.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java\\8.17.1\\rewrite-java-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-core\\8.17.1\\rewrite-core-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-databind\\2.16.1\\jackson-databind-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-core\\2.16.1\\jackson-core-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\dataformat\\jackson-dataformat-smile\\2.16.1\\jackson-dataformat-smile-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\module\\jackson-module-parameter-names\\2.16.1\\jackson-module-parameter-names-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\datatype\\jackson-datatype-jsr310\\2.16.1\\jackson-datatype-jsr310-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\tools\\java-object-diff\\1.0.1\\java-object-diff-1.0.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\quarkus\\gizmo\\gizmo\\1.0.11.Final\\gizmo-1.0.11.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jboss\\jandex\\2.4.2.Final\\jandex-2.4.2.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna-platform\\5.14.0\\jna-platform-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna\\5.14.0\\jna-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-compress\\1.26.0\\commons-compress-1.26.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-yaml\\8.17.1\\rewrite-yaml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-xml\\8.17.1\\rewrite-xml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\micrometer\\micrometer-core\\1.9.17\\micrometer-core-1.9.17.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\hdrhistogram\\HdrHistogram\\2.1.12\\HdrHistogram-2.1.12.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\latencyutils\\LatencyUtils\\2.0.3\\LatencyUtils-2.0.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jetbrains\\annotations\\24.1.0\\annotations-24.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-annotations\\2.16.1\\jackson-annotations-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\antlr\\antlr4-runtime\\4.11.1\\antlr4-runtime-4.11.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-text\\1.11.0\\commons-text-1.11.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\classgraph\\classgraph\\4.8.165\\classgraph-4.8.165.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\xerial\\snappy\\snappy-java\\1.1.10.5\\snappy-java-1.1.10.5.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\fastfilter\\fastfilter\\1.0.2\\fastfilter-1.0.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm\\9.6\\asm-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-util\\9.6\\asm-util-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-tree\\9.6\\asm-tree-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-analysis\\9.6\\asm-analysis-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java-21\\8.17.1\\rewrite-java-21-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0\\opentest4j-1.3.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2\\apiguardian-api-1.1.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-simple\\2.0.13\\slf4j-simple-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-api\\2.0.13\\slf4j-api-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\projectlombok\\lombok\\1.18.30\\lombok-1.18.30.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-lang3\\3.17.0\\commons-lang3-3.17.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-io\\commons-io\\2.17.0\\commons-io-2.17.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-codec\\commons-codec\\1.17.1\\commons-codec-1.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-csv\\1.12.0\\commons-csv-1.12.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\5.11.4\\junit-jupiter-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.11.4\\junit-jupiter-api-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\5.11.4\\junit-jupiter-params-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\5.11.4\\junit-jupiter-engine-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.11.4\\junit-platform-commons-1.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\1.11.4\\junit-platform-engine-1.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-launcher\\1.11.4\\junit-platform-launcher-1.11.4.jar\" \"--source\" \"21\" \"F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\project\\M3LexiconCpuProof.java\" \"http://127.0.0.1:62822/488461947f344273bc6c73bd79050bd1/product-0-before\" \"454fd420a9df6e195bb4aefe47c805395d6d88615830d481cea99e943edb7e73\" \"M3PayloadRenderingQualification\" \"before\"",
+          "org.codehaus.mojo:exec-maven-plugin:3.3.0:exec"
+        ],
+        "packetIdentity": {
+          "bytes": 64525,
+          "sha256": "454fd420a9df6e195bb4aefe47c805395d6d88615830d481cea99e943edb7e73",
+          "gitBlob": "39d0753cf14b45485d7039a4035e0d997e146555"
+        },
+        "sourcePins": {
+          "M3PrecomputePayloadParserContractTest": {
+            "bytes": 16671,
+            "sha256": "0490409694fdd570bd5943ad7330e0ab96b9213a88acc12220df80c00a1aa84f",
+            "gitBlob": "41e27cdb9b3b2c7a82daf73f0c81daf8ecb7bd3c"
+          },
+          "M3PrecomputePayloadTest": {
+            "bytes": 2995,
+            "sha256": "a7df0f11854ada05a03ab3e1129d0caf8b34b4cc2d94f49c23b9d7396fd0cb01",
+            "gitBlob": "1416170dbe1be0f911be61a7bf897cead23a4bdd"
+          },
+          "M3PayloadRenderingTest": {
+            "bytes": 8902,
+            "sha256": "0c7ef99755862ecb5a004c0a9a244a12f1d95be16d1d0d361328b1ac45879e2d",
+            "gitBlob": "7b66909ae12fe5688ffc7ec1511dd07e68df7686"
+          },
+          "M3PayloadRenderingQualification": {
+            "bytes": 1237,
+            "sha256": "14b27f8f33cda12f1ad870f62f186b39a4f511cde142f9332b3777e721e1f817",
+            "gitBlob": "54edbeb87f4e2dc9db292db80f02a64962326662"
+          },
+          "jdk.m3.text.M3PrecomputePayload": {
+            "bytes": 18221,
+            "sha256": "741dc7259cf79d6c305719fe0a18a8c084f3a8563e2af2b7c8d41a1ccb7cd08d",
+            "gitBlob": "189515e6218e09f640fc4f4d6bdb320884daea13"
+          }
+        },
+        "log": "[INFO] Scanning for projects...\r\n[INFO] \r\n[INFO] ---< com.synexia.verification:m3-shared-array-binding-qualification >---\r\n[INFO] Building m3-shared-array-binding-qualification 1\r\n[INFO]   from pom.xml\r\n[INFO] --------------------------------[ pom ]---------------------------------\r\n[INFO] \r\n[INFO] --- exec:3.3.0:exec (default-cli) @ m3-shared-array-binding-qualification ---\r\nM3_PRECOMPUTE_PAYLOAD_PARSER_CONTRACT_PASS checks=102\r\nM3JDK_SYNXIA_PAYLOAD_PASS checks=16 fields=7\r\n\r\nTest run finished after 717 ms\r\n[         2 containers found      ]\r\n[         0 containers skipped    ]\r\n[         2 containers started    ]\r\n[         0 containers aborted    ]\r\n[         2 containers successful ]\r\n[         0 containers failed     ]\r\n[         8 tests found           ]\r\n[         0 tests skipped         ]\r\n[         8 tests started         ]\r\n[         0 tests aborted         ]\r\n[         8 tests successful      ]\r\n[         0 tests failed          ]\r\n\r\nM3_LANGDEX_BEHAVIOR_PASS checks=68383 digest=1a819a8b4ab48686ad6b90b365d2e56092425687697a88499d23013324dbaeba\r\nM3_LANGDEX_API [public boolean jdk.m3.text.M3PrecomputePayload.requireBoolean(java.lang.String), public double jdk.m3.text.M3PrecomputePayload.requireDouble(java.lang.String), public int jdk.m3.text.M3PrecomputePayload.requireInt(java.lang.String), public int[] jdk.m3.text.M3PrecomputePayload.requireIntArray(java.lang.String), public java.lang.String jdk.m3.text.M3PrecomputePayload.canonicalJson(), public java.lang.String jdk.m3.text.M3PrecomputePayload.requireString(java.lang.String), public java.util.Map<java.lang.String, jdk.m3.text.M3PrecomputePayload$Field> jdk.m3.text.M3PrecomputePayload.fields(), public java.util.Optional<jdk.m3.text.M3PrecomputePayload$Field> jdk.m3.text.M3PrecomputePayload.field(java.lang.String), public java.util.Set<java.lang.String> jdk.m3.text.M3PrecomputePayload.fieldNames(), public long jdk.m3.text.M3PrecomputePayload.requireLong(java.lang.String), public long[] jdk.m3.text.M3PrecomputePayload.requireLongArray(java.lang.String), public static jdk.m3.text.M3PrecomputePayload jdk.m3.text.M3PrecomputePayload.parse(java.lang.String)]\r\nM3_PAYLOAD_MEASURE\tparse\t0\t10000\t18465100\t35520000\r\nM3_PAYLOAD_MEASURE\tparse\t1\t10000\t16947400\t35520000\r\nM3_PAYLOAD_MEASURE\tparse\t2\t10000\t14511700\t35520000\r\nM3_PAYLOAD_MEASURE\tparse\t3\t10000\t13967200\t35520000\r\nM3_PAYLOAD_MEASURE\tparse\t4\t10000\t14419800\t35520000\r\nM3_PAYLOAD_MEASURE\tfirstRender\t0\t10000\t19839000\t43840000\r\nM3_PAYLOAD_MEASURE\tfirstRender\t1\t10000\t19090500\t43840000\r\nM3_PAYLOAD_MEASURE\tfirstRender\t2\t10000\t18143100\t43840000\r\nM3_PAYLOAD_MEASURE\tfirstRender\t3\t10000\t19356200\t43840000\r\nM3_PAYLOAD_MEASURE\tfirstRender\t4\t10000\t17826600\t43840000\r\nM3_PAYLOAD_MEASURE\trenderWarm\t0\t50000\t32982800\t40000000\r\nM3_PAYLOAD_MEASURE\trenderWarm\t1\t50000\t153850100\t40000000\r\nM3_PAYLOAD_MEASURE\trenderWarm\t2\t50000\t150872000\t40000000\r\nM3_PAYLOAD_MEASURE\trenderWarm\t3\t50000\t155988500\t40000000\r\nM3_PAYLOAD_MEASURE\trenderWarm\t4\t50000\t155008800\t40000000\r\nM3_PAYLOAD_MEASURE\tnumericWarm\t0\t50000\t14438900\t3200000\r\nM3_PAYLOAD_MEASURE\tnumericWarm\t1\t50000\t13994200\t3179648\r\nM3_PAYLOAD_MEASURE\tnumericWarm\t2\t50000\t7708100\t2000000\r\nM3_PAYLOAD_MEASURE\tnumericWarm\t3\t50000\t7303300\t2000000\r\nM3_PAYLOAD_MEASURE\tnumericWarm\t4\t50000\t7922800\t2000000\r\nM3_PAYLOAD_STORAGE wrappers=32 backings=32 chars=142\r\nM3_CPU_RAM_COMPILE_PASS sources=5 classes=10\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] BUILD SUCCESS\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] Total time:  4.105 s\r\n[INFO] Finished at: 2026-11-13T09:04:06+05:30\r\n[INFO] ------------------------------------------------------------------------\r\n",
+        "logIdentity": {
+          "bytes": 3712,
+          "sha256": "2fbd06b8c610d00a54f0b6163d727ed79073529ebb86f0b10262ca053717f054",
+          "gitBlob": "9cba8d805d6aa7de37b5acbdbd69b63b87199b8d"
+        },
+        "allocationAfter": 571469824,
+        "issues": []
+      },
+      {
+        "stage": "product-1-after",
+        "exit": 0,
+        "reaped": true,
+        "elapsedSeconds": 8.75,
+        "argv": [
+          "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin\\mvn.cmd",
+          "-o",
+          "-B",
+          "-ntp",
+          "-f",
+          "F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\project\\pom.xml",
+          "-Dmaven.repo.local=F:\\codex-work\\lexicon-migration-20261031\\range-current-qualification\\proof\\repo-head",
+          "-Dmaven.repo.local.tail=C:/Users/hsoliwal/.m2/repository",
+          "-Dmaven.repo.local.tail.ignoreAvailability=false",
+          "-Dexec.args=\"--add-opens=java.base/java.lang=ALL-UNNAMED\" \"-XX:-UsePerfData\" \"-Xmx512m\" \"-Djava.io.tmpdir=F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\temp\" \"-Duser.home=F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\home\" \"-Djunit.jupiter.execution.parallel.enabled=false\" \"-Dorg.xerial.snappy.lib.path=F:\\codex-work\\lexicon-migration-20261031\\code-text-oracle-recipe\\proof\\temp\" \"-Dorg.xerial.snappy.lib.name=snappy-1.1.10-6e0cfc58-474b-47d4-bdb8-4cb270ee6e0e-snappyjava.dll\" \"-cp\" \"C:\\Users\\hsoliwal\\.m2\\repository\\org\\yaml\\snakeyaml\\2.2\\snakeyaml-2.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java\\8.17.1\\rewrite-java-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-core\\8.17.1\\rewrite-core-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-databind\\2.16.1\\jackson-databind-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-core\\2.16.1\\jackson-core-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\dataformat\\jackson-dataformat-smile\\2.16.1\\jackson-dataformat-smile-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\module\\jackson-module-parameter-names\\2.16.1\\jackson-module-parameter-names-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\datatype\\jackson-datatype-jsr310\\2.16.1\\jackson-datatype-jsr310-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\tools\\java-object-diff\\1.0.1\\java-object-diff-1.0.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\quarkus\\gizmo\\gizmo\\1.0.11.Final\\gizmo-1.0.11.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jboss\\jandex\\2.4.2.Final\\jandex-2.4.2.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna-platform\\5.14.0\\jna-platform-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna\\5.14.0\\jna-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-compress\\1.26.0\\commons-compress-1.26.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-yaml\\8.17.1\\rewrite-yaml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-xml\\8.17.1\\rewrite-xml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\micrometer\\micrometer-core\\1.9.17\\micrometer-core-1.9.17.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\hdrhistogram\\HdrHistogram\\2.1.12\\HdrHistogram-2.1.12.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\latencyutils\\LatencyUtils\\2.0.3\\LatencyUtils-2.0.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jetbrains\\annotations\\24.1.0\\annotations-24.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-annotations\\2.16.1\\jackson-annotations-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\antlr\\antlr4-runtime\\4.11.1\\antlr4-runtime-4.11.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-text\\1.11.0\\commons-text-1.11.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\classgraph\\classgraph\\4.8.165\\classgraph-4.8.165.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\xerial\\snappy\\snappy-java\\1.1.10.5\\snappy-java-1.1.10.5.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\fastfilter\\fastfilter\\1.0.2\\fastfilter-1.0.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm\\9.6\\asm-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-util\\9.6\\asm-util-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-tree\\9.6\\asm-tree-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-analysis\\9.6\\asm-analysis-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java-21\\8.17.1\\rewrite-java-21-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0\\opentest4j-1.3.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2\\apiguardian-api-1.1.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-simple\\2.0.13\\slf4j-simple-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-api\\2.0.13\\slf4j-api-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\projectlombok\\lombok\\1.18.30\\lombok-1.18.30.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-lang3\\3.17.0\\commons-lang3-3.17.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-io\\commons-io\\2.17.0\\commons-io-2.17.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-codec\\commons-codec\\1.17.1\\commons-codec-1.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-csv\\1.12.0\\commons-csv-1.12.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\5.11.4\\junit-jupiter-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.11.4\\junit-jupiter-api-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\5.11.4\\junit-jupiter-params-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\5.11.4\\junit-jupiter-engine-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.11.4\\junit-platform-commons-1.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\1.11.4\\junit-platform-engine-1.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-launcher\\1.11.4\\junit-platform-launcher-1.11.4.jar\" \"--source\" \"21\" \"F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\project\\M3LexiconCpuProof.java\" \"http://127.0.0.1:62822/488461947f344273bc6c73bd79050bd1/product-1-after\" \"ff49e6176d6c18b24f85ba42b00530abff91a46dcb5cd0cadeb7de45b07b7b7e\" \"M3PayloadRenderingQualification\" \"after\"",
+          "org.codehaus.mojo:exec-maven-plugin:3.3.0:exec"
+        ],
+        "packetIdentity": {
+          "bytes": 65453,
+          "sha256": "ff49e6176d6c18b24f85ba42b00530abff91a46dcb5cd0cadeb7de45b07b7b7e",
+          "gitBlob": "2f400ac951074e351f72c7521bcaea87698cec8d"
+        },
+        "sourcePins": {
+          "M3PrecomputePayloadParserContractTest": {
+            "bytes": 16671,
+            "sha256": "0490409694fdd570bd5943ad7330e0ab96b9213a88acc12220df80c00a1aa84f",
+            "gitBlob": "41e27cdb9b3b2c7a82daf73f0c81daf8ecb7bd3c"
+          },
+          "M3PrecomputePayloadTest": {
+            "bytes": 2995,
+            "sha256": "a7df0f11854ada05a03ab3e1129d0caf8b34b4cc2d94f49c23b9d7396fd0cb01",
+            "gitBlob": "1416170dbe1be0f911be61a7bf897cead23a4bdd"
+          },
+          "M3PayloadRenderingTest": {
+            "bytes": 8902,
+            "sha256": "0c7ef99755862ecb5a004c0a9a244a12f1d95be16d1d0d361328b1ac45879e2d",
+            "gitBlob": "7b66909ae12fe5688ffc7ec1511dd07e68df7686"
+          },
+          "M3PayloadRenderingQualification": {
+            "bytes": 1237,
+            "sha256": "14b27f8f33cda12f1ad870f62f186b39a4f511cde142f9332b3777e721e1f817",
+            "gitBlob": "54edbeb87f4e2dc9db292db80f02a64962326662"
+          },
+          "jdk.m3.text.M3PrecomputePayload": {
+            "bytes": 18917,
+            "sha256": "c648107f6188ae13f3fa7281d3244dcee09d770aa2b6da455d7d12a90abee3c0",
+            "gitBlob": "53f0387e1574b186bbc346db53def263abb75f0f"
+          }
+        },
+        "log": "[INFO] Scanning for projects...\r\n[INFO] \r\n[INFO] ---< com.synexia.verification:m3-shared-array-binding-qualification >---\r\n[INFO] Building m3-shared-array-binding-qualification 1\r\n[INFO]   from pom.xml\r\n[INFO] --------------------------------[ pom ]---------------------------------\r\n[INFO] \r\n[INFO] --- exec:3.3.0:exec (default-cli) @ m3-shared-array-binding-qualification ---\r\nM3_PRECOMPUTE_PAYLOAD_PARSER_CONTRACT_PASS checks=102\r\nM3JDK_SYNXIA_PAYLOAD_PASS checks=16 fields=7\r\n\r\nTest run finished after 636 ms\r\n[         2 containers found      ]\r\n[         0 containers skipped    ]\r\n[         2 containers started    ]\r\n[         0 containers aborted    ]\r\n[         2 containers successful ]\r\n[         0 containers failed     ]\r\n[         8 tests found           ]\r\n[         0 tests skipped         ]\r\n[         8 tests started         ]\r\n[         0 tests aborted         ]\r\n[         8 tests successful      ]\r\n[         0 tests failed          ]\r\n\r\nM3_LANGDEX_BEHAVIOR_PASS checks=68383 digest=1a819a8b4ab48686ad6b90b365d2e56092425687697a88499d23013324dbaeba\r\nM3_LANGDEX_API [public boolean jdk.m3.text.M3PrecomputePayload.requireBoolean(java.lang.String), public double jdk.m3.text.M3PrecomputePayload.requireDouble(java.lang.String), public int jdk.m3.text.M3PrecomputePayload.requireInt(java.lang.String), public int[] jdk.m3.text.M3PrecomputePayload.requireIntArray(java.lang.String), public java.lang.String jdk.m3.text.M3PrecomputePayload.canonicalJson(), public java.lang.String jdk.m3.text.M3PrecomputePayload.requireString(java.lang.String), public java.util.Map<java.lang.String, jdk.m3.text.M3PrecomputePayload$Field> jdk.m3.text.M3PrecomputePayload.fields(), public java.util.Optional<jdk.m3.text.M3PrecomputePayload$Field> jdk.m3.text.M3PrecomputePayload.field(java.lang.String), public java.util.Set<java.lang.String> jdk.m3.text.M3PrecomputePayload.fieldNames(), public long jdk.m3.text.M3PrecomputePayload.requireLong(java.lang.String), public long[] jdk.m3.text.M3PrecomputePayload.requireLongArray(java.lang.String), public static jdk.m3.text.M3PrecomputePayload jdk.m3.text.M3PrecomputePayload.parse(java.lang.String)]\r\nM3_PAYLOAD_ADMISSION emptyAfterParse=true emptyAfterOne=true presentAfterTwo=true\r\nM3_PAYLOAD_MEASURE\tparse\t0\t10000\t19227700\t35840000\r\nM3_PAYLOAD_MEASURE\tparse\t1\t10000\t23484400\t35647520\r\nM3_PAYLOAD_MEASURE\tparse\t2\t10000\t17416700\t35600000\r\nM3_PAYLOAD_MEASURE\tparse\t3\t10000\t15194800\t35600000\r\nM3_PAYLOAD_MEASURE\tparse\t4\t10000\t17059600\t35600000\r\nM3_PAYLOAD_MEASURE\tfirstRender\t0\t10000\t19658100\t43920000\r\nM3_PAYLOAD_MEASURE\tfirstRender\t1\t10000\t18391100\t43920000\r\nM3_PAYLOAD_MEASURE\tfirstRender\t2\t10000\t19406900\t43920000\r\nM3_PAYLOAD_MEASURE\tfirstRender\t3\t10000\t18577800\t43920000\r\nM3_PAYLOAD_MEASURE\tfirstRender\t4\t10000\t17357500\t43920000\r\nM3_PAYLOAD_MEASURE\trenderWarm\t0\t50000\t949800\t1200000\r\nM3_PAYLOAD_MEASURE\trenderWarm\t1\t50000\t816200\t1200000\r\nM3_PAYLOAD_MEASURE\trenderWarm\t2\t50000\t899700\t1200000\r\nM3_PAYLOAD_MEASURE\trenderWarm\t3\t50000\t1532700\t1200000\r\nM3_PAYLOAD_MEASURE\trenderWarm\t4\t50000\t1431400\t1200000\r\nM3_PAYLOAD_MEASURE\tnumericWarm\t0\t50000\t3734800\t0\r\nM3_PAYLOAD_MEASURE\tnumericWarm\t1\t50000\t856900\t0\r\nM3_PAYLOAD_MEASURE\tnumericWarm\t2\t50000\t750500\t0\r\nM3_PAYLOAD_MEASURE\tnumericWarm\t3\t50000\t756000\t0\r\nM3_PAYLOAD_MEASURE\tnumericWarm\t4\t50000\t745300\t0\r\nM3_PAYLOAD_STORAGE wrappers=32 backings=1 chars=142\r\nM3_CPU_RAM_COMPILE_PASS sources=5 classes=10\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] BUILD SUCCESS\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] Total time:  2.948 s\r\n[INFO] Finished at: 2026-11-13T09:04:22+05:30\r\n[INFO] ------------------------------------------------------------------------\r\n",
+        "logIdentity": {
+          "bytes": 3741,
+          "sha256": "36bda99196184e2f7c971ba38264fd840eca8ad57a3ea53ad1222ab1e75b198e",
+          "gitBlob": "c8553eac725884bea6bf4ab8660394e9e9a28682"
+        },
+        "allocationAfter": 571469824,
+        "issues": []
+      },
+      {
+        "stage": "product-2-after",
+        "exit": 0,
+        "reaped": true,
+        "elapsedSeconds": 7.531,
+        "argv": [
+          "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin\\mvn.cmd",
+          "-o",
+          "-B",
+          "-ntp",
+          "-f",
+          "F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\project\\pom.xml",
+          "-Dmaven.repo.local=F:\\codex-work\\lexicon-migration-20261031\\range-current-qualification\\proof\\repo-head",
+          "-Dmaven.repo.local.tail=C:/Users/hsoliwal/.m2/repository",
+          "-Dmaven.repo.local.tail.ignoreAvailability=false",
+          "-Dexec.args=\"--add-opens=java.base/java.lang=ALL-UNNAMED\" \"-XX:-UsePerfData\" \"-Xmx512m\" \"-Djava.io.tmpdir=F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\temp\" \"-Duser.home=F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\home\" \"-Djunit.jupiter.execution.parallel.enabled=false\" \"-Dorg.xerial.snappy.lib.path=F:\\codex-work\\lexicon-migration-20261031\\code-text-oracle-recipe\\proof\\temp\" \"-Dorg.xerial.snappy.lib.name=snappy-1.1.10-6e0cfc58-474b-47d4-bdb8-4cb270ee6e0e-snappyjava.dll\" \"-cp\" \"C:\\Users\\hsoliwal\\.m2\\repository\\org\\yaml\\snakeyaml\\2.2\\snakeyaml-2.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java\\8.17.1\\rewrite-java-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-core\\8.17.1\\rewrite-core-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-databind\\2.16.1\\jackson-databind-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-core\\2.16.1\\jackson-core-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\dataformat\\jackson-dataformat-smile\\2.16.1\\jackson-dataformat-smile-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\module\\jackson-module-parameter-names\\2.16.1\\jackson-module-parameter-names-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\datatype\\jackson-datatype-jsr310\\2.16.1\\jackson-datatype-jsr310-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\tools\\java-object-diff\\1.0.1\\java-object-diff-1.0.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\quarkus\\gizmo\\gizmo\\1.0.11.Final\\gizmo-1.0.11.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jboss\\jandex\\2.4.2.Final\\jandex-2.4.2.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna-platform\\5.14.0\\jna-platform-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna\\5.14.0\\jna-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-compress\\1.26.0\\commons-compress-1.26.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-yaml\\8.17.1\\rewrite-yaml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-xml\\8.17.1\\rewrite-xml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\micrometer\\micrometer-core\\1.9.17\\micrometer-core-1.9.17.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\hdrhistogram\\HdrHistogram\\2.1.12\\HdrHistogram-2.1.12.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\latencyutils\\LatencyUtils\\2.0.3\\LatencyUtils-2.0.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jetbrains\\annotations\\24.1.0\\annotations-24.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-annotations\\2.16.1\\jackson-annotations-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\antlr\\antlr4-runtime\\4.11.1\\antlr4-runtime-4.11.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-text\\1.11.0\\commons-text-1.11.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\classgraph\\classgraph\\4.8.165\\classgraph-4.8.165.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\xerial\\snappy\\snappy-java\\1.1.10.5\\snappy-java-1.1.10.5.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\fastfilter\\fastfilter\\1.0.2\\fastfilter-1.0.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm\\9.6\\asm-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-util\\9.6\\asm-util-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-tree\\9.6\\asm-tree-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-analysis\\9.6\\asm-analysis-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java-21\\8.17.1\\rewrite-java-21-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0\\opentest4j-1.3.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2\\apiguardian-api-1.1.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-simple\\2.0.13\\slf4j-simple-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-api\\2.0.13\\slf4j-api-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\projectlombok\\lombok\\1.18.30\\lombok-1.18.30.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-lang3\\3.17.0\\commons-lang3-3.17.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-io\\commons-io\\2.17.0\\commons-io-2.17.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-codec\\commons-codec\\1.17.1\\commons-codec-1.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-csv\\1.12.0\\commons-csv-1.12.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\5.11.4\\junit-jupiter-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.11.4\\junit-jupiter-api-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\5.11.4\\junit-jupiter-params-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\5.11.4\\junit-jupiter-engine-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.11.4\\junit-platform-commons-1.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\1.11.4\\junit-platform-engine-1.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-launcher\\1.11.4\\junit-platform-launcher-1.11.4.jar\" \"--source\" \"21\" \"F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\project\\M3LexiconCpuProof.java\" \"http://127.0.0.1:62822/488461947f344273bc6c73bd79050bd1/product-2-after\" \"ff49e6176d6c18b24f85ba42b00530abff91a46dcb5cd0cadeb7de45b07b7b7e\" \"M3PayloadRenderingQualification\" \"after\"",
+          "org.codehaus.mojo:exec-maven-plugin:3.3.0:exec"
+        ],
+        "packetIdentity": {
+          "bytes": 65453,
+          "sha256": "ff49e6176d6c18b24f85ba42b00530abff91a46dcb5cd0cadeb7de45b07b7b7e",
+          "gitBlob": "2f400ac951074e351f72c7521bcaea87698cec8d"
+        },
+        "sourcePins": {
+          "M3PrecomputePayloadParserContractTest": {
+            "bytes": 16671,
+            "sha256": "0490409694fdd570bd5943ad7330e0ab96b9213a88acc12220df80c00a1aa84f",
+            "gitBlob": "41e27cdb9b3b2c7a82daf73f0c81daf8ecb7bd3c"
+          },
+          "M3PrecomputePayloadTest": {
+            "bytes": 2995,
+            "sha256": "a7df0f11854ada05a03ab3e1129d0caf8b34b4cc2d94f49c23b9d7396fd0cb01",
+            "gitBlob": "1416170dbe1be0f911be61a7bf897cead23a4bdd"
+          },
+          "M3PayloadRenderingTest": {
+            "bytes": 8902,
+            "sha256": "0c7ef99755862ecb5a004c0a9a244a12f1d95be16d1d0d361328b1ac45879e2d",
+            "gitBlob": "7b66909ae12fe5688ffc7ec1511dd07e68df7686"
+          },
+          "M3PayloadRenderingQualification": {
+            "bytes": 1237,
+            "sha256": "14b27f8f33cda12f1ad870f62f186b39a4f511cde142f9332b3777e721e1f817",
+            "gitBlob": "54edbeb87f4e2dc9db292db80f02a64962326662"
+          },
+          "jdk.m3.text.M3PrecomputePayload": {
+            "bytes": 18917,
+            "sha256": "c648107f6188ae13f3fa7281d3244dcee09d770aa2b6da455d7d12a90abee3c0",
+            "gitBlob": "53f0387e1574b186bbc346db53def263abb75f0f"
+          }
+        },
+        "log": "[INFO] Scanning for projects...\r\n[INFO] \r\n[INFO] ---< com.synexia.verification:m3-shared-array-binding-qualification >---\r\n[INFO] Building m3-shared-array-binding-qualification 1\r\n[INFO]   from pom.xml\r\n[INFO] --------------------------------[ pom ]---------------------------------\r\n[INFO] \r\n[INFO] --- exec:3.3.0:exec (default-cli) @ m3-shared-array-binding-qualification ---\r\nM3_PRECOMPUTE_PAYLOAD_PARSER_CONTRACT_PASS checks=102\r\nM3JDK_SYNXIA_PAYLOAD_PASS checks=16 fields=7\r\n\r\nTest run finished after 650 ms\r\n[         2 containers found      ]\r\n[         0 containers skipped    ]\r\n[         2 containers started    ]\r\n[         0 containers aborted    ]\r\n[         2 containers successful ]\r\n[         0 containers failed     ]\r\n[         8 tests found           ]\r\n[         0 tests skipped         ]\r\n[         8 tests started         ]\r\n[         0 tests aborted         ]\r\n[         8 tests successful      ]\r\n[         0 tests failed          ]\r\n\r\nM3_LANGDEX_BEHAVIOR_PASS checks=68383 digest=1a819a8b4ab48686ad6b90b365d2e56092425687697a88499d23013324dbaeba\r\nM3_LANGDEX_API [public boolean jdk.m3.text.M3PrecomputePayload.requireBoolean(java.lang.String), public double jdk.m3.text.M3PrecomputePayload.requireDouble(java.lang.String), public int jdk.m3.text.M3PrecomputePayload.requireInt(java.lang.String), public int[] jdk.m3.text.M3PrecomputePayload.requireIntArray(java.lang.String), public java.lang.String jdk.m3.text.M3PrecomputePayload.canonicalJson(), public java.lang.String jdk.m3.text.M3PrecomputePayload.requireString(java.lang.String), public java.util.Map<java.lang.String, jdk.m3.text.M3PrecomputePayload$Field> jdk.m3.text.M3PrecomputePayload.fields(), public java.util.Optional<jdk.m3.text.M3PrecomputePayload$Field> jdk.m3.text.M3PrecomputePayload.field(java.lang.String), public java.util.Set<java.lang.String> jdk.m3.text.M3PrecomputePayload.fieldNames(), public long jdk.m3.text.M3PrecomputePayload.requireLong(java.lang.String), public long[] jdk.m3.text.M3PrecomputePayload.requireLongArray(java.lang.String), public static jdk.m3.text.M3PrecomputePayload jdk.m3.text.M3PrecomputePayload.parse(java.lang.String)]\r\nM3_PAYLOAD_ADMISSION emptyAfterParse=true emptyAfterOne=true presentAfterTwo=true\r\nM3_PAYLOAD_MEASURE\tparse\t0\t10000\t26924900\t35600000\r\nM3_PAYLOAD_MEASURE\tparse\t1\t10000\t15872400\t35600000\r\nM3_PAYLOAD_MEASURE\tparse\t2\t10000\t15815800\t35600000\r\nM3_PAYLOAD_MEASURE\tparse\t3\t10000\t16891800\t35600000\r\nM3_PAYLOAD_MEASURE\tparse\t4\t10000\t18292500\t35600000\r\nM3_PAYLOAD_MEASURE\tfirstRender\t0\t10000\t18660600\t43920000\r\nM3_PAYLOAD_MEASURE\tfirstRender\t1\t10000\t19649800\t43920000\r\nM3_PAYLOAD_MEASURE\tfirstRender\t2\t10000\t18725400\t43920000\r\nM3_PAYLOAD_MEASURE\tfirstRender\t3\t10000\t19673100\t43920000\r\nM3_PAYLOAD_MEASURE\tfirstRender\t4\t10000\t18810700\t43920000\r\nM3_PAYLOAD_MEASURE\trenderWarm\t0\t50000\t1015200\t1200000\r\nM3_PAYLOAD_MEASURE\trenderWarm\t1\t50000\t912500\t1200000\r\nM3_PAYLOAD_MEASURE\trenderWarm\t2\t50000\t909500\t1200000\r\nM3_PAYLOAD_MEASURE\trenderWarm\t3\t50000\t881100\t1200000\r\nM3_PAYLOAD_MEASURE\trenderWarm\t4\t50000\t881300\t1200000\r\nM3_PAYLOAD_MEASURE\tnumericWarm\t0\t50000\t4373000\t0\r\nM3_PAYLOAD_MEASURE\tnumericWarm\t1\t50000\t752400\t0\r\nM3_PAYLOAD_MEASURE\tnumericWarm\t2\t50000\t738100\t0\r\nM3_PAYLOAD_MEASURE\tnumericWarm\t3\t50000\t718100\t0\r\nM3_PAYLOAD_MEASURE\tnumericWarm\t4\t50000\t741700\t0\r\nM3_PAYLOAD_STORAGE wrappers=32 backings=1 chars=142\r\nM3_CPU_RAM_COMPILE_PASS sources=5 classes=10\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] BUILD SUCCESS\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] Total time:  3.056 s\r\n[INFO] Finished at: 2026-11-13T09:04:37+05:30\r\n[INFO] ------------------------------------------------------------------------\r\n",
+        "logIdentity": {
+          "bytes": 3740,
+          "sha256": "096b397b6d3cb495568b5c2233a393b58a4e22e4cf362543c003589d39a2b309",
+          "gitBlob": "ade4b5b27b62981804c9a3da531448eaa9a45ce9"
+        },
+        "allocationAfter": 571469824,
+        "issues": []
+      },
+      {
+        "stage": "product-3-before",
+        "exit": 0,
+        "reaped": true,
+        "elapsedSeconds": 8.109,
+        "argv": [
+          "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin\\mvn.cmd",
+          "-o",
+          "-B",
+          "-ntp",
+          "-f",
+          "F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\project\\pom.xml",
+          "-Dmaven.repo.local=F:\\codex-work\\lexicon-migration-20261031\\range-current-qualification\\proof\\repo-head",
+          "-Dmaven.repo.local.tail=C:/Users/hsoliwal/.m2/repository",
+          "-Dmaven.repo.local.tail.ignoreAvailability=false",
+          "-Dexec.args=\"--add-opens=java.base/java.lang=ALL-UNNAMED\" \"-XX:-UsePerfData\" \"-Xmx512m\" \"-Djava.io.tmpdir=F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\temp\" \"-Duser.home=F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\home\" \"-Djunit.jupiter.execution.parallel.enabled=false\" \"-Dorg.xerial.snappy.lib.path=F:\\codex-work\\lexicon-migration-20261031\\code-text-oracle-recipe\\proof\\temp\" \"-Dorg.xerial.snappy.lib.name=snappy-1.1.10-6e0cfc58-474b-47d4-bdb8-4cb270ee6e0e-snappyjava.dll\" \"-cp\" \"C:\\Users\\hsoliwal\\.m2\\repository\\org\\yaml\\snakeyaml\\2.2\\snakeyaml-2.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java\\8.17.1\\rewrite-java-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-core\\8.17.1\\rewrite-core-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-databind\\2.16.1\\jackson-databind-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-core\\2.16.1\\jackson-core-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\dataformat\\jackson-dataformat-smile\\2.16.1\\jackson-dataformat-smile-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\module\\jackson-module-parameter-names\\2.16.1\\jackson-module-parameter-names-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\datatype\\jackson-datatype-jsr310\\2.16.1\\jackson-datatype-jsr310-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\tools\\java-object-diff\\1.0.1\\java-object-diff-1.0.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\quarkus\\gizmo\\gizmo\\1.0.11.Final\\gizmo-1.0.11.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jboss\\jandex\\2.4.2.Final\\jandex-2.4.2.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna-platform\\5.14.0\\jna-platform-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna\\5.14.0\\jna-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-compress\\1.26.0\\commons-compress-1.26.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-yaml\\8.17.1\\rewrite-yaml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-xml\\8.17.1\\rewrite-xml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\micrometer\\micrometer-core\\1.9.17\\micrometer-core-1.9.17.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\hdrhistogram\\HdrHistogram\\2.1.12\\HdrHistogram-2.1.12.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\latencyutils\\LatencyUtils\\2.0.3\\LatencyUtils-2.0.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jetbrains\\annotations\\24.1.0\\annotations-24.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-annotations\\2.16.1\\jackson-annotations-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\antlr\\antlr4-runtime\\4.11.1\\antlr4-runtime-4.11.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-text\\1.11.0\\commons-text-1.11.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\classgraph\\classgraph\\4.8.165\\classgraph-4.8.165.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\xerial\\snappy\\snappy-java\\1.1.10.5\\snappy-java-1.1.10.5.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\fastfilter\\fastfilter\\1.0.2\\fastfilter-1.0.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm\\9.6\\asm-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-util\\9.6\\asm-util-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-tree\\9.6\\asm-tree-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-analysis\\9.6\\asm-analysis-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java-21\\8.17.1\\rewrite-java-21-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0\\opentest4j-1.3.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2\\apiguardian-api-1.1.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-simple\\2.0.13\\slf4j-simple-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-api\\2.0.13\\slf4j-api-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\projectlombok\\lombok\\1.18.30\\lombok-1.18.30.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-lang3\\3.17.0\\commons-lang3-3.17.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-io\\commons-io\\2.17.0\\commons-io-2.17.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-codec\\commons-codec\\1.17.1\\commons-codec-1.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-csv\\1.12.0\\commons-csv-1.12.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\5.11.4\\junit-jupiter-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.11.4\\junit-jupiter-api-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\5.11.4\\junit-jupiter-params-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\5.11.4\\junit-jupiter-engine-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.11.4\\junit-platform-commons-1.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\1.11.4\\junit-platform-engine-1.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-launcher\\1.11.4\\junit-platform-launcher-1.11.4.jar\" \"--source\" \"21\" \"F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\project\\M3LexiconCpuProof.java\" \"http://127.0.0.1:62822/488461947f344273bc6c73bd79050bd1/product-3-before\" \"454fd420a9df6e195bb4aefe47c805395d6d88615830d481cea99e943edb7e73\" \"M3PayloadRenderingQualification\" \"before\"",
+          "org.codehaus.mojo:exec-maven-plugin:3.3.0:exec"
+        ],
+        "packetIdentity": {
+          "bytes": 64525,
+          "sha256": "454fd420a9df6e195bb4aefe47c805395d6d88615830d481cea99e943edb7e73",
+          "gitBlob": "39d0753cf14b45485d7039a4035e0d997e146555"
+        },
+        "sourcePins": {
+          "M3PrecomputePayloadParserContractTest": {
+            "bytes": 16671,
+            "sha256": "0490409694fdd570bd5943ad7330e0ab96b9213a88acc12220df80c00a1aa84f",
+            "gitBlob": "41e27cdb9b3b2c7a82daf73f0c81daf8ecb7bd3c"
+          },
+          "M3PrecomputePayloadTest": {
+            "bytes": 2995,
+            "sha256": "a7df0f11854ada05a03ab3e1129d0caf8b34b4cc2d94f49c23b9d7396fd0cb01",
+            "gitBlob": "1416170dbe1be0f911be61a7bf897cead23a4bdd"
+          },
+          "M3PayloadRenderingTest": {
+            "bytes": 8902,
+            "sha256": "0c7ef99755862ecb5a004c0a9a244a12f1d95be16d1d0d361328b1ac45879e2d",
+            "gitBlob": "7b66909ae12fe5688ffc7ec1511dd07e68df7686"
+          },
+          "M3PayloadRenderingQualification": {
+            "bytes": 1237,
+            "sha256": "14b27f8f33cda12f1ad870f62f186b39a4f511cde142f9332b3777e721e1f817",
+            "gitBlob": "54edbeb87f4e2dc9db292db80f02a64962326662"
+          },
+          "jdk.m3.text.M3PrecomputePayload": {
+            "bytes": 18221,
+            "sha256": "741dc7259cf79d6c305719fe0a18a8c084f3a8563e2af2b7c8d41a1ccb7cd08d",
+            "gitBlob": "189515e6218e09f640fc4f4d6bdb320884daea13"
+          }
+        },
+        "log": "[INFO] Scanning for projects...\r\n[INFO] \r\n[INFO] ---< com.synexia.verification:m3-shared-array-binding-qualification >---\r\n[INFO] Building m3-shared-array-binding-qualification 1\r\n[INFO]   from pom.xml\r\n[INFO] --------------------------------[ pom ]---------------------------------\r\n[INFO] \r\n[INFO] --- exec:3.3.0:exec (default-cli) @ m3-shared-array-binding-qualification ---\r\nM3_PRECOMPUTE_PAYLOAD_PARSER_CONTRACT_PASS checks=102\r\nM3JDK_SYNXIA_PAYLOAD_PASS checks=16 fields=7\r\n\r\nTest run finished after 689 ms\r\n[         2 containers found      ]\r\n[         0 containers skipped    ]\r\n[         2 containers started    ]\r\n[         0 containers aborted    ]\r\n[         2 containers successful ]\r\n[         0 containers failed     ]\r\n[         8 tests found           ]\r\n[         0 tests skipped         ]\r\n[         8 tests started         ]\r\n[         0 tests aborted         ]\r\n[         8 tests successful      ]\r\n[         0 tests failed          ]\r\n\r\nM3_LANGDEX_BEHAVIOR_PASS checks=68383 digest=1a819a8b4ab48686ad6b90b365d2e56092425687697a88499d23013324dbaeba\r\nM3_LANGDEX_API [public boolean jdk.m3.text.M3PrecomputePayload.requireBoolean(java.lang.String), public double jdk.m3.text.M3PrecomputePayload.requireDouble(java.lang.String), public int jdk.m3.text.M3PrecomputePayload.requireInt(java.lang.String), public int[] jdk.m3.text.M3PrecomputePayload.requireIntArray(java.lang.String), public java.lang.String jdk.m3.text.M3PrecomputePayload.canonicalJson(), public java.lang.String jdk.m3.text.M3PrecomputePayload.requireString(java.lang.String), public java.util.Map<java.lang.String, jdk.m3.text.M3PrecomputePayload$Field> jdk.m3.text.M3PrecomputePayload.fields(), public java.util.Optional<jdk.m3.text.M3PrecomputePayload$Field> jdk.m3.text.M3PrecomputePayload.field(java.lang.String), public java.util.Set<java.lang.String> jdk.m3.text.M3PrecomputePayload.fieldNames(), public long jdk.m3.text.M3PrecomputePayload.requireLong(java.lang.String), public long[] jdk.m3.text.M3PrecomputePayload.requireLongArray(java.lang.String), public static jdk.m3.text.M3PrecomputePayload jdk.m3.text.M3PrecomputePayload.parse(java.lang.String)]\r\nM3_PAYLOAD_MEASURE\tparse\t0\t10000\t24828500\t35520000\r\nM3_PAYLOAD_MEASURE\tparse\t1\t10000\t26875100\t35520000\r\nM3_PAYLOAD_MEASURE\tparse\t2\t10000\t16863300\t35520000\r\nM3_PAYLOAD_MEASURE\tparse\t3\t10000\t15321400\t35520000\r\nM3_PAYLOAD_MEASURE\tparse\t4\t10000\t14537200\t35520000\r\nM3_PAYLOAD_MEASURE\tfirstRender\t0\t10000\t18884000\t43840000\r\nM3_PAYLOAD_MEASURE\tfirstRender\t1\t10000\t18695300\t43840000\r\nM3_PAYLOAD_MEASURE\tfirstRender\t2\t10000\t18389300\t43840000\r\nM3_PAYLOAD_MEASURE\tfirstRender\t3\t10000\t18719100\t43840000\r\nM3_PAYLOAD_MEASURE\tfirstRender\t4\t10000\t17598300\t43840000\r\nM3_PAYLOAD_MEASURE\trenderWarm\t0\t50000\t28895300\t40000000\r\nM3_PAYLOAD_MEASURE\trenderWarm\t1\t50000\t28592600\t40000000\r\nM3_PAYLOAD_MEASURE\trenderWarm\t2\t50000\t27448500\t40000000\r\nM3_PAYLOAD_MEASURE\trenderWarm\t3\t50000\t25255000\t40000000\r\nM3_PAYLOAD_MEASURE\trenderWarm\t4\t50000\t27648500\t40000000\r\nM3_PAYLOAD_MEASURE\tnumericWarm\t0\t50000\t2080000\t3200000\r\nM3_PAYLOAD_MEASURE\tnumericWarm\t1\t50000\t2047000\t3200000\r\nM3_PAYLOAD_MEASURE\tnumericWarm\t2\t50000\t1915300\t2931056\r\nM3_PAYLOAD_MEASURE\tnumericWarm\t3\t50000\t1054500\t2000000\r\nM3_PAYLOAD_MEASURE\tnumericWarm\t4\t50000\t944400\t2000000\r\nM3_PAYLOAD_STORAGE wrappers=32 backings=32 chars=142\r\nM3_CPU_RAM_COMPILE_PASS sources=5 classes=10\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] BUILD SUCCESS\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] Total time:  3.219 s\r\n[INFO] Finished at: 2026-11-13T09:04:53+05:30\r\n[INFO] ------------------------------------------------------------------------\r\n",
+        "logIdentity": {
+          "bytes": 3705,
+          "sha256": "39d002452a15b408ce20cbbec36439dff48aabd595634f273f416d1232738813",
+          "gitBlob": "8477fdb1d93382d8de374b4791039d6ec15900ea"
+        },
+        "allocationAfter": 571469824,
+        "issues": []
+      }
+    ],
+    "workOrder": {
+      "schema": "M3_PAYLOAD_RENDER_PRECOMPUTE_WORK_ORDER_V3",
+      "receivingHead": "0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb",
+      "recipeHead": "049fba279e7f05f4c4fe1906c57cfa3af9cbb274",
+      "owner": "m3/core/src/jdk/m3/text/M3PrecomputePayload.java",
+      "beforeGitBlob": "189515e6218e09f640fc4f4d6bdb320884daea13",
+      "recipe": "payload-render-precompute",
+      "atoms": [
+        "unchanged deterministic formatter",
+        "successful first-use signal without retained rendered text",
+        "private complete-text promotion on a later successful render",
+        "fresh collectible public String wrappers",
+        "incumbent numeric missing/error branch"
+      ],
+      "patterns": [
+        "immutable-derived-value-cache-v1",
+        "fresh-wrapper-shared-immutable-text-v1",
+        "cold-error-message-v1",
+        "exact-java-snapshot-v1"
+      ],
+      "contract": [
+        "canonical characters/escaping/order and failure behavior unchanged",
+        "every returned String wrapper stays fresh",
+        "immutable fields and copied arrays; no whole-catalog/source cache",
+        "volatile publication only after successful complete render; cold duplicates acceptable",
+        "public/protected API unchanged; no new native/JNI dependency"
+      ],
+      "evidenceRequired": [
+        "actual OpenRewrite replay/fixed-point/refusals",
+        "unmodified existing parser/payload test mains in JUnit",
+        "UTF16/numeric/grammar corpus and exact before/after digest",
+        "concurrent cold/warm render + identity/array immutability",
+        "first-touch and warm allocation/time; fresh wrapper count and backing array identity on test JDK21",
+        "bounded lifecycle/retention checks, storage unchanged",
+        "caller String collectability while payload retained; payload collectability while returned String retained; exception class/message/top method-frame parity",
+        "zero cached rendered text after parse and after exactly one render; promotion only after successful repeat"
+      ],
+      "generationControl": "Bounded existing formatter/getter implementation maintenance; no new public interface/type or module. CPU proof fixtures/logs only; no new architecture or generated product source classes.",
+      "scope": "One existing production owner; exact recipe emits candidate. Canonical recipe PR plus M3 receiving PR; no full DB/JNI/cross-platform/OS-sharing claim.",
+      "generationCalls": 0,
+      "previousWorkOrderBlob": "210c4fcc870c2d42d70a9ab418f9ff65abc06da6",
+      "correction": "Warm-only first candidate passed behavior but retained a rendered text after an admission-only call. Use a per-owner volatile successful-use flag; first render returns its unretained incumbent String, second successful render promotes a private complete text with a fresh caller copy; warm calls return fresh wrappers. No global cache or new owner.",
+      "previousQualificationInput": "e96226e4c8fa8b5ae613f47bfa740d7cda6c001b",
+      "priorFailureReceipt": "f19c6c520be68218b307e2aa74fc3d42c633bc76",
+      "parserContextPolicy": "No extra parser contexts: payload is self-contained with JDK imports/nested types. Original default-package contract mains remain separate compiled/executed product co-inputs; their intentionally unregistered parser-context paths are not admitted or bypassed.",
+      "previousQualificationProof": "cb5e6b4cabed34e8e7b4cb69ca8e976b25ddb21a"
+    },
+    "behavior": [
+      {
+        "stage": "product-0-before",
+        "checks": 68383,
+        "digest": "1a819a8b4ab48686ad6b90b365d2e56092425687697a88499d23013324dbaeba"
+      },
+      {
+        "stage": "product-1-after",
+        "checks": 68383,
+        "digest": "1a819a8b4ab48686ad6b90b365d2e56092425687697a88499d23013324dbaeba"
+      },
+      {
+        "stage": "product-2-after",
+        "checks": 68383,
+        "digest": "1a819a8b4ab48686ad6b90b365d2e56092425687697a88499d23013324dbaeba"
+      },
+      {
+        "stage": "product-3-before",
+        "checks": 68383,
+        "digest": "1a819a8b4ab48686ad6b90b365d2e56092425687697a88499d23013324dbaeba"
+      }
+    ],
+    "api": "[public boolean jdk.m3.text.M3PrecomputePayload.requireBoolean(java.lang.String), public double jdk.m3.text.M3PrecomputePayload.requireDouble(java.lang.String), public int jdk.m3.text.M3PrecomputePayload.requireInt(java.lang.String), public int[] jdk.m3.text.M3PrecomputePayload.requireIntArray(java.lang.String), public java.lang.String jdk.m3.text.M3PrecomputePayload.canonicalJson(), public java.lang.String jdk.m3.text.M3PrecomputePayload.requireString(java.lang.String), public java.util.Map<java.lang.String, jdk.m3.text.M3PrecomputePayload$Field> jdk.m3.text.M3PrecomputePayload.fields(), public java.util.Optional<jdk.m3.text.M3PrecomputePayload$Field> jdk.m3.text.M3PrecomputePayload.field(java.lang.String), public java.util.Set<java.lang.String> jdk.m3.text.M3PrecomputePayload.fieldNames(), public long jdk.m3.text.M3PrecomputePayload.requireLong(java.lang.String), public long[] jdk.m3.text.M3PrecomputePayload.requireLongArray(java.lang.String), public static jdk.m3.text.M3PrecomputePayload jdk.m3.text.M3PrecomputePayload.parse(java.lang.String)]\r",
+    "measurements": [
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "operation": "parse",
+        "sample": 0,
+        "iterations": 10000,
+        "nanos": 18465100,
+        "allocatedBytes": 35520000
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "operation": "parse",
+        "sample": 1,
+        "iterations": 10000,
+        "nanos": 16947400,
+        "allocatedBytes": 35520000
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "operation": "parse",
+        "sample": 2,
+        "iterations": 10000,
+        "nanos": 14511700,
+        "allocatedBytes": 35520000
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "operation": "parse",
+        "sample": 3,
+        "iterations": 10000,
+        "nanos": 13967200,
+        "allocatedBytes": 35520000
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "operation": "parse",
+        "sample": 4,
+        "iterations": 10000,
+        "nanos": 14419800,
+        "allocatedBytes": 35520000
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "operation": "firstRender",
+        "sample": 0,
+        "iterations": 10000,
+        "nanos": 19839000,
+        "allocatedBytes": 43840000
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "operation": "firstRender",
+        "sample": 1,
+        "iterations": 10000,
+        "nanos": 19090500,
+        "allocatedBytes": 43840000
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "operation": "firstRender",
+        "sample": 2,
+        "iterations": 10000,
+        "nanos": 18143100,
+        "allocatedBytes": 43840000
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "operation": "firstRender",
+        "sample": 3,
+        "iterations": 10000,
+        "nanos": 19356200,
+        "allocatedBytes": 43840000
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "operation": "firstRender",
+        "sample": 4,
+        "iterations": 10000,
+        "nanos": 17826600,
+        "allocatedBytes": 43840000
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "operation": "renderWarm",
+        "sample": 0,
+        "iterations": 50000,
+        "nanos": 32982800,
+        "allocatedBytes": 40000000
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "operation": "renderWarm",
+        "sample": 1,
+        "iterations": 50000,
+        "nanos": 153850100,
+        "allocatedBytes": 40000000
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "operation": "renderWarm",
+        "sample": 2,
+        "iterations": 50000,
+        "nanos": 150872000,
+        "allocatedBytes": 40000000
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "operation": "renderWarm",
+        "sample": 3,
+        "iterations": 50000,
+        "nanos": 155988500,
+        "allocatedBytes": 40000000
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "operation": "renderWarm",
+        "sample": 4,
+        "iterations": 50000,
+        "nanos": 155008800,
+        "allocatedBytes": 40000000
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "operation": "numericWarm",
+        "sample": 0,
+        "iterations": 50000,
+        "nanos": 14438900,
+        "allocatedBytes": 3200000
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "operation": "numericWarm",
+        "sample": 1,
+        "iterations": 50000,
+        "nanos": 13994200,
+        "allocatedBytes": 3179648
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "operation": "numericWarm",
+        "sample": 2,
+        "iterations": 50000,
+        "nanos": 7708100,
+        "allocatedBytes": 2000000
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "operation": "numericWarm",
+        "sample": 3,
+        "iterations": 50000,
+        "nanos": 7303300,
+        "allocatedBytes": 2000000
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "operation": "numericWarm",
+        "sample": 4,
+        "iterations": 50000,
+        "nanos": 7922800,
+        "allocatedBytes": 2000000
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "operation": "parse",
+        "sample": 0,
+        "iterations": 10000,
+        "nanos": 19227700,
+        "allocatedBytes": 35840000
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "operation": "parse",
+        "sample": 1,
+        "iterations": 10000,
+        "nanos": 23484400,
+        "allocatedBytes": 35647520
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "operation": "parse",
+        "sample": 2,
+        "iterations": 10000,
+        "nanos": 17416700,
+        "allocatedBytes": 35600000
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "operation": "parse",
+        "sample": 3,
+        "iterations": 10000,
+        "nanos": 15194800,
+        "allocatedBytes": 35600000
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "operation": "parse",
+        "sample": 4,
+        "iterations": 10000,
+        "nanos": 17059600,
+        "allocatedBytes": 35600000
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "operation": "firstRender",
+        "sample": 0,
+        "iterations": 10000,
+        "nanos": 19658100,
+        "allocatedBytes": 43920000
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "operation": "firstRender",
+        "sample": 1,
+        "iterations": 10000,
+        "nanos": 18391100,
+        "allocatedBytes": 43920000
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "operation": "firstRender",
+        "sample": 2,
+        "iterations": 10000,
+        "nanos": 19406900,
+        "allocatedBytes": 43920000
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "operation": "firstRender",
+        "sample": 3,
+        "iterations": 10000,
+        "nanos": 18577800,
+        "allocatedBytes": 43920000
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "operation": "firstRender",
+        "sample": 4,
+        "iterations": 10000,
+        "nanos": 17357500,
+        "allocatedBytes": 43920000
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "operation": "renderWarm",
+        "sample": 0,
+        "iterations": 50000,
+        "nanos": 949800,
+        "allocatedBytes": 1200000
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "operation": "renderWarm",
+        "sample": 1,
+        "iterations": 50000,
+        "nanos": 816200,
+        "allocatedBytes": 1200000
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "operation": "renderWarm",
+        "sample": 2,
+        "iterations": 50000,
+        "nanos": 899700,
+        "allocatedBytes": 1200000
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "operation": "renderWarm",
+        "sample": 3,
+        "iterations": 50000,
+        "nanos": 1532700,
+        "allocatedBytes": 1200000
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "operation": "renderWarm",
+        "sample": 4,
+        "iterations": 50000,
+        "nanos": 1431400,
+        "allocatedBytes": 1200000
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "operation": "numericWarm",
+        "sample": 0,
+        "iterations": 50000,
+        "nanos": 3734800,
+        "allocatedBytes": 0
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "operation": "numericWarm",
+        "sample": 1,
+        "iterations": 50000,
+        "nanos": 856900,
+        "allocatedBytes": 0
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "operation": "numericWarm",
+        "sample": 2,
+        "iterations": 50000,
+        "nanos": 750500,
+        "allocatedBytes": 0
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "operation": "numericWarm",
+        "sample": 3,
+        "iterations": 50000,
+        "nanos": 756000,
+        "allocatedBytes": 0
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "operation": "numericWarm",
+        "sample": 4,
+        "iterations": 50000,
+        "nanos": 745300,
+        "allocatedBytes": 0
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "operation": "parse",
+        "sample": 0,
+        "iterations": 10000,
+        "nanos": 26924900,
+        "allocatedBytes": 35600000
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "operation": "parse",
+        "sample": 1,
+        "iterations": 10000,
+        "nanos": 15872400,
+        "allocatedBytes": 35600000
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "operation": "parse",
+        "sample": 2,
+        "iterations": 10000,
+        "nanos": 15815800,
+        "allocatedBytes": 35600000
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "operation": "parse",
+        "sample": 3,
+        "iterations": 10000,
+        "nanos": 16891800,
+        "allocatedBytes": 35600000
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "operation": "parse",
+        "sample": 4,
+        "iterations": 10000,
+        "nanos": 18292500,
+        "allocatedBytes": 35600000
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "operation": "firstRender",
+        "sample": 0,
+        "iterations": 10000,
+        "nanos": 18660600,
+        "allocatedBytes": 43920000
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "operation": "firstRender",
+        "sample": 1,
+        "iterations": 10000,
+        "nanos": 19649800,
+        "allocatedBytes": 43920000
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "operation": "firstRender",
+        "sample": 2,
+        "iterations": 10000,
+        "nanos": 18725400,
+        "allocatedBytes": 43920000
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "operation": "firstRender",
+        "sample": 3,
+        "iterations": 10000,
+        "nanos": 19673100,
+        "allocatedBytes": 43920000
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "operation": "firstRender",
+        "sample": 4,
+        "iterations": 10000,
+        "nanos": 18810700,
+        "allocatedBytes": 43920000
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "operation": "renderWarm",
+        "sample": 0,
+        "iterations": 50000,
+        "nanos": 1015200,
+        "allocatedBytes": 1200000
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "operation": "renderWarm",
+        "sample": 1,
+        "iterations": 50000,
+        "nanos": 912500,
+        "allocatedBytes": 1200000
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "operation": "renderWarm",
+        "sample": 2,
+        "iterations": 50000,
+        "nanos": 909500,
+        "allocatedBytes": 1200000
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "operation": "renderWarm",
+        "sample": 3,
+        "iterations": 50000,
+        "nanos": 881100,
+        "allocatedBytes": 1200000
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "operation": "renderWarm",
+        "sample": 4,
+        "iterations": 50000,
+        "nanos": 881300,
+        "allocatedBytes": 1200000
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "operation": "numericWarm",
+        "sample": 0,
+        "iterations": 50000,
+        "nanos": 4373000,
+        "allocatedBytes": 0
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "operation": "numericWarm",
+        "sample": 1,
+        "iterations": 50000,
+        "nanos": 752400,
+        "allocatedBytes": 0
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "operation": "numericWarm",
+        "sample": 2,
+        "iterations": 50000,
+        "nanos": 738100,
+        "allocatedBytes": 0
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "operation": "numericWarm",
+        "sample": 3,
+        "iterations": 50000,
+        "nanos": 718100,
+        "allocatedBytes": 0
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "operation": "numericWarm",
+        "sample": 4,
+        "iterations": 50000,
+        "nanos": 741700,
+        "allocatedBytes": 0
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "operation": "parse",
+        "sample": 0,
+        "iterations": 10000,
+        "nanos": 24828500,
+        "allocatedBytes": 35520000
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "operation": "parse",
+        "sample": 1,
+        "iterations": 10000,
+        "nanos": 26875100,
+        "allocatedBytes": 35520000
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "operation": "parse",
+        "sample": 2,
+        "iterations": 10000,
+        "nanos": 16863300,
+        "allocatedBytes": 35520000
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "operation": "parse",
+        "sample": 3,
+        "iterations": 10000,
+        "nanos": 15321400,
+        "allocatedBytes": 35520000
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "operation": "parse",
+        "sample": 4,
+        "iterations": 10000,
+        "nanos": 14537200,
+        "allocatedBytes": 35520000
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "operation": "firstRender",
+        "sample": 0,
+        "iterations": 10000,
+        "nanos": 18884000,
+        "allocatedBytes": 43840000
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "operation": "firstRender",
+        "sample": 1,
+        "iterations": 10000,
+        "nanos": 18695300,
+        "allocatedBytes": 43840000
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "operation": "firstRender",
+        "sample": 2,
+        "iterations": 10000,
+        "nanos": 18389300,
+        "allocatedBytes": 43840000
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "operation": "firstRender",
+        "sample": 3,
+        "iterations": 10000,
+        "nanos": 18719100,
+        "allocatedBytes": 43840000
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "operation": "firstRender",
+        "sample": 4,
+        "iterations": 10000,
+        "nanos": 17598300,
+        "allocatedBytes": 43840000
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "operation": "renderWarm",
+        "sample": 0,
+        "iterations": 50000,
+        "nanos": 28895300,
+        "allocatedBytes": 40000000
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "operation": "renderWarm",
+        "sample": 1,
+        "iterations": 50000,
+        "nanos": 28592600,
+        "allocatedBytes": 40000000
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "operation": "renderWarm",
+        "sample": 2,
+        "iterations": 50000,
+        "nanos": 27448500,
+        "allocatedBytes": 40000000
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "operation": "renderWarm",
+        "sample": 3,
+        "iterations": 50000,
+        "nanos": 25255000,
+        "allocatedBytes": 40000000
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "operation": "renderWarm",
+        "sample": 4,
+        "iterations": 50000,
+        "nanos": 27648500,
+        "allocatedBytes": 40000000
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "operation": "numericWarm",
+        "sample": 0,
+        "iterations": 50000,
+        "nanos": 2080000,
+        "allocatedBytes": 3200000
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "operation": "numericWarm",
+        "sample": 1,
+        "iterations": 50000,
+        "nanos": 2047000,
+        "allocatedBytes": 3200000
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "operation": "numericWarm",
+        "sample": 2,
+        "iterations": 50000,
+        "nanos": 1915300,
+        "allocatedBytes": 2931056
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "operation": "numericWarm",
+        "sample": 3,
+        "iterations": 50000,
+        "nanos": 1054500,
+        "allocatedBytes": 2000000
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "operation": "numericWarm",
+        "sample": 4,
+        "iterations": 50000,
+        "nanos": 944400,
+        "allocatedBytes": 2000000
+      }
+    ],
+    "backingEvidence": [
+      {
+        "stage": "product-0-before",
+        "wrappers": 32,
+        "backings": 32,
+        "chars": 142
+      },
+      {
+        "stage": "product-1-after",
+        "wrappers": 32,
+        "backings": 1,
+        "chars": 142
+      },
+      {
+        "stage": "product-2-after",
+        "wrappers": 32,
+        "backings": 1,
+        "chars": 142
+      },
+      {
+        "stage": "product-3-before",
+        "wrappers": 32,
+        "backings": 32,
+        "chars": 142
+      }
+    ],
+    "scopePrerequisite": {
+      "input": "f7b10e97e2be9aabeee7c0cf9d8bb20949d52b2b",
+      "proof": "71f4708611e691de72d6149c83aa17ef3e81bedb",
+      "before": "d8d0d75cb42aa602c149e61026cd11b6fa702225",
+      "after": "db914de1b292ef737fe41f817a3f7a8522682112"
+    },
+    "sourceBefore": {
+      "bytes": 18221,
+      "sha256": "741dc7259cf79d6c305719fe0a18a8c084f3a8563e2af2b7c8d41a1ccb7cd08d",
+      "gitBlob": "189515e6218e09f640fc4f4d6bdb320884daea13"
+    },
+    "sourceAfter": {
+      "bytes": 18917,
+      "sha256": "c648107f6188ae13f3fa7281d3244dcee09d770aa2b6da455d7d12a90abee3c0",
+      "gitBlob": "53f0387e1574b186bbc346db53def263abb75f0f"
+    },
+    "recipeManifest": "# parse-context-sha256\t01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b\nm3/core/src/jdk/m3/text/M3PrecomputePayload.java\t741dc7259cf79d6c305719fe0a18a8c084f3a8563e2af2b7c8d41a1ccb7cd08d\tc648107f6188ae13f3fa7281d3244dcee09d770aa2b6da455d7d12a90abee3c0\t00-post.txt\n",
+    "allocationBefore": 571469824,
+    "allocationAfter": 571469824,
+    "capBytes": 571473920,
+    "freeBytes": 10843070464,
+    "httpErrors": [],
+    "generationCalls": 0,
+    "scope": "actual Maven/OpenRewrite2JUnit;8 product JUnit per fresh JVM including2 unmodified pure-memory mains; exact semantic and failure-top-frame/API digest across2before2after; four-operation cold/warm allocation/time and test-only String backing inspection; bounded explicit-GC lifetime observation on test JDK21; no full receiver/DB/JNI/cross-platform/startup heap proof"
+  },
+  "scopeRecipe": {
+    "schema": "M3_CORE_TEXT_SCOPE_QUALIFICATION_V1",
+    "status": "PASS",
+    "reports": [
+      {
+        "stage": "recipe",
+        "exit": 0,
+        "reaped": true,
+        "elapsedSeconds": 14.188,
+        "argv": [
+          "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin\\mvn.cmd",
+          "-o",
+          "-B",
+          "-ntp",
+          "-f",
+          "F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\project\\pom.xml",
+          "-Dmaven.repo.local=F:\\codex-work\\lexicon-migration-20261031\\range-current-qualification\\proof\\repo-head",
+          "-Dmaven.repo.local.tail=C:/Users/hsoliwal/.m2/repository",
+          "-Dmaven.repo.local.tail.ignoreAvailability=false",
+          "-Dexec.args=\"-XX:-UsePerfData\" \"-Xmx512m\" \"-Djava.io.tmpdir=F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\temp\" \"-Duser.home=F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\home\" \"-Djunit.jupiter.execution.parallel.enabled=false\" \"-Dorg.xerial.snappy.lib.path=F:\\codex-work\\lexicon-migration-20261031\\code-text-oracle-recipe\\proof\\temp\" \"-Dorg.xerial.snappy.lib.name=snappy-1.1.10-6e0cfc58-474b-47d4-bdb8-4cb270ee6e0e-snappyjava.dll\" \"-cp\" \"C:\\Users\\hsoliwal\\.m2\\repository\\org\\yaml\\snakeyaml\\2.2\\snakeyaml-2.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java\\8.17.1\\rewrite-java-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-core\\8.17.1\\rewrite-core-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-databind\\2.16.1\\jackson-databind-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-core\\2.16.1\\jackson-core-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\dataformat\\jackson-dataformat-smile\\2.16.1\\jackson-dataformat-smile-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\module\\jackson-module-parameter-names\\2.16.1\\jackson-module-parameter-names-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\datatype\\jackson-datatype-jsr310\\2.16.1\\jackson-datatype-jsr310-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\tools\\java-object-diff\\1.0.1\\java-object-diff-1.0.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\quarkus\\gizmo\\gizmo\\1.0.11.Final\\gizmo-1.0.11.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jboss\\jandex\\2.4.2.Final\\jandex-2.4.2.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna-platform\\5.14.0\\jna-platform-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna\\5.14.0\\jna-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-compress\\1.26.0\\commons-compress-1.26.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-yaml\\8.17.1\\rewrite-yaml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-xml\\8.17.1\\rewrite-xml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\micrometer\\micrometer-core\\1.9.17\\micrometer-core-1.9.17.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\hdrhistogram\\HdrHistogram\\2.1.12\\HdrHistogram-2.1.12.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\latencyutils\\LatencyUtils\\2.0.3\\LatencyUtils-2.0.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jetbrains\\annotations\\24.1.0\\annotations-24.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-annotations\\2.16.1\\jackson-annotations-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\antlr\\antlr4-runtime\\4.11.1\\antlr4-runtime-4.11.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-text\\1.11.0\\commons-text-1.11.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\classgraph\\classgraph\\4.8.165\\classgraph-4.8.165.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\xerial\\snappy\\snappy-java\\1.1.10.5\\snappy-java-1.1.10.5.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\fastfilter\\fastfilter\\1.0.2\\fastfilter-1.0.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm\\9.6\\asm-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-util\\9.6\\asm-util-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-tree\\9.6\\asm-tree-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-analysis\\9.6\\asm-analysis-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java-21\\8.17.1\\rewrite-java-21-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0\\opentest4j-1.3.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2\\apiguardian-api-1.1.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-simple\\2.0.13\\slf4j-simple-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-api\\2.0.13\\slf4j-api-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\projectlombok\\lombok\\1.18.30\\lombok-1.18.30.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-lang3\\3.17.0\\commons-lang3-3.17.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-io\\commons-io\\2.17.0\\commons-io-2.17.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-codec\\commons-codec\\1.17.1\\commons-codec-1.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-csv\\1.12.0\\commons-csv-1.12.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\5.11.4\\junit-jupiter-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.11.4\\junit-jupiter-api-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\5.11.4\\junit-jupiter-params-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\5.11.4\\junit-jupiter-engine-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.11.4\\junit-platform-commons-1.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\1.11.4\\junit-platform-engine-1.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-launcher\\1.11.4\\junit-platform-launcher-1.11.4.jar\" \"--source\" \"21\" \"F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\project\\M3LexiconCpuProof.java\" \"http://127.0.0.1:63513/b24185a7e80d48359d27a828040460b7/recipe\" \"09cb16aa7a27d5c229de0c0fece8ba38551316f1847bd5052b1703f35545cf9e\" \"com.synexia.rewrite.M3SnapshotCatalogueRecipeQualification\" \"http://127.0.0.1:63513/b24185a7e80d48359d27a828040460b7/recipe\"",
+          "org.codehaus.mojo:exec-maven-plugin:3.3.0:exec"
+        ],
+        "packetIdentity": {
+          "bytes": 193821,
+          "sha256": "09cb16aa7a27d5c229de0c0fece8ba38551316f1847bd5052b1703f35545cf9e",
+          "gitBlob": "e8cd7e88fd0ba877a6458b91a359e7c18d51e2bc"
+        },
+        "sourcePins": {
+          "com.synexia.rewrite.M3ResourceEnvelope": {
+            "bytes": 3849,
+            "sha256": "2f5f0a1dd1fabe07c97bf7acf4ead51e1853d302a2b21f6fe011d019cc496c57",
+            "gitBlob": "1b0b84ab1dd08aab4c8edb5835bd00615d0cf908"
+          },
+          "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe": {
+            "bytes": 47665,
+            "sha256": "254df9622aa099c93136e5615012b23adc5e93d93dca472b58332d5b094c2730",
+            "gitBlob": "3da0e5fc43b491e79ab71ee375146193d9628164"
+          },
+          "com.synexia.rewrite.M3SnapshotCatalogueRecipeTest": {
+            "bytes": 5703,
+            "sha256": "e628de184fca192424013bc1786d779b3b44a9a48c0c9b7ece1ecc0c4b87a3fd",
+            "gitBlob": "1498337ab8f0a4a2fa533bcfc06a01689a01c96d"
+          },
+          "com.synexia.rewrite.M3SnapshotCatalogueRecipeQualification": {
+            "bytes": 2026,
+            "sha256": "8d082908ad1d28944abfa8499bcd0c1a7fb0644a438ab95a30ded5c9360142dd",
+            "gitBlob": "376c9a438b04015202518e2562b60ab3a05acb90"
+          },
+          "com.synexia.rewrite.M3ScopeInference": {
+            "bytes": 27113,
+            "sha256": "09c53223424ca10acdb8cc6d7550a89cf40d6776afcab1195886ad0487f695a8",
+            "gitBlob": "d8d0d75cb42aa602c149e61026cd11b6fa702225"
+          },
+          "com.synexia.rewrite.M3EditScope": {
+            "bytes": 1139,
+            "sha256": "0dc762ef802b32ad0a40ff23e21cfbb67ad4bbd8a251b46b8a5954b647927824",
+            "gitBlob": "5e4cf8ea8df34090b5a17494ace72ab907161b9c"
+          }
+        },
+        "log": "[INFO] Scanning for projects...\r\n[INFO] \r\n[INFO] ---< com.synexia.verification:m3-shared-array-binding-qualification >---\r\n[INFO] Building m3-shared-array-binding-qualification 1\r\n[INFO]   from pom.xml\r\n[INFO] --------------------------------[ pom ]---------------------------------\r\n[INFO] \r\n[INFO] --- exec:3.3.0:exec (default-cli) @ m3-shared-array-binding-qualification ---\r\n\r\nTest run finished after 10804 ms\r\n[         2 containers found      ]\r\n[         0 containers skipped    ]\r\n[         2 containers started    ]\r\n[         0 containers aborted    ]\r\n[         2 containers successful ]\r\n[         0 containers failed     ]\r\n[         2 tests found           ]\r\n[         0 tests skipped         ]\r\n[         2 tests started         ]\r\n[         0 tests aborted         ]\r\n[         2 tests successful      ]\r\n[         0 tests failed          ]\r\n\r\nM3_SNAPSHOT_CATALOGUE_RECIPE_PASS tests=2 outputs=1\r\nM3_CPU_RAM_COMPILE_PASS sources=6 classes=14\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] BUILD SUCCESS\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] Total time:  13.092 s\r\n[INFO] Finished at: 2026-11-13T08:50:23+05:30\r\n[INFO] ------------------------------------------------------------------------\r\n",
+        "logIdentity": {
+          "bytes": 1302,
+          "sha256": "013e507480781b9fba55db432e3df6323b7a2321be572ed8d4ac8623be4aa329",
+          "gitBlob": "c2416642875581f2ba52d88e987a3670760a827a"
+        },
+        "allocationAfter": 571469824,
+        "issues": []
+      },
+      {
+        "stage": "product-0-before",
+        "exit": 0,
+        "reaped": true,
+        "elapsedSeconds": 3.562,
+        "argv": [
+          "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin\\mvn.cmd",
+          "-o",
+          "-B",
+          "-ntp",
+          "-f",
+          "F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\project\\pom.xml",
+          "-Dmaven.repo.local=F:\\codex-work\\lexicon-migration-20261031\\range-current-qualification\\proof\\repo-head",
+          "-Dmaven.repo.local.tail=C:/Users/hsoliwal/.m2/repository",
+          "-Dmaven.repo.local.tail.ignoreAvailability=false",
+          "-Dexec.args=\"-XX:-UsePerfData\" \"-Xmx512m\" \"-Djava.io.tmpdir=F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\temp\" \"-Duser.home=F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\home\" \"-Djunit.jupiter.execution.parallel.enabled=false\" \"-Dorg.xerial.snappy.lib.path=F:\\codex-work\\lexicon-migration-20261031\\code-text-oracle-recipe\\proof\\temp\" \"-Dorg.xerial.snappy.lib.name=snappy-1.1.10-6e0cfc58-474b-47d4-bdb8-4cb270ee6e0e-snappyjava.dll\" \"-cp\" \"C:\\Users\\hsoliwal\\.m2\\repository\\org\\yaml\\snakeyaml\\2.2\\snakeyaml-2.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java\\8.17.1\\rewrite-java-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-core\\8.17.1\\rewrite-core-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-databind\\2.16.1\\jackson-databind-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-core\\2.16.1\\jackson-core-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\dataformat\\jackson-dataformat-smile\\2.16.1\\jackson-dataformat-smile-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\module\\jackson-module-parameter-names\\2.16.1\\jackson-module-parameter-names-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\datatype\\jackson-datatype-jsr310\\2.16.1\\jackson-datatype-jsr310-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\tools\\java-object-diff\\1.0.1\\java-object-diff-1.0.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\quarkus\\gizmo\\gizmo\\1.0.11.Final\\gizmo-1.0.11.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jboss\\jandex\\2.4.2.Final\\jandex-2.4.2.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna-platform\\5.14.0\\jna-platform-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna\\5.14.0\\jna-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-compress\\1.26.0\\commons-compress-1.26.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-yaml\\8.17.1\\rewrite-yaml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-xml\\8.17.1\\rewrite-xml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\micrometer\\micrometer-core\\1.9.17\\micrometer-core-1.9.17.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\hdrhistogram\\HdrHistogram\\2.1.12\\HdrHistogram-2.1.12.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\latencyutils\\LatencyUtils\\2.0.3\\LatencyUtils-2.0.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jetbrains\\annotations\\24.1.0\\annotations-24.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-annotations\\2.16.1\\jackson-annotations-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\antlr\\antlr4-runtime\\4.11.1\\antlr4-runtime-4.11.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-text\\1.11.0\\commons-text-1.11.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\classgraph\\classgraph\\4.8.165\\classgraph-4.8.165.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\xerial\\snappy\\snappy-java\\1.1.10.5\\snappy-java-1.1.10.5.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\fastfilter\\fastfilter\\1.0.2\\fastfilter-1.0.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm\\9.6\\asm-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-util\\9.6\\asm-util-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-tree\\9.6\\asm-tree-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-analysis\\9.6\\asm-analysis-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java-21\\8.17.1\\rewrite-java-21-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0\\opentest4j-1.3.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2\\apiguardian-api-1.1.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-simple\\2.0.13\\slf4j-simple-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-api\\2.0.13\\slf4j-api-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\projectlombok\\lombok\\1.18.30\\lombok-1.18.30.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-lang3\\3.17.0\\commons-lang3-3.17.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-io\\commons-io\\2.17.0\\commons-io-2.17.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-codec\\commons-codec\\1.17.1\\commons-codec-1.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-csv\\1.12.0\\commons-csv-1.12.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\5.11.4\\junit-jupiter-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.11.4\\junit-jupiter-api-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\5.11.4\\junit-jupiter-params-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\5.11.4\\junit-jupiter-engine-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.11.4\\junit-platform-commons-1.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\1.11.4\\junit-platform-engine-1.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-launcher\\1.11.4\\junit-platform-launcher-1.11.4.jar\" \"--source\" \"21\" \"F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\project\\M3LexiconCpuProof.java\" \"http://127.0.0.1:63513/b24185a7e80d48359d27a828040460b7/product-0-before\" \"cbbf68394049f444be919db3fcac8a55681d053ac8837083aec0ba06929ab3f6\" \"com.synexia.rewrite.M3CoreScopeQualification\" \"before\"",
+          "org.codehaus.mojo:exec-maven-plugin:3.3.0:exec"
+        ],
+        "packetIdentity": {
+          "bytes": 46032,
+          "sha256": "cbbf68394049f444be919db3fcac8a55681d053ac8837083aec0ba06929ab3f6",
+          "gitBlob": "b2dc3b4d54102585e53f4eda64acc6e9dfb31e13"
+        },
+        "sourcePins": {
+          "com.synexia.rewrite.M3EditScope": {
+            "bytes": 1139,
+            "sha256": "0dc762ef802b32ad0a40ff23e21cfbb67ad4bbd8a251b46b8a5954b647927824",
+            "gitBlob": "5e4cf8ea8df34090b5a17494ace72ab907161b9c"
+          },
+          "com.synexia.rewrite.M3CoreScopeTest": {
+            "bytes": 4720,
+            "sha256": "65780de04e1f9ac9d0b1551dcffdedaf0a8b74b9e3ed950ef70576e5287e4a27",
+            "gitBlob": "86ca395421f0b3ba4ede6b67a3eea361566ce2e5"
+          },
+          "com.synexia.rewrite.M3CoreScopeQualification": {
+            "bytes": 1235,
+            "sha256": "567a77dbbbc03433ff64e35572bf553647709802a633c185b4c716cf76a40bcf",
+            "gitBlob": "c8c3b3abf0e07897135f711e0d9b957abc4820bc"
+          },
+          "com.synexia.rewrite.M3ScopeInference": {
+            "bytes": 27113,
+            "sha256": "09c53223424ca10acdb8cc6d7550a89cf40d6776afcab1195886ad0487f695a8",
+            "gitBlob": "d8d0d75cb42aa602c149e61026cd11b6fa702225"
+          }
+        },
+        "log": "[INFO] Scanning for projects...\r\n[INFO] \r\n[INFO] ---< com.synexia.verification:m3-shared-array-binding-qualification >---\r\n[INFO] Building m3-shared-array-binding-qualification 1\r\n[INFO]   from pom.xml\r\n[INFO] --------------------------------[ pom ]---------------------------------\r\n[INFO] \r\n[INFO] --- exec:3.3.0:exec (default-cli) @ m3-shared-array-binding-qualification ---\r\n\r\nTest run finished after 82 ms\r\n[         2 containers found      ]\r\n[         0 containers skipped    ]\r\n[         2 containers started    ]\r\n[         0 containers aborted    ]\r\n[         2 containers successful ]\r\n[         0 containers failed     ]\r\n[         4 tests found           ]\r\n[         0 tests skipped         ]\r\n[         4 tests started         ]\r\n[         0 tests aborted         ]\r\n[         4 tests successful      ]\r\n[         0 tests failed          ]\r\n\r\nM3_LANGDEX_BEHAVIOR_PASS checks=198 digest=cdd4e60533c7796be463fc9bcdad6afee9536199bd3574317f5ced21d6eb61ea\r\nM3_LANGDEX_API [public static boolean com.synexia.rewrite.M3ScopeInference.canonicalStandaloneGuard(java.lang.String), public static com.synexia.rewrite.M3EditScope com.synexia.rewrite.M3ScopeInference.inferJavaTargets(java.util.List<java.lang.String>), public static com.synexia.rewrite.M3EditScope com.synexia.rewrite.M3ScopeInference.requireExplicit(com.synexia.rewrite.M3EditScope,com.synexia.rewrite.M3EditScope), public static com.synexia.rewrite.M3ScopeInference$JavaLocation com.synexia.rewrite.M3ScopeInference.describeJavaTarget(java.lang.String)]\r\nM3_CPU_RAM_COMPILE_PASS sources=4 classes=5\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] BUILD SUCCESS\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] Total time:  2.133 s\r\n[INFO] Finished at: 2026-11-13T08:50:29+05:30\r\n[INFO] ------------------------------------------------------------------------\r\n",
+        "logIdentity": {
+          "bytes": 1912,
+          "sha256": "3f4ed463de4b6992dc0b8c8704c5ad0200177bf6795692d5c9230d1d84c4a30f",
+          "gitBlob": "26ebe8658c3d7690a0bb67d7b0d04f85e65061cb"
+        },
+        "allocationAfter": 571469824,
+        "issues": []
+      },
+      {
+        "stage": "product-1-after",
+        "exit": 0,
+        "reaped": true,
+        "elapsedSeconds": 3.141,
+        "argv": [
+          "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin\\mvn.cmd",
+          "-o",
+          "-B",
+          "-ntp",
+          "-f",
+          "F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\project\\pom.xml",
+          "-Dmaven.repo.local=F:\\codex-work\\lexicon-migration-20261031\\range-current-qualification\\proof\\repo-head",
+          "-Dmaven.repo.local.tail=C:/Users/hsoliwal/.m2/repository",
+          "-Dmaven.repo.local.tail.ignoreAvailability=false",
+          "-Dexec.args=\"-XX:-UsePerfData\" \"-Xmx512m\" \"-Djava.io.tmpdir=F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\temp\" \"-Duser.home=F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\home\" \"-Djunit.jupiter.execution.parallel.enabled=false\" \"-Dorg.xerial.snappy.lib.path=F:\\codex-work\\lexicon-migration-20261031\\code-text-oracle-recipe\\proof\\temp\" \"-Dorg.xerial.snappy.lib.name=snappy-1.1.10-6e0cfc58-474b-47d4-bdb8-4cb270ee6e0e-snappyjava.dll\" \"-cp\" \"C:\\Users\\hsoliwal\\.m2\\repository\\org\\yaml\\snakeyaml\\2.2\\snakeyaml-2.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java\\8.17.1\\rewrite-java-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-core\\8.17.1\\rewrite-core-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-databind\\2.16.1\\jackson-databind-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-core\\2.16.1\\jackson-core-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\dataformat\\jackson-dataformat-smile\\2.16.1\\jackson-dataformat-smile-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\module\\jackson-module-parameter-names\\2.16.1\\jackson-module-parameter-names-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\datatype\\jackson-datatype-jsr310\\2.16.1\\jackson-datatype-jsr310-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\tools\\java-object-diff\\1.0.1\\java-object-diff-1.0.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\quarkus\\gizmo\\gizmo\\1.0.11.Final\\gizmo-1.0.11.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jboss\\jandex\\2.4.2.Final\\jandex-2.4.2.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna-platform\\5.14.0\\jna-platform-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna\\5.14.0\\jna-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-compress\\1.26.0\\commons-compress-1.26.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-yaml\\8.17.1\\rewrite-yaml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-xml\\8.17.1\\rewrite-xml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\micrometer\\micrometer-core\\1.9.17\\micrometer-core-1.9.17.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\hdrhistogram\\HdrHistogram\\2.1.12\\HdrHistogram-2.1.12.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\latencyutils\\LatencyUtils\\2.0.3\\LatencyUtils-2.0.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jetbrains\\annotations\\24.1.0\\annotations-24.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-annotations\\2.16.1\\jackson-annotations-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\antlr\\antlr4-runtime\\4.11.1\\antlr4-runtime-4.11.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-text\\1.11.0\\commons-text-1.11.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\classgraph\\classgraph\\4.8.165\\classgraph-4.8.165.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\xerial\\snappy\\snappy-java\\1.1.10.5\\snappy-java-1.1.10.5.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\fastfilter\\fastfilter\\1.0.2\\fastfilter-1.0.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm\\9.6\\asm-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-util\\9.6\\asm-util-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-tree\\9.6\\asm-tree-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-analysis\\9.6\\asm-analysis-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java-21\\8.17.1\\rewrite-java-21-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0\\opentest4j-1.3.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2\\apiguardian-api-1.1.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-simple\\2.0.13\\slf4j-simple-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-api\\2.0.13\\slf4j-api-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\projectlombok\\lombok\\1.18.30\\lombok-1.18.30.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-lang3\\3.17.0\\commons-lang3-3.17.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-io\\commons-io\\2.17.0\\commons-io-2.17.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-codec\\commons-codec\\1.17.1\\commons-codec-1.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-csv\\1.12.0\\commons-csv-1.12.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\5.11.4\\junit-jupiter-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.11.4\\junit-jupiter-api-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\5.11.4\\junit-jupiter-params-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\5.11.4\\junit-jupiter-engine-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.11.4\\junit-platform-commons-1.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\1.11.4\\junit-platform-engine-1.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-launcher\\1.11.4\\junit-platform-launcher-1.11.4.jar\" \"--source\" \"21\" \"F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\project\\M3LexiconCpuProof.java\" \"http://127.0.0.1:63513/b24185a7e80d48359d27a828040460b7/product-1-after\" \"32d16214b049ffbeba788a6875233117e5404d7f103514e04a1c3906da453355\" \"com.synexia.rewrite.M3CoreScopeQualification\" \"after\"",
+          "org.codehaus.mojo:exec-maven-plugin:3.3.0:exec"
+        ],
+        "packetIdentity": {
+          "bytes": 47348,
+          "sha256": "32d16214b049ffbeba788a6875233117e5404d7f103514e04a1c3906da453355",
+          "gitBlob": "5f56a2c9af9453eefd62bb4e5f160f1cb7e37787"
+        },
+        "sourcePins": {
+          "com.synexia.rewrite.M3EditScope": {
+            "bytes": 1139,
+            "sha256": "0dc762ef802b32ad0a40ff23e21cfbb67ad4bbd8a251b46b8a5954b647927824",
+            "gitBlob": "5e4cf8ea8df34090b5a17494ace72ab907161b9c"
+          },
+          "com.synexia.rewrite.M3CoreScopeTest": {
+            "bytes": 4720,
+            "sha256": "65780de04e1f9ac9d0b1551dcffdedaf0a8b74b9e3ed950ef70576e5287e4a27",
+            "gitBlob": "86ca395421f0b3ba4ede6b67a3eea361566ce2e5"
+          },
+          "com.synexia.rewrite.M3CoreScopeQualification": {
+            "bytes": 1235,
+            "sha256": "567a77dbbbc03433ff64e35572bf553647709802a633c185b4c716cf76a40bcf",
+            "gitBlob": "c8c3b3abf0e07897135f711e0d9b957abc4820bc"
+          },
+          "com.synexia.rewrite.M3ScopeInference": {
+            "bytes": 28101,
+            "sha256": "6c3a5484d069a4d4d318bd4d84c3a9c253135c188b471cf9ca43578a96baf29b",
+            "gitBlob": "db914de1b292ef737fe41f817a3f7a8522682112"
+          }
+        },
+        "log": "[INFO] Scanning for projects...\r\n[INFO] \r\n[INFO] ---< com.synexia.verification:m3-shared-array-binding-qualification >---\r\n[INFO] Building m3-shared-array-binding-qualification 1\r\n[INFO]   from pom.xml\r\n[INFO] --------------------------------[ pom ]---------------------------------\r\n[INFO] \r\n[INFO] --- exec:3.3.0:exec (default-cli) @ m3-shared-array-binding-qualification ---\r\n\r\nTest run finished after 74 ms\r\n[         2 containers found      ]\r\n[         0 containers skipped    ]\r\n[         2 containers started    ]\r\n[         0 containers aborted    ]\r\n[         2 containers successful ]\r\n[         0 containers failed     ]\r\n[         4 tests found           ]\r\n[         0 tests skipped         ]\r\n[         4 tests started         ]\r\n[         0 tests aborted         ]\r\n[         4 tests successful      ]\r\n[         0 tests failed          ]\r\n\r\nM3_LANGDEX_BEHAVIOR_PASS checks=198 digest=f21c1a89b5cff6678905eb3741173b8ce6bb59bac3788674995f5a0ae796206e\r\nM3_LANGDEX_API [public static boolean com.synexia.rewrite.M3ScopeInference.canonicalStandaloneGuard(java.lang.String), public static com.synexia.rewrite.M3EditScope com.synexia.rewrite.M3ScopeInference.inferJavaTargets(java.util.List<java.lang.String>), public static com.synexia.rewrite.M3EditScope com.synexia.rewrite.M3ScopeInference.requireExplicit(com.synexia.rewrite.M3EditScope,com.synexia.rewrite.M3EditScope), public static com.synexia.rewrite.M3ScopeInference$JavaLocation com.synexia.rewrite.M3ScopeInference.describeJavaTarget(java.lang.String)]\r\nM3_CPU_RAM_COMPILE_PASS sources=4 classes=5\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] BUILD SUCCESS\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] Total time:  2.095 s\r\n[INFO] Finished at: 2026-11-13T08:50:33+05:30\r\n[INFO] ------------------------------------------------------------------------\r\n",
+        "logIdentity": {
+          "bytes": 1912,
+          "sha256": "7a8887b1397a5143987f552962b650b9b690f5f60b25d904d5d29054e6e02e06",
+          "gitBlob": "90befc68f59e45dfb77d406489920802c07f4046"
+        },
+        "allocationAfter": 571469824,
+        "issues": []
+      },
+      {
+        "stage": "product-2-after",
+        "exit": 0,
+        "reaped": true,
+        "elapsedSeconds": 3.063,
+        "argv": [
+          "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin\\mvn.cmd",
+          "-o",
+          "-B",
+          "-ntp",
+          "-f",
+          "F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\project\\pom.xml",
+          "-Dmaven.repo.local=F:\\codex-work\\lexicon-migration-20261031\\range-current-qualification\\proof\\repo-head",
+          "-Dmaven.repo.local.tail=C:/Users/hsoliwal/.m2/repository",
+          "-Dmaven.repo.local.tail.ignoreAvailability=false",
+          "-Dexec.args=\"-XX:-UsePerfData\" \"-Xmx512m\" \"-Djava.io.tmpdir=F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\temp\" \"-Duser.home=F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\home\" \"-Djunit.jupiter.execution.parallel.enabled=false\" \"-Dorg.xerial.snappy.lib.path=F:\\codex-work\\lexicon-migration-20261031\\code-text-oracle-recipe\\proof\\temp\" \"-Dorg.xerial.snappy.lib.name=snappy-1.1.10-6e0cfc58-474b-47d4-bdb8-4cb270ee6e0e-snappyjava.dll\" \"-cp\" \"C:\\Users\\hsoliwal\\.m2\\repository\\org\\yaml\\snakeyaml\\2.2\\snakeyaml-2.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java\\8.17.1\\rewrite-java-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-core\\8.17.1\\rewrite-core-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-databind\\2.16.1\\jackson-databind-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-core\\2.16.1\\jackson-core-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\dataformat\\jackson-dataformat-smile\\2.16.1\\jackson-dataformat-smile-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\module\\jackson-module-parameter-names\\2.16.1\\jackson-module-parameter-names-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\datatype\\jackson-datatype-jsr310\\2.16.1\\jackson-datatype-jsr310-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\tools\\java-object-diff\\1.0.1\\java-object-diff-1.0.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\quarkus\\gizmo\\gizmo\\1.0.11.Final\\gizmo-1.0.11.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jboss\\jandex\\2.4.2.Final\\jandex-2.4.2.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna-platform\\5.14.0\\jna-platform-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna\\5.14.0\\jna-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-compress\\1.26.0\\commons-compress-1.26.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-yaml\\8.17.1\\rewrite-yaml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-xml\\8.17.1\\rewrite-xml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\micrometer\\micrometer-core\\1.9.17\\micrometer-core-1.9.17.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\hdrhistogram\\HdrHistogram\\2.1.12\\HdrHistogram-2.1.12.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\latencyutils\\LatencyUtils\\2.0.3\\LatencyUtils-2.0.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jetbrains\\annotations\\24.1.0\\annotations-24.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-annotations\\2.16.1\\jackson-annotations-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\antlr\\antlr4-runtime\\4.11.1\\antlr4-runtime-4.11.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-text\\1.11.0\\commons-text-1.11.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\classgraph\\classgraph\\4.8.165\\classgraph-4.8.165.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\xerial\\snappy\\snappy-java\\1.1.10.5\\snappy-java-1.1.10.5.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\fastfilter\\fastfilter\\1.0.2\\fastfilter-1.0.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm\\9.6\\asm-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-util\\9.6\\asm-util-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-tree\\9.6\\asm-tree-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-analysis\\9.6\\asm-analysis-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java-21\\8.17.1\\rewrite-java-21-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0\\opentest4j-1.3.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2\\apiguardian-api-1.1.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-simple\\2.0.13\\slf4j-simple-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-api\\2.0.13\\slf4j-api-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\projectlombok\\lombok\\1.18.30\\lombok-1.18.30.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-lang3\\3.17.0\\commons-lang3-3.17.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-io\\commons-io\\2.17.0\\commons-io-2.17.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-codec\\commons-codec\\1.17.1\\commons-codec-1.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-csv\\1.12.0\\commons-csv-1.12.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\5.11.4\\junit-jupiter-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.11.4\\junit-jupiter-api-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\5.11.4\\junit-jupiter-params-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\5.11.4\\junit-jupiter-engine-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.11.4\\junit-platform-commons-1.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\1.11.4\\junit-platform-engine-1.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-launcher\\1.11.4\\junit-platform-launcher-1.11.4.jar\" \"--source\" \"21\" \"F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\project\\M3LexiconCpuProof.java\" \"http://127.0.0.1:63513/b24185a7e80d48359d27a828040460b7/product-2-after\" \"32d16214b049ffbeba788a6875233117e5404d7f103514e04a1c3906da453355\" \"com.synexia.rewrite.M3CoreScopeQualification\" \"after\"",
+          "org.codehaus.mojo:exec-maven-plugin:3.3.0:exec"
+        ],
+        "packetIdentity": {
+          "bytes": 47348,
+          "sha256": "32d16214b049ffbeba788a6875233117e5404d7f103514e04a1c3906da453355",
+          "gitBlob": "5f56a2c9af9453eefd62bb4e5f160f1cb7e37787"
+        },
+        "sourcePins": {
+          "com.synexia.rewrite.M3EditScope": {
+            "bytes": 1139,
+            "sha256": "0dc762ef802b32ad0a40ff23e21cfbb67ad4bbd8a251b46b8a5954b647927824",
+            "gitBlob": "5e4cf8ea8df34090b5a17494ace72ab907161b9c"
+          },
+          "com.synexia.rewrite.M3CoreScopeTest": {
+            "bytes": 4720,
+            "sha256": "65780de04e1f9ac9d0b1551dcffdedaf0a8b74b9e3ed950ef70576e5287e4a27",
+            "gitBlob": "86ca395421f0b3ba4ede6b67a3eea361566ce2e5"
+          },
+          "com.synexia.rewrite.M3CoreScopeQualification": {
+            "bytes": 1235,
+            "sha256": "567a77dbbbc03433ff64e35572bf553647709802a633c185b4c716cf76a40bcf",
+            "gitBlob": "c8c3b3abf0e07897135f711e0d9b957abc4820bc"
+          },
+          "com.synexia.rewrite.M3ScopeInference": {
+            "bytes": 28101,
+            "sha256": "6c3a5484d069a4d4d318bd4d84c3a9c253135c188b471cf9ca43578a96baf29b",
+            "gitBlob": "db914de1b292ef737fe41f817a3f7a8522682112"
+          }
+        },
+        "log": "[INFO] Scanning for projects...\r\n[INFO] \r\n[INFO] ---< com.synexia.verification:m3-shared-array-binding-qualification >---\r\n[INFO] Building m3-shared-array-binding-qualification 1\r\n[INFO]   from pom.xml\r\n[INFO] --------------------------------[ pom ]---------------------------------\r\n[INFO] \r\n[INFO] --- exec:3.3.0:exec (default-cli) @ m3-shared-array-binding-qualification ---\r\n\r\nTest run finished after 79 ms\r\n[         2 containers found      ]\r\n[         0 containers skipped    ]\r\n[         2 containers started    ]\r\n[         0 containers aborted    ]\r\n[         2 containers successful ]\r\n[         0 containers failed     ]\r\n[         4 tests found           ]\r\n[         0 tests skipped         ]\r\n[         4 tests started         ]\r\n[         0 tests aborted         ]\r\n[         4 tests successful      ]\r\n[         0 tests failed          ]\r\n\r\nM3_LANGDEX_BEHAVIOR_PASS checks=198 digest=f21c1a89b5cff6678905eb3741173b8ce6bb59bac3788674995f5a0ae796206e\r\nM3_LANGDEX_API [public static boolean com.synexia.rewrite.M3ScopeInference.canonicalStandaloneGuard(java.lang.String), public static com.synexia.rewrite.M3EditScope com.synexia.rewrite.M3ScopeInference.inferJavaTargets(java.util.List<java.lang.String>), public static com.synexia.rewrite.M3EditScope com.synexia.rewrite.M3ScopeInference.requireExplicit(com.synexia.rewrite.M3EditScope,com.synexia.rewrite.M3EditScope), public static com.synexia.rewrite.M3ScopeInference$JavaLocation com.synexia.rewrite.M3ScopeInference.describeJavaTarget(java.lang.String)]\r\nM3_CPU_RAM_COMPILE_PASS sources=4 classes=5\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] BUILD SUCCESS\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] Total time:  2.001 s\r\n[INFO] Finished at: 2026-11-13T08:50:37+05:30\r\n[INFO] ------------------------------------------------------------------------\r\n",
+        "logIdentity": {
+          "bytes": 1912,
+          "sha256": "4ccbbddf74bed12f8aa8b821cd2fe1a2c5a05e8db50d9312d4506f69a302e5a3",
+          "gitBlob": "5d123d764979f20950d1943b087a10588f24336c"
+        },
+        "allocationAfter": 571469824,
+        "issues": []
+      },
+      {
+        "stage": "product-3-before",
+        "exit": 0,
+        "reaped": true,
+        "elapsedSeconds": 3.547,
+        "argv": [
+          "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin\\mvn.cmd",
+          "-o",
+          "-B",
+          "-ntp",
+          "-f",
+          "F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\project\\pom.xml",
+          "-Dmaven.repo.local=F:\\codex-work\\lexicon-migration-20261031\\range-current-qualification\\proof\\repo-head",
+          "-Dmaven.repo.local.tail=C:/Users/hsoliwal/.m2/repository",
+          "-Dmaven.repo.local.tail.ignoreAvailability=false",
+          "-Dexec.args=\"-XX:-UsePerfData\" \"-Xmx512m\" \"-Djava.io.tmpdir=F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\temp\" \"-Duser.home=F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\home\" \"-Djunit.jupiter.execution.parallel.enabled=false\" \"-Dorg.xerial.snappy.lib.path=F:\\codex-work\\lexicon-migration-20261031\\code-text-oracle-recipe\\proof\\temp\" \"-Dorg.xerial.snappy.lib.name=snappy-1.1.10-6e0cfc58-474b-47d4-bdb8-4cb270ee6e0e-snappyjava.dll\" \"-cp\" \"C:\\Users\\hsoliwal\\.m2\\repository\\org\\yaml\\snakeyaml\\2.2\\snakeyaml-2.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java\\8.17.1\\rewrite-java-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-core\\8.17.1\\rewrite-core-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-databind\\2.16.1\\jackson-databind-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-core\\2.16.1\\jackson-core-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\dataformat\\jackson-dataformat-smile\\2.16.1\\jackson-dataformat-smile-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\module\\jackson-module-parameter-names\\2.16.1\\jackson-module-parameter-names-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\datatype\\jackson-datatype-jsr310\\2.16.1\\jackson-datatype-jsr310-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\tools\\java-object-diff\\1.0.1\\java-object-diff-1.0.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\quarkus\\gizmo\\gizmo\\1.0.11.Final\\gizmo-1.0.11.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jboss\\jandex\\2.4.2.Final\\jandex-2.4.2.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna-platform\\5.14.0\\jna-platform-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna\\5.14.0\\jna-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-compress\\1.26.0\\commons-compress-1.26.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-yaml\\8.17.1\\rewrite-yaml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-xml\\8.17.1\\rewrite-xml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\micrometer\\micrometer-core\\1.9.17\\micrometer-core-1.9.17.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\hdrhistogram\\HdrHistogram\\2.1.12\\HdrHistogram-2.1.12.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\latencyutils\\LatencyUtils\\2.0.3\\LatencyUtils-2.0.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jetbrains\\annotations\\24.1.0\\annotations-24.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-annotations\\2.16.1\\jackson-annotations-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\antlr\\antlr4-runtime\\4.11.1\\antlr4-runtime-4.11.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-text\\1.11.0\\commons-text-1.11.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\classgraph\\classgraph\\4.8.165\\classgraph-4.8.165.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\xerial\\snappy\\snappy-java\\1.1.10.5\\snappy-java-1.1.10.5.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\fastfilter\\fastfilter\\1.0.2\\fastfilter-1.0.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm\\9.6\\asm-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-util\\9.6\\asm-util-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-tree\\9.6\\asm-tree-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-analysis\\9.6\\asm-analysis-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java-21\\8.17.1\\rewrite-java-21-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0\\opentest4j-1.3.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2\\apiguardian-api-1.1.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-simple\\2.0.13\\slf4j-simple-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-api\\2.0.13\\slf4j-api-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\projectlombok\\lombok\\1.18.30\\lombok-1.18.30.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-lang3\\3.17.0\\commons-lang3-3.17.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-io\\commons-io\\2.17.0\\commons-io-2.17.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-codec\\commons-codec\\1.17.1\\commons-codec-1.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-csv\\1.12.0\\commons-csv-1.12.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\5.11.4\\junit-jupiter-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.11.4\\junit-jupiter-api-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\5.11.4\\junit-jupiter-params-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\5.11.4\\junit-jupiter-engine-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.11.4\\junit-platform-commons-1.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\1.11.4\\junit-platform-engine-1.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-launcher\\1.11.4\\junit-platform-launcher-1.11.4.jar\" \"--source\" \"21\" \"F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\project\\M3LexiconCpuProof.java\" \"http://127.0.0.1:63513/b24185a7e80d48359d27a828040460b7/product-3-before\" \"cbbf68394049f444be919db3fcac8a55681d053ac8837083aec0ba06929ab3f6\" \"com.synexia.rewrite.M3CoreScopeQualification\" \"before\"",
+          "org.codehaus.mojo:exec-maven-plugin:3.3.0:exec"
+        ],
+        "packetIdentity": {
+          "bytes": 46032,
+          "sha256": "cbbf68394049f444be919db3fcac8a55681d053ac8837083aec0ba06929ab3f6",
+          "gitBlob": "b2dc3b4d54102585e53f4eda64acc6e9dfb31e13"
+        },
+        "sourcePins": {
+          "com.synexia.rewrite.M3EditScope": {
+            "bytes": 1139,
+            "sha256": "0dc762ef802b32ad0a40ff23e21cfbb67ad4bbd8a251b46b8a5954b647927824",
+            "gitBlob": "5e4cf8ea8df34090b5a17494ace72ab907161b9c"
+          },
+          "com.synexia.rewrite.M3CoreScopeTest": {
+            "bytes": 4720,
+            "sha256": "65780de04e1f9ac9d0b1551dcffdedaf0a8b74b9e3ed950ef70576e5287e4a27",
+            "gitBlob": "86ca395421f0b3ba4ede6b67a3eea361566ce2e5"
+          },
+          "com.synexia.rewrite.M3CoreScopeQualification": {
+            "bytes": 1235,
+            "sha256": "567a77dbbbc03433ff64e35572bf553647709802a633c185b4c716cf76a40bcf",
+            "gitBlob": "c8c3b3abf0e07897135f711e0d9b957abc4820bc"
+          },
+          "com.synexia.rewrite.M3ScopeInference": {
+            "bytes": 27113,
+            "sha256": "09c53223424ca10acdb8cc6d7550a89cf40d6776afcab1195886ad0487f695a8",
+            "gitBlob": "d8d0d75cb42aa602c149e61026cd11b6fa702225"
+          }
+        },
+        "log": "[INFO] Scanning for projects...\r\n[INFO] \r\n[INFO] ---< com.synexia.verification:m3-shared-array-binding-qualification >---\r\n[INFO] Building m3-shared-array-binding-qualification 1\r\n[INFO]   from pom.xml\r\n[INFO] --------------------------------[ pom ]---------------------------------\r\n[INFO] \r\n[INFO] --- exec:3.3.0:exec (default-cli) @ m3-shared-array-binding-qualification ---\r\n\r\nTest run finished after 88 ms\r\n[         2 containers found      ]\r\n[         0 containers skipped    ]\r\n[         2 containers started    ]\r\n[         0 containers aborted    ]\r\n[         2 containers successful ]\r\n[         0 containers failed     ]\r\n[         4 tests found           ]\r\n[         0 tests skipped         ]\r\n[         4 tests started         ]\r\n[         0 tests aborted         ]\r\n[         4 tests successful      ]\r\n[         0 tests failed          ]\r\n\r\nM3_LANGDEX_BEHAVIOR_PASS checks=198 digest=cdd4e60533c7796be463fc9bcdad6afee9536199bd3574317f5ced21d6eb61ea\r\nM3_LANGDEX_API [public static boolean com.synexia.rewrite.M3ScopeInference.canonicalStandaloneGuard(java.lang.String), public static com.synexia.rewrite.M3EditScope com.synexia.rewrite.M3ScopeInference.inferJavaTargets(java.util.List<java.lang.String>), public static com.synexia.rewrite.M3EditScope com.synexia.rewrite.M3ScopeInference.requireExplicit(com.synexia.rewrite.M3EditScope,com.synexia.rewrite.M3EditScope), public static com.synexia.rewrite.M3ScopeInference$JavaLocation com.synexia.rewrite.M3ScopeInference.describeJavaTarget(java.lang.String)]\r\nM3_CPU_RAM_COMPILE_PASS sources=4 classes=5\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] BUILD SUCCESS\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] Total time:  2.196 s\r\n[INFO] Finished at: 2026-11-13T08:50:40+05:30\r\n[INFO] ------------------------------------------------------------------------\r\n",
+        "logIdentity": {
+          "bytes": 1912,
+          "sha256": "f1c16db633c102983a6461d270509cd296f0584135e67ed7b83cb217b9e06f88",
+          "gitBlob": "f4a5e3186f68373f2b24fc9bbd2addd2293ad951"
+        },
+        "allocationAfter": 571469824,
+        "issues": []
+      }
+    ],
+    "workOrder": {
+      "schema": "M3_EXACT_CORE_SCOPE_WORK_ORDER_V1",
+      "sourceHead": "049fba279e7f05f4c4fe1906c57cfa3af9cbb274",
+      "owner": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "beforeGitBlob": "d8d0d75cb42aa602c149e61026cd11b6fa702225",
+      "recipe": "core-text-owner-scope",
+      "generationCalls": 0,
+      "atoms": [
+        "exact renamed-owner classification",
+        "physical module/package scope inference",
+        "legacy and adjacent path refusal"
+      ],
+      "preserved": [
+        "all existing classifications and guards",
+        "no generic jdk/m3 path widening; only ten already snapshot-admitted source owners"
+      ],
+      "scope": "Prerequisite metadata alignment before one payload formatter owner. Existing public interfaces unchanged; exact known renamed paths now resolve to existing physical module/package.",
+      "generationControl": "Bounded existing scope classifier maintenance; no new product type/module"
+    },
+    "behavior": [
+      {
+        "stage": "product-0-before",
+        "checks": 198,
+        "digest": "cdd4e60533c7796be463fc9bcdad6afee9536199bd3574317f5ced21d6eb61ea"
+      },
+      {
+        "stage": "product-1-after",
+        "checks": 198,
+        "digest": "f21c1a89b5cff6678905eb3741173b8ce6bb59bac3788674995f5a0ae796206e"
+      },
+      {
+        "stage": "product-2-after",
+        "checks": 198,
+        "digest": "f21c1a89b5cff6678905eb3741173b8ce6bb59bac3788674995f5a0ae796206e"
+      },
+      {
+        "stage": "product-3-before",
+        "checks": 198,
+        "digest": "cdd4e60533c7796be463fc9bcdad6afee9536199bd3574317f5ced21d6eb61ea"
+      }
+    ],
+    "api": "[public static boolean com.synexia.rewrite.M3ScopeInference.canonicalStandaloneGuard(java.lang.String), public static com.synexia.rewrite.M3EditScope com.synexia.rewrite.M3ScopeInference.inferJavaTargets(java.util.List<java.lang.String>), public static com.synexia.rewrite.M3EditScope com.synexia.rewrite.M3ScopeInference.requireExplicit(com.synexia.rewrite.M3EditScope,com.synexia.rewrite.M3EditScope), public static com.synexia.rewrite.M3ScopeInference$JavaLocation com.synexia.rewrite.M3ScopeInference.describeJavaTarget(java.lang.String)]\r",
+    "measurements": [],
+    "sourceBefore": {
+      "bytes": 27113,
+      "sha256": "09c53223424ca10acdb8cc6d7550a89cf40d6776afcab1195886ad0487f695a8",
+      "gitBlob": "d8d0d75cb42aa602c149e61026cd11b6fa702225"
+    },
+    "sourceAfter": {
+      "bytes": 28101,
+      "sha256": "6c3a5484d069a4d4d318bd4d84c3a9c253135c188b471cf9ca43578a96baf29b",
+      "gitBlob": "db914de1b292ef737fe41f817a3f7a8522682112"
+    },
+    "recipeManifest": "# parse-context-sha256\t2e606640ebaded1733b54712dca76b46424ef547d0b850ea209fa1ef4c55e8c9\nsynexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java\t09c53223424ca10acdb8cc6d7550a89cf40d6776afcab1195886ad0487f695a8\t6c3a5484d069a4d4d318bd4d84c3a9c253135c188b471cf9ca43578a96baf29b\t00-post.txt\n",
+    "allocationBefore": 571469824,
+    "allocationAfter": 571469824,
+    "capBytes": 571473920,
+    "freeBytes": 10843725824,
+    "httpErrors": [],
+    "generationCalls": 0,
+    "scope": "actual offline Maven/OpenRewrite2 JUnit plus4 scope JUnit per fresh JVM; old exact renamed paths refuse, emitted helper resolves them; old/after pairs internally stable, neighboring refusals and public API retained; no payload runtime/JNI proof"
+  },
+  "performanceMedians": {
+    "product-0-before.parse": {
+      "ns": 1451.17,
+      "bytes": 3552
+    },
+    "product-0-before.firstRender": {
+      "ns": 1909.05,
+      "bytes": 4384
+    },
+    "product-0-before.renderWarm": {
+      "ns": 3077.002,
+      "bytes": 800
+    },
+    "product-0-before.numericWarm": {
+      "ns": 158.456,
+      "bytes": 40
+    },
+    "product-1-after.parse": {
+      "ns": 1741.67,
+      "bytes": 3560
+    },
+    "product-1-after.firstRender": {
+      "ns": 1857.78,
+      "bytes": 4392
+    },
+    "product-1-after.renderWarm": {
+      "ns": 18.996,
+      "bytes": 24
+    },
+    "product-1-after.numericWarm": {
+      "ns": 15.12,
+      "bytes": 0
+    },
+    "product-2-after.parse": {
+      "ns": 1689.18,
+      "bytes": 3560
+    },
+    "product-2-after.firstRender": {
+      "ns": 1881.07,
+      "bytes": 4392
+    },
+    "product-2-after.renderWarm": {
+      "ns": 18.19,
+      "bytes": 24
+    },
+    "product-2-after.numericWarm": {
+      "ns": 14.834,
+      "bytes": 0
+    },
+    "product-3-before.parse": {
+      "ns": 1686.33,
+      "bytes": 3552
+    },
+    "product-3-before.firstRender": {
+      "ns": 1869.53,
+      "bytes": 4384
+    },
+    "product-3-before.renderWarm": {
+      "ns": 552.97,
+      "bytes": 800
+    },
+    "product-3-before.numericWarm": {
+      "ns": 38.306,
+      "bytes": 58.62112
+    }
+  },
+  "scope": {
+    "tests": "52 final JUnit executions; two unmodified original mains inside product JUnit wrappers",
+    "coldRetention": "No rendered text after parse/one call; private text promoted only on later successful render",
+    "freshWrappers": "All public String results distinct and not retained by private cache",
+    "JVMBackingProbe": "32 fresh wrappers /32 before backings vs1 after on actual Java21",
+    "allocation": "Warm rendering800->24B/call; numeric warm0B after; cold stage medians+8B/call",
+    "lifetime": "Bounded explicit-GC observer passes; no global/cache map/native allocation added",
+    "moduleBuild": "NOT_RUN_PENDING_RECEIVING_CI",
+    "JNI": "UNCHANGED_NOT_REQUALIFIED",
+    "platforms": "NOT_ESTABLISHED",
+    "aggregateRetainedHeap": "NOT_ESTABLISHED",
+    "storage": "No local build/source/cache/native output;545MiB cap and8GiB reserve enforced"
+  },
+  "limits": [
+    "warm timing noisy; cold timing mixed; no universal speed multiplier",
+    "reused text has retained memory cost under payload lifetime",
+    "No complete receiver/DB/reactor/JDK, JNI parity, OS-sharing or cross-platform admission claim"
+  ]
+}
