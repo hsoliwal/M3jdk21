@@ -1,21 +1,93 @@
 {
-  "schema": "M3_LANGUAGE_DISCOVERY_STATE_RECEIVER_V1",
-  "canonicalRepository": "hsoliwal/com.synexia",
-  "canonicalCommit": "48491c79ff3352e40de5cf1830ed0a6e11967c2a",
-  "canonicalPr": 17367,
-  "receivingBase": "778cd3eac266974e7b5155e79838f74ee516b535",
-  "owner": "m3/lexicon/hf-intake/src/test/resources/jdk/m3/lexicon/hf/language-resource-discovery.tsv",
-  "before": "2b118e2dc69faa2b66aee3abc2c831c6771af2c1",
-  "after": "1e6e3226c40d6dafb7a0bed0fe44616a36a5190b",
-  "engine": "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe",
-  "engineBlob": "af3f00230db5aa16c44f642872b6f26193727757",
-  "crate": "language-discovery-state",
-  "canonicalResourcePrefix": "synexia-openrewrite-recipes/src/main/resources/",
-  "receivingResourcePrefix": "m3/qualification/language-discovery-state/recipe-resources/",
-  "inputPathMapping": "Replace canonicalResourcePrefix with receivingResourcePrefix to resolve packageContentRef; all referenced bytes are unchanged. Or read canonical immutable commit.",
-  "qualificationProof": "4ff76c06beef718955d587b0225225b7bcc238d6",
-  "engineRebindProof": "21ac92d3055455ecf032a8d6ec2c3d03b4c72f74",
-  "admittedPayloads": 0,
-  "newRuntimeApi": false,
-  "licenses": "Existing Apache-2.0 notices and source rights metadata retained"
+  "schema": "M3_TARGET_RECEIPT_REFERENCE_V1",
+  "copyright": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "license": "Apache-2.0",
+  "canonical": {
+    "repository": "hsoliwal/com.synexia",
+    "revision": "48491c79ff3352e40de5cf1830ed0a6e11967c2a",
+    "pr": 17367,
+    "recipeId": "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe",
+    "recipeBlob": "af3f00230db5aa16c44f642872b6f26193727757",
+    "crate": "language-discovery-state",
+    "fullReceiptReferences": [
+      {
+        "path": "synexia-openrewrite-recipes/recipe-crates/language-discovery-state/QUALIFICATION.zlib.json",
+        "git": "4ff76c06beef718955d587b0225225b7bcc238d6"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipe-crates/language-discovery-state/ENGINE_REBIND.zlib.json",
+        "git": "21ac92d3055455ecf032a8d6ec2c3d03b4c72f74"
+      }
+    ],
+    "donorAttribution": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/language-discovery-state/FOSS_REUSE_DECISION.tsv",
+      "git": "3a83db040c3c68d966a209f2b702338d673e6eac",
+      "license": "Apache-2.0"
+    }
+  },
+  "receiver": {
+    "repository": "hsoliwal/M3jdk21",
+    "originalHead": "061d0f327ef1168101293cc5c6e6416725ea4789",
+    "base": "778cd3eac266974e7b5155e79838f74ee516b535",
+    "owner": "m3/lexicon/hf-intake/src/test/resources/jdk/m3/lexicon/hf/language-resource-discovery.tsv",
+    "before": {
+      "git": "2b118e2dc69faa2b66aee3abc2c831c6771af2c1",
+      "sha256": "f9f86cbf61328240d403cc44f628717c38f3ce715288e7b21749680eb981ddaa",
+      "bytes": 252791,
+      "mode": "100644"
+    },
+    "after": {
+      "git": "1e6e3226c40d6dafb7a0bed0fe44616a36a5190b",
+      "sha256": "ed84d47e87622122c19069c5b8cfff0100e4b8b4e1e215ce033d1c5d987a40f1",
+      "bytes": 252890,
+      "mode": "100644"
+    }
+  },
+  "cleanupCustody": {
+    "repository": "hsoliwal/com.synexia",
+    "revision": "fa7d18a4e3a5bbbab367b4c6826d605b74e41ba8",
+    "path": "synexia-openrewrite-recipes/recipe-crates/public-fork-recipe-custody-20261017/recoveries/20261113-r225-r226-gpt6/CUSTODY_INPUTS.json",
+    "executionGate": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/public-fork-recipe-custody-20261017/recoveries/20261113-r225-r226-gpt6/WORKER_RESULT.json",
+      "git": "e8d815d27ff6ef458b148b6aa393ade704d7c2c4",
+      "sha256": "80379bec6d189f32c7f3c63c8d4022f363f0b1b49818332dae746cb6c70cea2d"
+    },
+    "originalVariants": [
+      {
+        "path": "synexia-openrewrite-recipes/recipe-crates/public-fork-recipe-custody-20261017/sources/M3jdk21-pr3002-20261113/m3/qualification/language-discovery-state/README.md",
+        "git": "4939866819f535a86adcf91d158e845430938406",
+        "sha256": "bc08c1cff157fcff04de18a0852910cababc27e325cfdb76bc841f681e02086e",
+        "bytes": 3463,
+        "mode": "100644"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipe-crates/public-fork-recipe-custody-20261017/sources/M3jdk21-pr3002-20261113/m3/qualification/language-discovery-state/RECIPE.json",
+        "git": "341b9c12f008bed1f48bae6855adfe683a0aed45",
+        "sha256": "132374290aefca355271aeba981c0b4aea8dd7990869345f27c9b4b23236802b",
+        "bytes": 1266,
+        "mode": "100644"
+      }
+    ],
+    "legalAdmission": "PENDING_FULL_CANONICAL_LOADER"
+  },
+  "recordedQualification": {
+    "platform": "Windows Java21 RAM/offline Maven bootstrap",
+    "catalogueRows": 284,
+    "baselineRuns": 2,
+    "baselinePerRun": {
+      "passed": 3,
+      "intentionalSchemaFailures": 1
+    },
+    "afterRuns": 2,
+    "afterPerRun": {
+      "passed": 4,
+      "failed": 0
+    },
+    "engineRebindRecipeTestsPassed": 2,
+    "proofScope": "Classpath catalogue/private existing verifier only",
+    "receivingQualificationClasses": "Outside Maven source roots; NOT_COMPILED_OR_RUN by receiving POM; launcher requires after argument",
+    "fullIntakeMainDatasetRightsJNIJDK": "NOT_EXECUTED_OR_ADMITTED"
+  },
+  "runtimeAPIsChanged": false,
+  "productPromotion": false
 }
