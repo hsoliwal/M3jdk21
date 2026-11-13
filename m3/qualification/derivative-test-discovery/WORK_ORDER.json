@@ -1,0 +1,23 @@
+{
+  "schema": "M3_DERIVATIVE_WORKFLOW_WORK_ORDER_V1",
+  "recipePrerequisites": {},
+  "owner": ".github/workflows/m3-derivative-regex-port.yml",
+  "recipe": "m3jdk21-derivative-test-discovery",
+  "sourceHead": "02e7b66f03805ac76b22717433fcf85b719810bd",
+  "beforeGitBlob": "1278e01a69b11b6bc78351efc01685426bbfe64a",
+  "expectedAfterGitBlob": "3b660b1f1ab5aff4ef6b70ecb434ac3d45b84b6c",
+  "atoms": [
+    "exact two test selector substitutions",
+    "preserve all other YAML and refusal semantics"
+  ],
+  "engine": "6bbf7714b1d16f19c005851bfe014e7d6e23ef4c",
+  "generationCalls": 0,
+  "fixtureCorrection": {
+    "failureReceipt": "36aec7884bc03cf1528cffca1488bcc0d0f31df0",
+    "reason": "Eight recipe tests passed; post-scan mutation was refused with correct IllegalStateException wrapped by RecipeRunException. Require exact root cause/message instead of unwrapped type; source engine and candidate unchanged."
+  },
+  "receivingMaster": "778cd3eac266974e7b5155e79838f74ee516b535",
+  "originalQualifiedInput": "2f7385109e4be5fc749f0f0e5b4dc2f195e73b81",
+  "qualificationProof": "f8d546b98f3c8e48fce28655236f7e6d84d09436",
+  "nativeProof": "NOT_EXECUTED_OPTIONAL_TEST_ABORTED"
+}

@@ -1,0 +1,26 @@
+{
+  "schema": "M3_DERIVATIVE_WORKFLOW_RECEIVING_RECIPE_V1",
+  "canonicalRepository": "hsoliwal/com.synexia",
+  "canonicalCommit": "c27dc5bf47cdc25471dde38008dbe6d77808ac51",
+  "canonicalPr": 17362,
+  "receiverRepository": "hsoliwal/M3jdk21",
+  "receiverBase": "778cd3eac266974e7b5155e79838f74ee516b535",
+  "owner": ".github/workflows/m3-derivative-regex-port.yml",
+  "engine": {
+    "class": "com.synexia.rewrite.M3HashPinnedYamlSnapshotRecipe",
+    "blob": "6bbf7714b1d16f19c005851bfe014e7d6e23ef4c",
+    "crate": "m3jdk21-derivative-test-discovery",
+    "runtimeDependency": false
+  },
+  "before": "1278e01a69b11b6bc78351efc01685426bbfe64a",
+  "after": "3b660b1f1ab5aff4ef6b70ecb434ac3d45b84b6c",
+  "canonicalMapping": "recipe-resources and qualification files retain exact canonical bytes; workflow is the observed recipe afterimage",
+  "qualification": {
+    "yamlProof": "f8d546b98f3c8e48fce28655236f7e6d84d09436",
+    "masterProof": "6d4bbfc70a4e8b2dc0b6c65b874a7f539d0214a6",
+    "native": "NOT_EXECUTED_OPTIONAL_TEST_ABORTED"
+  },
+  "license": "Apache-2.0; existing notices retained",
+  "publicApiChanged": false,
+  "javaNativeImplementationsChanged": false
+}

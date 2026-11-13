@@ -1,0 +1,3 @@
+capability	repository	revision	path	blob	license	classification	fit_and_limits
+workflow-yaml-replay	hsoliwal/com.synexia	b3e975ae0749db17aa700c6cf2ff90155cb0553b	synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedYamlSnapshotRecipe.java	6bbf7714b1d16f19c005851bfe014e7d6e23ef4c	Apache-2.0	REUSE_EXISTING	Typed YAML exact pre/post hash replay and refusals; nine executed JUnit checks; no new runtime owner
+receiving-regex-tests	hsoliwal/M3jdk21	778cd3eac266974e7b5155e79838f74ee516b535	m3/ports/precompute/src/test/java/jdk/m3/precompute/RegexDerivativeTest.java	6b14a36fd187422c22bb144a531345a6e5e77957	Apache-2.0	DIRECT_REUSE	Actual existing tests; optional JNI assumption remains explicit

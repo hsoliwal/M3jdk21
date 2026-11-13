@@ -1,0 +1,897 @@
+{
+  "schema": "M3_SEALED_INPUT_REFERENCE_TRANSPORT_V1",
+  "originalGitBlob": "d9c49d036acfd57a826b34ee22ce1c979a80ebfb",
+  "sourceRevision": "778cd3eac266974e7b5155e79838f74ee516b535",
+  "restoration": "Recursively replace sealedContentRef with the exact UTF-8 content from the listed Git blob; replace sealedQualificationRef with the parsed adjacent qualification envelope. Preserve object property order; serialize compact JSON followed by LF. Verify original Git blob SHA before execution.",
+  "template": {
+    "code": "# Copyright 2026 Hitesh Soliwal, Synexia. SPDX-License-Identifier: Apache-2.0\n# Existing Maven/OpenRewrite/RAM compiler composition; no new product runtime.\nimport os,sys,json,hashlib,base64,ctypes,shutil,subprocess,http.server,threading,uuid,re,time\nfrom pathlib import Path\nimport tempfile\ncfg=INPUT;assert cfg[\"runAuthorization\"][\"status\"]==\"AUTHORIZED\", \"qualification is held; no reserve exception granted\"\nT=Path(r\"F:\\codex-work\\lexicon-migration-20261031\");S=Path(r\"S:\\codex-work\\agent-temp\\lexicon-maven-r224\");cap=571473920;reserve=8589934592\nassert S.resolve().drive.upper()==\"S:\" and S.resolve().is_relative_to(Path(r\"S:\\codex-work\\agent-temp\").resolve())\nb=ctypes.create_unicode_buffer(32768);assert ctypes.windll.kernel32.GetTempPathW(len(b),b)\nassert b.value.rstrip(\"\\\\\").lower()==r\"F:\\codex-work\\agent-temp\".lower()\ndef allocation_at(path):\n total=0;pending=[path] if path.exists() else []\n while pending:\n  with os.scandir(pending.pop()) as it:\n   for e in it:\n    st=e.stat(follow_symlinks=False)\n    if getattr(st,\"st_file_attributes\",0)&0x400:\n     if path==T:continue\n     raise AssertionError(\"reparse output lane\")\n    if e.is_dir(follow_symlinks=False):pending.append(e.path)\n    else:total+=(st.st_size+4095)//4096*4096\n return total\nprint(\"M3_S_ROUTE_BASELINE_SCAN_STARTED\",flush=True)\nf_baseline=allocation_at(T)\ndef allocated():return f_baseline+allocation_at(S)\ndef raw(s):return s.encode(\"utf-8\")\ndef identity(data):return dict(bytes=len(data),sha256=hashlib.sha256(data).hexdigest(),gitBlob=hashlib.sha1(b\"blob \"+str(len(data)).encode()+b\"\\0\"+data).hexdigest())\nbefore=allocated();assert before+4096<=cap and shutil.disk_usage(S.parent).free-65536>=reserve\nfor part in [S,S/\"temp\",S/\"home\",S/\"home/.m2\",S/\"repo-head\"]:\n part.mkdir(parents=True,exist_ok=True)\nassert allocated()==before\nos.environ[\"TEMP\"]=str(S/\"temp\");os.environ[\"TMP\"]=str(S/\"temp\");tempfile.tempdir=str(S/\"temp\")\nb=ctypes.create_unicode_buffer(32768);assert ctypes.windll.kernel32.GetTempPathW(len(b),b)\nassert Path(b.value).resolve()==(S/\"temp\").resolve()\nprint(\"M3_S_ROUTE_BASELINE_PASS \"+json.dumps(dict(fBaseline=f_baseline,combined=before,sFree=shutil.disk_usage(S).free,temp=b.value)),flush=True)\nsourceRoot=T/\"shared-array-descriptors-20261112/jni-proof\";project=sourceRoot/\"project\";root=S\nassert project.is_dir() and (project/\"pom.xml\").read_bytes()==raw(cfg[\"pom\"])\ndriver=project/\"M3LexiconCpuProof.java\";data=raw(cfg[\"driver\"]);assert len(data)<=4096\nassert project.resolve().is_relative_to(T.resolve())\nif driver.exists():assert driver.read_bytes()==data,\"driver drift\"\nelse:raise AssertionError(\"existing RAM compiler bootstrap absent\")\nassert driver.read_bytes()==data and allocated()<=cap\nfor name,item in cfg[\"sources\"].items():assert identity(raw(item[\"content\"]))[\"gitBlob\"]==item[\"sha\"],name\nfor key in [\"engine\",\"envelope\"]:assert identity(raw(cfg[key]))[\"gitBlob\"]==cfg[\"pins\"][key]\nfor name,item in cfg[\"engineDeps\"].items():assert identity(raw(item[\"content\"]))[\"gitBlob\"]==item[\"sha\"],name\nfor path,sha in cfg[\"jars\"].items():assert hashlib.sha256(Path(path).read_bytes()).hexdigest()==sha\nfor kind,prereq in cfg[\"workOrder\"][\"recipePrerequisites\"].items():\n r=subprocess.run([\"gh\",\"api\",\"repos/hsoliwal/com.synexia/git/blobs/\"+prereq[\"proof\"]],env={**os.environ,\"GH_PROMPT_DISABLED\":\"1\",\"GH_CACHE_DIR\":str(T/\"hosted-v10-ci-20261104/gh-cache\")},capture_output=True,timeout=45);assert r.returncode==0\n d=base64.b64decode(\"\".join(json.loads(r.stdout)[\"content\"].split()),validate=True);assert identity(d)[\"gitBlob\"]==prereq[\"proof\"]\n p=json.loads(d);assert p[\"status\"]==\"PASS\" and p[\"sourceAfter\"][\"gitBlob\"]==prereq[\"after\"]\n assert prereq[\"after\"]==(cfg[\"pins\"][\"engine\"] if kind==\"javaPath\" else cfg[\"engineDeps\"][\"M3ScopeInference\"][\"sha\"])\ntarget=cfg[\"workOrder\"][\"owner\"];post=cfg[\"candidate\"];pre=cfg[\"preimage\"]\nresourceRoot=\"com/synexia/rewrite/hash-pinned-yaml/m3jdk21-derivative-test-discovery/\"\nresources={resourceRoot+n:raw(v) for n,v in cfg[\"resources\"].items()}\nassert identity(raw(pre))[\"gitBlob\"]==cfg[\"workOrder\"][\"beforeGitBlob\"] and identity(raw(post))[\"gitBlob\"]==cfg[\"workOrder\"][\"expectedAfterGitBlob\"]\nenv=os.environ.copy()\nfor key in [\"JAVA_TOOL_OPTIONS\",\"_JAVA_OPTIONS\",\"JDK_JAVA_OPTIONS\",\"MAVEN_ARGS\",\"CLASSPATH\",\"GH_DEBUG\"]:env.pop(key,None)\nP=T/\"recipe-engine-convergence-20261104/proof\"\nenv.update(TEMP=str(root/\"temp\"),TMP=str(root/\"temp\"),JAVA_HOME=r\"C:\\Program Files\\Java\\jdk-21\",MAVEN_USER_HOME=str(root/\"home/.m2\"),MAVEN_SKIP_RC=\"1\",MAVEN_OPTS=\"-Xmx512m -XX:-UsePerfData -XX:-HeapDumpOnOutOfMemoryError -XX:ErrorFile=\"+str(root/\"hs_err_pid%p.log\")+\" -XX:HeapDumpPath=\"+str(root/\"heap.hprof\")+\" -Djava.io.tmpdir=\"+str(root/\"temp\")+\" -Duser.home=\"+str(root/\"home\"))\ncp=\";\".join(cfg[\"jars\"]);env[\"M3_RUNTIME_CLASSPATH\"]=cp\nenv.update(GH_PROMPT_DISABLED=\"1\",GH_CACHE_DIR=str(root/\"gh-cache\"),GH_NO_UPDATE_NOTIFIER=\"1\",GH_NO_EXTENSION_UPDATE_NOTIFIER=\"1\")\npackets={};received={};httpErrors=[];nonce=\"/\"+uuid.uuid4().hex\nclass H(http.server.BaseHTTPRequestHandler):\n def do_GET(self):\n  data=packets.get(self.path)\n  if data is None:self.send_error(404);return\n  self.send_response(200);self.send_header(\"Content-Length\",str(len(data)));self.end_headers();self.wfile.write(data)\n def do_POST(self):\n  try:\n   assert self.path==nonce+\"/recipe\" and self.path not in received\n   size=int(self.headers[\"Content-Length\"]);assert 0<size<1048576\n   body=self.rfile.read(size);lines=body.decode(\"utf-8\").splitlines();assert len(lines)==1\n   path,sha,encoded=lines[0].split(\"\\t\");value=base64.b64decode(encoded,validate=True)\n   assert path==target and identity(value)[\"sha256\"]==sha and value==raw(post)\n   received[self.path]=value;self.send_response(204);self.end_headers()\n  except Exception as e:httpErrors.append(type(e).__name__);self.send_error(400)\n def log_message(self,*args):pass\nserver=http.server.ThreadingHTTPServer((\"127.0.0.1\",0),H);thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()\nbase=\"http://127.0.0.1:\"+str(server.server_port);reports=[];active=None\ndef packet(sources,res):\n return raw(str(len(sources))+\"\\n\")+b\"\".join(raw(n+\"\\t\"+identity(raw(v))[\"sha256\"]+\"\\t\")+base64.b64encode(raw(v))+b\"\\n\" for n,v in sources.items())+b\"\".join(raw(n+\"\\t\"+identity(v)[\"sha256\"]+\"\\t\")+base64.b64encode(v)+b\"\\n\" for n,v in res.items())\ndef run(label,sources,res,main,argument,expected):\n global active\n p=packet(sources,res);assert len(p)<=2097152;path=nonce+\"/\"+label;packets[path]=p\n worker=[\"--add-opens=java.base/java.lang=ALL-UNNAMED\",\"-XX:-UsePerfData\",\"-Xmx512m\",\"-XX:-HeapDumpOnOutOfMemoryError\",\"-XX:ErrorFile=\"+str(root/\"hs_err_pid%p.log\"),\"-XX:HeapDumpPath=\"+str(root/\"heap.hprof\"),\"-Djava.io.tmpdir=\"+str(root/\"temp\"),\"-Duser.home=\"+str(root/\"home\"),\"-Djunit.jupiter.execution.parallel.enabled=false\",\"-Dorg.xerial.snappy.lib.path=\"+str(T/\"code-text-oracle-recipe/proof/temp\"),\"-Dorg.xerial.snappy.lib.name=snappy-1.1.10-6e0cfc58-474b-47d4-bdb8-4cb270ee6e0e-snappyjava.dll\",\"-cp\",cp,\"--source\",\"21\",str(driver),base+path,identity(p)[\"sha256\"],main,argument]\n commandline=\" \".join('\"'+s.replace('\"','\\\\\"')+'\"' for s in worker)\n argv=[r\"C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin\\mvn.cmd\",\"-o\",\"-B\",\"-ntp\",\"-f\",str(project/\"pom.xml\"),\"-Dmaven.repo.local=\"+str(root/\"repo-head\"),\"-Dmaven.repo.local.tail=\"+str(T/\"range-current-qualification/proof/repo-head\")+\",C:/Users/hsoliwal/.m2/repository\",\"-Dmaven.repo.local.tail.ignoreAvailability=false\",\"-Dexec.args=\"+commandline,\"org.codehaus.mojo:exec-maven-plugin:3.3.0:exec\"]\n start=time.monotonic();print(\"M3_SNAPSHOT_STAGE_STARTED \"+label,flush=True)\n active=subprocess.Popen(argv,env=env,cwd=root,stdin=subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)\n stop=threading.Event();issues=[]\n def watch():\n  while not stop.wait(0.5):\n   if allocated()>cap or shutil.disk_usage(S).free<reserve:\n    issues.append(\"storage_budget\");subprocess.run([\"taskkill\",\"/PID\",str(active.pid),\"/T\",\"/F\"],env=env,capture_output=True,timeout=15);return\n watcher=threading.Thread(target=watch,daemon=True);watcher.start()\n try:log,_=active.communicate(timeout=150)\n except subprocess.TimeoutExpired:\n  subprocess.run([\"taskkill\",\"/PID\",str(active.pid),\"/T\",\"/F\"],env=env,capture_output=True,timeout=15);log,_=active.communicate(timeout=15);issues.append(\"timeout\")\n finally:stop.set();watcher.join(timeout=20)\n decoded=log.decode(\"utf-8\",errors=\"replace\");rc=active.returncode\n report=dict(stage=label,exit=rc,reaped=active.poll() is not None,elapsedSeconds=round(time.monotonic()-start,3),argv=argv,packetIdentity=identity(p),sourcePins={n:identity(raw(v)) for n,v in sources.items()},log=decoded,logIdentity=identity(log),allocationAfter=allocated(),issues=issues)\n reports.append(report);active=None\n assert not issues and allocated()<=cap and shutil.disk_usage(S).free>=reserve\n if expected==\"PASS\":assert rc==0 and \"M3_CPU_RAM_COMPILE_PASS\" in decoded,label\n else:assert rc!=0 and \"noEligibleNamespaceDoesNotEncode\" in decoded and \"M3_HIERARCHY_HEAP_QUERY_PASS\" not in decoded,label\n print(\"M3_SNAPSHOT_STAGE_FINISHED \"+json.dumps(dict(stage=label,exit=rc,expectation=expected)),flush=True)\n return decoded\n\ntry:\n import zlib\n prior=cfg[\"qualifiedRecipeProof\"]\n proofraw=zlib.decompress(bytes.fromhex(prior[\"payload\"]));assert hashlib.sha256(proofraw).hexdigest()==prior[\"uncompressedSha256\"]\n recipeProof=json.loads(proofraw);assert recipeProof[\"status\"]==\"PASS\" and recipeProof[\"recipeTests\"]==9 and recipeProof[\"sourceAfter\"]==identity(raw(post)) and recipeProof[\"sourceBefore\"]==identity(raw(pre))\n received[nonce+\"/recipe\"]=raw(post)\n productSources={n:item[\"content\"] for n,item in cfg[\"sources\"].items()}\n for n,item in cfg[\"portTests\"].items():\n  assert identity(raw(item[\"content\"]))[\"gitBlob\"]==item[\"sha\"];productSources[n]=item[\"content\"]\n productSources[\"jdk.m3.precompute.M3DerivativeSelectorQualification\"]=cfg[\"productEntry\"]\n productLog=run(\"actual-target-tests\",productSources,{},\"jdk.m3.precompute.M3DerivativeSelectorQualification\",\"current\",\"PASS\")\n m=re.search(r\"M3_ACTUAL_DERIVATIVE_TESTS_PASS found=6 succeeded=([0-9]+) aborted=([0-9]+) nativeAvailable=(true|false)\",productLog);assert m\n succeeded,aborted,native=int(m[1]),int(m[2]),m[3]==\"true\"\n assert (succeeded,aborted,native) in [(5,1,False),(6,0,True)]\nfinally:\n if active is not None and active.poll() is None:\n  subprocess.run([\"taskkill\",\"/PID\",str(active.pid),\"/T\",\"/F\"],env=env,capture_output=True,timeout=15);active.wait(timeout=15)\n server.shutdown();server.server_close();thread.join(timeout=5)\nf_after=allocation_at(T);assert f_after==f_baseline and allocated()==before and not httpErrors\nassert (project/\"pom.xml\").read_bytes()==raw(cfg[\"pom\"]) and driver.read_bytes()==raw(cfg[\"driver\"])\nresult=dict(schema=\"M3_DERIVATIVE_MASTER_TARGET_REBIND_QUALIFICATION_V1\",status=\"PASS\",workOrder=cfg[\"workOrder\"],reports=reports,sourceBefore=identity(raw(pre)),sourceAfter=identity(received[nonce+\"/recipe\"]),recipeManifest=resources[resourceRoot+\"manifest.tsv\"].decode(),recipeTestsPreviouslyQualified=9,recipeProofBlob=\"f8d546b98f3c8e48fce28655236f7e6d84d09436\",targetTests=dict(found=6,succeeded=succeeded,aborted=aborted,nativeAvailable=native),nativeExecution=\"OBSERVED_JNI_TEST\" if native else \"NOT_EXECUTED_OPTIONAL_TEST_ABORTED\",allocationBefore=before,allocationAfter=allocated(),fAllocationBefore=f_baseline,fAllocationAfter=f_after,sFileAllocation=allocation_at(S),generationCalls=0,scope=\"Actual typed YAML engine replay/fixedpoint/missing/duplicate/drift/wrong-AST/case-alias/path/after-scan/selector-binding contracts plus actual67 production sources and the two selected test classes compiled/run in RAM; no C11 build or complete native/JDK/platform proof\")\nEMIT(result)\n",
+    "workOrder": {
+      "schema": "M3_DERIVATIVE_WORKFLOW_WORK_ORDER_V1",
+      "recipePrerequisites": {},
+      "owner": ".github/workflows/m3-derivative-regex-port.yml",
+      "recipe": "m3jdk21-derivative-test-discovery",
+      "sourceHead": "778cd3eac266974e7b5155e79838f74ee516b535",
+      "beforeGitBlob": "1278e01a69b11b6bc78351efc01685426bbfe64a",
+      "expectedAfterGitBlob": "3b660b1f1ab5aff4ef6b70ecb434ac3d45b84b6c",
+      "atoms": [
+        "exact two test selector substitutions",
+        "preserve all other YAML and refusal semantics"
+      ],
+      "engine": "6bbf7714b1d16f19c005851bfe014e7d6e23ef4c",
+      "generationCalls": 0,
+      "fixtureCorrection": {
+        "failureReceipt": "36aec7884bc03cf1528cffca1488bcc0d0f31df0",
+        "reason": "Eight recipe tests passed; post-scan mutation was refused with correct IllegalStateException wrapped by RecipeRunException. Require exact root cause/message instead of unwrapped type; source engine and candidate unchanged."
+      },
+      "currentMasterRebind": {
+        "prior": "02e7b66f03805ac76b22717433fcf85b719810bd",
+        "sourceDelta": "IndexPrecomputeManifest afterimage f33ead... is on unmerged PR2987; master uses da109...; target actual67 sources recompiled/rerun without reexecuting unchanged recipe"
+      }
+    },
+    "driver": "// Copyright 2026 Hitesh Soliwal, Synexia. SPDX-License-Identifier: Apache-2.0\n// CPU qualification adapter of the existing RAM compiler; no product runtime owner.\nimport java.io.*;import java.net.*;import java.nio.charset.StandardCharsets;import java.util.*;import javax.tools.*;\nclass M3LexiconCpuProof {\n static String hash(byte[] b)throws Exception{return HexFormat.of().formatHex(java.security.MessageDigest.getInstance(\"SHA-256\").digest(b));}\n public static void main(String[] a)throws Exception{\n  byte[] p;try(var i=URI.create(a[0]).toURL().openStream()){p=i.readNBytes(2097153);}\n  if(p.length>2097152||!hash(p).equals(a[1]))throw new AssertionError(\"packet seal\");\n  var r=new BufferedReader(new StringReader(new String(p,StandardCharsets.UTF_8)));var s=new LinkedHashMap<String,String>();var resources=new HashMap<String,byte[]>();\n  int n=Integer.parseInt(r.readLine());if(n<1||n>128)throw new AssertionError(\"source count\");\n  for(int j=0;j<n;j++){var f=r.readLine().split(\"\\t\",-1);byte[] b=Base64.getDecoder().decode(f[2]);if(!hash(b).equals(f[1])||s.put(f[0],new String(b,StandardCharsets.UTF_8))!=null)throw new AssertionError(\"source seal\");}\n  String line;while((line=r.readLine())!=null){var f=line.split(\"\\t\",-1);byte[] b=Base64.getDecoder().decode(f[2]);if(!hash(b).equals(f[1])||resources.put(f[0],b)!=null)throw new AssertionError(\"resource seal\");}\n  var out=new HashMap<String,ByteArrayOutputStream>();var c=ToolProvider.getSystemJavaCompiler();\n  try(var std=c.getStandardFileManager(null,null,StandardCharsets.UTF_8);var fm=new ForwardingJavaFileManager<StandardJavaFileManager>(std){\n   public JavaFileObject getJavaFileForOutput(Location l,String name,JavaFileObject.Kind k,FileObject f){return new SimpleJavaFileObject(URI.create(\"mem:///\"+name.replace('.','/')+k.extension),k){public OutputStream openOutputStream(){var b=new ByteArrayOutputStream();if(out.put(name,b)!=null)throw new AssertionError(\"duplicate output\");return b;}};}\n  }){\n   var units=new ArrayList<JavaFileObject>();for(var e:s.entrySet())units.add(new SimpleJavaFileObject(URI.create(\"string:///\"+e.getKey().replace('.','/')+\".java\"),JavaFileObject.Kind.SOURCE){public CharSequence getCharContent(boolean ignored){return e.getValue();}});\n   if(!c.getTask(null,fm,null,List.of(\"--release\",\"21\",\"-proc:none\",\"-g:none\",\"-Xlint:all\",\"-Werror\",\"-classpath\",System.getProperty(\"java.class.path\")),null,units).call())throw new AssertionError(\"compile\");\n  }\n  var loader=new ClassLoader(M3LexiconCpuProof.class.getClassLoader()){\n   protected Class<?> findClass(String name)throws ClassNotFoundException{var b=out.get(name);if(b==null)throw new ClassNotFoundException(name);return defineClass(name,b.toByteArray(),0,b.size());}\n   public InputStream getResourceAsStream(String name){var b=resources.get(name);return b==null?super.getResourceAsStream(name):new ByteArrayInputStream(b);}\n  };\n  for(String name:s.keySet())if(loader.loadClass(name).getClassLoader()!=loader)throw new AssertionError(\"class origin\");\n  var old=Thread.currentThread().getContextClassLoader();Thread.currentThread().setContextClassLoader(loader);\n  try{loader.loadClass(a[2]).getMethod(\"main\",String[].class).invoke(null,(Object)Arrays.copyOfRange(a,3,a.length));}finally{Thread.currentThread().setContextClassLoader(old);}\n  System.out.println(\"M3_CPU_RAM_COMPILE_PASS sources=\"+s.size()+\" classes=\"+out.size());\n }\n}\n",
+    "sources": {
+      "jdk.m3.precompute.CodeTextSignalBatch": {
+        "sha": "825c8a5b446e09120e80bddc59c4b66efb419ea1",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@825c8a5b446e09120e80bddc59c4b66efb419ea1"
+        }
+      },
+      "jdk.m3.precompute.CodeTextSignalBatchJava": {
+        "sha": "6d68312db32b4f134ca3b04280cf90ef2ceb33f5",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@6d68312db32b4f134ca3b04280cf90ef2ceb33f5"
+        }
+      },
+      "jdk.m3.precompute.CodeTextSignalBatchNative": {
+        "sha": "d133e0fb22fe7703a514089b4fefcf0b92e82094",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@d133e0fb22fe7703a514089b4fefcf0b92e82094"
+        }
+      },
+      "jdk.m3.precompute.CodeTextSignals": {
+        "sha": "ba450cadacaa2d5fed79e5df07586fd3c6b88179",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@ba450cadacaa2d5fed79e5df07586fd3c6b88179"
+        }
+      },
+      "jdk.m3.precompute.CpuToolImage": {
+        "sha": "f4ab3da4d93bb7ed588f8ca2516d5969b0774547",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@f4ab3da4d93bb7ed588f8ca2516d5969b0774547"
+        }
+      },
+      "jdk.m3.precompute.CpuToolImageCompiler": {
+        "sha": "8184c7a4b67a7780f418a2aad4bb28575f5fe466",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@8184c7a4b67a7780f418a2aad4bb28575f5fe466"
+        }
+      },
+      "jdk.m3.precompute.CpuToolNativeSignals": {
+        "sha": "bbce17fcb25d8da910503ff937d648770c244671",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@bbce17fcb25d8da910503ff937d648770c244671"
+        }
+      },
+      "jdk.m3.precompute.CpuToolPlan": {
+        "sha": "5b46c2a25b1ddc0c2266ae6bc54165042d97f75a",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@5b46c2a25b1ddc0c2266ae6bc54165042d97f75a"
+        }
+      },
+      "jdk.m3.precompute.CpuToolRuntime": {
+        "sha": "61ee200af87638f85bfa8e324da647296690a0e8",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@61ee200af87638f85bfa8e324da647296690a0e8"
+        }
+      },
+      "jdk.m3.precompute.EditDistancePlan": {
+        "sha": "9789f2db5050b5a5c7b4afadc1f40d39eb43ad0e",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@9789f2db5050b5a5c7b4afadc1f40d39eb43ad0e"
+        }
+      },
+      "jdk.m3.precompute.FrozenLongTupleIndex": {
+        "sha": "9b07815cddb8f8383a979653909ee934d224f343",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@9b07815cddb8f8383a979653909ee934d224f343"
+        }
+      },
+      "jdk.m3.precompute.Histogram": {
+        "sha": "67446011e212ccccdd1de48926ef760c96205197",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@67446011e212ccccdd1de48926ef760c96205197"
+        }
+      },
+      "jdk.m3.precompute.IndexPrecomputeAccelerator": {
+        "sha": "74380ecf0a403eacc65c9192bc0418885731e6c6",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@74380ecf0a403eacc65c9192bc0418885731e6c6"
+        }
+      },
+      "jdk.m3.precompute.IndexPrecomputeAccelerators": {
+        "sha": "0c20b4b19269eb219ecb4e9cba328759e71224f4",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@0c20b4b19269eb219ecb4e9cba328759e71224f4"
+        }
+      },
+      "jdk.m3.precompute.IndexPrecomputeCandidate": {
+        "sha": "dcc329590d1e3f79edca7aa5900e438b0aeb9eb1",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@dcc329590d1e3f79edca7aa5900e438b0aeb9eb1"
+        }
+      },
+      "jdk.m3.precompute.IndexPrecomputeCapability": {
+        "sha": "7dfd8e6907117916261e28d8960531299d57ac46",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@7dfd8e6907117916261e28d8960531299d57ac46"
+        }
+      },
+      "jdk.m3.precompute.IndexPrecomputeConsumerProfiles": {
+        "sha": "2eaf48f4eb9eb26f4ca2336bfd2df703d1d1baf5",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@2eaf48f4eb9eb26f4ca2336bfd2df703d1d1baf5"
+        }
+      },
+      "jdk.m3.precompute.IndexPrecomputeDependencyImage": {
+        "sha": "29d2c991874a94c9a3a06c3d3f78ff38f3406200",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@29d2c991874a94c9a3a06c3d3f78ff38f3406200"
+        }
+      },
+      "jdk.m3.precompute.IndexPrecomputeFacet": {
+        "sha": "1c3787df35b2e4f316519b99a5bcb8f43d19860e",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@1c3787df35b2e4f316519b99a5bcb8f43d19860e"
+        }
+      },
+      "jdk.m3.precompute.IndexPrecomputeFacetGroup": {
+        "sha": "dbf645822c8a8734264c7b5a71029f84bbf932ff",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@dbf645822c8a8734264c7b5a71029f84bbf932ff"
+        }
+      },
+      "jdk.m3.precompute.IndexPrecomputeKernel": {
+        "sha": "88068864d5a3f6175ab6a972db480f9a3cebe958",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@88068864d5a3f6175ab6a972db480f9a3cebe958"
+        }
+      },
+      "jdk.m3.precompute.IndexPrecomputeManifest": {
+        "sha": "da10991af33b327a0a9c654f4546bfcabd6a9c98",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@da10991af33b327a0a9c654f4546bfcabd6a9c98"
+        }
+      },
+      "jdk.m3.precompute.IndexPrecomputeManifestImage": {
+        "sha": "8c3c8ff7d80e8c58e0749afb7c8fc93e5ddf0367",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@8c3c8ff7d80e8c58e0749afb7c8fc93e5ddf0367"
+        }
+      },
+      "jdk.m3.precompute.IndexPrecomputeMultipassCompiler": {
+        "sha": "f4141e9016dc7e3206aa9010608083af0b11af23",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@f4141e9016dc7e3206aa9010608083af0b11af23"
+        }
+      },
+      "jdk.m3.precompute.IndexPrecomputePlan": {
+        "sha": "695720d6212dc6cfd6a5d70b9cb74d946277375b",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@695720d6212dc6cfd6a5d70b9cb74d946277375b"
+        }
+      },
+      "jdk.m3.precompute.IndexPrecomputePlanner": {
+        "sha": "516272a8978500e3dcd31669b5f802d2c62c64d9",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@516272a8978500e3dcd31669b5f802d2c62c64d9"
+        }
+      },
+      "jdk.m3.precompute.IndexPrecomputeProvider": {
+        "sha": "1849c6e52c647324bfb8cc5a9da26939589dc1d1",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@1849c6e52c647324bfb8cc5a9da26939589dc1d1"
+        }
+      },
+      "jdk.m3.precompute.IndexPrecomputeProviders": {
+        "sha": "69ba5cf7ec03f9233d839d4f7734e8b64af2ea37",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@69ba5cf7ec03f9233d839d4f7734e8b64af2ea37"
+        }
+      },
+      "jdk.m3.precompute.IndexPrecomputeReceipt": {
+        "sha": "b272015cdb0d2460647ecf9cb3365e48d436f25a",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@b272015cdb0d2460647ecf9cb3365e48d436f25a"
+        }
+      },
+      "jdk.m3.precompute.IndexPrecomputeRecommendation": {
+        "sha": "ae940b30d50d82ae77a00bf1688765879c3096e5",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@ae940b30d50d82ae77a00bf1688765879c3096e5"
+        }
+      },
+      "jdk.m3.precompute.IndexPrecomputeSnapshot": {
+        "sha": "a115af05a6009ddcd8ce5c5890156bcb55761bd1",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@a115af05a6009ddcd8ce5c5890156bcb55761bd1"
+        }
+      },
+      "jdk.m3.precompute.IndexPrecomputeSnapshotBuilder": {
+        "sha": "962f6580171a50e1dcff324b2ec8c871597f7e83",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@962f6580171a50e1dcff324b2ec8c871597f7e83"
+        }
+      },
+      "jdk.m3.precompute.IndexPrecomputeSource": {
+        "sha": "b30e3e91d9197f99214d4c261534e4b567910368",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@b30e3e91d9197f99214d4c261534e4b567910368"
+        }
+      },
+      "jdk.m3.precompute.IndexPrecomputeWorkload": {
+        "sha": "f0a627846633d6a381c438ec4d4b07944d72e901",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@f0a627846633d6a381c438ec4d4b07944d72e901"
+        }
+      },
+      "jdk.m3.precompute.JavaIndexPrecomputeAccelerator": {
+        "sha": "b69c706a41cc3a8ada44b8d1cc9abc3b62d35563",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@b69c706a41cc3a8ada44b8d1cc9abc3b62d35563"
+        }
+      },
+      "jdk.m3.precompute.JniIndexPrecomputeAccelerator": {
+        "sha": "09e0b489bc55032e6939c62d451ed38ba9ded5db",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@09e0b489bc55032e6939c62d451ed38ba9ded5db"
+        }
+      },
+      "jdk.m3.precompute.LcsPlan": {
+        "sha": "936e058b36be21393d9420ae3330fb536ef6e22e",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@936e058b36be21393d9420ae3330fb536ef6e22e"
+        }
+      },
+      "jdk.m3.precompute.LiteralBatchCandidate": {
+        "sha": "f4076e4e0586d609af16964a01f7ab5255030783",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@f4076e4e0586d609af16964a01f7ab5255030783"
+        }
+      },
+      "jdk.m3.precompute.LongTupleIndexImage": {
+        "sha": "80892ecbd94fdf20b3ed9524b486c7aa8998ab8a",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@80892ecbd94fdf20b3ed9524b486c7aa8998ab8a"
+        }
+      },
+      "jdk.m3.precompute.LongTupleIndexView": {
+        "sha": "16fbf1c176be578f201dc3959b7fdebb673ae05a",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@16fbf1c176be578f201dc3959b7fdebb673ae05a"
+        }
+      },
+      "jdk.m3.precompute.MeasuredRope": {
+        "sha": "691fed7bf97539cbec14fc2d77da7a3c79d620ae",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@691fed7bf97539cbec14fc2d77da7a3c79d620ae"
+        }
+      },
+      "jdk.m3.precompute.NativePrecomputeOps": {
+        "sha": "81369bbcd3db2a532d70cb55147614a1259575a6",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@81369bbcd3db2a532d70cb55147614a1259575a6"
+        }
+      },
+      "jdk.m3.precompute.PrecomputeHashes": {
+        "sha": "d607cd730012532f757ed07003f5d3eebcb5304b",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@d607cd730012532f757ed07003f5d3eebcb5304b"
+        }
+      },
+      "jdk.m3.precompute.Progress": {
+        "sha": "c00ddf8df4f42e437bbe1bc6c898f9bcd82bcffe",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@c00ddf8df4f42e437bbe1bc6c898f9bcd82bcffe"
+        }
+      },
+      "jdk.m3.precompute.RegexDerivative": {
+        "sha": "a0bf26bf0d9a8666caa10e2ec9a54a0607adfa39",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@a0bf26bf0d9a8666caa10e2ec9a54a0607adfa39"
+        }
+      },
+      "jdk.m3.precompute.RegexDerivativeNative": {
+        "sha": "85394006729107ccd09ada250b225bba6d0587aa",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@85394006729107ccd09ada250b225bba6d0587aa"
+        }
+      },
+      "jdk.m3.precompute.RegexDfaEffects": {
+        "sha": "aabec43080849c28ac4f2b8f7c44ceccf1a1aa07",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@aabec43080849c28ac4f2b8f7c44ceccf1a1aa07"
+        }
+      },
+      "jdk.m3.precompute.RegexOracleCorpus": {
+        "sha": "bbb1d5d1fcc2b54be7e793195a33a7dec2b35ebf",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@bbb1d5d1fcc2b54be7e793195a33a7dec2b35ebf"
+        }
+      },
+      "jdk.m3.precompute.RegexOracleHarness": {
+        "sha": "a7d4bef4e9f1e2ea948e589b2993fe236ada3067",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@a7d4bef4e9f1e2ea948e589b2993fe236ada3067"
+        }
+      },
+      "jdk.m3.precompute.RegexPredicateAlphabet": {
+        "sha": "dc1d8a16da234b92570fa8c0411ce0455d128461",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@dc1d8a16da234b92570fa8c0411ce0455d128461"
+        }
+      },
+      "jdk.m3.precompute.RegexShape": {
+        "sha": "4c16064a1c2edc996d72cebbb977bb929fe61bb8",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@4c16064a1c2edc996d72cebbb977bb929fe61bb8"
+        }
+      },
+      "jdk.m3.precompute.RegexStringSignals": {
+        "sha": "4974519b66e0d62aa05b8e1295a54c7b2de85921",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@4974519b66e0d62aa05b8e1295a54c7b2de85921"
+        }
+      },
+      "jdk.m3.precompute.RegexStringTrialImage": {
+        "sha": "4618a3490229dafa789352f615bffcf4859bc256",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@4618a3490229dafa789352f615bffcf4859bc256"
+        }
+      },
+      "jdk.m3.precompute.RopeArena": {
+        "sha": "402a15abb08ded0ac8a9301a9be8e678d4d69eff",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@402a15abb08ded0ac8a9301a9be8e678d4d69eff"
+        }
+      },
+      "jdk.m3.precompute.RopeMeasure": {
+        "sha": "3b79315f35f719b6f4d3397b3a545a7f87046347",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@3b79315f35f719b6f4d3397b3a545a7f87046347"
+        }
+      },
+      "jdk.m3.precompute.RopeMeasures": {
+        "sha": "c9774f58ec284dcba0af3fd1406bcc77703d9b21",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@c9774f58ec284dcba0af3fd1406bcc77703d9b21"
+        }
+      },
+      "jdk.m3.precompute.RopeMetric": {
+        "sha": "a3040084f87a77b367b1d59553b37d591a8ffac0",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@a3040084f87a77b367b1d59553b37d591a8ffac0"
+        }
+      },
+      "jdk.m3.precompute.SimilarityBatch": {
+        "sha": "9867af90f57d060174ae219bb7f245cb7ef1e237",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@9867af90f57d060174ae219bb7f245cb7ef1e237"
+        }
+      },
+      "jdk.m3.precompute.SimilarityBatchJava": {
+        "sha": "94a5563a73e893a6af33c05c9112ea48ada9d02f",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@94a5563a73e893a6af33c05c9112ea48ada9d02f"
+        }
+      },
+      "jdk.m3.precompute.SimilarityBatchNative": {
+        "sha": "25a28db50227508a3f678ed36cb7177489d282e5",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@25a28db50227508a3f678ed36cb7177489d282e5"
+        }
+      },
+      "jdk.m3.precompute.SimilarityPrecompute": {
+        "sha": "34b7f4b4639ef5b9d69d3bbd8f9c1a5f8ce779f0",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@34b7f4b4639ef5b9d69d3bbd8f9c1a5f8ce779f0"
+        }
+      },
+      "jdk.m3.precompute.SparseUtf16LiteralPlan": {
+        "sha": "19e1986f87fec50cff7135984827aa697330c7a8",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@19e1986f87fec50cff7135984827aa697330c7a8"
+        }
+      },
+      "jdk.m3.precompute.SparseUtf16Stitched": {
+        "sha": "1afcd42cbf00fc62c7e57cf163b6892397246fe0",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@1afcd42cbf00fc62c7e57cf163b6892397246fe0"
+        }
+      },
+      "jdk.m3.precompute.TextMetrics": {
+        "sha": "d1124fd1609def2c305c01bbcd002c031a439f00",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@d1124fd1609def2c305c01bbcd002c031a439f00"
+        }
+      },
+      "jdk.m3.precompute.TextSignals": {
+        "sha": "3b68c45bd4c84ca0ee694c675c9253e045339f82",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@3b68c45bd4c84ca0ee694c675c9253e045339f82"
+        }
+      },
+      "jdk.m3.precompute.TokenRegex": {
+        "sha": "8066f19781407920ff87407f78836463738234ba",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@8066f19781407920ff87407f78836463738234ba"
+        }
+      },
+      "jdk.m3.precompute.Utf16Glob": {
+        "sha": "8a6b660761820a0632cc581581b8330aa8207724",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@8a6b660761820a0632cc581581b8330aa8207724"
+        }
+      }
+    },
+    "engine": {
+      "sealedContentRef": "hsoliwal/com.synexia@6bbf7714b1d16f19c005851bfe014e7d6e23ef4c"
+    },
+    "envelope": {
+      "sealedContentRef": "hsoliwal/com.synexia@1b0b84ab1dd08aab4c8edb5835bd00615d0cf908"
+    },
+    "pins": {
+      "engine": "6bbf7714b1d16f19c005851bfe014e7d6e23ef4c",
+      "envelope": "1b0b84ab1dd08aab4c8edb5835bd00615d0cf908"
+    },
+    "jars": {
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\yaml\\snakeyaml\\2.2\\snakeyaml-2.2.jar": "1467931448a0817696ae2805b7b8b20bfb082652bf9c4efaed528930dc49389b",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java\\8.17.1\\rewrite-java-8.17.1.jar": "32a3b27c0eafeb44c776500ae1378efdfb79d490a6afd7b58be07c6c0d6c55ff",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-core\\8.17.1\\rewrite-core-8.17.1.jar": "d7c07f91ab085a39bf1b40d7f2a7796a52619aaeefeca1481435e685aa663efa",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-databind\\2.16.1\\jackson-databind-2.16.1.jar": "baf8a8ebee8f45ef68cdd5e2dd3923b3e296c0937b96ec0b4806aa3a31bccd1d",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-core\\2.16.1\\jackson-core-2.16.1.jar": "f5f8ef90609e64fec82eb908e497dc7d81b2eb983fe509b870292a193cde4dfb",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\dataformat\\jackson-dataformat-smile\\2.16.1\\jackson-dataformat-smile-2.16.1.jar": "3767744f2e37e6e672c3a98174e68567907d18ea5c451b203a19e7b0ad934354",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\module\\jackson-module-parameter-names\\2.16.1\\jackson-module-parameter-names-2.16.1.jar": "9b333e7e69053807f42a9d92fc1e5da405938ecc4683146b8b1eb9c6967fea8e",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\datatype\\jackson-datatype-jsr310\\2.16.1\\jackson-datatype-jsr310-2.16.1.jar": "6281970682a8da3ddbac54bb203c9badf1c26f507f3ecaa48ef10318579bc9ad",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\tools\\java-object-diff\\1.0.1\\java-object-diff-1.0.1.jar": "8dcf0381d306c5223cea4c0acb84afd5691ec6eb41e0b6a36dda288a0c7ec4dc",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\io\\quarkus\\gizmo\\gizmo\\1.0.11.Final\\gizmo-1.0.11.Final.jar": "a54bfbb6dcce9298134595b3cd1df961bc732468825f26ee5296f2b5f88c0b99",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\jboss\\jandex\\2.4.2.Final\\jandex-2.4.2.Final.jar": "3f2ce55c7d71e744581488dc5105806aa8084c08e6e916a019bab8f8698994f0",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna-platform\\5.14.0\\jna-platform-5.14.0.jar": "ae4caceb3840730c2537f9b7fb55a01baba580286b4122951488bcee558c2449",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna\\5.14.0\\jna-5.14.0.jar": "34ed1e1f27fa896bca50dbc4e99cf3732967cec387a7a0d5e3486c09673fe8c6",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-compress\\1.26.0\\commons-compress-1.26.0.jar": "051aceb8bbcc62d0f5b2b8ac72c53767f9c59bfbd050151e65bef6f51c8ed9c9",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-yaml\\8.17.1\\rewrite-yaml-8.17.1.jar": "0203cc3b08f519975ed2dc2d20091f0b8e0ab20f72016871c05e50feb49e5a13",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-xml\\8.17.1\\rewrite-xml-8.17.1.jar": "89e9568e9e48bd2d3fbce5d9d23d1a828a54c97442590f8f77624cafb095785f",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\io\\micrometer\\micrometer-core\\1.9.17\\micrometer-core-1.9.17.jar": "c350cfdc76c08356f12a60e840f2dbeaeea7540712d58b54becd6c302a86147a",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\hdrhistogram\\HdrHistogram\\2.1.12\\HdrHistogram-2.1.12.jar": "9b47fbae444feaac4b7e04f0ea294569e4bc282bc69d8c2ce2ac3f23577281e2",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\latencyutils\\LatencyUtils\\2.0.3\\LatencyUtils-2.0.3.jar": "a32a9ffa06b2f4e01c5360f8f9df7bc5d9454a5d373cd8f361347fa5a57165ec",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\jetbrains\\annotations\\24.1.0\\annotations-24.1.0.jar": "27a770dc7ce50500918bb8c3c0660c98290630ec796b5e3cf6b90f403b3033c6",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-annotations\\2.16.1\\jackson-annotations-2.16.1.jar": "a4730771e6a495dd3793a42cdb8ce6bddb96c77e15f40c98fd8d9a7ae09e7286",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\antlr\\antlr4-runtime\\4.11.1\\antlr4-runtime-4.11.1.jar": "e06c6553c1ccc14d36052ec4b0fc6f13b808cf957b5b1dc3f61bf401996ada59",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-text\\1.11.0\\commons-text-1.11.0.jar": "2acf30a070b19163d5a480eae411a281341e870020e3534c6d5d4c8472739e30",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\classgraph\\classgraph\\4.8.165\\classgraph-4.8.165.jar": "5258d9218fc6413f4d14218a5a6e784528e349f60f48883b77de74bb478ebafd",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\xerial\\snappy\\snappy-java\\1.1.10.5\\snappy-java-1.1.10.5.jar": "0f3f1857ed33116583f480b4df5c0218836c47bfbc9c6221c0d73f356decf37b",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\fastfilter\\fastfilter\\1.0.2\\fastfilter-1.0.2.jar": "38f8824d07c8c932fa50cc0175f32c0fff2fafb3913cd2f9571ac349c9631149",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm\\9.6\\asm-9.6.jar": "3c6fac2424db3d4a853b669f4e3d1d9c3c552235e19a319673f887083c2303a1",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-util\\9.6\\asm-util-9.6.jar": "c635a7402f4aa9bf66b2f4230cea62025a0fe1cd63e8729adefc9b1994fac4c3",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-tree\\9.6\\asm-tree-9.6.jar": "c43ecf17b539c777e15da7b5b86553b377e2d39a683de6285567d5283888e7ef",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-analysis\\9.6\\asm-analysis-9.6.jar": "d92832d7c37edc07c60e2559ac6118b31d642e337a6671edcb7ba9fae68edbbb",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java-21\\8.17.1\\rewrite-java-21-8.17.1.jar": "7e654435905cf6afb9e659185773de0b75e4282c8e30c916ad15fd16b0fba9f4",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0\\opentest4j-1.3.0.jar": "48e2df636cab6563ced64dcdff8abb2355627cb236ef0bf37598682ddf742f1b",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2\\apiguardian-api-1.1.2.jar": "b509448ac506d607319f182537f0b35d71007582ec741832a1f111e5b5b70b38",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-simple\\2.0.13\\slf4j-simple-2.0.13.jar": "3153fe1d689cffb94f1530b58470c306685ba68844de8857116e3b6ebb81d9f7",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-api\\2.0.13\\slf4j-api-2.0.13.jar": "e7c2a48e8515ba1f49fa637d57b4e2f590b3f5bd97407ac699c3aa5efb1204a9",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\projectlombok\\lombok\\1.18.30\\lombok-1.18.30.jar": "14151b47582d570b4de16a147ece3bdbd19ace4aee5bde3a5578c87db9ecb998",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-lang3\\3.17.0\\commons-lang3-3.17.0.jar": "6ee731df5c8e5a2976a1ca023b6bb320ea8d3539fbe64c8a1d5cb765127c33b4",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\commons-io\\commons-io\\2.17.0\\commons-io-2.17.0.jar": "4aa4ca48f3dfd30b78220b7881d8cb93eac4093ec94361b6befa9487998a550b",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\commons-codec\\commons-codec\\1.17.1\\commons-codec-1.17.1.jar": "f9f6cb103f2ddc3c99a9d80ada2ae7bf0685111fd6bffccb72033d1da4e6ff23",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-csv\\1.12.0\\commons-csv-1.12.0.jar": "e11a33d65e5f2e92769c0b13c548e0c2da01e37c1581417ea3fd7d5d9474fee6",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\5.11.4\\junit-jupiter-5.11.4.jar": "aa880e4afba87d447357e4c1fc098c5cb1d200cb9403496c00d3b35a5bd0e8db",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.11.4\\junit-jupiter-api-5.11.4.jar": "ab83ef9e51ac4597d59d26b4b58812129550e2f579a404c8af7d09f5ce5b4293",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\5.11.4\\junit-jupiter-params-5.11.4.jar": "02a6e015de7ce94ac7f256e7fa05b8091dea861fe79a555a7993313d0f6c7d96",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\5.11.4\\junit-jupiter-engine-5.11.4.jar": "cdf8ac59f3fad774ca738ad03890950eeb91833ef0e8908753177edd26f1581c",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.11.4\\junit-platform-commons-1.11.4.jar": "9edd969b0d0670c54105bc91ae79bd1c6f503e12115faba82073b84c86bbc334",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\1.11.4\\junit-platform-engine-1.11.4.jar": "b1dd998f64f9acadc15966d9cd3d08074662677b3e390f0a38fcbf0bb4c72330",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-launcher\\1.11.4\\junit-platform-launcher-1.11.4.jar": "d7430bd029e7fcced53ee445e4d2d1a8a1e043ea4c4df43b6335a857f79761ae"
+    },
+    "pom": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!-- Copyright 2026 Hitesh Soliwal, Synexia. SPDX-License-Identifier: Apache-2.0 -->\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n<modelVersion>4.0.0</modelVersion><groupId>com.synexia.verification</groupId>\n<artifactId>m3-shared-array-binding-qualification</artifactId><version>1</version><packaging>pom</packaging>\n<build><plugins><plugin><groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.3.0</version>\n<executions><execution><id>qualify-shared-array-binding</id><phase>test</phase><goals><goal>exec</goal></goals></execution></executions>\n<configuration><executable>${java.home}/bin/java</executable><inheritIo>true</inheritIo><arguments>\n<argument>-Xcheck:jni</argument><argument>-XX:-UsePerfData</argument><argument>-XX:ErrorFile=${m3.test.temp}/hs_err_pid%p.log</argument><argument>--enable-preview</argument><argument>-Xmx768m</argument><argument>-Djunit.jupiter.execution.parallel.enabled=false</argument>\n<argument>-cp</argument><argument>${env.M3_RUNTIME_CLASSPATH}</argument>\n<argument>-Dorg.xerial.snappy.lib.path=F:/codex-work/lexicon-migration-20261031/code-text-oracle-recipe/proof/temp</argument>\n<argument>-Dorg.xerial.snappy.lib.name=snappy-1.1.10-6e0cfc58-474b-47d4-bdb8-4cb270ee6e0e-snappyjava.dll</argument><argument>-Duser.home=${m3.proof.root}/home</argument>\n<argument>-Djava.io.tmpdir=${m3.test.temp}</argument><argument>--source</argument><argument>21</argument>\n<argument>${project.basedir}/M3ReceiverPatternTransitionProof.java</argument>\n<argument>${m3.input.url}</argument><argument>${m3.packet.sha256}</argument>\n<argument>${m3.native.library}</argument>\n</arguments></configuration></plugin></plugins></build></project>\n",
+    "reuseDecisionTsv": "capability\tdonor_repository\tdonor_revision\tpaths\tlicense\tclassification\tfit\tremaining_gap\nstrict-precompute-source-identity\thsoliwal/com.synexia\td2d3357e207d1a9a5c7e3adafbb850a4173caa1a\tIndexPrecomputeMultipassCompiler.normalizeSources;IndexPrecomputeManifest\tApache-2.0\tADAPT\tcopy existing fail-closed source-ID uniqueness rule into manifest's existing set-add pass; same error wording\tnew refusal for ambiguous direct/parsed manifests; full source-owner and raw lexeme/profile join not implemented\n",
+    "engineDeps": {},
+    "runAuthorization": {
+      "status": "AUTHORIZED",
+      "source": "User reply call_94bbc71f8ad04ca1a7327c84782f16fc: Approve S routing; same cap",
+      "proposal": "158e58ed717f2590eccf5edb99825e37e2b9e448",
+      "capBytes": 571473920,
+      "reserveBytes": 8589934592,
+      "plannedFMutableWrites": 0,
+      "transport": "Already sealed resident packet via stdin; no native GitHub API calls after observed quota failure",
+      "taskScope": "Approved S route, same cap; existing YAML selector candidate and actual target Java tests"
+    },
+    "portTests": {
+      "jdk.m3.precompute.RegexDerivativeTest": {
+        "sha": "6b14a36fd187422c22bb144a531345a6e5e77957",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@6b14a36fd187422c22bb144a531345a6e5e77957"
+        }
+      },
+      "jdk.m3.precompute.RegexDerivativeEffectsBridgeTest": {
+        "sha": "b3fd2e15d4d798d2fd8dae96e3c87406fa8876d9",
+        "content": {
+          "sealedContentRef": "hsoliwal/M3jdk21@b3fd2e15d4d798d2fd8dae96e3c87406fa8876d9"
+        }
+      }
+    },
+    "recipeTest": "// Copyright 2026 Hitesh Soliwal, Synexia. SPDX-License-Identifier: Apache-2.0\npackage com.synexia.rewrite;\nimport java.io.IOException;\nimport java.nio.charset.StandardCharsets;\nimport java.nio.file.Path;\nimport java.util.*;\nimport java.util.regex.Pattern;\nimport org.junit.jupiter.api.Test;\nimport org.openrewrite.InMemoryExecutionContext;\nimport org.openrewrite.SourceFile;\nimport org.openrewrite.Parser;\nimport org.openrewrite.internal.InMemoryLargeSourceSet;\nimport org.openrewrite.text.PlainText;\nimport org.openrewrite.yaml.YamlParser;\nimport org.openrewrite.yaml.tree.Yaml;\nimport static org.junit.jupiter.api.Assertions.*;\npublic final class M3DerivativeWorkflowRecipeTest {\n static final String CRATE=\"m3jdk21-derivative-test-discovery\";\n static final Map<String,String> qualified=new TreeMap<>();\n static Map<String,String> outputs(){return Map.copyOf(qualified);}\n static String resource(String n)throws IOException{try(var in=M3DerivativeWorkflowRecipeTest.class.getResourceAsStream(\"/com/synexia/rewrite/hash-pinned-yaml/\"+CRATE+\"/\"+n)){if(in==null)throw new IOException(n);return new String(in.readAllBytes(),StandardCharsets.UTF_8);}}\n static String[] row()throws IOException{return resource(\"manifest.tsv\").stripTrailing().split(\"\\t\",-1);}\n static InMemoryExecutionContext context(List<Throwable> errors){return new InMemoryExecutionContext(errors::add);}\n static SourceFile source(String path,String text){\n  var errors=new ArrayList<Throwable>();\n  var parsed=YamlParser.builder().build().parseInputs(List.of(Parser.Input.fromString(Path.of(path),text)),null,context(errors)).toList();\n  assertTrue(errors.isEmpty(),errors.toString());assertEquals(1,parsed.size());assertInstanceOf(Yaml.Documents.class,parsed.getFirst());assertEquals(text,parsed.getFirst().printAll());return parsed.getFirst();\n }\n static SourceFile before()throws IOException{var r=row();return source(r[0],resource(r[3]+\".before\"));}\n static void reject(List<SourceFile> files){var errors=new ArrayList<Throwable>();try{var run=new M3HashPinnedYamlSnapshotRecipe(CRATE).run(new InMemoryLargeSourceSet(files),context(errors));assertTrue(run.getChangeset().getAllResults().isEmpty());assertFalse(errors.isEmpty());}catch(IllegalStateException expected){assertNotNull(expected.getMessage());}}\n @Test void replayAndFixedPoint()throws IOException{\n  var errors=new ArrayList<Throwable>();var old=before();var recipe=new M3HashPinnedYamlSnapshotRecipe(CRATE);\n  var other=PlainText.builder().sourcePath(Path.of(\"unrelated.txt\")).text(\"keep\\n\").build();\n  var changes=recipe.run(new InMemoryLargeSourceSet(List.of(old,other)),context(errors)).getChangeset().getAllResults();\n  assertTrue(errors.isEmpty(),errors.toString());assertEquals(1,changes.size());var after=changes.getFirst().getAfter();assertNotNull(after);assertInstanceOf(Yaml.Documents.class,after);\n  assertEquals(old.getId(),after.getId());assertEquals(old.getSourcePath(),after.getSourcePath());assertEquals(resource(row()[3]),after.printAll());qualified.put(row()[0],after.printAll());\n  var second=recipe.run(new InMemoryLargeSourceSet(List.of(after,other)),context(errors));assertTrue(second.getChangeset().getAllResults().isEmpty());assertTrue(errors.isEmpty());\n }\n @Test void missingRequiredRefuses(){reject(List.of());}\n @Test void duplicateRefuses()throws IOException{var old=before();reject(List.of(old,old));}\n @Test void sourceDriftRefuses()throws IOException{var old=before();reject(List.of(source(old.getSourcePath().toString(),old.printAll()+\"# drift\\n\")));}\n @Test void wrongAstRefuses()throws IOException{var old=before();reject(List.of(PlainText.builder().sourcePath(old.getSourcePath()).text(old.printAll()).build()));}\n @Test void caseAliasRefuses()throws IOException{reject(List.of(before().withSourcePath(Path.of(\".github/workflows/M3-DERIVATIVE-REGEX-PORT.yml\"))));}\n @Test void noncanonicalPathRefuses()throws IOException{reject(List.of(before().withSourcePath(Path.of(\".github/workflows/../workflows/m3-derivative-regex-port.yml\"))));}\n @Test void changedAfterScanRefuses()throws IOException{\n  var errors=new ArrayList<Throwable>();var ctx=context(errors);var r=new M3HashPinnedYamlSnapshotRecipe(CRATE);var inventory=r.getInitialValue(ctx);var old=before();r.getScanner(inventory).visit(old,ctx);var visitor=r.getVisitor(inventory);\n  var changed=source(old.getSourcePath().toString(),old.printAll()+\"# moved\\n\");var failure=assertThrows(RuntimeException.class,()->visitor.visit(changed,ctx));Throwable cause=failure;while(cause.getCause()!=null)cause=cause.getCause();assertInstanceOf(IllegalStateException.class,cause);assertEquals(\"target changed after scan: \"+row()[0],cause.getMessage());\n }\n @Test void selectorsBindToPinnedReceivingClasses()throws IOException{\n  var names=new ArrayList<String>();for(String file:List.of(\"RegexDerivativeTest.java.txt\",\"RegexDerivativeEffectsBridgeTest.java.txt\")){\n   var m=Pattern.compile(\"(?m)^final class ([A-Za-z0-9_]+) \\\\{\").matcher(resource(file));assertTrue(m.find());names.add(m.group(1));assertFalse(m.find());\n  }\n  String after=resource(row()[3]),expected=String.join(\",\",names);var selectors=Pattern.compile(\"-Dtest=([^ ]+) test\").matcher(after);int count=0;\n  while(selectors.find()){assertEquals(expected,selectors.group(1));count++;}assertEquals(2,count);\n  assertFalse(after.contains(\"failIfNoSpecifiedTests=false\"));assertFalse(after.contains(\"continue-on-error\"));assertTrue(after.contains(\"-Pnative\"));\n }\n}\n",
+    "recipeEntry": "// Copyright 2026 Hitesh Soliwal, Synexia. SPDX-License-Identifier: Apache-2.0\npackage com.synexia.rewrite;\nimport org.junit.platform.launcher.core.*;\nimport org.junit.platform.launcher.listeners.*;\nimport static org.junit.platform.engine.discovery.DiscoverySelectors.selectClass;\nimport java.net.*;import java.util.*;import java.nio.charset.StandardCharsets;\npublic class M3DerivativeWorkflowRecipeQualification {\n public static void main(String[] a)throws Exception{\n  var listener=new SummaryGeneratingListener();var launcher=LauncherFactory.create();launcher.registerTestExecutionListeners(listener);\n  launcher.execute(LauncherDiscoveryRequestBuilder.request().selectors(selectClass(M3DerivativeWorkflowRecipeTest.class)).build());\n  var s=listener.getSummary();s.printTo(new java.io.PrintWriter(System.out,true));s.printFailuresTo(new java.io.PrintWriter(System.out,true));\n  if(s.getTestsFoundCount()!=9||s.getTestsSucceededCount()!=9||s.getTestsFailedCount()!=0||s.getTestsSkippedCount()!=0||s.getTestsAbortedCount()!=0)throw new AssertionError(\"recipe counts\");\n  var map=M3DerivativeWorkflowRecipeTest.outputs();if(map.size()!=1)throw new AssertionError(\"qualified outputs\");\n  var b=new StringBuilder();\n  for(var e:map.entrySet()){byte[] value=e.getValue().getBytes(StandardCharsets.UTF_8);String h=HexFormat.of().formatHex(java.security.MessageDigest.getInstance(\"SHA-256\").digest(value));b.append(e.getKey()).append('\\t').append(h).append('\\t').append(Base64.getEncoder().encodeToString(value)).append('\\n');}\n  byte[] bytes=b.toString().getBytes(StandardCharsets.UTF_8);\n  var c=(HttpURLConnection)URI.create(a[0]).toURL().openConnection();c.setRequestMethod(\"POST\");c.setDoOutput(true);c.setConnectTimeout(10000);c.setReadTimeout(10000);c.setFixedLengthStreamingMode(bytes.length);\n  try(var out=c.getOutputStream()){out.write(bytes);}if(c.getResponseCode()!=204)throw new AssertionError(\"output receipt\");c.disconnect();\n  System.out.println(\"M3_YAML_TEST_DISCOVERY_RECIPE_PASS tests=9 outputs=1\");\n }\n}\n",
+    "productEntry": "// Copyright 2026 Hitesh Soliwal, Synexia. SPDX-License-Identifier: Apache-2.0\npackage jdk.m3.precompute;\nimport java.io.PrintWriter;\nimport org.junit.platform.launcher.core.*;\nimport org.junit.platform.launcher.listeners.SummaryGeneratingListener;\nimport static org.junit.platform.engine.discovery.DiscoverySelectors.selectClass;\npublic final class M3DerivativeSelectorQualification {\n public static void main(String[] args){\n  var l=new SummaryGeneratingListener();var x=LauncherFactory.create();x.registerTestExecutionListeners(l);\n  x.execute(LauncherDiscoveryRequestBuilder.request().selectors(selectClass(RegexDerivativeTest.class),selectClass(RegexDerivativeEffectsBridgeTest.class)).build());\n  var s=l.getSummary();s.printTo(new PrintWriter(System.out,true));s.printFailuresTo(new PrintWriter(System.out,true));\n  if(s.getTestsFoundCount()!=6||s.getTestsFailedCount()!=0||s.getTestsSkippedCount()!=0||s.getTestsSucceededCount()+s.getTestsAbortedCount()!=6||s.getTestsAbortedCount()>1)throw new AssertionError(\"actual target test discovery/results\");\n  System.out.println(\"M3_ACTUAL_DERIVATIVE_TESTS_PASS found=6 succeeded=\"+s.getTestsSucceededCount()+\" aborted=\"+s.getTestsAbortedCount()+\" nativeAvailable=\"+RegexDerivativeNative.available());\n }\n}\n",
+    "preimage": "name: M3 derivative regex candidate Java/JNI\non:\n  pull_request:\n    paths:\n      - 'm3/ports/precompute/**'\n      - '.github/workflows/m3-derivative-regex-port.yml'\n  workflow_dispatch:\nconcurrency:\n  group: ${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true\n\njobs:\n  derivative-java-native:\n    runs-on: ubuntu-latest\n    timeout-minutes: 40\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-java@v4\n        with:\n          distribution: temurin\n          java-version: '21'\n      - name: Build Java derivative and differential tests\n        run: |\n          mvn -B -ntp -f m3/ports/precompute/pom.xml -Dtest=M3RegexDerivativeTest,M3RegexDerivativeEffectsBridgeTest test\n      - name: Build C11 and JNI parity\n        run: |\n          mvn -B -ntp -f m3/ports/precompute/pom.xml -Pnative -Dtest=M3RegexDerivativeTest,M3RegexDerivativeEffectsBridgeTest test\n",
+    "candidate": "name: M3 derivative regex candidate Java/JNI\non:\n  pull_request:\n    paths:\n      - 'm3/ports/precompute/**'\n      - '.github/workflows/m3-derivative-regex-port.yml'\n  workflow_dispatch:\nconcurrency:\n  group: ${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true\n\njobs:\n  derivative-java-native:\n    runs-on: ubuntu-latest\n    timeout-minutes: 40\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-java@v4\n        with:\n          distribution: temurin\n          java-version: '21'\n      - name: Build Java derivative and differential tests\n        run: |\n          mvn -B -ntp -f m3/ports/precompute/pom.xml -Dtest=RegexDerivativeTest,RegexDerivativeEffectsBridgeTest test\n      - name: Build C11 and JNI parity\n        run: |\n          mvn -B -ntp -f m3/ports/precompute/pom.xml -Pnative -Dtest=RegexDerivativeTest,RegexDerivativeEffectsBridgeTest test\n",
+    "resources": {
+      "manifest.tsv": ".github/workflows/m3-derivative-regex-port.yml\tce1c74328ec8b2b8ced3025c02f41ae0383a76438cd36fbd35677525f33dd325\t51198ff735bb5897584fb16257c26740a1bba869f47d85b2026aee7e72f6b28c\t00-post.yml.txt\n",
+      "00-post.yml.txt": "name: M3 derivative regex candidate Java/JNI\non:\n  pull_request:\n    paths:\n      - 'm3/ports/precompute/**'\n      - '.github/workflows/m3-derivative-regex-port.yml'\n  workflow_dispatch:\nconcurrency:\n  group: ${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true\n\njobs:\n  derivative-java-native:\n    runs-on: ubuntu-latest\n    timeout-minutes: 40\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-java@v4\n        with:\n          distribution: temurin\n          java-version: '21'\n      - name: Build Java derivative and differential tests\n        run: |\n          mvn -B -ntp -f m3/ports/precompute/pom.xml -Dtest=RegexDerivativeTest,RegexDerivativeEffectsBridgeTest test\n      - name: Build C11 and JNI parity\n        run: |\n          mvn -B -ntp -f m3/ports/precompute/pom.xml -Pnative -Dtest=RegexDerivativeTest,RegexDerivativeEffectsBridgeTest test\n",
+      "00-post.yml.txt.before": "name: M3 derivative regex candidate Java/JNI\non:\n  pull_request:\n    paths:\n      - 'm3/ports/precompute/**'\n      - '.github/workflows/m3-derivative-regex-port.yml'\n  workflow_dispatch:\nconcurrency:\n  group: ${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true\n\njobs:\n  derivative-java-native:\n    runs-on: ubuntu-latest\n    timeout-minutes: 40\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-java@v4\n        with:\n          distribution: temurin\n          java-version: '21'\n      - name: Build Java derivative and differential tests\n        run: |\n          mvn -B -ntp -f m3/ports/precompute/pom.xml -Dtest=M3RegexDerivativeTest,M3RegexDerivativeEffectsBridgeTest test\n      - name: Build C11 and JNI parity\n        run: |\n          mvn -B -ntp -f m3/ports/precompute/pom.xml -Pnative -Dtest=M3RegexDerivativeTest,M3RegexDerivativeEffectsBridgeTest test\n",
+      "RegexDerivativeTest.java.txt": "// SPDX-License-Identifier: Apache-2.0\n// Copyright 2026 Hitesh Soliwal and contributors\npackage jdk.m3.precompute;\n\nimport static org.junit.jupiter.api.Assertions.assertArrayEquals;\nimport static org.junit.jupiter.api.Assertions.assertEquals;\nimport static org.junit.jupiter.api.Assertions.assertFalse;\nimport static org.junit.jupiter.api.Assertions.assertThrows;\nimport static org.junit.jupiter.api.Assertions.assertTrue;\n\nimport jdk.m3.precompute.RegexDerivative.Backend;\nimport jdk.m3.precompute.RegexDerivative.Expr;\nimport java.util.List;\nimport java.util.regex.Pattern;\nimport org.junit.jupiter.api.Assumptions;\nimport org.junit.jupiter.api.Test;\n\nfinal class RegexDerivativeTest {\n  @Test\n  void literalStarSequenceMatchesJdkOracleAndPrecomputesRunPowers() {\n    Expr expression =\n        RegexDerivative.sequence(\n            RegexDerivative.literal(\"a\"),\n            RegexDerivative.star(RegexDerivative.literal(\"b\")),\n            RegexDerivative.literal(\"c\"));\n    RegexPredicateAlphabet alphabet =\n        RegexDerivative.alphabetFor(List.of(expression), null);\n    RegexDerivative compiled =\n        RegexDerivative.compile(expression, alphabet, null);\n    Pattern oracle = Pattern.compile(\"ab*c\");\n\n    for (String value :\n        List.of(\"\", \"ac\", \"abc\", \"abbbc\", \"abb\", \"cabbbc\", \"abbbcc\")) {\n      assertEquals(oracle.matcher(value).matches(), compiled.matches(value, null), value);\n    }\n\n    String longRun = \"a\" + \"b\".repeat(1_000_000) + \"c\";\n    assertTrue(compiled.matches(longRun, null));\n    assertTrue(compiled.statistics().derivativeComputations() > 0);\n    assertTrue(compiled.statistics().runPowerBits() > 1);\n    assertTrue(compiled.statistics().minimizedStates() <= compiled.statistics().reachableStates());\n    assertTrue(compiled.statistics().executionClasses() <= compiled.statistics().alphabetClasses());\n    assertEquals(\n        compiled.statistics().minimizedStates(),\n        compiled.statistics().liveStates() + compiled.statistics().deadStates());\n    assertEquals(64, compiled.programSha256().length());\n  }\n\n  @Test\n  void intersectionAndComplementAreFirstClassBooleanAlgebra() {\n    Expr any = RegexDerivative.anyString();\n    Expr containsA =\n        RegexDerivative.sequence(\n            any, RegexDerivative.literal(\"a\"), any);\n    Expr containsB =\n        RegexDerivative.sequence(\n            any, RegexDerivative.literal(\"b\"), any);\n    Expr expression =\n        RegexDerivative.intersect(\n            containsA, RegexDerivative.complement(containsB));\n    RegexPredicateAlphabet alphabet =\n        RegexDerivative.alphabetFor(List.of(expression), null);\n    RegexDerivative compiled =\n        RegexDerivative.compile(expression, alphabet, null);\n\n    assertTrue(compiled.matches(\"cat\", null));\n    assertTrue(compiled.matches(\"a\", null));\n    assertFalse(compiled.matches(\"cab\", null));\n    assertFalse(compiled.matches(\"bbb\", null));\n    assertFalse(compiled.matches(\"\", null));\n  }\n\n  @Test\n  void compileIsDeterministicAndJavaBatchUsesFrozenRleProgram() {\n    Expr expression =\n        RegexDerivative.either(\n            RegexDerivative.literal(\"dog\"),\n            RegexDerivative.literal(\"dogma\"),\n            RegexDerivative.literal(\"cat\"));\n    RegexPredicateAlphabet alphabet =\n        RegexDerivative.alphabetFor(List.of(expression), null);\n    RegexDerivative first =\n        RegexDerivative.compile(expression, alphabet, null);\n    RegexDerivative second =\n        RegexDerivative.compile(expression, alphabet, null);\n\n    assertEquals(first.programSha256(), second.programSha256());\n    assertEquals(first.statistics(), second.statistics());\n\n    RegexDerivative.BatchResult result =\n        first.matchesBatch(\n            List.of(\"dog\", \"dogma\", \"cat\", \"dogmatic\", \"\"), Backend.JAVA, null);\n    assertEquals(Backend.JAVA, result.backend());\n    assertEquals(0, result.nativeCalls());\n    assertArrayEquals(\n        new boolean[] {true, true, true, false, false}, result.matches());\n  }\n\n  @Test\n  void explicitBudgetsFailClosed() {\n    Expr expression =\n        RegexDerivative.sequence(\n            RegexDerivative.literal(\"a\"),\n            RegexDerivative.star(RegexDerivative.literal(\"b\")),\n            RegexDerivative.literal(\"c\"));\n    RegexPredicateAlphabet alphabet =\n        RegexDerivative.alphabetFor(List.of(expression), null);\n    RegexDerivative.Limits limits =\n        new RegexDerivative.Limits(64, 16, 64, 1, 64, 64, 64);\n\n    assertThrows(\n        IllegalArgumentException.class,\n        () -> RegexDerivative.compile(expression, alphabet, limits, null));\n  }\n\n  @Test\n  void nativeBatchMatchesJavaOracleWhenCompatibleLibraryIsPresent() {\n    Assumptions.assumeTrue(RegexDerivativeNative.available());\n    Expr expression =\n        RegexDerivative.either(\n            RegexDerivative.literal(\"alpha\"),\n            RegexDerivative.literal(\"beta\"));\n    RegexPredicateAlphabet alphabet =\n        RegexDerivative.alphabetFor(List.of(expression), null);\n    RegexDerivative compiled =\n        RegexDerivative.compile(expression, alphabet, null);\n    List<String> values = List.of(\"alpha\", \"beta\", \"gamma\", \"\", \"alphabet\");\n\n    boolean[] javaResult =\n        compiled.matchesBatch(values, Backend.JAVA, null).matches();\n    RegexDerivative.BatchResult nativeResult =\n        compiled.matchesBatch(values, Backend.JNI, null);\n\n    assertEquals(Backend.JNI, nativeResult.backend());\n    assertEquals(1, nativeResult.nativeCalls());\n    assertArrayEquals(javaResult, nativeResult.matches());\n  }\n}\n",
+      "RegexDerivativeEffectsBridgeTest.java.txt": "// SPDX-License-Identifier: Apache-2.0\n// Copyright 2026 Hitesh Soliwal and contributors\npackage jdk.m3.precompute;\n\nimport static org.junit.jupiter.api.Assertions.*;\nimport org.junit.jupiter.api.Test;\nimport java.util.List;\nimport java.util.regex.Pattern;\n\n/** The existing M3 DFA effects engine is the only fragment-composition owner. */\nfinal class RegexDerivativeEffectsBridgeTest {\n  @Test void existingDfaEffectBackendMatchesFullInputOracle() {\n    var expr = RegexDerivative.sequence(\n        RegexDerivative.literal(\"a\"),\n        RegexDerivative.star(RegexDerivative.literal(\"b\")),\n        RegexDerivative.literal(\"c\"));\n    var alphabet = RegexDerivative.alphabetFor(List.of(expr), null);\n    var program = RegexDerivative.compile(expr, alphabet, null);\n    var plan = program.asciiEffects(RegexDfaEffects.DEFAULT_LIMITS, null);\n    assertNotNull(plan);\n    for (String value : List.of(\"\", \"ac\", \"abc\", \"abbbc\", \"abb\", \"cab\", \"abbbcc\")) {\n      var whole = plan.summarize(value, null);\n      assertNotNull(whole);\n      assertEquals(Pattern.matches(\"ab*c\", value), plan.matches(whole), value);\n      assertEquals(program.matches(value, null), plan.matches(whole), value);\n      for (int at = 0; at <= value.length(); at++) {\n        var a = plan.summarize(value.substring(0, at), null);\n        var b = plan.summarize(value.substring(at), null);\n        var combined = plan.compose(a, b, null);\n        assertEquals(plan.matches(whole), plan.matches(combined), value);\n      }\n    }\n    assertNull(plan.summarize(\"a\\u00e9c\", null));\n    assertThrows(IllegalArgumentException.class, () -> program.matches(\"a\\ud800c\", null));\n  }\n}\n"
+    },
+    "qualifiedRecipeProof": {
+      "sealedQualificationRef": "QUALIFICATION.zlib.json"
+    }
+  },
+  "refs": {
+    "hsoliwal/M3jdk21@825c8a5b446e09120e80bddc59c4b66efb419ea1": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "825c8a5b446e09120e80bddc59c4b66efb419ea1",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/CodeTextSignalBatch.java"
+    },
+    "hsoliwal/M3jdk21@6d68312db32b4f134ca3b04280cf90ef2ceb33f5": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "6d68312db32b4f134ca3b04280cf90ef2ceb33f5",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/CodeTextSignalBatchJava.java"
+    },
+    "hsoliwal/M3jdk21@d133e0fb22fe7703a514089b4fefcf0b92e82094": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "d133e0fb22fe7703a514089b4fefcf0b92e82094",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/CodeTextSignalBatchNative.java"
+    },
+    "hsoliwal/M3jdk21@ba450cadacaa2d5fed79e5df07586fd3c6b88179": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "ba450cadacaa2d5fed79e5df07586fd3c6b88179",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/CodeTextSignals.java"
+    },
+    "hsoliwal/M3jdk21@f4ab3da4d93bb7ed588f8ca2516d5969b0774547": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "f4ab3da4d93bb7ed588f8ca2516d5969b0774547",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/CpuToolImage.java"
+    },
+    "hsoliwal/M3jdk21@8184c7a4b67a7780f418a2aad4bb28575f5fe466": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "8184c7a4b67a7780f418a2aad4bb28575f5fe466",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/CpuToolImageCompiler.java"
+    },
+    "hsoliwal/M3jdk21@bbce17fcb25d8da910503ff937d648770c244671": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "bbce17fcb25d8da910503ff937d648770c244671",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/CpuToolNativeSignals.java"
+    },
+    "hsoliwal/M3jdk21@5b46c2a25b1ddc0c2266ae6bc54165042d97f75a": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "5b46c2a25b1ddc0c2266ae6bc54165042d97f75a",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/CpuToolPlan.java"
+    },
+    "hsoliwal/M3jdk21@61ee200af87638f85bfa8e324da647296690a0e8": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "61ee200af87638f85bfa8e324da647296690a0e8",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/CpuToolRuntime.java"
+    },
+    "hsoliwal/M3jdk21@9789f2db5050b5a5c7b4afadc1f40d39eb43ad0e": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "9789f2db5050b5a5c7b4afadc1f40d39eb43ad0e",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/EditDistancePlan.java"
+    },
+    "hsoliwal/M3jdk21@9b07815cddb8f8383a979653909ee934d224f343": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "9b07815cddb8f8383a979653909ee934d224f343",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/FrozenLongTupleIndex.java"
+    },
+    "hsoliwal/M3jdk21@67446011e212ccccdd1de48926ef760c96205197": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "67446011e212ccccdd1de48926ef760c96205197",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/Histogram.java"
+    },
+    "hsoliwal/M3jdk21@74380ecf0a403eacc65c9192bc0418885731e6c6": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "74380ecf0a403eacc65c9192bc0418885731e6c6",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeAccelerator.java"
+    },
+    "hsoliwal/M3jdk21@0c20b4b19269eb219ecb4e9cba328759e71224f4": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "0c20b4b19269eb219ecb4e9cba328759e71224f4",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeAccelerators.java"
+    },
+    "hsoliwal/M3jdk21@dcc329590d1e3f79edca7aa5900e438b0aeb9eb1": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "dcc329590d1e3f79edca7aa5900e438b0aeb9eb1",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeCandidate.java"
+    },
+    "hsoliwal/M3jdk21@7dfd8e6907117916261e28d8960531299d57ac46": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "7dfd8e6907117916261e28d8960531299d57ac46",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeCapability.java"
+    },
+    "hsoliwal/M3jdk21@2eaf48f4eb9eb26f4ca2336bfd2df703d1d1baf5": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "2eaf48f4eb9eb26f4ca2336bfd2df703d1d1baf5",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeConsumerProfiles.java"
+    },
+    "hsoliwal/M3jdk21@29d2c991874a94c9a3a06c3d3f78ff38f3406200": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "29d2c991874a94c9a3a06c3d3f78ff38f3406200",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeDependencyImage.java"
+    },
+    "hsoliwal/M3jdk21@1c3787df35b2e4f316519b99a5bcb8f43d19860e": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "1c3787df35b2e4f316519b99a5bcb8f43d19860e",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeFacet.java"
+    },
+    "hsoliwal/M3jdk21@dbf645822c8a8734264c7b5a71029f84bbf932ff": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "dbf645822c8a8734264c7b5a71029f84bbf932ff",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeFacetGroup.java"
+    },
+    "hsoliwal/M3jdk21@88068864d5a3f6175ab6a972db480f9a3cebe958": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "88068864d5a3f6175ab6a972db480f9a3cebe958",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeKernel.java"
+    },
+    "hsoliwal/M3jdk21@da10991af33b327a0a9c654f4546bfcabd6a9c98": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "da10991af33b327a0a9c654f4546bfcabd6a9c98",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeManifest.java"
+    },
+    "hsoliwal/M3jdk21@8c3c8ff7d80e8c58e0749afb7c8fc93e5ddf0367": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "8c3c8ff7d80e8c58e0749afb7c8fc93e5ddf0367",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeManifestImage.java"
+    },
+    "hsoliwal/M3jdk21@f4141e9016dc7e3206aa9010608083af0b11af23": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "f4141e9016dc7e3206aa9010608083af0b11af23",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeMultipassCompiler.java"
+    },
+    "hsoliwal/M3jdk21@695720d6212dc6cfd6a5d70b9cb74d946277375b": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "695720d6212dc6cfd6a5d70b9cb74d946277375b",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputePlan.java"
+    },
+    "hsoliwal/M3jdk21@516272a8978500e3dcd31669b5f802d2c62c64d9": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "516272a8978500e3dcd31669b5f802d2c62c64d9",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputePlanner.java"
+    },
+    "hsoliwal/M3jdk21@1849c6e52c647324bfb8cc5a9da26939589dc1d1": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "1849c6e52c647324bfb8cc5a9da26939589dc1d1",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeProvider.java"
+    },
+    "hsoliwal/M3jdk21@69ba5cf7ec03f9233d839d4f7734e8b64af2ea37": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "69ba5cf7ec03f9233d839d4f7734e8b64af2ea37",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeProviders.java"
+    },
+    "hsoliwal/M3jdk21@b272015cdb0d2460647ecf9cb3365e48d436f25a": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "b272015cdb0d2460647ecf9cb3365e48d436f25a",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeReceipt.java"
+    },
+    "hsoliwal/M3jdk21@ae940b30d50d82ae77a00bf1688765879c3096e5": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "ae940b30d50d82ae77a00bf1688765879c3096e5",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeRecommendation.java"
+    },
+    "hsoliwal/M3jdk21@a115af05a6009ddcd8ce5c5890156bcb55761bd1": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "a115af05a6009ddcd8ce5c5890156bcb55761bd1",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeSnapshot.java"
+    },
+    "hsoliwal/M3jdk21@962f6580171a50e1dcff324b2ec8c871597f7e83": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "962f6580171a50e1dcff324b2ec8c871597f7e83",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeSnapshotBuilder.java"
+    },
+    "hsoliwal/M3jdk21@b30e3e91d9197f99214d4c261534e4b567910368": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "b30e3e91d9197f99214d4c261534e4b567910368",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeSource.java"
+    },
+    "hsoliwal/M3jdk21@f0a627846633d6a381c438ec4d4b07944d72e901": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "f0a627846633d6a381c438ec4d4b07944d72e901",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeWorkload.java"
+    },
+    "hsoliwal/M3jdk21@b69c706a41cc3a8ada44b8d1cc9abc3b62d35563": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "b69c706a41cc3a8ada44b8d1cc9abc3b62d35563",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/JavaIndexPrecomputeAccelerator.java"
+    },
+    "hsoliwal/M3jdk21@09e0b489bc55032e6939c62d451ed38ba9ded5db": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "09e0b489bc55032e6939c62d451ed38ba9ded5db",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/JniIndexPrecomputeAccelerator.java"
+    },
+    "hsoliwal/M3jdk21@936e058b36be21393d9420ae3330fb536ef6e22e": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "936e058b36be21393d9420ae3330fb536ef6e22e",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/LcsPlan.java"
+    },
+    "hsoliwal/M3jdk21@f4076e4e0586d609af16964a01f7ab5255030783": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "f4076e4e0586d609af16964a01f7ab5255030783",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/LiteralBatchCandidate.java"
+    },
+    "hsoliwal/M3jdk21@80892ecbd94fdf20b3ed9524b486c7aa8998ab8a": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "80892ecbd94fdf20b3ed9524b486c7aa8998ab8a",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/LongTupleIndexImage.java"
+    },
+    "hsoliwal/M3jdk21@16fbf1c176be578f201dc3959b7fdebb673ae05a": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "16fbf1c176be578f201dc3959b7fdebb673ae05a",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/LongTupleIndexView.java"
+    },
+    "hsoliwal/M3jdk21@691fed7bf97539cbec14fc2d77da7a3c79d620ae": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "691fed7bf97539cbec14fc2d77da7a3c79d620ae",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/MeasuredRope.java"
+    },
+    "hsoliwal/M3jdk21@81369bbcd3db2a532d70cb55147614a1259575a6": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "81369bbcd3db2a532d70cb55147614a1259575a6",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/NativePrecomputeOps.java"
+    },
+    "hsoliwal/M3jdk21@d607cd730012532f757ed07003f5d3eebcb5304b": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "d607cd730012532f757ed07003f5d3eebcb5304b",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/PrecomputeHashes.java"
+    },
+    "hsoliwal/M3jdk21@c00ddf8df4f42e437bbe1bc6c898f9bcd82bcffe": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "c00ddf8df4f42e437bbe1bc6c898f9bcd82bcffe",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/Progress.java"
+    },
+    "hsoliwal/M3jdk21@a0bf26bf0d9a8666caa10e2ec9a54a0607adfa39": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "a0bf26bf0d9a8666caa10e2ec9a54a0607adfa39",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/RegexDerivative.java"
+    },
+    "hsoliwal/M3jdk21@85394006729107ccd09ada250b225bba6d0587aa": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "85394006729107ccd09ada250b225bba6d0587aa",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/RegexDerivativeNative.java"
+    },
+    "hsoliwal/M3jdk21@aabec43080849c28ac4f2b8f7c44ceccf1a1aa07": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "aabec43080849c28ac4f2b8f7c44ceccf1a1aa07",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/RegexDfaEffects.java"
+    },
+    "hsoliwal/M3jdk21@bbb1d5d1fcc2b54be7e793195a33a7dec2b35ebf": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "bbb1d5d1fcc2b54be7e793195a33a7dec2b35ebf",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/RegexOracleCorpus.java"
+    },
+    "hsoliwal/M3jdk21@a7d4bef4e9f1e2ea948e589b2993fe236ada3067": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "a7d4bef4e9f1e2ea948e589b2993fe236ada3067",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/RegexOracleHarness.java"
+    },
+    "hsoliwal/M3jdk21@dc1d8a16da234b92570fa8c0411ce0455d128461": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "dc1d8a16da234b92570fa8c0411ce0455d128461",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/RegexPredicateAlphabet.java"
+    },
+    "hsoliwal/M3jdk21@4c16064a1c2edc996d72cebbb977bb929fe61bb8": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "4c16064a1c2edc996d72cebbb977bb929fe61bb8",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/RegexShape.java"
+    },
+    "hsoliwal/M3jdk21@4974519b66e0d62aa05b8e1295a54c7b2de85921": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "4974519b66e0d62aa05b8e1295a54c7b2de85921",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/RegexStringSignals.java"
+    },
+    "hsoliwal/M3jdk21@4618a3490229dafa789352f615bffcf4859bc256": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "4618a3490229dafa789352f615bffcf4859bc256",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/RegexStringTrialImage.java"
+    },
+    "hsoliwal/M3jdk21@402a15abb08ded0ac8a9301a9be8e678d4d69eff": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "402a15abb08ded0ac8a9301a9be8e678d4d69eff",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/RopeArena.java"
+    },
+    "hsoliwal/M3jdk21@3b79315f35f719b6f4d3397b3a545a7f87046347": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "3b79315f35f719b6f4d3397b3a545a7f87046347",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/RopeMeasure.java"
+    },
+    "hsoliwal/M3jdk21@c9774f58ec284dcba0af3fd1406bcc77703d9b21": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "c9774f58ec284dcba0af3fd1406bcc77703d9b21",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/RopeMeasures.java"
+    },
+    "hsoliwal/M3jdk21@a3040084f87a77b367b1d59553b37d591a8ffac0": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "a3040084f87a77b367b1d59553b37d591a8ffac0",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/RopeMetric.java"
+    },
+    "hsoliwal/M3jdk21@9867af90f57d060174ae219bb7f245cb7ef1e237": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "9867af90f57d060174ae219bb7f245cb7ef1e237",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/SimilarityBatch.java"
+    },
+    "hsoliwal/M3jdk21@94a5563a73e893a6af33c05c9112ea48ada9d02f": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "94a5563a73e893a6af33c05c9112ea48ada9d02f",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/SimilarityBatchJava.java"
+    },
+    "hsoliwal/M3jdk21@25a28db50227508a3f678ed36cb7177489d282e5": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "25a28db50227508a3f678ed36cb7177489d282e5",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/SimilarityBatchNative.java"
+    },
+    "hsoliwal/M3jdk21@34b7f4b4639ef5b9d69d3bbd8f9c1a5f8ce779f0": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "34b7f4b4639ef5b9d69d3bbd8f9c1a5f8ce779f0",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/SimilarityPrecompute.java"
+    },
+    "hsoliwal/M3jdk21@19e1986f87fec50cff7135984827aa697330c7a8": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "19e1986f87fec50cff7135984827aa697330c7a8",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/SparseUtf16LiteralPlan.java"
+    },
+    "hsoliwal/M3jdk21@1afcd42cbf00fc62c7e57cf163b6892397246fe0": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "1afcd42cbf00fc62c7e57cf163b6892397246fe0",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/SparseUtf16Stitched.java"
+    },
+    "hsoliwal/M3jdk21@d1124fd1609def2c305c01bbcd002c031a439f00": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "d1124fd1609def2c305c01bbcd002c031a439f00",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/TextMetrics.java"
+    },
+    "hsoliwal/M3jdk21@3b68c45bd4c84ca0ee694c675c9253e045339f82": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "3b68c45bd4c84ca0ee694c675c9253e045339f82",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/TextSignals.java"
+    },
+    "hsoliwal/M3jdk21@8066f19781407920ff87407f78836463738234ba": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "8066f19781407920ff87407f78836463738234ba",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/TokenRegex.java"
+    },
+    "hsoliwal/M3jdk21@8a6b660761820a0632cc581581b8330aa8207724": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "8a6b660761820a0632cc581581b8330aa8207724",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/Utf16Glob.java"
+    },
+    "hsoliwal/M3jdk21@6b14a36fd187422c22bb144a531345a6e5e77957": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "6b14a36fd187422c22bb144a531345a6e5e77957",
+      "path": "m3/ports/precompute/src/test/java/jdk/m3/precompute/RegexDerivativeTest.java"
+    },
+    "hsoliwal/M3jdk21@b3fd2e15d4d798d2fd8dae96e3c87406fa8876d9": {
+      "repository": "hsoliwal/M3jdk21",
+      "gitBlob": "b3fd2e15d4d798d2fd8dae96e3c87406fa8876d9",
+      "path": "m3/ports/precompute/src/test/java/jdk/m3/precompute/RegexDerivativeEffectsBridgeTest.java"
+    },
+    "hsoliwal/com.synexia@6bbf7714b1d16f19c005851bfe014e7d6e23ef4c": {
+      "repository": "hsoliwal/com.synexia",
+      "gitBlob": "6bbf7714b1d16f19c005851bfe014e7d6e23ef4c",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedYamlSnapshotRecipe.java"
+    },
+    "hsoliwal/com.synexia@1b0b84ab1dd08aab4c8edb5835bd00615d0cf908": {
+      "repository": "hsoliwal/com.synexia",
+      "gitBlob": "1b0b84ab1dd08aab4c8edb5835bd00615d0cf908",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ResourceEnvelope.java"
+    }
+  },
+  "referenceRoundTrip": "Exact JavaScript restore+compactJSON+LF equality verified before packaging",
+  "qualification": "Actual executed input was sealed blob d9c49d036acfd57a826b34ee22ce1c979a80ebfb; this file represents that input through existing immutable repository blobs, not another code generator."
+}
