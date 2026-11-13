@@ -1,0 +1,48 @@
+{
+  "schema": "m3.receiving-canonical-source-custody-pointer/v1",
+  "canonicalPR": "https://github.com/hsoliwal/com.synexia/pull/17307",
+  "canonicalQualificationCommit": "2983c4f47d794bffbfb9f727c610cb33d2ad17b2",
+  "canonicalCurrentEvidence": {
+    "status": "PASS_EXACT_READBACK",
+    "head": "b6f2932cdbdc8ae0da389ba07e7d2d82256238d6",
+    "rootTree": "007e936e45d3b0b983aa26200373b72d7797f377",
+    "crateTree": "c5ae6e9ba157e35597aa96379187c868bd0a4ff2",
+    "files": 54,
+    "old50FilesUnchanged": true
+  },
+  "canonicalRecipePath": "synexia-openrewrite-recipes/recipe-crates/installed-current-custody-20261113",
+  "receiverParent": "b950475c09ee212b7223765b61e90b6360ccabf6",
+  "exactEmittedPostimages": [
+    {
+      "path": "m3/collections/verify_donation.py",
+      "beforeGitBlob": "bf9bf1d58721a37857fc5cbb94e5e78dd5e59c9d",
+      "afterGitBlob": "c1cad292973e91c17b86437dd5a613f55b12a33d",
+      "SHA256": "21f8c7b1c25d4a4c7d29383a3a9f44e4fddeb0e0167094a9bc21796a239d44de",
+      "bytes": 32146
+    },
+    {
+      "path": "m3/collections/m3-donation.json",
+      "beforeGitBlob": "e103b327d0b7b8924fec260d08b00d40dd800191",
+      "afterGitBlob": "16ca6a36af3f1c44e381a057f8f6431728fe74a5",
+      "SHA256": "ec91c7d7c0a2ad755c0bf1d2a91c4520fc722385afb82575dab203865fae32f3",
+      "bytes": 81414
+    },
+    {
+      "path": "m3/collections/qualification/current-context-source-successor-20261113.tsv",
+      "beforeGitBlob": "ABSENT",
+      "afterGitBlob": "8b382ee0ead48889ff96bae6c9d46dd075323c9a",
+      "SHA256": "62db1f5618f037a996528cc789416dd43934acee90e73a4b9356d2a25c24582a",
+      "bytes": 168512
+    }
+  ],
+  "qualifiedRows": 1932,
+  "JavaMembers": 1926,
+  "refinements": 796,
+  "MavenRecipeJUnit": 10,
+  "freshPublicationReplayJUnit": 10,
+  "sourceGuardCPUChecks": 12,
+  "existingReceiverUnitTests": 7,
+  "historicalReceiptsChanged": false,
+  "fullInstalledJavaJNI": "PENDING_EXACT_HEAD_CI",
+  "phase_advance": false
+}

@@ -17,7 +17,7 @@
   "qualification_receipt": "qualification/receiving-enum-set-20261008.json",
   "application_receipt": "qualification/m3-receiving-application-20261008.json",
   "first_party_license": "Apache-2.0",
-  "copyright": "Copyright © 2026 Hitesh Soliwal and Contributors to the Synexia Project.",
+  "copyright": "Copyright \u00a9 2026 Hitesh Soliwal and Contributors to the Synexia Project.",
   "rights_rule": "Preserve original donor attribution and Apache-2.0; OpenJDK and other third-party rights stay per file. Recipe rights do not relicense generated payloads.",
   "scope": "SEPARATELY_BUILT_COLLECTION_MODULE",
   "java_base_or_hotspot_promoted": false,
@@ -1128,7 +1128,7 @@
     "linux_acceptance": "PENDING_LINUX",
     "phase_advance": false
   },
-  "source_set_successor_current": "module_source_successor_20261109",
+  "source_set_successor_current": "current_context_source_successor_20261113",
   "tools4j_unix_refinement_20261019": {
     "schema": "M3_COLLECTION_EXACT_SOURCE_REFINEMENT_V1",
     "receiver_baseline": "677437be295b23f7ccf7409be287008944d0e8b0",
@@ -1229,5 +1229,39 @@
     "recipe": "com.synexia .m3/task-crates/release-blocker8-tools4j-rows-20261030/tools/fix_donation_ledger.py",
     "phase_advance": false,
     "sealed_tree_head": "43121da20d7a032e3b7dcd3b3bf54b3773deb5c8"
+  },
+  "current_context_source_successor_20261113": {
+    "schema": "M3_COLLECTION_EXACT_SOURCE_REFINEMENT_V2",
+    "successor_receipt": "qualification/current-context-source-successor-20261113.tsv",
+    "successor_receipt_sha256": "62db1f5618f037a996528cc789416dd43934acee90e73a4b9356d2a25c24582a",
+    "receipt_columns": [
+      "path",
+      "inherited_sha256",
+      "final_received_sha256_or_REMOVED"
+    ],
+    "inherited_composed_manifest_sha256": "82bf706fcaa997feb84806b87923f7fb4a275eeb19dfcfcd4d6d3049db0b372a",
+    "inherited_rows": 1932,
+    "successor_rows": 796,
+    "refined_rows": 796,
+    "added_rows": 0,
+    "removed_rows": 0,
+    "resulting_rows": 1932,
+    "exact_java_source_membership": 1926,
+    "predecessor_successor": "module_source_successor_20261109",
+    "historical_baseline_commit": "4cc4c4b58b22e953567f79e50b42cc5fafa1a8de",
+    "current_source_commit": "b950475c09ee212b7223765b61e90b6360ccabf6",
+    "qualification": {
+      "exactOpeningCommentByte": 756,
+      "otherParserEquivalentComments": 37,
+      "codeChanges": 3,
+      "runtimeReferences": [
+        "com.synexia PR17262 CountTotals",
+        "com.synexia PR17242 ZeroMask",
+        "canonical recipe proof/THREADOPS.json"
+      ],
+      "fullInstalledRuntime": "NOT_RUN"
+    },
+    "recipe": "synexia-openrewrite-recipes/recipe-crates/installed-current-custody-20261113",
+    "phase_advance": false
   }
 }
