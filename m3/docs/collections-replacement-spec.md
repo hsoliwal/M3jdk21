@@ -656,3 +656,98 @@ Short JDK-like names are preferred for new non-JDK public types when they remain
 
 No representation is promoted merely because it is compact. The JDK contract, iterator/view,
 serialization, concurrency, callback and exception semantics remain authoritative.
+
+## 23. Standards and evidence for collection migration
+
+The operational migration authority remains `migration.records` in
+[`name-mapping.json`](name-mapping.json). This section explains how to qualify
+references in those records; it does not create another migration queue.
+
+| Reference | Role and Java 21 applicability | Required treatment |
+| --- | --- | --- |
+| [JSR 396: Java SE 21](https://jcp.org/en/jsr/detail?id=396) | Platform specification baseline for this receiver. | Bind each affected API, language or VM obligation to the Java 21 edition and its concrete owner. A JSR identifier alone is not an implementation or a passing compatibility test. |
+| [Java 21 JLS, sections 4.2.1 and 4.2.2](https://docs.oracle.com/javase/specs/jls/se21/html/jls-4.html#jls-4.2.2) | Defines the signed 64-bit `long` domain and ordinary integer arithmetic. | Preserve wraparound in primitive arithmetic, including `LongLongHashMap.addTo`; do not substitute checked or saturating arithmetic. |
+| [JSR 337: Java SE 8](https://jcp.org/en/jsr/detail?id=337) | Historical platform context for older source donors. | Retain the donor's original specification level as provenance; review its behavior against Java 21 before reception. |
+| [JEP 431: Sequenced Collections](https://docs.oracle.com/en/java/javase/21/core/creating-sequenced-collections-sets-and-maps.html) | Delivered in Java 21. Relevant to owners exposing `SequencedCollection`, `SequencedSet` or `SequencedMap` contracts. | Preserve encounter order, first/last operations and reverse-view behavior where applicable. These requirements do not dictate a physical array layout. They do not apply merely because a primitive class is called a map. |
+| [JDK-8266571 and CSR JDK-8266572](https://github.com/openjdk/jdk/pull/7387) | Implementation and compatibility review evidence for Sequenced Collections. The integrated implementation is pinned by [OpenJDK commit 17ce0976e442d5fabb14daed40fa9a768989f02e](https://github.com/openjdk/jdk/commit/17ce0976e442d5fabb14daed40fa9a768989f02e). | Distinguish the implementation issue from its CSR. Neither is evidence that an unrelated primitive-map optimization fixes a JBS issue. |
+| A Synexia, OpenJDK or external donor source | Implementation evidence, with its own contract and licence provenance. | Record repository, immutable commit, path, symbol and content hash; distinguish the adopted algorithm from any storage or API behavior that is not adopted. |
+
+For JBS-backed changes, retain the concrete issue, affected versions, integrated
+commit and regression test when available. For a candidate without such evidence,
+record that no JBS fix is claimed. Do not assign a nearby bug number to make the
+candidate appear upstream-qualified.
+
+For generic Java 21 collection owners, use the versioned API specification as
+the contract source. In particular,
+[`SequencedCollection`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SequencedCollection.html)
+defines a reverse-ordered view; a reversed copy does not satisfy that view
+relationship. The applicable set/map API and the concrete owner's mutability,
+ordering, equality, serialization and concurrency rules remain separate
+obligations.
+
+### 23.1 Existing primitive long-to-long receiver
+
+The existing migration record is `synexia.collections.long-long-add-to`.
+Its current receiver is `jdk.m3.collections.LongLongHashMap` in
+`src/jdk.m3.collections/share/classes/jdk/m3/collections/LongLongHashMap.java`.
+It already stores keys, values and occupancy in `long[]`, `long[]` and
+`byte[]` lanes. A refinement of its probe path is an operation optimization;
+it does not newly arrayify the owner or remove previously allocated entry nodes.
+
+The source-side primitive map and the receiver are not interchangeable:
+
+| Concern | Receiver obligation |
+| --- | --- |
+| `put(long,long)` | Return whether a new key was inserted; do not adopt a donor method's previous-value return contract. |
+| `addTo(long,long)` | Treat absence as zero, insert on zero delta, return the resulting value and preserve Java `long` wraparound. |
+| Key domain | Keep zero and every other `long` in the ordinary occupancy lanes; do not import a separate zero-key sentinel owner. |
+| Deletion and reuse | Preserve the receiver's tombstones, first reusable slot, occupied count and existing compaction behavior. |
+| Existing-key update | Preserve capacity, slot coordinates and modification epoch so live iterators retain their existing validity. |
+| Absent-key insertion | Preserve growth thresholds, growth-before-publication behavior and exactly the existing structural modification accounting. |
+| Representation and public surface | Retain the three existing primitive lanes and all pre-existing descriptors; do not introduce an alternate collection family. |
+
+A combined lookup/insertion probe may retain the first deleted slot while
+continuing to establish whether the key already exists. Once absence is known,
+that coordinate may be reused without repeating the same probe. Growth changes
+the coordinates, so insertion into a newly grown table must still locate a slot
+in that table. The optimization must not describe all insertion paths as
+requiring only one probe.
+
+This primitive owner does not implement `java.util.Map` or
+`java.util.SequencedMap`. JEP 431 and its implementation/CSR are therefore
+not applicable gates for this refinement. They remain applicable to separate
+generic collection migrations that expose those Java 21 interfaces.
+
+Keep the source-to-recipe-to-receiver linkage and preserved historical targets
+in the existing migration record. Exact recipe execution, API comparison,
+differential behavior, performance observations and receiver acceptance belong
+in that record's evidence. A bounded component proof does not establish
+installed-image acceptance, all-platform qualification or a production
+performance improvement. Maven metadata describes how the canonical recipe
+and its proof are built; it is not a substitute for those executed gates.
+
+### 23.2 Primitive int-to-long conditional removal
+
+The additional scoped record is `synexia.collections.int-long-conditional-remove`
+for the existing `jdk.m3.collections.IntLongHashMap.remove(int,long)`. This owner
+already uses `int[]` and `long[]` lanes, a separate zero-key state and back-shift
+deletion. Its successful nonzero conditional removal now reuses the matched slot
+for deletion. The zero-key path, false results for absence or value mismatch,
+physical lane contents, capacity, size, modification epoch and public descriptors
+remain the receiver's contract. No LongLong occupancy/tombstone policy is imported.
+
+The canonical recipe remains in Synexia's existing
+`m3-intint-conditional-remove-20261030` crate, with a distinct IntLong dataset.
+Java SDK qualification and the selected receiver's Maven/JUnit, independent
+physical/model differential and API observations are recorded in the
+[passive IntLong receipt](../compatibility/intlong-known-slot-20261112-receipt.json).
+They do not establish installed-image, all-platform or production-performance
+admission. This primitive operation has no JEP 431 or JBS bug-fix association.
+
+The analogous fused IntInt experiment remains rejected for product use. A replay
+of its historical collision diagnostic on five JVM forks observed matched
+remove/reinsert medians of 81 to 102 ns at 32 colliding keys and 229 to 288 ns at
+96 colliding keys, about 26% higher time per operation. The receipt retains the
+measured diagnostic data and its scope. These single-host measurements are not a
+universal performance result. No IntInt source, test or target record is changed
+by this IntLong refinement.

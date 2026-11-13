@@ -1,0 +1,67 @@
+{
+  "schema": "M3_COLLECTION_RANK_MODE_RECEIVER_V1",
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "baseCommit": "1ac43631c3ee44bc5fb5fc55dd9ccfac09b38d5b",
+    "path": "m3/collections/qualification/full-java-jni-20261018/verify.py",
+    "preGitBlob": "7c2bfa47b925a93e48cb444d95364779c1ad0266",
+    "postGitBlob": "418b7c6c9d0c82586f2b37532f3f6214aed58f14",
+    "preSha256": "87141db0336fcc135ba85fb7f43a351aba8e0edc6890ab3c04d1235e43aa2dd3",
+    "postSha256": "4e6bc97e6a22a1f3dd9d350e1cea9fd87f7db584d22e0156c34d6743a9dbc0ab",
+    "postBytes": 22193
+  },
+  "canonical": {
+    "repository": "hsoliwal/com.synexia",
+    "sourcePullRequest": 17234,
+    "merged": true,
+    "revision": "81671564e5e3ffd3db24ed923230de2762221b3a",
+    "crate": "synexia-openrewrite-recipes/recipe-crates/collection-rank-mode-20261113",
+    "recipe": "M3HashPinnedTextSnapshotRecipe",
+    "recipeName": "m3-collection-rank-mode-20261113",
+    "manifestGitBlob": "f1bd8fd73ca037fa4cb1623d4f398772e395312e",
+    "postimageResourceGitBlob": "418b7c6c9d0c82586f2b37532f3f6214aed58f14",
+    "mavenVerifyGitBlob": "f471ab933550508e06377feb3fb0b4193484ef92"
+  },
+  "behavior": {
+    "change": "rank JNI opt-in false only in Java fallback with intentionally missing collection library; true in required-native and explicit standalone mode",
+    "unchanged": [
+      "complete -Dtest=* suite selection",
+      "required-array JNI",
+      "existing JNI/C17/UBSan checks",
+      "26 native libraries and 35 C sources",
+      "20 explicit contracts",
+      "source and JNI signatures",
+      "public API and storage layout"
+    ],
+    "noExecutableRecipeTransfer": true
+  },
+  "qualification": {
+    "canonicalSourceRecipe": "PASS_LOCAL_FROZEN_PROFILE_REPORTED_BY_SYNXIA_PR_17234",
+    "canonicalStrictJava21": "PASS_REPORTED",
+    "canonicalOpenRewriteJUnit": 8,
+    "canonicalCpuChecks": 26,
+    "canonicalRefusalFixedPoint": "PASS_REPORTED",
+    "canonicalActualJniRankChecks": 237179,
+    "canonicalJavaFallbackChecks": 172254,
+    "targetPreimage": "EXACT_GITHUB_BLOB",
+    "targetPostimage": "EXACT_GITHUB_READBACK",
+    "targetPythonCompile": "NOT_RUN",
+    "targetCollectionsCI": "NOT_RUN",
+    "targetInstalledImage": "NOT_RUN",
+    "targetRelease": "HOLD",
+    "productPromotion": false
+  },
+  "dependencies": {
+    "priorReceiverPR": 2966,
+    "priorRecipePR": 17211,
+    "unresolved": [
+      "ZeroMaskSuccessorIT native-only integration selection",
+      "M3EnumSet source identity drift",
+      "full Linux collection native/Java gate",
+      "installed JDK image",
+      "String phase",
+      "Maven release control receipt"
+    ]
+  },
+  "decision": "DRAFT_RECEIVING_ONLY_DO_NOT_MERGE_WITHOUT_INDEPENDENT_TARGET_PROOF"
+}

@@ -1,0 +1,77 @@
+{
+  "schema": "M3_ZERO_MASK_JNI_TEST_MODE_RECEIVER_V1",
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "baseCommit": "1ac43631c3ee44bc5fb5fc55dd9ccfac09b38d5b",
+    "path": "test/jdk/jdk/m3/collections/ZeroMaskSuccessorIT.java",
+    "preGitBlob": "0423189bb6852f1f2fa54d12db5fc826fff5fa08",
+    "postGitBlob": "62e88757b3a62edacef9f00949a2065c23bc6754",
+    "preSha256": "4a2dc3beecb1d663f1a9ee760938b9f9c8963501ffa77a288c3785c6c78273b6",
+    "postSha256": "1922f17aeb550269d60bac54c3f64ca3ae4367105e356cddfa8dd242f52d7963",
+    "postBytes": 918
+  },
+  "canonical": {
+    "repository": "hsoliwal/com.synexia",
+    "mergedRecipePR": 17242,
+    "recipeHeadCommit": "83aa605eaa54ba570c22b4aa6f6ebd061ee62069",
+    "followOnRequalificationPR": 17256,
+    "followOnStateObserved": "OPEN_DRAFT_NOT_MERGED",
+    "recipeCrate": "synexia-openrewrite-recipes/recipe-crates/zero-mask-native-mode-20261113",
+    "manifestGitBlob": "2139f7fd300ad3f1d12ec0d7f2e2f057cbcc80ca",
+    "outputResourceGitBlob": "62e88757b3a62edacef9f00949a2065c23bc6754"
+  },
+  "scope": {
+    "kind": "TEST_ONLY_RECEIVER",
+    "change": "gate exactly the two required-native integration tests on existing m3.collections.all.native.required property true",
+    "propertyValue": "(?i)true",
+    "unchanged": [
+      "two JUnit test method bodies",
+      "int and long NATIVE_REQUIRED oracle calls",
+      "nativeAvailable preconditions",
+      "production Java and JNI symbols",
+      "Java fallback oracle tests",
+      "public JDK APIs"
+    ],
+    "recipeAndEngineTransferred": false
+  },
+  "evidence": {
+    "canonicalMaven": "PASS_LOCAL_FROZEN_PROFILE_REPORTED_BY_SYNXIA_PR_17242",
+    "canonicalJUnit": 11,
+    "canonicalCpuChecks": 7,
+    "strictJava21AndC17": "PASS_REPORTED",
+    "javaModeMissingNative": {
+      "passed": 2,
+      "failed": 0,
+      "skipped": 2
+    },
+    "nativeRequiredMissingProvider": {
+      "passed": 2,
+      "failed": 2,
+      "skipped": 0,
+      "expectedFailure": true
+    },
+    "nativeRequiredRealProvider": {
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0
+    },
+    "canonicalFixedPointAndRefusal": "PASS_REPORTED",
+    "currentEngineDependencyRequalification": "OPEN_DRAFT_PR_17256",
+    "targetExactGitBlob": "PASS_GITHUB_BLOB_READBACK",
+    "targetJava21Compile": "NOT_RUN",
+    "targetCompleteSuite": "NOT_RUN",
+    "targetNativeJNI": "NOT_RUN",
+    "targetInstalledImage": "NOT_RUN",
+    "promotion": "HOLD"
+  },
+  "dependencies": {
+    "relatedProductReceiverPR": 2968,
+    "knownBlockers": [
+      "exact current SDK requalification PR17256 must be accepted",
+      "full target Linux/native CI and source-built installed-image proof",
+      "M3EnumSet installed-source manifest drift",
+      "String and Maven control release qualification"
+    ]
+  },
+  "disposition": "DRAFT_ONLY_NO_MERGE_OR_RELEASE"
+}

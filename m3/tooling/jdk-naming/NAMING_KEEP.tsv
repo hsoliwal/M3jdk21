@@ -45,3 +45,11 @@ m3/tooling/name-contract/name-plan.json	LINEAGE_ID	mapping ids name the donor co
 m3/tooling/name-contract/test_check.py	DETECTOR	negative test: the legacy symbol com.m3.arrays.M3Arrays must be rejected by the name contract
 m3/tooling/name-contract/test_schema.py	DETECTOR	negative test: the legacy symbol com.m3.arrays.M3Arrays must be rejected by the name contract
 test/jdk/java/lang/String/M3CanonicalApiBoundaryTest.java	DETECTOR	negative test: rejectInternalSurface("com.m3.collections.SlotArray") proves the legacy surface is refused
+m3/compatibility/check_m3_full_borrow_receiver.py	PIN	matches immutable Synexia schema, donor paths and ownership values in preserved full-borrow ledgers; implementation naming cannot rename those source identities
+m3/compatibility/test_m3_full_borrow_receiver.py	DETECTOR	regression detector for exact full-borrow provenance identifiers and refusal of renamed or malformed historical identities
+m3/runtime-integration/regex-precompute/verify.py	PIN	passive receipt names SYNEXIA_SEPARATE_GATE as the distinct canonical recipe execution obligation; target runtime verification does not execute recipes
+m3/runtime-integration/check-m3string-invariants.py	LINEAGE_ID	checks immutable canonical Synexia recipe IDs and resource paths alongside current target String source invariants
+m3/m3-import/current-full-borrow/check_string_phase.py	PIN	validates retained Synexia source and recipe identities in exact historical String-phase ledgers and additive chronology observations
+m3/m3-import/current-full-borrow/test_string_phase_successors.py	DETECTOR	regression detector for preserved String-phase provenance schemas, exact source hashes and refusal of unsupported phase promotion
+m3/runtime-integration/verify-recipe-ownership.py	PIN	reads canonical_synexia_owner and SYNEXIA_CANONICAL_RESIDUE from the preserved classification ledger; canonical owners retain com.synexia identities
+m3/runtime-integration/test_recipe_ownership.py	DETECTOR	regression detector for exact historical recipe custody schema and fail-closed missing, stale, duplicate or incorrectly renamed ownership rows

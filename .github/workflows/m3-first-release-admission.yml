@@ -210,9 +210,9 @@ jobs:
           retention-days: 90
 
   control-reactor:
-    name: M3jdk21 Maven control-reactor receipt
-    runs-on: ubuntu-22.04
-    timeout-minutes: 15
+    name: M3JDK21 Maven control-reactor execution
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -221,28 +221,45 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Require the M3jdk21-produced Maven control-reactor receipt
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Execute the complete product Maven control reactor
+        env:
+          EXPECTED_SOURCE_COMMIT: ${{ github.sha }}
         shell: bash
         run: |
           set -euo pipefail
-          # release-contract.json execution_evidence.gate_owners: M3_MAVEN_CONTROL_REACTOR is produced inside
-          # hsoliwal/M3jdk21 from M3jdk21 sources (standalone rule, 2026-10-31). This read-only consumer requires
-          # the same mandatory Maven gate; missing proof fails. It checks out and fetches nothing else.
+          python3 m3/release/run_maven_control_reactor.py --root . \
+            --expected-commit "$EXPECTED_SOURCE_COMMIT" \
+            --out "$RUNNER_TEMP/m3-maven-control" --timeout-seconds 1800
+      - name: Require the same-run product Maven receipt
+        if: always()
+        env:
+          MAVEN_EVIDENCE: ${{ runner.temp }}/m3-maven-control/evidence.json
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Product execution and canonical transformation provenance have separate owners.
+          # This consumer reads only the exact evidence produced above, including HOLD/FAIL.
           python3 - <<'PYCODE'
           import importlib.util
           import json
+          import os
           from pathlib import Path
           path = Path('m3/release/verify_release_admission.py')
           spec = importlib.util.spec_from_file_location('release_admission', path)
           module = importlib.util.module_from_spec(spec)
           spec.loader.exec_module(module)
-          result = module.validate(Path('.'))
+          result = module.validate(Path('.'), evidence_path=Path(os.environ['MAVEN_EVIDENCE']))
           name = 'gate:M3_MAVEN_CONTROL_REACTOR'
           checks = [check for check in result['checks'] if check['name'] == name]
           print(json.dumps({'source_commit': result['source_commit'],
                             'canonical_maven_gate': checks}, sort_keys=True))
           if not result['policy_valid'] or len(checks) != 1 or checks[0]['status'] != 'PASS':
-              raise SystemExit('HOLD: execute and qualify the source-bound Maven/OpenRewrite control reactor inside hsoliwal/M3jdk21 from M3jdk21 sources (release-contract.json execution_evidence.gate_owners); attach the exact command, source pins and raw artifact hashes. This job consumes the receipt and never executes recipe sources.')
+              raise SystemExit('HOLD: the same-run full product Maven execution is not qualified; inspect the producer artifacts. Canonical recipe provenance never substitutes for product execution.')
           PYCODE
       - name: Full-family and receiving-policy verification
         if: always()
@@ -251,6 +268,15 @@ jobs:
             python3 m3/compatibility/check_m3_full_family.py
             python3 -m unittest discover -s m3/compatibility -p 'test_m3_full_family.py' -v
           fi
+
+      - name: Upload product Maven execution or refusal evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-maven-control-${{ github.sha }}
+          path: ${{ runner.temp }}/m3-maven-control
+          if-no-files-found: error
+          retention-days: 90
 
   release-proof-summary:
     name: proof summary

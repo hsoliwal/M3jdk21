@@ -20,21 +20,101 @@ DEPENDENCIES = ('apiguardian-api', 'opentest4j', 'univocity-parsers',
                 'junit-jupiter-api-5.10.2', 'junit-jupiter-params-5.10.2',
                 'junit-jupiter-engine-5.10.2', 'junit-jupiter-5.10.2')
 # Existing library names and generated JNI headers; no second native owner.
-LIBRARIES = {
-    'm3_collections_mask': [('m3_index_mask_compactor.c', 'M3IndexMaskCompactor'),
-                            ('m3_index_mask_window.c', 'M3IndexMaskWindow')],
-    'm3_collections_pathmask': [('m3_index_path_masks.c', 'M3IndexPathMasks')],
-    'm3_collections_long_path_masks': [('m3_long_index_path_masks_jni.c', 'M3LongIndexPathMasksJNI')],
-    'm3_collections_address': [('m3_long_address_kernel.c', 'M3LongAddressKernel')],
-    'm3_collections_span': [('m3_span_index_jni.c', 'M3SpanIndex')],
-    'm3_collections_statehist': [('m3_state_mask_histogram.c', 'M3StateMaskHistogram')],
-    'm3rankbatch': [('m3_long_rank_batch_jni.c', 'M3LongRankBatchNative')],
-    'm3signalorder': [('m3_signal_order_jni.c', 'M3SignalOrderNative'),
-                      ('m3_object_signal_jni.c', 'M3ObjectSignalOps')],
-    'm3_residency_state_mask': [('m3_residency_state_mask.c', 'M3ResidencyStateMaskIndex')],
-    'm3_disjoint_index': [('m3_disjoint_index.c', 'M3DisjointIndex')],
-    'm3bitlane': [('segmented_bit_lane.c', 'M3BitLane28')],
-}
+LIBRARIES = {'m3_disjoint_index': {'sources': ['collections/m3_disjoint_index.c'],
+                       'owners': ['jdk.internal.m3.collections.DisjointIndex'],
+                       'requires': None},
+ 'm3_collections_address': {'sources': ['collections/m3_long_address_kernel.c'],
+                            'owners': ['jdk.internal.m3.collections.LaneAlgorithms',
+                                       'jdk.m3.collections.LongAddressKernel'],
+                            'requires': None},
+ 'm3_collections_long_path_masks': {'sources': ['collections/m3_long_index_path_masks_jni.c'],
+                                    'owners': ['jdk.internal.m3.collections.LongIndexPathMasksJNI'],
+                                    'requires': None},
+ 'm3rankbatch': {'sources': ['collections/m3_long_rank_batch_jni.c'],
+                 'owners': ['jdk.internal.m3.collections.LongRankBatchNative'],
+                 'requires': None},
+ 'm3signalorder': {'sources': ['collections/m3_object_signal_jni.c', 'collections/m3_signal_order_jni.c'],
+                   'owners': ['jdk.internal.m3.collections.ObjectSignalOps',
+                              'jdk.m3.collections.SignalOrderNative'],
+                   'requires': None},
+ 'm3_residency_state_mask': {'sources': ['collections/m3_residency_state_mask.c'],
+                             'owners': ['jdk.internal.m3.collections.ResidencyStateMaskIndex'],
+                             'requires': None},
+ 'm3_collections_statehist': {'sources': ['collections/m3_state_mask_histogram.c'],
+                              'owners': ['jdk.internal.m3.collections.sketch.StateMaskHistogram'],
+                              'requires': None},
+ 'm3_collections_mask': {'sources': ['collections/m3_index_mask_compactor.c',
+                                     'collections/m3_index_mask_window.c',
+                                     'collections/m3_index_mask_search.c'],
+                         'owners': ['jdk.m3.collections.IndexMaskCompactor',
+                                    'jdk.m3.collections.IndexMaskWindow'],
+                         'requires': None},
+ 'm3_collections_pathmask': {'sources': ['collections/m3_index_path_masks.c'],
+                             'owners': ['jdk.m3.collections.IndexPathMasks'],
+                             'requires': None},
+ 'm3_collections_span': {'sources': ['collections/m3_span_index_jni.c'],
+                         'owners': ['jdk.m3.collections.SpanIndex'],
+                         'requires': None},
+ 'm3bitlane': {'sources': ['collections/segmented_bit_lane.c'],
+               'owners': ['jdk.m3.collections.BitLane28'],
+               'requires': None},
+ 'm3_packed_integer': {'sources': ['collections/m3_packed_integer_jni.c'],
+                       'owners': ['jdk.internal.m3.collections.packed.PackedNative'],
+                       'requires': None},
+ 'm3_big_longs': {'sources': ['collections/m3_big_longs.c'],
+                  'owners': ['jdk.internal.m3.collections.packed.PrimitiveBigNative'],
+                  'requires': None},
+ 'm3_doop_frozen_mask': {'sources': ['collections/m3_doop_frozen_mask.c'],
+                         'owners': ['jdk.internal.m3.collections.DoopFrozenMaskedViewport'],
+                         'requires': None},
+ 'm3_doop_mask_window': {'sources': ['collections/m3_doop_mask_window.c'],
+                         'owners': ['jdk.internal.m3.collections.DoopMaskedWindowScan'],
+                         'requires': None},
+ 'm3_count_lanes': {'sources': ['collections/m3_count_lanes.c'],
+                    'owners': ['jdk.internal.m3.collections.CountLanes'],
+                    'requires': None},
+ 'm3_count_totals': {'sources': ['collections/m3_count_totals.c'],
+                     'owners': ['jdk.internal.m3.collections.CountTotals'],
+                     'requires': None},
+ 'm3maskviewport': {'sources': ['m3maskviewport.c'],
+                    'owners': ['jdk.internal.m3.collections.MaskViewportNative'],
+                    'requires': None},
+ 'm3_value_bits': {'sources': ['collections/m3_value_bits.c'],
+                   'owners': ['jdk.internal.m3.collections.PrimitiveFloat16'],
+                   'requires': 'M3_C_IEC_559'},
+ 'm3_primitive_order': {'sources': ['collections/primitive_order_jni.c'],
+                        'owners': ['jdk.m3.collections.PrimitivePartialSort$LongOrder'],
+                        'requires': None},
+ 'm3_collections_packed': {'sources': ['collections/packed_array_bulk.c',
+                                       'collections/packed_heap_selection.c',
+                                       'collections/packed_sorted_sets.c',
+                                       'collections/packed_stable_filter.c',
+                                       'collections/packed_long_mask_page.c',
+                                       'collections/packed_swiss_probe_jni.c',
+                                       'collections/segmented_short_lane.c',
+                                       'collections/segmented_bit_lane.c'],
+                           'owners': ['jdk.internal.m3.collections.packed.PackedArrayNative',
+                                      'jdk.internal.m3.collections.packed.PackedSelectionNative',
+                                      'jdk.internal.m3.collections.packed.PackedLongMaskPageNative',
+                                      'jdk.internal.m3.collections.packed.PackedSwissNative',
+                                      'jdk.internal.m3.collections.range.SegmentedShortLane28',
+                                      'jdk.m3.collections.BitLane28'],
+                           'requires': None},
+ 'm3_mat_csr': {'sources': ['collections/m3csrtranspose.c'],
+                'owners': ['jdk.internal.m3.collections.mat.MatCsrGraph'],
+                'requires': None},
+ 'm3_matfilter': {'sources': ['collections/mat_int_filter_jni.c'],
+                  'owners': ['jdk.internal.m3.collections.mat.MatIntFilterKernel'],
+                  'requires': None},
+ 'm3_marker_topk': {'sources': ['collections/m3_marker_topk_jni.c'],
+                    'owners': ['jdk.internal.m3.collections.sketch.MarkerTopKNative'],
+                    'requires': None},
+ 'm3_mat_row': {'sources': ['collections/mat_int_row_jni.c'],
+                'owners': ['jdk.internal.m3.collections.mat.MatIntRowKernel'],
+                'requires': None},
+ 'm3_packed_int_width': {'sources': ['collections/packed_int_width.c'],
+                         'owners': ['jdk.internal.m3.collections.packed.PackedIntNative'],
+                         'requires': None}}
 
 def run(args):
     print('+ ' + ' '.join(map(str, args)), flush=True)
@@ -113,63 +193,81 @@ def main():
     # controls; providing the library must not weaken allocation failure rules.
     maven(ROOT / 'm3/arrays/pom.xml', '-Dm3.arrays.native.required=true',
           '-DargLine=-Xcheck:jni ' + array_native_option,
-          '-Dtest=M3ArrayAllocationAtomsTest', '-DfailIfNoTests=true', 'test')
+          '-Dtest=ArrayAllocationAtomsTest', '-DfailIfNoTests=true', 'test')
     dependency_proof['jdk.m3.arrays'] = {
         'jar_sha256': sha(array_jar), 'native_sha256': sha(array_native),
-        'allocation_contract': 'M3ArrayAllocationAtomsTest'}
-    sources = sorted((MODULE / 'src/main/java').rglob('*.java'))
-    tests = sorted((MODULE / 'src/test/java').rglob('*.java'))
+        'allocation_contract': 'ArrayAllocationAtomsTest'}
+    sources = sorted({path for base in (MODULE / 'src/main/java',
+        ROOT / 'src/jdk.m3.collections/share/classes/jdk/internal/m3/collections',
+        ROOT / 'src/jdk.m3.collections/share/classes/jdk/m3/collections')
+        for path in base.rglob('*.java')})
+    tests = sorted({path for base in (MODULE / 'src/test/java',
+        ROOT / 'test/jdk/jdk/internal/m3/collections', ROOT / 'test/jdk/jdk/m3/collections')
+        for path in base.rglob('*.java')})
     (OUT / 'main.args').write_text('\n'.join(map(str, sources)) + '\n')
     run([JAVA / 'bin/javac', '--release', '21', '-Xlint:all,-module', '-Werror', '-Xpkginfo:always',
          '--module-path', array_jar, '-h', OUT / 'headers', '-d', OUT / 'classes',
          '@' + str(OUT / 'main.args')])
-    native = MODULE / 'src/main/native/collections'
-    admitted = {native / name for rows in LIBRARIES.values() for name, _ in rows}
-    actual = set(native.glob('*.c'))
+    native = ROOT / 'src/jdk.m3.collections/share/native/libm3collections'
+    admitted = {native / name for entry in LIBRARIES.values() for name in entry['sources']}
+    actual = set(native.rglob('*.c'))
     if admitted != actual:
         missing = sorted(str(path.relative_to(ROOT)) for path in admitted - actual)
         unexpected = sorted(str(path.relative_to(ROOT)) for path in actual - admitted)
         raise RuntimeError('Native source inventory changed; missing=' + repr(missing)
                            + '; unexpected=' + repr(unexpected))
-    cc = [os.environ.get('CC', 'cc'), '-std=c17', '-Wall', '-Wextra', '-Werror',
+    cc = [os.environ.get('CC', 'cc'), '-std=c17', '-Wall', '-Wextra', '-Werror', '-Wconversion', '-Wshadow', '-Wpedantic',
           '-fsanitize=undefined', '-fno-sanitize-recover=undefined', '-O2',
           '-I' + str(JAVA / 'include'), '-I' + str(JAVA / 'include/linux'),
-          '-I' + str(OUT / 'headers')]
-    for library, rows in LIBRARIES.items():
+          '-I' + str(OUT / 'headers'), '-I' + str(ROOT / 'm3/native/include')]
+    for library, entry in LIBRARIES.items():
         objects = []
-        for name, owner in rows:
-            obj = OUT / 'native' / (name + '.o')
-            run(cc + ['-fPIC', '-include', OUT / 'headers' / ('jdk_m3_collections_' + owner + '.h'),
-                      '-c', native / name, '-o', obj])
+        headers = [OUT / 'headers' / (owner.replace('.', '_').replace('$', '_') + '.h')
+                   for owner in entry['owners']]
+        for name in entry['sources']:
+            obj = OUT / 'native' / (Path(name).name + '.o')
+            includes = [argument for header in headers for argument in ('-include', header)]
+            run(cc + ['-fPIC', *includes, '-c', native / name, '-o', obj])
             objects.append(obj)
         run(cc + ['-shared', *objects, '-o', OUT / 'native' / ('lib' + library + '.so')])
     # Existing navigation fixture has its own test-only JNI ABI; keep it out of the product library.
     run([JAVA / 'bin/javac', '--release', '21', '-Xlint:all,-module', '-Werror',
          '-cp', OUT / 'classes', '-h', OUT / 'headers', '-d', OUT / 'fixture-classes',
-         MODULE / 'src/test/java/jdk/m3/collections/M3BitLaneJumpProof.java'])
-    run(cc + ['-shared', '-fPIC', '-include', OUT / 'headers/jdk_m3_collections_M3BitLaneJumpProof.h',
-              MODULE / 'src/test/native/m3_bitlane_jump_jni.c', '-o',
+         ROOT / 'test/jdk/jdk/m3/collections/BitLaneJumpProof.java'])
+    run(cc + ['-shared', '-fPIC', '-include', OUT / 'headers/jdk_m3_collections_BitLaneJumpProof.h',
+              ROOT / 'test/jdk/jdk/m3/collections/native/m3_bitlane_jump_jni.c', '-o',
               OUT / 'native/libm3_bitlane_jump_test.so'])
     for fixture in ('spans', 'regions'):
         executable = OUT / 'native' / fixture
-        run(cc + [native / 'm3_index_mask_window.c', MODULE / 'src/test/native' /
+        run(cc + [native / 'collections/m3_index_mask_window.c', ROOT / 'test/jdk/jdk/m3/collections/native' /
                   ('m3_mask_window_' + fixture + '.c'), '-o', executable])
         run([executable])
     gather_fixture = OUT / 'native/gather-spans'
-    run(cc + [native / 'm3_long_address_kernel.c', MODULE / 'src/test/native/m3_gather_spans.c',
+    run(cc + [native / 'collections/m3_long_address_kernel.c', ROOT / 'test/jdk/jdk/m3/collections/native/m3_gather_spans.c',
               '-o', gather_fixture])
     run([gather_fixture])
+    native_properties = [
+        '-Dm3.counted.native=' + str(OUT / 'native/libm3_count_lanes.so'),
+        '-Dm3.totals.native=' + str(OUT / 'native/libm3_count_totals.so'),
+        '-Dm3.native.path=' + str(OUT / 'native/libm3_collections_packed.so'),
+        '-Dlint.native.path=' + str(OUT / 'native/libm3_packed_int_width.so'),
+        '-Dm3.collections.rank.pairdistance.native=true',
+        '-Dm3.collections.lane.native=true',
+    ]
     common = ['-Xmx768m', '-XX:ActiveProcessorCount=2', '-Xcheck:jni', array_native_option,
-              '-Dm3.collections.rank.native=true', '-Dm3.collections.signal.native=true']
+              '-Dm3.collections.signal.native=true']
     results = {}
     for mode, required in [('java', 'false'), ('native', 'true')]:
         library = OUT / ('native' if mode == 'native' else 'missing')
         vm = common + ['-Djava.library.path=' + str(library),
                        '-Dm3.mask.spans.native.required=' + required,
-                       '-Dm3.collections.all.native.required=' + required]
+                       '-Dm3.collections.all.native.required=' + required,
+                       '-Dm3.collections.rank.native=' + required]
+        if mode == 'native':
+            vm += native_properties
         old_reports = MODULE / 'target/surefire-reports'
         if old_reports.exists(): shutil.rmtree(old_reports)
-        maven(MODULE / 'pom.xml', '-DargLine=' + ' '.join(vm), '-DfailIfNoTests=true', 'verify')
+        maven(MODULE / 'pom.xml', '-Dtest=*', '-DargLine=' + ' '.join(vm), '-DfailIfNoTests=true', 'verify')
         results[mode] = reports(mode)
     jar = MODULE / 'target/m3-collections-0.1.0-SNAPSHOT.jar'
     with zipfile.ZipFile(jar) as archive:
@@ -186,46 +284,52 @@ def main():
         raise RuntimeError('Unexpected JPMS dependency closure: ' + runtime_modules)
     cp = os.pathsep.join(map(str, (MODULE / 'target/classes',
                                    MODULE / 'target/test-classes', array_jar)))
-    java = [JAVA / 'bin/java', *common, '-Djava.library.path=' + str(OUT / 'native'), '-cp', cp]
-    contracts = [('M3MaskWindowSparseContract', ['native']),
-                 ('M3BudgetedMaskWindowContract', ['--native']),
-                 ('M3IndexMaskWindowSelfTest', ['--native']),
-                 ('M3IndexMaskWindowRecoverySelfTest', ['--native']),
-                 ('M3IndexMaskCompactorSelfTest', ['--native']),
-                 ('M3IndexPathMasksSelfTest', ['--native']),
-                 ('M3LongIndexPathMasksJNISelfTest', ['--native']),
-                 ('M3LongAddressBoundedSelfTest', []),
-                 ('M3IndexPathMaskWindowSelfTest', ['--native']),
-                 ('M3IndexPathRankNativeSelfTest', []),
-                 ('M3NativeIndexRangeSelfTest', ['range', 'sharing']),
-                 ('M3ObjectStateSlots28SelfTest', ['--native']),
-                 ('M3IndexedTableSelfTest', ['--native']),
-                 ('M3BagRankIndexSelfTest', ['--native']),
-                 ('M3SdkRecoverySelfTest', ['--native']),
-                 ('M3SignalOrderContract', ['native']),
-                 ('M3SignalDimensionsNativeContract', []),
-                 ('M3ResidencyStateMaskProof', ['native']),
-                 ('M3BitLaneJumpProof', [str(OUT / 'native/libm3_bitlane_jump_test.so')]),
-                 ('M3DisjointIndexSelfTest', ['--native'])]
-    for name, args in contracts: run(java + ['jdk.m3.collections.' + name, *args])
+    java = [JAVA / 'bin/java', *common, '-Dm3.collections.rank.native=true',
+            '-Djava.library.path=' + str(OUT / 'native'), '-cp', cp]
+    contracts = [('jdk.m3.collections.MaskWindowSparseContract', ['native']),
+                 ('jdk.m3.collections.BudgetedMaskWindowContract', ['--native']),
+                 ('jdk.m3.collections.IndexMaskWindowSelfTest', ['--native']),
+                 ('jdk.m3.collections.IndexMaskWindowRecoverySelfTest', ['--native']),
+                 ('jdk.m3.collections.IndexMaskCompactorSelfTest', ['--native']),
+                 ('jdk.m3.collections.IndexPathMasksSelfTest', ['--native']),
+                 ('jdk.m3.collections.LongIndexPathMasksJNISelfTest', ['--native']),
+                 ('jdk.m3.collections.LongAddressBoundedSelfTest', []),
+                 ('jdk.m3.collections.IndexPathMaskWindowSelfTest', ['--native']),
+                 ('jdk.m3.collections.IndexPathRankNativeSelfTest', []),
+                 ('jdk.m3.collections.NativeIndexRangeSelfTest', ['range', 'sharing']),
+                 ('jdk.m3.collections.ObjectStateSlots28SelfTest', ['--native']),
+                 ('jdk.m3.collections.IndexedTableSelfTest', ['--native']),
+                 ('jdk.m3.collections.BagRankIndexSelfTest', ['--native']),
+                 ('jdk.m3.collections.SdkRecoverySelfTest', ['--native']),
+                 ('jdk.m3.collections.SignalOrderContract', ['native']),
+                 ('jdk.m3.collections.SignalDimensionsNativeContract', []),
+                 ('jdk.m3.collections.ResidencyStateMaskProof', ['native']),
+                 ('jdk.m3.collections.BitLaneJumpProof', [str(OUT / 'native/libm3_bitlane_jump_test.so')]),
+                 ('jdk.internal.m3.collections.DisjointIndexSelfTest', ['--native'])]
+    for name, args in contracts: run(java + [name, *args])
     # Exercise collection-kernel fallback while retaining required arrays allocation JNI.
     run([JAVA / 'bin/java', *common, '-Djava.library.path=' + str(OUT / 'missing'), '-cp', cp,
-         'jdk.m3.collections.M3DisjointIndexSelfTest'])
+         'jdk.internal.m3.collections.DisjointIndexSelfTest'])
     run([JAVA / 'bin/java', *common, '-Djava.library.path=' + str(OUT / 'missing'), '-cp', cp,
-         'jdk.m3.collections.M3BudgetedMaskWindowContract', '--missing'])
+         'jdk.m3.collections.BudgetedMaskWindowContract', '--missing'])
     run([JAVA / 'bin/java', *common, '-Djava.library.path=' + str(OUT / 'missing'), '-cp', cp,
-         'jdk.m3.collections.M3LongIndexPathMasksJNISelfTest'])
-    native_fixtures = [MODULE / 'src/test/native' / name for name in
+         'jdk.m3.collections.LongIndexPathMasksJNISelfTest'])
+    native_fixtures = [ROOT / 'test/jdk/jdk/m3/collections/native' / name for name in
                        ('m3_mask_window_spans.c', 'm3_mask_window_regions.c', 'm3_bitlane_jump_jni.c', 'm3_gather_spans.c')]
     proof = {'status': 'PASS_OWNING_COLLECTION_JAVA_AND_JNI', 'head_sha': head,
              'scope': 'independent m3/collections; no JDK phase or challenge-corpus promotion',
+             'owning_test_selection': '-Dtest=* overrides default includes/excludes',
+             'native_host_properties': 'existing m3-collections-native POM bindings, native mode only',
              'worktree_dirty': bool(subprocess.check_output(['git', 'status', '--porcelain', '--untracked-files=no'], cwd=ROOT)),
              'jar_sha256': sha(jar), 'jar_classes': len(expected_classes), 'runtime_modules': runtime_modules,
              'java_sources': len(sources), 'test_sources': len(tests), 'junit': results,
              'source_dependencies': dependency_proof, 'native_libraries': sorted(LIBRARIES),
-             'explicit_native_contracts': [name for name, _ in contracts],
+             'explicit_native_contracts': [name.rsplit('.', 1)[-1] for name, _ in contracts],
+             'explicit_native_contract_binaries': [name for name, _ in contracts],
              'native': 'generated headers; C17 strict; fatal UBSan; actual -Xcheck:jni',
-             'source_sha256': {str(p.relative_to(ROOT)): sha(p) for p in sources + tests + sorted(admitted) + native_fixtures}}
+             'source_sha256': {str(p.relative_to(ROOT)): sha(p) for p in sources + tests + sorted(admitted) + native_fixtures
+                 + sorted(native.rglob('*.h')) + sorted((ROOT / 'm3/native/include').rglob('*.h'))
+                 + [MODULE / 'pom.xml', ROOT / 'm3/arrays/pom.xml', ROOT / 'make/m3/collections/CMakeLists.txt']}}
     (OUT / 'PROOF.json').write_text(json.dumps(proof, indent=2) + '\n')
     print(json.dumps({k: proof[k] for k in ('status', 'head_sha', 'junit', 'native_libraries')}, indent=2))
 

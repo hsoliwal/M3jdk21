@@ -25,7 +25,7 @@ from pathlib import Path
 from unittest import mock
 
 MODULE_PATH = Path(__file__).with_name("verify_release_admission.py")
-# The former recipe home, planted below only to prove that release admission refuses it (lineage data).
+# Canonical recipe origin is lineage; it cannot attest the target's product gates.
 DONOR_REPOSITORY = "hsoliwal/com.synexia"
 spec = importlib.util.spec_from_file_location("m3_release_admission", MODULE_PATH)
 release = importlib.util.module_from_spec(spec)
@@ -168,6 +168,18 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
                    "DEFAULT_VERSION_FEATURE=21\nDEFAULT_VERSION_INTERIM=0\n"
                    "DEFAULT_VERSION_UPDATE=14\nDEFAULT_VERSION_PATCH=0\n")
         self.write("src/example.java", "class Example {}\n")
+        # A deliberately synthetic complete POM closure and passive origin.
+        self.maven_origin = {"repository": release.CANONICAL_RECIPE_REPOSITORY,
+                             "commit": "1" * 40, "recipe_id": "synthetic.fixture.only"}
+        self.write(release.MAVEN_ORIGIN_PATH, json.dumps(self.maven_origin) + "\n")
+        pom = ('<project xmlns="http://maven.apache.org/POM/4.0.0">'
+               '<modelVersion>4.0.0</modelVersion><groupId>fixture</groupId>'
+               '<artifactId>synthetic-fixture</artifactId><version>1</version>{}</project>\n')
+        self.write("m3/pom.xml", pom.format('<modules><module>leaf</module></modules>'
+                   '<profiles><profile><id>unused</id><modules><module>optional</module>'
+                   '</modules></profile></profiles>'))
+        self.write("m3/leaf/pom.xml", pom.format(""))
+        self.write("m3/optional/pom.xml", pom.format(""))
         mapping = {
             "schema": 1,
             "porting_invariant": {"receiving_sequence": {
@@ -230,10 +242,27 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
                     }],
                 }
             if ident == "M3_MAVEN_CONTROL_REACTOR":
-                gate["canonical_recipe"] = {
-                    "repository": release.CANONICAL_RECIPE_REPOSITORY, "commit": "1" * 40,
-                    "recipe_id": "synthetic.fixture.only",
+                gate["command"] = ["synthetic-mvn-fixture", *release.MAVEN_CONTROL_ARGS]
+                gate["reactor"] = {"scope": release.MAVEN_REACTOR_SCOPE, "pom": "m3/pom.xml",
+                                   "maven_executed": True, "source_preserved": True}
+                gate["canonical_recipe"] = dict(self.maven_origin)
+                gate["environment"]["toolchain"] = (
+                    "Apache Maven 3.10.0\nJava version: 21.0.13, vendor: SYNTHETIC FIXTURE")
+                raw = {
+                    "maven.log": "SYNTHETIC MAVEN RECEIPT FIXTURE; NO PRODUCT BUILD\n",
+                    "toolchain.log": gate["environment"]["toolchain"] + "\n",
+                    "canonical-origin.json": (self.root / release.MAVEN_ORIGIN_PATH).read_text(),
+                    "reactor-inputs.json": json.dumps([
+                        {"path": path, "sha256": release.sha256(self.root / path)}
+                        for path in ("m3/leaf/pom.xml", "m3/optional/pom.xml", "m3/pom.xml")]),
+                    "producer-result.json": json.dumps(
+                        {key: value for key, value in gate.items() if key != "artifacts"}),
                 }
+                gate["artifacts"] = []
+                for path, text in raw.items():
+                    output = self.evidence_dir / path
+                    output.write_text(text, encoding="utf-8")
+                    gate["artifacts"].append({"path": path, "sha256": release.sha256(output)})
             self.evidence["gates"].append(gate)
 
     def write(self, path, text):
@@ -274,6 +303,18 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
         self.assertFalse(result["release_ready"], result)
         if name:
             self.assertIn(name, {b["name"] for b in result["blockers"]}, result)
+
+    def maven_gate(self):
+        return next(g for g in self.evidence["gates"] if g["id"] == release.MAVEN_GATE)
+
+    def write_maven_artifact(self, path, content):
+        file = self.evidence_dir / path
+        file.write_text(content, encoding="utf-8")
+        next(item for item in self.maven_gate()["artifacts"] if item["path"] == path)["sha256"] = release.sha256(file)
+
+    def sync_maven_result(self):
+        self.write_maven_artifact("producer-result.json", json.dumps(
+            {key: value for key, value in self.maven_gate().items() if key != "artifacts"}))
 
     def coverage_gate(self):
         return next(g for g in self.evidence["gates"] if g["id"] == release.COVERAGE_GATE)
@@ -728,22 +769,120 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
         self.assert_blocked(self.result(), "contract.mandatory_gates")
 
     def test_maven_gate_owner_and_recipe_identity_are_required(self):
-        # Only the exact canonical recipe authority can supply this receipt.
+        # Target execution ownership and canonical recipe origin are independent.
         other = "example/another-repository"
         entry = next(g for g in self.evidence["gates"] if g["id"] == release.MAVEN_GATE)
         entry["owner_repository"] = other
         self.assert_blocked(self.result(), "gate:" + release.MAVEN_GATE)
-        entry["owner_repository"] = release.CANONICAL_RECIPE_REPOSITORY
+        entry["owner_repository"] = release.PRODUCT_REPOSITORY
         entry["canonical_recipe"]["repository"] = other
         self.assert_blocked(self.result(), "gate:" + release.MAVEN_GATE)
         del entry["canonical_recipe"]
         self.assert_blocked(self.result(), "gate:" + release.MAVEN_GATE)
 
-    def test_external_repository_cannot_attest_the_recipe_execution(self):
-        # Standalone rule (2026-10-31): the receipt is produced inside M3jdk21, not by another repository.
+    def test_external_repository_cannot_attest_product_maven_execution(self):
+        # The product gate remains standalone even with valid canonical provenance.
         entry = next(g for g in self.evidence["gates"] if g["id"] == release.MAVEN_GATE)
         entry["owner_repository"] = DONOR_REPOSITORY
         entry["canonical_recipe"]["repository"] = DONOR_REPOSITORY
+        self.assert_blocked(self.result(), "gate:" + release.MAVEN_GATE)
+
+    def test_product_maven_receipt_has_canonical_synexia_origin(self):
+        entry = next(g for g in self.evidence["gates"] if g["id"] == release.MAVEN_GATE)
+        entry["owner_repository"] = release.PRODUCT_REPOSITORY
+        entry["canonical_recipe"]["repository"] = DONOR_REPOSITORY
+        result = self.result()
+        self.assertTrue(result["release_ready"], result)
+        self.assertEqual(release.PRODUCT_REPOSITORY, release.gate_owner(release.MAVEN_GATE))
+
+    def test_target_recipe_origin_is_refused_without_changing_product_gate_owner(self):
+        entry = next(g for g in self.evidence["gates"] if g["id"] == release.MAVEN_GATE)
+        entry["canonical_recipe"]["repository"] = release.PRODUCT_REPOSITORY
+        self.assert_blocked(self.result(), "gate:" + release.MAVEN_GATE)
+
+    def test_partial_cached_or_skipped_maven_command_is_refused(self):
+        entry = next(g for g in self.evidence["gates"] if g["id"] == release.MAVEN_GATE)
+        full = list(entry["command"])
+        for command in (full + ["-pl", "arrays"], full + ["-N"],
+                        full + ["-DskipTests=true"], full[:-2] + ["verify"],
+                        [x for x in full if x != "-Dmaven.build.cache.enabled=false"]):
+            with self.subTest(command=command):
+                entry["command"] = command
+                self.assert_blocked(self.result(), "gate:" + release.MAVEN_GATE)
+
+    def test_maven_execution_or_source_preservation_cannot_be_assumed(self):
+        entry = next(g for g in self.evidence["gates"] if g["id"] == release.MAVEN_GATE)
+        original = copy.deepcopy(entry["reactor"])
+        for field, value in (("maven_executed", False), ("source_preserved", False),
+                             ("scope", "SELECTED_REACTOR"), ("pom", "m3/arrays/pom.xml")):
+            with self.subTest(field=field):
+                entry["reactor"] = {**original, field: value}
+                self.assert_blocked(self.result(), "gate:" + release.MAVEN_GATE)
+
+    def test_maven_raw_packet_cannot_omit_any_required_file(self):
+        entry = self.maven_gate()
+        original = list(entry["artifacts"])
+        for path in release.MAVEN_RAW_ARTIFACTS:
+            with self.subTest(path=path):
+                entry["artifacts"] = [item for item in original if item["path"] != path]
+                result = self.result()
+                self.assert_blocked(result, "gate:" + release.MAVEN_GATE)
+                detail = next(row["detail"] for row in result["blockers"]
+                              if row["name"] == "gate:" + release.MAVEN_GATE)
+                self.assertIn("raw packet is incomplete", detail)
+
+    def test_maven_origin_must_match_committed_source_even_when_receipt_is_rehashed(self):
+        entry = self.maven_gate()
+        entry["canonical_recipe"]["commit"] = "2" * 40
+        self.write_maven_artifact("canonical-origin.json", json.dumps(entry["canonical_recipe"]))
+        self.sync_maven_result()
+        self.assert_blocked(self.result(), "gate:" + release.MAVEN_GATE)
+
+    def test_maven_origin_must_be_a_committed_source_file(self):
+        (self.root / release.MAVEN_ORIGIN_PATH).unlink()
+        self.amend()
+        self.assert_blocked(self.result(), "gate:" + release.MAVEN_GATE)
+
+    def test_maven_origin_bytes_are_bound_without_json_normalization(self):
+        self.write_maven_artifact("canonical-origin.json", json.dumps(self.maven_origin, indent=2))
+        self.assert_blocked(self.result(), "gate:" + release.MAVEN_GATE)
+
+    def test_maven_raw_result_cannot_disagree_with_gate_record(self):
+        result = {key: value for key, value in self.maven_gate().items() if key != "artifacts"}
+        result["exit_code"] = 7
+        self.write_maven_artifact("producer-result.json", json.dumps(result))
+        self.assert_blocked(self.result(), "gate:" + release.MAVEN_GATE)
+
+    def test_maven_input_seal_requires_exact_complete_sorted_unique_closure(self):
+        path = self.evidence_dir / "reactor-inputs.json"
+        original = json.loads(path.read_text())
+        variants = (
+            original[-1:],  # Root only, losing both child POMs.
+            [row for row in original if row["path"] != "m3/optional/pom.xml"],
+            [*original, original[0]],
+            list(reversed(original)),
+            [{**original[0], "sha256": "a" * 64}, *original[1:]],
+            [{**original[0], "unexpected": True}, *original[1:]],
+        )
+        for rows in variants:
+            with self.subTest(rows=rows):
+                self.write_maven_artifact("reactor-inputs.json", json.dumps(rows))
+                self.assert_blocked(self.result(), "gate:" + release.MAVEN_GATE)
+
+    def test_maven_stale_child_input_cannot_be_hidden_by_repinning_manifest(self):
+        leaf = self.root / "m3/leaf/pom.xml"
+        leaf.write_text(leaf.read_text().replace("<version>1</version>", "<version>2</version>"))
+        self.amend()
+        self.assert_blocked(self.result(), "gate:" + release.MAVEN_GATE)
+
+    def test_maven_empty_execution_log_is_not_a_receipt(self):
+        self.write_maven_artifact("maven.log", "")
+        self.assert_blocked(self.result(), "gate:" + release.MAVEN_GATE)
+
+    def test_maven_raw_toolchain_must_match_gate_and_required_version(self):
+        self.write_maven_artifact("toolchain.log", "Apache Maven 3.10.0\nJava version: 17.0.1\n")
+        self.maven_gate()["environment"]["toolchain"] = "Apache Maven 3.10.0\nJava version: 17.0.1"
+        self.sync_maven_result()
         self.assert_blocked(self.result(), "gate:" + release.MAVEN_GATE)
 
     def test_canonical_recipe_receipt_cannot_attest_a_product_gate(self):

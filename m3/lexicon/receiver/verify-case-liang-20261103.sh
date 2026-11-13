@@ -8,12 +8,12 @@ TEST="$ROOT/src/test/java/jdk/m3/lexicon"
 OUT="$ROOT/target/m3-case-liang-precompute-20261103"
 if [[ -e "$OUT" ]]; then echo 'REFUSE occupied build output' >&2; exit 3; fi
 pins=(
-'330de9d8f8752974316411bc8c8b75b97a3edb0b20a9fd17b44255410d033073  src/main/java/jdk/m3/lexicon/M3CaseBoundaryPrecompute.java'
-'fa7030872dd2f0614e1a69168b9c38588bebfbf89a34c917b058fb2984b7a72d  src/main/java/jdk/m3/lexicon/M3LiangPatternPrecompute.java'
-'a10b0086cf3e6134296f8a4a53a369252bc8c5c138ba82ac6f3b163652836847  src/main/java/jdk/m3/lexicon/M3WindowBoundarySummary.java'
-'6cf2d81afb0f3b1b399df98c6df2788f2031124ce748c0c1a266d3300ea09f3d  src/test/java/jdk/m3/lexicon/M3CaseLiangParityProof.java'
-'bb82d5a35085ea6c9e1b04b2db573e9376369835ba7a217b61dd5d4fbf636eca  src/test/java/jdk/m3/lexicon/M3CaseLiangJniParityProof.java'
-'e129675e7462a8f02eef929011860a13a6fefd08eb54c0339ef4b1f158813b1e  src/test/native/M3CaseLiangJniOracle.c'
+'68a6e2f20e9d0f348b03cabac6d1684c14c517c7de7b2f3dca446fb55372c8f6  src/main/java/jdk/m3/lexicon/M3CaseBoundaryPrecompute.java'
+'914bcc0a257f533dd6d593152e4f2940a10c6ca10f946f23bab8f604cf60a026  src/main/java/jdk/m3/lexicon/M3LiangPatternPrecompute.java'
+'5f4bc3061d4e6854b6b0780f1055fb6993f9060f102e5772638ae1e43a6aea5c  src/main/java/jdk/m3/lexicon/M3WindowBoundarySummary.java'
+'2e1ae2090077dd7e8867add7b89648ef9e0ffda57081c815e16555d871690ffc  src/test/java/jdk/m3/lexicon/M3CaseLiangParityProof.java'
+'5f5b4c9b8df707e0d4e4c9880997dc3912ec6de54a1e0a60bdc329f75b2933e4  src/test/java/jdk/m3/lexicon/M3CaseLiangJniParityProof.java'
+'067457f444d8c57ceccb030774d485b892b9fb14c38d0a5a0138e5788ad7717e  src/test/native/M3CaseLiangJniOracle.c'
 )
 for line in "${pins[@]}"; do (cd "$ROOT" && echo "$line" | sha256sum --check --status) || { echo 'REFUSE source hash drift' >&2; exit 4; }; done
 mkdir -p "$OUT/classes" "$OUT/logs"

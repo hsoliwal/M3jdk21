@@ -43,7 +43,7 @@ jobs:
       - name: Build source-vendored A3 OpenRewrite and JUnit closure
         run: >
           mvn -B -ntp -f m3/vendor/third_party/pom.xml
-          -pl rewrite-java,rewrite-java-21,rewrite-test,junit-jupiter-5.10.2
+          -pl rewrite-java,rewrite-java-21,rewrite-test,junit-jupiter-5.10.2,junit-platform-launcher-1.10.2
           -am -DskipTests install
       - name: Import planner focused tests
         run: >

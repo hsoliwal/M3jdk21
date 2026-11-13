@@ -22,6 +22,8 @@ import java.util.Objects;
  */
 public final class PmemPrefixCache {
     public static final int MAX_INDEX_ENTRIES = 1 << 20;
+    private static final long TENSOR_MAGIC = 0x4d3354454e534f31L;
+    private static final int TENSOR_HEADER_BYTES = 48;
     private final PmemBlockStore store;
     private long[] digestLanes;
     private long[] ordinalLane;
@@ -64,6 +66,81 @@ public final class PmemPrefixCache {
             long ordinal = find(key);
             return ordinal < 0 ? -1 : store.read(ordinal, target, offset);
         }
+    }
+
+    /**
+     * Publish one complete contiguous tensor under a separate typed-key domain.
+     * The scalar format, endian order and shape join the prefix identity. The
+     * payload length must exactly match the descriptor before any store write.
+     * Caller bytes must remain unchanged until return. No dtype conversion occurs.
+     */
+    public long put(PmemPrefixKey key, PmemTensorSpec spec,
+                    byte[] payload, int offset, int length) throws IOException {
+        Objects.requireNonNull(key, "key");
+        Objects.requireNonNull(spec, "spec");
+        Objects.requireNonNull(payload, "payload");
+        Objects.checkFromIndexSize(offset, length, payload.length);
+        if (spec.byteCount() != length) {
+            throw new IllegalArgumentException("tensor payload length differs from descriptor");
+        }
+        byte[] descriptor = spec.encoding();
+        int frameLength = tensorFrameLength(spec, descriptor);
+        ByteBuffer frame = ByteBuffer.allocate(frameLength);
+        frame.putLong(TENSOR_MAGIC).putInt(descriptor.length).putInt(length);
+        frame.put(PmemBlockStore.parseHash(key.sha256())).put(descriptor);
+        frame.put(payload, offset, length);
+        return put(PmemPrefixKey.tensor(key, descriptor), frame.array(), 0, frameLength);
+    }
+
+    /**
+     * Restore a tensor only after its complete envelope and exact descriptor pass
+     * validation. A miss returns -1; a miss or rejected frame leaves target intact.
+     * A shape, dtype or endian mismatch is a different key and therefore a miss.
+     * Target capacity for the declared tensor is checked even when its key is absent.
+     * Scratch memory is bounded by this store's maximum block payload.
+     */
+    public int get(PmemPrefixKey key, PmemTensorSpec spec,
+                   byte[] target, int offset) throws IOException {
+        Objects.requireNonNull(key, "key");
+        Objects.requireNonNull(spec, "spec");
+        Objects.requireNonNull(target, "target");
+        byte[] descriptor = spec.encoding();
+        int frameLength = tensorFrameLength(spec, descriptor);
+        int count = (int) spec.byteCount();
+        Objects.checkFromIndexSize(offset, count, target.length);
+        synchronized (store) {
+            long ordinal = find(PmemPrefixKey.tensor(key, descriptor));
+            if (ordinal < 0) {
+                return -1;
+            }
+            if (store.metadata(ordinal).length() != frameLength) {
+                throw new IOException("typed tensor frame length mismatch");
+            }
+            byte[] frame = new byte[frameLength];
+            store.read(ordinal, frame, 0);
+            ByteBuffer fields = ByteBuffer.wrap(frame);
+            if (fields.getLong() != TENSOR_MAGIC || fields.getInt() != descriptor.length
+                    || fields.getInt() != count) {
+                throw new IOException("typed tensor frame header mismatch");
+            }
+            byte[] prefix = PmemBlockStore.parseHash(key.sha256());
+            if (!Arrays.equals(frame, 16, TENSOR_HEADER_BYTES, prefix, 0, prefix.length)
+                    || !Arrays.equals(frame, TENSOR_HEADER_BYTES,
+                            TENSOR_HEADER_BYTES + descriptor.length,
+                            descriptor, 0, descriptor.length)) {
+                throw new IOException("typed tensor identity mismatch");
+            }
+            System.arraycopy(frame, TENSOR_HEADER_BYTES + descriptor.length, target, offset, count);
+            return count;
+        }
+    }
+
+    private int tensorFrameLength(PmemTensorSpec spec, byte[] descriptor) {
+        long overhead = TENSOR_HEADER_BYTES + (long) descriptor.length;
+        if (spec.byteCount() > store.maxPayloadBytes() - overhead) {
+            throw new IllegalArgumentException("typed tensor exceeds fixed block payload");
+        }
+        return (int) (overhead + spec.byteCount());
     }
 
     /** On-demand validated payload length, or -1 for a miss; no metadata is retained. */

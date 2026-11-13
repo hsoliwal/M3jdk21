@@ -8,9 +8,11 @@ import com.sun.source.tree.ClassTree;
 import com.sun.source.tree.CompilationUnitTree;
 import com.sun.source.tree.IfTree;
 import com.sun.source.tree.MethodTree;
+import com.sun.source.tree.LiteralTree;
 import com.sun.source.tree.StatementTree;
 import com.sun.source.tree.Tree;
 import com.sun.source.util.JavacTask;
+import com.sun.source.util.TreeScanner;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -68,6 +70,9 @@ public final class M3StringReplacementRoutes {
                     .map(t -> (ClassTree) t).toList();
             require(owners.size() == 1, "java.lang.String owner missing or duplicated");
             ClassTree owner = owners.getFirst();
+            require(owner.getKind() == Tree.Kind.CLASS
+                    && owner.getModifiers().getFlags().contains(Modifier.PUBLIC)
+                    && owner.getModifiers().getFlags().contains(Modifier.FINAL), "String class contract");
             literal(method(owner, "replace", List.of("CharSequence", "CharSequence"), Modifier.PUBLIC));
             helper(method(owner, "m3Replace", List.of("M3String", "String", "M3String", "String", "M3String"), Modifier.PRIVATE));
             regex(method(owner, "replaceFirst", List.of("String", "String"), Modifier.PUBLIC), true);
@@ -109,16 +114,37 @@ public final class M3StringReplacementRoutes {
         require(dispatchBody.size() == 2 && dispatch.getElseStatement() == null, "public dispatch geometry");
         expect(dispatchBody.get(0), "String replaced = m3Replace(storage, trgtStr, targetM3, replStr, replacementM3);", "public helper dispatch");
         expect(dispatchBody.get(1), "if (replaced != null) return replaced;", "literal refusal fallback");
+        expect(nonempty.get(5), "boolean thisIsLatin1 = this.isLatin1();", "flat source coder");
+        expect(nonempty.get(6), "boolean trgtIsLatin1 = trgtStr.isLatin1();", "flat target coder");
+        expect(nonempty.get(7), "boolean replIsLatin1 = replStr.isLatin1();", "flat replacement coder");
+        expect(nonempty.get(8), "String ret = (thisIsLatin1 && trgtIsLatin1 && replIsLatin1)"
+                + " ? StringLatin1.replace(value(), thisLen, trgtStr.value(), trgtLen, replStr.value(), replLen)"
+                + " : StringUTF16.replace(value(), thisLen, thisIsLatin1, trgtStr.value(), trgtLen,"
+                + " trgtIsLatin1, replStr.value(), replLen, replIsLatin1);", "flat coder dispatch");
+        expect(nonempty.get(9), "if (ret != null) { return ret; }", "flat result admission");
         expect(nonempty.get(10), "return this;", "unmatched flat identity");
 
         var empty = block(split.getElseStatement(), "empty target");
         require(empty.size() == 9, "empty target statement geometry");
+        expect(empty.get(0), "int resultLen;", "empty target result length");
+        expect(empty.get(1), "try { resultLen = Math.addExact(thisLen, Math.multiplyExact("
+                + "Math.addExact(thisLen, 1), replLen)); } catch (ArithmeticException ignored) {"
+                + " throw new OutOfMemoryError(\"Required length exceeds implementation limit\"); }",
+                "empty target overflow contract");
+        exactStringLiteral(empty.get(1), "Required length exceeds implementation limit");
+        expect(empty.get(2), "M3String storage = m3();", "empty source owner");
+        expect(empty.get(3), "M3String replacementM3 = replStr.m3();", "empty replacement owner");
         IfTree admission = branch(empty.get(4), "(storage != null || replacementM3 != null)", "empty target admission");
         var admitted = block(admission.getThenStatement(), "empty owner admission");
-        require(admitted.size() == 3, "empty admission statement geometry");
+        require(admitted.size() == 3 && admission.getElseStatement() == null,
+                "empty admission statement geometry");
         expect(admitted.get(0), "M3String sourceM3 = storage != null ? storage : M3String.canonicalize(this);", "empty source owner");
         expect(admitted.get(1), "if (replacementM3 == null) replacementM3 = M3String.canonicalize(replStr);", "empty replacement owner");
         expect(admitted.get(2), "if (sourceM3 != null && replacementM3 != null) { return new String(sourceM3.replaceEmptyTarget(replacementM3)); }", "empty canonical dispatch");
+        expect(empty.get(5), "StringBuilder sb = new StringBuilder(resultLen);", "empty fallback capacity");
+        expect(empty.get(6), "sb.append(replStr);", "empty initial replacement");
+        expect(empty.get(7), "for (int i = 0; i < thisLen; ++i) {"
+                + " sb.append(charAt(i)).append(replStr); }", "empty UTF-16 insertion loop");
         expect(empty.get(8), "return sb.toString();", "empty compatibility fallback");
     }
 
@@ -164,13 +190,26 @@ public final class M3StringReplacementRoutes {
     }
 
     private static void expect(Tree actual, String expected, String label) {
-        // Compare compiler-rendered trees, never raw Java substrings. No expected fragment
-        // contains literals; a string containing code therefore cannot satisfy a route.
+        // Compare compiler-rendered trees, never raw Java substrings. The one string literal
+        // in the overflow route is checked separately by exactStringLiteral, preserving its
+        // spaces and value; a string containing code cannot stand in for a route statement.
         String wanted = compact(expected);
         if (actual != null && actual.getKind() == Tree.Kind.VARIABLE && wanted.endsWith(";")) {
             wanted = wanted.substring(0, wanted.length() - 1);
         }
         require(actual != null && compact(actual.toString()).equals(wanted), label);
+    }
+
+    private static void exactStringLiteral(Tree tree, String expected) {
+        List<String> literals = new ArrayList<>();
+        new TreeScanner<Void, Void>() {
+            @Override
+            public Void visitLiteral(LiteralTree literal, Void unused) {
+                if (literal.getValue() instanceof String value) literals.add(value);
+                return super.visitLiteral(literal, unused);
+            }
+        }.scan(tree, null);
+        require(literals.equals(List.of(expected)), "empty target overflow message");
     }
 
     private static String compact(String source) {

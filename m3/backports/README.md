@@ -2,13 +2,69 @@
 
 Status: active downstream backport programme. Target baseline is OpenJDK 21 semantics.
 
+## Current convergence and delivery boundary
+
+**Canonical transformation work runs in `hsoliwal/com.synexia`; M3JDK21 receives
+the executed product changes and independently qualifies them.** This is the
+current [repository policy](../../AGENTS.md) and
+[porting contract](../docs/m3jdk21-porting-invariant.md). Historical recipe
+copies, generators and recipe profiles below remain custody debt, even where
+older sections describe them as execution entry points. Do not execute them in
+the public product or remove them before their exact source and callers have
+been reconciled with the canonical Synexia owner.
+
+Use the existing authorities together; these categories are related but do not
+count the same thing:
+
+| Input | Existing authority | Required receiving result |
+| --- | --- | --- |
+| Java specifications / JSRs | [Java SE 21 / JSR 396](https://jcp.org/en/jsr/detail?id=396), the compatibility decision and exact candidate packet | Explicit source, class-file, API and runtime obligations; a specification reference is not an implementation |
+| JEPs | `RELEASE_JEP_AUTHORITY.tsv`, `JEP_CATALOGUE.tsv`, `JEP_RESIDUE_QUEUE.tsv`, `JEP_SOURCE_WITNESS.md` | Exact implementation/dependency paths and target tests; a catalogue disposition or matching blob is not installed-image acceptance |
+| JBS fixes and non-JEP changes | `inventory.py`, `UPSTREAM_CHANGE_SEEDS.tsv`, `compatibility_queue.py` | Original issue and commit, follow-up/backout dependencies, adapted patch, regression and target evidence |
+| JDK vendors and other implementations | `COMMUNITY_FORKS.tsv`, `COMMUNITY_FORK_CAPABILITIES.tsv`, `VENDOR_BEST_OF.tsv`; Synexia donor catalogue and vendor-delta recipe | Pinned donor/licence and one reviewed adaptation into the existing target owner |
+| Synexia String, arrays, collections, AST, files and precompute | `m3/docs/name-mapping.json`, full-family pins and the Synexia `CANONICAL_RECIPE_HOME.tsv` | Stable capability ID, correct package/module, exact generated source and independent target acceptance |
+| Maven/build work | Existing Synexia build planners and Maven extension owners; target `m3/pom.xml` and release contract | Executed product build/test configuration and source-bound receipts; reusable recipes remain in Synexia |
+
+The same feature may have a JSR obligation, a JEP, several JBS issues and
+multiple vendor commits. Preserve those relationships in its existing packet;
+do not add their counts together or create a second implementation ledger.
+The counts and named historical candidates later in this document describe
+their recorded snapshots. Recompute and pin the current source before claiming
+coverage, implementation or release readiness.
+
+For each admitted batch, resolve the existing owner and compatibility contract,
+then improve and execute the source-sealed Maven/OpenRewrite recipe in Synexia.
+Its `M3Jdk21GitBlobRecipeCratePlanner`, hash-pinned snapshot recipes and existing
+backport DAG are the reusable owners. Receive only emitted source/test/build
+postimages, required notices and passive recipe-ID/revision/hash evidence.
+Run the corresponding M3JDK21 compiler, jtreg, native/JNI and installed-image
+checks, and carry failures back to the same recipe with a retained regression.
+
+Every receiving change documents its purpose, target API/module, dependency
+closure, donor rights, actual commands/results and remaining gates. Standard
+JDK public names remain unchanged; separately admitted `jdk.m3.*` companions
+use the existing naming map. String -> arrays -> collections -> AST/compiler
+remains the runtime receiving order. Tooling repair does not advance that order.
+
+The [release preparation guide](../release/README.md) distinguishes product
+gate ownership from canonical recipe provenance. The current Maven reactor
+contains legacy recipe dependencies, so complete custody/caller reconciliation
+is required before its release execution can be accepted. Running a smaller
+module subset or passing the recipe SDK tests does not satisfy the complete
+`M3_MAVEN_CONTROL_REACTOR` gate. OpenJDK configure/make and installed-JDK tests
+remain product authorities; Maven coordinates its own defined lifecycle.
+See the [Maven lifecycle documentation](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html).
+
 The governing execution law is [COMPATIBILITY_ADMISSION.md](COMPATIBILITY_ADMISSION.md).
 
 ## Locked contract
 
 The Java 21 language grammar, source acceptance, class-file compatibility and existing externally
 observable behavior are locked unless a future change is explicitly unlocked and independently
-accepted.
+accepted. This section governs the Java-21-compatible backport lane. The
+repository's directional-superset policy separately permits specified and
+independently qualified M3 extensions; a rejection from this lane is not a
+blanket rejection of an M3 extension merely because stock JDK 21 cannot express it.
 
 The donor universe is intentionally complete, not curated. Every OpenJDK change after JDK 21 GA
 through the latest released JDK enters inventory: JEP implementation, non-JEP JBS fix, javac fix,
@@ -130,8 +186,9 @@ DAG or OpenJDK build.
 
 A3Inv inventories the actual src/ and test/ trees by module/area/path/hash. A3Plan joins every
 current JEP row, inspected JBS seed and community capability row while preserving the original
-disposition. A3Apply can run the retained FILE-local Java convergence DAG on explicit source
-files and writes candidate copies only under m3/build.
+disposition. The retained A3Apply source describes the historical FILE-local Java convergence
+DAG. Its transformation execution belongs in canonical Synexia custody; do not
+run this historical target copy. Candidate output is not target acceptance.
 
 The intended join is:
 
@@ -169,7 +226,9 @@ parallelism. If compatibility or contract correctness depends on coordinated fil
 smallest honest composite crate and declare the resulting PACKAGE/MODULE/MULTI_MODULE promotion in
 the packet DAG.
 
-Example file-atomic generation:
+Historical file-atomic generator interface (custody reference, **not a command
+to run in this target**). Execute the corresponding qualified canonical Synexia
+recipe against pinned target inputs:
 
 ```bash
 python3 m3/backports/generate_recipe_crates.py \
@@ -183,8 +242,9 @@ python3 m3/backports/generate_recipe_crates.py \
 This is the bridge from whole-release inventory to genuinely per-file mechanical recipe work while
 preserving honest scope for coupled changes.
 
-For JDK tooling/build/resource changes that are not Java compilation units, opt into strict UTF-8
-text candidates:
+The historical strict-UTF-8 interface for JDK tooling/build/resource candidates
+is recorded below for custody reconciliation. Use the corresponding Synexia
+text recipe for new work; do not run the retained target generator:
 
 ```bash
 python3 m3/backports/generate_recipe_crates.py \
@@ -206,7 +266,9 @@ other file-mode changes. OpenRewrite byte replay cannot truthfully preserve thos
 semantics, so they require a separately reviewed native/Git/build-file mechanism rather than a
 fake PlainText success.
 
-For native/HotSpot/JNI source with unchanged regular-file mode, use the explicit native lane:
+The historical interface also records an explicit native lane for
+native/HotSpot/JNI source with unchanged regular-file mode. Execute its qualified
+canonical counterpart in Synexia, not this retained target generator:
 
 ```bash
 python3 m3/backports/generate_recipe_crates.py \
@@ -243,15 +305,17 @@ Independent FILE recipe atoms may share one parallel DAG layer. Any broader muta
 explicit scope-promotion approval. Canonical promotion is one serial terminal node after recipe
 JUnit, diff, lint, compile, jtreg and runtime gates.
 
-The Maven control entry point is:
+The product Maven control reactor is `m3/pom.xml`. Its eventual full execution
+must preserve the complete reviewed product scope and generate the exact-source
+release receipt described in [release preparation](../release/README.md).
+Historical recipe roots and callers must first be reconciled with Synexia.
+Do not use the legacy recipe profiles or a selected subset to claim the full
+product reactor passed. Synexia SDK execution and product Maven acceptance are
+separate results; neither replaces OpenJDK configure/make or installed-image tests.
 
-`mvn -B -ntp -f m3/pom.xml clean verify`
-
-This verifies the OpenRewrite recipe substrate, the 99%-gated DAG semantic kernel and the backport
-inventory/admission module without replacing OpenJDK's native configure/make build.
-
-For one concrete packet TSV, all three framework projections are generated from the validated
-composed DAG with one shared semantic SHA-256 root:
+The following retained projection interface documents the historical
+orchestration binding. Reusable recipe scheduling/execution stays in Synexia;
+this example is a custody reference, not a target recipe-execution entry point:
 
 ```bash
 mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
@@ -277,8 +341,9 @@ authoritative.
 
 ## Second-pass review DAG pre-admission
 
-Before JDK inventory/compatibility admission, the canonical backport DAG now runs four read-only
-FILE-scoped recipe atoms from merged Synexia PR #8973:
+The canonical Synexia backport DAG's recorded pre-admission design composes four
+read-only FILE-scoped recipe atoms from Synexia PR #8973. Execution stays in
+Synexia; their historical receipt does not prove current target qualification:
 
 ```text
 M3CodeSignalTriggerRecipe

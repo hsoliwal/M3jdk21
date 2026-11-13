@@ -1,0 +1,53 @@
+{
+  "schema": "M3JDK21_SOURCE_EXACT_POSTIMAGE_RECEIPT_V1",
+  "product_repository": "hsoliwal/M3jdk21",
+  "product_base_commit": "b98bf8c065818aac3447be165909e2a013325d9a",
+  "source_path": "m3/collections/qualification/full-java-jni-20261018/verify.py",
+  "before_git_blob_sha1": "79ebcde5d348e58b5a71f1bbaa876cd8601cee31",
+  "before_sha256": "ad7751a1a930a31110a771388cf5446acf544b622abc80ad0abf4bbdc4077119",
+  "after_git_blob_sha1": "7c2bfa47b925a93e48cb444d95364779c1ad0266",
+  "after_sha256": "87141db0336fcc135ba85fb7f43a351aba8e0edc6890ab3c04d1235e43aa2dd3",
+  "canonical_recipe_owner": "hsoliwal/com.synexia",
+  "recipe_chain": [
+    {
+      "pr": 17189,
+      "revision": "e166adbc2dd5ed291989bee2d3c1117784d34296",
+      "crate": "m3-current-collection-jni-verifier-20261112",
+      "before_git_blob": "79ebcde5d348e58b5a71f1bbaa876cd8601cee31",
+      "after_git_blob": "9283e6c65a46ac5814aca4d43c16fcf08d2eae6a",
+      "github_pr_state_observed": "MERGED",
+      "maven_openrewrite_evidence": "EXECUTED_REPORTED_BY_CANONICAL_PR"
+    },
+    {
+      "pr": 17211,
+      "revision": "3e2cbdb3685fe12df3e77d4191945282bfa02583",
+      "crate": "collection-jni-suite-completeness-20261112",
+      "before_git_blob": "9283e6c65a46ac5814aca4d43c16fcf08d2eae6a",
+      "after_git_blob": "7c2bfa47b925a93e48cb444d95364779c1ad0266",
+      "github_pr_state_observed": "OPEN_DRAFT",
+      "maven_openrewrite_evidence": "EXECUTED_REPORTED_BY_CANONICAL_PR"
+    }
+  ],
+  "receiving": {
+    "mode": "EXACT_POSTIMAGE_ONLY",
+    "recipe_code_transferred": false,
+    "compiler_contract": "NO_JAVA_JNI_IMPLEMENTATION_CHANGE",
+    "old_selector": "M3ArrayAllocationAtomsTest",
+    "new_selector": "ArrayAllocationAtomsTest",
+    "collection_suite_selector": "-Dtest=*",
+    "new_source_or_runtime_public_API": false
+  },
+  "qualification": {
+    "postimage_git_blob_identity": "EXACT_GITHUB_READBACK",
+    "original_jdk_ci_failure": "MAVEN_NO_TESTS_MATCHING_M3ArrayAllocationAtomsTest",
+    "canonical_sdk_proof": "REPORTED_IN_SYNXIA_PRS_17189_AND_17211",
+    "target_python_syntax": "NOT_RUN",
+    "target_maven_junit": "NOT_RUN",
+    "target_collection_java_jni": "NOT_RUN",
+    "target_installed_jdk": "NOT_RUN",
+    "target_release": "HOLD",
+    "other_existing_gates": "UNCHANGED"
+  },
+  "promotion": "HOLD_NOT_MERGE_READY",
+  "reason": "Full target runtime/Surefire/JNI/installed-image evidence and canonical follow-on PR admission remain pending."
+}
