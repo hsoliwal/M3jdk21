@@ -130,7 +130,19 @@ public final class LongHashSet implements LongCollection {
         if (size == 0 && occupied == 0) {
             return;
         }
-        Arrays.fill(keys, 0L);
+        // A deleted/empty slot already has a zero primitive payload.
+        // In a sparse table avoid writing every long: clear just live
+        // coordinates, then reset the compact occupancy lane. Dense
+        // tables retain the bulk-filled primitive fast path.
+        if ((long) size * Long.BYTES < keys.length) {
+            for (int index = 0; index < states.length; index++) {
+                if (states[index] == USED) {
+                    keys[index] = 0L;
+                }
+            }
+        } else {
+            Arrays.fill(keys, 0L);
+        }
         Arrays.fill(states, EMPTY);
         size = 0;
         occupied = 0;
