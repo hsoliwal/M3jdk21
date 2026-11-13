@@ -41,11 +41,11 @@ still fail closed.
 
 | Product path | Source Git blob before | Exact Synexia-generated product Git blob | SHA-256 postimage |
 | --- | --- | --- | --- |
-| `m3/backports/verify.py` | `e4ad2b11da3cd8352997c57686f24d70502bdbe8` | `fb3487eb4f83fd6fdf0e4af86014d9765458e8b7` | `be14df5623df961fe8f5a35b373b30574203e76a2dcd9baf007c7d3b4dd4771d` |
-| `m3/backports/test_jdk8364182_source_lineage.py` | `f9036900225b4327501b07e850dea6fd84fd0652` | `336f938ca29824901e0bab57934f40d9ae101895` | `a4f28414d189a6158f9cb331acb319b0da0d6b5b2af8c715432d2c273180ac18` |
+| `m3/backports/verify.py` | `e4ad2b11da3cd8352997c57686f24d70502bdbe8` | `9e2441357202a06e6631267c4dc4897209df351c` | `44281f429b240ed8604ca4eb9e7061bf8e1500f0cc721ddf9a8dc0d63bf8620c` |
+| `m3/backports/test_jdk8364182_source_lineage.py` | `f9036900225b4327501b07e850dea6fd84fd0652` | `8ef2ef4743be947253ed647c6874e476cb43879e` | `5eb5c4ddc29f165d2eb7bf0c53c03f36a9ef81a7712d404a12a3e2cbaf0a045f` |
 
 The existing source-owned `M3HashPinnedTextSnapshotRecipe` manifest is Git blob
-`cde7c3c3a8c865a0c2f0b4f19ab996fc5162ea37`. Both public postimage Git
+`972e1618d1f62ff43c437abb0d97a94373fe3c67`. Both public postimage Git
 blobs and full text bytes were read back and matched the canonical private
 source postimages, not rewritten by hand.
 
@@ -65,3 +65,21 @@ This report does not claim that JDK-8364182 runtime behavior, all JEPs, or
 the complete JBS backlog are accepted. Keep this receiver in **draft/HOLD** until
 the required actual CI and source-built product gates pass. No historical
 adaption or release receipt is rewritten to force a pass.
+
+
+## Source correction successor (2026-11-13)
+
+The original proposed source hashes were reviewed and retained in private
+Synexia `qualifications/CORRECTION_20261113.tsv`, not silently lost.
+An independent test check found an incomplete negative baseline-alias guard.
+The canonical source-owned recipe was therefore resealed to the **current**
+postimages shown above. The corrected verifier now refuses `baseline_sha256`
+aliasing **either** the exact JDK21u source hash or the exact SIMD successor,
+in addition to its original historical successor refusal. The test source now
+defines **11 test methods**, adding independent refusal of the older JDK21u
+and historical M3 String baseline aliases. Both current product Git blobs
+were independently read back identical to current canonical source resources.
+
+Source-exact byte matching is not actual OpenRewrite/JUnit execution or
+source-built M3JDK21 serviceability/JNI/JTReg qualification. No source code
+merge or release has been authorized by the correction.
