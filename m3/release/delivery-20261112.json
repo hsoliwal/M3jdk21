@@ -1,0 +1,129 @@
+{
+  "schema": "M3_RELEASE_DELIVERY_RECEIPT_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "735965a0ef09bca2fb618d28fc23b7b9a280aa82",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_preimage_commit": "b98bf8c065818aac3447be165909e2a013325d9a",
+  "execution_lane": "MAVEN_OPENREWRITE_SDK",
+  "outputs": [
+    {
+      "path": ".github/workflows/m3-bulk-executor-port.yml",
+      "recipe_id": "com.synexia.m3.JdkJtregProducerCurrent20261112",
+      "before_sha256": "15f423f5e9c39be4b07b93de4ae1a092b468722cbda75735cf78c46751d92a16",
+      "after_sha256": "ec3dc1d27ad20fb80f16febeb8d773fb40ab420e2aa8a73e695954ed6e89d478",
+      "after_git_blob": "b3776a9a221c3bf8b8eac61f93f92a8c02b33e6d",
+      "bytes": 4983,
+      "qualification_path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-release-admission-20261029/revisions/20261112-jtreg-producer-current/proof/QUALIFICATION.json",
+      "qualification_sha256": "f07cb8a60f606bbea865b9a2018a4c8d43ee69254617c288aa85683bd2dc99b9"
+    },
+    {
+      "path": ".github/workflows/m3-first-release-admission.yml",
+      "recipe_id": "com.synexia.m3.M3Jdk21MavenProductEvidence20261112",
+      "before_sha256": "8393c841544ce7a534dabba4dd10eea186c60f81ecd48c9beeec16fdb4857ea5",
+      "after_sha256": "94ad4696e6b8a20be78e7e093a607a193d934c62583cd7202b6db9bb33ea8792",
+      "after_git_blob": "e0e78883bf7ccee6a5e84b5dd8300402a8ed667c",
+      "bytes": 13200,
+      "qualification_path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-release-admission-20261029/revisions/20261112-maven-producer/proof/QUALIFICATION.json",
+      "qualification_sha256": "263b84677fe8a8c7eff1f46d71bd629325205aa3327c3365512df6aa32eef553"
+    },
+    {
+      "path": ".github/workflows/mindex-string-backing.yml",
+      "recipe_id": "com.synexia.m3.JdkJtregProducerCurrent20261112",
+      "before_sha256": "b4da5d0f9e06cd5a8bf20cc0c3c2bc1ee9c3707ae3cd82faf556d0b2a396b7f5",
+      "after_sha256": "46ff253c960902c8290f3a81399dd7974843a755576f5c43df96521c29443cb7",
+      "after_git_blob": "ce4b27b2b941777b2fb1601b9d340acee10650ae",
+      "bytes": 15843,
+      "qualification_path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-release-admission-20261029/revisions/20261112-jtreg-producer-current/proof/QUALIFICATION.json",
+      "qualification_sha256": "f07cb8a60f606bbea865b9a2018a4c8d43ee69254617c288aa85683bd2dc99b9"
+    },
+    {
+      "path": "m3/backports/README.md",
+      "recipe_id": "com.synexia.m3.JdkConvergenceDocs20261112",
+      "before_sha256": "32f384a00d149e0c0c9a1d73b9aff00e48d940fc10b4a4f7aa0788c0c9331b72",
+      "after_sha256": "b90250b4ec96a1cf325d87a958f10b51f8a7987ef6ed84fa57d5ae2b287e3081",
+      "after_git_blob": "053aebdddc24668ff07f61386dda0bc827cbf6e0",
+      "bytes": 24751,
+      "qualification_path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-release-admission-20261029/revisions/20261112-convergence-docs/proof/QUALIFICATION.json",
+      "qualification_sha256": "364aacb91939f05285b71f32566ff490302a180618205dfbe78db7345e6e152e"
+    },
+    {
+      "path": "m3/release/README.md",
+      "recipe_id": "com.synexia.m3.M3Jdk21MavenProductEvidence20261112",
+      "before_sha256": "30ebf2c9e00af86489ae401aae379c46d82c63e3649820a1806d0a11eef618d9",
+      "after_sha256": "0199337f0f4aec541610c8bc56d8a32245bc5e2b46c4a1605efa8da7505f8a10",
+      "after_git_blob": "ecca1c9eb6c44e1dd02ff436024e84c1c23cd55e",
+      "bytes": 22459,
+      "qualification_path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-release-admission-20261029/revisions/20261112-maven-producer/proof/QUALIFICATION.json",
+      "qualification_sha256": "263b84677fe8a8c7eff1f46d71bd629325205aa3327c3365512df6aa32eef553"
+    },
+    {
+      "path": "m3/release/release-contract.json",
+      "recipe_id": "com.synexia.m3.M3Jdk21MavenProductEvidence20261112",
+      "before_sha256": "003543165dded6c3e57364bea4de48e2ddb459e337205110ab18eb414eba97f0",
+      "after_sha256": "0bec7a818c3b665f70315a5422ac865b51967aee3a28d8c488eabe38d00ca39d",
+      "after_git_blob": "5fd39253e43caa542acf448429219903e5d3fbf8",
+      "bytes": 7844,
+      "qualification_path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-release-admission-20261029/revisions/20261112-maven-producer/proof/QUALIFICATION.json",
+      "qualification_sha256": "263b84677fe8a8c7eff1f46d71bd629325205aa3327c3365512df6aa32eef553"
+    },
+    {
+      "path": "m3/release/run_maven_control_reactor.py",
+      "recipe_id": "com.synexia.m3.M3Jdk21MavenProductEvidence20261112",
+      "before_sha256": "ABSENT",
+      "after_sha256": "9c7e4aebba9abeefc640bff1a747df1372a522a5b5fe605332eea5ab293d5f15",
+      "after_git_blob": "4cb94b65fcdd7363b61e88f95ff17853fe571eaf",
+      "bytes": 11346,
+      "qualification_path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-release-admission-20261029/revisions/20261112-maven-producer/proof/QUALIFICATION.json",
+      "qualification_sha256": "263b84677fe8a8c7eff1f46d71bd629325205aa3327c3365512df6aa32eef553"
+    },
+    {
+      "path": "m3/release/test_release_admission.py",
+      "recipe_id": "com.synexia.m3.M3Jdk21MavenProductEvidence20261112",
+      "before_sha256": "4978c690e98362426d82f22d437d472ac7556163868c7ee12e29bb5b09257601",
+      "after_sha256": "a032d6451881415c9cfbd884a0e2e4232181cbb09ba0c5c7722f5969f0e47a93",
+      "after_git_blob": "76c6023c38e4858b7c8b504ce8d0694b4df43aeb",
+      "bytes": 76764,
+      "qualification_path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-release-admission-20261029/revisions/20261112-maven-producer/proof/QUALIFICATION.json",
+      "qualification_sha256": "263b84677fe8a8c7eff1f46d71bd629325205aa3327c3365512df6aa32eef553"
+    },
+    {
+      "path": "m3/release/test_run_maven_control_reactor.py",
+      "recipe_id": "com.synexia.m3.M3Jdk21MavenProductEvidence20261112",
+      "before_sha256": "ABSENT",
+      "after_sha256": "9a396853879d25bc9d69c1a1a0008f0b36d0518dad6179253bccac6bd17486a2",
+      "after_git_blob": "ed4374288d0a69513e77f95cc3bd922d30e3aacd",
+      "bytes": 18508,
+      "qualification_path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-release-admission-20261029/revisions/20261112-maven-producer/proof/QUALIFICATION.json",
+      "qualification_sha256": "263b84677fe8a8c7eff1f46d71bd629325205aa3327c3365512df6aa32eef553"
+    },
+    {
+      "path": "m3/release/verify_release_admission.py",
+      "recipe_id": "com.synexia.m3.M3Jdk21MavenProductEvidence20261112",
+      "before_sha256": "4d9a4142af68fce74fafbb16a26d34c3519f6d6234d7265533329fb2021b48a6",
+      "after_sha256": "b9cbaf8b6ee45364054875a2c3851cec62097e51726b0d5d011a389792d77074",
+      "after_git_blob": "17bf6d1d6e4d546bc8625457a25d309666922a99",
+      "bytes": 55130,
+      "qualification_path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-release-admission-20261029/revisions/20261112-maven-producer/proof/QUALIFICATION.json",
+      "qualification_sha256": "263b84677fe8a8c7eff1f46d71bd629325205aa3327c3365512df6aa32eef553"
+    }
+  ],
+  "qualification": {
+    "recipe_sdk_tests": {
+      "jtreg_producer": 6,
+      "maven_product_evidence": 6,
+      "convergence_docs": 6
+    },
+    "jtreg_dependency_contract_cases": 24,
+    "maven_and_existing_product_verifier_cases": 180,
+    "target_test_scope": "Finite local Git/subprocess/action-shell fixtures against SDK outputs",
+    "hosted_workflows": "NOT_RUN",
+    "full_product_maven": "HOLD",
+    "source_built_jdk_jtreg": "NOT_RUN"
+  },
+  "limits": [
+    "The recorded target tests use finite local fixtures; hosted workflows and source-built JDK/JTReg have not been qualified by this record.",
+    "Full product Maven execution remains held by existing recipe custody and offline dependency requirements.",
+    "Canonical provenance JSON syntax is repaired without discarding historical conflicting or unsupported records; global provenance remains HOLD.",
+    "This file is passive data; the target does not fetch or execute Synexia transformation sources."
+  ]
+}

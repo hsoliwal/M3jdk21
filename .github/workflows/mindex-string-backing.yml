@@ -193,6 +193,7 @@ jobs:
         uses: ./.github/actions/get-bootjdk
         with:
           platform: linux-x64
+      - name: Build repository JTReg for this run
       - name: Build pinned repository JTReg for this run
         uses: ./.github/actions/build-jtreg
       - name: Get repository JTReg

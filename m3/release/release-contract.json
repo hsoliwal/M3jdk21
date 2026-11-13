@@ -150,7 +150,7 @@
     "gate_owners": {
       "M3_MAVEN_CONTROL_REACTOR": "hsoliwal/M3jdk21"
     },
-    "maven_gate_scope": "Preserve this existing gate ID. Under the 2026-10-31 standalone rule (M3JDK21 builds, tests, gates and releases without another repository) the Maven control-reactor receipt is produced inside hsoliwal/M3jdk21 from M3jdk21 sources rather than by the Synexia repository; it still records the exact repository, commit and recipe ID it executed. All product build, runtime and target acceptance gates remain M3JDK21-owned. Legacy recipe roots remain visible HOLD debt; a passive provenance receipt does not introduce a target runtime or build dependency.",
+    "maven_gate_scope": "The existing M3_MAVEN_CONTROL_REACTOR gate is produced inside hsoliwal/M3jdk21 by executing its complete default m3/pom.xml product reactor with clean verify, tests enabled and cache reuse disabled. Product execution remains standalone. canonical_recipe records only the exact Synexia source revision and recipe identity that produced the reviewed build outputs; it is passive provenance and never a target-side recipe invocation. Legacy recipe custody and unresolved executable recipe dependencies prevent this producer from starting Maven. Other release and runtime gates remain independently required.",
     "required_manifest_fields": [
       "schema",
       "source_commit",

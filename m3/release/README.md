@@ -154,8 +154,8 @@ A release candidate must preserve:
   raw JaCoCo XML where applicable, each source SHA-256, >=90% per measured
   contract atom (99% objective for critical atoms), and explicit exclusions/HOLD;
 - JNI/native parity results where JNI/native is used;
-- Maven/OpenRewrite control-reactor execution receipt **produced inside M3jdk21**
-  from M3jdk21 sources, with its exact repository, commit and recipe ID;
+- Maven product-reactor execution receipt **produced inside M3jdk21**
+  from its exact source commit/tree, with passive canonical recipe provenance;
 - product compilation and applicable installed-image/module tests;
 - release-contract validation;
 - generated SHA-256 manifest;
@@ -244,8 +244,10 @@ provenance receipts. It does not run a recipe command supplied in a receipt.
 
 Under the 2026-10-31 standalone rule the existing mandatory gate
 `M3_MAVEN_CONTROL_REACTOR` requires an execution receipt produced inside
-`hsoliwal/M3jdk21`, including its exact commit and recipe ID. Every mandatory
-gate is M3JDK21-owned. The
+`hsoliwal/M3jdk21`, including its exact source commit/tree and Maven command.
+Every mandatory product gate is M3JDK21-owned. The separate `canonical_recipe`
+fields identify the Synexia recipe origin; they neither delegate product acceptance
+nor authorize recipe execution inside the target. The
 standalone dependency check exempts only the structured canonical gate-owner
 metadata; actual external checkout/build/runtime references remain blockers.
 Historical target-local recipe roots remain custody debt. Preserve their source
@@ -312,8 +314,9 @@ release admission on HOLD.
 The `M3_RELEASE_EVIDENCE_V1` manifest binds `source_commit` and `source_tree`.
 Each gate includes its owner, executed command, zero exit status, OS,
 architecture, toolchain, and safe manifest-relative artifact paths with SHA-256.
-The canonical recipe gate additionally records `canonical_recipe.repository`,
-`commit` and `recipe_id`. Artifact bytes and structure can be verified locally;
+The Maven product gate additionally records `canonical_recipe.repository`,
+`commit` and `recipe_id` as passive Synexia origin, plus full-reactor execution
+and source-preservation evidence. Artifact bytes and structure can be verified locally;
 review must still establish that the actual execution covers the claimed
 contract. Synthetic verifier fixtures are never execution receipts.
 
@@ -360,3 +363,54 @@ that does not satisfy it stays on HOLD. This preparation does not delete/rebuild
 a branch, backdate authorship, rewrite ancestry or bypass the gate. Published
 release history remains immutable. See the [current candidate checklist](RELEASE_CHECKLIST_CANDIDATE_2756.md) for
 the evidence required before a tag or release can be admitted.
+
+## Producing the Maven control-reactor receipt
+
+The existing first-release workflow runs `run_maven_control_reactor.py` and then
+validates the evidence produced by that same invocation. Its raw artifacts are
+uploaded on PASS, FAIL and preflight HOLD. The consumer does not read a stale
+checked-in evidence manifest and never executes a command contained in a receipt.
+
+The producer requires a complete clean Git worktree at the expected commit,
+Maven >=3.9 running on Java 21, a POSIX host, and an empty evidence directory
+outside the source tree. It executes the complete default `m3/pom.xml` reactor
+with `clean verify`, offline dependencies, tests enabled and Maven build-cache
+reuse disabled. It accepts no module-selection, profile or arbitrary-goal options.
+Repository Maven CLI/JVM configuration and ambient Maven/JVM options require
+separate review; they cannot silently narrow the product gate. The Maven toolchain output,
+source identities, inspected POM hashes, exact command, exit status and raw build
+log are retained. A timeout terminates the Maven process group. Source changes
+before or during execution refuse a passing receipt.
+
+Canonical provenance is read from the committed data-only file
+`m3/release/maven-control-origin.json`. Its `repository`, `commit` and `recipe_id`
+identify the exact executed Synexia recipe for this build integration. Attach that
+origin only after the canonical recipe has actually executed; a placeholder is
+not execution proof. The producer copies its bytes to the evidence directory and
+never downloads or runs the referenced recipe. Product Maven dependencies must
+already be available from the approved offline toolchain/cache; a missing artifact
+is a build failure, not permission to omit a module.
+
+The consumer requires all five hash-verified raw files: `canonical-origin.json`,
+`reactor-inputs.json`, `producer-result.json`, `maven.log` and `toolchain.log`.
+It compares the origin bytes to the committed source file, the result to the gate
+record, and the sorted POM path/hash list to the complete declared local closure,
+including inactive profile modules and local parents. It also checks the raw
+toolchain identity. These integrity checks bind a packet to its source; the
+reviewed producer and same-run workflow remain responsible for actual execution.
+
+**Current reactor migration remains required.** A blob-pinned ABSORB custody row
+preserves historical source; it does not authorize executing a target-local
+recipe. The producer explicitly reports HOLD while executable candidates remain
+in the existing legacy recipe roots or a declared POM closure contains recipe or
+external Synexia build dependencies. Unresolved coordinates, local-parent identity
+mismatches, external parents and skip configurations also require review. It
+preserves all modules and profiles. Resolve the
+source custody and affected consumers through the existing Synexia recipe before
+rerunning this producer; do not remove modules simply to obtain PASS.
+
+A producer PASS proves only the recorded default product Maven execution. It does
+not enable optional profiles or establish a source-built JDK, jtreg, JNI, String,
+coverage, performance or release claim. Unit fixtures for this producer use clearly
+identified synthetic Maven subprocesses; their PASS is runner regression coverage,
+not a product execution receipt.

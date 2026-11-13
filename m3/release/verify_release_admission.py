@@ -16,6 +16,7 @@ import csv
 import hashlib
 import importlib.util
 import json
+import os
 import re
 import subprocess
 from pathlib import Path
@@ -68,11 +69,24 @@ NAME_MAP = "m3/docs/name-mapping.json"
 NAME_PLAN = "m3/tooling/name-contract/name-plan.json"
 EVIDENCE_SCHEMA = "M3_RELEASE_EVIDENCE_V1"
 DEFAULT_EVIDENCE = "m3/release/queue/current/evidence.json"
-# Product gates are independently accepted here. Standalone rule (2026-10-31): the Maven
-# control-reactor receipt is produced inside M3jdk21; this consumer never executes recipe source.
+# Product gates are independently accepted here. The Maven product build runs in
+# M3jdk21; its canonical recipe origin is passive Synexia provenance, never an
+# instruction to fetch or execute a transformation in the product repository.
 PRODUCT_REPOSITORY = "hsoliwal/M3jdk21"
-CANONICAL_RECIPE_REPOSITORY = PRODUCT_REPOSITORY
+CANONICAL_RECIPE_REPOSITORY = "hsoliwal/com.synexia"
 MAVEN_GATE = "M3_MAVEN_CONTROL_REACTOR"
+MAVEN_REACTOR_SCOPE = "FULL_DEFAULT_REACTOR"
+MAVEN_ORIGIN_PATH = "m3/release/maven-control-origin.json"
+MAVEN_RAW_ARTIFACTS = frozenset({"canonical-origin.json", "reactor-inputs.json",
+                                 "producer-result.json", "maven.log", "toolchain.log"})
+XML_NS = {"m": "http://maven.apache.org/POM/4.0.0"}
+MAX_POMS = 4096
+MAX_POM_BYTES = 4 * 1024 * 1024
+MAVEN_CONTROL_ARGS = (
+    "-B", "-ntp", "-o", "-f", "m3/pom.xml",
+    "-Dmaven.test.skip=false", "-DskipTests=false", "-DskipITs=false",
+    "-Dmaven.build.cache.enabled=false", "clean", "verify",
+)
 COVERAGE_GATE = "M3_CHANGED_ATOM_COVERAGE"
 COVERAGE_SCHEMA = "M3_CHANGED_ATOM_COVERAGE_V1"
 COVERAGE_SCOPE = "M3_OWNED_CHANGED_CONTRACT_ATOMS"
@@ -89,7 +103,18 @@ SOURCE_SUFFIXES = frozenset({
 
 
 def gate_owner(ident: str) -> str:
-    return CANONICAL_RECIPE_REPOSITORY if ident == MAVEN_GATE else PRODUCT_REPOSITORY
+    return PRODUCT_REPOSITORY
+
+
+def canonical_recipe_origin(value: dict) -> None:
+    """Validate data-only origin; this helper never loads or executes a recipe."""
+    if (not isinstance(value, dict)
+            or value.get("repository") != CANONICAL_RECIPE_REPOSITORY
+            or not isinstance(value.get("commit"), str)
+            or not SHA1.fullmatch(value["commit"])
+            or not isinstance(value.get("recipe_id"), str)
+            or not value["recipe_id"].strip()):
+        raise ValueError("exact canonical Synexia recipe repository, revision and identity missing")
 
 
 def release_identity(release: dict, version_text: str) -> None:
@@ -182,6 +207,148 @@ def safe_artifact(base: Path, relative: str) -> Path:
     if not current.is_file():
         raise ValueError("evidence artifact missing: " + relative)
     return current
+
+
+def maven_tracked_file(root: Path, relative: str, tracked: set[str]) -> Path:
+    if not tree_path(relative) or relative not in tracked:
+        raise ValueError("missing tracked product input: " + relative)
+    return safe_artifact(root, relative)
+
+
+def maven_reactor_inputs(root: Path, tracked: set[str]) -> list[dict]:
+    """Inspect and hash the complete declared local POM closure without running Maven.
+
+    Includes inactive profile modules and local parents, with conservative identity
+    and dependency checks. It does not activate optional profiles or replace Maven
+    model construction. Both producer and consumer use this exact input seal.
+    """
+    pending, seen, records, pom_texts = ["m3/pom.xml"], set(), [], {}
+    while pending:
+        relative = pending.pop()
+        if relative in seen:
+            continue
+        if len(seen) >= MAX_POMS:
+            raise ValueError("POM preflight budget exhausted; no partial reactor execution")
+        seen.add(relative)
+        pom = maven_tracked_file(root, relative, tracked)
+        if pom.stat().st_size > MAX_POM_BYTES:
+            raise ValueError("POM exceeds preflight byte budget: " + relative)
+        raw = pom.read_bytes()
+        pom_texts[relative] = raw.decode("utf-8")
+        if b"<!DOCTYPE" in raw or b"<!ENTITY" in raw:
+            raise ValueError("POM with DTD/entity is not admitted: " + relative)
+        model = ET.fromstring(raw)
+        if model.tag != "{" + XML_NS["m"] + "}project":
+            raise ValueError("unexpected Maven POM namespace: " + relative)
+        # Project coordinates alone do not prove an external dependency. Inspect
+        # actual dependency/plugin/extension references, including management and
+        # profile declarations; an unresolved coordinate cannot authorize a run.
+        references = model.findall("m:parent", XML_NS)
+        for kind in ("dependencies/m:dependency", "plugins/m:plugin", "extensions/m:extension"):
+            references.extend(model.findall(".//m:" + kind, XML_NS))
+        for reference in references:
+            group = (reference.findtext("m:groupId", "", XML_NS) or "").strip()
+            artifact = (reference.findtext("m:artifactId", "", XML_NS) or "").strip()
+            if "${" in group or "${" in artifact:
+                raise ValueError("unresolved Maven dependency/plugin coordinate requires review: " + relative)
+            if group.startswith("org.openrewrite"):
+                raise ValueError("recipe/external build dependency requires migration: " + relative)
+            if "rewrite" in artifact.lower() or "recipe" in artifact.lower():
+                raise ValueError("recipe build artifact requires migration: " + relative)
+        for config in model.findall(".//m:configuration", XML_NS):
+            for child in config.iter():
+                name = child.tag.rsplit("}", 1)[-1].lower()
+                value = (child.text or "").strip().lower()
+                if name.startswith("skip") and value not in ("", "false"):
+                    raise ValueError("unqualified skip configuration in product reactor: " + relative)
+        records.append({"path": relative, "sha256": sha256(pom)})
+        # .// includes profile modules deliberately: inspecting them does not run them.
+        children = [item.text or "" for item in model.findall(".//m:modules/m:module", XML_NS)]
+        parent = model.find("m:parent", XML_NS)
+        if parent is not None:
+            parent_path = parent.find("m:relativePath", XML_NS)
+            value = "../pom.xml" if parent_path is None else (parent_path.text or "").strip()
+            if not value:
+                raise ValueError("external Maven parent needs a reviewed local source closure: " + relative)
+            local = Path(os.path.normpath(pom.parent / value))
+            if local.suffix != ".xml":
+                local = local / "pom.xml"
+            if not local.is_relative_to(root):
+                raise ValueError("Maven parent escapes product source: " + relative)
+            local = maven_tracked_file(root, local.relative_to(root).as_posix(), tracked)
+            local_model = ET.fromstring(local.read_bytes())
+            for key in ("groupId", "artifactId", "version"):
+                expected = (parent.findtext("m:" + key, "", XML_NS) or "").strip()
+                actual = (local_model.findtext("m:" + key, "", XML_NS) or "").strip()
+                if not actual and key != "artifactId":
+                    actual = (local_model.findtext("m:parent/m:" + key, "", XML_NS) or "").strip()
+                if not expected or "${" in expected or "${" in actual or actual != expected:
+                    raise ValueError("Maven parent identity differs from its inspected local POM: " + relative)
+            children.append(value)
+        for child in children:
+            child = child.strip()
+            if not child or "${" in child or "\\" in child or Path(child).is_absolute():
+                raise ValueError("unresolved or nonlocal Maven module/parent in " + relative)
+            path = pom.parent / child
+            if path.suffix != ".xml":
+                path = path / "pom.xml"
+            path = Path(os.path.normpath(path))
+            if not path.is_relative_to(root):
+                raise ValueError("Maven module/parent escapes product source: " + relative)
+            pending.append(path.relative_to(root).as_posix())
+    # Reuse the existing target dependency classifier, including its distinction
+    # between repository-produced coordinates and external dependencies.
+    spec = importlib.util.spec_from_file_location(
+        "m3_standalone", Path(__file__).with_name("check_standalone.py"))
+    standalone = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(standalone)
+    dependencies = [item for item in standalone.maven_findings(pom_texts) if item[0] == "D_MAVEN"]
+    if dependencies:
+        raise ValueError("external product build dependency requires migration: " + dependencies[0][1])
+    return sorted(records, key=lambda item: item["path"])
+
+
+def maven_toolchain(log: Path) -> str:
+    text = log.read_text(encoding="utf-8", errors="replace")
+    plain = re.sub(r"\x1b\[[0-9;]*m", "", text)
+    maven = re.search(r"Apache Maven (\d+)\.(\d+)\.(\d+)", plain)
+    java = re.search(r"Java version:\s*([0-9]+)(?:[.\s,]|$)", plain)
+    if (maven is None or tuple(map(int, maven.groups())) < (3, 9, 0)
+            or java is None or java.group(1) != "21"):
+        raise ValueError("Maven >=3.9 and Java 21 are required; see toolchain.log")
+    return plain.strip()
+
+
+def validate_maven_receipt(root: Path, entry: dict, evidence_dir: Path) -> None:
+    """Bind the raw product receipt to committed provenance and the complete POM closure.
+
+    Byte integrity is not independent proof that Maven ran. The workflow invokes
+    the reviewed producer and consumes its fresh packet in the same job.
+    """
+    artifacts = {item["path"] for item in entry["artifacts"]}
+    if not MAVEN_RAW_ARTIFACTS.issubset(artifacts):
+        raise ValueError("Maven producer raw packet is incomplete: "
+                         + ", ".join(sorted(MAVEN_RAW_ARTIFACTS - artifacts)))
+    tracked = set(git_paths(root, "ls-tree", "-r", "--name-only", "-z", "HEAD"))
+    committed_origin = maven_tracked_file(root, MAVEN_ORIGIN_PATH, tracked)
+    origin = load_json(committed_origin)
+    canonical_recipe_origin(origin)
+    raw_origin = safe_artifact(evidence_dir, "canonical-origin.json")
+    if (raw_origin.read_bytes() != committed_origin.read_bytes()
+            or entry["canonical_recipe"] != {key: origin[key] for key in ("repository", "commit", "recipe_id")}):
+        raise ValueError("Maven canonical origin differs from the committed source receipt")
+    result = load_json(safe_artifact(evidence_dir, "producer-result.json"))
+    if result != {key: value for key, value in entry.items() if key != "artifacts"}:
+        raise ValueError("Maven producer result differs from the admitted gate record")
+    inputs = load_json(safe_artifact(evidence_dir, "reactor-inputs.json"))
+    if inputs != maven_reactor_inputs(root, tracked):
+        raise ValueError("Maven POM input seal differs from the complete current source closure")
+    if not safe_artifact(evidence_dir, "maven.log").stat().st_size:
+        raise ValueError("Maven execution log is empty")
+    toolchain = maven_toolchain(safe_artifact(evidence_dir, "toolchain.log"))
+    if toolchain != entry["environment"]["toolchain"]:
+        raise ValueError("Maven toolchain identity differs from its raw log")
 
 
 def reviewed_exemption(root: Path, proof: str, ident: str) -> None:
@@ -533,8 +700,8 @@ def validate(root: Path, release_mode: bool = False,
     foreign_owners = sorted(str(gate) for gate, owner in gate_owners.items()
                             if gate not in gates or owner != gate_owner(gate)) if isinstance(gate_owners, dict) else []
     if (not isinstance(gate_owners, dict)
-            or gate_owners.get(MAVEN_GATE) != CANONICAL_RECIPE_REPOSITORY or foreign_owners):
-        block("contract.recipe_owner", MAVEN_GATE + " requires the M3jdk21-produced recipe receipt; "
+            or gate_owners.get(MAVEN_GATE) != PRODUCT_REPOSITORY or foreign_owners):
+        block("contract.recipe_owner", MAVEN_GATE + " requires the M3jdk21-produced product-build receipt; "
               "all product gates remain owned by " + PRODUCT_REPOSITORY
               + "; invalid declarations: " + (", ".join(foreign_owners) or "-"))
 
@@ -741,13 +908,15 @@ def validate(root: Path, release_mode: bool = False,
                 raise ValueError("OS, architecture and toolchain identity missing")
             if ident == MAVEN_GATE:
                 canonical = entry.get("canonical_recipe")
-                if (not isinstance(canonical, dict)
-                        or canonical.get("repository") != CANONICAL_RECIPE_REPOSITORY
-                        or not isinstance(canonical.get("commit"), str)
-                        or not SHA1.fullmatch(canonical["commit"])
-                        or not isinstance(canonical.get("recipe_id"), str)
-                        or not canonical["recipe_id"].strip()):
-                    raise ValueError("exact recipe repository, revision and identity missing")
+                canonical_recipe_origin(canonical)
+                reactor = entry.get("reactor")
+                if (tuple(command[1:]) != MAVEN_CONTROL_ARGS
+                        or not isinstance(reactor, dict)
+                        or reactor.get("scope") != MAVEN_REACTOR_SCOPE
+                        or reactor.get("pom") != "m3/pom.xml"
+                        or reactor.get("maven_executed") is not True
+                        or reactor.get("source_preserved") is not True):
+                    raise ValueError("full default Maven clean/verify execution evidence missing or narrowed")
             artifacts = entry.get("artifacts")
             if not isinstance(artifacts, list) or not artifacts:
                 raise ValueError("raw execution artifacts missing")
@@ -766,6 +935,8 @@ def validate(root: Path, release_mode: bool = False,
                     raise ValueError("manifest cannot serve as its own execution artifact")
                 if sha256(file) != digest:
                     raise ValueError("execution artifact SHA-256 mismatch: " + path)
+            if ident == MAVEN_GATE:
+                validate_maven_receipt(root, entry, manifest_path.parent)
             if ident == COVERAGE_GATE:
                 validate_coverage_receipt(root, entry, manifest_path.parent)
             passed("gate:" + ident, f"{len(artifacts)} hash-verified artifacts; command provenance requires review")
