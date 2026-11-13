@@ -304,7 +304,7 @@ def main():
     runtime_modules = subprocess.check_output(
         [JAVA / 'bin/jdeps', '--module-path', array_jar, '--print-module-deps', jar],
         text=True).strip()
-    if runtime_modules != 'jdk.m3.arrays,java.base':
+    if sorted(runtime_modules.split(',')) != ['java.base', 'jdk.m3.arrays']:
         raise RuntimeError('Unexpected JPMS dependency closure: ' + runtime_modules)
     cp = os.pathsep.join(map(str, (MODULE / 'target/classes',
                                    MODULE / 'target/test-classes', array_jar)))
