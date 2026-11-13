@@ -401,7 +401,37 @@ public final class M3TreeList<E> extends AbstractList<E>
 
     @Override
     public int lastIndexOf(Object value) {
-        return super.lastIndexOf(value);
+        // The inherited ListIterator(size) repeatedly resolves rank in the
+        // tree. Visit the existing right/left index lanes in reverse order
+        // instead: O(n) worst-case search, O(tree height) int[] scratch.
+        if (size < 64) {
+            return super.lastIndexOf(value);
+        }
+        int expectedModCount = modCount;
+        int[] ancestors = new int[8];
+        int depth = 0;
+        int slot = root;
+        int position = size - 1;
+        while (slot != NONE || depth != 0) {
+            if (expectedModCount != modCount) {
+                throw new java.util.ConcurrentModificationException();
+            }
+            while (slot != NONE) {
+                if (depth == ancestors.length) {
+                    ancestors = Arrays.copyOf(ancestors, depth + (depth >>> 1) + 1);
+                }
+                ancestors[depth++] = slot;
+                slot = right[slot];
+            }
+            int candidate = ancestors[--depth];
+            E element = elementAt(candidate);
+            if (value == null ? element == null : value.equals(element)) {
+                return position;
+            }
+            position--;
+            slot = left[candidate];
+        }
+        return -1;
     }
 
     @Override
