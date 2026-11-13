@@ -105,8 +105,8 @@ jobs:
           LIBRARY="$GITHUB_WORKSPACE/proof/native/libm3_arrays.so"
           SDK=m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3SdkFamiliesTest.java
           SPRING=m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3SpringCaseInsensitiveSdkFactoryTest.java
-          test "$(git hash-object "$SDK")" = 4cfdcb18cb8417c607bb582069bfdc07975d9998
-          test "$(git hash-object "$SPRING")" = 4cec6718324f96d96ff5e183087569d8503758ce
+          test "$(git hash-object "$SDK")" = f4aa93c3a674e91d56bdb112dba86af3c97307d9
+          test "$(git hash-object "$SPRING")" = fcfbab2a9a49218b57df018992afc3ff1651f8e8
           mvn -B -ntp -f m3/collections/interop/pom.xml \
             '-Dtest=M3SdkFamiliesTest,M3SpringCaseInsensitiveSdkFactoryTest' \
             "-DargLine=-Xcheck:jni -Dm3.arrays.native.path=$LIBRARY" \
