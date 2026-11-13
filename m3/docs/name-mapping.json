@@ -13224,6 +13224,1190 @@
         },
         "source_state": "partial",
         "observation": "Source-body maintenance in the existing owners. The passive receiving receipt binds actual canonical Synexia execution and product evidence; inventory, source presence and metadata do not establish whole-family release readiness."
+      },
+      {
+        "id": "m3.collections.long-fifo-bulk-spans",
+        "kind": "specialization",
+        "status": "implemented-unverified",
+        "reason": "Bounded bulk-copy work in the existing fixed-capacity primitive-long FIFO. Exact component and module evidence is recorded separately; complete source-built M3JDK21, all-platform and production workload performance qualification remain open.",
+        "sources": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "fff5dea84d1b44c47ea58f84a75b8ff67f9632a6",
+            "module": "jdk.m3.collections",
+            "path": "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongCircularFifoQueue.java",
+            "symbol": "jdk.m3.collections.LongCircularFifoQueue",
+            "signatures": [],
+            "sha256": "2cebc170b5b3bcf76904a5b4ef6cb8d64173b34903d42c5863f89678335ce95e",
+            "git_blob_sha1": "eae619ccd191222e59d4a09da52a680572cca3c5",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.collections",
+            "path": "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongCircularFifoQueue.java",
+            "symbol": "jdk.m3.collections.LongCircularFifoQueue",
+            "signatures": [],
+            "sha256": "f84728e393f5cbcd88aa289e9a04f3a022ba5561734f272b8506f492e0bf2d5e",
+            "git_blob_sha1": "80dfc2a7f44afe514f333976f9cee13d58675028",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "jdk.m3.collections.LongCircularFifoQueue",
+        "identity": {
+          "namespace": "Existing public/protected class names, interfaces and descriptors remain unchanged.",
+          "generation": "Existing owned primitive arrays and scalar state; no new retained field, per-entry object or secondary payload owner."
+        },
+        "contract": {
+          "differences": [
+            "Medium windows shorter than capacity copy through at most two contiguous array spans; tiny windows and whole-capacity suffix replacement retain their existing behavior."
+          ],
+          "compatibility_obligations": [
+            "Preserve checked-window exception classes and validation order, accepted count, oldest-value eviction and encounter order.",
+            "Preserve exact physical slots, head, size and iterator epoch including integer wrap; zero-length windows do not mutate the owner.",
+            "Preserve detached array snapshots and source ownership; no input reference is retained or modified.",
+            "Preserve the full-capacity suffix shortcut and all existing single-item operations; no new concurrency guarantee."
+          ],
+          "public_surface": [
+            "All existing public/protected descriptors; no new public production member."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "Existing Java public/protected descriptors and retained fields; no JNI/native symbol changes.",
+          "bootstrap": "Existing src/jdk.m3.collections module; no new module or runtime dependency."
+        },
+        "dependencies": [
+          {
+            "id": "java.base",
+            "resolution": "resolved",
+            "reason": "Existing primitive arrays, array copies, Java callbacks and exceptions."
+          }
+        ],
+        "materialization": {
+          "admission": "Execute the sealed existing canonical Synexia recipe before receiving exact postimages.",
+          "joins": "Copy the checked window into the existing ring, then update the same head/size/epoch state without new storage.",
+          "outputs": "Executed Java source, target-authoritative regression tests and passive receiving receipt.",
+          "cached_facts": "No additional cache or payload owner."
+        },
+        "recipe": {
+          "id": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+          "version": "m3jdk21-ring-bulk-two-span-20261113",
+          "path": null,
+          "sha256": null,
+          "canonical_repository": "hsoliwal/com.synexia",
+          "canonical_path": "synexia-openrewrite-recipes/crates/m3jdk21-ring-bulk-two-span-20261113",
+          "preconditions": [
+            "Exact target preimage at fff5dea84d1b44c47ea58f84a75b8ff67f9632a6 with SHA-256 2cebc170b5b3bcf76904a5b4ef6cb8d64173b34903d42c5863f89678335ce95e.",
+            "Actual canonical Maven/OpenRewrite execution, exact no-change fixed point and stale-source refusal.",
+            "Compiler, API and behavior proofs on exact emitted bytes; bounded performance observations do not establish all-workload qualification.",
+            "Target tests and metadata are emitted separately by the existing m3-collections-contract-refinement-20261017 recipe, dataset fifo-bitset-target-20261113."
+          ],
+          "rollback": "Restore exact preimages through a separately reviewed sealed successor; preserve unrelated changes."
+        },
+        "tests": [
+          {
+            "id": "long-fifo-bulk-target-regression",
+            "receipt": "m3/compatibility/fifo-bitset-20261113.json"
+          },
+          {
+            "id": "long-fifo-public-api",
+            "receipt": "m3/compatibility/fifo-bitset-20261113.json"
+          },
+          {
+            "id": "long-fifo-bounded-cost",
+            "receipt": "m3/compatibility/fifo-bitset-20261113.json"
+          },
+          {
+            "id": "fifo-bitset-module-and-image",
+            "receipt": "m3/compatibility/fifo-bitset-20261113.json"
+          }
+        ],
+        "provenance": {
+          "license": "Apache-2.0; original first-party headers and published source lineage retained.",
+          "publication": "Routine maintenance of an already-public collection implementation; no previously private invention-specific implementation is exported.",
+          "copied_code": true,
+          "donor_boundary": "Reuse the existing primitive-array owner and canonical source recipe; no new vendor implementation, challenge solution or third-party body copied."
+        },
+        "sync": {
+          "source_revision": "fff5dea84d1b44c47ea58f84a75b8ff67f9632a6",
+          "target_revision": "fff5dea84d1b44c47ea58f84a75b8ff67f9632a6",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Preserve the existing owner, primitive-array representation and exported API; receive only the exact qualified source postimage."
+          ],
+          "pending": [
+            "Full source-built M3JDK21 acceptance",
+            "All-platform qualification and production workload performance",
+            "String -> arrays -> collections phase remains unchanged"
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "fff5dea84d1b44c47ea58f84a75b8ff67f9632a6",
+              "module": "jdk.m3.collections",
+              "path": "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongCircularFifoQueue.java",
+              "symbol": "jdk.m3.collections.LongCircularFifoQueue",
+              "signatures": [],
+              "sha256": "2cebc170b5b3bcf76904a5b4ef6cb8d64173b34903d42c5863f89678335ce95e",
+              "git_blob_sha1": "eae619ccd191222e59d4a09da52a680572cca3c5",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "partial",
+        "observation": "Source-body maintenance in the existing owner. The passive receiving receipt binds actual canonical Synexia execution and target evidence; source presence, metadata and finite checks do not establish whole-family release readiness."
+      },
+      {
+        "id": "m3.collections.long-bitset-max-traversal",
+        "kind": "specialization",
+        "status": "implemented-unverified",
+        "reason": "Overflow-safe live set-bit traversal at the largest int index in the existing long-array bitset owner. Exact component and module evidence is recorded separately; complete source-built M3JDK21, all-platform and production workload performance qualification remain open.",
+        "sources": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "fff5dea84d1b44c47ea58f84a75b8ff67f9632a6",
+            "module": "jdk.m3.collections",
+            "path": "src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/bits/PackedLongBitSet.java",
+            "symbol": "jdk.internal.m3.collections.bits.PackedLongBitSet",
+            "signatures": [],
+            "sha256": "7df86459e62a3fd979fad73955c49892c3bfaa610bb640291790a0e33c05516e",
+            "git_blob_sha1": "f056c32115f5dd7a495ca5607c1907ada660f6c2",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.collections",
+            "path": "src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/bits/PackedLongBitSet.java",
+            "symbol": "jdk.internal.m3.collections.bits.PackedLongBitSet",
+            "signatures": [],
+            "sha256": "e7df2a450ab47ec78d07f639f2248eafcca2d98667c82f08440c58a81807b4f6",
+            "git_blob_sha1": "64b1ace537704cb188064a387e773eaf2cf34b3e",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "jdk.internal.m3.collections.bits.PackedLongBitSet",
+        "identity": {
+          "namespace": "Existing public/protected class names, interfaces and descriptors remain unchanged.",
+          "generation": "Existing owned primitive arrays and scalar state; no new retained field, per-entry object or secondary payload owner."
+        },
+        "contract": {
+          "differences": [
+            "A delivered Integer.MAX_VALUE set bit terminates traversal without overflowing the next search coordinate, including when a callback grows a previously small owner.",
+            "A one-past cursor represents exhaustion as zero and the maximum-index terminal callback as Integer.MIN_VALUE; only positive search coordinates enter the ordinary traversal loop."
+          ],
+          "compatibility_obligations": [
+            "Preserve ascending live callback order and observe future set/clear/grow changes after each callback; never revisit already passed coordinates.",
+            "Deliver the maximum index exactly once and preserve effects made by its terminal callback without another owner query.",
+            "Preserve empty-owner null callback acceptance, nonempty null failure, and exact callback exception identity and prior side effects.",
+            "Preserve words, cached query state, all other operations and the public LongBitSet API; no new concurrency guarantee."
+          ],
+          "public_surface": [
+            "All existing public/protected descriptors; no new public production member."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "Existing Java public/protected descriptors and retained fields; no JNI/native symbol changes.",
+          "bootstrap": "Existing src/jdk.m3.collections module; no new module or runtime dependency."
+        },
+        "dependencies": [
+          {
+            "id": "java.base",
+            "resolution": "resolved",
+            "reason": "Existing primitive arrays, array copies, Java callbacks and exceptions."
+          }
+        ],
+        "materialization": {
+          "admission": "Execute the sealed existing canonical Synexia recipe before receiving exact postimages.",
+          "joins": "Traverse the existing nextSetBit owner with a one-past cursor, dispatch the maximum-index callback once after the positive-cursor loop, and retain no auxiliary state.",
+          "outputs": "Executed Java source, target-authoritative regression tests and passive receiving receipt.",
+          "cached_facts": "No additional cache or payload owner."
+        },
+        "recipe": {
+          "id": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+          "version": "m3jdk-longbitset-max-boundary-20261113",
+          "path": null,
+          "sha256": null,
+          "canonical_repository": "hsoliwal/com.synexia",
+          "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3jdk-longbitset-max-boundary-20261113",
+          "preconditions": [
+            "Exact target preimage at fff5dea84d1b44c47ea58f84a75b8ff67f9632a6 with SHA-256 7df86459e62a3fd979fad73955c49892c3bfaa610bb640291790a0e33c05516e.",
+            "Actual canonical Maven/OpenRewrite execution, exact no-change fixed point and stale-source refusal.",
+            "Compiler, API and behavior proofs on exact emitted bytes; bounded performance observations do not establish all-workload qualification.",
+            "Target tests and metadata are emitted separately by the existing m3-collections-contract-refinement-20261017 recipe, dataset fifo-bitset-target-20261113."
+          ],
+          "rollback": "Restore exact preimages through a separately reviewed sealed successor; preserve unrelated changes."
+        },
+        "tests": [
+          {
+            "id": "long-bitset-live-boundary-target-regression",
+            "receipt": "m3/compatibility/fifo-bitset-20261113.json"
+          },
+          {
+            "id": "long-bitset-public-api",
+            "receipt": "m3/compatibility/fifo-bitset-20261113.json"
+          },
+          {
+            "id": "long-bitset-bounded-cost",
+            "receipt": "m3/compatibility/fifo-bitset-20261113.json"
+          },
+          {
+            "id": "fifo-bitset-module-and-image",
+            "receipt": "m3/compatibility/fifo-bitset-20261113.json"
+          }
+        ],
+        "provenance": {
+          "license": "Apache-2.0 OR EPL-2.0; original first-party headers and published source lineage retained.",
+          "publication": "Routine maintenance of an already-public collection implementation; no previously private invention-specific implementation is exported.",
+          "copied_code": true,
+          "donor_boundary": "Reuse the existing primitive-array owner and canonical source recipe; no new vendor implementation, challenge solution or third-party body copied."
+        },
+        "sync": {
+          "source_revision": "fff5dea84d1b44c47ea58f84a75b8ff67f9632a6",
+          "target_revision": "fff5dea84d1b44c47ea58f84a75b8ff67f9632a6",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Preserve the existing owner, primitive-array representation and exported API; receive only the exact qualified source postimage."
+          ],
+          "pending": [
+            "Full source-built M3JDK21 acceptance",
+            "All-platform qualification and production workload performance",
+            "String -> arrays -> collections phase remains unchanged"
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "fff5dea84d1b44c47ea58f84a75b8ff67f9632a6",
+              "module": "jdk.m3.collections",
+              "path": "src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/bits/PackedLongBitSet.java",
+              "symbol": "jdk.internal.m3.collections.bits.PackedLongBitSet",
+              "signatures": [],
+              "sha256": "7df86459e62a3fd979fad73955c49892c3bfaa610bb640291790a0e33c05516e",
+              "git_blob_sha1": "f056c32115f5dd7a495ca5607c1907ada660f6c2",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "partial",
+        "observation": "Source-body maintenance in the existing owner. The passive receiving receipt binds actual canonical Synexia execution and target evidence; source presence, metadata and finite checks do not establish whole-family release readiness."
+      },
+      {
+        "id": "synexia.collections.long-order-statistic-array-growth",
+        "kind": "specialization",
+        "status": "pending",
+        "reason": "Source-pinned canonical candidate for LongOrderStatisticMultiset. Existing live jdk.m3.collections owner; installed-image and target-runtime acceptance remain pending.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2cbfb107709e0901d25ed56636ec226bca920343",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/crates/m3jdk-avl-array-growth-clear-20261112/src/main/java/jdk/m3/collections/LongOrderStatisticMultiset.java",
+            "symbol": "jdk.m3.collections.LongOrderStatisticMultiset",
+            "signatures": [
+              "void add(long)",
+              "void add(long,long)",
+              "void clear()"
+            ],
+            "sha256": "c7584931491a5dd88ada451b3fe628070574cb199cbb5cfe7eba82ea9cd8499c",
+            "git_blob_sha1": "d9f04734e3a93ffdf6e25e78f7630fb75e4b3743",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.collections",
+            "path": "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongOrderStatisticMultiset.java",
+            "symbol": "jdk.m3.collections.LongOrderStatisticMultiset",
+            "signatures": [
+              "void add(long)",
+              "void add(long,long)",
+              "void clear()"
+            ],
+            "sha256": "c7584931491a5dd88ada451b3fe628070574cb199cbb5cfe7eba82ea9cd8499c",
+            "git_blob_sha1": "d9f04734e3a93ffdf6e25e78f7630fb75e4b3743",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "jdk.m3.collections.LongOrderStatisticMultiset",
+        "identity": {
+          "namespace": "Retain every existing Java package, class and public/protected declaration.",
+          "generation": "Existing key, multiplicity, subtree count, left, right and height lanes; no retained node objects."
+        },
+        "contract": {
+          "differences": [
+            "Assign recursive child results through the current grown primitive lane.",
+            "Stage all six replacement arrays before publishing any live lane.",
+            "Clear logical state in constant work while retaining primitive capacity."
+          ],
+          "compatibility_obligations": [
+            "Preserve rank/select, signed key order, multiplicity, overflow refusal and free-slot reuse.",
+            "Failed allocation preserves all six prior array identities and committed contents.",
+            "Successful failure-atomic growth may require greater transient peak memory; clear is not secure zeroization.",
+            "Preserve existing JDK21 and provider contracts, licence/NOTICE and source ownership; no public Java SE type is renamed."
+          ],
+          "public_surface": [
+            "Existing public/protected declarations remain unchanged; no new API or JNI symbol."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "Public/protected descriptor parity requires independent target verification.",
+          "bootstrap": "Existing live jdk.m3.collections owner; installed-image and target-runtime acceptance remain pending."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Execute the existing canonical Maven/OpenRewrite recipe against exact target preimages before receiving.",
+          "joins": "Retain the existing array, coordinate and provider ownership described in this record.",
+          "outputs": "Source postimages and target-authoritative tests; passive receipt at m3/compatibility/collections-array-fork-receive-20261113.json.",
+          "cached_facts": "No new general cache, storage hierarchy or runtime dependency on Synexia."
+        },
+        "recipe": {
+          "id": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+          "version": "fork-array-receive-20261113",
+          "path": null,
+          "sha256": null,
+          "canonical_repository": "hsoliwal/com.synexia",
+          "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/fork-array-receive-20261113",
+          "preconditions": [
+            "Exact target base 0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb and source pin 2cbfb107709e0901d25ed56636ec226bca920343.",
+            "Actual SDK execution, exact postimages, fixed point and stale-source refusal.",
+            "Independent target compiler, behavior, API and applicable module/runtime gates."
+          ],
+          "rollback": "Use a separately reviewed, source-sealed inverse in canonical Synexia; preserve unrelated records and sources."
+        },
+        "tests": [],
+        "test_descriptions": [
+          "Planned passive target receipt: m3/compatibility/collections-array-fork-receive-20261113.json; a locator is not evidence of a passed gate.",
+          "Canonical predecessor dataset: m3jdk-avl-array-growth-clear-20261112; historical proof does not establish current target acceptance."
+        ],
+        "provenance": {
+          "license": "Original Apache-2.0 OR EPL-2.0 contributor header remains unchanged.",
+          "publication": "Exact existing canonical source candidate; recipes and improvement memory remain private in Synexia.",
+          "copied_code": true,
+          "donor_boundary": "Existing live jdk.m3.collections owner; installed-image and target-runtime acceptance remain pending."
+        },
+        "sync": {
+          "source_revision": "2cbfb107709e0901d25ed56636ec226bca920343",
+          "target_revision": "0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Assign recursive child results through the current grown primitive lane.",
+            "Stage all six replacement arrays before publishing any live lane.",
+            "Clear logical state in constant work while retaining primitive capacity."
+          ],
+          "pending": [
+            "Canonical receiver Maven/OpenRewrite execution and postimage-only handoff remain unclaimed by this naming candidate.",
+            "Actual emitted-source compilation, behavior/API and affected provider tests.",
+            "Full source-built installed M3JDK21, applicable JNI/GC/jtreg/platform acceptance and comparative resource evidence.",
+            "String -> arrays -> collections -> AST/compiler -> remaining families order and active String stage remain unchanged."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb",
+              "module": "jdk.m3.collections",
+              "path": "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongOrderStatisticMultiset.java",
+              "symbol": "jdk.m3.collections.LongOrderStatisticMultiset",
+              "signatures": [
+                "void add(long)",
+                "void add(long,long)",
+                "void clear()"
+              ],
+              "sha256": "0ce425aed59b6ecc77b25a12f222e349f70023693ceab0e8059095ab5eaf800b",
+              "git_blob_sha1": "8f6f23c7546bf491fc37bb3f1fa596193d3c8247",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "partial",
+        "observation": "Candidate source identities only. No recipe execution, library completion, runtime integration or performance qualification is claimed by this record."
+      },
+      {
+        "id": "synexia.collections.commons-fifo-two-span-index",
+        "kind": "specialization",
+        "status": "pending",
+        "reason": "Source-pinned canonical candidate for Commons CircularFifoQueue. Retained donor source under m3/collections/implementations; not a live collection-module source root or completed runtime integration.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2cbfb107709e0901d25ed56636ec226bca920343",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-commons-fifo-two-span-20261112/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-commons-fifo-two-span-20261112/0001-CircularFifoQueue.java.txt",
+            "symbol": "jdk.m3.collections.apache.queue.CircularFifoQueue",
+            "signatures": [
+              "E get(int)"
+            ],
+            "sha256": "24117940dea109bd9ce9421214ab06a5085ce36257c724fe172d9a123ecabb9e",
+            "git_blob_sha1": "75cc5051c2192cc1b3d59dac9658aed6b283299a",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": null,
+            "path": "m3/collections/implementations/commons-collections-4.5.0/src/main/java/jdk/m3/collections/apache/queue/CircularFifoQueue.java",
+            "symbol": "jdk.m3.collections.apache.queue.CircularFifoQueue",
+            "signatures": [
+              "E get(int)"
+            ],
+            "sha256": "24117940dea109bd9ce9421214ab06a5085ce36257c724fe172d9a123ecabb9e",
+            "git_blob_sha1": "75cc5051c2192cc1b3d59dac9658aed6b283299a",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "jdk.m3.collections.apache.queue.CircularFifoQueue",
+        "identity": {
+          "namespace": "Retain every existing Java package, class and public/protected declaration.",
+          "generation": "Existing Object[] circular buffer and start/end coordinates; no new payload owner."
+        },
+        "contract": {
+          "differences": [
+            "Use an overflow-safe one-wrap index with a cold modulo fallback for multi-wrap subclass coordinates."
+          ],
+          "compatibility_obligations": [
+            "Preserve bounds validation, exception behavior, array identity, queue ordering and overridable-size subclass behavior.",
+            "Preserve existing JDK21 and provider contracts, licence/NOTICE and source ownership; no public Java SE type is renamed."
+          ],
+          "public_surface": [
+            "Existing public/protected declarations remain unchanged; no new API or JNI symbol."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "Public/protected descriptor parity requires independent target verification.",
+          "bootstrap": "Retained donor source under m3/collections/implementations; not a live collection-module source root or completed runtime integration."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Execute the existing canonical Maven/OpenRewrite recipe against exact target preimages before receiving.",
+          "joins": "Retain the existing array, coordinate and provider ownership described in this record.",
+          "outputs": "Source postimages and target-authoritative tests; passive receipt at m3/compatibility/collections-array-fork-receive-20261113.json.",
+          "cached_facts": "No new general cache, storage hierarchy or runtime dependency on Synexia."
+        },
+        "recipe": {
+          "id": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+          "version": "fork-array-receive-20261113",
+          "path": null,
+          "sha256": null,
+          "canonical_repository": "hsoliwal/com.synexia",
+          "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/fork-array-receive-20261113",
+          "preconditions": [
+            "Exact target base 0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb and source pin 2cbfb107709e0901d25ed56636ec226bca920343.",
+            "Actual SDK execution, exact postimages, fixed point and stale-source refusal.",
+            "Independent target compiler, behavior, API and applicable module/runtime gates."
+          ],
+          "rollback": "Use a separately reviewed, source-sealed inverse in canonical Synexia; preserve unrelated records and sources."
+        },
+        "tests": [],
+        "test_descriptions": [
+          "Planned passive target receipt: m3/compatibility/collections-array-fork-receive-20261113.json; a locator is not evidence of a passed gate.",
+          "Canonical predecessor dataset: m3-commons-fifo-two-span-20261112; historical proof does not establish current target acceptance."
+        ],
+        "provenance": {
+          "license": "Apache Software Foundation Apache-2.0 header and existing NOTICE lineage remain unchanged.",
+          "publication": "Exact existing canonical source candidate; recipes and improvement memory remain private in Synexia.",
+          "copied_code": true,
+          "donor_boundary": "Retained donor source under m3/collections/implementations; not a live collection-module source root or completed runtime integration."
+        },
+        "sync": {
+          "source_revision": "2cbfb107709e0901d25ed56636ec226bca920343",
+          "target_revision": "0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Use an overflow-safe one-wrap index with a cold modulo fallback for multi-wrap subclass coordinates."
+          ],
+          "pending": [
+            "Canonical receiver Maven/OpenRewrite execution and postimage-only handoff remain unclaimed by this naming candidate.",
+            "Actual emitted-source compilation, behavior/API and affected provider tests.",
+            "Full source-built installed M3JDK21, applicable JNI/GC/jtreg/platform acceptance and comparative resource evidence.",
+            "String -> arrays -> collections -> AST/compiler -> remaining families order and active String stage remain unchanged.",
+            "Live module absorption is separate from receiving this retained donor-source atom."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb",
+              "module": null,
+              "path": "m3/collections/implementations/commons-collections-4.5.0/src/main/java/jdk/m3/collections/apache/queue/CircularFifoQueue.java",
+              "symbol": "jdk.m3.collections.apache.queue.CircularFifoQueue",
+              "signatures": [
+                "E get(int)"
+              ],
+              "sha256": "3f049edade65af154184df0fad68966e276f036e77325b65d436c02f07901cd8",
+              "git_blob_sha1": "5f94b86a7cf081e93ebfae3719f4f70d0e093b73",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "partial",
+        "observation": "Candidate source identities only. No recipe execution, library completion, runtime integration or performance qualification is claimed by this record."
+      },
+      {
+        "id": "synexia.collections.commons-permutation-capacity",
+        "kind": "specialization",
+        "status": "pending",
+        "reason": "Source-pinned canonical candidate for Commons PermutationIterator. Retained donor source under m3/collections/implementations; not a live collection-module source root or completed runtime integration.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2cbfb107709e0901d25ed56636ec226bca920343",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-commons-permutation-capacity-20261112/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-commons-permutation-capacity-20261112/0001-PermutationIterator.java.txt",
+            "symbol": "jdk.m3.collections.apache.iterators.PermutationIterator",
+            "signatures": [
+              "List<E> next()"
+            ],
+            "sha256": "10a8a201b38aa8c15a9564c682033b319847acd8cc01854af68024dd288bfa96",
+            "git_blob_sha1": "13343eaa2c408fc2f7ad0d70c708faad4dd3c372",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": null,
+            "path": "m3/collections/implementations/commons-collections-4.5.0/src/main/java/jdk/m3/collections/apache/iterators/PermutationIterator.java",
+            "symbol": "jdk.m3.collections.apache.iterators.PermutationIterator",
+            "signatures": [
+              "List<E> next()"
+            ],
+            "sha256": "10a8a201b38aa8c15a9564c682033b319847acd8cc01854af68024dd288bfa96",
+            "git_blob_sha1": "13343eaa2c408fc2f7ad0d70c708faad4dd3c372",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "jdk.m3.collections.apache.iterators.PermutationIterator",
+        "identity": {
+          "namespace": "Retain every existing Java package, class and public/protected declaration.",
+          "generation": "Existing permutation lanes and fresh caller-owned ArrayList output."
+        },
+        "contract": {
+          "differences": [
+            "Preallocate each returned permutation list to the known keys.length."
+          ],
+          "compatibility_obligations": [
+            "Preserve permutation order, reference identity, independent returned lists, exhaustion and the empty-input permutation.",
+            "Preserve existing JDK21 and provider contracts, licence/NOTICE and source ownership; no public Java SE type is renamed."
+          ],
+          "public_surface": [
+            "Existing public/protected declarations remain unchanged; no new API or JNI symbol."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "Public/protected descriptor parity requires independent target verification.",
+          "bootstrap": "Retained donor source under m3/collections/implementations; not a live collection-module source root or completed runtime integration."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Execute the existing canonical Maven/OpenRewrite recipe against exact target preimages before receiving.",
+          "joins": "Retain the existing array, coordinate and provider ownership described in this record.",
+          "outputs": "Source postimages and target-authoritative tests; passive receipt at m3/compatibility/collections-array-fork-receive-20261113.json.",
+          "cached_facts": "No new general cache, storage hierarchy or runtime dependency on Synexia."
+        },
+        "recipe": {
+          "id": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+          "version": "fork-array-receive-20261113",
+          "path": null,
+          "sha256": null,
+          "canonical_repository": "hsoliwal/com.synexia",
+          "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/fork-array-receive-20261113",
+          "preconditions": [
+            "Exact target base 0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb and source pin 2cbfb107709e0901d25ed56636ec226bca920343.",
+            "Actual SDK execution, exact postimages, fixed point and stale-source refusal.",
+            "Independent target compiler, behavior, API and applicable module/runtime gates."
+          ],
+          "rollback": "Use a separately reviewed, source-sealed inverse in canonical Synexia; preserve unrelated records and sources."
+        },
+        "tests": [],
+        "test_descriptions": [
+          "Planned passive target receipt: m3/compatibility/collections-array-fork-receive-20261113.json; a locator is not evidence of a passed gate.",
+          "Canonical predecessor dataset: m3-commons-permutation-capacity-20261112; historical proof does not establish current target acceptance."
+        ],
+        "provenance": {
+          "license": "Apache Software Foundation Apache-2.0 header and existing NOTICE lineage remain unchanged.",
+          "publication": "Exact existing canonical source candidate; recipes and improvement memory remain private in Synexia.",
+          "copied_code": true,
+          "donor_boundary": "Retained donor source under m3/collections/implementations; not a live collection-module source root or completed runtime integration."
+        },
+        "sync": {
+          "source_revision": "2cbfb107709e0901d25ed56636ec226bca920343",
+          "target_revision": "0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Preallocate each returned permutation list to the known keys.length."
+          ],
+          "pending": [
+            "Canonical receiver Maven/OpenRewrite execution and postimage-only handoff remain unclaimed by this naming candidate.",
+            "Actual emitted-source compilation, behavior/API and affected provider tests.",
+            "Full source-built installed M3JDK21, applicable JNI/GC/jtreg/platform acceptance and comparative resource evidence.",
+            "String -> arrays -> collections -> AST/compiler -> remaining families order and active String stage remain unchanged.",
+            "Live module absorption is separate from receiving this retained donor-source atom."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb",
+              "module": null,
+              "path": "m3/collections/implementations/commons-collections-4.5.0/src/main/java/jdk/m3/collections/apache/iterators/PermutationIterator.java",
+              "symbol": "jdk.m3.collections.apache.iterators.PermutationIterator",
+              "signatures": [
+                "List<E> next()"
+              ],
+              "sha256": "2d3f1a09beecc89860f45cca5b3f1ae2173969aa34f33ddad5b555fce1ec1ac9",
+              "git_blob_sha1": "7118abee3ae766c8f7279087450148bf20b4d7f9",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "partial",
+        "observation": "Candidate source identities only. No recipe execution, library completion, runtime integration or performance qualification is claimed by this record."
+      },
+      {
+        "id": "synexia.collections.eclipse-unified-set-bulk-clear",
+        "kind": "specialization",
+        "status": "pending",
+        "reason": "HELD: exact provider source closure fails; no target source update. Canonical candidate remains private; the exact current product preimage is retained.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2cbfb107709e0901d25ed56636ec226bca920343",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-eclipse-unifiedset-bulk-clear-20261112/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-eclipse-unifiedset-bulk-clear-20261112/0001-UnifiedSet.java.txt",
+            "symbol": "jdk.m3.collections.eclipse.impl.set.mutable.UnifiedSet",
+            "signatures": [
+              "void clear()"
+            ],
+            "sha256": "798627d0424076d387dd96d08d66a3a7ae372862293aeaa09f36b453c1c7e897",
+            "git_blob_sha1": "db6f4c73e3b9508074a34cc7b9384569497c9698",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb",
+            "module": null,
+            "path": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/set/mutable/UnifiedSet.java",
+            "symbol": "jdk.m3.collections.eclipse.impl.set.mutable.UnifiedSet",
+            "signatures": [
+              "void clear()"
+            ],
+            "sha256": "0db3b5beab1c4f3e13a2d2d69c17e9b3e6f726148278b30947e8f90cd209a081",
+            "git_blob_sha1": "f302e3b3f3e86a86ebea0f320c711c048a5c7e0c",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "owner": "jdk.m3.collections.eclipse.impl.set.mutable.UnifiedSet",
+        "identity": {
+          "namespace": "Retain every existing Java package, class and public/protected declaration.",
+          "generation": "Existing Object[] table and collision representation remain authoritative."
+        },
+        "contract": {
+          "differences": [
+            "Private candidate only: Replace the existing nulling loop with Arrays.fill on the same table."
+          ],
+          "compatibility_obligations": [
+            "Preserve early-empty behavior, occupied accounting, table identity, null/collision semantics and clear/reuse behavior.",
+            "Existing ChainedBucket objects remain; this atom does not claim complete set arrayification.",
+            "Preserve existing JDK21 and provider contracts, licence/NOTICE and source ownership; no public Java SE type is renamed."
+          ],
+          "public_surface": [
+            "Existing public/protected declarations remain unchanged; no new API or JNI symbol."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "Public/protected descriptor parity requires independent target verification.",
+          "bootstrap": "Retained donor source under m3/collections/implementations; not a live collection-module source root or completed runtime integration."
+        },
+        "dependencies": [
+          {
+            "id": "eclipse-collections-14-source-closure",
+            "resolution": "blocked",
+            "reason": "The exact provider source closure fails compilation; this receiver withholds its source and JUnit candidate."
+          }
+        ],
+        "materialization": {
+          "admission": "HELD: exact provider source closure fails; no target source update.",
+          "joins": "Retain the existing array, coordinate and provider ownership described in this record.",
+          "outputs": "No Eclipse source or test output. The target remains pinned to its unchanged preimage; retain the proposed source/test privately.",
+          "cached_facts": "No new general cache, storage hierarchy or runtime dependency on Synexia."
+        },
+        "recipe": {
+          "id": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+          "version": "fork-array-receive-20261113",
+          "path": null,
+          "sha256": null,
+          "canonical_repository": "hsoliwal/com.synexia",
+          "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/fork-array-receive-20261113",
+          "preconditions": [
+            "Exact target base 0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb and source pin 2cbfb107709e0901d25ed56636ec226bca920343.",
+            "Actual SDK execution, exact postimages, fixed point and stale-source refusal.",
+            "Independent target compiler, behavior, API and applicable module/runtime gates."
+          ],
+          "rollback": "Use a separately reviewed, source-sealed inverse in canonical Synexia; preserve unrelated records and sources."
+        },
+        "tests": [],
+        "test_descriptions": [
+          "Planned passive target receipt: m3/compatibility/collections-array-fork-receive-20261113.json; a locator is not evidence of a passed gate.",
+          "Canonical predecessor dataset: m3-eclipse-unifiedset-bulk-clear-20261112; historical proof does not establish current target acceptance."
+        ],
+        "provenance": {
+          "license": "Original Eclipse Collections EPL-1.0/EDL-1.0 licensed source header and donor notices remain unchanged.",
+          "publication": "Exact existing canonical source candidate; recipes and improvement memory remain private in Synexia.",
+          "copied_code": true,
+          "donor_boundary": "Retained donor source under m3/collections/implementations; not a live collection-module source root or completed runtime integration."
+        },
+        "sync": {
+          "source_revision": "2cbfb107709e0901d25ed56636ec226bca920343",
+          "target_revision": "0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Retain the current UnifiedSet source unchanged."
+          ],
+          "pending": [
+            "Resolve exact provider compilation/dependency closure before any Eclipse source or test receiving.",
+            "Canonical receiver Maven/OpenRewrite execution and postimage-only handoff remain unclaimed by this naming candidate.",
+            "Actual emitted-source compilation, behavior/API and affected provider tests.",
+            "Full source-built installed M3JDK21, applicable JNI/GC/jtreg/platform acceptance and comparative resource evidence.",
+            "String -> arrays -> collections -> AST/compiler -> remaining families order and active String stage remain unchanged.",
+            "Live module absorption is separate from receiving this retained donor-source atom."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb",
+              "module": null,
+              "path": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/set/mutable/UnifiedSet.java",
+              "symbol": "jdk.m3.collections.eclipse.impl.set.mutable.UnifiedSet",
+              "signatures": [
+                "void clear()"
+              ],
+              "sha256": "0db3b5beab1c4f3e13a2d2d69c17e9b3e6f726148278b30947e8f90cd209a081",
+              "git_blob_sha1": "f302e3b3f3e86a86ebea0f320c711c048a5c7e0c",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "partial",
+        "observation": "HELD: exact provider source closure fails; no target source update. Source hash identifies the private candidate; target hashes identify the unchanged product source, not an emitted Eclipse change."
+      },
+      {
+        "id": "synexia.collections.spring-adapter-entryless-traversal",
+        "kind": "specialization",
+        "status": "pending",
+        "reason": "Source-pinned canonical candidate for Spring single/multi-value adapters. Retained donor source under m3/collections/implementations; not a live collection-module source root or completed runtime integration.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2cbfb107709e0901d25ed56636ec226bca920343",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-spring-entryless-traversal-20261112/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-spring-entryless-traversal-20261112/0001-MultiToSingleValueMapAdapter.java.txt",
+            "symbol": "jdk.m3.collections.spring.MultiToSingleValueMapAdapter",
+            "signatures": [
+              "boolean containsValue(Object)",
+              "boolean equals(Object)"
+            ],
+            "sha256": "3a58309ce2c5a90c95b5c89b276247f8bba80b0e0416af9d8305cb137513028c",
+            "git_blob_sha1": "628f76f4929ba6e174a5de68ed447d6a758ce0e2",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": null,
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/authoring/collections-array-fork-receive-20261113/postimages/m3/collections/implementations/spring-core-6.2.0-collections/src/main/java/jdk/m3/collections/spring/MultiToSingleValueMapAdapter.java",
+            "symbol": "jdk.m3.collections.spring.MultiToSingleValueMapAdapter",
+            "signatures": [
+              "boolean containsValue(Object)",
+              "boolean equals(Object)"
+            ],
+            "sha256": "04871d44f866bfedc7a2952d143988551e4a0eb263862bda13d12512319ef0de",
+            "git_blob_sha1": "5fbd62bab852053ee77139321bcdfbb1e782beaa",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2cbfb107709e0901d25ed56636ec226bca920343",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-spring-entryless-traversal-20261112/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-spring-entryless-traversal-20261112/0002-SingleToMultiValueMapAdapter.java.txt",
+            "symbol": "jdk.m3.collections.spring.SingleToMultiValueMapAdapter",
+            "signatures": [
+              "boolean containsValue(Object)",
+              "boolean equals(Object)"
+            ],
+            "sha256": "906ad71b1cad4952667cd6e5c0682e7c05c778957f067f4f8a3b41fe311df6da",
+            "git_blob_sha1": "17ab8be0f89896c510ca8cdd07cf028a61dc2568",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": null,
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/authoring/collections-array-fork-receive-20261113/postimages/m3/collections/implementations/spring-core-6.2.0-collections/src/main/java/jdk/m3/collections/spring/SingleToMultiValueMapAdapter.java",
+            "symbol": "jdk.m3.collections.spring.SingleToMultiValueMapAdapter",
+            "signatures": [
+              "boolean containsValue(Object)",
+              "boolean equals(Object)"
+            ],
+            "sha256": "d5e63316ac7fef812a6cb2778721fa2de0772386c9d051ba27dfe02c446bae5f",
+            "git_blob_sha1": "db0f6cca86bd5b901d21e08c20a5c8b91632ef2c",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": null,
+            "path": "m3/collections/implementations/spring-core-6.2.0-collections/src/main/java/jdk/m3/collections/spring/MultiToSingleValueMapAdapter.java",
+            "symbol": "jdk.m3.collections.spring.MultiToSingleValueMapAdapter",
+            "signatures": [
+              "boolean containsValue(Object)",
+              "boolean equals(Object)"
+            ],
+            "sha256": "04871d44f866bfedc7a2952d143988551e4a0eb263862bda13d12512319ef0de",
+            "git_blob_sha1": "5fbd62bab852053ee77139321bcdfbb1e782beaa",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": null,
+            "path": "m3/collections/implementations/spring-core-6.2.0-collections/src/main/java/jdk/m3/collections/spring/SingleToMultiValueMapAdapter.java",
+            "symbol": "jdk.m3.collections.spring.SingleToMultiValueMapAdapter",
+            "signatures": [
+              "boolean containsValue(Object)",
+              "boolean equals(Object)"
+            ],
+            "sha256": "d5e63316ac7fef812a6cb2778721fa2de0772386c9d051ba27dfe02c446bae5f",
+            "git_blob_sha1": "db0f6cca86bd5b901d21e08c20a5c8b91632ef2c",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "jdk.m3.collections.spring.MultiToSingleValueMapAdapter and jdk.m3.collections.spring.SingleToMultiValueMapAdapter",
+        "identity": {
+          "namespace": "Retain every existing Java package, class and public/protected declaration.",
+          "generation": "Existing backing map remains authoritative; one transient set reference is cached per adapter, not per record."
+        },
+        "contract": {
+          "differences": [
+            "Scan the cached original backing entry set in containsValue/equals without constructing a SimpleImmutableEntry per visited entry."
+          ],
+          "compatibility_obligations": [
+            "Preserve key-before-value access, null and empty-list cases, equals catch behavior, iterator fail-fast behavior and public backed entry views.",
+            "Keep the corrected SingleToMulti source; reject the earlier malformed missing-brace image.",
+            "Test-only Spring dependency stubs are not product output or full Spring reactor qualification.",
+            "Preserve existing JDK21 and provider contracts, licence/NOTICE and source ownership; no public Java SE type is renamed."
+          ],
+          "public_surface": [
+            "Existing public/protected declarations remain unchanged; no new API or JNI symbol."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "Public/protected descriptor parity requires independent target verification.",
+          "bootstrap": "Retained donor source under m3/collections/implementations; not a live collection-module source root or completed runtime integration."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Execute the existing canonical Maven/OpenRewrite recipe against exact target preimages before receiving.",
+          "joins": "Retain the existing array, coordinate and provider ownership described in this record.",
+          "outputs": "Source postimages and target-authoritative tests; passive receipt at m3/compatibility/collections-array-fork-receive-20261113.json.",
+          "cached_facts": "No new general cache, storage hierarchy or runtime dependency on Synexia."
+        },
+        "recipe": {
+          "id": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+          "version": "fork-array-receive-20261113",
+          "path": null,
+          "sha256": null,
+          "canonical_repository": "hsoliwal/com.synexia",
+          "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/fork-array-receive-20261113",
+          "preconditions": [
+            "Exact target base 0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb and source pin 2cbfb107709e0901d25ed56636ec226bca920343.",
+            "Actual SDK execution, exact postimages, fixed point and stale-source refusal.",
+            "Independent target compiler, behavior, API and applicable module/runtime gates."
+          ],
+          "rollback": "Use a separately reviewed, source-sealed inverse in canonical Synexia; preserve unrelated records and sources."
+        },
+        "tests": [],
+        "test_descriptions": [
+          "Planned passive target receipt: m3/compatibility/collections-array-fork-receive-20261113.json; a locator is not evidence of a passed gate.",
+          "Canonical predecessor dataset: m3-spring-entryless-traversal-20261112; historical proof does not establish current target acceptance."
+        ],
+        "provenance": {
+          "license": "Original Spring Framework Apache-2.0 source headers and attribution remain unchanged. Add the dated first-party modification notice without changing upstream copyright or algorithm bytes.",
+          "publication": "Exact existing canonical source candidate; recipes and improvement memory remain private in Synexia.",
+          "copied_code": true,
+          "donor_boundary": "Retained donor source under m3/collections/implementations; not a live collection-module source root or completed runtime integration."
+        },
+        "sync": {
+          "source_revision": null,
+          "target_revision": "0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Scan the cached original backing entry set in containsValue/equals without constructing a SimpleImmutableEntry per visited entry.",
+            "Add only the dated modification notice after the pinned canonical postimage; removing that notice reproduces its exact bytes."
+          ],
+          "pending": [
+            "Canonical receiver Maven/OpenRewrite execution and postimage-only handoff remain unclaimed by this naming candidate.",
+            "Actual emitted-source compilation, behavior/API and affected provider tests.",
+            "Full source-built installed M3JDK21, applicable JNI/GC/jtreg/platform acceptance and comparative resource evidence.",
+            "String -> arrays -> collections -> AST/compiler -> remaining families order and active String stage remain unchanged.",
+            "Live module absorption is separate from receiving this retained donor-source atom."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb",
+              "module": null,
+              "path": "m3/collections/implementations/spring-core-6.2.0-collections/src/main/java/jdk/m3/collections/spring/MultiToSingleValueMapAdapter.java",
+              "symbol": "jdk.m3.collections.spring.MultiToSingleValueMapAdapter",
+              "signatures": [
+                "boolean containsValue(Object)",
+                "boolean equals(Object)"
+              ],
+              "sha256": "2c97bcd302305b3a4ef16d7ad05131324443900c4017c63d11ab1f06842864e5",
+              "git_blob_sha1": "39ac71a04b8bbae80b0020be258760a97eec281b",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb",
+              "module": null,
+              "path": "m3/collections/implementations/spring-core-6.2.0-collections/src/main/java/jdk/m3/collections/spring/SingleToMultiValueMapAdapter.java",
+              "symbol": "jdk.m3.collections.spring.SingleToMultiValueMapAdapter",
+              "signatures": [
+                "boolean containsValue(Object)",
+                "boolean equals(Object)"
+              ],
+              "sha256": "1f38e26ff89c7e70cb48e82b7a44662984e98c0360de36b7ea36dee9ba92b2f9",
+              "git_blob_sha1": "d3e07441c92bb5c2a91d46b7d4714428a1ae12e4",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "partial",
+        "observation": "Candidate source identities only. No recipe execution, library completion, runtime integration or performance qualification is claimed by this record. Pinned source entries identify the earlier postimages at 2cbfb107709e0901d25ed56636ec226bca920343; uncommitted candidate entries separately identify the attribution-only successors. No candidate bytes are falsely attributed to the older commit."
+      },
+      {
+        "id": "synexia.collections.single-value-view-search",
+        "kind": "specialization",
+        "status": "pending",
+        "reason": "Source-pinned canonical candidate for ListMultiValueMap scalar-view containsValue. Existing live jdk.m3.collections owner; installed-image and target-runtime acceptance remain pending.",
+        "sources": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb",
+            "module": "jdk.m3.collections",
+            "path": "src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ListMultiValueMap.java",
+            "symbol": "jdk.internal.m3.collections.ListMultiValueMap",
+            "signatures": [
+              "Map<K,V> asSingleValueMap()"
+            ],
+            "sha256": "64c9cd2d9891938f49b02055232b0b359ba7406c99668a73a4f941a5c178745f",
+            "git_blob_sha1": "2103eb92833b8d2de99dbf525cafd234c5835cc2",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": null,
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/authoring/collections-array-fork-receive-20261113/postimages/src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ListMultiValueMap.java",
+            "symbol": "jdk.internal.m3.collections.ListMultiValueMap",
+            "signatures": [
+              "Map<K,V> asSingleValueMap()"
+            ],
+            "sha256": "0617602e785114fbfebb1496df3631b2f140f97239cf2d17aec6f8cfee0651e9",
+            "git_blob_sha1": "a7830e5dbbd39bfe2c6bf3410fef3c086ca7a59f",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.collections",
+            "path": "src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ListMultiValueMap.java",
+            "symbol": "jdk.internal.m3.collections.ListMultiValueMap",
+            "signatures": [
+              "Map<K,V> asSingleValueMap()"
+            ],
+            "sha256": "0617602e785114fbfebb1496df3631b2f140f97239cf2d17aec6f8cfee0651e9",
+            "git_blob_sha1": "a7830e5dbbd39bfe2c6bf3410fef3c086ca7a59f",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "jdk.internal.m3.collections.ListMultiValueMap",
+        "identity": {
+          "namespace": "Retain every existing Java package, class and public/protected declaration.",
+          "generation": "Existing array-indexed M3LinkedHashMap and scalar view remain authoritative; no retained structural entry is introduced."
+        },
+        "contract": {
+          "differences": [
+            "Override containsValue in the existing scalar Map view to avoid per-visited SimpleImmutableEntry projections using the same keySet and getFirst evaluation path."
+          ],
+          "compatibility_obligations": [
+            "Preserve keySet, hash/lookup, getFirst and list accessor demand; retain query.equals direction even for identical references.",
+            "Preserve early exit, raw NPE/CCE/ISE identity, fail-fast after a nonmatching reentrant mutation, and absent/null-list/empty-list/first-null projection.",
+            "Preserve fresh immutable API entries and existing view equals behavior; no new storage owner or public outer-class descriptor.",
+            "Preserve existing JDK21 and provider contracts, licence/NOTICE and source ownership; no public Java SE type is renamed."
+          ],
+          "public_surface": [
+            "Existing public/protected declarations remain unchanged; no new API or JNI symbol."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "Public/protected descriptor parity requires independent target verification.",
+          "bootstrap": "Existing live jdk.m3.collections owner; installed-image and target-runtime acceptance remain pending."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Execute the existing canonical Maven/OpenRewrite recipe against exact target preimages before receiving.",
+          "joins": "Retain the existing array, coordinate and provider ownership described in this record.",
+          "outputs": "Source postimages and target-authoritative tests; passive receipt at m3/compatibility/collections-array-fork-receive-20261113.json.",
+          "cached_facts": "No new general cache, storage hierarchy or runtime dependency on Synexia."
+        },
+        "recipe": {
+          "id": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+          "version": "fork-array-receive-20261113",
+          "path": null,
+          "sha256": null,
+          "canonical_repository": "hsoliwal/com.synexia",
+          "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/fork-array-receive-20261113",
+          "preconditions": [
+            "Exact target base 0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb and source pin 2cbfb107709e0901d25ed56636ec226bca920343.",
+            "Actual SDK execution, exact postimages, fixed point and stale-source refusal.",
+            "Independent target compiler, behavior, API and applicable module/runtime gates."
+          ],
+          "rollback": "Use a separately reviewed, source-sealed inverse in canonical Synexia; preserve unrelated records and sources."
+        },
+        "tests": [],
+        "test_descriptions": [
+          "Planned passive target receipt: m3/compatibility/collections-array-fork-receive-20261113.json; a locator is not evidence of a passed gate.",
+          "Canonical predecessor dataset: fork-array-receive-20261113; historical proof does not establish current target acceptance."
+        ],
+        "provenance": {
+          "license": "Original Copyright 2026 Hitesh Soliwal and contributors, Apache-2.0 header retained; modification date recorded.",
+          "publication": "Exact existing canonical source candidate; recipes and improvement memory remain private in Synexia.",
+          "copied_code": true,
+          "donor_boundary": "Existing live jdk.m3.collections owner; installed-image and target-runtime acceptance remain pending."
+        },
+        "sync": {
+          "source_revision": null,
+          "target_revision": "0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Override containsValue in the existing scalar Map view to avoid per-visited SimpleImmutableEntry projections using the same keySet and getFirst evaluation path."
+          ],
+          "pending": [
+            "Canonical receiver Maven/OpenRewrite execution and postimage-only handoff remain unclaimed by this naming candidate.",
+            "Actual emitted-source compilation, behavior/API and affected provider tests.",
+            "Full source-built installed M3JDK21, applicable JNI/GC/jtreg/platform acceptance and comparative resource evidence.",
+            "String -> arrays -> collections -> AST/compiler -> remaining families order and active String stage remain unchanged."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb",
+              "module": "jdk.m3.collections",
+              "path": "src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ListMultiValueMap.java",
+              "symbol": "jdk.internal.m3.collections.ListMultiValueMap",
+              "signatures": [
+                "Map<K,V> asSingleValueMap()"
+              ],
+              "sha256": "64c9cd2d9891938f49b02055232b0b359ba7406c99668a73a4f941a5c178745f",
+              "git_blob_sha1": "2103eb92833b8d2de99dbf525cafd234c5835cc2",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "partial",
+        "observation": "Candidate source identities only. No recipe execution, library completion, runtime integration or performance qualification is claimed by this record."
       }
     ]
   },

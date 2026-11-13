@@ -217,7 +217,14 @@ public final class PackedLongBitSet implements LongBitSet {
     }
 
     public void forEachSetBit(IntConsumer action) {
-        for (int b = nextSetBit(0); b >= 0; b = nextSetBit(b + 1)) action.accept(b);
+        // Encode a found index as index + 1: zero is exhausted, MIN_VALUE is MAX_VALUE.
+        // Only positive cursors reach nextSetBit, including after callback-driven growth.
+        int cursor = nextSetBit(0) + 1;
+        while (cursor > 0) {
+            action.accept(cursor - 1);
+            cursor = nextSetBit(cursor) + 1;
+        }
+        if (cursor == Integer.MIN_VALUE) action.accept(Integer.MAX_VALUE);
     }
     public void or(LongBitSet other) {
         long[] right = operandWords(other);
