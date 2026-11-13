@@ -1,0 +1,164 @@
+{
+  "schema": "M3_PRIMITIVE_MAP_GROWTH_RECEIPT_V1",
+  "copyright": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "license": "Apache-2.0",
+  "status": "COMPONENT_QUALIFIED_PENDING_REPOSITORY_AND_PLATFORM_GATES",
+  "receiving_repository": "hsoliwal/M3jdk21",
+  "receiving_base": "0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb",
+  "canonical_recipe": {
+    "repository": "hsoliwal/com.synexia",
+    "task_ref": "refs/heads/recipe/primitive-map-growth-20261113",
+    "unchanged_engine_revision": "049fba279e7f05f4c4fe1906c57cfa3af9cbb274",
+    "crate": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+    "recipe_name": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+    "dataset": "primitive-map-growth-20261113",
+    "dataset_file_pins": [
+      {
+        "path": "datasets/primitive-map-growth-20261113/DATASET.json",
+        "sha256": "8d87f3aec2b8e14ee6e7fc518a5ce4a98fd2b14415ac232a7de81c0d64fd2719"
+      },
+      {
+        "path": "datasets/primitive-map-growth-20261113/ENGINE_EFFECTIVE.tsv",
+        "sha256": "d90ca9f503d268b7012005c936b58858362958af31a82e49e8cc1cfc503ae2c7"
+      },
+      {
+        "path": "datasets/primitive-map-growth-20261113/MODES.tsv",
+        "sha256": "0e273802e5b151da786d0d4afc769a1fafd6b46f06bdf17f84943d429b51561e"
+      },
+      {
+        "path": "datasets/primitive-map-growth-20261113/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-primitive-map-growth-20261113.yml",
+        "sha256": "a229e94f89880fafcd4003b3247be952c52bb84656eab1354d1038a9df33fe05"
+      },
+      {
+        "path": "datasets/primitive-map-growth-20261113/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-primitive-map-growth-20261113/0003-LongByteHashMap.java.txt",
+        "sha256": "29ae7fa6592e15169fbff319b688d5bdd517f33842c7393ac69696f6d60331dd"
+      },
+      {
+        "path": "datasets/primitive-map-growth-20261113/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-primitive-map-growth-20261113/0004-LongIntHashMap.java.txt",
+        "sha256": "2c668509e26441ce62dce23e16f2bd29a53a9845f612a9544f69a6983c2f2d7d"
+      },
+      {
+        "path": "datasets/primitive-map-growth-20261113/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-primitive-map-growth-20261113/0005-PrimitiveObjectHashMap.java.txt",
+        "sha256": "7ba375d50b555af2cc025fb61e8638d687a3b52e527f69439bb7638e9ca04953"
+      },
+      {
+        "path": "datasets/primitive-map-growth-20261113/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-primitive-map-growth-20261113/0006-PrimitiveMapGrowthTest.java.txt",
+        "sha256": "f2d7c393d6d9c993910cddf003ca62b31c39622f368149e626bb61728cdedd62"
+      },
+      {
+        "path": "datasets/primitive-map-growth-20261113/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-primitive-map-growth-20261113/0007-PrimitiveMapRealOomeTest.java.txt",
+        "sha256": "519632f3e4bff5a8a1bd063d0901f30652af44cc7f8e3e79003b6b03acc60d64"
+      },
+      {
+        "path": "datasets/primitive-map-growth-20261113/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-primitive-map-growth-20261113/manifest.tsv",
+        "sha256": "a46899614e25e65cba21cf6a442ecfae554d5f31f054db9029e357c91ec49d9e"
+      },
+      {
+        "path": "datasets/primitive-map-growth-20261113/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-primitive-map-growth-20261113/pre/0003-LongByteHashMap.java.txt",
+        "sha256": "d3d8a8ac7334e2b2a434081ee64c3b26d861eb8ae50314f5774cbf28f48116db"
+      },
+      {
+        "path": "datasets/primitive-map-growth-20261113/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-primitive-map-growth-20261113/pre/0004-LongIntHashMap.java.txt",
+        "sha256": "f87b2b09b4c1add0e1043dce65b7b600dc3b2d3b9e9c24f3e5991966434a734c"
+      },
+      {
+        "path": "datasets/primitive-map-growth-20261113/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-primitive-map-growth-20261113/pre/0005-PrimitiveObjectHashMap.java.txt",
+        "sha256": "358784b8fb905a79b6c9be9a35df25c62b25d40bfcc2a6d3cf9e5eef5a332c01"
+      },
+      {
+        "path": "datasets/primitive-map-growth-20261113/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-primitive-map-growth-20261113/0001-name-mapping.json.txt",
+        "sha256": "00aabe5de7fe6251ae2cfa7c6b5276f71c4f020b8f70ee8a226c14bf931a6fd3"
+      },
+      {
+        "path": "datasets/primitive-map-growth-20261113/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-primitive-map-growth-20261113/0002-name-plan.json.txt",
+        "sha256": "aa01d170def27b2eb6e80ba964c5e54ea0caa65356660bc11b9da1892020d127"
+      },
+      {
+        "path": "datasets/primitive-map-growth-20261113/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-primitive-map-growth-20261113/manifest.tsv",
+        "sha256": "6f3eea99e0066657a93727759bc91bc63d03f9136c9c20f4610ae793e4b84834"
+      },
+      {
+        "path": "datasets/primitive-map-growth-20261113/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-primitive-map-growth-20261113/pre/0001-name-mapping.json.txt",
+        "sha256": "8ffff346df0034fc64636f3a835bee40a2da74e194c844dde4cabce0e4380217"
+      },
+      {
+        "path": "datasets/primitive-map-growth-20261113/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-primitive-map-growth-20261113/pre/0002-name-plan.json.txt",
+        "sha256": "53d67d5711c96c0a66dc34c68a21c43e05927debe66e941406a204ab89195101"
+      }
+    ],
+    "host_correction_dataset": "maven-version-inputs-20261113",
+    "host_file_pins": [
+      {
+        "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/pom.xml",
+        "sha256": "c5ed7812a075ab4ec1bc48924c41ceb927a627868f66ae7a3a5dc704d22b9fbe"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java",
+        "sha256": "5e6e3061fbcd261cb24a944afb945a6f3297d933df2696dc21cd653c3800d56d"
+      }
+    ],
+    "sdk_inputs_sha256": "ad6b9ea167023bea4e32c57f56d58bdd9fa61a51d6c99e24b3c4cab3ed9a2407",
+    "sdk_results_sha256": "7246fac27b0d306d51e5e2b77165a7504d446d5c5fa5d752923be09e1a8dee03",
+    "evidence": "authoring/primitive-map-growth-20261113/FINAL_QUALIFICATION.json"
+  },
+  "executed_product_files": [
+    {
+      "path": "m3/docs/name-mapping.json",
+      "sha256": "00aabe5de7fe6251ae2cfa7c6b5276f71c4f020b8f70ee8a226c14bf931a6fd3",
+      "bytes": 720313
+    },
+    {
+      "path": "m3/tooling/name-contract/name-plan.json",
+      "sha256": "aa01d170def27b2eb6e80ba964c5e54ea0caa65356660bc11b9da1892020d127",
+      "bytes": 2444
+    },
+    {
+      "path": "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongByteHashMap.java",
+      "sha256": "29ae7fa6592e15169fbff319b688d5bdd517f33842c7393ac69696f6d60331dd",
+      "bytes": 8724
+    },
+    {
+      "path": "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongIntHashMap.java",
+      "sha256": "2c668509e26441ce62dce23e16f2bd29a53a9845f612a9544f69a6983c2f2d7d",
+      "bytes": 7595
+    },
+    {
+      "path": "src/jdk.m3.collections/share/classes/jdk/m3/collections/PrimitiveObjectHashMap.java",
+      "sha256": "7ba375d50b555af2cc025fb61e8638d687a3b52e527f69439bb7638e9ca04953",
+      "bytes": 8222
+    },
+    {
+      "path": "test/jdk/jdk/m3/collections/PrimitiveMapGrowthTest.java",
+      "sha256": "f2d7c393d6d9c993910cddf003ca62b31c39622f368149e626bb61728cdedd62",
+      "bytes": 11855
+    },
+    {
+      "path": "test/jdk/jdk/m3/collections/PrimitiveMapRealOomeTest.java",
+      "sha256": "519632f3e4bff5a8a1bd063d0901f30652af44cc7f8e3e79003b6b03acc60d64",
+      "bytes": 14854
+    }
+  ],
+  "qualification": {
+    "actual_openrewrite_sdk_tests": 17,
+    "sdk_failures": 0,
+    "first_receive_changes": 7,
+    "fixed_point_changes": 0,
+    "public_descriptors_equal": 6,
+    "successful_oracle_checks_per_version": 2796796,
+    "ordered_trace_sha256": "cfd2c2a3642ff63ea3963ed43402d6f15fb580ff6da262439798251e9a64661d",
+    "injected_failure_cases_passed": 74,
+    "real_oome_cases_passed": 7,
+    "junit_cases_passed": 7,
+    "compiled_module_sources": 1185,
+    "packaged_named_module_real_oome_cases_passed": 7,
+    "naming_gate": "PASS; four operations remain queued; zero JDK promotions"
+  },
+  "resource_disposition": "Array geometry and measured allocations unchanged in bounded workloads. Mixed timing results do not establish a speedup or general performance non-regression.",
+  "limits": [
+    "full source-built M3JDK and broad platform gates",
+    "production-workload performance acceptance",
+    "hosted CI and whole Synexia reactor",
+    "canonical repository-wide provenance gate: pre-existing malformed headers and classification rows remain"
+  ],
+  "public_payload": "Existing runtime owners, target tests, name metadata and this passive receipt only. Canonical recipe and authoring evidence stay in Synexia."
+}
