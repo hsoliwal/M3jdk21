@@ -2,6 +2,128 @@
 
 Status: proposed review protocol. The example files beside this document are explanatory artifacts, not an implemented migration database, runtime feature or validated port.
 
+
+## Current entry points for JDK, specification and Synexia migration — 2026-11-12
+
+<!-- Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 -->
+
+This section connects the existing owners inspected at
+M3JDK21 `b98bf8c065818aac3447be165909e2a013325d9a` and Synexia
+`510a640feb877b1b7e69d346ae2e4e1a10628506`. It adds no registry, changes no
+capability disposition and does not turn the dated observations below into
+current acceptance evidence. Resolve a capability in
+[`name-mapping.json`](name-mapping.json) `migration.records` before moving,
+renaming, formatting or substituting its implementation.
+
+### Connect the source to its existing contract and owner
+
+| Input | Existing authority | Migration use |
+| --- | --- | --- |
+| OpenJDK, vendor and other JVM source | Synexia's existing [federated donor intake](https://github.com/hsoliwal/com.synexia/blob/510a640feb877b1b7e69d346ae2e4e1a10628506/tools/m3-donor-recipes/JDK_RUNTIME_DONOR_INTAKE.md), `DonorCatalog` and category catalogue | Select exact repository/revision/path, source licence and an applicable donor mode; retain independent VM families and vendor deltas as distinct source relationships. |
+| Java specification | [JSR 396: Java SE 21](https://jcp.org/en/jsr/detail?id=396), affected Java 21 specifications and the existing [JSR/JEP/JBS crosswalk](../backports/JSR_JEP_JBS_22_27_RECEIPT_20261022.md) | Bind the required source, binary, API, VM and runtime contract. A specification identifier is not a source patch or test result. |
+| JEP feature lineage | [Release authority](../backports/RELEASE_JEP_AUTHORITY.tsv), [JEP catalogue](../backports/JEP_CATALOGUE.tsv), [residue queue](../backports/JEP_RESIDUE_QUEUE.tsv) and [source witness](../backports/JEP_SOURCE_WITNESS.md) | Preserve feature/successor relationships, candidate decisions and exact source-presence evidence. Preview or successor metadata does not grant default Java 21 compatibility. |
+| JBS fixes and follow-up changes | Existing `m3/backports/inventory.py`, `compatibility_queue.py`, `UPSTREAM_CHANGE_SEEDS.tsv` and per-change packets | Join commits and affected paths to candidate issue IDs and proof lanes. An ID parsed from a commit subject remains a candidate until its issue relationship is checked. |
+| Synexia implementation families | [Full-family catalogue](m3-full-family-catalogue.json), [current full-borrow pin](../m3-import/current-full-borrow/pin.tsv), estate/DAG/phase receipts and stable capability mappings | Preserve source ownership, exact bytes, dependencies and the String → arrays → collections → AST/compiler → remaining-families receiving order. |
+| Target form and build | [Name/package contract](M3JDK21_NAME_AND_PACKAGE_CONTRACT.md), [naming workflow](m3jdk21-naming-admission-workflow.md), [Maven control reactor](../pom.xml) and [release contract](../release/release-contract.json) | Place executed output under its actual JDK/module owner; prove target source, module/image packaging and the relevant runtime behavior. |
+
+A JEP may involve several JBS issues and commits; one commit may touch several
+capabilities. Keep these relationships in the existing records and their linked
+receipts. A list of JDK names, JSRs, JEPs, JBS identifiers or Maven modules cannot
+serve as a count of completed ports. The [whole-JDK subsystem matrix](jdk-subsystem-migration-matrix.md)
+describes inventory obligations; it does not replace the operational mapping.
+
+### Use the existing verification entry points
+
+From the **M3JDK21 repository root**, check names and source-pin custody:
+
+```sh
+python3 m3/tooling/name-contract/check.py
+python3 m3/compatibility/check_m3_full_borrow_receiver.py
+```
+
+The full-borrow checker retains the original source identities:
+`M3JDK21_SYNEXIA_FULL_BORROW_PIN_V1`,
+`SYNEXIA_M3JDK21_FULL_BORROW_V1`,
+`SYNEXIA_M3JDK21_FULL_BORROW_DAG_V1`,
+`SYNEXIA_M3JDK21_PROMOTION_PHASE_V1`, and
+`docs/M3-SCALE/invariants/SYNEXIA-M3JDK21-CANONICAL-OWNERSHIP-1.md`.
+Product naming rules do not rename a canonical donor schema or provenance
+identifier. Its checks still require the pinned bytes, family/DAG/phase
+relationships and actual Git baseline ancestry; a successful custody check
+does not promote a family or advance a phase.
+
+The existing backport owner produces the JEP witness, proof matrix, execution
+waves and scoped programme status:
+
+```sh
+mvn -B -ntp -f m3/backports/pom.xml verify
+python3 m3/backports/jep_residue.py --root . --include-m3-extensions
+```
+
+Use the existing [A3 inventory/plan owner](../tooling/a3/README.md) when source
+discovery is needed. These reports retain pending decisions; they do not execute
+or accept every JEP. The extension projection preserves Java 21 obligations and
+requires separate M3 extension evidence. Historical recipe directories and
+authoring profiles in the public tree are tracked migration residue; they do
+not authorize running or adding Synexia recipe machinery here.
+
+For that residue, use the existing [recipe custody ledger](../release/LEGACY_RECIPE_CUSTODY_LEDGER.tsv)
+and the [current private custody observation](https://github.com/hsoliwal/com.synexia/blob/4f5750e2ca3127211fdf3354dd6978a1a67672f5/synexia-openrewrite-recipes/recipes/m3jdk21-legacy-recipe-custody-20261030/observations/20261112/README.md).
+Its recorded decisions are an intake frontier, not evidence that the corresponding
+files, callers, tests or runtime capabilities have already moved.
+
+Target-local regex verification uses the actual source-built M3JDK21 image:
+
+```sh
+mvn -B -ntp -f m3/runtime-integration/regex-precompute/pom.xml \
+  -Dm3.test.jdk=/absolute/path/to/source-built-M3JDK21 verify
+```
+
+This module's verifier uses target-owned source and the target image, with no
+private checkout or fixture execution dependency. The supplied image also needs
+a matching source-build receipt; binary hashes alone do not establish its build
+provenance. A stock Java 21 installation
+cannot establish M3String runtime acceptance. Preserve the individual mode
+results and any refusal; the [regex receiver](../runtime-integration/regex-precompute/README.md)
+still needs its independent native, jtreg, lifetime and performance evidence.
+
+The complete target Maven and standalone entry points remain:
+
+```sh
+mvn -B -ntp -f m3/pom.xml verify
+python3 m3/release/check_standalone.py --root . --release
+```
+
+Run these against the candidate's actual checkout and record the command,
+toolchain, commit/tree, exit status and artifact hashes. A selected-module pass
+does not satisfy `M3_MAVEN_CONTROL_REACTOR`; a Maven reactor pass does not
+replace the source-built JDK, installed-image, jtreg, JNI/ABI, GC or performance
+gates declared by the release contract. Retain any reported blocker instead of
+weakening a baseline or calling an unexecuted gate passed.
+
+### Carry implementation, documentation and evidence together
+
+For each selected behavioral atom, improve and execute its source-pinned
+Maven/OpenRewrite recipe in private Synexia. The public target receives the
+executed Java/native/build/test/documentation output and passive provenance
+receipts. Recipe sources, templates, private mastery fixtures and recipe
+improvement memory remain with their canonical Synexia owner.
+
+Follow the [porting invariant](m3jdk21-porting-invariant.md). Public JDK names
+and observable contracts remain with their original owners; internal helpers
+use the admitted naming map. Describe the operation's behavior, exceptions,
+Unicode/range rules, ownership and materialization boundary beside its source.
+Update affected package/module documentation, build and installed-image
+requirements, attribution and migration links in the same recipe output.
+Bind documentation to the source/target revision and capability ID so a later
+source change can expose stale explanations.
+
+Record the narrow result actually established: inventoried source, reviewed
+contract, executed recipe output, target source verification, installed-runtime
+verification, or accepted capability. Link all remaining obligations from the
+existing capability and release records. Neither a copied source tree, a new
+Maven module, a green fixture nor a merge is a substitute for this chain.
+
 ## Operational authority before using these examples
 
 The illustrative schema/example in this directory must not become a competing migration registry. At the 2026-10-02 02:52 inspection, the verified operational candidate is [#12's m3/migration/manifest.json at d543255294ae85e4c8015812a3c8a97aaf498354](https://github.com/hsoliwal/M3jdk21/blob/d543255294ae85e4c8015812a3c8a97aaf498354/m3/migration/manifest.json), on its feature-stack line. That directory is not present in master 26c442d3f1400e01eeb11a44e803b63e1874735e. Reconcile the selected manifest/validator into the intended branch through a reviewed change. [Worked port decisions](migration-worked-port-decisions.md) maps these concepts to its existing fields and stable IDs, with rename/split/conflict examples. No operational mapping is changed by this documentation. This paragraph is the historical 02:52 snapshot; the retained records and newer source-presence facts immediately below supersede any inference that master still lacks all migration tooling.
@@ -162,3 +284,33 @@ A whole-JDK migration record should additionally identify, when applicable:
 - exact platform/collector scope.
 
 Promotion still requires exact candidate evidence. An inventory row, a retained file, a successful recipe replay, a compiling tree, a benchmark win and an accepted runtime are distinct states.
+
+
+## Current-source verification continuation (2026-11-12)
+
+The continuation of [migration verification PR #2953](https://github.com/hsoliwal/M3jdk21/pull/2953)
+uses the exact target input `0163b1474862ca463a64f24b45b0c6ca36aa4e73`.
+The [passive continuation receipt](../qualification/migration-verification-20261112/continuation-receipt.json)
+binds each emitted file to its canonical recipe, immutable Synexia execution source
+and before/after digest. The canonical task remains
+`synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112`;
+ordinary Java outputs use its typed Java recipe and acceptance/build/data outputs
+use its text recipe. No task recipe or execution harness is delivered here.
+
+| Existing owner | Implemented result | Evidence boundary |
+| --- | --- | --- |
+| `M3StringPositionPrecompute` | Counts the existing byte-offset and long-mask lanes once in retained primitive-byte accounting. | The original invariant-6 budget regression fails before and passes after; field/method descriptors match. Compile-only dependencies isolate layout/accounting, so this does not establish installed String/native behavior or a measured storage reduction. |
+| String source and route guards | Checks current mutable-input snapshots, exact cursor/key comparisons, fallback routes, overflow effects and exception-safe publication. | 58 target test methods pass; formerly accepted harmful source mutations remain counterexamples. The unchanged frozen-index owner passes construction and prepared-geometry contracts in normal and interpreted modes. |
+| Filtered deque and primitive-sequence verification | Uses current product names and compiles the complete 1,185-source collection module with its original module descriptor. | The object-deque contract performs 140,734 checks and the primitive contract performs 164,104 checks. These finite contracts do not promote other collection/provider families. |
+| Existing build workflows | Enables command-scoped Windows long paths, bootstraps the existing pinned JUnit launcher, builds JTReg before consumption, and runs regex Maven verification against the same job's new JDK image. | The 55-module prerequisite reactor was compiled, packaged and installed offline. Full Maven lifecycle, coverage and installed-image results remain separate required evidence. |
+| Existing String phase records | Preserves historical ledger prefixes and records exact observed source succession, with strict record widths and immutable provenance names. | Source chronology is not semantic reconstruction or phase acceptance. Unsupported historical transitions retain explicit unresolved dispositions. |
+| Recipe ownership classification | Restores canonical schema/predicate values and inventories every current Java file. | 16 acceptance tests pass. The production check still fails for 47 unclassified current classes and two stale historical paths; no classification is inferred from a similar name or a renamed body. |
+
+Use the existing source checks and runtime gates above on the actual receiving
+commit. Previously built images at `0163b147...` cannot qualify a later String
+postimage. The same-job image verification step records its own source identity,
+image and per-mode product receipts. Retain missing Maven plugins, seed snapshot
+drift, unresolved public recipe custody and any failing native/runtime gate as
+blocking evidence. This continuation does not advance the String → arrays →
+collections → AST/compiler sequence, accept every JDK/JSR/JEP/JBS candidate, or
+grant release authority.

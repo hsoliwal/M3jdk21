@@ -3,6 +3,7 @@
 """Mutation tests of the actual Pool and frozen-index source gate.
 
 Retain all 29 existing Pool semantic refusals across the actual split owners.
+Bind exception-safe native publication to the same exhaustive locked caller set.
 Additional cases bind the new displacement owner and fixed-address admission.
 AST extraction executes the complete actual lifecycle/precompute section; no
 Java runtime implementation is substituted or executed.
@@ -109,13 +110,13 @@ MUTATIONS = [('retired bucket retry', 'pool', 'if (bucket.retired) continue;', '
   '                throw unavailable;'),
  ('hash is candidate',
   'pool',
-  'return equalsChars(value, offset, logicalLength, offsets[row]) ? row : -1;',
-  'return row;'),
+  '|| !equalsChars(value, offset, logicalLength, offsets[row])) {',
+  '|| false) {'),
  ('compact exact comparison',
   'pool',
   'if (unit != mappedUnit(mappedOffset, index)) return false;',
   'if (false) return false;'),
- ('ambiguous binary fallback', 'pool', 'if (encoded < 0) return findUnitBinary(unit);', ''),
+ ('ambiguous binary fallback', 'pool', 'return encoded < 0 ? findUnitBinary(unit) : row;', 'return row;'),
  ('ambiguous bit decode', 'pool', 'int row = (encoded & Integer.MAX_VALUE) - 1;', 'int row = encoded - 1;'),
  ('ambiguous insertion', 'frozen_index', 'tableRows[slot] |= Integer.MIN_VALUE;', ''),
  ('shared stable record offset', 'pool', 'ids[i]=r[3]&Integer.MAX_VALUE;', 'ids[i]=r[3];'),
@@ -165,7 +166,7 @@ ADDITIONAL_MUTATIONS = [('frozen owner declaration', 'frozen_index', 'final clas
  ('UTF-16 length packing', 'frozen_index', '| Integer.toUnsignedLong(length)', '| 0L'),
  ('index owner publication',
   'pool',
-  'this.exactIndex = M3FrozenLexiconIndex.build(javaHashes, lengths);',
+  'this.exactIndex =\n                    M3FrozenLexiconIndex.buildExact(\n                            offsets.length, this::exactKeyForRow, this::sameExactRows);',
   'this.exactIndex = M3FrozenLexiconIndex.empty();'),
  ('published row lane identity',
   'pool',
@@ -186,12 +187,58 @@ ADDITIONAL_MUTATIONS = [('frozen owner declaration', 'frozen_index', 'final clas
   'if (false)'),
  ('char candidate complete key verification',
   'pool',
-  'if (javaHashes[row] != hash || lengths[row] != logicalLength) return -1;',
-  ''),
+  'if (javaHashes[row] != hash || lengths[row] != logicalLength\n                    || !equalsChars',
+  'if (false\n                    || !equalsChars'),
  ('Latin-1 source range binding',
   'pool',
   'return findCompactBytes(value, offset, logicalLength, String.LATIN1);',
   'return findCompactBytes(value, 0, logicalLength, String.LATIN1);')]
+
+
+PUBLICATION_MUTATIONS = [
+ ('retained flag starts false', 'pool', 'LocalRef reference = null;\n        boolean retained = false;', 'LocalRef reference = null;\n        boolean retained = true;'),
+ ('reference starts absent', 'pool', 'LocalRef reference = null;', 'LocalRef reference = other;'),
+ ('publication owner bucket', 'pool', 'new LocalRef(created, fingerprint, bucket, bytes)',
+  'new LocalRef(created, fingerprint, new LocalBucket(), bytes)'),
+ ('publication precedes transfer', 'pool', 'bucket.values.add(reference);', 'bucket.values.clear();'),
+ ('transfer owns wrapper allocation failure', 'pool', 'retained = true;\n            return M3String.whole(created);',
+  'return M3String.whole(created);'),
+ ('rollback requires unpublished atom', 'pool', 'if (!retained) {', 'if (retained) {'),
+ ('rollback avoids double free', 'pool', 'if (reference == null) {', 'if (reference != null) {'),
+ ('constructor failure releases payload', 'pool', 'UNSAFE.freeMemory(created.address);', ''),
+ ('constructor failure releases accounting', 'pool', 'release(bytes);', 'release(0L);'),
+ ('unit publication uses same owner', 'pool', 'return retain(bucket, fingerprint, created, retainedBytes);',
+  'return retain(other, fingerprint, created, retainedBytes);'),
+ ('unexpected unlocked admission', 'pool', 'private static boolean reserveAfterDrain(long bytes) {',
+  'private static boolean reserveAfterDrain(long bytes) { retain(bucket, fingerprint, created, byteLength);'),
+ ('escaping retain reference', 'pool', 'private static boolean reserveAfterDrain(long bytes) {',
+  'private static boolean reserveAfterDrain(long bytes) { Object escaped = M3StringPool::retain;')]
+
+
+EXACT_KEY_MUTATIONS = [
+ ('full-content seed binding', 'frozen_index', 'keys[row] = source.key(row, contentSeed);',
+  'keys[row] = source.key(row, 0L);'),
+ ('complete exact-key count', 'frozen_index', 'for (int row = 0; row < count; row++) {',
+  'for (int row = 1; row < count; row++) {'),
+ ('different contents reject a hash collision', 'frozen_index',
+  'if (!equality.same(priorRow, row)) return null;', ''),
+ ('exact length participates in key', 'frozen_index',
+  'hash = (hash ^ Integer.toUnsignedLong(length)) * EXACT_PRIME;', 'hash = hash * EXACT_PRIME;'),
+ ('UTF-16 participates in key', 'frozen_index', 'return (hash ^ unit) * EXACT_PRIME;',
+  'return hash * EXACT_PRIME;'),
+ ('runtime consumes same full-content key', 'frozen_index', 'long mixed = mix64(exactHash);',
+  'long mixed = mix64(0L);'),
+ ('production input row count', 'pool', 'offsets.length, this::exactKeyForRow, this::sameExactRows',
+  '0, this::exactKeyForRow, this::sameExactRows'),
+ ('frozen full-text row key', 'pool', 'hash, mappedUnit(offsets[row], index));',
+  'hash, mappedUnit(offsets[row], 0));'),
+ ('frozen row equality range', 'pool', 'if (length != lengths[rightRow]) return false;',
+  'if (false) return false;'),
+ ('runtime exact selection key', 'pool',
+  'exactIndex.candidateExact(M3FrozenLexiconIndex.exactHashFinish(exact));',
+  'exactIndex.candidateExact(0L);'),
+ ('single-unit payload authority', 'pool', '|| mappedUnit(offsets[row], 0) != unit) return -1;',
+  '|| false) return -1;')]
 
 
 class PoolPrecomputeMutationTest(unittest.TestCase):
@@ -204,17 +251,30 @@ class PoolPrecomputeMutationTest(unittest.TestCase):
         check_sources(self.sources)
 
     def check_mutations(self, cases):
+        refused = 0
         for label, owner, old, new in cases:
             with self.subTest(contract=label, owner=owner):
                 mutated = dict(self.sources)
                 mutated[owner] = replace_one(mutated[owner], old, new)
                 with self.assertRaises(AssertionError, msg="source gate accepted " + label):
                     check_sources(mutated)
+                refused += 1
+        self.assertEqual(refused, len(cases), "every mutation must reach the actual gate and refuse")
 
     def test_mechanical_contract_mutations_rejected(self):
         self.assertEqual(len(MUTATIONS), 29)
         self.check_mutations(MUTATIONS)
         print("RETAINED_POOL_MUTATIONS_REFUSED=29")
+
+    def test_exception_safe_publication_mutations_rejected(self):
+        self.assertEqual(len(PUBLICATION_MUTATIONS), 12)
+        self.check_mutations(PUBLICATION_MUTATIONS)
+        print("EXCEPTION_SAFE_PUBLICATION_MUTATIONS_REFUSED=12")
+
+    def test_complete_content_key_mutations_rejected(self):
+        self.assertEqual(len(EXACT_KEY_MUTATIONS), 11)
+        self.check_mutations(EXACT_KEY_MUTATIONS)
+        print("EXACT_CONTENT_KEY_MUTATIONS_REFUSED=11")
 
     def test_split_owner_contract_mutations_rejected(self):
         self.assertEqual(len(ADDITIONAL_MUTATIONS), 28)

@@ -5,15 +5,17 @@ on:
     branches:
       - "m3/recipe-ownership-*"
     paths:
-      - "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/**"
+      - "m3/tooling/migration-recipes/src/main/java/**"
       - "m3/docs/m3-recipe-ownership-classification.tsv"
       - "m3/runtime-integration/verify-recipe-ownership.py"
+      - "m3/runtime-integration/test_recipe_ownership.py"
       - ".github/workflows/m3-recipe-ownership.yml"
   pull_request:
     paths:
-      - "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/**"
+      - "m3/tooling/migration-recipes/src/main/java/**"
       - "m3/docs/m3-recipe-ownership-classification.tsv"
       - "m3/runtime-integration/verify-recipe-ownership.py"
+      - "m3/runtime-integration/test_recipe_ownership.py"
       - ".github/workflows/m3-recipe-ownership.yml"
   workflow_dispatch:
 
@@ -34,4 +36,6 @@ jobs:
         with:
           python-version: "3.12"
       - name: Verify every M3JDK21 recipe owner
-        run: python3 m3/runtime-integration/verify-recipe-ownership.py
+        run: |
+          python3 -m unittest discover -s m3/runtime-integration -p test_recipe_ownership.py -v
+          python3 m3/runtime-integration/verify-recipe-ownership.py

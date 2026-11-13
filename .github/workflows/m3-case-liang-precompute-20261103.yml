@@ -26,7 +26,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          echo 'bc3e44a44f5023716b71f42cbbe76bc31c29dcb812e39056fd5767891a6aac3a  m3/lexicon/receiver/verify-case-liang-20261103.sh' | sha256sum -c -
+          echo 'fe257d0d1f7a6fa96bd25dc64dfaeb122b363313d74ed1b8d40be31b46ecb4df  m3/lexicon/receiver/verify-case-liang-20261103.sh' | sha256sum -c -
           bash -n m3/lexicon/receiver/verify-case-liang-20261103.sh
       - name: Compile Java then C17; test Java and JNI checked/interpreted
         shell: bash

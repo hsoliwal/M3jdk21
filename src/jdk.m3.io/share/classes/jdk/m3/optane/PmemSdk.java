@@ -15,9 +15,12 @@ import java.util.Objects;
 public final class PmemSdk {
     private PmemSdk() {}
 
-    /** Preserve the actual filesystem traversal, including parent symlinks before '..'. */
+    /** Resolve parents with filesystem semantics, retaining the final component for O_NOFOLLOW. */
     static Path nativeRealPath(Path path) throws IOException {
-        Path resolved = path.toRealPath();
+        Path absolute = path.toAbsolutePath();
+        Path parent = absolute.getParent();
+        Path resolved = parent == null ? absolute
+                : parent.toRealPath().resolve(absolute.getFileName());
         if (!Path.of(resolved.toString()).equals(resolved))
             throw new IOException("PMem native path is not losslessly representable");
         return resolved;

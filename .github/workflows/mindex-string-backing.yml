@@ -74,6 +74,7 @@ on:
       - 'doc/mindex-string-backing.md'
       - 'src/java.base/share/classes/java/lang/M3FrozenLexiconIndex.java'
       - 'src/java.base/share/native/libjava/M3StringPool.c'
+      - 'src/java.base/share/native/libjava/M3StringRegexDp.c'
       - 'src/java.base/share/classes/jdk/internal/m3/IndexedView.java'
       - 'src/java.base/share/classes/jdk/internal/m3/IndexedArray.java'
       - 'test/jdk/jdk/internal/m3/IndexedViewEpochTest.java'
@@ -193,6 +194,7 @@ jobs:
         with:
           platform: linux-x64
       - name: Build repository JTReg for this run
+      - name: Build pinned repository JTReg for this run
         uses: ./.github/actions/build-jtreg
       - name: Get repository JTReg
         id: jtreg
@@ -205,6 +207,10 @@ jobs:
             libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
           sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-12 100 \
             --slave /usr/bin/g++ g++ /usr/bin/g++-12
+      - name: Set up Python for target regex verification
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
       - name: Configure matching runtime
         run: |
           bash configure --with-conf-name=linux-x64-string-keys \
@@ -213,6 +219,20 @@ jobs:
             --with-jtreg="${{ steps.jtreg.outputs.path }}" --with-zlib=system
       - name: Build matching runtime image
         run: make CONF=linux-x64-string-keys JOBS=2 images
+      - name: Verify regex product modes with the matching image
+        shell: bash
+        run: |
+          set -euo pipefail
+          image="$PWD/build/linux-x64-string-keys/images/jdk"
+          test -x "$image/bin/java"
+          test -x "$image/bin/javac"
+          git diff --exit-code -- src make test/jdk/java/lang/String/M3StringRegexPrecomputeTest.java
+          printf 'source_commit=%s\nsource_tree=%s\nimage=%s\n' \
+            "$(git rev-parse HEAD)" "$(git rev-parse 'HEAD^{tree}')" "$image" \
+            > build/linux-x64-string-keys/regex-source-image.txt
+          mvn -B -ntp -f m3/runtime-integration/regex-precompute/pom.xml \
+            -Dm3.test.jdk="$image" verify 2>&1 \
+            | tee build/linux-x64-string-keys/regex-precompute-maven.log
       - name: Run focused String key and owner-lifetime jtreg
         run: |
           make CONF=linux-x64-string-keys JOBS=2 test \
@@ -237,5 +257,8 @@ jobs:
             build/linux-x64-string-keys/test-results
             build/linux-x64-string-keys/test-support
             build/linux-x64-string-keys/configure.log
+            build/linux-x64-string-keys/regex-source-image.txt
+            build/linux-x64-string-keys/regex-precompute-maven.log
+            m3/runtime-integration/regex-precompute/target/product-verification
           if-no-files-found: warn
           retention-days: 30
