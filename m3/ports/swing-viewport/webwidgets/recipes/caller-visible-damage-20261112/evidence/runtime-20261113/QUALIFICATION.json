@@ -57,5 +57,35 @@
   },
   "applicationBehavior": "NOT_RUN; no test suppression",
   "fullGoal": "ACTIVE/INCOMPLETE",
-  "productionPromotion": false
+  "productionPromotion": false,
+  "additionalSourceCompilation": {
+    "report": "reports/junit-compile-focused.json",
+    "status": "PASS_COMPILATION_ONLY",
+    "classes": 3
+  },
+  "additionalResourceStop": {
+    "report": "reports/apply-003.json",
+    "native": {
+      "all_owned_native_handles_closed": true,
+      "assigned_to_job": true,
+      "cleanup_errors": [],
+      "creation_FILETIME": "134390349077890139",
+      "error_phase": "supervisor-check",
+      "exitcode": 125,
+      "job_active_processes": 0,
+      "job_handle_closed": true,
+      "job_total_processes": 6,
+      "pid": 43608,
+      "primary_traceback": "Traceback (most recent call last):\n  File \"S:\\codex-work\\storage-recovery-20261013\\native-process-cwd-recipe-20261016\\templates\\OwnedJobSupervisor.py\", line 152, in run_owned\n    check()\n  File \"S:\\codex-work\\ui-caller-runtime-qualification-20261113\\RUN_QUALIFICATION_V2.py\", line 43, in check\n    assert m.availPhys>=1610612736 and m.availPageFile>=8858370048,json.dumps({'memoryReserve':'FAIL','physicalAvailable':m.availPhys,'commitAvailable':m.availPageFile})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: {\"memoryReserve\": \"FAIL\", \"physicalAvailable\": 13583785984, \"commitAvailable\": 7462998016}\n",
+      "process_handle_closed": true,
+      "resumed": true,
+      "same_handle_wait": 0,
+      "supervisor_error": "AssertionError: {\"memoryReserve\": \"FAIL\", \"physicalAvailable\": 13583785984, \"commitAvailable\": 7462998016}",
+      "terminal": true,
+      "terminate_job_succeeded": true,
+      "termination_requested": true,
+      "thread_handle_closed": true
+    }
+  },
+  "junitPreflight": "TEST_PREFLIGHT_HOLD.json; no tests executed"
 }

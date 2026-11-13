@@ -13,10 +13,11 @@
     "contextIdentity": "PASS; fifteen namespace-derived dependencies equal current receiving Git blobs; output-free CPU check",
     "newProducerController": "PASS; actual offline Maven qualify-001, native exit0 and all owned handles closed",
     "newNamespaceCompiler": "PASS; before and after seventeen-source closures --release21 -Xlint:all -Werror; protected API identical",
-    "callerJUnit": "NOT_RUN; receiving apply attempts stopped by physical-memory reserve",
-    "publicJUnit": "NOT_RUN; receiving apply attempts stopped by physical-memory reserve",
-    "approved18Oracle": "NOT_RUN post-repair; unchanged fixture and prior failing baseline retained",
-    "generatedLedgerRecipe": "PASS; actual named recipe, exact 66135-byte afterimage, two rows, four refusals, wrong-path exclusion and zero replay"
+    "callerJUnit": "NOT_RUN; commit-reserve preflight refused JUnit before owned Java launch; strict focused test compilation passed separately",
+    "publicJUnit": "NOT_RUN; commit-reserve preflight refused JUnit before owned Java launch; strict focused test compilation passed separately",
+    "approved18Oracle": "NOT_RUN post-repair; exact unchanged fixture retained; oracle compiler preflight held for commit reserve",
+    "generatedLedgerRecipe": "PASS; actual named recipe, exact 66135-byte afterimage, two rows, four refusals, wrong-path exclusion and zero replay",
+    "focusedCallerTestCompilation": "PASS; three unchanged test/helper sources compiled strictly against the actual generated after-classes; three classes, zero diagnostics; not test execution"
   },
   "approved18": {
     "sha256": "ba22b2bf42b059ab93d906383d52c16b96be6f2cdbd3e49bade4ed3d473e8522",
@@ -53,7 +54,14 @@
     "maven": "3.9.14",
     "sourceOutputs": "Exact actual selected-producer after-sources, not hand-edited",
     "ledgerOutput": "Exact actual named-recipe candidate",
-    "scope": "No behavior/JNI/native/platform/performance or full-superset PASS"
+    "scope": "No behavior/JNI/native/platform/performance or full-superset PASS",
+    "focusedTestCompilation": {
+      "status": "PASS_COMPILATION_ONLY",
+      "receipt": "evidence/runtime-20261113/reports/junit-compile-focused.json",
+      "classes": 3,
+      "diagnostics": 0,
+      "testExecutions": "NOT_RUN"
+    }
   },
   "resourceStops": {
     "scope": "Subsequent local receiving apply-mode tests",
@@ -73,6 +81,16 @@
       "requiredPhysicalReserve": 1610612736,
       "allOwnedNativeHandlesClosed": true
     },
-    "retry": "No automatic retry or guard waiver"
+    "retry": "No additional receiving apply launch while commit-reserve pressure persists; keep the same hosted CI handle",
+    "third": {
+      "job": "apply-003",
+      "receipt": "evidence/runtime-20261113/reports/apply-003.json",
+      "exitCode": 125,
+      "physicalAvailableAtStop": 13583785984,
+      "commitAvailableAtStop": 7462998016,
+      "requiredCommitReserve": 8858370048,
+      "allOwnedNativeHandlesClosed": true,
+      "continuationPrecondition": "Ten healthy native samples after physical memory recovery; prior stopped jobs were not restarted"
+    }
   }
 }
