@@ -1128,7 +1128,7 @@
     "linux_acceptance": "PENDING_LINUX",
     "phase_advance": false
   },
-  "source_set_successor_current": "current_probe_source_successor_20261113",
+  "source_set_successor_current": "longlane_required_native_source_successor_20261113",
   "tools4j_unix_refinement_20261019": {
     "schema": "M3_COLLECTION_EXACT_SOURCE_REFINEMENT_V1",
     "receiver_baseline": "677437be295b23f7ccf7409be287008944d0e8b0",
@@ -1311,5 +1311,29 @@
     "historical_baseline_commit": "5e8a20b93790238c158bdc2d162cf8814e87448d",
     "current_source_commit": "6e1c49dd7748c473de07969506ea90ff95fd66d2",
     "origin": "Exact current probe identifier refinements; source recipe/component proof separate from installed Linux JNI admission"
+  },
+  "longlane_required_native_source_successor_20261113": {
+    "schema": "M3_COLLECTION_EXACT_SOURCE_REFINEMENT_V2",
+    "successor_receipt": "qualification/longlane-required-native-source-successor-20261113.tsv",
+    "successor_receipt_sha256": "d5ae8c5f706d23cde626460ee6810f1af666ec4a0f80ce2cb1e49189ded87f2d",
+    "receipt_columns": [
+      "path",
+      "inherited_sha256",
+      "final_received_sha256_or_REMOVED"
+    ],
+    "inherited_composed_manifest_sha256": "58fa6463746028a79b7e398dcc2f5fb7a6159f6a09986e809638b2503506a759",
+    "inherited_rows": 1957,
+    "successor_rows": 2,
+    "refined_rows": 2,
+    "added_rows": 0,
+    "removed_rows": 0,
+    "resulting_rows": 1957,
+    "exact_java_source_membership": 1951,
+    "predecessor_successor": "current_probe_source_successor_20261113",
+    "recipe": "synexia-openrewrite-recipes/recipe-crates/longlane-required-native-20261113",
+    "phase_advance": false,
+    "historical_baseline_commit": "5e8a20b93790238c158bdc2d162cf8814e87448d",
+    "current_source_commit": "2e25b01eefbe3c2e72650813f461ce35fa9f29a4",
+    "origin": "Required supplied JNI long-page allocation, typed-directory/lifetime/public API retained; real Windows component proof separate from installed Linux acceptance"
   }
 }

@@ -424,6 +424,22 @@ def include_current_probe_source_successor(previous_rows, receipt=_CURRENT_PROBE
                                     _CURRENT_PROBE_RESULT_JAVA)
 
 
+_LONG_NATIVE_RECEIPT = HERE / 'qualification/longlane-required-native-source-successor-20261113.tsv'
+_LONG_NATIVE_RECEIPT_SHA256 = 'd5ae8c5f706d23cde626460ee6810f1af666ec4a0f80ce2cb1e49189ded87f2d'
+_LONG_NATIVE_PREDECESSOR_SHA256 = '58fa6463746028a79b7e398dcc2f5fb7a6159f6a09986e809638b2503506a759'
+_LONG_NATIVE_TRANSITIONS = 2
+_LONG_NATIVE_RESULT_ROWS = 1957
+_LONG_NATIVE_RESULT_JAVA = 1951
+
+
+def include_longlane_required_native_source_successor(previous_rows, receipt=_LONG_NATIVE_RECEIPT):
+    """Admit the exact current receiver cohort over its immutable current-context ancestor."""
+    return admit_source_transitions(previous_rows, 'LongLane required native 20261113', receipt,
+                                    _LONG_NATIVE_RECEIPT_SHA256, _LONG_NATIVE_PREDECESSOR_SHA256,
+                                    _LONG_NATIVE_TRANSITIONS, _LONG_NATIVE_RESULT_ROWS,
+                                    _LONG_NATIVE_RESULT_JAVA)
+
+
 # The transition-receipt successors by their m3-donation.json record: (receipt, receipt SHA-256,
 # predecessor SHA-256, transitions, resulting rows, exact Java source membership).
 SOURCE_TRANSITION_SEALS = {
@@ -439,6 +455,8 @@ SOURCE_TRANSITION_SEALS = {
                                             _CURRENT_RECEIVER_TRANSITIONS, _CURRENT_RECEIVER_RESULT_ROWS, _CURRENT_RECEIVER_RESULT_JAVA),
     'current_probe_source_successor_20261113': (_CURRENT_PROBE_RECEIPT, _CURRENT_PROBE_RECEIPT_SHA256, _CURRENT_PROBE_PREDECESSOR_SHA256,
         _CURRENT_PROBE_TRANSITIONS, _CURRENT_PROBE_RESULT_ROWS, _CURRENT_PROBE_RESULT_JAVA),
+    'longlane_required_native_source_successor_20261113': (_LONG_NATIVE_RECEIPT, _LONG_NATIVE_RECEIPT_SHA256, _LONG_NATIVE_PREDECESSOR_SHA256,
+        _LONG_NATIVE_TRANSITIONS, _LONG_NATIVE_RESULT_ROWS, _LONG_NATIVE_RESULT_JAVA),
 }
 
 
@@ -655,6 +673,7 @@ def main():
     rows = include_current_context_source_successor(rows)
     rows = include_current_receiver_source_successor(rows)
     rows = include_current_probe_source_successor(rows)
+    rows = include_longlane_required_native_source_successor(rows)
     if len({row[0] for row in rows}) != len(rows):
         raise SystemExit('Duplicate installed source path')
     for path, expected in rows:
