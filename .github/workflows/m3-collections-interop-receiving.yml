@@ -144,7 +144,7 @@ jobs:
           cmp src/jdk.m3.collections/share/legal/m3collections.md proof/core-classes/META-INF/NOTICE
           jar --create --file proof/m3-collections.jar -C proof/core-classes .
           jdeps --print-module-deps --module-path proof/m3-arrays.jar proof/m3-collections.jar | tee proof/core-module-deps.txt
-          test "$(cat proof/core-module-deps.txt)" = jdk.m3.arrays,java.base
+          test "$(cat proof/core-module-deps.txt)" = java.base,jdk.m3.arrays
           ARRAYS="$GITHUB_WORKSPACE/proof/m3-arrays.jar"
           (cd "$RUNNER_TEMP" && mvn -B -ntp org.apache.maven.plugins:maven-install-plugin:3.1.3:install-file -Dfile="$ARRAYS" -DpomFile="$GITHUB_WORKSPACE/m3/arrays/pom.xml")
           JAR="$GITHUB_WORKSPACE/proof/m3-collections.jar"
