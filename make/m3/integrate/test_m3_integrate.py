@@ -71,6 +71,8 @@ class RefsTest(unittest.TestCase):
         self.assertEqual(self.pm.new_of("m3/fs/src"), "m3/fs/src")
         self.assertIsNone(self.pm.new_of("m3"))  # the reactor root is split, not one module
         self.assertEqual(self.pm.new_of("m3/vendor"), "m3/vendor")  # retire rows do not split
+        # an untracked class under a source root (fixture or stale) is not dragged along by the move
+        self.assertEqual(self.pm.new_of("m3/tooling/t/src/main/java/Missing.java"), "m3/tooling/t/src/main/java/Missing.java")
 
     def test_root_forms(self):
         text, _ = self.run_text("src/java.base/share/classes/X.java", "src/java.base/share/classes/X.java",
@@ -93,6 +95,13 @@ class RefsTest(unittest.TestCase):
         text, _ = self.run_text("m3/release/check.py", "make/m3/release/check.py", src)
         self.assertEqual(text, src.replace('"m3/release/check.py."', '"make/m3/release/check.py."'))
 
+    def test_python_variable_parents(self):
+        src = ("HERE = Path(__file__).resolve().parent\nROOT = HERE.parents[2]\nTOOL = HERE.parent\n"
+               "UP = Path(__file__).parents[1]\nTOP = UP.parent.parent\n")
+        text, _ = self.run_text("m3/tooling/t/run.py", "make/m3/tooling/t/run.py", src)
+        self.assertEqual(text, "HERE = Path(__file__).resolve().parent\nROOT = HERE.parents[3]\nTOOL = HERE.parent\n"
+                               "UP = Path(__file__).parents[1]\nTOP = UP.parent.parent.parent\n")
+
     def test_pom(self):
         pom = "<parent><groupId>g</groupId>\n  <artifactId>a</artifactId>\n</parent>\n<module>../../fs</module>"
         text, _ = self.run_text("m3/tooling/t/pom.xml", "make/m3/tooling/t/pom.xml", pom)
@@ -111,12 +120,13 @@ class RefsTest(unittest.TestCase):
                       "      - 'doc/m3/**'\n      - 'make/m3/tooling/t/**'\n", text)
 
     def test_fixture_tests_keep_their_synthetic_paths(self):
-        src = 'import tempfile\nROOT = Path(__file__).resolve().parents[3]\nput(tmp, "m3/tooling/t/run.py")\n'
+        src = ('import tempfile\nROOT = Path(__file__).resolve().parents[3]\nput(tmp, "m3/tooling/t/synthetic.py")\n'
+               'real = ROOT / "m3/release/check.py"\n')
         self.assertTrue(mi.fixture_test("m3/tooling/jdk-naming/test_jdk_naming.py", src))
         self.assertFalse(mi.fixture_test("m3/release/test_release_admission.py", src))
         self.rw.fixture = True
         text, _ = self.run_text("m3/tooling/t/test_run.py", "make/m3/tooling/t/test_run.py", src)
-        self.assertEqual(text, src.replace("parents[3]", "parents[4]"))
+        self.assertEqual(text, src.replace("parents[3]", "parents[4]").replace('"m3/release', '"make/m3/release'))
         self.rw.fixture = False
 
     def test_protected_corpus(self):

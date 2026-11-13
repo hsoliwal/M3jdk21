@@ -6,4 +6,5 @@
 # trees), so only its own location (relative forms, __file__ parents) follows the move.
 ^make/m3/integrate/	bytes	this recipe: MAPPING.tsv and the ledgers name old paths and base blob ids on purpose
 ^(make/)?m3/tooling/jdk-naming/(NAMING_RULES\.tsv|NAMING_STANDARD\.md|RENAME_MAP\.tsv|RENAME_RESEAL\.tsv|RENAME_PLAN_SUMMARY\.tsv|RECIPE_MEMORY\.tsv|MOVE_REFS_[^/]+\.tsv)$	bytes	JDK naming recipe corpus: rules, rename ledgers and the replayed standard
-^(make/)?m3/tooling/jdk-naming/test_(jdk_naming|fold_package|move_refs|rename_types|product_name|reseal)\.py$	fixture	JDK naming recipe tests: their synthetic trees are the inputs of the recorded rename
+^(make/)?m3/tooling/jdk-naming/test_(jdk_naming|move_refs|fold_package)\.py$	fixture	JDK naming recipe tests: their synthetic trees are inputs of the recorded rename (root / "m3/..." joins to a __file__ root still follow)
+/(qualification|recipe|recipes)/[^/]+/GATES\.tsv$	bytes	custody of executed gate commands: the command lines are what ran then (test_jdk_naming reads one)

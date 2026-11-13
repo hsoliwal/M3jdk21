@@ -30,6 +30,10 @@ R3-LAYER-NLP	prefix	m3/vendor/third_party-m3/nlp-search/	make/m3/lib-intake/thir
 # ---- P1: product code of the m3/ Maven modules (approved layout 2026-11-08); one area per PR with its gates
 # generated from AREAS.tsv by the tool (rules P1-<area>-*); see AREAS.tsv
 #
+# ---- P1: Maven bridges of areas whose code already moved into src/<module>: the bridge pom and its descriptor stay
+#      with the area's other code until the bridge retires (name-contract fixtures and Maven source roots expect them)
+R1-BRIDGE	regex	^m3/(arrays|collections|paradigm|optane)/(pom\.xml|src/.*|LICENSE[^/]*|NOTICE[^/]*|\.gitignore)$	make/m3/{1}/{2}	P1	HOLD_P1	Maven bridge over src/<module> (code already integrated): retires with the bridge
+#
 # ---- P2: documentation corpus -> doc/m3 (same depth: relative links keep their shape)
 R2-DOCS	prefix	m3/docs/	doc/m3/{rest}	P2	MOVE	documentation corpus (OpenJDK doc/ is markdown; data files referenced by the docs travel with them)
 R2-PAPERS	prefix	m3/papers/	doc/m3/papers/{rest}	P2	MOVE	papers (markdown)

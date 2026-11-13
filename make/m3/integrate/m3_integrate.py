@@ -239,6 +239,9 @@ def cmd_move(args) -> int:
 
 
 # ---------------------------------------------------------------- refs: the path model of one phase
+SOURCE_ROOT_DIR = re.compile(r"/src/(?:main|test)/(?:java|resources)/")
+
+
 class PathMap:
     """Old tree -> new tree for one phase: exact file moves, and directories whose every file moved by one shift.
     Rows of other phases' RETIRE status do not split a directory (they leave the tree in their own PR). A directory
@@ -295,6 +298,8 @@ class PathMap:
         for k in range(len(parts) - 1, 0, -1):
             d = "/".join(parts[:k])
             if d in self.dirs:
+                if SOURCE_ROOT_DIR.search(d + "/"):
+                    return old  # a class that does not exist under a source root: synthetic or stale, not a move
                 n = self.dirs[d]
                 return None if n is None else n + "/" + "/".join(parts[k:])
         return old
@@ -329,6 +334,12 @@ POM_ELEM = re.compile(r"<(?P<tag>module|relativePath|directory|source|sourceDire
 POM_BASEDIR = re.compile(r"\$\{(?:project\.basedir|basedir)\}/(?P<val>" + PATHCH + r"+)")
 PY_PARENTS = re.compile(r"(?P<head>Path\(__file__\)(?:\.resolve\(\)|\.absolute\(\))?)\.parents\[(?P<n>\d+)\]")
 PY_CHAIN = re.compile(r"(?P<head>Path\(__file__\)(?:\.resolve\(\)|\.absolute\(\))?)(?P<chain>(?:\.parent)+)(?![A-Za-z_])")
+PY_VAR_CHAIN = re.compile(r"^[ \t]*(?P<var>[A-Za-z_]\w*)\s*=\s*Path\(__file__\)(?:\.resolve\(\)|\.absolute\(\))?"
+                          r"(?P<chain>(?:\.parent)+)[ \t]*(?:#.*)?$", re.M)
+PY_VAR_INDEX = re.compile(r"^[ \t]*(?P<var>[A-Za-z_]\w*)\s*=\s*Path\(__file__\)(?:\.resolve\(\)|\.absolute\(\))?"
+                          r"\.parents\[(?P<n>\d+)\][ \t]*(?:#.*)?$", re.M)
+VAR_PARENTS = re.compile(r"(?<![\w.])(?P<var>[A-Za-z_]\w*)\.parents\[(?P<n>\d+)\]")
+VAR_CHAIN = re.compile(r"(?<![\w.])(?P<var>[A-Za-z_]\w*)(?P<chain>(?:\.parent)+)(?![A-Za-z_])")
 PARENT_BLOCK = re.compile(r"<parent>(?P<body>.*?)</parent>", re.S)
 FIXTURE_SEG = {"before", "after", "templates", "fixtures", "fixture", "golden", "expected", "baseline", "candidate",
                "snapshot", "snapshots", "retained-variants"}
@@ -434,6 +445,20 @@ class Rewriter:
     def plain(self, path: str, new_path: str, text: str, where: list) -> str:
         old_dir, new_dir = posixpath.dirname(path), posixpath.dirname(new_path)
         if self.fixture:
+            # a fixture test keeps its synthetic paths; a path joined to a root derived from __file__ (root / "m3/x")
+            # names this repository and follows the move
+            roots = file_roots(text)
+            if roots:
+                joined = re.compile(r"(?<![\w.])(?:" + "|".join(map(re.escape, sorted(roots))) +
+                                    r")\s*/\s*([\"'])(?P<path>m3/[^\"'\n]+)\1")
+
+                def join_sub(m):
+                    new = self.map_root(m.group("path"))
+                    if new is None:
+                        where.append(("SPLIT", m.group("path")))
+                        return m.group(0)
+                    return m.group(0)[: m.start("path") - m.start(0)] + new + m.group(0)[m.end("path") - m.start(0):]
+                text = joined.sub(join_sub, text)
             return self.located(path, new_path, text, where, old_dir, new_dir)
 
         def root_sub(m):
@@ -549,7 +574,44 @@ class Rewriter:
             return m.group(0) if k is None or k == n else m.group("head") + ".parent" * (k + 1)
 
         text = PY_PARENTS.sub(sub_idx, text)
-        return PY_CHAIN.sub(sub_chain, text)
+        text = PY_CHAIN.sub(sub_chain, text)
+        return self.py_var_parents(text, new_index)
+
+    def py_var_parents(self, text: str, new_index) -> str:
+        """HERE = Path(__file__).resolve().parent (or .parents[N]); ROOT = HERE.parents[M] / HERE.parent.parent: the
+        variable is an ancestor of the file at a fixed index, so its own parents are re-indexed like the file's."""
+        base = {}
+        for m in PY_VAR_CHAIN.finditer(text):
+            base[m.group("var")] = m.group("chain").count(".parent") - 1
+        for m in PY_VAR_INDEX.finditer(text):
+            base[m.group("var")] = int(m.group("n"))
+        for var in list(base):  # a name also bound to something else (a temp root, an argument) is left alone
+            binds = len(re.findall(r"(?m)^[ \t]*" + re.escape(var) + r"\s*=(?!=)", text))
+            ties = len([m for m in PY_VAR_CHAIN.finditer(text) if m.group("var") == var])
+            ties += len([m for m in PY_VAR_INDEX.finditer(text) if m.group("var") == var])
+            if binds != ties:
+                del base[var]
+        if not base:
+            return text
+
+        def sub_idx(m):
+            b = base.get(m.group("var"))
+            if b is None:
+                return m.group(0)
+            n = int(m.group("n"))
+            k = new_index(b + n + 1)
+            return m.group(0) if k is None or k - b - 1 == n or k - b - 1 < 0 else f"{m.group('var')}.parents[{k - b - 1}]"
+
+        def sub_chain(m):
+            b = base.get(m.group("var"))
+            if b is None:
+                return m.group(0)
+            c = m.group("chain").count(".parent")
+            k = new_index(b + c)
+            return m.group(0) if k is None or k - b == c or k - b < 1 else m.group("var") + ".parent" * (k - b)
+
+        text = VAR_PARENTS.sub(sub_idx, text)
+        return VAR_CHAIN.sub(sub_chain, text)
 
 
 PROTECT = ("make/m3/integrate/",)  # MAPPING.tsv and the ledgers name old paths and base blob ids on purpose
@@ -570,6 +632,28 @@ PROTECTED = load_protect()
 def skip_content(path: str) -> bool:
     return (path.startswith(PROTECT) or any(seg in FIXTURE_SEG for seg in path.split("/")[:-1])
             or any(r.search(path) for r in PROTECTED["bytes"]))
+
+
+ASSIGN = re.compile(r"(?m)^[ \t]*(?P<var>[A-Za-z_]\w*)[ \t]*=(?!=)[ \t]*(?P<expr>[^\n#]*?)[ \t]*(?:#.*)?$")
+FILE_EXPR = re.compile(r"^Path\(__file__\)(?:\.resolve\(\)|\.absolute\(\))?(?:\.parents\[\d+\]|(?:\.parent)+)$")
+
+
+def file_roots(text: str) -> set:
+    """Names bound only to ancestors of __file__: HERE = Path(__file__).parent, ROOT = HERE.parents[2],
+    root = Path(__file__).resolve().parents[3]. A name also bound to anything else (a temporary tree, an argument) is
+    not a repository root."""
+    binds: dict = {}
+    for m in ASSIGN.finditer(text):
+        binds.setdefault(m.group("var"), []).append(m.group("expr").strip())
+    roots: set = set()
+    while True:
+        derived = re.compile(r"^(?:" + "|".join(map(re.escape, sorted(roots))) + r")(?:\.parents\[\d+\]|(?:\.parent)+)$") \
+            if roots else None
+        grown = {var for var, exprs in binds.items()
+                 if all(FILE_EXPR.match(e) or (derived and derived.match(e)) for e in exprs)}
+        if grown == roots:
+            return roots
+        roots = grown
 
 
 def fixture_test(path: str, text: str = "") -> bool:
