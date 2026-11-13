@@ -1,0 +1,59 @@
+{
+  "schema": "M3_NATIVE_CURRENT_PROVIDER_BUDGET_PROPOSAL_V1",
+  "status": "AWAITING_APPROVAL",
+  "userControls": "Pasted AGENTS.md: 512MiB unless measured larger output expressly authorized; current task approved545MiB and Sroute via call94bbc...; 8GiB free after planned output",
+  "qualificationRecipeInput": "bdaf3d179af37851d125fc03ab9efdc8fb3b7418",
+  "preflightWitness": {
+    "schema": "M3_ARRAY_PROVIDER_PREFLIGHT_V1",
+    "status": "PASS",
+    "sha256": "c60472caf0b6712dc73a76f98c8a580f3a66efc42c08dada9a0f3648388bc2dc",
+    "bytes": 31282,
+    "recipeTests": null,
+    "readerJUnitExecutions": null,
+    "storage": {
+      "fBefore": 571469824,
+      "sBefore": 0,
+      "fAfter": 571469824,
+      "sAfter": 0,
+      "capBytes": 571473920,
+      "reserveBytes": 8589934592,
+      "sFree": 10361466880,
+      "peakObservedTaskAllocations": [
+        571469824
+      ]
+    },
+    "error": null
+  },
+  "preflightReceiptLimit": "Transport truncated18 compressed lines; no full-receipt claim; repeating with bounded metadata output and sufficient capture budget",
+  "existingDll": {
+    "sha256": "4d87118e754a8df8aeae4b5dc050e35da72ba99b7a94b450f88fa36fbfbf825d",
+    "bytes": 21504,
+    "exportsNamespace": "com_m3_arrays_M3ArrayNative",
+    "currentNamespace": "jdk_m3_arrays_ArrayNative"
+  },
+  "change": {
+    "currentCapBytes": 571473920,
+    "currentAllocatedBytes": 571469824,
+    "currentHeadroomBytes": 4096,
+    "increaseBytes": 131072,
+    "proposedCapBytes": 571604992,
+    "plannedBuildOutputs": {
+      "coffObjectUpperBound": 16384,
+      "dllUpperBound": 32768,
+      "additionalTransientReserve": 81920
+    },
+    "outputRoute": "S:\\codex-work\\agent-temp\\lexicon-maven-r224",
+    "minimumFreeAfterPlannedBytes": 8589934592,
+    "existingFAndCInputs": "READ_ONLY",
+    "sourceCopies": 0,
+    "repositoryClones": 0,
+    "productSourceChanges": 0
+  },
+  "preparedNativeContinuation": "# Copyright 2026 Hitesh Soliwal, Synexia. SPDX-License-Identifier: Apache-2.0\n# Prepared continuation inside the existing sealed qualification context.\n# HOLD: run only after user approval of the exact measured +131072-byte cap.\nassert INPUT[\"nativeAuthorization\"][\"approvedCapBytes\"]==571604992\nassert INPUT[\"nativeAuthorization\"][\"approvedIncreaseBytes\"]==131072\nassert INPUT[\"nativeAuthorization\"][\"userReply\"]\ncap=571604992\nnative_dir=S/(\"array-native-current-r230-\"+uuid.uuid4().hex)\nassert not native_dir.exists()\nnative_dir.mkdir()\nobj=native_dir/\"current.o\";dll=native_dir/\"m3_arrays_current.dll\"\nassert native_dir.resolve().is_relative_to(S.resolve())\ncommon=[\"-std=c11\",\"-O2\",\"-Wall\",\"-Wextra\",\"-Wpedantic\",\"-Werror\",\"-pipe\",\"-I\",r\"C:\\Program Files\\Java\\jdk-21\\include\",\"-I\",r\"C:\\Program Files\\Java\\jdk-21\\include\\win32\"]\ncommands=[\n ([str(gcc)]+common+[\"-c\",\"-x\",\"c\",\"-o\",str(obj),\"-\"],raw(source)),\n ([str(gcc),\"-shared\",\"-Wl,--no-insert-timestamp\",\"-o\",str(dll),str(obj)],None)\n]\nnative_reports=[]\ntry:\n for argv,data in commands:\n  budget();active=subprocess.Popen(argv,cwd=S,env=env,stdin=subprocess.PIPE if data is not None else subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)\n  try:log=active.communicate(input=data,timeout=45)[0]\n  except subprocess.TimeoutExpired:\n   subprocess.run([\"taskkill\",\"/PID\",str(active.pid),\"/T\",\"/F\"],env=env,capture_output=True,timeout=15);log=active.communicate(timeout=15)[0];raise AssertionError(\"native compile/link timeout\")\n  native_reports.append(dict(argv=argv,pid=active.pid,exit=active.returncode,reaped=active.poll() is not None,log=log.decode(\"utf-8\",\"replace\"),logIdentity=ident(log)))\n  assert active.returncode==0,native_reports[-1]\n  active=None;budget()\n obj_identity=ident(obj.read_bytes());dll_identity=ident(dll.read_bytes())\n assert obj.stat().st_size<=16384 and dll.stat().st_size<=32768\n export_process=subprocess.run([r\"C:\\Program Files\\LLVM\\bin\\llvm-readobj.exe\",\"--coff-exports\",str(dll)],stdout=subprocess.PIPE,stderr=subprocess.STDOUT,cwd=S,env=env,timeout=15)\n assert export_process.returncode==0\n import re\n exports=set(re.findall(r\"Name: (\\S+)\",export_process.stdout.decode()))\n expected=set(re.findall(r\"(Java_jdk_m3_arrays_ArrayNative_\\w+)\\s*\\(\",cfg[\"nativeC\"]))\n assert len(expected)==11 and exports==expected,(exports,expected)\n # A distinct fresh JVM must require and invoke this exact DLL. Use the unmodified seven-test owner.\n # The existing run helper's retained-output assertion must compare against native live allocation,\n # then reassert the original baseline after the JVM exits and these two owned build files are removed.\n native_live_allocation=allocation(S)\n # Inject only this measured expected live-output value; no cap, reserve or test checks are bypassed.\n # The qualified run helper will be frozen with this continuation before execution.\n for i in range(2):\n  run(\"current-native-\"+str(i),prod,{},\"jdk.m3.arrays.M3ArrayProviderQualification\",\n      [\"native\",base+nonce+\"/result-native-\"+str(i),str(dll)],retainedOutputBytes=native_live_allocation)\nfinally:\n if active is not None and active.poll() is None:\n  subprocess.run([\"taskkill\",\"/PID\",str(active.pid),\"/T\",\"/F\"],env=env,capture_output=True,timeout=15);active.wait(timeout=15)\n for child in (obj,dll):\n  if child.exists():\n   assert child.resolve().parent==native_dir.resolve()\n   child.unlink()\n if native_dir.exists():native_dir.rmdir()\nassert allocation(S)==s_before\n",
+  "limitations": [
+    "No SharedArrayNative custody-runtime completeness or fixed registration claim",
+    "No packed codec JNI, whole JDK, Linux/ARM/Android/macOS/ESP qualification",
+    "No performance improvement claim",
+    "Existing SharedArrayNative registration/callback mismatch and missing companion dependencies recorded separately"
+  ]
+}

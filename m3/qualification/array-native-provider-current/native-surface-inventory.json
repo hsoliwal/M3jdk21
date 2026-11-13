@@ -1,0 +1,47 @@
+{
+  "schema": "M3_ARRAY_NATIVE_SURFACE_INVENTORY_V1",
+  "sourceRef": "778cd3eac266974e7b5155e79838f74ee516b535",
+  "runtimeOwner": {
+    "javaPath": "src/jdk.m3.collections/share/classes/jdk/m3/arrays/ArrayNative.java",
+    "javaBlob": "8e8e2dc6e6e8b0299472f512ac1bb26f044c648f",
+    "cPath": "src/jdk.m3.collections/share/native/libm3arrays/m3_arrays_jni.c",
+    "cBlob": "fe9331e1cfbab7da489a8101d1c4a51e6dc202a7",
+    "jniNamespace": "Java_jdk_m3_arrays_ArrayNative_",
+    "existingTest": "test/jdk/jdk/m3/arrays/ArrayNativeTest.java",
+    "testBlob": "31c3dc2d12857ecba3a8fc17f6fd1edbb7150543"
+  },
+  "legacyProvider": {
+    "path": "F:\\codex-work\\lexicon-migration-20261031\\array-jni-master-qualification-20261105\\bin\\m3_arrays.dll",
+    "bytes": 21504,
+    "sha256": "4d87118e754a8df8aeae4b5dc050e35da72ba99b7a94b450f88fa36fbfbf825d",
+    "jniNamespace": "Java_com_m3_arrays_M3ArrayNative_",
+    "currentSuiteResults": "7 UnsatisfiedLinkError failures, loaded=true; load success alone is insufficient"
+  },
+  "sharedCustodyOwner": {
+    "javaPath": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/shared/SharedArrayNative.java",
+    "javaBlob": "396dfbc0c6866e49c7f60df2a88418ef58e22431",
+    "nativePath": "m3/vendor/m3/m3-indexstring/native/shared-arrays/shared_arrays.cpp",
+    "nativeBlob": "182520825505422c2d7b5570cb3b2bb556b0f222",
+    "observedMismatch": {
+      "registration": "four int[] arrays instead of the declared three",
+      "monitor": "com/m3/job/IProgressMonitor vs current jdk/internal/m3/job/IProgressMonitor in registration and callbacks"
+    },
+    "completion": "HOLD; companion IndexTextMetrics/MIndex array-view owners and referenced Mapbox native-interop subtree absent from the inventoried paths; no source/binary parity claim",
+    "legacyDll": {
+      "bytes": 22016,
+      "sha256": "260ed15652ad9ac449b98b5d063310dfff64676869d0268704722d62ef1d0331",
+      "namespace": "Java_com_synexia_indexstring_shared_SharedArrayNative_"
+    }
+  },
+  "agentLineage": {
+    "agent": "Dewey",
+    "reads": 8,
+    "result": "No repair lineage established from inspected open PR titles/bodies and commit search. #2951 merged core admission, not this binding repair; #902 already records mismatch; #2992 open draft broader custody/provider scope. Comments/diffs/detached refs/CI logs not inspected.",
+    "links": [
+      "https://github.com/hsoliwal/M3jdk21/pull/2951",
+      "https://github.com/hsoliwal/M3jdk21/pull/902",
+      "https://github.com/hsoliwal/M3jdk21/pull/2992"
+    ]
+  },
+  "policy": "Existing segmented arrays/offsets/index/order lanes/masks stay authoritative; no retained Entry/Node redesign. API projections retain existing M3LFUCache policy. Explicit concatenateUtf16 materializes; it is not the joined-view representation."
+}
