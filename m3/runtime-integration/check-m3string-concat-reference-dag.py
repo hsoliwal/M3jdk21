@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -90,7 +91,6 @@ for fragment in [
     "MethodHandle stringifier = m3Stringifier(mt.parameterType(i));",
     "mh = MethodHandles.filterArguments(mh, 0, stringifiers);",
     "private static MethodHandle m3Stringifier(Class<?> type)",
-    "if (type == String.class)",
     "return stringValueOf(type);",
     "return stringValueOf(int.class).asType(methodType(String.class, type));",
     "return floatStringifier();",
@@ -102,6 +102,19 @@ for fragment in [
 ]:
     if fragment not in factory:
         raise SystemExit(f"M3_STRING_CONCAT_RECEIVER_FAIL|stringifier={fragment}")
+
+# JLS 15.18.1 (836693acf8a7): a null String operand renders "null", so String-typed operands take
+# the stringOf gateway like every other reference type; no String short-circuit may return null.
+stringifier_start = factory.find("private static MethodHandle m3Stringifier(Class<?> type)")
+stringifier_end = factory.find("\n    }\n", stringifier_start)
+if stringifier_end < 0:
+    raise SystemExit("M3_STRING_CONCAT_RECEIVER_FAIL|cannot_bound_m3Stringifier")
+stringifier_body = factory[stringifier_start:stringifier_end]
+if re.search(r"\btype\s*==\s*String\.class|\bString\.class\s*==\s*type\b", stringifier_body) \
+        or "return null;" in stringifier_body:
+    raise SystemExit("M3_STRING_CONCAT_RECEIVER_FAIL|stringifier=String operand bypasses stringOf")
+if not stringifier_body.rstrip().endswith("return objectStringifier();"):
+    raise SystemExit("M3_STRING_CONCAT_RECEIVER_FAIL|stringifier=reference fallback is not objectStringifier")
 
 if "static String stringOf(Object value)" not in helper:
     raise SystemExit("M3_STRING_CONCAT_RECEIVER_FAIL|stringOf authority missing")

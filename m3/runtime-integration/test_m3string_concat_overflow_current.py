@@ -4,18 +4,26 @@
 """Mutation and repeatability evidence for the exact active M3JDK21 receiver."""
 from __future__ import annotations
 
+import importlib.util
+import sys
 import tempfile
 import unittest
 from pathlib import Path
 
-from check_m3string_concat_overflow_current import (
-    DIGESTS,
-    JTREG,
-    POOL,
-    WORKFLOW,
-    SourceRefusal,
-    verify,
-)
+# The checker file name is hyphenated, so it is loaded by path rather than imported by module name.
+_SPEC = importlib.util.spec_from_file_location(
+    "check_m3string_concat_overflow_current",
+    Path(__file__).resolve().parent / "check-m3string-concat-overflow-current.py")
+_CHECKER = importlib.util.module_from_spec(_SPEC)
+sys.modules[_SPEC.name] = _CHECKER
+_SPEC.loader.exec_module(_CHECKER)
+DIGESTS = _CHECKER.DIGESTS
+JTREG = _CHECKER.JTREG
+JTREG_SELECTORS = _CHECKER.JTREG_SELECTORS
+POOL = _CHECKER.POOL
+WORKFLOW = _CHECKER.WORKFLOW
+SourceRefusal = _CHECKER.SourceRefusal
+verify = _CHECKER.verify
 
 
 class M3StringConcatOverflowCurrentTest(unittest.TestCase):
@@ -39,7 +47,7 @@ class M3StringConcatOverflowCurrentTest(unittest.TestCase):
         first = verify(self.root)
         self.assertEqual(first, verify(self.root))
         self.assertEqual(first["java_targets"], 2)
-        self.assertEqual(first["workflow_selectors"], 24)
+        self.assertEqual(first["workflow_selectors"], JTREG_SELECTORS)
 
     def test_removed_size_limit_guard_refuses(self) -> None:
         self.change(POOL,
