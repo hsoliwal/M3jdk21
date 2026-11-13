@@ -255,13 +255,14 @@ def main():
         '-Dm3.collections.lane.native=true',
     ]
     common = ['-Xmx768m', '-XX:ActiveProcessorCount=2', '-Xcheck:jni', array_native_option,
-              '-Dm3.collections.rank.native=true', '-Dm3.collections.signal.native=true']
+              '-Dm3.collections.signal.native=true']
     results = {}
     for mode, required in [('java', 'false'), ('native', 'true')]:
         library = OUT / ('native' if mode == 'native' else 'missing')
         vm = common + ['-Djava.library.path=' + str(library),
                        '-Dm3.mask.spans.native.required=' + required,
-                       '-Dm3.collections.all.native.required=' + required]
+                       '-Dm3.collections.all.native.required=' + required,
+                       '-Dm3.collections.rank.native=' + required]
         if mode == 'native':
             vm += native_properties
         old_reports = MODULE / 'target/surefire-reports'
@@ -283,7 +284,8 @@ def main():
         raise RuntimeError('Unexpected JPMS dependency closure: ' + runtime_modules)
     cp = os.pathsep.join(map(str, (MODULE / 'target/classes',
                                    MODULE / 'target/test-classes', array_jar)))
-    java = [JAVA / 'bin/java', *common, '-Djava.library.path=' + str(OUT / 'native'), '-cp', cp]
+    java = [JAVA / 'bin/java', *common, '-Dm3.collections.rank.native=true',
+            '-Djava.library.path=' + str(OUT / 'native'), '-cp', cp]
     contracts = [('jdk.m3.collections.MaskWindowSparseContract', ['native']),
                  ('jdk.m3.collections.BudgetedMaskWindowContract', ['--native']),
                  ('jdk.m3.collections.IndexMaskWindowSelfTest', ['--native']),
