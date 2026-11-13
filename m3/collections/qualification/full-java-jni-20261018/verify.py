@@ -279,9 +279,28 @@ def main():
         expected_classes = {str(p.relative_to(OUT / 'classes')) for p in (OUT / 'classes').rglob('*.class')}
         actual_classes = {name for name in archive.namelist() if name.endswith('.class')}
         if expected_classes != actual_classes: raise RuntimeError('Packaged class inventory differs from fresh compilation')
-        for name in ('LICENSE', 'NOTICE', 'provenance.json', 'm3-donation.json', 'name-mapping.json', 'M3-DONATION-NOTICE.txt', 'NETBEANS-NOTICE.txt'):
-            if archive.read('META-INF/' + name) != (MODULE / name).read_bytes():
-                raise RuntimeError('Packaged module legal/provenance bytes differ: ' + name)
+        # The POM's current product owners are authoritative; NOTICE is not a source owner.
+        packaged_resources = {
+            'META-INF/LICENSE': MODULE / 'LICENSE',
+            'META-INF/provenance.json': MODULE / 'provenance.json',
+            'META-INF/m3-donation.json': MODULE / 'm3-donation.json',
+            'META-INF/name-mapping.json': MODULE / 'name-mapping.json',
+            'META-INF/M3-DONATION-NOTICE.txt': MODULE / 'M3-DONATION-NOTICE.txt',
+            'META-INF/NETBEANS-NOTICE.txt': MODULE / 'NETBEANS-NOTICE.txt',
+            'META-INF/m3collections.md': ROOT / 'src/jdk.m3.collections/share/legal/m3collections.md',
+            'jdk/m3/collections/M3_SDK_FAMILY_CATALOG.tsv':
+                ROOT / 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3_SDK_FAMILY_CATALOG.tsv',
+        }
+        packaged_names = archive.namelist()
+        for name, source in packaged_resources.items():
+            if packaged_names.count(name) != 1 or archive.read(name) != source.read_bytes():
+                raise RuntimeError('Packaged module resource missing, duplicate or drifted: ' + name)
+        test_resource_root = ROOT / 'test/jdk/jdk/m3/collections/resources'
+        test_resources = {path.relative_to(test_resource_root).as_posix()
+                          for path in test_resource_root.rglob('*') if path.is_file()}
+        leaked_test_resources = sorted(test_resources.intersection(packaged_names))
+        if leaked_test_resources:
+            raise RuntimeError('Test resources leaked into product jar: ' + repr(leaked_test_resources))
     runtime_modules = subprocess.check_output(
         [JAVA / 'bin/jdeps', '--module-path', array_jar, '--print-module-deps', jar],
         text=True).strip()
