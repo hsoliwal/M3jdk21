@@ -1,0 +1,54 @@
+{
+  "schema": "m3.receiver-postimage-reference/v1",
+  "status": "DRAFT_UNADMITTED",
+  "repository": "hsoliwal/M3jdk21",
+  "parent": "c81694d49da9eb6a1734ef89de72453c15e355b1",
+  "canonical": {
+    "repository": "hsoliwal/com.synexia",
+    "PR": 17242,
+    "head": "83aa605eaa54ba570c22b4aa6f6ebd061ee62069",
+    "path": "synexia-openrewrite-recipes/recipe-crates/zero-mask-native-mode-20261113",
+    "GAV": "com.synexia.verification:m3-zero-mask-native-mode-recipe:1.0.0",
+    "engine": "M3HashPinnedJavaSnapshotRecipe",
+    "crateId": "m3-zero-mask-native-mode-20261113"
+  },
+  "postimages": [
+    {
+      "path": "test/jdk/jdk/m3/collections/ZeroMaskSuccessorIT.java",
+      "beforeGitBlob": "0423189bb6852f1f2fa54d12db5fc826fff5fa08",
+      "gitBlob": "62e88757b3a62edacef9f00949a2065c23bc6754",
+      "sha256": "1922f17aeb550269d60bac54c3f64ca3ae4367105e356cddfa8dd242f52d7963"
+    }
+  ],
+  "proof": {
+    "recipeJUnit": 11,
+    "sourceDeltaChecks": 7,
+    "freshVMModeCases": 6,
+    "Maven": "PASS_REAL_OFFLINE_SDK3_9_14",
+    "artifactCacheCopies": 0,
+    "freshReplayUnchangedInputs": 22,
+    "nativeIntegrationMethods": 2,
+    "JavaOracleMethods": 2,
+    "XcheckJNI": true,
+    "nativeRequired": true,
+    "nativeRequiredRealProviderSkipped": 0,
+    "nativeRequiredMissingProviderFailures": 2,
+    "jniWarnings": 0,
+    "productionInterfacesChanged": false
+  },
+  "scope": "One existing zero-mask integration test owner; run only in required-native mode. Test names, provider assertions and primitive-window NATIVE_REQUIRED oracle calls retain exact bytes. Separate Java oracle tests remain active. No production storage/API/JNI/native implementation change.",
+  "holds": {
+    "fullLinuxCollections": "PREDECESSOR_RUN43249349029_FAILED_JAVA_MODE_3_OF2937",
+    "installedModule": "PREDECESSOR_SOURCE_DRIFT",
+    "productPhasePromotion": false,
+    "globalCatalogueAdmission": "OPEN",
+    "globalPerAtomRuntimePerformance": "OPEN",
+    "repositoryComplete": false
+  },
+  "phase": {
+    "STRING": "QUALIFICATION_REQUIRED",
+    "ARRAYS": "WAITING_FOR_PREDECESSOR",
+    "COLLECTIONS": "WAITING_FOR_PREDECESSOR"
+  },
+  "custody": "Only exact executed postimage plus passive reference. Recipes, fixtures, Maven qualification and improvement memory stay exclusively in Synexia."
+}
