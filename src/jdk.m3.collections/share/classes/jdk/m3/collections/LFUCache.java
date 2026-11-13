@@ -53,6 +53,9 @@ final class LFUCache<K, V> {
         if (keys.length == 0) {
             return created;
         }
+        // A timestamp rebase can allocate temporary primitive scratch.
+        // Finish it before publishing any new entry or evicting a live key.
+        long stamp = nextStamp();
         int target = victim();
         if (states[target] == 0) {
             size++;
@@ -61,7 +64,7 @@ final class LFUCache<K, V> {
         keys[target] = key;
         values[target] = created;
         frequencies[target] = 1;
-        accessStamps[target] = nextStamp();
+        accessStamps[target] = stamp;
         states[target] = OCCUPIED;
         return created;
     }
@@ -130,10 +133,12 @@ final class LFUCache<K, V> {
     }
 
     private void touch(int slot) {
+        // A failed overflow rebase must not increase a live entry frequency.
+        long stamp = nextStamp();
         if (frequencies[slot] < Integer.MAX_VALUE) {
             frequencies[slot]++;
         }
-        accessStamps[slot] = nextStamp();
+        accessStamps[slot] = stamp;
     }
 
     private long nextStamp() {
@@ -148,35 +153,35 @@ final class LFUCache<K, V> {
                 clock = 0L;
                 Arrays.fill(accessStamps, 0L);
             } else if (minimum == 0L) {
-                // Preserve recency and ties without allocating after a cache mutation.
-                // Nonnegative live stamps become temporary negative dense ranks.
-                long rank = 0L;
-                while (true) {
-                    boolean found = false;
-                    long next = Long.MAX_VALUE;
-                    for (int i = 0; i < accessStamps.length; i++) {
-                        if ((states[i] & OCCUPIED) != 0 && accessStamps[i] >= 0L
-                                && (!found || accessStamps[i] < next)) {
-                            next = accessStamps[i];
-                            found = true;
-                        }
-                    }
-                    if (!found) {
-                        break;
-                    }
-                    rank++;
-                    for (int i = 0; i < accessStamps.length; i++) {
-                        if ((states[i] & OCCUPIED) != 0 && accessStamps[i] == next) {
-                            accessStamps[i] = -rank;
-                        }
-                    }
-                }
-                for (int i = 0; i < accessStamps.length; i++) {
+                // Dense-rank the live timestamps in O(n log n), rather than
+                // repeatedly scanning the whole cache for each next distinct
+                // stamp (O(n squared)). Only one primitive scratch array is
+                // allocated: no per-slot Entry/Node object or boxing.
+                //
+                // Allocation must finish before any live timestamp is changed.
+                long[] sorted = new long[size];
+                int count = 0;
+                for (int i = 0; i < states.length; i++) {
                     if ((states[i] & OCCUPIED) != 0) {
-                        accessStamps[i] = -accessStamps[i];
+                        sorted[count++] = accessStamps[i];
                     }
                 }
-                clock = rank;
+                Arrays.sort(sorted, 0, count);
+                int distinct = 0;
+                for (int i = 0; i < count; i++) {
+                    if (distinct == 0 || sorted[i] != sorted[distinct - 1]) {
+                        sorted[distinct++] = sorted[i];
+                    }
+                }
+                for (int i = 0; i < states.length; i++) {
+                    if ((states[i] & OCCUPIED) != 0) {
+                        int rank = Arrays.binarySearch(sorted, 0, distinct, accessStamps[i]);
+                        // No negative rank is possible for a complete owner
+                        // snapshot. Preserve equal stamps as equal ranks.
+                        accessStamps[i] = rank + 1L;
+                    }
+                }
+                clock = distinct;
             } else {
                 for (int i = 0; i < accessStamps.length; i++) {
                     if ((states[i] & OCCUPIED) != 0) {
