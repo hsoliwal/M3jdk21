@@ -13900,6 +13900,457 @@
         },
         "source_state": "partial",
         "observation": "Candidate source identities only. No recipe execution, library completion, runtime integration or performance qualification is claimed by this record."
+      },
+      {
+        "id": "synexia.collections.apache.m3nodecachinglinkedlist",
+        "kind": "specialization",
+        "status": "implemented-unverified",
+        "reason": "The previous all-throw Apache-compatible scaffold is replaced on PR #2971 by a JDK21-formatted, intrinsic array/offset/mask implementation in the integrated jdk.m3.collections module. Not merged to master until full product gates pass.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "27399015ded4179274eac7cdbcd7ad321940ab60",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-apache-nodecache-owner-20261113/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-apache-nodecache-owner-20261113/0001-M3NodeCachingLinkedList.java.txt",
+            "symbol": "jdk.m3.collections.apache.M3NodeCachingLinkedList",
+            "signatures": [
+              "M3NodeCachingLinkedList()",
+              "M3NodeCachingLinkedList(int)",
+              "M3NodeCachingLinkedList(Collection<? extends E>)",
+              "List<E> reversed()"
+            ],
+            "sha256": "927f4faf79963228c5038330778a8c62f45281074f771cea527220bca0e3d2e8",
+            "git_blob_sha1": "3efc29e90f0bc0affa4af0567e5837e583e95eb3",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.collections",
+            "path": "src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3NodeCachingLinkedList.java",
+            "symbol": "jdk.m3.collections.apache.M3NodeCachingLinkedList",
+            "signatures": [
+              "M3NodeCachingLinkedList()",
+              "M3NodeCachingLinkedList(int)",
+              "M3NodeCachingLinkedList(Collection<? extends E>)",
+              "List<E> reversed()"
+            ],
+            "sha256": "65e2963f8d44e109a7a1c687714e0326084f8cfb870ed4a2cc880d58ccd22498",
+            "git_blob_sha1": "0639e6a9a0f4ef6c8d697ae1fa90f7a9542d15b9",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "jdk.m3.collections.apache.M3NodeCachingLinkedList",
+        "identity": {
+          "namespace": "Keep the target-owned additive Apache-compatible type and its public/protected Java contracts; no rename to java.util.* and no external wrapper.",
+          "generation": "Object[] elements, int[] previous/next, long[] live mask, primitive free-slot chain; no retained Node or Entry per element."
+        },
+        "contract": {
+          "differences": [
+            "Replace all throwing method bodies with a real, independent flat-array implementation.",
+            "End insert/remove O(1); indexed operations O(min(index,n-index)) by physical links."
+          ],
+          "compatibility_obligations": [
+            "Preserve nulls, duplicates, index errors, iteration and backed views, serialization identities, and relevant Apache Commons Collections 4.5.0 behavior.",
+            "Do not change existing Java SE names, constructors or JNI symbols; run independent original-provider and installed-image tests."
+          ],
+          "public_surface": [
+            "M3NodeCachingLinkedList()",
+            "M3NodeCachingLinkedList(int)",
+            "M3NodeCachingLinkedList(Collection<? extends E>)",
+            "List<E> reversed()"
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "JDK21 source-style four-space Java, explicit imports, Javadoc and @Serial; public method descriptors require full target ABI verification.",
+          "bootstrap": "Native product owner is compiled from src/jdk.m3.collections/share/classes, module-info.java exports jdk.m3.collections.apache; no Synexia runtime dependency."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Canonical source-sealed Maven/OpenRewrite recipe must execute in Synexia, then actual M3JDK21 JDK image, JTReg, JNI/GC and comparative CPU/heap/native gates must pass before merging.",
+          "joins": "Reuse product JDK module and its existing array/list/collection contracts; remove the old scaffold rather than retaining competing class definitions.",
+          "outputs": "Exact product Java source, linked module and external-module regression; passive receipt m3/collections/qualification/apache-nodecache-array-owner-20261113/RECEIVER.md",
+          "cached_facts": "No retained per-element Node/Entry/Cell; any public API-required projection may be created only at its boundary."
+        },
+        "recipe": {
+          "id": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+          "version": "m3-apache-nodecache-owner-20261113",
+          "path": null,
+          "sha256": null,
+          "canonical_repository": "hsoliwal/com.synexia",
+          "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-apache-nodecache-owner-20261113",
+          "preconditions": [
+            "Exact master preimage 0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb and original scaffold hash 01eb0ca8bc05bcefcaa3044fa7b1863d4a4c1a7d0ba85a3cb34f3af182f87b3f",
+            "Reject drift in the frozen source and perform named actual Maven/OpenRewrite SDK fixed-point/refusal checks.",
+            "Full source-built JDK21 and provider/jtreg/GC/JNI/runtime and performance acceptance before master merge."
+          ],
+          "rollback": "Review source-sealed inverse in Synexia; never restore a throwing public scaffold as a silent fallback."
+        },
+        "tests": [],
+        "test_descriptions": [
+          "Actual Java21 standalone reference-model evidence recorded by PR #2971 and m3/collections/qualification/apache-nodecache-array-owner-20261113/RECEIVER.md; 569965 finite assertions pass over 60,000 seeded operations.",
+          "New test/jdk/jdk/m3/collections/ArrayLinkedListContract.java byte provenance is pinned; source-built M3JDK21/JTReg hosted checks remain pending.",
+          "Strict Javadoc zero warnings (-Xdoclint:all -Werror); byte-identical compiled classes with -g:none; complete 60k-operation List oracle unchanged."
+        ],
+        "provenance": {
+          "license": "First-party Apache-2.0 OR EPL-2.0 source, with Apache Commons Collections 4.5.0 (Apache-2.0) used as contract/attribution oracle; no third-party implementation body copied.",
+          "publication": "Synexia source-sealed code candidate from merged PR #17268; target PR #2971 draft product source and passive receipts only.",
+          "copied_code": false,
+          "donor_boundary": "Original Apache provider is a behavior oracle; the target class is a new independently implemented array owner, not a provider subclass."
+        },
+        "sync": {
+          "source_revision": "27399015ded4179274eac7cdbcd7ad321940ab60",
+          "target_revision": "0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Relocate postimage to the canonical existing JDK module and package with four-space JDK style, Javadoc, explicit imports and @Serial.",
+            "Delete the previous all-throw scaffold and export exactly jdk.m3.collections.apache.",
+            "Source-sealed Javadoc-only OpenJDK 21 style successor from Synexia #17302; locally bytecode-identical at -g:none."
+          ],
+          "pending": [
+            "Run actual canonical Maven/OpenRewrite SDK and recorded exact source postimage/ABI equivalence.",
+            "Run full product source-built JDK image, jtreg, JNI/GC, Windows, and performance/heap/native-process qualification.",
+            "Verify the old per-provider Maven scaffold POMs are bridged/retired without breaking consumers or losing LICENSE/NOTICE.",
+            "Actual Maven/OpenRewrite SDK execution and full source-built JDK image gate still pending on #2971; local doclint/bytecode equivalence is not an image pass."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb",
+              "module": null,
+              "path": "m3/collections/implementations/apache-node-caching-linked-list/src/main/java/jdk/m3/collections/apache/M3NodeCachingLinkedList.java",
+              "symbol": "jdk.m3.collections.apache.M3NodeCachingLinkedList",
+              "signatures": [
+                "M3NodeCachingLinkedList()",
+                "M3NodeCachingLinkedList(int)",
+                "M3NodeCachingLinkedList(Collection<? extends E>)",
+                "List<E> reversed()"
+              ],
+              "sha256": "01eb0ca8bc05bcefcaa3044fa7b1863d4a4c1a7d0ba85a3cb34f3af182f87b3f",
+              "git_blob_sha1": "7cccf877127ca6d3b52165cac3b32b16806310a8",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "partial",
+        "observation": "JDK style/Javadoc source-only candidate from Synexia #17302 on product draft #2971; master and SDK/image/release acceptance remain unqualified."
+      },
+      {
+        "id": "synexia.collections.apache.m3treelist",
+        "kind": "specialization",
+        "status": "implemented-unverified",
+        "reason": "The previous all-throw Apache-compatible scaffold is replaced on PR #2971 by a JDK21-formatted, intrinsic array/offset/mask implementation in the integrated jdk.m3.collections module. Not merged to master until full product gates pass.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "80ab1a3125fc13ebc57d0eb81a60456c9d3df6b2",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-apache-treelist-array-treap-20261113/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-apache-treelist-array-treap-20261113/0001-M3TreeList.java.txt",
+            "symbol": "jdk.m3.collections.apache.M3TreeList",
+            "signatures": [
+              "M3TreeList()",
+              "M3TreeList(Collection<? extends E>)",
+              "E get(int)",
+              "void add(int,E)",
+              "E remove(int)"
+            ],
+            "sha256": "68fce448cdc052e43a059f9b1e71c2deb228c5e6c6dd0d3b7789b150cccc4a0a",
+            "git_blob_sha1": "06dc7501a8f6efc837ff3e9f716058b9b0bab76e",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.collections",
+            "path": "src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3TreeList.java",
+            "symbol": "jdk.m3.collections.apache.M3TreeList",
+            "signatures": [
+              "M3TreeList()",
+              "M3TreeList(Collection<? extends E>)",
+              "E get(int)",
+              "void add(int,E)",
+              "E remove(int)"
+            ],
+            "sha256": "ad155c871d40d03dca1412443814e8670e8819c1ccd690f60f09f18e2ce9ca86",
+            "git_blob_sha1": "9da0a6ad147c423a0cfa718a8159890cc2c25977",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "jdk.m3.collections.apache.M3TreeList",
+        "identity": {
+          "namespace": "Keep the target-owned additive Apache-compatible type and its public/protected Java contracts; no rename to java.util.* and no external wrapper.",
+          "generation": "Object[] elements, int[] left/right/weight/priority, long[] occupied bits, physical free-slot chain."
+        },
+        "contract": {
+          "differences": [
+            "Replace all throwing method bodies with a real, independent flat-array implementation.",
+            "Expected O(log n) indexed lookup/insertion/deletion by rank; no per-element TreeNode."
+          ],
+          "compatibility_obligations": [
+            "Preserve nulls, duplicates, index errors, iteration and backed views, serialization identities, and relevant Apache Commons Collections 4.5.0 behavior.",
+            "Do not change existing Java SE names, constructors or JNI symbols; run independent original-provider and installed-image tests."
+          ],
+          "public_surface": [
+            "M3TreeList()",
+            "M3TreeList(Collection<? extends E>)",
+            "E get(int)",
+            "void add(int,E)",
+            "E remove(int)"
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "JDK21 source-style four-space Java, explicit imports, Javadoc and @Serial; public method descriptors require full target ABI verification.",
+          "bootstrap": "Native product owner is compiled from src/jdk.m3.collections/share/classes, module-info.java exports jdk.m3.collections.apache; no Synexia runtime dependency."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Canonical source-sealed Maven/OpenRewrite recipe must execute in Synexia, then actual M3JDK21 JDK image, JTReg, JNI/GC and comparative CPU/heap/native gates must pass before merging.",
+          "joins": "Reuse product JDK module and its existing array/list/collection contracts; remove the old scaffold rather than retaining competing class definitions.",
+          "outputs": "Exact product Java source, linked module and external-module regression; passive receipt m3/collections/qualification/apache-treelist-array-owner-20261113/RECEIVER.md",
+          "cached_facts": "No retained per-element Node/Entry/Cell; any public API-required projection may be created only at its boundary."
+        },
+        "recipe": {
+          "id": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+          "version": "m3-apache-treelist-array-treap-20261113",
+          "path": null,
+          "sha256": null,
+          "canonical_repository": "hsoliwal/com.synexia",
+          "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-apache-treelist-array-treap-20261113",
+          "preconditions": [
+            "Exact master preimage 0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb and original scaffold hash 623bf403734c80152bcf59d9b31f733662aece96151536e7c7edc343bec4fa72",
+            "Reject drift in the frozen source and perform named actual Maven/OpenRewrite SDK fixed-point/refusal checks.",
+            "Full source-built JDK21 and provider/jtreg/GC/JNI/runtime and performance acceptance before master merge."
+          ],
+          "rollback": "Review source-sealed inverse in Synexia; never restore a throwing public scaffold as a silent fallback."
+        },
+        "tests": [],
+        "test_descriptions": [
+          "Actual Java21 standalone reference-model evidence recorded by PR #2971 and m3/collections/qualification/apache-treelist-array-owner-20261113/RECEIVER.md; 569967 finite assertions pass over 60,000 seeded operations.",
+          "New test/jdk/jdk/m3/collections/ArrayTreeListContract.java byte provenance is pinned; source-built M3JDK21/JTReg hosted checks remain pending.",
+          "Strict Javadoc zero warnings (-Xdoclint:all -Werror); byte-identical compiled classes with -g:none; complete 60k-operation List oracle unchanged."
+        ],
+        "provenance": {
+          "license": "First-party Apache-2.0 OR EPL-2.0 source, with Apache Commons Collections 4.5.0 (Apache-2.0) used as contract/attribution oracle; no third-party implementation body copied.",
+          "publication": "Synexia source-sealed code candidate from merged PR #17275; target PR #2971 draft product source and passive receipts only.",
+          "copied_code": false,
+          "donor_boundary": "Original Apache provider is a behavior oracle; the target class is a new independently implemented array owner, not a provider subclass."
+        },
+        "sync": {
+          "source_revision": "80ab1a3125fc13ebc57d0eb81a60456c9d3df6b2",
+          "target_revision": "0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Relocate postimage to the canonical existing JDK module and package with four-space JDK style, Javadoc, explicit imports and @Serial.",
+            "Delete the previous all-throw scaffold and export exactly jdk.m3.collections.apache.",
+            "Source-sealed Javadoc-only OpenJDK 21 style successor from Synexia #17302; locally bytecode-identical at -g:none."
+          ],
+          "pending": [
+            "Run actual canonical Maven/OpenRewrite SDK and recorded exact source postimage/ABI equivalence.",
+            "Run full product source-built JDK image, jtreg, JNI/GC, Windows, and performance/heap/native-process qualification.",
+            "Verify the old per-provider Maven scaffold POMs are bridged/retired without breaking consumers or losing LICENSE/NOTICE.",
+            "Actual Maven/OpenRewrite SDK execution and full source-built JDK image gate still pending on #2971; local doclint/bytecode equivalence is not an image pass."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb",
+              "module": null,
+              "path": "m3/collections/implementations/apache-tree-list/src/main/java/jdk/m3/collections/apache/M3TreeList.java",
+              "symbol": "jdk.m3.collections.apache.M3TreeList",
+              "signatures": [
+                "M3TreeList()",
+                "M3TreeList(Collection<? extends E>)",
+                "E get(int)",
+                "void add(int,E)",
+                "E remove(int)"
+              ],
+              "sha256": "623bf403734c80152bcf59d9b31f733662aece96151536e7c7edc343bec4fa72",
+              "git_blob_sha1": "7202d6ed806037e353516ec13e4a5d30527acac2",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "partial",
+        "observation": "JDK style/Javadoc source-only candidate from Synexia #17302 on product draft #2971; master and SDK/image/release acceptance remain unqualified."
+      },
+      {
+        "id": "synexia.collections.apache.m3arraystack",
+        "kind": "specialization",
+        "status": "implemented-unverified",
+        "reason": "The previous all-throw Apache-compatible scaffold is replaced on PR #2971 by a JDK21-formatted, intrinsic array/offset/mask implementation in the integrated jdk.m3.collections module. Not merged to master until full product gates pass.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "87b7675d936eb0389d09ad73d6709eeaa263b6df",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-apache-array-stack-20261113/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-apache-array-stack-20261113/0001-M3ArrayStack.java.txt",
+            "symbol": "jdk.m3.collections.apache.M3ArrayStack",
+            "signatures": [
+              "M3ArrayStack()",
+              "M3ArrayStack(int)",
+              "E push(E)",
+              "E pop()",
+              "E peek()",
+              "E peek(int)",
+              "int search(Object)"
+            ],
+            "sha256": "ce1b38af531d1d863f6eb67bd6e2f975a39a02979777ed5a2f0af3d1756e7e45",
+            "git_blob_sha1": "237c205c40f92d9ac135c64113fbdae1427a0ef2",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.collections",
+            "path": "src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3ArrayStack.java",
+            "symbol": "jdk.m3.collections.apache.M3ArrayStack",
+            "signatures": [
+              "M3ArrayStack()",
+              "M3ArrayStack(int)",
+              "E push(E)",
+              "E pop()",
+              "E peek()",
+              "E peek(int)",
+              "int search(Object)"
+            ],
+            "sha256": "e8e3de6031e99bfa20583bdbccf29aa98b18523ecc3cdc08d3b263125c77f3d9",
+            "git_blob_sha1": "fc253468efae015e37bfd68ad0195e106e8222f5",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "jdk.m3.collections.apache.M3ArrayStack",
+        "identity": {
+          "namespace": "Keep the target-owned additive Apache-compatible type and its public/protected Java contracts; no rename to java.util.* and no external wrapper.",
+          "generation": "One dynamic Object[] and int length; temporary long[] rejection mask only on bulk filtering; no per-element Node."
+        },
+        "contract": {
+          "differences": [
+            "Replace all throwing method bodies with a real, independent flat-array implementation.",
+            "Amortized O(1) push/pop, O(n) indexed insertion/deletion via contiguous System.arraycopy."
+          ],
+          "compatibility_obligations": [
+            "Preserve nulls, duplicates, index errors, iteration and backed views, serialization identities, and relevant Apache Commons Collections 4.5.0 behavior.",
+            "Do not change existing Java SE names, constructors or JNI symbols; run independent original-provider and installed-image tests."
+          ],
+          "public_surface": [
+            "M3ArrayStack()",
+            "M3ArrayStack(int)",
+            "E push(E)",
+            "E pop()",
+            "E peek()",
+            "E peek(int)",
+            "int search(Object)"
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "JDK21 source-style four-space Java, explicit imports, Javadoc and @Serial; public method descriptors require full target ABI verification.",
+          "bootstrap": "Native product owner is compiled from src/jdk.m3.collections/share/classes, module-info.java exports jdk.m3.collections.apache; no Synexia runtime dependency."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Canonical source-sealed Maven/OpenRewrite recipe must execute in Synexia, then actual M3JDK21 JDK image, JTReg, JNI/GC and comparative CPU/heap/native gates must pass before merging.",
+          "joins": "Reuse product JDK module and its existing array/list/collection contracts; remove the old scaffold rather than retaining competing class definitions.",
+          "outputs": "Exact product Java source, linked module and external-module regression; passive receipt m3/collections/qualification/apache-array-stack-20261113/RECEIVER.md",
+          "cached_facts": "No retained per-element Node/Entry/Cell; any public API-required projection may be created only at its boundary."
+        },
+        "recipe": {
+          "id": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+          "version": "m3-apache-array-stack-20261113",
+          "path": null,
+          "sha256": null,
+          "canonical_repository": "hsoliwal/com.synexia",
+          "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-apache-array-stack-20261113",
+          "preconditions": [
+            "Exact master preimage 0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb and original scaffold hash 85a2b6afd218f35442114bd599b2bc14f5f4b4341719f1a6372d8e8ccdb8ffd1",
+            "Reject drift in the frozen source and perform named actual Maven/OpenRewrite SDK fixed-point/refusal checks.",
+            "Full source-built JDK21 and provider/jtreg/GC/JNI/runtime and performance acceptance before master merge."
+          ],
+          "rollback": "Review source-sealed inverse in Synexia; never restore a throwing public scaffold as a silent fallback."
+        },
+        "tests": [],
+        "test_descriptions": [
+          "Actual Java21 standalone reference-model evidence recorded by PR #2971 and m3/collections/qualification/apache-array-stack-20261113/RECEIVER.md; 484245 finite assertions pass over 60,000 seeded operations.",
+          "New test/jdk/jdk/m3/collections/ArrayStackContract.java byte provenance is pinned; source-built M3JDK21/JTReg hosted checks remain pending.",
+          "Strict Javadoc zero warnings (-Xdoclint:all -Werror); byte-identical compiled classes with -g:none; complete 60k-operation List oracle unchanged."
+        ],
+        "provenance": {
+          "license": "First-party Apache-2.0 OR EPL-2.0 source, with Apache Commons Collections 4.5.0 (Apache-2.0) used as contract/attribution oracle; no third-party implementation body copied.",
+          "publication": "Synexia source-sealed code candidate from merged PR #17282; target PR #2971 draft product source and passive receipts only.",
+          "copied_code": false,
+          "donor_boundary": "Original Apache provider is a behavior oracle; the target class is a new independently implemented array owner, not a provider subclass."
+        },
+        "sync": {
+          "source_revision": "87b7675d936eb0389d09ad73d6709eeaa263b6df",
+          "target_revision": "0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Relocate postimage to the canonical existing JDK module and package with four-space JDK style, Javadoc, explicit imports and @Serial.",
+            "Delete the previous all-throw scaffold and export exactly jdk.m3.collections.apache.",
+            "Source-sealed Javadoc-only OpenJDK 21 style successor from Synexia #17302; locally bytecode-identical at -g:none."
+          ],
+          "pending": [
+            "Run actual canonical Maven/OpenRewrite SDK and recorded exact source postimage/ABI equivalence.",
+            "Run full product source-built JDK image, jtreg, JNI/GC, Windows, and performance/heap/native-process qualification.",
+            "Verify the old per-provider Maven scaffold POMs are bridged/retired without breaking consumers or losing LICENSE/NOTICE.",
+            "Actual Maven/OpenRewrite SDK execution and full source-built JDK image gate still pending on #2971; local doclint/bytecode equivalence is not an image pass."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb",
+              "module": null,
+              "path": "m3/collections/implementations/apache-array-stack/src/main/java/jdk/m3/collections/apache/M3ArrayStack.java",
+              "symbol": "jdk.m3.collections.apache.M3ArrayStack",
+              "signatures": [
+                "M3ArrayStack()",
+                "M3ArrayStack(int)",
+                "E push(E)",
+                "E pop()",
+                "E peek()",
+                "E peek(int)",
+                "int search(Object)"
+              ],
+              "sha256": "85a2b6afd218f35442114bd599b2bc14f5f4b4341719f1a6372d8e8ccdb8ffd1",
+              "git_blob_sha1": "3f6989ec756543f675d667c14ac1367d971276f2",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "partial",
+        "observation": "JDK style/Javadoc source-only candidate from Synexia #17302 on product draft #2971; master and SDK/image/release acceptance remain unqualified."
       }
     ]
   },

@@ -1,0 +1,208 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 Apache array-owned list and stack sources
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-arrayified-apache-list-owners-20261113.yml'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3NodeCachingLinkedList.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3TreeList.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3ArrayStack.java'
+      - 'test/jdk/jdk/m3/collections/ArrayLinkedListContract.java'
+      - 'test/jdk/jdk/m3/collections/ArrayTreeListContract.java'
+      - 'test/jdk/jdk/m3/collections/ArrayStackContract.java'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  java21-array-owners:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify exact integrated Java module source and JDK list contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          build="$RUNNER_TEMP/m3jdk-collection-array-owners"
+          mkdir -p "$build/src/jdk.m3.collections/jdk/m3/collections/apache" "$build/classes" "$build/test-classes"
+          printf 'module jdk.m3.collections { exports jdk.m3.collections.apache; }\n' > "$build/src/jdk.m3.collections/module-info.java"
+          cp src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3NodeCachingLinkedList.java "$build/src/jdk.m3.collections/jdk/m3/collections/apache/"
+          cp src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3TreeList.java "$build/src/jdk.m3.collections/jdk/m3/collections/apache/"
+          cp src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3ArrayStack.java "$build/src/jdk.m3.collections/jdk/m3/collections/apache/"
+          javac --release 21 -Xlint:all,-module -Werror -d "$build/classes" \
+            "$build/src/jdk.m3.collections/module-info.java" \
+            "$build/src/jdk.m3.collections/jdk/m3/collections/apache/M3NodeCachingLinkedList.java" \
+            "$build/src/jdk.m3.collections/jdk/m3/collections/apache/M3TreeList.java" \
+            "$build/src/jdk.m3.collections/jdk/m3/collections/apache/M3ArrayStack.java"
+          javac --release 21 -Xlint:all,-module -Werror \
+            --module-path "$build/classes" --add-modules jdk.m3.collections \
+            -d "$build/test-classes" \
+            test/jdk/jdk/m3/collections/ArrayLinkedListContract.java \
+            test/jdk/jdk/m3/collections/ArrayTreeListContract.java \
+            test/jdk/jdk/m3/collections/ArrayStackContract.java
+          java --module-path "$build/classes" --add-modules jdk.m3.collections \
+            --add-opens=jdk.m3.collections/jdk.m3.collections.apache=ALL-UNNAMED \
+            -cp "$build/test-classes" ArrayLinkedListContract | tee "$build/linked.txt"
+          grep -Fqx 'PASS checks=569965 steps=60000 array-lanes=Object[],int[],int[],long[]' "$build/linked.txt"
+          java --module-path "$build/classes" --add-modules jdk.m3.collections \
+            --add-opens=jdk.m3.collections/jdk.m3.collections.apache=ALL-UNNAMED \
+            -cp "$build/test-classes" ArrayTreeListContract | tee "$build/tree.txt"
+          grep -Fqx 'PASS checks=569967 steps=60000 array-lanes=Object[],int[]x4,long[]' "$build/tree.txt"
+          java --module-path "$build/classes" --add-modules jdk.m3.collections \
+            --add-opens=jdk.m3.collections/jdk.m3.collections.apache=ALL-UNNAMED \
+            -cp "$build/test-classes" ArrayStackContract | tee "$build/stack.txt"
+          grep -Fqx 'PASS checks=484245 steps=60000 array-lanes=Object[]' "$build/stack.txt"
+          echo 'THREE_M3JDK_ARRAY_OWNERS PASS (scoped module; full source-built JDK still HOLD)'
+      - name: Verify JDK-style Java source seals and strict Javadoc
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3NodeCachingLinkedList.java)" = "0639e6a9a0f4ef6c8d697ae1fa90f7a9542d15b9"
+          test "$(git hash-object src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3TreeList.java)" = "9da0a6ad147c423a0cfa718a8159890cc2c25977"
+          test "$(git hash-object src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3ArrayStack.java)" = "fc253468efae015e37bfd68ad0195e106e8222f5"
+          build="$RUNNER_TEMP/m3jdk-collection-array-owners"
+          mkdir -p "$build/javadoc"
+          javadoc -quiet -Xdoclint:all -Werror -d "$build/javadoc" \
+            "$build/src/jdk.m3.collections/jdk/m3/collections/apache/"*.java
+          echo 'M3JDK_APACHE_JDK21_DOCLINT_AND_SOURCE_SEALS PASS'
+
+      - name: Verify JMOD, jlink image and externally executed JDK module contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          build="$RUNNER_TEMP/m3jdk-collection-array-owners"
+          jmod create --class-path "$build/classes" "$build/jdk.m3.collections.jmod"
+          jmod describe "$build/jdk.m3.collections.jmod" | tee "$build/jmod-describe.txt"
+          grep -Eq 'exports +jdk\.m3\.collections\.apache' "$build/jmod-describe.txt"
+          jlink --module-path "$JAVA_HOME/jmods:$build" --add-modules jdk.m3.collections \
+            --output "$build/image" --strip-debug --no-header-files --no-man-pages
+          "$build/image/bin/java" --list-modules | grep -Eq '^jdk[.]m3[.]collections(@|$)'
+          for test in ArrayLinkedListContract ArrayTreeListContract ArrayStackContract; do
+            "$build/image/bin/java" --add-modules jdk.m3.collections \
+              --add-opens=jdk.m3.collections/jdk.m3.collections.apache=ALL-UNNAMED \
+              -cp "$build/test-classes" "$test" | tee "$build/$test.image.txt"
+          done
+          grep -Fqx 'PASS checks=569965 steps=60000 array-lanes=Object[],int[],int[],long[]' "$build/ArrayLinkedListContract.image.txt"
+          grep -Fqx 'PASS checks=569967 steps=60000 array-lanes=Object[],int[]x4,long[]' "$build/ArrayTreeListContract.image.txt"
+          grep -Fqx 'PASS checks=484245 steps=60000 array-lanes=Object[]' "$build/ArrayStackContract.image.txt"
+          echo 'M3_JMOD_AND_JLINK_IMAGE_THREE_ARRAY_OWNERS PASS (local linked JDK21 image; target source-built JDK still HOLD)'
+
+  source-built-m3jdk21:
+    # This is the actual product admission lane, not a detached javac/jlink proof.
+    runs-on: ubuntu-22.04
+    timeout-minutes: 180
+    steps:
+      - name: Checkout the exact M3JDK21 PR source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Prepare Java 17 for the pinned jtreg tool builder
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Use the repository's canonical BootJDK
+        uses: ./.github/actions/get-bootjdk
+        with:
+          platform: linux-x64
+
+      - name: Use the repository's canonical jtreg installation
+        uses: ./.github/actions/get-jtreg
+
+      - name: Install supported Linux M3JDK21 build prerequisites
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y gcc-10 g++-10 make autoconf zip unzip \
+            libxrandr-dev libxtst-dev libcups2-dev libasound2-dev \
+            libfreetype6-dev libffi-dev zlib1g-dev
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 100 \
+            --slave /usr/bin/g++ g++ /usr/bin/g++-10
+          test -x bootjdk/jdk/bin/java
+          test -x jtreg/installed/bin/jtreg
+
+      - name: Configure the full integrated JDK21 (including jdk.m3.collections)
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash configure \
+            --with-conf-name=m3jdk21-apache-array-owners \
+            --with-boot-jdk=bootjdk/jdk \
+            --with-jtreg=jtreg/installed \
+            --with-debug-level=release \
+            --with-zlib=system \
+            --with-jobs=2
+
+      - name: Build the real M3JDK21 image and verify integrated collection classes
+        shell: bash
+        run: |
+          set -euo pipefail
+          make CONF=m3jdk21-apache-array-owners JOBS=2 LOG=info images
+          image=build/m3jdk21-apache-array-owners/images/jdk
+          test -x "$image/bin/java"
+          test -x "$image/bin/javac"
+          "$image/bin/java" --list-modules | grep -Eq '^jdk[.]m3[.]collections(@|$)'
+          "$image/bin/javap" --module jdk.m3.collections \
+            jdk.m3.collections.apache.M3NodeCachingLinkedList > "$RUNNER_TEMP/linked.txt"
+          "$image/bin/javap" --module jdk.m3.collections \
+            jdk.m3.collections.apache.M3TreeList > "$RUNNER_TEMP/tree.txt"
+          "$image/bin/javap" --module jdk.m3.collections \
+            jdk.m3.collections.apache.M3ArrayStack > "$RUNNER_TEMP/stack.txt"
+          grep -Fq 'class jdk.m3.collections.apache.M3NodeCachingLinkedList' "$RUNNER_TEMP/linked.txt"
+          grep -Fq 'class jdk.m3.collections.apache.M3TreeList' "$RUNNER_TEMP/tree.txt"
+          grep -Fq 'class jdk.m3.collections.apache.M3ArrayStack' "$RUNNER_TEMP/stack.txt"
+
+      - name: Run the actual product JTReg tests against the built M3JDK21
+        shell: bash
+        run: |
+          set -euo pipefail
+          make CONF=m3jdk21-apache-array-owners JOBS=2 LOG=info test \
+            TEST="test/jdk/jdk/m3/collections/M3NodeCachingLinkedListJTReg.java test/jdk/jdk/m3/collections/M3TreeListJTReg.java test/jdk/jdk/m3/collections/M3ArrayStackJTReg.java"
+
+      - name: Recompile and rerun all three product oracles using the built javac and java
+        shell: bash
+        run: |
+          set -euo pipefail
+          image="$GITHUB_WORKSPACE/build/m3jdk21-apache-array-owners/images/jdk"
+          out="$RUNNER_TEMP/m3jdk21-apache-array-owners"
+          mkdir -p "$out/classes"
+          "$image/bin/javac" -proc:none -Xlint:all,-module -Werror \
+            --add-modules jdk.m3.collections \
+            --add-exports=jdk.m3.collections/jdk.m3.collections.apache=ALL-UNNAMED \
+            -d "$out/classes" \
+            test/jdk/jdk/m3/collections/ArrayLinkedListContract.java \
+            test/jdk/jdk/m3/collections/ArrayTreeListContract.java \
+            test/jdk/jdk/m3/collections/ArrayStackContract.java
+          for mode in default interpreted; do
+            args=()
+            if [[ "$mode" == interpreted ]]; then args=(-Xint); fi
+            for test in ArrayLinkedListContract ArrayTreeListContract ArrayStackContract; do
+              "$image/bin/java" "${args[@]}" --add-modules jdk.m3.collections \
+                --add-opens=jdk.m3.collections/jdk.m3.collections.apache=ALL-UNNAMED \
+                -cp "$out/classes" "$test" | tee "$out/$test.$mode.txt"
+            done
+            grep -Fqx 'PASS checks=569965 steps=60000 array-lanes=Object[],int[],int[],long[]' "$out/ArrayLinkedListContract.$mode.txt"
+            grep -Fqx 'PASS checks=569967 steps=60000 array-lanes=Object[],int[]x4,long[]' "$out/ArrayTreeListContract.$mode.txt"
+            grep -Fqx 'PASS checks=484245 steps=60000 array-lanes=Object[]' "$out/ArrayStackContract.$mode.txt"
+          done
+          echo "M3JDK21_REAL_IMAGE_JTREG_APACHE_ARRAY_OWNERS PASS"
+
+      - name: Preserve actual JDK build and jtreg evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3jdk21-apache-array-owners-product-image
+          path: |
+            build/m3jdk21-apache-array-owners/configure.log
+            build/m3jdk21-apache-array-owners/build.log
+            build/m3jdk21-apache-array-owners/test-results/
+            build/m3jdk21-apache-array-owners/test-support/
+          retention-days: 7
+          if-no-files-found: warn

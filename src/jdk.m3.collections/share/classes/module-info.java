@@ -10,6 +10,7 @@ module jdk.m3.collections {
     exports jdk.m3.arrays;
     exports jdk.m3.arrays.packed;
     exports jdk.m3.collections;
+    exports jdk.m3.collections.apache;
     exports jdk.m3.collections.bits;
     exports jdk.m3.collections.concurrent;
     exports jdk.m3.collections.graph;
