@@ -1,0 +1,7 @@
+{
+  "status": "PROCESS_EXIT_ZERO_RECEIPT_TRUNCATED_NOT_ADMITTED",
+  "input": "43b754aebca0625711b38222cba51a383e62c82d",
+  "exit": 0,
+  "reason": "Polling tool was given1800-token output budget; it removed middle receipt chunks. Source qualification source/candidate unchanged. Rerun needed for recoverable hash-verified performance evidence; fix owning emitter to persist before short stdout.",
+  "retainedFiles": 0
+}
