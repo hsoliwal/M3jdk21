@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  * Generated from canonical Synexia M3 source-sealed recipe.
  */
+// Modified 2026-11-13: scalar membership avoids temporary entry projections.
 package jdk.internal.m3.collections;
 
 import java.util.AbstractMap;
@@ -100,6 +101,18 @@ public final class ListMultiValueMap<K, V> extends AbstractMap<K, List<V>> {
             @Override public int size() { return data.size(); }
             @Override public boolean containsKey(Object key) { return data.containsKey(key); }
             @Override public V get(Object key) { return getFirst(key); }
+
+            /** Preserve the key and list callbacks of the entry-based membership scan. */
+            @Override public boolean containsValue(Object value) {
+                Iterator<K> keys = data.keySet().iterator();
+                while (keys.hasNext()) {
+                    V candidate = getFirst(keys.next());
+                    if (value == null ? candidate == null : value.equals(candidate)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
 
             @Override public void forEach(BiConsumer<? super K, ? super V> action) {
                 Objects.requireNonNull(action);
