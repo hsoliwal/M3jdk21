@@ -119,6 +119,70 @@ class StringReplacementRoutesTest(unittest.TestCase):
     def test_regex_result_admission_loss_refuses(self):
         self.assert_refused(self.changed('if (replaced != null) return replaced;', 'return replaced;'))
 
+    def changed_literal(self, old, new):
+        start = self.original.index('public String replace(CharSequence target, CharSequence replacement)')
+        end = self.original.index('\n    private String m3Replace(', start)
+        literal = self.original[start:end]
+        self.assertEqual(literal.count(old), 1, old)
+        return self.original[:start] + literal.replace(old, new, 1) + self.original[end:]
+
+    def test_flat_source_coder_loss_refuses(self):
+        self.assert_refused(self.changed_literal('boolean thisIsLatin1 = this.isLatin1();',
+                                                'boolean thisIsLatin1 = true;'))
+
+    def test_flat_target_coder_loss_refuses(self):
+        self.assert_refused(self.changed_literal('boolean trgtIsLatin1 = trgtStr.isLatin1();',
+                                                'boolean trgtIsLatin1 = true;'))
+
+    def test_flat_replacement_coder_loss_refuses(self):
+        self.assert_refused(self.changed_literal('boolean replIsLatin1 = replStr.isLatin1();',
+                                                'boolean replIsLatin1 = true;'))
+
+    def test_flat_latin1_length_loss_refuses(self):
+        self.assert_refused(self.changed_literal('StringLatin1.replace(value(), thisLen,',
+                                                'StringLatin1.replace(value(), 0,'))
+
+    def test_flat_utf16_length_loss_refuses(self):
+        self.assert_refused(self.changed_literal('StringUTF16.replace(value(), thisLen, thisIsLatin1,',
+                                                'StringUTF16.replace(value(), 0, thisIsLatin1,'))
+
+    def test_flat_result_admission_loss_refuses(self):
+        self.assert_refused(self.changed_literal('if (ret != null) {', 'if (ret == null) {'))
+
+    def test_empty_target_length_arithmetic_loss_refuses(self):
+        self.assert_refused(self.changed_literal('Math.addExact(thisLen, Math.multiplyExact(',
+                                                'Math.addExact(0, Math.multiplyExact('))
+
+    def test_empty_target_wrong_overflow_exception_refuses(self):
+        self.assert_refused(self.changed_literal('throw new OutOfMemoryError(',
+                                                'throw new IllegalArgumentException('))
+
+    def test_empty_target_overflow_message_spaces_preserved(self):
+        self.assert_refused(self.changed_literal('Required length exceeds implementation limit',
+                                                'Requiredlengthexceedsimplementationlimit'))
+
+    def test_empty_target_source_owner_loss_refuses(self):
+        source = self.original
+        start = source.index('} else { // trgtLen == 0')
+        tail = source[start:]
+        self.assertIn('M3String storage = m3();', tail)
+        self.assert_refused(source[:start] + tail.replace('M3String storage = m3();',
+                                                        'M3String storage = null;', 1))
+
+    def test_empty_target_fallback_capacity_loss_refuses(self):
+        self.assert_refused(self.changed_literal('StringBuilder sb = new StringBuilder(resultLen);',
+                                                'StringBuilder sb = new StringBuilder();'))
+
+    def test_empty_target_initial_insertion_loss_refuses(self):
+        self.assert_refused(self.changed_literal('sb.append(replStr);', 'sb.append(this);'))
+
+    def test_empty_target_utf16_loop_loss_refuses(self):
+        self.assert_refused(self.changed_literal('sb.append(charAt(i)).append(replStr);',
+                                                'sb.append(charAt(0)).append(replStr);'))
+
+    def test_nonfinal_string_owner_refuses(self):
+        self.assert_refused(self.changed('public final class String', 'public class String'))
+
     def test_wrong_class_refuses(self):
         self.assert_refused(self.changed('public final class String', 'public final class NotString'))
 

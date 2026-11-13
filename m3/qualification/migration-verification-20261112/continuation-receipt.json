@@ -1,0 +1,625 @@
+{
+  "schema": "M3_MIGRATION_CONTINUATION_RECEIVER_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_task": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112",
+  "canonical_source_base_revision": "b25fb8e0aa8d27a7756a782bbfe8becc1f98a2f1",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_input_revision": "0163b1474862ca463a64f24b45b0c6ca36aa4e73",
+  "canonical_core_execution_revision": "8ac9585a24f3b69d89874f08e7ae4c9325c2f8cd",
+  "canonical_acceptance_execution_revision": "77dcc82015a553b69746eb9e032fd2e2c5abdb80",
+  "status": "EXECUTED_SOURCE_SEALED_CONTINUATION_RUNTIME_RELEASE_SEPARATE",
+  "outputs": [
+    {
+      "path": ".github/workflows/build-windows.yml",
+      "before_sha256": "80cd6b0e4a26b20936bb59be0bcda4ab7f3acc0937077f7442943d2293d8f500",
+      "before_git_blob": "1764ab557820c4fd4115762ee28462a2fe78c341",
+      "after_sha256": "bd25affb0aa19b8832ac59486005f9d0bb20774a5868a9a844bf31733ed724b9",
+      "after_git_blob": "311b92fd939bf6b1b85d8a33d5c18b1ccc5ba78a",
+      "bytes": 5571,
+      "group": "continuation",
+      "recipe": "com.synexia.m3.MigrationVerificationContinuation20261112",
+      "resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-migration-verification-20261112-continuation/000.txt",
+      "recipe_revision": "8ac9585a24f3b69d89874f08e7ae4c9325c2f8cd"
+    },
+    {
+      "path": ".github/workflows/m3-full-delivery-a3.yml",
+      "before_sha256": "5fb1d94747d3588aa4cf7275598c3b14d6f6f73f0fb49b67e8ffa9f3c705a9c1",
+      "before_git_blob": "52760bf6095eda5cfe13f81674088db0bd298875",
+      "after_sha256": "a1c4ff538b29f0898e92eec19ebbd28916877ca6048509ebd60ff6332f316e29",
+      "after_git_blob": "3edae5c7831a50b19e2a62a9746da3b3ebf72c1b",
+      "bytes": 2166,
+      "group": "continuation",
+      "recipe": "com.synexia.m3.MigrationVerificationContinuation20261112",
+      "resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-migration-verification-20261112-continuation/001.txt",
+      "recipe_revision": "8ac9585a24f3b69d89874f08e7ae4c9325c2f8cd"
+    },
+    {
+      "path": ".github/workflows/m3-string-replacement-guard-proof.yml",
+      "before_sha256": "1b270e0aabeba10a1079b11571764f9bf1c8b72be1b358ac9610ab1cd9244883",
+      "before_git_blob": "f8b8c866f0bf3d483dec5e55fbe222d29bac78cb",
+      "after_sha256": "553d8e1ba1af75c819dcb691fee0c4e0ff19ca2bed065d6b882c6a911747af02",
+      "after_git_blob": "7724b478bc0b169ceda315d8cc7124e548bdf97b",
+      "bytes": 4897,
+      "group": "continuation",
+      "recipe": "com.synexia.m3.MigrationVerificationContinuation20261112",
+      "resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-migration-verification-20261112-continuation/002.txt",
+      "recipe_revision": "8ac9585a24f3b69d89874f08e7ae4c9325c2f8cd"
+    },
+    {
+      "path": ".github/workflows/mindex-string-backing.yml",
+      "before_sha256": "b4da5d0f9e06cd5a8bf20cc0c3c2bc1ee9c3707ae3cd82faf556d0b2a396b7f5",
+      "before_git_blob": "517ffc2a0b2363ed4a31c1ff9e06753c744900bc",
+      "after_sha256": "c94ae2a8d5d7fb0d959c7ada2f769b62299702e329126063cd494ed4e7064eb3",
+      "after_git_blob": "183bb2cd636bcbccc9660c18ebfdecb7beaf206a",
+      "bytes": 17039,
+      "group": "continuation",
+      "recipe": "com.synexia.m3.MigrationVerificationContinuation20261112",
+      "resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-migration-verification-20261112-continuation/003.txt",
+      "recipe_revision": "8ac9585a24f3b69d89874f08e7ae4c9325c2f8cd"
+    },
+    {
+      "path": "m3/collections/verification/filtered-object-deques-20261017/M3FilteredDequeContract.java",
+      "before_sha256": "2fa63ed2810dc2106763813978f6c60b6a3501cf4215bc200435597b1675825b",
+      "before_git_blob": "7a5a2fa42b749170b83fd348c564ed92dd5821bd",
+      "after_sha256": "4028c558218cf2d51b6466ec138736d56010d625fec311995ea1297b9f642d83",
+      "after_git_blob": "060d936edaf8d44e320e505eb37f0f650569c550",
+      "bytes": 18168,
+      "group": "continuationJava",
+      "recipe": "com.synexia.m3.MigrationVerificationContinuationJava20261112",
+      "resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-migration-verification-20261112-continuation-java/000.txt",
+      "recipe_revision": "8ac9585a24f3b69d89874f08e7ae4c9325c2f8cd"
+    },
+    {
+      "path": "m3/collections/verification/filtered-object-deques-20261017/README.md",
+      "before_sha256": "a4ec33a16a9f253143f4c9961a1798d2f76afa5342dadaefc5a133e04377a352",
+      "before_git_blob": "c1c9ce8a7facc8e4c38e8e89b9dda1a13271db5c",
+      "after_sha256": "70362acaf70ae8613270c96bfe95273850a67a401a6cf143056aa2ca0407babd",
+      "after_git_blob": "b9ca13beef6ff2e3751d1f68a9f96c1f0012795c",
+      "bytes": 2803,
+      "group": "continuation",
+      "recipe": "com.synexia.m3.MigrationVerificationContinuation20261112",
+      "resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-migration-verification-20261112-continuation/004.txt",
+      "recipe_revision": "8ac9585a24f3b69d89874f08e7ae4c9325c2f8cd"
+    },
+    {
+      "path": "m3/collections/verification/filtered-object-deques-20261017/verify.sh",
+      "before_sha256": "51dc2182a53ed715b984ab2fb921918ae6af33d9825b8c247bcb81c9453afafd",
+      "before_git_blob": "03fd1ad76562e3bf74ab33f0c4c323d600c7583b",
+      "after_sha256": "d6d53844a86020b202d1ae6c9bac5fb7af4f150ef55ce36e34a2c4b258c38819",
+      "after_git_blob": "c7c49b8bc048f9abb58b17a600a5d163eb04eb1b",
+      "bytes": 669,
+      "group": "continuation",
+      "recipe": "com.synexia.m3.MigrationVerificationContinuation20261112",
+      "resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-migration-verification-20261112-continuation/005.txt",
+      "recipe_revision": "8ac9585a24f3b69d89874f08e7ae4c9325c2f8cd"
+    },
+    {
+      "path": "m3/collections/verification/primitive-filtered-sequences-20261017/README.md",
+      "before_sha256": "6dab0ccc70caff6d2c6a29ceb7d3580831554a1906fe9e8d8be13ee7c0d22dfb",
+      "before_git_blob": "49027e72eff3edd1123c9ffbf481b048ec23ecd7",
+      "after_sha256": "2f597ab9c5a88c2beb2d67a3f836df95918fcbdf88bcaaac0a6a8ed2a347ad49",
+      "after_git_blob": "0f0e2d2851fd671181468541f5875153edff9610",
+      "bytes": 2611,
+      "group": "continuation",
+      "recipe": "com.synexia.m3.MigrationVerificationContinuation20261112",
+      "resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-migration-verification-20261112-continuation/006.txt",
+      "recipe_revision": "8ac9585a24f3b69d89874f08e7ae4c9325c2f8cd"
+    },
+    {
+      "path": "m3/collections/verification/primitive-filtered-sequences-20261017/verify.sh",
+      "before_sha256": "e24482ee6d450b9304e877722bc1dbcd391d59f681412b346db4dd38b68ef97b",
+      "before_git_blob": "9634762e92befd8001b9f1f10645d2f7c99bd6e0",
+      "after_sha256": "9c5d03ed8f7f8404e17919b5c7f38dc9d90ba4eae1d4cc67d6d9f829842f6620",
+      "after_git_blob": "c2485b2d3c869f7d35a39eb4a719417649ce61cf",
+      "bytes": 1563,
+      "group": "continuation",
+      "recipe": "com.synexia.m3.MigrationVerificationContinuation20261112",
+      "resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-migration-verification-20261112-continuation/007.txt",
+      "recipe_revision": "8ac9585a24f3b69d89874f08e7ae4c9325c2f8cd"
+    },
+    {
+      "path": "m3/runtime-integration/check-m3string-invariants.py",
+      "before_sha256": "7c5304aa001eacb53dc47b6911c7536b295269a298cd5351e76d1be7a6d6728d",
+      "before_git_blob": "bc60472ba646850f43064b915e2a5c8c8343db85",
+      "after_sha256": "dd24419376a173bab1431eab0060f85e8da3752463c998f634a5b75564ee7bf9",
+      "after_git_blob": "a550a0e0854117141e3684b5e728171cd5b65157",
+      "bytes": 114226,
+      "group": "continuation",
+      "recipe": "com.synexia.m3.MigrationVerificationContinuation20261112",
+      "resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-migration-verification-20261112-continuation/008.txt",
+      "recipe_revision": "8ac9585a24f3b69d89874f08e7ae4c9325c2f8cd"
+    },
+    {
+      "path": "m3/runtime-integration/src/main/java/M3StringReplacementRoutes.java",
+      "before_sha256": "098da0581258b416bbf7546aec9d0f3d2783643c69d122c460fa96d56b7e9475",
+      "before_git_blob": "9ec4baae6b2697c0f3202ea7dccc6b4c68a9d8a0",
+      "after_sha256": "c09f616c797c588755714919aba4739f6db336398ceb6005159ab64488de4b8b",
+      "after_git_blob": "b41c7ca1c0c1df67f39975f4bd105e2d1018cabe",
+      "bytes": 13828,
+      "group": "continuationJava",
+      "recipe": "com.synexia.m3.MigrationVerificationContinuationJava20261112",
+      "resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-migration-verification-20261112-continuation-java/001.txt",
+      "recipe_revision": "8ac9585a24f3b69d89874f08e7ae4c9325c2f8cd"
+    },
+    {
+      "path": "m3/runtime-integration/string-replacement-guard-custody.md",
+      "before_sha256": "3e7cfa57ba4b1f1b75b9e1cba103799fa37f62cb1bd90d1e22e769298ee6cacb",
+      "before_git_blob": "86fd9c1a5616dedb15179616e2209ae5b935a8e0",
+      "after_sha256": "0c8926cf7a491b5b5fe6d531ef5283f86a0021a3c3e3957a2c7a5fd33f937f0c",
+      "after_git_blob": "e2157bac98fd5a8ccd5a2117c239cb93f6a91003",
+      "bytes": 4732,
+      "group": "continuation",
+      "recipe": "com.synexia.m3.MigrationVerificationContinuation20261112",
+      "resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-migration-verification-20261112-continuation/009.txt",
+      "recipe_revision": "8ac9585a24f3b69d89874f08e7ae4c9325c2f8cd"
+    },
+    {
+      "path": "m3/runtime-integration/string-replacement-target-sha256.txt",
+      "before_sha256": "ABSENT",
+      "before_git_blob": "ABSENT",
+      "after_sha256": "8f1a1198fe25a21d6549c29561b3732b99197df2bd02ec389dda08e68dd66919",
+      "after_git_blob": "b35f8ae7c284b2471f501e04632078e4639d9e43",
+      "bytes": 5091,
+      "group": "continuation",
+      "recipe": "com.synexia.m3.MigrationVerificationContinuation20261112",
+      "resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-migration-verification-20261112-continuation/010.txt",
+      "recipe_revision": "8ac9585a24f3b69d89874f08e7ae4c9325c2f8cd"
+    },
+    {
+      "path": "m3/runtime-integration/test_string_cursor_and_ingress.py",
+      "before_sha256": "ABSENT",
+      "before_git_blob": "ABSENT",
+      "after_sha256": "fac32600e25804c951d491355b993e760959b89be0bab14c1ae236509c78397b",
+      "after_git_blob": "920f66b19f097564ef16522245340c28fcde7ce4",
+      "bytes": 7020,
+      "group": "continuation",
+      "recipe": "com.synexia.m3.MigrationVerificationContinuation20261112",
+      "resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-migration-verification-20261112-continuation/011.txt",
+      "recipe_revision": "8ac9585a24f3b69d89874f08e7ae4c9325c2f8cd"
+    },
+    {
+      "path": "m3/runtime-integration/test_string_pool_precompute.py",
+      "before_sha256": "897ea16019f76d48598391150542f32a391a7ba7f3a499c67e0880733f27bf84",
+      "before_git_blob": "685fc23e35856a281f2790a3e9f35d34f066f86b",
+      "after_sha256": "4def1edfa5504abe8ea91a9491a9fd6df681157ca64c7446ea001548aecea13a",
+      "after_git_blob": "173a5fb1d9b1624de94858742153b6bb724ac091",
+      "bytes": 14925,
+      "group": "continuation",
+      "recipe": "com.synexia.m3.MigrationVerificationContinuation20261112",
+      "resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-migration-verification-20261112-continuation/012.txt",
+      "recipe_revision": "8ac9585a24f3b69d89874f08e7ae4c9325c2f8cd"
+    },
+    {
+      "path": "m3/runtime-integration/test_string_replacement_routes.py",
+      "before_sha256": "1f4fa3977092afd5b44b2df231828497ed954bd3cc777c905550294b9bac7af3",
+      "before_git_blob": "e2472ba96690cae46b930f081abdc8027c6bf4c7",
+      "after_sha256": "9e454a13503c5f4f17830261bdf984e83b08d6b022b614eb0fc3cef77b289f79",
+      "after_git_blob": "03bdeabd254b1836767742a559f9a699124936ca",
+      "bytes": 10519,
+      "group": "continuation",
+      "recipe": "com.synexia.m3.MigrationVerificationContinuation20261112",
+      "resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-migration-verification-20261112-continuation/013.txt",
+      "recipe_revision": "8ac9585a24f3b69d89874f08e7ae4c9325c2f8cd"
+    },
+    {
+      "path": "m3/runtime-integration/test_string_workflow_contract.py",
+      "before_sha256": "ABSENT",
+      "before_git_blob": "ABSENT",
+      "after_sha256": "da234821bf87f89bc457ce373e68eb459575ab2809e7f59bdfffb25070192e3a",
+      "after_git_blob": "89e8f56ba3ad08a285b7846469da53ccb96d803c",
+      "bytes": 9723,
+      "group": "continuation",
+      "recipe": "com.synexia.m3.MigrationVerificationContinuation20261112",
+      "resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-migration-verification-20261112-continuation/014.txt",
+      "recipe_revision": "8ac9585a24f3b69d89874f08e7ae4c9325c2f8cd"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java",
+      "before_sha256": "9f2e50c678e632db619b906cd93f5af27ac8ec4ef4dc63e21ef923e51626dea4",
+      "before_git_blob": "7b25004afe2b11ad87de90bae698d51b5533afb8",
+      "after_sha256": "3dfed2c88a4a78f13701e816ccf550401c2658d8bcbecf91cf35c3b23b8d0cb6",
+      "after_git_blob": "b4c733004be251a751def941b3bdc27a77dc2fab",
+      "bytes": 13269,
+      "group": "continuationJava",
+      "recipe": "com.synexia.m3.MigrationVerificationContinuationJava20261112",
+      "resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-migration-verification-20261112-continuation-java/002.txt",
+      "recipe_revision": "8ac9585a24f3b69d89874f08e7ae4c9325c2f8cd"
+    },
+    {
+      "path": "m3/m3-import/current-full-borrow/README.md",
+      "before_sha256": "441f6142b1f5fd3ed624bbf43781e28e9a05a45a4eac4939ff9aa894bb5b60ea",
+      "before_git_blob": "271da5dc8d2060690f05858c3bc30d6a3c839f54",
+      "after_sha256": "a2d6c42ab0a44c1f8745d41e1bc74cc39cf110ee2d3926bcc4cf9eb3fc1f6f7b",
+      "after_git_blob": "6226d062b4663348364af4b1630a234bebd35cdc",
+      "bytes": 9788,
+      "group": "phase",
+      "resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-migration-verification-20261112-phase/000.txt",
+      "recipe_revision": "77dcc82015a553b69746eb9e032fd2e2c5abdb80",
+      "recipe": "com.synexia.m3.MigrationVerificationPhase20261112"
+    },
+    {
+      "path": "m3/m3-import/current-full-borrow/check_string_phase.py",
+      "before_sha256": "730fa79866ede00fc38275ba7e9c67da03988b1f2365e5920a4992fb4f153a06",
+      "before_git_blob": "150f413e7b4b041fb8024ef53fa61a4e316563fa",
+      "after_sha256": "243056b76e691947b6083e54771463ee21d6e1c075e0a56e928c958a32efb31f",
+      "after_git_blob": "aed08831ac0340d8478df1f2c546e7b6de577b45",
+      "bytes": 67744,
+      "group": "phase",
+      "resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-migration-verification-20261112-phase/001.txt",
+      "recipe_revision": "77dcc82015a553b69746eb9e032fd2e2c5abdb80",
+      "recipe": "com.synexia.m3.MigrationVerificationPhase20261112"
+    },
+    {
+      "path": "m3/m3-import/current-full-borrow/string-additional-owner-successors.tsv",
+      "before_sha256": "1c8e5a1061a56f2d3c6349adaa270f383bb3c3385a17d8ff8ad705241149ae15",
+      "before_git_blob": "70dfb6ae7c0803ffd45f68c2e850b4e2f0722822",
+      "after_sha256": "fd05127895b9fb35d08749f88768e382e53b7f7f7cda4225d58fdd3952388aa1",
+      "after_git_blob": "0b2f993c64d7570a3dbcbe18deefd84125217911",
+      "bytes": 10926,
+      "group": "phase",
+      "resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-migration-verification-20261112-phase/002.txt",
+      "recipe_revision": "77dcc82015a553b69746eb9e032fd2e2c5abdb80",
+      "recipe": "com.synexia.m3.MigrationVerificationPhase20261112"
+    },
+    {
+      "path": "m3/m3-import/current-full-borrow/string-facts-target-successor-chain.tsv",
+      "before_sha256": "567fe7e914f4e91bda63f8cc6a3dacf021e3abb92667e01f856e32b40c0d0a91",
+      "before_git_blob": "092233d3ad455ad6f5d86905cae30c0cad2a3f53",
+      "after_sha256": "c4c454318d14ddaa011e6bb6972fcdf81aecfa7aeb4a1b01073884037ba3ad8f",
+      "after_git_blob": "9619d7b775308406c3c7c7608a5bfbe1154eb644",
+      "bytes": 3795,
+      "group": "phase",
+      "resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-migration-verification-20261112-phase/003.txt",
+      "recipe_revision": "77dcc82015a553b69746eb9e032fd2e2c5abdb80",
+      "recipe": "com.synexia.m3.MigrationVerificationPhase20261112"
+    },
+    {
+      "path": "m3/m3-import/current-full-borrow/string-pool-source-observation.tsv",
+      "before_sha256": "8248fe1b5c9554ca7bacd93b04aa6b67a83a2e358f95fe9417341b4b0a857119",
+      "before_git_blob": "edc85975e9371a534b5b75ceb0fd235d5c777c1f",
+      "after_sha256": "0daf6b5553f85cf4320df986359e0563a2871d6ab0ac17c348ade0b5c54c51e5",
+      "after_git_blob": "2827281c5fbd1786d01380881e0e4220fc131970",
+      "bytes": 7865,
+      "group": "phase",
+      "resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-migration-verification-20261112-phase/004.txt",
+      "recipe_revision": "77dcc82015a553b69746eb9e032fd2e2c5abdb80",
+      "recipe": "com.synexia.m3.MigrationVerificationPhase20261112"
+    },
+    {
+      "path": "m3/m3-import/current-full-borrow/string-target-merged-source-observation.tsv",
+      "before_sha256": "2aa09ffab116870ce657fbbbe61b548d82d6951db148e48fd10e7b6d86c93bb8",
+      "before_git_blob": "c124fb831c48023cee82185d63a13f60652ca3d8",
+      "after_sha256": "9042180ef172db41dff716056839e2ad5da0271a2996fc6837eb87451701ffa8",
+      "after_git_blob": "e1effe1d4d7770ccdf3544b7cab5c1613c2ac550",
+      "bytes": 4221,
+      "group": "phase",
+      "resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-migration-verification-20261112-phase/005.txt",
+      "recipe_revision": "77dcc82015a553b69746eb9e032fd2e2c5abdb80",
+      "recipe": "com.synexia.m3.MigrationVerificationPhase20261112"
+    },
+    {
+      "path": "m3/m3-import/current-full-borrow/string-target-successor-chain.tsv",
+      "before_sha256": "cfdbd550ca16d6f28e718347409b328b677f473f1f498cb903da69c1cb386ca0",
+      "before_git_blob": "75d949e5aa2c8ff4e5c70d648e81fc0d37b68651",
+      "after_sha256": "1e696fd5363f21bcc0d3733d8e57430da3aafcc976244da5a7b896c1306c98c6",
+      "after_git_blob": "398de8e7bbea69ce76cb43cc24a28200644ed174",
+      "bytes": 1227,
+      "group": "phase",
+      "resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-migration-verification-20261112-phase/006.txt",
+      "recipe_revision": "77dcc82015a553b69746eb9e032fd2e2c5abdb80",
+      "recipe": "com.synexia.m3.MigrationVerificationPhase20261112"
+    },
+    {
+      "path": "m3/m3-import/current-full-borrow/test_string_phase_successors.py",
+      "before_sha256": "132adab9d1d8d4286445680bdf890c311b608e7cc1279edfa5b665c505b9d708",
+      "before_git_blob": "d9c314023e2f7bde472a81f112c72525f604df66",
+      "after_sha256": "7b30336993df81763fdacb01aaeeb5d46d95708472d34c826595581ee0c3ff95",
+      "after_git_blob": "31d59120777f26e0de37dfc00082eb8fc3569e48",
+      "bytes": 44625,
+      "group": "phase",
+      "resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-migration-verification-20261112-phase/007.txt",
+      "recipe_revision": "77dcc82015a553b69746eb9e032fd2e2c5abdb80",
+      "recipe": "com.synexia.m3.MigrationVerificationPhase20261112"
+    },
+    {
+      "path": ".github/workflows/m3-recipe-ownership.yml",
+      "before_sha256": "b48b6f1d0431c1a77bb400ecb1cf81ddf883beb498ee848f6f0f7f3b32c7e1b1",
+      "before_git_blob": "6dd3ae6b0d4926ee84c57df4a349d0bd2dde6f08",
+      "after_sha256": "7a396d20a2d6bb3af41f0bf505c500d25467ce971e960593487cb50f834b43aa",
+      "after_git_blob": "b75f5d5dbbd678ee51dc005fa6a46afcbbe8c28a",
+      "bytes": 1258,
+      "group": "ownership",
+      "resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-migration-verification-20261112-ownership/000.txt",
+      "recipe_revision": "77dcc82015a553b69746eb9e032fd2e2c5abdb80",
+      "recipe": "com.synexia.m3.MigrationVerificationOwnership20261112"
+    },
+    {
+      "path": "m3/runtime-integration/test_recipe_ownership.py",
+      "before_sha256": "ABSENT",
+      "before_git_blob": "ABSENT",
+      "after_sha256": "4b3e7adebbfb5c28156060fd6be5f2948d4d3b8ea19153a8bd895fc791c64b22",
+      "after_git_blob": "58eabae58447001e869d9e5ee12f73abf0a87654",
+      "bytes": 9787,
+      "group": "ownership",
+      "resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-migration-verification-20261112-ownership/001.txt",
+      "recipe_revision": "77dcc82015a553b69746eb9e032fd2e2c5abdb80",
+      "recipe": "com.synexia.m3.MigrationVerificationOwnership20261112"
+    },
+    {
+      "path": "m3/runtime-integration/verify-recipe-ownership.py",
+      "before_sha256": "e4781b582fe82d2dbe53777fe53b91546495c3c71ba6ce4164ebbbd91fb6e29f",
+      "before_git_blob": "b7728c70ea812904bb78ae9de5386d03a42cd5ce",
+      "after_sha256": "1e692d8899d3859834799d0b24d102f81c87e4603d26f9c231df485611744cb0",
+      "after_git_blob": "58d27c2811b1e4cac9f5e41cd2e1283b263b076f",
+      "bytes": 4545,
+      "group": "ownership",
+      "resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-migration-verification-20261112-ownership/002.txt",
+      "recipe_revision": "77dcc82015a553b69746eb9e032fd2e2c5abdb80",
+      "recipe": "com.synexia.m3.MigrationVerificationOwnership20261112"
+    },
+    {
+      "path": "m3/tooling/jdk-naming/NAMING_KEEP.tsv",
+      "before_sha256": "9f0a18e1d021a004b08b83b7cc14619a99f6da8fc3f399e6bd76c0f93265f721",
+      "before_git_blob": "ba7b9b4162eff16289537fe65bb087609ef50929",
+      "after_sha256": "be2c468a7579d05d46902fcfe1ecaf9314f8db4e2997600ce4ba52755520665d",
+      "after_git_blob": "f45f648098adbc1e55b022dafb10cd189c877667",
+      "bytes": 11501,
+      "group": "naming",
+      "resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-migration-verification-20261112-naming/000.txt",
+      "recipe_revision": "77dcc82015a553b69746eb9e032fd2e2c5abdb80",
+      "recipe": "com.synexia.m3.MigrationVerificationNaming20261112"
+    },
+    {
+      "path": "m3/docs/migration-mapping-lifecycle.md",
+      "before_sha256": "dae93d5aaa1d404e94adb5d877a95249d90dbbcc14d72989d88ae45bd919bb57",
+      "before_git_blob": "f3106dfb843d69f73386338b9993596920b65009",
+      "after_sha256": "39ac5c99f3eff523229b28ea2028159ac56325d0b9b4e3e3a963a7e5f12946e7",
+      "after_git_blob": "2785ce9d5a347913803015d0376b15a54f36bd21",
+      "bytes": 26120,
+      "group": "documentation",
+      "resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-migration-verification-20261112-documentation/000.txt",
+      "recipe_revision": "77dcc82015a553b69746eb9e032fd2e2c5abdb80",
+      "recipe": "com.synexia.m3.MigrationVerificationDocumentation20261112"
+    }
+  ],
+  "target_validation": {
+    "schema": "M3_EXECUTED_CONTINUATION_TARGET_VALIDATION_V1",
+    "target_input_revision": "0163b1474862ca463a64f24b45b0c6ca36aa4e73",
+    "worktree": "Actual complete target checkout with exact canonical emitted outputs",
+    "receiving_outputs_verified": 31,
+    "required_local_gates_passed": true,
+    "commands": [
+      {
+        "name": "historical-custody",
+        "command": [
+          "sha256sum",
+          "-c",
+          "m3/runtime-integration/string-replacement-guard-sha256.txt"
+        ],
+        "exit_code": 0,
+        "expected_hold": false,
+        "gate_expectation_met": true,
+        "elapsed_seconds": 0.016,
+        "log": "historical-custody.log",
+        "log_sha256": "70d486870342a3d2a9c0aecb054f348150417f3dcd454954969253d35ba42ea0"
+      },
+      {
+        "name": "source-custody",
+        "command": [
+          "sha256sum",
+          "--strict",
+          "-c",
+          "m3/runtime-integration/string-replacement-target-sha256.txt"
+        ],
+        "exit_code": 0,
+        "expected_hold": false,
+        "gate_expectation_met": true,
+        "elapsed_seconds": 0.028,
+        "log": "source-custody.log",
+        "log_sha256": "89de27a1a45d9a2bed74888a748e53b092e7f67c780ac33b94049a27c170f1ee"
+      },
+      {
+        "name": "replacement-routes",
+        "command": [
+          "python3",
+          "m3/runtime-integration/test_string_replacement_routes.py"
+        ],
+        "exit_code": 0,
+        "expected_hold": false,
+        "gate_expectation_met": true,
+        "elapsed_seconds": 19.864,
+        "log": "replacement-routes.log",
+        "log_sha256": "39008a9cdf8c00c035a5bc48043666c542fd4df8e2027d1e9a09a648bfa92694"
+      },
+      {
+        "name": "pool-precompute",
+        "command": [
+          "python3",
+          "m3/runtime-integration/test_string_pool_precompute.py"
+        ],
+        "exit_code": 0,
+        "expected_hold": false,
+        "gate_expectation_met": true,
+        "elapsed_seconds": 12.001,
+        "log": "pool-precompute.log",
+        "log_sha256": "d8bbccfc12ea3393da5d52fba196708ed7f8f4b91b9b5e06cb9f376cba68cbe0"
+      },
+      {
+        "name": "cursor-ingress",
+        "command": [
+          "python3",
+          "m3/runtime-integration/test_string_cursor_and_ingress.py"
+        ],
+        "exit_code": 0,
+        "expected_hold": false,
+        "gate_expectation_met": true,
+        "elapsed_seconds": 2.586,
+        "log": "cursor-ingress.log",
+        "log_sha256": "4868a9bfe5956dba97d99749b454fa9f9b65b633e41e364e71899753f993c9dc"
+      },
+      {
+        "name": "workflow-contract",
+        "command": [
+          "python3",
+          "m3/runtime-integration/test_string_workflow_contract.py"
+        ],
+        "exit_code": 0,
+        "expected_hold": false,
+        "gate_expectation_met": true,
+        "elapsed_seconds": 0.372,
+        "log": "workflow-contract.log",
+        "log_sha256": "e06748f06efd7fd93a2cdb10b1bdfcd260ae6d3a8a7610f2c6fcd2ef004e6d28"
+      },
+      {
+        "name": "string-source-invariants",
+        "command": [
+          "python3",
+          "m3/runtime-integration/check-m3string-invariants.py"
+        ],
+        "exit_code": 0,
+        "expected_hold": false,
+        "gate_expectation_met": true,
+        "elapsed_seconds": 3.073,
+        "log": "string-source-invariants.log",
+        "log_sha256": "ee4f6601bd711f75a391432b99d4ea4486ee61ec732ff3887a2015ba0bcb4762"
+      },
+      {
+        "name": "phase-regressions",
+        "command": [
+          "python3",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "m3/m3-import/current-full-borrow",
+          "-p",
+          "test_string_phase_successors.py",
+          "-v"
+        ],
+        "exit_code": 0,
+        "expected_hold": false,
+        "gate_expectation_met": true,
+        "elapsed_seconds": 0.989,
+        "log": "phase-regressions.log",
+        "log_sha256": "332c0222e324b9f979fdd4e994dd6f45387a2a149e38984dc8ff4e40aec31e1c"
+      },
+      {
+        "name": "phase-checker",
+        "command": [
+          "python3",
+          "m3/m3-import/current-full-borrow/check_string_phase.py"
+        ],
+        "exit_code": 0,
+        "expected_hold": false,
+        "gate_expectation_met": true,
+        "elapsed_seconds": 0.068,
+        "log": "phase-checker.log",
+        "log_sha256": "fdb8d175692ce64ce055778217ff5f7887d58ea45ce5b3aa868cd4f40bb888c2"
+      },
+      {
+        "name": "ownership-regressions",
+        "command": [
+          "python3",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "m3/runtime-integration",
+          "-p",
+          "test_recipe_ownership.py",
+          "-v"
+        ],
+        "exit_code": 0,
+        "expected_hold": false,
+        "gate_expectation_met": true,
+        "elapsed_seconds": 0.171,
+        "log": "ownership-regressions.log",
+        "log_sha256": "14ad35d7c630a325ac27d2b07aabdfee4fb267aa6b2833ee52682b80f85eeb9a"
+      },
+      {
+        "name": "ownership-gate",
+        "command": [
+          "python3",
+          "m3/runtime-integration/verify-recipe-ownership.py"
+        ],
+        "exit_code": 1,
+        "expected_hold": true,
+        "gate_expectation_met": true,
+        "elapsed_seconds": 0.047,
+        "log": "ownership-gate.log",
+        "log_sha256": "22c7c1524b89556ffa7d4bd0ff3bc15d72939bf22a0fe17c891d818ffe79a76e",
+        "observed_findings": {
+          "unclassified": 47,
+          "stale": 2
+        },
+        "exact_frozen_finding_set_match": true
+      },
+      {
+        "name": "full-borrow-receiver",
+        "command": [
+          "python3",
+          "m3/compatibility/check_m3_full_borrow_receiver.py"
+        ],
+        "exit_code": 0,
+        "expected_hold": false,
+        "gate_expectation_met": true,
+        "elapsed_seconds": 0.076,
+        "log": "full-borrow-receiver.log",
+        "log_sha256": "20cdb00ddbf13f8bc5ef137299710d64ee5c58333f119765abe56b5fe257cac2"
+      },
+      {
+        "name": "name-contract",
+        "command": [
+          "python3",
+          "m3/tooling/name-contract/check.py"
+        ],
+        "exit_code": 0,
+        "expected_hold": false,
+        "gate_expectation_met": true,
+        "elapsed_seconds": 0.574,
+        "log": "name-contract.log",
+        "log_sha256": "ab5694754665e8bd006829419fd9ce8bdf59e843414168a19e2815feb5743be9"
+      }
+    ],
+    "source_tests": {
+      "string_methods": 58,
+      "phase_methods": 36,
+      "ownership_methods": 16
+    },
+    "production_ownership_gate": {
+      "state": "EXPECTED_HOLD",
+      "observed_findings": {
+        "unclassified": 47,
+        "stale": 2
+      }
+    },
+    "independent_prior_source_contracts": {
+      "object_deque_checks": 140734,
+      "primitive_sequence_checks": 164104,
+      "actual_collection_module_sources_compiled": 1185,
+      "validation_scope": "Frozen candidate bytes equal actual canonical output bytes; prior finite target contract execution retained privately."
+    },
+    "runtime_image_acceptance": false,
+    "phase_advanced": false,
+    "release_admission": false
+  },
+  "prior_receipt": "m3/qualification/migration-verification-20261112/receipt.json",
+  "known_independent_gates": {
+    "recipe_ownership": "HOLD_47_UNCLASSIFIED_2_STALE_RECORDS",
+    "importer_source_tests": "49_PASS_1_LEGACY_SEED_SNAPSHOT_FAILURE",
+    "importer_Maven_lifecycle": "BLOCKED_UNCACHED_JACOCO_0_8_15",
+    "regex_Maven_local": "BLOCKED_UNCACHED_EXEC_PLUGIN_3_3_0",
+    "matched_postimage_M3JDK21_runtime": "HOSTED_SAME_JOB_BUILD_AND_THREE_MODE_VERIFICATION_REQUIRED",
+    "earlier_0163_linux_images": "RELEASE_AND_FASTDEBUG_PRODUCT_TEST_BUNDLES_BUILT; DO_NOT_QUALIFY_THIS_NEW_SOURCE",
+    "full_Maven_control_reactor": "NOT_QUALIFIED",
+    "full_canonical_provenance_set": "NOT_EXECUTED",
+    "legacy_public_recipe_custody_and_naming": "REMAINS_UNQUALIFIED",
+    "JNI_GC_ABI_lifetime_and_full_jtreg": "REQUIRED_INDEPENDENT_GATES",
+    "phase_advanced": false,
+    "complete_migration": false,
+    "release_admission": false
+  },
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "receipt_scope": "Passive product-output and qualification identities. No recipe source, templates or executable receiver."
+}

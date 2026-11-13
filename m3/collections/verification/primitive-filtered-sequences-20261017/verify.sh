@@ -1,41 +1,32 @@
 #!/usr/bin/env bash
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
 set -euo pipefail
 cd "$(dirname "$0")/../../../.."
 work="$(mktemp -d)"
 trap 'rm -rf "$work"' EXIT
-arrays="$work/arrays"
-collections="$work/collections"
-mkdir -p "$arrays" "$collections"
+classes="$work/classes"
+mkdir -p "$classes" "$work/empty-classpath"
 sep="${M3_PATH_SEPARATOR:-:}"
-# Build the actual original jdk.m3.arrays module, not a synthetic facade. Its module-info stays in m3/arrays/src/main/java;
-# since the arrays area moved into the JDK module tree (MOVE_TO_JDK_MODULE v2, #2825) the product sources live in
-# src/jdk.m3.collections/share/classes/jdk/m3/arrays (before the move both were under m3/arrays/src/main/java).
-arrays_area=src/jdk.m3.collections/share/classes/jdk/m3/arrays
-mapfile -d '' array_sources < <({ find m3/arrays/src/main/java -type f -name '*.java' -print0
-  if [[ -d "$arrays_area" ]]; then find "$arrays_area" -type f -name '*.java' -print0; fi; } | sort -z)
-if [[ "${#array_sources[@]}" -lt 2 ]]; then
-  echo 'missing original jdk.m3.arrays source closure' >&2
+# Arrays, algorithms and collections now belong to this single product module.
+# Compile its complete original source tree and module descriptor; do not revive
+# the historical split-module Maven descriptors or synthesize a replacement.
+source_root=src/jdk.m3.collections/share/classes
+contract=test/jdk/jdk/m3/collections/PrimitiveFilteredSequencesRuntimeContract.java
+if [[ ! -f "$source_root/module-info.java" || ! -f "$contract" ]]; then
+  echo 'missing current jdk.m3.collections module or primitive sequence contract' >&2
   exit 1
 fi
-printf '%s\n' "${array_sources[@]}" > "$work/arrays.args"
-javac --release 21 -proc:none -Xlint:all,-module -Werror -d "$arrays" @"$work/arrays.args"
-test -s "$arrays/module-info.class"
-# Preserve the original module-info and resolve its real 'requires jdk.m3.arrays'. The whole jdk.m3.collections source set
-# is compiled: module-info exports the family packages (bits, concurrent, graph, packed, range, sketch, text), which must
-# hold classes, and the product owner moved with the curation passes (A1 #2781 to jdk.internal.m3.collections, CURATE_E
-# E1/E2 dropping the M3 prefix), so no single source path is pinned here. The runtime contract is found by its name.
-src=m3/collections/src/main/java
-mapfile -d '' collection_sources < <(find "$src" -type f -name '*.java' -print0 | sort -z)
-contract="$(find m3/collections/src/test/java -type f -name '*PrimitiveFilteredSequencesRuntimeContract.java' | sort | head -1)"
-if [[ -z "$contract" ]]; then
-  echo 'missing primitive filtered sequences runtime contract' >&2
+mapfile -d '' sources < <(find "$source_root" -type f -name '*.java' -print0 | sort -z)
+if [[ "${#sources[@]}" -lt 2 ]]; then
+  echo 'missing current jdk.m3.collections source closure' >&2
   exit 1
 fi
-printf '%s\n' "${collection_sources[@]}" "$contract" > "$work/collections.args"  # an argfile: about 900 sources
+printf '%s\n' "${sources[@]}" "$contract" > "$work/sources.args"
 javac --release 21 -proc:none -Xlint:all,-module -Werror \
-  --module-path "$arrays" -d "$collections" @"$work/collections.args"
-test -s "$collections/module-info.class"
-main="$(sed -E 's#^m3/collections/src/test/java/##; s#\.java$##' <<< "$contract")"
-test -s "$collections/$main.class"
-java -Xmx256m --module-path "$arrays$sep$collections" --module "jdk.m3.collections/${main//\//.}"
+  --class-path "$work/empty-classpath" --source-path "$source_root${sep}test/jdk" \
+  -d "$classes" @"$work/sources.args"
+test -s "$classes/module-info.class"
+test -s "$classes/jdk/m3/collections/PrimitiveFilteredSequencesRuntimeContract.class"
+java -ea -Xmx256m --module-path "$classes" \
+  --module jdk.m3.collections/jdk.m3.collections.PrimitiveFilteredSequencesRuntimeContract
