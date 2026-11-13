@@ -61,6 +61,14 @@ jobs:
         run: python3 m3/tooling/name-contract/check.py
       - name: Existing M3JDK21 naming receiver tests
         run: python3 -m unittest discover -s m3/tooling/name-contract -p 'test_check.py'
+      - name: Install existing naming JSON Schema verification dependency
+        run: python3 -m pip install --disable-pip-version-check -r m3/migration/requirements.txt
+      - name: Existing JSON Schema and audit regression suites
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover -s m3/tooling/name-contract -p 'test_schema.py'
+          python3 -m unittest discover -s m3/tooling/name-contract -p 'test_audit.py'
       - name: Existing name mapping read-only census
         shell: bash
         run: |
