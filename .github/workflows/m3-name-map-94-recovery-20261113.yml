@@ -1,0 +1,76 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 recovered naming 94 strict JSON and existing contract
+
+on:
+  pull_request:
+    paths:
+      - 'm3/docs/name-mapping.json'
+      - 'm3/tooling/name-contract/name-plan.json'
+      - 'm3/compatibility/name-map-94-recovery-20261113.json'
+      - '.github/workflows/m3-name-map-94-recovery-20261113.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-name-map-94:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Strict JSON source, unique keys and exact hash binding
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          def strict_pairs(pairs):
+              obj = {}
+              for key, value in pairs:
+                  if key in obj:
+                      raise ValueError("duplicate JSON key: " + key)
+                  obj[key] = value
+              return obj
+          def load(path):
+              data = Path(path).read_bytes()
+              doc = json.loads(data, object_pairs_hook=strict_pairs)
+              return data, doc
+          def blob(data):
+              return hashlib.sha1(b"blob " + str(len(data)).encode("ascii")
+                                  + b"\x00" + data).hexdigest()
+          map_bytes, mapping = load("m3/docs/name-mapping.json")
+          _, plan = load("m3/tooling/name-contract/name-plan.json")
+          _, receipt = load("m3/compatibility/name-map-94-recovery-20261113.json")
+          values = mapping["migration"]["records"]
+          ids = [entry["id"] for entry in values]
+          assert len(ids) == len(set(ids)) == 94, "migration record loss/duplication"
+          assert blob(map_bytes) == "7f70f9a6153fe1e79f95d709aae611816dac4aa5"
+          assert plan["authority_blob"] == blob(map_bytes), "authority source drift"
+          assert len(plan["operations"]) == 4
+          assert all(entry["state"] == "QUEUED" for entry in plan["operations"])
+          assert receipt["record_count"] == len(values)
+          assert set(receipt["postimages"]) == {
+              "m3/docs/name-mapping.json", "m3/tooling/name-contract/name-plan.json"}
+          assert receipt["postimages"]["m3/docs/name-mapping.json"] == blob(map_bytes)
+          print("M3_94_NAME_MAP_STRICT_JSON_PASS records=94 queued=4")
+          PY
+      - name: Existing M3JDK21 naming contract checker
+        run: python3 m3/tooling/name-contract/check.py
+      - name: Existing M3JDK21 naming receiver tests
+        run: python3 -m unittest discover -s m3/tooling/name-contract -p 'test_check.py'
+      - name: Existing name mapping read-only census
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/tooling/name-contract/audit.py > m3-name-map-recovered-audit.tsv
+          wc -l m3-name-map-recovered-audit.tsv
+      - name: Publish actual audit output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-name-map-94-source-audit
+          path: m3-name-map-recovered-audit.tsv
+          if-no-files-found: ignore
