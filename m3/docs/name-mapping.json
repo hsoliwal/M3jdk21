@@ -12673,6 +12673,22 @@
         "observation": "The three actual SDK-emitted Java files pass the six-test canonical recipe harness. Exact baseline and emitted providers compile with strict Java21 lint and unchanged member descriptors. Original donor jtreg order and concurrency tests fail against the baseline and pass against emitted source; child VM logs prove patched provider loading. This scoped patch-module evidence is distinct from source-built target image and full release acceptance."
       },
       {
+        "id": "m3.collections.mat-map-values-export",
+        "kind": "specialization",
+        "status": "implemented-unverified",
+        "reason": "Existing internal map export atoms; component proof is recorded separately. No whole-SDK qualification or ordered receiving phase is advanced.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "dea06b3893982bef2d523c8bb4199fbfff467408",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/mat-primitive-owned-exports-20261112/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-mat-primitive-owned-exports-20261112/0001-MatAdaptiveIntIntMap.java.txt",
+            "symbol": "com.synexia.matcollections.MatAdaptiveIntIntMap",
+            "signatures": [
+              "com.synexia.matcollections.MatAdaptiveIntIntMap.valuesBySortedKey()[I"
+            ],
+            "sha256": "de8899d7af60a665b244788d8374e511e77bec5db693ac14ef59ad991ca29d0e",
+            "git_blob_sha1": "eedd0a15f2102a55da08908c59c4cf94a6e56446",
         "id": "synexia.collections.int-long-conditional-remove",
         "kind": "specialization",
         "status": "pending",
@@ -12694,6 +12710,15 @@
           },
           {
             "repo": "hsoliwal/com.synexia",
+            "commit": "dea06b3893982bef2d523c8bb4199fbfff467408",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/mat-long-map-export-20261112/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-mat-long-map-export-20261112/0001-MatAdaptiveLongLongMap.java.txt",
+            "symbol": "com.synexia.matcollections.MatAdaptiveLongLongMap",
+            "signatures": [
+              "com.synexia.matcollections.MatAdaptiveLongLongMap.valuesBySortedKey()[J"
+            ],
+            "sha256": "b7ab89c9c1427d0ab018015cafe526d1c30938a1cc19ec37b9fe780d8a6ce143",
+            "git_blob_sha1": "dbaddc062f0db1961c039ef000652e08312087af",
             "commit": "c10d88bca18d4f1690dc2484bd6f052eec21c8ca",
             "module": "synexia-openrewrite-recipes",
             "path": "synexia-openrewrite-recipes/crates/m3-intint-conditional-remove-20261030/resources/com/synexia/rewrite/hash-pinned-java/m3-intlong-product-conditional-remove-20261112/IntLongHashMap.java.txt",
@@ -12712,6 +12737,27 @@
             "repo": "hsoliwal/M3jdk21",
             "commit": null,
             "module": "jdk.m3.collections",
+            "path": "src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/mat/MatAdaptiveIntIntMap.java",
+            "symbol": "jdk.internal.m3.collections.mat.MatAdaptiveIntIntMap",
+            "signatures": [
+              "jdk.internal.m3.collections.mat.MatAdaptiveIntIntMap.valuesBySortedKey()[I"
+            ],
+            "sha256": "dba716518706d701519714c4ba569b419b76a4fec15d3d70be659b2f99331413",
+            "git_blob_sha1": "7020aeb88f8061dca0344da11186d9c59b6eaeb5",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.collections",
+            "path": "src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/mat/MatAdaptiveLongLongMap.java",
+            "symbol": "jdk.internal.m3.collections.mat.MatAdaptiveLongLongMap",
+            "signatures": [
+              "jdk.internal.m3.collections.mat.MatAdaptiveLongLongMap.valuesBySortedKey()[J"
+            ],
+            "sha256": "98288edfd1155c18ed3e4d725f954885bc2f5096a10690b5b00590928c369b27",
+            "git_blob_sha1": "b83f90947f2a37f5484225b14966c3ca0f9c7224",
             "path": "src/jdk.m3.collections/share/classes/jdk/m3/collections/IntLongHashMap.java",
             "symbol": "jdk.m3.collections.IntLongHashMap",
             "signatures": [
@@ -12723,6 +12769,23 @@
             "revision_role": "candidate"
           }
         ],
+        "owner": "jdk.internal.m3.collections.mat.MatAdaptiveIntIntMap and MatAdaptiveLongLongMap",
+        "identity": {
+          "namespace": "Existing immutable map instance and primitive lanes.",
+          "generation": "Builder snapshots and detached mutable exports retain existing ownership."
+        },
+        "contract": {
+          "differences": [
+            "SORTED copies its aligned value lane; DIRECT scans occupied slots.",
+            "HASH export and every other production byte are unchanged."
+          ],
+          "compatibility_obligations": [
+            "Signed key order and latest duplicate-key value.",
+            "Independent returned arrays and builder snapshot isolation.",
+            "Unchanged public/protected descriptors and exception behavior."
+          ],
+          "public_surface": [
+            "Existing public classes in the non-exported internal MAT package; no new API."
         "owner": "jdk.m3.collections.IntLongHashMap",
         "identity": {
           "namespace": "Existing jdk.m3.collections.IntLongHashMap; public java.util.HashMap and all existing Java descriptors remain unchanged.",
@@ -12745,6 +12808,58 @@
         },
         "format": {
           "schema": null,
+          "abi": "Existing Java descriptors; no native symbol changes.",
+          "bootstrap": "Existing jdk.m3.collections module; no additional runtime dependency."
+        },
+        "dependencies": [
+          {
+            "id": "java.base",
+            "resolution": "resolved",
+            "reason": "Existing Java array operations."
+          }
+        ],
+        "materialization": {
+          "admission": "Immutable owners are created by the existing builders.",
+          "joins": "No new alias, wrapper or retained payload owner.",
+          "outputs": "One fresh primitive array for SORTED/DIRECT; HASH retains existing behavior.",
+          "cached_facts": "Existing sorted alignment and presence bitmap only."
+        },
+        "recipe": {
+          "id": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+          "version": "mat-map-exports-m3-20261112",
+          "path": null,
+          "sha256": null,
+          "canonical_repository": "hsoliwal/com.synexia",
+          "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/mat-map-exports-m3-20261112",
+          "preconditions": [
+            "Exact target preimages at b98bf8c065818aac3447be165909e2a013325d9a.",
+            "Actual SDK Results, source seals, fixed point and refusal proof before transfer."
+          ],
+          "rollback": "A separately reviewed inverse packet must preserve unrelated changes."
+        },
+        "tests": [
+          {
+            "id": "mat-map-values-export",
+            "receipt": "m3/qualification/mat-map-exports-20261112/RECEIPT.json"
+          }
+        ],
+        "provenance": {
+          "license": "Retain existing Apache-2.0 OR EPL-2.0 source headers and contributor notices.",
+          "publication": "Routine optimization of already-public immutable primitive map exports; existing first-party method atoms, no new invention-specific architecture or third-party body.",
+          "copied_code": true
+        },
+        "sync": {
+          "source_revision": "dea06b3893982bef2d523c8bb4199fbfff467408",
+          "target_revision": "b98bf8c065818aac3447be165909e2a013325d9a",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Receive only valuesBySortedKey atoms into existing relocated owners.",
+            "Preserve newer explicit constructors, all builder fixes and the long keys() method."
+          ],
+          "pending": [
+            "Complete source-built M3JDK21 and full applicable jtreg/platform/release gates.",
+            "Five-provider collection compatibility and whole-family performance qualification.",
+            "String -> arrays -> collections admission order remains unchanged."
           "abi": "All existing Java descriptors retained; no new public API, JNI symbol or runtime dependency.",
           "bootstrap": "Existing jdk.m3.collections receiver; source-component proof does not establish installed JDK acceptance."
         },
@@ -12812,6 +12927,27 @@
               "repo": "hsoliwal/M3jdk21",
               "commit": "b98bf8c065818aac3447be165909e2a013325d9a",
               "module": "jdk.m3.collections",
+              "path": "src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/mat/MatAdaptiveIntIntMap.java",
+              "symbol": "jdk.internal.m3.collections.mat.MatAdaptiveIntIntMap",
+              "signatures": [
+                "jdk.internal.m3.collections.mat.MatAdaptiveIntIntMap.valuesBySortedKey()[I"
+              ],
+              "sha256": "9740ac2e8498bf4f99dc3e5b9d7cc3dde5c74caf392309a63862a3b42fea8dc2",
+              "git_blob_sha1": "b44e78ff27f30b199701148f2bf1e9849db5e983",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "b98bf8c065818aac3447be165909e2a013325d9a",
+              "module": "jdk.m3.collections",
+              "path": "src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/mat/MatAdaptiveLongLongMap.java",
+              "symbol": "jdk.internal.m3.collections.mat.MatAdaptiveLongLongMap",
+              "signatures": [
+                "jdk.internal.m3.collections.mat.MatAdaptiveLongLongMap.valuesBySortedKey()[J"
+              ],
+              "sha256": "8a4b587b1c27695c95cf6a039c17af011e8174c64f528bb07c8f4fe626f3bc88",
+              "git_blob_sha1": "4e2d75b8608c098683166aaa7c48464b21e6f26d",
               "path": "src/jdk.m3.collections/share/classes/jdk/m3/collections/IntLongHashMap.java",
               "symbol": "jdk.m3.collections.IntLongHashMap",
               "signatures": [
@@ -12825,6 +12961,8 @@
           ],
           "supersedes": []
         },
+        "source_state": "experimental",
+        "observation": "Stable capability mapping for two existing internal owners; no public name or phase promotion."
         "source_state": "partial",
         "observation": "Canonical Java recipe/templates published in hsoliwal/com.synexia@c10d88bca18d4f1690dc2484bd6f052eec21c8ca; manifest SHA-256 ec5dcf2910845783e319a489b4027cf30987fcb0971dc51b1f664b6cebad81b9. Exact SDK four-test qualification passed. Selected receiver Maven baseline 2/emitted 3 tests, independent 65,536-operation physical/model comparison across 16 seeds and identical javap public descriptors passed. Runtime receipts bind exact emitted postimages. Candidate target commit remains null until publication; no full image or universal performance claim. Historical fused IntInt candidate remains rejected after about 26% matched-remove/reinsert timing regressions at 32/96 collision keys; no IntInt source/test/target record is included. Completed portable receiver verification and the historical rejection diagnostic are published at hsoliwal/com.synexia@45f40a8fd3691e33cf5b7c3913375487c2add94b. The 65,536 operations are the total across 16 seeds, including 2,300 successful conditional removals."
       }
