@@ -1,0 +1,118 @@
+{
+  "schema": "M3_CATALOGUE_ALGORITHM_SELECTION_V1",
+  "category": "versioned immutable lexicon image admission / format-gated pure validation",
+  "candidatePattern": "M3_FORMAT_GATED_PURE_VALIDATION_V1",
+  "productionOwner": "m3/core/src/jdk/m3/text/SharedLexiconImage.java",
+  "before": {
+    "bytes": 15062,
+    "sha256": "c67fff80500a51457cbf171cfeb15cbf91562bac05614a3958e11985b4775028",
+    "gitBlob": "570a22f733499729bdc0fe48813f755e52ebe963"
+  },
+  "proposedAfter": {
+    "bytes": 15013,
+    "sha256": "44b51fc2493c3dcf8ffc192a10f75275892d47d4000f5d6509cb288d564673f8",
+    "gitBlob": "b3ec6ec0411361069f21f00b4001fddc9f681bf2"
+  },
+  "status": "NOT_SELECTED_PERFORMANCE_GAIN_UNPROVEN",
+  "installRuntimeChange": false,
+  "correctness": {
+    "recipeJUnitPassed": 7,
+    "candidateJUnitPassed": 16,
+    "baselinePositiveExecutions": 14,
+    "expectedBaselineFailures": 2,
+    "mechanism": "v1 javaHash calls139->0; v2 stays139; original v2 payload-before-lane evaluation preserved",
+    "refusals": "Range/dimensions/order/checksum/stored v2 hash/post-open corruption/missing SHA provider remain checked"
+  },
+  "measurement": {
+    "before": {
+      "v1": {
+        "records": 8192,
+        "utf16Units": 319488,
+        "samples": 10,
+        "medianNs": 9744300,
+        "medianAllocatedBytes": 5921832,
+        "allNanoseconds": [
+          20131400,
+          10712500,
+          9331100,
+          5595400,
+          5130100,
+          12251900,
+          10874200,
+          10157500,
+          7757700,
+          5302300
+        ]
+      },
+      "v2": {
+        "records": 8192,
+        "utf16Units": 319488,
+        "samples": 10,
+        "medianNs": 2859800,
+        "medianAllocatedBytes": 4073048,
+        "allNanoseconds": [
+          2754200,
+          2716300,
+          2875500,
+          2844100,
+          2737000,
+          3603200,
+          3962100,
+          5277300,
+          4073500,
+          2595900
+        ]
+      }
+    },
+    "after": {
+      "v1": {
+        "records": 8192,
+        "utf16Units": 319488,
+        "samples": 10,
+        "medianNs": 10856250,
+        "medianAllocatedBytes": 6301816,
+        "allNanoseconds": [
+          12499200,
+          11375100,
+          10482800,
+          10474300,
+          8321100,
+          21666900,
+          11845900,
+          11229700,
+          9942200,
+          9478000
+        ]
+      },
+      "v2": {
+        "records": 8192,
+        "utf16Units": 319488,
+        "samples": 10,
+        "medianNs": 2960000,
+        "medianAllocatedBytes": 4073048,
+        "allNanoseconds": [
+          4785400,
+          2532900,
+          2520400,
+          2638000,
+          2829800,
+          7206400,
+          5026800,
+          2906700,
+          3013300,
+          3021000
+        ]
+      }
+    }
+  },
+  "analysis": "The short constructor-only diagnostic did not demonstrate a gain: v1 median after10856250ns vs before9744300ns (about11.4% higher) and median thread allocation6301816B vs5921832B. V2 control also shifted; JIT/provider/host-load effects and limited warmup/sample count preclude a general regression conclusion. Mechanism-only work removal is insufficient evidence to select a performance optimization.",
+  "scopeLimits": [
+    "Direct-memory uninstrumented constructor, not file I/O or JVM startup",
+    "10 measured samples per variant per format across2freshJVMs; no statistical significance claim",
+    "All6 stages reaped;4KiB fixture removed; no default recipe activation/runtime installation"
+  ],
+  "reuseDecision": "Reuse current owner and exact snapshot engine for experiment; preserve existing production source. Candidate templates/recipe/QA and raw outcomes remain reviewable.",
+  "nextDiscriminator": "Before selecting this pattern, distinguish cold/provider/JIT effects from steady paired admission performance with representative workloads and unchanged evaluation/lifetime contracts. Prioritize measurements of provider/digest/allocation work rather than assuming skipped loops imply faster lexicon admission.",
+  "proof": "ccb1c5e7ea42f215b7f54d69a7f3556ef2a28aa4",
+  "input": "1eb01d7dc7588a7dc7f129891941937a85a66513"
+}

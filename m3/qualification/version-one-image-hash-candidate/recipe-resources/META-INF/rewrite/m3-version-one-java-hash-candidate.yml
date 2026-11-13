@@ -1,0 +1,8 @@
+# Copyright 2026 Hitesh Soliwal, Synexia. SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.VersionOneImageJavaHashElisionCandidate
+displayName: Unselected candidate for version-one image Java hash elision
+description: Candidate only; performance gain unproven. No default activation or runtime installation.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-version-one-java-hash-elision
