@@ -1,6 +1,6 @@
 {
   "builder_sha256": "0e620dac3cbc986ac448739e721d399d84d76a284ac72b3793880c740538fc43",
-  "combined_lock_sha256": "8717998bb1a4aecb83dc542f4e9a43611b9837e2c6f99984a6440aa284630c91",
+  "combined_lock_sha256": "40c7b497783f871a0ad616bafab4dbd6b75c56e6839f0068de0d2865c35ac5b3",
   "commands": [
     {
       "argv": [
@@ -136,7 +136,7 @@
     {
       "name": "openrewrite",
       "path": "/workspace/scratch/13309be96b09/ast-work/rewrite-pack-sdk-proof/openrewrite-lock.json",
-      "sha256": "a847e6c9c8f89a1d0c9be9aaf047d3ffa64a65fb33d4ec7dcabfa08d8d1619a8"
+      "sha256": "2b90498042fba1820d25ef411494f5166f8c5278f7bd600e622a22f2e2a07f36"
     }
   ],
   "input_sources": {
@@ -189,5 +189,5 @@
   "unselected_gradle_ant_absent": true,
   "unselected_missing_plugin_not_opened": true,
   "verified_asset_count": 336,
-  "verifier_sha256": "1f97567d361e9bbf130a7b3c7817664b778246e913322b36483c77798782ce2e"
+  "verifier_sha256": "661039e3dcd82058f5e1cf7f4e274a0390e48bb37a66eae83d8f79b83c3a6502"
 }

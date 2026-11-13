@@ -46,8 +46,8 @@ final class TQFixtureManifestConsistencyTest {
     private static final String OWNER_ROOT = RESOURCE_BASE + "m3-tq-sync/";
     private static final String TARGET =
             "make/m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/manifest.tsv";
-    private static final String BEFORE_SHA = "b40e5e2fd6cbf8ad487f10ecd60bfdb9f893da88578194a1d8ad1221d7815740";
-    private static final String AFTER_SHA = "5b4e8a514d7c44dd46447e76fde8bbf9a8cec9f2a1dacdc9e2a9d3bfe814d525";
+    private static final String BEFORE_SHA = "aa950566ac0a1945a6ac09b86a866563751814f8b6331835f3a6fa153693c62e";
+    private static final String AFTER_SHA = "1ed41b89ef8733aa2e1b4425bbab51118ab49814dbfc32e9a1ab67a930470507";
     private static final Path CRATE = Path.of(System.getProperty("m3.crate"));
     private static final Map<String, String> REVIEWED_AFTER = Map.of(
             "01-m3-tq.yml.txt", "67573f9e38b1ccd595e8c4be07b68f38a4cbe3d44eb81484d6f18d5e476ac60a",

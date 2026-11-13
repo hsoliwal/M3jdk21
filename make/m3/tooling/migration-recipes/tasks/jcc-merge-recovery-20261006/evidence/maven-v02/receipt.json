@@ -16,11 +16,11 @@
   "java_home": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/toolchain/jdk-21+35",
   "exit_code": 1,
   "asm93_addon_receipt_sha256": "c49c23fd5ec3fc02ad0c3332e16fe4b0f8c9ea4bfab296ad013c726bc226823d",
-  "input_seal_sha256": "ece8f1484d00e9658cae2610530823d892e24d0bf3a7be9f34a2e3c3aea29603",
+  "input_seal_sha256": "44e26beb0ce5201966aa0527f28a5d3db8592cc81ddc91b78ae6f31a951e5cc3",
   "inputs_unchanged": true,
   "offline_cache_receipt": "runtime-resolution/actual-acquisition/OFFLINE_DIAGNOSTIC_CACHE_V02.json",
   "offline_cache_receipt_sha256": "034d226e546825818559e5517ce62bb00dd855f9ce59760fa607049388280da9",
   "scope": "Focused finite offline compiler/JUnit diagnostic with exact artifact identities. Complete vendored source/native/plugin closure remains separately pending; no JDK/export admission.",
-  "stdout_sha256": "2c38fc47691473219add812de20e061bd5afa47244acfa0cff9d41361c8f39ea",
+  "stdout_sha256": "488833eeea925b60a5ec522b211d900d56d10f191bb0d072554d3468d6f4b0c8",
   "stderr_sha256": "9ddf3781b5e43a87b1d67caac2bc4b251f9ce8d77c509c8369129f4b0359fd55"
 }

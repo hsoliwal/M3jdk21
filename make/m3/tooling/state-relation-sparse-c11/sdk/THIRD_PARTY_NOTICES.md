@@ -30,8 +30,8 @@ inventory bb4958be148665085f5bb923e56d7d6bccb8b141 and pre-code admission
 5d2d2c39120c7a779e2beb06f0af19cb7364e253 record the accepted and rejected fits.
 
 The JUnit and counter/XML/physical-closure verifier adapt the existing
-StateRelation source-custody test 2ed4da274c8cdbf10da9140f3ff4fffd3f7d1d73 and
-verifier a80c6f48aebe6249239c52277ad0fc53f21179b6, Apache-2.0. Their provenance
+StateRelation source-custody test 527ec0a86edce205ff639b0a4c28b5117c9a3a45 and
+verifier f5cb14e00a1f3fd286bf79ef0fbac17ee5fafac3, Apache-2.0. Their provenance
 includes prior lexical and text-metadata custody SDKs; the two original provider
 files and Maven POM remain byte-for-byte unchanged.
 

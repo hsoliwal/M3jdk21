@@ -4,7 +4,7 @@
   "status": "AUTHORED_NOT_EXECUTED",
   "created_at_utc": "2026-10-06T04:22:29.754884+00:00",
   "parent_freeze": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/FROZEN_INPUTS.json",
-  "parent_freeze_sha256": "1b5d73f8ee53b03c2a88f8cb3f57eb54c99e26281ca16ad53b66925a0fb588c7",
+  "parent_freeze_sha256": "462c27024eb7ee009bb49e1289bbdc32bbbb81be617d42de8e4839dba753d937",
   "preserved_failed_execution": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/execution/05-maven.json",
   "preserved_failed_execution_sha256": "84b7b4e2ebca426be389cb2b53a579f4519aef02d09b5c4774a53a8d8045f863",
   "failure": "The new JUnit oracle compared the entire marker collection, but OpenRewrite adds RecipesThatMadeChanges provenance to a changed source.",
@@ -14,12 +14,12 @@
   ],
   "original_test": {
     "bytes": 14760,
-    "sha256": "0aeb413444c0b26dacc0adc6ff8552af0193cb963665a4f9bf452635d7d1ca9a",
+    "sha256": "d582a221a9870c25619d4bafe63c1179f190268eb1ba5329e0a57a48d21b57a8",
     "mode": "0o644"
   },
   "corrected_test": {
     "bytes": 15689,
-    "sha256": "7d1272d034907bbad8a2690e7d4242370692f31b23e67a3e2afd6fad3d2c4238",
+    "sha256": "fd2233674d8b9614a662cbbc62583dc385ae7369d44f8e9ec29424b848af078c",
     "mode": "0o644"
   },
   "original_target_test_bodies_and_production_recipe_unchanged": true,

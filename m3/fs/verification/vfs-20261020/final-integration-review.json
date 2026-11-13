@@ -11,7 +11,7 @@
   "fresh_qualification_receipts": {
     "java_command": {
       "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-capture/command-receipt.json",
-      "sha256": "bf1dedc43c1451ba1183274d01925e66829614d24dc247a9a8ae238ec08dbf78"
+      "sha256": "5b98626f2a075967e6a2235f1f94f17c052b6a79dc6b8cdb53bca4f0b425e0f3"
     },
     "java_vfs_image": {
       "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-capture/qualification.json",
@@ -27,7 +27,7 @@
     },
     "same_image_vfs_and_native": {
       "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-native-capture-receipts/combined-image-proof.json",
-      "sha256": "cb7d5624aabe334d1889dcefc2316a57e782dc40acf029e3adb79b98af016289"
+      "sha256": "66866ac9dc65a1545c1f91b08a1c5807bb3416c09aa613330605e078de6b325c"
     }
   },
   "generated_only_receipt_review": {
@@ -97,6 +97,6 @@
     "input_files": 389,
     "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/SOURCE_LOCK.capture.tsv",
     "receiver_base": "73f59218dc4ef1a3ef79aad990e77273db2a2d60",
-    "sha256": "ebacc3085d2404f3378ee5751321e82435fc91829bcd73d8ab19b47229ac835b"
+    "sha256": "147ed24355bcf7535932ecd25508ff18dea5934ab7ed51fc57324b73c1009d1b"
   }
 }

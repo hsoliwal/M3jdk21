@@ -25,8 +25,8 @@ for p in sorted(project.rglob('*')):
  (withheld if hazard else flat).append(row)
 assert len(project_rows)==43 and len(withheld)==2 and len(flat)==41
 assert {r['path']:r['sha256'] for r in withheld}=={
- 'src/test/resources/before/m3/tooling/lane28/verify-plan.py':'d56788db191b5e3361d3e35e7f07c4395b38aec4b7c0a07dcd620620f4c4687a',
- 'src/test/resources/before/m3/tooling/tq/verify-plan.py':'269cd10606a9de7629ec0d1f4dccce2866644f979c06958d808e107b6c9188bb'}
+ 'src/test/resources/before/m3/tooling/lane28/verify-plan.py':'c626a962c87b195dd31f4b0976b39981261f7c3a612050f175d29a774190fa57',
+ 'src/test/resources/before/m3/tooling/tq/verify-plan.py':'b70271e08910aedb8e512d38ef67c8dc041de522027e6a11abe96e3cfe825617'}
 owner=(E/'package_evidence.py').read_bytes();assert sha(owner)=='93a1c116c197854b0167c172581cd768d0f9098067bf0f1296607ca6ba855556';(H/'package_evidence.py').write_bytes(owner)
 write(H/'READBACK.json',{'schema':'m3.fc0.package-readback/1','status':'PASS_EXACT_PACKAGE_RECONSTRUCTION','sourceClosure':pin(H/'SOURCE-CLOSURE.json'),'bundle':pin(B/'BUNDLE.json'),'files':readback,'projectFiles':43,'artifactExcludedCount':len(cl['excludedIdentities']),'consumerQualified':False,'hermetic':False,'proofGatesExecuted':False,'parentPublication':cl['parentPublication'],'receivingOutcome':cl['receivingOutcome']})
 write(H/'PROJECT-READY.json',{'schema':'m3.fc0.project-ready/1','producer':cl['producer'],'qualifiedProject':{'sourceRoot':str(project),'logicalPrefix':'fc0/project','files':project_rows},'flatFiles':flat,'archiveOnlyFiles':withheld,'flatMirrorMavenReady':False,'archive':{'bundle':pin(B/'BUNDLE.json'),'packageOwner':pin(H/'package_evidence.py')},'reconstruction':{'entrypoint':'reconstruct.py','argv':['python3','<portable>/reconstruct.py','--portable','<portable>','--output','<fresh-extraction>'],'verifyArgv':['python3','<portable>/package_evidence.py','verify','--bundle','<portable>/bundle'],'extractArgv':['python3','<portable>/package_evidence.py','extract','--bundle','<portable>/bundle','--output','<fresh-extraction>'],'mavenExampleArgv':['<admitted-maven>/bin/mvn','-o','-B','-ntp','-Dmaven.repo.local=<admitted-cache>','-f','<fresh-extraction>/fc0/project/pom.xml','test']},'originalReceiptPathsPreserved':True,'automaticRequalification':False})
@@ -50,7 +50,7 @@ python3 ../../../../verification/ci8891-20261006/current-reconciliation/integrat
 /path/to/admitted-maven/bin/mvn -o -B -ntp -Dmaven.repo.local=/path/to/admitted-cache -f /path/to/fresh-extraction/fc0/project/pom.xml test
 ```
 
-PROJECT-READY.json pins all 43 logical files and the two archive-only fixtures. Their exact source hashes are `d56788db191b5e3361d3e35e7f07c4395b38aec4b7c0a07dcd620620f4c4687a` (lane28 verifier preimage) and `269cd10606a9de7629ec0d1f4dccce2866644f979c06958d808e107b6c9188bb` (TQ verifier preimage). This document is an unqualified publication envelope outside the project census. Reconstruction preserves source bytes and receipt paths; it does not turn later Maven execution into an original receipt.
+PROJECT-READY.json pins all 43 logical files and the two archive-only fixtures. Their exact source hashes are `c626a962c87b195dd31f4b0976b39981261f7c3a612050f175d29a774190fa57` (lane28 verifier preimage) and `b70271e08910aedb8e512d38ef67c8dc041de522027e6a11abe96e3cfe825617` (TQ verifier preimage). This document is an unqualified publication envelope outside the project census. Reconstruction preserves source bytes and receipt paths; it does not turn later Maven execution into an original receipt.
 ''')
 tr=[mapped(project/r['path'],TASK+r['path'],'qualified-project-flat',projectPath=r['path']) for r in flat]
 write(H/'TASK-MAPPING.json',{'schema':'m3.fc0.task-mapping/1','files':tr,'logicalProjectFiles':43,'flatProjectFiles':41,'archiveOnlyFiles':withheld,'producer':cl['producer'],'readback':pin(H/'READBACK.json')})

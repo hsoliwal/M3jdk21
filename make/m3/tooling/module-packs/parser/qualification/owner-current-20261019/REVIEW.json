@@ -57,7 +57,7 @@
   ],
   "integrated_result": {
     "path": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/RESULT.json",
-    "sha256": "d66e536cf262cca7787116a7015d1ece8e735c5e0874d329e907442f4bb87c5c",
+    "sha256": "4b6fcef01337814aa4f7f50de7cb621fb1417383459472438886177d016ee659",
     "status": "PASS",
     "all_commands_pass": true,
     "runtime_patch_module": false,
@@ -104,20 +104,20 @@
       },
       {
         "path": ".github/workflows/m3-parser-jmod-20261018.yml",
-        "integrated_sha256": "55fc6777a19521d160104799c609dc3c218619081f1510ffc9ddafa83cfbb950",
-        "current_sha256": "55fc6777a19521d160104799c609dc3c218619081f1510ffc9ddafa83cfbb950"
+        "integrated_sha256": "918ea4d9cbd449dd66998badb25d399252c910504c58487313ddf2778f291ee7",
+        "current_sha256": "918ea4d9cbd449dd66998badb25d399252c910504c58487313ddf2778f291ee7"
       },
       {
         "path": "make/m3/tooling/shared-frontend/algorithm-catalogue.tsv",
-        "integrated_sha256": "43842ca8104e48ae0bb18b2d0e819c8078ec8e6ed79d646610f6b2bea7c25f9f",
-        "current_sha256": "43842ca8104e48ae0bb18b2d0e819c8078ec8e6ed79d646610f6b2bea7c25f9f"
+        "integrated_sha256": "74ddc68791d49fc0eb99ee57be7bef21b986df69d2d48229682bb4365be486df",
+        "current_sha256": "74ddc68791d49fc0eb99ee57be7bef21b986df69d2d48229682bb4365be486df"
       }
     ],
     "different_current_targets": [
       {
         "path": "make/m3/tooling/module-packs/parser/build.py",
         "integrated_sha256": "d1e33939ce505a1237f9867da234d4422d34f8f7716b535081788f7b554eb7e3",
-        "current_sha256": "6fa0538c43a673d07f4ab5151fccf1ef23764604d3b7490384d78a5e83098157"
+        "current_sha256": "c10b8f13c3878f9db6a55f9e775a396505387a7b46d90f744bd946dbd915c70c"
       }
     ]
   },

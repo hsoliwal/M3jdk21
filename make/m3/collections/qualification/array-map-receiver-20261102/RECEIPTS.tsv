@@ -5,7 +5,7 @@
 # That PR's dedicated "M3 array map fill" differential job completed successfully on commit c28e9cfee03a7cdd189dd9eef95a6e391d0e6d00.
 # Public APIs remain as qualified in that original branch; materialization is 1:1 by Git blob.
 class	sha1	algorithm-category	product-gates
-M3HashedMap	0440ac943b5eb31d443d8be9943fc14597890277	LC706-open-addressing;LC27-compaction	Java21_receiver_PENDING;native_JNI_PENDING;full_JDK_PENDING
-M3LinkedMap	ebf03006129b74b813e406613594c196de10f477	LC307-rank-select;LC283-compaction	Java21_receiver_PENDING;native_JNI_PENDING;full_JDK_PENDING
-M3LRUMap	703641cfe70f58ba93dc4a9ef5129048c3b59bcd	LC146-LRU-index-lanes;LC706-hash	Java21_receiver_PENDING;native_JNI_PENDING;full_JDK_PENDING
+M3HashedMap	2887f69d2280458c7a8e1390eb84eb3e73570ac5	LC706-open-addressing;LC27-compaction	Java21_receiver_PENDING;native_JNI_PENDING;full_JDK_PENDING
+M3LinkedMap	e3649a952f27268a8291a38c92e7d1149a734b5d	LC307-rank-select;LC283-compaction	Java21_receiver_PENDING;native_JNI_PENDING;full_JDK_PENDING
+M3LRUMap	401bf0e56d0ab18b377b14d4de7b3432d46395fb	LC146-LRU-index-lanes;LC706-hash	Java21_receiver_PENDING;native_JNI_PENDING;full_JDK_PENDING
 M3LongObjectLinkedHashMap	bc8b45e9337fc1fadd139827d1197b357dbee3a3	PRIMITIVE_LONG_ID-LC706-hash;LC283-stable-compaction	Java21_receiver_PENDING;native_JNI_PENDING;full_JDK_PENDING

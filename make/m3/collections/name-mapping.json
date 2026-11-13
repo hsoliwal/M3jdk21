@@ -829,7 +829,7 @@
     "Preserve the global MIndex/String/AST name-mapping file; this independently built module owns its collection mapping."
   ],
   "installed_source_manifest": "make/m3/collections/qualification/installed-source-receiving-20261008.tsv",
-  "installed_source_manifest_sha256": "3719c9fdc78676a2c23ce1131792608889c377224ca4ceaddcec4945c0fe9042",
+  "installed_source_manifest_sha256": "b538e5bfc1735188e020f5edf6827fed3d600bde2dcb07bceb7cd3d254941734",
   "global_mapping_retained_byte_for_byte": "doc/m3/name-mapping.json",
   "historical_20261007_installed_source_manifest_sha256": "81d3ed294dcadf774a43b797ac8d6db51821ee1c026580d5e95b727a258e7af2",
   "current_target_baseline": "439b767c7c92e2751f7f6a47c012f96472420905",

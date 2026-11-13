@@ -192,7 +192,7 @@
       "references": [
         {
           "declared_git_blob_sha1": null,
-          "expected_sha256": "3b195d75e2fdc32ac31b665c5541bd07d3ffdb11698c499bccfd7bc4c1b4e338",
+          "expected_sha256": "86e090b9f8cbd9424b67505be1131b176d35b28984556e7bdd0d64fee70dd387",
           "record": "m3.counterpart.MIndexRegexTrigramQuery",
           "role": "recipe",
           "status": "implemented-unverified"
@@ -463,7 +463,7 @@
       "references": [
         {
           "declared_git_blob_sha1": null,
-          "expected_sha256": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb",
+          "expected_sha256": "dc2a020aa8f6da324ace8a19f68c90b65021b9ad732932ebabbf545468abc34a",
           "record": "m3.counterpart.MIndexLibraryRelease",
           "role": "target",
           "status": "implemented-unverified"
@@ -474,8 +474,8 @@
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
       "references": [
         {
-          "declared_git_blob_sha1": "ca23741ecd8cd24593ba5c260aa0d939c53d6766",
-          "expected_sha256": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155",
+          "declared_git_blob_sha1": "53cb5da67520082e62fffe75272406d3eacb366c",
+          "expected_sha256": "225e847c5fb9f0195b37b14810d405dc6cb8ff83156e667dc127d36489cbf7aa",
           "record": "m3.counterpart.MIndexRegexTrigramQuery",
           "role": "target",
           "status": "implemented-unverified"
@@ -487,7 +487,7 @@
       "references": [
         {
           "declared_git_blob_sha1": null,
-          "expected_sha256": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a",
+          "expected_sha256": "d4d57e6b892342716ef9a52007082ce7c53959cba81a5ad0f2a0cf8d275c3c01",
           "record": "m3.counterpart.MIndexVersionTable",
           "role": "target",
           "status": "implemented-unverified"

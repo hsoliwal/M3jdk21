@@ -13,7 +13,7 @@
     },
     {
       "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3CallSiteCatalog.java",
-      "sha": "7bca56b75f1508f28496bb3b49e9d0c75b6a8e38",
+      "sha": "3ad6340334813d6256495a2adf213191d84a98dd",
       "encoding": "utf-8"
     },
     {
@@ -78,7 +78,7 @@
     },
     {
       "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ItemReferenceScan.java",
-      "sha": "d9d94ebf3c1b88a8a09003846526ea77d8d6ae37",
+      "sha": "1314767e50d6a2553f632a6edda3e7d74b97d629",
       "encoding": "utf-8"
     },
     {
@@ -103,17 +103,17 @@
     },
     {
       "path": "m3/ports/compiletime/src/main/java/jdk/m3/residency/M3BehaviourOnly.java",
-      "sha": "ed03b050dd6ccc5d2f6241b7315a6b6ab65adb62",
+      "sha": "878f25b468b4d4753d018826043bfc04b653f4a2",
       "encoding": "utf-8"
     },
     {
       "path": "m3/ports/compiletime/src/main/java/jdk/m3/residency/M3Retains.java",
-      "sha": "28308e441d81edbf74e5921682d8d287e98b2615",
+      "sha": "be55b5f2342b3d933ed797cfa2ae69039cd6642c",
       "encoding": "utf-8"
     },
     {
       "path": "m3/ports/compiletime/src/main/java/jdk/m3/residency/M3Transient.java",
-      "sha": "4bfecd03d45ec7507fbbb5d9a730bc8e6d93b881",
+      "sha": "e6589740b71d9d2dde924524cbfec9831b0ebce1",
       "encoding": "utf-8"
     },
     {
@@ -253,7 +253,7 @@
     },
     {
       "path": "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
-      "sha": "40f543e413c245c900d6502a27645d05735a6ebd",
+      "sha": "1dbb89f4fde66b82c479d9414824ae172b4da54e",
       "encoding": "utf-8"
     }
   ],
@@ -262,7 +262,7 @@
     "failure": "crate targets differ from port sources",
     "current_exit": 0,
     "reseal_fixed_point": true,
-    "manifest_sha256": "fff56c5927f0d5fa03dc90f025bf519eb5e6c1c4a059364305835e91f370aae9",
+    "manifest_sha256": "a51bf5caf64edc1d10cac5c3dfbcb9c5531bad1eb1aea0db42ddaccde00327c1",
     "receipt_sha256": "0bf5b14e423b4dd6ae3fb67b5423c97f5622bf61283ca29351737adc3fb1743d"
   },
   "owning_maven": {
@@ -324,7 +324,7 @@
       "wrapper grants no semantic or bootstrap authority"
     ],
     "receipt_sha256": "2100b878169b824d0581a6f983b6a5a56c8a6fc061dd105d4b190f1df99d0e56",
-    "generic_owner_blob": "40f543e413c245c900d6502a27645d05735a6ebd",
+    "generic_owner_blob": "1dbb89f4fde66b82c479d9414824ae172b4da54e",
     "dependencies": [
       {
         "coordinate": "org.openrewrite:rewrite-java:8.17.1-m3-source-1",

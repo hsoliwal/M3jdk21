@@ -7,21 +7,21 @@
       "name": "measurement-evidence.part-001.jsonl",
       "bytes": 5614883,
       "records": 21,
-      "sha256": "d45d5f531835299da8221339e780116bf937538ab0c067bf59e0489080aec8ed",
+      "sha256": "741a5fdc53354e9efb67a78095e54c704da9243433be6792da4411f953a3ec12",
       "path": "evidence/bundles/measurement-evidence.part-001.jsonl"
     },
     {
       "name": "measurement-evidence.part-002.jsonl",
       "bytes": 6135617,
       "records": 277,
-      "sha256": "dc0ca93fab3f999f573e6143ef203a39351b11ab31dd8cde99bdbaa2c7e35021",
+      "sha256": "a349a4cd50949c4cce0e2a928f2f2badd1c542cb9c1c517656dd18883544f8dd",
       "path": "evidence/bundles/measurement-evidence.part-002.jsonl"
     },
     {
       "name": "measurement-evidence.part-003.jsonl",
       "bytes": 6288247,
       "records": 201,
-      "sha256": "3d05c9683d32225ae926e02fd97b0d794d5958a9f3f2fbf760c68e1ef3eab26e",
+      "sha256": "f33dafe6b48b5147b130712f28bc1a3629a0fe38fde3ef1f468b0091b48b5e44",
       "path": "evidence/bundles/measurement-evidence.part-003.jsonl"
     },
     {
@@ -45,7 +45,7 @@
     "records": 786,
     "sha256": "4eb14cb5a8bb45f1d4f21a4e9b89ca7b7c7df7f77a9809fed715ba3c8b087900"
   },
-  "parts_manifest_sha256": "9a17facfe27ed3cc1a5a51253826693d41b8469e8367098ddf790da0d7818f08",
+  "parts_manifest_sha256": "b982386d2239d492f53aef26ce85da246cef5ade2d264f544edcf70621508803",
   "full_bundle_companions": [
     {
       "name": "source-history.jsonl",

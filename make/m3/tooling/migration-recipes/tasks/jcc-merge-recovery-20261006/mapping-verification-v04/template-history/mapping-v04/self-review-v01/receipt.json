@@ -68,7 +68,7 @@
     "family_name_mapping",
     "porting_invariant"
   ],
-  "previous_qualified_input_publication_manifest_sha256": "071f16e072b74517d9446f9da449ed6d8ef711a79e71c2523717c648bd9bcb68",
+  "previous_qualified_input_publication_manifest_sha256": "d2d4b192ce9a398acd6ba35f6b334811de8c495b30571007f85b6d9a506bb8b5",
   "repository_metadata_filenames": [
     "source-publication-input-v04.json",
     "mapping-input-epoch-v04.json"

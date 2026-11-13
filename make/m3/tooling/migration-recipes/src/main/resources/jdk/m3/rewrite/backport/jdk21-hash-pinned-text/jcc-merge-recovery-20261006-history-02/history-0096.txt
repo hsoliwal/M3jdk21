@@ -4,12 +4,12 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/execution-static-review/current-owner-upstream-review/custody-v3-verifier-static-review/T02-delta/INPUT_SEALS.json",
       "bytes": 1763,
-      "sha256": "c84ce157e3c48664121769c2f878824bce2a6a97bdd60b53c38103fa3e33ec26"
+      "sha256": "5b94bf360a70828827795385dac2410be0acc8a28cebc21b61f40ad1ebaecf10"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/execution-static-review/current-owner-upstream-review/custody-v3-verifier-static-review/T02-delta/REVIEW.md",
       "bytes": 2881,
-      "sha256": "1ea4731fd6cf1c2c164f32970a646ef86e4750723e787544a10b504219bc0b74"
+      "sha256": "34c5177141320e90500024f8878063d899b2fb664904aa51a2ccd2048ed641e2"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/execution-static-review/current-owner-upstream-review/custody-v3-verifier-static-review/T02-delta/T01_T02.diff",

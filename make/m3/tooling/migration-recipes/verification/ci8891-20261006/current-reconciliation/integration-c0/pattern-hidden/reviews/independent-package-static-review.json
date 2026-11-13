@@ -54,12 +54,12 @@
     {
       "bytes": 37932,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/packaging-authoring-v1/prepare_package.py",
-      "sha256": "58e982f34fa5469372c264ae3ff73f4798b583e3943450aaf1cb5cc6c5ed1ee7"
+      "sha256": "041729569e60cda89fa122d86d354569aba6e56f955b2d6f587cebe928a820f7"
     },
     {
       "bytes": 8317,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/packaging-authoring-v1/finish_package.py",
-      "sha256": "6221077e2f9204c384e1f60f7b6cac452fd39f01c4dc1c48e8575681c41528e9"
+      "sha256": "7bf9076d38adea7cc3ad62eb6a2b00508763f728505bca3020c94c2872e762d4"
     },
     {
       "bytes": 1860,
@@ -74,17 +74,17 @@
     {
       "bytes": 8276,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/packaging-authoring-v1/ROOT-COMMANDS.json",
-      "sha256": "f86a236dffa5e20e487c1cd4c9dda530c95d5f213f7e37a2749b5993fb48f2cf"
+      "sha256": "ca06180b97cdc3d5453bcaa8b50ded3fd843f26aaba23dba0f3eaef00524d29a"
     },
     {
       "bytes": 42362,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/packaging-authoring-v1/prepare_package.py",
-      "sha256": "3d02b0880928e264d9e29305bdfd97244b2ccdf424644700336627ea7d40f3cf"
+      "sha256": "8fc01d4eebf41c1ec7c248e5406f757d4080205da2b776973d83ed3d32cb6998"
     },
     {
       "bytes": 8307,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/packaging-authoring-v1/finish_package.py",
-      "sha256": "0d9822c23fc977bfdc70dde931b2b883eeea80e2910adafe3c7357cd197d2640"
+      "sha256": "d20f8a43ad2c046d78c478993038dcca27f1fa85264caf3c762680d38ea19206"
     },
     {
       "bytes": 1860,
@@ -99,7 +99,7 @@
     {
       "bytes": 8254,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/packaging-authoring-v1/ROOT-COMMANDS.json",
-      "sha256": "4ca01289087cffa812a65a05c490a39019e4cc50853b8bf5a2daec70043b6d58"
+      "sha256": "93bf448f085f982ad426cf0b6ec2c0b2c80c444ed305ac657e8e9681bfc851ad"
     }
   ],
   "owner": {

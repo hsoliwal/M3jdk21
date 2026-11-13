@@ -24,9 +24,9 @@ GitHub Actions file, is already identical at Git blob
 | Original M3JDK21 path | Before Git blob | Canonical / #2076 after Git blob |
 | --- | --- | --- |
 | `m3/collections/interop/pom.xml` | `3fc5cc0f0bee520675fea18a379c96b288c99084` | `529fa821fcb27a645795f6677270a9a44f4526e3` |
-| `make/m3/collections/verification/no_external_runtime.py` | `aa7baed2aa9e4ff2aa675771def00a09ccc863f3` | `00b94bec1d828d5d716c9707844f97b6de1a6124` |
+| `make/m3/collections/verification/no_external_runtime.py` | `aa7baed2aa9e4ff2aa675771def00a09ccc863f3` | `0bd537385811b9f9eb84c24e0b405398e88ffbb0` |
 | `make/m3/collections/verification/test_no_external_runtime.py` | `2886c5d68444ee34e54a3352d1400a2e4fdb21a4` | `36b0428c202078f196b322d5e5d8d80313a5dd65` |
-| `m3/collections/interop/README.md` | `2f7104f1a694e0392713a4fd62b0883ebba3d650` | `c04634bc2696fae873a63bd1dfe6eb54fc341453` |
+| `m3/collections/interop/README.md` | `2f7104f1a694e0392713a4fd62b0883ebba3d650` | `bcd7bd589787778c6e42b6b042bb78509cac534a` |
 
 All four canonical original target postimages match byte-identically in
 private Synexia #13807's existing SHA-pinned resources
@@ -37,7 +37,7 @@ No OpenRewrite parser/engine/YAML materializer is copied into M3JDK21.
 
 - Independently reconstructed the new `no_external_runtime.py` and
   `test_no_external_runtime.py` as **byte-identical** product Git blobs
-  `00b94bec1d828d5d716c9707844f97b6de1a6124` and
+  `0bd537385811b9f9eb84c24e0b405398e88ffbb0` and
   `36b0428c202078f196b322d5e5d8d80313a5dd65`.
 - `python3 -m py_compile` passed on these exact Python source files.
 - Real `python3 -m unittest discover -p test_no_external_runtime.py -v`

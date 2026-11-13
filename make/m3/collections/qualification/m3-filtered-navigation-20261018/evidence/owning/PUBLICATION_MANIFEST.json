@@ -26,7 +26,7 @@
   "files": [
     {
       "path": "README.md",
-      "sha256": "28f118ab35e6b3cd01a972ee526fa2311e54f7511a187d8842f4aadab8371909",
+      "sha256": "15b25790ddfd3d965edb00d2f8a04b2da2530218f7cc102b4b513bd7e37394a0",
       "bytes": 8111,
       "kind": "authored-evidence-index",
       "byte_identical_to_original": false
@@ -41,7 +41,7 @@
     },
     {
       "path": "collections/INPUTS.json",
-      "sha256": "39294d4771072da3eaae7a39a4e3a98c65ce70919ce3b80ecc68dc4fa500489c",
+      "sha256": "0fc17f84ff09de26eb9dad1cd4bf948f556b49e16c968b3311d6a62e7b7ffa36",
       "bytes": 75848,
       "kind": "original-source-input-seals",
       "original_receipt": "owning-collections-native/INPUTS.json",

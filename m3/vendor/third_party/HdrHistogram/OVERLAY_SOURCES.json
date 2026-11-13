@@ -6,7 +6,7 @@
       "base_sha256": "9d74dae48f852cf2d7e7bb217c3ffb9716c5b74f9a4fd20817b256a167ec1d80",
       "overlay": "BASE64_TO_JDK v1",
       "recipe": "make/m3/tooling/jdk-superset/retarget/tools/base64_to_jdk.py",
-      "recipe_sha256": "022dd2df22e7f5b720b6b6e0c50ea0645a1a225fcb6d8abc9d8b8ee341775526",
+      "recipe_sha256": "ff684ab3e2a50dae1940f947309c47c5277783c30f1baed36ab859813b400a03",
       "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/Base64Helper.java",
       "sha256": "3adade20731b3a3b011a0dc8581338de3d24fea1fd20f8cae1db0f3dc636cae6",
       "upstream": "org/HdrHistogram/Base64Helper.java"

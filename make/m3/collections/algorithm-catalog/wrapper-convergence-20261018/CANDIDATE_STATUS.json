@@ -30,7 +30,7 @@
   "receiver_java_jni": {
     "status": "PASS_SCOPED_2F_ACTUAL_RECEIVER",
     "receipt": "FINAL_RECEIVING_STATUS.json",
-    "sha256": "42101163908978c388aa4e5b0aa5647593ccf24e7ce6de74d056246bc9cd4021"
+    "sha256": "4dfc35255985f6e4d0d534f0a1ddce884387bbc9a12e99b7f474394ebaa61d6f"
   },
   "canonical_immutable_pin": {
     "status": "EXTERNALLY_BOUND_AT_PUBLICATION",

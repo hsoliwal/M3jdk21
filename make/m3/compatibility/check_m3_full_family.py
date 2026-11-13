@@ -28,7 +28,7 @@ EXPECTED = {
     "receiver_invariant_path": "docs/M3-SCALE/invariants/M3-SYNEXIA-RECEIVER-1.md",
     "receiver_invariant_git_blob": "7ac11f77328c12cea7c157253d99937292235151",
     "catalogue_path": "synexia-openrewrite-recipes/verification/synexia-m3jdk-full-family-20261007/CATALOGUE_INDEX.json",
-    "catalogue_git_blob": "8145c667c941a9358e9a5149489e455d950afc34",
+    "catalogue_git_blob": "28f519a28020e7f8984252cfcdbd51087049376c",
     "inventory_source_revision": "7d2133f1412a9e7295296c3f86baae577bb3251c",
     "catalogue_total_paths": "4770",
     "catalogue_checked_roots": "13",

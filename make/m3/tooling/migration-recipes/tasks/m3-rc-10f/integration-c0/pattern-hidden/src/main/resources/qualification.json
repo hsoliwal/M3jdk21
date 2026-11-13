@@ -17,12 +17,12 @@
       "crate": "ph0-phc",
       "id": "Phc",
       "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ph0-phc/manifest.tsv",
-      "manifestSHA256": "31a4c764cd7dbb835834de27a70e925b6c567d36502303041f5236b8f89a2971",
+      "manifestSHA256": "db1570243cb2518854fb745de55d2d1070ae74dc264feecc186cdddd1c598b0c",
       "namedRecipe": "jdk.internal.m3.Ph0Phc",
       "targets": [
         {
           "afterBytes": 79664,
-          "afterSHA256": "ed524e76758081208a939f619d3bab55abf9ed0c95c053ab2957211d45718cab",
+          "afterSHA256": "cb50814e3b4a7aef2e18032851e98c197759f93245aea394441292fbc776ad06",
           "beforeBytes": 79672,
           "beforeSHA256": "e90a850d9a8946ad3c741b99a81bc823a65415110ec32aabffd25da15f530e59",
           "operation": "REPLACE",
@@ -38,9 +38,9 @@
         },
         {
           "afterBytes": 3300,
-          "afterSHA256": "523707713724ab3beacca8a7b9f38659a61c83bdd3940929e97487347e438c36",
+          "afterSHA256": "18c022bb19342e529f1cc5dc51cfb04b43f9e25b952f42b7e746717c3326f51a",
           "beforeBytes": 3300,
-          "beforeSHA256": "1a713463413df2684791ef1a214db69a7e5b23da888e61983c6b4902cef9c639",
+          "beforeSHA256": "3cc647126b451e35f6d5fe6a6b4fc41260da9b9f2c0757e96219e56e48a27562",
           "operation": "REPLACE",
           "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv"
         },

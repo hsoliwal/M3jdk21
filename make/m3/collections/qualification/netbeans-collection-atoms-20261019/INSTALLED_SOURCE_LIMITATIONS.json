@@ -3,7 +3,7 @@
   "source_revision": "677437be295b23f7ccf7409be287008944d0e8b0",
   "method": "Read-only exact gate-function composition and Git blob comparison; main() was not invoked and no target directory was written",
   "selected_manifest": "qualification/installed-source-enum-set-20261014.tsv",
-  "selected_manifest_sha256": "88ee9ceaa346a8fc2a24a84569ba852f5ad450dea26fe414d0095c31395272f7",
+  "selected_manifest_sha256": "dd2094e51fb334d8a3ec9de8dca09048fb2fa73881afc984be795ba3a6a08ce2",
   "selected_manifest_sealed": true,
   "base_rows": 99,
   "composed_rows": 113,

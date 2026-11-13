@@ -83,7 +83,7 @@
     {
       "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/integration-f29/invariant-policy-runtime.json",
       "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/evidence/integration-f29/invariant-policy-runtime.json",
-      "sha256": "86fbf2700d807bc5847664e7f81baba126f9f5332c05ae9b2e4af26c194c0dce",
+      "sha256": "fe168541ea89b7d2d292b49622402e60a34fb1753ec42d7006dadcf48389b581",
       "bytes": 397
     },
     {
@@ -173,7 +173,7 @@
     {
       "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/sdk-results/invariant-policy.json",
       "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/evidence/sdk-results/invariant-policy.json",
-      "sha256": "8cd8375f42868b95639bcd0fcf54417a5277e240db5c38b235b9223a0221eaf1",
+      "sha256": "039fc5f2f916b8dd45781ad9dd651199b1fdf5eb09708e5f3958afb4c7ec5835",
       "bytes": 30186
     },
     {
@@ -239,7 +239,7 @@
     {
       "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/recipe-host/WRAPPER_V2_AND_POLICY_RESULTS.json",
       "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/evidence/recipe-host/WRAPPER_V2_AND_POLICY_RESULTS.json",
-      "sha256": "0919c5284d2153a33b7bd2004e1bf57ee88068f528222c0722ccbb39a12b6d4c",
+      "sha256": "5948f212d4d4980a72c57a5e7344ee5045beb88a6f33aafdaf0f582f4218b1f2",
       "bytes": 13827
     },
     {
@@ -257,13 +257,13 @@
     {
       "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/public-custody-portability.json",
       "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/evidence/public-custody-portability.json",
-      "sha256": "7707a22cb51cf4f646738773788751047a01c84c6fbd2f3efc9ddc4eb8372733",
+      "sha256": "83e34ab9c1e4b527cc4be5f94e5ecab4de45351ecb00eba5d042edae8a13d3b9",
       "bytes": 177918
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/PUBLICATION_UPSTREAM_REFRESH.json",
       "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/evidence/PUBLICATION_UPSTREAM_REFRESH.json",
-      "sha256": "ac5df7d7a55b1ff66fbbbec0783a1ce46bf021c19497883b018582cfc3f3b4a7",
+      "sha256": "2a77ccc0500d57f0793bd5a42791fe09772bb77c23533687f6e402765994ccd6",
       "bytes": 13518
     }
   ],

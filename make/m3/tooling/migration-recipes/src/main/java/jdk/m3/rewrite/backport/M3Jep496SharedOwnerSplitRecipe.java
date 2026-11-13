@@ -30,8 +30,8 @@ public final class M3Jep496SharedOwnerSplitRecipe
     private static final Map<String, Target> TARGETS = Map.of(
             ".github/workflows/m3-jep496-mlkem-inventory.yml",
             new Target("workflow.before.yml", "workflow.after.yml",
-                    "286a153c3c674f97a246c368d1531af75af4fe77",
-                    "4a509e67c9d6415bc0529a6067c9819bfd97ce08"),
+                    "d5c7b41be37568b0ec00b6d9c19951572db828d7",
+                    "540fd0e1af3096904ed45e32fcd28d5f61a680c9"),
             "make/m3/backports/recipes/jep-496-mlkem/README.md",
             new Target("README.before.md", "README.after.md",
                     "a0fe18001dab48aef0c25c056a703fd2df8f99e1",

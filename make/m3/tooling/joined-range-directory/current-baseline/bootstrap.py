@@ -44,7 +44,7 @@ def main():
                  v8:'6f90d22fb6db68af59668138e3757f3c29826af552592b14322c927b372c3873',
                  v9:'8405960a98d2632bcfa45e9c93c90930fd8f8955ee0720c126421a856efc1c47',
                  v10:'48a2cdabd2093b8e18635b898d7294c3bb1accf14f8db0787ef636ca46935c4c',
-                 v11:'86382f8143dea0fb608e1895987feb85f54e2b27f182d2cdc21a68fd4d5affdc'}
+                 v11:'3a2a085a06b14871ef0a9fb3aa7067c039f79d81c3c9461e507f523c419340f8'}
         matches=[name for name in allowed if a.declared_transition.resolve()==(a.receiver/name).resolve()]
         assert len(matches)==1
         name=matches[0];declared=a.receiver/name

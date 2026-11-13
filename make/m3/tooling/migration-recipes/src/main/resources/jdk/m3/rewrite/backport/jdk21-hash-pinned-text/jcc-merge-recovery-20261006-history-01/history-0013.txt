@@ -24,7 +24,7 @@
       },
       "after": {
         "resource": "after00-name-mapping.json.txt",
-        "sha256": "61818898ef6c092ddad2c1ee4cfe7508199912ff0a1f2d5c2a51ad6695d040c8"
+        "sha256": "aeec3cfe84e57aadf7fa855a5f2174dd73749ccc8f6cd8f4409f0bb8a25e3d53"
       }
     },
     {
@@ -46,7 +46,7 @@
       },
       "after": {
         "resource": "after02-source-destination-bindings.json.txt",
-        "sha256": "8c76c2dd45e775d29f8f47d8daf65842e465c74ad3dec7aacd55df59f9d051a1"
+        "sha256": "e8f345aacd9d93fb436d08f3bd868c2f5849e8edf989dd7fab54cc665dc49577"
       }
     }
   ],

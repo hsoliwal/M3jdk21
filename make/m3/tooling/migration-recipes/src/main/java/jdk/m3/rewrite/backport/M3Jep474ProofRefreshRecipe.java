@@ -36,8 +36,8 @@ public final class M3Jep474ProofRefreshRecipe
                     new Target(
                             "workflow.before.yml",
                             "workflow.after.yml",
-                            "6659d405610d1092daeb89672c03250fa6be2040",
-                            "50bffac0533df4976bf8fd89ceb38b2117ea73fd"),
+                            "9be0d787103d6f0589f6f1bfab1410c600b8ea20",
+                            "5d0d87b7f8658059563879ac2a0adaaa19b3ef10"),
                     "make/m3/backports/recipes/jep-474-generational-zgc/CURRENT_TREE_RECEIPT.tsv",
                     new Target(
                             "receipt.before.tsv",

@@ -1,15 +1,15 @@
 {
   "baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
   "resource_root": "/dev/shm/m3jdk21-work/recipe-candidates/src/main/resources/jdk/internal/m3/rewrite/m3jdk21-integrated-utilities-20261018",
-  "manifest_sha256": "22dfc6c19ac95fd88eba0ac9d12845fad84a10f9c01445237264b229c00f2495",
+  "manifest_sha256": "7ca934f4a73c886186624d129402b5f0afe4ec17fe534a11dba18a1216bc7235",
   "source_intakes": [
     {
       "path": "/dev/shm/m3jdk21-work/collection-candidates/candidate-manifest.json",
-      "sha256": "183da09418d2cc25f70227330145aab3ff433b7150ff30e07edbb1611637f653"
+      "sha256": "bf3c9288a6dce5bd3b46cede1606c373865f0b1d0273c4f4d1909f1732377ad9"
     },
     {
       "path": "/dev/shm/m3jdk21-work/utility-candidates/candidate-manifest.json",
-      "sha256": "614f5565abeaf1daee2c9a2f7ea958eec6d4f5db1f2ee99f92daf1b3af324ded"
+      "sha256": "4e226785d03d9acccccd87647deed5fb7e74f8160d5fffa7adaeb4f7d8a3425d"
     },
     {
       "path": "/dev/shm/m3jdk21-work/mask-candidates/manifest.json",
@@ -17,7 +17,7 @@
     },
     {
       "path": "/dev/shm/m3jdk21-work/catalogue-expanded-intake.json",
-      "sha256": "b4724e4fcc3fd08c8395c6ca95c91961e66c92db978d4328d6db0c22f38c6869"
+      "sha256": "1df20605e154167bdd5950f0a81d9354b9e37cfb787ff789fd88e0e9bdbfd266"
     }
   ],
   "manifest_targets": 483,
@@ -25,7 +25,7 @@
     {
       "path": "make/m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv",
       "before_sha256": "ABSENT",
-      "after_sha256": "5bf447216af55a51b73c275182af891c1ded5c2b427fa6856139731078d2ef8c",
+      "after_sha256": "8fb0beb19ca5b45ce08f836cef64a243695a3920f19d6099e93a27c674f24f23",
       "template": "templates/m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv"
     },
     {
@@ -60,7 +60,7 @@
     },
     {
       "path": "doc/m3/name-mapping.json",
-      "before_sha256": "a28f218198b30d1292d51836c8912d1f69229ef9bef40a4726a2808bcdcb4d46",
+      "before_sha256": "fe21e482d061a08a149c0362c6043a66a2fcd6a91bf253c70eb49728f2ce45e3",
       "after_sha256": "2bb378d4e2af9c0bf62482182acdf53f1919abe16e6146195d38d9bcfc6ab9d7",
       "template": "templates/m3/docs/name-mapping.json"
     },

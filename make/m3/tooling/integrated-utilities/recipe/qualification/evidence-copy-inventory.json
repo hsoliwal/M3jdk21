@@ -13,7 +13,7 @@
     {
       "path": "qualification/catalogue/candidate-intake.json",
       "source": "/dev/shm/m3jdk21-work/catalogue-expanded-intake.json",
-      "sha256": "b4724e4fcc3fd08c8395c6ca95c91961e66c92db978d4328d6db0c22f38c6869",
+      "sha256": "1df20605e154167bdd5950f0a81d9354b9e37cfb787ff789fd88e0e9bdbfd266",
       "bytes": 111389,
       "category": "IMMUTABLE_GIT_SOURCE_COVERAGE_EVIDENCE",
       "copy": "EXACT_BYTES"
@@ -845,7 +845,7 @@
     {
       "path": "qualification/recipe/RECIPE_RESULTS-1.json",
       "source": "/dev/shm/m3jdk21-work/integrated-sdk-output-1/RECIPE_RESULTS.json",
-      "sha256": "8650ca2f0c8542084d2e7b7cfe9b9053354e2de2c68e4eb02b23521269011630",
+      "sha256": "41c63a97c67e6d5ffe2237ce43bf9fdfcb8f962eb4400df2993a0ee049a26c4d",
       "bytes": 5192,
       "category": "PRODUCTION_RECIPE_SOURCE_AND_EXECUTION_EVIDENCE",
       "copy": "EXACT_BYTES"
@@ -853,7 +853,7 @@
     {
       "path": "qualification/recipe/collection-intake-1.json",
       "source": "/dev/shm/m3jdk21-work/collection-candidates/candidate-manifest.json",
-      "sha256": "183da09418d2cc25f70227330145aab3ff433b7150ff30e07edbb1611637f653",
+      "sha256": "bf3c9288a6dce5bd3b46cede1606c373865f0b1d0273c4f4d1909f1732377ad9",
       "bytes": 3605,
       "category": "PRODUCTION_RECIPE_SOURCE_AND_EXECUTION_EVIDENCE",
       "copy": "EXACT_BYTES"
@@ -861,7 +861,7 @@
     {
       "path": "qualification/recipe/manifest-1.tsv",
       "source": "/dev/shm/m3jdk21-work/recipe-candidates/src/main/resources/com/synexia/rewrite/m3jdk21-integrated-utilities-20261018/manifest.tsv",
-      "sha256": "22dfc6c19ac95fd88eba0ac9d12845fad84a10f9c01445237264b229c00f2495",
+      "sha256": "7ca934f4a73c886186624d129402b5f0afe4ec17fe534a11dba18a1216bc7235",
       "bytes": 95320,
       "category": "PRETOKEN_PRODUCTION_MANIFEST_SNAPSHOT",
       "copy": "EXACT_BYTES"
@@ -885,7 +885,7 @@
     {
       "path": "qualification/recipe/production-resource-assembly-1.json",
       "source": "/dev/shm/m3jdk21-work/production-resource-assembly-1.json",
-      "sha256": "d2f722d42e1548f82bf454b8ea68ffb6cc1f08f50bb5be439dd4a349694dbe06",
+      "sha256": "761d7c429487c499fc6156ba0c2f3ad888fff4aa6cc05f44622fdd67d928cd20",
       "bytes": 42378,
       "category": "PRODUCTION_RECIPE_SOURCE_AND_EXECUTION_EVIDENCE",
       "copy": "EXACT_BYTES"
@@ -901,7 +901,7 @@
     {
       "path": "qualification/recipe/received-sdk-output-1.json",
       "source": "/dev/shm/m3jdk21-work/received-sdk-output-1.json",
-      "sha256": "24403fc9e1684398939ead2302e883d4315723ca54caa84c41edbb9780fe4fa4",
+      "sha256": "11aaef2bbc856fba0f8e58785f0ed3b518cace77de8c93a233bb574273aa6694",
       "bytes": 8619,
       "category": "PRODUCTION_RECIPE_SOURCE_AND_EXECUTION_EVIDENCE",
       "copy": "EXACT_BYTES"
@@ -925,7 +925,7 @@
     {
       "path": "qualification/utilities/candidate-manifest.json",
       "source": "/dev/shm/m3jdk21-work/utility-candidates/candidate-manifest.json",
-      "sha256": "614f5565abeaf1daee2c9a2f7ea958eec6d4f5db1f2ee99f92daf1b3af324ded",
+      "sha256": "4e226785d03d9acccccd87647deed5fb7e74f8160d5fffa7adaeb4f7d8a3425d",
       "bytes": 3833,
       "category": "UTILITY_SOURCE_BOUND_EVIDENCE",
       "copy": "EXACT_BYTES"
@@ -957,7 +957,7 @@
     {
       "path": "qualification/utilities/target-paths.json",
       "source": "/dev/shm/m3jdk21-work/utility-candidates/target-paths.json",
-      "sha256": "1e853c07e5d0b67b2c7547d9325cc379c2378db3a7522f47d3490953fd4503f0",
+      "sha256": "b0c7635ce933e1462076cd0ceee92ec061a0b9bb866f1786fed701ddcd2e382f",
       "bytes": 671,
       "category": "UTILITY_SOURCE_BOUND_EVIDENCE",
       "copy": "EXACT_BYTES"

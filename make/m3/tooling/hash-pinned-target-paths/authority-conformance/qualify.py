@@ -15,7 +15,7 @@ HERE = Path(__file__).resolve().parent
 PREFIX = "make/m3/tooling/hash-pinned-target-paths/authority-conformance/"
 WORKFLOW = ".github/workflows/m3-hash-pinned-target-paths.yml"
 ORIGINAL = HERE.parent / "qualify.py"
-ORIGINAL_GIT = "3fdbd0b7382bc07c3c9ca905845dcb824b2a1ae5"
+ORIGINAL_GIT = "2d8bf7af9ea91c5b8777341440d64bc40fe484a4"
 ORIGINAL_WORKFLOW_GIT = "2c87b2d062d3834e7144255c2db6b5f09d45ca18"
 CONTRACTS = {
     "scope": {

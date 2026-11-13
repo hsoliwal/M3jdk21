@@ -458,13 +458,13 @@ their blobs also match the earlier audit pin. Hashes identify bytes, not tests.
 | [SegmentedPrimitiveStorageTest.java][storage-test] | `0b2b7a97b35e1c867d7858a098d52945bd2e49f1`; seven tests, full body read |
 | [SegmentedLaneBulkContractTest.java][bulk-test] | `d7e791b04684063739432bc727bf0339043d02f9`; six tests, full body read |
 | [segmented_bit_lane.c][native] | `0d1a6f61897a6a5f3a600df0b426100156364e57`; complete JNI body and two static helpers |
-| [SegmentedLaneNativeProbe.java][native-probe] | `c2a0f571b791f2279b631772a2e43b483aa2e931`; complete probe |
+| [SegmentedLaneNativeProbe.java][native-probe] | `092ede5d010df6625703167801516b51eefe8061`; complete probe |
 | [PreparedLaneAllocationProbe.java][allocation-probe] | `7c5af983dcd1b7a8bedcacd998419ace943f62f2`; complete bounded measurement probe |
 | [M3Collections.java][factory] | `9b49f723dfa91628978e26db2564e0282a3e78a9`; seven relevant delegates only in this pass |
 | [module-info.java][module] | `bcb0af11a4d6038bc79ec582e71c63f218468a6e` |
 | [collections/pom.xml][pom] | `e82f308c1bc1e05807a6e6bf3104fe2d14664fa2` |
 | [collections/README.md][module-readme] | `622b61d4b719fd6879ef8df72ffbcfbaa7e54918`; source instructions, historical outcomes not rerun |
-| [verify.py][historical-verifier] | `9911d369c3ef6022f4f450c3891ce2fe6856a9bf`; historical build/JNI orchestration read only |
+| [verify.py][historical-verifier] | `6575dae0343df22f87c790f26f78216a94befc4c`; historical build/JNI orchestration read only |
 | [verify_donation.py][donation-verifier] | `be9a75e665683014c21e2a884a9ec8bf43636fbd`; relevant current source-set/compile/test/JNI gates read only |
 
 The [porting invariant][policy], [naming map][naming] and

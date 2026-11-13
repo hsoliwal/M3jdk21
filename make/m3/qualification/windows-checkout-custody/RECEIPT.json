@@ -43,8 +43,8 @@
     "status": "PASS_UNCHANGED_PREDICATE",
     "guard": {
       "bytes": 13679,
-      "sha256": "98c1272efd1c2c447cdd91bbb1f6779f48ee5394250f43316a6fdde5b2c8dff7",
-      "gitBlob": "d37e9f4f8155879a08f95f30bcf10259f37ddc7a"
+      "sha256": "944d0dfd7fb0af9e763f5a27f1b5dddcb60337961cb152f1019da55f516a3e9c",
+      "gitBlob": "40c441f773d5ac3c1b1703b73a9dc4e6159300c4"
     },
     "oldPath": "m3/lexicon/receiver/qualification/case-liang-seals-20261112/RECEIPT.json",
     "oldProblems": [

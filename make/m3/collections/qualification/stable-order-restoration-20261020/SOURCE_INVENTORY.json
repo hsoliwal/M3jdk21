@@ -37,8 +37,8 @@
     },
     {
       "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/HANDOFF.json",
-      "git_blob": "2402249b2ce87bd19c58b878afdd91873812373a",
-      "sha256": "5e89017447d68baf33772df998a7ef6ea51c0ba0b20311f7f16ca6e9f3bcc03c",
+      "git_blob": "b811433ad0afa21a65e2c095acf923128f395b81",
+      "sha256": "e8c310686356dbbd114f5d2cc682623290919c2ef823b55dbf5cf230d1cf2cde",
       "bytes": 9190,
       "local_path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/qualification/wrapper-convergence-20261018/HANDOFF.json"
     },
@@ -51,8 +51,8 @@
     },
     {
       "target_path": "make/m3/collections/algorithm-catalog/wrapper-convergence-20261018/ACCEPTED_ATOMS.tsv",
-      "git_blob": "e144a03604e25b8de1bd4d78401a1a1542e3beab",
-      "sha256": "abe44a6cd8a76e6aefefb3545fb5d0c00bccdfcd07069c0c0cdb53b2e013a3b0",
+      "git_blob": "dd80916e51f111a0be98e4cc2c5c7093b21d8524",
+      "sha256": "5e0108e25b61706772fbb6d24ea2c1c1b41217dd4a3b520b25ec0aea3d632f5e",
       "bytes": 2646,
       "local_path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/algorithm-catalog/wrapper-convergence-20261018/ACCEPTED_ATOMS.tsv"
     },
@@ -79,8 +79,8 @@
     },
     {
       "target_path": "make/m3/collections/algorithm-catalog/wrapper-convergence-20261018/RECIPE_CUSTODY_COPY_MANIFEST.tsv",
-      "git_blob": "bff7fd61a46d854d4a84cf4e95a68676f533437d",
-      "sha256": "da8c8f9a3031a8ad98d5e087c28148f4a8c6b38a52103c6f2920603495c7d245",
+      "git_blob": "33e175941d0324abb561dd9c041f5004c114a2bb",
+      "sha256": "fafb867299de74e016d34f5379c854aa98c40e3bb902240868bf1616f74c3d49",
       "bytes": 25240,
       "local_path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/algorithm-catalog/wrapper-convergence-20261018/RECIPE_CUSTODY_COPY_MANIFEST.tsv"
     },
@@ -401,8 +401,8 @@
     },
     {
       "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/invariant-policy/PASS.md",
-      "git_blob": "97556d048a3f44a8e93faabff71706552f29835b",
-      "sha256": "5dcff2e367ef87a0f84ed9675062a665742f69f5a81ceae6496eca7d089c27d2",
+      "git_blob": "758598613e2abe2af6629217604f6571b026b438",
+      "sha256": "6cf895fdb59aaef712262ec48ecacd21a4396bb5695504b7bbdae2372dda9f6f",
       "bytes": 3019,
       "local_path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/custody/m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/invariant-policy/PASS.md",
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/invariant-policy/PASS.md"
@@ -417,24 +417,24 @@
     },
     {
       "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/invariant-policy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-invariant-policy/m3jdk21-porting-invariant.md.txt",
-      "git_blob": "a05cbc0a2fe41df08dd71797fb530e57765ef08b",
-      "sha256": "95a5d111f0d9b2467bcc84828adc5b0efcfd1091e35a1b5c1bf1c484a2066b03",
+      "git_blob": "0ffaee43f5d3051179fde95fff3be713d9316d3b",
+      "sha256": "ba394522eae7c533512a7e8eabc18486d18983223fcd15a570f2fce366efd27c",
       "bytes": 37648,
       "local_path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/custody/m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/invariant-policy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-invariant-policy/m3jdk21-porting-invariant.md.txt",
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/invariant-policy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-invariant-policy/m3jdk21-porting-invariant.md.txt"
     },
     {
       "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/invariant-policy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-invariant-policy/manifest.tsv",
-      "git_blob": "e9baabe816c98d05476511ad44dddcb254569484",
-      "sha256": "b399afa9b06660ecb1cbc1e91af429af39bc4ffff493d2dbd844b359ee5e4a89",
+      "git_blob": "0b918fc274176b69e1590d29e6dba2d3205bf3f7",
+      "sha256": "3e206ca61e4c06b34d69e50a3ea3c5c4b1a414ff87afb72bb13d1bcd17b9b4e3",
       "bytes": 367,
       "local_path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/custody/m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/invariant-policy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-invariant-policy/manifest.tsv",
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/invariant-policy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-invariant-policy/manifest.tsv"
     },
     {
       "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/invariant-policy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-invariant-policy/pre/m3jdk21-porting-invariant.md.txt",
-      "git_blob": "d933c7f8a4ba875b318c499214857146724fc4da",
-      "sha256": "604ef82225fdb9e6ecf00e14f7630fb0956b85ec89e5c9241537733d4054f39a",
+      "git_blob": "61461a6900fed0b5db9b9aa2028c1d9a6e30f32b",
+      "sha256": "fbca494f64f60c7e337a1e0ee31077d372123ff13d9483d48fd6f3bec453a6c9",
       "bytes": 30964,
       "local_path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/custody/m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/invariant-policy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-invariant-policy/pre/m3jdk21-porting-invariant.md.txt",
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/invariant-policy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-invariant-policy/pre/m3jdk21-porting-invariant.md.txt"

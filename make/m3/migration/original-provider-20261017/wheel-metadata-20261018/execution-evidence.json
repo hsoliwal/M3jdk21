@@ -121,9 +121,9 @@
   "changedRequiresDistStrings": 18,
   "unchangedWheelBytes": 642142,
   "wrapperBeforeSha256": "08531c8ec0d9a77c701735935442b53d7084809f777668bf25be25495704c9d5",
-  "wrapperAfterSha256": "3875e91c82afd6712a3cc50f76cd7f317721839f69870c4c7dce0cfe8f455a34",
+  "wrapperAfterSha256": "8bf96849c73a8cb4865949a1422403872d9e0bcdfcc907f2d81964dc6c5b5c35",
   "lockBeforeSha256": "3b5399db82a98e8f081be41b90213957c8509d5464d303e9e5312c77d6b807c8",
-  "lockAfterSha256": "808e9471ebab14659401fd592538df7b0096c166c3410014e43d21747918af50",
+  "lockAfterSha256": "1dd5cb6888d3ab5ecb2aa42bdebedaf64562a0ee2921522b04340fde1f34db74",
   "execution": {
     "interpreter": "Windows CPython3.12; -I -S -B",
     "exactCheckWheel": "EXECUTED_UNCHANGED_FUNCTION_IN_RAM",

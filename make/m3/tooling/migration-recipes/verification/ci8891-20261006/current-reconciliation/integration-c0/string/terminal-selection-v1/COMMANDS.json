@@ -110,12 +110,12 @@
     {
       "bytes": 28933,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/prepare_package.py",
-      "sha256": "f92fc8d812a953cd089bcf145fb2497ad83009a8b037c05359b0d66e202c49d7"
+      "sha256": "5f8e663a81bd789d5eeab7ab541b1144a73fd75ef258ae5dd9bfbaa3749f9a70"
     },
     {
       "bytes": 8236,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/finish_package.py",
-      "sha256": "a23496665fd649df5040864f9c8e44049bbfd5112c4d661857bec808437c1f43"
+      "sha256": "12064a250b69153a79d39de33585fb4229b9aa2722a500fae17200f43791e1e2"
     },
     {
       "bytes": 1860,
@@ -155,7 +155,7 @@
   "receivingSelection": {
     "bytes": 74585,
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string-preparation/receiving-selection-v1/RECEIVING-SELECTION.json",
-    "sha256": "ee018354430dd4a256f88b09ad93adbcc91139adc6c2d6c83a050acd24030a2a"
+    "sha256": "92e0aaea9b6436ef0de9bcb1508bb091276f0e03c02ef940081f239ae9a778e3"
   },
   "receivingStatus": "PRIMARY_ONLY_STOP",
   "receivingStopPreserved": true,
@@ -166,7 +166,7 @@
   "selectionReadback": {
     "bytes": 7504,
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/terminal-selection-v1/SELECTION-READBACK.json",
-    "sha256": "7589a0107031bc02f4542714d1f03071ecbc3256d50a0040347a287c1385824e"
+    "sha256": "d52baec0e6dd208b6066c1bb18b0f11328bd76b8bccea294ae835380ef2a862b"
   },
   "semanticOutcomeSeparateFromPrimary": true,
   "semanticPrerequisite": {

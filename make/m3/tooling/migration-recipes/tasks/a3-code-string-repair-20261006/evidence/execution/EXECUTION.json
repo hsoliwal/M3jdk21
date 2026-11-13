@@ -5,8 +5,8 @@
   "proof_inputs": {
     "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/PROOF_INPUTS.json",
     "bytes": 7929,
-    "sha256": "0d3713e9f28c506c24564e7b5abe8ea90040714ab7eaccbc791e82ff33793f42",
-    "git_blob": "a84a38ea98736b77374ca4ea4c02c02f922852a3"
+    "sha256": "b4927b8f016f76e73bb46fa107ce8ba17667aa00b7b649722870f5e7fd3a1ebe",
+    "git_blob": "d034c5669935c00af08e0e46770875969e70b731"
   },
   "recipe_crate": "a3-code-string-repair-20261006",
   "library_versions": {
@@ -218,8 +218,8 @@
   "behavior_inputs": {
     "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/execution/BEHAVIOR_INPUTS.json",
     "bytes": 12798,
-    "sha256": "3bf1ce1a4cdf87d21f2d713ca815b641c1a3f843dd604604b9566bc1bf47d75a",
-    "git_blob": "1420bb4dcd43d4e9e1976579f5551630f9867112"
+    "sha256": "9c2e175e9ba0f4c436e2159cad8f85c669634da919fab82fdb5a869b9f061f25",
+    "git_blob": "a46633d3ab710ec8a13afa8d89440ea23dfb537e"
   },
   "original_behavior_process": {
     "argv": [

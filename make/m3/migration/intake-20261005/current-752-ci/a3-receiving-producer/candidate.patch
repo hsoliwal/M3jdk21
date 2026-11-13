@@ -90,7 +90,7 @@ index 33bf780..fa247df 100644
                  new Target(
                          "ABSENT",
 -                        "906b6353f7ceba3d97122fb25a5d5793e0183b37",
-+                        "f10cfcf833d845dcc621c5c5085c0a3125b8cc14",
++                        "8e32d78d4127e31b8e325722f5210e2462b688dc",
                          null,
                          "after/A3Alg.java",
                          false));
@@ -99,7 +99,7 @@ index 33bf780..fa247df 100644
                  new Target(
                          "4fe10060e31b23cd778f69c63033f27e7fc72d83",
 -                        "1c660d64d7a86eb44e2cc96b544a782c34e47bf8",
-+                        "1fb13b93f6ec9ec220aed71385dfa65edd20e8c1",
++                        "d672c0d99c7b4285cf831e9cc15f2cc41e731dc1",
                          "before/A3PlanTest.java",
                          "after/A3PlanTest.java",
                          true));

@@ -10,9 +10,9 @@
   "files": [
     {
       "targetPath": "make/m3/tooling/backport-wave-current-output/sdk/FOSS_REUSE_DECISION.tsv",
-      "gitBlob": "4103ffd88bfabaa675bef3bdb7fdfd7e91dd238e",
+      "gitBlob": "9b8d15298cb39e699e81ef7272818f9b835a01d7",
       "bytes": 848,
-      "sha256": "5edd11818b033b0fdf0dfcc2a17aebd7dc4163bb678e67506a8d129417e4c340",
+      "sha256": "08f368e89d86086c0ba9993d933ca70f56aefcf7c384ef4d5bd5f76128f8d59d",
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/FOSS_REUSE_DECISION.tsv"
     },
     {
@@ -45,9 +45,9 @@
     },
     {
       "targetPath": "make/m3/tooling/backport-wave-current-output/sdk/pins.json",
-      "gitBlob": "bf3f74b42a63422afa4fae029d4f1183d93ed081",
+      "gitBlob": "625abeabd517fe59100c859e2092d41e163364a6",
       "bytes": 10594,
-      "sha256": "b6d1fcef8ce4f11d7991dd0809b67fac854949523aae24cf80ef9acbf23818b8",
+      "sha256": "dc3ac20cb646aef086e5b81eb73815e9d81a51818e2272a51bfd939d0bc4ce21",
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/pins.json"
     },
     {
@@ -136,9 +136,9 @@
     },
     {
       "targetPath": "make/m3/tooling/backport-wave-current-output/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/inverse/manifest.tsv",
-      "gitBlob": "b6e4dcfe564226bcc3d4c2e279909edbb84ac63c",
+      "gitBlob": "faf5186358cc4ea1711ca90ea2cefd3191dc2058",
       "bytes": 1840,
-      "sha256": "6968c988a1156007c551909dc402f1d63500b44948b710c9116d0b30c498e6d7",
+      "sha256": "85c7c1796757ad58d2e33032f2b65f682ef1c805b5bd483e9938c87336d37d48",
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/inverse/manifest.tsv"
     },
     {
@@ -150,16 +150,16 @@
     },
     {
       "targetPath": "make/m3/tooling/backport-wave-current-output/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/manifest.tsv",
-      "gitBlob": "1b7d20616f0112e92305935727cfb877c6b1a60f",
+      "gitBlob": "581dafb1a738311b3f0d8d55e8d57a8e38179b92",
       "bytes": 1840,
-      "sha256": "9e1c22cab7e958eebf90605fae5d24f4d32991ad6f1e3538b6673d1a682627ab",
+      "sha256": "6e7bfaff99acbeed2ba8790ebe343f378b9a82029108365b67115516b8f12f82",
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/manifest.tsv"
     },
     {
       "targetPath": "make/m3/tooling/backport-wave-current-output/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/out/.github/workflows/m3jdk21-backport-wave-admission.yml",
-      "gitBlob": "0eab21184c1b7d90ded858acdeac5c7cc2e1382c",
+      "gitBlob": "810d1ae14e4a2bfa1fe41649ac61c3ddc1915336",
       "bytes": 3717,
-      "sha256": "942fe1f46b1b4f7c91418ded4c94b045576ec31b52dfed3ce0ac45ed4608ff25",
+      "sha256": "90677e9b79c698e0b1455eebf7aa319b38c0a6f6ef270d118b6c40bc58a6a328",
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/out/.github/workflows/m3jdk21-backport-wave-admission.yml"
     },
     {
@@ -241,9 +241,9 @@
     },
     {
       "targetPath": "make/m3/tooling/backport-wave-current-output/sdk/src/test/java/jdk/internal/m3/rewrite/M3BackportWaveCurrentOutputRecipeTest.java",
-      "gitBlob": "1ba3166c623dc1e3e3fb68b232e1ee61aa58e1c5",
+      "gitBlob": "e7a33743e7776ec9f5af01fd8b8503976d9ffbab",
       "bytes": 18087,
-      "sha256": "1733966fb5553147c355d6b86877946a21e677ee9b3b9effcd19cdc77b6f3b09",
+      "sha256": "2f74671f045ff3aff49e5a6077cb6c1332c7e655bd50e42fe4d982defa026ede",
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/test/java/jdk/internal/m3/rewrite/M3BackportWaveCurrentOutputRecipeTest.java"
     },
     {
@@ -255,16 +255,16 @@
     },
     {
       "targetPath": "make/m3/tooling/backport-wave-current-output/sdk/verify.py",
-      "gitBlob": "2d45eb9e4fd77a14c3e7af7c126f7cbd06126957",
+      "gitBlob": "105c108171e2a00f8a5094560390316b5085ac45",
       "bytes": 25000,
-      "sha256": "9278d7714e2c81a87b79396b5539b41c2e389dc11a3bc990793260611dec538b",
+      "sha256": "0bbb9c341a6359e5f5e79801e90bc381193664038363fcc15b4bd5d538bb3626",
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/verify.py"
     },
     {
       "targetPath": "make/m3/tooling/backport-wave-current-output/qualify.py",
-      "gitBlob": "7c145d65499b7f4ef203ee15ff82c5b64bb86758",
+      "gitBlob": "e07bd265682b8b17865c4063dead0beb7f5c35b3",
       "bytes": 17359,
-      "sha256": "431623f2e4082a129b5a361999118113899183cc3ed324f682e499fa677abf50",
+      "sha256": "e0722b878bde0e11fd76509bb5d0153c43003e096b3b394aafb924990161ca4e",
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/hosted/qualify.py"
     },
     {

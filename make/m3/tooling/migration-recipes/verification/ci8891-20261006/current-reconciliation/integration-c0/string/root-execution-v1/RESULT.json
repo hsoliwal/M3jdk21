@@ -3,7 +3,7 @@
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/root-execution-v1/select/receipt.json",
       "bytes": 1591,
-      "sha256": "8222e5ab9b5abc667c1dd022b898c53c053283a451593398cdc09583622e6d39"
+      "sha256": "9b3f892e63a83e7fdceaac7d9605efe528f3ca206e09422008c8ddfcaf943eed"
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/root-execution-v1/pack/receipt.json",
@@ -13,17 +13,17 @@
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/root-execution-v1/verify/receipt.json",
       "bytes": 1173,
-      "sha256": "512994fcdca26a35b9033df3a45f434e7a4acd67d73ab3e68ac4b663c3944b9c"
+      "sha256": "db2de6a3458eb33c65507559159b40b1f04e4db67650b2830196e31a3cdaa6c0"
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/root-execution-v1/extract/receipt.json",
       "bytes": 1321,
-      "sha256": "27bdb63612926659564bfe7d4fe91c27dcdcc5137fbda8d8d67458ecebd83429"
+      "sha256": "4706991baa7fce08ef1a4525571a13d6c17e22744ab3aef8d4aa592c301eb453"
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/root-execution-v1/finish/receipt.json",
       "bytes": 997,
-      "sha256": "ee17806cf31af225a406b22abf8f0df1d7296ba738615fb8641083d5f517c557"
+      "sha256": "0c87de8a27417b28a70eb4f9438b4e5d6470db977e74cabb25961ce6416bddb8"
     }
   ],
   "completed": 5,
@@ -31,7 +31,7 @@
   "commandPlan": {
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/terminal-selection-v1/COMMANDS.json",
     "bytes": 9708,
-    "sha256": "3f5258afc5a97b55128a70df38704472be9b283dd8998ad93771066c3cfa6ff1"
+    "sha256": "e67af9cbc0688d272e013cb710bdc1f80538c6f99a11affe292d57bf52413720"
   },
   "proofGatesReexecuted": false
 }

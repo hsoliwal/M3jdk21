@@ -110,7 +110,7 @@
     {
       "bytes": 9154,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/finish_package.py",
-      "sha256": "bc37eba617bf61f5d736f4482c32f65672e6feb03bbe9f7ed6c5dd7119a130ea"
+      "sha256": "b65b32eea46ddf5ace9a80a5f083a2bf8952132cac3595925a78f6a5cf88352a"
     },
     {
       "bytes": 1860,
@@ -152,7 +152,7 @@
   "selectionReadback": {
     "bytes": 3106,
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/terminal-selection-v1/SELECTION-READBACK.json",
-    "sha256": "3e3996490f3984dd71209a18b86eb3e2c7f23503fb3f92955ccf78184a88d29e"
+    "sha256": "f43d676ee4186554602313ce858870ef1d875b0df11da7cac697f97c56b5fd2e"
   },
   "status": "AUTHORED_NOT_EXECUTED"
 }

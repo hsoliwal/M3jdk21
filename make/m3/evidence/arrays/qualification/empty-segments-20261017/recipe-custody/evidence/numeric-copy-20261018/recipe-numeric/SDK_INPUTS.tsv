@@ -4,7 +4,7 @@ crate/contract/test_prepare.py	79c4335d02ca2179301d617d9ae447b778f2f12361e379ff0
 crate/contract/verify_receiver.py	a400589821da1c448b3c2354aef91c7a6fd596cf265b2baca097494135126d4c
 crate/datasets/m3jdk21-numeric-copy/DATASET.json	99608e69f06ff6d7574f0103ea27d567c8589cf4835291d0b84877e44695a03c
 crate/datasets/m3jdk21-numeric-copy/ENGINE_EFFECTIVE.tsv	80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23
-crate/datasets/m3jdk21-numeric-copy/MODES.tsv	6314b44848422ab9439e3b6e6afbfbb2b7074ecec05c7979cdeb761d22c08f0c
+crate/datasets/m3jdk21-numeric-copy/MODES.tsv	535439e67e3ea38e051e37474aa9cc42549af5289e1c48896cd0d6176787fdcf
 crate/datasets/m3jdk21-numeric-copy/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy.yml	b2943a754509e0225efd4e4f2a91199ad77bda7ba7ab901e639bbb7146797d33
 crate/datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0003-M3ArrayCopySizeAgent.java.txt	f1d6631ddd126bbd9f8eed49fd4a3b1d02600675dabecec0ee2ddc849df525b3
 crate/datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0004-M3ArrayNumericCopyCostProbe.java.txt	dde0c402e530b33be5c161e89e607da24557164b0270fa325722eff52ed83f3c
@@ -14,9 +14,9 @@ crate/datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-ja
 crate/datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/manifest.tsv	1ace63a83ef574318e2a19dfeed47ae208f85b52babb2d67035e0e9532000904
 crate/datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/pre/0005-M3Arrays.java.txt	87b3f76e04880c80a5bbf31e2cfe66fc7567d9b96ec5139cdf31536442ba58c7
 crate/datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0001-CATALOGUE.json.txt	aeeecf589fa9b07eae2474e2df0bcb115de18b580b7b3d9b83ff2566f3bd121f
-crate/datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0002-README.md.txt	cbf6808232d4242ee055046f7ad25a44bebf0086dfe53766f43665766b362ba8
+crate/datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0002-README.md.txt	d42b8aa4963aaede2df61fe69f58aa2c69beb2beaf406819e061499d9caf40b0
 crate/datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0008-ALGORITHM_CATALOGUE.tsv.txt	e225689ee0fc93496070e819f7b637aea299c3b677d3c72c833408343b4de72c
-crate/datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/manifest.tsv	7e557e8d3a5131f7ba1209cae40b706249ce2fa3689b481337f1294424b3311e
+crate/datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/manifest.tsv	e1458697f4c2fb702e04d195f31a591ac2a67de5ac5b7b1226149b469dbc52f1
 crate/datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/pre/0008-ALGORITHM_CATALOGUE.tsv.txt	3ab761465800d4fcb67c4a1024174292ee983b617db8708e1c8d451185730cdc
 crate/pom.xml	4c90faaa9e64aebeeba14fb2196731c6334293781d0fdcafbf190f2f5662eb7d
 crate/prepare.py	7c2063fa5aa88d0872fff0157413a1d2fdca4f00d01c787f8650969e8b514014

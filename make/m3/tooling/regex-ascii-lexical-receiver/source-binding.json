@@ -53,7 +53,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/pins.json",
       "targetPath": "make/m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json",
-      "gitBlob": "ce9727c7585c8f90f62a23524bf8e8245ea59858",
+      "gitBlob": "69dd910434902bb9d80c0671e9c9189fcc25c0ee",
       "bytes": 14670
     },
     {
@@ -119,7 +119,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/manifest.tsv",
       "targetPath": "make/m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/manifest.tsv",
-      "gitBlob": "05fb9022c38895991ad7e4b9f38bb5873c0cd461",
+      "gitBlob": "2baf4c24b447a4b6906b24645e920dbfb680c01d",
       "bytes": 1719
     },
     {
@@ -221,7 +221,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/manifest.tsv",
       "targetPath": "make/m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/manifest.tsv",
-      "gitBlob": "1b9b56b3d7c5c15f5252231f1b5b98a93f7e94be",
+      "gitBlob": "40936ba9c183e58b27ecbb44d70a3b3257a52549",
       "bytes": 1719
     },
     {
@@ -275,7 +275,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/test/java/jdk/internal/m3/rewrite/M3RegexAsciiLexicalReceiverRecipeTest.java",
       "targetPath": "make/m3/tooling/regex-ascii-lexical-receiver/sdk/src/test/java/jdk/internal/m3/rewrite/M3RegexAsciiLexicalReceiverRecipeTest.java",
-      "gitBlob": "f5d61fde46048098d1b25822e2ccc034cbe4318b",
+      "gitBlob": "9e0fe8024d58aff9114f5109dce6d549706244ef",
       "bytes": 16047
     },
     {

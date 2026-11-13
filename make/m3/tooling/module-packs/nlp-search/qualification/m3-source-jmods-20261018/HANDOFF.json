@@ -25,7 +25,7 @@
     "make/m3/tooling/jmod-recipes/tools/jmod_pack.py": "250d98a2789ed8d5018a5b911a14c0a6729e435a9da1513d37a2dac7429ec3d6",
     "make/m3/tooling/module-packs/nlp-search/M3_SOURCE_LOCK.json": "a3a7ff26867dab71fa5f82bf6899c4c582e01f39cc70f9b8eda02e9188c506dd",
     "make/m3/tooling/module-packs/nlp-search/README.md": "a730d71a85db465f38cd8a933c6600ae98a91fac9656f41aa50b94467cf05190",
-    "make/m3/tooling/module-packs/nlp-search/SOURCE_INTEGRATION.md": "e38127a4bed8c58f82bac6c65f78218c492c5bfa5f01d8d2be4527570c61ef4a",
+    "make/m3/tooling/module-packs/nlp-search/SOURCE_INTEGRATION.md": "9528d53bf8cdc8d3f51fa719e2049dcbdaf33cff4b9ba5258b1ed77aabdb1313",
     "make/m3/tooling/module-packs/nlp-search/SOURCE_REF.json": "d7f70e98141e8222c2aeebcde4b3a4604f1741fc38a710d5c445a12d7dfbdc34",
     "make/m3/tooling/module-packs/nlp-search/build.py": "39c03ed39095f74d8dead83d5b3dec225ba4c2fe2128fbab87323280cab02743",
     "make/m3/tooling/module-packs/nlp-search/compiler-src/jdk.m3.search.compiler/jdk/m3/search/compiler/M3ASTSearch.java": "5bc9430b952089f2de980dff48859023ee524cf9f46b6a8f74d53ef0d3b7c3ff",
@@ -83,7 +83,7 @@
     "src/jdk.compiler/share/classes/com/sun/tools/javac/main/JavaCompiler.java": "129e8c19ef328185c45465b9c8bf9baee43bb24be54842b69833c52e3e6f3dcb"
   },
   "recipe": "jdk.internal.m3.rewrite.M3NlpSearchSourceJmodsRecipe",
-  "recipe_receipt_sha256": "63b436539dbfc890ab0993152cea5dcfd97645b68cd6105091aecab6415bd3dd",
+  "recipe_receipt_sha256": "b050363e02bf37e0b6baeb98b84f23cadada001a2f9d10b995d46ed210999aa6",
   "schema": "M3_NLP_SOURCE_JMOD_CANONICAL_HANDOFF_1",
   "source_implementation_changes": 53
 }

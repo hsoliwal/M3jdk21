@@ -24,13 +24,13 @@
 | `make/m3/runtime-integration/regex-state-mask-20261014/receipt.json` | `969631b8d10ebb1b999100ae656d7d133fd12e6a` | #889 |
 | `test/jdk/java/util/regex/M3PatternStateMaskTest.java` | `ebaf8c4b91dd8e65ddc525864e2c92e69bad9f42` | #889 |
 | `make/m3/compatibility/regex-relations-20261014/M3RelationPortProof.java` | `e9a6beee8916cf97d5d4aac2383e7ac2fa8843e0` | #896 |
-| `doc/m3/name-mappings/regex-relations-20261014.json` | `63c0143abf061391d269303daf74909521464fee` | #896 |
+| `doc/m3/name-mappings/regex-relations-20261014.json` | `a28748a3b40f1bd89a3300fc967b394eae0c258e` | #896 |
 | `src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java` | `d70a152bdedc380ed8b28861ea94ef4c2adbea90` | #896 |
 | `src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java` | `30359b57b7b553e78355d3672119c685051ec1da` | #896 |
 | `src/java.base/share/native/libjava/M3StateRelation.c` | `89b3127f0f262de3e00ba28a01079a659013dce2` | #896 |
 | `src/java.base/share/native/libjava/m3_state_relation.h` | `0e0c70e60b2cee61c3df31982a26f4251955cb61` | #896 |
 | `test/jdk/java/lang/String/M3StringHierarchicalRegexTest.java` | `5d47787597630efc70a4e3b173f2e788dfb6aa3a` | #896 |
-| `doc/m3/name-mapping-regex-effects-20261014.json` | `17cadc255d96c3d21d3134da7eb72357c2efe3b4` | #894 |
+| `doc/m3/name-mapping-regex-effects-20261014.json` | `df5fc13a04569148913cfd3eeaad7a23feac0e27` | #894 |
 | `doc/m3/regex-effects-receiving.md` | `38ddbb2c533e7baf72f54f94f23fbfc84661bb4d` | #894 |
 | `doc/m3/regex-power-receiving-20261015.md` | `4c7b237f01f9cd231d5af7f4dc4361810bb39ece` | #894 |
 | `doc/m3/regex-pressure-receiving-20261014.md` | `2a06459bc418cde5b9e9d63934c53ea52d1debf6` | #894 |
@@ -42,9 +42,9 @@
 | `test/jdk/java/lang/String/M3StringRegexReuseTest.java` | `a913b9dc61447efafad9d68e534b838e9ada66f3` | #894 |
 | `test/jdk/java/lang/String/M3StringRegexUtf16Test.java` | `2bc23aab599cc15008d6faefc41c4fc2499f3a6d` | #894 |
 | `make/m3/compatibility/relation-images-20261014/RelationImageProof.java` | `8b87b9a3c80c591cdd40423356bc30ff3ef60cb2` | #896 |
-| `doc/m3/name-mappings/relation-images-20261014.json` | `09054ddba5a2fa2e765785048b0e0a1cdda5516b` | #896 |
+| `doc/m3/name-mappings/relation-images-20261014.json` | `47f22e1ef6b7dcc7be43834a8050ac26aee04ac0` | #896 |
 | `src/java.base/share/classes/jdk/internal/mindex/M3RelationImage.java` | `9c6fefa415f3bc2897a0ae3fdb17dd499ee4a21f` | #896 |
-| `make/m3/tooling/module-packs/text-tools/CSV_M3_STRING_RECEIVER_20261015.md` | `9ee2c2bd70de6b4e1e75b3ee6db93781db0b1a14` | #916 |
+| `make/m3/tooling/module-packs/text-tools/CSV_M3_STRING_RECEIVER_20261015.md` | `70ebe1364e70ac5b09ab312057311272ecc5e4aa` | #916 |
 | `make/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/CsvTools.java` | `dd2c3635c87cad4fcad50c7295011ddbacb7b722` | #916 |
 | `make/m3/backports/NEBULA_PROOF_GATED_ADMISSION_20261015.tsv` | `96891444042f6dd4cb51c9d8e3236b038474cc42` | #934 |
 | `make/m3/backports/NEBULA_UPSTREAM_PROOF_ADMISSION_20261016.tsv` | `ffff78cb1e9def6fadea247c3667961bf0539892` | #934 |

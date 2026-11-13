@@ -19,11 +19,11 @@ plan, rows = sealed.sealed_plan(plan_path)
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--context', choices=('historical', 'ic0'), default='historical')
 args = parser.parse_args()
-current_mapping_sha256 = '1d061025b81107d52e5c2fa52f1ad156b4d941c32bbd2fba725caebefc92b21b'
-current_workflow_sha256 = '2d6a9817ac4c24db803b02cfc1baa91fc38397fea813163acbab7e2ed0cec82d'
+current_mapping_sha256 = '632534ea2941b679bd9c582a62e351f56a7a3055440b6a9f5a80554148944de1'
+current_workflow_sha256 = '2d0f9d5237c25711ff27f99cc3fd8cd6c6e3bcb43ca41cf63a19f25b844dfeeb'
 current_source_sha256 = {
     '.github/workflows/m3-lane28.yml': current_workflow_sha256,
-    '.github/workflows/m3-tq.yml': 'ee42d6c6c11e06f7c4032407668baea5453dbdeb19104cd2aaf53d7c07e33e84',
+    '.github/workflows/m3-tq.yml': '6f344f100d044a55afd545f4b0faa50f4bb7988cfca306fb709bd2151a5d47a3',
     'make/m3/tooling/tq/verify-plan.py': '4bbcd11479a302c65944e44de96be8b2e70fc128376cb03423649dbb0e7d8125',
 }
 if args.context == 'historical':

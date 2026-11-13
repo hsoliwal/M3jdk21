@@ -69,14 +69,14 @@
   "mirror_input_files_verified": 258,
   "sdk_evidence_sha256": {
     "SDK_TESTS.xml": "4bb5174cb47b1ee54f393a804ab120d93385e53d5737f158a51b599da226b775",
-    "SDK_INPUTS.tsv": "20d2ee425d893fbe2c52de57a770d09409862e0adaaf94391d9c48af1191c439",
-    "SDK_RESULTS.tsv": "a86225201f4af2b52d155a7720e925e1afbb702493d845243fd0462926f1ca4d"
+    "SDK_INPUTS.tsv": "78b8cf59f79610cb0153b6cbc41a80330fcad565f5ea4a8bbad0fb0037c8fb70",
+    "SDK_RESULTS.tsv": "44bcca405f9273f0bd685c08b5e2734a3d934e54a52734a4e8ede7f3a3949e25"
   },
   "input_inventory_sha256": {
-    "PRODUCT_BEFORE.json": "33ade92a1ce8186bf453fbd9f4058301ab8c7b56ad6bad167cc20ab3c3e6a144",
-    "PRODUCT_AFTER.json": "33ade92a1ce8186bf453fbd9f4058301ab8c7b56ad6bad167cc20ab3c3e6a144",
-    "MIRROR_INPUTS_BEFORE.json": "aff4028766880ec7c4818cdb7f42d4df7847089ff2658c16c2a837fac04ce08f",
-    "MIRROR_INPUTS_AFTER.json": "aff4028766880ec7c4818cdb7f42d4df7847089ff2658c16c2a837fac04ce08f"
+    "PRODUCT_BEFORE.json": "16486b4cf635861cccfa5ef7c01cb721887e59dae103bd18cf6f686bf41df801",
+    "PRODUCT_AFTER.json": "16486b4cf635861cccfa5ef7c01cb721887e59dae103bd18cf6f686bf41df801",
+    "MIRROR_INPUTS_BEFORE.json": "9ddf6014ce614a26f8fa79c11562548c1e37d9061add95954a701a1645bf43e1",
+    "MIRROR_INPUTS_AFTER.json": "9ddf6014ce614a26f8fa79c11562548c1e37d9061add95954a701a1645bf43e1"
   },
   "runtime_tests_rerun": false,
   "publication_performed": false,

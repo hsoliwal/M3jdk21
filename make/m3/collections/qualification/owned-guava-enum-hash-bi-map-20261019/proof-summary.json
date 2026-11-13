@@ -3,7 +3,7 @@
   "provider_contract": "com.google.common.collect.EnumHashBiMap (Guava 33.4.8-jre)",
   "inventory_row": "DONE #1460",
   "source_sha256": "3c2b64a31eddd17967cc8777349e6e3c550abfd0fcfa233bed8756ba9a29d97d",
-  "scaffold_preimage_sha256": "36a1b8177d3e01df0ad813ab3d8fb22cb1217683f72559dda5e667beedf53dc0",
+  "scaffold_preimage_sha256": "215fbafba7a51220843d8ba85c7ca7a30a373a6d436288e530451ff03f56c57c",
   "module_tests": {"tests": 17, "failures": 0, "differential_seeds": 8, "differential_operations": 96000, "differential_checks": 1248156},
   "coverage": {"tool": "JaCoCo 0.8.12", "classes": 13, "line": "422/422", "branch": "306/306", "gate": "CLASS LINE and BRANCH COVEREDRATIO >= 0.99"},
   "allocation_probe_bytes": 0,

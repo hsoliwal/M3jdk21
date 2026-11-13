@@ -28,11 +28,11 @@ remain unchanged.
 
 - Public product baseline: `hsoliwal/M3jdk21 master@0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb`.
 - Old public workflow Git blob: `85549267946f4e4ee2ca1928b652c44edd657068`.
-- Current product workflow Git blob: `9348c09b9817dd44846f6481aabd906d7c8d698d`.
+- Current product workflow Git blob: `ccab13210c39c103378a0f2285512a537460eec6`.
 - Original complete workflow SHA-256:
   `592369818ed986f1f3b30e36f4d0ee21d6647f4bfa9294d80a16d1dfbb5bb48f`.
 - Exact candidate complete workflow SHA-256:
-  `52199e91330e75bb4bda2bd4beba221d6902b299a1fa6e191327beba205ad10d`.
+  `4badf60655fcb71a450b4398498b2806117a4d3058b294ae4d2de63e3141f30d`.
 - Private source-owning canonical recipe: [Synexia PR #17276](https://github.com/hsoliwal/com.synexia/pull/17276),
   using the **existing** `M3HashPinnedTextSnapshotRecipe` engine and its
   `m3jdk21-backport-jtreg7-harness-20261113` two-state manifest.

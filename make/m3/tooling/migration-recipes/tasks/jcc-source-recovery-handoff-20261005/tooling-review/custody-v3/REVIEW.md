@@ -6,11 +6,11 @@
 
 | Artifact | SHA-256 |
 | --- | --- |
-| `derive_source_handoff_v3.py` | `8b71aaefeee38c8c8bba0d8c4e169df6b0aeb73ad9b4cad35dae7181c1d0246b` |
-| `author_e04_v3.py` | `b63123a1d1369bc6289d7901f950a6d9ebe5ccd5b82ac146814c7af3305ddb1a` |
+| `derive_source_handoff_v3.py` | `45f5a7d68f45a5f3a6c36a1b3a730828392be921f526eaeb5d196b0d951c9b90` |
+| `author_e04_v3.py` | `1d6796afba96441855b9400e362582e0e95ae7b332b995f4b7061a20cb152e28` |
 | `run_verification_v3.py` | `2c0cc74d7c7faa821bec1969c20aa6e41f6cfd1aa29ec67cc6187b52878f38f9` |
-| `publication_custody_v3.py` | `340e3e1670e457d99ab9e0ae954eed85efacdea4e4e34f2d4b2165421b8c9248` |
-| Proposal readiness T01 | `cfcf56cddf3e8c710583a4d60d2ba86e1af1d1d17da9fc136bbb5c27db9e5604` |
+| `publication_custody_v3.py` | `a7365ce869bb73d3545dca0ae7804dd1e39d88ff2c8bb8994b68538e74742567` |
+| Proposal readiness T01 | `2e777a430357d10fac3fb4134fff1cbca9e264727d228de160724cea6fd38b25` |
 
 All snapshots are preserved under `inputs/`. The exact old derive/author/runner bodies and the prior independent T01/T02 seals remain unchanged. Independent diffs equal the proposed additive diffs. No old entrypoint or source payload is overwritten by this proposal.
 

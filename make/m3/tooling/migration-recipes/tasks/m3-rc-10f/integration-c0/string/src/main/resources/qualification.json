@@ -17,7 +17,7 @@
       "crate": "sc0-spc",
       "id": "Spc",
       "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/manifest.tsv",
-      "manifestSHA256": "3984a4646b2bee1cd30a5f12d42e01979e0f3e8261d6605dff40e635e45a72bd",
+      "manifestSHA256": "70ed0d7fc959f2249a8e1fa300274cbd43cce58c562508b36a5feb44b7e0c4e5",
       "namedRecipe": "jdk.internal.m3.Sc0Spc",
       "targets": [
         {
@@ -46,9 +46,9 @@
         },
         {
           "afterBytes": 3300,
-          "afterSHA256": "1a713463413df2684791ef1a214db69a7e5b23da888e61983c6b4902cef9c639",
+          "afterSHA256": "3cc647126b451e35f6d5fe6a6b4fc41260da9b9f2c0757e96219e56e48a27562",
           "beforeBytes": 3300,
-          "beforeSHA256": "d67ddc1cc759f042871c680d9510b929da4fd6b0523b43e966139cbe8ddace3b",
+          "beforeSHA256": "b055ce8829908257c61ddc71c127c28620657f2bd3cbe71fb6755404c5f4480c",
           "operation": "REPLACE",
           "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv"
         },

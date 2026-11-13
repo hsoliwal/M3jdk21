@@ -6,6 +6,6 @@
     "wall_time_seconds": 1.707130322,
     "exit_code": 0,
     "original_token_count": 63,
-    "output": "{\"status\": \"FINAL_COMMIT_CUSTODY_VERIFIED_BEFORE_BRANCH\", \"commit\": \"0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8\", \"tree\": \"0361e4a07b77a01df170523033fef01c4052ddc5\", \"receipt_sha256\": \"e347ce74d2e2c9a3252260215f9a4cd3c3a2aa791219095675ae67df8f135f23\"}\n"
+    "output": "{\"status\": \"FINAL_COMMIT_CUSTODY_VERIFIED_BEFORE_BRANCH\", \"commit\": \"0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8\", \"tree\": \"0361e4a07b77a01df170523033fef01c4052ddc5\", \"receipt_sha256\": \"1e262194fd5d61d5ce340ef081132467d5bcfb6625aac51f4c8c2e0c4f054a16\"}\n"
   }
 }

@@ -3,7 +3,7 @@
   "historicalAvailability": {
     "bytes": 119267,
     "path": "../HISTORY-AVAILABILITY.json",
-    "sha256": "5447a51edf6ac97b03e9fd8b6f5c42b783a1ef3e9aeac2a15a0ed2b559e40bd2"
+    "sha256": "9563891da8c6be93938c65f8f493372e74cad2a03ed49cacc10affba6b4e1292"
   },
   "historyMeaning": "The prior workspace census recorded 224 of 591 historical selections unavailable there. This follow-up does not recreate missing historical execution receipts or claim their global absence.",
   "latestHeadIntegrationClaimed": false,

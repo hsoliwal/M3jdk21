@@ -21,10 +21,10 @@ EXPECTED_SOURCE = {
             "mergeCommit": "e243e183d72bf42d57b2f946e332c8dc49a75ae9",
             "manifestPath": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3jdk21-string-concat-typed-stringifier-invariant-20261009/manifest.tsv",
             "manifestGitBlob": "9cfa92fb8edc158620fcd0cb1bb40eab052167d3",
-            "manifestRow": {"path":"make/m3/runtime-integration/check-m3string-concat-reference-dag.py","beforeSha256":"80894129e8a66544e27c7c55e06c84da8daae3ea3625015bb71d4e1978ba3b24","afterSha256":"9fd82a96ad813f11c90e593c8cd3b93feae9d5658a7b7b68ca48e95f035b19fa","template":"00-check-m3string-concat-reference-dag.py.txt"},
+            "manifestRow": {"path":"make/m3/runtime-integration/check-m3string-concat-reference-dag.py","beforeSha256":"80894129e8a66544e27c7c55e06c84da8daae3ea3625015bb71d4e1978ba3b24","afterSha256":"656bb36e9dfdd3bd6c0c0a399d5559911bf5cc2d95604825c55b24ff50a34daa","template":"00-check-m3string-concat-reference-dag.py.txt"},
             "sourceResourcePath": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3jdk21-string-concat-typed-stringifier-invariant-20261009/00-check-m3string-concat-reference-dag.py.txt",
-            "sourceResourceGitBlob": "bddd68cc9b36439fda39fe2fd655b8819fae7e0e",
-            "sourceResourceSha256": "9fd82a96ad813f11c90e593c8cd3b93feae9d5658a7b7b68ca48e95f035b19fa",
+            "sourceResourceGitBlob": "722f3bd2f9e2627188d5233068e0b7e51c628292",
+            "sourceResourceSha256": "656bb36e9dfdd3bd6c0c0a399d5559911bf5cc2d95604825c55b24ff50a34daa",
         },
         {
             "pullRequest": 10970,
@@ -40,7 +40,7 @@ EXPECTED_SOURCE = {
     ],
 }
 EXPECTED_CHANGES = [
-    {"path":"make/m3/runtime-integration/check-m3string-concat-reference-dag.py","beforeGitBlob":"b09f011e9f760efc093e467e3b494a903a6527ad","beforeSha256":"80894129e8a66544e27c7c55e06c84da8daae3ea3625015bb71d4e1978ba3b24","afterGitBlob":"bddd68cc9b36439fda39fe2fd655b8819fae7e0e","afterSha256":"9fd82a96ad813f11c90e593c8cd3b93feae9d5658a7b7b68ca48e95f035b19fa"},
+    {"path":"make/m3/runtime-integration/check-m3string-concat-reference-dag.py","beforeGitBlob":"b09f011e9f760efc093e467e3b494a903a6527ad","beforeSha256":"80894129e8a66544e27c7c55e06c84da8daae3ea3625015bb71d4e1978ba3b24","afterGitBlob":"722f3bd2f9e2627188d5233068e0b7e51c628292","afterSha256":"656bb36e9dfdd3bd6c0c0a399d5559911bf5cc2d95604825c55b24ff50a34daa"},
     {"path":"test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java","beforeGitBlob":"1c37ce9ae5dc3c13c1d1f10dc35fe6c409033358","beforeSha256":"111137431d9a475bbc5f9219859f3badd4d138cf3d61e5d1642880abb8175347","afterGitBlob":"edf35d940739581b76b73d7b431989ec4ff0d966","afterSha256":"e4624f56a93d68cd04337e39ed2cd3896867149908f287d5839ddff9b965ae95"},
 ]
 
@@ -82,7 +82,7 @@ class M3ConcatDagSuccessorTest(unittest.TestCase):
         mapping = json.loads(MAPPING_PATH.read_text(encoding="utf-8"))
         entries = {entry["target"]: entry for entry in mapping["mappings"]}
         for transfer, target, pr, commit, source_blob in [
-            (EXPECTED_SOURCE["transfers"][0], "make/m3/runtime-integration/check-m3string-concat-reference-dag.py", 10963, "e243e183d72bf42d57b2f946e332c8dc49a75ae9", "bddd68cc9b36439fda39fe2fd655b8819fae7e0e"),
+            (EXPECTED_SOURCE["transfers"][0], "make/m3/runtime-integration/check-m3string-concat-reference-dag.py", 10963, "e243e183d72bf42d57b2f946e332c8dc49a75ae9", "722f3bd2f9e2627188d5233068e0b7e51c628292"),
             (EXPECTED_SOURCE["transfers"][1], "test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java", 10970, "48900593efc773183594ac02e9ff0cf1928db197", "edf35d940739581b76b73d7b431989ec4ff0d966"),
         ]:
             entry = entries[target]

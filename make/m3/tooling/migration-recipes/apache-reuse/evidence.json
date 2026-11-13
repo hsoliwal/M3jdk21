@@ -17,11 +17,11 @@
   "files": {
     "NOTICE": "da0aac00dff5e0effb49af303fb67d9acb2611533708bbfbd95c05ff54116dfa",
     "README.md": "fbf916ee02a45f1d6f418f533e190bd85b128e2b6432b1b40072eda2c669dcb4",
-    "SOURCE_PROVENANCE.tsv": "fef1ad3a715677b263525d7abb59d72ba4d8532fe78317629cd5618ccdb6c3c9",
+    "SOURCE_PROVENANCE.tsv": "827d2170a90e85f6166dea223af688a066aca3996a12a5ab32cdf97cebe93f9a",
     "pom.xml": "bc8f5786ccf5a155342f9665cce09c3015b61e073165d2919f5d4adf208920cd",
-    "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/apache-public-reuse-v1/manifest.tsv": "966fba57263e22880b0f41a4f269a23ebf4250fcaa019b6f6a6d8d4bfc53b0ce",
+    "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/apache-public-reuse-v1/manifest.tsv": "76c1292ac42c90cb5dd7c0948780badfb7d73947e62541b01d56e6e4bc404edb",
     "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/apache-public-reuse-v1/policy.properties.txt": "a82ec4f77c36d9bbd526927d567f15b75c03e44f30715cd8030bd996f7c3918b",
-    "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/apache-public-reuse-v1/reuse.md.txt": "f72dc9a3332aafe66a88576b5addf90d628b68046f833e773581c43d0c512756",
+    "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/apache-public-reuse-v1/reuse.md.txt": "dd4ab41bb9f4250e8d5dd65053304efc70591670e8e062058259458c6772e0bc",
     "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/apache-public-reuse-v1/scope.tsv.txt": "f0c4956693279ffea733c13e504ba3ce83f679aba7af2c714c9f49dfc17b7447",
     "src/test/java/com/synexia/handoff/ApacheReuseProof.java": "b148b4c2722a2fdf76bd6c9f7f27421c6d2f14cc66c579e1c20875842a98fd8e",
     "src/test/java/com/synexia/handoff/ApacheReuseRecipeTest.java": "e7c555521008f004388a4769fa2b6615747a85847198fcc812b7e7fda11f1c34"

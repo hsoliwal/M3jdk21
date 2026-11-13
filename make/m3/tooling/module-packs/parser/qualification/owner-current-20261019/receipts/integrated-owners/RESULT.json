@@ -1047,8 +1047,8 @@
       "source_kind": "JAVA_LST"
     },
     {
-      "after_sha256": "55fc6777a19521d160104799c609dc3c218619081f1510ffc9ddafa83cfbb950",
-      "before_sha256": "474db0521b39a236883b8c6bc8abb397200eca59b2b714cbd530bae0ca26c6b2",
+      "after_sha256": "918ea4d9cbd449dd66998badb25d399252c910504c58487313ddf2778f291ee7",
+      "before_sha256": "a917afb13859602959b51859ae16b425f0b47e58d742e8d84d85c733723e2130",
       "path": ".github/workflows/m3-parser-jmod-20261018.yml",
       "recipe": "com.synexia.m3.ParserOwnerRefinements20261019",
       "source_kind": "TEXT_EXACT"
@@ -1061,8 +1061,8 @@
       "source_kind": "TEXT_EXACT"
     },
     {
-      "after_sha256": "43842ca8104e48ae0bb18b2d0e819c8078ec8e6ed79d646610f6b2bea7c25f9f",
-      "before_sha256": "a9b61bf5d96072144f0e229a48011e573dd7125572edb6e6599ebf4a71003faa",
+      "after_sha256": "74ddc68791d49fc0eb99ee57be7bef21b986df69d2d48229682bb4365be486df",
+      "before_sha256": "ba714f38f4dda33aff6cf14595c1921e0da6a4454dcfa0b793684e0d99c689ef",
       "path": "make/m3/tooling/shared-frontend/algorithm-catalogue.tsv",
       "recipe": "com.synexia.m3.ParserOwnerRefinements20261019",
       "source_kind": "TEXT_EXACT"
@@ -1633,7 +1633,7 @@
   "schema": "M3_EMITTED_SOURCE_BUILT_RUNTIME_PROOF_V1",
   "script": {
     "mode": "0o644",
-    "sha256": "7af0db9f08707ad9a4b86f778ba8a79a8e8de4635731118cfacdd85ae485c5d0",
+    "sha256": "93c7b0e0274813042084185d481b21e525d4caecf54f49e0d0ddbb11d78e7925",
     "size": 13227,
     "type": "file"
   },

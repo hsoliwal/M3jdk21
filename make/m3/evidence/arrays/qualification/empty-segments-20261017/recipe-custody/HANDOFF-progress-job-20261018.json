@@ -64,11 +64,11 @@
       "evidence": {
         "SDK_INPUTS.tsv": {
           "path": "evidence/progress-job-20261018/m3jdk21-progress-job/SDK_INPUTS.tsv",
-          "sha256": "5b0d277cdb87e6b8927df46bfbd027e855c0edee873577eebefef60deebd0773"
+          "sha256": "b70031c8712dc8a9b6f5b2decec155a01a7f0daf661d09664488ee5f31fd8b49"
         },
         "SDK_RESULTS.tsv": {
           "path": "evidence/progress-job-20261018/m3jdk21-progress-job/SDK_RESULTS.tsv",
-          "sha256": "fe6ac0cc66c1927acd577d773fbfb164a896dfd44e99f8332571516ab9794820"
+          "sha256": "f1e09650280da2fd9c0f4fff2beb17f1c31a9cb102358627c711d8041d9aab11"
         },
         "SDK_TESTS.xml": {
           "path": "evidence/progress-job-20261018/m3jdk21-progress-job/SDK_TESTS.xml",
@@ -217,7 +217,7 @@
     },
     {
       "path": "authoring/progress-job-20261018/inputs-v2/candidate-input/m3/runtime-integration/progress-job-20261018/verify_progress_job.py",
-      "sha256": "7778df10ecc62f960a406576053d29c182a5688c34650a79cf6f40848c4c0184",
+      "sha256": "892de0b8ce0c18b4a5cb0dbad8e01472236c6d53fc4c266f23498236d517d245",
       "bytes": 12200,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/preparation-v2/candidate-input/m3/runtime-integration/progress-job-20261018/verify_progress_job.py"
@@ -241,7 +241,7 @@
     },
     {
       "path": "authoring/progress-job-20261018/inputs-v2/preparation-receipt.json",
-      "sha256": "0c7dcb45d5d60f218f44603ef53750acad8ad3aadca426653d84c12f5c57898d",
+      "sha256": "80a44e201b3083dd42c0d4878a87439b014f9a1d89c8eae3ecc61844c84a0ca4",
       "bytes": 5968,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/preparation-v2/preparation-receipt.json"
@@ -249,7 +249,7 @@
     },
     {
       "path": "authoring/progress-job-20261018/prepare_progress_job.py",
-      "sha256": "fb17ea027f71a8594f4edfaccee476e4666f4b09b2d40ddf0cdb88a79698d62c",
+      "sha256": "c0b9e0066189e3cad53f45e2869fa54a1a2da9299906b4252106e7e78037d00c",
       "bytes": 19658,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/authoring/prepare_progress_job.py"
@@ -329,7 +329,7 @@
     },
     {
       "path": "authoring/progress-job-20261018/verify_progress_job.py",
-      "sha256": "7778df10ecc62f960a406576053d29c182a5688c34650a79cf6f40848c4c0184",
+      "sha256": "892de0b8ce0c18b4a5cb0dbad8e01472236c6d53fc4c266f23498236d517d245",
       "bytes": 12200,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/authoring/verify_progress_job.py"
@@ -369,7 +369,7 @@
     },
     {
       "path": "datasets/m3jdk21-progress-job/MODES.tsv",
-      "sha256": "85beebafdf673a58b53caa372893b24d22109c204c22abb64586cfd14314365f",
+      "sha256": "3c69fdaab790c9cc3f0c7d0beaa9cb552b6da50172ac0a0ecf069c00af082462",
       "bytes": 755,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/MODES.tsv"
@@ -417,7 +417,7 @@
     },
     {
       "path": "datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/manifest.tsv",
-      "sha256": "068b1c68573d1246c24ee2ae181b5f2423850dd3be5fd5be944ad502c7b11dde",
+      "sha256": "3fc0d6ffc4397037a32bf98e6b1d025ff082a3ac19121216a49c96a086db4692",
       "bytes": 705,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/manifest.tsv"
@@ -465,7 +465,7 @@
     },
     {
       "path": "datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0008-verify_progress_job.py.txt",
-      "sha256": "7778df10ecc62f960a406576053d29c182a5688c34650a79cf6f40848c4c0184",
+      "sha256": "892de0b8ce0c18b4a5cb0dbad8e01472236c6d53fc4c266f23498236d517d245",
       "bytes": 12200,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0008-verify_progress_job.py.txt"
@@ -473,7 +473,7 @@
     },
     {
       "path": "datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/manifest.tsv",
-      "sha256": "ff9af99741425ca48a83a8d72a0eb6737a18fe6b0fefff68f345ca57f7d352cb",
+      "sha256": "c9da2cc98f6ddb32b47e39dbc28dd927bae22e78ccc99a34b34e7d8370c5fd68",
       "bytes": 1017,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/manifest.tsv"
@@ -921,7 +921,7 @@
     },
     {
       "path": "evidence/progress-job-20261018/m3jdk21-progress-job/SDK_INPUTS.tsv",
-      "sha256": "5b0d277cdb87e6b8927df46bfbd027e855c0edee873577eebefef60deebd0773",
+      "sha256": "b70031c8712dc8a9b6f5b2decec155a01a7f0daf661d09664488ee5f31fd8b49",
       "bytes": 4652,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-progress-job/candidate/SDK_INPUTS.tsv"
@@ -929,7 +929,7 @@
     },
     {
       "path": "evidence/progress-job-20261018/m3jdk21-progress-job/SDK_RESULTS.tsv",
-      "sha256": "fe6ac0cc66c1927acd577d773fbfb164a896dfd44e99f8332571516ab9794820",
+      "sha256": "f1e09650280da2fd9c0f4fff2beb17f1c31a9cb102358627c711d8041d9aab11",
       "bytes": 1485,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-progress-job/candidate/SDK_RESULTS.tsv"
@@ -953,7 +953,7 @@
     },
     {
       "path": "evidence/progress-job-20261018/prior-qualified-pass-v1.json",
-      "sha256": "f5a463d54c2a80d0a8f9b369587b7cb6c782393b65a17a72d0adf9cb96b22eef",
+      "sha256": "420c4a8e48713f3747ae8a16dfa6e22eafcc932924491ae53f8feb6b28860076",
       "bytes": 583429,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/handoff-v2/prior-qualified-pass-v1.json"
@@ -977,7 +977,7 @@
     },
     {
       "path": "evidence/progress-job-20261018/receiver-contract-v2/RECEIVER_RECEIPT.json",
-      "sha256": "b2111b226fe7d8182e332a14779dfddd858904a899ca50ca933a416a9d9b0505",
+      "sha256": "a96f13574b77551d7dd7b295e50282ecf05338c59a4ae18ca76f8f0b16b01234",
       "bytes": 1629,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/proof/recipe-v2/receiver/evidence/RECEIVER_RECEIPT.json"
@@ -1185,7 +1185,7 @@
     },
     {
       "path": "evidence/progress-job-20261018/receiving-v2/receipt.json",
-      "sha256": "3b42f16def0e275eca44006e2abca40e0db22d618e696d539ab59754e312f90a",
+      "sha256": "01956d9dea6bca8114d38fd36c19693ba251d45f473f6943e84fdb9978462972",
       "bytes": 4866,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/proof/receiving-v2/receipt.json"
@@ -1193,7 +1193,7 @@
     },
     {
       "path": "evidence/progress-job-20261018/sdk-results-v2/SDK_INPUTS.tsv",
-      "sha256": "5b0d277cdb87e6b8927df46bfbd027e855c0edee873577eebefef60deebd0773",
+      "sha256": "b70031c8712dc8a9b6f5b2decec155a01a7f0daf661d09664488ee5f31fd8b49",
       "bytes": 4652,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/proof/receiving-v2/sdk-results/SDK_INPUTS.tsv"
@@ -1201,7 +1201,7 @@
     },
     {
       "path": "evidence/progress-job-20261018/sdk-results-v2/SDK_RESULTS.tsv",
-      "sha256": "fe6ac0cc66c1927acd577d773fbfb164a896dfd44e99f8332571516ab9794820",
+      "sha256": "f1e09650280da2fd9c0f4fff2beb17f1c31a9cb102358627c711d8041d9aab11",
       "bytes": 1485,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/proof/receiving-v2/sdk-results/SDK_RESULTS.tsv"
@@ -1273,7 +1273,7 @@
     },
     {
       "path": "evidence/progress-job-20261018/sdk-results-v2/m3/runtime-integration/progress-job-20261018/verify_progress_job.py",
-      "sha256": "7778df10ecc62f960a406576053d29c182a5688c34650a79cf6f40848c4c0184",
+      "sha256": "892de0b8ce0c18b4a5cb0dbad8e01472236c6d53fc4c266f23498236d517d245",
       "bytes": 12200,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/proof/receiving-v2/sdk-results/m3/runtime-integration/progress-job-20261018/verify_progress_job.py"
@@ -1297,7 +1297,7 @@
     },
     {
       "path": "evidence/progress-job-20261018/sdk-results-v2/text.patch.txt",
-      "sha256": "02244d1313e0302c3a13175bb075ab74200d9321f708ca425592a691e869080a",
+      "sha256": "092d1b2efc00f7be8072e1345b0ab5a09e2fff4841b298a84e486268238b0462",
       "bytes": 41452,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/proof/receiving-v2/sdk-results/text.patch"

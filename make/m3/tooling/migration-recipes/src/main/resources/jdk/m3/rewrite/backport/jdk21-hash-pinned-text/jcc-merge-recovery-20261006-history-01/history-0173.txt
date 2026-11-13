@@ -6,7 +6,7 @@ The actual execution receipt is `verification-v3/receipt.json`, SHA256 `1f4ac982
 
 ## Actual invocation and stage observations
 
-The invocation capture binds runner SHA256 `c779f94023b3914bca1558a35d39ab11aaedd00a18cf5b74e2a30bf1205de6b6`, final input `df6713ad19ce80daad0383fbd5c3716412e2dca133e1db7e0150b88e141313b5`, and the prior resource-admission report `7ece8d5be7df1a1080e2b8c6c86663dad44afe874404efe3a772484ad391c0bb`. It records an ordinary `python -B` invocation, exit zero, empty invocation stderr, and all ten expected child exit outcomes. The input freeze precedes all child commands; the actual stage times are ordered within the invocation interval on 2026-10-05, 17:40:48–17:40:56 UTC.
+The invocation capture binds runner SHA256 `19fc7bc5d1804082acd88598c12562b28c10a41e43aa356c23f5604a253268c2`, final input `df6713ad19ce80daad0383fbd5c3716412e2dca133e1db7e0150b88e141313b5`, and the prior resource-admission report `d0f4351455a36198b31f53c32c02a8b4a743d1542b6ce85b9e9de469cf23d6c7`. It records an ordinary `python -B` invocation, exit zero, empty invocation stderr, and all ten expected child exit outcomes. The input freeze precedes all child commands; the actual stage times are ordered within the invocation interval on 2026-10-05, 17:40:48–17:40:56 UTC.
 
 The exact per-stage JSON records, stdout and stderr identities were checked against the aggregate receipt. Their commands and working directory match the admitted runner and receiving overlay. No owner or resource edit was needed to pass this epoch.
 
@@ -37,7 +37,7 @@ These results exercise the actual canonical text recipe, named entrypoint/serial
 
 ## Frozen inputs and materialized outputs
 
-`verification-v3/inputs.json`, SHA256 `3747257e4df289cbc09ce34309683cb18c9c66caedab191379d0370a07057902`, records **391 fixed receiving inputs plus 617 external inputs**, totaling **1,008 unique paths**. The reviewer independently re-read and rehashed every one, including byte count, SHA256, Git blob identity and permission mode; all still exactly match the pre-run freeze. No frozen file is missing.
+`verification-v3/inputs.json`, SHA256 `d7b1ecde621d4f51016fe64168bb2b8821bb3f2ed452e190e65c36dc9e5bc8ab`, records **391 fixed receiving inputs plus 617 external inputs**, totaling **1,008 unique paths**. The reviewer independently re-read and rehashed every one, including byte count, SHA256, Git blob identity and permission mode; all still exactly match the pre-run freeze. No frozen file is missing.
 
 This explicitly includes all 527 declared current be92 bodies, the ten receiving current-context receipt copies, the two exact malformed-UTF8 fixture bodies added by the corrected V3 freeze, all nineteen selected current source bodies and all fifty-five proof bodies. Declared current-context identities and modes also match their original authority. The prior source custody object in the run receipt equals the admitted input, including the two raw-body/SHA256-readback false flags and recorded failed reads.
 

@@ -63,7 +63,7 @@
     {
       "path": "make/m3/collections/README.md",
       "before_sha256": "e72ff3d256fa47d49d5478532974e837af1a7a53d399655283c79fbd482d9dd0",
-      "after_sha256": "47f7da05b5fc2b80b910b9655367c1a9f912113121bd9a80d13b211a7de5ae89",
+      "after_sha256": "133f1a4e8032d31b692da1f9ea440e40d8fda603a38970bed984c95f3dd615e7",
       "template": "m3__collections__README.md.txt",
       "kind": "text"
     }

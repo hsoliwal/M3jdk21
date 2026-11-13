@@ -5,8 +5,8 @@
     {
       "path": "INPUTS.json",
       "bytes": 7320,
-      "sha256": "67657d100042552052fc16829996f22dc01431b5445e1c9687a7951ef90b9b80",
-      "git_blob_sha1": "677de5d83fbb9d022db3ad797566e05be58047de"
+      "sha256": "af801fd3d5c448f3f8b7eadf8b1b677d58173feed953aa55f71ddec45c677cae",
+      "git_blob_sha1": "c34134dc00fec6732e1da19bc6df7824843f4da6"
     },
     {
       "path": "REVIEW.json",
@@ -23,8 +23,8 @@
     {
       "path": "STATIC_INPUT_CHECKS.json",
       "bytes": 6923,
-      "sha256": "6c514d7f4586457169168c1d30ec9497b947a525596b770c9651abfc2e55ba3a",
-      "git_blob_sha1": "2c3ef21ccda565282ed2e8a7001972ddcac5c95b"
+      "sha256": "ef18e8dc9baa1050d6482389d2437284779b2b5fc823ceef139c99f910c63719",
+      "git_blob_sha1": "18112e79afa1473286585b20e442e8a43ca32cc0"
     },
     {
       "path": "inputs/BINDING_INPUT_CONTRACT.md",
@@ -35,8 +35,8 @@
     {
       "path": "inputs/CONTEXT_REFERENCES.json",
       "bytes": 470167,
-      "sha256": "ab9828692a1ca02adfabf22ff679e47e1e62a9d755b97f4071c42d5225698bc5",
-      "git_blob_sha1": "244ccde33cb6ff34bdd33eeec78eb4f88cf70dff"
+      "sha256": "c15282b8166aacce7d6c6bf5db8367cc4bbf24171369a03a3cf000cc4809e208",
+      "git_blob_sha1": "7bff1daf817cc6a62d003c5ecd00af5762f036a6"
     },
     {
       "path": "inputs/DERIVATION_INPUTS.json",
@@ -83,8 +83,8 @@
     {
       "path": "inputs/before00-name-mapping.json.txt",
       "bytes": 236215,
-      "sha256": "61818898ef6c092ddad2c1ee4cfe7508199912ff0a1f2d5c2a51ad6695d040c8",
-      "git_blob_sha1": "3a1e902a8284773f0f182d6bd43bf4e27b4e63c0"
+      "sha256": "aeec3cfe84e57aadf7fa855a5f2174dd73749ccc8f6cd8f4409f0bb8a25e3d53",
+      "git_blob_sha1": "1bbe40b2c04da018894a4494da157c6865340490"
     },
     {
       "path": "inputs/before01-jcc-source-handoff.md.txt",
@@ -95,8 +95,8 @@
     {
       "path": "inputs/before02-source-destination-bindings.json.txt",
       "bytes": 92103,
-      "sha256": "8c76c2dd45e775d29f8f47d8daf65842e465c74ad3dec7aacd55df59f9d051a1",
-      "git_blob_sha1": "5ecf415c7af4176898328d58b9df2972e18277c4"
+      "sha256": "e8f345aacd9d93fb436d08f3bd868c2f5849e8edf989dd7fab54cc665dc49577",
+      "git_blob_sha1": "0b4ddaae7f2550a3f336dea845a37781584d951e"
     },
     {
       "path": "inputs/before03-root-coverage-obligations.tsv.txt",

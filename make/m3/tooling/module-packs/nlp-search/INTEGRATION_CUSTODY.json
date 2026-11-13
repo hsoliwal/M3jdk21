@@ -4,13 +4,13 @@
     "manifests": {
       "java": {
         "canonical_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/manifest.tsv",
-        "git_blob_sha1": "d6120acd2e64f5696ef689a1eb7c1fdb2e9ad94c",
-        "sha256": "af0f31208fac8e0d667e923ab2e0346bead16b5874a2b7faa1c70ff4bec11e1c"
+        "git_blob_sha1": "121c5214145cf87b39e715a4d5cb8c016e16358c",
+        "sha256": "3566e47838eceed41822ae00745633a75decbe51403bc3503e54e9e3208d3c76"
       },
       "text": {
         "canonical_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/manifest.tsv",
-        "git_blob_sha1": "b9ab08c5df78bfef8aaace9721afb6e915d987ae",
-        "sha256": "46361f7af9acb6b3073fa61b83e83fe343eb4be389b2769de236b70180f34b6c"
+        "git_blob_sha1": "2ebe9f7996ccec0625aa1792ee67df0b02b0f7ee",
+        "sha256": "a8d8f77674b6a6fe66ca130958eeb3a2bf2ff1f278af1aba5d763522705c49aa"
       }
     },
     "recipe_yaml": {
@@ -55,11 +55,11 @@
   },
   "canonical_tree": "0590780ae47aafeb4d4841c3f6638f51e4dfd7d0",
   "historical_sdk_ledger": {
-    "git_blob_sha1": "e1f463b9fa54f9c92d0bbeacc79e7902be00bd2c",
+    "git_blob_sha1": "9c7b294e35a14c057d4431d96deb5c6f49ecc9e3",
     "mutation": "NONE",
     "path": "make/m3/tooling/jmod-recipes/RECEIVED_SDK_JMOD_BLOBS.tsv",
     "rows": 52,
-    "sha256": "db9c42ea9b0ec9af0986009a8022064eb419ed7e57104fa229b97dd625970046",
+    "sha256": "09662cb722cb36a19d22f4e020eaed5771177b485756b921c04c6f339939da46",
     "source_commit": "3c7f331a65e31fdbe4c198d79c7bfcb4c226cda2"
   },
   "inventory_authority": "Caller-supplied API-confirmed commit/tree filemap; every consumed local blob is checked against both published digests.",
@@ -693,23 +693,23 @@
     },
     "make/m3/tooling/module-packs/nlp-search/recipe-custody/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/manifest.tsv": {
       "canonical_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/manifest.tsv",
-      "git_blob_sha1": "d6120acd2e64f5696ef689a1eb7c1fdb2e9ad94c",
-      "sha256": "af0f31208fac8e0d667e923ab2e0346bead16b5874a2b7faa1c70ff4bec11e1c"
+      "git_blob_sha1": "121c5214145cf87b39e715a4d5cb8c016e16358c",
+      "sha256": "3566e47838eceed41822ae00745633a75decbe51403bc3503e54e9e3208d3c76"
     },
     "make/m3/tooling/module-packs/nlp-search/recipe-custody/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0000-m3sdk-jmod-receiver.yml.txt": {
       "canonical_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0000-m3sdk-jmod-receiver.yml.txt",
-      "git_blob_sha1": "5622a80ce12c5b4d4493a9df24e6bf1409f4fedc",
-      "sha256": "271f8b1aded73623d6684c5e35e566f73b0b474ca59a403ba3314c8c0121bd2b"
+      "git_blob_sha1": "48cd9675084bb55149793d25eb7aef9c70d9e8fe",
+      "sha256": "45ff02169fcae543ddf940b71e1af893453b9f3049723cface900e2cf8c1a62b"
     },
     "make/m3/tooling/module-packs/nlp-search/recipe-custody/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0001-m3-file-nlp-search.json.txt": {
       "canonical_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0001-m3-file-nlp-search.json.txt",
-      "git_blob_sha1": "e31cbff39f816b4429cace2ebbbb416bf86e74ec",
-      "sha256": "ac74fd38d51dbd2e83804871a692125e415328a7538b82434bcd1b7a68fac4b4"
+      "git_blob_sha1": "bd209aa38dbb599ce1c7d92900ada3ec381ec97f",
+      "sha256": "0cea64ce2058ad011b0ee6b91a6e78db8041178831bf83c6d59b41b735f6a79d"
     },
     "make/m3/tooling/module-packs/nlp-search/recipe-custody/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0002-name-mapping.json.txt": {
       "canonical_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0002-name-mapping.json.txt",
-      "git_blob_sha1": "d5ee8891a0963ab88bd0ae8651fc84cf1dff09fb",
-      "sha256": "70a852a048f4cb73df3cc25427348d9ce05c94e864fd2aa27340037a3d4ea347"
+      "git_blob_sha1": "0033b54fea209a93b71371eaedf29d937f8f4a92",
+      "sha256": "b92211a635dac0b4b2c877d593a7d9cd07f38cadb7615a6d97dc55343468c8b1"
     },
     "make/m3/tooling/module-packs/nlp-search/recipe-custody/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0003-m3_file_jni.c.txt": {
       "canonical_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0003-m3_file_jni.c.txt",
@@ -763,8 +763,8 @@
     },
     "make/m3/tooling/module-packs/nlp-search/recipe-custody/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0013-INPUTS.json.txt": {
       "canonical_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0013-INPUTS.json.txt",
-      "git_blob_sha1": "122ffcb55246503cb81e89324c43cb9b869319e5",
-      "sha256": "e797966a8070882c740f2d4c303bd787040755dcb53227d6a1d030de055542b4"
+      "git_blob_sha1": "5df9ee206a9e92728e25d85b472b4cd4e32f587c",
+      "sha256": "29834584b11b83009bb57854adacd70a9ff41b921a48fe6c89317c73c12486de"
     },
     "make/m3/tooling/module-packs/nlp-search/recipe-custody/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0014-JSON_CLOSURE_PROVENANCE.json.txt": {
       "canonical_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0014-JSON_CLOSURE_PROVENANCE.json.txt",
@@ -798,18 +798,18 @@
     },
     "make/m3/tooling/module-packs/nlp-search/recipe-custody/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0020-README.md.txt": {
       "canonical_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0020-README.md.txt",
-      "git_blob_sha1": "5ea78cbed957e08fe49cefce1e70d7297787a8e1",
-      "sha256": "d49c5113f516e8a0805eb2e6e39fc8b734e121217bf9dec71e3af48e6e3b70d2"
+      "git_blob_sha1": "2d06c11986e5ce55239872a123edaa9293856972",
+      "sha256": "04adf0a0ad7e96be0853ec489cf773ba8a048a65cae9fdcfb9ed56535edb1f8d"
     },
     "make/m3/tooling/module-packs/nlp-search/recipe-custody/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0021-SOURCE_REF.json.txt": {
       "canonical_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0021-SOURCE_REF.json.txt",
-      "git_blob_sha1": "fcbbf23ac6e77d1e5f50bf598f106949d2edcfbd",
-      "sha256": "67b9ad4db730bf5c00e83fd19aacbf4fe4ae338a393e0320438c53a9144dedbe"
+      "git_blob_sha1": "8d2d64642ed37de65c6c73c7a44af8b2788ed34e",
+      "sha256": "8435b26ad523ec9d3f23c3cc0abaf8c552f7d25bb0916cc5ec94f19bf4bcc815"
     },
     "make/m3/tooling/module-packs/nlp-search/recipe-custody/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0022-build.py.txt": {
       "canonical_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0022-build.py.txt",
-      "git_blob_sha1": "cdd1bfc760516057edb973081b7877b3e68d24a7",
-      "sha256": "cfc9d3c44d58a85edc7e03f469dbe2133dce16d76abbbd2f5dae225176ee0754"
+      "git_blob_sha1": "7b3be9ced221680317ecd3c0931df8b1889908df",
+      "sha256": "19293d8446c669fed164d5e9cc0733d5b9b66a6836d1b666f892547aa8d07d43"
     },
     "make/m3/tooling/module-packs/nlp-search/recipe-custody/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0023-compiler_source_proof.py.txt": {
       "canonical_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0023-compiler_source_proof.py.txt",
@@ -823,28 +823,28 @@
     },
     "make/m3/tooling/module-packs/nlp-search/recipe-custody/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0000-m3sdk-jmod-receiver.yml.txt": {
       "canonical_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0000-m3sdk-jmod-receiver.yml.txt",
-      "git_blob_sha1": "3d609e7244da5d2c66f07c46772b0a0c6b8db4b9",
-      "sha256": "7b2b89e66d5273783c6f4a9e22504298e70f45f3b4da999258b4dc2785dcb2a4"
+      "git_blob_sha1": "226777ed4d7b11bf174322629bb833790b04d2a2",
+      "sha256": "357ecb9105ed66e160a9227e930fcc863b8075b940d501ce4dfac557005abfde"
     },
     "make/m3/tooling/module-packs/nlp-search/recipe-custody/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0002-name-mapping.json.txt": {
       "canonical_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0002-name-mapping.json.txt",
-      "git_blob_sha1": "986147e2df24ef25076d451c49782d8e7e354a11",
-      "sha256": "a28f218198b30d1292d51836c8912d1f69229ef9bef40a4726a2808bcdcb4d46"
+      "git_blob_sha1": "343f101c9e7925c17d9949a6328b9744cc351548",
+      "sha256": "fe21e482d061a08a149c0362c6043a66a2fcd6a91bf253c70eb49728f2ce45e3"
     },
     "make/m3/tooling/module-packs/nlp-search/recipe-custody/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0020-README.md.txt": {
       "canonical_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0020-README.md.txt",
-      "git_blob_sha1": "8e32d4e658e999d755101bf74045fe6193ec68d8",
-      "sha256": "0c27021d845e113c8777f9d1d1f73ec03d3498b4fd6148a64024556563de3e28"
+      "git_blob_sha1": "cd5aae101ffde5cd50724e6290a8795e9110684f",
+      "sha256": "c171e013ebcb5fb2b38bb747c672a0e35ff5b6b839ad5e1b185c7e7724d8996b"
     },
     "make/m3/tooling/module-packs/nlp-search/recipe-custody/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0021-SOURCE_REF.json.txt": {
       "canonical_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0021-SOURCE_REF.json.txt",
-      "git_blob_sha1": "946fb30d5426c9c93c6e012ce46e70fe79f5f1c9",
-      "sha256": "bcfb1b500eb6b775081c8e148cecb94d0ce42e1add2abcedfad7aaadd83391b4"
+      "git_blob_sha1": "bc1d97cd05529de9f6cfd180318fecc2b0933cf4",
+      "sha256": "16304df69446d76e1d293d0a2a43d7c39acc7c52230ad6eaf57193fe1076ec1f"
     },
     "make/m3/tooling/module-packs/nlp-search/recipe-custody/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0022-build.py.txt": {
       "canonical_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0022-build.py.txt",
-      "git_blob_sha1": "937beb4fad0bd62d9f7b18f6674580e6c04c5da7",
-      "sha256": "60ab1a8bf17a0cfb8183aee3a506d89d98a8033d3f6c12656b74b7c476abc8b6"
+      "git_blob_sha1": "65b40ef740c383f6cc50372ec5416fb21358b6f5",
+      "sha256": "4c9f2af34442199e9cf2d05d9f20dc899c58621c29f9e38d979e3e59dceaebd7"
     },
     "make/m3/tooling/module-packs/nlp-search/recipe-custody/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0024-OVERLAY_LOCK.json.txt": {
       "canonical_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0024-OVERLAY_LOCK.json.txt",
@@ -853,8 +853,8 @@
     },
     "make/m3/tooling/module-packs/nlp-search/recipe-custody/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/manifest.tsv": {
       "canonical_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/manifest.tsv",
-      "git_blob_sha1": "b9ab08c5df78bfef8aaace9721afb6e915d987ae",
-      "sha256": "46361f7af9acb6b3073fa61b83e83fe343eb4be389b2769de236b70180f34b6c"
+      "git_blob_sha1": "2ebe9f7996ccec0625aa1792ee67df0b02b0f7ee",
+      "sha256": "a8d8f77674b6a6fe66ca130958eeb3a2bf2ff1f278af1aba5d763522705c49aa"
     }
   },
   "packet_id": "m3-nlp-search-custody-20261018",
@@ -897,8 +897,8 @@
       "sha256": "33cba41d8178e086af902a9aec635832cab839ced9ad7a644a6969188076d17c"
     },
     "m3-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/control/INPUTS.json.txt": {
-      "git_blob_sha1": "122ffcb55246503cb81e89324c43cb9b869319e5",
-      "sha256": "e797966a8070882c740f2d4c303bd787040755dcb53227d6a1d030de055542b4"
+      "git_blob_sha1": "5df9ee206a9e92728e25d85b472b4cd4e32f587c",
+      "sha256": "29834584b11b83009bb57854adacd70a9ff41b921a48fe6c89317c73c12486de"
     },
     "m3-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/control/LICENSE.txt.txt": {
       "git_blob_sha1": "d645695673349e3947e8e5ae42332d0ac3164cd7",
@@ -921,36 +921,36 @@
       "sha256": "b6ec8e64969bc10157b6a868d1a8da5c12d61bb211878922fe56881c1daee032"
     },
     "m3-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/control/README.md.txt": {
-      "git_blob_sha1": "5ea78cbed957e08fe49cefce1e70d7297787a8e1",
-      "sha256": "d49c5113f516e8a0805eb2e6e39fc8b734e121217bf9dec71e3af48e6e3b70d2"
+      "git_blob_sha1": "2d06c11986e5ce55239872a123edaa9293856972",
+      "sha256": "04adf0a0ad7e96be0853ec489cf773ba8a048a65cae9fdcfb9ed56535edb1f8d"
     },
     "m3-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/control/RemoveRecordedModuleHashes.java.txt": {
       "git_blob_sha1": "d10abfba2ef7611a531399efb0a02364d88c7c4d",
       "sha256": "a9cc9cdc39201e53c56befbcb4548b2a437719f2ca3945d1db2ce29e0a5c3783"
     },
     "m3-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/control/SOURCE_REF.json.txt": {
-      "git_blob_sha1": "fcbbf23ac6e77d1e5f50bf598f106949d2edcfbd",
-      "sha256": "67b9ad4db730bf5c00e83fd19aacbf4fe4ae338a393e0320438c53a9144dedbe"
+      "git_blob_sha1": "8d2d64642ed37de65c6c73c7a44af8b2788ed34e",
+      "sha256": "8435b26ad523ec9d3f23c3cc0abaf8c552f7d25bb0916cc5ec94f19bf4bcc815"
     },
     "m3-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/control/build.py.txt": {
-      "git_blob_sha1": "cdd1bfc760516057edb973081b7877b3e68d24a7",
-      "sha256": "cfc9d3c44d58a85edc7e03f469dbe2133dce16d76abbbd2f5dae225176ee0754"
+      "git_blob_sha1": "7b3be9ced221680317ecd3c0931df8b1889908df",
+      "sha256": "19293d8446c669fed164d5e9cc0733d5b9b66a6836d1b666f892547aa8d07d43"
     },
     "m3-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/control/compiler_source_proof.py.txt": {
       "git_blob_sha1": "2bac037f316c0c16f2c05311731b2a5a3d90936d",
       "sha256": "a52331c73f625eb4f1c1cffd1ccbe13979826b045b3638096786dd7d07d19250"
     },
     "m3-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/control/m3-file-nlp-search.json.txt": {
-      "git_blob_sha1": "e31cbff39f816b4429cace2ebbbb416bf86e74ec",
-      "sha256": "ac74fd38d51dbd2e83804871a692125e415328a7538b82434bcd1b7a68fac4b4"
+      "git_blob_sha1": "bd209aa38dbb599ce1c7d92900ada3ec381ec97f",
+      "sha256": "0cea64ce2058ad011b0ee6b91a6e78db8041178831bf83c6d59b41b735f6a79d"
     },
     "m3-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/control/m3sdk-jmod-receiver.yml.txt": {
-      "git_blob_sha1": "5622a80ce12c5b4d4493a9df24e6bf1409f4fedc",
-      "sha256": "271f8b1aded73623d6684c5e35e566f73b0b474ca59a403ba3314c8c0121bd2b"
+      "git_blob_sha1": "48cd9675084bb55149793d25eb7aef9c70d9e8fe",
+      "sha256": "45ff02169fcae543ddf940b71e1af893453b9f3049723cface900e2cf8c1a62b"
     },
     "m3-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/control/name-mapping.json.txt": {
-      "git_blob_sha1": "d5ee8891a0963ab88bd0ae8651fc84cf1dff09fb",
-      "sha256": "70a852a048f4cb73df3cc25427348d9ce05c94e864fd2aa27340037a3d4ea347"
+      "git_blob_sha1": "0033b54fea209a93b71371eaedf29d937f8f4a92",
+      "sha256": "b92211a635dac0b4b2c877d593a7d9cd07f38cadb7615a6d97dc55343468c8b1"
     },
     "m3-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/control/test_verify_sdk_receiver.py.txt": {
       "git_blob_sha1": "9e996dba7f7ab308cbe6c02504a4060ced7fba75",
@@ -1985,20 +1985,20 @@
       "sha256": "29fa03c69e074f7d4a9a2c73b2a2f2915c4e4fdd1cc02c40c9a7a3dbca1340f2"
     },
     "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/manifest.tsv": {
-      "git_blob_sha1": "d6120acd2e64f5696ef689a1eb7c1fdb2e9ad94c",
-      "sha256": "af0f31208fac8e0d667e923ab2e0346bead16b5874a2b7faa1c70ff4bec11e1c"
+      "git_blob_sha1": "121c5214145cf87b39e715a4d5cb8c016e16358c",
+      "sha256": "3566e47838eceed41822ae00745633a75decbe51403bc3503e54e9e3208d3c76"
     },
     "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0000-m3sdk-jmod-receiver.yml.txt": {
-      "git_blob_sha1": "5622a80ce12c5b4d4493a9df24e6bf1409f4fedc",
-      "sha256": "271f8b1aded73623d6684c5e35e566f73b0b474ca59a403ba3314c8c0121bd2b"
+      "git_blob_sha1": "48cd9675084bb55149793d25eb7aef9c70d9e8fe",
+      "sha256": "45ff02169fcae543ddf940b71e1af893453b9f3049723cface900e2cf8c1a62b"
     },
     "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0001-m3-file-nlp-search.json.txt": {
-      "git_blob_sha1": "e31cbff39f816b4429cace2ebbbb416bf86e74ec",
-      "sha256": "ac74fd38d51dbd2e83804871a692125e415328a7538b82434bcd1b7a68fac4b4"
+      "git_blob_sha1": "bd209aa38dbb599ce1c7d92900ada3ec381ec97f",
+      "sha256": "0cea64ce2058ad011b0ee6b91a6e78db8041178831bf83c6d59b41b735f6a79d"
     },
     "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0002-name-mapping.json.txt": {
-      "git_blob_sha1": "d5ee8891a0963ab88bd0ae8651fc84cf1dff09fb",
-      "sha256": "70a852a048f4cb73df3cc25427348d9ce05c94e864fd2aa27340037a3d4ea347"
+      "git_blob_sha1": "0033b54fea209a93b71371eaedf29d937f8f4a92",
+      "sha256": "b92211a635dac0b4b2c877d593a7d9cd07f38cadb7615a6d97dc55343468c8b1"
     },
     "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0003-m3_file_jni.c.txt": {
       "git_blob_sha1": "9b540c7482e68be640474cd0496a04a49e40b70c",
@@ -2041,8 +2041,8 @@
       "sha256": "24b33550f4de2028900c63740ecf5e3bb582ea517bb640e58cb6cb124944d24a"
     },
     "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0013-INPUTS.json.txt": {
-      "git_blob_sha1": "122ffcb55246503cb81e89324c43cb9b869319e5",
-      "sha256": "e797966a8070882c740f2d4c303bd787040755dcb53227d6a1d030de055542b4"
+      "git_blob_sha1": "5df9ee206a9e92728e25d85b472b4cd4e32f587c",
+      "sha256": "29834584b11b83009bb57854adacd70a9ff41b921a48fe6c89317c73c12486de"
     },
     "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0014-JSON_CLOSURE_PROVENANCE.json.txt": {
       "git_blob_sha1": "075a99c8120f349fc90998b20b219546e144ba36",
@@ -2069,16 +2069,16 @@
       "sha256": "751265f4507ace1c4cbc52b482bc1741e40710ab5df719a4e647239dc37ba3e8"
     },
     "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0020-README.md.txt": {
-      "git_blob_sha1": "5ea78cbed957e08fe49cefce1e70d7297787a8e1",
-      "sha256": "d49c5113f516e8a0805eb2e6e39fc8b734e121217bf9dec71e3af48e6e3b70d2"
+      "git_blob_sha1": "2d06c11986e5ce55239872a123edaa9293856972",
+      "sha256": "04adf0a0ad7e96be0853ec489cf773ba8a048a65cae9fdcfb9ed56535edb1f8d"
     },
     "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0021-SOURCE_REF.json.txt": {
-      "git_blob_sha1": "fcbbf23ac6e77d1e5f50bf598f106949d2edcfbd",
-      "sha256": "67b9ad4db730bf5c00e83fd19aacbf4fe4ae338a393e0320438c53a9144dedbe"
+      "git_blob_sha1": "8d2d64642ed37de65c6c73c7a44af8b2788ed34e",
+      "sha256": "8435b26ad523ec9d3f23c3cc0abaf8c552f7d25bb0916cc5ec94f19bf4bcc815"
     },
     "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0022-build.py.txt": {
-      "git_blob_sha1": "cdd1bfc760516057edb973081b7877b3e68d24a7",
-      "sha256": "cfc9d3c44d58a85edc7e03f469dbe2133dce16d76abbbd2f5dae225176ee0754"
+      "git_blob_sha1": "7b3be9ced221680317ecd3c0931df8b1889908df",
+      "sha256": "19293d8446c669fed164d5e9cc0733d5b9b66a6836d1b666f892547aa8d07d43"
     },
     "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0023-compiler_source_proof.py.txt": {
       "git_blob_sha1": "2bac037f316c0c16f2c05311731b2a5a3d90936d",
@@ -2089,32 +2089,32 @@
       "sha256": "b6ec8e64969bc10157b6a868d1a8da5c12d61bb211878922fe56881c1daee032"
     },
     "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0000-m3sdk-jmod-receiver.yml.txt": {
-      "git_blob_sha1": "3d609e7244da5d2c66f07c46772b0a0c6b8db4b9",
-      "sha256": "7b2b89e66d5273783c6f4a9e22504298e70f45f3b4da999258b4dc2785dcb2a4"
+      "git_blob_sha1": "226777ed4d7b11bf174322629bb833790b04d2a2",
+      "sha256": "357ecb9105ed66e160a9227e930fcc863b8075b940d501ce4dfac557005abfde"
     },
     "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0002-name-mapping.json.txt": {
-      "git_blob_sha1": "986147e2df24ef25076d451c49782d8e7e354a11",
-      "sha256": "a28f218198b30d1292d51836c8912d1f69229ef9bef40a4726a2808bcdcb4d46"
+      "git_blob_sha1": "343f101c9e7925c17d9949a6328b9744cc351548",
+      "sha256": "fe21e482d061a08a149c0362c6043a66a2fcd6a91bf253c70eb49728f2ce45e3"
     },
     "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0020-README.md.txt": {
-      "git_blob_sha1": "8e32d4e658e999d755101bf74045fe6193ec68d8",
-      "sha256": "0c27021d845e113c8777f9d1d1f73ec03d3498b4fd6148a64024556563de3e28"
+      "git_blob_sha1": "cd5aae101ffde5cd50724e6290a8795e9110684f",
+      "sha256": "c171e013ebcb5fb2b38bb747c672a0e35ff5b6b839ad5e1b185c7e7724d8996b"
     },
     "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0021-SOURCE_REF.json.txt": {
-      "git_blob_sha1": "946fb30d5426c9c93c6e012ce46e70fe79f5f1c9",
-      "sha256": "bcfb1b500eb6b775081c8e148cecb94d0ce42e1add2abcedfad7aaadd83391b4"
+      "git_blob_sha1": "bc1d97cd05529de9f6cfd180318fecc2b0933cf4",
+      "sha256": "16304df69446d76e1d293d0a2a43d7c39acc7c52230ad6eaf57193fe1076ec1f"
     },
     "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0022-build.py.txt": {
-      "git_blob_sha1": "937beb4fad0bd62d9f7b18f6674580e6c04c5da7",
-      "sha256": "60ab1a8bf17a0cfb8183aee3a506d89d98a8033d3f6c12656b74b7c476abc8b6"
+      "git_blob_sha1": "65b40ef740c383f6cc50372ec5416fb21358b6f5",
+      "sha256": "4c9f2af34442199e9cf2d05d9f20dc899c58621c29f9e38d979e3e59dceaebd7"
     },
     "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0024-OVERLAY_LOCK.json.txt": {
       "git_blob_sha1": "3db790232c6805f437c1a98da23db43c6be54ab2",
       "sha256": "e4d3accbdc8d41c47495905da6329b1aadc082fd0a24d4e154c6d95a2a84965d"
     },
     "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/manifest.tsv": {
-      "git_blob_sha1": "b9ab08c5df78bfef8aaace9721afb6e915d987ae",
-      "sha256": "46361f7af9acb6b3073fa61b83e83fe343eb4be389b2769de236b70180f34b6c"
+      "git_blob_sha1": "2ebe9f7996ccec0625aa1792ee67df0b02b0f7ee",
+      "sha256": "a8d8f77674b6a6fe66ca130958eeb3a2bf2ff1f278af1aba5d763522705c49aa"
     }
   },
   "verifier_derivation": {

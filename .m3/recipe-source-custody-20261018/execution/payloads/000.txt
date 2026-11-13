@@ -70,8 +70,8 @@
   "execution_scope": "CANONICAL_MAVEN_KERNEL_CONTROL_AND_CUSTODY_BINDING",
   "packet": {
     "base_sha": "275b610f26c191cd70420172ac65b634a8a4df49",
-    "manifest_sha256": "9f0f812658032086f1e6aa0c3fcf42c1cbc0073a5418bd53ebc334b80e5519c9",
-    "manifest_git_blob": "93c3aaacb44773403750023e620a449be18cce12",
+    "manifest_sha256": "152e2c0d455f76e50ee238ca59e5cb536a1614c341ac877ca1d335d4b746690b",
+    "manifest_git_blob": "e3ee00addd6232d8b504519d9e6cb350d2c9ba95",
     "public_mirror": ".m3/recipe-source-custody-20261018/binding",
     "targets": [
       {
@@ -98,9 +98,9 @@
       },
       {
         "path": "doc/m3/m3-public-fork-recipe-intake-20261017.md",
-        "before_sha256": "8b0a102143a144b62604ae09daf4a70d939482b0c085d8a856da72eb706f1d3e",
+        "before_sha256": "ac00e3d13bb2fe91221061d1646396cdefb746639670e1536d5447b2f03e1271",
         "after_sha256": "4dc6f12a66d719fb6b7ca23d8b19d059a611718a5ba663488949bc97da3140bf",
-        "before_git_blob": "cc4c327fd0af87a2c9b35c379b81489802f33704",
+        "before_git_blob": "17b2d004d66b6668bb6eda6904b18f2240da67da",
         "after_git_blob": "1582474d3519fd14ef00fe16127b78dde328625f",
         "mode": "100644",
         "resource": "payloads/002.txt",
@@ -110,9 +110,9 @@
       {
         "path": ".m3/M3_RECIPE_SOURCE_CUSTODY_20261018.json",
         "before_sha256": "ABSENT",
-        "after_sha256": "af474dd9e5f12e0870de7a6a00a57048d2efc5b1e6fb8bab36e718f12df0e4be",
+        "after_sha256": "c8b4758f0ec88d912a77b5207b9a3289c4bd6a54ceded32cc9c2d3535f0ed6c2",
         "before_git_blob": null,
-        "after_git_blob": "4c95b1efc75db51a61bb5417444c7a0589408dfb",
+        "after_git_blob": "dadde54244a4ffdc3bbbef0b435040b452185293",
         "mode": "100644",
         "resource": "payloads/003.txt",
         "bytes": 8456,
@@ -140,11 +140,11 @@
       "finished_at_utc": "2026-10-18T08:01:17.601988+00:00",
       "exit_code": 0,
       "log": ".m3/recipe-source-custody-20261018/logs/binding/plan.log",
-      "log_sha256": "ad4c85712a3a7fecb6fa45140ac45c8a06d35e648240dd445df9109a5acca09d",
+      "log_sha256": "1b4d93b914dec9adbfbb61be8d5ea31d9bd8397b90e5fc6e7816a92d745d5ba0",
       "expected_changes": 4,
       "report": [
         "275b610f26c191cd70420172ac65b634a8a4df49",
-        "9f0f812658032086f1e6aa0c3fcf42c1cbc0073a5418bd53ebc334b80e5519c9",
+        "152e2c0d455f76e50ee238ca59e5cb536a1614c341ac877ca1d335d4b746690b",
         "4",
         "false"
       ]
@@ -168,11 +168,11 @@
       "finished_at_utc": "2026-10-18T08:01:22.124883+00:00",
       "exit_code": 0,
       "log": ".m3/recipe-source-custody-20261018/logs/binding/apply.log",
-      "log_sha256": "0f5c30fd5a08a296fa82d23e7bc95037ebdc039942ca566194e62ce36d755fa0",
+      "log_sha256": "df640fd10f6f53f5c12f107172680cb76e767f99be15e371c2c433923f05c70c",
       "expected_changes": 4,
       "report": [
         "275b610f26c191cd70420172ac65b634a8a4df49",
-        "9f0f812658032086f1e6aa0c3fcf42c1cbc0073a5418bd53ebc334b80e5519c9",
+        "152e2c0d455f76e50ee238ca59e5cb536a1614c341ac877ca1d335d4b746690b",
         "4",
         "true"
       ]
@@ -196,11 +196,11 @@
       "finished_at_utc": "2026-10-18T08:01:24.973537+00:00",
       "exit_code": 0,
       "log": ".m3/recipe-source-custody-20261018/logs/binding/check-1.log",
-      "log_sha256": "6d7cc7d57c5c65a5349a94ee08ac70463baf2b9524fcbb555801b36d15bb51bb",
+      "log_sha256": "0d45c5637738146209b66cee5f867f03d2d965b7a7bdbc83c60a1d7762393034",
       "expected_changes": 0,
       "report": [
         "275b610f26c191cd70420172ac65b634a8a4df49",
-        "9f0f812658032086f1e6aa0c3fcf42c1cbc0073a5418bd53ebc334b80e5519c9",
+        "152e2c0d455f76e50ee238ca59e5cb536a1614c341ac877ca1d335d4b746690b",
         "0",
         "false"
       ]
@@ -224,11 +224,11 @@
       "finished_at_utc": "2026-10-18T08:01:29.925891+00:00",
       "exit_code": 0,
       "log": ".m3/recipe-source-custody-20261018/logs/binding/check-2.log",
-      "log_sha256": "1a29eddd042f587db8ef0c5a2c15958919ff28279aada1b2396327585edb9b84",
+      "log_sha256": "08c1105fc69b32ab30afce20b66d8675232e3fbc89d0d9a95527ef5590b66dce",
       "expected_changes": 0,
       "report": [
         "275b610f26c191cd70420172ac65b634a8a4df49",
-        "9f0f812658032086f1e6aa0c3fcf42c1cbc0073a5418bd53ebc334b80e5519c9",
+        "152e2c0d455f76e50ee238ca59e5cb536a1614c341ac877ca1d335d4b746690b",
         "0",
         "false"
       ]

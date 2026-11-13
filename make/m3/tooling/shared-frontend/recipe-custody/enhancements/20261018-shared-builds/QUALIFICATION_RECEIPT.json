@@ -93,7 +93,7 @@
     {
       "path": "evidence/final-bindings/openrewrite-adapter.json",
       "original": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/enhancements/20261018-plugin-selection/evidence/REWRITE_SUITE.json",
-      "sha256": "c627e0a800753ae3a18876e96071477fc4a01585d17eded5adeea55735086a4b",
+      "sha256": "57f5a494e4d014206633fabef49a31f7e95ce754609ebe7fc6463f3f5914aa93",
       "bytes": 995
     },
     {
@@ -105,7 +105,7 @@
     {
       "path": "evidence/final-bindings/gradle-qualification.json",
       "original": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/QUALIFICATION_RECEIPT.json",
-      "sha256": "3660a856ddd12cb2f2efccd17e06ec68991771adc08258ebfe46ff42fe357367",
+      "sha256": "43a709b0c926be439a4606f3aacf7af2302d2f189681296ab8cf1333102a1b84",
       "bytes": 13659
     },
     {

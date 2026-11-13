@@ -101,7 +101,7 @@
     },
     {
       "actual_equals_complete_after_bytes": true,
-      "after_sha256": "61818898ef6c092ddad2c1ee4cfe7508199912ff0a1f2d5c2a51ad6695d040c8",
+      "after_sha256": "aeec3cfe84e57aadf7fa855a5f2174dd73749ccc8f6cd8f4409f0bb8a25e3d53",
       "before_sha256": "536af76dd7b7b7217707662c2f1437af4adaa53af898627b0884e0b4f4603ace",
       "original_mode_preserved": true,
       "path": "doc/m3/name-mapping.json"
@@ -115,7 +115,7 @@
     },
     {
       "actual_equals_complete_after_bytes": true,
-      "after_sha256": "8c76c2dd45e775d29f8f47d8daf65842e465c74ad3dec7aacd55df59f9d051a1",
+      "after_sha256": "e8f345aacd9d93fb436d08f3bd868c2f5849e8edf989dd7fab54cc665dc49577",
       "before_sha256": "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126",
       "original_mode_preserved": true,
       "path": "make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json"
@@ -220,7 +220,7 @@
       "output_guard_adjustment_preserves_prior_failed_artifacts": true,
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/reference-audit/REFERENCE_AUDIT.json",
       "result": "PASS",
-      "sha256": "f7dcc4fb3843ce83520aacaf8fd36f4347d64000233d92921e81f67154bdfa87",
+      "sha256": "ca8d5f9b56713390710bad0cbe851f70b5df9a16feca79acf50ad8898bba37d4",
       "source_proof_reference_occurrences": 46,
       "source_reference_occurrences": 17,
       "uses_existing_remote_readbacks_not_new_remote_requests": true

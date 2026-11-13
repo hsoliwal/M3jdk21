@@ -32,15 +32,15 @@
     {
       "path": "derive_source_handoff_v3.py",
       "bytes": 12245,
-      "sha256": "8b71aaefeee38c8c8bba0d8c4e169df6b0aeb73ad9b4cad35dae7181c1d0246b",
-      "git_blob_sha1": "de2595ee839a468de5721559c9c1df1b910301b1",
+      "sha256": "45f5a7d68f45a5f3a6c36a1b3a730828392be921f526eaeb5d196b0d951c9b90",
+      "git_blob_sha1": "807ed88f740ad271548191ad5450f34b0da936f0",
       "mode": "100644"
     },
     {
       "path": "author_e04_v3.py",
       "bytes": 18901,
-      "sha256": "b63123a1d1369bc6289d7901f950a6d9ebe5ccd5b82ac146814c7af3305ddb1a",
-      "git_blob_sha1": "471660134d949a27f6c5dc672222b1b05fbd06b3",
+      "sha256": "1d6796afba96441855b9400e362582e0e95ae7b332b995f4b7061a20cb152e28",
+      "git_blob_sha1": "29996516e4927d924d224e35396b528e3bdab8ad",
       "mode": "100644"
     },
     {
@@ -53,8 +53,8 @@
     {
       "path": "publication_custody_v3.py",
       "bytes": 9752,
-      "sha256": "340e3e1670e457d99ab9e0ae954eed85efacdea4e4e34f2d4b2165421b8c9248",
-      "git_blob_sha1": "ab6182b9f208b27d1e9c54e6d6a51fe7a465c344",
+      "sha256": "a7365ce869bb73d3545dca0ae7804dd1e39d88ff2c8bb8994b68538e74742567",
+      "git_blob_sha1": "2d49e8645ca0531a24e3bae2f07cd31e1dde340d",
       "mode": "100644"
     },
     {
@@ -179,22 +179,22 @@
     {
       "path": "custody-v3-proposal/current-evidence/raw-custody-v3/CUSTODY_INPUT.json",
       "bytes": 14641,
-      "sha256": "384ce843f2e4545ad1c40d7ee58abbc471b5a6d1cbed89bea82dcff0479ce6a5",
-      "git_blob_sha1": "24e1d059396ed8f46f0a146f93cca483261a6d1e",
+      "sha256": "86e5e92e9f2dbb209085133b54daf9db3ad72988fe82968fb9f819aa015a3750",
+      "git_blob_sha1": "72e02b044789559c6bb34463d7f5d01edb83897a",
       "mode": "100644"
     },
     {
       "path": "custody-v3-proposal/current-evidence/raw-custody-v3/PROBE_CUSTODY_RESULT.json",
       "bytes": 1542,
-      "sha256": "3be2658241c3ebb336ae712268cbbd54c3d65969467d729f8a41c88e75bb98a8",
-      "git_blob_sha1": "1608150423fee65581d82475283a6f43bbaae311",
+      "sha256": "01b33d0f9b452a5ebfac70e3310a977114703a25250ce966f7f40b05cf24e594",
+      "git_blob_sha1": "74a73d67e9cf3ff46bc58355d70244ea8776c714",
       "mode": "100644"
     },
     {
       "path": "custody-v3-proposal/current-evidence/raw-custody-v3/PROBE_EXECUTION.json",
       "bytes": 670,
-      "sha256": "bfe83dd12307c0cddaba605d01c4d97c306201a44b16db6bd9c6cf6a7523979d",
-      "git_blob_sha1": "cc84771f49e8ab56b8862bacad1c33014d45d51b",
+      "sha256": "ce851e4600037c247db5c5cd3e0a9415bc12369ca28d4bf7a5c4f2a0c9d64fa4",
+      "git_blob_sha1": "bdd6c55434b476e1ff25812d93433440856ddd96",
       "mode": "100644"
     },
     {

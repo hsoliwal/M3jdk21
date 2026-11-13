@@ -83,37 +83,37 @@
     "PORTABLE-MANIFEST.json": {
       "bytes": 19235,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/PORTABLE-MANIFEST.json",
-      "sha256": "00f8323d58435876b64cbef812e2c45be761b282d49cd411e42c588fe3ec6271"
+      "sha256": "58490c2baf17f9140f9c2835f80bf10d81f90392f43fc67f93d285b4e61cf9a2"
     },
     "PROJECT-READY.json": {
       "bytes": 14331,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/PROJECT-READY.json",
-      "sha256": "4e99f141b6069e8bbdcac7ca4d746bbf07bc46e089d75e63aea17687ac15c1ff"
+      "sha256": "69eb39b6f9fef53f43b9a0155a671b0684378b821145fd0db578e316c12b86a8"
     },
     "READBACK.json": {
       "bytes": 384272,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/READBACK.json",
-      "sha256": "0478407e5a003ca49cf1734d9c1a302924a59d4925f59d140d947163a41e13b0"
+      "sha256": "047020517e034ec9509fa80646cef72b6e15a7bfd5798340e559d8c3d9482c52"
     },
     "ROOT-READBACK-v1.json": {
       "bytes": 2038,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/ROOT-READBACK-v1.json",
-      "sha256": "a1566c9df56bbe94c63471106cc3a17910689dbe325e37aa796d7425a6c21ccc"
+      "sha256": "46cc4e1bb541d1c401a9415fd1277fadd2492a7998e4282a8744be0c73016e39"
     },
     "SOURCE-CLOSURE.json": {
       "bytes": 2214350,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/SOURCE-CLOSURE.json",
-      "sha256": "6437600b8a1c34b55be3cd9dc1853fead56c5e42951b1962568fb7507056b82c"
+      "sha256": "c4ad7344731b1139b7315342ea0b475f1b9a655048150d6662d0b6c2272a21c5"
     },
     "TASK-MAPPING.json": {
       "bytes": 18649,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/TASK-MAPPING.json",
-      "sha256": "207adf3729e17267357cc086da0d649d23bab39ea7e3c41ddc87240f37dc289f"
+      "sha256": "41c1a12c306f664e3a3774cc9d11ef5bddccf30fc105536fe07c9fa2f9ef5284"
     },
     "bundle/BUNDLE.json": {
       "bytes": 123241,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/bundle/BUNDLE.json",
-      "sha256": "a13fea2b9340daf792af3960b7d98666064f28525e146a480381cf46e1fa8956"
+      "sha256": "4f9672b4f1c1618020cfc954a1be5a8e39303e5c96cb296b06142e6ed212acbe"
     },
     "package-plan.json": {
       "bytes": 117504,
@@ -123,17 +123,17 @@
     "root-execution-v1/RESULT.json": {
       "bytes": 1797,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/root-execution-v1/RESULT.json",
-      "sha256": "5bb129c19cc5d4acb0b6426880e3118952e0daf7f057fff51081570eb89272db"
+      "sha256": "978b816401efd2a13a05a498cb100f945eef8e856b0485d1118d0924e4b5dcce"
     },
     "terminal-selection-v1/COMMANDS.json": {
       "bytes": 9708,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/terminal-selection-v1/COMMANDS.json",
-      "sha256": "3f5258afc5a97b55128a70df38704472be9b283dd8998ad93771066c3cfa6ff1"
+      "sha256": "e67af9cbc0688d272e013cb710bdc1f80538c6f99a11affe292d57bf52413720"
     },
     "terminal-selection-v1/SELECTION-READBACK.json": {
       "bytes": 7504,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/terminal-selection-v1/SELECTION-READBACK.json",
-      "sha256": "7589a0107031bc02f4542714d1f03071ecbc3256d50a0040347a287c1385824e"
+      "sha256": "d52baec0e6dd208b6066c1bb18b0f11328bd76b8bccea294ae835380ef2a862b"
     }
   },
   "observedReceivingStatus": "PRIMARY_ONLY_STOP",
@@ -142,7 +142,7 @@
   "receivingSelection": {
     "bytes": 74585,
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string-preparation/receiving-selection-v1/RECEIVING-SELECTION.json",
-    "sha256": "ee018354430dd4a256f88b09ad93adbcc91139adc6c2d6c83a050acd24030a2a"
+    "sha256": "92e0aaea9b6436ef0de9bcb1508bb091276f0e03c02ef940081f239ae9a778e3"
   },
   "reusedMappingSchemaDonor": {
     "bytes": 19084,

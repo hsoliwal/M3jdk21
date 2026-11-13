@@ -2214,8 +2214,8 @@
         "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/M3_CURRENT_MASTER_PREIMAGES.json",
         "actual": {
           "bytes": 1137,
-          "sha256": "6e3d2c9760ee93a10b0da660e84a77d002ea2312954b42d3459803c867b57475",
-          "git_blob_sha1": "ea4fb9e885a4e393b48faa479af8b1c1663e8edd"
+          "sha256": "41dbe3e5c8dff9296fe3667a6eb2aad283a0ed3ea58cbc2bb49c113db6c6640c",
+          "git_blob_sha1": "b0746848d8271097150ec90c1de588231ac9db79"
         }
       }
     },
@@ -2306,13 +2306,13 @@
     },
     "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after00-name-mapping.json.txt": {
       "bytes": 236215,
-      "sha256": "61818898ef6c092ddad2c1ee4cfe7508199912ff0a1f2d5c2a51ad6695d040c8",
-      "git_blob_sha1": "3a1e902a8284773f0f182d6bd43bf4e27b4e63c0"
+      "sha256": "aeec3cfe84e57aadf7fa855a5f2174dd73749ccc8f6cd8f4409f0bb8a25e3d53",
+      "git_blob_sha1": "1bbe40b2c04da018894a4494da157c6865340490"
     },
     "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after02-source-destination-bindings.json.txt": {
       "bytes": 92103,
-      "sha256": "8c76c2dd45e775d29f8f47d8daf65842e465c74ad3dec7aacd55df59f9d051a1",
-      "git_blob_sha1": "5ecf415c7af4176898328d58b9df2972e18277c4"
+      "sha256": "e8f345aacd9d93fb436d08f3bd868c2f5849e8edf989dd7fab54cc665dc49577",
+      "git_blob_sha1": "0b4ddaae7f2550a3f336dea845a37781584d951e"
     },
     "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/SOURCE_IMPLEMENTATION_PUBLICATION_VERIFIED.json": {
       "bytes": 370323,
@@ -2761,8 +2761,8 @@
     },
     "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/M3_CURRENT_MASTER_PREIMAGES.json": {
       "bytes": 1137,
-      "sha256": "6e3d2c9760ee93a10b0da660e84a77d002ea2312954b42d3459803c867b57475",
-      "git_blob_sha1": "ea4fb9e885a4e393b48faa479af8b1c1663e8edd"
+      "sha256": "41dbe3e5c8dff9296fe3667a6eb2aad283a0ed3ea58cbc2bb49c113db6c6640c",
+      "git_blob_sha1": "b0746848d8271097150ec90c1de588231ac9db79"
     }
   },
   "limitations": [

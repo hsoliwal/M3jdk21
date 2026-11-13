@@ -31,12 +31,12 @@
   },
   "files": {
     "doc/m3/name-mapping.json": {
-      "sha256": "15629167d5f6d5f6999225a4ebd9b16b56943477c27701259048ac670d232fc4",
-      "git_blob": "d3d454d9a7891585d665f58b404989820ea751a4",
+      "sha256": "99f18a65a6fa4d8c01b423b78f742100db48435708a504951e15e3a668b339b7",
+      "git_blob": "5b26028a27115cd57b39a860106e1ddd96dc4f2b",
       "canonical_source_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-tools-recovery-20261014/4.txt",
-      "canonical_source_sha256": "15629167d5f6d5f6999225a4ebd9b16b56943477c27701259048ac670d232fc4",
+      "canonical_source_sha256": "99f18a65a6fa4d8c01b423b78f742100db48435708a504951e15e3a668b339b7",
       "license": "Apache-2.0",
-      "canonical_source_git_blob": "d3d454d9a7891585d665f58b404989820ea751a4",
+      "canonical_source_git_blob": "5b26028a27115cd57b39a860106e1ddd96dc4f2b",
       "source_revision": "ebff714f37756273594086226098137d0a37b30a",
       "recipe": "M3HashPinnedTextSnapshotRecipe / m3-tools-recovery-20261014"
     },
@@ -401,12 +401,12 @@
       "recipe": "M3HashPinnedJavaSnapshotRecipe admission + org.openrewrite.java.ChangePackage"
     },
     ".github/workflows/m3sdk-jmod-receiver.yml": {
-      "sha256": "7b2b89e66d5273783c6f4a9e22504298e70f45f3b4da999258b4dc2785dcb2a4",
-      "git_blob": "3d609e7244da5d2c66f07c46772b0a0c6b8db4b9",
+      "sha256": "357ecb9105ed66e160a9227e930fcc863b8075b940d501ce4dfac557005abfde",
+      "git_blob": "226777ed4d7b11bf174322629bb833790b04d2a2",
       "canonical_source_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-tools-recovery-20261014/3.txt",
-      "canonical_source_sha256": "7b2b89e66d5273783c6f4a9e22504298e70f45f3b4da999258b4dc2785dcb2a4",
+      "canonical_source_sha256": "357ecb9105ed66e160a9227e930fcc863b8075b940d501ce4dfac557005abfde",
       "license": "Apache-2.0",
-      "canonical_source_git_blob": "3d609e7244da5d2c66f07c46772b0a0c6b8db4b9",
+      "canonical_source_git_blob": "226777ed4d7b11bf174322629bb833790b04d2a2",
       "source_revision": "ebff714f37756273594086226098137d0a37b30a",
       "recipe": "M3HashPinnedTextSnapshotRecipe / m3-tools-recovery-20261014"
     }

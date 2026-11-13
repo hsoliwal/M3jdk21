@@ -109,9 +109,9 @@
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/NAMING_DISPOSITION.md",
       "expected_status": "A",
       "content_binding": "EXACT_REVIEWED_CONTENT",
-      "observed_sha256": "61ec0c907b0a46a93e37d19fb747afb08bd1f089eb66fa4ebd98852538a2778b",
+      "observed_sha256": "76a51fd2ef4189451b29a17bef993cbbfe0c06bccffa90b98c853370f07869d5",
       "observed_bytes": 999,
-      "expected_sha256": "61ec0c907b0a46a93e37d19fb747afb08bd1f089eb66fa4ebd98852538a2778b",
+      "expected_sha256": "76a51fd2ef4189451b29a17bef993cbbfe0c06bccffa90b98c853370f07869d5",
       "category": "NEW_FIRST_PARTY_COMMENTABLE",
       "rationale": "New task-authored Synexia recipe, SDK-test, build, prose or provenance metadata; no claim that the current base contains this new path.",
       "target_path": null,
@@ -120,12 +120,12 @@
         "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/NAMING_DISPOSITION.md",
         "classification": "FIRST_PARTY",
         "source_url": "https://github.com/hsoliwal/com.synexia/blob/aix/integrated-collections-refinement-20261021/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/NAMING_DISPOSITION.md",
-        "source_revision": "sha256:61ec0c907b0a46a93e37d19fb747afb08bd1f089eb66fa4ebd98852538a2778b",
+        "source_revision": "sha256:76a51fd2ef4189451b29a17bef993cbbfe0c06bccffa90b98c853370f07869d5",
         "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/NAMING_DISPOSITION.md",
         "license_id": "Apache-2.0",
         "notice_path": "LICENSE",
         "disposition": "NEW_FIRST_PARTY_RECIPE_OR_DOCUMENT",
-        "evidence": "sha256=61ec0c907b0a46a93e37d19fb747afb08bd1f089eb66fa4ebd98852538a2778b; resourceRoot=synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/arrayification-20261018/integrated-wrappers-20261021/; New task-authored Synexia recipe, SDK-test, build, prose or provenance metadata; no claim that the current base contains this new path."
+        "evidence": "sha256=76a51fd2ef4189451b29a17bef993cbbfe0c06bccffa90b98c853370f07869d5; resourceRoot=synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/arrayification-20261018/integrated-wrappers-20261021/; New task-authored Synexia recipe, SDK-test, build, prose or provenance metadata; no claim that the current base contains this new path."
       }
     },
     {
@@ -480,21 +480,21 @@
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/MEASUREMENT_PARTS.json",
       "expected_status": "A",
       "content_binding": "EXACT_REVIEWED_CONTENT",
-      "observed_sha256": "9a17facfe27ed3cc1a5a51253826693d41b8469e8367098ddf790da0d7818f08",
+      "observed_sha256": "b982386d2239d492f53aef26ce85da246cef5ade2d264f544edcf70621508803",
       "observed_bytes": 2094,
-      "expected_sha256": "9a17facfe27ed3cc1a5a51253826693d41b8469e8367098ddf790da0d7818f08",
+      "expected_sha256": "b982386d2239d492f53aef26ce85da246cef5ade2d264f544edcf70621508803",
       "category": "EXPLICIT_FINAL_V3_FIRST_PARTY_NO_HEADER",
       "rationale": "Explicit final source/evidence path with exact content identity and retained source/notice custody.",
       "row": {
         "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/MEASUREMENT_PARTS.json",
         "classification": "FIRST_PARTY_NO_HEADER",
         "source_url": "https://github.com/hsoliwal/com.synexia/blob/aix/integrated-collections-refinement-20261021/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/MEASUREMENT_PARTS.json",
-        "source_revision": "sha256:9a17facfe27ed3cc1a5a51253826693d41b8469e8367098ddf790da0d7818f08",
+        "source_revision": "sha256:b982386d2239d492f53aef26ce85da246cef5ade2d264f544edcf70621508803",
         "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/MEASUREMENT_PARTS.json",
         "license_id": "Apache-2.0",
         "notice_path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/LICENSE_PROVENANCE.md",
         "disposition": "FIRST_PARTY_METADATA",
-        "evidence": "sha256=9a17facfe27ed3cc1a5a51253826693d41b8469e8367098ddf790da0d7818f08; exact final v3 publication content; original task path=synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/MEASUREMENT_PARTS.json; final manifest=ed0798ddef0c7d052cafb776a42098086d69d67466c47b97f8bb6c46fe46dae2"
+        "evidence": "sha256=b982386d2239d492f53aef26ce85da246cef5ade2d264f544edcf70621508803; exact final v3 publication content; original task path=synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/MEASUREMENT_PARTS.json; final manifest=ed0798ddef0c7d052cafb776a42098086d69d67466c47b97f8bb6c46fe46dae2"
       }
     },
     {
@@ -543,63 +543,63 @@
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/measurement-evidence.part-001.jsonl",
       "expected_status": "A",
       "content_binding": "EXACT_REVIEWED_CONTENT",
-      "observed_sha256": "d45d5f531835299da8221339e780116bf937538ab0c067bf59e0489080aec8ed",
+      "observed_sha256": "741a5fdc53354e9efb67a78095e54c704da9243433be6792da4411f953a3ec12",
       "observed_bytes": 5614883,
-      "expected_sha256": "d45d5f531835299da8221339e780116bf937538ab0c067bf59e0489080aec8ed",
+      "expected_sha256": "741a5fdc53354e9efb67a78095e54c704da9243433be6792da4411f953a3ec12",
       "category": "EXPLICIT_FINAL_V3_FIRST_PARTY_NO_HEADER",
       "rationale": "Explicit final source/evidence path with exact content identity and retained source/notice custody.",
       "row": {
         "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/measurement-evidence.part-001.jsonl",
         "classification": "FIRST_PARTY_NO_HEADER",
         "source_url": "https://github.com/hsoliwal/com.synexia/blob/aix/integrated-collections-refinement-20261021/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/measurement-evidence.part-001.jsonl",
-        "source_revision": "sha256:d45d5f531835299da8221339e780116bf937538ab0c067bf59e0489080aec8ed",
+        "source_revision": "sha256:741a5fdc53354e9efb67a78095e54c704da9243433be6792da4411f953a3ec12",
         "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/measurement-evidence.part-001.jsonl",
         "license_id": "Apache-2.0",
         "notice_path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/LICENSE_PROVENANCE.md",
         "disposition": "FIRST_PARTY_METADATA",
-        "evidence": "sha256=d45d5f531835299da8221339e780116bf937538ab0c067bf59e0489080aec8ed; exact final v3 publication content; original task path=synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/measurement-evidence.part-001.jsonl; final manifest=ed0798ddef0c7d052cafb776a42098086d69d67466c47b97f8bb6c46fe46dae2"
+        "evidence": "sha256=741a5fdc53354e9efb67a78095e54c704da9243433be6792da4411f953a3ec12; exact final v3 publication content; original task path=synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/measurement-evidence.part-001.jsonl; final manifest=ed0798ddef0c7d052cafb776a42098086d69d67466c47b97f8bb6c46fe46dae2"
       }
     },
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/measurement-evidence.part-002.jsonl",
       "expected_status": "A",
       "content_binding": "EXACT_REVIEWED_CONTENT",
-      "observed_sha256": "dc0ca93fab3f999f573e6143ef203a39351b11ab31dd8cde99bdbaa2c7e35021",
+      "observed_sha256": "a349a4cd50949c4cce0e2a928f2f2badd1c542cb9c1c517656dd18883544f8dd",
       "observed_bytes": 6135617,
-      "expected_sha256": "dc0ca93fab3f999f573e6143ef203a39351b11ab31dd8cde99bdbaa2c7e35021",
+      "expected_sha256": "a349a4cd50949c4cce0e2a928f2f2badd1c542cb9c1c517656dd18883544f8dd",
       "category": "EXPLICIT_FINAL_V3_FIRST_PARTY_NO_HEADER",
       "rationale": "Explicit final source/evidence path with exact content identity and retained source/notice custody.",
       "row": {
         "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/measurement-evidence.part-002.jsonl",
         "classification": "FIRST_PARTY_NO_HEADER",
         "source_url": "https://github.com/hsoliwal/com.synexia/blob/aix/integrated-collections-refinement-20261021/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/measurement-evidence.part-002.jsonl",
-        "source_revision": "sha256:dc0ca93fab3f999f573e6143ef203a39351b11ab31dd8cde99bdbaa2c7e35021",
+        "source_revision": "sha256:a349a4cd50949c4cce0e2a928f2f2badd1c542cb9c1c517656dd18883544f8dd",
         "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/measurement-evidence.part-002.jsonl",
         "license_id": "Apache-2.0",
         "notice_path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/LICENSE_PROVENANCE.md",
         "disposition": "FIRST_PARTY_METADATA",
-        "evidence": "sha256=dc0ca93fab3f999f573e6143ef203a39351b11ab31dd8cde99bdbaa2c7e35021; exact final v3 publication content; original task path=synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/measurement-evidence.part-002.jsonl; final manifest=ed0798ddef0c7d052cafb776a42098086d69d67466c47b97f8bb6c46fe46dae2"
+        "evidence": "sha256=a349a4cd50949c4cce0e2a928f2f2badd1c542cb9c1c517656dd18883544f8dd; exact final v3 publication content; original task path=synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/measurement-evidence.part-002.jsonl; final manifest=ed0798ddef0c7d052cafb776a42098086d69d67466c47b97f8bb6c46fe46dae2"
       }
     },
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/measurement-evidence.part-003.jsonl",
       "expected_status": "A",
       "content_binding": "EXACT_REVIEWED_CONTENT",
-      "observed_sha256": "3d05c9683d32225ae926e02fd97b0d794d5958a9f3f2fbf760c68e1ef3eab26e",
+      "observed_sha256": "f33dafe6b48b5147b130712f28bc1a3629a0fe38fde3ef1f468b0091b48b5e44",
       "observed_bytes": 6288247,
-      "expected_sha256": "3d05c9683d32225ae926e02fd97b0d794d5958a9f3f2fbf760c68e1ef3eab26e",
+      "expected_sha256": "f33dafe6b48b5147b130712f28bc1a3629a0fe38fde3ef1f468b0091b48b5e44",
       "category": "EXPLICIT_FINAL_V3_FIRST_PARTY_NO_HEADER",
       "rationale": "Explicit final source/evidence path with exact content identity and retained source/notice custody.",
       "row": {
         "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/measurement-evidence.part-003.jsonl",
         "classification": "FIRST_PARTY_NO_HEADER",
         "source_url": "https://github.com/hsoliwal/com.synexia/blob/aix/integrated-collections-refinement-20261021/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/measurement-evidence.part-003.jsonl",
-        "source_revision": "sha256:3d05c9683d32225ae926e02fd97b0d794d5958a9f3f2fbf760c68e1ef3eab26e",
+        "source_revision": "sha256:f33dafe6b48b5147b130712f28bc1a3629a0fe38fde3ef1f468b0091b48b5e44",
         "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/measurement-evidence.part-003.jsonl",
         "license_id": "Apache-2.0",
         "notice_path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/LICENSE_PROVENANCE.md",
         "disposition": "FIRST_PARTY_METADATA",
-        "evidence": "sha256=3d05c9683d32225ae926e02fd97b0d794d5958a9f3f2fbf760c68e1ef3eab26e; exact final v3 publication content; original task path=synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/measurement-evidence.part-003.jsonl; final manifest=ed0798ddef0c7d052cafb776a42098086d69d67466c47b97f8bb6c46fe46dae2"
+        "evidence": "sha256=f33dafe6b48b5147b130712f28bc1a3629a0fe38fde3ef1f468b0091b48b5e44; exact final v3 publication content; original task path=synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/measurement-evidence.part-003.jsonl; final manifest=ed0798ddef0c7d052cafb776a42098086d69d67466c47b97f8bb6c46fe46dae2"
       }
     },
     {
@@ -1028,21 +1028,21 @@
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/qualification/PUBLICATION_TRANSPORT.json",
       "expected_status": "A",
       "content_binding": "EXACT_REVIEWED_CONTENT",
-      "observed_sha256": "e9fc96b26288b725b9261d40d8b1636f7b2dea558d885a2c0e01a061e8087e2c",
+      "observed_sha256": "4b139b841c5794bf9daed93786532651f74af4d4f752ecf58e521e7a60d3c2d3",
       "observed_bytes": 3701,
-      "expected_sha256": "e9fc96b26288b725b9261d40d8b1636f7b2dea558d885a2c0e01a061e8087e2c",
+      "expected_sha256": "4b139b841c5794bf9daed93786532651f74af4d4f752ecf58e521e7a60d3c2d3",
       "category": "EXPLICIT_FINAL_V3_FIRST_PARTY_NO_HEADER",
       "rationale": "Explicit final source/evidence path with exact content identity and retained source/notice custody.",
       "row": {
         "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/qualification/PUBLICATION_TRANSPORT.json",
         "classification": "FIRST_PARTY_NO_HEADER",
         "source_url": "https://github.com/hsoliwal/com.synexia/blob/aix/integrated-collections-refinement-20261021/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/qualification/PUBLICATION_TRANSPORT.json",
-        "source_revision": "sha256:e9fc96b26288b725b9261d40d8b1636f7b2dea558d885a2c0e01a061e8087e2c",
+        "source_revision": "sha256:4b139b841c5794bf9daed93786532651f74af4d4f752ecf58e521e7a60d3c2d3",
         "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/qualification/PUBLICATION_TRANSPORT.json",
         "license_id": "Apache-2.0",
         "notice_path": "LICENSE",
         "disposition": "FIRST_PARTY_METADATA",
-        "evidence": "sha256=e9fc96b26288b725b9261d40d8b1636f7b2dea558d885a2c0e01a061e8087e2c; exact final v3 publication content; original task path=synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/qualification/PUBLICATION_TRANSPORT.json; final manifest=ed0798ddef0c7d052cafb776a42098086d69d67466c47b97f8bb6c46fe46dae2"
+        "evidence": "sha256=4b139b841c5794bf9daed93786532651f74af4d4f752ecf58e521e7a60d3c2d3; exact final v3 publication content; original task path=synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/qualification/PUBLICATION_TRANSPORT.json; final manifest=ed0798ddef0c7d052cafb776a42098086d69d67466c47b97f8bb6c46fe46dae2"
       }
     },
     {
@@ -1112,21 +1112,21 @@
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/qualification/TARGET_FRESHNESS_FINAL.json",
       "expected_status": "A",
       "content_binding": "EXACT_REVIEWED_CONTENT",
-      "observed_sha256": "ad7f0af0a46359c134b047a4d196f4251de72c408c24e59f0a7a5924218ee47b",
+      "observed_sha256": "d69472e9f7c834e0625c621f45ad9ebe31f927cd0f10c7cdd6f7c6f3ab041caa",
       "observed_bytes": 8414,
-      "expected_sha256": "ad7f0af0a46359c134b047a4d196f4251de72c408c24e59f0a7a5924218ee47b",
+      "expected_sha256": "d69472e9f7c834e0625c621f45ad9ebe31f927cd0f10c7cdd6f7c6f3ab041caa",
       "category": "EXPLICIT_FINAL_V3_GENERATED",
       "rationale": "Explicit final source/evidence path with exact content identity and retained source/notice custody.",
       "row": {
         "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/qualification/TARGET_FRESHNESS_FINAL.json",
         "classification": "GENERATED",
         "source_url": "https://github.com/hsoliwal/com.synexia/blob/aix/integrated-collections-refinement-20261021/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/MEASUREMENT_PARTS.json",
-        "source_revision": "sha256:ad7f0af0a46359c134b047a4d196f4251de72c408c24e59f0a7a5924218ee47b",
+        "source_revision": "sha256:d69472e9f7c834e0625c621f45ad9ebe31f927cd0f10c7cdd6f7c6f3ab041caa",
         "source_path": "TARGET_FRESHNESS_FINAL.json",
         "license_id": "Apache-2.0",
         "notice_path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/LICENSE_PROVENANCE.md",
         "disposition": "EXACT_EXECUTION_EVIDENCE",
-        "evidence": "sha256=ad7f0af0a46359c134b047a4d196f4251de72c408c24e59f0a7a5924218ee47b; exact final v3 publication content; original task path=TARGET_FRESHNESS_FINAL.json; final manifest=ed0798ddef0c7d052cafb776a42098086d69d67466c47b97f8bb6c46fe46dae2"
+        "evidence": "sha256=d69472e9f7c834e0625c621f45ad9ebe31f927cd0f10c7cdd6f7c6f3ab041caa; exact final v3 publication content; original task path=TARGET_FRESHNESS_FINAL.json; final manifest=ed0798ddef0c7d052cafb776a42098086d69d67466c47b97f8bb6c46fe46dae2"
       }
     },
     {
@@ -2140,6 +2140,6 @@
     "docs/M3-SCALE/provenance/M3_FILE_PROVENANCE.tsv",
     "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/measurement-evidence.jsonl"
   ],
-  "transport_manifest_sha256": "9a17facfe27ed3cc1a5a51253826693d41b8469e8367098ddf790da0d7818f08",
+  "transport_manifest_sha256": "b982386d2239d492f53aef26ce85da246cef5ade2d264f544edcf70621508803",
   "final_manifest_sha256": "ed0798ddef0c7d052cafb776a42098086d69d67466c47b97f8bb6c46fe46dae2"
 }

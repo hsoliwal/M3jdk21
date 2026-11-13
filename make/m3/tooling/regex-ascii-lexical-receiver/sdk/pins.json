@@ -99,9 +99,9 @@
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/manifest.tsv",
-      "gitBlob": "05fb9022c38895991ad7e4b9f38bb5873c0cd461",
+      "gitBlob": "2baf4c24b447a4b6906b24645e920dbfb680c01d",
       "bytes": 1719,
-      "sha256": "974e340c5aa8e43bdad0927d0315ae5c6e4df6a8b7e2d161450bed44436e9106"
+      "sha256": "eddd1a7617fb0f1e18d8f30461ed344fb0933a7d550d4550f39a84da1a339c20"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/m3/docs/name-mapping.json",
@@ -201,9 +201,9 @@
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/manifest.tsv",
-      "gitBlob": "1b9b56b3d7c5c15f5252231f1b5b98a93f7e94be",
+      "gitBlob": "40936ba9c183e58b27ecbb44d70a3b3257a52549",
       "bytes": 1719,
-      "sha256": "34ba242e01cd1e5b675c850faec59a16d0c7371cd55a93201f1f700b2a44ce25"
+      "sha256": "66a8d05606189362d5ebef9dd73cca403dd1056ad09b5c2d620f4d117939fcc8"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/m3/docs/name-mapping.json",
@@ -261,9 +261,9 @@
     },
     {
       "path": "src/test/java/jdk/internal/m3/rewrite/M3RegexAsciiLexicalReceiverRecipeTest.java",
-      "gitBlob": "f5d61fde46048098d1b25822e2ccc034cbe4318b",
+      "gitBlob": "9e0fe8024d58aff9114f5109dce6d549706244ef",
       "bytes": 16047,
-      "sha256": "f5362d43b1705d071965e818ae355867cf18a63206511276b7ec52907febde01"
+      "sha256": "bfc003f8bbec8ea27b574b848457080a5f85249f86a3b645d5e459bb589731e2"
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",

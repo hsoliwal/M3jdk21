@@ -22,8 +22,8 @@ Public baseline: `2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49`.
 | Same Java owner at the baseline | `f875210dfb605799b6c8dbee53b28ad6383e000d90da775f7fd285464da7b2d3` |
 | `src/java.base/share/native/libjava/M3StringRegexDp.c` | Unchanged: `81440eb281b6401777d02a3ae28787f9d87b12ae10af426a7c78f58a5c9a723c` |
 | `test/jdk/java/lang/String/M3StringRegexClosureTest.java` | New: `05fbc141e18a298172ae9f6a77d9b8baa56953fa31ef6d1df6559e910ce302c1` |
-| `make/m3/runtime-integration/regex-closure/run_target_java21.py` | New: `8223329c8f6ff8c23cb71897e935119f5a389dae2ffbcfa4cc51e75844d548b8` |
-| `make/m3/runtime-integration/regex-closure/source-seals.json` | New: `0d699392d485562c953b70d80eeeff14dbbd98132f3d1abd152651e4e3bac87c` |
+| `make/m3/runtime-integration/regex-closure/run_target_java21.py` | New: `d94d476bd006b98fe070026fe269b6aa73a4a2f4c5f5f6178bcf3fb9c58ed13e` |
+| `make/m3/runtime-integration/regex-closure/source-seals.json` | New: `4fc0cedb1e312b8736cf2575e566266f89ec58948bb4aef98726bc2f03eb110a` |
 
 The adjacent [source seals](source-seals.json) bind all runtime fixture sources. This note records qualification separately and does not change those sealed inputs. SDK008 receipt SHA-256: `e80fc5f819d60ab25c5eb4f8fa024df5e851ddb6ae6a2180be908d4c370cf28a`.
 

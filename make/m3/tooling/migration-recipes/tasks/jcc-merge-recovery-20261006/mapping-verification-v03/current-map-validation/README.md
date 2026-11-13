@@ -21,11 +21,11 @@ synexia.counterpart.MIndexRegexTrigramQuery: recipe hash drift
 
 | Current artifact | SHA-256 declared by the map | Actual SHA-256 at the pinned commit |
 | --- | --- | --- |
-| `src/java.base/share/classes/jdk/internal/mindex/M3TQ.java` | `6ba1883a307c0c8c4b6254c1a531e98b805c00a6cb943135a6cc13b47522b187` | `d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155` |
-| `make/m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv` | `245e252da59d310ea7e4229e5cafa5d25e322fee82d349337b37eab8a1f161a1` | `30b9aee3598aa556a9de57e612a1b3e3b045586b6d7382d53dc92798177338fb` |
+| `src/java.base/share/classes/jdk/internal/mindex/M3TQ.java` | `6ba1883a307c0c8c4b6254c1a531e98b805c00a6cb943135a6cc13b47522b187` | `225e847c5fb9f0195b37b14810d405dc6cb8ff83156e667dc127d36489cbf7aa` |
+| `make/m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv` | `245e252da59d310ea7e4229e5cafa5d25e322fee82d349337b37eab8a1f161a1` | `46206a1a0468d0a4ccb786afd1729fabdccaa435e3a3e659a75c4c5d3c31d5b3` |
 
-The current target Git blob is `ca23741ecd8cd24593ba5c260aa0d939c53d6766`; the
-current recipe-manifest blob is `b050a6ef7e2c2ab114c7d78395ff38782125818d`.
+The current target Git blob is `53cb5da67520082e62fffe75272406d3eacb366c`; the
+current recipe-manifest blob is `975bf0621603508c4d1c964160ed4e2bc3320931`.
 All other required mapping and selected-receipt SHA comparisons agree with their
 current bodies. This is a finite metadata/artifact gate, not a test or rebuilt-JDK
 acceptance result.

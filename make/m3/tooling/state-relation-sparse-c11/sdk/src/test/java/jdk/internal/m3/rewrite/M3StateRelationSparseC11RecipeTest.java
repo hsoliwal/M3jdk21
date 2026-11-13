@@ -27,8 +27,8 @@ final class M3StateRelationSparseC11RecipeTest {
     private static final String ROOT = "/jdk/internal/m3/rewrite/state-relation-sparse-c11-20261020/";
     private static final String DESCRIPTOR = "/META-INF/rewrite/state-relation-sparse-c11-20261020";
     private static final String NAME = "jdk.internal.m3.StateRelationSparseC11";
-    private static final String FORWARD_MANIFEST_SHA = "9542bbe216aa75444f924483df17e436ced4ec76ba13c01e9cccfb4543169f9b";
-    private static final String INVERSE_MANIFEST_SHA = "4588c5e6ce767ffc071acb27daf70a86d4b871cd2bdbb80e85fdda250ee4f5b3";
+    private static final String FORWARD_MANIFEST_SHA = "8a2f7e8497583b2517d9e8cea85b0bcff575b454a291d129f06a9c65c852067f";
+    private static final String INVERSE_MANIFEST_SHA = "6a90039025c1c62db17f033cd878383f914b50e5f6264d23b8b18c22e1c864f4";
     private static final String FORWARD_DESCRIPTOR_SHA = "9d8ab747bc4775f467d466e5043bd61127681e35359f5339cfbcdacab739b252";
     private static final String INVERSE_DESCRIPTOR_SHA = "6b85531f3cca0aa6b532db220703b12dda283c34596b6e45ce5258f73fa3341a";
     private static final String C_OWNER = "src/java.base/share/native/libjava/M3StateRelation.c";

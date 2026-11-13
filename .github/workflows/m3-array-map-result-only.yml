@@ -46,7 +46,7 @@ jobs:
         run: |
           set -euo pipefail
           cd m3/collections/implementations
-          test "$(git hash-object apache-hashed-map/src/main/java/jdk/m3/collections/apache/M3HashedMap.java)" = 0440ac943b5eb31d443d8be9943fc14597890277
-          test "$(git hash-object apache-linked-map/src/main/java/jdk/m3/collections/apache/M3LinkedMap.java)" = ebf03006129b74b813e406613594c196de10f477
-          test "$(git hash-object apache-lru-map/src/main/java/jdk/m3/collections/apache/M3LRUMap.java)" = 703641cfe70f58ba93dc4a9ef5129048c3b59bcd
+          test "$(git hash-object apache-hashed-map/src/main/java/jdk/m3/collections/apache/M3HashedMap.java)" = 2887f69d2280458c7a8e1390eb84eb3e73570ac5
+          test "$(git hash-object apache-linked-map/src/main/java/jdk/m3/collections/apache/M3LinkedMap.java)" = e3649a952f27268a8291a38c92e7d1149a734b5d
+          test "$(git hash-object apache-lru-map/src/main/java/jdk/m3/collections/apache/M3LRUMap.java)" = 401bf0e56d0ab18b377b14d4de7b3432d46395fb
           test "$(git hash-object m3-long-object-linked-hash-map/src/main/java/jdk/m3/collections/id/M3LongObjectLinkedHashMap.java)" = bc8b45e9337fc1fadd139827d1197b357dbee3a3

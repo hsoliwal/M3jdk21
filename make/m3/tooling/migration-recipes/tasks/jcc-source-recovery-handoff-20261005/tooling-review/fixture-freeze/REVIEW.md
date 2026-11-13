@@ -2,7 +2,7 @@
 
 **E4-V3-01 is resolved at source level for the exact revised runner. No further narrow-delta blocker was found.** This conclusion admits the reviewed correction; actual source publication receipts, derived bindings, final evidence carry and concrete receiving resources remain a separate review.
 
-The reviewed runner is `c779f94023b3914bca1558a35d39ab11aaedd00a18cf5b74e2a30bf1205de6b6` (13,664 bytes). Additive readiness T02 is `6bba7f210e73180b8d91e9a6023e4e846954feec665c74bc73763ec4a9ebb0a3`. Their exact snapshots and the independent T01/T02 diff are retained with this report.
+The reviewed runner is `19fc7bc5d1804082acd88598c12562b28c10a41e43aa356c23f5604a253268c2` (13,664 bytes). Additive readiness T02 is `d45d668f8cb1746e93d56b02b18a732141c81c6efb39d3ec55fa7a1bde123e85`. Their exact snapshots and the independent T01/T02 diff are retained with this report.
 
 The runner now obtains the two fixture rows from the same SHA-pinned `LOCAL_EXPECTATIONS.json` used by the reviewed custody reader. It requires exactly two rows and rejects duplicate local paths. Each fixture is admitted using the existing absolute/canonical regular-file, symlink, stable-read, byte-length, SHA-256, Git-blob and declared Git-mode checks. This occurs before `OUT.mkdir()`, input-receipt writes and any gate subprocess.
 

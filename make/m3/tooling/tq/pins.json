@@ -59,7 +59,7 @@
   "successor": {
     "parent": "1c389e31805fb4faf5d9fe256c8dc6797a2eadff",
     "recipe": "make/m3/tooling/tq-sync",
-    "retained_owner_sha256": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155",
+    "retained_owner_sha256": "225e847c5fb9f0195b37b14810d405dc6cb8ff83156e667dc127d36489cbf7aa",
     "history": [
       "b68391863561ce80169663cd2b49c2845e084b74",
       "bb0461ea8adc5b93771596a0fc8e8981a1e9e328",

@@ -2,17 +2,17 @@
   "archiveOnlyProjectFiles": [
     {
       "bytes": 5146,
-      "gitBlob": "e5d9c893114130c9188f01f981198bcd18d96a85",
+      "gitBlob": "58ecc0d62664a90791663e3a53542d46d833bd22",
       "mode": "100644",
       "path": "src/test/resources/before/m3/tooling/lane28/verify-plan.py",
-      "sha256": "d56788db191b5e3361d3e35e7f07c4395b38aec4b7c0a07dcd620620f4c4687a"
+      "sha256": "c626a962c87b195dd31f4b0976b39981261f7c3a612050f175d29a774190fa57"
     },
     {
       "bytes": 5089,
-      "gitBlob": "679d71b6658913b894b2d6b0a1746688bf5a988d",
+      "gitBlob": "30040e55258a6e741f6a9569a8ee17f9e00d676f",
       "mode": "100644",
       "path": "src/test/resources/before/m3/tooling/tq/verify-plan.py",
-      "sha256": "269cd10606a9de7629ec0d1f4dccce2866644f979c06958d808e107b6c9188bb"
+      "sha256": "b70271e08910aedb8e512d38ef67c8dc041de522027e6a11abe96e3cfe825617"
     }
   ],
   "counts": {
@@ -84,42 +84,42 @@
     {
       "bytes": 498306,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/READBACK.json",
-      "sha256": "2b36b6e8cb9eacb964c4d1e6101e27c7104a11dbe5b3d73894b7654e03af3e38"
+      "sha256": "28f30068997656280924f10a5de3405a6800bfa30ecdce15e8cdec491e66a101"
     },
     {
       "bytes": 28539,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/PROJECT-READY.json",
-      "sha256": "01092fe7c042c08212643e7190a493443ed08addd8a2e0a3f29e87a76ce938df"
+      "sha256": "500a51d4ddb1c717f944b2656ff0e72234b1a4768dcfd86efdb8bdb89627d500"
     },
     {
       "bytes": 20869,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/PORTABLE-MANIFEST.json",
-      "sha256": "77c3d75a09fe982b24a6517d3c0d68e226c3b9cc9baf2b6faf0a520d836f2c2e"
+      "sha256": "bc455259112ac212365a1a2aba917d2499e9282294809c5dbe06dcdffcfce93c"
     },
     {
       "bytes": 39019,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/TASK-MAPPING.json",
-      "sha256": "9b2fd8b91c03671d2339b65c5ce06d32256e1d2244efa9bc034af8c669f0545c"
+      "sha256": "815782025bd8c96ce5964c63ab1c72df1153601dfd7b59a6544db655d0e3a3bf"
     },
     {
       "bytes": 3625376,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/SOURCE-CLOSURE.json",
-      "sha256": "bb2328d1bf42624be1937d8968cabc5639e3df570fdc2ef0d7fc8600fccd5c5c"
+      "sha256": "3fd80345556ea69cdb7ba7c97f3e3282821d34686e2fb6e3993a395bb4f7a5a0"
     },
     {
       "bytes": 187339,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/bundle/BUNDLE.json",
-      "sha256": "694448087b8ff29a1fd389a23362adb972cb72254e17610c8389bac477fc5147"
+      "sha256": "c41f1296295aba02dd33a445a5f256d4498fd492221a8fc6e75da1146ff91d7a"
     },
     {
       "bytes": 7311,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/root-execution-v1/RESULT.json",
-      "sha256": "17c938ff12d5a67e37de4aa369b8fac173c28f0125980caf2fd94fc6b9d6c72f"
+      "sha256": "573e2fe7f7e0533b712a6802a7c38347850970dc05999316c08c70307f100b71"
     },
     {
       "bytes": 7776,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/terminal-selection-v1/COMMANDS.json",
-      "sha256": "da333328eb2ae80710df758b10caf00243eeb2e6ec06f0fe6bb362a9d96e9f3d"
+      "sha256": "5cc3fc7a92abc03de6e9316557eb2dbeaac64bc231e472185faf17c475c549d9"
     },
     {
       "bytes": 13982,
@@ -212,7 +212,7 @@
     "result": {
       "bytes": 7311,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/root-execution-v1/RESULT.json",
-      "sha256": "17c938ff12d5a67e37de4aa369b8fac173c28f0125980caf2fd94fc6b9d6c72f"
+      "sha256": "573e2fe7f7e0533b712a6802a7c38347850970dc05999316c08c70307f100b71"
     }
   },
   "schema": "m3.fc0.independent-package-metadata-review/1",

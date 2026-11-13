@@ -130,7 +130,7 @@ paths, duplicate obligations, strict digest/mode behavior, ref movement, repeata
 and deterministic output. The tests mutate only dedicated synthetic Git repositories.
 
 Actual execution receipt SHA-256:
-`a4da326176195fccadb0c8c17e5d55bb2c88aeb02fd4a1f62eaa176bb9855551`.
+`08909ef690599642a7eaf33f5a7cd05f29acf660484e34643d746ae2790cba9c`.
 Full unittest stderr log SHA-256:
 `9c3678b9fd8a005d21987fcb3b2a91d2f48c957f33de54aa5a863edfd4d371cd`.
 

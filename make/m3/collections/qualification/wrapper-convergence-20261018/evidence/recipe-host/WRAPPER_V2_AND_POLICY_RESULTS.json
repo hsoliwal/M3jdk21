@@ -210,8 +210,8 @@
       "postimages": [
         {
           "path": "doc/m3/m3jdk21-porting-invariant.md",
-          "preimage_sha256": "604ef82225fdb9e6ecf00e14f7630fb0956b85ec89e5c9241537733d4054f39a",
-          "postimage_sha256": "95a5d111f0d9b2467bcc84828adc5b0efcfd1091e35a1b5c1bf1c484a2066b03"
+          "preimage_sha256": "fbca494f64f60c7e337a1e0ee31077d372123ff13d9483d48fd6f3bec453a6c9",
+          "postimage_sha256": "ba394522eae7c533512a7e8eabc18486d18983223fcd15a570f2fce366efd27c"
         }
       ],
       "sdk_input_rows": 15,
@@ -241,7 +241,7 @@
         "synexia-work/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/target/candidate/invariant-policy/SDK_INPUTS.tsv": "2f60e7f4db165bd60e6657f229deb96b44cf351da3a00c8d2ccd59c32e6594f7",
         "synexia-work/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/target/candidate/invariant-policy/SDK_REFUSALS.tsv": "8f302aaeb5f2a809dcb38a34df8d6208e6b994340f8fa8a83bcc28fc237fe41d",
         "synexia-work/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/target/candidate/invariant-policy/SDK_RESULTS.tsv": "5025f1651d5dbbb33cf5e92af14faaafff994fa6fdaee9f3831576f6350891e6",
-        "synexia-work/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/target/candidate/invariant-policy/m3/docs/m3jdk21-porting-invariant.md": "95a5d111f0d9b2467bcc84828adc5b0efcfd1091e35a1b5c1bf1c484a2066b03",
+        "synexia-work/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/target/candidate/invariant-policy/m3/docs/m3jdk21-porting-invariant.md": "ba394522eae7c533512a7e8eabc18486d18983223fcd15a570f2fce366efd27c",
         "synexia-work/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/target/candidate/invariant-policy/text.patch": "761c068841efaf74006d853a0d8dec48bcbfafd64f65a0da20a546158f23bec7"
       }
     }

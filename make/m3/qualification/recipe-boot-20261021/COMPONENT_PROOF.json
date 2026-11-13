@@ -22,8 +22,8 @@
     "actual_maven_exec_fixture_cases": 7,
     "no_installed_global_property_overrides": 457
   },
-  "coverage_sha256": "529e9512a152ccf142ad018f8c29e4c05933b834474a956980674882d1754976",
-  "semantic_installation_sha256": "69992c6fe3d3535964d73f9992b904bd0545d2c888b8c34d534fbefc77ee134d",
+  "coverage_sha256": "ce2a273fa0d24a80da4620be5e94c4d75dccce050cdebdfd73e7c892fe722d8d",
+  "semantic_installation_sha256": "6fc32b169b71e5731affd55ab1971fd88ee13a4ea800ffb0926ccf02cd599e7a",
   "maven": "3.9.9",
   "java": "21.0.12.1",
   "source_mutation": "Semantic Recipe.run wrote task candidate templates only. Exact3055 source POM retrieval hydrated a sparse receiving workspace separately; canonical hash-pinned product receipt remains a separate gate.",
@@ -37,7 +37,7 @@
   "model_runner_sha256": "01f452c62e593d5f966bd505ed604cb553509b2684dd4115ef68b0f780492d4d",
   "lifecycle_marker": "Three local CLI arguments; no JVM system property overrides in generated profile",
   "source_tree": "6b980f5e6be744d2ea0449f12731e9d3c040fd89",
-  "topology_sha256": "5f072350f753e937b6624f0e1037a24b21ae8f77790551a908998d000cd15875",
+  "topology_sha256": "5e8013a79276c3499c90de8b6586324b676b376903327f42e4be86570ed605cf",
   "inventory_reconciliation": {
     "original_source_commit": "a4415af418a9b0f21a06cd5801d238577fbb6eb7",
     "unchanged_existing_generated_postimages": 439,

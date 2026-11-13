@@ -2,8 +2,8 @@
   "schema": "M3_ORIGINAL_MAPPING_PYTHON_PROVIDER_LOCK_V1",
   "inventory": {
     "repository": "hsoliwal/com.synexia",
-    "gitBlob": "5fc137ec5d09bf24087aa9adb698f71219477924",
-    "sha256": "c2e05ca06b7aa0af65bc0a36c2990c5d7ae10ab8b4e17557f5dcb8050af921af"
+    "gitBlob": "3afe48b77678dfdaa10745deac423b1c685659b5",
+    "sha256": "a0dc925ea9456e6c4fd4069e167e10c09991b87cc3f93bdba5a2ff8d9f8eb1cd"
   },
   "target": {
     "implementation": "cpython",
@@ -228,7 +228,7 @@
     },
     "previous": {
       "path": "make/m3/migration/provider/python312-linux-x86_64/previous-name-mapping.json",
-      "sha256": "15629167d5f6d5f6999225a4ebd9b16b56943477c27701259048ac670d232fc4",
+      "sha256": "99f18a65a6fa4d8c01b423b78f742100db48435708a504951e15e3a668b339b7",
       "bytes": 399438
     },
     "manifestPath": "doc/m3/name-mapping.json"

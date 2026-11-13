@@ -30,8 +30,8 @@ public final class M3Jep497SharedOwnerSplitRecipe
     private static final Map<String, Target> TARGETS = Map.of(
             ".github/workflows/m3-jep497-mldsa-inventory.yml",
             new Target("workflow.before.yml","workflow.after.yml",
-                    "11425741b788db3806e3c71cfcf02327f6bcc9b6",
-                    "771c834dbfb5f0a7930eb8f91a3df583fa58699f"),
+                    "43bc7cb8db71b0e93a7c4a2d33e5539beac27aea",
+                    "46bbbba67d803881a417cadbcdbee25f9657dac9"),
             "make/m3/backports/recipes/jep-497-mldsa/README.md",
             new Target("README.before.md","README.after.md",
                     "aa337ea74e20be8e94dd048f8e573a9ab1ef0777",

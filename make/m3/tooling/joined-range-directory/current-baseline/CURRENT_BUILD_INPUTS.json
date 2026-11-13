@@ -374,8 +374,8 @@
   ],
   "historicalBaseline": {
     "commit": "73f59218dc4ef1a3ef79aad990e77273db2a2d60",
-    "manifestGit": "0ea37209f97eda757f17214f73d6a3850b01c56b",
-    "manifestSha256": "fbb744a04a050dc1489e7bf73cc63d9e60e8f161f881d071d4b24ced6b420d39",
+    "manifestGit": "2382ace56c16d0494d5d5deb053295e798527c3c",
+    "manifestSha256": "9e6d044598dbc2aa46db7ee020546930993ff26c02f2564963e4b95221ba27ec",
     "overlays": [
       "m3/core/src/jdk/m3/text/M3BigString.java",
       "m3/core/src/jdk/m3/text/M3LexiconPrecompute.java",

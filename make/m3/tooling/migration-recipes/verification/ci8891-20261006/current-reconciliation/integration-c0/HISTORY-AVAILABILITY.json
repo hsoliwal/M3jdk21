@@ -126,9 +126,9 @@
     {
       "expected": {
         "bytes": 374,
-        "gitBlob": "6012bde84949e71ae42b738f2c7f99c6d21f5be0",
+        "gitBlob": "acd3cb63e9bbde4c45ea9c6190a108aa57c17046",
         "mode": "100644",
-        "sha256": "550d220b04c80b90bfd4980b1737dabe0145f07501eff73601e045be9b8a68e2"
+        "sha256": "0b74c97e603763037b88a22ae19a418ef0df3490b4c866b268e6087010fb0ac0"
       },
       "receivingPath": "make/m3/tooling/migration-recipes/tasks/m3-ci-8891/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ci8891-cib/manifest.tsv",
       "sourcePath": "m3-openrewrite-recipes/tasks/m3-ci-8891/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ci8891-cib/manifest.tsv",
@@ -137,9 +137,9 @@
     {
       "expected": {
         "bytes": 529,
-        "gitBlob": "a7becadbce6a59353cde42320881404c9ae2350e",
+        "gitBlob": "f5482123e306f4d2ba5558b5d3f464f761ea6a26",
         "mode": "100644",
-        "sha256": "faa4a285c706daccc6654478662cbf796ea1b92cabcf7481e7546fa2dff398a2"
+        "sha256": "a8326f282dfd727e7ffb4b5e287862467a5dc87cea0b60b4c5f027ecfc3520cc"
       },
       "receivingPath": "make/m3/tooling/migration-recipes/tasks/m3-ci-8891/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ci8891-ciw/manifest.tsv",
       "sourcePath": "m3-openrewrite-recipes/tasks/m3-ci-8891/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ci8891-ciw/manifest.tsv",
@@ -1226,9 +1226,9 @@
     {
       "expected": {
         "bytes": 1089,
-        "gitBlob": "425399554a75d1a583294c932d9ea1420fba7a2b",
+        "gitBlob": "0105d5f20950f8e64dc0983a4a74a5b5c22b324e",
         "mode": "100644",
-        "sha256": "79bb5d5807338f502a53fadbaefce5e10047698f58db4b761e6347000b8139fe"
+        "sha256": "2e1056f2465ae90cfa1ce41f0e3f7af3a517ef180c75d2989346b6ea1e0cfb04"
       },
       "receivingPath": "make/m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-followup/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ir10f-scp/manifest.tsv",
       "sourcePath": "m3-openrewrite-recipes/tasks/m3-rc-10f/integration-followup/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ir10f-scp/manifest.tsv",
@@ -1919,9 +1919,9 @@
     {
       "expected": {
         "bytes": 634,
-        "gitBlob": "e0cbf9bfa0f2ffed8bae84decfac5d9a4a15f263",
+        "gitBlob": "cdb4e418ae412f663e143e396bd8c63b4df0eb7b",
         "mode": "100644",
-        "sha256": "ddd20275d7cc6c5282cbc69eea5ef443726a945e727025e352fba775a3c2f361"
+        "sha256": "2b3ec2e881cd6258c871c85618aeb490188f6ca43a0428e2d7332690a98b727c"
       },
       "receivingPath": "make/m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/br875-gte/manifest.tsv",
       "sourcePath": "m3-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/br875-gte/manifest.tsv",
@@ -1930,9 +1930,9 @@
     {
       "expected": {
         "bytes": 126,
-        "gitBlob": "0c75e0c92d7f4404980fd68650e79c2d57a03a55",
+        "gitBlob": "0f92748f8d78c188fd223d949732c94c57683626",
         "mode": "100644",
-        "sha256": "3da99fed3b7f3971ebbf17027484cd906d2ca1384c8ec0c383722e3431df8cf2"
+        "sha256": "190c9f3093324a820036e2d049a7e410b5851b446c96c18522f4e3d5df460c6b"
       },
       "receivingPath": "make/m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/br875-ipr/manifest.tsv",
       "sourcePath": "m3-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/br875-ipr/manifest.tsv",
@@ -2139,9 +2139,9 @@
     {
       "expected": {
         "bytes": 598,
-        "gitBlob": "a21470dfa302123787d36e1e49e379e97b93d80a",
+        "gitBlob": "5e523bcf6893c1841a87f3c41c58e9ed51110c73",
         "mode": "100644",
-        "sha256": "0b8b2f950378c011e76a30356219dd3f0b1dbe2358c01068708f782c568100b5"
+        "sha256": "7796c762a9bf3b6c48ccf4e2a2be93eab367f1c0625ebeffee8991e69e850a3c"
       },
       "receivingPath": "make/m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/br875-vpm/manifest.tsv",
       "sourcePath": "m3-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/br875-vpm/manifest.tsv",
@@ -2150,9 +2150,9 @@
     {
       "expected": {
         "bytes": 691,
-        "gitBlob": "a8b302a4f9c6b46a026fb3c659aac85b4be396a0",
+        "gitBlob": "46312e49b2af5a96b7ee34b404fbcc4e2ad54cc6",
         "mode": "100644",
-        "sha256": "57c9a61e2f642eccd038d0094649e53fd0ceffd335f498c0a63090c1bb9e1190"
+        "sha256": "f1bdef5561edfcd7e8f45a0b0d8a886ed3e2d243656a1e1fc11101e9d2b57716"
       },
       "receivingPath": "make/m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/br875-vrc/manifest.tsv",
       "sourcePath": "m3-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/br875-vrc/manifest.tsv",
@@ -2183,9 +2183,9 @@
     {
       "expected": {
         "bytes": 1332,
-        "gitBlob": "b6b2fc390e185398b5688e0ac28715d47fdd885c",
+        "gitBlob": "5f5c9f7b7bafc18f301ae2d8da01bfff0ad75ebf",
         "mode": "100644",
-        "sha256": "bdbf6f719aabf41568e2a41b3d7aa406276d2ec8f4ce0427b68ac1900700ba4e"
+        "sha256": "410c86d4b8582f7707951248d976245d9769625b3d7440456fd7e1a75945e71f"
       },
       "receivingPath": "make/m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/br875-wro/manifest.tsv",
       "sourcePath": "m3-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/br875-wro/manifest.tsv",

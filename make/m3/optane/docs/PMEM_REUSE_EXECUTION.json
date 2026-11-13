@@ -62,9 +62,9 @@
       },
       {
         "path": "src/jdk.m3.io/share/classes/jdk/m3/optane/PmemSdk.java",
-        "sha256": "3ee39bb0fc9073f8cdca8e18d246e96f6800405d98d05cfc937cce7420bd100f",
+        "sha256": "f54bf8c7733bf780cee1b8fdd1b473ce2b75165cc61c221374dc70bfec976875",
         "recipe": "pmem-reuse-current-m3jdk-java-20261112",
-        "gitBlobSha": "0de953686ceb845be6ee6f99d4ca29f57484f418"
+        "gitBlobSha": "674632cfb50d07f9ff6da6335b593c94c7d6277c"
       },
       {
         "path": "src/jdk.m3.io/share/classes/jdk/m3/optane/PmemTensorSpec.java",
@@ -74,9 +74,9 @@
       },
       {
         "path": "src/jdk.m3.io/share/native/libm3optane/m3pmemsdk.c",
-        "sha256": "4f3e3ff909f51b5ad94e226994d4dce2a4ebe97c2bbf0ccc2e64c21df902602d",
+        "sha256": "0da863ce95e875c0a449af821a12c06f8d42940a2b0af68219a348ae8e52a977",
         "recipe": "pmem-reuse-current-m3jdk-text-20261112",
-        "gitBlobSha": "319f08a4ba4a78e8a9206270a241e45805f18d07"
+        "gitBlobSha": "48c9c13179d5178651c2d12cec4b8be8ba0aee60"
       },
       {
         "path": "test/jdk/jdk/m3/optane/PmemMemoStoreJUnitTest.java",
@@ -116,9 +116,9 @@
       },
       {
         "path": "make/m3/optane/PORT-MAPPING.pending.json",
-        "sha256": "f65ec107463566c355fffc843b3e662cded808ecedfd229092311f786da6daeb",
+        "sha256": "0f2ae1d561a40f94a74a86c714ac0a851a322095ce14022a7b1d11f05e65f099",
         "recipe": "pmem-reuse-docs-m3jdk-text-20261112",
-        "gitBlobSha": "937c2b479b564425776288b9f42191c1c8fa7ac2"
+        "gitBlobSha": "49920cf9fd6acd3ad7ad961f03d52b4cbdf1b7d7"
       },
       {
         "path": "make/m3/optane/docs/PMEM_AI_REUSE.md",

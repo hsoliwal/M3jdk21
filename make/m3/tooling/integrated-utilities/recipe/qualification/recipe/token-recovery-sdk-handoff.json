@@ -2,8 +2,8 @@
   "schema": "M3_TOKEN_RECOVERY_ACTUAL_SDK_HANDOFF_V1",
   "time_utc": "2026-10-19T04:56:29.739564+00:00",
   "input_core_commit": "2717d156ad2aba73dfdfcfc6a58b59a82371798e",
-  "manifest_sha256": "140b908730c40af4696b50eb034828b48f8b5a45d68107ecfab1846db9373f5a",
-  "actual_result_receipt_sha256": "6b1a6d4ba835a3798a04a8dfbc359da6211d47d8490d6bc3f9364983bffb23bf",
+  "manifest_sha256": "3dfa070bcd65e6a132be9e4b6d867c911cef007cdc209f08365f216cf1965c28",
+  "actual_result_receipt_sha256": "e97c7fa5c235a6401235e12f85625a11dd9c6d756729ac2fc3299a05715c9cf5",
   "actual_openrewrite_results": 13,
   "actual_second_sdk_run_changes": 0,
   "sdk_tests": {
@@ -25,7 +25,7 @@
   "files": [
     {
       "path": "make/m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv",
-      "before_sha256": "5bf447216af55a51b73c275182af891c1ded5c2b427fa6856139731078d2ef8c",
+      "before_sha256": "8fb0beb19ca5b45ce08f836cef64a243695a3920f19d6099e93a27c674f24f23",
       "after_sha256": "46f7e0aa4f9c68c1959efb96b62916f5fe9abcaca6e8b3383255ccc27a6587e6",
       "actual_result": true
     },
@@ -98,7 +98,7 @@
     {
       "path": "doc/m3/name-mapping.json",
       "before_sha256": "2bb378d4e2af9c0bf62482182acdf53f1919abe16e6146195d38d9bcfc6ab9d7",
-      "after_sha256": "91a4a7fdf119842f5bb9ae7d849ae06db65e2f6359aabc96e4e0c8dc1edabaa6",
+      "after_sha256": "81c7cc9f94f0456653423ee0f292af9b2e5838ea69607c2ccb94b7191673fcfc",
       "actual_result": true
     },
     {

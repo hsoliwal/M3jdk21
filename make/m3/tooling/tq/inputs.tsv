@@ -1,5 +1,5 @@
 # path	sha256
-make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java	3bd03440ec348cad0cf5de6f3cb87a3cc00cc81b02aacf6f202f67e28976b120
+make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java	3d99b2c794d352bc1d371425f169cb2398d7f77b93f82d0b97d802172174c01b
 make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java	2102795eec6a55c6e7564ada0fa439cdf0d98e4c1fc395b2d5d52e1f88890283
 .m3/openrewrite-recipes/src/main/java/jdk/internal/m3/bootstrap/M3BootstrapTaskRecipe.java	d5b73971cf4107ffe5d9d2678d5a536491cd1552a2739818013e5ba4da1c3424
 .m3/openrewrite-recipes/src/main/java/jdk/internal/m3/bootstrap/M3BootstrapInventoryRecipe.java	19450c4b44091c4f37689be1fa45bb30b822cd2f962a323d0991529fc65f6a71
@@ -11,6 +11,6 @@ make/m3/tooling/tq/donor/LICENSE	1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc6
 make/m3/tooling/tq/donor/MIndexRegexTrigramQuery.java.txt	9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e
 make/m3/tooling/tq/donor/NOTICE	31cec4f2c4936b0e7a71a77847a3c20b0959e119a02ef5cf537f4f707fff9427
 make/m3/tooling/tq/donor/trigram-oracle.cpp.txt	0661355065effb42f56e1b1b384cade00171aeb15f7af9f7bb49eec4cd095d59
-src/java.base/share/classes/jdk/internal/mindex/M3TQ.java	78aa154b8aa25134edd9a16c746e4fdc7bcd3984b8f76cc96ef81437247e08d4
+src/java.base/share/classes/jdk/internal/mindex/M3TQ.java	569375ab9eadf62ad500f2f1cb8f5c347d20eca218840b47df726cea0f5e0b90
 test/jdk/java/lang/String/M3TQTest.java	f587cc74f8dcd9914827cb7d03b1e3aa5eb420851d7de231e5624885aff8782f
 test/jdk/java/lang/String/M3TQSparseContainmentTest.java	94a1b87f6702a780173c14b9676400522c980b2da328b13321650f0df656c790

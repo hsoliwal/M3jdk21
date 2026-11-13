@@ -14,113 +14,113 @@
       "path": "tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-levenshtein-evidence-closure/manifest.tsv",
       "mode": "100644",
       "type": "blob",
-      "sha": "a567233e3fbe33ebf8c9db061470b0eafb43fa2d",
+      "sha": "bc4d388bafd3d748ac69ba890c1d7722b4104e91",
       "size": 357,
-      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/a567233e3fbe33ebf8c9db061470b0eafb43fa2d"
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/bc4d388bafd3d748ac69ba890c1d7722b4104e91"
     },
     {
       "path": "tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-workflow/manifest.tsv",
       "mode": "100644",
       "type": "blob",
-      "sha": "3772494534a0137ba4cd4c6aea712a491e49d89b",
+      "sha": "8f94d4d687ad133f4808508917fcfa0dde65f258",
       "size": 449,
-      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/3772494534a0137ba4cd4c6aea712a491e49d89b"
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/8f94d4d687ad133f4808508917fcfa0dde65f258"
     },
     {
       "path": "tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-native-jni-lane/manifest.tsv",
       "mode": "100644",
       "type": "blob",
-      "sha": "483fa8809a49dc39d631dcf33d8ef6a3b65fa541",
+      "sha": "bef40bfc3e94c9bba852018150fcc964b1e1a631",
       "size": 1139,
-      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/483fa8809a49dc39d631dcf33d8ef6a3b65fa541"
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/bef40bfc3e94c9bba852018150fcc964b1e1a631"
     },
     {
       "path": "tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-proof-kit/manifest.tsv",
       "mode": "100644",
       "type": "blob",
-      "sha": "781800bdac9b4aecdc1e75944515148669732534",
+      "sha": "d0201a925d5120ff5751292d2dd74221a7d749e6",
       "size": 182,
-      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/781800bdac9b4aecdc1e75944515148669732534"
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/d0201a925d5120ff5751292d2dd74221a7d749e6"
     },
     {
       "path": "tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-regex-memory-workflow/manifest.tsv",
       "mode": "100644",
       "type": "blob",
-      "sha": "29e7731cd09d310ca5e3e221b405618af64abb56",
+      "sha": "76384056b0e1c03bcfbed9455e52de6792ae6a23",
       "size": 507,
-      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/29e7731cd09d310ca5e3e221b405618af64abb56"
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/76384056b0e1c03bcfbed9455e52de6792ae6a23"
     },
     {
       "path": "tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/db-meta/manifest.tsv",
       "mode": "100644",
       "type": "blob",
-      "sha": "7fd93c781752428b61dd0e7e5acf628bf3d94565",
+      "sha": "26a8e6cf5441f71266ff51ddeb9e2f35ee71e55d",
       "size": 675,
-      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/7fd93c781752428b61dd0e7e5acf628bf3d94565"
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/26a8e6cf5441f71266ff51ddeb9e2f35ee71e55d"
     },
     {
       "path": "tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/gate-meta/manifest.tsv",
       "mode": "100644",
       "type": "blob",
-      "sha": "75751b6f0faca8376442dbf1ff9ac82504da3579",
+      "sha": "a8e45fd15008fc8dfa8e64c4f9fc3d87fb87a3a0",
       "size": 1377,
-      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/75751b6f0faca8376442dbf1ff9ac82504da3579"
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/a8e45fd15008fc8dfa8e64c4f9fc3d87fb87a3a0"
     },
     {
       "path": "tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/manifest.tsv",
       "mode": "100644",
       "type": "blob",
-      "sha": "9f24b0965b9c78257ab0ebfb9f3f83561766e0ea",
+      "sha": "41c5c2f16886ef76378cee534b5c1a3c5dc02b25",
       "size": 687,
-      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/9f24b0965b9c78257ab0ebfb9f3f83561766e0ea"
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/41c5c2f16886ef76378cee534b5c1a3c5dc02b25"
     },
     {
       "path": "tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan.json",
       "mode": "100644",
       "type": "blob",
-      "sha": "d16c590aee6ce13f45e0c15201091a8783d52596",
+      "sha": "c721c8ed56c8d1a0a21eaf5843cedd35e8b60a54",
       "size": 2861,
-      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/d16c590aee6ce13f45e0c15201091a8783d52596"
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/c721c8ed56c8d1a0a21eaf5843cedd35e8b60a54"
     },
     {
       "path": "tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/manifest.tsv",
       "mode": "100644",
       "type": "blob",
-      "sha": "0db9d41c596d6ccb35b0c495b0e44bf48d75799e",
+      "sha": "e2fd737def08e982427b085748d67bf3a6bb26b9",
       "size": 876,
-      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/0db9d41c596d6ccb35b0c495b0e44bf48d75799e"
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/e2fd737def08e982427b085748d67bf3a6bb26b9"
     },
     {
       "path": "tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/plan.json",
       "mode": "100644",
       "type": "blob",
-      "sha": "abaa28a2c5ca013aa967643cb7328781e3ea4a27",
+      "sha": "9d5dd75c614b217119912d4bf813f0212ef1ba20",
       "size": 3414,
-      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/abaa28a2c5ca013aa967643cb7328781e3ea4a27"
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/9d5dd75c614b217119912d4bf813f0212ef1ba20"
     },
     {
       "path": "tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/manifest.tsv",
       "mode": "100644",
       "type": "blob",
-      "sha": "498da5417b538c49ce52ba13b7ef782ecc2b9e47",
+      "sha": "b02d4d3d49953d231baa49dc70c9b2543f6acc1a",
       "size": 876,
-      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/498da5417b538c49ce52ba13b7ef782ecc2b9e47"
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/b02d4d3d49953d231baa49dc70c9b2543f6acc1a"
     },
     {
       "path": "tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/plan.json",
       "mode": "100644",
       "type": "blob",
-      "sha": "c4b6be425ba7a025ce20a4da6dd7317c96fea5ff",
+      "sha": "fbb9e0400ef9aa60bc6e044d21f85e904b1bd8f0",
       "size": 3390,
-      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/c4b6be425ba7a025ce20a4da6dd7317c96fea5ff"
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/fbb9e0400ef9aa60bc6e044d21f85e904b1bd8f0"
     },
     {
       "path": "tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jdk21-developer-image-proof-20261004/manifest.tsv",
       "mode": "100644",
       "type": "blob",
-      "sha": "e09898678e5fb8a7ae7192f35024a52a72af3e24",
+      "sha": "91c3329d0a2a5889ca8cf1d86c269a2aaccb340f",
       "size": 901,
-      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/e09898678e5fb8a7ae7192f35024a52a72af3e24"
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/91c3329d0a2a5889ca8cf1d86c269a2aaccb340f"
     },
     {
       "path": "tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jdk22-jep458-multifile-text/manifest.tsv",
@@ -182,17 +182,17 @@
       "path": "tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jni-packet/manifest.tsv",
       "mode": "100644",
       "type": "blob",
-      "sha": "554a4240f2fad2713023e8b353c5ef3c2c4130a6",
+      "sha": "d4ff80271e0bdae42f2d169ea1e79721771a9b90",
       "size": 1088,
-      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/554a4240f2fad2713023e8b353c5ef3c2c4130a6"
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/d4ff80271e0bdae42f2d169ea1e79721771a9b90"
     },
     {
       "path": "tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/manifest.tsv",
       "mode": "100644",
       "type": "blob",
-      "sha": "ce107d983d051c8c8019fe766d39ed7d56eb51a0",
+      "sha": "df72e77c82846499b402c662b80220fc64e72e59",
       "size": 1579,
-      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/ce107d983d051c8c8019fe766d39ed7d56eb51a0"
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/df72e77c82846499b402c662b80220fc64e72e59"
     },
     {
       "path": "tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-history-convergence/manifest.tsv",
@@ -230,9 +230,9 @@
       "path": "tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/proof-kit/manifest.tsv",
       "mode": "100644",
       "type": "blob",
-      "sha": "3027859a0454b5905780c250b13c34fa075fad03",
+      "sha": "08353c417c7c0c4b3af5e3d21b22eb2df7ca76b0",
       "size": 124,
-      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/3027859a0454b5905780c250b13c34fa075fad03"
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/08353c417c7c0c4b3af5e3d21b22eb2df7ca76b0"
     },
     {
       "path": "tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-class-ver/manifest.tsv",
@@ -270,9 +270,9 @@
       "path": "tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv",
       "mode": "100644",
       "type": "blob",
-      "sha": "5c8978e385a4ba3b3cb7091884e77cafd281153a",
+      "sha": "3384973b07dc4452609ca8247aa8f40aafd75183",
       "size": 3300,
-      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/5c8978e385a4ba3b3cb7091884e77cafd281153a"
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/3384973b07dc4452609ca8247aa8f40aafd75183"
     },
     {
       "path": "tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-map-facts/manifest.tsv",
@@ -302,9 +302,9 @@
       "path": "tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-recipe-closure/manifest.tsv",
       "mode": "100644",
       "type": "blob",
-      "sha": "521bb2e584f30bf3aa4f4d6635cb37c7e5029cf4",
+      "sha": "9dc02e29049471644eb15ddf5d05e1f24e0fd50e",
       "size": 934,
-      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/521bb2e584f30bf3aa4f4d6635cb37c7e5029cf4"
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/9dc02e29049471644eb15ddf5d05e1f24e0fd50e"
     },
     {
       "path": "tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep485-stream-gatherers/manifest.tsv",
@@ -422,9 +422,9 @@
       "path": "tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/db-build/manifest.tsv",
       "mode": "100644",
       "type": "blob",
-      "sha": "1c287940125e55c79686c0f2310c44363713412b",
+      "sha": "61fcc979e8d61a58cf862ea9167cd2bb0f2d4007",
       "size": 427,
-      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/1c287940125e55c79686c0f2310c44363713412b"
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/61fcc979e8d61a58cf862ea9167cd2bb0f2d4007"
     },
     {
       "path": "tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/db-check/manifest.tsv",
@@ -446,9 +446,9 @@
       "path": "tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/db-mark/manifest.tsv",
       "mode": "100644",
       "type": "blob",
-      "sha": "5ad937526b4f1774bda1f3f5ec606062eec987d3",
+      "sha": "a946ffb0dc3623075c56e014d6767f38a823f52b",
       "size": 203,
-      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/5ad937526b4f1774bda1f3f5ec606062eec987d3"
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/a946ffb0dc3623075c56e014d6767f38a823f52b"
     },
     {
       "path": "tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/db-parse/manifest.tsv",
@@ -478,9 +478,9 @@
       "path": "tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/jdk-focus-a3/manifest.tsv",
       "mode": "100644",
       "type": "blob",
-      "sha": "3537a9b2a351038138c7d57b4792694fb125c2d6",
+      "sha": "4d279f458966f3a03f21737f627ba1e012a634fc",
       "size": 211,
-      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/3537a9b2a351038138c7d57b4792694fb125c2d6"
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/4d279f458966f3a03f21737f627ba1e012a634fc"
     },
     {
       "path": "tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-lanes/manifest.tsv",
@@ -518,9 +518,9 @@
       "path": "tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/scope-backslash-literal/manifest.tsv",
       "mode": "100644",
       "type": "blob",
-      "sha": "d94a63485f60ff5999fb1de948e37cbef5c9f5b9",
+      "sha": "71c82eba6faf5d994a807ebdaa99ace3314fc3b4",
       "size": 231,
-      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/d94a63485f60ff5999fb1de948e37cbef5c9f5b9"
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/71c82eba6faf5d994a807ebdaa99ace3314fc3b4"
     }
   ]
 }

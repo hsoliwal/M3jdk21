@@ -1,13 +1,13 @@
 [
   {
     "target": ".github/workflows/m3-parser-jmod-20261018.yml",
-    "before_sha256": "474db0521b39a236883b8c6bc8abb397200eca59b2b714cbd530bae0ca26c6b2",
-    "after_sha256": "55fc6777a19521d160104799c609dc3c218619081f1510ffc9ddafa83cfbb950"
+    "before_sha256": "a917afb13859602959b51859ae16b425f0b47e58d742e8d84d85c733723e2130",
+    "after_sha256": "918ea4d9cbd449dd66998badb25d399252c910504c58487313ddf2778f291ee7"
   },
   {
     "target": "make/m3/tooling/module-packs/parser/build.py",
-    "before_sha256": "abd623a90dd5c670bcd9326cf3e126cdd4de93efe2b8311ebc84d14e7d073ed5",
-    "after_sha256": "6fa0538c43a673d07f4ab5151fccf1ef23764604d3b7490384d78a5e83098157"
+    "before_sha256": "011500edcff177241c4b1944cf45383e20133b4992b286405ce215c744947807",
+    "after_sha256": "c10b8f13c3878f9db6a55f9e775a396505387a7b46d90f744bd946dbd915c70c"
   },
   {
     "target": "make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3File.java",
@@ -41,8 +41,8 @@
   },
   {
     "target": "make/m3/tooling/shared-frontend/algorithm-catalogue.tsv",
-    "before_sha256": "a9b61bf5d96072144f0e229a48011e573dd7125572edb6e6599ebf4a71003faa",
-    "after_sha256": "43842ca8104e48ae0bb18b2d0e819c8078ec8e6ed79d646610f6b2bea7c25f9f"
+    "before_sha256": "ba714f38f4dda33aff6cf14595c1921e0da6a4454dcfa0b793684e0d99c689ef",
+    "after_sha256": "74ddc68791d49fc0eb99ee57be7bef21b986df69d2d48229682bb4365be486df"
   },
   {
     "target": "src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3ASTPC.java",

@@ -35,8 +35,8 @@ final class M3JoinedReferenceWorkflowTest {
     @BeforeAll static void inputs() throws Exception {
         legacyBefore = resource("legacy-before.yml");
         nlpBefore = resource("nlp-before.yml");
-        assertEquals("9429b74592a09441deb1ca5c4308a6a417274e57", blob(legacyBefore));
-        assertEquals("31b721c7f6bca592b118668a5704f753a212fbc4", blob(nlpBefore));
+        assertEquals("35c96c12e527e5609d6a93f3848d333ad83ae950", blob(legacyBefore));
+        assertEquals("269a3dfec10492672896b2b8ddc8575e7ec08af6", blob(nlpBefore));
         Path root = Path.of(System.getProperty("m3.receiver.root")).toRealPath();
         legacyAfter = Files.readString(root.resolve(LEGACY));
         nlpAfter = Files.readString(root.resolve(NLP));

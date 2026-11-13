@@ -4,10 +4,10 @@ crate/contract/test_prepare.py	82de5be54cd1dd944c2b399f83a4f88d642ebf046a04aa935
 crate/contract/verify_receiver.py	1b877f8af0269fbc2b8cd7ef0a98245de5f044ebc5d8dae1f91bc1d8a1acd7e2
 crate/datasets/m3jdk21-build/DATASET.json	0d66d2f01bb9f175d77d43d367353944308b56749d9358b638388cdddc0d88e0
 crate/datasets/m3jdk21-build/ENGINE_EFFECTIVE.tsv	80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23
-crate/datasets/m3jdk21-build/MODES.tsv	dae11711a4208b1e7e6ced624c1640d39660426cadc1051bf71520d3535f10ae
+crate/datasets/m3jdk21-build/MODES.tsv	f769c7646ebd9e252a2c81292bbdd84764c49c0255a4cedf52360d893a77704b
 crate/datasets/m3jdk21-build/resources/META-INF/rewrite/m3-ast-build-reverse-20261017-m3jdk21-build.yml	4c208f99534ddaabe3ab17fe0dc094330d513a6a2640ae707103e5508a9ee21e
 crate/datasets/m3jdk21-build/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-m3jdk21-build/0001-jmod_pack.py.txt	250d98a2789ed8d5018a5b911a14c0a6729e435a9da1513d37a2dac7429ec3d6
-crate/datasets/m3jdk21-build/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-m3jdk21-build/0002-README.md.txt	7793bb9e194b22813f8af94333147fa463f4c9d256649714fbb488be367b8a09
+crate/datasets/m3jdk21-build/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-m3jdk21-build/0002-README.md.txt	f69ba92b43d6af251d5983f2d15ed412dea380b448927096c44f2b249f3e7b9f
 crate/datasets/m3jdk21-build/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-m3jdk21-build/0003-ant-m3ast.xml.txt	609cef3e53e6895f2eff31ae7cac7c52c3d8c47033068319feeed5783ccb1b9a
 crate/datasets/m3jdk21-build/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-m3jdk21-build/0004-gradle-m3ast.init.gradle.txt	d0d938186a2ace2ed702790de23cfd257b15438efb9fa9fc4b21486b26ffc790
 crate/datasets/m3jdk21-build/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-m3jdk21-build/0005-maven-m3ast.xml.txt	61fcf00281bc4ae3f086319c379bb7ace1c6ca8fa8c6145d32d8a0f8664d1016
@@ -22,7 +22,7 @@ crate/datasets/m3jdk21-build/resources/com/synexia/rewrite/hash-pinned-text/m3-a
 crate/datasets/m3jdk21-build/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-m3jdk21-build/0014-lock_tool_distribution.py.txt	ee0a50592064d8ba5bdb9f9ca9f412e036c9d5e60c062a6985b3062ee1192d4c
 crate/datasets/m3jdk21-build/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-m3jdk21-build/0015-test_tool_packs.py.txt	ba28752dfdcedb66165de9f0d202749c2a848d2c555632c1f846b2f4a724b199
 crate/datasets/m3jdk21-build/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-m3jdk21-build/0016-tool_packs.py.txt	24edd66788009d00eddcae9b2ba1bc61fd492b28aefb5f34c1439eff9e6b5acf
-crate/datasets/m3jdk21-build/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-m3jdk21-build/manifest.tsv	c083454d939efdc016e584126491c8db4b55e69f966ccb3434bda270f5316a4c
+crate/datasets/m3jdk21-build/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-m3jdk21-build/manifest.tsv	e5f0e78eba1191dec2d1b5d50eeba50855835e9b6529596cf1af89647661e391
 crate/datasets/m3jdk21-build/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-m3jdk21-build/pre/0001-jmod_pack.py.txt	9f541885c4fd9e9e868c63af44e9d8bc10cb6d5ebcdb663bacc2a47320404b57
 crate/datasets/m3jdk21-build/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-m3jdk21-build/pre/0013-build_pack.py.txt	9f58c25562bb29837c714cff2578e067abf3b06ec215f907638b6b6860452fe1
 crate/pom.xml	56567ab0175c47dbbada68bec8fe0fd9bbe027d6174c5cefef695a0b7283d448

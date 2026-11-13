@@ -45,7 +45,7 @@ OLD_PEERS = {
         ("69aef883c09997bae30825d7ad8757bc2358bf69", "m3_index_path_masks.c.txt"),
 }
 GUARDED_OLD = {
-    LEGACY + "verify.py": "37cafaecdf9ca96aed3087eef44d4250bac7ae76",
+    LEGACY + "verify.py": "9d19e15ea188f784df8f1ce67277b1a884b1779e",
     LEGACY + "CATEGORY_REVIEW.tsv": "f1ed7acefae57e3baf76dd0d1b42dcda83db04c0",
     LEGACY + "RECEIPT.tsv": "18b18a9149c27a6d92b9548cc4315ca7f920b791",
     TEMPLATES + "manifest.tsv": "78ad6150a339f579d9361e67a60ca9d70ad88f6b",

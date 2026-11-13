@@ -369,9 +369,9 @@
     "included_in_182_reference_occurrence_audit": false,
     "operational_afterimage_sha256_unchanged": {
       "doc/m3/jcc-source-handoff.md": "d5e18258027f457a1fcdc45ff30b4e2e7a0723825ea95b651933af23f27fd28d",
-      "doc/m3/name-mapping.json": "abfc59de62d46f6442b95717ac367461ab057cd74ed9dfffc6515d7fb0a1574c",
+      "doc/m3/name-mapping.json": "a91ad1cb7d7f358fb7c4e280b7bf3756db9dd2d6f387f4c7e622e232ff03c0bf",
       "make/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv": "1c4eedbf3f155bac469693da312c577d26999e7776ca1f85870f6cce125f1e35",
-      "make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json": "59b1491a232e3eabfd0530cbf47b01265603e6f493e382aa3c394c629b0516b6"
+      "make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json": "a0b20e45bb5d5e8f4a684ee0d4daa7a9cf8730529ae784a09778b17aceabea11"
     },
     "separate_final_documentation_review_required": true,
     "staged_after_receiving_execution_and_reference_audit": true,

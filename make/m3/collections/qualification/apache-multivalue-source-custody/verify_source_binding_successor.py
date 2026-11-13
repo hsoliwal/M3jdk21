@@ -22,10 +22,10 @@ import sys
 HERE = Path(__file__).resolve().parent
 HISTORICAL = HERE.parent / "owned-apache-multivalue-20261024"
 PREDECESSOR = HISTORICAL / "verify_source_binding_successor_v4.py"
-V4_SHA256 = "d6ac7c9368401fd3926f1c4a60e889b200d2edf59ce61d4213c298242e3c825c"
+V4_SHA256 = "5917743ab7b2bf6348b5ea73ec3ff5d9e1777475594ef4f520b8851a41ca05e0"
 RECEIPT_NAME = "SOURCE_BINDING_SUCCESSOR.json"
 RECEIPT_BYTES = 3397
-RECEIPT_SHA256 = "5498404216725b2a8742599a83f820867a615edf000b4b39d34f845ca4301249"
+RECEIPT_SHA256 = "fa889f55f2cd577eb38060186df603cb306d5dc7c13ac6fffcb86423b6a99d86"
 SUCCESSOR_PATHS = (
     "m3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java",
     "m3/collections/src/main/java/jdk/m3/collections/M3LongRangeSet.java",

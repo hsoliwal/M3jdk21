@@ -2,7 +2,7 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 # Receiving invariant policy pass
 
-This separately admitted text pass targets only `doc/m3/m3jdk21-porting-invariant.md` at integration revision `f29b0afe7ad253cc0562bc8dfdd48fc1acec710e`. Its exact preimage is `604ef82225fdb9e6ecf00e14f7630fb0956b85ec89e5c9241537733d4054f39a`, verified against both `git show` at that revision and the current receiving file before packet creation. The exact postimage is `95a5d111f0d9b2467bcc84828adc5b0efcfd1091e35a1b5c1bf1c484a2066b03`, from `../../../receiving-docs/m3jdk21-porting-invariant.md.txt`. Any other preimage must refuse.
+This separately admitted text pass targets only `doc/m3/m3jdk21-porting-invariant.md` at integration revision `f29b0afe7ad253cc0562bc8dfdd48fc1acec710e`. Its exact preimage is `fbca494f64f60c7e337a1e0ee31077d372123ff13d9483d48fd6f3bec453a6c9`, verified against both `git show` at that revision and the current receiving file before packet creation. The exact postimage is `ba394522eae7c533512a7e8eabc18486d18983223fcd15a570f2fce366efd27c`, from `../../../receiving-docs/m3jdk21-porting-invariant.md.txt`. Any other preimage must refuse.
 
 The full original receiving policy was reviewed in the initial audit and is retained byte-for-byte as the candidate's prefix. The change is exactly one blank line followed by the frozen `../../../receiving-docs/CATALOGUE_REFINEMENT_SECTION.md.txt` section. That section and the complete evergreen companion `../../../receiving-docs/SYNEXIA-CATALOGUE-FILE-REFINEMENT-1.md` were reviewed before this packet. Synexia's canonical `SYNEXIA-CATALOGUE-FILE-REFINEMENT-1` supplies the shared rule; this existing target porting invariant remains receiving authority.
 

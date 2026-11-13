@@ -4,8 +4,8 @@
   "jtreg_before_sha256": "ebe702139e903ac5fc4b3e1b6c6f0180a1c4fda7d6db9175532bf96979296aa5",
   "jtreg_after_sha256": "b9bbf14010da526e41d0e78945e728d5e9aa1cab8ccc732a815a9a14a253ee2a",
   "manifest_hashes": {
-    "java": "d05609ee1f486274c7e17380fe977b51050a1a3e1c2e5cdebe4f5df019db4903",
-    "text": "654f67f4ccfc86811d707c23d84514f08eb3dd4638e76df333816623c79b08cc"
+    "java": "8cf1efebde5aa394637224b49b4ce08c55786619c49eb33f912429873fb9b60a",
+    "text": "90e9d0b77ff5586611e6d3a3889dd9e8e2f5df4fb840e3a3dcc5453d9e58145d"
   },
   "changed_payloads": [
     {
@@ -37,9 +37,9 @@
       "sha256": "33cca9f8b476c8e923bc0cd17dbbbb6aba24dfd2209822503b2d3cd150f9708f"
     }
   ],
-  "payload_manifest_sha256": "b8c7a25e4f5c269c8637b00c6016ccfb4df0c3077de83701bf0e4ca00aae42cf",
-  "file_review_sha256": "1ab4620489e0fa8d06ba9cf4fa766ba9674729a2a6433690149f93e5051d41b6",
-  "local_gate_sha256": "af519276af3be51422da3d89776f63d9dc628d23b8d592571b1b78bfc163b38e",
+  "payload_manifest_sha256": "add97e84503b5d140deaf389bcbbe9edc29547f640e1cf7daf6090acf5924360",
+  "file_review_sha256": "572dd4e39ed17df69cc10b6a5348c15d2970ab28f6c948bf1873d372cbe09add",
+  "local_gate_sha256": "7968431003c8374a99000fac0ed414a32edbf8f9576fc1b2f2833308fff14da4",
   "whole_test_template_qualification": "three actual-image modes all passed 56,763 checks each; not yet SDK emission",
   "template_qualification_receipt_sha256": "01c69329c487fbd502e73720f34b5a1fc4ff926f39fcfcc4a01323e635853c20"
 }

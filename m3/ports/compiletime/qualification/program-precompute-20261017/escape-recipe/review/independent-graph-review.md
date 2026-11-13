@@ -12,17 +12,17 @@ The five files below were read from the actual SDK output at `target/candidate`,
 | Emitted target | SHA-256 |
 | --- | --- |
 | `m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3EscapeFlow.java` | `f8e14d9ab9e4499457ab58ad0776a8e8124331f28ab48de23bb69bc2f83adaff` |
-| `m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ItemReferenceScan.java` | `39881510663e11b27b59fc5f1ff8e1ff86e793a2f5d7ef36cef42023aebbccbf` |
+| `m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ItemReferenceScan.java` | `248068454a54e51bac6dc571c2d6033b7a5ecd380883d974478b0dcc9c1a21e8` |
 | `m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3GvasLiteralHarvester.java` | `cbe859bcfd97ee2e7bec6122c96de66d25159d00770cc84c5f0227c64f96f814` |
 | `m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3EscapePreparedTest.java` | `f1a3e4fa22d4ac116e936cac4d51d459d3def5ae855bd484157ca9fe3006de46` |
-| `doc/m3/name-mapping.d/m3-program-escape-precompute.json` | `159a44eeb638aff38ba84add724dcb2a0d64e9be29411b1224ce81f499c90078` |
+| `doc/m3/name-mapping.d/m3-program-escape-precompute.json` | `25780569fc06c0330fb371707105c325901149d38f6a689ecfc3b809cc47a7cf` |
 
 The source-binding receipt hashes are:
 
 | Receipt | SHA-256 |
 | --- | --- |
-| `target/candidate/SDK_INPUTS.tsv` | `03b3c05e03aed588d1afd101762a60c6d51aa1e1a8ed054a59f9663ddd42eb7a` |
-| `target/candidate/SDK_RESULTS.tsv` | `186b404d33b9f39998c92953fb7cafa29f8223ea334ca1b55e1eb1a16be0cade` |
+| `target/candidate/SDK_INPUTS.tsv` | `996267756ca408272cfd550a2b85cd6218c8d60dcb8a765acf84eafeb4accff1` |
+| `target/candidate/SDK_RESULTS.tsv` | `40783dd57247f2b8ff24bf3d6d9e18a275e892042f6207b9e1e5d98e207b4ef7` |
 | `target/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml` | `a055e885d201d8c27d482f9b7d0bc6c73eff0cd8be508916a3182ab32d6b3f86` |
 
 The inspected final SDK report records five tests, zero failures, zero errors, and zero skips. This establishes the named recipe execution and source binding; it is not a runtime or performance result.
@@ -59,12 +59,12 @@ The preceding section remains the exact V2 review history. Subsequent qualificat
 
 The tiny caller delta was inspected independently. The existing outer loop skips methods with an empty obtaining list before invoking `method`. Within `method`, `frames == null || sites.size() == 1` leaves `prepared` null. The unchanged result selection still emits `ANALYSIS_FAILED` for absent analysis, otherwise executes the corrected forward classifier for the one site. Multiple-site methods prepare once, and a preparation-budget refusal uses the same fallback. Frame construction, site coordinates, BCI/record order and public API are unchanged. No correctness blocker was found in that selection.
 
-The final caller SHA-256 is `4c504f5272d2d66b3e1de78e8db4dd4690aa4795b98eba91a828b15bbe409994`; the updated provenance shard is `d293b891ed743279037f4cf4417bf8efaae9fab186dee4a3cc6bb69dc78a0e8f`. The graph owner, GVAS local-name repair and test source retain the hashes in the original table.
+The final caller SHA-256 is `de8bdb834808fe654f0c983fc34f97d68ac400d36901ab8fc8f957e101d90288`; the updated provenance shard is `d293b891ed743279037f4cf4417bf8efaae9fab186dee4a3cc6bb69dc78a0e8f`. The graph owner, GVAS local-name repair and test source retain the hashes in the original table.
 
 | Final V4 receipt | SHA-256 |
 | --- | --- |
-| `target/candidate/SDK_INPUTS.tsv` | `f42529caa44677e118295e233ba89022c5b32f8d4dbbdf312f6ad33bf2825055` |
-| `target/candidate/SDK_RESULTS.tsv` | `c70b1ad337f5bd4d38305f7529c1ceef7ec70e63bf6a7231e37568b58fb9ba68` |
+| `target/candidate/SDK_INPUTS.tsv` | `96b67014936ee7fbacc24ab6ed7320f466aa17a55c4bbdbd9b79c9114795f7e5` |
+| `target/candidate/SDK_RESULTS.tsv` | `4431072a8b156f716e4610a1e3d83d664c216af92553de32026964af89ea9713` |
 | `target/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml` | `065c2b1dcf7ad3400dcb5b07f9969b20d202efb7e446a1f9f0dd6b63baa2c6d9` |
 | `/tmp/m3-program-escape-qualified-v4/receipt.json` | `4daa23b7a980ad7d0d500bd053f8a8a0ba52f6498aeac5a83c9afc29a2e32ec6` |
 

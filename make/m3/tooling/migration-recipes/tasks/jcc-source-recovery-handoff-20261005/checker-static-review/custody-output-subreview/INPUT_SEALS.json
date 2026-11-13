@@ -6,7 +6,7 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/check_references_v3.py",
       "bytes": 40725,
-      "sha256": "c88b8805881ab3cc299b530d50cbe8d6749a0a4925d7ea5e9ce512bd3a0a3ece"
+      "sha256": "9dc401c3bf818e2a50793a1b0f5bb465e2a26ae0916668587f9b2f2a30a06ff5"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/reference-audit-draft-v3/READINESS_T01.json",
@@ -21,12 +21,12 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/CUSTODY_EVIDENCE_INDEX.json",
       "bytes": 260154,
-      "sha256": "7876e0828731f3e4687c67162156788e7bde001406d5d723dd9acd8433fb36ee"
+      "sha256": "f16f04f2209fbf8ee78288b44ae46521244026262134a7258163910eb6bada43"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/ADDITIONAL_RECEIPTS.json",
       "bytes": 60890,
-      "sha256": "082d12dd79e70bb747441fc8b221ab5ddeea5fd8174629b068c137c4682e1b5a"
+      "sha256": "0a0171f801622e6ccee7559bbb29a89c8129e152107e23cf583cae93dbae0570"
     }
   ]
 }

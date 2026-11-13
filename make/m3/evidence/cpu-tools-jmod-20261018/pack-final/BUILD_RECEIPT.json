@@ -1,7 +1,7 @@
 {
   "catalogue_output_sha256": "5c10bbe5a1a36c7614e7008d714494438e16250bea84c27e36ceb29fb91399ff",
   "cli_replay": "EXACT_OUTPUT_MATCH",
-  "commands_sha256": "8bf340d6a1063ea1938b64ff14d847738f201502548990edfbab926a00edee6c",
+  "commands_sha256": "f8aab853c198b1e5dd38f48e683530fdfe04d76c730fe128f4b38f4bf1df146e",
   "fixture_classes": [
     "M3DonorToolsTest",
     "M3SourceToolsTest",
@@ -120,7 +120,7 @@
   ],
   "schema": "M3_CPU_TOOLS_BUILD_V1",
   "self-test_output_sha256": "fdd1a2ea5477a12f4be68be120a982f8cc8fc400e703d3c3cb7ce0f1fabbe28b",
-  "source_inputs_sha256": "00a20b43482a0f4f0b00f4fd69db94881bc862e24b4f7347c616e5d9db362572",
+  "source_inputs_sha256": "1fd29821c5adfa76e7d0dc9bc540361cbea065bcc4c1af2cafd19bf44db410be",
   "source_jdk_linked_modules": [
     "java.base",
     "java.compiler",

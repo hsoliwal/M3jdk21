@@ -8,10 +8,10 @@
     "test/jdk/java/lang/String/M3StringRegexPreparedBatchTest.java": "465e1002df44eb9453b3d6c45670af4b9a9de90e7fc746d9b82a2c85423be0ef"
   },
   "manifest_sha256": {
-    "java": "d05609ee1f486274c7e17380fe977b51050a1a3e1c2e5cdebe4f5df019db4903",
-    "text": "654f67f4ccfc86811d707c23d84514f08eb3dd4638e76df333816623c79b08cc"
+    "java": "8cf1efebde5aa394637224b49b4ce08c55786619c49eb33f912429873fb9b60a",
+    "text": "90e9d0b77ff5586611e6d3a3889dd9e8e2f5df4fb840e3a3dcc5453d9e58145d"
   },
-  "sdk_binding_sha256": "da0202c5af6e772edcf45706aa71d2132634ebffc60432ac1532b2f074ee3cd2",
+  "sdk_binding_sha256": "708a939cb46e7677f099b7137e81b28480f2b6edc578f5355884cab4116bb300",
   "image_and_harness_rechecked_after_tests": true,
   "suites": {
     "critical-final": {

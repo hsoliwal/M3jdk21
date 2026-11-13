@@ -7,7 +7,7 @@
       "before": null,
       "after": {
         "resource": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/M3TQ.java.txt",
-        "sha256": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155"
+        "sha256": "225e847c5fb9f0195b37b14810d405dc6cb8ff83156e667dc127d36489cbf7aa"
       }
     },
     {
@@ -23,18 +23,18 @@
       "before": null,
       "after": {
         "resource": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/workflow.yml.txt",
-        "sha256": "b82b840f8677d52b77bdd5be16e7eb59794612d74918e139d643e5ac29ab8c93"
+        "sha256": "d892092c9eb49232e0ad2a4d5a41a0199ac9b696f149a6292471072515a27175"
       }
     },
     {
       "path": "doc/m3/counterpart-naming.md",
       "before": {
         "resource": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/counterpart-naming.md.txt.before",
-        "sha256": "8a9df82b06f61ec680d47bbf512201f8120e661831b4d92b067aa58e7c84451c"
+        "sha256": "d66369a44018e7c8b8e734e4a9f7c6f146aeee6db2fd5f68d709586050528e3d"
       },
       "after": {
         "resource": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/counterpart-naming.md.txt",
-        "sha256": "8a32b9ba61492c9b232439b9d917db12f3d8d5b25236bb4acb0439c32e16ac8d"
+        "sha256": "1ab1e01e8c0f85bf2fe4cbd10f02fd9803f808a7bc517383d6ddf2ff903b94c3"
       }
     },
     {
@@ -60,11 +60,11 @@
       "path": "src/java.base/share/legal/synexia.md",
       "before": {
         "resource": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/synexia.md.txt.before",
-        "sha256": "1d615647231198fcfe563d63655165b4265fb9220626c24b88877fb3c76bf264"
+        "sha256": "2e4ba362b45291984fe5fd15c7c1e68392e22a459a86c96f407f4f2a54712263"
       },
       "after": {
         "resource": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/synexia.md.txt",
-        "sha256": "f2c1255f1a27c75e7c6835e01f61e3fb861407571410365e9b64267c7f27f516"
+        "sha256": "59e2fd36c354af4b9096bcad07ebbd3b7a96b815050bcfa66b29f49aeab926bd"
       }
     },
     {

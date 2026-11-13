@@ -16,14 +16,14 @@
   "inputs": {
     "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/INPUTS.json",
     "bytes": 20813,
-    "sha256": "96c283ba0648634120824bc74a250253de73bf53151f3535a68a446f85d8de70",
-    "git_blob": "94c0d045139a94aa3d71cafb67286dc63bb32b68"
+    "sha256": "0ed7a6ae25630a959281f5d24184a4efc4a871340388f1a16b1aeca11b87ec6c",
+    "git_blob": "7e84a3ee29c57c3c17f42c3e1b772007d27c287e"
   },
   "runner": {
     "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/run.py",
     "bytes": 2885,
-    "sha256": "7415a84b65eb0e61f5751f8429bf1d152df02ea4b575caae99ca5fc16c7964e5",
-    "git_blob": "97533a4d2e05f077884fed3fec537212a2fe901a"
+    "sha256": "f30625d9a2ed2fab1f10d7f5b1e1dccd1247adda82c54b65977c829bf9c41a14",
+    "git_blob": "0bb8ff0d0b3ba4d17cdb06f3ce3d98684ca2e6ce"
   },
   "staged_input_count": 21,
   "scope": "Four unchanged original A3 recipe tests; no whole-module, foundation workflow, runtime/JNI or JDK build qualification.",

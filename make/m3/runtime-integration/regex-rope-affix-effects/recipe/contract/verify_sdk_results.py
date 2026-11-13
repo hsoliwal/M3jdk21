@@ -26,11 +26,11 @@ RECIPE = "com.synexia.m3jdk.RopeAffixPreparedEffects20261017"
 TARGET_BASELINE = "3bbb4712fb20adba1405741db8457164b9f436f5"
 RESOURCE = "src/main/resources/com/synexia/rewrite"
 MANIFEST_HASHES = {
-    "java": "d05609ee1f486274c7e17380fe977b51050a1a3e1c2e5cdebe4f5df019db4903",
-    "text": "654f67f4ccfc86811d707c23d84514f08eb3dd4638e76df333816623c79b08cc",
+    "java": "8cf1efebde5aa394637224b49b4ce08c55786619c49eb33f912429873fb9b60a",
+    "text": "90e9d0b77ff5586611e6d3a3889dd9e8e2f5df4fb840e3a3dcc5453d9e58145d",
 }
 MANIFEST_COUNTS = {"java": 6, "text": 9}
-PARENT_INPUTS_HASH = "cfd27d7d001eda4da6053b07890ba1bfd7d3056790b325dea4e1a100c77cff5d"
+PARENT_INPUTS_HASH = "706f5b1da7ecf62ed23f5203d76e7c73b226cdef683b8a9a76fa5b4110810b5d"
 PARENT_INPUT_COUNT = 77
 SDK_REPORT = "target/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
 SDK_TESTS = {

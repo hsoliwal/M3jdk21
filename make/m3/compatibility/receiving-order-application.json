@@ -14,7 +14,7 @@
       "stage": "target-01",
       "repository": "target",
       "path": "doc/m3/name-mapping.json",
-      "beforeSha256": "5f57c35325374407cefa840f8071a8f739b931854b6c420d6d09deb6a443b2d5",
+      "beforeSha256": "146a1cd0db4d3f2ce24ca9157093bf51d91490e69939ca1ee6b85e81b672a0bb",
       "afterSha256": "75df53d5b22e58cf094ca4ecac28cb7c88753e1e4044934970e60f1ac15a04ff"
     },
     {

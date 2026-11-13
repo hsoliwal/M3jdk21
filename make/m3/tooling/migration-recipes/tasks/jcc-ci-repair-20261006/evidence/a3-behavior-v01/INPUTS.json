@@ -91,15 +91,15 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/workspace/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-regex-memory-workflow/manifest.tsv",
       "bytes": 507,
-      "sha256": "364df82310fbfd7f18cefa8982d7dd1a8cfa0814fce6fbb1e7218f0f39da1e47",
-      "git_blob": "29e7731cd09d310ca5e3e221b405618af64abb56",
+      "sha256": "9540cab846751163a2567a2f5d05adc3ff39274afd3a31f1d8db452a3b59a1dd",
+      "git_blob": "76384056b0e1c03bcfbed9455e52de6792ae6a23",
       "repository_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-regex-memory-workflow/manifest.tsv",
       "origin": "EXACT_CURRENT_GIT_BLOB",
       "capture": {
-        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/calls/29e7731cd09d310ca5e3e221b405618af64abb56.json",
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/calls/76384056b0e1c03bcfbed9455e52de6792ae6a23.json",
         "bytes": 845,
-        "sha256": "0337642251749448b4371065acbf89925f0c0ba757e8fb9cc52d411e35f80514",
-        "git_blob": "f904e92d1a70ccd9d725656b3c071c5cb44d8bc1"
+        "sha256": "9c5ce02e86fbb8d911c744813222286468bf0d58d4241176db773c9ecfdf368c",
+        "git_blob": "ddca311664ce466b73c149d68db21b97067e12b7"
       }
     },
     {
@@ -112,8 +112,8 @@
       "capture": {
         "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/calls/c1c92c23ebf33688568e5810d62f60a41c712417.json",
         "bytes": 11864,
-        "sha256": "1e13d199cb151bf0c24f555842a47442ca0074ca2126bc7a8aec0ffec8adee84",
-        "git_blob": "aa5e6d6c273101497eac0f2c3a81ab8052604dc9"
+        "sha256": "bb6fd8f9130b8e6c5360816a8e8010adad609e2c0fae30a4df6da2c99a3ab0a1",
+        "git_blob": "f67fb725a9df0fa65965508a7b464a07e2cd0c8c"
       }
     },
     {
@@ -252,8 +252,8 @@
       "capture": {
         "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/calls/7222e456179226a5c5d005d2deddecee7317dced.json",
         "bytes": 11839,
-        "sha256": "1864a7fecbbb185626a94ee28858a8d2642b22905b1aaae5329845636d8d6cd7",
-        "git_blob": "089ba08e038b04db9b111a4100082556f93fda04"
+        "sha256": "308645075590c90bcdee9f17524340f70d281f67ea4059845702f96bb0096d27",
+        "git_blob": "d1ec014f5e4dc70f8c0c307b3439e7ad712a56c0"
       }
     },
     {
@@ -273,15 +273,15 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/workspace/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java",
       "bytes": 4975,
-      "sha256": "83d970effb393f67462e5cb269118e6a390d82f74f70eb16905fd4ba948a4416",
-      "git_blob": "3a2f62fdf15efb66a35b9dcd9e1051b97710cd99",
+      "sha256": "d2d9405ad42f8744eedf75ec50be123ac5401f8c203335ebb53832c0a5cb42bf",
+      "git_blob": "2a86b2b2ef9287c338577fc3fcb977cf0ac27953",
       "repository_path": "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java",
       "origin": "ACTUAL_CI_OPENREWRITE_RESULT",
       "source": {
         "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate-v02/execution/materialized-01/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java",
         "bytes": 4975,
-        "sha256": "83d970effb393f67462e5cb269118e6a390d82f74f70eb16905fd4ba948a4416",
-        "git_blob": "3a2f62fdf15efb66a35b9dcd9e1051b97710cd99"
+        "sha256": "d2d9405ad42f8744eedf75ec50be123ac5401f8c203335ebb53832c0a5cb42bf",
+        "git_blob": "2a86b2b2ef9287c338577fc3fcb977cf0ac27953"
       }
     },
     {
@@ -302,8 +302,8 @@
   "prior_java_receipt": {
     "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate-v02/execution/JAVA_EXECUTION.json",
     "bytes": 37719,
-    "sha256": "4e53e428b77b8ef962a8c96846175391479f2991a878c2933f648c8c7c04646b",
-    "git_blob": "1ec1d6339bb79c5c4d52edddb03d37c2227e1359"
+    "sha256": "66433033fc2b467e330bb54d0cb2a8ee963f418d9746462ca4f4b37fd11e5094",
+    "git_blob": "5dd6386291e9585167b1961aaee0f295893e0914"
   },
   "toolchain": {
     "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/toolchain/TOOLCHAIN.json",

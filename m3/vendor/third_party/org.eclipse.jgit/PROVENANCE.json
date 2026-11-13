@@ -4799,7 +4799,7 @@
       "kind": "m3-overlay-source",
       "overlay": "JGIT_BASE64_TO_JDK v1",
       "recipe": "make/m3/tooling/jdk-superset/retarget/tools/jgit_base64_to_jdk.py",
-      "recipe_sha256": "6619e764d6f90ad50e9a2fcb69d2fcf3e7aa753847db95d325cf04933c6b83ea",
+      "recipe_sha256": "82339177567da36ae13a268abfc47693ffb8cd84545fde9fecf2fbc0b6c241b5",
       "repository": "m3/vendor/third_party/org.eclipse.jgit/src/main/java/org/eclipse/jgit/util/Base64.java",
       "sha256": "45be92b2b35567d2889d36f18ccbffcace35dfd5a2d18190fff6a31e660be47d",
       "upstream": "org/eclipse/jgit/util/Base64.java"
@@ -5305,7 +5305,7 @@
     {
       "kind": "m3-overlay-record",
       "repository": "m3/vendor/third_party/org.eclipse.jgit/OVERLAY_SOURCES.json",
-      "sha256": "e319c2ba93cdc0d037c726a32868eb022b4bd201aa460d2dc22bb8922c06ae4f",
+      "sha256": "e8d3095f267bab1576c72d43d9d38539082cb81a940f3ca5d5567357ad261cb3",
       "upstream": "make/m3/tooling/jdk-superset/retarget/tools/jgit_base64_to_jdk.py"
     }
   ],

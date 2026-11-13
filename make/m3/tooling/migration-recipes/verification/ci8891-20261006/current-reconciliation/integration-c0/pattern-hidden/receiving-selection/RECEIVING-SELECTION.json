@@ -43,7 +43,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v1/after/m3/tooling/image-gates/current-c0.json",
-      "sha256": "ed524e76758081208a939f619d3bab55abf9ed0c95c053ab2957211d45718cab",
+      "sha256": "cb50814e3b4a7aef2e18032851e98c197759f93245aea394441292fbc776ad06",
       "bytes": 79664
     },
     {
@@ -53,7 +53,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v1/after/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv",
-      "sha256": "523707713724ab3beacca8a7b9f38659a61c83bdd3940929e97487347e438c36",
+      "sha256": "18c022bb19342e529f1cc5dc51cfb04b43f9e25b952f42b7e746717c3326f51a",
       "bytes": 3300
     },
     {
@@ -78,7 +78,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v1/before/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv",
-      "sha256": "1a713463413df2684791ef1a214db69a7e5b23da888e61983c6b4902cef9c639",
+      "sha256": "3cc647126b451e35f6d5fe6a6b4fc41260da9b9f2c0757e96219e56e48a27562",
       "bytes": 3300
     },
     {
@@ -138,22 +138,22 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v1/protected/m3/runtime-integration/check-m3string-invariants.py",
-      "sha256": "1913aceb03b079596c7c8aea80285aecd2849f81475b597e4ea4094609b749a9",
+      "sha256": "85b515e05959bb8247bf22ad639ef81bdf87c9e4f93008a57cb284189b11eb7e",
       "bytes": 48860
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v1/protected/m3/runtime-integration/fix-root-ascii-case/manifest.json",
-      "sha256": "1eee6e6d1db0d7f602509db92e80fe00b990db2a37aae929a288b1379b602bd1",
+      "sha256": "d6e0245b968dccf0820c782fcb8eb1b3ad621a0ec306f95bddb9ff58a1ecc74b",
       "bytes": 778
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v1/protected/m3/tooling/image-gates/src/test/python/test_current_context.py",
-      "sha256": "6bf08c29ff6c5a4345159051de4b7144e922f61763c865bf2305a55799c03886",
+      "sha256": "1ccfe13c1f35f7e4307c8d5671396a6cb8f624cd4e1b71b7b8186c89c5f3bc6a",
       "bytes": 8723
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v1/protected/m3/tooling/image-gates/verify-current.py",
-      "sha256": "66040e38b9929442673dcead210a51b997865de25cb106048f7c51cb365fae23",
+      "sha256": "c6e9e53dcf7ce65799e366cd58e711b9a1d77333beaafa7812fcb4eb3b9e2cad",
       "bytes": 16970
     },
     {
@@ -178,12 +178,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v1/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/phc-current-c0/manifest.tsv",
-      "sha256": "31a4c764cd7dbb835834de27a70e925b6c567d36502303041f5236b8f89a2971",
+      "sha256": "db1570243cb2518854fb745de55d2d1070ae74dc264feecc186cdddd1c598b0c",
       "bytes": 1184
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v1/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/phc-current-c0/target-1.txt",
-      "sha256": "ed524e76758081208a939f619d3bab55abf9ed0c95c053ab2957211d45718cab",
+      "sha256": "cb50814e3b4a7aef2e18032851e98c197759f93245aea394441292fbc776ad06",
       "bytes": 79664
     },
     {
@@ -193,7 +193,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v1/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/phc-current-c0/target-3.txt",
-      "sha256": "523707713724ab3beacca8a7b9f38659a61c83bdd3940929e97487347e438c36",
+      "sha256": "18c022bb19342e529f1cc5dc51cfb04b43f9e25b952f42b7e746717c3326f51a",
       "bytes": 3300
     },
     {
@@ -228,7 +228,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v2/after/m3/tooling/image-gates/current-c0.json",
-      "sha256": "ed524e76758081208a939f619d3bab55abf9ed0c95c053ab2957211d45718cab",
+      "sha256": "cb50814e3b4a7aef2e18032851e98c197759f93245aea394441292fbc776ad06",
       "bytes": 79664
     },
     {
@@ -238,7 +238,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v2/after/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv",
-      "sha256": "523707713724ab3beacca8a7b9f38659a61c83bdd3940929e97487347e438c36",
+      "sha256": "18c022bb19342e529f1cc5dc51cfb04b43f9e25b952f42b7e746717c3326f51a",
       "bytes": 3300
     },
     {
@@ -263,7 +263,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v2/before/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv",
-      "sha256": "1a713463413df2684791ef1a214db69a7e5b23da888e61983c6b4902cef9c639",
+      "sha256": "3cc647126b451e35f6d5fe6a6b4fc41260da9b9f2c0757e96219e56e48a27562",
       "bytes": 3300
     },
     {
@@ -308,22 +308,22 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v2/protected/m3/runtime-integration/check-m3string-invariants.py",
-      "sha256": "1913aceb03b079596c7c8aea80285aecd2849f81475b597e4ea4094609b749a9",
+      "sha256": "85b515e05959bb8247bf22ad639ef81bdf87c9e4f93008a57cb284189b11eb7e",
       "bytes": 48860
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v2/protected/m3/runtime-integration/fix-root-ascii-case/manifest.json",
-      "sha256": "1eee6e6d1db0d7f602509db92e80fe00b990db2a37aae929a288b1379b602bd1",
+      "sha256": "d6e0245b968dccf0820c782fcb8eb1b3ad621a0ec306f95bddb9ff58a1ecc74b",
       "bytes": 778
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v2/protected/m3/tooling/image-gates/src/test/python/test_current_context.py",
-      "sha256": "6bf08c29ff6c5a4345159051de4b7144e922f61763c865bf2305a55799c03886",
+      "sha256": "1ccfe13c1f35f7e4307c8d5671396a6cb8f624cd4e1b71b7b8186c89c5f3bc6a",
       "bytes": 8723
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v2/protected/m3/tooling/image-gates/verify-current.py",
-      "sha256": "66040e38b9929442673dcead210a51b997865de25cb106048f7c51cb365fae23",
+      "sha256": "c6e9e53dcf7ce65799e366cd58e711b9a1d77333beaafa7812fcb4eb3b9e2cad",
       "bytes": 16970
     },
     {
@@ -348,12 +348,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v2/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/phc-current-c0/manifest.tsv",
-      "sha256": "31a4c764cd7dbb835834de27a70e925b6c567d36502303041f5236b8f89a2971",
+      "sha256": "db1570243cb2518854fb745de55d2d1070ae74dc264feecc186cdddd1c598b0c",
       "bytes": 1184
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v2/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/phc-current-c0/target-1.txt",
-      "sha256": "ed524e76758081208a939f619d3bab55abf9ed0c95c053ab2957211d45718cab",
+      "sha256": "cb50814e3b4a7aef2e18032851e98c197759f93245aea394441292fbc776ad06",
       "bytes": 79664
     },
     {
@@ -363,7 +363,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v2/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/phc-current-c0/target-3.txt",
-      "sha256": "523707713724ab3beacca8a7b9f38659a61c83bdd3940929e97487347e438c36",
+      "sha256": "18c022bb19342e529f1cc5dc51cfb04b43f9e25b952f42b7e746717c3326f51a",
       "bytes": 3300
     },
     {
@@ -423,7 +423,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/runtime-checker-c0-authoring-v1/protected/m3/runtime-integration/fix-root-ascii-case/Fix.py",
-      "sha256": "ac3d829f7aed357e3d5cc01bb2027ac3447c5962851441c11d8dd762f91df02f",
+      "sha256": "d1d921c321c31fe81f76b1f8d57a752495a84a0e6f0ada4162db6c548c3344ee",
       "bytes": 1819
     },
     {
@@ -448,12 +448,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/runtime-checker-c0-authoring-v1/protected/m3/tooling/image-gates/src/test/python/test_current_context.py",
-      "sha256": "6bf08c29ff6c5a4345159051de4b7144e922f61763c865bf2305a55799c03886",
+      "sha256": "1ccfe13c1f35f7e4307c8d5671396a6cb8f624cd4e1b71b7b8186c89c5f3bc6a",
       "bytes": 8723
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/runtime-checker-c0-authoring-v1/protected/m3/tooling/image-gates/verify-current.py",
-      "sha256": "66040e38b9929442673dcead210a51b997865de25cb106048f7c51cb365fae23",
+      "sha256": "c6e9e53dcf7ce65799e366cd58e711b9a1d77333beaafa7812fcb4eb3b9e2cad",
       "bytes": 16970
     },
     {
@@ -463,12 +463,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/runtime-checker-c0-authoring-v1/protected/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/03-invariants.py.txt",
-      "sha256": "fcfb61309318800949f5ef582f946bdbb14c40244f2dd84dd82f8b32e293d8b2",
+      "sha256": "3f630dcdb70a3118207de24e848fc9e40cc6acc30c7c40fa01e1b6bd705e825c",
       "bytes": 42045
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/runtime-checker-c0-authoring-v1/protected/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/manifest.tsv",
-      "sha256": "bf6d75e8bd8176486e82f9871a116356521409ab6bd9d666c3946ad3a34ec21c",
+      "sha256": "8c516ab3013ce6cfb460fdd368db59eb452920796d9f1ac92644bf807e7d8407",
       "bytes": 1579
     },
     {
@@ -528,7 +528,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/string-escape-c0-authoring-v2/before/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv",
-      "sha256": "d67ddc1cc759f042871c680d9510b929da4fd6b0523b43e966139cbe8ddace3b",
+      "sha256": "b055ce8829908257c61ddc71c127c28620657f2bd3cbe71fb6755404c5f4480c",
       "bytes": 3300
     },
     {
@@ -553,12 +553,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/string-escape-c0-authoring-v2/protected/m3/runtime-integration/fix-root-ascii-case/Fix.py",
-      "sha256": "ac3d829f7aed357e3d5cc01bb2027ac3447c5962851441c11d8dd762f91df02f",
+      "sha256": "d1d921c321c31fe81f76b1f8d57a752495a84a0e6f0ada4162db6c548c3344ee",
       "bytes": 1819
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/string-escape-c0-authoring-v2/protected/m3/runtime-integration/fix-root-ascii-case/README.md",
-      "sha256": "6256ac865fffedb7a8a5c2656afd5d23e893b40f737ea8f0f4afc53689fbe296",
+      "sha256": "0a2c2e248dd7d0184b82914b583fadbf6ee41a9e75499ce83bb581105aa6f5a2",
       "bytes": 1120
     },
     {
@@ -583,12 +583,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/string-escape-c0-authoring-v2/protected/m3/tooling/image-gates/src/test/python/test_current_context.py",
-      "sha256": "6bf08c29ff6c5a4345159051de4b7144e922f61763c865bf2305a55799c03886",
+      "sha256": "1ccfe13c1f35f7e4307c8d5671396a6cb8f624cd4e1b71b7b8186c89c5f3bc6a",
       "bytes": 8723
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/string-escape-c0-authoring-v2/protected/m3/tooling/image-gates/verify-current.py",
-      "sha256": "66040e38b9929442673dcead210a51b997865de25cb106048f7c51cb365fae23",
+      "sha256": "c6e9e53dcf7ce65799e366cd58e711b9a1d77333beaafa7812fcb4eb3b9e2cad",
       "bytes": 16970
     },
     {
@@ -638,7 +638,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/string-escape-c0-authoring-v2/protected/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/08-M3TQ.java.txt",
-      "sha256": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155",
+      "sha256": "225e847c5fb9f0195b37b14810d405dc6cb8ff83156e667dc127d36489cbf7aa",
       "bytes": 16998
     },
     {
@@ -2868,17 +2868,17 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v1/candidate/m3/runtime-integration/check-m3string-invariants.py",
-      "sha256": "1913aceb03b079596c7c8aea80285aecd2849f81475b597e4ea4094609b749a9",
+      "sha256": "85b515e05959bb8247bf22ad639ef81bdf87c9e4f93008a57cb284189b11eb7e",
       "bytes": 48860
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v1/candidate/m3/runtime-integration/fix-root-ascii-case/Fix.py",
-      "sha256": "ac3d829f7aed357e3d5cc01bb2027ac3447c5962851441c11d8dd762f91df02f",
+      "sha256": "d1d921c321c31fe81f76b1f8d57a752495a84a0e6f0ada4162db6c548c3344ee",
       "bytes": 1819
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v1/candidate/m3/runtime-integration/fix-root-ascii-case/manifest.json",
-      "sha256": "1eee6e6d1db0d7f602509db92e80fe00b990db2a37aae929a288b1379b602bd1",
+      "sha256": "d6e0245b968dccf0820c782fcb8eb1b3ad621a0ec306f95bddb9ff58a1ecc74b",
       "bytes": 778
     },
     {
@@ -2908,12 +2908,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v1/candidate/m3/tooling/image-gates/src/test/python/test_current_context.py",
-      "sha256": "6bf08c29ff6c5a4345159051de4b7144e922f61763c865bf2305a55799c03886",
+      "sha256": "1ccfe13c1f35f7e4307c8d5671396a6cb8f624cd4e1b71b7b8186c89c5f3bc6a",
       "bytes": 8723
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v1/candidate/m3/tooling/image-gates/verify-current.py",
-      "sha256": "66040e38b9929442673dcead210a51b997865de25cb106048f7c51cb365fae23",
+      "sha256": "c6e9e53dcf7ce65799e366cd58e711b9a1d77333beaafa7812fcb4eb3b9e2cad",
       "bytes": 16970
     },
     {
@@ -2923,12 +2923,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v1/candidate/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/03-invariants.py.txt",
-      "sha256": "fcfb61309318800949f5ef582f946bdbb14c40244f2dd84dd82f8b32e293d8b2",
+      "sha256": "3f630dcdb70a3118207de24e848fc9e40cc6acc30c7c40fa01e1b6bd705e825c",
       "bytes": 42045
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v1/candidate/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/manifest.tsv",
-      "sha256": "bf6d75e8bd8176486e82f9871a116356521409ab6bd9d666c3946ad3a34ec21c",
+      "sha256": "8c516ab3013ce6cfb460fdd368db59eb452920796d9f1ac92644bf807e7d8407",
       "bytes": 1579
     },
     {
@@ -2998,17 +2998,17 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/candidate/m3/runtime-integration/check-m3string-invariants.py",
-      "sha256": "1913aceb03b079596c7c8aea80285aecd2849f81475b597e4ea4094609b749a9",
+      "sha256": "85b515e05959bb8247bf22ad639ef81bdf87c9e4f93008a57cb284189b11eb7e",
       "bytes": 48860
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/candidate/m3/runtime-integration/fix-root-ascii-case/Fix.py",
-      "sha256": "ac3d829f7aed357e3d5cc01bb2027ac3447c5962851441c11d8dd762f91df02f",
+      "sha256": "d1d921c321c31fe81f76b1f8d57a752495a84a0e6f0ada4162db6c548c3344ee",
       "bytes": 1819
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/candidate/m3/runtime-integration/fix-root-ascii-case/manifest.json",
-      "sha256": "1eee6e6d1db0d7f602509db92e80fe00b990db2a37aae929a288b1379b602bd1",
+      "sha256": "d6e0245b968dccf0820c782fcb8eb1b3ad621a0ec306f95bddb9ff58a1ecc74b",
       "bytes": 778
     },
     {
@@ -3038,12 +3038,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/candidate/m3/tooling/image-gates/src/test/python/test_current_context.py",
-      "sha256": "6bf08c29ff6c5a4345159051de4b7144e922f61763c865bf2305a55799c03886",
+      "sha256": "1ccfe13c1f35f7e4307c8d5671396a6cb8f624cd4e1b71b7b8186c89c5f3bc6a",
       "bytes": 8723
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/candidate/m3/tooling/image-gates/verify-current.py",
-      "sha256": "66040e38b9929442673dcead210a51b997865de25cb106048f7c51cb365fae23",
+      "sha256": "c6e9e53dcf7ce65799e366cd58e711b9a1d77333beaafa7812fcb4eb3b9e2cad",
       "bytes": 16970
     },
     {
@@ -3053,12 +3053,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/candidate/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/03-invariants.py.txt",
-      "sha256": "fcfb61309318800949f5ef582f946bdbb14c40244f2dd84dd82f8b32e293d8b2",
+      "sha256": "3f630dcdb70a3118207de24e848fc9e40cc6acc30c7c40fa01e1b6bd705e825c",
       "bytes": 42045
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/candidate/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/manifest.tsv",
-      "sha256": "bf6d75e8bd8176486e82f9871a116356521409ab6bd9d666c3946ad3a34ec21c",
+      "sha256": "8c516ab3013ce6cfb460fdd368db59eb452920796d9f1ac92644bf807e7d8407",
       "bytes": 1579
     },
     {
@@ -3163,17 +3163,17 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/original-six/m3/runtime-integration/check-m3string-invariants.py",
-      "sha256": "1913aceb03b079596c7c8aea80285aecd2849f81475b597e4ea4094609b749a9",
+      "sha256": "85b515e05959bb8247bf22ad639ef81bdf87c9e4f93008a57cb284189b11eb7e",
       "bytes": 48860
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/original-six/m3/runtime-integration/fix-root-ascii-case/Fix.py",
-      "sha256": "ac3d829f7aed357e3d5cc01bb2027ac3447c5962851441c11d8dd762f91df02f",
+      "sha256": "d1d921c321c31fe81f76b1f8d57a752495a84a0e6f0ada4162db6c548c3344ee",
       "bytes": 1819
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/original-six/m3/runtime-integration/fix-root-ascii-case/manifest.json",
-      "sha256": "1eee6e6d1db0d7f602509db92e80fe00b990db2a37aae929a288b1379b602bd1",
+      "sha256": "d6e0245b968dccf0820c782fcb8eb1b3ad621a0ec306f95bddb9ff58a1ecc74b",
       "bytes": 778
     },
     {
@@ -3203,12 +3203,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/original-six/m3/tooling/image-gates/src/test/python/test_current_context.py",
-      "sha256": "6bf08c29ff6c5a4345159051de4b7144e922f61763c865bf2305a55799c03886",
+      "sha256": "1ccfe13c1f35f7e4307c8d5671396a6cb8f624cd4e1b71b7b8186c89c5f3bc6a",
       "bytes": 8723
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/original-six/m3/tooling/image-gates/verify-current.py",
-      "sha256": "66040e38b9929442673dcead210a51b997865de25cb106048f7c51cb365fae23",
+      "sha256": "c6e9e53dcf7ce65799e366cd58e711b9a1d77333beaafa7812fcb4eb3b9e2cad",
       "bytes": 16970
     },
     {
@@ -3218,12 +3218,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/original-six/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/03-invariants.py.txt",
-      "sha256": "fcfb61309318800949f5ef582f946bdbb14c40244f2dd84dd82f8b32e293d8b2",
+      "sha256": "3f630dcdb70a3118207de24e848fc9e40cc6acc30c7c40fa01e1b6bd705e825c",
       "bytes": 42045
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/original-six/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/manifest.tsv",
-      "sha256": "bf6d75e8bd8176486e82f9871a116356521409ab6bd9d666c3946ad3a34ec21c",
+      "sha256": "8c516ab3013ce6cfb460fdd368db59eb452920796d9f1ac92644bf807e7d8407",
       "bytes": 1579
     },
     {
@@ -3248,17 +3248,17 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/product-drift/m3/runtime-integration/check-m3string-invariants.py",
-      "sha256": "1913aceb03b079596c7c8aea80285aecd2849f81475b597e4ea4094609b749a9",
+      "sha256": "85b515e05959bb8247bf22ad639ef81bdf87c9e4f93008a57cb284189b11eb7e",
       "bytes": 48860
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/product-drift/m3/runtime-integration/fix-root-ascii-case/Fix.py",
-      "sha256": "ac3d829f7aed357e3d5cc01bb2027ac3447c5962851441c11d8dd762f91df02f",
+      "sha256": "d1d921c321c31fe81f76b1f8d57a752495a84a0e6f0ada4162db6c548c3344ee",
       "bytes": 1819
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/product-drift/m3/runtime-integration/fix-root-ascii-case/manifest.json",
-      "sha256": "1eee6e6d1db0d7f602509db92e80fe00b990db2a37aae929a288b1379b602bd1",
+      "sha256": "d6e0245b968dccf0820c782fcb8eb1b3ad621a0ec306f95bddb9ff58a1ecc74b",
       "bytes": 778
     },
     {
@@ -3288,12 +3288,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/product-drift/m3/tooling/image-gates/src/test/python/test_current_context.py",
-      "sha256": "6bf08c29ff6c5a4345159051de4b7144e922f61763c865bf2305a55799c03886",
+      "sha256": "1ccfe13c1f35f7e4307c8d5671396a6cb8f624cd4e1b71b7b8186c89c5f3bc6a",
       "bytes": 8723
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/product-drift/m3/tooling/image-gates/verify-current.py",
-      "sha256": "66040e38b9929442673dcead210a51b997865de25cb106048f7c51cb365fae23",
+      "sha256": "c6e9e53dcf7ce65799e366cd58e711b9a1d77333beaafa7812fcb4eb3b9e2cad",
       "bytes": 16970
     },
     {
@@ -3303,12 +3303,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/product-drift/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/03-invariants.py.txt",
-      "sha256": "fcfb61309318800949f5ef582f946bdbb14c40244f2dd84dd82f8b32e293d8b2",
+      "sha256": "3f630dcdb70a3118207de24e848fc9e40cc6acc30c7c40fa01e1b6bd705e825c",
       "bytes": 42045
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/product-drift/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/manifest.tsv",
-      "sha256": "bf6d75e8bd8176486e82f9871a116356521409ab6bd9d666c3946ad3a34ec21c",
+      "sha256": "8c516ab3013ce6cfb460fdd368db59eb452920796d9f1ac92644bf807e7d8407",
       "bytes": 1579
     },
     {
@@ -3333,17 +3333,17 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-content/m3/runtime-integration/check-m3string-invariants.py",
-      "sha256": "1913aceb03b079596c7c8aea80285aecd2849f81475b597e4ea4094609b749a9",
+      "sha256": "85b515e05959bb8247bf22ad639ef81bdf87c9e4f93008a57cb284189b11eb7e",
       "bytes": 48860
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-content/m3/runtime-integration/fix-root-ascii-case/Fix.py",
-      "sha256": "ac3d829f7aed357e3d5cc01bb2027ac3447c5962851441c11d8dd762f91df02f",
+      "sha256": "d1d921c321c31fe81f76b1f8d57a752495a84a0e6f0ada4162db6c548c3344ee",
       "bytes": 1819
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-content/m3/runtime-integration/fix-root-ascii-case/manifest.json",
-      "sha256": "1eee6e6d1db0d7f602509db92e80fe00b990db2a37aae929a288b1379b602bd1",
+      "sha256": "d6e0245b968dccf0820c782fcb8eb1b3ad621a0ec306f95bddb9ff58a1ecc74b",
       "bytes": 778
     },
     {
@@ -3373,12 +3373,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-content/m3/tooling/image-gates/src/test/python/test_current_context.py",
-      "sha256": "6bf08c29ff6c5a4345159051de4b7144e922f61763c865bf2305a55799c03886",
+      "sha256": "1ccfe13c1f35f7e4307c8d5671396a6cb8f624cd4e1b71b7b8186c89c5f3bc6a",
       "bytes": 8723
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-content/m3/tooling/image-gates/verify-current.py",
-      "sha256": "66040e38b9929442673dcead210a51b997865de25cb106048f7c51cb365fae23",
+      "sha256": "c6e9e53dcf7ce65799e366cd58e711b9a1d77333beaafa7812fcb4eb3b9e2cad",
       "bytes": 16970
     },
     {
@@ -3388,12 +3388,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-content/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/03-invariants.py.txt",
-      "sha256": "fcfb61309318800949f5ef582f946bdbb14c40244f2dd84dd82f8b32e293d8b2",
+      "sha256": "3f630dcdb70a3118207de24e848fc9e40cc6acc30c7c40fa01e1b6bd705e825c",
       "bytes": 42045
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-content/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/manifest.tsv",
-      "sha256": "bf6d75e8bd8176486e82f9871a116356521409ab6bd9d666c3946ad3a34ec21c",
+      "sha256": "8c516ab3013ce6cfb460fdd368db59eb452920796d9f1ac92644bf807e7d8407",
       "bytes": 1579
     },
     {
@@ -3418,17 +3418,17 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-missing/m3/runtime-integration/check-m3string-invariants.py",
-      "sha256": "1913aceb03b079596c7c8aea80285aecd2849f81475b597e4ea4094609b749a9",
+      "sha256": "85b515e05959bb8247bf22ad639ef81bdf87c9e4f93008a57cb284189b11eb7e",
       "bytes": 48860
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-missing/m3/runtime-integration/fix-root-ascii-case/Fix.py",
-      "sha256": "ac3d829f7aed357e3d5cc01bb2027ac3447c5962851441c11d8dd762f91df02f",
+      "sha256": "d1d921c321c31fe81f76b1f8d57a752495a84a0e6f0ada4162db6c548c3344ee",
       "bytes": 1819
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-missing/m3/runtime-integration/fix-root-ascii-case/manifest.json",
-      "sha256": "1eee6e6d1db0d7f602509db92e80fe00b990db2a37aae929a288b1379b602bd1",
+      "sha256": "d6e0245b968dccf0820c782fcb8eb1b3ad621a0ec306f95bddb9ff58a1ecc74b",
       "bytes": 778
     },
     {
@@ -3458,12 +3458,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-missing/m3/tooling/image-gates/src/test/python/test_current_context.py",
-      "sha256": "6bf08c29ff6c5a4345159051de4b7144e922f61763c865bf2305a55799c03886",
+      "sha256": "1ccfe13c1f35f7e4307c8d5671396a6cb8f624cd4e1b71b7b8186c89c5f3bc6a",
       "bytes": 8723
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-missing/m3/tooling/image-gates/verify-current.py",
-      "sha256": "66040e38b9929442673dcead210a51b997865de25cb106048f7c51cb365fae23",
+      "sha256": "c6e9e53dcf7ce65799e366cd58e711b9a1d77333beaafa7812fcb4eb3b9e2cad",
       "bytes": 16970
     },
     {
@@ -3473,12 +3473,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-missing/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/03-invariants.py.txt",
-      "sha256": "fcfb61309318800949f5ef582f946bdbb14c40244f2dd84dd82f8b32e293d8b2",
+      "sha256": "3f630dcdb70a3118207de24e848fc9e40cc6acc30c7c40fa01e1b6bd705e825c",
       "bytes": 42045
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-missing/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/manifest.tsv",
-      "sha256": "bf6d75e8bd8176486e82f9871a116356521409ab6bd9d666c3946ad3a34ec21c",
+      "sha256": "8c516ab3013ce6cfb460fdd368db59eb452920796d9f1ac92644bf807e7d8407",
       "bytes": 1579
     },
     {
@@ -3498,17 +3498,17 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-symlink/m3/runtime-integration/check-m3string-invariants.py",
-      "sha256": "1913aceb03b079596c7c8aea80285aecd2849f81475b597e4ea4094609b749a9",
+      "sha256": "85b515e05959bb8247bf22ad639ef81bdf87c9e4f93008a57cb284189b11eb7e",
       "bytes": 48860
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-symlink/m3/runtime-integration/fix-root-ascii-case/Fix.py",
-      "sha256": "ac3d829f7aed357e3d5cc01bb2027ac3447c5962851441c11d8dd762f91df02f",
+      "sha256": "d1d921c321c31fe81f76b1f8d57a752495a84a0e6f0ada4162db6c548c3344ee",
       "bytes": 1819
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-symlink/m3/runtime-integration/fix-root-ascii-case/manifest.json",
-      "sha256": "1eee6e6d1db0d7f602509db92e80fe00b990db2a37aae929a288b1379b602bd1",
+      "sha256": "d6e0245b968dccf0820c782fcb8eb1b3ad621a0ec306f95bddb9ff58a1ecc74b",
       "bytes": 778
     },
     {
@@ -3538,12 +3538,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-symlink/m3/tooling/image-gates/src/test/python/test_current_context.py",
-      "sha256": "6bf08c29ff6c5a4345159051de4b7144e922f61763c865bf2305a55799c03886",
+      "sha256": "1ccfe13c1f35f7e4307c8d5671396a6cb8f624cd4e1b71b7b8186c89c5f3bc6a",
       "bytes": 8723
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-symlink/m3/tooling/image-gates/verify-current.py",
-      "sha256": "66040e38b9929442673dcead210a51b997865de25cb106048f7c51cb365fae23",
+      "sha256": "c6e9e53dcf7ce65799e366cd58e711b9a1d77333beaafa7812fcb4eb3b9e2cad",
       "bytes": 16970
     },
     {
@@ -3553,12 +3553,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-symlink/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/03-invariants.py.txt",
-      "sha256": "fcfb61309318800949f5ef582f946bdbb14c40244f2dd84dd82f8b32e293d8b2",
+      "sha256": "3f630dcdb70a3118207de24e848fc9e40cc6acc30c7c40fa01e1b6bd705e825c",
       "bytes": 42045
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-symlink/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/manifest.tsv",
-      "sha256": "bf6d75e8bd8176486e82f9871a116356521409ab6bd9d666c3946ad3a34ec21c",
+      "sha256": "8c516ab3013ce6cfb460fdd368db59eb452920796d9f1ac92644bf807e7d8407",
       "bytes": 1579
     },
     {
@@ -3583,12 +3583,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-content/m3/runtime-integration/fix-root-ascii-case/Fix.py",
-      "sha256": "ac3d829f7aed357e3d5cc01bb2027ac3447c5962851441c11d8dd762f91df02f",
+      "sha256": "d1d921c321c31fe81f76b1f8d57a752495a84a0e6f0ada4162db6c548c3344ee",
       "bytes": 1819
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-content/m3/runtime-integration/fix-root-ascii-case/manifest.json",
-      "sha256": "1eee6e6d1db0d7f602509db92e80fe00b990db2a37aae929a288b1379b602bd1",
+      "sha256": "d6e0245b968dccf0820c782fcb8eb1b3ad621a0ec306f95bddb9ff58a1ecc74b",
       "bytes": 778
     },
     {
@@ -3618,12 +3618,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-content/m3/tooling/image-gates/src/test/python/test_current_context.py",
-      "sha256": "6bf08c29ff6c5a4345159051de4b7144e922f61763c865bf2305a55799c03886",
+      "sha256": "1ccfe13c1f35f7e4307c8d5671396a6cb8f624cd4e1b71b7b8186c89c5f3bc6a",
       "bytes": 8723
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-content/m3/tooling/image-gates/verify-current.py",
-      "sha256": "66040e38b9929442673dcead210a51b997865de25cb106048f7c51cb365fae23",
+      "sha256": "c6e9e53dcf7ce65799e366cd58e711b9a1d77333beaafa7812fcb4eb3b9e2cad",
       "bytes": 16970
     },
     {
@@ -3633,12 +3633,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-content/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/03-invariants.py.txt",
-      "sha256": "fcfb61309318800949f5ef582f946bdbb14c40244f2dd84dd82f8b32e293d8b2",
+      "sha256": "3f630dcdb70a3118207de24e848fc9e40cc6acc30c7c40fa01e1b6bd705e825c",
       "bytes": 42045
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-content/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/manifest.tsv",
-      "sha256": "bf6d75e8bd8176486e82f9871a116356521409ab6bd9d666c3946ad3a34ec21c",
+      "sha256": "8c516ab3013ce6cfb460fdd368db59eb452920796d9f1ac92644bf807e7d8407",
       "bytes": 1579
     },
     {
@@ -3663,12 +3663,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-missing/m3/runtime-integration/fix-root-ascii-case/Fix.py",
-      "sha256": "ac3d829f7aed357e3d5cc01bb2027ac3447c5962851441c11d8dd762f91df02f",
+      "sha256": "d1d921c321c31fe81f76b1f8d57a752495a84a0e6f0ada4162db6c548c3344ee",
       "bytes": 1819
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-missing/m3/runtime-integration/fix-root-ascii-case/manifest.json",
-      "sha256": "1eee6e6d1db0d7f602509db92e80fe00b990db2a37aae929a288b1379b602bd1",
+      "sha256": "d6e0245b968dccf0820c782fcb8eb1b3ad621a0ec306f95bddb9ff58a1ecc74b",
       "bytes": 778
     },
     {
@@ -3698,12 +3698,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-missing/m3/tooling/image-gates/src/test/python/test_current_context.py",
-      "sha256": "6bf08c29ff6c5a4345159051de4b7144e922f61763c865bf2305a55799c03886",
+      "sha256": "1ccfe13c1f35f7e4307c8d5671396a6cb8f624cd4e1b71b7b8186c89c5f3bc6a",
       "bytes": 8723
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-missing/m3/tooling/image-gates/verify-current.py",
-      "sha256": "66040e38b9929442673dcead210a51b997865de25cb106048f7c51cb365fae23",
+      "sha256": "c6e9e53dcf7ce65799e366cd58e711b9a1d77333beaafa7812fcb4eb3b9e2cad",
       "bytes": 16970
     },
     {
@@ -3713,12 +3713,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-missing/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/03-invariants.py.txt",
-      "sha256": "fcfb61309318800949f5ef582f946bdbb14c40244f2dd84dd82f8b32e293d8b2",
+      "sha256": "3f630dcdb70a3118207de24e848fc9e40cc6acc30c7c40fa01e1b6bd705e825c",
       "bytes": 42045
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-missing/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/manifest.tsv",
-      "sha256": "bf6d75e8bd8176486e82f9871a116356521409ab6bd9d666c3946ad3a34ec21c",
+      "sha256": "8c516ab3013ce6cfb460fdd368db59eb452920796d9f1ac92644bf807e7d8407",
       "bytes": 1579
     },
     {
@@ -3743,12 +3743,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-symlink/m3/runtime-integration/fix-root-ascii-case/Fix.py",
-      "sha256": "ac3d829f7aed357e3d5cc01bb2027ac3447c5962851441c11d8dd762f91df02f",
+      "sha256": "d1d921c321c31fe81f76b1f8d57a752495a84a0e6f0ada4162db6c548c3344ee",
       "bytes": 1819
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-symlink/m3/runtime-integration/fix-root-ascii-case/manifest.json",
-      "sha256": "1eee6e6d1db0d7f602509db92e80fe00b990db2a37aae929a288b1379b602bd1",
+      "sha256": "d6e0245b968dccf0820c782fcb8eb1b3ad621a0ec306f95bddb9ff58a1ecc74b",
       "bytes": 778
     },
     {
@@ -3778,12 +3778,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-symlink/m3/tooling/image-gates/src/test/python/test_current_context.py",
-      "sha256": "6bf08c29ff6c5a4345159051de4b7144e922f61763c865bf2305a55799c03886",
+      "sha256": "1ccfe13c1f35f7e4307c8d5671396a6cb8f624cd4e1b71b7b8186c89c5f3bc6a",
       "bytes": 8723
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-symlink/m3/tooling/image-gates/verify-current.py",
-      "sha256": "66040e38b9929442673dcead210a51b997865de25cb106048f7c51cb365fae23",
+      "sha256": "c6e9e53dcf7ce65799e366cd58e711b9a1d77333beaafa7812fcb4eb3b9e2cad",
       "bytes": 16970
     },
     {
@@ -3793,12 +3793,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-symlink/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/03-invariants.py.txt",
-      "sha256": "fcfb61309318800949f5ef582f946bdbb14c40244f2dd84dd82f8b32e293d8b2",
+      "sha256": "3f630dcdb70a3118207de24e848fc9e40cc6acc30c7c40fa01e1b6bd705e825c",
       "bytes": 42045
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-symlink/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/manifest.tsv",
-      "sha256": "bf6d75e8bd8176486e82f9871a116356521409ab6bd9d666c3946ad3a34ec21c",
+      "sha256": "8c516ab3013ce6cfb460fdd368db59eb452920796d9f1ac92644bf807e7d8407",
       "bytes": 1579
     },
     {

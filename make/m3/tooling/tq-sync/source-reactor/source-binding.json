@@ -11,19 +11,19 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/recipe/README.md",
       "targetPath": "make/m3/tooling/tq-sync/source-reactor/README.md",
-      "gitBlob": "26146304d14884ac1ebf3b487e4fb290a0fe24fc",
+      "gitBlob": "72ca0278066c55dca2d71ad72125ba88722b1e7f",
       "bytes": 1984
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/recipe/expected-projects.json",
       "targetPath": "make/m3/tooling/tq-sync/source-reactor/expected-projects.json",
-      "gitBlob": "462b7e1dfa3f6d74ceda23a2c3109b89777c98ca",
+      "gitBlob": "a12b7cf5c4ee4935406da5dd1ce2f3aed900b936",
       "bytes": 35277
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/recipe/pom.xml",
       "targetPath": "make/m3/tooling/tq-sync/source-reactor/pom.xml",
-      "gitBlob": "67f9d07050c93e4268fd6d09b93b6c967a93050b",
+      "gitBlob": "cd1461c70306ab85ac532c0d55cee0af68d54e54",
       "bytes": 836
     },
     {
@@ -35,7 +35,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/recipe/test_reactor.py",
       "targetPath": "make/m3/tooling/tq-sync/source-reactor/test_reactor.py",
-      "gitBlob": "e92978b80d8f1ac49d8b255fe9d99e307d95e7cf",
+      "gitBlob": "90ea2fc52be0bc049e74cb194d1b46c2bdcdc705",
       "bytes": 9823
     }
   ],

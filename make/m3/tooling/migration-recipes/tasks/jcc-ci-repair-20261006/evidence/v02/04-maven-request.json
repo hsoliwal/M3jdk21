@@ -4,8 +4,8 @@
   "execution_helper": {
     "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate-v02/execution/run_maven.py",
     "bytes": 9611,
-    "sha256": "bef1f2ccc07448f7581f4b6f9c82e181b1304fabc7a3b34b11c1683b5f0e64bd",
-    "git_blob": "45e3250da82aa043305d2f9e77d8c26a6489d9e3"
+    "sha256": "fc9ac4d3a6c282cb4f1992bd34bc5fb423cc534b480046a451d8417bf1c7dfe6",
+    "git_blob": "fe3e7367ab08377b2c5963341831de54798dabd0"
   },
   "inputs": {
     "frozen_files_unchanged": 35,
@@ -13,14 +13,14 @@
     "frozen_inputs": {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate-v02/FROZEN_INPUTS.json",
       "bytes": 9164,
-      "sha256": "86c4ec4b8e0bb641092f4dc9c2a00d54fd8cf1c6670ee42989ae4af93ca254c0",
-      "git_blob": "f2bfabd4d5fee7c0c02d599be2c3b602eb47e952"
+      "sha256": "50c52c9e6cf2b570ea3e5135451f7a2be3b4dff4d437bc12cf9507fd0b8c11f0",
+      "git_blob": "174731d504a33e815bd30065b0f756a9ad58bbc4"
     },
     "prepared_inputs": {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate-v02/execution/02-maven-inputs.json",
       "bytes": 12667,
-      "sha256": "45cf2012d69709622a582a610f215420a4b8dec01c4a8594e131703ea1899032",
-      "git_blob": "e64228ab30248e81f5db7ac3b229b911597a6c68"
+      "sha256": "ae931dbe5d637bee4ddc9b3ec433d06630da05425e18d72a85f89a33054812d5",
+      "git_blob": "cd9a9d0cfdd8fa111030d359387c4eb00b34f0f6"
     }
   },
   "toolchain_receipt": {

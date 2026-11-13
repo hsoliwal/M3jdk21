@@ -110,11 +110,11 @@
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/calls/current_refresh_m3_tree.json",
-      "sha256": "d1016d7fe37b9436dbca31b651865266db5e31666ad28c334551fc3f7dbf73f1"
+      "sha256": "a772161a6f292953a22df11e471f70ee70b340b2cece7396feff164d66980f5f"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/calls/current_refresh_github_tree.json",
-      "sha256": "c0e15a3a59178248aca45aceb935c49e074416ebbb7b602f809d21e1964f7520"
+      "sha256": "c29c9945274015c6f1d8b87e13b5ba9ba5c4ae93a593ec71c37ffc7a4b969866"
     }
   ],
   "scope": "Tree identity applicability only. Frozen b71 execution is not relabelled as an execution on the newer master."

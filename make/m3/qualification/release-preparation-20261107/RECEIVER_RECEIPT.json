@@ -54,10 +54,10 @@
     {
       "path": ".github/workflows/m3-release.yml",
       "source_sha256": "7889d66b0dd05bde654d158a28090ba22584aba1edb1887f891e52b1817710e4",
-      "postimage_sha256": "3c5e8cab15e0544d10ff2efe10b7d8d2d91e23efcb5b5f872d531021a6bc9897",
+      "postimage_sha256": "f2650b52d30670f233302b96de71da860dad139c91815885a7b6bf3fef6bbd17",
       "mode": "100644",
       "source_git_blob_sha1": "8fd820956c25aa431845aa4dfb45367023385e83",
-      "postimage_git_blob_sha1": "e620cb0edf13bd3b9ee7cddff22e7e3dbeedfee6",
+      "postimage_git_blob_sha1": "b73eb7e2521d97857d0bde823831e013e3a1f43f",
       "datasets": [
         "m3jdk21-release-preparation-20261107"
       ]
@@ -76,10 +76,10 @@
     {
       "path": "doc/m3/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md",
       "source_sha256": "6c9fad80349c6fcdd91594a6412c27caa81f44aef59a7bf71913d36862d220ac",
-      "postimage_sha256": "ecd9e5a48087f99adecdd02f6e795f2ebacff78bb3c3c3ba7846668113f861e6",
+      "postimage_sha256": "f5b204a80e2c46fbca53ba18ebfd10fd4bac0bac1a4590d783a4e6f79f301bab",
       "mode": "100644",
       "source_git_blob_sha1": "fa6e81dfad338d4093480597d9a97275b6bd2327",
-      "postimage_git_blob_sha1": "fd39b4bccc1cb8e7b3bdd377bdbf5ce5d4821581",
+      "postimage_git_blob_sha1": "6b5969583b612de1403730fb5aad822f07eff5c1",
       "datasets": [
         "m3jdk21-release-preparation-20261107"
       ]
@@ -87,10 +87,10 @@
     {
       "path": "doc/m3/m3jdk21-naming-admission-workflow.md",
       "source_sha256": "2ae62829d68dfe6b0475f1da5463c20b4ff09a89d8ac7e2d045c02abf47efe91",
-      "postimage_sha256": "de1f8c8dd0e465bfdd2c7b8c91054711d5716501ddc6d7a78423095a75546333",
+      "postimage_sha256": "9599b27605d386c90ea94de1d8173aadb94495bc87187d47de9f649d0829efb5",
       "mode": "100644",
       "source_git_blob_sha1": "4fbbaeca07a4314eb88a387c012ae763aee0e3aa",
-      "postimage_git_blob_sha1": "77fe5c2bdce7a844eaf55be97a2fc044e3b5bcb0",
+      "postimage_git_blob_sha1": "4d7edc076c4ccfccbdb59d19d6f2b3a3b9d24b9f",
       "datasets": [
         "m3jdk21-release-preparation-20261107"
       ]
@@ -175,10 +175,10 @@
     {
       "path": "make/m3/release/queue/README.md",
       "source_sha256": "2e2e03b6c813cbcef6b42daf88f3bcc03a2276a827bea5ced73835e926360a77",
-      "postimage_sha256": "78343f2a3b9d4228d6036f563391b54557122d34bcf958cdf9fb0d06301a7e3a",
+      "postimage_sha256": "b0af8c09da9fd3e8efa4aa75f1ffd7f9c42ff4563cc011b1a47dfbaef5e41682",
       "mode": "100644",
       "source_git_blob_sha1": "a455bd327f11cae41e7375c0b09005a7254b7b2b",
-      "postimage_git_blob_sha1": "f92de3db3c74932dc30c58a3fda9285806d041cd",
+      "postimage_git_blob_sha1": "715ae935938614a1f6df4c6484bed1345965a14b",
       "datasets": [
         "m3jdk21-release-preparation-20261107"
       ]
@@ -219,10 +219,10 @@
     {
       "path": "make/m3/release/test_release_workflow.py",
       "source_sha256": "ABSENT",
-      "postimage_sha256": "579c4fda6efa5315aca9967f158776da109864625daa9a4812136d53e0ec2601",
+      "postimage_sha256": "206f8413fdbc494fccfce0a26914618cdb2f637b40f29ab92a30c655d3584a06",
       "mode": "100644",
       "source_git_blob_sha1": null,
-      "postimage_git_blob_sha1": "703a79f452bfefc9d0a0b314daf10b6ba8730d60",
+      "postimage_git_blob_sha1": "7e184cf8812e92d376f75d72f4e0ed1c08fc0279",
       "datasets": [
         "m3jdk21-release-preparation-20261107"
       ]
@@ -274,10 +274,10 @@
     {
       "path": "make/m3/tooling/name-contract/receipts/release-preparation/arrays-live-successor.json",
       "source_sha256": "ABSENT",
-      "postimage_sha256": "0fe3254fcbdd23a358a5176a8594a465ce7807b28c8202aa7465a62db4db4fab",
+      "postimage_sha256": "19a70f45c2d80c29700b8bfa8b618f095fba3afc6a280ffc6da134e07f2998f8",
       "mode": "100644",
       "source_git_blob_sha1": null,
-      "postimage_git_blob_sha1": "d6b8f82d1c73c1ead895cf4786d9cebf067aefb1",
+      "postimage_git_blob_sha1": "79550775b25d51bda6bac449adc447053291c3b8",
       "datasets": [
         "m3jdk21-release-preparation-20261107"
       ]
@@ -296,10 +296,10 @@
     {
       "path": "make/m3/tooling/name-contract/receipts/release-preparation/source-identity.json",
       "source_sha256": "ABSENT",
-      "postimage_sha256": "cc4d3efdaf35cbc96afe94a51f813fb6323adcffb73c62fe7266d7aada3e1fef",
+      "postimage_sha256": "a37b0b81a7829ef61d2f527d6783b031f915cf9b0fb2eedb42881ef429e84ac5",
       "mode": "100644",
       "source_git_blob_sha1": null,
-      "postimage_git_blob_sha1": "aeaf5466ac8ecf8c2bf973bcf799322c59fd31e2",
+      "postimage_git_blob_sha1": "8299d90c2d5b3e5cfea0c723c50217191b44aa4c",
       "datasets": [
         "m3jdk21-release-preparation-20261107"
       ]
@@ -318,10 +318,10 @@
     {
       "path": "make/m3/tooling/name-contract/test_audit.py",
       "source_sha256": "0d5f502703e8a42822f72939bf47f989c1ad706740fab59733ffbb468b33de4d",
-      "postimage_sha256": "5f01a468ee85d69c8aae86d59ea6eaff3a1795e17e7b6fb2a3fc1f9959de36a8",
+      "postimage_sha256": "03641992a73f3ed83e3c70abd74d2feb87a86fca4ed48a3f2122ce48958527a4",
       "mode": "100644",
       "source_git_blob_sha1": "9c36d20bb5bc84161d4ab13845ee1c46929f7e07",
-      "postimage_git_blob_sha1": "18c86ec215c0318770ad163a23042a88723e017a",
+      "postimage_git_blob_sha1": "676748b37d12c536b8c4db0aca6c0c06d8ae85f4",
       "datasets": [
         "m3jdk21-release-preparation-20261107"
       ]
@@ -340,10 +340,10 @@
     {
       "path": "make/m3/tooling/name-contract/test_schema.py",
       "source_sha256": "a12e99359f645526b634030d628a0fb5a1ace61b2dd0bb7e9097942aa82ae81f",
-      "postimage_sha256": "baa8e58ff104639d41cde522746092a4b587e5f8f23229f4ebcced1d58b69271",
+      "postimage_sha256": "3131daed6f4c65856dd76ed40ffc3da58b6e44f3b24e49f4dba3f5dd3480cf47",
       "mode": "100644",
       "source_git_blob_sha1": "bdbcffad0d50173405c1518317646a433a454d45",
-      "postimage_git_blob_sha1": "8a52111a971b3972f2664ef7682ecf4c842a3d72",
+      "postimage_git_blob_sha1": "8d75b7bf3bf44d300319a14bf8862b3e5cc5518e",
       "datasets": [
         "m3jdk21-release-preparation-20261107"
       ]

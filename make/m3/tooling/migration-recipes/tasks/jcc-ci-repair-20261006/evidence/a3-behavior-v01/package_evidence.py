@@ -22,7 +22,7 @@ def main():
    found=gitproof.proof.resolve(trees,base,row['repository_path'])
    if row['origin']=='EXACT_CURRENT_GIT_BLOB':assert found['sha']==row['git_blob'],(row['repository_path'],found,row['git_blob'])
    else:
-    expected={'M3A3RegexMemoryLabDeliveryRecipeTest.java':('0e8c591c44c0ae52d404ee8e26c848632ec2b501','c57e91ff52de1519803049f6950e81e2129f6c93'),'M3A3RegexMemoryWorkflowRecipeTest.java':('faa4edaff92e400b7964e4577f07cd4d169c1892','3a2f62fdf15efb66a35b9dcd9e1051b97710cd99')}[p.name]
+    expected={'M3A3RegexMemoryLabDeliveryRecipeTest.java':('0e8c591c44c0ae52d404ee8e26c848632ec2b501','c57e91ff52de1519803049f6950e81e2129f6c93'),'M3A3RegexMemoryWorkflowRecipeTest.java':('faa4edaff92e400b7964e4577f07cd4d169c1892','2a86b2b2ef9287c338577fc3fcb977cf0ac27953')}[p.name]
     assert (found['sha'],row['git_blob'])==expected
    rows.append({'repository_path':row['repository_path'],'current_git_blob':found['sha'],'executed_git_blob':row['git_blob'],'sha256':row['sha256'],'bytes':row['bytes'],'origin':row['origin']})
  actual='make/m3/tooling/a3/src/main/java/jdk/m3/a3/A3RegexMatrix.java';prod=gitproof.proof.resolve(trees,base,actual);assert prod['sha']=='bf91afcd627d8e2faa9790ea6592b6bc9c1b0e33'

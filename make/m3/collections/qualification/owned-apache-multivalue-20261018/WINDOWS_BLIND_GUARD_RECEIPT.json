@@ -233,7 +233,7 @@
     "make/m3/collections/qualification/owned-apache-multivalue-20261018/SDK_SOURCE_BINDING_SUCCESSOR_V3.json": {
       "bytes": 4649,
       "kind": "file",
-      "sha256": "9432e17d44f32a6b672484ec6e63f28221b3422722f48db9a809fa663921c5c4"
+      "sha256": "672d80e6c3a09f18ec4bd653bd3775870b540cfdd1a5b110d3e561520697b345"
     },
     "make/m3/collections/qualification/owned-apache-multivalue-20261018/SOURCE_QUALIFICATION_V2.json": {
       "bytes": 7903,
@@ -248,12 +248,12 @@
     "make/m3/collections/qualification/owned-apache-multivalue-20261018/verify.py": {
       "bytes": 1027,
       "kind": "file",
-      "sha256": "4a23749f6419ea5b1cc63f412db5ab9f7cb38b62f2420fb1bae2cb6cb88d1595"
+      "sha256": "bd69e47cdc5fc156e75f86db6546770173c33924252d68b0766d65c02166079f"
     },
     "make/m3/collections/qualification/owned-apache-multivalue-20261018/verify_source_binding_successor_v3.py": {
       "bytes": 5889,
       "kind": "file",
-      "sha256": "1a47c56121ecf52ab475d463e22e118fcdcb0b330380dd4701c4a0969946aa00"
+      "sha256": "a5961ce8c13eb93ee789236be49c716ea5a4f01f82158cd8f10b3d51b5b1ab46"
     },
     "m3/collections/src": {
       "kind": "directory"
@@ -354,7 +354,7 @@
   "fixture_fingerprints_unchanged_from_negative01": true,
   "fixture_restored_exactly": true,
   "focused_driver_sha256": "032957aec6cbdb5f9f35722a397cf4896c8e7a9fbdc4ecaf3354b4545ebe772f",
-  "guard_opaque_sha256_unchanged": "1a47c56121ecf52ab475d463e22e118fcdcb0b330380dd4701c4a0969946aa00",
+  "guard_opaque_sha256_unchanged": "a5961ce8c13eb93ee789236be49c716ea5a4f01f82158cd8f10b3d51b5b1ab46",
   "new_distinct_negative_corpus": false,
   "original_harness_bytes": 23302,
   "original_harness_sha256": "ec12c0517c531f3035d4c1eaaafc382e8119100243bb1cc317dd52bc1b2885d9",

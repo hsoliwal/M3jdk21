@@ -13,7 +13,7 @@
   "name_map_sha256": "e976621377edae456e5c69308208b9a193d81c2d221cd137afefcd2d07e67b94",
   "applied_java_manifest_sha256": "31ef71b432356b141588bbc1352638890f1abeae81acb89d97a497f8e0eda513",
   "installed_source_manifest": "qualification/installed-source-enum-set-20261014.tsv",
-  "installed_source_manifest_sha256": "88ee9ceaa346a8fc2a24a84569ba852f5ad450dea26fe414d0095c31395272f7",
+  "installed_source_manifest_sha256": "dd2094e51fb334d8a3ec9de8dca09048fb2fa73881afc984be795ba3a6a08ce2",
   "qualification_receipt": "qualification/receiving-enum-set-20261008.json",
   "application_receipt": "qualification/m3-receiving-application-20261008.json",
   "first_party_license": "Apache-2.0",
@@ -981,7 +981,7 @@
   "historical_receiving_repair_20261008": {
     "target_baseline": "439b767c7c92e2751f7f6a47c012f96472420905",
     "installed_source_manifest": "qualification/installed-source-receiving-20261008.tsv",
-    "installed_source_manifest_sha256": "3719c9fdc78676a2c23ce1131792608889c377224ca4ceaddcec4945c0fe9042",
+    "installed_source_manifest_sha256": "b538e5bfc1735188e020f5edf6827fed3d600bde2dcb07bceb7cd3d254941734",
     "qualification_receipt": "qualification/receiving-repair-20261008.json",
     "qualification_source_counts": {
       "main_java": 65,
@@ -1020,7 +1020,7 @@
     "engine": "jdk.internal.m3.rewrite.M3CollectionsInventorySuccessorRecipe",
     "canonical_path": "m3-openrewrite-recipes/recipes/m3jdk-packed-collections-receiving-repair-20261008/metadata-proof/collections-source-set-successor-20261018",
     "predecessor_manifest": "qualification/installed-source-enum-set-20261014.tsv",
-    "predecessor_manifest_sha256": "88ee9ceaa346a8fc2a24a84569ba852f5ad450dea26fe414d0095c31395272f7",
+    "predecessor_manifest_sha256": "dd2094e51fb334d8a3ec9de8dca09048fb2fa73881afc984be795ba3a6a08ce2",
     "predecessor_rows": 99,
     "installed_manifest": "qualification/installed-source-successor-20261018.tsv",
     "installed_rows": 189,
@@ -1166,7 +1166,7 @@
   "module_source_successor_20261109": {
     "schema": "M3_COLLECTION_EXACT_SOURCE_REFINEMENT_V2",
     "successor_receipt": "qualification/module-source-successor-20261109.tsv",
-    "successor_receipt_sha256": "3c8cc30a27385503e473d1cef6bf59374d6c5633b1dba1105e3f73a21865b2b9",
+    "successor_receipt_sha256": "72303be9320654e1706f32393ac710e7c83cbaa2247abf05b4f986e5ad3e7c54",
     "receipt_columns": [
       "path",
       "inherited_sha256",

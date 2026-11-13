@@ -101,7 +101,7 @@
   "files": [
     {
       "path": "make/m3/backports/ALGORITHM_CATALOGUE.tsv",
-      "sha256": "7cb1e78450bd0fd8369482bb64f83035a2485c7a167c0ad2eecef8c125b6f001",
+      "sha256": "150bf4e956fc260f239e2e0d6f5e89116e1e1bf2906eaf9435e7b6e216320527",
       "size_bytes": 5700
     },
     {
@@ -156,27 +156,27 @@
     },
     {
       "path": "make/m3/runtime-integration/merged-repair-recovery-20261018/RECEIVING-MAP.json",
-      "sha256": "4cff79c7cf4399e6ed9593d23e373ee9c1e791bf1432d12d684771a1c2d51d8a",
+      "sha256": "2c61549e548a667f886720218d22556399607c22b6dd6af4f59ade4caa6d9092",
       "size_bytes": 893
     },
     {
       "path": "make/m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv",
-      "sha256": "3f88e143299a558a1a4f20c86d012b0823dc9f9ee4d519ce28cd16bc9cf35ff4",
+      "sha256": "822242c7a11a7e2dc0ec6bdde0cfa76d7e7784eeffe3722a1c34b32143251a58",
       "size_bytes": 5316
     },
     {
       "path": "make/m3/runtime-integration/runtime-repair-20261018/CURRENT_OWNERS.json",
-      "sha256": "6c6e6dca85d5bf211ec04d8164d357918950348c4c3a9413be453c2bb11de364",
+      "sha256": "152e7a648d84eb3726375658a8178d1cea2f74e71fca1f62925502a1fcd1acfa",
       "size_bytes": 2042
     },
     {
       "path": "make/m3/runtime-integration/runtime-repair-20261018/FILE_REVIEW.tsv",
-      "sha256": "1c5b958b528e94183f710dea0f4b7ce9319750407062ca51285bd66286b4d377",
+      "sha256": "de7730a773544c33f94c94b5906bd9fab927d522681cc3b382f631773de6ed52",
       "size_bytes": 7737
     },
     {
       "path": "make/m3/runtime-integration/runtime-repair-20261018/README.md",
-      "sha256": "04e8ff5ea3b57b861ce4381c120e56584478c1f8004c2397829fb8c59e8dd49a",
+      "sha256": "cd4c4cda7c1711bccc24eb58b5f98ed21b1a3a1b01c980345508c5c71beca4d0",
       "size_bytes": 6157
     },
     {

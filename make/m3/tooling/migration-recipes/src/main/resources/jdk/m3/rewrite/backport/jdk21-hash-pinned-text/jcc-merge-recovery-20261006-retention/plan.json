@@ -10,40 +10,40 @@
       "path": ".github/workflows/m3-retained-capability-audit.yml",
       "before": {
         "resource": "before-00.txt",
-        "sha256": "698c8bbb0b79249a3af2ed24b8a88aa89cdd25dc778cbc6108fa501fe8ae6304"
+        "sha256": "a78f1b133dcdb328f15d799c6cc47186ae1bbe622111c259a764cf42a5b1e1d9"
       },
       "after": {
         "resource": "after-00.txt",
-        "sha256": "f60cd12f2a0b1530f022c4aa9f98d48647a136328be7b67dd117cd08d1081300"
+        "sha256": "34b30ebbceba1601a519e523d1427e9839aa57abcaed9855da8299d0c3b8f3ae"
       }
     },
     {
       "path": "make/m3/history/README.md",
       "before": {
         "resource": "before-01.txt",
-        "sha256": "ef145204809b2ab1b3fa79b75ce740dfddb1d536f98f65b14ba50eea057fc4fc"
+        "sha256": "f34a90110fd386a3396e8a9e35cb742798335a34b1c80066a8fcca42ad1f4027"
       },
       "after": {
         "resource": "after-01.txt",
-        "sha256": "8918e530b22f7960db1a3918a5685978fd9fc14ed35338faefb224d935d7f5c0"
+        "sha256": "55684fff201ec4ffa5d25a5502a17ae640cd771db9a7269cf72568120a8d33dc"
       }
     },
     {
       "path": "make/m3/history/RETAINED_CAPABILITIES.tsv",
       "before": {
         "resource": "before-02.txt",
-        "sha256": "86de8000a91017b29e48b0ffd9cf19b264614dd8c983c08222cf5e253606c40a"
+        "sha256": "1fef541add1c89d470eb07c3f0bd814e27377c32501ede415eb58f903a86ae23"
       },
       "after": {
         "resource": "after-02.txt",
-        "sha256": "683b01fc68b8661a44fd1a9fbc72c1aa68145dab9318fb0f5a3e99bc0e102181"
+        "sha256": "3167529c891469e3fbe8ede1dbd3ccb287d094f15224b740b0a3d09d26512cb4"
       }
     },
     {
       "path": "make/m3/history/retention-pom.xml",
       "before": {
         "resource": "before-03.txt",
-        "sha256": "14c29126da786a7456a55ce400f5a800dfe53693e6c329e7342bf2fabb087e11"
+        "sha256": "94466607f0376f0964b3895f4ae248d9bc0e72728c1f7b758f27b1dadcac7e22"
       },
       "after": {
         "resource": "after-03.txt",
@@ -54,22 +54,22 @@
       "path": "make/m3/history/retention.py",
       "before": {
         "resource": "before-04.txt",
-        "sha256": "06c713d051ce0411b9c8a4faeafeaa3245b75ff4350e8f9afd94f15dd86451e4"
+        "sha256": "950df0feaad044007771d02e6e33e9084dfdec3fcb58cf0bf86ccad9aaea2e30"
       },
       "after": {
         "resource": "after-04.txt",
-        "sha256": "ccd63d4e05f51e816548ad9da4e5a0ce880a9cf90b1fd0dfe80b04f30f7d8a14"
+        "sha256": "389f8eeec7c5551f8714affb801ee56af8a0329ad99277382e7da2d7525cef13"
       }
     },
     {
       "path": "make/m3/history/test_retention.py",
       "before": {
         "resource": "before-05.txt",
-        "sha256": "68ae3ae0be2f45f9746c9573bf949698221a99696715065a14a293729c022a0c"
+        "sha256": "a73ed49047433e4e4534d4f9f32ed75adde8dee98d89eda7d81bb4a2cbac2bbf"
       },
       "after": {
         "resource": "after-05.txt",
-        "sha256": "6d11c5ff5d429daca053775a7b8eae9cbe89c3498c3b33c4f0f576c36b2b91c3"
+        "sha256": "ddbd039e5899b8f470157b81ba4659d8d997fd962db5fc809008af3692f2a9c4"
       }
     }
   ],

@@ -30,7 +30,7 @@ import urllib.parse
 import urllib.request
 import zipfile
 
-LOCK_SHA256 = "808e9471ebab14659401fd592538df7b0096c166c3410014e43d21747918af50"
+LOCK_SHA256 = "1dd5cb6888d3ab5ecb2aa42bdebedaf64562a0ee2921522b04340fde1f34db74"
 MIN_FREE = 8 * 1024 ** 3
 OUTPUT_LIMIT = 64 * 1024 ** 2
 RECEIPT_RESERVE = 1024 ** 2

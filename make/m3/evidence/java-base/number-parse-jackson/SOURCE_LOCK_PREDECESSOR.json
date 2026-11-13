@@ -77,7 +77,7 @@
     }
   ],
   "predecessor_path": "qualification/fdp-delegate/SOURCE_LOCK_PREDECESSOR.json",
-  "predecessor_sha256": "4bb1a8b623b106985cca97969a79561c079ff0cf9a415fcf91e996f3ee4ab99a",
+  "predecessor_sha256": "f5a20614b0f82e9f001968e4a65b292c07f49eef1f29f3e30770b064f6f05dd5",
   "schema": 1,
   "target_base_revision": "52fb81c483c74448a12eecb63aa9465e42cdb82c",
   "target_repository": "https://github.com/hsoliwal/M3jdk21",

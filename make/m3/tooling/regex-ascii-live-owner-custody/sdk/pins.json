@@ -81,9 +81,9 @@
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/before/m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json",
-      "gitBlob": "ce9727c7585c8f90f62a23524bf8e8245ea59858",
+      "gitBlob": "69dd910434902bb9d80c0671e9c9189fcc25c0ee",
       "bytes": 14670,
-      "sha256": "77cad6a4a4c48da4ed4959262da9c65bcb96210654e7b94747254eb1aa466b94"
+      "sha256": "e991c6c72db9cc01d1e88e97cfbcdf09f747147fae36a7b8a14b09a98207ba18"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/before/m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py",
@@ -93,9 +93,9 @@
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/manifest.tsv",
-      "gitBlob": "ee426fbb1839ed0602cec343ab0aa2614fe6dc80",
+      "gitBlob": "cfcce64dfa58e877c7d668379ca1bc428695eb58",
       "bytes": 1090,
-      "sha256": "d49cd58367626e5877b098e94debb6a34aff75111e2c431e0fc8befa4a09f2d0"
+      "sha256": "1f354e919166733ac1d554afe111b4d1115d73499c46ccc726b8e227f7f5e4d8"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/out/.github/workflows/m3-regex-ascii-lexical-receiver.yml",
@@ -117,9 +117,9 @@
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/out/m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json",
-      "gitBlob": "ce9727c7585c8f90f62a23524bf8e8245ea59858",
+      "gitBlob": "69dd910434902bb9d80c0671e9c9189fcc25c0ee",
       "bytes": 14670,
-      "sha256": "77cad6a4a4c48da4ed4959262da9c65bcb96210654e7b94747254eb1aa466b94"
+      "sha256": "e991c6c72db9cc01d1e88e97cfbcdf09f747147fae36a7b8a14b09a98207ba18"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/out/m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py",
@@ -147,9 +147,9 @@
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/before/m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json",
-      "gitBlob": "ce9727c7585c8f90f62a23524bf8e8245ea59858",
+      "gitBlob": "69dd910434902bb9d80c0671e9c9189fcc25c0ee",
       "bytes": 14670,
-      "sha256": "77cad6a4a4c48da4ed4959262da9c65bcb96210654e7b94747254eb1aa466b94"
+      "sha256": "e991c6c72db9cc01d1e88e97cfbcdf09f747147fae36a7b8a14b09a98207ba18"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/before/m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py",
@@ -159,9 +159,9 @@
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/manifest.tsv",
-      "gitBlob": "f496d522759ea443e89f0bf82d5205aaa47e001f",
+      "gitBlob": "8f5b28a375ceeae4e7b08b8a19237433391210b5",
       "bytes": 1090,
-      "sha256": "12c5799b1f8720c8059077145d30c8d8b0e028f5d614b59631eaca828b28aa6e"
+      "sha256": "168129b84ec3083f2fb11dc18015a9ee7bd43fcc222b5fdda56a97aaf6f1439e"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/out/.github/workflows/m3-regex-ascii-lexical-receiver.yml",
@@ -183,9 +183,9 @@
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/out/m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json",
-      "gitBlob": "ce9727c7585c8f90f62a23524bf8e8245ea59858",
+      "gitBlob": "69dd910434902bb9d80c0671e9c9189fcc25c0ee",
       "bytes": 14670,
-      "sha256": "77cad6a4a4c48da4ed4959262da9c65bcb96210654e7b94747254eb1aa466b94"
+      "sha256": "e991c6c72db9cc01d1e88e97cfbcdf09f747147fae36a7b8a14b09a98207ba18"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/out/m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py",
@@ -195,15 +195,15 @@
     },
     {
       "path": "src/test/java/jdk/internal/m3/rewrite/M3RegexAsciiLiveOwnerCustodyRecipeTest.java",
-      "gitBlob": "6de9e251de460305b5e65be33c5134654ec83758",
+      "gitBlob": "fd930e370520edcd974057d7940413d8cdcb6a69",
       "bytes": 16076,
-      "sha256": "573768d731ec77c9a8451df35e6eac2b3fa0990f69c148a7176fc993f3324603"
+      "sha256": "9bd86fac89b568038f52ff46191d6146053820be1bae6c6a2616853dd391560b"
     },
     {
       "path": "verify.py",
-      "gitBlob": "fe9de255cc0bc0fa5f320b73298fa1e9c71a9f88",
+      "gitBlob": "54dfa59018ec86885b125f394903da756af43d8f",
       "bytes": 28910,
-      "sha256": "685a56417fb62a603e0eec799bdb2e0be7eda98751d2104abaf43a0e4cbfc941"
+      "sha256": "8e8d4c3b9284cd0231de0dd0201e5b046d729d6e10dfe3ddd2fa7a6f9c11d6bb"
     }
   ]
 }

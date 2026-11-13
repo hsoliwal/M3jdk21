@@ -3,8 +3,8 @@
   "scope": "TOOLING_ONLY_NO_RUNTIME_PROMOTION",
   "predecessor": {
     "receiptPath": "make/m3/compatibility/m3-string-phase-checker-successor-20261015-v2.json",
-    "receiptGitBlob": "68a372773b9eebe48c4dc989be270bcbaa5e9adc",
-    "receiptSha256": "96ea0d1caa75b66d3bcca9deecd8170f60eb2a05acac165f28879b101d1cab92",
+    "receiptGitBlob": "473e2fe583573ddc6728922a475c8d91a74a5550",
+    "receiptSha256": "fb2b3e1314a6397359f96b76936a21bd6e2ca71af32a41aa68187fc6b101ad79",
     "targetAfterGitBlob": "274753ece4a5cfd11dc2e98feca50f2601540b8d",
     "targetAfterSha256": "bad0fe420fc677a977079e0aa557ff733e2858939781786bc37d0c9f38d96ff3"
   },

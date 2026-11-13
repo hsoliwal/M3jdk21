@@ -5,14 +5,14 @@
  "predecessor": {
   "path": "make/m3/collections/qualification/owned-apache-multivalue-20261018/SDK_SOURCE_BINDING_SUCCESSOR_V3.json",
   "bytes": 4649,
-  "sha256": "9432e17d44f32a6b672484ec6e63f28221b3422722f48db9a809fa663921c5c4",
-  "gitBlob": "e9ca64f85b94f5bca631da2970c09866b27047d4"
+  "sha256": "672d80e6c3a09f18ec4bd653bd3775870b540cfdd1a5b110d3e561520697b345",
+  "gitBlob": "d3e23c1f4e66f0538727a0cd23e4a6ff1278eef3"
  },
  "predecessorVerifier": {
   "path": "make/m3/collections/qualification/owned-apache-multivalue-20261018/verify_source_binding_successor_v3.py",
   "bytes": 5889,
-  "sha256": "1a47c56121ecf52ab475d463e22e118fcdcb0b330380dd4701c4a0969946aa00",
-  "gitBlob": "e28898852519c338706dba67d84056b28f628f8c"
+  "sha256": "a5961ce8c13eb93ee789236be49c716ea5a4f01f82158cd8f10b3d51b5b1ab46",
+  "gitBlob": "34f222a2bab61f9473f9b2ae1c7563d6214a8b86"
  },
  "successors": [
   {

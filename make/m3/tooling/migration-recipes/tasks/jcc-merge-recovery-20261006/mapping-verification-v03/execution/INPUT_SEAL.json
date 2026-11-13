@@ -62,33 +62,33 @@
     },
     {
       "bytes": 251524,
-      "git_blob": "f350c7c79e265c788d9e3278eb0103733b301327",
+      "git_blob": "7d43a1dc26becb45aa69616d47c9e8224a37611d",
       "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/history-0014.txt",
-      "sha256": "abfc59de62d46f6442b95717ac367461ab057cd74ed9dfffc6515d7fb0a1574c"
+      "sha256": "a91ad1cb7d7f358fb7c4e280b7bf3756db9dd2d6f387f4c7e622e232ff03c0bf"
     },
     {
       "bytes": 167811,
-      "git_blob": "8fc1846a9d81c1a6cd7e21f66048d9bc4ef2a834",
+      "git_blob": "46b99a0250db3076a602529f5aa4daedfc567739",
       "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/history-0016.txt",
-      "sha256": "59b1491a232e3eabfd0530cbf47b01265603e6f493e382aa3c394c629b0516b6"
+      "sha256": "a0b20e45bb5d5e8f4a684ee0d4daa7a9cf8730529ae784a09778b17aceabea11"
     },
     {
       "bytes": 328312,
-      "git_blob": "7b97f9376dbb885108a112dffb623b22a9821193",
+      "git_blob": "d5c1921a688517d3662f8b720e9068ade1720c04",
       "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v03/after-00.txt",
-      "sha256": "d4f1a513c663906dd4ec498c46864568dbee9866b48b3a1e41f7240a58c04e1c"
+      "sha256": "9e02e0b6b70cb6ea1cc6c47c2205186971b49f18f0f329ae5705c9ed88341e28"
     },
     {
       "bytes": 18828,
-      "git_blob": "5765f894e00e150139bf9569190048a028110744",
+      "git_blob": "ad9bbe3b84a7037adb6d51f9cf1ab23a94320df8",
       "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v03/after-01.txt",
-      "sha256": "52178015a89e5f1c08ab280725e5fb45a3617fdc9035fdecf793cd3c2b503858"
+      "sha256": "9da115d4bd716778deb0322a616c720c77b6ee9d04fa6b3774d1f5caada2a58f"
     },
     {
       "bytes": 255461,
-      "git_blob": "73d2b00c9c46145f3081c33b4a5c31236928a803",
+      "git_blob": "d967a5d17e4603d53f8216bc2db7b6a32d53c780",
       "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v03/after-02.txt",
-      "sha256": "283d44e6e66405165706447446ed5242104ac1e79d33a6ceafc0cbe1a128de09"
+      "sha256": "538627e65ce5230f4c09e89438053100c4af374dae1022ba077e3e1f4d7813ad"
     },
     {
       "bytes": 108212,
@@ -128,9 +128,9 @@
     },
     {
       "bytes": 3236,
-      "git_blob": "6a4e48b38777d142d3433e448f1b7f1e0137be1d",
+      "git_blob": "02e653d1969f1d6389b3e1af7b024c24f9a5338b",
       "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v03/plan.json",
-      "sha256": "155f96b0e3396f0987b9700d970841cf8bb8ede038ec838abe7cc53a18bc2619"
+      "sha256": "0ac448c26ace84444640fa025b162167abd3e5f1a4e706b9fd85d59b081b299a"
     },
     {
       "bytes": 396,
@@ -140,9 +140,9 @@
     },
     {
       "bytes": 52685,
-      "git_blob": "76042ac484d1f3e886a5a3dbc38ed08fed1eab46",
+      "git_blob": "b0d3d938a315f1dc0685f3dd587dcfd6caa2c3ae",
       "path": "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccMergeMappingRecoveryV03Test.java",
-      "sha256": "13da0f52896fe2aaf58b4106defb74d9b3ed963d9b39e078473389ec7190fedc"
+      "sha256": "d3c71edd96485e17830c6c3a98e8e2049e04de21c206635330d6f5c912a43d1f"
     },
     {
       "bytes": 138214,
@@ -158,9 +158,9 @@
     },
     {
       "bytes": 3281,
-      "git_blob": "11781c602e797e60f2aa4d4cab84b16b7aa9991c",
+      "git_blob": "4a6c4fa07b35c6505619bfcf0539f7518b0ea6b5",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/MAPPING_RESOURCES.json",
-      "sha256": "b64d79354c13b3695ffe2a1f3d897f7ef72f32cf751f3ab347d0d0a6dbdd5f26"
+      "sha256": "9614444fe2ea7500e0c945cbf02a4d57f2141291140e0c936bf3ff9c029506f3"
     },
     {
       "bytes": 3441,
@@ -170,9 +170,9 @@
     },
     {
       "bytes": 9768,
-      "git_blob": "7584ca2b0feaec8105559fcab397d37213bdac8f",
+      "git_blob": "b7400b207dbb53d30315f50cb198171523eefb1a",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/verify_installer.py",
-      "sha256": "0fe81adbb88301c6e98ae0c16dd1239758c8efc790124a942da8959a7dc15175"
+      "sha256": "ac7bee0083a03b36410615ddef137512ba0cc04c6f89295f0e286a23a24cfa2d"
     },
     {
       "bytes": 1156752,
@@ -193,5 +193,5 @@
   "source_commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
   "source_input_sha256": "7db913209511a230e36a8da12282b3e4a6f84193399821ce9693042f616fa39d",
   "source_root_tree": "a72565e0e67f330f12c712dcc7a3fcbe1d80d24e",
-  "template_packet_sha256": "9d24eaf99ff3cc614688f3f1193aaafc96be71a290a080d2835d4d62c267ddd5"
+  "template_packet_sha256": "7607f56eb966d3e03b1522d53426a15347cec231236e3159450dc71fe672d05f"
 }

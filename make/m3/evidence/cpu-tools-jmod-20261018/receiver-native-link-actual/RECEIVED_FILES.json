@@ -1,7 +1,7 @@
 [
   {
     "path": "doc/m3/name-mapping.d/m3-cpu-tools-jmod-20261018.json",
-    "sha256": "ffc8d74989ed7eac31b85218db352e4750c0e9236334ddcaa8de2b232ae6761c",
+    "sha256": "e5726c0c11c55f73db4d59f17b23a5e87a42038c0fbb8bb5b817da0ca188220a",
     "mode": "0644",
     "dataset": "current"
   },
@@ -13,7 +13,7 @@
   },
   {
     "path": "make/m3/tooling/module-packs/cpu-tools/DONOR_CHANGES.tsv",
-    "sha256": "e8074a1c1edc9b8c79305261f5d58631b6fddcdfe51499df610d41becbdfef8a",
+    "sha256": "bb886e469ecb1c3d4d59b550ebe377012b0d215eef59d9b31107eee72a2d9df7",
     "mode": "0644",
     "dataset": "current"
   },
@@ -25,7 +25,7 @@
   },
   {
     "path": "make/m3/tooling/module-packs/cpu-tools/DONOR_MODULES.tsv",
-    "sha256": "62f5a9ba0a60a3df5901a720823a8f3a8fac7ad4c467fa11e7aee0965e6854c3",
+    "sha256": "c59a895a8754f9b225250bb54889c2e0f8c9375c7bdff52a66085b7b164236ec",
     "mode": "0644",
     "dataset": "current"
   },
@@ -49,7 +49,7 @@
   },
   {
     "path": "make/m3/tooling/module-packs/cpu-tools/PROVENANCE.tsv",
-    "sha256": "2f54c0bafaa52fbde0fcc1374c4057443876aaed42092e35251b5286ffc5be8a",
+    "sha256": "82f8ee494c9527eff39344d08028ea323aa3bcb314fe990e0059ae2aec01d72f",
     "mode": "0644",
     "dataset": "current"
   },
@@ -73,7 +73,7 @@
   },
   {
     "path": "make/m3/tooling/module-packs/cpu-tools/TASK_PACKET.json",
-    "sha256": "83abb90abbd9682f82daf60e2289e78bfbe67d890845ab324616e538191e3e07",
+    "sha256": "030a58df2a62319b5ba536c67e193e4f41677f49fed77989963d9a63e9d0d7e4",
     "mode": "0644",
     "dataset": "current"
   },

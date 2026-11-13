@@ -3,15 +3,15 @@
   "files": [
     {
       "path": "build_runtime_facade_handoff.py",
-      "sha256": "a668c8b4df6ddeb34315562169a63d9763b79a5beb6735cc3ecc3f0a8237ee4a"
+      "sha256": "785849e0b9b38b1db039f731a8b6687bd2ef523b7cc58db0ddd22bb6a906c374"
     },
     {
       "path": "canonical-artifacts.json",
-      "sha256": "fcae62f8f3839ac414f07433849a16ee2eeb4987cd1a47984c7abfd0bd5cf721"
+      "sha256": "38ade0c279f8c3f3df402e6c0eaa9814c72e6927dab0648f242f94cd9409bfbb"
     },
     {
       "path": "CUSTODY-SOURCE.json",
-      "sha256": "4c043b5252853a59683317f42da01de5814381c0d825df1491878588d6ab9abf"
+      "sha256": "32c1b9cf1f9dcb92f793dd62c8ed1478cfbdfbd230d59e9bfbb58e1c5e552a4e"
     },
     {
       "path": "pom.xml",
@@ -27,7 +27,7 @@
     },
     {
       "path": "datasets/m3-runtime-facade-custody-1/MODES.tsv",
-      "sha256": "6562ed5d2ef3d43a72a6979d875ed0331bcac0babeeaa66c23aa8ae96ae120ec"
+      "sha256": "4bfadb990c49a143e06ce1ded0b7277eb9cb9cf747ac68368e315d5e9e157542"
     },
     {
       "path": "datasets/m3-runtime-facade-custody-1/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3-runtime-facade-custody-1.yml",
@@ -35,11 +35,11 @@
     },
     {
       "path": "datasets/m3-runtime-facade-custody-1/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-runtime-facade-custody-1/manifest.tsv",
-      "sha256": "1868e2c3885e2f4f718a21f455422f031129c142f5d4ce146d1dd63b4a16898e"
+      "sha256": "9364596b843972d669dd94e906b7f003beb6add53e73eeba54fab4c9735e3841"
     },
     {
       "path": "datasets/m3-runtime-facade-custody-1/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-facade-custody-1/manifest.tsv",
-      "sha256": "b681a99dcb6d2ae289674ace42ef8b0ac69f3486bfefb638cad22180bcfba304"
+      "sha256": "7cd2915f55750decb4445a79270a07aae0c4c824aa952d24d32be9024c719865"
     },
     {
       "path": "target/m3-runtime-facade-custody-1/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml",

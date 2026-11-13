@@ -127,12 +127,12 @@
     }
   ],
   "recipe_input_count": 51,
-  "recipe_inputs_sha256": "88de7108d5b729a0352d2aa0c86900ed06f23e20dc5a69ee4d47ffeeb8b1d66c",
+  "recipe_inputs_sha256": "ac054c4e2c5520f29622337a4604f220b5f5db06ed78cada873550b09b36a607",
   "target_base": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
   "checked_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
   "engine_base": "140c263a90f9803b9c46103c63355a286e0515f0",
   "java_manifest_sha256": "d8ebd90bce3c617b9598670f34b76ccda1a1fb4dba85075492ad0bc239ae2c8d",
-  "text_manifest_sha256": "f68d13347b8b2e0298e33109200e35d685659883c3313922c7743e933caad69f",
+  "text_manifest_sha256": "25a7ffea311e7a337274656a06f02f045828aba9cefbf70a1f5cefd519b4531d",
   "target_tree_sha256": "2558322dea284d16fedfe332450c1d7d32abfac3a843b153495bce6d61d69c23",
   "application": {
     "status": "PASS",
@@ -140,14 +140,14 @@
     "new_files": 14,
     "fixed_point_changes": 0,
     "receipt": "verification/source-application.tsv",
-    "receipt_sha256": "ebc75466123cba23016e09b9d3ddf7878fbfd0b6494c9b335097c2663980c1ee"
+    "receipt_sha256": "47ca349079093a14d4c7d2dc7a6f3a636a7808c2e98e04b0941ce12e92f9aa6b"
   },
   "independent_check": {
     "status": "PASS",
     "targets": 14,
     "changes": 0,
     "receipt": "verification/source-check.tsv",
-    "receipt_sha256": "513976db6c136ed598870110a22f26c3995a141f9c6da9529ade9eb4f2979278"
+    "receipt_sha256": "dceb547f4d5d45dd5d6da743957b70988072d8a47e8fe66e21efe5a63a62bc02"
   },
   "prior_counterexample": "verification/recipe-failures/symlink-refusal-classification.json",
   "separate_gates": [

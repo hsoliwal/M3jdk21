@@ -30,7 +30,7 @@
         "src/java.base/share/classes/jdk/internal/mindex/M3Constructor.java": "f6a8cd76d1bd8bd5f2641d6d81dcb4e74b8aa613442c23fed32f3e99945be923",
         "src/java.base/share/classes/jdk/internal/mindex/M3RecordComponent.java": "0be405cfa1d7fac2fbf1bdf5ae42e9798033eda53c6545b47154a16fa57134bd",
         "make/m3/tooling/cb/pom.xml": "5acfeeef9d5853198668de8022733459f842a7ae60b02a028b09192f16fb9c42",
-        "make/m3/tooling/cb/recipe-pin.tsv": "e74fa9dd39640a50e832710f8a7efc7c8b084e05bbc22a7e7613f6632159d201",
+        "make/m3/tooling/cb/recipe-pin.tsv": "da875c1bf1d0e4116f300c58649225d2e5db7c6b3831af31547c05d57212f1c8",
         "make/m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-close/manifest.tsv": "7bed7ae31c48003f4de722a750a79c80061bf68e391e8294f2a2ee98c3d9563c",
         "make/m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-jni-null/manifest.tsv": "a312cd8fe607d2fc15afda0be68a659bae6548860dbea2b037a0e4e6ff8b4ae2",
         "make/m3/tooling/cb/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-jni/manifest.tsv": "4205a9adaf793e3340a2b0e581687646eb0428ad957680f5736267f104def1ac"
@@ -50,7 +50,7 @@
         "src/java.base/share/classes/jdk/internal/mindex/MIndexStringBacking.java": "880731315e4c50076a1c240dfecb8bc9aa5551b40cc4a83f0f68e837accad79f",
         "make/m3/tooling/cb/src/test/java/jdk/m3/cb/CloseTest.java": "cf558a4c3b25f86727cb01b2ae3cb0ce846c943f7b622b73400a4c0422da8fd8",
         "make/m3/tooling/cb/pom.xml": "5acfeeef9d5853198668de8022733459f842a7ae60b02a028b09192f16fb9c42",
-        "make/m3/tooling/cb/recipe-pin.tsv": "e74fa9dd39640a50e832710f8a7efc7c8b084e05bbc22a7e7613f6632159d201",
+        "make/m3/tooling/cb/recipe-pin.tsv": "da875c1bf1d0e4116f300c58649225d2e5db7c6b3831af31547c05d57212f1c8",
         "make/m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
         "make/m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-close/manifest.tsv": "7bed7ae31c48003f4de722a750a79c80061bf68e391e8294f2a2ee98c3d9563c",
         "make/m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-jni-null/manifest.tsv": "a312cd8fe607d2fc15afda0be68a659bae6548860dbea2b037a0e4e6ff8b4ae2",
@@ -71,7 +71,7 @@
         "test/jdk/jdk/internal/mindex/cb/libM3JNINull.c": "471076651477273d831ea7cbfe25120aa7a8af6397c9611b0247e5c7c6b9702e",
         "test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/JNINull.java": "440e56c06fce9c7bfd37025fa3684afe715b4d9d2cfbca33c4bb9d7b084d1281",
         "make/m3/tooling/cb/pom.xml": "5acfeeef9d5853198668de8022733459f842a7ae60b02a028b09192f16fb9c42",
-        "make/m3/tooling/cb/recipe-pin.tsv": "e74fa9dd39640a50e832710f8a7efc7c8b084e05bbc22a7e7613f6632159d201",
+        "make/m3/tooling/cb/recipe-pin.tsv": "da875c1bf1d0e4116f300c58649225d2e5db7c6b3831af31547c05d57212f1c8",
         "make/m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
         "make/m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-close/manifest.tsv": "7bed7ae31c48003f4de722a750a79c80061bf68e391e8294f2a2ee98c3d9563c",
         "make/m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-jni-null/manifest.tsv": "a312cd8fe607d2fc15afda0be68a659bae6548860dbea2b037a0e4e6ff8b4ae2",
@@ -87,10 +87,10 @@
       "stdout_path": "make/m3/tooling/cb/evidence/install-tests.txt",
       "stdout_sha256": "22d5f6d6dd5ea52852cd0c247b1c76c38d9aa582db127aeb9de3d5f1f2a49ef6",
       "inputs": {
-        "make/m3/tooling/cb/install/plan.json": "eb3708a5756cb7d90f3a1be6695b25a8c0c42d6d7df083746a652e015b845373",
-        "make/m3/tooling/cb/integration/plan.json": "49a891e09c8f8e91d902af9a8323a6635dda1fd6b95304ef91db62bfcd3f02ca",
-        "make/m3/tooling/cb/close/plan.json": "7e6585516f56d953398679cf42554db2de9c1afc5b5e1ca78ff22d385af5ebcb",
-        "make/m3/tooling/cb/jni/plan.json": "61996e21e97fe10b5765fb0d6f7537a9bbca710094e193ee4bc755b84854024f"
+        "make/m3/tooling/cb/install/plan.json": "76abe4209857b6acc7193bb5cbeb42933d8c2c2f849d2764a3e168246b9bb74d",
+        "make/m3/tooling/cb/integration/plan.json": "d7d050573a3809dde51ebf237c59a787a032d1b47ae27df684817178fe370348",
+        "make/m3/tooling/cb/close/plan.json": "4fb2bcbbeb7eb0d40625a74e985ddc4a9da1ae917139c62f5e19138954b310e0",
+        "make/m3/tooling/cb/jni/plan.json": "5e31773c336fa68260e373932febf8eee2c366e0073fc4b16c7700831c4f3d4c"
       },
       "installer_tests": 5
     },
@@ -104,7 +104,7 @@
       "inputs": {
         "src/hotspot/share/prims/jni.cpp": "95adc8ea2a9035e65b613a7fb4131f8629bc90f81b70008895a77c1e396b05f9",
         "src/java.base/share/classes/jdk/internal/mindex/MIndexStringBacking.java": "880731315e4c50076a1c240dfecb8bc9aa5551b40cc4a83f0f68e837accad79f",
-        "src/java.base/share/legal/synexia.md": "1d615647231198fcfe563d63655165b4265fb9220626c24b88877fb3c76bf264",
+        "src/java.base/share/legal/synexia.md": "2e4ba362b45291984fe5fd15c7c1e68392e22a459a86c96f407f4f2a54712263",
         "src/java.base/share/classes/jdk/internal/mindex/M3Boundary.java": "c89a34d2e793f5a797ded51c32bf2f7ddad19ad1b932f003dfbde46b37f58d8a",
         "src/java.base/share/classes/jdk/internal/mindex/M3CB.java": "af93f3bebd9a54f592742b0b6d9e1215770446fd13b8679fa259f7c0d5effa36",
         "src/java.base/share/classes/jdk/internal/mindex/M3CI.java": "9a8fa33a3edf5edaaf6b22eeeb203cd08ff386bdd4b7307cdd47e849bc3b98b1",
@@ -123,11 +123,11 @@
         "test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/JNINull.java": "440e56c06fce9c7bfd37025fa3684afe715b4d9d2cfbca33c4bb9d7b084d1281",
         "test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/VmFixture.java": "9815efc8ec24804c0ed35c7f5bdf2b10d98ebdb65b8298ef66074aa94d5f020c",
         "test/jdk/jdk/internal/mindex/cb/libM3JNINull.c": "471076651477273d831ea7cbfe25120aa7a8af6397c9611b0247e5c7c6b9702e",
-        "src/java.base/share/classes/jdk/internal/mindex/M3VI.java": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a",
-        "src/java.base/share/classes/jdk/internal/mindex/M3Release.java": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb",
+        "src/java.base/share/classes/jdk/internal/mindex/M3VI.java": "d4d57e6b892342716ef9a52007082ce7c53959cba81a5ad0f2a0cf8d275c3c01",
+        "src/java.base/share/classes/jdk/internal/mindex/M3Release.java": "dc2a020aa8f6da324ace8a19f68c90b65021b9ad732932ebabbf545468abc34a",
         "make/m3/runtime-integration/tests/StringApiProbe.java": "3cc0dabd026bdb3f85512cb59cbd50a06c2e75f4d382eab9e458268d8897cc56",
         "make/m3/runtime-integration/tests/string_api_probe.c": "a53760f343c412c582cda4d4aecc8f800b5abdd1aa42d648d767f175fd1870c4",
-        "make/m3/tooling/cb/run-image.sh": "cc13d9558226182235e9eebb96015f235d832b52787200ee30cdb321fdb13b81"
+        "make/m3/tooling/cb/run-image.sh": "8f9e708eca0983bd412e70123d64234a394fa6b1307fdc2bc222d65c2667cddd"
       },
       "debug": "fastdebug",
       "warnings_as_errors": true,
@@ -144,7 +144,7 @@
       "inputs": {
         "src/hotspot/share/prims/jni.cpp": "95adc8ea2a9035e65b613a7fb4131f8629bc90f81b70008895a77c1e396b05f9",
         "src/java.base/share/classes/jdk/internal/mindex/MIndexStringBacking.java": "880731315e4c50076a1c240dfecb8bc9aa5551b40cc4a83f0f68e837accad79f",
-        "src/java.base/share/legal/synexia.md": "1d615647231198fcfe563d63655165b4265fb9220626c24b88877fb3c76bf264",
+        "src/java.base/share/legal/synexia.md": "2e4ba362b45291984fe5fd15c7c1e68392e22a459a86c96f407f4f2a54712263",
         "src/java.base/share/classes/jdk/internal/mindex/M3Boundary.java": "c89a34d2e793f5a797ded51c32bf2f7ddad19ad1b932f003dfbde46b37f58d8a",
         "src/java.base/share/classes/jdk/internal/mindex/M3CB.java": "af93f3bebd9a54f592742b0b6d9e1215770446fd13b8679fa259f7c0d5effa36",
         "src/java.base/share/classes/jdk/internal/mindex/M3CI.java": "9a8fa33a3edf5edaaf6b22eeeb203cd08ff386bdd4b7307cdd47e849bc3b98b1",
@@ -163,11 +163,11 @@
         "test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/JNINull.java": "440e56c06fce9c7bfd37025fa3684afe715b4d9d2cfbca33c4bb9d7b084d1281",
         "test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/VmFixture.java": "9815efc8ec24804c0ed35c7f5bdf2b10d98ebdb65b8298ef66074aa94d5f020c",
         "test/jdk/jdk/internal/mindex/cb/libM3JNINull.c": "471076651477273d831ea7cbfe25120aa7a8af6397c9611b0247e5c7c6b9702e",
-        "src/java.base/share/classes/jdk/internal/mindex/M3VI.java": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a",
-        "src/java.base/share/classes/jdk/internal/mindex/M3Release.java": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb",
+        "src/java.base/share/classes/jdk/internal/mindex/M3VI.java": "d4d57e6b892342716ef9a52007082ce7c53959cba81a5ad0f2a0cf8d275c3c01",
+        "src/java.base/share/classes/jdk/internal/mindex/M3Release.java": "dc2a020aa8f6da324ace8a19f68c90b65021b9ad732932ebabbf545468abc34a",
         "make/m3/runtime-integration/tests/StringApiProbe.java": "3cc0dabd026bdb3f85512cb59cbd50a06c2e75f4d382eab9e458268d8897cc56",
         "make/m3/runtime-integration/tests/string_api_probe.c": "a53760f343c412c582cda4d4aecc8f800b5abdd1aa42d648d767f175fd1870c4",
-        "make/m3/tooling/cb/run-image.sh": "cc13d9558226182235e9eebb96015f235d832b52787200ee30cdb321fdb13b81"
+        "make/m3/tooling/cb/run-image.sh": "8f9e708eca0983bd412e70123d64234a394fa6b1307fdc2bc222d65c2667cddd"
       },
       "jtreg_tests": 3,
       "class_assertions_per_mode": 4525,
@@ -183,7 +183,7 @@
       "inputs": {
         "src/hotspot/share/prims/jni.cpp": "95adc8ea2a9035e65b613a7fb4131f8629bc90f81b70008895a77c1e396b05f9",
         "src/java.base/share/classes/jdk/internal/mindex/MIndexStringBacking.java": "880731315e4c50076a1c240dfecb8bc9aa5551b40cc4a83f0f68e837accad79f",
-        "src/java.base/share/legal/synexia.md": "1d615647231198fcfe563d63655165b4265fb9220626c24b88877fb3c76bf264",
+        "src/java.base/share/legal/synexia.md": "2e4ba362b45291984fe5fd15c7c1e68392e22a459a86c96f407f4f2a54712263",
         "src/java.base/share/classes/jdk/internal/mindex/M3Boundary.java": "c89a34d2e793f5a797ded51c32bf2f7ddad19ad1b932f003dfbde46b37f58d8a",
         "src/java.base/share/classes/jdk/internal/mindex/M3CB.java": "af93f3bebd9a54f592742b0b6d9e1215770446fd13b8679fa259f7c0d5effa36",
         "src/java.base/share/classes/jdk/internal/mindex/M3CI.java": "9a8fa33a3edf5edaaf6b22eeeb203cd08ff386bdd4b7307cdd47e849bc3b98b1",
@@ -202,11 +202,11 @@
         "test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/JNINull.java": "440e56c06fce9c7bfd37025fa3684afe715b4d9d2cfbca33c4bb9d7b084d1281",
         "test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/VmFixture.java": "9815efc8ec24804c0ed35c7f5bdf2b10d98ebdb65b8298ef66074aa94d5f020c",
         "test/jdk/jdk/internal/mindex/cb/libM3JNINull.c": "471076651477273d831ea7cbfe25120aa7a8af6397c9611b0247e5c7c6b9702e",
-        "src/java.base/share/classes/jdk/internal/mindex/M3VI.java": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a",
-        "src/java.base/share/classes/jdk/internal/mindex/M3Release.java": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb",
+        "src/java.base/share/classes/jdk/internal/mindex/M3VI.java": "d4d57e6b892342716ef9a52007082ce7c53959cba81a5ad0f2a0cf8d275c3c01",
+        "src/java.base/share/classes/jdk/internal/mindex/M3Release.java": "dc2a020aa8f6da324ace8a19f68c90b65021b9ad732932ebabbf545468abc34a",
         "make/m3/runtime-integration/tests/StringApiProbe.java": "3cc0dabd026bdb3f85512cb59cbd50a06c2e75f4d382eab9e458268d8897cc56",
         "make/m3/runtime-integration/tests/string_api_probe.c": "a53760f343c412c582cda4d4aecc8f800b5abdd1aa42d648d767f175fd1870c4",
-        "make/m3/tooling/cb/run-image.sh": "cc13d9558226182235e9eebb96015f235d832b52787200ee30cdb321fdb13b81"
+        "make/m3/tooling/cb/run-image.sh": "8f9e708eca0983bd412e70123d64234a394fa6b1307fdc2bc222d65c2667cddd"
       },
       "assertions": 809315,
       "semantic_digest": "30e36ec204f5aec8e0d672ff5be675d3f8ac1677164481ec82a335b2540da499"
@@ -221,7 +221,7 @@
       "inputs": {
         "src/hotspot/share/prims/jni.cpp": "95adc8ea2a9035e65b613a7fb4131f8629bc90f81b70008895a77c1e396b05f9",
         "src/java.base/share/classes/jdk/internal/mindex/MIndexStringBacking.java": "880731315e4c50076a1c240dfecb8bc9aa5551b40cc4a83f0f68e837accad79f",
-        "src/java.base/share/legal/synexia.md": "1d615647231198fcfe563d63655165b4265fb9220626c24b88877fb3c76bf264",
+        "src/java.base/share/legal/synexia.md": "2e4ba362b45291984fe5fd15c7c1e68392e22a459a86c96f407f4f2a54712263",
         "src/java.base/share/classes/jdk/internal/mindex/M3Boundary.java": "c89a34d2e793f5a797ded51c32bf2f7ddad19ad1b932f003dfbde46b37f58d8a",
         "src/java.base/share/classes/jdk/internal/mindex/M3CB.java": "af93f3bebd9a54f592742b0b6d9e1215770446fd13b8679fa259f7c0d5effa36",
         "src/java.base/share/classes/jdk/internal/mindex/M3CI.java": "9a8fa33a3edf5edaaf6b22eeeb203cd08ff386bdd4b7307cdd47e849bc3b98b1",
@@ -240,11 +240,11 @@
         "test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/JNINull.java": "440e56c06fce9c7bfd37025fa3684afe715b4d9d2cfbca33c4bb9d7b084d1281",
         "test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/VmFixture.java": "9815efc8ec24804c0ed35c7f5bdf2b10d98ebdb65b8298ef66074aa94d5f020c",
         "test/jdk/jdk/internal/mindex/cb/libM3JNINull.c": "471076651477273d831ea7cbfe25120aa7a8af6397c9611b0247e5c7c6b9702e",
-        "src/java.base/share/classes/jdk/internal/mindex/M3VI.java": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a",
-        "src/java.base/share/classes/jdk/internal/mindex/M3Release.java": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb",
+        "src/java.base/share/classes/jdk/internal/mindex/M3VI.java": "d4d57e6b892342716ef9a52007082ce7c53959cba81a5ad0f2a0cf8d275c3c01",
+        "src/java.base/share/classes/jdk/internal/mindex/M3Release.java": "dc2a020aa8f6da324ace8a19f68c90b65021b9ad732932ebabbf545468abc34a",
         "make/m3/runtime-integration/tests/StringApiProbe.java": "3cc0dabd026bdb3f85512cb59cbd50a06c2e75f4d382eab9e458268d8897cc56",
         "make/m3/runtime-integration/tests/string_api_probe.c": "a53760f343c412c582cda4d4aecc8f800b5abdd1aa42d648d767f175fd1870c4",
-        "make/m3/tooling/cb/run-image.sh": "cc13d9558226182235e9eebb96015f235d832b52787200ee30cdb321fdb13b81"
+        "make/m3/tooling/cb/run-image.sh": "8f9e708eca0983bd412e70123d64234a394fa6b1307fdc2bc222d65c2667cddd"
       },
       "assertions": 809315,
       "semantic_digest": "30e36ec204f5aec8e0d672ff5be675d3f8ac1677164481ec82a335b2540da499"
@@ -259,7 +259,7 @@
       "inputs": {
         "src/hotspot/share/prims/jni.cpp": "95adc8ea2a9035e65b613a7fb4131f8629bc90f81b70008895a77c1e396b05f9",
         "src/java.base/share/classes/jdk/internal/mindex/MIndexStringBacking.java": "880731315e4c50076a1c240dfecb8bc9aa5551b40cc4a83f0f68e837accad79f",
-        "src/java.base/share/legal/synexia.md": "1d615647231198fcfe563d63655165b4265fb9220626c24b88877fb3c76bf264",
+        "src/java.base/share/legal/synexia.md": "2e4ba362b45291984fe5fd15c7c1e68392e22a459a86c96f407f4f2a54712263",
         "src/java.base/share/classes/jdk/internal/mindex/M3Boundary.java": "c89a34d2e793f5a797ded51c32bf2f7ddad19ad1b932f003dfbde46b37f58d8a",
         "src/java.base/share/classes/jdk/internal/mindex/M3CB.java": "af93f3bebd9a54f592742b0b6d9e1215770446fd13b8679fa259f7c0d5effa36",
         "src/java.base/share/classes/jdk/internal/mindex/M3CI.java": "9a8fa33a3edf5edaaf6b22eeeb203cd08ff386bdd4b7307cdd47e849bc3b98b1",
@@ -278,11 +278,11 @@
         "test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/JNINull.java": "440e56c06fce9c7bfd37025fa3684afe715b4d9d2cfbca33c4bb9d7b084d1281",
         "test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/VmFixture.java": "9815efc8ec24804c0ed35c7f5bdf2b10d98ebdb65b8298ef66074aa94d5f020c",
         "test/jdk/jdk/internal/mindex/cb/libM3JNINull.c": "471076651477273d831ea7cbfe25120aa7a8af6397c9611b0247e5c7c6b9702e",
-        "src/java.base/share/classes/jdk/internal/mindex/M3VI.java": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a",
-        "src/java.base/share/classes/jdk/internal/mindex/M3Release.java": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb",
+        "src/java.base/share/classes/jdk/internal/mindex/M3VI.java": "d4d57e6b892342716ef9a52007082ce7c53959cba81a5ad0f2a0cf8d275c3c01",
+        "src/java.base/share/classes/jdk/internal/mindex/M3Release.java": "dc2a020aa8f6da324ace8a19f68c90b65021b9ad732932ebabbf545468abc34a",
         "make/m3/runtime-integration/tests/StringApiProbe.java": "3cc0dabd026bdb3f85512cb59cbd50a06c2e75f4d382eab9e458268d8897cc56",
         "make/m3/runtime-integration/tests/string_api_probe.c": "a53760f343c412c582cda4d4aecc8f800b5abdd1aa42d648d767f175fd1870c4",
-        "make/m3/tooling/cb/run-image.sh": "cc13d9558226182235e9eebb96015f235d832b52787200ee30cdb321fdb13b81"
+        "make/m3/tooling/cb/run-image.sh": "8f9e708eca0983bd412e70123d64234a394fa6b1307fdc2bc222d65c2667cddd"
       },
       "assertions": 3061
     },
@@ -296,7 +296,7 @@
       "inputs": {
         "src/hotspot/share/prims/jni.cpp": "95adc8ea2a9035e65b613a7fb4131f8629bc90f81b70008895a77c1e396b05f9",
         "src/java.base/share/classes/jdk/internal/mindex/MIndexStringBacking.java": "880731315e4c50076a1c240dfecb8bc9aa5551b40cc4a83f0f68e837accad79f",
-        "src/java.base/share/legal/synexia.md": "1d615647231198fcfe563d63655165b4265fb9220626c24b88877fb3c76bf264",
+        "src/java.base/share/legal/synexia.md": "2e4ba362b45291984fe5fd15c7c1e68392e22a459a86c96f407f4f2a54712263",
         "src/java.base/share/classes/jdk/internal/mindex/M3Boundary.java": "c89a34d2e793f5a797ded51c32bf2f7ddad19ad1b932f003dfbde46b37f58d8a",
         "src/java.base/share/classes/jdk/internal/mindex/M3CB.java": "af93f3bebd9a54f592742b0b6d9e1215770446fd13b8679fa259f7c0d5effa36",
         "src/java.base/share/classes/jdk/internal/mindex/M3CI.java": "9a8fa33a3edf5edaaf6b22eeeb203cd08ff386bdd4b7307cdd47e849bc3b98b1",
@@ -315,11 +315,11 @@
         "test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/JNINull.java": "440e56c06fce9c7bfd37025fa3684afe715b4d9d2cfbca33c4bb9d7b084d1281",
         "test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/VmFixture.java": "9815efc8ec24804c0ed35c7f5bdf2b10d98ebdb65b8298ef66074aa94d5f020c",
         "test/jdk/jdk/internal/mindex/cb/libM3JNINull.c": "471076651477273d831ea7cbfe25120aa7a8af6397c9611b0247e5c7c6b9702e",
-        "src/java.base/share/classes/jdk/internal/mindex/M3VI.java": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a",
-        "src/java.base/share/classes/jdk/internal/mindex/M3Release.java": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb",
+        "src/java.base/share/classes/jdk/internal/mindex/M3VI.java": "d4d57e6b892342716ef9a52007082ce7c53959cba81a5ad0f2a0cf8d275c3c01",
+        "src/java.base/share/classes/jdk/internal/mindex/M3Release.java": "dc2a020aa8f6da324ace8a19f68c90b65021b9ad732932ebabbf545468abc34a",
         "make/m3/runtime-integration/tests/StringApiProbe.java": "3cc0dabd026bdb3f85512cb59cbd50a06c2e75f4d382eab9e458268d8897cc56",
         "make/m3/runtime-integration/tests/string_api_probe.c": "a53760f343c412c582cda4d4aecc8f800b5abdd1aa42d648d767f175fd1870c4",
-        "make/m3/tooling/cb/run-image.sh": "cc13d9558226182235e9eebb96015f235d832b52787200ee30cdb321fdb13b81"
+        "make/m3/tooling/cb/run-image.sh": "8f9e708eca0983bd412e70123d64234a394fa6b1307fdc2bc222d65c2667cddd"
       },
       "assertions": 3061
     },
@@ -333,7 +333,7 @@
       "inputs": {
         "src/hotspot/share/prims/jni.cpp": "95adc8ea2a9035e65b613a7fb4131f8629bc90f81b70008895a77c1e396b05f9",
         "src/java.base/share/classes/jdk/internal/mindex/MIndexStringBacking.java": "880731315e4c50076a1c240dfecb8bc9aa5551b40cc4a83f0f68e837accad79f",
-        "src/java.base/share/legal/synexia.md": "1d615647231198fcfe563d63655165b4265fb9220626c24b88877fb3c76bf264",
+        "src/java.base/share/legal/synexia.md": "2e4ba362b45291984fe5fd15c7c1e68392e22a459a86c96f407f4f2a54712263",
         "src/java.base/share/classes/jdk/internal/mindex/M3Boundary.java": "c89a34d2e793f5a797ded51c32bf2f7ddad19ad1b932f003dfbde46b37f58d8a",
         "src/java.base/share/classes/jdk/internal/mindex/M3CB.java": "af93f3bebd9a54f592742b0b6d9e1215770446fd13b8679fa259f7c0d5effa36",
         "src/java.base/share/classes/jdk/internal/mindex/M3CI.java": "9a8fa33a3edf5edaaf6b22eeeb203cd08ff386bdd4b7307cdd47e849bc3b98b1",
@@ -352,11 +352,11 @@
         "test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/JNINull.java": "440e56c06fce9c7bfd37025fa3684afe715b4d9d2cfbca33c4bb9d7b084d1281",
         "test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/VmFixture.java": "9815efc8ec24804c0ed35c7f5bdf2b10d98ebdb65b8298ef66074aa94d5f020c",
         "test/jdk/jdk/internal/mindex/cb/libM3JNINull.c": "471076651477273d831ea7cbfe25120aa7a8af6397c9611b0247e5c7c6b9702e",
-        "src/java.base/share/classes/jdk/internal/mindex/M3VI.java": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a",
-        "src/java.base/share/classes/jdk/internal/mindex/M3Release.java": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb",
+        "src/java.base/share/classes/jdk/internal/mindex/M3VI.java": "d4d57e6b892342716ef9a52007082ce7c53959cba81a5ad0f2a0cf8d275c3c01",
+        "src/java.base/share/classes/jdk/internal/mindex/M3Release.java": "dc2a020aa8f6da324ace8a19f68c90b65021b9ad732932ebabbf545468abc34a",
         "make/m3/runtime-integration/tests/StringApiProbe.java": "3cc0dabd026bdb3f85512cb59cbd50a06c2e75f4d382eab9e458268d8897cc56",
         "make/m3/runtime-integration/tests/string_api_probe.c": "a53760f343c412c582cda4d4aecc8f800b5abdd1aa42d648d767f175fd1870c4",
-        "make/m3/tooling/cb/run-image.sh": "cc13d9558226182235e9eebb96015f235d832b52787200ee30cdb321fdb13b81"
+        "make/m3/tooling/cb/run-image.sh": "8f9e708eca0983bd412e70123d64234a394fa6b1307fdc2bc222d65c2667cddd"
       },
       "assertions": 4525,
       "counterpart_compilation_observed": true,
@@ -372,7 +372,7 @@
       "inputs": {
         "src/hotspot/share/prims/jni.cpp": "95adc8ea2a9035e65b613a7fb4131f8629bc90f81b70008895a77c1e396b05f9",
         "src/java.base/share/classes/jdk/internal/mindex/MIndexStringBacking.java": "880731315e4c50076a1c240dfecb8bc9aa5551b40cc4a83f0f68e837accad79f",
-        "src/java.base/share/legal/synexia.md": "1d615647231198fcfe563d63655165b4265fb9220626c24b88877fb3c76bf264",
+        "src/java.base/share/legal/synexia.md": "2e4ba362b45291984fe5fd15c7c1e68392e22a459a86c96f407f4f2a54712263",
         "src/java.base/share/classes/jdk/internal/mindex/M3Boundary.java": "c89a34d2e793f5a797ded51c32bf2f7ddad19ad1b932f003dfbde46b37f58d8a",
         "src/java.base/share/classes/jdk/internal/mindex/M3CB.java": "af93f3bebd9a54f592742b0b6d9e1215770446fd13b8679fa259f7c0d5effa36",
         "src/java.base/share/classes/jdk/internal/mindex/M3CI.java": "9a8fa33a3edf5edaaf6b22eeeb203cd08ff386bdd4b7307cdd47e849bc3b98b1",
@@ -391,11 +391,11 @@
         "test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/JNINull.java": "440e56c06fce9c7bfd37025fa3684afe715b4d9d2cfbca33c4bb9d7b084d1281",
         "test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/VmFixture.java": "9815efc8ec24804c0ed35c7f5bdf2b10d98ebdb65b8298ef66074aa94d5f020c",
         "test/jdk/jdk/internal/mindex/cb/libM3JNINull.c": "471076651477273d831ea7cbfe25120aa7a8af6397c9611b0247e5c7c6b9702e",
-        "src/java.base/share/classes/jdk/internal/mindex/M3VI.java": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a",
-        "src/java.base/share/classes/jdk/internal/mindex/M3Release.java": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb",
+        "src/java.base/share/classes/jdk/internal/mindex/M3VI.java": "d4d57e6b892342716ef9a52007082ce7c53959cba81a5ad0f2a0cf8d275c3c01",
+        "src/java.base/share/classes/jdk/internal/mindex/M3Release.java": "dc2a020aa8f6da324ace8a19f68c90b65021b9ad732932ebabbf545468abc34a",
         "make/m3/runtime-integration/tests/StringApiProbe.java": "3cc0dabd026bdb3f85512cb59cbd50a06c2e75f4d382eab9e458268d8897cc56",
         "make/m3/runtime-integration/tests/string_api_probe.c": "a53760f343c412c582cda4d4aecc8f800b5abdd1aa42d648d767f175fd1870c4",
-        "make/m3/tooling/cb/run-image.sh": "cc13d9558226182235e9eebb96015f235d832b52787200ee30cdb321fdb13b81"
+        "make/m3/tooling/cb/run-image.sh": "8f9e708eca0983bd412e70123d64234a394fa6b1307fdc2bc222d65c2667cddd"
       },
       "assertions": 4525,
       "counterpart_compilation_observed": true,

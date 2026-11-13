@@ -14,7 +14,7 @@
   "binder": {
     "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/bind_mapping.py",
     "bytes": 31555,
-    "sha256": "7004dfc94aea795a56ea8b1c377bdb83f33fb67b6b5d259391ff5bc985d845ec"
+    "sha256": "a61bbdf26c3b2c17b88e50eda58b69e28cc0a7289e7169e5cd2060a43442d1ab"
   },
   "validated_owner_count": 20,
   "validated_build_component_count": 1,
@@ -22,20 +22,20 @@
     {
       "path": "doc/m3/name-mapping.json",
       "bytes": 328312,
-      "sha256": "d4f1a513c663906dd4ec498c46864568dbee9866b48b3a1e41f7240a58c04e1c",
-      "git_blob_sha1": "7b97f9376dbb885108a112dffb623b22a9821193"
+      "sha256": "9e02e0b6b70cb6ea1cc6c47c2205186971b49f18f0f329ae5705c9ed88341e28",
+      "git_blob_sha1": "d5c1921a688517d3662f8b720e9068ade1720c04"
     },
     {
       "path": "doc/m3/jcc-source-handoff.md",
       "bytes": 18828,
-      "sha256": "52178015a89e5f1c08ab280725e5fb45a3617fdc9035fdecf793cd3c2b503858",
-      "git_blob_sha1": "5765f894e00e150139bf9569190048a028110744"
+      "sha256": "9da115d4bd716778deb0322a616c720c77b6ee9d04fa6b3774d1f5caada2a58f",
+      "git_blob_sha1": "ad9bbe3b84a7037adb6d51f9cf1ab23a94320df8"
     },
     {
       "path": "make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
       "bytes": 255461,
-      "sha256": "283d44e6e66405165706447446ed5242104ac1e79d33a6ceafc0cbe1a128de09",
-      "git_blob_sha1": "73d2b00c9c46145f3081c33b4a5c31236928a803"
+      "sha256": "538627e65ce5230f4c09e89438053100c4af374dae1022ba077e3e1f4d7813ad",
+      "git_blob_sha1": "d967a5d17e4603d53f8216bc2db7b6a32d53c780"
     },
     {
       "path": "make/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",

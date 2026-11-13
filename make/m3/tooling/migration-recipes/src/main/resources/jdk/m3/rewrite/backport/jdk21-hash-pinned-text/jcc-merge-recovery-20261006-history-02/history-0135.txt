@@ -41,8 +41,8 @@
       "resource": "before00-name-mapping.json.txt",
       "path": "doc/m3/name-mapping.json",
       "bytes": 236215,
-      "sha256": "61818898ef6c092ddad2c1ee4cfe7508199912ff0a1f2d5c2a51ad6695d040c8",
-      "git_blob_sha1": "3a1e902a8284773f0f182d6bd43bf4e27b4e63c0",
+      "sha256": "aeec3cfe84e57aadf7fa855a5f2174dd73749ccc8f6cd8f4409f0bb8a25e3d53",
+      "git_blob_sha1": "1bbe40b2c04da018894a4494da157c6865340490",
       "exact_E3_manifest_match": true,
       "operational_preimage_equal": true
     },
@@ -59,8 +59,8 @@
       "resource": "before02-source-destination-bindings.json.txt",
       "path": "make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
       "bytes": 92103,
-      "sha256": "8c76c2dd45e775d29f8f47d8daf65842e465c74ad3dec7aacd55df59f9d051a1",
-      "git_blob_sha1": "5ecf415c7af4176898328d58b9df2972e18277c4",
+      "sha256": "e8f345aacd9d93fb436d08f3bd868c2f5849e8edf989dd7fab54cc665dc49577",
+      "git_blob_sha1": "0b4ddaae7f2550a3f336dea845a37781584d951e",
       "exact_E3_manifest_match": true,
       "operational_preimage_equal": true
     },

@@ -16,8 +16,8 @@
       "finished_utc": "2026-10-18T12:49:52.526332+00:00",
       "exit_code": 0,
       "record": "logs/02-authoring-lint.json",
-      "record_sha256": "fc8e1d0dc7b3b40dac574b60b0fdad91934494383488471e7f063c24aff65e8b",
-      "log_sha256": "6200996a47dc5c293ed31a8169dfe287f53a0db51954f6cafd16d7c01b52a806"
+      "record_sha256": "cc269657de4b6083e438b3bef2dda36c0fd13cdaa17f1ab832439a62ab5cfcd9",
+      "log_sha256": "9e6f2b9cfb453f2ab925e063931ff36f6df285a1788da5285c58670d3b46c5ff"
     },
     {
       "label": "03-authoring-compile",
@@ -43,8 +43,8 @@
       "finished_utc": "2026-10-18T12:52:52.080680+00:00",
       "exit_code": 0,
       "record": "logs/02b-authoring-lint.json",
-      "record_sha256": "90d00fe311ad6b4a28a5734df65147b640483cf0e338bec88cd3bbb5066960ac",
-      "log_sha256": "6200996a47dc5c293ed31a8169dfe287f53a0db51954f6cafd16d7c01b52a806"
+      "record_sha256": "686e4fd9052746ec023eaa11c2c5b94a5b1e613df1dbf409766003fdba339ff4",
+      "log_sha256": "9e6f2b9cfb453f2ab925e063931ff36f6df285a1788da5285c58670d3b46c5ff"
     },
     {
       "label": "03b-authoring-compile",
@@ -124,8 +124,8 @@
       "finished_utc": "2026-10-18T12:55:32.308196+00:00",
       "exit_code": 0,
       "record": "logs/07-product-lint.json",
-      "record_sha256": "92a47c7ab88a60df6f824f0bb02cb062a1a290a852ac2a08d742591caa5b4412",
-      "log_sha256": "6200996a47dc5c293ed31a8169dfe287f53a0db51954f6cafd16d7c01b52a806"
+      "record_sha256": "c1dd739d99383eb1b7d12887a0207fb20cf79f5a28014acd551699f961139de8",
+      "log_sha256": "9e6f2b9cfb453f2ab925e063931ff36f6df285a1788da5285c58670d3b46c5ff"
     },
     {
       "label": "08a-exact-spi-compile",
@@ -178,8 +178,8 @@
       "finished_utc": "2026-10-18T13:00:19.225501+00:00",
       "exit_code": 0,
       "record": "logs/11c-template-normalization.json",
-      "record_sha256": "1d519b4e461f9bd2976af193259a227e02021eb981b67dda10e4080930dba3e3",
-      "log_sha256": "9f9eb472625b66ddfe723b79de3bb92898da2366da01ad8c65dca4c61844b639"
+      "record_sha256": "eab49a9e953824bd02046b2ecca9b1f53ea7e03f3ea6c7fd07d984729a4c4800",
+      "log_sha256": "0af23021d988a7b69c35a85fff55132201186d62f376ede77b3a6af22b61b85a"
     },
     {
       "label": "12-authoring-lint",
@@ -187,8 +187,8 @@
       "finished_utc": "2026-10-18T13:00:19.676011+00:00",
       "exit_code": 0,
       "record": "logs/12-authoring-lint.json",
-      "record_sha256": "f245ab66a0045f1a63ce53dcc563c463b4c72c2808384dbf973bff48b7f5b5df",
-      "log_sha256": "b199e48386e579d2e566c029b811fb8280c854be9350c298855ec8d9ffaf15c1"
+      "record_sha256": "7444f46e7942bc0331c50fd0b688d49885d1fa32e440cec455f6b40a225a03f2",
+      "log_sha256": "9702e29e9294ea8576a3a5ed1ef4d50b008f08531e6aaa8e0f622c89278ea81a"
     },
     {
       "label": "13-authoring-compile",
@@ -223,8 +223,8 @@
       "finished_utc": "2026-10-18T13:09:44.018731+00:00",
       "exit_code": 0,
       "record": "logs/21b-template-normalization.json",
-      "record_sha256": "f78caaa153433646c40c0686ee82160b2c1f8ecac569404b4d880dbc683fe7f3",
-      "log_sha256": "70fa3d1231fa6d580e915428a1bd36b5e80920574fab75082cecc440a095be28"
+      "record_sha256": "20bf318a7b7529b8cb2fdf4f93332fefea7a8c615c1257f9b28ad43bfb23c7d3",
+      "log_sha256": "12f88c03fe6cc1ef7b157ff3d2c7367a822cbe57d3968abeaadc3c3215a96eeb"
     },
     {
       "label": "22-authoring-lint",
@@ -232,8 +232,8 @@
       "finished_utc": "2026-10-18T13:09:44.480605+00:00",
       "exit_code": 0,
       "record": "logs/22-authoring-lint.json",
-      "record_sha256": "9b19e1b3bc4f1f12493f476454ea1d487a1d4956e3783e278f547f406b75ff47",
-      "log_sha256": "36674a8134f71b16ac01ed1f3ebc8e53bc08d8fedbebe2464a0f74fbcb99c1f2"
+      "record_sha256": "266bd2a79dc00dc753f893dc0bed0feca1c84bb1cbd256767a5b220b82e9a02e",
+      "log_sha256": "971b7a14c14b103719b2511199bbb85a820b69d3fafe27ee9af43a76c9557edc"
     },
     {
       "label": "23-authoring-compile",
@@ -295,8 +295,8 @@
       "finished_utc": "2026-10-18T13:11:44.869189+00:00",
       "exit_code": 0,
       "record": "logs/27-product-lint.json",
-      "record_sha256": "601eb5081f2fef1a43c16115c9e0a537805438798b397ae0de420a239e37857b",
-      "log_sha256": "36674a8134f71b16ac01ed1f3ebc8e53bc08d8fedbebe2464a0f74fbcb99c1f2"
+      "record_sha256": "3e2498fe76d8e5119f7d3d458505856c3b608d856cb458de653b70ce3a4fb436",
+      "log_sha256": "971b7a14c14b103719b2511199bbb85a820b69d3fafe27ee9af43a76c9557edc"
     },
     {
       "label": "28-provider-compile",

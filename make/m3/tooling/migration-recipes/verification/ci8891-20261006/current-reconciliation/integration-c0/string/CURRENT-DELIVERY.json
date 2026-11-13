@@ -7,13 +7,13 @@
     "archiveIndex": {
       "bytes": 123241,
       "path": "bundle/BUNDLE.json",
-      "sha256": "a13fea2b9340daf792af3960b7d98666064f28525e146a480381cf46e1fa8956"
+      "sha256": "4f9672b4f1c1618020cfc954a1be5a8e39303e5c96cb296b06142e6ed212acbe"
     },
     "archiveOnlyProjectFiles": 0,
     "execution": {
       "bytes": 1797,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/root-execution-v1/RESULT.json",
-      "sha256": "5bb129c19cc5d4acb0b6426880e3118952e0daf7f057fff51081570eb89272db"
+      "sha256": "978b816401efd2a13a05a498cb100f945eef8e856b0485d1118d0924e4b5dcce"
     },
     "flatMirrorMavenReady": true,
     "flatProjectFiles": 20,
@@ -22,12 +22,12 @@
     "projectReady": {
       "bytes": 14331,
       "path": "PROJECT-READY.json",
-      "sha256": "4e99f141b6069e8bbdcac7ca4d746bbf07bc46e089d75e63aea17687ac15c1ff"
+      "sha256": "69eb39b6f9fef53f43b9a0155a671b0684378b821145fd0db578e316c12b86a8"
     },
     "readback": {
       "bytes": 384272,
       "path": "READBACK.json",
-      "sha256": "0478407e5a003ca49cf1734d9c1a302924a59d4925f59d140d947163a41e13b0"
+      "sha256": "047020517e034ec9509fa80646cef72b6e15a7bfd5798340e559d8c3d9482c52"
     },
     "selectedLogicalBodies": 810,
     "status": "PASS_SELECT_PACK_VERIFY_EXTRACT_FINISH"

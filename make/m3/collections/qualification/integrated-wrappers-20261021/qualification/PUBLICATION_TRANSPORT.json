@@ -13,7 +13,7 @@
     "branch_updated": false,
     "resolution_plan": "Publish record-boundary checksum-verified parts plus exact reconstruction; preserve immutable original bundle and implementation."
   },
-  "parts_manifest_sha256": "9a17facfe27ed3cc1a5a51253826693d41b8469e8367098ddf790da0d7818f08",
+  "parts_manifest_sha256": "b982386d2239d492f53aef26ce85da246cef5ade2d264f544edcf70621508803",
   "restore_adapter_sha256": "fc8509f1646a04ad3f8ee96f7eac103fb0ab741f83744075db7c4567f6154510",
   "parts": 5,
   "measurement_records": 786,

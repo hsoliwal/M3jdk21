@@ -365,9 +365,9 @@
     },
     {
       "path": "m3/core/test/SharedLexiconCatalogWarmLookupTest.java",
-      "gitBlob": "8c77241d3ae9fe3ceb2efb5b5d45b82728ce4ccf",
+      "gitBlob": "1d948279ace5042e3d5529ff10c328d9f0d41578",
       "bytes": 7963,
-      "sha256": "e8ddaae5a6cfbdc9117bc270fce308aee0512f10745d5fc10053b9842461baa9"
+      "sha256": "7e1669078e5b87832a0e79f4af4cf5fdeddd3d2236b82eae2d8f58dec7e6784c"
     },
     {
       "path": "m3/core/test/LexiconToolContractTest.java",

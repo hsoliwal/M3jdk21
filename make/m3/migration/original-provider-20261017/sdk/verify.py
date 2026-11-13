@@ -11,7 +11,7 @@ CRATE = "m3-original-mapping-provider-20261017"
 RESOURCE = "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/" + CRATE + "/"
 SUITE = "jdk.m3.rewrite.backport.M3OriginalCliProviderRecipeTest"
 BASELINE_MANIFEST = RESOURCE + "baseline-pre.tsv"
-BASELINE_MANIFEST_SHA = "e0ec50d7f1608180e1fe831d137e26d51e691606b85379a1a38c12d064c702f5"
+BASELINE_MANIFEST_SHA = "2137cd46e21b943e8b9b7ff439bbace154d3090aaaacf45095e5960d2a9e350b"
 BASELINE_FILES, BASELINE_BYTES = 55, 795620
 METHODS = ["allMutableStatesBothOrdersAndFixedPoint","exactRecipeResultsDeliveredToDeclaredOutput","everyUnknownTargetRefusesAfterItsPositiveBaseline","everyDuplicateTargetRefusesAfterItsPositiveBaseline","everyRequiredTargetMissingRefusesAfterItsPositiveBaseline","everyNonPlainTextTargetRefusesAfterItsPositiveBaseline","everyChangedAfterScanTargetRefusesAfterItsPositiveBaseline","sealedManifestPathSafetyAndConvergedIdentity","deliveryPrechecksForeignContentsAndAllSymlinkComponents","currentMappingReconciliationPreservesNewFieldsAndReviewedMigration","frozenPreBaselineRemainsIndependentOfInstalledPost"]
 def digest(data):
@@ -88,7 +88,7 @@ def validate_packet(pins, files):
     if sum(r["before"]=="ABSENT" for r in manifest)!=4 or sum(r["before"] not in ("ABSENT",r["after"]) for r in manifest)!=2:
         raise ValueError("expected four additions and two exact changes")
     workflow=next(row for row in manifest if row["path"]==".github/workflows/m3-original-mapping-provider-qualification.yml")
-    if workflow["before"]!="426f85c348a3bbff2ac767980e1cba3a205f624d3f2ca5b85cdcb52dc68b8751":
+    if workflow["before"]!="5ee05c9e96e7a478def715d80d96151efd57e1b908a9c8501073f0e217e082c4":
         raise ValueError("workflow must change from its exact qualified preimage")
     workflow_contexts(files[RESOURCE+workflow["resource"]])
     frozen_pre(files)

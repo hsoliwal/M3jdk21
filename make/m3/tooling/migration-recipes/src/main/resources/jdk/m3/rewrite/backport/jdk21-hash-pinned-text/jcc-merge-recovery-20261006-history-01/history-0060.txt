@@ -316,8 +316,8 @@
   "inputs": {
     "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/verification/inputs.json",
     "bytes": 95340,
-    "sha256": "adb5ad87c3799b50403352fa611d01a106e37e1eebade5e67f7964e2106d06d9",
-    "git_blob_sha1": "25d1f766fbaf636e6fd5bb97930002453615ca84",
+    "sha256": "2571ebe555606036f31a68cf7398676a88f18419f222685c5ffd52737583687e",
+    "git_blob_sha1": "eb95e12613ecd3d7dda1dcd1760d47493306408e",
     "mode": "0o644"
   },
   "all_fixed_inputs_unchanged": true,

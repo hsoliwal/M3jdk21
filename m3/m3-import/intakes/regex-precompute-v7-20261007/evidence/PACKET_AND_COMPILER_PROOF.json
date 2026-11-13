@@ -89,14 +89,14 @@
     },
     {
       "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\existing-intake\\m3\\docs\\synexia-intake-policy.tsv",
-      "expectedSha256": "519c6e3152fac4d5d06b77c859f8f5a6a6b7e54a1e3dbb5fdd999c4e100a69c7",
-      "actualSha256": "519c6e3152fac4d5d06b77c859f8f5a6a6b7e54a1e3dbb5fdd999c4e100a69c7",
+      "expectedSha256": "c2839240efa3e3bf921008b4e1994781db10dbb751f825f19269f8c0f71f4a99",
+      "actualSha256": "c2839240efa3e3bf921008b4e1994781db10dbb751f825f19269f8c0f71f4a99",
       "matched": true
     },
     {
       "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\existing-intake\\m3\\runtime-integration\\verify-synexia-intake.py",
-      "expectedSha256": "cdca97346f654d0cb4994822e50ab9d3b1585b9926bc73bf3c08f1cbbbfe0fbc",
-      "actualSha256": "cdca97346f654d0cb4994822e50ab9d3b1585b9926bc73bf3c08f1cbbbfe0fbc",
+      "expectedSha256": "a0957567ba7831d5ff1b657398d25e4670bc9e485583b1db0860848a97b48ce9",
+      "actualSha256": "a0957567ba7831d5ff1b657398d25e4670bc9e485583b1db0860848a97b48ce9",
       "matched": true
     },
     {

@@ -1071,7 +1071,7 @@
         {
           "executable": false,
           "file": "/workspace/scratch/13309be96b09/ast-work/rewrite-pack-sdk-proof/distribution/RUNTIME_INVENTORY.json",
-          "sha256": "a83c1fc2a0f846eba72033b430425ae760230682f76954cbfdfd74ccdebd4c0e",
+          "sha256": "21c10a35e8dcd12672975c24a2cc6d4799b1f5434e44e7a6b3b8b582aea2e9c1",
           "target": "lib/m3-tools/openrewrite/RUNTIME_INVENTORY.json"
         },
         {
@@ -2001,19 +2001,19 @@
         {
           "executable": false,
           "file": "/workspace/scratch/13309be96b09/ast-work/rewrite-pack-sdk-proof/distribution/provenance/source-proof-000.json",
-          "sha256": "baec7954a8144ab9d1361641c79ef4320f20d7323dfe23bb174302901e9d37f9",
+          "sha256": "924ff0f7ca06104960e300ee14dcc8d9f4a79d37ad8ac70186bbe5393e96cbe3",
           "target": "lib/m3-tools/openrewrite/provenance/source-proof-000.json"
         },
         {
           "executable": false,
           "file": "/workspace/scratch/13309be96b09/ast-work/rewrite-pack-sdk-proof/distribution/provenance/source-proof-001.json",
-          "sha256": "5a8448c60bd4cc390cc4f4cf6e1a1acd2a6d440d41f31a8cdff9d90e423f4a16",
+          "sha256": "4772baec5cb64c0e1332ecfa302abbf292eb5be618d30a27f80bec3c42f6e4f5",
           "target": "lib/m3-tools/openrewrite/provenance/source-proof-001.json"
         },
         {
           "executable": false,
           "file": "/workspace/scratch/13309be96b09/ast-work/rewrite-pack-sdk-proof/distribution/provenance/source-proof-002.tsv",
-          "sha256": "c39df2ca690e7c177059dec0f66b2fcf03804c90279cfd4dcdf211e952a9109e",
+          "sha256": "0bd07280104e68b9805eec605e0b797cf3a7aa12238cb7598f26faf1afed45b5",
           "target": "lib/m3-tools/openrewrite/provenance/source-proof-002.tsv"
         },
         {

@@ -64,11 +64,11 @@
       "evidence": {
         "SDK_INPUTS.tsv": {
           "path": "evidence/current-runtime-recovery-20261018/sdk-results/SDK_INPUTS.tsv",
-          "sha256": "58f138a2e50cbf4aac4a187e57932049420eed3b5c792533ed9b030160f6be4e"
+          "sha256": "3125f910e4c3d167c6c2ac22078ba602076f6d60c1c62c5e04c6063ae866139a"
         },
         "SDK_RESULTS.tsv": {
           "path": "evidence/current-runtime-recovery-20261018/sdk-results/SDK_RESULTS.tsv",
-          "sha256": "c0187b26f86d6eeace9bc4b4c0c0a221146312a17c1eb4aa135d627f83748671"
+          "sha256": "a09756c3e976f8d53517b04a5db5ddd198be9cd4f5b7eac7ed3633c5c966909c"
         },
         "SDK_TESTS.xml": {
           "path": "evidence/current-runtime-recovery-20261018/surefire/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml",
@@ -89,7 +89,7 @@
     },
     {
       "path": "authoring/current-runtime-recovery-20261018/build_recovery_inventory.py",
-      "sha256": "64e1f25800fe30c5b6afa80672cc85b6be01940bdf3eba29a0133f064df6e02e",
+      "sha256": "5b1213b81d9d4a63859440d46bd3ed7473cd007c992b0ffaf3774f75ee9eba98",
       "bytes": 11524,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/merged-recovery-20261018/authoring/build_recovery_inventory.py"
@@ -97,7 +97,7 @@
     },
     {
       "path": "authoring/current-runtime-recovery-20261018/prepare_merged_recovery.py",
-      "sha256": "5794805c641ef8163f95ac4cd1ebae7aa523d3dae7baf722b7db019b6f63d2dd",
+      "sha256": "58fc877a35fc0afa04449d2803e752916b5247561118f6bd53173823248db993",
       "bytes": 18245,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/merged-recovery-20261018/authoring/prepare_merged_recovery.py"
@@ -161,7 +161,7 @@
     },
     {
       "path": "datasets/m3jdk21-runtime-restore-07ba/MODES.tsv",
-      "sha256": "0ccd38339eaad4db6dae38ae82d6a5995038facceade4112c1001481d379f00e",
+      "sha256": "ba9aaf53c710628520b750e124dd31d4310a0b6ff8276ffee72c5f05922a8fbb",
       "bytes": 2027,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/MODES.tsv"
@@ -385,7 +385,7 @@
     },
     {
       "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0001-ALGORITHM_CATALOGUE.tsv.txt",
-      "sha256": "7cb1e78450bd0fd8369482bb64f83035a2485c7a167c0ad2eecef8c125b6f001",
+      "sha256": "150bf4e956fc260f239e2e0d6f5e89116e1e1bf2906eaf9435e7b6e216320527",
       "bytes": 5700,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0001-ALGORITHM_CATALOGUE.tsv.txt"
@@ -473,7 +473,7 @@
     },
     {
       "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0012-RECEIVING-MAP.json.txt",
-      "sha256": "4cff79c7cf4399e6ed9593d23e373ee9c1e791bf1432d12d684771a1c2d51d8a",
+      "sha256": "2c61549e548a667f886720218d22556399607c22b6dd6af4f59ade4caa6d9092",
       "bytes": 893,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0012-RECEIVING-MAP.json.txt"
@@ -481,7 +481,7 @@
     },
     {
       "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0013-CATALOGUE.tsv.txt",
-      "sha256": "3f88e143299a558a1a4f20c86d012b0823dc9f9ee4d519ce28cd16bc9cf35ff4",
+      "sha256": "822242c7a11a7e2dc0ec6bdde0cfa76d7e7784eeffe3722a1c34b32143251a58",
       "bytes": 5316,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0013-CATALOGUE.tsv.txt"
@@ -489,7 +489,7 @@
     },
     {
       "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0014-CURRENT_OWNERS.json.txt",
-      "sha256": "6c6e6dca85d5bf211ec04d8164d357918950348c4c3a9413be453c2bb11de364",
+      "sha256": "152e7a648d84eb3726375658a8178d1cea2f74e71fca1f62925502a1fcd1acfa",
       "bytes": 2042,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0014-CURRENT_OWNERS.json.txt"
@@ -497,7 +497,7 @@
     },
     {
       "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0015-FILE_REVIEW.tsv.txt",
-      "sha256": "1c5b958b528e94183f710dea0f4b7ce9319750407062ca51285bd66286b4d377",
+      "sha256": "de7730a773544c33f94c94b5906bd9fab927d522681cc3b382f631773de6ed52",
       "bytes": 7737,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0015-FILE_REVIEW.tsv.txt"
@@ -505,7 +505,7 @@
     },
     {
       "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0016-README.md.txt",
-      "sha256": "04e8ff5ea3b57b861ce4381c120e56584478c1f8004c2397829fb8c59e8dd49a",
+      "sha256": "cd4c4cda7c1711bccc24eb58b5f98ed21b1a3a1b01c980345508c5c71beca4d0",
       "bytes": 6157,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0016-README.md.txt"
@@ -529,7 +529,7 @@
     },
     {
       "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/manifest.tsv",
-      "sha256": "737770d882c11dc08bd83e50688909c062202f0ef92f337fd8ea3e844e62cd40",
+      "sha256": "0ff22b54ecd0a763971269160876e4daa833a6ca8614c220a3f9939e2146cfa1",
       "bytes": 3306,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/manifest.tsv"
@@ -545,7 +545,7 @@
     },
     {
       "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0002-check_object_adapter_progress_receiver_20261017.py.txt",
-      "sha256": "5e44ba190257db7d9715d80e7870d6a1b69f8c76cc3c285182193e80fc0da443",
+      "sha256": "33597bc4bc5cbf364f6f74886255151034e645c156b751ddeb1654c045114a8e",
       "bytes": 1304,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0002-check_object_adapter_progress_receiver_20261017.py.txt"
@@ -553,7 +553,7 @@
     },
     {
       "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0007-verify_m3_default_template_20261017.py.txt",
-      "sha256": "856910b716021260d387c0e3230c774223d7afc6ba62eab8e0c35668ffc8f2da",
+      "sha256": "0b6238aeadb710af6599a3688ebfc951729a8921ed67a476697b7edf57245f8a",
       "bytes": 1176,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0007-verify_m3_default_template_20261017.py.txt"
@@ -561,7 +561,7 @@
     },
     {
       "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0008-name-mapping.json.txt",
-      "sha256": "a28f218198b30d1292d51836c8912d1f69229ef9bef40a4726a2808bcdcb4d46",
+      "sha256": "fe21e482d061a08a149c0362c6043a66a2fcd6a91bf253c70eb49728f2ce45e3",
       "bytes": 404076,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0008-name-mapping.json.txt"
@@ -593,7 +593,7 @@
     },
     {
       "path": "evidence/current-runtime-recovery-20261018/PREPARATION.json",
-      "sha256": "be7504a42c3ecbe80f3250a9b43e6bf83b4bfa28660e90a9709422a2d34210ac",
+      "sha256": "af419f059c5b54e948f900805f9518a021e97e2ca4a41a5af07065ccda8429fa",
       "bytes": 963,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/merged-recovery-20261018/preparation-v1/PREPARATION.json"
@@ -609,7 +609,7 @@
     },
     {
       "path": "evidence/current-runtime-recovery-20261018/receiver-contract/RECEIVER_RECEIPT.json",
-      "sha256": "f2abc5b79c88102c86567297b294fa99f6212c5da4f7d68654b27318ddab05c6",
+      "sha256": "d5ce48cfa76fe63e8dc312db8d1e57365e6e723700f1c1f19d90d78c55be3bfe",
       "bytes": 1631,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/merged-recovery-20261018/proof/receiving-v2/original-contract-proof/evidence/RECEIVER_RECEIPT.json"
@@ -769,7 +769,7 @@
     },
     {
       "path": "evidence/current-runtime-recovery-20261018/receiving/RECEIPT.json",
-      "sha256": "75f9a94f3636a4bf0841532cf93197869fe013be285ed8d8e3efd46a024e64ed",
+      "sha256": "175fb4e49474182e39eaebb7dea0dca7b648babb89f389557cc3f9e4d4a28d41",
       "bytes": 13329,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/merged-recovery-20261018/proof/receiving-v2/RECEIPT.json"
@@ -849,7 +849,7 @@
     },
     {
       "path": "evidence/current-runtime-recovery-20261018/sdk-results/SDK_INPUTS.tsv",
-      "sha256": "58f138a2e50cbf4aac4a187e57932049420eed3b5c792533ed9b030160f6be4e",
+      "sha256": "3125f910e4c3d167c6c2ac22078ba602076f6d60c1c62c5e04c6063ae866139a",
       "bytes": 15102,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/SDK_INPUTS.tsv"
@@ -857,7 +857,7 @@
     },
     {
       "path": "evidence/current-runtime-recovery-20261018/sdk-results/SDK_RESULTS.tsv",
-      "sha256": "c0187b26f86d6eeace9bc4b4c0c0a221146312a17c1eb4aa135d627f83748671",
+      "sha256": "a09756c3e976f8d53517b04a5db5ddd198be9cd4f5b7eac7ed3633c5c966909c",
       "bytes": 5208,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/SDK_RESULTS.tsv"
@@ -873,7 +873,7 @@
     },
     {
       "path": "evidence/current-runtime-recovery-20261018/sdk-results/m3/backports/ALGORITHM_CATALOGUE.tsv",
-      "sha256": "7cb1e78450bd0fd8369482bb64f83035a2485c7a167c0ad2eecef8c125b6f001",
+      "sha256": "150bf4e956fc260f239e2e0d6f5e89116e1e1bf2906eaf9435e7b6e216320527",
       "bytes": 5700,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/backports/ALGORITHM_CATALOGUE.tsv"
@@ -961,7 +961,7 @@
     },
     {
       "path": "evidence/current-runtime-recovery-20261018/sdk-results/m3/runtime-integration/merged-repair-recovery-20261018/RECEIVING-MAP.json",
-      "sha256": "4cff79c7cf4399e6ed9593d23e373ee9c1e791bf1432d12d684771a1c2d51d8a",
+      "sha256": "2c61549e548a667f886720218d22556399607c22b6dd6af4f59ade4caa6d9092",
       "bytes": 893,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/runtime-integration/merged-repair-recovery-20261018/RECEIVING-MAP.json"
@@ -969,7 +969,7 @@
     },
     {
       "path": "evidence/current-runtime-recovery-20261018/sdk-results/m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv",
-      "sha256": "3f88e143299a558a1a4f20c86d012b0823dc9f9ee4d519ce28cd16bc9cf35ff4",
+      "sha256": "822242c7a11a7e2dc0ec6bdde0cfa76d7e7784eeffe3722a1c34b32143251a58",
       "bytes": 5316,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv"
@@ -977,7 +977,7 @@
     },
     {
       "path": "evidence/current-runtime-recovery-20261018/sdk-results/m3/runtime-integration/runtime-repair-20261018/CURRENT_OWNERS.json",
-      "sha256": "6c6e6dca85d5bf211ec04d8164d357918950348c4c3a9413be453c2bb11de364",
+      "sha256": "152e7a648d84eb3726375658a8178d1cea2f74e71fca1f62925502a1fcd1acfa",
       "bytes": 2042,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/runtime-integration/runtime-repair-20261018/CURRENT_OWNERS.json"
@@ -985,7 +985,7 @@
     },
     {
       "path": "evidence/current-runtime-recovery-20261018/sdk-results/m3/runtime-integration/runtime-repair-20261018/FILE_REVIEW.tsv",
-      "sha256": "1c5b958b528e94183f710dea0f4b7ce9319750407062ca51285bd66286b4d377",
+      "sha256": "de7730a773544c33f94c94b5906bd9fab927d522681cc3b382f631773de6ed52",
       "bytes": 7737,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/runtime-integration/runtime-repair-20261018/FILE_REVIEW.tsv"
@@ -993,7 +993,7 @@
     },
     {
       "path": "evidence/current-runtime-recovery-20261018/sdk-results/m3/runtime-integration/runtime-repair-20261018/README.md",
-      "sha256": "04e8ff5ea3b57b861ce4381c120e56584478c1f8004c2397829fb8c59e8dd49a",
+      "sha256": "cd4c4cda7c1711bccc24eb58b5f98ed21b1a3a1b01c980345508c5c71beca4d0",
       "bytes": 6157,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/runtime-integration/runtime-repair-20261018/README.md"
@@ -1121,7 +1121,7 @@
     },
     {
       "path": "evidence/current-runtime-recovery-20261018/sdk-results/text.patch.txt",
-      "sha256": "58f18b884c355cc71d7f72f5548d072a4ce23692db3b5d81268d142eb6ac34a3",
+      "sha256": "2b542cf758a42ff1856860c86d3f0a91fe1ccd8c57e9fe60c6466bcf9ff4fb79",
       "bytes": 118295,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/text.patch"

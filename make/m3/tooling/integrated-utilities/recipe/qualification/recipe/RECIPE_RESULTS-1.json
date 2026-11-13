@@ -3,7 +3,7 @@
   "second_sdk_run_changes": 0,
   "runtime_contracts": "NOT_RUN_BY_RECIPE_ENGINE",
   "outputs": [
-    {"path": "make/m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv", "sha256": "5bf447216af55a51b73c275182af891c1ded5c2b427fa6856139731078d2ef8c"},
+    {"path": "make/m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv", "sha256": "8fb0beb19ca5b45ce08f836cef64a243695a3920f19d6099e93a27c674f24f23"},
     {"path": "make/m3/compatibility/check_integrated_utility_coverage.py", "sha256": "75a089b2ef4bce9beb75f88869c4f613c530df528c872af33df9e8440914d9c1"},
     {"path": "make/m3/compatibility/test_integrated_utility_coverage.py", "sha256": "e783a54fcd7430755874e55dd2af19530d217084a76d61d845ab14f3c1069f5f"},
     {"path": "doc/m3/INTEGRATED_UTILITY_COVERAGE_20261018.md", "sha256": "301320272695a993769df1164709d2c5fbe469e45543139ecbbece8bf824fbf2"},

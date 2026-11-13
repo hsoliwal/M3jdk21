@@ -53,7 +53,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/string-escape-c0-authoring-v2/before/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv",
-      "sha256": "d67ddc1cc759f042871c680d9510b929da4fd6b0523b43e966139cbe8ddace3b",
+      "sha256": "b055ce8829908257c61ddc71c127c28620657f2bd3cbe71fb6755404c5f4480c",
       "bytes": 3300
     },
     {
@@ -78,12 +78,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/string-escape-c0-authoring-v2/protected/m3/runtime-integration/fix-root-ascii-case/Fix.py",
-      "sha256": "ac3d829f7aed357e3d5cc01bb2027ac3447c5962851441c11d8dd762f91df02f",
+      "sha256": "d1d921c321c31fe81f76b1f8d57a752495a84a0e6f0ada4162db6c548c3344ee",
       "bytes": 1819
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/string-escape-c0-authoring-v2/protected/m3/runtime-integration/fix-root-ascii-case/README.md",
-      "sha256": "6256ac865fffedb7a8a5c2656afd5d23e893b40f737ea8f0f4afc53689fbe296",
+      "sha256": "0a2c2e248dd7d0184b82914b583fadbf6ee41a9e75499ce83bb581105aa6f5a2",
       "bytes": 1120
     },
     {
@@ -108,12 +108,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/string-escape-c0-authoring-v2/protected/m3/tooling/image-gates/src/test/python/test_current_context.py",
-      "sha256": "6bf08c29ff6c5a4345159051de4b7144e922f61763c865bf2305a55799c03886",
+      "sha256": "1ccfe13c1f35f7e4307c8d5671396a6cb8f624cd4e1b71b7b8186c89c5f3bc6a",
       "bytes": 8723
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/string-escape-c0-authoring-v2/protected/m3/tooling/image-gates/verify-current.py",
-      "sha256": "66040e38b9929442673dcead210a51b997865de25cb106048f7c51cb365fae23",
+      "sha256": "c6e9e53dcf7ce65799e366cd58e711b9a1d77333beaafa7812fcb4eb3b9e2cad",
       "bytes": 16970
     },
     {
@@ -163,7 +163,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/string-escape-c0-authoring-v2/protected/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/08-M3TQ.java.txt",
-      "sha256": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155",
+      "sha256": "225e847c5fb9f0195b37b14810d405dc6cb8ff83156e667dc127d36489cbf7aa",
       "bytes": 16998
     },
     {

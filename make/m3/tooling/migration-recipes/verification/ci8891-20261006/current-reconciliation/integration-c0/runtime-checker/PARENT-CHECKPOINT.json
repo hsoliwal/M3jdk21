@@ -3,7 +3,7 @@
   "historicalAvailability": {
     "bytes": 119267,
     "path": "../HISTORY-AVAILABILITY.json",
-    "sha256": "5447a51edf6ac97b03e9fd8b6f5c42b783a1ef3e9aeac2a15a0ed2b559e40bd2"
+    "sha256": "9563891da8c6be93938c65f8f493372e74cad2a03ed49cacc10affba6b4e1292"
   },
   "historyMeaning": "The original workspace census remains literal history; absent historical executions are not recreated. Original published 338, 97 and 72 cohorts remain byte-for-byte unchanged.",
   "latestHeadIntegrationClaimed": false,
@@ -45,7 +45,7 @@
       "input": {
         "bytes": 30821,
         "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/m3-check-v2/RESULT.json",
-        "sha256": "521714b3e615dd79bb50075122887b944f3f39e9130efe5491fb7e582869ec71"
+        "sha256": "c87f5308771e7e604c3ef79448bff89def916a86b8a0105c9c90e9f546f561aa"
       },
       "path": "make/m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/runtime-checker/publication-parent/string-c0/m3-check-v2/RESULT.json"
     },

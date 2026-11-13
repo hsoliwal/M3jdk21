@@ -27,7 +27,7 @@ def main():
     spec.loader.exec_module(verifier)
     prior_root = AUDIT / "candidate/mapping-v02/input-epoch"
     prior_file = prior_root / "INPUT_EPOCH.json"
-    assert sha(prior_file) == "2ea3ffe30ac6824bcc6d708c431b848a4c7997bdb4cdeaaddea1a62640734718"
+    assert sha(prior_file) == "12432df37e8bb0c890ab63ae009c576720c40bcda0b927dc53b70fbbd612f84a"
     prior = json.loads(prior_file.read_bytes())
     capture_names = ["COMMIT", "ROOT", "M3", "GITHUB"]
     captures = [ROOT / ("publication/M3_FINAL_CURRENT_" + name + ".json") for name in capture_names]

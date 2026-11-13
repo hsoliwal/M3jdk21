@@ -70,8 +70,8 @@
     },
     {
       "path": "make/m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/manifest.tsv",
-      "before_sha256": "b40e5e2fd6cbf8ad487f10ecd60bfdb9f893da88578194a1d8ad1221d7815740",
-      "proposed_sha256": "5b4e8a514d7c44dd46447e76fde8bbf9a8cec9f2a1dacdc9e2a9d3bfe814d525",
+      "before_sha256": "aa950566ac0a1945a6ac09b86a866563751814f8b6331835f3a6fa153693c62e",
+      "proposed_sha256": "1ed41b89ef8733aa2e1b4425bbab51118ab49814dbfc32e9a1ab67a930470507",
       "mode": "0644",
       "license": "Apache-2.0"
     },
@@ -108,8 +108,8 @@
   ],
   "known_refusal": {
     "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
-    "guard_sha256": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155",
-    "current_sha256": "78aa154b8aa25134edd9a16c746e4fdc7bcd3984b8f76cc96ef81437247e08d4",
+    "guard_sha256": "225e847c5fb9f0195b37b14810d405dc6cb8ff83156e667dc127d36489cbf7aa",
+    "current_sha256": "569375ab9eadf62ad500f2f1cb8f5c347d20eca218840b47df726cea0f5e0b90",
     "guard_changed": false,
     "required_action": "Reconcile the recorded sparse-lookup successor with actual-source proofs; preserve the refusal until qualified."
   }

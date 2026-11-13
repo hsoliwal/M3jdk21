@@ -179,7 +179,7 @@
       "path": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/SOURCE_PINS.tsv",
       "entries": 15,
       "bytes": 3414,
-      "sha256": "1bba18f467ed62c73793d8d4dfacd186eb38589cffd3b655163cd98a32ad27d4"
+      "sha256": "3f4b57b4b83ad9bdc164391451a454148a0c2d1f3947b777005af3da13ce5234"
     },
     {
       "path": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/FINAL_SOURCE_SHA256.tsv",
@@ -225,7 +225,7 @@
     {
       "path": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/SOURCE_PINS.tsv",
       "bytes": 3414,
-      "sha256": "1bba18f467ed62c73793d8d4dfacd186eb38589cffd3b655163cd98a32ad27d4"
+      "sha256": "3f4b57b4b83ad9bdc164391451a454148a0c2d1f3947b777005af3da13ce5234"
     }
   ],
   "maven_selection": {

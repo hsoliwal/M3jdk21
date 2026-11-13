@@ -24,7 +24,7 @@
     ".github/workflows/m3-sparse-viewport-geometry.yml": "bc5a1a4e0e2d3ec2049caf2cf360c0a64c1ec30c",
     "make/m3/collections/viewport-proof/fixtures/M3FenwickInverseTest.txt": "9cd8ffcd6967091ea4382e532d67454971c5804f",
     "make/m3/collections/qualification/viewport-fenwick/DOCUMENTATION.json": "75f175cf3b104d7e870dd464726ad8484dafe39f",
-    "make/m3/collections/qualification/viewport-fenwick/GEOMETRY_CI.json": "11d86595f9b63fc38e51342ddfbf0e3ffd731f5e",
+    "make/m3/collections/qualification/viewport-fenwick/GEOMETRY_CI.json": "010f659dbd99b26c75877ac9d8b4a6d5f4377cb0",
     "make/m3/collections/qualification/viewport-fenwick/RECEIVING.json": "3a4d655b23e6c360c6b5920f7ef9ea9052657646"
   },
   "combined_workflow": {

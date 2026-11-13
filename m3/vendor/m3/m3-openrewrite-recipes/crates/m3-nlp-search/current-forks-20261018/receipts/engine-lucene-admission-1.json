@@ -11,6 +11,6 @@
   "duplicate_refusals" : 1,
   "missing_refusals" : 1,
   "source_sha256" : {
-    "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java" : "be18fe17ff596a273e435e55e9775cbe2c00338118d06fe9ad4e54ea40052325"
+    "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java" : "ed10443cce131d1606bbd6de48582b4c4078e7543176d4ce07a7a38c9bc18bde"
   }
 }

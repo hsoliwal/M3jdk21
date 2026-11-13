@@ -97,9 +97,9 @@
       "authoritative_existing_spec": "doc/m3/mop-recipe-improvement-memory.md; M3-MOP-RECIPE-MEMORY-1; MOP-RCM/1.0; linked from unchanged AGENTS.md",
       "canonical_memory_paths": [
         "m3-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/memory/LESSONS.md",
-        "m3-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/memory/events/07aa0aa54d63800c7cb988f214a150d7e428adb5dc1e61bc8ab10f04e8896bfd.json",
+        "m3-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/memory/events/27d02c7bac22967bedd3857302e4d21ee9c66b34436d1af685be2a740da84a4a.json",
         "m3-openrewrite-recipes/recipe-crates/m3fs-vfs-20261020/memory/LESSONS.md",
-        "m3-openrewrite-recipes/recipe-crates/m3fs-vfs-20261020/memory/events/aee05291b68de9a3dffa89987266e62bdc6f8330c86b726ffa8bd026a24b9361.json"
+        "m3-openrewrite-recipes/recipe-crates/m3fs-vfs-20261020/memory/events/0bc5b7db3fec9731fa0571ddbfd83567385e35adf5e5e3029c97965a6ddd5a1e.json"
       ],
       "exact_head_policy_files": {
         "AGENTS.md": {

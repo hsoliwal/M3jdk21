@@ -6,13 +6,13 @@
   "receiverOriginalAuditBase": "d47a4b4fdb8e3794ec56768b06aa9e23730c6b8e",
   "receiverBaseEquivalence": "Original55-input4e29/d47 equivalence is historical. Fresh4598 audit: all54KEEP exact; workflow alreadyAFTER,4ADD absent; currentA56 migration raw equals oldA while59top mappings/optional fields are preserved by reviewed value-only successor.",
   "originalCliGitBlob": "d976f4a5d7f8983ade85d5d2cf608e3f6b2885d7",
-  "canonicalBeforeGitBlob": "986147e2df24ef25076d451c49782d8e7e354a11",
-  "canonicalAfterGitBlob": "1a441d86ddd17b0d51ba32b9cbf82a2b421a623c",
+  "canonicalBeforeGitBlob": "343f101c9e7925c17d9949a6328b9744cc351548",
+  "canonicalAfterGitBlob": "b7b1d0a3bda64884c5c2703594a04c3544152af7",
   "targets": [
     {
       "path": ".github/workflows/m3-original-mapping-provider-qualification.yml",
-      "before": "426f85c348a3bbff2ac767980e1cba3a205f624d3f2ca5b85cdcb52dc68b8751",
-      "after": "6f6b465d4b020229c24eed25fe718b0c8768089d1a6b9c85d65de807afba2bbf",
+      "before": "5ee05c9e96e7a478def715d80d96151efd57e1b908a9c8501073f0e217e082c4",
+      "after": "3f345b3e6d99c388909882e90179f2188d7337ced8b71add810677e24fc999e1",
       "resource": "after-000.txt"
     },
     {
@@ -65,8 +65,8 @@
     },
     {
       "path": "doc/m3/name-mapping.json",
-      "before": "a28f218198b30d1292d51836c8912d1f69229ef9bef40a4726a2808bcdcb4d46",
-      "after": "1c396776ac7313695609384b5ad3abc98f15f4bde48af3bb26915f933d098663",
+      "before": "fe21e482d061a08a149c0362c6043a66a2fcd6a91bf253c70eb49728f2ce45e3",
+      "after": "3523a925aa39bce18bb9bc4d06ac6cfd5ba836ef557867d5c69760d08d7acadd",
       "resource": "after-009.txt"
     },
     {
@@ -108,13 +108,13 @@
     {
       "path": "make/m3/migration/provider/python312-linux-x86_64/bootstrap.py",
       "before": "ABSENT",
-      "after": "3875e91c82afd6712a3cc50f76cd7f317721839f69870c4c7dce0cfe8f455a34",
+      "after": "8bf96849c73a8cb4865949a1422403872d9e0bcdfcc907f2d81964dc6c5b5c35",
       "resource": "after-016.txt"
     },
     {
       "path": "make/m3/migration/provider/python312-linux-x86_64/previous-name-mapping.json",
       "before": "ABSENT",
-      "after": "15629167d5f6d5f6999225a4ebd9b16b56943477c27701259048ac670d232fc4",
+      "after": "99f18a65a6fa4d8c01b423b78f742100db48435708a504951e15e3a668b339b7",
       "resource": "after-017.txt"
     },
     {
@@ -126,7 +126,7 @@
     {
       "path": "make/m3/migration/provider/python312-linux-x86_64/wheels.lock.json",
       "before": "ABSENT",
-      "after": "808e9471ebab14659401fd592538df7b0096c166c3410014e43d21747918af50",
+      "after": "1dd5cb6888d3ab5ecb2aa42bdebedaf64562a0ee2921522b04340fde1f34db74",
       "resource": "after-019.txt"
     },
     {
@@ -191,8 +191,8 @@
     },
     {
       "path": "make/m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
-      "before": "3b195d75e2fdc32ac31b665c5541bd07d3ffdb11698c499bccfd7bc4c1b4e338",
-      "after": "3b195d75e2fdc32ac31b665c5541bd07d3ffdb11698c499bccfd7bc4c1b4e338",
+      "before": "86e090b9f8cbd9424b67505be1131b176d35b28984556e7bdd0d64fee70dd387",
+      "after": "86e090b9f8cbd9424b67505be1131b176d35b28984556e7bdd0d64fee70dd387",
       "resource": "after-030.txt"
     },
     {
@@ -329,8 +329,8 @@
     },
     {
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3Release.java",
-      "before": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb",
-      "after": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb",
+      "before": "dc2a020aa8f6da324ace8a19f68c90b65021b9ad732932ebabbf545468abc34a",
+      "after": "dc2a020aa8f6da324ace8a19f68c90b65021b9ad732932ebabbf545468abc34a",
       "resource": "after-053.txt"
     },
     {
@@ -341,14 +341,14 @@
     },
     {
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
-      "before": "78aa154b8aa25134edd9a16c746e4fdc7bcd3984b8f76cc96ef81437247e08d4",
-      "after": "78aa154b8aa25134edd9a16c746e4fdc7bcd3984b8f76cc96ef81437247e08d4",
+      "before": "569375ab9eadf62ad500f2f1cb8f5c347d20eca218840b47df726cea0f5e0b90",
+      "after": "569375ab9eadf62ad500f2f1cb8f5c347d20eca218840b47df726cea0f5e0b90",
       "resource": "after-055.txt"
     },
     {
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3VI.java",
-      "before": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a",
-      "after": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a",
+      "before": "d4d57e6b892342716ef9a52007082ce7c53959cba81a5ad0f2a0cf8d275c3c01",
+      "after": "d4d57e6b892342716ef9a52007082ce7c53959cba81a5ad0f2a0cf8d275c3c01",
       "resource": "after-056.txt"
     },
     {
@@ -418,8 +418,8 @@
     },
     {
       "path": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/after-000.txt",
-      "gitBlob": "2f764d5dbe04dd44430d6e49bd2dc123bfd90153",
-      "sha256": "6f6b465d4b020229c24eed25fe718b0c8768089d1a6b9c85d65de807afba2bbf",
+      "gitBlob": "84b88a6b18cfefc10c1ebe2ba59e372586cdb100",
+      "sha256": "3f345b3e6d99c388909882e90179f2188d7337ced8b71add810677e24fc999e1",
       "bytes": 35958
     },
     {
@@ -472,8 +472,8 @@
     },
     {
       "path": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/after-009.txt",
-      "gitBlob": "1a441d86ddd17b0d51ba32b9cbf82a2b421a623c",
-      "sha256": "1c396776ac7313695609384b5ad3abc98f15f4bde48af3bb26915f933d098663",
+      "gitBlob": "b7b1d0a3bda64884c5c2703594a04c3544152af7",
+      "sha256": "3523a925aa39bce18bb9bc4d06ac6cfd5ba836ef557867d5c69760d08d7acadd",
       "bytes": 441047
     },
     {
@@ -514,14 +514,14 @@
     },
     {
       "path": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/after-016.txt",
-      "gitBlob": "ae3b685d8f3731ad38ba59135a9c399c0a416d20",
-      "sha256": "3875e91c82afd6712a3cc50f76cd7f317721839f69870c4c7dce0cfe8f455a34",
+      "gitBlob": "09a93671ff9628638613e3af38b2d656ecbea793",
+      "sha256": "8bf96849c73a8cb4865949a1422403872d9e0bcdfcc907f2d81964dc6c5b5c35",
       "bytes": 42501
     },
     {
       "path": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/after-017.txt",
-      "gitBlob": "d3d454d9a7891585d665f58b404989820ea751a4",
-      "sha256": "15629167d5f6d5f6999225a4ebd9b16b56943477c27701259048ac670d232fc4",
+      "gitBlob": "5b26028a27115cd57b39a860106e1ddd96dc4f2b",
+      "sha256": "99f18a65a6fa4d8c01b423b78f742100db48435708a504951e15e3a668b339b7",
       "bytes": 399438
     },
     {
@@ -532,8 +532,8 @@
     },
     {
       "path": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/after-019.txt",
-      "gitBlob": "4a14a37652fc32b5251c9e99387e737b21852ebd",
-      "sha256": "808e9471ebab14659401fd592538df7b0096c166c3410014e43d21747918af50",
+      "gitBlob": "a362656296da9628463b3931a3e10c4c8ab1b724",
+      "sha256": "1dd5cb6888d3ab5ecb2aa42bdebedaf64562a0ee2921522b04340fde1f34db74",
       "bytes": 10099
     },
     {
@@ -598,8 +598,8 @@
     },
     {
       "path": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/after-030.txt",
-      "gitBlob": "777c79742b81d3fce8ad1f40e7a52e7d09474fde",
-      "sha256": "3b195d75e2fdc32ac31b665c5541bd07d3ffdb11698c499bccfd7bc4c1b4e338",
+      "gitBlob": "5691fafb3a44354f12164cd7a1c5a1db9645c4cc",
+      "sha256": "86e090b9f8cbd9424b67505be1131b176d35b28984556e7bdd0d64fee70dd387",
       "bytes": 303
     },
     {
@@ -736,8 +736,8 @@
     },
     {
       "path": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/after-053.txt",
-      "gitBlob": "1116f4cb0ffd361e764688640adb53af8cabe86d",
-      "sha256": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb",
+      "gitBlob": "408089ce5d78aec1bcb8cd97768e02f15f48e004",
+      "sha256": "dc2a020aa8f6da324ace8a19f68c90b65021b9ad732932ebabbf545468abc34a",
       "bytes": 1593
     },
     {
@@ -748,14 +748,14 @@
     },
     {
       "path": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/after-055.txt",
-      "gitBlob": "533a07b77061e757d476627557413f6df1067d34",
-      "sha256": "78aa154b8aa25134edd9a16c746e4fdc7bcd3984b8f76cc96ef81437247e08d4",
+      "gitBlob": "639acd53a32d0c7de879678d18de58423937c0fb",
+      "sha256": "569375ab9eadf62ad500f2f1cb8f5c347d20eca218840b47df726cea0f5e0b90",
       "bytes": 17919
     },
     {
       "path": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/after-056.txt",
-      "gitBlob": "087aa55bef9b57189d03f3388fb2e1f360320b02",
-      "sha256": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a",
+      "gitBlob": "eda4db3979a6aeed341d0190be974fe88059f3db",
+      "sha256": "d4d57e6b892342716ef9a52007082ce7c53959cba81a5ad0f2a0cf8d275c3c01",
       "bytes": 6165
     },
     {
@@ -778,26 +778,26 @@
     },
     {
       "path": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/baseline-pre.tsv",
-      "gitBlob": "7f338eebed9fb2886847a7f95280f31e33977c87",
-      "sha256": "e0ec50d7f1608180e1fe831d137e26d51e691606b85379a1a38c12d064c702f5",
+      "gitBlob": "d576736e273a7a834fc98a7f4cb86d297242dd1e",
+      "sha256": "2137cd46e21b943e8b9b7ff439bbace154d3090aaaacf45095e5960d2a9e350b",
       "bytes": 7605
     },
     {
       "path": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/before-after-000.txt",
-      "gitBlob": "edad663b2e4a51e22a5e25954df237192e5b8d08",
-      "sha256": "426f85c348a3bbff2ac767980e1cba3a205f624d3f2ca5b85cdcb52dc68b8751",
+      "gitBlob": "9e0af8b3ea3fbd687327a5f7e2aa6383d1336129",
+      "sha256": "5ee05c9e96e7a478def715d80d96151efd57e1b908a9c8501073f0e217e082c4",
       "bytes": 34558
     },
     {
       "path": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/before-after-009.txt",
-      "gitBlob": "986147e2df24ef25076d451c49782d8e7e354a11",
-      "sha256": "a28f218198b30d1292d51836c8912d1f69229ef9bef40a4726a2808bcdcb4d46",
+      "gitBlob": "343f101c9e7925c17d9949a6328b9744cc351548",
+      "sha256": "fe21e482d061a08a149c0362c6043a66a2fcd6a91bf253c70eb49728f2ce45e3",
       "bytes": 404076
     },
     {
       "path": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/manifest.tsv",
-      "gitBlob": "fa7293a036b60c956b6e72000a1e04c71d7be4a1",
-      "sha256": "356e2cfd3f5f320a77b0465bef58ec1b05f7a628a8f448f2dfe76828553ac42f",
+      "gitBlob": "761d67be86e22e730ab4c7f42c0290516da0b3a1",
+      "sha256": "799063ea3c2443d88218f5e27745c1bc6f344d36574413ae8f27ef24486d9de9",
       "bytes": 11981
     },
     {
@@ -808,8 +808,8 @@
     },
     {
       "path": "src/test/java/jdk/m3/rewrite/backport/M3OriginalCliProviderRecipeTest.java",
-      "gitBlob": "7d91ee284ba78dc6ae182f41ed879002f1b5e444",
-      "sha256": "ebb9f30f6ffb41752cb3babd06d350c9c248c1a0b5594b06a90b7828e3b5a9b3",
+      "gitBlob": "7e9b7409d641346469cd0b3bc9931cfaf83a8ba7",
+      "sha256": "929383d367c4215bc015d1e4d9d430dc984e9bd7bbb07ad0f99cd5530cd1770d",
       "bytes": 44081
     },
     {
@@ -820,8 +820,8 @@
     },
     {
       "path": "verify.py",
-      "gitBlob": "c255498f0677d8edae8e64afe40f155f22064835",
-      "sha256": "6f93bb6f759d5138e2a97cdaba419c06144c8221d220ed84129490dbdf59e338",
+      "gitBlob": "e808ea88d8dfd91250e46f6bf37b5f30058c12e0",
+      "sha256": "4c1274357b8d218815c9f175b58530271614221c107f2a89a385c4ef61696f72",
       "bytes": 21133
     }
   ],
@@ -830,8 +830,8 @@
     "borrowFirstFoundation": "3f3508d22b5d3ad37aa2f5a45a1e469e904a80da",
     "previousQualifiedReceiver": "924b88d8979ac5f904c88e7c33d7cec2e2917e3e",
     "previousQualifiedSdkTree": "638520715ffb00255639cb1e6667494bab729b53",
-    "frozenPreManifestSha256": "e0ec50d7f1608180e1fe831d137e26d51e691606b85379a1a38c12d064c702f5",
-    "frozenPreMapGitBlob": "986147e2df24ef25076d451c49782d8e7e354a11",
+    "frozenPreManifestSha256": "2137cd46e21b943e8b9b7ff439bbace154d3090aaaacf45095e5960d2a9e350b",
+    "frozenPreMapGitBlob": "343f101c9e7925c17d9949a6328b9744cc351548",
     "ownership": "Independent owned root, outside SDK/checkout/POST. Full55file inventory before/after unchanged provider.",
     "successorRecipePre": "56files including existing workflow; distinct from sealed old55PRE",
     "mutableTargets": {

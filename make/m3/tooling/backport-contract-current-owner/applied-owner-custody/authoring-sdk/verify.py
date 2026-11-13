@@ -27,7 +27,7 @@ OWNER_BEFORE_GIT = {
     "make/m3/tooling/backport-contract-current-owner/runtime/qualify.py": "4c64fbf724649bd9527e95b6456bcda842ec8086",
     "make/m3/tooling/backport-contract-current-owner/runtime/README.md": "0dfce38a83bfcc3abee720bf38d07e79d056abfb",
     ".github/workflows/m3-backport-contract-current-owner.yml": "5ab3cba8a55c95095e3db09b8c959938aeab91e1",
-    "make/m3/tooling/backport-contract-current-owner/sdk/pins.json": "f205864458b8dfa91445a26643bec1ab7b2e1859",
+    "make/m3/tooling/backport-contract-current-owner/sdk/pins.json": "fb98cc20f65f4722292fe8a953075fa991deacdd",
     "make/m3/tooling/backport-contract-current-owner/sdk/verify.py": "8ad669b3954a0958820f6962de2e55f6b1988bc2"
 }
 OWNER_AFTER_GIT = {
@@ -37,7 +37,7 @@ OWNER_AFTER_GIT = {
     "make/m3/tooling/backport-contract-current-owner/runtime/qualify.py": "a3f8492416876547eefed9c5a2d8bc5583ddd8ec",
     "make/m3/tooling/backport-contract-current-owner/runtime/README.md": "67d987cbad0af4aa3de0ed17a56dc69b2a1afc7b",
     ".github/workflows/m3-backport-contract-current-owner.yml": "b992bdbfb5187f868fbf3388d01edb7d9e9d905c",
-    "make/m3/tooling/backport-contract-current-owner/sdk/pins.json": "f205864458b8dfa91445a26643bec1ab7b2e1859",
+    "make/m3/tooling/backport-contract-current-owner/sdk/pins.json": "fb98cc20f65f4722292fe8a953075fa991deacdd",
     "make/m3/tooling/backport-contract-current-owner/sdk/verify.py": "8ad669b3954a0958820f6962de2e55f6b1988bc2"
 }
 DIRECTIONS = ("forward", "inverse")

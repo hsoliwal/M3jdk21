@@ -7206,9 +7206,9 @@
           "path": "PUBLIC_TARGET_APACHE_REUSE.md",
           "mode": "100644",
           "type": "blob",
-          "sha": "b574940c818c605cb5c8e2d035211b557db31706",
+          "sha": "7d5a73a1ec7a235c25f7bc3dd0ac82fe0ead06fd",
           "size": 4750,
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/b574940c818c605cb5c8e2d035211b557db31706"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/7d5a73a1ec7a235c25f7bc3dd0ac82fe0ead06fd"
         },
         {
           "path": "PYTHON-JAVA-PORTS.tsv",
@@ -60813,9 +60813,9 @@
           "path": "PUBLIC_TARGET_APACHE_REUSE.md",
           "mode": "100644",
           "type": "blob",
-          "sha": "b574940c818c605cb5c8e2d035211b557db31706",
+          "sha": "7d5a73a1ec7a235c25f7bc3dd0ac82fe0ead06fd",
           "size": 4750,
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/b574940c818c605cb5c8e2d035211b557db31706"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/7d5a73a1ec7a235c25f7bc3dd0ac82fe0ead06fd"
         },
         {
           "path": "PYTHON-JAVA-PORTS.tsv",
@@ -64160,9 +64160,9 @@
           "path": "NAMING_DISPOSITION.md",
           "mode": "100644",
           "type": "blob",
-          "sha": "3c5555becb470622735d0ef18eca75ebc8713785",
+          "sha": "2bc6e991fc73a821634f28fbb60574428a9478db",
           "size": 999,
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/3c5555becb470622735d0ef18eca75ebc8713785"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/2bc6e991fc73a821634f28fbb60574428a9478db"
         },
         {
           "path": "PLAN.md",
@@ -64414,9 +64414,9 @@
           "path": "MEASUREMENT_PARTS.json",
           "mode": "100644",
           "type": "blob",
-          "sha": "a2841a30ec50fe2e18adcaa3fa4ad69c49726a3a",
+          "sha": "ed2e13921581f2e45d8d9b66d40f9838c435a3be",
           "size": 2094,
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/a2841a30ec50fe2e18adcaa3fa4ad69c49726a3a"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/ed2e13921581f2e45d8d9b66d40f9838c435a3be"
         },
         {
           "path": "RECEIPT.json",
@@ -64438,25 +64438,25 @@
           "path": "measurement-evidence.part-001.jsonl",
           "mode": "100644",
           "type": "blob",
-          "sha": "f6742f300622026eb4df0a40717aef39a4836e04",
+          "sha": "329072ccca01b179e39bbe1f1b6e462a9f4faf81",
           "size": 5614883,
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/f6742f300622026eb4df0a40717aef39a4836e04"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/329072ccca01b179e39bbe1f1b6e462a9f4faf81"
         },
         {
           "path": "measurement-evidence.part-002.jsonl",
           "mode": "100644",
           "type": "blob",
-          "sha": "7ffb30fc7a964c2588f05f5f473fce525ceada42",
+          "sha": "cc789288a3e6b81f61adae44e5cf0965b98c400a",
           "size": 6135617,
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/7ffb30fc7a964c2588f05f5f473fce525ceada42"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/cc789288a3e6b81f61adae44e5cf0965b98c400a"
         },
         {
           "path": "measurement-evidence.part-003.jsonl",
           "mode": "100644",
           "type": "blob",
-          "sha": "2a2863edff79ad2a1c5ea11d14d7726a6246a391",
+          "sha": "ea83661a09dfe57eac4a477f31914c60ee1eb586",
           "size": 6288247,
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/2a2863edff79ad2a1c5ea11d14d7726a6246a391"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/ea83661a09dfe57eac4a477f31914c60ee1eb586"
         },
         {
           "path": "measurement-evidence.part-004.jsonl",
@@ -64626,9 +64626,9 @@
           "path": "PUBLICATION_TRANSPORT.json",
           "mode": "100644",
           "type": "blob",
-          "sha": "036ee409c67e6b6a77a26df9630b68d20ec693c9",
+          "sha": "6545c2a7b022577b44033bbce18126be24c2e3b6",
           "size": 3701,
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/036ee409c67e6b6a77a26df9630b68d20ec693c9"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/6545c2a7b022577b44033bbce18126be24c2e3b6"
         },
         {
           "path": "SDK_FINAL_V3_COMPARISON.json",
@@ -64658,9 +64658,9 @@
           "path": "TARGET_FRESHNESS_FINAL.json",
           "mode": "100644",
           "type": "blob",
-          "sha": "79b2b56be5d7ac0a7b38222629114a4e24ca94a2",
+          "sha": "984197868c5c18a53a8a3ec7c10040ee883feb73",
           "size": 8414,
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/79b2b56be5d7ac0a7b38222629114a4e24ca94a2"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/984197868c5c18a53a8a3ec7c10040ee883feb73"
         },
         {
           "path": "final-core-v3",

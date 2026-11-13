@@ -4,14 +4,14 @@ crate/contract/test_prepare.py	82de5be54cd1dd944c2b399f83a4f88d642ebf046a04aa935
 crate/contract/verify_receiver.py	1b877f8af0269fbc2b8cd7ef0a98245de5f044ebc5d8dae1f91bc1d8a1acd7e2
 crate/datasets/m3jdk21-openrewrite-tool/DATASET.json	22b995aca2d0200664a2ae034b287dee898b75769cbc9f6d27dbe65d26d3e3a5
 crate/datasets/m3jdk21-openrewrite-tool/ENGINE_EFFECTIVE.tsv	80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23
-crate/datasets/m3jdk21-openrewrite-tool/MODES.tsv	b91ffc7cf5520e6da70524798ef121f4d6b0b9eaa65f48f8c7b01eae1dc789ac
+crate/datasets/m3jdk21-openrewrite-tool/MODES.tsv	9be7859a6d148b2f2cf33777259d03805e102a9c95247b683296eca1831f04a9
 crate/datasets/m3jdk21-openrewrite-tool/resources/META-INF/rewrite/m3-ast-build-reverse-20261017-m3jdk21-openrewrite-tool.yml	702ca5b4dfb294ba3f8011a7079e0ed4253c887f333f3ac7d05aa02f2f68ce34
 crate/datasets/m3jdk21-openrewrite-tool/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-m3jdk21-openrewrite-tool/0003-M3RewriteTool.java.txt	5ff61fe56b750096da8b9972a9cb4d9f4c318d6c2f73863f26b9c49404ad2976
 crate/datasets/m3jdk21-openrewrite-tool/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-m3jdk21-openrewrite-tool/0004-M3RewriteToolTest.java.txt	53c807cf46d1b7dd14c3031b3bc9fef84349488cef4d7a0b43d9643c2aaffa86
-crate/datasets/m3jdk21-openrewrite-tool/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-m3jdk21-openrewrite-tool/manifest.tsv	efe373c89e96c89772a63e93ab1f7d37f0af240eb94bda723653a6504a717fae
+crate/datasets/m3jdk21-openrewrite-tool/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-m3jdk21-openrewrite-tool/manifest.tsv	e83bbcf02dbe041ae728c769a090a4138ff3a57d916d57819e86f3d29942cc4d
 crate/datasets/m3jdk21-openrewrite-tool/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-m3jdk21-openrewrite-tool/0001-README.md.txt	95c706e9a672f0447991478a09de36afaffbadb23c7a2f9275d8b67ffc5c80aa
 crate/datasets/m3jdk21-openrewrite-tool/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-m3jdk21-openrewrite-tool/0002-pom.xml.txt	b486de013cf39a2d5d2962a965dd848415a4800e0fc71f8543fb02b82e9cdaf5
-crate/datasets/m3jdk21-openrewrite-tool/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-m3jdk21-openrewrite-tool/manifest.tsv	c397c6c64dea51fe3e8c5f10ea464d8de5c5706ac775a5d59adc763dde23b66b
+crate/datasets/m3jdk21-openrewrite-tool/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-m3jdk21-openrewrite-tool/manifest.tsv	2d98b1ba448f79644eda0f1969aa79113dcbfa70c61b15101ff1b32206735e7e
 crate/pom.xml	56567ab0175c47dbbada68bec8fe0fd9bbe027d6174c5cefef695a0b7283d448
 crate/prepare.py	912cd376f0754469d6fd17325b15e44e8b69725c6af92d99aac5d9a20b4989f0
 crate/receive.py	bf80f52c20549eecd0959cad9824aa078c3ca857859ee66cc3765c6bd7045246

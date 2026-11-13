@@ -7,9 +7,9 @@
   },
   {
     "path": "make/m3/collections/qualification/verify_mask_selection.py",
-    "gitBlob": "74181552384d222ad4cddea7dbca403baedc5859",
+    "gitBlob": "5f44a0acc66994aebcab374fe6f87ab2877ed0f4",
     "revision": "7c0d2493edbf93ac5cb726667ce83046d3519e3e",
-    "sha256": "1dbed85fcd21e29f55d9b9045d317a3e62bfae1e34cdd60160a039cb49ba7201"
+    "sha256": "8de0f24af48a25f18cbd59d500871e941c3eff88a7fe98a81f3e270c0b960431"
   },
   {
     "path": "make/m3/collections/qualification/mask-selection-postimages-20261016.tsv",

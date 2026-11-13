@@ -36,7 +36,7 @@
       "non-Java exacttext refuses"
     ],
     "receipt_sha256": "d2515e4bfc7249aedde989796e167b48cf390e5f3001b97ded22dedb68848d1d",
-    "generic_owner_blob": "40f543e413c245c900d6502a27645d05735a6ebd"
+    "generic_owner_blob": "1dbb89f4fde66b82c479d9414824ae172b4da54e"
   },
   "dependencies": [
     {
@@ -255,7 +255,7 @@
   ],
   "goal": "ACTIVE",
   "delivered_provenance": {
-    "reuse_ledger_sha256": "c54755c056bc6f59eceee1f7d5a18ab7693239d6e8eed1c6cb19aec904cf3496",
+    "reuse_ledger_sha256": "fe4da41e0118818eb191a62c46a1219965212b7eb5ce8c33e574ba89520ed52e",
     "notice_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-item-reference-safety-v2/NOTICE",
     "notice_sha256": "39f882d11742e2d2712290e8376e10ca192fe035d0baa9b0e90d83d273e4fdb1"
   }

@@ -58,13 +58,13 @@ final class JccSourceRecoveryHandoffTest {
 
     private static final List<Target> OUTPUTS = List.of(
             new Target(REGISTRY, "before00-name-mapping.json.txt", "after00-name-mapping.json.txt",
-                    "61818898ef6c092ddad2c1ee4cfe7508199912ff0a1f2d5c2a51ad6695d040c8"),
+                    "aeec3cfe84e57aadf7fa855a5f2174dd73749ccc8f6cd8f4409f0bb8a25e3d53"),
             new Target("doc/m3/jcc-source-handoff.md", "before01-jcc-source-handoff.md.txt",
                     "after01-jcc-source-handoff.md.txt",
                     "59ed76969f86486e7adb377409e284f69577fe02754006fdfe5b3938a16760a0"),
             new Target("make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
                     "before02-source-destination-bindings.json.txt", "after02-source-destination-bindings.json.txt",
-                    "8c76c2dd45e775d29f8f47d8daf65842e465c74ad3dec7aacd55df59f9d051a1"),
+                    "e8f345aacd9d93fb436d08f3bd868c2f5849e8edf989dd7fab54cc665dc49577"),
             new Target("make/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
                     "before03-root-coverage-obligations.tsv.txt", "after03-root-coverage-obligations.tsv.txt",
                     "59c4c970ac75a56aa5d5a3e2f3e88f5caa831eb06be788266c725202b8c64b12"));

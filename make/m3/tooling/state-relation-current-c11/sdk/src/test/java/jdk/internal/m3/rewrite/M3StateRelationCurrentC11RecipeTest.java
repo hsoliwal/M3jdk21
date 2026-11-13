@@ -27,7 +27,7 @@ final class M3StateRelationCurrentC11RecipeTest {
     private static final String ROOT = "/jdk/internal/m3/rewrite/state-relation-current-c11-20261019/";
     private static final String DESCRIPTOR = "/META-INF/rewrite/state-relation-current-c11-20261019.yml";
     private static final String NAME = "jdk.internal.m3.StateRelationCurrentC11";
-    private static final String MANIFEST_SHA = "1daad5ae7810bc33038caf0763e2ba0659642da9643d1541b4def28c8b8b291e";
+    private static final String MANIFEST_SHA = "2ee095b07bafb9257881c885e0b4118ef7bf9f54a397027a0b62510b74579de7";
     private static final String DESCRIPTOR_SHA = "260e69562a94a55f92f9c3aedb2319b5cab83c3cd69a786e075d14d526d7372a";
     private static final String C_OWNER = "src/java.base/share/native/libjava/M3StateRelation.c";
     private static final String HISTORICAL = "/jdk/internal/m3/rewrite/state-relation-current-c11-20261019/historical/M3StateRelation.c.txt";

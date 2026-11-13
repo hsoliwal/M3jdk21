@@ -63,9 +63,9 @@ All **229 frozen inputs**—166 local fixed inputs and 63 external source/proof 
 | Operational path | Final SHA-256 |
 |---|---|
 | `doc/m3/jcc-source-handoff.md` | `59ed76969f86486e7adb377409e284f69577fe02754006fdfe5b3938a16760a0` |
-| `doc/m3/name-mapping.json` | `61818898ef6c092ddad2c1ee4cfe7508199912ff0a1f2d5c2a51ad6695d040c8` |
+| `doc/m3/name-mapping.json` | `aeec3cfe84e57aadf7fa855a5f2174dd73749ccc8f6cd8f4409f0bb8a25e3d53` |
 | `make/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv` | `59c4c970ac75a56aa5d5a3e2f3e88f5caa831eb06be788266c725202b8c64b12` |
-| `make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json` | `8c76c2dd45e775d29f8f47d8daf65842e465c74ad3dec7aacd55df59f9d051a1` |
+| `make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json` | `e8f345aacd9d93fb436d08f3bd868c2f5849e8edf989dd7fab54cc665dc49577` |
 
 The four manifest rows exactly match the plan's paths, before identities, after identities, and resource names. All seven guards retain their pinned content. The current map has 46 records; the two requested JCC capability rows remain `blocked` with empty `tests` arrays. All four acceptance flags remain explicitly false.
 
@@ -73,7 +73,7 @@ The four manifest rows exactly match the plan's paths, before identities, after 
 
 Normal mapping validation conditionally checks target/recipe content hashes only for implemented records and checks executed evidence for tested records. The requested JCC rows remain blocked, so the ordinary validator's success **does not certify their target, recipe, or evidence hashes**.
 
-The separate explicit audit is `successor-e03/reference-audit/REFERENCE_AUDIT.json`, SHA-256 **`f7dcc4fb3843ce83520aacaf8fd36f4347d64000233d92921e81f67154bdfa87`**. It reports passing bounded reference and lineage consistency. This reviewer independently rechecked actual local file identities for all:
+The separate explicit audit is `successor-e03/reference-audit/REFERENCE_AUDIT.json`, SHA-256 **`ca8d5f9b56713390710bad0cbe851f70b5df9a16feca79acf50ad8898bba37d4`**. It reports passing bounded reference and lineage consistency. This reviewer independently rechecked actual local file identities for all:
 
 - **17 source reference occurrences**.
 - **46 source-proof reference occurrences**.

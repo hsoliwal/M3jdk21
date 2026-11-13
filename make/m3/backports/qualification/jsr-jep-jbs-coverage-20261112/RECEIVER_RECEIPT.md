@@ -17,11 +17,11 @@ migration engine, an implementation of 85 JEPs or proof of 14,948 JBS fixes.
 | Recipe | `M3HashPinnedTextSnapshotRecipe`, `m3jdk21-jsr-jep-jbs-full-coverage-20261031` |
 | Recipe manifest | `synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-jsr-jep-jbs-full-coverage-20261031/manifest.tsv` |
 | Product coverage source | `make/m3/backports/jsr_jep_jbs_coverage.py` |
-| Coverage source Git blob | `4a968eb57739cf1da0470bcc255c54ba49c22666` |
-| Coverage source declared SHA-256 | `e3c1f8828a04d42e6a262d8e60a5b37ad20ef684c17ae009084cd52599653cf0` |
+| Coverage source Git blob | `839758f2a78e300c492ea91026be275059162297` |
+| Coverage source declared SHA-256 | `18aa467b2d9be84877f06315e27c57bdc8ffebcb959ac459fba3721f9bb9a1f5` |
 | Product coverage tests | `make/m3/backports/test_jsr_jep_jbs_coverage.py` |
-| Tests source Git blob | `37fe81de37eb1b50089ed65dfdb7b38a16ba456d` |
-| Tests source declared SHA-256 | `425f5308faa4dc5a3d199620ef87ab4c10345b47933bc2b1ac927d280ef75129` |
+| Tests source Git blob | `8677cdbe50e7b93fd01ddb5e129b2c53e0863a6b` |
+| Tests source declared SHA-256 | `eb85c76d3227edb9cf705e70710694d4c65558c77c0f4430cbb1ac85b15bc201` |
 
 Both target source paths were absent on the pinned parent. GitHub readbacks of
 the receiving branch prove **exact identical Git blob identity and byte content**

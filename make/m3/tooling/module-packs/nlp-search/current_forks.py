@@ -40,7 +40,7 @@ def write_json(path, value):
     path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
-_RECEIVER_LOCK_SHA256 = "2b420cf9c9eba406c05e0c10040869dfe07b2c682ca811af67e3b845815c0261"
+_RECEIVER_LOCK_SHA256 = "754cc5ac78022a84f72ec6f62cb11b1de592f95302006ad7a89c64c9452ee8bd"
 _RECEIVER_TRANSITION_PATH = "make/m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V5.json"
 _RECEIVER_TRANSITION_SHA256 = "34369e1ad23948e495a426d76969e208794d4007c2ec24690eda4b61717e6a30"
 _RECEIVER_TRANSITION_V6_PATH = "make/m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V6.json"

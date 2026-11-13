@@ -15,7 +15,7 @@
     {
       "path": "src/jdk.m3.io/share/classes/jdk/m3/optane/NativePmem.java",
       "before": "42e902ba71172f22281292543b743b2e328f2f9d5e0602f4981d49b682b9e139",
-      "sha256": "daee8959a23723abb666836f97b6eb98614c0afa5cf3917942ada2a00edb1348",
+      "sha256": "f1332ff47f7a631775c7abf1ff759fe40c94c937a7679aa05e29e1d3d69b3670",
       "license": "Apache-2.0"
     },
     {
@@ -39,7 +39,7 @@
     {
       "path": "src/jdk.m3.io/share/classes/jdk/m3/optane/PmemMapping.java",
       "before": "f2b9a00b795049aa2b5f24d788529b5a623f1fea51799dcbb62099f23c56711e",
-      "sha256": "cc7c59e6452a834d026994f5e34fb9cb652d9a2e23686788ece903f36473b6ab",
+      "sha256": "31619475714c47b7eb12ee691990d017f4a854c730c97f3e34b980a22648b57f",
       "license": "Apache-2.0"
     },
     {

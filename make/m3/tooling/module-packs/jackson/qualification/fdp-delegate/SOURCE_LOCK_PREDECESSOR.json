@@ -77,7 +77,7 @@
     }
   ],
   "predecessor_path": "qualification/pr1289-integration-20261029/SOURCE_LOCK_PREDECESSOR.json",
-  "predecessor_sha256": "f647be34985465164b2d48ccd4749a6e5278bb204cf9e4d860cf3a265bb8422d",
+  "predecessor_sha256": "7575ea394ca6803f1542a4a82731f0ca84ebfef901ed1c10594105bf7ed52031",
   "schema": 1,
   "target_base_revision": "649a735e23a79a4df46e6c61bfcd2fadf156d90d",
   "target_repository": "https://github.com/hsoliwal/M3jdk21",

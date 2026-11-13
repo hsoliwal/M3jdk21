@@ -59,7 +59,7 @@ def admit_publication_custody(publication):
     exceptions = {row["git_blob_sha1"]: row for row in identity_rows}
     assert len(direct) == 6 and len(exceptions) == 2 and not set(direct) & set(exceptions)
     designated = bound_json({"local_path": str(BASE / "source-prepublication/DESIGNATED_COMPARISON.json"),
-                            "sha256": "b81e40be63829a2f957308046f9b937dc1ef8d7c0bcbeab63111479d7da8ad00"})
+                            "sha256": "d277d9852950cea9cdd09837f535fbdd4a7b7031f74ac2357ccacb376400bed9"})
     allowed_direct = {row["git_blob_sha1"]: row for row in designated["sources"]}
     assert len(allowed_direct) == 19
     allowed_direct.update(direct)

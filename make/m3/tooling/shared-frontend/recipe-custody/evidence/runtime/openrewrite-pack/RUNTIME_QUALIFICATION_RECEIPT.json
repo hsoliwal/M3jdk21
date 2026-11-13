@@ -323,7 +323,7 @@
     {
       "path": "/workspace/scratch/13309be96b09/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/target/m3jdk21-openrewrite-pack/candidate/m3/tooling/module-packs/build-tools/OPENREWRITE.md",
       "bytes": 11000,
-      "sha256": "9a6536e3d8c30fd8064189dbb8be1ea01f02d9dc54739820d199634e6a4f46cd"
+      "sha256": "f209d3f3c3ada2a420b6889930569ec9be4b9e9240b618dd1937775a1158756d"
     },
     {
       "path": "/workspace/scratch/13309be96b09/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/target/m3jdk21-openrewrite-pack/candidate/m3/tooling/module-packs/build-tools/openrewrite_pack.py",
@@ -333,7 +333,7 @@
     {
       "path": "/workspace/scratch/13309be96b09/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/target/m3jdk21-openrewrite-pack/candidate/m3/tooling/module-packs/build-tools/test_openrewrite_pack.py",
       "bytes": 12703,
-      "sha256": "0cba34745fd33107d97dad89ddd72d90753e724975b6b9367fc42c11e230caf9"
+      "sha256": "8b4c2e35f80687b922f1792f94067b91d8599de3fde0dfc71684ffc749d87968"
     },
     {
       "path": "/workspace/scratch/13309be96b09/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/target/m3jdk21-openrewrite-pack/candidate/m3/tooling/shared-frontend/openrewrite-runtime/pom.xml",
@@ -345,7 +345,7 @@
     {
       "path": "/workspace/scratch/13309be96b09/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/target/m3jdk21-openrewrite-pack/candidate/SDK_RESULTS.tsv",
       "bytes": 756,
-      "sha256": "c39df2ca690e7c177059dec0f66b2fcf03804c90279cfd4dcdf211e952a9109e"
+      "sha256": "0bd07280104e68b9805eec605e0b797cf3a7aa12238cb7598f26faf1afed45b5"
     },
     {
       "path": "/workspace/scratch/13309be96b09/ast-work/rewrite-pack-sdk-proof/runtime/surefire-reports/TEST-org.m3jdk.tooling.rewrite.M3RewriteRuntimeTest.xml",

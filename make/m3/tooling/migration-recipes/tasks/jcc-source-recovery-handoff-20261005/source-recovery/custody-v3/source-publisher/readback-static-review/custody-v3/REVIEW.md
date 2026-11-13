@@ -10,11 +10,11 @@ The review combines full source inspection, independent arithmetic over the actu
 |---|---|
 | Corrected `raw_custody_v3.py` | `203f44729f860620949ec9e6aa7c5f2c7d766de2e406548ceb6797797bfdcc33` |
 | Corrected `verify_publication_v3.py` | `904a2105f04a12454a2d97c13a5bef6764e18ae28a2fe680e06ca0e6e14a6e93` |
-| `raw-custody-v3/CUSTODY_INPUT.json` | `384ce843f2e4545ad1c40d7ee58abbc471b5a6d1cbed89bea82dcff0479ce6a5` |
+| `raw-custody-v3/CUSTODY_INPUT.json` | `86e5e92e9f2dbb209085133b54daf9db3ad72988fe82968fb9f819aa015a3750` |
 | `raw-custody-v3/PROTOCOL.md` | `cdf3826e3725acded05b38031b70d9e7a8f8579540b38d65a2a8e38ce64209f5` |
 | Preserved V2 verifier | `fa327277439825eb5870f67063833dec3495448d03a70f2d9222acc48e4f9226` |
 | Final source manifest | `9270a6b4098960e2b7c7bd87b17325b648c4de363957f36028bacc9c1955e328` |
-| Existing V3 publisher preflight | `4a8e0c7647a9a6549ffc797de28d01a7806aa7757fedb2096bf35ecb0bba62c7` |
+| Existing V3 publisher preflight | `c28fb413b8a7c2b48d0a90f727397258e854e223859f65152272e912be983c89` |
 
 The original unexecuted V3 helper/verifier drafts remain exact under `raw-custody-v3/draft-T01/`, at `a96f1aec…` and `7138709c…`. This review retains complete source snapshots, AST-only parses and exact T01/T02 textual differences. The older source review is preserved as a review of that unexecuted draft, not as evidence that its former mutable file locations still contain T01.
 
@@ -76,6 +76,6 @@ The initial narrow probe must succeed before final-payload batches. The before-b
 
 The principal reviewer checked **37 unique stable inputs**, independently parsed seven Python source files without import/execution, validated the complete captured 4/4/17 evidence, and rechecked all inputs unchanged. The inspector passed on its first execution. `REVIEW.json` contains each creation identity, tree receipt, resolved membership and file-read outcome. `INPUT_SEALS.json` binds the exact source/input bytes; source copies and draft differences are retained alongside it.
 
-The focused companion main-verifier review and T02 delta addendum are bound by `COMPANION_BINDING.json`. Their respective artifact seals are `ca55cfa097bac969aabcda4d410e6e6b2aae563e41dcce17bfcd5a9d61a79006` and `df0e4f6c48aee658e68eb93792ec748c6b2a6953241fe8c554a6cebc8df22b6f`. Both found no remaining blocker within their scopes.
+The focused companion main-verifier review and T02 delta addendum are bound by `COMPANION_BINDING.json`. Their respective artifact seals are `67d4784b29d06455a061c996a8404a1ec1dcad236a7d2d3ce08deff0a76d1593` and `f595eb2722041509e83dac5fe879314b4bb97eaf79be14dfec826346b134a00e`. Both found no remaining blocker within their scopes.
 
 No reviewer executed an owner helper, verifier, project build, test, recipe, Java/native command or remote action. No source, fixture, manifest, publisher, earlier verifier or sealed review was changed by the reviewer. The corrected V3 is conditionally admitted; source qualification remains BLOCKED and export/destination acceptance remain unapproved.

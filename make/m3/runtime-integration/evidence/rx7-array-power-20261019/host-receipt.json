@@ -15,7 +15,7 @@
     {
       "path": "make/m3/runtime-integration/check-m3rx7-v7-receiver.sh",
       "before_sha256": "016a6015e1e3093f4bbe6264ae6411e90c36c72a945514aba82efad609ca634b",
-      "after_sha256": "db15894e8c81ad69ca681bfb1e12bb0c95b95f41389e5ce5964832878b24a488"
+      "after_sha256": "33ed3de607ba44bf2c4e11e2a7c0770e06289e5f7f191f2a298631f4957e8bd7"
     },
     {
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3RX7.java",

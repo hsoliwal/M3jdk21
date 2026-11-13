@@ -23,7 +23,7 @@
   ],
   "cwd": "/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture-final/source/test/jdk",
   "started_utc": "2026-10-17T10:12:10.431136+00:00",
-  "fixture_sdk_binding_sha256": "da0202c5af6e772edcf45706aa71d2132634ebffc60432ac1532b2f074ee3cd2",
+  "fixture_sdk_binding_sha256": "708a939cb46e7677f099b7137e81b28480f2b6edc578f5355884cab4116bb300",
   "test_sources_sha256": {
     "java/lang/String/M3StringRegexDpTest.java": "b9bbf14010da526e41d0e78945e728d5e9aa1cab8ccc732a815a9a14a253ee2a"
   },

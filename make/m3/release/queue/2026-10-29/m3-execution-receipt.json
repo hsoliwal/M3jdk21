@@ -84,13 +84,13 @@
     },
     {
       "path": "doc/m3/m3jdk21-porting-invariant.md",
-      "before_sha256": "95a5d111f0d9b2467bcc84828adc5b0efcfd1091e35a1b5c1bf1c484a2066b03",
+      "before_sha256": "ba394522eae7c533512a7e8eabc18486d18983223fcd15a570f2fce366efd27c",
       "after_sha256": "e3bd365135450e90a88082b78ecd12a4a1c2d8c0632487c654186566836a1c76",
       "recipe": "canonical-text-snapshot"
     },
     {
       "path": "doc/m3/m3-intake-policy.tsv",
-      "before_sha256": "519c6e3152fac4d5d06b77c859f8f5a6a6b7e54a1e3dbb5fdd999c4e100a69c7",
+      "before_sha256": "c2839240efa3e3bf921008b4e1994781db10dbb751f825f19269f8c0f71f4a99",
       "after_sha256": "7f4a36570ab48a80dd23f9b2831b1e8e6b9832f0dd6918539f19e1abea9ab761",
       "recipe": "canonical-text-snapshot"
     },
@@ -151,13 +151,13 @@
     {
       "path": "make/m3/runtime-integration/test_m3_intake_custody.py",
       "before_sha256": "ABSENT",
-      "after_sha256": "9ca7796238c1d47223c85f8cd1fd485687c14725486f6a8ee67b8c87fc116982",
+      "after_sha256": "dd6804e61b821815c616613f6c92f8ca9b0f15eba19483ace0a48cb68cefc008",
       "recipe": "canonical-text-snapshot"
     },
     {
       "path": "make/m3/runtime-integration/verify-m3-intake.py",
-      "before_sha256": "6f16a12a564589cb6055699f70a41e7de99716d55900efc70ed4601dafe9e3c5",
-      "after_sha256": "6d42599003415d84d3690872a40b65cad7c4506a13869a33eb4d3f5b8eab871a",
+      "before_sha256": "5f1b80ac05d73e79e9316c4905b86ade1e57c88f18fb342b02833a33a3958e70",
+      "after_sha256": "8ee79190127c966a81f00836a19fd351934a5adf183ec79872a8b531cf82a7ac",
       "recipe": "canonical-text-snapshot"
     }
   ],

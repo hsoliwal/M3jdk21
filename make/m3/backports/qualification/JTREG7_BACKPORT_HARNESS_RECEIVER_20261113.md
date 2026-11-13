@@ -27,9 +27,9 @@ workflow postimage and this passive acceptance receipt.
 - Canonical original SHA-256:
   `592369818ed986f1f3b30e36f4d0ee21d6647f4bfa9294d80a16d1dfbb5bb48f`.
 - Canonical postimage SHA-256:
-  `52199e91330e75bb4bda2bd4beba221d6902b299a1fa6e191327beba205ad10d`.
+  `4badf60655fcb71a450b4398498b2806117a4d3058b294ae4d2de63e3141f30d`.
 - Exact generated source/product Git blob:
-  `9348c09b9817dd44846f6481aabd906d7c8d698d`.
+  `ccab13210c39c103378a0f2285512a537460eec6`.
 - Canonical source manifest Git blob:
   `4f55c1c4ac9c294aa8af8de91f2cac7ab46c084d`.
 

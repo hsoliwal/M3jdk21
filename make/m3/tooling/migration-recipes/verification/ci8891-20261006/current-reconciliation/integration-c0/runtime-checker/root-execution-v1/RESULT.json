@@ -3,13 +3,13 @@
   "status": "PASS",
   "spec": {
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/packaging-authoring-v1/ROOT-COMMANDS.json",
-    "sha256": "f86a236dffa5e20e487c1cd4c9dda530c95d5f213f7e37a2749b5993fb48f2cf",
+    "sha256": "ca06180b97cdc3d5453bcaa8b50ded3fd843f26aaba23dba0f3eaef00524d29a",
     "bytes": 8276
   },
   "commands": [
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/root-packaging-v1/select.json",
-      "sha256": "89ba9636fb1a01270f5495f55724555271e05d189bd41e9f93c8b20fcfcf762e",
+      "sha256": "106f3180a9d4edcdf6ecd8d2ab0ae2b07c546ae9f3b3608976339e033342dfff",
       "bytes": 2011
     },
     {
@@ -19,17 +19,17 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/root-packaging-v1/verify.json",
-      "sha256": "d2285698a2044fa4e4e2c960121898a841aeff5dfd0ff9619762f17a1961ed06",
+      "sha256": "eba58a00027ede9672c2d0a8bdd3e3a11c2051fac6a13a49669a43e4e6ea5fcc",
       "bytes": 1384
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/root-packaging-v1/extract.json",
-      "sha256": "6710ecdced1973b852e3a1ec2e1101b3c91e21fd8f61672a7df12e69082bc4cf",
+      "sha256": "ff4f24fb824eae418c26d48cac7132b737811adcc845500f5d240b944ed2a31e",
       "bytes": 1541
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/root-packaging-v1/finish.json",
-      "sha256": "81af3d04d7eac5eab04b23aa66e7554bb664f055c0d465b6dcc5f9c493678dba",
+      "sha256": "0e8d7325a0df6c3e6b0fc3bf2ed2630b3af34fa2ed8bc430ffa7b15b16732a15",
       "bytes": 1207
     }
   ]

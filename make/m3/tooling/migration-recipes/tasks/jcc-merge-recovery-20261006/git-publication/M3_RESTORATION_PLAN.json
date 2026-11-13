@@ -47,7 +47,7 @@
         "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after00-name-mapping.json.txt",
         "mode": "100644",
         "type": "blob",
-        "sha": "3a1e902a8284773f0f182d6bd43bf4e27b4e63c0"
+        "sha": "1bbe40b2c04da018894a4494da157c6865340490"
       },
       {
         "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after01-jcc-source-handoff.md.txt",
@@ -59,7 +59,7 @@
         "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after02-source-destination-bindings.json.txt",
         "mode": "100644",
         "type": "blob",
-        "sha": "5ecf415c7af4176898328d58b9df2972e18277c4"
+        "sha": "0b4ddaae7f2550a3f336dea845a37781584d951e"
       },
       {
         "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after03-root-coverage-obligations.tsv.txt",
@@ -95,19 +95,19 @@
         "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/manifest.tsv",
         "mode": "100644",
         "type": "blob",
-        "sha": "0db9d41c596d6ccb35b0c495b0e44bf48d75799e"
+        "sha": "e2fd737def08e982427b085748d67bf3a6bb26b9"
       },
       {
         "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/plan.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "abaa28a2c5ca013aa967643cb7328781e3ea4a27"
+        "sha": "9d5dd75c614b217119912d4bf813f0212ef1ba20"
       },
       {
         "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/after00-name-mapping.json.txt",
         "mode": "100644",
         "type": "blob",
-        "sha": "f350c7c79e265c788d9e3278eb0103733b301327"
+        "sha": "7d43a1dc26becb45aa69616d47c9e8224a37611d"
       },
       {
         "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/after01-jcc-source-handoff.md.txt",
@@ -119,7 +119,7 @@
         "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/after02-source-destination-bindings.json.txt",
         "mode": "100644",
         "type": "blob",
-        "sha": "8fc1846a9d81c1a6cd7e21f66048d9bc4ef2a834"
+        "sha": "46b99a0250db3076a602529f5aa4daedfc567739"
       },
       {
         "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/after03-root-coverage-obligations.tsv.txt",
@@ -131,7 +131,7 @@
         "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/before00-name-mapping.json.txt",
         "mode": "100644",
         "type": "blob",
-        "sha": "3a1e902a8284773f0f182d6bd43bf4e27b4e63c0"
+        "sha": "1bbe40b2c04da018894a4494da157c6865340490"
       },
       {
         "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/before01-jcc-source-handoff.md.txt",
@@ -143,7 +143,7 @@
         "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/before02-source-destination-bindings.json.txt",
         "mode": "100644",
         "type": "blob",
-        "sha": "5ecf415c7af4176898328d58b9df2972e18277c4"
+        "sha": "0b4ddaae7f2550a3f336dea845a37781584d951e"
       },
       {
         "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/before03-root-coverage-obligations.tsv.txt",
@@ -155,25 +155,25 @@
         "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/manifest.tsv",
         "mode": "100644",
         "type": "blob",
-        "sha": "498da5417b538c49ce52ba13b7ef782ecc2b9e47"
+        "sha": "b02d4d3d49953d231baa49dc70c9b2543f6acc1a"
       },
       {
         "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/plan.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "c4b6be425ba7a025ce20a4da6dd7317c96fea5ff"
+        "sha": "fbb9e0400ef9aa60bc6e044d21f85e904b1bd8f0"
       },
       {
         "path": "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccSourceFinalHandoffTest.java",
         "mode": "100644",
         "type": "blob",
-        "sha": "2dcbc9debd2c3668c37dcc1d5075d5c635c7d1e4"
+        "sha": "5372bdda4a8a541ed769e785336cec4da58d29ef"
       },
       {
         "path": "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccSourceRecoveryHandoffTest.java",
         "mode": "100644",
         "type": "blob",
-        "sha": "1abc53c1c880686111631234b5df7db191bd0297"
+        "sha": "68065addeeba93a0e24edd3f3697004a752a212c"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/REVIEW.md",
@@ -377,7 +377,7 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/inputs.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "25d1f766fbaf636e6fd5bb97930002453615ca84"
+        "sha": "eb95e12613ecd3d7dda1dcd1760d47493306408e"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/receipt.json",
@@ -389,19 +389,19 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/FILE_SEALS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "0745375220efa00edddee49f969ba8799f5d14ec"
+        "sha": "c40dc77766eee60ccaaeea970cc0225604d44607"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/INPUT_SEALS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "09ee5f2de21335c9d95b86d12f4d4aac75aa2b1b"
+        "sha": "6120230d4fb0b3556fe46d8c91a6ae8c696456c0"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/INSPECTION.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "e94dac88cb28133b85f6731e6664ab0ed09b14b3"
+        "sha": "a20070c7cb8d6f4ef219e213cd200ba69ebae53a"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/INSPECTION_METHOD_NOTES.json",
@@ -419,37 +419,37 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/inspect_receiving.py",
         "mode": "100644",
         "type": "blob",
-        "sha": "a9793241503782849d5a25a1e635800077db84fc"
+        "sha": "87470e5bda4e1b6246f432bcd3726f61fbd1c103"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/FILE_SEALS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "d7cf21bff753dfb242cfca72a7fe54aac27e1f89"
+        "sha": "f4b67e87cb9b8efdeb92388104cb78760fb62f35"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/REVIEW.md",
         "mode": "100644",
         "type": "blob",
-        "sha": "015f80a489aaefefe3d341ad9ef734308219275a"
+        "sha": "1aa89db4d2ba1bf882d7646f42d6d2debf9d5ad1"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/STRUCTURAL_INSPECTION.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "eb1ea98585a14066861970947cbdd2321b123872"
+        "sha": "b6a58895102365e39e276ed0e0c4432921554f7e"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/root-coverage/FILE_SEALS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "cb5a2131620ceb6f91b33c2b9950abcda83b1fad"
+        "sha": "8406f03198691d1ca730b3f951fc09ea7a9aa8df"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/root-coverage/FINDINGS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "70b52e216b471133a5f0cb515e83e6ef28f8d9a7"
+        "sha": "0b71cd436a93cfb7580532e3bda995edcdb4a19e"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/root-coverage/REVIEW.md",
@@ -461,7 +461,7 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/source-proof/OBSERVATIONS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "77b817e2421c416a32e36fd4b2f6a060b1f4e867"
+        "sha": "418ccb4e1cdfb94c1ac72888218886d61d98ecf1"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/source-proof/REVIEW.md",
@@ -473,37 +473,37 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/provenance/AUTHORING_RESULT.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "08298c9be9037537508eeaafe3d31e6a1ae45f66"
+        "sha": "82a1a72f8fe09355808e4ca2b0fe43f4f70399a2"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/provenance/author_successor.py",
         "mode": "100644",
         "type": "blob",
-        "sha": "ff08e5d5106942b13e7ea495c9a0766121019660"
+        "sha": "cf94f315ae19019364e18c9422096012516c4624"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/provenance/check_references.py",
         "mode": "100644",
         "type": "blob",
-        "sha": "c5fb4e4659f7dbaf0bc9fdd4c535391d62f5cfd0"
+        "sha": "0b200b21a6897e789420210ba25182287e4f955c"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/provenance/run_verification.py",
         "mode": "100644",
         "type": "blob",
-        "sha": "be65c3ddb97632e9d6989155694b4eb58f33f117"
+        "sha": "1b6fddcbdeccf59cab258b9d1cef12f3150e5fb8"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/reference-audit/REFERENCE_AUDIT.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "a019e8c85939374211623a8b3de39988b124ba76"
+        "sha": "81026ede01b3bd921b3846f3588b941e9a7a59d1"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/reference-audit/attempt01-checker.py",
         "mode": "100644",
         "type": "blob",
-        "sha": "17fb1784d5b92bcf4b79ee6e92ae6d1d1e47411f"
+        "sha": "387a9568b9c720a878174b6e1782889fe471f8fc"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/reference-audit/attempt01.txt",
@@ -581,7 +581,7 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/M3_CURRENT_MASTER_PREIMAGES.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "ea4fb9e885a4e393b48faa479af8b1c1663e8edd"
+        "sha": "b0746848d8271097150ec90c1de588231ac9db79"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/PR_STATE_AFTER_SOURCE_PUBLICATION.json",
@@ -629,13 +629,13 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/REVIEW.md",
         "mode": "100644",
         "type": "blob",
-        "sha": "526ab3138f3123da8379d9d02a589e155b663b7e"
+        "sha": "bfee51d5be2c72eb9320e777224750b7e727ac42"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/authoring-invocation/EXECUTION.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "8eca475d38d3133cd7183239266dbabf1cf9cfb0"
+        "sha": "00cca678c3d7b2b43a54ea0eaae40b026cb429ba"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/authoring-invocation/stderr.log",
@@ -653,79 +653,79 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/authoring/AUTHORING_RESULT_V3.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "63e9ddff20a8ed1732c8337b0dd93f8b693cdb11"
+        "sha": "66dc9740e747275de6a8ec1ecb5caff6651f1499"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/authoring/BOUND_INPUTS_REVIEW_PACKET.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "b4efdc6a9ef0709b2063cb334a041a2f01922d4a"
+        "sha": "2a6151fda3bd91a9f6668b37fd0c534ebe109179"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/authoring/BOUND_RESOURCES_REVIEW_PACKET.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "282ce942d789459f83d9b1b38a6db454ff6aa6dc"
+        "sha": "7d3baa0bca3dc65a6dfc79a6e6f8e2c21246df11"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/authoring/DERIVATION_INVOCATION.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "50b2714ef27ff2b82dfea17a0f765f1936c7c451"
+        "sha": "f46f27e3a4b831c0134c86267d8aaccc39115eb1"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/authoring/DERIVATION_RESULT.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "90f8ebff8a56915247e20badc58b8f4ca252adf2"
+        "sha": "c5dc32c6f0e572886ce9e9174b451952d6cf0846"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/COMPANION_BINDING.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "708b6cab94b7ea9bc54ba294f3d89080aea5820b"
+        "sha": "39cf9817db9b0d4c7ded0b80c007ba23c8640623"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/FILE_SEALS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "eb2a96c88fc5314a33f797ce3b8fbb2deae89205"
+        "sha": "e735f87e0b2165e0a9f68fb7d66dbfa58aafa08f"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/INPUT_SEALS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "457f98e7213302c4b8f0c4644f7aab30592cb430"
+        "sha": "d62f466de4fbf55d0ab04a87d9d6f1a17029784a"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/REVIEW.md",
         "mode": "100644",
         "type": "blob",
-        "sha": "05429cadae15604a9b1f8a651741edb68d1a9bf3"
+        "sha": "3ff6a4d5a0413fe28160e926e04f4054b998c1bc"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/STATIC_AUDIT.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "ffebe6fcd689accc8460be75b1ebcab2bc9e278b"
+        "sha": "c819ddc989b6055064bd8d9db3cf2de46711e706"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/custody-output-subreview/FILE_SEALS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "8c1428e6d8adb50acb4873521a0fd71d3f325a6d"
+        "sha": "5f7ac12282e74a4f8f22c5597de9856fbad45647"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/custody-output-subreview/INPUT_SEALS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "689970d6aef0f713f6959e2f1a629f9b197696e0"
+        "sha": "faf8c8dfa45721c13f9ed243bb8efe81353ef7b0"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/custody-output-subreview/REVIEW.md",
         "mode": "100644",
         "type": "blob",
-        "sha": "c8a5c895bc7e997afb81c4cd53151122291be879"
+        "sha": "178f148e84e9122c7637da091888daff1f228c9b"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/custody-output-subreview/WRITE_SURFACE.json",
@@ -737,13 +737,13 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/custody-packaging/ADDITIONAL_RECEIPTS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "eaf3b002942e0fcf16aece8a2a4459f3cf9010f3"
+        "sha": "d67debc3e1ec6105a29b7b1f9b824324ac72fabd"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/custody-packaging/FILE_SEALS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "7f8e757fcc953d7a5e5acc12c039e90ed0a83e0c"
+        "sha": "99cedc3a5341638b8acf4eeb005413bc62885f9d"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/AUTHORING_RECEIPT.json",
@@ -755,7 +755,7 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/COMPONENT_BINDING.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "9e3be9ec51cb2333dee64b51b213953db03fae03"
+        "sha": "0ab62b6067f2b857fc352fdc67ced0b2ebc75e16"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/DONOR_CATALOGUE.md",
@@ -917,13 +917,13 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/execution-invocation/EXECUTION.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "732fad332073d67315a8e8c030562a95a1243683"
+        "sha": "33db0213e657cc510d3035e4f4e40070c7f4eaed"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/execution-invocation/STARTED.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "d556a4a8fc82561a539e03c6076081fb59468a40"
+        "sha": "24e0db86d59fac5781cf2ef374f54314a37cb8cc"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/execution-invocation/stderr.log",
@@ -941,109 +941,109 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/COMPANION_BINDING.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "b3f7cac6ad10e0d3a4adcb3dec51938d6774717c"
+        "sha": "ca379a3de59d24bd10a7b6ef801132eba2673370"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/FILE_SEALS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "7646478dbcd4c4baf20531f870a6772a9430dc8f"
+        "sha": "2cbacab48b92b16abe09cc5dc4471a5170e9046f"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/INPUT_SEALS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "441a127c0b2c6ed27029c491406be943f991d17d"
+        "sha": "bdc852b5e2d6c57ef37f2594a281eeb6193fa4ec"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/RECEIPT_RELATIONSHIPS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "d1a3602f71c35e31378638ef9f311aafbe8e76f7"
+        "sha": "c1b1fc5b06226f382195a1fe7e10f8c90688dd3c"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/REVIEW.md",
         "mode": "100644",
         "type": "blob",
-        "sha": "58fea3e9ba0fbf0df4de3b49950b1a04d77b4633"
+        "sha": "9ff5886897ac0dbbabdbd48c0396a441f03fac5d"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/invocation-subreview/AUDIT.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "e28198fab74346c71cd7967f99028d785fbb9366"
+        "sha": "82813e2855e553926606a0c33c964d53dd721917"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/invocation-subreview/FILE_SEALS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "7fef9378914636ebe9afd68a37213fa49495084a"
+        "sha": "2ebc15b9e8e3f5f7fb7e96e5fc31a39728bf30a2"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/invocation-subreview/INPUT_SEALS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "fbb39bed165e39cf48e72609b8f6d69ba160f228"
+        "sha": "743c7c4d61dd9c14592b924360ab2ad02d9507a4"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/invocation-subreview/REVIEW.md",
         "mode": "100644",
         "type": "blob",
-        "sha": "cb9b0a3ae01d047e0b558d33a6df3d850a73d2d9"
+        "sha": "777e59e98237ef23ed9cdf9de2688eb4c94192e2"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-bound-review/DERIVED_INPUT_CHECKS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "83c00f12432a893b2a83d911ce14195f646d9ef9"
+        "sha": "c28984480ff1b4ed96b82c01e8db7bff73f9201c"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-bound-review/FILE_SEALS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "98dbeed29856081e88128ffb3f245fa2c3b9b284"
+        "sha": "ddfbd575dfdff4c526ceb2a8c55b5ad5f70f73fe"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-bound-review/PACKAGE_CHECKS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "5ff8b6e90a724fa1f5f2b490145622eb946a0c5b"
+        "sha": "ef0720f09a1d9addf3aa71005d0141a90de6bcc8"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-bound-review/REVIEW.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "cd855481fa52b6567e49d994cafeb68fb11c808e"
+        "sha": "a8475cea2dacb2240e35815b31dade0298c2ed27"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-bound-review/REVIEW.md",
         "mode": "100644",
         "type": "blob",
-        "sha": "d6fc5951b5fb362285eff18daaf787c4690e6d9e"
+        "sha": "1953aebd49bd425f52427cfaa4d2a8c41eec69e0"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-bound-review/inspect_bound.py",
         "mode": "100644",
         "type": "blob",
-        "sha": "46aa6a2e98953a271665561d3b2cc2ae6111d52c"
+        "sha": "4109379c2aaf0e9464b304ede8d5a07825a11f46"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-bound-review/inspect_package.py",
         "mode": "100644",
         "type": "blob",
-        "sha": "fab82abc6666cb956a07ae28237252a87128eb02"
+        "sha": "066b7a7d332639fe854186f7595b9b2a8b50a1b4"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/EXECUTION_CHECKS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "f14afaf08221a8e30eac7c5f5880dcae9380feb4"
+        "sha": "ee324da96531e60801989b8238311a4054a56afe"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/FILE_SEALS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "7f2fdaa0c191758c2b324f94fbc693cef5773f3c"
+        "sha": "6452861f07eed66ab0b1602a487c3743c6bdec82"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/POSTRUN_ADDITIONAL_PATHS.json",
@@ -1055,13 +1055,13 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/REVIEW.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "b17d260d4072839a737924e1f353fc8586264eb6"
+        "sha": "eead9e9ff52bd8fd7b52cdb56f0fc871c946bde3"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/REVIEW.md",
         "mode": "100644",
         "type": "blob",
-        "sha": "d3efd43193df0d3695c8b15b4a574e9d93334bf8"
+        "sha": "1f2b8250d6bfdb69dec834ee5944571c257b63c3"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/01-check-E3-preimages.json",
@@ -1247,13 +1247,13 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/INVOCATION_EXECUTION.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "732fad332073d67315a8e8c030562a95a1243683"
+        "sha": "33db0213e657cc510d3035e4f4e40070c7f4eaed"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/INVOCATION_STARTED.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "d556a4a8fc82561a539e03c6076081fb59468a40"
+        "sha": "24e0db86d59fac5781cf2ef374f54314a37cb8cc"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/JccSourceRecoveryHandoffTest.xml",
@@ -1271,7 +1271,7 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/inputs.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "0d7c2fab780308c2774707b5e442c776b3950dbd"
+        "sha": "ce3a5856d0062a89248dd6516aed48e206395292"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/invocation-stderr.log",
@@ -1295,7 +1295,7 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inspect_execution.py",
         "mode": "100644",
         "type": "blob",
-        "sha": "2156b9ff024f6059c95341408f6462fdb82ec44d"
+        "sha": "deb310fc2619bec70adef9ceefefeb1edf37c7e5"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inspector-revisions/V1_DIAGNOSTIC.json",
@@ -1307,43 +1307,43 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inspector-revisions/inspect_execution_v1.py",
         "mode": "100644",
         "type": "blob",
-        "sha": "5928e79dd9c26ad0da2260594d2e8ad264554ce1"
+        "sha": "82719628b57c8edbe1cbc602d12e8b2afa1fa759"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-resource-review/FILE_SEALS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "3c08e6ae8b67d01b0b8e566307299220efc8b8d7"
+        "sha": "f0d58c53ef43b5cbdd08de08734b1913375b3f67"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-resource-review/RESOURCE_CHECKS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "38d370d6044fc4c4aa05d7bf0292c6420783aa31"
+        "sha": "acbf4ebc4a069eb6ec52fe2429cf7062a3380e20"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-resource-review/REVIEW.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "01223e23c3d75b405d1032579d56d510c46b4a34"
+        "sha": "4f2e5f955d45ccffb5f399b9e3dbde339a7730c8"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-resource-review/REVIEW.md",
         "mode": "100644",
         "type": "blob",
-        "sha": "c3bdb44fa23376733ffea31a8231606494905818"
+        "sha": "5a7bf2f967aeb3c046f81936fb9682722b138fe7"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-resource-review/inspect_resources.py",
         "mode": "100644",
         "type": "blob",
-        "sha": "f631cf96a49c0fd34915c1ce5c9410e66e8e7f1b"
+        "sha": "ac56d23c5ecfcada7a2445ee54d8bb09cc9fa85a"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/reference-audit-invocation/EXECUTION.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "421cd40549a93ef8c6317686bf8128f2a36dc73f"
+        "sha": "75d7afd10065e8855e775882462fc8da80c4850e"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/reference-audit-invocation/stderr.log",
@@ -1355,13 +1355,13 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/reference-audit-invocation/stdout.log",
         "mode": "100644",
         "type": "blob",
-        "sha": "9f940d2e9e029c6abd29681c9eab0b3c748bf391"
+        "sha": "90353cfaad81308ca3f96d77c7963950e3dbf7e9"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/reference-audit/REFERENCE_AUDIT.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "80074f14c84da4a27883e87b16358a90fd2ab031"
+        "sha": "bffe28cd96f4508ce8bdc67f2d88ef1d658cfd2c"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/AMENDMENT.json",
@@ -1427,19 +1427,19 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/PUBLICATION_CUSTODY.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "6389a4301478fd4df74e146f1ae4b8942f675e20"
+        "sha": "39a94c5646637a5b4246f6f1dc65af67f6dc0c51"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/ROOT_ACCOUNTING.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "ae55363fa985efefc16c80c9eea4587034bc9be2"
+        "sha": "67ef6ab139a20e1a93b01d11e0c4b70b4176f0e6"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/SOURCE_FIELDS_AND_PROOFS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "8d44a30fb11ce988c489a6259e8be117df98ed3a"
+        "sha": "7dd96b255efdd5f3d50370d50ec147b255c4de4a"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/CUSTODY_CARRY_PROSE.md",
@@ -1451,7 +1451,7 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/CUSTODY_EVIDENCE_INDEX.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "1838dbfdb07e182f193f78916e10cde3adeae7d8"
+        "sha": "4b484f7499a2e3bb551ccc9b7360c95083c6736d"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/BASE_TREE_MODEL.json",
@@ -1481,13 +1481,13 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/BEFORE_BRANCH_CUSTODY.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "3d29582bd7ae56a38c5e7d15bea3a587be7832c3"
+        "sha": "838d2c4ca831d2e6b27117e106b791d9bf86647e"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/BEFORE_BRANCH_EXECUTION.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "e6785ac00ae6d9deeca65144165986cabca95df5"
+        "sha": "dd73e75de9253f972ebf712e137e8e92b0eaa491"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/BRANCH_ABSENCE_BEFORE_CREATE.json",
@@ -1535,7 +1535,7 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FINAL_PUBLICATION_EXECUTION.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "951520a6c91ccf2a1fc5c04f662bac678e65380a"
+        "sha": "c384ba8fb6af5e02fa4f836638f041ef8bdcd0b7"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FINAL_READBACK.json",
@@ -1547,7 +1547,7 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/PREFLIGHT.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "2ce90c4b5891e73a43eea7df14886fb15f2ffe59"
+        "sha": "8860f7f7d243eb6c104939a9f3346c73af761911"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/PR_CREATION.json",
@@ -1559,7 +1559,7 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/PUBLICATION_CUSTODY.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "6389a4301478fd4df74e146f1ae4b8942f675e20"
+        "sha": "39a94c5646637a5b4246f6f1dc65af67f6dc0c51"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-00.json",
@@ -1733,19 +1733,19 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/CUSTODY_INPUT.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "24e1d059396ed8f46f0a146f93cca483261a6d1e"
+        "sha": "72e02b044789559c6bb34463d7f5d01edb83897a"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/PROBE_CUSTODY_RESULT.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "1608150423fee65581d82475283a6f43bbaae311"
+        "sha": "74a73d67e9cf3ff46bc58355d70244ea8776c714"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/PROBE_EXECUTION.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "cc84771f49e8ab56b8862bacad1c33014d45d51b"
+        "sha": "bdd6c55434b476e1ff25812d93433440856ddd96"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/PROTOCOL.md",
@@ -1907,13 +1907,13 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/COMPANION_BINDING.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "59754a53c7312108ca72c09f5f490f7181cd6a21"
+        "sha": "ca38a7922cb154e04c9a4ac72be76ef3f1c96c6b"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/FILE_SEALS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "06ea155cedfe75c7bbe4bd8cba71fd976f79c442"
+        "sha": "f174c6018e66b15bbd63b2ce3592621c41088721"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/INPUT_SEALS.json",
@@ -1931,7 +1931,7 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/REVIEW.md",
         "mode": "100644",
         "type": "blob",
-        "sha": "5f637453062b3d33c445e020f0ae11ba4c4efe05"
+        "sha": "9e0badf6b095794a4568cdbe1f2cf492cd292064"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/audit_base.py",
@@ -1985,7 +1985,7 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inspect_inputs.py",
         "mode": "100644",
         "type": "blob",
-        "sha": "0df30b1828b16d0a3740ca7891a444d18bc68c6e"
+        "sha": "9c3f73302cde310896df4e81727fdb656a493f2a"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/raw_custody_v3.py.T01-T02.diff",
@@ -2117,37 +2117,37 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/FILE_SEALS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "6e8951c0021a941a29bc93ea80b925fd4f5864d9"
+        "sha": "0ab99e60f2c3de4a3848e76a4318b4b2baabd370"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/INPUT_SEALS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "c7b0756a6e678ea2798261fdb83e9c86bd5bde7f"
+        "sha": "6df8fe9b0a17ac7c718278551c3a36d813708580"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/REVIEW.md",
         "mode": "100644",
         "type": "blob",
-        "sha": "d6c64f2b73f4c48e6f8e6e3cafe176a7e5ab911a"
+        "sha": "782436efbd911042ad25c39ff22b438b1e780a57"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/FILE_SEALS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "27c96cf2c25533c8dc22462e9778e2d1f411e1ae"
+        "sha": "5a87aef44b405f0bc52c0c6f0545b22745876d84"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/INPUT_SEALS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "c2fdbbe5e8a617571b25ce39920bfdbb36ff22ac"
+        "sha": "67f1e1d4d6b54341640ec2d26a68c0ad8a9153f1"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/REVIEW.md",
         "mode": "100644",
         "type": "blob",
-        "sha": "18703f18dabb562da3ccfc2af7bb1e9be5b20786"
+        "sha": "c7d1baf26a43aef29ead0335baa3466d9d6d9c4d"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/T01_T02.diff",
@@ -2183,13 +2183,13 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/DESIGNATED_SOURCE_OUTPUTS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "36e48a6a4e5b4e2592ad7d3fa90fd3800f6f5185"
+        "sha": "7d5e19be04c2c0165111f8b9e885ef8fae1c511a"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/E4_EXECUTION_INPUT.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "89dab4bdb446bb26d06c4de26ca8d32ea5c32674"
+        "sha": "0511732910164cc063ce6c06730fff678e679e8a"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/FINAL_T03_REVIEW.md",
@@ -2207,7 +2207,7 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/RECOVERY_RESULT.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "b930bffab5a0e9c9e9ad2b5f65804c236b199e51"
+        "sha": "edc30a7f507a80ba4468b78e01eac82c7f0763a3"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/ROOT_POM.xml",
@@ -2231,7 +2231,7 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/admission-fixes/FILE_SEALS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "17e6382a79b2a4653e9ca1cf0e05868d30f312ee"
+        "sha": "f028dbce1078dc20f9a6923e3a17c82b43b13080"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/admission-fixes/REVIEW.json",
@@ -2261,19 +2261,19 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/admission-fixes/run_verification.py.diff",
         "mode": "100644",
         "type": "blob",
-        "sha": "4f7e5b1db2b3f577c453d6d9a4754b9548af21d3"
+        "sha": "73f6f681887e09529242a14c0ab5f5d4c8d4e9a9"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/FILE_SEALS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "e58ea8f84074cf29d1d4e53f7c129159ba4c6aa3"
+        "sha": "31a284ab70adbd604b02846d5c2de293d95ea2ea"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/INPUTS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "381e8da82171f93a71b86ae2059e04cc14d2c1f0"
+        "sha": "2633b3d1030358cd65ff71095c10222d197cbb9b"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/REVIEW.json",
@@ -2285,13 +2285,13 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/REVIEW.md",
         "mode": "100644",
         "type": "blob",
-        "sha": "6288747755e045041dcee8d201cc67ef6141176e"
+        "sha": "1023c43e7fbf58e87e7ab1b270af585e503f99b7"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/STATIC_CHECKS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "69e490b227cb8fc55da51031019fdcbcb1ecce9a"
+        "sha": "7cc61c46885b03215d00552d430974ce3cfe3acc"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/author_e04_v3.py.diff",
@@ -2315,25 +2315,25 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/fixture-freeze/FILE_SEALS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "7c53117bf28203b413d076865022ebd9fa92b645"
+        "sha": "2969397eae8ce4d4d34dda42ab49069234edea88"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/fixture-freeze/REVIEW.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "47f6539fad27eb64ac4a8fb057f00131852f7c42"
+        "sha": "f7e9a4badcf3342ce4f6654d598faa7c6461ff1c"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/fixture-freeze/REVIEW.md",
         "mode": "100644",
         "type": "blob",
-        "sha": "3ab1954aaa583ffc761dbd93dfb041973121ffce"
+        "sha": "cff6248ac092869685495ed1234082307d440535"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/fixture-freeze/STATIC_CHECKS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "e2e40e25a5faf3abc218fb73ce5d2230d003cd22"
+        "sha": "c6c443817a6daf9840491e84e82b45f609e5b4aa"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/fixture-freeze/revision.diff",
@@ -2345,13 +2345,13 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/initial/FILE_SEALS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "67803e7194684c0ce9eb422976c8dc8963cadab1"
+        "sha": "28685d0f40323fec684737768ce225de4f8dff5d"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/initial/INPUTS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "677de5d83fbb9d022db3ad797566e05be58047de"
+        "sha": "c34134dc00fec6732e1da19bc6df7824843f4da6"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/initial/REVIEW.json",
@@ -2369,7 +2369,7 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/initial/STATIC_INPUT_CHECKS.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "2c3ef21ccda565282ed2e8a7001972ddcac5c95b"
+        "sha": "18112e79afa1473286585b20e442e8a43ca32cc0"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/01-check-E3-preimages.json",
@@ -2567,7 +2567,7 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/inputs.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "0d7c2fab780308c2774707b5e442c776b3950dbd"
+        "sha": "ce3a5856d0062a89248dd6516aed48e206395292"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/receipt.json",
@@ -2579,7 +2579,7 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/DERIVATION_INPUTS_V3.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "b33cb29dc8752f163e7d330797525d5b41244499"
+        "sha": "b7913d5fe2135309570eabdbf853b870a75577fe"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/FINAL_SOURCE_INPUTS_V3.json",
@@ -2591,19 +2591,19 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/author_e04_v3.py",
         "mode": "100644",
         "type": "blob",
-        "sha": "471660134d949a27f6c5dc672222b1b05fbd06b3"
+        "sha": "29996516e4927d924d224e35396b528e3bdab8ad"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/check_references_v3.py",
         "mode": "100644",
         "type": "blob",
-        "sha": "1773e3f5c40cd886caefe3e0ea7fb7be0e6c2fa8"
+        "sha": "e5b4f04f680a6b236400b0ba3525e1e34ff74712"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/current-context/CONTEXT_REFERENCES.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "244ccde33cb6ff34bdd33eeec78eb4f88cf70dff"
+        "sha": "7bff1daf817cc6a62d003c5ecd00af5762f036a6"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/custody-v3-proposal/LOCAL_EXPECTATIONS.json",
@@ -2615,13 +2615,13 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/custody-v3-proposal/READINESS_T01.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "70bdd5e5175ee08df6ae33669f95070b80721329"
+        "sha": "974300e1ba6428cde7cd8f1ea02c2c85bff6246d"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/custody-v3-proposal/READINESS_T02.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "e0015290efe3effb83bc3f02c3e475fe3f70f1da"
+        "sha": "9becf91908ce7039c2bcc4fd392f3ee0d7c3854d"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/custody-v3-proposal/revisions/before-two-fixture-freeze/revision.diff",
@@ -2633,37 +2633,37 @@
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/derive_source_handoff_v3.py",
         "mode": "100644",
         "type": "blob",
-        "sha": "de2595ee839a468de5721559c9c1df1b910301b1"
+        "sha": "807ed88f740ad271548191ad5450f34b0da936f0"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/publication_custody_v3.py",
         "mode": "100644",
         "type": "blob",
-        "sha": "ab6182b9f208b27d1e9c54e6d6a51fe7a465c344"
+        "sha": "2d49e8645ca0531a24e3bae2f07cd31e1dde340d"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/run_verification_v3.py",
         "mode": "100644",
         "type": "blob",
-        "sha": "ae10df70d469cd2ecb353e3dc018921af22bff30"
+        "sha": "79b85ea68deb5b37e84c67f13b29c809ccb10f42"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/seal_publication_v3.py",
         "mode": "100644",
         "type": "blob",
-        "sha": "a59361750739b1d838b8a4b496104d6faaa78fc0"
+        "sha": "8a7cd1df79664cee3a47103ee5c0932d74474154"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/source-prepublication/DESIGNATED_COMPARISON.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "bce1ca31de665bd595c1d6b86feb3ed7a2e1d420"
+        "sha": "ed448c35d36515c3de1b5408d7629c5e818c337e"
       },
       {
         "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/source-prepublication/PROOF_SELECTION.json",
         "mode": "100644",
         "type": "blob",
-        "sha": "63c8c6555ae3dbf428282d167943e84fb7e4543d"
+        "sha": "8f5eaed1ce3147641e07250a41c8e74f4bb5ac22"
       },
       {
         "path": "make/m3/tooling/migration-recipes/verification/jcc-source-final-handoff/pom.xml",
@@ -2680,8 +2680,8 @@
     ]
   },
   "inputs": {
-    "receiving-merge-audit/TREE_AUDIT.json": "ec309de8e791dbc8e38124f747ca4bbcc0867c9d7b8e057f793b897c6c85d840",
+    "receiving-merge-audit/TREE_AUDIT.json": "e5851995652d1bc248dacb7df48c23a0fd678d710a71f61fcf91f6872711dad1",
     "receiving-merge-audit/calls/current_refresh_root_tree.json": "935ee67b3ce4bb166b6d82abe2feb1b2f97b4bdb1c33e0be70f47659c4d82da8",
-    "receiving-merge-audit/calls/current_refresh_m3_tree.json": "d1016d7fe37b9436dbca31b651865266db5e31666ad28c334551fc3f7dbf73f1"
+    "receiving-merge-audit/calls/current_refresh_m3_tree.json": "a772161a6f292953a22df11e471f70ee70b340b2cece7396feff164d66980f5f"
   }
 }

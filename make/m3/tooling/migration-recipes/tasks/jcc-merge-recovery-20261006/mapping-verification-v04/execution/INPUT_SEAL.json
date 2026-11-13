@@ -62,21 +62,21 @@
     },
     {
       "bytes": 251524,
-      "git_blob": "f350c7c79e265c788d9e3278eb0103733b301327",
+      "git_blob": "7d43a1dc26becb45aa69616d47c9e8224a37611d",
       "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/history-0014.txt",
-      "sha256": "abfc59de62d46f6442b95717ac367461ab057cd74ed9dfffc6515d7fb0a1574c"
+      "sha256": "a91ad1cb7d7f358fb7c4e280b7bf3756db9dd2d6f387f4c7e622e232ff03c0bf"
     },
     {
       "bytes": 167811,
-      "git_blob": "8fc1846a9d81c1a6cd7e21f66048d9bc4ef2a834",
+      "git_blob": "46b99a0250db3076a602529f5aa4daedfc567739",
       "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/history-0016.txt",
-      "sha256": "59b1491a232e3eabfd0530cbf47b01265603e6f493e382aa3c394c629b0516b6"
+      "sha256": "a0b20e45bb5d5e8f4a684ee0d4daa7a9cf8730529ae784a09778b17aceabea11"
     },
     {
       "bytes": 355729,
-      "git_blob": "6bce7c06e322a1d43526e775a006856ac4a394c3",
+      "git_blob": "a7d8d443f54ce376f997efab4321972e2b20c1f9",
       "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/after-00.txt",
-      "sha256": "23113e94eba0ac7b745fd8dee95d27fa80fc12100534a32f447c3124879c5e39"
+      "sha256": "4a93f786780896fb5df348f5cc8cbdac20b6bfd5ab66a2a0fd2c8cf8067df308"
     },
     {
       "bytes": 18828,
@@ -128,9 +128,9 @@
     },
     {
       "bytes": 3236,
-      "git_blob": "ac454b124bbb57b9abb852d2e85cbb4d87a1c0dc",
+      "git_blob": "2efa9d09fdec158db43329476ee9ba774057b96d",
       "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/plan.json",
-      "sha256": "7cb7b904314619da8d43b74f74035b15ba08a3c1d065cd94b98e9056c2158a15"
+      "sha256": "1edb9e552c4705d5148a8896c252c79fef9d17a1cbf171e5ce7a3e48894c6ca6"
     },
     {
       "bytes": 396,
@@ -140,9 +140,9 @@
     },
     {
       "bytes": 53850,
-      "git_blob": "91e7249d8fce8ccc71bac98aeb2e5382fb87076c",
+      "git_blob": "13b287fb82607e5d042865edc372a6752a48df83",
       "path": "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccMergeMappingRecoveryV04Test.java",
-      "sha256": "ff551b33ab778594aac33c159c6afdaefabe2a94501c9fb4e71c4809b5ed7823"
+      "sha256": "cf3f5960fc54b65a5d4cb2e80266d59c98d071a1fbed761892dae83cb2497c9a"
     },
     {
       "bytes": 138214,
@@ -158,9 +158,9 @@
     },
     {
       "bytes": 3281,
-      "git_blob": "49443f5bf8f032460be48698fc7358ae57a08359",
+      "git_blob": "d4905978c9cfc2e2664fe0ecdf7c489e6b68ce74",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/MAPPING_RESOURCES.json",
-      "sha256": "09cefec20c7cbcfef8b36e3c8bbbfa2989f413e259135502e39b4f8d73893d57"
+      "sha256": "fa8deda5313b28d700ba890ced1d6a26cf5d72d5c2226567a585d68b65bef756"
     },
     {
       "bytes": 3441,
@@ -170,9 +170,9 @@
     },
     {
       "bytes": 9776,
-      "git_blob": "bbc2a60992494c056f96c253e0883872bb81c1ca",
+      "git_blob": "bd128b87281761dd624dc23da45b0620fd0d6365",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/verify_installer.py",
-      "sha256": "0e3e1c024667364cfc58eb1ac8223b7399039240077f5d5d8346dd617352a0a9"
+      "sha256": "dad0771a02774abc0d732c81aa2e39adc8458561ea0ca5f96e1e1cc1db963f6d"
     },
     {
       "bytes": 1156752,
@@ -193,5 +193,5 @@
   "source_commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
   "source_input_sha256": "7db913209511a230e36a8da12282b3e4a6f84193399821ce9693042f616fa39d",
   "source_root_tree": "a72565e0e67f330f12c712dcc7a3fcbe1d80d24e",
-  "template_packet_sha256": "56a7387d9300d17e47ecb295ff6de19447681bc3f91eb341bb30825062f0bfd5"
+  "template_packet_sha256": "e1b5d9b0e31a39e3b73efef8dba269941c109a49fb4fd8ce2ce622b53a1f6db6"
 }

@@ -28,22 +28,22 @@
       "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/integration/hosted/QUALIFICATION_PLAN.json",
       "targetPath": "make/m3/tooling/joined-range-directory/fresh-owned/QUALIFICATION_PLAN.json",
       "bytes": 5936,
-      "sha256": "2cc6cf3e4cb8c1d462ab359f30ae50079d810d91240088aa03ebacda12ab9367",
-      "gitBlob": "405aa4735dc715f0f6fe7df945e0348e89b87dde"
+      "sha256": "ea755f88a2d30eb7fa9c5ce536977ac80104a6220e8d0b671b41c44e87bf3a6a",
+      "gitBlob": "6c1b9954c81557217cbb90375314458ae02aa12b"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/integration/hosted/SOURCE_STATUS.json",
       "targetPath": "make/m3/tooling/joined-range-directory/fresh-owned/SOURCE_STATUS.json",
       "bytes": 4855,
-      "sha256": "a9f317b199e201e4e0edb362e64ca833add40d5bdca37c4e5c13d74608f5cf36",
-      "gitBlob": "4a9ca3c482182e73be37c70ef2780df58de2ec92"
+      "sha256": "74973b0bfcbf46262474ffca42720be59f9544d17c0b025c7fd81d2f918d856b",
+      "gitBlob": "a753b2a066aa68a425cdf05048fbd6349249ab7e"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/integration/hosted/qualify.py",
       "targetPath": "make/m3/tooling/joined-range-directory/fresh-owned/qualify.py",
       "bytes": 96049,
-      "sha256": "5b7409349105a6a514c4827b2b7b0251a1cb5fff12ab47264a52e3a6e5815edd",
-      "gitBlob": "43e556be50996136faa3c63f0f2a4e4aee91b36a"
+      "sha256": "07bffce28207303d6122010e2ea9c5c2ccb2ab40dd8c892269cc680c2d77f2f3",
+      "gitBlob": "4c4030926d17d8925841b6dae9b1edfec7f81149"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/FOSS_REUSE_DECISION.tsv",
@@ -293,9 +293,9 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/integration/bindings/parent-source-binding.json",
       "targetPath": "make/m3/tooling/joined-range-directory/source-binding.json",
-      "gitBlob": "566cb6abe154054cf7b08cf1a1db8d5042830e1d",
+      "gitBlob": "70720f64c0dba103cb5fd9253637ca03ae6c5ae8",
       "bytes": 21504,
-      "sha256": "d0e83c596fd5266ac66b70b960307da5a61eba79c78cd7ccfca8537ffd75c17d"
+      "sha256": "c5bea8a8f0ffd9ea2b2cb7598cb89cb2bfeb2f71270ab8aef3b2b4995e6eb395"
     }
   ]
 }

@@ -28,7 +28,7 @@ CURRENT_V3_RECEIPT_BLOB = "cacfab995ec8746c5d5db65cc5a3df12f03dc41a"
 BEFORE_V2_BLOB = "d07a222453c53bff7a5784e05cec8f868c5d3a07"
 SUCCESSIONS = ("m3/collections/interop/qualification/"
                "current-source-successors-v4-20261031/SOURCE_SUCCESSIONS_20261113.tsv")
-SUCCESSIONS_SHA256 = "4796402ab39dcc91e0902312b1878a53fb6a1048397a59371b543afc0a682c98"
+SUCCESSIONS_SHA256 = "cd9d44681f69b0f95adb990d6274fb04ae2233343385e0eb3966efd5a7e4ccac"
 APPROVED_PREFIX = "m3/collections/interop/src/"
 DISPOSITIONS = {
     "NAMESPACE": 44,
@@ -48,7 +48,7 @@ ATTRIBUTIONS = {
     "make/m3/collections/qualification/mergeloss-01-15-20261106/EDITS.tsv":
         "a6949d00ad72a8a631728d1b8116521b40edc2484150398027b216d2e2beb1e2",
     "make/m3/collections/qualification/foldaudit-collections-20261107/EDITS.tsv":
-        "92e1957330a6b8c5874a4452bb258b9fe772342c87a27c61f0e5bd34f7cf66da",
+        "a22e89e20c3b368063e4dac185b6e06fecc537cd448eb98c73684b39d213e266",
     "m3/collections/interop/qualification/bindings-gating-20261107/EDITS.tsv":
         "d39d7503ca53aa2a696e46760bff70d911a69ab909360c60f1090179b99b9b18",
 }

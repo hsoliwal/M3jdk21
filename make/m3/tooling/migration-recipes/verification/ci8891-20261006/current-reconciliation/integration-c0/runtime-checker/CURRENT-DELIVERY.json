@@ -14,12 +14,12 @@
         "bundle": {
           "bytes": 209211,
           "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/packaging-authoring-v1/bundle/BUNDLE.json",
-          "sha256": "40e8797584a89cfb9b72c05250f12b45fccd74c96b0f4cd5c9902440266b9bc8"
+          "sha256": "f04583ac05ab6197ab1f657449fa3770382e0167858006e29db72251c47058f7"
         },
         "execution": {
           "bytes": 1666,
           "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/root-packaging-v1/RESULT.json",
-          "sha256": "553fd4673fc09efccbba243a4eb804ea38a7a33d0a905879f5692b2316b7ffdf"
+          "sha256": "064c67bdd7e880167df1631d5359c811dc2a58f3e3a390b626990d142bda3fc9"
         },
         "flatProjectFiles": 16,
         "hermetic": false,
@@ -27,12 +27,12 @@
         "projectReady": {
           "bytes": 11481,
           "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/packaging-authoring-v1/PROJECT-READY.json",
-          "sha256": "c0802587c8747ed160a94c01a63db5cd2302992e9d17daea1426dc77dc252ddb"
+          "sha256": "eb8f65ba491fe12dc70f301f5b83f7b26acc97034562e4985f675ec0682b4573"
         },
         "readback": {
           "bytes": 1399571,
           "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/packaging-authoring-v1/READBACK.json",
-          "sha256": "c9215d6a5b8e5c10354fc42a1463d3a0cedbcad3937f4558428c0bcdcf7b6ecc"
+          "sha256": "dd12c972032f44b241cc6948c15bef1946c4f16b9156cf8fd4b498c730786e8a"
         },
         "status": "PASS_SELECT_PACK_VERIFY_EXTRACT_FINISH"
       },
@@ -130,12 +130,12 @@
         "bundle": {
           "bytes": 235613,
           "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/packaging-authoring-v1/bundle/BUNDLE.json",
-          "sha256": "fcc9ad208d1e0af28985fd4ec0b7c9f22d1f1cc9760668964eadf92c6ae444ce"
+          "sha256": "40b90d994496b26cd8b0329b87da22a2df8cac148af78c0dc3c540a7c7f51010"
         },
         "execution": {
           "bytes": 1660,
           "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/root-packaging-v1/RESULT.json",
-          "sha256": "8dbba3061d4aacc6fba5df1ec374582041820a1cabf0b5dfc4e8a9d6621fe13e"
+          "sha256": "27e285c7baa77179999bfee4ac4ad0f20236663cc75ce84855f7f53dfd832a91"
         },
         "flatProjectFiles": 20,
         "hermetic": false,
@@ -143,12 +143,12 @@
         "projectReady": {
           "bytes": 14401,
           "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/packaging-authoring-v1/PROJECT-READY.json",
-          "sha256": "66e83981ec9c970895e551fc6bc3af355096f66591efc121b144f01aef7b36e4"
+          "sha256": "e357f677a23743926417a74e513cb7c80a4323fbbb25a63586ca26de853761e8"
         },
         "readback": {
           "bytes": 1388548,
           "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/packaging-authoring-v1/READBACK.json",
-          "sha256": "012fda27d9a7926b717dc20e90e8136382e894bb50cef860283aa632ae366a74"
+          "sha256": "f38289f357fee43064120a5cb5737d57a522a33637d7d39a063d7cc1f4c30869"
         },
         "status": "PASS_SELECT_PACK_VERIFY_EXTRACT_FINISH"
       },

@@ -3,12 +3,12 @@
   "status": "PASS_EXPANDED_RECIPE_WITH_ROOT_CPU_REVIEW_SCOPE_ASSESSMENT",
   "proof": {
     "path": "PROOF.json",
-    "sha256": "9f554ffd2d24352d659ce1c336a821917fc7c850c6b863c7a2e13dd7c7fb049e"
+    "sha256": "1d477a7d639d40ecb0f2112351ea02ec0ee4f2474a83bdcb198261ba233aff3c"
   },
   "completeTemplates": "templates",
   "priorProofUnchanged": {
     "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\PROOF.json",
-    "sha256": "c339b321169a224851bbb68d2d07cfd0c0d3195236f2f5ce94f035b8f1253e6b"
+    "sha256": "731de46800cd38962f5e1a8c5eed295172d0702baa6e776d25e141cf33f86245"
   },
   "files": [
     {
@@ -53,7 +53,7 @@
     },
     {
       "path": "INPUT_CUSTODY.json",
-      "sha256": "86199f739226ddcd8e70b86eb584648691bab99f160b61559bef0abf52a710db",
+      "sha256": "aa55d3f5c6feb815977b73ffc777b583003bd1c062bca94fcbaec302ce22e566",
       "bytes": 3412
     },
     {
@@ -83,7 +83,7 @@
     },
     {
       "path": "PROOF.json",
-      "sha256": "9f554ffd2d24352d659ce1c336a821917fc7c850c6b863c7a2e13dd7c7fb049e",
+      "sha256": "1d477a7d639d40ecb0f2112351ea02ec0ee4f2474a83bdcb198261ba233aff3c",
       "bytes": 2709
     },
     {

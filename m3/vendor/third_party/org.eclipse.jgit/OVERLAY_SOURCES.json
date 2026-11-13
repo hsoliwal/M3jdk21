@@ -6,7 +6,7 @@
       "base_sha256": "8abe13c904e97722019c414858e3b8a6ba49c17e33277fd688d5148a06aedc98",
       "overlay": "JGIT_BASE64_TO_JDK v1",
       "recipe": "make/m3/tooling/jdk-superset/retarget/tools/jgit_base64_to_jdk.py",
-      "recipe_sha256": "6619e764d6f90ad50e9a2fcb69d2fcf3e7aa753847db95d325cf04933c6b83ea",
+      "recipe_sha256": "82339177567da36ae13a268abfc47693ffb8cd84545fde9fecf2fbc0b6c241b5",
       "repository": "m3/vendor/third_party/org.eclipse.jgit/src/main/java/org/eclipse/jgit/util/Base64.java",
       "sha256": "45be92b2b35567d2889d36f18ccbffcace35dfd5a2d18190fff6a31e660be47d",
       "upstream": "org/eclipse/jgit/util/Base64.java"

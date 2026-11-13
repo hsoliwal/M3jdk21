@@ -20,7 +20,7 @@ The runtime lane patches stock `java.desktop` with the exact generated owner and
 
 | Generated path | Before SHA-256 | Result SHA-256 |
 | --- | --- | --- |
-| `src/java.desktop/share/classes/sun/swing/list/M3ListMeasure.java` | `7e8c239ec674eb2d79f83904616e00e0421b82eda67c718f295e08b3fafd1577` | `d4aff8b10ff19caeeacdbf8e464fd9d6ab3899c35502758ea58ea03999dd1635` |
+| `src/java.desktop/share/classes/sun/swing/list/M3ListMeasure.java` | `7e8c239ec674eb2d79f83904616e00e0421b82eda67c718f295e08b3fafd1577` | `83674177bdfa19c556ab97042dcc6f572ad96f64994b2e26fbaa88b7e6aad70d` |
 | `test/jdk/javax/swing/JList/M3ListMeasureCustomLabelUITest.java` | `ABSENT` | `a028f1002cd87e8fc7171488df2d710bf274a1d31585a53ea867df3b46dac226` |
 | `m3/ports/swing-viewport/jdk-reproducers/M3ListMeasureTest.java` | `9f4367476a41bcfb032aea15b9eb49382c9222b5d91fabd124025ba95f38ad9c` | `901e447f8ad9785b61cd9239335808959520f6ef138bf84940272077b158b7be` |
 

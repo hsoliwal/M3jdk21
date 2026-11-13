@@ -4,7 +4,7 @@
 
 [Guide](README.md) · [Pattern integration](bootstrap-pattern-query-contracts.md) · [String facts](bootstrap-string-precompute.md) · [Mapped backing](mapped-string-storage-reference.md)
 
-This reference covers the complete [M3TQ.java](../../src/java.base/share/classes/jdk/internal/mindex/M3TQ.java) source body: the `M3TQ` query, `Op`, `Facts`, the temporary backing reader and all composition/search/rendering helpers. The reviewed public source is `e7d21edf0f998c3c53ab0d0909972a4a97dfc471`, blob `533a07b77061e757d476627557413f6df1067d34`, unchanged from the P03 inventory at `278b221e8365ebeb6095a3a5643b38a0564258b5`.
+This reference covers the complete [M3TQ.java](../../src/java.base/share/classes/jdk/internal/mindex/M3TQ.java) source body: the `M3TQ` query, `Op`, `Facts`, the temporary backing reader and all composition/search/rendering helpers. The reviewed public source is `e7d21edf0f998c3c53ab0d0909972a4a97dfc471`, blob `639acd53a32d0c7de879678d18de58423937c0fb`, unchanged from the P03 inventory at `278b221e8365ebeb6095a3a5643b38a0564258b5`.
 
 `TQ` means Trigram Query. This owner describes necessary conditions on UTF-16 three-unit membership, not class metadata search and not a serialized query image. It is internal to the unexported `jdk.internal.mindex` package of `java.base`. There is no dependency on donor modules or an optional native backend in M3TQ. Public `String`, `Pattern` and `Matcher` remain the API authorities.
 

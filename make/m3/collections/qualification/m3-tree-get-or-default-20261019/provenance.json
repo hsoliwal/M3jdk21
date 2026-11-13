@@ -7,7 +7,7 @@
   "manifestPath": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-tree-get-or-default-20261019/manifest.tsv",
   "manifestSha256": "fbcf4dd882e42af2e391e9ecfd724ce2e9df5b64b5772cd114fc4f7b3cbb4ed2",
   "proofScriptPath": "synexia-openrewrite-recipes/verification/m3-tree-get-or-default-20261019/replay.py",
-  "proofScriptSha256": "d0989f30af30b60a1bff65f6b99cc3229063c51e9a8c703a92e3ba45890de81d",
+  "proofScriptSha256": "5cfec9c79420b4f963b78c75e1ba1784dc1e539e07064e17e2eccccfafcd9ffe",
   "license": "Apache-2.0",
   "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
   "donationMode": "EXTERNAL_RECIPE_TOOL",

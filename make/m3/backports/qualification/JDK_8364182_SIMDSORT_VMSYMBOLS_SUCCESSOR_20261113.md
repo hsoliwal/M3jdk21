@@ -41,8 +41,8 @@ still fail closed.
 
 | Product path | Source Git blob before | Exact Synexia-generated product Git blob | SHA-256 postimage |
 | --- | --- | --- | --- |
-| `make/m3/backports/verify.py` | `e4ad2b11da3cd8352997c57686f24d70502bdbe8` | `9e2441357202a06e6631267c4dc4897209df351c` | `44281f429b240ed8604ca4eb9e7061bf8e1500f0cc721ddf9a8dc0d63bf8620c` |
-| `make/m3/backports/test_jdk8364182_source_lineage.py` | `f9036900225b4327501b07e850dea6fd84fd0652` | `8ef2ef4743be947253ed647c6874e476cb43879e` | `5eb5c4ddc29f165d2eb7bf0c53c03f36a9ef81a7712d404a12a3e2cbaf0a045f` |
+| `make/m3/backports/verify.py` | `e4ad2b11da3cd8352997c57686f24d70502bdbe8` | `e79e5e8cec116b474e212bbc397f3d8962afee2a` | `c2d337c4877102ba5428c62911aed308e185c8a601adb19e39ffc175a78af124` |
+| `make/m3/backports/test_jdk8364182_source_lineage.py` | `f9036900225b4327501b07e850dea6fd84fd0652` | `8c99c1db4e0392daa3f0b92b69049f8f442d2e44` | `cb468ad25423a50cadce8c77cbd2fb697e20b55e7862d4a82022204ebd0b6a84` |
 
 The existing source-owned `M3HashPinnedTextSnapshotRecipe` manifest is Git blob
 `972e1618d1f62ff43c437abb0d97a94373fe3c67`. Both public postimage Git

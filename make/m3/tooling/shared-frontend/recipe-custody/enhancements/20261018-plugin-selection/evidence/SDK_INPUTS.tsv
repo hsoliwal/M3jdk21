@@ -4,7 +4,7 @@ crate/contract/test_prepare.py	82de5be54cd1dd944c2b399f83a4f88d642ebf046a04aa935
 crate/contract/verify_receiver.py	1b877f8af0269fbc2b8cd7ef0a98245de5f044ebc5d8dae1f91bc1d8a1acd7e2
 crate/datasets/m3jdk21-plugin-selection/DATASET.json	995d73cf2ba01f7aed736964ce6054e26e791bc06c530e8d7fcf15cac3a1f134
 crate/datasets/m3jdk21-plugin-selection/ENGINE_EFFECTIVE.tsv	80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23
-crate/datasets/m3jdk21-plugin-selection/MODES.tsv	445ee7f4c108b2c028e8c575724dbdc042d0b57923b2e94f479f1acae3a3a503
+crate/datasets/m3jdk21-plugin-selection/MODES.tsv	3c01018d47e196cd9ee40f52cdd9945fce4f0a001d4602fcb58df7fef98b3c56
 crate/datasets/m3jdk21-plugin-selection/resources/META-INF/rewrite/m3-ast-build-reverse-20261017-m3jdk21-plugin-selection.yml	e1d674112fc4769f63c34d7178d10d1235d3c7a0f6ecdb25be9481ce2dc79f9a
 crate/datasets/m3jdk21-plugin-selection/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-m3jdk21-plugin-selection/0003-M3AST.java.txt	0c451956dbaa3cffcdd5e05705501c192b913048a7afd7562982aef584c9d37a
 crate/datasets/m3jdk21-plugin-selection/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-m3jdk21-plugin-selection/0004-M3ASTPC.java.txt	3e43390b9d9df94da9943b101c809f1bdc4c1039e825976b2cda72acb8c56b28
@@ -14,7 +14,7 @@ crate/datasets/m3jdk21-plugin-selection/resources/com/synexia/rewrite/hash-pinne
 crate/datasets/m3jdk21-plugin-selection/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-m3jdk21-plugin-selection/pre/0004-M3ASTPC.java.txt	8b426b59796942253765c0fe45725d4b3e0f3640a3dffe4ec3d8c44413109bb3
 crate/datasets/m3jdk21-plugin-selection/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-m3jdk21-plugin-selection/0001-m3-ast-plugin-selection-20261018.json.txt	1a6a9ba3fcdfd8072ff00e10c7e6692be2f1b152cad81277c263382a860cae10
 crate/datasets/m3jdk21-plugin-selection/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-m3jdk21-plugin-selection/0002-README.md.txt	c9baac52f80f27657e677de8ce993a114bc6c7f26bcf68d82723977ff4b57d03
-crate/datasets/m3jdk21-plugin-selection/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-m3jdk21-plugin-selection/manifest.tsv	bdfc8278128eeeec4f36529e72efa605cfb830b0f7ae2c6718a163baf42cd940
+crate/datasets/m3jdk21-plugin-selection/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-m3jdk21-plugin-selection/manifest.tsv	5b4ca18e126a28ce0d486cd79f60d5aca089fab1b0e5c784d67c600e0d36d168
 crate/pom.xml	56567ab0175c47dbbada68bec8fe0fd9bbe027d6174c5cefef695a0b7283d448
 crate/prepare.py	912cd376f0754469d6fd17325b15e44e8b69725c6af92d99aac5d9a20b4989f0
 crate/receive.py	bf80f52c20549eecd0959cad9824aa078c3ca857859ee66cc3765c6bd7045246

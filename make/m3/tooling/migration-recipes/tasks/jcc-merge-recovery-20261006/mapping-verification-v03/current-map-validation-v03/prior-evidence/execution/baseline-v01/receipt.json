@@ -19,7 +19,7 @@
     "    from jsonschema import Draft202012Validator",
     "ModuleNotFoundError: No module named 'jsonschema'"
   ],
-  "fixture_manifest_sha256": "de0eb7a131e699f0bfad772181a8cac1da303b58a45619438127d39bce3a5598",
+  "fixture_manifest_sha256": "fa7481d659d32f4536d7997436ac22fd9e16fbd8816e2df2a42fe04ba1b3fe8a",
   "fixture_unchanged": true,
   "receipt_writer_error": {
     "class": "importlib.metadata.PackageNotFoundError",

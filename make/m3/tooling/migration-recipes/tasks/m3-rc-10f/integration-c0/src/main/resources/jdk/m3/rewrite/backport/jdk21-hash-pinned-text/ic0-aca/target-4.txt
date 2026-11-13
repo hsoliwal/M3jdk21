@@ -38,7 +38,7 @@ final class M3A3AlgorithmCatalogueManifest {
                 "src/main/java/jdk/m3/a3/A3Alg.java",
                 new Target(
                         "ABSENT",
-                        "f10cfcf833d845dcc621c5c5085c0a3125b8cc14",
+                        "8e32d78d4127e31b8e325722f5210e2462b688dc",
                         null,
                         "after/A3Alg.java",
                         false));
@@ -46,7 +46,7 @@ final class M3A3AlgorithmCatalogueManifest {
                 "src/test/java/jdk/m3/a3/A3PlanTest.java",
                 new Target(
                         "4fe10060e31b23cd778f69c63033f27e7fc72d83",
-                        "1fb13b93f6ec9ec220aed71385dfa65edd20e8c1",
+                        "d672c0d99c7b4285cf831e9cc15f2cc41e731dc1",
                         "before/A3PlanTest.java",
                         "after/A3PlanTest.java",
                         true));

@@ -1,7 +1,7 @@
 {
   "canonical_baseline_receipt": {
     "path": "current-map-validation-v04/execution/baseline-v01/receipt.json",
-    "sha256": "4211ce07acc08c18c4ba08b0efc7e205299b989623b5c09773ccfaf4a1625061",
+    "sha256": "6535e4d8488e79a2991e91dd1cc44b038d2f7411adec848e5ae032892ea9bbd0",
     "status": "PASS"
   },
   "compile_only_status": "PASS",
@@ -17,7 +17,7 @@
     {
       "bytes": 53636,
       "path": "JccMergeMappingRecoveryV04Test.java.in",
-      "sha256": "0c891ed81dd8422572820f30c3b5b119e5584ee28e479c3ffa2ce5cb5d0d7163"
+      "sha256": "b202d32be75ee524aa7fab3693bdd9f23f51a304954703253805a4d70df84832"
     },
     {
       "bytes": 3441,
@@ -32,17 +32,17 @@
     {
       "bytes": 14710,
       "path": "render_template.py",
-      "sha256": "f058167409d02eb987be01c606b44ea55eccc9e4815f6915acb694ce496ad2f7"
+      "sha256": "d04f4bf925106f107a5534aa747e835ff7d362ae34ffd50ffe9007f4bdb0395a"
     },
     {
       "bytes": 3967,
       "path": "README.md",
-      "sha256": "79fb00cf89776bc0564b7ba4534dc397e1e2d8aa60dbbfb512da482b5ea98267"
+      "sha256": "cb9a39a5e3224ecb1958b7705fca84aabf1631f1f270be68434029ab4367fbab"
     },
     {
       "bytes": 6239,
       "path": "compile-check-v01/receipt.json",
-      "sha256": "f49077c35146e68ccab757f6fea9f0e62a2f5254d691f6383a0cdacf9262e3ea"
+      "sha256": "7bd78ff779ada9dabfa6cccc85b2f589c4505f2b1693c06d00f5baee63dea154"
     },
     {
       "bytes": 0,
@@ -57,7 +57,7 @@
     {
       "bytes": 3601,
       "path": "self-review-v01/receipt.json",
-      "sha256": "685496638039a4a4d8ea4d7c5cec52f74bf9670dab9f256c19961822098f082e"
+      "sha256": "e42367a6f842962aa2c93a4c599a9a024cda96b5d1adf7c0b3ef7250a781778c"
     },
     {
       "bytes": 0,
@@ -81,11 +81,11 @@
   "junit_methods_executed": 0,
   "materialized_result_property": "m3.mapping.materialized",
   "named_recipe": "jdk.m3.rewrite.backport.JccMergeMappingRecoveryV04",
-  "previous_qualified_publication_manifest_sha256": "071f16e072b74517d9446f9da449ed6d8ef711a79e71c2523717c648bd9bcb68",
+  "previous_qualified_publication_manifest_sha256": "d2d4b192ce9a398acd6ba35f6b334811de8c495b30571007f85b6d9a506bb8b5",
   "previous_template_packet": {
     "path": "candidate/mapping-v03/java-template/TEMPLATE_PACKET.json",
     "sealed_files_verified_unchanged": 31,
-    "sha256": "9d24eaf99ff3cc614688f3f1193aaafc96be71a290a080d2835d4d62c267ddd5"
+    "sha256": "7607f56eb966d3e03b1522d53426a15347cec231236e3159450dc71fe672d05f"
   },
   "schema": "m3-jcc-mapping-java-template-packet/4",
   "scope": "Same13controls;exact090current55/53/34/20 andnewglobalnodes preserved;V03actualqualification retained as history. Compile-only and fixture-refusal checks passed. Actualsource binding/JUnit execution performed separately; no acceptance promotion.",

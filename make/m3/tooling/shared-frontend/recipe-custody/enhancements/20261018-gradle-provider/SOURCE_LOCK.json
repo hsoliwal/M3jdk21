@@ -76,7 +76,7 @@
     },
     {
       "path": "datasets/gradle-provider-20261018/MODES.tsv",
-      "sha256": "e22927f5846c08ccc3783308326dae79c4152e862735cf3042c5fe0441c8c6dc"
+      "sha256": "8e0568b0c667951b9157029673faab979b0b52efde3a431e6a65ea7d9bdfc23d"
     },
     {
       "path": "datasets/gradle-provider-20261018/resources/META-INF/rewrite/m3-ast-build-reverse-20261017-gradle-provider-20261018.yml",
@@ -96,7 +96,7 @@
     },
     {
       "path": "datasets/gradle-provider-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-gradle-provider-20261018/manifest.tsv",
-      "sha256": "08363d7a77545ed7d0848d085bd7fe1e1c2009fee88ff418e120b003f3ee2085"
+      "sha256": "0a63cd07724c6ce353643dee3ee8bb1ecb2cb3dd356ab7133b2830484494c16e"
     },
     {
       "path": "datasets/gradle-provider-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-gradle-provider-20261018/0001-LICENSE.txt.txt",
@@ -128,7 +128,7 @@
     },
     {
       "path": "datasets/gradle-provider-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-gradle-provider-20261018/manifest.tsv",
-      "sha256": "1caf3e4c3a78b26e2d24e06261759018910f20ab5c70c43209d94f232bdb29fa"
+      "sha256": "75760c32bcbfc2bfaf8ed85dca818c04457f69663b45a315f16a7b980fa96f88"
     }
   ],
   "qualification": {

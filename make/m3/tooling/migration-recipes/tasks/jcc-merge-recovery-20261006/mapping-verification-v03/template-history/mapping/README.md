@@ -60,8 +60,8 @@ The POM also includes exactly two existing historical recipe resources:
 
 | Historical resource in `jcc-merge-recovery-20261006-history-01/` | Purpose | SHA-256 |
 | --- | --- | --- |
-| `history-0014.txt` | Complete prior map | `abfc59de62d46f6442b95717ac367461ab057cd74ed9dfffc6515d7fb0a1574c` |
-| `history-0016.txt` | Complete prior bindings | `59b1491a232e3eabfd0530cbf47b01265603e6f493e382aa3c394c629b0516b6` |
+| `history-0014.txt` | Complete prior map | `a91ad1cb7d7f358fb7c4e280b7bf3756db9dd2d6f387f4c7e622e232ff03c0bf` |
+| `history-0016.txt` | Complete prior bindings | `a0b20e45bb5d5e8f4a684ee0d4daa7a9cf8730529ae784a09778b17aceabea11` |
 
 Use a fresh execution workspace for each harness revision. From its repository root:
 

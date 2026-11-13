@@ -24,7 +24,7 @@ final class M3CharcopyCurrentSuccessorRecipeTest {
     private static final String ROOT = "/jdk/internal/m3/rewrite/charcopy-current-successor-20261019/";
     private static final String DESCRIPTOR = "/META-INF/rewrite/charcopy-current-successor-20261019.yml";
     private static final String NAME = "jdk.internal.m3.CharcopyCurrentSuccessor20261019";
-    private static final String MANIFEST_SHA = "db44f3abf5270084eaa529469f664333fcef6abfe4df73e78d7548f2a3287303";
+    private static final String MANIFEST_SHA = "270bcd43daaf9c10b4ea80796a2c2fd14353c8721905223ae934d95784794f65";
     private static final String DESCRIPTOR_SHA = "e7b8fe613c05d0ed6b5d97c6d384f3bf0638eb57d6432fe0b9ebbaf3f289595b";
     private static final String OWNER = "src/java.base/share/classes/java/lang/M3String.java";
     private static final String FACTS = "src/java.base/share/classes/java/lang/M3StringFacts.java";

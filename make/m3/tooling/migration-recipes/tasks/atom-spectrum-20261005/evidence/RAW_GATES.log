@@ -2972,7 +2972,7 @@ BEGIN_RAW_FILE final-current/00-publication-preflight.json sha256=078229832f13d3
       },
       {
         "path": "make/m3/backports/PROOF_HARNESS_REPAIR_20261005.md",
-        "sha": "d9999d6391ffe3b0a4b9b4b3b8f7142b8c2d9c2c",
+        "sha": "0e09b22c0371d38cba9a3be45bbdb16f1db5531e",
         "status": "added"
       },
       {

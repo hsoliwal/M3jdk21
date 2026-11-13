@@ -782,7 +782,7 @@
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/publication/M3_LATEST_M3.json",
-      "sha256": "73cd3ada7f6ef5c1f9cafce8ccb23d1d9c01141fae573d58ffd488786a90a514"
+      "sha256": "b629f68134a891ceaecabc78a314090979578ec5d16ea54e8b0faff2d3e2e569"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/publication/M3_LATEST_GITHUB.json",
@@ -1637,7 +1637,7 @@
           "Actual Java and text recipes execute fixed-point/refusal gates before sealed-install materialization."
         ],
         "rollback": "Existing sealed-install/1 rollback restores exact preimages and refuses foreign changes.",
-        "sha256": "3b195d75e2fdc32ac31b665c5541bd07d3ffdb11698c499bccfd7bc4c1b4e338",
+        "sha256": "86e090b9f8cbd9424b67505be1131b176d35b28984556e7bdd0d64fee70dd387",
         "version": "2-current-owner-custody"
       },
       "source_state": "implemented",
@@ -1684,12 +1684,12 @@
         {
           "commit": null,
           "fingerprint": null,
-          "git_blob_sha1": "ca23741ecd8cd24593ba5c260aa0d939c53d6766",
+          "git_blob_sha1": "53cb5da67520082e62fffe75272406d3eacb366c",
           "module": "java.base",
           "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
           "repo": "hsoliwal/M3jdk21",
           "revision_role": "candidate",
-          "sha256": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155",
+          "sha256": "225e847c5fb9f0195b37b14810d405dc6cb8ff83156e667dc127d36489cbf7aa",
           "signatures": [
             "Facts precompute(CharSequence,int)",
             "Facts precompute(CharSequence,int,int,int)",

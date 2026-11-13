@@ -807,7 +807,7 @@ index 0000000..641e397
 +      "original_preimage_sha256": "3ab761465800d4fcb67c4a1024174292ee983b617db8708e1c8d451185730cdc",
 +      "delivered_sha256": "6e129506e8e1bb6c8e728ed82ddae11822129da00b708959dc65deb40d2d0e0c",
 +      "delivered_git_blob": "f0b9cf0c109bcdd8fe075732b75f97f781a80353",
-+      "candidate_sha256": "7cb1e78450bd0fd8369482bb64f83035a2485c7a167c0ad2eecef8c125b6f001",
++      "candidate_sha256": "150bf4e956fc260f239e2e0d6f5e89116e1e1bf2906eaf9435e7b6e216320527",
 +      "disposition": "PRESERVE_CURRENT_PREFIX_APPEND_FIVE_EXACT_REPAIR_ROWS",
 +      "recipe_chain": [
 +        {
@@ -821,9 +821,9 @@ index 0000000..641e397
 +    },
 +    {
 +      "path": "make/m3/compatibility/check_object_adapter_progress_receiver_20261017.py",
-+      "current_sha256": "5e44ba190257db7d9715d80e7870d6a1b69f8c76cc3c285182193e80fc0da443",
-+      "current_git_blob": "23384a1f7e7317024b56a2b5c8e8b8c2b650bf89",
-+      "original_preimage_sha256": "5e44ba190257db7d9715d80e7870d6a1b69f8c76cc3c285182193e80fc0da443",
++      "current_sha256": "33597bc4bc5cbf364f6f74886255151034e645c156b751ddeb1654c045114a8e",
++      "current_git_blob": "23966071e709c7e655b72228d742d7d1bf2a6fcf",
++      "original_preimage_sha256": "33597bc4bc5cbf364f6f74886255151034e645c156b751ddeb1654c045114a8e",
 +      "delivered_sha256": "e2c0e81911a8ea4e6d0d6b77eacc36fa4a4aca2c792536b9c32cbcdd40be0404",
 +      "delivered_git_blob": "8261a45b7d9ea5000fcbc2ee7ce117a0eb03991d",
 +      "candidate_sha256": "e2c0e81911a8ea4e6d0d6b77eacc36fa4a4aca2c792536b9c32cbcdd40be0404",
@@ -831,7 +831,7 @@ index 0000000..641e397
 +      "recipe_chain": [
 +        {
 +          "dataset": "m3jdk21-runtime-control",
-+          "before": "5e44ba190257db7d9715d80e7870d6a1b69f8c76cc3c285182193e80fc0da443",
++          "before": "33597bc4bc5cbf364f6f74886255151034e645c156b751ddeb1654c045114a8e",
 +          "after": "e2c0e81911a8ea4e6d0d6b77eacc36fa4a4aca2c792536b9c32cbcdd40be0404",
 +          "manifest": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
 +          "template": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0002-check_object_adapter_progress_receiver_20261017.py.txt"
@@ -916,9 +916,9 @@ index 0000000..641e397
 +    },
 +    {
 +      "path": "make/m3/compatibility/verify_m3_default_template_20261017.py",
-+      "current_sha256": "856910b716021260d387c0e3230c774223d7afc6ba62eab8e0c35668ffc8f2da",
-+      "current_git_blob": "94340b0e9c118d8b821e5dc02f99ae966815630e",
-+      "original_preimage_sha256": "856910b716021260d387c0e3230c774223d7afc6ba62eab8e0c35668ffc8f2da",
++      "current_sha256": "0b6238aeadb710af6599a3688ebfc951729a8921ed67a476697b7edf57245f8a",
++      "current_git_blob": "bc4c443e5e40eaf0bbbf842114a7b83fd2937bca",
++      "original_preimage_sha256": "0b6238aeadb710af6599a3688ebfc951729a8921ed67a476697b7edf57245f8a",
 +      "delivered_sha256": "234293306f44acc4f756816564b9dea6146962b13ac2529397e25f062cce49bc",
 +      "delivered_git_blob": "a81b2aeeb25721dd937726320b48d817aae35b93",
 +      "candidate_sha256": "234293306f44acc4f756816564b9dea6146962b13ac2529397e25f062cce49bc",
@@ -926,7 +926,7 @@ index 0000000..641e397
 +      "recipe_chain": [
 +        {
 +          "dataset": "m3jdk21-runtime-control",
-+          "before": "856910b716021260d387c0e3230c774223d7afc6ba62eab8e0c35668ffc8f2da",
++          "before": "0b6238aeadb710af6599a3688ebfc951729a8921ed67a476697b7edf57245f8a",
 +          "after": "234293306f44acc4f756816564b9dea6146962b13ac2529397e25f062cce49bc",
 +          "manifest": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
 +          "template": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0004-verify_m3_default_template_20261017.py.txt"
@@ -935,9 +935,9 @@ index 0000000..641e397
 +    },
 +    {
 +      "path": "doc/m3/name-mapping.json",
-+      "current_sha256": "a28f218198b30d1292d51836c8912d1f69229ef9bef40a4726a2808bcdcb4d46",
-+      "current_git_blob": "986147e2df24ef25076d451c49782d8e7e354a11",
-+      "original_preimage_sha256": "a28f218198b30d1292d51836c8912d1f69229ef9bef40a4726a2808bcdcb4d46",
++      "current_sha256": "fe21e482d061a08a149c0362c6043a66a2fcd6a91bf253c70eb49728f2ce45e3",
++      "current_git_blob": "343f101c9e7925c17d9949a6328b9744cc351548",
++      "original_preimage_sha256": "fe21e482d061a08a149c0362c6043a66a2fcd6a91bf253c70eb49728f2ce45e3",
 +      "delivered_sha256": "d63db548f89f25622399329148872225a438e9121cb3436d967bccd3bdff0c02",
 +      "delivered_git_blob": "beb622bdb79ad2b6192ff5bcb3f2de59050effdd",
 +      "candidate_sha256": "d63db548f89f25622399329148872225a438e9121cb3436d967bccd3bdff0c02",
@@ -945,7 +945,7 @@ index 0000000..641e397
 +      "recipe_chain": [
 +        {
 +          "dataset": "m3jdk21-runtime-control",
-+          "before": "a28f218198b30d1292d51836c8912d1f69229ef9bef40a4726a2808bcdcb4d46",
++          "before": "fe21e482d061a08a149c0362c6043a66a2fcd6a91bf253c70eb49728f2ce45e3",
 +          "after": "d63db548f89f25622399329148872225a438e9121cb3436d967bccd3bdff0c02",
 +          "manifest": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
 +          "template": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0005-name-mapping.json.txt"
@@ -957,15 +957,15 @@ index 0000000..641e397
 +      "current_sha256": "ABSENT",
 +      "current_git_blob": null,
 +      "original_preimage_sha256": "ABSENT",
-+      "delivered_sha256": "3f88e143299a558a1a4f20c86d012b0823dc9f9ee4d519ce28cd16bc9cf35ff4",
-+      "delivered_git_blob": "aeaed84a0972f7fe84d13bfe561205179629b8e6",
-+      "candidate_sha256": "3f88e143299a558a1a4f20c86d012b0823dc9f9ee4d519ce28cd16bc9cf35ff4",
++      "delivered_sha256": "822242c7a11a7e2dc0ec6bdde0cfa76d7e7784eeffe3722a1c34b32143251a58",
++      "delivered_git_blob": "a333e51b9f6a2f039687ac3bf1a2180cea6f7438",
++      "candidate_sha256": "822242c7a11a7e2dc0ec6bdde0cfa76d7e7784eeffe3722a1c34b32143251a58",
 +      "disposition": "RESTORE_EXACT_ORIGINAL_PREIMAGE_TO_DELIVERED_POSTIMAGE",
 +      "recipe_chain": [
 +        {
 +          "dataset": "m3jdk21-runtime-control",
 +          "before": "ABSENT",
-+          "after": "3f88e143299a558a1a4f20c86d012b0823dc9f9ee4d519ce28cd16bc9cf35ff4",
++          "after": "822242c7a11a7e2dc0ec6bdde0cfa76d7e7784eeffe3722a1c34b32143251a58",
 +          "manifest": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
 +          "template": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0006-CATALOGUE.tsv.txt"
 +        }
@@ -976,15 +976,15 @@ index 0000000..641e397
 +      "current_sha256": "ABSENT",
 +      "current_git_blob": null,
 +      "original_preimage_sha256": "ABSENT",
-+      "delivered_sha256": "6c6e6dca85d5bf211ec04d8164d357918950348c4c3a9413be453c2bb11de364",
-+      "delivered_git_blob": "9b134df4e8d8889cd11ede497a0cbc949bbc7f7b",
-+      "candidate_sha256": "6c6e6dca85d5bf211ec04d8164d357918950348c4c3a9413be453c2bb11de364",
++      "delivered_sha256": "152e7a648d84eb3726375658a8178d1cea2f74e71fca1f62925502a1fcd1acfa",
++      "delivered_git_blob": "6164c8bb8d098d4536b775f135fcaa1f51a140b2",
++      "candidate_sha256": "152e7a648d84eb3726375658a8178d1cea2f74e71fca1f62925502a1fcd1acfa",
 +      "disposition": "RESTORE_EXACT_ORIGINAL_PREIMAGE_TO_DELIVERED_POSTIMAGE",
 +      "recipe_chain": [
 +        {
 +          "dataset": "m3jdk21-runtime-control",
 +          "before": "ABSENT",
-+          "after": "6c6e6dca85d5bf211ec04d8164d357918950348c4c3a9413be453c2bb11de364",
++          "after": "152e7a648d84eb3726375658a8178d1cea2f74e71fca1f62925502a1fcd1acfa",
 +          "manifest": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
 +          "template": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0007-CURRENT_OWNERS.json.txt"
 +        }
@@ -995,15 +995,15 @@ index 0000000..641e397
 +      "current_sha256": "ABSENT",
 +      "current_git_blob": null,
 +      "original_preimage_sha256": "ABSENT",
-+      "delivered_sha256": "1c5b958b528e94183f710dea0f4b7ce9319750407062ca51285bd66286b4d377",
-+      "delivered_git_blob": "9719263ae18432059257bbd120dd8e973af73a4b",
-+      "candidate_sha256": "1c5b958b528e94183f710dea0f4b7ce9319750407062ca51285bd66286b4d377",
++      "delivered_sha256": "de7730a773544c33f94c94b5906bd9fab927d522681cc3b382f631773de6ed52",
++      "delivered_git_blob": "3fb72bed2fbaf17a005a69abe40b794fb6676ae8",
++      "candidate_sha256": "de7730a773544c33f94c94b5906bd9fab927d522681cc3b382f631773de6ed52",
 +      "disposition": "RESTORE_EXACT_ORIGINAL_PREIMAGE_TO_DELIVERED_POSTIMAGE",
 +      "recipe_chain": [
 +        {
 +          "dataset": "m3jdk21-runtime-control",
 +          "before": "ABSENT",
-+          "after": "1c5b958b528e94183f710dea0f4b7ce9319750407062ca51285bd66286b4d377",
++          "after": "de7730a773544c33f94c94b5906bd9fab927d522681cc3b382f631773de6ed52",
 +          "manifest": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
 +          "template": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0008-FILE_REVIEW.tsv.txt"
 +        }
@@ -1014,15 +1014,15 @@ index 0000000..641e397
 +      "current_sha256": "ABSENT",
 +      "current_git_blob": null,
 +      "original_preimage_sha256": "ABSENT",
-+      "delivered_sha256": "04e8ff5ea3b57b861ce4381c120e56584478c1f8004c2397829fb8c59e8dd49a",
-+      "delivered_git_blob": "a35cc3688defef3b50d68453d7d5dffad85760ec",
-+      "candidate_sha256": "04e8ff5ea3b57b861ce4381c120e56584478c1f8004c2397829fb8c59e8dd49a",
++      "delivered_sha256": "cd4c4cda7c1711bccc24eb58b5f98ed21b1a3a1b01c980345508c5c71beca4d0",
++      "delivered_git_blob": "f9dab019bdc8944ee0afd5a49ad4ae93302cc66a",
++      "candidate_sha256": "cd4c4cda7c1711bccc24eb58b5f98ed21b1a3a1b01c980345508c5c71beca4d0",
 +      "disposition": "RESTORE_EXACT_ORIGINAL_PREIMAGE_TO_DELIVERED_POSTIMAGE",
 +      "recipe_chain": [
 +        {
 +          "dataset": "m3jdk21-runtime-control",
 +          "before": "ABSENT",
-+          "after": "04e8ff5ea3b57b861ce4381c120e56584478c1f8004c2397829fb8c59e8dd49a",
++          "after": "cd4c4cda7c1711bccc24eb58b5f98ed21b1a3a1b01c980345508c5c71beca4d0",
 +          "manifest": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
 +          "template": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0009-README.md.txt"
 +        }
@@ -1524,9 +1524,9 @@ index 0000000..9719263
 +14	src/java.base/share/classes/java/util/function/Consumer.java	025c5fa47f9505eccea26c540bc3e320762346c464ecca37ec1994297285a073	52773610a8cd4d4e0808c2895e504b09ce9c0c05a0273e81cc533bad19ab6226	BORROWED_SCOPE_LIFETIME	M3-PROGRESS-SCOPE-LINT	Method-local source annotations; try-with-resources code unchanged	Exact full-lint gate and 14 identical class files
 +15	src/java.base/share/classes/java/util/function/Function.java	e116c9989d314cb6ffdaef60e8f665205afccdd28ee3674af2c6eedc008da588	73877c7a547bb812a6901cae0af4866645de978b867e055204cd53f6dffb6476	BORROWED_SCOPE_LIFETIME	M3-PROGRESS-SCOPE-LINT	Method-local source annotations; try-with-resources code unchanged	Exact full-lint gate and 14 identical class files
 +16	src/java.base/share/classes/java/util/function/Supplier.java	2d5f23125e22f4d20d80d7734e883c45fd179207f0ab508fdd0c9e8616156766	84170e0863237433f20c3fdc4617eea990731fa7a1e5b0aeaf6b03f89e55c096	BORROWED_SCOPE_LIFETIME	M3-PROGRESS-SCOPE-LINT	Method-local source annotations; try-with-resources code unchanged	Exact full-lint gate and 14 identical class files
-+17	make/m3/compatibility/check_object_adapter_progress_receiver_20261017.py	5e44ba190257db7d9715d80e7870d6a1b69f8c76cc3c285182193e80fc0da443	e2c0e81911a8ea4e6d0d6b77eacc36fa4a4aca2c792536b9c32cbcdd40be0404	SOURCE_IDENTITY_CUSTODY	M3-PROGRESS-MANIFEST-SUCCESSION	Explicit bounded successor or compatibility witness	Fresh qualified recipe output; targeted regression/image evidence
++17	make/m3/compatibility/check_object_adapter_progress_receiver_20261017.py	33597bc4bc5cbf364f6f74886255151034e645c156b751ddeb1654c045114a8e	e2c0e81911a8ea4e6d0d6b77eacc36fa4a4aca2c792536b9c32cbcdd40be0404	SOURCE_IDENTITY_CUSTODY	M3-PROGRESS-MANIFEST-SUCCESSION	Explicit bounded successor or compatibility witness	Fresh qualified recipe output; targeted regression/image evidence
 +18	make/m3/compatibility/test_object_adapter_progress_receiver_20261018.py	ABSENT	e84be3f274caf1543ce7a2eb10aced6670fa488ad5478719be5b3227dc48a611	SOURCE_IDENTITY_CUSTODY	M3-PROGRESS-MANIFEST-SUCCESSION	Explicit bounded successor or compatibility witness	Fresh qualified recipe output; targeted regression/image evidence
-+19	make/m3/compatibility/verify_m3_default_template_20261017.py	856910b716021260d387c0e3230c774223d7afc6ba62eab8e0c35668ffc8f2da	234293306f44acc4f756816564b9dea6146962b13ac2529397e25f062cce49bc	SOURCE_IDENTITY_CUSTODY	M3-PROGRESS-MANIFEST-SUCCESSION	Explicit bounded successor or compatibility witness	Fresh qualified recipe output; targeted regression/image evidence
++19	make/m3/compatibility/verify_m3_default_template_20261017.py	0b6238aeadb710af6599a3688ebfc951729a8921ed67a476697b7edf57245f8a	234293306f44acc4f756816564b9dea6146962b13ac2529397e25f062cce49bc	SOURCE_IDENTITY_CUSTODY	M3-PROGRESS-MANIFEST-SUCCESSION	Explicit bounded successor or compatibility witness	Fresh qualified recipe output; targeted regression/image evidence
 +20	test/jdk/java/lang/Object/M3RuntimeCompatibilityHold.java	ABSENT	9faf22addfe520efd30ef8181fa1b89bb4e130f65acb35d2ac9e8b58a3ce38aa	API_COMPATIBILITY	M3-OBJECT-LEGACY-DISPATCH	Explicit bounded successor or compatibility witness	Fresh qualified recipe output; targeted regression/image evidence
 diff --git a/m3/runtime-integration/runtime-repair-20261018/README.md b/m3/runtime-integration/runtime-repair-20261018/README.md
 new file mode 100644

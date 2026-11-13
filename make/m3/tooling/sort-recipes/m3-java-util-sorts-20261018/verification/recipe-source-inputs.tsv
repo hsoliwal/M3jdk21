@@ -11,12 +11,12 @@ payload/java/Sorts.java.txt	9ecb5a224ed09a899778dd2541fb191b2377aa90e64f9ea14b8f
 payload/java/SortsBenchmark.java.txt	e406e251a6d66a1908fe9161547353f4a721d40424832508a6f310c171b37b28
 payload/java/SortsContract.java.txt	194b6225bd6dc7520e0cbbe2d42219513ba9fff3994b2ea4b323d1077704e819
 payload/java/manifest.tsv	d8ebd90bce3c617b9598670f34b76ccda1a1fb4dba85075492ad0bc239ae2c8d
-payload/text/manifest.tsv	f68d13347b8b2e0298e33109200e35d685659883c3313922c7743e933caad69f
-payload/text/sort-catalogue.md.txt	617ff12e313dbcc416def50abd6766d07cceef3fe475a92dac75c3567fb9e51c
+payload/text/manifest.tsv	25a7ffea311e7a337274656a06f02f045828aba9cefbf70a1f5cefd519b4531d
+payload/text/sort-catalogue.md.txt	d0b3ba4d459e5ad92cde1cdd1fe1509ba3767140e728c49004aad4c929bcad34
 payload/text/sort-catalogue.tsv.txt	fdd13991d79f91091b7633983e1dedaff2896aef7f308c5af9b9df9297d8b7a1
-payload/text/sorting-ci.yml.txt	c7c83e0340c6af8e7862d7b21dd2c8c34d56c2f478957f019c7f668254909ab8
-payload/text/sorting-name-map.json.txt	cc11cfa3ed9f575a7b0eef72f1a0b3fedbe92e0c70bd5e7d5fd53d694f079644
-payload/text/sorting-usage.md.txt	1a1cb2513886124f76547d8c47768b5d09a0f878d86b3f0cd796618824276490
+payload/text/sorting-ci.yml.txt	97a6bdacaddbb03e3485d496841367caf27837abf01100a3abf315ca1d5f296b
+payload/text/sorting-name-map.json.txt	c58767291e3a1403ff2cea19dc46cea242e72e35e851dc412a71c259e1461c43
+payload/text/sorting-usage.md.txt	9c4101c33f320ff55d53c4c34488261b18dd8f57d3baa44492e86532d4182f3a
 payload/text/sorting-verify.py.txt	96e4ed9e928691bf26353d051b3bd219772133dd571a0382877ae6d60dbd0a5f
 pom.xml	9c9c6ed58c0bec989a559986260847356282de04a5aa12610a30e7ca2acd7af9
 provenance/SYNEXIA-NOTICE.txt	816e983c97925d4342c370520dfd072fc4dfe493f050bf244e34ecb5c75ccbb1
@@ -29,7 +29,7 @@ src/main/java/com/synexia/rewrite/sorts/M3JavaUtilSortsApply.java	c8f27c9e9d6630
 src/main/java/com/synexia/rewrite/sorts/M3JavaUtilSortsRecipe.java	057077bd7b3e1557d5edc72f4a31fe350cff2802f144716f9fcb15ee804d9980
 src/main/resources/META-INF/rewrite/m3-java-util-sorts-20261018.yml	4f665189fe7e0d57e3e3f20e1eeb75c3a1d2b9b9542fe769f29fa8f11dba62d2
 src/test/java/com/synexia/rewrite/sorts/M3JavaUtilSortsPacketTest.java	8990e238d6f107e5bb5a1960c5d22d3bae3299fcc2d4f74525c08684d06f9224
-src/test/java/com/synexia/rewrite/sorts/M3RecipeReplayTest.java	3c146c510125e652b06d172a6e5794dda33e9ce2bac0567133a40cfdd89b6d5d
+src/test/java/com/synexia/rewrite/sorts/M3RecipeReplayTest.java	7809d10e5c12ba00022ac13078034344ad1cd49e7ace918028322b36492e27d7
 src/test/resources/com/synexia/rewrite/hash-pinned-java/sort-add-fixture/Carrier.java.txt	69512e9fca52ca82ff704a0b13e5ef1a4b784203a0914af288111fa9cdff5b7f
 src/test/resources/com/synexia/rewrite/hash-pinned-java/sort-add-fixture/Extra.java.txt	51e316c22299c64429328ec8ea37cb59cbc76371d0c842c179cd8959446d8ef9
 src/test/resources/com/synexia/rewrite/hash-pinned-java/sort-add-fixture/Numbers.java.txt	b19c66dbf7523359189f7302ddf089db8f7c935fe416b71cbeaf0f926ea36406
@@ -48,7 +48,7 @@ src/test/resources/com/synexia/rewrite/hash-pinned-java/sort-unsorted-fixture/Ex
 src/test/resources/com/synexia/rewrite/hash-pinned-java/sort-unsorted-fixture/Numbers.java.txt	b19c66dbf7523359189f7302ddf089db8f7c935fe416b71cbeaf0f926ea36406
 src/test/resources/com/synexia/rewrite/hash-pinned-java/sort-unsorted-fixture/manifest.tsv	0904420c6b9f6339abccd96c3113c9574df4c5988fbd259b7d2140b26f2ade30
 src/test/resources/com/synexia/rewrite/hash-pinned-text/sort-text-bad-hash-fixture/Fixture.md.txt	88b5bafe27dd33aca4a03e8468e519b21e910ad5890a515181f415209726311b
-src/test/resources/com/synexia/rewrite/hash-pinned-text/sort-text-bad-hash-fixture/manifest.tsv	059dc5dbd63ca2e879e5ae0640c9c7d8ba4d46eeff5af3b14be60ab168b9b1f7
+src/test/resources/com/synexia/rewrite/hash-pinned-text/sort-text-bad-hash-fixture/manifest.tsv	65b1ab88e4181f9045df3272b69c711c1bb81647b84b32c990854239ce462906
 src/test/resources/com/synexia/rewrite/hash-pinned-text/sort-text-fixture/Fixture.json.txt	0227630315f81c8e05e9516db88b7f3e131f6cb0dd8bab87befccbfbc728272f
 src/test/resources/com/synexia/rewrite/hash-pinned-text/sort-text-fixture/Fixture.md.txt	58f3347655bb90cb257a24f17161c7773a61a70356c47bcd69c37d679eea703d
-src/test/resources/com/synexia/rewrite/hash-pinned-text/sort-text-fixture/manifest.tsv	3b6ef32a77fa90ac3d6f87946d985b34b420edb986f5deb7520124d76321c661
+src/test/resources/com/synexia/rewrite/hash-pinned-text/sort-text-fixture/manifest.tsv	67a2ee920aae03995100dd65f3aefe2abd48ed9d1f4c75d7d0b1d4991e50ea47

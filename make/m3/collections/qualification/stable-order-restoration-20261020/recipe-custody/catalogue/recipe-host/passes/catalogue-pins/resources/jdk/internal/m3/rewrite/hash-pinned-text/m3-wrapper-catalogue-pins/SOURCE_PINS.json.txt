@@ -41,7 +41,7 @@
       "decision": "RETAIN_CURRENT_NO_PROPOSED_SOURCE_CHANGE"
     }
   ],
-  "discovery_sha256": "9919c3a227026a3038ad4d568878eb5559ace640de205914867fabb226152fca",
+  "discovery_sha256": "0ce46a344ab8a86bbf583ce0bc2e2e733393f68c6af55ca8684c2d5df4130da0",
   "decision_status": "SELECTED_ATOM_QUALIFIED_FOR_SCOPED_GENERATED_JAVA_AND_CURRENT_JNI",
   "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
   "spdx_license_identifier": "Apache-2.0",

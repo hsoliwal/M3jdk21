@@ -9,7 +9,7 @@
       "tests": 7
     },
     "owner_extension": "Only two exact M3FS Java descriptor paths; existing 256-target limit retained",
-    "payload_sha256": "d01cd2328153bf84bc2a7082ea8f19b4c31633b321ee40fb6ebe7b2595447bed",
+    "payload_sha256": "f1a83a1d5d6cd56fe6e4fb126e45b6358113174ef77a11be9be63a1be0e5b7c3",
     "status": "PASS"
   },
   "capture_contract": {
@@ -390,7 +390,7 @@
     "provider_lint_policy": "-Xlint:all; upstream warnings recorded, not errors",
     "scope": "Complete existing M3FS Java sources plus the 237-source attributed VFS core, JAR/JMOD assembly through the existing shared packer, and named-consumer execution on an image linked from the supplied prebuilt JDK 21. Maven lifecycle, JNI/SQLite runtime verification, and source-built OpenJDK/M3JDK21 qualification remain separate gates.",
     "source_built_m3jdk21": "NOT_RUN",
-    "source_lock_sha256": "ebacc3085d2404f3378ee5751321e82435fc91829bcd73d8ab19b47229ac835b",
+    "source_lock_sha256": "147ed24355bcf7535932ecd25508ff18dea5934ab7ed51fc57324b73c1009d1b",
     "status": "PASS"
   },
   "maven_lifecycle": {
@@ -459,7 +459,7 @@
         "input_files": 389,
         "receiver_base": "73f59218dc4ef1a3ef79aad990e77273db2a2d60",
         "source_lock": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/SOURCE_LOCK.capture.tsv",
-        "source_lock_sha256": "ebacc3085d2404f3378ee5751321e82435fc91829bcd73d8ab19b47229ac835b",
+        "source_lock_sha256": "147ed24355bcf7535932ecd25508ff18dea5934ab7ed51fc57324b73c1009d1b",
         "vfs_upstream_commit": "685b3b723a83e56034391350ea1a02231411142f"
       },
       "source_lock_unchanged": true,

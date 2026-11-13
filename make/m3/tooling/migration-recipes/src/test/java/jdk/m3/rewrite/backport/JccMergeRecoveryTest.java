@@ -45,7 +45,7 @@ final class JccMergeRecoveryTest {
     private static final List<String> MANIFEST_HASHES = List.of(
             "f843f199e2654aacf24d145183b8379e110b47679371f2ae00f957653293db60",
             "6f56937dd5064c9fdca7a92c3f3f2396bebc422eda7ff1d35874fb3d5710e0bf",
-            "a5c3165ae514ebcf1d074d9b2f0eec8ef18e2eec4e06f7145e04f89402b12eb9");
+            "8544d6baba54696aa260c5f5de6c252de7531204d27ce5fa969a9ce6f5f3de94");
     private static final ObjectMapper JSON = new ObjectMapper();
     private record Target(String crate, String path, String before, String after,
                           String beforeHash, String afterHash) {}

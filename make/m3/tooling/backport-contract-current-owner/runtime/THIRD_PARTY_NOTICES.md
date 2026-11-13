@@ -4,7 +4,7 @@
 
 The qualification driver adapts the first-party Apache-2.0 source
 synexia-openrewrite-recipes/tasks/state-relation-current-c11-20261019/runtime/qualify.py,
-Git blob b3fb888d4ea4d7a6b13bc13fef0fdcdba0bcb0f2 in hsoliwal/com.synexia.
+Git blob 88661fdb4a2b0d63f01385f2c6bb33f768523859 in hsoliwal/com.synexia.
 The borrowed mechanisms are exact input custody, canonical output/temp roots, bounded
 command logs, inherited subprocess groups, direct-child timeout handling and typed
 execution receipts. This adaptation replaces the relation-specific Java/C/JNI actions

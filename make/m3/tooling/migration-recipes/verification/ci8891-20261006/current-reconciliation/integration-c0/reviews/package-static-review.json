@@ -15,12 +15,12 @@
     {
       "bytes": 1054690,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/PACKAGE-SPEC.json",
-      "sha256": "89617ef4b2048025987f397c8bc821c0a6fbfedb1912d5428019fdf3240d2d47"
+      "sha256": "79349210aa8c1fe74fe2ad76588b13c663d32ed47e4c4edb75951819ef716b6b"
     },
     {
       "bytes": 4669388,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/SOURCE-CLOSURE.json",
-      "sha256": "ec0b69741e4b9247d5740d4fb0a160368c9378a480c09c19a514534fa0426678"
+      "sha256": "a8b6e725e4c6c02fe3f473c09f1d9d2fda62f1d94a649ea20309ec28fa81bd25"
     },
     {
       "bytes": 361405,
@@ -35,7 +35,7 @@
     {
       "bytes": 7924,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/finish_package.py",
-      "sha256": "ecb44caaf7841a5c3aeca8b52da6fa2756718841cbce5e430645417ce048946b"
+      "sha256": "9913aeb86a1935e990183032778406f3d641079947ef44de0678ae57dc5be1c1"
     },
     {
       "bytes": 1861,

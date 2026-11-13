@@ -9,7 +9,7 @@
     "make/m3/migration/recipes/prefix-z-v1.tsv": "54251ed210b9ed280919968a6ea13f0b6ed6e590fbf92090d13b4495f05f4217",
     "make/m3/migration/recipes/postimages/M3PrefixZ.java.txt": "5f936a3c6e69ca487eff6a0665ada01546750d9d87ce85ee50a337a4236233d0",
     "make/m3/migration/migration.py": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e",
-    "doc/m3/name-mapping.json": "f64c2fb755da01097665c6c2cc9b82c8c651e9f208eb7570de7ec6e47fbbeb4f",
+    "doc/m3/name-mapping.json": "1b609e25c4c588bda2a4da955ea5982ff0e70bc4aa9ece61f92de707b69727b4",
     "doc/m3/name-mapping.schema.json": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
     "m3/recipes/manifest.json": "a676ba7f32e406c12cbe120665a914130ed79e11fe8e43d005cb40b90d6f29f2"
   },

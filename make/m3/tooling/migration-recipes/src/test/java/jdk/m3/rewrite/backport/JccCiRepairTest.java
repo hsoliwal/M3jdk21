@@ -46,7 +46,7 @@ final class JccCiRepairTest {
             new Target(".github/workflows/m3-foundation.yml",
                     "before-00-m3-foundation.yml.txt", "after-00-m3-foundation.yml.txt",
                     "1a1ddd014a5cce76e75b1e4fce5c4cd0c746a3dbf5f18ef3a1bc9dad7d8fbdd1",
-                    "9969a19a5727bb1684d6e8443c67681a0afd52f0427d9501f4b4d363e9709982"),
+                    "b1a0fad411526e9f74d912e4ac2e4a3026f5daeb3175e6ab4caeb9948fe180fd"),
             new Target("make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java",
                     "before-01-M3A3RegexMemoryLabDeliveryRecipeTest.java.txt",
                     "after-01-M3A3RegexMemoryLabDeliveryRecipeTest.java.txt",
@@ -56,7 +56,7 @@ final class JccCiRepairTest {
                     "before-02-M3A3RegexMemoryWorkflowRecipeTest.java.txt",
                     "after-02-M3A3RegexMemoryWorkflowRecipeTest.java.txt",
                     "6d6f4257d18c5e5a016a6c876bffcc8f5c202a65b8f019f2cf3ec1f26bfc84e8",
-                    "83d970effb393f67462e5cb269118e6a390d82f74f70eb16905fd4ba948a4416"));
+                    "d2d9405ad42f8744eedf75ec50be123ac5401f8c203335ebb53832c0a5cb42bf"));
 
     @Test
     void retainedOwnerProducesExactlyThreeOutputsAndPreservesIdentityAtFixedPoint() throws IOException {

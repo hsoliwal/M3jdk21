@@ -31,12 +31,12 @@
     "test/jdk/java/lang/String/M3StringRegexPreparedBatchTest.java": "465e1002df44eb9453b3d6c45670af4b9a9de90e7fc746d9b82a2c85423be0ef"
   },
   "manifest_sha256": {
-    "java": "d05609ee1f486274c7e17380fe977b51050a1a3e1c2e5cdebe4f5df019db4903",
-    "text": "654f67f4ccfc86811d707c23d84514f08eb3dd4638e76df333816623c79b08cc"
+    "java": "8cf1efebde5aa394637224b49b4ce08c55786619c49eb33f912429873fb9b60a",
+    "text": "90e9d0b77ff5586611e6d3a3889dd9e8e2f5df4fb840e3a3dcc5453d9e58145d"
   },
   "sdk_report_sha256": "123a804e837061a6e90a3d6723525d8a039dc14a8035784bb9b338d39cfe8828",
-  "sdk_results_sha256": "a86225201f4af2b52d155a7720e925e1afbb702493d845243fd0462926f1ca4d",
-  "sdk_inputs_sha256": "20d2ee425d893fbe2c52de57a770d09409862e0adaaf94391d9c48af1191c439",
+  "sdk_results_sha256": "44bcca405f9273f0bd685c08b5e2734a3d934e54a52734a4e8ede7f3a3949e25",
+  "sdk_inputs_sha256": "78b8cf59f79610cb0153b6cbc41a80330fcad565f5ea4a8bbad0fb0037c8fb70",
   "jdk_build_note": "Complete images target built from the supplied source; frozen Java/C bytes equal SDK outputs.",
   "runtime_tests": "NOT_RUN"
 }

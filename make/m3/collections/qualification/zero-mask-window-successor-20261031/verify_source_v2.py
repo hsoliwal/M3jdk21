@@ -10,7 +10,7 @@ import sys
 
 HISTORICAL_SHA = "31cdce1db97fd1567b360ee843916f9b6cfa3ff3"
 ORIGINAL_VERIFIER = "make/m3/collections/qualification/zero-mask-window-copy-20261017/verify.py"
-ORIGINAL_VERIFIER_BLOB = "d40cbee01ed1351bb118e654bc4123ad17c2d29f"
+ORIGINAL_VERIFIER_BLOB = "60e4d789851027c23d58e1aa6a6661d24e7aed7a"
 MANIFEST = ("make/m3/collections/qualification/zero-mask-window-successor-20261031/"
             "SOURCE_SUCCESSOR_V2.tsv")
 C = "m3/collections/src/main/native/collections/m3_index_mask_compactor.c"

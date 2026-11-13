@@ -8,7 +8,7 @@
     },
     {
       "path": "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccHandoffTest.java",
-      "sha256": "72e0e1a33c402a1af2d12366c5f765f1ed0fda7594ef746e691a96c67b903ee3",
+      "sha256": "468ea98728df62254b46c57c01c2f516fddbc465d3fef94062640b29c4cd63f5",
       "bytes": 19825
     },
     {
@@ -53,12 +53,12 @@
     },
     {
       "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/manifest.tsv",
-      "sha256": "258b5ab6f6cb7099685ee4548d5430fcb952561fefdf565a6dff149cf50c5f06",
+      "sha256": "0672554c4335699f8fbd6ea510c8d30c85ae0543218ac2ce09b507363ebdcbaf",
       "bytes": 687
     },
     {
       "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan.json",
-      "sha256": "7c98e1c8d7d749e2eedd381d126cf68f641b86004edc6278cd32f613324e8326",
+      "sha256": "263aa4b5196c3a94c6a9f450f2476a9956b01386b93c21a048b5dcca0b6441a9",
       "bytes": 2861
     }
   ],

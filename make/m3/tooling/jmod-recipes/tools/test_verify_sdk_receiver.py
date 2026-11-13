@@ -339,9 +339,9 @@ class SdkReceiverTests(unittest.TestCase):
         self.assertFalse(result["jdk_runtime_verified"])
 
     def test_original_ledger_pin_has_both_independent_digests(self):
-        self.assertEqual("e1f463b9fa54f9c92d0bbeacc79e7902be00bd2c",
+        self.assertEqual("9c7b294e35a14c057d4431d96deb5c6f49ecc9e3",
                          ORIGINAL_LEDGER_GIT_BLOB)
-        self.assertEqual("db9c42ea9b0ec9af0986009a8022064eb419ed7e57104fa229b97dd625970046",
+        self.assertEqual("09662cb722cb36a19d22f4e020eaed5771177b485756b921c04c6f339939da46",
                          ORIGINAL_LEDGER_SHA256)
 
 

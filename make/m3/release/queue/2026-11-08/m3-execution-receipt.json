@@ -150,9 +150,9 @@
     {
       "path": "make/m3/compatibility/test_public_names.py",
       "before_sha256": "190f25ef9dbf1069853bd79148a389f4f4af8603f9b29e23a4f91109d45fb11b",
-      "after_sha256": "5847f10b95ca110ed74328ceb81c8a9e80061f26ff90a2f04e3d3879d115ec34",
+      "after_sha256": "d2ddf9d490354bea879a3a5566d6b29d5ab9baf80ac6bbcc28755d6dd46d5f03",
       "source_git_blob_sha1": "5d851202caedd6af63c82513985cf88a2b6cc393",
-      "postimage_git_blob_sha1": "ea430064dafdeb191ea6dedfc79fa9fe28433688",
+      "postimage_git_blob_sha1": "c53aeb696edc3332871dd6bb9a0c21b5a7b38746",
       "source_mode": "100644",
       "mode": "100644",
       "dataset": "m3-naming-preparation"
@@ -160,9 +160,9 @@
     {
       "path": "doc/m3/counterpart-naming.md",
       "before_sha256": "f5b37c1babb7775c2f07a901617fb226fa43d36b76c64fc3ccadc12180bf6e04",
-      "after_sha256": "afe9c083203193b1357aec7114c3bede7d263127f44be0eb8e0f4a425b7539af",
+      "after_sha256": "44e0c67e0ffd19345493e5ee2b207c5b99b86189ffe16d4b27c63c388faf8d52",
       "source_git_blob_sha1": "f3382edb5d2d671640df11dea5e3c4d62cea6877",
-      "postimage_git_blob_sha1": "4d8ab32b2eccfbd293b2baded6f8e89389fda302",
+      "postimage_git_blob_sha1": "3778dc6bd78f802b3d421e524f0ee40f2d57c178",
       "source_mode": "100644",
       "mode": "100644",
       "dataset": "m3-naming-preparation"
@@ -170,9 +170,9 @@
     {
       "path": "doc/m3/m3jdk21-porting-invariant.md",
       "before_sha256": "cc0e47d1fce6cf6812a48f8861876ab67aa49416fa3fa2e8d4c357b573f383e5",
-      "after_sha256": "991fada89f2015eac48c120e7911a6484015c7f156f8a963ab87734be1ed67af",
+      "after_sha256": "4754e5e5fd854fbda547f80856b3d749d3f3bcb9fca3fdfb736dd8c91eed508a",
       "source_git_blob_sha1": "673cca25ac880b9a9087ca9a8d1a05b6180307c6",
-      "postimage_git_blob_sha1": "a86371d79b9ff5815106d49e8145fbdca7eed234",
+      "postimage_git_blob_sha1": "cf09b52e5bab8f9bd0081b100b079a27779abdaa",
       "source_mode": "100644",
       "mode": "100644",
       "dataset": "m3-naming-preparation"
@@ -210,9 +210,9 @@
     {
       "path": "m3/file/verify.py",
       "before_sha256": "3af79d28344c8587678aa879d902047187d9463c7cf43ba57cc430590537f96f",
-      "after_sha256": "94548522f032c78f8c881e1861a42bd46a5f46a2069bcacc82bd79c14f98a7b7",
+      "after_sha256": "6f8f158b35c9e0ab1690e5f6386fcc72421ed3028c62433a55d6bd607b012d45",
       "source_git_blob_sha1": "7659d95711b9a9da818fa0cd639dfa14871e17fc",
-      "postimage_git_blob_sha1": "3161da59e85116ef9cace5f6ef973685dbefc840",
+      "postimage_git_blob_sha1": "5152a043ec3b338e6f3381893d97b6f4647be571",
       "source_mode": "100644",
       "mode": "100644",
       "dataset": "m3-file-workflow-dependencies-text"
@@ -220,9 +220,9 @@
     {
       "path": "make/m3/history/test_m3_handoff.py",
       "before_sha256": "27b069a24f8e433d769f7bff415d5f0da919e605e0edb641ccda750cfdcc897a",
-      "after_sha256": "8dc9e7830401e352a3e6b30546cb41b45e2e80badbf2116bac1024bbb00d121a",
+      "after_sha256": "50f8adc34c18e7cc129cc41cafe98bfd611c228c862efca4d661c592f3827142",
       "source_git_blob_sha1": "e6c67861605740a031b923fd74660e5c1f4d3bb2",
-      "postimage_git_blob_sha1": "bf6ad38238f605c18fa8941c2b12bd3ddffff87a",
+      "postimage_git_blob_sha1": "dbe1a019452c40ea079b33ea6dd30d549987d0d6",
       "source_mode": "100644",
       "mode": "100644",
       "dataset": "m3-handoff-recipe-identity"
@@ -230,9 +230,9 @@
     {
       "path": "make/m3/history/verify_m3_handoff.py",
       "before_sha256": "b2d28bdcf1cfbd0feb0d4147ec01a2b73bab973b3640675a3a14f3646818711a",
-      "after_sha256": "d44f565682cb36331b7797131d102b56f42464aeb357e32ab7cf78ceef78075e",
+      "after_sha256": "91a48ca66486a2aa825933c77e84db52401938d91d7450d603f759109be834a3",
       "source_git_blob_sha1": "34df7d9fca4fcb4a930ce3887ae2f4c4d4cd3e59",
-      "postimage_git_blob_sha1": "8d530a8143ada38ef54486e9814020b169ad7222",
+      "postimage_git_blob_sha1": "3f5f03317dc0d1adfe348e8222fac889f8fc7de5",
       "source_mode": "100644",
       "mode": "100644",
       "dataset": "m3-handoff-recipe-identity"
@@ -260,9 +260,9 @@
     {
       "path": "make/m3/release/RELEASE_CHECKLIST.md",
       "before_sha256": "500aa22aebeea3d4e5b701574344361f189dafb4819e7905a4932dc77243a680",
-      "after_sha256": "62b3623904fbfd56a9709550b8a941b5db8b8ded5919c80cdd2aa6bf4c732086",
+      "after_sha256": "6ee1fc430ecd001b8ec62ba419937b5d6f1566a524face00c7cce8f4099dabeb",
       "source_git_blob_sha1": "513a7e807d94ada82e1cb43adf739fc1adfef772",
-      "postimage_git_blob_sha1": "515871faed9ebe821bc15a0d338e7e7e83eee982",
+      "postimage_git_blob_sha1": "441b81b4b268302c8335d537b8339e3b10a35c57",
       "source_mode": "100644",
       "mode": "100644",
       "dataset": "m3-release-preparation"

@@ -80,7 +80,7 @@ SOURCE_GIT = {
     "make/m3/compatibility/m3-wave-admission-pin-20261014.tsv": "60c11d68f482efadeadbbe6f58bfac9ec9aa0090",
     ".github/workflows/m3jdk21-backport-wave-admission.yml": "c79022773165a4046a6078363bcb27ef4beb7d1d"
 }
-AFTER_GIT = {**SOURCE_GIT, TARGET_WORKFLOW: "0eab21184c1b7d90ded858acdeac5c7cc2e1382c"}
+AFTER_GIT = {**SOURCE_GIT, TARGET_WORKFLOW: "810d1ae14e4a2bfa1fe41649ac61c3ddc1915336"}
 
 def owner_plan(original, post, actual):
     lanes = (original, post, actual)
@@ -207,7 +207,7 @@ def report():
     module = runpy.run_path(str(regular(SDK / "verify.py")), run_name="m3_wave_sdk_reuse")
     pins, pins_data = module["inputs"]()
     if module["SUITES"] != {SUITE: METHODS} or module["RECEIVER_OUTPUTS"] != {
-            TARGET_WORKFLOW: "942fe1f46b1b4f7c91418ded4c94b045576ec31b52dfed3ce0ac45ed4608ff25"}:
+            TARGET_WORKFLOW: "90677e9b79c698e0b1455eebf7aa319b38c0a6f6ef270d118b6c40bc58a6a328"}:
         raise RuntimeError("exact three-method one-workflow recipe contract required")
     expected_custody = {row["path"]: row["sha256"] for row in record["receiverOriginalOwners"]
                         if row["path"] != TARGET_WORKFLOW}

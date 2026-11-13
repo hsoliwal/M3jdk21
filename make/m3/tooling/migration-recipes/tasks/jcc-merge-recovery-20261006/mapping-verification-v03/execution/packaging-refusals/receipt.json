@@ -1,12 +1,12 @@
 {
   "destination_gates_passed": false,
   "finished": "2026-10-06T06:13:05.560792+00:00",
-  "harness_sha256": "480f3bbe32481519ec5c2efb2eaa444cfa3e6fe4f10cafb4a932b1bfb12ba981",
+  "harness_sha256": "d444d6d99358c61197417ef43b79b18405edc58a71c331b0dbce869eec73b2f3",
   "input_epoch_sha256": "027e47d20c7fb854e028487ceef341c929877a6421dbb75f6433b5cd007fe5ee",
   "maven_cache_copied": false,
   "new_evidence_subtree_excluded_from_original_comparison": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/packaging-refusals",
   "original_inputs_unchanged": true,
-  "packager_sha256": "7a95a21c3e3e06033491b76ffddfdde13307bc0258ce2323b6ef046e5ce21dd0",
+  "packager_sha256": "d132c5e0e1d36a06f915934209a8d05e262bbe1125a90d6f35b23ac02de0332a",
   "packager_unchanged": true,
   "refusals": [
     {

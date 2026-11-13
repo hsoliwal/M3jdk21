@@ -40,7 +40,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/runtime/THIRD_PARTY_NOTICES.md",
       "targetPath": "make/m3/tooling/backport-contract-current-owner/runtime/THIRD_PARTY_NOTICES.md",
-      "gitBlob": "515217ab3a3362e0fb0de967d46115b7a44201db",
+      "gitBlob": "3ee575388ac1be6ea54523872a3f592a44f70320",
       "bytes": 1550
     },
     {
@@ -58,7 +58,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/sdk/README.md",
       "targetPath": "make/m3/tooling/backport-contract-current-owner/sdk/README.md",
-      "gitBlob": "a4674f6ed7983503de54bb1223c2c4cd88ff8e3a",
+      "gitBlob": "1ecf30b2b7c4b840720b7b1fb535d28b9574f02f",
       "bytes": 5233
     },
     {
@@ -94,7 +94,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/sdk/pins.json",
       "targetPath": "make/m3/tooling/backport-contract-current-owner/sdk/pins.json",
-      "gitBlob": "f205864458b8dfa91445a26643bec1ab7b2e1859",
+      "gitBlob": "fb98cc20f65f4722292fe8a953075fa991deacdd",
       "bytes": 14116
     },
     {
@@ -160,7 +160,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-contract-current-owner-20261019/forward/manifest.tsv",
       "targetPath": "make/m3/tooling/backport-contract-current-owner/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-contract-current-owner-20261019/forward/manifest.tsv",
-      "gitBlob": "1e6891ec6490a157170d5f298648dffc2073af11",
+      "gitBlob": "e31f2ee24d864b22c10344f1047dfd4407ef2172",
       "bytes": 1530
     },
     {
@@ -262,7 +262,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-contract-current-owner-20261019/inverse/manifest.tsv",
       "targetPath": "make/m3/tooling/backport-contract-current-owner/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-contract-current-owner-20261019/inverse/manifest.tsv",
-      "gitBlob": "9d256c4070c8ded6c3e8c4930d43bbb86756c239",
+      "gitBlob": "357c3fa4b096f7bbb21e761e38d99fa773db078a",
       "bytes": 1530
     },
     {
@@ -316,7 +316,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/sdk/src/test/java/jdk/internal/m3/rewrite/M3BackportContractCurrentOwnerRecipeTest.java",
       "targetPath": "make/m3/tooling/backport-contract-current-owner/sdk/src/test/java/jdk/internal/m3/rewrite/M3BackportContractCurrentOwnerRecipeTest.java",
-      "gitBlob": "ec369dba4fd3c0a842fb80bd802e6745fee7524e",
+      "gitBlob": "69fcef9b7f8d744fe7b819fe7bc58f473ff16053",
       "bytes": 16186
     },
     {

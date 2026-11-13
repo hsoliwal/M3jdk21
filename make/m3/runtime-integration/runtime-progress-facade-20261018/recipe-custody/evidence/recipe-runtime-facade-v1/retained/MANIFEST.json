@@ -23,7 +23,7 @@
     },
     {
       "path": "datasets/m3jdk21-runtime-facade/MODES.tsv",
-      "sha256": "5f65607128c5245f7e52a0c06f10a5be677a3c00f54301a93cf253047ee662dd",
+      "sha256": "2aa4fb5c51b5925838a53ecaad047e91e431c09e0fe19f521c0b3a2e52bcf623",
       "bytes": 402
     },
     {
@@ -73,7 +73,7 @@
     },
     {
       "path": "datasets/m3jdk21-runtime-facade/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-facade/manifest.tsv",
-      "sha256": "dba4e9cc20cb1ed30bf03167c57d833b86fa9e73b9a0bc3408f331deb5bd8694",
+      "sha256": "01358d64fd74b9adf8d7bf63287c278258bf97a89b0a40574cd05dafc6233701",
       "bytes": 497
     },
     {

@@ -15,7 +15,7 @@ from pathlib import Path, PurePosixPath
 HERE = Path(__file__).resolve().parent
 RECEIPT_NAME = "SDK_SOURCE_BINDING_SUCCESSOR_V3.json"
 RECEIPT_BYTES = 4649
-RECEIPT_SHA256 = "9432e17d44f32a6b672484ec6e63f28221b3422722f48db9a809fa663921c5c4"
+RECEIPT_SHA256 = "672d80e6c3a09f18ec4bd653bd3775870b540cfdd1a5b110d3e561520697b345"
 
 def checked(path: Path) -> bytes:
     if not path.is_file() or path.is_symlink():

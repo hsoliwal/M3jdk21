@@ -13,14 +13,14 @@
       },
       "after": {
         "resource": "NOTICE.after.txt",
-        "sha256": "1f55398216ed23efc858988f68bb9fecafa10efba4dd19c5ec5a0e64bacee5fc"
+        "sha256": "bd1eed242dacb781cbd22c5b54e529ed31e76c499db30299b1d2690bd3df5176"
       }
     },
     {
       "path": "doc/m3/name-mapping.json",
       "before": {
         "resource": "name-mapping.before.json",
-        "sha256": "f64c2fb755da01097665c6c2cc9b82c8c651e9f208eb7570de7ec6e47fbbeb4f"
+        "sha256": "1b609e25c4c588bda2a4da955ea5982ff0e70bc4aa9ece61f92de707b69727b4"
       },
       "after": {
         "resource": "name-mapping.after.json",
@@ -32,7 +32,7 @@
       "before": null,
       "after": {
         "resource": "M3Release.java.txt",
-        "sha256": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb"
+        "sha256": "dc2a020aa8f6da324ace8a19f68c90b65021b9ad732932ebabbf545468abc34a"
       }
     },
     {
@@ -40,7 +40,7 @@
       "before": null,
       "after": {
         "resource": "M3VI.java.txt",
-        "sha256": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a"
+        "sha256": "d4d57e6b892342716ef9a52007082ce7c53959cba81a5ad0f2a0cf8d275c3c01"
       }
     },
     {
@@ -48,7 +48,7 @@
       "before": null,
       "after": {
         "resource": "synexia.md",
-        "sha256": "83555e6e0a9ac65409ea500bdb70c3ce6799a8a9498b767742335a48e5a6efa8"
+        "sha256": "b8b5c6b4c58b53b48169513d4a9fe5e4e20c619d5c827482460e867a3e6f8ab9"
       }
     }
   ],

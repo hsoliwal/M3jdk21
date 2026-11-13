@@ -33,7 +33,7 @@ OLD_METHODS = {
 }
 ENGINES = {"M3GpuToolJoinRecipe": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
            "M3GpuToolJoinManifest": "78d5fb68f13872164973a8918cc7886c5f548bca",
-           "M3CharcopyCurrentSuccessorRecipe": "ae0a423270f2654a5ea5e8c2c8140c291091298e"}
+           "M3CharcopyCurrentSuccessorRecipe": "0aa377786444d7943fa2b6a4b56b5a86d0b3885a"}
 FALSE_GATES = ("originalPrivateTyped3bdeeQualified", "targetJavaCompiled", "matchedJdkQualified",
                "jniQualified", "runtimeBehaviorQualified", "performanceRetentionQualified",
                "runtimeApplied", "phaseAdvanced", "allCiGreen")

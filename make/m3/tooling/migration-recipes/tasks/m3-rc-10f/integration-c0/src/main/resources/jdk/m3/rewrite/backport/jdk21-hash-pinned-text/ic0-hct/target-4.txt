@@ -48,7 +48,7 @@
     },
     {
       "path": "make/m3/migration/migration.py",
-      "sha256": "dcbbabd8b7c99bcf1fe50b338bb1904f2f0c24b3a457c1ef75d849a0dd88fbb4"
+      "sha256": "9c09cc60a1825aa9b4d4c20cd81edb61fb0b4af24730e357e0d73241e58b48c3"
     },
     {
       "path": "make/m3/migration/recipe.py",

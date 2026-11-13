@@ -55,7 +55,7 @@ PR is created. Receiver PR #1280 mirrors this exact dataset in its existing cust
 path after the canonical source commit exists. This is a local prepared publication
 plan; no remote write has been performed by the qualification worker.
 
-Publication amendment event: `ec3240ca0c51dada1851704898e11a0c51e619af8ab228cb3a25ed3e37d38c21`.
+Publication amendment event: `a4de82f16e8cf59db50aceaf271b88eb70d2e2eba62b0d70f9fb4850df8206c2`.
 
 ## Final checked source epoch:55b44776
 
@@ -70,4 +70,4 @@ commands:133,140 existing Java contract checks,512 actual JNI cases,136,397 inde
 long-overload checks, and current/legacy/missing native capability cases on both before
 and generated sources. All22 retained method bodies and JNI headers match exactly.
 Current evidence is under `reconciliation-20261021/evidence/serial-v2` and `current-v2`.
-Event:`f5e733441b3801e0e5f0b1aa73a7ef450beb9ffefb3709efc93c3e1148beef85`. Previous receipts and events remain immutable. No global phase advances.
+Event:`392ca03c29ed63c9848d16aade79a5aa090fc8e3b99cbf7d64f603b69e8abafc`. Previous receipts and events remain immutable. No global phase advances.

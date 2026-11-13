@@ -1,17 +1,17 @@
 [
   {
     "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/PREFLIGHT.json",
-    "git_blob": "2ce90c4b5891e73a43eea7df14886fb15f2ffe59",
+    "git_blob": "8860f7f7d243eb6c104939a9f3346c73af761911",
     "decoded_bytes": 0,
     "expected_bytes": 4201003,
-    "file": "calls/restore_2ce90c4b5891e73a43eea7df14886fb15f2ffe59.json"
+    "file": "calls/restore_8860f7f7d243eb6c104939a9f3346c73af761911.json"
   },
   {
     "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/PUBLICATION_CUSTODY.json",
-    "git_blob": "6389a4301478fd4df74e146f1ae4b8942f675e20",
+    "git_blob": "39a94c5646637a5b4246f6f1dc65af67f6dc0c51",
     "decoded_bytes": 0,
     "expected_bytes": 1099619,
-    "file": "calls/restore_6389a4301478fd4df74e146f1ae4b8942f675e20.json"
+    "file": "calls/restore_39a94c5646637a5b4246f6f1dc65af67f6dc0c51.json"
   },
   {
     "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FINAL_READBACK.json",

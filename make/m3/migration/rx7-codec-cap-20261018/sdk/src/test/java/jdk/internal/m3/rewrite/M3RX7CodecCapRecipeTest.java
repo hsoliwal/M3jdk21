@@ -1091,9 +1091,9 @@ final class M3RX7CodecCapRecipeTest {
         assertEquals("e4624f56a93d68cd04337e39ed2cd3896867149908f287d5839ddff9b965ae95",
                 sha256(before.get(test)));
         assertEquals("053c69bd70909731e6509d06f6b29d31a24e2fb669a57f82bf22587e44e839c0", sha256(after.get(test)));
-        assertEquals("0bb9237ae583ba0a63dfaae5742d66be0c2749c79dd51cb6d44f5cf3e8e33f57",
+        assertEquals("9b99fe6d8c1989d5b1d03e298e4cea7b9cbf529c61bbbcfa59ed2908f9f45c34",
                 sha256(before.get(manifest)));
-        assertEquals("e0903dbeabc2f6a52c94e621ebe2e7184b1ef634725c2479d5b76ae5d2a4101d",
+        assertEquals("8384fd6afd2f39710353265aae1bf243a042eaddd39b8413d5f2f98811808e5d",
                 sha256(after.get(manifest)));
         assertEquals(62359, after.get(factory).getBytes(StandardCharsets.UTF_8).length);
         assertEquals(6913, after.get(test).getBytes(StandardCharsets.UTF_8).length);

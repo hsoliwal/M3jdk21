@@ -45,7 +45,7 @@ source anchor matched.
 The full Python checker
 `make/m3/compatibility/check_object_source_lineage_20261104.py` was
 compiled with Python 3.13 and committed byte-for-byte to GitHub
-(Git blob `b64087dea35bf5e66717abc9b336ad804755e828`).
+(Git blob `44c3626ffb02fd1089663c640e4b8fed56603493`).
 Its first-party 10-test suite
 `test_object_source_lineage_20261104.py` is source-sealed by Git
 blob `38169704acf9ef05b8d24a81fefe195e675ab99c`.

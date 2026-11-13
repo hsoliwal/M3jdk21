@@ -32,17 +32,17 @@
     },
     {
       "path": "doc/m3/regex-token-composite-convergence-20261018.md",
-      "sha256": "b12e9369cf72a8b553ec50f326bab73a03ba9d22abef9723a70dcd9fc0eecbb4",
+      "sha256": "92e5a1b94362f5f76f8325ba4c2307006cb4707d0b04c3bd8afa922a6b535489",
       "source_kind": "TEXT"
     },
     {
       "path": "make/m3/runtime-integration/check-m3rx7-convergence.sh",
-      "sha256": "ec4e739805bf1e5d343bb20fe5258643de8bc4b560c7612288bfa83fe21c1706",
+      "sha256": "e5c203ce9b38ede44a469410f255ccd7b8e9555b8d39022d0ba998c687f79246",
       "source_kind": "TEXT"
     },
     {
       "path": "make/m3/runtime-integration/check-m3rx7-transition-native.sh",
-      "sha256": "9efcb13152290c1a2eb862b4b71adbf028de045fb531c8895440314b10ebdd24",
+      "sha256": "420b31e67dd90d247433ef815f13709333caf78895213ff05e7e234e4c722ebf",
       "source_kind": "TEXT"
     },
     {
@@ -104,12 +104,12 @@
     },
     {
       "path": "receiver-host.json",
-      "sha256": "f5583e7bb0dff9dbb80e8b8045afc2b2c09a3ba9d5916bf4257a9c885a9741bd",
+      "sha256": "21b6e1f2107fd0a7997bd4b68a6e866ff2a66fe959130530b45e7250b241b458",
       "source_url": "https://github.com/hsoliwal/com.synexia/blob/a0a22f0a5554e19de46b27775b0eeb70fdea6c6a/synexia-openrewrite-recipes/recipes/m3jdk21-token-composite-convergence-20261018/evidence/receiver-host.json"
     },
     {
       "path": "receiver-host.log",
-      "sha256": "f04cf3861cb315e9e67398e0ce56e5381bf826e3767fa951325b9e08401a9103",
+      "sha256": "0c065fe47da0913a58ef84a3c814e349d1f406a5146848afa55605e842c6e9a5",
       "source_url": "https://github.com/hsoliwal/com.synexia/blob/a0a22f0a5554e19de46b27775b0eeb70fdea6c6a/synexia-openrewrite-recipes/recipes/m3jdk21-token-composite-convergence-20261018/evidence/receiver-host.log"
     }
   ],

@@ -13,6 +13,6 @@ Second, the verification-commit body must now equal the JSON parsed from the ret
 
 The main verifier's only change is its expected helper SHA-256, updated to the exact T02 helper. Its two immutable invalid-UTF8 exceptions, six required direct bodies, normalized-wrapper/path/ref/size checks, strict byte/Git/SHA checks, full payload/tree/parent verification, pre-branch mode and final `PUBLISHED_CUSTODY_VERIFIED` semantics are otherwise byte-for-byte unchanged. No source qualification or receiving acceptance is added.
 
-`CUSTODY_INPUT.json` remains `384ce843f2e4545ad1c40d7ee58abbc471b5a6d1cbed89bea82dcff0479ce6a5`; `PROTOCOL.md` remains `cdf3826e3725acded05b38031b70d9e7a8f8579540b38d65a2a8e38ce64209f5`. The parent owns the complete helper algorithm and actual four-create/four-read/17-tree evidence audit. This addendum reviews only the exact corrections and updated integration pin.
+`CUSTODY_INPUT.json` remains `86e5e92e9f2dbb209085133b54daf9db3ad72988fe82968fb9f819aa015a3750`; `PROTOCOL.md` remains `cdf3826e3725acded05b38031b70d9e7a8f8579540b38d65a2a8e38ce64209f5`. The parent owns the complete helper algorithm and actual four-create/four-read/17-tree evidence audit. This addendum reviews only the exact corrections and updated integration pin.
 
 Six inputs were rehashed without change during this review. The preserved draft hashes match the original static report. Source parsing and text comparison were performed without importing or executing either owner program. No remote action, owner edit, broad payload audit or historical suite review occurred.

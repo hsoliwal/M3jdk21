@@ -142,5 +142,5 @@
   "candidate_fixture_receipts_satisfy_full_module_gate": false,
   "source_export_admitted": false,
   "jdk_acceptance": false,
-  "frontier_sha256": "5d2d214c13e11060a8f02dfa601fff24d0a9622b19b43c182a38f4dcf867315f"
+  "frontier_sha256": "346e2288fbe959a564b0289e70e1347585231ed4745954428ec72425e2a5a066"
 }

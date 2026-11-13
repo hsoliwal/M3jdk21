@@ -10,9 +10,9 @@ every complete current non-JCC record, including that updated TQ record.
 
 The original 47-record/45-other-record/17-mapping expectations remain frozen in
 `candidate/mapping/java-template/TEMPLATE_PACKET.json`, SHA-256
-`a5a81bee6c69a796e0cf7632746dff3be5ac56bb11fbaac3424dcba325fcd94b`.
+`40e7f6ef1c30496b64c81574cfa8c358db9a82b9124003f07c1daecc550e795a`.
 V02 is also retained unchanged at `candidate/mapping-v02/java-template/TEMPLATE_PACKET.json`,
-SHA-256 `bba43023ead328438b81a397dcb6c646d5c79bfe33555d5a220ef1f985aabcd6`.
+SHA-256 `7ce81a0df44dd756158d51b1f1c3a9b1086e69dbdb7d8454f6066c499ee5f48f`.
 The receiving input advance did not change either historical oracle. The current
 input epoch is `candidate/mapping-v03/input-epoch/INPUT_EPOCH.json`, SHA-256
 `027e47d20c7fb854e028487ceef341c929877a6421dbb75f6433b5cd007fe5ee`.
@@ -84,8 +84,8 @@ also includes these two existing historical resources from
 
 | Resource | Contents | SHA-256 |
 | --- | --- | --- |
-| `history-0014.txt` | Complete prior map | `abfc59de62d46f6442b95717ac367461ab057cd74ed9dfffc6515d7fb0a1574c` |
-| `history-0016.txt` | Complete prior bindings | `59b1491a232e3eabfd0530cbf47b01265603e6f493e382aa3c394c629b0516b6` |
+| `history-0014.txt` | Complete prior map | `a91ad1cb7d7f358fb7c4e280b7bf3756db9dd2d6f387f4c7e622e232ff03c0bf` |
+| `history-0016.txt` | Complete prior bindings | `a0b20e45bb5d5e8f4a684ee0d4daa7a9cf8730529ae784a09778b17aceabea11` |
 
 From the execution workspace's repository root:
 

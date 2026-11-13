@@ -12,16 +12,16 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/charcopy-current-successor-20261019/FOSS_REUSE_DECISION.tsv",
       "targetPath": "make/m3/tooling/charcopy-current-successor/FOSS_REUSE_DECISION.tsv",
-      "gitBlob": "560903dd0b02e0c43e782fbe67e1dcbef49f544f",
+      "gitBlob": "57ea2831e1002d71d2c79029f1b3e24eec1ea3a9",
       "bytes": 2781,
-      "sha256": "37f4f574766229fd509077f8c9c2fd483db2676122da87b6a5fde69ca559e4b2"
+      "sha256": "42fc64519e27feefa08a6abbe33f161857136b231a6527fdaaa0fcca3aff3daf"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/charcopy-current-successor-20261019/INPUTS.json",
       "targetPath": "make/m3/tooling/charcopy-current-successor/INPUTS.json",
-      "gitBlob": "4614046a944b69d8ef91590fb5d6d04c3e8f39b7",
+      "gitBlob": "58ca1254e980bfd124c98f0de92c37146f633e4a",
       "bytes": 9508,
-      "sha256": "44c0d4e49f369ef19a5be322ebb24f13cae6497e027be1b85744df7bc582202c"
+      "sha256": "5d85dd73139c58740b45e27d86c4d596ffefd305310674432d3140b24793a6c9"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/charcopy-current-successor-20261019/README.md",
@@ -47,9 +47,9 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/charcopy-current-successor-20261019/qualify.py",
       "targetPath": "make/m3/tooling/charcopy-current-successor/qualify.py",
-      "gitBlob": "2e9dffad355017ded70f939758f57f44022dfa36",
+      "gitBlob": "2ed3f92457c7af32e108923e884222a2d1b246d6",
       "bytes": 24896,
-      "sha256": "d2dd34e0893574691e4093c5ed06baec89b0712fcbaf6739e4f4ce351603c0de"
+      "sha256": "4c4a6932002ee0e6df688dbc70147eee91dc5fdabea2a369ff53158a9939f427"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/charcopy-current-successor-20261019/sdk/LICENSE.OpenJDK",
@@ -68,9 +68,9 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/charcopy-current-successor-20261019/sdk/pinned-engine/jdk/internal/m3/rewrite/M3CharcopyCurrentSuccessorRecipe.java",
       "targetPath": "make/m3/tooling/charcopy-current-successor/sdk/pinned-engine/jdk/internal/m3/rewrite/M3CharcopyCurrentSuccessorRecipe.java",
-      "gitBlob": "ae0a423270f2654a5ea5e8c2c8140c291091298e",
+      "gitBlob": "0aa377786444d7943fa2b6a4b56b5a86d0b3885a",
       "bytes": 1951,
-      "sha256": "c3b2867fd17d9e7993ca70b70a3da4e18698cb7f48498b87e6867136c115fc07"
+      "sha256": "1e052d1e90e4af4e67b650253a2456186ad16748dfa9721149fbd04c083455e4"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/charcopy-current-successor-20261019/sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
@@ -103,16 +103,16 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/charcopy-current-successor-20261019/sdk/src/main/resources/jdk/internal/m3/rewrite/charcopy-current-successor-20261019/manifest.tsv",
       "targetPath": "make/m3/tooling/charcopy-current-successor/sdk/src/main/resources/jdk/internal/m3/rewrite/charcopy-current-successor-20261019/manifest.tsv",
-      "gitBlob": "1546700a445bf1c38834a41ba3b4ed263abf9527",
+      "gitBlob": "7d0ed15dcfb58887d3c84092431a2eb37ba8bc8a",
       "bytes": 1489,
-      "sha256": "db44f3abf5270084eaa529469f664333fcef6abfe4df73e78d7548f2a3287303"
+      "sha256": "270bcd43daaf9c10b4ea80796a2c2fd14353c8721905223ae934d95784794f65"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/charcopy-current-successor-20261019/sdk/src/test/java/jdk/internal/m3/rewrite/M3CharcopyCurrentSuccessorRecipeTest.java",
       "targetPath": "make/m3/tooling/charcopy-current-successor/sdk/src/test/java/jdk/internal/m3/rewrite/M3CharcopyCurrentSuccessorRecipeTest.java",
-      "gitBlob": "078109c8d1395801fffbdee913481eaeb559d367",
+      "gitBlob": "20695e64c482582230666dcb13d9144fc08fc5ee",
       "bytes": 14347,
-      "sha256": "66e5e7c3abdc5801f694e6cd447dea24f2f11bc96638d939b9b9cfa6af6192a9"
+      "sha256": "0f790b3e2e134bf55f08017c1d8617560f35ba0dc5df36a1f027e2253e56a861"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/charcopy-current-successor-20261019/sdk/src/test/resources/jdk/internal/m3/rewrite/charcopy-current-successor-20261019/M3String-predecessor.java.txt",
@@ -159,16 +159,16 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/charcopy-current-successor-20261019/hosted/qualify.py",
       "targetPath": "make/m3/tooling/charcopy-current-successor/hosted/qualify.py",
-      "gitBlob": "401df310e8e78fb86eeca6f7dee2b3159429cae5",
+      "gitBlob": "95e744ae25905ffd122d9c650c5e0fcfbd3315b4",
       "bytes": 17579,
-      "sha256": "e928f44b3d5573a3c86f734832f6e0471c63a132164db4e34ea1c04d1f594fc5"
+      "sha256": "b0bfcffa210b2080e2446ccde2dfb309cc02cb497cb576ef5c9c738698eee4ba"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/charcopy-current-successor-20261019/hosted/README.md",
       "targetPath": "make/m3/tooling/charcopy-current-successor/hosted/README.md",
-      "gitBlob": "c7fd8a2c523c1edbafc2a98e18c61d1062112e31",
+      "gitBlob": "95fd193cad8120a6eda7c4338d64429d577d2e2d",
       "bytes": 6236,
-      "sha256": "7daab9e7c6a1421d37672326e9f172aa922522343751ce2658656e213cf0d484"
+      "sha256": "df5f4cb388541dae7ed5e80fe54b4e183985354b92fc8d5fbdb4963df7f4f3ea"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/charcopy-current-successor-20261019/hosted/qualification.yml",
@@ -205,9 +205,9 @@
     },
     {
       "path": "make/m3/runtime-integration/char-array-copy/recipe/apply.py",
-      "gitBlob": "3e1a29bedd5f508d1217d81f712d5351f2e56a5d",
+      "gitBlob": "8561f612e87649ef02f2b56e42860af837b7a96a",
       "bytes": 10847,
-      "sha256": "01a20628a493101194d4698ad0701533c2a3ba797d17a344e5d557616976e16b"
+      "sha256": "bae4185077f38c69b59120ca3d7197bbfa8babbc56f9a3a9f8f0d0b6c42c3f52"
     },
     {
       "path": "make/m3/runtime-integration/char-array-copy/recipe/manifest.json",

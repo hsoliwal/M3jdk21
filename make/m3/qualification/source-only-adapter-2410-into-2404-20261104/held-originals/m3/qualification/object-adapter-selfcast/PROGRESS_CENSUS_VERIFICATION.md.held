@@ -52,7 +52,7 @@ still requires the original fail-closed historical gate for acceptance.
   refusal, synthetic expected vs current source agreement and historical
   hash mismatch refusal.
 - Source and test Git blobs compared against locally tested files:
-  `8193a6ce541874d56a38f8b6cb4f573083da2491` (verifier),
+  `867c364aee9558163f847ed71ad270ff7d154f0f` (verifier),
   `fd59470185971a869679f5dead3f6a4bc647b739` (tests),
   `fa2b92012e952a1bc92de80112856d4c13daa936` (ledger).
 - Focused hosted workflow was authored separately and must report its own

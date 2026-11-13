@@ -26,13 +26,13 @@
     },
     {
       "path": "make/m3/history/RETAINED_EVIDENCE.tsv",
-      "sha256": "47d58b6f4fb5aa55022b59fb8a9a83a975b8e52336ac98c7c339251c0604210b",
-      "git_blob": "9d8687c766a60d1188ccab93d7d4dbc5eb4850be"
+      "sha256": "0097224f108a6a1b74fa92482a708ef090cebb00d605bc627689295dff64f8da",
+      "git_blob": "8fae681964b9665facb0d42998060bb80219ec1e"
     },
     {
       "path": "make/m3/history/evidence-manifests/string-ci-20261014.tsv",
-      "sha256": "c049316c51ac8e361f84dc313bb645c2ca5c39e161be65da265af08b9e3d663b",
-      "git_blob": "6cadf639436f6461f0b251c5129ffe6a3815eae5"
+      "sha256": "8707748ac9347355634971247d82e46f6c743f18ddbcbcda8a8fd063f49d4315",
+      "git_blob": "758f9859c5c081c4eaeae81267c69bff0f1e3dec"
     },
     {
       "path": "make/m3/runtime-integration/check-m3string-invariants.py",

@@ -15,7 +15,7 @@
     },
     {
       "path": "MODES.tsv",
-      "sha256": "445ee7f4c108b2c028e8c575724dbdc042d0b57923b2e94f479f1acae3a3a503",
+      "sha256": "3c01018d47e196cd9ee40f52cdd9945fce4f0a001d4602fcb58df7fef98b3c56",
       "bytes": 329
     },
     {
@@ -65,7 +65,7 @@
     },
     {
       "path": "resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-m3jdk21-plugin-selection/manifest.tsv",
-      "sha256": "bdfc8278128eeeec4f36529e72efa605cfb830b0f7ae2c6718a163baf42cd940",
+      "sha256": "5b4ca18e126a28ce0d486cd79f60d5aca089fab1b0e5c784d67c600e0d36d168",
       "bytes": 325
     }
   ]

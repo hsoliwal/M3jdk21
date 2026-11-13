@@ -34,10 +34,10 @@ The linked references account for each complete declared source body, including 
 | [M3Method.java](../../src/java.base/share/classes/jdk/internal/mindex/M3Method.java) | `6bc2fe9176bdd9c95d732ecad105f03b62f4385e` | [Typed method projection](class-member-view-reference.md#member-views) |
 | [M3PC.java](../../src/java.base/share/classes/jdk/internal/mindex/M3PC.java) | `b63fd9e457f7ac16bca8bf07dcb564069fdfef79` | [Ordered VM-local candidate context key](internal-metadata-lanes-reference.md#candidate-context-key-m3pc) |
 | [M3RecordComponent.java](../../src/java.base/share/classes/jdk/internal/mindex/M3RecordComponent.java) | `55f82a8486055d50e24d1a9b12b0636f9db876ed` | [Typed record-component projection](class-member-view-reference.md#member-views) |
-| [M3Release.java](../../src/java.base/share/classes/jdk/internal/mindex/M3Release.java) | `1116f4cb0ffd361e764688640adb53af8cabe86d` | [Exact declared release provenance](mapped-string-storage-reference.md#m3release-exact-caller-declared-provenance) |
+| [M3Release.java](../../src/java.base/share/classes/jdk/internal/mindex/M3Release.java) | `408089ce5d78aec1bcb8cd97768e02f15f48e004` | [Exact declared release provenance](mapped-string-storage-reference.md#m3release-exact-caller-declared-provenance) |
 | [M3StringBacking.java](../../src/java.base/share/classes/jdk/internal/mindex/M3StringBacking.java) | `5daedbe16dfc9377783b52d932e548cc44f0b335` | [Backing interface/default contracts](mapped-string-storage-reference.md#m3stringbacking-transport-neutral-surface) |
-| [M3TQ.java](../../src/java.base/share/classes/jdk/internal/mindex/M3TQ.java) | `533a07b77061e757d476627557413f6df1067d34` | [Necessary-condition queries and exact trigram sets](trigram-query-reference.md) |
-| [M3VI.java](../../src/java.base/share/classes/jdk/internal/mindex/M3VI.java) | `087aa55bef9b57189d03f3388fb2e1f360320b02` | [Version parsing/order/range queries and Scheme limits](internal-metadata-lanes-reference.md#version-index-m3vi) |
+| [M3TQ.java](../../src/java.base/share/classes/jdk/internal/mindex/M3TQ.java) | `639acd53a32d0c7de879678d18de58423937c0fb` | [Necessary-condition queries and exact trigram sets](trigram-query-reference.md) |
+| [M3VI.java](../../src/java.base/share/classes/jdk/internal/mindex/M3VI.java) | `eda4db3979a6aeed341d0190be974fe88059f3db` | [Version parsing/order/range queries and Scheme limits](internal-metadata-lanes-reference.md#version-index-m3vi) |
 
 ## Why five references are needed
 

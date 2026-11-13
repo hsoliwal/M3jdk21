@@ -77,14 +77,14 @@
     {
       "dataset": "m3jdk21-compiler",
       "path": "make/m3/tooling/shared-frontend/README.md",
-      "sha256": "8f076c768f832ebcad3e9e25b4e99b0a24f3b2e6a072865d449bf216203c642c",
-      "git_blob_sha1": "304054ec80d62ecf8992dd0446576fed81b56178"
+      "sha256": "d6b621764687d8ae681a32ed36fe7331a876057bd02ae43e0f5fc1456f5e9a4f",
+      "git_blob_sha1": "efdf287617e64b2329598a7b97f38988f27483a2"
     },
     {
       "dataset": "m3jdk21-compiler",
       "path": "make/m3/tooling/shared-frontend/algorithm-catalogue.tsv",
-      "sha256": "a9b61bf5d96072144f0e229a48011e573dd7125572edb6e6599ebf4a71003faa",
-      "git_blob_sha1": "d6887790c11ab3cad3cfa4506f096a9a5a7275b6"
+      "sha256": "ba714f38f4dda33aff6cf14595c1921e0da6a4454dcfa0b793684e0d99c689ef",
+      "git_blob_sha1": "e96f033b6744e86716d27c1f33cc9145c1239d0a"
     },
     {
       "dataset": "m3jdk21-compiler",
@@ -155,8 +155,8 @@
     {
       "dataset": "m3jdk21-build",
       "path": "make/m3/tooling/module-packs/build-tools/README.md",
-      "sha256": "7793bb9e194b22813f8af94333147fa463f4c9d256649714fbb488be367b8a09",
-      "git_blob_sha1": "106d5c3bff8c254ece3c85f8172b06562404671c"
+      "sha256": "f69ba92b43d6af251d5983f2d15ed412dea380b448927096c44f2b249f3e7b9f",
+      "git_blob_sha1": "af7c20aedf4012e80704feb893de042c52e1d974"
     },
     {
       "dataset": "m3jdk21-build",

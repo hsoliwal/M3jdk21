@@ -81,7 +81,7 @@
     },
     {
       "path": "synexia-openrewrite-recipes/crates/m3-jdk-handoff/string-ledger/provenance/M3-NOTICE.txt",
-      "git_blob": "d0c4c8bb5e7544fd7a679f4250c53b1767792e04"
+      "git_blob": "8b3f077e72085c291436e08a614b0c9975b1addf"
     },
     {
       "path": "synexia-openrewrite-recipes/crates/m3-jdk-handoff/string-ledger/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-string-ledger-20261008/00-mindex-string-backing.yml.txt",
@@ -105,7 +105,7 @@
     },
     {
       "path": "synexia-openrewrite-recipes/crates/m3-jdk-handoff/string-ledger/src/test/resources/before/.github/workflows/mindex-string-backing.yml",
-      "git_blob": "1145b584bb032657b540c4b972f53b53cf7eef44"
+      "git_blob": "274ab850f61145e038a8b5f2f966a82410d152c8"
     },
     {
       "path": "synexia-openrewrite-recipes/crates/m3-jdk-handoff/string-ledger/src/test/resources/before/m3/runtime-integration/check-m3string-invariants.py",
@@ -119,7 +119,7 @@
   "outputs": [
     {
       "path": ".github/workflows/mindex-string-backing.yml",
-      "before": "cf9eb56cc321a4bcd403163f2a25e266d79e9c49dc7b934ea8d0221b250a9552",
+      "before": "4c0358500d347f85ab4ed93a295e18a59e0978bb62fbd97f7b5373e96abfe5b1",
       "after": "8f49f646b0b8b56b6dc70212f22366bb16112df91f8a6e7f0e86f41d545f655e"
     },
     {

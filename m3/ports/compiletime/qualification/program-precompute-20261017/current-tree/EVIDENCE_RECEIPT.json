@@ -13,7 +13,7 @@
   "helper_test_scope": "Synthetic boundary fixtures from the prior helper qualification; actual runtime SDK receivers and Java source checks are separate commands. Final metadata helper changes are qualified in evidence/prepared/MAVEN_VERIFY.log.",
   "execution_files": 27,
   "execution_bytes": 95781,
-  "inventory_sha256": "67577f49a1e1a230fc0543eb1dfbe6b728157c611f90bf10ddffb549db29ba5c",
+  "inventory_sha256": "17269119a3574fc62064e8cdabc232bec8528344572c7366fc2edda7178f8c7a",
   "source_gate_sha256": "67172088fda5233cd07886042b753a6eb378f24b80cb49bf3bfd62da757ad198",
   "literal_bytes_preserved": true,
   "nul_git_stdout": "Lossless JSON string envelope produced by the checker",
@@ -42,7 +42,7 @@
     },
     {
       "path": "RESULT.json",
-      "sha256": "846675b785af4447d959b3625c88ae5780d9db9d3e0eeeed05b8389f1047e7d7",
+      "sha256": "a5895113a418e55df89a44c42207ba5f1f6c05500044fcddd0ed2d41773797b0",
       "bytes": 25480,
       "source": "/tmp/m3-program-current-compiletime/RESULT.json"
     },
@@ -156,7 +156,7 @@
     },
     {
       "path": "receiving-source-tree.stdout.json",
-      "sha256": "1c49ec75e0f7f39ebb41981e7c52400d9faf8b6072f70f1b1c10ac2c98f2a25e",
+      "sha256": "cb7e1d4eaa3c14a7a1ca81a8f931a269aa00aa254aa53d3e91330fc4cc2c8c3f",
       "bytes": 20146,
       "source": "/tmp/m3-program-current-compiletime/receiving-source-tree.stdout.json"
     },

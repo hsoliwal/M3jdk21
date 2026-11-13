@@ -82,15 +82,15 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/docs/atom-pattern-admission-and-tooling-boundary.md",
       "bytes": 7878,
-      "sha256": "8742c19ea1d7fe1f5a8029c917ba79a3f02aa1adfc31456e16b63f1eb3eb9134",
-      "git_blob_sha1": "8089f053a6b13e9cd58323744cea85f40b23e4bc",
+      "sha256": "30cd72e59c16dcae65631eb6a2eab76a6c3e95db34005106cf3be161c51ee795",
+      "git_blob_sha1": "a9189171362f93fddd17543fd31b65892ae6cb0e",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/docs/java21-multipass-openrewrite-convergence.md",
       "bytes": 2241,
-      "sha256": "d6fb682156dfcf7da23aeb0f7f8c40c54089196bf0bab4575807ee6386c71fd6",
-      "git_blob_sha1": "06658e0e60d9e38a416291291be543b6f41b7bb7",
+      "sha256": "0f09b842911ce51f7f14542e2c339e03200fa80498bc1870c211338640f6d422",
+      "git_blob_sha1": "f7a27fe1b202d6b6a9122b33aae125a06a218700",
       "mode": "0o644"
     },
     {
@@ -110,8 +110,8 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/docs/migration-worked-port-decisions.md",
       "bytes": 22034,
-      "sha256": "be289646aadf9314ce63a7b7db6336c723ce3ba29a8de3cdae03f375a5d18b8e",
-      "git_blob_sha1": "89b17ea695663e5171ce236251aa59ba28e6cae1",
+      "sha256": "feb56b4675d7fa8cdcce0546047fa1e8bb6db4d3c79a9eac333e54d335edb449",
+      "git_blob_sha1": "b5149a75816d7f39f9c51fff3df1238ce448aa86",
       "mode": "0o644"
     },
     {
@@ -138,8 +138,8 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/migration/docs/ARCHITECTURE.md",
       "bytes": 6551,
-      "sha256": "42f055c4faf362164ec474ed42681886661741ea2818cbac23f275f5713d7d1f",
-      "git_blob_sha1": "0182f9314d013fe222453792024c2c2edfcdc5f8",
+      "sha256": "cc3733798512e3e11879c8ca236a6255a8a6639c953d8c1c5ae4cf007f6eebda",
+      "git_blob_sha1": "ecca89bc20747d35cd492c798fd95bfdf7d5df24",
       "mode": "0o644"
     },
     {
@@ -495,22 +495,22 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/manifest.tsv",
       "bytes": 687,
-      "sha256": "258b5ab6f6cb7099685ee4548d5430fcb952561fefdf565a6dff149cf50c5f06",
-      "git_blob_sha1": "9f24b0965b9c78257ab0ebfb9f3f83561766e0ea",
+      "sha256": "0672554c4335699f8fbd6ea510c8d30c85ae0543218ac2ce09b507363ebdcbaf",
+      "git_blob_sha1": "41c5c2f16886ef76378cee534b5c1a3c5dc02b25",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan.json",
       "bytes": 2861,
-      "sha256": "7c98e1c8d7d749e2eedd381d126cf68f641b86004edc6278cd32f613324e8326",
-      "git_blob_sha1": "d16c590aee6ce13f45e0c15201091a8783d52596",
+      "sha256": "263aa4b5196c3a94c6a9f450f2476a9956b01386b93c21a048b5dcca0b6441a9",
+      "git_blob_sha1": "c721c8ed56c8d1a0a21eaf5843cedd35e8b60a54",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after00-name-mapping.json.txt",
       "bytes": 236215,
-      "sha256": "61818898ef6c092ddad2c1ee4cfe7508199912ff0a1f2d5c2a51ad6695d040c8",
-      "git_blob_sha1": "3a1e902a8284773f0f182d6bd43bf4e27b4e63c0",
+      "sha256": "aeec3cfe84e57aadf7fa855a5f2174dd73749ccc8f6cd8f4409f0bb8a25e3d53",
+      "git_blob_sha1": "1bbe40b2c04da018894a4494da157c6865340490",
       "mode": "0o644"
     },
     {
@@ -523,8 +523,8 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after02-source-destination-bindings.json.txt",
       "bytes": 92103,
-      "sha256": "8c76c2dd45e775d29f8f47d8daf65842e465c74ad3dec7aacd55df59f9d051a1",
-      "git_blob_sha1": "5ecf415c7af4176898328d58b9df2972e18277c4",
+      "sha256": "e8f345aacd9d93fb436d08f3bd868c2f5849e8edf989dd7fab54cc665dc49577",
+      "git_blob_sha1": "0b4ddaae7f2550a3f336dea845a37781584d951e",
       "mode": "0o644"
     },
     {
@@ -565,22 +565,22 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/manifest.tsv",
       "bytes": 876,
-      "sha256": "bdf8db3538a4ef434eac10882da56159eb89dc6af344b3062a234c7052f13812",
-      "git_blob_sha1": "0db9d41c596d6ccb35b0c495b0e44bf48d75799e",
+      "sha256": "0a4013c5618b935e064e7faff6cc756073cca29e320394468a4e3e961acbeee0",
+      "git_blob_sha1": "e2fd737def08e982427b085748d67bf3a6bb26b9",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/plan.json",
       "bytes": 3414,
-      "sha256": "773061ce98ca152ae5015a12b13c08d332d5ffe64f43a913c677f297df4dbc8f",
-      "git_blob_sha1": "abaa28a2c5ca013aa967643cb7328781e3ea4a27",
+      "sha256": "f31976e57fc7305c13ad4ae98aba2d2b88d20e49a7858de2e66abe9368ca9bd2",
+      "git_blob_sha1": "9d5dd75c614b217119912d4bf813f0212ef1ba20",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/after00-name-mapping.json.txt",
       "bytes": 251524,
-      "sha256": "abfc59de62d46f6442b95717ac367461ab057cd74ed9dfffc6515d7fb0a1574c",
-      "git_blob_sha1": "f350c7c79e265c788d9e3278eb0103733b301327",
+      "sha256": "a91ad1cb7d7f358fb7c4e280b7bf3756db9dd2d6f387f4c7e622e232ff03c0bf",
+      "git_blob_sha1": "7d43a1dc26becb45aa69616d47c9e8224a37611d",
       "mode": "0o644"
     },
     {
@@ -593,8 +593,8 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/after02-source-destination-bindings.json.txt",
       "bytes": 167811,
-      "sha256": "59b1491a232e3eabfd0530cbf47b01265603e6f493e382aa3c394c629b0516b6",
-      "git_blob_sha1": "8fc1846a9d81c1a6cd7e21f66048d9bc4ef2a834",
+      "sha256": "a0b20e45bb5d5e8f4a684ee0d4daa7a9cf8730529ae784a09778b17aceabea11",
+      "git_blob_sha1": "46b99a0250db3076a602529f5aa4daedfc567739",
       "mode": "0o644"
     },
     {
@@ -607,8 +607,8 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/before00-name-mapping.json.txt",
       "bytes": 236215,
-      "sha256": "61818898ef6c092ddad2c1ee4cfe7508199912ff0a1f2d5c2a51ad6695d040c8",
-      "git_blob_sha1": "3a1e902a8284773f0f182d6bd43bf4e27b4e63c0",
+      "sha256": "aeec3cfe84e57aadf7fa855a5f2174dd73749ccc8f6cd8f4409f0bb8a25e3d53",
+      "git_blob_sha1": "1bbe40b2c04da018894a4494da157c6865340490",
       "mode": "0o644"
     },
     {
@@ -621,8 +621,8 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/before02-source-destination-bindings.json.txt",
       "bytes": 92103,
-      "sha256": "8c76c2dd45e775d29f8f47d8daf65842e465c74ad3dec7aacd55df59f9d051a1",
-      "git_blob_sha1": "5ecf415c7af4176898328d58b9df2972e18277c4",
+      "sha256": "e8f345aacd9d93fb436d08f3bd868c2f5849e8edf989dd7fab54cc665dc49577",
+      "git_blob_sha1": "0b4ddaae7f2550a3f336dea845a37781584d951e",
       "mode": "0o644"
     },
     {
@@ -635,15 +635,15 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/manifest.tsv",
       "bytes": 876,
-      "sha256": "f9e38d31f89d71ee6fcbb107d2ea0d12636196b16094d951b64b9a4b74bd5c0b",
-      "git_blob_sha1": "498da5417b538c49ce52ba13b7ef782ecc2b9e47",
+      "sha256": "9937394b752407265505c7b4aaee7fe6febac6babc05a27012c76301e08d8ccf",
+      "git_blob_sha1": "b02d4d3d49953d231baa49dc70c9b2543f6acc1a",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/plan.json",
       "bytes": 3390,
-      "sha256": "68d9e65e8d45d1c6e8eea04de4f9e2ab0326b7d66fef7f3d86f832fb0c8197e2",
-      "git_blob_sha1": "c4b6be425ba7a025ce20a4da6dd7317c96fea5ff",
+      "sha256": "49a8d7f2daeebe445ae6c7dcbde5d217ff28393238f9d569e7115f627a270620",
+      "git_blob_sha1": "fbb9e0400ef9aa60bc6e044d21f85e904b1bd8f0",
       "mode": "0o644"
     },
     {
@@ -684,29 +684,29 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccHandoffTest.java",
       "bytes": 19825,
-      "sha256": "72e0e1a33c402a1af2d12366c5f765f1ed0fda7594ef746e691a96c67b903ee3",
-      "git_blob_sha1": "ac9868de89b3a1cd333f401f0200a0e0afff0006",
+      "sha256": "468ea98728df62254b46c57c01c2f516fddbc465d3fef94062640b29c4cd63f5",
+      "git_blob_sha1": "89d0ffc978b9305f4ac1ea90551a574545d95482",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccSourceFinalHandoffTest.java",
       "bytes": 24518,
-      "sha256": "7bbaffb5c5f16f05119d439ff5a1f979c90b6091a2c3d79623f3e7d5cf538d43",
-      "git_blob_sha1": "2dcbc9debd2c3668c37dcc1d5075d5c635c7d1e4",
+      "sha256": "04bca26aad239dfe8fe16a8180acc4824e99fc362e5762f2033795cad589b168",
+      "git_blob_sha1": "5372bdda4a8a541ed769e785336cec4da58d29ef",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccSourceRecoveryHandoffTest.java",
       "bytes": 29963,
-      "sha256": "5a6efe78569fa76702d85b2d391335423d839b62748275748efc6020ba386de3",
-      "git_blob_sha1": "1abc53c1c880686111631234b5df7db191bd0297",
+      "sha256": "e25ac6f591aaee807abab8906fd61f5c191882f500c4dde5f4de8df7581c42df",
+      "git_blob_sha1": "68065addeeba93a0e24edd3f3697004a752a212c",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JniTest.java",
       "bytes": 4741,
-      "sha256": "f1c03c4e8e676c8e7893696427b2b2c4943976412286bd74d71c187db440d3df",
-      "git_blob_sha1": "3d99383e198743866986c686610f668d9c368796",
+      "sha256": "c7ae64b2bcf8f6a2e8c07c30c64790865a8f33a5f299bb74bdf1540aa0f7dd4d",
+      "git_blob_sha1": "971ddecf186fcc01cbade1c4cc3be01beb00c325",
       "mode": "0o644"
     },
     {
@@ -719,8 +719,8 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/REVIEW.md",
       "bytes": 10613,
-      "sha256": "afcfa9e7fae23d7c9348e0502dc389fca5435689dca6777e8fbf3ac376f6c155",
-      "git_blob_sha1": "6bb4273e191420d66d2f258e389b7818e3779baa",
+      "sha256": "ddfeae0da40ead6bd957d064b63d097474943b8c991bcec7f2e00e254e1ecda5",
+      "git_blob_sha1": "01e08621c7b8988482a2405b7230e6ec64639449",
       "mode": "0o644"
     },
     {
@@ -873,15 +873,15 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/ledger-e02/inputs.json",
       "bytes": 4275,
-      "sha256": "912fdd4d9f09222e530f3872e6184766232479a1c36b1a192dfd4cf4875758bd",
-      "git_blob_sha1": "de7faf1f3ac7ebd58e20ff18dce97df4437005bf",
+      "sha256": "058d80210fd15796d538408ff0c1f736ebe83cd0db47da9b5fa7259b0f95e7ef",
+      "git_blob_sha1": "8ac91d369562b02b25adc58d824d8377f3ebe652",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/ledger-e02/receipt.json",
       "bytes": 10396,
-      "sha256": "a7efd94b8da1ae11f40d138d859b1448e548f13ebb12bf2f7ef7c3182911dc18",
-      "git_blob_sha1": "457d9e06ab6efade833f2864cf9823227660764d",
+      "sha256": "c2650fd78700926afffd16b5a7a1a76f208ddfe54f498e1d4ba00eb7f3c9eb77",
+      "git_blob_sha1": "a7b9fa66d62d3d7c48bef0dc378a5ff66fe6bb37",
       "mode": "0o644"
     },
     {
@@ -915,22 +915,22 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/owner-regressions/receipt.json",
       "bytes": 2643,
-      "sha256": "8246b87185ec397d5efb029cf4e125e41b620d054ec0090049f6624f7577adea",
-      "git_blob_sha1": "9a689dfdca0eb058e75277f074007131216874ab",
+      "sha256": "9de7645f388c8f1d91116608cbcd4e31188fadff1851be944e65740e38eabaf0",
+      "git_blob_sha1": "47b8c6d7865a033eae3bf2ef43cf6df676ab46ac",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/owning-module-frontier/FRONTIER.tsv",
       "bytes": 120404,
-      "sha256": "5d2d214c13e11060a8f02dfa601fff24d0a9622b19b43c182a38f4dcf867315f",
-      "git_blob_sha1": "372ff8189c9899d8440009042da68c44b3c5e8ae",
+      "sha256": "346e2288fbe959a564b0289e70e1347585231ed4745954428ec72425e2a5a066",
+      "git_blob_sha1": "79144f40a04fe54f4d7f91fe7b7185349a785a84",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/owning-module-frontier/REVIEW.json",
       "bytes": 4807,
-      "sha256": "ac128a680edefc7d38daac9b4fe7ce9cebf474a5b6f3d2136bc2a58eb6635d16",
-      "git_blob_sha1": "89094b48367106f22671e5a6d109bf095dc8c525",
+      "sha256": "2b4fe0b108ec2a733bd89e326f6a8d2988144c347289855bcf485f9866a6924f",
+      "git_blob_sha1": "7c26c6924a81e537b0324baaca723c0ba67e012e",
       "mode": "0o644"
     },
     {
@@ -950,15 +950,15 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/receiving-e02/STAGING_RECEIPT.json",
       "bytes": 6235,
-      "sha256": "19b3265052459b5cddb95b695c7801d2090733d30527e6553eed823597690d17",
-      "git_blob_sha1": "2a45b9bac43c264a0bdc9a444c01dad625dbe747",
+      "sha256": "1583cc386e0187fd35cb3321e6e0c5b592351d52b5b262f36201d30d2b127a87",
+      "git_blob_sha1": "82da0e6f41f75bc923b7377343656841d6975b4a",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/receiving-e02/VERIFICATION_RECEIPT.json",
       "bytes": 1974,
-      "sha256": "b1d9d2a9d1492c2c69c62a1bc0fda5277cade749fc1ad690d355bc3ca71905ef",
-      "git_blob_sha1": "8fa6bb0ab8a329164579fad68aac96bf56457bf1",
+      "sha256": "58b717be6abf6503979be50f60cc47c70338d0cd3cb06479b78faaee80532115",
+      "git_blob_sha1": "4b6e9bf7244e7ec2eb2c6a4c2c90f1520b554278",
       "mode": "0o644"
     },
     {
@@ -985,15 +985,15 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/text-maven-e02/inputs.json",
       "bytes": 3353,
-      "sha256": "3ef45b842c78a6fe484bd2d1de0c10f3055e1b84ff2816922a0a991eada49c60",
-      "git_blob_sha1": "89b6b75792c2a282946b131e8e59a38fdfcc36ac",
+      "sha256": "3d9e951aef8a01f44d109ae64c78b682d5bfcc586c3f5e26d8eda97ba6b28526",
+      "git_blob_sha1": "382651810aedcb4a7e81c0211256f80953f3dd19",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/text-maven-e02/receipt.json",
       "bytes": 1632,
-      "sha256": "e948882cabeae36a82b8723695f316d2e0fe2ab3c4ec03633950c7c825d61015",
-      "git_blob_sha1": "a8db18e21903fd5fa2641038e67cfc3c7237ae3f",
+      "sha256": "9b0e6d92ec9b1c077a261b5dc3a0c21f8d5b767d714eb75a5641deb8f6e88168",
+      "git_blob_sha1": "740547a7ac44e2fd635a3e36f00592ba618f90d1",
       "mode": "0o644"
     },
     {
@@ -1244,8 +1244,8 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/inputs.json",
       "bytes": 95340,
-      "sha256": "adb5ad87c3799b50403352fa611d01a106e37e1eebade5e67f7964e2106d06d9",
-      "git_blob_sha1": "25d1f766fbaf636e6fd5bb97930002453615ca84",
+      "sha256": "2571ebe555606036f31a68cf7398676a88f18419f222685c5ffd52737583687e",
+      "git_blob_sha1": "eb95e12613ecd3d7dda1dcd1760d47493306408e",
       "mode": "0o644"
     },
     {
@@ -1258,22 +1258,22 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/FILE_SEALS.json",
       "bytes": 841,
-      "sha256": "2f279f2cabd49c04080b33717195fcd1cc184bf7fab89353810543ff165b6664",
-      "git_blob_sha1": "0745375220efa00edddee49f969ba8799f5d14ec",
+      "sha256": "0099006b30fadbc417a4f93484f77b772186cb6d1ad2aa9c91cf7847d3f43d8e",
+      "git_blob_sha1": "c40dc77766eee60ccaaeea970cc0225604d44607",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/INPUT_SEALS.json",
       "bytes": 141137,
-      "sha256": "c1db2f58d832d3faeaa6c680ea101eb2a04ac8037e6cdce519b17d6afd47db14",
-      "git_blob_sha1": "09ee5f2de21335c9d95b86d12f4d4aac75aa2b1b",
+      "sha256": "338c18443e522114f8f8fbe11e16951b7f4e91718604578ab1c387b6375054ba",
+      "git_blob_sha1": "6120230d4fb0b3556fe46d8c91a6ae8c696456c0",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/INSPECTION.json",
       "bytes": 8303,
-      "sha256": "24cd03c36e25e70c4b3564582b9d318b19f2a506365b8fdc7184f0aa5292e5e4",
-      "git_blob_sha1": "e94dac88cb28133b85f6731e6664ab0ed09b14b3",
+      "sha256": "281ec8c1a36c92fc2e3da3835b742830c9fb2c1d63f84191c1a9bca69de1db69",
+      "git_blob_sha1": "a20070c7cb8d6f4ef219e213cd200ba69ebae53a",
       "mode": "0o644"
     },
     {
@@ -1293,43 +1293,43 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/inspect_receiving.py",
       "bytes": 20397,
-      "sha256": "75cd25f633540c06ebd29fde0512c18c9968e1056ec9b9123f8540e958e6d999",
-      "git_blob_sha1": "a9793241503782849d5a25a1e635800077db84fc",
+      "sha256": "b96055780d682c6058ff3e1439b0f293abf0b1c063b72437e27be87bf9b847dd",
+      "git_blob_sha1": "87470e5bda4e1b6246f432bcd3726f61fbd1c103",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/FILE_SEALS.json",
       "bytes": 962,
-      "sha256": "7c783395bcc7f8cecea9da5a17d228bd336332fc1520a53149ef7405fcb91d63",
-      "git_blob_sha1": "d7cf21bff753dfb242cfca72a7fe54aac27e1f89",
+      "sha256": "ec1bc9b1ba508f4af215ca22883d5f9c986d4843adfcc1d0e0895577ded70fd7",
+      "git_blob_sha1": "f4b67e87cb9b8efdeb92388104cb78760fb62f35",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/REVIEW.md",
       "bytes": 7980,
-      "sha256": "95a3430d3dfb5c289dffdce992c0789495f963177aee25b29bca2c945d636ad2",
-      "git_blob_sha1": "015f80a489aaefefe3d341ad9ef734308219275a",
+      "sha256": "c495cc9a89b2c13bfde5d0cdb6ef0cca5bfb9803d720b67015fee3850dfbbf82",
+      "git_blob_sha1": "1aa89db4d2ba1bf882d7646f42d6d2debf9d5ad1",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/STRUCTURAL_INSPECTION.json",
       "bytes": 15679,
-      "sha256": "da8669a91c85e41c8c804775234a9243fe05428bbcbf1166bae0ae9cb8c4af90",
-      "git_blob_sha1": "eb1ea98585a14066861970947cbdd2321b123872",
+      "sha256": "b6453c07583c4cfda0914ef610a22abebd70bf3c63f6d114d5e2804f85883776",
+      "git_blob_sha1": "b6a58895102365e39e276ed0e0c4432921554f7e",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/root-coverage/FILE_SEALS.json",
       "bytes": 251,
-      "sha256": "331d9af58fd0be9a4c768e540cb6ca05fcbf73397abeca6af4322a532c28fa1b",
-      "git_blob_sha1": "cb5a2131620ceb6f91b33c2b9950abcda83b1fad",
+      "sha256": "18a31c3c4f3ac660f7669f1ef959dd867bb502f8ae415a5df9bc7c7a17088688",
+      "git_blob_sha1": "8406f03198691d1ca730b3f951fc09ea7a9aa8df",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/root-coverage/FINDINGS.json",
       "bytes": 5158,
-      "sha256": "7c2f4a394c3eb147ecb59656977f4c7b114b02ae9fa54bc3d99f1af2fea21fb0",
-      "git_blob_sha1": "70b52e216b471133a5f0cb515e83e6ef28f8d9a7",
+      "sha256": "b6ad56f1a1abd3ffc3d993e00fe08e199d002587d6fd0be0bea9e968310f4c04",
+      "git_blob_sha1": "0b71cd436a93cfb7580532e3bda995edcdb4a19e",
       "mode": "0o644"
     },
     {
@@ -1342,8 +1342,8 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/source-proof/OBSERVATIONS.json",
       "bytes": 160597,
-      "sha256": "e9ac214de25b0aa0f035efe81069ff9d48402576402e832411ac818b9724d9c3",
-      "git_blob_sha1": "77b817e2421c416a32e36fd4b2f6a060b1f4e867",
+      "sha256": "11397ec39941630d133721c92f80b602e2a3de1c46bc0574ea56c5eb0013d57f",
+      "git_blob_sha1": "418ccb4e1cdfb94c1ac72888218886d61d98ecf1",
       "mode": "0o644"
     },
     {
@@ -1356,43 +1356,43 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/provenance/AUTHORING_RESULT.json",
       "bytes": 3299,
-      "sha256": "1488c8b3619bb6585bdd981cd7a35795ca6e6e8b545452c468c5f184972f1d61",
-      "git_blob_sha1": "08298c9be9037537508eeaafe3d31e6a1ae45f66",
+      "sha256": "7f828e8114d17f4bc05623fb199bccc48467afed35bb31f2dabe22df4440a4b0",
+      "git_blob_sha1": "82a1a72f8fe09355808e4ca2b0fe43f4f70399a2",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/provenance/author_successor.py",
       "bytes": 21788,
-      "sha256": "662be00ddbb6b7a24e13060711647056bd89e9d6e3022ee427f90048f74a01da",
-      "git_blob_sha1": "ff08e5d5106942b13e7ea495c9a0766121019660",
+      "sha256": "e09d2f8ab9da64dfa350bd874d14c970f45b36c0bfb2458d691fdf36cb4f3254",
+      "git_blob_sha1": "cf94f315ae19019364e18c9422096012516c4624",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/provenance/check_references.py",
       "bytes": 14136,
-      "sha256": "e3e164757d00423b21590358c9d569e4905efb82934fecc08505151f4e8b052f",
-      "git_blob_sha1": "c5fb4e4659f7dbaf0bc9fdd4c535391d62f5cfd0",
+      "sha256": "f6702d7ab672368ee94138c4e23eb8e3f5ab8a774cf51b01f019f5c410f71d23",
+      "git_blob_sha1": "0b200b21a6897e789420210ba25182287e4f955c",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/provenance/run_verification.py",
       "bytes": 8109,
-      "sha256": "79dd3a118197ca82456aedd1ea56439101481ac8526f7153eb75339be54344a1",
-      "git_blob_sha1": "be65c3ddb97632e9d6989155694b4eb58f33f117",
+      "sha256": "5faca588b9f153d4d9856b5ff95f9015520612ff4756bab19e0107dacc796b23",
+      "git_blob_sha1": "1b6fddcbdeccf59cab258b9d1cef12f3150e5fb8",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/reference-audit/REFERENCE_AUDIT.json",
       "bytes": 178211,
-      "sha256": "f7dcc4fb3843ce83520aacaf8fd36f4347d64000233d92921e81f67154bdfa87",
-      "git_blob_sha1": "a019e8c85939374211623a8b3de39988b124ba76",
+      "sha256": "ca8d5f9b56713390710bad0cbe851f70b5df9a16feca79acf50ad8898bba37d4",
+      "git_blob_sha1": "81026ede01b3bd921b3846f3588b941e9a7a59d1",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/reference-audit/attempt01-checker.py",
       "bytes": 14098,
-      "sha256": "954258e783d0a0cb84325b9f408538db2969b7721c0390f6e71cc82baf7e126c",
-      "git_blob_sha1": "17fb1784d5b92bcf4b79ee6e92ae6d1d1e47411f",
+      "sha256": "509dd4475a8cad86445ddfe210324b45015ae2d9e07d0094533108379623065c",
+      "git_blob_sha1": "387a9568b9c720a878174b6e1782889fe471f8fc",
       "mode": "0o644"
     },
     {
@@ -1482,8 +1482,8 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/M3_CURRENT_MASTER_PREIMAGES.json",
       "bytes": 1137,
-      "sha256": "6e3d2c9760ee93a10b0da660e84a77d002ea2312954b42d3459803c867b57475",
-      "git_blob_sha1": "ea4fb9e885a4e393b48faa479af8b1c1663e8edd",
+      "sha256": "41dbe3e5c8dff9296fe3667a6eb2aad283a0ed3ea58cbc2bb49c113db6c6640c",
+      "git_blob_sha1": "b0746848d8271097150ec90c1de588231ac9db79",
       "mode": "0o644"
     },
     {
@@ -1608,22 +1608,22 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/PUBLICATION_CUSTODY.json",
       "bytes": 1099619,
-      "sha256": "91c8df6ab07e3590fecf20de65e2e65943c4b70aebb9f5133901ae6362506c35",
-      "git_blob_sha1": "6389a4301478fd4df74e146f1ae4b8942f675e20",
+      "sha256": "c07a59b4403bb5b08ecec5c5bc95c4537a4b8738a486f010bb55b03d688f7c07",
+      "git_blob_sha1": "39a94c5646637a5b4246f6f1dc65af67f6dc0c51",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/ROOT_ACCOUNTING.json",
       "bytes": 70709,
-      "sha256": "30dadc5274823dba2443d663000051a48c0785eb92042ba8e684520bc2ce5942",
-      "git_blob_sha1": "ae55363fa985efefc16c80c9eea4587034bc9be2",
+      "sha256": "aa6ed22184f16215dd7903cc2f5cc4a574d2f516e00fd35e985b924c6a3756fc",
+      "git_blob_sha1": "67ef6ab139a20e1a93b01d11e0c4b70b4176f0e6",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/SOURCE_FIELDS_AND_PROOFS.json",
       "bytes": 419637,
-      "sha256": "65f10e830243ed927aabedee9d0734daa46eed3b37ae4212e28ab85131fe9e9d",
-      "git_blob_sha1": "8d44a30fb11ce988c489a6259e8be117df98ed3a",
+      "sha256": "760fbeef441a7173306a4d8d79e3899b84a822e2d86785af9c7137458bf24860",
+      "git_blob_sha1": "7dd96b255efdd5f3d50370d50ec147b255c4de4a",
       "mode": "0o644"
     },
     {
@@ -1636,8 +1636,8 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/CUSTODY_EVIDENCE_INDEX.json",
       "bytes": 260154,
-      "sha256": "7876e0828731f3e4687c67162156788e7bde001406d5d723dd9acd8433fb36ee",
-      "git_blob_sha1": "1838dbfdb07e182f193f78916e10cde3adeae7d8",
+      "sha256": "f16f04f2209fbf8ee78288b44ae46521244026262134a7258163910eb6bada43",
+      "git_blob_sha1": "4b484f7499a2e3bb551ccc9b7360c95083c6736d",
       "mode": "0o644"
     },
     {
@@ -1671,15 +1671,15 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/BEFORE_BRANCH_CUSTODY.json",
       "bytes": 6403,
-      "sha256": "e347ce74d2e2c9a3252260215f9a4cd3c3a2aa791219095675ae67df8f135f23",
-      "git_blob_sha1": "3d29582bd7ae56a38c5e7d15bea3a587be7832c3",
+      "sha256": "1e262194fd5d61d5ce340ef081132467d5bcfb6625aac51f4c8c2e0c4f054a16",
+      "git_blob_sha1": "838d2c4ca831d2e6b27117e106b791d9bf86647e",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/BEFORE_BRANCH_EXECUTION.json",
       "bytes": 563,
-      "sha256": "a49305f07d6e6f172fcaffb296f5f2d4be23f6798827ceffc201fb1d8de76fc7",
-      "git_blob_sha1": "e6785ac00ae6d9deeca65144165986cabca95df5",
+      "sha256": "a4f88c9eea399c9c6fdaba9e4cee8093e7344a821f13b1d32b003e9c7a3ff071",
+      "git_blob_sha1": "dd73e75de9253f972ebf712e137e8e92b0eaa491",
       "mode": "0o644"
     },
     {
@@ -1734,8 +1734,8 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FINAL_PUBLICATION_EXECUTION.json",
       "bytes": 541,
-      "sha256": "8288a2009cdf92b117ad7ada704da4ebe27f8c67b451b3c779263819374a63f3",
-      "git_blob_sha1": "951520a6c91ccf2a1fc5c04f662bac678e65380a",
+      "sha256": "5653e77eb311f326f252688a7b8736433fde97804ead64881e4e77e84d8b671f",
+      "git_blob_sha1": "c384ba8fb6af5e02fa4f836638f041ef8bdcd0b7",
       "mode": "0o644"
     },
     {
@@ -1748,8 +1748,8 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/PREFLIGHT.json",
       "bytes": 4201003,
-      "sha256": "4a8e0c7647a9a6549ffc797de28d01a7806aa7757fedb2096bf35ecb0bba62c7",
-      "git_blob_sha1": "2ce90c4b5891e73a43eea7df14886fb15f2ffe59",
+      "sha256": "c28fb413b8a7c2b48d0a90f727397258e854e223859f65152272e912be983c89",
+      "git_blob_sha1": "8860f7f7d243eb6c104939a9f3346c73af761911",
       "mode": "0o644"
     },
     {
@@ -1762,8 +1762,8 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/PUBLICATION_CUSTODY.json",
       "bytes": 1099619,
-      "sha256": "91c8df6ab07e3590fecf20de65e2e65943c4b70aebb9f5133901ae6362506c35",
-      "git_blob_sha1": "6389a4301478fd4df74e146f1ae4b8942f675e20",
+      "sha256": "c07a59b4403bb5b08ecec5c5bc95c4537a4b8738a486f010bb55b03d688f7c07",
+      "git_blob_sha1": "39a94c5646637a5b4246f6f1dc65af67f6dc0c51",
       "mode": "0o644"
     },
     {
@@ -1965,22 +1965,22 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/CUSTODY_INPUT.json",
       "bytes": 14641,
-      "sha256": "384ce843f2e4545ad1c40d7ee58abbc471b5a6d1cbed89bea82dcff0479ce6a5",
-      "git_blob_sha1": "24e1d059396ed8f46f0a146f93cca483261a6d1e",
+      "sha256": "86e5e92e9f2dbb209085133b54daf9db3ad72988fe82968fb9f819aa015a3750",
+      "git_blob_sha1": "72e02b044789559c6bb34463d7f5d01edb83897a",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/PROBE_CUSTODY_RESULT.json",
       "bytes": 1542,
-      "sha256": "3be2658241c3ebb336ae712268cbbd54c3d65969467d729f8a41c88e75bb98a8",
-      "git_blob_sha1": "1608150423fee65581d82475283a6f43bbaae311",
+      "sha256": "01b33d0f9b452a5ebfac70e3310a977114703a25250ce966f7f40b05cf24e594",
+      "git_blob_sha1": "74a73d67e9cf3ff46bc58355d70244ea8776c714",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/PROBE_EXECUTION.json",
       "bytes": 670,
-      "sha256": "bfe83dd12307c0cddaba605d01c4d97c306201a44b16db6bd9c6cf6a7523979d",
-      "git_blob_sha1": "cc84771f49e8ab56b8862bacad1c33014d45d51b",
+      "sha256": "ce851e4600037c247db5c5cd3e0a9415bc12369ca28d4bf7a5c4f2a0c9d64fa4",
+      "git_blob_sha1": "bdd6c55434b476e1ff25812d93433440856ddd96",
       "mode": "0o644"
     },
     {
@@ -2168,15 +2168,15 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/COMPANION_BINDING.json",
       "bytes": 2857,
-      "sha256": "5464af87aec22c84a053e7c21d611b4583cb137aaecb27d419f846581c977f0d",
-      "git_blob_sha1": "59754a53c7312108ca72c09f5f490f7181cd6a21",
+      "sha256": "fc982cf40a4b0409df78248ba4e9e1558bbb5d4265e57818491b22b519417cdd",
+      "git_blob_sha1": "ca38a7922cb154e04c9a4ac72be76ef3f1c96c6b",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/FILE_SEALS.json",
       "bytes": 4661,
-      "sha256": "d1315cc7cf474bb4409ffa1423a228a175cbef1eb0a1cae2b70fe025d9c7ec92",
-      "git_blob_sha1": "06ea155cedfe75c7bbe4bd8cba71fd976f79c442",
+      "sha256": "e04951d9c2779f23513e1020d9aed8089e8fce675df7e79eee82d3987f3b04f9",
+      "git_blob_sha1": "f174c6018e66b15bbd63b2ce3592621c41088721",
       "mode": "0o644"
     },
     {
@@ -2196,8 +2196,8 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/REVIEW.md",
       "bytes": 10550,
-      "sha256": "b23f8008088a5ae382b10d40560dd57d7fe560838f864603b325f10d7c477fe0",
-      "git_blob_sha1": "5f637453062b3d33c445e020f0ae11ba4c4efe05",
+      "sha256": "ebc9a186e49b449192d29d5ce760a319323f6f10e71cac6d483bdeb5e78ecceb",
+      "git_blob_sha1": "9e0badf6b095794a4568cdbe1f2cf492cd292064",
       "mode": "0o644"
     },
     {
@@ -2259,8 +2259,8 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inspect_inputs.py",
       "bytes": 14398,
-      "sha256": "8f4b7b8b4b3e1886bea907fde673fbd70924a84359e02cd7591c1665945aeef4",
-      "git_blob_sha1": "0df30b1828b16d0a3740ca7891a444d18bc68c6e",
+      "sha256": "cb9e8dca16a5c9a2b193e23f302c88194d08874513beee8051d54e041cba8095",
+      "git_blob_sha1": "9c3f73302cde310896df4e81727fdb656a493f2a",
       "mode": "0o644"
     },
     {
@@ -2413,43 +2413,43 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/FILE_SEALS.json",
       "bytes": 1028,
-      "sha256": "ca55cfa097bac969aabcda4d410e6e6b2aae563e41dcce17bfcd5a9d61a79006",
-      "git_blob_sha1": "6e8951c0021a941a29bc93ea80b925fd4f5864d9",
+      "sha256": "67d4784b29d06455a061c996a8404a1ec1dcad236a7d2d3ce08deff0a76d1593",
+      "git_blob_sha1": "0ab99e60f2c3de4a3848e76a4318b4b2baabd370",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/INPUT_SEALS.json",
       "bytes": 1442,
-      "sha256": "71f0be66903961ff974b6cbbbe27db8ab03cc16097c06476f58549db9d02b261",
-      "git_blob_sha1": "c7b0756a6e678ea2798261fdb83e9c86bd5bde7f",
+      "sha256": "e9f649360f08272a0e30523c03ed9d9df36516df43aeb5e83dde37952295945f",
+      "git_blob_sha1": "6df8fe9b0a17ac7c718278551c3a36d813708580",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/REVIEW.md",
       "bytes": 6622,
-      "sha256": "02e50b35c0a4c749f9fef36d44998e8f6733de61a8e7f4d46c760bf5cb12ae52",
-      "git_blob_sha1": "d6c64f2b73f4c48e6f8e6e3cafe176a7e5ab911a",
+      "sha256": "a5544c9593c650f7f6d4ab576c31d6762b5e7d434e3512dfc7559d8df5554ff5",
+      "git_blob_sha1": "782436efbd911042ad25c39ff22b438b1e780a57",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/FILE_SEALS.json",
       "bytes": 1060,
-      "sha256": "df0e4f6c48aee658e68eb93792ec748c6b2a6953241fe8c554a6cebc8df22b6f",
-      "git_blob_sha1": "27c96cf2c25533c8dc22462e9778e2d1f411e1ae",
+      "sha256": "f595eb2722041509e83dac5fe879314b4bb97eaf79be14dfec826346b134a00e",
+      "git_blob_sha1": "5a87aef44b405f0bc52c0c6f0545b22745876d84",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/INPUT_SEALS.json",
       "bytes": 1763,
-      "sha256": "c84ce157e3c48664121769c2f878824bce2a6a97bdd60b53c38103fa3e33ec26",
-      "git_blob_sha1": "c2fdbbe5e8a617571b25ce39920bfdbb36ff22ac",
+      "sha256": "5b94bf360a70828827795385dac2410be0acc8a28cebc21b61f40ad1ebaecf10",
+      "git_blob_sha1": "67f1e1d4d6b54341640ec2d26a68c0ad8a9153f1",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/REVIEW.md",
       "bytes": 2881,
-      "sha256": "1ea4731fd6cf1c2c164f32970a646ef86e4750723e787544a10b504219bc0b74",
-      "git_blob_sha1": "18703f18dabb562da3ccfc2af7bb1e9be5b20786",
+      "sha256": "34c5177141320e90500024f8878063d899b2fb664904aa51a2ccd2048ed641e2",
+      "git_blob_sha1": "c7d1baf26a43aef29ead0335baa3466d9d6d9c4d",
       "mode": "0o644"
     },
     {
@@ -2490,15 +2490,15 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/DESIGNATED_SOURCE_OUTPUTS.json",
       "bytes": 15261,
-      "sha256": "dab78ed3ffa2cab8dad0feb532f493130570b8da35146a78e961b75cd11dd555",
-      "git_blob_sha1": "36e48a6a4e5b4e2592ad7d3fa90fd3800f6f5185",
+      "sha256": "2caa97c14d333ebe07a621e75c27c8a5eb5db9841532ac48013644b2301a0866",
+      "git_blob_sha1": "7d5e19be04c2c0165111f8b9e885ef8fae1c511a",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/E4_EXECUTION_INPUT.json",
       "bytes": 12601,
-      "sha256": "fd465a0de344227444f723287b0dee9fe6e25284c1767737a38b1d7d8b887c93",
-      "git_blob_sha1": "89dab4bdb446bb26d06c4de26ca8d32ea5c32674",
+      "sha256": "b1a811c36ad7a6abe420f9db62d06a44c9b35eec35dfe4821151c774239dfea9",
+      "git_blob_sha1": "0511732910164cc063ce6c06730fff678e679e8a",
       "mode": "0o644"
     },
     {
@@ -2518,8 +2518,8 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/RECOVERY_RESULT.json",
       "bytes": 456423,
-      "sha256": "823ef3c5f172b34d7c973f5e50424b8f7ab770687f8e2d80e2ecb2bde8dc1b77",
-      "git_blob_sha1": "b930bffab5a0e9c9e9ad2b5f65804c236b199e51",
+      "sha256": "8fe566b783b6e6af5ae8757b87ac560a41b20340a5f2d5fc9a3062f39eb76e27",
+      "git_blob_sha1": "edc30a7f507a80ba4468b78e01eac82c7f0763a3",
       "mode": "0o644"
     },
     {
@@ -2560,8 +2560,8 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/recipe-closure/FINAL_REPORT.md",
       "bytes": 6699,
-      "sha256": "5196ab94075f427ad07f13551f308eb7b5c5f0a61386d36ed60461d1c49ce3b3",
-      "git_blob_sha1": "836636240fe14c011df09b69bfe4e08eeb699c27",
+      "sha256": "d9523598559ffb85f1974e9e08aed85a050ff5569a26f986680e9a12ed09fd35",
+      "git_blob_sha1": "79a841cafd96881fceac65c5c866c1959f4f7f4b",
       "mode": "0o644"
     },
     {
@@ -2574,8 +2574,8 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/recipe-closure/SOURCE_SEALS.tsv",
       "bytes": 5947,
-      "sha256": "85da148a069a8125c67f417dcd53bfb2a1ac5a403ba8adbba69784771683af3e",
-      "git_blob_sha1": "ba5e7cfa046e5b6417f3ff56cc83d549e84f715b",
+      "sha256": "b326dc551b072c548cbe5eac8fe38a702ccc4832875e9725e6b6a0b1f090f0c3",
+      "git_blob_sha1": "858ae247f621f2f9a0e892a3c48d3b7c15d37bf1",
       "mode": "0o644"
     },
     {
@@ -2721,15 +2721,15 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/src/java.base/share/classes/jdk/internal/mindex/M3Release.java",
       "bytes": 1593,
-      "sha256": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb",
-      "git_blob_sha1": "1116f4cb0ffd361e764688640adb53af8cabe86d",
+      "sha256": "dc2a020aa8f6da324ace8a19f68c90b65021b9ad732932ebabbf545468abc34a",
+      "git_blob_sha1": "408089ce5d78aec1bcb8cd97768e02f15f48e004",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/src/java.base/share/classes/jdk/internal/mindex/M3VI.java",
       "bytes": 6165,
-      "sha256": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a",
-      "git_blob_sha1": "087aa55bef9b57189d03f3388fb2e1f360320b02",
+      "sha256": "d4d57e6b892342716ef9a52007082ce7c53959cba81a5ad0f2a0cf8d275c3c01",
+      "git_blob_sha1": "eda4db3979a6aeed341d0190be974fe88059f3db",
       "mode": "0o644"
     },
     {
@@ -6769,8 +6769,8 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/author_e04_v3.py",
       "bytes": 18901,
-      "sha256": "b63123a1d1369bc6289d7901f950a6d9ebe5ccd5b82ac146814c7af3305ddb1a",
-      "git_blob_sha1": "471660134d949a27f6c5dc672222b1b05fbd06b3",
+      "sha256": "1d6796afba96441855b9400e362582e0e95ae7b332b995f4b7061a20cb152e28",
+      "git_blob_sha1": "29996516e4927d924d224e35396b528e3bdab8ad",
       "mode": "0o644"
     },
     {
@@ -6790,43 +6790,43 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/derive_source_handoff_v3.py",
       "bytes": 12245,
-      "sha256": "8b71aaefeee38c8c8bba0d8c4e169df6b0aeb73ad9b4cad35dae7181c1d0246b",
-      "git_blob_sha1": "de2595ee839a468de5721559c9c1df1b910301b1",
+      "sha256": "45f5a7d68f45a5f3a6c36a1b3a730828392be921f526eaeb5d196b0d951c9b90",
+      "git_blob_sha1": "807ed88f740ad271548191ad5450f34b0da936f0",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/publication_custody_v3.py",
       "bytes": 9752,
-      "sha256": "340e3e1670e457d99ab9e0ae954eed85efacdea4e4e34f2d4b2165421b8c9248",
-      "git_blob_sha1": "ab6182b9f208b27d1e9c54e6d6a51fe7a465c344",
+      "sha256": "a7365ce869bb73d3545dca0ae7804dd1e39d88ff2c8bb8994b68538e74742567",
+      "git_blob_sha1": "2d49e8645ca0531a24e3bae2f07cd31e1dde340d",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/run_verification_v3.py",
       "bytes": 13664,
-      "sha256": "c779f94023b3914bca1558a35d39ab11aaedd00a18cf5b74e2a30bf1205de6b6",
-      "git_blob_sha1": "ae10df70d469cd2ecb353e3dc018921af22bff30",
+      "sha256": "19fc7bc5d1804082acd88598c12562b28c10a41e43aa356c23f5604a253268c2",
+      "git_blob_sha1": "79b85ea68deb5b37e84c67f13b29c809ccb10f42",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/source-binding-v3/ROOT_ACCOUNTING.json",
       "bytes": 70709,
-      "sha256": "30dadc5274823dba2443d663000051a48c0785eb92042ba8e684520bc2ce5942",
-      "git_blob_sha1": "ae55363fa985efefc16c80c9eea4587034bc9be2",
+      "sha256": "aa6ed22184f16215dd7903cc2f5cc4a574d2f516e00fd35e985b924c6a3756fc",
+      "git_blob_sha1": "67ef6ab139a20e1a93b01d11e0c4b70b4176f0e6",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/source-binding-v3/SOURCE_FIELDS_AND_PROOFS.json",
       "bytes": 419637,
-      "sha256": "65f10e830243ed927aabedee9d0734daa46eed3b37ae4212e28ab85131fe9e9d",
-      "git_blob_sha1": "8d44a30fb11ce988c489a6259e8be117df98ed3a",
+      "sha256": "760fbeef441a7173306a4d8d79e3899b84a822e2d86785af9c7137458bf24860",
+      "git_blob_sha1": "7dd96b255efdd5f3d50370d50ec147b255c4de4a",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/source-prepublication/DESIGNATED_COMPARISON.json",
       "bytes": 15782,
-      "sha256": "b81e40be63829a2f957308046f9b937dc1ef8d7c0bcbeab63111479d7da8ad00",
-      "git_blob_sha1": "bce1ca31de665bd595c1d6b86feb3ed7a2e1d420",
+      "sha256": "d277d9852950cea9cdd09837f535fbdd4a7b7031f74ac2357ccacb376400bed9",
+      "git_blob_sha1": "ed448c35d36515c3de1b5408d7629c5e818c337e",
       "mode": "0o644"
     },
     {
@@ -6846,15 +6846,15 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/PUBLICATION_CUSTODY.json",
       "bytes": 1099619,
-      "sha256": "91c8df6ab07e3590fecf20de65e2e65943c4b70aebb9f5133901ae6362506c35",
-      "git_blob_sha1": "6389a4301478fd4df74e146f1ae4b8942f675e20",
+      "sha256": "c07a59b4403bb5b08ecec5c5bc95c4537a4b8738a486f010bb55b03d688f7c07",
+      "git_blob_sha1": "39a94c5646637a5b4246f6f1dc65af67f6dc0c51",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/CUSTODY_INPUT.json",
       "bytes": 14641,
-      "sha256": "384ce843f2e4545ad1c40d7ee58abbc471b5a6d1cbed89bea82dcff0479ce6a5",
-      "git_blob_sha1": "24e1d059396ed8f46f0a146f93cca483261a6d1e",
+      "sha256": "86e5e92e9f2dbb209085133b54daf9db3ad72988fe82968fb9f819aa015a3750",
+      "git_blob_sha1": "72e02b044789559c6bb34463d7f5d01edb83897a",
       "mode": "0o644"
     },
     {
@@ -6867,22 +6867,22 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/DESIGNATED_SOURCE_OUTPUTS.json",
       "bytes": 15261,
-      "sha256": "dab78ed3ffa2cab8dad0feb532f493130570b8da35146a78e961b75cd11dd555",
-      "git_blob_sha1": "36e48a6a4e5b4e2592ad7d3fa90fd3800f6f5185",
+      "sha256": "2caa97c14d333ebe07a621e75c27c8a5eb5db9841532ac48013644b2301a0866",
+      "git_blob_sha1": "7d5e19be04c2c0165111f8b9e885ef8fae1c511a",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/E4_EXECUTION_INPUT.json",
       "bytes": 12601,
-      "sha256": "fd465a0de344227444f723287b0dee9fe6e25284c1767737a38b1d7d8b887c93",
-      "git_blob_sha1": "89dab4bdb446bb26d06c4de26ca8d32ea5c32674",
+      "sha256": "b1a811c36ad7a6abe420f9db62d06a44c9b35eec35dfe4821151c774239dfea9",
+      "git_blob_sha1": "0511732910164cc063ce6c06730fff678e679e8a",
       "mode": "0o644"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/RECOVERY_RESULT.json",
       "bytes": 456423,
-      "sha256": "823ef3c5f172b34d7c973f5e50424b8f7ab770687f8e2d80e2ecb2bde8dc1b77",
-      "git_blob_sha1": "b930bffab5a0e9c9e9ad2b5f65804c236b199e51",
+      "sha256": "8fe566b783b6e6af5ae8757b87ac560a41b20340a5f2d5fc9a3062f39eb76e27",
+      "git_blob_sha1": "edc30a7f507a80ba4468b78e01eac82c7f0763a3",
       "mode": "0o644"
     },
     {
@@ -7072,8 +7072,8 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/docs/name-mapping.json",
       "bytes": 236215,
-      "sha256": "61818898ef6c092ddad2c1ee4cfe7508199912ff0a1f2d5c2a51ad6695d040c8",
-      "git_blob_sha1": "3a1e902a8284773f0f182d6bd43bf4e27b4e63c0",
+      "sha256": "aeec3cfe84e57aadf7fa855a5f2174dd73749ccc8f6cd8f4409f0bb8a25e3d53",
+      "git_blob_sha1": "1bbe40b2c04da018894a4494da157c6865340490",
       "mode": "0o644"
     },
     {
@@ -7086,8 +7086,8 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
       "bytes": 92103,
-      "sha256": "8c76c2dd45e775d29f8f47d8daf65842e465c74ad3dec7aacd55df59f9d051a1",
-      "git_blob_sha1": "5ecf415c7af4176898328d58b9df2972e18277c4",
+      "sha256": "e8f345aacd9d93fb436d08f3bd868c2f5849e8edf989dd7fab54cc665dc49577",
+      "git_blob_sha1": "0b4ddaae7f2550a3f336dea845a37781584d951e",
       "mode": "0o644"
     }
   ]

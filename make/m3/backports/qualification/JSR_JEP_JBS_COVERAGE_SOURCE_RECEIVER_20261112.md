@@ -25,8 +25,8 @@ canonical Maven/OpenRewrite recipe, source templates or recipe executor.
 
 | Target source (absent on baseline) | Expected SHA-256 | Git blob verified on receiver branch |
 | --- | --- | --- |
-| `make/m3/backports/jsr_jep_jbs_coverage.py` | `e3c1f8828a04d42e6a262d8e60a5b37ad20ef684c17ae009084cd52599653cf0` | `4a968eb57739cf1da0470bcc255c54ba49c22666` |
-| `make/m3/backports/test_jsr_jep_jbs_coverage.py` | `425f5308faa4dc5a3d199620ef87ab4c10345b47933bc2b1ac927d280ef75129` | `37fe81de37eb1b50089ed65dfdb7b38a16ba456d` |
+| `make/m3/backports/jsr_jep_jbs_coverage.py` | `18aa467b2d9be84877f06315e27c57bdc8ffebcb959ac459fba3721f9bb9a1f5` | `839758f2a78e300c492ea91026be275059162297` |
+| `make/m3/backports/test_jsr_jep_jbs_coverage.py` | `eb85c76d3227edb9cf705e70710694d4c65558c77c0f4430cbb1ac85b15bc201` | `8677cdbe50e7b93fd01ddb5e129b2c53e0863a6b` |
 
 Both receiving Git blobs and complete UTF-8 contents matched the exact
 canonical source postimage resources upon independent GitHub readback.

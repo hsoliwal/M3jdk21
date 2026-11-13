@@ -27,12 +27,12 @@ final class M3BackportWaveCurrentOutputRecipeTest {
     private static final String ROOT = "/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/";
     private static final String DESCRIPTOR = "/META-INF/rewrite/backport-wave-current-output-20261020";
     private static final String NAME = "jdk.internal.m3.BackportWaveCurrentOutput";
-    private static final String FORWARD_MANIFEST_SHA = "9e1c22cab7e958eebf90605fae5d24f4d32991ad6f1e3538b6673d1a682627ab";
-    private static final String INVERSE_MANIFEST_SHA = "6968c988a1156007c551909dc402f1d63500b44948b710c9116d0b30c498e6d7";
+    private static final String FORWARD_MANIFEST_SHA = "6e7bfaff99acbeed2ba8790ebe343f378b9a82029108365b67115516b8f12f82";
+    private static final String INVERSE_MANIFEST_SHA = "85c7c1796757ad58d2e33032f2b65f682ef1c805b5bd483e9938c87336d37d48";
     private static final String FORWARD_DESCRIPTOR_SHA = "fbb55455fd65f0e2ebebcdad693034c1ca5f2feb0359841181c7ebb31359462f";
     private static final String INVERSE_DESCRIPTOR_SHA = "8d8ede14073be15d433eadd78706cc9fbc0facb44d1bd00c6dcd3f0ce404ce45";
     private static final String WAVE_OWNER = ".github/workflows/m3jdk21-backport-wave-admission.yml";
-    private static final String WAVE_AFTER = "942fe1f46b1b4f7c91418ded4c94b045576ec31b52dfed3ce0ac45ed4608ff25";
+    private static final String WAVE_AFTER = "90677e9b79c698e0b1455eebf7aa319b38c0a6f6ef270d118b6c40bc58a6a328";
     private static final Map<String, String> BEFORE = Map.ofEntries(
             Map.entry("make/m3/backports/test_compatibility_policy.py", "69694e6e3725aeee8687a8c58bce477c7256f626d8425c04a9ce9772250a2bb6"),
             Map.entry("make/m3/backports/compatibility_policy.py", "d51301d3ea225e89b000a2256855ab7806a1faf20c5fa493eb5666de1e7880c2"),

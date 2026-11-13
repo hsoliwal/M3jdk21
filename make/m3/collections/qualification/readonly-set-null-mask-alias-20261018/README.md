@@ -273,7 +273,7 @@ rg -n 'FILTERED_NAVIGATION|ROW_MASK_FILTER|JNI_OBJECT_PREDICATE' make/m3/collect
 ```
 
 The separate public challenge/fork catalogue packet is sealed by manifest SHA-256
-`3a8b36fe47266a7b4460bad200264ded602450c4e360d3b1cb38d43a847446ca`.
+`5415f422b29336c3a5ca2add52c599724223260898ee3410f97dcd3e4402b9d0`.
 The catalogue is reviewable in [PR #1323](https://github.com/hsoliwal/M3jdk21/pull/1323) at
 head `08181cf261f3b9224ec6916e352435ed0494a9a7`. Its
 [immutable public tree](https://github.com/hsoliwal/M3jdk21/tree/08181cf261f3b9224ec6916e352435ed0494a9a7/m3/collections/algorithm-catalog/challenge-forks-20261018)

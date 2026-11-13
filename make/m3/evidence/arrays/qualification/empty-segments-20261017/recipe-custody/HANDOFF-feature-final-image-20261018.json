@@ -64,11 +64,11 @@
       "evidence": {
         "SDK_INPUTS.tsv": {
           "path": "evidence/feature-final-image-20261018/m3jdk21-progress-job/SDK_INPUTS.tsv",
-          "sha256": "5b0d277cdb87e6b8927df46bfbd027e855c0edee873577eebefef60deebd0773"
+          "sha256": "b70031c8712dc8a9b6f5b2decec155a01a7f0daf661d09664488ee5f31fd8b49"
         },
         "SDK_RESULTS.tsv": {
           "path": "evidence/feature-final-image-20261018/m3jdk21-progress-job/SDK_RESULTS.tsv",
-          "sha256": "fe6ac0cc66c1927acd577d773fbfb164a896dfd44e99f8332571516ab9794820"
+          "sha256": "f1e09650280da2fd9c0f4fff2beb17f1c31a9cb102358627c711d8041d9aab11"
         },
         "SDK_TESTS.xml": {
           "path": "evidence/feature-final-image-20261018/m3jdk21-progress-job/SDK_TESTS.xml",
@@ -97,7 +97,7 @@
     },
     {
       "path": "authoring/feature-final-image-20261018/prepare_feature_evidence.py",
-      "sha256": "cabe6d53bfe347abe9e72c08fd0f292369de4b1149c727c8472797b306865f2f",
+      "sha256": "1d8df447a755045a51f8fab764743588b20585d978721ac355f3a7f98cb13c33",
       "bytes": 15440,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/feature-final-evidence/prepare_feature_evidence.py"
@@ -113,7 +113,7 @@
     },
     {
       "path": "authoring/feature-final-image-20261018/verify_feature_image.py",
-      "sha256": "6e8e09f1fbe8dcab15026d27fb7908d3e11f9d97b37b3fd83086660dc8cf5e92",
+      "sha256": "cc51a9368a608b53e2eab8707af1902ee029c49e700644ed5370927a232cebb4",
       "bytes": 7144,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/feature-final-evidence/verify_feature_image.py"
@@ -137,7 +137,7 @@
     },
     {
       "path": "datasets/m3jdk21-progress-job/MODES.tsv",
-      "sha256": "85beebafdf673a58b53caa372893b24d22109c204c22abb64586cfd14314365f",
+      "sha256": "3c69fdaab790c9cc3f0c7d0beaa9cb552b6da50172ac0a0ecf069c00af082462",
       "bytes": 755,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/MODES.tsv"
@@ -185,7 +185,7 @@
     },
     {
       "path": "datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/manifest.tsv",
-      "sha256": "068b1c68573d1246c24ee2ae181b5f2423850dd3be5fd5be944ad502c7b11dde",
+      "sha256": "3fc0d6ffc4397037a32bf98e6b1d025ff082a3ac19121216a49c96a086db4692",
       "bytes": 705,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/manifest.tsv"
@@ -233,7 +233,7 @@
     },
     {
       "path": "datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0008-verify_progress_job.py.txt",
-      "sha256": "7778df10ecc62f960a406576053d29c182a5688c34650a79cf6f40848c4c0184",
+      "sha256": "892de0b8ce0c18b4a5cb0dbad8e01472236c6d53fc4c266f23498236d517d245",
       "bytes": 12200,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0008-verify_progress_job.py.txt"
@@ -241,7 +241,7 @@
     },
     {
       "path": "datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/manifest.tsv",
-      "sha256": "ff9af99741425ca48a83a8d72a0eb6737a18fe6b0fefff68f345ca57f7d352cb",
+      "sha256": "c9da2cc98f6ddb32b47e39dbc28dd927bae22e78ccc99a34b34e7d8370c5fd68",
       "bytes": 1017,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/manifest.tsv"
@@ -249,7 +249,7 @@
     },
     {
       "path": "evidence/feature-final-image-20261018/QUALIFICATION.json",
-      "sha256": "429711a397ce6b000d878f7364dfeeb85aa9e421269c30bfaf272fa498da8c9d",
+      "sha256": "51eef856004d0c4438323256e7801c2bfae417feb8d0f551d739660ca4574f3d",
       "bytes": 3713,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/feature-final-evidence/inputs-v1/QUALIFICATION.json"
@@ -257,7 +257,7 @@
     },
     {
       "path": "evidence/feature-final-image-20261018/README.md",
-      "sha256": "6bc67a31350ab541464a4fbcdbbe447be775bfd6f0661187c478c4ac28b8d3cd",
+      "sha256": "7d9db9c87435d5f23e5df1103ad07a15a6038df43c8957bc70cc31b4f59cc8f9",
       "bytes": 4199,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/feature-final-evidence/inputs-v1/README.md"
@@ -937,7 +937,7 @@
     },
     {
       "path": "evidence/feature-final-image-20261018/feature-image-execution/receipt.json",
-      "sha256": "ba5c31502cd8f071f7057164282bc65175588ae36379c1be3123e319bbe00149",
+      "sha256": "e8023cc7037f3bd74d9303f77c12622f6cee55b5fb532d22dffe2f5753e4c9f7",
       "bytes": 22064,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/build-proof/feature-image-execution/receipt.json"
@@ -1177,7 +1177,7 @@
     },
     {
       "path": "evidence/feature-final-image-20261018/m3jdk21-progress-job/SDK_INPUTS.tsv",
-      "sha256": "5b0d277cdb87e6b8927df46bfbd027e855c0edee873577eebefef60deebd0773",
+      "sha256": "b70031c8712dc8a9b6f5b2decec155a01a7f0daf661d09664488ee5f31fd8b49",
       "bytes": 4652,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-progress-job/candidate/SDK_INPUTS.tsv"
@@ -1185,7 +1185,7 @@
     },
     {
       "path": "evidence/feature-final-image-20261018/m3jdk21-progress-job/SDK_RESULTS.tsv",
-      "sha256": "fe6ac0cc66c1927acd577d773fbfb164a896dfd44e99f8332571516ab9794820",
+      "sha256": "f1e09650280da2fd9c0f4fff2beb17f1c31a9cb102358627c711d8041d9aab11",
       "bytes": 1485,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-progress-job/candidate/SDK_RESULTS.tsv"
@@ -1209,7 +1209,7 @@
     },
     {
       "path": "evidence/feature-final-image-20261018/publication-upstream-scope-v1.json",
-      "sha256": "f32e05ddb050733eba4e26cc97da85b227e1dd3f9fdc61d5b62720cbd29586f4",
+      "sha256": "965c55f90c0ddb4ae61441be9f54ac55e0f1fd648eeb0ca6170222d69fe899ab",
       "bytes": 10147,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/build-proof/feature-publication-upstream-scope-v1.json"

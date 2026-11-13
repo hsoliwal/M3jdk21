@@ -73,7 +73,7 @@
   "reviewed_at_utc": "2026-10-20T11:38:15.301473+00:00",
   "reviewed_evidence": {
     "SOURCE_INVENTORY.json": {
-      "sha256": "da324afe818fac3bf8c4fbd613b9a456b75e8bd390c7b2ae7112df423ab04091",
+      "sha256": "eecbefe69a235b283fecbc660055d1528e0cca9e8701f970ae66eb9e30b4ca84",
       "status": "PINNED_SOURCE_INVENTORY"
     },
     "research/retained-owners.json": {

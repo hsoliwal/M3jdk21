@@ -242,6 +242,6 @@
     "src/test/java/jdk/m3/jackson/tests/M3LargeJsonAcceptance.java": "388aa5b9e1c6c933a969d2270cde33f38fb6d5c41dc96d5c7fbea963ff307210",
     "src/test/java/jdk/m3/jackson/tests/M3TokenRegexContract.java": "0179937e0add3d4bfcb8c8253826774ce410fbe8e3378078c93693c229c6205c"
   },
-  "source_lock_sha256": "4bb1a8b623b106985cca97969a79561c079ff0cf9a415fcf91e996f3ee4ab99a",
+  "source_lock_sha256": "f5a20614b0f82e9f001968e4a65b292c07f49eef1f29f3e30770b064f6f05dd5",
   "status": "PASS"
 }

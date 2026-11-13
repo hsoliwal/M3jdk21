@@ -264,7 +264,7 @@ For completeness, the mapped owner's nonpublic helpers have the following bounde
 | [M3MappedStringBacking][mapped] | `c2dc2371c730aa758ccc45e06ba4ab95661e5593` |
 | [M3Boundary][boundary] | `f10f815fc1a59a0d1ea7ed45158b89178f128a1a` |
 | [M3Address28][address] | `14cdb999f5eab5be443044bff2d273fb4e4113fb` |
-| [M3Release][release] | `1116f4cb0ffd361e764688640adb53af8cabe86d` |
+| [M3Release][release] | `408089ce5d78aec1bcb8cd97768e02f15f48e004` |
 | [M3Bits][bits] | `2ad46058a5325483647af4af16858c329ae24665` |
 
 Dependency scope stays bounded: `M3TQ` backing adapter (230–253), `M3CI` options/boundary/freeze (25–48, 175–196, 899–907), `M3CB` declaration/effective/currentness (109–164), `M3BitLane28` checked word/mask and explicit native bridge (1–67, 208–218), `M3StringAtom` mapped address/reads (12–45, 302–355), `M3StringPool.Lexicon` mapping/admission/address construction (912–1034, 1191–1288), HotSpot field/copy code (945–1071), JNI String boundaries (2137–2274, 2767–2883) and the inherited `MappedByteBuffer` lifetime/file-mutation Javadoc (39–68). The `java.base` module descriptor was checked for the absence of a `jdk.internal.mindex` export. The small `M3BitLane28.c` peer was read completely as a dependency; that does not complete all Java lane contracts or other native readers. These are not additional fully reviewed package owners.

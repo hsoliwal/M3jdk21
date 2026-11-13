@@ -7,7 +7,7 @@ for module` for the two explicit test Java files. It had corrected the main
 root but omitted `m3/collections/src/test/java`.
 
 This existing canonical TEXT OpenRewrite host is used on the exact YAML file
-preimage SHA256 148b443bb9297f5b66bd30e319a4b2eabc26ef872ae11df3fd17a32209459d79
+preimage SHA256 0850d5da6c123619ac4dd455925d6f9530b353472dd4afe2495e5686a739f834
 to produce only the corrected sourcepath. Full source/test input lists,
 `--release 21`, `-Werror`, JNI and Maven/source-vendored JUnit remain
 unchanged. No package-incorrect Java TEXT transform or hand production patch.

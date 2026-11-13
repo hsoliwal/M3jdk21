@@ -109,7 +109,7 @@
       "invariant-policy"
     ],
     "pass_manifest_path": "make/m3/collections/algorithm-catalog/wrapper-convergence-20261018/SDK_QUALIFIED_PASSES.tsv",
-    "pass_manifest_sha256": "8367e21361918e8837be808d8130c1828d4cf10d89cc3f4c6b4df672d15a43bb"
+    "pass_manifest_sha256": "f1fce64912ac532c2c81a9db29e3db6dc3dd94763188312b61359536d43b7fad"
   },
   "public_host_portability": {
     "passes": [
@@ -162,11 +162,11 @@
   "copy_custody": {
     "catalogue_files": 31,
     "canonical_copy_manifest": "make/m3/collections/algorithm-catalog/wrapper-convergence-20261018/CANONICAL_COPY_MANIFEST.tsv",
-    "canonical_copy_manifest_sha256": "64b2c9bd37f0c98a5cfa4314dc4a372e4b0de61a0efafd8adcf4aa6315af22b4",
-    "canonical_copies_checksum_sha256": "80e4ddff41be3ce01fd5490f52da5754b7e9a37bc2b6b68b8caa64fd3e9e292f",
+    "canonical_copy_manifest_sha256": "86655111901e5dcb75c6db91c375d69db3f6a54b79aea11fa7bf83f047e4a893",
+    "canonical_copies_checksum_sha256": "497336df4113f4d2b87a96e68ab24a7626b2d90f523492ddd9a824a801c21d91",
     "recipe_source_files": 61,
     "recipe_copy_manifest": "make/m3/collections/algorithm-catalog/wrapper-convergence-20261018/RECIPE_CUSTODY_COPY_MANIFEST.tsv",
-    "recipe_copy_manifest_sha256": "da8c8f9a3031a8ad98d5e087c28148f4a8c6b38a52103c6f2920603495c7d245",
+    "recipe_copy_manifest_sha256": "fafb867299de74e016d34f5379c854aa98c40e3bb902240868bf1616f74c3d49",
     "original_owner_catalogue_sha256": "644f170f3857f8391cd0554c82e06b0980c6e600f115c22843310703e0029022",
     "integration_owner_census_sha256": "caaf1684b3e6db0d8e1304672a2fd30dce260f145b1eb8da1e25d247a85ba7a9",
     "index_candidate_catalogue_sha256": "1fa3f63d01d9b9f0f10a0c20a85a377f42ed30892730587111435b3566869f72",

@@ -4,7 +4,7 @@
   "scope": "Existing Apache receiver import tool; v7 vendor byte custody. No canonical regex runtime port or source-complete dependency closure admission.",
   "packetCompilerProof": {
     "path": "PACKET_AND_COMPILER_PROOF.json",
-    "sha256": "dc3f8cd7cd642a1d3a66c4a1b7c2bc6fc259b3e676859ffbbf18134d09db6885",
+    "sha256": "f25dcad8b4eeb8e2501a9aa7ea875f01bc64a4a4d1b43d0c2a0cc25a1d698be2",
     "sourceOwners": 6,
     "emittedClasses": 14,
     "entries": 24,
@@ -60,7 +60,7 @@
   },
   "fileSeals": {
     "path": "FINAL_FILE_SEALS.json",
-    "sha256": "aff9e2961aa9e5058ffee7ba6c2a8dbe3577c60d4b371967e9d32438e278e919",
+    "sha256": "2dc64e1f304ac301b9f2aeac8923efe6b2c989f75a2676d1fc77fc928398645b",
     "count": 86
   },
   "initialFailuresRetained": [

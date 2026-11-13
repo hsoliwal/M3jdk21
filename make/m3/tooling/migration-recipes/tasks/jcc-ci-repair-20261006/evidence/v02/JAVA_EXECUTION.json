@@ -77,22 +77,22 @@
   "python_installer_receipt": {
     "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/execution/installer/receipt.json",
     "bytes": 7178,
-    "sha256": "7b30ce7daa26fe17d053912f0c7240b4f86929c1faf0fa683f8a0e8f9371f122",
-    "git_blob": "de086342a24bd09f1d73414b44fb2386a7befe7b"
+    "sha256": "53ff5ca6f8c447beca308be8a24a90a9ef30a75566c0414123b3db645de5840e",
+    "git_blob": "603d5d78a0a7b28393c83fd0b450df55f7fc5407"
   },
   "outputs": [
     {
       "repository_path": ".github/workflows/m3-foundation.yml",
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate-v02/execution/materialized-01/.github/workflows/m3-foundation.yml",
       "bytes": 2411,
-      "sha256": "9969a19a5727bb1684d6e8443c67681a0afd52f0427d9501f4b4d363e9709982",
-      "git_blob": "57bdcc788f0ebbf82afe9b97728e93ab108f5395",
+      "sha256": "b1a0fad411526e9f74d912e4ac2e4a3026f5daeb3175e6ab4caeb9948fe180fd",
+      "git_blob": "101a58ce28c94ddb6e9b75283249c06ecd6d8fc4",
       "origin": "ACTUAL_OPENREWRITE_RESULT_FROM_JccCiRepairTest",
       "matches_actual_installer_output": {
         "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/execution/installer/installer-workspace/.github/workflows/m3-foundation.yml",
         "bytes": 2411,
-        "sha256": "9969a19a5727bb1684d6e8443c67681a0afd52f0427d9501f4b4d363e9709982",
-        "git_blob": "57bdcc788f0ebbf82afe9b97728e93ab108f5395"
+        "sha256": "b1a0fad411526e9f74d912e4ac2e4a3026f5daeb3175e6ab4caeb9948fe180fd",
+        "git_blob": "101a58ce28c94ddb6e9b75283249c06ecd6d8fc4"
       }
     },
     {
@@ -113,14 +113,14 @@
       "repository_path": "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java",
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate-v02/execution/materialized-01/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java",
       "bytes": 4975,
-      "sha256": "83d970effb393f67462e5cb269118e6a390d82f74f70eb16905fd4ba948a4416",
-      "git_blob": "3a2f62fdf15efb66a35b9dcd9e1051b97710cd99",
+      "sha256": "d2d9405ad42f8744eedf75ec50be123ac5401f8c203335ebb53832c0a5cb42bf",
+      "git_blob": "2a86b2b2ef9287c338577fc3fcb977cf0ac27953",
       "origin": "ACTUAL_OPENREWRITE_RESULT_FROM_JccCiRepairTest",
       "matches_actual_installer_output": {
         "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/execution/installer/installer-workspace/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java",
         "bytes": 4975,
-        "sha256": "83d970effb393f67462e5cb269118e6a390d82f74f70eb16905fd4ba948a4416",
-        "git_blob": "3a2f62fdf15efb66a35b9dcd9e1051b97710cd99"
+        "sha256": "d2d9405ad42f8744eedf75ec50be123ac5401f8c203335ebb53832c0a5cb42bf",
+        "git_blob": "2a86b2b2ef9287c338577fc3fcb977cf0ac27953"
       }
     }
   ],
@@ -475,14 +475,14 @@
     "frozen_inputs": {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate-v02/FROZEN_INPUTS.json",
       "bytes": 9164,
-      "sha256": "86c4ec4b8e0bb641092f4dc9c2a00d54fd8cf1c6670ee42989ae4af93ca254c0",
-      "git_blob": "f2bfabd4d5fee7c0c02d599be2c3b602eb47e952"
+      "sha256": "50c52c9e6cf2b570ea3e5135451f7a2be3b4dff4d437bc12cf9507fd0b8c11f0",
+      "git_blob": "174731d504a33e815bd30065b0f756a9ad58bbc4"
     },
     "prepared_inputs": {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate-v02/execution/02-maven-inputs.json",
       "bytes": 12667,
-      "sha256": "45cf2012d69709622a582a610f215420a4b8dec01c4a8594e131703ea1899032",
-      "git_blob": "e64228ab30248e81f5db7ac3b229b911597a6c68"
+      "sha256": "ae931dbe5d637bee4ddc9b3ec433d06630da05425e18d72a85f89a33054812d5",
+      "git_blob": "cd9a9d0cfdd8fa111030d359387c4eb00b34f0f6"
     }
   },
   "cache_custody": {

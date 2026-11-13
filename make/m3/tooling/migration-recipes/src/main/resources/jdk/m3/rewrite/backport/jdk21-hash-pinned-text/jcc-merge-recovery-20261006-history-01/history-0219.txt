@@ -20,7 +20,7 @@ def snapshot(p,name=None):
  else:q.write_bytes(d)
  snapshots.append({'source':str(p),'snapshot':str(q.relative_to(O)),**identity(p)})
  return load(p) if p.suffix=='.json' else d
-packet=snapshot(B/'bound-inputs-v3/BOUND_RESOURCES_REVIEW_PACKET.json');assert identity(B/'bound-inputs-v3/BOUND_RESOURCES_REVIEW_PACKET.json')['sha256']=='225e5a587fb5845929390de32a0b70642d8c24e6345ee42733b2ce8b6a355012'
+packet=snapshot(B/'bound-inputs-v3/BOUND_RESOURCES_REVIEW_PACKET.json');assert identity(B/'bound-inputs-v3/BOUND_RESOURCES_REVIEW_PACKET.json')['sha256']=='7a9f44babde561e4132476f61af72243ca70b2d9ce2faf8ff3dfa3c07418bdd2'
 f=snapshot(B/'FINAL_SOURCE_INPUTS_V3.json');assert identity(B/'FINAL_SOURCE_INPUTS_V3.json')['sha256']=='df6713ad19ce80daad0383fbd5c3716412e2dca133e1db7e0150b88e141313b5';author=snapshot(B/'AUTHORING_RESULT_V3.json');plan=snapshot(packet['plan']['local_path']);snapshot(packet['manifest']['local_path']);check(packet['plan']['local_path'],packet['plan']);check(packet['manifest']['local_path'],packet['manifest']);check(packet['authoring']['local_path'],packet['authoring']);check(packet['bound_input']['local_path'],packet['bound_input'])
 assert packet['receiving_execution'] is False and packet['operational_outputs_unchanged'] is True and packet['source_export_admitted'] is False
 assert author['state']=='BOUND_RESOURCES_PENDING_EXECUTION' and author['recipe_execution']=='NOT_EXECUTED' and author['source_export_admitted'] is False
@@ -97,7 +97,7 @@ java=Path(packet['entrypoint_test_and_proof_owners'][0]['local_path']).read_text
 for a,z in [('UNBOUND_RECOVERY_SOURCE_COMMIT',SOURCE),('UNBOUND_RECOVERY_SOURCE_ROOT_TREE',ROOT),('UNBOUND_RECOVERY_SOURCE_REF',f['source_ref']),('EXPECTED_RECOVERY_SOURCE_COUNT = -1','EXPECTED_RECOVERY_SOURCE_COUNT = 19')]:assert prepared.count(a)==1;prepared=prepared.replace(a,z)
 assert java==prepared and len(re.findall(r'^    @Test$',java,re.M))==12
 python_path=R/'make/m3/migration/test/test_jcc_source_recovery_handoff_packet.py';assert python_path.read_bytes()==(B/'derivation-static-review/inputs/test_jcc_source_recovery_handoff_packet.py').read_bytes();py_ast=ast.parse(python_path.read_text());methods=[n.name for cls in py_ast.body if isinstance(cls,ast.ClassDef) for n in cls.body if isinstance(n,ast.FunctionDef) and n.name.startswith('test_')];assert len(methods)==6
-assert identity(B/'run_verification_v3.py')['sha256']=='c779f94023b3914bca1558a35d39ab11aaedd00a18cf5b74e2a30bf1205de6b6'
+assert identity(B/'run_verification_v3.py')['sha256']=='19fc7bc5d1804082acd88598c12562b28c10a41e43aa356c23f5604a253268c2'
 execution=snapshot(B/'authoring-invocation-v3/EXECUTION.json','AUTHORING_EXECUTION.json')
 assert execution['exit_code']==0
 for k in ('input','script','stdout','stderr'):check(execution[k]['local_path'],execution[k])

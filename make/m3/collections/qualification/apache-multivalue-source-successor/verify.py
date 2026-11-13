@@ -23,10 +23,10 @@ ROOT = HERE.parents[4]
 V4 = "make/m3/collections/qualification/owned-apache-multivalue-20261024/"
 D1 = ("make/m3/collections/recipe/owned-apache-multivalue-20261024/src/main/"
       "resources/jdk/internal/m3/rewrite/hash-pinned-java/apache-multivalue-v2-to-v3/")
-RECEIPT_BLOB = "46b471a59c346b72633621d67c274b91bf453d93"
-EXPECTED_V4_BLOB = "f9527b590a06c0a3e045c87f09761ecaf0412f41"
-EXPECTED_V4_VERIFIER = "49ff3794a24dd25fd5ab9e690cb5e8d53f0e851c"
-EXPECTED_V4_PROBE = "dbad467d3dd1cf6af42d65b60cff2d2123291aca"
+RECEIPT_BLOB = "03b4f58a29ce931c006030da312d9f854c47127d"
+EXPECTED_V4_BLOB = "861c2994fb37c21df3ceacf08285a8620618ec63"
+EXPECTED_V4_VERIFIER = "f6ed1c9b82251cbf2a1423ec2fa20583c526d0ee"
+EXPECTED_V4_PROBE = "8b302fff381c9a7a9e7a8ae73ddc5748592761f8"
 
 
 def blob(raw: bytes) -> str:

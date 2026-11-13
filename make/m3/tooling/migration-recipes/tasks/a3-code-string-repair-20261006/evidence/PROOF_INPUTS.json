@@ -64,13 +64,13 @@
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/proof-workspace/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-code-string-repair-20261006/plan.json",
       "relative_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-code-string-repair-20261006/plan.json",
       "bytes": 2574,
-      "sha256": "964462f06dc0b729f3993a9ae505d863ad8434550dd39bbb9337c00bd7c4f13f"
+      "sha256": "770cb0e97b6967334037236917aae67ce6cd705b2794bc21f5dffe5e3352761c"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/proof-workspace/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/A3CodeStringRepairTest.java",
       "relative_path": "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/A3CodeStringRepairTest.java",
       "bytes": 17090,
-      "sha256": "54e3336b2ff189949244976e44c0292b863837306dac18a937c42103dab897a6"
+      "sha256": "e866a6beda7742147b8aada903fb70d57fffc90c8d4919019e66551c861eb232"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/proof-workspace/m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/a3-regex-memory-lab/before/A3Lab.java",

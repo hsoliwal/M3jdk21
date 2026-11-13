@@ -21,8 +21,8 @@
   "scope": "Exact source reconstruction and current declaration identity only. Eight existing range-check differences are recorded; no source implementation is changed or runtime acceptance implied.",
   "supersedes": {
     "path": "make/m3/tooling/name-contract/receipts/release-preparation/arrays-live-successor.json",
-    "blob": "d6b8f82d1c73c1ead895cf4786d9cebf067aefb1",
-    "sha256": "0fe3254fcbdd23a358a5176a8594a465ce7807b28c8202aa7465a62db4db4fab",
+    "blob": "79550775b25d51bda6bac449adc447053291c3b8",
+    "sha256": "19a70f45c2d80c29700b8bfa8b618f095fba3afc6a280ffc6da134e07f2998f8",
     "reason": "the M3Arrays companion moved from m3/arrays (module jdk.m3.arrays) to src/jdk.m3.collections (module jdk.m3.collections); the java.util.Arrays source pins are unchanged"
   }
 }

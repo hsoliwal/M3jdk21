@@ -30,7 +30,7 @@
     "observed_ledger_mtime_ns": 1792292047968533600,
     "path": "FOSS_RECEIVING_DECISION.tsv",
     "rows": 2,
-    "sha256": "34895010e3481ddeef5ba6140475fe4333e4f50be060b8979b199a52a16152b2"
+    "sha256": "991a767f57d722cb54a278828bfe2da5fc9cd4835a29c87a5d4e1255c17d2549"
   },
   "borrowed_hosts": {
     "classification": "ADAPT",
@@ -82,7 +82,7 @@
     {
       "bytes": 1804,
       "path": "FOSS_RECEIVING_DECISION.tsv",
-      "sha256": "34895010e3481ddeef5ba6140475fe4333e4f50be060b8979b199a52a16152b2"
+      "sha256": "991a767f57d722cb54a278828bfe2da5fc9cd4835a29c87a5d4e1255c17d2549"
     },
     {
       "bytes": 2659,

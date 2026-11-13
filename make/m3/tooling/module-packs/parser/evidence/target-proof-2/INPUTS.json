@@ -5,7 +5,7 @@
       "bytes": 2647,
       "owner": "repository",
       "path": ".github/workflows/m3-parser-jmod-20261018.yml",
-      "sha256": "474db0521b39a236883b8c6bc8abb397200eca59b2b714cbd530bae0ca26c6b2"
+      "sha256": "a917afb13859602959b51859ae16b425f0b47e58d742e8d84d85c733723e2130"
     },
     {
       "bytes": 16157,
@@ -17,7 +17,7 @@
       "bytes": 1827,
       "owner": "repository",
       "path": "doc/m3/name-mapping.d/m3-parser-jmod-20261018.json",
-      "sha256": "3144da9d4f3d583cb53d21df1449877db6320870a23d25850e58e6c837a8b9d2"
+      "sha256": "66f8d0ad6e9a6fcfdf9bc4c6d0eee58c7f155608e141d10f50af644c3c1d583f"
     },
     {
       "bytes": 228,
@@ -77,7 +77,7 @@
       "bytes": 1103,
       "owner": "repository",
       "path": "make/m3/tooling/module-packs/parser/FOSS_REUSE_DECISIONS.tsv",
-      "sha256": "ee537b43add0e1f1090ed90f4ca16458b09e9c0445e8fdcca51e7283be0eb763"
+      "sha256": "43aac1ebf85e5a1cfa4c5b1a16c4fbbc0e5bcaef5b06b6c815563d0afa22887c"
     },
     {
       "bytes": 22780,

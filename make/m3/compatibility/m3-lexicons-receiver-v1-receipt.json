@@ -108,7 +108,7 @@
     {
       "path": "m3/lexicon/receiver/src/main/java/jdk/m3/lexicon/M3Lex001Image.java",
       "before": "ABSENT",
-      "after": "7b4dd447390f0ff4ab2afd59fa199c476e3b6a2361a3cbe06c66f2d921f9fe2d",
+      "after": "826f01acb57950365094f3a75a0930cc3f98430511ef0750e3299973514c855b",
       "resource": "03-M3Lex001Image.java.txt"
     },
     {
@@ -191,7 +191,7 @@
     },
     {
       "path": "m3/lexicon/receiver/README.md",
-      "sha256": "22a5e1ca1ef270984b2551144b53600041021219f95913016fbd74b6bdcdb9a8"
+      "sha256": "9013743c5e663eccb6e0bc18be5e53d84909c335282ccc3e0a459c385bbce7e9"
     },
     {
       "path": "m3/lexicon/LEXICON_RECEIVER_LEDGER.tsv",

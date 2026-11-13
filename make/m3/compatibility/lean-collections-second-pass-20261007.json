@@ -115,9 +115,9 @@
   "application": {
     "path": "doc/m3/m3jdk21-porting-invariant.md",
     "before": "5df3e79d6a79af0be3a9e3beffb29c0215786b489763f003ad40cd53f828216f",
-    "after": "604ef82225fdb9e6ecf00e14f7630fb0956b85ec89e5c9241537733d4054f39a",
+    "after": "fbca494f64f60c7e337a1e0ee31077d372123ff13d9483d48fd6f3bec453a6c9",
     "template": "0.txt",
-    "outputGitBlob": "d933c7f8a4ba875b318c499214857146724fc4da"
+    "outputGitBlob": "61461a6900fed0b5db9b9aa2028c1d9a6e30f32b"
   },
   "policyVerifier": {
     "path": "make/m3/compatibility/check_m3_full_family.py",

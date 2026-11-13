@@ -1,6 +1,6 @@
 {
   "schema": "M3_FROZEN_RECEIVER_TRANSITIONS_V2",
-  "frozenProfileSha256": "add8b698c97edcfe218088df6dd3377b1fdd8e10a066497933108c428b628fc8",
+  "frozenProfileSha256": "cb0d3980dbd7b75ce35bc5f531042e51c6b9bc2a712f706de6dc14c5e2e013b4",
   "custodySha256": {
     "m3/core/src/jdk/m3/text/M3StringPiece.java": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755",
     "m3/core/src/jdk/m3/text/LocalM3StringPiece.java": "77fd1cbeae4dc20a4c23497102cb7c44ec14adbdd6bbf328326957515a7858ad",
@@ -242,13 +242,13 @@
     },
     "originalBefore": {
       "bytes": 14878,
-      "sha256": "fa3b327c4ab23e9e7f251f4bb9a04bb4f7148113ec65e01708a020fc12da15d6",
-      "gitBlob": "a68332b1d66d744d557b094ab20e252135219952"
+      "sha256": "195b1816682b973f74f5ac692151787092fa173746a8b5b292616fd611c3ef3c",
+      "gitBlob": "b5ae9d048c7be752412a93077d0bdd8a767568d0"
     },
     "correctedOriginal": {
       "bytes": 14878,
-      "sha256": "fbb744a04a050dc1489e7bf73cc63d9e60e8f161f881d071d4b24ced6b420d39",
-      "gitBlob": "0ea37209f97eda757f17214f73d6a3850b01c56b"
+      "sha256": "9e6d044598dbc2aa46db7ee020546930993ff26c02f2564963e4b95221ba27ec",
+      "gitBlob": "2382ace56c16d0494d5d5deb053295e798527c3c"
     },
     "lengthCorrections": [
       {

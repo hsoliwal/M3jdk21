@@ -25,7 +25,7 @@
   },
   "predecessor": {
     "path": "make/m3/collections/receiving/mat-owned-exports-20261112.json",
-    "sha256": "fcb555ea7d47ab1f7129b2deadcb54b5258ff72454a2678d45c91604c62d31cf",
+    "sha256": "ba87dd7f9c4860410d8274a691fb53d76f68c474c70a617c6a117fe067e9ca05",
     "disposition": "immutable earlier scoped evidence retained; this record adds module and resource results"
   },
   "complete_module_compile": {

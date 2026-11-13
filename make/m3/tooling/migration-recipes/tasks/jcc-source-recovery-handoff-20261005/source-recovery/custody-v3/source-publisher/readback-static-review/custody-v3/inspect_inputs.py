@@ -73,10 +73,10 @@ def main():
         'audit_base.py': '839c35c611de2dc02f2a3f1233131b24c79d77e109aaf010df9689dc8e04893b',
         'prepare_publication.py': '9c35afe184b437b5668019f2c8702875d4fed6c3ef2b8232ec845bacc2be2bb2',
         'raw-custody-v3/PROTOCOL.md': 'cdf3826e3725acded05b38031b70d9e7a8f8579540b38d65a2a8e38ce64209f5',
-        'raw-custody-v3/CUSTODY_INPUT.json': '384ce843f2e4545ad1c40d7ee58abbc471b5a6d1cbed89bea82dcff0479ce6a5',
+        'raw-custody-v3/CUSTODY_INPUT.json': '86e5e92e9f2dbb209085133b54daf9db3ad72988fe82968fb9f819aa015a3750',
         'raw-custody-v3/draft-T01/raw_custody_v3.py': '80f45f4a1d2e0cd49199e6885c62beff39a326aef5739e8890da5e9d991e2412',
         'raw-custody-v3/draft-T01/verify_publication_v3.py': '4cc60517ad06d1c3590059e43f353c59ad751cb74601bc65735a7df9259edcbf',
-        'epoch-01/PREFLIGHT.json': '4a8e0c7647a9a6549ffc797de28d01a7806aa7757fedb2096bf35ecb0bba62c7',
+        'epoch-01/PREFLIGHT.json': 'c28fb413b8a7c2b48d0a90f727397258e854e223859f65152272e912be983c89',
         'BASE_TREE_MODEL.json': '5a6c06886a4241745d38b6b463a88ace34236a1b0c557ffae596b05d048e1b82'
     }
     snapshots = []

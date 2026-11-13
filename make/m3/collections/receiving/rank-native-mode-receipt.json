@@ -5,9 +5,9 @@
     "baseCommit": "1ac43631c3ee44bc5fb5fc55dd9ccfac09b38d5b",
     "path": "make/m3/collections/qualification/full-java-jni-20261018/verify.py",
     "preGitBlob": "7c2bfa47b925a93e48cb444d95364779c1ad0266",
-    "postGitBlob": "418b7c6c9d0c82586f2b37532f3f6214aed58f14",
+    "postGitBlob": "799dbc5fc5112cfb2fc3fe5f86fe64ace7c6079d",
     "preSha256": "87141db0336fcc135ba85fb7f43a351aba8e0edc6890ab3c04d1235e43aa2dd3",
-    "postSha256": "4e6bc97e6a22a1f3dd9d350e1cea9fd87f7db584d22e0156c34d6743a9dbc0ab",
+    "postSha256": "289b8f20a5f55d4725c2b2420f9dfd176520e18b68722712774effef92493501",
     "postBytes": 22193
   },
   "canonical": {
@@ -19,7 +19,7 @@
     "recipe": "M3HashPinnedTextSnapshotRecipe",
     "recipeName": "m3-collection-rank-mode-20261113",
     "manifestGitBlob": "f1bd8fd73ca037fa4cb1623d4f398772e395312e",
-    "postimageResourceGitBlob": "418b7c6c9d0c82586f2b37532f3f6214aed58f14",
+    "postimageResourceGitBlob": "799dbc5fc5112cfb2fc3fe5f86fe64ace7c6079d",
     "mavenVerifyGitBlob": "f471ab933550508e06377feb3fb0b4193484ef92"
   },
   "behavior": {

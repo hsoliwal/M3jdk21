@@ -28,7 +28,7 @@
     },
     {
       "path": "doc/m3/counterpart-naming.md",
-      "before_sha256": "56626d53928e650c0b87e3505718bffd8e3db4c335eee087760fc4fd5d7618b9",
+      "before_sha256": "8037ccb81c2b61548cfadf57c52b38fd2da6b0b0d2b4cdd2d4ac3423b3579583",
       "after_sha256": "80b04019f75e98959fd4b0ef93ac2b897f06a7bd51133e5907589d082e31ac08"
     },
     {
@@ -38,7 +38,7 @@
     },
     {
       "path": "doc/m3/m3jdk21-porting-invariant.md",
-      "before_sha256": "95a5d111f0d9b2467bcc84828adc5b0efcfd1091e35a1b5c1bf1c484a2066b03",
+      "before_sha256": "ba394522eae7c533512a7e8eabc18486d18983223fcd15a570f2fce366efd27c",
       "after_sha256": "d47bc0978d8e6d1fcab15d4c7709749337fd80c9c577f1a40dcbe7bd4c4f1c91"
     },
     {
@@ -54,7 +54,7 @@
     {
       "path": "doc/m3/public-naming.md",
       "before_sha256": "404670acbcfdd052a8402165d151b08e94f82bb84551af5001a4bd3ca6c419ab",
-      "after_sha256": "e0b49d327cf1ebf47b5582573c860f6c0241b9fc5dbb4f994e49a45d9c55e5be"
+      "after_sha256": "4b618bcde186d8a99d5f084fed4eeb9c12002e4d79394c41fca93384214490f5"
     },
     {
       "path": "make/m3/tooling/name-contract/check.py",

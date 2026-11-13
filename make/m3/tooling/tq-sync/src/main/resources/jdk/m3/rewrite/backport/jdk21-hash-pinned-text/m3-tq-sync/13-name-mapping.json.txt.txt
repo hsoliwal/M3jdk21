@@ -2394,7 +2394,7 @@
               "int[] between(String, boolean, String, boolean)",
               "String schemeRevision()"
             ],
-            "sha256": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a",
+            "sha256": "d4d57e6b892342716ef9a52007082ce7c53959cba81a5ad0f2a0cf8d275c3c01",
             "git_blob_sha1": null,
             "fingerprint": null,
             "revision_role": "candidate",
@@ -2513,7 +2513,7 @@
             "signatures": [
               "M3Release(String origin, String group, String artifact, String rawVersion, String extension, String classifier, String contentSha256)"
             ],
-            "sha256": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb",
+            "sha256": "dc2a020aa8f6da324ace8a19f68c90b65021b9ad732932ebabbf545468abc34a",
             "git_blob_sha1": null,
             "fingerprint": null,
             "revision_role": "candidate",
@@ -5352,8 +5352,8 @@
               "Facts Facts.concat(Facts,int)",
               "boolean Facts.containsAll(Facts)"
             ],
-            "sha256": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155",
-            "git_blob_sha1": "ca23741ecd8cd24593ba5c260aa0d939c53d6766",
+            "sha256": "225e847c5fb9f0195b37b14810d405dc6cb8ff83156e667dc127d36489cbf7aa",
+            "git_blob_sha1": "53cb5da67520082e62fffe75272406d3eacb366c",
             "fingerprint": null,
             "revision_role": "candidate"
           }
@@ -5401,7 +5401,7 @@
           "id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-tq",
           "version": "2-current-owner-custody",
           "path": "make/m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
-          "sha256": "3b195d75e2fdc32ac31b665c5541bd07d3ffdb11698c499bccfd7bc4c1b4e338",
+          "sha256": "86e090b9f8cbd9424b67505be1131b176d35b28984556e7bdd0d64fee70dd387",
           "preconditions": [
             "Explicit ABSENT Java targets, exact template hashes, pinned existing recipe and backing owners.",
             "Actual Java and text recipes execute fixed-point/refusal gates before sealed-install materialization."

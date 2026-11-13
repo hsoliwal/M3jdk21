@@ -60,7 +60,7 @@ final class M3OwnedGuavaHashMultisetRecipeTest {
     private static final String NAME = "jdk.internal.m3.OwnedGuavaHashMultiset20261018";
     private static final String TARGET =
             "m3/collections/implementations/guava-hash-multiset/src/main/java/jdk/m3/collections/guava/M3HashMultiset.java";
-    private static final String BEFORE_SHA = "bedc7e25fe39f88d1593e7cd1ab0f6ea3f344a499a943364ea7ff3a6cf1c3a37";
+    private static final String BEFORE_SHA = "cf72dcf806a1d573b2ec8009c94122789a24880b97484c52eb61114d85540ae5";
     private static final String AFTER_SHA = "b062fbf97b22d162b8b7d54fe16bc56b311bc13a3cbbb6c1ca4d8cea93e5abc9";
     private static final int AFTER_BYTES = 22731;
     private static final String TEMPLATE = "M3HashMultiset.java.txt";

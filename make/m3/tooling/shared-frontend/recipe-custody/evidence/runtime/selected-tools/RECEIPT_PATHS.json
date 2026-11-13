@@ -2,7 +2,7 @@
   {
     "original_path": "/tmp/m3-selected-tools-final-v3-20261017/RECEIPT.json",
     "retained_path": "RECEIPT.json",
-    "sha256": "45dc1574882bbb51e7c4b770298883b50b126f8d95a4613c1bd3242824c7f397",
+    "sha256": "e368eb5448eb7e911bb954e3e86784bd7d6dd25790e50121050bac0105f28fce",
     "bytes": 9896
   },
   {
@@ -14,19 +14,19 @@
   {
     "original_path": "/tmp/m3-selected-tools-final-v3-20261017/combined-tool-lock.json",
     "retained_path": "combined-tool-lock.json",
-    "sha256": "8717998bb1a4aecb83dc542f4e9a43611b9837e2c6f99984a6440aa284630c91",
+    "sha256": "40c7b497783f871a0ad616bafab4dbd6b75c56e6839f0068de0d2865c35ac5b3",
     "bytes": 127728
   },
   {
     "original_path": "/tmp/m3-selected-tools-final-v3-20261017/linked/RECEIPT.json",
     "retained_path": "linked-image-receipt.json",
-    "sha256": "a92733ee24421ff8d706340bb3ca053cc9acc9e46d96a37ce19c775aab4fe3ef",
+    "sha256": "370338c5f6cdba8b57ec4708021dff0205047c009aff1740e8d40a90c6983a91",
     "bytes": 76374
   },
   {
     "original_path": "/tmp/m3-selected-tools-final-v3-20261017/linked/IMAGE_SHA256.tsv",
     "retained_path": "IMAGE_SHA256.tsv",
-    "sha256": "14e49e048101a817ea45b3ce7206ac4413c79110e7f05200784d471d70d25e1e",
+    "sha256": "7c6981500842557e195805491f57482c46aa50e3dbd9c223d6fc1dd7c9695659",
     "bytes": 63809
   },
   {
@@ -128,7 +128,7 @@
   {
     "original_path": "/workspace/scratch/13309be96b09/ast-work/rewrite-pack-sdk-proof/openrewrite-lock.json",
     "retained_path": "openrewrite-input-lock.json",
-    "sha256": "a847e6c9c8f89a1d0c9be9aaf047d3ffa64a65fb33d4ec7dcabfa08d8d1619a8",
+    "sha256": "2b90498042fba1820d25ef411494f5166f8c5278f7bd600e622a22f2e2a07f36",
     "bytes": 67998
   }
 ]

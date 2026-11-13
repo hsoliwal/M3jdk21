@@ -8,7 +8,7 @@ The parent admission is ab8633cc645487bc69bcd6919f328a0e1b5e40a9.
 
 The driver adapts the existing exact-custody, inherited-process-group and receipt pattern
 from state-relation-current-c11-20261019/runtime/qualify.py
-(b3fb888d4ea4d7a6b13bc13fef0fdcdba0bcb0f2, Apache-2.0).
+(88661fdb4a2b0d63f01385f2c6bb33f768523859, Apache-2.0).
 It introduces no production policy, scheduler, parser or validator. The receiver's
 eight original owners total 59,781 bytes. Five production/data inputs remain unchanged;
 three expected postimages must be the actual fresh Maven SDK outputs.

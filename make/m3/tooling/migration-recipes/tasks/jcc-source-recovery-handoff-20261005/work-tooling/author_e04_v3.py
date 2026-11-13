@@ -83,7 +83,7 @@ def validate_inputs(f,receipts_absent=False):
  assert inventory['source_publication']['custody']==custody and inventory['source_publication']['publication_status']==publication['status']
  sources=inventory['sources'];assert len(sources)==19
  context_path=B/'current-context/CONTEXT_REFERENCES.json'
- assert ident(context_path)['sha256']=='ab9828692a1ca02adfabf22ff679e47e1e62a9d755b97f4071c42d5225698bc5'
+ assert ident(context_path)['sha256']=='c15282b8166aacce7d6c6bf5db8367cc4bbf24171369a03a3cf000cc4809e208'
  baseline=read(context_path);expected={x['path']:x for x in baseline['designated_sources']}
  assert set(expected)=={x['path'] for x in sources} and len({x['path'] for x in sources})==19
  for row in sources:

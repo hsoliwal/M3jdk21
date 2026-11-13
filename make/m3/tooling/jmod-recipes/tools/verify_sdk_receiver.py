@@ -92,8 +92,8 @@ CURRENT_SOURCE_SUCCESSORS = {
 # replaceable table of individually matching Git blobs. These are the original
 # target Git-object and SHA-256 identities at M3JDK 21 master 0ab28ea86ccb.
 ORIGINAL_LEDGER_RELATIVE = "make/m3/tooling/jmod-recipes/RECEIVED_SDK_JMOD_BLOBS.tsv"
-ORIGINAL_LEDGER_GIT_BLOB = "e1f463b9fa54f9c92d0bbeacc79e7902be00bd2c"
-ORIGINAL_LEDGER_SHA256 = "db9c42ea9b0ec9af0986009a8022064eb419ed7e57104fa229b97dd625970046"
+ORIGINAL_LEDGER_GIT_BLOB = "9c7b294e35a14c057d4431d96deb5c6f49ecc9e3"
+ORIGINAL_LEDGER_SHA256 = "09662cb722cb36a19d22f4e020eaed5771177b485756b921c04c6f339939da46"
 
 
 def read_original_ledger(root, ledger, expected_count):

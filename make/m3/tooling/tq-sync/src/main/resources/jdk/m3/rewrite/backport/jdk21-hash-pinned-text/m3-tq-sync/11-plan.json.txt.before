@@ -23,14 +23,14 @@
       "before": null,
       "after": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/workflow.yml.txt",
-        "sha256": "3c2089f136ba1eda7f504a20298678e51c2f21fd4103045d5edbd4b694943137"
+        "sha256": "b5346abe2925e16862b8c2e4819d2533f54bd72fa03c40016311d2bd32ddffc7"
       }
     },
     {
       "path": "doc/m3/counterpart-naming.md",
       "before": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/counterpart-naming.md.txt.before",
-        "sha256": "8a9df82b06f61ec680d47bbf512201f8120e661831b4d92b067aa58e7c84451c"
+        "sha256": "d66369a44018e7c8b8e734e4a9f7c6f146aeee6db2fd5f68d709586050528e3d"
       },
       "after": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/counterpart-naming.md.txt",
@@ -53,18 +53,18 @@
       "before": null,
       "after": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/verify-image.sh.txt",
-        "sha256": "280267785554ab46a8fa67d1801b4abd6fb3639a993c508e46e511d16affd407"
+        "sha256": "dabe46cdfdacf9daac448cf8bb139fa5de06a151b236857256ee9d05793c2639"
       }
     },
     {
       "path": "src/java.base/share/legal/synexia.md",
       "before": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/synexia.md.txt.before",
-        "sha256": "1d615647231198fcfe563d63655165b4265fb9220626c24b88877fb3c76bf264"
+        "sha256": "2e4ba362b45291984fe5fd15c7c1e68392e22a459a86c96f407f4f2a54712263"
       },
       "after": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/synexia.md.txt",
-        "sha256": "f2c1255f1a27c75e7c6835e01f61e3fb861407571410365e9b64267c7f27f516"
+        "sha256": "59e2fd36c354af4b9096bcad07ebbd3b7a96b815050bcfa66b29f49aeab926bd"
       }
     },
     {

@@ -19,8 +19,8 @@ plan, rows = sealed.sealed_plan(plan_path)
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--context', choices=('historical', 'ic0'), default='historical')
 args = parser.parse_args()
-current_mapping_sha256 = '1d061025b81107d52e5c2fa52f1ad156b4d941c32bbd2fba725caebefc92b21b'
-current_workflow_sha256 = 'ee42d6c6c11e06f7c4032407668baea5453dbdeb19104cd2aaf53d7c07e33e84'
+current_mapping_sha256 = '632534ea2941b679bd9c582a62e351f56a7a3055440b6a9f5a80554148944de1'
+current_workflow_sha256 = '6f344f100d044a55afd545f4b0faa50f4bb7988cfca306fb709bd2151a5d47a3'
 if args.context == 'ic0':
     # Retain the sealed owner's source-path and incomplete-transaction refusals.
     for name in (sealed.LOCK, sealed.JOURNAL):

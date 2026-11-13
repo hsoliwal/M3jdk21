@@ -4,28 +4,28 @@
     {
       "source": "/workspace/scratch/7ea994fb52d9/candidates/parser/receiving/QUALIFICATION.md",
       "target": "QUALIFICATION.md",
-      "sha256": "f3987aba18bc2aaac3f64026ae67cb5e340812e6001f434c769d45c7d8c70fc3",
+      "sha256": "92a0fd0a5977c5a261bb47a13a0d1df51ef47f47f5a80c8f5e946161c0c7d4a7",
       "bytes": 8216,
       "copy": "EXACT_BYTES"
     },
     {
       "source": "/workspace/scratch/7ea994fb52d9/candidates/parser/receiving/REVIEW.json",
       "target": "REVIEW.json",
-      "sha256": "70674e4d4c9dcaa669d0e6fea9ef6857ea733888d3e9ecd7839d3c64dd65914e",
+      "sha256": "f51f4584fc8371b6ce4738064b7373dab65ff71dd090674202761d96a4de6304",
       "bytes": 7915,
       "copy": "EXACT_BYTES"
     },
     {
       "source": "/workspace/scratch/7ea994fb52d9/candidates/parser/SOURCE_SEALS.json",
       "target": "SOURCE_SEALS.json",
-      "sha256": "f7f5f573a71df6950cbf72438545ff71a0040b5d161997027a1fe55b60679b1f",
+      "sha256": "69af1c995fd1a97866bedc4aa5289df9e7b38d2ce74f92e57cd27bd9bc9765c9",
       "bytes": 2875,
       "copy": "EXACT_BYTES"
     },
     {
       "source": "/workspace/scratch/7ea994fb52d9/candidates/parser/qualify_integrated.py",
       "target": "proof-drivers/qualify_integrated.py",
-      "sha256": "7af0db9f08707ad9a4b86f778ba8a79a8e8de4635731118cfacdd85ae485c5d0",
+      "sha256": "93c7b0e0274813042084185d481b21e525d4caecf54f49e0d0ddbb11d78e7925",
       "bytes": 13227,
       "copy": "EXACT_BYTES"
     },
@@ -39,14 +39,14 @@
     {
       "source": "/workspace/scratch/7ea994fb52d9/proofs/sdk-parser-current-01/sdk-output/SDK_EXECUTION.tsv",
       "target": "receipts/sdk-current/SDK_EXECUTION.tsv",
-      "sha256": "722cde9692bbbfc1353b5286d4623868f8182b48e4401458b6726236d2d3576d",
+      "sha256": "71048b214e46a12d90a21519f12ff62434bc63862b5fd8f0b80ac0f93f509611",
       "bytes": 2698,
       "copy": "EXACT_BYTES"
     },
     {
       "source": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/RESULT.json",
       "target": "receipts/integrated-owners/RESULT.json",
-      "sha256": "d66e536cf262cca7787116a7015d1ece8e735c5e0874d329e907442f4bb87c5c",
+      "sha256": "4b6fcef01337814aa4f7f50de7cb621fb1417383459472438886177d016ee659",
       "bytes": 68588,
       "copy": "EXACT_BYTES"
     },
@@ -74,7 +74,7 @@
     {
       "source": "/tmp/m3-parser-refinement-20261019/current-integrated/BUILD.json",
       "target": "receipts/current-integrated/BUILD.json",
-      "sha256": "66a44e67e95172c622545273ec9d02ba09bd8e1a8b1ad8188e26734a45226622",
+      "sha256": "d3af9573a49ef0716d91e401eab885575adc314b6884f3e679d1957ba49318b3",
       "bytes": 17516,
       "copy": "EXACT_BYTES"
     },

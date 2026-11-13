@@ -169,7 +169,7 @@
       "stderr_sha256": "d5a618f2b592b0ae983a8652b2a383fbf0fa10944b8a8bfaf9683209c7be4aea"
     }
   ],
-  "input_receipt_sha256": "912fdd4d9f09222e530f3872e6184766232479a1c36b1a192dfd4cf4875758bd",
+  "input_receipt_sha256": "058d80210fd15796d538408ff0c1f736ebe83cd0db47da9b5fa7259b0f95e7ef",
   "inputs_unchanged": true,
   "independent_fixture_reference_hashes_verified": true,
   "existing_records_unchanged": 43,

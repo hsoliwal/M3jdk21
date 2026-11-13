@@ -40,7 +40,7 @@
       "fixed_point_changes": 0,
       "kind": "java",
       "missing_refusals": 1,
-      "original_receipt_sha256": "8d43f420afaf039ee00afce23e05f205d067aa822111f4c8648748343d62455b",
+      "original_receipt_sha256": "b810bb2201aa11aeda95d7e6060778b2601530dd9d64ba44150e64c146e59e5e",
       "schema": "M3_NLP_CURRENT_FORKS_SDK_RECEIPT_V1",
       "sdk_version": "8.17.1",
       "targets": 1
@@ -53,7 +53,7 @@
       "fixed_point_changes": 0,
       "kind": "java",
       "missing_refusals": 1,
-      "original_receipt_sha256": "f217b50b5dcc3690f16a66974ad36582a693408656925178c0d7276a16d9ff3e",
+      "original_receipt_sha256": "5b3f59c2f60ccc89de7b3f66e36df3d84eca352b1e9cfe731872abbf1afc086f",
       "schema": "M3_NLP_CURRENT_FORKS_SDK_RECEIPT_V1",
       "sdk_version": "8.17.1",
       "targets": 1
@@ -66,7 +66,7 @@
       "fixed_point_changes": 0,
       "kind": "java",
       "missing_refusals": 1,
-      "original_receipt_sha256": "b4ae00afe58f85c99b19b0176a7fde35f872229c42e6be493a111b9083e1d559",
+      "original_receipt_sha256": "4698fff393483384b9fc3275fc06f89799a1a85f1e2f9b2ce232c1ad8c30704b",
       "schema": "M3_NLP_CURRENT_FORKS_SDK_RECEIPT_V1",
       "sdk_version": "8.17.1",
       "targets": 2
@@ -157,7 +157,7 @@
       "fixed_point_changes": 0,
       "kind": "java",
       "missing_refusals": 1,
-      "original_receipt_sha256": "e2e016d84171e6f9cd80a4e1abc9e0ae7cfead3bc9056de0e7c572812d6490e1",
+      "original_receipt_sha256": "605850804a298483403688539fdef9188cf3918969497d3b33464facb8b076af",
       "schema": "M3_NLP_CURRENT_FORKS_SDK_RECEIPT_V1",
       "sdk_version": "8.17.1",
       "targets": 7
@@ -170,7 +170,7 @@
       "fixed_point_changes": 0,
       "kind": "text",
       "missing_refusals": 0,
-      "original_receipt_sha256": "db1aec4fa31edcf21aa518451b3b8552488f4185176673179129d2968ffe4f9e",
+      "original_receipt_sha256": "1ec2d8815ef326c3056e57276585f82b386b91ad81ca733d17f98c5a88caea80",
       "schema": "M3_NLP_CURRENT_FORKS_SDK_RECEIPT_V1",
       "sdk_version": "8.17.1",
       "targets": 3
@@ -183,7 +183,7 @@
       "fixed_point_changes": 0,
       "kind": "descriptor",
       "missing_refusals": 0,
-      "original_receipt_sha256": "0bae06e836586a39e052ecbce449da97a5c1c5f5e26582e26f936755cd0bf958",
+      "original_receipt_sha256": "3a0eb472927f0cc502c08aab46a8564f808ac470d7aa7a6fa43bffe6cdcbc098",
       "schema": "M3_NLP_CURRENT_FORKS_SDK_RECEIPT_V1",
       "sdk_version": "8.17.1",
       "targets": 2
@@ -196,7 +196,7 @@
       "fixed_point_changes": 0,
       "kind": "java",
       "missing_refusals": 0,
-      "original_receipt_sha256": "5f082d072692e16255e82c543f78b22c5fb386fbacee5c5beea0d98be930e8c7",
+      "original_receipt_sha256": "b60adb0b62650507caeb4fc3c3434b47ab2e8f6f2007679bbb1668f190e8e50a",
       "schema": "M3_NLP_CURRENT_FORKS_SDK_RECEIPT_V1",
       "sdk_version": "8.17.1",
       "targets": 6

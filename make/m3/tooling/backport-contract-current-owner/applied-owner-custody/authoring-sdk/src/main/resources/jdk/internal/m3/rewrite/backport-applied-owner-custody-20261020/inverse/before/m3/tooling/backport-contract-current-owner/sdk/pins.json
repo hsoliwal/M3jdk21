@@ -15,9 +15,9 @@
     },
     {
       "path": "README.md",
-      "gitBlob": "a4674f6ed7983503de54bb1223c2c4cd88ff8e3a",
+      "gitBlob": "1ecf30b2b7c4b840720b7b1fb535d28b9574f02f",
       "bytes": 5233,
-      "sha256": "6a60a4e313d5f8f2e1597c057bdd5d006dca504d9735a9aaeeae1d1d4d0bfbb2"
+      "sha256": "562ead219a647bb4398c98bba7efc01a551d307d9b4962edb5248d552e74af2a"
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
@@ -111,9 +111,9 @@
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/backport-contract-current-owner-20261019/forward/manifest.tsv",
-      "gitBlob": "1e6891ec6490a157170d5f298648dffc2073af11",
+      "gitBlob": "e31f2ee24d864b22c10344f1047dfd4407ef2172",
       "bytes": 1530,
-      "sha256": "6179a6c48be2b33f6f865926df13c78bd96ddf6a91a1574ad2c190cc71f8fac2"
+      "sha256": "c94db00ccacaccb9497837580b676694120489f58396a4b256af676bf61d6ac6"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/backport-contract-current-owner-20261019/forward/out/m3/backports/BACKPORT_EXECUTION_WAVES.md",
@@ -213,9 +213,9 @@
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/backport-contract-current-owner-20261019/inverse/manifest.tsv",
-      "gitBlob": "9d256c4070c8ded6c3e8c4930d43bbb86756c239",
+      "gitBlob": "357c3fa4b096f7bbb21e761e38d99fa773db078a",
       "bytes": 1530,
-      "sha256": "3bf085cbeab90bc6926ca8fae0b08cf28610969620b2fd1023313c23b6b9ac96"
+      "sha256": "92557bfedda64d485b94ce1b5ecb7e1a5caee9f11b18c9bbb2ca8dc6fe30d88b"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/backport-contract-current-owner-20261019/inverse/out/m3/backports/BACKPORT_EXECUTION_WAVES.md",
@@ -267,9 +267,9 @@
     },
     {
       "path": "src/test/java/jdk/internal/m3/rewrite/M3BackportContractCurrentOwnerRecipeTest.java",
-      "gitBlob": "ec369dba4fd3c0a842fb80bd802e6745fee7524e",
+      "gitBlob": "69fcef9b7f8d744fe7b819fe7bc58f473ff16053",
       "bytes": 16186,
-      "sha256": "e84ab824ac6b145a5285c455453b599b1de855bdce2b8effd3569872f5917eb5"
+      "sha256": "0b819bb9ce2b80112c95f34c143123aedd8fa89cb5b11ebabc51aeb2b13e7827"
     },
     {
       "path": "verify.py",

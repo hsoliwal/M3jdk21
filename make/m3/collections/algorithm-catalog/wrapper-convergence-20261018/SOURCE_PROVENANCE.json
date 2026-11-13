@@ -26,13 +26,13 @@
   },
   "frozen_inventory": {
     "file": "FROZEN_INPUT_INVENTORY.json",
-    "sha256": "f6ee9a3059617dd871777d704b45e312a3fb23d5e4aca30596d6d5edd588464b",
+    "sha256": "af56022156bb38601c15fd51a3364d4db87f776bebceef640c98e75233b46581",
     "captured_utc": "2026-10-18T04:45:19.094817+00:00",
     "note": "Exact original freeze preserved, including uncommitted origin; it is not a recipe output receipt"
   },
   "historical_readme": {
     "file": "HISTORICAL_README.md",
-    "sha256": "e0fad4f4c7af9f34026a158dc7316ff1e6f342df2b6c939ed3c67ca34026ae1a",
+    "sha256": "c453a1fd7992007326220dc8b11214e01e59e0e26b866fbe59b354254ba8640a",
     "status": "INHERITED_CLAIMS_PRESERVED_NOT_PROMOTED",
     "overrides": "This provenance and README govern current claims; historical #1204/72580 sources not checked in this pass"
   },

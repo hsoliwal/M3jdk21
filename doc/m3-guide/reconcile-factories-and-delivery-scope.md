@@ -217,7 +217,7 @@ At the source pin above, complete bounded directory/tree reads established:
 | Current physical `src` Java | 77 package Java files (including package-info), plus module-info = **78 main Java**; **30 test Java**; **108 total** | Source-tree presence; no runtime pass inferred |
 | Current [installed manifest][installed] | **98 path rows** = 68 main Java + 25 test Java + 2 standalone Java probes + 3 non-Java inputs | Rows counted after excluding blank/comment lines, not “98 production owners” |
 | Current manifest SHA-256 | `90e6e4adcc6a9224b6ca7f85b5d01b950ed8c368fcc660b04ce56fda59eae689` | Matches `installed_source_manifest_sha256` in [donation metadata][donation] |
-| Linked dated [qualification receipt][receipt] | Records **95 installed rows**, 66 main Java, 24 tests, 90 module Java, 2 probes, 3 other inputs; product inventory digest `d2f00a69062eda3b383a356224dcd2e63d1f5161d81e8a386982142739caa936` | Historical declared qualification scope, not the current manifest or current directory count |
+| Linked dated [qualification receipt][receipt] | Records **95 installed rows**, 66 main Java, 24 tests, 90 module Java, 2 probes, 3 other inputs; product inventory digest `1522020f4f3e248002e579ca76fc80b7332c2577bc16d092dfd2b4a97951a7bc` | Historical declared qualification scope, not the current manifest or current directory count |
 | Module README historical receiver paragraph | Describes an earlier **88-Java** manifest and 113 tests | Earlier bounded receipt narrative, not a current-source census |
 
 The current installed manifest and its donation checksum agree. The count/digest

@@ -78,7 +78,7 @@
     },
     {
       "path": "doc/m3/name-mapping.json",
-      "git_entry": "100644 blob 8470fedded0cbd0bdf96ed852cce5e99b2c2634e",
+      "git_entry": "100644 blob d029bface96b6affaac5bf99c1ae610f36ccfa8e",
       "proof": "identical Git mode/type/object in merged tree and incoming master"
     },
     {
@@ -88,7 +88,7 @@
     },
     {
       "path": "make/m3/history/ATOM_PLAN.tsv",
-      "git_entry": "100644 blob c8ce97c13be626dd80b2a06ce53cd1fa3a4cd331",
+      "git_entry": "100644 blob b69fb27a3b6cb94d24bb9a0394a8e3a394b80212",
       "proof": "identical Git mode/type/object in merged tree and incoming master"
     },
     {
@@ -98,7 +98,7 @@
     },
     {
       "path": "make/m3/history/TASK_PACKET.json",
-      "git_entry": "100644 blob aadc1ffdd0ba149aeb1c96ca16bf309815835885",
+      "git_entry": "100644 blob 0a4ff5a6fdcf314ffb3b8bdd1e57dd20e05e768c",
       "proof": "identical Git mode/type/object in merged tree and incoming master"
     },
     {
@@ -128,7 +128,7 @@
     },
     {
       "path": "make/m3/history/evidence/20261002-inspection/FINAL_REPORT.md",
-      "git_entry": "100644 blob f66e860b6dd98473c6b24c12576b7483d699237c",
+      "git_entry": "100644 blob fa18ca6348aaf83c2b76bd6dafb5e4ed08f4b9bf",
       "proof": "identical Git mode/type/object in merged tree and incoming master"
     },
     {
@@ -138,17 +138,17 @@
     },
     {
       "path": "make/m3/history/evidence/20261002-inspection/INVENTORY.tsv",
-      "git_entry": "100644 blob 77abc54bd5293fc46d273c6ff6c696640fbba493",
+      "git_entry": "100644 blob 98a6278ece3d09e599b33fb3f25cb2f1302090e9",
       "proof": "identical Git mode/type/object in merged tree and incoming master"
     },
     {
       "path": "make/m3/history/evidence/20261002-inspection/OUTPUT_CONTRACT.tsv",
-      "git_entry": "100644 blob 01c6712c78673cd8e84876dd94f1a0f656b931ad",
+      "git_entry": "100644 blob 9130a847d3429feef976969944aca52f36400199",
       "proof": "identical Git mode/type/object in merged tree and incoming master"
     },
     {
       "path": "make/m3/history/evidence/20261002-inspection/PROVENANCE.tsv",
-      "git_entry": "100644 blob fd7cd5172b839bc5732f2de766fb6170770ef81d",
+      "git_entry": "100644 blob 1f289756769dcb3c9772e15f33f10c9ca6a1b9a2",
       "proof": "identical Git mode/type/object in merged tree and incoming master"
     },
     {
@@ -223,7 +223,7 @@
     },
     {
       "path": "make/m3/migration/RESUME.md",
-      "git_entry": "100644 blob b9d72968bfab89539cfc2e746eca2407980b25be",
+      "git_entry": "100644 blob 1448429c471a6c13857b69207f9fda477769f334",
       "proof": "identical Git mode/type/object in merged tree and incoming master"
     },
     {
@@ -238,7 +238,7 @@
     },
     {
       "path": "make/m3/migration/docs/ARCHITECTURE.md",
-      "git_entry": "100644 blob 0182f9314d013fe222453792024c2c2edfcdc5f8",
+      "git_entry": "100644 blob ecca89bc20747d35cd492c798fd95bfdf7d5df24",
       "proof": "identical Git mode/type/object in merged tree and incoming master"
     },
     {
@@ -253,7 +253,7 @@
     },
     {
       "path": "make/m3/migration/docs/IMPLEMENTATION_PLAN.md",
-      "git_entry": "100644 blob 7a344004e8a68210593871807fcbd6da3c8c2ea7",
+      "git_entry": "100644 blob d778e35911c4b57fb15b5d117d7b56e5f7754658",
       "proof": "identical Git mode/type/object in merged tree and incoming master"
     },
     {
@@ -308,7 +308,7 @@
     },
     {
       "path": "make/m3/migration/evidence/replay-final.json",
-      "git_entry": "100644 blob 95647eaa028fae79681c2994b098cad2de5ca997",
+      "git_entry": "100644 blob 3c09cb831307d2ea610ef9f86bc8f73761b5719d",
       "proof": "identical Git mode/type/object in merged tree and incoming master"
     },
     {
@@ -378,7 +378,7 @@
     },
     {
       "path": "make/m3/migration/run_local.py",
-      "git_entry": "100644 blob 34e1eb94baede56eef40de8c0976d2edeb8594fc",
+      "git_entry": "100644 blob 38299822ded55324da4332accf40017d8b096743",
       "proof": "identical Git mode/type/object in merged tree and incoming master"
     },
     {
@@ -433,7 +433,7 @@
     },
     {
       "path": "make/m3/migration/test_run_local.py",
-      "git_entry": "100644 blob 40cfaaa053d4b1b0c54478e0d78ea5e1c8b3012e",
+      "git_entry": "100644 blob fcb5e9cb364c1f86f11e02b21f452bcb7cbf617f",
       "proof": "identical Git mode/type/object in merged tree and incoming master"
     },
     {
@@ -927,7 +927,7 @@
         },
         {
           "path": "doc/m3/name-mapping.json",
-          "git_entry": "100644 blob 8470fedded0cbd0bdf96ed852cce5e99b2c2634e",
+          "git_entry": "100644 blob d029bface96b6affaac5bf99c1ae610f36ccfa8e",
           "proof": "identical Git mode/type/object in merged tree and incoming master"
         },
         {
@@ -947,7 +947,7 @@
         },
         {
           "path": "make/m3/migration/docs/ARCHITECTURE.md",
-          "git_entry": "100644 blob 0182f9314d013fe222453792024c2c2edfcdc5f8",
+          "git_entry": "100644 blob ecca89bc20747d35cd492c798fd95bfdf7d5df24",
           "proof": "identical Git mode/type/object in merged tree and incoming master"
         },
         {
@@ -962,7 +962,7 @@
         },
         {
           "path": "make/m3/migration/docs/IMPLEMENTATION_PLAN.md",
-          "git_entry": "100644 blob 7a344004e8a68210593871807fcbd6da3c8c2ea7",
+          "git_entry": "100644 blob d778e35911c4b57fb15b5d117d7b56e5f7754658",
           "proof": "identical Git mode/type/object in merged tree and incoming master"
         },
         {
@@ -1017,7 +1017,7 @@
         },
         {
           "path": "make/m3/migration/evidence/replay-final.json",
-          "git_entry": "100644 blob 95647eaa028fae79681c2994b098cad2de5ca997",
+          "git_entry": "100644 blob 3c09cb831307d2ea610ef9f86bc8f73761b5719d",
           "proof": "identical Git mode/type/object in merged tree and incoming master"
         },
         {

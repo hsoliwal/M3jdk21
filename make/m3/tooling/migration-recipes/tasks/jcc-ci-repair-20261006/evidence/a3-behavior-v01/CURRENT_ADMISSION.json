@@ -55,9 +55,9 @@
     },
     {
       "repository_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-regex-memory-workflow/manifest.tsv",
-      "current_git_blob": "29e7731cd09d310ca5e3e221b405618af64abb56",
-      "executed_git_blob": "29e7731cd09d310ca5e3e221b405618af64abb56",
-      "sha256": "364df82310fbfd7f18cefa8982d7dd1a8cfa0814fce6fbb1e7218f0f39da1e47",
+      "current_git_blob": "76384056b0e1c03bcfbed9455e52de6792ae6a23",
+      "executed_git_blob": "76384056b0e1c03bcfbed9455e52de6792ae6a23",
+      "sha256": "9540cab846751163a2567a2f5d05adc3ff39274afd3a31f1d8db452a3b59a1dd",
       "bytes": 507,
       "origin": "EXACT_CURRENT_GIT_BLOB"
     },
@@ -160,8 +160,8 @@
     {
       "repository_path": "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java",
       "current_git_blob": "faa4edaff92e400b7964e4577f07cd4d169c1892",
-      "executed_git_blob": "3a2f62fdf15efb66a35b9dcd9e1051b97710cd99",
-      "sha256": "83d970effb393f67462e5cb269118e6a390d82f74f70eb16905fd4ba948a4416",
+      "executed_git_blob": "2a86b2b2ef9287c338577fc3fcb977cf0ac27953",
+      "sha256": "d2d9405ad42f8744eedf75ec50be123ac5401f8c203335ebb53832c0a5cb42bf",
       "bytes": 4975,
       "origin": "ACTUAL_CI_OPENREWRITE_RESULT"
     }

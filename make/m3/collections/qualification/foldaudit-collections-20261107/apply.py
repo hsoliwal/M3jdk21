@@ -178,7 +178,7 @@ RULES = (
        "        assertEquals(20000, imported.totalCount()); for (long key = 0; key < 113; key++) {\n", 1),
       ("        eclipse.clear(); assertEquals(20000, imported.size());\n", "        eclipse.clear(); assertEquals(20000, imported.totalCount());\n", 1),
       cls("final class M3BagInteropTest {\n", anchor("L0151", "ADD from " + P1084 + " blob a15150ccdb81, " + D1084), MAPPED.lstrip())]),
-    ("L0054", "ADD", CRES + "catalogue.tsv", "4e93200b41816c8bfa8b5d7c83aeb290c7dadd81", P1084, D1084,
+    ("L0054", "ADD", CRES + "catalogue.tsv", "651cb7b16228427a46b831a9ec15574d6756a98f", P1084, D1084,
      "ADD MAPPED ledger byte for byte (historical receiver sub-ledger; the TSV takes no anchor): test resource of M3CountedCatalogueTest", []),
     ("L0054", "NEW", CTEST + "M3CountedCatalogueTest.java", "templates/M3CountedCatalogueTest.java", "this recipe", "-",
      "NEW test (no origin test ran the main): queries the restored ledger, refuses malformed rows and bad arguments", []),

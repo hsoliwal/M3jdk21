@@ -269,7 +269,7 @@ index feb16c69885d4af45a3e5dd64d6aa97cb6364c10..46be8d1e7026c93727657fd04d0bf70a
              echo 'The existing OpenJDK GHA sanity workflow remains the product-build/platform matrix.'
              echo 'A passing proof summary does not upgrade any claim marked NOT_CLAIMED in release-contract.json.'
 diff --git a/.github/workflows/m3-hf-intake-20261017.yml b/.github/workflows/m3-hf-intake-20261017.yml
-index 22855b285018ab9732d56aa517921c4cfb9969c9..3ca48d3deb0a9aa2862d1356d9454ed551571ade 100644
+index 22855b285018ab9732d56aa517921c4cfb9969c9..507929afb688a92ee295b54905f086ae4f0ff640 100644
 --- a/.github/workflows/m3-hf-intake-20261017.yml
 +++ b/.github/workflows/m3-hf-intake-20261017.yml
 @@ -61,8 +61,8 @@ jobs:
@@ -454,7 +454,7 @@ index b2910ba33db946d3071b20153b56a51324fc4a8e..bf1d7bce040801cc9d35aac840863bf2
                "canonical_path": "synexia-code-convergence/tools/WorkflowStructureCheck.java",
                "canonical_git_blob": "f61be81f5a15bea78f1c5ae7d5555844c9cd2ea7",
 diff --git a/.github/workflows/m3-merged-atom-preservation-20261022.yml b/.github/workflows/m3-merged-atom-preservation-20261022.yml
-index 30ac5a8cd08f22778061055accd3cb7344890f8f..36820cffd1f9e2ec48c8a22d59ae6ce7112a04af 100644
+index 30ac5a8cd08f22778061055accd3cb7344890f8f..42be7e88ae48f45c3a161a9497a3ae482d6eaf22 100644
 --- a/.github/workflows/m3-merged-atom-preservation-20261022.yml
 +++ b/.github/workflows/m3-merged-atom-preservation-20261022.yml
 @@ -58,6 +58,6 @@ jobs:
@@ -878,7 +878,7 @@ index cffcccfde7543511dce61da2fe4ea6ad4b49e687..25cd1b40ca9a131c1a89646412604e14
        </plugin>
      </plugins>
 diff --git a/m3/vendor/m3/README.md b/m3/vendor/m3/README.md
-index e9a7f0159de1e2c069662455202065a1c93fb522..d055f31c20a9ecf5369f9a736b7a0ffcc46560df 100644
+index e9a7f0159de1e2c069662455202065a1c93fb522..bad61e30bd723916ea6a2f52cdd723b99910d2ac 100644
 --- a/m3/vendor/m3/README.md
 +++ b/m3/vendor/m3/README.md
 @@ -29,6 +29,13 @@ The eight manifest-listed Java sources are mirrored byte-identically below the c

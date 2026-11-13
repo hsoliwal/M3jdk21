@@ -205,7 +205,7 @@ Revision equality is checked at the end of preparation and at the start of each 
 | [`M3CB.java`][cb] | `0be655b7020f13f3df4265f68daf189bd039d86b` |
 | [`M3Descriptor.java`][descriptor] | `92f4d7da32a3b8265675a413311fd304c6dc2dd2` |
 | [`M3PC.java`][pc] | `b63fd9e457f7ac16bca8bf07dcb564069fdfef79` |
-| [`M3VI.java`][vi] | `087aa55bef9b57189d03f3388fb2e1f360320b02` |
+| [`M3VI.java`][vi] | `eda4db3979a6aeed341d0190be974fe88059f3db` |
 
 All explicit public/private methods, overloads, constructors, nested interfaces, enum and records in these seven bodies were reviewed. The no-argument lane constructors are implicit; record/enum generated members retain Java language behavior. Fully read supporting bodies were `M3Address28`, `M3Bits`, `M3Boundary`, `M3Release` and the native `M3BitLane28.c`; these supporting reads do not enlarge this page's seven-owner denominator.
 

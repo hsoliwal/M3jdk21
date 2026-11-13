@@ -113,7 +113,7 @@ Every entry is **NOT_RUN** in this documentation pass.
 | [LangDexSourceEnvelopeTest.java][ET] | `7e7a80a03c671886a8b49afd1fc9e97fcfa151b6` | Wire/receipt fixture and focused rejection cases |
 | [LangDexProjectionReceiverTest.java][PT] | `8f56e44a5927309d54d9a82b651b383271218a1f` | Separate synthetic catalog/payload route; not envelope admission |
 | [FoundationTest.java][FT] | `c722aa61a9bc7953d183e1fac20c0155a19dd2dd` | Existing image/storage tests and optional exported catalog path |
-| [make/m3/runtime-integration/tests/test_m3_number_space_export.py][NP] | `401f4b281d5c66d8082e1a965fc94c301a5862f7` | Fixture-driven exporter/verifier orchestration and deterministic output assertions |
+| [make/m3/runtime-integration/tests/test_m3_number_space_export.py][NP] | `66c8b9a2b14ecdabfda5fdf7a0af14b9af562e9e` | Fixture-driven exporter/verifier orchestration and deterministic output assertions |
 
 The complete core listing contains no dedicated LexiconTool test. Its concrete
 callers inspected here are [build.sh][BUILD] and

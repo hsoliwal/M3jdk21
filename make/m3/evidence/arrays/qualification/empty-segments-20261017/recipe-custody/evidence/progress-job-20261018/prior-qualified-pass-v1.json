@@ -197,7 +197,7 @@
     },
     {
       "path": "proof/receiving-v1/qualified-dataset/MODES.tsv",
-      "sha256": "85beebafdf673a58b53caa372893b24d22109c204c22abb64586cfd14314365f",
+      "sha256": "3c69fdaab790c9cc3f0c7d0beaa9cb552b6da50172ac0a0ecf069c00af082462",
       "bytes": 755,
       "source_license": "Apache-2.0",
       "utf8": "make/m3/runtime-integration/progress-job-20261018/CATALOGUE.tsv\t0644\nm3/runtime-integration/progress-job-20261018/DONOR-REVIEW.json\t0644\nm3/runtime-integration/progress-job-20261018/README.md\t0644\nm3/runtime-integration/progress-job-20261018/RECEIVING-MAP.json\t0644\nm3/runtime-integration/progress-job-20261018/src/test/java/EclipseStatusIdentity.java\t0644\nm3/runtime-integration/progress-job-20261018/src/test/java/OldCallableClient.java\t0644\nm3/runtime-integration/progress-job-20261018/src/test/resources/ProgressJobRunnableConflict.java.txt\t0644\nm3/runtime-integration/progress-job-20261018/verify_progress_job.py\t0644\nsrc/java.base/share/classes/java/util/concurrent/ProgressJob.java\t0644\ntest/jdk/java/util/concurrent/ProgressJob/M3ProgressJob.java\t0644\n"
@@ -239,7 +239,7 @@
     },
     {
       "path": "proof/receiving-v1/qualified-dataset/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/manifest.tsv",
-      "sha256": "068b1c68573d1246c24ee2ae181b5f2423850dd3be5fd5be944ad502c7b11dde",
+      "sha256": "3fc0d6ffc4397037a32bf98e6b1d025ff082a3ac19121216a49c96a086db4692",
       "bytes": 705,
       "source_license": "Apache-2.0",
       "utf8": "make/m3/runtime-integration/progress-job-20261018/src/test/java/EclipseStatusIdentity.java\tABSENT\t9c5636c1c12363d9d05767b80cd589f9c9cedb55b0b3b7e073c8c25a114509e9\t0005-EclipseStatusIdentity.java.txt\nm3/runtime-integration/progress-job-20261018/src/test/java/OldCallableClient.java\tABSENT\td1749ed57040370cdce420fb89288f22d27c5d9aeae548dcd0f91601392a6117\t0006-OldCallableClient.java.txt\nsrc/java.base/share/classes/java/util/concurrent/ProgressJob.java\tABSENT\td2734bcc607b1af8a593387040da53886530a310685a26965a5aa77609aaefc8\t0009-ProgressJob.java.txt\ntest/jdk/java/util/concurrent/ProgressJob/M3ProgressJob.java\tABSENT\tc8a20e2143ab2a1ab4ca3437ca2bf79c1ab486596247e0aecd6c1cde3b0dd609\t0010-M3ProgressJob.java.txt\n"

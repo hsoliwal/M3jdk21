@@ -18,8 +18,8 @@
   "skipped": 0,
   "prepare_contract_cases": 10,
   "receiver_contract_cases": 10,
-  "sdk_inputs_sha256": "802c918a319b981e98247b90c9afda364e4c9fa496b12dfe8032bf0910e9e290",
-  "sdk_results_sha256": "d11405c8f862cd5858db2ec5477b4a048a54195ddcce3930e5ccb0b66a5d8c13",
-  "parent_sdk_results_sha256": "a9507f0949209eb663773a5049a7a2c10dc3898c383c0ec0ac627e523494525a",
+  "sdk_inputs_sha256": "9c3242f2890f4bcc1f1afd8491a6975daa9865b122744ea09fe58d17fc3517ce",
+  "sdk_results_sha256": "0f252312b5190b002324eb925a5409b97badcd86d70d5e891d5c3474aa38cac6",
+  "parent_sdk_results_sha256": "f8505d1514606c5fc93e261c2db96c8a8e9efe59327e9af2af9540a8c382295c",
   "shared_engine_and_bound_harness_changes_from_parent": false
 }

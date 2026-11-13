@@ -3,33 +3,33 @@
   "files": {
     "RESOURCE_CHECKS.json": {
       "bytes": 13445,
-      "sha256": "cac8c9c803447a910593b0e8594b93cd3b1b5adf149272fae7a8744ab814a429",
-      "git_blob_sha1": "38d370d6044fc4c4aa05d7bf0292c6420783aa31"
+      "sha256": "7e2bc8b1794c2bf14a69e421c1087b4bed9a387b59ab936893c86b733a39c806",
+      "git_blob_sha1": "acbf4ebc4a069eb6ec52fe2429cf7062a3380e20"
     },
     "REVIEW.json": {
       "bytes": 1141,
-      "sha256": "9c0b0065cc523d54f8ad6145d8dbf2e64c36c6fef5f8b091724a5edf8237634a",
-      "git_blob_sha1": "01223e23c3d75b405d1032579d56d510c46b4a34"
+      "sha256": "27484b7596a4487f34b96abca55cdce9ee4f72ded7777253fe4b8e091ff2277e",
+      "git_blob_sha1": "4f2e5f955d45ccffb5f399b9e3dbde339a7730c8"
     },
     "REVIEW.md": {
       "bytes": 9241,
-      "sha256": "7ece8d5be7df1a1080e2b8c6c86663dad44afe874404efe3a772484ad391c0bb",
-      "git_blob_sha1": "c3bdb44fa23376733ffea31a8231606494905818"
+      "sha256": "d0f4351455a36198b31f53c32c02a8b4a743d1542b6ce85b9e9de469cf23d6c7",
+      "git_blob_sha1": "5a7bf2f967aeb3c046f81936fb9682722b138fe7"
     },
     "inputs/AUTHORING_EXECUTION.json": {
       "bytes": 1443,
-      "sha256": "5a0e2fd11514f200f08d3297e52c37bdc208dab4c3e97040653f16c931c4787a",
-      "git_blob_sha1": "8eca475d38d3133cd7183239266dbabf1cf9cfb0"
+      "sha256": "3d2266f7b8bd1ba6206232886ef2e66008ce5fa326250590ccb5c4695e80b40a",
+      "git_blob_sha1": "00cca678c3d7b2b43a54ea0eaae40b026cb429ba"
     },
     "inputs/AUTHORING_RESULT_V3.json": {
       "bytes": 59614,
-      "sha256": "116fde8857beec30084054b03d2b543ad75e8dc0c534314e5fffde1554f5823f",
-      "git_blob_sha1": "63e9ddff20a8ed1732c8337b0dd93f8b693cdb11"
+      "sha256": "897b0cc16786bd0cc123ea497fc0cdf378c8a1664a06e212328b630b1e53f8a1",
+      "git_blob_sha1": "66dc9740e747275de6a8ec1ecb5caff6651f1499"
     },
     "inputs/BOUND_RESOURCES_REVIEW_PACKET.json": {
       "bytes": 63330,
-      "sha256": "225e5a587fb5845929390de32a0b70642d8c24e6345ee42733b2ce8b6a355012",
-      "git_blob_sha1": "282ce942d789459f83d9b1b38a6db454ff6aa6dc"
+      "sha256": "7a9f44babde561e4132476f61af72243ca70b2d9ce2faf8ff3dfa3c07418bdd2",
+      "git_blob_sha1": "7d3baa0bca3dc65a6dfc79a6e6f8e2c21246df11"
     },
     "inputs/FINAL_SOURCE_INPUTS_V3.json": {
       "bytes": 83448,
@@ -38,13 +38,13 @@
     },
     "inputs/JccSourceRecoveryHandoffTest.java": {
       "bytes": 29963,
-      "sha256": "5a6efe78569fa76702d85b2d391335423d839b62748275748efc6020ba386de3",
-      "git_blob_sha1": "1abc53c1c880686111631234b5df7db191bd0297"
+      "sha256": "e25ac6f591aaee807abab8906fd61f5c191882f500c4dde5f4de8df7581c42df",
+      "git_blob_sha1": "68065addeeba93a0e24edd3f3697004a752a212c"
     },
     "inputs/after00-name-mapping.json.txt": {
       "bytes": 251524,
-      "sha256": "abfc59de62d46f6442b95717ac367461ab057cd74ed9dfffc6515d7fb0a1574c",
-      "git_blob_sha1": "f350c7c79e265c788d9e3278eb0103733b301327"
+      "sha256": "a91ad1cb7d7f358fb7c4e280b7bf3756db9dd2d6f387f4c7e622e232ff03c0bf",
+      "git_blob_sha1": "7d43a1dc26becb45aa69616d47c9e8224a37611d"
     },
     "inputs/after01-jcc-source-handoff.md.txt": {
       "bytes": 29680,
@@ -53,8 +53,8 @@
     },
     "inputs/after02-source-destination-bindings.json.txt": {
       "bytes": 167811,
-      "sha256": "59b1491a232e3eabfd0530cbf47b01265603e6f493e382aa3c394c629b0516b6",
-      "git_blob_sha1": "8fc1846a9d81c1a6cd7e21f66048d9bc4ef2a834"
+      "sha256": "a0b20e45bb5d5e8f4a684ee0d4daa7a9cf8730529ae784a09778b17aceabea11",
+      "git_blob_sha1": "46b99a0250db3076a602529f5aa4daedfc567739"
     },
     "inputs/after03-root-coverage-obligations.tsv.txt": {
       "bytes": 107597,
@@ -73,8 +73,8 @@
     },
     "inputs/before00-name-mapping.json.txt": {
       "bytes": 236215,
-      "sha256": "61818898ef6c092ddad2c1ee4cfe7508199912ff0a1f2d5c2a51ad6695d040c8",
-      "git_blob_sha1": "3a1e902a8284773f0f182d6bd43bf4e27b4e63c0"
+      "sha256": "aeec3cfe84e57aadf7fa855a5f2174dd73749ccc8f6cd8f4409f0bb8a25e3d53",
+      "git_blob_sha1": "1bbe40b2c04da018894a4494da157c6865340490"
     },
     "inputs/before01-jcc-source-handoff.md.txt": {
       "bytes": 16423,
@@ -83,8 +83,8 @@
     },
     "inputs/before02-source-destination-bindings.json.txt": {
       "bytes": 92103,
-      "sha256": "8c76c2dd45e775d29f8f47d8daf65842e465c74ad3dec7aacd55df59f9d051a1",
-      "git_blob_sha1": "5ecf415c7af4176898328d58b9df2972e18277c4"
+      "sha256": "e8f345aacd9d93fb436d08f3bd868c2f5849e8edf989dd7fab54cc665dc49577",
+      "git_blob_sha1": "0b4ddaae7f2550a3f336dea845a37781584d951e"
     },
     "inputs/before03-root-coverage-obligations.tsv.txt": {
       "bytes": 107597,
@@ -98,13 +98,13 @@
     },
     "inputs/manifest.tsv": {
       "bytes": 876,
-      "sha256": "f9e38d31f89d71ee6fcbb107d2ea0d12636196b16094d951b64b9a4b74bd5c0b",
-      "git_blob_sha1": "498da5417b538c49ce52ba13b7ef782ecc2b9e47"
+      "sha256": "9937394b752407265505c7b4aaee7fe6febac6babc05a27012c76301e08d8ccf",
+      "git_blob_sha1": "b02d4d3d49953d231baa49dc70c9b2543f6acc1a"
     },
     "inputs/plan.json": {
       "bytes": 3390,
-      "sha256": "68d9e65e8d45d1c6e8eea04de4f9e2ab0326b7d66fef7f3d86f832fb0c8197e2",
-      "git_blob_sha1": "c4b6be425ba7a025ce20a4da6dd7317c96fea5ff"
+      "sha256": "49a8d7f2daeebe445ae6c7dcbde5d217ff28393238f9d569e7115f627a270620",
+      "git_blob_sha1": "fbb9e0400ef9aa60bc6e044d21f85e904b1bd8f0"
     },
     "inputs/test_jcc_source_recovery_handoff_packet.py": {
       "bytes": 17089,
@@ -118,8 +118,8 @@
     },
     "inspect_resources.py": {
       "bytes": 15928,
-      "sha256": "4adb10687dabffae8d1e18fc796dfd4d3ce1cbbb295157cbb204df84bacaf941",
-      "git_blob_sha1": "f631cf96a49c0fd34915c1ce5c9410e66e8e7f1b"
+      "sha256": "e5ec9317204644f31ff161ef0a695e6623952893ab1f7b35e0c870f11c9d1eac",
+      "git_blob_sha1": "ac56d23c5ecfcada7a2445ee54d8bb09cc9fa85a"
     },
     "inspector-revisions/V1_DIAGNOSTIC.json": {
       "bytes": 304,

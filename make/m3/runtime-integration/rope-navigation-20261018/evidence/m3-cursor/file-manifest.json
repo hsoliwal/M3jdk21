@@ -9,7 +9,7 @@
     {
       "path": "README.md",
       "bytes": 9334,
-      "sha256": "c238da13b1ea0820ca1695f4dcc9d760293eb0678b6799c7246e831eeb8d17e5"
+      "sha256": "a9e6ae8c68c99c249e6abd139240710bc6c1263c24fac7939d69892f36edaaf0"
     },
     {
       "path": "analysis/cursor-ab-final.json",
@@ -44,7 +44,7 @@
     {
       "path": "final-sdk-binding.json",
       "bytes": 3092,
-      "sha256": "77068214022cd539f3c98d7d523cf7958d07a52225e300e2d3378f99ce84a8db"
+      "sha256": "fbc47e7a4ad7a51931bd88c98321148bc9306c6f46489a676ccc5e21e3b94e4b"
     },
     {
       "path": "index.json",

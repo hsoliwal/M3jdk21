@@ -21,7 +21,7 @@
       "actual_receiver": {
         "bytes": 2692,
         "path": "receiver-actual/RECEIVER_ACTUAL.json",
-        "sha256": "4c593b03a3d931a51a54e3cebb785c7ef8aee68af761227cca51bc2d37f0e51a"
+        "sha256": "c113d53ed7e507564db6303546684c0feb2222773a26fbf3bdf75b27f44f023b"
       },
       "actual_receiver_cases": [
         {
@@ -56,7 +56,7 @@
       "sdk_inputs": {
         "bytes": 14384,
         "path": "sdk-final/SDK_INPUTS.tsv",
-        "sha256": "515d1e52b0e3720da471282aae435f2aabb121999495d8cdc7f60e2a9adcc17c"
+        "sha256": "a1e946e7a68d44d2ababc4e3ad7289f564d8686a54d4f11771f25e2e8d087efb"
       },
       "sdk_methods": [
         "driftMissingDuplicateAndWrongRepresentationRefuse",
@@ -68,12 +68,12 @@
       "sdk_qualification": {
         "bytes": 1055,
         "path": "sdk-final/SDK_QUALIFICATION.json",
-        "sha256": "653696d0826fa396174e1c3febba4afa3e4a7f4d31c9703158a484ac14d65ac0"
+        "sha256": "82ec55b1fa7086c10133daa7a214868da20e7b7b415ed1a04e51b97074aaf689"
       },
       "sdk_results": {
         "bytes": 9273,
         "path": "sdk-final/SDK_RESULTS.tsv",
-        "sha256": "b1c10bcff8905932bf1798d21f96e3f0e57a02cdc05bc6f70f28962635334e19"
+        "sha256": "8fbedf1b5967b3edc4fbe7fc38e84686e63bc09cb808d2cfb2118b9f4741766b"
       },
       "sdk_test_counts": {
         "errors": 0,
@@ -89,7 +89,7 @@
       "actual_receiver": {
         "bytes": 2915,
         "path": "receiver-native-link-actual/RECEIVER_ACTUAL.json",
-        "sha256": "c89695611e6882fd4093fc4875cd7e24c869caa956ad462bc05842b59f26650b"
+        "sha256": "8509ede561e5b69e11e5ac3d0eaa825ea37f7c225f69b6277383fa5965c3bc6a"
       },
       "actual_receiver_cases": [
         {
@@ -136,12 +136,12 @@
       "sdk_qualification": {
         "bytes": 854,
         "path": "sdk-native-link-final/SDK_QUALIFICATION.json",
-        "sha256": "851adfd26985be324268e2e97482119d21b708897232a343bb997ef8887d7515"
+        "sha256": "3ecc2cea6a12415723cb6f1d613fbe78fe99a4e034a68c2859d2b544509e1d17"
       },
       "sdk_results": {
         "bytes": 962,
         "path": "sdk-native-link-final/SDK_RESULTS.tsv",
-        "sha256": "a9507f0949209eb663773a5049a7a2c10dc3898c383c0ec0ac627e523494525a"
+        "sha256": "f8505d1514606c5fc93e261c2db96c8a8e9efe59327e9af2af9540a8c382295c"
       },
       "sdk_test_counts": {
         "errors": 0,
@@ -157,7 +157,7 @@
       "actual_receiver": {
         "bytes": 3036,
         "path": "receiver-linker-temp-actual/RECEIVER_ACTUAL.json",
-        "sha256": "fdb0d20018b402bc0342b2867964a1b10e96e57ddd6d5d66b4829e8eb58bd069"
+        "sha256": "8250f3279b7e5f399dafc1bab7707a5159c9fec05990e2fc30cadb1c549bf2bc"
       },
       "actual_receiver_cases": [
         {
@@ -192,7 +192,7 @@
       "sdk_inputs": {
         "bytes": 3520,
         "path": "sdk-linker-temp-final/SDK_INPUTS.tsv",
-        "sha256": "802c918a319b981e98247b90c9afda364e4c9fa496b12dfe8032bf0910e9e290"
+        "sha256": "9c3242f2890f4bcc1f1afd8491a6975daa9865b122744ea09fe58d17fc3517ce"
       },
       "sdk_methods": [
         "driftMissingDuplicateAndWrongRepresentationRefuse",
@@ -204,12 +204,12 @@
       "sdk_qualification": {
         "bytes": 854,
         "path": "sdk-linker-temp-final/SDK_QUALIFICATION.json",
-        "sha256": "341e465c914ed49a72f1cd9e574fe57838741fc1a4c0932b8ec5f0f3b767c16e"
+        "sha256": "2b37cbb1673834f7a78b8c5aa5e2e9a0b0740ad5ea61a45782e9d6de9a1d5eb3"
       },
       "sdk_results": {
         "bytes": 778,
         "path": "sdk-linker-temp-final/SDK_RESULTS.tsv",
-        "sha256": "d11405c8f862cd5858db2ec5477b4a048a54195ddcce3930e5ccb0b66a5d8c13"
+        "sha256": "0f252312b5190b002324eb925a5409b97badcd86d70d5e891d5c3474aa38cac6"
       },
       "sdk_test_counts": {
         "errors": 0,
@@ -228,7 +228,7 @@
     "files": 207,
     "inventory": "FINAL_EVIDENCE_FILES.tsv",
     "inventory_scope": "Selected retained proof files only; excludes this generated aggregate and the inventory itself.",
-    "inventory_sha256": "209ac2fcb7f2be01b674e9432f07925572fdd3deda7262a5a7fdad87aeeaebc6"
+    "inventory_sha256": "e94ccd7c028a97906e1985f85eead66c4ec95705d966af292253a2eff6b2fc75"
   },
   "final_pack": {
     "build_contract_result": "OK",
@@ -236,7 +236,7 @@
     "build_receipt": {
       "bytes": 7322,
       "path": "pack-final/BUILD_RECEIPT.json",
-      "sha256": "b98d72fdbfc742d3dbd25e00dba3965e14e28f0a98e87d9f4f90e96721fa1a7b"
+      "sha256": "13ea8b8989cabbd2f7fc8ad214b83108e5bdee68264990d132817e4c3ae0ed51"
     },
     "catalogue_output_sha256": "5c10bbe5a1a36c7614e7008d714494438e16250bea84c27e36ceb29fb91399ff",
     "cli_identities": {
@@ -251,7 +251,7 @@
     "commands": {
       "bytes": 50004,
       "path": "pack-final/COMMANDS.json",
-      "sha256": "8bf340d6a1063ea1938b64ff14d847738f201502548990edfbab926a00edee6c"
+      "sha256": "f8aab853c198b1e5dd38f48e683530fdfe04d76c730fe128f4b38f4bf1df146e"
     },
     "controlled_packager_java_tmp_dir": "${OUT}/java-tmp",
     "fixture_results": {
@@ -324,7 +324,7 @@
     "source_inputs": {
       "bytes": 12110,
       "path": "pack-final/SOURCE_INPUTS.tsv",
-      "sha256": "00a20b43482a0f4f0b00f4fd69db94881bc862e24b4f7347c616e5d9db362572"
+      "sha256": "1fd29821c5adfa76e7d0dc9bc540361cbea065bcc4c1af2cafd19bf44db410be"
     },
     "source_jdk_tool_module_collisions": "NONE_IN_RELEASE_OR_JMOD_FILENAMES",
     "status": "PASS",
@@ -350,14 +350,14 @@
     "evidence": {
       "bytes": 427,
       "path": "review/existing-sdk-receiver-baseline.json",
-      "sha256": "a0102376253b7d46eb767489a12c75cbb213c0e0c12eda46342e842b749e36c1"
+      "sha256": "f1c7091609466c059f7500971c4777abb16a47abce96a909a6441f4c7439f839"
     },
     "existing_gate_expected_git_blob": "83b1483c6c5e6a39c519f82af603382914eed3e5",
     "file": "make/m3/tooling/jmod-recipes/tools/jmod_pack.py",
     "gate_log": {
       "bytes": 1919,
       "path": "review/existing-sdk-receiver.log",
-      "sha256": "ad3b18c8cfc63a594a1a2779074746f68e8fd4db7ef01c3da37288fc6e894335"
+      "sha256": "f28f5f765df5245365418da42f1faaf68c377db7e766201911e4c4a6f792cec1"
     },
     "resolved_by_this_task": false,
     "same_as_baseline": true,
@@ -398,12 +398,12 @@
     {
       "bytes": 2177,
       "path": "native-link-parent.json",
-      "sha256": "94c371b8270eac5643ebf2aedab04422599925aa947d0f855cc392e2d28fd23e"
+      "sha256": "b52a452c0d9c997a36505b7c729eb553432ed6899b1e4d1eea3403eeec65944c"
     },
     {
       "bytes": 2175,
       "path": "linker-temp-parent.json",
-      "sha256": "b20318c4572a29080cf034cfcfeb69d3bcaaa04fdd9912debb29db389bd5d87b"
+      "sha256": "612292009513e38cd49712eb7d71a15515a8de3288d3807e2cb11af45688d60b"
     }
   ],
   "target_baseline": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e"

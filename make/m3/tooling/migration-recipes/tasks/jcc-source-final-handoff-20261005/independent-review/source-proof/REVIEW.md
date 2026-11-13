@@ -22,10 +22,10 @@ Qualification is unchanged: core 91/91 passed; parent 8/8 passed; upstream 66 pa
 
 | Resource | SHA-256 |
 | --- | --- |
-| `after00-name-mapping.json.txt` | `61818898ef6c092ddad2c1ee4cfe7508199912ff0a1f2d5c2a51ad6695d040c8` |
-| `after02-source-destination-bindings.json.txt` | `8c76c2dd45e775d29f8f47d8daf65842e465c74ad3dec7aacd55df59f9d051a1` |
+| `after00-name-mapping.json.txt` | `aeec3cfe84e57aadf7fa855a5f2174dd73749ccc8f6cd8f4409f0bb8a25e3d53` |
+| `after02-source-destination-bindings.json.txt` | `e8f345aacd9d93fb436d08f3bd868c2f5849e8edf989dd7fab54cc665dc49577` |
 | `SOURCE_FIELDS_AND_PROOFS.json` | `d4fa5704926ea9becfd7fea3b73928183724b5e63ed1814ac9aa0d4521e7136f` |
 | `SOURCE_IMPLEMENTATION_PUBLICATION_VERIFIED.json` | `c6500d09f2056e7ea1dad619cfbae3f8763e39ebdeedd4d63440540a2dd46146` |
 | `SOURCE_PRODUCTION_BODY_READBACK.json` | `0abd6ddcbe96eac76da9a708a2ffc9350c546c1c63382686c600dad3f7fc20df` |
 
-`OBSERVATIONS.json` is the complete bounded audit record: all 17 source identities, all 46 proof identities, every comparison, and the 94 exact input seals. Its SHA-256 is `e9ac214de25b0aa0f035efe81069ff9d48402576402e832411ac818b9724d9c3`. Remote-object claims here are comparisons to retained verified receipts; this review did not independently contact GitHub or re-execute any claimed proof.
+`OBSERVATIONS.json` is the complete bounded audit record: all 17 source identities, all 46 proof identities, every comparison, and the 94 exact input seals. Its SHA-256 is `11397ec39941630d133721c92f80b602e2a3de1c46bc0574ea56c5eb0013d57f`. Remote-object claims here are comparisons to retained verified receipts; this review did not independently contact GitHub or re-execute any claimed proof.

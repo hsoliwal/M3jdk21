@@ -221,7 +221,7 @@ The following are the three primary source identities at the pin above. Dependen
 | --- | --- | --- |
 | [M3BytecodeOffsets](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3BytecodeOffsets.java) | `b2320826fd113910e0871af43e4db11da8149c50` | `480f0cb4a4cd415a19a170739e773efd25362de75b30d516b1644c1f01f8b42d` |
 | [M3EscapeFlow](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3EscapeFlow.java) | `9eda59508ea15cb6ac72fa4cf9c74a08ed84193d` | `7a3a3346f4af222c4122d302b0b07155197dc64b864de2b2944c34a9f391c522` |
-| [M3ItemReferenceScan](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ItemReferenceScan.java) | `d9d94ebf3c1b88a8a09003846526ea77d8d6ae37` | `7fd342dce0e81da0cdb3e0e9e99a3a83d7f07ed10909ec57e7eb6614635dae05` |
+| [M3ItemReferenceScan](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ItemReferenceScan.java) | `1314767e50d6a2553f632a6edda3e7d74b97d629` | `ed0fbc0887f3b66abdaac672a1feb180b02e2bbbd083489e1d214ced38a510ea` |
 
 [pom]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/pom.xml
 [readme]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/README.md

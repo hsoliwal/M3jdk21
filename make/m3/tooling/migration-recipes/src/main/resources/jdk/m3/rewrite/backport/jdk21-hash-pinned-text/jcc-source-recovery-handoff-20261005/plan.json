@@ -20,11 +20,11 @@
       "path": "doc/m3/name-mapping.json",
       "before": {
         "resource": "before00-name-mapping.json.txt",
-        "sha256": "61818898ef6c092ddad2c1ee4cfe7508199912ff0a1f2d5c2a51ad6695d040c8"
+        "sha256": "aeec3cfe84e57aadf7fa855a5f2174dd73749ccc8f6cd8f4409f0bb8a25e3d53"
       },
       "after": {
         "resource": "after00-name-mapping.json.txt",
-        "sha256": "abfc59de62d46f6442b95717ac367461ab057cd74ed9dfffc6515d7fb0a1574c"
+        "sha256": "a91ad1cb7d7f358fb7c4e280b7bf3756db9dd2d6f387f4c7e622e232ff03c0bf"
       }
     },
     {
@@ -42,11 +42,11 @@
       "path": "make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
       "before": {
         "resource": "before02-source-destination-bindings.json.txt",
-        "sha256": "8c76c2dd45e775d29f8f47d8daf65842e465c74ad3dec7aacd55df59f9d051a1"
+        "sha256": "e8f345aacd9d93fb436d08f3bd868c2f5849e8edf989dd7fab54cc665dc49577"
       },
       "after": {
         "resource": "after02-source-destination-bindings.json.txt",
-        "sha256": "59b1491a232e3eabfd0530cbf47b01265603e6f493e382aa3c394c629b0516b6"
+        "sha256": "a0b20e45bb5d5e8f4a684ee0d4daa7a9cf8730529ae784a09778b17aceabea11"
       }
     }
   ],

@@ -2,8 +2,8 @@
   "acquisition": {
     "declared_hash_mismatches": [
       {
-        "actual_git_blob_sha1": "b050a6ef7e2c2ab114c7d78395ff38782125818d",
-        "actual_sha256": "30b9aee3598aa556a9de57e612a1b3e3b045586b6d7382d53dc92798177338fb",
+        "actual_git_blob_sha1": "975bf0621603508c4d1c964160ed4e2bc3320931",
+        "actual_sha256": "46206a1a0468d0a4ccb786afd1729fabdccaa435e3a3e659a75c4c5d3c31d5b3",
         "declared_git_blob_sha1": null,
         "expected_sha256": "245e252da59d310ea7e4229e5cafa5d25e322fee82d349337b37eab8a1f161a1",
         "path": "make/m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
@@ -13,8 +13,8 @@
         "status": "implemented-unverified"
       },
       {
-        "actual_git_blob_sha1": "ca23741ecd8cd24593ba5c260aa0d939c53d6766",
-        "actual_sha256": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155",
+        "actual_git_blob_sha1": "53cb5da67520082e62fffe75272406d3eacb366c",
+        "actual_sha256": "225e847c5fb9f0195b37b14810d405dc6cb8ff83156e667dc127d36489cbf7aa",
         "declared_git_blob_sha1": "565173748382cb3c49c35649785c41b46288a251",
         "expected_sha256": "6ba1883a307c0c8c4b6254c1a531e98b805c00a6cb943135a6cc13b47522b187",
         "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
@@ -38,7 +38,7 @@
     "exit_code": 1,
     "fixture_unchanged": true,
     "receipt": "execution/baseline-v02/receipt.json",
-    "receipt_sha256": "9c94792008e682ab9a8b7d6d4a18d05c5255cf1c1394259ccc624955f8ea8cc1",
+    "receipt_sha256": "848db3f3d55a423b48ea13cd69d9b73344ab90f5395a015d06b76f3b5dd5152c",
     "runtime_manifest": "execution/baseline-v02/runtime.json",
     "runtime_manifest_sha256": "3b49724deb63566f57d0da06cfffbc35404886ef65fa852f3d9e605f73673838",
     "status": "CANONICAL_VALIDATOR_FAILED",
@@ -56,22 +56,22 @@
     {
       "bytes": 13236,
       "path": "FIXTURE_MANIFEST.json",
-      "sha256": "de0eb7a131e699f0bfad772181a8cac1da303b58a45619438127d39bce3a5598"
+      "sha256": "fa7481d659d32f4536d7997436ac22fd9e16fbd8816e2df2a42fe04ba1b3fe8a"
     },
     {
       "bytes": 6635,
       "path": "README.md",
-      "sha256": "04a00f0774122aea5633624cd550a8f97210ecc060584a308586ab68bd892b7c"
+      "sha256": "060406029846f20a2387d30116d4550049f751cc11fa5932a3a780a34ddf455c"
     },
     {
       "bytes": 7804,
       "path": "RECEIPT_CLOSURE.json",
-      "sha256": "bacec669322ba865d983c4e3e4628e99f2c08eab8c6ef347828f07cd24d87977"
+      "sha256": "e6f5740911fe1d79be4e4b53ef3e1d1202a3056dd8dfc7d8d2f7d5f4f87068d4"
     },
     {
       "bytes": 18769,
       "path": "REQUIREMENTS.json",
-      "sha256": "20f0cae390ff246bced99634f36797c80bbda6a5ac424c1298345f16d17085d7"
+      "sha256": "4209bbb6e18ce610ac6b4d8ad40bcad304d8f9cfccdd99c261bcb560fc6e76a6"
     },
     {
       "bytes": 11465,
@@ -111,37 +111,37 @@
     {
       "bytes": 821,
       "path": "calls/closure-007.json",
-      "sha256": "f36b4dd13966f9ef498109095f4f93196c0bdc5026ad8cced92cd767bf3254ad"
+      "sha256": "d24c8a6231c042efd6e97aec364c96a544246f74c3edeb43ab31a0669dd6b1cb"
     },
     {
       "bytes": 806,
       "path": "calls/closure-008.json",
-      "sha256": "16ca7c46377a86a517bf2bc958443f94232d5e45b8c8689984c82d2670f13cb7"
+      "sha256": "a6648851dfb2ce8651aeec4b0f83a5f08c25a2af6d0ff0bcfceb1d19eaf1f767"
     },
     {
       "bytes": 3091,
       "path": "calls/closure-009.json",
-      "sha256": "9a81d13ff95ceaba6abf6ebc1578af4f18d8bcdfa69704fa1ed31cef1c3d01ad"
+      "sha256": "2435fc571e2951456cd3bd4ce00c70f7330097b44ecfe562f33c6316b70fdc44"
     },
     {
       "bytes": 7899,
       "path": "calls/closure-010.json",
-      "sha256": "9f9fca7dd38c8b651f757fded9926bd151aa915f84d03ac8c618441f5a2efce0"
+      "sha256": "968c2317e52ba6d8552cc7de044afebda9acb1f3854e0883ea6d27a64936fd9d"
     },
     {
       "bytes": 22627,
       "path": "calls/closure-011.json",
-      "sha256": "9a382d5e087dfed4c4ae3a99727e0b32c837b51436ec9b9acaa6d147084cf8df"
+      "sha256": "f40ff05ba4feacf8c0aafdbef6cf13d6a1e03e720a0df10644c4ed8f58904596"
     },
     {
       "bytes": 14590,
       "path": "calls/closure-012.json",
-      "sha256": "881ec45edf31938413fa5b2582ee9bf6ab8be26c1b22f8dc73ac87da968b26d0"
+      "sha256": "21d6c997a1eb2e1979994cd92ad22a838741a428c127db5e25daed054aa2445e"
     },
     {
       "bytes": 21451,
       "path": "calls/receipt-readback.json",
-      "sha256": "6a928f5613dd522429690ecc520bb1dec1498f19df9eba933726f51f15510438"
+      "sha256": "667f3af98ede44029e1f36f9beef5feb5bb41bebcdf9fed8fc2e33c7acf2c007"
     },
     {
       "bytes": 7697,
@@ -151,32 +151,32 @@
     {
       "bytes": 2088,
       "path": "calls/required-001.json",
-      "sha256": "532bd14410d1f1fba4714fdc60e44761dc6713b563c2c268880f3ac4cc08c751"
+      "sha256": "fedaa13d30e2db07923283a3c4655a42805a3b2af461ef42ebd58206172f8236"
     },
     {
       "bytes": 4149,
       "path": "calls/required-002.json",
-      "sha256": "dae95e84d3f44e101ba9d27da0e19ee746db3e7bb7908aa63d5bf426b41a2bb6"
+      "sha256": "bcc74fa24f74185eab1715c256c418c034b8e5b3ac6e1c1683e091746593b77b"
     },
     {
       "bytes": 2521,
       "path": "calls/required-003.json",
-      "sha256": "1b1eacaefca0c7d913d2262d4b34eeb09511ab5ba4eeed52d6a19f5422fbad37"
+      "sha256": "e5eb7216d09f3213fc70739cd232a854b71d2d994663324aa8dbb0f17547fd1d"
     },
     {
       "bytes": 1379,
       "path": "calls/required-004.json",
-      "sha256": "c134ece0744dcd2b705fcad91e2abbd286f316aacad393a207b197ba88765dd0"
+      "sha256": "0e5c7546bd3157aaa1d3fddd56a687b045808c29dbcbd5f82dba9f24946d11f2"
     },
     {
       "bytes": 1211,
       "path": "calls/required-005.json",
-      "sha256": "9c2da998c29aedb649345f2e6af9e60be9cf64939c5fa6e596905748b20b6aa8"
+      "sha256": "0bd8ebd26c46474b4cf971071a4970a5d11675000baed018fe1c54b689364c89"
     },
     {
       "bytes": 1397,
       "path": "calls/required-006.json",
-      "sha256": "670ccacfcf2176fd7566aa0c3276afd3fb158de3a0281ece0371a92233900a46"
+      "sha256": "b5c1132b0bce674ade4d58a6c2dbe594b810dac6851e2056126e4ca9af3d82b2"
     },
     {
       "bytes": 4307,
@@ -276,17 +276,17 @@
     {
       "bytes": 2917,
       "path": "calls/required-026.json",
-      "sha256": "632b62520b674a20c7b755180274a1b973dfddc42a935f33fc2d1662ef08816f"
+      "sha256": "1c1830563e1271a0e69b0d5244f9602e537f46b33bd0a19ee307e9ad6acc8b1c"
     },
     {
       "bytes": 24126,
       "path": "calls/required-027.json",
-      "sha256": "b44839f1f0f798c9b71b81b420355e8aa37fc179edab70999e602513135bb7e5"
+      "sha256": "52c25f95c8a9659884f13939371e6a95b94b7ed749a2cb5b4895f73ee58fea50"
     },
     {
       "bytes": 9200,
       "path": "calls/required-028.json",
-      "sha256": "de12333912c47a9cd014ff1d604019bef206df67ccdd4c2336ae4c2c1c062e82"
+      "sha256": "778c30e47f9e18b95040a68a9274faf0bbf1cfa83e7a56aecfda2846f6f49f0c"
     },
     {
       "bytes": 5508,
@@ -296,12 +296,12 @@
     {
       "bytes": 12637,
       "path": "execution/baseline-v01/prepare_fixture.py.snapshot",
-      "sha256": "91115fc1733ee21728c4f56dc12c42a19007a619e1ddcd713b64db472a0ab60f"
+      "sha256": "ca8ddd5ebf52805bf3df4959a82aad30cbcf7ba62e6ff8b7c2bbdb983b666d89"
     },
     {
       "bytes": 1721,
       "path": "execution/baseline-v01/receipt.json",
-      "sha256": "a86e5e1d4135a0ce886bfbccb25b23630b1518925d1d01291a79973d9eec6fa8"
+      "sha256": "6af7cf426cc1521270c18a7fef66417b6480ed6ba520c498d3a7c4c0bf6327a2"
     },
     {
       "bytes": 302,
@@ -316,7 +316,7 @@
     {
       "bytes": 8718,
       "path": "execution/baseline-v02/receipt.json",
-      "sha256": "9c94792008e682ab9a8b7d6d4a18d05c5255cf1c1394259ccc624955f8ea8cc1"
+      "sha256": "848db3f3d55a423b48ea13cd69d9b73344ab90f5395a015d06b76f3b5dd5152c"
     },
     {
       "bytes": 53430,
@@ -461,7 +461,7 @@
     {
       "bytes": 303,
       "path": "fixture/m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
-      "sha256": "30b9aee3598aa556a9de57e612a1b3e3b045586b6d7382d53dc92798177338fb"
+      "sha256": "46206a1a0468d0a4ccb786afd1729fabdccaa435e3a3e659a75c4c5d3c31d5b3"
     },
     {
       "bytes": 453,
@@ -566,17 +566,17 @@
     {
       "bytes": 1593,
       "path": "fixture/src/java.base/share/classes/jdk/internal/mindex/M3Release.java",
-      "sha256": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb"
+      "sha256": "dc2a020aa8f6da324ace8a19f68c90b65021b9ad732932ebabbf545468abc34a"
     },
     {
       "bytes": 16998,
       "path": "fixture/src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
-      "sha256": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155"
+      "sha256": "225e847c5fb9f0195b37b14810d405dc6cb8ff83156e667dc127d36489cbf7aa"
     },
     {
       "bytes": 6165,
       "path": "fixture/src/java.base/share/classes/jdk/internal/mindex/M3VI.java",
-      "sha256": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a"
+      "sha256": "d4d57e6b892342716ef9a52007082ce7c53959cba81a5ad0f2a0cf8d275c3c01"
     },
     {
       "bytes": 3494,
@@ -586,12 +586,12 @@
     {
       "bytes": 12780,
       "path": "prepare_fixture.py",
-      "sha256": "a0ac35c4d8e6b42f56089ef894edb26316d772f97a366251399cf8908b29cf85"
+      "sha256": "2b39becd15c075ed81907c2492bf11b661e40d2be891a32c4c49a74ef0c2539d"
     },
     {
       "bytes": 58247,
       "path": "root-evidence/INPUT_EPOCH.json",
-      "sha256": "2ea3ffe30ac6824bcc6d708c431b848a4c7997bdb4cdeaaddea1a62640734718"
+      "sha256": "12432df37e8bb0c890ab63ae009c576720c40bcda0b927dc53b70fbbd612f84a"
     },
     {
       "bytes": 6452,
@@ -611,7 +611,7 @@
     {
       "bytes": 10707,
       "path": "run_validator.py",
-      "sha256": "a3a2566787103660c03c89f848a01dfa303fffd3e47f65281a3a51455da29391"
+      "sha256": "d92905369a923026e7e4d03ec88cff513eac7b962685abd260de930fe4054b39"
     }
   ],
   "frozen_java_template_packets_unchanged": true,
@@ -620,12 +620,12 @@
     "canonical_nonzero_status_preserved": true,
     "only_four_mapping_replacements_allowed": true,
     "script": "run_validator.py",
-    "sha256": "a3a2566787103660c03c89f848a01dfa303fffd3e47f65281a3a51455da29391"
+    "sha256": "d92905369a923026e7e4d03ec88cff513eac7b962685abd260de930fe4054b39"
   },
   "initial_environment_failure": {
     "preserved": true,
     "receipt": "execution/baseline-v01/receipt.json",
-    "receipt_sha256": "a86e5e1d4135a0ce886bfbccb25b23630b1518925d1d01291a79973d9eec6fa8"
+    "receipt_sha256": "6af7cf426cc1521270c18a7fef66417b6480ed6ba520c498d3a7c4c0bf6327a2"
   },
   "repository": "hsoliwal/M3jdk21",
   "root_tree": "0812573f02908d8078d13f5f49346865cdf1c0e0",

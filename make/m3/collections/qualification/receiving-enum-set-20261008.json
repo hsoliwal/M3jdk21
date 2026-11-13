@@ -23,7 +23,7 @@
     "license": "Apache-2.0",
     "schema": "M3_COLLECTION_RECEIVING_QUALIFICATION_V1",
     "scope": "SEPARATELY_BUILT_COLLECTION_MODULE",
-    "installed_source_manifest_sha256": "d2f00a69062eda3b383a356224dcd2e63d1f5161d81e8a386982142739caa936",
+    "installed_source_manifest_sha256": "1522020f4f3e248002e579ca76fc80b7332c2577bc16d092dfd2b4a97951a7bc",
     "java_sources": 66,
     "test_sources": 24,
     "junit": {

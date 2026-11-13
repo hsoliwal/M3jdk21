@@ -4,8 +4,8 @@
   "checker_reports": {
     "PROVENANCE_FILES.tsv": {
       "bytes": 23142,
-      "git_blob": "c1856cf8b4419ea5031bc4ee63afa95397dce3b1",
-      "sha256": "ef78f9907ee0f95c3b655352ec678ce66921eb658d205ad88364139b9f50cb50"
+      "git_blob": "3e39649bd58c1314850e8fc6373a0b8c5ec34fdd",
+      "sha256": "719af90942114d9406f259fe4a58a7aec3957b8870e7f6566499e082f0a10969"
     },
     "PROVENANCE_GATE.tsv": {
       "bytes": 17049,
@@ -19,7 +19,7 @@
     }
   },
   "command_count": 233,
-  "commands_sha256": "08a91dee88cd1a7eab758109ed6763bc2563d5dcb3deae1fa7f98460123ec4e6",
+  "commands_sha256": "c5f7b451d35b15a1588e9468a1a648c493f71da99525a9709bffc576e5d40846",
   "exact_report_status_path_hash_match": true,
   "files": {
     "docs/M3-SCALE/provenance/M3_FILE_PROVENANCE.tsv": {
@@ -70,9 +70,9 @@
     "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/NAMING_DISPOSITION.md": {
       "before_source": null,
       "bytes": 999,
-      "git_blob": "3c5555becb470622735d0ef18eca75ebc8713785",
+      "git_blob": "2bc6e991fc73a821634f28fbb60574428a9478db",
       "mode": "100644",
-      "sha256": "61ec0c907b0a46a93e37d19fb747afb08bd1f089eb66fa4ebd98852538a2778b",
+      "sha256": "76a51fd2ef4189451b29a17bef993cbbfe0c06bccffa90b98c853370f07869d5",
       "source": "/workspace/scratch/a729c0cf94f5/collection-convergence-20261021/canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/NAMING_DISPOSITION.md",
       "status": "A"
     },
@@ -223,9 +223,9 @@
     "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/MEASUREMENT_PARTS.json": {
       "before_source": null,
       "bytes": 2094,
-      "git_blob": "a2841a30ec50fe2e18adcaa3fa4ad69c49726a3a",
+      "git_blob": "ed2e13921581f2e45d8d9b66d40f9838c435a3be",
       "mode": "100644",
-      "sha256": "9a17facfe27ed3cc1a5a51253826693d41b8469e8367098ddf790da0d7818f08",
+      "sha256": "b982386d2239d492f53aef26ce85da246cef5ade2d264f544edcf70621508803",
       "source": "/workspace/scratch/a729c0cf94f5/collection-convergence-20261021/canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/MEASUREMENT_PARTS.json",
       "status": "A"
     },
@@ -250,27 +250,27 @@
     "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/measurement-evidence.part-001.jsonl": {
       "before_source": null,
       "bytes": 5614883,
-      "git_blob": "f6742f300622026eb4df0a40717aef39a4836e04",
+      "git_blob": "329072ccca01b179e39bbe1f1b6e462a9f4faf81",
       "mode": "100644",
-      "sha256": "d45d5f531835299da8221339e780116bf937538ab0c067bf59e0489080aec8ed",
+      "sha256": "741a5fdc53354e9efb67a78095e54c704da9243433be6792da4411f953a3ec12",
       "source": "/workspace/scratch/a729c0cf94f5/collection-convergence-20261021/canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/measurement-evidence.part-001.jsonl",
       "status": "A"
     },
     "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/measurement-evidence.part-002.jsonl": {
       "before_source": null,
       "bytes": 6135617,
-      "git_blob": "7ffb30fc7a964c2588f05f5f473fce525ceada42",
+      "git_blob": "cc789288a3e6b81f61adae44e5cf0965b98c400a",
       "mode": "100644",
-      "sha256": "dc0ca93fab3f999f573e6143ef203a39351b11ab31dd8cde99bdbaa2c7e35021",
+      "sha256": "a349a4cd50949c4cce0e2a928f2f2badd1c542cb9c1c517656dd18883544f8dd",
       "source": "/workspace/scratch/a729c0cf94f5/collection-convergence-20261021/canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/measurement-evidence.part-002.jsonl",
       "status": "A"
     },
     "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/measurement-evidence.part-003.jsonl": {
       "before_source": null,
       "bytes": 6288247,
-      "git_blob": "2a2863edff79ad2a1c5ea11d14d7726a6246a391",
+      "git_blob": "ea83661a09dfe57eac4a477f31914c60ee1eb586",
       "mode": "100644",
-      "sha256": "3d05c9683d32225ae926e02fd97b0d794d5958a9f3f2fbf760c68e1ef3eab26e",
+      "sha256": "f33dafe6b48b5147b130712f28bc1a3629a0fe38fde3ef1f468b0091b48b5e44",
       "source": "/workspace/scratch/a729c0cf94f5/collection-convergence-20261021/canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/measurement-evidence.part-003.jsonl",
       "status": "A"
     },
@@ -457,9 +457,9 @@
     "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/qualification/PUBLICATION_TRANSPORT.json": {
       "before_source": null,
       "bytes": 3701,
-      "git_blob": "036ee409c67e6b6a77a26df9630b68d20ec693c9",
+      "git_blob": "6545c2a7b022577b44033bbce18126be24c2e3b6",
       "mode": "100644",
-      "sha256": "e9fc96b26288b725b9261d40d8b1636f7b2dea558d885a2c0e01a061e8087e2c",
+      "sha256": "4b139b841c5794bf9daed93786532651f74af4d4f752ecf58e521e7a60d3c2d3",
       "source": "/workspace/scratch/a729c0cf94f5/collection-convergence-20261021/canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/qualification/PUBLICATION_TRANSPORT.json",
       "status": "A"
     },
@@ -493,9 +493,9 @@
     "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/qualification/TARGET_FRESHNESS_FINAL.json": {
       "before_source": null,
       "bytes": 8414,
-      "git_blob": "79b2b56be5d7ac0a7b38222629114a4e24ca94a2",
+      "git_blob": "984197868c5c18a53a8a3ec7c10040ee883feb73",
       "mode": "100644",
-      "sha256": "ad7f0af0a46359c134b047a4d196f4251de72c408c24e59f0a7a5924218ee47b",
+      "sha256": "d69472e9f7c834e0625c621f45ad9ebe31f927cd0f10c7cdd6f7c6f3ab041caa",
       "source": "/workspace/scratch/a729c0cf94f5/collection-convergence-20261021/canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/qualification/TARGET_FRESHNESS_FINAL.json",
       "status": "A"
     },
@@ -1516,12 +1516,12 @@
   "manifest": {
     "files": 97,
     "path": "/workspace/scratch/a729c0cf94f5/collection-convergence-20261021/publication-v2/FILE_MANIFEST_SYN_FINAL.json",
-    "sha256": "f7af0cf86cf440ab9f95982376a6a41379efc8fd8c2b21d6344fe6d4d92fc49d"
+    "sha256": "ee1d9d308fffcab7ca40a811b0b8949fda1bb53f19b63d0a59da209e13ee6571"
   },
   "merge_base_sha": "408373f4101fdca2fb3625bec8af1234e5fd3e26",
   "objects_json": {
     "path": "/workspace/scratch/a729c0cf94f5/collection-convergence-20261021/publication-v2/FINAL_GIT_OBJECTS.json",
-    "sha256": "f861d9a6b7a9fb897e30ada9f91db5e3ea732231b6662b105a528b9c5067ce64"
+    "sha256": "d9cb327963ebc538be7a6038309cd78e91af8df1948ae99509f80b2529bebf60"
   },
   "plan_addendum_sha256": "7089b5277e6f7019d577067a806542f165d8d175320e7c7ab02f920d60745086",
   "plan_sha256": "cdc5e26afb095a084c08615725de28f938706272c6f160c33f281c69f5cb3049",

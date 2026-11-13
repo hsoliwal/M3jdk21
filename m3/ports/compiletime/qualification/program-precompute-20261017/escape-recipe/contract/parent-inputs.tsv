@@ -1,6 +1,6 @@
 m3/ports/compiletime/pom.xml	7c289c126eb5895a049d6941d7ca102f2f043f3f2cb68395cb4ea387e0a07a13
 m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3BytecodeOffsets.java	480f0cb4a4cd415a19a170739e773efd25362de75b30d516b1644c1f01f8b42d
-m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3CallSiteCatalog.java	737d95d87e1e2c8293cbb5fabb1333286450719da992bd672476970aff564cc2
+m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3CallSiteCatalog.java	a97a65b0fa7d09dd77c0d1d9993846c112b15c0d2f5d6497207c4484e71cf319
 m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ClassScan.java	2548946ee051d263900d743da8f215507e2d53a7ae13dc75357bebbdf7d4dcfd
 m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3CompileTimeStringInventory.java	20097226aebe120d383a4b8c54b73a95edca0f91fe330b39c45e50ec471061ed
 m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ConstantRegexDifferential.java	b85d3f4936d7441f128c00346cb36b529e976f83a24a8b26677199857a10570a
@@ -17,9 +17,9 @@ m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3PatternNodes.java	093001
 m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3RegexRequirement.java	13b162787c2d6d8a9785c38598c08b4f5389ebafc810f3c339981932d3627fda
 m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3SiteRecorder.java	270e28d2b863deb2d98a2265bc78788febbdb17ea979dcd5b16b359163a7a6b4
 m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3Tsv.java	86ae152c2e2defb554686c4ac64b2b096b5173ee1e0d4623d4faee2cfc9a4e73
-m3/ports/compiletime/src/main/java/jdk/m3/residency/M3BehaviourOnly.java	06ba4a3689a5fd7877f76a6137a33f9205d5738a73605eaa236045bae0f0be67
-m3/ports/compiletime/src/main/java/jdk/m3/residency/M3Retains.java	537548d59b0bee14c23228a7de6edb682e2b19ae4d5840cd1b6d8421e50a9b12
-m3/ports/compiletime/src/main/java/jdk/m3/residency/M3Transient.java	de58e23ebe652c8215379e06840783318103900a30e2c0771f8f51064075beb3
+m3/ports/compiletime/src/main/java/jdk/m3/residency/M3BehaviourOnly.java	3133c145fa404c67980b804c04abd19508f447031107ad05acb8fe4887f1c2ce
+m3/ports/compiletime/src/main/java/jdk/m3/residency/M3Retains.java	0d175d53d94a4a305cebcc6497f9f8b071e1a886c2403e680f62f1f8717c6aa0
+m3/ports/compiletime/src/main/java/jdk/m3/residency/M3Transient.java	dec2b68000b63c70f39136f6b41ba33ea54b33dbb2b73688490fc78bb7dc934f
 m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3ConstantRegexImageTest.java	662501f8806055759e97c8e1f0a379c57e7b89f44d0bd51cb36ecead86336d00
 m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3FormatPlanTest.java	23377df7a95dd00fe2dd5fe37b97acbb07f54a2a8bd88f0668bfc02f70590be7
 m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3GvasLiteralHarvesterTest.java	936a1184e9ce87ffbc9dd225dfd70fe547f3a41d621f5a7766e20223ef62799c
@@ -28,7 +28,7 @@ m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3RegexRequirementTest.jav
 m3/ports/compiletime/src/test/java/jdk/m3/compiletime/fixture/FakeItem.java	20558fa44059ef38eb4bc401999aea6be61df01317f55ce3975a6df7eece1dbc
 m3/ports/compiletime/src/test/java/jdk/m3/compiletime/fixture/FakeTable.java	77d90c5913d9e69be0a0f08c8d52a9e48487b815033cfd87b8bffbe4bd88340d
 m3/ports/compiletime/src/test/java/jdk/m3/compiletime/fixture/ItemUsers.java	dcde56ee241121042dc79820d65a7daf7e1bafc25bd56b43804d946ccfea9c03
-m3/ports/compiletime/verify_compiletime_precompute.py	b1ecf28a337cf8ce97f5a33046f9388b79a5813149d262230ed9a3a6b015c38a
+m3/ports/compiletime/verify_compiletime_precompute.py	d0ed8ec09b0f22105109c266a341510eef2f6da62b8c02dd6088e20ab20bd8f2
 m3/ports/precompute/pom.xml	2e5dec5159d051824000aa2641dca8fd4abc62397413f347402577d113c835a9
 m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CodeTextSignalBatch.java	9f766dfd77a3c720b067c2fd462db8fa0eb6aaeb57fb9e19ccd02d02c782ac67
 m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CodeTextSignalBatchJava.java	bc4905b103d64d3faf324b0f90245e36334d23c7880c49463cf6a240d08fd262
@@ -54,7 +54,7 @@ m3/ports/precompute/src/main/java/jdk/m3/precompute/M3SimilarityBatchNative.java
 m3/ports/precompute/src/main/java/jdk/m3/precompute/M3SimilarityPrecompute.java	d2e94f06244ea4f3892e4b22bc2b2103c62aea18702883fff2fede9f0c65c1be
 m3/ports/precompute/src/main/java/jdk/m3/precompute/M3TextMetrics.java	5f42c0983f206118c5493cd9ecc2e9b582ca3e339de83972dabe8d775a89ee8a
 m3/ports/precompute/src/main/java/jdk/m3/precompute/M3TextSignals.java	22ef43339c76cdb80e7972ebbcff823a34454624f50b2cd4059f4c0d751f976f
-make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-compiletime-regex-precompute/manifest.tsv	fff56c5927f0d5fa03dc90f025bf519eb5e6c1c4a059364305835e91f370aae9
+make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-compiletime-regex-precompute/manifest.tsv	a51bf5caf64edc1d10cac5c3dfbcb9c5531bad1eb1aea0db42ddaccde00327c1
 m3/vendor/third_party/asm-9.6/src/main/java/org/objectweb/asm/AnnotationVisitor.java	832f9959de57820f80d63e4678da82872f0599157be9364d7e352f220e4164f3
 m3/vendor/third_party/asm-9.6/src/main/java/org/objectweb/asm/AnnotationWriter.java	d3ce6cfe8866e7124b446ef1bd8ad23770a45c03ab4af3166cdddf6147a2c983
 m3/vendor/third_party/asm-9.6/src/main/java/org/objectweb/asm/Attribute.java	1f205141aef85d14890effea5d67963f81f7b5a8ecb088e91714d2ea84854db2

@@ -37,7 +37,7 @@ OUTPUTS = (
      "7e79ce168d8f3d0df8e3d7d633a1351d399f5013b4f7617824fbfa9d7efe613b"),
     ("make/m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/tq-verify-plan.py.txt",
      "replay/images/tq-verify-plan.py.txt", 5089,
-     "269cd10606a9de7629ec0d1f4dccce2866644f979c06958d808e107b6c9188bb"),
+     "b70271e08910aedb8e512d38ef67c8dc041de522027e6a11abe96e3cfe825617"),
 )
 LOGICAL = {"replay/plan.json": (940, PLAN_SHA),
            **{logical: (size, digest) for _, logical, size, digest in OUTPUTS}}

@@ -63,7 +63,7 @@
     {
       "target_path": "make/m3/collections/README.md",
       "before_sha256": "e72ff3d256fa47d49d5478532974e837af1a7a53d399655283c79fbd482d9dd0",
-      "after_sha256": "47f7da05b5fc2b80b910b9655367c1a9f912113121bd9a80d13b211a7de5ae89",
+      "after_sha256": "133f1a4e8032d31b692da1f9ea440e40d8fda603a38970bed984c95f3dd615e7",
       "canonical_template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-swift-deque-spans-20261018/m3__collections__README.md.txt"
     }
   ],
@@ -73,11 +73,11 @@
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-swift-deque-spans-20261018/evidence/COST.json"
     },
     "EXECUTION.json": {
-      "sha256": "267b3ccc6b9c9430c9e0a35fbec4274b5e34ef492a30b21b161fb2c5034a3244",
+      "sha256": "b2991334f6e7687b52cc7784272f3e82be873fdd93d7320597247043e9cd0214",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-swift-deque-spans-20261018/evidence/EXECUTION.json"
     },
     "LOCAL_VERIFICATION.md": {
-      "sha256": "9da4b15108ef55ad7999967f369d19f7955616d6868d8034269ad50562203967",
+      "sha256": "8b9641206d05122ad136750aae15d35314c68bed38604d3dc70664085682b189",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-swift-deque-spans-20261018/evidence/LOCAL_VERIFICATION.md"
     }
   }

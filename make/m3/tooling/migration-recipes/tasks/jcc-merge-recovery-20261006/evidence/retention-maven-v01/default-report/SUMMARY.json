@@ -2,7 +2,7 @@
   "baselines": [
     {
       "capabilities": 2,
-      "catalogue_sha256": "86de8000a91017b29e48b0ffd9cf19b264614dd8c983c08222cf5e253606c40a",
+      "catalogue_sha256": "1fef541add1c89d470eb07c3f0bd814e27377c32501ede415eb58f903a86ae23",
       "catalogue_state": "PRESENT",
       "commit": "03eb7d30063ece5d5da95cbf17a5364de0ce43bf",
       "direct_parent": true,
@@ -14,7 +14,7 @@
   "catalogue": "make/m3/history/RETAINED_CAPABILITIES.tsv",
   "commit": "283f01020841104df1d11e005ab995c766a76020",
   "current_capabilities": 4,
-  "current_catalogue_sha256": "683b01fc68b8661a44fd1a9fbc72c1aa68145dab9318fb0f5a3e99bc0e102181",
+  "current_catalogue_sha256": "3167529c891469e3fbe8ede1dbd3ccb287d094f15224b740b0a3d09d26512cb4",
   "current_catalogue_state": "PRESENT",
   "declaration_conflict_count": 0,
   "declaration_conflicts": [],
@@ -67,7 +67,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "61818898ef6c092ddad2c1ee4cfe7508199912ff0a1f2d5c2a51ad6695d040c8",
+      "expected_sha256": "aeec3cfe84e57aadf7fa855a5f2174dd73749ccc8f6cd8f4409f0bb8a25e3d53",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after00-name-mapping.json.txt"
     },
@@ -85,7 +85,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "8c76c2dd45e775d29f8f47d8daf65842e465c74ad3dec7aacd55df59f9d051a1",
+      "expected_sha256": "e8f345aacd9d93fb436d08f3bd868c2f5849e8edf989dd7fab54cc665dc49577",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after02-source-destination-bindings.json.txt"
     },
@@ -139,7 +139,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "bdf8db3538a4ef434eac10882da56159eb89dc6af344b3062a234c7052f13812",
+      "expected_sha256": "0a4013c5618b935e064e7faff6cc756073cca29e320394468a4e3e961acbeee0",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/manifest.tsv"
     },
@@ -148,7 +148,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "773061ce98ca152ae5015a12b13c08d332d5ffe64f43a913c677f297df4dbc8f",
+      "expected_sha256": "f31976e57fc7305c13ad4ae98aba2d2b88d20e49a7858de2e66abe9368ca9bd2",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/plan.json"
     },
@@ -157,7 +157,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "abfc59de62d46f6442b95717ac367461ab057cd74ed9dfffc6515d7fb0a1574c",
+      "expected_sha256": "a91ad1cb7d7f358fb7c4e280b7bf3756db9dd2d6f387f4c7e622e232ff03c0bf",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/after00-name-mapping.json.txt"
     },
@@ -175,7 +175,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "59b1491a232e3eabfd0530cbf47b01265603e6f493e382aa3c394c629b0516b6",
+      "expected_sha256": "a0b20e45bb5d5e8f4a684ee0d4daa7a9cf8730529ae784a09778b17aceabea11",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/after02-source-destination-bindings.json.txt"
     },
@@ -193,7 +193,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "61818898ef6c092ddad2c1ee4cfe7508199912ff0a1f2d5c2a51ad6695d040c8",
+      "expected_sha256": "aeec3cfe84e57aadf7fa855a5f2174dd73749ccc8f6cd8f4409f0bb8a25e3d53",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/before00-name-mapping.json.txt"
     },
@@ -211,7 +211,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "8c76c2dd45e775d29f8f47d8daf65842e465c74ad3dec7aacd55df59f9d051a1",
+      "expected_sha256": "e8f345aacd9d93fb436d08f3bd868c2f5849e8edf989dd7fab54cc665dc49577",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/before02-source-destination-bindings.json.txt"
     },
@@ -229,7 +229,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "f9e38d31f89d71ee6fcbb107d2ea0d12636196b16094d951b64b9a4b74bd5c0b",
+      "expected_sha256": "9937394b752407265505c7b4aaee7fe6febac6babc05a27012c76301e08d8ccf",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/manifest.tsv"
     },
@@ -238,7 +238,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "68d9e65e8d45d1c6e8eea04de4f9e2ab0326b7d66fef7f3d86f832fb0c8197e2",
+      "expected_sha256": "49a8d7f2daeebe445ae6c7dcbde5d217ff28393238f9d569e7115f627a270620",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/plan.json"
     },
@@ -247,7 +247,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "7bbaffb5c5f16f05119d439ff5a1f979c90b6091a2c3d79623f3e7d5cf538d43",
+      "expected_sha256": "04bca26aad239dfe8fe16a8180acc4824e99fc362e5762f2033795cad589b168",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccSourceFinalHandoffTest.java"
     },
@@ -256,7 +256,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "5a6efe78569fa76702d85b2d391335423d839b62748275748efc6020ba386de3",
+      "expected_sha256": "e25ac6f591aaee807abab8906fd61f5c191882f500c4dde5f4de8df7581c42df",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccSourceRecoveryHandoffTest.java"
     },
@@ -562,7 +562,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "adb5ad87c3799b50403352fa611d01a106e37e1eebade5e67f7964e2106d06d9",
+      "expected_sha256": "2571ebe555606036f31a68cf7398676a88f18419f222685c5ffd52737583687e",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/inputs.json"
     },
@@ -580,7 +580,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "2f279f2cabd49c04080b33717195fcd1cc184bf7fab89353810543ff165b6664",
+      "expected_sha256": "0099006b30fadbc417a4f93484f77b772186cb6d1ad2aa9c91cf7847d3f43d8e",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/FILE_SEALS.json"
     },
@@ -589,7 +589,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "c1db2f58d832d3faeaa6c680ea101eb2a04ac8037e6cdce519b17d6afd47db14",
+      "expected_sha256": "338c18443e522114f8f8fbe11e16951b7f4e91718604578ab1c387b6375054ba",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/INPUT_SEALS.json"
     },
@@ -598,7 +598,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "24cd03c36e25e70c4b3564582b9d318b19f2a506365b8fdc7184f0aa5292e5e4",
+      "expected_sha256": "281ec8c1a36c92fc2e3da3835b742830c9fb2c1d63f84191c1a9bca69de1db69",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/INSPECTION.json"
     },
@@ -625,7 +625,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "75cd25f633540c06ebd29fde0512c18c9968e1056ec9b9123f8540e958e6d999",
+      "expected_sha256": "b96055780d682c6058ff3e1439b0f293abf0b1c063b72437e27be87bf9b847dd",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/inspect_receiving.py"
     },
@@ -634,7 +634,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "7c783395bcc7f8cecea9da5a17d228bd336332fc1520a53149ef7405fcb91d63",
+      "expected_sha256": "ec1bc9b1ba508f4af215ca22883d5f9c986d4843adfcc1d0e0895577ded70fd7",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/FILE_SEALS.json"
     },
@@ -643,7 +643,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "95a3430d3dfb5c289dffdce992c0789495f963177aee25b29bca2c945d636ad2",
+      "expected_sha256": "c495cc9a89b2c13bfde5d0cdb6ef0cca5bfb9803d720b67015fee3850dfbbf82",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/REVIEW.md"
     },
@@ -652,7 +652,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "da8669a91c85e41c8c804775234a9243fe05428bbcbf1166bae0ae9cb8c4af90",
+      "expected_sha256": "b6453c07583c4cfda0914ef610a22abebd70bf3c63f6d114d5e2804f85883776",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/STRUCTURAL_INSPECTION.json"
     },
@@ -661,7 +661,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "331d9af58fd0be9a4c768e540cb6ca05fcbf73397abeca6af4322a532c28fa1b",
+      "expected_sha256": "18a31c3c4f3ac660f7669f1ef959dd867bb502f8ae415a5df9bc7c7a17088688",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/root-coverage/FILE_SEALS.json"
     },
@@ -670,7 +670,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "7c2f4a394c3eb147ecb59656977f4c7b114b02ae9fa54bc3d99f1af2fea21fb0",
+      "expected_sha256": "b6ad56f1a1abd3ffc3d993e00fe08e199d002587d6fd0be0bea9e968310f4c04",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/root-coverage/FINDINGS.json"
     },
@@ -688,7 +688,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "e9ac214de25b0aa0f035efe81069ff9d48402576402e832411ac818b9724d9c3",
+      "expected_sha256": "11397ec39941630d133721c92f80b602e2a3de1c46bc0574ea56c5eb0013d57f",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/source-proof/OBSERVATIONS.json"
     },
@@ -706,7 +706,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "1488c8b3619bb6585bdd981cd7a35795ca6e6e8b545452c468c5f184972f1d61",
+      "expected_sha256": "7f828e8114d17f4bc05623fb199bccc48467afed35bb31f2dabe22df4440a4b0",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/provenance/AUTHORING_RESULT.json"
     },
@@ -715,7 +715,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "662be00ddbb6b7a24e13060711647056bd89e9d6e3022ee427f90048f74a01da",
+      "expected_sha256": "e09d2f8ab9da64dfa350bd874d14c970f45b36c0bfb2458d691fdf36cb4f3254",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/provenance/author_successor.py"
     },
@@ -724,7 +724,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "e3e164757d00423b21590358c9d569e4905efb82934fecc08505151f4e8b052f",
+      "expected_sha256": "f6702d7ab672368ee94138c4e23eb8e3f5ab8a774cf51b01f019f5c410f71d23",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/provenance/check_references.py"
     },
@@ -733,7 +733,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "79dd3a118197ca82456aedd1ea56439101481ac8526f7153eb75339be54344a1",
+      "expected_sha256": "5faca588b9f153d4d9856b5ff95f9015520612ff4756bab19e0107dacc796b23",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/provenance/run_verification.py"
     },
@@ -742,7 +742,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "f7dcc4fb3843ce83520aacaf8fd36f4347d64000233d92921e81f67154bdfa87",
+      "expected_sha256": "ca8d5f9b56713390710bad0cbe851f70b5df9a16feca79acf50ad8898bba37d4",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/reference-audit/REFERENCE_AUDIT.json"
     },
@@ -751,7 +751,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "954258e783d0a0cb84325b9f408538db2969b7721c0390f6e71cc82baf7e126c",
+      "expected_sha256": "509dd4475a8cad86445ddfe210324b45015ae2d9e07d0094533108379623065c",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/reference-audit/attempt01-checker.py"
     },
@@ -868,7 +868,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "6e3d2c9760ee93a10b0da660e84a77d002ea2312954b42d3459803c867b57475",
+      "expected_sha256": "41dbe3e5c8dff9296fe3667a6eb2aad283a0ed3ea58cbc2bb49c113db6c6640c",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/M3_CURRENT_MASTER_PREIMAGES.json"
     },
@@ -940,7 +940,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "d918623244803faacd814be6049f7d712ef23e8646f3cf6df68d451b2f287de9",
+      "expected_sha256": "84ef2bab403b892271e8482f6f9fcab83bbb54ac42b0fd7787ffb694e38b72f7",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/REVIEW.md"
     },
@@ -949,7 +949,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "5a0e2fd11514f200f08d3297e52c37bdc208dab4c3e97040653f16c931c4787a",
+      "expected_sha256": "3d2266f7b8bd1ba6206232886ef2e66008ce5fa326250590ccb5c4695e80b40a",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/authoring-invocation/EXECUTION.json"
     },
@@ -976,7 +976,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "116fde8857beec30084054b03d2b543ad75e8dc0c534314e5fffde1554f5823f",
+      "expected_sha256": "897b0cc16786bd0cc123ea497fc0cdf378c8a1664a06e212328b630b1e53f8a1",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/authoring/AUTHORING_RESULT_V3.json"
     },
@@ -985,7 +985,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "867e7a054af6dcadf81d7a71c6cbe822695f3b5be3fd1fefe5d6df7919cfbb2c",
+      "expected_sha256": "42de60b2e797c59115e7ba763823f7c66bc5de5810b5b1ab9b0ba5fdfb10a2b7",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/authoring/BOUND_INPUTS_REVIEW_PACKET.json"
     },
@@ -994,7 +994,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "225e5a587fb5845929390de32a0b70642d8c24e6345ee42733b2ce8b6a355012",
+      "expected_sha256": "7a9f44babde561e4132476f61af72243ca70b2d9ce2faf8ff3dfa3c07418bdd2",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/authoring/BOUND_RESOURCES_REVIEW_PACKET.json"
     },
@@ -1003,7 +1003,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "0c0c66bb9f1186f8f5a5aa53398e762d7deb8ed15c576cce23672aa28989bb23",
+      "expected_sha256": "d1c4ab33babd7a3f09467e97e7008bba25a804cfbf13a1c31ae9ee6150f76613",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/authoring/DERIVATION_INVOCATION.json"
     },
@@ -1012,7 +1012,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "def3f591f3866e1e1ef825ef5101fd6a19e857b4b64bb3beec42ce9868f41e2d",
+      "expected_sha256": "8f4d6311d78990d3057336745fa3a64c45cf6b3d2bc407d934f26545ad297167",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/authoring/DERIVATION_RESULT.json"
     },
@@ -1021,7 +1021,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "81641b602be5d5ca0b34642b859555e98b78bf71913c9ac6d046cf5a29d2504f",
+      "expected_sha256": "511543e132fe29a2f59dc4cf8ab80137d3b4798434738c2b186db5e928653341",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/COMPANION_BINDING.json"
     },
@@ -1030,7 +1030,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "b9d56300ef2e7e9219d4790a325eb762c48263dd79311a5ef14852276e59bad1",
+      "expected_sha256": "6007d242c6130ec1d14b184ad2df0e17dfae7d115801d8966977044e0c4a3a18",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/FILE_SEALS.json"
     },
@@ -1039,7 +1039,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "3d3ea283b65e17ac8bafcf8b7bb3e5a8d08efe3f05d304cfca957e3de9fd81a3",
+      "expected_sha256": "fa612b921ee4b8d84c52405cc1937ab4a69356756e4c7f34695a0b8b359c6d36",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/INPUT_SEALS.json"
     },
@@ -1048,7 +1048,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "4bb195a07653347655c8bb9c2d4ffa2fff4316da506316655dbcb62686f7385e",
+      "expected_sha256": "da4f45ec1d0353a848f4ca0fc92b1314f04c0c3c04d487cab9e9c0c1b586bc4c",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/REVIEW.md"
     },
@@ -1057,7 +1057,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "2ffe907696a8326206d8bafe8c35b4a50ee4567500282c1fd7b550fa77339625",
+      "expected_sha256": "a3cd606cacbb2acab325e96ba9c76d643391adcb367b2f9fe2ae48c4bdec49b7",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/STATIC_AUDIT.json"
     },
@@ -1066,7 +1066,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "1c9dfb88fccf794e722b34b49868f83bc6cdb01b957cc9019f262175b44024f7",
+      "expected_sha256": "ba04ae0c568b41f3822d56276890ebefa689fb17a0e370b053cd6dd0beeb5033",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/custody-output-subreview/FILE_SEALS.json"
     },
@@ -1075,7 +1075,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "48600a242a92aef6e5e0d68e306cbf6167f36f421504e5931577ccd989c6d027",
+      "expected_sha256": "e20f4258b1b961f4188da7bb220eb437647c0e92fbe8da18dec0de1a533b513c",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/custody-output-subreview/INPUT_SEALS.json"
     },
@@ -1084,7 +1084,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "f01e78a0ea47be42e08866b26c231d7c68e992f5158527d1a0ef63c473561b0d",
+      "expected_sha256": "b7ab97141a1f2384191d29aab0e2c7b785386b7776ad83c3c5bad026cb736045",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/custody-output-subreview/REVIEW.md"
     },
@@ -1102,7 +1102,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "082d12dd79e70bb747441fc8b221ab5ddeea5fd8174629b068c137c4682e1b5a",
+      "expected_sha256": "0a0171f801622e6ccee7559bbb29a89c8129e152107e23cf583cae93dbae0570",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/custody-packaging/ADDITIONAL_RECEIPTS.json"
     },
@@ -1111,7 +1111,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "59a58bf5ed2487dc3a288a88cfca3cc3815caa3c4cbe0a6ca9171424d4211bc4",
+      "expected_sha256": "d8bc2b4f1f35a62a66c426c1615e37cc197a4a795bddd00d2c92ae6d8f8658ac",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/custody-packaging/FILE_SEALS.json"
     },
@@ -1129,7 +1129,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "5e935bacf7baad6694842b047e95f2d033c24df6150df175640c5bb6b13ef55b",
+      "expected_sha256": "edd226a2e4987d2fc6dfb6cfc8e94c3ffaf24500bfbe5a2fcd9d331a9412e8cb",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/COMPONENT_BINDING.json"
     },
@@ -1372,7 +1372,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "e7e2f10dfd621007c4d6c7180333ace760cf89ae4475513bb6de51bf6738fb06",
+      "expected_sha256": "0128809b7596263ac159d756a6b44729dbe3c08880467a6e058b390f9b587ae7",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/execution-invocation/EXECUTION.json"
     },
@@ -1381,7 +1381,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "ae9e079df0ee3f46c5cbf1f9c0be2a58906ae0861182550e39a741b700ec15e4",
+      "expected_sha256": "012b5d4fd61232e72b080e172eb6e73b4eadd0592250ffed2aa0caef5b9a6551",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/execution-invocation/STARTED.json"
     },
@@ -1408,7 +1408,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "436d00697cf1a5b883e889dbc1c1ba31e2c3cf4b74945831f7dde42fff414466",
+      "expected_sha256": "f61eb8d5f232e3e9f18f8bce929ffbe401d9ab90936a22170902bfa7809733ff",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/COMPANION_BINDING.json"
     },
@@ -1417,7 +1417,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "b29c6cac923102cdbf310614b8a36bb1d338305d5fd86f09b91a407df713a3fe",
+      "expected_sha256": "f29974f9d19e10515dc74700a9a4c38ffc63883cffcc85728caa9c69bcaafbb2",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/FILE_SEALS.json"
     },
@@ -1426,7 +1426,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "060a7cd38bd912741313a1212dfcdc185da3583ef338c29c14d6e1f6a0ebf467",
+      "expected_sha256": "d5c35c2872108d674f7c94baf11f90f89b2b85e3f4dd945084ee2fc9b1798332",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/INPUT_SEALS.json"
     },
@@ -1435,7 +1435,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "14b68eda05837baf3bdc6961c8e479be6e64607157687290050fb9b6cfc507f7",
+      "expected_sha256": "c5d965649d63d9c8cafe19f2fe5ee32d3f5950bf951f7f93d3cdfccd2f8deae1",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/RECEIPT_RELATIONSHIPS.json"
     },
@@ -1444,7 +1444,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "628417dc2a71fc31a41a97f9b6d6d6f2c7a7c1b1b5a17919fdb37492c402e484",
+      "expected_sha256": "97002bfb804aa931a153211f2e0f8f3ff1d7f97fe040ef574e192050181b2884",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/REVIEW.md"
     },
@@ -1453,7 +1453,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "f12d5a6a76f7068fdb5ae9a5efc27b6d90af99b66e8dcbae042bbf2cebf5f1b6",
+      "expected_sha256": "1420c0e57d1db18f315e9e1c3b7e78079a18e23851abf63fd1539e277f69bd62",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/invocation-subreview/AUDIT.json"
     },
@@ -1462,7 +1462,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "815f7574902919e921d476411e06089b131b5ddd402047ef3ce36c81951fa746",
+      "expected_sha256": "48da33f0635ea37cc09476ae702fd83b2ebe35e31a479fd929f25bfea7b49a96",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/invocation-subreview/FILE_SEALS.json"
     },
@@ -1471,7 +1471,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "b48735e32189bd678b794275753626dc41ca88dd02d4d23fd92411de9a09aa1f",
+      "expected_sha256": "181f07b822dbe51eada2ce1e02717046518a3b3258a456fbc9d39c1a31222368",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/invocation-subreview/INPUT_SEALS.json"
     },
@@ -1480,7 +1480,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "f45efeeb33612fd3f52b3d952c37f732b6a2b083dc97bfa6b395a415a171a6a8",
+      "expected_sha256": "5af90ae7045f003520b766858487777f4acf603473176286ab776d066592e4cb",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/invocation-subreview/REVIEW.md"
     },
@@ -1489,7 +1489,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "ac848e10dd044fc68ed42ea55dfd9e1e6f85d06604d9b813c10a0d94db674fad",
+      "expected_sha256": "e7455969080a777c42c25b5f22bc89d163ef36c0fa4b8dc3aa04ba93bb79c601",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-bound-review/DERIVED_INPUT_CHECKS.json"
     },
@@ -1498,7 +1498,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "1b9afdc841fdda73e9cec72dfe2f3c9d1a7d0850cc0f5e9a585d55739c622192",
+      "expected_sha256": "64e260776ae0ff4cbee9bd806792a13a33899568b3e6158be990be97efa2c1d9",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-bound-review/FILE_SEALS.json"
     },
@@ -1507,7 +1507,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "6738b42c8826dcd70c429f0059a8f03eca9bbe47c109c3584dd70374e3b245e7",
+      "expected_sha256": "3d9b89a20045183bad93859309e3e7385f809ca0cb78583a09dd3499c468e58b",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-bound-review/PACKAGE_CHECKS.json"
     },
@@ -1516,7 +1516,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "a923c978884091141cec5fc44c2ccc1cfbafe3d4e182d85878f38c22a2536ac8",
+      "expected_sha256": "d19f39d0ba25858094a22e116ac3c053a451d8e792050a240f07075bd1084cf6",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-bound-review/REVIEW.json"
     },
@@ -1525,7 +1525,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "7578e356c16a56b6a73995fa7faeab08d7668917ff770ab97cf0a4dd8d8169b1",
+      "expected_sha256": "af60c48d65531f4c180fbc156d4c479c5dbcd92d03fab967065028c2e86d8087",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-bound-review/REVIEW.md"
     },
@@ -1534,7 +1534,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "1e40215492063520fbf07f86897898ba636401c50c95eecf684915eae27df0a7",
+      "expected_sha256": "a956eaeda8ae20966979b03aba618a06e7705a298ee55e4ace8a9ff08c22b97d",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-bound-review/inspect_bound.py"
     },
@@ -1543,7 +1543,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "259c9feb05f6cb4688486ab0422c8bbcc5c1a7b66293c17c61019076186ac455",
+      "expected_sha256": "7c7e19b869230c18abab056b3939f3d6777a52a206cb9d9d8dffa78fea29c964",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-bound-review/inspect_package.py"
     },
@@ -1552,7 +1552,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "a5cc1aab410fbb6f8f155f7d6ed2b0e8dcdd43d1b615c5cde2fd743ac4613d0d",
+      "expected_sha256": "bb11ec02a55670832a41a81c01958f4f7965133dbc70e1e2d3200adb00691e2d",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/EXECUTION_CHECKS.json"
     },
@@ -1561,7 +1561,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "aa28a8483f4890c9f44838c21ee7c776ca2457dc024cfa4df5e81df34474e4eb",
+      "expected_sha256": "e5e38af9aeda5f7d62db8bedc435ce1998527cd554439ce27a023442934d6bd2",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/FILE_SEALS.json"
     },
@@ -1579,7 +1579,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "9b38a60e8c43da1f1dfaf859bb6de41a9dd0dba30eeb2169f2384df335d9fde3",
+      "expected_sha256": "a596d3ef34f2aa0b9046ecfd2260b318ae50b1c3f08cdfe0d725056409f3c8c6",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/REVIEW.json"
     },
@@ -1588,7 +1588,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "676c2ed4548ac2be360b39f389ecdde86e82ad08978d3019dd29d655ddfb31d2",
+      "expected_sha256": "b6812c2f90ce894c8ac86b326c34851535409e577f27d1632fc0de6ade61dc97",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/REVIEW.md"
     },
@@ -1867,7 +1867,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "e7e2f10dfd621007c4d6c7180333ace760cf89ae4475513bb6de51bf6738fb06",
+      "expected_sha256": "0128809b7596263ac159d756a6b44729dbe3c08880467a6e058b390f9b587ae7",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/INVOCATION_EXECUTION.json"
     },
@@ -1876,7 +1876,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "ae9e079df0ee3f46c5cbf1f9c0be2a58906ae0861182550e39a741b700ec15e4",
+      "expected_sha256": "012b5d4fd61232e72b080e172eb6e73b4eadd0592250ffed2aa0caef5b9a6551",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/INVOCATION_STARTED.json"
     },
@@ -1903,7 +1903,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "3747257e4df289cbc09ce34309683cb18c9c66caedab191379d0370a07057902",
+      "expected_sha256": "d7b1ecde621d4f51016fe64168bb2b8821bb3f2ed452e190e65c36dc9e5bc8ab",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/inputs.json"
     },
@@ -1939,7 +1939,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "1cbf7e831a571b0e613477d672a4ccd3ac65e107e25fb8fe9b327f4226d19ae8",
+      "expected_sha256": "6cbdf49b7a55a872d95cca2552c02d7ab0a5879d4e901541fb0540c55ce36e4a",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inspect_execution.py"
     },
@@ -1957,7 +1957,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "c8afea12ecb4b3aeb2d9d65fa8c1b717b2cabbd0d94273635a9ad74d405526a3",
+      "expected_sha256": "d0d440aa2ad89f52248bb86ae60524973be441e8367501e04b09215b148ad23f",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inspector-revisions/inspect_execution_v1.py"
     },
@@ -1966,7 +1966,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "e557e3a7ec16bbe7aa178a4b6132c7aa292c2a2ec9014779bbe8308484565d86",
+      "expected_sha256": "47df54d0ef1a6bde68af930f0dc294ed462a5f542bef5ba1258b8a492eb6d455",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-resource-review/FILE_SEALS.json"
     },
@@ -1975,7 +1975,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "cac8c9c803447a910593b0e8594b93cd3b1b5adf149272fae7a8744ab814a429",
+      "expected_sha256": "7e2bc8b1794c2bf14a69e421c1087b4bed9a387b59ab936893c86b733a39c806",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-resource-review/RESOURCE_CHECKS.json"
     },
@@ -1984,7 +1984,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "9c0b0065cc523d54f8ad6145d8dbf2e64c36c6fef5f8b091724a5edf8237634a",
+      "expected_sha256": "27484b7596a4487f34b96abca55cdce9ee4f72ded7777253fe4b8e091ff2277e",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-resource-review/REVIEW.json"
     },
@@ -1993,7 +1993,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "7ece8d5be7df1a1080e2b8c6c86663dad44afe874404efe3a772484ad391c0bb",
+      "expected_sha256": "d0f4351455a36198b31f53c32c02a8b4a743d1542b6ce85b9e9de469cf23d6c7",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-resource-review/REVIEW.md"
     },
@@ -2002,7 +2002,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "4adb10687dabffae8d1e18fc796dfd4d3ce1cbbb295157cbb204df84bacaf941",
+      "expected_sha256": "e5ec9317204644f31ff161ef0a695e6623952893ab1f7b35e0c870f11c9d1eac",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-resource-review/inspect_resources.py"
     },
@@ -2011,7 +2011,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "af823a726f18769d61586fe9be5362ae31743c4523003d292bad9ae536b72803",
+      "expected_sha256": "4f2304b3122d2decb0c3f8cce3ad37c49b058334fc0a906cbcf19288cb94e96d",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/reference-audit-invocation/EXECUTION.json"
     },
@@ -2029,7 +2029,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "325626fab5a186eecdba03c5eb66ea2a14ab955026f2bebaf591126ad2c80896",
+      "expected_sha256": "1951e9101651c4e405f08cba0445fe10dc301d34d3a0d20e2fc8d3fd38021f8b",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/reference-audit-invocation/stdout.log"
     },
@@ -2038,7 +2038,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "a7c41a897604c0421ca0f770fde83c51404208479f053b404cb98e5e7f2da7f1",
+      "expected_sha256": "3a7fdeca679ca21066dd44ab01f930547b37ecf5c9fa13a40e598d9112e54f24",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/reference-audit/REFERENCE_AUDIT.json"
     },
@@ -2137,7 +2137,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "91c8df6ab07e3590fecf20de65e2e65943c4b70aebb9f5133901ae6362506c35",
+      "expected_sha256": "c07a59b4403bb5b08ecec5c5bc95c4537a4b8738a486f010bb55b03d688f7c07",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/PUBLICATION_CUSTODY.json"
     },
@@ -2146,7 +2146,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "30dadc5274823dba2443d663000051a48c0785eb92042ba8e684520bc2ce5942",
+      "expected_sha256": "aa6ed22184f16215dd7903cc2f5cc4a574d2f516e00fd35e985b924c6a3756fc",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/ROOT_ACCOUNTING.json"
     },
@@ -2155,7 +2155,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "65f10e830243ed927aabedee9d0734daa46eed3b37ae4212e28ab85131fe9e9d",
+      "expected_sha256": "760fbeef441a7173306a4d8d79e3899b84a822e2d86785af9c7137458bf24860",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/SOURCE_FIELDS_AND_PROOFS.json"
     },
@@ -2173,7 +2173,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "7876e0828731f3e4687c67162156788e7bde001406d5d723dd9acd8433fb36ee",
+      "expected_sha256": "f16f04f2209fbf8ee78288b44ae46521244026262134a7258163910eb6bada43",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/CUSTODY_EVIDENCE_INDEX.json"
     },
@@ -2218,7 +2218,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "e347ce74d2e2c9a3252260215f9a4cd3c3a2aa791219095675ae67df8f135f23",
+      "expected_sha256": "1e262194fd5d61d5ce340ef081132467d5bcfb6625aac51f4c8c2e0c4f054a16",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/BEFORE_BRANCH_CUSTODY.json"
     },
@@ -2227,7 +2227,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "a49305f07d6e6f172fcaffb296f5f2d4be23f6798827ceffc201fb1d8de76fc7",
+      "expected_sha256": "a4f88c9eea399c9c6fdaba9e4cee8093e7344a821f13b1d32b003e9c7a3ff071",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/BEFORE_BRANCH_EXECUTION.json"
     },
@@ -2299,7 +2299,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "8288a2009cdf92b117ad7ada704da4ebe27f8c67b451b3c779263819374a63f3",
+      "expected_sha256": "5653e77eb311f326f252688a7b8736433fde97804ead64881e4e77e84d8b671f",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FINAL_PUBLICATION_EXECUTION.json"
     },
@@ -2317,7 +2317,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "4a8e0c7647a9a6549ffc797de28d01a7806aa7757fedb2096bf35ecb0bba62c7",
+      "expected_sha256": "c28fb413b8a7c2b48d0a90f727397258e854e223859f65152272e912be983c89",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/PREFLIGHT.json"
     },
@@ -2335,7 +2335,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "91c8df6ab07e3590fecf20de65e2e65943c4b70aebb9f5133901ae6362506c35",
+      "expected_sha256": "c07a59b4403bb5b08ecec5c5bc95c4537a4b8738a486f010bb55b03d688f7c07",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/PUBLICATION_CUSTODY.json"
     },
@@ -2596,7 +2596,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "384ce843f2e4545ad1c40d7ee58abbc471b5a6d1cbed89bea82dcff0479ce6a5",
+      "expected_sha256": "86e5e92e9f2dbb209085133b54daf9db3ad72988fe82968fb9f819aa015a3750",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/CUSTODY_INPUT.json"
     },
@@ -2605,7 +2605,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "3be2658241c3ebb336ae712268cbbd54c3d65969467d729f8a41c88e75bb98a8",
+      "expected_sha256": "01b33d0f9b452a5ebfac70e3310a977114703a25250ce966f7f40b05cf24e594",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/PROBE_CUSTODY_RESULT.json"
     },
@@ -2614,7 +2614,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "bfe83dd12307c0cddaba605d01c4d97c306201a44b16db6bd9c6cf6a7523979d",
+      "expected_sha256": "ce851e4600037c247db5c5cd3e0a9415bc12369ca28d4bf7a5c4f2a0c9d64fa4",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/PROBE_EXECUTION.json"
     },
@@ -2857,7 +2857,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "5464af87aec22c84a053e7c21d611b4583cb137aaecb27d419f846581c977f0d",
+      "expected_sha256": "fc982cf40a4b0409df78248ba4e9e1558bbb5d4265e57818491b22b519417cdd",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/COMPANION_BINDING.json"
     },
@@ -2866,7 +2866,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "d1315cc7cf474bb4409ffa1423a228a175cbef1eb0a1cae2b70fe025d9c7ec92",
+      "expected_sha256": "e04951d9c2779f23513e1020d9aed8089e8fce675df7e79eee82d3987f3b04f9",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/FILE_SEALS.json"
     },
@@ -2893,7 +2893,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "b23f8008088a5ae382b10d40560dd57d7fe560838f864603b325f10d7c477fe0",
+      "expected_sha256": "ebc9a186e49b449192d29d5ce760a319323f6f10e71cac6d483bdeb5e78ecceb",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/REVIEW.md"
     },
@@ -2974,7 +2974,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "8f4b7b8b4b3e1886bea907fde673fbd70924a84359e02cd7591c1665945aeef4",
+      "expected_sha256": "cb9e8dca16a5c9a2b193e23f302c88194d08874513beee8051d54e041cba8095",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inspect_inputs.py"
     },
@@ -3172,7 +3172,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "ca55cfa097bac969aabcda4d410e6e6b2aae563e41dcce17bfcd5a9d61a79006",
+      "expected_sha256": "67d4784b29d06455a061c996a8404a1ec1dcad236a7d2d3ce08deff0a76d1593",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/FILE_SEALS.json"
     },
@@ -3181,7 +3181,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "71f0be66903961ff974b6cbbbe27db8ab03cc16097c06476f58549db9d02b261",
+      "expected_sha256": "e9f649360f08272a0e30523c03ed9d9df36516df43aeb5e83dde37952295945f",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/INPUT_SEALS.json"
     },
@@ -3190,7 +3190,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "02e50b35c0a4c749f9fef36d44998e8f6733de61a8e7f4d46c760bf5cb12ae52",
+      "expected_sha256": "a5544c9593c650f7f6d4ab576c31d6762b5e7d434e3512dfc7559d8df5554ff5",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/REVIEW.md"
     },
@@ -3199,7 +3199,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "df0e4f6c48aee658e68eb93792ec748c6b2a6953241fe8c554a6cebc8df22b6f",
+      "expected_sha256": "f595eb2722041509e83dac5fe879314b4bb97eaf79be14dfec826346b134a00e",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/FILE_SEALS.json"
     },
@@ -3208,7 +3208,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "c84ce157e3c48664121769c2f878824bce2a6a97bdd60b53c38103fa3e33ec26",
+      "expected_sha256": "5b94bf360a70828827795385dac2410be0acc8a28cebc21b61f40ad1ebaecf10",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/INPUT_SEALS.json"
     },
@@ -3217,7 +3217,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "1ea4731fd6cf1c2c164f32970a646ef86e4750723e787544a10b504219bc0b74",
+      "expected_sha256": "34c5177141320e90500024f8878063d899b2fb664904aa51a2ccd2048ed641e2",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/REVIEW.md"
     },
@@ -3271,7 +3271,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "dab78ed3ffa2cab8dad0feb532f493130570b8da35146a78e961b75cd11dd555",
+      "expected_sha256": "2caa97c14d333ebe07a621e75c27c8a5eb5db9841532ac48013644b2301a0866",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/DESIGNATED_SOURCE_OUTPUTS.json"
     },
@@ -3280,7 +3280,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "fd465a0de344227444f723287b0dee9fe6e25284c1767737a38b1d7d8b887c93",
+      "expected_sha256": "b1a811c36ad7a6abe420f9db62d06a44c9b35eec35dfe4821151c774239dfea9",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/E4_EXECUTION_INPUT.json"
     },
@@ -3307,7 +3307,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "823ef3c5f172b34d7c973f5e50424b8f7ab770687f8e2d80e2ecb2bde8dc1b77",
+      "expected_sha256": "8fe566b783b6e6af5ae8757b87ac560a41b20340a5f2d5fc9a3062f39eb76e27",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/RECOVERY_RESULT.json"
     },
@@ -3343,7 +3343,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "39e507a34b7406ceec3adb91352de8cbc3556b04de2ce8138afc5c0feaf56708",
+      "expected_sha256": "4d781f2dc1ce0be1efd54207979b6b531920ea31e074a46831bd0d1373bbc43f",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/admission-fixes/FILE_SEALS.json"
     },
@@ -3388,7 +3388,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "8cbd11d00c95f196a19618f8fc60caa23c08eeef3fd80d34d8a22e55c36000ba",
+      "expected_sha256": "8bbbaf579b8e5e68aaaf1cb910245a69813c64c2be429942be79adfe7ef3f9a1",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/admission-fixes/run_verification.py.diff"
     },
@@ -3397,7 +3397,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "d8294afe553f2cf75921afda4a27c56cae97b908f9ce14d22cb9f12281d213ee",
+      "expected_sha256": "054ab8c2a52b1dd8dc8f48aec0e900dfe4b8a44166eeb19a6fdda65698e7db62",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/FILE_SEALS.json"
     },
@@ -3406,7 +3406,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "00cd3c8546cf7a909a5ea34d34dead8b5876601f1811b36be046b769d0f51053",
+      "expected_sha256": "fbc56bd605a8762ed41bab69852d1fabc9d68344e4b5d3b9becac1c227aaabf8",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/INPUTS.json"
     },
@@ -3424,7 +3424,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "d3e7592d49536d0fe76765e23eac8cb69616f58f31269269fc5239d20c59733d",
+      "expected_sha256": "3f8621d6f6a8cdbb55c5adfcef7c068c21f5101b4c6db691681a24be5d7bb0a2",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/REVIEW.md"
     },
@@ -3433,7 +3433,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "39550f84f6f7f71a958fa396c8ebd0d55af27664cec4428c2f60b93f1569a8f4",
+      "expected_sha256": "a00a401b9fca77f99eb890942cb63f7e746718c1bc6015aed5feb51c3377b5f7",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/STATIC_CHECKS.json"
     },
@@ -3469,7 +3469,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "781a186f95b21168359df9160bfffaeab03b096aec9460f8ea740b2ea4cfb5db",
+      "expected_sha256": "36b37a2aedda5fceb7f2bbca89674e4bcb060e45abf3c4ee0b017dfc815be6c3",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/fixture-freeze/FILE_SEALS.json"
     },
@@ -3478,7 +3478,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "d96b2d47d1617cea5ee7b693f2405ebab61edfa769e8bef25a1c75fbe02e5641",
+      "expected_sha256": "bbac1b8f1f6486a2ba2c3de8665a5dd03493eebc665bed047d6d25b974e87d8f",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/fixture-freeze/REVIEW.json"
     },
@@ -3487,7 +3487,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "11c5fc020c3841648a345e9597312ff6b7aa20c0e99df92ddec53e92eeeb1d11",
+      "expected_sha256": "fc2b59a9c586c1f9c7bd9051a596e795bc779c82da20b92c04941397cc4cfe87",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/fixture-freeze/REVIEW.md"
     },
@@ -3496,7 +3496,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "c056eba9e56486f641009b942768b3ac5a8e4a1a57464cde5aceeb856a930455",
+      "expected_sha256": "f69857f8a04e56048f65d6c396ef3ec8e8da5b9471938a696084d6d53dd9af66",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/fixture-freeze/STATIC_CHECKS.json"
     },
@@ -3514,7 +3514,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "561775f9a964f28260cc4cd09ba075becd5e2dd3da9fee4e5d90615f10bb8827",
+      "expected_sha256": "09e4489a9edb890bbe3c93f0f4e86b09de0b30fc50100d9c05788a01845aa422",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/initial/FILE_SEALS.json"
     },
@@ -3523,7 +3523,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "67657d100042552052fc16829996f22dc01431b5445e1c9687a7951ef90b9b80",
+      "expected_sha256": "af801fd3d5c448f3f8b7eadf8b1b677d58173feed953aa55f71ddec45c677cae",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/initial/INPUTS.json"
     },
@@ -3550,7 +3550,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "6c514d7f4586457169168c1d30ec9497b947a525596b770c9651abfc2e55ba3a",
+      "expected_sha256": "ef18e8dc9baa1050d6482389d2437284779b2b5fc823ceef139c99f910c63719",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/initial/STATIC_INPUT_CHECKS.json"
     },
@@ -3847,7 +3847,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "3747257e4df289cbc09ce34309683cb18c9c66caedab191379d0370a07057902",
+      "expected_sha256": "d7b1ecde621d4f51016fe64168bb2b8821bb3f2ed452e190e65c36dc9e5bc8ab",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/inputs.json"
     },
@@ -3865,7 +3865,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "8c6eab25d9adb14d3789799a979924f77a89b2f3824b5f676ea12c322bbf1da7",
+      "expected_sha256": "eae3d40bebeb52583e61594f0ab2fc8f3ea42a30569c66158f5807673e2b32fe",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/DERIVATION_INPUTS_V3.json"
     },
@@ -3883,7 +3883,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "b63123a1d1369bc6289d7901f950a6d9ebe5ccd5b82ac146814c7af3305ddb1a",
+      "expected_sha256": "1d6796afba96441855b9400e362582e0e95ae7b332b995f4b7061a20cb152e28",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/author_e04_v3.py"
     },
@@ -3892,7 +3892,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "c88b8805881ab3cc299b530d50cbe8d6749a0a4925d7ea5e9ce512bd3a0a3ece",
+      "expected_sha256": "9dc401c3bf818e2a50793a1b0f5bb465e2a26ae0916668587f9b2f2a30a06ff5",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/check_references_v3.py"
     },
@@ -3901,7 +3901,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "ab9828692a1ca02adfabf22ff679e47e1e62a9d755b97f4071c42d5225698bc5",
+      "expected_sha256": "c15282b8166aacce7d6c6bf5db8367cc4bbf24171369a03a3cf000cc4809e208",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/current-context/CONTEXT_REFERENCES.json"
     },
@@ -3919,7 +3919,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "cfcf56cddf3e8c710583a4d60d2ba86e1af1d1d17da9fc136bbb5c27db9e5604",
+      "expected_sha256": "2e777a430357d10fac3fb4134fff1cbca9e264727d228de160724cea6fd38b25",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/custody-v3-proposal/READINESS_T01.json"
     },
@@ -3928,7 +3928,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "6bba7f210e73180b8d91e9a6023e4e846954feec665c74bc73763ec4a9ebb0a3",
+      "expected_sha256": "d45d668f8cb1746e93d56b02b18a732141c81c6efb39d3ec55fa7a1bde123e85",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/custody-v3-proposal/READINESS_T02.json"
     },
@@ -3946,7 +3946,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "8b71aaefeee38c8c8bba0d8c4e169df6b0aeb73ad9b4cad35dae7181c1d0246b",
+      "expected_sha256": "45f5a7d68f45a5f3a6c36a1b3a730828392be921f526eaeb5d196b0d951c9b90",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/derive_source_handoff_v3.py"
     },
@@ -3955,7 +3955,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "340e3e1670e457d99ab9e0ae954eed85efacdea4e4e34f2d4b2165421b8c9248",
+      "expected_sha256": "a7365ce869bb73d3545dca0ae7804dd1e39d88ff2c8bb8994b68538e74742567",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/publication_custody_v3.py"
     },
@@ -3964,7 +3964,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "c779f94023b3914bca1558a35d39ab11aaedd00a18cf5b74e2a30bf1205de6b6",
+      "expected_sha256": "19fc7bc5d1804082acd88598c12562b28c10a41e43aa356c23f5604a253268c2",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/run_verification_v3.py"
     },
@@ -3973,7 +3973,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "6490106ef92b0198fe181b7d768ac78ac0131a9fc6942f8768cb230900f8a7c2",
+      "expected_sha256": "ab25cca871c3bd360a46324bc5337f2ffac5fe1fea7a43a5fe573762fe6236b9",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/seal_publication_v3.py"
     },
@@ -3982,7 +3982,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "b81e40be63829a2f957308046f9b937dc1ef8d7c0bcbeab63111479d7da8ad00",
+      "expected_sha256": "d277d9852950cea9cdd09837f535fbdd4a7b7031f74ac2357ccacb376400bed9",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/source-prepublication/DESIGNATED_COMPARISON.json"
     },
@@ -3991,7 +3991,7 @@
       "declared_by": [
         "283f01020841104df1d11e005ab995c766a76020"
       ],
-      "expected_sha256": "d1c53ae4d5b75c796e8a982bb22020f1f8fd1d69160bffe75095811b5a77dfee",
+      "expected_sha256": "223f2646d979ce407605d52493ce47992deb300e448c52e086363a2ad3540c88",
       "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/source-prepublication/PROOF_SELECTION.json"
     },

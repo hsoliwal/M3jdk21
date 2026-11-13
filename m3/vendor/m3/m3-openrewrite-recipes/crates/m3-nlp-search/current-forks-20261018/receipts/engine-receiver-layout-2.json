@@ -11,7 +11,7 @@
   "duplicate_refusals" : 1,
   "missing_refusals" : 1,
   "source_sha256" : {
-    "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java" : "99353ecfa06c6bd2c45ac32ec576c6bc63b7afb216afbe4d4f343d65e86d2441",
-    "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java" : "3f61002ab18470b5b36aaff96c9d983ab03f61b25414fac1e36d2a361d65c78e"
+    "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java" : "4916f1836650c29ece29ce5de14db844825de768f613ac18e4062a3369d1b43e",
+    "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java" : "f352a54bbbea6c24cc10374f548fd39b2ea0e56244e3c52cf7e95f91285fc133"
   }
 }

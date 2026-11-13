@@ -12,9 +12,9 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/FOSS_REUSE_DECISION.tsv",
       "targetPath": "make/m3/tooling/regex-relations-current-owner/sdk/FOSS_REUSE_DECISION.tsv",
-      "gitBlob": "8f2df6115956754bbb6ad97da5a83af3b4e1af7a",
+      "gitBlob": "8340bc5fbb685405194183d255cfc4d420c07bcd",
       "bytes": 6944,
-      "sha256": "b30be2a01f7b24b71a6aa0cd1687cdfed9fad002c9cf0452ba8758b7213bba96"
+      "sha256": "90457f99e861533d43d1d2f2e9111951f7851e0896fa1ec1b64a1edf9ff3d1d9"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/THIRD_PARTY_NOTICES.md",
@@ -47,9 +47,9 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/pins.json",
       "targetPath": "make/m3/tooling/regex-relations-current-owner/sdk/pins.json",
-      "gitBlob": "7fe960c07f0f28aef5a55c3b1c32b21981e19050",
+      "gitBlob": "e862ba31a77ddb1c1da6a90872c692a864c7692b",
       "bytes": 5525,
-      "sha256": "e9f4ef3f278a5d53f74d448e5731e6196a8bbd2c7b2c53dc96fe198740e2c1c5"
+      "sha256": "170409a3f64c6e0fcdc01303279d06050aa02b4cd3d5958458da5a589c54c279"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/pom.xml",
@@ -152,16 +152,16 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/verify.py",
       "targetPath": "make/m3/tooling/regex-relations-current-owner/sdk/verify.py",
-      "gitBlob": "1f35127bf21fbc00c9abf66ba7b93d1772984d8c",
+      "gitBlob": "cf4dbeb4860ce296498e0649083353c9bf8b5bbe",
       "bytes": 22823,
-      "sha256": "49046bb5ecfd80d7eb4568057113f5411cad998628121cec08a1ee30df07625d"
+      "sha256": "804c3b43aeea73552a1adf874dfda658df0dd51a06bc267553a720cf7ef3efa2"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/hosted/qualify.py",
       "targetPath": "make/m3/tooling/regex-relations-current-owner/qualify.py",
-      "gitBlob": "19638c98b28af580028a94cfa83840f997562e10",
+      "gitBlob": "a98adbe62c55bb37001bf34b78385c2184b2e816",
       "bytes": 12777,
-      "sha256": "c70a2297fee91ac14b3a7d5ee9f86d2eee43c14cab7f44df5f225bfbfda86e56"
+      "sha256": "27cc725a0186db6e49bc7e9f7c5b698be0a31f83afe2d9ed375561bb334bfc94"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/hosted/qualification.yml",

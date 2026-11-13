@@ -226,7 +226,7 @@ def changes(root: Path, base: str, head: str) -> list[Change]:
 
 CLASSVER_EVIDENCE_PREFIX = "make/m3/migration/intake-20261005/"
 CLASSVER_AUTHENTICATED = {
-    "make/m3/migration/classver.py": "4cec8da0a4feba829161e6afbc0ad9272ed4263b",
+    "make/m3/migration/classver.py": "0cc3ca0545966fa61b3f8ee7b152e9685c7e6827",
     "make/m3/migration/recipe.py": "02f88f9f8b1eb8930fff59684c81bb30819800ad",
     "make/m3/migration/classver-evidence.json": "32768c4e15b693f3800c62b0fbf0bf80aac9b460",
 }

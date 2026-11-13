@@ -18,16 +18,16 @@
     {
       "targetPath": "make/m3/tooling/state-relation-sparse-c11/qualify.py",
       "sourcePath": "m3-openrewrite-recipes/tasks/state-relation-sparse-c11-20261020/hosted/qualify.py",
-      "gitBlob": "a0ee492473c25d68ae9cc656e32ef2f70663ee11",
+      "gitBlob": "074f084134e2041c93fafc3997d631b011b6cf84",
       "bytes": 34587,
-      "sha256": "9cc30ea0a7c2f3f85f5a5153d8b9b4a9a61bd6cca7b89b1f9f71e6bc5f408964"
+      "sha256": "bf3d1135dccb7968858bc774e5677a448ad5159938c67274a20ea4dfed554516"
     },
     {
       "targetPath": "make/m3/tooling/state-relation-sparse-c11/runtime/INPUTS.json",
       "sourcePath": "m3-openrewrite-recipes/tasks/state-relation-sparse-c11-20261020/runtime/INPUTS.json",
-      "gitBlob": "614a38ffefda5788c099b98f6ac9a92d59df99cc",
+      "gitBlob": "63dd601e57f8f594ae141b0069e43cc8204a5987",
       "bytes": 5189,
-      "sha256": "14e2e44ec6a61c4d532f7814dd454906c2001536eac828f9129d2799a6eeb190"
+      "sha256": "df19e2f259ac0e7a87d9781c78057b2d13164318707220c05f6e07727f3d443b"
     },
     {
       "targetPath": "make/m3/tooling/state-relation-sparse-c11/runtime/direct_c_proof.c",
@@ -46,9 +46,9 @@
     {
       "targetPath": "make/m3/tooling/state-relation-sparse-c11/runtime/qualify.py",
       "sourcePath": "m3-openrewrite-recipes/tasks/state-relation-sparse-c11-20261020/runtime/qualify.py",
-      "gitBlob": "aae8c7a38ba41748d95d60c819d4154491a43b48",
+      "gitBlob": "d90ccd66b35d2ec5c7181d22711263446a639028",
       "bytes": 36508,
-      "sha256": "904c0fa530a82fe1d45484f77ae2662449d49f951d97d752a0f6211c0edbf72c"
+      "sha256": "d1cc4c4a4e5e8d8d5f285366ba6cf768ac4b72706abf88604a5f496973b5c733"
     },
     {
       "targetPath": "make/m3/tooling/state-relation-sparse-c11/runtime/verify_benchmark.py",
@@ -74,9 +74,9 @@
     {
       "targetPath": "make/m3/tooling/state-relation-sparse-c11/sdk/THIRD_PARTY_NOTICES.md",
       "sourcePath": "m3-openrewrite-recipes/tasks/state-relation-sparse-c11-20261020/sdk/THIRD_PARTY_NOTICES.md",
-      "gitBlob": "124c737439af16a013087643af8b953d53a9a779",
+      "gitBlob": "74f7dd460d577cf4f26af6e03219174d797e470b",
       "bytes": 2703,
-      "sha256": "d4425b5c10ec45e931831c1f478504ccf66ffd3014e902899fb747e0cfff811b"
+      "sha256": "64d0953807c5bc8087160ab87122e61e3061ec79cc7bf25d269b74c937f3a35e"
     },
     {
       "targetPath": "make/m3/tooling/state-relation-sparse-c11/sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
@@ -109,9 +109,9 @@
     {
       "targetPath": "make/m3/tooling/state-relation-sparse-c11/sdk/pins.json",
       "sourcePath": "m3-openrewrite-recipes/tasks/state-relation-sparse-c11-20261020/sdk/pins.json",
-      "gitBlob": "c0527d8f82f0698787dd8720e0e6e4425f1a5e21",
+      "gitBlob": "0b94b5d28fb75468e30d5089fbc4711c3ca17d2a",
       "bytes": 8122,
-      "sha256": "8cafbb9d677599e39c518447bca0729b553e3f43b13c659a461929766979ce95"
+      "sha256": "4534753d1ba51028a8511e673d8b098277ee9c39f6d6e338133895b08119881d"
     },
     {
       "targetPath": "make/m3/tooling/state-relation-sparse-c11/sdk/pom.xml",
@@ -172,9 +172,9 @@
     {
       "targetPath": "make/m3/tooling/state-relation-sparse-c11/sdk/src/main/resources/jdk/internal/m3/rewrite/state-relation-sparse-c11-20261020/inverse/manifest.tsv",
       "sourcePath": "m3-openrewrite-recipes/tasks/state-relation-sparse-c11-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/state-relation-sparse-c11-20261020/inverse/manifest.tsv",
-      "gitBlob": "c0086045b5d8b107a9f57b7327e65344a8e5b564",
+      "gitBlob": "26ee74ad58022218fcd14979684bcc562f4dfc60",
       "bytes": 1043,
-      "sha256": "4588c5e6ce767ffc071acb27daf70a86d4b871cd2bdbb80e85fdda250ee4f5b3"
+      "sha256": "6a90039025c1c62db17f033cd878383f914b50e5f6264d23b8b18c22e1c864f4"
     },
     {
       "targetPath": "make/m3/tooling/state-relation-sparse-c11/sdk/src/main/resources/jdk/internal/m3/rewrite/state-relation-sparse-c11-20261020/inverse/out/src/java.base/share/native/libjava/M3StateRelation.c",
@@ -186,9 +186,9 @@
     {
       "targetPath": "make/m3/tooling/state-relation-sparse-c11/sdk/src/main/resources/jdk/internal/m3/rewrite/state-relation-sparse-c11-20261020/manifest.tsv",
       "sourcePath": "m3-openrewrite-recipes/tasks/state-relation-sparse-c11-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/state-relation-sparse-c11-20261020/manifest.tsv",
-      "gitBlob": "b7a6219b17300ff5372e0974ab956be989c7451e",
+      "gitBlob": "66c087815d03f5c8540cd9b66396d349e1d97026",
       "bytes": 1043,
-      "sha256": "9542bbe216aa75444f924483df17e436ced4ec76ba13c01e9cccfb4543169f9b"
+      "sha256": "8a2f7e8497583b2517d9e8cea85b0bcff575b454a291d129f06a9c65c852067f"
     },
     {
       "targetPath": "make/m3/tooling/state-relation-sparse-c11/sdk/src/main/resources/jdk/internal/m3/rewrite/state-relation-sparse-c11-20261020/out/m3/compatibility/regex-relations-20261014/M3RelationPortProof.java",
@@ -228,9 +228,9 @@
     {
       "targetPath": "make/m3/tooling/state-relation-sparse-c11/sdk/src/test/java/jdk/internal/m3/rewrite/M3StateRelationSparseC11RecipeTest.java",
       "sourcePath": "m3-openrewrite-recipes/tasks/state-relation-sparse-c11-20261020/sdk/src/test/java/jdk/internal/m3/rewrite/M3StateRelationSparseC11RecipeTest.java",
-      "gitBlob": "daa02cbee4b30d437f8798afcc0f5de943f28c65",
+      "gitBlob": "ec5d133b000ebed009ca834771257f087538b11a",
       "bytes": 17464,
-      "sha256": "0d0230472b151619471a19a09fe6b4bdef8a4b566a65805e4b3cbcec2c855c10"
+      "sha256": "b261973e950f050ad63c9f4de4bf6a2cb79e977d22996fab23c4719b4722fcf6"
     },
     {
       "targetPath": "make/m3/tooling/state-relation-sparse-c11/sdk/src/test/resources/jdk/internal/m3/rewrite/state-relation-sparse-c11-20261020/historical/M3StateRelation.c.txt",
@@ -249,9 +249,9 @@
     {
       "targetPath": "make/m3/tooling/state-relation-sparse-c11/sdk/verify.py",
       "sourcePath": "m3-openrewrite-recipes/tasks/state-relation-sparse-c11-20261020/sdk/verify.py",
-      "gitBlob": "4af7d4a0c2cb82bc520eb99baf403bc67ad23430",
+      "gitBlob": "5c89704f859feec61be93ead4aeae659afc0b765",
       "bytes": 25533,
-      "sha256": "1f25e7897b273733c3220646428842a355e04d6490ebf1c37593756e2ab49b79"
+      "sha256": "e4d238cc94d2a4c4ea66142f2cc607dbbf9a534f7975d8c90a17f7bdaddeebc8"
     }
   ],
   "receiverOriginalOwners": [

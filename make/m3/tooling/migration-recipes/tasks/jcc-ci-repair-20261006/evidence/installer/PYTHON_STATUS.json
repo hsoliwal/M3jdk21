@@ -1,10 +1,10 @@
 {
   "schema": "m3-jcc-ci-python-execution-admission/1",
   "status": "PYTHON_PASS_JAVA_PENDING",
-  "frozen_inputs_sha256": "1b5d73f8ee53b03c2a88f8cb3f57eb54c99e26281ca16ad53b66925a0fb588c7",
+  "frozen_inputs_sha256": "462c27024eb7ee009bb49e1289bbdc32bbbb81be617d42de8e4839dba753d937",
   "frozen_files_unchanged": 33,
   "python_receipt": "execution/installer/receipt.json",
-  "python_receipt_sha256": "7b30ce7daa26fe17d053912f0c7240b4f86929c1faf0fa683f8a0e8f9371f122",
+  "python_receipt_sha256": "53ff5ca6f8c447beca308be8a24a90a9ef30a75566c0414123b3db645de5840e",
   "tests_run": 6,
   "refusal_calls": 33,
   "wiring_scope": "MOCKED_ACQUISITION_AND_JAVA_AND_MAVEN",

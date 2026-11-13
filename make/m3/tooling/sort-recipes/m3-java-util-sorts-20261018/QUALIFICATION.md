@@ -16,9 +16,9 @@ own evidence.
 | Existing canonical engine source revision | 140c263a90f9803b9c46103c63355a286e0515f0 |
 | Named OpenRewrite recipe | com.synexia.m3.JavaUtilSorts20261018 |
 | Java manifest, 8 targets | d8ebd90bce3c617b9598670f34b76ccda1a1fb4dba85075492ad0bc239ae2c8d |
-| Text manifest, 6 targets | f68d13347b8b2e0298e33109200e35d685659883c3313922c7743e933caad69f |
+| Text manifest, 6 targets | 25a7ffea311e7a337274656a06f02f045828aba9cefbf70a1f5cefd519b4531d |
 | Deterministic target path/postimage root | 2558322dea284d16fedfe332450c1d7d32abfac3a843b153495bce6d61d69c23 |
-| Qualified recipe input manifest, 51 inputs | 88de7108d5b729a0352d2aa0c86900ed06f23e20dc5a69ee4d47ffeeb8b1d66c |
+| Qualified recipe input manifest, 51 inputs | ac054c4e2c5520f29622337a4604f220b5f5db06ed78cada873550b09b36a607 |
 | JDK runtime | Eclipse Adoptium 21.0.12.1+1-LTS |
 | Maven / OpenRewrite | 3.9.11 / 8.90.4 |
 

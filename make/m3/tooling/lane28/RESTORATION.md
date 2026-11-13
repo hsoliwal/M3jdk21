@@ -62,8 +62,8 @@ checks. Current master's 47 records and 20 gates remain intact. The overall
 mapping remains INCOMPLETE; the restored records remain implemented-unverified.
 
 Current master independently has TQ source/template drift: the live `M3TQ.java`
-blob is `ca23741ecd8cd24593ba5c260aa0d939c53d6766`, while its recipe template is
-`4f92643166133b0f527c88db65b8c48c4cf00402`. The live owner adds `containsAll`.
+blob is `53cb5da67520082e62fffe75272406d3eacb366c`, while its recipe template is
+`86bab13e9d178d99ed7ccd8e95a9dfbdbeba602f`. The live owner adds `containsAll`.
 Its existing shared-metadata custody also predates additive records. This PR
 preserves those newer owners and keeps the predecessor TQ gate in CI. Separate
 reconciliation is required; no TQ or full-reactor pass is claimed here.

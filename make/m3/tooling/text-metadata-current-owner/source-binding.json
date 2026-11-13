@@ -426,9 +426,9 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/hosted/qualify.py",
       "targetPath": "make/m3/tooling/text-metadata-current-owner/qualify.py",
-      "gitBlob": "3c5ff69487f09c942fc9557e493d4692b0464e89",
+      "gitBlob": "50fa40466bfef52c173378f6f101f63a71936a05",
       "bytes": 15382,
-      "sha256": "d68bc5ce3f86018a00ac4280954380891e09d7eba6a7abbf66b2d4dd7c241da1"
+      "sha256": "9cc43b52c5831985dc309b7d63073601ac9cc7405ecad8cc477772b41a752870"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/hosted/qualification.yml",

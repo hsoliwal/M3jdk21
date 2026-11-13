@@ -30,7 +30,7 @@ QUEUE = "m3.collections.evicting-queue.owner-naming"
 # Historical capability IDs are protocol/lineage data, not Java source names.
 HISTORY_PATH = ROOT / "make/m3/tooling/name-contract/receipts/release-preparation/source-identity.json"
 HISTORY_BYTES = HISTORY_PATH.read_bytes()
-if hashlib.sha256(HISTORY_BYTES).hexdigest() != "cc4d3efdaf35cbc96afe94a51f813fb6323adcffb73c62fe7266d7aada3e1fef":
+if hashlib.sha256(HISTORY_BYTES).hexdigest() != "a37b0b81a7829ef61d2f527d6783b031f915cf9b0fb2eedb42881ef429e84ac5":
     raise ValueError("historical naming source receipt identity drift")
 HISTORY = json.loads(HISTORY_BYTES)
 HISTORICAL_IDS = frozenset(HISTORY["historical_mapping_ids"])

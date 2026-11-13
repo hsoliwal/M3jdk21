@@ -3,7 +3,7 @@
   "status": "LOCAL_QUALIFICATION_PASS",
   "recorded_utc": "2026-10-18T13:29:08.971591+00:00",
   "source_lock": "SOURCE_LOCK.json",
-  "source_lock_sha256": "6004b332fe0ea3882613289da36cb46cdf4cf25fca65590e52026157e4fab486",
+  "source_lock_sha256": "941062978c37a60c54b77ddec51eab1a60b8e45dfdecfc1ef2b6be7ec695d126",
   "receiver_prefix": "make/m3/tooling/module-packs/build-support/gradle-provider/",
   "receiving_files": 9,
   "implementation_sha256": "92a7700275af7759c6a8c80e636fc19e9ac1affa84c0cfa15b8063ae70244557",
@@ -27,8 +27,8 @@
     {
       "label": "22-authoring-lint",
       "command_record": "logs/22-authoring-lint.json",
-      "command_record_sha256": "9b19e1b3bc4f1f12493f476454ea1d487a1d4956e3783e278f547f406b75ff47",
-      "log_sha256": "36674a8134f71b16ac01ed1f3ebc8e53bc08d8fedbebe2464a0f74fbcb99c1f2",
+      "command_record_sha256": "266bd2a79dc00dc753f893dc0bed0feca1c84bb1cbd256767a5b220b82e9a02e",
+      "log_sha256": "971b7a14c14b103719b2511199bbb85a820b69d3fafe27ee9af43a76c9557edc",
       "exit_code": 0
     },
     {
@@ -83,8 +83,8 @@
     {
       "label": "27-product-lint",
       "command_record": "logs/27-product-lint.json",
-      "command_record_sha256": "601eb5081f2fef1a43c16115c9e0a537805438798b397ae0de420a239e37857b",
-      "log_sha256": "36674a8134f71b16ac01ed1f3ebc8e53bc08d8fedbebe2464a0f74fbcb99c1f2",
+      "command_record_sha256": "3e2498fe76d8e5119f7d3d458505856c3b608d856cb458de653b70ce3a4fb436",
+      "log_sha256": "971b7a14c14b103719b2511199bbb85a820b69d3fafe27ee9af43a76c9557edc",
       "exit_code": 0
     },
     {

@@ -1,7 +1,7 @@
 old_path	new_path	blob_before	blob_after	kind
 m3/file/src/main/java/jdk/m3/file/M3File.java	m3/file/src/main/java/jdk/m3/file/M3NioFile.java	02bc8fbd09d9f8be9d15bb1e411689500680da13	2bf7dc23baa63ff2ce55d33f6ff807ed0e65968a	RENAME
 m3/file/src/main/java/jdk/m3/file/M3FileDelta.java	m3/file/src/main/java/jdk/m3/file/M3NioFileDelta.java	0456626bdb7d0c490a83f0c3901000fb46efa724	e53eac62b2ce3aca11291db76972d913defb9f86	RENAME
-m3/ports/file/BUILD.md	m3/file/BUILD.md	1d2be83dd12d2ae4f0ceeb9fec0d4cb3688ca9e3	98f115c98fadfc37c6d6344e7b0d568a3ae1fee6	MOVE+EDIT
+m3/ports/file/BUILD.md	m3/file/BUILD.md	1d2be83dd12d2ae4f0ceeb9fec0d4cb3688ca9e3	701af0202a868edb381270ac74c38013ea97fc0b	MOVE+EDIT
 m3/ports/file/native/CMakeLists.txt	m3/file/src/main/native/CMakeLists.txt	ee7c6e1f3a9a087a833ce1d9b470b5971863f934	ee7c6e1f3a9a087a833ce1d9b470b5971863f934	MOVE
 m3/ports/file/native/m3_file_jni.c	m3/file/src/main/native/m3_file_jni.c	9b540c7482e68be640474cd0496a04a49e40b70c	9b540c7482e68be640474cd0496a04a49e40b70c	MOVE
 m3/ports/file/native/m3_json_signal_jni.c	m3/file/src/main/native/m3_json_signal_jni.c	082ff68a6ec87b3cb4b2673452b0a97c45a14365	082ff68a6ec87b3cb4b2673452b0a97c45a14365	MOVE

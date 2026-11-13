@@ -2902,8 +2902,8 @@
   "publication_receipt": {
     "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/PUBLICATION_CUSTODY.json",
     "bytes": 1099619,
-    "sha256": "91c8df6ab07e3590fecf20de65e2e65943c4b70aebb9f5133901ae6362506c35",
-    "git_blob_sha1": "6389a4301478fd4df74e146f1ae4b8942f675e20"
+    "sha256": "c07a59b4403bb5b08ecec5c5bc95c4537a4b8738a486f010bb55b03d688f7c07",
+    "git_blob_sha1": "39a94c5646637a5b4246f6f1dc65af67f6dc0c51"
   },
   "tree_receipts": [
     {

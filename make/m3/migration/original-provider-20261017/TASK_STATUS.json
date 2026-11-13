@@ -11,7 +11,7 @@
   "sdkTree": "c93b25915d57178bec19458ba9ddc34383d92639",
   "sdkFiles": 74,
   "sdkBytes": 1955646,
-  "pinsSha256": "0392e66f35721a0abfabe4a2500e0305bbb9b6b1cc78a7db342fb6bde3278ed5",
+  "pinsSha256": "0cf19f4fdf2c35da82edc45fa2efe0dbad2547cb86475e6e4cfe4ebae29d558c",
   "targets": {
     "total": 60,
     "keep": 54,
@@ -83,8 +83,8 @@
   "localControlOutputAllowanceRemaining": 0,
   "currentMappingCorrection": {
     "scopeAmendment": "c3f75f26d69ad2fc2d287a15579423adb4601960",
-    "currentBefore": "986147e2df24ef25076d451c49782d8e7e354a11",
-    "reviewedAfter": "1a441d86ddd17b0d51ba32b9cbf82a2b421a623c",
+    "currentBefore": "343f101c9e7925c17d9949a6328b9744cc351548",
+    "reviewedAfter": "b7b1d0a3bda64884c5c2703594a04c3544152af7",
     "preservedTopMappings": 59,
     "optionalModuleDeclarationsRetained": 1,
     "migrationRecordsBefore": 56,
@@ -128,7 +128,7 @@
   "baselineProjection": {
     "foundation": "3f3508d22b5d3ad37aa2f5a45a1e469e904a80da",
     "evidence": "baseline-projection-20261018/source-review.json",
-    "frozenPreManifestSha256": "e0ec50d7f1608180e1fe831d137e26d51e691606b85379a1a38c12d064c702f5",
+    "frozenPreManifestSha256": "2137cd46e21b943e8b9b7ff439bbace154d3090aaaacf45095e5960d2a9e350b",
     "beforeAfterProvider": true,
     "sourceReview": "CLEAR_SOURCE_ONLY",
     "execution": "PASS_AT613e5ff4; RECEIVED_POST_CHECKOUT_REQUALIFICATION_PENDING"
@@ -145,7 +145,7 @@
     "job": 117600228618,
     "conclusion": "SUCCESS",
     "sdkTree": "c93b25915d57178bec19458ba9ddc34383d92639",
-    "pinsSha256": "0392e66f35721a0abfabe4a2500e0305bbb9b6b1cc78a7db342fb6bde3278ed5",
+    "pinsSha256": "0cf19f4fdf2c35da82edc45fa2efe0dbad2547cb86475e6e4cfe4ebae29d558c",
     "artifact": {
       "id": 12127665194,
       "zipBytes": 161703,
@@ -173,7 +173,7 @@
       "bytes": 795620,
       "files": 55,
       "independentOfInstalledPost": true,
-      "manifestSha256": "e0ec50d7f1608180e1fe831d137e26d51e691606b85379a1a38c12d064c702f5",
+      "manifestSha256": "2137cd46e21b943e8b9b7ff439bbace154d3090aaaacf45095e5960d2a9e350b",
       "preInventorySha256": "d2a4133059aca61b7c001951b9d9df8cbdcac108bd59c5403c8d3131c7cea0ef",
       "root": "/home/runner/work/_temp/m3-original-provider-39102078256-1/baseline",
       "beforeAfterByteIdentical": true,
@@ -214,22 +214,22 @@
   "qualifiedDataOutputs": [
     {
       "path": "doc/m3/name-mapping.json",
-      "gitBlob": "1a441d86ddd17b0d51ba32b9cbf82a2b421a623c",
-      "sha256": "1c396776ac7313695609384b5ad3abc98f15f4bde48af3bb26915f933d098663",
+      "gitBlob": "b7b1d0a3bda64884c5c2703594a04c3544152af7",
+      "sha256": "3523a925aa39bce18bb9bc4d06ac6cfd5ba836ef557867d5c69760d08d7acadd",
       "bytes": 441047,
       "kind": "CHANGE"
     },
     {
       "path": "make/m3/migration/provider/python312-linux-x86_64/bootstrap.py",
-      "gitBlob": "ae3b685d8f3731ad38ba59135a9c399c0a416d20",
-      "sha256": "3875e91c82afd6712a3cc50f76cd7f317721839f69870c4c7dce0cfe8f455a34",
+      "gitBlob": "09a93671ff9628638613e3af38b2d656ecbea793",
+      "sha256": "8bf96849c73a8cb4865949a1422403872d9e0bcdfcc907f2d81964dc6c5b5c35",
       "bytes": 42501,
       "kind": "ADD"
     },
     {
       "path": "make/m3/migration/provider/python312-linux-x86_64/previous-name-mapping.json",
-      "gitBlob": "d3d454d9a7891585d665f58b404989820ea751a4",
-      "sha256": "15629167d5f6d5f6999225a4ebd9b16b56943477c27701259048ac670d232fc4",
+      "gitBlob": "5b26028a27115cd57b39a860106e1ddd96dc4f2b",
+      "sha256": "99f18a65a6fa4d8c01b423b78f742100db48435708a504951e15e3a668b339b7",
       "bytes": 399438,
       "kind": "ADD"
     },
@@ -242,8 +242,8 @@
     },
     {
       "path": "make/m3/migration/provider/python312-linux-x86_64/wheels.lock.json",
-      "gitBlob": "4a14a37652fc32b5251c9e99387e737b21852ebd",
-      "sha256": "808e9471ebab14659401fd592538df7b0096c166c3410014e43d21747918af50",
+      "gitBlob": "a362656296da9628463b3931a3e10c4c8ab1b724",
+      "sha256": "1dd5cb6888d3ab5ecb2aa42bdebedaf64562a0ee2921522b04340fde1f34db74",
       "bytes": 10099,
       "kind": "ADD"
     }

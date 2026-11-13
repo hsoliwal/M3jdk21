@@ -2,13 +2,13 @@
 crate/ENGINE_SOURCES.tsv	74242eb726eb5d1c5bbdc9fa4ee17c33b4afa1c96bfcddad5dcb1a4b1f4f58cb
 crate/contract/test_prepare.py	82de5be54cd1dd944c2b399f83a4f88d642ebf046a04aa935994001c0571246f
 crate/contract/verify_receiver.py	1b877f8af0269fbc2b8cd7ef0a98245de5f044ebc5d8dae1f91bc1d8a1acd7e2
-crate/datasets/m3jdk21-lock-order/DATASET.json	9b9a3bae94c5a6270beb6476fa9058e26035a610e9ce041ad50fdc4dc165c8d8
+crate/datasets/m3jdk21-lock-order/DATASET.json	44684c0e7bb7d8b5b98cfee342267c3a5df6f2f74876d93017637a198cf79c37
 crate/datasets/m3jdk21-lock-order/ENGINE_EFFECTIVE.tsv	80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23
-crate/datasets/m3jdk21-lock-order/MODES.tsv	074b7674fe2df7caf002c2d8c5305ccde53df4dc854797a1edc4f8ff36931754
+crate/datasets/m3jdk21-lock-order/MODES.tsv	d00a7faeb8d4a4a1ff915c6ccc56f63a470ea4327ae8dfbafb1d5368faf97cca
 crate/datasets/m3jdk21-lock-order/resources/META-INF/rewrite/m3-ast-build-reverse-20261017-m3jdk21-lock-order.yml	051987e63602fecdd9fcad94f0b2d27a406b9b0e664b6b4d551bc4792de92be2
 crate/datasets/m3jdk21-lock-order/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-m3jdk21-lock-order/0001-lock_tool_distribution.py.txt	ec090eda4c5376f387d66e43e0e744e6883f59385008df939757471c6c879b71
 crate/datasets/m3jdk21-lock-order/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-m3jdk21-lock-order/0002-test_tool_packs.py.txt	0c2cc1a09f2f298cdf1e43d59a27df568b5914eafe513dfffb0c00365ed7f686
-crate/datasets/m3jdk21-lock-order/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-m3jdk21-lock-order/manifest.tsv	29ea2d61e85dff0002d9c1f987c73d2c026b5c7c15db790f8d73b882c81dff9d
+crate/datasets/m3jdk21-lock-order/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-m3jdk21-lock-order/manifest.tsv	df4c383d45baccd386fa02e4da11893adf1fe237eb11c5da096b7d903ef59b61
 crate/datasets/m3jdk21-lock-order/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-m3jdk21-lock-order/pre/0001-lock_tool_distribution.py.txt	ee0a50592064d8ba5bdb9f9ca9f412e036c9d5e60c062a6985b3062ee1192d4c
 crate/datasets/m3jdk21-lock-order/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-m3jdk21-lock-order/pre/0002-test_tool_packs.py.txt	ba28752dfdcedb66165de9f0d202749c2a848d2c555632c1f846b2f4a724b199
 crate/pom.xml	56567ab0175c47dbbada68bec8fe0fd9bbe027d6174c5cefef695a0b7283d448

@@ -46,7 +46,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/state-relation-current-c11-20261019/sdk/pins.json",
       "targetPath": "make/m3/tooling/state-relation-current-c11/sdk/pins.json",
-      "gitBlob": "d2d636c615e5d1119255008fd13a092de2f0cbe7",
+      "gitBlob": "d35442041a0e0ec8ffe018fc43cdbdd287899744",
       "bytes": 6665
     },
     {
@@ -94,7 +94,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/state-relation-current-c11-20261019/sdk/src/main/resources/jdk/internal/m3/rewrite/state-relation-current-c11-20261019/manifest.tsv",
       "targetPath": "make/m3/tooling/state-relation-current-c11/sdk/src/main/resources/jdk/internal/m3/rewrite/state-relation-current-c11-20261019/manifest.tsv",
-      "gitBlob": "646e9d2e2cfd667771bde1a844f65cd84961b9f9",
+      "gitBlob": "c324c4080ee8d6b3df2f4e0a74b9fda236105e45",
       "bytes": 991
     },
     {
@@ -130,7 +130,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/state-relation-current-c11-20261019/sdk/src/test/java/jdk/internal/m3/rewrite/M3StateRelationCurrentC11RecipeTest.java",
       "targetPath": "make/m3/tooling/state-relation-current-c11/sdk/src/test/java/jdk/internal/m3/rewrite/M3StateRelationCurrentC11RecipeTest.java",
-      "gitBlob": "2ed4da274c8cdbf10da9140f3ff4fffd3f7d1d73",
+      "gitBlob": "527ec0a86edce205ff639b0a4c28b5117c9a3a45",
       "bytes": 12409
     },
     {
@@ -142,13 +142,13 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/state-relation-current-c11-20261019/sdk/verify.py",
       "targetPath": "make/m3/tooling/state-relation-current-c11/sdk/verify.py",
-      "gitBlob": "a80c6f48aebe6249239c52277ad0fc53f21179b6",
+      "gitBlob": "f5cb14e00a1f3fd286bf79ef0fbac17ee5fafac3",
       "bytes": 22427
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/state-relation-current-c11-20261019/runtime/INPUTS.json",
       "targetPath": "make/m3/tooling/state-relation-current-c11/runtime/INPUTS.json",
-      "gitBlob": "0e2bac3c1b28fb0924028a6bc0855909a6d6a9da",
+      "gitBlob": "827bba273bc317289dab4fe56bd80a51155b1e9e",
       "bytes": 3240
     },
     {
@@ -160,13 +160,13 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/state-relation-current-c11-20261019/runtime/THIRD_PARTY_NOTICES.md",
       "targetPath": "make/m3/tooling/state-relation-current-c11/runtime/THIRD_PARTY_NOTICES.md",
-      "gitBlob": "3942833a99fedaa7a6ba83c60734e950a02a49fe",
+      "gitBlob": "45e3e2ac4df8b198176fbe7625f7c2785faa8338",
       "bytes": 2626
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/state-relation-current-c11-20261019/runtime/qualify.py",
       "targetPath": "make/m3/tooling/state-relation-current-c11/runtime/qualify.py",
-      "gitBlob": "b3fb888d4ea4d7a6b13bc13fef0fdcdba0bcb0f2",
+      "gitBlob": "88661fdb4a2b0d63f01385f2c6bb33f768523859",
       "bytes": 20925
     },
     {
@@ -184,7 +184,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/state-relation-current-c11-20261019/hosted/qualify.py",
       "targetPath": "make/m3/tooling/state-relation-current-c11/qualify.py",
-      "gitBlob": "25e35e78e6099b93993da8d652041e8ff32793ec",
+      "gitBlob": "e1819aa5694878962af14af4fd4a71698cc7dacc",
       "bytes": 16752
     }
   ],

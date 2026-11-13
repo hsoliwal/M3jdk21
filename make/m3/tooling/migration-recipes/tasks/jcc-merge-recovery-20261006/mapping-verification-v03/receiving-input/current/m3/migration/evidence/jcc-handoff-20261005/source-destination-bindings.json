@@ -391,7 +391,7 @@
     "target_contract_change": "Class.descriptorString corrects hidden-class spelling; source retains the older getName substitution algorithm. Public method signatures are unchanged by the retained fix.",
     "historical_cb_receipt": {
       "path": "make/m3/tooling/cb/evidence/receipt.json",
-      "sha256": "59dad7e343be1af3d9a29a0adfe0baa1de788ce7ff88e74908e485539d53417f",
+      "sha256": "7a59c491e7f81f157f66ace4f70e783d0beb437bca14efbe013dfa2ab87ff3c9",
       "qualification": "Historical source7b5d/target-base3ec scoped packet; not a current descriptor or whole-image rerun."
     },
     "historical_descriptor_receipts": [
@@ -481,12 +481,12 @@
     },
     "input_receipt": {
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/receiving-e02/STAGING_RECEIPT.json",
-      "sha256": "19b3265052459b5cddb95b695c7801d2090733d30527e6553eed823597690d17",
+      "sha256": "1583cc386e0187fd35cb3321e6e0c5b592351d52b5b262f36201d30d2b127a87",
       "bytes": 6235
     },
     "verification_receipt": {
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/receiving-e02/VERIFICATION_RECEIPT.json",
-      "sha256": "b1d9d2a9d1492c2c69c62a1bc0fda5277cade749fc1ad690d355bc3ca71905ef",
+      "sha256": "58b717be6abf6503979be50f60cc47c70338d0cd3cb06479b78faaee80532115",
       "bytes": 1974
     },
     "maven_log": {
@@ -508,7 +508,7 @@
     },
     "whole_module_gate": {
       "path": "make/m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/owning-module-frontier/REVIEW.json",
-      "sha256": "ac128a680edefc7d38daac9b4fe7ce9cebf474a5b6f3d2136bc2a58eb6635d16",
+      "sha256": "2b4fe0b108ec2a733bd89e326f6a8d2988144c347289855bcf485f9866a6924f",
       "bytes": 4807
     },
     "qualification": "Finite candidate tooling proof only; capability tests[] remain empty. Final source qualification and committed read-back remain pending."

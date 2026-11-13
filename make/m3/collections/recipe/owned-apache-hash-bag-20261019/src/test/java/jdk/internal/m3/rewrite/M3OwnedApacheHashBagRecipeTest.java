@@ -60,7 +60,7 @@ final class M3OwnedApacheHashBagRecipeTest {
     private static final String NAME = "jdk.internal.m3.OwnedApacheHashBag20261019";
     private static final String TARGET =
             "m3/collections/implementations/apache-hash-bag/src/main/java/jdk/m3/collections/apache/M3HashBag.java";
-    private static final String BEFORE_SHA = "14f119444bd444b97da29d4b4744be1058534b61896ffae19a1733f5d96a59af";
+    private static final String BEFORE_SHA = "0ecc2bbaab1c6d52f099a63e127efd2c4822d71f21dd5f9a0a2aca2e3002ede3";
     private static final String AFTER_SHA = "7ff2c684fb2ee24998ffc2390057edeaa40787c91d35cc5bbda9bb24b324d5e4";
     private static final int AFTER_BYTES = 18277;
     private static final String TEMPLATE = "M3HashBag.java.txt";

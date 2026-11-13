@@ -6,17 +6,17 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/reference-audit-v3/REFERENCE_AUDIT.json",
       "bytes": 769381,
-      "sha256": "a7c41a897604c0421ca0f770fde83c51404208479f053b404cb98e5e7f2da7f1"
+      "sha256": "3a7fdeca679ca21066dd44ab01f930547b37ecf5c9fa13a40e598d9112e54f24"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/reference-audit-invocation-v3/EXECUTION.json",
       "bytes": 1530,
-      "sha256": "af823a726f18769d61586fe9be5362ae31743c4523003d292bad9ae536b72803"
+      "sha256": "4f2304b3122d2decb0c3f8cce3ad37c49b058334fc0a906cbcf19288cb94e96d"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/check_references_v3.py",
       "bytes": 40725,
-      "sha256": "c88b8805881ab3cc299b530d50cbe8d6749a0a4925d7ea5e9ce512bd3a0a3ece"
+      "sha256": "9dc401c3bf818e2a50793a1b0f5bb465e2a26ae0916668587f9b2f2a30a06ff5"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/verification-v3/receipt.json",
@@ -26,7 +26,7 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/reference-audit-invocation-v3/stdout.log",
       "bytes": 244,
-      "sha256": "325626fab5a186eecdba03c5eb66ea2a14ab955026f2bebaf591126ad2c80896"
+      "sha256": "1951e9101651c4e405f08cba0445fe10dc301d34d3a0d20e2fc8d3fd38021f8b"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/reference-audit-invocation-v3/stderr.log",
@@ -41,12 +41,12 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/checker-static-review-v3/custody-output-subreview/REVIEW.md",
       "bytes": 6397,
-      "sha256": "f01e78a0ea47be42e08866b26c231d7c68e992f5158527d1a0ef63c473561b0d"
+      "sha256": "b7ab97141a1f2384191d29aab0e2c7b785386b7776ad83c3c5bad026cb736045"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/checker-static-review-v3/custody-output-subreview/FILE_SEALS.json",
       "bytes": 951,
-      "sha256": "1c9dfb88fccf794e722b34b49868f83bc6cdb01b957cc9019f262175b44024f7"
+      "sha256": "ba04ae0c568b41f3822d56276890ebefa689fb17a0e370b053cd6dd0beeb5033"
     }
   ]
 }

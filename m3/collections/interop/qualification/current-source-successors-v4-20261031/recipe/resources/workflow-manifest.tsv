@@ -1,3 +1,3 @@
 # SPDX-License-Identifier: Apache-2.0
 # Complete old/new workflow source seals, before actual recipient commit.
-.github/workflows/m3-collections-interop-receiving.yml	9030685f3bfb956ba278e8401daf8b041d057b6af059b4b82290b37b80600236	f4be8b63678cd2d6fc1d1d391edb172cd018b6c390ec569f1f8273e368384be4	m3-collections-interop-receiving.yml.txt
+.github/workflows/m3-collections-interop-receiving.yml	0435494b8f5636a7b471f710938bacceb977d8ce77f46ba6b8594fdbb02400ee	16efd319643d66dc30b4ac6ff172737b3d9fa2f37742983e9ec2af59f813ff9c	m3-collections-interop-receiving.yml.txt

@@ -40,7 +40,7 @@ def main():
     exp=json.loads(regular(a.crate/'EXPECTED.json'))['targets'][0];raw=regular(a.emitted/TARGET)
     assert ident(raw)['sha256']==exp['afterSha256'] and ident(raw)['gitBlob']==exp['afterGit']
     current=json.loads(raw);oldraw=regular(a.crate/'contract/ORIGINAL_BUILD_INPUTS.json');old=json.loads(oldraw)
-    assert ident(oldraw)['gitBlob']==current['historicalBaseline']['manifestGit']=='0ea37209f97eda757f17214f73d6a3850b01c56b'
+    assert ident(oldraw)['gitBlob']==current['historicalBaseline']['manifestGit']=='2382ace56c16d0494d5d5deb053295e798527c3c'
     assert ident(oldraw)['sha256']==current['historicalBaseline']['manifestSha256']
     assert current['schema']=='M3_CURRENT_CORE_BASELINE_INPUTS_V1' and current['commit']=='1b5e64844fdb755ac8a7aee563e68c15e0126ced'
     assert old['commit']==current['historicalBaseline']['commit']=='73f59218dc4ef1a3ef79aad990e77273db2a2d60'

@@ -52,7 +52,7 @@
     {
       "path": ".github/workflows/m3-collections.yml",
       "before_sha256": "d388c56ade4fcebed88f0a43f9532a9abb513adac22a14dbe464f6984d5f08fd",
-      "after_sha256": "4b4d4ddabf4f7029daabcde1e5ac0102131e5557a14cf305befd1e884cb8d49e"
+      "after_sha256": "826069b187900d4e3282dc079e9610bbd28bd07d1ee6dffb499d7cef6d74e9d6"
     },
     {
       "path": ".github/workflows/m3jdk-modules.yml",
@@ -62,7 +62,7 @@
     {
       "path": "make/m3/collections/receiving/mat-owned-exports-20261112.md",
       "before_sha256": "ABSENT",
-      "after_sha256": "776fe9d85a46ea45cd58465c4afffb4e755c54d10f25f57a060eae0d0b000f2d"
+      "after_sha256": "a7cfd805ee66b2fdf9f67bb6949537da7192ecb310de5c1bd7f7e3db823cfbc3"
     }
   ],
   "gates": {

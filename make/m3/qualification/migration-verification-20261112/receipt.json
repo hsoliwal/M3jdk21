@@ -13,7 +13,7 @@
     {
       "path": "make/m3/compatibility/check_m3_full_borrow_receiver.py",
       "before_sha256": "444514e43ba0805375cd1894c372ad3493aea7291604103b700c37e741b0ff68",
-      "after_sha256": "f67fcb19fdd6e65b55c15dfaa45dcf428f069fa292df2f225226b8818cb7b592"
+      "after_sha256": "c3a2350007b8aa421b7f973fe42a2b766455b287e71bc8c8fbef30525dd2643c"
     },
     {
       "path": "make/m3/compatibility/test_m3_full_borrow_receiver.py",
@@ -28,12 +28,12 @@
     {
       "path": "make/m3/runtime-integration/regex-precompute/pom.xml",
       "before_sha256": "cd4265e106f6f1061349b779d7b752fb9aed4bd322a984de06bed4ca9603bc99",
-      "after_sha256": "18cebcc38f394a43f6996a5a57f997f48806c74863168ff2fef007032983812e"
+      "after_sha256": "adb8ebbf289fcba428f049bb6ab75b3b0d90d436b61f9bf69f4f60415f502ddf"
     },
     {
       "path": "make/m3/runtime-integration/regex-precompute/README.md",
       "before_sha256": "fabfe8b2854d6f51b5a0d4c5ccf9961628be81860a1c1ba1f55d25499874b621",
-      "after_sha256": "0d39956c89538204e9c9a2ac4e7a720d788f3ed3794d8d3354e718d546f27f11"
+      "after_sha256": "3d1a7492c9be00a4d89f2f7e382d7927b431a861319941ccecaa17f20f10f01d"
     },
     {
       "path": "make/m3/runtime-integration/regex-precompute/verify.py",

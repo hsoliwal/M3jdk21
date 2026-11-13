@@ -17,12 +17,12 @@
       "crate": "rf0-rfc",
       "id": "Rfc",
       "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/rf0-rfc/manifest.tsv",
-      "manifestSHA256": "8eb91537d63443d155d72d989fe640da85497764627e406054aa7a704b7d5869",
+      "manifestSHA256": "b22d3a610e9349d37dd20f9a7634e295a214f7673138de47b75b721d5d4f3d87",
       "namedRecipe": "jdk.internal.m3.Rf0Rfc",
       "targets": [
         {
           "afterBytes": 48860,
-          "afterSHA256": "1913aceb03b079596c7c8aea80285aecd2849f81475b597e4ea4094609b749a9",
+          "afterSHA256": "85b515e05959bb8247bf22ad639ef81bdf87c9e4f93008a57cb284189b11eb7e",
           "beforeBytes": 48850,
           "beforeSHA256": "c9eb51298f2a6a7a1798051c24074cd7f23a8e0805ed6d50420ff3bcd12cacb4",
           "operation": "REPLACE",
@@ -30,7 +30,7 @@
         },
         {
           "afterBytes": 778,
-          "afterSHA256": "1eee6e6d1db0d7f602509db92e80fe00b990db2a37aae929a288b1379b602bd1",
+          "afterSHA256": "d6e0245b968dccf0820c782fcb8eb1b3ad621a0ec306f95bddb9ff58a1ecc74b",
           "beforeBytes": 778,
           "beforeSHA256": "c0af7bc99ace3f9dcc5e0e9085d9bac66eeb1a497b2153a54bb11ca250916c14",
           "operation": "REPLACE",

@@ -46,9 +46,9 @@
     {
       "targetPath": "make/m3/tooling/hash-pinned-target-paths/sdk/pins.json",
       "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/pins.json",
-      "gitBlob": "7a316c069f6e7c611d631851b7ebecba0d9301d5",
+      "gitBlob": "e1225bf62bdd452a061df5094cae0b239e5f9579",
       "bytes": 10269,
-      "sha256": "d730a4f8f2cadcc2bc6a02f98289bc3a0ac7cb822a6427ff31ac78c8bcce7426"
+      "sha256": "e85cdbd125985f2b39042651cc85a97f74030f86c4f5922aaad8025db3e3d4b2"
     },
     {
       "targetPath": "make/m3/tooling/hash-pinned-target-paths/sdk/pom.xml",
@@ -116,9 +116,9 @@
     {
       "targetPath": "make/m3/tooling/hash-pinned-target-paths/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/inverse/manifest.tsv",
       "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/inverse/manifest.tsv",
-      "gitBlob": "884a94de357f35a94f126997008971fa38dcca99",
+      "gitBlob": "4c5f422e534aef5240de26c18047ca19faffab0c",
       "bytes": 2013,
-      "sha256": "1f67be7b8a07cda0e4746a516df0f637211ee7b99a2bb2ace48015539e84e499"
+      "sha256": "aea7a84e0233322a39925d7652392247456842ca162922ec4010bb92cfd87ced"
     },
     {
       "targetPath": "make/m3/tooling/hash-pinned-target-paths/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/inverse/out/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
@@ -130,9 +130,9 @@
     {
       "targetPath": "make/m3/tooling/hash-pinned-target-paths/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/manifest.tsv",
       "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/manifest.tsv",
-      "gitBlob": "71c721dc4abbe61126c32fc3b376ac8e11ea65e8",
+      "gitBlob": "ecb0f1649178ad88bb68cdf72d1f328ef16ab144",
       "bytes": 2013,
-      "sha256": "a5519c55b50da387e76d0b0ce2241cc25f4216eff62734557f0ed72e27051403"
+      "sha256": "1f6ba298d2dc3720f1cc9e81356706b35817aeae308ffa9bb856caca3b4f379d"
     },
     {
       "targetPath": "make/m3/tooling/hash-pinned-target-paths/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/out/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
@@ -200,9 +200,9 @@
     {
       "targetPath": "make/m3/tooling/hash-pinned-target-paths/sdk/src/test/java/jdk/internal/m3/rewrite/M3HashPinnedTargetPathsCompatRecipeTest.java",
       "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/src/test/java/jdk/internal/m3/rewrite/M3HashPinnedTargetPathsCompatRecipeTest.java",
-      "gitBlob": "4b913e6e0b7c7ae66cf9da8be40ee0565803997d",
+      "gitBlob": "8011cb9331d297fe3df4a7a0a7df3f69d2690a33",
       "bytes": 18047,
-      "sha256": "c27c6f1797a731a0c1c07cded4e9dd62dadc95f1c6bc7408472e01bc147e8283"
+      "sha256": "8cb46072bef4fda0c7da398422c47d941db9402fdc370f9f527238503cfae720"
     },
     {
       "targetPath": "make/m3/tooling/hash-pinned-target-paths/sdk/src/test/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/canonical-targetPaths.java.txt",
@@ -221,16 +221,16 @@
     {
       "targetPath": "make/m3/tooling/hash-pinned-target-paths/sdk/verify.py",
       "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/verify.py",
-      "gitBlob": "9d7815f4f345d5cc4eafbf955d5c7eab84764e07",
+      "gitBlob": "39249c61a55cdec2fa6dc2b9d0881df1c95474c3",
       "bytes": 25712,
-      "sha256": "404647928d4da986779761062069232ba460b274a4a4591f27e9a3ccdf628b4b"
+      "sha256": "1299e8cb5f8c9bd64529e82915d2666192c9c177c372a4f4e6d34569ea1bb608"
     },
     {
       "targetPath": "make/m3/tooling/hash-pinned-target-paths/qualify.py",
       "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/hosted/qualify.py",
-      "gitBlob": "3fdbd0b7382bc07c3c9ca905845dcb824b2a1ae5",
+      "gitBlob": "2d8bf7af9ea91c5b8777341440d64bc40fe484a4",
       "bytes": 17823,
-      "sha256": "05cd44ffef20c84cc9fa2c39ad2ebc4f4cb07d3ca2346f48d29947419b49e040"
+      "sha256": "11ec7084d99ae0bc1a6599790e655e4d7b1f3262d1538fd67a25df3d375baae4"
     },
     {
       "targetPath": ".github/workflows/m3-hash-pinned-target-paths.yml",

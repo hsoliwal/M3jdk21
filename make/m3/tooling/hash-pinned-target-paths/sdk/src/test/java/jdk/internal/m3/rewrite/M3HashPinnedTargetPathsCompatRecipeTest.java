@@ -27,8 +27,8 @@ final class M3HashPinnedTargetPathsCompatRecipeTest {
     private static final String ROOT = "/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/";
     private static final String DESCRIPTOR = "/META-INF/rewrite/hash-pinned-target-paths-20261020";
     private static final String NAME = "jdk.internal.m3.HashPinnedTargetPathsCompat";
-    private static final String FORWARD_MANIFEST_SHA = "a5519c55b50da387e76d0b0ce2241cc25f4216eff62734557f0ed72e27051403";
-    private static final String INVERSE_MANIFEST_SHA = "1f67be7b8a07cda0e4746a516df0f637211ee7b99a2bb2ace48015539e84e499";
+    private static final String FORWARD_MANIFEST_SHA = "1f6ba298d2dc3720f1cc9e81356706b35817aeae308ffa9bb856caca3b4f379d";
+    private static final String INVERSE_MANIFEST_SHA = "aea7a84e0233322a39925d7652392247456842ca162922ec4010bb92cfd87ced";
     private static final String FORWARD_DESCRIPTOR_SHA = "7b5e266f805a3a8da289fcc4358f346d5b475789672f30fd153f25d5eb116784";
     private static final String INVERSE_DESCRIPTOR_SHA = "2c3273d747559d4756cb49df36de5fddadb119a610b9fe4a8f383562a0e8ce2b";
     private static final String PROVIDER_OWNER = "make/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java";

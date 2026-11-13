@@ -194,7 +194,7 @@
     "status": "PASS",
     "files": 5,
     "script": "verify_candidate.py",
-    "sha256": "8e91d051b16c3e7c4daf6b73e6b28dd0c68b4c849a26c9dae7aadcaf7244fbe2",
+    "sha256": "165a8984c30f7cd927fcd106efe06559e2ff707d92d496b2cb154d1af9e470fb",
     "six_slot_drift": "REFUSED",
     "missing_legacy_fixture": "REFUSED"
   },

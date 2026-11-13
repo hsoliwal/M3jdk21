@@ -7914,8 +7914,8 @@
     "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/DESIGNATED_SOURCE_OUTPUTS.json",
     "repository_path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/DESIGNATED_SOURCE_OUTPUTS.json",
     "bytes": 15261,
-    "sha256": "dab78ed3ffa2cab8dad0feb532f493130570b8da35146a78e961b75cd11dd555",
-    "git_blob": "36e48a6a4e5b4e2592ad7d3fa90fd3800f6f5185"
+    "sha256": "2caa97c14d333ebe07a621e75c27c8a5eb5db9841532ac48013644b2301a0866",
+    "git_blob": "7d5e19be04c2c0165111f8b9e885ef8fae1c511a"
   },
   "independent_final_review": {
     "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/execution-static-review/t03-execution-review/REVIEW.md",
