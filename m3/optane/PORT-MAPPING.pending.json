@@ -1,7 +1,13 @@
 {
   "schema": 1,
   "status": "PENDING_OPTIONAL_MODULE_ADMISSION",
-  "target": "m3/optane; module org.m3jdk.optane; package jdk.m3.optane; Maven com.m3:m3-optane",
+  "target": "src/jdk.m3.io; product module jdk.m3.io; exported package jdk.m3.optane",
+  "maven_bridge": {
+    "path": "m3/optane",
+    "coordinates": "com.m3:m3-optane",
+    "module": "org.m3jdk.optane",
+    "role": "component build and test bridge over the product sources"
+  },
   "intake": "INDEPENDENT_APACHE_MODULE",
   "canonical_recipe": "hsoliwal/com.synexia:m3-openrewrite-recipes/recipes/optane-list-handoff-20261015",
   "reuse": [
@@ -132,5 +138,67 @@
     "full JVM optimization",
     "App Direct implementation",
     "PMem speedup"
-  ]
+  ],
+  "current_continuation": {
+    "execution_receipt": "m3/optane/docs/PMEM_REUSE_EXECUTION.json",
+    "evidence_scope": "The execution receipt binds actual source revisions, canonical recipes, emitted postimages and test seals. Component evidence does not close the historical open gates or establish full module admission.",
+    "historical_provenance": "The canonical_recipe and reuse entries retain the original intake history; the execution receipt identifies the current continuation.",
+    "canonical_registry_admission": {
+      "status": "PENDING",
+      "authority": "m3/docs/name-mapping.json",
+      "disposition": "Passive capability inventory only; no canonical mapping record or naming-plan pin is changed."
+    },
+    "qualified_jdk_promotions": 0,
+    "java_se_companion_relation": null,
+    "capabilities": [
+      {
+        "symbols": [
+          "jdk.m3.optane.PmemMemoKey"
+        ],
+        "target_paths": [
+          "src/jdk.m3.io/share/classes/jdk/m3/optane/PmemMemoKey.java"
+        ],
+        "scope": "Bounded, versioned exact memo identities; source-analysis keys retain complete-image scope by default and offer an explicit file/dependency scope with caller-declared complete dependencies and configuration."
+      },
+      {
+        "symbols": [
+          "jdk.m3.optane.PmemMemoStore"
+        ],
+        "target_paths": [
+          "src/jdk.m3.io/share/classes/jdk/m3/optane/PmemMemoStore.java"
+        ],
+        "scope": "Candidate and externally validated memo values, durable namespace generations and stale-snapshot refusal over the existing PmemBlockStore. Supplied validation identities do not execute or authenticate a validator."
+      },
+      {
+        "symbols": [
+          "jdk.m3.optane.PmemTensorSpec"
+        ],
+        "target_paths": [
+          "src/jdk.m3.io/share/classes/jdk/m3/optane/PmemTensorSpec.java"
+        ],
+        "scope": "Immutable contiguous tensor geometry with scalar format, byte order, shape and checked byte count; no payload owner or implicit conversion."
+      },
+      {
+        "symbols": [
+          "jdk.m3.optane.PmemPrefixCache.put(PmemPrefixKey,PmemTensorSpec,byte[],int,int)",
+          "jdk.m3.optane.PmemPrefixCache.get(PmemPrefixKey,PmemTensorSpec,byte[],int)"
+        ],
+        "target_paths": [
+          "src/jdk.m3.io/share/classes/jdk/m3/optane/PmemPrefixCache.java",
+          "src/jdk.m3.io/share/classes/jdk/m3/optane/PmemPrefixKey.java"
+        ],
+        "scope": "Additive typed prefix-cache overloads bind exact tensor descriptors and validate complete envelopes before copying into caller output; the existing cache, index and block-store owners remain authoritative."
+      },
+      {
+        "symbols": [
+          "jdk.m3.optane.PmemSdk.open"
+        ],
+        "target_paths": [
+          "src/jdk.m3.io/share/classes/jdk/m3/optane/PmemSdk.java",
+          "src/jdk.m3.io/share/native/libm3optane/m3pmemsdk.c"
+        ],
+        "scope": "Correct existing native admission to retain the final path component for O_NOFOLLOW while preserving parent traversal, and match PMDK protection to requested read-only/read-write access. No new JNI symbol or physical-PMem certification."
+      }
+    ]
+  }
 }
