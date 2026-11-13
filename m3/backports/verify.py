@@ -208,6 +208,66 @@ def verify_javadoc_8347112_backport(root: Path) -> None:
 
 JDK_8364182_COMMIT = "f2f8828188f45d16344c82adfbf951f7409b8825"
 
+# Original JDK-8364182 adaptation remains immutable. This exact successive
+# source state is inherited from JDK21u f97e75f2 + single-line SIMD commit cb0cc9a.
+JDK_8364182_VMSYMBOLS_PATH = "src/hotspot/share/classfile/vmSymbols.hpp"
+JDK_8364182_HISTORICAL_SHA256 = (
+    "eeffc686c1eef000be5e3be5eb02e13257c744a63ea926762e9d4749fadecc67"
+)
+JDK_8364182_21U_SHA256 = (
+    "691bd90288f30d9d25504526f234abc7db862e577544a7733d3fe0d09e585ff2"
+)
+JDK_8364182_21U_GIT_BLOB = "07a4452d5fabdf6f8f520421c3c668ae390bf666"
+JDK_8364182_SIMDSORT_SHA256 = (
+    "db65f0fdf1b3eba49a7819ab59a2c01f04b02c6e82daf8b55774d3c2404990aa"
+)
+JDK_8364182_SIMDSORT_GIT_BLOB = "65860effc9f00df74c1dd0dcea1e2c1605f54cfa"
+JDK_8364182_SIMDSORT_SYMBOL = (
+    b'template(java_util_DualPivotQuicksort,              '
+    b'"java/util/DualPivotQuicksort")'
+)
+
+
+def _verified_jdk8364182_vmsymbols_successor(
+    row: dict[str, str], data: bytes
+) -> bool:
+    """Admit only exact 21u vmSymbols or the one-line SIMD descendant."""
+    if (
+        row["target_path"] != JDK_8364182_VMSYMBOLS_PATH
+        or row["target_sha256"] != JDK_8364182_HISTORICAL_SHA256
+        or row.get("superseded_target_sha256") !=
+            "4f752ab79abf854d144e53118a2cc57a4b3cc2432140e9297079cca86dd2abab"
+    ):
+        return False
+    required = (
+        b"template(serializeSecurityPropertiesToByteArray_name,",
+        b"template(java_lang_M3StringImmediate,",
+        b"template(java_lang_M3String,",
+        b"template(java_util_Arrays,",
+    )
+    if any(data.count(marker) != 1 for marker in required):
+        return False
+    sha = hashlib.sha256(data).hexdigest()
+    blob = git_blob_sha1(data)
+    if sha == JDK_8364182_21U_SHA256:
+        return blob == JDK_8364182_21U_GIT_BLOB
+    if sha != JDK_8364182_SIMDSORT_SHA256:
+        return False
+    if blob != JDK_8364182_SIMDSORT_GIT_BLOB:
+        return False
+    matches = [
+        line for line in data.splitlines(keepends=True)
+        if JDK_8364182_SIMDSORT_SYMBOL in line
+    ]
+    if len(matches) != 1:
+        return False
+    previous = data.replace(matches[0], b"", 1)
+    return (
+        hashlib.sha256(previous).hexdigest() == JDK_8364182_21U_SHA256
+        and git_blob_sha1(previous) == JDK_8364182_21U_GIT_BLOB
+    )
+
+
 
 def verify_security_properties_8364182_backport(root: Path) -> None:
     rows = read_tsv(root / "m3/backports/recipes/jdk-8364182/adaptation.tsv")
@@ -230,10 +290,13 @@ def verify_security_properties_8364182_backport(root: Path) -> None:
             raise AssertionError(
                 f"missing JDK-8364182 target: {row['target_path']}"
             )
-        actual = hashlib.sha256(path.read_bytes()).hexdigest()
+        source_data = path.read_bytes()
+        actual = hashlib.sha256(source_data).hexdigest()
         baseline = row["baseline_sha256"]
         superseded = row.get("superseded_target_sha256", "")
         if row["target_path"] == "src/hotspot/share/classfile/vmSymbols.hpp":
+            if row["target_sha256"] != JDK_8364182_HISTORICAL_SHA256:
+                raise AssertionError("JDK-8364182 historical vmSymbols pin drift")
             expected_superseded = (
                 "4f752ab79abf854d144e53118a2cc57a4b3cc2432140e9297079cca86dd2abab"
             )
@@ -258,6 +321,8 @@ def verify_security_properties_8364182_backport(root: Path) -> None:
         allowed_targets = {row["target_sha256"]}
         if superseded:
             allowed_targets.add(superseded)
+        if _verified_jdk8364182_vmsymbols_successor(row, source_data):
+            allowed_targets.add(actual)
         if actual not in allowed_targets:
             raise AssertionError(
                 f"JDK-8364182 target drift for {row['target_path']}: "
