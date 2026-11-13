@@ -55,4 +55,24 @@ jobs:
             --add-opens=jdk.m3.collections/jdk.m3.collections.apache=ALL-UNNAMED \
             -cp "$build/test-classes" ArrayStackContract | tee "$build/stack.txt"
           grep -Fqx 'PASS checks=484245 steps=60000 array-lanes=Object[]' "$build/stack.txt"
-          echo 'THREE_M3JDK_ARRAY_OWNERS PASS (scoped module only; installed image still HOLD)'
+          echo 'THREE_M3JDK_ARRAY_OWNERS PASS (scoped module; full source-built JDK still HOLD)'
+      - name: Verify JMOD, jlink image and externally executed JDK module contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          build="$RUNNER_TEMP/m3jdk-collection-array-owners"
+          jmod create --class-path "$build/classes" "$build/jdk.m3.collections.jmod"
+          jmod describe "$build/jdk.m3.collections.jmod" | tee "$build/jmod-describe.txt"
+          grep -Eq 'exports +jdk\.m3\.collections\.apache' "$build/jmod-describe.txt"
+          jlink --module-path "$JAVA_HOME/jmods:$build" --add-modules jdk.m3.collections \
+            --output "$build/image" --strip-debug --no-header-files --no-man-pages
+          "$build/image/bin/java" --list-modules | grep -F 'jdk.m3.collections@'
+          for test in ArrayLinkedListContract ArrayTreeListContract ArrayStackContract; do
+            "$build/image/bin/java" --add-modules jdk.m3.collections \
+              --add-opens=jdk.m3.collections/jdk.m3.collections.apache=ALL-UNNAMED \
+              -cp "$build/test-classes" "$test" | tee "$build/$test.image.txt"
+          done
+          grep -Fqx 'PASS checks=569965 steps=60000 array-lanes=Object[],int[],int[],long[]' "$build/ArrayLinkedListContract.image.txt"
+          grep -Fqx 'PASS checks=569967 steps=60000 array-lanes=Object[],int[]x4,long[]' "$build/ArrayTreeListContract.image.txt"
+          grep -Fqx 'PASS checks=484245 steps=60000 array-lanes=Object[]' "$build/ArrayStackContract.image.txt"
+          echo 'M3_JMOD_AND_JLINK_IMAGE_THREE_ARRAY_OWNERS PASS (local linked JDK21 image; target source-built JDK still HOLD)'
