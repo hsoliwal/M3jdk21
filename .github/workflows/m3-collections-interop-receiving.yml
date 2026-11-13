@@ -25,6 +25,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           sparse-checkout: |
             m3/arrays
+            m3/evidence/arrays
             src/jdk.m3.collections/share
             make/m3/arrays
             test/jdk/jdk/m3/arrays
@@ -124,12 +125,23 @@ jobs:
           find m3/arrays/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/arrays -name '*.java' | sort > proof/array-sources.txt
           sha256sum $(cat proof/array-sources.txt) > proof/array-source-hashes.txt
           javac --release 21 -Xlint:all,-module -Werror -d proof/array-classes @proof/array-sources.txt 2>&1 | tee proof/array-compile.log
-          cp m3/arrays/{LICENSE,NOTICE,provenance.json} proof/array-classes/META-INF/
+          # Approved layout: legal notice and historical donor provenance have current owners.
+          test "$(git hash-object src/jdk.m3.collections/share/legal/m3arrays.md)" = f7002b4c480e10e8af6a0e279cc9582db7de7b9e
+          test "$(git hash-object m3/evidence/arrays/provenance.json)" = 619a6822a3a62ff2a652e3b6e011081359132115
+          cp m3/arrays/LICENSE proof/array-classes/META-INF/LICENSE
+          cp src/jdk.m3.collections/share/legal/m3arrays.md proof/array-classes/META-INF/NOTICE
+          cp m3/evidence/arrays/provenance.json proof/array-classes/META-INF/provenance.json
+          cmp m3/arrays/LICENSE proof/array-classes/META-INF/LICENSE
+          cmp src/jdk.m3.collections/share/legal/m3arrays.md proof/array-classes/META-INF/NOTICE
+          cmp m3/evidence/arrays/provenance.json proof/array-classes/META-INF/provenance.json
           jar --create --file proof/m3-arrays.jar -C proof/array-classes .
           find m3/collections/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/collections src/jdk.m3.collections/share/classes/jdk/internal/m3/collections -name '*.java' | sort > proof/core-sources.txt
           sha256sum $(cat proof/core-sources.txt) > proof/core-source-hashes.txt
           javac --release 21 -Xlint:all,-module -Werror --module-path proof/m3-arrays.jar -d proof/core-classes @proof/core-sources.txt 2>&1 | tee proof/core-compile.log
-          cp m3/collections/{LICENSE,NOTICE,provenance.json,name-mapping.json} proof/core-classes/META-INF/
+          cp m3/collections/{LICENSE,provenance.json,name-mapping.json} proof/core-classes/META-INF/
+          test "$(git hash-object src/jdk.m3.collections/share/legal/m3collections.md)" = c35cf82657474282058afc7ffbcb98c46fd865e3
+          cp src/jdk.m3.collections/share/legal/m3collections.md proof/core-classes/META-INF/NOTICE
+          cmp src/jdk.m3.collections/share/legal/m3collections.md proof/core-classes/META-INF/NOTICE
           jar --create --file proof/m3-collections.jar -C proof/core-classes .
           jdeps --print-module-deps --module-path proof/m3-arrays.jar proof/m3-collections.jar | tee proof/core-module-deps.txt
           test "$(cat proof/core-module-deps.txt)" = jdk.m3.arrays,java.base
