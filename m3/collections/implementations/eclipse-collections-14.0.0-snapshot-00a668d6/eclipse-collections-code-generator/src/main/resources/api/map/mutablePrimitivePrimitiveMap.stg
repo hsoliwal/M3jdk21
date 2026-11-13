@@ -4,7 +4,7 @@ skipBooleanKeys() ::= "true"
 
 hasTwoPrimitives() ::= "true"
 
-targetPath() ::= "com/m3/collections/eclipse/api/map/primitive"
+targetPath() ::= "jdk/m3/collections/eclipse/api/map/primitive"
 
 fileName(primitive1, primitive2, sameTwoPrimitives) ::= "Mutable<primitive1.name><primitive2.name>Map"
 
@@ -15,16 +15,16 @@ class(primitive1, primitive2, sameTwoPrimitives) ::= <<
 body(type1, type2, name1, name2) ::= <<
 <copyrightAndOthers()>
 
-package com.m3.collections.eclipse.api.map.primitive;
+package jdk.m3.collections.eclipse.api.map.primitive;
 
-import com.m3.collections.eclipse.api.<name1>Iterable;
-<if(!sameTwoPrimitives)>import com.m3.collections.eclipse.api.block.function.primitive.<name1>To<name2>Function;<endif>
-import com.m3.collections.eclipse.api.block.function.primitive.<name2>Function;
-import com.m3.collections.eclipse.api.block.function.primitive.<name2>Function0;
-import com.m3.collections.eclipse.api.block.function.primitive.<name2>To<name2>Function;
-import com.m3.collections.eclipse.api.block.function.primitive.<name1><name2>To<name2>Function;
-import com.m3.collections.eclipse.api.block.predicate.primitive.<name1><name2>Predicate;
-import com.m3.collections.eclipse.api.tuple.primitive.<name1><name2>Pair;
+import jdk.m3.collections.eclipse.api.<name1>Iterable;
+<if(!sameTwoPrimitives)>import jdk.m3.collections.eclipse.api.block.function.primitive.<name1>To<name2>Function;<endif>
+import jdk.m3.collections.eclipse.api.block.function.primitive.<name2>Function;
+import jdk.m3.collections.eclipse.api.block.function.primitive.<name2>Function0;
+import jdk.m3.collections.eclipse.api.block.function.primitive.<name2>To<name2>Function;
+import jdk.m3.collections.eclipse.api.block.function.primitive.<name1><name2>To<name2>Function;
+import jdk.m3.collections.eclipse.api.block.predicate.primitive.<name1><name2>Predicate;
+import jdk.m3.collections.eclipse.api.tuple.primitive.<name1><name2>Pair;
 
 /**
  * This file was automatically generated from template file mutablePrimitivePrimitiveMap.stg.

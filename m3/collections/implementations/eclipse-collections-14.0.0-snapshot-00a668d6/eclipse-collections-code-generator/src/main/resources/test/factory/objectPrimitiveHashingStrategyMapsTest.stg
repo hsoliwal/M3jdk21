@@ -6,7 +6,7 @@ skipBoolean() ::= "true"
 
 isTest() ::= "true"
 
-targetPath() ::= "com/m3/collections/eclipse/impl/factory/primitive"
+targetPath() ::= "jdk/m3/collections/eclipse/impl/factory/primitive"
 
 fileName(primitive) ::= "Object<primitive.name>HashingStrategyMapsTest"
 
@@ -17,16 +17,16 @@ class(primitive) ::= <<
 body(type, wrapperName, name) ::= <<
 <copyrightAndOthers()>
 
-package com.m3.collections.eclipse.impl.factory.primitive;
+package jdk.m3.collections.eclipse.impl.factory.primitive;
 
 import java.lang.reflect.Field;
 
-import com.m3.collections.eclipse.api.block.HashingStrategy;
-import com.m3.collections.eclipse.api.factory.map.primitive.MutableObject<name>HashingStrategyMapFactory;
-import com.m3.collections.eclipse.api.map.primitive.MutableObject<name>Map;
-import com.m3.collections.eclipse.impl.block.factory.HashingStrategies;
-import com.m3.collections.eclipse.impl.map.mutable.primitive.Object<name>HashMap;
-import com.m3.collections.eclipse.impl.test.Verify;
+import jdk.m3.collections.eclipse.api.block.HashingStrategy;
+import jdk.m3.collections.eclipse.api.factory.map.primitive.MutableObject<name>HashingStrategyMapFactory;
+import jdk.m3.collections.eclipse.api.map.primitive.MutableObject<name>Map;
+import jdk.m3.collections.eclipse.impl.block.factory.HashingStrategies;
+import jdk.m3.collections.eclipse.impl.map.mutable.primitive.Object<name>HashMap;
+import jdk.m3.collections.eclipse.impl.test.Verify;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -56,7 +56,7 @@ public class Object<name>HashingStrategyMapsTest
     public void mutables()
     {
         this.assertMutableHashingStrategyMapFactory(Object<name>HashingStrategyMaps.mutable);
-        this.assertMutableHashingStrategyMapFactory(com.m3.collections.eclipse.api.factory.primitive.Object<name>HashingStrategyMaps.mutable);
+        this.assertMutableHashingStrategyMapFactory(jdk.m3.collections.eclipse.api.factory.primitive.Object<name>HashingStrategyMaps.mutable);
     }
 
     private void assertMutableHashingStrategyMapFactory(MutableObject<name>HashingStrategyMapFactory mapFactory)

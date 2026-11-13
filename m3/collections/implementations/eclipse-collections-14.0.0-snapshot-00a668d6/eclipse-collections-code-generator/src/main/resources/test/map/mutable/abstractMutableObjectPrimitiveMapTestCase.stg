@@ -7,7 +7,7 @@ skipBoolean() ::= "true"
 
 isTest() ::= "true"
 
-targetPath() ::= "com/m3/collections/eclipse/impl/map/mutable/primitive"
+targetPath() ::= "jdk/m3/collections/eclipse/impl/map/mutable/primitive"
 
 fileName(primitive) ::= "AbstractMutableObject<primitive.name>MapTestCase"
 
@@ -18,20 +18,20 @@ class(primitive) ::= <<
 body(type, name, wrapperName) ::= <<
 <copyrightAndOthers()>
 
-package com.m3.collections.eclipse.impl.map.mutable.primitive;
+package jdk.m3.collections.eclipse.impl.map.mutable.primitive;
 
-import com.m3.collections.eclipse.api.block.function.primitive.<name>Function;
-import com.m3.collections.eclipse.api.block.function.primitive.<name>Function0;
-import com.m3.collections.eclipse.api.block.function.primitive.<name>To<name>Function;
-import com.m3.collections.eclipse.api.list.MutableList;
-import com.m3.collections.eclipse.api.map.primitive.MutableObject<name>Map;
-import com.m3.collections.eclipse.api.tuple.primitive.Object<name>Pair;
-import com.m3.collections.eclipse.impl.factory.Iterables;
-import com.m3.collections.eclipse.impl.list.mutable.FastList;
-import com.m3.collections.eclipse.impl.list.primitive.IntInterval;
-import com.m3.collections.eclipse.impl.map.primitive.AbstractObject<name>MapTestCase;
-import com.m3.collections.eclipse.impl.test.Verify;
-import com.m3.collections.eclipse.impl.tuple.primitive.PrimitiveTuples;
+import jdk.m3.collections.eclipse.api.block.function.primitive.<name>Function;
+import jdk.m3.collections.eclipse.api.block.function.primitive.<name>Function0;
+import jdk.m3.collections.eclipse.api.block.function.primitive.<name>To<name>Function;
+import jdk.m3.collections.eclipse.api.list.MutableList;
+import jdk.m3.collections.eclipse.api.map.primitive.MutableObject<name>Map;
+import jdk.m3.collections.eclipse.api.tuple.primitive.Object<name>Pair;
+import jdk.m3.collections.eclipse.impl.factory.Iterables;
+import jdk.m3.collections.eclipse.impl.list.mutable.FastList;
+import jdk.m3.collections.eclipse.impl.list.primitive.IntInterval;
+import jdk.m3.collections.eclipse.impl.map.primitive.AbstractObject<name>MapTestCase;
+import jdk.m3.collections.eclipse.impl.test.Verify;
+import jdk.m3.collections.eclipse.impl.tuple.primitive.PrimitiveTuples;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
