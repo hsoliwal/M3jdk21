@@ -53,6 +53,9 @@ public final class SharedLexiconImage {
         if (!MessageDigest.isEqual(expected, digestImage(data))) throw new IOException("image checksum mismatch");
         imageIdentity = HexFormat.of().formatHex(expected);
         offsets = new int[count]; lengths = new int[count]; recordDigests = new byte[count * 32];
+        // Reuse one engine only within this constructor's record batch.
+        MessageDigest recordDigest = null;
+        byte[] recordDigestBytes = null;
         // Snapshot metadata and record checksums before publishing this image owner.
         for (int i = 0; i < count; i++) {
             int entry = HEADER + i * directoryBytes;
@@ -64,7 +67,15 @@ public final class SharedLexiconImage {
                 throw new IOException("record Java hash mismatch");
             if (i > 0 && compareRecords(i - 1, i) >= 0)
                 throw new IOException("records must be UTF-16 sorted");
-            System.arraycopy(digest(recordBytes(i)), 0, recordDigests, i * 32, 32);
+            if (recordDigest == null) {
+                try { recordDigest = MessageDigest.getInstance("SHA-256"); }
+                catch (NoSuchAlgorithmException impossible) { throw new AssertionError(impossible); }
+                recordDigestBytes = new byte[32];
+            }
+            recordDigest.update(recordBytes(i));
+            try { recordDigest.digest(recordDigestBytes, 0, 32); }
+            catch (DigestException impossible) { throw new AssertionError(impossible); }
+            System.arraycopy(recordDigestBytes, 0, recordDigests, i * 32, 32);
         }
         // Detect changes during initial metadata/hash capture. Source files must be
         // immutable after publication; this is corruption detection, not OS sealing.

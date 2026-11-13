@@ -1,0 +1,51 @@
+{
+  "schema": "M3_IMAGE_DIGEST_REUSE_DECISION_V1",
+  "status": "INVENTORIED_BEFORE_CANDIDATE",
+  "owner": {
+    "repo": "hsoliwal/M3jdk21",
+    "revision": "778cd3eac266974e7b5155e79838f74ee516b535",
+    "path": "m3/core/src/jdk/m3/text/SharedLexiconImage.java",
+    "blob": "570a22f733499729bdc0fe48813f755e52ebe963"
+  },
+  "category": "precompute/immutable-lexicon-admission/batched-SHA256",
+  "reuse": [
+    {
+      "owner": "Existing SharedLexiconImage",
+      "classification": "REUSE",
+      "mechanism": "Existing per-record recordDigests parallel byte lane, recordBytes view, range/hash/order validation, whole-image seals and no-SHA256 refusal. Keep public methods/fields/format/storage unchanged."
+    },
+    {
+      "repo": "openjdk/jdk",
+      "revision": "890adb6410dab4606a4f26a942aed02fb2f55387",
+      "paths": [
+        {
+          "path": "src/java.base/share/classes/java/security/MessageDigest.java",
+          "blob": "36c92df556e072d922e0e635964f71132bc1f0b3"
+        },
+        {
+          "path": "src/java.base/share/classes/java/security/MessageDigestSpi.java",
+          "blob": "ff37569876f7baf220b6e0a069bbf39b804ba5c9"
+        },
+        {
+          "path": "src/java.base/share/classes/sun/security/provider/DigestBase.java",
+          "blob": "dbe59396ac0b62527f544f18bdb60545e4f3ad38"
+        }
+      ],
+      "license": "GPL-2.0-with-classpath-exception",
+      "classification": "DIRECT_USE_PLATFORM_API",
+      "mechanism": "MessageDigest digest(output,offset,len) permits direct output into existing byte table and resets completed state. Reuse one constructor-local instance for record batches; default SPI fallback remains valid but can allocate. SUN implementation writes caller output directly. No GPL implementation copied."
+    }
+  ],
+  "typedAtom": {
+    "inputs": "Previously sealed version1/2 M3LEX001 mapped byte view and bounded directory records",
+    "output": "Identical per-record SHA256 table and all admission outcomes for correct SHA256 providers",
+    "effects": "Constructor-local computation only. No changed lookup storage/API/lifetime, global/static/thread-local cache, final field or native owner.",
+    "proof": "Maven/OpenRewrite exact-source replay, original contract image/seal oracle retained, actual constructor run against direct ByteBuffer subtype compatible with MappedByteBuffer; exhaustive UTF16/record/ordering/range/hash/corruption/provider cases, concurrent independent construction, source/API/non-constructor bytecode fingerprints and measured startup allocation/timing. No filesystem/map syscall/full suite claim without an actual run."
+  },
+  "generationCalls": 0,
+  "agentFindings": {
+    "headerSurface": "Potential metadata wrapper allocation source sites; no runtime proof. Existing R232 Optional experiment not reopened.",
+    "precomputeConsumers": "No proven avoidable full-array clone caller in 8-read bounded inspected surface; preserve defensive-copy tests."
+  },
+  "selection": "QUALIFY_ONLY_NO_SPEED_CLAIM"
+}
