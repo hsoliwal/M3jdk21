@@ -130,7 +130,7 @@ def _recipe_evidence(root: Path, jep: int) -> tuple[str, tuple[str, ...], dict[s
         / "src"
         / "main"
         / "java"
-        / "com"
+        / "jdk"
         / "m3"
         / "rewrite"
         / "backport"
