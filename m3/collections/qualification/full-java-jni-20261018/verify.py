@@ -119,9 +119,15 @@ LIBRARIES = {'m3_disjoint_index': {'sources': ['collections/m3_disjoint_index.c'
                          'owners': ['jdk.internal.m3.collections.packed.PackedIntNative'],
                          'requires': None}}
 
+_completed_commands = []
+
+
 def run(args):
     print('+ ' + ' '.join(map(str, args)), flush=True)
-    subprocess.run(list(map(str, args)), cwd=ROOT, check=True)
+    command = list(map(str, args))
+    completed = subprocess.run(command, cwd=ROOT, check=True)
+    _completed_commands.append({'argv': list(command), 'cwd': str(ROOT),
+                                'returncode': completed.returncode})
 
 def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -150,6 +156,7 @@ def reports(mode):
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / 'PROOF.json').unlink(missing_ok=True)  # Never leave a prior PASS after a failed rerun.
+    _completed_commands.clear()
     for name in ('headers', 'classes', 'fixture-classes', 'native', 'missing'):
         path = OUT / name
         if path.exists(): shutil.rmtree(path)
@@ -262,6 +269,7 @@ def main():
     common = ['-Xmx768m', '-XX:ActiveProcessorCount=2', '-Xcheck:jni', array_native_option,
               '-Dm3.collections.signal.native=true']
     results = {}
+    configured_jvm_profiles = {}
     for mode, required in [('java', 'false'), ('native', 'true')]:
         library = OUT / ('native' if mode == 'native' else 'missing')
         vm = common + ['-Djava.library.path=' + str(library),
@@ -272,7 +280,10 @@ def main():
             vm += native_properties
         old_reports = MODULE / 'target/surefire-reports'
         if old_reports.exists(): shutil.rmtree(old_reports)
+        command_index = len(_completed_commands)
         maven(MODULE / 'pom.xml', '-Dtest=*', '-DargLine=' + ' '.join(vm), '-DfailIfNoTests=true', 'verify')
+        configured_jvm_profiles[mode] = {
+            'vm_args': list(vm), 'completed_command_index': command_index}
         results[mode] = reports(mode)
     jar = MODULE / 'target/m3-collections-0.1.0-SNAPSHOT.jar'
     with zipfile.ZipFile(jar) as archive:
@@ -348,6 +359,15 @@ def main():
              'jar_sha256': sha(jar), 'jar_classes': len(expected_classes), 'runtime_modules': runtime_modules,
              'java_sources': len(sources), 'test_sources': len(tests), 'junit': results,
              'source_dependencies': dependency_proof, 'native_libraries': sorted(LIBRARIES),
+             'native_library_artifacts': {
+                 name: {'path': (OUT / 'native' / ('lib' + name + '.so')).relative_to(ROOT).as_posix(),
+                        'sha256': sha(OUT / 'native' / ('lib' + name + '.so'))}
+                 for name in sorted(LIBRARIES)},
+             'arrays_native_artifact': {
+                 'path': array_native.relative_to(ROOT).as_posix(), 'sha256': sha(array_native)},
+             'completed_commands': list(_completed_commands),
+             'configured_jvm_profiles': configured_jvm_profiles,
+             'jvm_profile_evidence': 'configured -DargLine vectors bound to successful Maven argv; Surefire child argv not observed',
              'explicit_native_contracts': [name.rsplit('.', 1)[-1] for name, _ in contracts],
              'explicit_native_contract_binaries': [name for name, _ in contracts],
              'native': 'generated headers; C17 strict; fatal UBSan; actual -Xcheck:jni',
