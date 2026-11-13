@@ -464,4 +464,4 @@ src/test/java/com/m3/swing/web/model/M3SegmentsChecks.java	checks/SEGMENTS.check
 src/test/java/com/m3/swing/web/model/M3SegmentsModesTest.java	swing/ModesTest.tmpl	e91024b27f2aee23bdf87305a0f69086e3d827f910d13d1211f07ddff4dcf2c4
 src/test/java/com/m3/swing/web/model/M3TokenChecks.java	checks/TOKEN.checks.tmpl	c3eb018109a8a4dc9a88c0f8a39430248a308ea76b1f080b7b612e4cdf9af2d5
 src/test/java/com/m3/swing/web/model/M3TokenModesTest.java	swing/ModesTest.tmpl	eaba8375daee22969c6494c95fba684b8c6db78ff837f0a5d3cc439897af4422
-src/test/java/jdk/m3/swing/web/model/M3WebChecks.java	core/M3WebChecks.java.tmpl	2513cc95b19daad0883a14d727c138a95d0abca28b74a8f686f6b76dc80871f1
+src/test/java/jdk/m3/swing/web/model/M3WebChecks.java	core/M3WebChecks.java.tmpl	47c58002bd3bb75e8eac6d2cb950a54bd1bb760aa17c57ee9467678b3c868ecd

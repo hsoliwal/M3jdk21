@@ -1,6 +1,6 @@
 {
   "schema": "m3.selected-producer-qualification/v1",
-  "status": "QUALIFICATION_PASS_BEHAVIOR_PENDING",
+  "status": "LOCAL_PUBLIC_SUITE_PASS_WIDE_ORACLE_FAIL",
   "receiverHead": "778cd3eac266974e7b5155e79838f74ee516b535",
   "receivingModuleTree": "81b5d22c107850615d0a2fe66a1b2a2acb30a3df",
   "historicalEvidence": {
@@ -13,11 +13,12 @@
     "contextIdentity": "PASS; fifteen namespace-derived dependencies equal current receiving Git blobs; output-free CPU check",
     "newProducerController": "PASS; actual offline Maven qualify-001, native exit0 and all owned handles closed",
     "newNamespaceCompiler": "PASS; before and after seventeen-source closures --release21 -Xlint:all -Werror; protected API identical",
-    "callerJUnit": "NOT_RUN; commit-reserve preflight refused JUnit before owned Java launch; strict focused test compilation passed separately",
-    "publicJUnit": "NOT_RUN; commit-reserve preflight refused JUnit before owned Java launch; strict focused test compilation passed separately",
-    "approved18Oracle": "NOT_RUN post-repair; exact unchanged fixture retained; oracle compiler preflight held for commit reserve",
+    "callerJUnit": "PASS; actual seven existing M3CollectionModesTest methods, no skipped/aborted tests; Console1.10.1",
+    "publicJUnit": "PASS; full existing 375-test public suite, all375 successful using generated nonempty-item test-helper contract; Console1.10.1/repository launcher; 256MiB heap",
+    "approved18Oracle": "FAIL; unchanged18 rerun after helper correction:12passed/6failed/0skipped/0aborted, same3damage assertions and3missing takeWide errors",
     "generatedLedgerRecipe": "PASS; actual named recipe, exact 66135-byte afterimage, two rows, four refusals, wrong-path exclusion and zero replay",
-    "focusedCallerTestCompilation": "PASS; three unchanged test/helper sources compiled strictly against the actual generated after-classes; three classes, zero diagnostics; not test execution"
+    "focusedCallerTestCompilation": "PASS; three unchanged test/helper sources compiled strictly against the actual generated after-classes; three classes, zero diagnostics; not test execution",
+    "originalCoreJUnit": "PASS; actual four unchanged current M3ViewportCoreApiTest methods; no skipped/aborted tests; Console1.10.1"
   },
   "approved18": {
     "sha256": "ba22b2bf42b059ab93d906383d52c16b96be6f2cdbd3e49bade4ed3d473e8522",
@@ -31,19 +32,19 @@
     },
     "scope": "Local baseline against current receiving source; not a post-repair result"
   },
-  "fullDomainAccumulator": "HOLD; exact wide union and takeWide contract unimplemented in this caller repair",
+  "fullDomainAccumulator": "FAIL; exact-wide union/retention and takeWide(long[]) remain unimplemented",
   "productionPromotion": false,
   "generatedLedger": {
     "target": "m3/ports/swing-viewport/webwidgets/GENERATED.tsv",
     "beforeSHA256": "8cb45f082b5c18347549b486d84ca311cdc6aef5476e6446677a1efaf3b6f205",
-    "afterSHA256": "bf0f4a8ae085f115c4691aac6f4d95041157040c4ecf75bc1e33cffbe73b4e42",
+    "afterSHA256": "1085e4679fb7624127d08d27bf62a07c5daeff7c0482e47c9b1cbd4072406a8e",
     "bytes": 66135,
     "changedRows": 2,
     "sourceBindingsSeparate": true,
     "preserveOtherBytes": true,
     "recipe": "org.openrewrite.text.FindAndReplace@8.17.1",
-    "status": "QUALIFY_PASS; receiver apply-mode test HOLD",
-    "publication": "Exact named-recipe candidate from successful qualification; apply-mode mutation test remains held"
+    "status": "QUALIFY_PASS after current helper enrollment; receiver apply-mode mutation test remains unproved",
+    "publication": "Exact actual named-recipe candidate regenerated at enrolled-qualify-001"
   },
   "currentQualification": {
     "mode": "qualify",
@@ -61,6 +62,30 @@
       "classes": 3,
       "diagnostics": 0,
       "testExecutions": "NOT_RUN"
+    },
+    "executedFocusedTests": {
+      "caller": {
+        "found": 7,
+        "successful": 7,
+        "failed": 0,
+        "receiptSHA256": "0b1b5422d67486a687f214c9d2f1d288bd58725bd1cec6adc1cf727de9f90588"
+      },
+      "originalCore": {
+        "found": 4,
+        "successful": 4,
+        "failed": 0,
+        "receiptSHA256": "11d1958280c8b1f3147d5c6c4f485e8c4825dc845761ddcd877064b1cae7ee56"
+      },
+      "runner": "Existing offline Console1.10.1 with unchanged application/test sources; separate from hosted vendored1.10.2"
+    },
+    "enrolledRecipe": {
+      "status": "PASS",
+      "receipt": "evidence/runtime-20261113/reports/enrolled-qualify-001.json",
+      "receiptSHA256": "4c53c214bb9e825fe4501a6e27fafa6a57975b74bc7d8c3000ac1d5d13575140",
+      "strictCompiler": "17-source before/after closures",
+      "apiEqual": true,
+      "replay": true,
+      "ledgerRefusals": 4
     }
   },
   "resourceStops": {
@@ -92,5 +117,85 @@
       "allOwnedNativeHandlesClosed": true,
       "continuationPrecondition": "Ten healthy native samples after physical memory recovery; prior stopped jobs were not restarted"
     }
+  },
+  "postRepairOracle": {
+    "fixtureSHA256": "ba22b2bf42b059ab93d906383d52c16b96be6f2cdbd3e49bade4ed3d473e8522",
+    "passed": 12,
+    "failed": 6,
+    "assertionFailures": 3,
+    "missingMethodErrors": 3,
+    "skipped": 0,
+    "aborted": 0,
+    "exitCode": 1,
+    "receiptSHA256": "d26dcd461ca8ab2288aed479155fcaf17a355a53ec8eef216e62834ccf7ef109",
+    "failures": [
+      "damageNeverLosesAcceptedRepresentableUnion",
+      "damageNeverSilentlyDropsAcceptedEndpointRectangles",
+      "wideDamageAcceptsEveryPositiveIntSingleton",
+      "wideDamageDrainPreservesNullPartialFailureAndResetOrder",
+      "wideDamageRetainsOversizedUnionAfterLegacyProjectionFailure",
+      "wideDamagePermutationAndWrappedZeroAreaRemainNonempty"
+    ],
+    "afterHelperCorrection": {
+      "passed": 12,
+      "failed": 6,
+      "skipped": 0,
+      "aborted": 0,
+      "exitCode": 1,
+      "receiptSHA256": "b1aee46360673cdf158fc2de61ef9e2fbf1e376f0893883b6ee3b5f0b1561846"
+    }
+  },
+  "fullModuleQualification": {
+    "sourceHead": "41dbfee857379dc7eaee961d37332dc89b83f37d",
+    "moduleTree": "9b6b06dda8f30dcfe93a3a6b090645fdbe7481d1",
+    "sourceManifestSHA256": "bb88e30d2bf58ea0cb1fdf5ea19f79393f9e0f56985b56cd95e0cabfd18e7b00",
+    "productionSources": 307,
+    "testSources": 151,
+    "totalSourceBytes": 1251261,
+    "sourceCustody": "PASS; every file hash/Git blob and size checked",
+    "compileAndRun": "PASS for307 production/151 test source compilation and375 public tests after one generated test-helper precondition correction; separate unchanged18 oracle remains FAIL",
+    "testsExpectedFromSourceInventory": 375,
+    "expectedCountLimit": "Source inventory only; runtime discovery count remains unknown",
+    "productionClasses": 357,
+    "testClasses": 192,
+    "compilerDiagnostics": 0,
+    "fullSuiteAttempt": {
+      "status": "RESOURCE_STOP",
+      "exitCode": 125,
+      "receipt": "evidence/runtime-20261113/full-module/reports/full-suite-001.json",
+      "physicalAvailableAtStop": 1481089024,
+      "requiredPhysicalReserve": 1610612736,
+      "allOwnedNativeHandlesClosed": true,
+      "runtimeCounts": "UNKNOWN; log empty, no summary",
+      "unchangedSourceManifestSHA256": "bb88e30d2bf58ea0cb1fdf5ea19f79393f9e0f56985b56cd95e0cabfd18e7b00"
+    },
+    "afterComposition": {
+      "baselineSourceManifestSHA256": "bb88e30d2bf58ea0cb1fdf5ea19f79393f9e0f56985b56cd95e0cabfd18e7b00",
+      "onlyOverride": "M3WebChecks generated test helper SHA25647c58002bd3bb75e8eac6d2cb950a54bd1bb760aa17c57ee9467678b3c868ecd",
+      "productionClassesUnchanged": true,
+      "allOtherTestClassesUnchanged": true,
+      "recipe": "caller-item-damage-contract-20261113",
+      "result": {
+        "found": 375,
+        "successful": 375,
+        "failed": 0,
+        "exitCode": 0,
+        "receiptSHA256": "d0dc8022cb18474cc455ceed94b6096922b4d0b231fd166d66eb811d8bbd60b9"
+      },
+      "beforeResult": {
+        "found": 375,
+        "successful": 374,
+        "failed": 1,
+        "receiptSHA256": "6216f42602ba44a940d58981096eb9fed27723974c49a27d4a2ad69f5d441c79"
+      },
+      "scope": "Headless public suite only; separate oracle/native/JNI/platform/performance gates remain"
+    }
+  },
+  "hostedRun": {
+    "id": 43400895945,
+    "status": "QUEUED on authoritative current-run read after the superseded queue holder was cancelled",
+    "head": "41dbfee857379dc7eaee961d37332dc89b83f37d",
+    "supersededRun": 43399469014,
+    "supersededResult": "CANCELLED after exact old head/path/branch and both zero-step/no-runner jobs verified; no current-head run restarted"
   }
 }

@@ -1,0 +1,13 @@
+scope	generated-metadata-only
+qualifiedFileChanges	1
+changedRows	2
+replayChanges	0
+receiverFileChanges	0
+receiverRowWrites	0
+preflightRefusals	4
+wrongFilePatternChanges	0
+ledgerBeforeSha256	8cb45f082b5c18347549b486d84ca311cdc6aef5476e6446677a1efaf3b6f205
+ledgerAfterSha256	1085e4679fb7624127d08d27bf62a07c5daeff7c0482e47c9b1cbd4072406a8e
+receiverSha256	8cb45f082b5c18347549b486d84ca311cdc6aef5476e6446677a1efaf3b6f205
+sourceBindingsUnchanged	true
+productionPromotion	false

@@ -1,0 +1,17 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.CallerItemDamageContract20261113
+displayName: Require a nonempty item in the visible-damage test
+description: Repair only the test precondition and its generated ledger row; retain positive-item assertions.
+recipeList:
+  - org.openrewrite.text.FindAndReplace:
+      find: "if (m.count() == 0 || m.itemRect(0, 2) == 0) {"
+      replace: "if (m.count() == 0 || m.itemRect(0, 2) <= 0 || m.itemRect(0, 3) <= 0) {"
+      regex: false
+      caseSensitive: true
+      filePattern: m3/ports/swing-viewport/webwidgets/gen/templates/core/M3WebChecks.java.tmpl
+  - org.openrewrite.text.FindAndReplace:
+      find: "src/test/java/jdk/m3/swing/web/model/M3WebChecks.java\tcore/M3WebChecks.java.tmpl\t2513cc95b19daad0883a14d727c138a95d0abca28b74a8f686f6b76dc80871f1\n"
+      replace: "src/test/java/jdk/m3/swing/web/model/M3WebChecks.java\tcore/M3WebChecks.java.tmpl\t47c58002bd3bb75e8eac6d2cb950a54bd1bb760aa17c57ee9467678b3c868ecd\n"
+      regex: false
+      caseSensitive: true
+      filePattern: m3/ports/swing-viewport/webwidgets/GENERATED.tsv

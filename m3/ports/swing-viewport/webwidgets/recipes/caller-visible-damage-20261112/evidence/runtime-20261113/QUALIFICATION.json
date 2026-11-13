@@ -55,7 +55,7 @@
     "selectedProducer": "PASS",
     "junit": "NOT_RUN"
   },
-  "applicationBehavior": "NOT_RUN; no test suppression",
+  "applicationBehavior": "Focused caller7 and originalCore4 PASS; unchanged approved18 FAIL12/6; full suite/native/JNI/platform/performance unproved",
   "fullGoal": "ACTIVE/INCOMPLETE",
   "productionPromotion": false,
   "additionalSourceCompilation": {
@@ -87,5 +87,6 @@
       "thread_handle_closed": true
     }
   },
-  "junitPreflight": "TEST_PREFLIGHT_HOLD.json; no tests executed"
+  "junitPreflight": "TEST_PREFLIGHT_HOLD.json; no tests executed",
+  "postRepairBehaviorReport": "FOCUSED_BEHAVIOR.json"
 }
