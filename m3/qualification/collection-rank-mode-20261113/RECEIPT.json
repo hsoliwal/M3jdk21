@@ -1,0 +1,53 @@
+{
+  "schema": "m3.receiver-postimage-reference/v1",
+  "status": "DRAFT_UNADMITTED",
+  "repository": "hsoliwal/M3jdk21",
+  "parent": "2aa0a0308b69133d57eba017e1f6f538214c726b",
+  "canonical": {
+    "repository": "hsoliwal/com.synexia",
+    "PR": 17234,
+    "head": "81671564e5e3ffd3db24ed923230de2762221b3a",
+    "path": "synexia-openrewrite-recipes/recipe-crates/collection-rank-mode-20261113",
+    "GAV": "com.synexia.verification:m3-collection-rank-mode-recipe:1.0.0",
+    "engine": "M3HashPinnedTextSnapshotRecipe",
+    "crateId": "m3-collection-rank-mode-20261113"
+  },
+  "postimages": [
+    {
+      "path": "m3/collections/qualification/full-java-jni-20261018/verify.py",
+      "beforeGitBlob": "7c2bfa47b925a93e48cb444d95364779c1ad0266",
+      "gitBlob": "418b7c6c9d0c82586f2b37532f3f6214aed58f14",
+      "sha256": "4e6bc97e6a22a1f3dd9d350e1cea9fd87f7db584d22e0156c34d6743a9dbc0ab"
+    }
+  ],
+  "proof": {
+    "recipeJUnit": 8,
+    "verifierChecks": 26,
+    "rankModeDiscriminators": 3,
+    "Maven": "PASS_REAL_OFFLINE_SDK3_9_14",
+    "artifactCacheCopies": 0,
+    "freshReplayUnchangedInputs": 17,
+    "WindowsRankNativeChecks": 237179,
+    "JavaFallbackRankChecks": 172254,
+    "XcheckJNI": true,
+    "nativeRequired": true,
+    "skipped": 0,
+    "jniWarnings": 0,
+    "productionInterfacesChanged": false
+  },
+  "scope": "One existing verifier owner; rank JNI opt-in follows owning mode and remains enabled for explicit native contracts. Existing full suite, native registry, fatal UBSan and failure/skip controls retained. No product storage/API/JNI/native implementation change.",
+  "holds": {
+    "fullLinuxCollections": "PREDECESSOR_RUN43249349029_FAILED_JAVA_MODE_3_OF2937",
+    "installedModule": "PREDECESSOR_SOURCE_DRIFT",
+    "productPhasePromotion": false,
+    "globalCatalogueAdmission": "OPEN",
+    "globalPerAtomRuntimePerformance": "OPEN",
+    "repositoryComplete": false
+  },
+  "phase": {
+    "STRING": "QUALIFICATION_REQUIRED",
+    "ARRAYS": "WAITING_FOR_PREDECESSOR",
+    "COLLECTIONS": "WAITING_FOR_PREDECESSOR"
+  },
+  "custody": "Only exact executed postimage plus passive reference. Recipes, fixtures, Maven qualification and improvement memory stay exclusively in Synexia."
+}
