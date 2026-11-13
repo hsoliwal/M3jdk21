@@ -872,12 +872,15 @@ public final class SharedLexiconCatalog {
      * Copyright (C) 2002-2026 Sebastiano Vigna.
      * Donor: vigna/fastutil@e70f36a137c349efa50f346818d16917a9f91986,
      * src/it/unimi/dsi/fastutil/HashCommon.java (mix/INT_PHI).
-     * Modulo retains the incumbent half-full domain without power-of-two padding.
+     * Range reduction adapted from Daniel Lemire's fastrange32, Apache-2.0.
+     * Donor: lemire/fastrange@a70431b21c943506f2bf790693502160d274b939,
+     * fastrange.h; (c) Daniel Lemire. The unsigned high product retains the
+     * incumbent half-full capacity without power-of-two padding.
      */
     private static int identitySlot(String sourceId, String recordId, int length) {
         int hash = 31 * Objects.hashCode(sourceId) + Objects.hashCode(recordId);
         int mixed = hash * 0x9E3779B9;
-        return Math.floorMod(mixed ^ (mixed >>> 16), length);
+        return (int) ((Integer.toUnsignedLong(mixed ^ (mixed >>> 16)) * length) >>> 32);
     }
 
 }
