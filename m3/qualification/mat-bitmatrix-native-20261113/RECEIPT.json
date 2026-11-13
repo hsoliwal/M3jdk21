@@ -1,0 +1,75 @@
+{
+  "schema": "m3.receiver-postimage-reference/v1",
+  "status": "DRAFT_UNADMITTED",
+  "repository": "hsoliwal/M3jdk21",
+  "parent": "7116e53c47380fd4a62564844d74a580d2f24a8b",
+  "canonical": {
+    "repository": "hsoliwal/com.synexia",
+    "PR": 17277,
+    "head": "a1df06b26461025e54cadf771f3b6d5ac78c138d",
+    "path": "synexia-openrewrite-recipes/recipe-crates/mat-bitmatrix-native-20261113",
+    "GAV": "com.synexia.verification:m3-mat-bitmatrix-native-recipe:1.0.0",
+    "engine": "M3HashPinnedTextSnapshotRecipe",
+    "crateId": "m3-mat-bitmatrix-native-20261113"
+  },
+  "proof": {
+    "recipeJUnit": 10,
+    "realOfflineMaven": "PASS",
+    "artifactCacheCopies": 0,
+    "freshReplayUnchangedInputs": 19,
+    "sourcePostimages": 3,
+    "nativeFreshVMMatrixCases": 8,
+    "positiveOracleScenarios": 1754,
+    "positiveOracleAssertions": 109369518,
+    "missingInvalidOldPackageWrongProviderWrongABI": "EXPECTED_REFUSALS",
+    "conflictingPrototype": "EXPECTED_COMPILER_REFUSAL",
+    "hostASTDerivedFlags": "PASS_REAL_ORACLE",
+    "CMakeHelperAndTarget": "PASS_COMPONENT_BUILD_AND_ORACLE",
+    "JNIWarnings": 0,
+    "XcheckJNI": true,
+    "JavaSourceChanges": 0,
+    "nativeProvidersAdded": 1,
+    "algorithmChanges": false,
+    "JavaInterfacesChanged": false
+  },
+  "scope": "Reuse the existing canonical matrix C provider; only relocate its two JNI symbol prefixes to the already declared receiver class, register the existing build helper, and require its provider only in native host mode.",
+  "holds": {
+    "fullLinuxFatalUBSan": "REQUIRES_NEW_EXACT_HEAD_RUN",
+    "wholeCollectionCMake": "NOT_RUN",
+    "installedModule": "M3EnumSet_SOURCE_CUSTODY_DRIFT",
+    "remainingJavaBackingAllocationPaths": "OPEN",
+    "globalCatalogueRights": "OPEN",
+    "globalPerAtomRuntimePerformance": "OPEN",
+    "productPhasePromotion": false,
+    "repositoryComplete": false
+  },
+  "phase": {
+    "STRING": "QUALIFICATION_REQUIRED",
+    "ARRAYS": "WAITING_FOR_PREDECESSOR",
+    "COLLECTIONS": "WAITING_FOR_PREDECESSOR"
+  },
+  "custody": "Only exact executed postimage plus passive reference. Recipes, fixtures, Maven qualification and improvement memory stay exclusively in Synexia.",
+  "postimages": [
+    {
+      "path": "m3/collections/qualification/full-java-jni-20261018/verify.py",
+      "beforeGitBlob": "418b7c6c9d0c82586f2b37532f3f6214aed58f14",
+      "gitBlob": "bf37acf895b143f74264dfd670943319a9314662",
+      "sha256": "480357190daec8b09bd4626b1d0c1a81ebdad6866cb967a788cae1b4c12f2e94",
+      "bytes": 22549
+    },
+    {
+      "path": "make/m3/collections/CMakeLists.txt",
+      "beforeGitBlob": "e261d49bc1aae8d8997bc85f2f5df7bad23819f1",
+      "gitBlob": "91ee7203d8a06846dae4b3e73ef2674251f03e0f",
+      "sha256": "c74c8251e6acf2dfaaa1dce22db91302268e7f3d7dc3a1890e6d22792e954b1e",
+      "bytes": 11002
+    },
+    {
+      "path": "src/jdk.m3.collections/share/native/libm3collections/collections/mat_bit_matrix.c",
+      "beforeGitBlob": "ABSENT",
+      "gitBlob": "061d0e11ff901bfb82f869bf7f51c52ac8dd04ed",
+      "sha256": "5ba10aa85aebdf12ee6d66941631b3c87060c6258a373ae1d768aaebf2461bd1",
+      "bytes": 6159
+    }
+  ]
+}
