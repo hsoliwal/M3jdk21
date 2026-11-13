@@ -1128,7 +1128,7 @@
     "linux_acceptance": "PENDING_LINUX",
     "phase_advance": false
   },
-  "source_set_successor_current": "current_receiver_source_successor_20261113",
+  "source_set_successor_current": "current_probe_source_successor_20261113",
   "tools4j_unix_refinement_20261019": {
     "schema": "M3_COLLECTION_EXACT_SOURCE_REFINEMENT_V1",
     "receiver_baseline": "677437be295b23f7ccf7409be287008944d0e8b0",
@@ -1287,5 +1287,29 @@
     "historical_baseline_commit": "5e8a20b93790238c158bdc2d162cf8814e87448d",
     "current_source_commit": "646a2a58e8cfa6beacc67e0cf6cdc3d267589ee7",
     "origin": "Exact current receiver source custody only; Java/native behavior and phase admission remain separate"
+  },
+  "current_probe_source_successor_20261113": {
+    "schema": "M3_COLLECTION_EXACT_SOURCE_REFINEMENT_V2",
+    "successor_receipt": "qualification/current-probe-source-successor-20261113.tsv",
+    "successor_receipt_sha256": "6fc5b1a0ca9e4226e3b1aa5634afb5e222ee11c3544594f16f6b90ff7cf39f7e",
+    "receipt_columns": [
+      "path",
+      "inherited_sha256",
+      "final_received_sha256_or_REMOVED"
+    ],
+    "inherited_composed_manifest_sha256": "d7c4cd1d8e1357ba3c91f84309891b7aed504980f5abdb142c16816952e276e4",
+    "inherited_rows": 1957,
+    "successor_rows": 2,
+    "refined_rows": 2,
+    "added_rows": 0,
+    "removed_rows": 0,
+    "resulting_rows": 1957,
+    "exact_java_source_membership": 1951,
+    "predecessor_successor": "current_receiver_source_successor_20261113",
+    "recipe": "synexia-openrewrite-recipes/recipe-crates/installed-probe-source-successor-20261113",
+    "phase_advance": false,
+    "historical_baseline_commit": "5e8a20b93790238c158bdc2d162cf8814e87448d",
+    "current_source_commit": "6e1c49dd7748c473de07969506ea90ff95fd66d2",
+    "origin": "Exact current probe identifier refinements; source recipe/component proof separate from installed Linux JNI admission"
   }
 }

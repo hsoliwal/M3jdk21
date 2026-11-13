@@ -77,7 +77,7 @@ def unique_json_object(pairs):
 
 def read_donation_packet(path=HERE / 'm3-donation.json'):
     """Read all nested objects without silently accepting duplicate JSON keys."""
-    return json.loads(path.read_text(), object_pairs_hook=unique_json_object)
+    return json.loads(path.read_text(encoding='utf-8'), object_pairs_hook=unique_json_object)
 
 
 
@@ -407,6 +407,22 @@ def include_current_receiver_source_successor(previous_rows, receipt=_CURRENT_RE
                                     _CURRENT_RECEIVER_RESULT_JAVA)
 
 
+_CURRENT_PROBE_RECEIPT = HERE / 'qualification/current-probe-source-successor-20261113.tsv'
+_CURRENT_PROBE_RECEIPT_SHA256 = '6fc5b1a0ca9e4226e3b1aa5634afb5e222ee11c3544594f16f6b90ff7cf39f7e'
+_CURRENT_PROBE_PREDECESSOR_SHA256 = 'd7c4cd1d8e1357ba3c91f84309891b7aed504980f5abdb142c16816952e276e4'
+_CURRENT_PROBE_TRANSITIONS = 2
+_CURRENT_PROBE_RESULT_ROWS = 1957
+_CURRENT_PROBE_RESULT_JAVA = 1951
+
+
+def include_current_probe_source_successor(previous_rows, receipt=_CURRENT_PROBE_RECEIPT):
+    """Admit the exact current receiver cohort over its immutable current-context ancestor."""
+    return admit_source_transitions(previous_rows, 'Current probe 20261113', receipt,
+                                    _CURRENT_PROBE_RECEIPT_SHA256, _CURRENT_PROBE_PREDECESSOR_SHA256,
+                                    _CURRENT_PROBE_TRANSITIONS, _CURRENT_PROBE_RESULT_ROWS,
+                                    _CURRENT_PROBE_RESULT_JAVA)
+
+
 # The transition-receipt successors by their m3-donation.json record: (receipt, receipt SHA-256,
 # predecessor SHA-256, transitions, resulting rows, exact Java source membership).
 SOURCE_TRANSITION_SEALS = {
@@ -420,6 +436,8 @@ SOURCE_TRANSITION_SEALS = {
                                            _CURRENT_CONTEXT_TRANSITIONS, _CURRENT_CONTEXT_RESULT_ROWS, _CURRENT_CONTEXT_RESULT_JAVA),
     'current_receiver_source_successor_20261113': (_CURRENT_RECEIVER_RECEIPT, _CURRENT_RECEIVER_RECEIPT_SHA256, _CURRENT_RECEIVER_PREDECESSOR_SHA256,
                                             _CURRENT_RECEIVER_TRANSITIONS, _CURRENT_RECEIVER_RESULT_ROWS, _CURRENT_RECEIVER_RESULT_JAVA),
+    'current_probe_source_successor_20261113': (_CURRENT_PROBE_RECEIPT, _CURRENT_PROBE_RECEIPT_SHA256, _CURRENT_PROBE_PREDECESSOR_SHA256,
+        _CURRENT_PROBE_TRANSITIONS, _CURRENT_PROBE_RESULT_ROWS, _CURRENT_PROBE_RESULT_JAVA),
 }
 
 
@@ -473,6 +491,7 @@ def main():
     rows = include_module_source_successor(rows)
     rows = include_current_context_source_successor(rows)
     rows = include_current_receiver_source_successor(rows)
+    rows = include_current_probe_source_successor(rows)
     if len({row[0] for row in rows}) != len(rows):
         raise SystemExit('Duplicate installed source path')
     for path, expected in rows:
