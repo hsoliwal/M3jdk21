@@ -56,6 +56,19 @@ jobs:
             -cp "$build/test-classes" ArrayStackContract | tee "$build/stack.txt"
           grep -Fqx 'PASS checks=484245 steps=60000 array-lanes=Object[]' "$build/stack.txt"
           echo 'THREE_M3JDK_ARRAY_OWNERS PASS (scoped module; full source-built JDK still HOLD)'
+      - name: Verify JDK-style Java source seals and strict Javadoc
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3NodeCachingLinkedList.java)" = "0639e6a9a0f4ef6c8d697ae1fa90f7a9542d15b9"
+          test "$(git hash-object src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3TreeList.java)" = "9da0a6ad147c423a0cfa718a8159890cc2c25977"
+          test "$(git hash-object src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3ArrayStack.java)" = "fc253468efae015e37bfd68ad0195e106e8222f5"
+          build="$RUNNER_TEMP/m3jdk-collection-array-owners"
+          mkdir -p "$build/javadoc"
+          javadoc -quiet -Xdoclint:all -Werror -d "$build/javadoc" \
+            "$build/src/jdk.m3.collections/jdk/m3/collections/apache/"*.java
+          echo 'M3JDK_APACHE_JDK21_DOCLINT_AND_SOURCE_SEALS PASS'
+
       - name: Verify JMOD, jlink image and externally executed JDK module contracts
         shell: bash
         run: |

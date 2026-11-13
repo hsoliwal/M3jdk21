@@ -62,3 +62,16 @@ JDK API/ABI/reflection and serialization, JNI/GC, original Apache
 TreeList semantics, Windows source build and comparative JMH
 CPU/heap/native memory all remain HOLD. Do not merge before satisfying
 those gates. No canonical recipe code or engine is present here.
+
+## JDK21 strict style successor — 13 November 2026
+
+The source identity `06dc7501a8f6efc837ff3e9f716058b9b0bab76e` (SHA-256 `68fce448cdc052e43a059f9b1e71c2deb228c5e6c6dd0d3b7789b150cccc4a0a`)
+remains pinned above as its historical exact implementation receipt.
+JDK-style Javadoc-only successor: Git blob `9da0a6ad147c423a0cfa718a8159890cc2c25977`, SHA-256
+`ad155c871d40d03dca1412443814e8670e8819c1ccd690f60f09f18e2ce9ca86`; canonical private source packet [Synexia #17302](https://github.com/hsoliwal/com.synexia/pull/17302).
+
+Executed on the full Java owners: OpenJDK 21 strict compilation, `javadoc
+-Xdoclint:all -Werror` with zero warnings, and byte-for-byte classfile
+parity at `-g:none`. All three seeded 60,000-operation tests remain green.
+No Java storage, algorithm, ABI, JNI or public API changes. The real
+Maven/OpenRewrite SDK and source-built M3JDK21/JTReg gates are still HOLD.

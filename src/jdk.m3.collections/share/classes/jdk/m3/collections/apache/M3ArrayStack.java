@@ -62,7 +62,12 @@ public final class M3ArrayStack<E> extends AbstractList<E>
         elements = EMPTY;
     }
 
-    /** Constructs an empty stack with a nonnegative capacity hint. */
+    /**
+     * Constructs an empty stack with a nonnegative capacity hint.
+     *
+     * @param initialCapacity initial array capacity
+     * @throws IllegalArgumentException if the capacity is negative
+     */
     public M3ArrayStack(int initialCapacity) {
         if (initialCapacity < 0) {
             throw new IllegalArgumentException("negative initialCapacity");
@@ -73,6 +78,8 @@ public final class M3ArrayStack<E> extends AbstractList<E>
     /**
      * Expands the single payload array if necessary; the capacity is not
      * part of the logical List size.
+     *
+     * @param minCapacity minimum required physical array length
      */
     public void ensureCapacity(int minCapacity) {
         if (minCapacity <= elements.length) {
@@ -106,7 +113,11 @@ public final class M3ArrayStack<E> extends AbstractList<E>
         return size == 0;
     }
 
-    /** Apache-compatible stack alias for {@link #isEmpty()}. */
+    /**
+     * Apache-compatible stack alias for {@link #isEmpty()}.
+     *
+     * @return {@code true} if the stack has no elements
+     */
     public boolean empty() {
         return isEmpty();
     }
@@ -349,13 +360,23 @@ public final class M3ArrayStack<E> extends AbstractList<E>
         return remove(size - 1);
     }
 
-    /** Pushes an element to the top and returns the same reference. */
+    /**
+     * Pushes an element to the top and returns the same reference.
+     *
+     * @param value element to push
+     * @return the same reference that was pushed
+     */
     public E push(E value) {
         add(value);
         return value;
     }
 
-    /** Returns the current top without removal. */
+    /**
+     * Returns the current top without removal.
+     *
+     * @return the top element
+     * @throws EmptyStackException if the stack is empty
+     */
     public E peek() throws EmptyStackException {
         if (size == 0) {
             throw new EmptyStackException();
@@ -369,6 +390,10 @@ public final class M3ArrayStack<E> extends AbstractList<E>
      * <p>Preserves the Apache implementation's exceptional behavior for
      * negative depth: a positive out-of-range physical index is delegated
      * to the indexed getter.
+     *
+     * @param depth zero-based position from the stack top
+     * @return element at the requested depth
+     * @throws EmptyStackException if the depth exceeds the stack height
      */
     public E peek(int depth) throws EmptyStackException {
         int index = size - depth - 1;
@@ -378,7 +403,12 @@ public final class M3ArrayStack<E> extends AbstractList<E>
         return get(index);
     }
 
-    /** Removes and returns the stack's top element. */
+    /**
+     * Removes and returns the stack's top element.
+     *
+     * @return the removed top element
+     * @throws EmptyStackException if the stack is empty
+     */
     public E pop() throws EmptyStackException {
         if (size == 0) {
             throw new EmptyStackException();
@@ -386,7 +416,12 @@ public final class M3ArrayStack<E> extends AbstractList<E>
         return remove(size - 1);
     }
 
-    /** Returns the 1-based depth of the nearest matching value from the top. */
+    /**
+     * Returns the 1-based depth of the nearest matching value from the top.
+     *
+     * @param value the element to search for
+     * @return nearest matching depth, or {@code -1} when absent
+     */
     public int search(Object value) {
         for (int i = size - 1; i >= 0; i--) {
             Object item = elements[i];
@@ -498,6 +533,12 @@ public final class M3ArrayStack<E> extends AbstractList<E>
         }
     }
 
+    /**
+     * Serializes occupied logical positions without trailing spare capacity.
+     *
+     * @param out output stream
+     * @throws IOException if the stream cannot be written
+     */
     @Serial
     private void writeObject(ObjectOutputStream out) throws IOException {
         out.defaultWriteObject();
@@ -507,6 +548,13 @@ public final class M3ArrayStack<E> extends AbstractList<E>
         }
     }
 
+    /**
+     * Recreates stack capacity and elements from the serialized sequence.
+     *
+     * @param in input stream
+     * @throws IOException if the stream data is invalid or cannot be read
+     * @throws ClassNotFoundException if a serialized element type is unavailable
+     */
     @Serial
     private void readObject(ObjectInputStream in)
             throws IOException, ClassNotFoundException {

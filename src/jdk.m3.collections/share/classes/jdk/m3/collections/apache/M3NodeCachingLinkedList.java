@@ -60,6 +60,7 @@ public final class M3NodeCachingLinkedList<E> extends AbstractSequentialList<E>
     private static final int[] EMPTY_INTS = new int[0];
     private static final long[] EMPTY_WORDS = new long[0];
 
+    /** Advisory size of the recycled physical-slot pool. */
     private final int maximumCacheSize;
 
     private transient Object[] elements = EMPTY_OBJECTS;
@@ -72,14 +73,25 @@ public final class M3NodeCachingLinkedList<E> extends AbstractSequentialList<E>
     private transient int used;
     private transient int size;
 
+    /** Constructs an empty list with the default recycled-slot capacity hint. */
     public M3NodeCachingLinkedList() {
         this(DEFAULT_CACHE_HINT);
     }
 
+    /**
+     * Constructs an empty list with a physical-slot recycling hint.
+     *
+     * @param maximumCacheSize advisory recycled-slot capacity
+     */
     public M3NodeCachingLinkedList(int maximumCacheSize) {
         this.maximumCacheSize = maximumCacheSize;
     }
 
+    /**
+     * Copies the specified collection into independent array storage.
+     *
+     * @param source values to copy in their encounter order
+     */
     public M3NodeCachingLinkedList(Collection<? extends E> source) {
         this(DEFAULT_CACHE_HINT);
         addAll(source);
@@ -544,6 +556,12 @@ public final class M3NodeCachingLinkedList<E> extends AbstractSequentialList<E>
         return super.toString();
     }
 
+    /**
+     * Writes the ordered logical elements without serializing physical free slots.
+     *
+     * @param out output stream
+     * @throws IOException if the stream cannot be written
+     */
     @Serial
     private void writeObject(ObjectOutputStream out) throws IOException {
         out.defaultWriteObject();
@@ -553,6 +571,13 @@ public final class M3NodeCachingLinkedList<E> extends AbstractSequentialList<E>
         }
     }
 
+    /**
+     * Recreates the logical order in new array storage after deserialization.
+     *
+     * @param in input stream
+     * @throws IOException if the stream data is invalid or cannot be read
+     * @throws ClassNotFoundException if a serialized element type is unavailable
+     */
     @Serial
     @SuppressWarnings("unchecked")
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {

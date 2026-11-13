@@ -13938,8 +13938,8 @@
               "M3NodeCachingLinkedList(Collection<? extends E>)",
               "List<E> reversed()"
             ],
-            "sha256": "927f4faf79963228c5038330778a8c62f45281074f771cea527220bca0e3d2e8",
-            "git_blob_sha1": "3efc29e90f0bc0affa4af0567e5837e583e95eb3",
+            "sha256": "65e2963f8d44e109a7a1c687714e0326084f8cfb870ed4a2cc880d58ccd22498",
+            "git_blob_sha1": "0639e6a9a0f4ef6c8d697ae1fa90f7a9542d15b9",
             "fingerprint": null,
             "revision_role": "candidate"
           }
@@ -13994,7 +13994,8 @@
         "tests": [],
         "test_descriptions": [
           "Actual Java21 standalone reference-model evidence recorded by PR #2971 and m3/collections/qualification/apache-nodecache-array-owner-20261113/RECEIVER.md; 569965 finite assertions pass over 60,000 seeded operations.",
-          "New test/jdk/jdk/m3/collections/ArrayLinkedListContract.java byte provenance is pinned; source-built M3JDK21/JTReg hosted checks remain pending."
+          "New test/jdk/jdk/m3/collections/ArrayLinkedListContract.java byte provenance is pinned; source-built M3JDK21/JTReg hosted checks remain pending.",
+          "Strict Javadoc zero warnings (-Xdoclint:all -Werror); byte-identical compiled classes with -g:none; complete 60k-operation List oracle unchanged."
         ],
         "provenance": {
           "license": "First-party Apache-2.0 OR EPL-2.0 source, with Apache Commons Collections 4.5.0 (Apache-2.0) used as contract/attribution oracle; no third-party implementation body copied.",
@@ -14008,12 +14009,14 @@
           "direction": "source-to-target",
           "target_adaptations": [
             "Relocate postimage to the canonical existing JDK module and package with four-space JDK style, Javadoc, explicit imports and @Serial.",
-            "Delete the previous all-throw scaffold and export exactly jdk.m3.collections.apache."
+            "Delete the previous all-throw scaffold and export exactly jdk.m3.collections.apache.",
+            "Source-sealed Javadoc-only OpenJDK 21 style successor from Synexia #17302; locally bytecode-identical at -g:none."
           ],
           "pending": [
             "Run actual canonical Maven/OpenRewrite SDK and recorded exact source postimage/ABI equivalence.",
             "Run full product source-built JDK image, jtreg, JNI/GC, Windows, and performance/heap/native-process qualification.",
-            "Verify the old per-provider Maven scaffold POMs are bridged/retired without breaking consumers or losing LICENSE/NOTICE."
+            "Verify the old per-provider Maven scaffold POMs are bridged/retired without breaking consumers or losing LICENSE/NOTICE.",
+            "Actual Maven/OpenRewrite SDK execution and full source-built JDK image gate still pending on #2971; local doclint/bytecode equivalence is not an image pass."
           ],
           "conflicts": []
         },
@@ -14041,7 +14044,7 @@
           "supersedes": []
         },
         "source_state": "partial",
-        "observation": "Real product Java source is implemented on draft #2971, but original Apache provider closure and full JDK21 release qualification have NOT passed. Historical 2026-10-18 scaffold inventory remains preserved until a separately authored reconciliation."
+        "observation": "JDK style/Javadoc source-only candidate from Synexia #17302 on product draft #2971; master and SDK/image/release acceptance remain unqualified."
       },
       {
         "id": "synexia.collections.apache.m3treelist",
@@ -14082,8 +14085,8 @@
               "void add(int,E)",
               "E remove(int)"
             ],
-            "sha256": "68fce448cdc052e43a059f9b1e71c2deb228c5e6c6dd0d3b7789b150cccc4a0a",
-            "git_blob_sha1": "06dc7501a8f6efc837ff3e9f716058b9b0bab76e",
+            "sha256": "ad155c871d40d03dca1412443814e8670e8819c1ccd690f60f09f18e2ce9ca86",
+            "git_blob_sha1": "9da0a6ad147c423a0cfa718a8159890cc2c25977",
             "fingerprint": null,
             "revision_role": "candidate"
           }
@@ -14139,7 +14142,8 @@
         "tests": [],
         "test_descriptions": [
           "Actual Java21 standalone reference-model evidence recorded by PR #2971 and m3/collections/qualification/apache-treelist-array-owner-20261113/RECEIVER.md; 569967 finite assertions pass over 60,000 seeded operations.",
-          "New test/jdk/jdk/m3/collections/ArrayTreeListContract.java byte provenance is pinned; source-built M3JDK21/JTReg hosted checks remain pending."
+          "New test/jdk/jdk/m3/collections/ArrayTreeListContract.java byte provenance is pinned; source-built M3JDK21/JTReg hosted checks remain pending.",
+          "Strict Javadoc zero warnings (-Xdoclint:all -Werror); byte-identical compiled classes with -g:none; complete 60k-operation List oracle unchanged."
         ],
         "provenance": {
           "license": "First-party Apache-2.0 OR EPL-2.0 source, with Apache Commons Collections 4.5.0 (Apache-2.0) used as contract/attribution oracle; no third-party implementation body copied.",
@@ -14153,12 +14157,14 @@
           "direction": "source-to-target",
           "target_adaptations": [
             "Relocate postimage to the canonical existing JDK module and package with four-space JDK style, Javadoc, explicit imports and @Serial.",
-            "Delete the previous all-throw scaffold and export exactly jdk.m3.collections.apache."
+            "Delete the previous all-throw scaffold and export exactly jdk.m3.collections.apache.",
+            "Source-sealed Javadoc-only OpenJDK 21 style successor from Synexia #17302; locally bytecode-identical at -g:none."
           ],
           "pending": [
             "Run actual canonical Maven/OpenRewrite SDK and recorded exact source postimage/ABI equivalence.",
             "Run full product source-built JDK image, jtreg, JNI/GC, Windows, and performance/heap/native-process qualification.",
-            "Verify the old per-provider Maven scaffold POMs are bridged/retired without breaking consumers or losing LICENSE/NOTICE."
+            "Verify the old per-provider Maven scaffold POMs are bridged/retired without breaking consumers or losing LICENSE/NOTICE.",
+            "Actual Maven/OpenRewrite SDK execution and full source-built JDK image gate still pending on #2971; local doclint/bytecode equivalence is not an image pass."
           ],
           "conflicts": []
         },
@@ -14187,7 +14193,7 @@
           "supersedes": []
         },
         "source_state": "partial",
-        "observation": "Real product Java source is implemented on draft #2971, but original Apache provider closure and full JDK21 release qualification have NOT passed. Historical 2026-10-18 scaffold inventory remains preserved until a separately authored reconciliation."
+        "observation": "JDK style/Javadoc source-only candidate from Synexia #17302 on product draft #2971; master and SDK/image/release acceptance remain unqualified."
       },
       {
         "id": "synexia.collections.apache.m3arraystack",
@@ -14232,8 +14238,8 @@
               "E peek(int)",
               "int search(Object)"
             ],
-            "sha256": "ce1b38af531d1d863f6eb67bd6e2f975a39a02979777ed5a2f0af3d1756e7e45",
-            "git_blob_sha1": "237c205c40f92d9ac135c64113fbdae1427a0ef2",
+            "sha256": "e8e3de6031e99bfa20583bdbccf29aa98b18523ecc3cdc08d3b263125c77f3d9",
+            "git_blob_sha1": "fc253468efae015e37bfd68ad0195e106e8222f5",
             "fingerprint": null,
             "revision_role": "candidate"
           }
@@ -14291,7 +14297,8 @@
         "tests": [],
         "test_descriptions": [
           "Actual Java21 standalone reference-model evidence recorded by PR #2971 and m3/collections/qualification/apache-array-stack-20261113/RECEIVER.md; 484245 finite assertions pass over 60,000 seeded operations.",
-          "New test/jdk/jdk/m3/collections/ArrayStackContract.java byte provenance is pinned; source-built M3JDK21/JTReg hosted checks remain pending."
+          "New test/jdk/jdk/m3/collections/ArrayStackContract.java byte provenance is pinned; source-built M3JDK21/JTReg hosted checks remain pending.",
+          "Strict Javadoc zero warnings (-Xdoclint:all -Werror); byte-identical compiled classes with -g:none; complete 60k-operation List oracle unchanged."
         ],
         "provenance": {
           "license": "First-party Apache-2.0 OR EPL-2.0 source, with Apache Commons Collections 4.5.0 (Apache-2.0) used as contract/attribution oracle; no third-party implementation body copied.",
@@ -14305,12 +14312,14 @@
           "direction": "source-to-target",
           "target_adaptations": [
             "Relocate postimage to the canonical existing JDK module and package with four-space JDK style, Javadoc, explicit imports and @Serial.",
-            "Delete the previous all-throw scaffold and export exactly jdk.m3.collections.apache."
+            "Delete the previous all-throw scaffold and export exactly jdk.m3.collections.apache.",
+            "Source-sealed Javadoc-only OpenJDK 21 style successor from Synexia #17302; locally bytecode-identical at -g:none."
           ],
           "pending": [
             "Run actual canonical Maven/OpenRewrite SDK and recorded exact source postimage/ABI equivalence.",
             "Run full product source-built JDK image, jtreg, JNI/GC, Windows, and performance/heap/native-process qualification.",
-            "Verify the old per-provider Maven scaffold POMs are bridged/retired without breaking consumers or losing LICENSE/NOTICE."
+            "Verify the old per-provider Maven scaffold POMs are bridged/retired without breaking consumers or losing LICENSE/NOTICE.",
+            "Actual Maven/OpenRewrite SDK execution and full source-built JDK image gate still pending on #2971; local doclint/bytecode equivalence is not an image pass."
           ],
           "conflicts": []
         },
@@ -14341,7 +14350,7 @@
           "supersedes": []
         },
         "source_state": "partial",
-        "observation": "Real product Java source is implemented on draft #2971, but original Apache provider closure and full JDK21 release qualification have NOT passed. Historical 2026-10-18 scaffold inventory remains preserved until a separately authored reconciliation."
+        "observation": "JDK style/Javadoc source-only candidate from Synexia #17302 on product draft #2971; master and SDK/image/release acceptance remain unqualified."
       }
     ]
   },

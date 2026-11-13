@@ -63,3 +63,16 @@ process memory are NOT RUN here. The source is **committed on a
 review-only public draft branch**, not merged into product master.
 Do not merge before independent gate acceptance; preserve license
 and attribution/NOTICE requirements.
+
+## JDK21 strict style successor — 13 November 2026
+
+The source identity `237c205c40f92d9ac135c64113fbdae1427a0ef2` (SHA-256 `ce1b38af531d1d863f6eb67bd6e2f975a39a02979777ed5a2f0af3d1756e7e45`)
+remains pinned above as its historical exact implementation receipt.
+JDK-style Javadoc-only successor: Git blob `fc253468efae015e37bfd68ad0195e106e8222f5`, SHA-256
+`e8e3de6031e99bfa20583bdbccf29aa98b18523ecc3cdc08d3b263125c77f3d9`; canonical private source packet [Synexia #17302](https://github.com/hsoliwal/com.synexia/pull/17302).
+
+Executed on the full Java owners: OpenJDK 21 strict compilation, `javadoc
+-Xdoclint:all -Werror` with zero warnings, and byte-for-byte classfile
+parity at `-g:none`. All three seeded 60,000-operation tests remain green.
+No Java storage, algorithm, ABI, JNI or public API changes. The real
+Maven/OpenRewrite SDK and source-built M3JDK21/JTReg gates are still HOLD.

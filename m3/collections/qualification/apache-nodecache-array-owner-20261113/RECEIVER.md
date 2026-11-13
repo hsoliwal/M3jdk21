@@ -74,3 +74,16 @@ views/iterators. It is an implementation, not a scaffold or provider delegate.
 
 **Status:** code-bearing draft branch, not integrated master; all listed
 HOLDs remain open. Do not describe it as a finished five-provider convergence.
+
+## JDK21 strict style successor — 13 November 2026
+
+The source identity `3efc29e90f0bc0affa4af0567e5837e583e95eb3` (SHA-256 `927f4faf79963228c5038330778a8c62f45281074f771cea527220bca0e3d2e8`)
+remains pinned above as its historical exact implementation receipt.
+JDK-style Javadoc-only successor: Git blob `0639e6a9a0f4ef6c8d697ae1fa90f7a9542d15b9`, SHA-256
+`65e2963f8d44e109a7a1c687714e0326084f8cfb870ed4a2cc880d58ccd22498`; canonical private source packet [Synexia #17302](https://github.com/hsoliwal/com.synexia/pull/17302).
+
+Executed on the full Java owners: OpenJDK 21 strict compilation, `javadoc
+-Xdoclint:all -Werror` with zero warnings, and byte-for-byte classfile
+parity at `-g:none`. All three seeded 60,000-operation tests remain green.
+No Java storage, algorithm, ABI, JNI or public API changes. The real
+Maven/OpenRewrite SDK and source-built M3JDK21/JTReg gates are still HOLD.

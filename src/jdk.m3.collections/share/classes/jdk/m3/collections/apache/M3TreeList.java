@@ -75,7 +75,11 @@ public final class M3TreeList<E> extends AbstractList<E>
     public M3TreeList() {
     }
 
-    /** Copies the encounter order into a separate array-owned tree. */
+    /**
+     * Copies the encounter order into a separate array-owned tree.
+     *
+     * @param source source values in encounter order
+     */
     public M3TreeList(Collection<? extends E> source) {
         addAll(source);
     }
@@ -491,6 +495,12 @@ public final class M3TreeList<E> extends AbstractList<E>
         return super.toString();
     }
 
+    /**
+     * Serializes the logical sequence independently of the tree priorities.
+     *
+     * @param out output stream
+     * @throws IOException if the stream cannot be written
+     */
     @Serial
     private void writeObject(ObjectOutputStream out) throws IOException {
         out.defaultWriteObject();
@@ -500,6 +510,13 @@ public final class M3TreeList<E> extends AbstractList<E>
         }
     }
 
+    /**
+     * Rebuilds the order-statistic index from serialized logical elements.
+     *
+     * @param in input stream
+     * @throws IOException if the stream data is invalid or cannot be read
+     * @throws ClassNotFoundException if a serialized element type is unavailable
+     */
     @Serial
     @SuppressWarnings("unchecked")
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
