@@ -246,6 +246,72 @@ public class M3CircularFifoQueue<E> extends AbstractCollection<E>
         return false;
     }
 
+    /** Only final, non-mutating query equality may bypass virtual iterators. */
+    private static boolean safeEqualityQuery(final Object value) {
+        if (value == null || value instanceof Enum<?>) {
+            return true;
+        }
+        final Class<?> type = value.getClass();
+        return type == String.class || type == Integer.class || type == Long.class
+                || type == Short.class || type == Byte.class || type == Character.class
+                || type == Boolean.class || type == Float.class || type == Double.class;
+    }
+
+    private int findRingIndex(final Object value) {
+        final int count = size();
+        int position = start;
+        for (int i = 0; i < count; i++) {
+            if (value == null ? elements[position] == null : value.equals(elements[position])) {
+                return position;
+            }
+            if (++position == maxElements) {
+                position = 0;
+            }
+        }
+        return -1;
+    }
+
+    @Override
+    public boolean contains(final Object value) {
+        if (getClass() != M3CircularFifoQueue.class || !safeEqualityQuery(value)) {
+            return super.contains(value);
+        }
+        return findRingIndex(value) >= 0;
+    }
+
+    @Override
+    public boolean remove(final Object value) {
+        if (getClass() != M3CircularFifoQueue.class || !safeEqualityQuery(value)) {
+            return super.remove(value);
+        }
+        final int position = findRingIndex(value);
+        if (position < 0) {
+            return false;
+        }
+        if (position == start) {
+            remove();
+        } else {
+            int following = position + 1;
+            if (start < position && following < end) {
+                System.arraycopy(elements, following, elements, position, end - following);
+            } else {
+                while (following != end) {
+                    if (following >= maxElements) {
+                        elements[following - 1] = elements[0];
+                        following = 0;
+                    } else {
+                        elements[decrement(following)] = elements[following];
+                        following = increment(following);
+                    }
+                }
+            }
+            end = decrement(end);
+            elements[end] = null;
+            state &= ~FULL;
+        }
+        return true;
+    }
+
     /**
      * Returns an iterator over this queue's elements.
      *
