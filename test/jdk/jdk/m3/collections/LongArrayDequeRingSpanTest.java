@@ -180,6 +180,76 @@ final class LongArrayDequeRingSpanTest {
         assertTrue(trials >= 15_000, "empty, full and wrapped capacity spectrum");
     }
 
+    private static LongArrayDeque repeatedRing(int capacity, int head, int count)
+            throws Exception {
+        LongArrayDeque deque = new LongArrayDeque(capacity - 1);
+        for (int i = 0; i < head; i++) {
+            deque.addLast(-77L);
+            deque.removeFirstLong();
+        }
+        for (int i = 0; i < count; i++) {
+            long repeated = switch (i & 7) {
+                case 0 -> Long.MIN_VALUE;
+                case 1 -> Long.MAX_VALUE;
+                case 2 -> 0L;
+                default -> i % 7 - 3L;
+            };
+            deque.addLast(repeated);
+        }
+        return deque;
+    }
+
+    private static int scalarMatch(ScalarReference ref, long value, boolean last) {
+        if (last) {
+            for (int i = ref.size - 1; i >= 0; i--) {
+                if (ref.slots[ref.at(i)] == value) {
+                    return i;
+                }
+            }
+        } else {
+            for (int i = 0; i < ref.size; i++) {
+                if (ref.slots[ref.at(i)] == value) {
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+
+    @Test
+    void twoSpanSearchAndDuplicateRemovalPreserveFirstLastAndAbsentSemantics()
+            throws Exception {
+        long cases = 0;
+        long[] targets = {Long.MIN_VALUE, Long.MAX_VALUE, 0L, -4L, -1L, 1L, 4L, 999L};
+        for (int capacity : new int[]{8, 16, 32, 64}) {
+            for (int head = 0; head < capacity; head++) {
+                for (int size = 0; size <= capacity; size++) {
+                    for (long target : targets) {
+                        for (boolean last : new boolean[]{false, true}) {
+                            LongArrayDeque deque = repeatedRing(capacity, head, size);
+                            ScalarReference baseline = new ScalarReference(deque);
+                            int beforeEpoch = integer(EPOCH, deque);
+                            int match = scalarMatch(baseline, target, last);
+                            assertEquals(match >= 0, deque.contains(target));
+                            assertEquals(beforeEpoch, integer(EPOCH, deque),
+                                    "contains must never mutate");
+                            assertEquals(match >= 0, last
+                                    ? deque.removeLastOccurrence(target)
+                                    : deque.removeFirstOccurrence(target));
+                            if (match >= 0) {
+                                baseline.remove(match);
+                            }
+                            same(baseline, deque, beforeEpoch + (match >= 0 ? 1 : 0),
+                                    "duplicate scan " + capacity + "/" + head + "/" + size);
+                            cases++;
+                        }
+                    }
+                }
+            }
+        }
+        assertTrue(cases >= 80_000, "all wrapped logical match directions");
+    }
+
     @Test
     void randomizedMixedOperationsMatchArrayDequeAndPreserveNoOpEpochs() throws Exception {
         Random random = new Random(0x4D334C4F4E47L);

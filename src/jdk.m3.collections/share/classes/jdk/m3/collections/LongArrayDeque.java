@@ -143,34 +143,62 @@ public final class LongArrayDeque implements LongDeque {
 
     @Override
     public boolean contains(long value) {
-        for (int i = 0; i < size; i++) {
-            if (elements[physicalIndex(i)] == value) {
-                return true;
-            }
-        }
-        return false;
+        return firstOccurrenceIndex(value) >= 0;
     }
 
     @Override
     public boolean removeFirstOccurrence(long value) {
-        for (int i = 0; i < size; i++) {
-            if (elements[physicalIndex(i)] == value) {
-                removeLogicalIndex(i);
-                return true;
-            }
+        int logical = firstOccurrenceIndex(value);
+        if (logical < 0) {
+            return false;
         }
-        return false;
+        removeLogicalIndex(logical);
+        return true;
     }
 
     @Override
     public boolean removeLastOccurrence(long value) {
-        for (int i = size - 1; i >= 0; i--) {
-            if (elements[physicalIndex(i)] == value) {
-                removeLogicalIndex(i);
-                return true;
+        int logical = lastOccurrenceIndex(value);
+        if (logical < 0) {
+            return false;
+        }
+        removeLogicalIndex(logical);
+        return true;
+    }
+
+    /**
+     * Scan the two physical live spans in logical encounter order, without
+     * a masked address calculation for every primitive comparison.
+     */
+    private int firstOccurrenceIndex(long value) {
+        int first = Math.min(size, elements.length - head);
+        for (int i = 0; i < first; i++) {
+            if (elements[head + i] == value) {
+                return i;
             }
         }
-        return false;
+        for (int i = 0, second = size - first; i < second; i++) {
+            if (elements[i] == value) {
+                return first + i;
+            }
+        }
+        return -1;
+    }
+
+    /** Reverse encounter order across the wrapped low span, then high. */
+    private int lastOccurrenceIndex(long value) {
+        int first = Math.min(size, elements.length - head);
+        for (int i = size - first - 1; i >= 0; i--) {
+            if (elements[i] == value) {
+                return first + i;
+            }
+        }
+        for (int i = first - 1; i >= 0; i--) {
+            if (elements[head + i] == value) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     /**
