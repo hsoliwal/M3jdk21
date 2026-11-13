@@ -21,6 +21,8 @@ WORKFLOWS = ROOT / '.github/workflows'
 MOVE = 'm3-file-move-candidates-20261021.yml'
 SHADOW = 'm3-file-shadow-stream-20261020.yml'
 LAYERED = 'm3-native-shadow-stream-progress-20261020.yml'
+DELTA = 'm3-file-delta-20261020.yml'
+IMPACT = 'm3-file-build-impact-20261020.yml'
 
 
 def workflow(name):
@@ -182,6 +184,16 @@ class FileWorkflowWiringTest(unittest.TestCase):
                 self.assertIn('python3 -m unittest discover -s m3/file -p test_workflow_wiring.py -v', text)
         for name in (MOVE, SHADOW):
             self.assertIn('--module-path "$deps"', workflow(name))
+
+    def test_verify_only_workflows_build_and_pass_dependencies(self):
+        # org.m3jdk.file requires transitive jdk.m3.collections, so verify.py needs the built dependency module path.
+        for name in (DELTA, IMPACT):
+            with self.subTest(workflow=name):
+                text = workflow(name)
+                self.assertEqual(text.count("'src/jdk.m3.collections/**'"), text.count("'m3/file/**'"))
+                self.assertIn('github.event.pull_request.head.sha || github.sha', text)
+                self.assertIn('bash m3/file/compile-dependencies.sh "$JAVA_HOME" "$deps"', text)
+                self.assertIn('python3 m3/file/verify.py --java-home "$JAVA_HOME" --module-path "$deps"', text)
 
     def test_layered_workflow_keeps_complete_host_and_image_contracts(self):
         text = workflow(LAYERED)
