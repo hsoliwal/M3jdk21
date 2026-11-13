@@ -1,26 +1,85 @@
 {
-  "schema": "M3_DERIVATIVE_WORKFLOW_RECEIVING_RECIPE_V1",
-  "canonicalRepository": "hsoliwal/com.synexia",
-  "canonicalCommit": "c27dc5bf47cdc25471dde38008dbe6d77808ac51",
-  "canonicalPr": 17362,
-  "receiverRepository": "hsoliwal/M3jdk21",
-  "receiverBase": "778cd3eac266974e7b5155e79838f74ee516b535",
-  "owner": ".github/workflows/m3-derivative-regex-port.yml",
-  "engine": {
-    "class": "com.synexia.rewrite.M3HashPinnedYamlSnapshotRecipe",
-    "blob": "6bbf7714b1d16f19c005851bfe014e7d6e23ef4c",
+  "schema": "M3_TARGET_RECEIPT_REFERENCE_V1",
+  "copyright": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "license": "Apache-2.0",
+  "canonical": {
+    "repository": "hsoliwal/com.synexia",
+    "revision": "c27dc5bf47cdc25471dde38008dbe6d77808ac51",
+    "pr": 17362,
+    "recipeId": "com.synexia.rewrite.M3HashPinnedYamlSnapshotRecipe",
+    "recipeBlob": "6bbf7714b1d16f19c005851bfe014e7d6e23ef4c",
     "crate": "m3jdk21-derivative-test-discovery",
-    "runtimeDependency": false
+    "fullReceiptReferences": [
+      {
+        "path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-derivative-test-discovery/QUALIFICATION.zlib.json",
+        "git": "f8d546b98f3c8e48fce28655236f7e6d84d09436"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-derivative-test-discovery/MASTER_QUALIFICATION.zlib.json",
+        "git": "6d4bbfc70a4e8b2dc0b6c65b874a7f539d0214a6"
+      }
+    ],
+    "donorAttribution": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-derivative-test-discovery/FOSS_REUSE_DECISION.tsv",
+      "git": "fd09440b11a7ea472fb29c29aa2e4cf354f3bc18",
+      "license": "Apache-2.0"
+    }
   },
-  "before": "1278e01a69b11b6bc78351efc01685426bbfe64a",
-  "after": "3b660b1f1ab5aff4ef6b70ecb434ac3d45b84b6c",
-  "canonicalMapping": "recipe-resources and qualification files retain exact canonical bytes; workflow is the observed recipe afterimage",
-  "qualification": {
-    "yamlProof": "f8d546b98f3c8e48fce28655236f7e6d84d09436",
-    "masterProof": "6d4bbfc70a4e8b2dc0b6c65b874a7f539d0214a6",
-    "native": "NOT_EXECUTED_OPTIONAL_TEST_ABORTED"
+  "receiver": {
+    "repository": "hsoliwal/M3jdk21",
+    "originalHead": "8b8afef93c9603a94a1aa9022584300bdf326d82",
+    "base": "778cd3eac266974e7b5155e79838f74ee516b535",
+    "owner": ".github/workflows/m3-derivative-regex-port.yml",
+    "before": {
+      "git": "1278e01a69b11b6bc78351efc01685426bbfe64a",
+      "sha256": "ce1c74328ec8b2b8ced3025c02f41ae0383a76438cd36fbd35677525f33dd325",
+      "bytes": 898,
+      "mode": "100644"
+    },
+    "after": {
+      "git": "3b660b1f1ab5aff4ef6b70ecb434ac3d45b84b6c",
+      "sha256": "51198ff735bb5897584fb16257c26740a1bba869f47d85b2026aee7e72f6b28c",
+      "bytes": 890,
+      "mode": "100644"
+    }
   },
-  "license": "Apache-2.0; existing notices retained",
-  "publicApiChanged": false,
-  "javaNativeImplementationsChanged": false
+  "cleanupCustody": {
+    "repository": "hsoliwal/com.synexia",
+    "revision": "fa7d18a4e3a5bbbab367b4c6826d605b74e41ba8",
+    "path": "synexia-openrewrite-recipes/recipe-crates/public-fork-recipe-custody-20261017/recoveries/20261113-r225-r226-gpt6/CUSTODY_INPUTS.json",
+    "executionGate": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/public-fork-recipe-custody-20261017/recoveries/20261113-r225-r226-gpt6/WORKER_RESULT.json",
+      "git": "e8d815d27ff6ef458b148b6aa393ade704d7c2c4",
+      "sha256": "80379bec6d189f32c7f3c63c8d4022f363f0b1b49818332dae746cb6c70cea2d"
+    },
+    "originalVariants": [
+      {
+        "path": "synexia-openrewrite-recipes/recipe-crates/public-fork-recipe-custody-20261017/sources/M3jdk21-pr3001-20261113/m3/qualification/derivative-test-discovery/README.md",
+        "git": "c00acf3b2b7f5ba7e9c474f43a2f5c7c595a4ab5",
+        "sha256": "2b8d713c016d488457d85604fd4cda7f316d85fe5298205deba8ea72bf8e31f1",
+        "bytes": 3394,
+        "mode": "100644"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipe-crates/public-fork-recipe-custody-20261017/sources/M3jdk21-pr3001-20261113/m3/qualification/derivative-test-discovery/RECIPE.json",
+        "git": "da9c312e0d174a7dc569ee986b670f8adc55e147",
+        "sha256": "39bc2c81f7713e2644e6bc010c43924ae1edcb9143b89ea70ce48ceb86efe6fa",
+        "bytes": 1168,
+        "mode": "100644"
+      }
+    ],
+    "legalAdmission": "PENDING_FULL_CANONICAL_LOADER"
+  },
+  "recordedQualification": {
+    "platform": "Windows Java21 RAM/offline Maven bootstrap",
+    "recipeTestsPassed": 9,
+    "targetTestsFound": 6,
+    "targetTestsPassed": 5,
+    "targetTestsAborted": 1,
+    "abortReason": "Existing optional JNI assumption; no compatible library loaded",
+    "receivingLinuxPOMAndCJNI": "NOT_EXECUTED",
+    "retainedSelectorHelper": "Target-only acceptance asset; outside Maven source roots and not invoked by workflow"
+  },
+  "runtimeAPIsChanged": false,
+  "productPromotion": false
 }

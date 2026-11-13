@@ -1,3 +1,0 @@
-category	pattern	decision	evidence	limitations
-build-test-discovery	bind-selectors-to-declared-classes-v1	SELECTED	Exact two-selector YAML recipe; nine replay/refusal checks; actual target six tests discovered	No native execution claim from aborted optional test
-source-namespace-migration	retain-current-owner-mapping-v1	REUSE_EXISTING	Current jdk.m3.precompute classes unprefixed; legacy receiver targets com.m3/M3-prefixed classes	Do not replay legacy materializer over migrated port
