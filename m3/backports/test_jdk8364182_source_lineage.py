@@ -20,7 +20,11 @@ sys.path.insert(0, str(BACKPORTS))
 TARGET = "src/hotspot/share/classfile/vmSymbols.hpp"
 LEDGER = "m3/backports/recipes/jdk-8364182/adaptation.tsv"
 SEEDS = "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv"
-SUCCESSOR = "4f752ab79abf854d144e53118a2cc57a4b3cc2432140e9297079cca86dd2abab"
+HISTORICAL_SUPERSEDED = "4f752ab79abf854d144e53118a2cc57a4b3cc2432140e9297079cca86dd2abab"
+PREVIOUS_21U = "691bd90288f30d9d25504526f234abc7db862e577544a7733d3fe0d09e585ff2"
+SUCCESSOR = "db65f0fdf1b3eba49a7819ab59a2c01f04b02c6e82daf8b55774d3c2404990aa"
+SIMD_SOURCE_BLOB = "65860effc9f00df74c1dd0dcea1e2c1605f54cfa"
+SIMD_NAME = b'template(java_util_DualPivotQuicksort,              "java/util/DualPivotQuicksort")'
 
 
 def verifier():
@@ -75,12 +79,76 @@ class Jdk8364182LineageTest(unittest.TestCase):
         symbol = self.root / TARGET
         self.assertEqual(SUCCESSOR, hashlib.sha256(symbol.read_bytes()).hexdigest())
         current = next(r for r in self.records if r["target_path"] == TARGET)
-        self.assertEqual(SUCCESSOR, current["superseded_target_sha256"])
+        self.assertEqual(HISTORICAL_SUPERSEDED, current["superseded_target_sha256"])
         self.assertNotEqual(current["baseline_sha256"], current["target_sha256"])
         self.assertNotIn(
             current["superseded_target_sha256"],
             {current["baseline_sha256"], current["target_sha256"]},
         )
+
+    def test_only_exact_one_line_simd_source_succeeds_after_jdk21u(self) -> None:
+        source = (self.root / TARGET).read_bytes()
+        self.assertEqual(SUCCESSOR, hashlib.sha256(source).hexdigest())
+        self.assertEqual(SIMD_SOURCE_BLOB, self.verify.git_blob_sha1(source))
+        lines = [
+            line for line in source.splitlines(keepends=True)
+            if SIMD_NAME in line
+        ]
+        self.assertEqual(1, len(lines))
+        parent = source.replace(lines[0], b"", 1)
+        self.assertEqual(PREVIOUS_21U, hashlib.sha256(parent).hexdigest())
+        self.assertEqual(
+            self.verify.JDK_8364182_21U_GIT_BLOB,
+            self.verify.git_blob_sha1(parent),
+        )
+        for marker in (
+            b"template(serializeSecurityPropertiesToByteArray_name,",
+            b"template(java_lang_M3StringImmediate,",
+            b"template(java_lang_M3String,",
+        ):
+            self.assertEqual(1, source.count(marker))
+
+    def test_exact_previous_21u_source_remains_admissible(self) -> None:
+        target = self.root / TARGET
+        source = target.read_bytes()
+        line = next(
+            line for line in source.splitlines(keepends=True)
+            if SIMD_NAME in line
+        )
+        target.write_bytes(source.replace(line, b"", 1))
+        self.verify.verify_security_properties_8364182_backport(self.root)
+        self.assertEqual(PREVIOUS_21U, hashlib.sha256(target.read_bytes()).hexdigest())
+
+    def test_simd_duplication_mutation_or_lost_jmx_symbol_is_refused(self) -> None:
+        target = self.root / TARGET
+        source = target.read_bytes()
+        line = next(
+            line for line in source.splitlines(keepends=True)
+            if SIMD_NAME in line
+        )
+        changes = (
+            source.replace(b'"java/util/DualPivotQuicksort"',
+                           b'"java/util/BrokenQuicksort"', 1),
+            source.replace(line, line + line, 1),
+            source.replace(
+                b"serializeSecurityPropertiesToByteArray_name",
+                b"serializeLostPropertiesToByteArray_name", 1,
+            ),
+        )
+        for changed in changes:
+            with self.subTest(sha=hashlib.sha256(changed).hexdigest()):
+                target.write_bytes(changed)
+                with self.assertRaisesRegex(AssertionError, "target drift"):
+                    self.verify.verify_security_properties_8364182_backport(self.root)
+        target.write_bytes(source)
+
+    def test_historical_vm_symbols_pin_cannot_be_reassigned(self) -> None:
+        for row in self.records:
+            if row["target_path"] == TARGET:
+                row["target_sha256"] = SUCCESSOR
+        write_rows(self.root / LEDGER, self.columns, self.records)
+        with self.assertRaisesRegex(AssertionError, "historical vmSymbols pin drift"):
+            self.verify.verify_security_properties_8364182_backport(self.root)
 
     def test_unknown_hotswap_drift_still_fails(self) -> None:
         target = self.root / TARGET
@@ -103,6 +171,22 @@ class Jdk8364182LineageTest(unittest.TestCase):
                 break
         write_rows(self.root / LEDGER, self.columns, self.records)
         with self.assertRaisesRegex(AssertionError, "unexpected.*superseded"):
+            self.verify.verify_security_properties_8364182_backport(self.root)
+
+    def test_exact_jdk21u_source_cannot_be_reassigned_as_baseline(self) -> None:
+        for row in self.records:
+            if row["target_path"] == TARGET:
+                row["baseline_sha256"] = PREVIOUS_21U
+        write_rows(self.root / LEDGER, self.columns, self.records)
+        with self.assertRaisesRegex(AssertionError, "aliases a pinned state"):
+            self.verify.verify_security_properties_8364182_backport(self.root)
+
+    def test_old_m3_string_successor_cannot_be_reassigned_as_baseline(self) -> None:
+        for row in self.records:
+            if row["target_path"] == TARGET:
+                row["baseline_sha256"] = HISTORICAL_SUPERSEDED
+        write_rows(self.root / LEDGER, self.columns, self.records)
+        with self.assertRaisesRegex(AssertionError, "aliases a pinned state"):
             self.verify.verify_security_properties_8364182_backport(self.root)
 
     def test_baseline_and_original_target_cannot_alias_successor(self) -> None:
