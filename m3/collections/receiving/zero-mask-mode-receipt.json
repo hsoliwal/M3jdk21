@@ -57,7 +57,7 @@
     },
     "canonicalFixedPointAndRefusal": "PASS_REPORTED",
     "currentEngineDependencyRequalification": "OPEN_DRAFT_PR_17256",
-    "targetExactGitBlob": "PENDING_READBACK",
+    "targetExactGitBlob": "PASS_GITHUB_BLOB_READBACK",
     "targetJava21Compile": "NOT_RUN",
     "targetCompleteSuite": "NOT_RUN",
     "targetNativeJNI": "NOT_RUN",
