@@ -232,10 +232,8 @@ public class UnifiedSet<T>
         this.occupied = 0;
         Object[] set = this.table;
 
-        for (int i = set.length; i-- > 0; )
-        {
-            set[i] = null;
-        }
+        // Modified 2026 by Hitesh Soliwal and contributors to the Synexia Project.
+        Arrays.fill(set, null);
     }
 
     @Override

@@ -1,6 +1,9 @@
 /*
  * Copyright (C) 2012 The Guava Authors
  *
+ * Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project:
+ * array-backed entry hash traversal; previous serialized identity retained.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -81,6 +84,9 @@ import org.jspecify.annotations.Nullable;
 @GwtIncompatible // not worth using in GWT for now
 class CompactHashMap<K extends @Nullable Object, V extends @Nullable Object>
     extends AbstractMap<K, V> implements Serializable {
+  // Preserve the computed stream identity from the inherited hashCode implementation.
+  private static final long serialVersionUID = -710838063514302041L;
+
   /*
    * TODO: Make this a drop-in replacement for j.u. versions, actually drop them in, and test the
    * world. Figure out what sort of space-time tradeoff we're actually going to get here with the
@@ -616,6 +622,32 @@ class CompactHashMap<K extends @Nullable Object, V extends @Nullable Object>
    */
   int adjustAfterRemove(int indexBeforeRemove, @SuppressWarnings("unused") int indexRemoved) {
     return indexBeforeRemove - 1;
+  }
+
+  @Override
+  public int hashCode() {
+    // Preserve entrySet overrides in subclasses outside the two array-storage owners.
+    if (getClass() != CompactHashMap.class && getClass() != CompactLinkedHashMap.class) {
+      return super.hashCode();
+    }
+    Map<K, V> delegate = delegateOrNull();
+    if (delegate != null) {
+      return delegate.entrySet().hashCode();
+    }
+    int expectedMetadata = metadata;
+    int hashCode = 0;
+    for (int index = firstEntryIndex(); index >= 0; ) {
+      if (metadata != expectedMetadata) {
+        throw new ConcurrentModificationException();
+      }
+      K key = key(index);
+      V value = value(index);
+      // An entry iterator advances before hashing its output. Capture both payloads
+      // and the successor before callbacks, including on the final entry.
+      index = getSuccessor(index);
+      hashCode += java.util.Objects.hashCode(key) ^ java.util.Objects.hashCode(value);
+    }
+    return hashCode;
   }
 
   private abstract class Itr<T extends @Nullable Object> implements Iterator<T> {

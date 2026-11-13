@@ -1,7 +1,7 @@
 import "copyright.stg"
 import "primitiveLiteral.stg"
 
-targetPath() ::= "com/m3/collections/eclipse/impl/iterator"
+targetPath() ::= "jdk/m3/collections/eclipse/impl/iterator"
 
 fileName(primitive) ::= "Unmodifiable<primitive.name>Iterator"
 
@@ -12,10 +12,10 @@ class(primitive) ::= <<
 body(type, name) ::= <<
 <copyright()>
 
-package com.m3.collections.eclipse.impl.iterator;
+package jdk.m3.collections.eclipse.impl.iterator;
 
-import com.m3.collections.eclipse.api.iterator.<name>Iterator;
-import com.m3.collections.eclipse.api.iterator.Mutable<name>Iterator;
+import jdk.m3.collections.eclipse.api.iterator.<name>Iterator;
+import jdk.m3.collections.eclipse.api.iterator.Mutable<name>Iterator;
 
 /**
  * Unmodifiable<name>Iterator is a wrapper around <name>Iterator which is unmodifiable and doesn't support remove.

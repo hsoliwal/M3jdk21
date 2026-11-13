@@ -1,7 +1,7 @@
 import "copyrightAndOthers.stg"
 import "primitiveLiteral.stg"
 
-targetPath() ::= "com/m3/collections/eclipse/api"
+targetPath() ::= "jdk/m3/collections/eclipse/api"
 
 fileName(primitive) ::= "<primitive.name>Iterable"
 
@@ -12,46 +12,46 @@ class(primitive) ::= <<
 body(type, name) ::= <<
 <copyrightAndOthers()>
 
-package com.m3.collections.eclipse.api;
+package jdk.m3.collections.eclipse.api;
 
 import java.util.Collection;
 import java.util.NoSuchElementException;
 <(wideStatisticsImport.(type))>
 
 <(comparatorImports.(type))(type)>
-import com.m3.collections.eclipse.api.bag.primitive.Mutable<name>Bag;
-import com.m3.collections.eclipse.api.block.function.primitive.<name>ToBooleanFunction;
-import com.m3.collections.eclipse.api.block.function.primitive.<name>ToByteFunction;
-import com.m3.collections.eclipse.api.block.function.primitive.<name>ToShortFunction;
-import com.m3.collections.eclipse.api.block.function.primitive.<name>ToCharFunction;
-import com.m3.collections.eclipse.api.block.function.primitive.<name>ToDoubleFunction;
-import com.m3.collections.eclipse.api.block.function.primitive.<name>ToFloatFunction;
-import com.m3.collections.eclipse.api.block.function.primitive.<name>ToIntFunction;
-import com.m3.collections.eclipse.api.block.function.primitive.<name>ToLongFunction;
-import com.m3.collections.eclipse.api.block.function.primitive.<name>ToObjectFunction;
-import com.m3.collections.eclipse.api.block.function.primitive.Boolean<name>ToBooleanFunction;
-import com.m3.collections.eclipse.api.block.function.primitive.Byte<name>ToByteFunction;
-import com.m3.collections.eclipse.api.block.function.primitive.Char<name>ToCharFunction;
-import com.m3.collections.eclipse.api.block.function.primitive.Double<name>ToDoubleFunction;
-import com.m3.collections.eclipse.api.block.function.primitive.Float<name>ToFloatFunction;
-import com.m3.collections.eclipse.api.block.function.primitive.Int<name>ToIntFunction;
-import com.m3.collections.eclipse.api.block.function.primitive.Long<name>ToLongFunction;
-import com.m3.collections.eclipse.api.block.function.primitive.Object<name>ToObjectFunction;
-import com.m3.collections.eclipse.api.block.function.primitive.Short<name>ToShortFunction;
-import com.m3.collections.eclipse.api.block.predicate.primitive.<name>Predicate;
-import com.m3.collections.eclipse.api.block.procedure.primitive.<name>Procedure;
-import com.m3.collections.eclipse.api.collection.primitive.MutableBooleanCollection;
-import com.m3.collections.eclipse.api.collection.primitive.MutableByteCollection;
-import com.m3.collections.eclipse.api.collection.primitive.MutableCharCollection;
-import com.m3.collections.eclipse.api.collection.primitive.MutableDoubleCollection;
-import com.m3.collections.eclipse.api.collection.primitive.MutableFloatCollection;
-import com.m3.collections.eclipse.api.collection.primitive.MutableIntCollection;
-import com.m3.collections.eclipse.api.collection.primitive.MutableLongCollection;
-import com.m3.collections.eclipse.api.collection.primitive.MutableShortCollection;
-import com.m3.collections.eclipse.api.iterator.<name>Iterator;
-import com.m3.collections.eclipse.api.list.primitive.Mutable<name>List;
-import com.m3.collections.eclipse.api.set.primitive.<name>Set;
-import com.m3.collections.eclipse.api.set.primitive.Mutable<name>Set;
+import jdk.m3.collections.eclipse.api.bag.primitive.Mutable<name>Bag;
+import jdk.m3.collections.eclipse.api.block.function.primitive.<name>ToBooleanFunction;
+import jdk.m3.collections.eclipse.api.block.function.primitive.<name>ToByteFunction;
+import jdk.m3.collections.eclipse.api.block.function.primitive.<name>ToShortFunction;
+import jdk.m3.collections.eclipse.api.block.function.primitive.<name>ToCharFunction;
+import jdk.m3.collections.eclipse.api.block.function.primitive.<name>ToDoubleFunction;
+import jdk.m3.collections.eclipse.api.block.function.primitive.<name>ToFloatFunction;
+import jdk.m3.collections.eclipse.api.block.function.primitive.<name>ToIntFunction;
+import jdk.m3.collections.eclipse.api.block.function.primitive.<name>ToLongFunction;
+import jdk.m3.collections.eclipse.api.block.function.primitive.<name>ToObjectFunction;
+import jdk.m3.collections.eclipse.api.block.function.primitive.Boolean<name>ToBooleanFunction;
+import jdk.m3.collections.eclipse.api.block.function.primitive.Byte<name>ToByteFunction;
+import jdk.m3.collections.eclipse.api.block.function.primitive.Char<name>ToCharFunction;
+import jdk.m3.collections.eclipse.api.block.function.primitive.Double<name>ToDoubleFunction;
+import jdk.m3.collections.eclipse.api.block.function.primitive.Float<name>ToFloatFunction;
+import jdk.m3.collections.eclipse.api.block.function.primitive.Int<name>ToIntFunction;
+import jdk.m3.collections.eclipse.api.block.function.primitive.Long<name>ToLongFunction;
+import jdk.m3.collections.eclipse.api.block.function.primitive.Object<name>ToObjectFunction;
+import jdk.m3.collections.eclipse.api.block.function.primitive.Short<name>ToShortFunction;
+import jdk.m3.collections.eclipse.api.block.predicate.primitive.<name>Predicate;
+import jdk.m3.collections.eclipse.api.block.procedure.primitive.<name>Procedure;
+import jdk.m3.collections.eclipse.api.collection.primitive.MutableBooleanCollection;
+import jdk.m3.collections.eclipse.api.collection.primitive.MutableByteCollection;
+import jdk.m3.collections.eclipse.api.collection.primitive.MutableCharCollection;
+import jdk.m3.collections.eclipse.api.collection.primitive.MutableDoubleCollection;
+import jdk.m3.collections.eclipse.api.collection.primitive.MutableFloatCollection;
+import jdk.m3.collections.eclipse.api.collection.primitive.MutableIntCollection;
+import jdk.m3.collections.eclipse.api.collection.primitive.MutableLongCollection;
+import jdk.m3.collections.eclipse.api.collection.primitive.MutableShortCollection;
+import jdk.m3.collections.eclipse.api.iterator.<name>Iterator;
+import jdk.m3.collections.eclipse.api.list.primitive.Mutable<name>List;
+import jdk.m3.collections.eclipse.api.set.primitive.<name>Set;
+import jdk.m3.collections.eclipse.api.set.primitive.Mutable<name>Set;
 
 /**
  * <name>Iterable is an interface which is memory-optimized for <type> primitives.
@@ -628,7 +628,7 @@ comparatorImports ::= [
 
 allComparatorImports(type) ::= <<
 import java.util.Comparator;
-import com.m3.collections.eclipse.api.block.comparator.primitive.<name>Comparator;
+import jdk.m3.collections.eclipse.api.block.comparator.primitive.<name>Comparator;
 
 >>
 

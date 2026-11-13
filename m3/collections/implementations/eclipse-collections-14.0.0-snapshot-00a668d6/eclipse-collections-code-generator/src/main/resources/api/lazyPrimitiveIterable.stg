@@ -1,7 +1,7 @@
 import "copyrightAndOthers.stg"
 import "primitiveLiteral.stg"
 
-targetPath() ::= "com/m3/collections/eclipse/api"
+targetPath() ::= "jdk/m3/collections/eclipse/api"
 
 fileName(primitive) ::= "Lazy<primitive.name>Iterable"
 
@@ -19,19 +19,19 @@ Lazy<toName>Iterable collect<toName>(<fromName>To<toName>Function function);
 body(type, name) ::= <<
 <copyrightAndOthers()>
 
-package com.m3.collections.eclipse.api;
+package jdk.m3.collections.eclipse.api;
 
-import com.m3.collections.eclipse.api.block.function.primitive.<name>ToBooleanFunction;
-import com.m3.collections.eclipse.api.block.function.primitive.<name>ToByteFunction;
-import com.m3.collections.eclipse.api.block.function.primitive.<name>ToCharFunction;
-import com.m3.collections.eclipse.api.block.function.primitive.<name>ToDoubleFunction;
-import com.m3.collections.eclipse.api.block.function.primitive.<name>ToFloatFunction;
-import com.m3.collections.eclipse.api.block.function.primitive.<name>ToIntFunction;
-import com.m3.collections.eclipse.api.block.function.primitive.<name>ToLongFunction;
-import com.m3.collections.eclipse.api.block.function.primitive.<name>ToObjectFunction;
-import com.m3.collections.eclipse.api.block.function.primitive.<name>ToShortFunction;
-import com.m3.collections.eclipse.api.block.predicate.primitive.<name>Predicate;
-import com.m3.collections.eclipse.api.block.procedure.primitive.<name>Procedure;
+import jdk.m3.collections.eclipse.api.block.function.primitive.<name>ToBooleanFunction;
+import jdk.m3.collections.eclipse.api.block.function.primitive.<name>ToByteFunction;
+import jdk.m3.collections.eclipse.api.block.function.primitive.<name>ToCharFunction;
+import jdk.m3.collections.eclipse.api.block.function.primitive.<name>ToDoubleFunction;
+import jdk.m3.collections.eclipse.api.block.function.primitive.<name>ToFloatFunction;
+import jdk.m3.collections.eclipse.api.block.function.primitive.<name>ToIntFunction;
+import jdk.m3.collections.eclipse.api.block.function.primitive.<name>ToLongFunction;
+import jdk.m3.collections.eclipse.api.block.function.primitive.<name>ToObjectFunction;
+import jdk.m3.collections.eclipse.api.block.function.primitive.<name>ToShortFunction;
+import jdk.m3.collections.eclipse.api.block.predicate.primitive.<name>Predicate;
+import jdk.m3.collections.eclipse.api.block.procedure.primitive.<name>Procedure;
 
 /**
  * This file was automatically generated from template file lazyPrimitiveIterable.stg.
