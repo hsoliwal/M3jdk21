@@ -1,0 +1,181 @@
+{
+  "schema": "M3_HIERARCHY_HEADER_RECEIVING_RECEIPT_V1",
+  "status": "QUALIFIED_HEADER_ONLY",
+  "targetRepository": "hsoliwal/M3jdk21",
+  "targetBase": "b98bf8c065818aac3447be165909e2a013325d9a",
+  "canonicalRepository": "hsoliwal/com.synexia",
+  "canonicalPr": "https://github.com/hsoliwal/com.synexia/pull/17182",
+  "canonicalCommit": "e95aae15ee009158b99a56148e271d37dbf38a8b",
+  "canonicalCrate": "synexia-openrewrite-recipes/recipe-crates/hierarchy-header-style-20261112",
+  "recipeInput": "3bc9e097541ba71a150a1d635209c677fe76b30c",
+  "qualifiedOutputs": {
+    "m3/lexicon/receiver/src/main/java/jdk/m3/lexicon/M3LexiconFormat.java": {
+      "bytes": 5410,
+      "sha256": "dade3657573889e3e6649e76669667f72d3a48b8f97fafbe7941a38e58f4777b",
+      "gitBlob": "d5060b50c1cc0eb4732c21b37954673319c6ccf5"
+    },
+    "m3/lexicon/receiver/src/test/java/jdk/m3/lexicon/HierarchyHeaderTest.java": {
+      "bytes": 8434,
+      "sha256": "16f22f687ba1d729a0d256d082361fe419192991034f32525ac35fd7b8fe3d0c",
+      "gitBlob": "270ecb8232e85ce0b9eea0f740bc0f4fe9b455b7"
+    },
+    "m3/lexicon/LEXICON_RECEIVER_LEDGER.tsv": {
+      "bytes": 5197,
+      "sha256": "305241db28471aab6f883752b3fcd450a68467266dcaaccc3c73438a0bbfe022",
+      "gitBlob": "2b542c5c2dd37e235bf10f896c118ead5aad95e0"
+    }
+  },
+  "mapping": {
+    "sourceOwners": [
+      {
+        "repository": "hsoliwal/com.synexia",
+        "path": "synexia-dictlang/shared/core/src/main/java/com/synexia/dictshared/core/MappedHierarchicalLexicon.java",
+        "gitBlob": "4d08f568e0c44c717dc3595d5de5965bfc31b835"
+      },
+      {
+        "repository": "hsoliwal/com.synexia",
+        "path": "synexia-dictlang/shared/core/src/main/java/com/synexia/dictshared/core/Format.java",
+        "gitBlob": "25a1b5e2b8fd3ffbd4c3d6da0eaeb6df3c8344b3"
+      }
+    ],
+    "target": "jdk.m3.lexicon.M3LexiconFormat.SYNHIER1",
+    "magicAscii": "SYNHIER1",
+    "magicBigEndian": "53594e4849455231",
+    "byteOrder": "LITTLE_ENDIAN",
+    "headerBytes": 128,
+    "versionOffset": 8,
+    "version": 1,
+    "bodyReaderOwner": "NONE",
+    "rights": "Apache-2.0; Hitesh Soliwal/Synexia and contributors"
+  },
+  "precompute": {
+    "pattern": "private-enum-snapshot-v1",
+    "privateEnumReferenceCount": 15,
+    "publicValuesDefensive": true,
+    "legacyFormatNamesAndOrdinalsPreserved": 14,
+    "legacyPublicDeclarationsPreserved": 22,
+    "newPublicApi": "one appended SYNHIER1 enum constant",
+    "apiFingerprint": "183915ebdfe31f88c652d49e285e3515079da7499d994cebdd98d04da83b84a8"
+  },
+  "executed": {
+    "javaRecipeTests": 2,
+    "textRecipeTests": 4,
+    "baselineDonorOracleTests": 9,
+    "candidateDonorAndReceivingTests": 18,
+    "receivingOnlyTests": 9,
+    "receivingOnlySourceCount": 27,
+    "privateDonorClassesAvailable": 0,
+    "existingReceiverChecksBaseline": 806797,
+    "existingReceiverChecksCandidate": 806799,
+    "negativeControls": [
+      "new standalone tests reject old registry",
+      "wrong hierarchy byte order",
+      "undersized minimum header"
+    ],
+    "strictCompiler": [
+      "--release",
+      "21",
+      "-proc:none",
+      "-g:none",
+      "-Xlint:all",
+      "-Werror"
+    ],
+    "oracleVersions": {
+      "commonsLang": "3.17.0",
+      "commonsCsv": "1.12.0",
+      "junit": "5.11.4"
+    },
+    "offlineJarPins": 47,
+    "defaultReceipt": "eb9c6904c144b4838d9f4c86c3a564d627637108",
+    "fixedReceipt": "256bfb1b57c298e13d9727cb8c1df9c2e2917e34",
+    "fixedFlags": [
+      "-Xbatch",
+      "-XX:-TieredCompilation"
+    ],
+    "runtimeScope": "receiving sources compiled/executed in RAM on recorded system Java21 Windows AMD64; not installed M3JDK execution",
+    "compilerStyle": {
+      "oldIntroduced": 27,
+      "newIntroduced": 0,
+      "schemes": 2,
+      "unchangedFullFileWarnings": 6,
+      "producerReceipt": "e3ee1aa328725485a482bf7f8dd1c4c915d93308",
+      "sourceReferences": {
+        "jdk.m3.compiler.standard.ChangedNameGate": {
+          "path": "m3/compiler/jdk-standard/src/main/java/jdk/m3/compiler/standard/ChangedNameGate.java",
+          "sha": "1c94b79052ff69446ab4a70ee38dc33b4cef34cb",
+          "repository": "hsoliwal/M3JDK21"
+        },
+        "jdk.m3.compiler.standard.JdkStandardCensus": {
+          "path": "m3/compiler/jdk-standard/src/main/java/jdk/m3/compiler/standard/JdkStandardCensus.java",
+          "sha": "cc9dbef02477ea68e9089b99c2ca6a959edcf54c",
+          "repository": "hsoliwal/M3JDK21"
+        },
+        "jdk.m3.compiler.standard.JdkStandardPlugin": {
+          "path": "m3/compiler/jdk-standard/src/main/java/jdk/m3/compiler/standard/JdkStandardPlugin.java",
+          "sha": "b05ddc1096a4e26e67486ef26c26bd56885ccf83",
+          "repository": "hsoliwal/M3JDK21"
+        },
+        "jdk.m3.compiler.standard.NameQuality": {
+          "path": "m3/compiler/jdk-standard/src/main/java/jdk/m3/compiler/standard/NameQuality.java",
+          "sha": "8ffdf31e8a81bddce9b2426e4dd784bf75257514",
+          "repository": "hsoliwal/M3JDK21"
+        }
+      },
+      "policyChanged": false
+    }
+  },
+  "allocationObservation": {
+    "samples": 3,
+    "iterationsPerSample": 20000,
+    "profiles": [
+      "default",
+      "non-tiered batch"
+    ],
+    "knownBytesPerCall": [
+      144,
+      72
+    ],
+    "unknownBytesPerCall": [
+      128,
+      56
+    ],
+    "shortBytesPerCall": [
+      0,
+      0
+    ],
+    "scope": "thread allocation after initialization; no startup/retained-memory/latency/throughput or other-platform claim"
+  },
+  "naming": {
+    "receipt": "e72c4e719746dcdb21f85ffbec4d911f578ea0a3",
+    "scope": "canonical functions on selected files; not whole-tree CLI or release"
+  },
+  "open": [
+    "SYNHIER1/SYNDICT1 body readers and semantic/checksum/snapshot validation",
+    "hierarchical namespace16/entry48 identity and lossless runtime mapping",
+    "standard dictionary, mmap/process lifetime, authoritative storage/JNI/LFU projection fit",
+    "full target Maven lifecycle/module/JDK build and release",
+    "Android/ARM/embedded, cold startup and throughput"
+  ],
+  "localOutputBytesAdded": 0,
+  "taskCapBytes": 571473920,
+  "taskAllocatedBytes": 571469824,
+  "reserveBytes": 8589934592,
+  "generationCalls": 0,
+  "previousProposal": {
+    "head": "7c505990b07c2caabde0dd56170159ef15f7d406",
+    "canonicalCommit": "32876b4fb9d6154db427d67d5fc87fa3e52180f0",
+    "canonicalPrMerged": true,
+    "scope": "style-corrected output regenerates the proposal from the original immutable master inputs"
+  },
+  "currentDonorHeaderFacts": {
+    "source": "63a789b94a8a3f9e0fa1beb630576d32ee42139b",
+    "magic": "31524549484e5953",
+    "version": 1,
+    "formatHeaderBytes": 128,
+    "scope": "source-level fact confirmation; frozen runtime input remains explicitly pinned"
+  },
+  "inheritedCiFailures": {
+    "caseLiang": "stale six-source and dependent script seals; repair not admitted",
+    "currentCore": "missing/mismatched transitions and inaccurate frozen lengths; repair not admitted"
+  }
+}
