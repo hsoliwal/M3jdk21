@@ -13007,6 +13007,30 @@
         "observation": "Canonical Java recipe/templates published in hsoliwal/com.synexia@c10d88bca18d4f1690dc2484bd6f052eec21c8ca; manifest SHA-256 ec5dcf2910845783e319a489b4027cf30987fcb0971dc51b1f664b6cebad81b9. Exact SDK four-test qualification passed. Selected receiver Maven baseline 2/emitted 3 tests, independent 65,536-operation physical/model comparison across 16 seeds and identical javap public descriptors passed. Runtime receipts bind exact emitted postimages. Candidate target commit remains null until publication; no full image or universal performance claim. Historical fused IntInt candidate remains rejected after about 26% matched-remove/reinsert timing regressions at 32/96 collision keys; no IntInt source/test/target record is included. Completed portable receiver verification and the historical rejection diagnostic are published at hsoliwal/com.synexia@45f40a8fd3691e33cf5b7c3913375487c2add94b. The 65,536 operations are the total across 16 seeds, including 2,300 successful conditional removals."
       },
       {
+        "id": "m3.optane.checkpoint-streams",
+        "kind": "direct-port",
+        "status": "implemented-unverified",
+        "reason": "Add bounded encoder/decoder stream entry points to the existing jdk.m3.optane.PmemCheckpoint owner without changing its checkpoint format, module, prior API or native ABI. Focused component proofs do not establish complete installed-M3JDK21 or physical-PMem qualification; no receiving phase advances.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": null,
+            "module": "com.synexia.m3.pmem",
+            "path": "m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/PmemCheckpoint.java",
+            "symbol": "com.synexia.m3.pmem.PmemCheckpoint",
+            "signatures": [
+              "public static int maxChunks(PmemBlockStore)",
+              "public static Info commit(PmemBlockStore, String, long, int, byte[], ChunkSource) throws IOException",
+              "public static Info inspect(PmemBlockStore, String) throws IOException",
+              "public static Info restore(PmemBlockStore, String, byte[], RestoreTarget) throws IOException",
+              "public static Info commitStream(PmemBlockStore, String, long, long, byte[], StreamWriter) throws IOException",
+              "public static <T> T readStream(PmemBlockStore, String, long, byte[], StreamReader<T>) throws IOException"
+            ],
+            "sha256": "74d531e5a6e871159f1418da1b3abe097c3c94e9cda6070d3116f034cb59a7cb",
+            "git_blob_sha1": "8d9537560b8b3f978f3c131ea47bd6590582af55",
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "visibility": "public"
         "id": "m3.collections.primitive-map-growth",
         "kind": "specialization",
         "status": "implemented-unverified",
@@ -14542,6 +14566,121 @@
           {
             "repo": "hsoliwal/M3jdk21",
             "commit": null,
+            "module": "jdk.m3.io",
+            "path": "src/jdk.m3.io/share/classes/jdk/m3/optane/PmemCheckpoint.java",
+            "symbol": "jdk.m3.optane.PmemCheckpoint",
+            "signatures": [
+              "public static int maxChunks(PmemBlockStore)",
+              "public static Info commit(PmemBlockStore, String, long, int, byte[], ChunkSource) throws IOException",
+              "public static Info inspect(PmemBlockStore, String) throws IOException",
+              "public static Info restore(PmemBlockStore, String, byte[], RestoreTarget) throws IOException",
+              "public static Info commitStream(PmemBlockStore, String, long, long, byte[], StreamWriter) throws IOException",
+              "public static <T> T readStream(PmemBlockStore, String, long, byte[], StreamReader<T>) throws IOException"
+            ],
+            "sha256": "e53559e8182e0d4de0fcb7536288a8d0b718ab0f4e3ef05081250d016df4b87c",
+            "git_blob_sha1": "798f1f2401da82d805f32f91c01b96be8f2372f9",
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "visibility": "public"
+          }
+        ],
+        "owner": "Existing M3JDK21 jdk.m3.io / jdk.m3.optane.PmemCheckpoint product owner; canonical reusable implementation and recipe custody remain hsoliwal/com.synexia.",
+        "identity": {
+          "namespace": "Existing caller-supplied checkpoint SHA-256 identity and unchanged M3PMEM_CHECKPOINT_MANIFEST_V1 / M3PMEM_CHECKPOINT_CHUNK_V1 domains.",
+          "generation": "Strictly increasing nonnegative generation for the same checkpoint identity; append-only chunk and manifest ordinals remain owned by PmemBlockStore and PmemTaskLog."
+        },
+        "contract": {
+          "differences": [
+            "Add commitStream and readStream with StreamWriter and StreamReader<T> callback interfaces; no existing signature is removed or renamed.",
+            "Bound scratch to the caller-owned transfer array plus the existing bounded manifest; publish only after successful writer completion.",
+            "Require validated complete reader consumption and reject caught stream failures, expired or foreign-thread stream use and callback mutation of the borrowed store."
+          ],
+          "compatibility_obligations": [
+            "Preserve all prior PmemCheckpoint public methods, nested Info/ChunkSource/RestoreTarget contracts and Java21 checked exceptions.",
+            "Retain M3CKPT01 version1 manifest bytes, chunk identities, persist-before-manifest publication and existing uncertain-append reopen rules.",
+            "Read earlier chunk-based checkpoints and restore stream-produced checkpoints through the earlier chunk API.",
+            "Retain the jdk.m3.io module, jdk.m3.optane package export, PmemBlockStore/PmemTaskLog owners and every existing native JNI ABI.",
+            "Keep standard Java APIs and optional-module/ordered-family admission unchanged; do not introduce a Synexia runtime dependency."
+          ],
+          "public_surface": [
+            "Existing jdk.m3.optane.PmemCheckpoint public APIs are retained.",
+            "Add public static commitStream(PmemBlockStore, String, long, long, byte[], StreamWriter) and readStream(PmemBlockStore, String, long, byte[], StreamReader<T>).",
+            "Add public nested StreamWriter.write(OutputStream) and StreamReader<T>.read(InputStream), both throwing IOException."
+          ]
+        },
+        "format": {
+          "schema": "Existing M3CKPT01 version1 checkpoint manifest and M3BLOCK1 block storage; no format version or domain change.",
+          "abi": "Additive Java API only. Existing public method signatures, module/package ownership, native methods and JNI symbols remain unchanged.",
+          "bootstrap": "Use existing jdk.m3.io owners and Java21 InputStream/OutputStream; no new module, runtime service, mapping engine or persistence log."
+        },
+        "dependencies": [
+          {
+            "id": "jdk.m3.optane.PmemBlockStore",
+            "resolution": "resolved",
+            "reason": "Reuse the existing product fixed-slot append, validation, checksum and reopen owner."
+          },
+          {
+            "id": "jdk.m3.optane.PmemTaskLog",
+            "resolution": "resolved",
+            "reason": "Reuse the existing block-store publication and recovery log without new native selectors."
+          },
+          {
+            "id": "java.base.java.io",
+            "resolution": "resolved",
+            "reason": "Use Java21 InputStream/OutputStream through existing module dependency direction."
+          },
+          {
+            "id": "m3jdk21.installed-image-and-platform-qualification",
+            "resolution": "pending",
+            "reason": "Source-built modified JDK, complete product/control-reactor and physical Optane/DAX/power-loss evidence remain separate receiving gates."
+          }
+        ],
+        "materialization": {
+          "admission": "Exact Synexia source preimage at d6c9c9fa6669377799b106a417fdec18f9501c25 and exact M3JDK21 target preimage at 0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb; revised source and target artifacts remain candidate revisions with explicit content seals.",
+          "joins": "Direct package adaptation into the existing product owner; no second payload store, hierarchy, backend or active KV owner.",
+          "outputs": "Existing PmemCheckpoint source, target-owned stream tests and passive metadata/documentation only. Canonical recipe assets remain in Synexia.",
+          "cached_facts": "No whole-checkpoint payload cache. The caller owns one bounded transfer array; the existing manifest bounds and exclusive immutable backing-store rules remain."
+        },
+        "recipe": {
+          "id": "pmem-stream-m3jdk-runtime-java-20261113",
+          "version": "20261113",
+          "path": null,
+          "sha256": null,
+          "preconditions": [
+            "Execute the canonical Synexia Maven/OpenRewrite recipe against exact pinned source/target preimages and transfer only verified postimages.",
+            "Source preimage SHA-256 a414c8454a62a0bc1eff1c9d8fce2880c787f5a6f80360e2cb2b05a8fa874bd9; target preimage SHA-256 89541c886e3f8a66adc8e98e654b8246715ad4e21f75a355b63c0d62d366562e.",
+            "Require first application, unchanged fixed point, source-drift/missing/duplicate and occupied-new-path refusal evidence.",
+            "Preserve every earlier mapping record and all four queued naming operations; update only the authority map blob pin.",
+            "Candidate content hashes are not committed-revision or complete product-runtime proof."
+          ],
+          "rollback": "Use an additive source-sealed correction recipe preserving independent receiving changes and previous checkpoint readability; never rewrite develop history.",
+          "canonical_repository": "hsoliwal/com.synexia",
+          "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-pmem-stream-checkpoint-20261113"
+        },
+        "tests": [],
+        "test_descriptions": [
+          "Focused source Java21/JIT/interpreted/JUnit checks cover FILE/POSIX, old/new checkpoint interoperability, callback ownership, caught failures and simulated persistence boundaries; exact execution receipts are separate from this mapping.",
+          "A separate 32 MiB FILE stream with a 16 MiB maximum Java heap and 256 KiB transfers verifies bounded payload allocation, close/reopen and an incremental content hash.",
+          "Target-owned PmemCheckpointStreamSmokeTest and PmemCheckpointStreamJUnitTest exercise emitted product code; target source-built JDK/jtreg/control-reactor and physical-PMem qualifications remain pending."
+        ],
+        "provenance": {
+          "license": "Apache-2.0 for Synexia-authored implementation, target package adaptation, tests and mapping metadata; preserve existing copyright and all unaffected OpenJDK/third-party rights.",
+          "publication": "Reviewable existing-owner extension with unchanged storage format and native ABI; no claim of release or complete platform admission.",
+          "copied_code": true,
+          "donor_boundary": "Receive independently authored Synexia source through the canonical recipe, adapting only its package for this runtime owner. No external donor implementation or runtime dependency is added."
+        },
+        "sync": {
+          "source_revision": null,
+          "target_revision": null,
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Package-only source adaptation from com.synexia.m3.pmem.PmemCheckpoint to jdk.m3.optane.PmemCheckpoint; target-owned test declarations and existing-owner documentation are separate emitted outputs."
+          ],
+          "pending": [
+            "Bind final immutable publication revision and passive executed-recipe/product receipts after verified publication; do not attribute revised bytes to either baseline commit.",
+            "Source-built modified M3JDK21 image, applicable real jtreg/control-reactor and repository release gates.",
+            "Physical Optane/DAX/PMDK persistence, power-loss and NUMA/platform qualification; no hardware-throughput claim.",
+            "Existing optional-module and String -> arrays -> collections -> AST/compiler receiving order remains unchanged."
             "module": null,
             "path": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/list/mutable/FastList.java",
             "symbol": "jdk.m3.collections.eclipse.impl.list.mutable.FastList",
@@ -14961,6 +15100,44 @@
           "conflicts": []
         },
         "lineage": {
+          "previous_sources": [
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d6c9c9fa6669377799b106a417fdec18f9501c25",
+              "module": "com.synexia.m3.pmem",
+              "path": "m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/PmemCheckpoint.java",
+              "symbol": "com.synexia.m3.pmem.PmemCheckpoint",
+              "signatures": [
+                "public static int maxChunks(PmemBlockStore)",
+                "public static Info commit(PmemBlockStore, String, long, int, byte[], ChunkSource) throws IOException",
+                "public static Info inspect(PmemBlockStore, String) throws IOException",
+                "public static Info restore(PmemBlockStore, String, byte[], RestoreTarget) throws IOException"
+              ],
+              "sha256": "a414c8454a62a0bc1eff1c9d8fce2880c787f5a6f80360e2cb2b05a8fa874bd9",
+              "git_blob_sha1": "c457990ee36119a9ae18e28bbf4ee581ccdde6b8",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "visibility": "public"
+            }
+          ],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb",
+              "module": "jdk.m3.io",
+              "path": "src/jdk.m3.io/share/classes/jdk/m3/optane/PmemCheckpoint.java",
+              "symbol": "jdk.m3.optane.PmemCheckpoint",
+              "signatures": [
+                "public static int maxChunks(PmemBlockStore)",
+                "public static Info commit(PmemBlockStore, String, long, int, byte[], ChunkSource) throws IOException",
+                "public static Info inspect(PmemBlockStore, String) throws IOException",
+                "public static Info restore(PmemBlockStore, String, byte[], RestoreTarget) throws IOException"
+              ],
+              "sha256": "89541c886e3f8a66adc8e98e654b8246715ad4e21f75a355b63c0d62d366562e",
+              "git_blob_sha1": "5cacbe29d1d5048393fb4958adb64cadb3e9e5cd",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "visibility": "public"
           "previous_sources": [],
           "previous_targets": [
             {
@@ -15254,6 +15431,8 @@
           ],
           "supersedes": []
         },
+        "source_state": "implemented",
+        "observation": "Scoped existing-owner streaming implementation with explicit candidate source/target seals. This metadata does not itself establish recipe execution, an installed modified-JDK image, complete source inventory, physical PMem behavior or family/release promotion. Naming queue semantics and all prior records are retained."
         "source_state": "partial",
         "observation": "Current exact source/component candidate supersedes earlier preimage/held descriptions only within this atom. Earlier source and target identities remain in lineage; historical proof is not transferred. Retained donor source under m3/collections/implementations; source/component qualification is not live module absorption or installed/source-built M3JDK21 admission."
         "observation": "JDK style/Javadoc source-only candidate from Synexia #17302 on product draft #2971; master and SDK/image/release acceptance remain unqualified."

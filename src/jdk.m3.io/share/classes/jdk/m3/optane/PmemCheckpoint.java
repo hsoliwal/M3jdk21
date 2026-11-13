@@ -3,6 +3,8 @@
 package jdk.m3.optane;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -57,6 +59,407 @@ public final class PmemCheckpoint {
         void writeChunk(int index, byte[] transferBuffer, int length) throws IOException;
         void commit() throws IOException;
         void abort() throws IOException;
+    }
+
+    /**
+     * Encode into a bounded borrowed stream on the calling thread. Do not retain
+     * the stream, mutate its transfer array, or access the borrowed store from
+     * this callback. Closing the stream seals its chunks, but does not publish
+     * the checkpoint; publication requires successful callback completion.
+     */
+    @FunctionalInterface
+    public interface StreamWriter {
+        void write(OutputStream output) throws IOException;
+    }
+
+    /**
+     * Decode the entire borrowed stream on the calling thread into private state.
+     * The result becomes available to the caller only after complete consumption
+     * and successful validation. Do not retain the stream, mutate its transfer
+     * array, access the store, or publish partially decoded state from the callback.
+     * The decoder owns disposal of resources it creates if decoding fails.
+     */
+    @FunctionalInterface
+    public interface StreamReader<T> {
+        T read(InputStream input) throws IOException;
+    }
+
+    /**
+     * Encode a checkpoint without materializing its entire payload on the heap.
+     * The nonempty transfer buffer must fit one store payload. maximumBytes is a
+     * hard limit and also reserves ceil(maximumBytes / buffer.length) chunks plus
+     * one manifest before invoking the writer. Empty streams use zero chunks.
+     * Full chunks persist while writing; flush does not split a partial chunk.
+     * close seals a partial chunk but cannot publish before the callback returns.
+     *
+     * <p>Any stream failure poisons this operation even if the writer catches it.
+     * A failed writer can leave unreferenced chunks. An uncertain final append
+     * can have committed: reopen and inspect before retrying. The existing v1
+     * manifest and chunk format is also readable by {@link #restore}.</p>
+     */
+    public static Info commitStream(PmemBlockStore store, String checkpointSha256,
+                                    long generation, long maximumBytes, byte[] transferBuffer,
+                                    StreamWriter writer) throws IOException {
+        Objects.requireNonNull(store, "store");
+        Objects.requireNonNull(transferBuffer, "transferBuffer");
+        Objects.requireNonNull(writer, "writer");
+        PmemBlockStore.parseHash(checkpointSha256);
+        if (generation < 0 || maximumBytes < 0 || transferBuffer.length == 0
+                || transferBuffer.length > store.maxPayloadBytes() || store.maxPayloadBytes() < HEADER_BYTES)
+            throw new IllegalArgumentException("checkpoint stream bounds are invalid");
+        long maximumChunks = maximumBytes == 0 ? 0 : 1 + (maximumBytes - 1) / transferBuffer.length;
+        if (maximumChunks > maxChunks(store))
+            throw new IllegalArgumentException("checkpoint stream exceeds bounded manifest");
+        synchronized (store) {
+            String key = manifestKey(checkpointSha256);
+            long previous = store.findLatest(key);
+            if (previous >= 0 && generation <= load(store, checkpointSha256, previous).info().generation())
+                throw new IllegalArgumentException("checkpoint generation must increase");
+            if (store.remainingCapacity() < maximumChunks + 1)
+                throw new IOException("insufficient block capacity for bounded checkpoint");
+            CheckpointOutput output = new CheckpointOutput(store, checkpointSha256, generation,
+                    maximumBytes, transferBuffer, (int) maximumChunks);
+            try {
+                writer.write(output);
+                output.finish();
+                return output.publish(key);
+            } finally {
+                output.revoke();
+            }
+        }
+    }
+
+    /**
+     * Validate the latest checkpoint and decode its complete finite byte stream.
+     * maximumBytes and the transfer buffer's ability to hold every stored chunk
+     * are checked before the reader runs. Existing chunk checkpoints, including
+     * empty chunks, are accepted. Each chunk is revalidated while reading.
+     *
+     * <p>Closing early does not drain or accept a partial decode. Caught stream
+     * failures still refuse the result. The transfer buffer and bounded manifest
+     * are the adapter's scratch; allocations explicitly requested by a decoder
+     * (for example readAllBytes) and the decoded application's state are separate.</p>
+     */
+    public static <T> T readStream(PmemBlockStore store, String checkpointSha256,
+                                  long maximumBytes, byte[] transferBuffer,
+                                  StreamReader<T> reader) throws IOException {
+        Objects.requireNonNull(store, "store");
+        Objects.requireNonNull(transferBuffer, "transferBuffer");
+        Objects.requireNonNull(reader, "reader");
+        if (maximumBytes < 0 || transferBuffer.length == 0)
+            throw new IllegalArgumentException("checkpoint stream bounds are invalid");
+        synchronized (store) {
+            Manifest manifest = latest(store, checkpointSha256);
+            if (manifest.info().totalBytes() > maximumBytes)
+                throw new IllegalArgumentException("checkpoint exceeds reader byte limit");
+            ByteBuffer fields = ByteBuffer.wrap(manifest.bytes());
+            for (int index = 0; index < manifest.info().chunks(); index++) {
+                if (fields.getInt(HEADER_BYTES + ENTRY_BYTES * index + Long.BYTES) > transferBuffer.length)
+                    throw new IllegalArgumentException("checkpoint stream buffer is too small");
+            }
+            CheckpointInput input = new CheckpointInput(store, transferBuffer, manifest);
+            try {
+                T result = reader.read(input);
+                input.finish();
+                return result;
+            } finally {
+                input.revoke();
+            }
+        }
+    }
+
+    /** Scope checks precede store locking so a foreign callback thread cannot deadlock its owner. */
+    private static final class StreamScope {
+        private final Thread owner = Thread.currentThread();
+        private volatile boolean active = true;
+        private volatile Throwable failure;
+        private PmemBlockStore store;
+        private long expectedCount;
+
+        StreamScope(PmemBlockStore store) {
+            this.store = store;
+            expectedCount = store.committedCount();
+        }
+
+        void check() throws IOException {
+            if (Thread.currentThread() != owner) {
+                IOException problem = new IOException("checkpoint stream belongs to its callback thread");
+                poison(problem);
+                throw problem;
+            }
+            if (!active) throw new IOException("checkpoint stream callback has ended");
+            if (failure != null) throw new IOException("checkpoint stream operation failed", failure);
+            if (store.requiresReopen() || store.committedCount() != expectedCount) {
+                IOException problem = new IOException("checkpoint callback changed the borrowed store");
+                poison(problem);
+                throw problem;
+            }
+        }
+
+        synchronized void poison(Throwable problem) {
+            if (failure == null) failure = problem;
+        }
+
+        long append(String key, byte[] bytes, int length) throws IOException {
+            check();
+            long ordinal = store.append(key, bytes, 0, length);
+            if (ordinal != expectedCount) throw new IOException("checkpoint append ordinal changed");
+            expectedCount++;
+            return ordinal;
+        }
+
+        void revoke() { active = false; store = null; }
+    }
+
+    private static final class CheckpointOutput extends OutputStream {
+        private final StreamScope scope;
+        private final String identity;
+        private final long generation, maximum;
+        private byte[] buffer;
+        private ByteBuffer manifest;
+        private long total;
+        private int buffered, chunks;
+        private boolean closed;
+
+        CheckpointOutput(PmemBlockStore store, String identity, long generation, long maximum,
+                         byte[] buffer, int maximumChunks) {
+            scope = new StreamScope(store);
+            this.identity = identity;
+            this.generation = generation;
+            this.maximum = maximum;
+            this.buffer = buffer;
+            manifest = ByteBuffer.allocate(HEADER_BYTES + ENTRY_BYTES * maximumChunks);
+            manifest.put(MAGIC).putInt(VERSION).putInt(0).putLong(generation).putLong(0)
+                    .put(PmemBlockStore.parseHash(identity));
+        }
+
+        private void writable() throws IOException {
+            scope.check();
+            if (closed) throw new IOException("checkpoint output is closed");
+        }
+
+        private void bounded(int length) throws IOException {
+            if (length > maximum - total) throw new IOException("checkpoint writer exceeded byte limit");
+        }
+
+        @Override public void write(int value) throws IOException {
+            try {
+                writable();
+                bounded(1);
+                buffer[buffered++] = (byte) value;
+                total++;
+                if (buffered == buffer.length) appendChunk();
+            } catch (IOException | RuntimeException | Error failure) {
+                scope.poison(failure);
+                throw failure;
+            }
+        }
+
+        @Override public void write(byte[] bytes) throws IOException {
+            try {
+                writable();
+                write(bytes, 0, bytes.length);
+            } catch (IOException | RuntimeException | Error failure) {
+                scope.poison(failure);
+                throw failure;
+            }
+        }
+
+        @Override public void write(byte[] bytes, int offset, int length) throws IOException {
+            try {
+                writable();
+                Objects.checkFromIndexSize(offset, length, bytes.length);
+                if (bytes == buffer) throw new IllegalArgumentException("writer must not alias its transfer array");
+                bounded(length);
+                while (length != 0) {
+                    int count = Math.min(length, buffer.length - buffered);
+                    System.arraycopy(bytes, offset, buffer, buffered, count);
+                    buffered += count;
+                    offset += count;
+                    length -= count;
+                    total += count;
+                    if (buffered == buffer.length) appendChunk();
+                }
+            } catch (IOException | RuntimeException | Error failure) {
+                scope.poison(failure);
+                throw failure;
+            }
+        }
+
+        private void appendChunk() throws IOException {
+            if (buffered == 0) return;
+            MessageDigest digest = PmemBlockStore.digest();
+            digest.update(buffer, 0, buffered);
+            byte[] hash = digest.digest();
+            long ordinal = scope.append(chunkKey(identity, generation, chunks), buffer, buffered);
+            manifest.putLong(ordinal).putInt(buffered).putInt(0).put(hash);
+            chunks++;
+            buffered = 0;
+        }
+
+        @Override public void flush() throws IOException {
+            try { writable(); }
+            catch (IOException | RuntimeException | Error failure) { scope.poison(failure); throw failure; }
+        }
+
+        @Override public void close() throws IOException {
+            try {
+                scope.check();
+                if (!closed) { appendChunk(); closed = true; }
+            } catch (IOException | RuntimeException | Error failure) { scope.poison(failure); throw failure; }
+        }
+
+        void finish() throws IOException { scope.check(); close(); }
+
+        Info publish(String key) throws IOException {
+            scope.check();
+            manifest.putInt(12, chunks).putLong(24, total);
+            long ordinal = scope.append(key, manifest.array(), HEADER_BYTES + ENTRY_BYTES * chunks);
+            return new Info(generation, chunks, total, ordinal);
+        }
+
+        void revoke() { scope.revoke(); buffer = null; manifest = null; }
+    }
+
+    private static final class CheckpointInput extends InputStream {
+        private final StreamScope scope;
+        private PmemBlockStore store;
+        private final Info info;
+        private final String manifestHash;
+        private byte[] buffer;
+        private ByteBuffer fields;
+        private int nextChunk, offset, limit;
+        private long consumed;
+        private boolean closed;
+
+        CheckpointInput(PmemBlockStore store, byte[] buffer, Manifest manifest) {
+            scope = new StreamScope(store);
+            this.store = store;
+            this.buffer = buffer;
+            info = manifest.info();
+            fields = ByteBuffer.wrap(manifest.bytes());
+            manifestHash = PmemBlockStore.sha256(manifest.bytes());
+        }
+
+        private void readable() throws IOException {
+            scope.check();
+            if (closed) throw new IOException("checkpoint input is closed");
+        }
+
+        private boolean fill() throws IOException {
+            while (offset == limit && nextChunk < info.chunks()) {
+                int entry = HEADER_BYTES + ENTRY_BYTES * nextChunk++;
+                long ordinal = fields.getLong(entry);
+                limit = store.read(ordinal, buffer, 0);
+                offset = 0;
+                if (limit != fields.getInt(entry + Long.BYTES))
+                    throw new IOException("checkpoint chunk length changed during decoding");
+                MessageDigest digest = PmemBlockStore.digest();
+                digest.update(buffer, 0, limit);
+                byte[] expected = new byte[32];
+                fields.get(entry + 16, expected);
+                if (!MessageDigest.isEqual(expected, digest.digest()))
+                    throw new IOException("checkpoint chunk changed during decoding");
+            }
+            return offset != limit;
+        }
+
+        @Override public int read() throws IOException {
+            try {
+                readable();
+                if (!fill()) return -1;
+                consumed++;
+                return buffer[offset++] & 255;
+            } catch (IOException | RuntimeException | Error failure) { scope.poison(failure); throw failure; }
+        }
+
+        @Override public int read(byte[] bytes) throws IOException {
+            try {
+                readable();
+                return read(bytes, 0, bytes.length);
+            } catch (IOException | RuntimeException | Error failure) { scope.poison(failure); throw failure; }
+        }
+
+        @Override public int read(byte[] bytes, int start, int length) throws IOException {
+            try {
+                readable();
+                Objects.checkFromIndexSize(start, length, bytes.length);
+                if (bytes == buffer) throw new IllegalArgumentException("reader must not alias its transfer array");
+                if (length == 0) return 0;
+                if (!fill()) return -1;
+                int count = Math.min(length, limit - offset);
+                System.arraycopy(buffer, offset, bytes, start, count);
+                offset += count;
+                consumed += count;
+                return count;
+            } catch (IOException | RuntimeException | Error failure) { scope.poison(failure); throw failure; }
+        }
+
+        @Override public int available() throws IOException {
+            try { readable(); return (int) Math.min(Integer.MAX_VALUE, info.totalBytes() - consumed); }
+            catch (IOException | RuntimeException | Error failure) { scope.poison(failure); throw failure; }
+        }
+
+        @Override public long skip(long count) throws IOException {
+            try {
+                readable();
+                long skipped = 0;
+                while (skipped < count && fill()) {
+                    int step = (int) Math.min(count - skipped, limit - offset);
+                    offset += step;
+                    consumed += step;
+                    skipped += step;
+                }
+                return skipped;
+            } catch (IOException | RuntimeException | Error failure) { scope.poison(failure); throw failure; }
+        }
+
+        @Override public byte[] readNBytes(int length) throws IOException {
+            try { readable(); return super.readNBytes(length); }
+            catch (IOException | RuntimeException | Error failure) { scope.poison(failure); throw failure; }
+        }
+
+        @Override public int readNBytes(byte[] bytes, int start, int length) throws IOException {
+            try {
+                readable();
+                Objects.checkFromIndexSize(start, length, bytes.length);
+                if (bytes == buffer) throw new IllegalArgumentException("reader must not alias its transfer array");
+                return super.readNBytes(bytes, start, length);
+            }
+            catch (IOException | RuntimeException | Error failure) { scope.poison(failure); throw failure; }
+        }
+
+        @Override public void skipNBytes(long count) throws IOException {
+            try { readable(); super.skipNBytes(count); }
+            catch (IOException | RuntimeException | Error failure) { scope.poison(failure); throw failure; }
+        }
+
+        @Override public long transferTo(OutputStream target) throws IOException {
+            try { readable(); return super.transferTo(target); }
+            catch (IOException | RuntimeException | Error failure) { scope.poison(failure); throw failure; }
+        }
+
+        @Override public void reset() throws IOException {
+            IOException failure = new IOException("checkpoint stream does not support reset");
+            try { readable(); }
+            catch (IOException | RuntimeException | Error problem) { scope.poison(problem); throw problem; }
+            scope.poison(failure);
+            throw failure;
+        }
+
+        @Override public void close() throws IOException {
+            try { scope.check(); closed = true; }
+            catch (IOException | RuntimeException | Error failure) { scope.poison(failure); throw failure; }
+        }
+
+        void finish() throws IOException {
+            scope.check();
+            if (consumed != info.totalBytes()) throw new IOException("checkpoint reader did not consume complete stream");
+            if (!store.metadata(info.manifestOrdinal()).payloadSha256().equals(manifestHash))
+                throw new IOException("checkpoint manifest changed during decoding");
+        }
+
+        void revoke() { scope.revoke(); store = null; buffer = null; fields = null; }
     }
 
     /** Maximum bounded manifest entries supported by this store's fixed payload size. */
