@@ -1,0 +1,40 @@
+{
+  "schema": "M3_LANGUAGE_DISCOVERY_STATE_WORK_ORDER_V1",
+  "recipePrerequisites": {},
+  "owner": "m3/lexicon/hf-intake/src/test/resources/jdk/m3/lexicon/hf/language-resource-discovery.tsv",
+  "recipe": "language-discovery-state",
+  "sourceHead": "778cd3eac266974e7b5155e79838f74ee516b535",
+  "beforeGitBlob": "2b118e2dc69faa2b66aee3abc2c831c6771af2c1",
+  "sourceFacts": "Rows281-285 omit state but explicitly say no payload admitted; existing proof requires ninefields and REFERENCE_ONLY on every source",
+  "atoms": [
+    "restore five missing state cells",
+    "preserve original source IDs, rights, evidence URLs, row order, other fields"
+  ],
+  "productChanges": 1,
+  "generationCalls": 0,
+  "fixtureCorrection": {
+    "priorInput": "a91742888773543230145be8ef0df45f3ead1512",
+    "failureReceipt": "3cb585609f40febd53835ad579085e14d6aa6a64",
+    "finding": "Original full catalogue proof advanced past restored states, then refused Cygnet marker 'per-wordnet license'. Existing row already states every input wordnet has its own licence. Exact rights clarification in same row preserves that existing semantic requirement.",
+    "additionalFieldChange": "Cygnet rights phrase appends and per-wordnet license to existing preserve per-row source provenance"
+  },
+  "qualificationInput": "a7cb5dc9dba10589ba0c17c1f5048a34b275fc10",
+  "qualificationProof": "4ff76c06beef718955d587b0225225b7bcc238d6",
+  "initialFailure": "3cb585609f40febd53835ad579085e14d6aa6a64",
+  "sourceBefore": {
+    "bytes": 252791,
+    "sha256": "f9f86cbf61328240d403cc44f628717c38f3ce715288e7b21749680eb981ddaa",
+    "gitBlob": "2b118e2dc69faa2b66aee3abc2c831c6771af2c1"
+  },
+  "sourceAfter": {
+    "bytes": 252890,
+    "sha256": "ed84d47e87622122c19069c5b8cfff0100e4b8b4e1e215ce033d1c5d987a40f1",
+    "gitBlob": "1e6e3226c40d6dafb7a0bed0fe44616a36a5190b"
+  },
+  "currentEngine": {
+    "blob": "af3f00230db5aa16c44f642872b6f26193727757",
+    "input": "827c3d98fa5a06592f0830929873a3cd00aa2ce0",
+    "proof": "21ac92d3055455ecf032a8d6ec2c3d03b4c72f74",
+    "scope": "Recipe-only rebind; original product proof/source bytes unchanged"
+  }
+}

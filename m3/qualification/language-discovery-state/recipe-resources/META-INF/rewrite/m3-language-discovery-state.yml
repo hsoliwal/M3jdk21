@@ -1,0 +1,10 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.M3LanguageDiscoveryReferenceState
+displayName: Restore explicit reference-only states in the existing language discovery catalogue
+description: >-
+  Replay the exact five missing state cells and the existing Cygnet per-wordnet
+  rights requirement. Preserve source IDs, evidence and reference-only admission.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: language-discovery-state

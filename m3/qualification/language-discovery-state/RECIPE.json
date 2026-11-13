@@ -1,0 +1,21 @@
+{
+  "schema": "M3_LANGUAGE_DISCOVERY_STATE_RECEIVER_V1",
+  "canonicalRepository": "hsoliwal/com.synexia",
+  "canonicalCommit": "48491c79ff3352e40de5cf1830ed0a6e11967c2a",
+  "canonicalPr": 17367,
+  "receivingBase": "778cd3eac266974e7b5155e79838f74ee516b535",
+  "owner": "m3/lexicon/hf-intake/src/test/resources/jdk/m3/lexicon/hf/language-resource-discovery.tsv",
+  "before": "2b118e2dc69faa2b66aee3abc2c831c6771af2c1",
+  "after": "1e6e3226c40d6dafb7a0bed0fe44616a36a5190b",
+  "engine": "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe",
+  "engineBlob": "af3f00230db5aa16c44f642872b6f26193727757",
+  "crate": "language-discovery-state",
+  "canonicalResourcePrefix": "synexia-openrewrite-recipes/src/main/resources/",
+  "receivingResourcePrefix": "m3/qualification/language-discovery-state/recipe-resources/",
+  "inputPathMapping": "Replace canonicalResourcePrefix with receivingResourcePrefix to resolve packageContentRef; all referenced bytes are unchanged. Or read canonical immutable commit.",
+  "qualificationProof": "4ff76c06beef718955d587b0225225b7bcc238d6",
+  "engineRebindProof": "21ac92d3055455ecf032a8d6ec2c3d03b4c72f74",
+  "admittedPayloads": 0,
+  "newRuntimeApi": false,
+  "licenses": "Existing Apache-2.0 notices and source rights metadata retained"
+}

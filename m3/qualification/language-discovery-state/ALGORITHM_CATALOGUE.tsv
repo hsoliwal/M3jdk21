@@ -1,0 +1,3 @@
+category	pattern	decision	evidence	limits
+structured-tabular-admission	explicit-reference-state-and-nine-column-contract-v1	SELECTED	284 incumbent records validated; five state omissions restored; Cygnet rights scope explicit	Reference catalogue only; no corpus rights/admission or runtime proof
+source-identity-preservation	exact-existing-row-edit-v1	REQUIRED	Source IDs, first seven fields and evidence preserved except one named Cygnet rights clarification; 279 rows unchanged	No identifier synthesis or corpus equivalence
