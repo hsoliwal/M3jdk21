@@ -1,3 +1,7 @@
+/*
+ * Copyright 2026 Hitesh Soliwal and contributors.
+ * SPDX-License-Identifier: Apache-2.0
+ */
 
 package jdk.m3.collections;
 
@@ -28,7 +32,7 @@ public final class M3FilteredDequeContract {
     }
     static void basics() {
         Deque<String> src = new ArrayDeque<>(List.of("hidden-a", "v1", "hidden-b", "v2", "hidden-c"));
-        Deque<String> out = M3FilteredDeques.filtered(src,s->s.startsWith("v"));
+        Deque<String> out = FilteredDeques.filtered(src,s->s.startsWith("v"));
         eq(List.of("v1", "v2"),new ArrayList<>(out));
         eq("v1",out.getFirst());eq("v2",out.getLast());
         raises(IllegalArgumentException.class,()->out.offerFirst("bad"));
@@ -46,7 +50,7 @@ public final class M3FilteredDequeContract {
     }
     static void iteratorsAndReversal() {
         Deque<String> src = new ArrayDeque<>(List.of("hide0","vA","hide1","vB","hide2","vC"));
-        Deque<String> out = M3FilteredDeques.filtered(src,s->s.startsWith("v"));
+        Deque<String> out = FilteredDeques.filtered(src,s->s.startsWith("v"));
         Iterator<String> it = out.iterator();
         eq("vA",it.next());yes(it.hasNext());it.remove();
         eq("vB",it.next());yes(it.hasNext());it.remove();
@@ -55,7 +59,7 @@ public final class M3FilteredDequeContract {
         eq(List.of("hide0","hide1","hide2"),new ArrayList<>(src));
         raises(IllegalStateException.class,it::remove);
         Deque<Integer> nums=new ArrayDeque<>(List.of(1,2,3,4,5,6));
-        Deque<Integer> even=M3FilteredDeques.filtered(nums,n->(n&1)==0);
+        Deque<Integer> even=FilteredDeques.filtered(nums,n->(n&1)==0);
         Iterator<Integer> back=even.descendingIterator();
         eq(6,back.next());yes(back.hasNext());back.remove();eq(4,back.next());back.remove();
         eq(List.of(1,2,3,5),new ArrayList<>(nums));
@@ -63,10 +67,10 @@ public final class M3FilteredDequeContract {
     }
     static void nullsAndReadonly() {
         Deque<String> base=new LinkedList<>(Arrays.asList("hidden",null,"v",null));
-        Deque<String> view=M3FilteredDeques.filtered(base,x->x==null||x.equals("v"));
+        Deque<String> view=FilteredDeques.filtered(base,x->x==null||x.equals("v"));
         eq(null,view.getFirst());eq(null,view.removeFirst());
         eq(List.of("hidden","v"),new ArrayList<>(base).subList(0,2));
-        Deque<String> ro=M3FilteredDeques.readOnlyFiltered(new ArrayDeque<>(),x->true);
+        Deque<String> ro=FilteredDeques.readOnlyFiltered(new ArrayDeque<>(),x->true);
         raises(UnsupportedOperationException.class,()->ro.offer("x"));
         raises(UnsupportedOperationException.class,()->ro.poll());
         raises(UnsupportedOperationException.class,ro::removeFirst);
@@ -77,7 +81,7 @@ public final class M3FilteredDequeContract {
         raises(UnsupportedOperationException.class,()->ro.reversed().addFirst("x"));
         raises(UnsupportedOperationException.class,()->ro.iterator().remove());
         Deque<String> src=new ArrayDeque<>(List.of("hide","v","hide2"));
-        Deque<String> live=M3FilteredDeques.readOnlyFiltered(src,s->s.startsWith("v"));
+        Deque<String> live=FilteredDeques.readOnlyFiltered(src,s->s.startsWith("v"));
         eq(List.of("v"),new ArrayList<>(live));src.addLast("v2");
         eq(List.of("v","v2"),new ArrayList<>(live));
         raises(UnsupportedOperationException.class,()->live.iterator().remove());
@@ -96,7 +100,7 @@ public final class M3FilteredDequeContract {
         Token a = new Token(1, 0), hidden = new Token(2, 0), b = new Token(1, 1);
         Token other = new Token(1, 2), tail = new Token(3, 0);
         Deque<Token> source = new LinkedList<>(List.of(a, hidden, b, other, tail));
-        Deque<Token> view = M3FilteredDeques.filtered(source, t -> t.kind == 1);
+        Deque<Token> view = FilteredDeques.filtered(source, t -> t.kind == 1);
         Iterator<Token> cursor = view.iterator();
         yes(cursor.next() == a);
         yes(cursor.hasNext()); // lookahead has advanced past hidden to b
@@ -117,14 +121,14 @@ public final class M3FilteredDequeContract {
         // A reversed view must remove a physical occurrence from the opposite end.
         Token last = new Token(1, 99);
         source.addLast(last);
-        Deque<Token> backward = M3FilteredDeques.filtered(source.reversed(), t -> t.kind == 1);
+        Deque<Token> backward = FilteredDeques.filtered(source.reversed(), t -> t.kind == 1);
         yes(backward.getFirst() == last);
         yes(backward.removeFirst() == last);
         yes(source.size() == 2);
     }
     static void bulkAndQueue() {
         Deque<Integer> original = new LinkedList<>(List.of(-1, 2, -3, 4, -5, 6));
-        Deque<Integer> selected = M3FilteredDeques.filtered(original, i -> i >= 0);
+        Deque<Integer> selected = FilteredDeques.filtered(original, i -> i >= 0);
         java.util.Queue<Integer> queue = selected;
         eq(2, queue.element());
         eq(2, queue.poll());
@@ -146,7 +150,7 @@ public final class M3FilteredDequeContract {
             Random random=new Random(seed+78123);
             Deque<Integer> physical=new LinkedList<>();
             List<Integer> model=new ArrayList<>();
-            Deque<Integer> filtered=M3FilteredDeques.filtered(physical,x->x!=null&&x%3==0);
+            Deque<Integer> filtered=FilteredDeques.filtered(physical,x->x!=null&&x%3==0);
             for(int step=0;step<800;step++){
                 int value=random.nextInt(25)-12, action=random.nextInt(10);
                 if(action==0){physical.addFirst(value);model.add(0,value);}
@@ -170,5 +174,128 @@ public final class M3FilteredDequeContract {
             }
         }
     }
-    public static void main(String[] args) {basics();iteratorsAndReversal();nullsAndReadonly();equalButDistinctIdentities();bulkAndQueue();differential();System.out.println("PASS checks="+checks);}
+    static void emptyNullAndCapacityBoundaries() {
+        raises(NullPointerException.class, () -> FilteredDeques.filtered(null, x -> true));
+        raises(NullPointerException.class, () -> FilteredDeques.filtered(new ArrayDeque<>(), null));
+        raises(NullPointerException.class, () -> FilteredDeques.readOnlyFiltered(null, x -> true));
+        raises(NullPointerException.class, () -> FilteredDeques.readOnlyFiltered(new ArrayDeque<>(), null));
+        Deque<Integer> hidden = new LinkedList<>(List.of(1, 3, 5));
+        Deque<Integer> empty = FilteredDeques.filtered(hidden, x -> (x & 1) == 0);
+        eq(null, empty.peekFirst()); eq(null, empty.peekLast()); eq(null, empty.peek());
+        eq(null, empty.pollFirst()); eq(null, empty.pollLast()); eq(null, empty.poll());
+        raises(NoSuchElementException.class, empty::getFirst);
+        raises(NoSuchElementException.class, empty::getLast);
+        raises(NoSuchElementException.class, empty::element);
+        raises(NoSuchElementException.class, empty::removeFirst);
+        raises(NoSuchElementException.class, empty::removeLast);
+        raises(NoSuchElementException.class, empty::pop);
+        raises(IllegalStateException.class, empty.iterator()::remove);
+        raises(NoSuchElementException.class, empty.iterator()::next);
+        eq(List.of(1, 3, 5), new ArrayList<>(hidden));
+        Deque<String> nulls = new LinkedList<>(Arrays.asList("hidden", null, "v", null));
+        Deque<String> nullable = FilteredDeques.filtered(nulls, x -> x == null || x.equals("v"));
+        eq(null, nullable.getLast()); eq(null, nullable.removeLast());
+        eq(null, nullable.element()); eq(null, nullable.remove());
+        eq(List.of("hidden", "v"), new ArrayList<>(nulls));
+        Deque<Integer> bounded = new java.util.concurrent.LinkedBlockingDeque<>(2);
+        bounded.addAll(List.of(1, 2));
+        Deque<Integer> selected = FilteredDeques.filtered(bounded, x -> (x & 1) == 0);
+        yes(!selected.offerFirst(4)); yes(!selected.offerLast(4)); yes(!selected.offer(4));
+        raises(IllegalStateException.class, () -> selected.addFirst(4));
+        raises(IllegalStateException.class, () -> selected.addLast(4));
+        raises(IllegalArgumentException.class, () -> selected.offerFirst(3));
+        eq(List.of(1, 2), new ArrayList<>(bounded));
+        raises(IllegalStateException.class, () -> selected.push(6));
+    }
+    static void cursorStatesAndEffects() {
+        Deque<Integer> backing = new LinkedList<>(List.of(2, 1, 4, 3, 6));
+        int[] calls = {0};
+        Deque<Integer> view = FilteredDeques.filtered(backing, x -> { calls[0]++; return (x & 1) == 0; });
+        Iterator<Integer> cursor = view.iterator();
+        eq(0, calls[0]); eq(2, cursor.next()); eq(1, calls[0]);
+        yes(cursor.hasNext()); yes(cursor.hasNext()); eq(3, calls[0]);
+        cursor.remove(); eq(3, calls[0]);
+        eq(List.of(1, 4, 3, 6), new ArrayList<>(backing));
+        eq(4, cursor.next()); eq(3, calls[0]);
+        cursor.remove(); raises(IllegalStateException.class, cursor::remove);
+        eq(6, cursor.next()); yes(!cursor.hasNext()); cursor.remove();
+        eq(List.of(1, 3), new ArrayList<>(backing));
+        raises(NoSuchElementException.class, cursor::next);
+        backing = new LinkedList<>(List.of(2, 1, 3));
+        cursor = FilteredDeques.filtered(backing, x -> (x & 1) == 0).iterator();
+        eq(2, cursor.next()); yes(!cursor.hasNext()); cursor.remove();
+        eq(List.of(1, 3), new ArrayList<>(backing));
+        raises(IllegalStateException.class, cursor::remove);
+        IllegalArgumentException marker = new IllegalArgumentException("predicate marker");
+        Deque<Integer> exceptional = new LinkedList<>(List.of(1, 2, 3));
+        Iterator<Integer> failed = FilteredDeques.filtered(exceptional, x -> {
+            if (x == 2) throw marker;
+            return true;
+        }).iterator();
+        eq(1, failed.next());
+        try { failed.hasNext(); throw new AssertionError("missing predicate failure"); }
+        catch (IllegalArgumentException actual) { yes(actual == marker); }
+        raises(IllegalStateException.class, failed::hasNext);
+        raises(IllegalStateException.class, failed::next);
+        raises(IllegalStateException.class, failed::remove);
+        eq(List.of(1, 2, 3), new ArrayList<>(exceptional));
+    }
+    static void lazyStreamsAndAliasedBulk() {
+        Deque<Integer> backing = new LinkedList<>(List.of(1, 2, 3, 4));
+        int[] calls = {0};
+        Deque<Integer> selected = FilteredDeques.filtered(backing, x -> { calls[0]++; return (x & 1) == 0; });
+        java.util.Spliterator<Integer> split = selected.spliterator();
+        eq(0, calls[0]); eq(Long.MAX_VALUE, split.estimateSize());
+        yes(split.hasCharacteristics(java.util.Spliterator.ORDERED));
+        yes(!split.hasCharacteristics(java.util.Spliterator.SIZED));
+        eq(null, split.trySplit()); eq(0, calls[0]);
+        raises(IllegalStateException.class, split::getComparator);
+        raises(NullPointerException.class, () -> split.tryAdvance(null));
+        eq(0, calls[0]);
+        backing.addFirst(6);
+        List<Integer> observed = new ArrayList<>();
+        yes(split.tryAdvance(observed::add)); eq(List.of(6), observed); eq(1, calls[0]);
+        split.forEachRemaining(observed::add); eq(List.of(6, 2, 4), observed);
+        yes(!split.tryAdvance(observed::add));
+        calls[0] = 0;
+        eq(6, selected.stream().findFirst().orElseThrow()); eq(1, calls[0]);
+        calls[0] = 0;
+        Deque<Integer> readonly = FilteredDeques.readOnlyFiltered(backing, x -> { calls[0]++; return (x & 1) == 0; });
+        eq(6, readonly.stream().findFirst().orElseThrow()); eq(1, calls[0]);
+        eq(List.of(6, 2, 4), selected.parallelStream().toList());
+        eq(List.of(4, 2, 6), selected.reversed().parallelStream().toList());
+        eq(List.of(6, 2, 4), selected.reversed().reversed().stream().toList());
+        Deque<Integer> source = new LinkedList<>(List.of(1, 2, 3, 4));
+        Deque<Integer> view = FilteredDeques.filtered(source, x -> (x & 1) == 0);
+        yes(view.addAll(view));
+        eq(List.of(1, 2, 3, 4, 2, 4), new ArrayList<>(source));
+        raises(IllegalArgumentException.class, () -> view.addAll(List.of(6, 7, 8)));
+        eq(List.of(1, 2, 3, 4, 2, 4), new ArrayList<>(source));
+        yes(!view.addAll(List.of()));
+        Deque<Integer> reverse = view.reversed();
+        reverse.addFirst(10); reverse.addLast(12);
+        eq(List.of(12, 1, 2, 3, 4, 2, 4, 10), new ArrayList<>(source));
+        eq(10, reverse.removeFirst()); eq(12, reverse.removeLast());
+        eq(List.of(1, 2, 3, 4, 2, 4), new ArrayList<>(source));
+    }
+    static void readonlyMutationClosure() {
+        Deque<Integer> source = new LinkedList<>(List.of(1, 2, 3));
+        Deque<Integer> view = FilteredDeques.readOnlyFiltered(source, x -> (x & 1) == 0);
+        List<Runnable> mutations = List.of(
+                () -> view.addFirst(4), () -> view.addLast(4), () -> view.offerFirst(4),
+                () -> view.offerLast(4), () -> view.add(4), () -> view.offer(4),
+                () -> view.addAll(List.of()), view::removeFirst, view::removeLast,
+                view::pollFirst, view::pollLast, view::remove, view::poll,
+                () -> view.remove(2), () -> view.removeFirstOccurrence(2),
+                () -> view.removeLastOccurrence(2), () -> view.removeAll(List.of()),
+                () -> view.retainAll(List.of(2)), () -> view.removeIf(x -> false),
+                view::clear, () -> view.push(4), view::pop,
+                view.iterator()::remove, view.descendingIterator()::remove,
+                view.reversed()::poll, () -> view.reversed().addAll(List.of()));
+        for (Runnable mutation : mutations) {
+            raises(UnsupportedOperationException.class, mutation);
+            eq(List.of(1, 2, 3), new ArrayList<>(source));
+        }
+    }
+    public static void main(String[] args) {basics();iteratorsAndReversal();nullsAndReadonly();equalButDistinctIdentities();bulkAndQueue();differential();emptyNullAndCapacityBoundaries();cursorStatesAndEffects();lazyStreamsAndAliasedBulk();readonlyMutationClosure();System.out.println("PASS checks="+checks);}
 }

@@ -1007,7 +1007,8 @@ for fragment in [
     "M3StringFacts leftFacts = factsIfPrepared();",
     "M3StringFacts rightFacts = that.factsIfPrepared();",
     "leftFacts.javaHash != rightFacts.javaHash",
-    "if (charAt(index) != other.charAt(index)) return false;",
+    "? comparePrefix(that, length()) == 0",
+    ": compareFlatPrefix(other, length()) == 0",
 ]:
     if fragment not in m3:
         fail(f"M3 collision-safe equality path missing: {fragment}")
@@ -1152,10 +1153,11 @@ for fragment in [
     if fragment not in (string + m3 + pool + atom):
         fail(f"M3 exact byte-array ingress missing: {fragment}")
 
-# Unicode code-point array ingress emits canonical UTF-16 directly into native storage.
+# Mutable code-point input is snapshotted once before the pool reads it in multiple passes.
+# The private snapshot is ingress, not a retained second canonical spelling store.
 for fragment in [
     "M3String direct = maybeAdmitCodePoints(codePoints, offset, count);",
-    "M3String.admitCodePoints(value, offset, count)",
+    "M3String.admitCodePoints(Arrays.copyOfRange(value, offset, offset + count), 0, count)",
     "M3StringPool.internCodePoints(source, offset, count)",
     "M3StringAtom.localCodePoints(",
     "throw new IllegalArgumentException(Integer.toString(cp));",
@@ -1177,11 +1179,12 @@ for fragment in [
 if "return internCompactBytes(value, 0, value.length >> coder, coder);" not in pool:
     fail("M3 scalar ingress bypasses canonical coder normalization")
 
-# Mutable char[] ingress must snapshot directly into canonical M3 storage after activation.
-# Do not compress to a transient compact byte[] first and then copy again into native storage.
+# Mutable char[] ingress snapshots the selected range before multipass native admission.
+# Preserve this JDK-8311906 safety boundary; do not feed a concurrently mutable caller array
+# into separate coder-selection and payload-copy passes or stage through compact byte[].
 for fragment in [
     "M3String direct = maybeAdmit(value, off, len);",
-    "M3String.admit(value, offset, length)",
+    "M3String.admit(Arrays.copyOfRange(value, offset, offset + length), 0, length)",
     "M3StringPool.internChars(source, offset, length)",
     "M3StringAtom.localChars(source, offset, length, coder, id, hash64)",
 ]:
@@ -1372,8 +1375,8 @@ if re.sub(r"\s+", "", accounting) != (
         "privatestaticvoidrelease(longbytes){LOCAL_NATIVE_BYTES.addAndGet(-bytes);}"):
     fail("VM-local M3 native budget release control flow changed")
 
-# Constructor ownership must match both ways each LocalRef enters its bucket.
-if pool_code.count("new LocalRef(") != 2:
+# Every local admission publishes through the one exception-safe retain helper.
+if pool_code.count("new LocalRef(") != 1:
     fail("VM-local M3 LocalRef construction paths changed")
 retain_start = pool_code.find("private static M3String retain(")
 retain_open = pool_code.find("{", retain_start)
@@ -1383,9 +1386,12 @@ if retain_start < 0 or retain_open < 0 or retain_end < 0:
 retain_method = pool_code[retain_start:retain_end + 1]
 if re.sub(r"\s+", "", retain_method) != (
         "privatestaticM3Stringretain(LocalBucketbucket,Fingerprintfingerprint,"
-        "M3StringAtomcreated,longbytes){bucket.values.add(newLocalRef(created,"
-        "fingerprint,bucket,bytes));returnM3String.whole(created);}"):
-    fail("VM-local M3 retain path does not store the owning bucket")
+        "M3StringAtomcreated,longbytes){LocalRefreference=null;booleanretained=false;"
+        "try{reference=newLocalRef(created,fingerprint,bucket,bytes);"
+        "bucket.values.add(reference);retained=true;returnM3String.whole(created);"
+        "}finally{if(!retained){if(reference==null){UNSAFE.freeMemory(created.address);"
+        "release(bytes);}else{reference.releaseNative();}}}}"):
+    fail("VM-local M3 retain path lost owner binding or exception-safe publication cleanup")
 local_ref_class = pool_code.find("static final class LocalRef extends WeakReference<M3StringAtom>")
 constructor_start = pool_code.find("LocalRef(", local_ref_class)
 constructor_open = pool_code.find("{", constructor_start)
@@ -1398,16 +1404,15 @@ if re.sub(r"\s+", "", constructor) != (
         "longretainedBytes){super(value,LOCAL_QUEUE);this.fingerprint=fingerprint;"
         "this.bucket=bucket;this.address=value.address;this.retainedBytes=retainedBytes;}"):
     fail("VM-local M3 LocalRef constructor no longer binds its owning bucket")
-if pool_code.count(
-        "bucket.values.add(new LocalRef(created, fingerprint, bucket, retainedBytes));") != 1:
-    fail("VM-local M3 direct LocalRef publication lost bucket ownership")
+if re.search(r"::\s*retain\b", pool_code) or len(re.findall(r"\bretain\s*\(", pool_code)) != 6:
+    fail("VM-local M3 retain helper escaped or its complete caller set changed")
 
 # Every call must remain a direct invocation; an escaping bound method reference is unsafe.
 if re.search(r"::\s*releaseNative\b", pool_code):
     fail("VM-local M3 native release method reference escaped its monitor")
 release_calls = list(re.finditer(r"\breference\.releaseNative\(\)\s*;", pool_code))
 release_invocations = list(re.finditer(r"\.\s*releaseNative\s*\(\s*\)\s*;", pool_code))
-if len(release_calls) != 6 or len(release_invocations) != len(release_calls):
+if len(release_calls) != 7 or len(release_invocations) != len(release_calls):
     fail("VM-local M3 native release call sites changed or use another receiver")
 bucket_monitors = []
 for monitor in re.finditer(r"\bsynchronized\s*\(\s*bucket\s*\)\s*\{", pool_code):
@@ -1439,22 +1444,25 @@ def require_bucket_locked_owner(position: int, label: str) -> None:
         fail(f"VM-local M3 {label} is deferred or nested")
 
 retain_calls = list(re.finditer(
-    r"\bretain\(bucket, fingerprint, created, byteLength\)", pool_code))
-if len(retain_calls) != 4:
+    r"\bretain\(bucket, fingerprint, created, (?:byteLength|retainedBytes)\)", pool_code))
+if len(retain_calls) != 5:
     fail(f"VM-local M3 retain call count changed: {len(retain_calls)}")
 for retain_call in retain_calls:
     require_bucket_locked_owner(retain_call.start(), "retain call")
-inline_publications = list(re.finditer(
-    r"bucket\.values\.add\(new LocalRef\(created, fingerprint, bucket, retainedBytes\)\);",
-    pool_code))
-if len(inline_publications) != 1:
-    fail("VM-local M3 inline LocalRef publication count changed")
-for publication in inline_publications:
-    require_bucket_locked_owner(publication.start(), "inline LocalRef publication")
+# No caller publishes directly: each of the five checked calls transfers the same locked
+# bucket into retain(), whose exact body above owns allocation-failure rollback.
+if re.search(r"bucket\.values\.add\(new LocalRef", pool_code):
+    fail("VM-local M3 direct publication bypasses exception-safe retain")
 
 canonical_release_calls = 0
 queued_release_calls = 0
+retained_failure_release_calls = 0
 for call in release_calls:
+    if retain_open < call.start() < retain_end:
+        # This helper inherits its monitor from every exhaustively checked call site.
+        # Its exact finally/retained/reference-null control flow was checked above.
+        retained_failure_release_calls += 1
+        continue
     enclosing = [scope for scope in bucket_monitors
                  if scope[1] < call.start() < scope[2]]
     if not enclosing:
@@ -1487,7 +1495,7 @@ for call in release_calls:
         queued_release_calls += 1
     else:
         fail("VM-local M3 release is not protected by its LocalRef-owning bucket")
-if canonical_release_calls != 5 or queued_release_calls != 1:
+if canonical_release_calls != 5 or queued_release_calls != 1 or retained_failure_release_calls != 1:
     fail("VM-local M3 owner-to-bucket release paths changed")
 
 # The frozen index is optional metadata over exact UTF-16 payloads. Check code tokens,
@@ -1558,7 +1566,7 @@ def check_pool_precompute(source: str, frozen_index_source: str) -> None:
         ("privatefinalint[]exactRows;", "immutable primitive slots"),
         ("privatefinalbyte[]coders;", "immutable coder rows"),
         ("privatefinalM3FrozenLexiconIndexexactIndex;", "one frozen index owner"),
-        ("this.exactIndex=M3FrozenLexiconIndex.build(javaHashes,lengths);", "validated primitive hash reuse"),
+        ("this.exactIndex=M3FrozenLexiconIndex.buildExact(offsets.length,this::exactKeyForRow,this::sameExactRows);", "complete immutable UTF-16 key and exact duplicate authority"),
         ("this.exactRows=exactIndex.rows();", "same immutable row lane"),
         ("privatestaticfinallongLATIN1_GEOMETRY=1L<<Integer.SIZE;", "coder geometry bit"),
     ]:
@@ -1604,7 +1612,7 @@ def check_pool_precompute(source: str, frozen_index_source: str) -> None:
             "normal mandatory atom lane precedes optional coder allocation")
     require("M3StringAtom[]atoms=newM3StringAtom[n];byte[]coders=allocateCoders(n);",
             "shared mandatory atom lane precedes optional coder allocation")
-    require("this.atoms=atoms;this.exactIndex=M3FrozenLexiconIndex.build(javaHashes,lengths);"
+    require("this.atoms=atoms;this.bigEndian=bigEndian;this.exactIndex=M3FrozenLexiconIndex.buildExact(offsets.length,this::exactKeyForRow,this::sameExactRows);"
             "this.exactRows=exactIndex.rows();",
             "mandatory atom lane precedes optional slot allocation")
     atom_body = normalized("M3StringAtom atom(int row)")
@@ -1633,15 +1641,19 @@ def check_pool_precompute(source: str, frozen_index_source: str) -> None:
         if sha256(normalized.encode("utf-8")).hexdigest() != expected_sha256:
             fail("M3 frozen index control flow changed: " + label)
 
-    require_owned_atom(source, 'int findUnit(char unit)', 'fe4001f3be00b37d062f418271dab4e16ea210f7ce2287c95465d0739c358c7f', 'single unit exact candidate and ambiguous binary fallback')
+    # Review the complete immutable payload readers that prepare index keys and confirm duplicates.
+    require_owned_atom(source, 'private long exactKeyForRow(int row, long seed)', '74c19940a423c94d06cb9efc30d1b2f14460d9e682e49149c708dbbf86d661de', 'same seeded complete spelling at freeze and lookup')
+    require_owned_atom(source, 'private boolean sameExactRows(int leftRow, int rightRow)', 'ed2c3b92a85e02f026a19f0320a37c45e3f77612613f4ba92516fd1fe8f09566', 'full UTF-16 duplicate authority before row-marker grouping')
 
-    require_owned_atom(source, 'int findCodePoints(int[] value, int offset, int count, int utf16Length)', 'a026c5c6650fcfeedb395d2fbdffe984672e111616842bb4d23827d65217d1c3', 'code point UTF-16 key and exact candidate authority')
+    require_owned_atom(source, 'int findUnit(char unit)', '31d22592ae00bccd4331b9fc7552d920af0488f34ad7fb60b2efdae4206b3d81', 'single unit exact candidate and ambiguous binary fallback')
 
-    require_owned_atom(source, 'int findCompactBytes(byte[] value, int sourceOffset, int logicalLength, byte sourceCoder)', '8170515c3aa375f793e04e35265e8e38e5273c054faf8f8ab4897378a706d416', 'compact source hash, coder and exact candidate authority')
+    require_owned_atom(source, 'int findCodePoints(int[] value, int offset, int count, int utf16Length)', '892932c4ed11bc362be11eea82a0b6a0e6bb2fd0e31ff77aae924f33e05f5f5f', 'code point UTF-16 key and exact candidate authority')
+
+    require_owned_atom(source, 'int findCompactBytes(byte[] value, int sourceOffset, int logicalLength, byte sourceCoder)', '58b25463681c08624794ab1d516826d4246ccbee4784dad993adaede87fe21f6', 'compact source hash, coder and exact candidate authority')
 
     require_owned_atom(source, 'int findLatin1Bytes(byte[] value, int offset, int logicalLength)', 'a8d50b6d06e3422020e134923170df05450cb6b0ed87638b6d471cac2291a97e', 'Latin-1 delegates the identical compact source range')
 
-    require_owned_atom(source, 'int find(char[] value, int offset, int logicalLength)', 'f058d2dbb64cfe5c7ccae535a3b784748a0483e950845b1f6fdf8c0b1dcae70e', 'char source range, key, ambiguity and exact candidate authority')
+    require_owned_atom(source, 'int find(char[] value, int offset, int logicalLength)', '34e409e9e3deb49d8a9010d07767fdbb87166d3d48369be450ffca379a0c00ba', 'char source range, key, ambiguity and exact candidate authority')
 
     require_owned_atom(source, 'private static Lexicon openFixed(Path path, String fixed) throws IOException', '3e7ed2fdfe2a2d599cca0b24be74303b851c87ba3fbd5414fac7edfbc6adaf20', 'fixed-address SHA pin, direct index admission and unpublished cleanup')
 
@@ -1649,7 +1661,7 @@ def check_pool_precompute(source: str, frozen_index_source: str) -> None:
     # allocation and seed/displacement caps, complete-key grouping, ambiguity bits,
     # aliased-base rejection, one-candidate addressing and all helper arithmetic.
     # The constructor and field layout are included; detached good methods cannot qualify.
-    require_owned_atom(frozen_index_source, 'final class M3FrozenLexiconIndex', '32c71137646d36b55d3bc6b6b64cd605175cb019ba4b3924d01bc8d657106de5', "complete frozen displacement index owner")
+    require_owned_atom(frozen_index_source, 'final class M3FrozenLexiconIndex', '4cda1041fc189a0c5ca1e8a4be9ce9466f63a047af9a983ef9c5397d0f5ec66f', "complete frozen displacement index owner")
 
     if sha256(normalized("private boolean equalsChars(").encode("utf-8")).hexdigest() != (
             'f15fc968d1250b4e3d2d12b29f1a48283c7ceb67d78d93699fb264eb8e9afe61'):
@@ -1663,9 +1675,9 @@ check_pool_precompute(pool, frozen_index)
 
 
 for required_mechanical_name_mapping in [
-    '"source": "jdk.internal.m3.indexstring.precompute.MIndexRe2MechanicalFacts"',
-    '"source": "jdk.internal.m3.indexstring.precompute.MIndexLucenePostingPlan"',
-    '"source": "jdk.internal.m3.indexstring.precompute.MIndexTweetyGraphQueryIndex"',
+    '"source": "com.synexia.indexstring.precompute.MIndexRe2MechanicalFacts"',
+    '"source": "com.synexia.indexstring.precompute.MIndexLucenePostingPlan"',
+    '"source": "com.synexia.indexstring.precompute.MIndexTweetyGraphQueryIndex"',
     '"source_revision": "f07aa85ba83749bbb2b6fa4a7a169b38aaac8ba2"',
     '"status": "selective internal mapping; no RE2/J runtime dependency"',
     '"status": "do not port to java.lang.String"',
@@ -1700,7 +1712,15 @@ def check_cursor_refinements(m3: str, search_precompute: str, string: str,
                 != expected_sha256):
             fail("M3 cursor refinement control flow changed: " + label)
 
-    require_atom('m3', 'static final class CodeUnitCursor', '2c2b4dcf2fa289d87c30d39e465ded6f57a0d3825d79dfc5e7fac08657d2cbe6', 'logical cursor bounds and tuple coordinate descent')
+    # Mutable caller arrays are snapshotted once before coder/hash/native copy passes.
+    require_atom('string', 'private static M3String maybeAdmitCodePoints(int[] value, int offset, int count)', 'f1fe3b916bd4a47a95008332bf3ecbbdad7262a3a0319f4023f6b80b9491ccb0', 'code-point snapshot, original gates and exact selected range')
+    require_atom('string', 'private static M3String maybeAdmit(char[] value, int offset, int length)', '2e0019dc6beabde5648658ab99e0cca13e5fa75618f511e65eb598c7ab3ef847', 'UTF-16 snapshot, original gates and exact selected range')
+    require_atom('m3', 'boolean contentEquals(String other)', '79e9040630a2b9cdc8babd1e77cfb1897011e8dfd395e9971abba5e994da84ce', 'hash rejection only, immediate owner and exact scalar-run/flat comparison')
+    require_atom('m3', 'int comparePrefix(M3String other, int count)', '78fab78d7a8a9ae38a44235563b55c944dd44f628116699d3b106bccd7cd0427', 'canonical scalar runs, exact coordinates and nonzero difference')
+    require_atom('m3', 'private static int compareScalarRange(M3StringOwner left, int leftStart, M3StringOwner right, int rightStart, int count)', '4bc27393d9edcc7483e62f64bcc805fe1290cb483f251eb2b81e23c1354ccb56', 'same-owner coordinate shortcut then exact atom or UTF-16 difference')
+    require_atom('m3', 'int compareFlatPrefix(String other, int count)', 'ebdb761566cc10b31a20ca608b180ee4c01854957b067dc897bc5bb59363f786', 'bounded mixed prefix through actual owner units without admission')
+
+    require_atom('m3', 'static final class CodeUnitCursor implements IntUnaryOperator', 'f9b878450275cbc65fd24faae3c5f1b4ee7350246fa32b6d856324a53f7f239a', 'logical cursor bounds and tuple coordinate descent')
 
     require_atom('search_precompute', 'static Plan prepare(M3String pattern)', '835ccc22c52012ec5434a5b3d203b31b0757b87921af22caf740bba0041f9a60', 'optional bounded pattern admission')
 
@@ -1716,7 +1736,7 @@ def check_cursor_refinements(m3: str, search_precompute: str, string: str,
 
     require_atom('string', 'public int compareTo(String anotherString)', 'fc9fa307680059debb7e613a4febc269049b804652a79b386b9d89f458d6aff4', 'String receiver binding and original flat fallback')
 
-    require_atom('precompute_bridge', 'static int compareTo( String left, String right, M3String leftStorage, M3String rightStorage)', '0992b3ec2598dc7dc05e2fbf4f5926a71a09c4a6a9a9ce2b5ee2550419a5324a', 'coordinate shortcut followed by exact UTF-16 comparison and length fallback')
+    require_atom('precompute_bridge', 'static int compareTo( String left, String right, M3String leftStorage, M3String rightStorage)', 'c9b94087e764a0916ea04f57574fb77fae6df3c2c3f49441817b9cef325d71a8', 'coordinate shortcut followed by exact UTF-16 comparison and length fallback')
 
     require_atom('m3', 'private static final class CodePointsSpliterator implements Spliterator.OfInt', 'ed6d48af66dfddcaf739d9bc332ab0edc9a97692f49f593dfa5115e0e09f8e4a', 'both surrogate split guards, midpoint repair and exact traversal')
 
@@ -1800,7 +1820,7 @@ check_critical_surface_refinements(m3, string, precompute_bridge)
 
 # Mapping authority must preserve donor->target lineage and shadow names.
 required_mapping_fragments = [
-    '"source": "jdk.internal.m3.indexstring.MIndexString"',
+    '"source": "com.synexia.indexstring.MIndexString"',
     '"target": "java.lang.M3String"',
     '"target": "java.lang.M3StringOwner / java.lang.M3StringAtom / java.lang.M3StringTuple"',
     '"target": "java.lang.M3StringFacts plus owner-internal bounded range facts"',
@@ -1811,13 +1831,13 @@ for fragment in required_mapping_fragments:
         fail(f"name mapping missing: {fragment}")
 
 for fragment in [
-    '"recipe_id": "m3.m3jdk.string.canonical-dag.20261006"',
+    '"recipe_id": "synexia.m3jdk.string.canonical-dag.20261006"',
     '"source_repo": "hsoliwal/com.synexia"',
-    '"source_path": "m3-indexstring/recipes/m3jdk-string-canonical-dag-20261006"',
+    '"source_path": "synexia-indexstring/recipes/m3jdk-string-canonical-dag-20261006"',
     '"target_packet_role": "generated executable/hash-pinned application copy"',
     '"portable_semantics_owner": "Synexia"',
-    '"executable_verifier_recipe": "jdk.internal.m3.rewrite.M3StringCanonicalDagInvariant"',
-    '"executable_verifier_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3StringCanonicalDagInvariantRecipe.java"',
+    '"executable_verifier_recipe": "com.synexia.rewrite.M3StringCanonicalDagInvariant"',
+    '"executable_verifier_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3StringCanonicalDagInvariantRecipe.java"',
     '"source_lock_commit": "5fb52a051fa0e2722c2f69f2e22ac7f330c91ce2"',
     '"source_lock_blob": "0230b1a0864266d9243c161f7541c01492c9626e"',
     '"executable_verifier_implementation_blob": "5129fe4f7367486496f028a4d0339b84998cf7a0"',
@@ -1837,8 +1857,8 @@ for fragment in [
     "authority_source_lock_path\tsynexia-indexstring/recipes/m3jdk-string-canonical-dag-20261006/source-lock.json",
     "authority_source_lock_commit\t5fb52a051fa0e2722c2f69f2e22ac7f330c91ce2",
     "authority_source_lock_blob\t0230b1a0864266d9243c161f7541c01492c9626e",
-    "executable_verifier_recipe\tjdk.internal.m3.rewrite.M3StringCanonicalDagInvariant",
-    "executable_verifier_path\tsynexia-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3StringCanonicalDagInvariantRecipe.java",
+    "executable_verifier_recipe\tcom.synexia.rewrite.M3StringCanonicalDagInvariant",
+    "executable_verifier_path\tsynexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3StringCanonicalDagInvariantRecipe.java",
     "executable_verifier_pr\thsoliwal/com.synexia#9524",
 ]:
     if fragment not in recipe_authority:
@@ -1859,7 +1879,7 @@ for forbidden_recipe_path in [
 # first-class donor candidates, but licensing/provenance follows every copied artifact and
 # M3JDK 21 retains target/runtime ownership.
 for fragment in [
-    '"id": "M3JDK-DONOR-ARTIFACTS-1"',
+    '"id": "M3-JDK-DONOR-ARTIFACTS-1"',
     '"candidate_source": "whole qualified hsoliwal/com.synexia workspace"',
     '"recipe"',
     '"generated-postimage"',
@@ -1903,10 +1923,7 @@ for fragment in [
     if fragment not in port_map:
         fail(f"precompute port map missing: {fragment}")
 
-if any(re.match(r"^\s*-\s*['\"]test/jdk/", line)
-       and "M3StringPrecomputeSearchTest.java test/jdk/" in line
-       for line in workflow.splitlines()):
-    fail("M3 String workflow contains concatenated path entries")
+
 
 if "M3StringHistoryConvergenceRecipeTest" in workflow:
     fail("M3 String workflow must not restore Synexia-owned history recipe proof locally")
@@ -1978,27 +1995,41 @@ def check_string_jtreg_schedule(workflow: str) -> None:
         fail("M3 String workflow lost current regex-split source check")
 
 
-check_string_jtreg_schedule(workflow)
+def check_string_workflow_contract(workflow: str) -> None:
+    if any(re.match(r"^\s*-\s*['\"]test/jdk/", line)
+           and "M3StringPrecomputeSearchTest.java test/jdk/" in line
+           for line in workflow.splitlines()):
+        fail("M3 String workflow contains concatenated path entries")
+    check_string_jtreg_schedule(workflow)
+    for required_gate in [
+        "M3StringFactsCompositionTest.java",
+        "M3StringPrecomputeSearchTest.java",
+        "M3StringInternTest.java",
+        "M3StringCanonicalDagTest.java",
+        "M3StringStreamsTest.java",
+        "M3TQFactsTest.java",
+        "M3RegexLiteralTQTest.java",
+    ]:
+        if required_gate not in workflow:
+            fail(f"M3 String workflow lost verification gate: {required_gate}")
+    # Canonical recipe tests execute privately in Synexia. Historical target
+    # residue is not an authorized product-CI entry point. Preserve every actual
+    # jtreg schedule assertion above while rejecting recipe execution downstream.
+    for forbidden_recipe in [
+        "M3StringCanonicalDagMasterRepairRecipeTest",
+        "M3StringDirectStreamTraversalRecipeTest",
+        "M3StringHistoryConvergenceRecipeTest",
+    ]:
+        if forbidden_recipe in workflow:
+            fail(f"M3 String workflow reintroduced private recipe execution: {forbidden_recipe}")
 
-for required_gate in [
-    "M3StringFactsCompositionTest.java",
-    "M3StringPrecomputeSearchTest.java",
-    "M3StringInternTest.java",
-    "M3StringCanonicalDagTest.java",
-    "M3StringStreamsTest.java",
-    "M3TQFactsTest.java",
-    "M3RegexLiteralTQTest.java",
-    "M3StringCanonicalDagMasterRepairRecipeTest",
-    "M3StringDirectStreamTraversalRecipeTest",
-]:
-    if required_gate not in workflow:
-        fail(f"M3 String workflow lost verification gate: {required_gate}")
 
+check_string_workflow_contract(workflow)
 
-if "STRING_RECIPE_EXECUTABLE_VERIFIER_IS_M3_OPENREWRITE" not in read("m3/docs/m3-runtime-invariants.tsv"):
+if "STRING_RECIPE_EXECUTABLE_VERIFIER_IS_SYNEXIA_OPENREWRITE" not in read("m3/docs/m3-runtime-invariants.tsv"):
     fail("M3 String runtime invariant lost Synexia executable verifier binding")
 
-if "M3_PORTABLE_HISTORY_CONVERGENCE_RECIPE_AUTHORITY" not in read("m3/docs/m3-runtime-invariants.tsv"):
+if "SYNEXIA_PORTABLE_HISTORY_CONVERGENCE_RECIPE_AUTHORITY" not in read("m3/docs/m3-runtime-invariants.tsv"):
     fail("M3 String runtime invariant lost Synexia history-convergence authority binding")
 
 print("M3_STRING_SOURCE_INVARIANTS_PASS")

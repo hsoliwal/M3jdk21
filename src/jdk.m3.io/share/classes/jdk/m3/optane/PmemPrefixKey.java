@@ -95,6 +95,17 @@ public final class PmemPrefixKey {
     }
 
     public String sha256() { return sha256; }
+
+    static PmemPrefixKey tensor(PmemPrefixKey prefix, byte[] descriptor) {
+        Objects.requireNonNull(prefix, "prefix");
+        MessageDigest digest = PmemBlockStore.digest();
+        digest.update("M3PMEM_TYPED_PREFIX_V1".getBytes(StandardCharsets.US_ASCII));
+        digest.update(PmemBlockStore.parseHash(prefix.sha256));
+        digest.update(ByteBuffer.allocate(Integer.BYTES).putInt(descriptor.length).array());
+        digest.update(descriptor);
+        return new PmemPrefixKey(digest);
+    }
+
     @Override public String toString() { return sha256; }
     @Override public int hashCode() { return sha256.hashCode(); }
     @Override public boolean equals(Object other) {

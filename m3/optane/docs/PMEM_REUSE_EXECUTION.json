@@ -1,0 +1,303 @@
+{
+  "schema": 1,
+  "status": "IMPLEMENTED_COMPONENT_VERIFIED_ADMISSION_HELD",
+  "source": {
+    "repository": "hsoliwal/com.synexia",
+    "runtimeDocumentationAndEvidenceCommit": "7388719939e271c7bc5b924c5267a0f7315ce86a",
+    "testedBaseCommit": "af266602ec20d929c6b052ad90a6627d407a500b",
+    "publicationParentCommit": "109869055bacfdaf316e52acdb5be25e1d9ca4b4",
+    "recipeCrate": "synexia-openrewrite-recipes/recipe-crates/m3-pmem-donor-convergence-20261112",
+    "runtimeRecipeIds": [
+      "pmem-reuse-current-synexia-java-20261112",
+      "pmem-reuse-current-synexia-text-20261112",
+      "pmem-reuse-current-m3jdk-java-20261112",
+      "pmem-reuse-current-m3jdk-text-20261112"
+    ],
+    "documentationRecipeId": "pmem-reuse-docs-m3jdk-text-20261112",
+    "privateSourcePublicationPaths": 823,
+    "privateSourceSelectionSha256": "4eb2d2736c71cd7d5bb3ff8d72bdf9e9100042f3e85681510eebdafb834f6d7b"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "baseCommit": "64092c8c1b4157975e018c1f679f54059389e3fa",
+    "module": "jdk.m3.io",
+    "publicPackage": "jdk.m3.optane",
+    "mavenBridgeModule": "org.m3jdk.optane",
+    "optionalModuleAdmission": "PENDING_OPTIONAL_MODULE_ADMISSION",
+    "jdkFamilyPromotions": 0
+  },
+  "delivery": {
+    "runtimeAndTestOutputs": 13,
+    "documentationMetadataOutputs": 2,
+    "coveredNonSelfOutputs": 15,
+    "receiptPath": "m3/optane/docs/PMEM_REUSE_EXECUTION.json",
+    "receiptSelfHashExcluded": true,
+    "receiptMaterialization": "Separate actual canonical text-recipe stage after immutable source A; own postimage and remote identity verified by the private B-stage manifest and readback",
+    "receiptRecipeId": "pmem-reuse-receipt-m3jdk-text-20261112",
+    "privateAuthoringInfrastructureDelivered": false,
+    "files": [
+      {
+        "path": "src/jdk.m3.io/share/classes/jdk/m3/optane/PmemMemoKey.java",
+        "sha256": "08ebb11506fffaf3f6946e86939c564ff8729689429ba0a4ec4b95a248bac4fa",
+        "recipe": "pmem-reuse-current-m3jdk-java-20261112",
+        "gitBlobSha": "38b0670a608ecf1614f0f5d923b0c2dfcd23d8c2"
+      },
+      {
+        "path": "src/jdk.m3.io/share/classes/jdk/m3/optane/PmemMemoStore.java",
+        "sha256": "c3158cb637c1060b68066e1a1f660d4d59c8c2648c4260688d049a1048ed1a49",
+        "recipe": "pmem-reuse-current-m3jdk-java-20261112",
+        "gitBlobSha": "0a061abda1ebb91cea4b6dbd24de2b92761889a2"
+      },
+      {
+        "path": "src/jdk.m3.io/share/classes/jdk/m3/optane/PmemPrefixCache.java",
+        "sha256": "01ea4d953808f4b8f3a784b8e61772fe96c470d7742af1db93be6d151ec70d09",
+        "recipe": "pmem-reuse-current-m3jdk-java-20261112",
+        "gitBlobSha": "4179b34cea0e5802aa5cd017317c7fba3a94928b"
+      },
+      {
+        "path": "src/jdk.m3.io/share/classes/jdk/m3/optane/PmemPrefixKey.java",
+        "sha256": "1aeb0c31ddeb6e5b7beb66fb2c1a18ebd6319dcbc81af2cb3a06cad8369f8b75",
+        "recipe": "pmem-reuse-current-m3jdk-java-20261112",
+        "gitBlobSha": "8461eb00e5fbf547625c9201393a521e6ccffbbc"
+      },
+      {
+        "path": "src/jdk.m3.io/share/classes/jdk/m3/optane/PmemSdk.java",
+        "sha256": "3ee39bb0fc9073f8cdca8e18d246e96f6800405d98d05cfc937cce7420bd100f",
+        "recipe": "pmem-reuse-current-m3jdk-java-20261112",
+        "gitBlobSha": "0de953686ceb845be6ee6f99d4ca29f57484f418"
+      },
+      {
+        "path": "src/jdk.m3.io/share/classes/jdk/m3/optane/PmemTensorSpec.java",
+        "sha256": "64940f5b2a087ccaa55b892160467419b1a824e746e111f4c6b07d9e1c9dd618",
+        "recipe": "pmem-reuse-current-m3jdk-java-20261112",
+        "gitBlobSha": "994d4532b2cec9f66ca937febc3d044d51345957"
+      },
+      {
+        "path": "src/jdk.m3.io/share/native/libm3optane/m3pmemsdk.c",
+        "sha256": "4f3e3ff909f51b5ad94e226994d4dce2a4ebe97c2bbf0ccc2e64c21df902602d",
+        "recipe": "pmem-reuse-current-m3jdk-text-20261112",
+        "gitBlobSha": "319f08a4ba4a78e8a9206270a241e45805f18d07"
+      },
+      {
+        "path": "test/jdk/jdk/m3/optane/PmemMemoStoreJUnitTest.java",
+        "sha256": "90123edbdf422637785484608c9162a96ccf6ad65f66598f3ecd432b38f6a908",
+        "recipe": "pmem-reuse-current-m3jdk-java-20261112",
+        "gitBlobSha": "a6c5342e5b574c70dc98f7c58e1e5ab653bcd715"
+      },
+      {
+        "path": "test/jdk/jdk/m3/optane/PmemMemoStoreSmokeTest.java",
+        "sha256": "16466ca73e8004ef8d2ee3e06bd6b3738470a88d7d3a1e8c221961a42183fdc7",
+        "recipe": "pmem-reuse-current-m3jdk-java-20261112",
+        "gitBlobSha": "0b7a3e7677be17da94e61a108689d5690b2b9d3e"
+      },
+      {
+        "path": "test/jdk/jdk/m3/optane/PmemNativeOpenContractTest.java",
+        "sha256": "d9008caac749c6c3f2cef67cf0337e7638250b2f5daa5b38c5aa3fb612d0c039",
+        "recipe": "pmem-reuse-current-m3jdk-java-20261112",
+        "gitBlobSha": "cf5f28e3399e403d03d2b82f27e70205a1c850f9"
+      },
+      {
+        "path": "test/jdk/jdk/m3/optane/PmemNativeOpenJUnitTest.java",
+        "sha256": "1bb716309a8bb4c824dfba9757555bf1b1f14afaaa05b0690bdb779cda47cab2",
+        "recipe": "pmem-reuse-current-m3jdk-java-20261112",
+        "gitBlobSha": "d878dd6ad82ad22f63b33e5abbb95ce7ef92e373"
+      },
+      {
+        "path": "test/jdk/jdk/m3/optane/PmemTensorCacheContractTest.java",
+        "sha256": "9530b36b76dd33afd11884af9287c8bc155af66c1de99b42d3c38457366c5a13",
+        "recipe": "pmem-reuse-current-m3jdk-java-20261112",
+        "gitBlobSha": "78bbeed86b8affb9d98d65cd7cd53cc276061d49"
+      },
+      {
+        "path": "test/jdk/jdk/m3/optane/PmemTensorCacheJUnitTest.java",
+        "sha256": "e5f22b64631748074dfbeeec0665751e0269e121573453e3d1c4f4a1bf95b20f",
+        "recipe": "pmem-reuse-current-m3jdk-java-20261112",
+        "gitBlobSha": "03a3d989126ee3000ace66846641b626f0893ade"
+      },
+      {
+        "path": "m3/optane/PORT-MAPPING.pending.json",
+        "sha256": "f65ec107463566c355fffc843b3e662cded808ecedfd229092311f786da6daeb",
+        "recipe": "pmem-reuse-docs-m3jdk-text-20261112",
+        "gitBlobSha": "937c2b479b564425776288b9f42191c1c8fa7ac2"
+      },
+      {
+        "path": "m3/optane/docs/PMEM_AI_REUSE.md",
+        "sha256": "91fc4113aec9f44a1d56fafd1411163a83f9744baa702cd420a3e1e33fc6a8a7",
+        "recipe": "pmem-reuse-docs-m3jdk-text-20261112",
+        "gitBlobSha": "23df98551c3c1a2d5a58a2cc7de9712fce4249ee"
+      }
+    ]
+  },
+  "implementedContracts": [
+    "Exact bounded canonical memo identities with explicit image-generation or complete-file-dependencies scope",
+    "Durable namespace invalidation and stale-worker publication refusal under the existing store monitor",
+    "Separate candidate and externally validated result identities; owned result digest and complete envelope validation",
+    "Immutable fixed-width tensor geometry and typed prefix identity with validation before destination writes",
+    "Final symlink refusal retained through native open and access-correct libpmem2 protection"
+  ],
+  "verification": {
+    "java": "Temurin 21.0.9+10",
+    "openRewrite": "8.90.4",
+    "compiledReceivingSources": 36,
+    "nativeLibraries": 3,
+    "cmakeConfigurations": [
+      "POSIX-only",
+      "libpmem2 1.13.1 enabled"
+    ],
+    "canonicalSdkBuildJmodLinkedImage": "PASS",
+    "canonicalSdkJUnit": {
+      "passed": 92,
+      "skipped": 0,
+      "failed": 0
+    },
+    "receivingDefaultMaven": {
+      "discovered": 71,
+      "passed": 62,
+      "skipped": 9,
+      "failed": 0
+    },
+    "receivingNativeMavenAllFourScaleCases": {
+      "discovered": 109,
+      "passed": 108,
+      "skipped": 1,
+      "failed": 0,
+      "soleSkip": "PMDK case exercised separately"
+    },
+    "realLibpmem2Completion": {
+      "tests": 4,
+      "passed": 4,
+      "skipped": 0,
+      "failed": 0,
+      "scope": "Ordinary-file native-open contracts, including explicit read-only/read-write PMDK mappings"
+    },
+    "formalJtreg": {
+      "reportedHarness": "8.2.1-dev+1",
+      "files": 7,
+      "passedDescriptors": 13,
+      "passedMainActions": 16,
+      "declaredInterpreterActions": 3,
+      "exitCode": 0,
+      "imageScope": "Receiving-built jdk.m3.io and three installed JNI libraries linked with stock Temurin 21 base modules",
+      "developmentNativeLibraryPathInjected": false
+    },
+    "manualInstalledNormalAndInterpretedRuns": 10,
+    "memoAssertionsPerCombinedRun": 175,
+    "memoSimulatedPersistenceFailuresPerRun": 6,
+    "tensorAssertionsPerCombinedRun": 951,
+    "durableAssertionsPerCombinedRun": 366,
+    "durableSimulatedPersistenceFailuresPerRun": 37,
+    "fp32ChecksPerCombinedRun": 5099586,
+    "baselineBinaryOwnersCompared": 50,
+    "removedPublicDeclarations": 0,
+    "unchangedJniExports": 15,
+    "originalChangedJavaGate": {
+      "files": 12,
+      "introducedFindings": 0,
+      "inheritedParsedFindings": 7
+    },
+    "originalPublicNameGateAtSourceA": {
+      "files": 15,
+      "violations": 0,
+      "receiptSelfExcluded": true
+    },
+    "countRule": "Counts are per named execution; repeated modes and overlapping suites do not multiply unique coverage"
+  },
+  "canonicalProvenance": {
+    "status": "HOLD_PRE_EXISTING_POLICY_AND_INDEX_INVALID_JSON",
+    "globalPolicyOrIndexChanged": false,
+    "candidateRegistered": false,
+    "boundedHistoricalPolicyDiagnostic": "PASS_BOUNDED_ONLY",
+    "classifiedPrivatePaths": 823,
+    "exactNonSelfFilesChecked": 818,
+    "selfEvidenceRowsBoundExternally": 5,
+    "scope": "Per-file candidate evidence does not clear canonical admission or authorize promotion"
+  },
+  "evidence": [
+    {
+      "purpose": "runtime-recipe-execution",
+      "sourceCommit": "7388719939e271c7bc5b924c5267a0f7315ce86a",
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-pmem-donor-convergence-20261112/continuations/reuse-current-20261112/evidence/recipe/execution-summary.json",
+      "sha256": "49f8807a63db136ebb8107ae2f5df61676b181e5d0c133f458aa256e6157f5ba",
+      "gitBlobSha": "aa2a3a2d9552d3caeecbedc9ab96ba7200ebee96"
+    },
+    {
+      "purpose": "runtime-and-documentation-output-seals",
+      "sourceCommit": "7388719939e271c7bc5b924c5267a0f7315ce86a",
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-pmem-donor-convergence-20261112/continuations/reuse-docs-20261112/evidence/execution-summary.json",
+      "sha256": "1d5c6f458c9bc7c53b4268b641637be198c0030f9dc77de4bd3b671a4406c2ce",
+      "gitBlobSha": "c649ee53069ac46550def30dd1e60ec1ed6710dc"
+    },
+    {
+      "purpose": "combined-receiving-execution",
+      "sourceCommit": "7388719939e271c7bc5b924c5267a0f7315ce86a",
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-pmem-donor-convergence-20261112/continuations/reuse-20261112/evidence/receiving/execution-summary.json",
+      "sha256": "4b6eeffedbe0723742894ed9d810d91703296c8746d20791191cd39dca51e8b4",
+      "gitBlobSha": "e2c1de7d94fe9d7a0f81b933a2a955e5227fdc07"
+    },
+    {
+      "purpose": "formal-jtreg",
+      "sourceCommit": "7388719939e271c7bc5b924c5267a0f7315ce86a",
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-pmem-donor-convergence-20261112/continuations/reuse-20261112/evidence/receiving/jtreg/summary.json",
+      "sha256": "639e548d37ba41a066846823b7566ccaf34085369a98a139033ecaacaef80599",
+      "gitBlobSha": "fc2395f62f23357eb0e56f09079e2dd2106bd9f2"
+    },
+    {
+      "purpose": "api-and-jni-parity",
+      "sourceCommit": "7388719939e271c7bc5b924c5267a0f7315ce86a",
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-pmem-donor-convergence-20261112/continuations/reuse-20261112/evidence/receiving/api-jni-parity.json",
+      "sha256": "dcd48ea2e68fb3264e73e3563bacd366e0a46fc18dc8b6a7599bf7d45d717786",
+      "gitBlobSha": "12d38346ee5d777158136232becbffa80025a17b"
+    },
+    {
+      "purpose": "original-source-and-public-name-gates",
+      "sourceCommit": "7388719939e271c7bc5b924c5267a0f7315ce86a",
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-pmem-donor-convergence-20261112/continuations/reuse-current-20261112/evidence/target-admission/docs-two-f197a8d/formal-gates.json",
+      "sha256": "9ba047a33ec1bc23d0ddd094b18365d84e79e2165d6f3c3a14f38a7d8214a3b2",
+      "gitBlobSha": "ec45d0ddd10a465fc31456cc435a5f45713cd8c5"
+    },
+    {
+      "purpose": "source-only-copyright-successor",
+      "sourceCommit": "7388719939e271c7bc5b924c5267a0f7315ce86a",
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-pmem-donor-convergence-20261112/continuations/reuse-provenance-20261112/evidence/header-successor-proof.json",
+      "sha256": "03ff6d01d26e172fd531821a0b48f65ce56612fa824b3bdf0f01635af962f25b",
+      "gitBlobSha": "f8191dc249ba25f5d573d6468574254333260250"
+    },
+    {
+      "purpose": "bounded-provenance-final",
+      "sourceCommit": "7388719939e271c7bc5b924c5267a0f7315ce86a",
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-pmem-donor-convergence-20261112/continuations/reuse-provenance-metadata-20261112/evidence/execution-summary.json",
+      "sha256": "a4151b09364abd9dc1013b1eb71dec95aecbc029395508dd68ca1d46e1f46903",
+      "gitBlobSha": "5a59ec914e0064c14d027d87c91a46667e576908"
+    },
+    {
+      "purpose": "canonical-provenance-baseline-hold",
+      "sourceCommit": "7388719939e271c7bc5b924c5267a0f7315ce86a",
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-pmem-donor-convergence-20261112/continuations/reuse-provenance-20261112/evidence/canonical-baseline-failure.json",
+      "sha256": "7075d034e2d40810c3562a58f1e292f54c03c7bdd62dc50722d3841ee5039c9c",
+      "gitBlobSha": "aa7c1a573ed31050c515ac09997138471e30f5fa"
+    },
+    {
+      "purpose": "handoff-owner-search-scope",
+      "sourceCommit": "7388719939e271c7bc5b924c5267a0f7315ce86a",
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-pmem-donor-convergence-20261112/continuations/reuse-provenance-20261112/evidence/handoff-owner-inventory.json",
+      "sha256": "cd835a15985faa68f93346cd9a70430f32e72dfcfd6e96b17c9bd3fcf9d3541b",
+      "gitBlobSha": "487ffb818563de98fcc2bfc600885b2f69cf3695"
+    }
+  ],
+  "remainingGates": [
+    "Canonical provenance policy/index reconciliation and normal review",
+    "Full source reactor/mastery and repository-owned offline dependency admission",
+    "Documented canonical result-only handoff gate; no replacement authority is claimed",
+    "Complete source-built modified M3JDK and HotSpot image qualification",
+    "Optional-module admission and ordered JDK-family promotion",
+    "Physical PMem/DAX power-loss, NUMA/GPU/RDMA qualification",
+    "Representative comparative production performance"
+  ],
+  "contractLimits": [
+    "Fixed append-only capacity; logical invalidation and replacement do not reclaim slots",
+    "Applications own complete dependency/model identities, serializers and trusted validator/evidence receipts",
+    "The store does not automatically capture a live decoder, optimizer or distributed training state",
+    "Corrupt committed records can prevent reopening; no universal recovery of an older checkpoint is promised",
+    "Ordinary-file tests and simulated persistence cuts are distinct from physical power-loss qualification"
+  ]
+}

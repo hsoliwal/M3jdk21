@@ -1,0 +1,154 @@
+{
+  "schema": "M3_CHECKOUT_CUSTODY_RECEIVING_V1",
+  "sourceHead": "100fbc0bf0d1830674d339f578965b1f6cb47726",
+  "recipeProof": "14cecf005ba95f954f2901a116656da308df07a9",
+  "workOrder": {
+    "schema": "M3_RECEIVING_PLATFORM_REPAIR_V1",
+    "recipe": "lexicon-checkout-custody",
+    "sourceHead": "100fbc0bf0d1830674d339f578965b1f6cb47726",
+    "master": "b98bf8c065818aac3447be165909e2a013325d9a",
+    "owner": ".github/workflows/build-windows.yml",
+    "beforeGitBlob": "1764ab557820c4fd4115762ee28462a2fe78c341",
+    "generationCalls": 0,
+    "atoms": [
+      "checkout-scoped config inheritance",
+      "exact data receipt source+destination admission",
+      "CreateTextFile before DeleteSourceFiles",
+      "source blob preservation",
+      "unchanged public-name guard"
+    ],
+    "scope": "Existing workflow maintenance and passive receipt relocation using admitted source bytes and existing recipes; no new product implementation"
+  },
+  "workflowBefore": {
+    "bytes": 5362,
+    "sha256": "80cd6b0e4a26b20936bb59be0bcda4ab7f3acc0937077f7442943d2293d8f500",
+    "gitBlob": "1764ab557820c4fd4115762ee28462a2fe78c341"
+  },
+  "workflowAfter": {
+    "bytes": 5487,
+    "sha256": "bf064d7f242653c0414b787691e0da0af19d23344b4655299af43bb31c5ef3ea",
+    "gitBlob": "1a47691383d167c477ba3aa0bd2534a3597f1d8c"
+  },
+  "receiptRelocation": {
+    "oldPath": "m3/lexicon/receiver/qualification/case-liang-seals-20261112/RECEIPT.json",
+    "newPath": "m3/lexicon/receiver/qualification/case-liang-seals/RECEIPT.json",
+    "identity": {
+      "bytes": 11153,
+      "sha256": "d5456b98ec03f6861b5853ebcfe3e0b3fe55982d0cdc7f3c4765a6e5229cac6a",
+      "gitBlob": "40fdd4a9d4fc1bd3a77510902fcdfa7fb619ebfc"
+    },
+    "changes": "create destination then delete exact source; no receipt content change"
+  },
+  "publicNames": {
+    "status": "PASS_UNCHANGED_PREDICATE",
+    "guard": {
+      "bytes": 13679,
+      "sha256": "98c1272efd1c2c447cdd91bbb1f6779f48ee5394250f43316a6fdde5b2c8dff7",
+      "gitBlob": "d37e9f4f8155879a08f95f30bcf10259f37ddc7a"
+    },
+    "oldPath": "m3/lexicon/receiver/qualification/case-liang-seals-20261112/RECEIPT.json",
+    "oldProblems": [
+      "unstable date/version identifier"
+    ],
+    "newPath": "m3/lexicon/receiver/qualification/case-liang-seals/RECEIPT.json",
+    "newProblems": [],
+    "mutatedDateRefused": true,
+    "scope": "actual unchanged public-name predicate; full Git delta/other repository naming gates separate"
+  },
+  "longPath": {
+    "status": "PASS_READ_ONLY_LOCAL_GIT",
+    "version": "git version 2.53.0.windows.2",
+    "executable": {
+      "path": "C:\\Program Files\\Git\\cmd\\git.EXE",
+      "bytes": 46464,
+      "sha256": "37c5725818d602e951ba2563b870d62763322956b73373da4c33a0b566a80bc9",
+      "gitBlob": "cb7fed257dcbc0f70b0bc9bd143a377ca0b7a825"
+    },
+    "files": {
+      "F:\\codex-work\\lexicon-migration-20261031\\arrays-publication-selection-history\\attempt-1\\arrays-combined-source-candidate\\synexia-openrewrite-recipes\\recipe-crates\\m3jdk21-api-companions-20261029\\evidence\\current-metadata-20261101\\maven\\src\\main\\resources\\com\\synexia\\rewrite\\hash-pinned-text\\m3-arrays-current-metadata-20261101\\pre\\name-plan.json.txt": {
+        "bytes": 2319,
+        "sha256": "3f51a4975e9f423196a4ee5c715d4edc2c2e937c34d9d5a1e3d2276dcd47752e",
+        "gitBlob": "062f50d0e0fa13282640c82880723ba7f50a362c"
+      },
+      "F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\project\\M3LexiconCpuProof.java": {
+        "bytes": 3391,
+        "sha256": "ffad2daf59d13eac412c41165936880d2d26ffac338ebeb7713601d70a1992b2",
+        "gitBlob": "162ce049c940a6cbf417db68d80e04c81f217722"
+      }
+    },
+    "runs": [
+      {
+        "label": "baseline",
+        "value": "false",
+        "argv": [
+          "C:\\Program Files\\Git\\cmd\\git.EXE",
+          "--no-optional-locks",
+          "--no-pager",
+          "diff",
+          "--no-index",
+          "--no-ext-diff",
+          "--no-textconv",
+          "--numstat",
+          "--",
+          "F:\\codex-work\\lexicon-migration-20261031\\arrays-publication-selection-history\\attempt-1\\arrays-combined-source-candidate\\synexia-openrewrite-recipes\\recipe-crates\\m3jdk21-api-companions-20261029\\evidence\\current-metadata-20261101\\maven\\src\\main\\resources\\com\\synexia\\rewrite\\hash-pinned-text\\m3-arrays-current-metadata-20261101\\pre\\name-plan.json.txt",
+          "F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\project\\M3LexiconCpuProof.java"
+        ],
+        "exit": 1,
+        "stdout": "",
+        "stderr": "error: Could not access 'F:\\codex-work\\lexicon-migration-20261031\\arrays-publication-selection-history\\attempt-1\\arrays-combined-source-candidate\\synexia-openrewrite-recipes\\recipe-crates\\m3jdk21-api-companions-20261029\\evidence\\current-metadata-20261101\\maven\\src\\main\\resources\\com\\synexia\\rewrite\\hash-pinned-text\\m3-arrays-current-metadata-20261101\\pre\\name-plan.json.txt'\n"
+      },
+      {
+        "label": "candidate",
+        "value": "true",
+        "argv": [
+          "C:\\Program Files\\Git\\cmd\\git.EXE",
+          "--no-optional-locks",
+          "--no-pager",
+          "diff",
+          "--no-index",
+          "--no-ext-diff",
+          "--no-textconv",
+          "--numstat",
+          "--",
+          "F:\\codex-work\\lexicon-migration-20261031\\arrays-publication-selection-history\\attempt-1\\arrays-combined-source-candidate\\synexia-openrewrite-recipes\\recipe-crates\\m3jdk21-api-companions-20261029\\evidence\\current-metadata-20261101\\maven\\src\\main\\resources\\com\\synexia\\rewrite\\hash-pinned-text\\m3-arrays-current-metadata-20261101\\pre\\name-plan.json.txt",
+          "F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\project\\M3LexiconCpuProof.java"
+        ],
+        "exit": 1,
+        "stdout": "28\t38\t\"F:\\\\codex-work\\\\lexicon-migration-20261031\\\\arrays-publication-selection-history\\\\attempt-1\\\\arrays-combined-source-candidate\\\\synexia-openrewrite-recipes\\\\recipe-crates\\\\m3jdk21-api-companions-20261029\\\\evidence\\\\current-metadata-20261101\\\\maven\\\\src\\\\main\\\\resources\\\\com\\\\synexia\\\\rewrite\\\\hash-pinned-text\\\\m3-arrays-current-metadata-20261101\\\\pre\\\\name-plan.json.txt\" => \"F:\\\\codex-work\\\\lexicon-migration-20261031\\\\shared-array-descriptors-20261112\\\\jni-proof\\\\project\\\\M3LexiconCpuProof.java\"\n",
+        "stderr": ""
+      },
+      {
+        "label": "baseline-again",
+        "value": "false",
+        "argv": [
+          "C:\\Program Files\\Git\\cmd\\git.EXE",
+          "--no-optional-locks",
+          "--no-pager",
+          "diff",
+          "--no-index",
+          "--no-ext-diff",
+          "--no-textconv",
+          "--numstat",
+          "--",
+          "F:\\codex-work\\lexicon-migration-20261031\\arrays-publication-selection-history\\attempt-1\\arrays-combined-source-candidate\\synexia-openrewrite-recipes\\recipe-crates\\m3jdk21-api-companions-20261029\\evidence\\current-metadata-20261101\\maven\\src\\main\\resources\\com\\synexia\\rewrite\\hash-pinned-text\\m3-arrays-current-metadata-20261101\\pre\\name-plan.json.txt",
+          "F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\project\\M3LexiconCpuProof.java"
+        ],
+        "exit": 1,
+        "stdout": "",
+        "stderr": "error: Could not access 'F:\\codex-work\\lexicon-migration-20261031\\arrays-publication-selection-history\\attempt-1\\arrays-combined-source-candidate\\synexia-openrewrite-recipes\\recipe-crates\\m3jdk21-api-companions-20261029\\evidence\\current-metadata-20261101\\maven\\src\\main\\resources\\com\\synexia\\rewrite\\hash-pinned-text\\m3-arrays-current-metadata-20261101\\pre\\name-plan.json.txt'\n"
+      }
+    ],
+    "scope": "actual Windows builtin Git no-index read, process-env false/true/false; existing350-character file and115-character reference, no local writes; hosted checkout and subsequent configure/build remain unproven"
+  },
+  "localStorage": {
+    "before": 571469824,
+    "after": 571469824,
+    "cap": 571473920
+  },
+  "status": "PASS_SCOPED_LOCAL_PROOFS_HOSTED_PENDING",
+  "limits": [
+    "actual existing long-path read, not a hosted checkout or JDK build",
+    "previous CI results remain bound to prior exact head",
+    "foundation/control-reactor/naming/reference/collection failures remain open"
+  ]
+}
