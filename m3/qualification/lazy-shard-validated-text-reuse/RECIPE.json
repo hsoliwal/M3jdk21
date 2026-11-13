@@ -1,0 +1,37 @@
+{
+  "schema": "M3_HASH_PINNED_JAVA_RECEIVING_RECIPE_V1",
+  "name": "com.synexia.rewrite.M3LazyShardValidatedTextReuse",
+  "crate": "lazy-shard-validated-text-reuse",
+  "canonicalCommit": "eed15acb805f5e421436479374d41f49b37a1041",
+  "canonicalCratePath": "synexia-openrewrite-recipes/recipe-crates/lazy-shard-validated-text-reuse",
+  "descriptor": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-lazy-shard-validated-text-reuse.yml",
+  "hostPins": {
+    "revision": "e4f7ccf2edfe867294f7fe5ebbd711299517935c",
+    "engine": "548e6681c403942a3d72fa0e1252b3b897c09b96",
+    "scope": "579979410c6232718e03f249730cf03853561ff7",
+    "envelope": "1b0b84ab1dd08aab4c8edb5835bd00615d0cf908",
+    "editScope": "5e4cf8ea8df34090b5a17494ace72ab907161b9c",
+    "previousScopeProof": "71f4708611e691de72d6149c83aa17ef3e81bedb",
+    "note": "Current host adds four exact installed Guava hash owners; selected M3 catalog owner remains admitted; current-host replay and all parser/co-input/runtime source identities are checked."
+  },
+  "source": "m3/core/src/jdk/m3/text/SharedLexiconCatalog.java",
+  "before": {
+    "bytes": 44256,
+    "sha256": "da50c2acf4e6125d72af6ae374ef5e2281ed7b653af9f90578eccbb48da3029a",
+    "gitBlob": "598a67a25a6d8edd36d495aa692578f79c0f5879"
+  },
+  "after": {
+    "bytes": 44362,
+    "sha256": "4f3241c045253d15e96dd8163c4c9171acc96b8852f92c1512349cadbadca5d6",
+    "gitBlob": "a0cbbcedebc00cf886a611aff193ae8f47301e92"
+  },
+  "recipeManifest": "# parse-context-sha256\tb542e9e73e886a7dee1c61e0a033aa1111a86b308babea44332d9af77a30b767\nm3/core/src/jdk/m3/text/SharedLexiconCatalog.java\tda50c2acf4e6125d72af6ae374ef5e2281ed7b653af9f90578eccbb48da3029a\t4f3241c045253d15e96dd8163c4c9171acc96b8852f92c1512349cadbadca5d6\t00-post.txt\n",
+  "qualificationInput": "b18ceaa85a4238c5eb757dc66e204bd6f9a76a5b",
+  "qualificationProof": "7ea27efa45d4422f1a5e1de09c801393138e5c01",
+  "runtimeProof": "25a67fdadf786640c76f172889f514b3333f834d",
+  "tests": [
+    "m3/qualification/lazy-shard-validated-text-reuse/M3LazyTextReuseTest.java",
+    "m3/qualification/lazy-shard-validated-text-reuse/M3LazyTextReuseQualification.java"
+  ],
+  "note": "Existing Maven/OpenRewrite host performs exact replay/fixed-point/refusal; qualification orchestration and exact source/resource views remain in canonical crate. No unexecuted receiving build claim."
+}

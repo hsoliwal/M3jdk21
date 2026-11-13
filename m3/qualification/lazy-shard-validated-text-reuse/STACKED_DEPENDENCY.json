@@ -1,0 +1,20 @@
+{
+  "schema": "M3_LAZY_VALIDATION_STACKED_DEPENDENCY_V1",
+  "dependencyPr": "https://github.com/hsoliwal/M3jdk21/pull/2978",
+  "dependencyBranch": "codex/lexicon-manifest-workflow-r215",
+  "dependencyHead": "672b63eb1c9ee119221190d1868cf17b621cc889",
+  "optimizationParent": "53c0c3324a63086e180f2c26ee5133fd7b043926",
+  "dependencyCpu": "c67b09e1b50f12a16b4f33e13ba5d889a1019ba9",
+  "dependencyTree": "ab034b6b783faeab7dc088bb5fd9ab7d7af3a5b6",
+  "optimizationCpu": "e55a93054f54cffcb2d27f39ff65bc70ca64429d",
+  "optimizationTree": "4c6409c82dc390ed215cadfe705c9a642568b66b",
+  "initialReadback": "d49a771fc1b443893d12630bd7f5ef03bbece5f9",
+  "initialInvalidWorkflowRun": 43372076810,
+  "rootCause": "Optimization's master parent retained the exact name-only orphan workflow step already qualified for removal in dependency PR. Stack the complete disjoint recipe outputs; do not rerun or disable CI manually.",
+  "policy": "Preserve both parent histories and every qualified afterimage; actual JDK/JNI/filesystem CI remains required",
+  "generationCalls": 0,
+  "originalDependencyHead": "0cac5cdbff4250924d37606843600648373edd69",
+  "dependencyCurrentBaseTree": "3fd3f4038bde8b5d716212de53299c48b0a4af73",
+  "dependencyCurrentTreeProof": "e8321649620d585f1ad339ceaa0e5317fb5f3172",
+  "currentMaster": "796bd612b85fad87dd769558f4e7476c19556e3f"
+}
