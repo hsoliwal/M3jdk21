@@ -12,6 +12,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Modified 2026 by Hitesh Soliwal and contributors: preserve backing entry-set
+ * caching while removing temporary entry projections from membership and
+ * equality scans.
  */
 
 package jdk.m3.collections.spring;
@@ -52,6 +56,10 @@ final class SingleToMultiValueMapAdapter<K, V> implements MultiValueMap<K, V>, S
 
 	@Nullable
 	private transient Set<Entry<K, List<V>>> entries;
+
+	/** Reuse the backing set captured by the caller-visible entry projection. */
+	@Nullable
+	private transient Set<Entry<K, V>> backingEntries;
 
 
 	/**
@@ -133,21 +141,13 @@ final class SingleToMultiValueMapAdapter<K, V> implements MultiValueMap<K, V>, S
 
 	@Override
 	public boolean containsValue(@Nullable Object value) {
-		Iterator<Entry<K, List<V>>> i = entrySet().iterator();
-		if (value == null) {
-			while (i.hasNext()) {
-				Entry<K, List<V>> e = i.next();
-				if (e.getValue() == null || e.getValue().isEmpty()) {
-					return true;
-				}
-			}
-		}
-		else {
-			while (i.hasNext()) {
-				Entry<K, List<V>> e = i.next();
-				if (value.equals(e.getValue())) {
-					return true;
-				}
+		Iterator<Entry<K, V>> iterator = backingEntrySet().iterator();
+		while (iterator.hasNext()) {
+			Entry<K, V> entry = iterator.next();
+			entry.getKey(); // Preserve key-before-value callback behavior.
+			List<V> candidate = Collections.singletonList(entry.getValue());
+			if (value == null ? candidate == null || candidate.isEmpty() : value.equals(candidate)) {
+				return true;
 			}
 		}
 		return false;
@@ -237,6 +237,7 @@ final class SingleToMultiValueMapAdapter<K, V> implements MultiValueMap<K, V>, S
 		Set<Entry<K, List<V>>> entries = this.entries;
 		if (entries == null) {
 			Set<Entry<K, V>> targetEntries = this.targetMap.entrySet();
+			this.backingEntries = targetEntries;
 			entries = new AbstractSet<>() {
 				@Override
 				public Iterator<Entry<K, List<V>>> iterator() {
@@ -266,6 +267,16 @@ final class SingleToMultiValueMapAdapter<K, V> implements MultiValueMap<K, V>, S
 		return entries;
 	}
 
+	/** Accesses the same backed set as the cached public entry-set view. */
+	private Set<Entry<K, V>> backingEntrySet() {
+		if (this.entries == null) {
+			entrySet();
+		}
+		Set<Entry<K, V>> source = this.backingEntries;
+		Assert.state(source != null, "Entry-set source was not initialized");
+		return source;
+	}
+
 	@Override
 	public void forEach(BiConsumer<? super K, ? super List<V>> action) {
 		this.targetMap.forEach((k, v) -> action.accept(k, Collections.singletonList(v)));
@@ -279,9 +290,9 @@ final class SingleToMultiValueMapAdapter<K, V> implements MultiValueMap<K, V>, S
 		}
 		if (other instanceof Map<?,?> otherMap && size() == otherMap.size()) {
 			try {
-				for (Entry<K, List<V>> e : entrySet()) {
+				for (Entry<K, V> e : backingEntrySet()) {
 					K key = e.getKey();
-					List<V> values = e.getValue();
+					List<V> values = Collections.singletonList(e.getValue());
 					if (values == null) {
 						if (otherMap.get(key) != null || !otherMap.containsKey(key)) {
 							return false;

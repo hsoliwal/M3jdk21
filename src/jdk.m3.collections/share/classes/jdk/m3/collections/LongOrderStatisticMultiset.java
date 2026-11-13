@@ -143,13 +143,13 @@ public final class LongOrderStatisticMultiset {
         return keys[node];
     }
 
+    /**
+     * Logical O(1) clear. All six payload lanes are primitives and no internal
+     * array view escapes this class; the next allocation overwrites every lane
+     * of each reused node. Retain allocated capacity to avoid repeated growth.
+     * No secure memory erasure is implied by this collection operation.
+     */
     public void clear() {
-        Arrays.fill(keys, 0L);
-        Arrays.fill(multiplicities, 0L);
-        Arrays.fill(subtreeCounts, 0L);
-        Arrays.fill(left, 0);
-        Arrays.fill(right, 0);
-        Arrays.fill(heights, (byte) 0);
         root = 0;
         nextNode = 1;
         freeHead = 0;
@@ -161,9 +161,14 @@ public final class LongOrderStatisticMultiset {
         if (node == 0) return allocate(key, occurrences);
         int comparison = Long.compare(key, keys[node]);
         if (comparison < 0) {
-            left[node] = insert(left[node], key, occurrences);
+            // The recursive insert may grow and replace left[]. Evaluate the
+            // array owner AFTER recursion, or the new child is written only
+            // into the stale array and disappears from the live AVL tree.
+            int child = insert(left[node], key, occurrences);
+            left[node] = child;
         } else if (comparison > 0) {
-            right[node] = insert(right[node], key, occurrences);
+            int child = insert(right[node], key, occurrences);
+            right[node] = child;
         } else {
             multiplicities[node] = Math.addExact(multiplicities[node], occurrences);
             refresh(node);
@@ -305,12 +310,22 @@ public final class LongOrderStatisticMultiset {
 
     private void grow() {
         int next = Math.addExact(keys.length, (keys.length >>> 1) + 1);
-        keys = Arrays.copyOf(keys, next);
-        multiplicities = Arrays.copyOf(multiplicities, next);
-        subtreeCounts = Arrays.copyOf(subtreeCounts, next);
-        left = Arrays.copyOf(left, next);
-        right = Arrays.copyOf(right, next);
-        heights = Arrays.copyOf(heights, next);
+        // Stage every parallel primitive lane before publishing any of them.
+        // An allocation failure must not expose mismatched live array lengths.
+        // The transient peak memory is the old plus the new lanes; this is an
+        // intentional failure-atomicity trade-off, not an allocation speed claim.
+        long[] nextKeys = Arrays.copyOf(keys, next);
+        long[] nextMultiplicities = Arrays.copyOf(multiplicities, next);
+        long[] nextSubtreeCounts = Arrays.copyOf(subtreeCounts, next);
+        int[] nextLeft = Arrays.copyOf(left, next);
+        int[] nextRight = Arrays.copyOf(right, next);
+        byte[] nextHeights = Arrays.copyOf(heights, next);
+        keys = nextKeys;
+        multiplicities = nextMultiplicities;
+        subtreeCounts = nextSubtreeCounts;
+        left = nextLeft;
+        right = nextRight;
+        heights = nextHeights;
     }
 
     private int height(int node) {
