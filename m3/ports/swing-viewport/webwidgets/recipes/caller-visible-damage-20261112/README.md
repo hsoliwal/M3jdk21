@@ -25,16 +25,22 @@ mvn -o -B -ntp -f /absolute/recipe/pom.xml verify \
   -Dm3.caller.mode=qualify
 ```
 
-Run again with another fresh output root and `-Dm3.caller.mode=apply` after qualification. Commit only the exact two generator outputs, together with the owning template edits and this recipe. Repeating apply must leave their bytes and modification times unchanged.
+Run again with another fresh output root and `-Dm3.caller.mode=apply` after qualification. Commit the exact two generated Java outputs and the ledger candidate produced by the named recipe, together with the owning template edits and this recipe. Repeating apply must leave their bytes and modification times unchanged.
 
 Qualification emits before and after sources in isolation, compares exact hashes, verifies same-instance and fresh-instance zero-write replay, compiles each seventeen-source closure with `--release 21 -Xlint:all -Werror`, and compares the protected API of `M3WebLanes`. A failed preflight must not modify receiving Java. The compiler uses an explicitly empty classpath and sourcepath directory, so the selected seventeen-source closure cannot borrow the recipe's libraries.
 
 The generated-file ledger has a separate seal in `resources/manifest-pins.tsv`. Maven checks that ledger before generating Java. The existing OpenRewrite `FindAndReplace` recipe then updates only the two selected full rows, including their current namespace paths and actual emitted source hashes. Qualification verifies exact after-bytes, unchanged header/order/every other byte, fresh replay and refusal of missing, duplicated or changed rows. Apply retains ledger bytes and modification time when already current. The producer's whole-ledger `manifest()` operation is never called with a two-file map.
 
+## Runtime dependency
+
+Rewrite 8.17.1's `YamlResourceLoader` uses SLF4J, although its published POM omits that dependency. The controller explicitly pins `slf4j-api:2.0.9` with runtime scope, reusing the already provisioned compatible artifact. A logging provider is unnecessary; its three NOP-provider diagnostic lines are retained. The selected application compilation remains isolated from all recipe libraries. See `THIRD_PARTY_NOTICES.md`.
+
 ## Qualification limits
 
-Historical evidence is not fresh namespace qualification. The previous generator proof established exact two-file emission and zero-write replay; the previous API proof found identical protected surfaces. Before this new recipe runs, its current-namespace status is NOT_RUN.
+Historical evidence is not fresh namespace qualification. The previous generator proof established exact two-file emission and zero-write replay; the previous API proof found identical protected surfaces. The repaired Maven recipe passed current-namespace qualification on 2026-11-13 with Java 21.0.9 and Maven 3.9.14 using offline artifacts. The complete native receipt and exact source/ledger reports are in `evidence/runtime-20261113/`. This proves selected emission, strict compilation, protected-API equality, same/fresh replay, the named ledger recipe and its refusal cases.
 
 The approved eighteen-method `M3ViewportCoreApiTest` is retained byte-for-byte under `fixtures/` and is outside the two generated targets. It is compiled into a separate test output, ahead of the ordinary four-method test of the same name, and run in a separate CI job. All failures and the nonzero process status remain visible. No test is removed or weakened.
 
 This caller change does not implement the separate full-domain accumulator repair. That repair still requires exact wide unions, checked legacy projection with retained state, and `takeWide(long[])`. Passing the caller/public suite cannot qualify those outstanding contracts or complete the wider Synexia UI goal.
+
+The original hosted run `43250472845` reached selected-producer PASS and then failed loading SLF4J; it ran no JUnit tests. After the dependency correction, local `qualify-001` completed successfully and emitted the exact Java and ledger candidates now supplied for review. Subsequent local receiving apply attempts were stopped by the existing physical-memory reserve; they are not successful apply or behavior evidence. The eighteen-method oracle, caller tests and full public suite remain required in the focused hosted workflow. All original failures, counter values, and storage/process protections remain in force.

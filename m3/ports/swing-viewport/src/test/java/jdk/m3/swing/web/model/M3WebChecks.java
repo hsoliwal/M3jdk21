@@ -312,6 +312,12 @@ public final class M3WebChecks {
 		int a = m.aspects();
 		check((a & M3WebView.A_D) != 0, "every family declares D");
 		itemDamage(m);
+		if (m instanceof M3CollectionModel) {
+			callerUnresidentDamage();
+			callerOutsideDamage();
+			callerPaddedDamage();
+			callerDrainDamage();
+		}
 		if ((a & M3WebView.A_P) != 0) {
 			planes(m);
 		}
@@ -535,5 +541,169 @@ public final class M3WebChecks {
 		m.clear();
 		paints(m);
 		check(m.count() == 0, "cleared");
+	}
+
+	/** Invisible canonical items still change state and emit one delta, without invalidating pixels. */
+	private static void callerUnresidentDamage() {
+		M3CollectionModel m = callerVisibilityProbe();
+		for (int i = 0; i < 64; i++) {
+			m.add("row-" + i);
+		}
+		m.setItemExtent(40);
+		m.setLogicalCount(64);
+		m.layout(160, 40);
+		int[] out = new int[4];
+		m.takeDamage(out);
+		check(m.itemRect(63, 2) == 0 && m.itemRect(63, 3) == 0, "probe item is unresident");
+		int[] events = new int[5];
+		m.setDelta((item, mask) -> {
+			events[0]++; events[1] = item; events[2] = mask; events[3] = m.generation();
+			events[4] = m.is(63, SELECTED) ? 1 : 0;
+		});
+		int generation = m.generation();
+		boolean selected = !m.is(63, SELECTED);
+		m.setState(63, SELECTED, selected);
+		check(m.is(63, SELECTED) == selected, "unresident canonical state changes");
+		check(m.generation() == generation + 1 && events[0] == 1 && events[1] == 63
+				&& events[2] == M3WebLanes.D_STATE && events[3] == generation + 1
+				&& events[4] == (selected ? 1 : 0), "unresident delta and state order");
+		Arrays.fill(out, 71);
+		check(!m.takeDamage(out) && Arrays.equals(out, new int[] { 71, 71, 71, 71 }), "unresident state does not repaint origin");
+		m.setState(63, SELECTED, selected);
+		check(m.generation() == generation + 1 && events[0] == 1 && !m.takeDamage(out), "same state remains a no-op");
+		m.setDelta(null);
+	}
+
+	/** Clip each input before union; outside inputs cannot create a visible bridge between them. */
+	private static void callerOutsideDamage() {
+		M3CollectionModel m = callerVisibilityProbe();
+		m.layout(100, 60);
+		int[] out = new int[4];
+		m.takeDamage(out);
+		int[][][] pairs = {
+				{ { -20, 0, 5, 5 }, { 120, 0, 5, 5 } },
+				{ { 0, -20, 5, 5 }, { 0, 80, 5, 5 } },
+				{ { -20, 0, 5, 5 }, { 0, -20, 5, 5 } }
+		};
+		for (int[][] pair : pairs) {
+			for (int[] r : pair) {
+				m.damage(r[0], r[1], r[2], r[3]);
+			}
+			Arrays.fill(out, 73);
+			check(!m.takeDamage(out) && Arrays.equals(out, new int[] { 73, 73, 73, 73 }), "outside rectangles do not bridge the viewport");
+		}
+		m.damage(120, 10, 5, 5);
+		check(!m.takeDamage(out), "one outside rectangle produces no zero-size damage");
+		m.damage(0, 0, 0, 1); m.damage(0, 0, 1, 0);
+		m.damage(0, 0, -1, 1); m.damage(0, 0, 1, -1);
+		check(!m.takeDamage(out), "nonpositive inputs remain ignored");
+	}
+
+	/** Wide padding must retain a small visible focus margin even when its raw width cannot fit int. */
+	private static void callerPaddedDamage() {
+		M3CollectionModel m = callerVisibilityProbe();
+		m.add("row");
+		m.layout(160, 40);
+		int[] out = new int[5];
+		m.takeDamage(out);
+		int[][] cases = {
+				{ Integer.MIN_VALUE, 7, Integer.MAX_VALUE, 10, 0, 4, 2, 16 },
+				{ 12, Integer.MIN_VALUE, 9, Integer.MAX_VALUE, 9, 0, 15, 2 },
+				{ -10, -10, Integer.MAX_VALUE, Integer.MAX_VALUE, 0, 0, 160, 40 },
+				{ 159, 7, 1, 10, 156, 4, 4, 16 },
+				{ Integer.MAX_VALUE, 7, 1, 10, 0, 0, 0, 0 },
+				{ 10, 10, 0, 5, 0, 0, 0, 0 },
+				{ 10, 10, -1, 5, 0, 0, 0, 0 },
+				{ 10, 10, 5, 0, 0, 0, 0, 0 },
+				{ 10, 10, 5, -1, 0, 0, 0, 0 }
+		};
+		for (int[] r : cases) {
+			m.setRect(0, r[0], r[1], r[2], r[3]);
+			int generation = m.generation();
+			boolean selected = !m.is(0, SELECTED);
+			m.setState(0, SELECTED, selected);
+			check(m.is(0, SELECTED) == selected && m.generation() == generation + 1, "padded mutation retains state and generation");
+			Arrays.fill(out, 79);
+			boolean expected = r[6] > 0 && r[7] > 0;
+			check(m.takeDamage(out) == expected, "padded visible intersection admission");
+			if (expected) {
+				check(Arrays.equals(out, new int[] { r[4], r[5], r[6], r[7], 79 }), "exact wide padded intersection");
+			} else {
+				check(Arrays.equals(out, new int[] { 79, 79, 79, 79, 79 }), "empty padded intersection leaves output untouched");
+			}
+		}
+		int[] hook = new int[5];
+		M3CollectionModel probe = new M3CollectionModel("visibility-hook-contract", role("list"),
+				M3CollectionModel.INFINITE, RECT, V_DEFAULT) {
+			@Override
+			protected void damage(int x, int y, int w, int h) {
+				hook[0]++; hook[1] = x; hook[2] = y; hook[3] = w; hook[4] = h;
+				super.damage(x, y, w, h);
+			}
+		};
+		probe.add("row");
+		probe.layout(160, 40);
+		probe.takeDamage(out);
+		Arrays.fill(hook, 0);
+		probe.setRect(0, 10, 10, 5, 5);
+		probe.setState(0, SELECTED, !probe.is(0, SELECTED));
+		check(Arrays.equals(hook, new int[] { 1, 7, 7, 11, 11 }), "normal item retains one virtual damage hook and arguments");
+		probe.takeDamage(out);
+		Arrays.fill(hook, 0);
+		probe.setRect(0, Integer.MIN_VALUE, 7, Integer.MAX_VALUE, 10);
+		probe.setState(0, SELECTED, !probe.is(0, SELECTED));
+		check(Arrays.equals(hook, new int[] { 1, 0, 4, 2, 16 }), "overflow padding dispatches one clipped virtual damage hook");
+		probe.takeDamage(out);
+		Arrays.fill(hook, 0);
+		probe.setRect(0, 0, 0, 0, 0);
+		probe.setState(0, SELECTED, !probe.is(0, SELECTED));
+		check(Arrays.equals(hook, new int[5]) && !probe.takeDamage(out), "empty raw item does not dispatch damage hook");
+
+	}
+
+	/** Keep each backend's failed-take effects, while discarding successfully drained invisible damage. */
+	private static void callerDrainDamage() {
+		M3CollectionModel empty = callerVisibilityProbe();
+		M3CollectionModel rawEmpty = callerVisibilityProbe();
+		check(callerTakeOutcome(empty, null, false).equals(callerTakeOutcome(rawEmpty, null, true)), "empty null take follows backend");
+		for (int length = -1; length < 4; length++) {
+			M3CollectionModel raw = callerVisibilityProbe(), wrapped = callerVisibilityProbe();
+			raw.layout(0, 0); wrapped.layout(0, 0);
+			raw.core.damage(2, 3, 5, 7); wrapped.core.damage(2, 3, 5, 7);
+			int[] a = length < 0 ? null : new int[length], b = length < 0 ? null : new int[length];
+			if (a != null) { Arrays.fill(a, -99); Arrays.fill(b, -99); }
+			String expected = callerTakeOutcome(raw, a, true), actual = callerTakeOutcome(wrapped, b, false);
+			check(expected.startsWith("throw:") && expected.equals(actual), "failed take keeps backend exception");
+			check(a == null || Arrays.equals(a, b), "failed take keeps backend output prefix");
+			int[] out = { 83, 83, 83, 83, 83 };
+			check(!wrapped.takeDamage(out) && Arrays.equals(out, new int[] { 83, 83, 83, 83, 83 }), "successful invisible drain restores output");
+			check(!wrapped.core.take(new int[4]), "invisible damage was drained");
+			check(raw.core.take(new int[4]), "failed backend take retained pending damage");
+		}
+		M3CollectionModel m = callerVisibilityProbe();
+		m.layout(100, 60);
+		int[] out = new int[5];
+		m.takeDamage(out);
+		m.damage(2, 3, 5, 7);
+		Arrays.fill(out, 89);
+		check(m.takeDamage(out) && Arrays.equals(out, new int[] { 2, 3, 5, 7, 89 }), "nonempty output and trailing slot");
+		m.damage(2, 3, 5, 7);
+		m.layout(0, 0);
+		Arrays.fill(out, 97);
+		check(!m.takeDamage(out) && Arrays.equals(out, new int[] { 97, 97, 97, 97, 97 }), "pending damage disappears with zero client");
+		m.layout(100, 60);
+		check(m.takeDamage(out) && Arrays.equals(out, new int[] { 0, 0, 100, 60, 97 }), "real resize invalidates fresh visible pixels");
+	}
+
+	private static M3CollectionModel callerVisibilityProbe() {
+		return new M3CollectionModel("visibility-damage-contract", role("list"), M3CollectionModel.INFINITE, RECT, V_DEFAULT);
+	}
+
+	private static String callerTakeOutcome(M3WebModel m, int[] out, boolean raw) {
+		try {
+			return "return:" + (raw ? m.core.take(out) : m.takeDamage(out));
+		} catch (RuntimeException failure) {
+			return "throw:" + failure.getClass().getName();
+		}
 	}
 }
