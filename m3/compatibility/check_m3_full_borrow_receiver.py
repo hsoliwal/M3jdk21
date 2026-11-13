@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 Hitesh Soliwal and contributors
 """Fail closed unless the current Synexia full-borrow receiver remains source-pinned only."""
 
 from __future__ import annotations
@@ -21,8 +22,11 @@ HISTORICAL = BASE / "historical-evidence.tsv"
 PHASES = BASE / "promotion-phases.tsv"
 HEX40 = re.compile(r"^[0-9a-f]{40}$")
 
+# Source schema and invariant identifiers describe the pinned Synexia records.
+# They are immutable provenance, not M3JDK package or symbol names to rename.
+# Keep the donor bytes and Git identities unchanged when target owners are renamed.
 PIN_EXPECTED = {
-    "schema": "M3JDK21_M3_FULL_BORROW_PIN_V1",
+    "schema": "M3JDK21_SYNEXIA_FULL_BORROW_PIN_V1",
     "source_repository": "hsoliwal/com.synexia",
     "source_pr": "9860",
     "source_revision": "296323958b1019edd59b60b9c05cb148d024cfe5",
@@ -33,7 +37,7 @@ PIN_EXPECTED = {
     "source_family_count": "32",
     "source_phase_path": ".m3/m3jdk21-promotion-phases.tsv",
     "source_phase_git_blob": "c4e8582f99caba32d718b2c1e86dae0854cdce3d",
-    "source_canonical_invariant": "docs/M3-SCALE/invariants/M3-M3JDK21-CANONICAL-OWNERSHIP-1.md",
+    "source_canonical_invariant": "docs/M3-SCALE/invariants/SYNEXIA-M3JDK21-CANONICAL-OWNERSHIP-1.md",
     "target_repository": "hsoliwal/M3jdk21",
     "target_baseline": "c9b07049c57ecdf43175f5885e11998918416a00",
     "target_estate_copy": "m3/m3-import/current-full-borrow/m3-estate.tsv",
@@ -175,7 +179,7 @@ def load_estate(pin: dict[str, str]) -> dict[str, dict[str, str]]:
     for physical, row in enumerate(rows, start=2):
         if any(not row[field] for field in ESTATE_HEADER):
             raise ValueError(f"blank estate field at row {physical}")
-        if row["schema"] != "M3_M3JDK21_FULL_BORROW_V1":
+        if row["schema"] != "SYNEXIA_M3JDK21_FULL_BORROW_V1":
             raise ValueError(f"invalid estate schema at row {physical}")
         if row["snapshot_revision"] != pin["source_revision"]:
             raise ValueError(f"estate source revision drift at row {physical}")
@@ -226,7 +230,7 @@ def load_dag(pin: dict[str, str], estate: dict[str, dict[str, str]]) -> None:
     for physical, row in enumerate(rows, start=2):
         if any(not row[field] for field in DAG_HEADER):
             raise ValueError(f"blank receiver DAG field at row {physical}")
-        if row["schema"] != "M3_M3JDK21_FULL_BORROW_DAG_V1":
+        if row["schema"] != "SYNEXIA_M3JDK21_FULL_BORROW_DAG_V1":
             raise ValueError(f"invalid receiver DAG schema at row {physical}")
         family = row["family"]
         if family in by_family or family not in estate_families:
@@ -306,7 +310,7 @@ def load_phases(pin: dict[str, str], estate: dict[str, dict[str, str]]) -> None:
     for physical, row in enumerate(rows, start=2):
         if any(not row[field] for field in PHASE_HEADER):
             raise ValueError(f"blank receiver phase field at row {physical}")
-        if row["schema"] != "M3_M3JDK21_PROMOTION_PHASE_V1":
+        if row["schema"] != "SYNEXIA_M3JDK21_PROMOTION_PHASE_V1":
             raise ValueError(f"invalid receiver phase schema at row {physical}")
         if row["predecessor"] != previous:
             raise ValueError(

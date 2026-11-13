@@ -30,8 +30,10 @@ final class M3StringPositionPrecompute {
     private static final int SLOT_MASK = SLOTS - 1;
     private static final int MIN_SOURCE_UNITS = 256;
     private static final int MAX_SOURCE_UNITS = 32_768;
+    // Each retained exact lane owns one first-offset byte and one mask long.
+    // The temporary UTF-16 construction scratch is not retained by ExactBlock.
     private static final long EXACT_BLOCK_BYTES =
-            MAX_SOURCE_UNITS * (Character.BYTES + Long.BYTES);
+            MAX_SOURCE_UNITS * (Byte.BYTES + Long.BYTES);
 
     private static final AtomicReferenceArray<Entry> CACHE =
             new AtomicReferenceArray<>(SLOTS);
@@ -129,8 +131,7 @@ final class M3StringPositionPrecompute {
         long blocksPerEntry =
                 (MAX_SOURCE_UNITS + BLOCK_MASK) >>> BLOCK_SHIFT;
         long signalBytes = (long) SLOTS * blocksPerEntry * Long.BYTES;
-        long exactBytes =
-                (long) SLOTS * (EXACT_BLOCK_BYTES + MAX_SOURCE_UNITS * Byte.BYTES);
+        long exactBytes = (long) SLOTS * EXACT_BLOCK_BYTES;
         return Math.addExact(signalBytes, exactBytes);
     }
 
