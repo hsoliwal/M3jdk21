@@ -1,0 +1,132 @@
+{
+  "SPDX-FileCopyrightText": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "SPDX-License-Identifier": "Apache-2.0",
+  "schema_version": 1,
+  "kind": "PASSIVE_RECEIVING_RECEIPT",
+  "capability": "existing-mat-immutable-primitive-exports-module-qualification",
+  "recorded_date": "2026-11-12",
+  "source": {
+    "repository": "hsoliwal/com.synexia",
+    "qualification_commit": "5f1e933900b41e03a8d18bca76c31d990f16163c",
+    "recipe_commit": "930c1110e475e9c5f1cfd1171750ace8b479e528",
+    "recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+    "source_dataset": "mat-jdk-owned-export-20261112",
+    "receipt_dataset": "mat-module-proof-20261112",
+    "qualification_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/qualification/mat-module-acceptance-20261112",
+    "acceptance_sha256": "aab16805426f92b4d1ad69db30f74366b4ddd1849409ed2c1aadaf585c69f514"
+  },
+  "receiver": {
+    "repository": "hsoliwal/M3jdk21",
+    "application_base": "b98bf8c065818aac3447be165909e2a013325d9a",
+    "module": "jdk.m3.collections",
+    "new_production_types": 0,
+    "new_module_exports": 0,
+    "native_abi_change": false
+  },
+  "predecessor": {
+    "path": "m3/collections/receiving/mat-owned-exports-20261112.json",
+    "sha256": "fcb555ea7d47ab1f7129b2deadcb54b5258ff72454a2678d45c91604c62d31cf",
+    "disposition": "immutable earlier scoped evidence retained; this record adds module and resource results"
+  },
+  "complete_module_compile": {
+    "sources": 1185,
+    "class_files": 2081,
+    "baseline": "PASS",
+    "candidate": "PASS",
+    "flags": "--release 21 -Xlint:all,-module -Werror"
+  },
+  "collection_suite": {
+    "sources": 815,
+    "baseline_and_candidate": {
+      "discovered": 2846,
+      "successful": 2691,
+      "failed": 0,
+      "skipped": 16,
+      "aborted": 135,
+      "other_unstarted": 4,
+      "skipped_containers": 1,
+      "aborted_containers": 1,
+      "failed_containers": 0
+    },
+    "jni_class_exclusions": 21,
+    "candidate_only_failure": false
+  },
+  "actual_component_runtime": {
+    "module": "jdk.m3.collections",
+    "runs": 12,
+    "checks_per_run": 212968,
+    "modes": [
+      "mixed",
+      "-Xint",
+      "-XX:TieredStopAtLevel=1"
+    ],
+    "surfaces": [
+      "module path",
+      "jlinked component image"
+    ],
+    "host_vm": "Temurin 21.0.13+9",
+    "full_source_built_jdk": false
+  },
+  "public_protected_api": "UNCHANGED",
+  "production_source_count_changed": 2,
+  "resource_measurements": {
+    "sparse_factory_bytes_per_operation": {
+      "before": 16480,
+      "after": 8256
+    },
+    "sorted_24_value_export_bytes_per_operation": {
+      "before": 224,
+      "after": 112
+    },
+    "direct_512_value_export_bytes_per_operation": {
+      "before": 4128,
+      "after": 2064
+    },
+    "hash_control_bytes_per_operation": {
+      "before": 4128,
+      "after": 4128
+    },
+    "sparse_directly_owned_graph_bytes": {
+      "before": 8256,
+      "after": 8256
+    },
+    "peak_rss_kib_medians": {
+      "before": 123960,
+      "after": 124364
+    },
+    "interpretation": "Temporary allocation reduction; sampled owned-storage graphs unchanged. No process-memory or general speedup claim.",
+    "timing_conditions": "Shared host; broad JUnit suite overlapped measurement; unchanged HASH timing also moved.",
+    "summary_sha256": "2ac60b08465e3778954c580a56dd8294ed96e96a16a91e909c32f134bdf62426"
+  },
+  "canonical_provenance": {
+    "state": "FAIL_INHERITED",
+    "audited_source": "5f205b430885bab76fec104e3b508d338726b0bf",
+    "exact_members_read": 193,
+    "data_rows": 122245,
+    "members_with_parse_failure": 66,
+    "unsupported_classification_rows": 2901,
+    "duplicate_occurrences": 239,
+    "duplicated_paths": 12,
+    "first_failure": "invalid SPDX header: docs/M3-SCALE/provenance/shards/20261104-ap5-surviving-history-recovery.tsv",
+    "report_sha256": "c426c4c730f74c10becfe55c747d46229bfd554bb2881474c8420cdd72c7c94c",
+    "meaning": "Full original checker actually ran and failed. Scoped MAT evidence does not turn this into a pass."
+  },
+  "remaining_gates": {
+    "global_naming": "BASELINE_OWNER_MODULE_REVIEW_REFUSAL; MAT per-type map gap explicitly deferred in predecessor documentation",
+    "full_source_built_m3jdk_hotspot_image": "NOT_RUN",
+    "jtreg_harness": "NOT_RUN; its actual main oracle ran against linked component image",
+    "native_profile": "NOT_RUN; Java-only implementation change, existing default exclusions and conditional skips retained",
+    "cross_platform": "NOT_RUN",
+    "hosted_ci": "PENDING_CANDIDATE_EXECUTION",
+    "ordered_receiving_stage_promotion": "HOLD_STRING_QUALIFICATION"
+  },
+  "admission": "DRAFT_COMPONENT_QUALIFIED_GLOBAL_PROVENANCE_HOLD",
+  "evidence_sha256": {
+    "baseline-module-receipt.json": "e6d97394274a7b3edb2a973112092e7ea37b3acf0164c3fe36d7c1f72d15296d",
+    "candidate-module-receipt.json": "7d67cfcfbc1ae222c1b109018c1399be6c6d9d140b1db1e33c1e265104c5b45a",
+    "module-runtime-receipt.json": "6266c72717c6aba3b187027a62cab02b9d5668cf6ab7d61c8bf9c137ed40579e",
+    "collection-suite-receipt.json": "957816f44db5866353657e6ed0341a63acd10d88279ff5316445d9c04fa2a733",
+    "performance/RESOURCE_SUMMARY.json": "2ac60b08465e3778954c580a56dd8294ed96e96a16a91e909c32f134bdf62426",
+    "suite-test-manifest.json": "40ed8a2d9141ba19946f762923795b8de2b51c42283216b77357d6f04c171e01"
+  }
+}
