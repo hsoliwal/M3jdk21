@@ -13,9 +13,14 @@ junit=$1; work=${2:-$(mktemp -d)}
 pkg=jdk.internal.m3.compression
 main_src=$root/src/java.base/share/classes/jdk/internal/m3/compression
 test_src=$root/test/jdk/jdk/internal/m3/compression
-rm -rf "$work"; mkdir -p "$work/main" "$work/test" "$work/native"
+rm -rf "$work"; mkdir -p "$work/main" "$work/test" "$work/native" "$work/src/jdk/internal/m3"
 reads=(--add-reads java.base=ALL-UNNAMED,java.management,jdk.management --add-modules java.management,jdk.management)
-javac -Xlint:all,-serial -Werror --patch-module java.base="$root/src/java.base/share/classes" -d "$work/main" "$main_src"/*.java
+# The patch source root holds only the product package. With the whole src/java.base/share/classes tree as the root,
+# javac prefers the (newer) checkout sources over the host image and implicitly compiles and lints ~2,000 referenced
+# OpenJDK classes into the patch; those fail -Werror on this-escape, which the java.base build itself disables
+# (make/modules/java.base/Java.gmk). Upstream classes now resolve from the host JDK 21; the product lint is unchanged.
+cp -R "$main_src" "$work/src/jdk/internal/m3/"
+javac -Xlint:all,-serial -Werror --patch-module java.base="$work/src" -d "$work/main" "$work/src/jdk/internal/m3/compression"/*.java
 javac --patch-module java.base="$work/main:$root/test/jdk" "${reads[@]}" -cp "$junit" -d "$work/test" "$test_src"/*.java
 java_home=$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")
 gcc -std=c11 -O2 -fPIC -shared -Wall -Wextra -Wconversion -Wsign-conversion -Wshadow -Wpedantic -Werror \
