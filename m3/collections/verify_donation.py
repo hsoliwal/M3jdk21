@@ -11,6 +11,7 @@ This host verifies product source. The canonical transformation and SDK replay r
 in Synexia. The earlier verify.py remains the frozen primitive-lane installer.
 """
 import argparse
+import ast
 import hashlib
 import json
 import os
@@ -441,6 +442,168 @@ SOURCE_TRANSITION_SEALS = {
 }
 
 
+
+_FULL_VERIFIER_SHA256 = "6bd246c84d91ab0ac6c8de02246d1a8c00db62aadc03387e3337bc4735b52947"
+_FULL_PROFILE_SHA256 = {"java": "3156a2fd1b43f002062a4a1c282756d07ad687333ad54ee3b109ac5ea8bf38b9", "native": "d8188c990d2586771a9254e22c889d9e845deafb3e0c18a676f57560515a3fd1"}
+
+
+def _closure_file(relative, missing_ok=False):
+    """A canonical contained receipt/source/artifact path; reject aliased components."""
+    if (not isinstance(relative, str) or not relative or "\\" in relative or ":" in relative
+            or any(part in ("", ".", "..") for part in relative.split("/"))
+            or Path(relative).is_absolute()):
+        raise SystemExit("Invalid full-build path: " + repr(relative))
+    path = REPO
+    for part in relative.split("/"):
+        path = path / part
+        if path.is_symlink() or getattr(path, "is_junction", lambda: False)():
+            raise SystemExit("Aliased full-build path: " + relative)
+    if not path.resolve().is_relative_to(REPO.resolve()):
+        raise SystemExit("Escaping full-build path: " + relative)
+    if not path.is_file() and not (missing_ok and not path.exists()):
+        raise SystemExit("Missing full-build file: " + relative)
+    return path
+
+
+def _full_product_resources():
+    return {'META-INF/LICENSE': HERE / 'LICENSE', 'META-INF/provenance.json': HERE / 'provenance.json', 'META-INF/m3-donation.json': HERE / 'm3-donation.json', 'META-INF/name-mapping.json': HERE / 'name-mapping.json', 'META-INF/M3-DONATION-NOTICE.txt': HERE / 'M3-DONATION-NOTICE.txt', 'META-INF/NETBEANS-NOTICE.txt': HERE / 'NETBEANS-NOTICE.txt', 'META-INF/m3collections.md': REPO / 'src/jdk.m3.collections/share/legal/m3collections.md', 'jdk/m3/collections/M3_SDK_FAMILY_CATALOG.tsv': REPO / 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3_SDK_FAMILY_CATALOG.tsv'}
+
+
+def _qualified_full_build(mains, tests, runner, java_home, admitted_sources):
+    """Execute the existing owner once; admit fresh source/artifact/command evidence."""
+    script_name = "m3/collections/qualification/full-java-jni-20261018/verify.py"
+    script = _closure_file(script_name)
+    if digest(script) != _FULL_VERIFIER_SHA256:
+        raise SystemExit("Full verifier source drift; qualify the owning recipe")
+    tree = ast.parse(script.read_text(encoding="utf-8"))
+    registry_node = next(n for n in tree.body if isinstance(n, ast.Assign)
+                         and any(isinstance(t, ast.Name) and t.id == "LIBRARIES" for t in n.targets))
+    registry = ast.literal_eval(registry_node.value)
+    native = REPO / "src/jdk.m3.collections/share/native/libm3collections"
+    fixtures = [REPO / "test/jdk/jdk/m3/collections/native" / name for name in
+                ("m3_mask_window_spans.c", "m3_mask_window_regions.c",
+                 "m3_bitlane_jump_jni.c", "m3_gather_spans.c")]
+    admitted = {native / name for entry in registry.values() for name in entry["sources"]}
+    sources = set(mains + tests) | admitted | set(fixtures)
+    sources |= set(native.rglob("*.h")) | set((REPO / "m3/native/include").rglob("*.h"))
+    sources |= {HERE / "pom.xml", REPO / "m3/arrays/pom.xml",
+                REPO / "make/m3/collections/CMakeLists.txt"}
+    expected_sources = {p.relative_to(REPO).as_posix():
+                        digest(_closure_file(p.relative_to(REPO).as_posix())) for p in sorted(sources)}
+    extra_snapshot = {script_name: _FULL_VERIFIER_SHA256}
+    for source in _full_product_resources().values():
+        relative = source.relative_to(REPO).as_posix()
+        extra_snapshot[relative] = digest(_closure_file(relative))
+    if not isinstance(admitted_sources, dict) or not admitted_sources:
+        raise SystemExit("Installed admitted source inventory is missing")
+    for relative, expected in admitted_sources.items():
+        if digest(_closure_file(relative)) != expected:
+            raise SystemExit("Installed admitted source changed before full build: " + relative)
+        extra_snapshot[relative] = expected
+    head = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=REPO, text=True).strip()
+    if os.environ.get("EXPECTED_HEAD") not in (None, head):
+        raise SystemExit("Installed checked-out head differs from expected head")
+    receipt_name = "m3/collections/target/full-java-jni/PROOF.json"
+    receipt_path = _closure_file(receipt_name, missing_ok=True)
+    def signature():
+        if not receipt_path.exists():
+            return None
+        s = receipt_path.stat()
+        return (s.st_ino, s.st_size, s.st_mtime_ns, s.st_ctime_ns)
+    previous = signature()
+    env = dict(os.environ, EXPECTED_HEAD=head, JAVA_HOME=str(java_home))
+    runner("02-full-java-jni", [sys.executable, "-I", "-S", "-B", script], env=env)
+    receipt_path = _closure_file(receipt_name)
+    if signature() == previous:
+        raise SystemExit("Full-build receipt is stale")
+    raw = receipt_path.read_bytes()
+    proof = json.loads(raw.decode("utf-8"), object_pairs_hook=unique_json_object)
+    if (proof.get("status") != "PASS_OWNING_COLLECTION_JAVA_AND_JNI"
+            or proof.get("head_sha") != head or proof.get("source_sha256") != expected_sources
+            or proof.get("native") != "generated headers; C17 strict; fatal UBSan; actual -Xcheck:jni"
+            or proof.get("jvm_profile_evidence") != "configured -DargLine vectors bound to successful Maven argv; Surefire child argv not observed"
+            or proof.get("java_sources") != len(mains) or proof.get("test_sources") != len(tests)):
+        raise SystemExit("Full-build head/source/count receipt mismatch")
+    snapshot = dict(expected_sources, **extra_snapshot)
+    for name, expected in snapshot.items():
+        if digest(_closure_file(name)) != expected:
+            raise SystemExit("Full-build input changed: " + name)
+    if subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=REPO, text=True).strip() != head:
+        raise SystemExit("Full-build head changed during execution")
+    artifacts = proof.get("native_library_artifacts")
+    if (proof.get("native_libraries") != sorted(registry)
+            or not isinstance(artifacts, dict) or set(artifacts) != set(registry)):
+        raise SystemExit("Full-build native registry mismatch")
+    for name, record in artifacts.items():
+        expected_path = "m3/collections/target/full-java-jni/native/lib" + name + ".so"
+        if (not isinstance(record, dict) or set(record) != {"path", "sha256"}
+                or record["path"] != expected_path
+                or digest(_closure_file(record["path"])) != record["sha256"]):
+            raise SystemExit("Full-build native artifact mismatch: " + name)
+        snapshot[expected_path] = record["sha256"]
+    array_name = "m3/collections/target/full-java-jni/array-native/libm3_arrays.so"
+    array_record = proof.get("arrays_native_artifact", {})
+    arrays = proof.get("source_dependencies", {}).get("jdk.m3.arrays", {})
+    if (set(array_record) != {"path", "sha256"} or array_record["path"] != array_name
+            or digest(_closure_file(array_name)) != array_record["sha256"]
+            or arrays.get("native_sha256") != array_record["sha256"]):
+        raise SystemExit("Full-build arrays provider mismatch")
+    jar_name = "m3/collections/target/m3-collections-0.1.0-SNAPSHOT.jar"
+    arrays_name = "m3/arrays/target/m3-arrays-0.1.0-SNAPSHOT.jar"
+    jar, array_jar = _closure_file(jar_name), _closure_file(arrays_name)
+    for name, expected in [(jar_name, proof.get("jar_sha256")),
+                           (arrays_name, arrays.get("jar_sha256")),
+                           (array_name, array_record["sha256"])]:
+        if digest(_closure_file(name)) != expected:
+            raise SystemExit("Full-build JAR/provider drift: " + name)
+        snapshot[name] = expected
+    commands, modes = proof.get("completed_commands"), proof.get("configured_jvm_profiles")
+    if (not isinstance(commands, list) or not commands or not isinstance(modes, dict)
+            or set(modes) != {"java", "native"}):
+        raise SystemExit("Full-build command/profile evidence missing")
+    for command in commands:
+        if (not isinstance(command, dict) or set(command) != {"argv", "cwd", "returncode"}
+                or not isinstance(command["argv"], list) or not command["argv"]
+                or any(not isinstance(arg, str) for arg in command["argv"])
+                or command["cwd"] != str(REPO) or type(command["returncode"]) is not int
+                or command["returncode"] != 0):
+            raise SystemExit("Invalid completed full-build command")
+    prefix = [os.environ.get("MVN", "mvn"), "-B", "-ntp"]
+    if os.environ.get("M3_MAVEN_OFFLINE") == "1":
+        prefix.append("-o")
+    if os.environ.get("M2_REPO"):
+        prefix.append("-Dmaven.repo.local=" + os.environ["M2_REPO"])
+    for mode, profile in modes.items():
+        if not isinstance(profile, dict) or set(profile) != {"vm_args", "completed_command_index"}:
+            raise SystemExit("Invalid configured full-build profile")
+        vm, index = profile["vm_args"], profile["completed_command_index"]
+        if (not isinstance(vm, list) or any(not isinstance(arg, str) for arg in vm)
+                or type(index) is not int or index < 0 or index >= len(commands)):
+            raise SystemExit("Invalid full-build JVM vector/index")
+        normalized = [arg.replace(str(REPO), "${REPO}").replace(os.sep, "/") for arg in vm]
+        fingerprint = hashlib.sha256(json.dumps(normalized, separators=(",", ":"), ensure_ascii=True).encode()).hexdigest()
+        if fingerprint != _FULL_PROFILE_SHA256[mode]:
+            raise SystemExit("Full-build configured JVM vector drift: " + mode)
+        expected_command = prefix + ["-f", str(HERE / "pom.xml"), "-Dtest=*",
+                                   "-DargLine=" + " ".join(vm), "-DfailIfNoTests=true", "verify"]
+        if commands[index]["argv"] != expected_command:
+            raise SystemExit("Full-build JVM/Maven command link drift: " + mode)
+    if modes["java"]["completed_command_index"] == modes["native"]["completed_command_index"]:
+        raise SystemExit("Full-build modes share a command record")
+    for mode in ("java", "native"):
+        counts = proof.get("junit", {}).get(mode, {})
+        if (set(counts) != {"tests", "failures", "errors", "skipped"}
+                or any(type(v) is not int or v < 0 for v in counts.values())
+                or not counts["tests"] or counts["failures"] or counts["errors"]
+                or mode == "native" and counts["skipped"]):
+            raise SystemExit("Full-build owning suite failed: " + mode)
+    snapshot[receipt_name] = hashlib.sha256(raw).hexdigest()
+    for relative, expected in snapshot.items():
+        if digest(_closure_file(relative)) != expected:
+            raise SystemExit("Full-build evidence drift before installed commands: " + relative)
+    return proof, jar, array_jar, list(modes["native"]["vm_args"]), snapshot, raw
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--cost-probe', action='store_true', help='record paired diagnostic allocation/time samples')
@@ -458,9 +621,9 @@ def main():
     evidence = target / 'evidence'
     evidence.mkdir(parents=True)
 
-    def run(name, command):
+    def run(name, command, *, env=None):
         command = [str(x) for x in command]
-        result = subprocess.run(command, cwd=REPO, capture_output=True, text=True)
+        result = subprocess.run(command, cwd=REPO, capture_output=True, text=True, env=env)
         output = result.stdout + result.stderr
         (evidence / (name + '.log')).write_text(
             '$ ' + repr(command) + '\n' + output + '\nEXIT=' + str(result.returncode) + '\n')
@@ -513,16 +676,27 @@ def main():
     tests = sorted(located(path) for path in declared_java if '/src/test/' in path)
     probes = [HERE / 'verification' / (name + '.java') for name in
               ('SegmentedLaneNativeProbe', 'PreparedLaneAllocationProbe')]
+    if read_donation_packet() != packet or digest(manifest) != packet["installed_source_manifest_sha256"]:
+        raise SystemExit("Installed metadata/manifest changed before full build")
+    admitted_sources = {located(path).relative_to(REPO).as_posix(): expected for path, expected in rows}
+    full, jar, array_jar, native_vm, full_snapshot, full_raw = _qualified_full_build(mains, tests, run, java_home, admitted_sources)
+    (evidence / 'full-build-proof.json').write_bytes(full_raw)
     classes, test_classes = target / 'classes', target / 'test-classes'
     classes.mkdir()
     test_classes.mkdir()
-    common = [java_home / 'bin/javac', '--release', '21', '-Xlint:all,-module', '-Werror']
-    run('02-module-compile', common + ['-d', classes] + mains)
-    run('03-test-compile', common + ['-cp', str(classes) + os.pathsep + str(junit),
+    common = [java_home / 'bin/javac', '--release', '21', '-Xlint:all,-module', '-Werror', '-Xpkginfo:always']
+    run('02-module-compile', common + ['--module-path', array_jar, '-d', classes] + mains)
+    run('03-test-compile', common + ['-cp', os.pathsep.join(map(str, (classes, junit, array_jar))),
                                    '-d', test_classes] + tests + probes)
-    runtime_classpath = str(classes) + os.pathsep + str(test_classes)
+    test_resource_root = REPO / 'test/jdk/jdk/m3/collections/resources'
+    for resource in test_resource_root.rglob('*'):
+        if resource.is_file():
+            destination = test_classes / resource.relative_to(test_resource_root)
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(resource, destination)
+    runtime_classpath = os.pathsep.join(map(str, (jar, test_classes, array_jar)))
     reports = target / 'junit-reports'
-    run('04-all-contract-tests', [java_home / 'bin/java', '-jar', junit, 'execute',
+    run('04-all-contract-tests', [java_home / 'bin/java', *native_vm, '-jar', junit, 'execute',
                                 '--disable-banner', '--class-path', runtime_classpath,
                                 '--scan-class-path', '--fail-if-no-tests', '--reports-dir', reports])
     totals = {'tests': 0, 'failures': 0, 'errors': 0, 'skipped': 0}
@@ -532,47 +706,55 @@ def main():
             totals[key] += int(suite.attrib.get(key, '0'))
     if not totals['tests'] or any(totals[key] for key in ('failures', 'errors', 'skipped')):
         raise SystemExit('JUnit acceptance requires nonzero tests and no failures/errors/skips: ' + repr(totals))
-    for name in ('M3LazyTreeMapSelfTest', 'M3LazyValueStateSelfTest'):
-        run('04-' + name, [java_home / 'bin/java', '-ea', '-cp', runtime_classpath,
+    for name in ('LazyTreeMapSelfTest', 'LazyValueStateSelfTest'):
+        run('04-' + name, [java_home / 'bin/java', *native_vm, '-ea', '-cp', runtime_classpath,
                            'jdk.m3.collections.' + name])
-    resources = target / 'module-resources/META-INF'
-    resources.mkdir(parents=True)
-    names = ('LICENSE', 'NOTICE', 'provenance.json', 'm3-donation.json', 'M3-DONATION-NOTICE.txt', 'name-mapping.json')
-    for name in names:
-        shutil.copyfile(HERE / name, resources / name)
-    jar = target / 'm3-collections.jar'
-    run('05-module-package', [java_home / 'bin/jar', '--create', '--file', jar,
-                            '-C', classes, '.', '-C', resources.parent, '.'])
     descriptor = run('06-module-descriptor', [java_home / 'bin/jar', '--describe-module', '--file', jar])
     requirements = [line.strip() for line in descriptor.splitlines() if line.strip().startswith('requires ')]
-    if requirements != ['requires java.base mandated']:
+    if sorted(requirements) != ['requires java.base mandated', 'requires jdk.m3.arrays transitive']:
         raise SystemExit('Unexpected runtime dependency: ' + repr(requirements))
     with zipfile.ZipFile(jar) as archive:
-        for name in names:
-            if archive.read('META-INF/' + name) != (HERE / name).read_bytes():
-                raise SystemExit('Packaged attribution/provenance mismatch: ' + name)
-    native = HERE / 'src/main/native/collections/segmented_bit_lane.c'
-    native_args = [os.environ.get('CC', 'gcc'), '-std=c17', '-O2', '-Wall', '-Wextra', '-Werror',
-                   '-fsanitize=undefined', '-fno-sanitize-recover=all',
-                   '-I' + str(java_home / 'include'), '-I' + str(java_home / 'include/linux')]
-    library = target / 'libsegmented_bits.so'
-    run('07-native-static', native_args + ['-fsyntax-only', native])
-    run('08-native-compile', native_args + ['-shared', '-fPIC', native, '-o', library])
-    run('09-checked-jni-parity', [java_home / 'bin/java', '-Xcheck:jni', '-cp', runtime_classpath,
+        expected_classes = {p.relative_to(classes).as_posix() for p in classes.rglob('*.class')}
+        packaged_names = archive.namelist()
+        actual_classes = {name for name in packaged_names if name.endswith('.class')}
+        if actual_classes != expected_classes or any(packaged_names.count(name) != 1 for name in actual_classes):
+            raise SystemExit('Full-build JAR differs from fresh installed class inventory')
+        packaged_resources = _full_product_resources()
+        for name, source in packaged_resources.items():
+            if packaged_names.count(name) != 1 or archive.read(name) != source.read_bytes():
+                raise SystemExit('Packaged module resource missing, duplicate or drifted: ' + name)
+        test_resources = {p.relative_to(test_resource_root).as_posix() for p in test_resource_root.rglob('*') if p.is_file()}
+        if test_resources.intersection(packaged_names):
+            raise SystemExit('Test resources leaked into product JAR')
+    library = _closure_file(full['native_library_artifacts']['m3bitlane']['path'])
+    run('09-checked-jni-parity', [java_home / 'bin/java', *native_vm, '-cp', runtime_classpath,
                                  'SegmentedLaneNativeProbe', library])
-    run('10-prepared-allocation', [java_home / 'bin/java', '-Xbatch', '-cp', runtime_classpath,
+    run('10-prepared-allocation', [java_home / 'bin/java', *native_vm, '-Xbatch', '-cp', runtime_classpath,
                                   'PreparedLaneAllocationProbe'])
     if args.cost_probe:
-        cost = run('11-collection-cost-probe', [java_home / 'bin/java', '-Xbatch', '-cp', runtime_classpath,
-                                               'jdk.m3.collections.M3CollectionCostProbe'])
+        cost = run('11-collection-cost-probe', [java_home / 'bin/java', *native_vm, '-Xbatch', '-cp', runtime_classpath,
+                                               'jdk.m3.collections.CollectionCostProbe'])
         (evidence / 'collection-cost.csv').write_text(cost)
+    for relative, expected in full_snapshot.items():
+        if digest(_closure_file(relative)) != expected:
+            raise SystemExit('Full-build evidence changed during installed acceptance: ' + relative)
+    if read_donation_packet() != packet or digest(manifest) != packet["installed_source_manifest_sha256"]:
+        raise SystemExit("Installed metadata/manifest changed during acceptance")
+    final_head = run('12-final-head', ['git', 'rev-parse', 'HEAD']).strip()
+    if final_head != full['head_sha']:
+        raise SystemExit('Head changed during installed acceptance')
     receipt = {'copyright': 'Copyright 2026 Hitesh Soliwal and contributors', 'license': 'Apache-2.0', 'schema': 'M3_COLLECTION_RECEIVING_QUALIFICATION_V1',
                'scope': 'SEPARATELY_BUILT_COLLECTION_MODULE',
                'installed_source_manifest_sha256': digest(manifest),
                'java_sources': len(mains), 'test_sources': len(tests), 'junit': totals,
-               'main_self_tests': ['M3LazyTreeMapSelfTest:PASS', 'M3LazyValueStateSelfTest:PASS'],
-               'java_compile': '--release 21 -Xlint:all,-module -Werror',
-               'runtime_requires': ['java.base'], 'native_standard': 'c17',
+               'main_self_tests': ['LazyTreeMapSelfTest:PASS', 'LazyValueStateSelfTest:PASS'],
+               'java_compile': '--release 21 -Xlint:all,-module -Werror -Xpkginfo:always; arrays module path',
+               'full_build_head_sha': full['head_sha'],
+               'full_build_receipt_sha256': hashlib.sha256(full_raw).hexdigest(),
+               'full_build_verifier_sha256': _FULL_VERIFIER_SHA256,
+               'full_build_launches': 1,
+               'jvm_profile_evidence': full['jvm_profile_evidence'],
+               'runtime_requires': ['java.base', 'jdk.m3.arrays'], 'native_standard': 'c17',
                'undefined_behavior_sanitizer': 'PASS', 'checked_jni': 'PASS',
                'prepared_lane_allocation': 'PASS', 'packaged_license_provenance': 'PASS',
                'cost_probe': 'DIAGNOSTIC_RECORDED' if args.cost_probe else 'NOT_RUN',
