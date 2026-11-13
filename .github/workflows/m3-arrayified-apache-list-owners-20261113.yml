@@ -66,7 +66,7 @@ jobs:
           grep -Eq 'exports +jdk\.m3\.collections\.apache' "$build/jmod-describe.txt"
           jlink --module-path "$JAVA_HOME/jmods:$build" --add-modules jdk.m3.collections \
             --output "$build/image" --strip-debug --no-header-files --no-man-pages
-          "$build/image/bin/java" --list-modules | grep -F 'jdk.m3.collections@'
+          "$build/image/bin/java" --list-modules | grep -Eq '^jdk[.]m3[.]collections(@|$)'
           for test in ArrayLinkedListContract ArrayTreeListContract ArrayStackContract; do
             "$build/image/bin/java" --add-modules jdk.m3.collections \
               --add-opens=jdk.m3.collections/jdk.m3.collections.apache=ALL-UNNAMED \
