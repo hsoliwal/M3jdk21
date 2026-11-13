@@ -1,0 +1,188 @@
+{
+  "schema": "M3_PMEM_STREAM_CHECKPOINT_RECEIPT_V1",
+  "SPDX-FileCopyrightText": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "SPDX-License-Identifier": "Apache-2.0",
+  "canonical": {
+    "repository": "hsoliwal/com.synexia",
+    "runtime_recipe_and_evidence_commit": "9dd511e347e29f668af3022375c5ce0b232a045d",
+    "recipe_crate": "synexia-openrewrite-recipes/recipe-crates/m3-pmem-stream-checkpoint-20261113",
+    "source_pr": "https://github.com/hsoliwal/com.synexia/pull/17271",
+    "recipes": [
+      {
+        "id": "pmem-stream-m3jdk-runtime-java-20261113",
+        "manifest": "src/main/resources/com/synexia/rewrite/hash-pinned-java/pmem-stream-m3jdk-runtime-java-20261113/manifest.tsv",
+        "sha256": "1a236e1ec0e2ea7276351af297a87dcb727113b2387fa0e9b70adbe326e3525e"
+      },
+      {
+        "id": "pmem-stream-m3jdk-runtime-text-20261113",
+        "manifest": "src/main/resources/com/synexia/rewrite/hash-pinned-text/pmem-stream-m3jdk-runtime-text-20261113/manifest.tsv",
+        "sha256": "1076c60070d38e65373c0c200b809ec05660fa8e8bbee773258c908066bab484"
+      },
+      {
+        "id": "pmem-stream-m3jdk-metadata-text-20261113",
+        "manifest": "src/main/resources/com/synexia/rewrite/hash-pinned-text/pmem-stream-m3jdk-metadata-text-20261113/manifest.tsv",
+        "sha256": "0b336988d9b8041b525b25fd033f9be96fc7d837a712b44c198967ed3277868e"
+      }
+    ],
+    "receipt_recipe_id": "pmem-stream-m3jdk-receipt-text-20261113",
+    "receipt_recipe_custody": "Final source PR contains the exact receipt postimage, manifest and application evidence; the embedded commit pins the independently published runtime/naming recipes and component evidence."
+  },
+  "receiving": {
+    "repository": "hsoliwal/M3jdk21",
+    "publication_base": "0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb",
+    "qualified_inventory_base": "1ac43631c3ee44bc5fb5fc55dd9ccfac09b38d5b",
+    "qualified_inputs_equal_at_receiving_base": 94,
+    "products": [
+      {
+        "path": "m3/optane/docs/CHECKPOINT_STREAMS.md",
+        "sha256": "5e2038390edcaf74f39df57b64baa54be3f7c5a759b8dd43067b4ec583bfbe06",
+        "bytes": 8119,
+        "git_blob": "2cd8e7e1b852552bcb874ecc96c140ffc8034e64"
+      },
+      {
+        "path": "src/jdk.m3.io/share/classes/jdk/m3/optane/PmemCheckpoint.java",
+        "sha256": "e53559e8182e0d4de0fcb7536288a8d0b718ab0f4e3ef05081250d016df4b87c",
+        "bytes": 30949,
+        "git_blob": "798f1f2401da82d805f32f91c01b96be8f2372f9"
+      },
+      {
+        "path": "test/jdk/jdk/m3/optane/PmemCheckpointStreamJUnitTest.java",
+        "sha256": "19e3068c56ca736c3ced31c1e9102dca63714db12671984422b4d6fc59e69a11",
+        "bytes": 832,
+        "git_blob": "5f030a704a67b42a7b31d16ad868ebffc0cd5f5f"
+      },
+      {
+        "path": "test/jdk/jdk/m3/optane/PmemCheckpointStreamSmokeTest.java",
+        "sha256": "27c6695b5d9454fb1c5e8fe7a6d3a0e7f9e2d1f5fe4e3e01d2a13e683a160b66",
+        "bytes": 31031,
+        "git_blob": "09eec5f1df64e768d369492784f82a256179be80"
+      },
+      {
+        "path": "m3/docs/name-mapping.json",
+        "sha256": "f4a7ee4a2ecf7815445e67d9c48e1265a018f36d764bd084283ccaa61ace303f",
+        "bytes": 722713,
+        "git_blob": "ff36cf048cad8d0244050522319b9c9b7c5b2d3b"
+      },
+      {
+        "path": "m3/tooling/name-contract/name-plan.json",
+        "sha256": "b875f055e66df3a88fcd8d1410f137133ba9726181f54b77542229941b808e68",
+        "bytes": 2444,
+        "git_blob": "0803d5d733faaef74fe1efdbe695f77af0f10a73"
+      }
+    ]
+  },
+  "contract": {
+    "format": "M3CKPT01 version 1 unchanged",
+    "existing_public_apis_preserved": true,
+    "jni_abi_changed": false,
+    "new_runtime_dependencies": [],
+    "bounded_transfer_array": true,
+    "publish_manifest_only_after_successful_writer_return": true,
+    "reader_requires_complete_validated_consumption": true,
+    "active_kv_storage": "heap-owned; persistent snapshots restore dormant sessions"
+  },
+  "qualification": {
+    "component_status": "PASS",
+    "source_junit": {
+      "found": 97,
+      "skipped": 0,
+      "started": 97,
+      "aborted": 0,
+      "successful": 97,
+      "failed": 0
+    },
+    "target_default": {
+      "errors": 0,
+      "failures": 0,
+      "passed": 65,
+      "skipped": 8,
+      "tests": 73
+    },
+    "target_native": {
+      "errors": 0,
+      "failures": 0,
+      "passed": 106,
+      "skipped": 5,
+      "tests": 111
+    },
+    "stream_checks_per_backend_lane": 269,
+    "simulated_persistence_boundaries": 24,
+    "heap_payload_bytes": 33554432,
+    "maximum_heap_bytes": 16777216,
+    "transfer_bytes": 262144,
+    "transformer_prefix_tokens": 130,
+    "transformer_snapshot_bytes": 34292,
+    "transformer_snapshot_chunks": 9,
+    "transformer_restored_embedding_calls": 0,
+    "transformer_continuation_tokens": 3,
+    "transformer_backend_lane_observations": 6,
+    "transformer_assertions_per_observation": 326,
+    "jni_exports": 25,
+    "native_libraries": 3,
+    "remaining_gates": {
+      "repository_wide_provenance": "HOLD existing canonical-ledger SPDX failure after bounded syntax repair",
+      "source_built_modified_jdk": "NOT_RUN",
+      "formal_jtreg": "NOT_RUN",
+      "physical_pmem_dax_pmdk_power_loss": "NOT_RUN",
+      "full_repository_reactor": "NOT_RUN",
+      "remote_ci": "NOT_OBSERVED"
+    },
+    "scope_notes": [
+      "Active decoder KV remains heap-owned; persisted snapshots restore dormant sessions.",
+      "Synthetic real-operator transformer fixture; no trained-model accuracy or throughput claim.",
+      "Optional native Maven skips retain their existing PMDK and large-corpus conditions."
+    ]
+  },
+  "naming": {
+    "incoming_records_preserved": 78,
+    "final_records": 79,
+    "queued_operations_preserved": 4,
+    "checkpoint_status": "implemented-unverified",
+    "schema_and_unchanged_checker": "PASS",
+    "recovery": "Exact malformed incoming structure repaired from its immutable authority pins; no incoming record values dropped."
+  },
+  "evidence_at_canonical_commit": [
+    {
+      "path": "QUALIFICATION.json",
+      "sha256": "2b61c75fc1ec44fa83ca831c407bfea2dcd314decbe618907224e5f75022fce4"
+    },
+    {
+      "path": "evidence/source-final/FINAL_QUALIFICATION.json",
+      "sha256": "0c985cbb1510dfff792e3f5c7dd1e8fc5d1e0ba2e3c88e50089bf496d4052adb"
+    },
+    {
+      "path": "evidence/target-final/scope.json",
+      "sha256": "a0bc900a48830cd384e390cdff466b643bcb68c1059a168bb56000349bebd2b3"
+    },
+    {
+      "path": "evidence/target-final/surefire-summary.json",
+      "sha256": "875d578644e09c7b683c1d48bff003b5e559af2a26c25ccbb6f1e9aabbb413cb"
+    },
+    {
+      "path": "evidence/target-final/jni-symbols.json",
+      "sha256": "11fc001be9c86050543304d0ebf7dac382370df0ea85a02c30d68fa7455f403d"
+    },
+    {
+      "path": "evidence/target-final/product-package.json",
+      "sha256": "796d77dd9a046283122c9c462aa1063e28d5c256fc699511ff23ffceb1883933"
+    },
+    {
+      "path": "evidence/target-final/late-receiving-readback.json",
+      "sha256": "b089db2ea4111eebfab4b3c4df0f8b0ce3d86cfab2eeff0d2b7ac9d5ca6e0e59"
+    },
+    {
+      "path": "evidence/recipe/target-late-apply.log",
+      "sha256": "918136b92a470213acfe31a2e90e87d52a6c017ac8a8031bfa07bda1e80fd93b"
+    },
+    {
+      "path": "evidence/naming-late/HANDOFF.json",
+      "sha256": "cb72085ee2b85aa066366c2f5b75a8da1af5a56cc1a4d42b7fc813812c370301"
+    },
+    {
+      "path": "evidence/provenance/new-file-validation.json",
+      "sha256": "84b2f0278aed185439c295502d1d35e9e6bd41b4cc594c8e8719607e91af4165"
+    }
+  ],
+  "publication_disposition": "DRAFT: component qualified; repository-wide provenance HOLD and full modified JDK, formal jtreg, physical PMem and power-loss gates remain unqualified.",
+  "product_boundary": "Runtime source, receiving tests, documentation and passive metadata only."
+}
