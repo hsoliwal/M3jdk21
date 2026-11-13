@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
  * Primitive-long open-addressed hash set with JDK-shaped set semantics.
  *
  * <p>All {@code long} values, including zero and the extrema, are legal keys. Occupancy is kept
- * in a byte lane so no sentinel value is reserved and no per-entry node or {@link Long} wrapper
+ * in a packed two-bit lane so no sentinel value is reserved and no per-entry node or {@link Long} wrapper
  * is retained. This is an M3 proving-ground backend, not a public {@code HashSet} replacement.</p>
  */
 public final class LongHashSet implements LongCollection {
@@ -24,7 +24,7 @@ public final class LongHashSet implements LongCollection {
     private static final int LOAD_DENOMINATOR = 3;
 
     private long[] keys;
-    private byte[] states;
+    private PackedSlotStates states;
     private int size;
     private int occupied;
     private int modCount;
@@ -39,7 +39,7 @@ public final class LongHashSet implements LongCollection {
         }
         int capacity = capacityFor(expectedSize);
         keys = new long[capacity];
-        states = new byte[capacity];
+        states = new PackedSlotStates(capacity);
     }
 
     public boolean add(long key) {
@@ -50,7 +50,7 @@ public final class LongHashSet implements LongCollection {
         int index = mixed & mask;
         int firstDeleted = -1;
         for (;;) {
-            byte state = states[index];
+            byte state = states.get(index);
             if (state == EMPTY) {
                 break;
             }
@@ -74,15 +74,15 @@ public final class LongHashSet implements LongCollection {
             rehash(keys.length << 1);
             mask = keys.length - 1;
             index = mixed & mask;
-            while (states[index] != EMPTY) {
+            while (states.get(index) != EMPTY) {
                 index = (index + 1) & mask;
             }
         }
         keys[index] = key;
-        if (states[index] == EMPTY) {
+        if (states.get(index) == EMPTY) {
             occupied++;
         }
-        states[index] = USED;
+        states.set(index, USED);
         size++;
         modCount++;
         return true;
@@ -93,12 +93,12 @@ public final class LongHashSet implements LongCollection {
         if (index < 0) {
             return false;
         }
-        states[index] = DELETED;
+        states.set(index, DELETED);
         keys[index] = 0L;
         size--;
         modCount++;
         if (size == 0) {
-            Arrays.fill(states, EMPTY);
+            states.clear();
             occupied = 0;
         } else if ((long) occupied > (long) size * 2 && keys.length > MIN_CAPACITY) {
             try {
@@ -135,15 +135,15 @@ public final class LongHashSet implements LongCollection {
         // coordinates, then reset the compact occupancy lane. Dense
         // tables retain the bulk-filled primitive fast path.
         if ((long) size * Long.BYTES < keys.length) {
-            for (int index = 0; index < states.length; index++) {
-                if (states[index] == USED) {
+            for (int index = 0; index < states.length(); index++) {
+                if (states.get(index) == USED) {
                     keys[index] = 0L;
                 }
             }
         } else {
             Arrays.fill(keys, 0L);
         }
-        Arrays.fill(states, EMPTY);
+        states.clear();
         size = 0;
         occupied = 0;
         modCount++;
@@ -153,8 +153,8 @@ public final class LongHashSet implements LongCollection {
     public long[] toArray() {
         long[] result = new long[size];
         int cursor = 0;
-        for (int i = 0; i < states.length; i++) {
-            if (states[i] == USED) {
+        for (int i = 0; i < states.length(); i++) {
+            if (states.get(i) == USED) {
                 result[cursor++] = keys[i];
             }
         }
@@ -177,10 +177,10 @@ public final class LongHashSet implements LongCollection {
             @Override
             public long nextLong() {
                 checkForComodification(expectedModCount);
-                while (cursor < states.length && states[cursor] != USED) {
+                while (cursor < states.length() && states.get(cursor) != USED) {
                     cursor++;
                 }
-                if (cursor >= states.length) {
+                if (cursor >= states.length()) {
                     throw new NoSuchElementException();
                 }
                 emitted++;
@@ -193,7 +193,7 @@ public final class LongHashSet implements LongCollection {
         int mask = keys.length - 1;
         int index = mix(key) & mask;
         for (;;) {
-            byte state = states[index];
+            byte state = states.get(index);
             if (state == EMPTY) {
                 return -1;
             }
@@ -210,12 +210,12 @@ public final class LongHashSet implements LongCollection {
         // Allocate and populate both aligned lanes before publishing either.
         // Failed allocation leaves the original directory readable and usable.
         long[] replacementKeys = new long[capacity];
-        byte[] replacementStates = new byte[capacity];
+        PackedSlotStates replacementStates = new PackedSlotStates(capacity);
         long[] oldKeys = keys;
-        byte[] oldStates = states;
+        PackedSlotStates oldStates = states;
         int rebuilt = 0;
-        for (int i = 0; i < oldStates.length; i++) {
-            if (oldStates[i] == USED) {
+        for (int i = 0; i < oldStates.length(); i++) {
+            if (oldStates.get(i) == USED) {
                 insertRehashed(oldKeys[i], replacementKeys, replacementStates);
                 rebuilt++;
             }
@@ -228,14 +228,14 @@ public final class LongHashSet implements LongCollection {
         occupied = rebuilt;
     }
 
-    private static void insertRehashed(long key, long[] targetKeys, byte[] targetStates) {
+    private static void insertRehashed(long key, long[] targetKeys, PackedSlotStates targetStates) {
         int mask = targetKeys.length - 1;
         int index = mix(key) & mask;
-        while (targetStates[index] == USED) {
+        while (targetStates.get(index) == USED) {
             index = (index + 1) & mask;
         }
         targetKeys[index] = key;
-        targetStates[index] = USED;
+        targetStates.set(index, USED);
     }
 
     private static int capacityFor(int expectedSize) {
