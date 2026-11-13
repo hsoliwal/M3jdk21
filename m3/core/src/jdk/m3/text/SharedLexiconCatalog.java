@@ -371,7 +371,8 @@ public final class SharedLexiconCatalog {
         }
         // Preserve complete mapping validation before any precompute text checks.
         for (int row = 0; row < image.size(); row++) {
-            String text = image.recordText(row);
+            // Every nonempty row list was verified above against the immutable image.
+            String text = mappingRows[first + row].get(0).lexeme();
             PrecomputeFacts facts = precomputeRows[first + row];
             if (facts.utf16Units() != text.length()
                     || facts.javaHash() != Integer.toUnsignedLong(javaHash(text)))
