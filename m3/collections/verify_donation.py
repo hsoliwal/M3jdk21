@@ -372,6 +372,41 @@ def include_module_source_successor(previous_rows, receipt=_MODULE_RECEIPT):
                                     _MODULE_RESULT_ROWS, _MODULE_RESULT_JAVA)
 
 
+# Exact current-context refinements; historical receipts and source guards remain unchanged.
+_CURRENT_CONTEXT_RECEIPT = HERE / 'qualification/current-context-source-successor-20261113.tsv'
+_CURRENT_CONTEXT_RECEIPT_SHA256 = '62db1f5618f037a996528cc789416dd43934acee90e73a4b9356d2a25c24582a'
+_CURRENT_CONTEXT_PREDECESSOR_SHA256 = '82bf706fcaa997feb84806b87923f7fb4a275eeb19dfcfcd4d6d3049db0b372a'
+_CURRENT_CONTEXT_TRANSITIONS = 796
+_CURRENT_CONTEXT_RESULT_ROWS = 1932
+_CURRENT_CONTEXT_RESULT_JAVA = 1926
+
+
+def include_current_context_source_successor(previous_rows, receipt=_CURRENT_CONTEXT_RECEIPT):
+    """Admit the qualified current-context refinements over the exact module result."""
+    return admit_source_transitions(previous_rows, 'Current context 20261113', receipt,
+                                    _CURRENT_CONTEXT_RECEIPT_SHA256, _CURRENT_CONTEXT_PREDECESSOR_SHA256,
+                                    _CURRENT_CONTEXT_TRANSITIONS, _CURRENT_CONTEXT_RESULT_ROWS,
+                                    _CURRENT_CONTEXT_RESULT_JAVA)
+
+
+
+# Additive current-receiver source cohort; immutable historical receipts stay unchanged.
+_CURRENT_RECEIVER_RECEIPT = HERE / 'qualification/current-receiver-source-successor-20261113.tsv'
+_CURRENT_RECEIVER_RECEIPT_SHA256 = 'c0390d51cc7d9a5fd326d0c2722c61f6985502721547e7ae81e3f985c8cb4a93'
+_CURRENT_RECEIVER_PREDECESSOR_SHA256 = '54953383deb9998b7f8f411256c8d1ac2d8a343fa8dd7744ed6a8fe7454f7913'
+_CURRENT_RECEIVER_TRANSITIONS = 40
+_CURRENT_RECEIVER_RESULT_ROWS = 1957
+_CURRENT_RECEIVER_RESULT_JAVA = 1951
+
+
+def include_current_receiver_source_successor(previous_rows, receipt=_CURRENT_RECEIVER_RECEIPT):
+    """Admit the exact current receiver cohort over its immutable current-context ancestor."""
+    return admit_source_transitions(previous_rows, 'Current receiver 20261113', receipt,
+                                    _CURRENT_RECEIVER_RECEIPT_SHA256, _CURRENT_RECEIVER_PREDECESSOR_SHA256,
+                                    _CURRENT_RECEIVER_TRANSITIONS, _CURRENT_RECEIVER_RESULT_ROWS,
+                                    _CURRENT_RECEIVER_RESULT_JAVA)
+
+
 # The transition-receipt successors by their m3-donation.json record: (receipt, receipt SHA-256,
 # predecessor SHA-256, transitions, resulting rows, exact Java source membership).
 SOURCE_TRANSITION_SEALS = {
@@ -381,6 +416,10 @@ SOURCE_TRANSITION_SEALS = {
                                          _MASTER_TRANSITIONS, _MASTER_RESULT_ROWS, _MASTER_RESULT_JAVA),
     'module_source_successor_20261109': (_MODULE_RECEIPT, _MODULE_RECEIPT_SHA256, _MODULE_PREDECESSOR_SHA256,
                                          _MODULE_TRANSITIONS, _MODULE_RESULT_ROWS, _MODULE_RESULT_JAVA),
+    'current_context_source_successor_20261113': (_CURRENT_CONTEXT_RECEIPT, _CURRENT_CONTEXT_RECEIPT_SHA256, _CURRENT_CONTEXT_PREDECESSOR_SHA256,
+                                           _CURRENT_CONTEXT_TRANSITIONS, _CURRENT_CONTEXT_RESULT_ROWS, _CURRENT_CONTEXT_RESULT_JAVA),
+    'current_receiver_source_successor_20261113': (_CURRENT_RECEIVER_RECEIPT, _CURRENT_RECEIVER_RECEIPT_SHA256, _CURRENT_RECEIVER_PREDECESSOR_SHA256,
+                                            _CURRENT_RECEIVER_TRANSITIONS, _CURRENT_RECEIVER_RESULT_ROWS, _CURRENT_RECEIVER_RESULT_JAVA),
 }
 
 
@@ -432,6 +471,8 @@ def main():
     rows = include_superset_source_successor(rows)
     rows = include_master_source_successor(rows)
     rows = include_module_source_successor(rows)
+    rows = include_current_context_source_successor(rows)
+    rows = include_current_receiver_source_successor(rows)
     if len({row[0] for row in rows}) != len(rows):
         raise SystemExit('Duplicate installed source path')
     for path, expected in rows:
