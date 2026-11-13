@@ -12,6 +12,7 @@
  * Contributors:
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
+// Modified 2026 by Hitesh Soliwal and contributors: use validated array-slot traversal for Map.forEach.
 package jdk.m3.collections.eclipse.impl.map.sorted.mutable;
 
 import java.io.IOException;
@@ -29,6 +30,7 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.function.BiConsumer;
@@ -280,6 +282,15 @@ final class IndexedSortedMap<K, V> extends AbstractMap<K, V>
                 this.removable = false;
             }
         };
+    }
+
+    @Override public void forEach(BiConsumer<? super K, ? super V> action)
+    {
+        Objects.requireNonNull(action);
+        if (this.storage.backend.tree.root >= 0)
+        {
+            ((IndexedRedBlackMap<K, V>) this.delegate()).forEachMapEntry(action);
+        }
     }
 
     @Override public boolean containsValue(Object query)
