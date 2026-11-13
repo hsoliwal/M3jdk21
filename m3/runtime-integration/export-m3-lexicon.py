@@ -49,6 +49,10 @@ MANIFEST_COLUMNS = (
     "mapping_fields", "precompute_target", "data_license", "data_policy",
 )
 MANIFEST_COLUMNS_V2 = MANIFEST_COLUMNS + ("precompute_fields",)
+# Donor manifests retain their original path-column name and byte identity.
+LEGACY_MANIFEST_COLUMNS = tuple(
+    "synexia_path" if column == "m3_path" else column for column in MANIFEST_COLUMNS)
+LEGACY_MANIFEST_COLUMNS_V2 = LEGACY_MANIFEST_COLUMNS + ("precompute_fields",)
 PROFILE_COLUMNS = ("precompute_profile", "source_records", "image_records", "sha256")
 MAX_PRECOMPUTE_PAYLOAD_BYTES = 1 * 1024 * 1024
 TRANSLATION_SOURCE_ID = "translate.rows"
@@ -250,11 +254,15 @@ def read_manifest(path: pathlib.Path) -> tuple[dict[str, dict[str, str]], bytes]
     raw = path.read_bytes()
     with path.open("r", encoding="utf-8", errors="surrogatepass", newline="") as stream:
         columns = tuple(csv.DictReader(stream, delimiter="\t").fieldnames or ())
-    if columns not in (MANIFEST_COLUMNS, MANIFEST_COLUMNS_V2):
+    if columns not in (MANIFEST_COLUMNS, MANIFEST_COLUMNS_V2,
+                       LEGACY_MANIFEST_COLUMNS, LEGACY_MANIFEST_COLUMNS_V2):
         raise ValueError(f"{path}: expected columns {MANIFEST_COLUMNS} or {MANIFEST_COLUMNS_V2}")
     rows, _ = read_tsv(path, columns)
     result: dict[str, dict[str, str]] = {}
     for row in rows:
+        if "synexia_path" in row:
+            row = {("m3_path" if key == "synexia_path" else key): value
+                   for key, value in row.items()}
         source_id = row["source_id"]
         if source_id in result:
             raise ValueError(f"duplicate source_id: {source_id}")
