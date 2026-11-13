@@ -3,14 +3,12 @@ on:
   pull_request:
     paths:
       - 'm3/file/**'
-      - 'm3/arrays/**'
-      - 'm3/collections/**'
+      - 'src/jdk.m3.collections/**'
       - '.github/workflows/m3-native-shadow-stream-progress-20261020.yml'
   push:
     paths:
       - 'm3/file/**'
-      - 'm3/arrays/**'
-      - 'm3/collections/**'
+      - 'src/jdk.m3.collections/**'
       - '.github/workflows/m3-native-shadow-stream-progress-20261020.yml'
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

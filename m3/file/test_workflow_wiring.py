@@ -154,12 +154,16 @@ class FileWorkflowWiringTest(unittest.TestCase):
 
     def test_complete_dependencies_follow_actual_module_edges(self):
         file_descriptor = (FILE / 'src/main/java/module-info.java').read_text(encoding='utf-8')
-        collection_descriptor = (ROOT / 'm3/collections/src/main/java/module-info.java').read_text(encoding='utf-8')
+        collection_descriptor = (ROOT / 'src/jdk.m3.collections/share/classes/module-info.java').read_text(
+            encoding='utf-8')
         self.assertIn('requires transitive jdk.m3.collections;', file_descriptor)
-        self.assertIn('requires transitive jdk.m3.arrays;', collection_descriptor)
+        self.assertIn('module jdk.m3.collections {', collection_descriptor)
+        self.assertIn('exports jdk.m3.arrays;', collection_descriptor)
+        self.assertIn('exports jdk.m3.arrays.packed;', collection_descriptor)
         builder = (FILE / 'compile-dependencies.sh').read_text(encoding='utf-8')
-        self.assertIn('for family in arrays collections; do', builder)
-        self.assertIn('find "$repo/m3/$family/src/main/java"', builder)
+        self.assertIn('for module in jdk.m3.collections; do', builder)
+        self.assertIn('find "$repo/src/$module/share/classes"', builder)
+        self.assertNotIn('m3/$family/src/main/java', builder)
         self.assertIn('-print0', builder)
         self.assertIn('LC_ALL=C sort -z', builder)
         self.assertIn('mapfile -d', builder)
@@ -170,8 +174,7 @@ class FileWorkflowWiringTest(unittest.TestCase):
         for name in (MOVE, SHADOW, LAYERED):
             with self.subTest(workflow=name):
                 text = workflow(name)
-                self.assertEqual(text.count("'m3/arrays/**'"), text.count("'m3/file/**'"))
-                self.assertEqual(text.count("'m3/collections/**'"), text.count("'m3/file/**'"))
+                self.assertEqual(text.count("'src/jdk.m3.collections/**'"), text.count("'m3/file/**'"))
                 self.assertIn('bash m3/file/compile-dependencies.sh "$JAVA_HOME" "$deps"', text)
                 self.assertIn('github.event.pull_request.head.sha || github.sha', text)
                 self.assertIn('--module-path', text)
