@@ -1,13 +1,15 @@
 # SPDX-License-Identifier: Apache-2.0
-name: M3JDK21 Apache array-owned list sources
+name: M3JDK21 Apache array-owned list and stack sources
 on:
   pull_request:
     paths:
       - '.github/workflows/m3-arrayified-apache-list-owners-20261113.yml'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3NodeCachingLinkedList.java'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3TreeList.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3ArrayStack.java'
       - 'test/jdk/jdk/m3/collections/ArrayLinkedListContract.java'
       - 'test/jdk/jdk/m3/collections/ArrayTreeListContract.java'
+      - 'test/jdk/jdk/m3/collections/ArrayStackContract.java'
   workflow_dispatch:
 permissions:
   contents: read
@@ -29,15 +31,18 @@ jobs:
           printf 'module jdk.m3.collections { exports jdk.m3.collections.apache; }\n' > "$build/src/jdk.m3.collections/module-info.java"
           cp src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3NodeCachingLinkedList.java "$build/src/jdk.m3.collections/jdk/m3/collections/apache/"
           cp src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3TreeList.java "$build/src/jdk.m3.collections/jdk/m3/collections/apache/"
+          cp src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3ArrayStack.java "$build/src/jdk.m3.collections/jdk/m3/collections/apache/"
           javac --release 21 -Xlint:all,-module -Werror -d "$build/classes" \
             "$build/src/jdk.m3.collections/module-info.java" \
             "$build/src/jdk.m3.collections/jdk/m3/collections/apache/M3NodeCachingLinkedList.java" \
-            "$build/src/jdk.m3.collections/jdk/m3/collections/apache/M3TreeList.java"
+            "$build/src/jdk.m3.collections/jdk/m3/collections/apache/M3TreeList.java" \
+            "$build/src/jdk.m3.collections/jdk/m3/collections/apache/M3ArrayStack.java"
           javac --release 21 -Xlint:all,-module -Werror \
             --module-path "$build/classes" --add-modules jdk.m3.collections \
             -d "$build/test-classes" \
             test/jdk/jdk/m3/collections/ArrayLinkedListContract.java \
-            test/jdk/jdk/m3/collections/ArrayTreeListContract.java
+            test/jdk/jdk/m3/collections/ArrayTreeListContract.java \
+            test/jdk/jdk/m3/collections/ArrayStackContract.java
           java --module-path "$build/classes" --add-modules jdk.m3.collections \
             --add-opens=jdk.m3.collections/jdk.m3.collections.apache=ALL-UNNAMED \
             -cp "$build/test-classes" ArrayLinkedListContract | tee "$build/linked.txt"
@@ -46,4 +51,8 @@ jobs:
             --add-opens=jdk.m3.collections/jdk.m3.collections.apache=ALL-UNNAMED \
             -cp "$build/test-classes" ArrayTreeListContract | tee "$build/tree.txt"
           grep -Fqx 'PASS checks=569967 steps=60000 array-lanes=Object[],int[]x4,long[]' "$build/tree.txt"
-          echo 'BOTH_M3JDK_ARRAY_OWNERS PASS (scoped module only; installed image still HOLD)'
+          java --module-path "$build/classes" --add-modules jdk.m3.collections \
+            --add-opens=jdk.m3.collections/jdk.m3.collections.apache=ALL-UNNAMED \
+            -cp "$build/test-classes" ArrayStackContract | tee "$build/stack.txt"
+          grep -Fqx 'PASS checks=484245 steps=60000 array-lanes=Object[]' "$build/stack.txt"
+          echo 'THREE_M3JDK_ARRAY_OWNERS PASS (scoped module only; installed image still HOLD)'
