@@ -4,7 +4,7 @@ package jdk.m3.collections;
 
 import java.util.Arrays;
 
-//FLLDCIM: RELOCATE - donor blob e836f63cc034 at d5ad5090d87e; recipe m3/collections/qualification/census2-t2-20261106/relocate.py v6
+//FLLDCIM: RELOCATE - donor blob e836f63cc034 at d5ad5090d87e; recipe make/m3/collections/qualification/census2-t2-20261106/relocate.py v6
 final class PolicyAssertions {
     private PolicyAssertions(){}
     static void check(boolean ok,String reason) {

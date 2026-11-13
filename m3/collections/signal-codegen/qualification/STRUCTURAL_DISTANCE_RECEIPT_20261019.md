@@ -49,5 +49,5 @@ and String -> arrays -> collections -> compiler phase promotion.
 The broader filtered/sorted `java.util` PRs retain independent ownership and
 must not be overwritten or merged speculatively.
 
-See `m3/collections/algorithm-catalog/source-signal-distance-20261019.tsv`
+See `make/m3/collections/algorithm-catalog/source-signal-distance-20261019.tsv`
 for problem-category donor decisions and restrictions.

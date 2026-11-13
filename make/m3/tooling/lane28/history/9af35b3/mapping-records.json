@@ -76,7 +76,7 @@
     "recipe": {
       "id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
       "version": "1",
-      "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+      "path": "make/m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
       "sha256": "443353a0e986b0a284ad202fb85165994f31f9616993de7df9c0230f97b1c7fb",
       "preconditions": [
         "Explicit absent Java targets and exact source/template/dependency hashes.",
@@ -87,11 +87,11 @@
     "tests": [
       {
         "id": "lane28-port",
-        "receipt": "m3/tooling/lane28/evidence/receipt.json"
+        "receipt": "make/m3/tooling/lane28/evidence/receipt.json"
       }
     ],
     "provenance": {
-      "license": "Apache-2.0; exact source, LICENSE and NOTICE retained under m3/tooling/lane28/donor. Existing JDK licenses retain their scope.",
+      "license": "Apache-2.0; exact source, LICENSE and NOTICE retained under make/m3/tooling/lane28/donor. Existing JDK licenses retain their scope.",
       "publication": "User requested incremental Synexia-to-JDK inlining and evidence-based upstream feedback.",
       "copied_code": true
     },
@@ -196,7 +196,7 @@
     "recipe": {
       "id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
       "version": "1",
-      "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+      "path": "make/m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
       "sha256": "443353a0e986b0a284ad202fb85165994f31f9616993de7df9c0230f97b1c7fb",
       "preconditions": [
         "Explicit absent Java targets and exact source/template/dependency hashes.",
@@ -207,11 +207,11 @@
     "tests": [
       {
         "id": "lane28-port",
-        "receipt": "m3/tooling/lane28/evidence/receipt.json"
+        "receipt": "make/m3/tooling/lane28/evidence/receipt.json"
       }
     ],
     "provenance": {
-      "license": "Apache-2.0; exact source, LICENSE and NOTICE retained under m3/tooling/lane28/donor. Existing JDK licenses retain their scope.",
+      "license": "Apache-2.0; exact source, LICENSE and NOTICE retained under make/m3/tooling/lane28/donor. Existing JDK licenses retain their scope.",
       "publication": "User requested incremental Synexia-to-JDK inlining and evidence-based upstream feedback.",
       "copied_code": true
     },
@@ -316,7 +316,7 @@
     "recipe": {
       "id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
       "version": "1",
-      "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+      "path": "make/m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
       "sha256": "443353a0e986b0a284ad202fb85165994f31f9616993de7df9c0230f97b1c7fb",
       "preconditions": [
         "Explicit absent Java targets and exact source/template/dependency hashes.",
@@ -327,11 +327,11 @@
     "tests": [
       {
         "id": "lane28-port",
-        "receipt": "m3/tooling/lane28/evidence/receipt.json"
+        "receipt": "make/m3/tooling/lane28/evidence/receipt.json"
       }
     ],
     "provenance": {
-      "license": "Apache-2.0; exact source, LICENSE and NOTICE retained under m3/tooling/lane28/donor. Existing JDK licenses retain their scope.",
+      "license": "Apache-2.0; exact source, LICENSE and NOTICE retained under make/m3/tooling/lane28/donor. Existing JDK licenses retain their scope.",
       "publication": "User requested incremental Synexia-to-JDK inlining and evidence-based upstream feedback.",
       "copied_code": true
     },
@@ -464,7 +464,7 @@
     "recipe": {
       "id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
       "version": "1",
-      "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+      "path": "make/m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
       "sha256": "443353a0e986b0a284ad202fb85165994f31f9616993de7df9c0230f97b1c7fb",
       "preconditions": [
         "Explicit absent Java targets and exact source/template/dependency hashes.",
@@ -475,11 +475,11 @@
     "tests": [
       {
         "id": "lane28-port",
-        "receipt": "m3/tooling/lane28/evidence/receipt.json"
+        "receipt": "make/m3/tooling/lane28/evidence/receipt.json"
       }
     ],
     "provenance": {
-      "license": "Apache-2.0; exact source, LICENSE and NOTICE retained under m3/tooling/lane28/donor. Existing JDK licenses retain their scope.",
+      "license": "Apache-2.0; exact source, LICENSE and NOTICE retained under make/m3/tooling/lane28/donor. Existing JDK licenses retain their scope.",
       "publication": "User requested incremental Synexia-to-JDK inlining and evidence-based upstream feedback.",
       "copied_code": true
     },
@@ -584,7 +584,7 @@
     "recipe": {
       "id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
       "version": "1",
-      "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+      "path": "make/m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
       "sha256": "443353a0e986b0a284ad202fb85165994f31f9616993de7df9c0230f97b1c7fb",
       "preconditions": [
         "Explicit absent Java targets and exact source/template/dependency hashes.",
@@ -595,11 +595,11 @@
     "tests": [
       {
         "id": "lane28-port",
-        "receipt": "m3/tooling/lane28/evidence/receipt.json"
+        "receipt": "make/m3/tooling/lane28/evidence/receipt.json"
       }
     ],
     "provenance": {
-      "license": "Apache-2.0; exact source, LICENSE and NOTICE retained under m3/tooling/lane28/donor. Existing JDK licenses retain their scope.",
+      "license": "Apache-2.0; exact source, LICENSE and NOTICE retained under make/m3/tooling/lane28/donor. Existing JDK licenses retain their scope.",
       "publication": "User requested incremental Synexia-to-JDK inlining and evidence-based upstream feedback.",
       "copied_code": true
     },

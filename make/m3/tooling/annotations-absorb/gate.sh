@@ -11,7 +11,7 @@
 #      MAP_RULES atom (CANONICAL: equal to the compiled donor; MAP: a type-use or type owner exists).
 # Exit 0 = all three PASS. DONORS=<dir> overrides the donors root (default m3/vendor/third_party).
 set -euo pipefail
-T=m3/tooling/annotations-absorb; M=src/jdk.m3.annotations/share/classes; D="${DONORS:-m3/vendor/third_party}"
+T=make/m3/tooling/annotations-absorb; M=src/jdk.m3.annotations/share/classes; D="${DONORS:-m3/vendor/third_party}"
 BIN="$JAVA_HOME/bin"; W=$(mktemp -d); trap 'rm -rf "$W"' EXIT
 SEP=":"; case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) SEP=";"; W=$(cygpath -m "$W");; esac
 mkdir -p "$W/donors" "$W/m3/donors/m3/src/main/java" "$W/mod"

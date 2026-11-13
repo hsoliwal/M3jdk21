@@ -45,7 +45,7 @@ from pathlib import Path
 RECIPE = "relocate.py"
 VERSION = "v2"
 RECIPE_DIR = Path(__file__).resolve().parent
-RECIPE_PATH = "m3/optane/recipe/" + RECIPE_DIR.name + "/" + RECIPE
+RECIPE_PATH = "make/m3/optane/recipe/" + RECIPE_DIR.name + "/" + RECIPE
 DONOR_REPO = "hsoliwal/com.synexia"
 DONOR_BLOB_URL = "https://github.com/" + DONOR_REPO + "/blob/"
 MAP_NAME = "RELOCATION_MAP.tsv"

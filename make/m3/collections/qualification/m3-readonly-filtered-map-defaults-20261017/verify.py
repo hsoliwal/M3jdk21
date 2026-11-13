@@ -6,7 +6,7 @@ from pathlib import Path
 import hashlib
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[3]
+ROOT = HERE.parents[4]
 MIRROR = HERE / "recipe-mirror"
 EXPECTED = {
     "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredViews.java": (

@@ -15,8 +15,8 @@ are changed. This does not make `M3LongHashSet` a transparent JDK replacement.
 From an exact full target checkout, on a JDK21 host:
 
 ```sh
-python3 m3/collections/verification/tombstone-reuse-20261017/verify.py
-mvn -f m3/collections/verification/tombstone-reuse-20261017/pom.xml verify
+python3 make/m3/collections/verification/tombstone-reuse-20261017/verify.py
+mvn -f make/m3/collections/verification/tombstone-reuse-20261017/pom.xml verify
 mvn -f m3/collections/pom.xml test
 ```
 

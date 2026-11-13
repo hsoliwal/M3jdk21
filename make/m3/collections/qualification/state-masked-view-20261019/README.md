@@ -12,7 +12,7 @@ or dependency on a private Synexia runtime is introduced.
 
 The canonical reusable **OpenRewrite 8.17.1** Java snapshot recipe is the existing
 `M3HashPinnedJavaSnapshotRecipe` under
-`m3/tooling/shared-frontend/recipe-custody/sdk-owner`, *reused unchanged*.
+`make/m3/tooling/shared-frontend/recipe-custody/sdk-owner`, *reused unchanged*.
 The new `m3-state-masked-views-20261019` dataset includes exact old/new Java snapshots,
 source SHA-256 seals, a named OpenRewrite recipe and mode metadata. The resulting product
 sources match the target snapshots. Transformations are admitted serially, per file;
@@ -43,7 +43,7 @@ This is the same M3JDK21 recipe authority already used by the compiler frontend.
 ## Reproduction
 
 ```sh
-root="$PWD/m3/tooling/shared-frontend/recipe-custody"
+root="$PWD/make/m3/tooling/shared-frontend/recipe-custody"
 mvn -B -ntp -f "$root/pom.xml" \
   -Dm3.dataset=m3-state-masked-views-20261019 \
   "-Drecipe.owner.root=$root/sdk-owner" -Pcontract verify

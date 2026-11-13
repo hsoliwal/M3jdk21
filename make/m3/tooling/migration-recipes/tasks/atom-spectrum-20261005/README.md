@@ -21,7 +21,7 @@ Bash commands from the repository root. Every command must succeed before the ne
 set -euo pipefail
 : "${M3_CHECKSTYLE_JAR:?Set this to the Checkstyle 12.3.1 all-in-one JAR}"
 M3_SPECTRUM_ROOT="$PWD"
-M3_SPECTRUM_OWNER="$M3_SPECTRUM_ROOT/m3/tooling/migration-recipes"
+M3_SPECTRUM_OWNER="$M3_SPECTRUM_ROOT/make/m3/tooling/migration-recipes"
 M3_SPECTRUM_TASK="$M3_SPECTRUM_OWNER/tasks/atom-spectrum-20261005"
 M3_SPECTRUM_LOGS="$M3_SPECTRUM_TASK/target/verification"
 mkdir -p "$M3_SPECTRUM_LOGS"

@@ -5,7 +5,7 @@ package jdk.internal.m3.collections;
 import java.util.Objects;
 
 /** Single-threaded completed calls and terminal size deltas, not changed elements. */
-//FLLDCIM: RELOCATE - donor blob a5c2d45140b9 at d5ad5090d87e; recipe m3/collections/qualification/census2-t2-20261106/relocate.py v6
+//FLLDCIM: RELOCATE - donor blob a5c2d45140b9 at d5ad5090d87e; recipe make/m3/collections/qualification/census2-t2-20261106/relocate.py v6
 public final class LongSequenceMetrics implements LongSequenceListener {
     public LongSequenceMetrics() { }
     private long invocations,successes,failures,growth,shrink,unknownSizes;

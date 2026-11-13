@@ -267,7 +267,7 @@
   "repository_naming_gate": {
     "command": [
       "python3",
-      "m3/tooling/name-contract/check.py"
+      "make/m3/tooling/name-contract/check.py"
     ],
     "cwd": "/workspace/scratch/0027f9eece7a/M3jdk21-work",
     "exit_code": 2,
@@ -290,7 +290,7 @@
   "public_name_path_correction": {
     "initial_run": "https://github.com/hsoliwal/M3jdk21/actions/runs/41398824081",
     "initial_failure": "Four new dated compatibility receipt paths violate stable public naming.",
-    "resolved_path": "m3/qualification/object-adapter",
+    "resolved_path": "make/m3/qualification/object-adapter",
     "test_source_changes": 0
   }
 }

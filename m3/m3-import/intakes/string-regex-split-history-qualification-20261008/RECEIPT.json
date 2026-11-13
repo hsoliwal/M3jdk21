@@ -13,8 +13,8 @@
   "created_target": "test/jdk/java/lang/String/M3StringRegexSplitHistoryTest.java",
   "updated_targets": [
     ".github/workflows/mindex-string-backing.yml",
-    "m3/docs/m3string-history-recovery.tsv",
-    "m3/runtime-integration/check-m3string-history-recovery.py"
+    "doc/m3/m3string-history-recovery.tsv",
+    "make/m3/runtime-integration/check-m3string-history-recovery.py"
   ],
   "promoted_capabilities": [
     "mindex.string.regex-split-indexed",

@@ -1,4 +1,4 @@
-# Receipt: m3/tooling/companion (census2 leaf P2-117)
+# Receipt: make/m3/tooling/companion (census2 leaf P2-117)
 
 ## Source
 

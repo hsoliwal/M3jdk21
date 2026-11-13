@@ -3,8 +3,8 @@
 # Copyright 2026 Hitesh Soliwal and contributors.
 set -euo pipefail
 export LC_ALL=C
-root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
-manifest="$root/m3/collections/qualification/typed-signal-domain-evidence-20261022/SOURCE_MANIFEST.tsv"
+root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../../.." && pwd)"
+manifest="$root/make/m3/collections/qualification/typed-signal-domain-evidence-20261022/SOURCE_MANIFEST.tsv"
 count=0
 previous=''
 while IFS=$'\t' read -r path before after git_blob resource; do

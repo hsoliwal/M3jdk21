@@ -47,7 +47,7 @@ final class JccSourceRecoveryHandoffTest {
     private static final String PREVIOUS_BINDING_RESOURCE = "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/"
             + "jcc-source-final-handoff-20261005/after02-source-destination-bindings.json.txt";
     private static final int EXPECTED_RECOVERY_SOURCE_COUNT = 19;
-    private static final String REGISTRY = "m3/docs/name-mapping.json";
+    private static final String REGISTRY = "doc/m3/name-mapping.json";
     private static final String LAB = "m3.jcc-recipe-laboratory";
     private static final String JNI = "m3.jcc-java-jni-regression";
     private static final String RECEIVER = "jdk.m3.rewrite.atom.JccReceivingFixtureTest";
@@ -59,13 +59,13 @@ final class JccSourceRecoveryHandoffTest {
     private static final List<Target> OUTPUTS = List.of(
             new Target(REGISTRY, "before00-name-mapping.json.txt", "after00-name-mapping.json.txt",
                     "61818898ef6c092ddad2c1ee4cfe7508199912ff0a1f2d5c2a51ad6695d040c8"),
-            new Target("m3/docs/jcc-source-handoff.md", "before01-jcc-source-handoff.md.txt",
+            new Target("doc/m3/jcc-source-handoff.md", "before01-jcc-source-handoff.md.txt",
                     "after01-jcc-source-handoff.md.txt",
                     "59ed76969f86486e7adb377409e284f69577fe02754006fdfe5b3938a16760a0"),
-            new Target("m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
+            new Target("make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
                     "before02-source-destination-bindings.json.txt", "after02-source-destination-bindings.json.txt",
                     "8c76c2dd45e775d29f8f47d8daf65842e465c74ad3dec7aacd55df59f9d051a1"),
-            new Target("m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
+            new Target("make/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
                     "before03-root-coverage-obligations.tsv.txt", "after03-root-coverage-obligations.tsv.txt",
                     "59c4c970ac75a56aa5d5a3e2f3e88f5caa831eb06be788266c725202b8c64b12"));
 
@@ -272,7 +272,7 @@ final class JccSourceRecoveryHandoffTest {
         assertEquals(DESTINATION_PREIMAGE_COMMIT, prior.path("commit").asText());
         assertEquals(DESTINATION_PREIMAGE_ROOT, prior.path("root_tree").asText());
         assertEquals(PREVIOUS_SOURCE, prior.path("old_source_commit").asText());
-        assertEquals("m3/tooling/migration-recipes/src/main/resources/" + PREVIOUS_BINDING_RESOURCE,
+        assertEquals("make/m3/tooling/migration-recipes/src/main/resources/" + PREVIOUS_BINDING_RESOURCE,
                 prior.path("old_binding_resource").asText());
         assertEquals(hash(retained), prior.path("old_binding_sha256").asText());
         JsonNode historical = before.path("source_execution");

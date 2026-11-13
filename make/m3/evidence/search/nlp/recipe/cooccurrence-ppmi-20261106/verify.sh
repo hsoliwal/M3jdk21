@@ -60,7 +60,7 @@ else
     gate 5_untouched_classes SKIP "set M3_NLP_BASELINE_CLASSES to a sha256sum list (paths relative to target/) of a master build"
 fi
 
-naming=$(cd "$ROOT" && "$PY" -I m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/nlp/ 2>&1 | grep -E "^(JDK_NAMING|REFUSED)" | tail -1)
+naming=$(cd "$ROOT" && "$PY" -I make/m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/nlp/ 2>&1 | grep -E "^(JDK_NAMING|REFUSED)" | tail -1)
 case "$naming" in *"moves=0 rewrites=0 refusals=0"*) gate naming PASS "$naming" ;; *) gate naming FAIL "$naming" ;; esac
 echo "VERIFY $status"
 [ "$status" = PASS ]

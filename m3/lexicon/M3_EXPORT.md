@@ -108,7 +108,7 @@ escapes; valid surrogate pairs are emitted as their Unicode scalar. The image
 itself remains the authoritative UTF-16LE payload.
 
 ```text
-python3 m3/runtime-integration/export-m3-lexicon.py \
+python3 make/m3/runtime-integration/export-m3-lexicon.py \
   --source-manifest m3/lexicon/m3-source-manifest.tsv \
   --records /operator/synexia-snapshot/records.tsv \
   --output /operator/m3jdk-lexicon/export \
@@ -190,7 +190,7 @@ rows into its build directory, and runs the integration proof with an explicit
 scratch directory:
 
 ```text
-python -B m3/runtime-integration/tests/test_m3_number_space_export.py \
+python -B make/m3/runtime-integration/tests/test_m3_number_space_export.py \
   --fixture m3/build/translation-receiver-current-base/number-space.tsv \
   --scratch-dir m3/build/translation-receiver-current-base/python-temp
 ```
@@ -224,6 +224,6 @@ The receiver bounds each line at 16 MiB to keep validation memory bounded. That
 receiver limit is an explicit M3 intake policy, not a claim that Synexia's writer
 imposes the same limit. The source revision in the receipt identifies the data
 snapshot; it must not be confused with the Synexia code commit pin in
-`m3/runtime-integration/FOSS_REUSE_DECISION.tsv`. The SHA-256 comparison establishes byte integrity only relative to the supplied receipt;
+`make/m3/runtime-integration/FOSS_REUSE_DECISION.tsv`. The SHA-256 comparison establishes byte integrity only relative to the supplied receipt;
 it does not authenticate the producer or receipt. Obtain the expected receipt through a trusted,
 authenticated channel or verify a producer signature separately before relying on provenance.

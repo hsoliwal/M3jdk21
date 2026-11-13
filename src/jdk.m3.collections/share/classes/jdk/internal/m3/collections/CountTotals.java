@@ -21,7 +21,7 @@ import jdk.m3.collections.LongBag;
  * with System.load. There is no automatic loading or fallback. Native scratch is
  * two 1024-jlong lanes (16 KiB), with no pinned or retained Java heap pointers.
  */
-    //FLLDCIM: MRL - fold-close audit leaf L0025: ADD from PR #1084 head 6b16a20dcedf blob 31ce540046a3, ancestry-only landing b42ab7605b86 (tree == first parent); recipe m3/collections/qualification/foldaudit-collections-20261107/apply.py v1
+    //FLLDCIM: MRL - fold-close audit leaf L0025: ADD from PR #1084 head 6b16a20dcedf blob 31ce540046a3, ancestry-only landing b42ab7605b86 (tree == first parent); recipe make/m3/collections/qualification/foldaudit-collections-20261107/apply.py v1
     //FLLDCIM: MRL - the PR-head owner spelled size()/distinctSize()/add(long); master's LongBag (e6722c63e9b, blob d00efc879547) spells totalCount()/distinctCount()/add(long, long): calls renamed, contract unchanged (HANDOFF.tsv)
 public final class CountTotals {
     private CountTotals() { }

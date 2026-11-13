@@ -4,7 +4,7 @@ name: M3 long path JNI Java21 C17 differential
 on:
   pull_request:
     paths:
-      - 'm3/collections/qualification/m3-long-index-path-jni-20261018/**'
+      - 'make/m3/collections/qualification/m3-long-index-path-jni-20261018/**'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexPathMasks.java'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongIndexPathMasksJNI.java'
       - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_long_index_path_masks_jni.c'
@@ -46,7 +46,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          CRATE=m3/collections/qualification/m3-long-index-path-jni-20261018/recipe
+          CRATE=make/m3/collections/qualification/m3-long-index-path-jni-20261018/recipe
           mvn -B -ntp -f "$CRATE/pom.xml" -DskipTests package
           java -cp "$CRATE/target/classes" jdk.internal.m3.M3LongIndexPathJNIRecipe --check . "$CRATE/templates"
           FRESH="$RUNNER_TEMP/source-sealed-fresh"

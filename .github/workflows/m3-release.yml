@@ -18,7 +18,7 @@
 # and opens a DRAFT GitHub Release on the tag. Publishing the draft is a
 # person's click; this workflow never publishes.
 #
-# Claims: m3/release/release-contract.json is the only claim authority. The
+# Claims: make/m3/release/release-contract.json is the only claim authority. The
 # admission verifier runs in development mode and its JSON is attached as
 # evidence; release mode (--release) is also recorded. Candidate draft packaging
 # does not change the declared history requirement or replace exact source and
@@ -27,7 +27,7 @@
 # This workflow upgrades no claim and never publishes the draft.
 #
 # Startup contract (run on CPU before pushing a change to this file):
-#   python3 m3/tools/ci/reusable_call_check.py .
+#   python3 make/m3/tools/ci/reusable_call_check.py .
 #   actionlint .github/workflows/m3-release.yml
 #
 name: 'M3JDK21 release build'
@@ -291,11 +291,11 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p "${OUT}"
-          python3 m3/release/verify_release_admission.py --root . \
+          python3 make/m3/release/verify_release_admission.py --root . \
             --json-out "${OUT}/admission.json" \
             --queue-out "${OUT}/admission-queue.md" \
             --sha256-out "${OUT}/contract-SHA256SUMS"
-          if python3 m3/release/verify_release_admission.py --root . --release \
+          if python3 make/m3/release/verify_release_admission.py --root . --release \
                --json-out "${OUT}/admission-release-mode.json" > /dev/null; then
             echo 'release-mode admission: release_ready=true'
           else
@@ -366,7 +366,7 @@ jobs:
           fi
           for f in LICENSE ADDITIONAL_LICENSE_INFO ASSEMBLY_EXCEPTION LICENSE-M3-APACHE-2.0.txt \
                    M3-SYNEXIA-NOTICE.md M3-SYNEXIA-RIGHTS.md M3-SYNEXIA-AUTHORS.md \
-                   m3/release/release-contract.json; do
+                   make/m3/release/release-contract.json; do
             if [[ ! -f "${f}" ]]; then
               echo "::error::required rights or contract file missing: ${f}"
               exit 1
@@ -382,7 +382,7 @@ jobs:
           from pathlib import Path
           out = Path(os.environ['OUT'])
           tag = os.environ.get('TAG') or ('(untagged run of ' + os.environ['GITHUB_SHA'][:12] + ')')
-          contract = json.loads(Path('m3/release/release-contract.json').read_text(encoding='utf-8'))
+          contract = json.loads(Path('make/m3/release/release-contract.json').read_text(encoding='utf-8'))
           dev = json.loads((out / 'admission.json').read_text(encoding='utf-8'))
           rel_path = out / 'admission-release-mode.json'
           rel = json.loads(rel_path.read_text(encoding='utf-8')) if rel_path.is_file() else {}
@@ -391,7 +391,7 @@ jobs:
                    'Source tree: `' + dev['source_tree'] + '`  ',
                    'Upstream baseline: `' + contract['release']['upstream_baseline'] + '` (' + contract['release']['upstream_repository'] + ')', '',
                    'Platforms: ' + ', '.join(sorted({p.name.split('_')[1] for p in out.glob('*_bin.*')})), '',
-                   '## Claims (m3/release/release-contract.json, unchanged by this build)', '',
+                   '## Claims (make/m3/release/release-contract.json, unchanged by this build)', '',
                    '| Claim | State |', '| --- | --- |']
           lines += ['| ' + k + ' | ' + v + ' |' for k, v in contract['current_claims'].items()]
           lines += ['', '## Admission', '',

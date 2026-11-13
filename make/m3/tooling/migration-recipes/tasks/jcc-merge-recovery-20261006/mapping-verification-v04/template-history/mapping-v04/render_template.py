@@ -16,10 +16,10 @@ from pathlib import Path
 import re
 
 HERE = Path(__file__).resolve().parent
-TEST_PATH = "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccMergeMappingRecoveryV04Test.java"
-POM_PATH = "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/pom.xml"
-YAML_PATH = "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jcc-merge-mapping-recovery-v04.yml"
-SUMMARY_PATH = ("m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/"
+TEST_PATH = "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccMergeMappingRecoveryV04Test.java"
+POM_PATH = "make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/pom.xml"
+YAML_PATH = "make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jcc-merge-mapping-recovery-v04.yml"
+SUMMARY_PATH = ("make/m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/"
                 "jcc-merge-recovery-20261006-mapping-v04/publication-input-summary.json")
 BEFORE_PINS = (
     "e76133a4d1bb472dfc88a41e8d8560d5ac0e08ba4d227b3b6c8fbd95915e6ebc",

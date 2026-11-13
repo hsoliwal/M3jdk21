@@ -39,10 +39,10 @@ facade that delegates to it, proven by a Commons differential.
 ## Recipe
 
 ```
-python -I m3/collections/qualification/flat3map-single-owner-20261106/apply.py [--root <repo>] [--check]
+python -I make/m3/collections/qualification/flat3map-single-owner-20261106/apply.py [--root <repo>] [--check]
 ```
 
-Derived from `m3/qualification/progress-monitor-unify-20261106/unify.py`. Every rule pins the git blob of its
+Derived from `make/m3/qualification/progress-monitor-unify-20261106/unify.py`. Every rule pins the git blob of its
 preimage at master `e65f0f664fa3`; a target must equal its preimage or its postimage, otherwise the recipe refuses
 (exit 2) and writes nothing. A rule may also pin the crate postimage sha256: the pinned preimage, spelled with the
 crate's package again, must reproduce it byte for byte (the package is assembled from parts in the recipe, because

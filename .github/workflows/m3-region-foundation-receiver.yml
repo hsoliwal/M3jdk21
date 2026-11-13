@@ -24,9 +24,9 @@ jobs:
           persist-credentials: false
           sparse-checkout: |
             .github/workflows
-            m3/tooling/region-foundation-repair
-            m3/runtime-integration/region-foundation-20261016
-            m3/docs
+            make/m3/tooling/region-foundation-repair
+            make/m3/runtime-integration/region-foundation-20261016
+            doc/m3
             src/java.base/share/classes/java/lang
             test/jdk/java/lang/String
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
@@ -37,8 +37,8 @@ jobs:
           sparse-checkout: |
             .github/workflows
             m3/core
-            m3/docs
-            m3/tooling/migration-recipes
+            doc/m3
+            make/m3/tooling/migration-recipes
             src/java.base/share/classes/java/lang
       - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
         with:
@@ -48,7 +48,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          bash m3/tooling/region-foundation-repair/qualify.sh "$PWD/baseline" "$RUNNER_TEMP/m3-region-evidence"
+          bash make/m3/tooling/region-foundation-repair/qualify.sh "$PWD/baseline" "$RUNNER_TEMP/m3-region-evidence"
       - name: Preserve dependency and source evidence
         if: always()
         shell: bash
@@ -56,7 +56,7 @@ jobs:
           set -euo pipefail
           evidence="$RUNNER_TEMP/m3-region-evidence"
           mkdir -p "$evidence"
-          tar -czf "$evidence/task-source.tar.gz" m3/tooling/region-foundation-repair
+          tar -czf "$evidence/task-source.tar.gz" make/m3/tooling/region-foundation-repair
           if test -d "$HOME/.m2/repository"; then
             tar -C "$HOME/.m2" -czf "$evidence/maven-dependencies.tar.gz" repository
           fi
@@ -75,7 +75,7 @@ jobs:
           from pathlib import Path
           root = Path.cwd()
           delivery = Path(os.environ['DELIVERY'])
-          rows = list(csv.DictReader((root/'m3/tooling/region-foundation-repair/postimages.tsv').open(), delimiter='\t'))
+          rows = list(csv.DictReader((root/'make/m3/tooling/region-foundation-repair/postimages.tsv').open(), delimiter='\t'))
           admitted = []
           for row in rows:
               path = row['path']
@@ -91,14 +91,14 @@ jobs:
               target.parent.mkdir(parents=True, exist_ok=True)
               target.write_bytes(raw)
           PY
-          proof=m3/runtime-integration/region-foundation-20261016
+          proof=make/m3/runtime-integration/region-foundation-20261016
           mkdir -p "$proof"
           cp "$DELIVERY/delivery.tsv" "$proof/"
           cp "$RUNNER_TEMP/m3-region-evidence/runtime/qualification-scope.json" "$proof/"
           cp "$RUNNER_TEMP/m3-region-evidence/runtime/"*.log "$proof/"
           cp "$RUNNER_TEMP/m3-region-evidence/maven-verify.log" "$proof/"
           printf '%s\n' "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" > "$proof/action-run.txt"
-          git add src/java.base/share/classes/java/lang/String.java m3/docs/name-mapping.json test/jdk/java/lang/String/M3RegionMatchesNonPositive.java "$proof"
+          git add src/java.base/share/classes/java/lang/String.java doc/m3/name-mapping.json test/jdk/java/lang/String/M3RegionMatchesNonPositive.java "$proof"
           git diff --cached --check
           if git diff --cached --quiet; then exit 0; fi
           git config user.name 'Hitesh Soliwal'

@@ -10,7 +10,7 @@ JCC additions. The targets are also absent at the reviewed current input
 The existing `M3Jdk21HashPinnedTextSnapshotRecipe` owns all three replay crates. Two crates stay
 within its unchanged 256-target budget (256 plus 187 historical additions). A third crate changes
 six exact current files: the existing retention owner, tests, Maven entry, workflow, README and
-retention catalogue. The existing sealed `m3/migration/recipe.py` owns installation and rollback.
+retention catalogue. The existing sealed `make/m3/migration/recipe.py` owns installation and rollback.
 No new transformation engine, retention engine, runtime owner or Maven dependency version is added.
 
 ## Historical custody is explicit
@@ -18,7 +18,7 @@ No new transformation engine, retention engine, runtime owner or Maven dependenc
 The two new `jcc-merge-recovery-20261006-history-*` catalogue rows retain historical recipe/test/
 evidence custody. They do not declare the JCC capabilities promoted or accepted. Both existing
 JEP 458 product rows remain byte-for-byte at the start of the catalogue. The product-promotion
-rule in `m3/history/README.md` remains applicable to new product capability acceptance; these
+rule in `make/m3/history/README.md` remains applicable to new product capability acceptance; these
 two historical custody rows preserve already published artifacts and their unresolved results.
 
 Historical source 0b/d1/0c53 results, donor 4990 evidence, failed checks and raw-byte readback limits
@@ -39,7 +39,7 @@ The focused Maven verifier uses the existing Rewrite 8.17.1, JUnit 5.10.2, compi
 and Surefire 3.2.5 pins. Run it with the pinned JDK21 and admitted offline dependency closure:
 
 ```sh
-mvn -o -B -f m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/verification/pom.xml verify
+mvn -o -B -f make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/verification/pom.xml verify
 ```
 
 `JccMergeRecoveryTest` checks all 443 historical Git blob and SHA-256 identities, all six current
@@ -53,7 +53,7 @@ and immutable-baseline deletion/reseal detection. Its 26 JEP targets are exact e
 afterimages in a synthetic fixture; that test does not assert current JDK target acceptance.
 
 ```sh
-python3 -B m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/verification/verify_installer.py \
+python3 -B make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/verification/verify_installer.py \
   --repository /absolute/receiving/checkout --output /new/isolated/proof-directory
 ```
 

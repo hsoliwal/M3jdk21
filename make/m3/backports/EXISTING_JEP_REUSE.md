@@ -38,7 +38,7 @@ M3JDK21 Git repository. A ref may be supplied for convenience; the output always
 resolved immutable commit.
 
 ```bash
-python3 m3/backports/generate_recipe_crates.py \
+python3 make/m3/backports/generate_recipe_crates.py \
   --repo /path/to/upstream-jdk \
   --release 22 \
   --donor-ref jdk-22+36 \
@@ -91,7 +91,7 @@ The reviewed target baseline is `970a34350ebdf6a3f1c5ff5acc8445d0f3515f55`.
 The behavioral regression command is:
 
 ```bash
-cd m3/backports
+cd make/m3/backports
 python3 -m unittest -v test_file_delta_inventory.py test_generate_recipe_crates.py
 ```
 

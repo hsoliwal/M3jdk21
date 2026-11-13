@@ -21,18 +21,18 @@ git ls-files m3/core/src | wc -l                            # 27 files (26 Java 
 ## Derivation
 
 ```sh
-bash ./m3/build.sh                      # with the JaCoCo agent, see below
-bash ./m3/release/run_extra_core_contracts.sh
+bash ./make/m3/build.sh                      # with the JaCoCo agent, see below
+bash ./make/m3/release/run_extra_core_contracts.sh
 java -jar org.jacoco.cli-0.8.12-nodeps.jar report jacoco.exec \
   --classfiles m3/build/classes --sourcefiles m3/core/src --xml jacoco.xml --csv jacoco.csv
-python3 m3/release/derive_changed_atom_inventory.py --report jacoco.xml --root . \
-  --classfiles m3/build/classes --carry-exemptions m3/release/coverage/changed-atoms.tsv \
-  --out m3/release/coverage/changed-atoms.tsv
+python3 make/m3/release/derive_changed_atom_inventory.py --report jacoco.xml --root . \
+  --classfiles m3/build/classes --carry-exemptions make/m3/release/coverage/changed-atoms.tsv \
+  --out make/m3/release/coverage/changed-atoms.tsv
 ```
 
 JaCoCo analyzes every class in `--classfiles` whether or not it ran, so the method
 set does not depend on which tests executed; `--classfiles` also refuses a compiled
-class missing from the report. Re-run with `--check m3/release/coverage/changed-atoms.tsv`
+class missing from the report. Re-run with `--check make/m3/release/coverage/changed-atoms.tsv`
 to prove the committed file is byte-identical. Result: 607 atoms in 82 classes;
 341 have no JaCoCo `BRANCH` counter and carry the explicit `branchless_explanation`;
 18 carry a reviewed `exemption` (below). Exemptions are review data: `--carry-exemptions`

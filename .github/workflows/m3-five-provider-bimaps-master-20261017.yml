@@ -7,7 +7,7 @@ on:
       - 'm3/collections/interop/src/main/java/jdk/m3/collections/interop/M3LibraryCollections.java'
       - 'm3/collections/interop/sdk-family-bindings.tsv'
       - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3ApacheBidiMapContractTest.java'
-      - 'm3/collections/qualification/m3-five-provider-bimaps-master-20261017/**'
+      - 'make/m3/collections/qualification/m3-five-provider-bimaps-master-20261017/**'
       - '.github/workflows/m3-five-provider-bimaps-master-20261017.yml'
   workflow_dispatch:
 concurrency:
@@ -24,14 +24,14 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Actual Maven OpenRewrite SDK JUnit - source generation and fixed point
-        run: mvn -B -ntp -f m3/collections/qualification/m3-five-provider-bimaps-master-20261017/recipe/pom.xml clean verify
+        run: mvn -B -ntp -f make/m3/collections/qualification/m3-five-provider-bimaps-master-20261017/recipe/pom.xml clean verify
       - name: Verify all 6 exact generated targets against SHA256 resource manifest
         run: |
           python3 - <<'PY'
           from pathlib import Path
           from hashlib import sha256
           root=Path(".")
-          recipe=root/"m3/collections/qualification/m3-five-provider-bimaps-master-20261017/recipe/src/main/resources/jdk/internal/m3/rewrite/m3-five-provider-bimaps-master-20261017"
+          recipe=root/"make/m3/collections/qualification/m3-five-provider-bimaps-master-20261017/recipe/src/main/resources/jdk/internal/m3/rewrite/m3-five-provider-bimaps-master-20261017"
           count=0
           for line in (recipe/"manifest.tsv").read_text(encoding="utf-8").splitlines():
               path,before,after,resource=line.split("\t")

@@ -14,7 +14,7 @@ import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-RECIPE = 'm3/collections/qualification/rank-stack-followup-20261107/pinned_edits.py v1'
+RECIPE = 'make/m3/collections/qualification/rank-stack-followup-20261107/pinned_edits.py v1'
 OWNER = 'm3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java'
 CONTRACT = 'm3/collections/src/test/java/jdk/m3/collections/M3RankBatchIntoContract.java'
 
@@ -91,7 +91,7 @@ def blob_id(repo, data):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--check', action='store_true')
-    parser.add_argument('--repo', default=str(HERE.parents[3]))
+    parser.add_argument('--repo', default=str(HERE.parents[4]))
     args = parser.parse_args()
     repo = Path(args.repo)
     changed, report = 0, []

@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static jdk.m3.collections.PolicyAssertions.*;
 import jdk.internal.m3.collections.BoundedLongSequence;
 
-//FLLDCIM: RELOCATE - donor blob 1d2af871dbe2 at d5ad5090d87e; recipe m3/collections/qualification/census2-t2-20261106/relocate.py v6
+//FLLDCIM: RELOCATE - donor blob 1d2af871dbe2 at d5ad5090d87e; recipe make/m3/collections/qualification/census2-t2-20261106/relocate.py v6
 public final class BoundedLongSequenceProof {
     public static void main(String[] args) {
         fails(NullPointerException.class,()->new BoundedLongSequence(null,1));

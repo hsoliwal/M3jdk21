@@ -19,7 +19,7 @@ class VerifyCurrentTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             resources = root / (
-                "m3/tooling/migration-recipes/src/main/resources/"
+                "make/m3/tooling/migration-recipes/src/main/resources/"
                 "jdk/m3/rewrite/backport/jdk21-hash-pinned"
             )
             rows = []

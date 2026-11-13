@@ -15,7 +15,7 @@ The original prepass counted *all* deletion-run starts before determining whethe
 
 ## Reproduce the Java 21 proof
 ```sh
-bash m3/qualification/mask-run-budget-20261020/verify.sh
+bash make/m3/qualification/mask-run-budget-20261020/verify.sh
 ```
 This uses `javac` / `java --patch-module java.base` against the exact installed M3JDK21 class. It checks SHA-256 and runs 1,194 seeded identity/range differentials, including 64-bit word seams and invalid inputs. No Maven dependencies are needed for this narrow independent product test.
 

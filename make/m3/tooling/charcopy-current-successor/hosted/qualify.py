@@ -16,7 +16,7 @@ RECEIVER = TASK.parents[2]
 SDK = TASK / "sdk"
 ROOT = Path(os.environ["M3_PROOF_ROOT"]).resolve()
 ARTIFACTS = ROOT / "artifacts"
-PREFIX = "m3/tooling/charcopy-current-successor/"
+PREFIX = "make/m3/tooling/charcopy-current-successor/"
 WORKFLOW = ".github/workflows/m3-charcopy-current-successor.yml"
 SUITE = "jdk.internal.m3.rewrite.M3CharcopyCurrentSuccessorRecipeTest"
 METHODS = {"namedCurrentEightKeepInputsReplayAsExactFixedPoint",
@@ -137,7 +137,7 @@ def binding(fresh=False):
                 "actual receiver differs: " + name)
         receiver[name] = actual
     for name in ("src/java.base/share/classes/java/lang/MIndexString.java",
-                 "m3/runtime-integration/tests/MIndexStringInvariant.java"):
+                 "make/m3/runtime-integration/tests/MIndexStringInvariant.java"):
         require(not git("ls-tree", "-r", "--name-only", "HEAD", "--", name),
                 "tracked legacy receiver path forbidden: " + name)
         path = RECEIVER / name

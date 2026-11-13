@@ -30,7 +30,7 @@ package sun.swing.list;
  * {@link #firstEndingAfter} a binary search (O(log n)). The heights are not updated in place:
  * {@code BasicListUI} allocates a new {@code cellHeights} array on every layout and
  * {@link M3ListRows} builds a new lane for it. Chosen over {@code javax.swing.SizeSequence}, a
- * Fenwick tree and sqrt blocks by measurement (m3/docs/swing-viewport/ALGORITHM_CATALOGUE.tsv).
+ * Fenwick tree and sqrt blocks by measurement (doc/m3/swing-viewport/ALGORITHM_CATALOGUE.tsv).
  */
 //FLLDCIM: M3 swing-viewport leaf 3 - prefix lane over BasicListUI.cellHeights, same sums as the stock loops
 public final class M3PrefixRowOffsets implements M3RowOffsets {

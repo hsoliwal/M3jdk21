@@ -5,9 +5,9 @@ on:
   pull_request:
     paths:
       - '.github/workflows/m3-core-contract-matrix.yml'
-      - 'm3/tooling/core-contract-matrix/**'
+      - 'make/m3/tooling/core-contract-matrix/**'
       - 'm3/core/**'
-      - 'm3/build.sh'
+      - 'make/m3/build.sh'
       - 'm3/lexicon/**'
 permissions:
   contents: read
@@ -96,7 +96,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 -I -S -B "$M3_SOURCE_ROOT/m3/tooling/core-contract-matrix/qualify.py" --source "$M3_SOURCE_ROOT" --out "$M3_PROOF_ROOT" --jdk "$M3JDK"
+          python3 -I -S -B "$M3_SOURCE_ROOT/make/m3/tooling/core-contract-matrix/qualify.py" --source "$M3_SOURCE_ROOT" --out "$M3_PROOF_ROOT" --jdk "$M3JDK"
       - name: Preserve actual build evidence
         if: always() && (steps.qualify.outcome == 'success' || steps.qualify.outcome == 'failure')
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

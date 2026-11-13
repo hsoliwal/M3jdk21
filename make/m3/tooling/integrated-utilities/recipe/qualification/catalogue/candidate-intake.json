@@ -4,49 +4,49 @@
   "candidate_root": "/dev/shm/m3jdk21-work/catalogue-expanded-candidates",
   "target_files": [
     {
-      "path": "m3/docs/name-mapping.json",
+      "path": "doc/m3/name-mapping.json",
       "candidate_file": "/dev/shm/m3jdk21-work/catalogue-expanded-candidates/m3/docs/name-mapping.json",
       "before_sha256": "a28f218198b30d1292d51836c8912d1f69229ef9bef40a4726a2808bcdcb4d46",
       "after_sha256": "2bb378d4e2af9c0bf62482182acdf53f1919abe16e6146195d38d9bcfc6ab9d7",
       "bytes": 405195
     },
     {
-      "path": "m3/docs/name-mapping.d/m3-integrated-utility-families-20261018.json",
+      "path": "doc/m3/name-mapping.d/m3-integrated-utility-families-20261018.json",
       "candidate_file": "/dev/shm/m3jdk21-work/catalogue-expanded-candidates/m3/docs/name-mapping.d/m3-integrated-utility-families-20261018.json",
       "before_sha256": "ABSENT",
       "after_sha256": "0271ca2761cb871091fb22c5d7989ff11822ff2deb65d67d2c58080878948ff5",
       "bytes": 105339
     },
     {
-      "path": "m3/docs/INTEGRATED_UTILITY_COVERAGE_20261018.md",
+      "path": "doc/m3/INTEGRATED_UTILITY_COVERAGE_20261018.md",
       "candidate_file": "/dev/shm/m3jdk21-work/catalogue-expanded-candidates/m3/docs/INTEGRATED_UTILITY_COVERAGE_20261018.md",
       "before_sha256": "ABSENT",
       "after_sha256": "301320272695a993769df1164709d2c5fbe469e45543139ecbbece8bf824fbf2",
       "bytes": 22982
     },
     {
-      "path": "m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv",
+      "path": "make/m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv",
       "candidate_file": "/dev/shm/m3jdk21-work/catalogue-expanded-candidates/m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv",
       "before_sha256": "ABSENT",
       "after_sha256": "5bf447216af55a51b73c275182af891c1ded5c2b427fa6856139731078d2ef8c",
       "bytes": 17852
     },
     {
-      "path": "m3/compatibility/check_integrated_utility_coverage.py",
+      "path": "make/m3/compatibility/check_integrated_utility_coverage.py",
       "candidate_file": "/dev/shm/m3jdk21-work/catalogue-expanded-candidates/m3/compatibility/check_integrated_utility_coverage.py",
       "before_sha256": "ABSENT",
       "after_sha256": "75a089b2ef4bce9beb75f88869c4f613c530df528c872af33df9e8440914d9c1",
       "bytes": 28889
     },
     {
-      "path": "m3/compatibility/test_integrated_utility_coverage.py",
+      "path": "make/m3/compatibility/test_integrated_utility_coverage.py",
       "candidate_file": "/dev/shm/m3jdk21-work/catalogue-expanded-candidates/m3/compatibility/test_integrated_utility_coverage.py",
       "before_sha256": "ABSENT",
       "after_sha256": "e783a54fcd7430755874e55dd2af19530d217084a76d61d845ab14f3c1069f5f",
       "bytes": 10084
     },
     {
-      "path": "m3/docs/name-mapping.d/m3jdk-module-owners-20261018.json",
+      "path": "doc/m3/name-mapping.d/m3jdk-module-owners-20261018.json",
       "candidate_file": "/dev/shm/m3jdk21-work/catalogue-expanded-candidates/m3/docs/name-mapping.d/m3jdk-module-owners-20261018.json",
       "before_sha256": "ABSENT",
       "after_sha256": "7ec04178398539f8f27459d0d754a294af275f5469fcfa51db6ce58d872d47b1",
@@ -55,7 +55,7 @@
   ],
   "baseline_atoms": [
     {
-      "path": "m3/collections/algorithm-catalog/sdk-family-names-20261017.tsv",
+      "path": "make/m3/collections/algorithm-catalog/sdk-family-names-20261017.tsv",
       "git_blob": "defa93e232815f027f9e96b47aa18d896d1b4f31",
       "sha256": "dd2aed4d82561306a3bb901712b8c8bdbb08e103d32f192a2c9318363d16380a"
     },

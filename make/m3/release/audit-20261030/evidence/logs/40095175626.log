@@ -236,8 +236,8 @@ java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.6503930Z
 java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.6504417Z ##[endgroup]
 java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.6521990Z Creating settings.xml with server-id: github
 java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.6570843Z Writing to /home/runner/.m2/settings.xml
-java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.6764483Z ##[group]Run bash m3/collections/recipe/state-mask-histogram-20261017/verify.sh
-java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.6765310Z [36;1mbash m3/collections/recipe/state-mask-histogram-20261017/verify.sh[0m
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.6764483Z ##[group]Run bash make/m3/collections/recipe/state-mask-histogram-20261017/verify.sh
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.6765310Z [36;1mbash make/m3/collections/recipe/state-mask-histogram-20261017/verify.sh[0m
 java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.7043241Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
 java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.7043635Z env:
 java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.7043975Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64

@@ -62,7 +62,7 @@ precomputed filesystem, an `M3File` implementation or a JNI optimization.
 
 ## Admission and ongoing coverage
 
-`python3 m3/tooling/verify_m3_utility_families.py` rejects duplicate/unsorted
+`python3 make/m3/tooling/verify_m3_utility_families.py` rejects duplicate/unsorted
 families, invalid modules/states, fake implemented statuses, wrong paths, or an
 unresolved initial seed family. With `--missing-modules`, it also shows JDK modules
 not yet represented by any utility row; those are a *gap report*, not spurious
@@ -78,5 +78,5 @@ The target-only mapping does not fork reusable Synexia recipes. This initial PR
 is not proof of whole-JDK equivalence, a full OpenJDK image build, jtreg execution,
 JNI equivalence, or source-sealed OpenRewrite admission.
 
-The authoritative migration name registry remains `m3/docs/name-mapping.json` and its
+The authoritative migration name registry remains `doc/m3/name-mapping.json` and its
 reviewed fragments; the TSV is an implementer checklist, not a competing ABI registry.

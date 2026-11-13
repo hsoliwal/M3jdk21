@@ -56,7 +56,7 @@
     "canonical_commit": "cac5116e3408d6ff306d95654e9f4db6b59a27c1",
     "canonical_pull_request": "https://github.com/hsoliwal/com.synexia/pull/12705",
     "owner": "M3LongLongTreeMap",
-    "receiving_evidence": "m3/collections/qualification/array-defaults-20261021/RESULTS.md"
+    "receiving_evidence": "make/m3/collections/qualification/array-defaults-20261021/RESULTS.md"
   },
   "receiving_base_ref": "6ac3d5834844d444979ab1f7b8c85e68982759b7",
   "review_artifact_sha256": {

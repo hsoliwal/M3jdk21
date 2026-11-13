@@ -7,7 +7,7 @@
   "canonical_source_commit": "d8426c06f67683763a8ddfc8bd99620500a0f536",
   "scope": {
     "name": "prerequisites",
-    "target_prefix": "m3/qualification/integrated-build-prerequisites-20261019/legal",
+    "target_prefix": "make/m3/qualification/integrated-build-prerequisites-20261019/legal",
     "reviewed_file_count": 207,
     "classification_counts": {
       "PROOF": 193,
@@ -37,43 +37,43 @@
   "new_metadata_notice": "These six legal receipt files are new first-party Apache metadata or exact generated gate output. They describe the selected 207/290 inputs and are intentionally outside that input ledger, avoiding self-referential hashes. Scoped licence/NOTICE paths are recorded per reviewed input.",
   "policy_owner_seals": [
     {
-      "path": "m3/compatibility/check_m3_public_target.py",
+      "path": "make/m3/compatibility/check_m3_public_target.py",
       "sha256": "bc2d6ac8e6f2c2ef31f39a90f24cf1f1e064e50b16f31083d8583c425b66ca10",
       "git_blob": "cb8242ca0be52a81d6790ddd5d980ab96ab863c1",
       "bytes": 7784
     },
     {
-      "path": "m3/compatibility/m3-public-target-policy.tsv",
+      "path": "make/m3/compatibility/m3-public-target-policy.tsv",
       "sha256": "27f9efe7c5018b3415a34ca75ebcb9f37641e5b47c8781c771d4008fae826b8a",
       "git_blob": "28d492ac7a243116203aa04609d5b9573c2447c1",
       "bytes": 529
     },
     {
-      "path": "m3/compatibility/m3-apache-handoff-pin.tsv",
+      "path": "make/m3/compatibility/m3-apache-handoff-pin.tsv",
       "sha256": "4e7f0913f46cf1f9f0ae18d294565a32ff371c906f94c89aaa018847f8f8a49c",
       "git_blob": "58b26a6e6c00e4351c38f405d8a67f7ab0e3fdbf",
       "bytes": 585
     },
     {
-      "path": "m3/runtime-integration/verify-m3-intake.py",
+      "path": "make/m3/runtime-integration/verify-m3-intake.py",
       "sha256": "6f16a12a564589cb6055699f70a41e7de99716d55900efc70ed4601dafe9e3c5",
       "git_blob": "6567fdd037bdc1944afc2694101fb6eff3780f3b",
       "bytes": 4750
     },
     {
-      "path": "m3/docs/m3-intake-policy.tsv",
+      "path": "doc/m3/m3-intake-policy.tsv",
       "sha256": "519c6e3152fac4d5d06b77c859f8f5a6a6b7e54a1e3dbb5fdd999c4e100a69c7",
       "git_blob": "516d5374f3bea79ef9720caa6cdf0c2217ffbc4f",
       "bytes": 1035
     },
     {
-      "path": "m3/compatibility/m3-recipe-home-policy.tsv",
+      "path": "make/m3/compatibility/m3-recipe-home-policy.tsv",
       "sha256": "dbad0b1e16411668d1edc25f550a9a7c9485c8f6c546ade8a56124bd9e30fa29",
       "git_blob": "84dc0a45de8a3ce22d92144436d601df6ab248f6",
       "bytes": 5536
     },
     {
-      "path": "m3/docs/m3-apache-reuse-policy.properties",
+      "path": "doc/m3/m3-apache-reuse-policy.properties",
       "sha256": "dc56c10461d8910e3d2f36ea137237f309983c91bea56526cade6956ca4bde5e",
       "git_blob": "c5cd06b5d7661ae04625e04cccc7bbb74c45e59a",
       "bytes": 1127
@@ -82,7 +82,7 @@
   "commands": [
     {
       "name": "policy",
-      "cmd": "python3 m3/compatibility/check_m3_public_target.py",
+      "cmd": "python3 make/m3/compatibility/check_m3_public_target.py",
       "result": {
         "status": "fulfilled",
         "value": {
@@ -96,7 +96,7 @@
     },
     {
       "name": "intake",
-      "cmd": "python3 m3/runtime-integration/verify-m3-intake.py --repo .",
+      "cmd": "python3 make/m3/runtime-integration/verify-m3-intake.py --repo .",
       "result": {
         "status": "fulfilled",
         "value": {
@@ -110,7 +110,7 @@
     },
     {
       "name": "prerequisites_handoff",
-      "cmd": "python3 m3/compatibility/check_m3_public_target.py m3/qualification/integrated-build-prerequisites-20261019/legal/APACHE_HANDOFF.tsv",
+      "cmd": "python3 make/m3/compatibility/check_m3_public_target.py make/m3/qualification/integrated-build-prerequisites-20261019/legal/APACHE_HANDOFF.tsv",
       "result": {
         "status": "fulfilled",
         "value": {

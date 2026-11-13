@@ -25,7 +25,7 @@
       "predecessor": "batch",
       "main_before_sha256": "c15cc6c2c05557afba9b5dbe25b3c6663430d457495911329ff5a553d3110c8d",
       "main_after_sha256": "956ae0faf7f37d4b963d0d074445484548efe73f164142f2bd0c7de0815e49d4",
-      "added_test": "m3/collections/wrappers/src/test/java/jdk/m3/collections/M3StoredRepresentativeProof.java",
+      "added_test": "make/m3/collections/wrappers/src/test/java/jdk/m3/collections/M3StoredRepresentativeProof.java",
       "test_sha256": "2ab5bf02e491bacfc726cd3e38494601380b40844e5d83d0994ac33428c32597"
     }
   ],
@@ -35,27 +35,27 @@
       "sha256": "903399fb109feea866c117c60701b0a79c24d12afa6daa1cfdf80b359f6f04ed"
     },
     {
-      "path": "m3/collections/wrappers/src/test/java/jdk/m3/collections/M3StoredRepresentativeProof.java",
+      "path": "make/m3/collections/wrappers/src/test/java/jdk/m3/collections/M3StoredRepresentativeProof.java",
       "sha256": "2ab5bf02e491bacfc726cd3e38494601380b40844e5d83d0994ac33428c32597"
     },
     {
-      "path": "m3/collections/wrappers/src/test/java/jdk/m3/collections/M3WrapperContractsProof.java",
+      "path": "make/m3/collections/wrappers/src/test/java/jdk/m3/collections/M3WrapperContractsProof.java",
       "sha256": "8ac2618544e99013cefcbaa5b0119ca089c766b61c499f083b237f95dd7e37b1"
     },
     {
-      "path": "m3/collections/wrappers/src/test/java/jdk/m3/collections/M3DeepFilterCompositionProof.java",
+      "path": "make/m3/collections/wrappers/src/test/java/jdk/m3/collections/M3DeepFilterCompositionProof.java",
       "sha256": "362dc9caf845360782b0c313ff871d35badd62883b8695a4c31a937f22f370b6"
     },
     {
-      "path": "m3/collections/wrappers/src/test/java/jdk/m3/collections/M3DeepFilterNativeProof.java",
+      "path": "make/m3/collections/wrappers/src/test/java/jdk/m3/collections/M3DeepFilterNativeProof.java",
       "sha256": "c78647c37fea7351ceb0ceef3bd4139cbcfc69190c8e5864d4694edfa8751023"
     },
     {
-      "path": "m3/collections/wrappers/direct-projection-20261017/m3_map_cursor_jni.c",
+      "path": "make/m3/collections/wrappers/direct-projection-20261017/m3_map_cursor_jni.c",
       "sha256": "d0650f81a1ad0167db85f0be6dd4a7dcb55633c679c397fa9e2c036805820ee2"
     },
     {
-      "path": "m3/collections/wrappers/deep-filter-20261017/native/m3_deep_filter_jni.c",
+      "path": "make/m3/collections/wrappers/deep-filter-20261017/native/m3_deep_filter_jni.c",
       "sha256": "3f923c6762b0742acb92c52174481fa687416e83999dd1d698502d4b4b069438"
     }
   ],

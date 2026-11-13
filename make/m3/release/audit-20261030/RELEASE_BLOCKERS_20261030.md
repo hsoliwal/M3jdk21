@@ -7,7 +7,7 @@ Read-only audit. No code changes, no merges, no PR. Owner session (com-synexia-d
 | master head | `5860598b515885ebc2275f6552d9a5a1348fdb15` (2026-10-29T17:00:44Z, "Merge packed integer and VInt SDK APIs") |
 | superset head (PR #2151) | `ce9d68bcfc38a2f5d5f5f0fb19e6656ee77e71dc`, branch `m3/superset-landing-20261030`, 3706 commits ahead of master, merge-base = master head |
 | upstream baseline (contract) | `890adb6410dab4606a4f26a942aed02fb2f55387` (openjdk/jdk21); merge-base check PASS on both refs |
-| audit clone | `S:/m3-scratch/worktrees/m3jdk21-release-audit` (blobless, sparse: m3/release, m3/collections, m3/mop, m3/tooling, m3/ports, m3/docs, m3/arrays, .github; left on branch `superset-landing`) |
+| audit clone | `S:/m3-scratch/worktrees/m3jdk21-release-audit` (blobless, sparse: make/m3/release, m3/collections, m3/mop, make/m3/tooling, m3/ports, doc/m3, m3/arrays, .github; left on branch `superset-landing`) |
 | GitHub Releases / tags | 0 / 0 |
 | OpenJDK make build | NOT_RUN locally (no toolchain); CI equivalent is invalid (below) |
 | API budget | 91 REST calls + 4 GraphQL (cap 300) |
@@ -31,7 +31,7 @@ Read-only audit. No code changes, no merges, no PR. Owner session (com-synexia-d
 | --- | --- | --- | --- |
 | master | development | true | none (23 checks) |
 | master | --release | false | BLOCK `git.single_release_commit` ahead=15899 parent=0ab28ea86ccb |
-| superset | development | **false** | HOLD `git.single_release_commit` ahead=19605; HOLD `legacy_recipe_custody` (810 candidates); PENDING `evidence.manifest` (m3/release/queue/current/evidence.json missing); PENDING all 10 mandatory gates "no current execution receipt" |
+| superset | development | **false** | HOLD `git.single_release_commit` ahead=19605; HOLD `legacy_recipe_custody` (810 candidates); PENDING `evidence.manifest` (make/m3/release/queue/current/evidence.json missing); PENDING all 10 mandatory gates "no current execution receipt" |
 | superset | --release | false | same |
 
 All seven upgradable claims are `NOT_CLAIMED` on both refs; `immutable_text_foundation` is `IMPLEMENTED_WITH_REPOSITORY_TEST_SURFACE` but its gate workflow (`m3-first-release-admission.yml`) has never run on a master push (trigger = PR paths / `release/**` / dispatch). `test_release_admission.py`: master 4/4; superset 27/28 (one Windows-only NTFS failure, `extra\nquoted.java`).

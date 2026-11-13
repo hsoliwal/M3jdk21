@@ -13,8 +13,8 @@ frequency signals. No Map.Entry or graph-node object storage is retained by
 these algorithms; public result records detach primitive arrays on access.
 
 The two product fixture programs run under a standalone stock Java 21 runner:
-`python3 m3/tooling/module-packs/cpu-tools/fixtures/verify_wave4.py
- --owner m3/tooling/module-packs/cpu-tools --out /tmp/wave4-fresh-output`.
+`python3 make/m3/tooling/module-packs/cpu-tools/fixtures/verify_wave4.py
+ --owner make/m3/tooling/module-packs/cpu-tools --out /tmp/wave4-fresh-output`.
 The existing M3JDK21 build automatically *compiles* all new classes through
 module-source-path traversal, but its legacy fixture inventory has NOT been
 modified because that would require a verified live hash-pinned preimage of

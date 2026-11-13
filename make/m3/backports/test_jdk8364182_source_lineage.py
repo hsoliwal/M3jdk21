@@ -15,11 +15,11 @@ from pathlib import Path
 
 
 BACKPORTS = Path(__file__).resolve().parent
-REPOSITORY = BACKPORTS.parents[1]
+REPOSITORY = BACKPORTS.parents[2]
 sys.path.insert(0, str(BACKPORTS))
 TARGET = "src/hotspot/share/classfile/vmSymbols.hpp"
-LEDGER = "m3/backports/recipes/jdk-8364182/adaptation.tsv"
-SEEDS = "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv"
+LEDGER = "make/m3/backports/recipes/jdk-8364182/adaptation.tsv"
+SEEDS = "make/m3/backports/UPSTREAM_CHANGE_SEEDS.tsv"
 HISTORICAL_SUPERSEDED = "4f752ab79abf854d144e53118a2cc57a4b3cc2432140e9297079cca86dd2abab"
 PREVIOUS_21U = "691bd90288f30d9d25504526f234abc7db862e577544a7733d3fe0d09e585ff2"
 SUCCESSOR = "db65f0fdf1b3eba49a7819ab59a2c01f04b02c6e82daf8b55774d3c2404990aa"

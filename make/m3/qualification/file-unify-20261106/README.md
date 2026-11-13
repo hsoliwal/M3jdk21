@@ -38,7 +38,7 @@ dependency jars), and a new dependency 3.7.0 `properties` execution that supplie
 | `jdk.m3.file.M3FileDelta` | `m3/file` (content-delta evidence) | `jdk.m3.file.M3NioFileDelta` | companion of the NIO boundary |
 
 The decision came from the naming owner (lane session 45). `NAME_COLLISION.tsv` records it, and
-`m3/tooling/jdk-naming/RENAME_MAP.tsv` (two rows) and `RECIPE_MEMORY.tsv` (pattern `SPLIT_PACKAGE_NAME_COLLISION`)
+`make/m3/tooling/jdk-naming/RENAME_MAP.tsv` (two rows) and `RECIPE_MEMORY.tsv` (pattern `SPLIT_PACKAGE_NAME_COLLISION`)
 carry it.
 
 The rename happens inside the recipe; nothing is edited by hand:
@@ -55,7 +55,7 @@ The rename happens inside the recipe; nothing is edited by hand:
   `m3-original-provider-parser-capture-20261026`.
 
 `KEEP` rows: `M3FileMoveCandidates.java`, `M3ResourceLocks.java` and `M3FileMoveCandidatesContract.java` mention the NIO
-pair only in prose. `m3/history/verify_m3_handoff.py` pins their bytes. They are not edited, and the recipe refuses if
+pair only in prose. `make/m3/history/verify_m3_handoff.py` pins their bytes. They are not edited, and the recipe refuses if
 one of them names the pair outside a comment line.
 
 ## Ledgers
@@ -83,13 +83,13 @@ a fresh checkout. Do not merge by hand.
   - `m3-native-shadow-stream-progress-20261020` compiles `module-info.java` with a hand-picked subset of sources.
   - native-api `build.py` takes a hash-pinned m3-file jar (foundation sha256) and puts only that jar on the module
     path; it needs a re-seal by the pack owner.
-- The nlp-search input lock (`INPUTS.json`, recipe custody, `m3/docs/name-mapping.d/m3-file-nlp-search.json`) pins
+- The nlp-search input lock (`INPUTS.json`, recipe custody, `doc/m3/name-mapping.d/m3-file-nlp-search.json`) pins
   sha256 values per `m3/ports/file` path, including the token `M3File`, which now lives at
   `m3/file/src/main/java/jdk/m3/file/M3File.java`. No tool in the tree re-seals that lock, and it had already drifted on
-  master (`m3/qualification/ci-repair-20261031`, C5). Re-seal it with the module-pack owner.
+  master (`make/m3/qualification/ci-repair-20261031`, C5). Re-seal it with the module-pack owner.
 - Pre-existing problems that this branch does not touch:
   - `jdk_naming.py plan --only m3/search/` has 2 rewrites on master (#2550 files).
-  - `m3/history/verify_m3_handoff.py` refuses on master ("invalid immutable first-party recipe custody"). The KEEP files
+  - `make/m3/history/verify_m3_handoff.py` refuses on master ("invalid immutable first-party recipe custody"). The KEEP files
     are byte-identical to master.
   - `m3-resource-locks-20261021.yml` pins an older sha256 of `M3ResourceLocks.java`.
 - `jdk.m3.file.M3CharacterFlags` still lacks `combine`. That is a follow-up leaf.

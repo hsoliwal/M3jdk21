@@ -2,13 +2,13 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright 2026 Hitesh Soliwal and contributors
 set -euo pipefail
-root=$(cd "$(dirname "$0")/../.." && pwd)
+root=$(cd "$(dirname "$0")/../../.." && pwd)
 : "${M3_TEST_JDK:?matched M3JDK image required}"
 out="$root/m3/build/phase1-string-resources"
 rm -rf "$out"
 mkdir -p "$out/classes"
 "$M3_TEST_JDK/bin/javac" -Xlint:all -Werror -d "$out/classes" \
-  "$root/m3/runtime-integration/tests/M3StringPhase1ResourceProbe.java"
+  "$root/make/m3/runtime-integration/tests/M3StringPhase1ResourceProbe.java"
 for fork in 1 2 3; do
   for enabled in false true; do
     flags=()

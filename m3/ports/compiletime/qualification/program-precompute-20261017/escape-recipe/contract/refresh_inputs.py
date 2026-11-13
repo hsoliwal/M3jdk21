@@ -16,8 +16,8 @@ JAVA_TARGETS = [
     "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ItemReferenceScan.java",
     "m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3EscapePreparedTest.java",
 ]
-TEXT_TARGET = "m3/docs/name-mapping.d/m3-program-escape-precompute.json"
-HISTORY = ("m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/"
+TEXT_TARGET = "doc/m3/name-mapping.d/m3-program-escape-precompute.json"
+HISTORY = ("make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/"
            "jdk21-hash-pinned/m3-compiletime-regex-precompute/manifest.tsv")
 
 

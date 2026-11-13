@@ -4,7 +4,7 @@ import hashlib
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-MANIFEST = ROOT / "m3/compatibility/m3-default-template-source-seal.tsv"
+MANIFEST = ROOT / "make/m3/compatibility/m3-default-template-source-seal.tsv"
 
 def run():
     seen = set()

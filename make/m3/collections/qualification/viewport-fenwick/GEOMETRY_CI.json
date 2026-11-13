@@ -41,7 +41,7 @@
       "sha256": "844b2f1dddff6de42b76ecf0317203804b24f77263a19cf0dc81a09e1c6aac6d"
     },
     {
-      "path": "m3/collections/viewport-proof/fixtures/M3FenwickInverseTest.txt",
+      "path": "make/m3/collections/viewport-proof/fixtures/M3FenwickInverseTest.txt",
       "pre_git_blob": "ABSENT",
       "post_git_blob": "9cd8ffcd6967091ea4382e532d67454971c5804f",
       "sha256": "94fea1247ef713bb2c02393bf82b180015383aaff3d6a1eb76a7ef806acf2ba6"

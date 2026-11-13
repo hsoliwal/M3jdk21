@@ -6,7 +6,7 @@ on:
     paths:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexPathMasks.java'
       - 'test/jdk/jdk/m3/collections/M3IndexPathMaskWindowSelfTest.java'
-      - 'm3/collections/qualification/M3_INDEX_PATH_MASK_WINDOW_20261017.md'
+      - 'make/m3/collections/qualification/M3_INDEX_PATH_MASK_WINDOW_20261017.md'
       - '.github/workflows/m3-index-path-mask-window-20261017.yml'
   workflow_dispatch:
 permissions:

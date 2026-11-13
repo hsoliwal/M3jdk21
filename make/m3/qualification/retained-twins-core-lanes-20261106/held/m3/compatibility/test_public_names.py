@@ -37,27 +37,27 @@ class PublicNamesTest(unittest.TestCase):
 
     def test_versioned_passive_evidence_is_not_public_api(self):
         self.assertFalse(self.issue(
-            "m3/qualification/collection-convergence-20261024/REGEX_COMPACT_METADATA_RECEIPT.json"))
+            "make/m3/qualification/collection-convergence-20261024/REGEX_COMPACT_METADATA_RECEIPT.json"))
         self.assertFalse(self.issue(
-            "m3/qualification/indexed-sort-image-20261026/SOURCE_RECEIPT.tsv"))
+            "make/m3/qualification/indexed-sort-image-20261026/SOURCE_RECEIPT.tsv"))
         self.assertFalse(self.issue(
             "m3/m3-import/current-full-borrow/string-target-successor-v4.tsv"))
 
     def test_recipe_and_code_in_evidence_directory_still_refused(self):
         self.assertTrue(self.issue(
-            "m3/qualification/collection-convergence-20261024/DangerousRecipe.java"))
+            "make/m3/qualification/collection-convergence-20261024/DangerousRecipe.java"))
         self.assertTrue(self.issue(
-            "m3/qualification/collection-convergence-20261024/release.sh"))
+            "make/m3/qualification/collection-convergence-20261024/release.sh"))
         self.assertTrue(self.issue(
             ".github/workflows/m3-collection-20261024.yml"))
         self.assertTrue(self.issue(
-            "m3/docs/name-mapping.d/new-20261024.json"))
+            "doc/m3/name-mapping.d/new-20261024.json"))
 
     def test_new_experiment_version_refused(self):
-        self.assertTrue(self.issue("m3/runtime-integration/collection-views-v7/README-v2.md"))
+        self.assertTrue(self.issue("make/m3/runtime-integration/collection-views-v7/README-v2.md"))
 
     def test_nested_date_stamped_experiment_directory_refused(self):
-        self.assertTrue(self.issue("m3/collections/qualification/sort-20261022/README.md"))
+        self.assertTrue(self.issue("make/m3/collections/qualification/sort-20261022/README.md"))
 
     def test_other_jdk_public_module_m3_type_refused(self):
         self.assertTrue(self.issue("src/java.desktop/share/classes/java/awt/M3Window.java",
@@ -67,10 +67,10 @@ class PublicNamesTest(unittest.TestCase):
         self.assertFalse(self.issue(".github/workflows/public-api-naming.yml"))
 
     def test_new_mapping_fragment_refused(self):
-        self.assertTrue(self.issue("m3/docs/name-mapping.d/experimental-collections.json"))
+        self.assertTrue(self.issue("doc/m3/name-mapping.d/experimental-collections.json"))
 
     def test_grandfathered_existing_path_may_be_modified(self):
-        self.assertFalse(self.issue("m3/docs/name-mapping.d/experimental-20261022.json", status="M"))
+        self.assertFalse(self.issue("doc/m3/name-mapping.d/experimental-20261022.json", status="M"))
 
     def test_java_package_disagreement_refused(self):
         self.assertTrue(self.issue("src/java.base/share/classes/java/util/CollectionViews.java",
@@ -117,7 +117,7 @@ class PublicNamesTest(unittest.TestCase):
         self.assertFalse(self.issue(
             "test/jdk/java/util/CollectionViews/FilteredOwnerMembershipTest.java",
             "class FilteredOwnerMembershipTest {}"))
-        self.assertFalse(self.issue("m3/compatibility/collection-views/README.md"))
+        self.assertFalse(self.issue("make/m3/compatibility/collection-views/README.md"))
 
     def test_reviewed_immutable_qualification_receipts_are_data_not_public_names(self):
         self.assertEqual(len(GATE.QUALIFICATION_RECEIPTS), 17)
@@ -130,13 +130,13 @@ class PublicNamesTest(unittest.TestCase):
 
     def test_unreviewed_evidence_dates_and_versions_remain_refused(self):
         attempted = (
-            "m3/qualification/collection-convergence-20261024/NEW_RECEIPT.json",
-            "m3/qualification/collection-convergence-20261024/RECEIPT-v2.json",
-            "m3/qualification/collection-convergence-20261025/RECEIPT.json",
-            "m3/qualification/experiment-20261024/RECEIPT.json",
+            "make/m3/qualification/collection-convergence-20261024/NEW_RECEIPT.json",
+            "make/m3/qualification/collection-convergence-20261024/RECEIPT-v2.json",
+            "make/m3/qualification/collection-convergence-20261025/RECEIPT.json",
+            "make/m3/qualification/experiment-20261024/RECEIPT.json",
             "m3/m3-import/current-full-borrow/string-source-observation-v4.tsv",
             ".github/workflows/public-api-naming-20261026.yml",
-            "m3/collections/qualification/sort-20261026/README.md",
+            "make/m3/collections/qualification/sort-20261026/README.md",
         )
         for path in attempted:
             with self.subTest(path=path):
@@ -150,7 +150,7 @@ class PublicNamesTest(unittest.TestCase):
             "src/java.base/share/classes/java/util/M3Refactor20261026.java",
             "package java.util; public class M3Refactor20261026 {}"))
         self.assertTrue(self.issue(
-            "m3/qualification/collection-convergence-20261024/Receipt.java"))
+            "make/m3/qualification/collection-convergence-20261024/Receipt.java"))
         self.assertFalse(self.issue(
             GATE.QUALIFICATION_RECEIPT_ROOT + "RECEIPT.json", status="M"))
 
@@ -249,15 +249,15 @@ class PublicNamesTest(unittest.TestCase):
 
 
     def test_historical_classver_paths_remain_refused_without_verified_evidence(self):
-        sealed = "m3/migration/intake-20261005/current-752-ci/a3-producer/chain/02-compile.stdout.log"
+        sealed = "make/m3/migration/intake-20261005/current-752-ci/a3-producer/chain/02-compile.stdout.log"
         self.assertIn("unstable date/version identifier", self.issue(sealed))
         self.assertIn("unstable date/version identifier", self.issue(sealed, status="R"))
         self.assertIn("unstable date/version identifier",
-                      self.issue("m3/migration/intake-20261005/unlisted.log"))
+                      self.issue("make/m3/migration/intake-20261005/unlisted.log"))
 
     def test_verified_closed_classver_skips_only_listed_added_history(self):
-        known = "m3/migration/intake-20261005/current-752-ci/a3-producer/chain/02-compile.stdout.log"
-        unknown = "m3/migration/intake-20261005/forged.log"
+        known = "make/m3/migration/intake-20261005/current-752-ci/a3-producer/chain/02-compile.stdout.log"
+        unknown = "make/m3/migration/intake-20261005/forged.log"
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)
             def git(*args):
@@ -295,7 +295,7 @@ class PublicNamesTest(unittest.TestCase):
             git("add", ".")
             git("commit", "-qm", "base")
             base = git("rev-parse", "HEAD")
-            name = "m3/migration/intake-20261005/forged.log"
+            name = "make/m3/migration/intake-20261005/forged.log"
             candidate = root / name
             candidate.parent.mkdir(parents=True, exist_ok=True)
             candidate.write_text("forged\n")
@@ -310,8 +310,8 @@ class PublicNamesTest(unittest.TestCase):
     def test_unlisted_dated_source_still_refuses_even_with_classver_evidence(self):
         self.assertIn("unstable date/version identifier",
                       self.issue(".github/workflows/m3-new-20261029.yml"))
-        self.assertTrue(self.issue("m3/qualification/fake-20261029/UnknownRecipe.java"))
-        self.assertTrue(self.issue("m3/docs/name-mapping.d/unlisted-20261029.json"))
+        self.assertTrue(self.issue("make/m3/qualification/fake-20261029/UnknownRecipe.java"))
+        self.assertTrue(self.issue("doc/m3/name-mapping.d/unlisted-20261029.json"))
 
 if __name__ == "__main__":
     unittest.main()

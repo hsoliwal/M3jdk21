@@ -5,7 +5,7 @@ import hashlib
 from pathlib import Path
 import re
 
-REPO = Path(__file__).resolve().parents[4]
+REPO = Path(__file__).resolve().parents[5]
 CRATE = (REPO / 'm3/tooling/migration-recipes/src/main/resources/com/m3/'
          'rewrite/hash-pinned-java/m3-index-path-rank-20261017')
 MANIFEST = CRATE / 'manifest.tsv'

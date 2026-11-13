@@ -5,21 +5,21 @@ on:
     branches:
       - "m3/j491-materialization-substrate-20261006"
     paths:
-      - "m3/backports/recipes/j491/**"
-      - "m3/backports/j491_materialize.py"
-      - "m3/backports/test_j491_materialize.py"
-      - "m3/backports/commit_patch_atoms.py"
-      - "m3/backports/test_commit_patch_atoms.py"
-      - "m3/backports/file_delta_inventory.py"
+      - "make/m3/backports/recipes/j491/**"
+      - "make/m3/backports/j491_materialize.py"
+      - "make/m3/backports/test_j491_materialize.py"
+      - "make/m3/backports/commit_patch_atoms.py"
+      - "make/m3/backports/test_commit_patch_atoms.py"
+      - "make/m3/backports/file_delta_inventory.py"
       - ".github/workflows/m3-jep491-materialization.yml"
   pull_request:
     paths:
-      - "m3/backports/recipes/j491/**"
-      - "m3/backports/j491_materialize.py"
-      - "m3/backports/test_j491_materialize.py"
-      - "m3/backports/commit_patch_atoms.py"
-      - "m3/backports/test_commit_patch_atoms.py"
-      - "m3/backports/file_delta_inventory.py"
+      - "make/m3/backports/recipes/j491/**"
+      - "make/m3/backports/j491_materialize.py"
+      - "make/m3/backports/test_j491_materialize.py"
+      - "make/m3/backports/commit_patch_atoms.py"
+      - "make/m3/backports/test_commit_patch_atoms.py"
+      - "make/m3/backports/file_delta_inventory.py"
       - ".github/workflows/m3-jep491-materialization.yml"
   workflow_dispatch:
 
@@ -58,12 +58,12 @@ jobs:
           set -euo pipefail
           mkdir -p target/j491
           git -C "$J491_DONOR" diff --name-only             8a2a75e56de4497da48f43b3be3eb71bf3ef75ab             78b80150e009745b8f28d36c3836f18ad0ca921f | LC_ALL=C sort             > target/j491/UPSTREAM_PATHS.txt
-          LC_ALL=C sort m3/backports/recipes/j491/PATHS.txt > target/j491/CHECKED_PATHS.txt
+          LC_ALL=C sort make/m3/backports/recipes/j491/PATHS.txt > target/j491/CHECKED_PATHS.txt
           test "$(wc -l < target/j491/UPSTREAM_PATHS.txt)" -eq 246
           cmp target/j491/UPSTREAM_PATHS.txt target/j491/CHECKED_PATHS.txt
 
       - name: Unit-test exact-ref inventory classifier and patch atoms
-        working-directory: m3/backports
+        working-directory: make/m3/backports
         run: |
           set -euo pipefail
           python3 -m unittest -v             test_file_delta_inventory.py             test_j491_materialize.py             test_commit_patch_atoms.py
@@ -71,13 +71,13 @@ jobs:
       - name: Emit deterministic architecture and domain DAG
         run: |
           set -euo pipefail
-          python3 m3/backports/j491_materialize.py             --paths m3/backports/recipes/j491/PATHS.txt             --out target/j491/classification
+          python3 make/m3/backports/j491_materialize.py             --paths make/m3/backports/recipes/j491/PATHS.txt             --out target/j491/classification
           test "$(($(wc -l < target/j491/classification/ARCH_DAG.tsv)-1))" -eq 246
 
       - name: Materialize target-side FILE patch candidates without mutating checkout
         run: |
           set -euo pipefail
-          python3 m3/backports/commit_patch_atoms.py             --donor-repo "$J491_DONOR"             --target-root "$PWD"             --parent 8a2a75e56de4497da48f43b3be3eb71bf3ef75ab             --commit 78b80150e009745b8f28d36c3836f18ad0ca921f             --paths m3/backports/recipes/j491/PATHS.txt             --out target/j491/patch-atoms
+          python3 make/m3/backports/commit_patch_atoms.py             --donor-repo "$J491_DONOR"             --target-root "$PWD"             --parent 8a2a75e56de4497da48f43b3be3eb71bf3ef75ab             --commit 78b80150e009745b8f28d36c3836f18ad0ca921f             --paths make/m3/backports/recipes/j491/PATHS.txt             --out target/j491/patch-atoms
           python3 - <<'PY'
           import csv
           from collections import Counter
@@ -122,7 +122,7 @@ jobs:
           donor = Path(os.environ["J491_DONOR"])
           base_paths = {
               line.strip()
-              for line in Path("m3/backports/recipes/j491/PATHS.txt").read_text().splitlines()
+              for line in Path("make/m3/backports/recipes/j491/PATHS.txt").read_text().splitlines()
               if line.strip()
           }
           followups = [
@@ -149,7 +149,7 @@ jobs:
           PY
 
       - name: Verify M3 backport Python substrate
-        working-directory: m3/backports
+        working-directory: make/m3/backports
         run: |
           set -euo pipefail
           python3 -m compileall -q             file_delta_inventory.py             generate_recipe_crates.py             j491_materialize.py             commit_patch_atoms.py

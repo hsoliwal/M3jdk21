@@ -14,10 +14,10 @@ import subprocess
 import sys
 
 HERE = Path(__file__).resolve().parent
-REPO = HERE.parents[1]
+REPO = HERE.parents[2]
 MODULE = HERE
 RECIPE = HERE / 'recipe'
-RESOURCES = REPO / 'm3/tooling/migration-recipes/src/main/resources'
+RESOURCES = REPO / 'make/m3/tooling/migration-recipes/src/main/resources'
 CRATE = 'm3-collection-lanes'
 PACKAGE = 'jdk.m3.collections'
 MODULAR = True

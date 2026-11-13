@@ -3,7 +3,7 @@ name: M3 strict immutable indexed snapshots Java JNI
 on:
   pull_request:
     paths:
-      - 'm3/collections/qualification/m3jdk21-index-readonly-20261018/**'
+      - 'make/m3/collections/qualification/m3jdk21-index-readonly-20261018/**'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectIndexSnapshot.java'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexedListSnapshot.java'
       - 'test/jdk/jdk/m3/collections/M3IndexedReadOnlyNoopProof.java'
@@ -26,7 +26,7 @@ jobs:
       - name: Exact canonical recipe output hashes and source identity
         run: |
           set -eu
-          Q=m3/collections/qualification/m3jdk21-index-readonly-20261018/recipe
+          Q=make/m3/collections/qualification/m3jdk21-index-readonly-20261018/recipe
           awk -F '\t' '{print $3 "  " $1}' "$Q/manifest.tsv" | sha256sum -c -
           awk -F '\t' -v q="$Q" '{print $3 "  " q "/" $4}' "$Q/manifest.tsv" | sha256sum -c -
           cmp "$Q/M3ObjectIndexSnapshot.java.txt" src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectIndexSnapshot.java

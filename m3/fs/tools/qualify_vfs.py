@@ -119,8 +119,8 @@ def main(argv=None):
     for name in ("java", "javac", "jar", "jmod", "jlink"):
         input_file(jdk / "bin" / name)
     input_file(jdk / "jmods/java.base.jmod")
-    packer = input_file(repository / "m3/tooling/jmod-recipes/tools/jmod_pack.py")
-    kernel = repository / "m3/tooling/module-packs/kernel/src/main/java"
+    packer = input_file(repository / "make/m3/tooling/jmod-recipes/tools/jmod_pack.py")
+    kernel = repository / "make/m3/tooling/module-packs/kernel/src/main/java"
     if not kernel.is_dir() or not list(kernel.rglob("*.java")):
         raise ValueError("existing shared module-pack graph owner is missing")
     probe = input_file(module / PROBE)

@@ -10,7 +10,7 @@ import subprocess
 import tempfile
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[2]
+ROOT = HERE.parents[3]
 STUB_M3 = """package java.lang;
 final class M3String implements CharSequence {
   private final String text;

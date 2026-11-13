@@ -38,7 +38,7 @@
       "java.lang.M3String.isLiteralRegex"
     ],
     "publicJdkApiChange": false,
-    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed: 65 targets, target_commit c2eca9406b (String.java, M3String.java after-images); apply.py --check state=after; test_recipe.py 8/8"
+    "runtimeRecipe": "make/m3/runtime-integration/recipe re-sealed: 65 targets, target_commit c2eca9406b (String.java, M3String.java after-images); apply.py --check state=after; test_recipe.py 8/8"
   },
   "runtimeDependencyOnSynexia": false,
   "publicJdkReplacement": false,

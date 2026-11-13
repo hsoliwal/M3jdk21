@@ -30,9 +30,9 @@
     "rule": "R2",
     "ruleText": "A received source dir carries the full release version; only release tags are received, never snapshots",
     "directory": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6",
-    "evidenceDirectory": "m3/collections/receiving/eclipse-collections-14.0.0-snapshot-00a668d6-20261024",
+    "evidenceDirectory": "make/m3/collections/receiving/eclipse-collections-14.0.0-snapshot-00a668d6-20261024",
     "decision": "Owner-approved exception, 2026-10-24",
-    "record": "m3/collections/NAMING.md, Exceptions table",
+    "record": "make/m3/collections/NAMING.md, Exceptions table",
     "reason": "No release contains the fork M3 work; fork master acefe9c62227 compiles with --release 21 and --release 17; the name carries the snapshot version and the upstream commit 00a668d6"
   },
   "deferred": [

@@ -211,7 +211,7 @@ def report(items: Sequence[JepMatrixRow]) -> dict[str, object]:
 def work(root: Path) -> list[JepMatrixRow]:
     root = root.resolve(strict=True)
     authority = release_jep_authority.verify_repository_authority(root)
-    backports = root / "m3" / "backports"
+    backports = root / "make" / "m3" / "backports"
     catalogue = source_witness.read_catalogue(backports / "JEP_CATALOGUE.tsv")
     priority = jep_residue.read_tsv(backports / "POST21_PRIORITY_COMPATIBILITY.tsv")
     rows = assemble(catalogue, authority, source_witness.inspect(root, catalogue),

@@ -22,11 +22,11 @@ TASK = Path(__file__).resolve().parent
 SDK = TASK / "sdk"
 RESOURCE = SDK / "src/main/resources/jdk/internal/m3/rewrite/charcopy-current-successor-20261019"
 FIXTURES = SDK / "src/test/resources/jdk/internal/m3/rewrite/charcopy-current-successor-20261019"
-OLD = "m3/runtime-integration/char-array-copy/recipe"
+OLD = "make/m3/runtime-integration/char-array-copy/recipe"
 LEGACY = ["src/java.base/share/classes/java/lang/MIndexString.java",
-          "m3/runtime-integration/tests/MIndexStringInvariant.java"]
+          "make/m3/runtime-integration/tests/MIndexStringInvariant.java"]
 OWNER = "src/java.base/share/classes/java/lang/M3String.java"
-INVARIANT = "m3/runtime-integration/tests/M3StringInvariant.java"
+INVARIANT = "make/m3/runtime-integration/tests/M3StringInvariant.java"
 SUITE = "jdk.internal.m3.rewrite.M3CharcopyCurrentSuccessorRecipeTest"
 METHODS = {"namedCurrentEightKeepInputsReplayAsExactFixedPoint",
            "everyDriftMissingDuplicateLegacyAndMixedInputRefuses",

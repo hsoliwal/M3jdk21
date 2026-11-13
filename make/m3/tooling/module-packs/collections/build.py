@@ -95,7 +95,7 @@ def main():
     args = parser.parse_args()
     home = args.jdk_home.resolve(strict=True)
     repo = args.repo_root.resolve(strict=True)
-    pack = repo / "m3/tooling/module-packs/collections"
+    pack = repo / "make/m3/tooling/module-packs/collections"
     if not re.search(r'^JAVA_VERSION="21(?:[.+"-])', (home / "release").read_text(), re.MULTILINE):
         raise ValueError("Java 21 development toolchain required")
     if platform.system() != "Linux":
@@ -109,7 +109,7 @@ def main():
     view_sources = []  # one module since 2026-11-06: the former optional owners are collection sources
     native_sources = [repo / "m3/collections/src/main/native/collections" / name
                       for name in ("m3_index_mask_compactor.c", "m3_index_mask_window.c")]
-    packager = repo / "m3/tooling/jmod-recipes/tools/jmod_pack.py"
+    packager = repo / "make/m3/tooling/jmod-recipes/tools/jmod_pack.py"
     for source in [*collection_sources, *view_sources, *native_sources, packager]:
         source.resolve(strict=True)
     if not collection_sources:

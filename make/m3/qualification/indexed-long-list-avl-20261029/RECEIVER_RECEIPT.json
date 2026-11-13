@@ -71,9 +71,9 @@
   },
   "canonical_evidence_path": "synexia-openrewrite-recipes/recipe-crates/m3-indexed-long-list-avl-20261029/corrections/capacity-widening",
   "historical_receiver_receipt": {
-    "path": "m3/qualification/indexed-long-list-avl/original-receiver-receipt.md",
+    "path": "make/m3/qualification/indexed-long-list-avl/original-receiver-receipt.md",
     "git_blob": "b493b3a9a89fad9c2237122bfe8ea6fc40386c86",
-    "original_path": "m3/collections/qualification/indexed-long-list-avl-20261029/RECEIPT.md",
+    "original_path": "make/m3/collections/qualification/indexed-long-list-avl-20261029/RECEIPT.md",
     "original_commit": "354cca3d8cefed3b2cf79aa11d44eb3a7a052064",
     "status": "preserved verbatim; historical qualification limitations remain historical"
   },

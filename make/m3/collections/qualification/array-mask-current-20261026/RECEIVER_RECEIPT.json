@@ -52,7 +52,7 @@
     }
   ],
   "catalogue": {
-    "path": "m3/collections/algorithm-catalog/current-array-mask-20261026.tsv",
+    "path": "make/m3/collections/algorithm-catalog/current-array-mask-20261026.tsv",
     "git_blob": "3d80041c67be0387679ff25084986310a8a01b15",
     "categories": 11,
     "problem_category": "STABLE_BULK_REMOVE_MASK",

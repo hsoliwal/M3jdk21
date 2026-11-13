@@ -6,8 +6,8 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3CollectionViews.java'
       - 'test/jdk/jdk/m3/collections/M3FilteredIsEmptyContract.java'
       - 'test/jdk/jdk/m3/collections/M3FilteredIsEmptyTest.java'
-      - 'm3/collections/qualification/filtered-isempty-20261021/**'
-      - 'm3/collections/algorithm-catalog/filtered-isempty-20261021/**'
+      - 'make/m3/collections/qualification/filtered-isempty-20261021/**'
+      - 'make/m3/collections/algorithm-catalog/filtered-isempty-20261021/**'
       - '.github/workflows/m3-filtered-isempty-direct-20261021.yml'
   workflow_dispatch:
 concurrency:
@@ -27,4 +27,4 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Exact source + strict Java21 + baseline/candidate differential
-        run: bash m3/collections/qualification/filtered-isempty-20261021/verify.sh
+        run: bash make/m3/collections/qualification/filtered-isempty-20261021/verify.sh

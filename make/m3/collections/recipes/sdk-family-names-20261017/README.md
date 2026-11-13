@@ -17,9 +17,9 @@ duplicate ownership, corrupt resources, cancellation and late edits. The Java re
 qualification harness, not another recipe engine or an OpenRewrite scheduler substitute.
 
 ```sh
-python3 m3/collections/recipes/sdk-family-names-20261017/verify.py --apply
-python3 m3/collections/recipes/sdk-family-names-20261017/verify.py
-mvn -B -f m3/collections/recipes/sdk-family-names-20261017/pom.xml clean verify
+python3 make/m3/collections/recipes/sdk-family-names-20261017/verify.py --apply
+python3 make/m3/collections/recipes/sdk-family-names-20261017/verify.py
+mvn -B -f make/m3/collections/recipes/sdk-family-names-20261017/pom.xml clean verify
 mvn -B -f m3/collections/interop/pom.xml clean verify
 ```
 

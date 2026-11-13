@@ -167,7 +167,7 @@
     "Linux qualification uses an existing sealed M3 JDK image. No fresh whole current HotSpot/JDK build, jtreg, full Synexia reactor or non-Linux acceptance was performed.",
     "String remains the active global receiving phase. No java.util receiving promotion or phase advance is claimed."
   ],
-  "handoff": "m3/tooling/module-packs/text-tools/refinement-proofs/tools4j-tr-20261019",
+  "handoff": "make/m3/tooling/module-packs/text-tools/refinement-proofs/tools4j-tr-20261019",
   "scope": "jdk.m3.text.TextTools.tr",
   "qualified_leaf_count": 1,
   "new_handoff_documents": [
@@ -177,7 +177,7 @@
   "handoff_documents_are_additional_to_qualified_leaf_count": true,
   "leaves": [
     {
-      "path": "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/TextTools.java",
+      "path": "make/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/TextTools.java",
       "before_sha256": "854030b58cbb310f2f231d80088ddf92c16f733d26e7cfa2eaeb744c31e1e7c6",
       "after_sha256": "736a57774078e3bea6b4987ba92b205b6d9aef76d253e90df5669c3c3300e892",
       "after_bytes": 20847,

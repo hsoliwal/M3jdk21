@@ -3,7 +3,7 @@
 # M3JDK regex cursor port
 
 Status: isolated Apache-2.0 proving ground. Not on the bootstrap path, no `src/**` change, no
-public JDK API. Design: [`m3/docs/regex-cursor/DESIGN.md`](../../docs/regex-cursor/DESIGN.md).
+public JDK API. Design: [`doc/m3/regex-cursor/DESIGN.md`](../../../doc/m3/regex-cursor/DESIGN.md).
 Donors: [`FOSS_REUSE_DECISION.tsv`](FOSS_REUSE_DECISION.tsv), [`NOTICE`](NOTICE).
 
 | Class | Role |

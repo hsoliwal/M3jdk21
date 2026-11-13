@@ -4,7 +4,7 @@ on:
     paths:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredViews.java'
       - 'test/jdk/jdk/m3/collections/M3ReadOnlyMapDefaults*.java'
-      - 'm3/collections/qualification/m3-readonly-filtered-map-defaults-20261017/**'
+      - 'make/m3/collections/qualification/m3-readonly-filtered-map-defaults-20261017/**'
       - '.github/workflows/m3-readonly-filtered-map-defaults-receiver-20261017.yml'
   workflow_dispatch:
 concurrency:
@@ -21,12 +21,12 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Verify canonical manifest, source and recipe-template bytes
-        run: python3 m3/collections/qualification/m3-readonly-filtered-map-defaults-20261017/verify.py
+        run: python3 make/m3/collections/qualification/m3-readonly-filtered-map-defaults-20261017/verify.py
       - name: Original exact source must fail the new strict UOE oracle
         shell: bash
         run: |
           set -euo pipefail
-          mirror=m3/collections/qualification/m3-readonly-filtered-map-defaults-20261017/recipe-mirror
+          mirror=make/m3/collections/qualification/m3-readonly-filtered-map-defaults-20261017/recipe-mirror
           mkdir -p "$RUNNER_TEMP/m3-old-src" "$RUNNER_TEMP/m3-old-classes"
           cp "$mirror/pre/M3FilteredViews.java.txt" "$RUNNER_TEMP/m3-old-src/M3FilteredViews.java"
           javac --release 21 -proc:none -Xlint:all -Werror -d "$RUNNER_TEMP/m3-old-classes" \

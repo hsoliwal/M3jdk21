@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /** Buffer and source-lifetime regressions against the real POSIX JNI mapping. */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/m3-pmem-sdk/src/junit/java/test/PmemSourceSlicesJUnitTest.java blob cce4288cc865; recipe m3/optane/recipe/pmem-source-image-20261106/relocate.py v3
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/m3-pmem-sdk/src/junit/java/test/PmemSourceSlicesJUnitTest.java blob cce4288cc865; recipe make/m3/optane/recipe/pmem-source-image-20261106/relocate.py v3
 public final class PmemSourceSlicesJUnitTest {
     private static final int EMPTY_INDEX = 0;
     private static final int LONG_INDEX = 1;

@@ -22,10 +22,10 @@
   "fenwick_exact_blobs": {
     "m3/collections/src/main/java/jdk/m3/collections/M3SparseExtents.java": "ba6b2ebd0fac9f737deb28bce9385fff07164997",
     ".github/workflows/m3-sparse-viewport-geometry.yml": "bc5a1a4e0e2d3ec2049caf2cf360c0a64c1ec30c",
-    "m3/collections/viewport-proof/fixtures/M3FenwickInverseTest.txt": "9cd8ffcd6967091ea4382e532d67454971c5804f",
-    "m3/collections/qualification/viewport-fenwick/DOCUMENTATION.json": "75f175cf3b104d7e870dd464726ad8484dafe39f",
-    "m3/collections/qualification/viewport-fenwick/GEOMETRY_CI.json": "11d86595f9b63fc38e51342ddfbf0e3ffd731f5e",
-    "m3/collections/qualification/viewport-fenwick/RECEIVING.json": "3a4d655b23e6c360c6b5920f7ef9ea9052657646"
+    "make/m3/collections/viewport-proof/fixtures/M3FenwickInverseTest.txt": "9cd8ffcd6967091ea4382e532d67454971c5804f",
+    "make/m3/collections/qualification/viewport-fenwick/DOCUMENTATION.json": "75f175cf3b104d7e870dd464726ad8484dafe39f",
+    "make/m3/collections/qualification/viewport-fenwick/GEOMETRY_CI.json": "11d86595f9b63fc38e51342ddfbf0e3ffd731f5e",
+    "make/m3/collections/qualification/viewport-fenwick/RECEIVING.json": "3a4d655b23e6c360c6b5920f7ef9ea9052657646"
   },
   "combined_workflow": {
     "source_pr": 2047,
@@ -43,19 +43,19 @@
     "original_frame_tree_evolved": 2,
     "details": [
       {
-        "path": "m3/collections/viewport-proof/fixtures/M3FenwickInverseTest.txt",
+        "path": "make/m3/collections/viewport-proof/fixtures/M3FenwickInverseTest.txt",
         "kind": "ABSENT"
       },
       {
-        "path": "m3/collections/qualification/viewport-fenwick/DOCUMENTATION.json",
+        "path": "make/m3/collections/qualification/viewport-fenwick/DOCUMENTATION.json",
         "kind": "ABSENT"
       },
       {
-        "path": "m3/collections/qualification/viewport-fenwick/GEOMETRY_CI.json",
+        "path": "make/m3/collections/qualification/viewport-fenwick/GEOMETRY_CI.json",
         "kind": "ABSENT"
       },
       {
-        "path": "m3/collections/qualification/viewport-fenwick/RECEIVING.json",
+        "path": "make/m3/collections/qualification/viewport-fenwick/RECEIVING.json",
         "kind": "ABSENT"
       },
       {

@@ -60,7 +60,7 @@ class RecipeCustodyTest(unittest.TestCase):
         self.verify()
 
     def test_legacy_target_tooling_scope_is_rejected_even_without_runtime_dependency(self):
-        self.row("EXTERNAL_RECIPE_TOOL")["target_scope"] = "m3/tooling/**"
+        self.row("EXTERNAL_RECIPE_TOOL")["target_scope"] = "make/m3/tooling/**"
         with self.assertRaisesRegex(SystemExit, "exclusively in Synexia"):
             self.verify()
 

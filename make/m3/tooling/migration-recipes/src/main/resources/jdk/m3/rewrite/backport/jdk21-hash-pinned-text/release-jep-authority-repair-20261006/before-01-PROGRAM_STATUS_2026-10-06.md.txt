@@ -13,8 +13,8 @@ Canonical baseline for this snapshot:
 Regenerate repository-owned counts with:
 
 ```bash
-python3 m3/backports/program_status.py --root .
-python3 m3/backports/jep_residue.py --root . --out m3/backports/JEP_RESIDUE_QUEUE.tsv
+python3 make/m3/backports/program_status.py --root .
+python3 make/m3/backports/jep_residue.py --root . --out make/m3/backports/JEP_RESIDUE_QUEUE.tsv
 ```
 
 ## Released JEP denominator

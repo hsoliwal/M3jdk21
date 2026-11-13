@@ -10,7 +10,7 @@
 # Pass = leaf compiles clean, natives build clean, and no fixture that passes on live fails on leaf.
 cd "$(dirname "$0")"
 J="C:/Program Files/Java/jdk-21/bin"; JI="C:/Program Files/Java/jdk-21/include"; A=$(cygpath -m "$PWD")
-G=/h/m3-scratch/repos/M3jdk21-release.git; R=${1:?master}; T=m3/tooling/module-packs
+G=/h/m3-scratch/repos/M3jdk21-release.git; R=${1:?master}; T=make/m3/tooling/module-packs
 W=coeg; rm -rf $W; mkdir -p $W/tree $W/jb/java/util/concurrent
 GIT_DIR=$G git ls-tree -r $R -- $T/text-tools/src $T/text-tools/native $T/text-tools/fixtures $T/cpu-tools/src $T/cpu-tools/fixtures | awk '{print $3}' | GIT_DIR=$G git fetch -q --filter=blob:none --stdin origin 2>/dev/null
 GIT_DIR=$G git ls-tree -r $R -- $T/text-tools/src $T/text-tools/native $T/text-tools/fixtures $T/cpu-tools/src $T/cpu-tools/fixtures | while IFS=$'\t' read -r meta p; do

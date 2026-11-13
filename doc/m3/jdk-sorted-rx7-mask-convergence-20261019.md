@@ -20,7 +20,7 @@ The canonical Java recipe generated three changed source files; second applicati
 
 The retained combined host proof records: 1,031,319 sorted-split assertions; 337,790 top-level filtered-owner assertions; 251,558 RX7-find oracle assertions in normal and interpreted runs; 270,606 real JNI mask assertions; three missing-library checks; and 632,868 assertions from the preceding RX7 Java/JNI power corpus. Counts are assertions, not separate test methods; repeated runs are not summed as unique coverage. Java21 strict compilation, generated JNI headers, -Xcheck:jni and fatal UBSan for the mask kernel were used. Host-patched components are not a complete source-built JDK or production libjava linkage proof.
 
-`m3/collections/qualification/jdk-rx7-view-convergence-20261019/CATALOGUE.tsv` is an exact read-only canonical snapshot. It records GitHub donor identities, LeetCode/HackerRank/GeeksforGeeks problem categories and preconditions, not copied submissions/editorials. In particular, pair-multiplicity XOR cancellation cannot replace general NFA OR/union.
+`make/m3/collections/qualification/jdk-rx7-view-convergence-20261019/CATALOGUE.tsv` is an exact read-only canonical snapshot. It records GitHub donor identities, LeetCode/HackerRank/GeeksforGeeks problem categories and preconditions, not copied submissions/editorials. In particular, pair-multiplicity XOR cancellation cannot replace general NFA OR/union.
 
 The deterministic JNI region fixture transfers 1 rather than 128 row values for its sparse/dense limit-one cases and 130 rather than 300 for its sparse multi-chunk case. State-byte reads are unchanged. Those counts are separate from the real JNI correctness run and are not a universal timing claim.
 
@@ -33,7 +33,7 @@ From a checkout of the exact receiver commit printed on this PR:
 ```sh
 M3_JAVA_HOME=/absolute/path/to/java21 \
 M3_EXPECTED_COMMIT=<full-receiver-commit-from-the-PR> \
-bash m3/runtime-integration/check-m3rx7-view-convergence.sh
+bash make/m3/runtime-integration/check-m3rx7-view-convergence.sh
 ```
 
 The publication runner retains the qualified compile/execution sequence and adds a commit-pinned byte-comparison guard over every admitted input; it also checks production SHA-256 seals and logs SHA-256 for all consumed files. Bash syntax and invalid-pin refusal passed. The newly guarded wrapper has NOT_RUN end-to-end in the publication environment. The earlier completed host log is retained unchanged, not relabeled as a fresh guarded or hosted run.

@@ -1,7 +1,7 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
-# m3/core: repair the JDK-naming rename damage that stopped m3/build.sh
+# m3/core: repair the JDK-naming rename damage that stopped make/m3/build.sh
 
-`m3/build.sh` stopped at `M3NumberSpaceContractTest` on master. Replaying it fix by fix (GATES.tsv row 2) found three
+`make/m3/build.sh` stopped at `M3NumberSpaceContractTest` on master. Replaying it fix by fix (GATES.tsv row 2) found three
 kinds of damage from the rename fe35ea98841. No production source changes.
 
 1. **Donor facts renamed in test literals.** Three tests compare manifest rows against the donor source path in
@@ -15,5 +15,5 @@ kinds of damage from the rename fe35ea98841. No production source changes.
    type `jdk.m3.text.M3NumberSpace`. The field map and target map still named `synexia.*` and `com.m3.text.*`.
    76 cells now follow the code: 56 records, 19 family and 1 owner. Donor columns are untouched.
 
-After the fixes, `m3/build.sh` passes 72 of 72 runs (18 programs × 4 modes). The core-contract manifest is re-pinned.
-The lesson is recorded in m3/tooling/jdk-naming/RECIPE_MEMORY.tsv (PATTERN:DONOR_FACT_AND_ESCAPED_SPANS).
+After the fixes, `make/m3/build.sh` passes 72 of 72 runs (18 programs × 4 modes). The core-contract manifest is re-pinned.
+The lesson is recorded in make/m3/tooling/jdk-naming/RECIPE_MEMORY.tsv (PATTERN:DONOR_FACT_AND_ESCAPED_SPANS).

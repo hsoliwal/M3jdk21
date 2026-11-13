@@ -20,7 +20,7 @@ import re
 import sys
 from collections import Counter
 
-LEAF = "m3/tooling/skija-absorb/leaf1"
+LEAF = "make/m3/tooling/skija-absorb/leaf1"
 TAB, NL = "\t", "\n"
 PINNED = "-XX:+UnlockExperimentalVMOptions -XX:hashCode=2"
 PERF_FLAGS = ("-Xmx512m -XX:-TieredCompilation -Xbatch -XX:+UnlockExperimentalVMOptions "

@@ -4,11 +4,11 @@ name: M3 Synexia family naming receiver
 on:
   pull_request:
     paths:
-      - 'm3/compatibility/M3_FAMILY_NAMING_RECEIVER.md'
-      - 'm3/compatibility/m3-family-naming-pin.tsv'
-      - 'm3/compatibility/m3-family-naming-target-disposition.tsv'
-      - 'm3/compatibility/check_m3_family_naming.py'
-      - 'm3/docs/M3JDK_M3_PORTING_INVARIANT.md'
+      - 'make/m3/compatibility/M3_FAMILY_NAMING_RECEIVER.md'
+      - 'make/m3/compatibility/m3-family-naming-pin.tsv'
+      - 'make/m3/compatibility/m3-family-naming-target-disposition.tsv'
+      - 'make/m3/compatibility/check_m3_family_naming.py'
+      - 'doc/m3/M3JDK_M3_PORTING_INVARIANT.md'
       - '.github/workflows/m3-family-naming-receiver.yml'
   workflow_dispatch:
 
@@ -28,4 +28,4 @@ jobs:
       - name: Diff hygiene
         run: git diff --check
       - name: Verify pinned family naming receiver
-        run: python3 m3/compatibility/check_m3_family_naming.py
+        run: python3 make/m3/compatibility/check_m3_family_naming.py

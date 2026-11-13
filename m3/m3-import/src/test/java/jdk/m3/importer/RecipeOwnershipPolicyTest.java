@@ -136,12 +136,12 @@ final class RecipeOwnershipPolicyTest {
         assertEquals(
                 "jdk.m3.rewrite.scope.M3EditScope",
                 RecipeOwnershipPolicy.ownerFromPath(
-                        "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/"
+                        "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/"
                                 + "scope/M3EditScope.java"));
         assertEquals(
                 "jdk.m3.rewrite.InstallIndexStringCompatibility",
                 RecipeOwnershipPolicy.ownerFromPath(
-                        "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/"
+                        "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/"
                                 + "InstallIndexStringCompatibility.java"));
 
         assertThrows(

@@ -7,8 +7,8 @@ on:
       - '.github/workflows/m3-source-qualified-tq-model.yml'
       - 'm3/vendor/third_party/**/pom.xml'
       - 'm3/vendor/third_party/pom.xml'
-      - 'm3/tooling/tq-sync/pom.xml'
-      - 'm3/tooling/tq-sync/source-reactor/**'
+      - 'make/m3/tooling/tq-sync/pom.xml'
+      - 'make/m3/tooling/tq-sync/source-reactor/**'
 permissions:
   contents: read
 concurrency:
@@ -185,7 +185,7 @@ jobs:
           py=[os.environ["M3_PYTHON"],"-I","-S","-B"]
           env["M3_QUALIFICATION_ROOT"]=str(root)
           try:
-              run("actual-offline-maven-model-contract",py+[str(source/"m3/tooling/tq-sync/source-reactor/test_reactor.py")],deadline=300)
+              run("actual-offline-maven-model-contract",py+[str(source/"make/m3/tooling/tq-sync/source-reactor/test_reactor.py")],deadline=300)
               receipt=json.loads((root/"model-receipt.json").read_bytes())
               if receipt["tests"]!=6 or receipt["failures"] or receipt["errors"] or receipt["skips"] or receipt["successful"] is not True:raise RuntimeError("nonzero exact six method qualification required")
               if any(receipt[key] is not False for key in ("compiled","tqJUnitQualified","originalModelQualified","runtimeJniQualified","matchedJdkQualified","phaseAdvanced")):raise RuntimeError("model-only scope drift")

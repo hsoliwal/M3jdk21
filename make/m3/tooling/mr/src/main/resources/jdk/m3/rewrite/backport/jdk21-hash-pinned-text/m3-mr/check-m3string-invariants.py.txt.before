@@ -36,9 +36,9 @@ stringopts = read("src/hotspot/share/opto/stringopts.cpp")
 archive_writer = read("src/hotspot/share/cds/archiveHeapWriter.cpp")
 dedup = read("src/hotspot/share/gc/shared/stringdedup/stringDedupTable.cpp")
 stringtable = read("src/hotspot/share/classfile/stringTable.cpp")
-mapping = read("m3/docs/name-mapping.json")
-port_map = read("m3/docs/m3-string-precompute-port-map.tsv")
-completeness = read("m3/docs/string-precompute-completeness.tsv")
+mapping = read("doc/m3/name-mapping.json")
+port_map = read("doc/m3/m3-string-precompute-port-map.tsv")
+completeness = read("doc/m3/string-precompute-completeness.tsv")
 workflow = read(".github/workflows/mindex-string-backing.yml")
 native_string = read("src/java.base/share/native/libjava/String.c")
 pattern = read("src/java.base/share/classes/java/util/regex/Pattern.java")
@@ -162,7 +162,7 @@ for row in critical_port_map_rows:
     if row not in port_map:
         fail(f"String precompute port/completeness drift: {row}")
 
-if "m3/docs/string-precompute-completeness.tsv" not in workflow:
+if "doc/m3/string-precompute-completeness.tsv" not in workflow:
     fail("M3 String workflow does not trigger on completeness ledger changes")
 
 # Field-level parity for the fixed semantic donor bundle.

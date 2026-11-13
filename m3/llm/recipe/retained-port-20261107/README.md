@@ -6,7 +6,7 @@ summarization module `m3/llm` (44 production files, module `com.m3.llm`). A late
 module; `S:/m3-scratch/eb-conv/folddrop/retained/m3__llm.tsv` lists the 44 files with `merge_kind RETAIN`. Master
 `c7be9541dbad` has no `m3/llm` at all, so this leaf is a whole-module port: every file of the module is written back
 from its git blob at `58bc0d2d297e`, the exported package is relocated `com.m3.llm -> jdk.m3.llm` by the
-`m3/tooling/jdk-naming` rules, and the module is registered in `m3/pom.xml` after `nlp`.
+`make/m3/tooling/jdk-naming` rules, and the module is registered in `make/m3/pom.xml` after `nlp`.
 
 Chrome rule (user, 2026-10-31): Chrome-generated production classes are held pending a per-file Chrome work order.
 These 44 classes were authored and reviewed in #2108 and later landed as a retained variant; this leaf restores that
@@ -36,7 +36,7 @@ module keeps `requires transitive jdk.httpserver` exactly as #2108's `module-inf
 (`PKG_COM_M3`, `PKG_PATH_COM_M3` on `.java`, `pom.xml`, `.mjs`, `README.md`), edited (`EDITS`: the one CONST_KEBAB
 rename) and written only when the target is absent; a target holding other bytes than the postimage, a donor blob
 that does not hash to its recorded sha256, or a produced target that does not hash to its recorded sha256 refuses
-with exit 2 before any write. `EDITS.tsv` records before/after sha256 per written file (and the `m3/pom.xml`
+with exit 2 before any write. `EDITS.tsv` records before/after sha256 per written file (and the `make/m3/pom.xml`
 registration from the base blob `eadf233183d4`). Second run: `changed=0`; `jdk_naming.py plan|apply --only m3/llm/`:
 `moves=0 rewrites=0 refusals=0` (fixed point).
 

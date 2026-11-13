@@ -40,7 +40,7 @@ The original OpenJDK `java.util` interfaces and contracts are unchanged.
   comparators and reference ownership remain in Java.
 
 The new source receipt under
-`m3/collections/recipe/filtered-sorted-views-20261017/manifest.tsv`
+`make/m3/collections/recipe/filtered-sorted-views-20261017/manifest.tsv`
 contains exactly six sorted `ABSENT -> sha256` additions. Historical
 `installed_source_manifest` and its hash in `synexia-donation.json`
 are **unchanged**. The existing `verify_donation.py` is extended by the
@@ -54,7 +54,7 @@ closed; an absent successor does not alter legacy behavior.
 ```sh
 python3 -m unittest discover -s m3/collections -p 'test_verify_*.py' -v
 # Pinned JAVA_HOME (Java21) and JUNIT_CONSOLE_JAR required for full suite:
-python3 m3/collections/verify_donation.py --cost-probe
+python3 make/m3/collections/verify_donation.py --cost-probe
 # Existing JNI mask proof checks native C17 and JDK-backed Java reference.
 ```
 

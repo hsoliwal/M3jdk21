@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Random;
 
 /** Independent model-only execution on exact Java21 candidate source. */
-//FLLDCIM: RELOCATE - donor blob eb68a0be3fa5 at ca1aafc4d94f; recipe m3/collections/qualification/census-g6-20261106/relocate.py v4
+//FLLDCIM: RELOCATE - donor blob eb68a0be3fa5 at ca1aafc4d94f; recipe make/m3/collections/qualification/census-g6-20261106/relocate.py v4
 public final class LongMapRecoverySmoke {
     private static long checked;
     private LongMapRecoverySmoke() { }

@@ -14,7 +14,7 @@ import org.junit.jupiter.api.io.TempDir;
 import static org.junit.jupiter.api.Assertions.*;
 
 /** File-backed end-to-end path oracle; the original verified source image is authoritative. */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/m3-pmem-sdk/src/junit/java/test/PmemSourcePathIndexJUnitTest.java blob 735849e28d29; recipe m3/optane/recipe/pmem-source-image-20261106/relocate.py v3
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/m3-pmem-sdk/src/junit/java/test/PmemSourcePathIndexJUnitTest.java blob 735849e28d29; recipe make/m3/optane/recipe/pmem-source-image-20261106/relocate.py v3
 public final class PmemSourcePathIndexJUnitTest {
     @TempDir Path temporary;
 

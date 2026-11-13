@@ -1,7 +1,7 @@
 {
   "repository": "hsoliwal/M3jdk21",
   "destination_commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
-  "module": "m3/tooling/migration-recipes",
+  "module": "make/m3/tooling/migration-recipes",
   "module_tree_sha1": "491ffd49dc4ce712f6ccf5f5eb1f3c2a316aea9e",
   "tree_entries": 747,
   "tree_receipt_sha256": "715259011e234f5810a3cf22b9d9f1e27e957e845e99b8d06a46b0ffb87fb8b2",
@@ -132,7 +132,7 @@
     "-o",
     "-Dmaven.repo.local=/workspace/scratch/1c68df1bae79/javac-convergence-20261005/m2",
     "-f",
-    "m3/tooling/migration-recipes/pom.xml",
+    "make/m3/tooling/migration-recipes/pom.xml",
     "clean",
     "verify"
   ],

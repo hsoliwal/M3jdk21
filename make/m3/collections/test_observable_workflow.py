@@ -12,7 +12,7 @@ import tempfile
 import unittest
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 WORKFLOW = Path(".github/workflows/m3-observable-indexed-views-20261021.yml")
 CONTRACTS = {"ObservableListContract", "ObservableIndexedViewsContract"}
 
@@ -197,7 +197,7 @@ def inspect_wiring(root, workflow=None, *, verify_module=True):
     require(identity == owner_identity, "observable owner declaration mismatch")
     filters = pull_request_paths(workflow)
     required = [*inputs.values(), owners[0], descriptors[0], WORKFLOW,
-                Path("m3/collections/test_observable_workflow.py")]
+                Path("make/m3/collections/test_observable_workflow.py")]
     for relative in required:
         require(relative.as_posix() in filters, f"missing exact PR path filter: {relative}")
     module_inputs = (module_source_inputs(root, workflow, compiler, descriptors[0])

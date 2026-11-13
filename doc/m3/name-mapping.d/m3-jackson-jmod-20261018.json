@@ -16,7 +16,7 @@
   "canonical_recipe": "com.synexia.rewrite.M3JacksonJmodRecipe",
   "canonical_recipe_crate": "synexia-openrewrite-recipes/crates/m3-jackson-jmod/pom.xml",
   "canonical_recipe_packet": "m3-jackson-jmod-20261018",
-  "target_owner": "m3/tooling/module-packs/jackson",
+  "target_owner": "make/m3/tooling/module-packs/jackson",
   "mappings": [
     {
       "source": "com.fasterxml.jackson.databind.ObjectMapper 2.19.2",
@@ -55,7 +55,7 @@
       "target_rule": "Capture detached TypeShape metadata during the analyzed event using Unit.project; pass runtime binding to the actual ObjectMapper. M3AST is the Java compiler AST and does not replace Jackson JsonNode."
     }
   ],
-  "existing_mapping_preserved": "m3/docs/name-mapping.d/m3-shared-frontend.json",
+  "existing_mapping_preserved": "doc/m3/name-mapping.d/m3-shared-frontend.json",
   "pending_promotion_gates": [
     "Matched custom M3JDK build and UseM3StringStorage on/off execution",
     "Applicable full JDK/jtreg and full Jackson upstream tests",

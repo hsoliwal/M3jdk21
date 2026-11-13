@@ -27,7 +27,7 @@ M3_SYMBOLS=/absolute/path/to/M3jdk21-at-2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49
 M3_INPUT=/absolute/path/to/emitted-M3-receiver-image
 M3_BEFORE_OUT=/absolute/path/to/new-before-proof
 M3_AFTER_OUT=/absolute/path/to/new-after-proof
-M3_SUPPORT="$M3_INPUT/m3/runtime-integration/rope-navigation-20261018"
+M3_SUPPORT="$M3_INPUT/make/m3/runtime-integration/rope-navigation-20261018"
 M3_TEST="$M3_INPUT/test/jdk/java/lang/String/M3StringPathCursorTest.java"
 ```
 

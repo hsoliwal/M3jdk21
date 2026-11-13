@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 """Recipe P2_057_LONG_PATHMASK_BRIDGE v1: apply census2 P2-057 and re-pin the long path JNI workflow in the same change.
 
-Derived from m3/collections/qualification/mergeloss-s1-20261106/apply.py (anchored "sub" edits, every anchor exactly
+Derived from make/m3/collections/qualification/mergeloss-s1-20261106/apply.py (anchored "sub" edits, every anchor exactly
 once, LF payloads re-joined with the preimage's line ending, hash-pinned preimages, refusal on drift (exit 2) before the
 first write, idempotent, --check fixed point, --leaf per commit).
 
@@ -189,7 +189,7 @@ def run(root: Path, check: bool, leaf: str | None) -> int:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--root", default=str(RECIPE_DIR.parents[3]), help="repository root (default: four up)")
+    parser.add_argument("--root", default=str(RECIPE_DIR.parents[4]), help="repository root (default: four up)")
     parser.add_argument("--check", action="store_true", help="write nothing; exit 1 when a run would change a file")
     parser.add_argument("--leaf", choices=sorted({rule[0] for rule in RULES}), help="apply one leaf's rules only")
     args = parser.parse_args(argv)

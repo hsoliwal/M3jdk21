@@ -5,7 +5,7 @@ type: specs.openrewrite.org/v1beta/recipe
 name: com.synexia.openrewrite.viewport.M3SwingTableSorterLanes
 displayName: DefaultRowSorter keeps its order in int lanes when m3.swing.viewport is set
 description: >-
-  M3JDK Swing viewport leaf 7 (m3/docs/swing-viewport/DESIGN.md section 14). With the property set,
+  M3JDK Swing viewport leaf 7 (doc/m3/swing-viewport/DESIGN.md section 14). With the property set,
   javax.swing.DefaultRowSorter keeps its view order in sun.swing.table.M3SorterLanes (two int lanes) instead of
   one Row object per visible row: a field created with the sorter, a private method that binds the lanes to the
   sorter's compare, include, keys, flags and event on first use, and a gate at the start of sort,

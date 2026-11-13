@@ -30,8 +30,8 @@
   "qualificationProof": "7ea27efa45d4422f1a5e1de09c801393138e5c01",
   "runtimeProof": "25a67fdadf786640c76f172889f514b3333f834d",
   "tests": [
-    "m3/qualification/lazy-shard-validated-text-reuse/M3LazyTextReuseTest.java",
-    "m3/qualification/lazy-shard-validated-text-reuse/M3LazyTextReuseQualification.java"
+    "make/m3/qualification/lazy-shard-validated-text-reuse/M3LazyTextReuseTest.java",
+    "make/m3/qualification/lazy-shard-validated-text-reuse/M3LazyTextReuseQualification.java"
   ],
   "note": "Existing Maven/OpenRewrite host performs exact replay/fixed-point/refusal; qualification orchestration and exact source/resource views remain in canonical crate. No unexecuted receiving build claim."
 }

@@ -27,7 +27,7 @@
       }
     },
     {
-      "path": "m3/docs/counterpart-naming.md",
+      "path": "doc/m3/counterpart-naming.md",
       "before": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/counterpart-naming.md.txt.before",
         "sha256": "8a9df82b06f61ec680d47bbf512201f8120e661831b4d92b067aa58e7c84451c"
@@ -38,7 +38,7 @@
       }
     },
     {
-      "path": "m3/docs/name-mapping.json",
+      "path": "doc/m3/name-mapping.json",
       "before": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/name-mapping.json.txt.before",
         "sha256": "536af76dd7b7b7217707662c2f1437af4adaa53af898627b0884e0b4f4603ace"
@@ -49,7 +49,7 @@
       }
     },
     {
-      "path": "m3/tooling/tq/verify-image.sh",
+      "path": "make/m3/tooling/tq/verify-image.sh",
       "before": null,
       "after": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/verify-image.sh.txt",
@@ -78,11 +78,11 @@
   ],
   "guards": [
     {
-      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
+      "path": "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
       "sha256": "fd376487d4497fef3f3f058584cd04abb5622abcff14364600b96a53df588862"
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "path": "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
       "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795"
     },
     {
@@ -110,7 +110,7 @@
       "sha256": "c5d856acc3fa5b7b636894d1dd18b087c1d8e1a450fcbef0821e87b969d185c2"
     },
     {
-      "path": "m3/migration/recipe.py",
+      "path": "make/m3/migration/recipe.py",
       "sha256": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"
     }
   ],

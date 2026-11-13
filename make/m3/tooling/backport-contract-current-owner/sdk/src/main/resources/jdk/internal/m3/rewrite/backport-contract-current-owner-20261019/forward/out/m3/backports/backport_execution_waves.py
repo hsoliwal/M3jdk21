@@ -52,7 +52,7 @@ class WaveItem:
 
 
 def _load_dag_module(root: Path):
-    path = root / "m3" / "backports" / "backport_recipe_dag.py"
+    path = root / "make" / "m3" / "backports" / "backport_recipe_dag.py"
     spec = importlib.util.spec_from_file_location("m3_backport_recipe_dag_runtime", path)
     if spec is None or spec.loader is None:
         raise RuntimeError(f"cannot load canonical DAG authority: {path}")

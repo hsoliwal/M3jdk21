@@ -5,27 +5,27 @@ on:
     branches:
       - "m3/jep493-generated-crate-materialization-20261005"
     paths:
-      - "m3/backports/file_delta_inventory.py"
-      - "m3/backports/generate_recipe_crates.py"
-      - "m3/backports/materialize_generated_crates.py"
-      - "m3/backports/test_file_delta_inventory.py"
-      - "m3/backports/test_generate_recipe_crates.py"
-      - "m3/backports/test_materialize_generated_crates.py"
-      - "m3/backports/recipes/jep-493-runtime-image/**"
-      - "m3/tooling/migration-recipes/**"
-      - "m3/tooling/backport-dag/**"
+      - "make/m3/backports/file_delta_inventory.py"
+      - "make/m3/backports/generate_recipe_crates.py"
+      - "make/m3/backports/materialize_generated_crates.py"
+      - "make/m3/backports/test_file_delta_inventory.py"
+      - "make/m3/backports/test_generate_recipe_crates.py"
+      - "make/m3/backports/test_materialize_generated_crates.py"
+      - "make/m3/backports/recipes/jep-493-runtime-image/**"
+      - "make/m3/tooling/migration-recipes/**"
+      - "make/m3/tooling/backport-dag/**"
       - ".github/workflows/m3-jep493-runtime-image-materialize.yml"
   pull_request:
     paths:
-      - "m3/backports/file_delta_inventory.py"
-      - "m3/backports/generate_recipe_crates.py"
-      - "m3/backports/materialize_generated_crates.py"
-      - "m3/backports/test_file_delta_inventory.py"
-      - "m3/backports/test_generate_recipe_crates.py"
-      - "m3/backports/test_materialize_generated_crates.py"
-      - "m3/backports/recipes/jep-493-runtime-image/**"
-      - "m3/tooling/migration-recipes/**"
-      - "m3/tooling/backport-dag/**"
+      - "make/m3/backports/file_delta_inventory.py"
+      - "make/m3/backports/generate_recipe_crates.py"
+      - "make/m3/backports/materialize_generated_crates.py"
+      - "make/m3/backports/test_file_delta_inventory.py"
+      - "make/m3/backports/test_generate_recipe_crates.py"
+      - "make/m3/backports/test_materialize_generated_crates.py"
+      - "make/m3/backports/recipes/jep-493-runtime-image/**"
+      - "make/m3/tooling/migration-recipes/**"
+      - "make/m3/tooling/backport-dag/**"
       - ".github/workflows/m3-jep493-runtime-image-materialize.yml"
   workflow_dispatch:
 
@@ -58,8 +58,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m py_compile m3/backports/file_delta_inventory.py m3/backports/generate_recipe_crates.py m3/backports/materialize_generated_crates.py
-          cd m3/backports
+          python3 -m py_compile make/m3/backports/file_delta_inventory.py make/m3/backports/generate_recipe_crates.py make/m3/backports/materialize_generated_crates.py
+          cd make/m3/backports
           python3 -m unittest -v test_file_delta_inventory.py test_generate_recipe_crates.py test_materialize_generated_crates.py
 
       - name: 3 - Fetch pinned OpenJDK 21 and 24 GA trees
@@ -77,8 +77,8 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/jep493"
-          python3 m3/backports/file_delta_inventory.py --repo "$UPSTREAM" --release 24 --out "$RUNNER_TEMP/jep493/JDK21_TO_JDK24.tsv"
-          python3 m3/backports/generate_recipe_crates.py --repo "$UPSTREAM" --release 24 --paths-file m3/backports/recipes/jep-493-runtime-image/PATHS.txt --ga-reconciliation m3/backports/recipes/jep-493-runtime-image/GA_RECONCILIATION.json --crate-size 1 --include-text --out "$RUNNER_TEMP/jep493/file-atoms"
+          python3 make/m3/backports/file_delta_inventory.py --repo "$UPSTREAM" --release 24 --out "$RUNNER_TEMP/jep493/JDK21_TO_JDK24.tsv"
+          python3 make/m3/backports/generate_recipe_crates.py --repo "$UPSTREAM" --release 24 --paths-file make/m3/backports/recipes/jep-493-runtime-image/PATHS.txt --ga-reconciliation make/m3/backports/recipes/jep-493-runtime-image/GA_RECONCILIATION.json --crate-size 1 --include-text --out "$RUNNER_TEMP/jep493/file-atoms"
 
       - name: 5 - Prove 47-path accounting and one-file crate granularity
         shell: bash
@@ -89,14 +89,14 @@ jobs:
           import os
           import sys
           from pathlib import Path
-          sys.path.insert(0, "m3/backports")
+          sys.path.insert(0, "make/m3/backports")
           from generate_recipe_crates import _verify_ga_accounting
 
           root = Path(os.environ["RUNNER_TEMP"]) / "jep493"
           counts = _verify_ga_accounting(
               root / "file-atoms",
-              Path("m3/backports/recipes/jep-493-runtime-image/PATHS.txt"),
-              Path("m3/backports/recipes/jep-493-runtime-image/GA_RECONCILIATION.json"),
+              Path("make/m3/backports/recipes/jep-493-runtime-image/PATHS.txt"),
+              Path("make/m3/backports/recipes/jep-493-runtime-image/GA_RECONCILIATION.json"),
               root / "JDK21_TO_JDK24.tsv",
           )
           if counts["selected"] != 47 or counts["exclusions"] != 1 or counts["history_only"] != 1:
@@ -119,10 +119,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f m3/pom.xml -pl tooling/backport-dag -am install
+          mvn -B -ntp -f make/m3/pom.xml -pl tooling/backport-dag -am install
           mkdir -p "$RUNNER_TEMP/jep493/projections"
-          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml -Dexec.mainClass=jdk.m3.tooling.dag.M3PacketCollectionMain -Dexec.args="validate $PWD/m3/backports/recipes/jep-493-runtime-image/collection.tsv" exec:java
-          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml -Dexec.mainClass=jdk.m3.tooling.dag.M3PacketCollectionMain -Dexec.args="project $PWD/m3/backports/recipes/jep-493-runtime-image/collection.tsv $RUNNER_TEMP/jep493/projections" exec:java
+          mvn -B -ntp -f make/m3/tooling/backport-dag/pom.xml -Dexec.mainClass=jdk.m3.tooling.dag.M3PacketCollectionMain -Dexec.args="validate $PWD/make/m3/backports/recipes/jep-493-runtime-image/collection.tsv" exec:java
+          mvn -B -ntp -f make/m3/tooling/backport-dag/pom.xml -Dexec.mainClass=jdk.m3.tooling.dag.M3PacketCollectionMain -Dexec.args="project $PWD/make/m3/backports/recipes/jep-493-runtime-image/collection.tsv $RUNNER_TEMP/jep493/projections" exec:java
           test -s "$RUNNER_TEMP/jep493/projections/M3BackportRoutes.java"
           test -s "$RUNNER_TEMP/jep493/projections/m3_backport_dag.py"
           test -s "$RUNNER_TEMP/jep493/projections/m3_backport_rules.drl"
@@ -133,18 +133,18 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/backports/materialize_generated_crates.py --root "$PWD" --generated "$RUNNER_TEMP/jep493/file-atoms" --mode check --require-one-target-per-crate --receipt "$RUNNER_TEMP/jep493/preimage.tsv"
+          python3 make/m3/backports/materialize_generated_crates.py --root "$PWD" --generated "$RUNNER_TEMP/jep493/file-atoms" --mode check --require-one-target-per-crate --receipt "$RUNNER_TEMP/jep493/preimage.tsv"
           test -z "$(git status --porcelain=v1 -uall)"
 
       - name: 8 - Materialize exact JEP493 candidate and prove fixed point
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/backports/materialize_generated_crates.py --root "$PWD" --generated "$RUNNER_TEMP/jep493/file-atoms" --mode apply --require-one-target-per-crate --receipt "$RUNNER_TEMP/jep493/apply.tsv"
-          python3 m3/backports/materialize_generated_crates.py --root "$PWD" --generated "$RUNNER_TEMP/jep493/file-atoms" --mode verify-post --require-one-target-per-crate --receipt "$RUNNER_TEMP/jep493/postimage.tsv"
+          python3 make/m3/backports/materialize_generated_crates.py --root "$PWD" --generated "$RUNNER_TEMP/jep493/file-atoms" --mode apply --require-one-target-per-crate --receipt "$RUNNER_TEMP/jep493/apply.tsv"
+          python3 make/m3/backports/materialize_generated_crates.py --root "$PWD" --generated "$RUNNER_TEMP/jep493/file-atoms" --mode verify-post --require-one-target-per-crate --receipt "$RUNNER_TEMP/jep493/postimage.tsv"
           git diff --check
           before="$(git diff --binary | sha256sum | awk '{print $1}')"
-          python3 m3/backports/materialize_generated_crates.py --root "$PWD" --generated "$RUNNER_TEMP/jep493/file-atoms" --mode apply --require-one-target-per-crate
+          python3 make/m3/backports/materialize_generated_crates.py --root "$PWD" --generated "$RUNNER_TEMP/jep493/file-atoms" --mode apply --require-one-target-per-crate
           after="$(git diff --binary | sha256sum | awk '{print $1}')"
           test "$before" = "$after"
 
@@ -186,8 +186,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f m3/backports/pom.xml verify
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3RecipeScopeDeclarationTest test
+          mvn -B -ntp -f make/m3/backports/pom.xml verify
+          mvn -B -ntp -f make/m3/tooling/migration-recipes/pom.xml -Dtest=M3RecipeScopeDeclarationTest test
 
       - name: 11 - Install OpenJDK build prerequisites
         shell: bash

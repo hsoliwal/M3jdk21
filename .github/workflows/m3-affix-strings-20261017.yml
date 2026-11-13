@@ -9,7 +9,7 @@ on:
       - "src/java.base/share/classes/java/util/Strings.java"
       - "test/jdk/java/lang/String/M3StringAffixPrecomputeTest.java"
       - "test/jdk/java/util/Strings/StringsContractTest.java"
-      - "m3/runtime-integration/affix-strings-20261017/**"
+      - "make/m3/runtime-integration/affix-strings-20261017/**"
       - ".github/workflows/m3-affix-strings-20261017.yml"
 permissions:
   contents: read
@@ -32,13 +32,13 @@ jobs:
             src/java.base/share/classes/java/util/Strings.java
             test/jdk/java/lang/String/M3StringAffixPrecomputeTest.java
             test/jdk/java/util/Strings/StringsContractTest.java
-            m3/runtime-integration/affix-strings-20261017/
+            make/m3/runtime-integration/affix-strings-20261017/
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: "21"
       - name: Fail closed on source/review drift
-        run: python3 m3/runtime-integration/affix-strings-20261017/verify_receiver.py
+        run: python3 make/m3/runtime-integration/affix-strings-20261017/verify_receiver.py
       - name: Execute exact source-extracted Java21 affix/regex and Strings contract oracles
-        run: python3 m3/runtime-integration/affix-strings-20261017/run_java21_proof.py
+        run: python3 make/m3/runtime-integration/affix-strings-20261017/run_java21_proof.py
       # This is not a full source-built M3JDK 21 java.base, jtreg or JNI qualification.

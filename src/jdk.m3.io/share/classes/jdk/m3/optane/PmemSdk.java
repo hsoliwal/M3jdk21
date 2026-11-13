@@ -11,7 +11,7 @@ import java.nio.file.LinkOption;
 import java.util.Objects;
 
 /** Low-level, fail-closed, file-backed mapping API. See docs/API_CONTRACT.md. */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/36827ee8a798ef6ce07f6fc55a2ac371b1382c06/m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/PmemSdk.java blob 360b782ed01b; recipe m3/optane/recipe/pmem-region-core-20261106/relocate.py v2
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/36827ee8a798ef6ce07f6fc55a2ac371b1382c06/m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/PmemSdk.java blob 360b782ed01b; recipe make/m3/optane/recipe/pmem-region-core-20261106/relocate.py v2
 public final class PmemSdk {
     private PmemSdk() {}
 

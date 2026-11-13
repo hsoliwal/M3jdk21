@@ -8,13 +8,13 @@ import copy,csv,hashlib,io,json,re
 from pathlib import Path
 from publication_custody_v3 import admit_publication_custody
 B=Path(__file__).resolve().parent;R=B/'overlay';P=B.parent/'successor-e04-prep'
-NAME='jcc-source-recovery-handoff-20261005';PREFIX=Path('m3/tooling/migration-recipes');TASK=PREFIX/'tasks'/NAME
+NAME='jcc-source-recovery-handoff-20261005';PREFIX=Path('make/m3/tooling/migration-recipes');TASK=PREFIX/'tasks'/NAME
 C=R/PREFIX/'src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text'/NAME
 OLD=C.parent/'jcc-source-final-handoff-20261005'
 DEST='0994ecd65e86600f417f4d8702838d8c2663af61';DTREE='7e8f39ac999174f8d5b6028d638a68d8c317b070'
 BASELINE='be92c62ece9023b5c33676716a1076d00e26120a';BTREE='3c4f32b66633a251ba2c117090830252a7e2da03';D1='d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906'
 LAB='m3.jcc-recipe-laboratory';JNI='m3.jcc-java-jni-regression';IDS=(LAB,JNI)
-MAP='m3/docs/name-mapping.json';DOC='m3/docs/jcc-source-handoff.md';BIND='m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json';COV='m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv'
+MAP='doc/m3/name-mapping.json';DOC='doc/m3/jcc-source-handoff.md';BIND='make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json';COV='make/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv'
 def read(p):return json.loads(p.read_text())
 def enc(x):return (json.dumps(x,indent=2,ensure_ascii=False)+'\n').encode()
 def sha(d):return hashlib.sha256(d).hexdigest()

@@ -8,16 +8,16 @@ import hashlib
 from pathlib import Path, PurePosixPath
 import re
 
-ROOT = Path(__file__).resolve().parents[2]
-BASE_MANIFEST = "m3/compatibility/m3-object-adapter-progress-20261017.tsv"
-NEXT_MANIFEST = "m3/compatibility/m3-default-template-source-seal.tsv"
+ROOT = Path(__file__).resolve().parents[3]
+BASE_MANIFEST = "make/m3/compatibility/m3-object-adapter-progress-20261017.tsv"
+NEXT_MANIFEST = "make/m3/compatibility/m3-default-template-source-seal.tsv"
 BASE_MANIFEST_SHA256 = "2f581a791adc7ecf7f217a6276f0da8af424c1e3e49385ca6ae44704d3319c82"
 NEXT_MANIFEST_SHA256 = "c431bf732eb91a289b4bcd0b886db71d43da7d7bb17074cd6116db6b37e73ad6"
-DOCS_MANIFEST = "m3/compatibility/m3-progress-doclint-20261018.tsv"
+DOCS_MANIFEST = "make/m3/compatibility/m3-progress-doclint-20261018.tsv"
 DOCS_MANIFEST_SHA256 = "7246c16a0e8ec742eba98dac97e24b7fc3947250ad5d2a22f72ac32dcddf0219"
-FUNCTIONAL_MANIFEST = "m3/compatibility/m3-functional-progress-doclint-20261018.tsv"
+FUNCTIONAL_MANIFEST = "make/m3/compatibility/m3-functional-progress-doclint-20261018.tsv"
 FUNCTIONAL_MANIFEST_SHA256 = "3b62981be6a617b903c559cc31904eca2bffb2b200380f1be57e07a8f634d969"
-SCOPE_MANIFEST = "m3/compatibility/m3-progress-scope-lint-20261018.tsv"
+SCOPE_MANIFEST = "make/m3/compatibility/m3-progress-scope-lint-20261018.tsv"
 SCOPE_MANIFEST_SHA256 = "1a45edfa747a03b3491063648a455083633e7de836e4c46241de104d689eebee"
 SCOPED = frozenset((
     "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",

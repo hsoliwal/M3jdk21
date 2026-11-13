@@ -13,7 +13,7 @@ yet received. The develop blobs of `MIndexArgumentRoleBits` (`7dc48bec582f`) and
 | file | content |
 |---|---|
 | `DECISION.tsv` | one decision per unexplained MEMBER_GAPS row (15): RESTORE 4, HOLD_DEP 11 |
-| `apply.py` | recipe CENSUS3_GAPS v1 (from `m3/collections/qualification/census-small-batch-20261106/apply.py`): hash-pinned anchored edits, `--check` fixed point, refuses drift (exit 2) |
+| `apply.py` | recipe CENSUS3_GAPS v1 (from `make/m3/collections/qualification/census-small-batch-20261106/apply.py`): hash-pinned anchored edits, `--check` fixed point, refuses drift (exit 2) |
 | `EDITS.tsv` | file, before/after sha256, leaf, donor blob, rule (written by apply.py) |
 | `oracle/census3/` | seeded differential driver + `OwnerBits`; `oracle/SIDE_MAP.tsv` + `mkdonor.py` generate the donor side |
 | `differential.sh` | compiles both sides, runs default JIT and `-Xint`, requires byte-identical output |

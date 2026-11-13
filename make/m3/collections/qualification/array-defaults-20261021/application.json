@@ -5,7 +5,7 @@
   "canonical_pull_request": "https://github.com/hsoliwal/com.synexia/pull/12705",
   "canonical_repository": "hsoliwal/com.synexia",
   "canonical_task": "m3-openrewrite-recipes/recipe-crates/m3-array-defaults-20261021",
-  "complete_structural_review": "m3/collections/algorithm-catalogue/all-collections-20261021/README.md",
+  "complete_structural_review": "make/m3/collections/algorithm-catalogue/all-collections-20261021/README.md",
   "execution_kind": "SDK_EXECUTION",
   "full_reactors": "NOT_RUN",
   "materialization": "Exact bytes copied from qualified OpenRewrite SDK Results, not from templates",
@@ -30,7 +30,7 @@
       "kind": "text",
       "pass": "array-defaults-label-20261021",
       "recipe": "jdk.internal.m3.ArrayDefaultsTreeSetLabel20261021",
-      "target": "m3/collections/JDK_FAMILY_MAP.tsv"
+      "target": "make/m3/collections/JDK_FAMILY_MAP.tsv"
     }
   ],
   "timestamp_utc": "2026-10-21T03:19:05.533334+00:00"

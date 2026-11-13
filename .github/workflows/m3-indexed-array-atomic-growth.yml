@@ -9,7 +9,7 @@ on:
       - 'src/java.base/share/classes/jdk/internal/m3/IndexedArray.java'
       - 'test/jdk/jdk/internal/m3/M3IndexedArrayGrowth*.java'
       - '.github/workflows/m3-indexed-array-atomic-growth.yml'
-      - 'm3/qualification/indexed-array-atomic-growth/**'
+      - 'make/m3/qualification/indexed-array-atomic-growth/**'
   workflow_dispatch:
 permissions:
   contents: read

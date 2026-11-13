@@ -7,7 +7,7 @@
 package jdk.internal.m3.collections.packed;
 
 /** Overflow-checked size arithmetic, before mutation or allocation. */
-//FLLDCIM: RELOCATE - donor blob 0606653c5bad at d5ad5090d87e; recipe m3/collections/qualification/census2-t2-20261106/relocate.py v6
+//FLLDCIM: RELOCATE - donor blob 0606653c5bad at d5ad5090d87e; recipe make/m3/collections/qualification/census2-t2-20261106/relocate.py v6
 final class PackedArrayCapacity {
     private PackedArrayCapacity() { }
 

@@ -78,7 +78,7 @@ final class M3RecipeScopeDeclarationTest {
         var denominatorRepair = M3RecipeScopeRegistry.require(M3ReleaseJepAuthorityRepairRecipe.class);
         assertEquals(M3EditScope.MULTI_MODULE, denominatorRepair.minimumScope());
         assertEquals(M3ContractMode.BEHAVIOR_AND_CONTRACT_PRESERVING, denominatorRepair.contractMode());
-        assertFalse(denominatorRepair.fileLocalMechanical(List.of("m3/backports/JEP_CATALOGUE.tsv")));
+        assertFalse(denominatorRepair.fileLocalMechanical(List.of("make/m3/backports/JEP_CATALOGUE.tsv")));
         for (Class<?> jepRecipe : List.of(
                 M3Jep458BackportRecipe.class,
                 M3Jep485StreamGatherersBackportRecipe.class,

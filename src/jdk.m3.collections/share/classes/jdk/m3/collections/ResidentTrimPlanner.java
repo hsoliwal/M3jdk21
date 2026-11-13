@@ -11,7 +11,7 @@ import jdk.internal.m3.collections.LazyElementFlags;
  * for medium trimming, and an index-plus-priority min heap for full eviction.
  * The last branch improves full traversal locality without eager source copies.
  */
-//FLLDCIM: RELOCATE - donor blob 0aa7495771e3 at fd9a233680b4; recipe m3/collections/recipe/transient-facade-20261106/relocate.py v4
+//FLLDCIM: RELOCATE - donor blob 0aa7495771e3 at fd9a233680b4; recipe make/m3/collections/recipe/transient-facade-20261106/relocate.py v4
 final class ResidentTrimPlanner {
     private ResidentTrimPlanner() { }
 

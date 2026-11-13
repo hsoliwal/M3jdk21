@@ -6,8 +6,8 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SpanIndex.java'
       - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_span_index_jni.c'
       - 'test/jdk/jdk/m3/collections/M3SpanIndex*.java'
-      - 'm3/collections/recipe/widget-span-index-20261017/**'
-      - 'm3/collections/qualification/widget-span-index-20261017/**'
+      - 'make/m3/collections/recipe/widget-span-index-20261017/**'
+      - 'make/m3/collections/qualification/widget-span-index-20261017/**'
       - '.github/workflows/m3-widget-span-index-20261017.yml'
   workflow_dispatch:
 permissions:

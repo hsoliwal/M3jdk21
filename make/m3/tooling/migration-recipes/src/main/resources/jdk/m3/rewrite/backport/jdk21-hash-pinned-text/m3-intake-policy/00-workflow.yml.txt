@@ -7,24 +7,24 @@ on:
       - "m3/**"
     paths:
       - "ADDITIONAL_LICENSE_INFO"
-      - "m3/docs/m3jdk21-porting-invariant.md"
-      - "m3/docs/name-mapping.json"
-      - "m3/docs/m3-intake-policy.tsv"
-      - "m3/docs/m3-direct-copy-review.tsv"
-      - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
-      - "m3/runtime-integration/verify-m3-intake.py"
-      - "m3/tooling/migration-recipes/**"
+      - "doc/m3/m3jdk21-porting-invariant.md"
+      - "doc/m3/name-mapping.json"
+      - "doc/m3/m3-intake-policy.tsv"
+      - "doc/m3/m3-direct-copy-review.tsv"
+      - "make/m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
+      - "make/m3/runtime-integration/verify-m3-intake.py"
+      - "make/m3/tooling/migration-recipes/**"
       - ".github/workflows/m3-intake-policy.yml"
   pull_request:
     paths:
       - "ADDITIONAL_LICENSE_INFO"
-      - "m3/docs/m3jdk21-porting-invariant.md"
-      - "m3/docs/name-mapping.json"
-      - "m3/docs/m3-intake-policy.tsv"
-      - "m3/docs/m3-direct-copy-review.tsv"
-      - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
-      - "m3/runtime-integration/verify-m3-intake.py"
-      - "m3/tooling/migration-recipes/**"
+      - "doc/m3/m3jdk21-porting-invariant.md"
+      - "doc/m3/name-mapping.json"
+      - "doc/m3/m3-intake-policy.tsv"
+      - "doc/m3/m3-direct-copy-review.tsv"
+      - "make/m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
+      - "make/m3/runtime-integration/verify-m3-intake.py"
+      - "make/m3/tooling/migration-recipes/**"
       - ".github/workflows/m3-intake-policy.yml"
   workflow_dispatch:
 
@@ -51,7 +51,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 "$REPO/m3/runtime-integration/verify-m3-intake.py" --repo "$REPO"
+          python3 "$REPO/make/m3/runtime-integration/verify-m3-intake.py" --repo "$REPO"
 
       - name: Prepare pinned JDK 21
         shell: bash
@@ -67,4 +67,4 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f "$REPO/m3/tooling/migration-recipes/pom.xml"             -Dtest=M3IntakePolicyRecipeTest test
+          mvn -B -ntp -f "$REPO/make/m3/tooling/migration-recipes/pom.xml"             -Dtest=M3IntakePolicyRecipeTest test

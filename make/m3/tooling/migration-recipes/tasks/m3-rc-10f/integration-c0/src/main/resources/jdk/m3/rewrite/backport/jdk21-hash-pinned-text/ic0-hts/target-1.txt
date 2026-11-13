@@ -131,7 +131,7 @@ class IntakeTest(unittest.TestCase):
         return self.put(relative, (json.dumps(document, indent=2) + '\n').encode('utf-8'))
 
     def bind_authority(self):
-        self.packet['authority'] = self.put_json('m3/docs/name-mapping.json', self.doc)
+        self.packet['authority'] = self.put_json('doc/m3/name-mapping.json', self.doc)
 
     def bind_root(self):
         self.packet['sourceRoot'] = self.put_json('portable/current-root.json', self.root_inventory)
@@ -272,7 +272,7 @@ class IntakeTest(unittest.TestCase):
 
     def admit(self, packet=None):
         return migration._admit_intake(self.doc, self.packet if packet is None else packet,
-                                       self.root, sha((self.root / 'm3/docs/name-mapping.json').read_bytes()))
+                                       self.root, sha((self.root / 'doc/m3/name-mapping.json').read_bytes()))
 
     def refuse(self, packet=None):
         before = self.snapshot()
@@ -284,7 +284,7 @@ class IntakeTest(unittest.TestCase):
         path = self.root / 'packet.json'
         payload = (json.dumps(self.packet, indent=2) + '\n').encode() if packet_bytes is None else packet_bytes
         path.write_bytes(payload)
-        args = ['intake', str(self.root), '--manifest', str(self.root / 'm3/docs/name-mapping.json'),
+        args = ['intake', str(self.root), '--manifest', str(self.root / 'doc/m3/name-mapping.json'),
                 '--intake-packet', str(path), '--expected-sha256', sha(payload) if expected is None else expected]
         stdout, stderr = io.StringIO(), io.StringIO()
         with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):

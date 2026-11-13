@@ -8,13 +8,13 @@
 set -u
 M=$1; LANE=$2; PHASE=$3; SECTION=${4:-"lane 37"}
 W=${W:-/s/m3-scratch/eb-conv/wt-reactor}; R=${R:-/s/m3-scratch/eb-conv/reactor}
-Q=$W/m3/qualification/reactor-wiring-20261107
+Q=$W/make/m3/qualification/reactor-wiring-20261107
 SLUG=$(echo "$M" | tr '/' '-'); NAME=regate-$SLUG-$PHASE; LOG=$R/logs/$NAME.log
 cd "$W" || exit 9
-grep -q "<module>$M</module>" m3/pom.xml || { echo "REGATE_ABORT $M not a reactor module"; exit 8; }
+grep -q "<module>$M</module>" make/m3/pom.xml || { echo "REGATE_ABORT $M not a reactor module"; exit 8; }
 GAV=$(tr -d '\n' < "m3/$M/pom.xml" | sed -E 's/<parent>.*<\/parent>//; s/<dependencies>.*//; s/<build>.*//' | grep -o -E '<(groupId|artifactId|version|packaging)>[^<]+' | sed -E 's/<[a-zA-Z]+>//' | head -4 | tr '\n' ':' | sed 's/:$//')
-CMD="mvn -B -ntp -T1 -f m3/pom.xml -pl $M -am -DskipTests=false $PHASE"
-bash "$R/mvn.sh" "$NAME" -T1 -f m3/pom.xml -pl "$M" -am -DskipTests=false "$PHASE"
+CMD="mvn -B -ntp -T1 -f make/m3/pom.xml -pl $M -am -DskipTests=false $PHASE"
+bash "$R/mvn.sh" "$NAME" -T1 -f make/m3/pom.xml -pl "$M" -am -DskipTests=false "$PHASE"
 RC=$(cat "$LOG.rc" 2>/dev/null || echo 99)
 TS=$(sed -n '1s/^START \([^ ]*\) .*/\1/p' "$LOG"); TE=$(grep -o -E '^END [^ ]+' "$LOG" | tail -1 | cut -d' ' -f2)
 WALL=$(( $(date -d "$TE" +%s) - $(date -d "$TS" +%s) ))

@@ -6,7 +6,7 @@ on:
       - 'src/java.base/share/classes/jdk/internal/m3/IndexedArray.java'
       - 'src/java.base/share/classes/jdk/internal/m3/IndexedView.java'
       - 'test/jdk/jdk/internal/m3/StateMaskedIndexedViewTest.java'
-      - 'm3/tooling/shared-frontend/recipe-custody/datasets/m3-state-masked-views-20261019/**'
+      - 'make/m3/tooling/shared-frontend/recipe-custody/datasets/m3-state-masked-views-20261019/**'
       - '.github/workflows/m3-state-masked-indexed-views-20261019.yml'
   workflow_dispatch:
 concurrency:
@@ -29,7 +29,7 @@ jobs:
             test/jdk/jdk/internal/m3/IndexedArrayTest.java
             test/jdk/jdk/internal/m3/IndexedViewEpochTest.java
             test/jdk/jdk/internal/m3/StateMaskedIndexedViewTest.java
-            m3/tooling/shared-frontend/recipe-custody/
+            make/m3/tooling/shared-frontend/recipe-custody/
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -38,7 +38,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          root="$PWD/m3/tooling/shared-frontend/recipe-custody"
+          root="$PWD/make/m3/tooling/shared-frontend/recipe-custody"
           mvn -B -ntp -f "$root/pom.xml" \
             -Dm3.dataset=m3-state-masked-views-20261019 \
             "-Drecipe.owner.root=$root/sdk-owner" -Pcontract verify

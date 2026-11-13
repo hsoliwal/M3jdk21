@@ -16,4 +16,4 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Java 21 source contract
-        run: bash m3/collections/verification/filtered-object-deques-20261017/verify.sh
+        run: bash make/m3/collections/verification/filtered-object-deques-20261017/verify.sh

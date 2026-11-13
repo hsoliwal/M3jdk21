@@ -153,7 +153,7 @@
   "gates": {
     "synexiaCrateTest": "PASS 3 + 1 skipped by design (log sha256 dae912d5868a18f4241f95bf772dd4c7052c923c631835761000ffe73aef93e6)",
     "receiverMaterialization": "PASS 4/4 (crate test target mode)",
-    "compile": "javac --release 21 -Xlint:all,-module -Werror PASS per batch (m3/collections/qualification/five-library-scaffold-20261018/COMPILE_GATE.tsv)",
+    "compile": "javac --release 21 -Xlint:all,-module -Werror PASS per batch (make/m3/collections/qualification/five-library-scaffold-20261018/COMPILE_GATE.tsv)",
     "tests": "NOT_RUN (no behavior)",
     "installedCollectionsCi": "PENDING_QUEUE (verify_donation.py successor packet)"
   },

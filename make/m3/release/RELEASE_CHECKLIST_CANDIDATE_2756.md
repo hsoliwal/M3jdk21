@@ -34,11 +34,11 @@ naming fixes and successful tests do not override it.
 ## 2. Check names, schema, documentation and release tooling
 
 ```sh
-python3 -m pip install -r m3/migration/requirements.txt
-python3 m3/tooling/name-contract/check.py
-python3 m3/tooling/name-contract/audit.py --strict
-python3 -m unittest discover -s m3/tooling/name-contract -p 'test_*.py' -v
-python3 -m unittest discover -s m3/release -p 'test_*.py' -v
+python3 -m pip install -r make/m3/migration/requirements.txt
+python3 make/m3/tooling/name-contract/check.py
+python3 make/m3/tooling/name-contract/audit.py --strict
+python3 -m unittest discover -s make/m3/tooling/name-contract -p 'test_*.py' -v
+python3 -m unittest discover -s make/m3/release -p 'test_*.py' -v
 ```
 
 Keep the stable `migration.records[].id` values, exact current package/module
@@ -84,11 +84,11 @@ paths with SHA-256. The canonical gate also needs its repository, canonical
 commit and recipe ID. Synthetic test-fixture receipts are not admissible evidence.
 
 ```sh
-python3 -I m3/release/verify_release_admission.py --root . \
+python3 -I make/m3/release/verify_release_admission.py --root . \
   --json-out /absolute/path/to/proof/admission-development.json \
   --queue-out /absolute/path/to/proof/README.md \
   --sha256-out /absolute/path/to/proof/SHA256SUMS
-python3 -I m3/release/verify_release_admission.py --root . --release \
+python3 -I make/m3/release/verify_release_admission.py --root . --release \
   --evidence /absolute/path/to/proof/evidence.json \
   --json-out /absolute/path/to/proof/admission-release.json
 ```

@@ -4,7 +4,7 @@ on:
   pull_request:
     paths:
       - "src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java"
-      - "m3/qualification/java-base-sparse-mask-20261018/**"
+      - "make/m3/qualification/java-base-sparse-mask-20261018/**"
       - ".github/workflows/m3jdk-java-base-sparse-mask-20261018.yml"
   workflow_dispatch:
 permissions:
@@ -26,9 +26,9 @@ jobs:
           distribution: temurin
           java-version: "21"
       - name: Run actual Maven and OpenRewrite source-sealed recipe tests
-        run: mvn -B -ntp -f m3/qualification/java-base-sparse-mask-20261018/recipe/pom.xml test
+        run: mvn -B -ntp -f make/m3/qualification/java-base-sparse-mask-20261018/recipe/pom.xml test
       - name: Verify exact original and emitted JDK files
-        run: python3 m3/qualification/java-base-sparse-mask-20261018/verify.py
+        run: python3 make/m3/qualification/java-base-sparse-mask-20261018/verify.py
       - name: Compile product java.base classes together with incumbent ArrayList/Vector
         shell: bash
         run: |

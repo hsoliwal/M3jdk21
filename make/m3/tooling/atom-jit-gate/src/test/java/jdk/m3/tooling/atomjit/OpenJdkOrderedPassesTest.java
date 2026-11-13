@@ -16,7 +16,7 @@ import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
 
 /** Fail-closed OpenJDK source atomization, real JVM proof and post-pattern recheck. */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/b65df53330e3d82f6b2d5509ded971f19883f4ca/synexia-maven-plugin/src/test/java/com/synexia/ai/m3scale/M3OpenJdkOrderedPassesTest.java blob f809b7cd6baa; recipe m3/tooling/atom-jit-gate/recipe/atom-jit-gate-20261106/relocate.py v4
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/b65df53330e3d82f6b2d5509ded971f19883f4ca/synexia-maven-plugin/src/test/java/com/synexia/ai/m3scale/M3OpenJdkOrderedPassesTest.java blob f809b7cd6baa; recipe make/m3/tooling/atom-jit-gate/recipe/atom-jit-gate-20261106/relocate.py v4
 final class OpenJdkOrderedPassesTest {
     private static final String PATH = "src/java.base/share/classes/java/lang/M3Synthetic.java";
     private static final Path RULES = Path.of(System.getProperty("m3.atomjit.patternRules",

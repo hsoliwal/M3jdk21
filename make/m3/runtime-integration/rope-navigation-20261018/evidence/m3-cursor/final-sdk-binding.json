@@ -22,7 +22,7 @@
       "byte_equal": true
     },
     {
-      "relative_path": "m3/runtime-integration/rope-navigation-20261018/M3StringCursorBenchmark.java",
+      "relative_path": "make/m3/runtime-integration/rope-navigation-20261018/M3StringCursorBenchmark.java",
       "sha256": "bfb53263c24edc292788f8852109477714b1db1fdd4af8691a77cbb3bb631ba2",
       "bytes": 6658,
       "candidate3_path": "/dev/shm/m3-rope-proof-5c4ab305aedb/recipe-candidate3/m3/runtime-integration/rope-navigation-20261018/M3StringCursorBenchmark.java",

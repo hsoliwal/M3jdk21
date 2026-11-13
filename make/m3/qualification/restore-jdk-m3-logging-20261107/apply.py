@@ -13,7 +13,7 @@ Two kinds of edit, both hash-pinned:
 RESTORE: each of the eight files is the blob of 7c23ff3612ef, byte for byte (the same blobs as f12245e0b7a8, so
 no fallback was needed). A missing file is written from `git cat-file blob <pinned sha1>` after its sha256 is
 checked; a present file must equal the pinned sha256 (anything else is a drifted target: refused, nothing written).
-m3/tooling/jdk-naming/jdk_naming.py plan/apply --only the three prefixes is a fixed point on these bytes
+make/m3/tooling/jdk-naming/jdk_naming.py plan/apply --only the three prefixes is a fixed point on these bytes
 (moves=0 rewrites=0), so RENAME_APPLIED is empty.
 REGISTER: make/conf/module-loader-map.conf gets `    jdk.m3.logging \\` after `    jdk.m3.graphics \\` inside
 PLATFORM_MODULES (the sorted position; 7c23ff3612ef had it after jdk.localedata, before master's two jdk.m3
@@ -81,7 +81,7 @@ REGISTRATION_AFTER = "74fcb2422f3052516d63cb0e35ecfb194abafbd420bc8dbfcbf11e6ea1
 REGISTRATION_SOURCE_BLOB = "4182f2c46cb8feeeec100e8fbedd8b200e60a7d9"
 DECLARATION = b"\nPLATFORM_MODULES= \\\n"
 ANCHOR = (b"# //FLLDCIM: MRL - jdk.m3.logging restored to PLATFORM_MODULES (fold fc917d80ea3c dropped #2234/#2390"
-          b" head 7c23ff3612ef); recipe m3/qualification/restore-jdk-m3-logging-20261107/apply.py\n")
+          b" head 7c23ff3612ef); recipe make/m3/qualification/restore-jdk-m3-logging-20261107/apply.py\n")
 PREDECESSOR_LINE = b"    jdk.m3.graphics \\\n"
 MODULE_LINE = b"    jdk.m3.logging \\\n"
 
@@ -180,7 +180,7 @@ def run(root: Path, check: bool) -> int:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--root", default=str(RECIPE_DIR.parents[2]), help="repository root (default: three up)")
+    parser.add_argument("--root", default=str(RECIPE_DIR.parents[3]), help="repository root (default: three up)")
     parser.add_argument("--check", action="store_true", help="write nothing; exit 1 when a run would change a file")
     args = parser.parse_args(argv)
     try:

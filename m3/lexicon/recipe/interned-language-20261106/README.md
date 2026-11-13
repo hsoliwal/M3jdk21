@@ -29,7 +29,7 @@ The mapped-lexicon part of the donor module (`MappedLexicon`, `Utf8LexiconCompil
 | recipe | `relocate.py` v1 (`RELOCATE_INTERNED_LANGUAGE`): `python -I m3/lexicon/recipe/interned-language-20261106/relocate.py --donor-git <clone> --donor-rev <rev> [--check]` |
 | map | `RELOCATION_MAP.tsv`: 1 `REPO`, 5 `FILE`, 1 `PACKAGE` (`com.synexia.m3scale.intern -> jdk.m3.lexicon`), 5 `TYPE` (M3 prefix; nested `Leaf`, `Concat`, `Entry`, `Key` keep their names), 6 `SKIP`, 4 `NEC` |
 | provenance | `PROVENANCE.tsv`: donor commit, blob, sha256, URL, target sha256, counts of renamed / mapped / dropped lines, `body_match` per file |
-| naming | `python -I m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/lexicon/`: 0 moves, 0 rewrites, 0 refusals |
+| naming | `python -I make/m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/lexicon/`: 0 moves, 0 rewrites, 0 refusals |
 
 The recipe rewrites only the license header (the receiver's two `//` lines), the `package` line, mapped `import`
 lines (none here: the five files import `java.*` only), the declared type names (whole words, on every line) and
@@ -56,7 +56,7 @@ belong to the lexicon-index lane. Donor follow-up: restore or delete the test.
 | Step | Command |
 |---|---|
 | compile, test, jar | `JAVA_HOME=<JDK 21> mvn -B -ntp -f m3/lexicon/receiver/pom.xml package` (`-Xlint:all -Werror`, `-proc:none`; surefire 3.5.4 runs `M3InternedLanguageSubstrateTest`; the receiver's `*Proof` mains stay on `exec:java` in `verify`) |
-| from the control reactor | `mvn -f m3/pom.xml -pl lexicon/receiver package` (`lexicon/receiver` is now a default module of `m3/pom.xml`) |
+| from the control reactor | `mvn -f make/m3/pom.xml -pl lexicon/receiver package` (`lexicon/receiver` is now a default module of `make/m3/pom.xml`) |
 | differential | `bash m3/lexicon/recipe/interned-language-20261106/differential.sh <donor clone> <rev> <scratch> [cases]` after `package`: compiles the five donor sources from the donor tree, replays the same seeded operations through both sides with `M3InternedLanguageDump` (LF output, nothing identity-dependent printed), normalizes the donor dump by the map, compares byte for byte and compares `javap -p` of every class |
 | all gates | `bash m3/lexicon/recipe/interned-language-20261106/verify.sh <donor clone> <rev> <scratch> [cases]` |
 
@@ -84,12 +84,12 @@ later decision, see `RECIPE_MEMORY.tsv`).
 | 4 `jar --describe-module` | `org.m3jdk.lexicon@0.1.0-SNAPSHOT automatic`, contains `jdk.m3.lexicon` |
 | 5 `jdk_naming.py apply --only m3/lexicon/` | 0 moves, 0 rewrites, 0 refusals |
 | 6 `CONVERGE_COLLECTIONS.tsv`, `LEXICON_RECEIVER_LEDGER.tsv` | OverflowInterner GAP -> PRESENT_IN_M3JDK, 4 rows added, MappedConceptIndex stays GAP; ledger row IL01 |
-| 7 `m3/pom.xml` default module | `lexicon/receiver` after `algorithms` |
-| 8 scope | `m3/lexicon/**`, one `m3/pom.xml` line, the CONVERGE rows |
+| 7 `make/m3/pom.xml` default module | `lexicon/receiver` after `algorithms` |
+| 8 scope | `m3/lexicon/**`, one `make/m3/pom.xml` line, the CONVERGE rows |
 
 Deviation from the brief, recorded: the brief expected an orphan `m3/lexicon` without a pom; master already carries
 `m3/lexicon/receiver/pom.xml` (c9a1d41baaf), so no second pom was created, gate 1 runs on the receiver pom, and the
-receiver is registered in `m3/pom.xml`. Hard-limit notes for a later pass, recorded not fixed: donor bodies use `for`
+receiver is registered in `make/m3/pom.xml`. Hard-limit notes for a later pass, recorded not fixed: donor bodies use `for`
 loops (`M3PackedText.forEach`, `M3TokenRope.Leaf.fingerprint`, `M3SharedSymbols.find` linear scan over 22 entries);
 `M3OverflowInterner` boxes through `HashMap<Key, Integer>` and `ArrayList<Entry>` (collections culprit, HP-LAW review
 later). Lessons of the run are in `RECIPE_MEMORY.tsv`.

@@ -20,15 +20,15 @@ METHODS = ["bothPartialStatesRoundTripAndReachFixedPointsInBothOrders",
            "canonicalAccessorPreservesAllReceivingModes"]
 SUITES = {SUITE: METHODS}
 OWNER_GIT = {
-    "m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java": "907f176d32b55d78f13e3756a407f6877f25ca7d",
-    "m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3ObjectSlotIndexSnapshot20261017RecipeTest.java": "6d3fd39ddeb3ca8fddd0d69ee2345d8b39c0e7f0",
-    "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectIndexSnapshot.java.txt": "30c06855e426425db292c993f6a44e42a1bb15d8",
-    "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexSelfTest.java.txt": "33a01e6772c3eb93aa6db50a397ccf71ab037fd9",
-    "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexTest.java.txt": "8ec4178c0078915472b4f0e5a1674d7656fc9253",
-    "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotStore28.java.txt": "91d5946dd69aeb1ddc8b20ab20b357554fc98e8c",
-    "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/manifest.tsv": "9c4321dcba3c8df29910d6413114496fee58ecd1"
+    "make/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java": "907f176d32b55d78f13e3756a407f6877f25ca7d",
+    "make/m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3ObjectSlotIndexSnapshot20261017RecipeTest.java": "6d3fd39ddeb3ca8fddd0d69ee2345d8b39c0e7f0",
+    "make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectIndexSnapshot.java.txt": "30c06855e426425db292c993f6a44e42a1bb15d8",
+    "make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexSelfTest.java.txt": "33a01e6772c3eb93aa6db50a397ccf71ab037fd9",
+    "make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexTest.java.txt": "8ec4178c0078915472b4f0e5a1674d7656fc9253",
+    "make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotStore28.java.txt": "91d5946dd69aeb1ddc8b20ab20b357554fc98e8c",
+    "make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/manifest.tsv": "9c4321dcba3c8df29910d6413114496fee58ecd1"
 }
-PROVIDER_OWNER = "m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java"
+PROVIDER_OWNER = "make/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java"
 PROVIDER_BEFORE_SHA = "9dc65793cb1f4fb20866f99f4e5d0043d54734aa03cf0fe297c0cadbba2d1c37"
 PROVIDER_AFTER_GIT = "fa757481cc3a0e5c00c3e91c8f7824b5c10482c0"
 PROVIDER_AFTER_SHA = "8c43e01532a256cfc2b8c55bf5ed7e3c9719be6a37b223b0cd93258c823289f4"

@@ -59,7 +59,7 @@ They were independently materialized byte-for-byte and compared to the
 repository Git hashes, then executed using OpenJDK `21.0.12.1`.
 
 ```sh
-bash m3/collections/qualification/java-base-mask-20261023/verify.sh
+bash make/m3/collections/qualification/java-base-mask-20261023/verify.sh
 # M3CollectionMaskCompactorContract checks=2000865
 # PASS strict Java21 --patch-module kernel oracle; full M3JDK21 jtreg remains open
 ```

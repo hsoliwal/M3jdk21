@@ -7,8 +7,8 @@ on:
       - 'src/java.base/share/classes/jdk/internal/mindex/M3RX7Image.java'
       - 'src/java.base/share/classes/jdk/internal/mindex/M3RX7Codec.java'
       - 'test/jdk/java/util/regex/M3RX7CodecTest.java'
-      - 'm3/docs/name-mapping.d/m3-regex-v7-image-codec.json'
-      - 'm3/runtime-integration/check-m3rx7-v7-image-codec.sh'
+      - 'doc/m3/name-mapping.d/m3-regex-v7-image-codec.json'
+      - 'make/m3/runtime-integration/check-m3rx7-v7-image-codec.sh'
       - '.github/workflows/m3rx7-v7-image-codec-20261014.yml'
   workflow_dispatch:
 permissions:
@@ -24,4 +24,4 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Exact Synexia recipe receiver bytes and independent v7 wire oracle
-        run: sh m3/runtime-integration/check-m3rx7-v7-image-codec.sh
+        run: sh make/m3/runtime-integration/check-m3rx7-v7-image-codec.sh

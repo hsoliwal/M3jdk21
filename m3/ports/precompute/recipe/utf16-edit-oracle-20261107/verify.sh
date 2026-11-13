@@ -28,8 +28,8 @@ tests=$(grep -E "^\[(INFO|WARNING)\] Tests run: [0-9]+, Failures: [0-9]+, Errors
 echo "PACKAGE PASS warnings=$warnings errors=$errors ${tests#*\] }"
 grep -F "M3_UTF16_BITPARALLEL_EDIT_PROOF_V1" "$LOG" | tail -n 1
 [ "$warnings" -eq 0 ] && [ "$errors" -eq 0 ] || exit 1
-if [ -f "$ROOT/m3/tooling/jdk-naming/jdk_naming.py" ]; then
-    (cd "$ROOT" && "$PY" -I m3/tooling/jdk-naming/jdk_naming.py plan --only m3/ports/precompute/ | tail -n 1)
+if [ -f "$ROOT/make/m3/tooling/jdk-naming/jdk_naming.py" ]; then
+    (cd "$ROOT" && "$PY" -I make/m3/tooling/jdk-naming/jdk_naming.py plan --only m3/ports/precompute/ | tail -n 1)
 fi
 if [ $# -ge 4 ]; then
     bash "$RECIPE/class_identity.sh" "$4"

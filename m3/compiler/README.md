@@ -15,9 +15,9 @@ annotation processors. None of them authorizes reclamation, elision or source mu
 
 Six one-package modules (`jdk.m3.compiler.lifetime`, `.matsortable`, `.nullness`, `.parentowned`, `.reference`,
 `.staticuse`) and their descriptors (`org.m3jdk.compiler.*`) became this one package. The M3 prefix was dropped.
-Their relocation records keep their bytes in `m3/evidence/compiler/<module>/`: README, GATES, PROVENANCE,
+Their relocation records keep their bytes in `make/m3/evidence/compiler/<module>/`: README, GATES, PROVENANCE,
 RELOCATION_MAP, recipe/, verify.sh, pom and descriptor. The fold is described in
-`m3/evidence/compiler/FOLD_compiler.md`.
+`make/m3/evidence/compiler/FOLD_compiler.md`.
 
 Build: `mvn -f m3/compiler/pom.xml verify` (Java 21, `-Xlint:all -Werror`; tests `-Xlint:all,-lossy-conversions` for
 one donor proof). The javac Plugin descriptor joins the classes after compilation.

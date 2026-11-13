@@ -3,7 +3,7 @@
 # Modified 2026-10-29: retain existing arrays targets and add packed/full64 codecs.
 cmake_minimum_required(VERSION 3.20)
 project(m3_arrays LANGUAGES C)
-# Re-pointed by m3/tooling/jdk-naming/move_module_area.py (MOVE_TO_JDK_MODULE v2): the sources live in the
+# Re-pointed by make/m3/tooling/jdk-naming/move_module_area.py (MOVE_TO_JDK_MODULE v2): the sources live in the
 # JDK module src/jdk.m3.collections/share/native/libm3arrays and the C unit tests in test/jdk/jdk/m3/arrays/native.
 set(M3_NATIVE ${CMAKE_CURRENT_SOURCE_DIR}/../../../src/jdk.m3.collections/share/native/libm3arrays)
 set(M3_NATIVE_TESTS ${CMAKE_CURRENT_SOURCE_DIR}/../../../test/jdk/jdk/m3/arrays/native)

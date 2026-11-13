@@ -21,7 +21,7 @@
 //
 // WGSL specifics (each restates, never changes, the OpenCL behaviour):
 //   - 32-bit integers only: MULH / MULHSU / MULHU are built from 16-bit partial products
-//     (proven bit-exact: m3/docs/m3sdk/webgpu/rv32im_alu.wgsl, WEBGPU_PROBE_RECEIPTS.tsv)
+//     (proven bit-exact: doc/m3/m3sdk/webgpu/rv32im_alu.wgsl, WEBGPU_PROBE_RECEIPTS.tsv)
 //   - WGSL defines x / 0 and INT_MIN / -1 differently from RISC-V: both corners are guarded
 //     before the division, exactly as in the OpenCL helpers
 //   - RAM is array<u32>; LB/LH/LBU/LHU extract lanes and SB/SH read-modify-write the owning

@@ -20,7 +20,7 @@ final class M3Jep458ProofRefreshRecipeTest {
     private static final String WORKFLOW =
             ".github/workflows/m3-jep458-current-master.yml";
     private static final String RECEIPT =
-            "m3/backports/recipes/jep-458-current/CURRENT_TREE_RECEIPT.tsv";
+            "make/m3/backports/recipes/jep-458-current/CURRENT_TREE_RECEIPT.tsv";
 
     @Test
     void exactProofPreimagesTransformAndSecondPassIsFixedPoint() {

@@ -22,7 +22,7 @@ See [CATALOGUE.tsv](CATALOGUE.tsv) for the existing donor #1630, broader #1619 a
 Reuses the exact prior `M3FilteredCowOwnerContract`/JUnit from product #1630, including 209 previously executed checks on that donor source epoch. The current receiver must prove actual product behavior independently. Extra focus includes mixed and `-Xint`, exact Java21 strict compilation, original/candidate declared signatures, original `M3FilteredIsEmptyContract` regression, and full native/JNI/HotSpot integration gates when this stack is promoted.
 
 ```bash
-bash m3/collections/qualification/cow-filtered-owner-20261021/verify.sh
+bash make/m3/collections/qualification/cow-filtered-owner-20261021/verify.sh
 ```
 
 **Current scope:** Git/source SHA-256 identity and exact canonical donor method readback verified. Actual canonical Maven/OpenRewrite SDK and product Java21 contract execution, whole owning Maven module, full source-built M3JDK21/JNI/Android acceptance and CPU/allocation benchmarks are **NOT_RUN** until results are retrieved. Draft only.

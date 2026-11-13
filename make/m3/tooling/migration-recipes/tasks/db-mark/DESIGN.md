@@ -24,7 +24,7 @@ No database, production recipe, POM, workflow, dependency or threshold changes.
 DbMark is a named crate using the unchanged M3HashPinnedJavaSnapshotRecipe.
 It owns the exact current test preimage and reviewed output. DbBuild's current
 output is synchronized while its original preimage remains immutable.
-Execution root is m3/tooling/migration-recipes. Actual engine execution, not
+Execution root is make/m3/tooling/migration-recipes. Actual engine execution, not
 static snapshot identity alone, is the acceptance criterion.
 
 ## Broader obligations

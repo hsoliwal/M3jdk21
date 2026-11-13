@@ -7,7 +7,7 @@
   "source_revision": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
   "target_base": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
   "maven_profile": "m3-parser",
-  "target": "m3/tooling/module-packs/parser",
+  "target": "make/m3/tooling/module-packs/parser",
   "receiving_sequence_advanced": false,
   "mappings": [
     {

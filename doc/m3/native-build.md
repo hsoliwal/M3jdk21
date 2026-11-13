@@ -17,26 +17,26 @@ documentation update does not implement those repairs or add mobile runtime supp
 
 Run commands from the repository root. The historical result below belongs only to its
 named base. The commands in this section are reproduction instructions, **not new passing
-results**. Review [OpenJDK prerequisites](../../doc/building.md) and
-[test harness setup](../../doc/testing.md) for the selected host before building.
+results**. Review [OpenJDK prerequisites](../building.md) and
+[test harness setup](../testing.md) for the selected host before building.
 
 ### Choose the artifact
 
 ```sh
 # Separate foundation; does not rebuild java.base or HotSpot.
 export M3JDK=/absolute/path/to/private/jdk-21
-bash m3/build.sh
+bash make/m3/build.sh
 
 # Independent Maven recipe/admission reactor; not the OpenJDK image build.
-mvn -B -ntp -f m3/pom.xml clean verify
+mvn -B -ntp -f make/m3/pom.xml clean verify
 
 # Current collection receiver; see its README for Java/JUnit/native prerequisites.
-mvn -f m3/collections/recipe/pom.xml verify
+mvn -f make/m3/collections/recipe/pom.xml verify
 JUNIT_CONSOLE_JAR=/absolute/path/to/junit-platform-console-standalone-1.12.2.jar \
-  python3 m3/collections/verify_donation.py --cost-probe
+  python3 make/m3/collections/verify_donation.py --cost-probe
 ```
 
-Use the current [collection instructions](../collections/README.md), not the frozen
+Use the current [collection instructions](../../make/m3/collections/README.md), not the frozen
 historical lane installer against an expanded factory. Each command has independent
 scope and may fail on missing dependencies or source/receipt drift.
 
@@ -47,12 +47,12 @@ selection reference. Representative commands it runs are:
 
 ```sh
 python3 m3/m3-import/current-full-borrow/check_string_phase.py
-python3 m3/runtime-integration/test_string_completeness.py
-python3 m3/runtime-integration/test_string_layout.py
-python3 m3/runtime-integration/check-m3string-invariants.py
-python3 m3/runtime-integration/check-m3string-history-recovery.py
-python3 m3/runtime-integration/check-m3string-concat-reference-dag.py
-mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
+python3 make/m3/runtime-integration/test_string_completeness.py
+python3 make/m3/runtime-integration/test_string_layout.py
+python3 make/m3/runtime-integration/check-m3string-invariants.py
+python3 make/m3/runtime-integration/check-m3string-history-recovery.py
+python3 make/m3/runtime-integration/check-m3string-concat-reference-dag.py
+mvn -B -ntp -f make/m3/tooling/migration-recipes/pom.xml \
   -Dtest=M3StringCanonicalDagMasterRepairRecipeTest test
 ```
 
@@ -66,12 +66,12 @@ then fix the canonical recipe or record a blocker. Do not bypass the failing che
 ```sh
 export M3_BOOT_JDK=/absolute/path/to/private/jdk-21
 # Requires host compiler, make, Autoconf and platform development dependencies.
-bash m3/build-openjdk.sh
+bash make/m3/build-openjdk.sh
 # Select the image actually produced by your configuration; do not assume another host's path.
 export M3_TEST_JDK=/absolute/path/to/this-checkout/build/CONFIG/images/jdk
 "$M3_TEST_JDK/bin/java" -version
 # Focused Linux JNI API harness: also requires gcc and timeout on PATH.
-bash m3/runtime-integration/run-api.sh
+bash make/m3/runtime-integration/run-api.sh
 # Configure jtreg first, then run an explicit focused selection against the build.
 make test TEST="test/jdk/java/lang/String/M3StringCanonicalDagTest.java test/jdk/java/lang/String/M3StringStreamsTest.java"
 ```
@@ -92,7 +92,7 @@ and enabled test selections differ. Preserve separate reports and failing tests.
 
 | Surface | Checked-in implementation or recipe | Qualification boundary |
 | --- | --- | --- |
-| Separate Java 21 foundation | `m3/build.sh`; JIT, interpreter, noncompact and C2-focused cases | Module tests only; no claim for modified-JDK C2 |
+| Separate Java 21 foundation | `make/m3/build.sh`; JIT, interpreter, noncompact and C2-focused cases | Module tests only; no claim for modified-JDK C2 |
 | M3-enabled matched VM | `arguments.cpp` forces interpreter mode | Optimizing compilers are not supported with the flag enabled |
 | CDS/JVMCI/JFR/string dedup with M3 enabled | VM disables shared-space use and rejects specified incompatible options | Do not remove guards to claim support |
 | Linux String/JNI | `run-api.sh` uses GCC, `.so` and Linux headers; hosted String job uses Ubuntu | Exact-head execution still required; instructions are not a pass |
@@ -128,11 +128,11 @@ Equivalent configure/build entry point:
 export M3_BOOT_JDK=/path/to/private/jdk-21+35
 # Optional prefix with include/ and lib/x86_64-linux-gnu/ native dependencies:
 export M3_NATIVE_DEPS=/path/to/extracted-deps/usr
-./m3/build-openjdk.sh
+./make/m3/build-openjdk.sh
 export M3JDK="$PWD/build/linux-x86_64-server-fastdebug/images/jdk"
-./m3/build.sh
-python3 m3/compatibility/check-m3.py
-python3 m3/verify-shared-mapping.py
+./make/m3/build.sh
+python3 make/m3/compatibility/check-m3.py
+python3 make/m3/verify-shared-mapping.py
 ```
 
 The script configures fastdebug server, headless-only, bundled FreeType and

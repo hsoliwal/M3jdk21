@@ -15,25 +15,25 @@ import unittest
 
 
 CRATE = Path(
-    "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/"
+    "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/"
     "jdk21-hash-pinned-text/jcc-handoff-20261005"
 )
-REGISTRY = "m3/docs/name-mapping.json"
+REGISTRY = "doc/m3/name-mapping.json"
 OUTPUTS = {
     REGISTRY,
-    "m3/docs/jcc-source-handoff.md",
-    "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
-    "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
+    "doc/m3/jcc-source-handoff.md",
+    "make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
+    "make/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
 }
 GUARDS = {
-    "m3/docs/name-mapping.schema.json",
-    "m3/migration/migration.py",
-    "m3/migration/recipe.py",
-    "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/"
+    "doc/m3/name-mapping.schema.json",
+    "make/m3/migration/migration.py",
+    "make/m3/migration/recipe.py",
+    "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/"
     "M3Jdk21HashPinnedTextSnapshotRecipe.java",
-    "m3/tooling/migration-recipes/pom.xml",
+    "make/m3/tooling/migration-recipes/pom.xml",
     "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
-    "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/"
+    "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/"
     "jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
 }
 UNRELATED = "unrelated/preserve.bin"
@@ -44,8 +44,8 @@ class JccHandoffPacketTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         override = os.environ.get("M3_JCC_CANDIDATE_ROOT")
-        cls.candidate = Path(override).resolve() if override else Path(__file__).resolve().parents[3]
-        owner = cls.candidate / "m3/migration/recipe.py"
+        cls.candidate = Path(override).resolve() if override else Path(__file__).resolve().parents[4]
+        owner = cls.candidate / "make/m3/migration/recipe.py"
         # The supplied candidate is read-only, including Python's import cache behavior.
         sys.dont_write_bytecode = True
         spec = importlib.util.spec_from_file_location("jcc_retained_sealed_installer", owner)

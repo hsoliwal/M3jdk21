@@ -19,7 +19,7 @@ public final class RecipeOwnershipPolicy {
     public static final String EXPECTED_SCHEMA = "M3JDK21_M3_BORROWING_V1";
     public static final String EXPECTED_TARGET = "hsoliwal/M3jdk21";
     public static final String RECIPE_SOURCE_ROOT =
-            "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/";
+            "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/";
 
     public enum Disposition {
         M3_CANONICAL(false),

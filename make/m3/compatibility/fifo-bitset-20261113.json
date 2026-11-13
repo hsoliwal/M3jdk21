@@ -299,13 +299,13 @@
       "before_sha256": "ABSENT"
     },
     {
-      "path": "m3/docs/name-mapping.json",
+      "path": "doc/m3/name-mapping.json",
       "sha256": "c09c1a4b462c45c1cd4cbf684808143e2408a87ee990edb73bd8f7780c91bce8",
       "git_blob": "fff40434f900c92085bea43e63570727a5793b5d",
       "bytes": 789441
     },
     {
-      "path": "m3/tooling/name-contract/name-plan.json",
+      "path": "make/m3/tooling/name-contract/name-plan.json",
       "sha256": "2f7ed0208b7330db337a9587b15e220eb00ae4cc2f5d9b6e06a956ee30de05fa",
       "git_blob": "4ab64db85e71f38ebcf7c0f2dc10b745caeba7d2",
       "bytes": 2444
@@ -447,7 +447,7 @@
     "crate": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
     "recipe_name": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
     "dataset": "fifo-bitset-receipt-20261113",
-    "target": "m3/compatibility/fifo-bitset-20261113.json",
+    "target": "make/m3/compatibility/fifo-bitset-20261113.json",
     "before": "ABSENT",
     "self_seal": "The subsequent private dataset binds receipt bytes and its actual SDK/receiver evidence without a self-referential hash."
   }

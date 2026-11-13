@@ -18,11 +18,11 @@ HERE = Path(__file__).resolve().parent
 CURRENT = "09075810b55229662329a158923287e8a7118f86"
 CURRENT_ROOT = "bba8647ea80d1cb4101394b4c0fc5a97f0b8eb52"
 INPUT_EPOCH_SHA = "4fd3b3bd4fb09759d8bb02ca9ba45d0b2934625f24bcc4ae195f3e49394dff70"
-VALIDATOR = "m3/migration/migration.py"
-SCHEMA = "m3/docs/name-mapping.schema.json"
-PATHS = ("m3/docs/name-mapping.json", "m3/docs/jcc-source-handoff.md",
-         "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
-         "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv")
+VALIDATOR = "make/m3/migration/migration.py"
+SCHEMA = "doc/m3/name-mapping.schema.json"
+PATHS = ("doc/m3/name-mapping.json", "doc/m3/jcc-source-handoff.md",
+         "make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
+         "make/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv")
 
 
 def require(condition, message):

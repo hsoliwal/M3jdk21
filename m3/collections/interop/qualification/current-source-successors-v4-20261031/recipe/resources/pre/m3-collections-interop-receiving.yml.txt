@@ -5,7 +5,7 @@ on:
     paths:
       - 'm3/collections/interop/**'
       - 'm3/collections/src/main/java/**'
-      - 'm3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
+      - 'make/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
       - '.github/workflows/m3-collections-interop-receiving.yml'
   push:
     branches: [aix/m3-collections-interop-receiving-20261015]
@@ -27,7 +27,7 @@ jobs:
             m3/arrays
             m3/collections
             m3/native
-            m3/tooling/migration-recipes
+            make/m3/tooling/migration-recipes
       # Keep both historical source checkouts; the successor verifier binds
       # 36+7+40 originals, three compiled-test atoms and eight new E5 sources.
       - uses: actions/checkout@v4
@@ -67,7 +67,7 @@ jobs:
           set -euxo pipefail
           mkdir -p proof/core-classes/META-INF proof/array-classes/META-INF
           { git rev-parse HEAD; uname -m; java -version 2>&1; mvn -version; } > proof/identity.txt
-          ENGINE=m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java
+          ENGINE=make/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java
           test "$(git hash-object "$ENGINE")" = aaf5c4615fb44e49dde1ddcf15eb11a578c31885
           python3 -m unittest discover -s before-interop-20261026/m3/collections/interop/qualification/current-census-20261017 -p 'test_*.py' -v 2>&1 | tee proof/census-tests.log
           python3 -m unittest discover -s before-interop-20261026/m3/collections/interop/qualification/current-census-superset-20261022 -p 'test_*.py' -v 2>&1 | tee proof/superset-census-tests.log
@@ -195,7 +195,7 @@ jobs:
             jdk.m3.collections.interop.M3LibraryCollections \
             jdk.m3.collections.interop.M3LibraryCollectors \
             jdk.m3.collections.interop.M3SpringMultiValueMap > proof/interop-public-api.txt
-          git diff --exit-code -- m3/collections/src/main/java m3/tooling/migration-recipes/src/main/java m3/collections/interop/src
+          git diff --exit-code -- m3/collections/src/main/java make/m3/tooling/migration-recipes/src/main/java m3/collections/interop/src
       - name: Preserve actual resolved runtime dependency closure and hashes
         shell: bash
         run: |

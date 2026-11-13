@@ -13,7 +13,7 @@ import java.util.Objects;
  * Schemes must be deterministic, immutable and bound to a precise semantic revision.
  * This internal kernel stores references to existing JDK Strings, not a spelling dictionary.
  * It performs no module resolution, class loading, dependency selection or implementation routing.
- * Adapted from Synexia MIndexVersionTable; see m3/tooling/vi/README.md for pinned lineage.
+ * Adapted from Synexia MIndexVersionTable; see make/m3/tooling/vi/README.md for pinned lineage.
  */
 public final class M3VI<T> {
     /** JDK-owned callback boundary; null means no reporting or cancellation. */

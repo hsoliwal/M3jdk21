@@ -3,7 +3,7 @@
 # Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
 """Recipe JBCOLL_MASK_COMPACTOR_PERF v1: complete mask statistic + measured dispatch of jdk.internal.mindex.M3CollectionMaskCompactor.
 
-Derived from m3/qualification/jbcoll-arraylist-inline-20261106/apply.py (itself from progress-monitor-unify-20261106/
+Derived from make/m3/qualification/jbcoll-arraylist-inline-20261106/apply.py (itself from progress-monitor-unify-20261106/
 unify.py). Root cause: the superset merge b361ddbf0552 (PR #1363, "conflicts resolved to the candidate the compiler
 accepts") joined the long-returning maskStatistics of PR #1363's head 584cf8a6d0b5 (complete scan, runs << 32 |
 removed) with the early exit of the int-returning removalRuns of ff0b94fc2a3b/4476604f7d95 (`if (count > threshold)
@@ -228,7 +228,7 @@ def run(root: Path, check: bool, whatif: str | None) -> int:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--root", default=str(RECIPE_DIR.parents[2]), help="repository root (default: three up)")
+    parser.add_argument("--root", default=str(RECIPE_DIR.parents[3]), help="repository root (default: three up)")
     parser.add_argument("--check", action="store_true", help="write nothing; exit 1 when a run would change a file")
     parser.add_argument("--whatif", help="write the owner postimage to this path only")
     args = parser.parse_args(argv)

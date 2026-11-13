@@ -9,7 +9,7 @@ import org.openrewrite.text.PlainText;
 
 /** Adds the target-owned bulk scheduler family to the canonical M3JDK name map. */
 public final class M3BulkExecutorNameMappingRecipe extends Recipe {
-    static final String PATH = "m3/docs/name-mapping.json";
+    static final String PATH = "doc/m3/name-mapping.json";
     static final String MARKER =
             "\"source_family\": \"Synexia BulkTask/BulkExecutor/M3BulkExecutor"
                     + " + TornadoVM verified RV32IM bulk provider\"";

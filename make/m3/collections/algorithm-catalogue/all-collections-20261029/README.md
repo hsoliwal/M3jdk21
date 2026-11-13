@@ -21,7 +21,7 @@ recipe resides in [Synexia #14097](https://github.com/hsoliwal/com.synexia/pull/
 The preceding queue tranche remains [M3JDK21 #2135](https://github.com/hsoliwal/M3jdk21/pull/2135).
 Avoid rebasing/force-pushing either side of this recipe-driven stack.
 
-Run `python3 m3/collections/verification/verify_complete_collection_inventory.py`
+Run `python3 make/m3/collections/verification/verify_complete_collection_inventory.py`
 from the Git repository root. The verifier reads Git objects only; it never
 rewrites any source or changes Git refs. New files after this frozen baseline
 require the next append-only inventory revision.

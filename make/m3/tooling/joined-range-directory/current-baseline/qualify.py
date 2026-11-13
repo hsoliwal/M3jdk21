@@ -15,7 +15,7 @@ import signal
 import subprocess
 import time
 
-TARGET='m3/tooling/joined-range-directory/current-baseline/CURRENT_BUILD_INPUTS.json'
+TARGET='make/m3/tooling/joined-range-directory/current-baseline/CURRENT_BUILD_INPUTS.json'
 def ident(raw):
     return dict(bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest(),gitBlob=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest())
 def relative(name):
@@ -120,7 +120,7 @@ m3_checked_paths() {
 rm() { m3_checked_paths "$@" && command rm "$@"; }
 mv() { m3_checked_paths "$@" && command mv "$@"; }
 rmdir() { m3_checked_paths "$@" && command rmdir "$@"; }
-source "$M3_BOUNDED_COHORT/m3/build.sh"
+source "$M3_BOUNDED_COHORT/make/m3/build.sh"
 '''
         for label,values,rows in [('historical',before,old['files']),('current',now,current['files'])]:
             directory=a.historical_workspace if label=='historical' else a.inputs/'current'
@@ -146,7 +146,7 @@ if m3_checked_paths ../outside; then exit 74; fi
 if m3_checked_paths build/../../outside; then exit 74; fi
 '''
             command(label+'-filesystem-fence',[a.bash,'--noprofile','--norc','-c',fence.decode(),'qualification'],directory,child_env)
-            text=command(label+'-original-build',[a.bash,'--noprofile','--norc','-c',wrapper.decode(),str(directory/'m3/build.sh')],directory,child_env)
+            text=command(label+'-original-build',[a.bash,'--noprofile','--norc','-c',wrapper.decode(),str(directory/'make/m3/build.sh')],directory,child_env)
             counts={marker:[line for line in text.splitlines() if re.match(re.escape(marker)+r' checks=[1-9][0-9]*(?:\s|$)',line)] for marker in constants['MARKERS']}
             assert all(len(lines)==4 for lines in counts.values()),'all16 original markers must execute in four modes'
             compiled={p.relative_to(directory/'m3/build/classes').as_posix():ident(regular(p)) for p in sorted((directory/'m3/build/classes').rglob('*.class'))}

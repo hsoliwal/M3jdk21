@@ -9,7 +9,7 @@ current_tree_equivalent	false
 implementation_paths	47
 recipe_atoms_generated	false
 materializer_ready	true
-materializer	m3/backports/materialize_generated_crates.py
+materializer	make/m3/backports/materialize_generated_crates.py
 dependency_audit	initial-pass-complete
 compile_proof	pending
 jtreg_proof	pending

@@ -28,23 +28,23 @@ jobs:
           cache: maven
       - name: Recipe tests (rename, reseal, rename_types, fold_package)
         run: |
-          python3 -I m3/tooling/jdk-naming/test_jdk_naming.py
-          python3 -I m3/tooling/jdk-naming/test_reseal.py
-          python3 -I m3/tooling/jdk-naming/test_rename_types.py
-          python3 -I m3/tooling/jdk-naming/test_fold_package.py
-          python3 -I m3/tooling/jdk-naming/test_product_name.py
+          python3 -I make/m3/tooling/jdk-naming/test_jdk_naming.py
+          python3 -I make/m3/tooling/jdk-naming/test_reseal.py
+          python3 -I make/m3/tooling/jdk-naming/test_rename_types.py
+          python3 -I make/m3/tooling/jdk-naming/test_fold_package.py
+          python3 -I make/m3/tooling/jdk-naming/test_product_name.py
       - name: Package layout gate (no new package, module root or split package without approval)
         run: |
-          python3 -I m3/tooling/jdk-naming/test_package_gate.py
-          python3 -I m3/tooling/jdk-naming/test_pom_dependents.py
-          python3 -I m3/tooling/jdk-naming/test_move_refs.py
-          python3 -I m3/tooling/jdk-naming/package_gate.py check --tree HEAD
+          python3 -I make/m3/tooling/jdk-naming/test_package_gate.py
+          python3 -I make/m3/tooling/jdk-naming/test_pom_dependents.py
+          python3 -I make/m3/tooling/jdk-naming/test_move_refs.py
+          python3 -I make/m3/tooling/jdk-naming/package_gate.py check --tree HEAD
       - name: Recipe fixed point on the tree
         run: |
-          python3 -I m3/tooling/jdk-naming/jdk_naming.py plan --tree HEAD --tsv naming-plan.tsv | tee naming-plan.txt
+          python3 -I make/m3/tooling/jdk-naming/jdk_naming.py plan --tree HEAD --tsv naming-plan.tsv | tee naming-plan.txt
           grep -q 'moves=0 rewrites=0 refusals=0' naming-plan.txt
       - name: JUnit conformance
-        run: mvn -B -ntp -f m3/tooling/jdk-naming/conformance/pom.xml test
+        run: mvn -B -ntp -f make/m3/tooling/jdk-naming/conformance/pom.xml test
       - uses: actions/upload-artifact@v4
         if: failure()
         with:

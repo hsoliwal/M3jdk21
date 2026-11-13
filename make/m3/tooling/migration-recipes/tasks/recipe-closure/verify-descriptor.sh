@@ -17,7 +17,7 @@ mkdir -p "$out"
 exec > >(tee "$out/verify.log") 2>&1
 owner=src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java
 test_source=test/jdk/jdk/internal/mindex/descriptor/jdk/m3/descriptor/DescriptorTest.java
-crate=m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor
+crate=make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor
 "$jdk/bin/java" -version
 printf 'SOURCE_SCOPE=layout-independent-two-source-export\n'
 printf 'JDK_HOME=%s\nREPOSITORY=%s\n' "$jdk" "$repo"

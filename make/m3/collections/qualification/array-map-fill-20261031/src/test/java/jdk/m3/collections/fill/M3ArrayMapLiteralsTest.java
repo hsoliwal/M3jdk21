@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 import org.junit.jupiter.api.Test;
 
 /**
- * No magic number and no floating string in the generated members: the rule of M3Culprits (m3/tooling/module-packs/
+ * No magic number and no floating string in the generated members: the rule of M3Culprits (make/m3/tooling/module-packs/
  * parser), applied here to source text. A numeric literal with an absolute value above 2, or not an integer, and a
  * non-empty string literal may only stand in a constant position (a static final field, an annotation, a case label);
  * a string may also stand in a message position (a throw statement, a format/info/warn/error/debug/trace call).

@@ -4,12 +4,12 @@ on:
   pull_request:
     paths:
       - 'm3/collections/src/**/M3IndexPathRank*.java'
-      - 'm3/collections/qualification/m3-index-path-rank-20261017/**'
-      - 'm3/collections/qualification/indexpath-bulk-20261021/**'
-      - 'm3/collections/algorithm-catalog/index-path-rank-20261017.tsv'
+      - 'make/m3/collections/qualification/m3-index-path-rank-20261017/**'
+      - 'make/m3/collections/qualification/indexpath-bulk-20261021/**'
+      - 'make/m3/collections/algorithm-catalog/index-path-rank-20261017.tsv'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-index-path-rank-20261017/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-index-path-rank-20261017.yml'
-      - 'm3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3IndexPathRankRecipeTest.java'
+      - 'make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-index-path-rank-20261017.yml'
+      - 'make/m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3IndexPathRankRecipeTest.java'
       - '.github/workflows/m3-index-path-rank-20261017.yml'
   workflow_dispatch:
 permissions:
@@ -34,8 +34,8 @@ jobs:
         run: |
           set -euo pipefail
           git diff --check
-          python3 m3/collections/qualification/indexpath-bulk-20261021/verify_history.py
-          bash m3/collections/qualification/indexpath-bulk-20261021/verify.sh
+          python3 make/m3/collections/qualification/indexpath-bulk-20261021/verify_history.py
+          bash make/m3/collections/qualification/indexpath-bulk-20261021/verify.sh
       - name: M3 collections JUnit Java21 contract
         run: >
           mvn -B -ntp -f m3/collections/pom.xml

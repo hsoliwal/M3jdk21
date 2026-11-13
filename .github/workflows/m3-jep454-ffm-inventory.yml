@@ -5,15 +5,15 @@ on:
     branches:
       - "m3/jep454-ffm-*"
     paths:
-      - "m3/backports/recipes/jep-454-ffm/**"
-      - "m3/backports/JEP_RESIDUE_QUEUE.tsv"
-      - "m3/backports/PROGRAM_STATUS_2026-10-07.md"
+      - "make/m3/backports/recipes/jep-454-ffm/**"
+      - "make/m3/backports/JEP_RESIDUE_QUEUE.tsv"
+      - "make/m3/backports/PROGRAM_STATUS_2026-10-07.md"
       - ".github/workflows/m3-jep454-ffm-inventory.yml"
   pull_request:
     paths:
-      - "m3/backports/recipes/jep-454-ffm/**"
-      - "m3/backports/JEP_RESIDUE_QUEUE.tsv"
-      - "m3/backports/PROGRAM_STATUS_2026-10-07.md"
+      - "make/m3/backports/recipes/jep-454-ffm/**"
+      - "make/m3/backports/JEP_RESIDUE_QUEUE.tsv"
+      - "make/m3/backports/PROGRAM_STATUS_2026-10-07.md"
       - ".github/workflows/m3-jep454-ffm-inventory.yml"
   workflow_dispatch:
 
@@ -35,10 +35,10 @@ jobs:
           python-version: "3.12"
 
       - name: Validate JEP 454 packet
-        run: python3 m3/backports/recipes/jep-454-ffm/validate_inventory.py
+        run: python3 make/m3/backports/recipes/jep-454-ffm/validate_inventory.py
 
       - name: Run refusal tests
-        run: python3 -m unittest -v m3/backports/recipes/jep-454-ffm/test_validate_inventory.py
+        run: python3 -m unittest -v make/m3/backports/recipes/jep-454-ffm/test_validate_inventory.py
 
       - name: Diff hygiene
         run: git diff --check

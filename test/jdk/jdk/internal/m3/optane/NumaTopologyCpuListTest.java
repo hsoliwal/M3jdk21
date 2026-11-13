@@ -13,13 +13,13 @@ import java.util.regex.Pattern;
 import org.junit.jupiter.api.Test;
 
 /**
- * The CPU-list parser of {@link NumaTopology} (recipe m3/optane/recipe/pmem-accelerator-20261107, census L047)
+ * The CPU-list parser of {@link NumaTopology} (recipe make/m3/optane/recipe/pmem-accelerator-20261107, census L047)
  * against (1) the hand-derived table of the donor SelfTest (its eleven parseCpuList checks, the only part of that
  * 465-line self-test that runs without the accelerator jmod family), (2) a canonical-formatter round trip over
  * seeded random CPU sets, and (3) a regex reference grammar over seeded random short strings, accept/refuse and set
  * compared. The parser is a pure Java atom; no native library and no NUMA host is needed.
  */
-//FLLDCIM: RELOCATE - M3JDK-authored reference model of recipe m3/optane/recipe/pmem-accelerator-20261107 (census L047); the donor SelfTest checks are the hand table below
+//FLLDCIM: RELOCATE - M3JDK-authored reference model of recipe make/m3/optane/recipe/pmem-accelerator-20261107 (census L047); the donor SelfTest checks are the hand table below
 final class NumaTopologyCpuListTest {
     private static final int LIMIT = 65535;
     /** The reference grammar: elements of an optional +, digits, an optional -+digits range; ASCII trim; commas. */

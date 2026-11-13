@@ -2,7 +2,7 @@
 <!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors -->
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 <!-- FLLDCIM: FILE_UNIFY - union of m3/file/pom.xml (blob c64ebfc3ccdf) and m3/ports/file/pom.xml (blob f928fb9071a4): every
-     dependency, plugin, execution and surefire setting of both; recipe m3/qualification/file-unify-20261106/unify.py v1 -->
+     dependency, plugin, execution and surefire setting of both; recipe make/m3/qualification/file-unify-20261106/unify.py v1 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
@@ -17,7 +17,7 @@
     M3ProgressMonitor as an adapter over the owner jdk.m3.collections.M3ProgressMonitor, M3JsonStructuralIndex). Pure
     Java 21; com.m3:m3-collections is the only dependency outside java.base; the natives under src/main/native are built
     by their CMakeLists.txt and loaded at run time through M3JniLibraryLoader. One module for the package since
-    m3/qualification/file-unify-20261106 (formerly m3/file jdk.m3.file and m3/ports/file org.m3jdk.file); the first
+    make/m3/qualification/file-unify-20261106 (formerly m3/file jdk.m3.file and m3/ports/file org.m3jdk.file); the first
     consumer outside this module is the native search engine (m3/search), whose loader owner is
     M3JniLibraryLoader.</description>
   <properties>

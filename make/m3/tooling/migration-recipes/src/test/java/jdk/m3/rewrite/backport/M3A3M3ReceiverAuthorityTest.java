@@ -12,13 +12,13 @@ class M3A3M3ReceiverAuthorityTest {
     void synexiaReceiverAdmitsOnlyToolPlaneA3AndReceiverOwners() {
         assertTrue(
                 M3Jdk21HashPinnedSnapshotRecipe.synexiaReceiverJavaPath(
-                        "m3/tooling/a3/src/main/java/jdk/m3/a3/A3Apply.java"));
+                        "make/m3/tooling/a3/src/main/java/jdk/m3/a3/A3Apply.java"));
         assertTrue(
                 M3Jdk21HashPinnedSnapshotRecipe.synexiaReceiverJavaPath(
-                        "m3/tooling/a3/src/test/java/jdk/m3/a3/A3ApplyTest.java"));
+                        "make/m3/tooling/a3/src/test/java/jdk/m3/a3/A3ApplyTest.java"));
         assertTrue(
                 M3Jdk21HashPinnedSnapshotRecipe.synexiaReceiverJavaPath(
-                        "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/"
+                        "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/"
                                 + "M3HandoffGuardRecipe.java"));
 
         assertFalse(
@@ -29,7 +29,7 @@ class M3A3M3ReceiverAuthorityTest {
                         "test/jdk/java/lang/String/Basic.java"));
         assertFalse(
                 M3Jdk21HashPinnedSnapshotRecipe.synexiaReceiverJavaPath(
-                        "m3/tooling/a3/README.md"));
+                        "make/m3/tooling/a3/README.md"));
         assertFalse(
                 M3Jdk21HashPinnedSnapshotRecipe.synexiaReceiverJavaPath(
                         "../m3/tooling/a3/src/main/java/jdk/m3/a3/A3Apply.java"));

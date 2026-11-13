@@ -24,7 +24,7 @@ mkdir -p "$SCRATCH"
 cd "$REPO"
 python -I m3/file/recipe/delta-generator-20261106/relocate.py --donor-git "$DONOR_GIT" --donor-rev "$REV" --check | tee "$SCRATCH/relocate-check.txt"
 grep -q ' changed=0 provenance=UNCHANGED' "$SCRATCH/relocate-check.txt"
-python -I m3/tooling/jdk-naming/jdk_naming.py plan --root . --only m3/file/ | tee "$SCRATCH/naming-plan.txt"
+python -I make/m3/tooling/jdk-naming/jdk_naming.py plan --root . --only m3/file/ | tee "$SCRATCH/naming-plan.txt"
 grep -q 'moves=0 rewrites=0 refusals=0' "$SCRATCH/naming-plan.txt"
 echo "mvn package ${MVN_ARGS:-} (extra arguments: '${MVN_ARGS:-none}')"
 if ! mvn -q -B -ntp ${REPO_LOCAL:+-Dmaven.repo.local=$REPO_LOCAL} ${MVN_ARGS:-} -f m3/file/pom.xml package > "$SCRATCH/mvn-package.log" 2>&1; then

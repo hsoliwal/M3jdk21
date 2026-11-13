@@ -23,7 +23,7 @@ The source-owned packet seals both receiver Java files with ABSENT preimages and
 ## Verify
 
 ```sh
-sh m3/tooling/lazy-priority-frontier/verify.sh
+sh make/m3/tooling/lazy-priority-frontier/verify.sh
 ```
 
 The script compiles with Java 21, all lint warnings treated as errors, then runs four deterministic regression groups. The 4,096-value comparison establishes ordering correctness against `Arrays.sort`; it is not a performance benchmark. No speedup or JNI benefit is claimed.

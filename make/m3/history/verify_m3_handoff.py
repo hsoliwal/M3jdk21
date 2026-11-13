@@ -13,8 +13,8 @@ import hashlib
 from pathlib import Path, PurePosixPath
 import re
 
-HISTORY = "m3/docs/m3-m3jdk21-eclipse-recipe-handoff-20261022.tsv"
-SUCCESSIONS = "m3/docs/m3-m3jdk21-source-successions.tsv"
+HISTORY = "doc/m3/m3-m3jdk21-eclipse-recipe-handoff-20261022.tsv"
+SUCCESSIONS = "doc/m3/m3-m3jdk21-source-successions.tsv"
 HISTORY_BLOB = "30d5224faaa7c923bf72af4f7a1b1d15bbdad207"
 EVOLVED_OWNER = "m3/file/src/main/java/jdk/m3/file/M3ResourceLocks.java"
 HISTORICAL_OWNER_SHA = "18d05ae54945d4129c46d62e26551cbc4fd200b31c185e020b9ee6240fdc9599"
@@ -117,7 +117,7 @@ def verify(root: Path) -> tuple[int, int]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[2])
+    parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[3])
     args = parser.parse_args()
     try:
         historical, successors = verify(args.root)

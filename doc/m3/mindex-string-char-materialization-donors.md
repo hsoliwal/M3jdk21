@@ -20,7 +20,7 @@ The reviewed donor projects reinforce the same separation:
 | OpenJDK String/StringUTF16/StringConcatHelper/JNI | exact Java UTF-16, Compact String and JNI materialization contract | semantic authority for the modified-JDK route |
 
 Exact repository commits and licenses are recorded in
-`m3/runtime-integration/FOSS_REUSE_DECISION.tsv`.
+`make/m3/runtime-integration/FOSS_REUSE_DECISION.tsv`.
 
 ## Current implementation
 

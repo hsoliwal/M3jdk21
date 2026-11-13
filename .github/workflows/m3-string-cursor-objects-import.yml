@@ -5,7 +5,7 @@ on:
   pull_request:
     paths:
       - 'src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java'
-      - 'm3/backports/recipes/jdk-m3string-objects-import/**'
+      - 'make/m3/backports/recipes/jdk-m3string-objects-import/**'
       - '.github/workflows/m3-string-cursor-objects-import.yml'
   workflow_dispatch:
 
@@ -27,8 +27,8 @@ jobs:
         run: |
           set -euo pipefail
           git diff --check
-          python3 m3/backports/recipes/jdk-m3string-objects-import/verify_current.py --root .
-          python3 -m unittest discover -v             -s m3/backports/recipes/jdk-m3string-objects-import             -p test_verify_current.py
+          python3 make/m3/backports/recipes/jdk-m3string-objects-import/verify_current.py --root .
+          python3 -m unittest discover -v             -s make/m3/backports/recipes/jdk-m3string-objects-import             -p test_verify_current.py
 
   java21-image:
     needs: source-custody

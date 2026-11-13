@@ -6,16 +6,16 @@ on:
   pull_request:
     paths:
       - '.github/workflows/m3-charcopy-current-successor.yml'
-      - 'm3/tooling/charcopy-current-successor/**'
+      - 'make/m3/tooling/charcopy-current-successor/**'
       - 'src/java.base/share/classes/java/lang/MIndexString.java'
-      - 'm3/runtime-integration/tests/MIndexStringInvariant.java'
+      - 'make/m3/runtime-integration/tests/MIndexStringInvariant.java'
       - 'src/java.base/share/classes/java/lang/M3String.java'
       - 'src/java.base/share/classes/java/lang/M3StringFacts.java'
       - 'test/jdk/java/lang/String/M3StringConcatLengthOverflowTest.java'
-      - 'm3/runtime-integration/tests/M3StringInvariant.java'
-      - 'm3/runtime-integration/char-array-copy/recipe/apply.py'
-      - 'm3/runtime-integration/char-array-copy/recipe/manifest.json'
-      - 'm3/runtime-integration/char-array-copy/recipe/test_recipe.py'
+      - 'make/m3/runtime-integration/tests/M3StringInvariant.java'
+      - 'make/m3/runtime-integration/char-array-copy/recipe/apply.py'
+      - 'make/m3/runtime-integration/char-array-copy/recipe/manifest.json'
+      - 'make/m3/runtime-integration/char-array-copy/recipe/test_recipe.py'
       - 'LICENSE'
 permissions:
   contents: read
@@ -132,7 +132,7 @@ jobs:
           root=pathlib.Path(os.environ["M3_PROOF_ROOT"])
           source=pathlib.Path(os.environ["M3_SOURCE_ROOT"])
           bundle=root/"artifacts";bundle.mkdir(exist_ok=False)
-          task=source/"m3/tooling/charcopy-current-successor"
+          task=source/"make/m3/tooling/charcopy-current-successor"
           sdk=task/"sdk"
           start=time.monotonic()
           active_command=None

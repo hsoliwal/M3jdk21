@@ -57,13 +57,13 @@ jobs:
           java -cp m3/lexicon/hf-intake/target/classes \
             jdk.m3.lexicon.hf.M3HfLexiconIntakeRecipe \
             "$tmp/approval.tsv" "$tmp/fixture.tsv" "$tmp/m3-source.records.tsv"
-          python3 m3/runtime-integration/export-m3-lexicon.py \
+          python3 make/m3/runtime-integration/export-m3-lexicon.py \
             --source-manifest "$tmp/manifest.tsv" \
             --records "$tmp/m3-source.records.tsv" \
             --output "$tmp/export" \
             --source-repository "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" \
             --source-commit "$GITHUB_SHA"
-          python3 m3/runtime-integration/verify-m3-lexicon.py "$tmp/export"
+          python3 make/m3/runtime-integration/verify-m3-lexicon.py "$tmp/export"
       - name: Reuse the existing C11 JNI word-row receiver, four runtime modes
         shell: bash
         run: |

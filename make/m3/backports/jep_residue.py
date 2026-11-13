@@ -107,7 +107,7 @@ def _recipe_evidence(root: Path, jep: int) -> tuple[str, tuple[str, ...], dict[s
     evidence: list[str] = []
     receipt: dict[str, str] = {}
 
-    recipes = root / "m3" / "backports" / "recipes"
+    recipes = root / "make" / "m3" / "backports" / "recipes"
     if recipes.is_dir():
         prefixes = (f"jep-{jep}", f"j{jep}")
         for candidate in sorted(recipes.iterdir()):
@@ -124,16 +124,7 @@ def _recipe_evidence(root: Path, jep: int) -> tuple[str, tuple[str, ...], dict[s
 
     recipe_java = (
         root
-        / "m3"
-        / "tooling"
-        / "migration-recipes"
-        / "src"
-        / "main"
-        / "java"
-        / "jdk"
-        / "m3"
-        / "rewrite"
-        / "backport"
+        / "make" / "m3" / "tooling" / "migration-recipes" / "src" / "main" / "java" / "jdk" / "m3" / "rewrite" / "backport"
     )
     if recipe_java.is_dir():
         needle = f"jep{jep}".lower()
@@ -143,7 +134,7 @@ def _recipe_evidence(root: Path, jep: int) -> tuple[str, tuple[str, ...], dict[s
 
     if receipt:
         state = "MATERIALIZED_PACKET"
-    elif any(path.startswith("m3/backports/recipes/") for path in evidence):
+    elif any(path.startswith("make/m3/backports/recipes/") for path in evidence):
         state = "PACKET_EVIDENCE"
     elif evidence:
         state = "RECIPE_CLASS"
@@ -305,7 +296,7 @@ def _parse_args(argv: Sequence[str]) -> argparse.Namespace:
 def main(argv: Sequence[str] | None = None) -> int:
     args = _parse_args(sys.argv[1:] if argv is None else argv)
     root = args.root.resolve()
-    backports = root / "m3" / "backports"
+    backports = root / "make" / "m3" / "backports"
     items = queue(
         root,
         read_tsv(backports / "JEP_CATALOGUE.tsv"),

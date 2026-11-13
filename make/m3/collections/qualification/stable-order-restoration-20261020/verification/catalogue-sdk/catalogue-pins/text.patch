@@ -58,26 +58,26 @@ index 0000000..46ec51b
 +    "m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowResourceProbe.java": "a9dfb46285a65001c135fda31e3b69fe7a3882e00412029fe2abd64b1384fb9e",
 +    "m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowTest.java": "2d0b1bb9a515eefd48c3de29b32dced613c4e9f05c0547d677d8c8f67c004397"
 +  },
-+  "summary_target_path": "m3/collections/qualification/stable-order-restoration-20261020/RESULTS.json",
++  "summary_target_path": "make/m3/collections/qualification/stable-order-restoration-20261020/RESULTS.json",
 +  "qualification_receipts": {
 +    "verification/sdk/RESULTS.json": {
-+      "target_path": "m3/collections/qualification/stable-order-restoration-20261020/verification/sdk/RESULTS.json",
++      "target_path": "make/m3/collections/qualification/stable-order-restoration-20261020/verification/sdk/RESULTS.json",
 +      "sha256": "162a5d8ebcb52c9bf05c284f315ffc2146773f446861bd8fc12db851c1488eaf"
 +    },
 +    "verification/generated/RESULTS.json": {
-+      "target_path": "m3/collections/qualification/stable-order-restoration-20261020/verification/generated/RESULTS.json",
++      "target_path": "make/m3/collections/qualification/stable-order-restoration-20261020/verification/generated/RESULTS.json",
 +      "sha256": "8447b5d391ae2e8e21875d6952509ec174049a727b5140f59fd4dc23b12c0293"
 +    },
 +    "verification/GENERATED_COMPARISON.json": {
-+      "target_path": "m3/collections/qualification/stable-order-restoration-20261020/verification/GENERATED_COMPARISON.json",
++      "target_path": "make/m3/collections/qualification/stable-order-restoration-20261020/verification/GENERATED_COMPARISON.json",
 +      "sha256": "d8f0ae2fdbf6f119c2e6b892fdc480f950a2486425297313ebb0d664d2b04496"
 +    },
 +    "verification/native-final/RESULTS.json": {
-+      "target_path": "m3/collections/qualification/stable-order-restoration-20261020/verification/native-final/RESULTS.json",
++      "target_path": "make/m3/collections/qualification/stable-order-restoration-20261020/verification/native-final/RESULTS.json",
 +      "sha256": "2778ab5de34dd286019154fc180310ad60cdf6b126db48f676ea774c0494aaca"
 +    },
 +    "verification/retained-wrappers/RESULTS.json": {
-+      "target_path": "m3/collections/qualification/stable-order-restoration-20261020/verification/retained-wrappers/RESULTS.json",
++      "target_path": "make/m3/collections/qualification/stable-order-restoration-20261020/verification/retained-wrappers/RESULTS.json",
 +      "sha256": "8b1627414e93d555276e5113f7a053cc311f136ff0b0302f09470e36b4ab51ca"
 +    }
 +  },

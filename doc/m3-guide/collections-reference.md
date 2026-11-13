@@ -352,8 +352,8 @@ are not supplied here; reflection, hostile/reentrant user methods, allocation
 failure and all aliasing/default-method combinations are not newly qualified.
 Fail-fast behavior does not establish concurrent correctness.
 
-The [porting invariant](../../m3/docs/m3jdk21-porting-invariant.md#collection-family)
-and [naming map](../../m3/docs/name-mapping.json) retain the original JDK public
+The [porting invariant](../m3/m3jdk21-porting-invariant.md#collection-family)
+and [naming map](../m3/name-mapping.json) retain the original JDK public
 owners and ordered receiving gates. String qualification remains the active
 phase. This separately built library and its historical receipts do not advance
 arrays/collections or establish a replacement for every JDK collection.

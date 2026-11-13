@@ -14,7 +14,7 @@ eight original owners total 59,781 bytes. Five production/data inputs remain unc
 three expected postimages must be the actual fresh Maven SDK outputs.
 
 Run the existing SDK qualification first. Its three generated files must exist at
-sdk/target/emitted/<original m3/backports path>, with the exact INPUTS.json postimage pins.
+sdk/target/emitted/<original make/m3/backports path>, with the exact INPUTS.json postimage pins.
 The runtime accepts the exact reviewed before tuple, not an unreviewed current file.
 
 The existing external supervisor must create Q/artifacts, Q/tmp, Q/home and Q/cache,

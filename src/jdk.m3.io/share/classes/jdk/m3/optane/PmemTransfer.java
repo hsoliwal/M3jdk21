@@ -8,7 +8,7 @@ package jdk.m3.optane;
  * Copy changes destination bytes; call {@link PmemRegion#persist(long, long)}
  * separately if durable completion is required.
  */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/36827ee8a798ef6ce07f6fc55a2ac371b1382c06/m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/PmemTransfer.java blob ebd4dbc93549; recipe m3/optane/recipe/pmem-region-core-20261106/relocate.py v2
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/36827ee8a798ef6ce07f6fc55a2ac371b1382c06/m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/PmemTransfer.java blob ebd4dbc93549; recipe make/m3/optane/recipe/pmem-region-core-20261106/relocate.py v2
 public final class PmemTransfer {
     private PmemTransfer() {}
 

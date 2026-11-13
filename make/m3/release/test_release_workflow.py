@@ -16,14 +16,14 @@ import unittest
 import zipfile
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 WORKFLOW = ROOT / '.github/workflows/m3-release.yml'
 PLATFORMS = ('linux-x64', 'macos-x64', 'macos-aarch64', 'windows-x64')
 RIGHTS = (
     'LICENSE', 'ADDITIONAL_LICENSE_INFO', 'ASSEMBLY_EXCEPTION',
     'LICENSE-M3-APACHE-2.0.txt', 'M3-SYNEXIA-NOTICE.md',
     'M3-SYNEXIA-RIGHTS.md', 'M3-SYNEXIA-AUTHORS.md',
-    'm3/release/release-contract.json',
+    'make/m3/release/release-contract.json',
 )
 
 

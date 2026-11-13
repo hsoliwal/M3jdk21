@@ -24,4 +24,4 @@ Files: `relocate.py` (RELOCATE_CENSUS v5, unchanged copy of `qualification/censu
 (donor contract on the donor owner postimage vs relocated contract on the module owner, byte-identical stdout),
 `GATES.tsv`, `CENSUS_RERUN.tsv`, `RECIPE_MEMORY.tsv`.
 
-Re-run: `python -I m3/collections/qualification/census2-t1-20261106/relocate.py --donor-git <com.synexia clone> --donor-rev d5ad5090d87ef8477a56317e60ac0d29c65029f7 [--check]`.
+Re-run: `python -I make/m3/collections/qualification/census2-t1-20261106/relocate.py --donor-git <com.synexia clone> --donor-rev d5ad5090d87ef8477a56317e60ac0d29c65029f7 [--check]`.

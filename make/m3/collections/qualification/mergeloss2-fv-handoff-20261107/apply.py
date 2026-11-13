@@ -15,7 +15,7 @@ M3LongIndexPathMasks). DECISION.tsv decides every line; this recipe applies the 
   whose front scan it contains); row 27's m3_admit_chunk is the same transfer contract by another route and is
   not copied.
 plus the origin tests of those rows, CREATEd from the retained-variant blobs master carries.
-Derived from m3/collections/qualification/mergeloss2-filtered-views-20261107/apply.py v1 (anchored "sub" edits,
+Derived from make/m3/collections/qualification/mergeloss2-filtered-views-20261107/apply.py v1 (anchored "sub" edits,
 every anchor exactly once, LF payloads re-joined with the preimage's line ending, rules on one path chain, CREATE
 from pinned donor blobs). An EDIT target must equal its pinned preimage blob (the rule applies) or the final
 postimage (no-op); anything else is drift and the recipe refuses (exit 2) without writing. Idempotent; --check
@@ -278,7 +278,7 @@ def run(root: Path, check: bool) -> int:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--root", default=str(RECIPE_DIR.parents[3]), help="repository root (default: four up)")
+    parser.add_argument("--root", default=str(RECIPE_DIR.parents[4]), help="repository root (default: four up)")
     parser.add_argument("--check", action="store_true", help="write nothing; exit 1 when a run would change a file")
     args = parser.parse_args(argv)
     try:

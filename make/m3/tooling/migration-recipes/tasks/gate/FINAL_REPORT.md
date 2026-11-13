@@ -28,7 +28,7 @@ pending. Do not convert candidate inventory into a completion statement.
 
 Reproduction after the patch:
 ```
-mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify
+mvn -B -ntp -f make/m3/tooling/migration-recipes/pom.xml clean verify
 ```
 Run source-preserving gate recipes from their declared execution roots. The
 source-lane change is explicit metadata, not automatic fallback on parser error.

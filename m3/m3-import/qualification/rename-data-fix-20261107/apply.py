@@ -34,8 +34,8 @@ from pathlib import Path
 RECIPE = "RENAME_DATA_FIX"
 VERSION = "v1"
 BASE_COMMIT = "dc44fdbc244bc55402ed097010496e571a258a7e"
-NAMING_TOOL = "m3/tooling/jdk-naming/jdk_naming.py"
-NAMING_RULES = "m3/tooling/jdk-naming/NAMING_RULES.tsv"
+NAMING_TOOL = "make/m3/tooling/jdk-naming/jdk_naming.py"
+NAMING_RULES = "make/m3/tooling/jdk-naming/NAMING_RULES.tsv"
 STEPS_NAME = "STEPS.tsv"
 EDITS_NAME = "EDITS.tsv"
 STEP_COLUMNS = ("kind", "file", "old", "new", "count", "reason")

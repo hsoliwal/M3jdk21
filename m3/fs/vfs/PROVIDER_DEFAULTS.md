@@ -231,8 +231,8 @@ credentials/backends, power-loss behavior and performance remain separately
 qualified. The global String/arrays/collections receiving stage is unchanged.
 
 The authoritative naming admission is capability `m3.fs.provider-defaults` in
-`m3/docs/name-mapping.json` under `migration.records[]`. The companion
-`m3/docs/name-mapping.d/m3fs-provider-defaults-20261021.json` supplies provider
+`doc/m3/name-mapping.json` under `migration.records[]`. The companion
+`doc/m3/name-mapping.d/m3fs-provider-defaults-20261021.json` supplies provider
 details for that record. Public Java SE names and the existing module exports
 remain unchanged; database and NIO helpers stay internal to `com.m3.fs`.
 

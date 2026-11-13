@@ -64,7 +64,7 @@ is never canonical equality**. The complete UTF-16 bytes are the authority.
 ## Local JNI acceptance
 
 ```
-M3JDK=/path/to/jdk-21 python3 m3/verify-gvas-literal-precompute.py
+M3JDK=/path/to/jdk-21 python3 make/m3/verify-gvas-literal-precompute.py
 ```
 
 The script compiles real Java 21 sources with `javac -h -Xlint:all -Werror`, builds the

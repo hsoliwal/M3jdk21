@@ -68,7 +68,7 @@ def probe(root: Path, rev, rel: str, kind: str, literal: str, listing) -> bool:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--root", default=str(HERE.parents[2]), help="repository root (default: three up)")
+    parser.add_argument("--root", default=str(HERE.parents[3]), help="repository root (default: three up)")
     parser.add_argument("--rev", help="read files from this revision instead of the working tree")
     args = parser.parse_args(argv)
     root = Path(args.root).resolve()

@@ -28,7 +28,7 @@ Declared build gates:
 - JaCoCo 0.8.15 attaches its agent and, at `verify`, checks bundle LINE and BRANCH covered ratios against 0.99
 - Optional `m3-synexia-atom-pattern` and `m3-synexia-atom-pattern-mastery` profiles use OpenRewrite 5.23.1 and the source-owned recipes artifact; they are authoring/verification dependencies, not dependencies of the production DB API
 
-The retained [parse report][parse-report] gives `mvn -B -ntp -f m3/indexdb/pom.xml clean verify` as the module route. Resolve the pinned dependencies and use a suitable Java 21 toolchain before attempting it. That report and the later [atom report][atom-report] describe particular historical heads and mixed DB/recipe results; neither is refreshed into an exact-current-head pass by this guide. The [general build routes](../../m3/docs/native-build.md#current-checkout-verification-routes) separately cover the control reactor and OpenJDK image.
+The retained [parse report][parse-report] gives `mvn -B -ntp -f m3/indexdb/pom.xml clean verify` as the module route. Resolve the pinned dependencies and use a suitable Java 21 toolchain before attempting it. That report and the later [atom report][atom-report] describe particular historical heads and mixed DB/recipe results; neither is refreshed into an exact-current-head pass by this guide. The [general build routes](../m3/native-build.md#current-checkout-verification-routes) separately cover the control reactor and OpenJDK image.
 
 ## Artifact values and validation
 

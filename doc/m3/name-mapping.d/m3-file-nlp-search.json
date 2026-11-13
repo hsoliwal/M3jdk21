@@ -4,7 +4,7 @@
   "source_revision": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
   "canonical_recipe": "com.synexia.m3.M3NlpSearchIntegration20261018",
   "canonical_crate": "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018",
-  "canonical_commit_receipt": "m3/tooling/module-packs/nlp-search/INTEGRATION_CUSTODY.json",
+  "canonical_commit_receipt": "make/m3/tooling/module-packs/nlp-search/INTEGRATION_CUSTODY.json",
   "target_base": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
   "intake_mode": "INDEPENDENT_APACHE_MODULE",
   "receiving_sequence_advanced": false,
@@ -14,9 +14,9 @@
     "target_package": "com.m3.file",
     "source_class_count": 50,
     "mapped_public_and_protected_declarations_and_record_components": 709,
-    "full_mapping": "m3/tooling/module-packs/nlp-search/FILE_PORT_MAP.json",
-    "api_parity": "m3/tooling/module-packs/nlp-search/FILE_API_PARITY.json",
-    "native_and_json_closure": "m3/tooling/module-packs/nlp-search/JSON_CLOSURE_PROVENANCE.json"
+    "full_mapping": "make/m3/tooling/module-packs/nlp-search/FILE_PORT_MAP.json",
+    "api_parity": "make/m3/tooling/module-packs/nlp-search/FILE_API_PARITY.json",
+    "native_and_json_closure": "make/m3/tooling/module-packs/nlp-search/JSON_CLOSURE_PROVENANCE.json"
   },
   "support_owner_mapping": {
     "MIndexString": "com.m3.file.M3FileText",
@@ -28,7 +28,7 @@
   "file_identity": "Persisted files retain exact validated frozen dictionary generation/fingerprint; malformed UTF-16 frozen dictionary entries are refused to avoid UTF-8 fingerprint aliasing. Live dictionary overlays cannot be persisted.",
   "module_roots": [
     "m3/ports/file/src/main/java",
-    "m3/tooling/module-packs/nlp-search/frontend/src/main/java"
+    "make/m3/tooling/module-packs/nlp-search/frontend/src/main/java"
   ],
   "fork_projection": {
     "lucene": {
@@ -36,14 +36,14 @@
       "revision": "d1b7235f1ba1c1eea5b04a5b7e6554595a90719e",
       "full_target_source_version": "9.10.0",
       "projection": "ReusableStringReader, M3TextReaders, cached String hash atom in CharArrayMap; preserve every other full tool source",
-      "provenance": "m3/tooling/module-packs/nlp-search/LUCENE_PROVENANCE.json"
+      "provenance": "make/m3/tooling/module-packs/nlp-search/LUCENE_PROVENANCE.json"
     },
     "opennlp": {
       "repository": "hsoliwal/opennlp",
       "revision": "368337311ad94b665fd178f8d3ced005a73b2370",
       "full_target_source_version": "2.4.0",
       "projection": "Eight explicit UTF-16 span, borrowed CharSequence and WordPiece backports into the existing aggregate org.apache.opennlp.tools owner",
-      "provenance": "m3/tooling/module-packs/nlp-search/OPENNLP_PROVENANCE.json"
+      "provenance": "make/m3/tooling/module-packs/nlp-search/OPENNLP_PROVENANCE.json"
     }
   },
   "runtime_dependency_on_synexia": false,

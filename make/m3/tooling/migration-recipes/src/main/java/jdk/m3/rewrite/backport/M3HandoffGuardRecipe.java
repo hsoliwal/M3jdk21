@@ -322,7 +322,7 @@ public final class M3HandoffGuardRecipe extends Recipe {
                                 || target.contains("/rewrite")
                                 || target.startsWith(".m3/openrewrite-recipes/"));
         boolean test = target.startsWith("test/") || target.contains("/src/test/");
-        boolean docs = target.startsWith("m3/docs/") || target.startsWith("doc/");
+        boolean docs = target.startsWith("doc/m3/") || target.startsWith("doc/");
         boolean manifest =
                 m3
                         && (target.endsWith(".tsv")

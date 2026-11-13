@@ -29,14 +29,14 @@ JNI = "m3.jcc-java-jni-regression"
 IDS = (LAB, JNI)
 IOP = "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3IopPatternMechanicalPasses.java"
 PATHS = (
-    "m3/docs/name-mapping.json",
-    "m3/docs/jcc-source-handoff.md",
-    "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
-    "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
+    "doc/m3/name-mapping.json",
+    "doc/m3/jcc-source-handoff.md",
+    "make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
+    "make/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
 )
-RESOURCE_ROOT = "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text"
-TASK_ROOT = "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006"
-TEXT_OWNER = "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java"
+RESOURCE_ROOT = "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text"
+TASK_ROOT = "make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006"
+TEXT_OWNER = "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java"
 TEXT_OWNER_HASH = "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795"
 OID = re.compile(r"[0-9a-f]{40}\Z")
 SHA = re.compile(r"[0-9a-f]{64}\Z")
@@ -355,7 +355,7 @@ def compose(current_files, prior_files, packet, *, allow_fixture=False):
              "records": [row for row in prior_map["migration"]["records"] if row["id"] in IDS],
              "source_execution": historical_binding["source_execution"], "source_publication": historical_binding["source_publication"]}],
         "donor_catalogue_history": {"source_commit": "4990edbf4ba4afaa14e0ba2d7613331c31e21e9e",
-            "receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue",
+            "receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue",
             "scope": "Previously published donor catalogue and provenance; no private challenge corpus or automatic qualification"}}
     fixture_note = "**UNPUBLISHABLE SYNTHETIC FIXTURE OUTPUT.**\n\n" if packet["fixture"] else ""
     introduction = fixture_note + "# Current JCC receiving recovery, 2026-10-06\n\n" + (

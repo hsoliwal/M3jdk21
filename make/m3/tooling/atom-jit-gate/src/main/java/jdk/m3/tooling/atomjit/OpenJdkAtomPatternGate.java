@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 /** JDK-wide read-only dispatch to canonical Synexia Atomizer and Patternizer. */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/b65df53330e3d82f6b2d5509ded971f19883f4ca/synexia-openrewrite-recipes/crates/m3jdk21-openjdk-atom-pattern-20261031/src/main/java/com/synexia/m3/openjdk/M3OpenJdkAtomPatternGate.java blob 6b82daff2a9b; recipe m3/tooling/atom-jit-gate/recipe/atom-jit-gate-20261106/relocate.py v4
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/b65df53330e3d82f6b2d5509ded971f19883f4ca/synexia-openrewrite-recipes/crates/m3jdk21-openjdk-atom-pattern-20261031/src/main/java/com/synexia/m3/openjdk/M3OpenJdkAtomPatternGate.java blob 6b82daff2a9b; recipe make/m3/tooling/atom-jit-gate/recipe/atom-jit-gate-20261106/relocate.py v4
 public final class OpenJdkAtomPatternGate {
     private static final String EXPECTED_HEADER = String.join("\t", "path", "git_blob_sha1",
             "mode", "file_kind", "owner_family", "phase", "candidate_category",
@@ -78,10 +78,10 @@ public final class OpenJdkAtomPatternGate {
             lane = Lane.RECEIVED_PROVIDER;
         else if (path.startsWith("test/") || path.contains("/src/test/") ||
                 path.contains("/tests/") || path.contains("/test/") ||
-                path.startsWith("m3/qualification/") ||
-                path.startsWith("m3/collections/qualification/")) lane = Lane.TEST_OR_ORACLE;
+                path.startsWith("make/m3/qualification/") ||
+                path.startsWith("make/m3/collections/qualification/")) lane = Lane.TEST_OR_ORACLE;
         else if (jdk && (path.startsWith("m3/recipes/") ||
-                path.startsWith("m3/collections/recipe/") ||
+                path.startsWith("make/m3/collections/recipe/") ||
                 path.startsWith("m3/mop/") || path.startsWith(".m3/")))
             lane = Lane.RECIPE_CUSTODY;
         else if (path.startsWith("make/"))

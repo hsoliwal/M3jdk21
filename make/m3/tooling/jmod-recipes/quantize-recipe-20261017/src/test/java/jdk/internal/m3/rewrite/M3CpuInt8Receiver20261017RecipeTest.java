@@ -23,7 +23,7 @@ final class M3CpuInt8Receiver20261017RecipeTest {
     private static final String ROOT =
             "/jdk/internal/m3/rewrite/hash-pinned-java/m3-cpu-int8-receiver-20261017/";
     private static final String CHECKS =
-            "m3/tooling/jmod-recipes/src/test/java/jdk/m3/rewrite/jmod/CpuToolReceiverAdmissionChecks.java";
+            "make/m3/tooling/jmod-recipes/src/test/java/jdk/m3/rewrite/jmod/CpuToolReceiverAdmissionChecks.java";
 
     private static InMemoryExecutionContext ctx() {
         return new InMemoryExecutionContext(error -> { throw new AssertionError(error); });

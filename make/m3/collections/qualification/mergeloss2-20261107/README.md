@@ -12,7 +12,7 @@ this recipe does not touch M3ObjectResidency. The other m3/collections leaves of
 |---|---|---|---|---|
 | 59 | `M3SingleValueMapView` (spring) | `554b4d715e0` restore published M3MultiValueMap constructor binary descriptor | `fc917d80ea3c` fold #2390 through API_FOLD v1 | RESTORE |
 
-- **59**: `m3/collections/qualification/spring-scalar-constructor-abi/README.md` records that the published
+- **59**: `make/m3/collections/qualification/spring-scalar-constructor-abi/README.md` records that the published
   `(M3MultiValueMap)V` constructor must stay, because precompiled clients throw `NoSuchMethodError` without it. Its
   verified preimage `ab4ffb724568` is the current master blob. The 3-way merge is clean.
 
@@ -27,5 +27,5 @@ this recipe does not touch M3ObjectResidency. The other m3/collections leaves of
 | `SpringCtorAbiProbe.java` | leaf 59: a client linked to the published constructor descriptor |
 
 ```text
-python -I m3/collections/qualification/mergeloss2-20261107/apply.py [--check] [--leaf 59]
+python -I make/m3/collections/qualification/mergeloss2-20261107/apply.py [--check] [--leaf 59]
 ```

@@ -16,7 +16,7 @@ Allowed target-local content:
 - JUnit/jtreg/proof harnesses.
 
 Historical reusable implementations under `scope/`, `semantic/` and `a3/` remain migration residue. The former local `com.m3.rewrite.atom` pure-int implementation layer has been retired; the target proof corpus now executes the qualified `com.synexia.rewrite.atom` mirror. Their reusable authority is mapped by
-`m3/compatibility/m3-recipe-home-policy.tsv` and
+`make/m3/compatibility/m3-recipe-home-policy.tsv` and
 `.m3/m3jdk21-synexia-borrowing.tsv` in the canonical Synexia repository.
 
 Any reusable improvement discovered here must first be authored/proved in Synexia and then
@@ -35,7 +35,7 @@ First build/install the exact reviewed Synexia revision:
 
 Then invoke the M3JDK21 receiver with the opt-in profile and an explicit canonical recipe:
 
-    mvn -B -f m3/tooling/migration-recipes/pom.xml \
+    mvn -B -f make/m3/tooling/migration-recipes/pom.xml \
       -Pm3-synexia-canonical-recipes \
       -Dm3.synexia.version=1.0.0-SNAPSHOT \
       -Drewrite.activeRecipes=com.synexia.rewrite.M3RepositoryJava21ConvergenceRecipe \
@@ -49,7 +49,7 @@ Synexia recipe execution therefore remains explicit, source-revision/proof bound
 
 After installing the exact reviewed Synexia recipe artifact, run the target-local receiver profile:
 
-    mvn -B -f m3/tooling/migration-recipes/pom.xml \
+    mvn -B -f make/m3/tooling/migration-recipes/pom.xml \
       -Pm3-synexia-recipe-ownership-audit \
       -Dm3.synexia.version=1.0.0-SNAPSHOT \
       rewrite:dryRun

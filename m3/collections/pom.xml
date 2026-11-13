@@ -51,7 +51,7 @@
       </resource>
     </resources>
     <plugins>
-      <!-- MOVE_TO_JDK_MODULE v3 (keep-pom mode, m3/tooling/jdk-naming/move_module_area.py): the sources live in the
+      <!-- MOVE_TO_JDK_MODULE v3 (keep-pom mode, make/m3/tooling/jdk-naming/move_module_area.py): the sources live in the
            JDK module src/jdk.m3.collections and the tests in test/jdk; this pom keeps its own configuration and adds them. -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>

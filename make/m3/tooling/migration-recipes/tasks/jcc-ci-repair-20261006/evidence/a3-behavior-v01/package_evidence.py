@@ -25,7 +25,7 @@ def main():
     expected={'M3A3RegexMemoryLabDeliveryRecipeTest.java':('0e8c591c44c0ae52d404ee8e26c848632ec2b501','c57e91ff52de1519803049f6950e81e2129f6c93'),'M3A3RegexMemoryWorkflowRecipeTest.java':('faa4edaff92e400b7964e4577f07cd4d169c1892','3a2f62fdf15efb66a35b9dcd9e1051b97710cd99')}[p.name]
     assert (found['sha'],row['git_blob'])==expected
    rows.append({'repository_path':row['repository_path'],'current_git_blob':found['sha'],'executed_git_blob':row['git_blob'],'sha256':row['sha256'],'bytes':row['bytes'],'origin':row['origin']})
- actual='m3/tooling/a3/src/main/java/jdk/m3/a3/A3RegexMatrix.java';prod=gitproof.proof.resolve(trees,base,actual);assert prod['sha']=='bf91afcd627d8e2faa9790ea6592b6bc9c1b0e33'
+ actual='make/m3/tooling/a3/src/main/java/jdk/m3/a3/A3RegexMatrix.java';prod=gitproof.proof.resolve(trees,base,actual);assert prod['sha']=='bf91afcd627d8e2faa9790ea6592b6bc9c1b0e33'
  write(HERE/'CURRENT_ADMISSION.json',{'schema':'m3-a3-behavior-current-admission/1','commit':commit['sha'],'root':base,'m3_tree':m3,'validated_git_tree_objects':len(trees),'inputs':rows,'production_matrix':{**prod,'repository_path':actual},'unchanged_owner_resource_inputs_match_current_revision':18,'test_inputs_are_actual_verified_ci_outputs_over_exact_current_preimages':2})
  reports=HERE/'workspace/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/a3-behavior-verification/target/surefire-reports'
  cp=ET.parse(next(reports.glob('TEST-*.xml'))).getroot().find("properties/property[@name='surefire.test.class.path']").get('value')
@@ -37,7 +37,7 @@ def main():
  for row in copy['files']:
   assert identity(source/row['relative_path'])['sha256']==row['sha256'];unchanged+=1
  write(HERE/'RUNTIME_CUSTODY.json',{'schema':'m3-a3-behavior-runtime-custody/1','java_home':str(ROOT/'toolchain/jdk-21+35'),'toolchain':identity(ROOT/'toolchain/TOOLCHAIN.json'),'cache_copy':identity(HERE/'CACHE_COPY.json'),'immutable_source_cache_files_unchanged_after':unchanged,'classpath_artifacts':artifacts,'full_native_or_repository_admission':False})
- overlay=HERE/'publication/overlay';prefix=Path('m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006');evidence=prefix/'evidence/a3-behavior-v01'
+ overlay=HERE/'publication/overlay';prefix=Path('make/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006');evidence=prefix/'evidence/a3-behavior-v01'
  entries=[]
  def copyfile(src,dest):
   dst=overlay/dest;dst.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(src,dst);entries.append({**identity(dst),'repository_path':str(dest),'source':str(src),'before':None})

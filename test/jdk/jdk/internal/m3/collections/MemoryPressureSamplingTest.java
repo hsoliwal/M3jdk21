@@ -10,7 +10,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 /** Actual-owner oracle; fixture modes require the separately built test-only JNI ABI. */
-//FLLDCIM: RELOCATE - donor blob d45586be99b1 at 165ceb5a0202; recipe m3/collections/recipe/residency-paged-array-20261107/relocate.py v4
+//FLLDCIM: RELOCATE - donor blob d45586be99b1 at 165ceb5a0202; recipe make/m3/collections/recipe/residency-paged-array-20261107/relocate.py v4
 public final class MemoryPressureSamplingTest {
     private static int checks;
     private MemoryPressureSamplingTest() { }

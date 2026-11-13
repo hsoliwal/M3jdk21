@@ -10,7 +10,7 @@ The current `java.util.ArrayList` and `Vector` owners already call `jdk.internal
 Run from repository root:
 
 ```sh
-bash m3/collections/qualification/java-base-mask-current-master-20261027/verify.sh
+bash make/m3/collections/qualification/java-base-mask-current-master-20261027/verify.sh
 ```
 
 Historical [CI run #39960645843](https://github.com/hsoliwal/M3jdk21/actions/runs/39960645843) passed 2,000,865 compaction checks under stock-JDK `--patch-module java.base` plus 143,122 reference-API checks under the stock runtime. This is **inherited provenance, not a passing result for this new branch**. The new branch must have its **own** successful GitHub Actions gate before promotion.
@@ -29,7 +29,7 @@ has a `workflow_dispatch` trigger only, to avoid consuming a full OpenJDK
 build on every documentation/test edit while many unrelated checks are queued.
 It installs the Linux build and jtreg prerequisites, reruns the exact
 source/caller seals, executes the repository's
-`m3/build-openjdk.sh` to build an M3JDK21 fastdebug image, locates the actual
+`make/m3/build-openjdk.sh` to build an M3JDK21 fastdebug image, locates the actual
 image and runs the two named jtreg tests through `make test`.
 
 A workflow declaration is **not proof that this full image has built or passed**.

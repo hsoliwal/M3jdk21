@@ -1076,8 +1076,8 @@
       "adaptation": "Review evidence links and custody entry point"
     },
     {
-      "original_target": "m3/docs/name-mapping.d/m3-arrays-empty-segment-lookup-20261017.json",
-      "mirror_target": "m3/docs/name-mapping.d/m3-arrays-empty-segment-lookup-20261017.json",
+      "original_target": "doc/m3/name-mapping.d/m3-arrays-empty-segment-lookup-20261017.json",
+      "mirror_target": "doc/m3/name-mapping.d/m3-arrays-empty-segment-lookup-20261017.json",
       "source_sha256": "f88b3f9e495eb35d2c87cd9f3e4f4683bc470c9f027e0a99ead9abcc25b0afc7",
       "mirror_sha256": "f88b3f9e495eb35d2c87cd9f3e4f4683bc470c9f027e0a99ead9abcc25b0afc7",
       "byte_exact": true,

@@ -18,13 +18,13 @@
     "preimage_revision": "acf211f05a9c6766ed4c2664aca2778e3c7f76d3",
     "outputs": [
       {
-        "path": "m3/runtime-integration/src/main/java/M3StringLayout.java",
+        "path": "make/m3/runtime-integration/src/main/java/M3StringLayout.java",
         "before": "ABSENT",
         "after": "939cb8b803f19a0ae96d435dfa8b52df64e6ef629269c95d7e663f25342af4df",
         "lane": "java"
       },
       {
-        "path": "m3/runtime-integration/src/test/java/M3StringLayoutTest.java",
+        "path": "make/m3/runtime-integration/src/test/java/M3StringLayoutTest.java",
         "before": "ABSENT",
         "after": "218028137efc353e2a6b5ef488e8bfaf33a9e898dc220c8c2e7adf1e70c17226",
         "lane": "java"
@@ -36,13 +36,13 @@
         "lane": "text"
       },
       {
-        "path": "m3/runtime-integration/check-m3string-invariants.py",
+        "path": "make/m3/runtime-integration/check-m3string-invariants.py",
         "before": "0c15318fe636a884f7e4ea5bde34e2cae320c816d8603dfb4dcaf53738ead98d",
         "after": "dbf25f26bbf37bb510f9ed791a337011ce651ae6b351d677c0425cad4d3ccde6",
         "lane": "text"
       },
       {
-        "path": "m3/runtime-integration/test_string_layout.py",
+        "path": "make/m3/runtime-integration/test_string_layout.py",
         "before": "ABSENT",
         "after": "1eb253a2d5350af9f8d6ace012ac2628f1908615e2eb32edf837d9f41aba14fb",
         "lane": "text"

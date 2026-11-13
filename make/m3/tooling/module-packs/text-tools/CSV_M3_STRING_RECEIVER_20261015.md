@@ -12,7 +12,7 @@ review branch `m3/structured-text-csv-mindex-20261015`.
   SHA-256 `72c88dc6880829f6530d6d6e8f4ce15cb32c532d49b59e35b109f4b655b895de`.
 - Target-owned port:
   `src/jdk.m3.text/jdk/m3/text/CsvTools.java` (relative to
-  `m3/tooling/module-packs/text-tools/`), SHA-256
+  `make/m3/tooling/module-packs/text-tools/`), SHA-256
   `f07c5ef868f075ccae4b0732b20ecbb20634afbd73bd68a39e69a2ebf50d7a1b`.
 - Canonical target recipe:
   `com.synexia.rewrite.M3StructuredTextCsvReceiver20261015`
@@ -44,13 +44,13 @@ advance the String-to-arrays-to-collections receiving order.
 Use the existing packager rather than making a new image system:
 
 ```sh
-python3 m3/tooling/module-packs/text-tools/build.py \
+python3 make/m3/tooling/module-packs/text-tools/build.py \
   --jdk-home "$JAVA_HOME" \
-  --sources m3/tooling/module-packs/text-tools/src \
-  --native-source m3/tooling/module-packs/text-tools/native/m3textio.c \
-  --smoke m3/tooling/module-packs/text-tools/fixtures/src/test/java/M3TextSmoke.java \
-  --legal-notices m3/tooling/module-packs/text-tools/legal \
-  --packager m3/tooling/jmod-recipes/tools/jmod_pack.py \
+  --sources make/m3/tooling/module-packs/text-tools/src \
+  --native-source make/m3/tooling/module-packs/text-tools/native/m3textio.c \
+  --smoke make/m3/tooling/module-packs/text-tools/fixtures/src/test/java/M3TextSmoke.java \
+  --legal-notices make/m3/tooling/module-packs/text-tools/legal \
+  --packager make/m3/tooling/jmod-recipes/tools/jmod_pack.py \
   --out build/m3-text-tools-csv
 ```
 

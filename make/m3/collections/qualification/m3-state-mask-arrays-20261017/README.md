@@ -33,8 +33,8 @@ Executed on local Java 21 + GCC C17 with the **exact unchanged M3IndexMaskCompac
 ## Reproduce on a Java 21 Maven/GCC environment
 
 ```sh
-mvn -B -ntp -f m3/collections/qualification/m3-state-mask-arrays-20261017/recipe/pom.xml verify
-java -cp m3/collections/qualification/m3-state-mask-arrays-20261017/recipe/target/classes \
+mvn -B -ntp -f make/m3/collections/qualification/m3-state-mask-arrays-20261017/recipe/pom.xml verify
+java -cp make/m3/collections/qualification/m3-state-mask-arrays-20261017/recipe/target/classes \
  com.synexia.m3.M3StateMaskArraysRecipe --check .
 
 mkdir -p /tmp/m3-state-mask-classes /tmp/m3-state-mask-lib

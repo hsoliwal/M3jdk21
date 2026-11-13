@@ -21,9 +21,9 @@ from pathlib import Path
 RECIPE_DIR = Path(__file__).resolve().parent
 TEXT = "m3/core/src/jdk/m3/text/"
 PAYLOAD = TEXT + "M3PrecomputePayload.java"
-EXPORT = "m3/runtime-integration/export-m3-lexicon.py"
-VERIFY = "m3/runtime-integration/verify-m3-lexicon.py"
-EXPORT_TEST = "m3/runtime-integration/tests/test_m3_export.py"
+EXPORT = "make/m3/runtime-integration/export-m3-lexicon.py"
+VERIFY = "make/m3/runtime-integration/verify-m3-lexicon.py"
+EXPORT_TEST = "make/m3/runtime-integration/tests/test_m3_export.py"
 
 # commits each decision cites as deliberate master evidence (must be ancestors of HEAD)
 EVIDENCE_COMMITS = {

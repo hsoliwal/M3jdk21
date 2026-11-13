@@ -16,7 +16,7 @@ abspath() { (cd "$1" && (pwd -W 2>/dev/null || pwd)); }
 repo=$(abspath "$1")
 mkdir -p "$2"
 work=$(abspath "$2")
-lane=$repo/m3/tooling/jdk-superset/hashing
+lane=$repo/make/m3/tooling/jdk-superset/hashing
 donor=$repo/m3/vendor/third_party/zero-allocation-hashing/src/main/java/net/openhft/hashing
 dst=${3:-$repo/src/java.base/share/classes/jdk/internal/m3/hash}
 pkg=jdk/internal/m3/hash

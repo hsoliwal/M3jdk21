@@ -12,10 +12,10 @@ JVMCI and dedup remain unsupported while enabled. Flag off remains the default.
 
 ## Current-source navigation
 
-Use [the backing contract](../../doc/mindex-string-backing.md#reading-the-current-source)
-for the owner/range model and [JNI ownership](../docs/mindex-jni-string-ingress.md)
+Use [the backing contract](../../../doc/mindex-string-backing.md#reading-the-current-source)
+for the owner/range model and [JNI ownership](../../../doc/m3/mindex-jni-string-ingress.md)
 for acquire/release behavior. The build and platform limitations are collected in
-[the native build guide](../docs/native-build.md). Historical pins and replay commands
+[the native build guide](../../../doc/m3/native-build.md). Historical pins and replay commands
 below retain their original scope; an old runtime patch is not an installer for an
 arbitrarily newer checkout.
 
@@ -134,24 +134,24 @@ and symlinks before writing; reverse restores the precise prior runtime. Tests w
 without Git history and execute all preceding recipe gates on reversed snapshots.
 
 ```
-python3 m3/runtime-integration/recipe/apply.py --check
-python3 m3/runtime-integration/recipe/test_recipe.py
+python3 make/m3/runtime-integration/recipe/apply.py --check
+python3 make/m3/runtime-integration/recipe/test_recipe.py
 source /workspace/m3-build-deps/env.sh
 make images JOBS=5
-python3 m3/runtime-integration/prepare-owner.py \
+python3 make/m3/runtime-integration/prepare-owner.py \
   --git-dir /path/to/synexia.git --output /path/to/exact-owner-sources
 export M3_TEST_JDK=/path/to/matched/image
 export M3_BOOT_JDK=/path/to/original/java21
 export M3_OWNER_SRC=/path/to/exact-owner-sources
 export M3_RESULTS=/path/to/results
-bash m3/runtime-integration/run-focused.sh
-bash m3/runtime-integration/run-api.sh
-python3 m3/runtime-integration/test-gates.py
-python3 m3/runtime-integration/protocol-tests.py
-python3 m3/runtime-integration/two-process.py
-bash m3/runtime-integration/run-allocation.sh
+bash make/m3/runtime-integration/run-focused.sh
+bash make/m3/runtime-integration/run-api.sh
+python3 make/m3/runtime-integration/test-gates.py
+python3 make/m3/runtime-integration/protocol-tests.py
+python3 make/m3/runtime-integration/two-process.py
+bash make/m3/runtime-integration/run-allocation.sh
 # Also set JTREG_JAR and optionally M3_NATIVE_DIR:
-bash m3/runtime-integration/run-jtreg.sh
+bash make/m3/runtime-integration/run-jtreg.sh
 ```
 
 See evidence for actual passes and remaining failed gates. Allocation-dependent

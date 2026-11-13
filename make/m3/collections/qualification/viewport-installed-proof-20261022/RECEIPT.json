@@ -16,19 +16,19 @@
   "java_page_wired": false,
   "targets": [
     {
-      "path": "m3/collections/viewport-proof/CMakeLists.txt",
+      "path": "make/m3/collections/viewport-proof/CMakeLists.txt",
       "before_sha256": "ABSENT",
       "after_sha256": "26b5922e84d61c357c9527711f0aa7d393407eeb728a33d9feac1f1d2c40cddb",
       "git_blob": "d6fe9780e28e007aacb6786d37a36a7197cd11d3"
     },
     {
-      "path": "m3/collections/viewport-proof/verify.py",
+      "path": "make/m3/collections/viewport-proof/verify.py",
       "before_sha256": "ABSENT",
       "after_sha256": "b3e902faef7c29c28e48afbfb484c3cbebda8769dba2b3ed54fec2f9d765f293",
       "git_blob": "1f55d3d2292ebf03d2fc6cf5bda77cd455e58aa9"
     },
     {
-      "path": "m3/collections/viewport-proof/verify.sh",
+      "path": "make/m3/collections/viewport-proof/verify.sh",
       "before_sha256": "ccb22adceb62ea97207daead1e2fd28723e3a0d6f08879d28171a7959b8a4036",
       "after_sha256": "2f5da0701d7a7d35e1bf60518dca44bf2d136caee143dbeb1d7f75f509549930",
       "git_blob": "8057d53dbad55ea43c9d0c9ad8a7d612334500bc"

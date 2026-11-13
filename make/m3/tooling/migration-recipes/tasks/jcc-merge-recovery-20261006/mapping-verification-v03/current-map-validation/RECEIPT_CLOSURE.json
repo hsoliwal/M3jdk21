@@ -127,7 +127,7 @@
       ]
     },
     {
-      "path": "m3/migration/evidence/local-20261002-final/prefix-z-interpreter.log",
+      "path": "make/m3/migration/evidence/local-20261002-final/prefix-z-interpreter.log",
       "references": [
         {
           "role": "receipt-stdout",
@@ -137,7 +137,7 @@
       ]
     },
     {
-      "path": "m3/migration/evidence/local-20261002-final/prefix-z-normal.log",
+      "path": "make/m3/migration/evidence/local-20261002-final/prefix-z-normal.log",
       "references": [
         {
           "role": "receipt-stdout",
@@ -147,7 +147,7 @@
       ]
     },
     {
-      "path": "m3/migration/pinned-dependencies.json",
+      "path": "make/m3/migration/pinned-dependencies.json",
       "references": [
         {
           "role": "receipt-input",
@@ -162,7 +162,7 @@
       ]
     },
     {
-      "path": "m3/migration/run-tests.py",
+      "path": "make/m3/migration/run-tests.py",
       "references": [
         {
           "role": "receipt-input",
@@ -177,7 +177,7 @@
       ]
     },
     {
-      "path": "m3/migration/src/jdk/m3/migration/ExactFileRecipe.java",
+      "path": "make/m3/migration/src/jdk/m3/migration/ExactFileRecipe.java",
       "references": [
         {
           "role": "receipt-input",
@@ -192,7 +192,7 @@
       ]
     },
     {
-      "path": "m3/migration/test/RecipeContractTest.java",
+      "path": "make/m3/migration/test/RecipeContractTest.java",
       "references": [
         {
           "role": "receipt-input",
@@ -216,12 +216,12 @@
     "m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
     "m3/core/src/jdk/m3/text/M3StringPiece.java",
     "m3/core/src/jdk/m3/text/StorageIdentity.java",
-    "m3/migration/evidence/local-20261002-final/prefix-z-interpreter.log",
-    "m3/migration/evidence/local-20261002-final/prefix-z-normal.log",
-    "m3/migration/pinned-dependencies.json",
-    "m3/migration/run-tests.py",
-    "m3/migration/src/jdk/m3/migration/ExactFileRecipe.java",
-    "m3/migration/test/RecipeContractTest.java"
+    "make/m3/migration/evidence/local-20261002-final/prefix-z-interpreter.log",
+    "make/m3/migration/evidence/local-20261002-final/prefix-z-normal.log",
+    "make/m3/migration/pinned-dependencies.json",
+    "make/m3/migration/run-tests.py",
+    "make/m3/migration/src/jdk/m3/migration/ExactFileRecipe.java",
+    "make/m3/migration/test/RecipeContractTest.java"
   ],
   "ignored_unselected_receipt_runs": [
     "javac21",

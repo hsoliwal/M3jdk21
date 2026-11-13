@@ -10,14 +10,14 @@ from the canonical UTF-16 and stat columns without building DirEntry/Stat object
 M3DirectoryPageIdentityTest. The retain merge a7d07c6b1f00 (2026-10-28, "Superset: retain PR #1538") kept the older
 side of M3FS.java and dropped entriesHashCode() and the test. Positive evidence: #2547 (836bdbb9d0c) lists the
 M3DirectoryTable hunk as an open insert/insert conflict for owners
-(m3/qualification/retained-twins-core-lanes-20261106/conflicts/pr1538/m3/fs/src/main/java/jdk/m3/fs/
+(make/m3/qualification/retained-twins-core-lanes-20261106/conflicts/pr1538/m3/fs/src/main/java/jdk/m3/fs/
 M3DirectoryTable.java.diff3); both sides are additive, so this recipe takes the union. The test is the retained
 variant blob b7fda3515752 (the origin test after JDK naming), restored with one anchor line.
 
 Values are unchanged: the columns are canonical (offsets start at 0, the kind lane is the 1/2/3 bijection of
 M3FS.Kind), so column equality is entry-list equality and entriesHashCode() equals entries().hashCode(); the test
 checks both against independent List/record oracles. Derived from
-m3/collections/qualification/census-small-batch-20261106/apply.py v1, plus create rules (a new file whose text is
+make/m3/collections/qualification/census-small-batch-20261106/apply.py v1, plus create rules (a new file whose text is
 a pinned in-repository blob; absent -> written, equal -> no-op, anything else refused).
 
 usage: python -I apply.py [--root DIR] [--check]

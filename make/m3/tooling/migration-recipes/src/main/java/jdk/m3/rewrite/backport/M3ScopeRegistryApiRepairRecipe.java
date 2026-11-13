@@ -9,7 +9,7 @@ import org.openrewrite.Recipe;
 /** Exact scope receiver test repair without widening Synexia canonical registry API. */
 public final class M3ScopeRegistryApiRepairRecipe extends Recipe {
     private static final String TARGET =
-            "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/scope/M3ScopeCoverageClosureTest.java";
+            "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/scope/M3ScopeCoverageClosureTest.java";
     private static final String ROOT =
             "/jdk/m3/rewrite/backport/scope-registry-api-repair/";
 

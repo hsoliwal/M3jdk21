@@ -43,8 +43,8 @@ class M3A3RegexMemoryReceiptTest(unittest.TestCase):
         ):
             self.assertRegex(row[field], r"^[0-9a-f]{40}$")
 
-        descriptor = ROOT.parent / row["target_descriptor_path"]
-        manifest = ROOT.parent / row["target_manifest_path"]
+        descriptor = ROOT.parent.parent / row["target_descriptor_path"]
+        manifest = ROOT.parent.parent / row["target_manifest_path"]
         self.assertTrue(descriptor.is_file())
         self.assertTrue(manifest.is_file())
         self.assertEqual(row["target_descriptor_git_blob"], git_blob(descriptor))
@@ -63,16 +63,16 @@ class M3A3RegexMemoryReceiptTest(unittest.TestCase):
 
     def test_adjacent_descriptors_remain_target_adapters(self) -> None:
         workflow = (
-            ROOT.parent
-            / "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/"
+            ROOT.parent.parent
+            / "make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/"
             / "m3-a3-regex-memory-workflow.yml"
         ).read_text(encoding="utf-8")
         self.assertIn("Target-only replay", workflow)
         self.assertIn("not portable recipe authority", workflow)
 
         jni = (
-            ROOT.parent
-            / "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/"
+            ROOT.parent.parent
+            / "make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/"
             / "m3-jni-newstring-admission.yml"
         ).read_text(encoding="utf-8")
         self.assertIn("M3JDK product adapter", jni)

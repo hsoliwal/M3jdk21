@@ -8,7 +8,7 @@
   "effect": "SERIAL_EXACT_GIT_BLOB_RECEIVING",
   "source_audit": [
     {
-      "path": "m3/collections/qualification/jdk-rx7-view-convergence-20261019/proof/MaskWindowConvergence.java",
+      "path": "make/m3/collections/qualification/jdk-rx7-view-convergence-20261019/proof/MaskWindowConvergence.java",
       "before": "ABSENT",
       "after": "5555cabc7ac7d1e22d728db55f908b3ab1dc9aae",
       "canonical_resource": "m3-openrewrite-recipes/recipe-crates/m3jdk21-collection-composite-20261019/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-collection-composite-20261019/MaskWindowConvergence.java.txt",
@@ -64,14 +64,14 @@
       "admission": "EXACT_BLOB_MATCH"
     },
     {
-      "path": "m3/collections/verification/view-refinement-20261019/M3FilteredNullNavigationProbe.java",
+      "path": "make/m3/collections/verification/view-refinement-20261019/M3FilteredNullNavigationProbe.java",
       "before": "ABSENT",
       "after": "0dcf67ac0b2fccec299f520452bb4c667aa62600",
       "canonical_resource": "m3-openrewrite-recipes/recipe-crates/m3jdk21-collection-composite-20261019/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-collection-composite-20261019/M3FilteredNullNavigationProbe.java.txt",
       "admission": "EXACT_BLOB_MATCH"
     },
     {
-      "path": "m3/collections/verification/view-refinement-20261019/M3ProjectionRefinementProbe.java",
+      "path": "make/m3/collections/verification/view-refinement-20261019/M3ProjectionRefinementProbe.java",
       "before": "ABSENT",
       "after": "338fa16a24ebf7202bd3ecac970a030b4af06633",
       "canonical_resource": "m3-openrewrite-recipes/recipe-crates/m3jdk21-collection-composite-20261019/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-collection-composite-20261019/M3ProjectionRefinementProbe.java.txt",
@@ -172,7 +172,7 @@
     },
     {
       "pass": 8,
-      "path": "m3/collections/qualification/jdk-rx7-view-convergence-20261019/proof/MaskWindowConvergence.java",
+      "path": "make/m3/collections/qualification/jdk-rx7-view-convergence-20261019/proof/MaskWindowConvergence.java",
       "parent": "d5f9c1598a862959c3394e204fe7285409aae61f",
       "commit": "147a6090c398eb0ce060d56d6f8f43218897fa50",
       "tree": "02785bae1108c6c0226afcf0720e2e77dca32708",
@@ -202,7 +202,7 @@
     },
     {
       "pass": 11,
-      "path": "m3/collections/verification/view-refinement-20261019/M3FilteredNullNavigationProbe.java",
+      "path": "make/m3/collections/verification/view-refinement-20261019/M3FilteredNullNavigationProbe.java",
       "parent": "78a9d1598119c815e5ea7a0185aa7b7ecc8929a1",
       "commit": "e6eab186b11a0d6518719532c8a4a555492bc42d",
       "tree": "272ad2bf5aefca0a4a19fc4368683350e13fbeb7",
@@ -212,7 +212,7 @@
     },
     {
       "pass": 12,
-      "path": "m3/collections/verification/view-refinement-20261019/M3ProjectionRefinementProbe.java",
+      "path": "make/m3/collections/verification/view-refinement-20261019/M3ProjectionRefinementProbe.java",
       "parent": "e6eab186b11a0d6518719532c8a4a555492bc42d",
       "commit": "770de5132a6634b2df26d5769ebb170133ff4643",
       "tree": "be70c1a5d1f6a64aec57698333fb425935e9e353",

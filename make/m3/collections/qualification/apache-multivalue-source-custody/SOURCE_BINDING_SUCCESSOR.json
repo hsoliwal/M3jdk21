@@ -2,13 +2,13 @@
   "schema": "M3_COLLECTIONS_SDK_SOURCE_BINDING_SUCCESSOR_V5",
   "frozenReceiver": "hsoliwal/M3jdk21@a25e22f656ea4e208661d65fe146eebee2d17cc5",
   "predecessor": {
-    "path": "m3/collections/qualification/owned-apache-multivalue-20261024/SDK_SOURCE_BINDING_SUCCESSOR_V4.json",
+    "path": "make/m3/collections/qualification/owned-apache-multivalue-20261024/SDK_SOURCE_BINDING_SUCCESSOR_V4.json",
     "bytes": 8204,
     "sha256": "505f340763e19d7ddb2e05cc8f14f1b3e4b2a8bf56cd88033ded08b91da82038",
     "gitBlob": "f9527b590a06c0a3e045c87f09761ecaf0412f41"
   },
   "predecessorVerifier": {
-    "path": "m3/collections/qualification/owned-apache-multivalue-20261024/verify_source_binding_successor_v4.py",
+    "path": "make/m3/collections/qualification/owned-apache-multivalue-20261024/verify_source_binding_successor_v4.py",
     "bytes": 6749,
     "sha256": "d6ac7c9368401fd3926f1c4a60e889b200d2edf59ce61d4213c298242e3c825c",
     "gitBlob": "49ff3794a24dd25fd5ab9e690cb5e8d53f0e851c"

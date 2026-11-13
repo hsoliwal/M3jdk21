@@ -4,19 +4,19 @@
   "scope": "Effective input qualification only: preserve old33-row source receipt and exact32owned implementation/test bodies; qualify exactly one SDK append successor. No production source, JNI ABI or old public body is changed by this receipt.",
   "history": [
     {
-      "path": "m3/collections/qualification/owned-apache-multivalue-20261018/source-provenance.json",
+      "path": "make/m3/collections/qualification/owned-apache-multivalue-20261018/source-provenance.json",
       "bytes": 15595,
       "sha256": "c12810499738df40393bbe82291eaca77e84e8cad7f5989f26def47f25bbf06e",
       "gitBlob": "d4bf015c3aadf6cd5d0ef869069a5a3503001afb"
     },
     {
-      "path": "m3/collections/qualification/owned-apache-multivalue-20261018/verify.py",
+      "path": "make/m3/collections/qualification/owned-apache-multivalue-20261018/verify.py",
       "bytes": 1027,
       "sha256": "4a23749f6419ea5b1cc63f412db5ab9f7cb38b62f2420fb1bae2cb6cb88d1595",
       "gitBlob": "8d6021fcf5ba9e0bb325c01c58b2f94022d8534d"
     },
     {
-      "path": "m3/collections/qualification/owned-apache-multivalue-20261018/SOURCE_QUALIFICATION_V2.json",
+      "path": "make/m3/collections/qualification/owned-apache-multivalue-20261018/SOURCE_QUALIFICATION_V2.json",
       "bytes": 7903,
       "sha256": "090cc4cada34c1bf01d2a49a3bc84c8ee7b35675de02ecbb1a0b7ef303d23d1a",
       "gitBlob": "2af05bb60360f1a33ca3735ac9d25f00933069c9"
@@ -24,7 +24,7 @@
   ],
   "sdkPath": "m3/collections/src/main/java/jdk/m3/collections/M3CollectionSdk.java",
   "before": {
-    "path": "m3/collections/qualification/owned-apache-multivalue-20261018/SDK_HISTORICAL_7020.java.txt",
+    "path": "make/m3/collections/qualification/owned-apache-multivalue-20261018/SDK_HISTORICAL_7020.java.txt",
     "bytes": 7020,
     "sha256": "e4f05110dd6aaebcfb4f6a6d45d1ff0d8f5b50cc154f6372337d09877b62e83f",
     "gitBlob": "07dc6f52a8de569e47ff36f80dbba4d8e059ef8a"

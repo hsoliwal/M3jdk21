@@ -33,13 +33,13 @@ METHODS = ['closedFamiliesAndResourcePins',
  'pureAdditionInputs',
  'spcMixedStates']
 FAMILY_IDS = ('Spc',)
-FAMILIES = {'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc': ('m3/runtime-integration/fix-root-ascii-case/manifest.json',
-                                                            'm3/tooling/image-gates/current-c0.json',
+FAMILIES = {'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc': ('make/m3/runtime-integration/fix-root-ascii-case/manifest.json',
+                                                            'make/m3/tooling/image-gates/current-c0.json',
                                                             'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/03-M3StringPrecomputeSearchTest.java.txt',
                                                             'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv',
                                                             'test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java')}
-REPLACEMENTS = ('m3/runtime-integration/fix-root-ascii-case/manifest.json',
- 'm3/tooling/image-gates/current-c0.json',
+REPLACEMENTS = ('make/m3/runtime-integration/fix-root-ascii-case/manifest.json',
+ 'make/m3/tooling/image-gates/current-c0.json',
  'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/03-M3StringPrecomputeSearchTest.java.txt',
  'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv',
  'test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java')

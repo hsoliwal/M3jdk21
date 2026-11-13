@@ -1,5 +1,5 @@
 #!/bin/bash
-# order_gate.sh <master-sha> : NATIVE_ORDER_MONITOR_GATE v1 for m3/tooling/module-packs/text-tools.
+# order_gate.sh <master-sha> : NATIVE_ORDER_MONITOR_GATE v1 for make/m3/tooling/module-packs/text-tools.
 # live = master's text-tools; fix = live with m3unixtext.c looking up "checkCancelled" (the java.base
 # java.util.concurrent.ProgressMonitor method NativeLineBatch passes) instead of the donor's "checkCanceled".
 # Per side: java.base patched with master's java.util.concurrent Progress*/Monitored* sources; main sources +
@@ -8,7 +8,7 @@
 # (NoSuchMethodError from GetMethodID), fix PASS (M3_NATIVE_ORDER_PASS).
 cd "$(dirname "$0")"
 J="C:/Program Files/Java/jdk-21/bin"; JI="C:/Program Files/Java/jdk-21/include"; G=/h/m3-scratch/repos/M3jdk21-release.git
-R=${1:?master sha}; T=m3/tooling/module-packs/text-tools
+R=${1:?master sha}; T=make/m3/tooling/module-packs/text-tools
 rm -rf ord; mkdir -p ord/jb/java/util/concurrent ord/jbcls
 GIT_DIR=$G git ls-tree --name-only $R src/java.base/share/classes/java/util/concurrent/ | grep -E '/(Progress|Monitored)[A-Za-z]*\.java$' |
   while read -r f; do GIT_DIR=$G git show "$R:$f" > ord/jb/java/util/concurrent/$(basename $f); done

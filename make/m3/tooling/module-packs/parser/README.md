@@ -110,10 +110,10 @@ full Git ancestry for the unchanged receiver-policy gate. From the repository
 root, choose a new output directory and run the phases in order:
 
 ```sh
-python3 m3/tooling/module-packs/parser/build.py --jdk-home /path/to/jdk-21 --out /path/to/new-proof --phase lint
-python3 m3/tooling/module-packs/parser/build.py --jdk-home /path/to/jdk-21 --out /path/to/new-proof --phase compile
-python3 m3/tooling/module-packs/parser/build.py --jdk-home /path/to/jdk-21 --out /path/to/new-proof --phase test
-python3 m3/tooling/module-packs/parser/build.py --jdk-home /path/to/jdk-21 --out /path/to/new-proof --phase runtime
+python3 make/m3/tooling/module-packs/parser/build.py --jdk-home /path/to/jdk-21 --out /path/to/new-proof --phase lint
+python3 make/m3/tooling/module-packs/parser/build.py --jdk-home /path/to/jdk-21 --out /path/to/new-proof --phase compile
+python3 make/m3/tooling/module-packs/parser/build.py --jdk-home /path/to/jdk-21 --out /path/to/new-proof --phase test
+python3 make/m3/tooling/module-packs/parser/build.py --jdk-home /path/to/jdk-21 --out /path/to/new-proof --phase runtime
 ```
 
 The source and toolchain inventory, command logs and chained receipts are written
@@ -124,7 +124,7 @@ All build-time `javac` work, including the consumers, finishes before tests.
 Maven orchestrates the same phases through the optional `m3-parser` profile:
 
 ```sh
-mvn -f m3/tooling/module-packs/pom.xml -P m3-parser -pl :m3-parser-jmod-pack verify -Dm3.parser.jdk=/path/to/jdk-21 -Dm3.parser.proof=/path/to/new-proof
+mvn -f make/m3/tooling/module-packs/pom.xml -P m3-parser -pl :m3-parser-jmod-pack verify -Dm3.parser.jdk=/path/to/jdk-21 -Dm3.parser.proof=/path/to/new-proof
 ```
 
 The default module-pack profile graph is unchanged. The dedicated

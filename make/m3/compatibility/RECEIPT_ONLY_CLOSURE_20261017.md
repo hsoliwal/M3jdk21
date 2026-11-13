@@ -3,7 +3,7 @@
 Leaf `RCPT-receipt-only-closure` of run `20261017-synexia-to-public`.
 Input: leaf S `GAP_STRING_PRECOMPUTE.tsv` — 17 string/regex units whose owner class already
 exists on pinned M3jdk21 master (`refs/m3run/m3jdk21-master-20261017` = `970a34350ebdf6a3f1c5ff5acc8445d0f3515f55`)
-but which had no receipt under `m3/compatibility/` and no crate pin.
+but which had no receipt under `make/m3/compatibility/` and no crate pin.
 
 ## What these receipts ARE
 
@@ -18,7 +18,7 @@ but which had no receipt under `m3/compatibility/` and no crate pin.
 ## What is NOT claimed
 
 - No phase advance, no receiving, no runtime claim, no gate result: `gates.evidenceOnly = NOT_RUN`.
-- No owner source file was changed; the branch touches `m3/compatibility/` and `m3/docs/` only.
+- No owner source file was changed; the branch touches `make/m3/compatibility/` and `doc/m3/` only.
 - A receipt does not assert the Synexia unit PRODUCED the master content. Where the unit carries
   no hash-pinned manifest covering the master content, the receipt says `RE_SEAL_REQUIRED`
   (15 of 17); no manifest was invented.

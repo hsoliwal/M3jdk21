@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 """Recipe CENSUS2_C2 v1: the MAPPED hunk of census pass-2 leaf P2-043 (m3/collections, group C2 filtered views).
 
-Derived from m3/collections/qualification/census-small-batch-20261106/apply.py v1 (#2565): anchored "sub" edits, every
+Derived from make/m3/collections/qualification/census-small-batch-20261106/apply.py v1 (#2565): anchored "sub" edits, every
 anchor exactly once, LF payloads re-joined with the preimage's line ending. Every rule names the git blob sha of its
 preimage at the base commit; a target must equal the preimage (the rule is applied) or the postimage (already
 applied, no-op); anything else is a drifted preimage and the recipe refuses (exit 2) without writing. Idempotent: a
@@ -42,7 +42,7 @@ class Refused(Exception):
 RULES = (
     ("P2-043", SRC + "M3FilteredLists.java", "78c77749664cd56ab2759cbb04ba5d792d624ecd", PIN,
      "post=25e243eabdbf32f2de215ebc96072849600a0568 pre=- (dataset m3jdk21-filtered-list-mutation-20261018;"
-     " M3JDK receiver pre m3/collections/qualification/filtered-list-mutation-20261018/pre/M3FilteredLists.java.txt)",
+     " M3JDK receiver pre make/m3/collections/qualification/filtered-list-mutation-20261018/pre/M3FilteredLists.java.txt)",
      "MAPPED: the cursor's reversible fail-fast probe before the three backing writes (remove, set, add) of the filtered"
      " ListIterator; the owner's later state mask (340bafb58b7: failed -> state |= FAILED) and its supported-write"
      " helpers (df6a836b26e/fd633b1d98c: removePhysical/setPhysical instead of backing.remove/set) are kept", [
@@ -151,7 +151,7 @@ def run(root: Path, check: bool, leaf: str | None) -> int:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--root", default=str(RECIPE_DIR.parents[3]), help="repository root (default: four up)")
+    parser.add_argument("--root", default=str(RECIPE_DIR.parents[4]), help="repository root (default: four up)")
     parser.add_argument("--check", action="store_true", help="write nothing; exit 1 when a run would change a file")
     parser.add_argument("--leaf", choices=sorted({rule[0] for rule in RULES}), help="apply one leaf's rules only")
     args = parser.parse_args(argv)

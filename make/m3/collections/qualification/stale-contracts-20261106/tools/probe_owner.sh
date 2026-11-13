@@ -6,7 +6,7 @@
 #      JVM_OPT (one extra JVM option for javac -J and java, e.g. -Djava.io.tmpdir=<dir>),
 #      CONTRACTS (dir holding the contract .java, default $REPO/m3/collections/src/test/java/jdk/m3/collections)
 # The owner tree of <commit> (m3/collections + m3/arrays main sources, module-info dropped) is the -sourcepath;
-# javac -implicit:class compiles only the contract's closure. Trees before the JDK naming rename (m3/tooling/jdk-naming)
+# javac -implicit:class compiles only the contract's closure. Trees before the JDK naming rename (make/m3/tooling/jdk-naming)
 # hold the owner under its old package: the contract's package line follows the <x>/m3/collections directory of the tree. Prints "<commit> <mode> :: <first two output lines>"; COMPILE_FAIL when it does not build.
 set -u
 REPO=${REPO:-.}; WORK=${WORK:?set WORK to a scratch directory}; JB=${JAVA_BIN:+$JAVA_BIN/}

@@ -3,9 +3,9 @@ name: M3 Guava MinMax original compiler diagnostic capture
 on:
   pull_request:
     paths:
-      - 'm3/collections/qualification/guava-minmax-source-custody/**'
+      - 'make/m3/collections/qualification/guava-minmax-source-custody/**'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/arrays/**'
-      - 'm3/collections/qualification/owned-guava-minmax-priority-queue-20261018/**'
+      - 'make/m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/**'
       - '.github/workflows/m3-guava-minmax-compiler-diagnostics.yml'
   workflow_dispatch:
 permissions:
@@ -39,7 +39,7 @@ jobs:
           set -uo pipefail
           out="$RUNNER_TEMP/m3-minmax-compiler-diagnostic"
           python3 -I -S -B \
-            m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/run.py \
+            make/m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/run.py \
             --root . --out "$out" --job java
           result=$?
           echo "Original MinMax java job exit=$result"

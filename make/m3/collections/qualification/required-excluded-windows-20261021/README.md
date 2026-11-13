@@ -26,7 +26,7 @@ The four checked-in template bodies have Git blobs matching their receiving file
 
 ## Verification instructions and boundaries
 
-Run: `bash m3/collections/qualification/required-excluded-windows-20261021/verify.sh`.
+Run: `bash make/m3/collections/qualification/required-excluded-windows-20261021/verify.sh`.
 
 This compiles the *original receiving* M3IndexMaskCompactor.java with `javac --release 21 -Xlint:all -Werror`, runs an independent seeded 4,096-case scalar oracle on Java, compiles the *original receiving* m3_index_mask_compactor.c as C11/JNI using `-Wall -Wextra -Werror -Wpedantic`, and runs the identical oracle with real JNI and `-Xcheck:jni`. The tests cover:
 - offset independence, zero and contradictory masks, high-bit states 0x80, signed extremes and duplicates;
@@ -40,7 +40,7 @@ The JUnit adapter runs the scalar oracle in the existing m3/collections Maven mo
 
 ## Algorithm catalogue and license evaluation
 
-See `m3/collections/algorithm-catalog/required-excluded-windows-20261021.tsv`. Original JDK/Synexia primitive compaction and C JNI Region APIs were selected. LeetCode 27 (stable-prefix inspiration only), GeeksforGeeks stable partition and HackerRank AND Product are documented as category references; their published challenge/editorial code was not copied. The GeeksforGeeks boxed stable sort is rejected because it violates primitive/no-boxing and O(n) target constraints. Existing copyright/SPDX headers and original exported signatures are preserved.
+See `make/m3/collections/algorithm-catalog/required-excluded-windows-20261021.tsv`. Original JDK/Synexia primitive compaction and C JNI Region APIs were selected. LeetCode 27 (stable-prefix inspiration only), GeeksforGeeks stable partition and HackerRank AND Product are documented as category references; their published challenge/editorial code was not copied. The GeeksforGeeks boxed stable sort is rejected because it violates primitive/no-boxing and O(n) target constraints. Existing copyright/SPDX headers and original exported signatures are preserved.
 
 ## Remaining convergence
 

@@ -8,7 +8,7 @@ import java.util.function.LongSupplier;
 import jdk.m3.collections.LongSequence;
 
 /** Single-threaded; callback reentry is permitted but observation is suppressed. */
-//FLLDCIM: RELOCATE - donor blob 7338965418c4 at d5ad5090d87e; recipe m3/collections/qualification/census2-t2-20261106/relocate.py v6
+//FLLDCIM: RELOCATE - donor blob 7338965418c4 at d5ad5090d87e; recipe make/m3/collections/qualification/census2-t2-20261106/relocate.py v6
 public final class ObservedLongSequence extends ForwardingLongSequence {
     private final LongSequence backend;
     private final LongSequenceListener listener;

@@ -21,20 +21,20 @@ by path and copy their Plugin descriptor, so those workflows move with them.
 
     # pass 1: every sibling retires first, so no fold rewrites a sibling's records
     fold_package.py --root . --from-root m3/compiler/<m> --from-package jdk.m3.compiler.<p> --to-root m3/compiler \
-      --to-package jdk.m3.compiler --exclude m3/tooling/jdk-naming/ --retire-to m3/evidence/compiler/<m> \
-      --aggregator m3/pom.xml --retire-only
+      --to-package jdk.m3.compiler --exclude make/m3/tooling/jdk-naming/ --retire-to make/m3/evidence/compiler/<m> \
+      --aggregator make/m3/pom.xml --retire-only
     # pass 2: the folds
     fold_package.py ... (same, without --retire-only)
-    rename_types.py --root . --package jdk.m3.compiler --exclude m3/tooling/jdk-naming/ --doc m3/compiler/ \
+    rename_types.py --root . --package jdk.m3.compiler --exclude make/m3/tooling/jdk-naming/ --doc m3/compiler/ \
       --string-words --comment-words
 
 fold_package v1.1 records three corrections this fold found (RECIPE_MEMORY 2026-11-08):
 - SIBLING_RECORD_REWRITE: `--retire-only`;
-- REACTOR_RELATIVE_MODULE: m3/pom.xml names modules as compiler/<name>;
+- REACTOR_RELATIVE_MODULE: make/m3/pom.xml names modules as compiler/<name>;
 - NON_PACKAGE_RESOURCES: nullness-facts' META-INF/services javac Plugin descriptor and test fixtures move with the
   fold; service files merge by line union.
 Every module's records (README, GATES, PROVENANCE, RELOCATION_MAP, RECIPE_MEMORY, recipe/, verify.sh, pom,
-descriptor) keep their bytes in m3/evidence/compiler/<module>/. The //FLLDCIM anchors in the moved sources are
+descriptor) keep their bytes in make/m3/evidence/compiler/<module>/. The //FLLDCIM anchors in the moved sources are
 unchanged. The one on reference-flow's descriptor sits byte for byte in its evidence copy.
 
 ## Inventory and gate

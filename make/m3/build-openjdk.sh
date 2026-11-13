@@ -2,7 +2,7 @@
 # Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
 # SPDX-License-Identifier: Apache-2.0
 set -euo pipefail
-cd "$(dirname "$0")/.."
+cd "$(dirname "$0")/../.."
 : "${M3_BOOT_JDK:?Set M3_BOOT_JDK to a private JDK 21 directory}"
 mkdir -p m3/build/logs
 args=(--with-boot-jdk="$M3_BOOT_JDK" --with-debug-level=fastdebug --with-jvm-variants=server --enable-headless-only --disable-warnings-as-errors --with-freetype=bundled)

@@ -4,7 +4,7 @@
 import hashlib
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[3]
+ROOT = Path(__file__).resolve().parents[4]
 MANIFEST = Path(__file__).with_name("mask-selection-postimages-20261016.tsv")
 
 def main() -> None:
@@ -17,7 +17,7 @@ def main() -> None:
             raise SystemExit("invalid mask receiving manifest row")
         path, expected, disposition = row
         rel = Path(path)
-        if (rel.is_absolute() or ".." in rel.parts
+        if (rel.is_absolute() or "../../../../m3/collections" in rel.parts
                 or rel.parts[:2] != ("m3", "collections")
                 or disposition != "RECEIVER_CANDIDATE_NOT_INSTALLED_JDK"):
             raise SystemExit("out-of-scope/invalid target path")

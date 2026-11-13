@@ -1,7 +1,7 @@
     /** Columns of the census SEMANTIC_CENSUS_&lt;repo&gt;.tsv ledger (contract/SEMANTIC_SOURCE_CENSUS_V1.md). */
     private static final int CENSUS_COLUMNS = 12;
     private static final String CENSUS_HEADER_PREFIX = "atom_id\trepo\tpath\tkind\towner\tname\tsignature\t";
-    private static final String CENSUS_CONTRACT = "m3/tooling/atom-census SEMANTIC_CENSUS_V1";
+    private static final String CENSUS_CONTRACT = "make/m3/tooling/atom-census SEMANTIC_CENSUS_V1";
 
     /** Runs the census CLI ({@code --semantic}) on the one file at its logical path; keeps executable Java atoms. */
     private static List<M3AtomRecord> census(String module, String path, byte[] source, Path rules) {

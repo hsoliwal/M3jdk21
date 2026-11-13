@@ -12,7 +12,7 @@ import runpy
 import subprocess
 
 HERE = Path(__file__).resolve().parent
-PREFIX = "m3/tooling/hash-pinned-target-paths/authority-conformance/"
+PREFIX = "make/m3/tooling/hash-pinned-target-paths/authority-conformance/"
 WORKFLOW = ".github/workflows/m3-hash-pinned-target-paths.yml"
 ORIGINAL = HERE.parent / "qualify.py"
 ORIGINAL_GIT = "3fdbd0b7382bc07c3c9ca905845dcb824b2a1ae5"
@@ -39,7 +39,7 @@ CONTRACTS = {
             "bothPartialStatesRoundTripAndReachFixedPointsInBothOrders",
             "everyOwnerRefusesDriftMissingAndDuplicateWithoutMutation",
             "authenticStrictProviderReplaysElevenTargetsAndRejectsBothOrderFailures"]},
-        "emittedOwners": ["m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/manifest.tsv"],
+        "emittedOwners": ["make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/manifest.tsv"],
         "counters": {"tests": 3, "successfulRuns": 16, "refusedRuns": 6, "emittedOutputs": 2,
                      "authenticProviderRuns": 2, "authenticProviderRefusals": 2, "authenticProviderOutputs": 11},
         "schema": "M3_AUTHORITY_MANIFEST_ORDER_SDK_RECEIPT_V1",

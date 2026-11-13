@@ -60,7 +60,7 @@ def verify(root: Path, dataset: str, require_terminal: bool = True) -> dict:
     if not NAME.fullmatch(dataset) or len(dataset) > 32:
         raise ValueError('invalid recipe dataset')
     root = root.resolve(strict=True)
-    data = root / 'm3/tooling/shared-frontend/recipe-custody/datasets' / dataset
+    data = root / 'make/m3/tooling/shared-frontend/recipe-custody/datasets' / dataset
     meta = json.loads((data / 'DATASET.json').read_text(encoding='utf-8'))
     if meta.get('dataset') != dataset or meta.get('targets', 0) > MAX_TARGETS:
         raise ValueError('dataset identity or size drift')
@@ -185,13 +185,13 @@ def verify(root: Path, dataset: str, require_terminal: bool = True) -> dict:
 
 def main() -> None:
     arg = argparse.ArgumentParser(description=__doc__)
-    arg.add_argument('--root', type=Path, default=Path(__file__).resolve().parents[5])
+    arg.add_argument('--root', type=Path, default=Path(__file__).resolve().parents[6])
     arg.add_argument('--dataset', required=True)
     arg.add_argument('--allow-checkpoint', action='store_true')
     arg.add_argument('--optional', action='store_true',
                      help='skip historical datasets without PASSES.tsv')
     opts = arg.parse_args()
-    plan = (opts.root / 'm3/tooling/shared-frontend/recipe-custody/datasets'
+    plan = (opts.root / 'make/m3/tooling/shared-frontend/recipe-custody/datasets'
             / opts.dataset / 'PASSES.tsv')
     if opts.optional and not plan.is_file():
         print('M3_STAGE_CHAIN_SKIP ' + opts.dataset + ': no multi-pass plan')

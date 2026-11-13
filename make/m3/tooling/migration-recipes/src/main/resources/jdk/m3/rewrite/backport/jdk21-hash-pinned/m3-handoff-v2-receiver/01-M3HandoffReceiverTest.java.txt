@@ -25,7 +25,7 @@ final class M3HandoffReceiverTest {
         assertTrue(
                 M3Jdk21HashPinnedSnapshotRecipe.jdkJavaPath(
                         "m3/ports/sample/src/main/java/sample/Sample.java"));
-        assertFalse(M3Jdk21HashPinnedSnapshotRecipe.jdkJavaPath("m3/docs/Sample.java"));
+        assertFalse(M3Jdk21HashPinnedSnapshotRecipe.jdkJavaPath("doc/m3/Sample.java"));
     }
 
     @Test

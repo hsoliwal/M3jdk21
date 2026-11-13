@@ -8,7 +8,7 @@ from pathlib import Path
 import unittest
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 
 
 def rows(path: str) -> list[dict[str, str]]:
@@ -18,7 +18,7 @@ def rows(path: str) -> list[dict[str, str]]:
 
 class TemurinDonorCatalogueTest(unittest.TestCase):
     def test_adoptium_mirror_is_explicitly_non_unique_and_non_authoritative(self) -> None:
-        forks = {row["fork_id"]: row for row in rows("m3/backports/COMMUNITY_FORKS.tsv")}
+        forks = {row["fork_id"]: row for row in rows("make/m3/backports/COMMUNITY_FORKS.tsv")}
         upstream = forks["upstream21u"]
         adoptium = forks["adoptium-jdk21u"]
 
@@ -32,7 +32,7 @@ class TemurinDonorCatalogueTest(unittest.TestCase):
 
     def test_tooling_donors_are_pinned_apache2_and_authority_false(self) -> None:
         tooling = {row["donor_id"]: row for row in rows(
-            "m3/backports/COMMUNITY_TOOLING_DONORS.tsv"
+            "make/m3/backports/COMMUNITY_TOOLING_DONORS.tsv"
         )}
         self.assertEqual({"temurin-build", "aqavit-tests"}, set(tooling))
 
@@ -65,9 +65,9 @@ class TemurinDonorCatalogueTest(unittest.TestCase):
 
     def test_capability_candidates_are_evidence_only_and_reference_known_donors(self) -> None:
         tooling = {row["donor_id"] for row in rows(
-            "m3/backports/COMMUNITY_TOOLING_DONORS.tsv"
+            "make/m3/backports/COMMUNITY_TOOLING_DONORS.tsv"
         )}
-        capabilities = rows("m3/backports/TEMURIN_CAPABILITY_CANDIDATES.tsv")
+        capabilities = rows("make/m3/backports/TEMURIN_CAPABILITY_CANDIDATES.tsv")
         ids = [row["candidate_id"] for row in capabilities]
         self.assertEqual(len(ids), len(set(ids)))
         self.assertEqual(8, len(capabilities))

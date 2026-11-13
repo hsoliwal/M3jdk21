@@ -290,7 +290,7 @@ public final class M3TreeLayoutCacheDifferential {
         return r == null ? "null" : r.x + "," + r.y + " " + r.width + "x" + r.height;
     }
 
-    // ---- accepted upstream defects (m3/docs/swing-viewport/UPSTREAM_DEFECTS.tsv) ----------------
+    // ---- accepted upstream defects (doc/m3/swing-viewport/UPSTREAM_DEFECTS.tsv) ----------------
 
     static final int[] ACCEPTED = new int[3];
     /** -Ddiff.fixed=true: stock FixedHeightLayoutCache vs M3FixedHeightLayoutCache (positive row heights). */

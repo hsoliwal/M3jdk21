@@ -33,7 +33,7 @@ final class M3StringConcatTypedCompileQualification {
             "src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java";
     private static final String TEST =
             "test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java";
-    private static final String MANIFEST = "m3/runtime-integration/recipe/manifest.json";
+    private static final String MANIFEST = "make/m3/runtime-integration/recipe/manifest.json";
     private static final String FACTORY_UNIT = "java/lang/invoke/StringConcatFactory.java";
     private static final String JLA_UNIT = "jdk/internal/access/JavaLangAccess.java";
     private static final String TEST_UNIT = "M3StringConcatReferenceDagTest.java";

@@ -6,7 +6,7 @@ The source publication is [com.synexia PR9285](https://github.com/hsoliwal/com.s
 
 ## Actual changes and retained authority
 
-The existing `M3Jdk21HashPinnedTextSnapshotRecipe`, canonical `m3/docs/name-mapping.json`, schema, `migration.py` and sealed `recipe.py` installer own this change. `com.m3.rewrite.backport.JccSourceFinalHandoff` selects a new four-output crate. The plan seal is `af65912789780e214f09644b38f542db5f7670b83ee1fada228bce08f8f9b30e`; it is the canonical plan digest, distinct from the formatted plan file hash. The materialized mapping afterimage is SHA256 `61818898ef6c092ddad2c1ee4cfe7508199912ff0a1f2d5c2a51ad6695d040c8`.
+The existing `M3Jdk21HashPinnedTextSnapshotRecipe`, canonical `doc/m3/name-mapping.json`, schema, `migration.py` and sealed `recipe.py` installer own this change. `com.m3.rewrite.backport.JccSourceFinalHandoff` selects a new four-output crate. The plan seal is `af65912789780e214f09644b38f542db5f7670b83ee1fada228bce08f8f9b30e`; it is the canonical plan digest, distinct from the formatted plan file hash. The materialized mapping afterimage is SHA256 `61818898ef6c092ddad2c1ee4cfe7508199912ff0a1f2d5c2a51ad6695d040c8`.
 
 Exactly four existing files change through that actual recipe/installer: canonical mapping, handoff document, binding receipt and root obligations. Every preimage equals its E2 published bytes, and all seven dependency guards stay exact. New crate resources, named YAML, Java/Python tests, focused proof POM and task evidence are additive. The original E2 one-update/three-absent crate, tests, proofs and other payload files remain intact. No production Java, native source, existing owning POM, schema, validator, installer or workflow is changed.
 
@@ -68,6 +68,6 @@ Source export, source-qualified destination materialization, complete destinatio
 
 ## Evidence reproducibility
 
-The source-final receipt copies and public source proof references carry exact identity bindings. Execution files retain original local absolute paths as provenance. The scripts under `provenance/` record the actual acquisition-bound authoring, checker and execution procedure; they are not a new repository build entry point. From a full checkout, the additive tests use the existing focused POM and Python packet test listed in the handoff document. The canonical plan can be checked/applied/rolled back with the existing `m3/migration/recipe.py`; its four exact preimages and seven guards remain mandatory.
+The source-final receipt copies and public source proof references carry exact identity bindings. Execution files retain original local absolute paths as provenance. The scripts under `provenance/` record the actual acquisition-bound authoring, checker and execution procedure; they are not a new repository build entry point. From a full checkout, the additive tests use the existing focused POM and Python packet test listed in the handoff document. The canonical plan can be checked/applied/rolled back with the existing `make/m3/migration/recipe.py`; its four exact preimages and seven guards remain mandatory.
 
 No new receiving publication commit is placed inside its own files, avoiding a self-reference cycle. The coordinating publisher must separately verify payload blobs/modes, retained base files, commit parent/root/ref and the new draft PR before describing delivery.

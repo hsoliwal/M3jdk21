@@ -9,7 +9,7 @@ The fdp-delegate lane made the 1.0.90 double/float facades call java.base: a lay
 
 ## Change
 
-- Recipe `m3/tooling/jdk-superset/number-parse/tools/jackson_numbers_to_jdk.py` (re-runs to a fixed point; `--check`
+- Recipe `make/m3/tooling/jdk-superset/number-parse/tools/jackson_numbers_to_jdk.py` (re-runs to a fixed point; `--check`
   writes nothing). In jackson-core 2.15.3, 2.16.1 and 2.19.2 it retargets the FastDoubleParser calls:
   - `NumberInput`: `JavaDoubleParser.parseDouble(s)` -> `Double.parseDouble(s)`, `parseDouble(array, offset, len)` ->
     `Double.parseDouble(new String(array, offset, len))` (the expression of Jackson's own non-fast branch); the same
@@ -25,7 +25,7 @@ The fdp-delegate lane made the 1.0.90 double/float facades call java.base: a lay
 - Each pom drops the FastDoubleParser dependency, its shade filter and its four package relocations; the
   LICENSE/NOTICE relocations stay. The relocated jackson-core gets the same overlay through the lib-intake name
   mapping and loses `requires jdk.m3.fastdoubleparser`.
-- Jackson pack (`m3/tooling/module-packs/jackson`): the FastDoubleParser donor leaves `build.py` DONORS,
+- Jackson pack (`make/m3/tooling/module-packs/jackson`): the FastDoubleParser donor leaves `build.py` DONORS,
   `source-build/pom.xml` and `SOURCE_LOCK.json`; the recipe relocks jackson-core (the previous lock is
   `number-parse-jackson/SOURCE_LOCK_PREDECESSOR.json`); the built-jar contract now refuses any FastDoubleParser class;
   `legal/fastdoubleparser-1.0.90/` and its `legal_copies` rows go; NOTICE, README, INTEGRATION and
@@ -33,10 +33,10 @@ The fdp-delegate lane made the 1.0.90 double/float facades call java.base: a lay
   (`META-INF/FastDoubleParser-LICENSE`, `-NOTICE`, `thirdparty-LICENSE`) stay upstream bytes.
 - Removed: the four FastDoubleParser trees (244 files), their three `third_party/pom.xml` modules, the
   `m3sdk-jmod-receiver.yml` path filter and their four VENDOR rows in `PACKAGE_BASELINE.tsv`.
-- `m3/tooling/fdp-delegate` is retired to `m3/evidence/java-base/fdp-delegate` (its overlay target is gone).
+- `make/m3/tooling/fdp-delegate` is retired to `make/m3/evidence/java-base/fdp-delegate` (its overlay target is gone).
 - `src/java.base/share/legal/fastdoubleparser.md`: the origin line says the vendored copy was removed.
 - One-off edits: `number-parse-jackson/land_edits.py` (asserts each anchor; a second run changes nothing).
-- Left as records: lib-intake runs, catalogue, BATCH and COMBINED_IMAGE receipts; `m3/docs/name-mapping.d`;
+- Left as records: lib-intake runs, catalogue, BATCH and COMBINED_IMAGE receipts; `doc/m3/name-mapping.d`;
   compiletime inventories (jar SHA-256 receipts of a past run); retained variants; jmod-recipes evidence; the tq-sync
   oracle, which pins receiver base a7cfe4931f22 and whose 122 model pins already all differ from master.
 

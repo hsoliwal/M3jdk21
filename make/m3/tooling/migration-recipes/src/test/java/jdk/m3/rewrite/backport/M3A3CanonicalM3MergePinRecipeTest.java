@@ -33,9 +33,9 @@ class M3A3CanonicalM3MergePinRecipeTest {
         var javaRecipe = new M3Jdk21HashPinnedSnapshotRecipe(JAVA_CRATE);
         Map<String, String> javaBefore =
                 Map.of(
-                        "m3/tooling/a3/src/main/java/jdk/m3/a3/A3RecipeHome.java",
+                        "make/m3/tooling/a3/src/main/java/jdk/m3/a3/A3RecipeHome.java",
                         resource(JAVA_ROOT + "pre-A3RecipeHome.java.txt"),
-                        "m3/tooling/a3/src/test/java/jdk/m3/a3/A3RecipeHomeTest.java",
+                        "make/m3/tooling/a3/src/test/java/jdk/m3/a3/A3RecipeHomeTest.java",
                         resource(JAVA_ROOT + "pre-A3RecipeHomeTest.java.txt"));
         var javaRun =
                 javaRecipe.run(
@@ -45,9 +45,9 @@ class M3A3CanonicalM3MergePinRecipeTest {
         Map<String, String> javaAfter = results(javaRun.getChangeset().getAllResults());
         Map<String, String> expectedJava =
                 Map.of(
-                        "m3/tooling/a3/src/main/java/jdk/m3/a3/A3RecipeHome.java",
+                        "make/m3/tooling/a3/src/main/java/jdk/m3/a3/A3RecipeHome.java",
                         resource(JAVA_ROOT + "00-A3RecipeHome.java.txt"),
-                        "m3/tooling/a3/src/test/java/jdk/m3/a3/A3RecipeHomeTest.java",
+                        "make/m3/tooling/a3/src/test/java/jdk/m3/a3/A3RecipeHomeTest.java",
                         resource(JAVA_ROOT + "01-A3RecipeHomeTest.java.txt"));
         assertEquals(expectedJava, javaAfter);
         assertTrue(
@@ -67,7 +67,7 @@ class M3A3CanonicalM3MergePinRecipeTest {
                         resource(TEXT_ROOT + "pre-workflow.yml.txt"),
                         ".github/workflows/m3-a3.yml",
                         resource(TEXT_ROOT + "pre-m3-a3.yml.txt"),
-                        "m3/tooling/a3/M3_RECIPE_RECEIVER.md",
+                        "make/m3/tooling/a3/M3_RECIPE_RECEIVER.md",
                         resource(TEXT_ROOT + "pre-M3_RECIPE_RECEIVER.md.txt"));
         var textRun =
                 textRecipe.run(
@@ -84,7 +84,7 @@ class M3A3CanonicalM3MergePinRecipeTest {
                         resource(TEXT_ROOT + "00-workflow.yml.txt"),
                         ".github/workflows/m3-a3.yml",
                         resource(TEXT_ROOT + "02-m3-a3.yml.txt"),
-                        "m3/tooling/a3/M3_RECIPE_RECEIVER.md",
+                        "make/m3/tooling/a3/M3_RECIPE_RECEIVER.md",
                         resource(TEXT_ROOT + "01-M3_RECIPE_RECEIVER.md.txt"));
         assertEquals(expectedText, textAfter);
         assertTrue(

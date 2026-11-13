@@ -3,9 +3,9 @@
 
 #2649 (merge `664dd18c7eef`, merge-loss case 05, `mergeloss-s1-20261106` leaf L2) moved the two held tests
 `M3IndexPathMasksLongSelfTest.java` and `M3IndexPathMasksLongTest.java` out of
-`m3/qualification/loss-guard-restore-20261106/held/` back to their paths, byte for byte, after its L1 restored
+`make/m3/qualification/loss-guard-restore-20261106/held/` back to their paths, byte for byte, after its L1 restored
 `M3IndexPathMasks.selectLong`. This change records that in the held set's own ledger: one RESTORED status row per test is
-appended to `m3/qualification/loss-guard-restore-20261106/HELD.tsv`; the original HELD rows are kept unchanged.
+appended to `make/m3/qualification/loss-guard-restore-20261106/HELD.tsv`; the original HELD rows are kept unchanged.
 
 The rows follow that file's own five columns (`path, source_blob, reason, evidence, owner_action`, the schema #2517's
 writer used; hold.py's `path, labels, gate, held_sha256, reason` belongs to #2547's ledger): status `RESTORED` leads

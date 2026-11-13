@@ -55,7 +55,7 @@ descriptor or native JNI symbol is overwritten by this transfer.
   CURRENT MASTER UNCHANGED — no destructive restoration of old facade.
 - JNI mask sources and java.util Collections/TreeSet/TreeMap implementations:
   UNCHANGED — no claim of native binary or JDK collection replacement.
-- `m3/collections/algorithm-catalog/java-base-filtered-sorted-receiver-20261020.tsv`:
+- `make/m3/collections/algorithm-catalog/java-base-filtered-sorted-receiver-20261020.tsv`:
   problem-category comparison and explicit acceptance dispositions.
 
 ## Receiver gates before merge

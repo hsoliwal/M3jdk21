@@ -11,7 +11,7 @@ download is required by the resulting modules.
 This builds the actual tool implementations and packages ten JMODs, or eleven
 with the optional real M3AST compiler consumer. Original
 public APIs/module names remain intact. The canonical naming policy/map stays in
-`m3/docs/name-mapping.json`; String runtime qualification remains the active phase.
+`doc/m3/name-mapping.json`; String runtime qualification remains the active phase.
 
 The canonical source owner is
 `hsoliwal/com.synexia:synexia-openrewrite-recipes/crates/m3-nlp-search`.
@@ -36,7 +36,7 @@ owner and regenerate the receiver.
 | `org.m3jdk.tools.search` | M3AST consumer and CLI in `org.m3jdk.tools.search.M3SourceIndex` |
 
 The file module exports `com.m3.file` and `com.m3.file.json`. Its source is under
-[`m3/file`](../../../file). It retains the full mapped file family:
+[`m3/file`](../../../../../m3/file). It retains the full mapped file family:
 token stores, lexicons, kinds, frequencies, patterns, event streams, byte facts,
 source facts, snapshots, mapped images, rolling indexes, token-range digests and
 universe images. The supporting closure includes JSON structure, pageable trees,
@@ -115,7 +115,7 @@ pins that handoff. The small source-build mirror retains its canonical source
 identity and all locks. Improvements return to Synexia.
 
 ```sh
-python3 m3/tooling/module-packs/nlp-search/build.py \
+python3 make/m3/tooling/module-packs/nlp-search/build.py \
   --jdk-home "$M3JDK_HOME" \
   --out build/m3-nlp-search
 ```
@@ -134,7 +134,7 @@ CI and local integration work can use a stock Java 21 JDK by requesting the
 bounded compiler proof explicitly:
 
 ```sh
-python3 m3/tooling/module-packs/nlp-search/build.py \
+python3 make/m3/tooling/module-packs/nlp-search/build.py \
   --jdk-home "$JAVA_HOME" \
   --compiler-source-proof \
   --out build/m3-nlp-search-proof

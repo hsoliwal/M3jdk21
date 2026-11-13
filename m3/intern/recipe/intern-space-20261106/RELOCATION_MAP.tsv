@@ -20,7 +20,7 @@ FILE	synexia-common/src/test/java/com/synexia/common/intern/M3InternShapesTest.j
 FILE	synexia-common/src/test/java/com/synexia/common/intern/M3InternChunkMatchTest.java	src/test/java/jdk/m3/intern/M3InternChunkMatchTest.java	donor JUnit 5 wrapper: one @Test calling the proof's run() (the module's test phase runs every proof)
 FILE	synexia-common/src/test/java/com/synexia/common/intern/M3InternPathTrieTest.java	src/test/java/jdk/m3/intern/M3InternPathTrieTest.java	donor JUnit 5 wrapper: one @Test calling the proof's run() (the module's test phase runs every proof)
 FILE	synexia-common/src/test/java/com/synexia/common/intern/M3InternTrieScalarTest.java	src/test/java/jdk/m3/intern/M3InternTrieScalarTest.java	donor JUnit 5 wrapper: one @Test calling the proof's run() (the module's test phase runs every proof)
-PACKAGE	com.synexia.common.intern	jdk.m3.intern	new module m3/intern (com.m3:m3-intern, module org.m3jdk.intern, package jdk.m3.intern), a default module of m3/pom.xml after collections (README, Module decision)
+PACKAGE	com.synexia.common.intern	jdk.m3.intern	new module m3/intern (com.m3:m3-intern, module org.m3jdk.intern, package jdk.m3.intern), a default module of make/m3/pom.xml after collections (README, Module decision)
 TYPE	M3InternSpace	M3InternSpace	identity (M3 prefix already)
 TYPE	M3InternShapes	M3InternShapes	identity (M3 prefix already)
 TYPE	M3InternPathTrie	M3InternPathTrie	identity (M3 prefix already)

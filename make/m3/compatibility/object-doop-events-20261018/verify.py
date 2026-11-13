@@ -21,7 +21,7 @@ def main():
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--hotspot-jvm', type=Path, help='Built compatible libjvm.so; original Object vtable contract requires six slots')
     args = parser.parse_args()
-    repo = Path(__file__).resolve().parents[3]
+    repo = Path(__file__).resolve().parents[4]
     out = args.output.resolve()
     out.mkdir(parents=True, exist_ok=True)
     if (out / 'stages.json').exists():

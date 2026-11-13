@@ -8,7 +8,7 @@ is the ledger.
 
 Why a new branch and not `m3/superset-20261023`: that branch is 39 commits behind master and master's drift
 conflicts with it in 10 core files (`M3FilteredViews`, `M3LinkedHashMap`, `M3SlotMap`, ... and
-`m3/tooling/module-packs/parser`), so every collections PR, all branched from current master, conflicts against it
+`make/m3/tooling/module-packs/parser`), so every collections PR, all branched from current master, conflicts against it
 for the same files. The collections PRs touch no core source; they add implementations, interop, qualification,
 receiving, recipe and catalogue files plus four workflows, each PR in its own files.
 

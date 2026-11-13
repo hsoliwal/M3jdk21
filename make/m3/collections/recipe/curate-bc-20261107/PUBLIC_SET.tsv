@@ -7,7 +7,7 @@ M3IntIterator	core	IntIterator	primitive iterator
 M3LongIterator	core	LongIterator	primitive iterator
 M3LongDeque	core	LongDeque	deque interface
 M3LongQueue	core	LongQueue	queue interface
-M3PrimitiveKind	core	PrimitiveKind	the eight primitive kinds (used by m3/tooling)
+M3PrimitiveKind	core	PrimitiveKind	the eight primitive kinds (used by make/m3/tooling)
 M3IntArrayList	core	IntArrayList	canonical growable int list
 M3LongArrayList	core	LongArrayList	canonical growable long list (used by m3/eclipse)
 M3IntHashSet	core	IntHashSet	open-addressing int set
@@ -159,4 +159,4 @@ M3Collections	core	M3Collections	used by m3/eclipse (A2); java.util.Collections 
 M3ObjectIdentitySet	core	ObjectIdentitySet	used by m3/eclipse (A2)
 M3SlotAllocator28	core	SlotAllocator28	used by m3/eclipse (A2); name to review in phase C
 M3ItemState	core	ItemState	used by m3/viewport-core (A2)
-M3ObjectResidency	core	ObjectResidency	used by m3/tooling/object-residency (A2)
+M3ObjectResidency	core	ObjectResidency	used by make/m3/tooling/object-residency (A2)

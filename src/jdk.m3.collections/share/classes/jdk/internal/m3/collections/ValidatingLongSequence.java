@@ -7,7 +7,7 @@ import java.util.function.LongPredicate;
 import jdk.m3.collections.LongSequence;
 
 /** Predicate admission; caller bulk arrays are snapshotted before validation. */
-//FLLDCIM: RELOCATE - donor blob 522c3ae14d22 at d5ad5090d87e; recipe m3/collections/qualification/census2-t2-20261106/relocate.py v6
+//FLLDCIM: RELOCATE - donor blob 522c3ae14d22 at d5ad5090d87e; recipe make/m3/collections/qualification/census2-t2-20261106/relocate.py v6
 public final class ValidatingLongSequence extends ForwardingLongSequence {
     private final LongSequence backend;
     private final LongPredicate validator;

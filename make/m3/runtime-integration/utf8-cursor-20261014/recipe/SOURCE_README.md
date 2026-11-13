@@ -37,7 +37,7 @@ is recorded separately as NOT_RUN: these existing tests instantiate the Java
 provider directly.
 
 A related receiving mirror may live at
-m3/runtime-integration/utf8-cursor-20261014/recipe/canonical in M3jdk21. It must
+make/m3/runtime-integration/utf8-cursor-20261014/recipe/canonical in M3jdk21. It must
 equal this sdk Git subtree exactly, carry a source-commit/tree binding outside
 the core, and validate existing public provider blobs, live35ed target and
 immutable UTF8 HOLD before and after Maven. No private engine, unrelated source,

@@ -11,14 +11,14 @@ import runpy
 import subprocess
 
 HERE = Path(__file__).resolve().parent
-RECEIVER = HERE.parents[2]
+RECEIVER = HERE.parents[3]
 SDK = HERE / "sdk"
 ROOT = Path(os.environ["M3_PROOF_ROOT"]).resolve()
 ARTIFACTS = ROOT / "artifacts"
-PREFIX = "m3/tooling/regex-ascii-live-owner-custody/"
+PREFIX = "make/m3/tooling/regex-ascii-live-owner-custody/"
 WORKFLOW = ".github/workflows/m3-regex-ascii-live-owner-custody.yml"
-ORIGINAL_SDK = RECEIVER / "m3/tooling/regex-ascii-lexical-receiver/sdk"
-ORIGINAL_PREFIX = "m3/tooling/regex-ascii-lexical-receiver/"
+ORIGINAL_SDK = RECEIVER / "make/m3/tooling/regex-ascii-lexical-receiver/sdk"
+ORIGINAL_PREFIX = "make/m3/tooling/regex-ascii-lexical-receiver/"
 ENGINES = {
     "M3GpuToolJoinRecipe": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
     "M3GpuToolJoinManifest": "78d5fb68f13872164973a8918cc7886c5f548bca",

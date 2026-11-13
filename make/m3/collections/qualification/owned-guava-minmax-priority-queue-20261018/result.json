@@ -73,7 +73,7 @@
       "scope": "existing current aligned primitive kernel over public queue array/iterator/poll/rebuild snapshots; no native heap CRUD/store or ABI addition"
     },
     "actualReceiptSHA256": "ae92daa318e3e472642b54cd108c5d8356cce584e8db49fd997cb0409c0599ca",
-    "publicReceiptPath": "m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/MASK_PROJECTION_V4.json",
+    "publicReceiptPath": "make/m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/MASK_PROJECTION_V4.json",
     "rootCurrentRuntimeReceiptSHA256": "4ba523ad8d2e96254d81d5b6d3587ac2118f9fcf196122b64f1afb14dc26cda1",
     "rootCurrentCustodyReceiptSHA256": "fde5fca9b6608d022b6fecac5bfc189d934812f9ff721084b7e568f2c2006b56",
     "historyScope": "Prior V1 snapshot projection retained under historicalMaskProjectionV1; no previous receipt rewritten"

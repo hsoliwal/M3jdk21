@@ -4,9 +4,9 @@
 # LIB_INTAKE_TO_JMOD combined image: every library whose run passed S8 (runs/<lib>/STAGES.tsv) contributes its JMOD from
 # <work root>/<lib>/jmods; one jlink of java.base + all those modules, --validate-modules, and a presence check per module
 # (COMBINED_IMAGE.tsv). Re-runnable on its own after any single-library re-run.
-# Usage (repository root): bash m3/tooling/lib-intake/lib_intake_combine.sh <work root>
+# Usage (repository root): bash make/m3/tooling/lib-intake/lib_intake_combine.sh <work root>
 set -uo pipefail
-WR="$1"; D=m3/tooling/lib-intake; BIN="$JAVA_HOME/bin"; SEP=":"; case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) SEP=";";; esac
+WR="$1"; D=make/m3/tooling/lib-intake; BIN="$JAVA_HOME/bin"; SEP=":"; case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) SEP=";";; esac
 mods=(); mp="$JAVA_HOME/jmods"
 for st in "$D"/runs/*/STAGES.tsv; do
 	lib=$(basename "$(dirname "$st")")

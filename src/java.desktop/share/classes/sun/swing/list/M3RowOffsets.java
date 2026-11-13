@@ -28,7 +28,7 @@ package sun.swing.list;
  * Offsets of rows over a dense lane of row heights: where a row starts and which row holds an
  * offset. This is the seam between {@link M3ListRows} and the prefix-sum owner behind it:
  * {@link M3PrefixRowOffsets} today, an {@code m3/collections} owner when one ships in the JDK
- * (m3/docs/swing-viewport/DESIGN.md section 9, ALGORITHM_CATALOGUE.tsv).
+ * (doc/m3/swing-viewport/DESIGN.md section 9, ALGORITHM_CATALOGUE.tsv).
  */
 public interface M3RowOffsets {
 

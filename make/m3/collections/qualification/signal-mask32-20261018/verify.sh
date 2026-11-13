@@ -3,7 +3,7 @@
 # Copyright 2026 Hitesh Soliwal and contributors
 set -euo pipefail
 
-ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../../.." && pwd)"
 MAIN="$ROOT/src/jdk.m3.collections/share/classes/jdk/m3/collections"
 TEST="$ROOT/test/jdk/jdk/m3/collections"
 NATIVE="$ROOT/src/jdk.m3.collections/share/native/libm3collections/collections"

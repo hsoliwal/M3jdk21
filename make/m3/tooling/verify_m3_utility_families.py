@@ -9,8 +9,8 @@ from pathlib import Path
 import re
 import sys
 
-ROOT = Path(__file__).resolve().parents[2]
-CATALOGUE = ROOT / "m3/docs/m3-utility-families.tsv"
+ROOT = Path(__file__).resolve().parents[3]
+CATALOGUE = ROOT / "doc/m3/m3-utility-families.tsv"
 HEADER = ["family", "module", "upstream_api", "current_owner_path", "status", "required_gate"]
 STATES = {"QUALIFIED_ISOLATED", "IMPLEMENTED_INTERNAL", "EXISTING_INTERNAL_KERNEL", "MAPPED_PENDING"}
 SEEDS = {"M3Objects", "M3Strings", "M3Streams", "M3Reflection", "M3Arrays",

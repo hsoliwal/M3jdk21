@@ -5,7 +5,7 @@
 # OVERLAP_LANDED or OVERLAP_OTHER_OWNER runs next to its owner on the same seeded fixtures (OverlapAgreement.java, one
 # JVM): the whole donor catalogue (21 sources + the progress contract, javac --release 21 -Xlint:all -Werror), the
 # landed jdk.m3.algorithm classes (target/classes; byte-identical to the master build by gate 7), jdk.m3.collections
-# (DEP_CP), the cpu-tools owners (compiled from m3/tooling/module-packs/cpu-tools) and the java.base owner
+# (DEP_CP), the cpu-tools owners (compiled from make/m3/tooling/module-packs/cpu-tools) and the java.base owner
 # jdk.internal.m3.M3IntAlgorithms (compiled from this tree's src/java.base and patched into java.base). Writes
 # OVERLAP.tsv into the recipe directory (deterministic: same seed, same table) and prints its digest.
 # usage: overlap.sh <donor-git-dir> <donor-rev> <scratch-dir>   (JAVA_HOME = JDK 21; after mvn package)

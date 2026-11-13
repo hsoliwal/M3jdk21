@@ -3,8 +3,8 @@ from pathlib import Path
 import ast, collections, copy, csv, hashlib, io, json, re
 B=Path('/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04');R=B/'overlay';O=B/'derivation-static-review/resources-v3';S=O/'inputs'
 SOURCE='0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8';ROOT='0361e4a07b77a01df170523033fef01c4052ddc5';DEST='0994ecd65e86600f417f4d8702838d8c2663af61';DTREE='7e8f39ac999174f8d5b6028d638a68d8c317b070'
-LAB='m3.jcc-recipe-laboratory';JNI='m3.jcc-java-jni-regression';IDS={LAB,JNI};PREFIX='m3/tooling/migration-recipes';TASK=PREFIX+'/tasks/jcc-source-recovery-handoff-20261005/source-recovery/';CRATE=R/PREFIX/'src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005'
-MAP='m3/docs/name-mapping.json';DOC='m3/docs/jcc-source-handoff.md';BIND='m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json';COV='m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv'
+LAB='m3.jcc-recipe-laboratory';JNI='m3.jcc-java-jni-regression';IDS={LAB,JNI};PREFIX='make/m3/tooling/migration-recipes';TASK=PREFIX+'/tasks/jcc-source-recovery-handoff-20261005/source-recovery/';CRATE=R/PREFIX/'src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005'
+MAP='doc/m3/name-mapping.json';DOC='doc/m3/jcc-source-handoff.md';BIND='make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json';COV='make/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv'
 def load(p):return json.loads(Path(p).read_text())
 def identity(p):
  p=Path(p);assert p.is_file() and not p.is_symlink(),p;d=p.read_bytes();return {'bytes':len(d),'sha256':hashlib.sha256(d).hexdigest(),'git_blob_sha1':hashlib.sha1(f'blob {len(d)}\0'.encode()+d).hexdigest(),'mode':'100755' if p.stat().st_mode&0o111 else '100644'}
@@ -96,7 +96,7 @@ for r in packet['entrypoint_test_and_proof_owners']:check(r['local_path'],r);sna
 java=Path(packet['entrypoint_test_and_proof_owners'][0]['local_path']).read_text();prepared=(B/'derivation-static-review/inputs/JccSourceRecoveryHandoffTest.java').read_text()
 for a,z in [('UNBOUND_RECOVERY_SOURCE_COMMIT',SOURCE),('UNBOUND_RECOVERY_SOURCE_ROOT_TREE',ROOT),('UNBOUND_RECOVERY_SOURCE_REF',f['source_ref']),('EXPECTED_RECOVERY_SOURCE_COUNT = -1','EXPECTED_RECOVERY_SOURCE_COUNT = 19')]:assert prepared.count(a)==1;prepared=prepared.replace(a,z)
 assert java==prepared and len(re.findall(r'^    @Test$',java,re.M))==12
-python_path=R/'m3/migration/test/test_jcc_source_recovery_handoff_packet.py';assert python_path.read_bytes()==(B/'derivation-static-review/inputs/test_jcc_source_recovery_handoff_packet.py').read_bytes();py_ast=ast.parse(python_path.read_text());methods=[n.name for cls in py_ast.body if isinstance(cls,ast.ClassDef) for n in cls.body if isinstance(n,ast.FunctionDef) and n.name.startswith('test_')];assert len(methods)==6
+python_path=R/'make/m3/migration/test/test_jcc_source_recovery_handoff_packet.py';assert python_path.read_bytes()==(B/'derivation-static-review/inputs/test_jcc_source_recovery_handoff_packet.py').read_bytes();py_ast=ast.parse(python_path.read_text());methods=[n.name for cls in py_ast.body if isinstance(cls,ast.ClassDef) for n in cls.body if isinstance(n,ast.FunctionDef) and n.name.startswith('test_')];assert len(methods)==6
 assert identity(B/'run_verification_v3.py')['sha256']=='c779f94023b3914bca1558a35d39ab11aaedd00a18cf5b74e2a30bf1205de6b6'
 execution=snapshot(B/'authoring-invocation-v3/EXECUTION.json','AUTHORING_EXECUTION.json')
 assert execution['exit_code']==0

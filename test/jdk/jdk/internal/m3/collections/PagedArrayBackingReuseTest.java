@@ -18,7 +18,7 @@ import java.util.IdentityHashMap;
 import java.util.List;
 
 /** Actual-source qualification; reflection observes private capacity only in this fixture. */
-//FLLDCIM: RELOCATE - donor blob 21f1abd993fe at 165ceb5a0202; recipe m3/collections/recipe/residency-paged-array-20261107/relocate.py v4
+//FLLDCIM: RELOCATE - donor blob 21f1abd993fe at 165ceb5a0202; recipe make/m3/collections/recipe/residency-paged-array-20261107/relocate.py v4
 public final class PagedArrayBackingReuseTest {
     private static boolean requireReuse;
     private static int cases;

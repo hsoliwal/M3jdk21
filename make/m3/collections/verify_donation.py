@@ -23,14 +23,14 @@ import zipfile
 from m3_object_state_offset_receipt import include_successor as include_object_state_offset_successor
 
 HERE = Path(__file__).resolve().parent
-REPO = HERE.parents[1]
+REPO = HERE.parents[2]
 
 
 def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-# The module move of 2026-11-08 (MOVE_TO_JDK_MODULE v3, m3/tooling/jdk-naming/move_module_area.py) gives each recorded
+# The module move of 2026-11-08 (MOVE_TO_JDK_MODULE v3, make/m3/tooling/jdk-naming/move_module_area.py) gives each recorded
 # custody path a new home; recorded paths stay the keys of the hash-pinned manifests. Specific entries come first.
 MOVED_PREFIXES = (
     ('m3/collections/src/test/java/MaskWindowConvergence.java',

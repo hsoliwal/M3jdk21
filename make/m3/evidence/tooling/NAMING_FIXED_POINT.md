@@ -9,7 +9,7 @@
 | .github/workflows/m3-regex-plan-amalgamation.yml, m3-regex-required-ngrams.yml | unowned | PROSE_PRODUCT_VERSION applied by the recipe: comment "M3JDK21" -> "M3JDK 21" |
 | .github/workflows/m3-jdk-modules.yml -> m3jdk-modules.yml | lane 37 | their #2838 |
 | 10 m3/collections rows | a4 | left to the owner |
-| 23 m3/runtime-integration/regex-rope-affix-effects rows (34 moves) | unowned; restored by b1df0c0d60cb "Restore merge-dropped #1080" | left: restored custody content, needs its owner or the user |
+| 23 make/m3/runtime-integration/regex-rope-affix-effects rows (34 moves) | unowned; restored by b1df0c0d60cb "Restore merge-dropped #1080" | left: restored custody content, needs its owner or the user |
 
 Each KEEP row was read in context before listing. Examples:
 - `rejectInternalSurface("com.m3.collections.SlotArray")` proves the legacy surface is refused;

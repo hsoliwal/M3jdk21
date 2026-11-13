@@ -8,7 +8,7 @@ import jdk.internal.m3.collections.packed.PackedLongBag;
 import jdk.internal.m3.collections.packed.PackedLongLongHashMap;
 
 /** Real constrained-heap allocation failure, not a mocked allocator. Run in an isolated JVM. */
-//FLLDCIM: RELOCATE - donor blob 1f50696a49e4 at commit d5ad5090d87e (repository, path, URL and digests: m3/collections/recipe/four-library-bags-20261106/PROVENANCE.tsv); recipe m3/collections/recipe/four-library-bags-20261106/relocate.py v1
+//FLLDCIM: RELOCATE - donor blob 1f50696a49e4 at commit d5ad5090d87e (repository, path, URL and digests: make/m3/collections/recipe/four-library-bags-20261106/PROVENANCE.tsv); recipe make/m3/collections/recipe/four-library-bags-20261106/relocate.py v1
 public final class BagMapFailureProof {
     private BagMapFailureProof() { }
     /** @param args rehash under -Xmx32m, or remove under -Xmx16m @throws Exception on a failed check */

@@ -6,8 +6,8 @@ import re
 import unittest
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
-PACK = ROOT / "m3" / "release"
+ROOT = Path(__file__).resolve().parents[3]
+PACK = ROOT / "make" / "m3" / "release"
 # The former recipe home; the release notes must not present a receipt from it (lineage data).
 DONOR_REPOSITORY = "hsoliwal/com.synexia"
 

@@ -31,7 +31,7 @@ The public portable [M3Text bridge](https://github.com/hsoliwal/M3jdk21/blob/1de
 
 The existing [name map](https://github.com/hsoliwal/M3jdk21/blob/1de629d26ea82d2729a5993bfc88099f83221923/m3/docs/name-mapping.json#L307-L334) already keeps lexical/language/model facts in separate namespaced/versioned image planes and explicitly excludes `MIndexLucenePostingPlan` from `java.lang.String`. Posting schedules remain higher-level search/index metadata. Do not add Lucene, ICU, OpenNLP or Synexia runtime dependencies to `java.base`, or introduce another authoritative spelling store.
 
-The [porting invariant](../../m3/docs/m3jdk21-porting-invariant.md) remains recipe-first: reusable donor convergence/recipes are Synexia-owned, while M3 owns target integration and acceptance. Documentation does not advance String → arrays → collections → AST/compiler → remaining-family receiving phases.
+The [porting invariant](../m3/m3jdk21-porting-invariant.md) remains recipe-first: reusable donor convergence/recipes are Synexia-owned, while M3 owns target integration and acceptance. Documentation does not advance String → arrays → collections → AST/compiler → remaining-family receiving phases.
 
 ## 3. Ranked compatibility map
 

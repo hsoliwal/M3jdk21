@@ -36,7 +36,7 @@ class MavenProducerTest(unittest.TestCase):
         self.root.mkdir()
         self.git("init", "-q")
         self.write(".gitignore", "**/target/\n")
-        self.write("m3/pom.xml", POM.format('<packaging>pom</packaging><modules><module>leaf</module></modules>'))
+        self.write("make/m3/pom.xml", POM.format('<packaging>pom</packaging><modules><module>leaf</module></modules>'))
         self.write("m3/leaf/pom.xml", POM.format(""))
         self.write(producer.ORIGIN_PATH, json.dumps({
             "repository": producer.release.CANONICAL_RECIPE_REPOSITORY,
@@ -110,14 +110,14 @@ class MavenProducerTest(unittest.TestCase):
 
     def test_actual_cli_imports_do_not_create_source_bytecode(self):
         for name in ("run_maven_control_reactor.py", "verify_release_admission.py", "check_standalone.py"):
-            self.write("m3/release/" + name, Path(__file__).with_name(name).read_text())
+            self.write("make/m3/release/" + name, Path(__file__).with_name(name).read_text())
         self.head = self.commit()
         env = dict(os.environ)
         env.pop("PYTHONDONTWRITEBYTECODE", None)
         for name in ("MAVEN_ARGS", "MAVEN_OPTS", "JAVA_TOOL_OPTIONS", "_JAVA_OPTIONS", "JDK_JAVA_OPTIONS"):
             env.pop(name, None)
         result = subprocess.run(
-            [sys.executable, str(self.root / "m3/release/run_maven_control_reactor.py"),
+            [sys.executable, str(self.root / "make/m3/release/run_maven_control_reactor.py"),
              "--root", str(self.root), "--out", str(self.out),
              "--expected-commit", self.head, "--maven", str(self.maven)],
             capture_output=True, text=True, env=env, timeout=20)
@@ -195,7 +195,7 @@ class MavenProducerTest(unittest.TestCase):
         self.assert_no_maven()
 
     def test_recipe_custody_hold_never_executes_maven(self):
-        self.write("m3/tooling/migration-recipes/pom.xml", POM.format(""))
+        self.write("make/m3/tooling/migration-recipes/pom.xml", POM.format(""))
         self.head = self.commit()
         code, _, gate = self.invoke()
         self.assertNotEqual(0, code)
@@ -203,7 +203,7 @@ class MavenProducerTest(unittest.TestCase):
         self.assert_no_maven()
 
     def test_absorb_in_place_custody_is_not_permission_to_execute_recipes(self):
-        relative = "m3/tooling/migration-recipes/pom.xml"
+        relative = "make/m3/tooling/migration-recipes/pom.xml"
         self.write(relative, POM.format(""))
         self.commit()
         blob = self.git("rev-parse", "HEAD:" + relative)
@@ -218,7 +218,7 @@ class MavenProducerTest(unittest.TestCase):
         self.assert_no_maven()
 
     def test_rewrite_dependency_is_refused_even_in_an_inactive_profile(self):
-        self.write("m3/pom.xml", POM.format('<profiles><profile><id>unused</id><build><plugins>'
+        self.write("make/m3/pom.xml", POM.format('<profiles><profile><id>unused</id><build><plugins>'
                    '<plugin><groupId>org.openrewrite.maven</groupId><artifactId>rewrite-maven-plugin</artifactId>'
                    '</plugin></plugins></build></profile></profiles>'))
         self.head = self.commit()
@@ -228,7 +228,7 @@ class MavenProducerTest(unittest.TestCase):
         self.assert_no_maven()
 
     def test_declared_profile_module_is_inspected(self):
-        self.write("m3/pom.xml", POM.format('<profiles><profile><id>optional</id><modules>'
+        self.write("make/m3/pom.xml", POM.format('<profiles><profile><id>optional</id><modules>'
                    '<module>absent</module></modules></profile></profiles>'))
         self.head = self.commit()
         code, _, gate = self.invoke()
@@ -237,7 +237,7 @@ class MavenProducerTest(unittest.TestCase):
         self.assert_no_maven()
 
     def test_property_valued_plugin_coordinates_cannot_hide_rewrite(self):
-        self.write("m3/pom.xml", POM.format('<properties><g>org.openrewrite.maven</g></properties>'
+        self.write("make/m3/pom.xml", POM.format('<properties><g>org.openrewrite.maven</g></properties>'
                    '<build><plugins><plugin><groupId>${g}</groupId><artifactId>hidden</artifactId>'
                    '</plugin></plugins></build>'))
         self.head = self.commit()
@@ -358,7 +358,7 @@ class MavenProducerTest(unittest.TestCase):
         self.assert_no_maven()
 
     def test_workflow_produces_then_consumes_same_run_artifact(self):
-        root = Path(__file__).resolve().parents[2]
+        root = Path(__file__).resolve().parents[3]
         workflow = (root / ".github/workflows/m3-first-release-admission.yml").read_text()
         block = workflow.split("  control-reactor:\n", 1)[1].split("  release-proof-summary:", 1)[0]
         self.assertLess(block.index("run_maven_control_reactor.py"), block.index("module.validate("))

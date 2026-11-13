@@ -28,7 +28,7 @@ before/after manifest, then this receiver mirrors exact templates and commits
 only the generated product source/test/C files as a second commit.
 No hand patch of generated receiver files is allowed.
 
-**Verification:** `sh m3/collections/qualification/residency-state-mask-20261017/verify.sh`
+**Verification:** `sh make/m3/collections/qualification/residency-state-mask-20261017/verify.sh`
 checks exact Java/C17 source identities, compiles against the real
 M3ObjectResidency (no test double), generates JNI headers, compiles the C
 library, and compares Java and JNI execution under Serial, Parallel, G1,

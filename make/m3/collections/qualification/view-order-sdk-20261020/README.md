@@ -15,7 +15,7 @@ Generated output SHA256 must be `a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0
 
 ## Reproduce
 
-Run `mvn -B -ntp -f m3/collections/qualification/view-order-sdk-20261020/verification/view-order-sdk-20261020/pom.xml clean test`, then its adjacent `verify-current.sh /path/to/exact-987f7436-checkout`.
+Run `mvn -B -ntp -f make/m3/collections/qualification/view-order-sdk-20261020/verification/view-order-sdk-20261020/pom.xml clean test`, then its adjacent `verify-current.sh /path/to/exact-987f7436-checkout`.
 
 The parser context uses the original source-sealed fixtures for unchanged referenced APIs; actual current dependency compilation is independently mandatory. The unchanged original probe checks sorting/slicing/filtering, stable physical ties, single-payload identity, mask/gather Java/JNI behavior, exceptional prefixes, bounds, export isolation and missing libraries. Three-process measurements are scoped diagnostics, not universal speedup or UI evidence.
 

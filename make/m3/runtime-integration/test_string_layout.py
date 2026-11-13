@@ -10,8 +10,8 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-ROOT = Path(__file__).resolve().parents[2]
-BASE = ROOT / "m3/runtime-integration"
+ROOT = Path(__file__).resolve().parents[3]
+BASE = ROOT / "make/m3/runtime-integration"
 
 
 def tool(name):
@@ -91,7 +91,7 @@ class StringLayoutTest(unittest.TestCase):
             target = root / "src/java.base/share/classes/java/lang/M3String.java"
             target.parent.mkdir(parents=True)
             target.write_text(source, encoding="utf-8")
-            checker = root / "m3/runtime-integration/src/main/java/M3StringLayout.java"
+            checker = root / "make/m3/runtime-integration/src/main/java/M3StringLayout.java"
             checker.parent.mkdir(parents=True)
             checker.write_bytes((BASE / "src/main/java/M3StringLayout.java").read_bytes())
             def fail(message):

@@ -29,22 +29,22 @@ final class M3A3M3MasteryInvariantRecipeTest {
     void exactCurrentPolicyPreimagesAdvanceAndSecondRunIsFixedPoint() {
         Map<String, String> before =
                 Map.of(
-                        "m3/compatibility/m3-recipe-home-policy.tsv",
+                        "make/m3/compatibility/m3-recipe-home-policy.tsv",
                         resource("policy.before.tsv"),
-                        "m3/compatibility/test_m3_recipe_home_policy.py",
+                        "make/m3/compatibility/test_m3_recipe_home_policy.py",
                         resource("policy-test.before.py"));
 
         Recipe recipe = new M3Jdk21HashPinnedTextSnapshotRecipe(CRATE);
         Map<String, String> first = apply(recipe, before);
         assertEquals(2, first.size());
 
-        String policy = first.get("m3/compatibility/m3-recipe-home-policy.tsv");
+        String policy = first.get("make/m3/compatibility/m3-recipe-home-policy.tsv");
         assertTrue(
                 policy.contains(
-                        "m3/tooling/a3/src/main/java/jdk/m3/a3/A3Lab.java\tTARGET_PROOF_CONSUMER\tjdk.internal.m3.rewrite.atom"));
+                        "make/m3/tooling/a3/src/main/java/jdk/m3/a3/A3Lab.java\tTARGET_PROOF_CONSUMER\tjdk.internal.m3.rewrite.atom"));
 
         String policyTest =
-                first.get("m3/compatibility/test_m3_recipe_home_policy.py");
+                first.get("make/m3/compatibility/test_m3_recipe_home_policy.py");
         assertTrue(policyTest.contains("import xml.etree.ElementTree as ET"));
         assertTrue(policyTest.contains("PIN = ROOT / \"compatibility\" / \"m3-recipe-home-pin.tsv\""));
         assertTrue(

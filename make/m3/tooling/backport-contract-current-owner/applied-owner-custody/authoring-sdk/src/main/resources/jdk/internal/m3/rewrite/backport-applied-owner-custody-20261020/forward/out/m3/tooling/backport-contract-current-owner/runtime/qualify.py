@@ -20,34 +20,34 @@ RESERVE, CAP, LOG_LIMIT = 8 * 1024 ** 3, 512 * 1024 ** 2, 1024 ** 2
 SCHEMA = "M3_BACKPORT_CONTRACT_CURRENT_OWNER_EXECUTION_V1"
 SCOPE = "EXACT_EIGHT_OWNER_BACKPORT_CONTRACT_DIFFERENTIAL"
 MARKER = "M3_BACKPORT_UNITTEST_RESULT "
-POLICY = "m3/backports/test_compatibility_policy.py"
-WAVES = "m3/backports/test_backport_execution_waves.py"
+POLICY = "make/m3/backports/test_compatibility_policy.py"
+WAVES = "make/m3/backports/test_backport_execution_waves.py"
 CHILD_APPROVAL = '{"a.compile": "review/child-only"}'
 PINNED = {
-    "m3/backports/test_compatibility_policy.py": "14f15fff4c3cfcf940c0de01eb50da27792c9fc9",
-    "m3/backports/compatibility_policy.py": "89673d65b2ad42fc694d809d5c6f4d0eab7adbd8",
-    "m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv": "db7579c96d7dfc9c0c70fb4b28773cf89bad76ca",
-    "m3/backports/JEP_CATALOGUE.tsv": "a0ef9aa95da17a19c3df8ab8aded355fad4f4598",
-    "m3/backports/RELEASE_JEP_AUTHORITY.tsv": "745a26772b8050c28dd93d05c724bfa9c2ad5e18",
-    "m3/backports/test_backport_execution_waves.py": "e10ae062eb1b86a6335e7d64fd520d2206a4b4c4",
-    "m3/backports/backport_execution_waves.py": "cc2a6ceb90b56d3b05d1307e705586c8d7cf1b40",
-    "m3/backports/BACKPORT_EXECUTION_WAVES.md": "a5421ae43c55cbcce025f95cf49838a112a507bc"
+    "make/m3/backports/test_compatibility_policy.py": "14f15fff4c3cfcf940c0de01eb50da27792c9fc9",
+    "make/m3/backports/compatibility_policy.py": "89673d65b2ad42fc694d809d5c6f4d0eab7adbd8",
+    "make/m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv": "db7579c96d7dfc9c0c70fb4b28773cf89bad76ca",
+    "make/m3/backports/JEP_CATALOGUE.tsv": "a0ef9aa95da17a19c3df8ab8aded355fad4f4598",
+    "make/m3/backports/RELEASE_JEP_AUTHORITY.tsv": "745a26772b8050c28dd93d05c724bfa9c2ad5e18",
+    "make/m3/backports/test_backport_execution_waves.py": "e10ae062eb1b86a6335e7d64fd520d2206a4b4c4",
+    "make/m3/backports/backport_execution_waves.py": "cc2a6ceb90b56d3b05d1307e705586c8d7cf1b40",
+    "make/m3/backports/BACKPORT_EXECUTION_WAVES.md": "a5421ae43c55cbcce025f95cf49838a112a507bc"
 }
 AFTER = {
-    "m3/backports/test_compatibility_policy.py": {
-        "path": "m3/backports/test_compatibility_policy.py",
+    "make/m3/backports/test_compatibility_policy.py": {
+        "path": "make/m3/backports/test_compatibility_policy.py",
         "gitBlob": "cd7b5a28ce3ec1f5a4475a145b40a3074b1a5c21",
         "bytes": 7101,
         "sha256": "69694e6e3725aeee8687a8c58bce477c7256f626d8425c04a9ce9772250a2bb6"
     },
-    "m3/backports/test_backport_execution_waves.py": {
-        "path": "m3/backports/test_backport_execution_waves.py",
+    "make/m3/backports/test_backport_execution_waves.py": {
+        "path": "make/m3/backports/test_backport_execution_waves.py",
         "gitBlob": "7a3b961caa4302a2ebd1675360e29e6b1df9697b",
         "bytes": 12454,
         "sha256": "5a59d038e108010c484f66f545ab5bc745a791182ed4794556b414ffde315dd0"
     },
-    "m3/backports/BACKPORT_EXECUTION_WAVES.md": {
-        "path": "m3/backports/BACKPORT_EXECUTION_WAVES.md",
+    "make/m3/backports/BACKPORT_EXECUTION_WAVES.md": {
+        "path": "make/m3/backports/BACKPORT_EXECUTION_WAVES.md",
         "gitBlob": "428d775ca476b187dceb26a012401b11b975bbbb",
         "bytes": 6247,
         "sha256": "df2aca41ab120bdbc8c165d4abe3552c54a91c591aab116b718b94283ae23f28"
@@ -286,7 +286,7 @@ def constructor_controls_from_data(metadata, current, frozen):
     value["receiverCurrentOwners"][-1] = dict(value["receiverCurrentOwners"][0])
     variants["duplicate"] = value
     value = copy.deepcopy(metadata)
-    value["receiverCurrentOwners"][-1]["path"] = "m3/backports/unexpected.py"
+    value["receiverCurrentOwners"][-1]["path"] = "make/m3/backports/unexpected.py"
     variants["unexpected"] = value
     value = copy.deepcopy(metadata)
     value["receiverCurrentOwners"] = {}
@@ -388,7 +388,7 @@ def command(root, source, label, argv, env, expected=0, timeout=120):
             "log": str(path.relative_to(root)), "bytes": len(raw), "sha256": sha(raw)}, raw
 
 
-CHILD = "import importlib\nimport json\nimport os\nfrom pathlib import Path\nimport sys\nimport tempfile\nimport unittest\n\nreceiver = Path(sys.argv[1])\ntemp_root = Path(sys.argv[2])\nmode = sys.argv[3]\nassert receiver.is_absolute() and receiver == receiver.resolve() and receiver.is_dir()\nassert temp_root.is_absolute() and temp_root == temp_root.resolve() and temp_root.is_dir()\nassert all(os.environ.get(key) == str(temp_root) for key in (\"TMPDIR\", \"TEMP\", \"TMP\"))\nassert sys.flags.isolated == 1 and sys.flags.no_site == 1 and sys.flags.dont_write_bytecode == 1\ntempfile.tempdir = str(temp_root)\nassert tempfile.gettempdir() == str(temp_root)\nsys.path.insert(0, str(receiver / \"m3/backports\"))\npolicy_tests = importlib.import_module(\"test_compatibility_policy\")\nexpected_modules = {\n    \"test_compatibility_policy\": receiver / \"m3/backports/test_compatibility_policy.py\",\n    \"compatibility_policy\": receiver / \"m3/backports/compatibility_policy.py\",\n}\nif mode != \"synthetic\":\n    wave_tests = importlib.import_module(\"test_backport_execution_waves\")\n    expected_modules[\"test_backport_execution_waves\"] = (\n        receiver / \"m3/backports/test_backport_execution_waves.py\")\n\nclass SyntheticClassifierControls(unittest.TestCase):\n    def row(self, marker):\n        value = policy_tests._row(jep=\"999\", release=\"22\",\n            classification=\"REJECT_JVMS_LANGUAGE_SPEC\", default_java21=marker)\n        value[\"title\"] = \"Synthetic classification-only runtime control\"\n        return value\n\n    def test_no_is_accepted(self):\n        actual = policy_tests._load_rows([self.row(\"NO\")])\n        self.assertEqual(1, len(actual))\n        self.assertEqual(999, actual[0].jep)\n        self.assertEqual(\"REJECT_JVMS_LANGUAGE_SPEC\", actual[0].classification)\n        self.assertEqual(\"NO\", actual[0].default_java21)\n\n    def test_opt_in_is_refused(self):\n        with self.assertRaisesRegex(ValueError, \"cannot be default Java21\"):\n            policy_tests._load_rows([self.row(\"OPT_IN\")])\n\n    def test_candidate_is_refused(self):\n        with self.assertRaisesRegex(ValueError, \"cannot be default Java21\"):\n            policy_tests._load_rows([self.row(\"CANDIDATE\")])\n\nclass RecordingResult(unittest.TextTestResult):\n    def __init__(self, *args, **kwargs):\n        super().__init__(*args, **kwargs)\n        self.executed = []\n        self.problems = []\n        self.subtest_problems = []\n\n    def startTest(self, test):\n        self.executed.append(test.id())\n        super().startTest(test)\n\n    def addError(self, test, err):\n        self.problems.append({\"id\": test.id(), \"kind\": \"error\",\n            \"exception\": err[0].__name__, \"message\": str(err[1]),\n            \"traceback\": self._exc_info_to_string(err, test)})\n        super().addError(test, err)\n\n    def addFailure(self, test, err):\n        self.problems.append({\"id\": test.id(), \"kind\": \"failure\",\n            \"exception\": err[0].__name__, \"message\": str(err[1]),\n            \"traceback\": self._exc_info_to_string(err, test)})\n        super().addFailure(test, err)\n\n    def addSubTest(self, test, subtest, err):\n        if err is not None:\n            self.subtest_problems.append({\"id\": test.id(), \"subtest\": str(subtest)})\n        super().addSubTest(test, subtest, err)\n\ndef flatten(suite):\n    result = []\n    for item in suite:\n        if isinstance(item, unittest.TestSuite):\n            result.extend(flatten(item))\n        else:\n            result.append(item.id())\n    return result\n\nloader = unittest.TestLoader()\nif mode == \"synthetic\":\n    suite = loader.loadTestsFromTestCase(SyntheticClassifierControls)\nelse:\n    suite = unittest.TestSuite([\n        loader.loadTestsFromModule(policy_tests),\n        loader.loadTestsFromModule(wave_tests),\n    ])\nloaded = flatten(suite)\nassert len(loaded) == len(set(loaded))\nresult = unittest.TextTestRunner(verbosity=2, resultclass=RecordingResult).run(suite)\nif mode != \"synthetic\":\n    expected_modules[\"m3_backport_execution_waves\"] = receiver / \"m3/backports/backport_execution_waves.py\"\nmodules = {}\nfor name, expected in expected_modules.items():\n    actual = Path(sys.modules[name].__file__).resolve()\n    assert actual == expected\n    modules[name] = str(actual)\ndocument = {\n    \"schema\": \"M3_BACKPORT_ACTUAL_UNITTEST_RESULT_V1\",\n    \"mode\": mode, \"testsRun\": result.testsRun, \"loadedIds\": sorted(loaded),\n    \"executedIds\": sorted(result.executed),\n    \"failures\": len(result.failures), \"errors\": len(result.errors),\n    \"skips\": len(result.skipped), \"expectedFailures\": len(result.expectedFailures),\n    \"unexpectedSuccesses\": len(result.unexpectedSuccesses),\n    \"subtestProblems\": result.subtest_problems, \"problems\": result.problems,\n    \"successful\": result.wasSuccessful(), \"realFileIo\": True,\n    \"tempRoot\": str(temp_root), \"receiver\": str(receiver), \"modules\": modules,\n    \"pythonIsolation\": {\"isolated\": sys.flags.isolated, \"noSite\": sys.flags.no_site,\n        \"dontWriteBytecode\": sys.flags.dont_write_bytecode},\n}\nprint(\"M3_BACKPORT_UNITTEST_RESULT \" + json.dumps(document, sort_keys=True), flush=True)\nraise SystemExit(0 if result.wasSuccessful() else 1)\n"
+CHILD = "import importlib\nimport json\nimport os\nfrom pathlib import Path\nimport sys\nimport tempfile\nimport unittest\n\nreceiver = Path(sys.argv[1])\ntemp_root = Path(sys.argv[2])\nmode = sys.argv[3]\nassert receiver.is_absolute() and receiver == receiver.resolve() and receiver.is_dir()\nassert temp_root.is_absolute() and temp_root == temp_root.resolve() and temp_root.is_dir()\nassert all(os.environ.get(key) == str(temp_root) for key in (\"TMPDIR\", \"TEMP\", \"TMP\"))\nassert sys.flags.isolated == 1 and sys.flags.no_site == 1 and sys.flags.dont_write_bytecode == 1\ntempfile.tempdir = str(temp_root)\nassert tempfile.gettempdir() == str(temp_root)\nsys.path.insert(0, str(receiver / \"make/m3/backports\"))\npolicy_tests = importlib.import_module(\"test_compatibility_policy\")\nexpected_modules = {\n    \"test_compatibility_policy\": receiver / \"make/m3/backports/test_compatibility_policy.py\",\n    \"compatibility_policy\": receiver / \"make/m3/backports/compatibility_policy.py\",\n}\nif mode != \"synthetic\":\n    wave_tests = importlib.import_module(\"test_backport_execution_waves\")\n    expected_modules[\"test_backport_execution_waves\"] = (\n        receiver / \"make/m3/backports/test_backport_execution_waves.py\")\n\nclass SyntheticClassifierControls(unittest.TestCase):\n    def row(self, marker):\n        value = policy_tests._row(jep=\"999\", release=\"22\",\n            classification=\"REJECT_JVMS_LANGUAGE_SPEC\", default_java21=marker)\n        value[\"title\"] = \"Synthetic classification-only runtime control\"\n        return value\n\n    def test_no_is_accepted(self):\n        actual = policy_tests._load_rows([self.row(\"NO\")])\n        self.assertEqual(1, len(actual))\n        self.assertEqual(999, actual[0].jep)\n        self.assertEqual(\"REJECT_JVMS_LANGUAGE_SPEC\", actual[0].classification)\n        self.assertEqual(\"NO\", actual[0].default_java21)\n\n    def test_opt_in_is_refused(self):\n        with self.assertRaisesRegex(ValueError, \"cannot be default Java21\"):\n            policy_tests._load_rows([self.row(\"OPT_IN\")])\n\n    def test_candidate_is_refused(self):\n        with self.assertRaisesRegex(ValueError, \"cannot be default Java21\"):\n            policy_tests._load_rows([self.row(\"CANDIDATE\")])\n\nclass RecordingResult(unittest.TextTestResult):\n    def __init__(self, *args, **kwargs):\n        super().__init__(*args, **kwargs)\n        self.executed = []\n        self.problems = []\n        self.subtest_problems = []\n\n    def startTest(self, test):\n        self.executed.append(test.id())\n        super().startTest(test)\n\n    def addError(self, test, err):\n        self.problems.append({\"id\": test.id(), \"kind\": \"error\",\n            \"exception\": err[0].__name__, \"message\": str(err[1]),\n            \"traceback\": self._exc_info_to_string(err, test)})\n        super().addError(test, err)\n\n    def addFailure(self, test, err):\n        self.problems.append({\"id\": test.id(), \"kind\": \"failure\",\n            \"exception\": err[0].__name__, \"message\": str(err[1]),\n            \"traceback\": self._exc_info_to_string(err, test)})\n        super().addFailure(test, err)\n\n    def addSubTest(self, test, subtest, err):\n        if err is not None:\n            self.subtest_problems.append({\"id\": test.id(), \"subtest\": str(subtest)})\n        super().addSubTest(test, subtest, err)\n\ndef flatten(suite):\n    result = []\n    for item in suite:\n        if isinstance(item, unittest.TestSuite):\n            result.extend(flatten(item))\n        else:\n            result.append(item.id())\n    return result\n\nloader = unittest.TestLoader()\nif mode == \"synthetic\":\n    suite = loader.loadTestsFromTestCase(SyntheticClassifierControls)\nelse:\n    suite = unittest.TestSuite([\n        loader.loadTestsFromModule(policy_tests),\n        loader.loadTestsFromModule(wave_tests),\n    ])\nloaded = flatten(suite)\nassert len(loaded) == len(set(loaded))\nresult = unittest.TextTestRunner(verbosity=2, resultclass=RecordingResult).run(suite)\nif mode != \"synthetic\":\n    expected_modules[\"m3_backport_execution_waves\"] = receiver / \"make/m3/backports/backport_execution_waves.py\"\nmodules = {}\nfor name, expected in expected_modules.items():\n    actual = Path(sys.modules[name].__file__).resolve()\n    assert actual == expected\n    modules[name] = str(actual)\ndocument = {\n    \"schema\": \"M3_BACKPORT_ACTUAL_UNITTEST_RESULT_V1\",\n    \"mode\": mode, \"testsRun\": result.testsRun, \"loadedIds\": sorted(loaded),\n    \"executedIds\": sorted(result.executed),\n    \"failures\": len(result.failures), \"errors\": len(result.errors),\n    \"skips\": len(result.skipped), \"expectedFailures\": len(result.expectedFailures),\n    \"unexpectedSuccesses\": len(result.unexpectedSuccesses),\n    \"subtestProblems\": result.subtest_problems, \"problems\": result.problems,\n    \"successful\": result.wasSuccessful(), \"realFileIo\": True,\n    \"tempRoot\": str(temp_root), \"receiver\": str(receiver), \"modules\": modules,\n    \"pythonIsolation\": {\"isolated\": sys.flags.isolated, \"noSite\": sys.flags.no_site,\n        \"dontWriteBytecode\": sys.flags.dont_write_bytecode},\n}\nprint(\"M3_BACKPORT_UNITTEST_RESULT \" + json.dumps(document, sort_keys=True), flush=True)\nraise SystemExit(0 if result.wasSuccessful() else 1)\n"
 
 def expected_failure_ids():
     return (
@@ -419,12 +419,12 @@ def parse_result(raw, mode, fixture, root):
             "REAL_ISOLATED_FILESYSTEM_TESTS_REQUIRED:" + mode)
     modules = {
         "test_compatibility_policy": str(fixture / POLICY),
-        "compatibility_policy": str(fixture / "m3/backports/compatibility_policy.py"),
+        "compatibility_policy": str(fixture / "make/m3/backports/compatibility_policy.py"),
     }
     if mode != "synthetic":
         modules.update({
             "test_backport_execution_waves": str(fixture / WAVES),
-            "m3_backport_execution_waves": str(fixture / "m3/backports/backport_execution_waves.py"),
+            "m3_backport_execution_waves": str(fixture / "make/m3/backports/backport_execution_waves.py"),
         })
     require(result["modules"] == modules, "EXACT_AUTHENTIC_MODULE_PATHS_REQUIRED:" + mode)
     problems = result["problems"]

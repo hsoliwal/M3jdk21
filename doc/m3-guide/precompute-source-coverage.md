@@ -60,7 +60,7 @@ policy and recipe verifiers/benchmarks for these documentation passes are
 - Native C/JNI/build files, test sources and documentation are dependency/evidence surfaces, not extra Java production files in the 23-row denominator
 - Remaining work includes systematic base-overview API enumeration, documented test gaps and actual Java/native/JDK/resource qualification; other precompute packages, vendor/custody trees and repositories require their own inventories
 
-The [porting invariant](../../m3/docs/m3jdk21-porting-invariant.md) keeps
+The [porting invariant](../m3/m3jdk21-porting-invariant.md) keeps
 String → arrays → collections → AST/compiler → remaining families as the
 receiving order. This ledger is documentation/navigation only and changes no
 receiving status, code, build profile, runtime owner or provenance authority.

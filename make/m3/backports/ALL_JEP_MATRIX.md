@@ -6,7 +6,7 @@ baseline product behavior; they are not "backported" a second time.
 
 The upstream denominator, its release authority, full 14,948 post-21 commit
 history, and existing per-JEP Maven/OpenRewrite/HotSpot programs are already
-owned by \`m3/backports\`. This packet does **not** replace or copy any of
+owned by \`make/m3/backports\`. This packet does **not** replace or copy any of
 those authorities or authorize wholesale JDK source transplant.
 
 ## Executed source/proof join
@@ -14,12 +14,12 @@ those authorities or authorize wholesale JDK source transplant.
 Run from the M3JDK21 repository root:
 
 \`\`\`sh
-python3 m3/backports/all_jep_matrix.py --root . \
-  --out m3/backports/target/all-jep-matrix.tsv \
-  --json-out m3/backports/target/all-jep-matrix.json
+python3 make/m3/backports/all_jep_matrix.py --root . \
+  --out make/m3/backports/target/all-jep-matrix.tsv \
+  --json-out make/m3/backports/target/all-jep-matrix.json
 
-python3 -m unittest discover -s m3/backports -p 'test_all_jep_matrix.py' -v
-mvn -B -ntp -f m3/backports/pom.xml verify
+python3 -m unittest discover -s make/m3/backports -p 'test_all_jep_matrix.py' -v
+mvn -B -ntp -f make/m3/backports/pom.xml verify
 \`\`\`
 
 \`all_jep_matrix.py\` is a **read-only joined projection**, reusing the
@@ -52,7 +52,7 @@ preview/compatibility held and superseded JEPs remain separately stated.
 The CSV/TSV is deterministic and preserves physical tab/newline separators.
 The JSON summary contains a digest of the exact TSV bytes and counts by
 release, current witness state and proof gate. Outputs are confined to
-\`m3/backports/target\` using the **existing** source-witness output
+\`make/m3/backports/target\` using the **existing** source-witness output
 fence: product files, aliases and hard-linked outputs are refused.
 
 This is the all-JEP **execution admission layer**, not 85 completed

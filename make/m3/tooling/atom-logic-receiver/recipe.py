@@ -16,8 +16,8 @@ import tempfile
 import xml.etree.ElementTree as ET
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[2]
-OWNER = Path("m3/pom.xml")
+ROOT = HERE.parents[3]
+OWNER = Path("make/m3/pom.xml")
 PRE_BLOB = "e01cddcbac3751bfa79368c3727343754c7e3b21"
 ANCHOR = "  </profiles>\n\n  <build>\n"
 PROFILE = """    <profile>

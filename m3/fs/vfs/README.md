@@ -318,7 +318,7 @@ for JAR/JMOD/legal-byte checks, the linked-image consumer and distinct Maven,
 native SQLite and source-built M3JDK21 gates. Source custody or a successful bounded
 Java image does not establish those broader gates.
 
-The [enhanced design](../../docs/mfile-streams/DESIGN.md) retains proposals for
+The [enhanced design](../../../doc/m3/mfile-streams/DESIGN.md) retains proposals for
 content predicates, richer archive occurrence identities, immutable transforms,
 multi-source comparison/deduplication, directory/archive output transactions, and
 context-qualified source/AST reuse. Its 56 future acceptance

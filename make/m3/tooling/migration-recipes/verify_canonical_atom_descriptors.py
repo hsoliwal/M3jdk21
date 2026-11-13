@@ -9,7 +9,7 @@ import argparse
 from pathlib import Path
 import re
 
-BASE = "m3/tooling/migration-recipes"
+BASE = "make/m3/tooling/migration-recipes"
 PACKAGE = "jdk.internal.m3.rewrite.atom"
 DESCRIPTORS = {
     "m3-atom-pattern.yml": ("M3AtomizePureIntReturnRecipe",),
@@ -118,7 +118,7 @@ def verify(root: Path) -> tuple[int, int, int]:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[3])
+    parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[4])
     args = parser.parse_args()
     try:
         files, references, classes = verify(args.root)

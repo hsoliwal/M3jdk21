@@ -12,7 +12,7 @@ import sys
 import tempfile
 
 HERE=Path(__file__).resolve().parent
-ROOT=HERE.parents[3]
+ROOT=HERE.parents[4]
 PROD=ROOT/'m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java'
 TESTS=[ROOT/'m3/collections/src/test/java/jdk/m3/collections'/n for n in (
   'M3MaskDenseSelectionProof.java','M3MaskNativeParityProof.java')]

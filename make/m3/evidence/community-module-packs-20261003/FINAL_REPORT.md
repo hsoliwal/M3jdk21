@@ -1,10 +1,10 @@
 # Community module-pack execution report — 2026-10-03
 
 ## Files changed and exact delta
-This packet adds the external `m3/tooling/module-packs` reactor (kernel + OpenRewrite
+This packet adds the external `make/m3/tooling/module-packs` reactor (kernel + OpenRewrite
 adapters), actual artifact inventory/graph validation, the diagnostics/JavaFX image
 assembler, test fixtures, license notices and documentation. The sole existing-file
-edit is one `tooling/module-packs` module entry in `m3/pom.xml`, with exact XML
+edit is one `tooling/module-packs` module entry in `make/m3/pom.xml`, with exact XML
 pre/postimages owned by `M3RegisterModulePacksRecipe`.
 
 `SOURCE_SHA256.tsv` enumerates the 30 source/build/doc files. Evidence files are
@@ -49,9 +49,9 @@ task or production-release completion.
 ## Reproduction
 From the repository with Java21:
 ```
-python3 m3/tooling/module-packs/verify.py --jdk /path/to/jdk21 --out /fresh/proof
-python3 m3/tooling/module-packs/build_pack.py --jdk /path/to/jdk21 --out /fresh/image
-mvn -B -ntp -f m3/tooling/module-packs/pom.xml clean verify
+python3 make/m3/tooling/module-packs/verify.py --jdk /path/to/jdk21 --out /fresh/proof
+python3 make/m3/tooling/module-packs/build_pack.py --jdk /path/to/jdk21 --out /fresh/image
+mvn -B -ntp -f make/m3/tooling/module-packs/pom.xml clean verify
 ```
 The first two commands were executed here against the recorded JDK. The Maven
 command is the unexecuted admission gate, not a claimed result. JavaFX requires

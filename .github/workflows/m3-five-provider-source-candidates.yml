@@ -5,7 +5,7 @@ on:
   pull_request:
     paths:
       - 'm3-openrewrite-recipes/recipe-crates/five-provider-package-relocation-20261018/**'
-      - 'm3/collections/relocation/five-provider-20261018/**'
+      - 'make/m3/collections/relocation/five-provider-20261018/**'
       - '.github/workflows/m3-five-provider-source-candidates.yml'
   workflow_dispatch:
 permissions:

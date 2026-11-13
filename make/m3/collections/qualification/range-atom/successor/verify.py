@@ -16,9 +16,9 @@ import sys
 from tempfile import TemporaryDirectory
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[4]
-LEGACY = "m3/collections/qualification/long-range-set-20261017/"
-TEMPLATES = ("m3/tooling/migration-recipes/src/main/resources/"
+ROOT = HERE.parents[5]
+LEGACY = "make/m3/collections/qualification/long-range-set-20261017/"
+TEMPLATES = ("make/m3/tooling/migration-recipes/src/main/resources/"
              "jdk/internal/m3/rewrite/hash-pinned-java/"
              "m3jdk21-long-range-array-flags-20261017/")
 PRODUCTION = "m3/collections/src/main/java/jdk/m3/collections/"
@@ -129,7 +129,7 @@ def original_receipt_replay() -> None:
             stage(old_root, path, content)
         stage(old_root, TEMPLATES + "manifest.tsv", load(TEMPLATES + "manifest.tsv"))
         for path, (old_blob, name) in OLD_PEERS.items():
-            content = load("m3/collections/qualification/range-atom/successor/samples/" + name)
+            content = load("make/m3/collections/qualification/range-atom/successor/samples/" + name)
             demand(content, expected_blob=old_blob)
             stage(old_root, path, content)
         for path in (LEGACY + "verify.py", LEGACY + "CATEGORY_REVIEW.tsv", LEGACY + "RECEIPT.tsv"):
@@ -142,7 +142,7 @@ def original_receipt_replay() -> None:
 
 
 def current_successor() -> None:
-    before = load("m3/collections/qualification/range-atom/successor/samples/before-M3LongRangeSet.java.txt")
+    before = load("make/m3/collections/qualification/range-atom/successor/samples/before-M3LongRangeSet.java.txt")
     demand(before, *BEFORE)
     for path, (sha, git_blob) in CURRENT.items():
         demand(load(path), sha, git_blob)

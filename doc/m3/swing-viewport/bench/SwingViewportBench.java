@@ -31,7 +31,7 @@ import javax.swing.tree.TreePath;
 import javax.swing.tree.VariableHeightLayoutCache;
 
 /**
- * Headless CPU benchmark of stock Swing at 10^6 items (m3/docs/swing-viewport/DESIGN.md, section 3).
+ * Headless CPU benchmark of stock Swing at 10^6 items (doc/m3/swing-viewport/DESIGN.md, section 3).
  * One TSV row per measurement on stdout:
  * {@code case  shape  impl  nodes  rows  metric  value  unit  note}.
  *

@@ -19,7 +19,7 @@ python -I curate_e_classify.py "files_$T.txt" "LANDED_$T.tsv" curation/java_name
 python -I gen_map_e1.py "draft_$T.tsv" bcw "fresh_$T.tsv" > /dev/null || { say "gen_map_e1 FAILED"; exit 2; }
 python -I carry_map_e1.py "fresh_$T.tsv" RENAME_MAP_E1_final.tsv DEQUALIFY.tsv "intended_$T.tsv" | sed 's/^/map: /' | tee -a "$R"
 rm -rf "base_$T"; mkdir -p "base_$T/m3"; cp cur2/pom.xml "base_$T/"
-for d in m3/arrays m3/collections m3/tooling/jdk-naming; do git -C bcw archive --format=tar HEAD "$d" | tar -x -C "base_$T"; done
+for d in m3/arrays m3/collections make/m3/tooling/jdk-naming; do git -C bcw archive --format=tar HEAD "$d" | tar -x -C "base_$T"; done
 (cd "base_$T" && git init -q && git config core.autocrlf false && git config core.longpaths true && git add -A && git -c user.name=b -c user.email=b@b commit -q -m "base $M")
 rm -rf "fast_$T"; bash curate_e_fastloop.sh "base_$T" "intended_$T.tsv" "fast_$T" 16 > "fast_$T.log" 2>&1
 fin=$(grep -oE 'STABLE at round [0-9]+: \S+' "fast_$T.log" | awk '{print $NF}')
@@ -40,6 +40,6 @@ for side in base cur; do d=$([ $side = base ] && echo "base_$T" || echo "mvn_$T/
     (cd "$d" && timeout 3300 mvn -o -B test > "../$( [ $side = cur ] && echo ../ )test_${side}_$T.log" 2>&1)
 done
 for side in base cur; do say "tests $side: $(grep -E 'Tests run: [0-9]+, Failures' "test_${side}_$T.log" | tail -1 | sed -E 's/\[[A-Z]+\] //') $(grep -oE 'BUILD (SUCCESS|FAILURE)' "test_${side}_$T.log" | tail -1)"; done
-(cd "mvn_$T/tree" && python -I m3/tooling/jdk-naming/jdk_naming.py plan --root . --only m3/collections 2>&1 | tail -1) | sed 's/^/naming cur: /' | tee -a "$R"
-(cd "base_$T" && python -I m3/tooling/jdk-naming/jdk_naming.py plan --root . --only m3/collections 2>&1 | tail -1) | sed 's/^/naming base: /' | tee -a "$R"
+(cd "mvn_$T/tree" && python -I make/m3/tooling/jdk-naming/jdk_naming.py plan --root . --only m3/collections 2>&1 | tail -1) | sed 's/^/naming cur: /' | tee -a "$R"
+(cd "base_$T" && python -I make/m3/tooling/jdk-naming/jdk_naming.py plan --root . --only m3/collections 2>&1 | tail -1) | sed 's/^/naming base: /' | tee -a "$R"
 say "DONE"

@@ -17,28 +17,28 @@ RESOURCE = "src/main/resources/jdk/internal/m3/rewrite/backport-applied-owner-cu
 SUITE = "jdk.internal.m3.rewrite.M3BackportAppliedOwnerCustodyRecipeTest"
 METHODS = ["allSixtyFourPartialStatesBothOrdersReachExactFixedPoint","allSixtyFourInverseStatesBothOrdersRecoverExactBefore","eachOwnedInputRefusesDriftMissingAndDuplicateOwnership"]
 SUITES = {SUITE: METHODS}
-CHANGE_PATHS = ["m3/tooling/backport-contract-current-owner/qualify.py","m3/tooling/backport-contract-current-owner/README.md","m3/tooling/backport-contract-current-owner/runtime/INPUTS.json","m3/tooling/backport-contract-current-owner/runtime/qualify.py","m3/tooling/backport-contract-current-owner/runtime/README.md",".github/workflows/m3-backport-contract-current-owner.yml"]
-KEEP_PATHS = ["m3/tooling/backport-contract-current-owner/sdk/pins.json","m3/tooling/backport-contract-current-owner/sdk/verify.py"]
+CHANGE_PATHS = ["make/m3/tooling/backport-contract-current-owner/qualify.py","make/m3/tooling/backport-contract-current-owner/README.md","make/m3/tooling/backport-contract-current-owner/runtime/INPUTS.json","make/m3/tooling/backport-contract-current-owner/runtime/qualify.py","make/m3/tooling/backport-contract-current-owner/runtime/README.md",".github/workflows/m3-backport-contract-current-owner.yml"]
+KEEP_PATHS = ["make/m3/tooling/backport-contract-current-owner/sdk/pins.json","make/m3/tooling/backport-contract-current-owner/sdk/verify.py"]
 TARGET_PATHS = CHANGE_PATHS + KEEP_PATHS
 OWNER_BEFORE_GIT = {
-    "m3/tooling/backport-contract-current-owner/qualify.py": "13acb84b735ec47304807108f4292509e4dc1b7f",
-    "m3/tooling/backport-contract-current-owner/README.md": "7b5a280796392c828899a98c384f6f543b37d32f",
-    "m3/tooling/backport-contract-current-owner/runtime/INPUTS.json": "5e3967517857e79249f3e1cc28a707c9f79b8996",
-    "m3/tooling/backport-contract-current-owner/runtime/qualify.py": "4c64fbf724649bd9527e95b6456bcda842ec8086",
-    "m3/tooling/backport-contract-current-owner/runtime/README.md": "0dfce38a83bfcc3abee720bf38d07e79d056abfb",
+    "make/m3/tooling/backport-contract-current-owner/qualify.py": "13acb84b735ec47304807108f4292509e4dc1b7f",
+    "make/m3/tooling/backport-contract-current-owner/README.md": "7b5a280796392c828899a98c384f6f543b37d32f",
+    "make/m3/tooling/backport-contract-current-owner/runtime/INPUTS.json": "5e3967517857e79249f3e1cc28a707c9f79b8996",
+    "make/m3/tooling/backport-contract-current-owner/runtime/qualify.py": "4c64fbf724649bd9527e95b6456bcda842ec8086",
+    "make/m3/tooling/backport-contract-current-owner/runtime/README.md": "0dfce38a83bfcc3abee720bf38d07e79d056abfb",
     ".github/workflows/m3-backport-contract-current-owner.yml": "5ab3cba8a55c95095e3db09b8c959938aeab91e1",
-    "m3/tooling/backport-contract-current-owner/sdk/pins.json": "f205864458b8dfa91445a26643bec1ab7b2e1859",
-    "m3/tooling/backport-contract-current-owner/sdk/verify.py": "8ad669b3954a0958820f6962de2e55f6b1988bc2"
+    "make/m3/tooling/backport-contract-current-owner/sdk/pins.json": "f205864458b8dfa91445a26643bec1ab7b2e1859",
+    "make/m3/tooling/backport-contract-current-owner/sdk/verify.py": "8ad669b3954a0958820f6962de2e55f6b1988bc2"
 }
 OWNER_AFTER_GIT = {
-    "m3/tooling/backport-contract-current-owner/qualify.py": "735f880afd81739cd21313302de947d49626d202",
-    "m3/tooling/backport-contract-current-owner/README.md": "0be188a28a3575c7af4bb574e7e741a12101d083",
-    "m3/tooling/backport-contract-current-owner/runtime/INPUTS.json": "8ac731367e254e1ed9b49813f9d109d3f06eb5e0",
-    "m3/tooling/backport-contract-current-owner/runtime/qualify.py": "a3f8492416876547eefed9c5a2d8bc5583ddd8ec",
-    "m3/tooling/backport-contract-current-owner/runtime/README.md": "67d987cbad0af4aa3de0ed17a56dc69b2a1afc7b",
+    "make/m3/tooling/backport-contract-current-owner/qualify.py": "735f880afd81739cd21313302de947d49626d202",
+    "make/m3/tooling/backport-contract-current-owner/README.md": "0be188a28a3575c7af4bb574e7e741a12101d083",
+    "make/m3/tooling/backport-contract-current-owner/runtime/INPUTS.json": "8ac731367e254e1ed9b49813f9d109d3f06eb5e0",
+    "make/m3/tooling/backport-contract-current-owner/runtime/qualify.py": "a3f8492416876547eefed9c5a2d8bc5583ddd8ec",
+    "make/m3/tooling/backport-contract-current-owner/runtime/README.md": "67d987cbad0af4aa3de0ed17a56dc69b2a1afc7b",
     ".github/workflows/m3-backport-contract-current-owner.yml": "b992bdbfb5187f868fbf3388d01edb7d9e9d905c",
-    "m3/tooling/backport-contract-current-owner/sdk/pins.json": "f205864458b8dfa91445a26643bec1ab7b2e1859",
-    "m3/tooling/backport-contract-current-owner/sdk/verify.py": "8ad669b3954a0958820f6962de2e55f6b1988bc2"
+    "make/m3/tooling/backport-contract-current-owner/sdk/pins.json": "f205864458b8dfa91445a26643bec1ab7b2e1859",
+    "make/m3/tooling/backport-contract-current-owner/sdk/verify.py": "8ad669b3954a0958820f6962de2e55f6b1988bc2"
 }
 DIRECTIONS = ("forward", "inverse")
 RECEIVER_OUTPUTS: dict[str, str] = {}
@@ -342,7 +342,7 @@ def constructor_self_test() -> dict:
     """Run candidate pure constructors against fresh recipe outputs and actual KEEP bytes."""
     import copy
     import runpy
-    target_prefix = "m3/tooling/backport-contract-current-owner/"
+    target_prefix = "make/m3/tooling/backport-contract-current-owner/"
     resource = ROOT / RESOURCE / "forward/out"
     runtime_path = regular(resource / (target_prefix + "runtime/qualify.py"))
     metadata = json.loads(regular(resource / (target_prefix + "runtime/INPUTS.json")).read_bytes())
@@ -404,7 +404,7 @@ def constructor_self_test() -> dict:
         elif kind == "duplicate":
             changed["receiverCurrentOwners"][-1] = dict(changed["receiverCurrentOwners"][0])
         else:
-            changed["receiverCurrentOwners"][-1]["path"] = "m3/backports/unexpected.py"
+            changed["receiverCurrentOwners"][-1]["path"] = "make/m3/backports/unexpected.py"
         refuses("current-owner-set:" + kind, changed)
     for index, row in enumerate(record["receiverOriginalOwners"]):
         if row["path"] in driver["AFTER"]:

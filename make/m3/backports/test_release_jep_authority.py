@@ -8,7 +8,7 @@ import release_jep_authority
 
 class ReleaseJepAuthorityTest(unittest.TestCase):
     def test_repository_authority_is_exact(self):
-        root = Path(__file__).resolve().parents[2]
+        root = Path(__file__).resolve().parents[3]
         authority = release_jep_authority.verify_repository_authority(root)
         self.assertEqual(tuple(range(22, 28)), tuple(sorted(authority)))
         self.assertEqual(24, len(authority[24]))
@@ -33,7 +33,7 @@ class ReleaseJepAuthorityTest(unittest.TestCase):
     def test_authority_requires_released_status_and_openjdk_source(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            backports = root / "m3" / "backports"
+            backports = root / "make" / "m3" / "backports"
             backports.mkdir(parents=True)
             rows = [
                 "release\tstatus\tofficial_feature_jep_ids\tsource\treviewed_utc"
@@ -57,15 +57,15 @@ class ReleaseJepAuthorityTest(unittest.TestCase):
     def test_catalogue_missing_authority_row_fails_closed(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            backports = root / "m3" / "backports"
+            backports = root / "make" / "m3" / "backports"
             backports.mkdir(parents=True)
             source_root = Path(__file__).resolve().parent
-            repo_root = source_root.parents[1]
+            repo_root = source_root.parents[2]
             authority_text = (
-                repo_root / "m3" / "backports" / "RELEASE_JEP_AUTHORITY.tsv"
+                repo_root / "make" / "m3" / "backports" / "RELEASE_JEP_AUTHORITY.tsv"
             ).read_text(encoding="utf-8")
             catalogue_lines = (
-                repo_root / "m3" / "backports" / "JEP_CATALOGUE.tsv"
+                repo_root / "make" / "m3" / "backports" / "JEP_CATALOGUE.tsv"
             ).read_text(encoding="utf-8").splitlines()
             catalogue_lines = [
                 line

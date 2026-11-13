@@ -1,9 +1,9 @@
 # Retained-variant twins, core lanes (2026-11-06)
 
-Promotion-backlog leaf of the loss-guard restore (#2517, `m3/qualification/loss-guard-restore-20261106/TWIN_CONTENT.tsv`):
+Promotion-backlog leaf of the loss-guard restore (#2517, `make/m3/qualification/loss-guard-restore-20261106/TWIN_CONTENT.tsv`):
 the 290 retained source twins under `m3/qualification/master-landing-20261028/retained-variants/<label>/<path>` that
 declare members their live `<path>` lacks. This leaf takes the 173 rows whose live path is under `m3/` outside
-`m3/tooling`, `m3/search` and `text-tools` (collections, arrays, file, fs, core, ast, eclipse, ports, compatibility,
+`make/m3/tooling`, `m3/search` and `text-tools` (collections, arrays, file, fs, core, ast, eclipse, ports, compatibility,
 m3-import, release, runtime-integration, migration, lexicon, the root `verify-gvas-literal-precompute.py`); the
 OpenJDK-tree rows (`src/java.base`, `test/jdk`, `src/jdk.compiler`, including `jdk/internal/m3` hash and mindex) and the
 tooling/search/text/workflow rows are the other session's. The verdict names and output shape are the lane owner's
@@ -29,9 +29,9 @@ running content: nothing to restore), COVERED 5 (every retained line already pre
 | m3/ast | 4 | 2 | 2 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 4 |
 | m3/collections | 87 | 9 | 78 | 0 | 7 | 8 | 2 | 4 | 2 | 64 | 12 |
 | m3/collections/interop | 17 | 0 | 17 | 0 | 0 | 0 | 2 | 0 | 0 | 15 | 0 |
-| m3/collections/qualification | 2 | 0 | 2 | 0 | 0 | 1 | 0 | 0 | 0 | 1 | 1 |
-| m3/collections/verification | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 |
-| m3/compatibility | 6 | 0 | 6 | 0 | 0 | 0 | 1 | 0 | 0 | 5 | 0 |
+| make/m3/collections/qualification | 2 | 0 | 2 | 0 | 0 | 1 | 0 | 0 | 0 | 1 | 1 |
+| make/m3/collections/verification | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 |
+| make/m3/compatibility | 6 | 0 | 6 | 0 | 0 | 0 | 1 | 0 | 0 | 5 | 0 |
 | m3/core | 6 | 0 | 6 | 0 | 0 | 0 | 3 | 0 | 0 | 3 | 0 |
 | m3/eclipse/core-runtime | 2 | 1 | 1 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 2 |
 | m3/eclipse/framework | 4 | 1 | 3 | 0 | 1 | 2 | 0 | 0 | 0 | 1 | 3 |
@@ -40,14 +40,14 @@ running content: nothing to restore), COVERED 5 (every retained line already pre
 | m3/fs | 6 | 2 | 4 | 0 | 2 | 2 | 0 | 0 | 0 | 2 | 4 |
 | m3/lexicon | 1 | 0 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 1 |
 | m3/m3-import | 5 | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 0 |
-| m3/migration | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 |
+| make/m3/migration | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 |
 | m3/ports/collections | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | m3/ports/compiletime | 3 | 1 | 2 | 0 | 1 | 2 | 0 | 0 | 0 | 0 | 3 |
 | m3/ports/swing-viewport | 2 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 |
-| m3/qualification | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 |
-| m3/release | 4 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 |
-| m3/runtime-integration | 2 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 |
-| m3/verify-gvas-literal-precompute.py | 3 | 0 | 3 | 0 | 0 | 1 | 0 | 0 | 2 | 0 | 1 |
+| make/m3/qualification | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 |
+| make/m3/release | 4 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 |
+| make/m3/runtime-integration | 2 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 |
+| make/m3/verify-gvas-literal-precompute.py | 3 | 0 | 3 | 0 | 0 | 1 | 0 | 0 | 2 | 0 | 1 |
 | **total** | **173** | **18** | **154** | **1** | **15** | **23** | **8** | **4** | **5** | **117** | **34** |
 
 ## Method (recipe-first, CPU only)
@@ -79,7 +79,7 @@ running content: nothing to restore), COVERED 5 (every retained line already pre
 | `m3/collections/src/test/java/jdk/m3/collections/M3FilteredSetNullContract.java` | #2115 3-way | collections mvn test | the restored `boundedCursorExtremeProbes` fails against master's main ("forward cursor uses its stored last boundary expected=[last] actual=[isEmpty, first]"); master's contract passes with every restored main file; proven by three isolated runs |
 | `m3/collections/interop/qualification/current-census-20261017/test_verify.py` | #1808 3-way | pytest | master 6 passed; restored 3 failed / 6 passed: three new successor tests refuse today's census |
 | `m3/collections/interop/qualification/current-census-superset-20261022/test_compound_var_successor.py` | #1847 3-way | pytest | 1 failed / 4 passed on both sides, but a different test fails: not the baseline set |
-| `m3/compatibility/test_public_names.py` | #1908 3-way | pytest | 10 failed / 34 passed vs master 1 / 33: the restored `test_unreviewed_evidence_dates_and_versions_remain_refused` refuses 9 of today's evidence files |
+| `make/m3/compatibility/test_public_names.py` | #1908 3-way | pytest | 10 failed / 34 passed vs master 1 / 33: the restored `test_unreviewed_evidence_dates_and_versions_remain_refused` refuses 9 of today's evidence files |
 | `m3/core/src/jdk/m3/text/SharedLexiconCatalog.java` | #1769 3-way | javac | `mappingsByIdentity.values()`: master's field is `SourceMapping[]`, the hunks expect a Map (API drift) |
 | `m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java` | #1538, #1637 3-way chain | javac | `constructor Builder() is already defined`: the chain added a second no-arg constructor |
 
@@ -118,11 +118,11 @@ retained paths (label ledgers excluded), inherited-not-retained, live twins, TWI
 | m3/ast | mvn package; the 2 restored main-based contracts | BUILD SUCCESS; ORIGINS checks=44 (master 15), TREE checks=21 (master 13), PASS |
 | m3/eclipse/framework | mvn test | 21/21 (master 11/11 kept, +10 green) |
 | m3/eclipse/core-runtime | mvn test | 37/37 (master 26/26 kept, +11 green) |
-| m3/eclipse/optional-jmod, m3/collections/qualification, root verify-gvas | py_compile (+ the caller's pytest for verify-gvas, = baseline) | PASS |
+| m3/eclipse/optional-jmod, make/m3/collections/qualification, root verify-gvas | py_compile (+ the caller's pytest for verify-gvas, = baseline) | PASS |
 | m3/ports/compiletime | mvn red on master (needs the M3 java.base); twin javac of the 3 restored files | identical error multiset |
 | m3/core | javac of the 2 restored files | FAIL -> both held |
 | m3/lexicon/native | gcc -Wall -Wextra -shared of the restored JNI file | 0 warnings |
-| m3/compatibility | pytest test_public_names.py | FAIL -> held |
+| make/m3/compatibility | pytest test_public_names.py | FAIL -> held |
 | all | jdk_naming.py apply --only; restore3.py --apply twice | fixed point; idempotent |
 
 Rows, logs and the exact commands: `GATES.tsv`.
@@ -130,10 +130,10 @@ Rows, logs and the exact commands: `GATES.tsv`.
 ## Reproduce
 
 ```
-B=m3/qualification/retained-twins-core-lanes-20261106
+B=make/m3/qualification/retained-twins-core-lanes-20261106
 python -I $B/audit.py <clone> $B/ROWS.tsv $B/AUDIT.tsv --blobs <cache>
 python -I $B/restore3.py <clone> $B/AUDIT.tsv $B/PR_SOURCES.tsv <out> --blobs <cache> --apply <worktree>
-python -I m3/tooling/jdk-naming/jdk_naming.py apply --only <each restored path> --tsv $B/NAMING_APPLY.tsv
+python -I make/m3/tooling/jdk-naming/jdk_naming.py apply --only <each restored path> --tsv $B/NAMING_APPLY.tsv
 python -I $B/hold.py <worktree> $B <path> <gate> <reason>
 python -I $B/held_sequence.py HELD_PRS.tsv LOSS_CANDIDATES.tsv MASTER_PATHS.txt TWIN_CONTENT.tsv PR_TITLES.tsv $B/HELD_PRS_SEQUENCE.tsv
 ```

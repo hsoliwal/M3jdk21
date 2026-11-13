@@ -22,7 +22,7 @@ index 0000000..1737f24
 +    {
 +      "source": "hsoliwal/com.synexia/synexia-m3-jmods/modules/com.synexia.m3.text.normalize :: UnicodeNormalizer",
 +      "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-+      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.normalize : module com.m3.tools.text.normalize",
++      "target": "make/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.normalize : module com.m3.tools.text.normalize",
 +      "status": "Selected optional receiver source; exact image/product acceptance is recorded separately",
 +      "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018 (existing hash-pinned Java/text snapshot engines)",
 +      "target_rule": "Target-owned module/package; public String/CharSequence uses the running M3JDK owner; no com.synexia runtime dependency",
@@ -33,7 +33,7 @@ index 0000000..1737f24
 +    {
 +      "source": "hsoliwal/com.synexia/synexia-m3-jmods/modules/com.synexia.m3.text.tokenize :: WordTokenizer",
 +      "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-+      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.tokenize : module com.m3.tools.text.tokenize",
++      "target": "make/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.tokenize : module com.m3.tools.text.tokenize",
 +      "status": "Selected optional receiver source; exact image/product acceptance is recorded separately",
 +      "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018 (existing hash-pinned Java/text snapshot engines)",
 +      "target_rule": "Target-owned module/package; public String/CharSequence uses the running M3JDK owner; no com.synexia runtime dependency",
@@ -44,7 +44,7 @@ index 0000000..1737f24
 +    {
 +      "source": "hsoliwal/com.synexia/synexia-m3-jmods/modules/com.synexia.m3.text.regex :: RegexMatcher",
 +      "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-+      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.regex : module com.m3.tools.text.regex",
++      "target": "make/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.regex : module com.m3.tools.text.regex",
 +      "status": "Selected optional receiver source; exact image/product acceptance is recorded separately",
 +      "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018 (existing hash-pinned Java/text snapshot engines)",
 +      "target_rule": "Target-owned module/package; public String/CharSequence uses the running M3JDK owner; no com.synexia runtime dependency",
@@ -55,7 +55,7 @@ index 0000000..1737f24
 +    {
 +      "source": "hsoliwal/com.synexia/synexia-m3-jmods/modules/com.synexia.m3.text.search :: ExactSearch",
 +      "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-+      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.search : module com.m3.tools.text.search",
++      "target": "make/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.search : module com.m3.tools.text.search",
 +      "status": "Selected optional receiver source; exact image/product acceptance is recorded separately",
 +      "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018 (existing hash-pinned Java/text snapshot engines)",
 +      "target_rule": "Target-owned module/package; public String/CharSequence uses the running M3JDK owner; no com.synexia runtime dependency",
@@ -66,7 +66,7 @@ index 0000000..1737f24
 +    {
 +      "source": "hsoliwal/com.synexia/synexia-m3-jmods/modules/com.synexia.m3.text.ngram :: NGrams",
 +      "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-+      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.ngram : module com.m3.tools.text.ngram",
++      "target": "make/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.ngram : module com.m3.tools.text.ngram",
 +      "status": "Selected optional receiver source; exact image/product acceptance is recorded separately",
 +      "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018 (existing hash-pinned Java/text snapshot engines)",
 +      "target_rule": "Target-owned module/package; public String/CharSequence uses the running M3JDK owner; no com.synexia runtime dependency",
@@ -77,7 +77,7 @@ index 0000000..1737f24
 +    {
 +      "source": "hsoliwal/com.synexia/synexia-m3-jmods/modules/com.synexia.m3.text.frequency :: TermFrequency",
 +      "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-+      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.frequency : module com.m3.tools.text.frequency",
++      "target": "make/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.frequency : module com.m3.tools.text.frequency",
 +      "status": "Selected optional receiver source; exact image/product acceptance is recorded separately",
 +      "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018 (existing hash-pinned Java/text snapshot engines)",
 +      "target_rule": "Target-owned module/package; public String/CharSequence uses the running M3JDK owner; no com.synexia runtime dependency",
@@ -88,7 +88,7 @@ index 0000000..1737f24
 +    {
 +      "source": "hsoliwal/com.synexia/synexia-m3-jmods/modules/com.synexia.m3.text.similarity :: EditDistance",
 +      "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-+      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.similarity : module com.m3.tools.text.similarity",
++      "target": "make/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.similarity : module com.m3.tools.text.similarity",
 +      "status": "Selected optional receiver source; exact image/product acceptance is recorded separately",
 +      "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018 (existing hash-pinned Java/text snapshot engines)",
 +      "target_rule": "Target-owned module/package; public String/CharSequence uses the running M3JDK owner; no com.synexia runtime dependency",
@@ -99,7 +99,7 @@ index 0000000..1737f24
 +    {
 +      "source": "hsoliwal/com.synexia/synexia-m3-jmods/modules/com.synexia.m3.text.diff :: TextDelta",
 +      "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-+      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.diff : module com.m3.tools.text.diff",
++      "target": "make/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.diff : module com.m3.tools.text.diff",
 +      "status": "Selected optional receiver source; exact image/product acceptance is recorded separately",
 +      "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018 (existing hash-pinned Java/text snapshot engines)",
 +      "target_rule": "Target-owned module/package; public String/CharSequence uses the running M3JDK owner; no com.synexia runtime dependency",
@@ -110,7 +110,7 @@ index 0000000..1737f24
 +    {
 +      "source": "hsoliwal/com.synexia/synexia-m3-jmods/modules/com.synexia.m3.text.index :: InvertedIndex",
 +      "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-+      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.index : module com.m3.tools.text.index",
++      "target": "make/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.index : module com.m3.tools.text.index",
 +      "status": "Selected optional receiver source; exact image/product acceptance is recorded separately",
 +      "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018 (existing hash-pinned Java/text snapshot engines)",
 +      "target_rule": "Target-owned module/package; public String/CharSequence uses the running M3JDK owner; no com.synexia runtime dependency",
@@ -121,7 +121,7 @@ index 0000000..1737f24
 +    {
 +      "source": "hsoliwal/com.synexia/synexia-m3-jmods/modules/com.synexia.m3.graph.topology :: TopologicalOrder",
 +      "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-+      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.topology : module com.m3.tools.graph.topology",
++      "target": "make/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.topology : module com.m3.tools.graph.topology",
 +      "status": "Selected optional receiver source; exact image/product acceptance is recorded separately",
 +      "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018 (existing hash-pinned Java/text snapshot engines)",
 +      "target_rule": "Target-owned module/package; public String/CharSequence uses the running M3JDK owner; no com.synexia runtime dependency",
@@ -132,7 +132,7 @@ index 0000000..1737f24
 +    {
 +      "source": "hsoliwal/com.synexia/synexia-m3-jmods/modules/com.synexia.m3.graph.paths :: ShortestPaths",
 +      "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-+      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.paths : module com.m3.tools.graph.paths",
++      "target": "make/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.paths : module com.m3.tools.graph.paths",
 +      "status": "Selected optional receiver source; exact image/product acceptance is recorded separately",
 +      "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018 (existing hash-pinned Java/text snapshot engines)",
 +      "target_rule": "Target-owned module/package; public String/CharSequence uses the running M3JDK owner; no com.synexia runtime dependency",
@@ -143,7 +143,7 @@ index 0000000..1737f24
 +    {
 +      "source": "hsoliwal/com.synexia/synexia-m3-jmods/modules/com.synexia.m3.stats.streaming :: RunningStatistics",
 +      "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-+      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.stats.streaming : module com.m3.tools.stats.streaming",
++      "target": "make/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.stats.streaming : module com.m3.tools.stats.streaming",
 +      "status": "Selected optional receiver source; exact image/product acceptance is recorded separately",
 +      "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018 (existing hash-pinned Java/text snapshot engines)",
 +      "target_rule": "Target-owned module/package; public String/CharSequence uses the running M3JDK owner; no com.synexia runtime dependency",
@@ -154,7 +154,7 @@ index 0000000..1737f24
 +    {
 +      "source": "hsoliwal/com.synexia/synexia-m3-jmods/modules/com.synexia.m3.constraint.interval :: Intervals",
 +      "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-+      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.constraint.interval : module com.m3.tools.constraint.interval",
++      "target": "make/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.constraint.interval : module com.m3.tools.constraint.interval",
 +      "status": "Selected optional receiver source; exact image/product acceptance is recorded separately",
 +      "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018 (existing hash-pinned Java/text snapshot engines)",
 +      "target_rule": "Target-owned module/package; public String/CharSequence uses the running M3JDK owner; no com.synexia runtime dependency",
@@ -165,7 +165,7 @@ index 0000000..1737f24
 +    {
 +      "source": "hsoliwal/com.synexia/synexia-m3-jmods/modules/com.synexia.m3.codec.varint :: VarInts",
 +      "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-+      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.codec.varint : module com.m3.tools.codec.varint",
++      "target": "make/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.codec.varint : module com.m3.tools.codec.varint",
 +      "status": "Selected optional receiver source; exact image/product acceptance is recorded separately",
 +      "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018 (existing hash-pinned Java/text snapshot engines)",
 +      "target_rule": "Target-owned module/package; public String/CharSequence uses the running M3JDK owner; no com.synexia runtime dependency",
@@ -176,7 +176,7 @@ index 0000000..1737f24
 +    {
 +      "source": "hsoliwal/com.synexia/synexia-m3-jmods/modules/com.synexia.m3.verify.sha256 :: Sha256",
 +      "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-+      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.verify.sha256 : module com.m3.tools.verify.sha256",
++      "target": "make/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.verify.sha256 : module com.m3.tools.verify.sha256",
 +      "status": "Selected optional receiver source; exact image/product acceptance is recorded separately",
 +      "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018 (existing hash-pinned Java/text snapshot engines)",
 +      "target_rule": "Target-owned module/package; public String/CharSequence uses the running M3JDK owner; no com.synexia runtime dependency",
@@ -187,7 +187,7 @@ index 0000000..1737f24
 +    {
 +      "source": "hsoliwal/com.synexia/synexia-m3-jmods/modules/com.synexia.m3.plan.priority :: StablePriorityQueue",
 +      "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-+      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.plan.priority : module com.m3.tools.plan.priority",
++      "target": "make/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.plan.priority : module com.m3.tools.plan.priority",
 +      "status": "Selected optional receiver source; exact image/product acceptance is recorded separately",
 +      "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018 (existing hash-pinned Java/text snapshot engines)",
 +      "target_rule": "Target-owned module/package; public String/CharSequence uses the running M3JDK owner; no com.synexia runtime dependency",
@@ -198,7 +198,7 @@ index 0000000..1737f24
 +    {
 +      "source": "com.synexia.indexstring.file.MIndexFileStreamIndexer single-stream admission pattern",
 +      "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-+      "target": "m3/tooling/module-packs/text-tools/src/jdk.m3.io/jdk/m3/io/M3File.java",
++      "target": "make/m3/tooling/module-packs/text-tools/src/jdk.m3.io/jdk/m3/io/M3File.java",
 +      "status": "Additive bounded snapshot adapter; full MIndexFile data plane not received",
 +      "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018",
 +      "target_rule": "One admitted public String plus raw-byte and UTF-16 identities; no retained second byte snapshot, token pool or postings store",
@@ -220,7 +220,7 @@ index 0000000..1737f24
 +    {
 +      "source": "Existing com.sun.source.util.M3AST compiler frontend",
 +      "source_commit": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
-+      "target": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/M3AstTools.java",
++      "target": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/M3AstTools.java",
 +      "status": "Actual callback projection over compiler-owned trees; syntax-only parse helper",
 +      "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018",
 +      "target_rule": "No independent parser, tree owner or live compiler-object cache; detached primitive facts and public record projections",
@@ -231,7 +231,7 @@ index 0000000..1737f24
 +    {
 +      "source": "Existing jdk.m3.text/jdk.m3.io/jdk.m3.structured owners and selected16 donor modules",
 +      "source_commit": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
-+      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu : module com.m3.tools.cpu",
++      "target": "make/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu : module com.m3.tools.cpu",
 +      "status": "Optional aggregate; exactly22 current registry bindings; direct APIs exported separately",
 +      "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018",
 +      "target_rule": "Reuse existing Registry/Plan/Limits/M3UnixRuntime and sole existing jmod_pack.py; no parallel scheduler or packager",
@@ -240,9 +240,9 @@ index 0000000..1737f24
 +      "gates": "Exactly20 optional linked modules; JAR/JMOD readback; original JNI; default/storage-enabled fixtures; exact receipts"
 +    },
 +    {
-+      "source": "m3/tooling/jmod-recipes/CPU_TOOL_CATEGORY_MATRIX_20261017.tsv :110 inventory rows",
++      "source": "make/m3/tooling/jmod-recipes/CPU_TOOL_CATEGORY_MATRIX_20261017.tsv :110 inventory rows",
 +      "source_commit": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
-+      "target": "m3/tooling/module-packs/cpu-tools/COVERAGE.tsv : task-local scope mapping",
++      "target": "make/m3/tooling/module-packs/cpu-tools/COVERAGE.tsv : task-local scope mapping",
 +      "status": "Inventory coverage only; selected partial subsets and deferred families are explicit",
 +      "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018",
 +      "target_rule": "Do not promote full SAT/SMT/LP/ILP, consensus, media, Lucene/OpenNLP, quantization/distillation/WebGPU or ordered product families from this optional pack",
@@ -421,38 +421,38 @@ index 0000000..208ae4d
 @@ -0,0 +1,34 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
 +# SPDX-License-Identifier: Apache-2.0
 +target_module	target_path	donor_git_blob	donor_sha256	payload_sha256	change_kind	change_summary	semantic_contract
-+com.m3.tools.codec.varint	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.codec.varint/jdk/m3/tools/codec/varint/VarInts.java	3f65cfa1511b8ed195f8ca2787922dfa92c5c7e7	a735065b9b480136d1f1bed3bf482b7c07325ba3b1e169797e977f7226d90df4	727e6f87e0494ad4dd6864a619e323c2fee97ab50015da0b60aa93e65f107671	RECEIVER_NAMING	Map the exact existing NAMING_MAP package; add attribution and modification notice; preserve the complete donor implementation body.	Public declarations and implementation behavior retained.
-+com.m3.tools.codec.varint	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.codec.varint/module-info.java	818176f33b59baf32fac4c33865791ff3d722d93	3d2a3687feff72f397996d84b1b218a651b59a26fcd8507844399360c2e8cfb3	4dfaa0010d9a791b0613860cbd77390896716624445ad7151a98a1648df25b86	RECEIVER_NAMING	Map the exact existing NAMING_MAP module and exported package; add attribution and modification notice.	Exports unchanged after package mapping; dependency remains java.base only.
-+com.m3.tools.constraint.interval	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.constraint.interval/jdk/m3/tools/constraint/interval/Intervals.java	4f8bd5242215ca0c24135c25bec76e1893716c1c	e5e26a093813723a0c023f0f01a97cecac6f928becd196f4f3d15e52034b87d8	364ea0481635019fe057e8cbb56120a1d01034cdff3b3c1307309b891d2f80bb	RECEIVER_NAMING	Map the exact existing NAMING_MAP package; add attribution and modification notice; preserve the complete donor implementation body.	Public declarations and implementation behavior retained.
-+com.m3.tools.constraint.interval	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.constraint.interval/module-info.java	92bc39c91c0346eef45ff54f4a0f05f1a9f8a601	32dc7737e35c6ef27ad2f24ee42bb5bc077dd1d0ada466976b71ce932b44f842	5bdf7cf5c4b5d57c7b5b9deb78a53c2193750a9710201e043140050709143cfe	RECEIVER_NAMING	Map the exact existing NAMING_MAP module and exported package; add attribution and modification notice.	Exports unchanged after package mapping; dependency remains java.base only.
-+com.m3.tools.graph.paths	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.paths/jdk/m3/tools/graph/paths/ShortestPaths.java	97e80e094b6d24027a8882045040ed5085bf3d6a	26d19619a2a552159da96bf14f115890e90925e57f37e0b376ee47d99a63115b	c88608bc4362856d9a263b4b97819fb80ab8d944727764130e3d9bcbe6144416	PACKED_STORAGE	Preserve nonnegative Dijkstra and the Long.MAX_VALUE sentinel; replace retained Edge adjacency and Step objects with primitive weighted CSR and an indexed decrease-key heap.	Same Edge and distances signatures; overflow paths are skipped; output is a detached long array.
-+com.m3.tools.graph.paths	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.paths/module-info.java	42017ecfdb9e734ba420024f7731097cd5f49a52	3a280c9bdec397af0ed9b6d227f191734e10e886c33308f4639d2d47fe48de94	89e811b835a7afad11a60970c42fc1ee3b9abc2e7522b951d2331142f7695635	RECEIVER_NAMING	Map the exact existing NAMING_MAP module and exported package; add attribution and modification notice.	Exports unchanged after package mapping; dependency remains java.base only.
-+com.m3.tools.graph.topology	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.topology/jdk/m3/tools/graph/topology/TopologicalOrder.java	de967f745c15c0d240b445c50d3bb23dd973242d	3f240e4c2f7c4ee9d8ce482b232b12d87c0ab8dd6beca74f3ef14bd34ac18b6a	14e7378411cb1c78b9b5abfcea81ba8f039ccd89786cebbcc3f363ea567379f9	DECLARATION_FIX_AND_PACKED_STORAGE	Repair the donor scalar written declaration; preserve Kahn traversal and lexicographically smallest ready vertex; replace boxed adjacency and ready queue with primitive CSR and an integer min-heap.	Same public Arc and sort signatures; cycles and invalid endpoints refuse; parallel arcs count separately.
-+com.m3.tools.graph.topology	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.topology/module-info.java	a43a544a3cbb4029e9953e5007888e63c60a578a	16b5df61a39db04915b40aa533b5d4a9a7312c3491c15c870252ec042a029b39	00f0f71038d3ab67f4f260557e7fd086700c379a2edbe08a3a929682e087a0c1	RECEIVER_NAMING	Map the exact existing NAMING_MAP module and exported package; add attribution and modification notice.	Exports unchanged after package mapping; dependency remains java.base only.
-+com.m3.tools.plan.priority	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.plan.priority/jdk/m3/tools/plan/priority/StablePriorityQueue.java	1852108298f43d6687ada95bfc46e9949681fce1	8f5cf4f6fa50ab5f58d2af4620026bcdffa029f5392bdc8376cee589118f51a1	abebf89af99ff624f1a03751831145dbfa1af29e958478f66eba003ac861e4cb	PACKED_STORAGE	Replace per-offer Entry records and JDK PriorityQueue retention with parent-owned value, score and sequence lanes; preserve score and insertion-sequence ordering.	Same offer/poll/size signatures; finite scores only; Double.compare distinguishes signed zero; vacated references cleared.
-+com.m3.tools.plan.priority	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.plan.priority/module-info.java	7bb5b64a564a19144fd05b3fc1167eb1b017ad75	703f6607f6dfcf288e4da59c717bb886d684a1f0671fd01d790c89de719a1c11	0ef7bbc1d2fa26231240007fa41273e95768383782ec68c17b083289f836c0f9	RECEIVER_NAMING	Map the exact existing NAMING_MAP module and exported package; add attribution and modification notice.	Exports unchanged after package mapping; dependency remains java.base only.
-+com.m3.tools.stats.streaming	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.stats.streaming/jdk/m3/tools/stats/streaming/RunningStatistics.java	1bf87833c669c085b57362be12875ed0d3ce9c2c	85f54daebcdfb566e4f79b23789320c68f26d78319765a63292de1ac0f725722	f84f2ebb7d32f73db1aa0ebbfa8a088e13dfb815baf848fcd152708c70b261b7	RECEIVER_NAMING	Map the exact existing NAMING_MAP package; add attribution and modification notice; preserve the complete donor implementation body.	Public declarations and implementation behavior retained.
-+com.m3.tools.stats.streaming	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.stats.streaming/module-info.java	f2d55827beaa6137f3d76f25105a1acb9a2bbaa2	d9ae7916edfd55b581a083a4890eaa01f33fc1fc3eca3f1f1478f50d64494545	e3444eafb5e81a011ed1d93c56be512301ea4f36a1929bb26cb6fa8e4fb63f54	RECEIVER_NAMING	Map the exact existing NAMING_MAP module and exported package; add attribution and modification notice.	Exports unchanged after package mapping; dependency remains java.base only.
-+com.m3.tools.text.diff	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.diff/jdk/m3/tools/text/diff/TextDelta.java	c8e6ca8d2ad42bd7319c75f1c036886f75c5e2f8	83eaf22e7b2badfb9e0cdaef1168986160cce5d2acbd7e083dcfe132a6a62038	779448e86648711b20810aa8a82264cbc98073149447b00690c8f16b256e1811	RECEIVER_NAMING	Map the exact existing NAMING_MAP package; add attribution and modification notice; preserve the complete donor implementation body.	Public declarations and implementation behavior retained.
-+com.m3.tools.text.diff	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.diff/module-info.java	6ee52bab6343b56c88881a31dab5d827658ae7e8	eb8771671a8fbd809a0fbac4b82510f06886b91d5287b7df2ab90263c5c0e8a4	26b71c5f02338b0195746c0895dcae0dd76ee9ba8d91a3dafd80cae47c1b16c5	RECEIVER_NAMING	Map the exact existing NAMING_MAP module and exported package; add attribution and modification notice.	Exports unchanged after package mapping; dependency remains java.base only.
-+com.m3.tools.text.frequency	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.frequency/jdk/m3/tools/text/frequency/TermFrequency.java	159c605dd4065f1f87ebd9426244ab8a7ab520af	d089476990d37b22478ae9774394f59796d3de1e21bb7a48d8a973786b290d03	968c74c80fbf119f90e5bb02e4c15cd271aba341e30e49f709dcc91c64272dff	RECEIVER_NAMING	Map the exact existing NAMING_MAP package; add attribution and modification notice; preserve the complete donor implementation body.	Public declarations and implementation behavior retained.
-+com.m3.tools.text.frequency	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.frequency/module-info.java	15849e5a401b89d15b733f86428fa2716a7baa0b	fa0c8fae51019f49ae55833ac39ca1dda9a61ec9918106d129126ed62dfe3966	ea37386c16c7b284107dc98e43810df6dee8365810433512ed5dc164605f8732	RECEIVER_NAMING	Map the exact existing NAMING_MAP module and exported package; add attribution and modification notice.	Exports unchanged after package mapping; dependency remains java.base only.
-+com.m3.tools.text.index	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.index/jdk/m3/tools/text/index/InvertedIndex.java	9a8bd9b558db7a86fc72acd59b2d081aa487486c	7092e7a42ef0d6b5d714019d65b56c5198c7d5d406f16261ea9f90c5b0992544	fe5bb68d37c09d33d8baae2e76a223fbdd627018e30b8532735e66e201ed846c	PACKED_STORAGE	Replace retained per-term map entries and separate posting arrays with sorted existing String references, a CSR start lane and one posting lane; expose one immutable Set view.	Same build/documents/terms signatures; distinct ascending document IDs; defensive postings; term iteration is now deterministic where donor order was unspecified.
-+com.m3.tools.text.index	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.index/module-info.java	6256b5dd173fccb9f00ed2e517d27f151233e853	18b5309194368d2ff96b5bb323a17d9872b45b174b3e843e1bd74743aa1c3a8e	aacacfc948ff4f9d56925e4fc9c38c0af52ba22da8a6ff70fc4f1e8dc16359e1	RECEIVER_NAMING	Map the exact existing NAMING_MAP module and exported package; add attribution and modification notice.	Exports unchanged after package mapping; dependency remains java.base only.
-+com.m3.tools.text.ngram	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.ngram/jdk/m3/tools/text/ngram/NGrams.java	8e04dc00048f18715177d30d6e4417f880a070b3	6017b720e58bb35f1bcbdb9a89ec21ac3a9f4291cf7cc2aa8f75f17d9653c199	0cde8da1762345362e5ed10efef9d27b6a7757f70d7ee5b8935b440660373442	RECEIVER_NAMING	Map the exact existing NAMING_MAP package; add attribution and modification notice; preserve the complete donor implementation body.	Public declarations and implementation behavior retained.
-+com.m3.tools.text.ngram	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.ngram/module-info.java	12e39e45dbc92d9f9a7620023f4979ef0f1983ae	ab456e8aac9af20efa79f495e6237f537d6012f24adee7f93dd25b48908f8d1c	035920afd021691bc712f31c898f65b599b652067c3f17e9c4568f2bd5892a62	RECEIVER_NAMING	Map the exact existing NAMING_MAP module and exported package; add attribution and modification notice.	Exports unchanged after package mapping; dependency remains java.base only.
-+com.m3.tools.text.normalize	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.normalize/jdk/m3/tools/text/normalize/UnicodeNormalizer.java	c17b0391bb6c0b6904a6ca01fb18ccc8c9e5ac46	c0acf2b5b9815423642672431256487da2a41b23d89d2da10388ba59834996e1	8412d7c628d2e4e32fb81f62f48697f229f14bcb3ee3b08628ef96b3e2514ee0	RECEIVER_NAMING	Map the exact existing NAMING_MAP package; add attribution and modification notice; preserve the complete donor implementation body.	Public declarations and implementation behavior retained.
-+com.m3.tools.text.normalize	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.normalize/module-info.java	5efad2f1e8ff967d71ea83fc95737ca4209d0150	3bb2b02d0c8d133ddcf09cd3e6d8d73b9b89267c67d02ce2d8fd568a2db1f9c4	6f46e1e08418d796a56a823fe170455302426a52d69df16ed2ded756dcc2ed15	RECEIVER_NAMING	Map the exact existing NAMING_MAP module and exported package; add attribution and modification notice.	Exports unchanged after package mapping; dependency remains java.base only.
-+com.m3.tools.text.regex	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.regex/jdk/m3/tools/text/regex/RegexMatcher.java	9ce0420965fd6a6a10804165153547e7c18bcdb6	785521d5e3b035a0e72cb181081d50ff1fb77dce5e1e187b712c2e9f417fdb2a	7c01f9b2b62a7544de11f006658a1527c809b5275057cfdc3c34b2fb8aa579df	RECEIVER_NAMING	Map the exact existing NAMING_MAP package; add attribution and modification notice; preserve the complete donor implementation body.	Public declarations and implementation behavior retained.
-+com.m3.tools.text.regex	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.regex/module-info.java	96cce6d52b0330ad90f5e936c55e433c7be64129	be6ed47927111245111c6c0ab29b56aeed2b222c746537e5bb6ced9574602dbb	0023883ea478a63d02ae09f029b61f32b4ef8314db250036f193656c306ca92f	RECEIVER_NAMING	Map the exact existing NAMING_MAP module and exported package; add attribution and modification notice.	Exports unchanged after package mapping; dependency remains java.base only.
-+com.m3.tools.text.search	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.search/jdk/m3/tools/text/search/ExactSearch.java	2ea1ec40ffa8a6e8cbbfbb0b35b63647e920eb50	23af5034f0e0987bd73f38f4b90837815651f80b687a57472c05249e6a65606b	e0f1df2028c4f8098d86595a45545f2d48540004fbbf01adea1cb833e4b78b32	ARITHMETIC_BOUNDARY_FIX	Use long arithmetic for bounded output growth; stop after an empty-needle match at the final UTF-16 boundary before incrementing the cursor.	Same UTF-16 String.indexOf and overlapping-hit semantics; no behavior change for ordinary representable inputs.
-+com.m3.tools.text.search	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.search/module-info.java	d1d303b8f2497f436787a90c4aad2635eb0757c7	b0eb12468254e4ab50ac8352bd905b106194522b1ce924fab7732ee1fbea7fc6	5f23b208d895f1cf05850e9f27edfbbe3a1a95cb82dcf6b240384aeab603d52f	RECEIVER_NAMING	Map the exact existing NAMING_MAP module and exported package; add attribution and modification notice.	Exports unchanged after package mapping; dependency remains java.base only.
-+com.m3.tools.text.similarity	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.similarity/jdk/m3/tools/text/similarity/EditDistance.java	67b2354f1186ed7c9cf371eadc5dd48157aa5f43	b4753cd93cde9bc40c2b290a2f38b3af324107de29965593bf01bacf9c74d325	46046967b3f3d3a573b025e28f4ec23e320e3e8b16a47ce12623fa5658153115	RECEIVER_NAMING	Map the exact existing NAMING_MAP package; add attribution and modification notice; preserve the complete donor implementation body.	Public declarations and implementation behavior retained.
-+com.m3.tools.text.similarity	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.similarity/module-info.java	d14657e9ade28cc4c7d15c2914ba523f525d89fa	e0ba999c69a2ea1346c238348da1fb1ef665a7497004be6362e06224730b63fa	8ae0bf4fc45876171c948e459feb1bfdcf4b540dc2903563b5fab9c49d31084b	RECEIVER_NAMING	Map the exact existing NAMING_MAP module and exported package; add attribution and modification notice.	Exports unchanged after package mapping; dependency remains java.base only.
-+com.m3.tools.text.tokenize	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.tokenize/jdk/m3/tools/text/tokenize/WordTokenizer.java	a1a085a2a49b238ec44e5372bb86ae9b49083182	b5b3329eda9ebc88c06af1396eca6dbcaf3d2fa207ab348d0e3167351ca77ca5	5b8f130337dc6ae2ad813e8d7ce89dc6bcff2371eb9ac3f067aa83ea9fa37911	RECEIVER_NAMING	Map the exact existing NAMING_MAP package; add attribution and modification notice; preserve the complete donor implementation body.	Public declarations and implementation behavior retained.
-+com.m3.tools.text.tokenize	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.tokenize/module-info.java	74297be2321cab7bb2b08073bd5b7e1f892075ee	469dacab44f20a930ee811e891ad02183892afac91b41b1151824511b31264e5	3ddebe14556ed8e4fd2e1aeed52bc2e7e099b988dbee9781c0cefba02b3b9253	RECEIVER_NAMING	Map the exact existing NAMING_MAP module and exported package; add attribution and modification notice.	Exports unchanged after package mapping; dependency remains java.base only.
-+com.m3.tools.verify.sha256	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.verify.sha256/jdk/m3/tools/verify/sha256/Sha256.java	d68692f15eff3c563ba5f9b16ca0a791562c7abc	4b62b1715297f2a4feede8b251353495c2c5fae528b8868ff9ea3e3fc9b43493	b5a78b494c67bb6bc5773f2eb957f81336ff4c6c1eeb88796a922f01d8188d59	RECEIVER_NAMING	Map the exact existing NAMING_MAP package; add attribution and modification notice; preserve the complete donor implementation body.	Public declarations and implementation behavior retained.
-+com.m3.tools.verify.sha256	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.verify.sha256/module-info.java	09bae72d83591c6d5ba86d22b4aac37a1cf511a3	1375388802276599d74c53e006d4a5836982bdfcf89a073fc79a926d3a8cda09	cdf42904dd792a820ea85c00edc9f989ebadef4017527986883b3e20f7cddf71	RECEIVER_NAMING	Map the exact existing NAMING_MAP module and exported package; add attribution and modification notice.	Exports unchanged after package mapping; dependency remains java.base only.
++com.m3.tools.codec.varint	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.codec.varint/jdk/m3/tools/codec/varint/VarInts.java	3f65cfa1511b8ed195f8ca2787922dfa92c5c7e7	a735065b9b480136d1f1bed3bf482b7c07325ba3b1e169797e977f7226d90df4	727e6f87e0494ad4dd6864a619e323c2fee97ab50015da0b60aa93e65f107671	RECEIVER_NAMING	Map the exact existing NAMING_MAP package; add attribution and modification notice; preserve the complete donor implementation body.	Public declarations and implementation behavior retained.
++com.m3.tools.codec.varint	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.codec.varint/module-info.java	818176f33b59baf32fac4c33865791ff3d722d93	3d2a3687feff72f397996d84b1b218a651b59a26fcd8507844399360c2e8cfb3	4dfaa0010d9a791b0613860cbd77390896716624445ad7151a98a1648df25b86	RECEIVER_NAMING	Map the exact existing NAMING_MAP module and exported package; add attribution and modification notice.	Exports unchanged after package mapping; dependency remains java.base only.
++com.m3.tools.constraint.interval	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.constraint.interval/jdk/m3/tools/constraint/interval/Intervals.java	4f8bd5242215ca0c24135c25bec76e1893716c1c	e5e26a093813723a0c023f0f01a97cecac6f928becd196f4f3d15e52034b87d8	364ea0481635019fe057e8cbb56120a1d01034cdff3b3c1307309b891d2f80bb	RECEIVER_NAMING	Map the exact existing NAMING_MAP package; add attribution and modification notice; preserve the complete donor implementation body.	Public declarations and implementation behavior retained.
++com.m3.tools.constraint.interval	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.constraint.interval/module-info.java	92bc39c91c0346eef45ff54f4a0f05f1a9f8a601	32dc7737e35c6ef27ad2f24ee42bb5bc077dd1d0ada466976b71ce932b44f842	5bdf7cf5c4b5d57c7b5b9deb78a53c2193750a9710201e043140050709143cfe	RECEIVER_NAMING	Map the exact existing NAMING_MAP module and exported package; add attribution and modification notice.	Exports unchanged after package mapping; dependency remains java.base only.
++com.m3.tools.graph.paths	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.paths/jdk/m3/tools/graph/paths/ShortestPaths.java	97e80e094b6d24027a8882045040ed5085bf3d6a	26d19619a2a552159da96bf14f115890e90925e57f37e0b376ee47d99a63115b	c88608bc4362856d9a263b4b97819fb80ab8d944727764130e3d9bcbe6144416	PACKED_STORAGE	Preserve nonnegative Dijkstra and the Long.MAX_VALUE sentinel; replace retained Edge adjacency and Step objects with primitive weighted CSR and an indexed decrease-key heap.	Same Edge and distances signatures; overflow paths are skipped; output is a detached long array.
++com.m3.tools.graph.paths	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.paths/module-info.java	42017ecfdb9e734ba420024f7731097cd5f49a52	3a280c9bdec397af0ed9b6d227f191734e10e886c33308f4639d2d47fe48de94	89e811b835a7afad11a60970c42fc1ee3b9abc2e7522b951d2331142f7695635	RECEIVER_NAMING	Map the exact existing NAMING_MAP module and exported package; add attribution and modification notice.	Exports unchanged after package mapping; dependency remains java.base only.
++com.m3.tools.graph.topology	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.topology/jdk/m3/tools/graph/topology/TopologicalOrder.java	de967f745c15c0d240b445c50d3bb23dd973242d	3f240e4c2f7c4ee9d8ce482b232b12d87c0ab8dd6beca74f3ef14bd34ac18b6a	14e7378411cb1c78b9b5abfcea81ba8f039ccd89786cebbcc3f363ea567379f9	DECLARATION_FIX_AND_PACKED_STORAGE	Repair the donor scalar written declaration; preserve Kahn traversal and lexicographically smallest ready vertex; replace boxed adjacency and ready queue with primitive CSR and an integer min-heap.	Same public Arc and sort signatures; cycles and invalid endpoints refuse; parallel arcs count separately.
++com.m3.tools.graph.topology	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.topology/module-info.java	a43a544a3cbb4029e9953e5007888e63c60a578a	16b5df61a39db04915b40aa533b5d4a9a7312c3491c15c870252ec042a029b39	00f0f71038d3ab67f4f260557e7fd086700c379a2edbe08a3a929682e087a0c1	RECEIVER_NAMING	Map the exact existing NAMING_MAP module and exported package; add attribution and modification notice.	Exports unchanged after package mapping; dependency remains java.base only.
++com.m3.tools.plan.priority	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.plan.priority/jdk/m3/tools/plan/priority/StablePriorityQueue.java	1852108298f43d6687ada95bfc46e9949681fce1	8f5cf4f6fa50ab5f58d2af4620026bcdffa029f5392bdc8376cee589118f51a1	abebf89af99ff624f1a03751831145dbfa1af29e958478f66eba003ac861e4cb	PACKED_STORAGE	Replace per-offer Entry records and JDK PriorityQueue retention with parent-owned value, score and sequence lanes; preserve score and insertion-sequence ordering.	Same offer/poll/size signatures; finite scores only; Double.compare distinguishes signed zero; vacated references cleared.
++com.m3.tools.plan.priority	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.plan.priority/module-info.java	7bb5b64a564a19144fd05b3fc1167eb1b017ad75	703f6607f6dfcf288e4da59c717bb886d684a1f0671fd01d790c89de719a1c11	0ef7bbc1d2fa26231240007fa41273e95768383782ec68c17b083289f836c0f9	RECEIVER_NAMING	Map the exact existing NAMING_MAP module and exported package; add attribution and modification notice.	Exports unchanged after package mapping; dependency remains java.base only.
++com.m3.tools.stats.streaming	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.stats.streaming/jdk/m3/tools/stats/streaming/RunningStatistics.java	1bf87833c669c085b57362be12875ed0d3ce9c2c	85f54daebcdfb566e4f79b23789320c68f26d78319765a63292de1ac0f725722	f84f2ebb7d32f73db1aa0ebbfa8a088e13dfb815baf848fcd152708c70b261b7	RECEIVER_NAMING	Map the exact existing NAMING_MAP package; add attribution and modification notice; preserve the complete donor implementation body.	Public declarations and implementation behavior retained.
++com.m3.tools.stats.streaming	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.stats.streaming/module-info.java	f2d55827beaa6137f3d76f25105a1acb9a2bbaa2	d9ae7916edfd55b581a083a4890eaa01f33fc1fc3eca3f1f1478f50d64494545	e3444eafb5e81a011ed1d93c56be512301ea4f36a1929bb26cb6fa8e4fb63f54	RECEIVER_NAMING	Map the exact existing NAMING_MAP module and exported package; add attribution and modification notice.	Exports unchanged after package mapping; dependency remains java.base only.
++com.m3.tools.text.diff	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.diff/jdk/m3/tools/text/diff/TextDelta.java	c8e6ca8d2ad42bd7319c75f1c036886f75c5e2f8	83eaf22e7b2badfb9e0cdaef1168986160cce5d2acbd7e083dcfe132a6a62038	779448e86648711b20810aa8a82264cbc98073149447b00690c8f16b256e1811	RECEIVER_NAMING	Map the exact existing NAMING_MAP package; add attribution and modification notice; preserve the complete donor implementation body.	Public declarations and implementation behavior retained.
++com.m3.tools.text.diff	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.diff/module-info.java	6ee52bab6343b56c88881a31dab5d827658ae7e8	eb8771671a8fbd809a0fbac4b82510f06886b91d5287b7df2ab90263c5c0e8a4	26b71c5f02338b0195746c0895dcae0dd76ee9ba8d91a3dafd80cae47c1b16c5	RECEIVER_NAMING	Map the exact existing NAMING_MAP module and exported package; add attribution and modification notice.	Exports unchanged after package mapping; dependency remains java.base only.
++com.m3.tools.text.frequency	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.frequency/jdk/m3/tools/text/frequency/TermFrequency.java	159c605dd4065f1f87ebd9426244ab8a7ab520af	d089476990d37b22478ae9774394f59796d3de1e21bb7a48d8a973786b290d03	968c74c80fbf119f90e5bb02e4c15cd271aba341e30e49f709dcc91c64272dff	RECEIVER_NAMING	Map the exact existing NAMING_MAP package; add attribution and modification notice; preserve the complete donor implementation body.	Public declarations and implementation behavior retained.
++com.m3.tools.text.frequency	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.frequency/module-info.java	15849e5a401b89d15b733f86428fa2716a7baa0b	fa0c8fae51019f49ae55833ac39ca1dda9a61ec9918106d129126ed62dfe3966	ea37386c16c7b284107dc98e43810df6dee8365810433512ed5dc164605f8732	RECEIVER_NAMING	Map the exact existing NAMING_MAP module and exported package; add attribution and modification notice.	Exports unchanged after package mapping; dependency remains java.base only.
++com.m3.tools.text.index	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.index/jdk/m3/tools/text/index/InvertedIndex.java	9a8bd9b558db7a86fc72acd59b2d081aa487486c	7092e7a42ef0d6b5d714019d65b56c5198c7d5d406f16261ea9f90c5b0992544	fe5bb68d37c09d33d8baae2e76a223fbdd627018e30b8532735e66e201ed846c	PACKED_STORAGE	Replace retained per-term map entries and separate posting arrays with sorted existing String references, a CSR start lane and one posting lane; expose one immutable Set view.	Same build/documents/terms signatures; distinct ascending document IDs; defensive postings; term iteration is now deterministic where donor order was unspecified.
++com.m3.tools.text.index	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.index/module-info.java	6256b5dd173fccb9f00ed2e517d27f151233e853	18b5309194368d2ff96b5bb323a17d9872b45b174b3e843e1bd74743aa1c3a8e	aacacfc948ff4f9d56925e4fc9c38c0af52ba22da8a6ff70fc4f1e8dc16359e1	RECEIVER_NAMING	Map the exact existing NAMING_MAP module and exported package; add attribution and modification notice.	Exports unchanged after package mapping; dependency remains java.base only.
++com.m3.tools.text.ngram	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.ngram/jdk/m3/tools/text/ngram/NGrams.java	8e04dc00048f18715177d30d6e4417f880a070b3	6017b720e58bb35f1bcbdb9a89ec21ac3a9f4291cf7cc2aa8f75f17d9653c199	0cde8da1762345362e5ed10efef9d27b6a7757f70d7ee5b8935b440660373442	RECEIVER_NAMING	Map the exact existing NAMING_MAP package; add attribution and modification notice; preserve the complete donor implementation body.	Public declarations and implementation behavior retained.
++com.m3.tools.text.ngram	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.ngram/module-info.java	12e39e45dbc92d9f9a7620023f4979ef0f1983ae	ab456e8aac9af20efa79f495e6237f537d6012f24adee7f93dd25b48908f8d1c	035920afd021691bc712f31c898f65b599b652067c3f17e9c4568f2bd5892a62	RECEIVER_NAMING	Map the exact existing NAMING_MAP module and exported package; add attribution and modification notice.	Exports unchanged after package mapping; dependency remains java.base only.
++com.m3.tools.text.normalize	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.normalize/jdk/m3/tools/text/normalize/UnicodeNormalizer.java	c17b0391bb6c0b6904a6ca01fb18ccc8c9e5ac46	c0acf2b5b9815423642672431256487da2a41b23d89d2da10388ba59834996e1	8412d7c628d2e4e32fb81f62f48697f229f14bcb3ee3b08628ef96b3e2514ee0	RECEIVER_NAMING	Map the exact existing NAMING_MAP package; add attribution and modification notice; preserve the complete donor implementation body.	Public declarations and implementation behavior retained.
++com.m3.tools.text.normalize	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.normalize/module-info.java	5efad2f1e8ff967d71ea83fc95737ca4209d0150	3bb2b02d0c8d133ddcf09cd3e6d8d73b9b89267c67d02ce2d8fd568a2db1f9c4	6f46e1e08418d796a56a823fe170455302426a52d69df16ed2ded756dcc2ed15	RECEIVER_NAMING	Map the exact existing NAMING_MAP module and exported package; add attribution and modification notice.	Exports unchanged after package mapping; dependency remains java.base only.
++com.m3.tools.text.regex	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.regex/jdk/m3/tools/text/regex/RegexMatcher.java	9ce0420965fd6a6a10804165153547e7c18bcdb6	785521d5e3b035a0e72cb181081d50ff1fb77dce5e1e187b712c2e9f417fdb2a	7c01f9b2b62a7544de11f006658a1527c809b5275057cfdc3c34b2fb8aa579df	RECEIVER_NAMING	Map the exact existing NAMING_MAP package; add attribution and modification notice; preserve the complete donor implementation body.	Public declarations and implementation behavior retained.
++com.m3.tools.text.regex	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.regex/module-info.java	96cce6d52b0330ad90f5e936c55e433c7be64129	be6ed47927111245111c6c0ab29b56aeed2b222c746537e5bb6ced9574602dbb	0023883ea478a63d02ae09f029b61f32b4ef8314db250036f193656c306ca92f	RECEIVER_NAMING	Map the exact existing NAMING_MAP module and exported package; add attribution and modification notice.	Exports unchanged after package mapping; dependency remains java.base only.
++com.m3.tools.text.search	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.search/jdk/m3/tools/text/search/ExactSearch.java	2ea1ec40ffa8a6e8cbbfbb0b35b63647e920eb50	23af5034f0e0987bd73f38f4b90837815651f80b687a57472c05249e6a65606b	e0f1df2028c4f8098d86595a45545f2d48540004fbbf01adea1cb833e4b78b32	ARITHMETIC_BOUNDARY_FIX	Use long arithmetic for bounded output growth; stop after an empty-needle match at the final UTF-16 boundary before incrementing the cursor.	Same UTF-16 String.indexOf and overlapping-hit semantics; no behavior change for ordinary representable inputs.
++com.m3.tools.text.search	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.search/module-info.java	d1d303b8f2497f436787a90c4aad2635eb0757c7	b0eb12468254e4ab50ac8352bd905b106194522b1ce924fab7732ee1fbea7fc6	5f23b208d895f1cf05850e9f27edfbbe3a1a95cb82dcf6b240384aeab603d52f	RECEIVER_NAMING	Map the exact existing NAMING_MAP module and exported package; add attribution and modification notice.	Exports unchanged after package mapping; dependency remains java.base only.
++com.m3.tools.text.similarity	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.similarity/jdk/m3/tools/text/similarity/EditDistance.java	67b2354f1186ed7c9cf371eadc5dd48157aa5f43	b4753cd93cde9bc40c2b290a2f38b3af324107de29965593bf01bacf9c74d325	46046967b3f3d3a573b025e28f4ec23e320e3e8b16a47ce12623fa5658153115	RECEIVER_NAMING	Map the exact existing NAMING_MAP package; add attribution and modification notice; preserve the complete donor implementation body.	Public declarations and implementation behavior retained.
++com.m3.tools.text.similarity	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.similarity/module-info.java	d14657e9ade28cc4c7d15c2914ba523f525d89fa	e0ba999c69a2ea1346c238348da1fb1ef665a7497004be6362e06224730b63fa	8ae0bf4fc45876171c948e459feb1bfdcf4b540dc2903563b5fab9c49d31084b	RECEIVER_NAMING	Map the exact existing NAMING_MAP module and exported package; add attribution and modification notice.	Exports unchanged after package mapping; dependency remains java.base only.
++com.m3.tools.text.tokenize	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.tokenize/jdk/m3/tools/text/tokenize/WordTokenizer.java	a1a085a2a49b238ec44e5372bb86ae9b49083182	b5b3329eda9ebc88c06af1396eca6dbcaf3d2fa207ab348d0e3167351ca77ca5	5b8f130337dc6ae2ad813e8d7ce89dc6bcff2371eb9ac3f067aa83ea9fa37911	RECEIVER_NAMING	Map the exact existing NAMING_MAP package; add attribution and modification notice; preserve the complete donor implementation body.	Public declarations and implementation behavior retained.
++com.m3.tools.text.tokenize	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.tokenize/module-info.java	74297be2321cab7bb2b08073bd5b7e1f892075ee	469dacab44f20a930ee811e891ad02183892afac91b41b1151824511b31264e5	3ddebe14556ed8e4fd2e1aeed52bc2e7e099b988dbee9781c0cefba02b3b9253	RECEIVER_NAMING	Map the exact existing NAMING_MAP module and exported package; add attribution and modification notice.	Exports unchanged after package mapping; dependency remains java.base only.
++com.m3.tools.verify.sha256	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.verify.sha256/jdk/m3/tools/verify/sha256/Sha256.java	d68692f15eff3c563ba5f9b16ca0a791562c7abc	4b62b1715297f2a4feede8b251353495c2c5fae528b8868ff9ea3e3fc9b43493	b5a78b494c67bb6bc5773f2eb957f81336ff4c6c1eeb88796a922f01d8188d59	RECEIVER_NAMING	Map the exact existing NAMING_MAP package; add attribution and modification notice; preserve the complete donor implementation body.	Public declarations and implementation behavior retained.
++com.m3.tools.verify.sha256	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.verify.sha256/module-info.java	09bae72d83591c6d5ba86d22b4aac37a1cf511a3	1375388802276599d74c53e006d4a5836982bdfcf89a073fc79a926d3a8cda09	cdf42904dd792a820ea85c00edc9f989ebadef4017527986883b3e20f7cddf71	RECEIVER_NAMING	Map the exact existing NAMING_MAP module and exported package; add attribution and modification notice.	Exports unchanged after package mapping; dependency remains java.base only.
 diff --git a/m3/tooling/module-packs/cpu-tools/DONOR_CONTRACTS.md b/m3/tooling/module-packs/cpu-tools/DONOR_CONTRACTS.md
 new file mode 100644
 index 0000000..3627b19
@@ -561,38 +561,38 @@ index 0000000..ce6101f
 @@ -0,0 +1,34 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
 +# SPDX-License-Identifier: Apache-2.0
 +repository	revision	path	git_blob	source_sha256	target_path	target_module
-+hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.codec.varint/src/main/java/com/synexia/m3/codec/varint/VarInts.java	3f65cfa1511b8ed195f8ca2787922dfa92c5c7e7	a735065b9b480136d1f1bed3bf482b7c07325ba3b1e169797e977f7226d90df4	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.codec.varint/jdk/m3/tools/codec/varint/VarInts.java	com.m3.tools.codec.varint
-+hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.codec.varint/src/main/java/module-info.java	818176f33b59baf32fac4c33865791ff3d722d93	3d2a3687feff72f397996d84b1b218a651b59a26fcd8507844399360c2e8cfb3	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.codec.varint/module-info.java	com.m3.tools.codec.varint
-+hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.constraint.interval/src/main/java/com/synexia/m3/constraint/interval/Intervals.java	4f8bd5242215ca0c24135c25bec76e1893716c1c	e5e26a093813723a0c023f0f01a97cecac6f928becd196f4f3d15e52034b87d8	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.constraint.interval/jdk/m3/tools/constraint/interval/Intervals.java	com.m3.tools.constraint.interval
-+hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.constraint.interval/src/main/java/module-info.java	92bc39c91c0346eef45ff54f4a0f05f1a9f8a601	32dc7737e35c6ef27ad2f24ee42bb5bc077dd1d0ada466976b71ce932b44f842	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.constraint.interval/module-info.java	com.m3.tools.constraint.interval
-+hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.graph.paths/src/main/java/com/synexia/m3/graph/paths/ShortestPaths.java	97e80e094b6d24027a8882045040ed5085bf3d6a	26d19619a2a552159da96bf14f115890e90925e57f37e0b376ee47d99a63115b	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.paths/jdk/m3/tools/graph/paths/ShortestPaths.java	com.m3.tools.graph.paths
-+hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.graph.paths/src/main/java/module-info.java	42017ecfdb9e734ba420024f7731097cd5f49a52	3a280c9bdec397af0ed9b6d227f191734e10e886c33308f4639d2d47fe48de94	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.paths/module-info.java	com.m3.tools.graph.paths
-+hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.graph.topology/src/main/java/com/synexia/m3/graph/topology/TopologicalOrder.java	de967f745c15c0d240b445c50d3bb23dd973242d	3f240e4c2f7c4ee9d8ce482b232b12d87c0ab8dd6beca74f3ef14bd34ac18b6a	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.topology/jdk/m3/tools/graph/topology/TopologicalOrder.java	com.m3.tools.graph.topology
-+hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.graph.topology/src/main/java/module-info.java	a43a544a3cbb4029e9953e5007888e63c60a578a	16b5df61a39db04915b40aa533b5d4a9a7312c3491c15c870252ec042a029b39	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.topology/module-info.java	com.m3.tools.graph.topology
-+hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.plan.priority/src/main/java/com/synexia/m3/plan/priority/StablePriorityQueue.java	1852108298f43d6687ada95bfc46e9949681fce1	8f5cf4f6fa50ab5f58d2af4620026bcdffa029f5392bdc8376cee589118f51a1	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.plan.priority/jdk/m3/tools/plan/priority/StablePriorityQueue.java	com.m3.tools.plan.priority
-+hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.plan.priority/src/main/java/module-info.java	7bb5b64a564a19144fd05b3fc1167eb1b017ad75	703f6607f6dfcf288e4da59c717bb886d684a1f0671fd01d790c89de719a1c11	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.plan.priority/module-info.java	com.m3.tools.plan.priority
-+hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.stats.streaming/src/main/java/com/synexia/m3/stats/streaming/RunningStatistics.java	1bf87833c669c085b57362be12875ed0d3ce9c2c	85f54daebcdfb566e4f79b23789320c68f26d78319765a63292de1ac0f725722	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.stats.streaming/jdk/m3/tools/stats/streaming/RunningStatistics.java	com.m3.tools.stats.streaming
-+hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.stats.streaming/src/main/java/module-info.java	f2d55827beaa6137f3d76f25105a1acb9a2bbaa2	d9ae7916edfd55b581a083a4890eaa01f33fc1fc3eca3f1f1478f50d64494545	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.stats.streaming/module-info.java	com.m3.tools.stats.streaming
-+hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.diff/src/main/java/com/synexia/m3/text/diff/TextDelta.java	c8e6ca8d2ad42bd7319c75f1c036886f75c5e2f8	83eaf22e7b2badfb9e0cdaef1168986160cce5d2acbd7e083dcfe132a6a62038	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.diff/jdk/m3/tools/text/diff/TextDelta.java	com.m3.tools.text.diff
-+hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.diff/src/main/java/module-info.java	6ee52bab6343b56c88881a31dab5d827658ae7e8	eb8771671a8fbd809a0fbac4b82510f06886b91d5287b7df2ab90263c5c0e8a4	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.diff/module-info.java	com.m3.tools.text.diff
-+hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.frequency/src/main/java/com/synexia/m3/text/frequency/TermFrequency.java	159c605dd4065f1f87ebd9426244ab8a7ab520af	d089476990d37b22478ae9774394f59796d3de1e21bb7a48d8a973786b290d03	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.frequency/jdk/m3/tools/text/frequency/TermFrequency.java	com.m3.tools.text.frequency
-+hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.frequency/src/main/java/module-info.java	15849e5a401b89d15b733f86428fa2716a7baa0b	fa0c8fae51019f49ae55833ac39ca1dda9a61ec9918106d129126ed62dfe3966	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.frequency/module-info.java	com.m3.tools.text.frequency
-+hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.index/src/main/java/com/synexia/m3/text/index/InvertedIndex.java	9a8bd9b558db7a86fc72acd59b2d081aa487486c	7092e7a42ef0d6b5d714019d65b56c5198c7d5d406f16261ea9f90c5b0992544	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.index/jdk/m3/tools/text/index/InvertedIndex.java	com.m3.tools.text.index
-+hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.index/src/main/java/module-info.java	6256b5dd173fccb9f00ed2e517d27f151233e853	18b5309194368d2ff96b5bb323a17d9872b45b174b3e843e1bd74743aa1c3a8e	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.index/module-info.java	com.m3.tools.text.index
-+hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.ngram/src/main/java/com/synexia/m3/text/ngram/NGrams.java	8e04dc00048f18715177d30d6e4417f880a070b3	6017b720e58bb35f1bcbdb9a89ec21ac3a9f4291cf7cc2aa8f75f17d9653c199	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.ngram/jdk/m3/tools/text/ngram/NGrams.java	com.m3.tools.text.ngram
-+hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.ngram/src/main/java/module-info.java	12e39e45dbc92d9f9a7620023f4979ef0f1983ae	ab456e8aac9af20efa79f495e6237f537d6012f24adee7f93dd25b48908f8d1c	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.ngram/module-info.java	com.m3.tools.text.ngram
-+hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.normalize/src/main/java/com/synexia/m3/text/normalize/UnicodeNormalizer.java	c17b0391bb6c0b6904a6ca01fb18ccc8c9e5ac46	c0acf2b5b9815423642672431256487da2a41b23d89d2da10388ba59834996e1	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.normalize/jdk/m3/tools/text/normalize/UnicodeNormalizer.java	com.m3.tools.text.normalize
-+hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.normalize/src/main/java/module-info.java	5efad2f1e8ff967d71ea83fc95737ca4209d0150	3bb2b02d0c8d133ddcf09cd3e6d8d73b9b89267c67d02ce2d8fd568a2db1f9c4	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.normalize/module-info.java	com.m3.tools.text.normalize
-+hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.regex/src/main/java/com/synexia/m3/text/regex/RegexMatcher.java	9ce0420965fd6a6a10804165153547e7c18bcdb6	785521d5e3b035a0e72cb181081d50ff1fb77dce5e1e187b712c2e9f417fdb2a	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.regex/jdk/m3/tools/text/regex/RegexMatcher.java	com.m3.tools.text.regex
-+hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.regex/src/main/java/module-info.java	96cce6d52b0330ad90f5e936c55e433c7be64129	be6ed47927111245111c6c0ab29b56aeed2b222c746537e5bb6ced9574602dbb	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.regex/module-info.java	com.m3.tools.text.regex
-+hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.search/src/main/java/com/synexia/m3/text/search/ExactSearch.java	2ea1ec40ffa8a6e8cbbfbb0b35b63647e920eb50	23af5034f0e0987bd73f38f4b90837815651f80b687a57472c05249e6a65606b	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.search/jdk/m3/tools/text/search/ExactSearch.java	com.m3.tools.text.search
-+hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.search/src/main/java/module-info.java	d1d303b8f2497f436787a90c4aad2635eb0757c7	b0eb12468254e4ab50ac8352bd905b106194522b1ce924fab7732ee1fbea7fc6	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.search/module-info.java	com.m3.tools.text.search
-+hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.similarity/src/main/java/com/synexia/m3/text/similarity/EditDistance.java	67b2354f1186ed7c9cf371eadc5dd48157aa5f43	b4753cd93cde9bc40c2b290a2f38b3af324107de29965593bf01bacf9c74d325	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.similarity/jdk/m3/tools/text/similarity/EditDistance.java	com.m3.tools.text.similarity
-+hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.similarity/src/main/java/module-info.java	d14657e9ade28cc4c7d15c2914ba523f525d89fa	e0ba999c69a2ea1346c238348da1fb1ef665a7497004be6362e06224730b63fa	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.similarity/module-info.java	com.m3.tools.text.similarity
-+hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.tokenize/src/main/java/com/synexia/m3/text/tokenize/WordTokenizer.java	a1a085a2a49b238ec44e5372bb86ae9b49083182	b5b3329eda9ebc88c06af1396eca6dbcaf3d2fa207ab348d0e3167351ca77ca5	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.tokenize/jdk/m3/tools/text/tokenize/WordTokenizer.java	com.m3.tools.text.tokenize
-+hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.tokenize/src/main/java/module-info.java	74297be2321cab7bb2b08073bd5b7e1f892075ee	469dacab44f20a930ee811e891ad02183892afac91b41b1151824511b31264e5	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.tokenize/module-info.java	com.m3.tools.text.tokenize
-+hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.verify.sha256/src/main/java/com/synexia/m3/verify/sha256/Sha256.java	d68692f15eff3c563ba5f9b16ca0a791562c7abc	4b62b1715297f2a4feede8b251353495c2c5fae528b8868ff9ea3e3fc9b43493	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.verify.sha256/jdk/m3/tools/verify/sha256/Sha256.java	com.m3.tools.verify.sha256
-+hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.verify.sha256/src/main/java/module-info.java	09bae72d83591c6d5ba86d22b4aac37a1cf511a3	1375388802276599d74c53e006d4a5836982bdfcf89a073fc79a926d3a8cda09	m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.verify.sha256/module-info.java	com.m3.tools.verify.sha256
++hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.codec.varint/src/main/java/com/synexia/m3/codec/varint/VarInts.java	3f65cfa1511b8ed195f8ca2787922dfa92c5c7e7	a735065b9b480136d1f1bed3bf482b7c07325ba3b1e169797e977f7226d90df4	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.codec.varint/jdk/m3/tools/codec/varint/VarInts.java	com.m3.tools.codec.varint
++hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.codec.varint/src/main/java/module-info.java	818176f33b59baf32fac4c33865791ff3d722d93	3d2a3687feff72f397996d84b1b218a651b59a26fcd8507844399360c2e8cfb3	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.codec.varint/module-info.java	com.m3.tools.codec.varint
++hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.constraint.interval/src/main/java/com/synexia/m3/constraint/interval/Intervals.java	4f8bd5242215ca0c24135c25bec76e1893716c1c	e5e26a093813723a0c023f0f01a97cecac6f928becd196f4f3d15e52034b87d8	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.constraint.interval/jdk/m3/tools/constraint/interval/Intervals.java	com.m3.tools.constraint.interval
++hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.constraint.interval/src/main/java/module-info.java	92bc39c91c0346eef45ff54f4a0f05f1a9f8a601	32dc7737e35c6ef27ad2f24ee42bb5bc077dd1d0ada466976b71ce932b44f842	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.constraint.interval/module-info.java	com.m3.tools.constraint.interval
++hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.graph.paths/src/main/java/com/synexia/m3/graph/paths/ShortestPaths.java	97e80e094b6d24027a8882045040ed5085bf3d6a	26d19619a2a552159da96bf14f115890e90925e57f37e0b376ee47d99a63115b	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.paths/jdk/m3/tools/graph/paths/ShortestPaths.java	com.m3.tools.graph.paths
++hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.graph.paths/src/main/java/module-info.java	42017ecfdb9e734ba420024f7731097cd5f49a52	3a280c9bdec397af0ed9b6d227f191734e10e886c33308f4639d2d47fe48de94	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.paths/module-info.java	com.m3.tools.graph.paths
++hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.graph.topology/src/main/java/com/synexia/m3/graph/topology/TopologicalOrder.java	de967f745c15c0d240b445c50d3bb23dd973242d	3f240e4c2f7c4ee9d8ce482b232b12d87c0ab8dd6beca74f3ef14bd34ac18b6a	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.topology/jdk/m3/tools/graph/topology/TopologicalOrder.java	com.m3.tools.graph.topology
++hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.graph.topology/src/main/java/module-info.java	a43a544a3cbb4029e9953e5007888e63c60a578a	16b5df61a39db04915b40aa533b5d4a9a7312c3491c15c870252ec042a029b39	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.topology/module-info.java	com.m3.tools.graph.topology
++hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.plan.priority/src/main/java/com/synexia/m3/plan/priority/StablePriorityQueue.java	1852108298f43d6687ada95bfc46e9949681fce1	8f5cf4f6fa50ab5f58d2af4620026bcdffa029f5392bdc8376cee589118f51a1	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.plan.priority/jdk/m3/tools/plan/priority/StablePriorityQueue.java	com.m3.tools.plan.priority
++hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.plan.priority/src/main/java/module-info.java	7bb5b64a564a19144fd05b3fc1167eb1b017ad75	703f6607f6dfcf288e4da59c717bb886d684a1f0671fd01d790c89de719a1c11	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.plan.priority/module-info.java	com.m3.tools.plan.priority
++hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.stats.streaming/src/main/java/com/synexia/m3/stats/streaming/RunningStatistics.java	1bf87833c669c085b57362be12875ed0d3ce9c2c	85f54daebcdfb566e4f79b23789320c68f26d78319765a63292de1ac0f725722	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.stats.streaming/jdk/m3/tools/stats/streaming/RunningStatistics.java	com.m3.tools.stats.streaming
++hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.stats.streaming/src/main/java/module-info.java	f2d55827beaa6137f3d76f25105a1acb9a2bbaa2	d9ae7916edfd55b581a083a4890eaa01f33fc1fc3eca3f1f1478f50d64494545	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.stats.streaming/module-info.java	com.m3.tools.stats.streaming
++hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.diff/src/main/java/com/synexia/m3/text/diff/TextDelta.java	c8e6ca8d2ad42bd7319c75f1c036886f75c5e2f8	83eaf22e7b2badfb9e0cdaef1168986160cce5d2acbd7e083dcfe132a6a62038	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.diff/jdk/m3/tools/text/diff/TextDelta.java	com.m3.tools.text.diff
++hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.diff/src/main/java/module-info.java	6ee52bab6343b56c88881a31dab5d827658ae7e8	eb8771671a8fbd809a0fbac4b82510f06886b91d5287b7df2ab90263c5c0e8a4	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.diff/module-info.java	com.m3.tools.text.diff
++hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.frequency/src/main/java/com/synexia/m3/text/frequency/TermFrequency.java	159c605dd4065f1f87ebd9426244ab8a7ab520af	d089476990d37b22478ae9774394f59796d3de1e21bb7a48d8a973786b290d03	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.frequency/jdk/m3/tools/text/frequency/TermFrequency.java	com.m3.tools.text.frequency
++hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.frequency/src/main/java/module-info.java	15849e5a401b89d15b733f86428fa2716a7baa0b	fa0c8fae51019f49ae55833ac39ca1dda9a61ec9918106d129126ed62dfe3966	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.frequency/module-info.java	com.m3.tools.text.frequency
++hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.index/src/main/java/com/synexia/m3/text/index/InvertedIndex.java	9a8bd9b558db7a86fc72acd59b2d081aa487486c	7092e7a42ef0d6b5d714019d65b56c5198c7d5d406f16261ea9f90c5b0992544	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.index/jdk/m3/tools/text/index/InvertedIndex.java	com.m3.tools.text.index
++hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.index/src/main/java/module-info.java	6256b5dd173fccb9f00ed2e517d27f151233e853	18b5309194368d2ff96b5bb323a17d9872b45b174b3e843e1bd74743aa1c3a8e	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.index/module-info.java	com.m3.tools.text.index
++hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.ngram/src/main/java/com/synexia/m3/text/ngram/NGrams.java	8e04dc00048f18715177d30d6e4417f880a070b3	6017b720e58bb35f1bcbdb9a89ec21ac3a9f4291cf7cc2aa8f75f17d9653c199	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.ngram/jdk/m3/tools/text/ngram/NGrams.java	com.m3.tools.text.ngram
++hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.ngram/src/main/java/module-info.java	12e39e45dbc92d9f9a7620023f4979ef0f1983ae	ab456e8aac9af20efa79f495e6237f537d6012f24adee7f93dd25b48908f8d1c	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.ngram/module-info.java	com.m3.tools.text.ngram
++hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.normalize/src/main/java/com/synexia/m3/text/normalize/UnicodeNormalizer.java	c17b0391bb6c0b6904a6ca01fb18ccc8c9e5ac46	c0acf2b5b9815423642672431256487da2a41b23d89d2da10388ba59834996e1	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.normalize/jdk/m3/tools/text/normalize/UnicodeNormalizer.java	com.m3.tools.text.normalize
++hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.normalize/src/main/java/module-info.java	5efad2f1e8ff967d71ea83fc95737ca4209d0150	3bb2b02d0c8d133ddcf09cd3e6d8d73b9b89267c67d02ce2d8fd568a2db1f9c4	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.normalize/module-info.java	com.m3.tools.text.normalize
++hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.regex/src/main/java/com/synexia/m3/text/regex/RegexMatcher.java	9ce0420965fd6a6a10804165153547e7c18bcdb6	785521d5e3b035a0e72cb181081d50ff1fb77dce5e1e187b712c2e9f417fdb2a	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.regex/jdk/m3/tools/text/regex/RegexMatcher.java	com.m3.tools.text.regex
++hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.regex/src/main/java/module-info.java	96cce6d52b0330ad90f5e936c55e433c7be64129	be6ed47927111245111c6c0ab29b56aeed2b222c746537e5bb6ced9574602dbb	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.regex/module-info.java	com.m3.tools.text.regex
++hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.search/src/main/java/com/synexia/m3/text/search/ExactSearch.java	2ea1ec40ffa8a6e8cbbfbb0b35b63647e920eb50	23af5034f0e0987bd73f38f4b90837815651f80b687a57472c05249e6a65606b	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.search/jdk/m3/tools/text/search/ExactSearch.java	com.m3.tools.text.search
++hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.search/src/main/java/module-info.java	d1d303b8f2497f436787a90c4aad2635eb0757c7	b0eb12468254e4ab50ac8352bd905b106194522b1ce924fab7732ee1fbea7fc6	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.search/module-info.java	com.m3.tools.text.search
++hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.similarity/src/main/java/com/synexia/m3/text/similarity/EditDistance.java	67b2354f1186ed7c9cf371eadc5dd48157aa5f43	b4753cd93cde9bc40c2b290a2f38b3af324107de29965593bf01bacf9c74d325	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.similarity/jdk/m3/tools/text/similarity/EditDistance.java	com.m3.tools.text.similarity
++hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.similarity/src/main/java/module-info.java	d14657e9ade28cc4c7d15c2914ba523f525d89fa	e0ba999c69a2ea1346c238348da1fb1ef665a7497004be6362e06224730b63fa	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.similarity/module-info.java	com.m3.tools.text.similarity
++hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.tokenize/src/main/java/com/synexia/m3/text/tokenize/WordTokenizer.java	a1a085a2a49b238ec44e5372bb86ae9b49083182	b5b3329eda9ebc88c06af1396eca6dbcaf3d2fa207ab348d0e3167351ca77ca5	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.tokenize/jdk/m3/tools/text/tokenize/WordTokenizer.java	com.m3.tools.text.tokenize
++hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.text.tokenize/src/main/java/module-info.java	74297be2321cab7bb2b08073bd5b7e1f892075ee	469dacab44f20a930ee811e891ad02183892afac91b41b1151824511b31264e5	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.tokenize/module-info.java	com.m3.tools.text.tokenize
++hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.verify.sha256/src/main/java/com/synexia/m3/verify/sha256/Sha256.java	d68692f15eff3c563ba5f9b16ca0a791562c7abc	4b62b1715297f2a4feede8b251353495c2c5fae528b8868ff9ea3e3fc9b43493	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.verify.sha256/jdk/m3/tools/verify/sha256/Sha256.java	com.m3.tools.verify.sha256
++hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	synexia-m3-jmods/modules/com.synexia.m3.verify.sha256/src/main/java/module-info.java	09bae72d83591c6d5ba86d22b4aac37a1cf511a3	1375388802276599d74c53e006d4a5836982bdfcf89a073fc79a926d3a8cda09	make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.verify.sha256/module-info.java	com.m3.tools.verify.sha256
 diff --git a/m3/tooling/module-packs/cpu-tools/DONOR_QUALIFICATION.md b/m3/tooling/module-packs/cpu-tools/DONOR_QUALIFICATION.md
 new file mode 100644
 index 0000000..ef6cbd2
@@ -933,7 +933,7 @@ index 0000000..4a7e0f9
 +```bash
 +M3_CPU_JDK=/absolute/path/to/m3-java-21-image
 +mvn -B -ntp clean verify \
-+  -f m3/tooling/module-packs/cpu-tools/pom.xml \
++  -f make/m3/tooling/module-packs/cpu-tools/pom.xml \
 +  -Dm3.jdk="$M3_CPU_JDK"
 +```
 +
@@ -943,14 +943,14 @@ index 0000000..4a7e0f9
 +directory is refused rather than replaced. The equivalent direct command is:
 +
 +```bash
-+python3 -B m3/tooling/module-packs/cpu-tools/build.py \
++python3 -B make/m3/tooling/module-packs/cpu-tools/build.py \
 +  --jdk-home "$M3_CPU_JDK" \
-+  --out m3/tooling/module-packs/cpu-tools/target/cpu-tools-image
++  --out make/m3/tooling/module-packs/cpu-tools/target/cpu-tools-image
 +```
 +
 +The driver compiles source with `-source 21 -target 21`, compiles the original
 +`text-tools/native/m3textio.c`, and calls the existing
-+`m3/tooling/jmod-recipes/tools/jmod_pack.py` for JMOD creation and image linking.
++`make/m3/tooling/jmod-recipes/tools/jmod_pack.py` for JMOD creation and image linking.
 +There is no second packager. The staging legal directory preserves both
 +`text-tools/legal` and `cpu-tools/legal` under distinct names before the
 +existing packager includes them in the JMODs. It then reads every notice from
@@ -963,7 +963,7 @@ index 0000000..4a7e0f9
 +After successful qualification, invoke the linked image directly:
 +
 +```bash
-+M3_CPU_IMAGE=m3/tooling/module-packs/cpu-tools/target/cpu-tools-image/pack/image
++M3_CPU_IMAGE=make/m3/tooling/module-packs/cpu-tools/target/cpu-tools-image/pack/image
 +"$M3_CPU_IMAGE/bin/java" -m com.m3.tools.cpu/com.m3.tools.cpu.CpuToolsCli --list
 +"$M3_CPU_IMAGE/bin/java" -m com.m3.tools.cpu/com.m3.tools.cpu.CpuToolsCli --self-test
 +"$M3_CPU_IMAGE/bin/java" -m com.m3.tools.cpu/com.m3.tools.cpu.CpuToolsCli \
@@ -1066,8 +1066,8 @@ index 0000000..4a7e0f9
 +The task-local [TASK_PACKET.json](TASK_PACKET.json), [PROVENANCE.tsv](PROVENANCE.tsv),
 +[VERIFY_CONTRACT.tsv](VERIFY_CONTRACT.tsv) and [OUTPUT_CONTRACT.tsv](OUTPUT_CONTRACT.tsv)
 +describe scope and evidence obligations. The additive naming fragment is
-+`m3/docs/name-mapping.d/m3-cpu-tools-jmod-20261018.json`. Generated task evidence is published under
-+`m3/evidence/cpu-tools-jmod-20261018/`; it records actual command outcomes
++`doc/m3/name-mapping.d/m3-cpu-tools-jmod-20261018.json`. Generated task evidence is published under
++`make/m3/evidence/cpu-tools-jmod-20261018/`; it records actual command outcomes
 +without rewriting sealed source contracts. Existing global lineage,
 +historical recipes/receipts and per-file OpenJDK/third-party licensing remain
 +their own authorities.
@@ -1136,7 +1136,7 @@ index 0000000..4fe88f4
 +{
 +  "task_packet": "active",
 +  "task_id": "m3-cpu-tools-jmod-20261018",
-+  "source_doc": "m3/docs/community-capability-admission.md",
++  "source_doc": "doc/m3/community-capability-admission.md",
 +  "invariant_id": "M3-COMMUNITY-1-2-4",
 +  "base_commit": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
 +  "canonical_repository": "hsoliwal/com.synexia",
@@ -1151,12 +1151,12 @@ index 0000000..4fe88f4
 +    "shard_index": 0
 +  },
 +  "targets": [
-+    "m3/tooling/module-packs/cpu-tools/**",
-+    "m3/tooling/module-packs/text-tools/src/jdk.m3.io/jdk/m3/io/M3File.java",
-+    "m3/docs/name-mapping.d/m3-cpu-tools-jmod-20261018.json",
-+    "m3/tooling/module-packs/text-tools/build.py",
-+    "m3/tooling/module-packs/text-tools/README.md",
-+    "m3/evidence/cpu-tools-jmod-20261018/**"
++    "make/m3/tooling/module-packs/cpu-tools/**",
++    "make/m3/tooling/module-packs/text-tools/src/jdk.m3.io/jdk/m3/io/M3File.java",
++    "doc/m3/name-mapping.d/m3-cpu-tools-jmod-20261018.json",
++    "make/m3/tooling/module-packs/text-tools/build.py",
++    "make/m3/tooling/module-packs/text-tools/README.md",
++    "make/m3/evidence/cpu-tools-jmod-20261018/**"
 +  ],
 +  "invariant_locks": {
 +    "JDK_PRODUCT_SOURCE": "LOCKED",
@@ -1172,7 +1172,7 @@ index 0000000..4fe88f4
 +    "task-local build, tests, legal notices, naming and receipts",
 +    "explicit fresh-output image assembly through existing packager",
 +    "existing text-tools build source/target mode and documentation for the additive M3File custom-JDK API",
-+    "generated tool evidence under m3/evidence/cpu-tools-jmod-20261018; source payload remains sealed"
++    "generated tool evidence under make/m3/evidence/cpu-tools-jmod-20261018; source payload remains sealed"
 +  ],
 +  "forbidden": [
 +    "editing generated production sources outside canonical recipe",
@@ -1473,8 +1473,8 @@ index 0000000..3ff88ce
 +
 +def qualify(args):
 +    repo = args.repo_root.resolve(strict=True)
-+    owner = repo / "m3/tooling/module-packs/cpu-tools"
-+    existing = repo / "m3/tooling/module-packs/text-tools"
++    owner = repo / "make/m3/tooling/module-packs/cpu-tools"
++    existing = repo / "make/m3/tooling/module-packs/text-tools"
 +    source_roots = (existing / "src", owner / "src")
 +    native_source = required_file(existing / "native/m3textio.c")
 +    legal_roots = (("text-tools", existing / "legal"), ("cpu-tools", owner / "legal"))
@@ -1488,7 +1488,7 @@ index 0000000..3ff88ce
 +            if path.is_file():
 +                notices.append(required_file(path))
 +    notices = tuple(notices)
-+    packager = required_file(repo / "m3/tooling/jmod-recipes/tools/jmod_pack.py")
++    packager = required_file(repo / "make/m3/tooling/jmod-recipes/tools/jmod_pack.py")
 +    packager_support = required_file(packager.with_name("jmod_image.py"))
 +    fixture_files = tuple(required_file(owner / "fixtures" / (name + ".java")) for name in FIXTURES)
 +    existing_smoke = required_file(existing / "fixtures/src/test/java/M3TextSmoke.java")
@@ -2210,7 +2210,7 @@ index 107484d..6b6c675 100644
 +the actual supplied image with `javap` before compiling any module sources.
  
  ```sh
- python3 m3/tooling/module-packs/text-tools/build.py \
+ python3 make/m3/tooling/module-packs/text-tools/build.py \
 @@ -24,15 +30,16 @@
  ```
  

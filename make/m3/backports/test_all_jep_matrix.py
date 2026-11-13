@@ -117,14 +117,14 @@ class AllJepMatrixTest(unittest.TestCase):
     def test_output_fence_is_reused_not_bypassed(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
-            out = root / "m3/backports/target/all-jep-matrix.tsv"
+            out = root / "make/m3/backports/target/all-jep-matrix.tsv"
             module._write(root, out, module.render_tsv(self.matrix()))
             self.assertTrue(out.is_file())
             with self.assertRaises(ValueError):
                 module._write(root, root / "src/java.base/share/classes/java/lang/String.java", "illegal")
             source = root / "source.txt"
             source.write_text("preserve")
-            link = root / "m3/backports/target/link.tsv"
+            link = root / "make/m3/backports/target/link.tsv"
             link.hardlink_to(source)
             with self.assertRaises(ValueError):
                 module._write(root, link, "altered")

@@ -20,7 +20,7 @@ import xml.etree.ElementTree as ET
 
 FORK_COMMIT = '2993571eedbe96e06a737eaa8ae47cf112b255de'
 BASE_COMMIT = '2779aba3f98f31c324be43f731be7914e1a05935'
-PACK = Path('m3/tooling/module-packs/parser')
+PACK = Path('make/m3/tooling/module-packs/parser')
 JAVA = PACK / 'src/main/java/jdk/m3/parser'
 TEST = PACK / 'real-providers/src/test/java/jdk/m3/parser/tests/M3Maven4ProviderContract.java'
 PREIMAGES = {

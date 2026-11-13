@@ -10,7 +10,7 @@
   <properties>
     <maven.compiler.release>21</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <root>${project.basedir}/../../../..</root>
+    <root>${project.basedir}/../../../../..</root>
   </properties>
   <dependencies>
     <dependency>
@@ -37,11 +37,11 @@
     </dependency>
   </dependencies>
   <build>
-    <sourceDirectory>${root}/m3/tooling/migration-recipes/src/main/java</sourceDirectory>
+    <sourceDirectory>${root}/make/m3/tooling/migration-recipes/src/main/java</sourceDirectory>
     <testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
     <resources>
       <resource>
-        <directory>${root}/m3/tooling/migration-recipes/src/main/resources</directory>
+        <directory>${root}/make/m3/tooling/migration-recipes/src/main/resources</directory>
         <includes>
           <include>jdk/internal/m3/rewrite/hash-pinned-java/m3-long-dag-doop-20261017/**</include>
           <include>META-INF/rewrite/m3-long-dag-doop-20261017.yml</include>

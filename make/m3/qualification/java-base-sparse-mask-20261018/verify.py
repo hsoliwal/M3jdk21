@@ -3,7 +3,7 @@
 """Fail closed on the exact M3JDK21 native java.base sparse-mask source postimage."""
 from pathlib import Path
 import hashlib, sys
-ROOT = Path(__file__).resolve().parents[3]
+ROOT = Path(__file__).resolve().parents[4]
 TASK = Path(__file__).resolve().parent
 OWNER = "src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java"
 TEMPLATE = TASK / "recipe/src/main/resources/jdk/internal/m3/rewrite/m3-array-mask-sparse-20261018/M3CollectionMaskCompactor.java.txt"

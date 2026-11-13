@@ -7,7 +7,7 @@
 #   1. javac -h of the donor closure and of the host owner (M3IndexMaskCompactor + the relocated proof): the five lane
 #      prototypes of the two JNI headers must be identical modulo the class name.
 #   2. gcc of the donor kernel (libdonor.so) and of the module library libm3_collections_mask.so (m3_index_mask_compactor.c
-#      + m3_index_mask_window.c, the two sources of the library as m3/collections/qualification/full-java-jni-20261018/
+#      + m3_index_mask_window.c, the two sources of the library as make/m3/collections/qualification/full-java-jni-20261018/
 #      verify.py and doops-entryless-verify.sh build it; the module has no CMake for it) with the donor's flags
 #      -std=c17 -O2 -Wall -Wextra -Wpedantic -Werror -fPIC -shared, both through -include of their javac -h header
 #      (prototype check); 5 lane exports + 16 host exports (15 existing + laneKernelAbiNative) in the module library.

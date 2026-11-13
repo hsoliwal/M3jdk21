@@ -123,12 +123,12 @@
       "after": "8f49f646b0b8b56b6dc70212f22366bb16112df91f8a6e7f0e86f41d545f655e"
     },
     {
-      "path": "m3/runtime-integration/check-m3string-invariants.py",
+      "path": "make/m3/runtime-integration/check-m3string-invariants.py",
       "before": "4e39c1800980db32fc0e8c2ec9d2f70dc4a2d5be2cfe6b89aa6291bd598a886e",
       "after": "0c15318fe636a884f7e4ea5bde34e2cae320c816d8603dfb4dcaf53738ead98d"
     },
     {
-      "path": "m3/runtime-integration/test_string_completeness.py",
+      "path": "make/m3/runtime-integration/test_string_completeness.py",
       "before": "ABSENT",
       "after": "083e7b57a1ddec9b517668e742a69d8291b11de61450542165380f923cd19358"
     }

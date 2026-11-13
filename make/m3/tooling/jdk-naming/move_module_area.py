@@ -16,7 +16,7 @@ src/<module>, keeping its package names (they are API), with `git mv` so history
 Writes: src/<module>/share/classes/module-info.java (created, or its exports extended), make/modules/<module>/Java.gmk
 (if absent), the PLATFORM_MODULES line of make/conf/module-loader-map.conf (if absent), the Maven bridge pom at
 m3/<area>/pom.xml (same artifact, sources = the moved package directories, so every Maven consumer keeps building),
-and m3/tooling/jdk-naming/PACKAGE_BASELINE.tsv without the area's REAL root and product packages (removals pass the
+and make/m3/tooling/jdk-naming/PACKAGE_BASELINE.tsv without the area's REAL root and product packages (removals pass the
 gate). Evidence directories (qualification/, recipe/, docs/, *.md, *.json) are NOT moved by this step: they stay
 under the bridge module for the evidence-store step. Prints one line per move. Idempotent for the writes; refuses a
 second run once the sources are gone. usage: python3 -I move_module_area.py <repo root> <area> <module> [--dry-run]
@@ -40,7 +40,7 @@ SRC = ROOT / "m3" / AREA
 CLASSES = ROOT / "src" / MODULE / "share" / "classes"
 NATIVE = ROOT / "src" / MODULE / "share" / "native" / f"libm3{AREA}"
 MAKE = ROOT / "make" / "m3" / AREA
-BASELINE = ROOT / "m3" / "tooling" / "jdk-naming" / "PACKAGE_BASELINE.tsv"
+BASELINE = ROOT / "make" / "m3" / "tooling" / "jdk-naming" / "PACKAGE_BASELINE.tsv"
 
 
 def sh(*args: str) -> str:
@@ -128,7 +128,7 @@ def keep_pom_bridge(pom: str) -> None:
         execs += goal("jdk-module-test-resources", "add-test-resource", "resources",
                       f"                <resource>\n                  <directory>{rel}/test/jdk/{first_pkg_path}/resources</directory>\n"
                       f"                </resource>\n")
-    plugin = ("      <!-- MOVE_TO_JDK_MODULE v3 (keep-pom mode, m3/tooling/jdk-naming/move_module_area.py): the sources live in the\n"
+    plugin = ("      <!-- MOVE_TO_JDK_MODULE v3 (keep-pom mode, make/m3/tooling/jdk-naming/move_module_area.py): the sources live in the\n"
               f"           JDK module src/{MODULE} and the tests in test/jdk; this pom keeps its own configuration and adds them. -->\n"
               "      <plugin>\n        <groupId>org.codehaus.mojo</groupId>\n        <artifactId>build-helper-maven-plugin</artifactId>\n"
               f"        <version>3.6.1</version>\n        <executions>\n{execs}        </executions>\n      </plugin>\n")
@@ -213,12 +213,12 @@ if cmake_text is not None:
     body = re.sub(r"(?<![\w/$}])tests/([A-Za-z0-9_]+\.c)", r"${M3_NATIVE_TESTS}/\1", cmake_text)
     body = re.sub(r"(?<![\w/$}])([A-Za-z0-9_]+\.c)(?=[\s)])", r"${M3_NATIVE}/\1", body)
     body = body.replace("${CMAKE_CURRENT_SOURCE_DIR}/include", "${M3_NATIVE}/include")
-    head = ("# Re-pointed by m3/tooling/jdk-naming/move_module_area.py (MOVE_TO_JDK_MODULE v2): the sources live in the\n"
+    head = ("# Re-pointed by make/m3/tooling/jdk-naming/move_module_area.py (MOVE_TO_JDK_MODULE v2): the sources live in the\n"
             f"# JDK module src/{MODULE}/share/native/libm3{AREA} and the C unit tests in test/jdk/{first_pkg_path}/native.\n"
             f"set(M3_NATIVE ${{CMAKE_CURRENT_SOURCE_DIR}}/../../../src/{MODULE}/share/native/libm3{AREA})\n"
             f"set(M3_NATIVE_TESTS ${{CMAKE_CURRENT_SOURCE_DIR}}/../../../test/jdk/{first_pkg_path}/native)\n"
             "# The shared JNI core header of m3/native (the moved sources include it as m3_jni_core.h).\n"
-            "include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../../m3/native/include)\n")
+            "include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../../../m3/native/include)\n")
     body = re.sub(r"(^cmake_minimum_required\([^\n]*\)\n(?:project\([^\n]*\)\n)?)", r"\1" + head.replace("\\", "\\\\"), body, count=1, flags=re.M)
     write(MAKE / "CMakeLists.txt", body)
 
@@ -233,7 +233,7 @@ if descriptor.exists():
 else:
     write(descriptor, "// Copyright 2026 Hitesh Soliwal and contributors\n// SPDX-License-Identifier: Apache-2.0\n"
           f"/**\n * {MODULE}: the M3 collections lane (arrays, collections, algorithms) as one JDK module, moved area by area\n"
-          " * from the m3/ side tree by m3/tooling/jdk-naming/move_module_area.py (approved layout 2026-11-08). Package\n"
+          " * from the m3/ side tree by make/m3/tooling/jdk-naming/move_module_area.py (approved layout 2026-11-08). Package\n"
           " * names are unchanged (they are API); each area's Maven module becomes a bridge pom over these sources until\n"
           " * every consumer has moved.\n */\n"
           f"module {MODULE} {{\n" + "".join(f"    exports {e};\n" for e in exports) + "}\n")
@@ -243,7 +243,7 @@ gmk = ROOT / "make/modules" / MODULE / "Java.gmk"
 if not gmk.exists():
     write(gmk, "#\n# SPDX-License-Identifier: Apache-2.0\n# Copyright 2026 Hitesh Soliwal and contributors\n#\n\n"
           f"# {MODULE}: M3 product code moved from the m3/ Maven modules (approved layout 2026-11-08) by\n"
-          "# m3/tooling/jdk-naming/move_module_area.py. The Maven modules compiled with -Xlint:all,-module -Werror; the module\n"
+          "# make/m3/tooling/jdk-naming/move_module_area.py. The Maven modules compiled with -Xlint:all,-module -Werror; the module\n"
           "# name's \"m3\" component is the one lint kind disabled here.\n\n"
           "DISABLED_WARNINGS_java += module\n\n"
           "# Doclint as java.base runs it, without the \"missing\" group (the moved Javadoc is the donors').\n"
@@ -270,7 +270,7 @@ sources = "".join(f"                <source>${{project.basedir}}/../../src/{MODU
                   if not any(p != q and p.startswith(q + "/") for q in pkg_paths))
 bridge = f"""<?xml version="1.0" encoding="UTF-8"?>
 <!-- SPDX-License-Identifier: Apache-2.0 -->
-<!-- Maven BRIDGE of the area m3/{AREA}, written by m3/tooling/jdk-naming/move_module_area.py (MOVE_TO_JDK_MODULE v2,
+<!-- Maven BRIDGE of the area m3/{AREA}, written by make/m3/tooling/jdk-naming/move_module_area.py (MOVE_TO_JDK_MODULE v2,
      approved layout 2026-11-08): the product sources live in the JDK module src/{MODULE}/share/classes and the
      tests in test/jdk; this pom compiles those package directories under the same artifact so every Maven consumer
      keeps building until it has moved too. src/main/java holds only the bridge module descriptor. -->

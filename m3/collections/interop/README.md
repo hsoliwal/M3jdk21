@@ -114,7 +114,7 @@ without preserving exact Java API, serialization, allocation and live-view
 semantics. Install/deploy quarantine is not source inlining. Custom upload, explicit `install:install-file`/`deploy:deploy-file`, and modified plugin settings can bypass it.
 
 The no-download Python regression and declared-dependency census live at
-`m3/collections/verification/no_external_runtime.py` and
+`make/m3/collections/verification/no_external_runtime.py` and
 `test_no_external_runtime.py`. They reject direct external core dependencies,
 missing/symlinked POMs, a missing install/deploy quarantine, profile overrides, and
 `provided`/`optional` scope tricks. This is **not** full transitive Maven

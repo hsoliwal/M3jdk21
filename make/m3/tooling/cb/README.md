@@ -1,7 +1,7 @@
 # CB: Class Bridge
 
 This packet ports the reflection-backed class snapshot and caller-owned VM bridge into
-`java.base`. It follows `m3/docs/name-mapping.json`; CB means Class Bridge, CI means Class
+`java.base`. It follows `doc/m3/name-mapping.json`; CB means Class Bridge, CI means Class
 Index and PC means Precompute Context. It adds fourteen internal owners and reuses the
 already inlined `M3VI` and `M3Release`. Maven/OpenRewrite is authoring tooling only.
 
@@ -64,9 +64,9 @@ inputs are tested, followed by a generation fixed point and strict Java 21 compi
 From the repository root with Java 21 and Maven available:
 
 ```sh
-mvn -f m3/tooling/cb/pom.xml test
-python m3/tooling/cb/test_install.py
-python m3/migration/migration.py validate . --previous m3/tooling/cb/integration/name-mapping.json.before
+mvn -f make/m3/tooling/cb/pom.xml test
+python make/m3/tooling/cb/test_install.py
+python make/m3/migration/migration.py validate . --previous make/m3/tooling/cb/integration/name-mapping.json.before
 ```
 
 The runtime probes contain 4,515 assertions per interpreter/mixed run. They compare class

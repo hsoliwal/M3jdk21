@@ -14,7 +14,7 @@ HERE = Path(__file__).resolve().parent
 SPEC = importlib.util.spec_from_file_location("m3_current_arraymask_receiver", HERE / "verify.py")
 receiver = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(receiver)
-ROOT = HERE.parents[3]
+ROOT = HERE.parents[4]
 
 
 def receipt() -> dict:

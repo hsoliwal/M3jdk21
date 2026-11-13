@@ -2,7 +2,7 @@ name: M3 #1294 source-exact historical catalogue proof
 on:
   pull_request:
     paths:
-      - 'm3/collections/algorithm-catalog/wrapper-convergence-20261018/**'
+      - 'make/m3/collections/algorithm-catalog/wrapper-convergence-20261018/**'
       - '.github/workflows/m3-pr1294-historical-catalogue.yml'
   workflow_dispatch:
 permissions:
@@ -20,7 +20,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          file=m3/collections/algorithm-catalog/wrapper-convergence-20261018/SOURCE_CUSTODY_20261028.tsv
+          file=make/m3/collections/algorithm-catalog/wrapper-convergence-20261018/SOURCE_CUSTODY_20261028.tsv
           test "$(wc -l < "$file")" -eq 24
           while IFS=$'\t' read -r path sha mode bytes; do
             [[ "$path" == \#* ]] && continue

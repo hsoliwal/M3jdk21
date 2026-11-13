@@ -12,9 +12,9 @@ theirs = `6adadadf64ae`; none of the 44 paths master changed since `aa2372843bff
 
 | Kind | Paths | Method |
 |------|-------|--------|
-| Added by #1080, absent on master | 292 (278 under `m3/runtime-integration/regex-rope-affix-effects`, regex-plan-amalgamation 5, regex-mandatory-affixes 3, regex-required-ngrams 1, 2 docs, 2 workflows, `M3StringRegexPreparedBatchTest.java`) | historical blob ids reused byte-exact (`restore_retained4.py` BLOB rows) |
+| Added by #1080, absent on master | 292 (278 under `make/m3/runtime-integration/regex-rope-affix-effects`, regex-plan-amalgamation 5, regex-mandatory-affixes 3, regex-required-ngrams 1, 2 docs, 2 workflows, `M3StringRegexPreparedBatchTest.java`) | historical blob ids reused byte-exact (`restore_retained4.py` BLOB rows) |
 | Clean 3-way merges | `M3StringFacts.java`, `jdk/internal/mindex/M3RegexDpPlan.java`, regex-rolling-cursor `run_source_extracted_java21.py`, `verify_exact_source.py` | `git merge-file` |
-| Resolved conflicts | `M3StringRegexDp.java`, `libjava/M3RegexDpPlan.c`, `M3StringRegexDpTest.java`, `m3/docs/name-mapping.json` | both sides kept, see below |
+| Resolved conflicts | `M3StringRegexDp.java`, `libjava/M3RegexDpPlan.c`, `M3StringRegexDpTest.java`, `doc/m3/name-mapping.json` | both sides kept, see below |
 
 ## Conflict resolutions
 

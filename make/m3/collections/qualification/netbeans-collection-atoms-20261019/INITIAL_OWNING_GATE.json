@@ -5,7 +5,7 @@
     "seconds": 353.354453086853,
     "command": [
       "python3",
-      "m3/collections/qualification/full-java-jni-20261018/verify.py"
+      "make/m3/collections/qualification/full-java-jni-20261018/verify.py"
     ],
     "log": "full-java-jni.log"
   },

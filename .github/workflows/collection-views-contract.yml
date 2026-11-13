@@ -5,7 +5,7 @@ on:
     paths:
       - 'src/java.base/share/classes/java/util/CollectionViews.java'
       - 'test/jdk/java/util/CollectionViews/StoredRepresentativeOracle.java'
-      - 'm3/compatibility/collection-views/**'
+      - 'make/m3/compatibility/collection-views/**'
       - '.github/workflows/collection-views-contract.yml'
   workflow_dispatch:
 permissions:
@@ -26,11 +26,11 @@ jobs:
           sparse-checkout: |
             src/java.base/share/classes/java/util/CollectionViews.java
             test/jdk/java/util/CollectionViews/**
-            m3/compatibility/collection-views/**
+            make/m3/compatibility/collection-views/**
             .github/workflows/collection-views-contract.yml
       - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
         with:
           distribution: temurin
           java-version: '21'
       - name: Verify exact source, public ABI, old red, new oracle and existing contracts
-        run: bash m3/compatibility/collection-views/verify.sh "$RUNNER_TEMP/m3-stored-occurrence"
+        run: bash make/m3/compatibility/collection-views/verify.sh "$RUNNER_TEMP/m3-stored-occurrence"

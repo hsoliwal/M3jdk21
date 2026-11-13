@@ -16,7 +16,7 @@
 -->
 # Eclipse Collections source in the M3 namespace
 
-[The implementation directory](../../implementations/eclipse-collections-14.0.0-snapshot-00a668d6/) holds all 3,480 files of
+[The implementation directory](../../../../../m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/) holds all 3,480 files of
 tree `97cd9b660586845b0015e4882d28af6834ed5527` of `hsoliwal/eclipse-collections`, branch
 `m3/eclipse-collections-receive-prep-20261024`, commit `d7e0b3970e611dd6be1aeca56fe6d94cf8d34fa7`. The files were written byte
 for byte from `git cat-file`, with no transformation, and staged as the exact blobs. The directory's tree id equals the fork tree id.

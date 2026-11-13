@@ -1,5 +1,5 @@
 #!/bin/bash
-# Gate for the #15117 union on m3/tooling/search: module verify scripts on the union stage, then the three
+# Gate for the #15117 union on make/m3/tooling/search: module verify scripts on the union stage, then the three
 # com.synexia step probes (empty keys, empty range, lower-bound reuse) against the union Java + C, plus two
 # mutants that each break one #15117 feature and must be rejected.
 set -u

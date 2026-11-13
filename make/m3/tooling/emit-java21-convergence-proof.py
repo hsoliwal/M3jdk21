@@ -109,8 +109,8 @@ def main() -> int:
     out = args.out.resolve()
     out.mkdir(parents=True, exist_ok=True)
 
-    module = repo / "m3/tooling/migration-recipes"
-    catalogue = repo / "m3/tooling/recipe-catalogue.tsv"
+    module = repo / "make/m3/tooling/migration-recipes"
+    catalogue = repo / "make/m3/tooling/recipe-catalogue.tsv"
     surefire = module / "target/surefire-reports"
     jacoco = module / "target/site/jacoco/jacoco.xml"
 
@@ -155,7 +155,7 @@ def main() -> int:
             ("github_run_attempt", os.environ.get("GITHUB_RUN_ATTEMPT", "")),
             ("java_home", os.environ.get("JAVA_HOME", "")),
             ("recipe_entrypoint", "jdk.m3.rewrite.M3Java21ConvergenceRecipe"),
-            ("verify_command", "mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify"),
+            ("verify_command", "mvn -B -ntp -f make/m3/tooling/migration-recipes/pom.xml clean verify"),
         ],
     )
 
@@ -172,8 +172,8 @@ def main() -> int:
     write_tsv(verify_contract, verify_rows)
 
     provenance_rows = [("artifact", "sha256")]
-    provenance_rows.append(("m3/tooling/recipe-catalogue.tsv", sha256(catalogue)))
-    provenance_rows.append(("m3/tooling/migration-recipes/target/site/jacoco/jacoco.xml", sha256(jacoco)))
+    provenance_rows.append(("make/m3/tooling/recipe-catalogue.tsv", sha256(catalogue)))
+    provenance_rows.append(("make/m3/tooling/migration-recipes/target/site/jacoco/jacoco.xml", sha256(jacoco)))
     for report in reports:
         provenance_rows.append(
             (str(report.relative_to(repo)).replace("\\", "/"), sha256(report))

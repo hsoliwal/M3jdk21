@@ -18,7 +18,7 @@ import tempfile
 import zipfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-LEAF = "m3/tooling/skija-absorb/leaf1"
+LEAF = "make/m3/tooling/skija-absorb/leaf1"
 NAME = "io.github.humbleui.skija.impl.Cleanable"
 ENTRY9 = "META-INF/versions/9/io/github/humbleui/skija/impl/Cleanable.class"
 ENTRY11 = "META-INF/versions/11/io/github/humbleui/skija/impl/Cleanable.class"

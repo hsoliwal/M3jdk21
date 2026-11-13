@@ -42,19 +42,19 @@
       "readback": "EXACT"
     },
     {
-      "path": "m3/qualification/object-toadpater/verify_candidate.py",
+      "path": "make/m3/qualification/object-toadpater/verify_candidate.py",
       "pre": "ABSENT",
       "post_git_blob_sha1": "c3d2f5339194335052276dc5e2e66b1142211e40",
       "readback": "EXACT"
     },
     {
-      "path": "m3/qualification/object-toadpater/LegacyPreAliasSubclass.java.txt",
+      "path": "make/m3/qualification/object-toadpater/LegacyPreAliasSubclass.java.txt",
       "pre": "ABSENT",
       "post_git_blob_sha1": "8829d98401370c3350093fbf288a26d5336b6e17",
       "readback": "EXACT"
     },
     {
-      "path": "m3/qualification/object-toadpater/LegacyImageFixtureOracle.java",
+      "path": "make/m3/qualification/object-toadpater/LegacyImageFixtureOracle.java",
       "pre": "ABSENT",
       "post_git_blob_sha1": "55b0cfed807d5a24c6ade3afa559ea74b8cde3c1",
       "readback": "EXACT"

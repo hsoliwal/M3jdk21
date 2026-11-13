@@ -131,7 +131,7 @@ class A3AlgTest {
     }
 
     private void writeCatalogue(String... rows) throws Exception {
-        Path backports = root.resolve("m3/backports");
+        Path backports = root.resolve("make/m3/backports");
         Files.createDirectories(backports);
         String header =
                 "atom_id\tcategory\ttechnique\tdisposition\tscope\ttarget_owner\t"

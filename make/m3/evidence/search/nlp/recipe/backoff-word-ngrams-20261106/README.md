@@ -26,7 +26,7 @@ array trie; training uses primitive AVL rows and an array-backed reverse-context
 | oracles | `recipes/nlp-wordrank-20261031/{WordRankOracle, WordContextOracle, WordTrainingOracle, TrainingContextIndexOracle, TrainingGrowthOracle, TrainingContextGrowthOracle}.java` (default package -> `jdk.m3.nlp`) and the fault helpers `TrainingArrayFault`, `TrainingContextArrayFault`; renamed `M3BackoffWordNgrams*` |
 | recipe | `relocate.py` v3 (v2 of the perplexity leaf, PR #2537, plus the default-package `PACKAGE -` row); `mutants.py` (fault variants and mutants of gate 2c) |
 | provenance | `PROVENANCE.tsv`: `body_match_renamed=TRUE` for all 9 files |
-| receiver | `m3/nlp` `jdk.m3.nlp.M3BackoffWordNgrams` with `Model`/`Limits`/`Prediction`. **Rejected:** the classical crate's `TARGET_MAP.tsv` receiver `jdk.m3.tools.text.wordngram` in `m3/tooling/module-packs/cpu-tools` (SKIP row) |
+| receiver | `m3/nlp` `jdk.m3.nlp.M3BackoffWordNgrams` with `Model`/`Limits`/`Prediction`. **Rejected:** the classical crate's `TARGET_MAP.tsv` receiver `jdk.m3.tools.text.wordngram` in `make/m3/tooling/module-packs/cpu-tools` (SKIP row) |
 
 Held (`SKIP`, nothing copied, blob pinned): the manifest probe `WordRankManifestProbe` (donor recipe engine), the four
 predecessor templates under `before/` (the preimage `8d3c6052a7f8` is still compiled by `differential.sh` for the red
@@ -45,7 +45,7 @@ allocation witness), the experiment `module-info` template, the classical crate'
 | 4 `javap -p` | 9 classes, 125 members identical under the map |
 | 5 untouched classes | 10/10 master class files byte-identical |
 | 6 naming | 0 moves, 0 rewrites, 0 refusals; FIXED_POINT 0/0 |
-| 7 scope | `m3/nlp/**` only; `m3/pom.xml` untouched |
+| 7 scope | `m3/nlp/**` only; `make/m3/pom.xml` untouched |
 
 `bash verify.sh <donor clone> <scratch>` runs them (the module's `verify.sh` calls it). Hard limits are recorded, not
 fixed: 19 `for` statements, 8 methods over 15 lines (`train` 45).

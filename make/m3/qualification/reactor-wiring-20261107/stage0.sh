@@ -11,7 +11,7 @@
 set -u
 MODS=$1; SLUG=$2
 W=${W:-/s/m3-scratch/eb-conv/wt-reactor}; R=${R:-/s/m3-scratch/eb-conv/reactor}
-Q=$W/m3/qualification/reactor-wiring-20261107
+Q=$W/make/m3/qualification/reactor-wiring-20261107
 LOG=$R/logs/stage0-$SLUG.log
 cd "$W" || exit 9
 case "$MODS" in

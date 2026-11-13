@@ -17,7 +17,7 @@ final class M3TornadoBulkAdapterMappingRecipeTest {
     void addsProviderOwnerAndCatalogueRowThenReachesFixedPoint() {
         PlainText map =
                 text(
-                        "m3/docs/name-mapping.json",
+                        "doc/m3/name-mapping.json",
                         """
                         {
                           "family_name_mapping": [
@@ -36,7 +36,7 @@ final class M3TornadoBulkAdapterMappingRecipeTest {
                         """);
         PlainText catalogue =
                 text(
-                        "m3/tooling/recipe-catalogue.tsv",
+                        "make/m3/tooling/recipe-catalogue.tsv",
                         "recipe_id\tclass\tscope\tcontract\tstatus\tverification\n");
 
         var first =

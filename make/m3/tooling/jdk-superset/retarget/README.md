@@ -14,8 +14,8 @@ recipe here keeps the library's API and points its implementation at java.base.
 |---|---|
 | `tools/donor_overlay.py` | DONOR_OVERLAY v2: the custody every donor-overlay recipe uses. Each upstream file stays byte-identical under `upstream-excluded/`; the overlay is pinned with its base and its recipe in `PROVENANCE.json` and `OVERLAY_SOURCES.json`; `verify_source.py` re-derives each overlay; the relocated (lib-intake) copy gets the name-mapped overlay. `--check` writes nothing |
 | `tools/maven_gate.sh` | builds a donor pom on master and on the branch, runs `verify_source.py` with the jar, and compares the jars |
-| `tools/base64_to_jdk.py` | BASE64_TO_JDK v1: HdrHistogram's `Base64Helper` calls `java.util.Base64` directly (`m3/evidence/java-base/BASE64_HDRHISTOGRAM.md`) |
-| `tools/jgit_base64_to_jdk.py` | JGIT_BASE64_TO_JDK v1: JGit's `util.Base64` encodes with `java.util.Base64`, and decodes canonical input with it; other input keeps JGit's lenient loop (`m3/evidence/java-base/BASE64_JGIT.md`) |
+| `tools/base64_to_jdk.py` | BASE64_TO_JDK v1: HdrHistogram's `Base64Helper` calls `java.util.Base64` directly (`make/m3/evidence/java-base/BASE64_HDRHISTOGRAM.md`) |
+| `tools/jgit_base64_to_jdk.py` | JGIT_BASE64_TO_JDK v1: JGit's `util.Base64` encodes with `java.util.Base64`, and decodes canonical input with it; other input keeps JGit's lenient loop (`make/m3/evidence/java-base/BASE64_JGIT.md`) |
 
 A recipe module defines `RECIPE_ID`, `TOOL_REL`, `DONORS`, `TARGETS`, `overlay(original, upstream)`, `POM_TEXT`,
 `README_TEXT`, `MODIFICATIONS` and `RELOCATED`, then calls `donor_overlay.run`. `overlay()` stays in the recipe file,
@@ -37,5 +37,5 @@ Both also run on DONOR_OVERLAY v2:
 
 Moving them changed only the pins of their own sha256: `recipe_sha256` in `PROVENANCE.json` and
 `OVERLAY_SOURCES.json`, the record digests that follow from it, and the jackson pack's lock entry for jackson-core.
-No overlay, pom, README or `verify_source.py` byte changed (`m3/evidence/java-base/donor-overlay-v2/AUDIT.txt`).
+No overlay, pom, README or `verify_source.py` byte changed (`make/m3/evidence/java-base/donor-overlay-v2/AUDIT.txt`).
 FDP_DELEGATES_TO_JDK (retired with the FastDoubleParser copies) was the last recipe with its own custody code.

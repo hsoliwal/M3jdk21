@@ -11,7 +11,7 @@ commit. Removing a catalogue row, deleting a manifest row or rewriting an expect
 therefore remove or redefine the very obligations the candidate is meant to satisfy. A merge
 may keep another parent's history reachable while dropping its retained files.
 
-This extension changes the existing `m3/history/retention.py`, its existing tests and Maven
+This extension changes the existing `make/m3/history/retention.py`, its existing tests and Maven
 entry point, its existing workflow, and the corresponding README. It adds no second audit
 owner or workflow. These five `.txt` files are proposed recipe afterimages; they have not been
 written to current product targets or published to GitHub by this task. The parent integrates

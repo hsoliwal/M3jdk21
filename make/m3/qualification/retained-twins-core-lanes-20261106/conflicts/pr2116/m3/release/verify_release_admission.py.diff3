@@ -57,10 +57,10 @@ UNQUALIFIED_CLAIMS = {
 }
 REQUIRED_FILES = [
     "M3-SYNEXIA-NOTICE.md", "M3-SYNEXIA-RIGHTS.md", "M3-SYNEXIA-AUTHORS.md",
-    "LICENSE-M3-APACHE-2.0.txt", "m3/README.md",
-    "m3/release/release-contract.json", "m3/release/README.md",
-    "m3/release/BENCHMARK_AND_COMPATIBILITY_SPEC.md",
-    "m3/docs/name-mapping.json", "m3/tooling/name-contract/name-plan.json",
+    "LICENSE-M3-APACHE-2.0.txt", "make/m3/README.md",
+    "make/m3/release/release-contract.json", "make/m3/release/README.md",
+    "make/m3/release/BENCHMARK_AND_COMPATIBILITY_SPEC.md",
+    "doc/m3/name-mapping.json", "make/m3/tooling/name-contract/name-plan.json",
 ]
 <<<<<<< live
 REQUIRED_GATES = frozenset({
@@ -72,18 +72,18 @@ REQUIRED_GATES = frozenset({
 })
 RECIPE_ROOTS = (
     ".m3/openrewrite-recipes", ".m3/task-crates", "m3/recipes",
-    "m3/tooling/migration-recipes", "m3/tooling/m3jdk-a3-recipes",
+    "make/m3/tooling/migration-recipes", "make/m3/tooling/m3jdk-a3-recipes",
     "m3/m3-import/pure-int-recipe-custody",
-    "m3/runtime-integration/recipe",
-    "m3/runtime-integration/char-array-copy/recipe",
-    "m3/runtime-integration/utf8-cursor-20261014/recipe/canonical",
+    "make/m3/runtime-integration/recipe",
+    "make/m3/runtime-integration/char-array-copy/recipe",
+    "make/m3/runtime-integration/utf8-cursor-20261014/recipe/canonical",
 )
-NAME_MAP = "m3/docs/name-mapping.json"
-NAME_PLAN = "m3/tooling/name-contract/name-plan.json"
+NAME_MAP = "doc/m3/name-mapping.json"
+NAME_PLAN = "make/m3/tooling/name-contract/name-plan.json"
 EVIDENCE_SCHEMA = "M3_RELEASE_EVIDENCE_V1"
-DEFAULT_EVIDENCE = "m3/release/queue/current/evidence.json"
+DEFAULT_EVIDENCE = "make/m3/release/queue/current/evidence.json"
 # Standalone rule (user, 2026-10-31): every release gate, the Maven/OpenRewrite control reactor included,
-# is owned and executed by this repository; donor lineage stays in ledgers (m3/tooling/standalone/).
+# is owned and executed by this repository; donor lineage stays in ledgers (make/m3/tooling/standalone/).
 PRODUCT_REPOSITORY = "hsoliwal/M3jdk21"
 MAVEN_GATE = "M3_MAVEN_CONTROL_REACTOR"
 SHA1 = re.compile(r"[0-9a-f]{40}\Z")
@@ -104,7 +104,7 @@ MANDATORY_GATES = frozenset({
 REPOSITORY = "hsoliwal/M3jdk21"
 HEX40 = re.compile(r"[0-9a-f]{40}")
 HEX64 = re.compile(r"[0-9a-f]{64}")
-REPORT_PREFIX = "m3/release/queue/runs/"
+REPORT_PREFIX = "make/m3/release/queue/runs/"
 QUEUE_FIELDS = ("id", "status", "source_sha", "source_tree", "evidence", "next_action", "detail")
 >>>>>>> retained
 
@@ -434,8 +434,8 @@ def check_trusted_producer(root: Path, directory: Path, entry: dict, source: dic
 def custody_report(root: Path, scope: str) -> dict:
     """Refuse existing recipe execution wiring before a release job invokes it."""
     scopes = {
-        "foundation": ["m3/recipes", "m3/runtime-integration/char-array-copy/recipe", "m3/runtime-integration/recipe"],
-        "precompute": ["m3/runtime-integration/utf8-cursor-20261014/recipe"],
+        "foundation": ["m3/recipes", "make/m3/runtime-integration/char-array-copy/recipe", "make/m3/runtime-integration/recipe"],
+        "precompute": ["make/m3/runtime-integration/utf8-cursor-20261014/recipe"],
         "control-reactor": [],
     }
     require(scope in scopes, "unknown custody scope")
@@ -449,13 +449,13 @@ def custody_report(root: Path, scope: str) -> dict:
                 residue.extend(str(path.relative_to(root)) for path in directory.rglob("*")
                                if path.is_file() and path.suffix in (".py", ".java", ".yml", ".yaml", ".xml", ".sh"))
         if scope == "control-reactor":
-            pom = root / "m3/pom.xml"
+            pom = root / "make/m3/pom.xml"
             document = ET.parse(pom)
             legacy = {"m3-import/pure-int-recipe-custody", "tooling/migration-recipes",
                       "tooling/m3jdk-a3-recipes", "tooling/recipe-agent-api"}
             for module in document.findall(".//{http://maven.apache.org/POM/4.0.0}module"):
                 if module.text and module.text.strip() in legacy:
-                    residue.append("m3/pom.xml -> " + module.text.strip())
+                    residue.append("make/m3/pom.xml -> " + module.text.strip())
     except (OSError, ValueError, ET.ParseError, subprocess.SubprocessError) as error:
         errors.append(str(error))
     residue = sorted(set(residue))
@@ -544,10 +544,10 @@ def validate(root: Path, release_mode: bool = False, evidence_path: Path | None 
 >>>>>>> retained
 
 <<<<<<< live
-    contract = read_object(root / "m3/release/release-contract.json", "contract.read")
+    contract = read_object(root / "make/m3/release/release-contract.json", "contract.read")
     if contract.get("schema") == "M3_RELEASE_CONTRACT_V1":
 ||||||| base
-    contract_path = root / "m3/release/release-contract.json"
+    contract_path = root / "make/m3/release/release-contract.json"
     contract = load_json(contract_path)
     if contract.get("schema") != "M3_RELEASE_CONTRACT_V1":
         block("contract.schema", "unexpected release contract schema")
@@ -573,7 +573,7 @@ def validate(root: Path, release_mode: bool = False, evidence_path: Path | None 
         else:
             block("file:" + relative, "required release-boundary file is missing")
     try:
-        contract = object_value(json.loads(read_text("m3/release/release-contract.json"), object_pairs_hook=unique_object), "release contract")
+        contract = object_value(json.loads(read_text("make/m3/release/release-contract.json"), object_pairs_hook=unique_object), "release contract")
     except (OSError, UnicodeError, ValueError) as error:
         block("contract.read", str(error))
         contract = {}
@@ -698,7 +698,7 @@ def validate(root: Path, release_mode: bool = False, evidence_path: Path | None 
         passed("rights.reservation")
     else:
         block("rights.reservation", "first-party rights reservation missing")
-    m3_readme = read_text("m3/README.md")
+    m3_readme = read_text("make/m3/README.md")
     if "does **not** modify `java.lang.String`" in m3_readme:
         passed("claims.current_string_boundary")
     else:
@@ -717,7 +717,7 @@ def validate(root: Path, release_mode: bool = False, evidence_path: Path | None 
         passed("receiving_sequence")
 ||||||| base
 
-    mapping_path = root / "m3/docs/name-mapping.json"
+    mapping_path = root / "doc/m3/name-mapping.json"
     if mapping_path.is_file():
         mapping = load_json(mapping_path)
         seq = mapping.get("porting_invariant", {}).get("receiving_sequence")
@@ -733,7 +733,7 @@ def validate(root: Path, release_mode: bool = False, evidence_path: Path | None 
             block("receiving_sequence", "receiving order or active phase drifted")
 =======
     try:
-        mapping = object_value(json.loads(read_text("m3/docs/name-mapping.json"), object_pairs_hook=unique_object), "name mapping")
+        mapping = object_value(json.loads(read_text("doc/m3/name-mapping.json"), object_pairs_hook=unique_object), "name mapping")
         seq = object_value(object_value(mapping.get("porting_invariant"), "porting invariant").get("receiving_sequence"), "receiving sequence")
         require(seq.get("order") == EXPECTED_RECEIVING_ORDER and seq.get("active_phase") == "STRING",
                 "receiving order or active phase drifted")
@@ -1109,7 +1109,7 @@ def render_queue(result: dict) -> str:
             row["id"], row["state"], "yes" if row["blocking"] else "no", detail)) + " |")
     if not result["queue"]:
         lines.append("| No pending items | VERIFIED_RECEIPTS | no | Review the exact proof pack before publication. |")
-    lines.extend(["", "This is a generated view of gate evidence and `m3/tooling/name-contract/name-plan.json`. "
+    lines.extend(["", "This is a generated view of gate evidence and `make/m3/tooling/name-contract/name-plan.json`. "
                   "It creates no second naming registry, recipe authority, or release claim.", ""])
     return "\n".join(lines)
 
@@ -1224,7 +1224,7 @@ def main() -> int:
         args.json_out.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     if args.sha256_out:
         lines = []
-        for rel in REQUIRED_FILES + ["m3/release/verify_release_admission.py"]:
+        for rel in REQUIRED_FILES + ["make/m3/release/verify_release_admission.py"]:
             path = root / rel
             if path.is_file():
                 lines.append(f"{sha256(path)}  {rel}")
@@ -1242,7 +1242,7 @@ def main() -> int:
 
     if args.sha256_out:
         lines = []
-        for rel in REQUIRED_FILES + ["m3/release/verify_release_admission.py"]:
+        for rel in REQUIRED_FILES + ["make/m3/release/verify_release_admission.py"]:
             path = root / rel
             if path.is_file():
                 lines.append(f"{sha256(path)}  {rel}")
@@ -1258,7 +1258,7 @@ def main() -> int:
         # Reject aliases introduced while producer verification was in progress.
         outputs = preflight_outputs(root, args.evidence, outputs)
         lines = [f"{sha256(root / rel)}  {rel}" for rel in
-                 REQUIRED_FILES + ["m3/release/verify_release_admission.py"] if (root / rel).is_file()]
+                 REQUIRED_FILES + ["make/m3/release/verify_release_admission.py"] if (root / rel).is_file()]
         write_output(outputs[0], json.dumps(result, indent=2, sort_keys=True) + "\n")
         write_output(outputs[1], queue_tsv(result))
         write_output(outputs[2], "\n".join(lines) + "\n")

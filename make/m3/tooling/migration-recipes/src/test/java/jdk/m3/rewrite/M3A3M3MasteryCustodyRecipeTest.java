@@ -28,7 +28,7 @@ final class M3A3M3MasteryCustodyRecipeTest {
     private static final String JAVA_CRATE = "a3-m3-mastery-custody";
     private static final String TEXT_CRATE = "a3-m3-mastery-custody-text";
     private static final String A3_PATH = "src/main/java/jdk/m3/a3/A3Lab.java";
-    private static final String CATALOGUE_PATH = "m3/tooling/recipe-catalogue.tsv";
+    private static final String CATALOGUE_PATH = "make/m3/tooling/recipe-catalogue.tsv";
 
     @Test
     void exactA3LabPreimageMovesToM3OwnersAndSecondRunIsFixedPoint() {
@@ -77,7 +77,7 @@ final class M3A3M3MasteryCustodyRecipeTest {
         assertFalse(catalogue.contains("\tjdk.m3.rewrite.atom.M3AtomizePureIntReturnRecipe"));
         assertFalse(catalogue.contains("\tjdk.m3.rewrite.atom.M3PatternizePureIntAtomRecipe"));
 
-        String note = first.get("m3/docs/A3_SYNX_MASTERY_CUSTODY.md");
+        String note = first.get("doc/m3/A3_SYNX_MASTERY_CUSTODY.md");
         assertTrue(note.contains("Reusable Atomize/Patternize/Document/Convergence recipes"));
         assertTrue(note.contains("OpenJDK `configure -> make -> jtreg -> runtime` remains"));
 

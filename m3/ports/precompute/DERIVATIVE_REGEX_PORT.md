@@ -82,7 +82,7 @@ java.base/jtreg and CPU/startup/retained-heap/native-memory measurements are
 
 ## Broader receiving order
 
-Follow `m3/docs/m3jdk21-porting-invariant.md`:
+Follow `doc/m3/m3jdk21-porting-invariant.md`:
 String/regex qualification → arrays → collections → AST/compiler.
 Filtered and sorted collection wrappers require separate concrete JDK
 collection contract proof (backed views, fail-fast/snapshot semantics, nulls,

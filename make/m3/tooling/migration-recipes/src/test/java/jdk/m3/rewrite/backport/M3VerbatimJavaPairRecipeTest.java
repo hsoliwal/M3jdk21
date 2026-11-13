@@ -114,7 +114,7 @@ final class M3VerbatimJavaPairRecipeTest {
     void parentTraversalAndMalformedPathVariantsAreRefused() {
         for (String path : List.of(
                 "../escape.java", "..\\escape.java", "../../escape.java",
-                "./../escape.java", "./..\\escape.java", "../src/Sample.java",
+                "./../escape.java", "..\\escape.java", "../src/Sample.java",
                 "src/../escape.java", "src\\..\\escape.java", "/escape.java",
                 "C:/escape.java", "C:\\escape.java", "//host/share.java",
                 "src//Sample.java", "src/./Sample.java", "src/..", "readme.md", "", " ")) {

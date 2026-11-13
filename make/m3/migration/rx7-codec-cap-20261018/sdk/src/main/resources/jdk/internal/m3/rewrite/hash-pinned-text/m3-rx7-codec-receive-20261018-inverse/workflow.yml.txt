@@ -11,9 +11,9 @@ on:
       - 'test/jdk/java/util/regex/M3RX7Test.java'
       - 'test/jdk/java/util/regex/M3RX7CodecTest.java'
       - 'test/jdk/java/util/regex/M3RX7CodecBoundsTest.java'
-      - 'm3/docs/name-mapping.d/m3-regex-v7-image-codec.json'
-      - 'm3/migration/rx7-codec-cap-20261018/**'
-      - 'm3/runtime-integration/check-m3rx7-v7-image-codec.sh'
+      - 'doc/m3/name-mapping.d/m3-regex-v7-image-codec.json'
+      - 'make/m3/migration/rx7-codec-cap-20261018/**'
+      - 'make/m3/runtime-integration/check-m3rx7-v7-image-codec.sh'
       - '.github/workflows/m3rx7-v7-image-codec-20261014.yml'
   workflow_dispatch:
 permissions:
@@ -130,7 +130,7 @@ jobs:
           GCM_INTERACTIVE: never
         run: |
           set -euo pipefail
-          sh "$M3_SOURCE_ROOT/m3/runtime-integration/check-m3rx7-v7-image-codec.sh"
+          sh "$M3_SOURCE_ROOT/make/m3/runtime-integration/check-m3rx7-v7-image-codec.sh"
       - name: Retain closed two-MiB proof
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

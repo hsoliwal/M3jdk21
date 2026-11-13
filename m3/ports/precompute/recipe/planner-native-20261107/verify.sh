@@ -23,5 +23,5 @@ warnings=$(grep -cE '\[WARNING\].*\.java|warning:' "$LOG" || true)
 failures=$(grep -cE '\[ERROR\]|FAILURE' "$LOG" || true)
 echo "GATE package PASS warnings=${warnings:-0} errors=${failures:-0} $(grep -E 'Tests run: [0-9]+, Failures: [0-9]+, Errors: [0-9]+, Skipped: [0-9]+$' "$LOG" | tail -n 1 | sed 's/.*Tests run/Tests run/')"
 [ "${warnings:-0}" -eq 0 ] && [ "${failures:-0}" -eq 0 ]
-(cd "$ROOT" && "$PY" -I m3/tooling/jdk-naming/jdk_naming.py plan --root . --only "$REL/" | tail -n 1)
+(cd "$ROOT" && "$PY" -I make/m3/tooling/jdk-naming/jdk_naming.py plan --root . --only "$REL/" | tail -n 1)
 bash "$RECIPE/../planner-family-20261107/class_identity.sh" "$4" | grep -vE '^SAME '

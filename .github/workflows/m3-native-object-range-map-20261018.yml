@@ -4,7 +4,7 @@ on:
     paths:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectRangeMap.java'
       - 'test/jdk/jdk/m3/collections/M3ObjectRangeMap*'
-      - 'm3/collections/qualification/m3-native-object-range-map-20261018/**'
+      - 'make/m3/collections/qualification/m3-native-object-range-map-20261018/**'
       - '.github/workflows/m3-native-object-range-map-20261018.yml'
   workflow_dispatch:
 concurrency:
@@ -21,7 +21,7 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Fail closed on noncanonical generated source
-        run: python3 m3/collections/qualification/m3-native-object-range-map-20261018/verify.py
+        run: python3 make/m3/collections/qualification/m3-native-object-range-map-20261018/verify.py
       - name: Strict Java21 source compilation against real M3 slot/mask owners
         run: |
           mkdir -p "$RUNNER_TEMP/classes"

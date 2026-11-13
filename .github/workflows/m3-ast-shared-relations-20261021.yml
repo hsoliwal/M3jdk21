@@ -6,10 +6,10 @@ on:
     branches: [m3/ast-shared-relations-20261021]
   pull_request:
     paths:
-      - m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java
-      - m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTRelations.java
-      - m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTRelationsContract.java
-      - m3/tooling/module-packs/parser/build.py
+      - make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java
+      - make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTRelations.java
+      - make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTRelationsContract.java
+      - make/m3/tooling/module-packs/parser/build.py
       - .github/workflows/m3-ast-shared-relations-20261021.yml
   workflow_dispatch:
 
@@ -34,7 +34,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          ROOT=m3/tooling/module-packs/parser/src
+          ROOT=make/m3/tooling/module-packs/parser/src
           mkdir -p "$RUNNER_TEMP/m3-ast-relations-classes"
           javac --release 21 -Xlint:all -Werror -proc:none -implicit:none \
             -d "$RUNNER_TEMP/m3-ast-relations-classes" \
@@ -52,17 +52,17 @@ jobs:
             | tee m3-ast-relations-proof/RESULT.txt
           grep '^M3_AST_RELATIONS_PASS checks=' m3-ast-relations-proof/RESULT.txt
           grep -F '("jdk.m3.parser.test.M3ASTRelationsContract", "M3_AST_RELATIONS_PASS")' \
-            m3/tooling/module-packs/parser/build.py
+            make/m3/tooling/module-packs/parser/build.py
       - name: Pin measured source code for JMOD follow-up
         if: always()
         shell: bash
         run: |
           mkdir -p m3-ast-relations-proof
           sha256sum \
-            m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java \
-            m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTRelations.java \
-            m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTRelationsContract.java \
-            m3/tooling/module-packs/parser/build.py \
+            make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java \
+            make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTRelations.java \
+            make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTRelationsContract.java \
+            make/m3/tooling/module-packs/parser/build.py \
             > m3-ast-relations-proof/SOURCE_SHA256.txt
       - uses: actions/upload-artifact@v4
         if: always()

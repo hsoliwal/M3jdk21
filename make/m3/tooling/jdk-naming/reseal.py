@@ -38,7 +38,7 @@ SPEC = importlib.util.spec_from_file_location("jdk_naming", Path(__file__).with_
 jn = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(jn)
 
-LEDGER = "m3/tooling/jdk-naming/RENAME_RESEAL.tsv"
+LEDGER = "make/m3/tooling/jdk-naming/RENAME_RESEAL.tsv"
 HEX = re.compile(r"(?<![0-9A-Za-z])(?:[0-9a-f]{64}|[0-9a-f]{40}|[0-9A-F]{64}|[0-9A-F]{40})(?![0-9A-Za-z])")
 HEX_QUICK = re.compile(r"[0-9a-fA-F]{40}")
 PATHISH = re.compile(r"[A-Za-z0-9_.$+@~-]+(?:/[A-Za-z0-9_.$+@~-]+)+")

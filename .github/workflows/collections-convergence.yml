@@ -16,8 +16,8 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexedLiveView.java'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3NativeFiveLibrarySdk.java'
       - 'test/jdk/jdk/m3/collections/**'
-      - 'm3/collections/qualification/current-wrapper-arraymask-convergence/**'
-      - 'm3/collections/qualification/current-wrapper-arraymask-convergence/SOURCE_MANIFEST.tsv'
+      - 'make/m3/collections/qualification/current-wrapper-arraymask-convergence/**'
+      - 'make/m3/collections/qualification/current-wrapper-arraymask-convergence/SOURCE_MANIFEST.tsv'
       - '.github/workflows/collections-convergence.yml'
   workflow_dispatch:
 
@@ -53,7 +53,7 @@ jobs:
           test "$(git hash-object src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredDeques.java)" = a0ead9565983e95aeae66e48712b02adaba7a7d6
           test "$(git hash-object src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexedLiveView.java)" = 6992c39ca0d540f5de20fe99f68fae8598b72fe6
           test "$(git hash-object src/jdk.m3.collections/share/classes/jdk/m3/collections/M3NativeFiveLibrarySdk.java)" = dcba69b51a77a12f45b6ec00995ebe6e5849155f
-          bash m3/collections/qualification/filtered-cursor-mask-20261021/verify.sh
+          bash make/m3/collections/qualification/filtered-cursor-mask-20261021/verify.sh
       - name: Compile actual java.base array/mask and CollectionViews owners
         shell: bash
         run: |
@@ -105,7 +105,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f m3/pom.xml -Pm3-extended -pl :m3-collections -am             -Dsurefire.failIfNoSpecifiedTests=false             -Dtest=M3FilteredMasterPredicatePlanLifecycleTest,M3FilteredMasterTreePlanTest,M3FilteredSortedIteratorPlanTest,IndexedLiveSortedSpliteratorTest,M3FilteredDequesTest,M3FilteredListsOwnerSetTest             test
+          mvn -B -ntp -f make/m3/pom.xml -Pm3-extended -pl :m3-collections -am             -Dsurefire.failIfNoSpecifiedTests=false             -Dtest=M3FilteredMasterPredicatePlanLifecycleTest,M3FilteredMasterTreePlanTest,M3FilteredSortedIteratorPlanTest,IndexedLiveSortedSpliteratorTest,M3FilteredDequesTest,M3FilteredListsOwnerSetTest             test
           for klass in             M3FilteredMasterPredicatePlanLifecycleTest             M3FilteredMasterTreePlanTest             M3FilteredSortedIteratorPlanTest             IndexedLiveSortedSpliteratorTest             M3FilteredDequesTest             M3FilteredListsOwnerSetTest; do
             test -s "m3/collections/target/surefire-reports/TEST-jdk.m3.collections.$klass.xml"
           done

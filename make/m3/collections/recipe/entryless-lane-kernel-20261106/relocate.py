@@ -45,7 +45,7 @@ lines) are exactly the donor body lines after the declared rows, in order, and e
 drop (FILE rows: every line after the header, package and anchor is a donor line after the declared rows).
 
 Derived from m3/arrays/recipe/posting-index-20261106/relocate.py v2 (C/JNI/INCLUDE rows, anchors) and
-m3/collections/recipe/immutable-pools-20261106/relocate.py v2 (DROP_METHOD, DROP_LINE, REWRITE, INSERT rows, REPO row,
+make/m3/collections/recipe/immutable-pools-20261106/relocate.py v2 (DROP_METHOD, DROP_LINE, REWRITE, INSERT rows, REPO row,
 read-back body_match, anchors naming blob and commit without a repository URL). New in v3: MERGE (member insertion
 into an existing type, import-block union, host/base pins) and APPEND (C source extension) rows, MEMBER rows,
 INSERT_BLOCK rows, BASE rows.
@@ -64,7 +64,7 @@ from pathlib import Path
 RECIPE = "relocate.py"
 VERSION = "v3"
 RECIPE_DIR = Path(__file__).resolve().parent
-RECIPE_DIR_REL = "m3/collections/recipe/" + RECIPE_DIR.name
+RECIPE_DIR_REL = "make/m3/collections/recipe/" + RECIPE_DIR.name
 MAP_NAME = "RELOCATION_MAP.tsv"
 PROVENANCE_NAME = "PROVENANCE.tsv"
 PROVENANCE_COLUMNS = ("donor_repo", "donor_commit", "donor_path", "donor_blob", "donor_sha256", "donor_url",

@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 """Recipe CENSUS2_SMALL_BATCH v1: the APPLICABLE hunks of census2 leaves P2-001, P2-025 and P2-064.
 
-Derived from m3/collections/qualification/census-small-batch-20261106/apply.py v1 (#2565): every rule names the git
+Derived from make/m3/collections/qualification/census-small-batch-20261106/apply.py v1 (#2565): every rule names the git
 blob sha of its preimage at the base commit; a target must equal the preimage (the rule is applied) or the postimage
 (already applied, no-op); anything else is a drifted preimage and the recipe refuses (exit 2) without writing. Every
 preimage is verified before the first write. The anchored edits live in hunks/<leaf>.edits (@@@ FILE/HUNK/OLD/NEW/END,
@@ -11,11 +11,11 @@ every OLD block exactly once in the preimage; tab-indented sources keep their ta
 changed=0, and EDITS.tsv (file, before/after sha256, leaf, crate, donor sha chain, rule) is a fixed point. --leaf
 applies one leaf's rules only (one commit per leaf); --check writes nothing and exits 1 when a run would change a file.
 
-Each postimage is the donor postimage after jdk_naming (m3/tooling/jdk-naming rewrite_text, the rename fe35ea98841)
+Each postimage is the donor postimage after jdk_naming (make/m3/tooling/jdk-naming rewrite_text, the rename fe35ea98841)
 plus one //FLLDCIM: MRL anchor line; for P2-025 the base also carries faa9d9fff46's empty-identity check, which the
 crate preimage predates, so the crate's one-line hunk is replayed on the base. Donor: com.synexia develop
 d5ad5090d87e (census2 pin). P2-001 and P2-064 were also resolved by the chain resolver of #2602,
-m3/qualification/cpu-owner-extensions-20261105/crate_chain2.py (+ named_apply.py; HASH_PINNED_CHAIN v2, rename parent
+make/m3/qualification/cpu-owner-extensions-20261105/crate_chain2.py (+ named_apply.py; HASH_PINNED_CHAIN v2, rename parent
 06495fea4157): APPLY. Census rows, verdicts and the no-edit leaves are LEAVES.tsv; gates GATES.tsv.
 
 usage: python -I apply.py [--root DIR] [--check] [--leaf P2-001|P2-025|P2-064]
@@ -48,7 +48,7 @@ RULES = (
      "m3-cpu-owner-extensions-20261105",
      "rename-parent 06495fea4157 sha256 3221d674 (manifest before) -> owner-view-20261105 final 67c2c232 (blob"
      " 474dda35c66e); jdk_naming(start) == base a7f4c973; jdk_naming(final) 5d99e07e; resolver"
-     " m3/qualification/cpu-owner-extensions-20261105/crate_chain2.py + named_apply.py (#2602 8ec6289aab6f): APPLY",
+     " make/m3/qualification/cpu-owner-extensions-20261105/crate_chain2.py + named_apply.py (#2602 8ec6289aab6f): APPLY",
      "APPLICABLE (chain resolver APPLY): the base is jdk_naming of the crate preimage; the postimage adds"
      " stringView(String) and its StringView slice (53 lines, no deletion)"),
     ("P2-025", "m3/core/src/jdk/m3/text/SharedRelatedLexemeCatalog.java", "822035981f5462c610d95ba2b86d9d7a056e8c9a",
@@ -158,7 +158,7 @@ def run(root: Path, check: bool, leaf: str | None) -> int:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--root", default=str(RECIPE_DIR.parents[2]), help="repository root (default: three up)")
+    parser.add_argument("--root", default=str(RECIPE_DIR.parents[3]), help="repository root (default: three up)")
     parser.add_argument("--check", action="store_true", help="write nothing; exit 1 when a run would change a file")
     parser.add_argument("--leaf", choices=sorted({rule[0] for rule in RULES}), help="apply one leaf's rules only")
     args = parser.parse_args(argv)

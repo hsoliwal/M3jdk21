@@ -8,7 +8,7 @@
   "canonical_application_qualification_revision": "8ffbde7414f33de549c1363f64c33d75bfed2564",
   "canonical_qualification_path": "m3-openrewrite-recipes/verification/m3-rank-installer-application-20261018",
   "canonical_qualification_pr": "https://github.com/hsoliwal/com.synexia/pull/12270",
-  "source_path": "m3/collections/recipe/order-statistics/src/main/java/jdk/m3/recipe/M3RankIndexRecipe.java",
+  "source_path": "make/m3/collections/recipe/order-statistics/src/main/java/jdk/m3/recipe/M3RankIndexRecipe.java",
   "preimage_git_blob": "146c953902760d29e6f17ce658f6625fbc532839",
   "postimage_git_blob": "c3f02f21b574ba5d0de6bc44f7b07692cccc5957",
   "sdk_first_changes": 1,

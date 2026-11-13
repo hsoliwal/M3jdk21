@@ -27,7 +27,7 @@ dispositions:
     target: src/java.base/share/classes/java/lang/String.java
     disposition: JDK_RUNTIME_INLINE
   - capability: atomize-patternize recipe mastery
-    target: m3/tooling/migration-recipes
+    target: make/m3/tooling/migration-recipes
     disposition: TOOLING_ONLY
   - capability: SharedArrayPool literal geometry
     disposition: JDK_INTERNAL_ADAPTER

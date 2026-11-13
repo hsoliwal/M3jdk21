@@ -13,7 +13,7 @@ One meaningful replaceable behavioral atom: ASCENDING↔DESCENDING on an immutab
 - Observed locally (Java 21): focused standalone two-pointer/differential harness completed **51,200 cases**, including Long.MIN_VALUE/MAX_VALUE, duplicates and filtered indices. This validates the algorithm shape, not the full SDK source.
 - Exact target Java test `M3LongIndexOrderFlipProof` runs 3,072 deterministic randomized windows, mask/slice composition, stable consecutive sorts, signed extremes, unchanged payload/physical indices. Maven/JUnit wrapper includes it.
 - Canonical recipe test checks full LST generation from pinned preimage, postimage fixed-point, hash seals and source drift refusal.
-- **Not run here:** full `mvn -B -f m3/collections/pom.xml test`, recipe test `mvn -B -f m3/collections/recipe/long-projection-flip-20261020/pom.xml test`, actual JNI native mask parity, matched JDK/HotSpot build, JMH throughput/retained memory. No general speedup assertion. Keep draft until exact-head gates pass.
+- **Not run here:** full `mvn -B -f m3/collections/pom.xml test`, recipe test `mvn -B -f make/m3/collections/recipe/long-projection-flip-20261020/pom.xml test`, actual JNI native mask parity, matched JDK/HotSpot build, JMH throughput/retained memory. No general speedup assertion. Keep draft until exact-head gates pass.
 
 Java/JNI: this is Java 21 primitive array index manipulation. Existing primitive mask JNI backend and fallback contracts are left unchanged; JNI user-callback dispatch is unnecessary.
 

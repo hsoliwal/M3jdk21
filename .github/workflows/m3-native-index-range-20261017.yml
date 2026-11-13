@@ -7,7 +7,7 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexMaskCompactor.java'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongIndexProjection.java'
       - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c'
-      - 'm3/collections/recipes/native-index-range-20261017/**'
+      - 'make/m3/collections/recipes/native-index-range-20261017/**'
       - 'test/jdk/jdk/m3/collections/M3NativeIndexRange*'
       - '.github/workflows/m3-native-index-range-20261017.yml'
   workflow_dispatch:
@@ -31,12 +31,12 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Actual Maven SDK and Java/JNI proof
-        run: mvn -B -f m3/collections/recipes/native-index-range-20261017/pom.xml clean verify
+        run: mvn -B -f make/m3/collections/recipes/native-index-range-20261017/pom.xml clean verify
       - name: Reject missing, skipped or failing tests
         run: |
           python3 - <<'PYTEST'
           import pathlib,xml.etree.ElementTree as ET
-          root=pathlib.Path('m3/collections/recipes/native-index-range-20261017/target/surefire-reports')
+          root=pathlib.Path('make/m3/collections/recipes/native-index-range-20261017/target/surefire-reports')
           suites=[ET.parse(p).getroot() for p in root.glob('TEST-*.xml')]
           assert sum(int(s.get('tests','0')) for s in suites)==5, 'expected four SDK tests and one product test'
           assert all(int(s.get(k,'0'))==0 for s in suites for k in ['errors','failures','skipped'])

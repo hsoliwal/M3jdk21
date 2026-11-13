@@ -76,4 +76,4 @@ FS-DAX, NUMA placement, power-loss durability, or inference throughput.
 All transformation recipes and their correction memory are authored and
 executed only in canonical Synexia. M3JDK21 receives the executed build/test
 postimages and passive source/recipe/gate receipts. Historical recipes still
-present under `m3/optane/recipe` are migration residue, not execution entrypoints.
+present under `make/m3/optane/recipe` are migration residue, not execution entrypoints.

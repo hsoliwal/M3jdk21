@@ -1,2 +1,2 @@
 # OpenRewrite SDK Results; no template-copy materialization
-m3/collections/qualification/m3-sdk-families-20261017/recipe-v3/src/main/java/jdk/internal/m3/M3SdkSortedContractRecipe.java	4871d83f3c0da5d1bbf0f5157c1a73d5335a8508027d2a69b5e5096ce62673ff	b5c94cad3b1414b5005aaf910bcc3981e37e73d5c63ef4b758cf2dfb8b9e6fff
+make/m3/collections/qualification/m3-sdk-families-20261017/recipe-v3/src/main/java/jdk/internal/m3/M3SdkSortedContractRecipe.java	4871d83f3c0da5d1bbf0f5157c1a73d5335a8508027d2a69b5e5096ce62673ff	b5c94cad3b1414b5005aaf910bcc3981e37e73d5c63ef4b758cf2dfb8b9e6fff

@@ -54,4 +54,4 @@ composition recipe `com.synexia.rewrite.M3Jdk21StringFocusedSearchConvergence`. 
 serially owns adaptive prepared search, exact UTF-16 position masks, then fail-closed superset
 acceptance. It is recipe/provenance authority only: the three runtime lanes remain owned and
 qualified inside M3JDK21, and this repository must not create a duplicate descriptor under
-`m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite`.
+`make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite`.

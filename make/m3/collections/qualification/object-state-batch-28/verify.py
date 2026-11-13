@@ -7,7 +7,7 @@ import hashlib
 import sys
 
 CRATE = Path(__file__).resolve().parent
-ROOT = CRATE.parents[3]
+ROOT = CRATE.parents[4]
 RESOURCES = CRATE / "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/object-state-batch-28"
 CORE = ROOT / "m3/collections/src/main/java/jdk/m3/collections"
 
@@ -32,7 +32,7 @@ def check() -> None:
     for name, expected, template in rows:
         original = ROOT / name
         image = RESOURCES / template
-        mirror = ROOT / ("m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/object-state-batch-28/" + template)
+        mirror = ROOT / ("make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/object-state-batch-28/" + template)
         if sha(original) != expected or sha(image) != expected or sha(mirror) != expected:
             raise ValueError("SDK recipe/receiver/source drift: " + name)
         if original.read_bytes() != image.read_bytes():

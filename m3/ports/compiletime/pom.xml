@@ -68,7 +68,7 @@
             <configuration>
               <!-- The ast owners import the vendored mindex AST (jdk.internal.m3.mindex.compiler.ast) and its
                    runtime closure. M3JDK carries those sources under m3/vendor/m3 without a pom (the same shape
-                   as m3/tooling/m3jdk-a3-recipes), so main compilation adds them as source roots; tests keep
+                   as make/m3/tooling/m3jdk-a3-recipes), so main compilation adds them as source roots; tests keep
                    the default test root. -->
               <compileSourceRoots>
                 <compileSourceRoot>${project.basedir}/src/main/java</compileSourceRoot>

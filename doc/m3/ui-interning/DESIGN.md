@@ -151,7 +151,7 @@ ids and path ids and the expected savings. TreeViewport, TableViewport and ListV
 - Tests: 42 JUnit 5 cases, seeded differentials against an LRU model, a path map, a depth-first row walk and String
   cells (pool on versus off, pooled and immediate lanes); JaCoCo 100% lines and branches for all six classes
   (`build_and_test.sh`).
-- Benchmarks: `m3/collections/examples/ui-interning/` (headless, 10^5 and 10^6) and, in SWT,
+- Benchmarks: `make/m3/collections/examples/ui-interning/` (headless, 10^5 and 10^6) and, in SWT,
   `docs/m3/ui-interning/bench/` (real Table and Tree on the official 3.135.0 jar and the fork's viewport jar, hidden
   desktop). Every number is in `OPTIMIZATION_LEDGER.tsv` with its evidence file.
 - Not done here: switching TreeViewport/TableViewport/ListViewport, JFace and Swing to the lanes (owners in

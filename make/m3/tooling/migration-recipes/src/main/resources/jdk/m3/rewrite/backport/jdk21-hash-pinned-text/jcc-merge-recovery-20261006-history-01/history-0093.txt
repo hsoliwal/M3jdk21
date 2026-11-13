@@ -11,22 +11,22 @@
   ],
   "files": [
     {
-      "path": "m3/docs/jcc-source-handoff.md",
+      "path": "doc/m3/jcc-source-handoff.md",
       "read": "SUCCESS",
       "equal_to_e2": true
     },
     {
-      "path": "m3/docs/name-mapping.json",
+      "path": "doc/m3/name-mapping.json",
       "read": "SUCCESS",
       "equal_to_e2": true
     },
     {
-      "path": "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
+      "path": "make/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
       "read": "SUCCESS",
       "equal_to_e2": true
     },
     {
-      "path": "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
+      "path": "make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
       "read": "SUCCESS",
       "equal_to_e2": true
     }

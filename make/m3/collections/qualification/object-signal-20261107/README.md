@@ -47,12 +47,12 @@ family's owner with NEC rows (DECISION.tsv D0 / D1).
 ## Relocation (recipe, never by hand)
 
 ```sh
-python -I m3/collections/qualification/object-signal-20261107/relocate.py --donor-git <m3scale clone> \
+python -I make/m3/collections/qualification/object-signal-20261107/relocate.py --donor-git <m3scale clone> \
     --donor-rev 3385d79a2968c770aedf1d3398b2a62f05ebc092 [--check] [--donor-subset DIR]
-python -I m3/collections/qualification/object-signal-20261107/apply.py [--check]
+python -I make/m3/collections/qualification/object-signal-20261107/apply.py [--check]
 ```
 
-* `relocate.py` v1 (derived from `m3/collections/recipe/immutable-pools-20261106/relocate.py` v2, same donor
+* `relocate.py` v1 (derived from `make/m3/collections/recipe/immutable-pools-20261106/relocate.py` v2, same donor
   repository and module): header, package, mapped imports, 15 TYPE rows, one `//FLLDCIM: RELOCATE` anchor per file;
   both-mode `DROP_METHOD` / `DROP_LINE` / `REWRITE` rows; new relocate-only `DROP_BLOCK` (count + sha256 pinned) and
   `ADAPT` rows; `SUBSET_ONLY`, `HELD`, `OMIT` rows. `PROVENANCE.tsv`: 14 FILE rows, body_match 14/14.
@@ -61,7 +61,7 @@ python -I m3/collections/qualification/object-signal-20261107/apply.py [--check]
   (4 `ADAPT` lines; the codec family is a SKIP row of immutable-pools-20261106; an immutable codec fits as
   `codec::encode`); the JNI seam of `NativeSignalOps` (4 `DROP_BLOCK` rows, 31 lines; one `ADAPT` doc line); the
   oracle keeps 4 of its 8 methods and its PASS line loses the JNI flag.
-* `apply.py` (`EDITS.tsv`): one row in `m3/collections/JDK_FAMILY_MAP.tsv`.
+* `apply.py` (`EDITS.tsv`): one row in `make/m3/collections/JDK_FAMILY_MAP.tsv`.
 
 ## Decisions (DECISION.tsv), NEC and HELD
 

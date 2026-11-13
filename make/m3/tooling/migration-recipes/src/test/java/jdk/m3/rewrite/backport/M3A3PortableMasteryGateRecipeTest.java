@@ -34,13 +34,13 @@ class M3A3PortableMasteryGateRecipeTest {
         var javaRecipe = new M3Jdk21HashPinnedSnapshotRecipe(JAVA_CRATE);
         List<String> javaTargets =
                 List.of(
-                        "m3/tooling/a3/src/main/java/jdk/m3/a3/A3.java",
-                        "m3/tooling/a3/src/main/java/jdk/m3/a3/A3Apply.java",
-                        "m3/tooling/a3/src/main/java/jdk/m3/a3/A3Mastery.java",
-                        "m3/tooling/a3/src/main/java/jdk/m3/a3/A3RecipeHome.java",
-                        "m3/tooling/a3/src/test/java/jdk/m3/a3/A3ApplyTest.java",
-                        "m3/tooling/a3/src/test/java/jdk/m3/a3/A3MasteryTest.java",
-                        "m3/tooling/a3/src/test/java/jdk/m3/a3/A3RecipeHomeTest.java");
+                        "make/m3/tooling/a3/src/main/java/jdk/m3/a3/A3.java",
+                        "make/m3/tooling/a3/src/main/java/jdk/m3/a3/A3Apply.java",
+                        "make/m3/tooling/a3/src/main/java/jdk/m3/a3/A3Mastery.java",
+                        "make/m3/tooling/a3/src/main/java/jdk/m3/a3/A3RecipeHome.java",
+                        "make/m3/tooling/a3/src/test/java/jdk/m3/a3/A3ApplyTest.java",
+                        "make/m3/tooling/a3/src/test/java/jdk/m3/a3/A3MasteryTest.java",
+                        "make/m3/tooling/a3/src/test/java/jdk/m3/a3/A3RecipeHomeTest.java");
         assertEquals(javaTargets, javaRecipe.targetPaths());
 
         Map<String, String> before =
@@ -80,8 +80,8 @@ class M3A3PortableMasteryGateRecipeTest {
         var textRecipe = new M3Jdk21HashPinnedTextSnapshotRecipe(TEXT_CRATE);
         List<String> textTargets =
                 List.of(
-                        "m3/tooling/a3/README.md",
-                        "m3/tooling/a3/M3_RECIPE_RECEIVER.md");
+                        "make/m3/tooling/a3/README.md",
+                        "make/m3/tooling/a3/M3_RECIPE_RECEIVER.md");
         assertEquals(textTargets, textRecipe.targetPaths());
         List<SourceFile> textBefore =
                 List.of(

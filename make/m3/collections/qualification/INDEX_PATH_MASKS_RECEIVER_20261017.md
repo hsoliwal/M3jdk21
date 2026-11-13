@@ -35,7 +35,7 @@ and public JDK `java.util` contracts are not changed.
 
 Historical `installed_source_manifest` and filtered-view successor remain unchanged.
 A separately source-sealed, **exact four-path** additive successor exists at
-`m3/collections/recipe/index-path-masks-20261017/manifest.tsv`;
+`make/m3/collections/recipe/index-path-masks-20261017/manifest.tsv`;
 its SHA-256 is
 `c3af2d443d0c79ee375f6ac0399a874fd5662123e4ef1af52b358c2a6f8ea28f`.
 The pinned Python verifier's preimage is
@@ -62,7 +62,7 @@ and **STRING remains active** in the canonical target receiving order.
 
 ## Catalogue and licensing
 
-`m3/collections/algorithm-catalog/index-path-masks-20261017.tsv` is a
+`make/m3/collections/algorithm-catalog/index-path-masks-20261017.tsv` is a
 byte-identical Synexia catalogue mirror. LeetCode, HackerRank, GFG are
 problem-category evidence only, and Google Guava, Eclipse Collections,
 Apache Commons and OpenJDK are comparative donors, **not copied source**.

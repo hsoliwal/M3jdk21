@@ -90,7 +90,7 @@ public final class RankBatchIntoContract {
         int[] output = {31, 32, 33};
         //FLLDCIM: MRL - follow-up of #2693: efa61222bcc made mode 0 the in-place lower-bound mode of boundBatchInto0
         // (native check: mode != 0 && mode != M3_RANK_UPPER && mode != M3_RANK_COUNT), so mode 3 is the invalid mode
-        // probed here and mode 0 is probed as valid below; recipe m3/collections/qualification/rank-stack-followup-20261107/pinned_edits.py v1
+        // probed here and mode 0 is probed as valid below; recipe make/m3/collections/qualification/rank-stack-followup-20261107/pinned_edits.py v1
         for (int[] input : new int[][] {{0, 1, 0, 3}, {-1, 1, 0, 2}, {0, 4, 0, 2}}) {
             try {
                 rank.invoke(null, new long[]{3, 4}, new long[]{3, 4},

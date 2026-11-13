@@ -33,4 +33,4 @@ The SDK tested output is a **source-candidate** until required gates run. The ca
 
 ## Catalogue and next gates
 
-`m3/collections/algorithm-catalog/filtered-sorted-duplicate-20261019.tsv` records selected/refused problem shapes, intended owners, bounds, and explicit pending qualification. Proceed serially file-by-file after earlier source preimages are sealed; do not interpret this correction as completion of all wrappers.
+`make/m3/collections/algorithm-catalog/filtered-sorted-duplicate-20261019.tsv` records selected/refused problem shapes, intended owners, bounds, and explicit pending qualification. Proceed serially file-by-file after earlier source preimages are sealed; do not interpret this correction as completion of all wrappers.

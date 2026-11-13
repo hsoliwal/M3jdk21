@@ -19,6 +19,6 @@ java -cp /tmp/m3-scope com.m3.compiletime.M3ASTLeafIndexSelfTest
 java -cp /tmp/m3-scope com.m3.compiletime.M3ASTScopeDispatchProof
 ```
 
-Recipe: `m3/tooling/shared-frontend/recipe-custody/datasets/ast-scope-dispatch-20261020`, reusing `M3HashPinnedJavaSnapshotRecipe` and the existing Maven/OpenRewrite test/receiver. Only source/test targets are output; documentation, catalogue and CI are admission evidence. Keep **draft** until actual SDK and Java21 CI pass. No JNI change is justified by row traversal; the original M3 JNI/index machinery remains intact.
+Recipe: `make/m3/tooling/shared-frontend/recipe-custody/datasets/ast-scope-dispatch-20261020`, reusing `M3HashPinnedJavaSnapshotRecipe` and the existing Maven/OpenRewrite test/receiver. Only source/test targets are output; documentation, catalogue and CI are admission evidence. Keep **draft** until actual SDK and Java21 CI pass. No JNI change is justified by row traversal; the original M3 JNI/index machinery remains intact.
 
 Remaining admission gates: actual chosen-file javac compilation with binary dependencies, full Eclipse JDT working-copy and NetBeans task ownership, Gradle/Maven plugin lifecycle, full source-built M3JDK21, cross-process cache invalidation and retained-heap benchmarks. Do not claim global single parse across separate JVMs from this narrow selector.

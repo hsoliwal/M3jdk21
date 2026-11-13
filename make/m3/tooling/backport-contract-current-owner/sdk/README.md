@@ -15,14 +15,14 @@ The exact receiver baseline is hsoliwal/M3jdk21 commit
 
 | Role | Path |
 | --- | --- |
-| REPLACE | m3/backports/test_compatibility_policy.py |
-| KEEP | m3/backports/compatibility_policy.py |
-| KEEP | m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv |
-| KEEP | m3/backports/JEP_CATALOGUE.tsv |
-| KEEP | m3/backports/RELEASE_JEP_AUTHORITY.tsv |
-| REPLACE | m3/backports/test_backport_execution_waves.py |
-| KEEP | m3/backports/backport_execution_waves.py |
-| REPLACE | m3/backports/BACKPORT_EXECUTION_WAVES.md |
+| REPLACE | make/m3/backports/test_compatibility_policy.py |
+| KEEP | make/m3/backports/compatibility_policy.py |
+| KEEP | make/m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv |
+| KEEP | make/m3/backports/JEP_CATALOGUE.tsv |
+| KEEP | make/m3/backports/RELEASE_JEP_AUTHORITY.tsv |
+| REPLACE | make/m3/backports/test_backport_execution_waves.py |
+| KEEP | make/m3/backports/backport_execution_waves.py |
+| REPLACE | make/m3/backports/BACKPORT_EXECUTION_WAVES.md |
 
 Only the two owning Python tests and explanatory document have reviewed output
 bytes. The production policy, planner and three authority/compatibility tables

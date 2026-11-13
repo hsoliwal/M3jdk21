@@ -6,7 +6,7 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexPartitions.java'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongBag.java'
       - 'test/jdk/jdk/m3/collections/M3SdkRecovery*.java'
-      - 'm3/collections/qualification/sdk-current-recovery-20261017/**'
+      - 'make/m3/collections/qualification/sdk-current-recovery-20261017/**'
       - '.github/workflows/m3-sdk-current-recovery-20261017.yml'
   workflow_dispatch:
 permissions:
@@ -27,7 +27,7 @@ jobs:
           java-version: '21'
       - name: Strict SHA-256 source admission and refusal tests
         run: |
-          python3 -m unittest discover -s m3/collections/qualification/sdk-current-recovery-20261017 -p 'test_*.py' -v
+          python3 -m unittest discover -s make/m3/collections/qualification/sdk-current-recovery-20261017 -p 'test_*.py' -v
       - name: Compile all actual collection owners and run JUnit
         run: mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3SdkRecoveryTest test
       - name: Compile existing C17 path-mask native implementation

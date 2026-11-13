@@ -6,7 +6,7 @@
 #   1        mvn clean package of m3/compiler/static-use on JDK 21 (-Xlint:all -Werror on main and test sources), 0 [WARNING]
 #   2        the donor test and the dump ran in the test phase (surefire totals, dump figures)
 #   3        differential.sh: donor vs relocated dumps byte-identical (default, -Xint), donor JUnit test, mutants refused, javap
-#   reactor  mvn -f m3/pom.xml -DskipTests package -pl compiler/static-use -am (the module is a default reactor module)
+#   reactor  mvn -f make/m3/pom.xml -DskipTests package -pl compiler/static-use -am (the module is a default reactor module)
 #   naming   jdk_naming.py apply --only m3/compiler/static-use/ reports 0 moves, 0 rewrites, 0 refusals (new files staged first)
 #   siblings every m3/compiler/<dir> module descriptor is 'module org.m3jdk.compiler.<x>' exporting jdk.m3.compiler.<x>, every
 #            m3/compiler pom has groupId com.m3, and every main source package is jdk.m3.compiler.<x> (this module included)
@@ -46,9 +46,9 @@ else
     gate 3_differential FAIL "log=$SCRATCH/differential.log"; tail -8 "$SCRATCH/differential.log"
 fi
 
-(cd "$ROOT" && mvn "${MVN_COMMON[@]}" -f m3/pom.xml -DskipTests package -pl compiler/static-use -am > "$SCRATCH/reactor-package.log" 2>&1)
+(cd "$ROOT" && mvn "${MVN_COMMON[@]}" -f make/m3/pom.xml -DskipTests package -pl compiler/static-use -am > "$SCRATCH/reactor-package.log" 2>&1)
 if grep -q "BUILD SUCCESS" "$SCRATCH/reactor-package.log" && ! grep -qE "^\[ERROR\]" "$SCRATCH/reactor-package.log"; then
-    gate reactor PASS "mvn -f m3/pom.xml -DskipTests package -pl compiler/static-use -am: BUILD SUCCESS ($(grep -cE '^\[INFO\] Building ' "$SCRATCH/reactor-package.log") project) log=$SCRATCH/reactor-package.log"
+    gate reactor PASS "mvn -f make/m3/pom.xml -DskipTests package -pl compiler/static-use -am: BUILD SUCCESS ($(grep -cE '^\[INFO\] Building ' "$SCRATCH/reactor-package.log") project) log=$SCRATCH/reactor-package.log"
 else
     gate reactor FAIL "log=$SCRATCH/reactor-package.log"
 fi
@@ -79,7 +79,7 @@ EOF
 )
 case "$siblings" in OK*) gate siblings PASS "$siblings" ;; *) gate siblings FAIL "$siblings" ;; esac
 
-naming=$(cd "$ROOT" && python -I m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/compiler/static-use/ 2>&1 | grep -E "^(JDK_NAMING|REFUSED)" | tail -1)
+naming=$(cd "$ROOT" && python -I make/m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/compiler/static-use/ 2>&1 | grep -E "^(JDK_NAMING|REFUSED)" | tail -1)
 case "$naming" in *"moves=0 rewrites=0 refusals=0"*) gate naming PASS "$naming" ;; *) gate naming FAIL "$naming" ;; esac
 echo "VERIFY $status"
 [ "$status" = PASS ]

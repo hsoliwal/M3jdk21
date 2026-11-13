@@ -47,7 +47,7 @@ public final class RecipeContractTest {
         var dry = ExactFileRecipe.apply(f.source, f.target, f.plan, true);
         require(dry.changed() == 2 && dry.dryRun(), "dry run count");
         require(!Files.exists(f.target.resolve("m3/new")), "dry run writes nothing");
-        require(!Files.exists(f.target.resolve("m3/migration")), "dry run creates no state");
+        require(!Files.exists(f.target.resolve("make/m3/migration")), "dry run creates no state");
         var first = ExactFileRecipe.apply(f.source, f.target, f.plan, false);
         require(first.changed() == 2, "first apply");
         require(Files.readString(f.target.resolve("m3/new/first.java")).equals("first\n"), "exact bytes");
@@ -130,13 +130,13 @@ public final class RecipeContractTest {
         refuses(() -> ExactFileRecipe.apply(deleted.source, deleted.target, deleted.plan, false));
         require(!Files.exists(deleted.target.resolve("m3/new/second.java")), "target deletion is drift, not permission to recreate");
         Fixture locked = new Fixture();
-        Files.createDirectories(locked.target.resolve("m3/migration/.state"));
-        Path foreignLock = locked.target.resolve("m3/migration/.state/lock");
+        Files.createDirectories(locked.target.resolve("make/m3/migration/.state"));
+        Path foreignLock = locked.target.resolve("make/m3/migration/.state/lock");
         Files.writeString(foreignLock, "other invocation");
         refuses(() -> ExactFileRecipe.apply(locked.source, locked.target, locked.plan, false));
         require(Files.readString(foreignLock).equals("other invocation"), "never remove another invocation's lock");
         Fixture reserved = new Fixture();
-        Files.writeString(reserved.plan, Files.readString(reserved.plan).replace("m3/new/second.java", "m3/migration/.state"));
+        Files.writeString(reserved.plan, Files.readString(reserved.plan).replace("m3/new/second.java", "make/m3/migration/.state"));
         refuses(() -> ExactFileRecipe.apply(reserved.source, reserved.target, reserved.plan, false));
         require(!Files.exists(reserved.target.resolve("m3/new/first.java")), "state directory is reserved");
         System.out.println("EXACT_RECIPE_PASS checks=" + checks);

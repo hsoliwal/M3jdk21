@@ -63,7 +63,7 @@ separate broader-scope proof exists.
 The Maven proof command is:
 
 ```bash
-mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify
+mvn -B -ntp -f make/m3/tooling/migration-recipes/pom.xml clean verify
 ```
 
 That one build compiles the Java 21 recipe implementation, executes OpenRewrite/JUnit proof fixtures,

@@ -104,7 +104,7 @@ and `source-custody/rv32im-provider.json`. Tornado API/runtime/driver sources ke
 their own scoped licenses in the integrated source distribution. This module's
 license does not relicense them or the `java.base` bulk contract.
 
-The existing `m3/runtime-integration/FOSS_REUSE_DECISION.tsv` registers the
+The existing `make/m3/runtime-integration/FOSS_REUSE_DECISION.tsv` registers the
 separate Tornado source-build intake and this exact compatibility provider.
 This provider uses the existing `INDEPENDENT_APACHE_MODULE` intake mode: its
 Apache sources and notices stay in a separately built `m3/**` module. There is

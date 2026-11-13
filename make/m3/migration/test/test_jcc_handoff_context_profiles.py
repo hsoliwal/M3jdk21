@@ -16,10 +16,10 @@ import unittest
 from unittest.mock import patch
 
 
-MIGRATION = "m3/migration/migration.py"
-INSTALLER = "m3/migration/recipe.py"
-PACKET_TEST = "m3/migration/test/test_jcc_handoff_packet.py"
-INTAKE_CRATE = Path("m3/migration/intake-20261005/crate")
+MIGRATION = "make/m3/migration/migration.py"
+INSTALLER = "make/m3/migration/recipe.py"
+PACKET_TEST = "make/m3/migration/test/test_jcc_handoff_packet.py"
+INTAKE_CRATE = Path("make/m3/migration/intake-20261005/crate")
 INTAKE_PLAN_SHA256 = "47aa763f4678124df42f3181e68e2ff0a74636add9403c1e36e40224094e0cdc"
 INSTALLER_SHA256 = "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"
 PROFILES = (
@@ -42,9 +42,9 @@ PROFILES = (
 )
 
 
-POM = "m3/tooling/migration-recipes/pom.xml"
+POM = "make/m3/tooling/migration-recipes/pom.xml"
 HISTORICAL_POM = Path(
-    "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/"
+    "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/"
     "jdk21-hash-pinned-text/jcc-handoff-20261005/pom-before-752.xml"
 )
 HISTORICAL_POM_SHA256 = "3eb73bbf38c0c591b8f714f6e9923eaa25a35b5ffc7f0512b8ec7fd3602b5531"
@@ -63,7 +63,7 @@ class JccHandoffContextProfileTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         override = os.environ.get("M3_JCC_CANDIDATE_ROOT")
-        cls.candidate = Path(override).resolve() if override else Path(__file__).resolve().parents[3]
+        cls.candidate = Path(override).resolve() if override else Path(__file__).resolve().parents[4]
         previous_cache_flag = sys.dont_write_bytecode
         sys.dont_write_bytecode = True
         cls.addClassCleanup(setattr, sys, "dont_write_bytecode", previous_cache_flag)

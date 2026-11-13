@@ -3,11 +3,11 @@ name: M3JDK21 native JNI declaration projection Java21
 on:
   pull_request:
     paths:
-      - 'm3/tooling/atom-census/**'
+      - 'make/m3/tooling/atom-census/**'
       - '.github/workflows/m3jdk21-jni-declaration-projection-20261101.yml'
   push:
     paths:
-      - 'm3/tooling/atom-census/**'
+      - 'make/m3/tooling/atom-census/**'
       - '.github/workflows/m3jdk21-jni-declaration-projection-20261101.yml'
 permissions:
   contents: read
@@ -24,10 +24,10 @@ jobs:
           java-version: '21'
       - name: Java21 strict compile and independent JNI source/header proof
         shell: bash
-        run: bash m3/tooling/atom-census/verify-jni-projection.sh
+        run: bash make/m3/tooling/atom-census/verify-jni-projection.sh
       - name: Genuine module JUnit tests with full original semantic tests
         shell: bash
-        run: mvn -B -ntp -f m3/tooling/atom-census/pom.xml clean test
+        run: mvn -B -ntp -f make/m3/tooling/atom-census/pom.xml clean test
       - name: Fail closed on absent or skipped JUnit XML
         shell: bash
         run: |
@@ -35,7 +35,7 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           import xml.etree.ElementTree as ET
-          root=Path('m3/tooling/atom-census/target/surefire-reports')
+          root=Path('make/m3/tooling/atom-census/target/surefire-reports')
           reports=sorted(root.glob('TEST-*.xml'))
           if not reports: raise SystemExit('HOLD: missing JUnit XML results')
           tests=0

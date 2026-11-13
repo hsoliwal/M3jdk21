@@ -8,7 +8,7 @@ on:
     paths:
       - "src/java.base/share/classes/java/lang/M3StringRegexDp.java"
       - "test/jdk/java/lang/String/M3StringRegexDpTest.java"
-      - "m3/runtime-integration/regex-rolling-cursor/**"
+      - "make/m3/runtime-integration/regex-rolling-cursor/**"
       - ".github/workflows/m3-regex-rolling-cursor-recovery.yml"
 
 permissions:
@@ -33,9 +33,9 @@ jobs:
           distribution: temurin
           java-version: "21"
       - name: Verify full source SHA256 and retained native/effects
-        run: python3 m3/runtime-integration/regex-rolling-cursor/verify_exact_source.py
+        run: python3 make/m3/runtime-integration/regex-rolling-cursor/verify_exact_source.py
       - name: Compile exact old/new rolling method and real CodeUnitCursor with fixture owners
-        run: python3 m3/runtime-integration/regex-rolling-cursor/run_source_extracted_java21.py
+        run: python3 make/m3/runtime-integration/regex-rolling-cursor/run_source_extracted_java21.py
       - name: Strict compile expanded jtreg source on stock Java21 (syntax only)
         run: |
           mkdir -p "$RUNNER_TEMP/m3-regex-jtreg"

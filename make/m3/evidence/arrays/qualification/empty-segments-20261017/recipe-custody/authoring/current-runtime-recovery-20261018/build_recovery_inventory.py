@@ -111,7 +111,7 @@ def main():
             target, kind = payloads[relative]
             license_name = target_rights(target)
             revision = PIN if kind == "preimage" else DELIVERED
-            if kind == "postimage" and (target == "m3/backports/ALGORITHM_CATALOGUE.tsv"
+            if kind == "postimage" and (target == "make/m3/backports/ALGORITHM_CATALOGUE.tsv"
                                         or "merged-repair-recovery-20261018" in target):
                 revision = "FIRST_PARTY_CURRENT_SOURCE_COMPOSITION_NO_REMOTE_COMMIT_CLAIM"
             add(source, relative, "QUALIFIED_RECIPE_INPUT_WITH_PRESERVED_PAYLOAD_RIGHTS", license_name,

@@ -1,6 +1,6 @@
 # Exact current canonical mapping validation — C0 / V03
 
-The unchanged canonical `m3/migration/migration.py` and schema pass against the exact receiving commit `c0a14387009aefc7d62bd3268055d526e04f9074`, root `491bbd80a51483d0710fc12c1bad3a037b385ba0`. The result is `MIGRATION_MANIFEST_VALID completion=INCOMPLETE`, exit 0. All acceptance remains blocked.
+The unchanged canonical `make/m3/migration/migration.py` and schema pass against the exact receiving commit `c0a14387009aefc7d62bd3268055d526e04f9074`, root `491bbd80a51483d0710fc12c1bad3a037b385ba0`. The result is `MIGRATION_MANIFEST_VALID completion=INCOMPLETE`, exit 0. All acceptance remains blocked.
 
 The fixture contains 50 files: exactly 44 required artifacts, the unchanged canonical validator/schema, and the four frozen current mapping images. The artifact closure is 30 unique implemented target/recipe paths, one tested receipt, and 13 additional selected-run input/stdout paths. No historical command or test was rerun.
 

@@ -16,7 +16,7 @@
     {
       "source": "hsoliwal/com.synexia/synexia-m3-jmods/modules/com.synexia.m3.text.normalize :: UnicodeNormalizer",
       "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.normalize : module com.m3.tools.text.normalize",
+      "target": "make/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.normalize : module com.m3.tools.text.normalize",
       "status": "Selected optional receiver source; exact image/product acceptance is recorded separately",
       "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018 (existing hash-pinned Java/text snapshot engines)",
       "target_rule": "Target-owned module/package; public String/CharSequence uses the running M3JDK owner; no com.synexia runtime dependency",
@@ -27,7 +27,7 @@
     {
       "source": "hsoliwal/com.synexia/synexia-m3-jmods/modules/com.synexia.m3.text.tokenize :: WordTokenizer",
       "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.tokenize : module com.m3.tools.text.tokenize",
+      "target": "make/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.tokenize : module com.m3.tools.text.tokenize",
       "status": "Selected optional receiver source; exact image/product acceptance is recorded separately",
       "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018 (existing hash-pinned Java/text snapshot engines)",
       "target_rule": "Target-owned module/package; public String/CharSequence uses the running M3JDK owner; no com.synexia runtime dependency",
@@ -38,7 +38,7 @@
     {
       "source": "hsoliwal/com.synexia/synexia-m3-jmods/modules/com.synexia.m3.text.regex :: RegexMatcher",
       "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.regex : module com.m3.tools.text.regex",
+      "target": "make/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.regex : module com.m3.tools.text.regex",
       "status": "Selected optional receiver source; exact image/product acceptance is recorded separately",
       "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018 (existing hash-pinned Java/text snapshot engines)",
       "target_rule": "Target-owned module/package; public String/CharSequence uses the running M3JDK owner; no com.synexia runtime dependency",
@@ -49,7 +49,7 @@
     {
       "source": "hsoliwal/com.synexia/synexia-m3-jmods/modules/com.synexia.m3.text.search :: ExactSearch",
       "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.search : module com.m3.tools.text.search",
+      "target": "make/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.search : module com.m3.tools.text.search",
       "status": "Selected optional receiver source; exact image/product acceptance is recorded separately",
       "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018 (existing hash-pinned Java/text snapshot engines)",
       "target_rule": "Target-owned module/package; public String/CharSequence uses the running M3JDK owner; no com.synexia runtime dependency",
@@ -60,7 +60,7 @@
     {
       "source": "hsoliwal/com.synexia/synexia-m3-jmods/modules/com.synexia.m3.text.ngram :: NGrams",
       "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.ngram : module com.m3.tools.text.ngram",
+      "target": "make/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.ngram : module com.m3.tools.text.ngram",
       "status": "Selected optional receiver source; exact image/product acceptance is recorded separately",
       "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018 (existing hash-pinned Java/text snapshot engines)",
       "target_rule": "Target-owned module/package; public String/CharSequence uses the running M3JDK owner; no com.synexia runtime dependency",
@@ -71,7 +71,7 @@
     {
       "source": "hsoliwal/com.synexia/synexia-m3-jmods/modules/com.synexia.m3.text.frequency :: TermFrequency",
       "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.frequency : module com.m3.tools.text.frequency",
+      "target": "make/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.frequency : module com.m3.tools.text.frequency",
       "status": "Selected optional receiver source; exact image/product acceptance is recorded separately",
       "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018 (existing hash-pinned Java/text snapshot engines)",
       "target_rule": "Target-owned module/package; public String/CharSequence uses the running M3JDK owner; no com.synexia runtime dependency",
@@ -82,7 +82,7 @@
     {
       "source": "hsoliwal/com.synexia/synexia-m3-jmods/modules/com.synexia.m3.text.similarity :: EditDistance",
       "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.similarity : module com.m3.tools.text.similarity",
+      "target": "make/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.similarity : module com.m3.tools.text.similarity",
       "status": "Selected optional receiver source; exact image/product acceptance is recorded separately",
       "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018 (existing hash-pinned Java/text snapshot engines)",
       "target_rule": "Target-owned module/package; public String/CharSequence uses the running M3JDK owner; no com.synexia runtime dependency",
@@ -93,7 +93,7 @@
     {
       "source": "hsoliwal/com.synexia/synexia-m3-jmods/modules/com.synexia.m3.text.diff :: TextDelta",
       "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.diff : module com.m3.tools.text.diff",
+      "target": "make/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.diff : module com.m3.tools.text.diff",
       "status": "Selected optional receiver source; exact image/product acceptance is recorded separately",
       "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018 (existing hash-pinned Java/text snapshot engines)",
       "target_rule": "Target-owned module/package; public String/CharSequence uses the running M3JDK owner; no com.synexia runtime dependency",
@@ -104,7 +104,7 @@
     {
       "source": "hsoliwal/com.synexia/synexia-m3-jmods/modules/com.synexia.m3.text.index :: InvertedIndex",
       "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.index : module com.m3.tools.text.index",
+      "target": "make/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.index : module com.m3.tools.text.index",
       "status": "Selected optional receiver source; exact image/product acceptance is recorded separately",
       "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018 (existing hash-pinned Java/text snapshot engines)",
       "target_rule": "Target-owned module/package; public String/CharSequence uses the running M3JDK owner; no com.synexia runtime dependency",
@@ -115,7 +115,7 @@
     {
       "source": "hsoliwal/com.synexia/synexia-m3-jmods/modules/com.synexia.m3.graph.topology :: TopologicalOrder",
       "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.topology : module com.m3.tools.graph.topology",
+      "target": "make/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.topology : module com.m3.tools.graph.topology",
       "status": "Selected optional receiver source; exact image/product acceptance is recorded separately",
       "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018 (existing hash-pinned Java/text snapshot engines)",
       "target_rule": "Target-owned module/package; public String/CharSequence uses the running M3JDK owner; no com.synexia runtime dependency",
@@ -126,7 +126,7 @@
     {
       "source": "hsoliwal/com.synexia/synexia-m3-jmods/modules/com.synexia.m3.graph.paths :: ShortestPaths",
       "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.paths : module com.m3.tools.graph.paths",
+      "target": "make/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.paths : module com.m3.tools.graph.paths",
       "status": "Selected optional receiver source; exact image/product acceptance is recorded separately",
       "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018 (existing hash-pinned Java/text snapshot engines)",
       "target_rule": "Target-owned module/package; public String/CharSequence uses the running M3JDK owner; no com.synexia runtime dependency",
@@ -137,7 +137,7 @@
     {
       "source": "hsoliwal/com.synexia/synexia-m3-jmods/modules/com.synexia.m3.stats.streaming :: RunningStatistics",
       "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.stats.streaming : module com.m3.tools.stats.streaming",
+      "target": "make/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.stats.streaming : module com.m3.tools.stats.streaming",
       "status": "Selected optional receiver source; exact image/product acceptance is recorded separately",
       "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018 (existing hash-pinned Java/text snapshot engines)",
       "target_rule": "Target-owned module/package; public String/CharSequence uses the running M3JDK owner; no com.synexia runtime dependency",
@@ -148,7 +148,7 @@
     {
       "source": "hsoliwal/com.synexia/synexia-m3-jmods/modules/com.synexia.m3.constraint.interval :: Intervals",
       "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.constraint.interval : module com.m3.tools.constraint.interval",
+      "target": "make/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.constraint.interval : module com.m3.tools.constraint.interval",
       "status": "Selected optional receiver source; exact image/product acceptance is recorded separately",
       "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018 (existing hash-pinned Java/text snapshot engines)",
       "target_rule": "Target-owned module/package; public String/CharSequence uses the running M3JDK owner; no com.synexia runtime dependency",
@@ -159,7 +159,7 @@
     {
       "source": "hsoliwal/com.synexia/synexia-m3-jmods/modules/com.synexia.m3.codec.varint :: VarInts",
       "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.codec.varint : module com.m3.tools.codec.varint",
+      "target": "make/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.codec.varint : module com.m3.tools.codec.varint",
       "status": "Selected optional receiver source; exact image/product acceptance is recorded separately",
       "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018 (existing hash-pinned Java/text snapshot engines)",
       "target_rule": "Target-owned module/package; public String/CharSequence uses the running M3JDK owner; no com.synexia runtime dependency",
@@ -170,7 +170,7 @@
     {
       "source": "hsoliwal/com.synexia/synexia-m3-jmods/modules/com.synexia.m3.verify.sha256 :: Sha256",
       "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.verify.sha256 : module com.m3.tools.verify.sha256",
+      "target": "make/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.verify.sha256 : module com.m3.tools.verify.sha256",
       "status": "Selected optional receiver source; exact image/product acceptance is recorded separately",
       "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018 (existing hash-pinned Java/text snapshot engines)",
       "target_rule": "Target-owned module/package; public String/CharSequence uses the running M3JDK owner; no com.synexia runtime dependency",
@@ -181,7 +181,7 @@
     {
       "source": "hsoliwal/com.synexia/synexia-m3-jmods/modules/com.synexia.m3.plan.priority :: StablePriorityQueue",
       "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.plan.priority : module com.m3.tools.plan.priority",
+      "target": "make/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.plan.priority : module com.m3.tools.plan.priority",
       "status": "Selected optional receiver source; exact image/product acceptance is recorded separately",
       "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018 (existing hash-pinned Java/text snapshot engines)",
       "target_rule": "Target-owned module/package; public String/CharSequence uses the running M3JDK owner; no com.synexia runtime dependency",
@@ -192,7 +192,7 @@
     {
       "source": "com.synexia.indexstring.file.MIndexFileStreamIndexer single-stream admission pattern",
       "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-      "target": "m3/tooling/module-packs/text-tools/src/jdk.m3.io/jdk/m3/io/M3File.java",
+      "target": "make/m3/tooling/module-packs/text-tools/src/jdk.m3.io/jdk/m3/io/M3File.java",
       "status": "Additive bounded snapshot adapter; full MIndexFile data plane not received",
       "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018",
       "target_rule": "One admitted public String plus raw-byte and UTF-16 identities; no retained second byte snapshot, token pool or postings store",
@@ -214,7 +214,7 @@
     {
       "source": "Existing com.sun.source.util.M3AST compiler frontend",
       "source_commit": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
-      "target": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/M3AstTools.java",
+      "target": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/M3AstTools.java",
       "status": "Actual callback projection over compiler-owned trees; syntax-only parse helper",
       "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018",
       "target_rule": "No independent parser, tree owner or live compiler-object cache; detached primitive facts and public record projections",
@@ -225,7 +225,7 @@
     {
       "source": "Existing jdk.m3.text/jdk.m3.io/jdk.m3.structured owners and selected16 donor modules",
       "source_commit": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
-      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu : module com.m3.tools.cpu",
+      "target": "make/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu : module com.m3.tools.cpu",
       "status": "Optional aggregate; exactly22 current registry bindings; direct APIs exported separately",
       "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018",
       "target_rule": "Reuse existing Registry/Plan/Limits/M3UnixRuntime and sole existing jmod_pack.py; no parallel scheduler or packager",
@@ -234,9 +234,9 @@
       "gates": "Exactly20 optional linked modules; JAR/JMOD readback; original JNI; default/storage-enabled fixtures; exact receipts"
     },
     {
-      "source": "m3/tooling/jmod-recipes/CPU_TOOL_CATEGORY_MATRIX_20261017.tsv :110 inventory rows",
+      "source": "make/m3/tooling/jmod-recipes/CPU_TOOL_CATEGORY_MATRIX_20261017.tsv :110 inventory rows",
       "source_commit": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
-      "target": "m3/tooling/module-packs/cpu-tools/COVERAGE.tsv : task-local scope mapping",
+      "target": "make/m3/tooling/module-packs/cpu-tools/COVERAGE.tsv : task-local scope mapping",
       "status": "Inventory coverage only; selected partial subsets and deferred families are explicit",
       "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018",
       "target_rule": "Do not promote full SAT/SMT/LP/ILP, consensus, media, Lucene/OpenNLP, quantization/distillation/WebGPU or ordered product families from this optional pack",

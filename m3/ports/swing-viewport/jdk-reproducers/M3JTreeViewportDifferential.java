@@ -385,7 +385,7 @@ public final class M3JTreeViewportDifferential {
     static int rebuiltAfterException;
 
     /**
-     * D1 (m3/docs/swing-viewport/UPSTREAM_DEFECTS.tsv): after treeNodesChanged for children of a
+     * D1 (doc/m3/swing-viewport/UPSTREAM_DEFECTS.tsv): after treeNodesChanged for children of a
      * hidden root, the stock cache keeps the old y of the rows that follow a child whose height
      * changed. Accepted only right after such a change, only when the stock rows are then
      * inconsistent and the M3 rows are not; both trees are then re-synchronized through public API

@@ -1,13 +1,13 @@
 type	owned_status	m3_owner	evidence	reuse_owner	note
 com.google.common.collect.EvictingQueue	DONE #1239	com.m3.collections.guava.M3EvictingQueue	master:m3/collections/implementations/guava-evicting-queue	-	owned array ring; merged
-com.google.common.collect.HashBiMap	DONE master	com.m3.collections.guava.M3HashBiMap	master:m3/collections/qualification/owned-guava-hash-bimap-20261017	-	owned payload/hash/order lanes
-org.apache.commons.collections4.queue.CircularFifoQueue	DONE master	com.m3.collections.apache.M3CircularFifoQueue	master:m3/collections/qualification/owned-apache-circular-fifo-20261018	-	owned array ring
-org.apache.commons.collections4.bidimap.DualHashBidiMap	DONE master	com.m3.collections.apache.M3BidiMap	master:m3/collections/qualification/owned-apache-bidimap-20261017	-	complete Apache BidiMap over two M3LinkedHashMap owners
-org.apache.commons.collections4.multimap.ArrayListValuedHashMap	DONE master	com.m3.collections.apache.M3ListValuedMap	master:m3/collections/qualification/owned-apache-multivalue-20261018	-	owned list-valued map
-org.apache.commons.collections4.multimap.HashSetValuedHashMap	DONE master	com.m3.collections.apache.M3SetValuedMap	master:m3/collections/qualification/owned-apache-multivalue-20261018	-	owned set-valued map
+com.google.common.collect.HashBiMap	DONE master	com.m3.collections.guava.M3HashBiMap	master:make/m3/collections/qualification/owned-guava-hash-bimap-20261017	-	owned payload/hash/order lanes
+org.apache.commons.collections4.queue.CircularFifoQueue	DONE master	com.m3.collections.apache.M3CircularFifoQueue	master:make/m3/collections/qualification/owned-apache-circular-fifo-20261018	-	owned array ring
+org.apache.commons.collections4.bidimap.DualHashBidiMap	DONE master	com.m3.collections.apache.M3BidiMap	master:make/m3/collections/qualification/owned-apache-bidimap-20261017	-	complete Apache BidiMap over two M3LinkedHashMap owners
+org.apache.commons.collections4.multimap.ArrayListValuedHashMap	DONE master	com.m3.collections.apache.M3ListValuedMap	master:make/m3/collections/qualification/owned-apache-multivalue-20261018	-	owned list-valued map
+org.apache.commons.collections4.multimap.HashSetValuedHashMap	DONE master	com.m3.collections.apache.M3SetValuedMap	master:make/m3/collections/qualification/owned-apache-multivalue-20261018	-	owned set-valued map
 org.apache.commons.collections4.multiset.UnmodifiableMultiSet	DONE master	com.m3.collections.apache.M3ApacheUnmodifiableMultiSet	master:m3/collections/implementations/apache	-	owned decorator closure of the multivalue packet
 org.apache.commons.collections4.set.UnmodifiableSet	DONE master	com.m3.collections.apache.M3ApacheUnmodifiableSet	master:m3/collections/implementations/apache	-	owned decorator closure of the multivalue packet
-org.springframework.util.LinkedMultiValueMap	DONE master	com.m3.collections.spring.M3MultiValueMap	master:m3/collections/qualification/owned-spring-multivalue-map-20261017	-	owned Spring MultiValueMap
+org.springframework.util.LinkedMultiValueMap	DONE master	com.m3.collections.spring.M3MultiValueMap	master:make/m3/collections/qualification/owned-spring-multivalue-map-20261017	-	owned Spring MultiValueMap
 java.util.ArrayList	EXISTING	com.m3.collections.M3ArrayList	master:m3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java	-	core generic list owner
 java.util.LinkedHashMap	EXISTING	com.m3.collections.M3LinkedHashMap	master:m3/collections/src/main/java/jdk/m3/collections/M3LinkedHashMap.java	-	slot lanes + int link lanes
 java.util.LinkedHashSet	EXISTING	com.m3.collections.M3LinkedHashSet	master:m3/collections/src/main/java/jdk/m3/collections/M3LinkedHashSet.java	-	keyOnly slot table

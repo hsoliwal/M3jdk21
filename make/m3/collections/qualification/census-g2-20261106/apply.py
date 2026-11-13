@@ -3,10 +3,10 @@
 # SPDX-License-Identifier: Apache-2.0
 """Recipe CENSUS_OWNER_EDITS v1 (census-g2-20261106): hash-pinned edits of existing jdk.m3.collections owners for M3JDK census leaves.
 
-Derived from m3/qualification/progress-monitor-unify-20261106/unify.py v1 (hash-pinned preimage blobs, drift refusal,
+Derived from make/m3/qualification/progress-monitor-unify-20261106/unify.py v1 (hash-pinned preimage blobs, drift refusal,
 one-anchor EDIT rules, LF payloads re-joined with the preimage's line ending, idempotent fixed point). Rules live in
 EDIT_RULES.tsv next to this script (group data, no code: kind, path, preimage blob, note, JSON payload; PIN rows name
-base_commit and donor_commit). A .tsv is a lineage file for m3/tooling/jdk-naming, so donor paths and package names
+base_commit and donor_commit). A .tsv is a lineage file for make/m3/tooling/jdk-naming, so donor paths and package names
 in the rules are never renamed; this script names none and is the same in every census group.
 
 Rule kinds:
@@ -185,7 +185,7 @@ def run(root: Path, check: bool, donor: dict) -> int:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--root", default=str(RECIPE_DIR.parents[3]), help="repository root (default: four up)")
+    parser.add_argument("--root", default=str(RECIPE_DIR.parents[4]), help="repository root (default: four up)")
     parser.add_argument("--donor-git", help="donor git directory (DONOR rules)")
     parser.add_argument("--donor-rev", help="donor revision (DONOR rules)")
     parser.add_argument("--check", action="store_true", help="write nothing; exit 1 when a run would change a file")

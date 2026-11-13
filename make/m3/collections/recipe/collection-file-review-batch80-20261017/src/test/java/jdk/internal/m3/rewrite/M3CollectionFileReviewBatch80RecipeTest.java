@@ -42,7 +42,7 @@ import org.openrewrite.text.PlainTextParser;
 /** Static catalogue custody and declared review boundaries, without behavioral admission. */
 final class M3CollectionFileReviewBatch80RecipeTest {
     private static final String ROOT="/jdk/internal/m3/rewrite/hash-pinned-text/collection-file-review-batch80/";
-    private static final String PATH_ROOT="m3/collections/algorithm-catalog/";
+    private static final String PATH_ROOT="make/m3/collections/algorithm-catalog/";
     private static final String YAML="/META-INF/rewrite/m3-collection-file-review-batch80.yml";
     private static final String NAME="jdk.internal.m3.CollectionFileReviewBatch8020261017";
     private static final String UNRELATED="unrelated.txt";
@@ -60,12 +60,12 @@ final class M3CollectionFileReviewBatch80RecipeTest {
     }
     private static List<Target> targets() throws Exception {
         var expected=List.of(
-                new Target("m3/collections/algorithm-catalog/README-collection-file-review-20261017.md","f598ec356cd140e71a7d2c085c61ac857b8a7d8e8228723a85df7cfff60db4d9",5039,resource(ROOT+"README-collection-file-review-20261017.md")),
-                new Target("m3/collections/algorithm-catalog/SOURCE_INVARIANT_CONTRACT-20261017.md","e80c95e72cdff72e8f14be43e70a768a503eaeea0b168a1ce6393696d51c1fe5",2044,resource(ROOT+"SOURCE_INVARIANT_CONTRACT-20261017.md")),
-                new Target("m3/collections/algorithm-catalog/TASKS-collection-batch80-20261017.md","86062da35ac684503c468118cf925b286be92cfd470e9bc10748f8e712659cae",2311,resource(ROOT+"TASKS-collection-batch80-20261017.md")),
-                new Target("m3/collections/algorithm-catalog/collection-candidate-comparison-20261017.tsv","e9d721fd062fe291f695a9dc39de2f4d90a725a49432cde5017ccac644c910cd",15104,resource(ROOT+"collection-candidate-comparison-20261017.tsv")),
-                new Target("m3/collections/algorithm-catalog/collection-catalogue-input-provenance-20261017.tsv","15783211d8ccd539aa70d5559cf29cccfa8ad24e4260e02e2a80819bdc7637ec",5392,resource(ROOT+"collection-catalogue-input-provenance-20261017.tsv")),
-                new Target("m3/collections/algorithm-catalog/collection-file-review-20261017.tsv","1eda2361d3c9dcbc7b87fea67184c6747731fc1c8de9439c77ccda61171d29f3",63289,resource(ROOT+"collection-file-review-20261017.tsv")));
+                new Target("make/m3/collections/algorithm-catalog/README-collection-file-review-20261017.md","f598ec356cd140e71a7d2c085c61ac857b8a7d8e8228723a85df7cfff60db4d9",5039,resource(ROOT+"README-collection-file-review-20261017.md")),
+                new Target("make/m3/collections/algorithm-catalog/SOURCE_INVARIANT_CONTRACT-20261017.md","e80c95e72cdff72e8f14be43e70a768a503eaeea0b168a1ce6393696d51c1fe5",2044,resource(ROOT+"SOURCE_INVARIANT_CONTRACT-20261017.md")),
+                new Target("make/m3/collections/algorithm-catalog/TASKS-collection-batch80-20261017.md","86062da35ac684503c468118cf925b286be92cfd470e9bc10748f8e712659cae",2311,resource(ROOT+"TASKS-collection-batch80-20261017.md")),
+                new Target("make/m3/collections/algorithm-catalog/collection-candidate-comparison-20261017.tsv","e9d721fd062fe291f695a9dc39de2f4d90a725a49432cde5017ccac644c910cd",15104,resource(ROOT+"collection-candidate-comparison-20261017.tsv")),
+                new Target("make/m3/collections/algorithm-catalog/collection-catalogue-input-provenance-20261017.tsv","15783211d8ccd539aa70d5559cf29cccfa8ad24e4260e02e2a80819bdc7637ec",5392,resource(ROOT+"collection-catalogue-input-provenance-20261017.tsv")),
+                new Target("make/m3/collections/algorithm-catalog/collection-file-review-20261017.tsv","1eda2361d3c9dcbc7b87fea67184c6747731fc1c8de9439c77ccda61171d29f3",63289,resource(ROOT+"collection-file-review-20261017.tsv")));
         var lines=resource(ROOT+"manifest.tsv").lines()
                 .filter(line->!line.isBlank()&&!line.startsWith("#")).toList();
         assertEquals(6,lines.size());String previous="";

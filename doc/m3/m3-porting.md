@@ -10,7 +10,7 @@ facts, Java/JNI implementation and tests, with traceable source history.
 Use the existing authorities: [name-mapping.json](name-mapping.json),
 [counterpart-naming.md](counterpart-naming.md),
 [String/precompute port map](synexia-string-precompute-port-map.tsv), and
-[source census](../migration/vi-census.tsv). This document is the execution order,
+[source census](../../make/m3/migration/vi-census.tsv). This document is the execution order,
 not another naming registry. The census covers 2,494 matching files in eight
 pinned source subtrees; it does not establish complete repository/dependency
 coverage. A non-String disposition leaves a capability in the broader accounting
@@ -72,7 +72,7 @@ Facts never become canonical payload; cache eviction affects performance only.
 
 ## Current gate and remaining scope
 
-The [TQ successor packet](../tooling/tq-sync/README.md) reconciles the M3 backing
+The [TQ successor packet](../../make/m3/tooling/tq-sync/README.md) reconciles the M3 backing
 names and current `containsAll` implementation, retains current M3String naming
 metadata, and qualifies 201,601 containment pairs per runtime mode. It preserves
 the original primitive collection gates. It does not replace the existing

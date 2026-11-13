@@ -3,11 +3,11 @@ name: M3 AST UTF8 mapping and full syntax source coverage
 on:
   pull_request:
     paths:
-      - 'm3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3Utf8SourceMap.java'
-      - 'm3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTSyntaxCoverage.java'
-      - 'm3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3Utf8SourceMapContract.java'
-      - 'm3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTSyntaxCoverageContract.java'
-      - 'm3/tooling/module-packs/parser/build.py'
+      - 'make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3Utf8SourceMap.java'
+      - 'make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTSyntaxCoverage.java'
+      - 'make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3Utf8SourceMapContract.java'
+      - 'make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTSyntaxCoverageContract.java'
+      - 'make/m3/tooling/module-packs/parser/build.py'
       - '.github/workflows/m3ast-utf8-coverage-20261026.yml'
   workflow_dispatch:
 concurrency:
@@ -30,7 +30,7 @@ jobs:
           set -euo pipefail
           classes="$RUNNER_TEMP/m3ast-utf8-coverage-classes"
           mkdir -p "$classes"
-          root=m3/tooling/module-packs/parser/src
+          root=make/m3/tooling/module-packs/parser/src
           javac --release 21 -Xlint:all -Werror -d "$classes" \
             "$root/main/java/jdk/m3/parser/M3File.java" \
             "$root/main/java/jdk/m3/parser/M3ASTIndex.java" \

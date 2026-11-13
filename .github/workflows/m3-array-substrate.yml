@@ -6,19 +6,19 @@ on:
     paths:
       - 'm3/arrays/**'
       - 'm3/native/include/m3_jni_core.h'
-      - 'm3/tooling/module-packs/build_pack.py'
-      - 'm3/tooling/module-packs/test_sdk_profile.py'
-      - 'm3/tooling/module-packs/developer_tools.py'
-      - 'm3/tooling/module-packs/tool_packs.py'
-      - 'm3/tooling/jmod-recipes/tools/jmod_pack.py'
-      - 'm3/tooling/jmod-recipes/tools/test_jmod_resolution.py'
-      - 'm3/docs/m3jdk21-porting-invariant.md'
-      - 'm3/docs/name-mapping.json'
-      - 'm3/docs/m3-array-port-map.tsv'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-array-substrate.yml'
+      - 'make/m3/tooling/module-packs/build_pack.py'
+      - 'make/m3/tooling/module-packs/test_sdk_profile.py'
+      - 'make/m3/tooling/module-packs/developer_tools.py'
+      - 'make/m3/tooling/module-packs/tool_packs.py'
+      - 'make/m3/tooling/jmod-recipes/tools/jmod_pack.py'
+      - 'make/m3/tooling/jmod-recipes/tools/test_jmod_resolution.py'
+      - 'doc/m3/m3jdk21-porting-invariant.md'
+      - 'doc/m3/name-mapping.json'
+      - 'doc/m3/m3-array-port-map.tsv'
+      - 'make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-array-substrate.yml'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-array-substrate-v1/**'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-array-substrate-v1/**'
-      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3ArraySubstrateRecipeTest.java'
+      - 'make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3ArraySubstrateRecipeTest.java'
       - '.github/workflows/m3-array-substrate.yml'
   workflow_dispatch:
 
@@ -37,9 +37,9 @@ jobs:
       - uses: actions/checkout@v5
       - name: Target naming and intake contracts
         run: |
-          python3 m3/tooling/name-contract/check.py
-          python3 m3/tooling/name-contract/audit.py --strict
-          python3 m3/runtime-integration/verify-m3-intake.py
+          python3 make/m3/tooling/name-contract/check.py
+          python3 make/m3/tooling/name-contract/audit.py --strict
+          python3 make/m3/runtime-integration/verify-m3-intake.py
       # Canonical Maven/OpenRewrite execution is qualified in com.synexia.
       # This public receiver runs only target-authoritative product gates.
 
@@ -57,12 +57,12 @@ jobs:
         run: mvn -B -ntp -f m3/arrays/pom.xml test
       - name: SDK asset and default-root compatibility contracts
         run: |
-          python3 -m unittest discover -s m3/tooling/module-packs -p test_sdk_profile.py -v
-          JAVA_HOME21="$JAVA_HOME" PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s m3/tooling/jmod-recipes/tools -p test_jmod_resolution.py -v
+          python3 -m unittest discover -s make/m3/tooling/module-packs -p test_sdk_profile.py -v
+          JAVA_HOME21="$JAVA_HOME" PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s make/m3/tooling/jmod-recipes/tools -p test_jmod_resolution.py -v
       - name: Mapping JSON syntax
-        run: python3 -m json.tool m3/docs/name-mapping.json >/dev/null
+        run: python3 -m json.tool doc/m3/name-mapping.json >/dev/null
       - name: Provenance JSON syntax
-        run: python3 -m json.tool m3/evidence/arrays/provenance.json >/dev/null
+        run: python3 -m json.tool make/m3/evidence/arrays/provenance.json >/dev/null
 
   native:
     runs-on: ubuntu-24.04

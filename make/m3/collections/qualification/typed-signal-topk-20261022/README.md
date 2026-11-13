@@ -32,7 +32,7 @@ custom-fork dependency, or certify fork-specific JUnit semantics.
 Run:
 
 ```sh
-mvn -B -ntp -f m3/collections/qualification/typed-signal-topk-20261022/pom.xml \
+mvn -B -ntp -f make/m3/collections/qualification/typed-signal-topk-20261022/pom.xml \
   -Dtest=M3SignalTopKTest,M3SignalColumnsTest test
 ```
 

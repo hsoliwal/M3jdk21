@@ -29,4 +29,4 @@ default-package donors (`PACKAGE - <package>`). Files: `RELOCATION_MAP.tsv`, `PR
 `differential/M3LongSequenceReturnModel.java.tmpl`, `OWNER_VERDICTS.tsv`, `GATES.tsv`, `CENSUS_RERUN.tsv`,
 `RECIPE_MEMORY.tsv`.
 
-Re-run: `python -I m3/collections/qualification/census2-t2-20261106/relocate.py --donor-git <com.synexia clone> --donor-rev d5ad5090d87ef8477a56317e60ac0d29c65029f7 [--check]`.
+Re-run: `python -I make/m3/collections/qualification/census2-t2-20261106/relocate.py --donor-git <com.synexia clone> --donor-rev d5ad5090d87ef8477a56317e60ac0d29c65029f7 [--check]`.

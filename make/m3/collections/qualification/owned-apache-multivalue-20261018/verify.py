@@ -1,7 +1,7 @@
 import argparse,hashlib,json
 from pathlib import Path
 HERE=Path(__file__).resolve().parent
-ROOT=HERE.parents[3]
+ROOT=HERE.parents[4]
 spec=json.loads((HERE/'source-provenance.json').read_text())
 parser=argparse.ArgumentParser();parser.add_argument('--jar');parser.add_argument('--args')
 args=parser.parse_args()

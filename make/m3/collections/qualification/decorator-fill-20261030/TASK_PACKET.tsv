@@ -2,7 +2,7 @@
 # M3-SCALE section 4 task packet for this run.
 key	value
 task_packet	active
-source_doc	m3/collections/qualification/decorator-fill-20261030/README.md
+source_doc	make/m3/collections/qualification/decorator-fill-20261030/README.md
 invariant_id	DECORATOR_FILL-v1.1
 run.mode	apply
 run.profile	full

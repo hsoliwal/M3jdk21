@@ -28,7 +28,7 @@ default-branch merge or release.
 |---|---|---|
 | `m3/collections/src/test/java/jdk/m3/collections/M3FilteredCursorExceptionContract.java` | `a23f5bdc5bf8d4200e01903cf068921375f6e23a` | `e46503c9ec2c42c17d37a20fcc0d0cc3673c9ff2` |
 | `m3/collections/src/test/java/jdk/m3/collections/M3FirstVisibleAtomContract.java` | `ca0a522f153f13c0889f4e09729961f5b2d7d93b` | `5039fef1934d156e7da31850cd13491b777d4ddd` |
-| `m3/collections/qualification/filtered-oracle-current-20261030/RECEIVER_RECEIPT.json` | `ABSENT` on the #2227 target head | `5d321688ffb7c41faa9e0aa32a0bf87ab17f8840` |
+| `make/m3/collections/qualification/filtered-oracle-current-20261030/RECEIVER_RECEIPT.json` | `ABSENT` on the #2227 target head | `5d321688ffb7c41faa9e0aa32a0bf87ab17f8840` |
 
 The target preimage SHA-1s were re-read on #2227 before constructing the
 additive merge. The Java and C17 runtime source files remain byte-identical
@@ -48,7 +48,7 @@ errors and reduced the same focused six-class set to zero errors with its
 own built library. That proof does not mean the complete JDK suite passes.
 
 **NOT EXECUTED / HOLD on the combined tree:** full Maven
-`m3/collections/qualification/full-java-jni-20261018/verify.py` on Linux
+`make/m3/collections/qualification/full-java-jni-20261018/verify.py` on Linux
 with exact library bindings; full JDK/JNI/jtreg, whole-reactor and installed
 image, sanitizer/cross-platform, 183-repository provenance/merge audit and
 all-domain per-atom JUnit coverage. Existing baseline showed 2 skips; each

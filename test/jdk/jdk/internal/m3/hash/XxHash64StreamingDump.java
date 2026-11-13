@@ -4,7 +4,7 @@
  */
 
 /*
- * Not a jtreg test: the differential dump driver of recipe m3/qualification/hash-xxhash64-streaming-20261106.
+ * Not a jtreg test: the differential dump driver of recipe make/m3/qualification/hash-xxhash64-streaming-20261106.
  *
  *   java [--patch-module java.base=<classes>] --add-exports java.base/jdk.internal.m3.hash=ALL-UNNAMED
  *        [-cp <donor classes>] M3XxHash64StreamingDump m3|<donor one-shot class> [random-cases]

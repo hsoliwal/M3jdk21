@@ -32,7 +32,7 @@ Portable recipe semantics remain Synexia-owned.
 
 ## Catalogue
 
-The five reusable pure-int recipe rows in `m3/tooling/recipe-catalogue.tsv` resolve to the
+The five reusable pure-int recipe rows in `make/m3/tooling/recipe-catalogue.tsv` resolve to the
 `com.synexia.rewrite.atom` package:
 
 1. inventory;

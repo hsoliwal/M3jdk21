@@ -22,7 +22,7 @@
       },
       {
         "path": "m3/collections/src/main/java/jdk/m3/collections/M3EnumLongMap.java",
-        "receipt": "m3/compatibility/m3-enum-long-map-receipt.json",
+        "receipt": "make/m3/compatibility/m3-enum-long-map-receipt.json",
         "target": "com.m3.collections.M3EnumSet",
         "mechanics": "ordinal universe handling"
       }

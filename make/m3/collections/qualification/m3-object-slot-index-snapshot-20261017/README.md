@@ -60,9 +60,9 @@ predecessor gates are sealed.
 ## Verification
 
 ```bash
-python3 m3/collections/qualification/m3-object-slot-index-snapshot-20261017/verify.py
+python3 make/m3/collections/qualification/m3-object-slot-index-snapshot-20261017/verify.py
 mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3ObjectSlotIndexTest test
-mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
+mvn -B -ntp -f make/m3/tooling/migration-recipes/pom.xml \
   -Dtest=M3ObjectSlotIndexSnapshot20261017RecipeTest test
 ```
 

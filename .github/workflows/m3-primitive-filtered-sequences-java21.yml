@@ -16,4 +16,4 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Product-backed primitive filtered sequence contracts
-        run: bash m3/collections/verification/primitive-filtered-sequences-20261017/verify.sh
+        run: bash make/m3/collections/verification/primitive-filtered-sequences-20261017/verify.sh

@@ -34,7 +34,7 @@
   },
   "canonical_immutable_pin": {
     "status": "EXTERNALLY_BOUND_AT_PUBLICATION",
-    "path": "m3/collections/verification/wrapper-convergence-20261018/SOURCE_PIN.json",
+    "path": "make/m3/collections/verification/wrapper-convergence-20261018/SOURCE_PIN.json",
     "included_in_core_packet": false,
     "reason": "The final immutable canonical commit is recorded outside its own content to avoid a self-referential hash."
   },

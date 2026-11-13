@@ -3,7 +3,7 @@
 # Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
 """Recipe JBCOLL_COLLECTIONVIEWS v1: census leaf L001 (java.base java/util/CollectionViews.java).
 
-Derived from m3/qualification/progress-monitor-unify-20261106/unify.py (hash-pinned preimage, anchors that must
+Derived from make/m3/qualification/progress-monitor-unify-20261106/unify.py (hash-pinned preimage, anchors that must
 occur exactly once, drift refusal, idempotent plan). The census (S:/m3-scratch/eb-conv/census, rows of crates
 collectionviews-current-owner and m3-collectionviews-onepass-cow-20261023) found 7 crate postimage lines absent from
 the live owner. Each becomes one rule with a verdict:
@@ -197,7 +197,7 @@ def whatif(root: Path, out: Path, selected: str) -> int:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--root", default=str(RECIPE_DIR.parents[2]), help="repository root (default: three up)")
+    parser.add_argument("--root", default=str(RECIPE_DIR.parents[3]), help="repository root (default: three up)")
     parser.add_argument("--check", action="store_true", help="write nothing; exit 1 when a run would change a file")
     parser.add_argument("--donor-git", help="com.synexia clone holding the crate postimage blobs")
     parser.add_argument("--donor-rev", help="com.synexia revision of the census pin")

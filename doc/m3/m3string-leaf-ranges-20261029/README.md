@@ -6,7 +6,7 @@ on 2026-10-29. The source base is `3569c790d5cc3f9bc871ab0ecd025dab0fd5cafc` plu
 19 qualified Javadoc/import postimages recorded in [m3-image-qualification.json](m3-image-qualification.json).
 The earlier stock JDK 21 component results for Windows and Linux remain recorded below.
 
-Leaf 1 (the `wc` C kernel and Java facade in `m3/tooling/module-packs/text-tools`, branch
+Leaf 1 (the `wc` C kernel and Java facade in `make/m3/tooling/module-packs/text-tools`, branch
 `m3/unix4j-native-wc-20261029`) consumes this contract. This leaf changes java.base only; the
 module pack, `m3textio.c` and leaf 1's branch are untouched.
 

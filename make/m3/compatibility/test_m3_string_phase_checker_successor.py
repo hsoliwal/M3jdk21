@@ -10,10 +10,10 @@ from pathlib import Path
 import unittest
 
 
-ROOT = Path(__file__).resolve().parents[2]
-RECEIPT_PATH = ROOT / "m3/compatibility/m3-string-phase-checker-successor-20261013.json"
-RECEIPT_V2_PATH = ROOT / "m3/compatibility/m3-string-phase-checker-successor-20261015-v2.json"
-RECEIPT_V3_PATH = ROOT / "m3/compatibility/m3-string-phase-checker-successor-20261028-v3.json"
+ROOT = Path(__file__).resolve().parents[3]
+RECEIPT_PATH = ROOT / "make/m3/compatibility/m3-string-phase-checker-successor-20261013.json"
+RECEIPT_V2_PATH = ROOT / "make/m3/compatibility/m3-string-phase-checker-successor-20261015-v2.json"
+RECEIPT_V3_PATH = ROOT / "make/m3/compatibility/m3-string-phase-checker-successor-20261028-v3.json"
 TARGET_PATH = ROOT / "m3/m3-import/current-full-borrow/check_string_phase.py"
 
 OLD_MARKER = "M3StringTuple tuple = new M3StringTuple(left, right);"
@@ -21,8 +21,8 @@ NEW_MARKER = "return concatBalanced(left, right);"
 EXPECTED_MANIFEST = (
     "# path\tbefore\tafter\ttemplate\n"
     ".github/workflows/mindex-string-backing.yml\t33cefc4ff5aad4b2eb74532261b06daf6d21311f48e9a154df5619e3b8f3ce10\t927ba49c51709896a4610d89daf4d669217e27713153cd46f863aafb0dd63989\t00-mindex-string-backing.yml.txt\n"
-    "m3/runtime-integration/check-m3string-concat-overflow-current.py\tABSENT\te16460bd56377ca59c395e3336dad5914cab1d46c8423b22ee7a0c4366e38cf8\t01-check-m3string-concat-overflow-current.py.txt\n"
-    "m3/runtime-integration/test_m3string_concat_overflow_current.py\tABSENT\t5a28b85c7f6e5af794acf6663d32ac5a5c82d31e67fc6f22e1a1dc688925eab4\t02-test_m3string_concat_overflow_current.py.txt\n"
+    "make/m3/runtime-integration/check-m3string-concat-overflow-current.py\tABSENT\te16460bd56377ca59c395e3336dad5914cab1d46c8423b22ee7a0c4366e38cf8\t01-check-m3string-concat-overflow-current.py.txt\n"
+    "make/m3/runtime-integration/test_m3string_concat_overflow_current.py\tABSENT\t5a28b85c7f6e5af794acf6663d32ac5a5c82d31e67fc6f22e1a1dc688925eab4\t02-test_m3string_concat_overflow_current.py.txt\n"
     "m3/m3-import/current-full-borrow/check_string_phase.py\t892a5986d7c8a24909cbe04c29a0a44dc22eea508463a3bef8bd3e8444a6304c\t11613c443875536088a13eb932c4142f723d3d1366baf32333accc37260c8fc4\t03-check_string_phase.py.txt\n"
 )
 EXPECTED_RECEIPT = json.loads("{\n  \"schema\": \"M3JDK21_STRING_PHASE_CHECKER_SUCCESSOR_V1\",\n  \"scope\": \"TOOLING_ONLY_NO_RUNTIME_PROMOTION\",\n  \"source\": {\n    \"repository\": \"hsoliwal/com.synexia\",\n    \"pullRequest\": 10942,\n    \"head\": \"192607fed74e6ff27beaf553db6ec169afc40b3d\",\n    \"mergeCommit\": \"b6b1af473ea8ca5073b0bd3b16a7a0063db1782d\",\n    \"manifestPath\": \"m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3jdk21-string-concat-current-proof-20261012/manifest.tsv\",\n    \"manifestGitBlob\": \"101be05c8b045749e5d1e86a97b73bd4ae1c4bd1\",\n    \"sourceResourcePath\": \"m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3jdk21-string-concat-current-proof-20261012/03-check_string_phase.py.txt\",\n    \"sourceResourceGitBlob\": \"9a1d8576f4b8e5f96c691a3a1b25c3bd77fa5c02\",\n    \"sourceResourceSha256\": \"11613c443875536088a13eb932c4142f723d3d1366baf32333accc37260c8fc4\"\n  },\n  \"target\": {\n    \"repository\": \"hsoliwal/M3jdk21\",\n    \"baseCommit\": \"ffc16b832c49798c422ded0d6ddbc5dbe524cce8\",\n    \"path\": \"m3/m3-import/current-full-borrow/check_string_phase.py\",\n    \"beforeGitBlob\": \"67d562b0a2a72bd72a185007b2345b87fb3a8e68\",\n    \"beforeSha256\": \"892a5986d7c8a24909cbe04c29a0a44dc22eea508463a3bef8bd3e8444a6304c\",\n    \"afterGitBlob\": \"9a1d8576f4b8e5f96c691a3a1b25c3bd77fa5c02\",\n    \"afterSha256\": \"11613c443875536088a13eb932c4142f723d3d1366baf32333accc37260c8fc4\"\n  },\n  \"change\": {\n    \"oldMarker\": \"M3StringTuple tuple = new M3StringTuple(left, right);\",\n    \"newMarker\": \"return concatBalanced(left, right);\",\n    \"expectedOccurrences\": 1,\n    \"runtimeProductFilesChanged\": false,\n    \"runtimePromotionAuthorized\": false\n  }\n}\n")
@@ -31,7 +31,7 @@ EXPECTED_RECEIPT_V2 = json.loads(r'''{
   "schema": "M3JDK21_STRING_PHASE_CHECKER_SUCCESSOR_V2",
   "scope": "TOOLING_ONLY_NO_RUNTIME_PROMOTION",
   "predecessor": {
-    "receiptPath": "m3/compatibility/m3-string-phase-checker-successor-20261013.json",
+    "receiptPath": "make/m3/compatibility/m3-string-phase-checker-successor-20261013.json",
     "receiptGitBlob": "f817a92ff96ecf4658dfac811a25edb294b7d6c2",
     "receiptSha256": "a599d62b01ef0c36855a356e8bc88fa8709b722ec8b251eabb8986d80927ef9f",
     "targetAfterGitBlob": "9a1d8576f4b8e5f96c691a3a1b25c3bd77fa5c02",
@@ -73,7 +73,7 @@ EXPECTED_RECEIPT_V3 = json.loads(r'''{
   "schema": "M3JDK21_STRING_PHASE_CHECKER_SUCCESSOR_V3",
   "scope": "TOOLING_ONLY_NO_RUNTIME_PROMOTION",
   "predecessor": {
-    "receiptPath": "m3/compatibility/m3-string-phase-checker-successor-20261015-v2.json",
+    "receiptPath": "make/m3/compatibility/m3-string-phase-checker-successor-20261015-v2.json",
     "receiptGitBlob": "68a372773b9eebe48c4dc989be270bcbaa5e9adc",
     "receiptSha256": "96ea0d1caa75b66d3bcca9deecd8170f60eb2a05acac165f28879b101d1cab92",
     "targetAfterGitBlob": "274753ece4a5cfd11dc2e98feca50f2601540b8d",

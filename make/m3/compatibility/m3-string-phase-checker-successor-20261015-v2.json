@@ -2,7 +2,7 @@
   "schema": "M3JDK21_STRING_PHASE_CHECKER_SUCCESSOR_V2",
   "scope": "TOOLING_ONLY_NO_RUNTIME_PROMOTION",
   "predecessor": {
-    "receiptPath": "m3/compatibility/m3-string-phase-checker-successor-20261013.json",
+    "receiptPath": "make/m3/compatibility/m3-string-phase-checker-successor-20261013.json",
     "receiptGitBlob": "f817a92ff96ecf4658dfac811a25edb294b7d6c2",
     "receiptSha256": "a599d62b01ef0c36855a356e8bc88fa8709b722ec8b251eabb8986d80927ef9f",
     "targetAfterGitBlob": "9a1d8576f4b8e5f96c691a3a1b25c3bd77fa5c02",

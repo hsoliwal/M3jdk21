@@ -181,7 +181,7 @@ def main():
     requests = [
         ("new-matcher.json", "src/java.base/share/classes/java/util/regex/Matcher.java",
          next(row for row in matcher_tree["tree"] if row["path"] == "Matcher.java")),
-        ("new-mr-manifest.json", "m3/tooling/mr/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv",
+        ("new-mr-manifest.json", "make/m3/tooling/mr/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv",
          next(row for row in m3["tree"] if row["path"] == "tooling/mr/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv")),
     ]
     for filename, p, entry in requests:
@@ -203,7 +203,7 @@ def main():
     m3_entries = {row["path"]: row for row in m3["tree"]}
     for local, p, entry in [
         ("M3_LATEST_AGENTS.md", "AGENTS.md", next(r for r in trees[NEW_ROOT]["tree"] if r["path"] == "AGENTS.md")),
-        ("M3_LATEST_PORTING_INVARIANT.md", "m3/docs/m3jdk21-porting-invariant.md", m3_entries["docs/m3jdk21-porting-invariant.md"]),
+        ("M3_LATEST_PORTING_INVARIANT.md", "doc/m3/m3jdk21-porting-invariant.md", m3_entries["docs/m3jdk21-porting-invariant.md"]),
     ]:
         target = ROOT / "publication" / local
         body = target.read_bytes()

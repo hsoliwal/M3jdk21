@@ -11,7 +11,7 @@ import java.util.function.Predicate;
  * Exact second stage. A lossy signal may only shortlist candidates; semantic truth stays in the
  * supplied exact predicate.
  */
-//FLLDCIM: RELOCATE - donor blob 9f0ef929e435 at commit 3385d79a2968 (repository, path, URL and digests: m3/collections/qualification/object-signal-20261107/PROVENANCE.tsv); recipe m3/collections/qualification/object-signal-20261107/relocate.py v1
+//FLLDCIM: RELOCATE - donor blob 9f0ef929e435 at commit 3385d79a2968 (repository, path, URL and digests: make/m3/collections/qualification/object-signal-20261107/PROVENANCE.tsv); recipe make/m3/collections/qualification/object-signal-20261107/relocate.py v1
 public final class ObjectSignalMatcher {
     private ObjectSignalMatcher() { }
 

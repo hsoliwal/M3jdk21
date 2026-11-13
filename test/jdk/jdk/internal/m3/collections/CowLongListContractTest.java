@@ -17,7 +17,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.Test;
 
 /** Real Java 21 CopyOnWriteArrayList behavior oracle, without boxing in the M3 owner. */
-//FLLDCIM: RELOCATE - donor blob 4b65d351cd8a at ca1aafc4d94f; recipe m3/collections/qualification/census-g2-20261106/relocate.py v4
+//FLLDCIM: RELOCATE - donor blob 4b65d351cd8a at ca1aafc4d94f; recipe make/m3/collections/qualification/census-g2-20261106/relocate.py v4
 final class CowLongListContractTest {
     private static long[] contents(CopyOnWriteArrayList<Long> source) {
         long[] values = new long[source.size()];

@@ -7,7 +7,7 @@ on:
       - 'm3/arrays/pom.xml'
       - 'm3/collections/pom.xml'
       - 'm3/collections/interop/pom.xml'
-      - 'm3/collections/verification/**'
+      - 'make/m3/collections/verification/**'
       - '.github/workflows/m3-no-external-consumer-deps.yml'
   push:
     branches:
@@ -17,7 +17,7 @@ on:
       - 'm3/arrays/pom.xml'
       - 'm3/collections/pom.xml'
       - 'm3/collections/interop/pom.xml'
-      - 'm3/collections/verification/**'
+      - 'make/m3/collections/verification/**'
       - '.github/workflows/m3-no-external-consumer-deps.yml'
   workflow_dispatch:
 permissions:
@@ -36,6 +36,6 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
       - name: Refusal oracles (no external tools)
-        run: python3 -m unittest discover -s m3/collections/verification -p 'test_no_external_runtime.py' -v
+        run: python3 -m unittest discover -s make/m3/collections/verification -p 'test_no_external_runtime.py' -v
       - name: Inspect current direct Maven ownership and enforce deploy quarantine
-        run: python3 m3/collections/verification/no_external_runtime.py --root .
+        run: python3 make/m3/collections/verification/no_external_runtime.py --root .

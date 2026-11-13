@@ -10,7 +10,7 @@ The publication baseline is `hsoliwal/M3jdk21` master
 `548f3d7c434c49c3989fc722f34ebba2ba9f0c5a`. Initial qualification and the unchanged real-source
 corpus remain pinned to `e8fdab9a7abc4b0273438ce9e5d0ffd6255b1247`, root tree
 `7d03f7bd4aab860c74cb436c082eca50d87c8391`. Every authored mutation is under
-`m3/tooling/migration-recipes`. This result does not establish full default-module coverage,
+`make/m3/tooling/migration-recipes`. This result does not establish full default-module coverage,
 an OpenJDK build, jtreg, or JNI/native correctness.
 
 ## Production changes and their executed causes

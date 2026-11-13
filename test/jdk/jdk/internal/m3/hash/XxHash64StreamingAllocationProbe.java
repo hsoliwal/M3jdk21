@@ -4,7 +4,7 @@
  */
 
 /*
- * Not a jtreg test: the allocation diagnostic of recipe m3/qualification/hash-xxhash64-streaming-20261106 (run by its
+ * Not a jtreg test: the allocation diagnostic of recipe make/m3/qualification/hash-xxhash64-streaming-20261106 (run by its
  * differential.sh on the donor class and on M3XxHash64Streaming; the figures are recorded in GATES.tsv, never asserted).
  * java --add-exports java.base/jdk.internal.m3.hash=ALL-UNNAMED M3XxHash64StreamingAllocationProbe
  */
@@ -18,7 +18,7 @@ import java.nio.ByteBuffer;
  * Optional single-thread allocation diagnostic: run against old and new class files.
  * Neither elapsed time nor allocation counts are pass/fail performance thresholds.
  */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/ca1aafc4d94f9dd1ee288226dcca070cc60991c9/synexia-fileindex/src/test/java/com/synexia/fileindex/content/XXHash64AllocationProbe.java blob 2b3d933711d9; recipe m3/qualification/hash-xxhash64-streaming-20261106/recipe/relocate.py v4
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/ca1aafc4d94f9dd1ee288226dcca070cc60991c9/synexia-fileindex/src/test/java/com/synexia/fileindex/content/XXHash64AllocationProbe.java blob 2b3d933711d9; recipe make/m3/qualification/hash-xxhash64-streaming-20261106/recipe/relocate.py v4
 public final class XxHash64StreamingAllocationProbe {
     private XxHash64StreamingAllocationProbe() {}
 

@@ -6,7 +6,7 @@ on:
   pull_request:
     paths:
       - '.github/workflows/m3-swt-scrollbar-full-range-20261020.yml'
-      - 'm3/compatibility/swt-scrollbar-full-range-20261020/**'
+      - 'make/m3/compatibility/swt-scrollbar-full-range-20261020/**'
 permissions:
   contents: read
 concurrency:
@@ -24,7 +24,7 @@ jobs:
           persist-credentials: false
           fetch-depth: 1
           sparse-checkout: |
-            m3/compatibility/swt-scrollbar-full-range-20261020
+            make/m3/compatibility/swt-scrollbar-full-range-20261020
       - name: Record exact M3 proof revision
         run: git rev-parse HEAD
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09

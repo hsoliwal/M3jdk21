@@ -4,7 +4,7 @@ on:
   pull_request:
     paths:
       - 'm3/collections/implementations/apache-*-map/src/main/java/jdk/m3/collections/apache/M3*Map.java'
-      - 'm3/collections/qualification/array-map-receiver-20261102/**'
+      - 'make/m3/collections/qualification/array-map-receiver-20261102/**'
       - '.github/workflows/m3-array-map-result-only.yml'
   workflow_dispatch:
 jobs:
@@ -38,7 +38,7 @@ jobs:
           done
           mkdir -p "$RUNNER_TEMP/m3-receiver"
           javac --release 21 -Xlint:all -Werror -cp "$CP" -d "$RUNNER_TEMP/m3-receiver" \
-            m3/collections/qualification/array-map-receiver-20261102/M3ArrayMapReceiverSmoke.java
+            make/m3/collections/qualification/array-map-receiver-20261102/M3ArrayMapReceiverSmoke.java
           java -ea -cp "$CP:$RUNNER_TEMP/m3-receiver" jdk.m3.collections.receiver.M3ArrayMapReceiverSmoke
           java -Xint -ea -cp "$CP:$RUNNER_TEMP/m3-receiver" jdk.m3.collections.receiver.M3ArrayMapReceiverSmoke
       - name: Verify source blobs match qualified generated output

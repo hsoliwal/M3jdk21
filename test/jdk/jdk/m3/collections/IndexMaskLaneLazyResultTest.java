@@ -7,7 +7,7 @@ import java.util.Random;
 import org.junit.jupiter.api.Test;
 
 /** Real owner contract: caller receives fresh, ordered, correctly sized primitive index arrays. */
-//FLLDCIM: RELOCATE - donor blob ce374af4b0af at ac5feec00a6d; recipe m3/collections/recipe/entryless-lane-kernel-20261106/relocate.py v3
+//FLLDCIM: RELOCATE - donor blob ce374af4b0af at ac5feec00a6d; recipe make/m3/collections/recipe/entryless-lane-kernel-20261106/relocate.py v3
 class IndexMaskLaneLazyResultTest {
     @Test void zeroMatchAndZeroWindowReturnIndependentEmptyArrays() {
         long[] keys = {0, 1, Long.MIN_VALUE, Long.MAX_VALUE};

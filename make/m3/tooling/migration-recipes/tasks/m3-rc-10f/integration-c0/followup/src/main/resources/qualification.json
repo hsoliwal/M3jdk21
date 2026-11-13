@@ -34,7 +34,7 @@
           "beforeBytes": 79534,
           "beforeSHA256": "021e4dff92d1fe78e015c7538c5d28e503dac8c62f43d09df3c831bdf3ddccf1",
           "operation": "REPLACE",
-          "path": "m3/tooling/image-gates/current-c0.json"
+          "path": "make/m3/tooling/image-gates/current-c0.json"
         },
         {
           "afterBytes": 12302,
@@ -42,7 +42,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/lane28/src/test/python/test_ic0_context.py"
+          "path": "make/m3/tooling/lane28/src/test/python/test_ic0_context.py"
         },
         {
           "afterBytes": 6709,
@@ -50,7 +50,7 @@
           "beforeBytes": 5146,
           "beforeSHA256": "d56788db191b5e3361d3e35e7f07c4395b38aec4b7c0a07dcd620620f4c4687a",
           "operation": "REPLACE",
-          "path": "m3/tooling/lane28/verify-plan.py"
+          "path": "make/m3/tooling/lane28/verify-plan.py"
         },
         {
           "afterBytes": 14147,
@@ -58,7 +58,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/tq-sync/src/test/python/test_ic0_context.py"
+          "path": "make/m3/tooling/tq-sync/src/test/python/test_ic0_context.py"
         },
         {
           "afterBytes": 6404,
@@ -66,7 +66,7 @@
           "beforeBytes": 3719,
           "beforeSHA256": "ca29fa3e9a6660a8006f99702fc8c3db2839049af00a8eeee4a435701cf5f36e",
           "operation": "REPLACE",
-          "path": "m3/tooling/tq-sync/verify-plan.py"
+          "path": "make/m3/tooling/tq-sync/verify-plan.py"
         }
       ],
       "yamlPath": "META-INF/rewrite/fc0-cwf.yml",
@@ -93,7 +93,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/tq/src/test/python/test_ic0_context.py"
+          "path": "make/m3/tooling/tq/src/test/python/test_ic0_context.py"
         },
         {
           "afterBytes": 6648,
@@ -101,7 +101,7 @@
           "beforeBytes": 5089,
           "beforeSHA256": "269cd10606a9de7629ec0d1f4dccce2866644f979c06958d808e107b6c9188bb",
           "operation": "REPLACE",
-          "path": "m3/tooling/tq/verify-plan.py"
+          "path": "make/m3/tooling/tq/verify-plan.py"
         }
       ],
       "yamlPath": "META-INF/rewrite/fc0-tqc.yml",
@@ -136,7 +136,7 @@
           "beforeBytes": 18329,
           "beforeSHA256": "8347c271c10cb9256cdcab29bf480edaf58c181dd06ba24c6d030a38fb4dc0fc",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/atom/spectrum/CORPUS.tsv"
+          "path": "make/m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/atom/spectrum/CORPUS.tsv"
         },
         {
           "afterBytes": 235261,
@@ -163,7 +163,7 @@
           "beforeBytes": 8906,
           "beforeSHA256": "8aa8f45f218999c84841e99b1959efb639e01f568e3a09145c717a52df0296ca",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-recipe-closure/03-M3RecipeScopeDeclarationTest.java.txt"
+          "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-recipe-closure/03-M3RecipeScopeDeclarationTest.java.txt"
         },
         {
           "afterBytes": 934,
@@ -171,7 +171,7 @@
           "beforeBytes": 934,
           "beforeSHA256": "0f79229a093fc3a53158401bb29a627e71f2774292b4d727e6c0911b9f2a47c9",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-recipe-closure/manifest.tsv"
+          "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-recipe-closure/manifest.tsv"
         }
       ],
       "yamlPath": "META-INF/rewrite/fc0-clr.yml",

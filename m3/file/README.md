@@ -40,9 +40,9 @@ be reused; calling `fingerprint` again deliberately reads again.
 Raw byte fingerprints differ from the parser's UTF-16 and framed source-fact
 identities. A matching digest does not certify collision-free equality, class
 ABI, compiler bindings or complete task inputs. The existing build planner must
-qualify those facts before skipping work. The [shared build contract](../docs/build-delta-invariant.md)
+qualify those facts before skipping work. The [shared build contract](../../doc/m3/build-delta-invariant.md)
 defines source, binary, dependency and configuration invalidation for Maven,
-Gradle and the other fork consumers. The [mapping](../docs/name-mapping.d/m3file-build-delta-20261020.json)
+Gradle and the other fork consumers. The [mapping](../../doc/m3/name-mapping.d/m3file-build-delta-20261020.json)
 keeps this extension with the original product module.
 
 The `test` lifecycle now invokes `verify.py` against Maven's already compiled

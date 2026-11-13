@@ -26,10 +26,10 @@ public final class M3StringGuardRepair {
     static final String REVIEWED_CHECKER_SHA = "fa88e6ee2b5903802a9463bec14133feb74a730009b08e722924064052afb10e";
     static final String STRING_SHA = "b7a074c6f366397847538b6b1bc6a5e5fecfb94809ab70fda40ef58406595b13";
     static final String RECEIPT_BEFORE_SHA = "22cc4f60884a25f57a341b99f3332b92ae3dca4d83f5ef13d34d77904174011d";
-    static final String CHECKER = "m3/runtime-integration/check-m3string-invariants.py";
-    static final String JAVA_TARGET = "m3/runtime-integration/src/main/java/M3StringReplacementRoutes.java";
-    static final String PY_TARGET = "m3/runtime-integration/test_string_replacement_routes.py";
-    static final String RECEIPT = "m3/runtime-integration/string-replacement-guard-receipt.tsv";
+    static final String CHECKER = "make/m3/runtime-integration/check-m3string-invariants.py";
+    static final String JAVA_TARGET = "make/m3/runtime-integration/src/main/java/M3StringReplacementRoutes.java";
+    static final String PY_TARGET = "make/m3/runtime-integration/test_string_replacement_routes.py";
+    static final String RECEIPT = "make/m3/runtime-integration/string-replacement-guard-receipt.tsv";
     static final String JAVA_SHA = "098da0581258b416bbf7546aec9d0f3d2783643c69d122c460fa96d56b7e9475";
     static final String PY_SHA = "1f4fa3977092afd5b44b2df231828497ed954bd3cc777c905550294b9bac7af3";
     record Atom(String before, String after) {}

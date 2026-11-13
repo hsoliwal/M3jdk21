@@ -9,8 +9,8 @@ import tempfile
 import unittest
 
 CRATE = Path(__file__).resolve().parent
-ROOT = Path(os.environ.get('M3_SOURCE_ROOT', CRATE.parents[2]))
-sys.path.insert(0, str(ROOT / 'm3/migration'))
+ROOT = Path(os.environ.get('M3_SOURCE_ROOT', CRATE.parents[3]))
+sys.path.insert(0, str(ROOT / 'make/m3/migration'))
 import recipe
 
 
@@ -48,7 +48,7 @@ class InstallTest(unittest.TestCase):
     def test_preimage_drift_refuses_entire_packet(self):
         with tempfile.TemporaryDirectory() as directory:
             root, rows = self.prepare(directory)
-            (root / 'm3/docs/name-mapping.json').write_bytes(b'changed')
+            (root / 'doc/m3/name-mapping.json').write_bytes(b'changed')
             with self.assertRaises(recipe.Refusal):
                 recipe.execute(CRATE / 'install/plan.json', root, 'apply')
             for row in rows:

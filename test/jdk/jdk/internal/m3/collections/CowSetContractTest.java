@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.Test;
 
 /** Existing public M3 owner, JDK provider oracle, no Java SE type replacement. */
-//FLLDCIM: RELOCATE - donor blob fbce36f189cd at ca1aafc4d94f; recipe m3/collections/qualification/census-g2-20261106/relocate.py v4
+//FLLDCIM: RELOCATE - donor blob fbce36f189cd at ca1aafc4d94f; recipe make/m3/collections/qualification/census-g2-20261106/relocate.py v4
 final class CowSetContractTest {
     @Test
     void publicContractAndSnapshotIterators() {

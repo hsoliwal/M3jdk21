@@ -14,7 +14,7 @@ PY=${PYTHON:-python}
 REPO=${MAVEN_REPO_LOCAL:+-Dmaven.repo.local=$MAVEN_REPO_LOCAL}
 "$PY" -I "$RECIPE/relocate.py" --donor-git "$1" --donor-rev "$2" --check
 mvn -q -B -ntp $REPO -f "$MODULE/pom.xml" package
-if [ -f "$ROOT/m3/tooling/jdk-naming/jdk_naming.py" ]; then
-    (cd "$ROOT" && "$PY" -I m3/tooling/jdk-naming/jdk_naming.py plan --only m3/ports/precompute/ | tail -n 1)
+if [ -f "$ROOT/make/m3/tooling/jdk-naming/jdk_naming.py" ]; then
+    (cd "$ROOT" && "$PY" -I make/m3/tooling/jdk-naming/jdk_naming.py plan --only m3/ports/precompute/ | tail -n 1)
 fi
 bash "$RECIPE/differential.sh" "$1" "$2" "$3"

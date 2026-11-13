@@ -22,7 +22,7 @@ standard's exception; v1.2: a type token qualified by another package (x.y.M3Res
 literals "M3<Rest>.member" and "M3<Rest>" of renamed types (catalog entry points), off by default.
 Refused (exit 2, nothing written): <Rest> empty or not UpperCamel; <Rest> already a type of P; <Rest> a java.lang
 type; a file that references M3<Rest> while importing another package that declares the same simple name.
-Evidence records (paths under --exclude prefixes, default m3/evidence/ and m3/qualification/) are history and stay.
+Evidence records (paths under --exclude prefixes, default make/m3/evidence/ and make/m3/qualification/) are history and stay.
 Prints one row per renamed type and per changed file; --check writes nothing and exits 1 when anything would change."""
 import argparse
 import re
@@ -89,7 +89,7 @@ def main():
     # v1.5: a jtreg-style test directory whose Java files declare no package is one pseudo-package "dir:<path>"
     # (simple names in its own files and in launchers only; workflows name these mains by bare class name).
     ap.add_argument("--test-dir", action="append", default=[])
-    ap.add_argument("--exclude", action="append", default=["m3/evidence/", "m3/qualification/"])
+    ap.add_argument("--exclude", action="append", default=["make/m3/evidence/", "make/m3/qualification/"])
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--comment-words", action="store_true",
                     help="v1.7: inside comments of files of the package or importing it, rename every whole-word M3Rest of a renamed type ({@link M3Rest}, @see, prose)")

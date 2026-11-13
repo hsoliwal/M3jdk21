@@ -8,18 +8,18 @@
 +          printf '%s\n' "$RUNNER_TEMP/jdk-21+35/bin" >> "$GITHUB_PATH"
        - name: Verify layered source-bound recipes
          run: |
-           python3 m3/runtime-integration/char-array-copy/recipe/apply.py --check
+           python3 make/m3/runtime-integration/char-array-copy/recipe/apply.py --check
 @@ -34,7 +36,10 @@
            trap - EXIT
-           python3 m3/runtime-integration/char-array-copy/recipe/apply.py --check
+           python3 make/m3/runtime-integration/char-array-copy/recipe/apply.py --check
        - name: Verify OpenRewrite convergence DAG
--        run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify
+-        run: mvn -B -ntp -f make/m3/tooling/migration-recipes/pom.xml clean verify
 +        run: |
 +          java -version
 +          mvn -version
-+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify
++          mvn -B -ntp -f make/m3/tooling/migration-recipes/pom.xml clean verify
        - name: Build and exercise immutable foundation
-         run: ./m3/build.sh
+         run: ./make/m3/build.sh
        - name: Compare pinned Synexia content and range contract
 --- a/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java
 +++ b/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java

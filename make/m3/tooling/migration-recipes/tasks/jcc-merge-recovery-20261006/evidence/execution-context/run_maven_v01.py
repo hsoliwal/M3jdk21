@@ -13,7 +13,7 @@ workspace = HERE / "input-workspace"
 toolchain = ROOT / "toolchain"
 jdk = toolchain / "jdk-21+35"
 maven = toolchain / "apache-maven-3.9.9/bin/mvn"
-pom = workspace / "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/verification/pom.xml"
+pom = workspace / "make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/verification/pom.xml"
 command = [str(maven), "-o", "-B", "-f", str(pom), "-Dmaven.repo.local=" + str(HERE / "m2-diagnostic-v02"),
            "-Dm3.recovery.materialized=" + str(HERE / "materialized-v01"), "verify"]
 env = dict(os.environ, JAVA_HOME=str(jdk), PATH=str(jdk / "bin") + os.pathsep + os.environ["PATH"])

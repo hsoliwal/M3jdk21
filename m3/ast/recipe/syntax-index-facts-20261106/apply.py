@@ -9,7 +9,7 @@ re-applies the crate's pre -> post change to the M3JDK owner, crate by crate in 
 postimage of one crate is the preimage of the next), and relocates each crate's proof into the module's test style.
 
 Rule kinds. EDIT: the crate's preimage and postimage, read as donor blobs and mapped to M3JDK names through the naming
-recipe (m3/tooling/jdk-naming: jdk_naming.rewrite_text for text, target_path for the manifest's target path); the
+recipe (make/m3/tooling/jdk-naming: jdk_naming.rewrite_text for text, target_path for the manifest's target path); the
 owner without its //FLLDCIM: lines must equal the mapped preimage (EXACT_TARGET), otherwise the recipe refuses
 (a diverged owner needs a declared EDIT row by method name); the postimage is the mapped crate postimage with every
 earlier anchor kept before its declaration and one //FLLDCIM: MRL anchor per edited declaration of this crate.
@@ -48,7 +48,7 @@ RECIPE_DIR_REL = "m3/ast/recipe/syntax-index-facts-20261106"
 BASE_COMMIT = "c4e268d495a0f87ea672f52c2f05c923562f4c04"
 DONOR_REPO = "hsoliwal/com.synexia"
 DONOR_COMMIT = "ca1aafc4d94f9dd1ee288226dcca070cc60991c9"
-NAMING = "m3/tooling/jdk-naming/jdk_naming.py"
+NAMING = "make/m3/tooling/jdk-naming/jdk_naming.py"
 OWNER = "m3/ast/src/main/java/jdk/m3/ast/M3SyntaxIndex.java"
 TEST_DIR = "m3/ast/src/test/java/jdk/m3/ast/"
 TEST_PACKAGE = "jdk.m3.ast"

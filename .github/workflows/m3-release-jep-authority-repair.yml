@@ -5,28 +5,28 @@ on:
     branches:
       - "m3/release-jep-authority-repair-*"
     paths:
-      - "m3/backports/RELEASE_JEP_AUTHORITY.tsv"
-      - "m3/backports/JEP_CATALOGUE.tsv"
-      - "m3/backports/release_jep_authority.py"
-      - "m3/backports/test_release_jep_authority.py"
-      - "m3/backports/program_status.py"
-      - "m3/backports/test_program_status.py"
-      - "m3/backports/verify.py"
-      - "m3/backports/README.md"
-      - "m3/backports/PROGRAM_STATUS_2026-10-06.md"
-      - "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3ReleaseJepAuthorityRepairRecipe.java"
-      - "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3RecipeScopeRegistry.java"
-      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-release-jep-authority-repair.yml"
+      - "make/m3/backports/RELEASE_JEP_AUTHORITY.tsv"
+      - "make/m3/backports/JEP_CATALOGUE.tsv"
+      - "make/m3/backports/release_jep_authority.py"
+      - "make/m3/backports/test_release_jep_authority.py"
+      - "make/m3/backports/program_status.py"
+      - "make/m3/backports/test_program_status.py"
+      - "make/m3/backports/verify.py"
+      - "make/m3/backports/README.md"
+      - "make/m3/backports/PROGRAM_STATUS_2026-10-06.md"
+      - "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3ReleaseJepAuthorityRepairRecipe.java"
+      - "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3RecipeScopeRegistry.java"
+      - "make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-release-jep-authority-repair.yml"
       - "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/**"
-      - "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3ReleaseJepAuthorityRepairRecipeTest.java"
-      - "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/scope/M3RecipeScopeDeclarationTest.java"
-      - "m3/tooling/recipe-catalogue.tsv"
+      - "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3ReleaseJepAuthorityRepairRecipeTest.java"
+      - "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/scope/M3RecipeScopeDeclarationTest.java"
+      - "make/m3/tooling/recipe-catalogue.tsv"
       - ".github/workflows/m3-release-jep-authority-repair.yml"
   pull_request:
     paths:
-      - "m3/backports/**"
-      - "m3/tooling/migration-recipes/**"
-      - "m3/tooling/recipe-catalogue.tsv"
+      - "make/m3/backports/**"
+      - "make/m3/tooling/migration-recipes/**"
+      - "make/m3/tooling/recipe-catalogue.tsv"
       - ".github/workflows/m3-release-jep-authority-repair.yml"
   workflow_dispatch:
 
@@ -58,19 +58,19 @@ jobs:
       - name: Compile denominator tools
         run: >
           python3 -m py_compile
-          m3/backports/release_jep_authority.py
-          m3/backports/program_status.py
-          m3/backports/verify.py
+          make/m3/backports/release_jep_authority.py
+          make/m3/backports/program_status.py
+          make/m3/backports/verify.py
       - name: Denominator unit proof
-        working-directory: m3/backports
+        working-directory: make/m3/backports
         run: >
           python3 -m unittest -v
           test_release_jep_authority.py
           test_program_status.py
       - name: Full backport verification
-        run: python3 m3/backports/verify.py --root .
+        run: python3 make/m3/backports/verify.py --root .
       - name: Deterministic status
         run: |
-          python3 m3/backports/program_status.py             --root .             --json-out target/m3-program-status.json             --tsv-out target/m3-program-status.tsv
+          python3 make/m3/backports/program_status.py             --root .             --json-out target/m3-program-status.json             --tsv-out target/m3-program-status.tsv
           grep -F $'jep\ttotal\t85' target/m3-program-status.tsv
           grep -F $'jep\tunique\t85' target/m3-program-status.tsv

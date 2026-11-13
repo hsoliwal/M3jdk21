@@ -5,7 +5,7 @@ on:
     paths:
       - 'm3/collections/interop/src/main/java/jdk/m3/collections/interop/M3ApacheBag.java'
       - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3ApacheBagContractTest.java'
-      - 'm3/collections/qualification/m3-commons-bag-20261018/**'
+      - 'make/m3/collections/qualification/m3-commons-bag-20261018/**'
       - '.github/workflows/m3-commons-bag-five-provider-20261018.yml'
   workflow_dispatch:
 concurrency:
@@ -25,7 +25,7 @@ jobs:
       - name: Maven OpenRewrite recipe fixed point and drift refusal
         run: |
           set -eu
-          mvn -B -ntp -f m3/collections/qualification/m3-commons-bag-20261018/recipe/pom.xml clean verify
+          mvn -B -ntp -f make/m3/collections/qualification/m3-commons-bag-20261018/recipe/pom.xml clean verify
       - name: Verify exact recipe-emitted source and tests
         run: |
           python3 - <<'PY'

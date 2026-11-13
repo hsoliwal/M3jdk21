@@ -102,7 +102,7 @@ final class M3FullDeliveryA3RecipeTest {
         Map<String, String> after = apply(recipe, Map.of());
 
         assertEquals(1, after.size());
-        String document = after.get("m3/docs/m3-full-delivery-a3.md");
+        String document = after.get("doc/m3/m3-full-delivery-a3.md");
         assertTrue(document.contains("ADD"));
         assertTrue(document.contains("REPLACE"));
         assertTrue(document.contains("STALE"));

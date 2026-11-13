@@ -16,7 +16,7 @@ of the first-party donor `hsoliwal/com.synexia` (develop `d5ad5090d87e`), reloca
 ## Decisions ([DECISION.tsv](DECISION.tsv))
 
 * The consumer is the donor's javac annotation processor `M3StaticFactsProcessor`, so the plan joins the `m3/compiler`
-  family as its own module, a default module of `m3/pom.xml` (S1). The processor is the next leaf (OMIT row, S3).
+  family as its own module, a default module of `make/m3/pom.xml` (S1). The processor is the next leaf (OMIT row, S3).
 * Naming follows the `m3/compiler` siblings with a descriptor (S7, verify.sh gate `siblings`): module
   `org.m3jdk.compiler.<x>`, package `jdk.m3.compiler.<x>`, coordinates `com.m3:m3-compiler-<dir>`, exactly as
   `lifetime-slots` (`org.m3jdk.compiler.lifetime`, `com.m3:m3-compiler-lifetime-slots`) and `nullness-facts`.

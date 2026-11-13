@@ -14,11 +14,11 @@ enum, hash/heap implementations and tests are retained. Generic ordered/sorted c
 weak maps, blocking queues, lazy state and progress are restored from qualified canonical
 postimages with their original notices. No Synexia runtime dependency is introduced.
 
-Use m3/collections/verify_donation.py for current product qualification. The frozen lane
+Use make/m3/collections/verify_donation.py for current product qualification. The frozen lane
 recipe has a separate Maven fixture. Do not call the historical installer against current
 expanded sources. The dedicated workflow exercises both independent gates.
 
-The actual application and qualification receipts are under m3/collections/qualification.
+The actual application and qualification receipts are under make/m3/collections/qualification.
 Historical 20261007 receipts remain revision-scoped in Synexia. Current destination blob
 and mode readback, not merge status or ancestry, establishes that content landed.
 

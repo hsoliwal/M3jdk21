@@ -20,7 +20,7 @@ These two modules stay separate from m3/compiler, the owner module of #2841, for
 `m3/compiler/source-signals/qualification/method-signals-20261022/SOURCE_MANIFEST.tsv` pins 5 sources by path,
 sha256 and git blob, and its verify.sh is step 1 of m3-method-source-signals-20261022.yml. The rows now carry the
 renamed paths and bytes. The 15 carried values (PATH, SHA256, BLOB) are appended to
-m3/tooling/jdk-naming/RENAME_RESEAL.tsv. The preimage column is unchanged.
+make/m3/tooling/jdk-naming/RENAME_RESEAL.tsv. The preimage column is unchanged.
 
 The seal had already failed on master: M3MethodSignalsPluginTest.java changed in c5bd05277774 (2026-11-06, Windows
 code-source URI fix) without a reseal. The carried row seals the current bytes, which include that fix.
@@ -32,5 +32,5 @@ code-source URI fix) without a reseal. The carried row seals the current bytes, 
 |---|---|---|
 | jdk-standard verify.sh (plugin over its own sources, doclint, self-tests) | rc=0 | rc=0 |
 | source-signals verify.sh | rc=0 | rc=0 |
-| javac main/test + JUnit (m3/evidence/compiler/gate_fold_compiler.sh) | standard 1/1, signals 3/3 | same |
+| javac main/test + JUnit (make/m3/evidence/compiler/gate_fold_compiler.sh) | standard 1/1, signals 3/3 | same |
 | rename fixed point | - | second run: no change |

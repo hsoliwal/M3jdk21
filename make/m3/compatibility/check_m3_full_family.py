@@ -10,10 +10,10 @@ import re
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 PIN = Path(__file__).with_name("m3-full-family-pin.tsv")
-CATALOGUE = ROOT / "m3/docs/m3-full-family-catalogue.json"
-PRECOMPUTE = ROOT / "m3/docs/m3-mindex-precompute-inventory.tsv"
+CATALOGUE = ROOT / "doc/m3/m3-full-family-catalogue.json"
+PRECOMPUTE = ROOT / "doc/m3/m3-mindex-precompute-inventory.tsv"
 HEX40 = re.compile(r"^[0-9a-f]{40}$")
 
 # These are immutable source and lineage identities, not current package names.
@@ -181,7 +181,7 @@ def unique_json_object(pairs: list[tuple[str, object]]) -> dict:
     return result
 
 
-def validate_receiving_sequence(path: Path = ROOT / "m3/docs/name-mapping.json") -> dict:
+def validate_receiving_sequence(path: Path = ROOT / "doc/m3/name-mapping.json") -> dict:
     data = json.loads(path.read_text(encoding="utf-8"), object_pairs_hook=unique_json_object)
     policy = data.get("porting_invariant")
     if not isinstance(policy, dict) or policy.get("id") != "M3-JDK-PORT-1":

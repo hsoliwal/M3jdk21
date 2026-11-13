@@ -11,7 +11,7 @@ Original contributions: Hitesh Soliwal <hsoliwal@gmail.com>. OpenJDK retains its
 
 ## Build and test
 
-Set `M3JDK` to a private JDK 21 directory and run `./m3/build.sh`. The script compiles the named module, executes deterministic tests under normal JIT, interpreter, noncompact Strings and C2-focused modes, then builds an original 13-word English **fixture** image. This is not a production English lexicon. `m3/build/` is ignored. The built JDK image can be used as `M3JDK` after a native OpenJDK build.
+Set `M3JDK` to a private JDK 21 directory and run `./make/m3/build.sh`. The script compiles the named module, executes deterministic tests under normal JIT, interpreter, noncompact Strings and C2-focused modes, then builds an original 13-word English **fixture** image. This is not a production English lexicon. `m3/build/` is ignored. The built JDK image can be used as `M3JDK` after a native OpenJDK build.
 
 The historical `m3/recipes/` scripts are **migration residue** from an earlier receiver model. They must not be used for new source changes. The owning Maven/OpenRewrite recipes, task crates, fixtures and execution live only in Synexia. This repository receives the exact qualified postimages and independently verifies their source hashes, JDK contracts and installed-product behavior. Before cleaning up the old scripts, source-seal them in Synexia and verify all callers.
 
@@ -65,7 +65,7 @@ acceptance evidence and installed JDKs are not changed by the documentation hand
 
 The OpenJDK configure/make build remains authoritative for this integrated JDK product.
 Source transformation and Maven/OpenRewrite recipe execution are exclusively Synexia-owned.
-The historical `m3/pom.xml` reactor still includes legacy target-local recipe wiring;
+The historical `make/m3/pom.xml` reactor still includes legacy target-local recipe wiring;
 it is **migration residue**, not an authorized recipe-production entrypoint.
 Receiver-side verification must build the actual produced Java/JNI/HotSpot postimages and
 run the relevant JDK/jtreg/API/ABI/native/runtime or installed-image tests.

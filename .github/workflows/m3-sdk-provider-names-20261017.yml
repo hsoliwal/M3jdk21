@@ -3,12 +3,12 @@ name: M3 SDK five-provider names and indexed multivalue Java JNI
 on:
   pull_request:
     paths:
-      - 'm3/collections/qualification/m3-sdk-provider-names-20261017/**'
+      - 'make/m3/collections/qualification/m3-sdk-provider-names-20261017/**'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3CollectionSdkNames.java'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexedMultiValueMap.java'
       - 'test/jdk/jdk/m3/collections/M3CollectionSdkContractSelfTest.java'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3_SDK_FAMILY_CATALOG.tsv'
-      - 'm3/docs/name-mapping.d/m3-sdk-provider-names-20261017.json'
+      - 'doc/m3/name-mapping.d/m3-sdk-provider-names-20261017.json'
       - '.github/workflows/m3-sdk-provider-names-20261017.yml'
   workflow_dispatch:
 concurrency:
@@ -27,7 +27,7 @@ jobs:
       - name: Canonical Maven recipe self-test and exact fixed point
         run: |
           set -eu
-          RECIPE=m3/collections/qualification/m3-sdk-provider-names-20261017/recipe
+          RECIPE=make/m3/collections/qualification/m3-sdk-provider-names-20261017/recipe
           mvn -B -ntp -f "$RECIPE/pom.xml" verify
           java -cp "$RECIPE/target/classes" jdk.internal.m3.M3SdkNamesRecipe --check .
       - name: Compile actual existing M3 key map and new SDK source with strict Java 21

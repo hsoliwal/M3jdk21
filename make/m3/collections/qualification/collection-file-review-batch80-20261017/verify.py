@@ -8,16 +8,16 @@ SCRIPT = Path(__file__).absolute()
 for component in (SCRIPT, *SCRIPT.parents):
     if component.is_symlink() or getattr(component, "is_junction", lambda: False)():
         raise RuntimeError("aliased qualification path")
-ROOT = Path(__file__).resolve().parents[4]
-RECIPE = ROOT / "m3/collections/recipe/collection-file-review-batch80-20261017"
+ROOT = Path(__file__).resolve().parents[5]
+RECIPE = ROOT / "make/m3/collections/recipe/collection-file-review-batch80-20261017"
 OWNER = RECIPE / "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/collection-file-review-batch80"
 EXPECTED = {
-    "m3/collections/algorithm-catalog/README-collection-file-review-20261017.md": "f598ec356cd140e71a7d2c085c61ac857b8a7d8e8228723a85df7cfff60db4d9",
-    "m3/collections/algorithm-catalog/SOURCE_INVARIANT_CONTRACT-20261017.md": "e80c95e72cdff72e8f14be43e70a768a503eaeea0b168a1ce6393696d51c1fe5",
-    "m3/collections/algorithm-catalog/TASKS-collection-batch80-20261017.md": "86062da35ac684503c468118cf925b286be92cfd470e9bc10748f8e712659cae",
-    "m3/collections/algorithm-catalog/collection-candidate-comparison-20261017.tsv": "e9d721fd062fe291f695a9dc39de2f4d90a725a49432cde5017ccac644c910cd",
-    "m3/collections/algorithm-catalog/collection-catalogue-input-provenance-20261017.tsv": "15783211d8ccd539aa70d5559cf29cccfa8ad24e4260e02e2a80819bdc7637ec",
-    "m3/collections/algorithm-catalog/collection-file-review-20261017.tsv": "1eda2361d3c9dcbc7b87fea67184c6747731fc1c8de9439c77ccda61171d29f3",
+    "make/m3/collections/algorithm-catalog/README-collection-file-review-20261017.md": "f598ec356cd140e71a7d2c085c61ac857b8a7d8e8228723a85df7cfff60db4d9",
+    "make/m3/collections/algorithm-catalog/SOURCE_INVARIANT_CONTRACT-20261017.md": "e80c95e72cdff72e8f14be43e70a768a503eaeea0b168a1ce6393696d51c1fe5",
+    "make/m3/collections/algorithm-catalog/TASKS-collection-batch80-20261017.md": "86062da35ac684503c468118cf925b286be92cfd470e9bc10748f8e712659cae",
+    "make/m3/collections/algorithm-catalog/collection-candidate-comparison-20261017.tsv": "e9d721fd062fe291f695a9dc39de2f4d90a725a49432cde5017ccac644c910cd",
+    "make/m3/collections/algorithm-catalog/collection-catalogue-input-provenance-20261017.tsv": "15783211d8ccd539aa70d5559cf29cccfa8ad24e4260e02e2a80819bdc7637ec",
+    "make/m3/collections/algorithm-catalog/collection-file-review-20261017.tsv": "1eda2361d3c9dcbc7b87fea67184c6747731fc1c8de9439c77ccda61171d29f3",
 }
 
 

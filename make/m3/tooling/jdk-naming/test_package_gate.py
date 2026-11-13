@@ -32,10 +32,10 @@ def expect(paths, kinds, label):
 expect(BASE, [], "unchanged tree")
 expect([p for p in BASE if "/arrays/" not in p], [], "removed module")
 expect(BASE + ["m3/search/src/main/java/jdk/m3/search/Bmh.java"], [], "new class in an existing package")
-expect(BASE + ["m3/tooling/search/pom.xml", "m3/tooling/search/src/main/java/jdk/m3/tooling/search/S.java"],
+expect(BASE + ["make/m3/tooling/search/pom.xml", "make/m3/tooling/search/src/main/java/jdk/m3/tooling/search/S.java"],
        ["NEW_ROOT", "NEW_PACKAGE"], "new module with a new package")
 expect(BASE + ["m3/search/src/main/java/jdk/m3/search/sorted/S.java"], ["NEW_PACKAGE"], "new package in an existing root")
-expect(BASE + ["m3/tooling/x/pom.xml", "m3/tooling/x/src/main/java/jdk/m3/search/S.java"],
+expect(BASE + ["make/m3/tooling/x/pom.xml", "make/m3/tooling/x/src/main/java/jdk/m3/search/S.java"],
        ["NEW_ROOT", "SPLIT_GROWS"], "existing package split into a new root")
 expect(BASE + ["m3/collections/implementations/c/pom.xml",
                "m3/collections/implementations/c/src/main/java/jdk/m3/collections/apache/C.java"],

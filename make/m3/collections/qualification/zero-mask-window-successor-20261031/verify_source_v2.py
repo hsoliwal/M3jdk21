@@ -9,9 +9,9 @@ import subprocess
 import sys
 
 HISTORICAL_SHA = "31cdce1db97fd1567b360ee843916f9b6cfa3ff3"
-ORIGINAL_VERIFIER = "m3/collections/qualification/zero-mask-window-copy-20261017/verify.py"
+ORIGINAL_VERIFIER = "make/m3/collections/qualification/zero-mask-window-copy-20261017/verify.py"
 ORIGINAL_VERIFIER_BLOB = "d40cbee01ed1351bb118e654bc4123ad17c2d29f"
-MANIFEST = ("m3/collections/qualification/zero-mask-window-successor-20261031/"
+MANIFEST = ("make/m3/collections/qualification/zero-mask-window-successor-20261031/"
             "SOURCE_SUCCESSOR_V2.tsv")
 C = "m3/collections/src/main/native/collections/m3_index_mask_compactor.c"
 JAVA = "m3/collections/src/test/java/jdk/m3/collections/M3IndexMaskCompactorSelfTest.java"

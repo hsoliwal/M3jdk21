@@ -13,7 +13,7 @@ import java.util.UUID;
  * of the canonical 16-byte big-endian representation. This intentionally differs from
  * {@link UUID#compareTo(UUID)}, which compares signed long halves.</p>
  */
-//FLLDCIM: RELOCATE - donor blob bb77b6d5b7a8 at commit 3385d79a2968 (repository, path, URL and digests: m3/collections/recipe/immutable-pools-20261106/PROVENANCE.tsv); recipe m3/collections/recipe/immutable-pools-20261106/relocate.py v2
+//FLLDCIM: RELOCATE - donor blob bb77b6d5b7a8 at commit 3385d79a2968 (repository, path, URL and digests: make/m3/collections/recipe/immutable-pools-20261106/PROVENANCE.tsv); recipe make/m3/collections/recipe/immutable-pools-20261106/relocate.py v2
 public record Uuid128(long mostSignificantBits, long leastSignificantBits)
         implements Comparable<Uuid128> {
     public static final int BINARY_BYTES = 16;

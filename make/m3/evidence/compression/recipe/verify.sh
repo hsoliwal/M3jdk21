@@ -69,7 +69,7 @@ elif [ -f "$RECIPE_DIR/native-gate.sh" ]; then
     gate 4_native SKIP "not a Linux host: run native-gate.sh <scratch>/differential <out> there (GATES.tsv native_gate)"
 fi
 
-naming=$(cd "$ROOT" && python -I m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/compression/ 2>&1 | grep -E "^(JDK_NAMING|REFUSED)" | tail -1)
+naming=$(cd "$ROOT" && python -I make/m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/compression/ 2>&1 | grep -E "^(JDK_NAMING|REFUSED)" | tail -1)
 case "$naming" in *"moves=0 rewrites=0 refusals=0"*) gate naming PASS "$naming" ;; *) gate naming FAIL "$naming" ;; esac
 echo "VERIFY $status"
 [ "$status" = PASS ]

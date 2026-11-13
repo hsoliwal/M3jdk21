@@ -26,9 +26,9 @@ Do not create another mapping database.
 
 On the current master line, the operational public mapping authority is:
 
-- `m3/docs/name-mapping.json`, including its `migration.records` extension;
-- the lifecycle rules in `m3/docs/migration-mapping-lifecycle.md`;
-- the worked conflict/rename/split guidance in `m3/docs/migration-worked-port-decisions.md`.
+- `doc/m3/name-mapping.json`, including its `migration.records` extension;
+- the lifecycle rules in `doc/m3/migration-mapping-lifecycle.md`;
+- the worked conflict/rename/split guidance in `doc/m3/migration-worked-port-decisions.md`.
 
 Branch-scoped manifests, generated coverage and receipts remain evidence or candidate tooling tied to their exact branches. They may be reconciled into the authority through a reviewed change, but their existence on another branch does not silently replace the master registry.
 

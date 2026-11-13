@@ -14,7 +14,7 @@ import java.util.HexFormat;
 import java.util.Random;
 
 /** Baseline + candidate compiled independently, exact shared-operation physical-state trace. */
-//FLLDCIM: RELOCATE - donor blob c98b1cde67be at ca1aafc4d94f; recipe m3/collections/qualification/census-g6-20261106/relocate.py v4
+//FLLDCIM: RELOCATE - donor blob c98b1cde67be at ca1aafc4d94f; recipe make/m3/collections/qualification/census-g6-20261106/relocate.py v4
 public final class LongLongMapSharedTrace {
     private static long checks;
     private LongLongMapSharedTrace() { }

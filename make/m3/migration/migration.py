@@ -418,7 +418,7 @@ def main(argv=None):
             write_output(args.output, content)
             print('MANIFEST_EXTENSION_RECIPE_PASS source_unchanged=true output_sha256=' + digest(content))
             return 0
-        manifest = args.manifest or args.root / 'm3/docs/name-mapping.json'
+        manifest = args.manifest or args.root / 'doc/m3/name-mapping.json'
         document = load_json(manifest)
         previous = load_json(args.previous) if args.previous else None
         errors = validate(document, args.root, previous)

@@ -5,8 +5,8 @@ on:
   pull_request:
     paths:
       - 'test/jdk/java/lang/String/M3CanonicalApiBoundaryTest.java'
-      - 'm3/docs/qualification/current-api-internality-20261027/**'
-      - 'm3/docs/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md'
+      - 'doc/m3/qualification/current-api-internality-20261027/**'
+      - 'doc/m3/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md'
       - '.github/workflows/m3jdk21-canonical-api-internality-20261027.yml'
   workflow_dispatch:
 permissions:
@@ -26,8 +26,8 @@ jobs:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             test/jdk/java/lang/String/M3CanonicalApiBoundaryTest.java
-            m3/docs/qualification/current-api-internality-20261027/**
-            m3/docs/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md
+            doc/m3/qualification/current-api-internality-20261027/**
+            doc/m3/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md
             .github/workflows/m3jdk21-canonical-api-internality-20261027.yml
       - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
         with:
@@ -43,7 +43,7 @@ jobs:
           from pathlib import Path
 
           receipt = json.loads(Path(
-              "m3/docs/qualification/current-api-internality-20261027/RECEIVER_RECEIPT.json"
+              "doc/m3/qualification/current-api-internality-20261027/RECEIVER_RECEIPT.json"
           ).read_text(encoding="utf-8"))
           source = Path(receipt["product"]["source_path"])
           if source.as_posix() != "test/jdk/java/lang/String/M3CanonicalApiBoundaryTest.java":

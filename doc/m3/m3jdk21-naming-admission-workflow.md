@@ -177,7 +177,7 @@ mvn -B -ntp -f synexia-openrewrite-recipes/pom-m3jdk21-naming-admission.xml test
 From this target root, inventory authoritative mapping IDs:
 
 ```sh
-python3 -c 'import json; print("\n".join(x["id"] for x in json.load(open("m3/docs/name-mapping.json", encoding="utf-8"))["migration"]["records"]))'
+python3 -c 'import json; print("\n".join(x["id"] for x in json.load(open("doc/m3/name-mapping.json", encoding="utf-8"))["migration"]["records"]))'
 ```
 
 Each production candidate still needs its own pinned canonical Synexia task and
@@ -196,7 +196,7 @@ whole-Maven/JDK test must remain `NOT_RUN` in PR evidence, not PASS.
 ## Release review and visible intermediate output
 
 Run the existing map checker before changing package, class or method names.
-The stable mapping IDs and [name-plan.json](../tooling/name-contract/name-plan.json)
+The stable mapping IDs and [name-plan.json](../../make/m3/tooling/name-contract/name-plan.json)
 remain authoritative; the release queue projects their status without creating a
 second rename registry. A `QUEUED` row is an excluded candidate, not an applied
 rename or a reason to rewrite a public Java API.
@@ -206,9 +206,9 @@ rename or a reason to rewrite a public Java API.
 | Internal package/class move | Resolve the mapped destination and typed caller closure, then update source paths, imports, module/service resources and JNI names as applicable |
 | Method rename | Match the exact owner and overload; retain public, override, reflection, serialization and native contracts |
 | Documentation update | Describe the current mapped owner and exact scope; distinguish an existing implementation from installed-image qualification |
-| Intermediate output | Put release reports under `m3/release/queue/current/`; retain failures and incomplete gates in the report and publish the report as a CI artifact |
+| Intermediate output | Put release reports under `make/m3/release/queue/current/`; retain failures and incomplete gates in the report and publish the report as a CI artifact |
 
-See [the release queue](../release/queue/README.md) for the commands and the
+See [the release queue](../../make/m3/release/queue/README.md) for the commands and the
 current evidence requirements. Public JDK names stay `String`, `Class`,
 `HashMap`, `Pattern` and their existing method signatures. This documentation
 update does not promote the queued class or package proposals.

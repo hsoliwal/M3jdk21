@@ -5,7 +5,7 @@
   "priorPublicSource": {
     "repository": "hsoliwal/M3jdk21",
     "commit": "26f61cbe6da082cdfa7ccbfbd3a51067924dc7ec",
-    "sdkPath": "m3/migration/original-provider-20261017/sdk",
+    "sdkPath": "make/m3/migration/original-provider-20261017/sdk",
     "sdkTree": "3c02e3896096753a63654d56650a4561118db2b4"
   },
   "newPublicDelta": "18 literal Requires-Dist marker quote corrections, wrapper lock digest, regression fixtures from already-public hash-pinned METADATA and closed pins/source binding",

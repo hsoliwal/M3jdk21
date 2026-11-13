@@ -98,7 +98,7 @@
     }
   },
   "policy_evidence": {
-    "checker": "m3/compatibility/check_m3_full_borrow_receiver.py",
+    "checker": "make/m3/compatibility/check_m3_full_borrow_receiver.py",
     "checker_log": "lint-full-borrow-receiver.log",
     "marker": "SYNEXIA_FULL_BORROW_RECEIVER_PASS",
     "families": 32,

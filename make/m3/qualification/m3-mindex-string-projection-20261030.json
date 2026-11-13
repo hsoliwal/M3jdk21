@@ -142,7 +142,7 @@
     },
     {
       "crate": "m3-mindex-string-naming-20261030",
-      "path": "m3/docs/name-mapping.json",
+      "path": "doc/m3/name-mapping.json",
       "before": {
         "sha256": "71930eadce7bd6889525a360f35328dad0535ff5a32d2e646a9f9345455f0bee",
         "git_blob_sha1": "e65bff35122d02dfa6be4662ceeab65cc6f96a62"
@@ -154,7 +154,7 @@
     },
     {
       "crate": "m3-mindex-string-naming-20261030",
-      "path": "m3/tooling/name-contract/name-plan.json",
+      "path": "make/m3/tooling/name-contract/name-plan.json",
       "before": {
         "sha256": "d2cb06d0106b964e51108a95dbc0026312f30ebf8b6703b5d468005463187def",
         "git_blob_sha1": "e4320d6941d2a409d8cc79c48bccf7a4f6b463d3"

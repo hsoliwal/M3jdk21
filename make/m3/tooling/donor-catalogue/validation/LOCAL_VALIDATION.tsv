@@ -1,6 +1,6 @@
 stage	status	evidence
 inventory	PASS	module and workflow paths were absent at base commit 3a25863c13773d7c332963c58ddd6142e6f52dbb
-shell_syntax	PASS	bash -n m3/tooling/donor-catalogue/verify.sh
+shell_syntax	PASS	bash -n make/m3/tooling/donor-catalogue/verify.sh
 java_compile	PASS	javac --release 21 -Xlint:all -Werror
 javadoc	PASS	javadoc -Werror -Xdoclint:all
 self_test	PASS	36 dependency-free checks including local Git add modify delete and rename delta fixture

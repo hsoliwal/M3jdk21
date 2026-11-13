@@ -13,7 +13,7 @@ import java.util.Objects;
  * Querying required/forbidden signal bits is therefore AND/AND-NOT over 64 objects per machine
  * word before any exact object operation is attempted.</p>
  */
-//FLLDCIM: RELOCATE - donor blob cf5b38a4654a at commit 3385d79a2968 (repository, path, URL and digests: m3/collections/qualification/object-signal-20261107/PROVENANCE.tsv); recipe m3/collections/qualification/object-signal-20261107/relocate.py v1
+//FLLDCIM: RELOCATE - donor blob cf5b38a4654a at commit 3385d79a2968 (repository, path, URL and digests: make/m3/collections/qualification/object-signal-20261107/PROVENANCE.tsv); recipe make/m3/collections/qualification/object-signal-20261107/relocate.py v1
 public final class ObjectSignalTable {
     private static final int FEATURE_BITS = Long.SIZE;
 

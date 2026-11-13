@@ -661,7 +661,7 @@ import hashlib,importlib.util,json,sys,tempfile,unittest
 from pathlib import Path
 root,out,expected=Path(sys.argv[1]),Path(sys.argv[2]),json.loads(sys.argv[3])
 tempfile.tempdir=str(out/"tmp")
-path=root/"m3/migration/test/test_migration.py"
+path=root/"make/m3/migration/test/test_migration.py"
 spec=importlib.util.spec_from_file_location("m3_original_migration_tests",path)
 module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
 suite=unittest.defaultTestLoader.loadTestsFromModule(module)

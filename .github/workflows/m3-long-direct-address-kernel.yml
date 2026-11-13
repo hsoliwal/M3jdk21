@@ -23,7 +23,7 @@ jobs:
           java-version: '21'
       - name: Historical recipe self-test and fixed point (isolated fixture)
         run: |
-          mvn -B -ntp -f m3/collections/qualification/m3-long-direct-address-kernel-20261017/recipe/pom.xml verify
+          mvn -B -ntp -f make/m3/collections/qualification/m3-long-direct-address-kernel-20261017/recipe/pom.xml verify
       - name: Compile and install original arrays Maven dependency
         shell: bash
         run: |

@@ -7,8 +7,8 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IntIntHashMap.java'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IntLongHashMap.java'
       - 'test/jdk/jdk/m3/collections/M3ZeroSlotCapacity*'
-      - 'm3/collections/verification/zero-slot-growth-20261017/**'
-      - 'm3/collections/qualification/zero-slot-growth-20261017.tsv'
+      - 'make/m3/collections/verification/zero-slot-growth-20261017/**'
+      - 'make/m3/collections/qualification/zero-slot-growth-20261017.tsv'
       - '.github/workflows/m3-zero-slot-growth-20261017.yml'
   workflow_dispatch:
 permissions:
@@ -27,7 +27,7 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Verify exact generated source, API descriptors and JDK differential
-        run: python3 m3/collections/verification/zero-slot-growth-20261017/verify.py --root .
+        run: python3 make/m3/collections/verification/zero-slot-growth-20261017/verify.py --root .
       - name: Check patch hygiene
         run: git diff --check HEAD^...HEAD
   module-junit:

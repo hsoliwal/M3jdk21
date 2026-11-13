@@ -3,7 +3,7 @@ name: M3 modified UTF-8 runtime owner fan-in
 on:
   pull_request:
     paths:
-      - 'm3/runtime-integration/recipe/**'
+      - 'make/m3/runtime-integration/recipe/**'
       - '.github/workflows/m3-runtime-mutf8-fanin-proof.yml'
   workflow_dispatch:
 permissions:
@@ -24,4 +24,4 @@ jobs:
         with:
           python-version: '3.12'
       - name: Check exact recipe syntax
-        run: python3 -m py_compile m3/runtime-integration/recipe/apply.py m3/runtime-integration/recipe/test_recipe.py
+        run: python3 -m py_compile make/m3/runtime-integration/recipe/apply.py make/m3/runtime-integration/recipe/test_recipe.py

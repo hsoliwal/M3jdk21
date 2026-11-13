@@ -13,7 +13,7 @@
 set -uo pipefail
 WT=${1:?worktree}; OUT=${2:?out_dir}; MUTANTS=${3:?MUTANTS.tsv}; RESULT=${4:?MUTATION.tsv}
 PKG_DIR=${PKG_DIR:-"src/java.base/share/classes/jdk/internal/mindex"}
-T="$WT/m3/tooling/atom-tests"
+T="$WT/make/m3/tooling/atom-tests"
 # Git Bash would rewrite mutant texts that start with '/' or '//' as paths before python sees them
 export MSYS_NO_PATHCONV=1
 mkdir -p "$OUT"

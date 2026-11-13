@@ -7,7 +7,7 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexedListSnapshot.java'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3GenericCollections.java'
       - 'test/jdk/jdk/m3/collections/M3GenericArrayList*.java'
-      - 'm3/collections/qualification/m3-generic-object-list-20261017/**'
+      - 'make/m3/collections/qualification/m3-generic-object-list-20261017/**'
       - '.github/workflows/m3-generic-object-list-20261017.yml'
   workflow_dispatch:
 concurrency:
@@ -27,7 +27,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          RECIPE=m3/collections/qualification/m3-generic-object-list-20261017/recipe
+          RECIPE=make/m3/collections/qualification/m3-generic-object-list-20261017/recipe
           mvn -B -ntp -f "$RECIPE/pom.xml" verify
           java -cp "$RECIPE/target/classes" jdk.internal.m3.M3GenericObjectListRecipe --check .
       - name: Differential Java21 object List and indexed snapshot

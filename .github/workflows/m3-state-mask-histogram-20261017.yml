@@ -6,8 +6,8 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3StateMaskHistogram.java'
       - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_state_mask_histogram.c'
       - 'test/jdk/jdk/m3/collections/M3StateMaskHistogram*'
-      - 'm3/collections/recipe/state-mask-histogram-20261017/**'
-      - 'm3/collections/algorithm-catalog/state-mask-histogram-20261017.tsv'
+      - 'make/m3/collections/recipe/state-mask-histogram-20261017/**'
+      - 'make/m3/collections/algorithm-catalog/state-mask-histogram-20261017.tsv'
       - '.github/workflows/m3-state-mask-histogram-20261017.yml'
   push:
     branches: [master]
@@ -31,7 +31,7 @@ jobs:
           java-version: '21'
       - name: Exact-source Java21 / C17 / JNI proof
         shell: bash
-        run: bash m3/collections/recipe/state-mask-histogram-20261017/verify.sh
+        run: bash make/m3/collections/recipe/state-mask-histogram-20261017/verify.sh
   owning-module:
     runs-on: ubuntu-latest
     steps:

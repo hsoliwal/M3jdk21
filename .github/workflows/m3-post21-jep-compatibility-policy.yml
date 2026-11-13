@@ -5,15 +5,15 @@ on:
     branches:
       - "m3/post21-jep-compat-reconcile-20261005"
     paths:
-      - "m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv"
-      - "m3/backports/compatibility_policy.py"
-      - "m3/backports/test_compatibility_policy.py"
+      - "make/m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv"
+      - "make/m3/backports/compatibility_policy.py"
+      - "make/m3/backports/test_compatibility_policy.py"
       - ".github/workflows/m3-post21-jep-compatibility-policy.yml"
   pull_request:
     paths:
-      - "m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv"
-      - "m3/backports/compatibility_policy.py"
-      - "m3/backports/test_compatibility_policy.py"
+      - "make/m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv"
+      - "make/m3/backports/compatibility_policy.py"
+      - "make/m3/backports/test_compatibility_policy.py"
       - ".github/workflows/m3-post21-jep-compatibility-policy.yml"
   workflow_dispatch:
 
@@ -32,11 +32,11 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Compile policy
-        run: python3 -m compileall -q m3/backports/compatibility_policy.py m3/backports/test_compatibility_policy.py
+        run: python3 -m compileall -q make/m3/backports/compatibility_policy.py make/m3/backports/test_compatibility_policy.py
 
       - name: Validate checked-in compatibility ledger
-        run: python3 m3/backports/compatibility_policy.py
+        run: python3 make/m3/backports/compatibility_policy.py
 
       - name: Run compatibility-policy tests
-        working-directory: m3/backports
+        working-directory: make/m3/backports
         run: python3 -m unittest -v test_compatibility_policy.py

@@ -46,10 +46,10 @@ UNQUALIFIED_CLAIMS = {
 }
 REQUIRED_FILES = [
     "M3-SYNEXIA-NOTICE.md", "M3-SYNEXIA-RIGHTS.md", "M3-SYNEXIA-AUTHORS.md",
-    "LICENSE-M3-APACHE-2.0.txt", "m3/README.md",
-    "m3/release/release-contract.json", "m3/release/README.md",
-    "m3/release/BENCHMARK_AND_COMPATIBILITY_SPEC.md",
-    "m3/docs/name-mapping.json", "m3/tooling/name-contract/name-plan.json",
+    "LICENSE-M3-APACHE-2.0.txt", "make/m3/README.md",
+    "make/m3/release/release-contract.json", "make/m3/release/README.md",
+    "make/m3/release/BENCHMARK_AND_COMPATIBILITY_SPEC.md",
+    "doc/m3/name-mapping.json", "make/m3/tooling/name-contract/name-plan.json",
 ]
 REQUIRED_GATES = frozenset({
     "RIGHTS_AND_LICENSE_BOUNDARY", "SOURCE_TREE_AND_UPSTREAM_BASELINE",
@@ -60,18 +60,18 @@ REQUIRED_GATES = frozenset({
 })
 RECIPE_ROOTS = (
     ".m3/openrewrite-recipes", ".m3/task-crates", "m3/recipes",
-    "m3/tooling/migration-recipes", "m3/tooling/m3jdk-a3-recipes",
+    "make/m3/tooling/migration-recipes", "make/m3/tooling/m3jdk-a3-recipes",
     "m3/m3-import/pure-int-recipe-custody",
-    "m3/runtime-integration/recipe",
-    "m3/runtime-integration/char-array-copy/recipe",
-    "m3/runtime-integration/utf8-cursor-20261014/recipe/canonical",
+    "make/m3/runtime-integration/recipe",
+    "make/m3/runtime-integration/char-array-copy/recipe",
+    "make/m3/runtime-integration/utf8-cursor-20261014/recipe/canonical",
 )
-NAME_MAP = "m3/docs/name-mapping.json"
-NAME_PLAN = "m3/tooling/name-contract/name-plan.json"
+NAME_MAP = "doc/m3/name-mapping.json"
+NAME_PLAN = "make/m3/tooling/name-contract/name-plan.json"
 EVIDENCE_SCHEMA = "M3_RELEASE_EVIDENCE_V1"
-DEFAULT_EVIDENCE = "m3/release/queue/current/evidence.json"
+DEFAULT_EVIDENCE = "make/m3/release/queue/current/evidence.json"
 # Standalone rule (user, 2026-10-31): every release gate, the Maven/OpenRewrite control reactor included,
-# is owned and executed by this repository; donor lineage stays in ledgers (m3/tooling/standalone/).
+# is owned and executed by this repository; donor lineage stays in ledgers (make/m3/tooling/standalone/).
 PRODUCT_REPOSITORY = "hsoliwal/M3jdk21"
 MAVEN_GATE = "M3_MAVEN_CONTROL_REACTOR"
 SHA1 = re.compile(r"[0-9a-f]{40}\Z")
@@ -300,7 +300,7 @@ def validate(root: Path, release_mode: bool = False) -> dict:
 
 def validate_release_source(root: Path, passed, block) -> None:
     """Require an isolated source checkout and exact regular boundary-input blobs."""
-    for relative in REQUIRED_FILES + ["m3/docs/name-mapping.json", "m3/release/verify_release_admission.py"]:
+    for relative in REQUIRED_FILES + ["doc/m3/name-mapping.json", "make/m3/release/verify_release_admission.py"]:
         try:
             path = root
             for part in relative.split("/"):
@@ -332,7 +332,7 @@ def validate_release_source(root: Path, passed, block) -> None:
             block("git.untracked_source", "release requires an isolated checkout without untracked or ignored files; keep builds and proof packs outside it")
         else:
             passed("git.untracked_source")
-        if sha256(root / "m3/release/verify_release_admission.py") != sha256(Path(__file__)):
+        if sha256(root / "make/m3/release/verify_release_admission.py") != sha256(Path(__file__)):
             block("git.verifier_identity", "executed verifier differs from the source-boundary verifier")
         else:
             passed("git.verifier_identity")
@@ -397,16 +397,16 @@ def validate(root: Path, release_mode: bool = False, evidence: Path | None = Non
             block("file:" + rel, "required release-boundary file is missing")
 
 <<<<<<< live
-    contract = read_object(root / "m3/release/release-contract.json", "contract.read")
+    contract = read_object(root / "make/m3/release/release-contract.json", "contract.read")
     if contract.get("schema") == "M3_RELEASE_CONTRACT_V1":
 ||||||| base
-    contract_path = root / "m3/release/release-contract.json"
+    contract_path = root / "make/m3/release/release-contract.json"
     contract = load_json(contract_path)
     if contract.get("schema") != "M3_RELEASE_CONTRACT_V1":
         block("contract.schema", "unexpected release contract schema")
     else:
 =======
-    contract_path = root / "m3/release/release-contract.json"
+    contract_path = root / "make/m3/release/release-contract.json"
     try:
         contract = load_json(contract_path)
         if not isinstance(contract, dict):
@@ -539,13 +539,13 @@ def validate(root: Path, release_mode: bool = False, evidence: Path | None = Non
     else:
         block("rights.reservation", "first-party rights reservation missing")
 <<<<<<< live
-    m3_readme = read_text("m3/README.md")
+    m3_readme = read_text("make/m3/README.md")
 ||||||| base
 
-    m3_readme = (root / "m3/README.md").read_text(encoding="utf-8")
+    m3_readme = (root / "make/m3/README.md").read_text(encoding="utf-8")
 =======
 
-    m3_readme = read_text("m3/README.md")
+    m3_readme = read_text("make/m3/README.md")
 >>>>>>> retained
     if "does **not** modify `java.lang.String`" in m3_readme:
         passed("claims.current_string_boundary")
@@ -564,7 +564,7 @@ def validate(root: Path, release_mode: bool = False, evidence: Path | None = Non
             and sequence.get("active_phase") == "STRING"):
         passed("receiving_sequence")
 ||||||| base
-    mapping_path = root / "m3/docs/name-mapping.json"
+    mapping_path = root / "doc/m3/name-mapping.json"
     if mapping_path.is_file():
         mapping = load_json(mapping_path)
         seq = mapping.get("porting_invariant", {}).get("receiving_sequence")
@@ -579,7 +579,7 @@ def validate(root: Path, release_mode: bool = False, evidence: Path | None = Non
         else:
             block("receiving_sequence", "receiving order or active phase drifted")
 =======
-    mapping_path = root / "m3/docs/name-mapping.json"
+    mapping_path = root / "doc/m3/name-mapping.json"
     if mapping_path.is_file():
         try:
             mapping = load_json(mapping_path)
@@ -895,7 +895,7 @@ def render_queue(result: dict) -> str:
             row["id"], row["state"], "yes" if row["blocking"] else "no", detail)) + " |")
     if not result["queue"]:
         lines.append("| No pending items | VERIFIED_RECEIPTS | no | Review the exact proof pack before publication. |")
-    lines.extend(["", "This is a generated view of gate evidence and `m3/tooling/name-contract/name-plan.json`. "
+    lines.extend(["", "This is a generated view of gate evidence and `make/m3/tooling/name-contract/name-plan.json`. "
                   "It creates no second naming registry, recipe authority, or release claim.", ""])
     return "\n".join(lines)
 
@@ -931,7 +931,7 @@ def main(argv=None) -> int:
         args.json_out.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     if args.sha256_out:
         lines = []
-        for rel in REQUIRED_FILES + ["m3/release/verify_release_admission.py"]:
+        for rel in REQUIRED_FILES + ["make/m3/release/verify_release_admission.py"]:
             path = root / rel
             if path.is_file():
                 lines.append(f"{sha256(path)}  {rel}")
@@ -947,7 +947,7 @@ def main(argv=None) -> int:
 
     if args.sha256_out:
         lines = []
-        for rel in REQUIRED_FILES + ["m3/release/verify_release_admission.py"]:
+        for rel in REQUIRED_FILES + ["make/m3/release/verify_release_admission.py"]:
             path = root / rel
             if path.is_file():
                 lines.append(f"{sha256(path)}  {rel}")
@@ -970,7 +970,7 @@ def main(argv=None) -> int:
                     created.append(path)
                 if args.sha256_out:
                     lines = []
-                    for rel in REQUIRED_FILES + ["m3/release/verify_release_admission.py"]:
+                    for rel in REQUIRED_FILES + ["make/m3/release/verify_release_admission.py"]:
                         path = root / rel
                         if path.is_file():
                             lines.append(f"{sha256(path)}  {rel}")

@@ -77,7 +77,7 @@ String -> arrays -> collections -> AST/compiler receiving sequence is advanced.
 Use the same Java 21 toolchain for `JAVA_HOME`, `M3_JAVA_HOME` and `PATH`, then run:
 
 ```sh
-bash m3/runtime-integration/check-m3rx7-convergence.sh
+bash make/m3/runtime-integration/check-m3rx7-convergence.sh
 ```
 
 The command runs the repaired existing receiver/codec gates, new lexical and

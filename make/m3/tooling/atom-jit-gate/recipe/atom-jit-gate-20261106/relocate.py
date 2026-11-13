@@ -5,7 +5,7 @@
 
 Copies every FILE row of RELOCATION_MAP.tsv (next to this script) from a donor git tree (--donor-git DIR at
 --donor-rev REV) into the module (--module DIR, default: the grandparent of this recipe directory,
-m3/tooling/atom-jit-gate).
+make/m3/tooling/atom-jit-gate).
 
 Every file first takes its REWRITE rows: a declared adapter change, rewrites/<name>.before replaced by
 rewrites/<name>.after on the donor bytes, refused unless the before bytes occur exactly the declared number of times
@@ -28,7 +28,7 @@ anchor line inserted before the first #include.
 Python files (.py): rewrites only (1) the license comment lines after an optional #! line, replaced by the M3JDK
 header, (2) the TYPE, LITERAL and JNI rows, and (3) one # FLLDCIM: anchor line after the header.
 
-Last stage of every file: the JDK naming rules (m3/tooling/jdk-naming/jdk_naming.py rewrite_text, the one owner of
+Last stage of every file: the JDK naming rules (make/m3/tooling/jdk-naming/jdk_naming.py rewrite_text, the one owner of
 NAMING_RULES.tsv) are applied to the relocated text, so this recipe and jdk_naming.py share one fixed point by
 construction; the run log and PROVENANCE.tsv count each naming rewrite (comment-line PROSE renames such as the
 product name, constant renames such as SYNEXIA_ -> M3_ inside a validated schema token).
@@ -43,8 +43,8 @@ shape); OMIT rows name donor files left out by decision. Both are informational:
 run log (HELD lines) and nothing is copied.
 
 The module registration is part of the recipe too: REGISTRATION (below) is the module's GitHub workflow, written to
-.github/workflows/<name> of the repository once (idempotent, --check reports it), the way m3/tooling/atom-census is
-registered (a standalone pom.xml with its own workflow, not a module of the m3/pom.xml reactor).
+.github/workflows/<name> of the repository once (idempotent, --check reports it), the way make/m3/tooling/atom-census is
+registered (a standalone pom.xml with its own workflow, not a module of the make/m3/pom.xml reactor).
 
 PROVENANCE.tsv pins donor commit, blob sha, donor sha256 and target sha256 of every FILE row and states body_match
 (the bytes after the header/package line, minus the anchor, equal the donor's), body_match_renamed (they equal the
@@ -76,7 +76,7 @@ from pathlib import Path
 RECIPE = "relocate.py"
 VERSION = "v4"
 RECIPE_DIR = Path(__file__).resolve().parent
-RECIPE_PATH = "m3/tooling/atom-jit-gate/recipe/" + RECIPE_DIR.name + "/" + RECIPE
+RECIPE_PATH = "make/m3/tooling/atom-jit-gate/recipe/" + RECIPE_DIR.name + "/" + RECIPE
 DONOR_REPO = "hsoliwal/com.synexia"
 DONOR_BLOB_URL = "https://github.com/" + DONOR_REPO + "/blob/"
 MAP_NAME = "RELOCATION_MAP.tsv"
@@ -103,22 +103,22 @@ JNI_SYMBOL = re.compile(rb"\bJava_(\w+)")
 JDK_PREFIXES = ("java.", "javax.", "jdk.")
 LINES = re.compile(rb"[^\n]*\n|[^\n]+$")
 HELD_KINDS = ("NEC", "OMIT")
-NAMING_TOOL = "m3/tooling/jdk-naming/jdk_naming.py"
+NAMING_TOOL = "make/m3/tooling/jdk-naming/jdk_naming.py"
 WORKFLOW_PATH = ".github/workflows/m3-tooling-atom-jit-gate-20261106.yml"
 REGISTRATION = b"""# SPDX-License-Identifier: Apache-2.0
-# Registration of m3/tooling/atom-jit-gate (written by m3/tooling/atom-jit-gate/recipe/atom-jit-gate-20261106/relocate.py,
-# the way m3/tooling/atom-census is registered: a standalone pom.xml with its own workflow).
+# Registration of make/m3/tooling/atom-jit-gate (written by make/m3/tooling/atom-jit-gate/recipe/atom-jit-gate-20261106/relocate.py,
+# the way make/m3/tooling/atom-census is registered: a standalone pom.xml with its own workflow).
 name: M3JDK21 per-atom JIT retest gate (tooling)
 on:
   pull_request:
     paths:
-      - 'm3/tooling/atom-jit-gate/**'
-      - 'm3/tooling/atom-census/**'
+      - 'make/m3/tooling/atom-jit-gate/**'
+      - 'make/m3/tooling/atom-census/**'
       - '.github/workflows/m3-tooling-atom-jit-gate-20261106.yml'
   push:
     paths:
-      - 'm3/tooling/atom-jit-gate/**'
-      - 'm3/tooling/atom-census/**'
+      - 'make/m3/tooling/atom-jit-gate/**'
+      - 'make/m3/tooling/atom-census/**'
       - '.github/workflows/m3-tooling-atom-jit-gate-20261106.yml'
 permissions:
   contents: read
@@ -135,14 +135,14 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Install the atom census the gate atomizes with
-        run: mvn -B -ntp -q -f m3/tooling/atom-census/pom.xml -DskipTests install
+        run: mvn -B -ntp -q -f make/m3/tooling/atom-census/pom.xml -DskipTests install
       - name: Package the gate (-Xlint:all -Werror) and run its JUnit tests
-        run: mvn -B -ntp -f m3/tooling/atom-jit-gate/pom.xml package
+        run: mvn -B -ntp -f make/m3/tooling/atom-jit-gate/pom.xml package
       - name: Fixture gate (javac -h, C17/C++20 JNI, nm exports, four JVM modes, negative control)
         shell: bash
         run: |
           set -euo pipefail
-          gate=m3/tooling/atom-jit-gate/fixture-gate
+          gate=make/m3/tooling/atom-jit-gate/fixture-gate
           python3 -I "$gate/verify.py" --evidence "$RUNNER_TEMP/atom-jit-fixture" --timeout-seconds 120
           python3 -I "$gate/verify.py" --evidence "$RUNNER_TEMP/atom-jit-negative" --timeout-seconds 120 --negative-test
           (cd "$gate" && python3 -m unittest -q test_verify)
@@ -541,7 +541,7 @@ def main(argv=None) -> int:
     parser.add_argument("--donor-git", required=True, help="donor git directory (a blobless clone is enough)")
     parser.add_argument("--donor-rev", required=True, help="donor revision (pin the commit sha, not FETCH_HEAD)")
     parser.add_argument("--module", default=str(RECIPE_DIR.parent.parent),
-                        help="module root (default m3/tooling/atom-jit-gate)")
+                        help="module root (default make/m3/tooling/atom-jit-gate)")
     parser.add_argument("--check", action="store_true", help="write nothing; exit 1 when a run would change a file")
     args = parser.parse_args(argv)
     try:

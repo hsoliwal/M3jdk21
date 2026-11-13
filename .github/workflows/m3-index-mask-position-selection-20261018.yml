@@ -7,7 +7,7 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3CountedBag.java'
       - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c'
       - 'test/jdk/jdk/m3/collections/M3IndexMaskCompactorSelfTest.java'
-      - 'm3/collections/qualification/m3-index-mask-position-selection-20261018/**'
+      - 'make/m3/collections/qualification/m3-index-mask-position-selection-20261018/**'
       - '.github/workflows/m3-index-mask-position-selection-20261018.yml'
   workflow_dispatch:
 permissions:
@@ -29,7 +29,7 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Verify exact postimages and allocation boundary
-        run: python -I -S -B m3/collections/qualification/m3-index-mask-position-selection-20261018/verify.py
+        run: python -I -S -B make/m3/collections/qualification/m3-index-mask-position-selection-20261018/verify.py
       - name: Compile current M3 core and self-tests
         shell: bash
         run: |

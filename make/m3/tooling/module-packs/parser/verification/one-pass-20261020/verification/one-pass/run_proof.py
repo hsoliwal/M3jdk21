@@ -139,7 +139,7 @@ def main():
         tracked.add(path)
     sqlite = pinned(args.sqlite_jar, SQLITE_SHA, 'original SQLite JDBC 3.45.1.0')
     slf4j = pinned(args.slf4j_jar, SLF4J_SHA, 'original SLF4J API 2.0.13')
-    packer = pinned(args.receiving_root / 'm3/tooling/jmod-recipes/tools/jmod_pack.py', PACKER_SHA, 'existing shared packer')
+    packer = pinned(args.receiving_root / 'make/m3/tooling/jmod-recipes/tools/jmod_pack.py', PACKER_SHA, 'existing shared packer')
     tracked.update((sqlite, slf4j, packer))
     fs_jmods = sorted((args.fs_qualification / 'pack/jmods').glob('*.jmod'))
     require({path.stem for path in fs_jmods} == {'jdk.m3fs', 'commons.logging', 'org.apache.commons.codec',

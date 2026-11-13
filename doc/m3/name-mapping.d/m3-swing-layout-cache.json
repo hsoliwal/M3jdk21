@@ -8,8 +8,8 @@
       "target": "sun.swing.tree.M3VariableHeightLayoutCache (java.desktop, internal; extends javax.swing.tree.VariableHeightLayoutCache)",
       "public_api": "javax.swing.tree.AbstractLayoutCache / VariableHeightLayoutCache / JTree / BasicTreeUI unchanged; opt-in by -Dm3.swing.viewport=true, default off",
       "status": "implemented; differential-verified on stock JDK 21.0.9 with --patch-module (layout cache 500 seeds x 400 steps, JTree 120 seeds x 250 steps with pixels); make/jtreg PENDING_CI",
-      "target_rule": "TARGET_OWNED_PORT; GPLv2+CPE; rights holder Hitesh Soliwal (Synexia) in m3/docs/swing-viewport/LICENSE_DECISIONS.tsv",
-      "evidence": "m3/docs/swing-viewport/DESIGN.md, bench/BENCH_20261017.tsv, UPSTREAM_DEFECTS.tsv"
+      "target_rule": "TARGET_OWNED_PORT; GPLv2+CPE; rights holder Hitesh Soliwal (Synexia) in doc/m3/swing-viewport/LICENSE_DECISIONS.tsv",
+      "evidence": "doc/m3/swing-viewport/DESIGN.md, bench/BENCH_20261017.tsv, UPSTREAM_DEFECTS.tsv"
     }
   ]
 }

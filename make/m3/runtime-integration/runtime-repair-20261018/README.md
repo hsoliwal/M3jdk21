@@ -54,9 +54,9 @@ checker shares that current-closure verification while retaining its five owners
 Run both receiving checks and the isolated negative regressions:
 
 ```sh
-python3 m3/compatibility/check_object_adapter_progress_receiver_20261017.py
-python3 m3/compatibility/verify_m3_default_template_20261017.py
-python3 m3/compatibility/test_object_adapter_progress_receiver_20261018.py
+python3 make/m3/compatibility/check_object_adapter_progress_receiver_20261017.py
+python3 make/m3/compatibility/verify_m3_default_template_20261017.py
+python3 make/m3/compatibility/test_object_adapter_progress_receiver_20261018.py
 ```
 
 ## Object compatibility remains on hold

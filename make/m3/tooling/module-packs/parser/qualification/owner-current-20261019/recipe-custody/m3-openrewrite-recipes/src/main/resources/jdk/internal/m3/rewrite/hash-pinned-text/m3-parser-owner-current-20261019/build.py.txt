@@ -23,10 +23,10 @@ import xml.etree.ElementTree as ET
 
 
 MODULE = "jdk.m3.parser"
-PACK = Path("m3/tooling/module-packs/parser")
+PACK = Path("make/m3/tooling/module-packs/parser")
 PHASES = ("lint", "compile", "test", "runtime")
 COMPILER_ROOT = Path("src/jdk.compiler/share/classes")
-RECEIVER_CHECKER = Path("m3/compatibility/check_m3_full_borrow_receiver.py")
+RECEIVER_CHECKER = Path("make/m3/compatibility/check_m3_full_borrow_receiver.py")
 RECEIVER_INPUTS = ("pin.tsv", "m3-estate.tsv", "m3-dag.tsv",
                    "receiver-status.tsv", "historical-evidence.tsv", "promotion-phases.tsv")
 COMPILER_SOURCES = (
@@ -83,11 +83,11 @@ def input_rows(repository, jdk):
     required.append(repository / RECEIVER_CHECKER)
     required += [repository / "m3/m3-import/current-full-borrow" / name
                  for name in RECEIVER_INPUTS]
-    required += [repository / "m3/tooling/jmod-recipes/tools" / name
+    required += [repository / "make/m3/tooling/jmod-recipes/tools" / name
                  for name in ("jmod_pack.py", "jmod_image.py")]
     required += [pack / "legal/LICENSE.txt", pack / "legal/NOTICE.txt"]
     required += sorted(path for path in (pack / "legal").rglob("*") if path.is_file())
-    required += [repository / "m3/docs/name-mapping.d/m3-parser-jmod-20261018.json",
+    required += [repository / "doc/m3/name-mapping.d/m3-parser-jmod-20261018.json",
                  repository / ".github/workflows/m3-parser-jmod-20261018.yml"]
     required += [pack / "src/main/java/module-info.java"]
     for name, unused in (*CONTRACTS, SMOKE):
@@ -239,7 +239,7 @@ class Qualification:
     def lint(self):
         ast.parse((self.pack / "build.py").read_text(encoding="utf-8"))
         ET.parse(self.pack / "pom.xml")
-        json.loads((self.repository / "m3/docs/name-mapping.d/m3-parser-jmod-20261018.json")
+        json.loads((self.repository / "doc/m3/name-mapping.d/m3-parser-jmod-20261018.json")
                    .read_text(encoding="utf-8"))
         source_count = 0
         for path in sorted((self.pack / "src").rglob("*.java")):
@@ -332,7 +332,7 @@ class Qualification:
         manifest = self.output / "EMPTY_DESCRIPTOR_MANIFEST.tsv"
         manifest.write_text("module\tartifacts\tunit_jars\ttarget\tsha256\tgenerated\n", encoding="utf-8")
         # A published descriptor and no --root-module prevent packager-side javac.
-        packager = self.repository / "m3/tooling/jmod-recipes/tools/jmod_pack.py"
+        packager = self.repository / "make/m3/tooling/jmod-recipes/tools/jmod_pack.py"
         self.run("jmod-pack", [sys.executable, packager, "--jdk-home", self.jdk,
                                "--image-tsv", image_tsv, "--manifest", manifest,
                                "--layer-root", self.repository, "--out", self.output / "pack",

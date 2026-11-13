@@ -19,10 +19,10 @@ import subprocess
 import sys
 import tempfile
 
-PREFIX = "m3/tooling/migration-recipes/verification/ci8891-20261006/prepared-inputs"
+PREFIX = "make/m3/tooling/migration-recipes/verification/ci8891-20261006/prepared-inputs"
 ARCHIVE_OWNER = PREFIX + "/acquisition/package_evidence.py"
 ARCHIVE_SHA = "93a1c116c197854b0167c172581cd768d0f9098067bf0f1296607ca6ba855556"
-INSTALL_OWNER = "m3/migration/recipe.py"
+INSTALL_OWNER = "make/m3/migration/recipe.py"
 INSTALL_SHA = "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"
 BUNDLE = PREFIX + "/bundle"
 # Exact independent bundle built and verified before this wrapper was frozen.
@@ -32,10 +32,10 @@ PLAN_SHA = "b5712cf6ce4c0113f0fa1c09c7d8c0e50487fdf0936b8f593ba550f832a469a2"
 PLAN_SEAL = "b7c182828f47bcaca54effae56235a93246f0389c3c7ac8a2a1252a5016aa3ca"
 RECIPE_ID = "m3.immutable-inputs.jep485-lane28/1"
 OUTPUTS = (
-    ("m3/backports/recipes/jep-485-gatherers/packet.tsv",
+    ("make/m3/backports/recipes/jep-485-gatherers/packet.tsv",
      "replay/images/jep485-packet.tsv", 192,
      "7e79ce168d8f3d0df8e3d7d633a1351d399f5013b4f7617824fbfa9d7efe613b"),
-    ("m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/tq-verify-plan.py.txt",
+    ("make/m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/tq-verify-plan.py.txt",
      "replay/images/tq-verify-plan.py.txt", 5089,
      "269cd10606a9de7629ec0d1f4dccce2866644f979c06958d808e107b6c9188bb"),
 )

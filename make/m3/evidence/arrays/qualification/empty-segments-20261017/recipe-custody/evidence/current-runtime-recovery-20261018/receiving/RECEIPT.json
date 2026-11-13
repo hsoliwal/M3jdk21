@@ -100,82 +100,82 @@
   ],
   "files": [
     {
-      "path": "m3/backports/ALGORITHM_CATALOGUE.tsv",
+      "path": "make/m3/backports/ALGORITHM_CATALOGUE.tsv",
       "sha256": "7cb1e78450bd0fd8369482bb64f83035a2485c7a167c0ad2eecef8c125b6f001",
       "size_bytes": 5700
     },
     {
-      "path": "m3/compatibility/check_object_adapter_progress_receiver_20261017.py",
+      "path": "make/m3/compatibility/check_object_adapter_progress_receiver_20261017.py",
       "sha256": "e2c0e81911a8ea4e6d0d6b77eacc36fa4a4aca2c792536b9c32cbcdd40be0404",
       "size_bytes": 8803
     },
     {
-      "path": "m3/compatibility/m3-functional-progress-doclint-20261018.tsv",
+      "path": "make/m3/compatibility/m3-functional-progress-doclint-20261018.tsv",
       "sha256": "3b62981be6a617b903c559cc31904eca2bffb2b200380f1be57e07a8f634d969",
       "size_bytes": 694
     },
     {
-      "path": "m3/compatibility/m3-progress-doclint-20261018.tsv",
+      "path": "make/m3/compatibility/m3-progress-doclint-20261018.tsv",
       "sha256": "7246c16a0e8ec742eba98dac97e24b7fc3947250ad5d2a22f72ac32dcddf0219",
       "size_bytes": 1866
     },
     {
-      "path": "m3/compatibility/m3-progress-scope-lint-20261018.tsv",
+      "path": "make/m3/compatibility/m3-progress-scope-lint-20261018.tsv",
       "sha256": "1a45edfa747a03b3491063648a455083633e7de836e4c46241de104d689eebee",
       "size_bytes": 950
     },
     {
-      "path": "m3/compatibility/test_object_adapter_progress_receiver_20261018.py",
+      "path": "make/m3/compatibility/test_object_adapter_progress_receiver_20261018.py",
       "sha256": "e84be3f274caf1543ce7a2eb10aced6670fa488ad5478719be5b3227dc48a611",
       "size_bytes": 14842
     },
     {
-      "path": "m3/compatibility/verify_m3_default_template_20261017.py",
+      "path": "make/m3/compatibility/verify_m3_default_template_20261017.py",
       "sha256": "234293306f44acc4f756816564b9dea6146962b13ac2529397e25f062cce49bc",
       "size_bytes": 1128
     },
     {
-      "path": "m3/docs/name-mapping.json",
+      "path": "doc/m3/name-mapping.json",
       "sha256": "d63db548f89f25622399329148872225a438e9121cb3436d967bccd3bdff0c02",
       "size_bytes": 411184
     },
     {
-      "path": "m3/runtime-integration/merged-repair-recovery-20261018/ADMISSION.json",
+      "path": "make/m3/runtime-integration/merged-repair-recovery-20261018/ADMISSION.json",
       "sha256": "e921ec70d5a48e34f9f0a47f9f881b983c1efa62fe64b606c0883677478402a0",
       "size_bytes": 42505
     },
     {
-      "path": "m3/runtime-integration/merged-repair-recovery-20261018/CATALOGUE.tsv",
+      "path": "make/m3/runtime-integration/merged-repair-recovery-20261018/CATALOGUE.tsv",
       "sha256": "4baf92cdab38c03ef4a18e7fdf9e2cee914fb0641e02650fb4629c6960ec147b",
       "size_bytes": 1512
     },
     {
-      "path": "m3/runtime-integration/merged-repair-recovery-20261018/README.md",
+      "path": "make/m3/runtime-integration/merged-repair-recovery-20261018/README.md",
       "sha256": "5509f68c1ffd80067d2de0e47243777a1435b2a5746e93175188a0684352ebec",
       "size_bytes": 2420
     },
     {
-      "path": "m3/runtime-integration/merged-repair-recovery-20261018/RECEIVING-MAP.json",
+      "path": "make/m3/runtime-integration/merged-repair-recovery-20261018/RECEIVING-MAP.json",
       "sha256": "4cff79c7cf4399e6ed9593d23e373ee9c1e791bf1432d12d684771a1c2d51d8a",
       "size_bytes": 893
     },
     {
-      "path": "m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv",
+      "path": "make/m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv",
       "sha256": "3f88e143299a558a1a4f20c86d012b0823dc9f9ee4d519ce28cd16bc9cf35ff4",
       "size_bytes": 5316
     },
     {
-      "path": "m3/runtime-integration/runtime-repair-20261018/CURRENT_OWNERS.json",
+      "path": "make/m3/runtime-integration/runtime-repair-20261018/CURRENT_OWNERS.json",
       "sha256": "6c6e6dca85d5bf211ec04d8164d357918950348c4c3a9413be453c2bb11de364",
       "size_bytes": 2042
     },
     {
-      "path": "m3/runtime-integration/runtime-repair-20261018/FILE_REVIEW.tsv",
+      "path": "make/m3/runtime-integration/runtime-repair-20261018/FILE_REVIEW.tsv",
       "sha256": "1c5b958b528e94183f710dea0f4b7ce9319750407062ca51285bd66286b4d377",
       "size_bytes": 7737
     },
     {
-      "path": "m3/runtime-integration/runtime-repair-20261018/README.md",
+      "path": "make/m3/runtime-integration/runtime-repair-20261018/README.md",
       "sha256": "04e8ff5ea3b57b861ce4381c120e56584478c1f8004c2397829fb8c59e8dd49a",
       "size_bytes": 6157
     },

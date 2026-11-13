@@ -17,7 +17,7 @@
   "scope": "Only valuesBySortedKey() in existing int/int and long/long owners: SORTED clones aligned values; DIRECT copies occupied slots into one fresh primitive array. HASH, key exports, builders, state and signatures remain unchanged.",
   "product_postimages": [
     {
-      "path": "m3/docs/name-mapping.json",
+      "path": "doc/m3/name-mapping.json",
       "before": {
         "git_blob": "034f650369a6691ccd0d0c9b1f250cecb455d0f8",
         "sha256": "06c398dc75ab1fd451f4039004d8510ccc9119145754a0aa8c40d858544a4fdf"
@@ -29,7 +29,7 @@
       }
     },
     {
-      "path": "m3/tooling/name-contract/name-plan.json",
+      "path": "make/m3/tooling/name-contract/name-plan.json",
       "before": {
         "git_blob": "f3e268618c1cf5d40697382aca9f961ad0526524",
         "sha256": "b02ca5d1fa5752aa032333d7d51bb8e9f1c78fdc4691c707491ae324159e9d33"

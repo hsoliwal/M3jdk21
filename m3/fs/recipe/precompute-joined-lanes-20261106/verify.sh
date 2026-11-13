@@ -19,5 +19,5 @@ mkdir -p "$W"
 mvn -B -ntp ${MVN_ARGS:-} -f "$ROOT/m3/fs/pom.xml" verify | tee "$W/mvn-verify.log" | grep -E "Tests run:|BUILD|ERROR" | tail -n 5
 bash "$R/qualification/differential.sh" "$ROOT/m3/fs/target/classes" "$W/differential"
 if grep -q "^m3/fs/native/src/m3_fs_jni.c" "$R/EDITS.tsv"; then bash "$R/qualification/native-gate.sh" "$W/native"; fi
-"$PY" -I "$ROOT/m3/tooling/jdk-naming/jdk_naming.py" plan --root "$ROOT" --only m3/fs/
+"$PY" -I "$ROOT/make/m3/tooling/jdk-naming/jdk_naming.py" plan --root "$ROOT" --only m3/fs/
 echo PRECOMPUTE_JOINED_LANES_GATES_DONE

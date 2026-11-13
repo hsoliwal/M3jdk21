@@ -6,7 +6,7 @@ The stable-ID and refusal intent was reviewed from retained PR1868
 test_schema_history.py (Git blob 86d6ef87858fb86588c578abcaf99ad08cdda0a1).
 That historical single-ID vocabulary exception is reference-only: the current
 authority already normalized it, so these tests do not restore the exception.
-Schema validation uses the existing m3/migration/requirements.txt dependency.
+Schema validation uses the existing make/m3/migration/requirements.txt dependency.
 """
 from __future__ import annotations
 
@@ -18,17 +18,17 @@ import unittest
 
 from jsonschema import Draft202012Validator, ValidationError
 
-ROOT = Path(__file__).resolve().parents[3]
-MAP = "m3/docs/name-mapping.json"
-SCHEMA = "m3/docs/name-mapping.schema.json"
-PLAN = "m3/tooling/name-contract/name-plan.json"
+ROOT = Path(__file__).resolve().parents[4]
+MAP = "doc/m3/name-mapping.json"
+SCHEMA = "doc/m3/name-mapping.schema.json"
+PLAN = "make/m3/tooling/name-contract/name-plan.json"
 SIGNAL = "m3.code-text-signal-batch"
 FS = "m3.fs.provider-defaults"
 COMPANION = "m3.arrays.api-companion"
 QUEUE = "m3.collections.evicting-queue.owner-naming"
 # Sealed receiving snapshot 5f1ac46f: future additions are allowed; removal needs explicit review.
 # Historical capability IDs are protocol/lineage data, not Java source names.
-HISTORY_PATH = ROOT / "m3/tooling/name-contract/receipts/release-preparation/source-identity.json"
+HISTORY_PATH = ROOT / "make/m3/tooling/name-contract/receipts/release-preparation/source-identity.json"
 HISTORY_BYTES = HISTORY_PATH.read_bytes()
 if hashlib.sha256(HISTORY_BYTES).hexdigest() != "cc4d3efdaf35cbc96afe94a51f813fb6323adcffb73c62fe7266d7aada3e1fef":
     raise ValueError("historical naming source receipt identity drift")

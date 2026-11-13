@@ -21,7 +21,7 @@ import org.openrewrite.java.JavaParser;
 final class M3A3ReceiptProofRecipeTest {
     private static final String CRATE = "m3-a3-receipt-id-proof";
     private static final String PATH =
-            "m3/tooling/a3/src/test/java/jdk/m3/a3/A3ApplyTest.java";
+            "make/m3/tooling/a3/src/test/java/jdk/m3/a3/A3ApplyTest.java";
     private static final String ROOT =
             "/jdk/m3/rewrite/backport/jdk21-hash-pinned/" + CRATE + "/";
 

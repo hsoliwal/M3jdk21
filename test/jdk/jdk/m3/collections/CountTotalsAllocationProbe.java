@@ -8,7 +8,7 @@ import jdk.internal.m3.collections.CountLanes;
 import jdk.internal.m3.collections.CountTotals;
 
 /** Paired Java-heap allocation diagnostic, not a throughput benchmark or universal claim. */
-//FLLDCIM: MRL - fold-close audit leaf L0173: ADD from PR #1084 head 6b16a20dcedf blob 7684db3d4224, ancestry-only landing b42ab7605b86 (tree == first parent); recipe m3/collections/qualification/foldaudit-collections-20261107/apply.py v1
+//FLLDCIM: MRL - fold-close audit leaf L0173: ADD from PR #1084 head 6b16a20dcedf blob 7684db3d4224, ancestry-only landing b42ab7605b86 (tree == first parent); recipe make/m3/collections/qualification/foldaudit-collections-20261107/apply.py v1
 //FLLDCIM: MRL - MAPPED: the origin counts/ module has no pom on master; the file joins the real module tree
 public final class CountTotalsAllocationProbe {
     private static volatile Object escapedResult;

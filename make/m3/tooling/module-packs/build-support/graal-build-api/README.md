@@ -58,7 +58,7 @@ also require `java.net.http`, and `JarScanner` dynamically needs `jdk.zipfs`.
 These explicit roots are retained alongside `java.base`.
 
 Pass the emitted lock and `--tool-pack graal-build-api` to the existing
-`m3/tooling/module-packs/build_pack.py` owner. Its existing loader and installer
+`make/m3/tooling/module-packs/build_pack.py` owner. Its existing loader and installer
 place JAR assets in `lib/m3-tools/graal-build-api/` and provenance/licenses in
 `legal/m3-graal-build-api/`. The builder implements no additional installer.
 Callers use the installed JARs on an explicit classpath; no framework module

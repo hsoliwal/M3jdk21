@@ -7,12 +7,16 @@ on:
       - master
     paths:
       - "m3/**"
+      - "make/m3/**"
+      - "doc/m3/**"
       - "src/**"
       - "test/**"
       - ".github/workflows/m3-retained-capability-audit.yml"
   pull_request:
     paths:
       - "m3/**"
+      - "make/m3/**"
+      - "doc/m3/**"
       - "src/**"
       - "test/**"
       - ".github/workflows/m3-retained-capability-audit.yml"
@@ -76,7 +80,7 @@ jobs:
           run_audit() {
             local catalogue="$1"
             local output="$2"
-            mvn -B -ntp -f m3/history/retention-pom.xml verify \
+            mvn -B -ntp -f make/m3/history/retention-pom.xml verify \
               -Dm3.repo="$GITHUB_WORKSPACE" \
               -Dm3.retentionCommit="$HEAD_SHA" \
               -Dm3.retentionCatalogue="$catalogue" \
@@ -85,8 +89,8 @@ jobs:
             cat "$output/SUMMARY.json"
           }
 
-          run_audit "m3/history/RETAINED_CAPABILITIES.tsv" "$OUT_CAP"
-          run_audit "m3/history/RETAINED_EVIDENCE.tsv" "$OUT_EVID"
+          run_audit "make/m3/history/RETAINED_CAPABILITIES.tsv" "$OUT_CAP"
+          run_audit "make/m3/history/RETAINED_EVIDENCE.tsv" "$OUT_EVID"
 
       - name: Upload retention evidence
         if: always()

@@ -1,11 +1,11 @@
 # mvn -B -ntp -Dmaven.repo.local=S:/m3-scratch/eb-conv/m2 -f m3/collections/pom.xml test (JDK 21.0.9, Maven 3.9.14, no m3-arrays JNI library built on Windows); log lines kept as surefire wrote them (CR stripped; the 0xBB separator byte of the summary lines is cp1252 as the Windows console emits it)
-# base: 39b0d9e2c6e (origin/master 2026-11-06, merge of #2504) in the detached sparse worktree S:/m3-scratch/eb-conv/wt-pools-base holding m3/collections + m3/arrays + m3/pom.xml; m3-arrays 0.1.0-SNAPSHOT installed from the same tree first; log S:/m3-scratch/eb-conv/pools-base-test.log
-# head: branch m3/collections-immutable-pools-20261106a in S:/m3-scratch/eb-conv/wt-pools (same layout + m3/tooling/jdk-naming + m3/qualification/converge-collections-20261030); log S:/m3-scratch/eb-conv/pools-head-test.log
+# base: 39b0d9e2c6e (origin/master 2026-11-06, merge of #2504) in the detached sparse worktree S:/m3-scratch/eb-conv/wt-pools-base holding m3/collections + m3/arrays + make/m3/pom.xml; m3-arrays 0.1.0-SNAPSHOT installed from the same tree first; log S:/m3-scratch/eb-conv/pools-base-test.log
+# head: branch m3/collections-immutable-pools-20261106a in S:/m3-scratch/eb-conv/wt-pools (same layout + make/m3/tooling/jdk-naming + make/m3/qualification/converge-collections-20261030); log S:/m3-scratch/eb-conv/pools-head-test.log
 base: Tests run: 1624, Failures: 5, Errors: 49, Skipped: 2
 head: Tests run: 1627, Failures: 5, Errors: 49, Skipped: 2 (1627 = 1624 + the three wrappers M3ImmutablePoolTest, M3Uuid128Test, M3UuidBinaryTest, each Tests run: 1, Failures: 0; printed PASS: 71 immutable-pool checks, PASS: 26 uuid128 checks, PASS: 7 UUID binary checks)
 failing set sizes: base 54, head 54; diff failset-base failset-head: empty (identical sets)
 
-## base failing set (54 tests; 53 UnsatisfiedLink 'M3 array JNI library is not loaded' / 'real m3-arrays JNI library path required', 1 M3ObjectResidencyTest class-file metadata; identical to the head set of m3/collections/recipe/naming-fixed-point-20261106/TEST_BASELINE_DIFF.txt, the module's last landing)
+## base failing set (54 tests; 53 UnsatisfiedLink 'M3 array JNI library is not loaded' / 'real m3-arrays JNI library path required', 1 M3ObjectResidencyTest class-file metadata; identical to the head set of make/m3/collections/recipe/naming-fixed-point-20261106/TEST_BASELINE_DIFF.txt, the module's last landing)
 M3BagRankIndexTest.rankSelectRangesStableTiesAndNativeMasks:7 » UnsatisfiedLink M3 array JNI library is not loaded
 M3ConcurrentContractTest.atomicHashAndTreeCompute:53 » UnsatisfiedLink M3 array JNI library is not loaded
 M3ConcurrentContractTest.concurrentStreamsUseSnapshotSizeAndSelfToStringTerminates:42 » UnsatisfiedLink M3 array JNI library is not loaded

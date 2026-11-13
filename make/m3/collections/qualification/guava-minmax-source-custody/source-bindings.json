@@ -3,10 +3,10 @@
   "baseCommit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
   "baseTree": "a493469edd30b3345cc32f608fca19b55b4a378a",
   "ownerPath": "m3/collections/implementations/guava-minmax-priority-queue/src/main/java/jdk/m3/collections/guava/M3MinMaxPriorityQueue.java",
-  "recipePayloadPath": "m3/collections/receiving/guava-minmax-priority-queue/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-guava-minmax-priority-queue/M3MinMaxPriorityQueue.java.txt",
+  "recipePayloadPath": "make/m3/collections/receiving/guava-minmax-priority-queue/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-guava-minmax-priority-queue/M3MinMaxPriorityQueue.java.txt",
   "modulePath": "m3/collections/implementations/guava-minmax-priority-queue",
-  "recipePath": "m3/collections/receiving/guava-minmax-priority-queue",
-  "qualificationPath": "m3/collections/qualification/owned-guava-minmax-priority-queue-20261018",
+  "recipePath": "make/m3/collections/receiving/guava-minmax-priority-queue",
+  "qualificationPath": "make/m3/collections/qualification/owned-guava-minmax-priority-queue-20261018",
   "provider": {
     "bytes": 3023797,
     "sha256": "f3d7f57f67fd622f4d468dfdd692b3a5e3909246c28017ac3263405f0fe617ed"
@@ -1115,157 +1115,157 @@
       "role": "NEW_PACKET_SOURCE"
     },
     {
-      "path": "m3/collections/receiving/guava-minmax-priority-queue/engine-src/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "path": "make/m3/collections/receiving/guava-minmax-priority-queue/engine-src/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "bytes": 13805,
       "sha256": "9dc65793cb1f4fb20866f99f4e5d0043d54734aa03cf0fe297c0cadbba2d1c37",
       "role": "NEW_PACKET_SOURCE"
     },
     {
-      "path": "m3/collections/receiving/guava-minmax-priority-queue/FOSS_RECEIVING_DECISION.tsv",
+      "path": "make/m3/collections/receiving/guava-minmax-priority-queue/FOSS_RECEIVING_DECISION.tsv",
       "bytes": 2213,
       "sha256": "a61c46edb1db52f087310d29c4f717ec2a8a7f89e6e64154c0baf9d69aa88090",
       "role": "NEW_PACKET_SOURCE"
     },
     {
-      "path": "m3/collections/receiving/guava-minmax-priority-queue/pom.xml",
+      "path": "make/m3/collections/receiving/guava-minmax-priority-queue/pom.xml",
       "bytes": 5663,
       "sha256": "bd2426bc42c8f4cecb838936f345bad022a8cb5a45154f93aff5f5ed7a9909a3",
       "role": "NEW_PACKET_SOURCE"
     },
     {
-      "path": "m3/collections/receiving/guava-minmax-priority-queue/README.md",
+      "path": "make/m3/collections/receiving/guava-minmax-priority-queue/README.md",
       "bytes": 765,
       "sha256": "6cec0eaf8a4ed9b93bfc35dd88e53e66a47c00c4d5eeb85b338299575c194618",
       "role": "NEW_PACKET_SOURCE"
     },
     {
-      "path": "m3/collections/receiving/guava-minmax-priority-queue/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-guava-minmax-priority-queue/engine-receipt.tsv",
+      "path": "make/m3/collections/receiving/guava-minmax-priority-queue/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-guava-minmax-priority-queue/engine-receipt.tsv",
       "bytes": 179,
       "sha256": "42f35e73d1b645a4df4e116145f6d079ab9952adc14db5e8da1fef4f8f44fb5d",
       "role": "NEW_PACKET_SOURCE"
     },
     {
-      "path": "m3/collections/receiving/guava-minmax-priority-queue/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-guava-minmax-priority-queue/M3MinMaxPriorityQueue.java.txt",
+      "path": "make/m3/collections/receiving/guava-minmax-priority-queue/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-guava-minmax-priority-queue/M3MinMaxPriorityQueue.java.txt",
       "bytes": 38983,
       "sha256": "c8f44e9ca7507c1759da1b4ae497f7dda116d7776a9c5c711b32468176013c00",
       "role": "NEW_PACKET_SOURCE"
     },
     {
-      "path": "m3/collections/receiving/guava-minmax-priority-queue/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-guava-minmax-priority-queue/manifest.tsv",
+      "path": "make/m3/collections/receiving/guava-minmax-priority-queue/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-guava-minmax-priority-queue/manifest.tsv",
       "bytes": 228,
       "sha256": "01b65965ef43e7c027eff43728854dd5d8bda483a2108848cea5cb3599866f9f",
       "role": "NEW_PACKET_SOURCE"
     },
     {
-      "path": "m3/collections/receiving/guava-minmax-priority-queue/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-guava-minmax-priority-queue/source-receipt.tsv",
+      "path": "make/m3/collections/receiving/guava-minmax-priority-queue/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-guava-minmax-priority-queue/source-receipt.tsv",
       "bytes": 196,
       "sha256": "12037a16cf9a29e0aa4740d2398d19aaf380126d9950b9c09a7b29a6b119021c",
       "role": "NEW_PACKET_SOURCE"
     },
     {
-      "path": "m3/collections/receiving/guava-minmax-priority-queue/src/main/resources/META-INF/rewrite/m3-owned-guava-minmax-priority-queue.yml",
+      "path": "make/m3/collections/receiving/guava-minmax-priority-queue/src/main/resources/META-INF/rewrite/m3-owned-guava-minmax-priority-queue.yml",
       "bytes": 534,
       "sha256": "b0431ac7bb34cb99643774ce2c74c0192edc85fd507ac4387c600be96cedf727",
       "role": "NEW_PACKET_SOURCE"
     },
     {
-      "path": "m3/collections/receiving/guava-minmax-priority-queue/src/test/java/jdk/internal/m3/rewrite/M3OwnedGuavaMinMaxPriorityQueueRecipeTest.java",
+      "path": "make/m3/collections/receiving/guava-minmax-priority-queue/src/test/java/jdk/internal/m3/rewrite/M3OwnedGuavaMinMaxPriorityQueueRecipeTest.java",
       "bytes": 13541,
       "sha256": "a225d3f5403e30ae4286b6e29e8ed1027f7d35e47e37250cf57b8e7cfb1f0944",
       "role": "NEW_PACKET_SOURCE"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/GuavaMinMaxGenericCompileProof.java",
+      "path": "make/m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/GuavaMinMaxGenericCompileProof.java",
       "bytes": 1393,
       "sha256": "4697ffa767205f427861d5b0fa9bcf388b975026a6b2f4254c17ce1d1c5614c9",
       "role": "NEW_PACKET_SOURCE"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/GuavaMinMaxOrderingHookProof.java",
+      "path": "make/m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/GuavaMinMaxOrderingHookProof.java",
       "bytes": 7203,
       "sha256": "38034fb45ea778c3251d3aded0d70e0e712e78d44be1f38406192de34f88dd92",
       "role": "NEW_PACKET_SOURCE"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/GuavaMinMaxProtocolProof.java",
+      "path": "make/m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/GuavaMinMaxProtocolProof.java",
       "bytes": 56071,
       "sha256": "334d3a3e9c86a5c0cceed4a6440ee0ecbec70e5b26d06617cda6a3136032f205",
       "role": "NEW_PACKET_SOURCE"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/GuavaMinMaxPublicSurfaceProof.java",
+      "path": "make/m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/GuavaMinMaxPublicSurfaceProof.java",
       "bytes": 3515,
       "sha256": "dbb08cdda334c4d9851895180afb0b2bf4a970767f77521d14b8355af4182ab7",
       "role": "NEW_PACKET_SOURCE"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/GuavaMinMaxResourceProfileProof.java",
+      "path": "make/m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/GuavaMinMaxResourceProfileProof.java",
       "bytes": 2185,
       "sha256": "0db2eb8e4e1fcb3c1a46fa4e0a321a32f45328b9ebc0cb552071774eba7dfe97",
       "role": "NEW_PACKET_SOURCE"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/GuavaMinMaxMaskProjectionProof.java",
+      "path": "make/m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/GuavaMinMaxMaskProjectionProof.java",
       "bytes": 9375,
       "sha256": "b7fb3aacb3a8c76b716caa87d163e90b2e8b8d65f9006fcb7eeef5c1fb81e25b",
       "role": "NEW_PACKET_SOURCE"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/verify.py",
+      "path": "make/m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/verify.py",
       "bytes": 10295,
       "sha256": "711a079ea26bd059898916d07c1af1f8fdd4ee567d683efd97c802834205a600",
       "role": "NEW_PACKET_SOURCE"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/run.py",
+      "path": "make/m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/run.py",
       "bytes": 19347,
       "sha256": "6faae312cf259d842d2257ac735efddd6d342ee111c514456e429223488edf85",
       "role": "NEW_PACKET_SOURCE"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/FOSS_REUSE_DECISION.tsv",
+      "path": "make/m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/FOSS_REUSE_DECISION.tsv",
       "bytes": 7484,
       "sha256": "263294d5723e7d0e33e6fd687e7e8d2ecd1b684432db4818ba193d0310688152",
       "role": "NEW_PACKET_SOURCE"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/FOSS_RECEIVING_PROJECTION_PACKING_DECISION.tsv",
+      "path": "make/m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/FOSS_RECEIVING_PROJECTION_PACKING_DECISION.tsv",
       "bytes": 2213,
       "sha256": "a61c46edb1db52f087310d29c4f717ec2a8a7f89e6e64154c0baf9d69aa88090",
       "role": "NEW_PACKET_SOURCE"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/ATOM_COMPOSITION.tsv",
+      "path": "make/m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/ATOM_COMPOSITION.tsv",
       "bytes": 5569,
       "sha256": "a5828fcb4640339005bd40325551d8e0aff61664bb76ffb82b130b41a85f1213",
       "role": "NEW_PACKET_SOURCE"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/CONTRACT_EXECUTION_MAP.tsv",
+      "path": "make/m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/CONTRACT_EXECUTION_MAP.tsv",
       "bytes": 2330,
       "sha256": "c2b38137a22e5ece538b4d70b8b53a9966675366ca36eb435bbd59c5dc8394f9",
       "role": "NEW_PACKET_SOURCE"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/PROSPECTIVE_FIXTURE_PARTITIONS.json",
+      "path": "make/m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/PROSPECTIVE_FIXTURE_PARTITIONS.json",
       "bytes": 3070,
       "sha256": "595ec131aa43f8756ce79908c23731c10a823af08529359741c93127d52c105d",
       "role": "NEW_PACKET_SOURCE"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/result.json",
+      "path": "make/m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/result.json",
       "bytes": 8338,
       "sha256": "48cb049c951187a5c5292b170d07e553ae944b3f9f47a64ffcf442702dbc6a97",
       "role": "NEW_PACKET_SOURCE"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/provenance.json",
+      "path": "make/m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/provenance.json",
       "bytes": 7469,
       "sha256": "516e699cbb80629d9015344f3afb0aa4f8fa7ae40ef3f03a420ad81f868aa635",
       "role": "NEW_PACKET_SOURCE"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/README.md",
+      "path": "make/m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/README.md",
       "bytes": 2926,
       "sha256": "b91d87c821de1d49365ccc8b8494342c3957dc01048339e18fa3813206a70a5f",
       "role": "NEW_PACKET_SOURCE"
@@ -1277,7 +1277,7 @@
       "role": "NEW_PACKET_SOURCE"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/MASK_PROJECTION_V4.json",
+      "path": "make/m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/MASK_PROJECTION_V4.json",
       "bytes": 13270,
       "sha256": "ae92daa318e3e472642b54cd108c5d8356cce584e8db49fd997cb0409c0599ca",
       "role": "NEW_PACKET_SOURCE"
@@ -1303,7 +1303,7 @@
         "semanticDiff": "ONLY_OPT_IN_M3_RECIPE_BOOT_PROFILE_AND_XML_WHITESPACE"
       },
       {
-        "path": "m3/collections/receiving/guava-minmax-priority-queue/pom.xml",
+        "path": "make/m3/collections/receiving/guava-minmax-priority-queue/pom.xml",
         "originalPacketBytes": 3058,
         "originalPacketSHA256": "d9a2259e3463db925ae15f7027e4ec4a2c1319cc11910efc63a8691f10b88919",
         "originalGitBlob": "8f7450ae1af1f68732835c51434f6c9970c45cf4",

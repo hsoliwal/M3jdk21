@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
 # Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
 # Runs every gate of leaf jbcoll-mask-compactor-perf-20261106 (recipe JBCOLL_MASK_COMPACTOR_PERF v1) and prints one
-# GATE line per gate (GATES.tsv). Derived from m3/qualification/jbcoll-mask-compactor-20261106/verify.sh (L003), whose
+# GATE line per gate (GATES.tsv). Derived from make/m3/qualification/jbcoll-mask-compactor-20261106/verify.sh (L003), whose
 # CompactorDifferential.java and tests.sh it runs in place.
 #   recipe         apply.py --check: changed=0 plan=UNCHANGED (pr1908 provenance re-derived); a drifted owner (one
 #                  appended byte, restored afterwards) is REFUSED with exit 2; variants.py checks pr1754 provenance
@@ -24,13 +24,13 @@ set -uo pipefail
 case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) SEP=';'; winpath() { (cd "$1" && pwd -W); } ;; *) SEP=':'; winpath() { (cd "$1" && pwd); } ;; esac
 Q=$(cd "$(dirname "$0")" && pwd)
 ROOT=$(cd "$Q/../../.." && pwd)
-L3="$ROOT/m3/qualification/jbcoll-mask-compactor-20261106"
+L3="$ROOT/make/m3/qualification/jbcoll-mask-compactor-20261106"
 mkdir -p "$1"; S=$(winpath "$1"); CASES=${2:-1000000}
 BASE=${3:-$(git -C "$ROOT" merge-base HEAD origin/master)}
 J="${JAVA_HOME:?JAVA_HOME must point at a JDK 21}/bin"
 SEED=0x4d334a424d534b31
 L3_SHA=c5f342c12d3d6ae1ddb65f87f8a1514a9ad389f87155a8e2db4adc22b8ff4881
-LEAF=m3/qualification/$(basename "$Q")/
+LEAF=make/m3/qualification/$(basename "$Q")/
 U=src/java.base/share/classes/java/util
 OWNER=src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java
 FLAGS=(-g -Xlint:all -Werror -Xlint:-this-escape -XDstringConcat=inline)
@@ -85,8 +85,8 @@ v=FAIL
 case "$r" in *"RULE FIX PASS"*"RULE IDEA REJECTED threshold_prefix"*"RULE IDEA ADOPT fixed vs threshold"*"RULE IDEA REJECTED fixed_prefix"*) v=PASS ;; esac
 gate timing $v "$(printf '%s\n' "$r" | grep -E '^RULE (FIX|IDEA)' | cut -c1-200 | tr '\n' ';')"
 
-naming=$(cd "$ROOT" && git add -- "$OWNER" "$LEAF" && python -I m3/tooling/jdk-naming/jdk_naming.py apply --root . --only "$OWNER" --only "$LEAF" 2>&1 | grep -E "^(JDK_NAMING|REFUSED)" | tail -1; \
-    python -I m3/tooling/jdk-naming/jdk_naming.py plan --root . --only "$OWNER" --only "$LEAF" 2>&1 | grep -E "^(JDK_NAMING|REFUSED)" | tail -1)
+naming=$(cd "$ROOT" && git add -- "$OWNER" "$LEAF" && python -I make/m3/tooling/jdk-naming/jdk_naming.py apply --root . --only "$OWNER" --only "$LEAF" 2>&1 | grep -E "^(JDK_NAMING|REFUSED)" | tail -1; \
+    python -I make/m3/tooling/jdk-naming/jdk_naming.py plan --root . --only "$OWNER" --only "$LEAF" 2>&1 | grep -E "^(JDK_NAMING|REFUSED)" | tail -1)
 case "$naming" in *"moves=0 rewrites=0 refusals=0"*"moves=0 rewrites=0 refusals=0"*) gate naming PASS "$(printf '%s' "$naming" | tr '\n' ';')" ;;
     *) gate naming FAIL "$(printf '%s' "$naming" | tr '\n' ';')" ;; esac
 

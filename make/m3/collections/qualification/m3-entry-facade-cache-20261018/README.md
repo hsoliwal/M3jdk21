@@ -19,8 +19,8 @@ The production slice, self-tests, recipe, full before-image fixtures, and output
 
 From a Java 21 + Maven environment:
 
-    mvn -B -ntp -f m3/collections/qualification/m3-entry-facade-cache-20261018/recipe/pom.xml verify
+    mvn -B -ntp -f make/m3/collections/qualification/m3-entry-facade-cache-20261018/recipe/pom.xml verify
     mvn -B -ntp -f m3/collections/pom.xml test
-    java -cp m3/collections/qualification/m3-entry-facade-cache-20261018/recipe/target/classes com.synexia.m3.M3EntryFacadeCacheRecipe --check .
+    java -cp make/m3/collections/qualification/m3-entry-facade-cache-20261018/recipe/target/classes com.synexia.m3.M3EntryFacadeCacheRecipe --check .
 
 These are the intended admission gates. Local Maven execution and exact-head hosted CI must be reported separately from source-level seals.

@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # Modified 2026-10-21: Execute existing and new module contracts on host and linked images.
 # Modified 2026-11-05: Isolate mutable contract fixtures from the source/evidence tree.
-# Modified 2026-11-06 by m3/qualification/file-unify-20261106 (FILE_UNIFY v1): the module is org.m3jdk.file
+# Modified 2026-11-06 by make/m3/qualification/file-unify-20261106 (FILE_UNIFY v1): the module is org.m3jdk.file
 # and requires jdk.m3.collections: the module name is a constant, --module-path carries the dependency modules.
 # Modified 2026-11-08: Complete all contract compilation before host execution.
 """Compile the existing file module, run its independent contract, and check a linked image."""

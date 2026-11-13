@@ -32,7 +32,7 @@ No row needs an edit in this repository, so this PR changes no source.
 `verify.py` re-checks the probes. It reuses the probe atom of `../census2-small-20261107a/verify.py`:
 
 ```text
-python -I m3/qualification/census2-one-pass-20261107a/verify.py [--rev REV]
+python -I make/m3/qualification/census2-one-pass-20261107a/verify.py [--rev REV]
 ```
 
 A FAIL means master moved under a decision, and that row needs a new decision.

@@ -1,5 +1,5 @@
 # Copyright 2026 Hitesh Soliwal, Synexia. SPDX-License-Identifier: Apache-2.0
-"""Qualify the explicit current cohort through unchanged m3/build.sh.
+"""Qualify the explicit current cohort through unchanged make/m3/build.sh.
 Adapted from the existing current-baseline qualifier; no product source edits.
 """
 from pathlib import Path, PurePosixPath
@@ -41,7 +41,7 @@ def main():
     runner = Path(os.environ["RUNNER_TEMP"]).resolve()
     if runner not in out.parents or not out.is_dir():
         raise ValueError("owned runner output required")
-    manifest = json.loads(regular(source/"m3/tooling/core-contract-matrix/CURRENT_INPUTS.json"))
+    manifest = json.loads(regular(source/"make/m3/tooling/core-contract-matrix/CURRENT_INPUTS.json"))
     assert manifest["schema"] == "M3_CURRENT_CORE_CONTRACT_INPUTS_V1"
     assert manifest["repository"] == "hsoliwal/M3jdk21" and len(manifest["files"]) == 81
     rows = manifest["files"]
@@ -49,7 +49,7 @@ def main():
     admit(rows, before)
     java_paths = {p.relative_to(source).as_posix() for domain in ("m3/core/src", "m3/core/test") for p in (source/domain).rglob("*.java")}
     assert java_paths == {p for p in before if p.endswith(".java")}, "unlisted Java source"
-    build = before["m3/build.sh"].decode("utf-8")
+    build = before["make/m3/build.sh"].decode("utf-8")
     selected = re.findall(r'-cp build/tests ([A-Za-z0-9_]+) \| tee "build/logs/([^"]+)\-\$mode\.log"', build)
     assert [r[0] for r in selected] == manifest["programs"] and len(selected) == 18
     assert manifest["modes"] == ["jit", "int", "nocompact", "c2"]
@@ -89,9 +89,9 @@ m3_checked_paths() {
 rm() { m3_checked_paths "$@" && command rm "$@"; }
 mv() { m3_checked_paths "$@" && command mv "$@"; }
 rmdir() { m3_checked_paths "$@" && command rmdir "$@"; }
-source "$M3_BOUNDED_COHORT/m3/build.sh"
+source "$M3_BOUNDED_COHORT/make/m3/build.sh"
 '''
-    argv = ["/bin/bash", "--noprofile", "--norc", "-c", wrapper, str(source/"m3/build.sh")]
+    argv = ["/bin/bash", "--noprofile", "--norc", "-c", wrapper, str(source/"make/m3/build.sh")]
     start = time.monotonic()
     child = None
     error = None

@@ -19,7 +19,7 @@ mkdir -p "$3"; S=$(winpath "$3")
 J="${JAVA_HOME:?JAVA_HOME must point at a JDK 21}/bin"
 CS="$M2/org/junit/platform/junit-platform-console-standalone/1.11.4/junit-platform-console-standalone-1.11.4.jar"
 API="$M2/org/junit/jupiter/junit-jupiter-api/5.11.4/junit-jupiter-api-5.11.4.jar"
-LEAF=m3/qualification/$(basename "$(dirname "$RECIPE_DIR")")/
+LEAF=make/m3/qualification/$(basename "$(dirname "$RECIPE_DIR")")/
 SCOPE=(src/java.base/share/classes/jdk/internal/m3/hash/ test/jdk/jdk/internal/m3/hash/ "$LEAF")
 status=PASS
 gate() { local name=$1 verdict=$2; shift 2; echo "GATE $name $verdict $*"; [ "$verdict" = PASS ] || status=FAIL; }
@@ -51,7 +51,7 @@ b=$(grep -E 'tests (successful|failed)' "$L/junit_testsrc.txt" | tr -s ' ' | tr 
 case "$a|$b" in *"35 tests successful"*"0 tests failed"*"|"*"35 tests successful"*"0 tests failed"*) v=PASS ;; *) v=FAIL ;; esac
 gate lane_tests $v "oracle_javac rc=$orc classes=$(find "$L/oracle" -name '*.class' | wc -l) test_javac rc=$trc prebuilt: $a test.src: $b"
 
-naming=$(cd "$ROOT" && python -I m3/tooling/jdk-naming/jdk_naming.py plan --root . $(printf -- '--only %s ' "${SCOPE[@]}") 2>&1 | grep -E "^(JDK_NAMING|REFUSED)" | tail -1)
+naming=$(cd "$ROOT" && python -I make/m3/tooling/jdk-naming/jdk_naming.py plan --root . $(printf -- '--only %s ' "${SCOPE[@]}") 2>&1 | grep -E "^(JDK_NAMING|REFUSED)" | tail -1)
 case "$naming" in *"moves=0 rewrites=0 refusals=0"*) gate naming PASS "$naming" ;; *) gate naming FAIL "$naming" ;; esac
 
 changed=$(cd "$ROOT" && { git diff --name-only "$BASE"; git diff --name-only --cached; git ls-files --others --exclude-standard; } | sort -u)

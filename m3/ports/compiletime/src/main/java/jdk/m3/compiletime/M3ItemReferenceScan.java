@@ -41,7 +41,7 @@ import org.objectweb.asm.tree.analysis.SourceInterpreter;
 import org.objectweb.asm.tree.analysis.SourceValue;
 
 /**
- * Build-time reference metadata for M3 item residency (m3/docs/m3-item-residency-metadata.md).
+ * Build-time reference metadata for M3 item residency (doc/m3/m3-item-residency-metadata.md).
  * For every call site that obtains a transient item handle (an {@code INVOKE*} returning a
  * transient type or an array of it, or {@code NEW} of one) it records whether the reference
  * escapes, using prepared def-use masks over ASM {@link SourceInterpreter} frames. Reuses PR #814's

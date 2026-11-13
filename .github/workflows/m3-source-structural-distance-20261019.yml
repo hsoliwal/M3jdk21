@@ -5,7 +5,7 @@ on:
   pull_request:
     paths:
       - 'm3/collections/signal-codegen/**'
-      - 'm3/collections/algorithm-catalog/source-signal-distance-20261019.tsv'
+      - 'make/m3/collections/algorithm-catalog/source-signal-distance-20261019.tsv'
       - '.github/workflows/m3-source-structural-distance-20261019.yml'
   workflow_dispatch:
 

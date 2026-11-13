@@ -16,7 +16,7 @@ M3JDK header, (2) the package line, through the PACKAGE rows, (3) import lines o
 the PACKAGE, TYPE and EXTERNAL rows (an import of a.b.Type.member maps its longest mapped package prefix and the type
 that follows it; JDK packages java., javax., jdk., com.sun. pass), (4) the TYPE rows whose donor and target names
 differ, as whole-word tokens, (5) the LITERAL rows, declared string-literal tokens (a system property, a library
-name) renamed as whole tokens, exactly the rename the JDK naming rules would apply (m3/tooling/jdk-naming/
+name) renamed as whole tokens, exactly the rename the JDK naming rules would apply (make/m3/tooling/jdk-naming/
 NAMING_RULES.tsv) so that jdk_naming.py and this recipe share one fixed point, and (6) one //FLLDCIM: anchor line
 inserted before the top-level type declaration, naming the donor blob URL at the donor commit. Every other byte of
 the file is kept (CRLF too).

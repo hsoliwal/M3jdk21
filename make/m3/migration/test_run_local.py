@@ -11,7 +11,7 @@ class InputScopeTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
         self.port = self.root / 'm3/ports/indexstring'
-        self.here = self.root / 'm3/migration'
+        self.here = self.root / 'make/m3/migration'
         self.port.mkdir(parents=True)
         self.here.mkdir(parents=True)
         self.addCleanup(patch.stopall)

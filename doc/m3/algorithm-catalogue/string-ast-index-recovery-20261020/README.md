@@ -29,8 +29,8 @@ owners, donor references, complexity, contract requirements and selection status
 No new search engine is introduced. For example, from the repository root:
 
 ```sh
-rg -n 'array-growth|bit-mask|source-seal' m3/docs/algorithm-catalogue/string-ast-index-recovery-20261020
-rg -n 'REJECTED|REFERENCE_ONLY|EXISTING' m3/docs/algorithm-catalogue/string-ast-index-recovery-20261020/catalogue.tsv
+rg -n 'array-growth|bit-mask|source-seal' doc/m3/algorithm-catalogue/string-ast-index-recovery-20261020
+rg -n 'REJECTED|REFERENCE_ONLY|EXISTING' doc/m3/algorithm-catalogue/string-ast-index-recovery-20261020/catalogue.tsv
 ```
 
 The collection model remains dynamic arrays with primitive offsets, indexes and

@@ -4,12 +4,12 @@ The user's instruction: M3JDK is one unit, not m3 + jdk. Census of live text (m3
 - the split spellings are `M3 JDK` (81), `M3-JDK` (82), `m3-jdk` (42), `M3_JDK` (28) and `m3_jdk` (9);
 - evidence holds a further 7,575, which stay.
 
-`m3/tooling/jdk-naming/product_name.py` (PRODUCT_NAME_UNIFY v1, 5 fixture tests) rewrote 31 live files
+`make/m3/tooling/jdk-naming/product_name.py` (PRODUCT_NAME_UNIFY v1, 5 fixture tests) rewrote 31 live files
 (`PRODUCT_NAME.tsv`) to the per-kind product name of NAMING_STANDARD:
 - `M3 JDK` becomes `M3JDK`: workflow names (M3JDK naming standard, M3JDK modules, M3JDK proof kit, M3JDK source
   naming), step names, docs, a recipe display name;
-- the environment name `M3_JDK` becomes `M3JDK`: every script already reads `M3JDK` (m3/build.sh,
-  m3/optane/verify.sh, the lexicon and release runners, the qualify scripts); only the docs still said `M3_JDK`;
+- the environment name `M3_JDK` becomes `M3JDK`: every script already reads `M3JDK` (make/m3/build.sh,
+  make/m3/optane/verify.sh, the lexicon and release runners, the qualify scripts); only the docs still said `M3_JDK`;
 - `--m3-jdk[-x]` becomes `--m3jdk[-x]`, and `m3_jdk[_x]` becomes `m3jdk[_x]`. Master declares `--m3jdk` and
   `--m3jdk-receipt` but reads `args.m3_jdk` and `self.a.m3_jdk_receipt`, attributes argparse never sets. So
   verify_progress_job.py and tornado/build_runtime.py raise AttributeError on master; with this change they read

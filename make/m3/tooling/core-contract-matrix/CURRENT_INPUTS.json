@@ -4,7 +4,7 @@
   "sourceCommit": "64092c8c1b4157975e018c1f679f54059389e3fa",
   "files": [
     {
-      "path": "m3/build.sh",
+      "path": "make/m3/build.sh",
       "gitBlob": "54d70a526e73822cac7886a973ec7a5274d7b6ab",
       "bytes": 5896,
       "sha256": "79952444ce0e5317b5fd43fb57c693c6fed94c54a2100eb11d2526c6f0ae44e7"
@@ -516,7 +516,7 @@
     "nocompact",
     "c2"
   ],
-  "scope": "Unchanged m3/build.sh selects 18 original programs in four JVM modes. Other inventoried tests are not claimed as executed.",
+  "scope": "Unchanged make/m3/build.sh selects 18 original programs in four JVM modes. Other inventoried tests are not claimed as executed.",
   "priorProfile": {
     "gitBlob": "8473d4432f33ed95acb4d778d0976da09b70146a",
     "files": 59,

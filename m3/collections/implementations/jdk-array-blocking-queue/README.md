@@ -13,6 +13,6 @@ Planned lanes: `Object[] ring`, `int head`, `int tail`, `int count`, `int state`
 
 Reuse when filling: core M3BlockingDeque ring; peer native skeleton M3ArrayBlockingLongQueue (m3/five-library-scaffold-20261018@bec1ebbaa352).
 
-The row in `m3/collections/qualification/five-provider-inventory-20261018/INVENTORY.tsv` is `SCAFFOLD`;
+The row in `make/m3/collections/qualification/five-provider-inventory-20261018/INVENTORY.tsv` is `SCAFFOLD`;
 the owning PR flips it to `DONE #PR`. Regenerate with the generator in that directory rather than editing
 this module by hand until the owning PR replaces the bodies.

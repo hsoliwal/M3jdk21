@@ -740,7 +740,7 @@ The canonical recipe remains in Synexia's existing
 `m3-intint-conditional-remove-20261030` crate, with a distinct IntLong dataset.
 Java SDK qualification and the selected receiver's Maven/JUnit, independent
 physical/model differential and API observations are recorded in the
-[passive IntLong receipt](../compatibility/intlong-known-slot-20261112-receipt.json).
+[passive IntLong receipt](../../make/m3/compatibility/intlong-known-slot-20261112-receipt.json).
 They do not establish installed-image, all-platform or production-performance
 admission. This primitive operation has no JEP 431 or JBS bug-fix association.
 

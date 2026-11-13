@@ -18,10 +18,10 @@ import sys
 import tempfile
 
 RECIPE_NAME = "filtered-navigation-20261018"
-PREFIX = "m3/collections/qualification/m3-filtered-navigation-20261018"
+PREFIX = "make/m3/collections/qualification/m3-filtered-navigation-20261018"
 WORKFLOW = ".github/workflows/m3-filtered-bounded-current-20261018.yml"
 OLD_RECEIVE = '          python3 "$Q/recipe/receive.py" --dataset filtered-navigation-20261018 --target "$PWD" --check'
-NEW_RECEIVE = '          python3 m3/collections/qualification/filtered-current/verify_shadow.py --crate "$Q/recipe" --dataset filtered-navigation-20261018 --target "$PWD"'
+NEW_RECEIVE = '          python3 make/m3/collections/qualification/filtered-current/verify_shadow.py --crate "$Q/recipe" --dataset filtered-navigation-20261018 --target "$PWD"'
 # Postimages of newer product work, NOT invented replacements for historical SDK results.
 EVOLVED_GIT_BLOBS = {
     "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java":

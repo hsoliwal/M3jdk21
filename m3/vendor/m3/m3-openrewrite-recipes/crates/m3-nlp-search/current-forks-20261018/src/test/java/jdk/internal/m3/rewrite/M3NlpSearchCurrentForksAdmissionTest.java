@@ -52,7 +52,7 @@ class M3NlpSearchCurrentForksAdmissionTest {
                 empty, temporary.resolve("receiver"));
         assertEquals(6, receipt.get("first_application_changes"));
         assertThrows(IllegalArgumentException.class, () -> M3ScopeInference.describeJavaTarget(
-                "m3/tooling/module-packs/nlp-search/tests/UnapprovedProbe.java"));
+                "make/m3/tooling/module-packs/nlp-search/tests/UnapprovedProbe.java"));
     }
 
     @Test void publicMirrorAdmitsOnlyItsExactLuceneDataOwner() throws Exception {

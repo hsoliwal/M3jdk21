@@ -12,7 +12,7 @@ from pathlib import Path, PurePosixPath
 import sys
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[3]
+ROOT = HERE.parents[4]
 RECEIPT = HERE / "RECEIVER_RECEIPT.json"
 SCHEMA = "M3JDK21_SOURCE_PINNED_ARRAY_MASK_RECEIPT_V1"
 EXPECTED = {

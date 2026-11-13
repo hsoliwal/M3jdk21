@@ -13,7 +13,7 @@ import os
 import subprocess
 import sys
 
-ROOT = Path(__file__).resolve().parents[3]
+ROOT = Path(__file__).resolve().parents[4]
 TARGET = "src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java"
 BASE_COMMIT = "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55"
 BASE_SHA = "50e1fe55cd5e8a53b72aa8a4772f826f712c7e3edb3239514f9504819a0b0257"

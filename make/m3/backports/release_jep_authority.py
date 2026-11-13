@@ -27,7 +27,7 @@ def parse_ids(value: str) -> tuple[int, ...]:
 
 
 def authority(root: Path) -> dict[int, tuple[int, ...]]:
-    rows = read_tsv(root / "m3/backports/RELEASE_JEP_AUTHORITY.tsv")
+    rows = read_tsv(root / "make/m3/backports/RELEASE_JEP_AUTHORITY.tsv")
     if len(rows) != len(RELEASES):
         raise AssertionError(
             f"expected {len(RELEASES)} release authority rows, found {len(rows)}"
@@ -63,7 +63,7 @@ def authority(root: Path) -> dict[int, tuple[int, ...]]:
 
 def verify_repository_authority(root: Path) -> dict[int, tuple[int, ...]]:
     expected = authority(root)
-    catalogue = read_tsv(root / "m3/backports/JEP_CATALOGUE.tsv")
+    catalogue = read_tsv(root / "make/m3/backports/JEP_CATALOGUE.tsv")
     actual: dict[int, set[int]] = {release: set() for release in RELEASES}
 
     for row in catalogue:

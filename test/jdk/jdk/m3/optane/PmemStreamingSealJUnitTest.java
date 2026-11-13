@@ -17,7 +17,7 @@ import org.junit.jupiter.api.io.TempDir;
 import static org.junit.jupiter.api.Assertions.*;
 
 /** Exact original-source verification with a single reusable scratch buffer. */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/m3-pmem-sdk/campaign/src/test/java/com/synexia/m3/pmem/campaign/PmemStreamingSealJUnitTest.java blob e36991b90bd6; recipe m3/optane/recipe/pmem-source-image-20261106/relocate.py v3
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/m3-pmem-sdk/campaign/src/test/java/com/synexia/m3/pmem/campaign/PmemStreamingSealJUnitTest.java blob e36991b90bd6; recipe make/m3/optane/recipe/pmem-source-image-20261106/relocate.py v3
 final class PmemStreamingSealJUnitTest {
     @TempDir Path temporary;
     private static final PmemSourceImage.Limits LIMITS =

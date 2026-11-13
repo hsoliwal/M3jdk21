@@ -7,11 +7,11 @@ PR #2108 (head 58bc0d2d297e, the second parent of the retain merge a92a5765d54a)
 the com.m3.* namespace. A later fold of master dropped the whole module (S:/m3-scratch/eb-conv/folddrop/retained/
 m3__llm.tsv: 44 production files, merge_kind RETAIN). This recipe writes every file of that module back from its git
 blob at 58bc0d2d297e and relocates the exported package to jdk.m3.llm (the NAMING_RULES.tsv rules PKG_COM_M3 and
-PKG_PATH_COM_M3 of m3/tooling/jdk-naming, applied to the same text scope as jdk_naming.py: .java, pom.xml, .mjs;
+PKG_PATH_COM_M3 of make/m3/tooling/jdk-naming, applied to the same text scope as jdk_naming.py: .java, pom.xml, .mjs;
 README.md is relocated too so the module's own documentation names the landed package), then applies the recorded
 edits (EDITS below, every anchor exactly once: the one CONST_KEBAB rename jdk_naming.py plan still reported after the
 package relocation, so that the naming tool is a fixed point on the written tree) and registers the module in
-m3/pom.xml after nlp.
+make/m3/pom.xml after nlp.
 
 Hash pinned: RESTORE.tsv names, for every target, the donor blob (git object id at 58bc0d2d297e), the donor sha256 and
 the target sha256. apply reads each blob with git cat-file (or --donor-dir, an export of the donor tree), refuses
@@ -55,13 +55,13 @@ TARGET_PREFIX_MAIN = "m3/llm/src/main/java/jdk/m3/llm/"
 TARGET_PREFIX_TEST = "m3/llm/src/test/java/jdk/m3/llm/"
 RELOCATE_SUFFIXES = (".java", ".mjs", ".md")
 RELOCATE_NAMES = ("pom.xml",)
-# NAMING_RULES.tsv PKG_COM_M3 / PKG_PATH_COM_M3 (m3/tooling/jdk-naming): exported M3 packages take the JDK module prefix;
+# NAMING_RULES.tsv PKG_COM_M3 / PKG_PATH_COM_M3 (make/m3/tooling/jdk-naming): exported M3 packages take the JDK module prefix;
 # a Maven groupId span (<groupId>com.m3</groupId>) is not followed by a lowercase letter and stays.
 PKG_RULE = (re.compile(r"(?:(?<![A-Za-z0-9])|(?<=\\[tnr]))com\.m3\.(?=[a-z])"), "jdk.m3.")
 PATH_RULE = (re.compile(r"(?:(?<![A-Za-z0-9])|(?<=\\[tnr]))com/m3/(?=[a-z])"), "jdk/m3/")
 
-# the m3/pom.xml registration: preimage blob at BASE_COMMIT, one anchored edit
-REACTOR_POM = "m3/pom.xml"
+# the make/m3/pom.xml registration: preimage blob at BASE_COMMIT, one anchored edit
+REACTOR_POM = "make/m3/pom.xml"
 REACTOR_POM_BLOB = "eadf233183d4134ba66c5ba30272cf474d5cec4a"
 REACTOR_EDIT = ("    <module>nlp</module>\n", "    <module>nlp</module>\n    <module>llm</module>\n")
 
@@ -160,7 +160,7 @@ def produce(target_path: str, raw: bytes) -> bytes:
 
 def reactor_postimage(root: Path) -> tuple[bytes, bytes]:
     # the preimage is always the base blob (git cat-file), never the checkout: a sealed postimage computed from an
-    # already registered m3/pom.xml would register the module twice (RECIPE_MEMORY REACTOR_PREIMAGE_FROM_BLOB)
+    # already registered make/m3/pom.xml would register the module twice (RECIPE_MEMORY REACTOR_PREIMAGE_FROM_BLOB)
     pre = donor_bytes(root, None, REACTOR_POM, REACTOR_POM_BLOB)
     text = pre.decode("utf-8")
     if text.count(REACTOR_EDIT[0]) != 1:
@@ -235,7 +235,7 @@ def main(argv=None) -> int:
                   f"m3/llm restore of PR #{DONOR_PR} head {DONOR_COMMIT} (retain merge {RETAIN_MERGE}) onto"
                   f" {BASE_COMMIT[:12]}: donor blob and sha256, target sha256 after relocation and ADAPT edits")
         write_tsv(RECIPE_DIR / EDITS_NAME, EDITS_COLUMNS, edits,
-                  f"before = donor blob sha256 at {DONOR_COMMIT} (m3/pom.xml: base {BASE_COMMIT[:12]}),"
+                  f"before = donor blob sha256 at {DONOR_COMMIT} (make/m3/pom.xml: base {BASE_COMMIT[:12]}),"
                   f" after = written bytes; {RECIPE} {VERSION}")
     edits_path = RECIPE_DIR / EDITS_NAME
     recorded = read_tsv(edits_path, EDITS_COLUMNS) if edits_path.exists() else []

@@ -31,7 +31,7 @@ the JDK image. No format, public API, loader or JVM identity change is made.
 
 ## Mapping and subsequent improvements
 
-`m3/docs/name-mapping.json` remains the single mapping authority. Stable record
+`doc/m3/name-mapping.json` remains the single mapping authority. Stable record
 `synexia.counterpart.MIndexRegexTrigramQuery` records the source and target
 symbols, immutable source commit, file hashes, target adaptations, recipe,
 tests, license, dependencies and pending runtime consumers. Its state remains
@@ -55,10 +55,10 @@ not a claim that every class has an admitted replacement. Use the existing
 mapping tools to inspect progress and reconcile a newly captured inventory:
 
 ```sh
-python3 m3/migration/migration.py validate .
-python3 m3/migration/migration.py report .
-python3 m3/migration/migration.py reconcile . --inventory <inventory.tsv> --inventory-receipt <receipt.json>
-python3 m3/migration/migration.py complete .
+python3 make/m3/migration/migration.py validate .
+python3 make/m3/migration/migration.py report .
+python3 make/m3/migration/migration.py reconcile . --inventory <inventory.tsv> --inventory-receipt <receipt.json>
+python3 make/m3/migration/migration.py complete .
 ```
 
 `complete` deliberately fails while any required family or gate remains open.
@@ -68,13 +68,13 @@ interpret a source-only recipe result as HotSpot integration.
 ## Reproduction and installation
 
 Use Java 21, Maven 3.9.9 and Linux g++ with JNI headers. The mapping validator
-also needs the existing `m3/migration/requirements.txt` installed in a tooling
+also needs the existing `make/m3/migration/requirements.txt` installed in a tooling
 Python environment:
 
 ```sh
-mvn -B -ntp -f m3/tooling/tq/pom.xml verify
-mvn -B -ntp -f m3/tooling/tq/pom.xml -Dtq.sanitize=true verify
-python3 m3/migration/recipe.py check --root . --plan m3/tooling/tq/plan.json
+mvn -B -ntp -f make/m3/tooling/tq/pom.xml verify
+mvn -B -ntp -f make/m3/tooling/tq/pom.xml -Dtq.sanitize=true verify
+python3 make/m3/migration/recipe.py check --root . --plan make/m3/tooling/tq/plan.json
 ```
 
 The crate executes the existing Java and text snapshot recipes. The legacy
@@ -89,8 +89,8 @@ The checked-in targets are exact postimages of these recipes. For a matching
 base, the existing sealed installer can apply or roll back all eight outputs:
 
 ```sh
-python3 m3/migration/recipe.py apply --root . --plan m3/tooling/tq/plan.json
-python3 m3/migration/recipe.py rollback --root . --plan m3/tooling/tq/plan.json
+python3 make/m3/migration/recipe.py apply --root . --plan make/m3/tooling/tq/plan.json
+python3 make/m3/migration/recipe.py rollback --root . --plan make/m3/tooling/tq/plan.json
 ```
 
 Run those mutation commands only in an exclusively owned worktree. They reject
@@ -139,7 +139,7 @@ force. No challenge-site solution or newly found third-party code was copied.
 ## Serial port follow-ups
 
 A later port may append mappings and distribution notices. On such a tree, run
-`python3 m3/tooling/tq/verify-plan.py` after this crate's Maven gate. It verifies
+`python3 make/m3/tooling/tq/verify-plan.py` after this crate's Maven gate. It verifies
 all TQ-owned product/test/workflow bytes exactly, permits only additive shared
 mapping/naming/notice content, and replays the complete historical eight-output
 plan in an isolated fixture for apply/fixed-point/rollback/refusal checks.

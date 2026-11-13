@@ -25,7 +25,7 @@ donor revision's own blob and the reason in base_note.
 
 VERBATIM rows (v3) copy one donor file byte for byte (no header, anchor or rename: donor-run evidence such as
 logs, hash tables and input manifests, whose statements name donor paths and digests that a rename would falsify) to a
-target path under an evidence/ directory (the lineage scope of m3/tooling/jdk-naming, which never rewrites it); their
+target path under an evidence/ directory (the lineage scope of make/m3/tooling/jdk-naming, which never rewrites it); their
 PROVENANCE row states body_match TRUE and base_note VERBATIM. MERGE rows (v3) record an edit of an existing module
 file that a relocated class needs (path and reason); the recipe writes nothing for them.
 
@@ -33,7 +33,7 @@ Idempotent: writes a file only when its bytes differ; a second run reports chang
 package, an import that is neither a JDK package, nor a mapped donor package, nor a declared EXTERNAL package of the
 map (port the closure: add the file or the dependency to the map), or a Java file without a top-level type.
 
-Derived from m3/optane/recipe/pmem-region-core-20261106/relocate.py v2 (RELOCATE_PMEM_REGION_CORE, itself derived from
+Derived from make/m3/optane/recipe/pmem-region-core-20261106/relocate.py v2 (RELOCATE_PMEM_REGION_CORE, itself derived from
 m3/native/recipe/scoped-leases-20261106/relocate.py v1): v3 adds the VERBATIM rows; every v2 rule is unchanged.
 
 usage: python -I relocate.py --donor-git DIR --donor-rev REV [--module DIR] [--check]
@@ -50,7 +50,7 @@ from pathlib import Path
 RECIPE = "relocate.py"
 VERSION = "v3"
 RECIPE_DIR = Path(__file__).resolve().parent
-RECIPE_PATH = "m3/optane/recipe/" + RECIPE_DIR.name + "/" + RECIPE
+RECIPE_PATH = "make/m3/optane/recipe/" + RECIPE_DIR.name + "/" + RECIPE
 DONOR_REPO = "hsoliwal/com.synexia"
 DONOR_BLOB_URL = "https://github.com/" + DONOR_REPO + "/blob/"
 MAP_NAME = "RELOCATION_MAP.tsv"

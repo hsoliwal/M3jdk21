@@ -27,7 +27,7 @@ scores (Java path). The packed pair counter is frozen into sorted `long[]` keys 
 | oracles | `recipes/nlp-ppmi-topk-20261031/{PpmiRankingOracle, PpmiSparseOracle, PpmiPositiveOracle}.java` (default package -> `jdk.m3.nlp`), renamed `M3CooccurrencePpmi*Oracle` |
 | recipe | `relocate.py` v3 (same code as the backoff leaf's, PR #2544); `LITERAL` rows `synexia.ppmi.nativeTopK -> m3.ppmi.nativeTopK`, `synexia_ppmi_topk -> m3_ppmi_topk` |
 | provenance | `PROVENANCE.tsv`: `body_match_renamed=TRUE` for all 4 files |
-| receiver | `m3/nlp` `jdk.m3.nlp.M3CooccurrencePpmi` with `Snapshot`/`PairCount`/`ContextScore`/`Limits`. **Rejected:** the classical crate's `TARGET_MAP.tsv` receiver `jdk.m3.tools.text.ppmi` in `m3/tooling/module-packs/cpu-tools` (SKIP row) |
+| receiver | `m3/nlp` `jdk.m3.nlp.M3CooccurrencePpmi` with `Snapshot`/`PairCount`/`ContextScore`/`Limits`. **Rejected:** the classical crate's `TARGET_MAP.tsv` receiver `jdk.m3.tools.text.ppmi` in `make/m3/tooling/module-packs/cpu-tools` (SKIP row) |
 
 ### Native selector: deferred (SKIP rows, nothing copied)
 
@@ -58,7 +58,7 @@ classical crate's `TARGET_MAP.tsv` (rejected receiver), its old template copy an
 | 4 `javap -p` | 9 classes, 94 members (1 native) identical under the map |
 | 5 untouched classes | 10/10 master class files byte-identical |
 | 6 naming | 0 moves, 0 rewrites, 0 refusals; FIXED_POINT 0/0 |
-| 7 scope | `m3/nlp/**` only; `m3/pom.xml` untouched |
+| 7 scope | `m3/nlp/**` only; `make/m3/pom.xml` untouched |
 
 `bash verify.sh <donor clone> <scratch>` runs them (the module's `verify.sh` calls it). Hard limits are recorded, not
 fixed: 16 `for` statements, 2 methods over 15 lines (`topPositiveContexts` 47, `build` 53).

@@ -18,7 +18,7 @@ Keep the original catalogue and priority-ledger dispositions. Reuse the existing
 residue owner to expose the additional work:
 
 ```sh
-python3 m3/backports/jep_residue.py --root . --include-m3-extensions
+python3 make/m3/backports/jep_residue.py --root . --include-m3-extensions
 ```
 
 Without the flag, the existing queue and its TSV columns remain unchanged. With

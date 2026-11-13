@@ -10,7 +10,7 @@ The source-based backport intake must **retain both independent edits** rather
 than bulk-copy a donor file or falsely claim that a context mismatch proves the
 change incompatible.
 
-The incumbent owner is `m3/backports/commit_patch_atoms.py`, already
+The incumbent owner is `make/m3/backports/commit_patch_atoms.py`, already
 source-custodied by Synexia [PR #11638](https://github.com/hsoliwal/com.synexia/pull/11638)
 and M3 receiver [PR #935](https://github.com/hsoliwal/M3jdk21/pull/935).
 This work adapts its existing target-local `apply_patch` execution, not a new
@@ -54,16 +54,16 @@ license to merge/execute HotSpot changes.
 
 A separate source error in the same Maven/backport test phase contained a
 literal LF inside an unterminated Python string in
-`m3/backports/nebula_proof_admission.py`. Its exact target-only one-byte
+`make/m3/backports/nebula_proof_admission.py`. Its exact target-only one-byte
 escape repair restores deterministic JSON output while retaining the entire
 original HOLD receipt and all fail-closed Nebula/Synexia authority checks.
 The original test is extended to assert real JSON plus one physical LF.
 
 ## Proof and promotion
 
-- `python3 -m compileall -q m3/backports`
-- `python3 -m unittest discover -s m3/backports -p 'test_*.py' -v`
-- `mvn -B -ntp -f m3/backports/pom.xml verify`
+- `python3 -m compileall -q make/m3/backports`
+- `python3 -m unittest discover -s make/m3/backports -p 'test_*.py' -v`
+- `mvn -B -ntp -f make/m3/backports/pom.xml verify`
 - Follow with existing full Maven recipe/JUnit, A3, source-sealed
   fixed point and matched OpenJDK configure/make/jtreg/runtime gates for any
   specific materialized JEP packet.

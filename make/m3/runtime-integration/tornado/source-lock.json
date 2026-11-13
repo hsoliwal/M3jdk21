@@ -14423,43 +14423,43 @@
   ],
   "packaging_owners": [
     {
-      "path": "m3/tooling/jmod-recipes/tools/jmod_pack.py",
+      "path": "make/m3/tooling/jmod-recipes/tools/jmod_pack.py",
       "sha256": "8acdc46eaa0cac0861384d6caf252d1a2f763c80d09b68932177e1dac598bfaf"
     },
     {
-      "path": "m3/tooling/jmod-recipes/tools/jmod_image.py",
+      "path": "make/m3/tooling/jmod-recipes/tools/jmod_image.py",
       "sha256": "407622e9a4db86f1b9abae2e451638713b151f14256190c0e28fe7d0739eb7cf"
     },
     {
-      "path": "m3/tooling/module-packs/tool_packs.py",
+      "path": "make/m3/tooling/module-packs/tool_packs.py",
       "sha256": "24edd66788009d00eddcae9b2ba1bc61fd492b28aefb5f34c1439eff9e6b5acf"
     },
     {
-      "path": "m3/tooling/module-packs/kernel/src/main/java/jdk/m3/tools/modulepack/M3ModuleArtifact.java",
+      "path": "make/m3/tooling/module-packs/kernel/src/main/java/jdk/m3/tools/modulepack/M3ModuleArtifact.java",
       "sha256": "0da80eb22f2c356089d7da5c914b3bf939d9723a9aee7708e2de5d79cc117439"
     },
     {
-      "path": "m3/tooling/module-packs/kernel/src/main/java/jdk/m3/tools/modulepack/M3ModuleGraph.java",
+      "path": "make/m3/tooling/module-packs/kernel/src/main/java/jdk/m3/tools/modulepack/M3ModuleGraph.java",
       "sha256": "c1fa4ca74d190654fabb662db83a61ab9b0cdf617da5e0806ff96b5d99b015ac"
     },
     {
-      "path": "m3/tooling/module-packs/kernel/src/main/java/jdk/m3/tools/modulepack/M3ModuleInspector.java",
+      "path": "make/m3/tooling/module-packs/kernel/src/main/java/jdk/m3/tools/modulepack/M3ModuleInspector.java",
       "sha256": "6243fd822320cbbc8cf64855d06247f84f73e17a2e2b8655855033eadaee8b01"
     },
     {
-      "path": "m3/tooling/module-packs/kernel/src/main/java/jdk/m3/tools/modulepack/M3ModuleInventory.java",
+      "path": "make/m3/tooling/module-packs/kernel/src/main/java/jdk/m3/tools/modulepack/M3ModuleInventory.java",
       "sha256": "f9f7d948de83d875b2e96ade22f9c40b680d972a53b224cdfc509640d855fdb2"
     },
     {
-      "path": "m3/tooling/module-packs/kernel/src/main/java/module-info.java",
+      "path": "make/m3/tooling/module-packs/kernel/src/main/java/module-info.java",
       "sha256": "f8c4096e7d38dec851e5aae6121dbd160aba89d99a7c2fe09eee57c6e9c084af"
     },
     {
-      "path": "m3/tooling/jmod-recipes/tools/descriptor_gen.py",
+      "path": "make/m3/tooling/jmod-recipes/tools/descriptor_gen.py",
       "sha256": "c9730d4efba66f2f78b051077571a81d15558c03e69e1dda69bfb6a802a2457d"
     },
     {
-      "path": "m3/tooling/jmod-recipes/tools/split_packages.py",
+      "path": "make/m3/tooling/jmod-recipes/tools/split_packages.py",
       "sha256": "8559a357fb2e3b06af13b1b3972166493aede2d77dc3611e84555a87ab068d9a"
     }
   ],
@@ -14473,79 +14473,79 @@
   },
   "legal_notices": [
     {
-      "path": "m3/runtime-integration/tornado/legal/ASM_9_7_SOURCE_NOTICES.txt",
+      "path": "make/m3/runtime-integration/tornado/legal/ASM_9_7_SOURCE_NOTICES.txt",
       "sha256": "9432ad5794673b7677579df67cdf3ae16495e2306c58b7fc5d7e4c2f454871ef"
     },
     {
-      "path": "m3/runtime-integration/tornado/legal/COMMONS_MATH3_LICENSE.txt",
+      "path": "make/m3/runtime-integration/tornado/legal/COMMONS_MATH3_LICENSE.txt",
       "sha256": "6976c88ee62b19950a70022bd8fbcc51f576fd9d7753fb3b8d10a485c624a389"
     },
     {
-      "path": "m3/runtime-integration/tornado/legal/COMMONS_MATH3_NOTICE.txt",
+      "path": "make/m3/runtime-integration/tornado/legal/COMMONS_MATH3_NOTICE.txt",
       "sha256": "d016929b952c4b2025e85f05043980e66316576deb226a37d33bf44a85ef1032"
     },
     {
-      "path": "m3/runtime-integration/tornado/legal/DEPENDENCIES.md",
+      "path": "make/m3/runtime-integration/tornado/legal/DEPENDENCIES.md",
       "sha256": "b1da3387ec8569a9b8ff4501bf8119434fc1ef99a01d28f449237f505f0e27f4"
     },
     {
-      "path": "m3/runtime-integration/tornado/legal/GRAAL_SDK_UPL_1.0.txt",
+      "path": "make/m3/runtime-integration/tornado/legal/GRAAL_SDK_UPL_1.0.txt",
       "sha256": "7d2369d11c040d7937191c1222d4910071fddf7413b1b4f743eee982e8ab63fd"
     },
     {
-      "path": "m3/runtime-integration/tornado/legal/TORNADOVM_LICENSE_APACHE2.txt",
+      "path": "make/m3/runtime-integration/tornado/legal/TORNADOVM_LICENSE_APACHE2.txt",
       "sha256": "c95bae1d1ce0235ecccd3560b772ec1efb97f348a79f0fbe0a634f0c2ccefe2c"
     },
     {
-      "path": "m3/runtime-integration/tornado/legal/TORNADOVM_LICENSE_GPLv2CE.txt",
+      "path": "make/m3/runtime-integration/tornado/legal/TORNADOVM_LICENSE_GPLv2CE.txt",
       "sha256": "3f64ffe97d7ad70cdf09557378394eb1c514fe3b94e12e8fcc0418fcb30b276d"
     },
     {
-      "path": "m3/runtime-integration/tornado/legal/TORNADOVM_LICENSE_MIT.txt",
+      "path": "make/m3/runtime-integration/tornado/legal/TORNADOVM_LICENSE_MIT.txt",
       "sha256": "f8185a0683554afcee1981963d06dd9d4012f109c52d0739eae3995410d7fd7d"
     },
     {
-      "path": "m3/runtime-integration/tornado/legal/asm-9.7.pom",
+      "path": "make/m3/runtime-integration/tornado/legal/asm-9.7.pom",
       "sha256": "de00115f1d84f3a0b2ee3a4b6f6192d066f86d185d67b9d1522f2c80feac5f00"
     },
     {
-      "path": "m3/runtime-integration/tornado/legal/collections-23.1.0-COPYRIGHTS.txt",
+      "path": "make/m3/runtime-integration/tornado/legal/collections-23.1.0-COPYRIGHTS.txt",
       "sha256": "2a802959a6dc0d5a94149d4667800a2c873a8714d8fd743a3b9f1d892e11510d"
     },
     {
-      "path": "m3/runtime-integration/tornado/legal/collections-23.1.0.pom",
+      "path": "make/m3/runtime-integration/tornado/legal/collections-23.1.0.pom",
       "sha256": "37b9c860ca1fa8eb75ad74ec8e0bae3a54c09d5ffd0948962bab080af239ae13"
     },
     {
-      "path": "m3/runtime-integration/tornado/legal/commons-math3-3.2.pom",
+      "path": "make/m3/runtime-integration/tornado/legal/commons-math3-3.2.pom",
       "sha256": "2cd0db7bce370c1404025cc013c11f8fd49f3f3c340a6d2dcf99d363d7948a69"
     },
     {
-      "path": "m3/runtime-integration/tornado/legal/compiler-23.1.0-COPYRIGHTS.txt",
+      "path": "make/m3/runtime-integration/tornado/legal/compiler-23.1.0-COPYRIGHTS.txt",
       "sha256": "8e794db402d3c79823a75cfb1f02b6596c5544d77a695b6d9039dacce350853a"
     },
     {
-      "path": "m3/runtime-integration/tornado/legal/compiler-23.1.0.pom",
+      "path": "make/m3/runtime-integration/tornado/legal/compiler-23.1.0.pom",
       "sha256": "424783614e675bdf2c9e573917966c3d7b99bf66ce65ab465840408c21936d62"
     },
     {
-      "path": "m3/runtime-integration/tornado/legal/dependency-source-custody.json",
+      "path": "make/m3/runtime-integration/tornado/legal/dependency-source-custody.json",
       "sha256": "6a4c1b5635f1ed1d387451b5350b933dc2403d7ddbaceba566799cfc20a2122d"
     },
     {
-      "path": "m3/runtime-integration/tornado/legal/truffle-compiler-23.1.0-COPYRIGHTS.txt",
+      "path": "make/m3/runtime-integration/tornado/legal/truffle-compiler-23.1.0-COPYRIGHTS.txt",
       "sha256": "269ff3aa319a3c05939725cd2e9c1dbd34db4de3f0ddbdcabf2ef7cad6eaf1d0"
     },
     {
-      "path": "m3/runtime-integration/tornado/legal/truffle-compiler-23.1.0.pom",
+      "path": "make/m3/runtime-integration/tornado/legal/truffle-compiler-23.1.0.pom",
       "sha256": "e2820f370b507a8b4cfa6f3188694fbcc07c6e9d1ee40eda3554d635642def1b"
     },
     {
-      "path": "m3/runtime-integration/tornado/legal/word-23.1.0-COPYRIGHTS.txt",
+      "path": "make/m3/runtime-integration/tornado/legal/word-23.1.0-COPYRIGHTS.txt",
       "sha256": "1c7a4dbe010bc033924483a8c62216c266475577e720eed8c80231df91210298"
     },
     {
-      "path": "m3/runtime-integration/tornado/legal/word-23.1.0.pom",
+      "path": "make/m3/runtime-integration/tornado/legal/word-23.1.0.pom",
       "sha256": "0f7156eee7cf3a60eab3b9d43f7bed36466c87fa306ff8bb4237bc55495a996d"
     }
   ]

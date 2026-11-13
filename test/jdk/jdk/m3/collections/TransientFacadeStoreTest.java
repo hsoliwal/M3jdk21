@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
-//FLLDCIM: RELOCATE - donor blob fd143d57abd0 at fd9a233680b4; recipe m3/collections/recipe/transient-facade-20261106/relocate.py v4
+//FLLDCIM: RELOCATE - donor blob fd143d57abd0 at fd9a233680b4; recipe make/m3/collections/recipe/transient-facade-20261106/relocate.py v4
 class TransientFacadeStoreTest {
 
     @Test

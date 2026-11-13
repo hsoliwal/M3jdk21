@@ -3,8 +3,8 @@ name: M3JDK21 original SWT EventTable indexed arrays
 on:
   pull_request:
     paths:
-      - 'm3/eclipse/swt/qualification/eventtable-20261021/**'
-      - 'm3/tooling/shared-frontend/recipe-custody/datasets/swt-event-table-m3-20261021/**'
+      - 'make/m3/eclipse/swt/qualification/eventtable-20261021/**'
+      - 'make/m3/tooling/shared-frontend/recipe-custody/datasets/swt-event-table-m3-20261021/**'
       - '.github/workflows/m3-swt-event-table-20261021.yml'
   workflow_dispatch:
 permissions:
@@ -30,7 +30,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          root="$PWD/m3/tooling/shared-frontend/recipe-custody"
+          root="$PWD/make/m3/tooling/shared-frontend/recipe-custody"
           mvn -B -ntp -f "$root/pom.xml" -Pcontract \
             -Dm3.dataset=swt-event-table-m3-20261021 \
             "-Drecipe.owner.root=$root/sdk-owner" verify
@@ -45,7 +45,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          root="$PWD/m3/tooling/shared-frontend/recipe-custody"
+          root="$PWD/make/m3/tooling/shared-frontend/recipe-custody"
           python3 "$root/receive.py" \
             --dataset swt-event-table-m3-20261021 \
             --recipe-owner "$root/sdk-owner" \

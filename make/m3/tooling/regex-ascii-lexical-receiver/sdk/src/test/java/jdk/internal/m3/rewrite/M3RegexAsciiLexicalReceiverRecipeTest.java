@@ -29,7 +29,7 @@ final class M3RegexAsciiLexicalReceiverRecipeTest {
     private static final Set<String> CHANGE = Set.of(
             "src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java",
             "test/jdk/java/util/regex/M3AutomatonDifferentialTest.java",
-            "m3/docs/name-mapping.json");
+            "doc/m3/name-mapping.json");
     private static final Set<String> KEEP = Set.of(
             "src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java",
             "src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java",

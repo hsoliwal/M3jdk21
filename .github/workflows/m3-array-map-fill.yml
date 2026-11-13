@@ -4,7 +4,7 @@ name: M3 array map fill
 on:
   pull_request:
     paths:
-      - 'm3/collections/qualification/array-map-fill-20261031/**'
+      - 'make/m3/collections/qualification/array-map-fill-20261031/**'
       - 'm3/collections/implementations/apache-hashed-map/**'
       - 'm3/collections/implementations/apache-linked-map/**'
       - 'm3/collections/implementations/apache-lru-map/**'
@@ -35,12 +35,12 @@ jobs:
             mvn -B -ntp -f m3/collections/implementations/$m/pom.xml compile
           done
       - name: Differential against Commons Collections 4.5.0 and java.util.LinkedHashMap, and the fixed point
-        run: mvn -B -ntp -f m3/collections/qualification/array-map-fill-20261031/pom.xml -DexcludedGroups=performance test
+        run: mvn -B -ntp -f make/m3/collections/qualification/array-map-fill-20261031/pom.xml -DexcludedGroups=performance test
       - name: Performance report (not a gate on shared runners)
         continue-on-error: true
-        run: mvn -B -ntp -f m3/collections/qualification/array-map-fill-20261031/pom.xml -Dgroups=performance test
+        run: mvn -B -ntp -f make/m3/collections/qualification/array-map-fill-20261031/pom.xml -Dgroups=performance test
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: array-map-perf
-          path: m3/collections/qualification/array-map-fill-20261031/target/perf/
+          path: make/m3/collections/qualification/array-map-fill-20261031/target/perf/

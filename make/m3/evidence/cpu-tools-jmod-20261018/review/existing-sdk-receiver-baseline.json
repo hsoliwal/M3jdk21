@@ -1,6 +1,6 @@
 {
   "baseline_revision": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
-  "path": "m3/tooling/jmod-recipes/tools/jmod_pack.py",
+  "path": "make/m3/tooling/jmod-recipes/tools/jmod_pack.py",
   "baseline_git_blob": "1b20225a72caf20a7c02f9ef1ca2cb068294bff6",
   "current_git_blob": "1b20225a72caf20a7c02f9ef1ca2cb068294bff6",
   "same_as_baseline": true,

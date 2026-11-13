@@ -21,6 +21,6 @@ for t in M3DeepReadOnlyCollectionSelfTest M3DeepReadOnlyCollectionTest M3Filtere
 "$J/java" -ea -jar "$CS" execute -cp "$GW/coll2/main;$GW/coll2/test" --select-package jdk.m3.collections --include-classname ".*(DeepReadOnlyCollection|FilteredNavigationBoundary|IndexPathMasksLong|ReadOnlyViewBoundary|LongHashSetAddAtom).*Test" --details=summary --disable-banner > $G/coll2/junit.txt 2>&1; log "coll2_junit rc=$? $(grep -E 'tests (successful|failed)' $G/coll2/junit.txt | tr -s ' ' | tr '\n' ' ')"
 for c in M3DeepReadOnlyCollectionSelfTest M3FilteredNavigationBoundarySelfTest M3IndexPathMasksLongSelfTest M3ReadOnlyViewBoundarySelfTest; do "$J/java" -ea -cp "$GW/coll2/main;$GW/coll2/test" jdk.m3.collections.$c > $G/coll2/$c.txt 2>&1; log "coll2_self $c rc=$? $(tail -1 $G/coll2/$c.txt | cut -c1-100)"; done
 export JAVA_HOME="C:/Program Files/Java/jdk-21"; export MAVEN_OPTS="-Dmaven.repo.local=S:/m3-scratch/eb-conv/m2"
-cd $WT/m3/collections/qualification/array-map-fill-20261031 && PATH="$J:$PATH" bash run.sh > $G/mvn_array_map_fill_run.log 2>&1; log "array_map_fill run.sh rc=$? $(grep -E 'Tests run:' $G/mvn_array_map_fill_run.log | tail -1 | cut -c1-120)"
+cd $WT/make/m3/collections/qualification/array-map-fill-20261031 && PATH="$J:$PATH" bash run.sh > $G/mvn_array_map_fill_run.log 2>&1; log "array_map_fill run.sh rc=$? $(grep -E 'Tests run:' $G/mvn_array_map_fill_run.log | tail -1 | cut -c1-120)"
 cd $WT && log "worktree changes after run.sh: $(git status --short | wc -l)"
 log end

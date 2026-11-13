@@ -21,11 +21,11 @@ final class M3Jep404EphemeralProofReceiverRecipeTest {
     private static final String WORKFLOW =
             ".github/workflows/m3-jep404-generational-shenandoah-inventory.yml";
     private static final String POLICY =
-            "m3/backports/recipes/jep-404-generational-shenandoah/MATERIALIZATION_POLICY.tsv";
+            "make/m3/backports/recipes/jep-404-generational-shenandoah/MATERIALIZATION_POLICY.tsv";
     private static final String README =
-            "m3/backports/recipes/jep-404-generational-shenandoah/README.md";
+            "make/m3/backports/recipes/jep-404-generational-shenandoah/README.md";
     private static final String TEST =
-            "m3/backports/test_jep404_inventory_policy.py";
+            "make/m3/backports/test_jep404_inventory_policy.py";
     private static final String PRE =
             "/jdk/m3/rewrite/backport/jep404-ephemeral-proof/pre/";
 
@@ -71,7 +71,7 @@ final class M3Jep404EphemeralProofReceiverRecipeTest {
     @Test
     void stalePreimageFailsWholeBatchAndUnrelatedFileStaysUntouched() throws IOException {
         var wrapper = new M3Jep404EphemeralProofReceiverRecipe();
-        var unrelated = file("m3/backports/UNRELATED.txt", "unchanged\n");
+        var unrelated = file("make/m3/backports/UNRELATED.txt", "unchanged\n");
         List<SourceFile> sources =
                 new ArrayList<>(
                         List.of(

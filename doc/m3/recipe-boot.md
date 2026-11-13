@@ -6,8 +6,8 @@ Copyright 2026 Hitesh Soliwal and contributors
 ## Retired from the M3jdk21 poms (2026-10-31, standalone)
 
 M3jdk21 builds, tests and releases from what it carries, so the `m3-recipe-boot` profile has been removed from all
-470 poms that held it (`m3/release/check_standalone.py`: D_MAVEN 470 -> 0). The 470 blocks were one byte-identical
-pattern, removed by `RETIRE_PROFILE v1` (`m3/tooling/standalone/retire_profile.py`). The profile was dead config here,
+470 poms that held it (`make/m3/release/check_standalone.py`: D_MAVEN 470 -> 0). The 470 blocks were one byte-identical
+pattern, removed by `RETIRE_PROFILE v1` (`make/m3/tooling/standalone/retire_profile.py`). The profile was dead config here,
 for two reasons:
 
 - It activates only when `.m3/recipe-boot.properties` exists, and that file is not in the repository.
@@ -103,7 +103,7 @@ The reusable source is reconciled to Synexia commit
 suite for every part and checking all receiving preconditions before writes.
 The full product inventory itself is not presented as a single qualified recipe.
 
-See `m3/qualification/recipe-boot-20261021/` for all-POM coverage, original and
+See `make/m3/qualification/recipe-boot-20261021/` for all-POM coverage, original and
 result hashes, exclusions, inheritance roots and application receipts. Historical
 upstream metadata, exact custody mirrors and before/after fixtures retain their
 original bytes. The recipe refuses a conflicting pre-existing boot profile.

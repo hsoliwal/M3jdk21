@@ -7,7 +7,7 @@ import java.util.function.LongPredicate;
 import jdk.m3.collections.LongSequence;
 
 /** Bound logical growth without changing the underlying primitive backend. */
-//FLLDCIM: RELOCATE - donor blob f96c3cc357db at d5ad5090d87e; recipe m3/collections/qualification/census2-t2-20261106/relocate.py v6
+//FLLDCIM: RELOCATE - donor blob f96c3cc357db at d5ad5090d87e; recipe make/m3/collections/qualification/census2-t2-20261106/relocate.py v6
 public final class BoundedLongSequence extends ForwardingLongSequence {
     private final LongSequence backend;
     private final int maximumSize;

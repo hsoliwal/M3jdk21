@@ -5,7 +5,7 @@ on:
     paths:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3MaskViewportKernel.java'
       - 'test/jdk/jdk/m3/collections/M3FrameJavaContract.java'
-      - 'm3/collections/qualification/viewport-frame/JAVA_FALLBACK_CURRENT_REVIEW.md'
+      - 'make/m3/collections/qualification/viewport-frame/JAVA_FALLBACK_CURRENT_REVIEW.md'
       - '.github/workflows/m3-viewport-frame-fallback.yml'
   workflow_dispatch:
 permissions:

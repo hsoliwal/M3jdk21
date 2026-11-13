@@ -19,7 +19,7 @@
     "jdk": 21,
     "status": "NOT_RUN_IN_THIS_SESSION",
     "required_before_promotion": [
-      "mvn -f m3/collections/qualification/deque-zero-mask-20261018/pom.xml test",
+      "mvn -f make/m3/collections/qualification/deque-zero-mask-20261018/pom.xml test",
       "compile and run M3IndexMaskCompactorSelfTest with Java backend",
       "run the same self-test with actual JNI backend and -Xcheck:jni",
       "run native selector under C17 warnings-as-errors and UBSan",

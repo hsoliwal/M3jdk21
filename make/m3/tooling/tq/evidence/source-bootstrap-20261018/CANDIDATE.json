@@ -34,63 +34,63 @@
       "license": "Apache-2.0"
     },
     {
-      "path": "m3/tooling/tq-sync/plan.json",
+      "path": "make/m3/tooling/tq-sync/plan.json",
       "before_sha256": "284a25961f678010247d90f869c26e6566c367eb65b9e1b472c38279003bc032",
       "proposed_sha256": "116e3d1374c4d816ddb9b3509dc11bf6954a3769c58fd32fd00cb8f236c584aa",
       "mode": "0644",
       "license": "Apache-2.0"
     },
     {
-      "path": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/01-m3-tq.yml.txt",
+      "path": "make/m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/01-m3-tq.yml.txt",
       "before_sha256": "923c89b5626d73ac4fd053cea7b60e57ed7c7ae1217938926679feeeebe84bd8",
       "proposed_sha256": "67573f9e38b1ccd595e8c4be07b68f38a4cbe3d44eb81484d6f18d5e476ac60a",
       "mode": "0644",
       "license": "Apache-2.0"
     },
     {
-      "path": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/11-plan.json.txt",
+      "path": "make/m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/11-plan.json.txt",
       "before_sha256": "8e6db1b290e9ee55bc028ce51e4aae85773cb8be167b7193ee721b031f46be4b",
       "proposed_sha256": "50d583d5ff9f0975e8d1970eaaf9613c9694ccc0e9664f9c2f92f5e901ba0a39",
       "mode": "0644",
       "license": "Apache-2.0"
     },
     {
-      "path": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/12-manifest.tsv.txt",
+      "path": "make/m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/12-manifest.tsv.txt",
       "before_sha256": "61f9431a2426d37e910d64fdf337d604d3cc5af31bb25bb546acdc0d07a1fd38",
       "proposed_sha256": "d4748d025cf93a35fb50695d7ca85728a1b9a8b319beed4f55a4d4ca64070595",
       "mode": "0644",
       "license": "Apache-2.0"
     },
     {
-      "path": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/16-workflow.yml.txt.txt",
+      "path": "make/m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/16-workflow.yml.txt.txt",
       "before_sha256": "923c89b5626d73ac4fd053cea7b60e57ed7c7ae1217938926679feeeebe84bd8",
       "proposed_sha256": "67573f9e38b1ccd595e8c4be07b68f38a4cbe3d44eb81484d6f18d5e476ac60a",
       "mode": "0644",
       "license": "Apache-2.0"
     },
     {
-      "path": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/manifest.tsv",
+      "path": "make/m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/manifest.tsv",
       "before_sha256": "b40e5e2fd6cbf8ad487f10ecd60bfdb9f893da88578194a1d8ad1221d7815740",
       "proposed_sha256": "5b4e8a514d7c44dd46447e76fde8bbf9a8cec9f2a1dacdc9e2a9d3bfe814d525",
       "mode": "0644",
       "license": "Apache-2.0"
     },
     {
-      "path": "m3/tooling/tq/plan.json",
+      "path": "make/m3/tooling/tq/plan.json",
       "before_sha256": "8e6db1b290e9ee55bc028ce51e4aae85773cb8be167b7193ee721b031f46be4b",
       "proposed_sha256": "50d583d5ff9f0975e8d1970eaaf9613c9694ccc0e9664f9c2f92f5e901ba0a39",
       "mode": "0644",
       "license": "Apache-2.0"
     },
     {
-      "path": "m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/manifest.tsv",
+      "path": "make/m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/manifest.tsv",
       "before_sha256": "61f9431a2426d37e910d64fdf337d604d3cc5af31bb25bb546acdc0d07a1fd38",
       "proposed_sha256": "d4748d025cf93a35fb50695d7ca85728a1b9a8b319beed4f55a4d4ca64070595",
       "mode": "0644",
       "license": "Apache-2.0"
     },
     {
-      "path": "m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/workflow.yml.txt",
+      "path": "make/m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/workflow.yml.txt",
       "before_sha256": "923c89b5626d73ac4fd053cea7b60e57ed7c7ae1217938926679feeeebe84bd8",
       "proposed_sha256": "67573f9e38b1ccd595e8c4be07b68f38a4cbe3d44eb81484d6f18d5e476ac60a",
       "mode": "0644",

@@ -32,15 +32,15 @@ public final class M3Jep497SharedOwnerSplitRecipe
             new Target("workflow.before.yml","workflow.after.yml",
                     "11425741b788db3806e3c71cfcf02327f6bcc9b6",
                     "771c834dbfb5f0a7930eb8f91a3df583fa58699f"),
-            "m3/backports/recipes/jep-497-mldsa/README.md",
+            "make/m3/backports/recipes/jep-497-mldsa/README.md",
             new Target("README.before.md","README.after.md",
                     "aa337ea74e20be8e94dd048f8e573a9ab1ef0777",
                     "6d40957c80c46b78cafb34d5f0403590c20626a9"),
-            "m3/backports/recipes/jep-497-mldsa/MATERIALIZE_PATHS.txt",
+            "make/m3/backports/recipes/jep-497-mldsa/MATERIALIZE_PATHS.txt",
             new Target("MATERIALIZE.before.txt","MATERIALIZE.after.txt",
                     "c5d456d93c3ea10bde4cb9e8ab1a0860f5876548",
                     "0adcadd7ccef2fa2101140ec8ddb3f51dae38182"),
-            "m3/backports/recipes/jep-497-mldsa/SHARED_OWNER_PATHS.txt",
+            "make/m3/backports/recipes/jep-497-mldsa/SHARED_OWNER_PATHS.txt",
             new Target(null,"SHARED_OWNER_PATHS.txt","ABSENT",
                     "c55b5bafbe58dbe71f0eb4951382d23b36a4226d"));
 

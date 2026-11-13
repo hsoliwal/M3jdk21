@@ -74,7 +74,7 @@ First execute the canonical Maven/OpenRewrite source recipe and receive its exac
 Then run the emitted verifier from the repository root:
 
 ```sh
-python3 m3/runtime-integration/integrated-collections/verify.py \
+python3 make/m3/runtime-integration/integrated-collections/verify.py \
   --repository . --java-home /path/to/jdk21 \
   --temp-directory /path/to/compiler-scratch \
   --native-temp-directory /path/to/executable-scratch \
@@ -96,7 +96,7 @@ those applicable product gates execute. The active ordered phase remains unchang
 
 The canonical source owner is
 `synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018` in Synexia;
-the target holds an exact pinned proof mirror under `m3/tooling/integrated-utilities/recipe`.
+the target holds an exact pinned proof mirror under `make/m3/tooling/integrated-utilities/recipe`.
 The existing source-seal engine is reused byte-for-byte. Every postimage is emitted by
 actual Maven/OpenRewrite execution, admits exact before/after hashes, and must reach a
 no-change second execution. Fix the recipe template and regenerate for any subsequent

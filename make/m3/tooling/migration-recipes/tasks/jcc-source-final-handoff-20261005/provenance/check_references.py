@@ -12,7 +12,7 @@ BASE = HERE.parent
 ROOT = HERE / 'overlay'
 OLD = BASE / 'candidate'
 PUB = BASE.parent / 'publication-current'
-CRATE = ROOT / 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005'
+CRATE = ROOT / 'make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005'
 SOURCE = 'd1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906'
 DEST = 'df06cdee5a8526f573b3ad89622824d0b49e2f25'
 OWNER = 'da958d00d24154c0db87beca0ec80a7df2b43b73'
@@ -35,15 +35,15 @@ def main():
     canonical=(json.dumps({k:v for k,v in plan.items() if k!='plan_sha256'},sort_keys=True,separators=(',',':'),ensure_ascii=True)+'\n').encode()
     assert hashlib.sha256(canonical).hexdigest()==plan['plan_sha256']=='af65912789780e214f09644b38f542db5f7670b83ee1fada228bce08f8f9b30e'
     assert plan['source_commit']==SOURCE and plan['target_commit']==DEST
-    previous=load(OLD/'m3/docs/name-mapping.json'); current=load(ROOT/'m3/docs/name-mapping.json')
+    previous=load(OLD/'doc/m3/name-mapping.json'); current=load(ROOT/'doc/m3/name-mapping.json')
     before={r['id']:r for r in previous['migration']['records']}; rows={r['id']:r for r in current['migration']['records']}
     assert list(before)==list(rows) and len(rows)==46
     assert {k:v for k,v in previous.items() if k!='migration'}=={k:v for k,v in current.items() if k!='migration'}
     assert {k:v for k,v in previous['migration'].items() if k!='records'}=={k:v for k,v in current['migration'].items() if k!='records'}
     assert len(current['migration']['gates'])==20
     for rid in set(rows)-set(IDS): assert rows[rid]==before[rid],rid
-    oldbind=load(OLD/'m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json')
-    binding=load(ROOT/'m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json')
+    oldbind=load(OLD/'make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json')
+    binding=load(ROOT/'make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json')
     assert all(v is False for v in binding['acceptance'].values())
     assert binding['source_commit']==SOURCE and binding['destination_commit']==DEST
     assert binding['source_execution']['input_remote_revision']=='0b8dc32b9e8a616b7b7141bbdd88722839dc64bc'
@@ -80,7 +80,7 @@ def main():
         elif path in acquired:
             check(ROOT/path,acquired[path]); assert (ROOT/path).read_bytes()==Path(acquired[path]['local_path']).read_bytes(); basis='PINNED_DA958_ACQUISITION'
         else:
-            assert path.startswith('m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/'); basis='E3_RECEIPT_COPY'
+            assert path.startswith('make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/'); basis='E3_RECEIPT_COPY'
         refs.append({'reference':location,'path':path,**got,'basis':basis})
     def nested(value,loc):
         if isinstance(value,dict):
@@ -88,7 +88,7 @@ def main():
             for k,v in value.items(): nested(v,loc+'.'+k)
         elif isinstance(value,list):
             for i,v in enumerate(value): nested(v,f'{loc}[{i}]')
-    oldplan=load(OLD/'m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan.json')
+    oldplan=load(OLD/'make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan.json')
     assert plan['guards']==oldplan['guards'] and len(plan['guards'])==7
     for i,g in enumerate(plan['guards']): dest(g,f'plan.guards[{i}]')
     fields=load(HERE/'source-binding-review/SOURCE_FIELDS_AND_PROOFS.json')
@@ -137,7 +137,7 @@ def main():
     assert len(binding['source_publication']['receipts'])==8
     coverage=binding['source_root_accounting']
     dest({'path':coverage['coverage_receipt_path'],'sha256':coverage['coverage_receipt_sha256']},'binding.source_root_accounting.coverage')
-    for path in ('m3/docs/jcc-source-handoff.md','m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json'):
+    for path in ('doc/m3/jcc-source-handoff.md','make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json'):
         dest({'path':path,'sha256':outputs[path]['after']['sha256']},'blocked_record.observation')
     proofs=[]; proofinv={x['path']:x for x in fields['proof_references']}
     for i,ref in enumerate(binding['source_execution']['proofs']):

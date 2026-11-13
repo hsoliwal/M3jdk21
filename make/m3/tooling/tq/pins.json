@@ -23,11 +23,11 @@
     }
   },
   "dependencies": {
-    "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java": {
+    "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java": {
       "sha256": "fd376487d4497fef3f3f058584cd04abb5622abcff14364600b96a53df588862",
       "git_blob": "c143dfd295453861105682bc8409c3c72c582a04"
     },
-    "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java": {
+    "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java": {
       "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
       "git_blob": "3fdc75a71290e2fd1659bfbc7fa532828363275b"
     },
@@ -58,7 +58,7 @@
   },
   "successor": {
     "parent": "1c389e31805fb4faf5d9fe256c8dc6797a2eadff",
-    "recipe": "m3/tooling/tq-sync",
+    "recipe": "make/m3/tooling/tq-sync",
     "retained_owner_sha256": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155",
     "history": [
       "b68391863561ce80169663cd2b49c2845e084b74",

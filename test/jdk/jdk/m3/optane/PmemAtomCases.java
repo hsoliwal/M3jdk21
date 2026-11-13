@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  * oracle runs under JUnit and without an external test dependency. Timing
  * separately measures each operation without a pass/fail throughput limit.
  */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/36827ee8a798ef6ce07f6fc55a2ac371b1382c06/m3-pmem-sdk/src/test/java/test/PmemAtomCases.java blob bc3b13ce4f1b; recipe m3/optane/recipe/pmem-region-core-20261106/relocate.py v2
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/36827ee8a798ef6ce07f6fc55a2ac371b1382c06/m3-pmem-sdk/src/test/java/test/PmemAtomCases.java blob bc3b13ce4f1b; recipe make/m3/optane/recipe/pmem-region-core-20261106/relocate.py v2
 public final class PmemAtomCases {
     private PmemAtomCases() {}
     private static volatile long sink;

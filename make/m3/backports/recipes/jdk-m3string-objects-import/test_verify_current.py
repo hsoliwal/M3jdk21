@@ -16,7 +16,7 @@ SPEC.loader.exec_module(VERIFY)
 
 class CursorObjectsReceiverProof(unittest.TestCase):
     def setUp(self) -> None:
-        self.root = Path(__file__).resolve().parents[4]
+        self.root = Path(__file__).resolve().parents[5]
         self.original = (self.root / VERIFY.RELATIVE).read_bytes()
 
     def test_source_on_current_branch_is_exact_postimage(self) -> None:

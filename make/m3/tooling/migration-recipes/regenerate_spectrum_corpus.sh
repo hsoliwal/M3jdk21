@@ -2,7 +2,7 @@
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 # SPDX-License-Identifier: Apache-2.0
 #
-# Owning generator for m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/atom/spectrum/CORPUS.tsv
+# Owning generator for make/m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/atom/spectrum/CORPUS.tsv
 # (consumed by jdk.m3.rewrite.m3.M3PureIntRepositoryCorpusTest.verifyPin).
 #
 # Keeps the pinned path and category columns of the existing CORPUS.tsv and recomputes

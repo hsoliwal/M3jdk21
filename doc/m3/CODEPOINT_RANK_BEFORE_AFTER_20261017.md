@@ -12,7 +12,7 @@ This is a concrete product source comparison, not a cross-JDK marketing claim.
   Java-snapshot recipe, post SHA-256 \`43f65f6e578dc5b3ad59046a52ea70bffae3bbff855c861bc2ffd24d1f4bf3d2\`.
 - Same Java 21 runner (GitHub Actions \`38998405911\`), precomputed geometry objects,
   no extra character copy or M3 runtime state in the timed method. Rerun locally with:
-  \`python3 m3/runtime-integration/codepoint-rank/measure_before_after.py\`
+  \`python3 make/m3/runtime-integration/codepoint-rank/measure_before_after.py\`
   using a checkout that contains the baseline Git commit.
 - **Exact source extraction:** test loads baseline bytes via \`git show <master-baseline>:<source>\`,
   extracts the pre-existing \`Geometry\` and \`lowerBound\`, then repeats for receiver

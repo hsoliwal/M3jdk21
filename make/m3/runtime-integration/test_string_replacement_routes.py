@@ -8,8 +8,8 @@ import subprocess
 import tempfile
 import unittest
 
-ROOT = Path(__file__).resolve().parents[2]
-JAVA_SOURCE = ROOT / 'm3/runtime-integration/src/main/java/M3StringReplacementRoutes.java'
+ROOT = Path(__file__).resolve().parents[3]
+JAVA_SOURCE = ROOT / 'make/m3/runtime-integration/src/main/java/M3StringReplacementRoutes.java'
 STRING_SOURCE = ROOT / 'src/java.base/share/classes/java/lang/String.java'
 
 

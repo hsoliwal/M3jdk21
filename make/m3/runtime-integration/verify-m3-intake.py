@@ -7,10 +7,10 @@ import csv
 import json
 from pathlib import Path
 
-POLICY = "m3/docs/m3-intake-policy.tsv"
-DIRECT = "m3/docs/m3-direct-copy-review.tsv"
-MAPPING = "m3/docs/name-mapping.json"
-FOSS = "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
+POLICY = "doc/m3/m3-intake-policy.tsv"
+DIRECT = "doc/m3/m3-direct-copy-review.tsv"
+MAPPING = "doc/m3/name-mapping.json"
+FOSS = "make/m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
 LICENSE_INFO = "ADDITIONAL_LICENSE_INFO"
 
 REQUIRED_MODES = {
@@ -131,7 +131,7 @@ def verify(root: Path) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--repo", type=Path, default=Path(__file__).resolve().parents[2])
+    parser.add_argument("--repo", type=Path, default=Path(__file__).resolve().parents[3])
     args = parser.parse_args()
     verify(args.repo.resolve())
 

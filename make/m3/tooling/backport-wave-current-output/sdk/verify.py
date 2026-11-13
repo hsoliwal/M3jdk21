@@ -20,15 +20,15 @@ METHODS = ["bothPartialStatesRoundTripAndReachFixedPointsInBothOrders",
            "exactCurrentWorkflowPinsPreserveHistoricalReceipt"]
 SUITES = {SUITE: METHODS}
 OWNER_GIT = {
-    "m3/backports/test_compatibility_policy.py": "cd7b5a28ce3ec1f5a4475a145b40a3074b1a5c21",
-    "m3/backports/compatibility_policy.py": "89673d65b2ad42fc694d809d5c6f4d0eab7adbd8",
-    "m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv": "db7579c96d7dfc9c0c70fb4b28773cf89bad76ca",
-    "m3/backports/JEP_CATALOGUE.tsv": "a0ef9aa95da17a19c3df8ab8aded355fad4f4598",
-    "m3/backports/RELEASE_JEP_AUTHORITY.tsv": "745a26772b8050c28dd93d05c724bfa9c2ad5e18",
-    "m3/backports/test_backport_execution_waves.py": "7a3b961caa4302a2ebd1675360e29e6b1df9697b",
-    "m3/backports/backport_execution_waves.py": "cc2a6ceb90b56d3b05d1307e705586c8d7cf1b40",
-    "m3/backports/BACKPORT_EXECUTION_WAVES.md": "428d775ca476b187dceb26a012401b11b975bbbb",
-    "m3/compatibility/m3-wave-admission-pin-20261014.tsv": "60c11d68f482efadeadbbe6f58bfac9ec9aa0090",
+    "make/m3/backports/test_compatibility_policy.py": "cd7b5a28ce3ec1f5a4475a145b40a3074b1a5c21",
+    "make/m3/backports/compatibility_policy.py": "89673d65b2ad42fc694d809d5c6f4d0eab7adbd8",
+    "make/m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv": "db7579c96d7dfc9c0c70fb4b28773cf89bad76ca",
+    "make/m3/backports/JEP_CATALOGUE.tsv": "a0ef9aa95da17a19c3df8ab8aded355fad4f4598",
+    "make/m3/backports/RELEASE_JEP_AUTHORITY.tsv": "745a26772b8050c28dd93d05c724bfa9c2ad5e18",
+    "make/m3/backports/test_backport_execution_waves.py": "7a3b961caa4302a2ebd1675360e29e6b1df9697b",
+    "make/m3/backports/backport_execution_waves.py": "cc2a6ceb90b56d3b05d1307e705586c8d7cf1b40",
+    "make/m3/backports/BACKPORT_EXECUTION_WAVES.md": "428d775ca476b187dceb26a012401b11b975bbbb",
+    "make/m3/compatibility/m3-wave-admission-pin-20261014.tsv": "60c11d68f482efadeadbbe6f58bfac9ec9aa0090",
     ".github/workflows/m3jdk21-backport-wave-admission.yml": "c79022773165a4046a6078363bcb27ef4beb7d1d"
 }
 WAVE_OWNER = ".github/workflows/m3jdk21-backport-wave-admission.yml"

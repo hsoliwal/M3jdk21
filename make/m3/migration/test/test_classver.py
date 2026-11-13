@@ -17,10 +17,10 @@ import tempfile
 import unittest
 from unittest import mock
 
-SOURCE_ROOT = Path(__file__).resolve().parents[3]
-ADAPTER = "m3/migration/classver.py"
-LEDGER = "m3/migration/classver-evidence.json"
-HELPER = "m3/migration/recipe.py"
+SOURCE_ROOT = Path(__file__).resolve().parents[4]
+ADAPTER = "make/m3/migration/classver.py"
+LEDGER = "make/m3/migration/classver-evidence.json"
+HELPER = "make/m3/migration/recipe.py"
 
 
 def git(root, *arguments, check=True):
@@ -128,9 +128,9 @@ class ClassVerEvidenceTest(unittest.TestCase):
     def test_active_code_and_unlisted_same_directory_files_still_fail(self):
         paths = (
             "src/Whitespace.java",
-            "m3/tooling/migration-recipes/unlisted-control.xml",
-            "m3/migration/intake-20261005/current-752-ci/unlisted-proof.log",
-            "m3/migration/intake-20261005/current-752-ci/unlisted[1]*.txt",
+            "make/m3/tooling/migration-recipes/unlisted-control.xml",
+            "make/m3/migration/intake-20261005/current-752-ci/unlisted-proof.log",
+            "make/m3/migration/intake-20261005/current-752-ci/unlisted[1]*.txt",
         )
         for relative in paths:
             with self.subTest(path=relative):

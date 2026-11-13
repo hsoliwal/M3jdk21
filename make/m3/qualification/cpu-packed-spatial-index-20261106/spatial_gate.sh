@@ -21,7 +21,7 @@ HERE=$(cd "$(dirname "$0")" && pwd); ROOT=$(cd "$HERE/../../.." && pwd)
 J="${JDK21_HOME:-C:/Program Files/Java/jdk-21}/bin"; JI="${JDK21_HOME:-C:/Program Files/Java/jdk-21}/include"
 TD=${TMPDIR_M3:-S:/m3-scratch/eb-conv/spatial/tmp}; mkdir -p "$TD"; export TMP="$TD" TEMP="$TD" TMPDIR="$TD"
 JT="-Djava.io.tmpdir=$TD"; JCT="-J-Djava.io.tmpdir=$TD"
-T=m3/tooling/module-packs; CT=$T/cpu-tools; PKG=jdk/m3/tools/cpu
+T=make/m3/tooling/module-packs; CT=$T/cpu-tools; PKG=jdk/m3/tools/cpu
 rm -rf "$X"; mkdir -p "$X"; A=$(cygpath -m "$X")
 row() { awk -F'\t' -v r="$1" -v c="$2" '$1 == r {print $c}' "$HERE/PROVENANCE.tsv"; }
 
@@ -33,7 +33,7 @@ if [ -n "${CRATE_CHAIN:-}" ]; then
 CRATE=$(dirname "$(row CLASS 4)"); CRATE_TEXT=$(echo "$CRATE" | sed 's#/hash-pinned-java/#/hash-pinned-text/#')
 python -I "$CRATE_CHAIN" "$CRATE,$CRATE_TEXT" \
   "$(git -C "$ROOT" rev-parse --path-format=absolute --git-common-dir)" "$R" \
-  "$(git -C "$ROOT" rev-parse fe35ea98841^)" "$ROOT/m3/tooling/jdk-naming" "$X/chain" > "$X/chain.out"
+  "$(git -C "$ROOT" rev-parse fe35ea98841^)" "$ROOT/make/m3/tooling/jdk-naming" "$X/chain" > "$X/chain.out"
 grep -F "$(basename "$(row CLASS 7)")" "$X/chain.out"
 cmp "$X/chain/$(row CLASS 7)" "$ROOT/$(row CLASS 7)" && echo "class bytes == chain output (NEW)"
 CIN="$X/chain/$CT/fixtures/$(basename "$(row CONTRACT 4)" .txt)"

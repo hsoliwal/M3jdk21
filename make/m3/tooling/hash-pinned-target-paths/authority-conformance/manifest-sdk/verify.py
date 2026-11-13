@@ -15,7 +15,7 @@ import xml.etree.ElementTree as ET
 ROOT = Path(__file__).resolve().parent
 ADMISSION = "24bdaa2c54d7ff2da53f3edfcf068ddd4ffa70f7"
 RESOURCE = "src/main/resources/jdk/internal/m3/rewrite/release-jep-manifest-order-20261020"
-TARGET = "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/manifest.tsv"
+TARGET = "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/manifest.tsv"
 SUITE = "jdk.internal.m3.rewrite.M3ReleaseJepManifestOrderRecipeTest"
 METHODS = ["bothPartialStatesRoundTripAndReachFixedPointsInBothOrders",
            "everyOwnerRefusesDriftMissingAndDuplicateWithoutMutation",

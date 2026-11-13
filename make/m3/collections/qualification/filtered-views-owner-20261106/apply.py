@@ -26,7 +26,7 @@ cursors):
   comparator lookup runs inside it (the differential showed a key-based own remove re-entered by a clearing
   comparator: the lookup misses, the clear passes for the erase and the cursor walks released slots).
 
-Engine of m3/collections/qualification/census2-c2-20261106/apply.py v1 (#2565 lineage): anchored "sub" edits, every
+Engine of make/m3/collections/qualification/census2-c2-20261106/apply.py v1 (#2565 lineage): anchored "sub" edits, every
 anchor exactly once, LF payloads re-joined with the preimage's line ending; every rule names the git blob of its
 preimage at the base commit; a target must equal the preimage (applied) or the postimage (no-op), anything else is a
 drifted preimage and the recipe refuses (exit 2) without writing. Idempotent: a second run reports changed=0 and
@@ -444,7 +444,7 @@ def run(root: Path, check: bool) -> int:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--root", default=str(RECIPE_DIR.parents[3]), help="repository root (default: four up)")
+    parser.add_argument("--root", default=str(RECIPE_DIR.parents[4]), help="repository root (default: four up)")
     parser.add_argument("--check", action="store_true", help="write nothing; exit 1 when a run would change a file")
     args = parser.parse_args(argv)
     try:

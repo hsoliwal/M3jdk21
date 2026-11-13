@@ -5,19 +5,19 @@ on:
     branches:
       - "m3/recover-jep467-current-master-20261005"
     paths:
-      - "m3/backports/generate_recipe_crates.py"
-      - "m3/backports/test_generate_recipe_crates.py"
-      - "m3/backports/recipes/jep-467-markdown/**"
-      - "m3/tooling/migration-recipes/**"
-      - "m3/tooling/backport-dag/**"
+      - "make/m3/backports/generate_recipe_crates.py"
+      - "make/m3/backports/test_generate_recipe_crates.py"
+      - "make/m3/backports/recipes/jep-467-markdown/**"
+      - "make/m3/tooling/migration-recipes/**"
+      - "make/m3/tooling/backport-dag/**"
       - ".github/workflows/m3-jep467-markdown-inventory.yml"
   pull_request:
     paths:
-      - "m3/backports/generate_recipe_crates.py"
-      - "m3/backports/test_generate_recipe_crates.py"
-      - "m3/backports/recipes/jep-467-markdown/**"
-      - "m3/tooling/migration-recipes/**"
-      - "m3/tooling/backport-dag/**"
+      - "make/m3/backports/generate_recipe_crates.py"
+      - "make/m3/backports/test_generate_recipe_crates.py"
+      - "make/m3/backports/recipes/jep-467-markdown/**"
+      - "make/m3/tooling/migration-recipes/**"
+      - "make/m3/tooling/backport-dag/**"
       - ".github/workflows/m3-jep467-markdown-inventory.yml"
   workflow_dispatch:
 
@@ -65,7 +65,7 @@ jobs:
           repo = Path(__import__("os").environ["UPSTREAM"])
           expected = [
               line.strip()
-              for line in Path("m3/backports/recipes/jep-467-markdown/PATHS.txt")
+              for line in Path("make/m3/backports/recipes/jep-467-markdown/PATHS.txt")
                   .read_text(encoding="utf-8").splitlines()
               if line.strip()
           ]
@@ -95,7 +95,7 @@ jobs:
           repo = Path(os.environ["UPSTREAM"])
           paths = [
               line.strip()
-              for line in Path("m3/backports/recipes/jep-467-markdown/PATHS.txt")
+              for line in Path("make/m3/backports/recipes/jep-467-markdown/PATHS.txt")
                   .read_text(encoding="utf-8").splitlines()
               if line.strip()
           ]
@@ -118,18 +118,18 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          cd m3/backports
+          cd make/m3/backports
           python3 -m unittest -v test_generate_recipe_crates.py
 
       - name: Generate candidate FILE atoms from JDK23 GA
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/backports/generate_recipe_crates.py \
+          python3 make/m3/backports/generate_recipe_crates.py \
             --repo "$UPSTREAM" \
             --release 23 \
-            --paths-file m3/backports/recipes/jep-467-markdown/PATHS.txt \
-            --ga-reconciliation m3/backports/recipes/jep-467-markdown/GA_RECONCILIATION.json \
+            --paths-file make/m3/backports/recipes/jep-467-markdown/PATHS.txt \
+            --ga-reconciliation make/m3/backports/recipes/jep-467-markdown/GA_RECONCILIATION.json \
             --crate-size 1 \
             --include-text \
             --out target/jep467/file-atoms
@@ -141,13 +141,13 @@ jobs:
           python3 - <<'PY'
           import sys
           from pathlib import Path
-          sys.path.insert(0, "m3/backports")
+          sys.path.insert(0, "make/m3/backports")
           from generate_recipe_crates import _verify_ga_accounting
 
           counts = _verify_ga_accounting(
               Path("target/jep467/file-atoms"),
-              Path("m3/backports/recipes/jep-467-markdown/PATHS.txt"),
-              Path("m3/backports/recipes/jep-467-markdown/GA_RECONCILIATION.json"),
+              Path("make/m3/backports/recipes/jep-467-markdown/PATHS.txt"),
+              Path("make/m3/backports/recipes/jep-467-markdown/GA_RECONCILIATION.json"),
           )
           if counts["selected"] != 251 or counts["history_only"] != 1:
               raise SystemExit("JEP467 declared-path/history denominator drift")
@@ -164,28 +164,28 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f m3/pom.xml -pl tooling/migration-recipes -am \
+          mvn -B -ntp -f make/m3/pom.xml -pl tooling/migration-recipes -am \
             -Dtest=M3RecipeScopeDeclarationTest \
             -Dsurefire.failIfNoSpecifiedTests=false test
 
       - name: Build and install the complete DAG dependency reactor
         run: |
-          mvn -B -ntp -f m3/pom.xml -pl tooling/backport-dag -am install
+          mvn -B -ntp -f make/m3/pom.xml -pl tooling/backport-dag -am install
 
       - name: Validate evidence-bound JEP467 composition DAG
         run: |
-          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
+          mvn -B -ntp -f make/m3/tooling/backport-dag/pom.xml \
             -Dexec.mainClass=jdk.m3.tooling.dag.M3PacketCollectionMain \
-            -Dexec.args="validate $PWD/m3/backports/recipes/jep-467-markdown/collection.tsv" \
+            -Dexec.args="validate $PWD/make/m3/backports/recipes/jep-467-markdown/collection.tsv" \
             exec:java
 
       - name: Project JEP467 DAG to Camel Airflow and Drools
         run: |
           set -euo pipefail
           mkdir -p target/jep467/projections
-          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
+          mvn -B -ntp -f make/m3/tooling/backport-dag/pom.xml \
             -Dexec.mainClass=jdk.m3.tooling.dag.M3PacketCollectionMain \
-            -Dexec.args="project $PWD/m3/backports/recipes/jep-467-markdown/collection.tsv $PWD/target/jep467/projections" \
+            -Dexec.args="project $PWD/make/m3/backports/recipes/jep-467-markdown/collection.tsv $PWD/target/jep467/projections" \
             exec:java
           test -s target/jep467/projections/M3BackportRoutes.java
           test -s target/jep467/projections/m3_backport_dag.py

@@ -18,7 +18,7 @@ import sys
 import zipfile
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[3]
+ROOT = HERE.parents[4]
 MODULE = "jdk.m3.nlp.search"
 EPOCH = (2000, 1, 1, 0, 0, 0)
 
@@ -41,17 +41,17 @@ def write_json(path, value):
 
 
 _RECEIVER_LOCK_SHA256 = "2b420cf9c9eba406c05e0c10040869dfe07b2c682ca811af67e3b845815c0261"
-_RECEIVER_TRANSITION_PATH = "m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V5.json"
+_RECEIVER_TRANSITION_PATH = "make/m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V5.json"
 _RECEIVER_TRANSITION_SHA256 = "34369e1ad23948e495a426d76969e208794d4007c2ec24690eda4b61717e6a30"
-_RECEIVER_TRANSITION_V6_PATH = "m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V6.json"
+_RECEIVER_TRANSITION_V6_PATH = "make/m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V6.json"
 _RECEIVER_TRANSITION_V6_SHA256 = "166ccfe6d6c585e5fc2ae70de91a911c0e5dd3634b9c2f740e28611317670ba9"
-_RECEIVER_TRANSITION_V7_PATH = "m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V7.json"
+_RECEIVER_TRANSITION_V7_PATH = "make/m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V7.json"
 _RECEIVER_TRANSITION_V7_SHA256 = "4f6aa0fa97dc0e7ba6e9eb89afd95a3f4bc50180fba4c937d3c53efeb4f93936"
-_RECEIVER_TRANSITION_V8_PATH = "m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V8.json"
+_RECEIVER_TRANSITION_V8_PATH = "make/m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V8.json"
 _RECEIVER_TRANSITION_V8_SHA256 = "6f90d22fb6db68af59668138e3757f3c29826af552592b14322c927b372c3873"
-_RECEIVER_TRANSITION_V9_PATH = "m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V9.json"
+_RECEIVER_TRANSITION_V9_PATH = "make/m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V9.json"
 _RECEIVER_TRANSITION_V9_SHA256 = "8405960a98d2632bcfa45e9c93c90930fd8f8955ee0720c126421a856efc1c47"
-_RECEIVER_TRANSITION_V10_PATH = "m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V10.json"
+_RECEIVER_TRANSITION_V10_PATH = "make/m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V10.json"
 _RECEIVER_TRANSITION_V10_SHA256 = "48a2cdabd2093b8e18635b898d7294c3bb1accf14f8db0787ef636ca46935c4c"
 _RECEIVER_SUCCESSORS = frozenset(
     "m3/core/src/jdk/m3/text/" + name for name in (
@@ -337,7 +337,7 @@ def build(args):
             raise ValueError("receiver revision changed during build")
         checkpoints.append(dict(phase=phase, manifest_sha256=admission["manifestSha256"]))
 
-    packager = root / "m3/tooling/jmod-recipes/tools/jmod_pack.py"
+    packager = root / "make/m3/tooling/jmod-recipes/tools/jmod_pack.py"
     opennlp = args.opennlp_source.resolve()
     lucene = args.lucene_source.resolve()
     environment = dict(os.environ, JAVA_HOME=str(jdk))

@@ -20,11 +20,11 @@ renaming, formatting or substituting its implementation.
 | Input | Existing authority | Migration use |
 | --- | --- | --- |
 | OpenJDK, vendor and other JVM source | Synexia's existing [federated donor intake](https://github.com/hsoliwal/com.synexia/blob/510a640feb877b1b7e69d346ae2e4e1a10628506/tools/m3-donor-recipes/JDK_RUNTIME_DONOR_INTAKE.md), `DonorCatalog` and category catalogue | Select exact repository/revision/path, source licence and an applicable donor mode; retain independent VM families and vendor deltas as distinct source relationships. |
-| Java specification | [JSR 396: Java SE 21](https://jcp.org/en/jsr/detail?id=396), affected Java 21 specifications and the existing [JSR/JEP/JBS crosswalk](../backports/JSR_JEP_JBS_22_27_RECEIPT_20261022.md) | Bind the required source, binary, API, VM and runtime contract. A specification identifier is not a source patch or test result. |
-| JEP feature lineage | [Release authority](../backports/RELEASE_JEP_AUTHORITY.tsv), [JEP catalogue](../backports/JEP_CATALOGUE.tsv), [residue queue](../backports/JEP_RESIDUE_QUEUE.tsv) and [source witness](../backports/JEP_SOURCE_WITNESS.md) | Preserve feature/successor relationships, candidate decisions and exact source-presence evidence. Preview or successor metadata does not grant default Java 21 compatibility. |
-| JBS fixes and follow-up changes | Existing `m3/backports/inventory.py`, `compatibility_queue.py`, `UPSTREAM_CHANGE_SEEDS.tsv` and per-change packets | Join commits and affected paths to candidate issue IDs and proof lanes. An ID parsed from a commit subject remains a candidate until its issue relationship is checked. |
-| Synexia implementation families | [Full-family catalogue](m3-full-family-catalogue.json), [current full-borrow pin](../m3-import/current-full-borrow/pin.tsv), estate/DAG/phase receipts and stable capability mappings | Preserve source ownership, exact bytes, dependencies and the String → arrays → collections → AST/compiler → remaining-families receiving order. |
-| Target form and build | [Name/package contract](M3JDK21_NAME_AND_PACKAGE_CONTRACT.md), [naming workflow](m3jdk21-naming-admission-workflow.md), [Maven control reactor](../pom.xml) and [release contract](../release/release-contract.json) | Place executed output under its actual JDK/module owner; prove target source, module/image packaging and the relevant runtime behavior. |
+| Java specification | [JSR 396: Java SE 21](https://jcp.org/en/jsr/detail?id=396), affected Java 21 specifications and the existing [JSR/JEP/JBS crosswalk](../../make/m3/backports/JSR_JEP_JBS_22_27_RECEIPT_20261022.md) | Bind the required source, binary, API, VM and runtime contract. A specification identifier is not a source patch or test result. |
+| JEP feature lineage | [Release authority](../../make/m3/backports/RELEASE_JEP_AUTHORITY.tsv), [JEP catalogue](../../make/m3/backports/JEP_CATALOGUE.tsv), [residue queue](../../make/m3/backports/JEP_RESIDUE_QUEUE.tsv) and [source witness](../../make/m3/backports/JEP_SOURCE_WITNESS.md) | Preserve feature/successor relationships, candidate decisions and exact source-presence evidence. Preview or successor metadata does not grant default Java 21 compatibility. |
+| JBS fixes and follow-up changes | Existing `make/m3/backports/inventory.py`, `compatibility_queue.py`, `UPSTREAM_CHANGE_SEEDS.tsv` and per-change packets | Join commits and affected paths to candidate issue IDs and proof lanes. An ID parsed from a commit subject remains a candidate until its issue relationship is checked. |
+| Synexia implementation families | [Full-family catalogue](m3-full-family-catalogue.json), [current full-borrow pin](../../m3/m3-import/current-full-borrow/pin.tsv), estate/DAG/phase receipts and stable capability mappings | Preserve source ownership, exact bytes, dependencies and the String → arrays → collections → AST/compiler → remaining-families receiving order. |
+| Target form and build | [Name/package contract](M3JDK21_NAME_AND_PACKAGE_CONTRACT.md), [naming workflow](m3jdk21-naming-admission-workflow.md), [Maven control reactor](../../make/m3/pom.xml) and [release contract](../../make/m3/release/release-contract.json) | Place executed output under its actual JDK/module owner; prove target source, module/image packaging and the relevant runtime behavior. |
 
 A JEP may involve several JBS issues and commits; one commit may touch several
 capabilities. Keep these relationships in the existing records and their linked
@@ -37,8 +37,8 @@ describes inventory obligations; it does not replace the operational mapping.
 From the **M3JDK21 repository root**, check names and source-pin custody:
 
 ```sh
-python3 m3/tooling/name-contract/check.py
-python3 m3/compatibility/check_m3_full_borrow_receiver.py
+python3 make/m3/tooling/name-contract/check.py
+python3 make/m3/compatibility/check_m3_full_borrow_receiver.py
 ```
 
 The full-borrow checker retains the original source identities:
@@ -56,18 +56,18 @@ The existing backport owner produces the JEP witness, proof matrix, execution
 waves and scoped programme status:
 
 ```sh
-mvn -B -ntp -f m3/backports/pom.xml verify
-python3 m3/backports/jep_residue.py --root . --include-m3-extensions
+mvn -B -ntp -f make/m3/backports/pom.xml verify
+python3 make/m3/backports/jep_residue.py --root . --include-m3-extensions
 ```
 
-Use the existing [A3 inventory/plan owner](../tooling/a3/README.md) when source
+Use the existing [A3 inventory/plan owner](../../make/m3/tooling/a3/README.md) when source
 discovery is needed. These reports retain pending decisions; they do not execute
 or accept every JEP. The extension projection preserves Java 21 obligations and
 requires separate M3 extension evidence. Historical recipe directories and
 authoring profiles in the public tree are tracked migration residue; they do
 not authorize running or adding Synexia recipe machinery here.
 
-For that residue, use the existing [recipe custody ledger](../release/LEGACY_RECIPE_CUSTODY_LEDGER.tsv)
+For that residue, use the existing [recipe custody ledger](../../make/m3/release/LEGACY_RECIPE_CUSTODY_LEDGER.tsv)
 and the [current private custody observation](https://github.com/hsoliwal/com.synexia/blob/4f5750e2ca3127211fdf3354dd6978a1a67672f5/synexia-openrewrite-recipes/recipes/m3jdk21-legacy-recipe-custody-20261030/observations/20261112/README.md).
 Its recorded decisions are an intake frontier, not evidence that the corresponding
 files, callers, tests or runtime capabilities have already moved.
@@ -75,7 +75,7 @@ files, callers, tests or runtime capabilities have already moved.
 Target-local regex verification uses the actual source-built M3JDK21 image:
 
 ```sh
-mvn -B -ntp -f m3/runtime-integration/regex-precompute/pom.xml \
+mvn -B -ntp -f make/m3/runtime-integration/regex-precompute/pom.xml \
   -Dm3.test.jdk=/absolute/path/to/source-built-M3JDK21 verify
 ```
 
@@ -84,14 +84,14 @@ private checkout or fixture execution dependency. The supplied image also needs
 a matching source-build receipt; binary hashes alone do not establish its build
 provenance. A stock Java 21 installation
 cannot establish M3String runtime acceptance. Preserve the individual mode
-results and any refusal; the [regex receiver](../runtime-integration/regex-precompute/README.md)
+results and any refusal; the [regex receiver](../../make/m3/runtime-integration/regex-precompute/README.md)
 still needs its independent native, jtreg, lifetime and performance evidence.
 
 The complete target Maven and standalone entry points remain:
 
 ```sh
-mvn -B -ntp -f m3/pom.xml verify
-python3 m3/release/check_standalone.py --root . --release
+mvn -B -ntp -f make/m3/pom.xml verify
+python3 make/m3/release/check_standalone.py --root . --release
 ```
 
 Run these against the candidate's actual checkout and record the command,
@@ -126,13 +126,13 @@ Maven module, a green fixture nor a merge is a substitute for this chain.
 
 ## Operational authority before using these examples
 
-The illustrative schema/example in this directory must not become a competing migration registry. At the 2026-10-02 02:52 inspection, the verified operational candidate is [#12's m3/migration/manifest.json at d543255294ae85e4c8015812a3c8a97aaf498354](https://github.com/hsoliwal/M3jdk21/blob/d543255294ae85e4c8015812a3c8a97aaf498354/m3/migration/manifest.json), on its feature-stack line. That directory is not present in master 26c442d3f1400e01eeb11a44e803b63e1874735e. Reconcile the selected manifest/validator into the intended branch through a reviewed change. [Worked port decisions](migration-worked-port-decisions.md) maps these concepts to its existing fields and stable IDs, with rename/split/conflict examples. No operational mapping is changed by this documentation. This paragraph is the historical 02:52 snapshot; the retained records and newer source-presence facts immediately below supersede any inference that master still lacks all migration tooling.
+The illustrative schema/example in this directory must not become a competing migration registry. At the 2026-10-02 02:52 inspection, the verified operational candidate is [#12's make/m3/migration/manifest.json at d543255294ae85e4c8015812a3c8a97aaf498354](https://github.com/hsoliwal/M3jdk21/blob/d543255294ae85e4c8015812a3c8a97aaf498354/m3/migration/manifest.json), on its feature-stack line. That directory is not present in master 26c442d3f1400e01eeb11a44e803b63e1874735e. Reconcile the selected manifest/validator into the intended branch through a reviewed change. [Worked port decisions](migration-worked-port-decisions.md) maps these concepts to its existing fields and stable IDs, with rename/split/conflict examples. No operational mapping is changed by this documentation. This paragraph is the historical 02:52 snapshot; the retained records and newer source-presence facts immediately below supersede any inference that master still lacks all migration tooling.
 
 ## Retained mapping records and remaining reconciliation
 
 The top-level mappings array in [name-mapping.json](name-mapping.json) preserves early provisional directions, but the file is no longer only that historical map. At master 45f546ff5bcb06a1b2604f14baf998785d98d9a1 (same map blob as #19 merge 43cf5ed4b97bc9a2832f10a332eb6500ca73ca04), its migration.records contains actual records including m3.prefix-z and synexia.frozen-chars. Preserve their stable IDs, exact pins, target adaptations, sync fields and qualified evidence. The documentation schema/example remains illustrative and must not replace those records.
 
-Retained source and mapping completeness are separate: synexia.frozen-chars is still pending with targets=[] in that pinned map, while #19 retains FrozenChars under m3/ports/indexstring. This is a mapping-reconciliation gap, not evidence that the file is absent or that its acceptance is complete. The #12 m3/migration/manifest.json candidate remains separate; that exact path returns 404 on the current master pin despite other m3/migration tooling now being present. See [the dated retained-content reconciliation](migration-worked-port-decisions.md#retained-content-and-mapping-reconciliation-2026-10-02-0345-utc) for concrete paths and proof boundaries. This documentation does not populate, promote or merge operational records.
+Retained source and mapping completeness are separate: synexia.frozen-chars is still pending with targets=[] in that pinned map, while #19 retains FrozenChars under m3/ports/indexstring. This is a mapping-reconciliation gap, not evidence that the file is absent or that its acceptance is complete. The #12 make/m3/migration/manifest.json candidate remains separate; that exact path returns 404 on the current master pin despite other make/m3/migration tooling now being present. See [the dated retained-content reconciliation](migration-worked-port-decisions.md#retained-content-and-mapping-reconciliation-2026-10-02-0345-utc) for concrete paths and proof boundaries. This documentation does not populate, promote or merge operational records.
 
 A type name alone cannot express source ownership, multiple targets, merged/split classes, per-operation compatibility or which later enhancement has been ported.
 
@@ -290,7 +290,7 @@ Promotion still requires exact candidate evidence. An inventory row, a retained 
 
 The continuation of [migration verification PR #2953](https://github.com/hsoliwal/M3jdk21/pull/2953)
 uses the exact target input `0163b1474862ca463a64f24b45b0c6ca36aa4e73`.
-The [passive continuation receipt](../qualification/migration-verification-20261112/continuation-receipt.json)
+The [passive continuation receipt](../../make/m3/qualification/migration-verification-20261112/continuation-receipt.json)
 binds each emitted file to its canonical recipe, immutable Synexia execution source
 and before/after digest. The canonical task remains
 `synexia-openrewrite-recipes/recipe-crates/m3jdk21-migration-verification-20261112`;

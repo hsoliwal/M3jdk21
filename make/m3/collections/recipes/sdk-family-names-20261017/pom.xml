@@ -47,7 +47,7 @@
       <include>**/SdkFamilyNamesSdkTest.java</include>
      </includes>
      <systemPropertyVariables>
-      <m3.repo.root>${project.basedir}/../../../..</m3.repo.root>
+      <m3.repo.root>${project.basedir}/../../../../..</m3.repo.root>
       <m3.task.root>${project.basedir}</m3.task.root>
      </systemPropertyVariables>
     </configuration>

@@ -4,7 +4,7 @@
 from hashlib import sha256
 from pathlib import Path
 import sys
-root = Path(__file__).resolve().parents[3]
+root = Path(__file__).resolve().parents[4]
 expected = {
   "src/java.base/share/classes/java/lang/M3StringFacts.java": "d18122b42e9e4bcb76fd3e807467a59160e012d7ac249efe9cc71e5f6b8faa22",
   "src/java.base/share/classes/java/lang/M3StringRegexDp.java": "3029950078524419af52edbcbaaccab545bd5b1bed824ee80218250b8c748ef4",

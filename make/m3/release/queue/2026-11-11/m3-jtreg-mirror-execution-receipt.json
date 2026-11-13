@@ -119,7 +119,7 @@
     }
   },
   "self_provenance": {
-    "path": "m3/release/queue/2026-11-11/m3-jtreg-mirror-execution-receipt.json",
+    "path": "make/m3/release/queue/2026-11-11/m3-jtreg-mirror-execution-receipt.json",
     "covered_by_this_receipt": false,
     "explanation": "The receiving Git tree binds this passive receipt; no recursive self-hash or future receiving commit is asserted."
   },

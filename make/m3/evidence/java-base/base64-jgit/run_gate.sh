@@ -18,7 +18,7 @@ for dep in JavaEWAH slf4j-api-2.0.12; do
   cp -r "$A/$V/$dep" "$O/deps/"
   mvn -q -B -f "$O/deps/$dep/pom.xml" clean install > "$O/mvn_install_$dep.log" 2>&1; echo "mvn install $dep rc=$?"
 done
-bash "$B/m3/tooling/jdk-superset/retarget/tools/maven_gate.sh" "$A" "$B" "$O/maven" "$D" "$URL"
+bash "$B/make/m3/tooling/jdk-superset/retarget/tools/maven_gate.sh" "$A" "$B" "$O/maven" "$D" "$URL"
 CP="$(ls ~/.m2/repository/com/googlecode/javaewah/JavaEWAH/1.1.13-m3-source-1/*.jar):$(ls ~/.m2/repository/org/slf4j/slf4j-api/2.0.12-m3-source-1/*.jar)"
 for side in master branch; do
   T=$A; [ $side = branch ] && T=$B; mkdir -p "$O/javac-$side"

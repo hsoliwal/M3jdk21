@@ -88,7 +88,7 @@
     "offlineCompatibilityCheckers": "PASS: check_synexia_m3_collection_port_recipe.py -> SYNEXIA_M3_COLLECTION_PORT_RECIPE_PIN_PASS (log sha256 6f8c67f4a944b398db527863ca91c871c37d77641044f6da23ddf1eec758417f); check_synexia_m3_family_naming.py -> SYNEXIA_M3_FAMILY_NAMING_RECEIVER_PASS families=9 (log sha256 465cdd77f589f143a798264907efc1074dd06b005c7ec976f169b4a7f969e546)",
     "atomizePatternize": "J1 lane (Java-only CPU projection); Python atomize_patternize.py NOT_RUN by user rule",
     "jdkBuildJtregRuntime": "PENDING_LINUX",
-    "ci": "PENDING_QUEUE; m3/collections/verify_donation.py refuses with 'Java source set changed; qualify a successor packet' until a successor installed-source manifest is qualified through synexia-openrewrite-recipes/recipes/m3jdk-packed-collections-receiving-repair-20261008"
+    "ci": "PENDING_QUEUE; make/m3/collections/verify_donation.py refuses with 'Java source set changed; qualify a successor packet' until a successor installed-source manifest is qualified through synexia-openrewrite-recipes/recipes/m3jdk-packed-collections-receiving-repair-20261008"
   },
   "semanticDecisions": [
     "every long is a legal key and a legal value (sorted lane membership, no sentinel); no per-entry node; two parallel long[] lanes only",

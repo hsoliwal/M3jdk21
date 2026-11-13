@@ -103,7 +103,7 @@
     }
   },
   "coverage": {
-    "catalogue": "m3/collections/qualification/m3-sdk-families-20261017/FAMILY_CATALOG.tsv",
+    "catalogue": "make/m3/collections/qualification/m3-sdk-families-20261017/FAMILY_CATALOG.tsv",
     "family": "com.google.common.collect.ArrayListMultimap",
     "catalogue_status": "PENDING",
     "scope": "One existing factory uses existing M3ArrayList through Guava ListMultimap policy.",

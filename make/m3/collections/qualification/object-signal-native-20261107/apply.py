@@ -9,7 +9,7 @@ Two rules (the kernel itself is relocated by ../object-signal-20261107/relocate.
      m3_signal_order_jni.c (owner M3SignalOrderNative). The registry is the module's only native build description:
      verify.py refuses a C file under src/main/native/collections that no library admits, compiles each file with
      -include of its owner's javac -h header and links one shared object per library.
-  N2 FAMILY_ROW: the object-signal row of m3/collections/JDK_FAMILY_MAP.tsv (written by ../object-signal-20261107/apply.py)
+  N2 FAMILY_ROW: the object-signal row of make/m3/collections/JDK_FAMILY_MAP.tsv (written by ../object-signal-20261107/apply.py)
      no longer says the JNI kernel is held.
 
 Derived from ../object-signal-20261107/apply.py v1 (anchored "sub" edits, every anchor exactly once, LF payloads
@@ -38,13 +38,13 @@ EDITS_COLUMNS = ("file", "before_sha256", "after_sha256", "leaf", "rule")
 LEAF = "object-signal-native-20261107"
 # leaf, path, preimage blob at BASE_COMMIT, rule note, edits [(old, new)]
 RULES = (
-    (LEAF, "m3/collections/qualification/full-java-jni-20261018/verify.py", "a26fa7bb0eae4a45acba5e15d645e5ecc435f544",
+    (LEAF, "make/m3/collections/qualification/full-java-jni-20261018/verify.py", "a26fa7bb0eae4a45acba5e15d645e5ecc435f544",
      "N1 LIBRARY: m3_object_signal_jni.c (M3ObjectSignalOps) joins the existing library m3signalorder", [
          ("    'm3signalorder': [('m3_signal_order_jni.c', 'M3SignalOrderNative')],\n",
           "    'm3signalorder': [('m3_signal_order_jni.c', 'M3SignalOrderNative'),\n"
           "                      ('m3_object_signal_jni.c', 'M3ObjectSignalOps')],\n"),
      ]),
-    (LEAF, "m3/collections/JDK_FAMILY_MAP.tsv", "6253d33f804fa102292ecfe779b5a8d81828266a",
+    (LEAF, "make/m3/collections/JDK_FAMILY_MAP.tsv", "6253d33f804fa102292ecfe779b5a8d81828266a",
      "N2 FAMILY_ROW: the object-signal row names the JNI kernel in libm3signalorder", [
          ("Object.equals remain authority; Java kernel only, the donor JNI kernel is a HELD row",
           "Object.equals remain authority; Java kernel by default, the donor JNI kernel in the module library"
@@ -123,7 +123,7 @@ def run(root: Path, check: bool) -> int:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--root", default=str(RECIPE_DIR.parents[3]), help="repository root (default: four up)")
+    parser.add_argument("--root", default=str(RECIPE_DIR.parents[4]), help="repository root (default: four up)")
     parser.add_argument("--check", action="store_true", help="write nothing; exit 1 when a run would change a file")
     args = parser.parse_args(argv)
     try:

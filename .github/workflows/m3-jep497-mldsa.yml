@@ -12,17 +12,17 @@ on:
       - 'src/java.base/share/classes/sun/security/provider/SunEntries.java'
       - 'src/java.base/share/classes/sun/security/util/KnownOIDs.java'
       - 'test/jdk/sun/security/provider/ML_DSA/**'
-      - 'm3/backports/recipes/j497/**'
-      - 'm3/backports/JEP_RESIDUE_QUEUE.tsv'
-      - 'm3/backports/test_jep_residue.py'
-      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep497MlDsaBackportRecipe.java'
-      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep497MlDsaBackportRecipeTest.java'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jep497-mldsa.yml'
+      - 'make/m3/backports/recipes/j497/**'
+      - 'make/m3/backports/JEP_RESIDUE_QUEUE.tsv'
+      - 'make/m3/backports/test_jep_residue.py'
+      - 'make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep497MlDsaBackportRecipe.java'
+      - 'make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep497MlDsaBackportRecipeTest.java'
+      - 'make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jep497-mldsa.yml'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep497-mldsa/**'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jdk24-jep497-mldsa-vectors/**'
-      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3RecipeScopeRegistry.java'
-      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/scope/M3RecipeScopeDeclarationTest.java'
-      - 'm3/tooling/recipe-catalogue.tsv'
+      - 'make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3RecipeScopeRegistry.java'
+      - 'make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/scope/M3RecipeScopeDeclarationTest.java'
+      - 'make/m3/tooling/recipe-catalogue.tsv'
       - '.github/workflows/m3-jep497-mldsa.yml'
   pull_request:
     paths:
@@ -32,10 +32,10 @@ on:
       - 'src/java.base/share/classes/sun/security/provider/SunEntries.java'
       - 'src/java.base/share/classes/sun/security/util/KnownOIDs.java'
       - 'test/jdk/sun/security/provider/ML_DSA/**'
-      - 'm3/backports/recipes/j497/**'
-      - 'm3/backports/JEP_RESIDUE_QUEUE.tsv'
-      - 'm3/backports/test_jep_residue.py'
-      - 'm3/tooling/migration-recipes/**'
+      - 'make/m3/backports/recipes/j497/**'
+      - 'make/m3/backports/JEP_RESIDUE_QUEUE.tsv'
+      - 'make/m3/backports/test_jep_residue.py'
+      - 'make/m3/tooling/migration-recipes/**'
       - '.github/workflows/m3-jep497-mldsa.yml'
   workflow_dispatch:
 
@@ -63,7 +63,7 @@ jobs:
 
 
       - name: 3 - Released JEP residue stays derived
-        run: python3 -m unittest m3/backports/test_jep_residue.py
+        run: python3 -m unittest make/m3/backports/test_jep_residue.py
 
   m3-file-convergence:
     runs-on: ubuntu-24.04

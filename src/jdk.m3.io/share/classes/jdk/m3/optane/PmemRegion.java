@@ -3,7 +3,7 @@
 package jdk.m3.optane;
 
 /** Versioned low-level PMem mapping contract generated from recipes/pmem-api.tsv. */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/36827ee8a798ef6ce07f6fc55a2ac371b1382c06/m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/PmemRegion.java blob b7e090aec696; recipe m3/optane/recipe/pmem-region-core-20261106/relocate.py v2
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/36827ee8a798ef6ce07f6fc55a2ac371b1382c06/m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/PmemRegion.java blob b7e090aec696; recipe make/m3/optane/recipe/pmem-region-core-20261106/relocate.py v2
 public interface PmemRegion extends AutoCloseable {
     /** Length in bytes, not limited to an int. */
     long length();

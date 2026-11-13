@@ -1,5 +1,5 @@
 """M3_TEXT_TOOLS_CONVERGE v1: three-way receive of com.synexia m3-unix4j-m3 (develop) into M3jdk21
-m3/tooling/module-packs/text-tools, against the pinned receiving base (com.synexia 3b5c4be7630f, SOURCE_REF.json).
+make/m3/tooling/module-packs/text-tools, against the pinned receiving base (com.synexia 3b5c4be7630f, SOURCE_REF.json).
 
 usage: python -I merge_unix4j.py <base-dir> <develop-dir> <m3-root> <out-dir>
 R() relocates a donor file the way the existing receiver did:
@@ -22,7 +22,7 @@ from pathlib import Path
 STRUCT = {"StructuredTextTools", "StructuredCli", "JsonLinesTools"}
 HOLD = {"M3TextToolExecutor"}  # needs jdk.m3.text package-private members and jdk.m3.structured: module decision pending
 JNI_BLOCK = re.compile(r"^JNIEXPORT [^\n]*?\b(Java_jdk_internal_m3_unix4jm3_\w+)\s*\n.*?^\}\n", re.S | re.M)
-PREFIX = "m3/tooling/module-packs/text-tools/"
+PREFIX = "make/m3/tooling/module-packs/text-tools/"
 
 
 def target(rel: str):

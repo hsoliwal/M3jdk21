@@ -3,8 +3,8 @@ name: Collection verification module closure
 on:
   pull_request:
     paths:
-      - 'm3/collections/verification/filtered-object-deques-20261017/verify.sh'
-      - 'm3/collections/verification/primitive-filtered-sequences-20261017/verify.sh'
+      - 'make/m3/collections/verification/filtered-object-deques-20261017/verify.sh'
+      - 'make/m3/collections/verification/primitive-filtered-sequences-20261017/verify.sh'
       - '.github/workflows/collection-verification-closure.yml'
   workflow_dispatch:
 permissions:
@@ -27,6 +27,6 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Compile and run actual filtered Deque ownership
-        run: bash m3/collections/verification/filtered-object-deques-20261017/verify.sh
+        run: bash make/m3/collections/verification/filtered-object-deques-20261017/verify.sh
       - name: Compile actual array prerequisite and primitive filtered collection module
-        run: bash m3/collections/verification/primitive-filtered-sequences-20261017/verify.sh
+        run: bash make/m3/collections/verification/primitive-filtered-sequences-20261017/verify.sh

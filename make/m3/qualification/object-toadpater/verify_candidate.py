@@ -63,7 +63,7 @@ if __name__ == "__main__":
     try:
         if len(sys.argv) > 2:
             raise ValueError("usage: verify_candidate.py [repository-root]")
-        root_path = Path(sys.argv[1]) if len(sys.argv) == 2 else Path(__file__).resolve().parents[3]
+        root_path = Path(sys.argv[1]) if len(sys.argv) == 2 else Path(__file__).resolve().parents[4]
         verify(root_path)
     except (RuntimeError, ValueError, OSError, subprocess.CalledProcessError) as exc:
         print(f"FAIL {exc}", file=sys.stderr)

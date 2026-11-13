@@ -14,8 +14,8 @@ def rows(path: Path):
         return list(csv.DictReader(stream, delimiter="\t"))
 
 def main() -> int:
-    root = Path(__file__).resolve().parents[4]
-    adaptation = rows(root / "m3/backports/recipes/jdk-8367584/adaptation.tsv")
+    root = Path(__file__).resolve().parents[5]
+    adaptation = rows(root / "make/m3/backports/recipes/jdk-8367584/adaptation.tsv")
     if len(adaptation) != 4:
         raise SystemExit(f"expected 4 adaptation rows, found {len(adaptation)}")
     for row in adaptation:
@@ -32,7 +32,7 @@ def main() -> int:
             if token in body:
                 raise SystemExit(f"forbidden JEP 536 redaction token in {row['target_path']}: {token}")
 
-    seeds = rows(root / "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv")
+    seeds = rows(root / "make/m3/backports/UPSTREAM_CHANGE_SEEDS.tsv")
     seed = next((r for r in seeds if r["jbs"] == "JDK-8367584"), None)
     if seed is None or seed["upstream_commit"] != UPSTREAM:
         raise SystemExit("JDK-8367584 seed lineage missing")

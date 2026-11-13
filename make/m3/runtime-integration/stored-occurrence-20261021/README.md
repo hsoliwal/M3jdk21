@@ -33,7 +33,7 @@ visible representative semantics; no throughput advantage is claimed.
 With a Java 21 compiler and a complete Git object history available:
 
 ```sh
-bash m3/runtime-integration/stored-occurrence-20261021/verify.sh \
+bash make/m3/runtime-integration/stored-occurrence-20261021/verify.sh \
   /absolute/new/evidence-directory
 ```
 

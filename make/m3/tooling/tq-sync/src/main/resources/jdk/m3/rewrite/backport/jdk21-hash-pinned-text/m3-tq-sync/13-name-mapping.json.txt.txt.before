@@ -320,7 +320,7 @@
         "recipe": {
           "id": "m3.prefix-z.port.v1",
           "version": "1",
-          "path": "m3/migration/recipes/prefix-z-v1.tsv",
+          "path": "make/m3/migration/recipes/prefix-z-v1.tsv",
           "sha256": "54251ed210b9ed280919968a6ea13f0b6ed6e590fbf92090d13b4495f05f4217",
           "preconditions": [
             "Exact source file at PR7526 and five exact target owner file hashes.",
@@ -331,11 +331,11 @@
         "tests": [
           {
             "id": "prefix-z-normal",
-            "receipt": "m3/migration/evidence/local-20261002-final/receipt.json"
+            "receipt": "make/m3/migration/evidence/local-20261002-final/receipt.json"
           },
           {
             "id": "prefix-z-interpreter",
-            "receipt": "m3/migration/evidence/local-20261002-final/receipt.json"
+            "receipt": "make/m3/migration/evidence/local-20261002-final/receipt.json"
           }
         ],
         "provenance": {
@@ -2279,7 +2279,7 @@
         "recipe": {
           "id": "m3-vi",
           "version": "1",
-          "path": "m3/tooling/vi/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
+          "path": "make/m3/tooling/vi/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
           "sha256": "c47151b5df79d6d2711e6de748bff3fb08e2c01af5e9c6ac0b4b3b91ac97425c",
           "preconditions": [
             "Exact source/template pins; absent new targets or exact converged outputs."
@@ -2289,7 +2289,7 @@
         "tests": [
           {
             "id": "vi-module-runtime",
-            "receipt": "m3/tooling/vi/evidence/receipt.json"
+            "receipt": "make/m3/tooling/vi/evidence/receipt.json"
           }
         ],
         "provenance": {
@@ -2319,7 +2319,7 @@
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "See m3/docs/counterpart-naming.md; runtime effective implementation selection is not installed."
+        "observation": "See doc/m3/counterpart-naming.md; runtime effective implementation selection is not installed."
       },
       {
         "id": "synexia.counterpart.MIndexLibraryRelease",
@@ -2398,7 +2398,7 @@
         "recipe": {
           "id": "m3-vi",
           "version": "1",
-          "path": "m3/tooling/vi/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
+          "path": "make/m3/tooling/vi/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
           "sha256": "c47151b5df79d6d2711e6de748bff3fb08e2c01af5e9c6ac0b4b3b91ac97425c",
           "preconditions": [
             "Exact source/template pins; absent new targets or exact converged outputs."
@@ -2408,7 +2408,7 @@
         "tests": [
           {
             "id": "vi-module-runtime",
-            "receipt": "m3/tooling/vi/evidence/receipt.json"
+            "receipt": "make/m3/tooling/vi/evidence/receipt.json"
           }
         ],
         "provenance": {
@@ -2438,7 +2438,7 @@
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "See m3/docs/counterpart-naming.md; runtime effective implementation selection is not installed."
+        "observation": "See doc/m3/counterpart-naming.md; runtime effective implementation selection is not installed."
       },
       {
         "id": "synexia.counterpart.MIndexVmSession",
@@ -2529,7 +2529,7 @@
         "recipe": {
           "id": "m3-cb",
           "version": "1",
-          "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+          "path": "make/m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
           "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
           "preconditions": [
             "Pinned source bodies, exact retained OpenRewrite owner, absent targets or exact fixed point."
@@ -2539,7 +2539,7 @@
         "tests": [
           {
             "id": "cb-module-runtime",
-            "receipt": "m3/tooling/cb/evidence/receipt.json"
+            "receipt": "make/m3/tooling/cb/evidence/receipt.json"
           }
         ],
         "provenance": {
@@ -2603,7 +2603,7 @@
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
+        "observation": "See make/m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
       },
       {
         "id": "synexia.counterpart.MIndexVmPrecomputeKey",
@@ -2694,7 +2694,7 @@
         "recipe": {
           "id": "m3-cb",
           "version": "1",
-          "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+          "path": "make/m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
           "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
           "preconditions": [
             "Pinned source bodies, exact retained OpenRewrite owner, absent targets or exact fixed point."
@@ -2704,7 +2704,7 @@
         "tests": [
           {
             "id": "cb-module-runtime",
-            "receipt": "m3/tooling/cb/evidence/receipt.json"
+            "receipt": "make/m3/tooling/cb/evidence/receipt.json"
           }
         ],
         "provenance": {
@@ -2768,7 +2768,7 @@
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
+        "observation": "See make/m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
       },
       {
         "id": "synexia.counterpart.MIndexClass",
@@ -2859,7 +2859,7 @@
         "recipe": {
           "id": "m3-cb",
           "version": "1",
-          "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+          "path": "make/m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
           "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
           "preconditions": [
             "Pinned source bodies, exact retained OpenRewrite owner, absent targets or exact fixed point."
@@ -2869,7 +2869,7 @@
         "tests": [
           {
             "id": "cb-module-runtime",
-            "receipt": "m3/tooling/cb/evidence/receipt.json"
+            "receipt": "make/m3/tooling/cb/evidence/receipt.json"
           }
         ],
         "provenance": {
@@ -2933,7 +2933,7 @@
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
+        "observation": "See make/m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
       },
       {
         "id": "synexia.counterpart.MIndexClassIndex",
@@ -3040,7 +3040,7 @@
         "recipe": {
           "id": "m3-cb",
           "version": "1",
-          "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+          "path": "make/m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
           "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
           "preconditions": [
             "Pinned source bodies, exact retained OpenRewrite owner, absent targets or exact fixed point."
@@ -3050,7 +3050,7 @@
         "tests": [
           {
             "id": "cb-module-runtime",
-            "receipt": "m3/tooling/cb/evidence/receipt.json"
+            "receipt": "make/m3/tooling/cb/evidence/receipt.json"
           }
         ],
         "provenance": {
@@ -3114,7 +3114,7 @@
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
+        "observation": "See make/m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
       },
       {
         "id": "synexia.counterpart.MIndexAST",
@@ -3224,7 +3224,7 @@
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "See m3/docs/counterpart-naming.md; runtime effective implementation selection is not installed."
+        "observation": "See doc/m3/counterpart-naming.md; runtime effective implementation selection is not installed."
       },
       {
         "id": "synexia.counterpart.MIndexASTPrecompute",
@@ -3334,7 +3334,7 @@
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "See m3/docs/counterpart-naming.md; runtime effective implementation selection is not installed."
+        "observation": "See doc/m3/counterpart-naming.md; runtime effective implementation selection is not installed."
       },
       {
         "id": "synexia.counterpart.MIndexCompilerASTPrecompute",
@@ -3444,7 +3444,7 @@
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "See m3/docs/counterpart-naming.md; runtime effective implementation selection is not installed."
+        "observation": "See doc/m3/counterpart-naming.md; runtime effective implementation selection is not installed."
       },
       {
         "id": "synexia.counterpart.MIndexClassBoundary",
@@ -3535,7 +3535,7 @@
         "recipe": {
           "id": "m3-cb",
           "version": "1",
-          "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+          "path": "make/m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
           "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
           "preconditions": [
             "Pinned source bodies, exact retained OpenRewrite owner, absent targets or exact fixed point."
@@ -3545,7 +3545,7 @@
         "tests": [
           {
             "id": "cb-module-runtime",
-            "receipt": "m3/tooling/cb/evidence/receipt.json"
+            "receipt": "make/m3/tooling/cb/evidence/receipt.json"
           }
         ],
         "provenance": {
@@ -3577,7 +3577,7 @@
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
+        "observation": "See make/m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
       },
       {
         "id": "synexia.counterpart.MIndexJvmDescriptor",
@@ -3673,7 +3673,7 @@
         "recipe": {
           "id": "com.m3.rewrite.backport.Descriptor",
           "version": "snapshot@39702564163c017f9dc0350a305b032b06274857",
-          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+          "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
           "sha256": "8006b173253ea7502efe7f7a77738b65f9df9e2871d4d6c29ff4fb8fb058c8c6",
           "preconditions": [
             "Use the retained M3Jdk21HashPinnedSnapshotRecipe and exact jdk22-descriptor manifest.",
@@ -3686,7 +3686,7 @@
         "tests": [
           {
             "id": "cb-module-runtime",
-            "receipt": "m3/tooling/cb/evidence/receipt.json"
+            "receipt": "make/m3/tooling/cb/evidence/receipt.json"
           }
         ],
         "provenance": {
@@ -3754,7 +3754,7 @@
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "The complete previous record and exact old/current source/target bindings are retained in m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json#descriptor_reconciliation. Previous sync target 3ec445df10a3e8fc74aa983181f0700ac7bfbcad precedes target introduction; the path is absent there. The old target hash is verified at f74592e363466a59b391fbbe47500c7985c9a691. Existing cb-module-runtime evidence is historical and unchanged; implemented-unverified is retained."
+        "observation": "The complete previous record and exact old/current source/target bindings are retained in make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json#descriptor_reconciliation. Previous sync target 3ec445df10a3e8fc74aa983181f0700ac7bfbcad precedes target introduction; the path is absent there. The old target hash is verified at f74592e363466a59b391fbbe47500c7985c9a691. Existing cb-module-runtime evidence is historical and unchanged; implemented-unverified is retained."
       },
       {
         "id": "synexia.counterpart.MIndexMember",
@@ -3845,7 +3845,7 @@
         "recipe": {
           "id": "m3-cb",
           "version": "1",
-          "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+          "path": "make/m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
           "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
           "preconditions": [
             "Pinned source bodies, exact retained OpenRewrite owner, absent targets or exact fixed point."
@@ -3855,7 +3855,7 @@
         "tests": [
           {
             "id": "cb-module-runtime",
-            "receipt": "m3/tooling/cb/evidence/receipt.json"
+            "receipt": "make/m3/tooling/cb/evidence/receipt.json"
           }
         ],
         "provenance": {
@@ -3887,7 +3887,7 @@
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
+        "observation": "See make/m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
       },
       {
         "id": "synexia.counterpart.MIndexMemberKind",
@@ -3978,7 +3978,7 @@
         "recipe": {
           "id": "m3-cb",
           "version": "1",
-          "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+          "path": "make/m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
           "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
           "preconditions": [
             "Pinned source bodies, exact retained OpenRewrite owner, absent targets or exact fixed point."
@@ -3988,7 +3988,7 @@
         "tests": [
           {
             "id": "cb-module-runtime",
-            "receipt": "m3/tooling/cb/evidence/receipt.json"
+            "receipt": "make/m3/tooling/cb/evidence/receipt.json"
           }
         ],
         "provenance": {
@@ -4020,7 +4020,7 @@
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
+        "observation": "See make/m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
       },
       {
         "id": "synexia.counterpart.MIndexMemberFlags",
@@ -4111,7 +4111,7 @@
         "recipe": {
           "id": "m3-cb",
           "version": "1",
-          "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+          "path": "make/m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
           "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
           "preconditions": [
             "Pinned source bodies, exact retained OpenRewrite owner, absent targets or exact fixed point."
@@ -4121,7 +4121,7 @@
         "tests": [
           {
             "id": "cb-module-runtime",
-            "receipt": "m3/tooling/cb/evidence/receipt.json"
+            "receipt": "make/m3/tooling/cb/evidence/receipt.json"
           }
         ],
         "provenance": {
@@ -4153,7 +4153,7 @@
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
+        "observation": "See make/m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
       },
       {
         "id": "synexia.counterpart.MIndexClassFlags",
@@ -4244,7 +4244,7 @@
         "recipe": {
           "id": "m3-cb",
           "version": "1",
-          "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+          "path": "make/m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
           "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
           "preconditions": [
             "Pinned source bodies, exact retained OpenRewrite owner, absent targets or exact fixed point."
@@ -4254,7 +4254,7 @@
         "tests": [
           {
             "id": "cb-module-runtime",
-            "receipt": "m3/tooling/cb/evidence/receipt.json"
+            "receipt": "make/m3/tooling/cb/evidence/receipt.json"
           }
         ],
         "provenance": {
@@ -4286,7 +4286,7 @@
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
+        "observation": "See make/m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
       },
       {
         "id": "synexia.counterpart.MIndexField",
@@ -4377,7 +4377,7 @@
         "recipe": {
           "id": "m3-cb",
           "version": "1",
-          "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+          "path": "make/m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
           "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
           "preconditions": [
             "Pinned source bodies, exact retained OpenRewrite owner, absent targets or exact fixed point."
@@ -4387,7 +4387,7 @@
         "tests": [
           {
             "id": "cb-module-runtime",
-            "receipt": "m3/tooling/cb/evidence/receipt.json"
+            "receipt": "make/m3/tooling/cb/evidence/receipt.json"
           }
         ],
         "provenance": {
@@ -4419,7 +4419,7 @@
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
+        "observation": "See make/m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
       },
       {
         "id": "synexia.counterpart.MIndexMethod",
@@ -4510,7 +4510,7 @@
         "recipe": {
           "id": "m3-cb",
           "version": "1",
-          "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+          "path": "make/m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
           "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
           "preconditions": [
             "Pinned source bodies, exact retained OpenRewrite owner, absent targets or exact fixed point."
@@ -4520,7 +4520,7 @@
         "tests": [
           {
             "id": "cb-module-runtime",
-            "receipt": "m3/tooling/cb/evidence/receipt.json"
+            "receipt": "make/m3/tooling/cb/evidence/receipt.json"
           }
         ],
         "provenance": {
@@ -4552,7 +4552,7 @@
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
+        "observation": "See make/m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
       },
       {
         "id": "synexia.counterpart.MIndexConstructor",
@@ -4643,7 +4643,7 @@
         "recipe": {
           "id": "m3-cb",
           "version": "1",
-          "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+          "path": "make/m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
           "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
           "preconditions": [
             "Pinned source bodies, exact retained OpenRewrite owner, absent targets or exact fixed point."
@@ -4653,7 +4653,7 @@
         "tests": [
           {
             "id": "cb-module-runtime",
-            "receipt": "m3/tooling/cb/evidence/receipt.json"
+            "receipt": "make/m3/tooling/cb/evidence/receipt.json"
           }
         ],
         "provenance": {
@@ -4685,7 +4685,7 @@
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
+        "observation": "See make/m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
       },
       {
         "id": "synexia.counterpart.MIndexRecordComponent",
@@ -4776,7 +4776,7 @@
         "recipe": {
           "id": "m3-cb",
           "version": "1",
-          "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+          "path": "make/m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
           "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
           "preconditions": [
             "Pinned source bodies, exact retained OpenRewrite owner, absent targets or exact fixed point."
@@ -4786,7 +4786,7 @@
         "tests": [
           {
             "id": "cb-module-runtime",
-            "receipt": "m3/tooling/cb/evidence/receipt.json"
+            "receipt": "make/m3/tooling/cb/evidence/receipt.json"
           }
         ],
         "provenance": {
@@ -4818,7 +4818,7 @@
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
+        "observation": "See make/m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
       },
       {
         "id": "synexia.jcc-recipe-laboratory",
@@ -4857,8 +4857,8 @@
           {
             "repo": "hsoliwal/M3jdk21",
             "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
-            "module": "m3/tooling/migration-recipes",
-            "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceRecipe.java",
+            "module": "make/m3/tooling/migration-recipes",
+            "path": "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceRecipe.java",
             "symbol": "com.m3.rewrite.M3Java21ConvergenceRecipe",
             "signatures": [
               "java.util.List<org.openrewrite.Recipe> getRecipeList()"
@@ -4872,7 +4872,7 @@
           {
             "repo": "hsoliwal/M3jdk21",
             "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
-            "module": "m3/tooling/migration-recipes",
+            "module": "make/m3/tooling/migration-recipes",
             "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java",
             "symbol": "com.m3.rewrite.atom.M3PureIntConvergenceRecipe",
             "signatures": [
@@ -4887,7 +4887,7 @@
           {
             "repo": "hsoliwal/M3jdk21",
             "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
-            "module": "m3/tooling/migration-recipes",
+            "module": "make/m3/tooling/migration-recipes",
             "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java",
             "symbol": "com.m3.rewrite.atom.M3PureIntAtomEligibility",
             "signatures": [
@@ -4903,7 +4903,7 @@
           {
             "repo": "hsoliwal/M3jdk21",
             "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
-            "module": "m3/tooling/migration-recipes",
+            "module": "make/m3/tooling/migration-recipes",
             "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/MemJava.java",
             "symbol": "com.m3.rewrite.atom.MemJava",
             "signatures": [
@@ -4918,7 +4918,7 @@
           {
             "repo": "hsoliwal/M3jdk21",
             "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
-            "module": "m3/tooling/migration-recipes",
+            "module": "make/m3/tooling/migration-recipes",
             "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3IntRecipeProjectTest.java",
             "symbol": "com.m3.rewrite.atom.M3IntRecipeProjectTest",
             "signatures": [
@@ -4933,7 +4933,7 @@
           {
             "repo": "hsoliwal/M3jdk21",
             "commit": null,
-            "module": "m3/tooling/migration-recipes",
+            "module": "make/m3/tooling/migration-recipes",
             "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/JccReceivingFixtureTest.java",
             "symbol": "com.m3.rewrite.atom.JccReceivingFixtureTest",
             "signatures": [
@@ -4990,7 +4990,7 @@
         "recipe": {
           "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-handoff-20261005",
           "version": "0.1.0-SNAPSHOT",
-          "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+          "path": "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
           "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
           "preconditions": [
             "Exact canonical map preimage 67d40925b97a38c3c1a85f337806524ac590a540bd39647b3e4b0988f2ae3fbb.",
@@ -5027,7 +5027,7 @@
           "supersedes": []
         },
         "source_state": "partial",
-        "observation": "Review and explicit root coverage obligations: m3/docs/jcc-source-handoff.md and m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json. Ledger replay tests are separate from capability acceptance; tests is empty intentionally. Independently authored receiving-fixture evidence is linked under m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json#independent_receiving_fixture; it does not promote this blocked capability."
+        "observation": "Review and explicit root coverage obligations: doc/m3/jcc-source-handoff.md and make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json. Ledger replay tests are separate from capability acceptance; tests is empty intentionally. Independently authored receiving-fixture evidence is linked under make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json#independent_receiving_fixture; it does not promote this blocked capability."
       },
       {
         "id": "synexia.jcc-java-jni-regression",
@@ -5114,7 +5114,7 @@
         "recipe": {
           "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-handoff-20261005",
           "version": "0.1.0-SNAPSHOT",
-          "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+          "path": "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
           "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
           "preconditions": [
             "Exact canonical map preimage 67d40925b97a38c3c1a85f337806524ac590a540bd39647b3e4b0988f2ae3fbb.",
@@ -5150,7 +5150,7 @@
           "supersedes": []
         },
         "source_state": "partial",
-        "observation": "Review and explicit root coverage obligations: m3/docs/jcc-source-handoff.md and m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json. Ledger replay tests are separate from capability acceptance; tests is empty intentionally."
+        "observation": "Review and explicit root coverage obligations: doc/m3/jcc-source-handoff.md and make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json. Ledger replay tests are separate from capability acceptance; tests is empty intentionally."
       },
       {
         "id": "synexia.counterpart.MIndexRegexTrigramQuery",
@@ -5238,7 +5238,7 @@
         "recipe": {
           "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-tq",
           "version": "1",
-          "path": "m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
+          "path": "make/m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
           "sha256": "245e252da59d310ea7e4229e5cafa5d25e322fee82d349337b37eab8a1f161a1",
           "preconditions": [
             "Explicit ABSENT Java targets, exact template hashes, pinned existing recipe and backing owners.",
@@ -5249,7 +5249,7 @@
         "tests": [
           {
             "id": "tq-port",
-            "receipt": "m3/tooling/tq/evidence/receipt.json"
+            "receipt": "make/m3/tooling/tq/evidence/receipt.json"
           }
         ],
         "provenance": {

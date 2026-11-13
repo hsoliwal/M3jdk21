@@ -216,7 +216,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--maven-global-settings", type=Path)
     ap.add_argument("--maven-offline", choices=("true", "false"), default="true")
     ap.add_argument("--resolve-build-tools", action="store_const", dest="maven_offline", const="false")
-    ap.add_argument("--repo-root", type=Path, default=Path(__file__).resolve().parents[4])
+    ap.add_argument("--repo-root", type=Path, default=Path(__file__).resolve().parents[5])
     ap.add_argument("--source-root", type=Path, default=Path(__file__).resolve().parent)
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--require-m3-runtime", action="store_true")
@@ -341,7 +341,7 @@ def main(argv: list[str] | None = None) -> int:
     manifest = out / "DESCRIPTOR_MANIFEST.tsv"
     manifest.write_text("module\tartifacts\tunit_jars\ttarget\tsha256\tgenerated\n", encoding="utf-8")
     pack = out / "pack"
-    command([sys.executable, repo / "m3/tooling/jmod-recipes/tools/jmod_pack.py",
+    command([sys.executable, repo / "make/m3/tooling/jmod-recipes/tools/jmod_pack.py",
              "--jdk-home", jdk, "--image-tsv", image_tsv, "--manifest", manifest,
              "--layer-root", source, "--out", pack, "--root-module", MODULE,
              "--add-modules", "java.se", "--legal-notices", legal], logs / "jmod-pack.log", env=env)
@@ -376,7 +376,7 @@ def main(argv: list[str] | None = None) -> int:
               "m3_string_runtime": m3, "native_code": "NO_NEW_JNI_ABI",
               "full_jdk_suite": "NOT_RUN",
               "jackson_upstream_suite": "SEPARATE_UPSTREAM_QUALIFICATION_RECEIPT",
-              "packaging_owner": "m3/tooling/jmod-recipes/tools/jmod_pack.py"}
+              "packaging_owner": "make/m3/tooling/jmod-recipes/tools/jmod_pack.py"}
     # Build and package operations must not mutate the actual donor checkout.
     check_donors(repo, lock)
     for name, expected in source_hashes.items():

@@ -5,7 +5,7 @@
 
 This module does not decide compatibility. JEP_CATALOGUE.tsv, UPSTREAM_CHANGE_SEEDS.tsv and
 COMMUNITY_CAPABILITY_CANDIDATES.tsv remain the authorities for disposition. The compiler only
-projects those decisions plus the physically present m3/backports/recipes directories into small
+projects those decisions plus the physically present make/m3/backports/recipes directories into small
 ordered work atoms suitable for Maven/OpenRewrite/Camel-style orchestration.
 """
 
@@ -372,7 +372,7 @@ def compile_community_rows(
 
 
 def compile_root(root: Path) -> list[Atom]:
-    backports = root / "m3" / "backports"
+    backports = root / "make" / "m3" / "backports"
     recipes = backports / "recipes"
     residue_path = backports / "JEP_RESIDUE_QUEUE.tsv"
     residue_rows = _rows(residue_path) if residue_path.is_file() else []
@@ -474,7 +474,7 @@ def _work_ref(atom: Atom) -> str:
     if atom.phase == "RECIPE":
         if atom.state.startswith("MATERIALIZED_RECIPE"):
             return ";".join(
-                "m3/backports/recipes/" + value
+                "make/m3/backports/recipes/" + value
                 for value in atom.recipe_ref.split(";")
                 if value
             )
@@ -579,7 +579,7 @@ def summary(atoms: Sequence[Atom]) -> dict[str, object]:
 def _args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--root", type=Path, default=Path(__file__).resolve().parents[2]
+        "--root", type=Path, default=Path(__file__).resolve().parents[3]
     )
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--summary", type=Path, required=True)

@@ -16,10 +16,10 @@ on:
       - 'test/jdk/com/sun/crypto/provider/MLKEMProviderSmoke.java'
       - 'test/jdk/sun/security/provider/acvp/MLKEMKnownAnswer.java'
       - 'test/jdk/sun/security/provider/acvp/data/ML-KEM-*/internalProjection.json'
-      - 'm3/backports/recipes/j496/**'
-      - 'm3/backports/JEP_RESIDUE_QUEUE.tsv'
-      - 'm3/backports/test_jep_residue.py'
-      - 'm3/tooling/migration-recipes/**'
+      - 'make/m3/backports/recipes/j496/**'
+      - 'make/m3/backports/JEP_RESIDUE_QUEUE.tsv'
+      - 'make/m3/backports/test_jep_residue.py'
+      - 'make/m3/tooling/migration-recipes/**'
       - '.github/workflows/m3-jep496-mlkem.yml'
   pull_request:
     paths:
@@ -32,10 +32,10 @@ on:
       - 'test/jdk/com/sun/crypto/provider/MLKEMProviderSmoke.java'
       - 'test/jdk/sun/security/provider/acvp/MLKEMKnownAnswer.java'
       - 'test/jdk/sun/security/provider/acvp/data/ML-KEM-*/internalProjection.json'
-      - 'm3/backports/recipes/j496/**'
-      - 'm3/backports/JEP_RESIDUE_QUEUE.tsv'
-      - 'm3/backports/test_jep_residue.py'
-      - 'm3/tooling/migration-recipes/**'
+      - 'make/m3/backports/recipes/j496/**'
+      - 'make/m3/backports/JEP_RESIDUE_QUEUE.tsv'
+      - 'make/m3/backports/test_jep_residue.py'
+      - 'make/m3/tooling/migration-recipes/**'
       - '.github/workflows/m3-jep496-mlkem.yml'
   workflow_dispatch:
 
@@ -59,8 +59,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          named=m3/backports/recipes/jdk-8340327-java21-internal/CURRENT_TREE_RECEIPT.tsv
-          shake=m3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv
+          named=make/m3/backports/recipes/jdk-8340327-java21-internal/CURRENT_TREE_RECEIPT.tsv
+          shake=make/m3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv
           grep -F $'current_tree_state\tCANDIDATE_MATERIALIZED_PROVED' "$named"
           grep -F $'recipe_fixed_point\tPASS' "$named"
           grep -F $'named_key_jtreg\tPASS' "$named"
@@ -85,7 +85,7 @@ jobs:
       - name: Diff hygiene
         run: git diff --check
       - name: Released JEP residue stays derived
-        run: python3 -m unittest m3/backports/test_jep_residue.py
+        run: python3 -m unittest make/m3/backports/test_jep_residue.py
 
   jdk-proof:
     needs: dependency-gate
@@ -166,8 +166,8 @@ jobs:
           from pathlib import Path
           import os
 
-          receipt = Path("m3/backports/recipes/j496/CURRENT_TREE_RECEIPT.tsv")
-          dependency = Path("m3/backports/recipes/j496/CURRENT_DEPENDENCY_STATE.tsv")
+          receipt = Path("make/m3/backports/recipes/j496/CURRENT_TREE_RECEIPT.tsv")
+          dependency = Path("make/m3/backports/recipes/j496/CURRENT_DEPENDENCY_STATE.tsv")
           updates = {
               "current_tree_state": "CANDIDATE_MATERIALIZED_PROVED",
               "blocking_dependency": "NONE",
@@ -231,18 +231,18 @@ jobs:
           dependency.write_text("\n".join(dep_rows) + "\n", encoding="utf-8")
           PY
           git diff --check
-          grep -F $'current_tree_state\tCANDIDATE_MATERIALIZED_PROVED' m3/backports/recipes/j496/CURRENT_TREE_RECEIPT.tsv
-          grep -F $'blocking_dependency\tNONE' m3/backports/recipes/j496/CURRENT_TREE_RECEIPT.tsv
-          grep -F $'fips203_jtreg\tPASS' m3/backports/recipes/j496/CURRENT_TREE_RECEIPT.tsv
-          grep -F $'provider_oid_api_smoke\tPASS' m3/backports/recipes/j496/CURRENT_TREE_RECEIPT.tsv
-          grep -F $'promotion\tNOT_AUTHORIZED' m3/backports/recipes/j496/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'current_tree_state\tCANDIDATE_MATERIALIZED_PROVED' make/m3/backports/recipes/j496/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'blocking_dependency\tNONE' make/m3/backports/recipes/j496/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'fips203_jtreg\tPASS' make/m3/backports/recipes/j496/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'provider_oid_api_smoke\tPASS' make/m3/backports/recipes/j496/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'promotion\tNOT_AUTHORIZED' make/m3/backports/recipes/j496/CURRENT_TREE_RECEIPT.tsv
       - name: Commit only security proof receipts
         shell: bash
         env:
           BRANCH_NAME: ${{ github.ref_name }}
         run: |
           set -euo pipefail
-          git add             m3/backports/recipes/j496/CURRENT_TREE_RECEIPT.tsv             m3/backports/recipes/j496/CURRENT_DEPENDENCY_STATE.tsv
+          git add             make/m3/backports/recipes/j496/CURRENT_TREE_RECEIPT.tsv             make/m3/backports/recipes/j496/CURRENT_DEPENDENCY_STATE.tsv
           git diff --cached --check
           git config user.name "m3-recipe-bot"
           git config user.email "actions@users.noreply.github.com"
@@ -267,8 +267,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          grep -F $'current_tree_state\tCANDIDATE_MATERIALIZED_PROVED' m3/backports/recipes/j496/CURRENT_TREE_RECEIPT.tsv
-          grep -F $'blocking_dependency\tNONE' m3/backports/recipes/j496/CURRENT_TREE_RECEIPT.tsv
-          grep -F $'promotion\tNOT_AUTHORIZED' m3/backports/recipes/j496/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'current_tree_state\tCANDIDATE_MATERIALIZED_PROVED' make/m3/backports/recipes/j496/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'blocking_dependency\tNONE' make/m3/backports/recipes/j496/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'promotion\tNOT_AUTHORIZED' make/m3/backports/recipes/j496/CURRENT_TREE_RECEIPT.tsv
           git diff --exit-code
           test -z "$(git status --porcelain=v1 -uall)"

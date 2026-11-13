@@ -7,7 +7,7 @@ jdk.m3.collections.M3IntIterator	jdk.m3.collections.IntIterator	core	primitive i
 jdk.m3.collections.M3LongIterator	jdk.m3.collections.LongIterator	core	primitive iterator
 jdk.m3.collections.M3LongDeque	jdk.m3.collections.LongDeque	core	deque interface
 jdk.m3.collections.M3LongQueue	jdk.m3.collections.LongQueue	core	queue interface
-jdk.m3.collections.M3PrimitiveKind	jdk.m3.collections.PrimitiveKind	core	the eight primitive kinds (used by m3/tooling)
+jdk.m3.collections.M3PrimitiveKind	jdk.m3.collections.PrimitiveKind	core	the eight primitive kinds (used by make/m3/tooling)
 jdk.m3.collections.M3IntArrayList	jdk.m3.collections.IntArrayList	core	canonical growable int list
 jdk.m3.collections.M3LongArrayList	jdk.m3.collections.LongArrayList	core	canonical growable long list (used by m3/eclipse)
 jdk.m3.collections.M3IntHashSet	jdk.m3.collections.IntHashSet	core	open-addressing int set
@@ -159,4 +159,4 @@ jdk.m3.collections.M3Collections	jdk.m3.collections.M3Collections	core	used by m
 jdk.m3.collections.M3ObjectIdentitySet	jdk.m3.collections.ObjectIdentitySet	core	used by m3/eclipse (A2)
 jdk.m3.collections.M3SlotAllocator28	jdk.m3.collections.SlotAllocator28	core	used by m3/eclipse (A2); name to review in phase C
 jdk.m3.collections.M3ItemState	jdk.m3.collections.ItemState	core	used by m3/viewport-core (A2)
-jdk.m3.collections.M3ObjectResidency	jdk.m3.collections.ObjectResidency	core	used by m3/tooling/object-residency (A2)
+jdk.m3.collections.M3ObjectResidency	jdk.m3.collections.ObjectResidency	core	used by make/m3/tooling/object-residency (A2)

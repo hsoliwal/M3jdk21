@@ -19,4 +19,4 @@ donors, SPDX block headers kept, WRAP rows), `RELOCATION_MAP.tsv` (rows, SKIP an
 (donor commit, blob, sha256, URL, target sha256, body_match), `differential.sh` + `differential/M3FilteredMapsDump.java.tmpl`
 (donor vs relocated + brute-force model), `GATES.tsv`, `RECIPE_MEMORY.tsv`.
 
-Re-run: `python -I m3/collections/qualification/census-g1-20261106/relocate.py --donor-git <com.synexia clone> --donor-rev ca1aafc4d94f9dd1ee288226dcca070cc60991c9 [--check]`.
+Re-run: `python -I make/m3/collections/qualification/census-g1-20261106/relocate.py --donor-git <com.synexia clone> --donor-rev ca1aafc4d94f9dd1ee288226dcca070cc60991c9 [--check]`.

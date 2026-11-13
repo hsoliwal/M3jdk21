@@ -12,10 +12,10 @@ The receiver's complete existing five source files were retrieved and found byte
 | Path | Receiver/common Git blob | Exact donor Git blob |
 |---|---|---|
 | `.github/workflows/m3jdk21-upstream-inventory.yml` | `7a6fd8bae568b50f4beee19025f447ff80334ddd` | `b8e289823a580f31c60b040a2479adb80ba0c365` |
-| `m3/backports/compatibility_queue.py` | `4296619d4edf1be471f5cf3cf9bf249642bdacea` | `cbdf02fe4b1232c1c52e35e705d32a14ecd72582` |
-| `m3/backports/inventory.py` | `9b85f31fd88a06744df041241baf67116c24b2bf` | `f81f9f09f87bd91d5479aed1554439d6b5b056d3` |
-| `m3/backports/test_compatibility_queue.py` | `5d6272318a29f2052f5bb27e8dc6ecbfcb7cb3b1` | `e5adab00788f868e5d72e68d533b65d6cc6ab3aa` |
-| `m3/backports/test_inventory.py` | `4c1b1ed3f3ac22d61580cb86fef923a877f46457` | `244af69095a850fc67cfe23f5188e1cf91b3e88e` |
+| `make/m3/backports/compatibility_queue.py` | `4296619d4edf1be471f5cf3cf9bf249642bdacea` | `cbdf02fe4b1232c1c52e35e705d32a14ecd72582` |
+| `make/m3/backports/inventory.py` | `9b85f31fd88a06744df041241baf67116c24b2bf` | `f81f9f09f87bd91d5479aed1554439d6b5b056d3` |
+| `make/m3/backports/test_compatibility_queue.py` | `5d6272318a29f2052f5bb27e8dc6ecbfcb7cb3b1` | `e5adab00788f868e5d72e68d533b65d6cc6ab3aa` |
+| `make/m3/backports/test_inventory.py` | `4c1b1ed3f3ac22d61580cb86fef923a877f46457` | `244af69095a850fc67cfe23f5188e1cf91b3e88e` |
 
 ## Merge procedure
 One normal, **non-force, exact-head-leased Git two-parent commit on this new isolated review branch**: first parent is this documentation commit descending from original receiving tree, second parent is original donor commit. Compose its Git tree solely by copying the five pre-existing donor file blobs/modes into the existing first-parent tree (no reserialization, no destructive ours/theirs conflict). Everything outside these five paths is **identical** to first parent by tree inheritance. After commit, independently compare first-parent → merge and donor file identities, and confirm first-parent + donor ancestry; refuse any drift.

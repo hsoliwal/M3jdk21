@@ -6,7 +6,7 @@ from hashlib import sha256
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-REPO = HERE.parents[3]
+REPO = HERE.parents[4]
 ORACLE = HERE / "recipe-mirror"
 TARGETS = {
     "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3BagRankIndex.java":

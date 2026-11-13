@@ -7,7 +7,7 @@
 path	first_parent_blob	second_parent_and_merged_blob	mode	change	verified
 src/java.base/share/classes/java/util/zip/InflaterOutputStream.java	7b08d5b45385caaecec8d14ceee6c3eb3ec3a4f9	19a56deb5977c64e16d3e8593fb74dc8444e90eb	100644	MODIFIED	EXACT_GIT_BLOB
 test/jdk/java/util/zip/InflaterOutputStream/Jbs8369181Oracle.java	ABSENT	0aa7b0d58ac0f8dfb4aabec750b313def068d09b	100644	ADDED	EXACT_GIT_BLOB
-m3/backports/qualification/JDK-8369181_INFLATER_FINISH_RECEIPT.md	ABSENT	84009aa9d0c0176b3684a50799458073ab84514a	100644	ADDED	EXACT_GIT_BLOB
+make/m3/backports/qualification/JDK-8369181_INFLATER_FINISH_RECEIPT.md	ABSENT	84009aa9d0c0176b3684a50799458073ab84514a	100644	ADDED	EXACT_GIT_BLOB
 # prior_first_merge_preserved	5	5	all_five_git_blobs_unchanged
 # upstream_attribution	openjdk/jdk@e58e576f80cd35728bac6738474c4090737c16a8	GPLv2+Classpath-Exception
 # runtime_merge_acceptance	NOT_RUN	NO_DEFAULT_BRANCH_PROMOTION

@@ -24,8 +24,8 @@ and storage plans in `STORAGE_PLANS.tsv`.
 
 ```
 java -cp guava-33.4.8-jre.jar;failureaccess-1.0.3.jar;commons-collections4-4.5.0.jar;spring-core-6.2.0.jar;spring-jcl-6.2.0.jar \
-     M3FiveProviderScaffold.java inventory m3/collections/qualification/five-provider-inventory-20261018
-java -cp ... M3FiveProviderScaffold.java scaffold m3/collections/qualification/five-provider-inventory-20261018 m3/collections/implementations
+     M3FiveProviderScaffold.java inventory make/m3/collections/qualification/five-provider-inventory-20261018
+java -cp ... M3FiveProviderScaffold.java scaffold make/m3/collections/qualification/five-provider-inventory-20261018 m3/collections/implementations
 ```
 
 Inputs: `CANDIDATES_PR1278.tsv` (exact copy, Git blob `590a4a3e9d7d971eb2a19c586068695a2623df1d` from

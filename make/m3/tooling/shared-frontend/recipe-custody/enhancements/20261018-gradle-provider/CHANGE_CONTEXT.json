@@ -2,7 +2,7 @@
   "task": "m3-gradle-provider-20261018",
   "stage": "LOCAL_QUALIFICATION_PASS_READY_FOR_ROOT_RECEIPT",
   "authorized_workspace": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work",
-  "receiver_prefix": "m3/tooling/module-packs/build-support/gradle-provider/",
+  "receiver_prefix": "make/m3/tooling/module-packs/build-support/gradle-provider/",
   "receiver_baseline": "hsoliwal/M3jdk21@2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
   "gradle_spi_commit": "419a77cf61af3924f60678510ed2440230047671",
   "gradle_spi_blob": "f2a08ee8074d6f6faec69543032c9176ad62ef11",

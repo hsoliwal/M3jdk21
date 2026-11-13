@@ -63,14 +63,14 @@ public final class A3Plan {
         Path checkedRoot = A3Fs.root(root);
         ArrayList<Row> rows = new ArrayList<>();
         loadJep(
-                checkedRoot.resolve("m3/backports/JEP_CATALOGUE.tsv"),
+                checkedRoot.resolve("make/m3/backports/JEP_CATALOGUE.tsv"),
                 rows);
         loadJbs(
-                checkedRoot.resolve("m3/backports/UPSTREAM_CHANGE_SEEDS.tsv"),
+                checkedRoot.resolve("make/m3/backports/UPSTREAM_CHANGE_SEEDS.tsv"),
                 rows);
         loadCap(
                 checkedRoot.resolve(
-                        "m3/backports/COMMUNITY_CAPABILITY_CANDIDATES.tsv"),
+                        "make/m3/backports/COMMUNITY_CAPABILITY_CANDIDATES.tsv"),
                 rows);
         loadAlg(checkedRoot, rows);
         rows.sort(

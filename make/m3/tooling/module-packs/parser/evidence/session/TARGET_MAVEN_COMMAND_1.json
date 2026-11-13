@@ -5,7 +5,7 @@
     "--settings",
     "/workspace/scratch/a0f19f379302/parser-maven-settings.xml",
     "-f",
-    "m3/tooling/module-packs/pom.xml",
+    "make/m3/tooling/module-packs/pom.xml",
     "-P",
     "m3-parser",
     "-Dstyle.color=never",

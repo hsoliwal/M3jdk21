@@ -8,7 +8,7 @@ import java.util.Random;
 import java.util.TreeMap;
 
 /** Java 21 executable differential oracle, intentionally no JUnit or JNI dependency. */
-//FLLDCIM: RELOCATE - donor blob 86ad92bba6a5 at ca1aafc4d94f; recipe m3/collections/qualification/census-g4-20261106/relocate.py v4
+//FLLDCIM: RELOCATE - donor blob 86ad92bba6a5 at ca1aafc4d94f; recipe make/m3/collections/qualification/census-g4-20261106/relocate.py v4
 public final class LongLongIndexedSortedViewProof {
     private LongLongIndexedSortedViewProof() { }
 

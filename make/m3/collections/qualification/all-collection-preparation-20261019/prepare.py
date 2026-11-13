@@ -65,8 +65,8 @@ def selected(repo: str, path: str) -> bool:
     if repo.lower().endswith('/m3jdk21'):
         return (path.startswith('m3/collections/') or path.startswith('m3/pcollections/')
                 or path.startswith('src/java.base/share/classes/java/util/')
-                or path in ('AGENTS.md', 'm3/docs/m3jdk21-porting-invariant.md',
-                            'm3/docs/name-mapping.json', 'LICENSE', 'ADDITIONAL_LICENSE_INFO'))
+                or path in ('AGENTS.md', 'doc/m3/m3jdk21-porting-invariant.md',
+                            'doc/m3/name-mapping.json', 'LICENSE', 'ADDITIONAL_LICENSE_INFO'))
     return True
 
 

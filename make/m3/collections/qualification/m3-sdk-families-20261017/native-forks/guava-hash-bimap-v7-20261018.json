@@ -19,7 +19,7 @@
       "upstream_fqcn": "com.google.common.collect.HashBiMap",
       "vendor": "GUAVA"
     },
-    "path": "m3/collections/qualification/m3-sdk-families-20261017/FAMILY_CATALOG.tsv",
+    "path": "make/m3/collections/qualification/m3-sdk-families-20261017/FAMILY_CATALOG.tsv",
     "repository": "hsoliwal/M3jdk21",
     "revision": "cde88a7a565ce1701038974199896c05dda7f04e"
   },

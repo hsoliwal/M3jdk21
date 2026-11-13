@@ -6,9 +6,9 @@ on:
     paths:
       - '.github/workflows/m3-source-qualified-tq-build.yml'
       - 'm3/vendor/third_party/**'
-      - 'm3/tooling/tq-sync/**'
-      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java'
-      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java'
+      - 'make/m3/tooling/tq-sync/**'
+      - 'make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java'
+      - 'make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java'
       - '.m3/task-crates/dependency-source-inline-20261010/verify_crate.py'
 permissions:
   contents: read
@@ -311,12 +311,12 @@ jobs:
               if code:raise RuntimeError(name+" failed with "+str(code))
           py=[os.environ["M3_PYTHON"],"-I","-S","-B"]
           env["M3_QUALIFICATION_ROOT"]=str(root)
-          qualifier=source/"m3/tooling/tq-sync/source-build/qualify.py"
+          qualifier=source/"make/m3/tooling/tq-sync/source-build/qualify.py"
           settings=root/"home/.m2"
           maven=["mvn","-B","-ntp","-s",str(settings/"settings.xml"),"-gs",str(settings/"global-settings.xml"),"-Dmaven.repo.local="+str(root/"m2"),"-Dstyle.color=never"]
           try:
               run("binding",py+[str(qualifier),"binding"],deadline=60)
-              run("model-contract",py+[str(source/"m3/tooling/tq-sync/source-reactor/test_reactor.py")],deadline=90)
+              run("model-contract",py+[str(source/"make/m3/tooling/tq-sync/source-reactor/test_reactor.py")],deadline=90)
               model=json.loads((root/"model-receipt.json").read_bytes())
               if model["tests"]!=6 or model["errors"] or model["failures"] or model["skips"] or not model["successful"]:raise RuntimeError("exact prior model contract required")
               # The unchanged model suite writes ROOT outputs; retain them once before bulk work.
@@ -338,7 +338,7 @@ jobs:
               run("producer-install",py+[str(qualifier),"produce"],deadline=900)
               run("serial-selftest",py+[str(qualifier),"selftest"],deadline=90)
               run("installed-artifacts",py+[str(qualifier),"installed"],deadline=90)
-              run("tq-verify",maven+["-f",str(source/"m3/tooling/tq-sync/source-reactor/pom.xml"),"-Dm3.receiver.relative=../../../..","-pl","com.m3:tq-sync","-DskipTests=false","-Dmaven.test.skip=false","verify"],deadline=300)
+              run("tq-verify",maven+["-f",str(source/"make/m3/tooling/tq-sync/source-reactor/pom.xml"),"-Dm3.receiver.relative=../../../..","-pl","com.m3:tq-sync","-DskipTests=false","-Dmaven.test.skip=false","verify"],deadline=300)
               run("build-report",py+[str(qualifier),"report"],deadline=180)
               receipt=json.loads((bundle/"build-receipt.json").read_bytes())
               if receipt["producerBuildQualified"] is not True or receipt["tqSyncFixtureJUnitQualified"] is not True:raise RuntimeError("actual build and TQ sync test proof required")
@@ -356,8 +356,8 @@ jobs:
                   before=gate(496*1024**2)
                   present=sorted(bundle.iterdir())
                   external=sorted(root.glob("*.json"))+sorted(root.glob("*.log"))
-                  external+=sorted((source/"m3/tooling/tq-sync/target/surefire-reports").glob("TEST-*.xml"))
-                  external+=sorted((source/"m3/tooling/tq-sync/target/surefire-reports").glob("*.txt"))
+                  external+=sorted((source/"make/m3/tooling/tq-sync/target/surefire-reports").glob("TEST-*.xml"))
+                  external+=sorted((source/"make/m3/tooling/tq-sync/target/surefire-reports").glob("*.txt"))
                   external+=[qualifier.parent/"source-binding.json"]
                   selected=present+[p for p in external if p.is_file()]
                   if any(not p.is_file() or any(q.is_symlink() for q in [p,*p.parents]) for p in selected):raise RuntimeError("closed artifact source fence")

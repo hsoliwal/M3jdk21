@@ -6,7 +6,7 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalColumns.java'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalEvidenceBridge.java'
       - 'test/jdk/jdk/m3/collections/M3SignalEvidenceBridge*.java'
-      - 'm3/collections/qualification/typed-signal-evidence-bridge-20261022/**'
+      - 'make/m3/collections/qualification/typed-signal-evidence-bridge-20261022/**'
       - '.github/workflows/m3-typed-signal-evidence-bridge-20261022.yml'
   workflow_dispatch:
 permissions:
@@ -33,7 +33,7 @@ jobs:
         run: |
           set -euo pipefail
           git diff --check origin/m3/typed-signal-topk-20261022...HEAD
-          bash m3/collections/qualification/typed-signal-evidence-bridge-20261022/verify.sh
+          bash make/m3/collections/qualification/typed-signal-evidence-bridge-20261022/verify.sh
       - name: Strict Java21 original typed sources, existing progressive engine and bridge
         shell: bash
         run: |
@@ -96,5 +96,5 @@ jobs:
           mvn -B -ntp -f m3/vendor/third_party/pom.xml \
             -pl junit-jupiter-5.10.2 -am -DskipTests install
           mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
-          mvn -B -ntp -f m3/collections/qualification/typed-signal-evidence-bridge-20261022/pom.xml \
+          mvn -B -ntp -f make/m3/collections/qualification/typed-signal-evidence-bridge-20261022/pom.xml \
             -Dtest=M3SignalEvidenceBridgeTest test

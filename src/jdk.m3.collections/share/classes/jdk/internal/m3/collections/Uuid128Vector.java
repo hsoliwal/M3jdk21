@@ -13,7 +13,7 @@ import java.util.UUID;
  * <p>Payload is 16 bytes per UUID instead of retaining one UUID/String object per occurrence.
  * A consumer materializes UUID/String only at an explicit boundary.</p>
  */
-//FLLDCIM: RELOCATE - donor blob 8eace5c30c50 at commit 3385d79a2968 (repository, path, URL and digests: m3/collections/recipe/immutable-pools-20261106/PROVENANCE.tsv); recipe m3/collections/recipe/immutable-pools-20261106/relocate.py v2
+//FLLDCIM: RELOCATE - donor blob 8eace5c30c50 at commit 3385d79a2968 (repository, path, URL and digests: make/m3/collections/recipe/immutable-pools-20261106/PROVENANCE.tsv); recipe make/m3/collections/recipe/immutable-pools-20261106/relocate.py v2
 public final class Uuid128Vector {
     private final long[] most;
     private final long[] least;

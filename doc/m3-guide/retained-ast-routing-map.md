@@ -100,8 +100,8 @@ Synexia facts.
 This map does not expand the separate `m3/ports/indexstring` bridge or frozen-text
 compatibility fixture into a production AST owner. It does not rename or qualify
 reserved `jdk.internal.mindex.M3AST`/`M3ASTPC` or compiler-specific target mappings.
-The [porting invariant](../../m3/docs/m3jdk21-porting-invariant.md), existing
-[naming map](../../m3/docs/name-mapping.json) and
+The [porting invariant](../m3/m3jdk21-porting-invariant.md), existing
+[naming map](../m3/name-mapping.json) and
 [current-full-borrow plan](../../m3/m3-import/current-full-borrow/README.md)
 keep target consumer/module/runtime gates and String-first promotion order intact.
 

@@ -14,6 +14,6 @@ All eight native jobs exited zero, reached zero active owned processes, and clos
 
 Canonical Synexia recipe `com.synexia.m3.M3IndexPathRankWordWalk20261020`, PR12545 head `8ed3b94b207612bc71fbff6fd02de985bb930107`, remains separate: its actual OpenRewrite/Maven SDK application and recipe tests were not run by this proof. JNI parity, benchmarks, whole-image/JDK integration, downstream compatibility, and merge/promotion admission remain pending. The global active family is unchanged.
 
-Publish this data under `m3/collections/evidence/index-path-rank-wordwalk-20261020/windows-host-20261020/`. Keep Python launchers, classes, caches, and private session/harness material outside the public bundle. Apache-2.0 notices remain in the unchanged source donors.
+Publish this data under `make/m3/collections/evidence/index-path-rank-wordwalk-20261020/windows-host-20261020/`. Keep Python launchers, classes, caches, and private session/harness material outside the public bundle. Apache-2.0 notices remain in the unchanged source donors.
 
 The frozen INVENTORY.json describes the original K execution inputs, not this public metadata folder. Its README.md row maps to the exact original [PREPARATION_README.md](PREPARATION_README.md), retained byte for byte. Its four Java rows identify the recorded staged inputs and public Git blobs; those source bodies are not duplicated in this proof folder. PLAN.json is published with its original bytes.

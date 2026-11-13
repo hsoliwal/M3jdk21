@@ -7,4 +7,4 @@ javap_shape	javap -p donor vs relocated, package and progress names normalised	6
 differential_120	python recipe/differential.py <donor> <work> <cp> 0x4d3343524546 120	8/8 IDENTICAL (JIT and -Xint)	proofs byte-identical; probe units=120 methods=587 edges=14845 throws=0 digest 3885eb95eeece00d
 mutants	python recipe/mutants.py <work> <cp>	killed=6/6	liveness def kill, MUST join, unknown guard, census ending diff, census before lane, escaped mask; 3 also change the probe digest
 naming_fixed_point	a3/jn/jdk_naming.py rewrite_text over the module (lineage files excluded as the rewrite excludes them)	naming_changed_files=0 of 19	RECIPE_MEMORY CREF-2
-reactor	mvn -pl compiler/reference-flow -am from m3/pom.xml	NOT_RUN	no full m3 checkout on this machine (disks full); standalone build against the installed m3-collections/m3-arrays artifacts
+reactor	mvn -pl compiler/reference-flow -am from make/m3/pom.xml	NOT_RUN	no full m3 checkout on this machine (disks full); standalone build against the installed m3-collections/m3-arrays artifacts

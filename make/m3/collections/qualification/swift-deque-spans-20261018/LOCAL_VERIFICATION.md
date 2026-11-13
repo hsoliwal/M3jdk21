@@ -95,7 +95,7 @@ establish atom-specific native savings. Two contiguous copies still perform O(n)
 The target's existing command remains:
 
 ```sh
-JAVA_HOME=/path/to/jdk21 MVN=/path/to/mvn python3 m3/collections/qualification/full-java-jni-20261018/verify.py
+JAVA_HOME=/path/to/jdk21 MVN=/path/to/mvn python3 make/m3/collections/qualification/full-java-jni-20261018/verify.py
 ```
 
 The canonical crate's Maven POM runs the real shared recipe owners; set `parser.classpath`

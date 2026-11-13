@@ -6,7 +6,7 @@
 /*
  * @test
  * @summary Differential of the relocated xxHash64 streaming and file API (jdk.internal.m3.hash.XxHash64Streaming,
- *          recipe m3/qualification/hash-xxhash64-streaming-20261106): the donor contract (the known empty-input
+ *          recipe make/m3/qualification/hash-xxhash64-streaming-20261106): the donor contract (the known empty-input
  *          vector, 25 lengths x 4 seeds x 8 chunk widths of read-only big-endian heap slices, direct sliced buffers,
  *          reset and reuse, repeatable and intermediate getValue, files across the 256 KiB read boundary) against the
  *          one-shot of the owner, M3LongHashFunction.xx(seed).hashBytes(byte[]).
@@ -29,7 +29,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /** Contract checks for the existing array, ByteBuffer and file hashing interfaces. */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/ca1aafc4d94f9dd1ee288226dcca070cc60991c9/synexia-fileindex/src/test/java/com/synexia/fileindex/content/XXHash64StreamingTest.java blob e813c1ae9577; recipe m3/qualification/hash-xxhash64-streaming-20261106/recipe/relocate.py v4
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/ca1aafc4d94f9dd1ee288226dcca070cc60991c9/synexia-fileindex/src/test/java/com/synexia/fileindex/content/XXHash64StreamingTest.java blob e813c1ae9577; recipe make/m3/qualification/hash-xxhash64-streaming-20261106/recipe/relocate.py v4
 final class XxHash64StreamingTest {
     private static final int[] LENGTHS = {
         0, 1, 3, 7, 8, 15, 16, 31, 32, 33, 63, 64, 65, 127, 128,

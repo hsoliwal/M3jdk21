@@ -13,7 +13,7 @@ That draft inventories the target's existing recipe-source surface, not yet migr
 ## Exact source intake
 
 - Target original `master` commit: `4e29dc9d4141261e8763fbe9ffd6a20e017b1aff`.
-- Existing scoped receipt root: `m3/tooling/migration-recipes/src/`.
+- Existing scoped receipt root: `make/m3/tooling/migration-recipes/src/`.
 - Git-blob-identified scoped source assets: **336** total,
   consisting of **85 main Java** (**73** named `*Recipe.java`),
   **115 YAML source resources**, **136 test Java**.

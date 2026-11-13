@@ -29,7 +29,7 @@ final class M3ModulePackRecipesTest implements RewriteTest {
                         .cycles(2).expectedCyclesThatMakeChanges(1),
                 xml(M3RegisterModulePacksRecipe.resource("reactor-before.xml"),
                         M3RegisterModulePacksRecipe.resource("reactor-after.xml"),
-                        source -> source.path("m3/pom.xml").noTrim()));
+                        source -> source.path("make/m3/pom.xml").noTrim()));
     }
 
     @Test
@@ -37,7 +37,7 @@ final class M3ModulePackRecipesTest implements RewriteTest {
         var context = new InMemoryExecutionContext();
         var input = XmlParser.builder().build().parse(context,
                 M3RegisterModulePacksRecipe.resource("reactor-before.xml").strip())
-                .findFirst().orElseThrow().withSourcePath(Path.of("m3/pom.xml"));
+                .findFirst().orElseThrow().withSourcePath(Path.of("make/m3/pom.xml"));
         assertThrows(RuntimeException.class,
                 () -> new M3RegisterModulePacksRecipe().getVisitor().visit(input, context));
     }
@@ -107,7 +107,7 @@ final class M3ModulePackRecipesTest implements RewriteTest {
         var changed = XmlParser.builder().build().parse(context,
                 M3RegisterModulePacksRecipe.resource("reactor-before.xml").replace(
                         "M3JDK21 Maven control reactor", "Unreviewed reactor"))
-                .findFirst().orElseThrow().withSourcePath(Path.of("m3/pom.xml"));
+                .findFirst().orElseThrow().withSourcePath(Path.of("make/m3/pom.xml"));
         assertThrows(RuntimeException.class,
                 () -> new M3RegisterModulePacksRecipe().getVisitor().visit(changed, context));
         assertThrows(IllegalStateException.class,

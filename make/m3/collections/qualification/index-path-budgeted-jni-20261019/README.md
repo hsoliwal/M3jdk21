@@ -24,4 +24,4 @@
 
 **NOT_EXECUTED:** full Maven Java21 module/reactor, real JNI `--native` and `-Xcheck:jni`, native C17 compile and parity, full source-built M3JDK21 and installed-image launch, vt/jtreg/HotSpot, all five JDK/Guava/Eclipse Collections/Commons Collections/Spring Framework contracts, JMH/CPU/heap/native memory comparisons. This draft does not advance String -> arrays -> collections admission.
 
-**Work selection catalogue:** `m3/collections/algorithm-catalog/index-path-budgeted-jni-20261019.tsv`. Serial next file must re-pin its preimage and consult accumulated problem-category decisions. Neither full filtered/sorted wrapper contract completion nor native speedup is claimed.
+**Work selection catalogue:** `make/m3/collections/algorithm-catalog/index-path-budgeted-jni-20261019.tsv`. Serial next file must re-pin its preimage and consult accumulated problem-category decisions. Neither full filtered/sorted wrapper contract completion nor native speedup is claimed.

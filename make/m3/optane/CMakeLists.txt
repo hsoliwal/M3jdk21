@@ -13,7 +13,7 @@
 #        then -Djava.library.path=<build> (surefire: -Pm3-optane-native -Dm3.optane.library.path=<build>)
 cmake_minimum_required(VERSION 3.20)
 project(m3_optane_jni LANGUAGES C)
-# Re-pointed by m3/tooling/jdk-naming/move_module_area.py (MOVE_TO_JDK_MODULE v2): the sources live in the
+# Re-pointed by make/m3/tooling/jdk-naming/move_module_area.py (MOVE_TO_JDK_MODULE v2): the sources live in the
 # JDK module src/jdk.m3.io/share/native/libm3optane and the C unit tests in test/jdk/jdk/m3/optane/native.
 set(M3_NATIVE ${CMAKE_CURRENT_SOURCE_DIR}/../../../src/jdk.m3.io/share/native/libm3optane)
 set(M3_NATIVE_TESTS ${CMAKE_CURRENT_SOURCE_DIR}/../../../test/jdk/jdk/m3/optane/native)

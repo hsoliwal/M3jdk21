@@ -75,7 +75,7 @@ the scoped oracle does not certify them.
 Disposition: `EXISTING_OWNER_REFINEMENT_NO_RENAME`.
 The canonical per-type map has no exact record for these two existing owners.
 That map gap is explicitly deferred under naming law 9 of
-`m3/docs/m3jdk21-porting-invariant.md`; this record does not invent a previously
+`doc/m3/m3jdk21-porting-invariant.md`; this record does not invent a previously
 accepted capability ID or grant backend/phase promotion. The existing canonical
 map remains the authority. No source is relocated and no type becomes public.
 

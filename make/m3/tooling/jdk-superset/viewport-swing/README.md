@@ -5,7 +5,7 @@
 Scope: the 281 method and constructor atoms of `sun.swing.list`, `sun.swing.table` and `sun.swing.tree` in
 `java.desktop` (`M3ListMeasure`, `M3ListRows`, `M3PrefixRowOffsets`, `M3RowOffsets`, `M3RowPieces`, `M3SorterLanes`,
 `M3SparseSizes`, `M3ExpandedState`, `M3FixedHeightLayoutCache`, `M3VariableHeightLayoutCache`; design:
-`m3/docs/swing-viewport/DESIGN.md`). Work list: the per-atom test census of com.synexia PR #14999 (259 untested,
+`doc/m3/swing-viewport/DESIGN.md`). Work list: the per-atom test census of com.synexia PR #14999 (259 untested,
 20 class-only, 2 tested).
 
 Every file under `test/jdk/sun/swing/{list,table,tree}` is generated; change the generators or their templates,
@@ -27,12 +27,12 @@ scans, the stock `BasicListUI` loops (through a `BasicListUI` subclass of the un
 `DefaultListModel`, `DefaultTableModel` and `DefaultTreeModel` events. Private atoms are also checked white-box through
 `MethodHandles.privateLookupIn` against their inline contracts. Seeds derive from the atom name. Every number in the
 tests is a named constant or an enum constant: `gen_atom_tests.py` and `gen_atom_perf.py` refuse to write a file with a
-numeric literal outside one (`m3/tooling/atom-tests/literal_census.py --strict`; -1, 0, 1 and 2 are trivial).
+numeric literal outside one (`make/m3/tooling/atom-tests/literal_census.py --strict`; -1, 0, 1 and 2 are trivial).
 
 Each generated class has one dynamic test per atom and one `oneTestPerAtom` check (`@Tag("generator-consistency")`).
 The check tests the generator (one dynamic test per census atom, distinct atom ids), not an atom, so reports count the
 281 atom tests and the 10 generator checks apart. The census of this PR together with PR #2249 is
-`m3/tooling/atom-tests/CENSUS_UNION.tsv` (`census_union.py`).
+`make/m3/tooling/atom-tests/CENSUS_UNION.tsv` (`census_union.py`).
 
 The tests are jtreg-compatible (`@test`, `@modules ...:open`, `@run junit/othervm`); the perf harnesses run under jtreg
 as one-round smoke tests (`-Dperf.rounds=1`). Gates and their results: `GATES.tsv`; corrections of the generators:

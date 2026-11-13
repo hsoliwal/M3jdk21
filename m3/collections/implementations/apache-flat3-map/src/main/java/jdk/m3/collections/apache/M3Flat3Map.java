@@ -13,7 +13,7 @@
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
 /*
- * TEMPLATE of m3/collections/qualification/flat3map-single-owner-20261106/apply.py (census leaf L075); the
+ * TEMPLATE of make/m3/collections/qualification/flat3map-single-owner-20261106/apply.py (census leaf L075); the
  * public surface still mirrors org.apache.commons.collections4.map.Flat3Map from Apache Commons Collections
  * 4.5.0 (Apache-2.0) as the five-provider scaffold declared it; no provider implementation code is copied.
  */

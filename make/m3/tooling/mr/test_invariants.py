@@ -8,8 +8,8 @@ import tempfile
 import unittest
 
 CRATE = Path(__file__).resolve().parent
-ROOT = CRATE.parents[2]
-source = Path(sys.argv.pop(1)) if len(sys.argv) > 1 else ROOT / 'm3/runtime-integration/check-m3string-invariants.py'
+ROOT = CRATE.parents[3]
+source = Path(sys.argv.pop(1)) if len(sys.argv) > 1 else ROOT / 'make/m3/runtime-integration/check-m3string-invariants.py'
 script = source.read_text()
 paths = list(dict.fromkeys(re.findall(r'read\("([^"]+)"\)', script)))
 
@@ -26,7 +26,7 @@ class InvariantTest(unittest.TestCase):
                 target = root / name
                 target.parent.mkdir(parents=True, exist_ok=True)
                 target.write_text(content)
-            gate = root / 'm3/runtime-integration/check-m3string-invariants.py'
+            gate = root / 'make/m3/runtime-integration/check-m3string-invariants.py'
             gate.parent.mkdir(parents=True, exist_ok=True)
             gate.write_text(script)
             return subprocess.run([sys.executable, str(gate)], capture_output=True, text=True, timeout=10)

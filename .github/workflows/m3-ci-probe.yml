@@ -7,10 +7,14 @@ on:
     paths:
       - ".github/workflows/m3-ci-probe.yml"
       - "m3/**"
+      - "make/m3/**"
+      - "doc/m3/**"
   pull_request:
     paths:
       - ".github/workflows/m3-ci-probe.yml"
       - "m3/**"
+      - "make/m3/**"
+      - "doc/m3/**"
   workflow_dispatch:
 
 permissions:

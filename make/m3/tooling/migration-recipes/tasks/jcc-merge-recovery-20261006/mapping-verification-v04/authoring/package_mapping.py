@@ -8,12 +8,12 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 AUDIT = HERE.parents[1]
-TASK = "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006"
+TASK = "make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006"
 PROOF = TASK + "/mapping-verification-v04"
-RESOURCE = "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04"
-PATHS = {"m3/docs/name-mapping.json", "m3/docs/jcc-source-handoff.md",
-         "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
-         "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv"}
+RESOURCE = "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04"
+PATHS = {"doc/m3/name-mapping.json", "doc/m3/jcc-source-handoff.md",
+         "make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
+         "make/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv"}
 
 
 def sha(body):

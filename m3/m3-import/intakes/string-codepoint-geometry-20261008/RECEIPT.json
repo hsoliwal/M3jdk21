@@ -25,7 +25,7 @@
     "over-budget or allocation failure falls back to exact JDK traversal"
   ],
   "verification": {
-    "source_checker": "m3/runtime-integration/check-m3string-codepoint-geometry.py",
+    "source_checker": "make/m3/runtime-integration/check-m3string-codepoint-geometry.py",
     "jtreg": "test/jdk/java/lang/String/M3StringCodePointGeometryTest.java",
     "jdk_build": "NOT_RUN",
     "jtreg_run": "NOT_RUN",

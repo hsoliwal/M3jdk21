@@ -18,10 +18,10 @@ in the working tree, two families of findings:
   N_PATH      a tracked path containing "synexia"
   N_NAME      another Synexia identifier (Synexia*, SYNEXIA_*, synexia-*) in an executable or configuration file
 
-Documentation and ledgers (Markdown, text, TSV, NOTICE/LICENSE, m3/docs, release audits) record lineage and
+Documentation and ledgers (Markdown, text, TSV, NOTICE/LICENSE, doc/m3, release audits) record lineage and
 attribution, which the absorb-first rule keeps; they are not counted. LINEAGE (2026-11-10) is data that names the donor
 inside a scoped file; it is listed in the TSV and summary under its own kind and never counted as a dependency or name:
-  L_ARCHIVE     every finding of a file under m3/qualification/<run>/.../retained-variants/ (the archive of
+  L_ARCHIVE     every finding of a file under make/m3/qualification/<run>/.../retained-variants/ (the archive of
                 retained_source_queue.py: copies kept as history; no workflow, build or test runs them)
   L_PROVENANCE  a D_REPO_REF line whose every donor reference is
                 (a) in a Python file with no REMOTE_ACCESS anywhere in it: a comment, a docstring, or the donor identity
@@ -72,20 +72,20 @@ DEPENDENCY_KINDS = ("D_CHECKOUT", "D_SECRET", "D_MAVEN", "D_REPO_REF")
 NAMING_KINDS = ("N_PACKAGE", "N_PATH", "N_NAME")
 KINDS = DEPENDENCY_KINDS + NAMING_KINDS
 LINEAGE_KINDS = ("L_ARCHIVE", "L_PROVENANCE", "L_SEALED")
-# the donor repository, the one identity this check looks for (m3/tooling/standalone/LINEAGE_SOURCES.tsv: lineage only)
+# the donor repository, the one identity this check looks for (make/m3/tooling/standalone/LINEAGE_SOURCES.tsv: lineage only)
 DONOR = "hsoliwal/com.synexia"
-BASELINE = "m3/release/STANDALONE_BASELINE.tsv"
+BASELINE = "make/m3/release/STANDALONE_BASELINE.tsv"
 # Sealed lineage files (L_SEALED): path, pinned Git blob, reason; '#' lines before the header are notes.
-LINEAGE_FILES = "m3/release/STANDALONE_LINEAGE.tsv"
+LINEAGE_FILES = "make/m3/release/STANDALONE_LINEAGE.tsv"
 LINEAGE_FILES_HEADER = "path\tblob\treason"
 OID = re.compile(r"[0-9a-f]{40}\Z")
 # Recipe-ownership policy guards (P_POLICY): path, the exact stripped line, reason; '#' lines before the header are notes.
 POLICY_KINDS = ("P_POLICY",)
-POLICY_ROWS = "m3/release/STANDALONE_POLICY.tsv"
+POLICY_ROWS = "make/m3/release/STANDALONE_POLICY.tsv"
 POLICY_ROWS_HEADER = "path\tline\treason"
 # the files that define the patterns they look for or rewrite (this check and the JDK naming recipe crate)
-SELF = {"m3/release/check_standalone.py", "m3/release/test_check_standalone.py", BASELINE}
-SELF_PREFIX = "m3/tooling/jdk-naming/"
+SELF = {"make/m3/release/check_standalone.py", "make/m3/release/test_check_standalone.py", BASELINE}
+SELF_PREFIX = "make/m3/tooling/jdk-naming/"
 
 
 def is_self(path: str) -> bool:
@@ -94,10 +94,10 @@ def is_self(path: str) -> bool:
 # files; a scoped file that is not checked out is reported as unscanned. Executable and configuration files only:
 # JSON evidence, provenance and receipts are lineage (absorb-first keeps them), except the release contract.
 SCOPED_SUFFIXES = {".yml", ".yaml", ".sh", ".py", ".mjs", ".js", ".properties", ".gradle", ".toml", ".cfg", ".ini"}
-SCOPED_FILES = {"m3/release/release-contract.json"}
+SCOPED_FILES = {"make/m3/release/release-contract.json"}
 DOC_SUFFIXES = {".md", ".txt", ".tsv", ".rst", ".adoc", ".html", ".log", ".patch"}
 DOC_NAMES = {"NOTICE", "LICENSE", "COPYRIGHT", "AUTHORS", "THIRD_PARTY_NOTICES"}
-DOC_DIRS = ("m3/docs/", "m3/release/audit-", "doc/")
+DOC_DIRS = ("doc/m3/", "make/m3/release/audit-", "doc/")
 GROUP_ID_LINE = re.compile(r"<groupId>\s*com\.synexia[\w.]*\s*</groupId>")
 DONOR_REF = re.compile(re.escape(DONOR) + r"\b")
 RULES = (
@@ -111,7 +111,7 @@ POM_NS = re.compile(r"^\{[^}]*\}")
 PASSIVE_MAVEN_OWNER = re.compile(
     r'"M3_MAVEN_CONTROL_REACTOR"\s*:\s*"(?P<owner>hsoliwal/com\.synexia)"')
 # Lineage rules (module docstring). The archive is the one retained_source_queue.py writes, at any run directory.
-LINEAGE_ARCHIVE = re.compile(r"^m3/qualification/(?:[^/]+/)+retained-variants/")
+LINEAGE_ARCHIVE = re.compile(r"^make/m3/qualification/(?:[^/]+/)+retained-variants/")
 # Any of these anywhere in a Python file means it can reach another repository: none of its references are lineage.
 REMOTE_ACCESS = re.compile(
     r"\bgit\s+(?:clone|fetch|pull|push|ls-remote|submodule|remote\s+add)\b"
@@ -159,7 +159,7 @@ def dependency_scan_text(path: str, text: str) -> str:
     Malformed/duplicate-key JSON or ambiguous occurrences get no exemption.
     This classifies metadata; it does not validate or execute a receipt.
     """
-    if path != "m3/release/release-contract.json":
+    if path != "make/m3/release/release-contract.json":
         return text
 
     def unique_fields(pairs):

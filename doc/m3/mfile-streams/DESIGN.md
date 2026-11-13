@@ -70,9 +70,9 @@ HTTP-client and SFTP transports are excluded from the bounded source profile.
 The generic URL fallback is present and remains subject to installed URL handlers;
 it does not establish qualification of those excluded transports.
 
-See [the current API guide](../../fs/vfs/README.md), the
-[checked image receipt](../../fs/verification/vfs-20261020/qualification.json), and
-[the cross-gate report](../../fs/verification/vfs-20261020/RESULTS.json).
+See [the current API guide](../../../m3/fs/vfs/README.md), the
+[checked image receipt](../../../m3/fs/verification/vfs-20261020/qualification.json), and
+[the cross-gate report](../../../m3/fs/verification/vfs-20261020/RESULTS.json).
 Receipts describe actual checks and outstanding gates. This design update records
 no test pass. All 56 richer acceptance rows remain `NOT_RUN_RUNTIME`; a related
 bounded-core test never makes a stronger full-specification row pass implicitly.

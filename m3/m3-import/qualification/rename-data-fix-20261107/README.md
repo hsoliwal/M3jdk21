@@ -13,7 +13,7 @@ outside its scope). It also missed two literal shapes: a path segment that ends 
 
 - M3JDK names follow the naming law. This covers schema ids, header names, M3JDK paths, M3JDK owners and dispositions
   read by the renamed Java. Data is rewritten by the naming law itself: `jdk_naming.rewrite_line`, loaded from
-  `m3/tooling/jdk-naming`, so data and Java come from the same rules.
+  `make/m3/tooling/jdk-naming`, so data and Java come from the same rules.
 - Donor facts stay as they are: the donor repository, the revision, donor paths and donor git blobs at that revision.
   com.synexia HEAD `3d5c6b08cd2` still has `synexia-*` modules, so these values are still true.
 - Literal shapes that the rules do not cover are LITERAL rows in [STEPS.tsv](STEPS.tsv), with a count and a reason.

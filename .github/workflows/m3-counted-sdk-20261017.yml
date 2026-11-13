@@ -8,7 +8,7 @@ on:
       - 'm3/collections/interop/src/main/java/jdk/m3/collections/interop/M3GuavaMultiset.java'
       - 'm3/collections/interop/src/main/java/jdk/m3/collections/interop/M3ApacheMultiSet.java'
       - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3CountedProviderContractTest.java'
-      - 'm3/collections/qualification/m3-counted-sdk-20261017/**'
+      - 'make/m3/collections/qualification/m3-counted-sdk-20261017/**'
       - '.github/workflows/m3-counted-sdk-20261017.yml'
   workflow_dispatch:
 concurrency:
@@ -27,7 +27,7 @@ jobs:
       - name: Maven recipe and exact receiver source proof
         run: |
           set -eu
-          RECIPE=m3/collections/qualification/m3-counted-sdk-20261017/recipe
+          RECIPE=make/m3/collections/qualification/m3-counted-sdk-20261017/recipe
           mvn -B -ntp -f "$RECIPE/pom.xml" verify
           java -cp "$RECIPE/target/classes" jdk.internal.m3.M3CountedSdkRecipe --check .
       - name: Compile and run real M3 owner and core counted JUnit contracts

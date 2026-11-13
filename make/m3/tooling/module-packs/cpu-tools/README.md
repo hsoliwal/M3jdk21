@@ -111,7 +111,7 @@ Set a task-specific path variable; the build does not change a global
 ```bash
 M3_CPU_JDK=/absolute/path/to/m3-java-21-image
 mvn -B -ntp clean verify \
-  -f m3/tooling/module-packs/cpu-tools/pom.xml \
+  -f make/m3/tooling/module-packs/cpu-tools/pom.xml \
   -Dm3.jdk="$M3_CPU_JDK"
 ```
 
@@ -121,14 +121,14 @@ default `target/cpu-tools-image` output below this pack. An existing output
 directory is refused rather than replaced. The equivalent direct command is:
 
 ```bash
-python3 -B m3/tooling/module-packs/cpu-tools/build.py \
+python3 -B make/m3/tooling/module-packs/cpu-tools/build.py \
   --jdk-home "$M3_CPU_JDK" \
-  --out m3/tooling/module-packs/cpu-tools/target/cpu-tools-image
+  --out make/m3/tooling/module-packs/cpu-tools/target/cpu-tools-image
 ```
 
 The driver compiles source with `-source 21 -target 21`, compiles the original
 `text-tools/native/m3textio.c`, and calls the existing
-`m3/tooling/jmod-recipes/tools/jmod_pack.py` for JMOD creation and image linking.
+`make/m3/tooling/jmod-recipes/tools/jmod_pack.py` for JMOD creation and image linking.
 There is no second packager. On Linux its `--strip-debug` option applies
 `objcopy -g` to native libraries. The driver requires exact original compiled
 bytes in the unique JMOD native member, then compares the linked library with
@@ -155,7 +155,7 @@ normalized temporary directory is recorded in the packager command receipt.
 After successful qualification, invoke the linked image directly:
 
 ```bash
-M3_CPU_IMAGE=m3/tooling/module-packs/cpu-tools/target/cpu-tools-image/pack/image
+M3_CPU_IMAGE=make/m3/tooling/module-packs/cpu-tools/target/cpu-tools-image/pack/image
 "$M3_CPU_IMAGE/bin/java" -m com.m3.tools.cpu/com.m3.tools.cpu.CpuToolsCli --list
 "$M3_CPU_IMAGE/bin/java" -m com.m3.tools.cpu/com.m3.tools.cpu.CpuToolsCli --self-test
 "$M3_CPU_IMAGE/bin/java" -m com.m3.tools.cpu/com.m3.tools.cpu.CpuToolsCli \
@@ -359,8 +359,8 @@ baseline `f29b0afe7ad253cc0562bc8dfdd48fc1acec710e`.
 The task-local [TASK_PACKET.json](TASK_PACKET.json), [PROVENANCE.tsv](PROVENANCE.tsv),
 [VERIFY_CONTRACT.tsv](VERIFY_CONTRACT.tsv) and [OUTPUT_CONTRACT.tsv](OUTPUT_CONTRACT.tsv)
 describe scope and evidence obligations. The additive naming fragment is
-`m3/docs/name-mapping.d/m3-cpu-tools-jmod-20261018.json`. Generated task evidence is published under
-`m3/evidence/cpu-tools-jmod-20261018/`; it records actual command outcomes
+`doc/m3/name-mapping.d/m3-cpu-tools-jmod-20261018.json`. Generated task evidence is published under
+`make/m3/evidence/cpu-tools-jmod-20261018/`; it records actual command outcomes
 without rewriting sealed source contracts. Existing global lineage,
 historical recipes/receipts and per-file OpenJDK/third-party licensing remain
 their own authorities.

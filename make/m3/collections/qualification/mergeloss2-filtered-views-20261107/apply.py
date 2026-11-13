@@ -12,9 +12,9 @@ positive evidence (the origin commit's own test fails on master 33541216b2cd and
   leaf 17 (origin 3538a25a194, retain merge 6d0e9f5461e6 #1522): M3KeyedParallelismPlan fast-admission failure check;
 plus the origin tests of those rows (CREATE from the retained-variant blobs master carries under
 m3/qualification/master-landing-20261028/retained-variants/, already JDK-named) and one reference-model test.
-Derived from m3/collections/qualification/census-small-batch-20261106/apply.py v1 (anchored "sub" edits, every anchor
+Derived from make/m3/collections/qualification/census-small-batch-20261106/apply.py v1 (anchored "sub" edits, every anchor
 exactly once, LF payloads re-joined with the preimage's line ending) with the rule chaining and CREATE kind of
-m3/collections/qualification/mergeloss-01-15-20261106/apply.py: rules on one path chain (the second starts from the
+make/m3/collections/qualification/mergeloss-01-15-20261106/apply.py: rules on one path chain (the second starts from the
 first's postimage). Every EDIT rule names the git blob sha of its preimage on master 33541216b2cd; a target must equal
 the preimage (the rules are applied) or the final postimage (already applied, no-op); anything else is drift and the
 recipe refuses (exit 2) without writing. A CREATE target must be absent or equal its postimage; a CREATE with an
@@ -403,7 +403,7 @@ def run(root: Path, check: bool) -> int:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--root", default=str(RECIPE_DIR.parents[3]), help="repository root (default: four up)")
+    parser.add_argument("--root", default=str(RECIPE_DIR.parents[4]), help="repository root (default: four up)")
     parser.add_argument("--check", action="store_true", help="write nothing; exit 1 when a run would change a file")
     args = parser.parse_args(argv)
     try:

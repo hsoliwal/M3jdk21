@@ -4,7 +4,7 @@ name: M3 donor catalogue
 on:
   pull_request:
     paths:
-      - 'm3/tooling/donor-catalogue/**'
+      - 'make/m3/tooling/donor-catalogue/**'
       - '.github/workflows/m3-donor-catalogue.yml'
   workflow_dispatch:
 
@@ -29,9 +29,9 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Validate verification script syntax
-        run: bash -n m3/tooling/donor-catalogue/verify.sh
+        run: bash -n make/m3/tooling/donor-catalogue/verify.sh
       - name: Compile, test, validate and prove fixed point
-        run: bash m3/tooling/donor-catalogue/verify.sh
+        run: bash make/m3/tooling/donor-catalogue/verify.sh
       - name: Upload deterministic donor plan and receipts
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:

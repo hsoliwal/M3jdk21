@@ -4,7 +4,7 @@
 
 ## Failure reproduced from GitHub Actions
 
-The `recipe-maven-admission` job on PR #1545 called `mvn -f m3/pom.xml -pl tooling/migration-recipes -am ... test` without first building the repository's vendored source producers. Maven failed to resolve `rewrite-java:8.17.1-m3-source-1`, `rewrite-java-21:8.17.1-m3-source-1`, `rewrite-test:8.17.1-m3-source-1` and `junit-jupiter:5.10.2-m3-source-1`. All four have exact source modules under `m3/vendor/third_party` and are deliberately unpublished source-pinned coordinates. The correct fix is to install the pinned **source producers first**, not to change dependencies to released binary artifacts, suppress the Maven failure, or loosen source SHA guards.
+The `recipe-maven-admission` job on PR #1545 called `mvn -f make/m3/pom.xml -pl tooling/migration-recipes -am ... test` without first building the repository's vendored source producers. Maven failed to resolve `rewrite-java:8.17.1-m3-source-1`, `rewrite-java-21:8.17.1-m3-source-1`, `rewrite-test:8.17.1-m3-source-1` and `junit-jupiter:5.10.2-m3-source-1`. All four have exact source modules under `m3/vendor/third_party` and are deliberately unpublished source-pinned coordinates. The correct fix is to install the pinned **source producers first**, not to change dependencies to released binary artifacts, suppress the Maven failure, or loosen source SHA guards.
 
 ## Algorithm and qualified process
 
@@ -24,9 +24,9 @@ No classpath substitutions are performed, and the original native C17/JNI contra
 `SOURCE_CLOSURE.sha256` pins the exact helper and tests. Compare from repository root with:
 
 ```bash
-sha256sum -c m3/tooling/migration-recipes/qualification/native-recipe-admission-20261021/SOURCE_CLOSURE.sha256
+sha256sum -c make/m3/tooling/migration-recipes/qualification/native-recipe-admission-20261021/SOURCE_CLOSURE.sha256
 python3 -m unittest discover -v \
-  -s m3/tooling/migration-recipes/qualification/native-recipe-admission-20261021 \
+  -s make/m3/tooling/migration-recipes/qualification/native-recipe-admission-20261021 \
   -p test_source_closure.py
 ```
 

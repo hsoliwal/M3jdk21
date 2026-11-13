@@ -2,17 +2,17 @@
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
 """land_edits.py <repo> : the one-off edits that come with JACKSON_NUMBERS_TO_JDK v1 once Jackson no longer uses
-FastDoubleParser. The recipe (m3/tooling/jdk-superset/number-parse/tools/jackson_numbers_to_jdk.py) owns the
+FastDoubleParser. The recipe (make/m3/tooling/jdk-superset/number-parse/tools/jackson_numbers_to_jdk.py) owns the
 donor overlays and the pack lock; this script owns the rest. Each edit asserts its anchor once, or that it is
 already applied, so a second run changes nothing. Removing the four FastDoubleParser trees and the pack's
-legal/fastdoubleparser-1.0.90 copy, and moving m3/tooling/fdp-delegate to m3/evidence/java-base/fdp-delegate,
+legal/fastdoubleparser-1.0.90 copy, and moving make/m3/tooling/fdp-delegate to make/m3/evidence/java-base/fdp-delegate,
 are tree operations recorded in NUMBER_PARSE_JACKSON.md."""
 import json
 from pathlib import Path
 import sys
 
 repo = Path(sys.argv[1])
-PACK = "m3/tooling/module-packs/jackson/"
+PACK = "make/m3/tooling/module-packs/jackson/"
 V1, V2 = "JACKSON_NUMBERS_TO_JDK v1", "JACKSON_NUMBERS_TO_JDK v2"  # a v1 edit that v2 rewrote counts as applied
 
 
@@ -76,13 +76,13 @@ edit(PACK + "README.md",
      "staging directories. No upstream source or POM is patched by this build. The\n"
      "FastDoubleParser 1.0.90 tree carries two recorded M3 overlays: its\n"
      "`JavaDoubleParser` and `JavaFloatParser` facades delegate to java.base\n"
-     "(`m3/tooling/fdp-delegate`), so Jackson's `USE_FAST_DOUBLE_PARSER` path and the\n"
+     "(`make/m3/tooling/fdp-delegate`), so Jackson's `USE_FAST_DOUBLE_PARSER` path and the\n"
      "JDK use one parser; its BigDecimal/BigInteger parsers are unchanged.\n",
      "annotations/core/databind 2.19.2. `SOURCE_LOCK.json` pins their complete\n"
      "source/build/legal trees. Their exact Maven POMs perform the source builds and\n"
      "multi-release compilation in fresh staging directories. No upstream source or\n"
      "POM is patched by this build. Jackson core carries one recorded M3 overlay,\n"
-     "`JACKSON_NUMBERS_TO_JDK v1` (`m3/tooling/jdk-superset/number-parse`): its\n"
+     "`JACKSON_NUMBERS_TO_JDK v1` (`make/m3/tooling/jdk-superset/number-parse`): its\n"
      "`NumberInput`, `BigDecimalParser` and `BigIntegerParser` call `Double.parseDouble`,\n"
      "`Float.parseFloat`, `new BigDecimal` and `new BigInteger`, so Jackson and the JDK\n"
      "use one number parser, the one in java.base.\n")
@@ -98,19 +98,19 @@ edit(PACK + "FOSS_REUSE_DECISION.tsv",
      "Numeric parsing\tFastDoubleParser source already in M3JDK21\t1.0.90 at M3JDK21 "
      "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e\tREUSE_WITH_M3_OVERLAY\tBuild the existing source POM and original "
      "Jackson shading/multi-release closure; the JavaDoubleParser/JavaFloatParser facades are recorded M3 overlays "
-     "delegating to java.base (m3/tooling/fdp-delegate)",
+     "delegating to java.base (make/m3/tooling/fdp-delegate)",
      "Numeric parsing\tFastDoubleParser 1.0.90 absorbed in M3JDK java.base (jdk.internal.math.M3*)\t"
      "NUMBER_PARSE_ABSORB v1 and v2\tREUSE_JDK\tJackson core calls Double.parseDouble, Float.parseFloat, "
      "new BigDecimal and new BigInteger (recorded M3 overlay JACKSON_NUMBERS_TO_JDK v1, "
-     "m3/tooling/jdk-superset/number-parse); no parser copy is built or shaded")
+     "make/m3/tooling/jdk-superset/number-parse); no parser copy is built or shaded")
 
 # v2 (writing): Jackson core also renders doubles and floats with java.base.
 edit(PACK + "README.md",
-     "`JACKSON_NUMBERS_TO_JDK v1` (`m3/tooling/jdk-superset/number-parse`): its\n"
+     "`JACKSON_NUMBERS_TO_JDK v1` (`make/m3/tooling/jdk-superset/number-parse`): its\n"
      "`NumberInput`, `BigDecimalParser` and `BigIntegerParser` call `Double.parseDouble`,\n"
      "`Float.parseFloat`, `new BigDecimal` and `new BigInteger`, so Jackson and the JDK\n"
      "use one number parser, the one in java.base.\n",
-     "`JACKSON_NUMBERS_TO_JDK v2` (`m3/tooling/jdk-superset/number-parse`): its\n"
+     "`JACKSON_NUMBERS_TO_JDK v2` (`make/m3/tooling/jdk-superset/number-parse`): its\n"
      "`NumberInput`, `BigDecimalParser` and `BigIntegerParser` call `Double.parseDouble`,\n"
      "`Float.parseFloat`, `new BigDecimal` and `new BigInteger`, and `NumberOutput` calls\n"
      "`Double.toString` and `Float.toString`, so Jackson and the JDK use one number parser\n"

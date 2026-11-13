@@ -7,11 +7,11 @@ import csv
 import hashlib
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 BRIDGE = ROOT / "src/java.base/share/classes/java/lang/M3StringPrecomputeBridge.java"
 STRING = ROOT / "src/java.base/share/classes/java/lang/String.java"
 TEST = ROOT / "test/jdk/java/lang/String/M3StringPrecomputeBridgeTest.java"
-RECEIPT = ROOT / "m3/compatibility/m3string-precompute-bridge-receiver.tsv"
+RECEIPT = ROOT / "make/m3/compatibility/m3string-precompute-bridge-receiver.tsv"
 
 
 def sha256(path: Path) -> str:

@@ -56,15 +56,15 @@ explicitly witnessed files.
 From repository root:
 
 ```bash
-python3 m3/backports/jep_source_witness.py --root . \
-  --out m3/backports/target/jep-source-witness.tsv
-python3 -m unittest discover -s m3/backports \
+python3 make/m3/backports/jep_source_witness.py --root . \
+  --out make/m3/backports/target/jep-source-witness.tsv
+python3 -m unittest discover -s make/m3/backports \
   -p test_jep_source_witness.py -v
 ```
 
 The Maven backport reactor also emits this TSV in its verify phase, and the
 existing test_*.py discovery executes the focused regression tests in its test
-phase. Output writes are confined to m3/backports/target/ and reject symlinks
+phase. Output writes are confined to make/m3/backports/target/ and reject symlinks
 and hard-linked output aliases; product source is never modified.
 
 ## To actually borrow implementation code

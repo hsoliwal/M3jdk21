@@ -11,8 +11,8 @@ retain their own ownership. M3JDK21 `java.*`, JNI and HotSpot public contracts a
 ## Build and invoke
 
 ```sh
-mvn -B -ntp -f m3/tooling/smart-build/pom.xml verify
-java -jar m3/tooling/smart-build/target/m3-smart-build-receiver-0.1.0-SNAPSHOT.jar \
+mvn -B -ntp -f make/m3/tooling/smart-build/pom.xml verify
+java -jar make/m3/tooling/smart-build/target/m3-smart-build-receiver-0.1.0-SNAPSHOT.jar \
   --jdk-root /work/M3JDK21 \
   --smartbuild-jar /approved/synexia-build-inventory.jar \
   --jar-sha256 <approved-jar-sha256> \
@@ -31,7 +31,7 @@ If and only if the selected active Maven reactor has been audited, pass
 `--active-modules /approved/m3-reactor.txt` (one Maven-project-relative module path per line).
 Missing or uncertain inventories delegate to full Maven `verify`. The standalone `m3/file`
 project can be used without a module inventory. This receiver does not alter default `make`
-/OpenJDK build behavior and is not added to `m3/pom.xml` by default.
+/OpenJDK build behavior and is not added to `make/m3/pom.xml` by default.
 
 Optional `--remote-cache-url https://approved.example/cache` is forwarded to the canonical
 SmartBuild client; it requires the reviewed Apache Maven Build Cache Extension 1.3.0 in

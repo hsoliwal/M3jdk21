@@ -6,13 +6,13 @@ on:
     branches:
       - m3/atomlogic-recipe-profile-receiver-20261017
     paths:
-      - 'm3/pom.xml'
-      - 'm3/tooling/atom-logic-receiver/**'
+      - 'make/m3/pom.xml'
+      - 'make/m3/tooling/atom-logic-receiver/**'
       - '.github/workflows/m3-atomlogic-profile-20261017.yml'
   pull_request:
     paths:
-      - 'm3/pom.xml'
-      - 'm3/tooling/atom-logic-receiver/**'
+      - 'make/m3/pom.xml'
+      - 'make/m3/tooling/atom-logic-receiver/**'
       - '.github/workflows/m3-atomlogic-profile-20261017.yml'
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -30,8 +30,8 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: SHA pinned source/refusal and Maven XML oracle
-        run: python3 m3/tooling/atom-logic-receiver/recipe.py self-test
+        run: python3 make/m3/tooling/atom-logic-receiver/recipe.py self-test
       - name: Maven receipt and fixed point (does not execute Synexia SDK)
-        run: mvn -B -ntp -f m3/tooling/atom-logic-receiver/pom.xml verify
+        run: mvn -B -ntp -f make/m3/tooling/atom-logic-receiver/pom.xml verify
       - name: Confirm no direct target or JDK source mutation
-        run: git diff --exit-code -- m3/pom.xml
+        run: git diff --exit-code -- make/m3/pom.xml

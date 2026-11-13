@@ -6,7 +6,7 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3MaskViewportKernel.java'
       - 'test/jdk/jdk/m3/collections/M3MaskViewportPageContract.java'
       - 'test/jdk/jdk/m3/collections/M3FrameJavaContract.java'
-      - 'm3/collections/qualification/mask-viewport-page-20261021/**'
+      - 'make/m3/collections/qualification/mask-viewport-page-20261021/**'
       - '.github/workflows/m3-mask-viewport-page-20261021.yml'
   workflow_dispatch:
 

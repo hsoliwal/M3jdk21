@@ -119,7 +119,7 @@
 
   <profiles>
     <!-- Standalone (2026-10-31): the opt-in m3-recipe-ownership-audit profile is retired; no workflow
-         activated it and its recipe class exists only in the donor repository (m3/tooling/standalone/M3_REFS.tsv). -->
+         activated it and its recipe class exists only in the donor repository (make/m3/tooling/standalone/M3_REFS.tsv). -->
     <profile>
       <id>m3-canonical-recipes</id>
       <build>

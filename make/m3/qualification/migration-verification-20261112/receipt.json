@@ -11,12 +11,12 @@
   "status": "RECIPE_EXECUTED_SCOPED_TARGET_VERIFICATION_PASS_RELEASE_PENDING",
   "outputs": [
     {
-      "path": "m3/compatibility/check_m3_full_borrow_receiver.py",
+      "path": "make/m3/compatibility/check_m3_full_borrow_receiver.py",
       "before_sha256": "444514e43ba0805375cd1894c372ad3493aea7291604103b700c37e741b0ff68",
       "after_sha256": "f67fcb19fdd6e65b55c15dfaa45dcf428f069fa292df2f225226b8818cb7b592"
     },
     {
-      "path": "m3/compatibility/test_m3_full_borrow_receiver.py",
+      "path": "make/m3/compatibility/test_m3_full_borrow_receiver.py",
       "before_sha256": null,
       "after_sha256": "4bacf2ff3784caa20f92ea44156dc6b4364227dd5773cf25f4dfb3edeb1e18f8"
     },
@@ -26,27 +26,27 @@
       "after_sha256": "441f6142b1f5fd3ed624bbf43781e28e9a05a45a4eac4939ff9aa894bb5b60ea"
     },
     {
-      "path": "m3/runtime-integration/regex-precompute/pom.xml",
+      "path": "make/m3/runtime-integration/regex-precompute/pom.xml",
       "before_sha256": "cd4265e106f6f1061349b779d7b752fb9aed4bd322a984de06bed4ca9603bc99",
       "after_sha256": "18cebcc38f394a43f6996a5a57f997f48806c74863168ff2fef007032983812e"
     },
     {
-      "path": "m3/runtime-integration/regex-precompute/README.md",
+      "path": "make/m3/runtime-integration/regex-precompute/README.md",
       "before_sha256": "fabfe8b2854d6f51b5a0d4c5ccf9961628be81860a1c1ba1f55d25499874b621",
       "after_sha256": "0d39956c89538204e9c9a2ac4e7a720d788f3ed3794d8d3354e718d546f27f11"
     },
     {
-      "path": "m3/runtime-integration/regex-precompute/verify.py",
+      "path": "make/m3/runtime-integration/regex-precompute/verify.py",
       "before_sha256": null,
       "after_sha256": "ac29d9dd6c03adf12349a897a69c411a201f3d158b4b0f797dd9dd19331e82a2"
     },
     {
-      "path": "m3/runtime-integration/regex-precompute/test_verify.py",
+      "path": "make/m3/runtime-integration/regex-precompute/test_verify.py",
       "before_sha256": null,
       "after_sha256": "26f9497f03f6be3726ac409008b8c55b160bf78f13368608009fed3d92548fb2"
     },
     {
-      "path": "m3/docs/migration-mapping-lifecycle.md",
+      "path": "doc/m3/migration-mapping-lifecycle.md",
       "before_sha256": "773f1939ba24e80cf7d67f85ed570de695c4e4e2f9f0547ce28c7b942c268e2c",
       "after_sha256": "dae93d5aaa1d404e94adb5d877a95249d90dbbcc14d72989d88ae45bd919bb57"
     }

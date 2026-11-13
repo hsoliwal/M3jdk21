@@ -227,11 +227,11 @@
       {
         "executedFailureClaimed": false,
         "finding": "The default strict sealed-install check requires the historical 24-file after state, including the 52-row mapping at SHA prefix33504527. Fresh output uses an87-row mapping at SHA prefixcf6a7580, preserving52 and adding35 pending rows. A separate explicit current-context profile is being prepared; full workflow wiring remains pending.",
-        "owner": "m3/tooling/tq-sync/verify-plan.py"
+        "owner": "make/m3/tooling/tq-sync/verify-plan.py"
       }
     ],
     "withdrawnStaticFinding": {
-      "correction": "The workflow reads m3/backports/JEP_CATALOGUE.tsv, whose index4 value is candidate. CANDIDATE_UNVERIFIED/PENDING_CI belongs to distinct m3/tooling/recipe-catalogue.tsv. No JEP485 mismatch was established and no execution failure is claimed.",
+      "correction": "The workflow reads make/m3/backports/JEP_CATALOGUE.tsv, whose index4 value is candidate. CANDIDATE_UNVERIFIED/PENDING_CI belongs to distinct make/m3/tooling/recipe-catalogue.tsv. No JEP485 mismatch was established and no execution failure is claimed.",
       "finding": "Alleged JEP485 workflow catalogue mismatch"
     }
   },

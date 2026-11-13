@@ -7,7 +7,7 @@
 
 Public source pin: `c842fab8cf5b799257e3c9ea07f8baddde80db09`.
 The unfiltered physical directory
-`m3/compatibility/synexia-reference/src/com/synexia/indexstring` contains exactly
+`make/m3/compatibility/synexia-reference/src/com/synexia/indexstring` contains exactly
 four Java files, all read in full. There is no `package-info.java` or
 `module-info.java` in this fixture source tree. This denominator is two frozen
 storage snapshots, one compile-only seam and one main test, not four production
@@ -100,12 +100,12 @@ of the whole retained-port package.
 
 | Public file | Evidence role | Git blob SHA-1 |
 | --- | --- | --- |
-| [m3/compatibility/m3-reference/PROVENANCE.md](https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/compatibility/m3-reference/PROVENANCE.md) | Public donor snapshot identity, test-only isolation, throwing seam, exclusions and refresh procedure | `400e30b64110faa62d872332093042549da8318d` |
-| [m3/compatibility/m3-reference/NOTICE.md](https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/compatibility/m3-reference/NOTICE.md) | Applicable attribution and public lineage declaration; source of donor NOTICE identity, not that donor NOTICE itself | `f0f90fa78d87581bc8c227a7cb45bee60052e8d7` |
-| [m3/compatibility/m3-reference/LICENSE-2.0.txt](https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/compatibility/m3-reference/LICENSE-2.0.txt) | Exact Apache-2.0 license bytes preserved; script checks its blob | `29f81d812f3e768fa89638d1f72920dbfd1413a8` |
-| [m3/compatibility/check-m3.py](https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/compatibility/check-m3.py) | Two source/SPDX and license checks; release-21 compiler; separate reference classpath; two main invocations | `8a4e836c8411646131200a7e3f298f666330af42` |
-| [m3/compatibility/M3ContractTest.java](https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/compatibility/M3ContractTest.java) | Actual differential content/range assertions and explicit API-equivalence disclaimer | `f864147e4e8f41ad990e05d5a2f0525f1fc3e05f` |
-| [m3/build.sh](https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/build.sh) | Core-only production source selection and separate tests/JAR output; fixture is not selected | `be764d854ce1d7686fd53da8953110a382ec1dec` |
+| [make/m3/compatibility/m3-reference/PROVENANCE.md](https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/compatibility/m3-reference/PROVENANCE.md) | Public donor snapshot identity, test-only isolation, throwing seam, exclusions and refresh procedure | `400e30b64110faa62d872332093042549da8318d` |
+| [make/m3/compatibility/m3-reference/NOTICE.md](https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/compatibility/m3-reference/NOTICE.md) | Applicable attribution and public lineage declaration; source of donor NOTICE identity, not that donor NOTICE itself | `f0f90fa78d87581bc8c227a7cb45bee60052e8d7` |
+| [make/m3/compatibility/m3-reference/LICENSE-2.0.txt](https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/compatibility/m3-reference/LICENSE-2.0.txt) | Exact Apache-2.0 license bytes preserved; script checks its blob | `29f81d812f3e768fa89638d1f72920dbfd1413a8` |
+| [make/m3/compatibility/check-m3.py](https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/compatibility/check-m3.py) | Two source/SPDX and license checks; release-21 compiler; separate reference classpath; two main invocations | `8a4e836c8411646131200a7e3f298f666330af42` |
+| [make/m3/compatibility/M3ContractTest.java](https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/compatibility/M3ContractTest.java) | Actual differential content/range assertions and explicit API-equivalence disclaimer | `f864147e4e8f41ad990e05d5a2f0525f1fc3e05f` |
+| [make/m3/build.sh](https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/build.sh) | Core-only production source selection and separate tests/JAR output; fixture is not selected | `be764d854ce1d7686fd53da8953110a382ec1dec` |
 | [.github/workflows/m3-foundation.yml](https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/.github/workflows/m3-foundation.yml) | Declared foundation-build then compatibility step; path filters; separate mapping verification step | `573b248c82d8ea1f4d39fdc0c80ea88cf2a5605e` |
 | [m3/ports/indexstring/src/main/java/jdk/internal/m3/indexstring/FrozenBytes.java](https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/ports/indexstring/src/main/java/jdk/internal/m3/indexstring/FrozenBytes.java) | Different retained-port body omits fixture addressed method | `f393350db66e0f75540a532b127df629641ad7ac` |
 | [m3/ports/indexstring/src/main/java/jdk/internal/m3/indexstring/FrozenChars.java](https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/ports/indexstring/src/main/java/jdk/internal/m3/indexstring/FrozenChars.java) | Different retained-port body omits fixture package-private ranged copyOf overload | `e7cecf3e32eca949dcf6616455caab6c62fd909d` |
@@ -129,16 +129,16 @@ execution or target receiving acceptance.
 
 | File | Bytes / lines | SHA-256 |
 | --- | ---: | --- |
-| `m3/compatibility/m3-reference/src/jdk/internal/m3/indexstring/FrozenBytes.java` | 4288 / 96 | `a4c419c1d539189f004cdb72f009087dfee519cb39e5ee7bfc7faa043bf230f0` |
-| `m3/compatibility/m3-reference/src/jdk/internal/m3/indexstring/FrozenChars.java` | 4424 / 99 | `5fe62df7d3f0d48f45326dbb17ce8ce8bce160aa9ffeafec5ec66c572a10deda` |
-| `m3/compatibility/m3-reference/src/jdk/internal/m3/indexstring/MIndexAddressedView.java` | 573 / 18 | `36223e6e51474b7a8dbc5dacfa9a0c7563ad75905776280ac908a4c2445ae853` |
-| `m3/compatibility/m3-reference/src/jdk/internal/m3/indexstring/M3MappedStorageTest.java` | 3847 / 78 | `56331cb98c2f539c2e17805a03d9a477542cba6fb7df1aa20e3f05ff24d0cf72` |
-| `m3/compatibility/m3-reference/PROVENANCE.md` | 1700 / 29 | `7f5683751c72db91dac37ae83cb97e02882ad773040a88d47e9ad466ba303d55` |
-| `m3/compatibility/m3-reference/NOTICE.md` | 809 / 11 | `da9f431faf05760ea4afa259f79917012c1e3c5c8f3a7a49fd2ad2a2d513eee1` |
-| `m3/compatibility/m3-reference/LICENSE-2.0.txt` | 11558 / 201 | `1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6` |
-| `m3/compatibility/check-m3.py` | 2107 / 33 | `78c646c4e5d1d16fc152cee917b892b27bd995eaae990007512b67fbb383c611` |
-| `m3/compatibility/M3ContractTest.java` | 1340 / 27 | `b18f011344c6c0a392dc27e0557cb95f4366c62d726721e4620d560385fcaf66` |
-| `m3/build.sh` | 5412 / 55 | `c7b954a6faa16cc8a0cb4a2d13a8032c43fb308a739b225362b6ac3fd84864ee` |
+| `make/m3/compatibility/m3-reference/src/jdk/internal/m3/indexstring/FrozenBytes.java` | 4288 / 96 | `a4c419c1d539189f004cdb72f009087dfee519cb39e5ee7bfc7faa043bf230f0` |
+| `make/m3/compatibility/m3-reference/src/jdk/internal/m3/indexstring/FrozenChars.java` | 4424 / 99 | `5fe62df7d3f0d48f45326dbb17ce8ce8bce160aa9ffeafec5ec66c572a10deda` |
+| `make/m3/compatibility/m3-reference/src/jdk/internal/m3/indexstring/MIndexAddressedView.java` | 573 / 18 | `36223e6e51474b7a8dbc5dacfa9a0c7563ad75905776280ac908a4c2445ae853` |
+| `make/m3/compatibility/m3-reference/src/jdk/internal/m3/indexstring/M3MappedStorageTest.java` | 3847 / 78 | `56331cb98c2f539c2e17805a03d9a477542cba6fb7df1aa20e3f05ff24d0cf72` |
+| `make/m3/compatibility/m3-reference/PROVENANCE.md` | 1700 / 29 | `7f5683751c72db91dac37ae83cb97e02882ad773040a88d47e9ad466ba303d55` |
+| `make/m3/compatibility/m3-reference/NOTICE.md` | 809 / 11 | `da9f431faf05760ea4afa259f79917012c1e3c5c8f3a7a49fd2ad2a2d513eee1` |
+| `make/m3/compatibility/m3-reference/LICENSE-2.0.txt` | 11558 / 201 | `1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6` |
+| `make/m3/compatibility/check-m3.py` | 2107 / 33 | `78c646c4e5d1d16fc152cee917b892b27bd995eaae990007512b67fbb383c611` |
+| `make/m3/compatibility/M3ContractTest.java` | 1340 / 27 | `b18f011344c6c0a392dc27e0557cb95f4366c62d726721e4620d560385fcaf66` |
+| `make/m3/build.sh` | 5412 / 55 | `c7b954a6faa16cc8a0cb4a2d13a8032c43fb308a739b225362b6ac3fd84864ee` |
 | `.github/workflows/m3-foundation.yml` | 3965 / 85 | `e3625a7f61ece03df4ac90102e45a299ed3f571ca889295da4899fcd8759d5ad` |
 | `m3/ports/indexstring/src/main/java/jdk/internal/m3/indexstring/FrozenBytes.java` | 4037 / 91 | `db46ea5bd16183568d71552375f9ee61c29966902a14f5b15b70d8dd825fb17d` |
 | `m3/ports/indexstring/src/main/java/jdk/internal/m3/indexstring/FrozenChars.java` | 3868 / 86 | `88a85b35a7c5c6d84b23fa734254c11e4492ecf87ed0c93b6f730ddbec7d15ba` |

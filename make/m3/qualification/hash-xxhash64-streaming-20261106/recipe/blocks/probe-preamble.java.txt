@@ -1,5 +1,5 @@
 /*
- * Not a jtreg test: the allocation diagnostic of recipe m3/qualification/hash-xxhash64-streaming-20261106 (run by its
+ * Not a jtreg test: the allocation diagnostic of recipe make/m3/qualification/hash-xxhash64-streaming-20261106 (run by its
  * differential.sh on the donor class and on M3XxHash64Streaming; the figures are recorded in GATES.tsv, never asserted).
  * java --add-exports java.base/jdk.internal.m3.hash=ALL-UNNAMED M3XxHash64StreamingAllocationProbe
  */

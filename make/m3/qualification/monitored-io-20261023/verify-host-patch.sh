@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # This host-JDK patch proof does not qualify the full native M3JDK21.
 set -euo pipefail
-root="$(cd "$(dirname "$0")/../../.." && pwd)"
+root="$(cd "$(dirname "$0")/../../../.." && pwd)"
 scratch="$(mktemp -d)"
 trap 'rm -rf "$scratch"' EXIT
 mkdir -p "$scratch/patch/java/io" "$scratch/patch/java/util/concurrent" "$scratch/classes" "$scratch/tests"

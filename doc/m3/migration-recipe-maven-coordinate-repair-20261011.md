@@ -8,7 +8,7 @@ fail before Java recipe compilation because Maven Central cannot resolve:
 - org.openrewrite:rewrite-java-21:8.17.1-m3-source-1
 - org.openrewrite:rewrite-test:8.17.1-m3-source-1
 
-The `m3/tooling/migration-recipes/pom.xml` has no repository declaration for
+The `make/m3/tooling/migration-recipes/pom.xml` has no repository declaration for
 these custom coordinates and the workflow does not build/install a matching
 fork first. A version suffix is not evidence that an artifact is published.
 

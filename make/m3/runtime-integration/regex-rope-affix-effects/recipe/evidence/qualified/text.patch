@@ -40,7 +40,7 @@ index d4ec375..e8b39db 100644
 +      "source_default_branch": "develop",
 +      "recipe": "com.synexia.m3jdk.RopeAffixPreparedEffects20261017",
 +      "recipe_crate": "synexia-openrewrite-recipes/recipe-crates/m3-rope-affix-effects-20261017",
-+      "evidence": "m3/runtime-integration/regex-rope-affix-effects/recipe/QUALIFICATION.md"
++      "evidence": "make/m3/runtime-integration/regex-rope-affix-effects/recipe/QUALIFICATION.md"
 +    },
 +    {
 +      "source": "Synexia MIndexRegexAtomAlgebra, MIndexRegexTokenEffectTable and prepared executor lifecycle; existing M3RegexDpPlan UTF-16 Effects",
@@ -61,7 +61,7 @@ index d4ec375..e8b39db 100644
 +      "cuda": "Optional source-reviewed provider remains in private convergence workspace. No nvcc/device qualification or GPU speedup claim; no implicit String loading.",
 +      "public_api": "Existing public JDK interfaces are unchanged; new batch entry points are in the established internal owner only.",
 +      "receiving_phase_advanced": false,
-+      "evidence": "m3/runtime-integration/regex-rope-affix-effects/recipe/QUALIFICATION.md",
++      "evidence": "make/m3/runtime-integration/regex-rope-affix-effects/recipe/QUALIFICATION.md",
 +      "license": "Preserve GPL-2.0-only WITH Classpath-exception-2.0 target files; Apache-2.0 recipe ownership; retain all donor notices."
      }
    ],
@@ -474,7 +474,7 @@ index 0000000..cdfc20a
 +
 +SOURCE = "src/java.base/share/classes/java/lang/M3StringRegexDp.java"
 +TEST = "test/jdk/java/lang/String/M3StringRegexDpTest.java"
-+SUPPORT = "m3/runtime-integration/regex-plan-amalgamation/source_extracted_java21.py"
++SUPPORT = "make/m3/runtime-integration/regex-plan-amalgamation/source_extracted_java21.py"
 +BEFORE_SHA = "9536a6df2042fe047f02ef07834edca91ce7a863e5b3c1daafffe55fdad48e6e"
 +AFTER_SHA = "3029950078524419af52edbcbaaccab545bd5b1bed824ee80218250b8c748ef4"
 +TEST_SHA = "b9bbf14010da526e41d0e78945e728d5e9aa1cab8ccc732a815a9a14a253ee2a"

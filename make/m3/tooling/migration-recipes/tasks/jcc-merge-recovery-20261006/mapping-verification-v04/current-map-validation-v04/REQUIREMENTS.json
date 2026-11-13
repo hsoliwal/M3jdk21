@@ -16,7 +16,7 @@
       ]
     },
     {
-      "path": "m3/migration/recipes/prefix-z-v1.tsv",
+      "path": "make/m3/migration/recipes/prefix-z-v1.tsv",
       "references": [
         {
           "declared_git_blob_sha1": null,
@@ -28,7 +28,7 @@
       ]
     },
     {
-      "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+      "path": "make/m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
       "references": [
         {
           "declared_git_blob_sha1": null,
@@ -124,7 +124,7 @@
       ]
     },
     {
-      "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+      "path": "make/m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
       "references": [
         {
           "declared_git_blob_sha1": null,
@@ -164,7 +164,7 @@
       ]
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+      "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
       "references": [
         {
           "declared_git_blob_sha1": null,
@@ -176,7 +176,7 @@
       ]
     },
     {
-      "path": "m3/tooling/mr/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv",
+      "path": "make/m3/tooling/mr/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv",
       "references": [
         {
           "declared_git_blob_sha1": null,
@@ -188,7 +188,7 @@
       ]
     },
     {
-      "path": "m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
+      "path": "make/m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
       "references": [
         {
           "declared_git_blob_sha1": null,
@@ -200,7 +200,7 @@
       ]
     },
     {
-      "path": "m3/tooling/vi/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
+      "path": "make/m3/tooling/vi/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
       "references": [
         {
           "declared_git_blob_sha1": null,
@@ -514,7 +514,7 @@
   "tested_receipt_unique_paths": 1,
   "tested_receipts": [
     {
-      "path": "m3/migration/evidence/local-20261002-final/receipt.json",
+      "path": "make/m3/migration/evidence/local-20261002-final/receipt.json",
       "tests": [
         {
           "record": "m3.prefix-z",

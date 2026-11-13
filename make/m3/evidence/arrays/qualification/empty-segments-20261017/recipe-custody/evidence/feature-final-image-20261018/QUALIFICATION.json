@@ -74,6 +74,6 @@
     "lib/modules": "f58365e287ba18548e6ce609d4df57eb2bb399016f05ee130824843ab058c236"
   },
   "separately_built_m3_modules": "Earlier owning-module receipts remain separate; not rerun by this image witness",
-  "runtime_recipe_entrypoint": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/README.md",
+  "runtime_recipe_entrypoint": "make/m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/README.md",
   "primitive_fixture_origin": "Existing primitive-address-identity verifier, SHA retained by execution receipt"
 }

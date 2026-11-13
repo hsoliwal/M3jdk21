@@ -6,13 +6,13 @@
     "OPTIONAL_DEPENDENCY_PENDING": 74
   },
   "files": {
-    "m3/docs/mfile-streams/ACCEPTANCE.tsv": "ce61abfd84f6006df809fdbb34ba3f14b235be957efba207dd66595528102036",
-    "m3/docs/mfile-streams/CAPABILITIES.tsv": "d672374cfa8202d259509c903b222cd343f00056e3a63c18c8dcdcfb28c68bb7",
-    "m3/docs/mfile-streams/DESIGN.md": "b11d57623c50f646c406aaebfe7af31a80a05ccb4d22b959fe9fe6b3fb122b85",
-    "m3/docs/mfile-streams/IMPLEMENTATION_PLAN.md": "8d8feb36b255b772db180cb790faf13d54be1ed9d3a5ae826621ea061bde4e24",
-    "m3/docs/mfile-streams/README.md": "7e75c4a6678e390fb787f31f7b2f3ee4596cd39767d976d161cd2d152ef44a72",
-    "m3/docs/mfile-streams/SOURCE.json": "84c78c75f960ac6aee80b128ecf61a98c4734b9ddae6dc1b0a2da0c1a57af2d9",
-    "m3/docs/name-mapping.d/m3fs-vfs-20261020.json": "37390cdf1dfe2071b20b75b2233d8ee234a49cb8fbbc6d03f1a6512b048cc3d6",
+    "doc/m3/mfile-streams/ACCEPTANCE.tsv": "ce61abfd84f6006df809fdbb34ba3f14b235be957efba207dd66595528102036",
+    "doc/m3/mfile-streams/CAPABILITIES.tsv": "d672374cfa8202d259509c903b222cd343f00056e3a63c18c8dcdcfb28c68bb7",
+    "doc/m3/mfile-streams/DESIGN.md": "b11d57623c50f646c406aaebfe7af31a80a05ccb4d22b959fe9fe6b3fb122b85",
+    "doc/m3/mfile-streams/IMPLEMENTATION_PLAN.md": "8d8feb36b255b772db180cb790faf13d54be1ed9d3a5ae826621ea061bde4e24",
+    "doc/m3/mfile-streams/README.md": "7e75c4a6678e390fb787f31f7b2f3ee4596cd39767d976d161cd2d152ef44a72",
+    "doc/m3/mfile-streams/SOURCE.json": "84c78c75f960ac6aee80b128ecf61a98c4734b9ddae6dc1b0a2da0c1a57af2d9",
+    "doc/m3/name-mapping.d/m3fs-vfs-20261020.json": "37390cdf1dfe2071b20b75b2233d8ee234a49cb8fbbc6d03f1a6512b048cc3d6",
     "m3/fs/legal/commons-vfs2/CHANGES-M3FS.md": "ff88790d2ec279fc246a8073ed8823c92e0abd36337913a1128618baec6ece9e",
     "m3/fs/legal/commons-vfs2/LICENSE.txt": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
     "m3/fs/legal/commons-vfs2/NOTICE.txt": "c3b9e52e1b1a64d99b76e0f529d38d70c7ed01b97d01fd68e4c2fe4b6bf7bbbb",
@@ -361,6 +361,6 @@
     "m3/fs/vfs/README.md": "1d7f6822be5b6c059a5f978ed74f4a5c61f460b22e1ea23223bfc032d4f4a982",
     "m3/fs/vfs/SOURCE.json": "6db1af15a917ca73f8eb9decf38d04f890a5f2e15b1c0290e1c254759981db75",
     "m3/fs/vfs/SOURCE_PROFILE.tsv": "7e8aa973c1261f9c0b3ac95861f1647f276186648685720030ee1324623c5bdf",
-    "m3/runtime-integration/FOSS_REUSE_DECISION.tsv": "a4006dea4739743b9d48794c3185fe5efa8d75276fd4314f75e5fd96faed11f3"
+    "make/m3/runtime-integration/FOSS_REUSE_DECISION.tsv": "a4006dea4739743b9d48794c3185fe5efa8d75276fd4314f75e5fd96faed11f3"
   }
 }

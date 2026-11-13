@@ -29,13 +29,13 @@
       "bytes": 13239
     },
     {
-      "path": "m3/docs/name-mapping.d/m3-array-mask-lookup-20261018.json",
+      "path": "doc/m3/name-mapping.d/m3-array-mask-lookup-20261018.json",
       "before": "ABSENT",
       "after": "749608e7fc3df9bde30e7135f7319ce98fd92709bd986e4a7d8d7f1fc24f5401",
       "bytes": 1737
     },
     {
-      "path": "m3/qualification/string-index-reverse-20261018/collections/CONTRACT.md",
+      "path": "make/m3/qualification/string-index-reverse-20261018/collections/CONTRACT.md",
       "before": "ABSENT",
       "after": "b26eb0e37326f91dcbe4988c8c8fe23347639e5cfcbb99908687734ef50f286d",
       "bytes": 2570

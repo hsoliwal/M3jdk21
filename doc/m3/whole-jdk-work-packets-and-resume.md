@@ -6,14 +6,14 @@ Status: documentation-only execution handoff. This file organizes implementation
 
 Before implementing a packet, read:
 
-1. `m3/docs/a3.md`
-2. `m3/docs/whole-jdk-m3-architecture.md`
-3. `m3/docs/jdk-subsystem-migration-matrix.md`
-4. `m3/docs/collections-replacement-spec.md` when collections are in scope
-5. `m3/docs/string-text-replacement-spec.md` when text is in scope
-6. `m3/docs/name-mapping.json`
-7. `m3/docs/migration-mapping-lifecycle.md`
-8. `m3/docs/migration-worked-port-decisions.md`
+1. `doc/m3/a3.md`
+2. `doc/m3/whole-jdk-m3-architecture.md`
+3. `doc/m3/jdk-subsystem-migration-matrix.md`
+4. `doc/m3/collections-replacement-spec.md` when collections are in scope
+5. `doc/m3/string-text-replacement-spec.md` when text is in scope
+6. `doc/m3/name-mapping.json`
+7. `doc/m3/migration-mapping-lifecycle.md`
+8. `doc/m3/migration-worked-port-decisions.md`
 9. the exact branch/commit-specific evidence for the packet
 
 Do not treat a branch-only manifest or receipt as current master authority merely because it is newer or more detailed.
@@ -130,7 +130,7 @@ Make one operational mapping authority capable of representing whole-JDK capabil
 
 ### Rule
 
-Extend/reconcile `m3/docs/name-mapping.json` and its existing validator/toolchain in an implementation PR. Do not create a third registry from these architecture documents.
+Extend/reconcile `doc/m3/name-mapping.json` and its existing validator/toolchain in an implementation PR. Do not create a third registry from these architecture documents.
 
 ### Required record semantics
 

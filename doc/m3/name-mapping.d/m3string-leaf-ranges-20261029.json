@@ -12,9 +12,9 @@
     {
       "source": "unix4j wc/grep/cut text kernels over java.lang.String (Java)",
       "source_commit": "7f7accdd54e2",
-      "target": "libm3textio C kernels in m3/tooling/module-packs/text-tools (jdk.m3.text, jdk.m3.io) reading M3StringLeafLanes",
+      "target": "libm3textio C kernels in make/m3/tooling/module-packs/text-tools (jdk.m3.text, jdk.m3.io) reading M3StringLeafLanes",
       "status": "consumer contract only; the C kernel and Java facade are leaf 1 (branch m3/unix4j-native-wc-20261029), not this leaf",
-      "target_rule": "export jdk.internal.access to jdk.m3.text by --add-exports at module-pack javac time and jlink --add-options in the module-pack image; java.base module-info unchanged (open question recorded in m3/docs/m3string-leaf-ranges-20261029/README.md)"
+      "target_rule": "export jdk.internal.access to jdk.m3.text by --add-exports at module-pack javac time and jlink --add-options in the module-pack image; java.base module-info unchanged (open question recorded in doc/m3/m3string-leaf-ranges-20261029/README.md)"
     }
   ]
 }

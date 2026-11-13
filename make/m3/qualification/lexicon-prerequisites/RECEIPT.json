@@ -172,7 +172,7 @@
       }
     },
     {
-      "owner": "m3/runtime-integration/export-m3-lexicon.py",
+      "owner": "make/m3/runtime-integration/export-m3-lexicon.py",
       "recipe": "lexicon-manifest-path-alias",
       "inputBlob": "f2d4b4dc5f1aefed94e0f9f8d927141b8ad200ae",
       "proofBlob": "5c6a22c32fc11c877fb3fb3cd26487349aa3920c",
@@ -282,7 +282,7 @@
         "workOrder": {
           "schema": "M3_MANIFEST_PATH_ALIAS_WORK_ORDER_V1",
           "sourceHead": "65d2636ee26956bc638d56e5433c9e275f70997d",
-          "owner": "m3/runtime-integration/export-m3-lexicon.py",
+          "owner": "make/m3/runtime-integration/export-m3-lexicon.py",
           "beforeGitBlob": "b36568fac95669beadd34eb20765d727e06a2af8",
           "recipe": "lexicon-manifest-path-alias",
           "atoms": [
@@ -403,7 +403,7 @@
           "sha256": "9104057d264523ae55080634c5ddb23071a2d5a35d8f9c947879545ff41df052",
           "gitBlob": "86aa8215d1e720655d43e3a78541c949905194f7"
         },
-        "recipeManifest": "m3/runtime-integration/export-m3-lexicon.py\tff0c916f8194382c98ec1efd53ba8031bd530920b6de390f0953d206489659b6\t9104057d264523ae55080634c5ddb23071a2d5a35d8f9c947879545ff41df052\t00-post.txt\n",
+        "recipeManifest": "make/m3/runtime-integration/export-m3-lexicon.py\tff0c916f8194382c98ec1efd53ba8031bd530920b6de390f0953d206489659b6\t9104057d264523ae55080634c5ddb23071a2d5a35d8f9c947879545ff41df052\t00-post.txt\n",
         "allocationBefore": 571469824,
         "allocationAfter": 571469824,
         "capBytes": 571473920,

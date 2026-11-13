@@ -45,9 +45,9 @@ LATER_ADDITIONS = {
     SRC + "M3FiveProviderIntegrationTest.java",
 }
 ATTRIBUTIONS = {
-    "m3/collections/qualification/mergeloss-01-15-20261106/EDITS.tsv":
+    "make/m3/collections/qualification/mergeloss-01-15-20261106/EDITS.tsv":
         "a6949d00ad72a8a631728d1b8116521b40edc2484150398027b216d2e2beb1e2",
-    "m3/collections/qualification/foldaudit-collections-20261107/EDITS.tsv":
+    "make/m3/collections/qualification/foldaudit-collections-20261107/EDITS.tsv":
         "92e1957330a6b8c5874a4452bb258b9fe772342c87a27c61f0e5bd34f7cf66da",
     "m3/collections/interop/qualification/bindings-gating-20261107/EDITS.tsv":
         "d39d7503ca53aa2a696e46760bff70d911a69ab909360c60f1090179b99b9b18",

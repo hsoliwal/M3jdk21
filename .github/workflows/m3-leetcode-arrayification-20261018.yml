@@ -7,7 +7,7 @@ on:
       - 'test/jdk/jdk/m3/collections/M3ArrayifiedIndexOpsSelfTest.java'
       - 'm3/collections/interop/src/main/java/jdk/m3/collections/interop/M3FiveLibraryIndexViews.java'
       - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryArrayificationTest.java'
-      - 'm3/collections/qualification/m3-arrayification-20261018/**'
+      - 'make/m3/collections/qualification/m3-arrayification-20261018/**'
       - '.github/workflows/m3-leetcode-arrayification-20261018.yml'
   workflow_dispatch:
 concurrency:
@@ -26,7 +26,7 @@ jobs:
       - name: Real Maven OpenRewrite recipe and exact generated postimages
         run: |
           set -eu
-          TASK=m3/collections/qualification/m3-arrayification-20261018
+          TASK=make/m3/collections/qualification/m3-arrayification-20261018
           RES="$TASK/recipe/src/main/resources/jdk/internal/m3/rewrite/arrayification-20261018"
           mvn -B -ntp -f "$TASK/recipe/pom.xml" test
           cmp -s src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ArrayifiedIndexOps.java "$RES/M3ArrayifiedIndexOps.java"

@@ -95,9 +95,9 @@ public final class M3ApacheHeader extends Recipe {
 	static String header (String origin, String source, List<String> kept) {
 		StringBuilder b = new StringBuilder ("\n").append (COPYRIGHT).append ('\n');
 		b.append (" * SPDX-License-Identifier: Apache-2.0\n *\n");
-		b.append (" * Derived by recipe (m3/docs/viewport-everywhere/recipe) from ").append (origin).append (",\n");
+		b.append (" * Derived by recipe (doc/m3/viewport-everywhere/recipe) from ").append (origin).append (",\n");
 		b.append (" * ").append (source).append (".java; Apache-2.0 elected from its Apache-2.0 OR EPL-2.0 publication\n");
-		b.append (" * (m3/docs/viewport-everywhere/LICENSE_ELECTION.tsv).\n");
+		b.append (" * (doc/m3/viewport-everywhere/LICENSE_ELECTION.tsv).\n");
 		for (String line : kept) b.append (line).append ('\n');
 		return b.append (' ').toString ();
 	}

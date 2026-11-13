@@ -39,7 +39,7 @@ mvn -B -ntp -f "$RECIPE_CRATE/pom.xml" test \
 Then build the source modules and combined image:
 
 ```sh
-python3 m3/tooling/module-packs/nlp-search/current_forks.py \
+python3 make/m3/tooling/module-packs/nlp-search/current_forks.py \
   --jdk-home "$JAVA_HOME" \
   --lucene-source /path/to/lucene \
   --opennlp-source /path/to/opennlp \

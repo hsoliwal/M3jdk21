@@ -10,7 +10,7 @@ on:
       - 'm3/collections/interop/src/main/java/jdk/m3/collections/interop/M3ApacheMultiSet.java'
       - 'm3/collections/interop/src/main/java/jdk/m3/collections/interop/M3FiveProviderFlagSelection.java'
       - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveProviderCountSharingRegressionTest.java'
-      - 'm3/collections/qualification/five-provider-count-recovery-20261018/**'
+      - 'make/m3/collections/qualification/five-provider-count-recovery-20261018/**'
       - '.github/workflows/m3-five-provider-count-recovery-20261018.yml'
   workflow_dispatch:
 permissions:
@@ -38,7 +38,7 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           import hashlib
-          root = Path('m3/collections/qualification/five-provider-count-recovery-20261018/recipe')
+          root = Path('make/m3/collections/qualification/five-provider-count-recovery-20261018/recipe')
           resources = root / 'src/main/resources/jdk/internal/m3/rewrite/five-provider-count-recovery-20261018'
           for line in (resources/'manifest.tsv').read_text().splitlines():
               path,before,after,name = line.split('\t')
@@ -52,7 +52,7 @@ jobs:
       - name: Execute original OpenRewrite recipe, adversarial refusal and fixed point
         run: |
           set -euxo pipefail
-          mvn -B -ntp -f m3/collections/qualification/five-provider-count-recovery-20261018/recipe/pom.xml verify
+          mvn -B -ntp -f make/m3/collections/qualification/five-provider-count-recovery-20261018/recipe/pom.xml verify
       - name: Compile complete installed M3 core sources at strict Java 21 warning gate
         shell: bash
         run: |
@@ -82,5 +82,5 @@ jobs:
           retention-days: 30
           path: |
             proof/
-            m3/collections/qualification/five-provider-count-recovery-20261018/recipe/target/surefire-reports/
+            make/m3/collections/qualification/five-provider-count-recovery-20261018/recipe/target/surefire-reports/
             m3/collections/interop/target/surefire-reports/

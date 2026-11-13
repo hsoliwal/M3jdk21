@@ -3,12 +3,12 @@
 # SPDX-License-Identifier: Apache-2.0
 """Relocation recipe RELOCATE_CENSUS2 v1 (recipe-first port of census pass-2 oracles and tests, never by hand).
 
-Derived from m3/collections/recipe/entryless-lane-kernel-20261106/relocate.py v3 (RELOCATE_ENTRYLESS_LANE_KERNEL):
+Derived from make/m3/collections/recipe/entryless-lane-kernel-20261106/relocate.py v3 (RELOCATE_ENTRYLESS_LANE_KERNEL):
 the same RELOCATION_MAP.tsv row kinds, PROVENANCE.tsv columns, anchors, idempotence, --check and refusals. Census
 pass 2 relocates whole files only (FILE rows: the M3JDK header, the mapped package line, mapped imports, TYPE and
 MEMBER renames, DROP/REWRITE rows, one //FLLDCIM: RELOCATE anchor line before the top-level type naming the donor
 blob and commit); MERGE/APPEND rows stay available unchanged. Changes from v3, each a census pass-2 donor shape:
-  * the recipe lives under m3/collections/qualification/<dir>/ (anchors name that directory);
+  * the recipe lives under make/m3/collections/qualification/<dir>/ (anchors name that directory);
   * donor files may be hash-pinned templates named <Type>.java.txt (the donor type is the name before .java);
   * a leading /* ... */ block comment that carries an SPDX or Copyright line is the donor header (v3 knew only //
     header lines), so it is replaced by the M3JDK header like a // header.
@@ -31,7 +31,7 @@ from pathlib import Path
 RECIPE = "relocate.py"
 VERSION = "v1"
 RECIPE_DIR = Path(__file__).resolve().parent
-RECIPE_DIR_REL = "m3/collections/qualification/" + RECIPE_DIR.name
+RECIPE_DIR_REL = "make/m3/collections/qualification/" + RECIPE_DIR.name
 MAP_NAME = "RELOCATION_MAP.tsv"
 PROVENANCE_NAME = "PROVENANCE.tsv"
 PROVENANCE_COLUMNS = ("donor_repo", "donor_commit", "donor_path", "donor_blob", "donor_sha256", "donor_url",

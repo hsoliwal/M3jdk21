@@ -450,7 +450,7 @@
   ],
   "delivery": {
     "receipt_dataset": "jdk-receipt-20261102",
-    "path": "m3/array-lanes-20261102/RECEIPT.json",
+    "path": "make/m3/array-lanes-20261102/RECEIPT.json",
     "execution_evidence_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/array-lanes-20261102/execution/jdk-receipt-20261102",
     "revision_scope": "Receipt delivery evidence is generated after source commit A and published in the canonical review; it is not claimed to exist at the source commit.",
     "method": "Existing canonical prepare, actual OpenRewrite SDK qualification, admitted Result receipt, then zero-change fixed-point receive."

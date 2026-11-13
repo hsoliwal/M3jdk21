@@ -42,11 +42,11 @@ Public descriptors compare unchanged. The unsafe-sharing mutant is caught by the
 The packaged runner was executed on the sealed output bytes:
 
 ```sh
-M3_JAVA_HOME=/absolute/path/to/java21 bash m3/runtime-integration/check-m3tq-array-composition.sh
+M3_JAVA_HOME=/absolute/path/to/java21 bash make/m3/runtime-integration/check-m3tq-array-composition.sh
 ```
 
 Its completed log and consumed-source SHA-256 are under
-`m3/runtime-integration/evidence/tq-primitive-composition-20261021/`.
+`make/m3/runtime-integration/evidence/tq-primitive-composition-20261021/`.
 This is a host-patched component/JNI-oracle run, not a rebuilt JDK or actual jtreg run.
 
 ## Measured costs and pending scope

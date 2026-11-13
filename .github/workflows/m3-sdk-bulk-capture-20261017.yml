@@ -7,7 +7,7 @@ on:
     paths:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3MutableFilteredViews.java'
       - 'test/jdk/jdk/m3/collections/M3BulkCaptureContract.java'
-      - 'm3/collections/qualification/sdk-bulk-capture-20261017/**'
+      - 'make/m3/collections/qualification/sdk-bulk-capture-20261017/**'
       - '.github/workflows/m3-sdk-bulk-capture-20261017.yml'
   workflow_dispatch:
 permissions:
@@ -30,7 +30,7 @@ jobs:
           java-version: '21'
           cache: maven
       - name: Canonical postimage, refusal and Maven recipe fixed point
-        run: mvn -B -ntp -f m3/collections/qualification/sdk-bulk-capture-20261017/recipe/pom.xml verify
+        run: mvn -B -ntp -f make/m3/collections/qualification/sdk-bulk-capture-20261017/recipe/pom.xml verify
       - name: Strict Java21 owning source and hostile TreeSet/TreeMap differential oracle
         shell: bash
         run: |

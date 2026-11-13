@@ -6,12 +6,12 @@ No Maven/OpenRewrite SDK result is inferred from this dependency-free gate.
 import argparse, hashlib, json, os, re, shutil, subprocess, tempfile
 from pathlib import Path
 TASK=Path(__file__).resolve().parent
-ROOT=TASK.parents[3]
+ROOT=TASK.parents[4]
 RES=TASK/'src/main/resources/jdk/internal/m3/rewrite/native-index-range-20261017'
 JAVA='m3/collections/src/main/java/jdk/m3/collections/'
 C='m3/collections/src/main/native/collections/m3_index_mask_compactor.c'
 SELF='m3/collections/src/test/java/jdk/m3/collections/M3NativeIndexRangeSelfTest.java'
-EXAMPLE='m3/collections/examples/IndexedMaskPipelineExample.java'
+EXAMPLE='make/m3/collections/examples/IndexedMaskPipelineExample.java'
 rows=[line.split('\t') for line in (RES/'manifest.tsv').read_text().splitlines()]
 logs=[]
 def run(args, expected=0):

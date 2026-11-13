@@ -149,25 +149,25 @@
       "sha256": "a07590946ce9330772bb30a21dc35f1f1da0b87b671fdcf30c8630db33a91ac3"
     },
     {
-      "path": "m3/runtime-integration/tests/M3StringInvariant.java",
+      "path": "make/m3/runtime-integration/tests/M3StringInvariant.java",
       "gitBlob": "a39f876f0d3065d0754f8381e57aa097b6051e35",
       "bytes": 12335,
       "sha256": "7228184f31eaa1f8acd8271586b4745172b2f38dd24d004078f244b8cb6e54d8"
     },
     {
-      "path": "m3/runtime-integration/char-array-copy/recipe/apply.py",
+      "path": "make/m3/runtime-integration/char-array-copy/recipe/apply.py",
       "gitBlob": "3e1a29bedd5f508d1217d81f712d5351f2e56a5d",
       "bytes": 10847,
       "sha256": "01a20628a493101194d4698ad0701533c2a3ba797d17a344e5d557616976e16b"
     },
     {
-      "path": "m3/runtime-integration/char-array-copy/recipe/manifest.json",
+      "path": "make/m3/runtime-integration/char-array-copy/recipe/manifest.json",
       "gitBlob": "244a5bd23f38065cb5d9e9fcacc3eb397c145a89",
       "bytes": 1105,
       "sha256": "cbd0b1b2aa815dcfb92fc517eedf5aed8da13dbf7a5af472b918aee4a38c25a0"
     },
     {
-      "path": "m3/runtime-integration/char-array-copy/recipe/test_recipe.py",
+      "path": "make/m3/runtime-integration/char-array-copy/recipe/test_recipe.py",
       "gitBlob": "604e5f073577e4ac880ac594e0b48934657b8312",
       "bytes": 6415,
       "sha256": "dda45def134f0b188d8cecb0bca4f5e0049d237e3cdc91b8469316772d49e187"

@@ -18,7 +18,7 @@ import sys
 import tempfile
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[3]
+ROOT = HERE.parents[4]
 PREFIX = Path("m3/collections/")
 JAVA_OWNER = PREFIX / "src/main/java/jdk/m3/collections/M3BitLane28.java"
 PROOF_OWNER = PREFIX / "src/test/java/jdk/m3/collections/M3BitLaneJumpProof.java"

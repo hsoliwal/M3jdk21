@@ -103,7 +103,7 @@ establish a universal graph or application speedup.
 | `m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3GvasLiteralHarvester.java` | `cbe859bcfd97ee2e7bec6122c96de66d25159d00770cc84c5f0227c64f96f814` |
 | `m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ItemReferenceScan.java` | `4c504f5272d2d66b3e1de78e8db4dd4690aa4795b98eba91a828b15bbe409994` |
 | `m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3EscapePreparedTest.java` | `f1a3e4fa22d4ac116e936cac4d51d459d3def5ae855bd484157ca9fe3006de46` |
-| `m3/docs/name-mapping.d/m3-program-escape-precompute.json` | `d293b891ed743279037f4cf4417bf8efaae9fab186dee4a3cc6bb69dc78a0e8f` |
+| `doc/m3/name-mapping.d/m3-program-escape-precompute.json` | `d293b891ed743279037f4cf4417bf8efaae9fab186dee4a3cc6bb69dc78a0e8f` |
 
 The Java manifest hash is `6f89d7258175b03200250d0ba233dd3a49ff090cfd9bfb9008bf888b4562ef96`;
 the text manifest hash is `029f8135054b08b5b05b7e7b8ca62a4ed84614ac2a4ad04620e3a23848f8d293`.

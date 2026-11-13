@@ -11,7 +11,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 HERE = Path(__file__).resolve().parent
-RECEIVER = HERE.parents[2]
+RECEIVER = HERE.parents[3]
 SOURCE = HERE / "source"
 TASK_REL = "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019"
 TASK = SOURCE / TASK_REL
@@ -83,7 +83,7 @@ def binding(fresh=False):
     head = git("rev-parse", "HEAD")
     require(head == os.environ["EXPECTED_SOURCE_SHA"] and len(head) == 40, "exact head required")
     raw = regular(HERE / "source-binding.json").read_bytes()
-    require(blob(raw) == git("rev-parse", "HEAD:m3/tooling/text-metadata-current-owner/source-binding.json"),
+    require(blob(raw) == git("rev-parse", "HEAD:make/m3/tooling/text-metadata-current-owner/source-binding.json"),
             "source binding itself differs from exact checkout")
     record = json.loads(raw)
     require(record["repository"] == "hsoliwal/com.synexia"
@@ -93,7 +93,7 @@ def binding(fresh=False):
     revision = record["sourceCommit"]
     require(len(revision) == 40 and all(c in "0123456789abcdef" for c in revision),
             "canonical source commit required")
-    prefix = "m3/tooling/text-metadata-current-owner/"
+    prefix = "make/m3/tooling/text-metadata-current-owner/"
     source_prefix = prefix + "source/"
     rows = record["files"]
     require(61 <= len(rows) <= 72, "bounded complete original-path source binding required")

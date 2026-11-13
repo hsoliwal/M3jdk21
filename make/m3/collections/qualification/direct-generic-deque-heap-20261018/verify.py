@@ -6,8 +6,8 @@ import hashlib
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[3]
-TEMPLATES = ROOT / "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-native-generic-deque-priority-20261018"
+ROOT = HERE.parents[4]
+TEMPLATES = ROOT / "make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-native-generic-deque-priority-20261018"
 SOURCE_BLOBS = {
   "M3ArrayDeque.java": "25d61c5e3e0bdf28a75e66de03da7256761e8fbb",
   "M3PriorityQueue.java": "795e6036e0e6ef4cf4e3f04f6fbe61b544583a2a",

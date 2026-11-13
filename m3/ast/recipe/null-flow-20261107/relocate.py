@@ -29,7 +29,7 @@ and the reason in base_note.
 
 VERBATIM rows copy one donor file byte for byte (no header, anchor or rename: donor-run evidence such as logs, hash
 tables and input manifests, whose statements name donor paths and digests that a rename would falsify) to a target
-path under an evidence/ directory (the lineage scope of m3/tooling/jdk-naming, which never rewrites it); their
+path under an evidence/ directory (the lineage scope of make/m3/tooling/jdk-naming, which never rewrites it); their
 PROVENANCE row states body_match TRUE and base_note VERBATIM. MERGE rows record an edit of an existing module file
 that a relocated class needs (path and reason; applied by the recipe's apply.py from EDITS.tsv); the recipe writes
 nothing for them. SKIP and DROP rows document non-ports.
@@ -39,11 +39,11 @@ package, an import that is neither a JDK package, nor a mapped donor package, no
 map (port the closure: add the file or the dependency to the map), a DROP_METHOD row matching no declaration or more
 than one, or a Java file without a top-level type.
 
-Derived from m3/optane/recipe/pmem-gram-index-20261106/relocate.py v3 (RELOCATE_PMEM_GRAM_INDEX, itself from
+Derived from make/m3/optane/recipe/pmem-gram-index-20261106/relocate.py v3 (RELOCATE_PMEM_GRAM_INDEX, itself from
 pmem-region-core-20261106 v2 and m3/native/recipe/scoped-leases-20261106 v1): v4 adds the DROP_METHOD rows (the
 method_span rule of m3/algorithms/recipe/families-20261106/relocate.py v1) with the dropped_lines column, and derives
 RECIPE_PATH from the module directory so one recipe text serves m3/ast/recipe/null-flow-20261107 and
-m3/optane/recipe/pmem-accelerator-20261107; every v3 rule is unchanged.
+make/m3/optane/recipe/pmem-accelerator-20261107; every v3 rule is unchanged.
 
 usage: python -I relocate.py --donor-git DIR --donor-rev REV [--module DIR] [--check]
 """

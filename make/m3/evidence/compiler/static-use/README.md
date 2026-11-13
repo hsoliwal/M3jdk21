@@ -4,7 +4,7 @@
 
 Module `org.m3jdk.compiler.staticuse` (package `jdk.m3.compiler.staticuse`), Maven coordinates
 `com.m3:m3-compiler-static-use:0.1.0-SNAPSHOT`, Java 21; a default module of
-`m3/pom.xml`.
+`make/m3/pom.xml`.
 
 `M3StaticUsePlan` turns compiler-proven facts into `DIRECT_PARENT`, `LAZY_HANDLE`, `MATERIALIZE` or `REFUSE` (unknown
 is refused), gives the matching reference mode and the int-induction condition-only loop entry bound, and declares the

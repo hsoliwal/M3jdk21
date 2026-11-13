@@ -14,10 +14,10 @@ import tempfile
 import sys
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[4]
+ROOT = HERE.parents[5]
 SOURCE = "src/java.base/share/classes/java/util/Arrays.java"
-MAPPING = "m3/docs/name-mapping.json"
-PLAN = "m3/tooling/name-contract/name-plan.json"
+MAPPING = "doc/m3/name-mapping.json"
+PLAN = "make/m3/tooling/name-contract/name-plan.json"
 COMPANION = "src/jdk.m3.collections/share/classes/jdk/m3/arrays/M3Arrays.java"
 OLD_BLOB = "2347e48700de1d26f630b348554ea9db3b4db25b"
 NEW_BLOB = "c5412776d202bc6fb36a3a9e65ba35437a98cbef"
@@ -106,7 +106,7 @@ def verify(root=ROOT):
     v1_bytes = read(V1_RECEIPT)
     pinned(v1_bytes, V1_RECEIPT_BLOB, V1_RECEIPT_SHA)
     if current_receipt.get("supersedes", {}) != {
-            **current_receipt.get("supersedes", {}), "path": "m3/tooling/name-contract/receipts/"
+            **current_receipt.get("supersedes", {}), "path": "make/m3/tooling/name-contract/receipts/"
             "release-preparation/arrays-live-successor.json", "blob": V1_RECEIPT_BLOB, "sha256": V1_RECEIPT_SHA}:
         raise ValueError("successor receipt lineage altered")
     if (current_receipt["schema"] != "M3_ARRAYS_RELEASE_SOURCE_SUCCESSOR_V2"

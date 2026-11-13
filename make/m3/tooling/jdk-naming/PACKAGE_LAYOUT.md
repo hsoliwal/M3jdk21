@@ -30,9 +30,9 @@ The gate fails on:
 Removals always pass, so consolidation only ever shrinks the baseline. Commands:
 
 ```sh
-python3 -I m3/tooling/jdk-naming/test_package_gate.py               # 9 synthetic-tree checks
-python3 -I m3/tooling/jdk-naming/package_gate.py check --tree HEAD
-python3 -I m3/tooling/jdk-naming/package_gate.py baseline --tree HEAD > PACKAGE_BASELINE.tsv   # after approval only
+python3 -I make/m3/tooling/jdk-naming/test_package_gate.py               # 9 synthetic-tree checks
+python3 -I make/m3/tooling/jdk-naming/package_gate.py check --tree HEAD
+python3 -I make/m3/tooling/jdk-naming/package_gate.py baseline --tree HEAD > PACKAGE_BASELINE.tsv   # after approval only
 ```
 
 ## Census at the baseline (master 2026-11-08; tables in `package-census-20261108/`)

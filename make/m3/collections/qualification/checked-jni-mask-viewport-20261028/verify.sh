@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # Checked-JNI parity for the unchanged current-master M3 primitive mask viewport.
 set -euo pipefail
-cd "$(dirname "${BASH_SOURCE[0]}")/../../../.."
+cd "$(dirname "${BASH_SOURCE[0]}")/../../../../.."
 : "${JAVA_HOME:?Java 21 installation and JNI headers required}"
 command -v cc >/dev/null || { echo "Native C compiler required" >&2; exit 1; }
 command -v mvn >/dev/null || { echo "Maven required" >&2; exit 1; }

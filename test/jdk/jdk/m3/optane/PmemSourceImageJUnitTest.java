@@ -17,7 +17,7 @@ import org.junit.jupiter.api.io.TempDir;
 import static org.junit.jupiter.api.Assertions.*;
 
 /** Exact-byte snapshot contract; uses real SDK backing rather than a fake mapping. */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/m3-pmem-sdk/src/junit/java/test/PmemSourceImageJUnitTest.java blob 045712cc23ae; recipe m3/optane/recipe/pmem-source-image-20261106/relocate.py v3
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/m3-pmem-sdk/src/junit/java/test/PmemSourceImageJUnitTest.java blob 045712cc23ae; recipe make/m3/optane/recipe/pmem-source-image-20261106/relocate.py v3
 public final class PmemSourceImageJUnitTest {
     @TempDir Path temp;
     private static final PmemSourceImage.Limits LIMITS = new PmemSourceImage.Limits(32, 1 << 20, 65536, 127);

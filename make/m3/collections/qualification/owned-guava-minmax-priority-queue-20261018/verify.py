@@ -8,8 +8,8 @@ def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 HISTORIC_PACKET_SHA256 = "da37bfacf6b8bfa91e5ded6bb74947c54c8d54a8c70f6b15cc58c1eb94208bea"
 SUCCESSOR_PACKET = BASE.parent / "guava-minmax-source-custody" / "source-bindings.json"
 WORKFLOW = ".github/workflows/m3-owned-guava-minmax-priority-queue.yml"
-OWN_VERIFIER = "m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/verify.py"
-ORIGINAL_RUNNER = "m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/run.py"
+OWN_VERIFIER = "make/m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/verify.py"
+ORIGINAL_RUNNER = "make/m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/run.py"
 RUNNER_POST_SHA256 = "6faae312cf259d842d2257ac735efddd6d342ee111c514456e429223488edf85"
 
 # Exact first-party compile closure found in original javac 21 diagnostics.

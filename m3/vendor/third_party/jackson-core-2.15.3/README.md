@@ -1,7 +1,7 @@
 # jackson-core 2.15.3 source reference
 
 This directory compiles the jackson-core 2.15.3 sources from the published sources jar with one M3 overlay,
-`JACKSON_NUMBERS_TO_JDK v2` (`m3/tooling/jdk-superset/number-parse/tools/jackson_numbers_to_jdk.py`): `NumberInput`, `BigDecimalParser` and
+`JACKSON_NUMBERS_TO_JDK v2` (`make/m3/tooling/jdk-superset/number-parse/tools/jackson_numbers_to_jdk.py`): `NumberInput`, `BigDecimalParser` and
 `BigIntegerParser` call `Double.parseDouble`, `Float.parseFloat`, `new BigDecimal` and `new BigInteger`,
 and `NumberOutput` calls `Double.toString` and `Float.toString`: java.base parses and renders the numbers,
 not the shaded FastDoubleParser or the copied Schubfach. `io.schubfach.DoubleToDecimal` and

@@ -19,7 +19,7 @@
       "mode": "100644"
     },
     {
-      "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java",
+      "path": "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java",
       "before": {
         "resource": "before-01-M3A3RegexMemoryLabDeliveryRecipeTest.java.txt",
         "sha256": "fa5476d63c50d830de841e53b58dd7346275ce812f16d2e200ad6a4f0d016ff8"
@@ -35,7 +35,7 @@
       "mode": "100644"
     },
     {
-      "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java",
+      "path": "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java",
       "before": {
         "resource": "before-02-M3A3RegexMemoryWorkflowRecipeTest.java.txt",
         "sha256": "6d6f4257d18c5e5a016a6c876bffcc8f5c202a65b8f019f2cf3ec1f26bfc84e8"

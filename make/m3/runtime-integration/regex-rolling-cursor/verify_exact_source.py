@@ -6,7 +6,7 @@ from hashlib import sha256
 from pathlib import Path
 import sys
 
-ROOT = Path(__file__).resolve().parents[3]
+ROOT = Path(__file__).resolve().parents[4]
 files = {
     "src/java.base/share/classes/java/lang/M3StringRegexDp.java":
         "3029950078524419af52edbcbaaccab545bd5b1bed824ee80218250b8c748ef4",

@@ -28,13 +28,13 @@
       },
       {
         "path": "m3/collections/src/main/java/jdk/m3/collections/M3EnumLongMap.java",
-        "receipt": "m3/compatibility/m3-enum-long-map-receipt.json",
+        "receipt": "make/m3/compatibility/m3-enum-long-map-receipt.json",
         "target": "com.m3.collections.M3AdaptiveEnumLongMap",
         "mechanics": "dense backing and key contract"
       },
       {
         "path": "m3/collections/src/main/java/jdk/m3/collections/M3IntIntHashMap.java",
-        "receipt": "m3/compatibility/m3-int-lanes-receipt.json (re-applied in #427)",
+        "receipt": "make/m3/compatibility/m3-int-lanes-receipt.json (re-applied in #427)",
         "target": "com.m3.collections.M3IntLongHashMap",
         "mechanics": "M3 shape: inlined DenseHash, modCount fail-fast, M3IntIterator keys"
       }

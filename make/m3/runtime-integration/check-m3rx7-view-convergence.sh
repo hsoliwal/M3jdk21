@@ -2,7 +2,7 @@
 # Copyright (c) 2026, Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
 # Target proof mirror. Canonical task: Synexia PR 12446 at b8ee85a73166407e0d82a6bdf51cfaad7698f4ed.
 set -euo pipefail
-ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd -P)"
+ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../../.." && pwd -P)"
 : "${M3_JAVA_HOME:?set M3_JAVA_HOME to a Java 21 JDK}"
 : "${M3_EXPECTED_COMMIT:?set M3_EXPECTED_COMMIT to the receiver commit published on this PR}"
 [[ "$M3_EXPECTED_COMMIT" =~ ^[0-9a-f]{40}$ ]] || { echo 'A full pinned commit is required.' >&2; exit 2; }
@@ -13,7 +13,7 @@ CC="${CC:-cc}"
 WORK="$(mktemp -d "${TMPDIR:-/tmp}/m3jdk-views.XXXXXX")"
 trap 'rm -rf -- "$WORK"' EXIT
 COLL_REL=m3/collections/src/main/java/jdk/m3/collections
-PROOF_REL=m3/collections/qualification/jdk-rx7-view-convergence-20261019/proof
+PROOF_REL=make/m3/collections/qualification/jdk-rx7-view-convergence-20261019/proof
 INPUTS=(
   src/java.base/share/classes/java/util/SortedSet.java
   src/java.base/share/classes/java/util/ReverseOrderSortedSetView.java
@@ -28,8 +28,8 @@ INPUTS=(
   test/jdk/jdk/internal/mindex/M3RX7ArrayPowerContract.java
   "$PROOF_REL/FilteredOwnerIntegration.java" "$PROOF_REL/MaskWindowConvergence.java"
   "$PROOF_REL/MaskWindowWork.c" "$PROOF_REL/ConvergenceCostProbe.java"
-  m3/runtime-integration/check-m3rx7-view-convergence.sh
-  m3/runtime-integration/evidence/jdk-rx7-view-convergence-20261019/PRODUCTION.sha256
+  make/m3/runtime-integration/check-m3rx7-view-convergence.sh
+  make/m3/runtime-integration/evidence/jdk-rx7-view-convergence-20261019/PRODUCTION.sha256
 )
 for path in "${INPUTS[@]}"; do
   at="$ROOT/$path"
@@ -40,7 +40,7 @@ for path in "${INPUTS[@]}"; do
   git -C "$ROOT" cat-file blob "$M3_EXPECTED_COMMIT:$path" > "$WORK/expected"
   cmp -- "$ROOT/$path" "$WORK/expected"
 done
-(cd "$ROOT" && sha256sum -c m3/runtime-integration/evidence/jdk-rx7-view-convergence-20261019/PRODUCTION.sha256 && sha256sum "${INPUTS[@]}")
+(cd "$ROOT" && sha256sum -c make/m3/runtime-integration/evidence/jdk-rx7-view-convergence-20261019/PRODUCTION.sha256 && sha256sum "${INPUTS[@]}")
 java -version; "$CC" --version
 mkdir -p "$WORK/source/java/util" "$WORK/source/jdk/internal/mindex" "$WORK/patch" "$WORK/tests" "$WORK/headers" "$WORK/native" "$WORK/missing"
 for name in SortedSet ReverseOrderSortedSetView; do cp "$ROOT/src/java.base/share/classes/java/util/$name.java" "$WORK/source/java/util/"; done

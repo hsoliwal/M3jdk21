@@ -5,7 +5,7 @@
 **Source-changing unit:** existing `M3HashPinnedJavaSnapshotRecipe`, named
 `com.synexia.m3jdk.LongSortedSnapshot20261017`. Exact `ABSENT` preimages, SHA-256 sealed
 Java and proof templates, Java LST creation, replay/fixed-point and occupied/drift/non-Java
-refusal are defined in `m3/collections/snapshot-recipe-20261017`.
+refusal are defined in `make/m3/collections/snapshot-recipe-20261017`.
 The matching source-producing recipe is first-party and committed before installing any output.
 Do not manually edit generated product Java; change the template + manifest, re-run recipe and
 qualify again. Synexia remains a convergence/donor workspace; M3JDK21 is the product owner.

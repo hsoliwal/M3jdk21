@@ -41,7 +41,7 @@ another signal producer or make source-time claims.
 Run from the repository:
 
 ```sh
-bash m3/collections/qualification/signal-mask32-20261018/verify.sh
+bash make/m3/collections/qualification/signal-mask32-20261018/verify.sh
 ```
 
 The script compiles the actual owner sources using `javac --release 21 -Xlint:all -Werror`,

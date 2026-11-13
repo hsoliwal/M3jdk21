@@ -1,7 +1,7 @@
 # M3JDK compile-time String precompute port
 
 Status: isolated Apache-2.0 port. Not on the bootstrap path, no `src/**` change, no public JDK
-API. Design: [`m3/docs/m3-compiletime-precompute.md`](../../docs/m3-compiletime-precompute.md).
+API. Design: [`doc/m3/m3-compiletime-precompute.md`](../../../doc/m3/m3-compiletime-precompute.md).
 
 | Class | Role |
 |---|---|
@@ -37,7 +37,7 @@ SHA-256 is in `evidence/HARVEST_RECEIPT.tsv`).
 ```sh
 python3 m3/ports/compiletime/seal_crate.py                    # regenerate the recipe crate
 python3 m3/ports/compiletime/verify_compiletime_precompute.py # refuse on any drift
-mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3CompileTimeRegexPrecomputeRecipeTest test
+mvn -B -ntp -f make/m3/tooling/migration-recipes/pom.xml -Dtest=M3CompileTimeRegexPrecomputeRecipeTest test
 ```
 
 ## Detailed source references

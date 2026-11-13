@@ -2,7 +2,7 @@
 """Prepared actual-plan proof for an additive, four-existing-input JCC successor.
 
 Requires real final-source resources. Missing/unbound resources fail; none are generated.
-Use M3_JCC_CANDIDATE_ROOT for staging, or install under m3/migration/test/.
+Use M3_JCC_CANDIDATE_ROOT for staging, or install under make/m3/migration/test/.
 Passing this tool-plane replay test grants no source export, JNI or JDK acceptance.
 """
 from __future__ import annotations
@@ -18,7 +18,7 @@ import unittest
 
 
 RESOURCE_ROOT = Path(
-    "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/"
+    "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/"
     "jdk21-hash-pinned-text"
 )
 CRATE = RESOURCE_ROOT / "jcc-source-final-handoff-20261005"
@@ -28,27 +28,27 @@ PREVIOUS_RECIPE_ID = "jcc-handoff-20261005/2"
 PREVIOUS_SEAL = "70283e86d30abf8e30a09b10d77be40f99160371a98927dc151d680e3c2e4a87"
 PREVIOUS_SOURCE = "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc"
 DESTINATION_PREIMAGE_COMMIT = "df06cdee5a8526f573b3ad89622824d0b49e2f25"
-REGISTRY = "m3/docs/name-mapping.json"
-BINDINGS = "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json"
+REGISTRY = "doc/m3/name-mapping.json"
+BINDINGS = "make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json"
 IMAGES = {
     REGISTRY: ("before00-name-mapping.json.txt", "after00-name-mapping.json.txt"),
-    "m3/docs/jcc-source-handoff.md":
+    "doc/m3/jcc-source-handoff.md":
         ("before01-jcc-source-handoff.md.txt", "after01-jcc-source-handoff.md.txt"),
     BINDINGS:
         ("before02-source-destination-bindings.json.txt", "after02-source-destination-bindings.json.txt"),
-    "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv":
+    "make/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv":
         ("before03-root-coverage-obligations.tsv.txt", "after03-root-coverage-obligations.tsv.txt"),
 }
 OUTPUT_MODES = dict(zip(sorted(IMAGES), (0o640, 0o600, 0o750, 0o644)))
 GUARDS = {
-    "m3/docs/name-mapping.schema.json",
-    "m3/migration/migration.py",
-    "m3/migration/recipe.py",
-    "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/"
+    "doc/m3/name-mapping.schema.json",
+    "make/m3/migration/migration.py",
+    "make/m3/migration/recipe.py",
+    "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/"
     "M3Jdk21HashPinnedTextSnapshotRecipe.java",
-    "m3/tooling/migration-recipes/pom.xml",
+    "make/m3/tooling/migration-recipes/pom.xml",
     "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
-    "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/"
+    "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/"
     "jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
 }
 JCC_IDS = {"m3.jcc-recipe-laboratory", "m3.jcc-java-jni-regression"}
@@ -73,7 +73,7 @@ class JccSourceFinalHandoffPacketTests(unittest.TestCase):
         override = os.environ.get("M3_JCC_CANDIDATE_ROOT")
         cls.candidate = Path(override).resolve() if override else Path(__file__).resolve().parents[3]
         cls.frozen_inputs = {}
-        owner = cls.candidate / "m3/migration/recipe.py"
+        owner = cls.candidate / "make/m3/migration/recipe.py"
         cls.require_file(owner, "retained sealed installer")
         sys.dont_write_bytecode = True
         spec = importlib.util.spec_from_file_location("jcc_source_final_retained_installer", owner)

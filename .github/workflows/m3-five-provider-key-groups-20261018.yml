@@ -29,7 +29,7 @@ jobs:
             test/jdk/jdk/m3/collections
             test/jdk/jdk/internal/m3/collections
             m3/native/include
-            m3/tooling/migration-recipes
+            make/m3/tooling/migration-recipes
       - uses: actions/setup-java@v4
         with:
           distribution: temurin

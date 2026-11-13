@@ -37,7 +37,7 @@
       "qualification_sha256": "f07cb8a60f606bbea865b9a2018a4c8d43ee69254617c288aa85683bd2dc99b9"
     },
     {
-      "path": "m3/backports/README.md",
+      "path": "make/m3/backports/README.md",
       "recipe_id": "com.synexia.m3.JdkConvergenceDocs20261112",
       "before_sha256": "32f384a00d149e0c0c9a1d73b9aff00e48d940fc10b4a4f7aa0788c0c9331b72",
       "after_sha256": "b90250b4ec96a1cf325d87a958f10b51f8a7987ef6ed84fa57d5ae2b287e3081",
@@ -47,7 +47,7 @@
       "qualification_sha256": "364aacb91939f05285b71f32566ff490302a180618205dfbe78db7345e6e152e"
     },
     {
-      "path": "m3/release/README.md",
+      "path": "make/m3/release/README.md",
       "recipe_id": "com.synexia.m3.M3Jdk21MavenProductEvidence20261112",
       "before_sha256": "30ebf2c9e00af86489ae401aae379c46d82c63e3649820a1806d0a11eef618d9",
       "after_sha256": "0199337f0f4aec541610c8bc56d8a32245bc5e2b46c4a1605efa8da7505f8a10",
@@ -57,7 +57,7 @@
       "qualification_sha256": "263b84677fe8a8c7eff1f46d71bd629325205aa3327c3365512df6aa32eef553"
     },
     {
-      "path": "m3/release/release-contract.json",
+      "path": "make/m3/release/release-contract.json",
       "recipe_id": "com.synexia.m3.M3Jdk21MavenProductEvidence20261112",
       "before_sha256": "003543165dded6c3e57364bea4de48e2ddb459e337205110ab18eb414eba97f0",
       "after_sha256": "0bec7a818c3b665f70315a5422ac865b51967aee3a28d8c488eabe38d00ca39d",
@@ -67,7 +67,7 @@
       "qualification_sha256": "263b84677fe8a8c7eff1f46d71bd629325205aa3327c3365512df6aa32eef553"
     },
     {
-      "path": "m3/release/run_maven_control_reactor.py",
+      "path": "make/m3/release/run_maven_control_reactor.py",
       "recipe_id": "com.synexia.m3.M3Jdk21MavenProductEvidence20261112",
       "before_sha256": "ABSENT",
       "after_sha256": "9c7e4aebba9abeefc640bff1a747df1372a522a5b5fe605332eea5ab293d5f15",
@@ -77,7 +77,7 @@
       "qualification_sha256": "263b84677fe8a8c7eff1f46d71bd629325205aa3327c3365512df6aa32eef553"
     },
     {
-      "path": "m3/release/test_release_admission.py",
+      "path": "make/m3/release/test_release_admission.py",
       "recipe_id": "com.synexia.m3.M3Jdk21MavenProductEvidence20261112",
       "before_sha256": "4978c690e98362426d82f22d437d472ac7556163868c7ee12e29bb5b09257601",
       "after_sha256": "a032d6451881415c9cfbd884a0e2e4232181cbb09ba0c5c7722f5969f0e47a93",
@@ -87,7 +87,7 @@
       "qualification_sha256": "263b84677fe8a8c7eff1f46d71bd629325205aa3327c3365512df6aa32eef553"
     },
     {
-      "path": "m3/release/test_run_maven_control_reactor.py",
+      "path": "make/m3/release/test_run_maven_control_reactor.py",
       "recipe_id": "com.synexia.m3.M3Jdk21MavenProductEvidence20261112",
       "before_sha256": "ABSENT",
       "after_sha256": "9a396853879d25bc9d69c1a1a0008f0b36d0518dad6179253bccac6bd17486a2",
@@ -97,7 +97,7 @@
       "qualification_sha256": "263b84677fe8a8c7eff1f46d71bd629325205aa3327c3365512df6aa32eef553"
     },
     {
-      "path": "m3/release/verify_release_admission.py",
+      "path": "make/m3/release/verify_release_admission.py",
       "recipe_id": "com.synexia.m3.M3Jdk21MavenProductEvidence20261112",
       "before_sha256": "4d9a4142af68fce74fafbb16a26d34c3519f6d6234d7265533329fb2021b48a6",
       "after_sha256": "b9cbaf8b6ee45364054875a2c3851cec62097e51726b0d5d011a389792d77074",

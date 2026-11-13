@@ -141,7 +141,7 @@ class M3ExtensionResidueTest(unittest.TestCase):
     def test_packet_promotion_cannot_authorize_an_extension(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
-            packet = root / "m3/backports/recipes/jep-511-fixture"
+            packet = root / "make/m3/backports/recipes/jep-511-fixture"
             packet.mkdir(parents=True)
             (packet / "CURRENT_TREE_RECEIPT.tsv").write_text(
                 "field\tvalue\n"
@@ -209,8 +209,8 @@ class M3ExtensionResidueTest(unittest.TestCase):
     def test_cli_flag_is_explicit_and_output_is_reviewable(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
-            self.write_rows(root / "m3/backports/JEP_CATALOGUE.tsv", [self.row()])
-            self.write_rows(root / "m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv", [self.priority()])
+            self.write_rows(root / "make/m3/backports/JEP_CATALOGUE.tsv", [self.row()])
+            self.write_rows(root / "make/m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv", [self.priority()])
             plain = io.StringIO()
             with contextlib.redirect_stdout(plain):
                 self.assertEqual(0, self.r.main(["--root", str(root)]))
@@ -227,8 +227,8 @@ class M3ExtensionResidueTest(unittest.TestCase):
         self.assertEqual("M3_EXTENSION", parsed[0]["compatibility_lane"])
 
     def test_released_catalogue_keeps_all_language_history_without_qualification(self):
-        root = Path(__file__).resolve().parents[2]
-        backports = root / "m3/backports"
+        root = Path(__file__).resolve().parents[3]
+        backports = root / "make/m3/backports"
         catalogue = self.r.read_tsv(backports / "JEP_CATALOGUE.tsv")
         priorities = self.r.read_tsv(backports / "POST21_PRIORITY_COMPATIBILITY.tsv")
         legacy = self.r.queue(root, catalogue, priorities)

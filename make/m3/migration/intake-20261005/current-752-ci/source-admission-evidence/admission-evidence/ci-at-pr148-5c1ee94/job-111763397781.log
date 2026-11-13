@@ -232,16 +232,16 @@
 2026-10-05T12:33:34.3531748Z  40  198M   40 80.0M    0     0  50.8M      0  0:00:03  0:00:01  0:00:02 77.5M
 2026-10-05T12:33:34.3532658Z 100  198M  100  198M    0     0  82.7M      0  0:00:02  0:00:02 --:--:--  107M
 2026-10-05T12:33:35.2921865Z /home/runner/work/_temp/jdk21.tar.gz: OK
-2026-10-05T12:33:37.5541201Z ##[group]Run python3 m3/runtime-integration/char-array-copy/recipe/apply.py --check
-2026-10-05T12:33:37.5541847Z [36;1mpython3 m3/runtime-integration/char-array-copy/recipe/apply.py --check[0m
-2026-10-05T12:33:37.5542351Z [36;1mpython3 m3/runtime-integration/char-array-copy/recipe/test_recipe.py[0m
-2026-10-05T12:33:37.5542868Z [36;1mpython3 m3/runtime-integration/char-array-copy/recipe/apply.py --reverse[0m
-2026-10-05T12:33:37.5543441Z [36;1mtrap 'python3 m3/runtime-integration/char-array-copy/recipe/apply.py >/dev/null' EXIT[0m
-2026-10-05T12:33:37.5543956Z [36;1mpython3 m3/runtime-integration/recipe/apply.py --check[0m
-2026-10-05T12:33:37.5544355Z [36;1mpython3 m3/runtime-integration/recipe/test_recipe.py[0m
-2026-10-05T12:33:37.5544774Z [36;1mpython3 m3/runtime-integration/char-array-copy/recipe/apply.py[0m
+2026-10-05T12:33:37.5541201Z ##[group]Run python3 make/m3/runtime-integration/char-array-copy/recipe/apply.py --check
+2026-10-05T12:33:37.5541847Z [36;1mpython3 make/m3/runtime-integration/char-array-copy/recipe/apply.py --check[0m
+2026-10-05T12:33:37.5542351Z [36;1mpython3 make/m3/runtime-integration/char-array-copy/recipe/test_recipe.py[0m
+2026-10-05T12:33:37.5542868Z [36;1mpython3 make/m3/runtime-integration/char-array-copy/recipe/apply.py --reverse[0m
+2026-10-05T12:33:37.5543441Z [36;1mtrap 'python3 make/m3/runtime-integration/char-array-copy/recipe/apply.py >/dev/null' EXIT[0m
+2026-10-05T12:33:37.5543956Z [36;1mpython3 make/m3/runtime-integration/recipe/apply.py --check[0m
+2026-10-05T12:33:37.5544355Z [36;1mpython3 make/m3/runtime-integration/recipe/test_recipe.py[0m
+2026-10-05T12:33:37.5544774Z [36;1mpython3 make/m3/runtime-integration/char-array-copy/recipe/apply.py[0m
 2026-10-05T12:33:37.5545122Z [36;1mtrap - EXIT[0m
-2026-10-05T12:33:37.5545499Z [36;1mpython3 m3/runtime-integration/char-array-copy/recipe/apply.py --check[0m
+2026-10-05T12:33:37.5545499Z [36;1mpython3 make/m3/runtime-integration/char-array-copy/recipe/apply.py --check[0m
 2026-10-05T12:33:37.5586137Z shell: /usr/bin/bash -e {0}
 2026-10-05T12:33:37.5586411Z env:
 2026-10-05T12:33:37.5586633Z   M3_JDK: /home/runner/work/_temp/jdk-21+35
@@ -261,8 +261,8 @@
 2026-10-05T12:33:37.8968311Z OK
 2026-10-05T12:33:37.9291098Z M3_CHAR_ARRAY_COPY_RECIPE state=superseded
 2026-10-05T12:33:37.9591069Z M3_CHAR_ARRAY_COPY_RECIPE state=superseded
-2026-10-05T12:33:37.9664196Z ##[group]Run mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify
-2026-10-05T12:33:37.9665052Z [36;1mmvn -B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify[0m
+2026-10-05T12:33:37.9664196Z ##[group]Run mvn -B -ntp -f make/m3/tooling/migration-recipes/pom.xml clean verify
+2026-10-05T12:33:37.9665052Z [36;1mmvn -B -ntp -f make/m3/tooling/migration-recipes/pom.xml clean verify[0m
 2026-10-05T12:33:37.9703294Z shell: /usr/bin/bash -e {0}
 2026-10-05T12:33:37.9703564Z env:
 2026-10-05T12:33:37.9703790Z   M3_JDK: /home/runner/work/_temp/jdk-21+35

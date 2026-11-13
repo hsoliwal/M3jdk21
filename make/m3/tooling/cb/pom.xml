@@ -10,7 +10,7 @@
   <properties>
     <maven.compiler.release>21</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <m3.root>${project.basedir}/../../..</m3.root>
+    <m3.root>${project.basedir}/../../../..</m3.root>
   </properties>
   <dependencies>
     <dependency>
@@ -43,7 +43,7 @@
     </dependency>
   </dependencies>
   <build>
-    <sourceDirectory>${m3.root}/m3/tooling/migration-recipes/src/main/java</sourceDirectory>
+    <sourceDirectory>${m3.root}/make/m3/tooling/migration-recipes/src/main/java</sourceDirectory>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

@@ -86,7 +86,7 @@ class JepResidueTest(unittest.TestCase):
     def test_detects_packet_and_recipe_class_evidence(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
-            packet = root / "m3/backports/recipes/jep-458-current"
+            packet = root / "make/m3/backports/recipes/jep-458-current"
             packet.mkdir(parents=True)
             (packet / "README.md").write_text("packet", encoding="utf-8")
             (packet / "CURRENT_TREE_RECEIPT.tsv").write_text(
@@ -99,7 +99,7 @@ class JepResidueTest(unittest.TestCase):
 
             source = (
                 root
-                / "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport"
+                / "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport"
             )
             source.mkdir(parents=True)
             (source / "M3Jep485BackportRecipe.java").write_text(
@@ -138,7 +138,7 @@ class JepResidueTest(unittest.TestCase):
                 "jep-484-classfile-api",
                 "jep-523-g1-default",
             ):
-                packet = root / "m3/backports/recipes" / name
+                packet = root / "make/m3/backports/recipes" / name
                 packet.mkdir(parents=True)
                 (packet / "README.md").write_text("packet\n", encoding="utf-8")
             by_jep = {item.jep: item for item in self.r.queue(root, catalogue, [])}
@@ -152,7 +152,7 @@ class JepResidueTest(unittest.TestCase):
     def test_packet_prefix_requires_a_jep_number_boundary(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
-            recipes = root / "m3/backports/recipes"
+            recipes = root / "make/m3/backports/recipes"
             for name in ("jep-4230-false", "j4230", "jep-423extra"):
                 (recipes / name).mkdir(parents=True)
             catalogue = [self.row(release=22, jep=423, disposition="candidate")]
@@ -177,7 +177,7 @@ class JepResidueTest(unittest.TestCase):
     def test_detects_compact_jep_packet_directory_names(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
-            packet = root / "m3/backports/recipes/j510"
+            packet = root / "make/m3/backports/recipes/j510"
             packet.mkdir(parents=True)
             (packet / "README.md").write_text("packet", encoding="utf-8")
 
@@ -187,7 +187,7 @@ class JepResidueTest(unittest.TestCase):
             item = self.r.queue(root, catalogue, [])[0]
 
         self.assertEqual("PACKET_EVIDENCE", item.evidence_state)
-        self.assertIn("m3/backports/recipes/j510", item.evidence_paths)
+        self.assertIn("make/m3/backports/recipes/j510", item.evidence_paths)
 
     def test_priority_matrix_metadata_is_joined_without_granting_compatibility(self) -> None:
         catalogue = [self.row(release=24, jep=493, disposition="candidate")]
@@ -236,8 +236,8 @@ class JepResidueTest(unittest.TestCase):
         self.assertIn("NO_RECIPE_EVIDENCE", text)
 
     def test_checked_in_residue_queue_is_byte_exact_generator_output(self) -> None:
-        root = Path(__file__).resolve().parents[2]
-        backports = root / "m3" / "backports"
+        root = Path(__file__).resolve().parents[3]
+        backports = root / "make" / "m3" / "backports"
         items = self.r.queue(
             root,
             self.r.read_tsv(backports / "JEP_CATALOGUE.tsv"),
@@ -249,8 +249,8 @@ class JepResidueTest(unittest.TestCase):
         self.assertEqual(generated.getvalue(), checked_in)
 
     def test_live_repository_queue_matches_released_pending_denominator(self) -> None:
-        root = Path(__file__).resolve().parents[2]
-        backports = root / "m3" / "backports"
+        root = Path(__file__).resolve().parents[3]
+        backports = root / "make" / "m3" / "backports"
         items = self.r.queue(
             root,
             self.r.read_tsv(backports / "JEP_CATALOGUE.tsv"),
@@ -279,9 +279,9 @@ class JepResidueTest(unittest.TestCase):
             by_jep[493].receipt_next_action,
         )
         self.assertEqual("MATERIALIZED_PACKET", by_jep[496].evidence_state)
-        self.assertIn("m3/backports/recipes/j496", by_jep[496].evidence_paths)
+        self.assertIn("make/m3/backports/recipes/j496", by_jep[496].evidence_paths)
         self.assertEqual("MATERIALIZED_PACKET", by_jep[497].evidence_state)
-        self.assertIn("m3/backports/recipes/j497", by_jep[497].evidence_paths)
+        self.assertIn("make/m3/backports/recipes/j497", by_jep[497].evidence_paths)
         self.assertEqual(
             "CANDIDATE_MATERIALIZED_UNVERIFIED",
             by_jep[496].receipt_state,
@@ -301,7 +301,7 @@ class JepResidueTest(unittest.TestCase):
             by_jep[497].receipt_next_action,
         )
         self.assertEqual("MATERIALIZED_PACKET", by_jep[485].evidence_state)
-        self.assertIn("m3/backports/recipes/j485", by_jep[485].evidence_paths)
+        self.assertIn("make/m3/backports/recipes/j485", by_jep[485].evidence_paths)
         self.assertEqual(
             "CANDIDATE_MATERIALIZED_UNVERIFIED",
             by_jep[485].receipt_state,
@@ -312,9 +312,9 @@ class JepResidueTest(unittest.TestCase):
             by_jep[485].receipt_next_action,
         )
         self.assertEqual("MATERIALIZED_PACKET", by_jep[510].evidence_state)
-        self.assertIn("m3/backports/recipes/j510", by_jep[510].evidence_paths)
+        self.assertIn("make/m3/backports/recipes/j510", by_jep[510].evidence_paths)
         self.assertEqual("MATERIALIZED_PACKET", by_jep[523].evidence_state)
-        self.assertIn("m3/backports/recipes/jep-523-g1-default", by_jep[523].evidence_paths)
+        self.assertIn("make/m3/backports/recipes/jep-523-g1-default", by_jep[523].evidence_paths)
         self.assertEqual(
             "REVIEWED_POSTIMAGES_ALREADY_PRESENT",
             by_jep[523].receipt_state,
@@ -335,7 +335,7 @@ class JepResidueTest(unittest.TestCase):
         )
         self.assertEqual("PACKET_EVIDENCE", by_jep[404].evidence_state)
         self.assertIn(
-            "m3/backports/recipes/jep-404-generational-shenandoah",
+            "make/m3/backports/recipes/jep-404-generational-shenandoah",
             by_jep[404].evidence_paths,
         )
         self.assertEqual("", by_jep[404].receipt_state)
@@ -345,8 +345,8 @@ class JepResidueTest(unittest.TestCase):
         self.assertNotIn(401, by_jep)
 
     def test_live_repository_queue_file_matches_current_tree_evidence(self) -> None:
-        root = Path(__file__).resolve().parents[2]
-        backports = root / "m3" / "backports"
+        root = Path(__file__).resolve().parents[3]
+        backports = root / "make" / "m3" / "backports"
         items = self.r.queue(
             root,
             self.r.read_tsv(backports / "JEP_CATALOGUE.tsv"),

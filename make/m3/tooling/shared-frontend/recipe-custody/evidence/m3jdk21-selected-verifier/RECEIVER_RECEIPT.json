@@ -22,7 +22,7 @@
     {
       "case": "late-drift-no-partial-write",
       "exit_code": 1,
-      "expected_refusal": "target source drift: m3/tooling/module-packs/verify_combined_selection.py"
+      "expected_refusal": "target source drift: make/m3/tooling/module-packs/verify_combined_selection.py"
     },
     {
       "case": "qualified-input-tamper",
@@ -32,7 +32,7 @@
     {
       "case": "sdk-result-tamper",
       "exit_code": 1,
-      "expected_refusal": "SDK result changed after qualification: m3/tooling/module-packs/verify_combined_selection.py"
+      "expected_refusal": "SDK result changed after qualification: make/m3/tooling/module-packs/verify_combined_selection.py"
     },
     {
       "case": "symlink-target",

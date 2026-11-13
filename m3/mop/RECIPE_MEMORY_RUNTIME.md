@@ -99,7 +99,7 @@ symlinks/path traversal and concurrent same-recipe admission.
 
 All two Java sources and the `verify.sh` runner are source-sealed
 with exact preimage=ABSENT SHA-256 postimages in
-`m3/tooling/shared-frontend/recipe-custody/datasets/m3-mop-recipe-memory-20261020`.
+`make/m3/tooling/shared-frontend/recipe-custody/datasets/m3-mop-recipe-memory-20261020`.
 The canonical Maven/OpenRewrite SDK uses the unchanged original
 `M3HashPinnedJavaSnapshotRecipe` and
 `M3HashPinnedTextSnapshotRecipe`. Synexia is donor/canonical

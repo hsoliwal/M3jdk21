@@ -32,7 +32,7 @@ def main():
     output = args.out.absolute()
     if output.exists():
         raise FileExistsError('fresh proof output required: ' + str(output))
-    helper = repo / ('m3/tooling/shared-frontend/recipe-custody/enhancements/'
+    helper = repo / ('make/m3/tooling/shared-frontend/recipe-custody/enhancements/'
                      '20261018-source-seals/runtime/qualify_runtime.py')
     spec = importlib.util.spec_from_file_location('existing_m3_runtime_qualification', helper)
     runtime = importlib.util.module_from_spec(spec)

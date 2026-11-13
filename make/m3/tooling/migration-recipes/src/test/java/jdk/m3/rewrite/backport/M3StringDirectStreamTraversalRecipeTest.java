@@ -39,8 +39,8 @@ final class M3StringDirectStreamTraversalRecipeTest {
                 "test/jdk/java/lang/String/M3StringStreamsTest.java"), javaCrate.targetPaths());
         assertEquals(List.of(
                 ".github/workflows/mindex-string-backing.yml",
-                "m3/docs/m3-runtime-invariants.tsv",
-                "m3/runtime-integration/check-m3string-invariants.py"),
+                "doc/m3/m3-runtime-invariants.tsv",
+                "make/m3/runtime-integration/check-m3string-invariants.py"),
                 textCrate.targetPaths());
     }
 
@@ -92,11 +92,11 @@ final class M3StringDirectStreamTraversalRecipeTest {
 
     private static List<SourceFile> textAfter() {
         return List.of(
-                text("m3/runtime-integration/check-m3string-invariants.py",
+                text("make/m3/runtime-integration/check-m3string-invariants.py",
                         "00-check-m3string-invariants.py.txt"),
                 text(".github/workflows/mindex-string-backing.yml",
                         "01-mindex-string-backing.yml.txt"),
-                text("m3/docs/m3-runtime-invariants.tsv",
+                text("doc/m3/m3-runtime-invariants.tsv",
                         "02-m3-runtime-invariants.tsv.txt"));
     }
 

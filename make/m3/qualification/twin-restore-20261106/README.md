@@ -1,7 +1,7 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
-# Twin restore 2026-11-06: m3/tooling and .github (com-synexia-45 half of TWIN_CONTENT)
+# Twin restore 2026-11-06: make/m3/tooling and .github (com-synexia-45 half of TWIN_CONTENT)
 
-The input is `TWIN_CONTENT.tsv` from the loss-guard restore (#2517, com-synexia-0e). Each row is a retained twin whose declarations its live file lacks. This half covers 52 rows under `m3/tooling` and `.github`.
+The input is `TWIN_CONTENT.tsv` from the loss-guard restore (#2517, com-synexia-0e). Each row is a retained twin whose declarations its live file lacks. This half covers 52 rows under `make/m3/tooling` and `.github`.
 
 RETAINED_AUDIT (`retained_audit.py`, line-multiset containment against master) gave:
 - 10 RETAINED_SUPERSET: the retained copy holds every live line plus more.

@@ -9,7 +9,7 @@ import xml.etree.ElementTree as ET
 
 root = Path(__file__).resolve().parent
 candidate = Path(sys.argv[1]).resolve()
-prefix = "m3/tooling/module-packs/build-support/gradle-provider/"
+prefix = "make/m3/tooling/module-packs/build-support/gradle-provider/"
 files = sorted(path for path in candidate.rglob("*") if path.is_file())
 if not files:
     raise SystemExit("No actual candidate files")

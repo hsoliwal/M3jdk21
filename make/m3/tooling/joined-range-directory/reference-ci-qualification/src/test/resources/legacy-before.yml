@@ -6,9 +6,9 @@ on:
   pull_request:
     paths:
       - '.github/workflows/m3-joined-range-directory.yml'
-      - 'm3/tooling/joined-range-directory/**'
+      - 'make/m3/tooling/joined-range-directory/**'
       - 'm3/core/**'
-      - 'm3/build.sh'
+      - 'make/m3/build.sh'
       - 'm3/lexicon/english-demo.txt'
       - 'm3/lexicon/m3-number-target-map.tsv'
       - 'm3/lexicon/m3-precompute-field-map.tsv'
@@ -132,8 +132,8 @@ jobs:
           root=pathlib.Path(os.environ["M3_PROOF_ROOT"])
           source=pathlib.Path(os.environ["M3_SOURCE_ROOT"])
           bundle=root/"artifacts";bundle.mkdir(exist_ok=False)
-          sdk=source/"m3/tooling/joined-range-directory/sdk"
-          fresh_qualifier=source/"m3/tooling/joined-range-directory/fresh-owned/qualify.py"
+          sdk=source/"make/m3/tooling/joined-range-directory/sdk"
+          fresh_qualifier=source/"make/m3/tooling/joined-range-directory/fresh-owned/qualify.py"
           fresh_sdk=fresh_qualifier.parent/"sdk"
           fresh_root=root/"joined-fresh-owned";fresh_root.mkdir(exist_ok=False)
           fresh_outer=fresh_root/"outer";fresh_outer.mkdir(exist_ok=False)
@@ -385,7 +385,7 @@ jobs:
               gate()
               if code!=expected:raise RuntimeError(name+" failed with "+str(code)+" expected "+str(expected))
           py=[os.environ["M3_PYTHON"],"-I","-S","-B"]
-          qualifier=source/"m3/tooling/joined-range-directory/qualify.py"
+          qualifier=source/"make/m3/tooling/joined-range-directory/qualify.py"
           settings=root/"home/.m2"
           maven=["mvn","-B","-ntp","-s",str(settings/"settings.xml"),"-gs",str(settings/"global-settings.xml"),"-Dmaven.repo.local="+str(root/"m2"),"-Dstyle.color=never"]
           try:

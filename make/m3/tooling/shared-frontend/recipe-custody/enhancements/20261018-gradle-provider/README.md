@@ -43,10 +43,10 @@ refuses parent-resolved consumer implementations before their constructors run.
 | Gradle host SPI | `hsoliwal/gradle@419a77cf61af3924f60678510ed2440230047671` |
 | Exact SPI Git blob | `f2a08ee8074d6f6faec69543032c9176ad62ef11` |
 | M3JDK receiving baseline | `hsoliwal/M3jdk21@2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49` |
-| Receiving prefix | `m3/tooling/module-packs/build-support/gradle-provider/` |
+| Receiving prefix | `make/m3/tooling/module-packs/build-support/gradle-provider/` |
 | Implementation | `org.gradle.internal.m3.ast.M3GradleASTProvider` |
-| Public dataset mirror | `m3/tooling/shared-frontend/recipe-custody/datasets/gradle-provider-20261018` |
-| Public evidence mirror | `m3/tooling/shared-frontend/recipe-custody/enhancements/20261018-gradle-provider` |
+| Public dataset mirror | `make/m3/tooling/shared-frontend/recipe-custody/datasets/gradle-provider-20261018` |
+| Public evidence mirror | `make/m3/tooling/shared-frontend/recipe-custody/enhancements/20261018-gradle-provider` |
 
 The SPI source under `proof-inputs/gradle/` is the exact published host contract,
 retained as a qualification input. The provider artifact contains only its three

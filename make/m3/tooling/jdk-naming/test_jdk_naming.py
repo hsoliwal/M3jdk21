@@ -219,7 +219,7 @@ class JdkNamingTest(unittest.TestCase):
         weaken validation or edit their contents to make a CI run green.
         """
         here = Path(__file__).parent
-        root = here.parents[2]
+        root = here.parents[3]
         raw = (here / "RECIPE_MEMORY.tsv").read_text(encoding="utf-8").splitlines()
         self.assertEqual(raw[0],
                          "utc\trecipe\ttrigger\tobserved\tcorrection\tcorrected_by\tguard\tlesson")
@@ -277,8 +277,8 @@ class JdkNamingTest(unittest.TestCase):
 
     def test_split_package_file_unify_receipt(self):
         """Structural name-collision gate, not a substitute for a Maven/JNI run."""
-        root = Path(__file__).resolve().parents[3]
-        path = root / "m3/qualification/file-unify-20261106/NAME_COLLISION.tsv"
+        root = Path(__file__).resolve().parents[4]
+        path = root / "make/m3/qualification/file-unify-20261106/NAME_COLLISION.tsv"
         lines = [x for x in path.read_text(encoding="utf-8").splitlines()
                  if x and not x.startswith("#")]
         names = [x.split("\t") for x in lines[1:]]
@@ -299,7 +299,7 @@ class JdkNamingTest(unittest.TestCase):
 
     def test_jvm_residency_descriptor_references(self):
         """Verify all three current descriptor owners and the JUnit test source."""
-        root = Path(__file__).resolve().parents[3]
+        root = Path(__file__).resolve().parents[4]
         main = root / "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ItemReferenceScan.java"
         test = root / "m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3ItemReferenceScanTest.java"
         source = main.read_text(encoding="utf-8")
@@ -310,7 +310,7 @@ class JdkNamingTest(unittest.TestCase):
 
     def test_core_donor_fact_and_sidecar_receipt(self):
         """Check the repaired donor fact, target owner and retained build receipt."""
-        root = Path(__file__).resolve().parents[3]
+        root = Path(__file__).resolve().parents[4]
         test = (root / "m3/core/test/M3NumberSpaceContractTest.java").read_text(encoding="utf-8")
         gates = (root / "m3/core/qualification/rename-damage-20261107/GATES.tsv").read_text(
             encoding="utf-8")
@@ -493,7 +493,7 @@ class JdkNamingTest(unittest.TestCase):
 
     def test_naming_keep_rows_name_files_of_the_tree(self):
         """A KEEP row whose file is gone is stale: the list must never outlive its files (full checkout, as in CI)."""
-        root = Path(__file__).resolve().parents[3]
+        root = Path(__file__).resolve().parents[4]
         missing = [path for path in jn.load_keep() if not (root / path).is_file()]
         self.assertEqual([], missing, "stale NAMING_KEEP.tsv rows")
 

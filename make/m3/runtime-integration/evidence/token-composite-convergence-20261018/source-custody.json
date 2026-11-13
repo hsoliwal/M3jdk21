@@ -26,32 +26,32 @@
       "source_kind": "JAVA"
     },
     {
-      "path": "m3/docs/name-mapping.d/m3-regex-lexical-nfa-20261018.json",
+      "path": "doc/m3/name-mapping.d/m3-regex-lexical-nfa-20261018.json",
       "sha256": "628daba4deaaea5be439812c9b86a636bb0ed32e801383a1f5fdde77f2dccd17",
       "source_kind": "TEXT"
     },
     {
-      "path": "m3/docs/regex-token-composite-convergence-20261018.md",
+      "path": "doc/m3/regex-token-composite-convergence-20261018.md",
       "sha256": "b12e9369cf72a8b553ec50f326bab73a03ba9d22abef9723a70dcd9fc0eecbb4",
       "source_kind": "TEXT"
     },
     {
-      "path": "m3/runtime-integration/check-m3rx7-convergence.sh",
+      "path": "make/m3/runtime-integration/check-m3rx7-convergence.sh",
       "sha256": "ec4e739805bf1e5d343bb20fe5258643de8bc4b560c7612288bfa83fe21c1706",
       "source_kind": "TEXT"
     },
     {
-      "path": "m3/runtime-integration/check-m3rx7-transition-native.sh",
+      "path": "make/m3/runtime-integration/check-m3rx7-transition-native.sh",
       "sha256": "9efcb13152290c1a2eb862b4b71adbf028de045fb531c8895440314b10ebdd24",
       "source_kind": "TEXT"
     },
     {
-      "path": "m3/runtime-integration/check-m3rx7-v7-image-codec.sh",
+      "path": "make/m3/runtime-integration/check-m3rx7-v7-image-codec.sh",
       "sha256": "019f99675b0fb423d724d0d4de69b436102e492ea9aaa10c82cde4fd50ea33c8",
       "source_kind": "TEXT"
     },
     {
-      "path": "m3/runtime-integration/check-m3rx7-v7-receiver.sh",
+      "path": "make/m3/runtime-integration/check-m3rx7-v7-receiver.sh",
       "sha256": "016a6015e1e3093f4bbe6264ae6411e90c36c72a945514aba82efad609ca634b",
       "source_kind": "TEXT"
     },

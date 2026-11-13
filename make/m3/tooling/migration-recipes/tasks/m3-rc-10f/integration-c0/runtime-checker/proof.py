@@ -33,12 +33,12 @@ METHODS = ['closedFamiliesAndResourcePins',
  'pureAdditionInputs',
  'rfcMixedStates']
 FAMILY_IDS = ('Rfc',)
-FAMILIES = {'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/rf0-rfc': ('m3/runtime-integration/check-m3string-invariants.py',
-                                                            'm3/runtime-integration/fix-root-ascii-case/manifest.json',
-                                                            'm3/tooling/image-gates/current-c0.json')}
-REPLACEMENTS = ('m3/runtime-integration/check-m3string-invariants.py',
- 'm3/runtime-integration/fix-root-ascii-case/manifest.json',
- 'm3/tooling/image-gates/current-c0.json')
+FAMILIES = {'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/rf0-rfc': ('make/m3/runtime-integration/check-m3string-invariants.py',
+                                                            'make/m3/runtime-integration/fix-root-ascii-case/manifest.json',
+                                                            'make/m3/tooling/image-gates/current-c0.json')}
+REPLACEMENTS = ('make/m3/runtime-integration/check-m3string-invariants.py',
+ 'make/m3/runtime-integration/fix-root-ascii-case/manifest.json',
+ 'make/m3/tooling/image-gates/current-c0.json')
 COUNTS = {'additions': 0,
  'families': 1,
  'initialRefusals': 17,
@@ -425,7 +425,7 @@ def static_gate(proof):
             parsed_python_postimages.append({"path": row["path"], "sha256": digest(after), "bytes": len(after)})
             if row["operation"] == "REPLACE":
                 before = (project / "src/test/resources/before" / row["path"]).read_bytes()
-                if row["path"] == "m3/runtime-integration/check-m3string-invariants.py":
+                if row["path"] == "make/m3/runtime-integration/check-m3string-invariants.py":
                     require(digest(before) == "c9eb51298f2a6a7a1798051c24074cd7f23a8e0805ed6d50420ff3bcd12cacb4"
                             and len(before) == 48850
                             and before.decode("utf-8").splitlines()[251] == 'if "prepared.unpairedSurrogateCount == 0" not in m3',
@@ -448,7 +448,7 @@ def static_gate(proof):
                 else:
                     ast.parse(before, filename=row["path"])
     require(len(expected_baseline_refusals) == 1, "one exact malformed baseline control required")
-    require(parsed_python_postimages == [{"path": "m3/runtime-integration/check-m3string-invariants.py",
+    require(parsed_python_postimages == [{"path": "make/m3/runtime-integration/check-m3string-invariants.py",
             "sha256": "1913aceb03b079596c7c8aea80285aecd2849f81475b597e4ea4094609b749a9", "bytes": 48860}],
             "the exact repaired checker must parse successfully")
     print(json.dumps({"status": "STATIC_SCOPE_PASS", "mainSources": len(MAIN), "testSources": 1,

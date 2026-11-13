@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 """Recipe MERGELOSS2_RESTORE v1: restore merge-loss audit phase-2 leaf 59 (m3/collections, Spring view).
 
-Derived from m3/collections/qualification/census-small-batch-20261106/apply.py v1 (anchored "sub" edits, LF payloads
+Derived from make/m3/collections/qualification/census-small-batch-20261106/apply.py v1 (anchored "sub" edits, LF payloads
 re-joined with the preimage's line ending). Extension: every edit names how many times its anchor occurs (default 1).
 Every rule pins the git blob sha of its preimage on master; a target must equal the preimage (the rule is applied) or
 the postimage (already applied, no-op); anything else is a drifted preimage and the recipe refuses (exit 2) without
@@ -12,7 +12,7 @@ only; --check writes nothing and exits 1 when a run would change a file.
 
 Each rule cites the origin commit of the lost lines and the merge that dropped them, and the 3-way merge it was
 checked against: base = origin commit's parent blob, theirs = origin commit's blob (both put through
-m3/tooling/jdk-naming rewrite_text), ours = the pinned master blob. A conflicting hunk would be resolved by ADD/SUB
+make/m3/tooling/jdk-naming rewrite_text), ours = the pinned master blob. A conflicting hunk would be resolved by ADD/SUB
 rows that take ours and apply only the origin commit's own substitution (named in the rule note). Leaf 45
 (M3ObjectResidency pressure sampling) left this recipe: draft #2653 (322af721aa7, residency fold leaf PS) restores
 the same lines, so its decision is RESTORED_SINCE #2653 (record-only PR).
@@ -48,7 +48,7 @@ RULES = (
      "base=e397cb4ab042 theirs=bf28adb8154e ours=ab4ffb724568 git-merge-file=CLEAN (result blob 1c5e41760e14 ="
      " this rule's postimage)",
      "RESTORE: the published (Ljdk/m3/collections/spring/M3MultiValueMap;)V constructor delegates to the widened Map"
-     " constructor (m3/collections/qualification/spring-scalar-constructor-abi/README.md: verified preimage blob"
+     " constructor (make/m3/collections/qualification/spring-scalar-constructor-abi/README.md: verified preimage blob"
      " ab4ffb724568, no original public API may be removed)", [
          ("        this.targetMap = targetMap;\n    }\n\n    @Override\n    public int size() {\n",
           "        this.targetMap = targetMap;\n    }\n\n"
@@ -132,7 +132,7 @@ def run(root: Path, check: bool, leaf: str | None) -> int:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--root", default=str(RECIPE_DIR.parents[3]), help="repository root (default: four up)")
+    parser.add_argument("--root", default=str(RECIPE_DIR.parents[4]), help="repository root (default: four up)")
     parser.add_argument("--check", action="store_true", help="write nothing; exit 1 when a run would change a file")
     parser.add_argument("--leaf", choices=sorted({rule[0] for rule in RULES}), help="apply one leaf's rules only")
     args = parser.parse_args(argv)

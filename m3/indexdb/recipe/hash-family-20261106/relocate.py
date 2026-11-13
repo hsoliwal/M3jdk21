@@ -21,7 +21,7 @@ donor files that are deliberately not relocated (role SKIP; the scope column car
 pin the donor's oracle scripts and evidence (role ORACLE), PROBE rows with scope donor pin donor files compiled only
 for an NEC probe (role PROBE); NEC rows record a difference between a donor member and an M3 owner and are counted,
 never applied (equivalence is never decided by the recipe). NAMING rows are exact text replacements scoped to one
-FILE target, each applied exactly once after the renames: the rewrite m3/tooling/jdk-naming/jdk_naming.py would make
+FILE target, each applied exactly once after the renames: the rewrite make/m3/tooling/jdk-naming/jdk_naming.py would make
 (the rule is named in the note), so that the recipe and the naming recipe share one fixed point; they count as
 substitutions in the provenance.
 

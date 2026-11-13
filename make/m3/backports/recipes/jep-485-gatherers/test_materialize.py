@@ -98,7 +98,7 @@ class MaterializeTest(unittest.TestCase):
         self.assertRaises(ValueError, materialize.canonical_relative, "a\\b")
 
     def test_repository_manifest_is_current_master_admissible(self) -> None:
-        root = Path(__file__).resolve().parents[4]
+        root = Path(__file__).resolve().parents[5]
         targets = materialize.load_manifest(root)
         self.assertEqual(15, len(targets))
         self.assertEqual(15, materialize.materialize(root, "check", None))

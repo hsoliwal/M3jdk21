@@ -35,7 +35,7 @@ def classify_seed(disposition: str) -> str:
     raise ValueError(f"unclassified seed disposition: {disposition}")
 
 def snapshot(root: Path) -> dict[str, object]:
-    backports = root / "m3" / "backports"
+    backports = root / "make" / "m3" / "backports"
     authority = release_jep_authority.verify_repository_authority(root)
     jeps = read_tsv(backports / "JEP_CATALOGUE.tsv")
     priorities = read_tsv(backports / "POST21_PRIORITY_COMPATIBILITY.tsv")

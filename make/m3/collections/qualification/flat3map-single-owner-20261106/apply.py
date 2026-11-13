@@ -35,7 +35,7 @@ from pathlib import Path
 RECIPE = "apply.py"
 VERSION = "v1"
 RECIPE_DIR = Path(__file__).resolve().parent
-RECIPE_DIR_REL = "m3/collections/qualification/flat3map-single-owner-20261106"
+RECIPE_DIR_REL = "make/m3/collections/qualification/flat3map-single-owner-20261106"
 BASE_COMMIT = "e65f0f664fa334b4ad60b1ebcb2f1436380aace1"
 OWNER = "jdk.m3.collections.M3Flat3Map"
 FACADE = "jdk.m3.collections.apache.M3Flat3Map"
@@ -49,7 +49,7 @@ CORE = "m3/collections/src/main/java/jdk/m3/collections/"
 CORE_TEST = "m3/collections/src/test/java/jdk/m3/collections/"
 APACHE = "m3/collections/implementations/apache-flat3-map/"
 APACHE_TEST = APACHE + "src/test/java/jdk/m3/collections/apache/"
-INVENTORY = "m3/collections/qualification/five-provider-inventory-20261018/INVENTORY.tsv"
+INVENTORY = "make/m3/collections/qualification/five-provider-inventory-20261018/INVENTORY.tsv"
 BRANCH = "m3/collections-flat3map-single-owner-20261106a"
 
 
@@ -427,7 +427,7 @@ def run(root: Path, check: bool) -> int:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--root", default=str(RECIPE_DIR.parents[3]), help="repository root (default: four up)")
+    parser.add_argument("--root", default=str(RECIPE_DIR.parents[4]), help="repository root (default: four up)")
     parser.add_argument("--check", action="store_true", help="write nothing; exit 1 when a run would change a file")
     args = parser.parse_args(argv)
     try:

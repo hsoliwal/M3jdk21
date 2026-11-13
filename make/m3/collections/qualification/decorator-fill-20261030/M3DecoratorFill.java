@@ -72,7 +72,7 @@ public final class M3DecoratorFill {
     static final Logger LOG = Logger.getLogger(M3DecoratorFill.class.getName());
     private static final String UNMOD = "org.apache.commons.collections4.Unmodifiable";
     private static final String GENERATOR =
-            "m3/collections/qualification/decorator-fill-20261030/M3DecoratorFill.java";
+            "make/m3/collections/qualification/decorator-fill-20261030/M3DecoratorFill.java";
     /** The pattern version the GENERATED block of every owned class names. */
     private static final String VERSION = "1.6";
     /** SFA: a Java string literal (data, never rewritten). */

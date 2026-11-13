@@ -5,8 +5,8 @@ on:
     branches:
       - 'm3/a3-portable-mastery-gate-20261007'
     paths:
-      - 'm3/tooling/a3/**'
-      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java'
+      - 'make/m3/tooling/a3/**'
+      - 'make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-*.yml'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-a3-*/**'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-a3-*/**'
@@ -14,8 +14,8 @@ on:
       - '.github/workflows/m3-a3-portable-mastery-gate-java21.yml'
   pull_request:
     paths:
-      - 'm3/tooling/a3/**'
-      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java'
+      - 'make/m3/tooling/a3/**'
+      - 'make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-*.yml'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-a3-*/**'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-a3-*/**'
@@ -58,19 +58,19 @@ jobs:
       # Standalone (2026-10-31): the slim A3 export is absorbed (m3/vendor/m3/README.md);
       # the reactor module tooling/m3jdk-a3-recipes builds it into the same coordinate; its tests
       # verify the absorbed bytes and run the export's own unit tests. No other repository is fetched
-      # (m3/tooling/standalone/M3_REFS.tsv).
+      # (make/m3/tooling/standalone/M3_REFS.tsv).
       - name: 2 build the absorbed slim A3 artifact
         shell: bash
         run: |
           set -euo pipefail
           bash m3/m3-import/pure-int-recipe-custody/install.sh "$PWD"
-          mvn -B -ntp -f m3/pom.xml -pl tooling/m3jdk-a3-recipes clean install
+          mvn -B -ntp -f make/m3/pom.xml -pl tooling/m3jdk-a3-recipes clean install
 
 
       - name: 4 compile and test A3 mastery receiver
         run: >
           mvn -B -ntp
-          -f m3/pom.xml
+          -f make/m3/pom.xml
           -pl tooling/a3
           -am
           -Dtest=A3RecipeHomeTest,A3MasteryTest,A3ApplyTest

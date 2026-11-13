@@ -95,7 +95,7 @@ def prove(image_path, pack_path, out_path):
     image = Path(image_path).resolve(strict=True)
     pack = Path(pack_path).resolve(strict=True)
     output = Path(out_path).absolute()
-    repo = Path(__file__).resolve().parents[4]
+    repo = Path(__file__).resolve().parents[5]
     if (output.exists() or output.resolve().is_relative_to(image)
             or output.resolve().is_relative_to(repo)):
         raise ValueError("SDK_OUTPUT_OCCUPIED_OR_UNSAFE")

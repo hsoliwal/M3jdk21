@@ -5,7 +5,7 @@ package jdk.internal.m3.collections;
 import java.util.Objects;
 
 /** Optional JNI accelerator for the bulk transposed feature-plane pass. */
-//FLLDCIM: RELOCATE - donor blob a4663c8f8ca1 at commit 3385d79a2968 (repository, path, URL and digests: m3/collections/qualification/object-signal-20261107/PROVENANCE.tsv); recipe m3/collections/qualification/object-signal-20261107/relocate.py v1
+//FLLDCIM: RELOCATE - donor blob a4663c8f8ca1 at commit 3385d79a2968 (repository, path, URL and digests: make/m3/collections/qualification/object-signal-20261107/PROVENANCE.tsv); recipe make/m3/collections/qualification/object-signal-20261107/relocate.py v1
 final class ObjectSignalOps {
     private static final int JNI_WORD_THRESHOLD = 256;
     private static final boolean AVAILABLE;

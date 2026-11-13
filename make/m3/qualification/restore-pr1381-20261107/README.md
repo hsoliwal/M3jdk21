@@ -3,7 +3,7 @@
 PR #1381, "M3JDK21: receive lexical RX7, transfer JNI and filtered sorted refinement" (head `07e5e24c7539`,
 base `6e5035c1aa0b`), was marked merged, but its java.base work never reached master: the fold merges kept its
 ancestry and dropped its tree. The fold-drop scan found it as case 29 of the lane-4d java.base triage
-(`m3/qualification/foldaudit2-jbdrop-4d-20261107/DECISION.tsv`, WHOLE_PR).
+(`make/m3/qualification/foldaudit2-jbdrop-4d-20261107/DECISION.tsv`, WHOLE_PR).
 
 Its head is an ancestor of master, so the merge base of master and the head is the head itself. The replay
 therefore uses the PR's own base: `union_merge_api.py ... --base=6e5035c1aa0b`.

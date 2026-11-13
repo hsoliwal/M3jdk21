@@ -40,7 +40,7 @@ write failures intentionally remain partially applied (no false transaction).
 
 ## Maven recipe and JNI boundary
 
-`mvn -B -ntp -f m3/collections/qualification/sdk-bulk-capture-20261017/recipe/pom.xml verify`
+`mvn -B -ntp -f make/m3/collections/qualification/sdk-bulk-capture-20261017/recipe/pom.xml verify`
 runs source postimage checking, a repeat fixed-point test and missing/drift
 refusal. `--apply` on the recipe class is permitted only from the pinned
 preimage; never hand-edit the generated owner. Workflow also performs strict

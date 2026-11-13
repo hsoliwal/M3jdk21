@@ -20,7 +20,7 @@ Policy companion: Synexia PR #11979.
 | 8 Compile/test gates | Target compiler, jtreg, JNI, API/ABI, GC/JIT/CDS/runtime remain PENDING |
 | 9 PR | No promotion without reviewed target proof; always PENDING at receiver stage |
 
-The implementation is m3/compatibility/M3OrderedConvergenceReceiver.java.
+The implementation is make/m3/compatibility/M3OrderedConvergenceReceiver.java.
 It consumes Synexia's M3_ORDERED_CONVERGENCE_HANDOFF_V1 TSV, requiring a
 separately provided handoff SHA-256 and exact donor Git revision.
 It validates the original donor Git blob and source bytes, the exact candidate
@@ -33,8 +33,8 @@ code.
 ~~~sh
 mkdir -p build/m3-ordered-receiver
 javac --release 21 -Xlint:all -Werror -d build/m3-ordered-receiver \
-  m3/compatibility/M3OrderedConvergenceReceiver.java \
-  m3/compatibility/M3OrderedConvergenceReceiverTest.java
+  make/m3/compatibility/M3OrderedConvergenceReceiver.java \
+  make/m3/compatibility/M3OrderedConvergenceReceiverTest.java
 java -cp build/m3-ordered-receiver M3OrderedConvergenceReceiverTest
 ~~~
 
@@ -99,9 +99,9 @@ PR_PROMOTION_HOLD.md; both explicitly mark build, jtreg, JNI/native parity,
 JIT/GC/CDS, runtime, API/ABI, license review and PR gates PENDING. There
 is no source write, merge, rebase, checkout, ref update or push.
 
-For broad historical retention use the existing m3/history audit; for
+For broad historical retention use the existing make/m3/history audit; for
 real source substitution and fixed-point proof use the existing
-m3/tooling/migration-recipes Synexia consumer, M3 A3 and
+make/m3/tooling/migration-recipes Synexia consumer, M3 A3 and
 target-owned JNI/HotSpot/JDK suites. The per-file receiver does not
 replace these authorities.
 

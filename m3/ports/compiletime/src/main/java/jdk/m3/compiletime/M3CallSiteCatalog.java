@@ -12,7 +12,7 @@ import java.util.Optional;
  * precompute candidate. One row = one exact {@code owner.name desc}; {@code arg} is the
  * zero-based argument index of the String operand, {@code -1} for the receiver.
  *
- * <p>Inventory categories follow {@code m3/docs/m3-compiletime-precompute.md}:
+ * <p>Inventory categories follow {@code doc/m3/m3-compiletime-precompute.md}:
  * {@code b} regex, {@code c} format, {@code f} keys, {@code g} other large lanes.</p>
  */
 public final class M3CallSiteCatalog {

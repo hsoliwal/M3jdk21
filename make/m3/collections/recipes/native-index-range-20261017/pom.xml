@@ -9,7 +9,7 @@
  <properties>
   <maven.compiler.release>21</maven.compiler.release>
   <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  <m3.repo.root>${project.basedir}/../../../..</m3.repo.root>
+  <m3.repo.root>${project.basedir}/../../../../..</m3.repo.root>
   <maven.install.skip>true</maven.install.skip>
   <maven.deploy.skip>true</maven.deploy.skip>
  </properties>

@@ -63,7 +63,7 @@
         "previous_filename": null
       },
       {
-        "filename": "m3/docs/a3-lab.md",
+        "filename": "doc/m3/a3-lab.md",
         "status": "added",
         "additions": 98,
         "deletions": 0,
@@ -71,7 +71,7 @@
         "previous_filename": null
       },
       {
-        "filename": "m3/tooling/a3/src/main/java/jdk/m3/a3/A3.java",
+        "filename": "make/m3/tooling/a3/src/main/java/jdk/m3/a3/A3.java",
         "status": "modified",
         "additions": 5,
         "deletions": 1,
@@ -79,7 +79,7 @@
         "previous_filename": null
       },
       {
-        "filename": "m3/tooling/a3/src/main/java/jdk/m3/a3/A3Cases.java",
+        "filename": "make/m3/tooling/a3/src/main/java/jdk/m3/a3/A3Cases.java",
         "status": "added",
         "additions": 144,
         "deletions": 0,
@@ -87,7 +87,7 @@
         "previous_filename": null
       },
       {
-        "filename": "m3/tooling/a3/src/main/java/jdk/m3/a3/A3Lab.java",
+        "filename": "make/m3/tooling/a3/src/main/java/jdk/m3/a3/A3Lab.java",
         "status": "added",
         "additions": 443,
         "deletions": 0,
@@ -95,7 +95,7 @@
         "previous_filename": null
       },
       {
-        "filename": "m3/tooling/a3/src/test/java/jdk/m3/a3/A3LabTest.java",
+        "filename": "make/m3/tooling/a3/src/test/java/jdk/m3/a3/A3LabTest.java",
         "status": "added",
         "additions": 76,
         "deletions": 0,
@@ -103,7 +103,7 @@
         "previous_filename": null
       },
       {
-        "filename": "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-lab.yml",
+        "filename": "make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-lab.yml",
         "status": "added",
         "additions": 11,
         "deletions": 0,
@@ -111,7 +111,7 @@
         "previous_filename": null
       },
       {
-        "filename": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-lab/A3.java.after",
+        "filename": "make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-lab/A3.java.after",
         "status": "added",
         "additions": 143,
         "deletions": 0,
@@ -119,7 +119,7 @@
         "previous_filename": null
       },
       {
-        "filename": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after",
+        "filename": "make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after",
         "status": "added",
         "additions": 144,
         "deletions": 0,
@@ -127,7 +127,7 @@
         "previous_filename": null
       },
       {
-        "filename": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-lab/A3Lab.java.after",
+        "filename": "make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-lab/A3Lab.java.after",
         "status": "added",
         "additions": 443,
         "deletions": 0,
@@ -135,7 +135,7 @@
         "previous_filename": null
       },
       {
-        "filename": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-lab/A3LabTest.java.after",
+        "filename": "make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-lab/A3LabTest.java.after",
         "status": "added",
         "additions": 76,
         "deletions": 0,
@@ -143,7 +143,7 @@
         "previous_filename": null
       },
       {
-        "filename": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv",
+        "filename": "make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv",
         "status": "added",
         "additions": 4,
         "deletions": 0,
@@ -151,7 +151,7 @@
         "previous_filename": null
       },
       {
-        "filename": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3LabDeliveryRecipeTest.java",
+        "filename": "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3LabDeliveryRecipeTest.java",
         "status": "added",
         "additions": 124,
         "deletions": 0,
@@ -159,7 +159,7 @@
         "previous_filename": null
       },
       {
-        "filename": "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/a3-lab/before-A3.java.txt",
+        "filename": "make/m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/a3-lab/before-A3.java.txt",
         "status": "added",
         "additions": 139,
         "deletions": 0,
@@ -176,19 +176,19 @@
       "sha256": "523c47adcea9e2416d25467864c84dc1836f708e60474d12e6bc56faa994adde"
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/SOURCE_PINS.tsv",
+      "path": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/SOURCE_PINS.tsv",
       "entries": 15,
       "bytes": 3414,
       "sha256": "1bba18f467ed62c73793d8d4dfacd186eb38589cffd3b655163cd98a32ad27d4"
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/FINAL_SOURCE_SHA256.tsv",
+      "path": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/FINAL_SOURCE_SHA256.tsv",
       "entries": 19,
       "bytes": 3019,
       "sha256": "0178436ecb494a0fb1898d1d6dace8aaf9f9a25505fa79721f917a8d31a5b803"
     },
     {
-      "path": "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/atom/spectrum/CORPUS.tsv",
+      "path": "make/m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/atom/spectrum/CORPUS.tsv",
       "entries": 100,
       "source_bytes": 4004365,
       "pin_commit": "e8fdab9a7abc4b0273438ce9e5d0ffd6255b1247",
@@ -197,33 +197,33 @@
     }
   ],
   "preserved_snapshot_helper": {
-    "path": "m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+    "path": "make/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
     "git_blob": "717c3e01f8f0407ce96439e3ecc96190b10c1eed",
     "sha256": "9cf77c6e68a534e84b88230ca517fa6c5a76fb3e101ea3a1f68aa5222c3ec4d9"
   },
   "build_and_verification_controls": [
     {
-      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/pom.xml",
+      "path": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/pom.xml",
       "bytes": 3221,
       "sha256": "2c74118271736d55096f2e613753d269a3a5b41dc4d7332ba9a15593b95edbe6"
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/checkstyle.xml",
+      "path": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/checkstyle.xml",
       "bytes": 644,
       "sha256": "e8838f6b765b92ada1e24636c0ed003c2eb4869bd57e796e6368d472ad601f16"
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/verify-static.py",
+      "path": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/verify-static.py",
       "bytes": 4083,
       "sha256": "06989cc783da5d41aa64282025583d99969bee8597189058650c2944a67b18bc"
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/verify-runtime.py",
+      "path": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/verify-runtime.py",
       "bytes": 8011,
       "sha256": "f68269b8090cf34ff4319351ee4b03cab35aeb1c17cfc9e30bbf92d8c6b31e34"
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/SOURCE_PINS.tsv",
+      "path": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/SOURCE_PINS.tsv",
       "bytes": 3414,
       "sha256": "1bba18f467ed62c73793d8d4dfacd186eb38589cffd3b655163cd98a32ad27d4"
     }
@@ -233,7 +233,7 @@
     "test_source_directory": "${project.basedir}/../../src/test/java",
     "compiler_and_resource_selectors": {
       "production": {
-        "root": "m3/tooling/migration-recipes/src/main/java",
+        "root": "make/m3/tooling/migration-recipes/src/main/java",
         "patterns": [
           "com/m3/rewrite/atom/*.java",
           "com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java"
@@ -248,11 +248,11 @@
           "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
           "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java",
           "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java",
-          "m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java"
+          "make/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java"
         ]
       },
       "test": {
-        "root": "m3/tooling/migration-recipes/src/test/java",
+        "root": "make/m3/tooling/migration-recipes/src/test/java",
         "patterns": [
           "com/m3/rewrite/atom/*.java"
         ],
@@ -274,7 +274,7 @@
         ]
       },
       "resources": {
-        "root": "m3/tooling/migration-recipes/src/main/resources",
+        "root": "make/m3/tooling/migration-recipes/src/main/resources",
         "patterns": [
           "com/synexia/rewrite/hash-pinned-java/atom-comment-custody/**",
           "com/synexia/rewrite/hash-pinned-java/atom-pattern-spectrum/**"
@@ -283,7 +283,7 @@
         "changed_paths_matching_selection": []
       },
       "test_resources": {
-        "root": "m3/tooling/migration-recipes/src/test/resources",
+        "root": "make/m3/tooling/migration-recipes/src/test/resources",
         "patterns": [
           "com/m3/rewrite/atom/spectrum/**"
         ],
@@ -292,7 +292,7 @@
       }
     },
     "new_delivery_test": {
-      "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3LabDeliveryRecipeTest.java",
+      "path": "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3LabDeliveryRecipeTest.java",
       "selected": false,
       "reason": "Compiler testIncludes admits only com/m3/rewrite/atom/*.java; this file is in the parent package."
     }

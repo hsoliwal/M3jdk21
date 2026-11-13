@@ -3,8 +3,8 @@ on:
   pull_request:
     paths:
       - 'm3/collections/implementations/apache-circular-fifo/**'
-      - 'm3/collections/qualification/owned-apache-circular-fifo-20261018/**'
-      - 'm3/collections/qualification/owned-apache-circular-fifo-index-wrap-20261018/**'
+      - 'make/m3/collections/qualification/owned-apache-circular-fifo-20261018/**'
+      - 'make/m3/collections/qualification/owned-apache-circular-fifo-index-wrap-20261018/**'
       - '.github/workflows/m3-owned-apache-circular-fifo-index-wrap.yml'
   workflow_dispatch:
 permissions:
@@ -35,7 +35,7 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Source seal
-        run: python -I -S -B m3/collections/qualification/owned-apache-circular-fifo-index-wrap-20261018/verify.py
+        run: python -I -S -B make/m3/collections/qualification/owned-apache-circular-fifo-index-wrap-20261018/verify.py
       - name: Compile provider, M3 core and receiver proofs
         shell: bash
         run: |
@@ -50,7 +50,7 @@ jobs:
           find m3/collections/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/collections src/jdk.m3.collections/share/classes/jdk/internal/m3/collections -name '*.java' | sort > "$OUT/core.args"
           printf -- '--module-path\n%s\n' "$OUT/arrays" >> "$OUT/core.args"
           javac --release 21 -g -proc:none -Xlint:all,-module -Werror             -d "$OUT/core" @"$OUT/core.args"
-          javac --release 21 -g -proc:none -Xlint:all,-module -Werror             -cp "$OUT/core:$OUT/commons-collections4-4.5.0.jar"             -d "$OUT/classes"             m3/collections/implementations/apache-circular-fifo/src/main/java/jdk/m3/collections/apache/M3CircularFifoQueue.java             m3/collections/qualification/owned-apache-circular-fifo-20261018/CircularFifoProtocolProof.java             m3/collections/qualification/owned-apache-circular-fifo-20261018/CircularFifoMutationProbe.java             m3/collections/qualification/owned-apache-circular-fifo-index-wrap-20261018/CircularFifoIndexWrapProof.java
+          javac --release 21 -g -proc:none -Xlint:all,-module -Werror             -cp "$OUT/core:$OUT/commons-collections4-4.5.0.jar"             -d "$OUT/classes"             m3/collections/implementations/apache-circular-fifo/src/main/java/jdk/m3/collections/apache/M3CircularFifoQueue.java             make/m3/collections/qualification/owned-apache-circular-fifo-20261018/CircularFifoProtocolProof.java             make/m3/collections/qualification/owned-apache-circular-fifo-20261018/CircularFifoMutationProbe.java             make/m3/collections/qualification/owned-apache-circular-fifo-index-wrap-20261018/CircularFifoIndexWrapProof.java
           gcc -std=c17 -O2 -Wall -Wextra -Werror -fPIC -shared             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux"             src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c             -o "$OUT/native/libm3_collections_mask.so"
           echo "$OUT" > "$RUNNER_TEMP/m3_fifo_out"
       - name: Run Apache differential and checked JNI lane
@@ -64,5 +64,5 @@ jobs:
           java -Xcheck:jni -Djava.library.path="$OUT/native" -cp "$CP"             CircularFifoProtocolProof jdk.m3.collections.apache.M3CircularFifoQueue native             > "$OUT/native.json"
           java -cp "$CP" CircularFifoMutationProbe             org.apache.commons.collections4.queue.CircularFifoQueue > "$OUT/provider-mutation.json"
           java -cp "$CP" CircularFifoMutationProbe             jdk.m3.collections.apache.M3CircularFifoQueue > "$OUT/owned-mutation.json"
-          python -I -S -B             m3/collections/qualification/owned-apache-circular-fifo-20261018/compare.py "$OUT"
+          python -I -S -B             make/m3/collections/qualification/owned-apache-circular-fifo-20261018/compare.py "$OUT"
           java -cp "$CP" CircularFifoIndexWrapProof

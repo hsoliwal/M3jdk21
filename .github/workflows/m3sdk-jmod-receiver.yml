@@ -4,18 +4,18 @@ name: M3SDK JMOD Receiver Proof
 on:
   pull_request:
     paths:
-      - 'm3/tooling/jmod-recipes/**'
+      - 'make/m3/tooling/jmod-recipes/**'
       - 'm3/vendor/third_party-m3/**'
-      - 'm3/tooling/module-packs/nlp-search/**'
+      - 'make/m3/tooling/module-packs/nlp-search/**'
       - 'm3/file/**'
-      - 'm3/tooling/shared-frontend/**'
+      - 'make/m3/tooling/shared-frontend/**'
       - 'src/jdk.compiler/share/classes/com/sun/source/util/M3AST.java'
       - 'src/jdk.compiler/share/classes/com/sun/tools/javac/m3/**'
       - 'src/jdk.compiler/share/classes/com/sun/tools/javac/main/JavaCompiler.java'
       - 'src/jdk.compiler/share/classes/module-info.java'
       - 'test/langtools/tools/javac/m3/**'
-      - 'm3/tooling/module-packs/text-tools/**'
-      - 'm3/tooling/module-packs/jackson/**'
+      - 'make/m3/tooling/module-packs/text-tools/**'
+      - 'make/m3/tooling/module-packs/jackson/**'
       - 'm3/vendor/third_party/jackson-annotations-2.19.2/**'
       - 'm3/vendor/third_party/jackson-core-2.19.2/**'
       - 'm3/vendor/third_party/jackson-databind-2.19.2/**'
@@ -59,11 +59,11 @@ jobs:
       - name: 1 - Diff hygiene
         run: git diff --check
       - name: 2 - Exact Git blob receiver proof
-        run: python3 m3/tooling/jmod-recipes/tools/verify_sdk_receiver.py --repo .
+        run: python3 make/m3/tooling/jmod-recipes/tools/verify_sdk_receiver.py --repo .
       - name: 3 - SDK receiver and preflight refusal tests
         run: >-
           JAVA_HOME21="$JAVA_HOME" python3 -m unittest discover
-          -s m3/tooling/jmod-recipes/tools
+          -s make/m3/tooling/jmod-recipes/tools
           -p 'test_*.py' -v
       - name: 4 - Java 21 vendor smoke source compiles without donor classpath
         run: |
@@ -71,11 +71,11 @@ jobs:
           mkdir -p "$RUNNER_TEMP/m3sdk-smoke-classes"
           javac --release 21 -Xlint:all -Werror \
             -d "$RUNNER_TEMP/m3sdk-smoke-classes" \
-            m3/tooling/jmod-recipes/tools/fixtures/M3SdkImageSmoke.java
+            make/m3/tooling/jmod-recipes/tools/fixtures/M3SdkImageSmoke.java
       - name: 5 - Product acceptance remains independently proof-gated
         run: |
           set -euo pipefail
-          test -f m3/release/release-contract.json
+          test -f make/m3/release/release-contract.json
           echo 'SDK source and Java smoke compilation proof only; no linked image executed in this job.'
 
   openrewrite-recipe-junit:
@@ -97,12 +97,12 @@ jobs:
           -am -DskipTests install
       - name: Run original hash-pinned JMOD descriptor OpenRewrite JUnit
         run: >-
-          mvn -B -ntp -f m3/tooling/jmod-recipes/pom.xml
+          mvn -B -ntp -f make/m3/tooling/jmod-recipes/pom.xml
           -Dtest=M3ModuleDescriptorRecipeTest test
       - name: Run the exact receiver recipe-custody proof mirror
         run: >-
           mvn -B -ntp
-          -f m3/tooling/module-packs/nlp-search/recipe-custody/pom.xml
+          -f make/m3/tooling/module-packs/nlp-search/recipe-custody/pom.xml
           clean test
       - name: Retain descriptor and receiver recipe proof reports
         if: always()
@@ -111,9 +111,9 @@ jobs:
           name: m3-recipe-custody-proof
           if-no-files-found: error
           path: |
-            m3/tooling/jmod-recipes/target/surefire-reports/**
-            m3/tooling/module-packs/nlp-search/recipe-custody/target/surefire-reports/**
-            m3/tooling/module-packs/nlp-search/recipe-custody/target/evidence/**
+            make/m3/tooling/jmod-recipes/target/surefire-reports/**
+            make/m3/tooling/module-packs/nlp-search/recipe-custody/target/surefire-reports/**
+            make/m3/tooling/module-packs/nlp-search/recipe-custody/target/evidence/**
 
 
   full-tool-images:
@@ -130,18 +130,18 @@ jobs:
           java-version: '21'
       - name: Build ten JMODs and run full file JNI NLP and M3AST contracts
         run: >-
-          python3 m3/tooling/module-packs/nlp-search/build.py
+          python3 make/m3/tooling/module-packs/nlp-search/build.py
           --jdk-home "$JAVA_HOME" --compiler-source-proof
           --out build/m3-nlp-search
       - name: Build and execute text and POSIX JNI tools
         run: |
           set -euo pipefail
-          owner="$PWD/m3/tooling/module-packs/text-tools"
+          owner="$PWD/make/m3/tooling/module-packs/text-tools"
           python3 "$owner/build.py" --jdk-home "$PWD/build/m3-nlp-search/compiler-proof/image" \
             --sources "$owner/src" --native-source "$owner/native/m3textio.c" \
             --smoke "$owner/fixtures/src/test/java/M3TextSmoke.java" \
             --legal-notices "$owner/legal" \
-            --packager "$PWD/m3/tooling/jmod-recipes/tools/jmod_pack.py" \
+            --packager "$PWD/make/m3/tooling/jmod-recipes/tools/jmod_pack.py" \
             --out "$PWD/build/m3-text-tools"
           image="$PWD/build/m3-text-tools/pack/image"
           mkdir -p build/m3-text-tools/utf8
@@ -211,21 +211,21 @@ jobs:
       - name: Build Jackson sources and execute host and linked runtime contracts
         run: |
           set -euo pipefail
-          python3 m3/tooling/module-packs/jackson/build.py \
+          python3 make/m3/tooling/module-packs/jackson/build.py \
             --jdk-home "$JAVA_HOME" --repo-root "$PWD" --maven mvn \
             --maven-repo "$RUNNER_TEMP/m3-jackson-maven" --resolve-build-tools \
             --out build/m3-jackson
       - name: Build compiler JMOD and execute actual M3AST host and linked contracts
         run: |
           set -euo pipefail
-          python3 m3/tooling/module-packs/jackson/compiler-build.py \
+          python3 make/m3/tooling/module-packs/jackson/compiler-build.py \
             --jdk-home "$JAVA_HOME" --repo-root "$PWD" \
             --jars build/m3-jackson/jars --out build/m3-jackson-compiler
       - name: Run complete pinned fork suites and exact generated-library replays
         run: |
           set -euo pipefail
-          python3 m3/tooling/module-packs/jackson/upstream-qualification-regression.py 2>&1 | tee build/m3-jackson-ci/upstream-admission-regression.log
-          python3 m3/tooling/module-packs/jackson/upstream-qualification.py \
+          python3 make/m3/tooling/module-packs/jackson/upstream-qualification-regression.py 2>&1 | tee build/m3-jackson-ci/upstream-admission-regression.log
+          python3 make/m3/tooling/module-packs/jackson/upstream-qualification.py \
             --annotations-root build/m3-jackson-upstream-sources/jackson-annotations \
             --core-root build/m3-jackson-upstream-sources/jackson-core \
             --databind-root build/m3-jackson-upstream-sources/jackson-databind \
@@ -235,7 +235,7 @@ jobs:
       - name: Verify executed contracts, exact source hashes and all eight upstream lanes
         run: |
           set -euo pipefail
-          python3 m3/tooling/module-packs/jackson/verify-qualification.py \
+          python3 make/m3/tooling/module-packs/jackson/verify-qualification.py \
             --runtime build/m3-jackson --compiler build/m3-jackson-compiler \
             --upstream build/m3-jackson-upstream-proof --repo-root "$PWD" \
             --expected-head "$M3_JACKSON_HEAD" --out build/m3-jackson-ci/CI_RECEIPT.json

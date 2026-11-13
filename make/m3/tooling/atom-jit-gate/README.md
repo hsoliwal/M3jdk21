@@ -1,10 +1,10 @@
 # M3 atom JIT gate (per-atom JIT retest gate)
 
-`m3/tooling/atom-jit-gate` is qualification tooling: it is never product code and never lives under `src/`. It holds
+`make/m3/tooling/atom-jit-gate` is qualification tooling: it is never product code and never lives under `src/`. It holds
 the per-atom JIT retest gate that the other convergence leaves use to show that an atom behaves the same when the JVM
 interprets it and when it compiles it. Maven `com.m3:m3-tooling-atom-jit-gate`, package `jdk.m3.tooling.atomjit`,
-automatic module `org.m3jdk.tooling.atomjit`. Like its sibling `m3/tooling/atom-census`, it is a standalone pom with
-its own workflow (`.github/workflows/m3-tooling-atom-jit-gate-20261106.yml`). It is not a module of the `m3/pom.xml`
+automatic module `org.m3jdk.tooling.atomjit`. Like its sibling `make/m3/tooling/atom-census`, it is a standalone pom with
+its own workflow (`.github/workflows/m3-tooling-atom-jit-gate-20261106.yml`). It is not a module of the `make/m3/pom.xml`
 reactor.
 
 All of it was relocated by recipe from hsoliwal/com.synexia develop `b65df53330e3`, never edited by hand. The recipe
@@ -39,10 +39,10 @@ re-bound onto the census without a second atomizer. That re-binding is a NEC (`r
 ## Run
 
 ```text
-mvn -f m3/tooling/atom-census/pom.xml -DskipTests install     # the atomizer the gate binds
-mvn -f m3/tooling/atom-jit-gate/pom.xml package                # -Xlint:all -Werror, JUnit 5
-JAVA_HOME=<JDK 21> bash m3/tooling/atom-jit-gate/recipe/atom-jit-gate-20261106/verify.sh <donor-git> <donor-rev> <scratch> [m2]
-python3 m3/tooling/atom-jit-gate/fixture-gate/verify.py --evidence <dir> [--negative-test]   # Linux: gcc, g++, nm, JDK 21
+mvn -f make/m3/tooling/atom-census/pom.xml -DskipTests install     # the atomizer the gate binds
+mvn -f make/m3/tooling/atom-jit-gate/pom.xml package                # -Xlint:all -Werror, JUnit 5
+JAVA_HOME=<JDK 21> bash make/m3/tooling/atom-jit-gate/recipe/atom-jit-gate-20261106/verify.sh <donor-git> <donor-rev> <scratch> [m2]
+python3 make/m3/tooling/atom-jit-gate/fixture-gate/verify.py --evidence <dir> [--negative-test]   # Linux: gcc, g++, nm, JDK 21
 ```
 
 The measured figures of every gate are in `recipe/atom-jit-gate-20261106/GATES.tsv`. Lessons learned are in

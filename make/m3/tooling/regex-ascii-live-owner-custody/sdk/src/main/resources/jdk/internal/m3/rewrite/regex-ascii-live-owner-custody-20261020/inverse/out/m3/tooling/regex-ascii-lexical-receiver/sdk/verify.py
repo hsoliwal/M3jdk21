@@ -19,7 +19,7 @@ METHODS = ["all8PartialStatesBothOrdersReachExactFixedPoint",
            "all8InverseStatesBothOrdersRecoverExactBefore",
            "eachOwnedInputRefusesDriftMissingAndDuplicateOwnership"]
 SUITES = {SUITE: METHODS}
-CHANGE_PATHS = ["src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java","test/jdk/java/util/regex/M3AutomatonDifferentialTest.java","m3/docs/name-mapping.json"]
+CHANGE_PATHS = ["src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java","test/jdk/java/util/regex/M3AutomatonDifferentialTest.java","doc/m3/name-mapping.json"]
 KEEP_PATHS = ["src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java","src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java","src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java","src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java","src/java.base/share/classes/jdk/internal/mindex/M3NotYetReceived.java"]
 TARGET_PATHS = CHANGE_PATHS + KEEP_PATHS
 DIRECTIONS = ("forward", "inverse")

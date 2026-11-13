@@ -4,7 +4,7 @@ package jdk.internal.m3.collections;
 
 import org.junit.jupiter.api.Test;
 
-//FLLDCIM: RELOCATE - donor blob df65643e3e90 at d5ad5090d87e; recipe m3/collections/qualification/census2-c4-20261106/relocate.py v1
+//FLLDCIM: RELOCATE - donor blob df65643e3e90 at d5ad5090d87e; recipe make/m3/collections/qualification/census2-c4-20261106/relocate.py v1
 final class KthPairDistanceTest {
     @Test void javaAndOptionalJniKthPairDistance() {
         KthPairDistanceContract.main(new String[0]);

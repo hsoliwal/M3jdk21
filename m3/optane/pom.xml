@@ -47,7 +47,7 @@
   </dependencies>
   <build>
     <plugins>
-      <!-- MOVE_TO_JDK_MODULE v3 (keep-pom mode, m3/tooling/jdk-naming/move_module_area.py): the sources live in the
+      <!-- MOVE_TO_JDK_MODULE v3 (keep-pom mode, make/m3/tooling/jdk-naming/move_module_area.py): the sources live in the
            JDK module src/jdk.m3.io and the tests in test/jdk; this pom keeps its own configuration and adds them. -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -90,7 +90,7 @@
           <release>21</release>
           <proc>none</proc>
           <compilerArgs>
-            <!-- every lint, warnings are errors: the same gate as m3/optane/verify.sh before the family arrived -->
+            <!-- every lint, warnings are errors: the same gate as make/m3/optane/verify.sh before the family arrived -->
             <arg>-Xlint:all</arg>
             <arg>-Werror</arg>
           </compilerArgs>
@@ -154,7 +154,7 @@
                 <configuration>
                   <executable>bash</executable>
                   <arguments>
-                    <argument>${project.basedir}/verify.sh</argument>
+                    <argument>${project.basedir}/../../make/m3/optane/verify.sh</argument>
                   </arguments>
                   <environmentVariables>
                     <M3_OPTANE_BUILD>${project.build.directory}/verified</M3_OPTANE_BUILD>

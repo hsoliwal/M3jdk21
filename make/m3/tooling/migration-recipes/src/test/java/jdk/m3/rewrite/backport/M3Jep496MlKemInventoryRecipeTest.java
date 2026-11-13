@@ -19,11 +19,11 @@ final class M3Jep496MlKemInventoryRecipeTest {
     private static final List<String> TARGETS =
             List.of(
                     ".github/workflows/m3-jep496-mlkem-inventory.yml",
-                    "m3/backports/recipes/jep-496-mlkem/DEPENDENCY_CLOSURE.tsv",
-                    "m3/backports/recipes/jep-496-mlkem/GA_PATH_STATE.tsv",
-                    "m3/backports/recipes/jep-496-mlkem/MATERIALIZE_PATHS.txt",
-                    "m3/backports/recipes/jep-496-mlkem/README.md",
-                    "m3/backports/recipes/jep-496-mlkem/UPSTREAM_AUTHORITY.tsv");
+                    "make/m3/backports/recipes/jep-496-mlkem/DEPENDENCY_CLOSURE.tsv",
+                    "make/m3/backports/recipes/jep-496-mlkem/GA_PATH_STATE.tsv",
+                    "make/m3/backports/recipes/jep-496-mlkem/MATERIALIZE_PATHS.txt",
+                    "make/m3/backports/recipes/jep-496-mlkem/README.md",
+                    "make/m3/backports/recipes/jep-496-mlkem/UPSTREAM_AUTHORITY.tsv");
 
     @Test
     void inventoryRecipeUsesExistingHashPinnedTextOwner() {
@@ -83,17 +83,17 @@ final class M3Jep496MlKemInventoryRecipeTest {
                         .map(Result::getAfter)
                         .toList();
 
-        String state = find(generated, "m3/backports/recipes/jep-496-mlkem/GA_PATH_STATE.tsv");
+        String state = find(generated, "make/m3/backports/recipes/jep-496-mlkem/GA_PATH_STATE.tsv");
         assertEquals(10, state.lines().skip(1).count());
         assertEquals(2, state.lines().filter(line -> line.contains("ABSENT_AT_GA")).count());
 
         String materialize =
-                find(generated, "m3/backports/recipes/jep-496-mlkem/MATERIALIZE_PATHS.txt");
+                find(generated, "make/m3/backports/recipes/jep-496-mlkem/MATERIALIZE_PATHS.txt");
         assertEquals(8, materialize.lines().filter(line -> !line.isBlank()).count());
         assertFalse(materialize.contains("internalProjection.json"));
 
         String dependencies =
-                find(generated, "m3/backports/recipes/jep-496-mlkem/DEPENDENCY_CLOSURE.tsv");
+                find(generated, "make/m3/backports/recipes/jep-496-mlkem/DEPENDENCY_CLOSURE.tsv");
         assertTrue(dependencies.contains("JEP-497"));
         assertTrue(dependencies.contains("JDK-8345057"));
         assertTrue(dependencies.contains("JDK24-GA"));

@@ -5,8 +5,8 @@ on:
     branches: [m3/scoped-once-javac-20261020]
   pull_request:
     paths:
-      - m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ScopedCompilation.java
-      - m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ScopedCompilationTest.java
+      - make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ScopedCompilation.java
+      - make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ScopedCompilationTest.java
       - .github/workflows/m3-scoped-once-20261020.yml
   workflow_dispatch:
 permissions:
@@ -30,7 +30,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/m3-scoped-classes"
-          javac --release 21 -Xlint:all -Werror -proc:none             -d "$RUNNER_TEMP/m3-scoped-classes"             m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ScopedCompilation.java             m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ScopedCompilationTest.java
+          javac --release 21 -Xlint:all -Werror -proc:none             -d "$RUNNER_TEMP/m3-scoped-classes"             make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ScopedCompilation.java             make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ScopedCompilationTest.java
           java -ea -cp "$RUNNER_TEMP/m3-scoped-classes"             jdk.m3.parser.test.M3ScopedCompilationTest | tee scoped-result.txt
           grep '^M3_SCOPED_COMPILATION_PASS checks=9$' scoped-result.txt
       - uses: actions/upload-artifact@v4

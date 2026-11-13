@@ -3,7 +3,7 @@ name: M3 indexed binary sorted set algebra Java and JNI
 on:
   pull_request:
     paths:
-      - 'm3/collections/qualification/m3jdk21-binary-set-index-navigation-20261018/**'
+      - 'make/m3/collections/qualification/m3jdk21-binary-set-index-navigation-20261018/**'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongCompositeViews.java'
       - 'test/jdk/jdk/m3/collections/M3IndexedSetAlgebraSeekProof.java'
       - 'test/jdk/jdk/m3/collections/M3IndexedSetAlgebraSeekTest.java'
@@ -25,7 +25,7 @@ jobs:
       - name: Seal original source and all canonical generated output templates
         run: |
           set -eu
-          Q=m3/collections/qualification/m3jdk21-binary-set-index-navigation-20261018/recipe
+          Q=make/m3/collections/qualification/m3jdk21-binary-set-index-navigation-20261018/recipe
           awk -F '\t' '{print $3 "  " $1}' "$Q/manifest.tsv" | sha256sum -c -
           awk -F '\t' -v q="$Q" '{print $3 "  " q "/" $4}' "$Q/manifest.tsv" | sha256sum -c -
           cmp "$Q/M3LongCompositeViews.java.txt" src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongCompositeViews.java

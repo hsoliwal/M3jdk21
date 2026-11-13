@@ -15,7 +15,7 @@ DATASET = "m3jdk21-progress-job"
 TASK = "m3-collections-contract-refinement-20261017"
 TARGET_PIN = "86528a90079b89a50b51ef13da08e7e70d468cb4"
 CANONICAL_PIN = "8f8200375d8d403b58e855ee5db02f2e8fac33a8"
-PREFIX = "m3/runtime-integration/progress-job-20261018"
+PREFIX = "make/m3/runtime-integration/progress-job-20261018"
 OWNER_PATH = "src/java.base/share/classes/java/util/concurrent/ProgressJob.java"
 DEPENDENCIES = (
     "src/java.base/share/classes/java/lang/Runnable.java",

@@ -8,7 +8,7 @@ on:
       - test/jdk/jdk/m3/collections/M3IndexedMultiValueOccurrenceSelfTest.java
       - test/jdk/jdk/m3/collections/M3IndexedMultiValueOccurrenceTest.java
       - test/jdk/jdk/m3/collections/M3IndexedOccurrenceArrayNativeTest.java
-      - m3/collections/qualification/m3-five-library-occurrences-20261018/**
+      - make/m3/collections/qualification/m3-five-library-occurrences-20261018/**
       - .github/workflows/m3-five-library-occurrences-20261018.yml
   workflow_dispatch:
 concurrency:
@@ -27,7 +27,7 @@ jobs:
       - name: Run actual canonical OpenRewrite recipe Maven JUnit
         run: |
           set -eu
-          mvn -B -ntp -f m3/collections/qualification/m3-five-library-occurrences-20261018/recipe/pom.xml verify
+          mvn -B -ntp -f make/m3/collections/qualification/m3-five-library-occurrences-20261018/recipe/pom.xml verify
       - name: Build M3JDK21 collection module and run real JUnit
         run: |
           set -eu

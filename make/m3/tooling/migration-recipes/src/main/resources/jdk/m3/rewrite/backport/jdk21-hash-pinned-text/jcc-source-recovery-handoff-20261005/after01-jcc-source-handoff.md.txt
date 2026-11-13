@@ -48,7 +48,7 @@ The complete E3 binding remains in its preserved `jcc-source-final-handoff-20261
 
 ## Existing authority and complete source context
 
-`m3/docs/name-mapping.json` remains the mapping authority. The existing schema, `migration.py`, `M3Jdk21HashPinnedTextSnapshotRecipe` and `recipe.py` sealed installer own validation and materialization. This transition introduces no replacement registry, compiler, scanner, scheduler or importer.
+`doc/m3/name-mapping.json` remains the mapping authority. The existing schema, `migration.py`, `M3Jdk21HashPinnedTextSnapshotRecipe` and `recipe.py` sealed installer own validation and materialization. This transition introduces no replacement registry, compiler, scanner, scheduler or importer.
 
 Only `synexia.jcc-recipe-laboratory` and `synexia.jcc-java-jni-regression` advance source bindings. Their statuses remain `blocked`, their capability `tests` arrays remain empty, and all broad acceptance flags remain false. All 46 IDs and their order, the other 44 whole records, all 20 destination gates and non-record globals remain unchanged. The complete Descriptor reconciliation and all receiver targets, target history and supersession fields remain equal.
 
@@ -169,8 +169,8 @@ At this document’s afterimage-freeze boundary, E4 receiving execution is plann
 The concrete prepared checks cover 12 Java methods, six Python methods, named recipe activation, four writes, a fixed point, rollback/replay, missing/drifted/duplicate/scan-mutated input refusals, all fourteen mixed before/after subsets, normal whole-map validation and expected incomplete-completion refusal. These are planned checks until actual execution receipts say otherwise; definition and syntax parsing are not passes.
 
 ```sh
-mvn -B -ntp -f m3/tooling/migration-recipes/verification/jcc-source-recovery-handoff/pom.xml clean verify
-python -B m3/migration/test/test_jcc_source_recovery_handoff_packet.py
+mvn -B -ntp -f make/m3/tooling/migration-recipes/verification/jcc-source-recovery-handoff/pom.xml clean verify
+python -B make/m3/migration/test/test_jcc_source_recovery_handoff_packet.py
 ```
 
 Source export admitted, source-qualified destination materialized, destination gates passed and complete capability readback delivered all remain false. Actual publication custody, including its explicit body-method limits, is recorded separately from those acceptance flags.

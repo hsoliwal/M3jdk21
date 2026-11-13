@@ -34,7 +34,7 @@ This recipe only centralizes the final address atom and bulk gather. It does not
 The Maven-bound source-sealed recipe:
 
 ```
-m3/collections/qualification/m3-long-direct-address-kernel-20261017/recipe
+make/m3/collections/qualification/m3-long-direct-address-kernel-20261017/recipe
 ```
 
 preflights the exact existing `M3LongIndexProjection.java` preimage and all additive targets before writing. It refuses drift, symlinks and partial application; a second apply is a fixed point. The existing projection is transformed mechanically by four exact behavioral-atom substitutions; new Java/test/C/workflow files are copied from sealed templates.

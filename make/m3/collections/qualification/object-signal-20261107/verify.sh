@@ -14,8 +14,8 @@
 set -euo pipefail
 case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) SEP=';'; winpath() { (cd "$1" && pwd -W); } ;; *) SEP=':'; winpath() { (cd "$1" && pwd); } ;; esac
 RECIPE_DIR=$(winpath "$(dirname "$0")")
-MODULE=$(winpath "$(dirname "$0")/../..")
-ROOT=$(winpath "$(dirname "$0")/../../../..")
+MODULE=$(winpath "$(dirname "$0")/../../../../../m3/collections")
+ROOT=$(winpath "$(dirname "$0")/../../../../..")
 DONOR_GIT=$1
 REV=$2
 mkdir -p "$3"
@@ -81,9 +81,9 @@ sys.exit(1 if changed else 0)
 EOF
 fi
 echo "GATE naming"
-(cd "$ROOT" && "$PY" -I m3/tooling/jdk-naming/jdk_naming.py plan --root . \
+(cd "$ROOT" && "$PY" -I make/m3/tooling/jdk-naming/jdk_naming.py plan --root . \
     --only m3/collections/src/main/java/jdk/m3/collections/M3ObjectSignal \
     --only m3/collections/src/main/java/jdk/m3/collections/M3ObjectProj \
     --only m3/collections/src/test/java/jdk/m3/collections/M3ObjectSignal \
-    --only m3/collections/qualification/object-signal-20261107/ | tail -n 1)
+    --only make/m3/collections/qualification/object-signal-20261107/ | tail -n 1)
 echo "VERIFY PASS"

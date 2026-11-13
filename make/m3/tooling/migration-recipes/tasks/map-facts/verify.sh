@@ -11,9 +11,9 @@ repo=$(realpath "$2")
 out=$(realpath -m "$3")
 case "$out/" in "$repo/"*|"$jdk/"*) echo 'Output must be outside repository and JDK' >&2; exit 2;; esac
 test ! -e "$out" && test ! -L "$out"
-task=m3/tooling/migration-recipes/tasks/map-facts
+task=make/m3/tooling/migration-recipes/tasks/map-facts
 (cd "$repo" && sha256sum --check "$task/inputs.sha256")
-bash "$repo/m3/tooling/migration-recipes/tasks/map-guard/verify.sh" "$jdk" "$repo" "$out"
+bash "$repo/make/m3/tooling/migration-recipes/tasks/map-guard/verify.sh" "$jdk" "$repo" "$out"
 tests="$repo/test/jdk/java/lang/String"
 "$jdk/bin/javac" -source 21 -target 21 -Xlint:all -Werror \
   --patch-module "java.base=$out/classes" \

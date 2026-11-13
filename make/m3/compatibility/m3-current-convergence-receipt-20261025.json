@@ -39,7 +39,7 @@
     "disposition": "History/inventory only. Conflict-marked diagnostic tree is never a receiving source or allowlist."
   },
   "naming": {
-    "authority": "m3/docs/name-mapping.json",
+    "authority": "doc/m3/name-mapping.json",
     "before": {
       "sha256": "2beaf836d56b50e71f94e1be94d7923198baed7b7355dc4997342ca5257e8116",
       "git_blob_sha1": "fe77055e75116df42fafb40c433d351fbac139cc",

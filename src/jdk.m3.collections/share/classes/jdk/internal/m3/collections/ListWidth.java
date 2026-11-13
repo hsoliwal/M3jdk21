@@ -13,9 +13,9 @@
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
 /*
- * Derived by recipe (m3/docs/viewport-everywhere/recipe) from hsoliwal/eclipse.platform.swt 553eefd41d9961d303c41e0e4e181712e64a1e45,
+ * Derived by recipe (doc/m3/viewport-everywhere/recipe) from hsoliwal/eclipse.platform.swt 553eefd41d9961d303c41e0e4e181712e64a1e45,
  * VirtualListWidth.java; Apache-2.0 elected from its Apache-2.0 OR EPL-2.0 publication
- * (m3/docs/viewport-everywhere/LICENSE_ELECTION.tsv).
+ * (doc/m3/viewport-everywhere/LICENSE_ELECTION.tsv).
  */
 package jdk.internal.m3.collections;
 

@@ -40,16 +40,16 @@ OpenJDK `src/`, `make/` and the default Maven reactor are unchanged.
 From repository root:
 
 ```bash
-python3 m3/tooling/jmod-recipes/tools/verify_sdk_receiver.py --repo .
-python3 -m unittest discover -s m3/tooling/jmod-recipes/tools -p 'test_*.py' -v
-mvn -B -ntp -f m3/tooling/jmod-recipes/pom.xml test
+python3 make/m3/tooling/jmod-recipes/tools/verify_sdk_receiver.py --repo .
+python3 -m unittest discover -s make/m3/tooling/jmod-recipes/tools -p 'test_*.py' -v
+mvn -B -ntp -f make/m3/tooling/jmod-recipes/pom.xml test
 ```
 
 For a **new** developer/JMOD SDK image built with the selected Java 21 tools and a
 current matching JMOD pack TSV (not a stale historical receipt):
 
 ```bash
-python3 m3/tooling/jmod-recipes/tools/sdk_image_probe.py \
+python3 make/m3/tooling/jmod-recipes/tools/sdk_image_probe.py \
   --image /path/to/new/m3sdk/image \
   --pack /path/to/new/m3sdk/JMOD_PACK.tsv \
   --out /fresh/external/sdk-runtime-proof
@@ -60,7 +60,7 @@ it unless that image includes `javac`, `jlink`, `jpackage` and the other develop
 tools. The PR #788 image linked `java.se` plus donor modules and proved module
 resolution; it did not prove an SDK developer toolchain or execute application APIs.
 
-The existing safe developer-pack machinery under `m3/tooling/module-packs/` remains
+The existing safe developer-pack machinery under `make/m3/tooling/module-packs/` remains
 the canonical developer-tools/image owner. Composing its developer closure with the
 vendored JMOD closure is the following **PENDING** SDK recipe/DAG pass, not a reason
 to create a second image assembler or alter current Java 21 contracts.

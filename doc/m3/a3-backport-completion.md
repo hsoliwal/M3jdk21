@@ -3,7 +3,7 @@
 A3 backport completion is an evidence fan-in, not product-source promotion.
 
 The full JDK 22-27 upstream commit inventory and Java-21 compatibility queue remain owned by
-`m3/backports/inventory.py` and `compatibility_queue.py`. A3 owns the current-tree inventory and
+`make/m3/backports/inventory.py` and `compatibility_queue.py`. A3 owns the current-tree inventory and
 FILE preparation frontier.
 
 The canonical sequence is:
@@ -49,7 +49,7 @@ authority.
 After `COMPATIBILITY_QUEUE.tsv` exists, the current-tree inventory and fan-in are lifecycle-bound:
 
 ```bash
-mvn -B -ntp -f m3/tooling/a3/pom.xml \
+mvn -B -ntp -f make/m3/tooling/a3/pom.xml \
   -Pm3-a3-backport-completion \
   -Dm3.a3.root="$PWD" \
   -Dm3.a3.queue=m3/build/backports/COMPATIBILITY_QUEUE.tsv \

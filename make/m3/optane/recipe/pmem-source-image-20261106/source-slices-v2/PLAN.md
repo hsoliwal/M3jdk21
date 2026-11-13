@@ -1,6 +1,6 @@
 <!-- Copyright 2026 Hitesh Soliwal and contributors -->
 <!-- SPDX-License-Identifier: Apache-2.0 -->
-<!-- FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/m3-pmem-sdk/recipes/source-slices-v2/PLAN.md blob 35ad473ee387; recipe m3/optane/recipe/pmem-source-image-20261106/relocate.py v3 -->
+<!-- FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/m3-pmem-sdk/recipes/source-slices-v2/PLAN.md blob 35ad473ee387; recipe make/m3/optane/recipe/pmem-source-image-20261106/relocate.py v3 -->
 # PMEM source-slices v2 implementation plan
 
 > **For agentic workers:** Use superpowers:executing-plans for inline implementation and one independent whole-change review. Steps are tracked below.

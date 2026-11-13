@@ -2,7 +2,7 @@
 
 This recipe crate inlines the relevant Synexia implementation into two internal java.base owners:
 `jdk.internal.mindex.M3VI` and `jdk.internal.mindex.M3Release`. VI is the short pattern name;
-Release is already a concise domain name. The canonical crosswalk is `m3/docs/name-mapping.json`.
+Release is already a concise domain name. The canonical crosswalk is `doc/m3/name-mapping.json`.
 
 ## Source and adaptation
 
@@ -28,8 +28,8 @@ this metadata port; the source VM precompute JNI owner remains a separate pendin
 From the repository root with JDK 21 and the pinned dependencies available offline:
 
 ```sh
-mvn -o -f m3/tooling/vi/pom.xml test
-python m3/tooling/vi/test_install.py
+mvn -o -f make/m3/tooling/vi/pom.xml test
+python make/m3/tooling/vi/test_install.py
 ```
 
 The existing `M3HashPinnedJavaSnapshotRecipe` creates typed Java candidates under `target/generated`.
@@ -41,7 +41,7 @@ The retained bootstrap task-crate gate verifies the manifest seal and performs a
 atom inventory over this packet's Java candidates. Exact donor bytes and license/NOTICE seals
 are verified as well. This scoped inventory does not claim a full-tree semantic audit.
 
-`install/plan.json` uses the retained `m3/migration/recipe.py` sealed installer for reviewed outputs,
+`install/plan.json` uses the retained `make/m3/migration/recipe.py` sealed installer for reviewed outputs,
 including mapping, notices and generated Java. It preserves exact preimages for rollback. The
 installer is not a second Java transformation engine: Java postimages come from OpenRewrite.
 All template and output changes must rerun the recipe proof and refresh the sealed plan.

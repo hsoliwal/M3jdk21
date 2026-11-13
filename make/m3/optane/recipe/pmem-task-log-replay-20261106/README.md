@@ -35,7 +35,7 @@ the JUnit wrapper and the gates below).
 
 ## Recipe
 
-`python -I m3/optane/recipe/pmem-task-log-replay-20261106/relocate.py --donor-git <clone> --donor-rev 5ecfe052562c [--check]`
+`python -I make/m3/optane/recipe/pmem-task-log-replay-20261106/relocate.py --donor-git <clone> --donor-rev 5ecfe052562c [--check]`
 (`RELOCATE_PMEM_TASK_LOG_REPLAY` v3: the same v3 as `recipe/pmem-source-image-20261106`, derived from
 `pmem-region-core-20261106/relocate.py` v2 with VERBATIM and MERGE rows added). TYPE rows repeat the region-core map and
 add `PmemTaskLog`, `PmemTaskReplay` and the two smoke mains. 8 FILE rows `body_match_renamed=TRUE`, 1 VERBATIM row. No

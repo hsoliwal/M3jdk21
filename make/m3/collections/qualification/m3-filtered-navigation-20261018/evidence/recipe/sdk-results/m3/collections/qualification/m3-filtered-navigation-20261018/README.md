@@ -27,7 +27,7 @@ The unchanged ordinary read trace excludes the two repaired paths: comparator-ba
 From the repository root with Java 21, Python 3 and Maven:
 
 ```sh
-Q=m3/collections/qualification/m3-filtered-navigation-20261018
+Q=make/m3/collections/qualification/m3-filtered-navigation-20261018
 mvn -B -ntp -f "$Q/recipe/pom.xml" \
   -Dm3.dataset=filtered-navigation-20261018 \
   -Drecipe.owner.root="$PWD/$Q/recipe/sdk-owner" -Pcontract verify
@@ -41,9 +41,9 @@ The existing shared task requires five real OpenRewrite SDK tests, eight input-s
 On Linux with Java 21 in `JAVA_HOME`, GCC, Python 3 and Maven:
 
 ```sh
-python3 m3/collections/qualification/m3-filtered-navigation-20261018/runtime/verify.py
+python3 make/m3/collections/qualification/m3-filtered-navigation-20261018/runtime/verify.py
 ```
 
 The focused runtime POM compiles every current collection production Java source and the declared 61-source test closure with warnings as errors. It uses the genuine public JUnit 5.10.2 artifact explicitly for this isolated proof. Separate fresh Java-only and actual JNI runs execute the JUnit closure, existing array/offset/mask tests, explicit native-required checks, missing-library refusal and the 65,536-layer small-stack wrapper regression. The script compiles the actual three C source files with C17 warnings as errors and runs Java with `-Xcheck:jni`; inputs are fingerprinted and checked for concurrent change.
 
-This focused POM does not replace the owning collection POM or its source-qualified JUnit coordinate. The original owning Maven gate remains in the existing workflow and must pass before promotion. Its prerequisite builds the genuine checked-in JUnit source closure with `mvn -f m3/vendor/third_party/pom.xml -pl junit-jupiter-5.10.2,junit-platform-launcher-1.10.2 -am -DskipTests install`, following `m3/docs/a3-vendored-build-prerequisite-20261015.md`; it does not relabel public binaries as source-derived artifacts. Full JDK builds, JTreg, non-Linux native platforms, specialized deep sorted membership/range construction and performance acceptance remain separate gates. No throughput or allocation benchmark improvement is claimed. The source inventory marks unreviewed operations as pending; these repairs do not advance the global String, arrays, collections, AST receiving order.
+This focused POM does not replace the owning collection POM or its source-qualified JUnit coordinate. The original owning Maven gate remains in the existing workflow and must pass before promotion. Its prerequisite builds the genuine checked-in JUnit source closure with `mvn -f m3/vendor/third_party/pom.xml -pl junit-jupiter-5.10.2,junit-platform-launcher-1.10.2 -am -DskipTests install`, following `doc/m3/a3-vendored-build-prerequisite-20261015.md`; it does not relabel public binaries as source-derived artifacts. Full JDK builds, JTreg, non-Linux native platforms, specialized deep sorted membership/range construction and performance acceptance remain separate gates. No throughput or allocation benchmark improvement is claimed. The source inventory marks unreviewed operations as pending; these repairs do not advance the global String, arrays, collections, AST receiving order.

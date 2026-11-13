@@ -18,7 +18,7 @@ downstream_receiver_pr	413
 target_repo	hsoliwal/M3jdk21
 target_base_branch	m3/string-ledger-20261008
 target_base	b82e7ffdb8d8e92fb253f2650a47f843b76cc7bc
-target_path	m3/runtime-integration/check-m3string-invariants.py
+target_path	make/m3/runtime-integration/check-m3string-invariants.py
 preimage_sha256	dbf25f26bbf37bb510f9ed791a337011ce651ae6b351d677c0425cad4d3ccde6
 postimage_sha256	416c95426c08b272e3a12f883fefc78edda71f4c3bc32a306c719bd5ab2b1403
 application_kind	KERNEL_REPLAY

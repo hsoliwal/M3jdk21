@@ -6,7 +6,7 @@
     {
       "commit": "976bb5c6c58439a772124d62e1c7103d3b8428c1",
       "git_blob": "907f176d32b55d78f13e3756a407f6877f25ca7d",
-      "path": "m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "path": "make/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "repository": "hsoliwal/M3jdk21",
       "sha256": "9dc65793cb1f4fb20866f99f4e5d0043d54734aa03cf0fe297c0cadbba2d1c37"
     },

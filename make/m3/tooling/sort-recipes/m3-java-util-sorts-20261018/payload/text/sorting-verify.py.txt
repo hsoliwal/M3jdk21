@@ -47,7 +47,7 @@ def main():
     args = parser.parse_args()
     root = args.root.resolve()
     crate = (args.recipe_crate or
-             root / "m3/tooling/sort-recipes/m3-java-util-sorts-20261018").resolve()
+             root / "make/m3/tooling/sort-recipes/m3-java-util-sorts-20261018").resolve()
     build = (args.build_dir or root / "build/m3-sorting-qualification").resolve()
     build.mkdir(parents=True, exist_ok=True)
     java_home = args.java_home or (Path(os.environ["JAVA_HOME"]) if "JAVA_HOME" in os.environ else None)

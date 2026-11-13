@@ -16,7 +16,7 @@
   "canonical_recipe": "com.synexia.rewrite.M3JacksonJmodFullRecipe",
   "canonical_recipe_crate": "synexia-openrewrite-recipes/crates/m3-jackson-jmod/pom.xml",
   "canonical_recipe_packet": "m3-jackson-jmod-full-20261018",
-  "target_owner": "m3/tooling/module-packs/jackson",
+  "target_owner": "make/m3/tooling/module-packs/jackson",
   "mappings": [
     {
       "source": "com.fasterxml.jackson.databind.ObjectMapper 2.19.2",
@@ -55,7 +55,7 @@
       "target_rule": "Capture detached TypeShape metadata through the actual M3AST Unit.project API. Preserve the original top-level projection; add an explicit named-member projection, typed Class/TypeReference/JavaType preparation and declaration-kind/record-signature checks. The actual ObjectMapper owns annotation, visibility and generic binding decisions."
     }
   ],
-  "existing_mapping_preserved": "m3/docs/name-mapping.d/m3-shared-frontend.json",
+  "existing_mapping_preserved": "doc/m3/name-mapping.d/m3-shared-frontend.json",
   "pending_promotion_gates": [
     "Matched custom M3JDK build and UseM3StringStorage on/off execution",
     "Applicable full JDK/jtreg matrix",
@@ -63,6 +63,6 @@
   ],
   "runtime_dependency_on_synexia": false,
   "source_license_rule": "Preserve individual upstream licenses and source provenance; adapter Apache-2.0; existing JDK compiler sources retain their own OpenJDK license.",
-  "supersedes": "m3/docs/name-mapping.d/m3-jackson-jmod-20261018.json",
-  "upstream_qualification": "m3/tooling/module-packs/jackson/UPSTREAM_QUALIFICATION.md"
+  "supersedes": "doc/m3/name-mapping.d/m3-jackson-jmod-20261018.json",
+  "upstream_qualification": "make/m3/tooling/module-packs/jackson/UPSTREAM_QUALIFICATION.md"
 }

@@ -5,9 +5,9 @@
   "authority": {
     "repository": "hsoliwal/M3jdk21",
     "revision": "e2a8ae5602a2afa1201e5facb7c74b70bafc4506",
-    "policy": "m3/docs/m3jdk21-porting-invariant.md",
-    "mapping": "m3/docs/name-mapping.json",
-    "naming": "m3/collections/NAMING.md"
+    "policy": "doc/m3/m3jdk21-porting-invariant.md",
+    "mapping": "doc/m3/name-mapping.json",
+    "naming": "make/m3/collections/NAMING.md"
   },
   "namespaceMapping": {
     "source": "org.eclipse.collections",
@@ -26,11 +26,11 @@
   "arrayNativeStorage": "OPEN",
   "runtimeDependencyOnSynexia": false,
   "supersedes": {
-    "directory": "m3/collections/receiving/eclipse-indexed-rb-20261019",
+    "directory": "make/m3/collections/receiving/eclipse-indexed-rb-20261019",
     "handling": "Kept unchanged as history; its 12 in-scope source files are byte-equal to the received copies or differ only by the fork-first header lines"
   },
   "providers": {
-    "file": "m3/collections/qualification/five-provider-inventory-20261018/PROVIDERS.tsv",
+    "file": "make/m3/collections/qualification/five-provider-inventory-20261018/PROVIDERS.tsv",
     "rows": "EA, EI",
     "current": "PATTERN_ONLY (unchanged by this receive)",
     "decided": "Switch to received source in a follow-up leaf after A1"

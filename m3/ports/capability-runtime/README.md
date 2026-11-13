@@ -208,6 +208,6 @@ SourceArtifact/LfCount controls and original C11 JNI: 21,572 Java
 and 31,171 JNI differential assertions passed. This does not prove the
 full target module, JMOD/jlink, HotSpot/jtreg or setup-inclusive speedup.
 
-The 110-row CPUTOOLS category matrix under m3/tooling/jmod-recipes/
+The 110-row CPUTOOLS category matrix under make/m3/tooling/jmod-recipes/
 CPU_TOOL_CATEGORY_MATRIX_20261017.tsv retains 91 categories and 19 host
 commands; most entries are CATALOGUED_ONLY, not completed implementations.

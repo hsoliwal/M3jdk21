@@ -1,5 +1,5 @@
 path	kind	signature	reason
-m3/tooling/module-packs/parser/verification/one-pass-20261020/qualification/parser-final/compiler-source/com/sun/tools/javac/main/JavaCompiler.java	import	import com.sun.tools.javac.code.Lint.LintCategory	SKIPPED:QUALIFICATION_EVIDENCE_COPY
+make/m3/tooling/module-packs/parser/verification/one-pass-20261020/qualification/parser-final/compiler-source/com/sun/tools/javac/main/JavaCompiler.java	import	import com.sun.tools.javac.code.Lint.LintCategory	SKIPPED:QUALIFICATION_EVIDENCE_COPY
 src/java.desktop/share/classes/java/awt/AWTEventMulticaster.java	import	import java.util.EventListener	SKIPPED:OUT_OF_GATE_SCOPE
 src/java.desktop/share/classes/java/awt/font/ShapeGraphicAttribute.java	import	import java.awt.Shape	SKIPPED:OUT_OF_GATE_SCOPE
 src/java.desktop/share/classes/javax/swing/plaf/basic/BasicPanelUI.java	import	import java.awt.*	SKIPPED:OUT_OF_GATE_SCOPE

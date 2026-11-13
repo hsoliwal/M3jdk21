@@ -38,8 +38,8 @@ jobs:
           set -euo pipefail
           java -version 2>&1 | tee "$RUNNER_TEMP/kit/java-version.txt"
           mvn -version 2>&1 | tee "$RUNNER_TEMP/kit/maven-version.txt"
-          mvn -B -ntp -Dmaven.repo.local="$RUNNER_TEMP/maven-repo" -f "$REPO/m3/tooling/module-packs/pom.xml" clean test 2>&1 | tee "$RUNNER_TEMP/kit/test.log"
-          mvn -B -ntp -Dmaven.repo.local="$RUNNER_TEMP/maven-repo" -f "$REPO/m3/tooling/module-packs/pom.xml" verify 2>&1 | tee "$RUNNER_TEMP/kit/verify.log"
+          mvn -B -ntp -Dmaven.repo.local="$RUNNER_TEMP/maven-repo" -f "$REPO/make/m3/tooling/module-packs/pom.xml" clean test 2>&1 | tee "$RUNNER_TEMP/kit/test.log"
+          mvn -B -ntp -Dmaven.repo.local="$RUNNER_TEMP/maven-repo" -f "$REPO/make/m3/tooling/module-packs/pom.xml" verify 2>&1 | tee "$RUNNER_TEMP/kit/verify.log"
       - name: Preserve exact runtime and dependencies even on rejection
         if: always()
         run: |

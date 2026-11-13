@@ -58,7 +58,7 @@
       "recipe_revision": "8ac9585a24f3b69d89874f08e7ae4c9325c2f8cd"
     },
     {
-      "path": "m3/collections/verification/filtered-object-deques-20261017/M3FilteredDequeContract.java",
+      "path": "make/m3/collections/verification/filtered-object-deques-20261017/M3FilteredDequeContract.java",
       "before_sha256": "2fa63ed2810dc2106763813978f6c60b6a3501cf4215bc200435597b1675825b",
       "before_git_blob": "7a5a2fa42b749170b83fd348c564ed92dd5821bd",
       "after_sha256": "4028c558218cf2d51b6466ec138736d56010d625fec311995ea1297b9f642d83",
@@ -70,7 +70,7 @@
       "recipe_revision": "8ac9585a24f3b69d89874f08e7ae4c9325c2f8cd"
     },
     {
-      "path": "m3/collections/verification/filtered-object-deques-20261017/README.md",
+      "path": "make/m3/collections/verification/filtered-object-deques-20261017/README.md",
       "before_sha256": "a4ec33a16a9f253143f4c9961a1798d2f76afa5342dadaefc5a133e04377a352",
       "before_git_blob": "c1c9ce8a7facc8e4c38e8e89b9dda1a13271db5c",
       "after_sha256": "70362acaf70ae8613270c96bfe95273850a67a401a6cf143056aa2ca0407babd",
@@ -82,7 +82,7 @@
       "recipe_revision": "8ac9585a24f3b69d89874f08e7ae4c9325c2f8cd"
     },
     {
-      "path": "m3/collections/verification/filtered-object-deques-20261017/verify.sh",
+      "path": "make/m3/collections/verification/filtered-object-deques-20261017/verify.sh",
       "before_sha256": "51dc2182a53ed715b984ab2fb921918ae6af33d9825b8c247bcb81c9453afafd",
       "before_git_blob": "03fd1ad76562e3bf74ab33f0c4c323d600c7583b",
       "after_sha256": "d6d53844a86020b202d1ae6c9bac5fb7af4f150ef55ce36e34a2c4b258c38819",
@@ -94,7 +94,7 @@
       "recipe_revision": "8ac9585a24f3b69d89874f08e7ae4c9325c2f8cd"
     },
     {
-      "path": "m3/collections/verification/primitive-filtered-sequences-20261017/README.md",
+      "path": "make/m3/collections/verification/primitive-filtered-sequences-20261017/README.md",
       "before_sha256": "6dab0ccc70caff6d2c6a29ceb7d3580831554a1906fe9e8d8be13ee7c0d22dfb",
       "before_git_blob": "49027e72eff3edd1123c9ffbf481b048ec23ecd7",
       "after_sha256": "2f597ab9c5a88c2beb2d67a3f836df95918fcbdf88bcaaac0a6a8ed2a347ad49",
@@ -106,7 +106,7 @@
       "recipe_revision": "8ac9585a24f3b69d89874f08e7ae4c9325c2f8cd"
     },
     {
-      "path": "m3/collections/verification/primitive-filtered-sequences-20261017/verify.sh",
+      "path": "make/m3/collections/verification/primitive-filtered-sequences-20261017/verify.sh",
       "before_sha256": "e24482ee6d450b9304e877722bc1dbcd391d59f681412b346db4dd38b68ef97b",
       "before_git_blob": "9634762e92befd8001b9f1f10645d2f7c99bd6e0",
       "after_sha256": "9c5d03ed8f7f8404e17919b5c7f38dc9d90ba4eae1d4cc67d6d9f829842f6620",
@@ -118,7 +118,7 @@
       "recipe_revision": "8ac9585a24f3b69d89874f08e7ae4c9325c2f8cd"
     },
     {
-      "path": "m3/runtime-integration/check-m3string-invariants.py",
+      "path": "make/m3/runtime-integration/check-m3string-invariants.py",
       "before_sha256": "7c5304aa001eacb53dc47b6911c7536b295269a298cd5351e76d1be7a6d6728d",
       "before_git_blob": "bc60472ba646850f43064b915e2a5c8c8343db85",
       "after_sha256": "dd24419376a173bab1431eab0060f85e8da3752463c998f634a5b75564ee7bf9",
@@ -130,7 +130,7 @@
       "recipe_revision": "8ac9585a24f3b69d89874f08e7ae4c9325c2f8cd"
     },
     {
-      "path": "m3/runtime-integration/src/main/java/M3StringReplacementRoutes.java",
+      "path": "make/m3/runtime-integration/src/main/java/M3StringReplacementRoutes.java",
       "before_sha256": "098da0581258b416bbf7546aec9d0f3d2783643c69d122c460fa96d56b7e9475",
       "before_git_blob": "9ec4baae6b2697c0f3202ea7dccc6b4c68a9d8a0",
       "after_sha256": "c09f616c797c588755714919aba4739f6db336398ceb6005159ab64488de4b8b",
@@ -142,7 +142,7 @@
       "recipe_revision": "8ac9585a24f3b69d89874f08e7ae4c9325c2f8cd"
     },
     {
-      "path": "m3/runtime-integration/string-replacement-guard-custody.md",
+      "path": "make/m3/runtime-integration/string-replacement-guard-custody.md",
       "before_sha256": "3e7cfa57ba4b1f1b75b9e1cba103799fa37f62cb1bd90d1e22e769298ee6cacb",
       "before_git_blob": "86fd9c1a5616dedb15179616e2209ae5b935a8e0",
       "after_sha256": "0c8926cf7a491b5b5fe6d531ef5283f86a0021a3c3e3957a2c7a5fd33f937f0c",
@@ -154,7 +154,7 @@
       "recipe_revision": "8ac9585a24f3b69d89874f08e7ae4c9325c2f8cd"
     },
     {
-      "path": "m3/runtime-integration/string-replacement-target-sha256.txt",
+      "path": "make/m3/runtime-integration/string-replacement-target-sha256.txt",
       "before_sha256": "ABSENT",
       "before_git_blob": "ABSENT",
       "after_sha256": "8f1a1198fe25a21d6549c29561b3732b99197df2bd02ec389dda08e68dd66919",
@@ -166,7 +166,7 @@
       "recipe_revision": "8ac9585a24f3b69d89874f08e7ae4c9325c2f8cd"
     },
     {
-      "path": "m3/runtime-integration/test_string_cursor_and_ingress.py",
+      "path": "make/m3/runtime-integration/test_string_cursor_and_ingress.py",
       "before_sha256": "ABSENT",
       "before_git_blob": "ABSENT",
       "after_sha256": "fac32600e25804c951d491355b993e760959b89be0bab14c1ae236509c78397b",
@@ -178,7 +178,7 @@
       "recipe_revision": "8ac9585a24f3b69d89874f08e7ae4c9325c2f8cd"
     },
     {
-      "path": "m3/runtime-integration/test_string_pool_precompute.py",
+      "path": "make/m3/runtime-integration/test_string_pool_precompute.py",
       "before_sha256": "897ea16019f76d48598391150542f32a391a7ba7f3a499c67e0880733f27bf84",
       "before_git_blob": "685fc23e35856a281f2790a3e9f35d34f066f86b",
       "after_sha256": "4def1edfa5504abe8ea91a9491a9fd6df681157ca64c7446ea001548aecea13a",
@@ -190,7 +190,7 @@
       "recipe_revision": "8ac9585a24f3b69d89874f08e7ae4c9325c2f8cd"
     },
     {
-      "path": "m3/runtime-integration/test_string_replacement_routes.py",
+      "path": "make/m3/runtime-integration/test_string_replacement_routes.py",
       "before_sha256": "1f4fa3977092afd5b44b2df231828497ed954bd3cc777c905550294b9bac7af3",
       "before_git_blob": "e2472ba96690cae46b930f081abdc8027c6bf4c7",
       "after_sha256": "9e454a13503c5f4f17830261bdf984e83b08d6b022b614eb0fc3cef77b289f79",
@@ -202,7 +202,7 @@
       "recipe_revision": "8ac9585a24f3b69d89874f08e7ae4c9325c2f8cd"
     },
     {
-      "path": "m3/runtime-integration/test_string_workflow_contract.py",
+      "path": "make/m3/runtime-integration/test_string_workflow_contract.py",
       "before_sha256": "ABSENT",
       "before_git_blob": "ABSENT",
       "after_sha256": "da234821bf87f89bc457ce373e68eb459575ab2809e7f59bdfffb25070192e3a",
@@ -334,7 +334,7 @@
       "recipe": "com.synexia.m3.MigrationVerificationOwnership20261112"
     },
     {
-      "path": "m3/runtime-integration/test_recipe_ownership.py",
+      "path": "make/m3/runtime-integration/test_recipe_ownership.py",
       "before_sha256": "ABSENT",
       "before_git_blob": "ABSENT",
       "after_sha256": "4b3e7adebbfb5c28156060fd6be5f2948d4d3b8ea19153a8bd895fc791c64b22",
@@ -346,7 +346,7 @@
       "recipe": "com.synexia.m3.MigrationVerificationOwnership20261112"
     },
     {
-      "path": "m3/runtime-integration/verify-recipe-ownership.py",
+      "path": "make/m3/runtime-integration/verify-recipe-ownership.py",
       "before_sha256": "e4781b582fe82d2dbe53777fe53b91546495c3c71ba6ce4164ebbbd91fb6e29f",
       "before_git_blob": "b7728c70ea812904bb78ae9de5386d03a42cd5ce",
       "after_sha256": "1e692d8899d3859834799d0b24d102f81c87e4603d26f9c231df485611744cb0",
@@ -358,7 +358,7 @@
       "recipe": "com.synexia.m3.MigrationVerificationOwnership20261112"
     },
     {
-      "path": "m3/tooling/jdk-naming/NAMING_KEEP.tsv",
+      "path": "make/m3/tooling/jdk-naming/NAMING_KEEP.tsv",
       "before_sha256": "9f0a18e1d021a004b08b83b7cc14619a99f6da8fc3f399e6bd76c0f93265f721",
       "before_git_blob": "ba7b9b4162eff16289537fe65bb087609ef50929",
       "after_sha256": "be2c468a7579d05d46902fcfe1ecaf9314f8db4e2997600ce4ba52755520665d",
@@ -370,7 +370,7 @@
       "recipe": "com.synexia.m3.MigrationVerificationNaming20261112"
     },
     {
-      "path": "m3/docs/migration-mapping-lifecycle.md",
+      "path": "doc/m3/migration-mapping-lifecycle.md",
       "before_sha256": "dae93d5aaa1d404e94adb5d877a95249d90dbbcc14d72989d88ae45bd919bb57",
       "before_git_blob": "f3106dfb843d69f73386338b9993596920b65009",
       "after_sha256": "39ac5c99f3eff523229b28ea2028159ac56325d0b9b4e3e3a963a7e5f12946e7",
@@ -394,7 +394,7 @@
         "command": [
           "sha256sum",
           "-c",
-          "m3/runtime-integration/string-replacement-guard-sha256.txt"
+          "make/m3/runtime-integration/string-replacement-guard-sha256.txt"
         ],
         "exit_code": 0,
         "expected_hold": false,
@@ -409,7 +409,7 @@
           "sha256sum",
           "--strict",
           "-c",
-          "m3/runtime-integration/string-replacement-target-sha256.txt"
+          "make/m3/runtime-integration/string-replacement-target-sha256.txt"
         ],
         "exit_code": 0,
         "expected_hold": false,
@@ -422,7 +422,7 @@
         "name": "replacement-routes",
         "command": [
           "python3",
-          "m3/runtime-integration/test_string_replacement_routes.py"
+          "make/m3/runtime-integration/test_string_replacement_routes.py"
         ],
         "exit_code": 0,
         "expected_hold": false,
@@ -435,7 +435,7 @@
         "name": "pool-precompute",
         "command": [
           "python3",
-          "m3/runtime-integration/test_string_pool_precompute.py"
+          "make/m3/runtime-integration/test_string_pool_precompute.py"
         ],
         "exit_code": 0,
         "expected_hold": false,
@@ -448,7 +448,7 @@
         "name": "cursor-ingress",
         "command": [
           "python3",
-          "m3/runtime-integration/test_string_cursor_and_ingress.py"
+          "make/m3/runtime-integration/test_string_cursor_and_ingress.py"
         ],
         "exit_code": 0,
         "expected_hold": false,
@@ -461,7 +461,7 @@
         "name": "workflow-contract",
         "command": [
           "python3",
-          "m3/runtime-integration/test_string_workflow_contract.py"
+          "make/m3/runtime-integration/test_string_workflow_contract.py"
         ],
         "exit_code": 0,
         "expected_hold": false,
@@ -474,7 +474,7 @@
         "name": "string-source-invariants",
         "command": [
           "python3",
-          "m3/runtime-integration/check-m3string-invariants.py"
+          "make/m3/runtime-integration/check-m3string-invariants.py"
         ],
         "exit_code": 0,
         "expected_hold": false,
@@ -524,7 +524,7 @@
           "unittest",
           "discover",
           "-s",
-          "m3/runtime-integration",
+          "make/m3/runtime-integration",
           "-p",
           "test_recipe_ownership.py",
           "-v"
@@ -540,7 +540,7 @@
         "name": "ownership-gate",
         "command": [
           "python3",
-          "m3/runtime-integration/verify-recipe-ownership.py"
+          "make/m3/runtime-integration/verify-recipe-ownership.py"
         ],
         "exit_code": 1,
         "expected_hold": true,
@@ -558,7 +558,7 @@
         "name": "full-borrow-receiver",
         "command": [
           "python3",
-          "m3/compatibility/check_m3_full_borrow_receiver.py"
+          "make/m3/compatibility/check_m3_full_borrow_receiver.py"
         ],
         "exit_code": 0,
         "expected_hold": false,
@@ -571,7 +571,7 @@
         "name": "name-contract",
         "command": [
           "python3",
-          "m3/tooling/name-contract/check.py"
+          "make/m3/tooling/name-contract/check.py"
         ],
         "exit_code": 0,
         "expected_hold": false,
@@ -603,7 +603,7 @@
     "phase_advanced": false,
     "release_admission": false
   },
-  "prior_receipt": "m3/qualification/migration-verification-20261112/receipt.json",
+  "prior_receipt": "make/m3/qualification/migration-verification-20261112/receipt.json",
   "known_independent_gates": {
     "recipe_ownership": "HOLD_47_UNCLASSIFIED_2_STALE_RECORDS",
     "importer_source_tests": "49_PASS_1_LEGACY_SEED_SNAPSHOT_FAILURE",

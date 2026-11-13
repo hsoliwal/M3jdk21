@@ -529,10 +529,10 @@ turning it into a runtime dependency or an admission claim.
 | `M3RegexOracleHarness.java` | `7385c57458a7b3f01857bc94dcee2d19c0638e39` |
 
 Policy and lineage: [AGENTS](../../AGENTS.md),
-[porting invariant](../../m3/docs/m3jdk21-porting-invariant.md),
-[naming map](../../m3/docs/name-mapping.json),
-[full-family pin](../../m3/compatibility/m3-full-family-pin.tsv),
-[catalogue](../../m3/docs/m3-full-family-catalogue.json),
+[porting invariant](../m3/m3jdk21-porting-invariant.md),
+[naming map](../m3/name-mapping.json),
+[full-family pin](../../make/m3/compatibility/m3-full-family-pin.tsv),
+[catalogue](../m3/m3-full-family-catalogue.json),
 [current receiver snapshot](../../m3/m3-import/current-full-borrow/README.md),
 [regex/String provenance](../../m3/ports/precompute/REGEX_STRING_V2_PROVENANCE.tsv),
 [oracle provenance](../../m3/ports/precompute/REGEX_ORACLE_HARNESS_PROVENANCE.tsv).

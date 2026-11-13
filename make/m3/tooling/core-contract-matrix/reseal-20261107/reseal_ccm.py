@@ -1,6 +1,6 @@
 """reseal_ccm.py <source-root> <old CURRENT_INPUTS.json> <old qualify.py> <out-dir> <source-commit> : CORE_CONTRACT_RESEAL v1.
-Re-seals m3/tooling/core-contract-matrix to the current m3/core cohort:
-  - files: m3/build.sh, every *.java under m3/core/src and m3/core/test (qualify.py requires exactly that Java set),
+Re-seals make/m3/tooling/core-contract-matrix to the current m3/core cohort:
+  - files: make/m3/build.sh, every *.java under m3/core/src and m3/core/test (qualify.py requires exactly that Java set),
     and every non-Java input the old manifest pinned (the m3/lexicon data the tests read),
     each with bytes, sha256 and git blob id (qualify.identity);
   - programs: the programs build.sh selects, in its order (qualify.py's own regex);
@@ -29,7 +29,7 @@ old_order = [f["path"] for f in manifest["files"]
              if not f["path"].endswith(".java") or f["path"] in current_java]
 paths = old_order + sorted(current_java - set(old_order))
 manifest["files"] = [{"path": p, **{k: identity((src / p).read_bytes())[k] for k in ("gitBlob", "bytes", "sha256")}} for p in paths]
-build = (src / "m3/build.sh").read_text(encoding="utf-8")
+build = (src / "make/m3/build.sh").read_text(encoding="utf-8")
 selected = re.findall(r'-cp build/tests ([A-Za-z0-9_]+) \| tee "build/logs/([^"]+)\-\$mode\.log"', build)
 programs = [name for name, _ in selected]
 markers = {}

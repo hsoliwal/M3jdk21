@@ -15,7 +15,7 @@ import jdk.m3.collections.ProgressState;
  * default: a monitor meant for owner-side callers overrides the long methods.
  */
 //FLLDCIM: RELOCATE - donor blob 6d0b659af853 at commit 3385d79a2968 (repository, path, URL and digests: the SUPERSEDED row of m3/algorithms/recipe/families-20261106/RELOCATION_MAP.tsv); recipe m3/algorithms/recipe/families-20261106/relocate.py v1
-//FLLDCIM: UNIFY - adapter over jdk.m3.collections.ProgressMonitor (int work units widen to long); recipe m3/qualification/progress-monitor-unify-20261106/unify.py v1
+//FLLDCIM: UNIFY - adapter over jdk.m3.collections.ProgressMonitor (int work units widen to long); recipe make/m3/qualification/progress-monitor-unify-20261106/unify.py v1
 public interface ProgressMonitor extends jdk.m3.collections.ProgressMonitor {
     /** Unknown total work in the donor's int unit; the same value as the owner's {@code long UNKNOWN}. */
     int UNKNOWN = -1;

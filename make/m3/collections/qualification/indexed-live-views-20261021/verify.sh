@@ -2,8 +2,8 @@
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
 set -euo pipefail
-ROOT="$(cd "$(dirname "$0")/../../../.." && pwd)"
-Q="$ROOT/m3/collections/qualification/indexed-live-views-20261021"
+ROOT="$(cd "$(dirname "$0")/../../../../.." && pwd)"
+Q="$ROOT/make/m3/collections/qualification/indexed-live-views-20261021"
 MAIN="$ROOT/src/jdk.m3.collections/share/classes"
 TEST="$ROOT/test/jdk"
 OUTPUT="$(mktemp -d)"

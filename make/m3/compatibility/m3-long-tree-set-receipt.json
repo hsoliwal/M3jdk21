@@ -69,7 +69,7 @@
     "gitDiffCheck": "PASS_WINDOWS",
     "offlineCompatibilityCheckers": "PASS_WINDOWS check_synexia_m3_collection_port_recipe.py (log sha256 6f8c67f4a944b398db527863ca91c871c37d77641044f6da23ddf1eec758417f); check_synexia_m3_family_naming.py (log sha256 465cdd77f589f143a798264907efc1074dd06b005c7ec976f169b4a7f969e546)",
     "jdkBuildJtregRuntime": "PENDING_LINUX",
-    "ci": "PENDING_QUEUE; m3/collections/verify_donation.py line 99 refuses new m3/collections source until a successor installed-source packet is qualified: 'Java source set changed; qualify a successor packet'"
+    "ci": "PENDING_QUEUE; make/m3/collections/verify_donation.py line 99 refuses new m3/collections source until a successor installed-source packet is qualified: 'Java source set changed; qualify a successor packet'"
   },
   "semanticDecisions": [
     "the test postimage is the master revision from 50eca57f27a (blob c43f89052e14), which corrected three wrong expectations of the #1054 revision; the owner postimage is the #1054 owner (blob 310e7e1b6083); the recipe is a fixed point on master",

@@ -26,7 +26,7 @@
     "sha256": "5654b1c759aef03451f3b9c4b5f18acb919b5f920a530014065c9b88c916b75d"
   },
   "receiving_report": {
-    "path": "m3/evidence/cpu-tools-jmod-20261018/QUALIFICATION.md",
+    "path": "make/m3/evidence/cpu-tools-jmod-20261018/QUALIFICATION.md",
     "sha256": "60c0f41304ac080d43d4a6e3fea0f91c858fa24cda36c666723381ef744a2db9",
     "change": "Relative links relocated; canonical publication attribution added."
   },

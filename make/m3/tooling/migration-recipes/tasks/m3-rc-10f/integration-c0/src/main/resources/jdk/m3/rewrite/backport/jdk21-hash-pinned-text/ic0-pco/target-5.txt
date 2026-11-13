@@ -771,7 +771,7 @@ final class M3BackportPacketCollectionTest {
     }
 
     private Path copyCatalogue(String catalogue, String fixtureName) throws Exception {
-        // Maven runs this test from m3/tooling/backport-dag; no fallback or filesystem discovery.
+        // Maven runs this test from make/m3/tooling/backport-dag; no fallback or filesystem discovery.
         Path source = Path.of("../../backports/recipes").resolve(catalogue).normalize();
         Path destination = Files.createDirectory(temp.resolve(fixtureName));
         for (String name : List.of("packet.tsv", "atom-evidence.tsv", "collection-map.tsv", "collection.tsv")) {

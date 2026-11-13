@@ -15,7 +15,7 @@ throws are identical (the tails start after the last comparison of the pass). Th
 (m3_index_path_masks.c chunked result writes) is not applied here: that file is owned by the merge-loss case 05
 restore (selectLong / long_rows rewrite of the same select loop) and is recorded HOLD_CASE05 in DECISION.tsv.
 
-Derived from m3/collections/qualification/census-small-batch-20261106/apply.py v1 (anchored edits, every anchor
+Derived from make/m3/collections/qualification/census-small-batch-20261106/apply.py v1 (anchored edits, every anchor
 exactly once, pinned preimage blob, refuses drift, idempotent; --check writes nothing).
 
 usage: python -I apply.py [--root DIR] [--check]

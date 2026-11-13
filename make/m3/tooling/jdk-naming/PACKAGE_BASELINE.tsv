@@ -1,5 +1,5 @@
 ROOT	.m3/openrewrite-recipes	REAL
-ROOT	m3/evidence/arrays/qualification/empty-segments-20261017/recipe-custody/sdk-owner	COPY
+ROOT	make/m3/evidence/arrays/qualification/empty-segments-20261017/recipe-custody/sdk-owner	COPY
 ROOT	m3/ast	REAL
 ROOT	m3/ast/recipe-custody/hierarchy-encoding-20261018/qualified/ast-hierarchy-20261018/candidate/m3-indexstring	COPY
 ROOT	m3/ast/recipe-custody/hierarchy-encoding-20261018/qualified/ast-hierarchy-target-20261018/candidate/m3/ast	COPY
@@ -165,65 +165,65 @@ ROOT	m3/collections/interop	REAL
 ROOT	m3/collections/interop/qualification/m3-direct-spring-multivaluemap-20261017/recipe	COPY
 ROOT	m3/collections/interop/qualification/spring-case-sdk-20261018/engine	COPY
 ROOT	m3/collections/pcollections	REAL
-ROOT	m3/collections/qualification/array-defaults-20261021/evidence/sdk-results/array-defaults-map-20261021/m3/collections	COPY
-ROOT	m3/collections/qualification/array-map-fill-20261031	COPY
-ROOT	m3/collections/qualification/bimap-mainline-20261017/recipe	COPY
-ROOT	m3/collections/qualification/deque-zero-mask-20261018	COPY
-ROOT	m3/collections/qualification/five-library-prepared-rows-20261018/recipe	COPY
-ROOT	m3/collections/qualification/five-provider-count-recovery-20261018/recipe	COPY
-ROOT	m3/collections/qualification/jdk21-array-only-entry-facades-20261018/recipe	COPY
-ROOT	m3/collections/qualification/m3-arrayification-20261018/recipe	COPY
-ROOT	m3/collections/qualification/m3-commons-bag-20261018/recipe	COPY
-ROOT	m3/collections/qualification/m3-counted-sdk-20261017/recipe	COPY
-ROOT	m3/collections/qualification/m3-entry-facade-cache-20261018/recipe	COPY
-ROOT	m3/collections/qualification/m3-filtered-navigation-20261018/evidence/recipe/sdk-results/m3/collections	COPY
-ROOT	m3/collections/qualification/m3-filtered-navigation-20261018/recipe/sdk-owner	COPY
-ROOT	m3/collections/qualification/m3-five-fork-prepared-20261018/recipe	COPY
-ROOT	m3/collections/qualification/m3-five-library-occurrences-20261018/recipe	COPY
-ROOT	m3/collections/qualification/m3-five-provider-bimaps-20261017/recipe	COPY
-ROOT	m3/collections/qualification/m3-five-provider-bimaps-master-20261017/recipe	COPY
-ROOT	m3/collections/qualification/m3-five-provider-current-census-20261017/recipe	COPY
-ROOT	m3/collections/qualification/m3-generic-object-list-20261017/recipe	COPY
-ROOT	m3/collections/qualification/m3-guava-setmultimap-20261018/recipe	COPY
-ROOT	m3/collections/qualification/m3-int-array-index-20261018/recipe	COPY
-ROOT	m3/collections/qualification/m3-linked-list-live-mask-20261017/recipe	COPY
-ROOT	m3/collections/qualification/m3-long-bitmap-algebra-20261017/recipe	COPY
-ROOT	m3/collections/qualification/m3-long-bitmap-cache-20261017/recipe	COPY
-ROOT	m3/collections/qualification/m3-long-direct-address-kernel-20261017/recipe	COPY
-ROOT	m3/collections/qualification/m3-long-index-path-jni-20261018/recipe	COPY
-ROOT	m3/collections/qualification/m3-long-index-path-masks-20261018/recipe	COPY
-ROOT	m3/collections/qualification/m3-long-index-projection-20261017/recipe	COPY
-ROOT	m3/collections/qualification/m3-long-path-input-budget-20261018/recipe	COPY
-ROOT	m3/collections/qualification/m3-native-five-provider-core-20261018/recipe	COPY
-ROOT	m3/collections/qualification/m3-native-indexed-table-20261017/recipe-mirror	COPY
-ROOT	m3/collections/qualification/m3-sdk-families-20261017/recipe	COPY
-ROOT	m3/collections/qualification/m3-sdk-families-20261017/recipe-v3	COPY
-ROOT	m3/collections/qualification/m3-sdk-provider-names-20261017/recipe	COPY
-ROOT	m3/collections/qualification/m3-state-mask-arrays-20261017/recipe	COPY
-ROOT	m3/collections/qualification/mask-window-sparse-20261017/tooling/m3-openrewrite-recipes	COPY
-ROOT	m3/collections/qualification/master-landing-20261028/retained-variants/pr1328	COPY
-ROOT	m3/collections/qualification/master-landing-20261028/retained-variants/pr1330	COPY
-ROOT	m3/collections/qualification/master-landing-20261028/retained-variants/pr1335	COPY
-ROOT	m3/collections/qualification/master-landing-20261028/retained-variants/pr1335/qualification/jdk21-array-only-entry-facades-20261018/recipe	COPY
-ROOT	m3/collections/qualification/master-landing-20261028/retained-variants/pr1342	COPY
-ROOT	m3/collections/qualification/master-landing-20261028/retained-variants/pr1435	COPY
-ROOT	m3/collections/qualification/master-landing-20261028/retained-variants/pr1451	COPY
-ROOT	m3/collections/qualification/sdk-bulk-capture-20261017/recipe	COPY
-ROOT	m3/collections/qualification/sdk-five-owner-repair-20261018/recipe	COPY
-ROOT	m3/collections/qualification/sdk-mask-bounded-current-20261017/recipe	COPY
-ROOT	m3/collections/qualification/view-order-sdk-20261020	COPY
-ROOT	m3/collections/receiving/eclipse-indexed-rb-20261019/source/eclipse-collections	COPY
-ROOT	m3/collections/recipe/order-statistics	COPY
-ROOT	m3/collections/recipes/mask-window-core-20261018	COPY
-ROOT	m3/collections/recipes/native-index-range-20261017	COPY
-ROOT	m3/collections/recipes/native-index-range-20261017/before/m3/collections	COPY
-ROOT	m3/collections/recipes/native-index-range-20261017/src/main/resources/jdk/internal/m3/rewrite/native-index-range-20261017/templates/m3/collections	COPY
-ROOT	m3/collections/recipes/sdk-family-names-20261017	COPY
-ROOT	m3/collections/recipes/sdk-family-names-20261017/before/m3/collections/interop	COPY
-ROOT	m3/collections/recipes/sdk-family-names-20261017/src/main/resources/jdk/internal/m3/rewrite/sdk-family-names-20261017/templates/m3/collections/interop	COPY
-ROOT	m3/collections/recipes/sdk-guava-bimap-20261017	COPY
-ROOT	m3/collections/recipes/sdk-guava-bimap-20261017/before/m3/collections/interop	COPY
-ROOT	m3/collections/runtime	LOOSE
+ROOT	make/m3/collections/qualification/array-defaults-20261021/evidence/sdk-results/array-defaults-map-20261021/m3/collections	COPY
+ROOT	make/m3/collections/qualification/array-map-fill-20261031	COPY
+ROOT	make/m3/collections/qualification/bimap-mainline-20261017/recipe	COPY
+ROOT	make/m3/collections/qualification/deque-zero-mask-20261018	COPY
+ROOT	make/m3/collections/qualification/five-library-prepared-rows-20261018/recipe	COPY
+ROOT	make/m3/collections/qualification/five-provider-count-recovery-20261018/recipe	COPY
+ROOT	make/m3/collections/qualification/jdk21-array-only-entry-facades-20261018/recipe	COPY
+ROOT	make/m3/collections/qualification/m3-arrayification-20261018/recipe	COPY
+ROOT	make/m3/collections/qualification/m3-commons-bag-20261018/recipe	COPY
+ROOT	make/m3/collections/qualification/m3-counted-sdk-20261017/recipe	COPY
+ROOT	make/m3/collections/qualification/m3-entry-facade-cache-20261018/recipe	COPY
+ROOT	make/m3/collections/qualification/m3-filtered-navigation-20261018/evidence/recipe/sdk-results/m3/collections	COPY
+ROOT	make/m3/collections/qualification/m3-filtered-navigation-20261018/recipe/sdk-owner	COPY
+ROOT	make/m3/collections/qualification/m3-five-fork-prepared-20261018/recipe	COPY
+ROOT	make/m3/collections/qualification/m3-five-library-occurrences-20261018/recipe	COPY
+ROOT	make/m3/collections/qualification/m3-five-provider-bimaps-20261017/recipe	COPY
+ROOT	make/m3/collections/qualification/m3-five-provider-bimaps-master-20261017/recipe	COPY
+ROOT	make/m3/collections/qualification/m3-five-provider-current-census-20261017/recipe	COPY
+ROOT	make/m3/collections/qualification/m3-generic-object-list-20261017/recipe	COPY
+ROOT	make/m3/collections/qualification/m3-guava-setmultimap-20261018/recipe	COPY
+ROOT	make/m3/collections/qualification/m3-int-array-index-20261018/recipe	COPY
+ROOT	make/m3/collections/qualification/m3-linked-list-live-mask-20261017/recipe	COPY
+ROOT	make/m3/collections/qualification/m3-long-bitmap-algebra-20261017/recipe	COPY
+ROOT	make/m3/collections/qualification/m3-long-bitmap-cache-20261017/recipe	COPY
+ROOT	make/m3/collections/qualification/m3-long-direct-address-kernel-20261017/recipe	COPY
+ROOT	make/m3/collections/qualification/m3-long-index-path-jni-20261018/recipe	COPY
+ROOT	make/m3/collections/qualification/m3-long-index-path-masks-20261018/recipe	COPY
+ROOT	make/m3/collections/qualification/m3-long-index-projection-20261017/recipe	COPY
+ROOT	make/m3/collections/qualification/m3-long-path-input-budget-20261018/recipe	COPY
+ROOT	make/m3/collections/qualification/m3-native-five-provider-core-20261018/recipe	COPY
+ROOT	make/m3/collections/qualification/m3-native-indexed-table-20261017/recipe-mirror	COPY
+ROOT	make/m3/collections/qualification/m3-sdk-families-20261017/recipe	COPY
+ROOT	make/m3/collections/qualification/m3-sdk-families-20261017/recipe-v3	COPY
+ROOT	make/m3/collections/qualification/m3-sdk-provider-names-20261017/recipe	COPY
+ROOT	make/m3/collections/qualification/m3-state-mask-arrays-20261017/recipe	COPY
+ROOT	make/m3/collections/qualification/mask-window-sparse-20261017/tooling/m3-openrewrite-recipes	COPY
+ROOT	make/m3/collections/qualification/master-landing-20261028/retained-variants/pr1328	COPY
+ROOT	make/m3/collections/qualification/master-landing-20261028/retained-variants/pr1330	COPY
+ROOT	make/m3/collections/qualification/master-landing-20261028/retained-variants/pr1335	COPY
+ROOT	make/m3/collections/qualification/master-landing-20261028/retained-variants/pr1335/qualification/jdk21-array-only-entry-facades-20261018/recipe	COPY
+ROOT	make/m3/collections/qualification/master-landing-20261028/retained-variants/pr1342	COPY
+ROOT	make/m3/collections/qualification/master-landing-20261028/retained-variants/pr1435	COPY
+ROOT	make/m3/collections/qualification/master-landing-20261028/retained-variants/pr1451	COPY
+ROOT	make/m3/collections/qualification/sdk-bulk-capture-20261017/recipe	COPY
+ROOT	make/m3/collections/qualification/sdk-five-owner-repair-20261018/recipe	COPY
+ROOT	make/m3/collections/qualification/sdk-mask-bounded-current-20261017/recipe	COPY
+ROOT	make/m3/collections/qualification/view-order-sdk-20261020	COPY
+ROOT	make/m3/collections/receiving/eclipse-indexed-rb-20261019/source/eclipse-collections	COPY
+ROOT	make/m3/collections/recipe/order-statistics	COPY
+ROOT	make/m3/collections/recipes/mask-window-core-20261018	COPY
+ROOT	make/m3/collections/recipes/native-index-range-20261017	COPY
+ROOT	make/m3/collections/recipes/native-index-range-20261017/before/m3/collections	COPY
+ROOT	make/m3/collections/recipes/native-index-range-20261017/src/main/resources/jdk/internal/m3/rewrite/native-index-range-20261017/templates/m3/collections	COPY
+ROOT	make/m3/collections/recipes/sdk-family-names-20261017	COPY
+ROOT	make/m3/collections/recipes/sdk-family-names-20261017/before/m3/collections/interop	COPY
+ROOT	make/m3/collections/recipes/sdk-family-names-20261017/src/main/resources/jdk/internal/m3/rewrite/sdk-family-names-20261017/templates/m3/collections/interop	COPY
+ROOT	make/m3/collections/recipes/sdk-guava-bimap-20261017	COPY
+ROOT	make/m3/collections/recipes/sdk-guava-bimap-20261017/before/m3/collections/interop	COPY
+ROOT	make/m3/collections/runtime	LOOSE
 ROOT	m3/collections/signal-codegen	REAL
 ROOT	m3/compiler	REAL
 ROOT	m3/compiler/jdk-standard	REAL
@@ -231,9 +231,9 @@ ROOT	m3/compiler/source-signals	REAL
 ROOT	m3/eclipse/core-runtime	REAL
 ROOT	m3/eclipse/filesystem	REAL
 ROOT	m3/eclipse/framework	REAL
-ROOT	m3/eclipse/jdt/receiving/array-nodelist-20261019	COPY
-ROOT	m3/eclipse/jdt/receiving/array-nodelist-20261019/proof	COPY
-ROOT	m3/eclipse/jdt/receiving/array-nodelist-20261019/recipe-custody/m3-openrewrite-recipes	COPY
+ROOT	make/m3/eclipse/jdt/receiving/array-nodelist-20261019	COPY
+ROOT	make/m3/eclipse/jdt/receiving/array-nodelist-20261019/proof	COPY
+ROOT	make/m3/eclipse/jdt/receiving/array-nodelist-20261019/recipe-custody/m3-openrewrite-recipes	COPY
 ROOT	m3/eclipse/optional-jmod	REAL
 ROOT	m3/file	REAL
 ROOT	m3/fs	REAL
@@ -247,8 +247,8 @@ ROOT	m3/m3-import	REAL
 ROOT	m3/m3-import/intakes/regex-precompute-v7-20261007/evidence/importer-replay-v3/drift-receiver/m3/m3-import	COPY
 ROOT	m3/m3-import/intakes/regex-precompute-v7-20261007/evidence/importer-replay-v3/receiver/m3/m3-import	COPY
 ROOT	m3/m3-import/pure-int-recipe-custody	REAL
-ROOT	m3/migration/original-provider-20261017/sdk	REAL
-ROOT	m3/migration/rx7-codec-cap-20261018/sdk	REAL
+ROOT	make/m3/migration/original-provider-20261017/sdk	REAL
+ROOT	make/m3/migration/rx7-codec-cap-20261018/sdk	REAL
 ROOT	m3/mop	LOOSE
 ROOT	m3/native	REAL
 ROOT	m3/ports/capability-runtime	REAL
@@ -264,9 +264,9 @@ ROOT	m3/ports/regex-cursor	REAL
 ROOT	m3/ports/swing-viewport	REAL
 ROOT	m3/ports/tornadovm-bulk	REAL
 ROOT	m3/ports/vcpu	REAL
-ROOT	m3/qualification/java-base-doclint-20261018/canonical-owner	COPY
-ROOT	m3/qualification/java-base-sparse-mask-20261018/recipe	COPY
-ROOT	m3/qualification/loss-guard-restore-20261106/held/m3/collections	COPY
+ROOT	make/m3/qualification/java-base-doclint-20261018/canonical-owner	COPY
+ROOT	make/m3/qualification/java-base-sparse-mask-20261018/recipe	COPY
+ROOT	make/m3/qualification/loss-guard-restore-20261106/held/m3/collections	COPY
 ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1294/m3/collections	COPY
 ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1332/m3/collections	COPY
 ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1357/m3/collections	COPY
@@ -471,75 +471,75 @@ ROOT	m3/qualification/master-landing-20261028/retained-variants/pr2489/m3/collec
 ROOT	m3/qualification/master-landing-20261028/retained-variants/pr2489/m3/collections/implementations/apache-linked-map	COPY
 ROOT	m3/qualification/master-landing-20261028/retained-variants/pr2489/m3/collections/implementations/apache-lru-map	COPY
 ROOT	m3/qualification/master-landing-20261028/retained-variants/pr2489/m3/tooling/atom-census	COPY
-ROOT	m3/qualification/progress-scope-lint-20261018/canonical-owner	COPY
-ROOT	m3/qualification/retained-twins-core-lanes-20261106/held/m3/collections	COPY
-ROOT	m3/runtime-integration/qualification/bitlane-count-skip-20261019	COPY
-ROOT	m3/runtime-integration/regex-rope-affix-effects/recipe/sdk-owner	COPY
-ROOT	m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/parser-source/rewrite-java-21	COPY
+ROOT	make/m3/qualification/progress-scope-lint-20261018/canonical-owner	COPY
+ROOT	make/m3/qualification/retained-twins-core-lanes-20261106/held/m3/collections	COPY
+ROOT	make/m3/runtime-integration/qualification/bitlane-count-skip-20261019	COPY
+ROOT	make/m3/runtime-integration/regex-rope-affix-effects/recipe/sdk-owner	COPY
+ROOT	make/m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/parser-source/rewrite-java-21	COPY
 ROOT	m3/search	REAL
-ROOT	m3/tooling	LOOSE
-ROOT	m3/tooling/a3	REAL
-ROOT	m3/tooling/atom-census	REAL
-ROOT	m3/tooling/atom-jit-gate	REAL
-ROOT	m3/tooling/backport-dag	REAL
-ROOT	m3/tooling/cds-training	LOOSE
-ROOT	m3/tooling/collection-dense-20261019/m3-openrewrite-recipes	LOOSE
-ROOT	m3/tooling/donor-catalogue	LOOSE
-ROOT	m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/src/main/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/before/m3-openrewrite-recipes	COPY
-ROOT	m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/src/main/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/inverse/out/m3-openrewrite-recipes	COPY
-ROOT	m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/src/main/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/out/m3-openrewrite-recipes	COPY
-ROOT	m3/tooling/hash-pinned-target-paths/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/before/m3/tooling/migration-recipes	COPY
-ROOT	m3/tooling/hash-pinned-target-paths/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/inverse/out/m3/tooling/migration-recipes	COPY
-ROOT	m3/tooling/hash-pinned-target-paths/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/out/m3/tooling/migration-recipes	COPY
-ROOT	m3/tooling/integrated-utilities/recipe	COPY
-ROOT	m3/tooling/jdk-naming/conformance	REAL
-ROOT	m3/tooling/jmod-recipes	REAL
-ROOT	m3/tooling/jmod-recipes/cpu-tools/model-quantize	REAL
-ROOT	m3/tooling/lazy-priority-frontier	LOOSE
-ROOT	m3/tooling/m3-image	REAL
-ROOT	m3/tooling/migration-recipes	REAL
-ROOT	m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/epoch-review-v01/input-epoch/guards/m3/tooling/migration-recipes	COPY
-ROOT	m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/receiving-input/guards/m3/tooling/migration-recipes	COPY
-ROOT	m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/receiving-input/guards/m3/tooling/migration-recipes	COPY
-ROOT	m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/src/test/resources/before/m3/tooling/a3	COPY
-ROOT	m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/src/test/resources/before/m3/tooling/backport-dag	COPY
-ROOT	m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/src/test/resources/before/m3/tooling/migration-recipes	COPY
-ROOT	m3/tooling/module-packs/build-support/graal-build-api/generated-sources	LOOSE
-ROOT	m3/tooling/module-packs/build-support/graal-build-api/upstream/native-build-tools/build-logic/utils-plugins	LOOSE
-ROOT	m3/tooling/module-packs/build-support/graal-build-api/upstream/native-build-tools/common/graalvm-reachability-metadata	LOOSE
-ROOT	m3/tooling/module-packs/build-support/graal-build-api/upstream/native-build-tools/common/utils	LOOSE
-ROOT	m3/tooling/module-packs/build-support/graal-build-api/upstream/openjson	REAL
-ROOT	m3/tooling/module-packs/build-support/gradle-provider	REAL
-ROOT	m3/tooling/module-packs/build-support/native-api/upstream/maven-native-api	REAL
-ROOT	m3/tooling/module-packs/build-support/native-api/upstream/maven-native-components/maven-native-generic-c	REAL
-ROOT	m3/tooling/module-packs/jackson	REAL
-ROOT	m3/tooling/module-packs/jackson/compiler	REAL
-ROOT	m3/tooling/module-packs/jackson/qualification/master-landing-20261028/retained-variants/pr1289	COPY
-ROOT	m3/tooling/module-packs/kernel	REAL
-ROOT	m3/tooling/module-packs/nlp-search/current-forks/fixtures/custom-spi/opennlp.fixture.probe	COPY
-ROOT	m3/tooling/module-packs/nlp-search/current-forks/fixtures/custom-spi/opennlp.fixture.provider	COPY
-ROOT	m3/tooling/module-packs/nlp-search/current-forks/fixtures/custom-spi/opennlp.fixture.spi	COPY
-ROOT	m3/tooling/module-packs/nlp-search/current-forks/fixtures/dependency-probe	COPY
-ROOT	m3/tooling/module-packs/nlp-search/current-forks/fixtures/spatial-core	COPY
-ROOT	m3/tooling/module-packs/nlp-search/current-forks/fixtures/spatial-features	COPY
-ROOT	m3/tooling/module-packs/nlp-search/frontend	REAL
-ROOT	m3/tooling/module-packs/nlp-search/m3-bridge	REAL
-ROOT	m3/tooling/module-packs/parser	REAL
-ROOT	m3/tooling/module-packs/parser-openrewrite	LOOSE
-ROOT	m3/tooling/module-packs/parser/qualification/owner-current-20261019/recipe-custody/m3-openrewrite-recipes	COPY
-ROOT	m3/tooling/module-packs/recipes	COPY
-ROOT	m3/tooling/netbeans-gap-boundary-20261019/m3-openrewrite-recipes	LOOSE
-ROOT	m3/tooling/recipe-agent-api	REAL
-ROOT	m3/tooling/region-foundation-repair	REAL
-ROOT	m3/tooling/shared-frontend/openrewrite	REAL
-ROOT	m3/tooling/shared-frontend/openrewrite-tool	REAL
-ROOT	m3/tooling/shared-frontend/recipe-custody/sdk-owner	COPY
-ROOT	m3/tooling/smart-build	REAL
-ROOT	m3/tooling/sort-recipes/m3-java-util-sorts-20261018	REAL
-ROOT	m3/tooling/text-metadata-current-owner/source/m3-mindex/runtime	LOOSE
-ROOT	m3/tooling/text-metadata-current-owner/source/m3-openrewrite-recipes	LOOSE
-ROOT	m3/tooling/text-metadata-current-owner/source/m3-openrewrite-recipes/tasks/recipe-qualification	COPY
-ROOT	m3/tooling/vendor-recipes	REAL
+ROOT	make/m3/tooling	LOOSE
+ROOT	make/m3/tooling/a3	REAL
+ROOT	make/m3/tooling/atom-census	REAL
+ROOT	make/m3/tooling/atom-jit-gate	REAL
+ROOT	make/m3/tooling/backport-dag	REAL
+ROOT	make/m3/tooling/cds-training	LOOSE
+ROOT	make/m3/tooling/collection-dense-20261019/m3-openrewrite-recipes	LOOSE
+ROOT	make/m3/tooling/donor-catalogue	LOOSE
+ROOT	make/m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/src/main/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/before/m3-openrewrite-recipes	COPY
+ROOT	make/m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/src/main/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/inverse/out/m3-openrewrite-recipes	COPY
+ROOT	make/m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/src/main/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/out/m3-openrewrite-recipes	COPY
+ROOT	make/m3/tooling/hash-pinned-target-paths/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/before/m3/tooling/migration-recipes	COPY
+ROOT	make/m3/tooling/hash-pinned-target-paths/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/inverse/out/m3/tooling/migration-recipes	COPY
+ROOT	make/m3/tooling/hash-pinned-target-paths/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/out/m3/tooling/migration-recipes	COPY
+ROOT	make/m3/tooling/integrated-utilities/recipe	COPY
+ROOT	make/m3/tooling/jdk-naming/conformance	REAL
+ROOT	make/m3/tooling/jmod-recipes	REAL
+ROOT	make/m3/tooling/jmod-recipes/cpu-tools/model-quantize	REAL
+ROOT	make/m3/tooling/lazy-priority-frontier	LOOSE
+ROOT	make/m3/tooling/m3-image	REAL
+ROOT	make/m3/tooling/migration-recipes	REAL
+ROOT	make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/epoch-review-v01/input-epoch/guards/m3/tooling/migration-recipes	COPY
+ROOT	make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/receiving-input/guards/m3/tooling/migration-recipes	COPY
+ROOT	make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/receiving-input/guards/m3/tooling/migration-recipes	COPY
+ROOT	make/m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/src/test/resources/before/m3/tooling/a3	COPY
+ROOT	make/m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/src/test/resources/before/m3/tooling/backport-dag	COPY
+ROOT	make/m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/src/test/resources/before/m3/tooling/migration-recipes	COPY
+ROOT	make/m3/tooling/module-packs/build-support/graal-build-api/generated-sources	LOOSE
+ROOT	make/m3/tooling/module-packs/build-support/graal-build-api/upstream/native-build-tools/build-logic/utils-plugins	LOOSE
+ROOT	make/m3/tooling/module-packs/build-support/graal-build-api/upstream/native-build-tools/common/graalvm-reachability-metadata	LOOSE
+ROOT	make/m3/tooling/module-packs/build-support/graal-build-api/upstream/native-build-tools/common/utils	LOOSE
+ROOT	make/m3/tooling/module-packs/build-support/graal-build-api/upstream/openjson	REAL
+ROOT	make/m3/tooling/module-packs/build-support/gradle-provider	REAL
+ROOT	make/m3/tooling/module-packs/build-support/native-api/upstream/maven-native-api	REAL
+ROOT	make/m3/tooling/module-packs/build-support/native-api/upstream/maven-native-components/maven-native-generic-c	REAL
+ROOT	make/m3/tooling/module-packs/jackson	REAL
+ROOT	make/m3/tooling/module-packs/jackson/compiler	REAL
+ROOT	make/m3/tooling/module-packs/jackson/qualification/master-landing-20261028/retained-variants/pr1289	COPY
+ROOT	make/m3/tooling/module-packs/kernel	REAL
+ROOT	make/m3/tooling/module-packs/nlp-search/current-forks/fixtures/custom-spi/opennlp.fixture.probe	COPY
+ROOT	make/m3/tooling/module-packs/nlp-search/current-forks/fixtures/custom-spi/opennlp.fixture.provider	COPY
+ROOT	make/m3/tooling/module-packs/nlp-search/current-forks/fixtures/custom-spi/opennlp.fixture.spi	COPY
+ROOT	make/m3/tooling/module-packs/nlp-search/current-forks/fixtures/dependency-probe	COPY
+ROOT	make/m3/tooling/module-packs/nlp-search/current-forks/fixtures/spatial-core	COPY
+ROOT	make/m3/tooling/module-packs/nlp-search/current-forks/fixtures/spatial-features	COPY
+ROOT	make/m3/tooling/module-packs/nlp-search/frontend	REAL
+ROOT	make/m3/tooling/module-packs/nlp-search/m3-bridge	REAL
+ROOT	make/m3/tooling/module-packs/parser	REAL
+ROOT	make/m3/tooling/module-packs/parser-openrewrite	LOOSE
+ROOT	make/m3/tooling/module-packs/parser/qualification/owner-current-20261019/recipe-custody/m3-openrewrite-recipes	COPY
+ROOT	make/m3/tooling/module-packs/recipes	COPY
+ROOT	make/m3/tooling/netbeans-gap-boundary-20261019/m3-openrewrite-recipes	LOOSE
+ROOT	make/m3/tooling/recipe-agent-api	REAL
+ROOT	make/m3/tooling/region-foundation-repair	REAL
+ROOT	make/m3/tooling/shared-frontend/openrewrite	REAL
+ROOT	make/m3/tooling/shared-frontend/openrewrite-tool	REAL
+ROOT	make/m3/tooling/shared-frontend/recipe-custody/sdk-owner	COPY
+ROOT	make/m3/tooling/smart-build	REAL
+ROOT	make/m3/tooling/sort-recipes/m3-java-util-sorts-20261018	REAL
+ROOT	make/m3/tooling/text-metadata-current-owner/source/m3-mindex/runtime	LOOSE
+ROOT	make/m3/tooling/text-metadata-current-owner/source/m3-openrewrite-recipes	LOOSE
+ROOT	make/m3/tooling/text-metadata-current-owner/source/m3-openrewrite-recipes/tasks/recipe-qualification	COPY
+ROOT	make/m3/tooling/vendor-recipes	REAL
 ROOT	m3/vendor/m3/m3-code-convergence	VENDOR
 ROOT	m3/vendor/m3/m3-indexstring	VENDOR
 ROOT	m3/vendor/m3/m3-mindex/compiler	VENDOR
@@ -1456,17 +1456,17 @@ PREFIXED	m3/collections/pcollections/src/test/java/jdk/m3/pcollections/M3PHashCo
 PREFIXED	m3/collections/pcollections/src/test/java/jdk/m3/pcollections/M3PResourceProbe.java
 PREFIXED	m3/collections/pcollections/src/test/java/jdk/m3/pcollections/M3PVectorContract.java
 PREFIXED	m3/collections/pcollections/src/test/java/jdk/m3/pcollections/M3PViewsContract.java
-PREFIXED	m3/collections/relocation/five-provider-20261018/src/test/java/jdk/internal/m3/M3FiveProviderInventoryProof.java
-PREFIXED	m3/collections/relocation/five-provider-20261018/src/test/java/jdk/internal/m3/M3FiveProviderInventoryTest.java
-PREFIXED	m3/collections/runtime/src/main/java/jdk/m3/collections/runtime/M3ArrayMap.java
-PREFIXED	m3/collections/runtime/src/test/java/jdk/m3/collections/runtime/M3ArrayMapSmokeTest.java
+PREFIXED	make/m3/collections/relocation/five-provider-20261018/src/test/java/jdk/internal/m3/M3FiveProviderInventoryProof.java
+PREFIXED	make/m3/collections/relocation/five-provider-20261018/src/test/java/jdk/internal/m3/M3FiveProviderInventoryTest.java
+PREFIXED	make/m3/collections/runtime/src/main/java/jdk/m3/collections/runtime/M3ArrayMap.java
+PREFIXED	make/m3/collections/runtime/src/test/java/jdk/m3/collections/runtime/M3ArrayMapSmokeTest.java
 PREFIXED	m3/collections/signal-codegen/src/main/java/jdk/m3/collections/sortable/M3CompilerFacts.java
 PREFIXED	m3/collections/signal-codegen/src/main/java/jdk/m3/collections/sortable/M3CompilerHintEmitter.java
 PREFIXED	m3/collections/signal-codegen/src/main/java/jdk/m3/collections/sortable/M3MachineHintRules.java
 PREFIXED	m3/collections/signal-codegen/src/test/java/jdk/m3/collections/sortable/M3CompilerFactsContract.java
 PREFIXED	m3/collections/signal-codegen/src/test/java/jdk/m3/collections/sortable/M3CompilerHintEmitterSelfTest.java
 PREFIXED	m3/collections/signal-codegen/src/test/java/jdk/m3/collections/sortable/M3MachineHintRulesContract.java
-PREFIXED	m3/collections/snapshot-recipe-20261017/src/test/java/jdk/internal/m3/rewrite/M3LongSortedSnapshotRecipeTest.java
+PREFIXED	make/m3/collections/snapshot-recipe-20261017/src/test/java/jdk/internal/m3/rewrite/M3LongSortedSnapshotRecipeTest.java
 PREFIXED	m3/collections/src/main/java/jdk/internal/m3/collections/M3AbstractAddressablePriorityQueue.java
 PREFIXED	m3/collections/src/main/java/jdk/internal/m3/collections/M3AbstractPrefixSet.java
 PREFIXED	m3/collections/src/main/java/jdk/internal/m3/collections/M3AbstractRankedSelection.java
@@ -3451,15 +3451,15 @@ PREFIXED	m3/m3-import/pure-int-recipe-custody/src/main/java/jdk/internal/m3/rewr
 PREFIXED	m3/m3-import/pure-int-recipe-custody/src/test/java/jdk/internal/m3/rewrite/M3CanonicalScopeCustodyTest.java
 PREFIXED	m3/m3-import/pure-int-recipe-custody/src/test/java/jdk/internal/m3/rewrite/M3Jdk21A3SourceSealedRecipeTest.java
 PREFIXED	m3/m3-import/pure-int-recipe-custody/src/test/java/jdk/internal/m3/rewrite/M3PureIntCustodyTest.java
-PREFIXED	m3/migration/original-provider-20261017/sdk/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java
-PREFIXED	m3/migration/original-provider-20261017/sdk/src/test/java/jdk/m3/rewrite/backport/M3OriginalCliProviderRecipeTest.java
-PREFIXED	m3/migration/rx7-codec-cap-20261018/sdk/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java
-PREFIXED	m3/migration/rx7-codec-cap-20261018/sdk/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java
-PREFIXED	m3/migration/rx7-codec-cap-20261018/sdk/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java
-PREFIXED	m3/migration/rx7-codec-cap-20261018/sdk/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java
-PREFIXED	m3/migration/rx7-codec-cap-20261018/sdk/src/test/java/jdk/internal/m3/rewrite/M3RX7CodecCapRecipeTest.java
-PREFIXED	m3/migration/rx7-codec-cap-20261018/sdk/src/test/java/jdk/internal/m3/rewrite/M3StringConcatTypedCompileQualification.java
-PREFIXED	m3/migration/rx7-codec-cap-20261018/sdk/src/test/java/jdk/internal/m3/rewrite/M3StringConcatTypedCompiler.java
+PREFIXED	make/m3/migration/original-provider-20261017/sdk/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java
+PREFIXED	make/m3/migration/original-provider-20261017/sdk/src/test/java/jdk/m3/rewrite/backport/M3OriginalCliProviderRecipeTest.java
+PREFIXED	make/m3/migration/rx7-codec-cap-20261018/sdk/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java
+PREFIXED	make/m3/migration/rx7-codec-cap-20261018/sdk/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java
+PREFIXED	make/m3/migration/rx7-codec-cap-20261018/sdk/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java
+PREFIXED	make/m3/migration/rx7-codec-cap-20261018/sdk/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java
+PREFIXED	make/m3/migration/rx7-codec-cap-20261018/sdk/src/test/java/jdk/internal/m3/rewrite/M3RX7CodecCapRecipeTest.java
+PREFIXED	make/m3/migration/rx7-codec-cap-20261018/sdk/src/test/java/jdk/internal/m3/rewrite/M3StringConcatTypedCompileQualification.java
+PREFIXED	make/m3/migration/rx7-codec-cap-20261018/sdk/src/test/java/jdk/internal/m3/rewrite/M3StringConcatTypedCompiler.java
 PREFIXED	m3/mop/src/main/java/jdk/m3/mop/M3RecipeMemory.java
 PREFIXED	m3/mop/src/test/java/jdk/m3/mop/M3RecipeMemoryAdmissionContract.java
 PREFIXED	m3/mop/src/test/java/jdk/m3/mop/M3RecipeMemoryContract.java
@@ -3970,443 +3970,443 @@ PREFIXED	m3/ports/swing-viewport/src/test/java/jdk/m3/swing/web/model/M3Segments
 PREFIXED	m3/ports/swing-viewport/src/test/java/jdk/m3/swing/web/model/M3TokenChecks.java
 PREFIXED	m3/ports/swing-viewport/src/test/java/jdk/m3/swing/web/model/M3TokenModesTest.java
 PREFIXED	m3/ports/swing-viewport/src/test/java/jdk/m3/swing/web/model/M3WebChecks.java
-PREFIXED	m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/test/java/jdk/internal/m3/rewrite/M3BackportAppliedOwnerCustodyRecipeTest.java
-PREFIXED	m3/tooling/backport-contract-current-owner/sdk/src/test/java/jdk/internal/m3/rewrite/M3BackportContractCurrentOwnerRecipeTest.java
-PREFIXED	m3/tooling/backport-wave-current-output/sdk/src/test/java/jdk/internal/m3/rewrite/M3BackportWaveCurrentOutputRecipeTest.java
-PREFIXED	m3/tooling/charcopy-current-successor/sdk/src/test/java/jdk/internal/m3/rewrite/M3CharcopyCurrentSuccessorRecipeTest.java
-PREFIXED	m3/tooling/collection-dense-20261019/m3-openrewrite-recipes/recipe-crates/m3jdk-collection-dense-20261019/src/test/java/jdk/internal/m3/rewrite/M3CollectionDenseRecipeTest.java
-PREFIXED	m3/tooling/collection-dense-20261019/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java
-PREFIXED	m3/tooling/collection-dense-20261019/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java
-PREFIXED	m3/tooling/collection-dense-20261019/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java
-PREFIXED	m3/tooling/collection-dense-20261019/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java
-PREFIXED	m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/test/java/jdk/internal/m3/rewrite/M3ReleaseJepManifestOrderRecipeTest.java
-PREFIXED	m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/src/test/java/jdk/internal/m3/rewrite/M3CanonicalScopeBoundaryRecipeTest.java
-PREFIXED	m3/tooling/hash-pinned-target-paths/sdk/src/test/java/jdk/internal/m3/rewrite/M3HashPinnedTargetPathsCompatRecipeTest.java
-PREFIXED	m3/tooling/jmod-recipes/quantize-recipe-20261017/src/test/java/jdk/internal/m3/rewrite/M3CpuInt8Receiver20261017RecipeTest.java
-PREFIXED	m3/tooling/jmod-recipes/src/main/java/jdk/m3/rewrite/jmod/M3ModuleDescriptorApply.java
-PREFIXED	m3/tooling/jmod-recipes/src/main/java/jdk/m3/rewrite/jmod/M3ModuleDescriptorRecipe.java
-PREFIXED	m3/tooling/jmod-recipes/src/test/java/jdk/m3/rewrite/jmod/M3ModuleDescriptorRecipeTest.java
-PREFIXED	m3/tooling/joined-range-directory/fresh-owned/sdk/src/test/java/jdk/internal/m3/rewrite/M3JoinedRangeDirectoryRecipeTest.java
-PREFIXED	m3/tooling/joined-range-directory/sdk/src/test/java/jdk/internal/m3/rewrite/M3JoinedRangeDirectoryRecipeTest.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ArchiveIndex.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3Arguments.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3BackendKind.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3BuildOptions.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ClassFileParser.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ClassInfo.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ClassPathScanner.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ClassRole.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3DeterministicJar.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3FeatureKind.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3Files.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3Hashing.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ImageBackend.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ImageBuildResult.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ImageBuilder.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ImageManifest.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ImagePlan.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ImagePlanner.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ImageTool.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ImageVerifier.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3IncrementalStore.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3JavaReachabilityKernel.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3Jdk21ShiftedBackend.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3JdkTools.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3JfrProfileReader.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3JniReachabilityKernel.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3Mode.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ModuleResolver.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3Names.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3NativeImageBackend.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3PlanIO.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3Process.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3Profile.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ProfileIO.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ReachabilityAnalyzer.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ReachabilityGraph.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ReachabilityKernel.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ReachabilityKernels.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3Trainer.java
-PREFIXED	m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3TrainingManifest.java
-PREFIXED	m3/tooling/m3-image/src/test/java/jdk/m3/tooling/image/M3ImagePipelineTest.java
-PREFIXED	m3/tooling/m3-image/src/test/java/jdk/m3/tooling/image/M3ImageSelfTest.java
-PREFIXED	m3/tooling/m3-image/src/test/java/jdk/m3/tooling/image/M3ReachabilityKernelSelfTest.java
-PREFIXED	m3/tooling/m3-image/src/test/java/jdk/m3/tooling/image/M3ReachabilityKernelTest.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HierarchicalDocumentation.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HierarchicalDocumentationRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3MIndexJoinedCharsViewRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3SegmentedLaneNativeRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/semantic/M3SemanticHashRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/semantic/M3SemanticHashTable.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/semantic/M3SemanticHasher.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceCatalog.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/a3/M3A3AlgorithmCatalogueRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/a3/M3A3MasteryV6Recipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/a3/M3A3SerialFileWorkRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3BackportExecutionWaveReceiverRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3BulkExecutorGateRepairRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3BulkExecutorNameMappingRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3BulkExecutorPortRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3BulkFreezeSourceBootstrapRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3BulkInputBindingReceiverRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3BulkLiveRegistrationRecoveryRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3BulkOutputIsolationRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3BulkOutputMetadataFastPathRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3BulkRegistrationCiBootstrapRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3BulkRegistrationFreezeReceiverRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3BulkSchedulerProviderRecoveryRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3BulkSchedulerRecoveryNameMappingRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3BulkSchedulerRecoveryWorkflowRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3BulkScopeRegistryRecoveryReceiverRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3CompileTimeRegexPrecomputeRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3FileByteEventFactRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3HandoffGuardRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8284315BackportRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8284315FullBackportRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8284315TestExpectationsRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8347112BackportRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8357439JcmdCompletionBackportRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8359706BackportRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8364182BackportRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8367584JfrOptionsHelpBackportRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8368692PasswordSystemInBackportRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8374808BackportRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep404EphemeralProofReceiverRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep458BackportRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep458ProofRefreshRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep474ProofRefreshRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep475InventoryReceiverRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep485StreamGatherersBackportRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep496MlKemBackportRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep496MlKemInventoryRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep496SharedOwnerSplitRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep497MlDsaBackportRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep497MlDsaInventoryRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep497SharedOwnerSplitRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep510KdfBackportRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep510KdfCandidateRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep510KdfSecurityTestsRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep523BackportRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3JepResidueProofGateReceiverRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3JniSaM3FieldRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3MopStreamTraversalRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3ParallelBulkBridgeNameMappingRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3ParallelBulkBridgeReceiverRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3ParallelBulkCompilerRepairRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3PureIntPublishedDepsReceiverRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3RecipeMemoryLedger.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3RegexStringPrecomputeSupersetRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3ReleaseJepAuthorityRepairRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3ScopeRegistryApiRepairRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3SourceLauncherClosureRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3StringLeafCursorConvergenceRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3StringTokenSequenceRegexRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3TornadoBulkAdapterMappingRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3TornadoBulkAdapterPortRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3TornadoBulkCompilerRepairReceiverRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3TornadoBulkGeometryRepairReceiverRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3TornadoProviderUpgradeReceiverRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3VerbatimJavaPairRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3XmxReceiverRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/m3/M3ImportInventoryRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3ContractMode.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3EditScope.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3RecipeScopePolicy.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3RecipeScopeRegistry.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3ScopeInference.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/semantic/M3SemanticHashRecipe.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/semantic/M3SemanticHashTable.java
-PREFIXED	m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/semantic/M3SemanticHasher.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3DocumentJavadocContractRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3HierarchicalDocumentationRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3HierarchicalDocumentationSelfTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3IndexPathRankRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3MIndexJniNewStringAdmissionRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3MIndexJoinedCharsViewRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3MIndexStringBulkCharBoundaryRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3NativeRecipePathAdmissionTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3ObjectSlotIndexSnapshot20261017RecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3ScopeLiteralRepairRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3DeclarativeDeliveryRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3LabDeliveryRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3LevenshteinEvidenceClosureRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3M3MasteryCustodyRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3M3MasteryInvariantRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3MasteryReceiptDeliveryRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3MasteryReceiptWorkflowRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3MasteryV6DeliveryTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3MasteryWorkflowRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3FullDeliveryA3RecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3ImportAdmissionTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3Java21ConvergenceAdmissionTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3Java21ConvergenceRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3Java21DeclarativeConvergenceTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/a3/M3A3AlgorithmCatalogueRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/a3/M3A3MasteryV6RecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/a3/M3A3SerialFileWorkRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3A3CanonicalM3MergePinRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3A3M3ReceiverAuthorityTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3A3NativeJniLaneRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3A3PortableMasteryGateRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3A3ReceiptProofRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3A3ReceiverMainAuthorityRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3ArraySubstrateRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BackportExecutionWaveReceiverRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BulkExecutorGateRepairRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BulkExecutorNameMappingRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BulkExecutorPortRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BulkFreezeSourceBootstrapRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BulkInputBindingReceiverRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BulkLiveRegistrationRecoveryRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BulkOutputIsolationRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BulkOutputMetadataFastPathRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BulkRegistrationCiBootstrapRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BulkRegistrationFreezeReceiverRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BulkSchedulerProviderRecoveryRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BulkSchedulerRecoveryNameMappingRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BulkSchedulerRecoveryWorkflowRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BulkScopeRegistryRecoveryReceiverRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3CompileTimeRegexPrecomputeRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3FileByteEventFactRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3FullPrecomputeSecondPassRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3HandoffReceiverTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3HandoffV2IntegrityRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3HandoffV2ReceiverRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3IntakePolicyRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3ItemReferenceSafetyRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipeNameTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8284315BackportRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8284315TestExpectationsRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8347112BackportRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8357439JcmdCompletionBackportRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8359706BackportRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8364182BackportRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8367584JfrOptionsHelpBackportRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8368692PasswordSystemInBackportRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8374808BackportRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3JdkExecutionFollowthroughRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep404EphemeralProofReceiverRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep458BackportRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep458ProofRefreshRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep474ProofRefreshRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep475InventoryReceiverRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep485StreamGatherersBackportRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep496MlKemBackportRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep496MlKemInventoryRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep496SharedOwnerSplitRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep497MlDsaBackportRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep497MlDsaInventoryRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep497SharedOwnerSplitRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep510KdfBackportRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep510KdfCandidateRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep523BackportRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3JepResidueProofGateReceiverRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3JniSaM3FieldRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3MopStreamTraversalRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3ParallelBulkBridgeNameMappingRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3ParallelBulkBridgeReceiverRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3ParallelBulkCompilerRepairRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3PureIntPublishedDepsReceiverRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3RecipeMemoryLedgerTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3RegexStringPrecomputeSupersetRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3ReleaseJepAuthorityRepairRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3ScopeRegistryApiRepairRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3SourceLauncherClosureRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3StringCanonicalDagMasterRepairRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3StringDirectStreamTraversalRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3StringLeafCursorConvergenceRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3StringLeafCursorCurrentMasterTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3StringMechanicalDonorMapRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3StringTokenSequenceRegexRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3TokenRegexConvergenceRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3TornadoBulkAdapterMappingRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3TornadoBulkAdapterPortRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3TornadoBulkCompilerRepairReceiverRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3TornadoBulkGeometryRepairReceiverRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3TornadoProviderUpgradeReceiverRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3VerbatimJavaPairRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3XmxReceiverRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/m3/M3CanonicalRecipeConsumerTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/m3/M3ImportInventoryRecipeTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/m3/M3PureIntRepositoryCorpusTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/m3/M3RecipeHomePolicyTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/m3/M3ScopeKernelConsumerTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/m3/M3SemanticFingerprintConsumerTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/scope/M3RecipeScopeDeclarationTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/scope/M3ScopeContractTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/scope/M3ScopeCoverageClosureTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/scope/M3ScopeDefensiveBranchTest.java
-PREFIXED	m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/semantic/M3SemanticHashRecipeTest.java
-PREFIXED	m3/tooling/module-packs/collections/src/test/java/jdk/m3/collections/M3CollectionsPackTest.java
+PREFIXED	make/m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/test/java/jdk/internal/m3/rewrite/M3BackportAppliedOwnerCustodyRecipeTest.java
+PREFIXED	make/m3/tooling/backport-contract-current-owner/sdk/src/test/java/jdk/internal/m3/rewrite/M3BackportContractCurrentOwnerRecipeTest.java
+PREFIXED	make/m3/tooling/backport-wave-current-output/sdk/src/test/java/jdk/internal/m3/rewrite/M3BackportWaveCurrentOutputRecipeTest.java
+PREFIXED	make/m3/tooling/charcopy-current-successor/sdk/src/test/java/jdk/internal/m3/rewrite/M3CharcopyCurrentSuccessorRecipeTest.java
+PREFIXED	make/m3/tooling/collection-dense-20261019/m3-openrewrite-recipes/recipe-crates/m3jdk-collection-dense-20261019/src/test/java/jdk/internal/m3/rewrite/M3CollectionDenseRecipeTest.java
+PREFIXED	make/m3/tooling/collection-dense-20261019/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java
+PREFIXED	make/m3/tooling/collection-dense-20261019/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java
+PREFIXED	make/m3/tooling/collection-dense-20261019/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java
+PREFIXED	make/m3/tooling/collection-dense-20261019/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java
+PREFIXED	make/m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/test/java/jdk/internal/m3/rewrite/M3ReleaseJepManifestOrderRecipeTest.java
+PREFIXED	make/m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/src/test/java/jdk/internal/m3/rewrite/M3CanonicalScopeBoundaryRecipeTest.java
+PREFIXED	make/m3/tooling/hash-pinned-target-paths/sdk/src/test/java/jdk/internal/m3/rewrite/M3HashPinnedTargetPathsCompatRecipeTest.java
+PREFIXED	make/m3/tooling/jmod-recipes/quantize-recipe-20261017/src/test/java/jdk/internal/m3/rewrite/M3CpuInt8Receiver20261017RecipeTest.java
+PREFIXED	make/m3/tooling/jmod-recipes/src/main/java/jdk/m3/rewrite/jmod/M3ModuleDescriptorApply.java
+PREFIXED	make/m3/tooling/jmod-recipes/src/main/java/jdk/m3/rewrite/jmod/M3ModuleDescriptorRecipe.java
+PREFIXED	make/m3/tooling/jmod-recipes/src/test/java/jdk/m3/rewrite/jmod/M3ModuleDescriptorRecipeTest.java
+PREFIXED	make/m3/tooling/joined-range-directory/fresh-owned/sdk/src/test/java/jdk/internal/m3/rewrite/M3JoinedRangeDirectoryRecipeTest.java
+PREFIXED	make/m3/tooling/joined-range-directory/sdk/src/test/java/jdk/internal/m3/rewrite/M3JoinedRangeDirectoryRecipeTest.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ArchiveIndex.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3Arguments.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3BackendKind.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3BuildOptions.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ClassFileParser.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ClassInfo.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ClassPathScanner.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ClassRole.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3DeterministicJar.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3FeatureKind.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3Files.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3Hashing.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ImageBackend.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ImageBuildResult.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ImageBuilder.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ImageManifest.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ImagePlan.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ImagePlanner.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ImageTool.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ImageVerifier.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3IncrementalStore.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3JavaReachabilityKernel.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3Jdk21ShiftedBackend.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3JdkTools.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3JfrProfileReader.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3JniReachabilityKernel.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3Mode.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ModuleResolver.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3Names.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3NativeImageBackend.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3PlanIO.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3Process.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3Profile.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ProfileIO.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ReachabilityAnalyzer.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ReachabilityGraph.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ReachabilityKernel.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3ReachabilityKernels.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3Trainer.java
+PREFIXED	make/m3/tooling/m3-image/src/main/java/jdk/m3/tooling/image/M3TrainingManifest.java
+PREFIXED	make/m3/tooling/m3-image/src/test/java/jdk/m3/tooling/image/M3ImagePipelineTest.java
+PREFIXED	make/m3/tooling/m3-image/src/test/java/jdk/m3/tooling/image/M3ImageSelfTest.java
+PREFIXED	make/m3/tooling/m3-image/src/test/java/jdk/m3/tooling/image/M3ReachabilityKernelSelfTest.java
+PREFIXED	make/m3/tooling/m3-image/src/test/java/jdk/m3/tooling/image/M3ReachabilityKernelTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HierarchicalDocumentation.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HierarchicalDocumentationRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3MIndexJoinedCharsViewRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3SegmentedLaneNativeRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/semantic/M3SemanticHashRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/semantic/M3SemanticHashTable.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/semantic/M3SemanticHasher.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceCatalog.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/a3/M3A3AlgorithmCatalogueRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/a3/M3A3MasteryV6Recipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/a3/M3A3SerialFileWorkRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3BackportExecutionWaveReceiverRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3BulkExecutorGateRepairRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3BulkExecutorNameMappingRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3BulkExecutorPortRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3BulkFreezeSourceBootstrapRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3BulkInputBindingReceiverRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3BulkLiveRegistrationRecoveryRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3BulkOutputIsolationRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3BulkOutputMetadataFastPathRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3BulkRegistrationCiBootstrapRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3BulkRegistrationFreezeReceiverRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3BulkSchedulerProviderRecoveryRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3BulkSchedulerRecoveryNameMappingRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3BulkSchedulerRecoveryWorkflowRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3BulkScopeRegistryRecoveryReceiverRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3CompileTimeRegexPrecomputeRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3FileByteEventFactRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3HandoffGuardRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8284315BackportRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8284315FullBackportRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8284315TestExpectationsRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8347112BackportRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8357439JcmdCompletionBackportRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8359706BackportRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8364182BackportRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8367584JfrOptionsHelpBackportRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8368692PasswordSystemInBackportRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8374808BackportRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep404EphemeralProofReceiverRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep458BackportRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep458ProofRefreshRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep474ProofRefreshRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep475InventoryReceiverRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep485StreamGatherersBackportRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep496MlKemBackportRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep496MlKemInventoryRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep496SharedOwnerSplitRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep497MlDsaBackportRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep497MlDsaInventoryRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep497SharedOwnerSplitRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep510KdfBackportRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep510KdfCandidateRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep510KdfSecurityTestsRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep523BackportRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3JepResidueProofGateReceiverRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3JniSaM3FieldRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3MopStreamTraversalRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3ParallelBulkBridgeNameMappingRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3ParallelBulkBridgeReceiverRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3ParallelBulkCompilerRepairRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3PureIntPublishedDepsReceiverRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3RecipeMemoryLedger.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3RegexStringPrecomputeSupersetRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3ReleaseJepAuthorityRepairRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3ScopeRegistryApiRepairRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3SourceLauncherClosureRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3StringLeafCursorConvergenceRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3StringTokenSequenceRegexRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3TornadoBulkAdapterMappingRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3TornadoBulkAdapterPortRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3TornadoBulkCompilerRepairReceiverRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3TornadoBulkGeometryRepairReceiverRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3TornadoProviderUpgradeReceiverRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3VerbatimJavaPairRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3XmxReceiverRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/m3/M3ImportInventoryRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3ContractMode.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3EditScope.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3RecipeScopePolicy.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3RecipeScopeRegistry.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3ScopeInference.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/semantic/M3SemanticHashRecipe.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/semantic/M3SemanticHashTable.java
+PREFIXED	make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/semantic/M3SemanticHasher.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3DocumentJavadocContractRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3HierarchicalDocumentationRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3HierarchicalDocumentationSelfTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3IndexPathRankRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3MIndexJniNewStringAdmissionRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3MIndexJoinedCharsViewRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3MIndexStringBulkCharBoundaryRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3NativeRecipePathAdmissionTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3ObjectSlotIndexSnapshot20261017RecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3ScopeLiteralRepairRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3DeclarativeDeliveryRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3LabDeliveryRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3LevenshteinEvidenceClosureRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3M3MasteryCustodyRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3M3MasteryInvariantRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3MasteryReceiptDeliveryRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3MasteryReceiptWorkflowRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3MasteryV6DeliveryTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3MasteryWorkflowRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3FullDeliveryA3RecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3ImportAdmissionTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3Java21ConvergenceAdmissionTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3Java21ConvergenceRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3Java21DeclarativeConvergenceTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/a3/M3A3AlgorithmCatalogueRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/a3/M3A3MasteryV6RecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/a3/M3A3SerialFileWorkRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3A3CanonicalM3MergePinRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3A3M3ReceiverAuthorityTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3A3NativeJniLaneRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3A3PortableMasteryGateRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3A3ReceiptProofRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3A3ReceiverMainAuthorityRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3ArraySubstrateRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BackportExecutionWaveReceiverRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BulkExecutorGateRepairRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BulkExecutorNameMappingRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BulkExecutorPortRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BulkFreezeSourceBootstrapRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BulkInputBindingReceiverRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BulkLiveRegistrationRecoveryRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BulkOutputIsolationRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BulkOutputMetadataFastPathRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BulkRegistrationCiBootstrapRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BulkRegistrationFreezeReceiverRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BulkSchedulerProviderRecoveryRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BulkSchedulerRecoveryNameMappingRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BulkSchedulerRecoveryWorkflowRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BulkScopeRegistryRecoveryReceiverRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3CompileTimeRegexPrecomputeRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3FileByteEventFactRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3FullPrecomputeSecondPassRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3HandoffReceiverTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3HandoffV2IntegrityRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3HandoffV2ReceiverRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3IntakePolicyRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3ItemReferenceSafetyRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipeNameTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8284315BackportRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8284315TestExpectationsRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8347112BackportRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8357439JcmdCompletionBackportRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8359706BackportRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8364182BackportRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8367584JfrOptionsHelpBackportRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8368692PasswordSystemInBackportRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8374808BackportRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3JdkExecutionFollowthroughRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep404EphemeralProofReceiverRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep458BackportRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep458ProofRefreshRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep474ProofRefreshRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep475InventoryReceiverRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep485StreamGatherersBackportRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep496MlKemBackportRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep496MlKemInventoryRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep496SharedOwnerSplitRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep497MlDsaBackportRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep497MlDsaInventoryRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep497SharedOwnerSplitRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep510KdfBackportRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep510KdfCandidateRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep523BackportRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3JepResidueProofGateReceiverRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3JniSaM3FieldRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3MopStreamTraversalRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3ParallelBulkBridgeNameMappingRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3ParallelBulkBridgeReceiverRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3ParallelBulkCompilerRepairRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3PureIntPublishedDepsReceiverRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3RecipeMemoryLedgerTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3RegexStringPrecomputeSupersetRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3ReleaseJepAuthorityRepairRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3ScopeRegistryApiRepairRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3SourceLauncherClosureRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3StringCanonicalDagMasterRepairRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3StringDirectStreamTraversalRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3StringLeafCursorConvergenceRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3StringLeafCursorCurrentMasterTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3StringMechanicalDonorMapRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3StringTokenSequenceRegexRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3TokenRegexConvergenceRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3TornadoBulkAdapterMappingRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3TornadoBulkAdapterPortRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3TornadoBulkCompilerRepairReceiverRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3TornadoBulkGeometryRepairReceiverRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3TornadoProviderUpgradeReceiverRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3VerbatimJavaPairRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3XmxReceiverRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/m3/M3CanonicalRecipeConsumerTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/m3/M3ImportInventoryRecipeTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/m3/M3PureIntRepositoryCorpusTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/m3/M3RecipeHomePolicyTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/m3/M3ScopeKernelConsumerTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/m3/M3SemanticFingerprintConsumerTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/scope/M3RecipeScopeDeclarationTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/scope/M3ScopeContractTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/scope/M3ScopeCoverageClosureTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/scope/M3ScopeDefensiveBranchTest.java
+PREFIXED	make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/semantic/M3SemanticHashRecipeTest.java
+PREFIXED	make/m3/tooling/module-packs/collections/src/test/java/jdk/m3/collections/M3CollectionsPackTest.java
 PREFIXED	m3/tooling/module-packs/collections/src/test/java/jdk/m3/collections/M3FilteredViewsContract.java
 PREFIXED	m3/tooling/module-packs/collections/src/test/java/jdk/m3/collections/M3MutableFilteredViewsContract.java
-PREFIXED	m3/tooling/module-packs/collections/src/test/java/jdk/m3/collections/M3PrimitiveIndexViewFilterContract.java
-PREFIXED	m3/tooling/module-packs/collections/src/test/java/jdk/m3/collections/M3PrimitiveSelectionWordContract.java
-PREFIXED	m3/tooling/module-packs/jackson/compiler/src/main/java/jdk/m3/jackson/compiler/M3AstBindings.java
-PREFIXED	m3/tooling/module-packs/jackson/compiler/src/test/java/jdk/m3/jackson/compiler/M3AstBindingsContract.java
-PREFIXED	m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3AST.java
-PREFIXED	m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3ASTAtom.java
-PREFIXED	m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3ASTBuilder.java
-PREFIXED	m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3ASTParser.java
-PREFIXED	m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3ASTPool.java
-PREFIXED	m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3ASTTokenPattern.java
-PREFIXED	m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3Binding.java
-PREFIXED	m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3File.java
-PREFIXED	m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3FileTokenStore.java
-PREFIXED	m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3JacksonModule.java
-PREFIXED	m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3JsonCodec.java
-PREFIXED	m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3JsonLimits.java
-PREFIXED	m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3ObjectMapper.java
-PREFIXED	m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3SourceHash.java
-PREFIXED	m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3TokenRegex.java
-PREFIXED	m3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/M3ASTCoreReceiptContract.java
-PREFIXED	m3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/M3ASTPatternCoreReceiptContract.java
-PREFIXED	m3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/M3FileContract.java
-PREFIXED	m3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/M3SourceFactsContract.java
-PREFIXED	m3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/tests/M3ASTBindingContract.java
-PREFIXED	m3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/tests/M3ASTTokenPatternContract.java
-PREFIXED	m3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/tests/M3ASTTokenRegex100MiB.java
-PREFIXED	m3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/tests/M3JacksonCoexistenceContract.java
-PREFIXED	m3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/tests/M3JacksonContract.java
-PREFIXED	m3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/tests/M3JacksonResourceProbe.java
-PREFIXED	m3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/tests/M3Json100MiBAcceptance.java
-PREFIXED	m3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/tests/M3LargeJsonAcceptance.java
-PREFIXED	m3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/tests/M3TokenRegexContract.java
-PREFIXED	m3/tooling/module-packs/kernel/src/main/java/jdk/m3/tools/modulepack/M3ModuleArtifact.java
-PREFIXED	m3/tooling/module-packs/kernel/src/main/java/jdk/m3/tools/modulepack/M3ModuleGraph.java
-PREFIXED	m3/tooling/module-packs/kernel/src/main/java/jdk/m3/tools/modulepack/M3ModuleInspector.java
-PREFIXED	m3/tooling/module-packs/kernel/src/main/java/jdk/m3/tools/modulepack/M3ModuleInventory.java
-PREFIXED	m3/tooling/module-packs/kernel/src/test/java/jdk/m3/tools/modulepack/M3ModuleChecks.java
-PREFIXED	m3/tooling/module-packs/kernel/src/test/java/jdk/m3/tools/modulepack/M3ModuleClassVersionChecks.java
-PREFIXED	m3/tooling/module-packs/kernel/src/test/java/jdk/m3/tools/modulepack/M3ModuleClassVersionTest.java
-PREFIXED	m3/tooling/module-packs/kernel/src/test/java/jdk/m3/tools/modulepack/M3ModulePackTest.java
-PREFIXED	m3/tooling/module-packs/nlp-search/m3-bridge/src/main/java/jdk/m3/nlpsearch/M3NlpSearch.java
-PREFIXED	m3/tooling/module-packs/nlp-search/m3-bridge/src/main/java/jdk/m3/nlpsearch/M3SourceInputStream.java
-PREFIXED	m3/tooling/module-packs/nlp-search/m3-bridge/src/test/java/jdk/m3/nlpsearch/M3NlpSearchChecks.java
-PREFIXED	m3/tooling/module-packs/nlp-search/m3-bridge/src/test/java/jdk/m3/nlpsearch/M3SourceInputStreamChecks.java
-PREFIXED	m3/tooling/module-packs/parser-openrewrite/src/main/java/jdk/m3/parser/openrewrite/M3OpenRewriteIngress.java
-PREFIXED	m3/tooling/module-packs/parser-openrewrite/src/test/java/jdk/m3/parser/openrewrite/test/M3OpenRewriteIngressContract.java
-PREFIXED	m3/tooling/module-packs/parser/integration/antlr4/src/test/java/jdk/m3/parser/test/M3ANTLR4RealParserContract.java
-PREFIXED	m3/tooling/module-packs/parser/integration/jdt/src/test/java/jdk/m3/parser/test/M3JDTRealProvenanceContract.java
-PREFIXED	m3/tooling/module-packs/parser/integration/src/test/java/jdk/m3/parser/test/M3ActualJavacCaptureContract.java
-PREFIXED	m3/tooling/module-packs/parser/integration/src/test/java/jdk/m3/parser/test/M3ProviderCaptureContract.java
-PREFIXED	m3/tooling/module-packs/parser/real-providers/src/test/java/jdk/m3/parser/tests/M3GradleToolingSmoke.java
-PREFIXED	m3/tooling/module-packs/parser/real-providers/src/test/java/jdk/m3/parser/tests/M3JacksonIndexScale.java
-PREFIXED	m3/tooling/module-packs/parser/real-providers/src/test/java/jdk/m3/parser/tests/M3KotlinPsiSmoke.java
-PREFIXED	m3/tooling/module-packs/parser/real-providers/src/test/java/jdk/m3/parser/tests/M3Maven4ProviderContract.java
-PREFIXED	m3/tooling/module-packs/parser/real-providers/src/test/java/jdk/m3/parser/tests/M3RealProvidersSmoke.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTAuthoritativeModels.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTDependencyImpact.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTExternalIngress.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTFacts.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIngress.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTJacksonEvents.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTRelations.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTSourceOrigins.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTSyntaxCoverage.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3CodePointSourceMap.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3Culprits.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3FactsWriter.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3File.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3JavacFactImage.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3JavacParser.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3JavacTree.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ParseResult.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3Parser.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ScopedCompilation.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3Utf8SourceMap.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3EarleyWaitingIndex.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3Grammar.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarAnalysis.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarBudget.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarBuilder.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarDecisionIndex.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarDecisionIndexes.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarException.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarFamily.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarFormat.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarLexer.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarLimits.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarParseResult.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarParseTree.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarParser.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarRecognizer.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarRef.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarSource.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarStrictness.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarSymbolKind.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarTokenDispatch.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarValidation.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3LexerProfile.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3LiteralCase.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3TokenClass.java
-PREFIXED	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3TokenStream.java
-PREFIXED	m3/tooling/module-packs/parser/src/test/java/jdk/m3/jackson/M3AST.java
-PREFIXED	m3/tooling/module-packs/parser/src/test/java/jdk/m3/jackson/M3ASTAtom.java
-PREFIXED	m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTBuilderOrdinalContract.java
-PREFIXED	m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTDependencyImpactContract.java
-PREFIXED	m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTDetailsContract.java
-PREFIXED	m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTFactsContract.java
-PREFIXED	m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTIndexProjectionContract.java
-PREFIXED	m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTPortabilityContract.java
-PREFIXED	m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTRelationsContract.java
-PREFIXED	m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTSourceOriginsContract.java
-PREFIXED	m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTSyntaxCoverageContract.java
-PREFIXED	m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3CapturedSourceContract.java
-PREFIXED	m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3CodePointSourceContract.java
-PREFIXED	m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3CrossFrontendContract.java
-PREFIXED	m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3CulpritsContract.java
-PREFIXED	m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3FactsFixtures.java
-PREFIXED	m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3FactsStreamContract.java
-PREFIXED	m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3FactsTransactionContract.java
-PREFIXED	m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3FactsWriterContract.java
-PREFIXED	m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3FileInputContract.java
-PREFIXED	m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3FileLineMapContract.java
-PREFIXED	m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3JavacFactImageContract.java
-PREFIXED	m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3JavacParserContract.java
-PREFIXED	m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3JavacTreeViewContract.java
-PREFIXED	m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ParserFixtures.java
-PREFIXED	m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ParserFrameworkContract.java
-PREFIXED	m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ParserImageSmoke.java
-PREFIXED	m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ParserResourceProbe.java
-PREFIXED	m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ScopedCompilationTest.java
-PREFIXED	m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3Utf8SourceMapContract.java
-PREFIXED	m3/tooling/netbeans-gap-boundary-20261019/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java
-PREFIXED	m3/tooling/netbeans-gap-boundary-20261019/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java
-PREFIXED	m3/tooling/netbeans-gap-boundary-20261019/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java
-PREFIXED	m3/tooling/netbeans-gap-boundary-20261019/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java
-PREFIXED	m3/tooling/regex-ascii-lexical-receiver/sdk/src/test/java/jdk/internal/m3/rewrite/M3RegexAsciiLexicalReceiverRecipeTest.java
-PREFIXED	m3/tooling/regex-ascii-live-owner-custody/sdk/src/test/java/jdk/internal/m3/rewrite/M3RegexAsciiLiveOwnerCustodyRecipeTest.java
-PREFIXED	m3/tooling/regex-relations-current-owner/sdk/src/test/java/jdk/internal/m3/rewrite/M3RegexRelationsCurrentOwnerRecipeTest.java
-PREFIXED	m3/tooling/region-foundation-repair/src/main/java/jdk/internal/m3/rewrite/M3JdkRegionFoundationRepair.java
-PREFIXED	m3/tooling/sort-recipes/m3-java-util-sorts-20261018/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java
-PREFIXED	m3/tooling/sort-recipes/m3-java-util-sorts-20261018/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java
-PREFIXED	m3/tooling/sort-recipes/m3-java-util-sorts-20261018/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java
-PREFIXED	m3/tooling/sort-recipes/m3-java-util-sorts-20261018/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java
-PREFIXED	m3/tooling/sort-recipes/m3-java-util-sorts-20261018/src/main/java/jdk/internal/m3/rewrite/sorts/M3JavaUtilSortsApply.java
-PREFIXED	m3/tooling/sort-recipes/m3-java-util-sorts-20261018/src/main/java/jdk/internal/m3/rewrite/sorts/M3JavaUtilSortsRecipe.java
-PREFIXED	m3/tooling/sort-recipes/m3-java-util-sorts-20261018/src/test/java/jdk/internal/m3/rewrite/sorts/M3JavaUtilSortsPacketTest.java
-PREFIXED	m3/tooling/sort-recipes/m3-java-util-sorts-20261018/src/test/java/jdk/internal/m3/rewrite/sorts/M3RecipeReplayTest.java
-PREFIXED	m3/tooling/src/main/java/jdk/internal/m3/rewrite/sealed/M3ExactSourceAtom.java
-PREFIXED	m3/tooling/state-relation-current-c11/sdk/src/test/java/jdk/internal/m3/rewrite/M3StateRelationCurrentC11RecipeTest.java
-PREFIXED	m3/tooling/state-relation-sparse-c11/sdk/src/test/java/jdk/internal/m3/rewrite/M3StateRelationSparseC11RecipeTest.java
-PREFIXED	m3/tooling/text-metadata-current-owner/source/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java
-PREFIXED	m3/tooling/text-metadata-current-owner/source/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java
-PREFIXED	m3/tooling/vendor-recipes/src/main/java/jdk/m3/rewrite/vendor/M3VendoredPinApply.java
-PREFIXED	m3/tooling/vendor-recipes/src/main/java/jdk/m3/rewrite/vendor/M3VendoredPinRecipe.java
-PREFIXED	m3/tooling/vendor-recipes/src/main/java/jdk/m3/rewrite/vendor/M3VendoredPinRows.java
-PREFIXED	m3/tooling/vendor-recipes/src/main/java/jdk/m3/rewrite/vendor/M3VendoredPinVisitor.java
-PREFIXED	m3/tooling/vendor-recipes/src/test/java/jdk/m3/rewrite/vendor/M3VendoredPinRecipeTest.java
+PREFIXED	make/m3/tooling/module-packs/collections/src/test/java/jdk/m3/collections/M3PrimitiveIndexViewFilterContract.java
+PREFIXED	make/m3/tooling/module-packs/collections/src/test/java/jdk/m3/collections/M3PrimitiveSelectionWordContract.java
+PREFIXED	make/m3/tooling/module-packs/jackson/compiler/src/main/java/jdk/m3/jackson/compiler/M3AstBindings.java
+PREFIXED	make/m3/tooling/module-packs/jackson/compiler/src/test/java/jdk/m3/jackson/compiler/M3AstBindingsContract.java
+PREFIXED	make/m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3AST.java
+PREFIXED	make/m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3ASTAtom.java
+PREFIXED	make/m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3ASTBuilder.java
+PREFIXED	make/m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3ASTParser.java
+PREFIXED	make/m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3ASTPool.java
+PREFIXED	make/m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3ASTTokenPattern.java
+PREFIXED	make/m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3Binding.java
+PREFIXED	make/m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3File.java
+PREFIXED	make/m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3FileTokenStore.java
+PREFIXED	make/m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3JacksonModule.java
+PREFIXED	make/m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3JsonCodec.java
+PREFIXED	make/m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3JsonLimits.java
+PREFIXED	make/m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3ObjectMapper.java
+PREFIXED	make/m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3SourceHash.java
+PREFIXED	make/m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3TokenRegex.java
+PREFIXED	make/m3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/M3ASTCoreReceiptContract.java
+PREFIXED	make/m3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/M3ASTPatternCoreReceiptContract.java
+PREFIXED	make/m3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/M3FileContract.java
+PREFIXED	make/m3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/M3SourceFactsContract.java
+PREFIXED	make/m3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/tests/M3ASTBindingContract.java
+PREFIXED	make/m3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/tests/M3ASTTokenPatternContract.java
+PREFIXED	make/m3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/tests/M3ASTTokenRegex100MiB.java
+PREFIXED	make/m3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/tests/M3JacksonCoexistenceContract.java
+PREFIXED	make/m3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/tests/M3JacksonContract.java
+PREFIXED	make/m3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/tests/M3JacksonResourceProbe.java
+PREFIXED	make/m3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/tests/M3Json100MiBAcceptance.java
+PREFIXED	make/m3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/tests/M3LargeJsonAcceptance.java
+PREFIXED	make/m3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/tests/M3TokenRegexContract.java
+PREFIXED	make/m3/tooling/module-packs/kernel/src/main/java/jdk/m3/tools/modulepack/M3ModuleArtifact.java
+PREFIXED	make/m3/tooling/module-packs/kernel/src/main/java/jdk/m3/tools/modulepack/M3ModuleGraph.java
+PREFIXED	make/m3/tooling/module-packs/kernel/src/main/java/jdk/m3/tools/modulepack/M3ModuleInspector.java
+PREFIXED	make/m3/tooling/module-packs/kernel/src/main/java/jdk/m3/tools/modulepack/M3ModuleInventory.java
+PREFIXED	make/m3/tooling/module-packs/kernel/src/test/java/jdk/m3/tools/modulepack/M3ModuleChecks.java
+PREFIXED	make/m3/tooling/module-packs/kernel/src/test/java/jdk/m3/tools/modulepack/M3ModuleClassVersionChecks.java
+PREFIXED	make/m3/tooling/module-packs/kernel/src/test/java/jdk/m3/tools/modulepack/M3ModuleClassVersionTest.java
+PREFIXED	make/m3/tooling/module-packs/kernel/src/test/java/jdk/m3/tools/modulepack/M3ModulePackTest.java
+PREFIXED	make/m3/tooling/module-packs/nlp-search/m3-bridge/src/main/java/jdk/m3/nlpsearch/M3NlpSearch.java
+PREFIXED	make/m3/tooling/module-packs/nlp-search/m3-bridge/src/main/java/jdk/m3/nlpsearch/M3SourceInputStream.java
+PREFIXED	make/m3/tooling/module-packs/nlp-search/m3-bridge/src/test/java/jdk/m3/nlpsearch/M3NlpSearchChecks.java
+PREFIXED	make/m3/tooling/module-packs/nlp-search/m3-bridge/src/test/java/jdk/m3/nlpsearch/M3SourceInputStreamChecks.java
+PREFIXED	make/m3/tooling/module-packs/parser-openrewrite/src/main/java/jdk/m3/parser/openrewrite/M3OpenRewriteIngress.java
+PREFIXED	make/m3/tooling/module-packs/parser-openrewrite/src/test/java/jdk/m3/parser/openrewrite/test/M3OpenRewriteIngressContract.java
+PREFIXED	make/m3/tooling/module-packs/parser/integration/antlr4/src/test/java/jdk/m3/parser/test/M3ANTLR4RealParserContract.java
+PREFIXED	make/m3/tooling/module-packs/parser/integration/jdt/src/test/java/jdk/m3/parser/test/M3JDTRealProvenanceContract.java
+PREFIXED	make/m3/tooling/module-packs/parser/integration/src/test/java/jdk/m3/parser/test/M3ActualJavacCaptureContract.java
+PREFIXED	make/m3/tooling/module-packs/parser/integration/src/test/java/jdk/m3/parser/test/M3ProviderCaptureContract.java
+PREFIXED	make/m3/tooling/module-packs/parser/real-providers/src/test/java/jdk/m3/parser/tests/M3GradleToolingSmoke.java
+PREFIXED	make/m3/tooling/module-packs/parser/real-providers/src/test/java/jdk/m3/parser/tests/M3JacksonIndexScale.java
+PREFIXED	make/m3/tooling/module-packs/parser/real-providers/src/test/java/jdk/m3/parser/tests/M3KotlinPsiSmoke.java
+PREFIXED	make/m3/tooling/module-packs/parser/real-providers/src/test/java/jdk/m3/parser/tests/M3Maven4ProviderContract.java
+PREFIXED	make/m3/tooling/module-packs/parser/real-providers/src/test/java/jdk/m3/parser/tests/M3RealProvidersSmoke.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTAuthoritativeModels.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTDependencyImpact.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTExternalIngress.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTFacts.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIngress.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTJacksonEvents.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTRelations.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTSourceOrigins.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTSyntaxCoverage.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3CodePointSourceMap.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3Culprits.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3FactsWriter.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3File.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3JavacFactImage.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3JavacParser.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3JavacTree.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ParseResult.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3Parser.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ScopedCompilation.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3Utf8SourceMap.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3EarleyWaitingIndex.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3Grammar.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarAnalysis.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarBudget.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarBuilder.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarDecisionIndex.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarDecisionIndexes.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarException.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarFamily.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarFormat.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarLexer.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarLimits.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarParseResult.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarParseTree.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarParser.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarRecognizer.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarRef.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarSource.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarStrictness.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarSymbolKind.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarTokenDispatch.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3GrammarValidation.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3LexerProfile.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3LiteralCase.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3TokenClass.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/grammar/M3TokenStream.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/jackson/M3AST.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/jackson/M3ASTAtom.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTBuilderOrdinalContract.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTDependencyImpactContract.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTDetailsContract.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTFactsContract.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTIndexProjectionContract.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTPortabilityContract.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTRelationsContract.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTSourceOriginsContract.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTSyntaxCoverageContract.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3CapturedSourceContract.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3CodePointSourceContract.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3CrossFrontendContract.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3CulpritsContract.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3FactsFixtures.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3FactsStreamContract.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3FactsTransactionContract.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3FactsWriterContract.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3FileInputContract.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3FileLineMapContract.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3JavacFactImageContract.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3JavacParserContract.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3JavacTreeViewContract.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ParserFixtures.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ParserFrameworkContract.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ParserImageSmoke.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ParserResourceProbe.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ScopedCompilationTest.java
+PREFIXED	make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3Utf8SourceMapContract.java
+PREFIXED	make/m3/tooling/netbeans-gap-boundary-20261019/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java
+PREFIXED	make/m3/tooling/netbeans-gap-boundary-20261019/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java
+PREFIXED	make/m3/tooling/netbeans-gap-boundary-20261019/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java
+PREFIXED	make/m3/tooling/netbeans-gap-boundary-20261019/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java
+PREFIXED	make/m3/tooling/regex-ascii-lexical-receiver/sdk/src/test/java/jdk/internal/m3/rewrite/M3RegexAsciiLexicalReceiverRecipeTest.java
+PREFIXED	make/m3/tooling/regex-ascii-live-owner-custody/sdk/src/test/java/jdk/internal/m3/rewrite/M3RegexAsciiLiveOwnerCustodyRecipeTest.java
+PREFIXED	make/m3/tooling/regex-relations-current-owner/sdk/src/test/java/jdk/internal/m3/rewrite/M3RegexRelationsCurrentOwnerRecipeTest.java
+PREFIXED	make/m3/tooling/region-foundation-repair/src/main/java/jdk/internal/m3/rewrite/M3JdkRegionFoundationRepair.java
+PREFIXED	make/m3/tooling/sort-recipes/m3-java-util-sorts-20261018/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java
+PREFIXED	make/m3/tooling/sort-recipes/m3-java-util-sorts-20261018/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java
+PREFIXED	make/m3/tooling/sort-recipes/m3-java-util-sorts-20261018/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java
+PREFIXED	make/m3/tooling/sort-recipes/m3-java-util-sorts-20261018/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java
+PREFIXED	make/m3/tooling/sort-recipes/m3-java-util-sorts-20261018/src/main/java/jdk/internal/m3/rewrite/sorts/M3JavaUtilSortsApply.java
+PREFIXED	make/m3/tooling/sort-recipes/m3-java-util-sorts-20261018/src/main/java/jdk/internal/m3/rewrite/sorts/M3JavaUtilSortsRecipe.java
+PREFIXED	make/m3/tooling/sort-recipes/m3-java-util-sorts-20261018/src/test/java/jdk/internal/m3/rewrite/sorts/M3JavaUtilSortsPacketTest.java
+PREFIXED	make/m3/tooling/sort-recipes/m3-java-util-sorts-20261018/src/test/java/jdk/internal/m3/rewrite/sorts/M3RecipeReplayTest.java
+PREFIXED	make/m3/tooling/src/main/java/jdk/internal/m3/rewrite/sealed/M3ExactSourceAtom.java
+PREFIXED	make/m3/tooling/state-relation-current-c11/sdk/src/test/java/jdk/internal/m3/rewrite/M3StateRelationCurrentC11RecipeTest.java
+PREFIXED	make/m3/tooling/state-relation-sparse-c11/sdk/src/test/java/jdk/internal/m3/rewrite/M3StateRelationSparseC11RecipeTest.java
+PREFIXED	make/m3/tooling/text-metadata-current-owner/source/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java
+PREFIXED	make/m3/tooling/text-metadata-current-owner/source/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java
+PREFIXED	make/m3/tooling/vendor-recipes/src/main/java/jdk/m3/rewrite/vendor/M3VendoredPinApply.java
+PREFIXED	make/m3/tooling/vendor-recipes/src/main/java/jdk/m3/rewrite/vendor/M3VendoredPinRecipe.java
+PREFIXED	make/m3/tooling/vendor-recipes/src/main/java/jdk/m3/rewrite/vendor/M3VendoredPinRows.java
+PREFIXED	make/m3/tooling/vendor-recipes/src/main/java/jdk/m3/rewrite/vendor/M3VendoredPinVisitor.java
+PREFIXED	make/m3/tooling/vendor-recipes/src/test/java/jdk/m3/rewrite/vendor/M3VendoredPinRecipeTest.java
 PREFIXED	m3/viewport-core/src/main/java/jdk/m3/viewport/M3RowEvents.java
 PREFIXED	m3/viewport-core/src/main/java/jdk/m3/viewport/M3RowHost.java
 PREFIXED	m3/viewport-core/src/main/java/jdk/m3/viewport/M3RowPainter.java

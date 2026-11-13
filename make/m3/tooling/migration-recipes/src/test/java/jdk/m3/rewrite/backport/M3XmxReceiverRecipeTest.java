@@ -19,7 +19,7 @@ final class M3XmxReceiverRecipeTest {
                 "m3/collections/src/test/java/jdk/m3/collections/ObjectResidencyRuntimePressureTest.java"),
                 new M3Jdk21HashPinnedSnapshotRecipe(M3XmxReceiverRecipe.CRATE).targetPaths());
         assertEquals(List.of(
-                "m3/compatibility/m3-xmx-memory-receiver-20261014.tsv"),
+                "make/m3/compatibility/m3-xmx-memory-receiver-20261014.tsv"),
                 new M3Jdk21HashPinnedTextSnapshotRecipe(M3XmxReceiverRecipe.CRATE).targetPaths());
     }
 }

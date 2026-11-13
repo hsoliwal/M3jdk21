@@ -140,12 +140,12 @@
     "PMem speedup"
   ],
   "current_continuation": {
-    "execution_receipt": "m3/optane/docs/PMEM_REUSE_EXECUTION.json",
+    "execution_receipt": "make/m3/optane/docs/PMEM_REUSE_EXECUTION.json",
     "evidence_scope": "The execution receipt binds actual source revisions, canonical recipes, emitted postimages and test seals. Component evidence does not close the historical open gates or establish full module admission.",
     "historical_provenance": "The canonical_recipe and reuse entries retain the original intake history; the execution receipt identifies the current continuation.",
     "canonical_registry_admission": {
       "status": "PENDING",
-      "authority": "m3/docs/name-mapping.json",
+      "authority": "doc/m3/name-mapping.json",
       "disposition": "Passive capability inventory only; no canonical mapping record or naming-plan pin is changed."
     },
     "qualified_jdk_promotions": 0,

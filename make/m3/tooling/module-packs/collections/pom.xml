@@ -93,7 +93,7 @@
                     <argument>--jdk-home</argument>
                     <argument>${java.home}</argument>
                     <argument>--repo-root</argument>
-                    <argument>${project.basedir}/../../../..</argument>
+                    <argument>${project.basedir}/../../../../..</argument>
                     <argument>--out</argument>
                     <argument>${project.build.directory}/m3-collections-image</argument>
                   </arguments>

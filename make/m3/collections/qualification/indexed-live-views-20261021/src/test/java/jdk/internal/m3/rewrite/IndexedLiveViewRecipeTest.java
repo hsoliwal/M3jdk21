@@ -78,7 +78,7 @@ final class IndexedLiveViewRecipeTest {
     private static List<SourceFile> inputs() throws Exception {
         List<SourceFile> files = new ArrayList<>();
         Path pre = Path.of(System.getProperty("repo.root"),
-                "m3/collections/qualification/indexed-live-views-20261021/pre");
+                "make/m3/collections/qualification/indexed-live-views-20261021/pre");
         for (Row row : rows()) {
             if ("ABSENT".equals(row.before())) continue;
             String source = Files.readString(pre.resolve(Path.of(row.path()).getFileName() + ".txt"));

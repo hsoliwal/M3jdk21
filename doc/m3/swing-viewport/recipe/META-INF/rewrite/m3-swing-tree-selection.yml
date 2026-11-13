@@ -5,7 +5,7 @@ type: specs.openrewrite.org/v1beta/recipe
 name: com.synexia.openrewrite.viewport.M3SwingTreeSelectionContinuity
 displayName: DefaultTreeSelectionModel.insureRowContinuity skips selected paths without a row (D2)
 description: >-
-  M3 upstream defect D2 (m3/docs/swing-viewport/UPSTREAM_DEFECTS.tsv, DESIGN.md section 4). insureRowContinuity
+  M3 upstream defect D2 (doc/m3/swing-viewport/UPSTREAM_DEFECTS.tsv, DESIGN.md section 4). insureRowContinuity
   keeps the first run of contiguous selected rows and copies each selected path whose row is below the first gap
   to newSel[row - min]. A selected path that is not visible has row -1, so the index was negative and the method
   threw ArrayIndexOutOfBoundsException. One guard before the copy skips rows below min: a path without a row is

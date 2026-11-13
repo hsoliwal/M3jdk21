@@ -8,7 +8,7 @@ import java.util.Objects;
 import jdk.internal.m3.collections.InternalLeaseRecycler;
 
 /** Same deterministic operations against original and candidate Java21 bytecode. */
-//FLLDCIM: RELOCATE - donor blob 54c126868d13 at fd9a233680b4; recipe m3/collections/recipe/transient-facade-20261106/relocate.py v4
+//FLLDCIM: RELOCATE - donor blob 54c126868d13 at fd9a233680b4; recipe make/m3/collections/recipe/transient-facade-20261106/relocate.py v4
 public final class DoopLazyIdleDifferential {
     private static final class Cell {
         long owner = -1;

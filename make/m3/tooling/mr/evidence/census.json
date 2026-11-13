@@ -1,7 +1,7 @@
 {
   "source_commit": "4f9a91ab6239212acdb676757d96f5083d27c474",
   "target_base": "c0a14387009aefc7d62bd3268055d526e04f9074",
-  "canonical_mapping": "m3/docs/name-mapping.json",
+  "canonical_mapping": "doc/m3/name-mapping.json",
   "selection": "All blobs under src/main in nine exact subtrees; MIndex/MatIndex prefix is an annotation, not dependency admission.",
   "source_tree_complete": false,
   "semantic_dependency_closure_complete": false,

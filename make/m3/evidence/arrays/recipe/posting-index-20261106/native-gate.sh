@@ -34,7 +34,7 @@ java -version 2>&1 | head -1; gcc --version | head -1; cmake --version | head -1
 
 target_package=$(awk -F'\t' '$1=="PACKAGE" {print $3; exit}' "$MAP")
 donor_c=$(awk -F'\t' '$1=="FILE" && $2 ~ /\.c$/ {print $2; exit}' "$MAP")
-mainpath_c=$(echo "$donor_c" | sed 's#^m3/qualification/[^/]*/retained-variants/[^/]*/##')
+mainpath_c=$(echo "$donor_c" | sed 's#^make/m3/qualification/[^/]*/retained-variants/[^/]*/##')
 donor_symbol=$(awk -F'\t' '$1=="JNI" {print $2; exit}' "$MAP")
 relocated_symbol=$(awk -F'\t' '$1=="JNI" {print $3; exit}' "$MAP")
 donor_header=$(awk -F'\t' '$1=="INCLUDE" {print $2; exit}' "$MAP" | tr -d '"')

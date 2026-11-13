@@ -4,7 +4,7 @@ on:
     paths:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3BagRankIndex.java'
       - 'test/jdk/jdk/m3/collections/M3BagRankIndex*'
-      - 'm3/collections/qualification/m3-native-bag-rank-index-20261018/**'
+      - 'make/m3/collections/qualification/m3-native-bag-rank-index-20261018/**'
       - '.github/workflows/m3-native-bag-rank-index-20261018.yml'
   workflow_dispatch:
 concurrency:
@@ -21,7 +21,7 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Byte-for-byte canonical Synexia source-recipe proof
-        run: python3 m3/collections/qualification/m3-native-bag-rank-index-20261018/verify.py
+        run: python3 make/m3/collections/qualification/m3-native-bag-rank-index-20261018/verify.py
       - name: Strict Java21 compile against actual M3 CountedBag and JNI owners
         run: |
           mkdir -p "$RUNNER_TEMP/classes"

@@ -6,16 +6,16 @@ on:
   pull_request:
     paths:
       - '.github/workflows/m3-backport-wave-current-output.yml'
-      - 'm3/tooling/backport-wave-current-output/**'
-      - 'm3/backports/test_compatibility_policy.py'
-      - 'm3/backports/compatibility_policy.py'
-      - 'm3/backports/POST21_PRIORITY_COMPATIBILITY.tsv'
-      - 'm3/backports/JEP_CATALOGUE.tsv'
-      - 'm3/backports/RELEASE_JEP_AUTHORITY.tsv'
-      - 'm3/backports/test_backport_execution_waves.py'
-      - 'm3/backports/backport_execution_waves.py'
-      - 'm3/backports/BACKPORT_EXECUTION_WAVES.md'
-      - 'm3/compatibility/m3-wave-admission-pin-20261014.tsv'
+      - 'make/m3/tooling/backport-wave-current-output/**'
+      - 'make/m3/backports/test_compatibility_policy.py'
+      - 'make/m3/backports/compatibility_policy.py'
+      - 'make/m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv'
+      - 'make/m3/backports/JEP_CATALOGUE.tsv'
+      - 'make/m3/backports/RELEASE_JEP_AUTHORITY.tsv'
+      - 'make/m3/backports/test_backport_execution_waves.py'
+      - 'make/m3/backports/backport_execution_waves.py'
+      - 'make/m3/backports/BACKPORT_EXECUTION_WAVES.md'
+      - 'make/m3/compatibility/m3-wave-admission-pin-20261014.tsv'
       - '.github/workflows/m3jdk21-backport-wave-admission.yml'
 permissions:
   contents: read
@@ -138,7 +138,7 @@ jobs:
           root=pathlib.Path(os.environ["M3_PROOF_ROOT"])
           source=pathlib.Path(os.environ["M3_SOURCE_ROOT"])
           bundle=root/"artifacts";bundle.mkdir(exist_ok=False)
-          sdk=source/"m3/tooling/backport-wave-current-output/sdk"
+          sdk=source/"make/m3/tooling/backport-wave-current-output/sdk"
           start=time.monotonic()
           active_command=None
           class CensusRescan(RuntimeError):pass
@@ -299,7 +299,7 @@ jobs:
               gate()
               if code!=expected:raise RuntimeError(name+" failed with "+str(code)+" expected "+str(expected))
           py=[os.environ["M3_PYTHON"],"-I","-S","-B"]
-          qualifier=source/"m3/tooling/backport-wave-current-output/qualify.py"
+          qualifier=source/"make/m3/tooling/backport-wave-current-output/qualify.py"
           settings=root/"home/.m2"
           maven=["mvn","-B","-ntp","-s",str(settings/"settings.xml"),"-gs",str(settings/"global-settings.xml"),"-Dmaven.repo.local="+str(root/"m2"),"-Dstyle.color=never"]
           try:

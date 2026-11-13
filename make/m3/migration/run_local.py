@@ -15,14 +15,14 @@ import tempfile
 import xml.etree.ElementTree as ET
 from recipe import canonical, digest, execute
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 HERE = Path(__file__).resolve().parent
 PORT = ROOT / 'm3/ports/indexstring'
 
 def input_snapshot() -> dict[str, str]:
     """Hash only declared migration inputs, not unrelated OpenJDK source trees."""
     inputs = {}
-    for area in (PORT, HERE, ROOT / 'm3/tooling/migration-recipes'):
+    for area in (PORT, HERE, ROOT / 'make/m3/tooling/migration-recipes'):
         for path in sorted(area.rglob('*')):
             if path.is_symlink(): raise RuntimeError('symlink input refused: ' + str(path))
             if (path.is_file() and path.suffix in ('.java', '.c', '.py', '.xml', '.json', '.txt')

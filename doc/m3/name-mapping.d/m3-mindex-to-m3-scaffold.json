@@ -1,6 +1,6 @@
 {
   "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
-  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf. Lineage of every received MIndex to M3 SDK scaffold (m3/compatibility/MINDEX_TO_M3_SCAFFOLD_LEDGER.tsv).",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf. Lineage of every received MIndex to M3 SDK scaffold (make/m3/compatibility/MINDEX_TO_M3_SCAFFOLD_LEDGER.tsv).",
   "mappings": [
     {
       "source": "com.synexia.indexstring.MIndexAddressedBits (2694b63a9299)",

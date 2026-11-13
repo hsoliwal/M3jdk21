@@ -3,11 +3,11 @@ name: M3JDK21 semantic atom census Java21 and Maven admission
 on:
   pull_request:
     paths:
-      - 'm3/tooling/atom-census/**'
+      - 'make/m3/tooling/atom-census/**'
       - '.github/workflows/m3-semantic-census-20261101.yml'
   push:
     paths:
-      - 'm3/tooling/atom-census/**'
+      - 'make/m3/tooling/atom-census/**'
       - '.github/workflows/m3-semantic-census-20261101.yml'
 permissions:
   contents: read
@@ -29,7 +29,7 @@ jobs:
           python3 - <<'PY'
           import hashlib,json
           from pathlib import Path
-          receipt=json.loads(Path('m3/tooling/atom-census/contract/M3_SEMANTIC_CENSUS_V2_RECEIPT.json').read_text())
+          receipt=json.loads(Path('make/m3/tooling/atom-census/contract/M3_SEMANTIC_CENSUS_V2_RECEIPT.json').read_text())
           if receipt['external_api_changed'] or receipt['jni_abi_changed']:
               raise SystemExit('REFUSED: ABI unlock')
           for key in ('source_change','test_change'):
@@ -46,7 +46,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          root=m3/tooling/atom-census
+          root=make/m3/tooling/atom-census
           mkdir -p "$RUNNER_TEMP/m3-semantic"
           javac --release 21 -proc:none -Xlint:all -Werror -d "$RUNNER_TEMP/m3-semantic" \
             "$root/src/main/java/jdk/m3/tooling/atoms/contract/AtomKind.java" \
@@ -59,10 +59,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          bash m3/tooling/atom-census/verify-contract.sh
+          bash make/m3/tooling/atom-census/verify-contract.sh
       - name: Execute actual JUnit tests in M3JDK21 atom census module
         shell: bash
-        run: mvn -B -ntp -f m3/tooling/atom-census/pom.xml clean test
+        run: mvn -B -ntp -f make/m3/tooling/atom-census/pom.xml clean test
       - name: Require Surefire cases without failure or skip
         shell: bash
         run: |
@@ -70,7 +70,7 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           import xml.etree.ElementTree as ET
-          reports=Path('m3/tooling/atom-census/target/surefire-reports')
+          reports=Path('make/m3/tooling/atom-census/target/surefire-reports')
           files=sorted(reports.glob('TEST-*.xml'))
           if not files: raise SystemExit('HOLD: no JUnit XML')
           count=0

@@ -5,8 +5,8 @@
 
   python public_names_gate.py --base <rev> --out <dir> [--checker <check_public_names.py>]
 
-Resolves --base and HEAD to commit ids and runs m3/compatibility/check_public_names.py --base --head on them,
-with GIT_NO_LAZY_FETCH=1 so a blobless clone fetches nothing. A sparse checkout without m3/compatibility passes a
+Resolves --base and HEAD to commit ids and runs make/m3/compatibility/check_public_names.py --base --head on them,
+with GIT_NO_LAZY_FETCH=1 so a blobless clone fetches nothing. A sparse checkout without make/m3/compatibility passes a
 copy with --checker; the copy must be HEAD's blob of that path (git blob ids). Writes <out>/public-names.json
 (base, head, checker blob, exit code, changed files, violations, status) and exits with the checker's code.
 """
@@ -24,7 +24,7 @@ sys.dont_write_bytecode = True
 
 REPO = Path(__file__).resolve().parents[4]
 GATE = "public_names"
-CHECKER_REL = "m3/compatibility/check_public_names.py"
+CHECKER_REL = "make/m3/compatibility/check_public_names.py"
 OUTPUT = "public-names.json"
 SUMMARY = re.compile(r"^PUBLIC_NAMES files=(?P<files>\d+) violations=(?P<violations>\d+)$", re.MULTILINE)
 GIT_ENV = {"GIT_NO_LAZY_FETCH": "1"}

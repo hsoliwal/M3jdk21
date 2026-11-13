@@ -44,7 +44,7 @@ ZIP movement executes with the normal provider configuration.
 
 The all-recipe suite at the same head executed 77 tests with 12 failures. Its
 remaining attribution, fixture, introspection and assertion failures are listed
-in `m3/tooling/migration-recipes/tasks/db-mark/ACTION_QUEUE.tsv`. A green database
+in `make/m3/tooling/migration-recipes/tasks/db-mark/ACTION_QUEUE.tsv`. A green database
 or individual recipe case does not certify that suite or the full Maven reactor.
 
 This report supersedes this task's earlier pending DB/JUnit/coverage statements

@@ -20,7 +20,7 @@
       "post_sha256": "79f02e7adb6e0199a1cee58a771468e5af6753805b3bc84c23263881e6441b83"
     },
     {
-      "path": "m3/tooling/atom-census/contract/ADMISSION_COUNT_INVARIANT.md",
+      "path": "make/m3/tooling/atom-census/contract/ADMISSION_COUNT_INVARIANT.md",
       "pre_sha256": "ABSENT",
       "post_sha256": "d621748ef62fb096f0c29573114fcc2a3557afa55ab1313fd6b4fd1414138754"
     }

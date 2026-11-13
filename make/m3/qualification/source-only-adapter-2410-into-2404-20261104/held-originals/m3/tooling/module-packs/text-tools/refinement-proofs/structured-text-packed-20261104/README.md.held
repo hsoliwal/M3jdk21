@@ -16,7 +16,7 @@ Canonical source: [Synexia PR #16128](https://github.com/hsoliwal/com.synexia/pu
 
 Actual recipe outputs passed strict Java21 compilation, protected differential tests in normal/interpreted modes, real JUnit, checked JNI with compiled C17 current/legacy libraries, public API/JNI export parity, and exact output-admission checks. The complete two-module text/structured source closure was built into JMODs and a stock Java21 linked image; all five existing structured CLI operations passed smoke tests. The existing module-name advisory is recorded separately from product lint.
 
-The receiving tests are in `m3/tooling/module-packs/text-tools/src/test/java`. Their only external test dependency is JUnit5; dependency-free contract mains are also present. They are product tests emitted by the canonical recipe. The private task's README contains complete reproducible commands and baseline pins.
+The receiving tests are in `make/m3/tooling/module-packs/text-tools/src/test/java`. Their only external test dependency is JUnit5; dependency-free contract mains are also present. They are product tests emitted by the canonical recipe. The private task's README contains complete reproducible commands and baseline pins.
 
 ## Scope and resource tradeoffs
 

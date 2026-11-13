@@ -21,7 +21,7 @@
   },
   "postimages": [
     {
-      "path": "m3/collections/recipe/src/test/java/jdk/internal/m3/rewrite/M3LongLongHashMapEmptyValueRecipeTest.java",
+      "path": "make/m3/collections/recipe/src/test/java/jdk/internal/m3/rewrite/M3LongLongHashMapEmptyValueRecipeTest.java",
       "sha256": "ae6fd05551b012ff21dd60767a59555e5f65b860edf9c94ce535a6a505808d15",
       "gitBlob": "e26c03cd19da2fcf36883610d02b50b20cb75eda"
     }

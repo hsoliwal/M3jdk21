@@ -3,7 +3,7 @@
   "mirrors": [
     {
       "source": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/enhancements/20261018-source-seals",
-      "target": "m3/tooling/shared-frontend/recipe-custody/enhancements/20261018-source-seals",
+      "target": "make/m3/tooling/shared-frontend/recipe-custody/enhancements/20261018-source-seals",
       "before": "ABSENT",
       "files": [
         {
@@ -390,7 +390,7 @@
     },
     {
       "source": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/enhancements/20261018-plugin-selection",
-      "target": "m3/tooling/shared-frontend/recipe-custody/enhancements/20261018-plugin-selection",
+      "target": "make/m3/tooling/shared-frontend/recipe-custody/enhancements/20261018-plugin-selection",
       "before": "ABSENT",
       "files": [
         {
@@ -682,7 +682,7 @@
     },
     {
       "source": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/canonical/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/enhancements/20261018-gradle-provider",
-      "target": "m3/tooling/shared-frontend/recipe-custody/enhancements/20261018-gradle-provider",
+      "target": "make/m3/tooling/shared-frontend/recipe-custody/enhancements/20261018-gradle-provider",
       "before": "ABSENT",
       "files": [
         {

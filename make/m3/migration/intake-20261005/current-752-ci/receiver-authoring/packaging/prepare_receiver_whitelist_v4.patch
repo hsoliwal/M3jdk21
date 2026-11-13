@@ -3,12 +3,12 @@
 @@ -7,7 +7,10 @@
  
  R = Path(__file__).resolve().parents[1]
- TASK = 'm3/migration/intake-20261005/current-752-ci'
+ TASK = 'make/m3/migration/intake-20261005/current-752-ci'
 -MANIFEST_SHA = 'f25a39ea2c764a5a9f2a84b43915aa4480aa4302718bc098bd4bfaa39727f7b3'
 +MANIFEST_SHA = '8c3d4e6a28d4314a1de4c3a15c3616a371e04ac2eaf6357852c6ce28c1642db4'
 +JCC_CRATE = 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005'
-+ADDED_TARGETS = {'m3/migration/test/test_jcc_handoff_current_context.py', JCC_CRATE+'/plan-intake-752-ci.json', JCC_CRATE+'/pom-before-752.xml'}
-+PRIOR569_EXCEPTIONS = {'m3/migration/test/test_jcc_handoff_context_profiles.py', 'm3/migration/test/test_jcc_handoff_packet.py'}
++ADDED_TARGETS = {'make/m3/migration/test/test_jcc_handoff_current_context.py', JCC_CRATE+'/plan-intake-752-ci.json', JCC_CRATE+'/pom-before-752.xml'}
++PRIOR569_EXCEPTIONS = {'make/m3/migration/test/test_jcc_handoff_context_profiles.py', 'make/m3/migration/test/test_jcc_handoff_packet.py'}
  PORTABLE = {
      'producer-portable-v1': '4682c5402aeb13219555a8bf2addd286f5088eb8055c8b887523a68a624f2847',
      'cir-producer-portable-v1': 'cf090e7f50ba798f7983d8a2bb0d3a0f9377c15864e7d50a258d61900f07e889',

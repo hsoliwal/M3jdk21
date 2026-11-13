@@ -3,7 +3,7 @@
 # Compile the exact java.base source candidates; no claims about complete SDK builds.
 set -euo pipefail
 [[ $# == 1 ]] || { echo 'usage: verify.sh <new-absolute-evidence-dir>' >&2; exit 2; }
-ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
 OUT="$1"
 [[ "$OUT" == /* && ! -e "$OUT" ]] || { echo 'require a new absolute output directory' >&2; exit 2; }
 mkdir -p "$OUT"

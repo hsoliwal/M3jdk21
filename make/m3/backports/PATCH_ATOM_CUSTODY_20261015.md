@@ -37,8 +37,8 @@ refusals, not partially rewritten candidates.
 The backport Maven control plane already runs `test_*.py` during `verify`:
 
 ```bash
-python3 -m unittest discover -s m3/backports -p 'test_*.py' -v
-mvn -B -ntp -f m3/backports/pom.xml verify
+python3 -m unittest discover -s make/m3/backports -p 'test_*.py' -v
+mvn -B -ntp -f make/m3/backports/pom.xml verify
 ```
 
 `test_patch_atom_io.py` covers traversal, output/source disjointness,

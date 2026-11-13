@@ -34,7 +34,7 @@ the DROP rows (generation templates, donor scripts) and one MERGE row (`pom.xml`
 
 ## Recipe
 
-`python -I m3/optane/recipe/pmem-source-image-20261106/relocate.py --donor-git <clone> --donor-rev 5ecfe052562c [--check]`
+`python -I make/m3/optane/recipe/pmem-source-image-20261106/relocate.py --donor-git <clone> --donor-rev 5ecfe052562c [--check]`
 (`RELOCATE_PMEM_SOURCE_IMAGE` v3, derived from `pmem-region-core-20261106/relocate.py` v2: every v2 rule unchanged; v3
 adds VERBATIM rows, exact donor bytes under an `evidence/` directory, and MERGE rows, documented edits of existing module
 files). TYPE rows `Pmem* -> M3Pmem*` repeat the region-core map and add the twelve types of this leaf; the campaign test

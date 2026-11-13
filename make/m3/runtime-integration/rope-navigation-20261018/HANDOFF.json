@@ -81,7 +81,7 @@
       "role": "Already-qualified C1-stage output, not a handoff preimage or new handoff target"
     },
     {
-      "path": "m3/runtime-integration/rope-navigation-20261018/M3StringCursorBenchmark.java",
+      "path": "make/m3/runtime-integration/rope-navigation-20261018/M3StringCursorBenchmark.java",
       "repository": "hsoliwal/M3jdk21",
       "input_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "before_sha256": "ABSENT",
@@ -92,7 +92,7 @@
       "role": "Already-qualified C1-stage output, not a handoff preimage or new handoff target"
     },
     {
-      "path": "m3/docs/name-mapping.json",
+      "path": "doc/m3/name-mapping.json",
       "repository": "hsoliwal/M3jdk21",
       "input_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "before_sha256": "a28f218198b30d1292d51836c8912d1f69229ef9bef40a4726a2808bcdcb4d46",
@@ -103,7 +103,7 @@
       "role": "Already-qualified C1-stage output, not a handoff preimage or new handoff target"
     },
     {
-      "path": "m3/runtime-integration/rope-navigation-20261018/run_actual_owner_cursor.py",
+      "path": "make/m3/runtime-integration/rope-navigation-20261018/run_actual_owner_cursor.py",
       "repository": "hsoliwal/M3jdk21",
       "input_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "before_sha256": "ABSENT",
@@ -117,7 +117,7 @@
   "unchanged_C1_support_custody": [
     {
       "target_repository": "hsoliwal/M3jdk21",
-      "target_path": "m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/README.md",
+      "target_path": "make/m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/README.md",
       "target_input_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "target_before": "ABSENT",
       "canonical_source_repository": "hsoliwal/com.synexia",
@@ -131,7 +131,7 @@
     },
     {
       "target_repository": "hsoliwal/M3jdk21",
-      "target_path": "m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/analysis/cursor-ab-final.json",
+      "target_path": "make/m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/analysis/cursor-ab-final.json",
       "target_input_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "target_before": "ABSENT",
       "canonical_source_repository": "hsoliwal/com.synexia",
@@ -145,7 +145,7 @@
     },
     {
       "target_repository": "hsoliwal/M3jdk21",
-      "target_path": "m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/analysis/cursor-ab-final.md",
+      "target_path": "make/m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/analysis/cursor-ab-final.md",
       "target_input_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "target_before": "ABSENT",
       "canonical_source_repository": "hsoliwal/com.synexia",
@@ -159,7 +159,7 @@
     },
     {
       "target_repository": "hsoliwal/M3jdk21",
-      "target_path": "m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/analysis/inlining-summary.json",
+      "target_path": "make/m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/analysis/inlining-summary.json",
       "target_input_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "target_before": "ABSENT",
       "canonical_source_repository": "hsoliwal/com.synexia",
@@ -173,7 +173,7 @@
     },
     {
       "target_repository": "hsoliwal/M3jdk21",
-      "target_path": "m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/analysis/inlining-summary.md",
+      "target_path": "make/m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/analysis/inlining-summary.md",
       "target_input_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "target_before": "ABSENT",
       "canonical_source_repository": "hsoliwal/com.synexia",
@@ -187,7 +187,7 @@
     },
     {
       "target_repository": "hsoliwal/M3jdk21",
-      "target_path": "m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/diagnostic/M3CursorCaseDiagnostic.java",
+      "target_path": "make/m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/diagnostic/M3CursorCaseDiagnostic.java",
       "target_input_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "target_before": "ABSENT",
       "canonical_source_repository": "hsoliwal/com.synexia",
@@ -201,7 +201,7 @@
     },
     {
       "target_repository": "hsoliwal/M3jdk21",
-      "target_path": "m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/environment.json",
+      "target_path": "make/m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/environment.json",
       "target_input_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "target_before": "ABSENT",
       "canonical_source_repository": "hsoliwal/com.synexia",
@@ -215,7 +215,7 @@
     },
     {
       "target_repository": "hsoliwal/M3jdk21",
-      "target_path": "m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/file-manifest.json",
+      "target_path": "make/m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/file-manifest.json",
       "target_input_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "target_before": "ABSENT",
       "canonical_source_repository": "hsoliwal/com.synexia",
@@ -229,7 +229,7 @@
     },
     {
       "target_repository": "hsoliwal/M3jdk21",
-      "target_path": "m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/final-sdk-binding.json",
+      "target_path": "make/m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/final-sdk-binding.json",
       "target_input_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "target_before": "ABSENT",
       "canonical_source_repository": "hsoliwal/com.synexia",
@@ -243,7 +243,7 @@
     },
     {
       "target_repository": "hsoliwal/M3jdk21",
-      "target_path": "m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/index.json",
+      "target_path": "make/m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/index.json",
       "target_input_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "target_before": "ABSENT",
       "canonical_source_repository": "hsoliwal/com.synexia",
@@ -257,7 +257,7 @@
     },
     {
       "target_repository": "hsoliwal/M3jdk21",
-      "target_path": "m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/baseline-1.json",
+      "target_path": "make/m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/baseline-1.json",
       "target_input_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "target_before": "ABSENT",
       "canonical_source_repository": "hsoliwal/com.synexia",
@@ -271,7 +271,7 @@
     },
     {
       "target_repository": "hsoliwal/M3jdk21",
-      "target_path": "m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/baseline-2.json",
+      "target_path": "make/m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/baseline-2.json",
       "target_input_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "target_before": "ABSENT",
       "canonical_source_repository": "hsoliwal/com.synexia",
@@ -285,7 +285,7 @@
     },
     {
       "target_repository": "hsoliwal/M3jdk21",
-      "target_path": "m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/baseline-final-contract.json",
+      "target_path": "make/m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/baseline-final-contract.json",
       "target_input_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "target_before": "ABSENT",
       "canonical_source_repository": "hsoliwal/com.synexia",
@@ -299,7 +299,7 @@
     },
     {
       "target_repository": "hsoliwal/M3jdk21",
-      "target_path": "m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/bench-repeat.json",
+      "target_path": "make/m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/bench-repeat.json",
       "target_input_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "target_before": "ABSENT",
       "canonical_source_repository": "hsoliwal/com.synexia",
@@ -313,7 +313,7 @@
     },
     {
       "target_repository": "hsoliwal/M3jdk21",
-      "target_path": "m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/candidate-1.json",
+      "target_path": "make/m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/candidate-1.json",
       "target_input_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "target_before": "ABSENT",
       "canonical_source_repository": "hsoliwal/com.synexia",
@@ -327,7 +327,7 @@
     },
     {
       "target_repository": "hsoliwal/M3jdk21",
-      "target_path": "m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/candidate2-actual-contract.json",
+      "target_path": "make/m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/candidate2-actual-contract.json",
       "target_input_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "target_before": "ABSENT",
       "canonical_source_repository": "hsoliwal/com.synexia",
@@ -341,7 +341,7 @@
     },
     {
       "target_repository": "hsoliwal/M3jdk21",
-      "target_path": "m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/candidate2-benchmark.json",
+      "target_path": "make/m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/candidate2-benchmark.json",
       "target_input_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "target_before": "ABSENT",
       "canonical_source_repository": "hsoliwal/com.synexia",
@@ -355,7 +355,7 @@
     },
     {
       "target_repository": "hsoliwal/M3jdk21",
-      "target_path": "m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/candidate3-actual-contract.json",
+      "target_path": "make/m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/candidate3-actual-contract.json",
       "target_input_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "target_before": "ABSENT",
       "canonical_source_repository": "hsoliwal/com.synexia",
@@ -369,7 +369,7 @@
     },
     {
       "target_repository": "hsoliwal/M3jdk21",
-      "target_path": "m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/candidate3-benchmark.json",
+      "target_path": "make/m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/candidate3-benchmark.json",
       "target_input_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "target_before": "ABSENT",
       "canonical_source_repository": "hsoliwal/com.synexia",
@@ -383,7 +383,7 @@
     },
     {
       "target_repository": "hsoliwal/M3jdk21",
-      "target_path": "m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/diagnostic-baseline-atom-16384-forward.json",
+      "target_path": "make/m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/diagnostic-baseline-atom-16384-forward.json",
       "target_input_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "target_before": "ABSENT",
       "canonical_source_repository": "hsoliwal/com.synexia",
@@ -397,7 +397,7 @@
     },
     {
       "target_repository": "hsoliwal/M3jdk21",
-      "target_path": "m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/diagnostic-baseline-atom-16384-random.json",
+      "target_path": "make/m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/diagnostic-baseline-atom-16384-random.json",
       "target_input_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "target_before": "ABSENT",
       "canonical_source_repository": "hsoliwal/com.synexia",
@@ -411,7 +411,7 @@
     },
     {
       "target_repository": "hsoliwal/M3jdk21",
-      "target_path": "m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/diagnostic-baseline-balanced-64-16384-forward.json",
+      "target_path": "make/m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/diagnostic-baseline-balanced-64-16384-forward.json",
       "target_input_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "target_before": "ABSENT",
       "canonical_source_repository": "hsoliwal/com.synexia",
@@ -425,7 +425,7 @@
     },
     {
       "target_repository": "hsoliwal/M3jdk21",
-      "target_path": "m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/diagnostic-baseline-balanced-64-16384-random.json",
+      "target_path": "make/m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/diagnostic-baseline-balanced-64-16384-random.json",
       "target_input_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "target_before": "ABSENT",
       "canonical_source_repository": "hsoliwal/com.synexia",
@@ -439,7 +439,7 @@
     },
     {
       "target_repository": "hsoliwal/M3jdk21",
-      "target_path": "m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/diagnostic-candidate2-atom-16384-forward.json",
+      "target_path": "make/m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/diagnostic-candidate2-atom-16384-forward.json",
       "target_input_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "target_before": "ABSENT",
       "canonical_source_repository": "hsoliwal/com.synexia",
@@ -453,7 +453,7 @@
     },
     {
       "target_repository": "hsoliwal/M3jdk21",
-      "target_path": "m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/diagnostic-candidate2-atom-16384-random.json",
+      "target_path": "make/m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/diagnostic-candidate2-atom-16384-random.json",
       "target_input_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "target_before": "ABSENT",
       "canonical_source_repository": "hsoliwal/com.synexia",
@@ -467,7 +467,7 @@
     },
     {
       "target_repository": "hsoliwal/M3jdk21",
-      "target_path": "m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/diagnostic-candidate2-balanced-64-16384-forward.json",
+      "target_path": "make/m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/diagnostic-candidate2-balanced-64-16384-forward.json",
       "target_input_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "target_before": "ABSENT",
       "canonical_source_repository": "hsoliwal/com.synexia",
@@ -481,7 +481,7 @@
     },
     {
       "target_repository": "hsoliwal/M3jdk21",
-      "target_path": "m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/diagnostic-candidate2-balanced-64-16384-random.json",
+      "target_path": "make/m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/diagnostic-candidate2-balanced-64-16384-random.json",
       "target_input_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "target_before": "ABSENT",
       "canonical_source_repository": "hsoliwal/com.synexia",
@@ -495,7 +495,7 @@
     },
     {
       "target_repository": "hsoliwal/M3jdk21",
-      "target_path": "m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/diagnostic-control.json",
+      "target_path": "make/m3/runtime-integration/rope-navigation-20261018/evidence/m3-cursor/raw/diagnostic-control.json",
       "target_input_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "target_before": "ABSENT",
       "canonical_source_repository": "hsoliwal/com.synexia",
@@ -509,7 +509,7 @@
     },
     {
       "target_repository": "hsoliwal/M3jdk21",
-      "target_path": "m3/runtime-integration/rope-navigation-20261018/evidence/m3-api/after.javap.txt",
+      "target_path": "make/m3/runtime-integration/rope-navigation-20261018/evidence/m3-api/after.javap.txt",
       "target_input_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "target_before": "ABSENT",
       "canonical_source_repository": "hsoliwal/com.synexia",
@@ -523,7 +523,7 @@
     },
     {
       "target_repository": "hsoliwal/M3jdk21",
-      "target_path": "m3/runtime-integration/rope-navigation-20261018/evidence/m3-api/before.javap.txt",
+      "target_path": "make/m3/runtime-integration/rope-navigation-20261018/evidence/m3-api/before.javap.txt",
       "target_input_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "target_before": "ABSENT",
       "canonical_source_repository": "hsoliwal/com.synexia",
@@ -537,7 +537,7 @@
     },
     {
       "target_repository": "hsoliwal/M3jdk21",
-      "target_path": "m3/runtime-integration/rope-navigation-20261018/evidence/m3-api/receipt.json",
+      "target_path": "make/m3/runtime-integration/rope-navigation-20261018/evidence/m3-api/receipt.json",
       "target_input_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "target_before": "ABSENT",
       "canonical_source_repository": "hsoliwal/com.synexia",
@@ -552,13 +552,13 @@
   ],
   "new_handoff_documents": [
     {
-      "path": "m3/runtime-integration/rope-navigation-20261018/README.md",
+      "path": "make/m3/runtime-integration/rope-navigation-20261018/README.md",
       "before": "ABSENT",
       "receiver_base": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "origin": "New first-party replay instructions; exact bytes sealed by the handoff manifest."
     },
     {
-      "path": "m3/runtime-integration/rope-navigation-20261018/HANDOFF.json",
+      "path": "make/m3/runtime-integration/rope-navigation-20261018/HANDOFF.json",
       "before": "ABSENT",
       "receiver_base": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "origin": "New first-party custody metadata; exact bytes sealed by the handoff manifest."

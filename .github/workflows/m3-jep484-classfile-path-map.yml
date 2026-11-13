@@ -7,7 +7,7 @@ on:
       - "m3/jep484-path-map-20261006"
   pull_request:
     paths:
-      - "m3/backports/recipes/jep-484-classfile-api/**"
+      - "make/m3/backports/recipes/jep-484-classfile-api/**"
       - ".github/workflows/m3-jep484-classfile-path-map.yml"
   workflow_dispatch:
 
@@ -38,18 +38,18 @@ jobs:
         run: |
           set -euo pipefail
           # Standalone (2026-10-31): the validator is absorbed byte-identically (canonical Git blob
-          # below; receiver record in m3/compatibility/); no other repository is fetched
-          # (m3/tooling/standalone/M3_REFS.tsv).
-          test "$(git hash-object m3/tooling/validators/WorkflowStructureCheck.java)" = \
+          # below; receiver record in make/m3/compatibility/); no other repository is fetched
+          # (make/m3/tooling/standalone/M3_REFS.tsv).
+          test "$(git hash-object make/m3/tooling/validators/WorkflowStructureCheck.java)" = \
             "f61be81f5a15bea78f1c5ae7d5555844c9cd2ea7"
-          java m3/tooling/validators/WorkflowStructureCheck.java \
+          java make/m3/tooling/validators/WorkflowStructureCheck.java \
             .github/workflows/m3-jep484-classfile-path-map.yml
 
       - name: Diff hygiene
         run: git diff --check
 
       - name: Unit-test mapper
-        run: python3 m3/backports/recipes/jep-484-classfile-api/test_path_map.py
+        run: python3 make/m3/backports/recipes/jep-484-classfile-api/test_path_map.py
 
       - name: Fetch exact OpenJDK donor refs
         run: |
@@ -61,7 +61,7 @@ jobs:
         run: |
           set -euo pipefail
           out="$RUNNER_TEMP/jep484-map"
-          python3 m3/backports/recipes/jep-484-classfile-api/path_map.py             --repo . --jdk21-ref refs/tags/m3jdk21 --jdk24-ref refs/tags/m3jdk24             --out "$out"
+          python3 make/m3/backports/recipes/jep-484-classfile-api/path_map.py             --repo . --jdk21-ref refs/tags/m3jdk21 --jdk24-ref refs/tags/m3jdk24             --out "$out"
           python3 - "$out/summary.json" <<'PY'
           import json,sys
           d=json.load(open(sys.argv[1],encoding="utf-8"))
@@ -82,8 +82,8 @@ jobs:
 
       - name: Re-run existing inventory verifier
         run: |
-          python3 m3/backports/recipes/jep-484-classfile-api/verify.py
-          python3 m3/backports/recipes/jep-484-classfile-api/test_verify.py
+          python3 make/m3/backports/recipes/jep-484-classfile-api/verify.py
+          python3 make/m3/backports/recipes/jep-484-classfile-api/test_verify.py
 
 
       - name: Upload map evidence

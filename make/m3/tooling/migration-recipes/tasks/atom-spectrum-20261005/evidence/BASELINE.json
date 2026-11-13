@@ -42,12 +42,12 @@
     ]
   },
   "preserved_snapshot_helper": {
-    "path": "m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+    "path": "make/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
     "git_blob": "717c3e01f8f0407ce96439e3ecc96190b10c1eed",
     "sha256": "9cf77c6e68a534e84b88230ca517fa6c5a76fb3e101ea3a1f68aa5222c3ec4d9"
   },
   "corpus_pin_commit": "e8fdab9a7abc4b0273438ce9e5d0ffd6255b1247",
-  "write_scope": "m3/tooling/migration-recipes",
+  "write_scope": "make/m3/tooling/migration-recipes",
   "remote_publication": "parent-owned; not performed by this task lane",
   "source_pins": "../SOURCE_PINS.tsv",
   "corpus_pins": "../../../src/test/resources/com/m3/rewrite/atom/spectrum/CORPUS.tsv",

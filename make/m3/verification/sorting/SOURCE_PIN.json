@@ -17,7 +17,7 @@
     "runtime_module": "java.base"
   },
   "mirror": {
-    "path": "m3/tooling/sort-recipes/m3-java-util-sorts-20261018",
+    "path": "make/m3/tooling/sort-recipes/m3-java-util-sorts-20261018",
     "role": "EXACT_NON_CANONICAL_SOURCE_MIRROR",
     "file_count": 86,
     "total_bytes": 531952,

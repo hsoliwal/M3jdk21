@@ -3,7 +3,7 @@ name: M3 SDK five-provider fork source package relocation
 on:
   pull_request:
     paths:
-      - 'm3/collections/relocation/five-provider-20261018/**'
+      - 'make/m3/collections/relocation/five-provider-20261018/**'
       - '.github/workflows/m3-five-provider-fork-relocation.yml'
   workflow_dispatch:
 concurrency:
@@ -20,4 +20,4 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Run actual OpenRewrite package-refactoring Maven tests
-        run: mvn -B -ntp -f m3/collections/relocation/five-provider-20261018/pom.xml clean test
+        run: mvn -B -ntp -f make/m3/collections/relocation/five-provider-20261018/pom.xml clean test

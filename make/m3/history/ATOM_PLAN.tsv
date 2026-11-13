@@ -12,6 +12,6 @@ P0	RuntimeSafety	Capability gate	JIT intrinsics / GC dedup / CDS / JFR / SA	neve
 P1	SharedFacts	Immutable memoized value	Java hash / code points / character flags / prefix facts	facts owned by canonical atom/composition; exact UTF-16 verification	storage + consumers	OPEN
 P1	OperationBridge	Adapter / strategy	String operations and regex consumers	operate on canonical atoms; materialize only explicit boundaries	file then package then module	OPEN
 P1	PatternDocumentation	Semantic contract ledger	Javadoc + existing naming/migration authority	declared roles agree with code and tests; no invented annotations	appropriate owner scope	OPEN
-P1	SourceRecipe	Template / source-bound transformation	m3/tooling + m3/migration + historical OpenRewrite recipes	drift refusal; reversible proof; fixed point; public API lock	existing recipe owners	OPEN_REUSE
+P1	SourceRecipe	Template / source-bound transformation	make/m3/tooling + make/m3/migration + historical OpenRewrite recipes	drift refusal; reversible proof; fixed point; public API lock	existing recipe owners	OPEN_REUSE
 P1	ForwardPortQueue	Serial ratifier	PR11/12/13/15/16 changes	preserve distinct valid work; explicit supersession rather than silent overwrite	verified integration branch	OPEN
 P0	ExactHeadAcceptance	Differential oracle	baseline image + candidate image + unchanged upstream tests	two StringJoiner failures remain failures; interpreter is not compiled acceptance	whole JDK	NOT_RUN

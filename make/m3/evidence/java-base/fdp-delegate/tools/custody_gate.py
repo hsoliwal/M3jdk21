@@ -32,9 +32,9 @@ import sys
 sys.dont_write_bytecode = True
 
 REPO = Path(__file__).resolve().parents[4]
-TOOL_REL = "m3/tooling/fdp-delegate/tools/fdp_delegate_overlay.py"
+TOOL_REL = "make/m3/tooling/fdp-delegate/tools/fdp_delegate_overlay.py"
 DONOR_REL = "m3/vendor/third_party/fastdoubleparser-1.0.90"
-PACK_REL = "m3/tooling/module-packs/jackson"
+PACK_REL = "make/m3/tooling/module-packs/jackson"
 LOCKED_DONORS = ("fastdoubleparser-1.0.90", "jackson-core-2.19.2")
 BASE_REVISION = "52fb81c483c74448a12eecb63aa9465e42cdb82c"
 OVERLAY = "src/main/java/ch/randelshofer/fastdoubleparser/JavaDoubleParser.java"

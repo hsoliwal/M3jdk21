@@ -64,7 +64,7 @@ There is no new VM-wide class registry. Existing `Class.getName`, class identity
 
 ## Every MIndex family remains in scope
 
-`m3/migration/vi-census.tsv` is a refreshed review queue of 2,494 matching production Java filenames
+`make/m3/migration/vi-census.tsv` is a refreshed review queue of 2,494 matching production Java filenames
 from eight exact, untruncated Git subtrees. Its receipt states the source commit, subtree roots,
 selection rule and exclusions. It includes all matching paths in those subtrees, including names
 that occur in multiple packages. It does not cover every repository module, nested declaration,
@@ -84,7 +84,7 @@ and proof tooling. No Synexia application artifact may become a product dependen
 ## License and tests
 
 The two inlined Synexia kernels and their adaptations retain Apache-2.0. Exact source originals,
-license and NOTICE snapshots live in `m3/tooling/vi/donor`; the java.base distribution notice is
+license and NOTICE snapshots live in `make/m3/tooling/vi/donor`; the java.base distribution notice is
 `src/java.base/share/legal/synexia.md`. Existing OpenJDK and third-party notices remain authoritative
 for their respective code. The user requested Apache-2.0 for relevant Synexia code; this does not
 relicense unrelated donors or the JDK.

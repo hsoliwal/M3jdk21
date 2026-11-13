@@ -127,7 +127,7 @@ its required leaves are admitted or carry explicit reviewed dispositions.
 
 ## 8. Initial executable leaf
 
-The initial implementation under `m3/tooling/atom-census` provides:
+The initial implementation under `make/m3/tooling/atom-census` provides:
 
 - a closed atom-kind and proof-gate vocabulary;
 - source-only `@M3AtomSpec` plus descriptor/evidence interfaces;

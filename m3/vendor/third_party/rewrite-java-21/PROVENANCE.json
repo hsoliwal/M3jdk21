@@ -3,7 +3,7 @@
   "automatic_module_name": "",
   "build": "commands",
   "build_reason": "LOMBOK_AT_SOURCE_LEVEL;COMPILED_EXPORT_OVER_BUDGET (runner compile passed; attributed distribution exceeded the export budget)",
-  "consumers": "synexia-openrewrite-recipes, M3jdk21 m3/tooling",
+  "consumers": "synexia-openrewrite-recipes, M3jdk21 make/m3/tooling",
   "coordinate": "org.openrewrite:rewrite-java-21:8.17.1-m3-source-1",
   "decision": "DIRECT_IMPORT",
   "delomboked": true,

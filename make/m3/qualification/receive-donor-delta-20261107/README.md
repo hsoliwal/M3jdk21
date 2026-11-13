@@ -1,10 +1,10 @@
-# Receipt: m3jdk-donor-convergence (m3/tooling/donor-delta)
+# Receipt: m3jdk-donor-convergence (make/m3/tooling/donor-delta)
 
 This receives the com.synexia receiver crate `m3jdk-donor-convergence-20261101` at develop `ded4a4acdffe`. The crate
 carries four postimage generations (`postimages`, `-v2`, `-v3`, `-v4`). Each target path takes its newest generation,
 as `PROVENANCE.tsv` records per file.
 
-The result is a new tool, `m3/tooling/donor-delta` (package `jdk.m3.tooling.donors`):
+The result is a new tool, `make/m3/tooling/donor-delta` (package `jdk.m3.tooling.donors`):
 - `M3DonorDeltaPlanner`, the deterministic, fail-closed, read-only donor delta inventory.
 - `M3DonorTreeLanes`, a primitive-lane tree with atomic growth and a sorted fast path.
 - Four self-test and proof mains.

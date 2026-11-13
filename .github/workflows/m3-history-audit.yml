@@ -2,7 +2,7 @@
 name: M3 frozen history audit
 on:
   pull_request:
-    paths: ['m3/history/**', '.github/workflows/m3-history-audit.yml']
+    paths: ['make/m3/history/**', '.github/workflows/m3-history-audit.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -23,17 +23,17 @@ jobs:
       - name: Diff, lexical hygiene and byte compilation
         shell: bash
         run: |
-          git diff --check f18b9d6b2d43dcec36adc46dc915e623333e613c HEAD -- m3/history .github/workflows/m3-history-audit.yml
-          python3 -m tabnanny m3/history
-          PYTHONPYCACHEPREFIX="$RUNNER_TEMP/history-pycache" python3 -m py_compile m3/history/*.py
+          git diff --check f18b9d6b2d43dcec36adc46dc915e623333e613c HEAD -- make/m3/history .github/workflows/m3-history-audit.yml
+          python3 -m tabnanny make/m3/history
+          PYTHONPYCACHEPREFIX="$RUNNER_TEMP/history-pycache" python3 -m py_compile make/m3/history/*.py
       - name: Test history contracts on isolated Git fixtures
-        run: python3 -B -m unittest discover -s m3/history -p 'test_*.py' -v
+        run: python3 -B -m unittest discover -s make/m3/history -p 'test_*.py' -v
       - name: Ensure frozen public commit objects are present
         shell: bash
         run: |
           python3 - <<'PY'
           import json, subprocess
-          data = json.load(open('m3/history/snapshot.json'))
+          data = json.load(open('make/m3/history/snapshot.json'))
           pins = set(data['refs'].values()) | {data[k] for k in ('upstream', 'candidate', 'target')}
           for sha in sorted(pins):
               result = subprocess.run(['git', 'cat-file', '-e', sha + '^{commit}'], capture_output=True)
@@ -43,9 +43,9 @@ jobs:
       - name: Capture PR metadata witness without changing the frozen graph
         env:
           GH_TOKEN: ${{ github.token }}
-        run: python3 -B m3/history/collect_prs.py --snapshot m3/history/snapshot.json --output "$RUNNER_TEMP/m3-pr-witness.json"
+        run: python3 -B make/m3/history/collect_prs.py --snapshot make/m3/history/snapshot.json --output "$RUNNER_TEMP/m3-pr-witness.json"
       - name: Traverse every frozen commit forward and backward with all parent patches
-        run: python3 -B m3/history/audit.py --repo . --snapshot m3/history/snapshot.json --prs "$RUNNER_TEMP/m3-pr-witness.json" --output "$RUNNER_TEMP/m3-history-audit"
+        run: python3 -B make/m3/history/audit.py --repo . --snapshot make/m3/history/snapshot.json --prs "$RUNNER_TEMP/m3-pr-witness.json" --output "$RUNNER_TEMP/m3-history-audit"
       - name: Publish audit summary, not runtime acceptance
         if: always()
         shell: bash

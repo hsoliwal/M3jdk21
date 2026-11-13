@@ -95,7 +95,7 @@ Listed, not fixed (16 rows, `RECIPE_LEDGER.tsv` status `SKIPPED:*`, also in `DUP
   ShapeGraphicAttribute, BasicPanelUI, BasicViewportUI, MetalToggleButtonUI, OutlineTextRenderer,
   SunMinMaxPage, XChoicePeer, JdbcRowSet, dsig Policy, xsltc SAX2DOM, javac ClassFinder + JavaCompiler,
   SA SALauncher + VM). No JDK image build ran in this leaf, so no gate: `SKIPPED:OUT_OF_GATE_SCOPE`.
-* `m3/tooling/module-packs/parser/verification/one-pass-20261020/qualification/parser-final/compiler-source/.../JavaCompiler.java`:
+* `make/m3/tooling/module-packs/parser/verification/one-pass-20261020/qualification/parser-final/compiler-source/.../JavaCompiler.java`:
   a frozen qualification evidence copy mirroring the upstream duplicate: `SKIPPED:QUALIFICATION_EVIDENCE_COPY`.
 
 ## Gates
@@ -109,8 +109,8 @@ on both sides for that reason); the 19 class files that differ on disk are `java
 ## Running the gate in CI
 
 ```
-python -I m3/qualification/dup-guard-20261106/dup_guard.py check --root . \
-    --allow m3/qualification/dup-guard-20261106/DUP_GUARD_ALLOW.tsv
+python -I make/m3/qualification/dup-guard-20261106/dup_guard.py check --root . \
+    --allow make/m3/qualification/dup-guard-20261106/DUP_GUARD_ALLOW.tsv
 ```
 
 exits 1 on any `PURE_DUP` or `DIVERGENT` row not in the allow list (one blocking line per row on stdout),

@@ -24,7 +24,7 @@ index 46f74600f0c092fde0bbaba78692987fa4ce6420..6312fc816c387d71aeabfcf17cd925e4
 -
 +      # Standalone (2026-10-31): the A3 recipe export is absorbed (m3/vendor/m3/README.md).
 +      # The reactor module tooling/synexia-jdk-a3-recipes builds and verifies it in the next step
-+      # (-am); no other repository is fetched (m3/tooling/standalone/M3_REFS.tsv).
++      # (-am); no other repository is fetched (make/m3/tooling/standalone/M3_REFS.tsv).
        - name: Verify A3 fan-in implementation
          shell: bash
          run: |
@@ -59,13 +59,13 @@ index f62c61288d819fbd39e5ba1b942852e65ceb4a3b..6d6e689f3f35c104cdeedd6516942a27
 +      # Standalone (2026-10-31): the slim A3 export is absorbed (m3/vendor/m3/README.md);
 +      # the reactor module tooling/synexia-jdk-a3-recipes builds it into the same coordinate; its tests
 +      # verify the absorbed bytes and run the export's own unit tests. No other repository is fetched
-+      # (m3/tooling/standalone/M3_REFS.tsv).
++      # (make/m3/tooling/standalone/M3_REFS.tsv).
 +      - name: 2 build the absorbed slim A3 artifact
 +        shell: bash
 +        run: |
 +          set -euo pipefail
 +          bash m3/m3-import/pure-int-recipe-custody/install.sh "$PWD"
-+          mvn -B -ntp -f m3/pom.xml -pl tooling/synexia-jdk-a3-recipes clean install
++          mvn -B -ntp -f make/m3/pom.xml -pl tooling/synexia-jdk-a3-recipes clean install
  
        - name: 3 prove receiver authority and mastery-gate recipes
          run: >
@@ -132,7 +132,7 @@ index 340f09c7a7f42fe042f8dfb50216212bb833f22c..fb18736ae4c3ca489f471557ba9111dd
 +      # m3/vendor/ (provenance: m3/vendor/m3/README.md); the reactor module
 +      # tooling/synexia-jdk-a3-recipes builds them into the same coordinate in the reactor step
 +      # below (-am) and runs the tests in its own step. No other repository is fetched
-+      # (decisions: m3/tooling/standalone/M3_REFS.tsv).
++      # (decisions: make/m3/tooling/standalone/M3_REFS.tsv).
 +      - name: Verify absorbed A3 recipe export closure
          shell: bash
 -        working-directory: synexia-a3
@@ -190,7 +190,7 @@ index 340f09c7a7f42fe042f8dfb50216212bb833f22c..fb18736ae4c3ca489f471557ba9111dd
        - name: Compile and install retained A3 recipe dependencies
          shell: bash
 @@ -151,6 +116,14 @@ jobs:
-           mvn -B -ntp -f "$REPO/m3/pom.xml" \
+           mvn -B -ntp -f "$REPO/make/m3/pom.xml" \
              -pl tooling/a3 -am -DskipTests install
  
 +      - name: Run absorbed A3 export unit tests
@@ -199,7 +199,7 @@ index 340f09c7a7f42fe042f8dfb50216212bb833f22c..fb18736ae4c3ca489f471557ba9111dd
 +          set -euo pipefail
 +          # The reactor step above skips tests. The export's own unit tests run here against
 +          # the absorbed sources; one method is a recorded HOLD (surefire-hold-excludes.txt).
-+          mvn -B -ntp -f "$REPO/m3/pom.xml" -pl tooling/synexia-jdk-a3-recipes test
++          mvn -B -ntp -f "$REPO/make/m3/pom.xml" -pl tooling/synexia-jdk-a3-recipes test
 +
        - name: Run focused A3 JUnit and recipe replay proof
          shell: bash
@@ -212,7 +212,7 @@ index be7f55b20dcd6dcdbf1dc66b5978b3f3dbcf88c6..ea87429f175004b8089de49c96255947
      paths:
        - 'm3/ports/collections/**'
        - '.github/workflows/m3-collection-port-wave1.yml'
-+      - 'm3/tooling/standalone/LINEAGE_SOURCES.tsv'
++      - 'make/m3/tooling/standalone/LINEAGE_SOURCES.tsv'
    workflow_dispatch:
  
  permissions:
@@ -224,7 +224,7 @@ index c42954ecf99a58893a76f3aee6dbe2d258e3a7fe..3bb64ed1925c461716818cdd95852426
  # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
  # SPDX-License-Identifier: Apache-2.0
 -# Canonical recipe: com.synexia.m3.M3PackedCollectionsReceivingMetadata in hsoliwal/com.synexia.
-+# Canonical recipe: com.synexia.m3.M3PackedCollectionsReceivingMetadata (donor lineage: m3/tooling/standalone/M3_REFS.tsv).
++# Canonical recipe: com.synexia.m3.M3PackedCollectionsReceivingMetadata (donor lineage: make/m3/tooling/standalone/M3_REFS.tsv).
  # Modified 2026 by Hitesh Soliwal and contributors: restore exact collection receiving provenance and verification while retaining current owners and String phase authority.
  name: M3 collection contracts
  
@@ -280,7 +280,7 @@ index 22855b285018ab9732d56aa517921c4cfb9969c9..3ca48d3deb0a9aa2862d1356d9454ed5
 -            --source-commit 892e3f6c51d78bc0948e8a8cf736055b4c70eafa
 +            --source-repository "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" \
 +            --source-commit "$GITHUB_SHA"
-           python3 m3/runtime-integration/verify-m3-lexicon.py "$tmp/export"
+           python3 make/m3/runtime-integration/verify-m3-lexicon.py "$tmp/export"
        - name: Reuse the existing C11 JNI word-row receiver, four runtime modes
          shell: bash
 diff --git a/.github/workflows/m3jdk21-second-pass-review-dag.yml b/.github/workflows/m3jdk21-second-pass-review-dag.yml
@@ -328,7 +328,7 @@ index df5db43e578282cb371f726c4d739a6b2311c243..8f001accc1bfdbcb548409f37839abc4
 +  # Standalone (2026-10-31): the former upstream-dag job cloned the donor repository at
 +  # 5369fdc8c076 and ran that repository's own tests (M3SecondPassReviewDagPlanTest and the
 +  # atom-pattern signal-chain verification pom). Those proofs belong to the donor's CI (MOVE);
-+  # this workflow keeps the local DAG proof above (m3/tooling/standalone/M3_REFS.tsv).
++  # this workflow keeps the local DAG proof above (make/m3/tooling/standalone/M3_REFS.tsv).
 diff --git a/.github/workflows/m3-jep484-classfile-path-map.yml b/.github/workflows/m3-jep484-classfile-path-map.yml
 index 0b6e42dbbe6d1c40278d6fdb530459a929a7b92a..b0cc4604e205585b98c576a235664f359f1b5531 100644
 --- a/.github/workflows/m3-jep484-classfile-path-map.yml
@@ -349,11 +349,11 @@ index 0b6e42dbbe6d1c40278d6fdb530459a929a7b92a..b0cc4604e205585b98c576a235664f35
 -          test "$(git -C "$SYNEXIA" rev-parse FETCH_HEAD)" = "0f0f9965092955c15f5c32f5eb102137fd0dbf8e"
 -          java "$SYNEXIA/synexia-code-convergence/tools/WorkflowStructureCheck.java" \
 +          # Standalone (2026-10-31): the validator is absorbed byte-identically (canonical Git blob
-+          # below; receiver record in m3/compatibility/); no other repository is fetched
-+          # (m3/tooling/standalone/M3_REFS.tsv).
-+          test "$(git hash-object m3/tooling/validators/WorkflowStructureCheck.java)" = \
++          # below; receiver record in make/m3/compatibility/); no other repository is fetched
++          # (make/m3/tooling/standalone/M3_REFS.tsv).
++          test "$(git hash-object make/m3/tooling/validators/WorkflowStructureCheck.java)" = \
 +            "f61be81f5a15bea78f1c5ae7d5555844c9cd2ea7"
-+          java m3/tooling/validators/WorkflowStructureCheck.java \
++          java make/m3/tooling/validators/WorkflowStructureCheck.java \
              .github/workflows/m3-jep484-classfile-path-map.yml
  
        - name: Diff hygiene
@@ -377,11 +377,11 @@ index df5719bd8cd1a5e9fbbce677c0a1f5c37d59cd96..b0321ab6431a87fe746e38bbf7b383f6
 -          test "$(git -C "$SYNEXIA" rev-parse FETCH_HEAD)" = "0f0f9965092955c15f5c32f5eb102137fd0dbf8e"
 -          java "$SYNEXIA/synexia-code-convergence/tools/WorkflowStructureCheck.java" \
 +          # Standalone (2026-10-31): the validator is absorbed byte-identically (canonical Git blob
-+          # below; receiver record in m3/compatibility/); no other repository is fetched
-+          # (m3/tooling/standalone/M3_REFS.tsv).
-+          test "$(git hash-object m3/tooling/validators/WorkflowStructureCheck.java)" = \
++          # below; receiver record in make/m3/compatibility/); no other repository is fetched
++          # (make/m3/tooling/standalone/M3_REFS.tsv).
++          test "$(git hash-object make/m3/tooling/validators/WorkflowStructureCheck.java)" = \
 +            "f61be81f5a15bea78f1c5ae7d5555844c9cd2ea7"
-+          java m3/tooling/validators/WorkflowStructureCheck.java \
++          java make/m3/tooling/validators/WorkflowStructureCheck.java \
              .github/workflows/m3-jep484-custody-plan.yml
  
        - name: Diff hygiene
@@ -393,15 +393,15 @@ index e36c61c529f68e514000c0aca639e4dbfcc2e0c4..83d667e50dd4f6f9d1bb609ba95e8d39
        - "src/java.base/share/classes/java/util/stream/**"
        - "test/jdk/java/util/stream/**"
        - ".github/workflows/m3-jep485-stream-gatherers.yml"
-+      - "m3/tooling/standalone/LINEAGE_SOURCES.tsv"
++      - "make/m3/tooling/standalone/LINEAGE_SOURCES.tsv"
    pull_request:
      paths:
-       - "m3/backports/recipes/jep-485-gatherers/**"
+       - "make/m3/backports/recipes/jep-485-gatherers/**"
 @@ -26,6 +27,7 @@ on:
        - "src/java.base/share/classes/java/util/stream/**"
        - "test/jdk/java/util/stream/**"
        - ".github/workflows/m3-jep485-stream-gatherers.yml"
-+      - "m3/tooling/standalone/LINEAGE_SOURCES.tsv"
++      - "make/m3/tooling/standalone/LINEAGE_SOURCES.tsv"
    workflow_dispatch:
  
  permissions:
@@ -410,8 +410,8 @@ index e36c61c529f68e514000c0aca639e4dbfcc2e0c4..83d667e50dd4f6f9d1bb609ba95e8d39
                    raise SystemExit(f"JEP485 workflow receiver header drift: {header}")
                rows = dict(reader)
 +          # Standalone (2026-10-31): the donor repository is lineage; it lives once in the
-+          # standalone ledger, not in this workflow (m3/tooling/standalone/M3_REFS.tsv).
-+          with Path("m3/tooling/standalone/LINEAGE_SOURCES.tsv").open(encoding="utf-8", newline="") as handle:
++          # standalone ledger, not in this workflow (make/m3/tooling/standalone/M3_REFS.tsv).
++          with Path("make/m3/tooling/standalone/LINEAGE_SOURCES.tsv").open(encoding="utf-8", newline="") as handle:
 +              lineage = {row["key"]: row for row in csv.DictReader(handle, delimiter="\t")}
            expected = {
 -              "canonical_repository": "hsoliwal/com.synexia",
@@ -424,18 +424,18 @@ index b2910ba33db946d3071b20153b56a51324fc4a8e..bf1d7bce040801cc9d35aac840863bf2
 --- a/.github/workflows/m3-jep493-runtime-image-materialize.yml
 +++ b/.github/workflows/m3-jep493-runtime-image-materialize.yml
 @@ -16,6 +16,7 @@ on:
-       - "m3/tooling/migration-recipes/**"
-       - "m3/tooling/backport-dag/**"
+       - "make/m3/tooling/migration-recipes/**"
+       - "make/m3/tooling/backport-dag/**"
        - ".github/workflows/m3-jep493-runtime-image-materialize.yml"
-+      - "m3/tooling/standalone/LINEAGE_SOURCES.tsv"
++      - "make/m3/tooling/standalone/LINEAGE_SOURCES.tsv"
    pull_request:
      paths:
-       - "m3/backports/file_delta_inventory.py"
+       - "make/m3/backports/file_delta_inventory.py"
 @@ -28,6 +29,7 @@ on:
-       - "m3/tooling/migration-recipes/**"
-       - "m3/tooling/backport-dag/**"
+       - "make/m3/tooling/migration-recipes/**"
+       - "make/m3/tooling/backport-dag/**"
        - ".github/workflows/m3-jep493-runtime-image-materialize.yml"
-+      - "m3/tooling/standalone/LINEAGE_SOURCES.tsv"
++      - "make/m3/tooling/standalone/LINEAGE_SOURCES.tsv"
    workflow_dispatch:
  
  permissions:
@@ -444,8 +444,8 @@ index b2910ba33db946d3071b20153b56a51324fc4a8e..bf1d7bce040801cc9d35aac840863bf2
                    raise SystemExit(f"JEP493 workflow-validator receiver header drift: {header}")
                rows = dict(reader)
 +          # Standalone (2026-10-31): the donor repository is lineage; it lives once in the
-+          # standalone ledger, not in this workflow (m3/tooling/standalone/M3_REFS.tsv).
-+          with Path("m3/tooling/standalone/LINEAGE_SOURCES.tsv").open(encoding="utf-8", newline="") as handle:
++          # standalone ledger, not in this workflow (make/m3/tooling/standalone/M3_REFS.tsv).
++          with Path("make/m3/tooling/standalone/LINEAGE_SOURCES.tsv").open(encoding="utf-8", newline="") as handle:
 +              lineage = {row["key"]: row for row in csv.DictReader(handle, delimiter="\t")}
            expected = {
 -              "canonical_repository": "hsoliwal/com.synexia",
@@ -460,9 +460,9 @@ index 30ac5a8cd08f22778061055accd3cb7344890f8f..36820cffd1f9e2ec48c8a22d59ae6ce7
 @@ -58,6 +58,6 @@ jobs:
            git fetch --no-tags --depth=1 origin "$M3_BASE_SHA"
            git diff --diff-filter=A --name-only "$M3_BASE_SHA" HEAD > "$RUNNER_TEMP/m3-new-paths.txt"
-           if grep -E '(^m3/recipes/|^m3/tooling/migration-recipes/|/recipe(s)?/)' "$RUNNER_TEMP/m3-new-paths.txt"; then
+           if grep -E '(^m3/recipes/|^make/m3/tooling/migration-recipes/|/recipe(s)?/)' "$RUNNER_TEMP/m3-new-paths.txt"; then
 -            echo 'ERROR: executable transformation recipes belong in hsoliwal/com.synexia, not M3JDK21'
-+            echo 'ERROR: recipe roots (m3/recipes, migration-recipes, */recipe(s)/) take no new sources; add tools under m3/tooling/<lane>/tools/ (standalone, m3/tooling/standalone/M3_REFS.tsv)'
++            echo 'ERROR: recipe roots (m3/recipes, migration-recipes, */recipe(s)/) take no new sources; add tools under make/m3/tooling/<lane>/tools/ (standalone, make/m3/tooling/standalone/M3_REFS.tsv)'
              exit 1
            fi
 diff --git a/m3/ports/collections/verify_collection_port_wave1.py b/m3/ports/collections/verify_collection_port_wave1.py
@@ -474,8 +474,8 @@ index 983e1e8427b67d148c78022be2d5357ee654577b..21a7218f41707a7e33729d247171e2a6
  PROVENANCE = ROOT / "PROVENANCE.tsv"
  RECIPE = ROOT / "recipe.json"
 +# Standalone (2026-10-31): the donor repository is lineage, kept once in the standalone ledger and never
-+# fetched; this verifier compares provenance against that ledger row (m3/tooling/standalone/M3_REFS.tsv).
-+LINEAGE = REPO / "m3" / "tooling" / "standalone" / "LINEAGE_SOURCES.tsv"
++# fetched; this verifier compares provenance against that ledger row (make/m3/tooling/standalone/M3_REFS.tsv).
++LINEAGE = REPO / "make" / "m3" / "tooling" / "standalone" / "LINEAGE_SOURCES.tsv"
 +LINEAGE_KEY = "synexia"
  
  EXPECTED = {
@@ -531,7 +531,7 @@ index 585187c65aaef0266a36e7985bd1015e66b00edc..2dbe616eb1a6757e174d11f90f94358f
 -  evidence are authored and executed in Synexia;
 +  parity tests exist here; under the standalone rule (2026-10-31) the transformation
 +  recipes this repository carries and their control-reactor evidence are executed here
-+  as well, with donor lineage kept in ledgers (`m3/tooling/standalone/`);
++  as well, with donor lineage kept in ledgers (`make/m3/tooling/standalone/`);
  - the project has a deterministic release contract, rights/provenance record, and proof-pack
    checksum process.
  
@@ -552,7 +552,7 @@ index 585187c65aaef0266a36e7985bd1015e66b00edc..2dbe616eb1a6757e174d11f90f94358f
 -an executed, source-preserving cleanup. Moving those recipes to another folder
 -inside M3JDK21 does not satisfy this boundary.
 +available, recover each canonical recipe and its callers as a deterministic,
-+re-runnable tool in this repository (`m3/tooling/<lane>/tools/`), then perform
++re-runnable tool in this repository (`make/m3/tooling/<lane>/tools/`), then perform
 +an executed, source-preserving cleanup. Moving a recipe to another folder
 +without that recovery and an executed proof does not satisfy this boundary.
 +Standalone rule (2026-10-31): no other repository owns or executes a recipe
@@ -578,12 +578,12 @@ index 585187c65aaef0266a36e7985bd1015e66b00edc..2dbe616eb1a6757e174d11f90f94358f
 -compiler/JUnit gates to prepare a bounded candidate. The public queue is
 +For each unresolved row, compare the exact merge base, donor parent,
 +historical merge result and current delivered Git blobs with a deterministic
-+tool carried in this repository (`m3/tooling/<lane>/tools/`), then prepare a
++tool carried in this repository (`make/m3/tooling/<lane>/tools/`), then prepare a
 +bounded candidate behind compiler/JUnit gates. The donor-side
 +`M3HistoricalCodeLossRecipe`, `M3HunkResolver`, `ExactFileHunkReplay` and
 +`m3-pr-stack-preservation` gates are lineage only: none of them is in this tree,
 +so absorb the logic as such a tool before relying on it (standalone rule,
-+2026-10-31; `m3/tooling/standalone/M3_REFS.md`). The public queue is
++2026-10-31; `make/m3/tooling/standalone/M3_REFS.md`). The public queue is
  a review input, **not** a competing source transformation implementation.
  GitHub's merge action handles mergeable history, but even a clean merge
  needs content no-loss review. Conflicts require an explicit reviewed patch
@@ -591,17 +591,17 @@ index 585187c65aaef0266a36e7985bd1015e66b00edc..2dbe616eb1a6757e174d11f90f94358f
  Public JDK class and method names stay those of Java 21. Internal class/method
  renames, package moves, documentation changes, service/reflection/JNI symbols
  and consumption must be registered under the stable capability ID in
--`m3/docs/name-mapping.json` and processed with the existing Synexia typed
+-`doc/m3/name-mapping.json` and processed with the existing Synexia typed
 -Maven/OpenRewrite recipe before target acceptance. Preserve ABI, serialization
 -and native entry-point behavior. Recipes and execution memory live in Synexia;
 -only qualified product results and evidence live in M3JDK21.
-+`m3/docs/name-mapping.json` and processed with a typed, deterministic recipe
-+carried in this repository (name contract: `m3/tooling/name-contract/`) before
++`doc/m3/name-mapping.json` and processed with a typed, deterministic recipe
++carried in this repository (name contract: `make/m3/tooling/name-contract/`) before
 +target acceptance. Preserve ABI, serialization and native entry-point behavior.
 +Standalone rule (2026-10-31): recipes, their execution memory
 +(`RECIPE_MEMORY.tsv`, `GATES.tsv`) and the qualified product results and
 +evidence all live in M3JDK21; donor lineage stays in ledgers
-+(`m3/tooling/standalone/`).
++(`make/m3/tooling/standalone/`).
  
  ## Canonical recipe execution and migration HOLD
  
@@ -609,7 +609,7 @@ index 585187c65aaef0266a36e7985bd1015e66b00edc..2dbe616eb1a6757e174d11f90f94358f
 -from source-bound work executed in `hsoliwal/com.synexia`. Its control job
 +from source-bound work executed in this repository (`hsoliwal/M3jdk21`). Standalone
 +rule (2026-10-31): no other repository is needed to build, test, gate or release;
-+donor lineage stays in `m3/tooling/standalone/` (`SYNEXIA_REFS.tsv`,
++donor lineage stays in `make/m3/tooling/standalone/` (`SYNEXIA_REFS.tsv`,
 +`LINEAGE_SOURCES.tsv`). Its control job
  requires both `policy_valid` and an exact passing canonical Maven gate; absent,
  stale, malformed or failed evidence keeps the job and release summary on HOLD.
@@ -633,8 +633,8 @@ index 98d3eef0ae59ec6c161f783eb3c1bbceee7e952e..62975597c1ca95216e9787713ecd436c
 -      "M3_MAVEN_CONTROL_REACTOR": "hsoliwal/com.synexia"
 +      "M3_MAVEN_CONTROL_REACTOR": "hsoliwal/M3jdk21"
      },
--    "maven_gate_scope": "Preserve this existing gate ID. Its equivalent canonical Maven/OpenRewrite recipe execution is owned and executed only by hsoliwal/com.synexia. The historical target m3/pom.xml reactor and target-local recipes remain migration holds; running them in M3JDK21 does not satisfy this gate.",
-+    "maven_gate_scope": "Preserve this existing gate ID. Standalone rule (user, 2026-10-31): M3JDK builds, tests and releases without any other repository, so its Maven/OpenRewrite control-reactor execution is owned and executed by hsoliwal/M3jdk21 from the recipes and sources it carries; the evidence names this repository, the exact commit and the recipe identity. Donor lineage stays in ledgers (m3/tooling/standalone/M3_REFS.tsv). Legacy recipe roots remain a visible HOLD (legacy_recipe_custody).",
+-    "maven_gate_scope": "Preserve this existing gate ID. Its equivalent canonical Maven/OpenRewrite recipe execution is owned and executed only by hsoliwal/com.synexia. The historical target make/m3/pom.xml reactor and target-local recipes remain migration holds; running them in M3JDK21 does not satisfy this gate.",
++    "maven_gate_scope": "Preserve this existing gate ID. Standalone rule (user, 2026-10-31): M3JDK builds, tests and releases without any other repository, so its Maven/OpenRewrite control-reactor execution is owned and executed by hsoliwal/M3jdk21 from the recipes and sources it carries; the evidence names this repository, the exact commit and the recipe identity. Donor lineage stays in ledgers (make/m3/tooling/standalone/M3_REFS.tsv). Legacy recipe roots remain a visible HOLD (legacy_recipe_custody).",
      "required_manifest_fields": [
        "schema",
        "source_commit",
@@ -660,7 +660,7 @@ index b409c10a52b7e08f5cc5a8878b3dd4b98e6e550c..d0687a1f9be68532c8872c53c57fd3a5
                  }
              self.evidence["gates"].append(gate)
 @@ -277,13 +277,43 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
-         self.write("m3/release/release-contract.json", json.dumps(self.contract))
+         self.write("make/m3/release/release-contract.json", json.dumps(self.contract))
          self.assert_blocked(self.result(), "contract.mandatory_gates")
  
 -    def test_synexia_recipe_owner_and_identity_are_required(self):
@@ -683,7 +683,7 @@ index b409c10a52b7e08f5cc5a8878b3dd4b98e6e550c..d0687a1f9be68532c8872c53c57fd3a5
 +
 +    def test_contract_naming_another_maven_gate_owner_is_refused(self):
 +        self.contract["execution_evidence"]["gate_owners"][release.MAVEN_GATE] = "example/another-repository"
-+        self.write("m3/release/release-contract.json", json.dumps(self.contract))
++        self.write("make/m3/release/release-contract.json", json.dumps(self.contract))
 +        self.assert_blocked(self.result(), "contract.recipe_owner")
 +
 +    def test_contract_delegating_any_other_gate_to_another_repository_is_refused(self):
@@ -692,7 +692,7 @@ index b409c10a52b7e08f5cc5a8878b3dd4b98e6e550c..d0687a1f9be68532c8872c53c57fd3a5
 +        other = "example/another-repository"
 +        ident = next(g for g in self.contract["mandatory_release_gates"] if g != release.MAVEN_GATE)
 +        self.contract["execution_evidence"]["gate_owners"][ident] = other
-+        self.write("m3/release/release-contract.json", json.dumps(self.contract))
++        self.write("make/m3/release/release-contract.json", json.dumps(self.contract))
 +        self.git("add", ".")
 +        self.git("commit", "--amend", "-qm", "synthetic release tree delegating " + ident)
 +        self.evidence["source_commit"] = self.git("rev-parse", "HEAD")
@@ -713,12 +713,12 @@ diff --git a/m3/release/verify_release_admission.py b/m3/release/verify_release_
 index 94027fa5e1baa0c3f422a70d30e0982a0b8676f3..eaa759387b670bd74cbf4aef7f2a8b7d76014378 100644
 --- a/m3/release/verify_release_admission.py
 +++ b/m3/release/verify_release_admission.py
-@@ -56,6 +56,10 @@ NAME_MAP = "m3/docs/name-mapping.json"
- NAME_PLAN = "m3/tooling/name-contract/name-plan.json"
+@@ -56,6 +56,10 @@ NAME_MAP = "doc/m3/name-mapping.json"
+ NAME_PLAN = "make/m3/tooling/name-contract/name-plan.json"
  EVIDENCE_SCHEMA = "M3_RELEASE_EVIDENCE_V1"
- DEFAULT_EVIDENCE = "m3/release/queue/current/evidence.json"
+ DEFAULT_EVIDENCE = "make/m3/release/queue/current/evidence.json"
 +# Standalone rule (user, 2026-10-31): every release gate, the Maven/OpenRewrite control reactor included,
-+# is owned and executed by this repository; donor lineage stays in ledgers (m3/tooling/standalone/).
++# is owned and executed by this repository; donor lineage stays in ledgers (make/m3/tooling/standalone/).
 +PRODUCT_REPOSITORY = "hsoliwal/M3jdk21"
 +MAVEN_GATE = "M3_MAVEN_CONTROL_REACTOR"
  SHA1 = re.compile(r"[0-9a-f]{40}\Z")
@@ -813,7 +813,7 @@ index a3ed6b9db77a623e732f018cf2dbc9041cf3610d..15ae192b7d14dd4ce797c9298cdbd7c4
 -    </profile>
 -
 +    <!-- Standalone (2026-10-31): the opt-in m3-synexia-recipe-ownership-audit profile is retired; no workflow
-+         activated it and its recipe class exists only in the donor repository (m3/tooling/standalone/M3_REFS.tsv). -->
++         activated it and its recipe class exists only in the donor repository (make/m3/tooling/standalone/M3_REFS.tsv). -->
      <profile>
        <id>m3-synexia-canonical-recipes</id>
        <build>
@@ -871,7 +871,7 @@ index cffcccfde7543511dce61da2fe4ea6ad4b49e687..25cd1b40ca9a131c1a89646412604e14
            <failIfNoTests>true</failIfNoTests>
 +          <!-- the export tests resolve manifest and source paths from the export root, as in the donor module -->
 +          <workingDirectory>${project.basedir}/../../vendor/synexia/synexia-openrewrite-recipes</workingDirectory>
-+          <!-- HOLD (m3/tooling/standalone/GATES.tsv A3_EXPORT_TAG_ASSERTION): one export test method, listed in
++          <!-- HOLD (make/m3/tooling/standalone/GATES.tsv A3_EXPORT_TAG_ASSERTION): one export test method, listed in
 +               the file with its reason; Surefire accepts method filters only there -->
 +          <excludesFile>${project.basedir}/surefire-hold-excludes.txt</excludesFile>
          </configuration>
@@ -882,7 +882,7 @@ index e9a7f0159de1e2c069662455202065a1c93fb522..d055f31c20a9ecf5369f9a736b7a0ffc
 --- a/m3/vendor/m3/README.md
 +++ b/m3/vendor/m3/README.md
 @@ -29,6 +29,13 @@ The eight manifest-listed Java sources are mirrored byte-identically below the c
- `m3/tooling/synexia-jdk-a3-recipes` compiles only those manifest-listed files into the already
+ `make/m3/tooling/synexia-jdk-a3-recipes` compiles only those manifest-listed files into the already
  declared `com.synexia:synexia-jdk-a3-recipes:1.0.0-SNAPSHOT` coordinate.
  
 +The export's seven unit tests, sealed with those sources in the same export closure, are
@@ -890,7 +890,7 @@ index e9a7f0159de1e2c069662455202065a1c93fb522..d055f31c20a9ecf5369f9a736b7a0ffc
 +provenance: `m3/m3-import/intakes/jdk-a3-public-export-tests-20261031/SOURCE_PROVENANCE.tsv`;
 +sha256 seal: `.github/workflows/m3-a3.yml`). The module compiles and runs them in its test phase.
 +One method is a recorded HOLD: at this revision it expects a `synexia` tag that the sealed
-+`M3PureIntConvergenceRecipe` never carried (`m3/tooling/m3jdk-a3-recipes/surefire-hold-excludes.txt`).
++`M3PureIntConvergenceRecipe` never carried (`make/m3/tooling/m3jdk-a3-recipes/surefire-hold-excludes.txt`).
 +
  The module is build glue, not a second recipe home.
  

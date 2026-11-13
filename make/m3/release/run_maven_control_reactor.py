@@ -146,7 +146,7 @@ def execute(root: Path, out: Path, expected_commit: str, maven: str = "mvn",
         "command": [maven, *release.MAVEN_CONTROL_ARGS],
         "environment": {"os": platform.platform(), "architecture": platform.machine(),
                         "toolchain": "NOT_EXECUTED"},
-        "reactor": {"scope": release.MAVEN_REACTOR_SCOPE, "pom": "m3/pom.xml",
+        "reactor": {"scope": release.MAVEN_REACTOR_SCOPE, "pom": "make/m3/pom.xml",
                     "maven_executed": False, "source_preserved": False},
         "artifacts": [],
     }

@@ -3,18 +3,18 @@
 # SPDX-License-Identifier: Apache-2.0
 """Recipe OBJECT_SIGNAL_OWNER_EDITS v1: the owner-file edits of leaf object-signal-20261107 (m3/collections).
 
-One rule: the family ledger m3/collections/JDK_FAMILY_MAP.tsv gains the row of the relocated object first-pass signal
+One rule: the family ledger make/m3/collections/JDK_FAMILY_MAP.tsv gains the row of the relocated object first-pass signal
 family (M3ObjectSignalTable, M3ObjectSignalQuery, M3ObjectProjectors, M3ObjectSignalMatcher), inserted before the
 entryless signed-range lane row (the ledger's last row on the base commit) so the m3-immutable-pool rows of the same
 donor stay together. Everything else of the leaf is relocated by relocate.py; no Java owner, pom.xml or module-info.java
 is edited (the package jdk.m3.collections is already exported by module jdk.m3.collections).
 
-Derived from m3/collections/qualification/census2-c4-20261106/apply.py v1 (anchored "sub" edits, every anchor exactly
+Derived from make/m3/collections/qualification/census2-c4-20261106/apply.py v1 (anchored "sub" edits, every anchor exactly
 once, LF payloads re-joined with the preimage's line ending). The rule names the git blob sha of its preimage at the
 base commit; a target must equal the preimage (the rule is applied) or the postimage (already applied, no-op); anything
 else is a drifted preimage and the recipe refuses (exit 2) without writing. Idempotent: a second run reports
 changed=0 and EDITS.tsv (file, before/after sha256, leaf, rule) is a fixed point. The payload names the donor module
-and blobs, never the donor repository (m3/tooling/jdk-naming renames synexia-* tokens in .py files; the repository
+and blobs, never the donor repository (make/m3/tooling/jdk-naming renames synexia-* tokens in .py files; the repository
 lives in RELOCATION_MAP.tsv).
 
 usage: python -I apply.py [--root DIR] [--check]
@@ -40,13 +40,13 @@ ROW = "\t".join((
     "64 transposed feature planes (one long[] bitmap per signal bit) + byte kind / int domain, length, flags /"
     " long exact-hash, raw-identity lanes",
     "adapted from the M3Scale donor module m3-object-signal (SignalTable cf5b38a4654a, SignalQuery aa475998e712;"
-    " repository and blobs in RELOCATION_MAP.tsv) by recipe m3/collections/qualification/object-signal-20261107;"
+    " repository and blobs in RELOCATION_MAP.tsv) by recipe make/m3/collections/qualification/object-signal-20261107;"
     " lossy first pass (false positives allowed, no false negative for literal String / byte[] containment), exact"
     " truth stays the caller's predicate (M3ObjectSignalMatcher counts the checks); java.lang.String and"
     " Object.equals remain authority; Java kernel only, the donor JNI kernel is a HELD row"))
 # leaf, path, preimage blob at BASE_COMMIT, rule note, edits [(old, new)]
 RULES = (
-    ("object-signal-20261107", "m3/collections/JDK_FAMILY_MAP.tsv", "913a20f4938eab02d0af8a1f0b0fdb7a127d5bf2",
+    ("object-signal-20261107", "make/m3/collections/JDK_FAMILY_MAP.tsv", "913a20f4938eab02d0af8a1f0b0fdb7a127d5bf2",
      "FAMILY_ROW: one ledger row for the relocated family, before the entryless signed-range lane row", [
          ("\nSupplementary primitive key/value signed-range lane selection (entryless",
           "\n" + ROW + "\nSupplementary primitive key/value signed-range lane selection (entryless"),
@@ -123,7 +123,7 @@ def run(root: Path, check: bool) -> int:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--root", default=str(RECIPE_DIR.parents[3]), help="repository root (default: four up)")
+    parser.add_argument("--root", default=str(RECIPE_DIR.parents[4]), help="repository root (default: four up)")
     parser.add_argument("--check", action="store_true", help="write nothing; exit 1 when a run would change a file")
     args = parser.parse_args(argv)
     try:

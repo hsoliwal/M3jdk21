@@ -66,8 +66,8 @@ final class A3KitTest {
         assertEquals(M3Jdk21HashPinnedTextSnapshotRecipe.sha256(after), row[2]);
         assertEquals(before.replace("      - '.github/workflows/m3jdk-proof.yml'\n",
                 "      - '.github/workflows/m3jdk-proof.yml'\n"
-                        + "      - 'm3/tooling/migration-recipes/**'\n"
-                        + "      - 'm3/tooling/a3/**'\n"), after);
+                        + "      - 'make/m3/tooling/migration-recipes/**'\n"
+                        + "      - 'make/m3/tooling/a3/**'\n"), after);
     }
 
     private static void reject(List<SourceFile> input) {

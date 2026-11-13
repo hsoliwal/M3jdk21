@@ -15,14 +15,14 @@ in the M3JDK21 direction. Internal M3 owner names are distinct from public Java
 APIs. Never rename a public type into an `M3*` facade; never rename an existing
 JNI symbol or serialized/reflected name mechanically.
 
-The existing authority is [name-mapping.json](../docs/name-mapping.json) and
-[the name contract](../docs/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md); the existing
+The existing authority is [name-mapping.json](../../../doc/m3/name-mapping.json) and
+[the name contract](../../../doc/m3/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md); the existing
 name-plan is a *queue*, not an admission receipt. Run:
 
 ```sh
-python3 m3/tooling/name-contract/check.py
-python3 m3/tooling/name-contract/audit.py --strict
-python3 -m unittest discover -s m3/release -p 'test_*.py' -v
+python3 make/m3/tooling/name-contract/check.py
+python3 make/m3/tooling/name-contract/audit.py --strict
+python3 -m unittest discover -s make/m3/release -p 'test_*.py' -v
 ```
 
 Do not bulk-reformat `src/**` during release hardening. Any approved internal
@@ -52,8 +52,8 @@ SHA-256 evidence to the final product commit after the last merge.
 
 | Area | Existing test surface | Required release evidence |
 | --- | --- | --- |
-| Naming/receipts | `m3/release/test_*.py`, name-contract tests | executed Python checks, zero failures, source-bound logs |
-| M3 text foundation | `m3/build.sh` | JDK 21 test executions including `-Xint`, C2 and UTF-16/unpaired surrogate cases |
+| Naming/receipts | `make/m3/release/test_*.py`, name-contract tests | executed Python checks, zero failures, source-bound logs |
+| M3 text foundation | `make/m3/build.sh` | JDK 21 test executions including `-Xint`, C2 and UTF-16/unpaired surrogate cases |
 | Java precompute | `m3/ports/precompute` Maven tests | differential result, corpus/case count, failures and raw logs |
 | JNI/native | precompute `-Pnative`, checked JNI receivers | compiled native build, parity/lifetime tests on matched images and OS/arch |
 | JDK public behavior | OpenJDK sanity workflows, jtreg tests | tested **M3JDK21 image**, jtreg group/case counts, fails, skips, regression diffs |
@@ -63,13 +63,13 @@ SHA-256 evidence to the final product commit after the last merge.
 ### Observable collections Java 21 naming and coverage repair (2026-11-11)
 
 The actual internal Java owner is
-[`jdk.internal.m3.collections.ObservableList`](../../src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ObservableList.java),
+[`jdk.internal.m3.collections.ObservableList`](../../../src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ObservableList.java),
 with tests
-[`ObservableListContract`](../../test/jdk/jdk/internal/m3/collections/ObservableListContract.java)
+[`ObservableListContract`](../../../test/jdk/jdk/internal/m3/collections/ObservableListContract.java)
 and
-[`ObservableIndexedViewsContract`](../../test/jdk/jdk/m3/collections/ObservableIndexedViewsContract.java).
+[`ObservableIndexedViewsContract`](../../../test/jdk/jdk/m3/collections/ObservableIndexedViewsContract.java).
 The `M3Observable*` names retained in the old
-[`m3-observable-indexed-views-20261021.yml`](../../.github/workflows/m3-observable-indexed-views-20261021.yml)
+[`m3-observable-indexed-views-20261021.yml`](../../../.github/workflows/m3-observable-indexed-views-20261021.yml)
 are no longer real product/test paths. Treat this as **stale test wiring**, not
 permission to rename public or internal Java types blindly.
 
@@ -78,7 +78,7 @@ The refreshed Java 21 workflow compiles **only the collections-owned**
 with the canonical `jdk.m3.collections` module descriptor, then explicitly
 compiles and launches both standalone differential
 contract classes using their **declared class names**. Its source audit is
-[`m3/collections/test_observable_workflow.py`](../collections/test_observable_workflow.py);
+[`make/m3/collections/test_observable_workflow.py`](../collections/test_observable_workflow.py);
 that audit rejects missing modules, dropped collections package subtrees,
 accidental inclusion of the sibling `jdk.m3.arrays` owner, stale names,
 incorrect package-to-path relations, missing PR triggers and a contract that was
@@ -170,7 +170,7 @@ run and the full set of *changed contract-bearing methods* has been reviewed,
 build its pinned receipt fragment:
 
 ```sh
-python3 m3/release/build_changed_atom_coverage.py \
+python3 make/m3/release/build_changed_atom_coverage.py \
   --root . \
   --report /absolute/evidence/jacoco.xml \
   --inventory /absolute/evidence/changed-atoms.tsv \
@@ -182,7 +182,7 @@ python3 m3/release/build_changed_atom_coverage.py \
 ```
 
 The reviewed inventory for the `jdk.m3.text` scope is committed as
-`m3/release/coverage/changed-atoms.tsv`; `m3/release/coverage/README.md` records its
+`make/m3/release/coverage/changed-atoms.tsv`; `make/m3/release/coverage/README.md` records its
 scope proof and the `derive_changed_atom_inventory.py` command that regenerates it.
 
 The tab-separated inventory contains columns
@@ -219,7 +219,7 @@ and source-bound artifact SHA-256 receipts pass. `policy_valid` does not mean
 `release_ready`; use the existing verifier:
 
 ```sh
-python3 m3/release/verify_release_admission.py --root . --release \
+python3 make/m3/release/verify_release_admission.py --root . --release \
   --evidence /absolute/path/to/release-evidence.json \
   --json-out admission-release.json
 ```
@@ -243,13 +243,13 @@ separately from the repository root:
 ```sh
 python3 -m coverage run --branch --data-file=.coverage-naming \
   --include='*/m3/tooling/name-contract/check.py' \
-  -m unittest discover -s m3/tooling/name-contract -p test_check.py -v
+  -m unittest discover -s make/m3/tooling/name-contract -p test_check.py -v
 python3 -m coverage report --data-file=.coverage-naming -m
 python3 -m coverage json --data-file=.coverage-naming -o naming-tool-coverage.json
 
 python3 -m coverage run --branch --data-file=.coverage-release \
   --include='*/m3/release/verify_release_admission.py' \
-  -m unittest discover -s m3/release -p test_release_admission.py -v
+  -m unittest discover -s make/m3/release -p test_release_admission.py -v
 python3 -m coverage report --data-file=.coverage-release -m
 python3 -m coverage json --data-file=.coverage-release -o release-verifier-coverage.json
 ```
@@ -304,8 +304,8 @@ The release-verifier row is measured with the complete release suite:
 
 ```sh
 python3 -m coverage run --branch --data-file=.coverage-release \
-  --source=m3/release --omit='*/test_*.py' \
-  -m unittest discover -s m3/release -p 'test_*.py' -v
+  --source=make/m3/release --omit='*/test_*.py' \
+  -m unittest discover -s make/m3/release -p 'test_*.py' -v
 python3 -m coverage json --data-file=.coverage-release -o release-tool-coverage.json
 ```
 

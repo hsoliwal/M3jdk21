@@ -11,7 +11,7 @@ reinterpret that historical result.
 
 - Nebula repository: `hsoliwal/nebula`
 - current observed master: `7b36ce9e3e0c8d1e91324589b38b9d9d5a164356`
-- recipe/DAG transfer document: `m3/docs/FINAL_PROVEN_TRANSFER_20261006.md`
+- recipe/DAG transfer document: `doc/m3/FINAL_PROVEN_TRANSFER_20261006.md`
 - current-master runtime-equivalence receipt:
   `m3/convergence/CURRENT_MASTER_RUNTIME_EQUIVALENCE_CLOSURE_20261011.md`
 - latest UI-distillation closure:
@@ -25,7 +25,7 @@ explicitly keeps fresh native GTK/Win32/Cocoa current-head execution pending ext
 
 M3JDK21 consumes the reusable recipe/DAG contract only through the Synexia Apache handoff:
 
-`m3/backports/M3_NEBULA_RECIPE_DAG_HANDOFF.tsv`.
+`make/m3/backports/M3_NEBULA_RECIPE_DAG_HANDOFF.tsv`.
 
 This successor receiver therefore records:
 

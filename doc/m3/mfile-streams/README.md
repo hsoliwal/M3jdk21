@@ -14,7 +14,7 @@ opens a fresh execution; ordinary `Stream.map` and the generic convenience overl
 project results with lambdas. The source/recipe changes do not by themselves prove
 that a runtime or packaging gate has passed.
 
-Read [the current API guide](../../fs/vfs/README.md) for callable examples and limits.
+Read [the current API guide](../../../m3/fs/vfs/README.md) for callable examples and limits.
 Archive containers use explicit layered addresses such as `zip:file:///tmp/a.zip!/`
 or opt-in `enterArchives` selection with an archive-layer limit; by default a `.zip`
 Path remains a file. The provider exposes a logical hierarchy and can
@@ -56,8 +56,8 @@ checks verify source delivery only. They do not establish archive-record identit
 JNI, output transactions, source snapshots or performance.
 
 The authoritative bounded-image evidence is
-[`qualification.json`](../../fs/verification/vfs-20261020/qualification.json).
-The separate [`RESULTS.json`](../../fs/verification/vfs-20261020/RESULTS.json)
+[`qualification.json`](../../../m3/fs/verification/vfs-20261020/qualification.json).
+The separate [`RESULTS.json`](../../../m3/fs/verification/vfs-20261020/RESULTS.json)
 records the final disposition of each gate. Missing receipts or missing gate
 results mean no success is established by this packet. The provider intake makes
 no array-only, zero-copy, constant-memory or measured memory-gain claim.

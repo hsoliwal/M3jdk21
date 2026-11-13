@@ -954,259 +954,259 @@
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-evicting-queue-20261018/ALGORITHM_CATALOGUE.tsv",
+      "path": "make/m3/collections/qualification/owned-guava-evicting-queue-20261018/ALGORITHM_CATALOGUE.tsv",
       "bytes": 5955,
       "sha256": "a8772cd7db3ab1258d8e8c325f23b8e719936a4344baafb71228fcff9cd03aa9",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-evicting-queue-20261018/ATOM_COMPOSITION.tsv",
+      "path": "make/m3/collections/qualification/owned-guava-evicting-queue-20261018/ATOM_COMPOSITION.tsv",
       "bytes": 3436,
       "sha256": "5261716eb221db9cfa811848c2a058d2088bc0fc3b329a6e2cb4244d2c8bae1b",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-evicting-queue-20261018/compare.py",
+      "path": "make/m3/collections/qualification/owned-guava-evicting-queue-20261018/compare.py",
       "bytes": 1185,
       "sha256": "7fe2e34e168d93e4565b4b04414b8eeb0dfa6ea50888dfad1a799aa65e1db74b",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-evicting-queue-20261018/FOSS_IMPLEMENTATION_DECISION.tsv",
+      "path": "make/m3/collections/qualification/owned-guava-evicting-queue-20261018/FOSS_IMPLEMENTATION_DECISION.tsv",
       "bytes": 4359,
       "sha256": "d604f2267bd6b2bd59db1aa476384b70e49083fd78b477974cc769c8f31a0473",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-evicting-queue-20261018/FOSS_REUSE_DECISION.tsv",
+      "path": "make/m3/collections/qualification/owned-guava-evicting-queue-20261018/FOSS_REUSE_DECISION.tsv",
       "bytes": 8697,
       "sha256": "556aa9db5935029f6220b7e20b0218d1e305546ebf1ad5965e68e95cf598d5a0",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-evicting-queue-20261018/FOSS_STAGING_DECISION.tsv",
+      "path": "make/m3/collections/qualification/owned-guava-evicting-queue-20261018/FOSS_STAGING_DECISION.tsv",
       "bytes": 2561,
       "sha256": "a4ede01ea8a9434d58e3b2309c28b8e59ba78afcf284f64530971cf5e9837f37",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-evicting-queue-20261018/GuavaEvictingQueueMaskProjectionProof.java",
+      "path": "make/m3/collections/qualification/owned-guava-evicting-queue-20261018/GuavaEvictingQueueMaskProjectionProof.java",
       "bytes": 9435,
       "sha256": "f3474e861dcf60f7b1e38b6a1884a9c91d24d48661c42c2cd761f48a70fa7581",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-evicting-queue-20261018/GuavaEvictingQueueProtocolProof.java",
+      "path": "make/m3/collections/qualification/owned-guava-evicting-queue-20261018/GuavaEvictingQueueProtocolProof.java",
       "bytes": 32195,
       "sha256": "e2766ba3cc1c42de7ac902a931b498d819064f565aa84569d0b4f2c82aa20fc1",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-evicting-queue-20261018/GuavaEvictingQueuePublicSurfaceProof.java",
+      "path": "make/m3/collections/qualification/owned-guava-evicting-queue-20261018/GuavaEvictingQueuePublicSurfaceProof.java",
       "bytes": 2824,
       "sha256": "0739683f97574f9172d1f34de47e7933d909a220e0a359782862c039f1926df7",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-evicting-queue-20261018/GuavaEvictingQueueSerializationProof.java",
+      "path": "make/m3/collections/qualification/owned-guava-evicting-queue-20261018/GuavaEvictingQueueSerializationProof.java",
       "bytes": 12460,
       "sha256": "6659b1f7853a5edd8f286b67e42644fe1d6d1df68f5df60fa6d620124c818e5b",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-evicting-queue-20261018/LOCAL_RECEIVING_PROOF.json",
+      "path": "make/m3/collections/qualification/owned-guava-evicting-queue-20261018/LOCAL_RECEIVING_PROOF.json",
       "bytes": 1813,
       "sha256": "a9159173a308f3243cb2fd3d5aeea19eb60094573eac5db3e76ea46c429dd070",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-evicting-queue-20261018/OWNED_IMPLEMENTATION.md",
+      "path": "make/m3/collections/qualification/owned-guava-evicting-queue-20261018/OWNED_IMPLEMENTATION.md",
       "bytes": 5265,
       "sha256": "32600b0b8afa11ffaa5bf20498ee740b1462d453ac6a4d3ab5b61473277a9f10",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-evicting-queue-20261018/performance/BEFORE_CODE_SEAL.json",
+      "path": "make/m3/collections/qualification/owned-guava-evicting-queue-20261018/performance/BEFORE_CODE_SEAL.json",
       "bytes": 801,
       "sha256": "cdd85bae745d25d2ac732099b15adf7526786283e047e93b4b829c79c583802b",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-evicting-queue-20261018/performance/FOSS_PERFORMANCE_DECISION.tsv",
+      "path": "make/m3/collections/qualification/owned-guava-evicting-queue-20261018/performance/FOSS_PERFORMANCE_DECISION.tsv",
       "bytes": 2201,
       "sha256": "2496d8355f60e966fea5955cf8d85f274e199a2c89fad93170f49acc3002c14d",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-evicting-queue-20261018/performance/QueuePerformance.java",
+      "path": "make/m3/collections/qualification/owned-guava-evicting-queue-20261018/performance/QueuePerformance.java",
       "bytes": 8690,
       "sha256": "a7091bfe5b492765302453c4671dfdef694376fae886779fbd49367adc8c2159",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-evicting-queue-20261018/performance/README.md",
+      "path": "make/m3/collections/qualification/owned-guava-evicting-queue-20261018/performance/README.md",
       "bytes": 1205,
       "sha256": "54c66a9a82d3b08d2c37ef3742150407bd4a5784dbde32dcf873444eb7e270b1",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-evicting-queue-20261018/performance/RESULTS.md",
+      "path": "make/m3/collections/qualification/owned-guava-evicting-queue-20261018/performance/RESULTS.md",
       "bytes": 2544,
       "sha256": "393063f0826a1a73d6a15147c9ecb44e390b2fd7047882cc28fea20b7cdc01c3",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-evicting-queue-20261018/performance/RESULTS_COMPACT.json",
+      "path": "make/m3/collections/qualification/owned-guava-evicting-queue-20261018/performance/RESULTS_COMPACT.json",
       "bytes": 22865,
       "sha256": "9f11a85fd8852ac6aff42e93fe89bb05409f96d1785a7ea951294561e8af382a",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-evicting-queue-20261018/performance/WORKLOADS.json",
+      "path": "make/m3/collections/qualification/owned-guava-evicting-queue-20261018/performance/WORKLOADS.json",
       "bytes": 2424,
       "sha256": "cfe620b8b3e45ce1d704da686ed0049cf08be855bcaea3223f9e5942ec974b38",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-evicting-queue-20261018/proof-summary.json",
+      "path": "make/m3/collections/qualification/owned-guava-evicting-queue-20261018/proof-summary.json",
       "bytes": 4474,
       "sha256": "1fc9757e44b3c57edb11858df775492c600279bb565a8bced14a7f5a52a5cdda",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-evicting-queue-20261018/README.md",
+      "path": "make/m3/collections/qualification/owned-guava-evicting-queue-20261018/README.md",
       "bytes": 4627,
       "sha256": "d6b07fc1770bb7f60da1b6f34e18150fd2f7426b98023f1fe08741de0f132dd2",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-evicting-queue-20261018/receiving-offline-dependency-pins.json",
+      "path": "make/m3/collections/qualification/owned-guava-evicting-queue-20261018/receiving-offline-dependency-pins.json",
       "bytes": 6832,
       "sha256": "a3cd2d1334c96d6b8594067d0321ac65f1eaf2fff89e39ad5a42d5a926ce400b",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-evicting-queue-20261018/serialization-review/BEFORE_OWNER_EDIT.json",
+      "path": "make/m3/collections/qualification/owned-guava-evicting-queue-20261018/serialization-review/BEFORE_OWNER_EDIT.json",
       "bytes": 948,
       "sha256": "81a5d21872f5988ec3df1d50a4c0f03ecb3c50513ed57ddc41844b71fa6e20ab",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-evicting-queue-20261018/serialization-review/FOSS_SERIALIZATION_REVIEW_DECISION.tsv",
+      "path": "make/m3/collections/qualification/owned-guava-evicting-queue-20261018/serialization-review/FOSS_SERIALIZATION_REVIEW_DECISION.tsv",
       "bytes": 1254,
       "sha256": "01f2e75061a91a210e3fbb1b813d0e55eda61b0062ec3705a91f25c5acc55fb1",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-evicting-queue-20261018/serialization-review/FOSS_SERIALIZATION_STAGING_DECISION.tsv",
+      "path": "make/m3/collections/qualification/owned-guava-evicting-queue-20261018/serialization-review/FOSS_SERIALIZATION_STAGING_DECISION.tsv",
       "bytes": 558,
       "sha256": "4d58685c0c2e131b685d6c69f53da68fbd778717c780728b01aca57e2dade9e2",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-evicting-queue-20261018/serialization-review/REGRESSION_RESULTS.json",
+      "path": "make/m3/collections/qualification/owned-guava-evicting-queue-20261018/serialization-review/REGRESSION_RESULTS.json",
       "bytes": 5118,
       "sha256": "b3c22e7bc8d883b561d809504a0ae54d09cc9e4dca6e0803d40da1f8ee5f6797",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-evicting-queue-20261018/serialization-review/SOURCE_DELTA.json",
+      "path": "make/m3/collections/qualification/owned-guava-evicting-queue-20261018/serialization-review/SOURCE_DELTA.json",
       "bytes": 793,
       "sha256": "78be21f151ccef178223086ae9a2275d9e5ac94dc58ba2d6877af15d0aca1e0d",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-evicting-queue-20261018/source-provenance.json",
+      "path": "make/m3/collections/qualification/owned-guava-evicting-queue-20261018/source-provenance.json",
       "bytes": 1830,
       "sha256": "902c19e3d3e14c65de6765852d06950b109553b180906cb8b52980140a6988cb",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-evicting-queue-20261018/SOURCE_INVENTORY.tsv",
+      "path": "make/m3/collections/qualification/owned-guava-evicting-queue-20261018/SOURCE_INVENTORY.tsv",
       "bytes": 6145,
       "sha256": "d2f553d25b9a8f0baa1e693e404057f4dc9138459ce57b40e9111e897e86f7c0",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-evicting-queue-20261018/SOURCE_PINS.json",
+      "path": "make/m3/collections/qualification/owned-guava-evicting-queue-20261018/SOURCE_PINS.json",
       "bytes": 9079,
       "sha256": "e4443d9a6ab81b6003c8a31138e5c3bfd40fd77ab79ace8f7b5c687661c55fbe",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-evicting-queue-20261018/THIRD_PARTY_NOTICES_OWNED_QUEUE.md",
+      "path": "make/m3/collections/qualification/owned-guava-evicting-queue-20261018/THIRD_PARTY_NOTICES_OWNED_QUEUE.md",
       "bytes": 2958,
       "sha256": "60bef975f162dcacf13ac38f3e68ba247511ab3a99eba465757cbbec2c457663",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-evicting-queue-20261018/verify.py",
+      "path": "make/m3/collections/qualification/owned-guava-evicting-queue-20261018/verify.py",
       "bytes": 928,
       "sha256": "91aa767fa9c156af561af82bc898e025a2044309c4c84306d94b2dbbc2156a04",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-guava-evicting-queue-20261018/verify_module.py",
+      "path": "make/m3/collections/qualification/owned-guava-evicting-queue-20261018/verify_module.py",
       "bytes": 801,
       "sha256": "90ee6e65cc18eb5db84d87f21b0a1e5d0b81aaf16223be633be809783d222d76",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-guava-evicting-queue-20261018/engine-src/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "path": "make/m3/collections/recipe/owned-guava-evicting-queue-20261018/engine-src/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "bytes": 13805,
       "sha256": "9dc65793cb1f4fb20866f99f4e5d0043d54734aa03cf0fe297c0cadbba2d1c37",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-guava-evicting-queue-20261018/FOSS_RECEIVING_DECISION.tsv",
+      "path": "make/m3/collections/recipe/owned-guava-evicting-queue-20261018/FOSS_RECEIVING_DECISION.tsv",
       "bytes": 1897,
       "sha256": "af79bb54fae17496dacbaa6656f7171cce27d30f6112c494d0f0b561a520e1d3",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-guava-evicting-queue-20261018/pom.xml",
+      "path": "make/m3/collections/recipe/owned-guava-evicting-queue-20261018/pom.xml",
       "bytes": 2669,
       "sha256": "e17ec90a308a67c5976461744f098a177bab8b9abc4484a8dfac1060060794de",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-guava-evicting-queue-20261018/README.md",
+      "path": "make/m3/collections/recipe/owned-guava-evicting-queue-20261018/README.md",
       "bytes": 3060,
       "sha256": "e76c8a03d4c19061fe07fe35d6c463924068518ce22dadf969f0da80524d1b67",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-guava-evicting-queue-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-guava-evicting-queue/engine-receipt.tsv",
+      "path": "make/m3/collections/recipe/owned-guava-evicting-queue-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-guava-evicting-queue/engine-receipt.tsv",
       "bytes": 179,
       "sha256": "42f35e73d1b645a4df4e116145f6d079ab9952adc14db5e8da1fef4f8f44fb5d",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-guava-evicting-queue-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-guava-evicting-queue/M3EvictingQueue.java.txt",
+      "path": "make/m3/collections/recipe/owned-guava-evicting-queue-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-guava-evicting-queue/M3EvictingQueue.java.txt",
       "bytes": 16979,
       "sha256": "12e10948c33dedf38961027f23c01a3a912889d2585dfe8181f35ecb43426dfb",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-guava-evicting-queue-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-guava-evicting-queue/manifest.tsv",
+      "path": "make/m3/collections/recipe/owned-guava-evicting-queue-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-guava-evicting-queue/manifest.tsv",
       "bytes": 209,
       "sha256": "3a329d5702e27eb0b36e98bb43583299ace266c2b9a6c5917a7418695519aad3",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-guava-evicting-queue-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-guava-evicting-queue/source-receipt.tsv",
+      "path": "make/m3/collections/recipe/owned-guava-evicting-queue-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-guava-evicting-queue/source-receipt.tsv",
       "bytes": 183,
       "sha256": "ae85f338d3872aaa871c5d0a7fe03c93352027b3fef0e057244d248669ab6314",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-guava-evicting-queue-20261018/src/main/resources/META-INF/rewrite/m3-owned-guava-evicting-queue.yml",
+      "path": "make/m3/collections/recipe/owned-guava-evicting-queue-20261018/src/main/resources/META-INF/rewrite/m3-owned-guava-evicting-queue.yml",
       "bytes": 513,
       "sha256": "1217db10ddb967bed583a6b21c0d9dece7d7058771da80a9a440815ba0d73bd5",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-guava-evicting-queue-20261018/src/test/java/jdk/internal/m3/rewrite/M3OwnedGuavaEvictingQueueRecipeTest.java",
+      "path": "make/m3/collections/recipe/owned-guava-evicting-queue-20261018/src/test/java/jdk/internal/m3/rewrite/M3OwnedGuavaEvictingQueueRecipeTest.java",
       "bytes": 13459,
       "sha256": "b510475fe169cc7fc854f2aaebb6766be2de8decc1b3d23922fdb6ea523a2cf3",
       "scope": "new packet input"

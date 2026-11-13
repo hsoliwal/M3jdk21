@@ -24,8 +24,8 @@ or a claim of new Git ancestry.
 | `.github/workflows/m3-no-external-consumer-deps.yml` | `81c237f93da86aafa026099b9c799d0d99b09537` |
 | `m3/collections/interop/README.md` | `2f7104f1a694e0392713a4fd62b0883ebba3d650` |
 | `m3/collections/interop/pom.xml` | `3fc5cc0f0bee520675fea18a379c96b288c99084` |
-| `m3/collections/verification/no_external_runtime.py` | `aa7baed2aa9e4ff2aa675771def00a09ccc863f3` |
-| `m3/collections/verification/test_no_external_runtime.py` | `2886c5d68444ee34e54a3352d1400a2e4fdb21a4` |
+| `make/m3/collections/verification/no_external_runtime.py` | `aa7baed2aa9e4ff2aa675771def00a09ccc863f3` |
+| `make/m3/collections/verification/test_no_external_runtime.py` | `2886c5d68444ee34e54a3352d1400a2e4fdb21a4` |
 
 The two live receiving preimages were re-read from actual master and matched
 the canonical exact inputs:
@@ -40,7 +40,7 @@ Every other original target path retains its Git object unchanged.
 
 - Python3 `py_compile` passed for both exact original script blobs, verified by
   independent local `git hash-object` output.
-- Original `python3 -m unittest discover -s m3/collections/verification
+- Original `python3 -m unittest discover -s make/m3/collections/verification
   -p test_no_external_runtime.py -v`: **11 run, 0 failures/errors**.
 - Actual current `m3/arrays/pom.xml` and `m3/collections/pom.xml` direct
   dependency census: only JUnit test-scoped and first-party `com.m3` compile.

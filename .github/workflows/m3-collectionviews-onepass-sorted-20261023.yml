@@ -5,7 +5,7 @@ on:
     paths:
       - 'src/java.base/share/classes/java/util/CollectionViews.java'
       - 'test/jdk/java/util/CollectionViews/**'
-      - 'm3/collections/receiving/collectionviews-*'
+      - 'make/m3/collections/receiving/collectionviews-*'
       - '.github/workflows/m3-collectionviews-onepass-sorted-20261023.yml'
   workflow_dispatch:
 
@@ -54,5 +54,5 @@ jobs:
         run: |
           set -euo pipefail
           ! grep -E '(^|[[:space:]])native[[:space:]]' src/java.base/share/classes/java/util/CollectionViews.java
-          test -f m3/collections/receiving/collectionviews-onepass-cow-20261023.json
-          test -f m3/collections/receiving/collectionviews-sorted-meta-20261023.json
+          test -f make/m3/collections/receiving/collectionviews-onepass-cow-20261023.json
+          test -f make/m3/collections/receiving/collectionviews-sorted-meta-20261023.json

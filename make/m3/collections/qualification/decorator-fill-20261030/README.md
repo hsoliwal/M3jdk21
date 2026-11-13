@@ -303,7 +303,7 @@ templates change from one donor to another.
 From the repository root, with `JAVA_HOME` set to a JDK 21:
 
 ```bash
-bash m3/collections/qualification/decorator-fill-20261030/run.sh \
+bash make/m3/collections/qualification/decorator-fill-20261030/run.sh \
   ~/.m2/repository/org/apache/commons/commons-collections4/4.5.0/commons-collections4-4.5.0.jar <unpacked 4.5.0 sources dir> [work dir]
 ```
 

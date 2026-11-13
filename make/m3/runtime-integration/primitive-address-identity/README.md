@@ -35,7 +35,7 @@ JVM B: 0x600000000000 + 64 + slot*16
 From repository root (requires Linux GCC for JNI check; Java 21 elsewhere):
 
 ```sh
-python3 m3/runtime-integration/primitive-address-identity/verify.py
+python3 make/m3/runtime-integration/primitive-address-identity/verify.py
 ```
 
 This executes Java 21 `-Xlint:all -Werror`, a real attributed javac pass, binary fixed point, compile-error refusal, corruption rejection, 131K+ primitive/domain checks per test process, independent JVM image-root agreement, GCC `-Wall -Wextra -Werror`, two concurrent `-Xcheck:jni` JVMs, and Linux collision refusal. On one Linux test environment two JVMs mapped at `0x600000000000`, with equal image namespaces; this is a local bounded proof, not source-built M3JDK jtreg/JCK or Windows compatibility. The proof script skips native on unsupported hosts, preserving its explicit status.
@@ -43,7 +43,7 @@ This executes Java 21 `-Xlint:all -Werror`, a real attributed javac pass, binary
 Maven verification receiver:
 
 ```sh
-mvn -B -ntp -f m3/runtime-integration/primitive-address-identity/pom.xml verify
+mvn -B -ntp -f make/m3/runtime-integration/primitive-address-identity/pom.xml verify
 ```
 
 Remaining **PENDING**: canonical Synexia source-template recipe fixed point and full Maven/OpenRewrite run, source-built `libjava` linkage/JDK image, jtreg HotSpot interpreter/C1/C2/GC and CompactStrings, Windows/macOS fallback and native proof, corrupt shared-file race / immutable publication protocol, OS-level namespace/version negotiation, resource/RSS/JFR benchmarks, compiler source dependency seal and reproducibility in build pipelines. No global JDK intrinsic or transparent compiler lowering is enabled. Advance only after matching target evidence. Preserve String → arrays → collections → AST/compiler receiving order; this primitive metadata is a narrow dependency experiment, **not** an AST/compiler phase acceptance claim.

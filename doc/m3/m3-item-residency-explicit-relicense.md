@@ -1,7 +1,7 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 # Authority record: item-residency engine (EXPLICIT_RELICENSE_PORT)
 
-This record is filed under `m3/docs/m3jdk21-porting-invariant.md`, mode `EXPLICIT_RELICENSE_PORT`: direct source reuse inside `src/**` needs recorded authority from every necessary rights holder, under target-compatible terms with correct target headers. The machine-readable policy row is in `m3/docs/m3-intake-policy.tsv`.
+This record is filed under `doc/m3/m3jdk21-porting-invariant.md`, mode `EXPLICIT_RELICENSE_PORT`: direct source reuse inside `src/**` needs recorded authority from every necessary rights holder, under target-compatible terms with correct target headers. The machine-readable policy row is in `doc/m3/m3-intake-policy.tsv`.
 
 ## Decision
 
@@ -13,7 +13,7 @@ What the decision means for each case:
 
 1. **Engine files of SWT #122** (`org.eclipse.swt.internal.residency`, `PackedHeapGrowth`, `FileSwapStore`, `SwapPageBinaryOpsSelector`): `SPDX-License-Identifier: EPL-2.0 OR Apache-2.0`, "Copyright 2026 Hitesh Soliwal and contributors". Recorded in the package's `package-info.java`.
 2. **Ported Synexia swap files** (`SwapStore`, `TieredSwapCache`, `SwapBudgetPlane`, `SwapPressureController`, `SwapPageBinaryOps`, `JavaSwapPageBinaryOps`, `ParityCheckedSwapPageBinaryOps`): they stay Apache-2.0 with their original notices.
-3. **Swing reuse:** the files enter M3jdk21 as Apache-2.0 code in the independent module `m3/ports/swing-viewport` (`INDEPENDENT_APACHE_MODULE`). The route is the hash-pinned rename in `m3/tooling/residency-rename/`.
+3. **Swing reuse:** the files enter M3jdk21 as Apache-2.0 code in the independent module `m3/ports/swing-viewport` (`INDEPENDENT_APACHE_MODULE`). The route is the hash-pinned rename in `make/m3/tooling/residency-rename/`.
 4. **Copies into `java.desktop` internals (`src/**`):** these are an explicit relicence of the listed files to GPL-2.0 with the Classpath Exception. The rights holder authorizes that relicence for every file below, including the ported Synexia files, which he also owns. Each copy must carry the OpenJDK GPLv2+CPE header and keep a provenance line naming this record and the source commit.
 5. **No pre-existing SWT file changes licence.**
 
@@ -23,7 +23,7 @@ hsoliwal/eclipse.platform.swt, PR #122, branch `m3/item-residency-20261013`, com
 
 ## Files
 
-Each row gives the source SHA-256 at the source commit. The SHA-256 after the rename is in `m3/tooling/residency-rename/RENAME_MANIFEST.tsv`.
+Each row gives the source SHA-256 at the source commit. The SHA-256 after the rename is in `make/m3/tooling/residency-rename/RENAME_MANIFEST.tsv`.
 
 | Source path (under `bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/internal/`) | Licence at source | Source SHA-256 |
 |---|---|---|

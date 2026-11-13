@@ -2,7 +2,7 @@
 # Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
 """method_bytecode.py <javap> <pre_classes> <post_classes> <out_tsv> : METHOD BYTECODE IDENTITY v1 (CPU).
 
-Per-method form of BYTECODE_IDENTITY v1 (m3/tooling/jdk-superset/hashing/tools/bytecode_identity.py, hashing lane):
+Per-method form of BYTECODE_IDENTITY v1 (make/m3/tooling/jdk-superset/hashing/tools/bytecode_identity.py, hashing lane):
 a literal replaced by a constant variable (static final with a constant initializer) is folded back by javac, so the
 method keeps its instructions. For every class file present in pre_classes and post_classes, 'javap -c -p' of both
 with the constant-pool indexes (#n) removed is split into methods (declaration line + Code listing); each method is

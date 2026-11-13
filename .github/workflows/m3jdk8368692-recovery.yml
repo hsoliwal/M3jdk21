@@ -3,13 +3,13 @@ name: M3 JDK-8368692 recovery proof
 on:
   pull_request:
     paths:
-      - "m3/backports/recipes/jdk-8368692/**"
-      - "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv"
-      - "m3/tooling/recipe-catalogue.tsv"
-      - "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8368692PasswordSystemInBackportRecipe.java"
+      - "make/m3/backports/recipes/jdk-8368692/**"
+      - "make/m3/backports/UPSTREAM_CHANGE_SEEDS.tsv"
+      - "make/m3/tooling/recipe-catalogue.tsv"
+      - "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8368692PasswordSystemInBackportRecipe.java"
       - "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk27-password-systemin-8368692-java/**"
       - "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jdk27-password-systemin-8368692-text/**"
-      - "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8368692PasswordSystemInBackportRecipeTest.java"
+      - "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8368692PasswordSystemInBackportRecipeTest.java"
       - "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/jdk27-password-systemin-8368692/**"
       - "src/java.base/share/classes/sun/security/util/Password.java"
       - "src/java.base/share/conf/security/java.security"
@@ -35,7 +35,7 @@ jobs:
           java-version: "21"
           cache: maven
       - name: Verify packet hashes and compatibility
-        run: python3 m3/backports/recipes/jdk-8368692/verify_recovery.py
+        run: python3 make/m3/backports/recipes/jdk-8368692/verify_recovery.py
 
   java-base-image-and-jtreg:
     runs-on: ubuntu-22.04

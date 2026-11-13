@@ -68,7 +68,7 @@ jobs:
           else
             echo "Retention scope: all direct parents; no explicit historical baseline"
           fi
-          mvn -B -ntp -f m3/history/retention-pom.xml verify \
+          mvn -B -ntp -f make/m3/history/retention-pom.xml verify \
             -Dm3.repo="$GITHUB_WORKSPACE" \
             -Dm3.retentionCommit="$HEAD_SHA" \
             -Dm3.output="$OUT" \

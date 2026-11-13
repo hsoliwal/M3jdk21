@@ -36,7 +36,7 @@ and fixtures; do not substitute hand-written target changes for their execution.
 ## M3JDK21 boundary
 
 M3JDK21 owns its product names, public JDK contracts, bootstrap behavior and
-runtime. Continue using `m3/docs/name-mapping.json`; this packet creates no
+runtime. Continue using `doc/m3/name-mapping.json`; this packet creates no
 second naming registry. Apache-covered independent authoring/proof tooling may
 remain under `m3/`. The JDK does not acquire a Synexia runtime service dependency.
 

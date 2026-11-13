@@ -12,7 +12,7 @@ Four **new, exact source-postimage files**, preserving the existing Java/module 
 - `m3_disjoint_index.c`: one explicitly opt-in JNI `connectedBatch` with ephemeral scalar `GetIntArrayRegion`/`SetBooleanArrayRegion`, no held heap address or Java callback, bounded traversal and invalid parent refusal. No fallback when native requested and unavailable.
 - Independently authored graph/BFS differential Java selftest plus JUnit 5 adapter.
 
-All four are byte-identical to Synexia's canonical recipe's Git blobs. The source SHA-256 checklist is `m3/collections/qualification/disjoint-index-20261027.sha256`; no recipe project in this public product. `m3/collections/algorithm-catalog/disjoint-index-20261027.tsv` mirrors the first-party reviewed donor/category decisions (LeetCode → HackerRank → GeeksforGeeks, GitHub TheAlgorithms/Java @ `96ed2d7970606b51014afd25212c6c86d2af6255`). Challenge/editorial bodies and per-node GitHub donors were not copied. First-party Apache-2.0 copyright retained; external source rights unchanged.
+All four are byte-identical to Synexia's canonical recipe's Git blobs. The source SHA-256 checklist is `make/m3/collections/qualification/disjoint-index-20261027.sha256`; no recipe project in this public product. `make/m3/collections/algorithm-catalog/disjoint-index-20261027.tsv` mirrors the first-party reviewed donor/category decisions (LeetCode → HackerRank → GeeksforGeeks, GitHub TheAlgorithms/Java @ `96ed2d7970606b51014afd25212c6c86d2af6255`). Challenge/editorial bodies and per-node GitHub donors were not copied. First-party Apache-2.0 copyright retained; external source rights unchanged.
 
 ## Actual focused local checks (exact template-produced sources)
 

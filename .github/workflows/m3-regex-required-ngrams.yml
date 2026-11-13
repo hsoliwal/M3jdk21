@@ -7,7 +7,7 @@ on:
       - "src/java.base/share/classes/java/lang/M3StringFacts.java"
       - "src/java.base/share/classes/java/lang/M3StringRegexDp.java"
       - "test/jdk/java/lang/String/M3StringRegexDpTest.java"
-      - "m3/runtime-integration/regex-required-ngrams/**"
+      - "make/m3/runtime-integration/regex-required-ngrams/**"
       - ".github/workflows/m3-regex-required-ngrams.yml"
 permissions:
   contents: read
@@ -21,8 +21,8 @@ jobs:
           fetch-depth: 1
           sparse-checkout-cone-mode: false
           sparse-checkout: |
-            m3/runtime-integration/regex-required-ngrams/
-            m3/runtime-integration/regex-plan-amalgamation/
+            make/m3/runtime-integration/regex-required-ngrams/
+            make/m3/runtime-integration/regex-plan-amalgamation/
             src/java.base/share/classes/java/lang/M3String.java
             src/java.base/share/classes/java/lang/M3StringFacts.java
             src/java.base/share/classes/java/lang/M3StringRegexDp.java
@@ -32,9 +32,9 @@ jobs:
           distribution: temurin
           java-version: "21"
       - name: Confirm source-first exact owner images
-        run: python3 m3/runtime-integration/regex-required-ngrams/verify.py
+        run: python3 make/m3/runtime-integration/regex-required-ngrams/verify.py
       - name: Compile complete previous/current regex classes with actual owner extract
-        run: python3 m3/runtime-integration/regex-plan-amalgamation/source_extracted_java21.py
+        run: python3 make/m3/runtime-integration/regex-plan-amalgamation/source_extracted_java21.py
       - name: Syntax-compile exact expanded jtreg for Java21
         run: |
           mkdir -p "$RUNNER_TEMP/m3-required-ngram-jtreg"

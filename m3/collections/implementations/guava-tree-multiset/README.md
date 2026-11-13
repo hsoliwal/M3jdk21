@@ -13,6 +13,6 @@ Planned lanes: `Object[] elements`, `int[] counts`, `int[] hashes`, `int[] index
 
 Reuse when filling: core M3CountedBag; #1403 M3OrderStatisticForest + M3SparseExtents.
 
-The row in `m3/collections/qualification/five-provider-inventory-20261018/INVENTORY.tsv` is `SCAFFOLD`;
+The row in `make/m3/collections/qualification/five-provider-inventory-20261018/INVENTORY.tsv` is `SCAFFOLD`;
 the owning PR flips it to `DONE #PR`. Regenerate with the generator in that directory rather than editing
 this module by hand until the owning PR replaces the bodies.

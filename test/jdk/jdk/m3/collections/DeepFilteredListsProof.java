@@ -24,7 +24,7 @@ import jdk.internal.m3.collections.FilteredLists;
  * Run the actual recipe output with Java21 and -Xss256k. This is a finite contract
  * check, not a benchmark or a claim about recursion inside a caller predicate.
  */
-//FLLDCIM: RELOCATE - donor blob 27a0f8c0069d at ca1aafc4d94f; recipe m3/collections/qualification/census-g1-20261106/relocate.py v4
+//FLLDCIM: RELOCATE - donor blob 27a0f8c0069d at ca1aafc4d94f; recipe make/m3/collections/qualification/census-g1-20261106/relocate.py v4
 public final class DeepFilteredListsProof {
     private static long checks;
 

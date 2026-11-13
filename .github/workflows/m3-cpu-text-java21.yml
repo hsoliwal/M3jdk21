@@ -5,8 +5,8 @@ on:
   pull_request:
     paths:
       - '.github/workflows/m3-cpu-text-java21.yml'
-      - 'm3/tooling/module-packs/cpu-tools/src/**'
-      - 'm3/tooling/module-packs/cpu-tools/fixtures/M3DonorToolsTest.java'
+      - 'make/m3/tooling/module-packs/cpu-tools/src/**'
+      - 'make/m3/tooling/module-packs/cpu-tools/fixtures/M3DonorToolsTest.java'
   workflow_dispatch:
 
 permissions:
@@ -32,11 +32,11 @@ jobs:
           set -euo pipefail
           classes="$RUNNER_TEMP/m3-cpu-text-donor-classes"
           mkdir -p "$classes"
-          find m3/tooling/module-packs/cpu-tools/src -type f -name '*.java' \
+          find make/m3/tooling/module-packs/cpu-tools/src -type f -name '*.java' \
             ! -name module-info.java ! -path '*/jdk.m3.tools.cpu/*' -print0 \
             | LC_ALL=C sort -z \
             | xargs -0 -r javac --release 21 -Xlint:all,-module -Werror -d "$classes" \
-                m3/tooling/module-packs/cpu-tools/fixtures/M3DonorToolsTest.java
+                make/m3/tooling/module-packs/cpu-tools/fixtures/M3DonorToolsTest.java
       - name: Run independent Java 21 UTF-16 and signature oracle
         shell: bash
         run: java -cp "$RUNNER_TEMP/m3-cpu-text-donor-classes" M3DonorToolsTest

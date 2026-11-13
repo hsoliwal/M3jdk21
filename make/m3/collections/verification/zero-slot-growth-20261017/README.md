@@ -13,7 +13,7 @@ No retained Entry/Node objects, boxed keys, new reference-array store or JNI met
 Run the selected-source product admission on a Java21 checkout:
 
 ```
-python3 m3/collections/verification/zero-slot-growth-20261017/verify.py --root .
+python3 make/m3/collections/verification/zero-slot-growth-20261017/verify.py --root .
 mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3ZeroSlotCapacityTest test
 ```
 

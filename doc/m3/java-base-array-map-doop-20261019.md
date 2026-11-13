@@ -70,7 +70,7 @@ any persisted per-key/node storage in the JDK owners.
   `com.synexia.m3.Jdk21IdentityMapDoopOffset20261019`.
   They are tooling/provenance assets, not a product runtime link.
 - A source-to-category catalogue remains inside this product at
-  `m3/collections/algorithm-catalog/java-base-array-map-atoms-20261019.tsv`.
+  `make/m3/collections/algorithm-catalog/java-base-array-map-atoms-20261019.tsv`.
 
 The patch-module test is **not** a substitute for executing the
 full OpenJDK build, jtreg suite, serialization compatibility checks,

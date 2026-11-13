@@ -3,11 +3,11 @@ on:
   pull_request:
     paths:
       - 'src/java.base/share/classes/jdk/internal/mindex/**'
-      - 'm3/docs/m3-runtime-invariants.tsv'
-      - 'm3/docs/name-mapping.json'
-      - 'm3/docs/m3string-m3-lineage.md'
-      - 'm3/docs/m3-string-precompute-port-map.tsv'
-      - 'm3/runtime-integration/**'
+      - 'doc/m3/m3-runtime-invariants.tsv'
+      - 'doc/m3/name-mapping.json'
+      - 'doc/m3/m3string-m3-lineage.md'
+      - 'doc/m3/m3-string-precompute-port-map.tsv'
+      - 'make/m3/runtime-integration/**'
       - 'src/hotspot/share/prims/jni.cpp'
       - 'src/hotspot/share/gc/shared/stringdedup/stringDedupTable.cpp'
       - 'src/hotspot/share/classfile/vmClassMacros.hpp'
@@ -48,11 +48,11 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Verify M3 String source invariants
-        run: python3 m3/runtime-integration/check-m3string-invariants.py
+        run: python3 make/m3/runtime-integration/check-m3string-invariants.py
       - name: Prove M3 String history-convergence recipe
-        run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringHistoryConvergenceRecipeTest test
+        run: mvn -B -ntp -f make/m3/tooling/migration-recipes/pom.xml -Dtest=M3StringHistoryConvergenceRecipeTest test
       - name: Prove canonical DAG master-repair recipe
-        run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringCanonicalDagMasterRepairRecipeTest test
+        run: mvn -B -ntp -f make/m3/tooling/migration-recipes/pom.xml -Dtest=M3StringCanonicalDagMasterRepairRecipeTest test
       - name: Set up Java 20 boot JDK for OpenJDK 21 build
         uses: actions/setup-java@v4
         with:

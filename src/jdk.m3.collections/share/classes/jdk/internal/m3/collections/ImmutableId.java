@@ -8,7 +8,7 @@ package jdk.internal.m3.collections;
  * <p>High 16 bits are a pool/type id; low 48 bits are a local canonical-object id.
  * Id equality is therefore one primitive long comparison.</p>
  */
-//FLLDCIM: RELOCATE - donor blob a6f11fc6e2c5 at commit 3385d79a2968 (repository, path, URL and digests: m3/collections/recipe/immutable-pools-20261106/PROVENANCE.tsv); recipe m3/collections/recipe/immutable-pools-20261106/relocate.py v2
+//FLLDCIM: RELOCATE - donor blob a6f11fc6e2c5 at commit 3385d79a2968 (repository, path, URL and digests: make/m3/collections/recipe/immutable-pools-20261106/PROVENANCE.tsv); recipe make/m3/collections/recipe/immutable-pools-20261106/relocate.py v2
 public record ImmutableId(long packed) implements Comparable<ImmutableId> {
     public static final int MAX_TYPE_ID = 0xffff;
     public static final long MAX_LOCAL_ID = 0x0000_ffff_ffff_ffffL;

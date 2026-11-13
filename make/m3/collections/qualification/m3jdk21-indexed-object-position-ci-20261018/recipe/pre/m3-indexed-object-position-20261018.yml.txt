@@ -3,7 +3,7 @@ name: M3 indexed object position Java JNI receiver
 on:
   pull_request:
     paths:
-      - 'm3/collections/qualification/m3jdk21-indexed-object-position-20261018/**'
+      - 'make/m3/collections/qualification/m3jdk21-indexed-object-position-20261018/**'
       - 'm3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java'
       - 'm3/collections/src/test/java/jdk/m3/collections/M3IndexedSnapshotPositionProof.java'
       - 'm3/collections/src/test/java/jdk/m3/collections/M3IndexedSnapshotPositionTest.java'
@@ -21,7 +21,7 @@ jobs:
       - name: Check three sealed source/test outputs and their mirrored templates
         run: |
           set -eu
-          Q=m3/collections/qualification/m3jdk21-indexed-object-position-20261018/recipe
+          Q=make/m3/collections/qualification/m3jdk21-indexed-object-position-20261018/recipe
           awk -F '\t' '{print $3 "  " $1}' "$Q/manifest.tsv" | sha256sum -c -
           awk -F '\t' -v q="$Q" '{print $3 "  " q "/" $4}' "$Q/manifest.tsv" | sha256sum -c -
           cmp "$Q/M3IndexedListSnapshot.java.txt" m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java

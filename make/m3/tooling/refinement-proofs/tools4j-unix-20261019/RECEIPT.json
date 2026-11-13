@@ -167,7 +167,7 @@
     "Linux qualification uses an existing sealed M3 JDK image. No fresh whole current HotSpot/JDK build, jtreg, full Synexia reactor or non-Linux acceptance was performed.",
     "String remains the active global receiving phase. No java.util receiving promotion or phase advance is claimed."
   ],
-  "handoff": "m3/tooling/refinement-proofs/tools4j-unix-20261019",
+  "handoff": "make/m3/tooling/refinement-proofs/tools4j-unix-20261019",
   "scope": "collections",
   "qualified_leaf_count": 14,
   "leaf_composition": {
@@ -184,7 +184,7 @@
   "handoff_documents_are_additional_to_qualified_leaf_count": true,
   "leaves": [
     {
-      "path": "m3/collections/name-mapping.json",
+      "path": "make/m3/collections/name-mapping.json",
       "before_sha256": "320f47e9a8381350cd641a3444119513e5fd32b961369c98338846d7735d03f4",
       "after_sha256": "8e81856d27d63fcf7e0390dcd1ef6b19604a47041d8a012d36187e07dff13ae2",
       "after_bytes": 63404,
@@ -201,7 +201,7 @@
       "evidence_locator": "PASS_INDEX.json datasets[dataset=tools4j-module-map-20261019]"
     },
     {
-      "path": "m3/collections/qualification/tools4j-unix-source-successor-20261019.tsv",
+      "path": "make/m3/collections/qualification/tools4j-unix-source-successor-20261019.tsv",
       "before_sha256": "ABSENT",
       "after_sha256": "bf7c68162c99c6066446f2ff97e7fce4700cdd3370aebd8b814730e8ec188fb6",
       "after_bytes": 89744,
@@ -371,7 +371,7 @@
       "evidence_locator": "PASS_INDEX.json datasets[dataset=tools4j-mask-oracle-20261019]"
     },
     {
-      "path": "m3/collections/m3-donation.json",
+      "path": "make/m3/collections/m3-donation.json",
       "before_sha256": "50df53dec7be6b25b0f84c1635fa3abbe1391dc8a9c28c4ad0c993b0aa5ed964",
       "after_sha256": "9bc90b2578b7a82353533746e002f77dfdc0a2459c910d3e7eaf83dd5cf7924c",
       "after_bytes": 67681,
@@ -388,7 +388,7 @@
       "evidence_locator": "PASS_INDEX.json datasets[dataset=tools4j-donation-link-20261019]"
     },
     {
-      "path": "m3/collections/verify_donation.py",
+      "path": "make/m3/collections/verify_donation.py",
       "before_sha256": "2e98edda477e2805586ffced0749c62bd2d9674727e84c65cc8b2511fbb622cb",
       "after_sha256": "cbb92b8e8bc37a473f4c0b6788e9d6fea16da0090e4cbb7f9151337041b64a6b",
       "after_bytes": 21028,
@@ -405,7 +405,7 @@
       "evidence_locator": "PASS_INDEX.json datasets[dataset=tools4j-donation-gate-20261019]"
     },
     {
-      "path": "m3/tooling/module-packs/collections/build.py",
+      "path": "make/m3/tooling/module-packs/collections/build.py",
       "before_sha256": "7df7f538bdb2f759406421eaae1d60b5ad0b497c6d0c2c44d1b39ee836ca42ad",
       "after_sha256": "8ab72f34ec5fcb08d8a90f03d0659431bb6ab3e97853d62c0b1877faa99902e0",
       "after_bytes": 11817,
@@ -512,7 +512,7 @@
       "tools4j-module-map-20261019",
       "tools4j-donation-link-20261019"
     ],
-    "target_handoff": "m3/tooling/refinement-proofs/tools4j-unix-20261019",
+    "target_handoff": "make/m3/tooling/refinement-proofs/tools4j-unix-20261019",
     "naming_disposition": "EXISTING_OWNER_REFINEMENT_NO_RENAME; BASELINE_INVENTORY_RECONCILIATION",
     "historical_hash_rule": "Original donor and target hash records retain their recorded receiving revisions. Current listed source hashes are the final_received_sha256 column of this exact successor; historical files and receipts are not rewritten.",
     "review_scope": "Inventory reconciliation is not algorithm review of all503 Java files. Source refinements and their individual canonical recipes/gates remain separately recorded in the target handoff.",

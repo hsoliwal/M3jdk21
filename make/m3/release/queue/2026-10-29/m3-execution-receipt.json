@@ -59,7 +59,7 @@
       "recipe": "canonical-text-snapshot"
     },
     {
-      "path": "m3/README.md",
+      "path": "make/m3/README.md",
       "before_sha256": "271188558783d68c90eeea47cc61df941e3069dca2fdf1a9cdc17f602d7e5248",
       "after_sha256": "7e7232815c1dd72a22015bbd18cd1ed713fb96dc9892598c7088f3c09c3bfece",
       "recipe": "canonical-text-snapshot"
@@ -77,19 +77,19 @@
       "recipe": "guarded-official-CreateTextFile"
     },
     {
-      "path": "m3/docs/m3jdk21-naming-admission-workflow.md",
+      "path": "doc/m3/m3jdk21-naming-admission-workflow.md",
       "before_sha256": "ee13e0f45461a714828723454cf28e0f604e72a7cc1f1494f924706010dd6269",
       "after_sha256": "7628bbb05f32ceac04af11e8a548923f849828ade35d90bdbf482ee990535955",
       "recipe": "canonical-text-snapshot"
     },
     {
-      "path": "m3/docs/m3jdk21-porting-invariant.md",
+      "path": "doc/m3/m3jdk21-porting-invariant.md",
       "before_sha256": "95a5d111f0d9b2467bcc84828adc5b0efcfd1091e35a1b5c1bf1c484a2066b03",
       "after_sha256": "e3bd365135450e90a88082b78ecd12a4a1c2d8c0632487c654186566836a1c76",
       "recipe": "canonical-text-snapshot"
     },
     {
-      "path": "m3/docs/m3-intake-policy.tsv",
+      "path": "doc/m3/m3-intake-policy.tsv",
       "before_sha256": "519c6e3152fac4d5d06b77c859f8f5a6a6b7e54a1e3dbb5fdd999c4e100a69c7",
       "after_sha256": "7f4a36570ab48a80dd23f9b2831b1e8e6b9832f0dd6918539f19e1abea9ab761",
       "recipe": "canonical-text-snapshot"
@@ -101,61 +101,61 @@
       "recipe": "guarded-official-CreateTextFile"
     },
     {
-      "path": "m3/release/README.md",
+      "path": "make/m3/release/README.md",
       "before_sha256": "91829a5b8d40fb433aaae1b1162da6f50da70db9174839eef6d59401a2c5213e",
       "after_sha256": "c60f2e26c6b5f5938b71e9d08669f301da90333459b73bb0304cf43e11f7ebd4",
       "recipe": "canonical-text-snapshot"
     },
     {
-      "path": "m3/release/queue/.gitignore",
+      "path": "make/m3/release/queue/.gitignore",
       "before_sha256": "ABSENT",
       "after_sha256": "dbfaef22e39c0352a78e8850f3f457ffff760816877859a29c6881ce32cfbd50",
       "recipe": "guarded-official-CreateTextFile"
     },
     {
-      "path": "m3/release/queue/2026-10-29/collections-failures.tsv",
+      "path": "make/m3/release/queue/2026-10-29/collections-failures.tsv",
       "before_sha256": "ABSENT",
       "after_sha256": "d1bfce1424c44474cb31f7f9bd3c2bbbd0a8db30e4ee2e2b52ecbb4e89b175a3",
       "recipe": "canonical-text-snapshot"
     },
     {
-      "path": "m3/release/queue/2026-10-29/validation-summary.json",
+      "path": "make/m3/release/queue/2026-10-29/validation-summary.json",
       "before_sha256": "ABSENT",
       "after_sha256": "f58a81af366a66eea2cb56128cac38d297f6d6eb7ff641e0dea12e1131a03b9e",
       "recipe": "canonical-text-snapshot"
     },
     {
-      "path": "m3/release/queue/README.md",
+      "path": "make/m3/release/queue/README.md",
       "before_sha256": "ABSENT",
       "after_sha256": "08ffb612893690fd8e7593ef54602a3f3e2966efb119491b1ad86986937d9831",
       "recipe": "canonical-text-snapshot"
     },
     {
-      "path": "m3/release/release-contract.json",
+      "path": "make/m3/release/release-contract.json",
       "before_sha256": "467c0948c8e53588474551bbc1ef57e91c008f09908afdd0b2ccd2084b348358",
       "after_sha256": "12b5f583300a93b9043e67f63d9dcab816e628e433ff0648979e39b14d93b5ea",
       "recipe": "canonical-text-snapshot"
     },
     {
-      "path": "m3/release/test_release_admission.py",
+      "path": "make/m3/release/test_release_admission.py",
       "before_sha256": "94ec205a3ee4541d46f997af76e28004a56dbad51f0c2039c51230c5ce3fb413",
       "after_sha256": "d934c03b6d13e0dea42098f45b8091b72fd039eaeacbb04038191ee5aeaa2afb",
       "recipe": "canonical-text-snapshot"
     },
     {
-      "path": "m3/release/verify_release_admission.py",
+      "path": "make/m3/release/verify_release_admission.py",
       "before_sha256": "e64d059cb9751d13fc53ba23bac8461da8c8827383ed13dadbc09b29c03e29be",
       "after_sha256": "579ce6a96ffea7494bcabf71ba3c3e2e7d7c4d5609e21c70e89731b3c10d4c0d",
       "recipe": "canonical-text-snapshot"
     },
     {
-      "path": "m3/runtime-integration/test_m3_intake_custody.py",
+      "path": "make/m3/runtime-integration/test_m3_intake_custody.py",
       "before_sha256": "ABSENT",
       "after_sha256": "9ca7796238c1d47223c85f8cd1fd485687c14725486f6a8ee67b8c87fc116982",
       "recipe": "canonical-text-snapshot"
     },
     {
-      "path": "m3/runtime-integration/verify-m3-intake.py",
+      "path": "make/m3/runtime-integration/verify-m3-intake.py",
       "before_sha256": "6f16a12a564589cb6055699f70a41e7de99716d55900efc70ed4601dafe9e3c5",
       "after_sha256": "6d42599003415d84d3690872a40b65cad7c4506a13869a33eb4d3f5b8eab871a",
       "recipe": "canonical-text-snapshot"
@@ -293,7 +293,7 @@
     "failure_catalogue": "collections-failures.tsv"
   },
   "self_provenance": {
-    "path": "m3/release/queue/2026-10-29/m3-execution-receipt.json",
+    "path": "make/m3/release/queue/2026-10-29/m3-execution-receipt.json",
     "covered_by_this_receipt": false,
     "explanation": "This receipt covers the nineteen other outputs only. Its own creation and transfer are proved by the later canonical task execution and receiving pull request; no recursive self-hash or future commit identity is asserted."
   },

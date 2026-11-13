@@ -76,7 +76,7 @@
       "license": "Apache-2.0"
     },
     {
-      "path": "m3/docs/name-mapping.json",
+      "path": "doc/m3/name-mapping.json",
       "before_sha256": "d47986f9e64a16e406f76ca1c9dcdb7aa543e3ce77e89abb3f906cb4fa26882e",
       "before_blob": "1c861c463892b7ee62cb419d6c2daccff8f15a1c",
       "after_sha256": "16ff734981b1971de71b0f927be0eef4bd0b99f1745c644d8cdf0830c03825cc",
@@ -88,7 +88,7 @@
       "license": "Apache-2.0"
     },
     {
-      "path": "m3/tooling/name-contract/name-plan.json",
+      "path": "make/m3/tooling/name-contract/name-plan.json",
       "before_sha256": "b835e88bd08c4fcfde5a2ba08caad9fab884db1e94c5bfc876967d1090b57ffe",
       "before_blob": "cbaa6f476637aed4310135b1d6904ac3b2a48d8b",
       "after_sha256": "d47bb5432f39cc4a3f45a600665d7e0b78979381cb1116af1df1cc19d7cc5017",
@@ -100,7 +100,7 @@
       "license": "Apache-2.0"
     }
   ],
-  "passive_receipt_path": "m3/qualification/jdk-cldr-timezone-cache-isolation-20261111/receipt.json",
+  "passive_receipt_path": "make/m3/qualification/jdk-cldr-timezone-cache-isolation-20261111/receipt.json",
   "receipt_identity": "The receiving Git tree binds this passive receipt; no circular self-hash or future receiving commit is recorded.",
   "sdk_execution": {
     "status": "PASS",

@@ -236,7 +236,7 @@ final class M3PureIntRepositoryCorpusTest {
             if (Files.isRegularFile(
                             at.resolve(
                                     "src/java.base/share/classes/java/lang/String.java"))
-                    && Files.isRegularFile(at.resolve("m3/pom.xml"))) {
+                    && Files.isRegularFile(at.resolve("make/m3/pom.xml"))) {
                 return at;
             }
         }

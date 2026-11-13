@@ -103,12 +103,12 @@
   },
   "executed_product_files": [
     {
-      "path": "m3/docs/name-mapping.json",
+      "path": "doc/m3/name-mapping.json",
       "sha256": "00aabe5de7fe6251ae2cfa7c6b5276f71c4f020b8f70ee8a226c14bf931a6fd3",
       "bytes": 720313
     },
     {
-      "path": "m3/tooling/name-contract/name-plan.json",
+      "path": "make/m3/tooling/name-contract/name-plan.json",
       "sha256": "aa01d170def27b2eb6e80ba964c5e54ea0caa65356660bc11b9da1892020d127",
       "bytes": 2444
     },

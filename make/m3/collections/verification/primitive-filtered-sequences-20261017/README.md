@@ -12,7 +12,7 @@ are not substituted for the current product module.
 Run with Java 21 on `PATH`:
 
 ```sh
-bash m3/collections/verification/primitive-filtered-sequences-20261017/verify.sh
+bash make/m3/collections/verification/primitive-filtered-sequences-20261017/verify.sh
 ```
 
 The verifier compiles **all Java sources in that actual product module** and

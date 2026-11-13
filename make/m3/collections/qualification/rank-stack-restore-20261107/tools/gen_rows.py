@@ -22,7 +22,7 @@ import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent.parent
-RECIPE = 'm3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2'
+RECIPE = 'make/m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2'
 JAVA_MEMBER = re.compile(r'^    (?:@\w+\s+)*(?:(?:public|private|protected|static|final|native|synchronized|abstract'
                          r'|volatile|transient)\s+)*(?:<[^>]+>\s+)?([\w.<>\[\], ?]+?)\s+(\w+)\s*(\(|=|;)')
 JAVA_TYPE = re.compile(r'^    (?:(?:public|private|protected|static|final|abstract|sealed)\s+)*'
@@ -160,7 +160,7 @@ def runs_for(target, ours_text, theirs_text, origins, leaves, indent):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--check', action='store_true')
-    parser.add_argument('--repo', default=str(HERE.parents[3]))
+    parser.add_argument('--repo', default=str(HERE.parents[4]))
     args = parser.parse_args()
     repo = Path(args.repo)
     leaves = {row['origin']: row['leaf'] for row in table(HERE / 'tools' / 'LEAF_ORIGINS.tsv')}

@@ -15,7 +15,7 @@ The five files below were read from the actual SDK output at `target/candidate`,
 | `m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ItemReferenceScan.java` | `39881510663e11b27b59fc5f1ff8e1ff86e793a2f5d7ef36cef42023aebbccbf` |
 | `m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3GvasLiteralHarvester.java` | `cbe859bcfd97ee2e7bec6122c96de66d25159d00770cc84c5f0227c64f96f814` |
 | `m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3EscapePreparedTest.java` | `f1a3e4fa22d4ac116e936cac4d51d459d3def5ae855bd484157ca9fe3006de46` |
-| `m3/docs/name-mapping.d/m3-program-escape-precompute.json` | `159a44eeb638aff38ba84add724dcb2a0d64e9be29411b1224ce81f499c90078` |
+| `doc/m3/name-mapping.d/m3-program-escape-precompute.json` | `159a44eeb638aff38ba84add724dcb2a0d64e9be29411b1224ce81f499c90078` |
 
 The source-binding receipt hashes are:
 

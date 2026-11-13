@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
 set -euo pipefail
-ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
-TASK="$ROOT/m3/collections/qualification/signal-mask-order-20261017"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../../.." && pwd)"
+TASK="$ROOT/make/m3/collections/qualification/signal-mask-order-20261017"
 MAIN="$ROOT/src/jdk.m3.collections/share/classes/jdk/m3/collections"
 TEST="$ROOT/test/jdk/jdk/m3/collections"
 NATIVE="$ROOT/src/jdk.m3.collections/share/native/libm3collections/collections/m3_signal_order_jni.c"

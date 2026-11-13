@@ -9,7 +9,7 @@ set -u
 A=$1; B=$2; W=$3; DONOR=$4; URL=$5; V=m3/vendor/third_party
 rm -rf "$W"; mkdir -p "$W/master/$V" "$W/branch/$V"
 cp -r "$A/$V/$DONOR" "$W/master/$V/"; cp -r "$B/$V/$DONOR" "$W/branch/$V/"
-mkdir -p "$W/branch/m3/tooling"; cp -r "$B/m3/tooling/." "$W/branch/m3/tooling/"  # the recipes verify_source.py loads
+mkdir -p "$W/branch/m3/tooling"; cp -r "$B/make/m3/tooling/." "$W/branch/m3/tooling/"  # the recipes verify_source.py loads
 for side in master branch; do
   mvn -q -B -f "$W/$side/$V/$DONOR/pom.xml" clean package > "$W/mvn_$side.log" 2>&1
   echo "mvn $side $DONOR rc=$?"

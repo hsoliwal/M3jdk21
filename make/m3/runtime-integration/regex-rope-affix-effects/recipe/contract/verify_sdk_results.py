@@ -353,7 +353,7 @@ def execute(target, crate, output, java_home):
         return result.stdout
 
     try:
-        integration = overlay / "m3/runtime-integration"
+        integration = overlay / "make/m3/runtime-integration"
         run("affix-complete-source-before-after", [
             sys.executable, integration / "regex-mandatory-affixes/run_source_extracted_java21.py",
             "--source-root", overlay, "--candidate-root", overlay, "--java-home", java_home,
@@ -406,7 +406,7 @@ def execute(target, crate, output, java_home):
         ], "PREPARED_REGEX_CPU_QUALIFICATION_PASS; CUDA_KERNEL_AND_DEVICE_GATE_NOT_RUN")
         for label, root in (("baseline-full-string-invariant", baseline),
                             ("candidate-full-string-invariant", overlay)):
-            run(label, [sys.executable, root / "m3/runtime-integration/check-m3string-invariants.py"],
+            run(label, [sys.executable, root / "make/m3/runtime-integration/check-m3string-invariants.py"],
                 cwd=root, expected_failure=BASELINE_DIAGNOSTIC)
         holds.append({"gate": "full-string-source-invariant", "status": "UNCHANGED_BASELINE_FAILURE",
                       "baseline_commit": TARGET_BASELINE, "diagnostic": BASELINE_DIAGNOSTIC,

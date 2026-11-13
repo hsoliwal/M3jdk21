@@ -6,7 +6,7 @@ recipe/compression-20261106 (relocate.py, RELOCATION_MAP.tsv); every donor
 commit, blob and sha256 is recorded in recipe/compression-20261106/PROVENANCE.tsv.
 OpenJDK retains its existing licensing. Since 2026-11-08 the code lives in java.base as the internal,
 unexported package jdk.internal.m3.compression (moved from the m3/compression module; recipe
-m3/tooling/jdk-naming/move_area.py, evidence m3/evidence/compression). It does not replace
+make/m3/tooling/jdk-naming/move_area.py, evidence make/m3/evidence/compression). It does not replace
 java.util.zip or route any codec.
 
 Formats, not code

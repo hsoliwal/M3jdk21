@@ -49,7 +49,7 @@ public final class NebulaJavaGradeBackportBinding {
     public static final Asset DOCUMENTATION =
             new Asset(
                     "java-grade-doc",
-                    "m3/docs/JAVA_GRADE_RECIPE_CONVERGENCE.md",
+                    "doc/m3/JAVA_GRADE_RECIPE_CONVERGENCE.md",
                     "d74b4180bf6b36a16d9c2f1362c19fcc5d38daf0");
 
     public enum Phase {

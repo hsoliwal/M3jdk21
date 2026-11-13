@@ -2,7 +2,7 @@
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
 set -euo pipefail
-root="$(cd "$(dirname "$0")/../../../.." && pwd)"
+root="$(cd "$(dirname "$0")/../../../../.." && pwd)"
 src="$root/src/jdk.m3.collections/share/classes/jdk/m3/collections"
 native="$root/src/jdk.m3.collections/share/native/libm3collections/collections"
 test="$root/test/jdk/jdk/m3/collections"

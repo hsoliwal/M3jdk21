@@ -24,9 +24,9 @@ ANCESTRY_ONLY_MERGES = (
 # Paths that must be absent at the owner revision for the HOLD rows to stay live.
 ABSENT_PATHS = (
     "src/jdk.m3.logging",
-    "m3/runtime-integration/regex-rope-affix-effects",
-    "m3/runtime-integration/regex-mandatory-affixes",
-    "m3/runtime-integration/regex-plan-amalgamation",
+    "make/m3/runtime-integration/regex-rope-affix-effects",
+    "make/m3/runtime-integration/regex-mandatory-affixes",
+    "make/m3/runtime-integration/regex-plan-amalgamation",
     "src/java.base/share/classes/java/lang/MIndexString.java",
 )
 # (path, blob) pairs the PRESENT_EVOLVED rows cite.
@@ -43,11 +43,11 @@ TOKENS = (
     ("src/hotspot/share/classfile/javaClasses.inline.hpp", "java_lang_MIndexString", False),
     ("src/hotspot/share/classfile/javaClasses.inline.hpp", "java_lang_M3String::char_at", True),
     ("src/java.base/share/classes/java/lang/String.java", "private volatile M3String m3;", True),
-    ("m3/runtime-integration/export-m3-lexicon.py", "def load_family_sidecars", False),
-    ("m3/runtime-integration/tests/test_m3_export.py", "def run_export", True),
-    ("m3/runtime-integration/tests/test_m3_export.py", "def test_typed_family_sidecars_round_trip_and_reject_partial", False),
-    ("m3/runtime-integration/tests/test_m3_export.py", "def test_composite_owner_shapes_and_overloaded_field_types_are_admitted", False),
-    ("m3/runtime-integration/tests/test_m3_export.py", "def test_directed_related_lexeme_families_round_trip_and_require_input", False),
+    ("make/m3/runtime-integration/export-m3-lexicon.py", "def load_family_sidecars", False),
+    ("make/m3/runtime-integration/tests/test_m3_export.py", "def run_export", True),
+    ("make/m3/runtime-integration/tests/test_m3_export.py", "def test_typed_family_sidecars_round_trip_and_reject_partial", False),
+    ("make/m3/runtime-integration/tests/test_m3_export.py", "def test_composite_owner_shapes_and_overloaded_field_types_are_admitted", False),
+    ("make/m3/runtime-integration/tests/test_m3_export.py", "def test_directed_related_lexeme_families_round_trip_and_require_input", False),
     ("make/conf/module-loader-map.conf", "jdk.m3.logging", False),
 )
 

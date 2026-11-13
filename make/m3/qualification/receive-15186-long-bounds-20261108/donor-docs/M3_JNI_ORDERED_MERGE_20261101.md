@@ -7,7 +7,7 @@
 Canonical recipe: `m3jdk-sorted-long-batch-bounds-v1`, in Synexia. Source authority:
 `hsoliwal/com.synexia@e7256247dc57f5feafe612d91100854cde78dd51`.
 The ONLY production owner changed by this atom is the internal implementation of
-`m3/tooling/search/src/main/native/m3_native_sorted_long_bounds.c`; the exported JNI
+`make/m3/tooling/search/src/main/native/m3_native_sorted_long_bounds.c`; the exported JNI
 symbol, public Java methods, argument/exception order, Java-only implementation,
 caller-visible indices, output ownership and native opt-in contract remain fixed.
 

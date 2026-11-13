@@ -16,7 +16,7 @@
       "after_sha256": "3663d0cc849fa20c295042982c9632e58ad98e064e3c560d8a06f13c36d868a9"
     },
     {
-      "path": "m3/collections/viewport-proof/verify.py",
+      "path": "make/m3/collections/viewport-proof/verify.py",
       "before_git_blob": "c3be65553a10b6104afc1ef6f37a7d7bd83c97a3",
       "after_git_blob": "53ae1ca30b7ce2526babd53331a61d3e3ec5eeae",
       "before_sha256": "67d20137a557b29eace74081025cb5d08b5b46581590ce61f02bd4e1cd59cf37",

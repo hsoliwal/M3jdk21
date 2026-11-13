@@ -77,7 +77,7 @@ final class JniTest {
     }
 
     private static SourceFile baseline() throws IOException {
-        return text("m3/runtime-integration/recipe/manifest.json", resource("before-07-manifest.json.txt"));
+        return text("make/m3/runtime-integration/recipe/manifest.json", resource("before-07-manifest.json.txt"));
     }
 
     private static void reject(List<SourceFile> input) {

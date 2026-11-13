@@ -249,14 +249,14 @@
     {
       "source": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "source_sha256": "2afab8874bdc9ca6d03c9e52d036ae8398e537067e477ad91537c6bdc027c2ae",
-      "target": "m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "target": "make/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "target_sha256": "2afab8874bdc9ca6d03c9e52d036ae8398e537067e477ad91537c6bdc027c2ae",
       "changes": []
     },
     {
       "source": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SegmentedLaneNativeRecipe.java",
       "source_sha256": "da3ba922379239758bbc365a563bcfae80f080e563d9b6026d6d670b963ef235",
-      "target": "m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3SegmentedLaneNativeRecipe.java",
+      "target": "make/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3SegmentedLaneNativeRecipe.java",
       "target_sha256": "ba2cfbaa3ba736cc1823953d5eefa44ad0c6df1c54b363d4e85fe2dd4f346680",
       "changes": [
         "native postimage SHA updated for renamed JNI symbol"
@@ -269,7 +269,7 @@
     "canonical_source_repository": "hsoliwal/com.synexia",
     "canonical_recipe_path": "synexia-openrewrite-recipes/recipes/m3jdk-packed-collections-receiving-repair-20261008",
     "java_manifest_sha256": "31ef71b432356b141588bbc1352638890f1abeae81acb89d97a497f8e0eda513",
-    "installed_source_manifest": "m3/collections/qualification/installed-source-receiving-20261008.tsv",
+    "installed_source_manifest": "make/m3/collections/qualification/installed-source-receiving-20261008.tsv",
     "installed_source_manifest_sha256": "3719c9fdc78676a2c23ce1131792608889c377224ca4ceaddcec4945c0fe9042",
     "rights": "Apache-2.0; preserve all original notices and per-file third-party/OpenJDK rights",
     "historical_records": "Existing files/tooling_reuse records describe the original 21-file lane intake and are retained without reinterpretation.",
@@ -282,8 +282,8 @@
     "canonical_repository": "hsoliwal/com.synexia",
     "canonical_recipe": "com.synexia.m3.NetBeansCollectionAtoms20261019",
     "canonical_recipe_path": "synexia-openrewrite-recipes/recipe-crates/m3-netbeans-collection-atoms-20261019",
-    "qualification": "m3/collections/qualification/netbeans-collection-atoms-20261019/README.md",
-    "catalogue": "m3/collections/algorithm-catalog/netbeans-collection-atoms-20261019.tsv",
+    "qualification": "make/m3/collections/qualification/netbeans-collection-atoms-20261019/README.md",
+    "catalogue": "make/m3/collections/algorithm-catalog/netbeans-collection-atoms-20261019.tsv",
     "netbeans_donor_revision": "f26ca8d8025ff820b8ffe751b6db6c1cc67baa97",
     "netbeans_runtime_source_adopted": false,
     "netbeans_disposition": "EVALUATED; M3ArrayList and native long-address gather candidates REFUSED; incumbent owners retained",

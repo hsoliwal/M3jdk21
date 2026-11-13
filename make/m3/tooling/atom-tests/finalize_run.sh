@@ -13,7 +13,7 @@
 set -uo pipefail
 WT=${1:?worktree}; OUT=${2:?out}; RUN=${3:?run_dir}; CENSUS=${4:?census_root}; REF=${5:?reference_test_root}
 GROUP=${6:?group}; PKG=${7:?package}
-T="$WT/m3/tooling/atom-tests"
+T="$WT/make/m3/tooling/atom-tests"
 JDK=${JDK:-"C:/Program Files/Java/jdk-21"}
 JUNIT_JAR=${JUNIT_JAR:-"$(cygpath -m "$HOME")/.m2/repository/org/junit/platform/junit-platform-console-standalone/1.11.4/junit-platform-console-standalone-1.11.4.jar"}
 PERF_CLASS=${PERF_CLASS:-M3MindexAtomPerf}

@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
 import java.util.Random;
 
 /** Independent mutable-list oracle for the real, complete collection owner. */
-//FLLDCIM: RELOCATE - donor blob ce54b87a83c7 at d5ad5090d87e; recipe m3/collections/qualification/census2-t2-20261106/relocate.py v6
+//FLLDCIM: RELOCATE - donor blob ce54b87a83c7 at d5ad5090d87e; recipe make/m3/collections/qualification/census2-t2-20261106/relocate.py v6
 public final class InlineOwnerBehaviorProbe {
     private static long trace = 0xcbf29ce484222325L;
     private static long assertions;

@@ -25,7 +25,7 @@ Refine **one source file/one replaceable atom per pass**. Never hand-edit genera
 ## Executable product-owner Java/JNI proof
 
 ```bash
-bash m3/collections/qualification/pathmask-classification-20261021/verify.sh
+bash make/m3/collections/qualification/pathmask-classification-20261021/verify.sh
 ```
 
 Requires Java 21, Python 3, GCC/C17/JNI headers, and UBSan on Linux. It verifies **both** source/template postimages against their recorded SHA-256 digests, compiles the actual M3JDK21 `M3IndexPathMasks.java` (not a surrogate) with all Java warnings treated as errors, and performs 3,092 deterministic seeded reference differentials on the actual production Java implementation. It then builds the **existing** JNI C17 selector with UBSan and reruns the proof under `-Xcheck:jni` with explicit native availability. The native subset includes zero/conflict/general masks and stride directions.
@@ -34,7 +34,7 @@ A local Java 21 fixture implementing the same selected algorithm passed 3,092 co
 
 ## Donor catalogue and superset preservation
 
-See `m3/collections/algorithm-catalog/pathmask-terminal-classification-20261021.tsv`. Entries identify category, original owner, complexity, source, donor rights and precise accept/keep/reject decisions. LeetCode #27's in-place deletion is **rejected** for this detached selection; HackerRank BitSet and GeeksforGeeks bit-mask examples supply concepts only. No third-party code was copied.
+See `make/m3/collections/algorithm-catalog/pathmask-terminal-classification-20261021.tsv`. Entries identify category, original owner, complexity, source, donor rights and precise accept/keep/reject decisions. LeetCode #27's in-place deletion is **rejected** for this detached selection; HackerRank BitSet and GeeksforGeeks bit-mask examples supply concepts only. No third-party code was copied.
 
 Filtered/sorted live views, the existing `java.util` M3JDK21 implementation, indexed snapshots and native mask windows have separate authoritative contracts. Do **not** overwrite active convergence in PRs #1503, #1522, #1508 or #1545. The old and new Java paths maintain a superset of those existing operations, rather than introducing another `M3 + JDK` layer.
 

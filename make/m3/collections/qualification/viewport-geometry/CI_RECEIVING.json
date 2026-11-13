@@ -13,7 +13,7 @@
       "after_git_blob": "5280431fb75caf397245bc88b15bc02db9098b02",
       "sha256": "99ab86196e4b109ab1b48b83e54fbd65a5062d79ea22e1f9945d276cec3f6ed6"
     },
-    "m3/collections/viewport-proof/fixtures/M3ViewportGeometryTest.txt": {
+    "make/m3/collections/viewport-proof/fixtures/M3ViewportGeometryTest.txt": {
       "before": "ABSENT",
       "after_git_blob": "f0305132f17593394a14a69c260520204140eea3",
       "sha256": "b34dbbf23de35d596938579287fdf79a5c9386d0c2e5af025aa253c2974bb3b9"

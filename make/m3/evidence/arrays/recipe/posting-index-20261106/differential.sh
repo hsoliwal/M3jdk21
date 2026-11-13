@@ -37,7 +37,7 @@ done
 mkdir -p "$SCRATCH/native"
 donor_c=$(awk -F'\t' '$1=="FILE" && $2 ~ /\.c$/ {print $2; exit}' "$MAP")
 git -C "$DONOR_GIT" show "$REV:$donor_c" > "$SCRATCH/native/kernel.c"
-git -C "$DONOR_GIT" show "$REV:$(echo "$donor_c" | sed 's#^m3/qualification/[^/]*/retained-variants/[^/]*/##')" > "$SCRATCH/native/mainpath.c"
+git -C "$DONOR_GIT" show "$REV:$(echo "$donor_c" | sed 's#^make/m3/qualification/[^/]*/retained-variants/[^/]*/##')" > "$SCRATCH/native/mainpath.c"
 echo "DONOR $donor_commit files=${#closure[@]} kernel=$donor_c"
 "$JAVA_BIN/javac" --release 21 -Xlint:all -Werror -d "$SCRATCH/classes" -sourcepath "$SCRATCH/src" $(find "$SCRATCH/src" -name '*.java')
 pair() { # label donor-fqn relocated-fqn [args]

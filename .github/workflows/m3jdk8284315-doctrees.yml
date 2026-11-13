@@ -3,9 +3,9 @@ name: M3 JDK-8284315 DocTrees bug-fix proof
 on:
   pull_request:
     paths:
-      - "m3/backports/recipes/jdk-8284315/**"
-      - "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv"
-      - "m3/tooling/recipe-catalogue.tsv"
+      - "make/m3/backports/recipes/jdk-8284315/**"
+      - "make/m3/backports/UPSTREAM_CHANGE_SEEDS.tsv"
+      - "make/m3/tooling/recipe-catalogue.tsv"
       - "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8284315*.java"
       - "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk27-*8284315/**"
       - "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jdk27-*8284315/**"
@@ -51,9 +51,9 @@ jobs:
           set -euo pipefail
           OUT="$PWD/target/jdk-8284315-orchestration"
           mkdir -p "$OUT"
-          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
+          mvn -B -ntp -f make/m3/tooling/backport-dag/pom.xml \
             -Dexec.mainClass=jdk.m3.tooling.dag.OrchestrationProjectionMain \
-            -Dexec.args="$PWD/m3/backports/recipes/jdk-8284315/packet.tsv $OUT" \
+            -Dexec.args="$PWD/make/m3/backports/recipes/jdk-8284315/packet.tsv $OUT" \
             exec:java
           test -s "$OUT/M3BackportRoutes.java"
           test -s "$OUT/m3_backport_dag.py"
@@ -64,7 +64,7 @@ jobs:
           grep -F "$ROOT" "$OUT/M3BackportRoutes.java"
           grep -F "$ROOT" "$OUT/m3_backport_dag.py"
           grep -F "$ROOT" "$OUT/m3_backport_rules.drl"
-          grep -F $'library-api-join\tLIBRARY_API' m3/backports/recipes/jdk-8284315/packet.tsv
+          grep -F $'library-api-join\tLIBRARY_API' make/m3/backports/recipes/jdk-8284315/packet.tsv
 
       - name: Upload orchestration projections
         uses: actions/upload-artifact@v4

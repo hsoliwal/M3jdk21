@@ -4,7 +4,7 @@ This packet owns the recipe-first workflow for parent-owned lazy object projecti
 
 ## Canonical source owners
 
-- Runtime contract: m3/docs/m3-parent-owned-object-residency.md
+- Runtime contract: doc/m3/m3-parent-owned-object-residency.md
 - Parent-owned flat runtime: m3/collections/src/main/java/jdk/m3/collections/M3ObjectResidency.java
 - Compile-time marker: m3/collections/src/main/java/jdk/m3/collections/M3Residency.java
 - Runtime tests: m3/collections/src/test/java/jdk/m3/collections/M3ObjectResidencyTest.java

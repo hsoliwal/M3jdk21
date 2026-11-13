@@ -11,7 +11,7 @@
       "git_blob": "2ed18aba9668bbdea2ef4ba52383ed57a6fd3c1c",
       "sha256": "7f20891ba7bb45e506712e6a10373dc9c69556bdaf9b83d149c42226350300fa"
     },
-    "path": "m3/collections/verification/primitive-filtered-sequences-20261017/verify.sh"
+    "path": "make/m3/collections/verification/primitive-filtered-sequences-20261017/verify.sh"
   },
   "evidence_correction": {
     "finding": "V1 extra debug compiler option did not match committed helper.",

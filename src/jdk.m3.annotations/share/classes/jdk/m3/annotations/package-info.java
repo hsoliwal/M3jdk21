@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  * Modified by Synexia, 2026-10-31: package org.jspecify.annotations renamed to
- * jdk.m3.annotations (m3/tooling/annotations-absorb).
+ * jdk.m3.annotations (make/m3/tooling/annotations-absorb).
  */
 
 /**

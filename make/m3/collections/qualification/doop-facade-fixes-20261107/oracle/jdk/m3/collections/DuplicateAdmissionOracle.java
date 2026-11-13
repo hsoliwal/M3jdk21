@@ -9,7 +9,7 @@ import java.util.function.BiConsumer;
 import java.util.function.LongFunction;
 
 /** Reduced-state Java21 oracle. NOT production M3TransientFacadeStore. */
-//FLLDCIM: RELOCATE - donor blob 73ff5f3d56ca at 6a534f23a85f; recipe m3/collections/qualification/doop-facade-fixes-20261107/apply.py v1
+//FLLDCIM: RELOCATE - donor blob 73ff5f3d56ca at 6a534f23a85f; recipe make/m3/collections/qualification/doop-facade-fixes-20261107/apply.py v1
 public final class DuplicateAdmissionOracle {
     private DuplicateAdmissionOracle() { }
     private record Facade(long id, int generation) { }

@@ -83,7 +83,7 @@ JDT/Maven 3/Groovy/Kotlin/Gradle/Jackson job remains intact.
 Example after the exact fork and baseline trees have been prepared:
 
 ```sh
-python3 m3/tooling/module-packs/parser/real-providers/maven4/verify.py \
+python3 make/m3/tooling/module-packs/parser/real-providers/maven4/verify.py \
   --repo-root . --baseline-root /path/to/frozen-m3-baseline \
   --fork-root /path/to/pinned-maven-fork --jdk-home /path/to/jdk21 \
   --maven /path/to/maven/bin/mvn --cache /path/to/task-maven-cache \

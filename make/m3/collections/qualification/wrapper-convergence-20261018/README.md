@@ -47,11 +47,11 @@ The copied POM must be given an **absolute public owner root** through `recipe.o
 ```sh
 m3_recipe_owner_root="$(pwd)/m3/arrays/qualification/empty-segments-20261017/recipe-custody/sdk-owner"
 
-mvn -f m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/pom.xml \
+mvn -f make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/pom.xml \
   -Drecipe.owner.root="$m3_recipe_owner_root" \
   -Dm3.pass=fixture-java -DskipTests test-compile
 
-mvn -f m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/pom.xml \
+mvn -f make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/pom.xml \
   -Drecipe.owner.root="$m3_recipe_owner_root" \
   -Dm3.pass=fixture-java surefire:test
 ```
@@ -62,7 +62,7 @@ Run the same pair with `fixture-text` only after the Java fixture passes. The re
 
 The iterator repair qualifies its declared mutation-refusal boundary and preserved read effects. Comparator exception identity in bounded navigation, lawful interior-null navigation, ordinary-iterator predicate work and backing fail-fast remain unresolved. The numeric bounded-map/set witnesses pass at f29; that does not establish arbitrary comparator failure preservation. The [reconciliation](../../algorithm-catalog/wrapper-convergence-20261018/catalogue-review/RECONCILIATION.md) retains the exact execution/source distinction and the original failing modes.
 
-Selected implementation reuse is first-party Synexia/M3 history. External implementations remain licensed comparison references in the exact [donor catalogue](../../algorithm-catalog/wrapper-convergence-20261018/index-candidates/CATALOGUE.tsv). [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md), the existing [module LICENSE](../../LICENSE) and [NOTICE](../../NOTICE) retain the source/dependency attribution.
+Selected implementation reuse is first-party Synexia/M3 history. External implementations remain licensed comparison references in the exact [donor catalogue](../../algorithm-catalog/wrapper-convergence-20261018/index-candidates/CATALOGUE.tsv). [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md), the existing [module LICENSE](../../../../../m3/collections/LICENSE) and [NOTICE](../../NOTICE) retain the source/dependency attribution.
 
 The public [catalogue copy manifest](../../algorithm-catalog/wrapper-convergence-20261018/CANONICAL_COPY_MANIFEST.tsv) and [recipe copy manifest](../../algorithm-catalog/wrapper-convergence-20261018/RECIPE_CUSTODY_COPY_MANIFEST.tsv) identify exact canonical bytes. Historical catalogue rows and earlier pending statuses remain unchanged. New acceptance is stated separately, and the published canonical source commit is recorded in the handoff.
 

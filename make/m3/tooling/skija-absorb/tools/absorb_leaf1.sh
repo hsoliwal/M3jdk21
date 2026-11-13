@@ -54,7 +54,7 @@ HELPER_ROW=$'io.github.humbleui.skija.impl.SneakyThrow\tjdk.m3.graphics.impl.M3S
 LEAF0_LEDGERS="CLASSES JNI_BINDINGS CC_CLASSREFS JAVA_CLASSREFS OWNER_MAP SUMMARY TYPE_RENAME JNI_RENAME"
 LEAF0_LEDGERS="$LEAF0_LEDGERS CC_STRING_RENAME"
 MODULE_DIR=src/jdk.m3.graphics/share/classes
-ABSORB=m3/tooling/skija-absorb
+ABSORB=make/m3/tooling/skija-absorb
 TOOLS="$repo/$ABSORB/tools"
 MARKER=.absorb_leaf1_work
 case "$(uname -s)" in

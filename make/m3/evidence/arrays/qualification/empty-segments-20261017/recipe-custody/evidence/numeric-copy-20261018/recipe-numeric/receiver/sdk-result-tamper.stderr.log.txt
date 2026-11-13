@@ -9,4 +9,4 @@ Traceback (most recent call last):
                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-numeric-v2/receiver-proof/isolated-o86qqbmp/result-tamper/crate/receive.py", line 137, in qualification
     raise ValueError("SDK result changed after qualification: " + path)
-ValueError: SDK result changed after qualification: m3/backports/ALGORITHM_CATALOGUE.tsv
+ValueError: SDK result changed after qualification: make/m3/backports/ALGORITHM_CATALOGUE.tsv

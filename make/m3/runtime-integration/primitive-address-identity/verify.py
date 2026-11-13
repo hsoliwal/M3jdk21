@@ -12,7 +12,7 @@ import sys
 import tempfile
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[3]
+ROOT = Path(__file__).resolve().parents[4]
 BASE = ROOT / 'src/java.base/share/classes/jdk/internal/mindex'
 COMPILER = ROOT / 'src/jdk.compiler/share/classes/com/sun/tools/javac/m3'
 TEST = ROOT / 'test/jdk/jdk/internal/mindex'

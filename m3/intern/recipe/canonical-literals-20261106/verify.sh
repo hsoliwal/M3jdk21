@@ -78,7 +78,7 @@ else
     gate 5_untouched_classes FAIL "log=$SCRATCH/base-build.log"
 fi
 
-naming=$(cd "$ROOT" && python -I m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/intern/ 2>&1 | grep -E "^(JDK_NAMING|REFUSED)" | tail -1)
+naming=$(cd "$ROOT" && python -I make/m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/intern/ 2>&1 | grep -E "^(JDK_NAMING|REFUSED)" | tail -1)
 after=$(recipe_check)
 case "$naming|$after" in *"moves=0 rewrites=0 refusals=0"*"|"*"changed=0 provenance=UNCHANGED"*) gate 6_naming PASS "$naming; relocate.py --check after naming: changed=0" ;;
     *) gate 6_naming FAIL "$naming | $after (stage the m3/intern files first: jdk_naming.py reads git ls-files)" ;; esac

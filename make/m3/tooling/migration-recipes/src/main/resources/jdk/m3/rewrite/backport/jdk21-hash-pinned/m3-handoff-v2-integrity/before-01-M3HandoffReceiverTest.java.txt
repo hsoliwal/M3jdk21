@@ -25,14 +25,14 @@ final class M3HandoffReceiverTest {
         assertTrue(
                 M3Jdk21HashPinnedSnapshotRecipe.jdkJavaPath(
                         "m3/ports/sample/src/main/java/sample/Sample.java"));
-        assertFalse(M3Jdk21HashPinnedSnapshotRecipe.jdkJavaPath("m3/docs/Sample.java"));
+        assertFalse(M3Jdk21HashPinnedSnapshotRecipe.jdkJavaPath("doc/m3/Sample.java"));
         assertTrue(
                 M3Jdk21HashPinnedSnapshotRecipe.synexiaReceiverJavaPath(
-                        "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/"
+                        "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/"
                                 + "M3HandoffGuardRecipe.java"));
         assertTrue(
                 M3Jdk21HashPinnedSnapshotRecipe.synexiaReceiverJavaPath(
-                        "m3/tooling/a3/src/test/java/jdk/m3/a3/A3ApplyTest.java"));
+                        "make/m3/tooling/a3/src/test/java/jdk/m3/a3/A3ApplyTest.java"));
         assertFalse(
                 M3Jdk21HashPinnedSnapshotRecipe.synexiaReceiverJavaPath(
                         "src/java.base/share/classes/java/lang/String.java"));

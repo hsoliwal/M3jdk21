@@ -1,4 +1,4 @@
-# Union: com.synexia #15117 onto m3/tooling/search
+# Union: com.synexia #15117 onto make/m3/tooling/search
 
 #15117 (`m3/sorted-int-adjacent-repeat-20261101`, head `81eadeefa85a`) edited the base crate
 `m3jdk-sorted-batch-bounds-20261101` in place. It was fold-dropped from com.synexia develop together with that crate.

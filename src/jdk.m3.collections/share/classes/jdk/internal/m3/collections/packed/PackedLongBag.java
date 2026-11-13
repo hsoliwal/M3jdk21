@@ -19,7 +19,7 @@ import jdk.m3.collections.LongLongConsumer;
  * snapshots, unlike Guava's live algebra views; neither input is modified, even
  * when an output count/total overflows. This type is not a JDK Collection adapter.
  */
-//FLLDCIM: RELOCATE - donor blob 329b632b8a78 at commit d5ad5090d87e (repository, path, URL and digests: m3/collections/recipe/four-library-bags-20261106/PROVENANCE.tsv); recipe m3/collections/recipe/four-library-bags-20261106/relocate.py v1
+//FLLDCIM: RELOCATE - donor blob 329b632b8a78 at commit d5ad5090d87e (repository, path, URL and digests: make/m3/collections/recipe/four-library-bags-20261106/PROVENANCE.tsv); recipe make/m3/collections/recipe/four-library-bags-20261106/relocate.py v1
 public final class PackedLongBag implements PackedLongBagContract {
     private final PackedLongLongHashMap counts;
     private long totalSize;

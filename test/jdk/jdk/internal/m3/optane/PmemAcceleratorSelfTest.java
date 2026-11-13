@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import java.util.Random;
 
 /** Executable JDK-only contract oracle: no Optane device required. */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/56cbdc6312594f06e21ef56f0ce33b605383270b/synexia-m3-jmods/accelerator-pmem/src/test/java/com/synexia/m3/accelerator/pmem/PmemAcceleratorSelfTest.java blob fbebe6786ee9; recipe m3/optane/recipe/pmem-accelerator-20261107/relocate.py v4
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/56cbdc6312594f06e21ef56f0ce33b605383270b/synexia-m3-jmods/accelerator-pmem/src/test/java/com/synexia/m3/accelerator/pmem/PmemAcceleratorSelfTest.java blob fbebe6786ee9; recipe make/m3/optane/recipe/pmem-accelerator-20261107/relocate.py v4
 public final class PmemAcceleratorSelfTest {
     private PmemAcceleratorSelfTest() { }
     private static int cases;

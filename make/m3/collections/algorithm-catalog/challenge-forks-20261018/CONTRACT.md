@@ -5,7 +5,7 @@
 The receiving product is `hsoliwal/M3JDK21`, pinned for this packet to
 `2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49`. A read-only `git ls-tree -r
 --name-only` check at that commit returned no entry under
-`m3/collections/algorithm-catalog/challenge-forks-20261018`. The isolated staging
+`make/m3/collections/algorithm-catalog/challenge-forks-20261018`. The isolated staging
 destination was also absent. This document is created before catalogue data.
 
 The packet adds static data to the existing problem-category catalogue. It does

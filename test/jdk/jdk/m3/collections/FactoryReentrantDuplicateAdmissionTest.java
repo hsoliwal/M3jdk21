@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.Test;
 
 /** Source-sealed regressions for factory reentry before a facade is resident. */
-//FLLDCIM: RELOCATE - donor blob 40ef508a7ba6 at 6a534f23a85f; recipe m3/collections/qualification/doop-facade-fixes-20261107/apply.py v1
+//FLLDCIM: RELOCATE - donor blob 40ef508a7ba6 at 6a534f23a85f; recipe make/m3/collections/qualification/doop-facade-fixes-20261107/apply.py v1
 final class FactoryReentrantDuplicateAdmissionTest {
     private record Facade(long id, int invocation) { }
 

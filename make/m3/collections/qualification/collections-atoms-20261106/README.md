@@ -21,7 +21,7 @@ by `git diff d876c246ea06 3d17af324de9` (atom 1) and the crate README's single r
 the preimage bytes. Each edited method carries a `//FLLDCIM: MRL` anchor.
 
 ```
-python -I m3/collections/qualification/collections-atoms-20261106/apply.py --root .   # changed=3, then changed=0
+python -I make/m3/collections/qualification/collections-atoms-20261106/apply.py --root .   # changed=3, then changed=0
 ```
 
 Hunks (anchors omitted):
@@ -76,7 +76,7 @@ Gate results: GATES.tsv. Logs on the executing host: S:/m3-scratch/eb-conv/colla
 * com.synexia side: retire the four evidence-only crates `m3jdk21-evicting-queue-canonical-owner`,
   `-canonical-model-fuzz`, `-growth-arithmetic-proof`, `-physical-growth-ceiling` (memory/events only), and mark
   the two received crates ABSORBED.
-* `m3/tooling/name-contract/receipts/evicting-queue-canonical-owner.json` still pins canonical sha256 `77ba9ea6...`,
+* `make/m3/tooling/name-contract/receipts/evicting-queue-canonical-owner.json` still pins canonical sha256 `77ba9ea6...`,
   already stale on master (55f35c29...); left for the name-contract owner.
 * Pre-existing on master, untouched here: `jdk.m3.collections.guava.M3EvictingQueueContractProbe` fails with
   "observable or serialized queue contract drift: d6f1b707..." (the guava-evicting-queue module is byte-identical

@@ -19,7 +19,7 @@ import org.junit.jupiter.api.io.TempDir;
 import static org.junit.jupiter.api.Assertions.*;
 
 /** Actual PMEMSDK owner tests; optional Linux POSIX JNI parity and 20k files. */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/m3-pmem-sdk/campaign/src/test/java/com/synexia/m3/pmem/campaign/PmemCorpusSelectedJUnitTest.java blob 7c58d0d2004c; recipe m3/optane/recipe/pmem-gram-index-20261106/relocate.py v3
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/m3-pmem-sdk/campaign/src/test/java/com/synexia/m3/pmem/campaign/PmemCorpusSelectedJUnitTest.java blob 7c58d0d2004c; recipe make/m3/optane/recipe/pmem-gram-index-20261106/relocate.py v3
 final class PmemCorpusSelectedJUnitTest {
     @TempDir Path temp;
     private static final PmemSourceImage.Limits SMALL =

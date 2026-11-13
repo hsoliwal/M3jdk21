@@ -13,7 +13,7 @@ m3/qualification/master-landing-20261028/retained-variants/pr1538/m3/arrays/src/
 m3_array_concat_faults.c (blob 283f30104882), fails on master ("both passes preserve a pending throwable or refuse
 bare null") and passes on this postimage.
 
-Derived from m3/collections/qualification/census-small-batch-20261106/apply.py v1 (anchored edits, every anchor
+Derived from make/m3/collections/qualification/census-small-batch-20261106/apply.py v1 (anchored edits, every anchor
 exactly once, LF payloads re-joined with the preimage's line ending). Every rule names the git blob of its preimage;
 a target must equal the preimage (applied) or the postimage (already applied, no-op); anything else is drift and the
 recipe refuses (exit 2) without writing. Idempotent: a second run reports changed=0 and EDITS.tsv is a fixed point.

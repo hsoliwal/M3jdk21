@@ -83,7 +83,7 @@ def native_notices(repository, module_root, artifact_module, sqlite, legal):
                         if (path / "LICENSE.txt").is_file()), None)
     candidates = ((owned_legal / "LICENSE.txt",) if owned_legal else ()) + (
                   module_root / "LICENSE-2.0.txt", module_root / "LICENSE",
-                  repository / "m3/tooling/module-packs/legal/LICENSE")
+                  repository / "make/m3/tooling/module-packs/legal/LICENSE")
     license_file = next((path for path in candidates if path.is_file()), None)
     if license_file is None:
         raise ValueError("Apache-2.0 license text missing from module and existing tooling owner")
@@ -147,8 +147,8 @@ def main(argv=None):
         if "module-info.class" not in archive.namelist():
             raise ValueError("packaged modular M3FS jar required; run Maven install first")
     repository = args.repository_root.resolve(strict=True)
-    packer = input_file(repository / "m3/tooling/jmod-recipes/tools/jmod_pack.py")
-    graph = repository / "m3/tooling/module-packs/kernel/src/main/java"
+    packer = input_file(repository / "make/m3/tooling/jmod-recipes/tools/jmod_pack.py")
+    graph = repository / "make/m3/tooling/module-packs/kernel/src/main/java"
     if not graph.is_dir():
         raise ValueError("existing module-packs graph owner missing")
     module_root = Path(__file__).resolve().parents[1]

@@ -27,7 +27,7 @@ public final class M3CharcopyCurrentSuccessorRecipe extends M3GpuToolJoinRecipe 
                     stopAfterPreVisit();
                     String path = M3GpuToolJoinManifest.normalized(source.getSourcePath());
                     if (path.equals("src/java.base/share/classes/java/lang/MIndexString.java")
-                            || path.equals("m3/runtime-integration/tests/MIndexStringInvariant.java")) {
+                            || path.equals("make/m3/runtime-integration/tests/MIndexStringInvariant.java")) {
                         throw new IllegalStateException("legacy source forbidden: " + path);
                     }
                     delegate.visit(source, context);

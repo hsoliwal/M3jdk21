@@ -14,7 +14,7 @@ def digest(path):
 
 def main():
     crate = Path(__file__).resolve().parent
-    repo = crate.parents[2]
+    repo = crate.parents[3]
     resources = crate / 'src/main/resources/jdk/m3/rewrite/backport'
     checked = {}
     for kind, name in [('jdk21-hash-pinned', 'jdk22-m3-mr'),
@@ -36,7 +36,7 @@ def main():
         assert digest(repo / path) == expected, ('dependency drift', path)
         checked[path] = expected
 
-    authority = json.loads((repo / 'm3/docs/name-mapping.json').read_text())
+    authority = json.loads((repo / 'doc/m3/name-mapping.json').read_text())
     original = json.loads((resources / 'jdk21-hash-pinned-text/m3-mr/name-mapping.json.txt.before').read_text())
     records = {record['id']: record for record in authority['migration']['records']}
     assert len(records) == len(authority['migration']['records']), 'duplicate mapping IDs'

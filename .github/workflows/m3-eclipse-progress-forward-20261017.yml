@@ -5,7 +5,7 @@ on:
     paths:
       - 'm3/eclipse/core-runtime/**'
       - 'src/jdk.m3.collections/share/classes/**'
-      - 'm3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
+      - 'make/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
       - '.github/workflows/m3-eclipse-progress-forward-20261017.yml'
   workflow_dispatch:
 permissions:

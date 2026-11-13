@@ -12,7 +12,7 @@ The actual compilable Eclipse production source belongs to
 `hsoliwal/eclipse.platform.swt`, path
 `bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/widgets/EventTable.java`.
 The M3JDK21-owned Maven/OpenRewrite recipe under
-`m3/tooling/shared-frontend/recipe-custody/datasets/swt-event-table-m3-20261021`
+`make/m3/tooling/shared-frontend/recipe-custody/datasets/swt-event-table-m3-20261021`
 is the source-custody/replay authority, **not a second EventTable runtime**.
 This is an additive new reviewable source-refinement slice after existing
 JDT NodeList array adoption and SWT's indexed VirtualTree/VirtualItemStorage work.
@@ -66,18 +66,18 @@ positions, query results and callback order.
 Run the source recipe in the M3JDK21 checkout:
 
 ```sh
-mvn -B -ntp -f m3/tooling/shared-frontend/recipe-custody/pom.xml \
+mvn -B -ntp -f make/m3/tooling/shared-frontend/recipe-custody/pom.xml \
   -Dm3.dataset=swt-event-table-m3-20261021 \
-  "-Drecipe.owner.root=$PWD/m3/tooling/shared-frontend/recipe-custody/sdk-owner" \
+  "-Drecipe.owner.root=$PWD/make/m3/tooling/shared-frontend/recipe-custody/sdk-owner" \
   -Pcontract verify
 ```
 
 Then check a **separate** SWT fork checkout:
 
 ```sh
-python3 m3/tooling/shared-frontend/recipe-custody/receive.py \
+python3 make/m3/tooling/shared-frontend/recipe-custody/receive.py \
   --dataset swt-event-table-m3-20261021 \
-  --recipe-owner "$PWD/m3/tooling/shared-frontend/recipe-custody/sdk-owner" \
+  --recipe-owner "$PWD/make/m3/tooling/shared-frontend/recipe-custody/sdk-owner" \
   --target /path/to/eclipse.platform.swt --check
 
 cd /path/to/eclipse.platform.swt

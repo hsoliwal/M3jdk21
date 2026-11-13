@@ -5,7 +5,7 @@ on:
     paths:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3TreeWindowPlan.java'
       - 'test/jdk/jdk/m3/collections/M3ParentHandleClosureProof.java'
-      - 'm3/collections/qualification/viewport-tree-parent/**'
+      - 'make/m3/collections/qualification/viewport-tree-parent/**'
       - '.github/workflows/m3-viewport-tree-parent.yml'
   workflow_dispatch:
 permissions:
@@ -81,4 +81,4 @@ jobs:
           if-no-files-found: warn
           path: |
             ${{ runner.temp }}/m3-tree-parent/
-            m3/collections/qualification/viewport-tree-parent/QUALIFICATION.json
+            make/m3/collections/qualification/viewport-tree-parent/QUALIFICATION.json

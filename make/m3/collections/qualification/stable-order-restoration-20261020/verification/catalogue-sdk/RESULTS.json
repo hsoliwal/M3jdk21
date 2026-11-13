@@ -1,9 +1,9 @@
 {
   "admitted_files": {
-    "m3/collections/algorithm-catalog/stable-order-restoration-20261020/CANDIDATES.tsv": "4c665ab69a525cf0f289053989adc8fac1dbf78c527631dfe60e6b9e695bf6c8",
-    "m3/collections/algorithm-catalog/stable-order-restoration-20261020/DISCOVERY.json": "9919c3a227026a3038ad4d568878eb5559ace640de205914867fabb226152fca",
-    "m3/collections/algorithm-catalog/stable-order-restoration-20261020/README.md": "5226edebfdddfb21515cab2a1c8863d8d52304ecb57edff198619591bb903c31",
-    "m3/collections/algorithm-catalog/stable-order-restoration-20261020/SOURCE_PINS.json": "0d654bbbb283e1e60898e05961ba2052fb6694216488ba22461c539efa836361"
+    "make/m3/collections/algorithm-catalog/stable-order-restoration-20261020/CANDIDATES.tsv": "4c665ab69a525cf0f289053989adc8fac1dbf78c527631dfe60e6b9e695bf6c8",
+    "make/m3/collections/algorithm-catalog/stable-order-restoration-20261020/DISCOVERY.json": "9919c3a227026a3038ad4d568878eb5559ace640de205914867fabb226152fca",
+    "make/m3/collections/algorithm-catalog/stable-order-restoration-20261020/README.md": "5226edebfdddfb21515cab2a1c8863d8d52304ecb57edff198619591bb903c31",
+    "make/m3/collections/algorithm-catalog/stable-order-restoration-20261020/SOURCE_PINS.json": "0d654bbbb283e1e60898e05961ba2052fb6694216488ba22461c539efa836361"
   },
   "commands": [
     {

@@ -14,7 +14,7 @@ The signal-dimension oracle verifies unavailable and loaded native modes separat
 
 ```sh
 JAVA_HOME=/path/to/jdk21 MVN=mvn \
-  python3 m3/collections/qualification/full-java-jni-20261018/verify.py
+  python3 make/m3/collections/qualification/full-java-jni-20261018/verify.py
 ```
 
 Linux, C17 and Maven dependencies/plugins are required. M2_REPO and

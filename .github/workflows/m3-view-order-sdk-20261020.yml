@@ -6,7 +6,7 @@ on:
   pull_request:
     paths:
       - '.github/workflows/m3-view-order-sdk-20261020.yml'
-      - 'm3/collections/qualification/view-order-sdk-20261020/**'
+      - 'make/m3/collections/qualification/view-order-sdk-20261020/**'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongIndexProjection.java'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredViews.java'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredNavigableSet.java'
@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     env:
-      Q: m3/collections/qualification/view-order-sdk-20261020
+      Q: make/m3/collections/qualification/view-order-sdk-20261020
     steps:
       - uses: actions/checkout@v5
         with:
@@ -31,7 +31,7 @@ jobs:
           persist-credentials: false
           fetch-depth: 1
           sparse-checkout: |
-            m3/collections/qualification/view-order-sdk-20261020
+            make/m3/collections/qualification/view-order-sdk-20261020
             m3/collections/src/main
             src/java.base/share/native/libjava
       - uses: actions/checkout@v5
@@ -85,7 +85,7 @@ jobs:
           name: view-order-sdk-${{ github.event.pull_request.head.sha || github.sha }}
           path: |
             ${{ runner.temp }}/view-order-sdk.log
-            m3/collections/qualification/view-order-sdk-20261020/verification/view-order-sdk-20261020/target/surefire-reports
-            m3/collections/qualification/view-order-sdk-20261020/verification/view-order-sdk-20261020/target/evidence
-            m3/collections/qualification/view-order-sdk-20261020/verification/view-order-sdk-20261020/target/generated-receiver
+            make/m3/collections/qualification/view-order-sdk-20261020/verification/view-order-sdk-20261020/target/surefire-reports
+            make/m3/collections/qualification/view-order-sdk-20261020/verification/view-order-sdk-20261020/target/evidence
+            make/m3/collections/qualification/view-order-sdk-20261020/verification/view-order-sdk-20261020/target/generated-receiver
           if-no-files-found: error

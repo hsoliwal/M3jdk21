@@ -14,7 +14,7 @@ the producer and finite evidence pipeline.
 **Verification: NOT_RUN.** Source bodies, two direct JUnit classes and bounded
 call paths were read; no build, test, example, benchmark, custody verifier or
 JDK runtime integration ran for this documentation. The [existing design and
-2026-10-13 measurements](../../m3/docs/m3-compiletime-precompute.md) remain
+2026-10-13 measurements](../m3/m3-compiletime-precompute.md) remain
 historical evidence with their original corpus, host and limits.
 
 ## Layer and authority boundary
@@ -25,7 +25,7 @@ depends on ASM, ASM tree/analysis, the separate `com.m3:m3-precompute` artifact,
 and test-scoped JUnit. Surefire disables the module path and opens
 `java.base/java.util.regex` for reflective build-time analysis. The project has
 no `module-info.java`, parent POM or module list, and is not an entry in the
-[root control reactor's module/profile module lists](../../m3/pom.xml).
+[root control reactor's module/profile module lists](../../make/m3/pom.xml).
 Follow the explicit dependency-first [build recipe](../../m3/ports/compiletime/README.md);
 this page neither adds reactor membership nor establishes a JPMS or bootstrap
 receiver.

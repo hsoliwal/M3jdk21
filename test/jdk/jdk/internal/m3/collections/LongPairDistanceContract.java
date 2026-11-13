@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 /** Dependency-free original-owner Java/JNI distance-window differential contract. */
-//FLLDCIM: RELOCATE - donor blob a28b67978112 at d5ad5090d87e; recipe m3/collections/qualification/census2-c4-20261106/relocate.py v1
+//FLLDCIM: RELOCATE - donor blob a28b67978112 at d5ad5090d87e; recipe make/m3/collections/qualification/census2-c4-20261106/relocate.py v1
 public final class LongPairDistanceContract {
     private static long checks;
 

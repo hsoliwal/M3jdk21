@@ -7,9 +7,9 @@ on:
   pull_request:
     paths:
       - '.github/workflows/m3-filtered-list-mutation-20261018.yml'
-      - 'm3/collections/qualification/filtered-list-mutation-20261018/**'
+      - 'make/m3/collections/qualification/filtered-list-mutation-20261018/**'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-filtered-list-mutation-20261018/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3jdk21-filtered-list-mutation-20261018.yml'
+      - 'make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3jdk21-filtered-list-mutation-20261018.yml'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredLists.java'
       - 'test/jdk/jdk/m3/collections/M3FilteredListMutation*.java'
   workflow_dispatch:
@@ -33,9 +33,9 @@ jobs:
             src/jdk.m3.collections/share
             test/jdk/jdk/m3/collections
             test/jdk/jdk/internal/m3/collections
-            m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite
-            m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-filtered-list-mutation-20261018
-            m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite
+            make/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite
+            make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-filtered-list-mutation-20261018
+            make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite
       - uses: actions/setup-java@v5
         with:
           distribution: temurin
@@ -44,8 +44,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          P=m3/collections/qualification/filtered-list-mutation-20261018
-          test "$(git hash-object m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java)" = aaf5c4615fb44e49dde1ddcf15eb11a578c31885
+          P=make/m3/collections/qualification/filtered-list-mutation-20261018
+          test "$(git hash-object make/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java)" = aaf5c4615fb44e49dde1ddcf15eb11a578c31885
           mkdir -p "$P/target/pre"
           cp "$P/pre/M3FilteredLists.java.txt" "$P/target/pre/M3FilteredLists.java"
           echo "f1e3e21c37cbe084ef6b9446b86293d5039cd9b2bc6c1bf86d63a86793e3b8d5  $P/target/pre/M3FilteredLists.java" | sha256sum -c -
@@ -54,14 +54,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          P=m3/collections/qualification/filtered-list-mutation-20261018
+          P=make/m3/collections/qualification/filtered-list-mutation-20261018
           mvn -B -ntp -f "$P/pom.xml" test | tee "$P/target/maven.log"
           grep -F 'Tests run: 4, Failures: 0, Errors: 0, Skipped: 0' "$P/target/surefire-reports/jdk.internal.m3.rewrite.FilteredListMutationRecipeTest.txt"
       - name: Generated-source red green, public API and actual receiver state
         shell: bash
         run: |
           set -euo pipefail
-          P=m3/collections/qualification/filtered-list-mutation-20261018
+          P=make/m3/collections/qualification/filtered-list-mutation-20261018
           G="$P/target/generated/m3/collections/src"
           test "$(find "$P/target/generated" -name '*.java' | wc -l)" -eq 3
           mkdir -p "$P/target/green" "$P/target/red" "$P/target/receiver"
@@ -91,7 +91,7 @@ jobs:
         with:
           name: filtered-list-mutation-${{ github.event.pull_request.head.sha || github.sha }}
           path: |
-            m3/collections/qualification/filtered-list-mutation-20261018/target/generated
-            m3/collections/qualification/filtered-list-mutation-20261018/target/*.txt
-            m3/collections/qualification/filtered-list-mutation-20261018/target/*.log
-            m3/collections/qualification/filtered-list-mutation-20261018/target/surefire-reports
+            make/m3/collections/qualification/filtered-list-mutation-20261018/target/generated
+            make/m3/collections/qualification/filtered-list-mutation-20261018/target/*.txt
+            make/m3/collections/qualification/filtered-list-mutation-20261018/target/*.log
+            make/m3/collections/qualification/filtered-list-mutation-20261018/target/surefire-reports

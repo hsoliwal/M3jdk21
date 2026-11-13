@@ -137,7 +137,7 @@ variant, stability, bounds, memory and applicability.
 From a Java 21 checkout, verify the canonical proof-tooling mirror:
 
 ~~~sh
-SORT_RECIPE=m3/tooling/sort-recipes/m3-java-util-sorts-20261018
+SORT_RECIPE=make/m3/tooling/sort-recipes/m3-java-util-sorts-20261018
 mvn -B -ntp -f "$SORT_RECIPE/pom.xml" verify
 
 # EVIDENCE_DIR must be outside the checkout.
@@ -145,7 +145,7 @@ mvn -B -ntp -f "$SORT_RECIPE/pom.xml" compile exec:java \
   -DtargetRoot="$PWD" -DapplyMode=check \
   -DreceiptPath="$EVIDENCE_DIR/m3-sorts-check.tsv"
 
-python3 m3/verification/sorting/verify.py --java-home "$JAVA_HOME"
+python3 make/m3/verification/sorting/verify.py --java-home "$JAVA_HOME"
 ~~~
 
 The receiver checks every sealed postimage and the exact existing sorting/progress

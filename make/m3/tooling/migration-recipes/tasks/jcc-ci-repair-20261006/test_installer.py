@@ -184,7 +184,7 @@ class InstallerTests(unittest.TestCase):
                 hash_input=(root/"hash-input").read_text()
                 self.assertIn("OpenJDK21U-jdk_x64_linux_hotspot_21_35.tar.gz",acquisition)
                 self.assertIn("82f64c53acaa045370d6762ebd7441b74e6fda14b464d54d1ff8ca941ec069e6",hash_input)
-                self.assertIn("-B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify",args)
+                self.assertIn("-B -ntp -f make/m3/tooling/migration-recipes/pom.xml clean verify",args)
                 self.assertEqual(str(selected),selected_env["M3JDK"])
                 if state=="before":
                     self.assertEqual([str(unselected)],homes)
@@ -193,7 +193,7 @@ class InstallerTests(unittest.TestCase):
                     self.assertEqual([str(selected),str(selected)],homes)
                     self.assertEqual([str(selected/"bin")],paths)
                     self.assertEqual([str(selected/"bin/java")],(root/"java-observations").read_text().splitlines())
-                    self.assertEqual(["-version","-B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify"],args)
+                    self.assertEqual(["-version","-B -ntp -f make/m3/tooling/migration-recipes/pom.xml clean verify"],args)
                 observations[state]={"maven_calls":len(homes),"selected_pinned_jdk":all(x==str(selected) for x in homes),
                                      "verification_arguments":args,"archive_name_preserved":True,"archive_sha256_preserved":True}
         RECEIPTS.append({"stage":"foundation-wiring-control","mode":"MOCKED_ACQUISITION_AND_JAVA_AND_MAVEN",
@@ -208,7 +208,7 @@ def main():
     args=parser.parse_args()
     REPO=args.repo.resolve();PLAN=args.plan.resolve();OUT=args.out.resolve()
     OUT.mkdir(parents=True,exist_ok=False)
-    owner_path=REPO/"m3/migration/recipe.py"
+    owner_path=REPO/"make/m3/migration/recipe.py"
     if digest(owner_path.read_bytes())!=INSTALLER_SHA:
         raise RuntimeError("installer identity drift")
     spec=importlib.util.spec_from_file_location("retained_m3_installer",owner_path)

@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 /** Reads reviewed file-atom identity overrides from the exact committed census tree. */
 public final class FileAtomIdentities {
     /** Repository-relative path of the reviewed identity override table. */
-    public static final String PATH = "m3/tooling/atom-census/contract/FILE_IDENTITY_OVERRIDES.tsv";
+    public static final String PATH = "make/m3/tooling/atom-census/contract/FILE_IDENTITY_OVERRIDES.tsv";
     /** Exact override-table header. */
     public static final String HEADER = "source_path\tatom_id";
 

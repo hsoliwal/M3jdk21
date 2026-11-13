@@ -3,13 +3,13 @@
  "baseCommit": "b35759a36ecdfc299855a5e53b4d1a05f9f3884d",
  "scope": "Effective input qualification only: the sealed v3 receipt and verifier stay byte-exact history; successor rows re-pin the three D1 counter bodies and the owners master changed after the v3 seal; the counter differential test, the size bench and the v2-to-v3 recipe manifest are pinned as added inputs.",
  "predecessor": {
-  "path": "m3/collections/qualification/owned-apache-multivalue-20261018/SDK_SOURCE_BINDING_SUCCESSOR_V3.json",
+  "path": "make/m3/collections/qualification/owned-apache-multivalue-20261018/SDK_SOURCE_BINDING_SUCCESSOR_V3.json",
   "bytes": 4649,
   "sha256": "9432e17d44f32a6b672484ec6e63f28221b3422722f48db9a809fa663921c5c4",
   "gitBlob": "e9ca64f85b94f5bca631da2970c09866b27047d4"
  },
  "predecessorVerifier": {
-  "path": "m3/collections/qualification/owned-apache-multivalue-20261018/verify_source_binding_successor_v3.py",
+  "path": "make/m3/collections/qualification/owned-apache-multivalue-20261018/verify_source_binding_successor_v3.py",
   "bytes": 5889,
   "sha256": "1a47c56121ecf52ab475d463e22e118fcdcb0b330380dd4701c4a0969946aa00",
   "gitBlob": "e28898852519c338706dba67d84056b28f628f8c"
@@ -171,7 +171,7 @@
   }
  ],
  "recipe": {
-  "path": "m3/collections/recipe/owned-apache-multivalue-20261024/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/apache-multivalue-v2-to-v3/manifest.tsv",
+  "path": "make/m3/collections/recipe/owned-apache-multivalue-20261024/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/apache-multivalue-v2-to-v3/manifest.tsv",
   "bytes": 1054,
   "sha256": "78a74d5a90ae3800f14ff50f562f3327af628b5fbed48f8c8b4e9e4ee48ed08d",
   "gitBlob": "d8146d11d64b533c60021cdc0dddff086f27be41"

@@ -554,12 +554,12 @@ public final class M3HashPinnedJavaSnapshotRecipe
                 "cpullm-java/facet-release/tests/FacetExactCoverageChecks.java");
         // Six reviewed current-fork module-pack owners retain Java AST admission.
         boolean m3NlpCurrentForkOwner = switch (value) {
-            case "m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/jdk/m3/nlp/search/LuceneSourceFields.java" -> true;
-            case "m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/jdk/m3/nlp/search/SourceDocument.java" -> true;
-            case "m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/jdk/m3/nlp/search/SourceSpans.java" -> true;
-            case "m3/tooling/module-packs/nlp-search/tests/ModelSourceProbe.java" -> true;
-            case "m3/tooling/module-packs/nlp-search/tests/SourceFactsProbe.java" -> true;
-            case "m3/tooling/module-packs/nlp-search/tests/SourceIntegrationProbe.java" -> true;
+            case "make/m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/jdk/m3/nlp/search/LuceneSourceFields.java" -> true;
+            case "make/m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/jdk/m3/nlp/search/SourceDocument.java" -> true;
+            case "make/m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/jdk/m3/nlp/search/SourceSpans.java" -> true;
+            case "make/m3/tooling/module-packs/nlp-search/tests/ModelSourceProbe.java" -> true;
+            case "make/m3/tooling/module-packs/nlp-search/tests/SourceFactsProbe.java" -> true;
+            case "make/m3/tooling/module-packs/nlp-search/tests/SourceIntegrationProbe.java" -> true;
             default -> false;
         };
         if ((!mavenSource && !eclipsePdeSource && !eclipsePdeTestSource && !eclipseNebulaWidgetSource

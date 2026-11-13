@@ -19,7 +19,7 @@
     "all-flat inputs retain stock JDK replacement paths"
   ],
   "verification": {
-    "source_checker": "m3/runtime-integration/check-m3string-mixed-literal-replace.py",
+    "source_checker": "make/m3/runtime-integration/check-m3string-mixed-literal-replace.py",
     "jtreg": "test/jdk/java/lang/String/M3StringMixedLiteralReplaceTest.java",
     "jdk_build": "NOT_RUN",
     "jtreg_run": "NOT_RUN",

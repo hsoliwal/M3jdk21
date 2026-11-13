@@ -34,7 +34,7 @@ output was hand-patched. Original license notices are retained.
 mkdir -p target/m3-view-order/classes
 javac --release 21 -Xlint:all -Werror -d target/m3-view-order/classes \
   m3/collections/src/main/java/com/m3/collections/{M3FilteredViews,M3LongIndexProjection,M3IndexMaskCompactor,M3LongAddressKernel}.java \
-  m3/collections/verification/view-refinement-20261019/*Probe.java
+  make/m3/collections/verification/view-refinement-20261019/*Probe.java
 java -ea -cp target/m3-view-order/classes com.m3.collections.M3FilteredNullNavigationProbe
 java -ea -cp target/m3-view-order/classes com.m3.collections.M3ProjectionRefinementProbe java
 ```

@@ -34,9 +34,9 @@ export M3_PACK_ROOT=/absolute/path/to/fresh/arrays-sdk-build
 cd "$M3_SOURCE_ROOT"
 
 mvn -B -ntp -f m3/arrays/pom.xml -Pnative-linux -DargLine=-Xcheck:jni verify
-python3 -m unittest discover -s m3/tooling/module-packs -p test_sdk_profile.py
+python3 -m unittest discover -s make/m3/tooling/module-packs -p test_sdk_profile.py
 JAVA_HOME21="$JAVA_HOME" PYTHONDONTWRITEBYTECODE=1 \
-  python3 -m unittest discover -s m3/tooling/jmod-recipes/tools -p test_jmod_resolution.py -v
+  python3 -m unittest discover -s make/m3/tooling/jmod-recipes/tools -p test_jmod_resolution.py -v
 ```
 
 The JMOD regression suite uses the supplied source JDK through `JAVA_HOME21`.
@@ -116,7 +116,7 @@ out of the default root set for ordinary classpath launches, preserving lookup
 of existing classpath classes in the same packages.
 
 ```sh
-python3 m3/tooling/jmod-recipes/tools/jmod_pack.py \
+python3 make/m3/tooling/jmod-recipes/tools/jmod_pack.py \
   --jdk-home "$JAVA_HOME" \
   --image-tsv "$M3_PACK_ROOT/JMOD_IMAGE.tsv" \
   --manifest "$M3_PACK_ROOT/DESCRIPTOR_MANIFEST.tsv" \
@@ -154,7 +154,7 @@ lock = {"schema_version": 1, "packs": [{
 (root / "arrays-lock.json").write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n")
 PY
 
-python3 m3/tooling/module-packs/build_pack.py \
+python3 make/m3/tooling/module-packs/build_pack.py \
   --jdk "$JAVA_HOME" \
   --out "$M3_PACK_ROOT/sdk" \
   --profile sdk \

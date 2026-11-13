@@ -132,9 +132,9 @@ class Verifier:
         self.pack = self.repo / "m3/collections/pcollections"
         self.donor = self.repo / "m3/vendor/third_party/pcollections"
         self.base = self.repo / "m3/collections"
-        self.packager = self.repo / "m3/tooling/jmod-recipes/tools/jmod_pack.py"
+        self.packager = self.repo / "make/m3/tooling/jmod-recipes/tools/jmod_pack.py"
         self.packager_helper = self.packager.with_name("jmod_image.py")
-        self.old_build = self.repo / "m3/tooling/module-packs/collections/build.py"
+        self.old_build = self.repo / "make/m3/tooling/module-packs/collections/build.py"
         self.old_legal = self.old_build.parent / "legal"
         self.native_source = self.base / "src/main/native/collections/m3_index_mask_compactor.c"
         self.junit = dependency(arguments.junit_console, "junit")

@@ -20,14 +20,14 @@ hidden reference remains before asserting that the last visible member is gone.
 `CATALOGUE.json` records the four operation categories, rejected and selected
 oracles, original source hashes, unchanged production hashes, donor evaluation,
 coverage, and evidence boundaries. The searchable module catalogue index is
-`m3/collections/algorithm-catalog/collection-oracle-repair-20261018.tsv`.
+`make/m3/collections/algorithm-catalog/collection-oracle-repair-20261018.tsv`.
 
 The independent witness needs only Java 21 and no M3 classes. From the repository
 root, use an isolated output directory:
 
 ```sh
 mkdir -p /tmp/m3-collection-oracle-classes
-javac -Xlint:all -Werror -d /tmp/m3-collection-oracle-classes m3/collections/qualification/oracle-repair-20261018/src/test/java/CollectionOracleWitness.java
+javac -Xlint:all -Werror -d /tmp/m3-collection-oracle-classes make/m3/collections/qualification/oracle-repair-20261018/src/test/java/CollectionOracleWitness.java
 java -Xmx128m -cp /tmp/m3-collection-oracle-classes CollectionOracleWitness
 ```
 

@@ -34,7 +34,7 @@ import re
 import sys
 
 RECIPE_ID = "JGIT_BASE64_TO_JDK v1"
-TOOL_REL = "m3/tooling/jdk-superset/retarget/tools/jgit_base64_to_jdk.py"
+TOOL_REL = "make/m3/tooling/jdk-superset/retarget/tools/jgit_base64_to_jdk.py"
 DONORS = ("org.eclipse.jgit",)
 TARGETS = ("org/eclipse/jgit/util/Base64.java",)
 RELOCATED: dict = {}
@@ -100,7 +100,7 @@ README_TEXT = (
     ("No speed, allocation or behaviour change is claimed. The published sources jar carries no test suite; the\n"
      "compile from source and the consumers' own tests are the proof lane. Upstream tests remain a follow-up with\n"
      "their own recipe. See `PROVENANCE.json` for the file-level pins and the runner receipt.",
-     "The overlay's proof is `m3/evidence/java-base/BASE64_JGIT.md`. Outside it no speed, allocation or behaviour\n"
+     "The overlay's proof is `make/m3/evidence/java-base/BASE64_JGIT.md`. Outside it no speed, allocation or behaviour\n"
      "change is claimed. The published sources jar carries no test suite; the compile from source and the consumers'\n"
      "own tests are the proof lane. Upstream tests remain a follow-up with their own recipe. See `PROVENANCE.json` for\n"
      "the file-level pins and the runner receipt."),

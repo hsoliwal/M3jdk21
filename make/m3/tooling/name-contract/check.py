@@ -15,10 +15,10 @@ from pathlib import Path
 import re
 import sys
 
-ROOT = Path(__file__).resolve().parents[3]
-PLAN = "m3/tooling/name-contract/name-plan.json"
-MAP = "m3/docs/name-mapping.json"
-DOC = "m3/docs/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md"
+ROOT = Path(__file__).resolve().parents[4]
+PLAN = "make/m3/tooling/name-contract/name-plan.json"
+MAP = "doc/m3/name-mapping.json"
+DOC = "doc/m3/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md"
 SCHEMA = "M3JDK21_NAME_CONTRACT_PLAN_V1"
 SHA = re.compile(r"^[0-9a-f]{40}$")
 FQN = re.compile(r"^[A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*)+$")
@@ -34,7 +34,7 @@ TYPE_NAME_END = r"(?=[ \t\n\r\f<{(]|\Z)"
 
 # Reuse the repository's public-name lexical helper; this is not Java attribution.
 _PUBLIC_NAMES_SPEC = importlib.util.spec_from_file_location(
-    "m3_public_names_for_name_contract", ROOT / "m3/compatibility/check_public_names.py")
+    "m3_public_names_for_name_contract", ROOT / "make/m3/compatibility/check_public_names.py")
 _PUBLIC_NAMES = importlib.util.module_from_spec(_PUBLIC_NAMES_SPEC)
 sys.modules[_PUBLIC_NAMES_SPEC.name] = _PUBLIC_NAMES
 _PUBLIC_NAMES_SPEC.loader.exec_module(_PUBLIC_NAMES)

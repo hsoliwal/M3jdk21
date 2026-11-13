@@ -6,16 +6,16 @@
   "kind": "Dated successor receipt: brings the received tree up to fork master 07ba121f146a; the 20261024 receipt stays byte-exact history",
   "base": "bb66a8c16642a4e898dbc5fc7c3af0d5ed572136",
   "predecessor": {
-    "directory": "m3/collections/receiving/eclipse-collections-14.0.0-snapshot-00a668d6-20261024",
+    "directory": "make/m3/collections/receiving/eclipse-collections-14.0.0-snapshot-00a668d6-20261024",
     "handling": "Kept unchanged",
     "sourceQualification": {
-      "path": "m3/collections/receiving/eclipse-collections-14.0.0-snapshot-00a668d6-20261024/SOURCE_QUALIFICATION.json",
+      "path": "make/m3/collections/receiving/eclipse-collections-14.0.0-snapshot-00a668d6-20261024/SOURCE_QUALIFICATION.json",
       "bytes": 7741,
       "sha256": "68480cc404a0fffd3ba6ef1e70eec1d7d1668446440b9360702c4a32d9b19c49",
       "gitBlob": "75e6b8cd19ffc279abd481bd622274027d17cd18"
     },
     "bindings": {
-      "path": "m3/collections/receiving/eclipse-collections-14.0.0-snapshot-00a668d6-20261024/FULL_SOURCE_BINDINGS.tsv",
+      "path": "make/m3/collections/receiving/eclipse-collections-14.0.0-snapshot-00a668d6-20261024/FULL_SOURCE_BINDINGS.tsv",
       "bytes": 1515189,
       "sha256": "7ef1a2ad3d46db2cb27f73f35fe7fb7885d931e3b49fe201ec99e61f24343399",
       "gitBlob": "2f1c896c2994da77b3d08a2a06e6bbbf38b62e3c",
@@ -80,7 +80,7 @@
       "after": {"bytes": 1937, "sha256": "fe83cef1577f6e22487814a43b4dacc73fe5b04f8b8348f3b26aea18d76d2d63", "gitBlob": "08c5aab32369f95caf021ed2d8a3cba0c5b2b635"}
     },
     {
-      "path": "m3/qualification/eclipse-release-20261029/EXECUTION.json",
+      "path": "make/m3/qualification/eclipse-release-20261029/EXECUTION.json",
       "reason": "Fork receipt for the three serialization files: its source_sha256 values equal the before SHA-256 above and its postimage_sha256 values equal the after SHA-256 above (3 of 3)",
       "before": null,
       "after": {"bytes": 4300, "sha256": "358d72ae987b609419ab267b99c2b5c805e0a508d9be05b568cb3c0d099f846b", "gitBlob": "2a54cd6092b7e13a4eb18c67ceb2039e178b7f9a"}
@@ -104,7 +104,7 @@
     {"path": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/m3/package-import-rename-20261018/FINAL_SOURCE_HASHES.tsv", "lines": [675, 682, 2932], "handling": "Fork file of the 20261018 rename, byte-equal with the fork head; kept. EXECUTION.json is the fork successor for these three rows"},
     {"path": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/m3/package-import-rename-20261018/NAMESPACE_CHANGES.tsv", "lines": [296, 2539], "handling": "Same as FINAL_SOURCE_HASHES.tsv"},
     {"path": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/m3/package-import-rename-20261018/IMPORT_ORDER_CHANGES.tsv", "lines": [3], "handling": "Same as FINAL_SOURCE_HASHES.tsv"},
-    {"path": "m3/collections/relocation/five-provider-20261018/file-census/ECLIPSE_INVENTORY.tsv", "lines": [575], "handling": "Pins the upstream FastListTest blob a1a8a27ddc5d (before column); not affected"}
+    {"path": "make/m3/collections/relocation/five-provider-20261018/file-census/ECLIPSE_INVENTORY.tsv", "lines": [575], "handling": "Pins the upstream FastListTest blob a1a8a27ddc5d (before column); not affected"}
   ],
   "checks": {
     "forkBlobEquality": "PASS 6/6: git hash-object --no-filters of each committed file equals its blob in fork tree 07ba121f146a",

@@ -36,7 +36,7 @@ unavailable; the original no-fallback semantics are retained.
 
 Named OpenRewrite recipe:
 `com.synexia.m3.LongSortedMaskedWindow20261021` at
-`m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-long-sorted-masked-window-20261021.yml`.
+`make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-long-sorted-masked-window-20261021.yml`.
 Uses existing Synexia `M3HashPinnedJavaSnapshotRecipe`, not a parallel
 OpenRewrite compiler or patcher. Exact before/after source seals for three
 files are in `m3-long-sorted-masked-window-20261021/manifest.tsv`.
@@ -46,7 +46,7 @@ instead of editing generated output directly.
 
 ## Verification and scope
 
-Run `bash m3/collections/qualification/long-sorted-masked-window-20261021/verify.sh`.
+Run `bash make/m3/collections/qualification/long-sorted-masked-window-20261021/verify.sh`.
 The test script compiles the original Java 21 sorted/array/mask owners with
 `javac --release 21 -Xlint:all -Werror`; runs 2,048 seeded scalar oracle
 cases over independent physical offsets, required/excluded high-bit masks,
@@ -66,7 +66,7 @@ claim or other PR merge is made by this change.
 
 ## Source/donor catalogue
 
-See `m3/collections/algorithm-catalog/long-sorted-mask-window-20261021.tsv`.
+See `make/m3/collections/algorithm-catalog/long-sorted-mask-window-20261021.tsv`.
 M3LongSortedSnapshot, M3LaneSearch and M3IndexMaskCompactor remain the
 accepted first-party Apache-2.0 code owners. LeetCode binary search and
 GeeksforGeeks lower/upper-bound are pattern references only; no solution

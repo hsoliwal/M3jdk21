@@ -9,7 +9,7 @@
   "canonical_evidence": "https://github.com/hsoliwal/com.synexia/tree/0fa0c9c9a44af87a15eee53cd7bf2e295bd8b8ff/synexia-openrewrite-recipes/recipes/m3-jdk-donor-acceptance-20261105",
   "receiving_repository": "hsoliwal/M3jdk21",
   "receiving_parent": "8d4ce462ad0765609553c8656f9c9a6edb7261f9",
-  "previous_receipt": "m3/qualification/jdk-donor-continuation-20261105/RECEIVER_RECEIPT.json",
+  "previous_receipt": "make/m3/qualification/jdk-donor-continuation-20261105/RECEIVER_RECEIPT.json",
   "product_files": [
     {
       "path": "m3/file/src/test/java/jdk/m3/file/M3FileDeltaLedgerContract.java",
@@ -54,14 +54,14 @@
       "mode": "100644"
     },
     {
-      "path": "m3/tooling/module-packs/text-tools/fixtures/src/test/java/M3TextKernelRegression.java",
+      "path": "make/m3/tooling/module-packs/text-tools/fixtures/src/test/java/M3TextKernelRegression.java",
       "before_sha256": "64e0bf9f28674c20e5e17ecdc21ed041eb74bcdffdf0f237c2f7fec8f2627964",
       "sha256": "40834243374555c0cc41c3a8e12dc1d501aa8013508dcaea99c3ae8566530bac",
       "git_blob": "a4c2ab735541b8fc78dab1db177334572ca68df7",
       "mode": "100644"
     },
     {
-      "path": "m3/tooling/module-packs/text-tools/native/m3textops.c",
+      "path": "make/m3/tooling/module-packs/text-tools/native/m3textops.c",
       "before_sha256": "a89b55724384f0bf8f691a0e018eba5090224baecd25575481fbe581910c8f0a",
       "sha256": "87216910b9a1730ca7121efb07c1cd6bf0c69e4c370a12a08285e97404be9759",
       "git_blob": "e7e505fe21b56bb127382f82238af70ccfee3fde",

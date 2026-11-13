@@ -39,7 +39,7 @@ import java.util.TreeSet;
 public final class ExactFileRecipe {
     private static final int MAX_FILE = 8 * 1024 * 1024;
     private static final int MAX_TOTAL_POSTIMAGES = 16 * 1024 * 1024;
-    private static final String STATE = "m3/migration/.state";
+    private static final String STATE = "make/m3/migration/.state";
     private ExactFileRecipe() { }
     public record Result(int changed, int unchanged, boolean dryRun) { }
     private record Pin(String path, String sha) { }

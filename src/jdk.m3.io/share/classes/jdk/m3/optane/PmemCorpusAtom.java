@@ -18,7 +18,7 @@ import java.util.Objects;
  * Source identity comes from the existing immutable source inventory, not this class.
  * This class exposes no public Java SDK API or native symbol.
  */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/PmemCorpusAtom.java blob f7f504b96418; recipe m3/optane/recipe/pmem-source-image-20261106/relocate.py v3
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/PmemCorpusAtom.java blob f7f504b96418; recipe make/m3/optane/recipe/pmem-source-image-20261106/relocate.py v3
 final class PmemCorpusAtom {
     private static final int READ_CHUNK = 64 * 1024;
     private static final int MAX_ATOM_BYTES = 1024 * 1024;

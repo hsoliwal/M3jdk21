@@ -6,9 +6,9 @@
   "targets": 6,
   "history_targets": 443,
   "reviewed_packet_sha256": "ff29d75fb3a4070765ff1bce2996d88e925f6e33721d6a02c8cdb314fced7613",
-  "manifest_path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-retention/manifest.tsv",
+  "manifest_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-retention/manifest.tsv",
   "manifest_sha256": "a5c3165ae514ebcf1d074d9b2f0eec8ef18e2eec4e06f7145e04f89402b12eb9",
-  "plan_path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-retention/plan.json",
+  "plan_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-retention/plan.json",
   "plan_sha256": "45023d28f18af7639eb071845be094b63aa72f28c647ae0796334297c0e1e0a4",
   "rows": [
     {
@@ -24,7 +24,7 @@
       "review_authority": "workflow.yml.txt"
     },
     {
-      "path": "m3/history/README.md",
+      "path": "make/m3/history/README.md",
       "before_sha256": "ef145204809b2ab1b3fa79b75ce740dfddb1d536f98f65b14ba50eea057fc4fc",
       "after_sha256": "8918e530b22f7960db1a3918a5685978fd9fc14ed35338faefb224d935d7f5c0",
       "before_git_blob": "1c012956c7ae68a9651144f4643a6013a3cdb9a2",
@@ -36,7 +36,7 @@
       "review_authority": "README.md.txt"
     },
     {
-      "path": "m3/history/RETAINED_CAPABILITIES.tsv",
+      "path": "make/m3/history/RETAINED_CAPABILITIES.tsv",
       "before_sha256": "86de8000a91017b29e48b0ffd9cf19b264614dd8c983c08222cf5e253606c40a",
       "after_sha256": "683b01fc68b8661a44fd1a9fbc72c1aa68145dab9318fb0f5a3e99bc0e102181",
       "before_git_blob": "b60637f762398d4345c0cf7f15072bab9b902240",
@@ -48,7 +48,7 @@
       "review_authority": "exact catalogue prefix plus two history manifests"
     },
     {
-      "path": "m3/history/retention-pom.xml",
+      "path": "make/m3/history/retention-pom.xml",
       "before_sha256": "14c29126da786a7456a55ce400f5a800dfe53693e6c329e7342bf2fabb087e11",
       "after_sha256": "b4f00263594158b47e76ccb34000095f46bc3f66a69151304fe7b544dad6ca15",
       "before_git_blob": "8c02223c7af8ca2e415103dcdea930d6ad9c7beb",
@@ -60,7 +60,7 @@
       "review_authority": "retention-pom.xml.txt"
     },
     {
-      "path": "m3/history/retention.py",
+      "path": "make/m3/history/retention.py",
       "before_sha256": "06c713d051ce0411b9c8a4faeafeaa3245b75ff4350e8f9afd94f15dd86451e4",
       "after_sha256": "ccd63d4e05f51e816548ad9da4e5a0ce880a9cf90b1fd0dfe80b04f30f7d8a14",
       "before_git_blob": "3bb3bba9a620c253ac1ad82736a923e0660c6ae2",
@@ -72,7 +72,7 @@
       "review_authority": "retention.py.txt"
     },
     {
-      "path": "m3/history/test_retention.py",
+      "path": "make/m3/history/test_retention.py",
       "before_sha256": "68ae3ae0be2f45f9746c9573bf949698221a99696715065a14a293729c022a0c",
       "after_sha256": "6d11c5ff5d429daca053775a7b8eae9cbe89c3498c3b33c4f0f576c36b2b91c3",
       "before_git_blob": "87e86678a7ea7238f9f30c3974dd1962e26a71a4",

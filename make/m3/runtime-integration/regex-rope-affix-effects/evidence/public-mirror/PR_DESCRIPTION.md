@@ -24,4 +24,4 @@ The complete String stage remains on HOLD: the original BMH/KMP invariant checke
 
 The local source-fixture timings are mixed, so this PR does not claim a universal speedup or product performance acceptance. CUDA compilation, physical GPU execution, transfer/residency measurements and GPU performance remain unqualified; the optional provider stays in private convergence.
 
-Detailed scope, source identities, original failed attempts and executed receipts are retained in `m3/runtime-integration/regex-rope-affix-effects/recipe/QUALIFICATION.md` and its `evidence/` directory.
+Detailed scope, source identities, original failed attempts and executed receipts are retained in `make/m3/runtime-integration/regex-rope-affix-effects/recipe/QUALIFICATION.md` and its `evidence/` directory.

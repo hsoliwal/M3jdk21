@@ -9,7 +9,7 @@ retain PR #1559) kept master's three owners and parked the PR's versions under
 m3/qualification/master-landing-20261028/retained-variants/pr1559/.
 
 Per file: ours = the pinned master blob, base = the origin commit's parent blob, theirs = the origin commit's blob
-(= the retained copy; m3/tooling/jdk-naming rewrite_text is a no-op on all three). The recipe runs
+(= the retained copy; make/m3/tooling/jdk-naming rewrite_text is a no-op on all three). The recipe runs
 `git merge-file -p --diff3` itself and resolves the conflict hunks by declared shape only. ADD means an empty base:
 ours, then theirs. OPEN is the one M3ASTPC session-open line: master's `retainSyntax || relations != null` is kept,
 inside the origin's `sourceScope == null ? open(..) : open(.., sourceScope(..))`. Any other hunk count or shape
@@ -181,7 +181,7 @@ def run(root: Path, check: bool) -> int:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--root", default=str(RECIPE_DIR.parents[2]), help="repository root (default: three up)")
+    parser.add_argument("--root", default=str(RECIPE_DIR.parents[3]), help="repository root (default: three up)")
     parser.add_argument("--check", action="store_true", help="write nothing; exit 1 when a run would change a file")
     args = parser.parse_args(argv)
     try:

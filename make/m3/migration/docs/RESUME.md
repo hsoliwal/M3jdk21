@@ -2,17 +2,17 @@
 
 ## Whole-JDK documentation extension — 2026-10-02
 
-The programme scope is the entire JDK, explicitly including collections; String is one subsystem. Read the [whole-JDK architecture](../../docs/whole-jdk-architecture.md), [source-root inventory and dispositions](../../docs/whole-jdk-inventory.md), [collection replacement specification](../../docs/whole-jdk-collections.md), [text operation specification](../../docs/whole-jdk-text-operations.md), and [execution, mapping, evidence and rollout plan](../../docs/whole-jdk-execution.md). These extend the existing handoff and shared-atom contract rather than create another capability authority.
+The programme scope is the entire JDK, explicitly including collections; String is one subsystem. Read the [whole-JDK architecture](../../../../doc/m3/whole-jdk-architecture.md), [source-root inventory and dispositions](../../../../doc/m3/whole-jdk-inventory.md), [collection replacement specification](../../../../doc/m3/whole-jdk-collections.md), [text operation specification](../../../../doc/m3/whole-jdk-text-operations.md), and [execution, mapping, evidence and rollout plan](../../../../doc/m3/whole-jdk-execution.md). These extend the existing handoff and shared-atom contract rather than create another capability authority.
 
 At target `45f546ff5bcb06a1b2604f14baf998785d98d9a1`, all 73 immediate `src` directories are accounted for in the documentary matrix. Complete recursive file/package/symbol/native/build-consumer coverage remains OPEN. The documentation does not implement replacements, populate/promote operational mappings, run runtime tests or replace an installed JDK.
 
-Preserve the existing `m3/docs/name-mapping.json` authority and read the [retained-source/mapping reconciliation](../../docs/migration-mapping-lifecycle.md) before interpreting old counts. Current source inventories, branch-scoped manifests and #23/#24 runtime/text candidates need explicit joins and their own exact-tree evidence. The historical prefix-tranche section below is retained unchanged as its original evidence record; its status, counts and commands do not describe every later repository change or certify a combined tree.
+Preserve the existing `doc/m3/name-mapping.json` authority and read the [retained-source/mapping reconciliation](../../../../doc/m3/migration-mapping-lifecycle.md) before interpreting old counts. Current source inventories, branch-scoped manifests and #23/#24 runtime/text candidates need explicit joins and their own exact-tree evidence. The historical prefix-tranche section below is retained unchanged as its original evidence record; its status, counts and commands do not describe every later repository change or certify a combined tree.
 
 ## Historical prefix tranche — original evidence retained
 
 **Status: INCOMPLETE. One algorithm specialization is implemented and locally tested. The whole MIndex family has not been inventoried or migrated. No complete JDK image was built in this tranche.**
 
-Read `m3/docs/name-mapping.json`, this document, `COVERAGE.md`, and `ACCEPTANCE.md` before changing code. The existing naming map is the sole capability authority; reports are generated projections. Never infer implementation from a merged documentation PR or a placeholder mapping.
+Read `doc/m3/name-mapping.json`, this document, `COVERAGE.md`, and `ACCEPTANCE.md` before changing code. The existing naming map is the sole capability authority; reports are generated projections. Never infer implementation from a merged documentation PR or a placeholder mapping.
 
 ## Exact starting points
 
@@ -39,7 +39,7 @@ The naming map has 25 observed or pending records. One has exact local algorithm
 
 ## Local evidence
 
-`m3/migration/evidence/local-20261002-final/receipt.json` records the actual environment, commands, input hashes and output hashes. It covers five actual target dependency classes on the classpath, not a complete source checkout. Java 21 normal and interpreter prefix suites each passed 77,735 cases / 1,564,255 assertions. Focused view/regex/code-point suites each passed 68,106 assertions. The exact-file recipe passed 45 checks. Python schema/mapping tests passed 26 tests. No benchmark or retained-memory result was measured.
+`make/m3/migration/evidence/local-20261002-final/receipt.json` records the actual environment, commands, input hashes and output hashes. It covers five actual target dependency classes on the classpath, not a complete source checkout. Java 21 normal and interpreter prefix suites each passed 77,735 cases / 1,564,255 assertions. Focused view/regex/code-point suites each passed 68,106 assertions. The exact-file recipe passed 45 checks. Python schema/mapping tests passed 26 tests. No benchmark or retained-memory result was measured.
 
 Maven is absent from the local execution environment; its lifecycle is unexecuted. Full repository/JDK/JPMS/native/Windows builds, complete source-owner reactor tests and independent review are unexecuted. GitHub status must be read separately; local receipts do not establish hosted success.
 
@@ -48,10 +48,10 @@ Maven is absent from the local execution environment; its lifecycle is unexecute
 From a checkout of this draft, using an existing stock Java 21:
 
 ```sh
-python -m pip install -r m3/migration/requirements.txt
-python m3/migration/run-tests.py --out m3/migration/evidence/NEW-UNUSED-RECEIPT-DIRECTORY
-python m3/migration/migration.py validate .
-python m3/migration/migration.py complete .
+python -m pip install -r make/m3/migration/requirements.txt
+python make/m3/migration/run-tests.py --out make/m3/migration/evidence/NEW-UNUSED-RECEIPT-DIRECTORY
+python make/m3/migration/migration.py validate .
+python make/m3/migration/migration.py complete .
 ```
 
 `validate` currently succeeds with `completion=INCOMPLETE`; `complete` must currently exit **2**. Do not suppress that failure or describe it as migration acceptance. The runner is for local execution and labels receipts accordingly. A future hosted wrapper must explicitly record the actual checked-out PR head and execution environment instead of reusing that label unmodified.
@@ -59,15 +59,15 @@ python m3/migration/migration.py complete .
 Maven execution, when a legitimate Maven installation is available:
 
 ```sh
-mvn -f m3/migration/pom.xml verify
+mvn -f make/m3/migration/pom.xml verify
 ```
 
 Exact source-bound prefix replay requires an authorized source checkout at the pinned donor revision and the guarded target files. Paths below are placeholders for those real checkouts, not network fetches:
 
 ```sh
-java m3/migration/src/jdk/m3/migration/ExactFileRecipe.java check SOURCE_ROOT TARGET_ROOT m3/migration/recipes/prefix-z-v1.tsv
-java m3/migration/src/jdk/m3/migration/ExactFileRecipe.java apply SOURCE_ROOT TARGET_ROOT m3/migration/recipes/prefix-z-v1.tsv
-java m3/migration/src/jdk/m3/migration/ExactFileRecipe.java rollback TARGET_ROOT m3/migration/recipes/prefix-z-v1.tsv
+java make/m3/migration/src/jdk/m3/migration/ExactFileRecipe.java check SOURCE_ROOT TARGET_ROOT make/m3/migration/recipes/prefix-z-v1.tsv
+java make/m3/migration/src/jdk/m3/migration/ExactFileRecipe.java apply SOURCE_ROOT TARGET_ROOT make/m3/migration/recipes/prefix-z-v1.tsv
+java make/m3/migration/src/jdk/m3/migration/ExactFileRecipe.java rollback TARGET_ROOT make/m3/migration/recipes/prefix-z-v1.tsv
 ```
 
 Rollback deletes only equal additions owned by that plan receipt. A preexisting equal file is not acquired for deletion. Missing or modified receipt-owned files cause refusal. Review stale locks after a crash; do not automatically delete another invocation's lock.
@@ -75,7 +75,7 @@ Rollback deletes only equal additions owned by that plan receipt. A preexisting 
 The naming extension is replayed from the retained public baseline and the canonical current manifest, without a second migration registry:
 
 ```sh
-python m3/migration/migration.py extend --base m3/migration/recipes/baselines/name-mapping.v1.json --extension m3/docs/name-mapping.json --expected-sha256 991bfb86a4b57e4874aab7dfac4790a9b4d2c1c04453313a0527e5a8a21e73b1 --output NEW-REVIEW-OUTPUT.json
+python make/m3/migration/migration.py extend --base make/m3/migration/recipes/baselines/name-mapping.v1.json --extension doc/m3/name-mapping.json --expected-sha256 991bfb86a4b57e4874aab7dfac4790a9b4d2c1c04453313a0527e5a8a21e73b1 --output NEW-REVIEW-OUTPUT.json
 ```
 
 This creates a review output and refuses modified existing output. Install only a reviewed diff; preserve target adaptations. The foundation recipe manifest's naming-file hash must stay synchronized.

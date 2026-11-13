@@ -20,7 +20,7 @@ class ReleaseIdentityTest(unittest.TestCase):
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)
         self.root = Path(self.tmp.name)
-        self.release = self.root / "m3/release"
+        self.release = self.root / "make/m3/release"
         self.release.mkdir(parents=True)
         self.write("release/qualified", "release/qualified")
 

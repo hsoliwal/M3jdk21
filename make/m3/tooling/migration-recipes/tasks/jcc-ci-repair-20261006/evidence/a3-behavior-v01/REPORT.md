@@ -23,7 +23,7 @@ The four original A3 recipe test methods executed offline with the two unchanged
 
 The failing template contains `"Pattern.compile("a+b?")"` at line 61, with its nested quotes unescaped. A separate invocation of the actual pinned javac against the complete, unchanged template reports three syntax errors at that line. Thus this is an invalid current template, rather than evidence that the pinned parser cannot represent valid Java.
 
-The recipe template `m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after` and current production file `m3/tooling/a3/src/main/java/jdk/m3/a3/A3RegexMatrix.java` share Git blob `bf91afcd627d8e2faa9790ea6592b6bc9c1b0e33`, SHA-256 `f000b1eea411056baaca6051b220149f25334bc70bf69b4f0536839c6c78e404`, and 7,514 bytes. The manifest correctly hashes these invalid bytes; a repair must update the production source, template, and its declared hash consistently through the existing recipe owner.
+The recipe template `make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after` and current production file `make/m3/tooling/a3/src/main/java/jdk/m3/a3/A3RegexMatrix.java` share Git blob `bf91afcd627d8e2faa9790ea6592b6bc9c1b0e33`, SHA-256 `f000b1eea411056baaca6051b220149f25334bc70bf69b4f0536839c6c78e404`, and 7,514 bytes. The manifest correctly hashes these invalid bytes; a repair must update the production source, template, and its declared hash consistently through the existing recipe owner.
 
 ## Evidence and replay
 
@@ -32,7 +32,7 @@ The recipe template `m3/tooling/migration-recipes/src/main/resources/jdk/interna
 Run the focused repository verification with:
 
 ```sh
-mvn -o -B -ntp -f m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/a3-behavior-verification/pom.xml test
+mvn -o -B -ntp -f make/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/a3-behavior-verification/pom.xml test
 ```
 
 This command needs the same pinned JDK and exact dependencies available offline. The original test bodies, production owners, templates, and manifests have not been changed in this evidence supplement. The earlier eight-method CI-repair proof and javac compilation remain valid. This supplement closes the prior lack of execution evidence, but does not close the failing A3 Java behavioral gate. It does not claim a whole-module build, foundation workflow execution, A3 runtime behavior qualification, native/JNI qualification, or JDK build.

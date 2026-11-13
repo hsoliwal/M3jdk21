@@ -344,7 +344,7 @@ def render_tsv(items: Sequence[Mapping[str, str]]) -> str:
 def work(root: Path, queue: Path, inventory: Path, upstream_repo: Path) -> tuple[list[dict[str, str]], dict[str, object], list[dict[str, str]]]:
     root = root.resolve(strict=True)
     authorities = release_jep_authority.verify_repository_authority(root)
-    area = root / "m3" / "backports"
+    area = root / "make" / "m3" / "backports"
     catalogue = jep_source_witness.read_catalogue(area / "JEP_CATALOGUE.tsv")
     seeds = load_tsv(area / "UPSTREAM_CHANGE_SEEDS.tsv", (
         "release", "jbs", "title", "component", "disposition", "reason", "upstream_commit"))

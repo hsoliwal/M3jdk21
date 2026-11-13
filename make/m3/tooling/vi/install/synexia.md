@@ -5,8 +5,8 @@ jdk.internal.mindex.M3VI and jdk.internal.mindex.M3Release, including their nest
 Copyright 2026 Hitesh Soliwal and contributors.
 
 Adapted from hsoliwal/com.synexia; exact source and modification provenance is retained in
-m3/tooling/vi/pins.json and m3/tooling/vi/README.md. The original implementation and scoped
-license/NOTICE snapshots are retained in m3/tooling/vi/donor.
+make/m3/tooling/vi/pins.json and make/m3/tooling/vi/README.md. The original implementation and scoped
+license/NOTICE snapshots are retained in make/m3/tooling/vi/donor.
 Modifications: JDK-owned package/names, String and progress callback boundary, and refusal
 of observed version-scheme drift during preparation. Existing OpenJDK code retains its notices.
 

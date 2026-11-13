@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 """Recipe MERGELOSS_RESTORE v2 (S1): restore the M3IndexPathMasks long-row members and JNI entry dropped by merge e913ab890566.
 
-Derived from m3/collections/qualification/census-small-batch-20261106/apply.py v1: anchored "sub" edits, every anchor
+Derived from make/m3/collections/qualification/census-small-batch-20261106/apply.py v1: anchored "sub" edits, every anchor
 exactly once, LF payloads re-joined with the preimage's line ending. An EDIT rule names the git blob sha of its preimage
 at the base commit; a target must equal the preimage (the rule is applied) or the postimage (already applied, no-op);
 anything else is a drifted preimage and the recipe refuses (exit 2) without writing. A MOVE rule moves one file byte for
@@ -48,7 +48,7 @@ EDITS_COLUMNS = ("file", "before_sha256", "after_sha256", "leaf", "decision", "c
 SRC = "m3/collections/src/main/java/jdk/m3/collections/"
 NATIVE = "m3/collections/src/main/native/collections/"
 TEST = "m3/collections/src/test/java/jdk/m3/collections/"
-HELD = "m3/qualification/loss-guard-restore-20261106/held/"
+HELD = "make/m3/qualification/loss-guard-restore-20261106/held/"
 CITED = "origin=" + ORIGIN[:12] + ";dropped_by=" + DROPPING_MERGE[:12]
 ANCHOR = ("//FLLDCIM: MRL - mergeloss-s1-20261106 L1: restored from origin ebbfcbdf93aa, dropped by ancestry merge"
           " e913ab890566 (case 05)")
@@ -416,7 +416,7 @@ def run(root: Path, check: bool, leaf: str | None) -> int:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--root", default=str(RECIPE_DIR.parents[3]), help="repository root (default: four up)")
+    parser.add_argument("--root", default=str(RECIPE_DIR.parents[4]), help="repository root (default: four up)")
     parser.add_argument("--check", action="store_true", help="write nothing; exit 1 when a run would change a file")
     parser.add_argument("--leaf", choices=sorted({rule[0] for rule in RULES}), help="apply one leaf's rules only")
     args = parser.parse_args(argv)

@@ -3,7 +3,7 @@
 package jdk.m3.optane;
 
 /** Read-only search using native or bounded Java streaming kernels. */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/36827ee8a798ef6ce07f6fc55a2ac371b1382c06/m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/PmemSearch.java blob a8e2b66123f7; recipe m3/optane/recipe/pmem-region-core-20261106/relocate.py v2
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/36827ee8a798ef6ce07f6fc55a2ac371b1382c06/m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/PmemSearch.java blob a8e2b66123f7; recipe make/m3/optane/recipe/pmem-region-core-20261106/relocate.py v2
 public final class PmemSearch {
     /** Bounds peak search scratch space to a small fraction of a large model. */
     public static final int MAX_PATTERN_BYTES = 1 << 20;

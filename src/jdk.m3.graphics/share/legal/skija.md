@@ -13,7 +13,7 @@ Both are licensed under the Apache License, Version 2.0.
 
 ### Changes made by Synexia (2026-10-31)
 
-The changes were mechanical, and the tools that made them are in `m3/tooling/skija-absorb`:
+The changes were mechanical, and the tools that made them are in `make/m3/tooling/skija-absorb`:
 
 - Lombok annotations were expanded with `lombok.jar delombok` 1.18.48, then the generated markers were removed. One helper
   class was added, `jdk.m3.graphics.impl.M3SneakyThrow`.
@@ -57,4 +57,4 @@ limitations under the License.
 ```
 
 The full text of the license is in the Skija repository's LICENSE file, and is reproduced in this repository at
-`m3/tooling/skija-absorb/LICENSE-Apache-2.0.txt`.
+`make/m3/tooling/skija-absorb/LICENSE-Apache-2.0.txt`.

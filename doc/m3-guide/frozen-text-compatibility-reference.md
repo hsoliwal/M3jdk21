@@ -6,7 +6,7 @@
 [Guide](README.md) · [Four-source and member map](frozen-text-compatibility-source-coverage.md) · [Package navigation](m3-packages.md#package-4)
 
 This reference covers the complete four-file physical package
-`m3/compatibility/synexia-reference/src/com/synexia/indexstring` at public target
+`make/m3/compatibility/synexia-reference/src/com/synexia/indexstring` at public target
 revision `c842fab8cf5b799257e3c9ea07f8baddde80db09`: two pinned storage snapshots,
 one throwing compile-only seam and one executable test. It documents every
 explicit public callable and the supporting private/package-private members.

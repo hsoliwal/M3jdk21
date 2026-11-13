@@ -42,10 +42,10 @@ public receiver records and bytes, not independent inspection of donor source.
 Preserve the existing [LICENSE](../../m3/vendor/m3/LICENSE),
 [NOTICE](../../m3/vendor/m3/NOTICE) and scoped third-party notices.
 
-Repository [delivery policy](../../m3/docs/m3-delivery.md) keeps reusable
+Repository [delivery policy](../m3/m3-delivery.md) keeps reusable
 mechanics canonical in Synexia and JDK integration target-owned. The
-[porting invariant](../../m3/docs/m3jdk21-porting-invariant.md) and
-[naming map](../../m3/docs/name-mapping.json) retain String → arrays → collections →
+[porting invariant](../m3/m3jdk21-porting-invariant.md) and
+[naming map](../m3/name-mapping.json) retain String → arrays → collections →
 AST/compiler → remaining families, with String qualification active. The newer
 [current-full-borrow plan](../../m3/m3-import/current-full-borrow/README.md)
 also leaves AST and grammar at source-pin-only and promotion phases planned.

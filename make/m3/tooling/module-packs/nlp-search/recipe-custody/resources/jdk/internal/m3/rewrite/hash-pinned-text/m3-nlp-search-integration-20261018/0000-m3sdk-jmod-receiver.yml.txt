@@ -4,17 +4,17 @@ name: M3SDK JMOD Receiver Proof
 on:
   pull_request:
     paths:
-      - 'm3/tooling/jmod-recipes/**'
+      - 'make/m3/tooling/jmod-recipes/**'
       - 'm3/vendor/third_party-m3/**'
-      - 'm3/tooling/module-packs/nlp-search/**'
+      - 'make/m3/tooling/module-packs/nlp-search/**'
       - 'm3/ports/file/**'
-      - 'm3/tooling/shared-frontend/**'
+      - 'make/m3/tooling/shared-frontend/**'
       - 'src/jdk.compiler/share/classes/com/sun/source/util/M3AST.java'
       - 'src/jdk.compiler/share/classes/com/sun/tools/javac/m3/**'
       - 'src/jdk.compiler/share/classes/com/sun/tools/javac/main/JavaCompiler.java'
       - 'src/jdk.compiler/share/classes/module-info.java'
       - 'test/langtools/tools/javac/m3/**'
-      - 'm3/tooling/module-packs/text-tools/**'
+      - 'make/m3/tooling/module-packs/text-tools/**'
       - 'm3/vendor/m3/nlp-search/**'
       - 'm3/vendor/third_party/opennlp-tools/**'
       - 'm3/vendor/third_party/lucene-core/**'
@@ -45,11 +45,11 @@ jobs:
       - name: 1 - Diff hygiene
         run: git diff --check
       - name: 2 - Exact Git blob receiver proof
-        run: python3 m3/tooling/jmod-recipes/tools/verify_sdk_receiver.py --repo .
+        run: python3 make/m3/tooling/jmod-recipes/tools/verify_sdk_receiver.py --repo .
       - name: 3 - SDK receiver and preflight refusal tests
         run: >-
           python3 -m unittest discover
-          -s m3/tooling/jmod-recipes/tools
+          -s make/m3/tooling/jmod-recipes/tools
           -p 'test_*.py' -v
       - name: 4 - Java 21 vendor smoke source compiles without donor classpath
         run: |
@@ -57,11 +57,11 @@ jobs:
           mkdir -p "$RUNNER_TEMP/m3sdk-smoke-classes"
           javac --release 21 -Xlint:all -Werror \
             -d "$RUNNER_TEMP/m3sdk-smoke-classes" \
-            m3/tooling/jmod-recipes/tools/fixtures/M3SdkImageSmoke.java
+            make/m3/tooling/jmod-recipes/tools/fixtures/M3SdkImageSmoke.java
       - name: 5 - Product acceptance remains independently proof-gated
         run: |
           set -euo pipefail
-          test -f m3/release/release-contract.json
+          test -f make/m3/release/release-contract.json
           echo 'SDK source and Java smoke compilation proof only; no linked image executed in this job.'
 
   openrewrite-recipe-junit:
@@ -83,12 +83,12 @@ jobs:
           -am -DskipTests install
       - name: Run original hash-pinned JMOD descriptor OpenRewrite JUnit
         run: >-
-          mvn -B -ntp -f m3/tooling/jmod-recipes/pom.xml
+          mvn -B -ntp -f make/m3/tooling/jmod-recipes/pom.xml
           -Dtest=M3ModuleDescriptorRecipeTest test
       - name: Run the exact receiver recipe-custody proof mirror
         run: >-
           mvn -B -ntp
-          -f m3/tooling/module-packs/nlp-search/recipe-custody/pom.xml
+          -f make/m3/tooling/module-packs/nlp-search/recipe-custody/pom.xml
           clean test
       - name: Retain descriptor and receiver recipe proof reports
         if: always()
@@ -97,9 +97,9 @@ jobs:
           name: m3-recipe-custody-proof
           if-no-files-found: error
           path: |
-            m3/tooling/jmod-recipes/target/surefire-reports/**
-            m3/tooling/module-packs/nlp-search/recipe-custody/target/surefire-reports/**
-            m3/tooling/module-packs/nlp-search/recipe-custody/target/evidence/**
+            make/m3/tooling/jmod-recipes/target/surefire-reports/**
+            make/m3/tooling/module-packs/nlp-search/recipe-custody/target/surefire-reports/**
+            make/m3/tooling/module-packs/nlp-search/recipe-custody/target/evidence/**
 
 
   full-tool-images:
@@ -116,18 +116,18 @@ jobs:
           java-version: '21'
       - name: Build ten JMODs and run full file JNI NLP and M3AST contracts
         run: >-
-          python3 m3/tooling/module-packs/nlp-search/build.py
+          python3 make/m3/tooling/module-packs/nlp-search/build.py
           --jdk-home "$JAVA_HOME" --compiler-source-proof
           --out build/m3-nlp-search
       - name: Build and execute text and POSIX JNI tools
         run: |
           set -euo pipefail
-          owner="$PWD/m3/tooling/module-packs/text-tools"
+          owner="$PWD/make/m3/tooling/module-packs/text-tools"
           python3 "$owner/build.py" --jdk-home "$JAVA_HOME" \
             --sources "$owner/src" --native-source "$owner/native/m3textio.c" \
             --smoke "$owner/fixtures/src/test/java/M3TextSmoke.java" \
             --legal-notices "$owner/legal" \
-            --packager "$PWD/m3/tooling/jmod-recipes/tools/jmod_pack.py" \
+            --packager "$PWD/make/m3/tooling/jmod-recipes/tools/jmod_pack.py" \
             --out "$PWD/build/m3-text-tools"
           image="$PWD/build/m3-text-tools/pack/image"
           mkdir -p build/m3-text-tools/utf8

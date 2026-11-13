@@ -42,4 +42,4 @@ The `verify.sh` gate reproduces the following against the target's exact existin
 
 The source recipe JUnit `Recipe.run` on the actual SDK; Maven module Surefire/reactor and other suite coverage; full HotSpot image/jtreg/JCK, Windows/MSVC, GC/concurrent, serialization, source-time `@Sortable` processor product promotion, memory pressure allocation/cold-warm benchmark, and multi-provider contract equivalence are **not certified**. Target `m3/collections` is still a separately-built proving module and the product's STRING phase remains active; this PR does not promote java.util internals. Full filtered/ordered/writable collection families remain their existing owners and require independent proof. Preserve this candidate as draft until all necessary gates genuinely pass.
 
-Run from a Linux checkout: `bash m3/collections/qualification/compound-signals-20261018/verify.sh`.
+Run from a Linux checkout: `bash make/m3/collections/qualification/compound-signals-20261018/verify.sh`.

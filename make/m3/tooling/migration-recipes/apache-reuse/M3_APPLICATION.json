@@ -111,28 +111,28 @@
   },
   "results": [
     {
-      "path": "m3/docs/m3-apache-reuse-policy.properties",
+      "path": "doc/m3/m3-apache-reuse-policy.properties",
       "beforeSha256": "ABSENT",
       "afterSha256": "dc56c10461d8910e3d2f36ea137237f309983c91bea56526cade6956ca4bde5e",
       "gitBlob": "c5cd06b5d7661ae04625e04cccc7bbb74c45e59a",
       "origin": "Verified OpenRewrite Result.getAfter()"
     },
     {
-      "path": "m3/docs/m3-apache-reuse-scope.tsv",
+      "path": "doc/m3/m3-apache-reuse-scope.tsv",
       "beforeSha256": "ABSENT",
       "afterSha256": "f0c4956693279ffea733c13e504ba3ce83f679aba7af2c714c9f49dfc17b7447",
       "gitBlob": "756e9d17a70bab5a7973d38d76bcfd9ffbd78454",
       "origin": "Verified OpenRewrite Result.getAfter()"
     },
     {
-      "path": "m3/docs/m3-apache-reuse.md",
+      "path": "doc/m3/m3-apache-reuse.md",
       "beforeSha256": "ABSENT",
       "afterSha256": "6957c8f8796a7546a8676cdead62fff1440a32a742f1fcc377ae54cb2f31ee2c",
       "gitBlob": "b574940c818c605cb5c8e2d035211b557db31706",
       "origin": "Verified OpenRewrite Result.getAfter()"
     },
     {
-      "path": "m3/tooling/migration-recipes/apache-reuse/README.md",
+      "path": "make/m3/tooling/migration-recipes/apache-reuse/README.md",
       "beforeSha256": "fbf916ee02a45f1d6f418f533e190bd85b128e2b6432b1b40072eda2c669dcb4",
       "afterSha256": "78cf843b37b7e0e6e143ec902cbb79735fbe37390253a9f823c8c7a381e1c263",
       "gitBlob": "f2a72b2fec345da73fa5fb85bcda4989558ed5bd",
@@ -142,7 +142,7 @@
   "recipeCustody": "Canonical generic implementation, templates, tests and receiver configuration remain in Synexia. This target retains application outputs, this receipt and a receiving guide.",
   "historicalPacket": "Existing target-local POM, templates, proof fixtures and evidence.json remain frozen historical material. Current execution uses the pinned shared Synexia profile.",
   "licenseBoundary": "Eligible Synexia-owned Apache-2.0 material retains applicable license/NOTICE/attribution/modification lineage; upstream and OpenJDK files are not relicensed.",
-  "targetAuthority": "Existing m3/docs/m3jdk21-porting-invariant.md and m3/docs/name-mapping.json remain authoritative; runtime/public JDK APIs and accepted precompute stay in M3JDK21.",
+  "targetAuthority": "Existing doc/m3/m3jdk21-porting-invariant.md and doc/m3/name-mapping.json remain authoritative; runtime/public JDK APIs and accepted precompute stay in M3JDK21.",
   "notEstablished": [
     "Hosted CI success",
     "Full JDK/jtreg/HotSpot/JNI/runtime qualification",

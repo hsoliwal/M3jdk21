@@ -16,14 +16,14 @@
     "changeScope": "Only src/java.base/share/classes/java/util/Arrays.java; no added or removed public method declaration in Git patch; private helpers folded"
   },
   "map": {
-    "path": "m3/docs/name-mapping.json",
+    "path": "doc/m3/name-mapping.json",
     "beforeBlob": "c46790d3c7c89581b0e19e4f58d6532c042744ac",
     "afterBlob": "d3d78c4ebf02572a85ef889a36dc13684dc086e9",
     "beforeSha256": "406cefb62b79fc677972e9d76a77342c3999b41ef6594f9faf5bd06795235dc3",
     "afterSha256": "a246cdb364037e56e5218f03e6bec520adc1dd902d02982be7d798ef67969ed4"
   },
   "plan": {
-    "path": "m3/tooling/name-contract/name-plan.json",
+    "path": "make/m3/tooling/name-contract/name-plan.json",
     "beforeBlob": "062f50d0e0fa13282640c82880723ba7f50a362c",
     "afterBlob": "ed9b8bbbf31d81483c42022b4fdc947abc7df5f7",
     "beforeSha256": "3f51a4975e9f423196a4ee5c715d4edc2c2e937c34d9d5a1e3d2276dcd47752e",

@@ -158,7 +158,7 @@ def main():
     descriptors = output / "DESCRIPTORS.tsv"
     descriptors.write_text("module\tartifacts\tunit_jars\ttarget\tsha256\tgenerated\n", encoding="utf-8")
     run(output / "jmod-pack.log", sys.executable,
-        repo / "m3/tooling/jmod-recipes/tools/jmod_pack.py", "--jdk-home", home,
+        repo / "make/m3/tooling/jmod-recipes/tools/jmod_pack.py", "--jdk-home", home,
         "--image-tsv", image_tsv, "--manifest", descriptors, "--layer-root", repo,
         "--out", output / "pack", "--legal-notices", legal,
         "--root-module", "jdk.m3.jackson.compiler",

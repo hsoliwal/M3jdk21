@@ -8,26 +8,26 @@ on:
     paths:
       - 'src/java.base/share/classes/sun/security/provider/SHA3.java'
       - 'test/jdk/sun/security/provider/MessageDigest/SHAKEXofCompatibility.java'
-      - 'm3/backports/recipes/jdk-8338587-shake-xof/**'
-      - 'm3/backports/recipes/j496/**'
-      - 'm3/backports/recipes/j497/**'
-      - 'm3/backports/JEP_RESIDUE_QUEUE.tsv'
-      - 'm3/backports/test_jep_residue.py'
-      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipe.java'
-      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipeTest.java'
+      - 'make/m3/backports/recipes/jdk-8338587-shake-xof/**'
+      - 'make/m3/backports/recipes/j496/**'
+      - 'make/m3/backports/recipes/j497/**'
+      - 'make/m3/backports/JEP_RESIDUE_QUEUE.tsv'
+      - 'make/m3/backports/test_jep_residue.py'
+      - 'make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipe.java'
+      - 'make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipeTest.java'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jdk8338587-shake-xof/**'
       - '.github/workflows/m3jdk8338587-shake-xof.yml'
   pull_request:
     paths:
       - 'src/java.base/share/classes/sun/security/provider/SHA3.java'
       - 'test/jdk/sun/security/provider/MessageDigest/SHAKEXofCompatibility.java'
-      - 'm3/backports/recipes/jdk-8338587-shake-xof/**'
-      - 'm3/backports/recipes/j496/**'
-      - 'm3/backports/recipes/j497/**'
-      - 'm3/backports/JEP_RESIDUE_QUEUE.tsv'
-      - 'm3/backports/test_jep_residue.py'
-      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipe.java'
-      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipeTest.java'
+      - 'make/m3/backports/recipes/jdk-8338587-shake-xof/**'
+      - 'make/m3/backports/recipes/j496/**'
+      - 'make/m3/backports/recipes/j497/**'
+      - 'make/m3/backports/JEP_RESIDUE_QUEUE.tsv'
+      - 'make/m3/backports/test_jep_residue.py'
+      - 'make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipe.java'
+      - 'make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipeTest.java'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jdk8338587-shake-xof/**'
       - '.github/workflows/m3jdk8338587-shake-xof.yml'
   workflow_dispatch:
@@ -57,7 +57,7 @@ jobs:
 
 
       - name: 3 - Released JEP residue denominator remains derived
-        run: python3 -m unittest m3/backports/test_jep_residue.py
+        run: python3 -m unittest make/m3/backports/test_jep_residue.py
 
   jdk-shake-proof:
     if: ${{ !contains(github.event.head_commit.message || '', '[m3-shake-proofed]') }}
@@ -135,7 +135,7 @@ jobs:
           from pathlib import Path
           import os
 
-          path = Path("m3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv")
+          path = Path("make/m3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv")
           updates = {
               "current_tree_state": "CANDIDATE_MATERIALIZED_PROVED",
               "recipe_junit": "PASS",
@@ -167,13 +167,13 @@ jobs:
               encoding="utf-8")
           PY
           git diff --check
-          grep -F $'current_tree_state\tCANDIDATE_MATERIALIZED_PROVED' m3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv
-          grep -F $'recipe_junit\tPASS' m3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv
-          grep -F $'openjdk_image_build\tPASS' m3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv
-          grep -F $'shake_jtreg\tPASS' m3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv
-          grep -F $'sha3_regression\tPASS' m3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv
-          grep -F $'fixed_point\tPASS' m3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv
-          grep -F $'promotion\tNOT_AUTHORIZED' m3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'current_tree_state\tCANDIDATE_MATERIALIZED_PROVED' make/m3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'recipe_junit\tPASS' make/m3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'openjdk_image_build\tPASS' make/m3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'shake_jtreg\tPASS' make/m3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'sha3_regression\tPASS' make/m3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'fixed_point\tPASS' make/m3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'promotion\tNOT_AUTHORIZED' make/m3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv
 
       - name: Commit only the proven dependency receipt
         shell: bash
@@ -181,7 +181,7 @@ jobs:
           BRANCH_NAME: ${{ github.ref_name }}
         run: |
           set -euo pipefail
-          git add m3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv
+          git add make/m3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv
           git diff --cached --check
           git config user.name "m3-recipe-bot"
           git config user.email "actions@users.noreply.github.com"
@@ -208,8 +208,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          grep -F $'current_tree_state\tCANDIDATE_MATERIALIZED_PROVED' m3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv
-          grep -F $'fixed_point\tPASS' m3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv
-          grep -F $'promotion\tNOT_AUTHORIZED' m3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'current_tree_state\tCANDIDATE_MATERIALIZED_PROVED' make/m3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'fixed_point\tPASS' make/m3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'promotion\tNOT_AUTHORIZED' make/m3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv
           git diff --exit-code
           test -z "$(git status --porcelain=v1 -uall)"

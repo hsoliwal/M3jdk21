@@ -8,11 +8,11 @@ Patch https://github.com/hsoliwal/M3jdk21/pull/2250.patch
 Dependency: originally stacked on #2240 atom-census, already retained as source and ancestry in this branch. Exact original PR-file metadata: 19/19 added, all destination paths absent from frozen receiving first parent; no prior blob overwritten.
 
 Original immutable donor source Git subtrees:
-- m3/tooling/atom-census/contract | d40badc846ef5881a4a0e3a7f910dfdbef2d7afd | 5 exact files (100644)
-- m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract | 92cc04745096a7d0acb1a73b3fb82de9fbb1d8b2 | 10 exact files (100644)
-- m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/contract | b9af024867b04b25c2387ee37579deb47696d3b6 | 2 exact files (100644)
-- `m3/docs/M3JDK21_MACHINE_MAINTAINED_MECHANICAL_SUPERSET.md` exact blob 520613c53c19ef8a9521953e5c78f7cffc4c625c mode 100644.
-- `m3/tooling/atom-census/verify-contract.sh` exact blob 9ceefdb27f9c7455232a93a7012e26df769fe2d2 mode 100755.
+- make/m3/tooling/atom-census/contract | d40badc846ef5881a4a0e3a7f910dfdbef2d7afd | 5 exact files (100644)
+- make/m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract | 92cc04745096a7d0acb1a73b3fb82de9fbb1d8b2 | 10 exact files (100644)
+- make/m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/contract | b9af024867b04b25c2387ee37579deb47696d3b6 | 2 exact files (100644)
+- `doc/m3/M3JDK21_MACHINE_MAINTAINED_MECHANICAL_SUPERSET.md` exact blob 520613c53c19ef8a9521953e5c78f7cffc4c625c mode 100644.
+- `make/m3/tooling/atom-census/verify-contract.sh` exact blob 9ceefdb27f9c7455232a93a7012e26df769fe2d2 mode 100755.
 
 Require Git final compare to contain only original 19 added source files plus this receipt, no edits, deletes or renames. Retain actual donor head as second Git parent.
 

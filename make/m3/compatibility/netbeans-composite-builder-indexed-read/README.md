@@ -12,7 +12,7 @@ or declare any family complete.
 
 The Synexia-owned `com.synexia.m3.CompositeBuilderIndexedRead` recipe emitted four
 sealed outputs: `M3StringBuilderLane.java`, `AbstractStringBuilder.java`, the new
-`M3CompositeBuilderIndexedReadTest.java`, and `m3/docs/name-mapping.json`. Their
+`M3CompositeBuilderIndexedReadTest.java`, and `doc/m3/name-mapping.json`. Their
 preimages, postimages and actual receiving-tree hashes are in [receipt.json](receipt.json).
 The existing builder owner gains a primitive cumulative piece-end index; public
 `charAt`, `codePointAt` and `codePointBefore` reads retain pieces and flat backing.

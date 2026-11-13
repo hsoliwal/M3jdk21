@@ -47,10 +47,10 @@
   </dependencies>
 
   <build>
-    <sourceDirectory>${project.basedir}/../../vendor/m3/m3-openrewrite-recipes/src/main/java</sourceDirectory>
+    <sourceDirectory>${project.basedir}/../../../../m3/vendor/m3/m3-openrewrite-recipes/src/main/java</sourceDirectory>
     <resources>
       <resource>
-        <directory>${project.basedir}/../../vendor/m3/m3-openrewrite-recipes/src/main/resources</directory>
+        <directory>${project.basedir}/../../../../m3/vendor/m3/m3-openrewrite-recipes/src/main/resources</directory>
         <includes>
           <include>META-INF/m3/jdk-a3-recipe-export.tsv</include>
         </includes>
@@ -88,7 +88,7 @@
             <configuration>
               <compileSourceRoots>
                 <compileSourceRoot>${project.basedir}/src/test/java</compileSourceRoot>
-                <compileSourceRoot>${project.basedir}/../../vendor/m3/m3-openrewrite-recipes/src/test/java</compileSourceRoot>
+                <compileSourceRoot>${project.basedir}/../../../../m3/vendor/m3/m3-openrewrite-recipes/src/test/java</compileSourceRoot>
               </compileSourceRoots>
               <testIncludes>
                 <testInclude>jdk/m3/tooling/m3/a3/PublicA3ExportMirrorTest.java</testInclude>
@@ -112,8 +112,8 @@
           <useModulePath>false</useModulePath>
           <failIfNoTests>true</failIfNoTests>
           <!-- the export tests resolve manifest and source paths from the export root, as in the donor module -->
-          <workingDirectory>${project.basedir}/../../vendor/m3/m3-openrewrite-recipes</workingDirectory>
-          <!-- HOLD (m3/tooling/standalone/GATES.tsv A3_EXPORT_TAG_ASSERTION): one export test method, listed in
+          <workingDirectory>${project.basedir}/../../../../m3/vendor/m3/m3-openrewrite-recipes</workingDirectory>
+          <!-- HOLD (make/m3/tooling/standalone/GATES.tsv A3_EXPORT_TAG_ASSERTION): one export test method, listed in
                the file with its reason; Surefire accepts method filters only there -->
           <excludesFile>${project.basedir}/surefire-hold-excludes.txt</excludesFile>
         </configuration>

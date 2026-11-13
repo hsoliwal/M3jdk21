@@ -22,7 +22,7 @@ import java.util.Objects;
  * Plan construction (donors, contracts, Maven recipe custody) stays with the donor's universal recipe planner; this
  * gate receives only a sealed plan root and its ordered targets ({@link Plan}).
  */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/b65df53330e3d82f6b2d5509ded971f19883f4ca/synexia-m3-recipe/src/main/java/com/synexia/m3/recipe/M3OpenJdkAtomJitPatternGate.java blob fa51c5df12d5; recipe m3/tooling/atom-jit-gate/recipe/atom-jit-gate-20261106/relocate.py v4
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/b65df53330e3d82f6b2d5509ded971f19883f4ca/synexia-m3-recipe/src/main/java/com/synexia/m3/recipe/M3OpenJdkAtomJitPatternGate.java blob fa51c5df12d5; recipe make/m3/tooling/atom-jit-gate/recipe/atom-jit-gate-20261106/relocate.py v4
 public final class OpenJdkAtomJitPatternGate {
     public enum Phase {
         ATOMIZE, JAVA_COMPILE, JIT_XINT, JIT_C2, JNI_PARITY,

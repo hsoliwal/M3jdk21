@@ -5,7 +5,7 @@ on:
     paths:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalExactIntegerDistance.java'
       - 'test/jdk/jdk/m3/collections/M3SignalExactIntegerDistance*.java'
-      - 'm3/collections/qualification/signal-exact-integer-distance-20261025/**'
+      - 'make/m3/collections/qualification/signal-exact-integer-distance-20261025/**'
       - '.github/workflows/m3-signal-exact-integer-distance-20261025.yml'
   workflow_dispatch:
 permissions:

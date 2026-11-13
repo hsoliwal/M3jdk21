@@ -16,7 +16,7 @@ toolchain = ROOT / "toolchain"
 jdk = toolchain / "jdk-21+35"
 maven = toolchain / "apache-maven-3.9.9/bin/mvn"
 env = dict(os.environ, JAVA_HOME=str(jdk), PATH=str(jdk / "bin") + os.pathsep + os.environ["PATH"])
-common = [str(maven), "-o", "-B", "-f", str(fixture / "m3/history/retention-pom.xml"),
+common = [str(maven), "-o", "-B", "-f", str(fixture / "make/m3/history/retention-pom.xml"),
           "-Dmaven.repo.local=" + str(HERE / "m2-diagnostic-v02"), "-Dm3.repo=" + str(fixture),
           "-Dm3.retentionCommit=" + pins["fixture_candidate_commit"]]
 commands = []

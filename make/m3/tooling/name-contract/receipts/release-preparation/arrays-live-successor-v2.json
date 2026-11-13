@@ -8,7 +8,7 @@
   "historical_sha256": "0ba39f0b1a0be0c1e8040f778253ea41b5342f34b39786be64988f8b31d12c73",
   "current_blob": "23fcda31d0678a09caee8d458a7caeff12abec24",
   "current_sha256": "d05ab40d783e91cd608ffd76892f141bef38a82c0e105b67c4a6ee2f01faeb4f",
-  "patch_path": "m3/tooling/name-contract/receipts/release-preparation/arrays-live-successor.patch.txt",
+  "patch_path": "make/m3/tooling/name-contract/receipts/release-preparation/arrays-live-successor.patch.txt",
   "patch_blob": "fcc0e7620897279855999df1e5143f6e1792c21a",
   "patch_sha256": "38eecd500e05afedb6c64d9a177961ad9ded7b3b2cd2bb2636bdb34aa9a9a28c",
   "companion": {
@@ -20,7 +20,7 @@
   },
   "scope": "Exact source reconstruction and current declaration identity only. Eight existing range-check differences are recorded; no source implementation is changed or runtime acceptance implied.",
   "supersedes": {
-    "path": "m3/tooling/name-contract/receipts/release-preparation/arrays-live-successor.json",
+    "path": "make/m3/tooling/name-contract/receipts/release-preparation/arrays-live-successor.json",
     "blob": "d6b8f82d1c73c1ead895cf4786d9cebf067aefb1",
     "sha256": "0fe3254fcbdd23a358a5176a8594a465ce7807b28c8202aa7465a62db4db4fab",
     "reason": "the M3Arrays companion moved from m3/arrays (module jdk.m3.arrays) to src/jdk.m3.collections (module jdk.m3.collections); the java.util.Arrays source pins are unchanged"

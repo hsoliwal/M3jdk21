@@ -1,7 +1,7 @@
 {
   "schema": "m3-catalogue-text-delivery-partitions/v1",
   "receiver_baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
-  "target_prefix": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/",
+  "target_prefix": "make/m3/collections/algorithm-catalog/wrapper-convergence-20261018/",
   "before_state": "ABSENT",
   "unchanged_text_target_budget": 256,
   "datasets": [

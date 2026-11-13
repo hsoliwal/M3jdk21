@@ -9,7 +9,7 @@ lane = root / "canonical/m3-openrewrite-recipes/recipe-crates/m3-ast-build-rever
 manifest = lane / "manifest.tsv"
 before = manifest.read_bytes()
 rows = [line.split("\t") for line in before.decode().splitlines()]
-target = "m3/tooling/module-packs/build-support/gradle-provider/src/test/resources/META-INF/services/com.sun.source.util.M3AST$Consumer"
+target = "make/m3/tooling/module-packs/build-support/gradle-provider/src/test/resources/META-INF/services/com.sun.source.util.M3AST$Consumer"
 selected = [row for row in rows if row[0] == target]
 assert len(selected) == 1
 row = selected[0]

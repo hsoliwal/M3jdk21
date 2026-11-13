@@ -29,9 +29,9 @@ PR_PREFIX = re.compile(r"pr([1-9][0-9]*)/(.+)\Z")
 HEADER = ("priority\tpr\toriginal_path\tarchive_path\tarchive_mode\tarchive_oid"
           "\tactive_mode\tactive_oid\tpath_state\tnext_gate\n")
 MAX_TREE_BYTES = 128 * 1024 * 1024
-# Archive rows that m3/release/LEGACY_RECIPE_CUSTODY_LEDGER.tsv records as RETIRE (same path, mode and
+# Archive rows that make/m3/release/LEGACY_RECIPE_CUSTODY_LEDGER.tsv records as RETIRE (same path, mode and
 # blob) are resolved lineage: the legacy recipe source was retired here on purpose, not lost.
-CUSTODY_LEDGER = "m3/release/LEGACY_RECIPE_CUSTODY_LEDGER.tsv"
+CUSTODY_LEDGER = "make/m3/release/LEGACY_RECIPE_CUSTODY_LEDGER.tsv"
 CUSTODY_HEADER = "path\tblob\tmode\tdecision\tdestination\treason\tcallers"
 RESOLVED_STATES = frozenset({"EXACT_ACTIVE_PATH", "RETIRED_LEGACY_RECIPE"})
 MAX_SOURCE_ROWS = 100_000

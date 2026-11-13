@@ -9,8 +9,8 @@ on:
       - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c'
       - 'test/jdk/jdk/m3/collections/M3IndexMaskWindow*.java'
       - 'test/jdk/jdk/m3/collections/M3MaskSpansContract.java'
-      - 'm3/collections/qualification/m3-index-mask-window-20261017/**'
-      - 'm3/collections/pom-m3-index-mask-window-20261017.xml'
+      - 'make/m3/collections/qualification/m3-index-mask-window-20261017/**'
+      - 'make/m3/collections/pom-m3-index-mask-window-20261017.xml'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-index-mask-window-20261017/**'
       - '.github/workflows/m3-index-mask-window-20261017.yml'
   workflow_dispatch:
@@ -60,9 +60,9 @@ jobs:
           trap 'rm -rf "$historical"' EXIT
           # Verify original additions and fixed point in a fresh disjoint tree.
           # The existing verifier also proves tampered source refusal.
-          python3 m3/collections/qualification/m3-index-mask-window-20261017/verify.py \
+          python3 make/m3/collections/qualification/m3-index-mask-window-20261017/verify.py \
             --apply --workspace "$historical"
-          python3 m3/collections/qualification/m3-index-mask-window-20261017/verify.py \
+          python3 make/m3/collections/qualification/m3-index-mask-window-20261017/verify.py \
             --workspace "$historical"
       - name: Compile and execute strict Java21 and native differential
         shell: bash
@@ -98,5 +98,5 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f m3/collections/pom-m3-index-mask-window-20261017.xml test
-          mvn -B -ntp -f m3/collections/qualification/m3-index-mask-window-20261017/pom.xml test
+          mvn -B -ntp -f make/m3/collections/pom-m3-index-mask-window-20261017.xml test
+          mvn -B -ntp -f make/m3/collections/qualification/m3-index-mask-window-20261017/pom.xml test

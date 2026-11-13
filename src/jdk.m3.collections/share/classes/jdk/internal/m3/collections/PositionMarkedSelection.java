@@ -13,9 +13,9 @@
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
 /*
- * Derived by recipe (m3/docs/viewport-everywhere/recipe) from hsoliwal/nebula 79fdab533b25bd228e96a70feed55c905ab9aefb,
+ * Derived by recipe (doc/m3/viewport-everywhere/recipe) from hsoliwal/nebula 79fdab533b25bd228e96a70feed55c905ab9aefb,
  * GridSelectionList.java; Apache-2.0 elected from its Apache-2.0 OR EPL-2.0 publication
- * (m3/docs/viewport-everywhere/LICENSE_ELECTION.tsv).
+ * (doc/m3/viewport-everywhere/LICENSE_ELECTION.tsv).
  */
 package jdk.internal.m3.collections;
 

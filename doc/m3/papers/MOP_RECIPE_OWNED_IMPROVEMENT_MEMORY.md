@@ -213,4 +213,4 @@ Copyright 2026 Hitesh Soliwal and contributors. Synexia — Machine-Oriented Pro
 6. World Intellectual Property Organization. *Frequently Asked Questions on Copyright*. https://www.wipo.int/en/web/copyright/faq-copyright
 7. Apache Software Foundation. *Apache License Version 2.0*. https://www.apache.org/licenses/LICENSE-2.0
 
-Companion operational specification: [Recipe owned correction memory invariant](../docs/mop-recipe-improvement-memory.md). The paper and specification describe the design and required workflow; publication or merge alone does not establish implemented runtime behavior.
+Companion operational specification: [Recipe owned correction memory invariant](../mop-recipe-improvement-memory.md). The paper and specification describe the design and required workflow; publication or merge alone does not establish implemented runtime behavior.

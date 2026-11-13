@@ -24,7 +24,7 @@
     "native_abi_change": false
   },
   "predecessor": {
-    "path": "m3/collections/receiving/mat-owned-exports-20261112.json",
+    "path": "make/m3/collections/receiving/mat-owned-exports-20261112.json",
     "sha256": "fcb555ea7d47ab1f7129b2deadcb54b5258ff72454a2678d45c91604c62d31cf",
     "disposition": "immutable earlier scoped evidence retained; this record adds module and resource results"
   },

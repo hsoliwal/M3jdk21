@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 /** LC #315 primitive-index merge-count differential over Java and JNI. */
-//FLLDCIM: RELOCATE - donor blob 90995dfabb36 at d5ad5090d87e; recipe m3/collections/qualification/census2-c4-20261106/relocate.py v1
+//FLLDCIM: RELOCATE - donor blob 90995dfabb36 at d5ad5090d87e; recipe make/m3/collections/qualification/census2-c4-20261106/relocate.py v1
 public final class LongCountSmallerRightContract {
     private static long checks;
 

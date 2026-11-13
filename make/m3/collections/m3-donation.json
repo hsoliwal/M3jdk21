@@ -969,8 +969,8 @@
       "canonical_central_home_registration": "NOT_REASSERTED; existing source crate staging row is PENDING_COMMIT",
       "license": "Apache-2.0",
       "source_admission": "NO_NEW_DONOR_COPY; existing target owner and immutable published source templates match",
-      "provenance_receipt": "m3/compatibility/m3-enum-set-receipt.json",
-      "mapping_fragment": "m3/docs/name-mapping.d/m3-enum-set.json"
+      "provenance_receipt": "make/m3/compatibility/m3-enum-set-receipt.json",
+      "mapping_fragment": "doc/m3/name-mapping.d/m3-enum-set.json"
     }
   ],
   "qualification_source_counts": {
@@ -1002,9 +1002,9 @@
     "standalone_java_probes": 2,
     "non_java_inputs": 3,
     "runtime_source_changes": 0,
-    "preserved_enum_set_receipt": "m3/compatibility/m3-enum-set-receipt.json",
-    "preserved_enum_set_mapping_fragment": "m3/docs/name-mapping.d/m3-enum-set.json",
-    "preserved_family_map": "m3/collections/JDK_FAMILY_MAP.tsv",
+    "preserved_enum_set_receipt": "make/m3/compatibility/m3-enum-set-receipt.json",
+    "preserved_enum_set_mapping_fragment": "doc/m3/name-mapping.d/m3-enum-set.json",
+    "preserved_family_map": "make/m3/collections/JDK_FAMILY_MAP.tsv",
     "historical_receipts": "Original93-row inventory and88-module-source qualification/application evidence remain unchanged.",
     "phase_advance": false,
     "canonical_source_revision": "ea441c53361caf7222eb064b24640be7f7927672",
@@ -1157,7 +1157,7 @@
       "tools4j-module-map-20261019",
       "tools4j-donation-link-20261019"
     ],
-    "target_handoff": "m3/tooling/refinement-proofs/tools4j-unix-20261019",
+    "target_handoff": "make/m3/tooling/refinement-proofs/tools4j-unix-20261019",
     "naming_disposition": "EXISTING_OWNER_REFINEMENT_NO_RENAME; BASELINE_INVENTORY_RECONCILIATION",
     "historical_hash_rule": "Original donor and target hash records retain their recorded receiving revisions. Current listed source hashes are the final_received_sha256 column of this exact successor; historical files and receipts are not rewritten.",
     "review_scope": "Inventory reconciliation is not algorithm review of all503 Java files. Source refinements and their individual canonical recipes/gates remain separately recorded in the target handoff.",
@@ -1183,7 +1183,7 @@
     "predecessor_successor": "master_source_successor_20261031",
     "origin": "master after the JDK module move #2849: sources absorbed, renamed and moved since the master seal; recorded keys stay in the m3/collections/src key space (verify_donation.py located/recorded)",
     "chain_repins": "JDK_NAMING_RESEAL caf39c93e4c left the Tools4j, Superset and Master predecessor pins stale; derived by replaying the sealed chain",
-    "recipe": "m3/collections/qualification/module-source-successor-20261109.py",
+    "recipe": "make/m3/collections/qualification/module-source-successor-20261109.py",
     "phase_advance": false
   },
   "master_source_successor_20261031": {

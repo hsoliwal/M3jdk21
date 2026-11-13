@@ -75,7 +75,7 @@
 +def admit_current_receipts(context):
 +    receipts = context["receipts"]
 +    assert len(receipts) == 10
-+    prefix = PurePosixPath("m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current")
++    prefix = PurePosixPath("make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current")
 +    admitted = {}
 +    for name, row in receipts.items():
 +        assert name and "\\" not in name and PurePosixPath(name).name == name

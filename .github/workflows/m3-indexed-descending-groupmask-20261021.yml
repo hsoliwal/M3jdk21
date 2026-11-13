@@ -5,7 +5,7 @@ on:
     paths:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexedListSnapshot.java'
       - 'test/jdk/jdk/m3/collections/M3IndexedDescendingGroupMask*.java'
-      - 'm3/collections/qualification/descending-groupmask-20261021/**'
+      - 'make/m3/collections/qualification/descending-groupmask-20261021/**'
       - '.github/workflows/m3-indexed-descending-groupmask-20261021.yml'
   workflow_dispatch:
 permissions:
@@ -31,7 +31,7 @@ jobs:
         run: |
           set -euo pipefail
           git diff --check origin/master...HEAD
-          bash m3/collections/qualification/descending-groupmask-20261021/verify.sh
+          bash make/m3/collections/qualification/descending-groupmask-20261021/verify.sh
       - name: Strict actual-owner Java21 and comparator/exception JDK differential
         shell: bash
         run: |
@@ -71,7 +71,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f m3/pom.xml -Pm3-extended -pl :m3-collections -am \
+          mvn -B -ntp -f make/m3/pom.xml -Pm3-extended -pl :m3-collections -am \
             -Dsurefire.failIfNoSpecifiedTests=false \
             -Dtest=M3IndexedDescendingGroupMaskTest,M3IndexedFilterSortFusionTest,M3IndexedSnapshotPositionTest \
             test

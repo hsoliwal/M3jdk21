@@ -10,7 +10,7 @@ import java.util.Objects;
  * <p>Stores two long key columns, one int value column and a byte occupancy column. No UUID
  * objects or UUID strings are retained by the index.</p>
  */
-//FLLDCIM: RELOCATE - donor blob 5a0ad78d3171 at commit 3385d79a2968 (repository, path, URL and digests: m3/collections/recipe/immutable-pools-20261106/PROVENANCE.tsv); recipe m3/collections/recipe/immutable-pools-20261106/relocate.py v2
+//FLLDCIM: RELOCATE - donor blob 5a0ad78d3171 at commit 3385d79a2968 (repository, path, URL and digests: make/m3/collections/recipe/immutable-pools-20261106/PROVENANCE.tsv); recipe make/m3/collections/recipe/immutable-pools-20261106/relocate.py v2
 public final class Uuid128HashIndex {
     private final long[] most;
     private final long[] least;

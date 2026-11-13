@@ -32,7 +32,7 @@ module `m3/indexdb` (artifact `m3indexdb`, package `jdk.m3.indexdb`, an automati
 | recipe | `relocate.py` v2: `python -I m3/indexdb/recipe/hamming-topk-20261106/relocate.py --donor-git <clone> --donor-rev <rev> [--module m3/indexdb] [--check]` |
 | map | `RELOCATION_MAP.tsv`: 3 `FILE` rows, 1 `MUTANT` row, `PACKAGE com.synexia.algorithms.agent -> jdk.m3.indexdb`, `TYPE TopKByHamming -> M3HammingTopK` (scoped to the mutant file: `-> M3HammingTopKTieOrderMutant`), `TYPE TopKByHammingHeapSortProof -> M3HammingTopKContract`, `TYPE ...ProofTest -> M3HammingTopKContractTest`, `MEMBER SimHash64.distance -> M3IndexDbChunkSimHash.hammingDistance`, 1 `SUBST` row (the reversed tie comparator of the mutant), `EXTERNAL org.junit.jupiter.api`, `DONOR_DEP SimHash64.java` |
 | provenance | `PROVENANCE.tsv`: donor commit, blob, donor sha256, target sha256, `body_match`, `body_match_renamed`, role, substitution count per file (4 relocated files + the DONOR_DEP pin) |
-| naming | `python -I m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/indexdb/`: 0 moves, 0 rewrites, 0 refusals (before, after staging, FIXED_POINT) |
+| naming | `python -I make/m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/indexdb/`: 0 moves, 0 rewrites, 0 refusals (before, after staging, FIXED_POINT) |
 
 The recipe rewrites only the license header (M3JDK style), the `package` line, mapped `import` lines, the MEMBER token,
 the mapped type names (whole-word tokens; the TYPE row scoped to the mutant file gives the mutant its own name), the

@@ -31,7 +31,7 @@ class JdkNamingConformanceTest {
     @BeforeAll
     static void load() throws IOException {
         root = Path.of(System.getProperty("m3.repo.root", "../../../..")).toAbsolutePath().normalize();
-        rules = NamingRules.load(root.resolve("m3/tooling/jdk-naming/NAMING_RULES.tsv"));
+        rules = NamingRules.load(root.resolve("make/m3/tooling/jdk-naming/NAMING_RULES.tsv"));
     }
 
     private static String rewritten(String line) {
@@ -136,11 +136,11 @@ class JdkNamingConformanceTest {
         assertFalse(NamingScan.inScope("m3/x/src/main/resources/META-INF/MANIFEST.MF"));
         assertFalse(NamingScan.inScope("m3/x/provenance.json"));
         assertFalse(NamingScan.inScope("m3/x/evidence/run.json"));
-        assertFalse(NamingScan.inScope("m3/docs/notes.yml"));
+        assertFalse(NamingScan.inScope("doc/m3/notes.yml"));
         assertFalse(NamingScan.inScope("m3/x/README.md"));
         assertFalse(NamingScan.inScope("m3/x/NOTICE"));
-        assertFalse(NamingScan.inScope("m3/tooling/jdk-naming/jdk_naming.py"));
-        assertFalse(NamingScan.inScope("m3/release/check_standalone.py"));
+        assertFalse(NamingScan.inScope("make/m3/tooling/jdk-naming/jdk_naming.py"));
+        assertFalse(NamingScan.inScope("make/m3/release/check_standalone.py"));
         assertTrue(NamingScan.isLineage("m3/x/surefire-reports/TEST-a.xml"));
     }
 
@@ -174,8 +174,8 @@ class JdkNamingConformanceTest {
                 "kept in place: its name-kept target is taken too");
         assertEquals("m3/x/m3-openrewrite-recipes/licenses/Synexia-LICENSE",
                 scan.targetPath("m3/x/synexia-openrewrite-recipes/licenses/Synexia-LICENSE"));
-        assertEquals("python3 m3/compatibility/check-m3.py; dependency_on_synexia",
-                rewritten("python3 m3/compatibility/check-synexia.py; dependency_on_synexia"));
+        assertEquals("python3 make/m3/compatibility/check-m3.py; dependency_on_synexia",
+                rewritten("python3 make/m3/compatibility/check-synexia.py; dependency_on_synexia"));
         assertFalse(NamingScan.isLineage("m3/x/after-009.java.txt"));
     }
 

@@ -14,6 +14,6 @@
  * notices. No pre-existing SWT file changes licence. The Swing reuse in M3JDK 21
  * {@code m3/ports/swing-viewport} takes the Apache-2.0 option; copies into {@code java.desktop}
  * internals are an explicit relicence to GPL-2.0 with the Classpath Exception, recorded in M3JDK 21
- * {@code m3/docs/m3-item-residency-explicit-relicense.md}.</p>
+ * {@code doc/m3/m3-item-residency-explicit-relicense.md}.</p>
  */
 package jdk.m3.swing.viewport.engine.residency;

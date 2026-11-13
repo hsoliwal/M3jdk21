@@ -5,7 +5,7 @@ on:
     branches:
       - aix/jdk22-27-backports-20261002
     paths:
-      - "m3/backports/**"
+      - "make/m3/backports/**"
       - "make/modules/jdk.jcmd/Copy.gmk"
       - "src/jdk.jcmd/share/conf/bash-completion/jcmd"
       - "src/jdk.javadoc/share/classes/jdk/javadoc/internal/doclets/formats/html/DocFilesHandlerImpl.java"
@@ -13,10 +13,10 @@ on:
       - "src/jdk.javadoc/share/classes/jdk/javadoc/internal/doclets/toolkit/BaseConfiguration.java"
       - "src/jdk.javadoc/share/man/javadoc.1"
       - "test/langtools/jdk/javadoc/doclet/testCopyFiles/TestCopyFiles.java"
-      - "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8347112BackportRecipe.java"
+      - "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8347112BackportRecipe.java"
       - "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk27-javadoc-8347112-java/**"
       - "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jdk27-javadoc-8347112-text/**"
-      - "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8347112BackportRecipeTest.java"
+      - "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8347112BackportRecipeTest.java"
       - "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/jdk27-javadoc-8347112/**"
       - "src/hotspot/share/classfile/vmSymbols.hpp"
       - "src/hotspot/share/services/diagnosticCommand.cpp"
@@ -25,23 +25,23 @@ on:
       - "src/java.base/share/classes/jdk/internal/access/JavaSecurityPropertiesAccess.java"
       - "src/java.base/share/classes/jdk/internal/vm/VMSupport.java"
       - "test/hotspot/jtreg/serviceability/dcmd/vm/SecurityPropertiesTest.java"
-      - "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8364182BackportRecipe.java"
+      - "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8364182BackportRecipe.java"
       - "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk27-security-properties-8364182-java/**"
       - "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jdk27-security-properties-8364182-text/**"
-      - "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8364182BackportRecipeTest.java"
+      - "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8364182BackportRecipeTest.java"
       - "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/jdk27-security-properties-8364182/**"
       - "src/java.base/share/classes/java/security/KeyStore.java"
       - "src/java.base/share/classes/java/security/KeyStoreSpi.java"
       - "test/jdk/java/security/KeyStore/CreationInstant.java"
-      - "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8374808BackportRecipe.java"
+      - "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8374808BackportRecipe.java"
       - "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk27-keystore-creation-instant-8374808/**"
-      - "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8374808BackportRecipeTest.java"
+      - "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8374808BackportRecipeTest.java"
       - "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/jdk27-keystore-creation-instant-8374808/**"
-      - "m3/tooling/recipe-catalogue.tsv"
+      - "make/m3/tooling/recipe-catalogue.tsv"
       - ".github/workflows/m3jdk21-backports.yml"
   pull_request:
     paths:
-      - "m3/backports/**"
+      - "make/m3/backports/**"
       - "make/modules/jdk.jcmd/Copy.gmk"
       - "src/jdk.jcmd/share/conf/bash-completion/jcmd"
       - "src/jdk.javadoc/share/classes/jdk/javadoc/internal/doclets/formats/html/DocFilesHandlerImpl.java"
@@ -49,10 +49,10 @@ on:
       - "src/jdk.javadoc/share/classes/jdk/javadoc/internal/doclets/toolkit/BaseConfiguration.java"
       - "src/jdk.javadoc/share/man/javadoc.1"
       - "test/langtools/jdk/javadoc/doclet/testCopyFiles/TestCopyFiles.java"
-      - "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8347112BackportRecipe.java"
+      - "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8347112BackportRecipe.java"
       - "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk27-javadoc-8347112-java/**"
       - "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jdk27-javadoc-8347112-text/**"
-      - "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8347112BackportRecipeTest.java"
+      - "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8347112BackportRecipeTest.java"
       - "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/jdk27-javadoc-8347112/**"
       - "src/hotspot/share/classfile/vmSymbols.hpp"
       - "src/hotspot/share/services/diagnosticCommand.cpp"
@@ -61,19 +61,19 @@ on:
       - "src/java.base/share/classes/jdk/internal/access/JavaSecurityPropertiesAccess.java"
       - "src/java.base/share/classes/jdk/internal/vm/VMSupport.java"
       - "test/hotspot/jtreg/serviceability/dcmd/vm/SecurityPropertiesTest.java"
-      - "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8364182BackportRecipe.java"
+      - "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8364182BackportRecipe.java"
       - "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk27-security-properties-8364182-java/**"
       - "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jdk27-security-properties-8364182-text/**"
-      - "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8364182BackportRecipeTest.java"
+      - "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8364182BackportRecipeTest.java"
       - "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/jdk27-security-properties-8364182/**"
       - "src/java.base/share/classes/java/security/KeyStore.java"
       - "src/java.base/share/classes/java/security/KeyStoreSpi.java"
       - "test/jdk/java/security/KeyStore/CreationInstant.java"
-      - "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8374808BackportRecipe.java"
+      - "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8374808BackportRecipe.java"
       - "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk27-keystore-creation-instant-8374808/**"
-      - "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8374808BackportRecipeTest.java"
+      - "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8374808BackportRecipeTest.java"
       - "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/jdk27-keystore-creation-instant-8374808/**"
-      - "m3/tooling/recipe-catalogue.tsv"
+      - "make/m3/tooling/recipe-catalogue.tsv"
       - ".github/workflows/m3jdk21-backports.yml"
   workflow_dispatch:
 
@@ -105,20 +105,20 @@ jobs:
           from pathlib import Path
 
           paths = (
-              "m3/backports/README.md",
-              "m3/backports/JEP_CATALOGUE.tsv",
-              "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv",
-              "m3/backports/inventory.py",
-              "m3/backports/pom.xml",
-              "m3/backports/recipes/jdk-8357439/manifest.tsv",
-              "m3/backports/recipes/jdk-8347112/adaptation.tsv",
-              "m3/backports/recipes/jdk-8347112/README.md",
-              "m3/backports/recipes/jdk-8364182/adaptation.tsv",
-              "m3/backports/recipes/jdk-8364182/README.md",
-              "m3/backports/recipes/jdk-8374808/adaptation.tsv",
-              "m3/backports/recipes/jdk-8374808/README.md",
-              "m3/backports/test_inventory.py",
-              "m3/backports/verify.py",
+              "make/m3/backports/README.md",
+              "make/m3/backports/JEP_CATALOGUE.tsv",
+              "make/m3/backports/UPSTREAM_CHANGE_SEEDS.tsv",
+              "make/m3/backports/inventory.py",
+              "make/m3/backports/pom.xml",
+              "make/m3/backports/recipes/jdk-8357439/manifest.tsv",
+              "make/m3/backports/recipes/jdk-8347112/adaptation.tsv",
+              "make/m3/backports/recipes/jdk-8347112/README.md",
+              "make/m3/backports/recipes/jdk-8364182/adaptation.tsv",
+              "make/m3/backports/recipes/jdk-8364182/README.md",
+              "make/m3/backports/recipes/jdk-8374808/adaptation.tsv",
+              "make/m3/backports/recipes/jdk-8374808/README.md",
+              "make/m3/backports/test_inventory.py",
+              "make/m3/backports/verify.py",
               "make/modules/jdk.jcmd/Copy.gmk",
               "src/jdk.jcmd/share/conf/bash-completion/jcmd",
           )
@@ -158,10 +158,10 @@ jobs:
       - name: Compile and syntax checks
         shell: bash
         run: |
-          python3 -m py_compile             m3/backports/inventory.py             m3/backports/test_inventory.py             m3/backports/verify.py
+          python3 -m py_compile             make/m3/backports/inventory.py             make/m3/backports/test_inventory.py             make/m3/backports/verify.py
           python3 - <<'PY'
           import xml.etree.ElementTree as ET
-          ET.parse("m3/backports/pom.xml")
+          ET.parse("make/m3/backports/pom.xml")
           print("PASS: pom.xml")
           PY
           bash -n src/jdk.jcmd/share/conf/bash-completion/jcmd
@@ -170,10 +170,10 @@ jobs:
       - name: Tests and Maven recipe crate
         shell: bash
         run: |
-          python3 -m unittest -v m3/backports/test_inventory.py
-          python3 m3/backports/verify.py --root .
-          mvn -B -f m3/backports/pom.xml test
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
+          python3 -m unittest -v make/m3/backports/test_inventory.py
+          python3 make/m3/backports/verify.py --root .
+          mvn -B -f make/m3/backports/pom.xml test
+          mvn -B -ntp -f make/m3/tooling/migration-recipes/pom.xml \
             -Dtest=M3Jdk8347112BackportRecipeTest,M3Jdk8364182BackportRecipeTest,M3Jdk8374808BackportRecipeTest test
 
       - name: jcmd completion runtime smoke

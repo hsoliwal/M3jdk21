@@ -1,6 +1,6 @@
 <!-- Copyright 2026 Hitesh Soliwal and contributors -->
 <!-- SPDX-License-Identifier: Apache-2.0 -->
-<!-- FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/synexia-openrewrite-recipes/recipe-crates/m3-pmem-task-replay-20261102/README.md blob 3c60e2d72314; recipe m3/optane/recipe/pmem-task-log-replay-20261106/relocate.py v3 -->
+<!-- FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/synexia-openrewrite-recipes/recipe-crates/m3-pmem-task-replay-20261102/README.md blob 3c60e2d72314; recipe make/m3/optane/recipe/pmem-task-log-replay-20261106/relocate.py v3 -->
 # M3 PMEM task replay and Chrome atom recovery bridge — 2026-11-02
 
 Canonical recipe `com.synexia.m3.PmemTaskReplay20261102`, class-backed by

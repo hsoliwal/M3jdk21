@@ -42,7 +42,7 @@ final class M3StateRelationSparseC11RecipeTest {
             Map.entry("src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java", "9d485a1771a30b4229acb5526ca90de5f2df4a03ee5ad8f5388bb128d2c38194"),
             Map.entry(C_OWNER, "0df1989292b23b1f185f222db61ad55d5e38b30d5b758436ca9d62b8de277bbd"),
             Map.entry("src/java.base/share/native/libjava/m3_state_relation.h", "6a453bbe5c443d327228e48cc27c6d5dc356a67586f93796a52de17e69fa12a2"),
-            Map.entry("m3/compatibility/regex-relations-20261014/M3RelationPortProof.java", "bb77a4d48ed803e0503a8e497ec144748dd87d05b1c659971273d15b5bd89606"));
+            Map.entry("make/m3/compatibility/regex-relations-20261014/M3RelationPortProof.java", "bb77a4d48ed803e0503a8e497ec144748dd87d05b1c659971273d15b5bd89606"));
     private static final Set<String> PASSED = new LinkedHashSet<>();
     private static final Map<Boolean, String> EMITTED = new HashMap<>();
     private static int successfulRuns;

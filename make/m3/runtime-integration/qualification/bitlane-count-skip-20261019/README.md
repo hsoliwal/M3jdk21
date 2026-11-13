@@ -19,7 +19,7 @@ Standalone Fenwick navigation (M3JDK21 #1122 / Synexia #12104) is a compared don
 
 ## Reproduce
 
-Run `mvn -B -ntp -f m3/runtime-integration/qualification/bitlane-count-skip-20261019/recipes/m3jdk21-bitlane-runtime-count-skip-20261019/pom.xml clean test`, then the adjacent `verify-generated.sh`.
+Run `mvn -B -ntp -f make/m3/runtime-integration/qualification/bitlane-count-skip-20261019/recipes/m3jdk21-bitlane-runtime-count-skip-20261019/pom.xml clean test`, then the adjacent `verify-generated.sh`.
 
 Seven authored SDK tests emit actual `Result.getAfter()` bytes into a fresh build directory. The script consumes that result, compiles the owner into bootstrap-loaded `java.base`, and executes the unchanged real C17 JNI peer. The final workflow receiving check intentionally refuses while production still contains the baseline.
 

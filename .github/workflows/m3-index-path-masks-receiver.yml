@@ -7,10 +7,10 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexPathMasks.java'
       - 'test/jdk/jdk/m3/collections/M3IndexPathMasks*'
       - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_path_masks.c'
-      - 'm3/collections/recipe/index-path-masks-20261017/**'
-      - 'm3/collections/verify_donation.py'
-      - 'm3/collections/test_verify_index_path_masks.py'
-      - 'm3/collections/qualification/INDEX_PATH_MASKS_RECEIVER_20261017.md'
+      - 'make/m3/collections/recipe/index-path-masks-20261017/**'
+      - 'make/m3/collections/verify_donation.py'
+      - 'make/m3/collections/test_verify_index_path_masks.py'
+      - 'make/m3/collections/qualification/INDEX_PATH_MASKS_RECEIVER_20261017.md'
       - '.github/workflows/m3-index-path-masks-receiver.yml'
   push:
     branches:
@@ -44,9 +44,9 @@ jobs:
           4883466fcc73cea1aaa7b443abbb5612a1e9f0c06166f0576b091b273653c02e  test/jdk/jdk/m3/collections/M3IndexPathMasksSelfTest.java
           3ba12ceee31693b3c202a3867f42a4fdc5acba5f9c7d96f919e4f88155af71b8  test/jdk/jdk/m3/collections/M3IndexPathMasksTest.java
           072e6c3d30b1fd54d8ce883ed18fde75aa6c1809a1dc0c9a2de7b7e5f571f824  src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_path_masks.c
-          c3af2d443d0c79ee375f6ac0399a874fd5662123e4ef1af52b358c2a6f8ea28f  m3/collections/recipe/index-path-masks-20261017/manifest.tsv
-          094ec75e59efa040b5d21f5f4bbf893125c1d57ee394a3c57d9ae7a902017d52  m3/collections/test_verify_index_path_masks.py
-          ecd2bc317fa630f4519025f2c687b59186981278fc963a7eb471dcf910819c49  m3/collections/verify_donation.py
+          c3af2d443d0c79ee375f6ac0399a874fd5662123e4ef1af52b358c2a6f8ea28f  make/m3/collections/recipe/index-path-masks-20261017/manifest.tsv
+          094ec75e59efa040b5d21f5f4bbf893125c1d57ee394a3c57d9ae7a902017d52  make/m3/collections/test_verify_index_path_masks.py
+          ecd2bc317fa630f4519025f2c687b59186981278fc963a7eb471dcf910819c49  make/m3/collections/verify_donation.py
           DIGESTS
           python3 -m unittest discover -s m3/collections -p 'test_verify_*.py' -v
       - name: Compile Java21 module owner and actual mask proof

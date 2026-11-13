@@ -13,7 +13,7 @@ import java.util.Objects;
  * file identities; this adapter neither discovers files nor owns model calls.
  * M3File must retain its immutable source snapshot lease until dispatch ends.
  */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/PmemSourceSlices.java blob 234f261627d3; recipe m3/optane/recipe/pmem-source-image-20261106/relocate.py v3
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/PmemSourceSlices.java blob 234f261627d3; recipe make/m3/optane/recipe/pmem-source-image-20261106/relocate.py v3
 public final class PmemSourceSlices {
     private static final int SHA256_BYTES = 32;
     private static final int MAX_FILES = 1_000_000;

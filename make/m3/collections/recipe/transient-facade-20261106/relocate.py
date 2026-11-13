@@ -44,8 +44,8 @@ dropped and inserted lines, and body_match: read back from disk, the lines betwe
 lines) are exactly the donor body lines after the declared rows, in order, and every missing donor line is a declared
 drop (FILE rows: every line after the header, package and anchor is a donor line after the declared rows).
 
-Derived from m3/collections/recipe/entryless-lane-kernel-20261106/relocate.py v3 (itself derived from
-m3/arrays/recipe/posting-index-20261106/relocate.py v2 and m3/collections/recipe/immutable-pools-20261106/relocate.py v2:
+Derived from make/m3/collections/recipe/entryless-lane-kernel-20261106/relocate.py v3 (itself derived from
+m3/arrays/recipe/posting-index-20261106/relocate.py v2 and make/m3/collections/recipe/immutable-pools-20261106/relocate.py v2:
 MERGE/APPEND/FILE, MEMBER, DROP/REWRITE/INSERT_BLOCK, REPO/BASE rows, read-back body_match). New in v4: a donor header
 may also be one leading block comment whose text lines are only Copyright / SPDX-License-Identifier /
 SPDX-FileCopyrightText lines ("/*", " * ...", " */", or "/* Copyright ..." opening the block); it is replaced by the
@@ -66,7 +66,7 @@ from pathlib import Path
 RECIPE = "relocate.py"
 VERSION = "v4"
 RECIPE_DIR = Path(__file__).resolve().parent
-RECIPE_DIR_REL = "m3/collections/recipe/" + RECIPE_DIR.name
+RECIPE_DIR_REL = "make/m3/collections/recipe/" + RECIPE_DIR.name
 MAP_NAME = "RELOCATION_MAP.tsv"
 PROVENANCE_NAME = "PROVENANCE.tsv"
 PROVENANCE_COLUMNS = ("donor_repo", "donor_commit", "donor_path", "donor_blob", "donor_sha256", "donor_url",

@@ -26,7 +26,7 @@ Canonical generated outputs (SHA-256):
 - `M3StoredRepresentativeTest.java`: `446920d8a0f43b3badac44ff9440eaedc2bc9dc1f53653dcecc4de026489d316`
 
 The earlier six-file filtered/sorted receiver manifest remains unchanged. The exact successor
-`m3/collections/recipe/stored-representative-20261017/manifest.tsv` updates only two
+`make/m3/collections/recipe/stored-representative-20261017/manifest.tsv` updates only two
 approved source digests and admits two new Java tests. Existing `verify_donation.py` uses
 the canonical hash-pinned successor overlay. The exact stored-representative verifier and
 refusal tests from #1035 are reused, not reimplemented.
@@ -60,7 +60,7 @@ Java; existing numerical JNI mask/index primitives remain separate qualified bat
 Focused target receiver:
 
 ```bash
-bash m3/collections/qualification/stored-representative-20261017/verify.sh
+bash make/m3/collections/qualification/stored-representative-20261017/verify.sh
 ```
 
 Full `m3/collections` Maven, Java 21 compiler, JUnit, source-inventory, native parity and

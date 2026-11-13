@@ -8,7 +8,7 @@ lane, in which every touched 4,096-slot block owns 64 long words.
 
 | Class | Origin | C side |
 |---|---|---|
-| public `jdk.m3.collections.BitLane28` | Synexia `SegmentedBitLane28`, received as `M3BitLane28` and renamed by curation (`m3/docs/name-mapping.json` id `synexia.collections.SegmentedBitLane28`; `m3/tooling/lane28`) | `cardinality0` in `segmented_bit_lane.c` (library `m3bitlane`) |
+| public `jdk.m3.collections.BitLane28` | Synexia `SegmentedBitLane28`, received as `M3BitLane28` and renamed by curation (`doc/m3/name-mapping.json` id `synexia.collections.SegmentedBitLane28`; `make/m3/tooling/lane28`) | `cardinality0` in `segmented_bit_lane.c` (library `m3bitlane`) |
 | internal `jdk.internal.m3.collections.bits.SegmentedBitLane28` | absorbed again from Synexia m3-common by RELOCATE_M3_OWNER v4 (common collections batch) | none (its `cardinality0` was ABSENT) |
 
 The second absorb missed the existing receipt; that batch predates the RECEIPT_MAP guard.

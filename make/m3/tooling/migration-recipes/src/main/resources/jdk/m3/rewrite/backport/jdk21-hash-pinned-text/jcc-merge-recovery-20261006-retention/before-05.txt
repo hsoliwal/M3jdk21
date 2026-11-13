@@ -24,7 +24,7 @@ class RetentionAuditTest(unittest.TestCase):
 
         (self.repo / "src").mkdir()
         (self.repo / "recipes").mkdir()
-        (self.repo / "m3/history").mkdir(parents=True)
+        (self.repo / "make/m3/history").mkdir(parents=True)
         self.a = b"class A {}\n"
         self.b = b"class B {}\n"
         (self.repo / "src/A.java").write_bytes(self.a)
@@ -34,7 +34,7 @@ class RetentionAuditTest(unittest.TestCase):
             "src/B.java\tABSENT\t" + hashlib.sha256(self.b).hexdigest() + "\tB.txt\n"
         )
         (self.repo / "recipes/cap.manifest.tsv").write_text(manifest, encoding="utf-8")
-        (self.repo / "m3/history/RETAINED_CAPABILITIES.tsv").write_text(
+        (self.repo / "make/m3/history/RETAINED_CAPABILITIES.tsv").write_text(
             "capability_id\tmanifest_path\n"
             "cap\trecipes/cap.manifest.tsv\n",
             encoding="utf-8",
@@ -53,12 +53,12 @@ class RetentionAuditTest(unittest.TestCase):
         first = inspect(
             self.repo,
             self.baseline,
-            "m3/history/RETAINED_CAPABILITIES.tsv",
+            "make/m3/history/RETAINED_CAPABILITIES.tsv",
         )
         second = inspect(
             self.repo,
             self.baseline,
-            "m3/history/RETAINED_CAPABILITIES.tsv",
+            "make/m3/history/RETAINED_CAPABILITIES.tsv",
         )
         self.assertEqual(first, second)
         self.assertEqual(1, first["capabilities"])
@@ -77,7 +77,7 @@ class RetentionAuditTest(unittest.TestCase):
         result = inspect(
             self.repo,
             head,
-            "m3/history/RETAINED_CAPABILITIES.tsv",
+            "make/m3/history/RETAINED_CAPABILITIES.tsv",
         )
         self.assertEqual(0, result["retained_exact"])
         self.assertEqual(1, result["present_drifted_review"])
@@ -93,7 +93,7 @@ class RetentionAuditTest(unittest.TestCase):
         result = inspect(
             self.repo,
             self.baseline,
-            "m3/history/RETAINED_CAPABILITIES.tsv",
+            "make/m3/history/RETAINED_CAPABILITIES.tsv",
         )
         self.assertEqual(2, result["retained_exact"])
 
@@ -107,9 +107,9 @@ class RetentionAuditTest(unittest.TestCase):
         self.git("commit", "-m", "unsorted manifest")
         head = self.git("rev-parse", "HEAD")
         with self.assertRaisesRegex(ValueError, "sorted"):
-            inspect(self.repo, head, "m3/history/RETAINED_CAPABILITIES.tsv")
+            inspect(self.repo, head, "make/m3/history/RETAINED_CAPABILITIES.tsv")
 
-        (self.repo / "m3/history/RETAINED_CAPABILITIES.tsv").write_text(
+        (self.repo / "make/m3/history/RETAINED_CAPABILITIES.tsv").write_text(
             "capability_id\tmanifest_path\n"
             "cap\t../escape.tsv\n",
             encoding="utf-8",
@@ -118,13 +118,13 @@ class RetentionAuditTest(unittest.TestCase):
         self.git("commit", "-m", "unsafe catalogue")
         unsafe = self.git("rev-parse", "HEAD")
         with self.assertRaisesRegex(ValueError, "noncanonical"):
-            inspect(self.repo, unsafe, "m3/history/RETAINED_CAPABILITIES.tsv")
+            inspect(self.repo, unsafe, "make/m3/history/RETAINED_CAPABILITIES.tsv")
 
     def test_write_is_deterministic_and_refuses_existing_output(self):
         result = inspect(
             self.repo,
             self.baseline,
-            "m3/history/RETAINED_CAPABILITIES.tsv",
+            "make/m3/history/RETAINED_CAPABILITIES.tsv",
         )
         output = self.home / "out"
         write(result, output)

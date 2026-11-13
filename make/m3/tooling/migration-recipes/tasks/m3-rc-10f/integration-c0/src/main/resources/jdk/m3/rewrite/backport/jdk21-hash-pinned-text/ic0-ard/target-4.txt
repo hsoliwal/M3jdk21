@@ -31,13 +31,13 @@ final class M3A3MasteryReceiptWorkflowRecipeTest {
                 Map.of(
                         ".github/workflows/m3-a3.yml",
                         resource(BEFORE_ROOT + "workflow.yml"),
-                        "m3/docs/a3-lab.md",
+                        "doc/m3/a3-lab.md",
                         resource(BEFORE_ROOT + "a3-lab.md"),
-                        "m3/docs/a3-mastery.md",
+                        "doc/m3/a3-mastery.md",
                         resource(BEFORE_ROOT + "a3-mastery.md"),
-                        "m3/docs/a3.md",
+                        "doc/m3/a3.md",
                         resource(BEFORE_ROOT + "a3.md"),
-                        "m3/tooling/a3/pom.xml",
+                        "make/m3/tooling/a3/pom.xml",
                         resource(BEFORE_ROOT + "pom.xml"));
 
         Recipe recipe = new M3Jdk21HashPinnedTextSnapshotRecipe(CRATE);
@@ -51,19 +51,19 @@ final class M3A3MasteryReceiptWorkflowRecipeTest {
                 changed.get(".github/workflows/m3-a3.yml")
                         .contains("--mastery-root $REPO"));
         assertTrue(
-                changed.get("m3/docs/a3-lab.md")
+                changed.get("doc/m3/a3-lab.md")
                         .contains("48 x 17 = 816 result rows"));
         assertTrue(
-                changed.get("m3/docs/a3-mastery.md")
+                changed.get("doc/m3/a3-mastery.md")
                         .contains("## A3M receipt gate"));
         assertTrue(
-                changed.get("m3/docs/a3.md")
+                changed.get("doc/m3/a3.md")
                         .contains("A3M — master the retained FILE DAG"));
         assertTrue(
-                changed.get("m3/tooling/a3/pom.xml")
+                changed.get("make/m3/tooling/a3/pom.xml")
                         .contains("m3-a3-mastery-receipt-delivery"));
         assertTrue(
-                changed.get("m3/docs/a3-mastery.md")
+                changed.get("doc/m3/a3-mastery.md")
                         .contains("rewrite:dryRunNoFork"));
 
         Map<String, String> converged = new LinkedHashMap<>(before);

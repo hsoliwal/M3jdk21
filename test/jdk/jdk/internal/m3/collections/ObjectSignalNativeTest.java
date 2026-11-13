@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
  * dispatching side runs the native kernel for 256 words and more. Under m3.collections.all.native.required the library
  * must be loaded.
  */
-//FLLDCIM: TOP - native vs Java kernel parity of ObjectSignalOps; recipe m3/collections/qualification/object-signal-native-20261107
+//FLLDCIM: TOP - native vs Java kernel parity of ObjectSignalOps; recipe make/m3/collections/qualification/object-signal-native-20261107
 final class ObjectSignalNativeTest {
     private static final int[] WORDS = {0, 1, 2, 255, 256, 257, 300, 1024};
     private static final long[] EDGE = {0L, -1L, 1L, Long.MIN_VALUE, Long.MAX_VALUE, 0x5555_5555_5555_5555L,

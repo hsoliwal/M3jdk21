@@ -221,7 +221,7 @@
         "recipe": {
           "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-source-recovery-handoff-20261005",
           "version": "0.1.0-SNAPSHOT",
-          "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+          "path": "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
           "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
           "preconditions": [
             "All four existing E3 preimages at 0994ecd65e86600f417f4d8702838d8c2663af61; canonical map SHA256 61818898ef6c092ddad2c1ee4cfe7508199912ff0a1f2d5c2a51ad6695d040c8.",
@@ -288,7 +288,7 @@
         "recipe": {
           "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-handoff-20261005",
           "version": "0.1.0-SNAPSHOT",
-          "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+          "path": "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
           "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
           "preconditions": [
             "Exact canonical map preimage 67d40925b97a38c3c1a85f337806524ac590a540bd39647b3e4b0988f2ae3fbb.",
@@ -502,7 +502,7 @@
         "recipe": {
           "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-source-recovery-handoff-20261005",
           "version": "0.1.0-SNAPSHOT",
-          "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+          "path": "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
           "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
           "preconditions": [
             "All four existing E3 preimages at 0994ecd65e86600f417f4d8702838d8c2663af61; canonical map SHA256 61818898ef6c092ddad2c1ee4cfe7508199912ff0a1f2d5c2a51ad6695d040c8.",
@@ -570,7 +570,7 @@
         "recipe": {
           "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-handoff-20261005",
           "version": "0.1.0-SNAPSHOT",
-          "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+          "path": "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
           "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
           "preconditions": [
             "Exact canonical map preimage 67d40925b97a38c3c1a85f337806524ac590a540bd39647b3e4b0988f2ae3fbb.",
@@ -584,7 +584,7 @@
   },
   "current_operational_preimages": [
     {
-      "path": "m3/docs/jcc-source-handoff.md",
+      "path": "doc/m3/jcc-source-handoff.md",
       "ref": "b71ee5bf88398fb80961c13db03e8c675fb445ce",
       "file": "files/current/m3/docs/jcc-source-handoff.md",
       "bytes": 17031,
@@ -593,7 +593,7 @@
       "tool_envelope": "calls/current_jcc-source-handoff.md.json"
     },
     {
-      "path": "m3/docs/name-mapping.json",
+      "path": "doc/m3/name-mapping.json",
       "ref": "b71ee5bf88398fb80961c13db03e8c675fb445ce",
       "file": "files/current/m3/docs/name-mapping.json",
       "bytes": 235299,
@@ -602,7 +602,7 @@
       "tool_envelope": "calls/current_name-mapping.json.json"
     },
     {
-      "path": "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
+      "path": "make/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
       "ref": "b71ee5bf88398fb80961c13db03e8c675fb445ce",
       "file": "files/current/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
       "bytes": 107504,
@@ -611,7 +611,7 @@
       "tool_envelope": "calls/current_root-coverage-obligations.tsv.json"
     },
     {
-      "path": "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
+      "path": "make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
       "ref": "b71ee5bf88398fb80961c13db03e8c675fb445ce",
       "file": "files/current/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
       "bytes": 24139,
@@ -622,10 +622,10 @@
   ],
   "guard_comparison": [
     {
-      "path": "m3/docs/name-mapping.schema.json",
+      "path": "doc/m3/name-mapping.schema.json",
       "prior_sha256": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
       "current": {
-        "path": "m3/docs/name-mapping.schema.json",
+        "path": "doc/m3/name-mapping.schema.json",
         "ref": "b71ee5bf88398fb80961c13db03e8c675fb445ce",
         "file": "files/current/m3/docs/name-mapping.schema.json",
         "bytes": 16827,
@@ -636,10 +636,10 @@
       "equal_prior": true
     },
     {
-      "path": "m3/migration/migration.py",
+      "path": "make/m3/migration/migration.py",
       "prior_sha256": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e",
       "current": {
-        "path": "m3/migration/migration.py",
+        "path": "make/m3/migration/migration.py",
         "ref": "b71ee5bf88398fb80961c13db03e8c675fb445ce",
         "file": "files/current/m3/migration/migration.py",
         "bytes": 23333,
@@ -650,10 +650,10 @@
       "equal_prior": true
     },
     {
-      "path": "m3/migration/recipe.py",
+      "path": "make/m3/migration/recipe.py",
       "prior_sha256": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628",
       "current": {
-        "path": "m3/migration/recipe.py",
+        "path": "make/m3/migration/recipe.py",
         "ref": "b71ee5bf88398fb80961c13db03e8c675fb445ce",
         "file": "files/current/m3/migration/recipe.py",
         "bytes": 9860,
@@ -664,10 +664,10 @@
       "equal_prior": true
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "path": "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
       "prior_sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
       "current": {
-        "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+        "path": "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
         "ref": "b71ee5bf88398fb80961c13db03e8c675fb445ce",
         "file": "files/current/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
         "bytes": 12032,
@@ -678,10 +678,10 @@
       "equal_prior": true
     },
     {
-      "path": "m3/tooling/migration-recipes/pom.xml",
+      "path": "make/m3/tooling/migration-recipes/pom.xml",
       "prior_sha256": "3eb73bbf38c0c591b8f714f6e9923eaa25a35b5ffc7f0512b8ec7fd3602b5531",
       "current": {
-        "path": "m3/tooling/migration-recipes/pom.xml",
+        "path": "make/m3/tooling/migration-recipes/pom.xml",
         "ref": "b71ee5bf88398fb80961c13db03e8c675fb445ce",
         "file": "files/current/m3/tooling/migration-recipes/pom.xml",
         "bytes": 3383,
@@ -706,10 +706,10 @@
       "equal_prior": true
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+      "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
       "prior_sha256": "8006b173253ea7502efe7f7a77738b65f9df9e2871d4d6c29ff4fb8fb058c8c6",
       "current": {
-        "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+        "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
         "ref": "b71ee5bf88398fb80961c13db03e8c675fb445ce",
         "file": "files/current/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
         "bytes": 396,

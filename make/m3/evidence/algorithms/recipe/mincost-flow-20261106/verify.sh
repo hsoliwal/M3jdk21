@@ -46,4 +46,4 @@ if [ -n "${BASELINE_CLASSES:-}" ]; then
     [ "$same" -eq "$total" ] || { echo "UNTOUCHED FAIL $same/$total"; exit 1; }
     echo "UNTOUCHED PASS master_classes=$total identical=$same"
 fi
-"$PY" -I "$ROOT/m3/tooling/jdk-naming/jdk_naming.py" plan --root "$ROOT" --only m3/algorithms/ | tail -n 1
+"$PY" -I "$ROOT/make/m3/tooling/jdk-naming/jdk_naming.py" plan --root "$ROOT" --only m3/algorithms/ | tail -n 1

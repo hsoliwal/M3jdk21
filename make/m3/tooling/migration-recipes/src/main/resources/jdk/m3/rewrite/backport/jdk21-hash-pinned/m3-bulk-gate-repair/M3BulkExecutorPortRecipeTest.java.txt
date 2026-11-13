@@ -32,7 +32,7 @@ final class M3BulkExecutorPortRecipeTest {
                 new M3Jdk21HashPinnedSnapshotRecipe(M3BulkExecutorPortRecipe.CRATE)
                         .targetPaths());
         assertEquals(
-                List.of("m3/compatibility/m3-bulk-executor-receipt-20261008.tsv"),
+                List.of("make/m3/compatibility/m3-bulk-executor-receipt-20261008.tsv"),
                 new M3Jdk21HashPinnedTextSnapshotRecipe(M3BulkExecutorPortRecipe.CRATE)
                         .targetPaths());
     }

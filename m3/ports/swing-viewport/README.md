@@ -7,7 +7,7 @@ Packed Swing models that follow the M3 viewport laws on a stock JDK 21:
 - state in engine bit lanes and patterns, data in columnar primitive arrays;
 - every node or row object handed out is a proxy `(model, key, generation)`.
 
-Design: [`m3/docs/m3-swing-awt-viewport.md`](../../docs/m3-swing-awt-viewport.md). The residency engine under
+Design: [`doc/m3/m3-swing-awt-viewport.md`](../../../doc/m3/m3-swing-awt-viewport.md). The residency engine under
 `engine/` comes from the hash-pinned rename recipe of M3jdk21 #826; see `THIRD_PARTY_NOTICES.md`.
 
 ```

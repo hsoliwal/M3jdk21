@@ -57,7 +57,7 @@ def verify(
 ) -> tuple[int, int]:
     root = repo.resolve(strict=True)
     resource_root = root / (
-        "m3/tooling/migration-recipes/src/main/resources/"
+        "make/m3/tooling/migration-recipes/src/main/resources/"
         "jdk/m3/rewrite/backport/jdk21-hash-pinned"
     )
     catalogue = resource_root / "j485-current-catalogue.tsv"
@@ -102,7 +102,7 @@ def verify(
 
 def main(argv: list[str] | None = None) -> int:
     args = sys.argv[1:] if argv is None else argv
-    repo = Path(args[0]) if args else Path(__file__).resolve().parents[4]
+    repo = Path(args[0]) if args else Path(__file__).resolve().parents[5]
     guards, mutations = verify(repo)
     print(f"J485_CURRENT_TREE_PASS guards={guards} mutations={mutations}")
     return 0

@@ -38,7 +38,7 @@ adaptation, while API descriptor tests protect callers.
 
 ## Qualification and limits
 
-`mvn -B -ntp -f m3/tooling/lane28/pom.xml verify` runs the restored 12 checks plus
+`mvn -B -ntp -f make/m3/tooling/lane28/pom.xml verify` runs the restored 12 checks plus
 compiler-boundary evidence and seven sparse-fill checks (20 total). Java 21.0.8+9
 and Maven 3.9.9 were run offline locally. The original 12 Java/JNI checks also
 passed with nonrecovering UBSan. Eleven Python tests protect the strict XML

@@ -47,9 +47,9 @@ def main():
     candidate = qualified["candidate"]
     if set(qualified["outputs"]) != {
         RUNTIME, TEST_ROOT + "/M3RuntimeProgressFacade.java", TEST_ROOT + "/M3RuntimeLegacyClient.java",
-        "m3/runtime-integration/runtime-progress-facade-20261018/CATALOGUE.tsv",
-        "m3/runtime-integration/runtime-progress-facade-20261018/README.md",
-        "m3/runtime-integration/runtime-progress-facade-20261018/RECEIVING-MAP.json",
+        "make/m3/runtime-integration/runtime-progress-facade-20261018/CATALOGUE.tsv",
+        "make/m3/runtime-integration/runtime-progress-facade-20261018/README.md",
+        "make/m3/runtime-integration/runtime-progress-facade-20261018/RECEIVING-MAP.json",
     }:
         raise ValueError("unexpected Runtime facade recipe target set")
     closure = json.loads(args.source_receipt.read_text())

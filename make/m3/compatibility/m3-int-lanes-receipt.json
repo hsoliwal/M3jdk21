@@ -112,7 +112,7 @@
       "e2cf915688",
       "062733f443"
     ],
-    "conflictResolved": "m3/collections/JDK_FAMILY_MAP.tsv: master's EnumMap/EnumSet row kept, the three int rows appended",
+    "conflictResolved": "make/m3/collections/JDK_FAMILY_MAP.tsv: master's EnumMap/EnumSet row kept, the three int rows appended",
     "targetsUnchanged": true
   }
 }

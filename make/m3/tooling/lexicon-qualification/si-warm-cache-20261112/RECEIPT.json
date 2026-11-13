@@ -12,7 +12,7 @@
     "sha256": "efaf8b1e861682100a61fca31f774f71978f9a6cc7b8abe01c893b79e82ff1ba",
     "gitBlob": "ef99594a076ed23c162d40e97e423d961869b30e"
   },
-  "testPath": "m3/tooling/lexicon-qualification/src/test/java/jdk/m3/text/SharedLexiconCatalogSiWarmTest.java",
+  "testPath": "make/m3/tooling/lexicon-qualification/src/test/java/jdk/m3/text/SharedLexiconCatalogSiWarmTest.java",
   "test": {
     "bytes": 17195,
     "sha256": "f7845e7d7ebc165ca13eb76f677ab050080bd6b12fa509abe35e35962d69b79c",

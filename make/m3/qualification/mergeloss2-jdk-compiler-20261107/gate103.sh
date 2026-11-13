@@ -1,9 +1,9 @@
 #!/bin/bash
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-# gate103.sh <tree> <fix-dir> <out> : MERGELOSS2_LEAF103_GATE v1, the phases of m3/tooling/module-packs/parser/build.py
-# (after m3/qualification/loss-guard-restore-20261106/m3astpc-pr2357/parser_pack_gate.sh) on stock JDK 21.
-#   <tree>    archive of master: src/jdk.compiler/share/classes, m3/tooling/module-packs/parser and
+# gate103.sh <tree> <fix-dir> <out> : MERGELOSS2_LEAF103_GATE v1, the phases of make/m3/tooling/module-packs/parser/build.py
+# (after make/m3/qualification/loss-guard-restore-20261106/m3astpc-pr2357/parser_pack_gate.sh) on stock JDK 21.
+#   <tree>    archive of master: src/jdk.compiler/share/classes, make/m3/tooling/module-packs/parser and
 #             m3/qualification/master-landing-20261028/retained-variants/pr1559
 #   <fix-dir> M3AST.java, M3ASTPC.java, JavaCompiler.java as written by apply.py
 # Per side (live = master, fix = live + the three restored owners):
@@ -15,7 +15,7 @@
 # fix only: the origin's own M3ASTScopeContract (retained-variants/pr1559, not committed) compiled and run the same way.
 set -u
 J="${JAVA21:-C:/Program Files/Java/jdk-21}/bin"; T=$(cygpath -m "$1"); FIX=$(cygpath -m "$2"); O=$(cygpath -m "$3")
-P=m3/tooling/module-packs/parser; C=src/jdk.compiler/share/classes
+P=make/m3/tooling/module-packs/parser; C=src/jdk.compiler/share/classes
 M2=S:/m3-scratch/eb-conv/m2; EXTRA="$M2/org/xerial/sqlite-jdbc/3.45.1.0/sqlite-jdbc-3.45.1.0.jar;$M2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar"
 OWNERS="com/sun/source/util/M3AST.java com/sun/tools/javac/m3/M3ASTPC.java com/sun/tools/javac/m3/M3CompilerPatternHints.java com/sun/tools/javac/m3/M3PrimitiveImageCompiler.java com/sun/tools/javac/main/JavaCompiler.java"
 TMPD=S:/m3-scratch/eb-conv/ml2singles/tmp

@@ -18,7 +18,7 @@
  * Changed by Synexia (2026-10-31): zero-allocation-hashing 0.16 (Apache License 2.0) absorbed into java.base
  * as jdk.internal.m3.hash; the changes are listed in src/java.base/share/legal/zero-allocation-hashing.md.
  * Changed by Synexia (2026-11-06): the stripe round, lane merge and tail of xxHash64 are package-private atoms
- * that M3XxHash64Streaming composes too (recipe m3/qualification/hash-xxhash64-streaming-20261106).
+ * that M3XxHash64Streaming composes too (recipe make/m3/qualification/hash-xxhash64-streaming-20261106).
  */
 package jdk.internal.m3.hash;
 
@@ -30,18 +30,18 @@ import static java.nio.ByteOrder.LITTLE_ENDIAN;
  */
 class XxHash {
     //FLLDCIM: M3 - LITERAL_CONSTANTS v1.1: this class's magic literals, named by role (user rule: no magic numbers, no floating strings)
-    //FLLDCIM: HPCPOP - XXH64_KERNEL_ATOMS v1: package-private for M3XxHash64Streaming (one xxHash64 kernel in java.base; recipe m3/qualification/hash-xxhash64-streaming-20261106)
+    //FLLDCIM: HPCPOP - XXH64_KERNEL_ATOMS v1: package-private for M3XxHash64Streaming (one xxHash64 kernel in java.base; recipe make/m3/qualification/hash-xxhash64-streaming-20261106)
     /** Bytes of one stripe: four 64-bit lanes. */
     static final int STRIPE_BYTES = 32;
     /** Rotation of the round function. */
     private static final int ROUND_ROTATION = 31;
-    //FLLDCIM: HPCPOP - XXH64_KERNEL_ATOMS v1: package-private for M3XxHash64Streaming (one xxHash64 kernel in java.base; recipe m3/qualification/hash-xxhash64-streaming-20261106)
+    //FLLDCIM: HPCPOP - XXH64_KERNEL_ATOMS v1: package-private for M3XxHash64Streaming (one xxHash64 kernel in java.base; recipe make/m3/qualification/hash-xxhash64-streaming-20261106)
     /** Offset of the second lane in a stripe. */
     static final int LANE_2_OFFSET = 8;
-    //FLLDCIM: HPCPOP - XXH64_KERNEL_ATOMS v1: package-private for M3XxHash64Streaming (one xxHash64 kernel in java.base; recipe m3/qualification/hash-xxhash64-streaming-20261106)
+    //FLLDCIM: HPCPOP - XXH64_KERNEL_ATOMS v1: package-private for M3XxHash64Streaming (one xxHash64 kernel in java.base; recipe make/m3/qualification/hash-xxhash64-streaming-20261106)
     /** Offset of the third lane in a stripe. */
     static final int LANE_3_OFFSET = 16;
-    //FLLDCIM: HPCPOP - XXH64_KERNEL_ATOMS v1: package-private for M3XxHash64Streaming (one xxHash64 kernel in java.base; recipe m3/qualification/hash-xxhash64-streaming-20261106)
+    //FLLDCIM: HPCPOP - XXH64_KERNEL_ATOMS v1: package-private for M3XxHash64Streaming (one xxHash64 kernel in java.base; recipe make/m3/qualification/hash-xxhash64-streaming-20261106)
     /** Offset of the fourth lane in a stripe. */
     static final int LANE_4_OFFSET = 24;
     /** Rotation of the second lane when the lanes merge. */
@@ -74,7 +74,7 @@ class XxHash {
     private static final long P4 = -8796714831421723037L;
     private static final long P5 = 2870177450012600261L;
 
-    //FLLDCIM: HPCPOP - XXH64_KERNEL_ATOMS v1: the one-shot composes the stripe round, the lane merge and the tail atoms below; M3XxHash64Streaming composes the same atoms over its scratch stripe, so java.base carries one xxHash64 kernel (recipe m3/qualification/hash-xxhash64-streaming-20261106)
+    //FLLDCIM: HPCPOP - XXH64_KERNEL_ATOMS v1: the one-shot composes the stripe round, the lane merge and the tail atoms below; M3XxHash64Streaming composes the same atoms over its scratch stripe, so java.base carries one xxHash64 kernel (recipe make/m3/qualification/hash-xxhash64-streaming-20261106)
     static <T> long xxHash64(long seed, T input, Access<T> access, long off, long length) {
         long hash;
         long remaining = length;

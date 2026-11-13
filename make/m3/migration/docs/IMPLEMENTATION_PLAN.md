@@ -1,9 +1,9 @@
 # MIndex-to-M3 first reproducible port implementation plan
 
 **Goal:** Establish repeatable pinned porting and one independently testable prefix-facts specialization, without changing the existing text owners or the installed JDK.
-**Architecture:** Retain the canonical naming authority at m3/docs/name-mapping.json; extend its history with versioned capability records. A dependency-free Java source-bound recipe verifies input/output closure and fails closed on drift. A separate algorithm module consumes the existing sealed M3StringPiece view. Python with tooling-only jsonschema 4.26.0 validation follows the target's existing recipe tooling convention and does not enter java.base.
+**Architecture:** Retain the canonical naming authority at doc/m3/name-mapping.json; extend its history with versioned capability records. A dependency-free Java source-bound recipe verifies input/output closure and fails closed on drift. A separate algorithm module consumes the existing sealed M3StringPiece view. Python with tooling-only jsonschema 4.26.0 validation follows the target's existing recipe tooling convention and does not enter java.base.
 **Tech stack:** Java 21; Maven tooling descriptor; Python 3 and jsonschema 4.26.0 for manifest validation; standard-library packaging. Native OpenJDK build remains unchanged.
-**Spec:** User's 2026-10-02 MIndex family migration specification; authoritative design m3/docs/shared-atom-concatenation.md in target PR7. This plan is a dependency-ready tranche, not a substitute for its twelve passes.
+**Spec:** User's 2026-10-02 MIndex family migration specification; authoritative design doc/m3/shared-atom-concatenation.md in target PR7. This plan is a dependency-ready tranche, not a substitute for its twelve passes.
 
 ## Global constraints
 Inventory before changes; no blind type-prefix substitution; no new canonical text storage; no public API removals; no merges; no private source fixtures in public CI; no unsupported test/benchmark claims. Preserve OpenJDK licensing. Keep all three routes and full inventory explicitly open until their gates pass.

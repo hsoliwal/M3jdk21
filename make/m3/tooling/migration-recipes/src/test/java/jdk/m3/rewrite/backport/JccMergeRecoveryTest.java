@@ -194,7 +194,7 @@ final class JccMergeRecoveryTest {
 
     @Test
     void cataloguePreservesTheTwoProductRowsAndAddsOnly443HistoricalCustodyObligations() throws IOException {
-        Target catalogue = targets().stream().filter(row -> row.path().equals("m3/history/RETAINED_CAPABILITIES.tsv"))
+        Target catalogue = targets().stream().filter(row -> row.path().equals("make/m3/history/RETAINED_CAPABILITIES.tsv"))
                 .findFirst().orElseThrow();
         String before = resource(ROOT + catalogue.crate() + "/" + catalogue.before());
         String after = resource(ROOT + catalogue.crate() + "/" + catalogue.after());
@@ -203,7 +203,7 @@ final class JccMergeRecoveryTest {
         var additions = after.substring(before.length()).lines().toList();
         assertEquals(2, additions.size());
         for (int i = 0; i < 2; i++) {
-            String path = "m3/tooling/migration-recipes/src/main/resources" + ROOT + CRATES.get(i) + "/manifest.tsv";
+            String path = "make/m3/tooling/migration-recipes/src/main/resources" + ROOT + CRATES.get(i) + "/manifest.tsv";
             assertEquals(CRATES.get(i) + "\t" + path, additions.get(i));
         }
         assertEquals(443, COUNTS.get(0) + COUNTS.get(1));

@@ -16,7 +16,7 @@ import xml.etree.ElementTree as ET
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--repository", type=Path, default=Path(__file__).resolve().parents[5])
+    parser.add_argument("--repository", type=Path, default=Path(__file__).resolve().parents[6])
     parser.add_argument("--output", type=Path)
     parser.add_argument("--maven", default="mvn")
     parser.add_argument("--maven-repository", type=Path)

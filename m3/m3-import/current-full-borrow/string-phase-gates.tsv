@@ -2,7 +2,7 @@ gate	state	evidence_or_requirement
 SOURCE_ESTATE	PINNED	Synexia full-borrow estate revision 296323958b1019edd59b60b9c05cb148d024cfe5
 SOURCE_STRING_ATOMS	PINNED	string-source-target-map.tsv source Git blobs
 TARGET_OWNER_CUSTODY	PINNED	string-source-target-map.tsv target Git blobs
-CANONICAL_NAME_MAPPING	PINNED	m3/docs/name-mapping.json MIndexString -> java.lang.M3String
+CANONICAL_NAME_MAPPING	PINNED	doc/m3/name-mapping.json MIndexString -> java.lang.M3String
 LICENSE_PROVENANCE	PINNED	Apache-2.0 first-party authored expression; preserve NOTICE/provenance
 COPYRIGHT_NOTICE	PINNED	Copyright 2026 Hitesh Soliwal and contributors
 ABSTRACT_IDEA_BOUNDARY	PINNED	PROVENANCE_NOT_COPYRIGHTED_EXPRESSION

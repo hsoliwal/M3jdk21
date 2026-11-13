@@ -32,7 +32,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/BASE_TREE_MODEL.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/BASE_TREE_MODEL.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/BASE_TREE_MODEL.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/BASE_TREE_MODEL.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/BASE_TREE_MODEL.json"
@@ -48,7 +48,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/RAW_READBACK_FAILURE_OBSERVATION.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/RAW_READBACK_FAILURE_OBSERVATION.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/RAW_READBACK_FAILURE_OBSERVATION.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/RAW_READBACK_FAILURE_OBSERVATION.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/RAW_READBACK_FAILURE_OBSERVATION.json"
@@ -64,7 +64,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/RAW_VERIFICATION_TREE_PLAN.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/RAW_VERIFICATION_TREE_PLAN.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/RAW_VERIFICATION_TREE_PLAN.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/RAW_VERIFICATION_TREE_PLAN.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/RAW_VERIFICATION_TREE_PLAN.json"
@@ -80,7 +80,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/audit_base.py",
       "planned_receiving_copy_name": "custody-v3/source-publisher/audit_base.py",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/audit_base.py",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/audit_base.py",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/audit_base.py"
@@ -96,7 +96,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/BEFORE_BRANCH_CUSTODY.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/BEFORE_BRANCH_CUSTODY.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/BEFORE_BRANCH_CUSTODY.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/BEFORE_BRANCH_CUSTODY.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -111,7 +111,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/BEFORE_BRANCH_EXECUTION.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/BEFORE_BRANCH_EXECUTION.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/BEFORE_BRANCH_EXECUTION.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/BEFORE_BRANCH_EXECUTION.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -126,7 +126,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/BRANCH_ABSENCE_BEFORE_CREATE.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/BRANCH_ABSENCE_BEFORE_CREATE.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/BRANCH_ABSENCE_BEFORE_CREATE.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/BRANCH_ABSENCE_BEFORE_CREATE.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -141,7 +141,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/BRANCH_CREATION.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/BRANCH_CREATION.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/BRANCH_CREATION.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/BRANCH_CREATION.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -156,7 +156,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/BRANCH_GET.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/BRANCH_GET.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/BRANCH_GET.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/BRANCH_GET.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -171,7 +171,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/COMPLETED_TRANSPORT.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/COMPLETED_TRANSPORT.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/COMPLETED_TRANSPORT.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/COMPLETED_TRANSPORT.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -186,7 +186,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/FILE_READBACKS.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/FILE_READBACKS.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FILE_READBACKS.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FILE_READBACKS.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -201,7 +201,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/FINAL_COMMIT_CREATION.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/FINAL_COMMIT_CREATION.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FINAL_COMMIT_CREATION.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FINAL_COMMIT_CREATION.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -216,7 +216,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/FINAL_COMMIT_GET.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/FINAL_COMMIT_GET.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FINAL_COMMIT_GET.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FINAL_COMMIT_GET.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -231,7 +231,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/FINAL_PUBLICATION_EXECUTION.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/FINAL_PUBLICATION_EXECUTION.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FINAL_PUBLICATION_EXECUTION.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FINAL_PUBLICATION_EXECUTION.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -246,7 +246,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/FINAL_READBACK.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/FINAL_READBACK.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FINAL_READBACK.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FINAL_READBACK.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -261,7 +261,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/PREFLIGHT.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/PREFLIGHT.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/PREFLIGHT.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/PREFLIGHT.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -276,7 +276,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/PR_CREATION.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/PR_CREATION.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/PR_CREATION.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/PR_CREATION.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -291,7 +291,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/PUBLICATION_CUSTODY.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/PUBLICATION_CUSTODY.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/PUBLICATION_CUSTODY.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/PUBLICATION_CUSTODY.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -306,7 +306,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/final-file-calls/call-00.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-00.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-00.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-00.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -321,7 +321,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/final-file-calls/call-01.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-01.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-01.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-01.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -336,7 +336,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/final-file-calls/call-02.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-02.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-02.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-02.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -351,7 +351,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/final-file-calls/call-03.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-03.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-03.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-03.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -366,7 +366,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/final-file-calls/call-04.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-04.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-04.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-04.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -381,7 +381,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/final-file-calls/call-05.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-05.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-05.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-05.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -396,7 +396,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/final-file-calls/call-06.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-06.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-06.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-06.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -411,7 +411,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/final-file-calls/call-07.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-07.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-07.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-07.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -426,7 +426,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/final-file-calls/call-08.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-08.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-08.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-08.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -441,7 +441,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/final-file-calls/call-09.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-09.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-09.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-09.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -456,7 +456,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/final-file-calls/call-10.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-10.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-10.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-10.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -471,7 +471,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/final-file-calls/call-11.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-11.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-11.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-11.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -486,7 +486,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/final-file-calls/call-12.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-12.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-12.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-12.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -501,7 +501,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/final-file-calls/call-13.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-13.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-13.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-13.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -516,7 +516,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/final-file-calls/call-14.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-14.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-14.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-14.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -531,7 +531,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/final-file-calls/call-15.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-15.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-15.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-15.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -546,7 +546,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/final-file-calls/call-16.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-16.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-16.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-16.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -561,7 +561,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/final-file-calls/call-17.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-17.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-17.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-17.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -576,7 +576,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/final-file-calls/call-18.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-18.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-18.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-18.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -591,7 +591,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/final-file-calls/call-19.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-19.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-19.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-19.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -606,7 +606,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/final-file-calls/call-20.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-20.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-20.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-20.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -621,7 +621,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/final-file-calls/call-21.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-21.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-21.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-21.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -636,7 +636,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/final-file-calls/call-22.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-22.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-22.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-22.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -651,7 +651,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/final-publication-calls/commit.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/final-publication-calls/commit.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-publication-calls/commit.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-publication-calls/commit.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -666,7 +666,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/final-publication-calls/pull_request.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/final-publication-calls/pull_request.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-publication-calls/pull_request.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-publication-calls/pull_request.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -681,7 +681,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/final-publication-calls/ref.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/final-publication-calls/ref.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-publication-calls/ref.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-publication-calls/ref.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -696,7 +696,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/epoch-01/transport/INDEX.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/epoch-01/transport/INDEX.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/transport/INDEX.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/transport/INDEX.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/epoch-01/transport/INDEX.json"
@@ -712,7 +712,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/prepare_publication.py",
       "planned_receiving_copy_name": "custody-v3/source-publisher/prepare_publication.py",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/prepare_publication.py",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/prepare_publication.py",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/prepare_publication.py"
@@ -728,7 +728,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/raw-custody-v3/CUSTODY_INPUT.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/raw-custody-v3/CUSTODY_INPUT.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/CUSTODY_INPUT.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/CUSTODY_INPUT.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/raw-custody-v3/CUSTODY_INPUT.json"
@@ -744,7 +744,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/raw-custody-v3/PROBE_CUSTODY_RESULT.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/raw-custody-v3/PROBE_CUSTODY_RESULT.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/PROBE_CUSTODY_RESULT.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/PROBE_CUSTODY_RESULT.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/raw-custody-v3/PROBE_CUSTODY_RESULT.json"
@@ -760,7 +760,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/raw-custody-v3/PROBE_EXECUTION.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/raw-custody-v3/PROBE_EXECUTION.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/PROBE_EXECUTION.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/PROBE_EXECUTION.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/raw-custody-v3/PROBE_EXECUTION.json"
@@ -776,7 +776,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/raw-custody-v3/PROTOCOL.md",
       "planned_receiving_copy_name": "custody-v3/source-publisher/raw-custody-v3/PROTOCOL.md",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/PROTOCOL.md",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/PROTOCOL.md",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/raw-custody-v3/PROTOCOL.md"
@@ -792,7 +792,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/raw-custody-v3/create-call-0.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/raw-custody-v3/create-call-0.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/create-call-0.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/create-call-0.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/raw-custody-v3/create-call-0.json"
@@ -808,7 +808,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/raw-custody-v3/create-call-1.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/raw-custody-v3/create-call-1.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/create-call-1.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/create-call-1.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/raw-custody-v3/create-call-1.json"
@@ -824,7 +824,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/raw-custody-v3/create-call-2.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/raw-custody-v3/create-call-2.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/create-call-2.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/create-call-2.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/raw-custody-v3/create-call-2.json"
@@ -840,7 +840,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/raw-custody-v3/create-call-3.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/raw-custody-v3/create-call-3.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/create-call-3.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/create-call-3.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/raw-custody-v3/create-call-3.json"
@@ -856,7 +856,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/raw-custody-v3/draft-T01/raw_custody_v3.py",
       "planned_receiving_copy_name": "custody-v3/source-publisher/raw-custody-v3/draft-T01/raw_custody_v3.py",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/draft-T01/raw_custody_v3.py",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/draft-T01/raw_custody_v3.py",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -871,7 +871,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/raw-custody-v3/draft-T01/verify_publication_v3.py",
       "planned_receiving_copy_name": "custody-v3/source-publisher/raw-custody-v3/draft-T01/verify_publication_v3.py",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/draft-T01/verify_publication_v3.py",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/draft-T01/verify_publication_v3.py",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -886,7 +886,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/raw-custody-v3/trees/0b445a9f02146e1ef34f499ae801d0f9001b6313.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/raw-custody-v3/trees/0b445a9f02146e1ef34f499ae801d0f9001b6313.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/0b445a9f02146e1ef34f499ae801d0f9001b6313.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/0b445a9f02146e1ef34f499ae801d0f9001b6313.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/raw-custody-v3/trees/0b445a9f02146e1ef34f499ae801d0f9001b6313.json"
@@ -902,7 +902,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/raw-custody-v3/trees/1f7ac77c503cb40df683a7831d94b0c6a381b811.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/raw-custody-v3/trees/1f7ac77c503cb40df683a7831d94b0c6a381b811.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/1f7ac77c503cb40df683a7831d94b0c6a381b811.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/1f7ac77c503cb40df683a7831d94b0c6a381b811.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/raw-custody-v3/trees/1f7ac77c503cb40df683a7831d94b0c6a381b811.json"
@@ -918,7 +918,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/raw-custody-v3/trees/1f8b33bc67afb0a0537c93dddd7ed5d94476dd8a.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/raw-custody-v3/trees/1f8b33bc67afb0a0537c93dddd7ed5d94476dd8a.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/1f8b33bc67afb0a0537c93dddd7ed5d94476dd8a.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/1f8b33bc67afb0a0537c93dddd7ed5d94476dd8a.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/raw-custody-v3/trees/1f8b33bc67afb0a0537c93dddd7ed5d94476dd8a.json"
@@ -934,7 +934,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/raw-custody-v3/trees/2e1ea5ea0076af3e2947a20dcddf8b306249d46c.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/raw-custody-v3/trees/2e1ea5ea0076af3e2947a20dcddf8b306249d46c.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/2e1ea5ea0076af3e2947a20dcddf8b306249d46c.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/2e1ea5ea0076af3e2947a20dcddf8b306249d46c.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/raw-custody-v3/trees/2e1ea5ea0076af3e2947a20dcddf8b306249d46c.json"
@@ -950,7 +950,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/raw-custody-v3/trees/7de7c1ae7d22f70481a6dc0c5e81e3de73423e70.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/raw-custody-v3/trees/7de7c1ae7d22f70481a6dc0c5e81e3de73423e70.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/7de7c1ae7d22f70481a6dc0c5e81e3de73423e70.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/7de7c1ae7d22f70481a6dc0c5e81e3de73423e70.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/raw-custody-v3/trees/7de7c1ae7d22f70481a6dc0c5e81e3de73423e70.json"
@@ -966,7 +966,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/raw-custody-v3/trees/8582ac8a6a16142f1ee2b8151085238304fb7aa3.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/raw-custody-v3/trees/8582ac8a6a16142f1ee2b8151085238304fb7aa3.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/8582ac8a6a16142f1ee2b8151085238304fb7aa3.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/8582ac8a6a16142f1ee2b8151085238304fb7aa3.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/raw-custody-v3/trees/8582ac8a6a16142f1ee2b8151085238304fb7aa3.json"
@@ -982,7 +982,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/raw-custody-v3/trees/894e5ba1d9e4e747a308d05f7acb254614f3fe0c.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/raw-custody-v3/trees/894e5ba1d9e4e747a308d05f7acb254614f3fe0c.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/894e5ba1d9e4e747a308d05f7acb254614f3fe0c.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/894e5ba1d9e4e747a308d05f7acb254614f3fe0c.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/raw-custody-v3/trees/894e5ba1d9e4e747a308d05f7acb254614f3fe0c.json"
@@ -998,7 +998,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/raw-custody-v3/trees/89e0c45dbf11305c45c0574ab73486c66a8fe7b2.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/raw-custody-v3/trees/89e0c45dbf11305c45c0574ab73486c66a8fe7b2.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/89e0c45dbf11305c45c0574ab73486c66a8fe7b2.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/89e0c45dbf11305c45c0574ab73486c66a8fe7b2.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/raw-custody-v3/trees/89e0c45dbf11305c45c0574ab73486c66a8fe7b2.json"
@@ -1014,7 +1014,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/raw-custody-v3/trees/8de0927ad179c1a668e215fde234824f0b302797.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/raw-custody-v3/trees/8de0927ad179c1a668e215fde234824f0b302797.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/8de0927ad179c1a668e215fde234824f0b302797.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/8de0927ad179c1a668e215fde234824f0b302797.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/raw-custody-v3/trees/8de0927ad179c1a668e215fde234824f0b302797.json"
@@ -1030,7 +1030,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/raw-custody-v3/trees/9988b4d8f0482cb1e10e41b38e36fd79f5c7bc10.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/raw-custody-v3/trees/9988b4d8f0482cb1e10e41b38e36fd79f5c7bc10.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/9988b4d8f0482cb1e10e41b38e36fd79f5c7bc10.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/9988b4d8f0482cb1e10e41b38e36fd79f5c7bc10.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/raw-custody-v3/trees/9988b4d8f0482cb1e10e41b38e36fd79f5c7bc10.json"
@@ -1046,7 +1046,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/raw-custody-v3/trees/aee49a1388a9853f238d6360549181611d8168c4.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/raw-custody-v3/trees/aee49a1388a9853f238d6360549181611d8168c4.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/aee49a1388a9853f238d6360549181611d8168c4.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/aee49a1388a9853f238d6360549181611d8168c4.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/raw-custody-v3/trees/aee49a1388a9853f238d6360549181611d8168c4.json"
@@ -1062,7 +1062,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/raw-custody-v3/trees/bf2b8fe43cda47f0c6363c8d376f61419e647e4d.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/raw-custody-v3/trees/bf2b8fe43cda47f0c6363c8d376f61419e647e4d.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/bf2b8fe43cda47f0c6363c8d376f61419e647e4d.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/bf2b8fe43cda47f0c6363c8d376f61419e647e4d.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/raw-custody-v3/trees/bf2b8fe43cda47f0c6363c8d376f61419e647e4d.json"
@@ -1078,7 +1078,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/raw-custody-v3/trees/cac95ee10acb1ef18280347dcee30e626ff0e2b2.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/raw-custody-v3/trees/cac95ee10acb1ef18280347dcee30e626ff0e2b2.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/cac95ee10acb1ef18280347dcee30e626ff0e2b2.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/cac95ee10acb1ef18280347dcee30e626ff0e2b2.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/raw-custody-v3/trees/cac95ee10acb1ef18280347dcee30e626ff0e2b2.json"
@@ -1094,7 +1094,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/raw-custody-v3/trees/d7bce8c8d93693af06d95f1121257d65ca7d9f19.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/raw-custody-v3/trees/d7bce8c8d93693af06d95f1121257d65ca7d9f19.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/d7bce8c8d93693af06d95f1121257d65ca7d9f19.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/d7bce8c8d93693af06d95f1121257d65ca7d9f19.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/raw-custody-v3/trees/d7bce8c8d93693af06d95f1121257d65ca7d9f19.json"
@@ -1110,7 +1110,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/raw-custody-v3/trees/de28521cc91ed2316af7806f04d933543a3e3637.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/raw-custody-v3/trees/de28521cc91ed2316af7806f04d933543a3e3637.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/de28521cc91ed2316af7806f04d933543a3e3637.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/de28521cc91ed2316af7806f04d933543a3e3637.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/raw-custody-v3/trees/de28521cc91ed2316af7806f04d933543a3e3637.json"
@@ -1126,7 +1126,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/raw-custody-v3/trees/e6cb4eaa71784811361312b305d2723cf886ac1e.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/raw-custody-v3/trees/e6cb4eaa71784811361312b305d2723cf886ac1e.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/e6cb4eaa71784811361312b305d2723cf886ac1e.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/e6cb4eaa71784811361312b305d2723cf886ac1e.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/raw-custody-v3/trees/e6cb4eaa71784811361312b305d2723cf886ac1e.json"
@@ -1142,7 +1142,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/raw-custody-v3/trees/fa58808396946d716c50398bc880a9bc570148db.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/raw-custody-v3/trees/fa58808396946d716c50398bc880a9bc570148db.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/fa58808396946d716c50398bc880a9bc570148db.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/fa58808396946d716c50398bc880a9bc570148db.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/raw-custody-v3/trees/fa58808396946d716c50398bc880a9bc570148db.json"
@@ -1158,7 +1158,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/raw-custody-v3/verification-file-reads.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/raw-custody-v3/verification-file-reads.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/verification-file-reads.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/verification-file-reads.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/raw-custody-v3/verification-file-reads.json"
@@ -1174,7 +1174,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/raw_custody_v3.py",
       "planned_receiving_copy_name": "custody-v3/source-publisher/raw_custody_v3.py",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw_custody_v3.py",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw_custody_v3.py",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/raw_custody_v3.py"
@@ -1190,7 +1190,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/custody-v3/COMPANION_BINDING.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/custody-v3/COMPANION_BINDING.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/COMPANION_BINDING.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/COMPANION_BINDING.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1205,7 +1205,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/custody-v3/FILE_SEALS.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/custody-v3/FILE_SEALS.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/FILE_SEALS.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/FILE_SEALS.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1220,7 +1220,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/custody-v3/INPUT_SEALS.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/custody-v3/INPUT_SEALS.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/INPUT_SEALS.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/INPUT_SEALS.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1235,7 +1235,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/custody-v3/REVIEW.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/custody-v3/REVIEW.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/REVIEW.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/REVIEW.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1250,7 +1250,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/custody-v3/REVIEW.md",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/custody-v3/REVIEW.md",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/REVIEW.md",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/REVIEW.md",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1265,7 +1265,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/audit_base.py",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/custody-v3/inputs/audit_base.py",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/audit_base.py",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/audit_base.py",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1280,7 +1280,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/prepare_publication.py",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/custody-v3/inputs/prepare_publication.py",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/prepare_publication.py",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/prepare_publication.py",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1295,7 +1295,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/PROTOCOL.md",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/PROTOCOL.md",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/PROTOCOL.md",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/PROTOCOL.md",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1310,7 +1310,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/draft-T01/raw_custody_v3.py",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/draft-T01/raw_custody_v3.py",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/draft-T01/raw_custody_v3.py",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/draft-T01/raw_custody_v3.py",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1325,7 +1325,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/draft-T01/verify_publication_v3.py",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/draft-T01/verify_publication_v3.py",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/draft-T01/verify_publication_v3.py",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/draft-T01/verify_publication_v3.py",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1340,7 +1340,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw_custody_v3.py",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw_custody_v3.py",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw_custody_v3.py",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw_custody_v3.py",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1355,7 +1355,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/verify_publication.py",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/custody-v3/inputs/verify_publication.py",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/verify_publication.py",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/verify_publication.py",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1370,7 +1370,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/verify_publication_v3.py",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/custody-v3/inputs/verify_publication_v3.py",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/verify_publication_v3.py",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/verify_publication_v3.py",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1385,7 +1385,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/custody-v3/inspect_inputs.py",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/custody-v3/inspect_inputs.py",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inspect_inputs.py",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inspect_inputs.py",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1400,7 +1400,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/custody-v3/raw_custody_v3.py.T01-T02.diff",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/custody-v3/raw_custody_v3.py.T01-T02.diff",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/raw_custody_v3.py.T01-T02.diff",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/raw_custody_v3.py.T01-T02.diff",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1415,7 +1415,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/custody-v3/verify_publication_v3.py.T01-T02.diff",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/custody-v3/verify_publication_v3.py.T01-T02.diff",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/verify_publication_v3.py.T01-T02.diff",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/verify_publication_v3.py.T01-T02.diff",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1430,7 +1430,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/raw-readback-failure/FILE_SEALS.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/raw-readback-failure/FILE_SEALS.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/FILE_SEALS.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/FILE_SEALS.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1445,7 +1445,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/raw-readback-failure/INPUT_SEALS.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/raw-readback-failure/INPUT_SEALS.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/INPUT_SEALS.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/INPUT_SEALS.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1460,7 +1460,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/raw-readback-failure/READ_CAPABILITIES.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/raw-readback-failure/READ_CAPABILITIES.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/READ_CAPABILITIES.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/READ_CAPABILITIES.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1475,7 +1475,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/raw-readback-failure/REVIEW.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/raw-readback-failure/REVIEW.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/REVIEW.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/REVIEW.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1490,7 +1490,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/raw-readback-failure/REVIEW.md",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/raw-readback-failure/REVIEW.md",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/REVIEW.md",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/REVIEW.md",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1505,7 +1505,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/raw-readback-failure/inspect.py",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/raw-readback-failure/inspect.py",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/inspect.py",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/inspect.py",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1520,7 +1520,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/FETCH_FILE_CAPABILITY.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/raw-transport-adapter/FETCH_FILE_CAPABILITY.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/FETCH_FILE_CAPABILITY.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/FETCH_FILE_CAPABILITY.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1535,7 +1535,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/FILE_SEALS.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/raw-transport-adapter/FILE_SEALS.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/FILE_SEALS.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/FILE_SEALS.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1550,7 +1550,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/INPUT_SEALS.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/raw-transport-adapter/INPUT_SEALS.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/INPUT_SEALS.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/INPUT_SEALS.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1565,7 +1565,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/REVIEW.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/raw-transport-adapter/REVIEW.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/REVIEW.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/REVIEW.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1580,7 +1580,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/REVIEW.md",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/raw-transport-adapter/REVIEW.md",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/REVIEW.md",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/REVIEW.md",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1595,7 +1595,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/inspect.py",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/raw-transport-adapter/inspect.py",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/inspect.py",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/inspect.py",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1610,7 +1610,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/v2/FILE_SEALS.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/v2/FILE_SEALS.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/FILE_SEALS.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/FILE_SEALS.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1625,7 +1625,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/v2/INPUT_SEALS.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/v2/INPUT_SEALS.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/INPUT_SEALS.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/INPUT_SEALS.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1640,7 +1640,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/v2/REVIEW.md",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/v2/REVIEW.md",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/REVIEW.md",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/REVIEW.md",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1655,7 +1655,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/v2/audit_base.py.txt",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/v2/audit_base.py.txt",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/audit_base.py.txt",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/audit_base.py.txt",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1670,7 +1670,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/v2/prepare_publication.py.txt",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/v2/prepare_publication.py.txt",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/prepare_publication.py.txt",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/prepare_publication.py.txt",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1685,7 +1685,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/v2/v1-v2.diff",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/v2/v1-v2.diff",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/v1-v2.diff",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/v1-v2.diff",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1700,7 +1700,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/readback-static-review/v2/verify_publication.py.txt",
       "planned_receiving_copy_name": "custody-v3/source-publisher/readback-static-review/v2/verify_publication.py.txt",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/verify_publication.py.txt",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/verify_publication.py.txt",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1715,7 +1715,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/FILE_SEALS.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/FILE_SEALS.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/FILE_SEALS.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/FILE_SEALS.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1730,7 +1730,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/INPUT_SEALS.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/INPUT_SEALS.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/INPUT_SEALS.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/INPUT_SEALS.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1745,7 +1745,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/REVIEW.md",
       "planned_receiving_copy_name": "custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/REVIEW.md",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/REVIEW.md",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/REVIEW.md",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1760,7 +1760,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/FILE_SEALS.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/FILE_SEALS.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/FILE_SEALS.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/FILE_SEALS.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1775,7 +1775,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/INPUT_SEALS.json",
       "planned_receiving_copy_name": "custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/INPUT_SEALS.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/INPUT_SEALS.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/INPUT_SEALS.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1790,7 +1790,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/REVIEW.md",
       "planned_receiving_copy_name": "custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/REVIEW.md",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/REVIEW.md",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/REVIEW.md",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1805,7 +1805,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/T01_T02.diff",
       "planned_receiving_copy_name": "custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/T01_T02.diff",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/T01_T02.diff",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/T01_T02.diff",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1820,7 +1820,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/V2_V3.diff",
       "planned_receiving_copy_name": "custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/V2_V3.diff",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/V2_V3.diff",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/V2_V3.diff",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     },
@@ -1835,7 +1835,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/verify_publication.py",
       "planned_receiving_copy_name": "custody-v3/source-publisher/verify_publication.py",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/verify_publication.py",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/verify_publication.py",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/verify_publication.py"
@@ -1851,7 +1851,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/custody-v3/source-publisher/verify_publication_v3.py",
       "planned_receiving_copy_name": "custody-v3/source-publisher/verify_publication_v3.py",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/verify_publication_v3.py",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/verify_publication_v3.py",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE",
       "verified_prior_draft_copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/current-evidence/verify_publication_v3.py"
@@ -1867,7 +1867,7 @@
       ],
       "staged_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/files/source-manifest/FINAL_MANIFEST.json",
       "planned_receiving_copy_name": "source-manifest/FINAL_MANIFEST.json",
-      "planned_receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-manifest/FINAL_MANIFEST.json",
+      "planned_receiving_path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-manifest/FINAL_MANIFEST.json",
       "representation": "EXACT_ORIGINAL_FILE_BYTES",
       "carry_status": "DIRECTLY_CARRIED_EXACT_ORIGINAL_FILE"
     }

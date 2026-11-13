@@ -2,7 +2,7 @@
 # Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
 # SPDX-License-Identifier: Apache-2.0
 set -euo pipefail
-root=$(cd "$(dirname "$0")/../.." && pwd)
+root=$(cd "$(dirname "$0")/../../.." && pwd)
 : "${M3_TEST_JDK:?Set matched candidate}"
 : "${M3_BOOT_JDK:?Set original private Java21 compiler}"
 : "${M3_OWNER_SRC:?Set exact verified #7498 shared owner source closure}"
@@ -12,7 +12,7 @@ mapfile -t owners < <(find "$M3_OWNER_SRC" -name '*.java' ! -name SharedArrayNat
 "$M3_BOOT_JDK/bin/javac" -Xlint:all -Werror -d "$result/classes" "${owners[@]}" "$root"/m3/runtime-integration/tests/*.java "$root/m3/runtime-stage1/tests/JoinJni.java"
 gcc -std=c11 -Wall -Wextra -Werror -Wconversion -Wshadow -pedantic -shared -fPIC -I"$M3_BOOT_JDK/include" -I"$M3_BOOT_JDK/include/linux" "$root/m3/runtime-stage1/tests/join_jni.c" -o "$result/libjoinprobe.so"
 gcc -std=c11 -Wall -Wextra -Werror -Wconversion -Wshadow -pedantic -shared -fPIC -I"$M3_BOOT_JDK/include" -I"$M3_BOOT_JDK/include/linux" "$root/m3/runtime-segments/tests/segmented_jvmti.c" -o "$result/libsegmentsjvmti.so"
-python3 "$root/m3/runtime-integration/build-lexicon.py" "$result/test.m3lex"
+python3 "$root/make/m3/runtime-integration/build-lexicon.py" "$result/test.m3lex"
 "$M3_BOOT_JDK/bin/java" -cp "$result/classes" SharedOwnerFixture "$result/shared-owner" > "$result/owner-fixture.log"
 flags=(-ea -esa -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CreateCoredumpOnCrash --add-opens java.base/java.lang=ALL-UNNAMED -cp "$result/classes")
 for mode in mapped local;do

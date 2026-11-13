@@ -19,9 +19,9 @@ import org.openrewrite.text.PlainText;
 
 /** JUnit acceptance gate for the exact Synexia-to-M3JDK21 text receiver. */
 final class M3JepResidueProofGateReceiverRecipeTest {
-    private static final String QUEUE = "m3/backports/JEP_RESIDUE_QUEUE.tsv";
-    private static final String SOURCE = "m3/backports/jep_residue.py";
-    private static final String TEST = "m3/backports/test_jep_residue.py";
+    private static final String QUEUE = "make/m3/backports/JEP_RESIDUE_QUEUE.tsv";
+    private static final String SOURCE = "make/m3/backports/jep_residue.py";
+    private static final String TEST = "make/m3/backports/test_jep_residue.py";
     private static final String PRE =
             "/jdk/m3/rewrite/backport/jep-residue-proof/pre/";
 
@@ -60,7 +60,7 @@ final class M3JepResidueProofGateReceiverRecipeTest {
                 file(QUEUE, resource(PRE + "JEP_RESIDUE_QUEUE.tsv.txt")),
                 file(SOURCE, resource(PRE + "jep_residue.py.txt")),
                 file(TEST, resource(PRE + "test_jep_residue.py.txt")));
-        var unrelated = file("m3/backports/README.unrelated", "unchanged\n");
+        var unrelated = file("make/m3/backports/README.unrelated", "unchanged\n");
         var passed = new ArrayList<SourceFile>(before);
         passed.add(unrelated);
 

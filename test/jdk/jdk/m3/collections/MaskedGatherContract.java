@@ -5,7 +5,7 @@ package jdk.m3.collections;
 import java.util.Arrays;
 import java.util.Random;
 
-//FLLDCIM: RELOCATE - donor blob d4271622eabf at d5ad5090d87e; recipe m3/collections/qualification/census2-t1-20261106/relocate.py v5
+//FLLDCIM: RELOCATE - donor blob d4271622eabf at d5ad5090d87e; recipe make/m3/collections/qualification/census2-t1-20261106/relocate.py v5
 public final class MaskedGatherContract {
     private static long checks;
     private MaskedGatherContract() { }

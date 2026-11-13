@@ -15,7 +15,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Predicate;
 
 /** Same-thread fail-fast, optional-write and physical-occurrence regression oracle. */
-//FLLDCIM: RELOCATE - donor blob 5a1e46a18f75 at d5ad5090d87e; recipe m3/collections/qualification/census2-c2-20261106/relocate.py v1
+//FLLDCIM: RELOCATE - donor blob 5a1e46a18f75 at d5ad5090d87e; recipe make/m3/collections/qualification/census2-c2-20261106/relocate.py v1
 public final class FilteredListMutationProof {
     private static int checks;
     private FilteredListMutationProof() { }

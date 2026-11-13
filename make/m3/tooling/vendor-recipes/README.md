@@ -1,5 +1,5 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
-# m3/tooling/vendor-recipes — consumer pins to the vendored sources, as an OpenRewrite recipe
+# make/m3/tooling/vendor-recipes — consumer pins to the vendored sources, as an OpenRewrite recipe
 
 `M3VendoredPinRecipe` is an XML recipe on the SDK's own vendored OpenRewrite (rewrite-core and rewrite-xml
 8.17.1-m3-source-1). It replaces the regex script `switch_consumers.py` that switched consumer poms to the source-built

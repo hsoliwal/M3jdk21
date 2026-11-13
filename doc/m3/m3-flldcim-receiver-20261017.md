@@ -7,7 +7,7 @@ runtime dependency or a declaration that all OpenJDK source is documented.
 The original Synexia canonical recipe and test bodies are pinned at
 [hsoliwal/com.synexia#12065](https://github.com/hsoliwal/com.synexia/pull/12065),
 source commit `303969c826cba7da43fc2e8b264b762485c202ef`. Exact donor/target file blobs appear in
-`m3/docs/m3-flldcim-receiver-provenance-20261017.tsv`.
+`doc/m3/m3-flldcim-receiver-provenance-20261017.tsv`.
 
 ## Hierarchy (documentation view, not the separate M3AST evidence hierarchy)
 
@@ -36,8 +36,8 @@ Run the local zero-dependency projection smoke test with Java 21:
 
 ```sh
 javac --release 21 -Xlint:all -Werror -d /tmp/m3-flldcim-docs \
-  m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HierarchicalDocumentation.java \
-  m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3HierarchicalDocumentationSelfTest.java
+  make/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HierarchicalDocumentation.java \
+  make/m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3HierarchicalDocumentationSelfTest.java
 java -cp /tmp/m3-flldcim-docs com.synexia.rewrite.M3HierarchicalDocumentationSelfTest
 ```
 
@@ -45,7 +45,7 @@ Run the owning Maven/OpenRewrite JUnit test on the target's own pinned Maven
 dependency set:
 
 ```sh
-mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
+mvn -B -ntp -f make/m3/tooling/migration-recipes/pom.xml \
   -Dtest=M3HierarchicalDocumentationRecipeTest test
 ```
 

@@ -11,7 +11,7 @@ on:
       - 'src/java.base/share/classes/java/util/List.java'
       - 'src/java.base/share/classes/java/util/Map.java'
       - 'test/jdk/java/util/MonitoredCollectionDefaults.java'
-      - 'm3/qualification/collection-progress-20261023/**'
+      - 'make/m3/qualification/collection-progress-20261023/**'
       - '.github/workflows/m3jdk21-collection-progress-receiver-20261023.yml'
   workflow_dispatch:
 permissions:
@@ -31,4 +31,4 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Java21 compile and 17 method contracts in normal and -Xint VM
-        run: bash m3/qualification/collection-progress-20261023/verify-host-patch.sh
+        run: bash make/m3/qualification/collection-progress-20261023/verify-host-patch.sh

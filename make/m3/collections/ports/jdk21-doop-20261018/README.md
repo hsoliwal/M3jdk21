@@ -4,7 +4,7 @@
 **Review branch:** stacked on [source-custody PR #1325](https://github.com/hsoliwal/M3jdk21/pull/1325).  
 **Source custody:** 59 selected JDK 21 implementation files, original license and binding records in
 `m3/collections/implementations/jdk21-package-renamed/` and
-`m3/collections/receiving/jdk21-package-renamed-20261018/`.
+`make/m3/collections/receiving/jdk21-package-renamed-20261018/`.
 Those files remain **unchanged** by this follow-on; custody claims are not runtime claims.
 
 ## Immutable design invariant

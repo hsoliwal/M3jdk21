@@ -7,7 +7,7 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3BitLane28.java'
       - 'test/jdk/jdk/m3/collections/M3BitLane28FenwickSelfTest.java'
       - 'test/jdk/jdk/m3/collections/M3BitLane28FenwickTest.java'
-      - 'm3/collections/qualification/bitlane28-fenwick-20261017/**'
+      - 'make/m3/collections/qualification/bitlane28-fenwick-20261017/**'
   workflow_dispatch:
 permissions:
   contents: read

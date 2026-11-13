@@ -5,10 +5,10 @@ source_pr	9599
 source_closure	the 17-file A3 export closure sealed by sha256 in .github/workflows/m3-a3.yml before #2236; sources and manifest: m3/synexia-import/intakes/jdk-a3-public-export-20261007
 license	Apache-2.0
 target_source_root	m3/vendor/synexia/synexia-openrewrite-recipes
-target_module	m3/tooling/synexia-jdk-a3-recipes (default-testCompile root; surefire workingDirectory)
+target_module	make/m3/tooling/synexia-jdk-a3-recipes (default-testCompile root; surefire workingDirectory)
 target_seal	.github/workflows/m3-a3.yml (Verify absorbed A3 recipe export closure: 16 files)
-hold	M3JdkA3RecipeExportTest#exportedConvergenceRecipeIsTheCanonicalFileLocalDag expects a synexia tag that the sealed M3PureIntConvergenceRecipe never carried; excluded by surefire-hold-excludes.txt (m3/tooling/standalone/GATES.tsv A3_EXPORT_TAG_ASSERTION)
-absorbed	2026-10-31 (standalone rule; m3/tooling/standalone/M3_REFS.md)
+hold	M3JdkA3RecipeExportTest#exportedConvergenceRecipeIsTheCanonicalFileLocalDag expects a synexia tag that the sealed M3PureIntConvergenceRecipe never carried; excluded by surefire-hold-excludes.txt (make/m3/tooling/standalone/GATES.tsv A3_EXPORT_TAG_ASSERTION)
+absorbed	2026-10-31 (standalone rule; make/m3/tooling/standalone/M3_REFS.md)
 src/test/java/com/synexia/rewrite/M3JdkA3RecipeExportTest.java	git_blob=223582b0a12e28c4ec7eec4b985d55b79530f726 sha256=b2cceacde86886a6339ff1df9dcfb267bee589e23e800864b5507dea603a1f72 bytes=3479
 src/test/java/com/synexia/rewrite/M3RecipeMasteryPortableReceiptTest.java	git_blob=eac9f6d5c2ca02a83efecb352149db7bbade340c sha256=120e5cf7fa921edfdd4da13d755af70b47d8d6d0adc4fef70233a42a7d3250a5 bytes=7664
 src/test/java/com/synexia/rewrite/atom/M3AtomCoverageClosureTest.java	git_blob=cc06a1ac0eb492c7cdc8b08976af7d61b8f8fe1f sha256=01916ea53538347cbd5e582626ae665825f94cdeda75de272318f58f2bd10c40 bytes=14831

@@ -3,7 +3,7 @@
 # recipe null-flow-20261107: the Kotlin-inspired null-flow atoms relocated into jdk.internal.m3.ast
 
 Census pass-1 leaf **L048** (`C:/m3-superset/conv/record/census/LEAVES_PROPOSED.tsv`; ledger row 110, lane
-com-synexia-0e; qualification record `m3/qualification/census1-remainder-20261107a/`): the three method-local null-flow
+com-synexia-0e; qualification record `make/m3/qualification/census1-remainder-20261107a/`): the three method-local null-flow
 atoms of `hsoliwal/com.synexia` crate `m3-kotlin-null-flow-20261031` and their oracles become part of `m3/ast` by recipe,
 in the internal package `jdk.internal.m3.ast`.
 
@@ -38,7 +38,7 @@ second source copy exists in the donor either.
 
 `python -I m3/ast/recipe/null-flow-20261107/relocate.py --donor-git <clone> --donor-rev 56cbdc631259 [--check]`
 (`RELOCATE_CENSUS1_REMAINDER` v4: pmem-gram-index v3 plus DROP_METHOD rows and a module-derived recipe path; the same
-text as `m3/optane/recipe/pmem-accelerator-20261107/relocate.py`). Map: 9 FILE rows, 1 PACKAGE, 9 identity TYPE rows,
+text as `make/m3/optane/recipe/pmem-accelerator-20261107/relocate.py`). Map: 9 FILE rows, 1 PACKAGE, 9 identity TYPE rows,
 3 EXTERNAL (`com.sun.source.tree`, `com.sun.source.util`, `org.junit.jupiter.api`), SKIP rows for the crate records and
 the OpenRewrite recipe. `PROVENANCE.tsv`: 9 rows `body_match=TRUE` (every relocated line is a donor line; only the
 header, the package line and one `//FLLDCIM: RELOCATE` anchor differ).

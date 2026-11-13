@@ -4,7 +4,7 @@
 import argparse, subprocess
 from pathlib import Path
 p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);a=p.parse_args()
-r=Path(__file__).resolve().parents[3];out=a.output.resolve()
+r=Path(__file__).resolve().parents[4];out=a.output.resolve()
 if out.exists() or out==r or r in out.parents:p.error('fresh output outside checkout required')
 out.mkdir(parents=True)
 commands=[('compile',['javac','--release','21','-Xlint:all','-Werror','-d',out/'classes',r/'m3/collections/src/main/java/jdk/m3/collections/M3CollectionViews.java',Path(__file__).with_name('M3LiveViewContinuationTest.java')]),('normal',['java','-cp',out/'classes','jdk.m3.collections.M3LiveViewContinuationTest']),('interpreter',['java','-Xint','-cp',out/'classes','jdk.m3.collections.M3LiveViewContinuationTest'])]

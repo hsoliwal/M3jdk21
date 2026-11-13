@@ -5,8 +5,8 @@ on:
     branches: [master]
     paths:
       - '.github/workflows/doops-entryless-receiver.yml'
-      - 'm3/collections/qualification/doops-entryless-verify.sh'
-      - 'm3/collections/qualification/doops-entryless-receiver.tsv'
+      - 'make/m3/collections/qualification/doops-entryless-verify.sh'
+      - 'make/m3/collections/qualification/doops-entryless-receiver.tsv'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredViews.java'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3TreeMap.java'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexMaskCompactor.java'
@@ -33,4 +33,4 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Verify exact product source and run Java/JNI differential oracles
-        run: bash m3/collections/qualification/doops-entryless-verify.sh
+        run: bash make/m3/collections/qualification/doops-entryless-verify.sh

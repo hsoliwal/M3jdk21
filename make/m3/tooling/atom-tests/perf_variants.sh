@@ -22,7 +22,7 @@ PKG_DIR=${PKG_DIR:-"src/java.base/share/classes/jdk/internal/mindex"}
 TEST_DIR=${TEST_DIR:-"test/jdk/jdk/internal/mindex/atoms"}
 PKG=${PKG:-"jdk.internal.mindex"}
 PERF_CLASS=${PERF_CLASS:-M3MindexAtomPerf}
-T="$WT/m3/tooling/atom-tests"
+T="$WT/make/m3/tooling/atom-tests"
 PKG_REL=${PKG_DIR#src/java.base/share/classes/}
 export MSYS_NO_PATHCONV=1
 host_load() { powershell -NoProfile -Command "(Get-CimInstance Win32_Processor | Measure-Object -Property LoadPercentage -Average).Average" 2>/dev/null | tr -d '\r'; }

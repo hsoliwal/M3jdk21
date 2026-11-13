@@ -10,7 +10,7 @@ everything else, and the deletions only behind an explicit flag:
   allocation/read/write counts describe `d0cec9717801`'s replaced `project()`. `verify_mask_viewport.py`, its only
   caller, drops the region steps now (it failed on master, it passes here). The test file stays tracked.
 * **R2** #2547's held `M3MaskViewportNative.java` is **RETIRED_PENDING_DELETE**, citing #2656: a
-  `RETIRED_PENDING_DELETE` row is appended to `m3/qualification/retained-twins-core-lanes-20261106/HELD.tsv`. The held
+  `RETIRED_PENDING_DELETE` row is appended to `make/m3/qualification/retained-twins-core-lanes-20261106/HELD.tsv`. The held
   copy stays tracked.
 
 `retire.py` (VIEWPORT_REGIONS_RETIRE v2) applies the edits; its RETIRE rules only report `PENDING_DELETE` unless

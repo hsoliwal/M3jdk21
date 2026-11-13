@@ -1,10 +1,10 @@
 # DONOR_OVERLAY v2 migration audit: master 08db7f057c8702daccfd9726c802ec5cb5907eaf (before) vs the branch (after).
 # 1. Files that differ (diff -rq over the extracted donors, relocated modules, jackson pack and recipe lanes, before
 #    the lane READMEs, RECIPE_MEMORY rows and this evidence were written):
-  m3/tooling/jdk-superset/hashing/tools/checksums_to_jdk.py
-  m3/tooling/jdk-superset/number-parse/tools/jackson_numbers_to_jdk.py
-  m3/tooling/jdk-superset/retarget/tools/donor_overlay.py
-  m3/tooling/module-packs/jackson/SOURCE_LOCK.json
+  make/m3/tooling/jdk-superset/hashing/tools/checksums_to_jdk.py
+  make/m3/tooling/jdk-superset/number-parse/tools/jackson_numbers_to_jdk.py
+  make/m3/tooling/jdk-superset/retarget/tools/donor_overlay.py
+  make/m3/tooling/module-packs/jackson/SOURCE_LOCK.json
   m3/vendor/third_party/commons-codec-1.17.1/OVERLAY_SOURCES.json
   m3/vendor/third_party/commons-codec-1.17.1/PROVENANCE.json
   m3/vendor/third_party/commons-codec-1.22.1/OVERLAY_SOURCES.json
@@ -18,7 +18,7 @@
   m3/vendor/third_party-m3/relocated/commons-codec-1.22.1/PROVENANCE.json
   m3/vendor/third_party-m3/relocated/jackson-core-2.19.2/PROVENANCE.json
 # 2. JSON leaves that differ, by key (jsondiff.py before after <file>):
-  m3/tooling/module-packs/jackson/SOURCE_LOCK.json {'provenance_sha256': 1, 'tree_sha256': 1}
+  make/m3/tooling/module-packs/jackson/SOURCE_LOCK.json {'provenance_sha256': 1, 'tree_sha256': 1}
   m3/vendor/third_party/commons-codec-1.17.1/OVERLAY_SOURCES.json {'recipe_sha256': 2}
   m3/vendor/third_party/commons-codec-1.17.1/PROVENANCE.json {'sha256': 1, 'recipe_sha256': 2}
   m3/vendor/third_party/commons-codec-1.22.1/OVERLAY_SOURCES.json {'recipe_sha256': 2}

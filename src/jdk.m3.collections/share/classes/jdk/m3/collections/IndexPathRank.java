@@ -30,7 +30,7 @@ import jdk.internal.m3.collections.LaneSearch;
 public final class IndexPathRank {
     // Null only for the identity-path mode: row ID is the source ordinal.
     private final int[] rows;
-    //FLLDCIM: MRL - fold-close audit leaf L0048: RESTORE from PR #1791 head f452419fdcee (retained variant blob 54de439ba38d on master), dropped by the retain merge of #2070 (2028b1fb5f4) which kept master's pre-identity owner; 3-way base = pr1791 parent 5b779429120f blob 4a60fd1fab76, ours = master blob 647d2dc0452d, theirs = 905797a33244: clean except Window.copySelectedRowIds (one token, rowIdAt); recipe m3/collections/qualification/foldaudit-collections-20261107/apply.py v1
+    //FLLDCIM: MRL - fold-close audit leaf L0048: RESTORE from PR #1791 head f452419fdcee (retained variant blob 54de439ba38d on master), dropped by the retain merge of #2070 (2028b1fb5f4) which kept master's pre-identity owner; 3-way base = pr1791 parent 5b779429120f blob 4a60fd1fab76, ours = master blob 647d2dc0452d, theirs = 905797a33244: clean except Window.copySelectedRowIds (one token, rowIdAt); recipe make/m3/collections/qualification/foldaudit-collections-20261107/apply.py v1
     private final int sourceLength;
     private final long[] selected;
     private final int[] wordPrefix;
@@ -171,11 +171,11 @@ public final class IndexPathRank {
     /** Zero-based selected rank to ordinal in the captured strided source path. */
     public int selectedSourceOrdinal(int rank) {
         Objects.checkIndex(rank, size());
-        //FLLDCIM: MRL - RESTORE-MERGE IPR leaf 26: clean 3-way (THREE_WAY.tsv IPR 1) takes the next line from theirs 979763a143bb (origin 3373515b972; dropped by retain merge 6f82d57908e8); recipe m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
+        //FLLDCIM: MRL - RESTORE-MERGE IPR leaf 26: clean 3-way (THREE_WAY.tsv IPR 1) takes the next line from theirs 979763a143bb (origin 3373515b972; dropped by retain merge 6f82d57908e8); recipe make/m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
         int low = LaneSearch.upperBound(wordPrefix, 1, wordPrefix.length, rank) - 1;
         long word = selected[low];
         int remainder = rank - wordPrefix[low];
-        //FLLDCIM: MRL - RESTORE-ADD IPR leaf 60: theirs 76a2600beade lines 146-148 (origin ad9056cdb1e, low-bit-run select fast path; dropped by retain merge d4021923792a); recipe m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
+        //FLLDCIM: MRL - RESTORE-ADD IPR leaf 60: theirs 76a2600beade lines 146-148 (origin ad9056cdb1e, low-bit-run select fast path; dropped by retain merge d4021923792a); recipe make/m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
         // A nonzero low-bit run has ordinal == rank within this word.
         // The identity also admits all 64 bits: -1L + 1L wraps to zero.
         if ((word & (word + 1L)) == 0) return (low << 6) + remainder;

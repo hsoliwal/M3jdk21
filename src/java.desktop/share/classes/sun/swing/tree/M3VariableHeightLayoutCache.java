@@ -57,7 +57,7 @@ import sun.swing.SwingUtilities2;
  * <p>
  * Selected by {@code BasicTreeUI.createLayoutCache} when the system property
  * {@code m3.swing.viewport} is {@code true}; off by default. Design and proof:
- * {@code m3/docs/swing-viewport/DESIGN.md} (M3 TARGET_OWNED_PORT).
+ * {@code doc/m3/swing-viewport/DESIGN.md} (M3 TARGET_OWNED_PORT).
  */
 //FLLDCIM: M3 swing-viewport leaf 1 - data-oriented VariableHeightLayoutCache, same answers as stock
 public class M3VariableHeightLayoutCache extends VariableHeightLayoutCache {

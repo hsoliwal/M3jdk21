@@ -6,7 +6,7 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexPathRank.java'
       - 'test/jdk/jdk/m3/collections/M3IndexPathRankBulk*.java'
       - 'test/jdk/jdk/m3/collections/M3IndexPathRankNativeSelfTest.java'
-      - 'm3/collections/qualification/indexpath-bulk-20261021/**'
+      - 'make/m3/collections/qualification/indexpath-bulk-20261021/**'
       - '.github/workflows/m3-indexpath-rank-bulk-20261021.yml'
   workflow_dispatch:
 permissions:
@@ -32,7 +32,7 @@ jobs:
         run: |
           set -euo pipefail
           git diff --check origin/master...HEAD
-          bash m3/collections/qualification/indexpath-bulk-20261021/verify.sh
+          bash make/m3/collections/qualification/indexpath-bulk-20261021/verify.sh
       - name: Strict Java21 standalone rank and bounded paging regression
         shell: bash
         run: |

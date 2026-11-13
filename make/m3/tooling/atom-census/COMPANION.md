@@ -1,4 +1,4 @@
-# m3/tooling/atom-census: companion admission planner (Java 21, no dependencies)
+# make/m3/tooling/atom-census: companion admission planner (Java 21, no dependencies)
 
 `jdk.m3.tooling.atoms` helps decide whether an exported Java API type may get an optional M3 companion class. It
 never changes the JDK class, its API, native symbols, serialization, module exports or storage.
@@ -16,5 +16,5 @@ java -cp <classes> jdk.m3.tooling.atoms.CompanionPlan java.base:java.lang.String
 ```
 
 Received from com.synexia `synexia-openrewrite-recipes/crates/m3jdk21-companion-admission-20261029`; see
-`m3/qualification/receive-m3-tooling-companion-20261108/`. The crate's OpenRewrite discovery recipe
+`make/m3/qualification/receive-m3-tooling-companion-20261108/`. The crate's OpenRewrite discovery recipe
 (`M3CompanionInventoryRecipe`) stays in com.synexia because it needs `org.openrewrite`.

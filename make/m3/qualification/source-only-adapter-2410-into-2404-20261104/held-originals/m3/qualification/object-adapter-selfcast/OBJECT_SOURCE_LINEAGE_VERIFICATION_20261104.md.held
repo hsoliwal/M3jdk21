@@ -43,7 +43,7 @@ fragment caused the exact region anchor to mismatch; the untouched
 source anchor matched.
 
 The full Python checker
-`m3/compatibility/check_object_source_lineage_20261104.py` was
+`make/m3/compatibility/check_object_source_lineage_20261104.py` was
 compiled with Python 3.13 and committed byte-for-byte to GitHub
 (Git blob `b64087dea35bf5e66717abc9b336ad804755e828`).
 Its first-party 10-test suite

@@ -6,8 +6,8 @@ import unittest
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[2]
-PACKET = ROOT / "m3/backports/recipes/jep-491-vthread-unpinning"
+ROOT = Path(__file__).resolve().parents[3]
+PACKET = ROOT / "make/m3/backports/recipes/jep-491-vthread-unpinning"
 
 
 def fields(path: Path) -> dict[str, str]:

@@ -13,13 +13,13 @@
   "targetBase": "92962fbba10cbf13799253a307dc90f4de94b179",
   "files": [
     {
-      "path": "m3/docs/name-mapping.json",
+      "path": "doc/m3/name-mapping.json",
       "beforeGit": "e038ef6eb4a77eb37cd473edb85bb4bb35838fc9",
       "afterGit": "337c083efb329e9d417bbbf5ddde8cb06cac696c",
       "afterSha256": "be6d7a1365a8795cda0351aecd7514d8c4fc57a0003e2519c3738a3266e4ae06"
     },
     {
-      "path": "m3/tooling/name-contract/name-plan.json",
+      "path": "make/m3/tooling/name-contract/name-plan.json",
       "beforeGit": "5797857432228fcc7448c8236aa2d3264ab4f915",
       "afterGit": "57aa173bfdac2119c9c8ad491879784dda02654f",
       "afterSha256": "2f85f9997f892a5b346007ca5ceb4ed555736ff2702d39e94fc4567107302a58"

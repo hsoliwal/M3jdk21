@@ -13,7 +13,7 @@
   <description>jdk.m3.compiler, the compiler family of the approved layout (jdk.m3.compiler = compiler + ast): read-only
     javac facts and processors folded from six one-package modules on 2026-11-08 (FOLD_PACKAGE v1.1): lifetime slots,
     the Mat-sortable processor, nullness facts (javac Plugin M3NullnessFacts), parent-owned facts, reference flow and
-    liveness, static-use facts. Their records are in m3/evidence/compiler/. Java 21, jdk.compiler, m3-collections.</description>
+    liveness, static-use facts. Their records are in make/m3/evidence/compiler/. Java 21, jdk.compiler, m3-collections.</description>
   <properties>
     <maven.compiler.release>21</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

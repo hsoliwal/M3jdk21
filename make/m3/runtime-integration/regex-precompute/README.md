@@ -13,7 +13,7 @@ sources, load private recipe fixtures, or require a Synexia checkout.
 After building an M3JDK21 image from the source under review, run:
 
 ```sh
-mvn -B -ntp -f m3/runtime-integration/regex-precompute/pom.xml \
+mvn -B -ntp -f make/m3/runtime-integration/regex-precompute/pom.xml \
   -Dm3.test.jdk=/absolute/path/to/source-built-M3JDK21 verify
 ```
 
@@ -29,9 +29,9 @@ for offline Maven execution.
 The same product proof can run directly, without Maven artifact resolution:
 
 ```sh
-python3 -B m3/runtime-integration/regex-precompute/verify.py \
+python3 -B make/m3/runtime-integration/regex-precompute/verify.py \
   --target . --java-home /absolute/path/to/source-built-M3JDK21 \
-  --output m3/runtime-integration/regex-precompute/target/product-verification
+  --output make/m3/runtime-integration/regex-precompute/target/product-verification
 ```
 
 The standard Maven `test` phase runs `test_verify.py`, which tests the verifier's

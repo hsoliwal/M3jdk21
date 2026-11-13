@@ -25,7 +25,7 @@ JNI exports, validation, exception/allocation order and the JNI Region schedule
 retain their existing contracts. The filtered-wrapper contract repair is excluded.
 
 This target-local mapping refers to the existing
-`m3/docs/name-mapping.json` entries `/family_name_mapping/2` and
+`doc/m3/name-mapping.json` entries `/family_name_mapping/2` and
 `/family_name_mapping/3`. Its root document and receiving sequence are unchanged:
 STRING is active; subsequent family acceptance remains pending.
 
@@ -40,9 +40,9 @@ and actual source-replay proof bind this scope.
 - Canonical immutable revision: `ad4ff6084a3b95c9e5dc993eff96efef03ea8f2c`
 - Native-only SDK proof SHA-256: `8b96ff9f844e6c238d2105c55af7b4c37f4628737e8232ca8115a5942dd14bd0`
 - Two-file receiver root: `a9af2623aea50708e6506c43ffb484858d5f1740fa550466ea08307a34c733bf`
-- Target application: `m3/collections/qualification/m3-mask-native-atoms-runtime-20261021/evidence/copier-apply.receipt.json`
-- Exact replay: `m3/collections/qualification/m3-mask-native-atoms-runtime-20261021/evidence/copier-replay.receipt.json`
-- GitHub source-blob readback: `m3/collections/qualification/m3-mask-native-atoms-runtime-20261021/source-blobs-readback.json`
+- Target application: `make/m3/collections/qualification/m3-mask-native-atoms-runtime-20261021/evidence/copier-apply.receipt.json`
+- Exact replay: `make/m3/collections/qualification/m3-mask-native-atoms-runtime-20261021/evidence/copier-replay.receipt.json`
+- GitHub source-blob readback: `make/m3/collections/qualification/m3-mask-native-atoms-runtime-20261021/source-blobs-readback.json`
 
 These bindings identify the actual canonical publication, target application,
 exact replay and GitHub source-blob readback. The blob receipt verifies content
@@ -105,7 +105,7 @@ The [existing canonical catalogue](https://github.com/hsoliwal/com.synexia/blob/
 retains the native mask comparison, the existing Java identity-fill donor,
 stable-compaction/JNI schedule constraints and rejected challenge assumptions.
 Its wrapper-repair rows are outside this target change. Existing target search
-records remain under `m3/collections/algorithm-catalog/`; the earlier
+records remain under `make/m3/collections/algorithm-catalog/`; the earlier
 fourteen-row review remains [M3JDK21 #1605](https://github.com/hsoliwal/M3jdk21/pull/1605).
 
 Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project.

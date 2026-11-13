@@ -43,7 +43,7 @@ The verifier POM configures Java release 21, all lint checks, and failure on war
 
 The Java tests exercise actual named recipe activation and serialization, exact four-file result maps, before-image identity, unchanged fresh second application, preserved record IDs/order and global fields, old source/target lineage, unchanged historical receiver/Descriptor evidence, blocked acceptance, and refusal of each drifted, missing, duplicate, or scan-to-visit-mutated target.
 
-The Python log names all **six actual test methods** with `ok` and ends with `Ran 6 tests` and `OK`. These tests load the retained `m3/migration/recipe.py` against the actual sealed E3 packet. Their negative loops cover:
+The Python log names all **six actual test methods** with `ok` and ends with `Ran 6 tests` and `OK`. These tests load the retained `make/m3/migration/recipe.py` against the actual sealed E3 packet. Their negative loops cover:
 
 | Negative workspace condition | Conditions | Operations per condition | Refusal calls |
 |---|---:|---:|---:|
@@ -62,10 +62,10 @@ All **229 frozen inputs**—166 local fixed inputs and 63 external source/proof 
 
 | Operational path | Final SHA-256 |
 |---|---|
-| `m3/docs/jcc-source-handoff.md` | `59ed76969f86486e7adb377409e284f69577fe02754006fdfe5b3938a16760a0` |
-| `m3/docs/name-mapping.json` | `61818898ef6c092ddad2c1ee4cfe7508199912ff0a1f2d5c2a51ad6695d040c8` |
-| `m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv` | `59c4c970ac75a56aa5d5a3e2f3e88f5caa831eb06be788266c725202b8c64b12` |
-| `m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json` | `8c76c2dd45e775d29f8f47d8daf65842e465c74ad3dec7aacd55df59f9d051a1` |
+| `doc/m3/jcc-source-handoff.md` | `59ed76969f86486e7adb377409e284f69577fe02754006fdfe5b3938a16760a0` |
+| `doc/m3/name-mapping.json` | `61818898ef6c092ddad2c1ee4cfe7508199912ff0a1f2d5c2a51ad6695d040c8` |
+| `make/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv` | `59c4c970ac75a56aa5d5a3e2f3e88f5caa831eb06be788266c725202b8c64b12` |
+| `make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json` | `8c76c2dd45e775d29f8f47d8daf65842e465c74ad3dec7aacd55df59f9d051a1` |
 
 The four manifest rows exactly match the plan's paths, before identities, after identities, and resource names. All seven guards retain their pinned content. The current map has 46 records; the two requested JCC capability rows remain `blocked` with empty `tests` arrays. All four acceptance flags remain explicitly false.
 

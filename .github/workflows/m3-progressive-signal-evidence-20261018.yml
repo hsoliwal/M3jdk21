@@ -5,7 +5,7 @@ on:
     paths:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ProgressiveSignalEvidence.java'
       - 'test/jdk/jdk/m3/collections/M3ProgressiveSignalEvidenceContract.java'
-      - 'm3/collections/qualification/progressive-signal-evidence-20261018/**'
+      - 'make/m3/collections/qualification/progressive-signal-evidence-20261018/**'
       - '.github/workflows/m3-progressive-signal-evidence-20261018.yml'
   workflow_dispatch:
 permissions:

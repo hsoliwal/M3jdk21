@@ -15,7 +15,7 @@ import re
 
 DATASET = 'm3-prefix-cursor-20261020'
 CRATE = 'm3-ast-build-reverse-20261017-' + DATASET
-PREFIX = Path('m3/tooling/shared-frontend/recipe-custody/datasets') / DATASET
+PREFIX = Path('make/m3/tooling/shared-frontend/recipe-custody/datasets') / DATASET
 RESOURCE = PREFIX / 'resources/jdk/internal/m3/rewrite/hash-pinned-java'
 DESCRIPTOR = PREFIX / 'resources/META-INF/rewrite' / (CRATE + '.yml')
 PASS_PATHS = (
@@ -141,7 +141,7 @@ def verify(root: Path) -> dict[str, object]:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--root', type=Path,
-                        default=Path(__file__).resolve().parents[3])
+                        default=Path(__file__).resolve().parents[4])
     args = parser.parse_args()
     print('M3_MULTI_PASS_CUSTODY_PASS ' + json.dumps(verify(args.root), sort_keys=True))
 

@@ -55,8 +55,8 @@ discussion tracks under their existing owners.
 ## Reproduce
 From a patched checkout:
 ```
-bash m3/tooling/migration-recipes/tasks/map-guard/verify.sh JDK21 REPOSITORY FRESH_OUTPUT
-mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify
+bash make/m3/tooling/migration-recipes/tasks/map-guard/verify.sh JDK21 REPOSITORY FRESH_OUTPUT
+mvn -B -ntp -f make/m3/tooling/migration-recipes/pom.xml clean verify
 make test TEST="test/jdk/java/lang/String/MIndexMappedStringBackingTest.java test/jdk/java/lang/String/MapGuardTest.java"
 ```
 Only the first command was executed here. It stages only the two layout-independent

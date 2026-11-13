@@ -9,7 +9,7 @@ on:
       - 'm3/ports/parallel-bulk/verification/BITCOUNT.md'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-bulk-bitcount-20261014/**'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bulk-bitcount-20261014/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-parallel-bitcount.yml'
+      - 'make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-parallel-bitcount.yml'
       - '.github/workflows/m3-parallel-bitcount.yml'
   workflow_dispatch:
 
@@ -60,9 +60,9 @@ jobs:
           -pl rewrite-java-21,rewrite-test,junit-jupiter-5.10.2,junit-platform-launcher-1.10.2
           -am -DskipTests install
       - run: bash m3/m3-import/pure-int-recipe-custody/install.sh "$PWD"
-      - run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -DskipTests install
+      - run: mvn -B -ntp -f make/m3/tooling/migration-recipes/pom.xml -DskipTests install
       - run: >
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
+          mvn -B -ntp -f make/m3/tooling/migration-recipes/pom.xml
           -Drewrite.recipeArtifactCoordinates=jdk.m3.tooling:migration-recipes:0.1.0-SNAPSHOT
           -Drewrite.activeRecipes=jdk.m3.rewrite.M3ParallelBitCount
           rewrite:dryRun

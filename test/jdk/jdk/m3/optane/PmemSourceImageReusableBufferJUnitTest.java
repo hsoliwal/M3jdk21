@@ -19,7 +19,7 @@ import org.junit.jupiter.api.io.TempDir;
 import static org.junit.jupiter.api.Assertions.*;
 
 /** Real PMEMSDK FILE/JNI acceptance; not a simulated source owner. */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/m3-pmem-sdk/campaign/src/test/java/com/synexia/m3/pmem/campaign/PmemSourceImageReusableBufferJUnitTest.java blob fb9f45e18533; recipe m3/optane/recipe/pmem-source-image-20261106/relocate.py v3
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/m3-pmem-sdk/campaign/src/test/java/com/synexia/m3/pmem/campaign/PmemSourceImageReusableBufferJUnitTest.java blob fb9f45e18533; recipe make/m3/optane/recipe/pmem-source-image-20261106/relocate.py v3
 final class PmemSourceImageReusableBufferJUnitTest {
     @TempDir Path temporary;
     private static final PmemSourceImage.Limits SMALL =

@@ -29,7 +29,7 @@ class RetentionAuditTest(unittest.TestCase):
 
         (self.repo / "src").mkdir()
         (self.repo / "recipes").mkdir()
-        (self.repo / "m3/history").mkdir(parents=True)
+        (self.repo / "make/m3/history").mkdir(parents=True)
         self.a = b"class A {}\n"
         self.b = b"class B {}\n"
         (self.repo / "src/A.java").write_bytes(self.a)
@@ -39,7 +39,7 @@ class RetentionAuditTest(unittest.TestCase):
             "src/B.java\tABSENT\t" + hashlib.sha256(self.b).hexdigest() + "\tB.txt\n"
         )
         (self.repo / "recipes/cap.manifest.tsv").write_text(manifest, encoding="utf-8")
-        (self.repo / "m3/history/RETAINED_CAPABILITIES.tsv").write_text(
+        (self.repo / "make/m3/history/RETAINED_CAPABILITIES.tsv").write_text(
             "capability_id\tmanifest_path\n"
             "cap\trecipes/cap.manifest.tsv\n",
             encoding="utf-8",
@@ -58,12 +58,12 @@ class RetentionAuditTest(unittest.TestCase):
         first = inspect(
             self.repo,
             self.baseline,
-            "m3/history/RETAINED_CAPABILITIES.tsv",
+            "make/m3/history/RETAINED_CAPABILITIES.tsv",
         )
         second = inspect(
             self.repo,
             self.baseline,
-            "m3/history/RETAINED_CAPABILITIES.tsv",
+            "make/m3/history/RETAINED_CAPABILITIES.tsv",
         )
         self.assertEqual(first, second)
         self.assertEqual(1, first["capabilities"])
@@ -82,7 +82,7 @@ class RetentionAuditTest(unittest.TestCase):
         result = inspect(
             self.repo,
             head,
-            "m3/history/RETAINED_CAPABILITIES.tsv",
+            "make/m3/history/RETAINED_CAPABILITIES.tsv",
         )
         self.assertEqual(0, result["retained_exact"])
         self.assertEqual(1, result["present_drifted_review"])
@@ -98,7 +98,7 @@ class RetentionAuditTest(unittest.TestCase):
         result = inspect(
             self.repo,
             self.baseline,
-            "m3/history/RETAINED_CAPABILITIES.tsv",
+            "make/m3/history/RETAINED_CAPABILITIES.tsv",
         )
         self.assertEqual(2, result["retained_exact"])
 
@@ -112,9 +112,9 @@ class RetentionAuditTest(unittest.TestCase):
         self.git("commit", "-m", "unsorted manifest")
         head = self.git("rev-parse", "HEAD")
         with self.assertRaisesRegex(ValueError, "sorted"):
-            inspect(self.repo, head, "m3/history/RETAINED_CAPABILITIES.tsv")
+            inspect(self.repo, head, "make/m3/history/RETAINED_CAPABILITIES.tsv")
 
-        (self.repo / "m3/history/RETAINED_CAPABILITIES.tsv").write_text(
+        (self.repo / "make/m3/history/RETAINED_CAPABILITIES.tsv").write_text(
             "capability_id\tmanifest_path\n"
             "cap\t../escape.tsv\n",
             encoding="utf-8",
@@ -123,13 +123,13 @@ class RetentionAuditTest(unittest.TestCase):
         self.git("commit", "-m", "unsafe catalogue")
         unsafe = self.git("rev-parse", "HEAD")
         with self.assertRaisesRegex(ValueError, "noncanonical"):
-            inspect(self.repo, unsafe, "m3/history/RETAINED_CAPABILITIES.tsv")
+            inspect(self.repo, unsafe, "make/m3/history/RETAINED_CAPABILITIES.tsv")
 
     def test_write_is_deterministic_and_refuses_existing_output(self):
         result = inspect(
             self.repo,
             self.baseline,
-            "m3/history/RETAINED_CAPABILITIES.tsv",
+            "make/m3/history/RETAINED_CAPABILITIES.tsv",
         )
         output = self.home / "out"
         write(result, output)
@@ -157,14 +157,14 @@ class RetentionAuditTest(unittest.TestCase):
         ), encoding="utf-8")
 
     def catalogue(self, rows):
-        (self.repo / "m3/history/RETAINED_CAPABILITIES.tsv").write_text(
+        (self.repo / "make/m3/history/RETAINED_CAPABILITIES.tsv").write_text(
             "capability_id\tmanifest_path\n" + "".join(
                 capability + "\t" + manifest + "\n" for capability, manifest in rows
             ), encoding="utf-8",
         )
 
     def baseline_audit(self, commit, baselines=None, include_parents=False):
-        return inspect(self.repo, commit, "m3/history/RETAINED_CAPABILITIES.tsv",
+        return inspect(self.repo, commit, "make/m3/history/RETAINED_CAPABILITIES.tsv",
                        baseline_commits=(self.baseline,) if baselines is None else baselines,
                        include_parents=include_parents)
 
@@ -193,7 +193,7 @@ class RetentionAuditTest(unittest.TestCase):
         expected["root"] = hashlib.sha256(
             json.dumps(expected, sort_keys=True, separators=(",", ":")).encode("utf-8")
         ).hexdigest()
-        actual = inspect(self.repo, self.baseline, "m3/history/RETAINED_CAPABILITIES.tsv")
+        actual = inspect(self.repo, self.baseline, "make/m3/history/RETAINED_CAPABILITIES.tsv")
         self.assertEqual(expected, actual)
         self.assertEqual(actual, self.baseline_audit(self.baseline, (), False))
         left, right = self.home / "legacy", self.home / "extended-default"
@@ -216,7 +216,7 @@ class RetentionAuditTest(unittest.TestCase):
         self.assertGreater(summary["declaration_conflict_count"], 0)
 
     def test_deleted_catalogue_keeps_baseline_targets(self):
-        (self.repo / "m3/history/RETAINED_CAPABILITIES.tsv").unlink()
+        (self.repo / "make/m3/history/RETAINED_CAPABILITIES.tsv").unlink()
         head = self.checkpoint("drop catalogue")
         result = self.baseline_audit(head)
         self.assertEqual("ABSENT", result["current_catalogue_state"])
@@ -363,7 +363,7 @@ class RetentionAuditTest(unittest.TestCase):
         self.assertEqual(result, self.baseline_audit(merge, (), True))
 
     def test_implicit_parent_catalogue_absence_is_recorded_but_explicit_refuses(self):
-        catalogue = self.repo / "m3/history/RETAINED_CAPABILITIES.tsv"
+        catalogue = self.repo / "make/m3/history/RETAINED_CAPABILITIES.tsv"
         original = catalogue.read_bytes()
         catalogue.unlink()
         parent = self.checkpoint("older history without a catalogue")
@@ -380,7 +380,7 @@ class RetentionAuditTest(unittest.TestCase):
                 self.baseline_audit(head, (parent,), parents)
 
     def test_explicit_pre_push_baseline_survives_intermediate_catalogue_deletion(self):
-        (self.repo / "m3/history/RETAINED_CAPABILITIES.tsv").unlink()
+        (self.repo / "make/m3/history/RETAINED_CAPABILITIES.tsv").unlink()
         self.checkpoint("first pushed commit erases catalogue")
         shutil.rmtree(self.repo / "src")
         head = self.checkpoint("last pushed commit erases target directory")
@@ -390,7 +390,7 @@ class RetentionAuditTest(unittest.TestCase):
         self.assertIn("CAPABILITY_REMOVED", self.kinds(result))
 
     def test_invalid_existing_parent_catalogue_is_not_treated_as_absence(self):
-        catalogue = self.repo / "m3/history/RETAINED_CAPABILITIES.tsv"
+        catalogue = self.repo / "make/m3/history/RETAINED_CAPABILITIES.tsv"
         original = catalogue.read_bytes()
         catalogue.write_text("bad\theader\n")
         parent = self.checkpoint("malformed baseline")
@@ -425,7 +425,7 @@ class RetentionAuditTest(unittest.TestCase):
 
     def test_unsafe_catalogue_and_manifest_paths_refuse_in_baseline_mode(self):
         for path in ["../escape", "/absolute", "m3/../escape", "m3//history/file", "m3/.git/file",
-                     "m3\\history\\file", "m3/history/file\n", "m3/history/fi\tle", "C:/outside", " padded"]:
+                     "m3\\history\\file", "make/m3/history/file\n", "make/m3/history/fi\tle", "C:/outside", " padded"]:
             with self.subTest(path=path), self.assertRaisesRegex(ValueError, "noncanonical"):
                 inspect(self.repo, self.baseline, path, include_parents=True)
         self.catalogue([("cap", "../escape.tsv")])
@@ -512,7 +512,7 @@ class RetentionAuditTest(unittest.TestCase):
                             for row in summary["obligations"]))
 
     def test_empty_or_unreadable_explicit_baseline_catalogue_refuses(self):
-        catalogue = self.repo / "m3/history/RETAINED_CAPABILITIES.tsv"
+        catalogue = self.repo / "make/m3/history/RETAINED_CAPABILITIES.tsv"
         for data in [b"capability_id\tmanifest_path\n", b"\xff"]:
             catalogue.write_bytes(data)
             baseline = self.checkpoint("inadmissible baseline catalogue")
@@ -531,7 +531,7 @@ class RetentionAuditTest(unittest.TestCase):
                          {row["capability_id"] for row in result["rows"] if row["path"] == "src/A.java"})
 
     def test_malformed_quoted_catalogue_is_a_cli_refusal(self):
-        (self.repo / "m3/history/RETAINED_CAPABILITIES.tsv").write_text(
+        (self.repo / "make/m3/history/RETAINED_CAPABILITIES.tsv").write_text(
             'capability_id\tmanifest_path\n"unterminated\tmanifest\n'
         )
         head = self.checkpoint("malformed quoted catalogue")

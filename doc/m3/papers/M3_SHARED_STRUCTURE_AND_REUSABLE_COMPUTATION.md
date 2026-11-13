@@ -397,7 +397,7 @@ then reuse can amortize preparation only when B > R and the operation count
 exceeds P/(B-R). This model excludes memory opportunity costs and contention;
 measurements must include those separately.
 
-The repository's [benchmark and compatibility specification](../release/BENCHMARK_AND_COMPATIBILITY_SPEC.md)
+The repository's [benchmark and compatibility specification](../../../make/m3/release/BENCHMARK_AND_COMPATIBILITY_SPEC.md)
 provides the detailed evaluation contract. Quantitative findings should be
 published only with their raw evidence and reproducible commands.
 
@@ -409,7 +409,7 @@ Reusable transformations converge in Synexia before product application.
 Compiler and contract tests govern promotion; provenance and upstream licensing
 remain explicit.
 
-The [home-page roadmap](../../README.md#project-goals-and-plan) records milestone
+The [home-page roadmap](../../../README.md#project-goals-and-plan) records milestone
 deliverables and acceptance criteria. This paper is a design account, not an
 implementation inventory. Future revisions should link individual architectural
 elements to implementation commits and evidence, add related-work analysis, and
@@ -439,11 +439,11 @@ This paper records the M3 design direction attributed to Hitesh Soliwal and
 Contributors to the Synexia Project. References identify background and contract
 sources; citing or integrating upstream work does not transfer its ownership.
 Applicable rights and licensing boundaries are described in
-[M3-SYNEXIA-NOTICE](../../M3-SYNEXIA-NOTICE.md) and
-[M3-SYNEXIA-RIGHTS](../../M3-SYNEXIA-RIGHTS.md).
+[M3-SYNEXIA-NOTICE](../../../M3-SYNEXIA-NOTICE.md) and
+[M3-SYNEXIA-RIGHTS](../../../M3-SYNEXIA-RIGHTS.md).
 
 For citation in JEPs, standards submissions, or downstream publications, see the
-[proposal attribution policy and versioned publication record](../../M3-SYNEXIA-RIGHTS.md#jeps-standards-proposals-and-technical-publications).
+[proposal attribution policy and versioned publication record](../../../M3-SYNEXIA-RIGHTS.md#jeps-standards-proposals-and-technical-publications).
 
 ### Revision and filing intent
 

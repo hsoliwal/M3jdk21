@@ -1,8 +1,8 @@
 # Contributing to M3JDK21
 
 M3JDK21 retains the upstream JDK contributor guidance below. For M3-specific changes,
-start with [AGENTS.md](AGENTS.md), the [porting invariant](m3/docs/m3jdk21-porting-invariant.md),
-and [existing naming map](m3/docs/name-mapping.json). This checklist explains how to
+start with [AGENTS.md](AGENTS.md), the [porting invariant](doc/m3/m3jdk21-porting-invariant.md),
+and [existing naming map](doc/m3/name-mapping.json). This checklist explains how to
 prepare a review; it does not change those authorities or any license.
 
 ## Before editing
@@ -15,7 +15,7 @@ prepare a review; it does not change those authorities or any license.
    Reuse an existing guide and mapping row rather than creating a second authority.
 3. Classify the change: standalone module, reusable donor recipe, exact target adaptation,
    runtime integration, documentation, or evidence. Review the
-   [convergence model](m3/docs/M3_CONVERGENCE_MODEL.md).
+   [convergence model](doc/m3/M3_CONVERGENCE_MODEL.md).
 4. For reusable semantics, improve and qualify the canonical Synexia recipe first; receive
    exact pinned output here. Record donor revision/path/blob, recipe identity, target
    preimage/postimage, notices and target-only adaptations. Do not independently edit
@@ -34,8 +34,8 @@ names, method descriptors, native symbols, serialized surfaces and public/protec
 ABI remain governed by the JDK contract. New `M3*` helpers normally stay in
 existing internal packages or package-private alongside the original owner.
 
-Follow the [naming/formatting and promotion workflow](m3/docs/m3jdk21-naming-admission-workflow.md).
-It uses the target's existing `m3/docs/name-mapping.json` stable capability IDs,
+Follow the [naming/formatting and promotion workflow](doc/m3/m3jdk21-naming-admission-workflow.md).
+It uses the target's existing `doc/m3/name-mapping.json` stable capability IDs,
 and the Synexia-owned `M3Jdk21NamingAdmission` policy with the original hash-pinned
 Maven/OpenRewrite recipe engine. An exact per-file formatting, class move or method
 rename requires a separate source-sealed recipe, attributed dependency/constructor/
@@ -45,13 +45,13 @@ later receiving phases forward until their full gates have passed.
 
 ## First build: prerequisites, outputs and test selection
 
-The [build/test routes](m3/docs/native-build.md#current-checkout-verification-routes)
+The [build/test routes](doc/m3/native-build.md#current-checkout-verification-routes)
 cover separate artifacts. Before running one, check the shell, JDK selection and
 output locations below. These are source-derived instructions, not new passing results.
 
 ### Prepare the shell and JDKs
 
-The [foundation script](m3/build.sh) uses Bash `mapfile`, arrays and process
+The [foundation script](make/m3/build.sh) uses Bash `mapfile`, arrays and process
 substitution. Use Bash 4+ and make sure `sha256sum`, `find`, `sort`, `mktemp`,
 `tee`, `cmp`, `chmod` and `mv` are available. The older system Bash on macOS
 and a plain Windows command prompt do not supply this environment unchanged.
@@ -61,8 +61,8 @@ Use isolated JDK installations and distinguish these variables:
 
 | Variable | Consumer | Meaning |
 | --- | --- | --- |
-| `M3_JDK` | `m3/build.sh` | JDK used to compile and run the separate foundation |
-| `M3_BOOT_JDK` | `m3/build-openjdk.sh` and native harnesses | Bootstrap JDK; the wrapper requests a private JDK 21 |
+| `M3_JDK` | `make/m3/build.sh` | JDK used to compile and run the separate foundation |
+| `M3_BOOT_JDK` | `make/m3/build-openjdk.sh` and native harnesses | Bootstrap JDK; the wrapper requests a private JDK 21 |
 | `M3_TEST_JDK` | M3 runtime harnesses | Complete candidate image with matching Java and HotSpot code |
 
 Setting one does not set the others. The foundation calls `javac`, `jar` and
@@ -80,9 +80,9 @@ for the image, objects, logs and test results before starting.
 
 | Entry point | Outputs to inspect |
 | --- | --- |
-| `m3/build.sh` | `m3/build/com.m3.text.jar`, `m3/build/classes/`, `m3/build/tests/` and `m3/build/logs/` |
+| `make/m3/build.sh` | `m3/build/com.m3.text.jar`, `m3/build/classes/`, `m3/build/tests/` and `m3/build/logs/` |
 | Foundation fixture generation | `m3/build/english-image-path.txt` names the content-addressed fixture; `m3/build/logs/artifacts.sha256` records hashes |
-| `m3/build-openjdk.sh` | `m3/build/logs/native-configure.log`, `m3/build/logs/native-build.log` and `build/CONFIG/images/jdk/` |
+| `make/m3/build-openjdk.sh` | `m3/build/logs/native-configure.log`, `m3/build/logs/native-build.log` and `build/CONFIG/images/jdk/` |
 
 The foundation uses `set -euo pipefail`: a compile or test failure stops later
 steps, including fixture publication. An old JAR or fixture left in the output
@@ -90,7 +90,7 @@ directory does not establish that the latest command completed. Check the exit
 status and invocation logs. Preserve logs before rerunning; the scripts reuse
 their log filenames.
 
-The [native wrapper](m3/build-openjdk.sh) passes fixed configure options and
+The [native wrapper](make/m3/build-openjdk.sh) passes fixed configure options and
 does not forward additional command-line arguments. It defaults to five make
 jobs; `M3_JOBS` changes that count. Use the documented OpenJDK configure/make
 route when you need custom configure flags.
@@ -113,7 +113,7 @@ make CONF_NAME=CONFIG test TEST="test/jdk/java/lang/String/M3StringCanonicalDagT
 `M3_TEST_JDK` selects the M3 harness image; it does not select the configuration
 used by `make test`. Use the same
 [explicit configuration](doc/building.md#using-multiple-configurations) for both.
-The separate [scripted jtreg lane](m3/runtime-integration/run-jtreg.sh) requires
+The separate [scripted jtreg lane](make/m3/runtime-integration/run-jtreg.sh) requires
 `JTREG_JAR`, `M3_TEST_JDK`, `M3_BOOT_JDK` and built native test libraries; its
 default native-library path is Linux x86-64. A focused test selection remains
 separate from full JDK, platform and performance qualification.
@@ -133,7 +133,7 @@ Java/C++ files. Preserve per-file copyright, license and change notices.
 
 ## Review and regression evidence
 
-Use the [build/test routes](m3/docs/native-build.md#current-checkout-verification-routes)
+Use the [build/test routes](doc/m3/native-build.md#current-checkout-verification-routes)
 for the affected artifact. In a PR, include:
 
 - exact base and candidate SHAs, changed owners and recipe/provenance links;

@@ -10,7 +10,7 @@ The earlier exploratory image built from a standalone production-only JAR is
 excluded from this evidence set.
 
 The wrapper delegates to the existing M3JDK21
-`m3/tooling/jmod-recipes/tools/jmod_pack.py` without changing that packer or its
+`make/m3/tooling/jmod-recipes/tools/jmod_pack.py` without changing that packer or its
 module-packs owner. It links roots `java.se`, `jdk.m3fs`, `jdk.unsupported`, and
 `jdk.zipfs`, using the supplied prebuilt JDK 21.
 

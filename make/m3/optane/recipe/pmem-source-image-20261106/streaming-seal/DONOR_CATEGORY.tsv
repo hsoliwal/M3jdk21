@@ -1,6 +1,6 @@
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-#FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/synexia-openrewrite-recipes/recipe-crates/m3-pmem-streaming-seal-20261105/DONOR_CATEGORY.tsv blob e8c64cfdc2a1; recipe m3/optane/recipe/pmem-source-image-20261106/relocate.py v3
+#FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/synexia-openrewrite-recipes/recipe-crates/m3-pmem-streaming-seal-20261105/DONOR_CATEGORY.tsv blob e8c64cfdc2a1; recipe make/m3/optane/recipe/pmem-source-image-20261106/relocate.py v3
 category	reference	decision	contract_evidence
 source-read-memory	Synexia PR #15204 M3PmemSourceSlices.readSealed(int,byte[],int)	REUSE_CONCEPT	Preserve 64-bit offset, zero-length lease, byte-exact SHA-256 and caller-owned buffer; no code copied
 exact-first-hit	LeetCode 28	REUSE_EXISTING	Native KMP and first-hit file-relative offsets unchanged

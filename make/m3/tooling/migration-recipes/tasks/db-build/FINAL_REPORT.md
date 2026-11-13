@@ -18,9 +18,9 @@ The new head's actual Maven compilation and nine JUnit cases remain pending
 until the hosted workflow provides evidence. No fabricated dependency stubs
 or inferred green coverage are used.
 
-Execution root: m3/tooling/migration-recipes.
+Execution root: make/m3/tooling/migration-recipes.
 Required focused command:
-mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=DbRecipeTest test
+mvn -B -ntp -f make/m3/tooling/migration-recipes/pom.xml -Dtest=DbRecipeTest test
 
 This is not whole-reactor verification, a99percent coverage pass, a modified-JDK
 build, native/JNI parity or completion of the entire M3JDK21 programme.

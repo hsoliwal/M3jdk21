@@ -6,10 +6,10 @@ on:
   pull_request:
     paths:
       - '.github/workflows/m3-regex-ascii-live-owner-custody.yml'
-      - 'm3/tooling/regex-ascii-live-owner-custody/**'
-      - 'm3/tooling/regex-ascii-lexical-receiver/**'
+      - 'make/m3/tooling/regex-ascii-live-owner-custody/**'
+      - 'make/m3/tooling/regex-ascii-lexical-receiver/**'
       - '.github/workflows/m3-regex-ascii-lexical-receiver.yml'
-      - 'm3/docs/name-mapping.json'
+      - 'doc/m3/name-mapping.json'
       - 'src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java'
       - 'src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java'
       - 'src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java'
@@ -138,8 +138,8 @@ jobs:
           root=pathlib.Path(os.environ["M3_PROOF_ROOT"])
           source=pathlib.Path(os.environ["M3_SOURCE_ROOT"])
           bundle=root/"artifacts";bundle.mkdir(exist_ok=False)
-          sdk=source/"m3/tooling/regex-ascii-live-owner-custody/sdk"
-          original_sdk=source/"m3/tooling/regex-ascii-lexical-receiver/sdk"
+          sdk=source/"make/m3/tooling/regex-ascii-live-owner-custody/sdk"
+          original_sdk=source/"make/m3/tooling/regex-ascii-lexical-receiver/sdk"
           start=time.monotonic()
           active_command=None
           class CensusRescan(RuntimeError):pass
@@ -302,7 +302,7 @@ jobs:
               gate()
               if code!=expected:raise RuntimeError(name+" failed with "+str(code)+" expected "+str(expected))
           py=[os.environ["M3_PYTHON"],"-I","-S","-B"]
-          qualifier=source/"m3/tooling/regex-ascii-live-owner-custody/qualify.py"
+          qualifier=source/"make/m3/tooling/regex-ascii-live-owner-custody/qualify.py"
           settings=root/"home/.m2"
           maven=["mvn","-B","-ntp","-s",str(settings/"settings.xml"),"-gs",str(settings/"global-settings.xml"),"-Dmaven.repo.local="+str(root/"m2"),"-Dstyle.color=never"]
           try:
@@ -345,11 +345,11 @@ jobs:
                   external+=sorted((original_sdk/"target/surefire-reports").glob("*.txt"))
                   external+=[sdk/"target/authoring-sdk-receipt.json",sdk/"target/authoring-recipe-test-counters.json",original_sdk/"target/sdk-receipt.json",original_sdk/"target/recipe-test-counters.json",qualifier.parent/"source-binding.json"]
                   aliases={}
-                  for name,alias in [["src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java","compiler.java"],["test/jdk/java/util/regex/M3AutomatonDifferentialTest.java","test.java"],["m3/docs/name-mapping.json","name-mapping.json"]]:
+                  for name,alias in [["src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java","compiler.java"],["test/jdk/java/util/regex/M3AutomatonDifferentialTest.java","test.java"],["doc/m3/name-mapping.json","name-mapping.json"]]:
                       for direction in ("forward","inverse"):
                           path=original_sdk/"target/emitted/regex-ascii-lexical-receiver-20261019"/direction/name
                           external.append(path);aliases[path]="original-"+direction+"-"+alias
-                  for name,alias in [["m3/tooling/regex-ascii-lexical-receiver/qualify.py","qualify.py"],["m3/tooling/regex-ascii-lexical-receiver/README.md","README.md"],[".github/workflows/m3-regex-ascii-lexical-receiver.yml","qualification.yml"]]:
+                  for name,alias in [["make/m3/tooling/regex-ascii-lexical-receiver/qualify.py","qualify.py"],["make/m3/tooling/regex-ascii-lexical-receiver/README.md","README.md"],[".github/workflows/m3-regex-ascii-lexical-receiver.yml","qualification.yml"]]:
                       path=sdk/"target/emitted"/name
                       external.append(path);aliases[path]="helper-emitted-"+alias
                   selected=present+[p for p in external if p.is_file()]

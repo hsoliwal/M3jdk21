@@ -15,9 +15,9 @@ the current master tree even though their history remains merged.
 Recover exactly the six reviewed PR #144 files:
 
 - `.github/workflows/m3-jep493-runtime-image-materialize.yml`
-- `m3/backports/materialize_generated_crates.py`
-- `m3/backports/test_materialize_generated_crates.py`
-- `m3/backports/recipes/jep-493-runtime-image/MATERIALIZATION_POLICY.tsv`
+- `make/m3/backports/materialize_generated_crates.py`
+- `make/m3/backports/test_materialize_generated_crates.py`
+- `make/m3/backports/recipes/jep-493-runtime-image/MATERIALIZATION_POLICY.tsv`
 - current JEP493 receipt update
 - current JEP493 README materialization section
 

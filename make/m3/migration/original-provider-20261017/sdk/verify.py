@@ -274,7 +274,7 @@ def self_test(pins,files):
             path=safe(pre,row["path"]);path.parent.mkdir(parents=True,exist_ok=True)
             path.write_bytes(files[RESOURCE+row["resource"]])
         baseline(pre,files)
-        mapping=safe(pre,"m3/docs/name-mapping.json")
+        mapping=safe(pre,"doc/m3/name-mapping.json")
         original=mapping.read_bytes()
         mapping.write_bytes(files[RESOURCE+"after-009.txt"])
         refuses(lambda:baseline(pre,files)) # POST cannot substitute for frozen PRE.

@@ -4,7 +4,7 @@
 """Recipe FOLDAUDIT_RESTORE v1: fold-close audit of the m3/core lexicon family (lane com-m3-0e, jdk.m3.text).
 
 Engine: m3/core/qualification/mergeloss-2472-20261107/apply.py v1 (from mergeloss-67-69-20261107, itself from
-m3/collections/qualification/census-small-batch-20261106): anchored "sub" edits, every anchor exactly once, LF payloads
+make/m3/collections/qualification/census-small-batch-20261106): anchored "sub" edits, every anchor exactly once, LF payloads
 re-joined with the preimage's line ending, a per-file leaf chain whose accepted states are the base (pinned by git blob
 id) and each chain prefix. Anything else is drift and the recipe refuses (exit 2) before any write. Idempotent: a second
 run reports files_changed=0 and EDITS.tsv is a fixed point. --check writes nothing and exits 1 when a run would change

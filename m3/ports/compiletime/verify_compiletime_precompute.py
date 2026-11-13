@@ -13,7 +13,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
 PORT = ROOT / "m3/ports/compiletime"
-CRATE = ROOT / ("m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/"
+CRATE = ROOT / ("make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/"
                 "jdk21-hash-pinned/m3-compiletime-regex-precompute")
 LEDGER_COLUMNS = ["capability", "candidate_repo", "commit", "source_paths", "license",
                   "contract_fit", "decision", "rejected_reason", "adapted_hashes", "notice_path"]
@@ -72,7 +72,7 @@ def check_evidence() -> None:
     for token in ("MIndexRegexProgram.java", "M3PatternQuery.java", "M3TQ.java", "asm-9.6"):
         if token not in provenance:
             raise AssertionError(f"provenance token missing: {token}")
-    if not (ROOT / "m3/docs/m3-compiletime-precompute.md").is_file():
+    if not (ROOT / "doc/m3/m3-compiletime-precompute.md").is_file():
         raise AssertionError("design doc missing")
 
 

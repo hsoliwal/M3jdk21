@@ -18,14 +18,14 @@
       "deletions": 0
     },
     {
-      "path": "m3/docs/mop-recipe-improvement-memory.md",
+      "path": "doc/m3/mop-recipe-improvement-memory.md",
       "status": "added",
       "git_blob": "c9386f423cd810aa77379b980ed52153d2090ffb",
       "additions": 254,
       "deletions": 0
     },
     {
-      "path": "m3/papers/MOP_RECIPE_OWNED_IMPROVEMENT_MEMORY.md",
+      "path": "doc/m3/papers/MOP_RECIPE_OWNED_IMPROVEMENT_MEMORY.md",
       "status": "added",
       "git_blob": "ff6bf74342b0cf7e51d3faa819b8b4e29d52468e",
       "additions": 214,

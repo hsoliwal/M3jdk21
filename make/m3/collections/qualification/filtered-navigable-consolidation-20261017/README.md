@@ -29,7 +29,7 @@ a reviewable collections proving-ground increment only.
 ## Selected proof
 
 ```sh
-bash m3/collections/qualification/filtered-navigable-consolidation-20261017/verify.sh
+bash make/m3/collections/qualification/filtered-navigable-consolidation-20261017/verify.sh
 # Broader module gate, when Maven/JUnit dependencies are available:
 mvn -B -ntp -f m3/collections/pom.xml test
 ```

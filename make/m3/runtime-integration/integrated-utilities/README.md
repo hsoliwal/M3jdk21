@@ -117,7 +117,7 @@ ownership, complexity/selection reasons, and explicit pending qualification.
 materialization with a Java 21 toolchain:
 
 ```sh
-python3 m3/runtime-integration/integrated-utilities/verify.py \
+python3 make/m3/runtime-integration/integrated-utilities/verify.py \
   --java-home /path/to/jdk-21 \
   --output /path/to/utility-contract-receipt.json
 ```

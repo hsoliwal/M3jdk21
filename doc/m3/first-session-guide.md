@@ -16,9 +16,9 @@ a quick reference; it does not replace the existing naming or acceptance authori
 
 | Question | Source entry point | Boundary to keep in mind |
 | --- | --- | --- |
-| How are independent immutable text pieces represented? | [Foundation module](../core/) and [module README](../README.md) | Explicit `com.m3.text` APIs on a selected JDK; not a transparent String replacement |
-| Where does the actual JDK live? | [Java platform sources](../../src/) and [runtime integration](../runtime-integration/) | Java classes, HotSpot layout and JNI must agree in one matched runtime image |
-| How are changes admitted? | [Recipes](../recipes/), [compatibility](../compatibility/), [release evidence](../release/) | A recipe receipt establishes its checked custody scope, not all runtime behavior |
+| How are independent immutable text pieces represented? | [Foundation module](../../m3/core/) and [module README](../../make/m3/README.md) | Explicit `com.m3.text` APIs on a selected JDK; not a transparent String replacement |
+| Where does the actual JDK live? | [Java platform sources](../../src/) and [runtime integration](../../make/m3/runtime-integration/) | Java classes, HotSpot layout and JNI must agree in one matched runtime image |
+| How are changes admitted? | [Recipes](../recipes/), [compatibility](../../make/m3/compatibility/), [release evidence](../../make/m3/release/) | A recipe receipt establishes its checked custody scope, not all runtime behavior |
 
 The [porting invariant](m3jdk21-porting-invariant.md) and
 [naming map](name-mapping.json) remain authoritative. The receiving order is
@@ -35,18 +35,18 @@ the scripts and selected toolchain before running them.
 | --- | --- | --- |
 | Identify the exact tree | `git rev-parse HEAD`; `git status --short` | Git checkout; preserve unrelated changes |
 | Read the independent module | `git grep -n 'flatten\|subSequence' -- m3/core/src/com/m3/text` | Read-only symbol search |
-| Build and test that module | `M3JDK=/absolute/path/to/jdk-21 bash m3/build.sh` | Bash, JDK 21 and shell utilities including `sha256sum`; writes `m3/build/` |
+| Build and test that module | `M3JDK=/absolute/path/to/jdk-21 bash make/m3/build.sh` | Bash, JDK 21 and shell utilities including `sha256sum`; writes `m3/build/` |
 | Check the foundation recipe manifest | `python3 m3/recipes/apply.py --check` | Python 3; a refusal needs investigation, not bypass |
 | Test foundation recipe refusal/repeatability | `python3 m3/recipes/test_recipe.py` | Python 3; recipe scope only |
-| Verify the independent Maven control plane | `mvn -B -ntp -f m3/pom.xml clean verify` | Maven, selected Java toolchain and resolvable pinned dependencies |
-| Build a complete modified JDK | `M3_BOOT_JDK=/absolute/path/to/jdk-21 bash m3/build-openjdk.sh` | Host compiler, make, Autoconf and platform headers; follow [native-build](native-build.md) |
-| Configure and select upstream tests | [OpenJDK testing guide](../../doc/testing.md) | jtreg and the actual built configuration; do not substitute foundation test results |
+| Verify the independent Maven control plane | `mvn -B -ntp -f make/m3/pom.xml clean verify` | Maven, selected Java toolchain and resolvable pinned dependencies |
+| Build a complete modified JDK | `M3_BOOT_JDK=/absolute/path/to/jdk-21 bash make/m3/build-openjdk.sh` | Host compiler, make, Autoconf and platform headers; follow [native-build](native-build.md) |
+| Configure and select upstream tests | [OpenJDK testing guide](../testing.md) | jtreg and the actual built configuration; do not substitute foundation test results |
 
-Read [OpenJDK build prerequisites](../../doc/building.md) for your OS. The native
+Read [OpenJDK build prerequisites](../building.md) for your OS. The native
 wrapper's optional dependency paths are Linux-specific; the existence of an upstream
 platform build route does not establish M3-specific qualification on that platform.
 
-The foundation [build script](../build.sh) compiles the module and listed tests,
+The foundation [build script](../../make/m3/build.sh) compiles the module and listed tests,
 then runs JIT, interpreter, noncompact-String and C2-focused configurations. It later
 creates a small fixture lexicon. Failure stops the script: an early passing log does
 not imply that later tests or image publication ran. These modes exercise the
@@ -54,7 +54,7 @@ separate module; they do not demonstrate M3-enabled optimizing-compiler support.
 
 ## Worked trace: what does “share a substring” mean here?
 
-Open [FoundationTest.java](../core/test/FoundationTest.java), method `pieces()`.
+Open [FoundationTest.java](../../m3/core/test/FoundationTest.java), method `pieces()`.
 Follow this path instead of starting with the whole JVM:
 
 1. A mutable `char[]` is passed to `LocalM3Arena.copyUtf16`.
@@ -85,7 +85,7 @@ The test source is an executable specification candidate, not evidence that it p
 on your checkout.
 
 For the separate runtime route, continue with the
-[String backing contract](../../doc/mindex-string-backing.md) and
+[String backing contract](../mindex-string-backing.md) and
 [JNI ingress/egress guide](mindex-jni-string-ingress.md). Never patch candidate
 `java.base` classes into an unrelated installed VM to simulate a matched build.
 

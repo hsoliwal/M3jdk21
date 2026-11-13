@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "catalogue_id": "m3-collection-wrapper-convergence-20261018",
-  "extends_columns_from": "m3/collections/algorithm-catalog/collection-candidate-comparison-20261017.tsv",
+  "extends_columns_from": "make/m3/collections/algorithm-catalog/collection-candidate-comparison-20261017.tsv",
   "columns": [
     "donor_link_id",
     "category",

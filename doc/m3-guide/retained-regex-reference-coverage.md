@@ -351,7 +351,7 @@ The existing routes in `packages/custody-01.md`, `indexed-string-reference.md`,
 `runtime-owners.md` and `projects.md` were read to retain their bounded ownership
 claims. This reference adds detail for these seven retained regex owners; it does
 not replace the separate compatibility bridge or bootstrap/runtime guides.
-`m3/pom.xml`, `m3/m3-import/pom.xml`, `m3/build.sh` and vendor custody establish
+`make/m3/pom.xml`, `m3/m3-import/pom.xml`, `make/m3/build.sh` and vendor custody establish
 separate build responsibilities, not a standalone retained regex build. The
 retained subtree has no root regex test sources or module/POM descriptor.
 

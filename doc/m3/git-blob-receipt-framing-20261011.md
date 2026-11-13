@@ -3,7 +3,7 @@
 ## CI evidence
 
 The `M3 foundation contracts` and `M3JDK String owner-coordinate runtime`
-jobs fail in `m3/runtime-integration/char-array-copy/recipe/apply.py`:
+jobs fail in `make/m3/runtime-integration/char-array-copy/recipe/apply.py`:
 
 `superseded owner drift: src/java.base/share/classes/java/lang/M3String.java expected=70d1d03c109126fdda36c54da21b484bbe368fd9 actual=2e1239e157650dda20d4fd1d95e6fe35d1fe4c5a`.
 

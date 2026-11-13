@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.Test;
 
 /** A deterministic DOOP no-escape lease oracle; no JVMTI snapshot is a reuse permit. */
-//FLLDCIM: RELOCATE - donor blob 94857594c8b0 at fd9a233680b4; recipe m3/collections/recipe/transient-facade-20261106/relocate.py v4
+//FLLDCIM: RELOCATE - donor blob 94857594c8b0 at fd9a233680b4; recipe make/m3/collections/recipe/transient-facade-20261106/relocate.py v4
 class TransientFacadeRecycleTest {
     private static final class Mutable {
         long id;

@@ -13,4 +13,4 @@ keep Java mask selection by default; native mask selection is opt-in through the
 The implementation reuses first-party M3 owners. HackerRank/LeetCode/GeeksforGeeks are
 problem-category references only; no challenge or editorial source is copied.
 
-Run: `bash m3/collections/qualification/required-excluded-mask-selector-20261018/verify.sh`.
+Run: `bash make/m3/collections/qualification/required-excluded-mask-selector-20261018/verify.sh`.

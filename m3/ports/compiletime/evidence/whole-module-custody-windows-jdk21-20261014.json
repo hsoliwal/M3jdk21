@@ -242,17 +242,17 @@
       "encoding": "utf-8"
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3CompileTimeRegexPrecomputeRecipe.java",
+      "path": "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3CompileTimeRegexPrecomputeRecipe.java",
       "sha": "d517a60b077eb2adbfbcfe4d6f81951a9c7b4640",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3CompileTimeRegexPrecomputeRecipeTest.java",
+      "path": "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3CompileTimeRegexPrecomputeRecipeTest.java",
       "sha": "88727b2eb5929b124d9f4874a61c61f31516cad6",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
+      "path": "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
       "sha": "40f543e413c245c900d6502a27645d05735a6ebd",
       "encoding": "utf-8"
     }

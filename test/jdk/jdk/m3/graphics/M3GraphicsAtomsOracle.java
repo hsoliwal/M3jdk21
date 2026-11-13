@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * Both sides of the jdk.m3.graphics atom tests (support of m3/tooling/skija-absorb/tools/gen_atom_tests.py).
+ * Both sides of the jdk.m3.graphics atom tests (support of make/m3/tooling/skija-absorb/tools/gen_atom_tests.py).
  * The M3 side is the absorbed module: jdk.m3.graphics in the image, or its classes on the class path. The oracle side
  * is the donor, HumbleUI Skija 0.143.18 and Types 0.2.0, loaded from the jars named by
  * {@code -Dm3.graphics.oracle=<skija-shared jar><path separator><types jar>} in a class loader of its own whose parent
@@ -28,7 +28,7 @@ import java.util.Optional;
  *
  * <p>Atoms and descriptors use short donor names: {@code skija.ColorType}, {@code types.Rect} and descriptor tokens
  * {@code Lskija/paragraph/TextStyle;} stand for {@code io.github.humbleui.skija.ColorType} and so on. The M3 name of
- * a donor type follows the leaf-1 rename (m3/tooling/skija-absorb/leaf1/TYPE_RENAME_L1.tsv):
+ * a donor type follows the leaf-1 rename (make/m3/tooling/skija-absorb/leaf1/TYPE_RENAME_L1.tsv):
  * {@code io.github.humbleui.skija[.x].T} and {@code io.github.humbleui.types.T} become {@code jdk.m3.graphics[.x].M3T}.
  * Classes are loaded without initialization; a class initializes when a test first uses it.
  */

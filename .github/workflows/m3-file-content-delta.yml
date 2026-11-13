@@ -5,8 +5,8 @@ on:
   pull_request:
     paths:
       - 'm3/file/**'
-      - 'm3/docs/build-delta-invariant.md'
-      - 'm3/docs/name-mapping.d/m3file-build-delta-20261020.json'
+      - 'doc/m3/build-delta-invariant.md'
+      - 'doc/m3/name-mapping.d/m3file-build-delta-20261020.json'
       - '.github/workflows/m3-file-content-delta.yml'
   workflow_dispatch:
 permissions:

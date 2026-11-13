@@ -26,7 +26,7 @@
           "beforeBytes": 778,
           "beforeSHA256": "55cf0228bc55016de89f71104895e3c9fd408ec05dc32640452914ca53f42170",
           "operation": "REPLACE",
-          "path": "m3/runtime-integration/fix-root-ascii-case/manifest.json"
+          "path": "make/m3/runtime-integration/fix-root-ascii-case/manifest.json"
         },
         {
           "afterBytes": 79659,
@@ -34,7 +34,7 @@
           "beforeBytes": 79652,
           "beforeSHA256": "46a4e8a218c33beaeb1190fb82562d30744e0c0f6c03af1ecef50cc3866dc9da",
           "operation": "REPLACE",
-          "path": "m3/tooling/image-gates/current-c0.json"
+          "path": "make/m3/tooling/image-gates/current-c0.json"
         },
         {
           "afterBytes": 51207,

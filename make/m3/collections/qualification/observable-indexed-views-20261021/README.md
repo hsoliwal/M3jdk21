@@ -23,7 +23,7 @@ The existing `M3ObservableList` notification listeners and generation remain aut
 ## Recipe admission and tests
 
 - Canonical reusable OpenRewrite machinery: `M3HashPinnedJavaSnapshotRecipe` already provided by M3/Synexia. The new dataset `m3-observable-indexed-views-20261021` retains the SHA-256 old-source preimage, both exact Java output templates, and two-target sorted manifest.
-- Run `mvn -B -ntp -f m3/collections/recipe/observable-indexed-views-20261021/pom.xml test`: Java LST generation from original preimage, fixed-point rerun, and drift refusal.
+- Run `mvn -B -ntp -f make/m3/collections/recipe/observable-indexed-views-20261021/pom.xml test`: Java LST generation from original preimage, fixed-point rerun, and drift refusal.
 - Compile Java 21 collection owners and run `M3ObservableListContract` and `M3ObservableIndexedViewsContract`. New contract covers nulls, duplicates, stable comparator order, physical positions, sorted-only/filtered-only views, structural/nonstructural changes, notification order, fail-fast iterators, read-only mutation refusal, mutable referent invalidation, optional JNI refusal, and 1,200 seeded randomized differential steps against standard Java collection operations.
 - GitHub Actions workflow `.github/workflows/m3-observable-indexed-views-20261021.yml` should prove these on the exact PR head before qualified promotion.
 - The complete Eclipse/EMF inverse containment, proxy resolution, notification chains, transaction policies and observer scheduling still need a separate exact upstream differential gate. This Java List view does not claim their contracts.

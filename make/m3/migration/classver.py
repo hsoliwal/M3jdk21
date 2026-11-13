@@ -14,7 +14,7 @@ import subprocess
 import sys
 import types
 
-LEDGER = "m3/migration/classver-evidence.json"
+LEDGER = "make/m3/migration/classver-evidence.json"
 LEDGER_SHA256 = "da68bc2e110f1e6cfcadef240393c121c86a8bcc3341202a900e2c8e3466e1b5"
 AUTHORITY = {
     "repository": "hsoliwal/M3jdk21",
@@ -22,7 +22,7 @@ AUTHORITY = {
     "tree": "90ff0bbaea96b14dc65806ee10b587deee7eaffc",
 }
 HELPER = {
-    "path": "m3/migration/recipe.py",
+    "path": "make/m3/migration/recipe.py",
     "mode": "100644",
     "gitBlob": "02f88f9f8b1eb8930fff59684c81bb30819800ad",
     "sha256": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628",

@@ -32,7 +32,7 @@ GitHub evidence is separate and license-bound:
 
 ## Catalogue
 
-The canonical input is m3/backports/ALGORITHM_CATALOGUE.tsv.
+The canonical input is make/m3/backports/ALGORITHM_CATALOGUE.tsv.
 
 One row is one candidate algorithm atom, not one problem solution.
 

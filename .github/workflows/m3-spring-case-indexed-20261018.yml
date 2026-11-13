@@ -7,7 +7,7 @@ on:
       - "m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3SpringCaseInsensitive*.java"
       - "m3/collections/interop/qualification/spring-case-indexed-20261018/**"
       - "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-spring-case-indexed-20261018/**"
-      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-spring-case-indexed-20261018.yml"
+      - "make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-spring-case-indexed-20261018.yml"
       - ".github/workflows/m3-spring-case-indexed-20261018.yml"
   push:
     branches: [m3/spring-case-indexed-receiver-20261018]

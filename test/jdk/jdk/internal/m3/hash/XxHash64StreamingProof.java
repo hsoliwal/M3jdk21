@@ -5,7 +5,7 @@
 
 /*
  * @test
- * @summary Dependency-free parity proof of M3XxHash64Streaming (recipe m3/qualification/hash-xxhash64-streaming-20261106):
+ * @summary Dependency-free parity proof of M3XxHash64Streaming (recipe make/m3/qualification/hash-xxhash64-streaming-20261106):
  *          17 lengths x 4 seeds, 7-byte and 4,097-byte updates, files, the known empty-input vector, every value equal
  *          to the one-shot of the owner, M3LongHashFunction.xx(seed).hashBytes(byte[]).
  * @modules java.base/jdk.internal.m3.hash:open
@@ -21,7 +21,7 @@ import java.nio.file.Path;
 import java.util.Random;
 
 /** Dependency-free parity probe for Java 21, independent from JUnit / Maven. */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/ca1aafc4d94f9dd1ee288226dcca070cc60991c9/synexia-fileindex/src/test/java/com/synexia/fileindex/content/XXHash64StandaloneProof.java blob a5303cc84a1b; recipe m3/qualification/hash-xxhash64-streaming-20261106/recipe/relocate.py v4
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/ca1aafc4d94f9dd1ee288226dcca070cc60991c9/synexia-fileindex/src/test/java/com/synexia/fileindex/content/XXHash64StandaloneProof.java blob a5303cc84a1b; recipe make/m3/qualification/hash-xxhash64-streaming-20261106/recipe/relocate.py v4
 public final class XxHash64StreamingProof {
     private XxHash64StreamingProof() {}
 

@@ -24,7 +24,7 @@ not a test): `src/test/java/jdk/m3/algorithm/M3GraphTrieDump.java`.
 |---|---|---|
 | union-find (`IntUnionFind`, blob `a254fd158850`) | `git ls-files \| grep -i 'DisjointSet\|DisjointIndex\|UnionFind'`: `jdk.m3.collections.M3IntDisjointSet` (blob `301e06fa76e7`, programme leaf 1), `M3DisjointIndex` (blob `c8296043b571`), cpu-tools `M3RollbackUnionFind` | **ALREADY** (not ported; SKIP + NEC row). `unionfind_differential.sh`: 1,000,000 seeded ops (union 50 %, connected 20 %, find 15 %, componentSize 10 %, componentCount 5 %, 1 % out-of-range probes) over 101 sequences of sizes 0..98,473; per-op dumps of every partition observation plus a canonical-labelling sha256 per sequence, byte-identical: sha256 `3974870afe23f6ac18b5813ba80f999c498bad762a06740d910a3a5c234b765e` both sides; `first_partition_difference=none`. Representatives were compared in process only: 150,123 finds, 0 mismatches (both are union by size with the same tie-break; full compression vs path halving does not change roots). NEC row text: "IntUnionFind -> M3IntDisjointSet (partition-equivalent, representatives differ: no)" |
 | trie | `git grep -n -i trie -- m3 src/java.base/share/classes/jdk/internal/m3 ':!**/target/**'`: `jdk.m3.collections.M3TreePathTrie` (blob `043c2bb63dc1`, int segment paths to int ids with flag lanes), `M3PatriciaTrie` (blob `8f89c1dbb739`, scaffold, every method throws), `M3LongPatriciaTrie` (blob `fc76bf4a4700`, crit-bit over long keys); nothing in java.base `jdk/internal/m3` | **ABSORB + NEC**: no code-point String trie with insert/contains/startsWith/remove/wordCount; `StringTrie` relocated as `M3StringTrie`, NEC row names the three owners with blob ids |
-| graph | `git grep -n -i -E 'dijkstra\|topological\|StronglyConnected\|Tarjan\|Kosaraju'`: only `m3/tooling/module-packs/cpu-tools` (`TopologicalOrder` blob `86119c6acae8`, `ShortestPaths` blob `429772cec77d`, `M3ShortestPaths` blob `a20e8ff49798` with `UNREACHABLE = Long.MAX_VALUE`), guava copies (doc mentions), catalogue TSVs | **ABSORB + NEC**: int-vertex tool shapes returning arrays, no generic `V`, no monitor, no BFS/SCC, and the MAX sentinel the donor's `dijkstra` removes; `GraphAlgorithms` relocated as `M3GraphAlgorithms`, NEC row names the four tool owners |
+| graph | `git grep -n -i -E 'dijkstra\|topological\|StronglyConnected\|Tarjan\|Kosaraju'`: only `make/m3/tooling/module-packs/cpu-tools` (`TopologicalOrder` blob `86119c6acae8`, `ShortestPaths` blob `429772cec77d`, `M3ShortestPaths` blob `a20e8ff49798` with `UNREACHABLE = Long.MAX_VALUE`), guava copies (doc mentions), catalogue TSVs | **ABSORB + NEC**: int-vertex tool shapes returning arrays, no generic `V`, no monitor, no BFS/SCC, and the MAX sentinel the donor's `dijkstra` removes; `GraphAlgorithms` relocated as `M3GraphAlgorithms`, NEC row names the four tool owners |
 
 ## Donor and relocation (recipe, never by hand)
 
@@ -35,7 +35,7 @@ not a test): `src/test/java/jdk/m3/algorithm/M3GraphTrieDump.java`.
 | recipe | `relocate.py` v1 (`RELOCATE_ALGORITHM_GRAPH_TRIE`, lineage: `families-20261106/relocate.py` v1): `python -I recipe/graph-trie-20261106/relocate.py --donor-git <clone> --donor-rev <rev> [--check]` |
 | map | `RELOCATION_MAP.tsv`: 1 `REPO`, 5 `FILE`, 2 `OWNED`, 2 `PACKAGE`, 7 `TYPE`, 1 `EXTERNAL`, 1 `DROP_METHOD`, 1 `INSERT_AFTER`, 3 `SKIP`, 3 `NEC` |
 | provenance | `body_match=TRUE` 5/5; renamed lines 11/8/11/16/7, 1 mapped import each, 9 dropped lines (one oracle method), 4 inserted lines (the constructor block) |
-| naming | `python -I m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/algorithms/`: 0 moves, 0 rewrites, 0 refusals; fixed point 0/0 |
+| naming | `python -I make/m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/algorithms/`: 0 moves, 0 rewrites, 0 refusals; fixed point 0/0 |
 
 Differences from the families recipe (each recorded in `RECIPE_MEMORY.tsv`):
 
@@ -64,7 +64,7 @@ Differences from the families recipe (each recorded in `RECIPE_MEMORY.tsv`):
 | 4 families differential (leaf 1) | PASS, 1,100,019 cases, sha256 `f85280ac94b2fc25bf7f10ac17193bf7b788dc1aea731a6a2b4c3da04fc392f9` unchanged |
 | 5 untouched class files | 24 of 24 master class files byte-identical (module-info included); 6 new |
 | 6 `jdk_naming.py apply --only m3/algorithms/` | 0/0/0, fixed point 0/0 |
-| 7 scope | `m3/algorithms/**` plus the three ledger rows; `m3/pom.xml` untouched |
+| 7 scope | `m3/algorithms/**` plus the three ledger rows; `make/m3/pom.xml` untouched |
 | owner check union-find | PASS (partition-equivalent, representatives differ: no), see above |
 
 ## Hard-limit notes (recorded, not fixed)

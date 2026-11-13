@@ -3,7 +3,7 @@
 
 Copyright 2026 Hitesh Soliwal and contributors. Authored receiving metadata is Apache-2.0; imported source retains its original rights.
 
-The package-first pass imports complete source bodies into [the implementation directory](../../implementations/spring-core-6.2.0-collections/). FULL_SOURCE_BINDINGS.tsv records each original/target path, mode, Git blob and raw SHA-256. File counts describe this finite inventory, not implemented collection contracts.
+The package-first pass imports complete source bodies into [the implementation directory](../../../../../m3/collections/implementations/spring-core-6.2.0-collections/). FULL_SOURCE_BINDINGS.tsv records each original/target path, mode, Git blob and raw SHA-256. File counts describe this finite inventory, not implemented collection contracts.
 
 All27 sources compile into89 classfiles;88 body classes and954 API symbols match under the namespace mapping. Five original compiler warnings are preserved. Original reference entries, backing Java collections and global caches remain.
 

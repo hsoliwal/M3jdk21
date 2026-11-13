@@ -5,7 +5,7 @@
 import argparse,hashlib,json,subprocess
 from pathlib import Path,PurePosixPath
 HERE=Path(__file__).resolve().parent
-ROOT=HERE.parents[2]
+ROOT=HERE.parents[3]
 def digest(data): return hashlib.sha256(data).hexdigest()
 
 # Exact four-owner JNI modified-UTF8 source receipt: Synexia #11288,

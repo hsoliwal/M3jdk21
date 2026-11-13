@@ -6,7 +6,7 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalRelations.java'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SourceSignalImage.java'
       - 'test/jdk/jdk/m3/collections/M3SourceSignalImage*.java'
-      - 'm3/collections/qualification/source-signal-image-20261022/**'
+      - 'make/m3/collections/qualification/source-signal-image-20261022/**'
       - '.github/workflows/m3-source-signal-image-20261022.yml'
   workflow_dispatch:
 permissions:
@@ -33,7 +33,7 @@ jobs:
         run: |
           set -euo pipefail
           git diff --check origin/m3/typed-signal-columns-20261022...HEAD
-          bash m3/collections/qualification/source-signal-image-20261022/verify.sh
+          bash make/m3/collections/qualification/source-signal-image-20261022/verify.sh
       - name: Compile M3JDK21 owning source and run strict seeded Java21 differential
         shell: bash
         run: |

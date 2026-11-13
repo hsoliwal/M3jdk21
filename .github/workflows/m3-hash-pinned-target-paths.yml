@@ -6,14 +6,14 @@ on:
   pull_request:
     paths:
       - '.github/workflows/m3-hash-pinned-target-paths.yml'
-      - 'm3/tooling/hash-pinned-target-paths/**'
-      - 'm3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
-      - 'm3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3ObjectSlotIndexSnapshot20261017RecipeTest.java'
-      - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectIndexSnapshot.java.txt'
-      - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexSelfTest.java.txt'
-      - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexTest.java.txt'
-      - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotStore28.java.txt'
-      - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/manifest.tsv'
+      - 'make/m3/tooling/hash-pinned-target-paths/**'
+      - 'make/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
+      - 'make/m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3ObjectSlotIndexSnapshot20261017RecipeTest.java'
+      - 'make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectIndexSnapshot.java.txt'
+      - 'make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexSelfTest.java.txt'
+      - 'make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexTest.java.txt'
+      - 'make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotStore28.java.txt'
+      - 'make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/manifest.tsv'
 permissions:
   contents: read
 concurrency:
@@ -132,8 +132,8 @@ jobs:
           root=pathlib.Path(os.environ["M3_PROOF_ROOT"])
           source=pathlib.Path(os.environ["M3_SOURCE_ROOT"])
           bundle=root/"artifacts";bundle.mkdir(exist_ok=False)
-          sdk=source/"m3/tooling/hash-pinned-target-paths/sdk"
-          authority=source/"m3/tooling/hash-pinned-target-paths/authority-conformance"
+          sdk=source/"make/m3/tooling/hash-pinned-target-paths/sdk"
+          authority=source/"make/m3/tooling/hash-pinned-target-paths/authority-conformance"
           lanes={"sdk":sdk,"scope":authority/"scope-sdk","manifest":authority/"manifest-sdk"}
           phase_sdks={lane+"-"+phase:folder for lane,folder in lanes.items() for phase in ("inputs","maven")}
           completed=False
@@ -302,7 +302,7 @@ jobs:
               gate()
               if code!=expected:raise RuntimeError(name+" failed with "+str(code)+" expected "+str(expected))
           py=[os.environ["M3_PYTHON"],"-I","-S","-B"]
-          qualifier=source/"m3/tooling/hash-pinned-target-paths/qualify.py"
+          qualifier=source/"make/m3/tooling/hash-pinned-target-paths/qualify.py"
           settings=root/"home/.m2"
           maven=["mvn","-B","-ntp","-s",str(settings/"settings.xml"),"-gs",str(settings/"global-settings.xml"),"-Dmaven.repo.local="+str(root/"m2"),"-Dstyle.color=never"]
           try:

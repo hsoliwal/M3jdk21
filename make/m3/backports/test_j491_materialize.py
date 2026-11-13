@@ -52,7 +52,7 @@ class J491MaterializeTest(unittest.TestCase):
     def test_exact_denominator_materializes_sorted_dag_and_counts(self) -> None:
         root = Path(__file__).parents[0]
         paths = root / "recipes" / "j491" / "PATHS.txt"
-        # Unit tests may run from m3/backports; use the checked-in packet path directly.
+        # Unit tests may run from make/m3/backports; use the checked-in packet path directly.
         if not paths.is_file():
             paths = Path(__file__).with_name("recipes") / "j491" / "PATHS.txt"
         rows = self.mod.load_paths(paths)

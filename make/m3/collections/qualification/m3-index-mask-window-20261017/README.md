@@ -73,14 +73,14 @@ pending wrapper PR family; a primitive index mask is not interchangeable with `N
 2. Edit **checked-in recipe templates**, never the generated runtime postimages directly.
    `M3HashPinnedJavaSnapshotRecipe` owns Java generation from exact SHA-256 templates;
    `native-manifest.tsv` owns only the companion C source.
-3. `python3 m3/collections/qualification/m3-index-mask-window-20261017/verify.py`
+3. `python3 make/m3/collections/qualification/m3-index-mask-window-20261017/verify.py`
    checks all targets, replays onto an empty isolated workspace, proves second-pass fixed
    point, and refuses modified postimages before any file write. An opt-in `--apply`
    generates only absent targets; it never replaces an existing differing source.
 4. Run the focused Java/JUnit gate:
-   `mvn -f m3/collections/pom-m3-index-mask-window-20261017.xml test`.
+   `mvn -f make/m3/collections/pom-m3-index-mask-window-20261017.xml test`.
 5. Run the **actual** Maven/OpenRewrite SDK gate (requires pinned dependencies installed):
-   `mvn -f m3/collections/qualification/m3-index-mask-window-20261017/pom.xml test`.
+   `mvn -f make/m3/collections/qualification/m3-index-mask-window-20261017/pom.xml test`.
 6. Compile strict Java 21 sources and JNI C with `-Wall -Wextra -Werror -Wconversion
    -Wshadow -pedantic` plus optional UndefinedBehaviorSanitizer. Run the same randomized
    standalone oracle under Java-only and native-loaded JVMs. JNI must be loaded explicitly,

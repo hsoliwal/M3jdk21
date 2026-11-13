@@ -28,7 +28,7 @@ import java.util.stream.IntStream;
  * mapping function for a key that is present, so the returned instance is the same either way.
  * So the test replaces the catalog's private {@code payloads} map with a counting one by
  * reflection, as the com.synexia crate harness M3PayloadWarmLookupRedTest did. That needs
- * {@code --add-opens jdk.m3.text/jdk.m3.text=ALL-UNNAMED} on the module path. m3/build.sh
+ * {@code --add-opens jdk.m3.text/jdk.m3.text=ALL-UNNAMED} on the module path. make/m3/build.sh
  * passes it on this test's run line only. One cold lookup and {@value #WARM_LOOKUPS} warm
  * lookups must enter {@code computeIfAbsent} exactly once, and run the loader exactly once.</p>
  */

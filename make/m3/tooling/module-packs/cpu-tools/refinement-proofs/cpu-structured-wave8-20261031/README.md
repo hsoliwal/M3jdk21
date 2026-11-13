@@ -5,7 +5,7 @@ This scope receives three first-party Java21 CPU primitives, two independent Jav
 
 ## Local proof, not final target acceptance
 
-`python3 m3/tooling/module-packs/cpu-tools/fixtures/verify_wave8.py --root <fresh-receiver> --out <fresh-outside-root>` compiles only the five received Java files using `javac --release 21 -proc:none -Xlint:all -Werror`, then independently checks JIT and interpreted mode oracles and sealed input identities. It is not an actual M3JDK21 JMOD build, does not run Maven/OpenRewrite, cannot prove full-platform compatibility, and is not a performance claim.
+`python3 make/m3/tooling/module-packs/cpu-tools/fixtures/verify_wave8.py --root <fresh-receiver> --out <fresh-outside-root>` compiles only the five received Java files using `javac --release 21 -proc:none -Xlint:all -Werror`, then independently checks JIT and interpreted mode oracles and sealed input identities. It is not an actual M3JDK21 JMOD build, does not run Maven/OpenRewrite, cannot prove full-platform compatibility, and is not a performance claim.
 
 - `M3TwoSat`: bounded exact 2-CNF, not full SAT/SMT.
 - `M3ArcConsistency`: sound binary CSP local filtering, not complete CSP decision.

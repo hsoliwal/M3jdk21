@@ -23,6 +23,6 @@ capture makes an explicitly transient aligned byte plane. No performance improve
 or end-to-end source/binary substitutability is asserted without benchmark/JDK gates.
 
 Generated output SHA-256 pins: `manifest.tsv` and `native-manifest.tsv`.
-Local reproduction: `bash m3/collections/recipe/state-mask-histogram-20261017/verify.sh`.
+Local reproduction: `bash make/m3/collections/recipe/state-mask-histogram-20261017/verify.sh`.
 This proves a bounded Java21/C17/JNI contract, **not** full patched JDK,
 OpenRewrite execution, JCK/jtreg, Maven module or multi-platform parity.

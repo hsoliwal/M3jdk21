@@ -48,11 +48,11 @@ TYPE	jdk.m3.tooling.donors.M3DonorTreeLanesSelfTest	jdk.m3.tooling.donors.DonorT
 TYPE	jdk.m3.tooling.donors.M3OpenJdkDeltaInventory	jdk.m3.tooling.donors.OpenJdkDeltaInventory
 EDIT	.github/workflows/m3-semantic-census-20261101.yml
 EDIT	.github/workflows/m3jdk21-jni-export-join-20261101.yml
-EDIT	m3/tooling/atom-census/COMPANION.md
-EDIT	m3/tooling/atom-census/contract/README.md
-EDIT	m3/tooling/atom-census/contract/SEMANTIC_SOURCE_CENSUS_V1.md
-EDIT	m3/tooling/atom-census/java-semantic/README.md
-EDIT	m3/tooling/atom-census/run.sh
+EDIT	make/m3/tooling/atom-census/COMPANION.md
+EDIT	make/m3/tooling/atom-census/contract/README.md
+EDIT	make/m3/tooling/atom-census/contract/SEMANTIC_SOURCE_CENSUS_V1.md
+EDIT	make/m3/tooling/atom-census/java-semantic/README.md
+EDIT	make/m3/tooling/atom-census/run.sh
 EDIT	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/M3AtomCoverageLedger.java
 EDIT	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/M3AtomCoverageVerifier.java
 EDIT	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/M3AtomDescriptor.java
@@ -92,13 +92,13 @@ EDIT	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/M3SystemApiReview
 EDIT	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/repository/M3JavaSemanticCensusSelfTest.java
 EDIT	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/repository/M3RepositoryFileCensusSelfTest.java
 EDIT	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/repository/M3RepositoryFileCensusTest.java
-EDIT	m3/tooling/atom-census/verify-companion.sh
-EDIT	m3/tooling/atom-census/verify-contract.sh
-EDIT	m3/tooling/atom-census/verify-jni-export-join.sh
-EDIT	m3/tooling/atom-census/verify-jni-projection.sh
-EDIT	m3/tooling/atom-census/verify-repository-census.sh
+EDIT	make/m3/tooling/atom-census/verify-companion.sh
+EDIT	make/m3/tooling/atom-census/verify-contract.sh
+EDIT	make/m3/tooling/atom-census/verify-jni-export-join.sh
+EDIT	make/m3/tooling/atom-census/verify-jni-projection.sh
+EDIT	make/m3/tooling/atom-census/verify-repository-census.sh
 EDIT	m3/tooling/atom-jit-gate/src/main/java/jdk/m3/tooling/atomjit/M3OpenJdkOrderedPasses.java
-EDIT	m3/tooling/donor-catalogue/README.md
+EDIT	make/m3/tooling/donor-catalogue/README.md
 EDIT	m3/tooling/donor-catalogue/src/main/java/jdk/m3/tooling/donors/M3DonorCatalogue.java
 EDIT	m3/tooling/donor-catalogue/src/main/java/jdk/m3/tooling/donors/M3DonorDeltaPlanner.java
 EDIT	m3/tooling/donor-catalogue/src/main/java/jdk/m3/tooling/donors/M3DonorTreeLanes.java
@@ -108,52 +108,52 @@ EDIT	m3/tooling/donor-catalogue/src/test/java/jdk/m3/tooling/donors/M3DonorDelta
 EDIT	m3/tooling/donor-catalogue/src/test/java/jdk/m3/tooling/donors/M3DonorSortedFastPathProof.java
 EDIT	m3/tooling/donor-catalogue/src/test/java/jdk/m3/tooling/donors/M3DonorTreeLanesGrowthTest.java
 EDIT	m3/tooling/donor-catalogue/src/test/java/jdk/m3/tooling/donors/M3DonorTreeLanesSelfTest.java
-EDIT	m3/tooling/donor-catalogue/verify.sh
-MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/M3AtomCensus.java	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/AtomCensus.java
-MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/M3ClassfileSeal.java	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/ClassfileSeal.java
-MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/M3CompanionPlan.java	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/CompanionPlan.java
-MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/M3JniDeclarationProjection.java	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/JniDeclarationProjection.java
-MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/M3JniExportJoin.java	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/JniExportJoin.java
-MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/M3SystemApiCensus.java	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/SystemApiCensus.java
-MOVE	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/M3AtomCensusSemanticSelfTest.java	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/AtomCensusSemanticSelfTest.java
-MOVE	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/M3AtomCensusSemanticTest.java	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/AtomCensusSemanticTest.java
-MOVE	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/M3AtomCensusTest.java	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/AtomCensusTest.java
-MOVE	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/M3ClassfileSealTest.java	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/ClassfileSealTest.java
-MOVE	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/M3CompanionPlanTest.java	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/CompanionPlanTest.java
-MOVE	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/M3JniDeclarationProjectionSelfTest.java	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/JniDeclarationProjectionSelfTest.java
-MOVE	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/M3JniDeclarationProjectionTest.java	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/JniDeclarationProjectionTest.java
-MOVE	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/M3JniExportJoinSelfTest.java	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/JniExportJoinSelfTest.java
-MOVE	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/M3JniExportJoinTest.java	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/JniExportJoinTest.java
-MOVE	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/M3SystemApiCensusTest.java	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/SystemApiCensusTest.java
-MOVE	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/M3SystemApiReviewTest.java	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/SystemApiReviewTest.java
-MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/M3AtomCoverageLedger.java	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/AtomCoverageLedger.java
-MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/M3AtomCoverageVerifier.java	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/AtomCoverageVerifier.java
-MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/M3AtomDescriptor.java	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/AtomDescriptor.java
-MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/M3AtomEvidence.java	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/AtomEvidence.java
-MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/M3AtomKind.java	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/AtomKind.java
-MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/M3AtomRecord.java	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/AtomRecord.java
-MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/M3AtomSpec.java	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/AtomSpec.java
-MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/M3CoverageGate.java	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/CoverageGate.java
-MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/M3EvidenceRecord.java	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/EvidenceRecord.java
-MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/M3GateStatus.java	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/GateStatus.java
-MOVE	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/contract/M3AtomCoverageContractTest.java	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/contract/AtomCoverageContractTest.java
-MOVE	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/contract/M3AtomCoverageVerifierSelfTest.java	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/contract/AtomCoverageVerifierSelfTest.java
-MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/repository/M3FileAtomIdentities.java	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/repository/FileAtomIdentities.java
-MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/repository/M3GitTreeEntry.java	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/repository/GitTreeEntry.java
-MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/repository/M3GitTreeSnapshot.java	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/repository/GitTreeSnapshot.java
-MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/repository/M3JavaSemanticCensus.java	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/repository/JavaSemanticCensus.java
-MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/repository/M3JavaSemanticExtractor.java	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/repository/JavaSemanticExtractor.java
-MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/repository/M3RepositoryFileCensus.java	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/repository/RepositoryFileCensus.java
-MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/repository/M3SourceFamily.java	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/repository/SourceFamily.java
-MOVE	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/repository/M3JavaSemanticCensusSelfTest.java	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/repository/JavaSemanticCensusSelfTest.java
-MOVE	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/repository/M3RepositoryFileCensusSelfTest.java	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/repository/RepositoryFileCensusSelfTest.java
-MOVE	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/repository/M3RepositoryFileCensusTest.java	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/repository/RepositoryFileCensusTest.java
-MOVE	m3/tooling/donor-catalogue/src/main/java/jdk/m3/tooling/donors/M3DonorCatalogue.java	m3/tooling/donor-catalogue/src/main/java/jdk/m3/tooling/donors/DonorCatalogue.java
-MOVE	m3/tooling/donor-catalogue/src/main/java/jdk/m3/tooling/donors/M3DonorDeltaPlanner.java	m3/tooling/donor-catalogue/src/main/java/jdk/m3/tooling/donors/DonorDeltaPlanner.java
-MOVE	m3/tooling/donor-catalogue/src/main/java/jdk/m3/tooling/donors/M3DonorTreeLanes.java	m3/tooling/donor-catalogue/src/main/java/jdk/m3/tooling/donors/DonorTreeLanes.java
-MOVE	m3/tooling/donor-catalogue/src/main/java/jdk/m3/tooling/donors/M3OpenJdkDeltaInventory.java	m3/tooling/donor-catalogue/src/main/java/jdk/m3/tooling/donors/OpenJdkDeltaInventory.java
-MOVE	m3/tooling/donor-catalogue/src/test/java/jdk/m3/tooling/donors/M3DonorCatalogueSelfTest.java	m3/tooling/donor-catalogue/src/test/java/jdk/m3/tooling/donors/DonorCatalogueSelfTest.java
-MOVE	m3/tooling/donor-catalogue/src/test/java/jdk/m3/tooling/donors/M3DonorDeltaPlannerSelfTest.java	m3/tooling/donor-catalogue/src/test/java/jdk/m3/tooling/donors/DonorDeltaPlannerSelfTest.java
-MOVE	m3/tooling/donor-catalogue/src/test/java/jdk/m3/tooling/donors/M3DonorSortedFastPathProof.java	m3/tooling/donor-catalogue/src/test/java/jdk/m3/tooling/donors/DonorSortedFastPathProof.java
-MOVE	m3/tooling/donor-catalogue/src/test/java/jdk/m3/tooling/donors/M3DonorTreeLanesGrowthTest.java	m3/tooling/donor-catalogue/src/test/java/jdk/m3/tooling/donors/DonorTreeLanesGrowthTest.java
-MOVE	m3/tooling/donor-catalogue/src/test/java/jdk/m3/tooling/donors/M3DonorTreeLanesSelfTest.java	m3/tooling/donor-catalogue/src/test/java/jdk/m3/tooling/donors/DonorTreeLanesSelfTest.java
+EDIT	make/m3/tooling/donor-catalogue/verify.sh
+MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/M3AtomCensus.java	make/m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/AtomCensus.java
+MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/M3ClassfileSeal.java	make/m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/ClassfileSeal.java
+MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/M3CompanionPlan.java	make/m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/CompanionPlan.java
+MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/M3JniDeclarationProjection.java	make/m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/JniDeclarationProjection.java
+MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/M3JniExportJoin.java	make/m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/JniExportJoin.java
+MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/M3SystemApiCensus.java	make/m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/SystemApiCensus.java
+MOVE	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/M3AtomCensusSemanticSelfTest.java	make/m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/AtomCensusSemanticSelfTest.java
+MOVE	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/M3AtomCensusSemanticTest.java	make/m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/AtomCensusSemanticTest.java
+MOVE	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/M3AtomCensusTest.java	make/m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/AtomCensusTest.java
+MOVE	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/M3ClassfileSealTest.java	make/m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/ClassfileSealTest.java
+MOVE	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/M3CompanionPlanTest.java	make/m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/CompanionPlanTest.java
+MOVE	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/M3JniDeclarationProjectionSelfTest.java	make/m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/JniDeclarationProjectionSelfTest.java
+MOVE	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/M3JniDeclarationProjectionTest.java	make/m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/JniDeclarationProjectionTest.java
+MOVE	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/M3JniExportJoinSelfTest.java	make/m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/JniExportJoinSelfTest.java
+MOVE	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/M3JniExportJoinTest.java	make/m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/JniExportJoinTest.java
+MOVE	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/M3SystemApiCensusTest.java	make/m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/SystemApiCensusTest.java
+MOVE	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/M3SystemApiReviewTest.java	make/m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/SystemApiReviewTest.java
+MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/M3AtomCoverageLedger.java	make/m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/AtomCoverageLedger.java
+MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/M3AtomCoverageVerifier.java	make/m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/AtomCoverageVerifier.java
+MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/M3AtomDescriptor.java	make/m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/AtomDescriptor.java
+MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/M3AtomEvidence.java	make/m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/AtomEvidence.java
+MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/M3AtomKind.java	make/m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/AtomKind.java
+MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/M3AtomRecord.java	make/m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/AtomRecord.java
+MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/M3AtomSpec.java	make/m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/AtomSpec.java
+MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/M3CoverageGate.java	make/m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/CoverageGate.java
+MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/M3EvidenceRecord.java	make/m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/EvidenceRecord.java
+MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/M3GateStatus.java	make/m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/GateStatus.java
+MOVE	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/contract/M3AtomCoverageContractTest.java	make/m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/contract/AtomCoverageContractTest.java
+MOVE	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/contract/M3AtomCoverageVerifierSelfTest.java	make/m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/contract/AtomCoverageVerifierSelfTest.java
+MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/repository/M3FileAtomIdentities.java	make/m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/repository/FileAtomIdentities.java
+MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/repository/M3GitTreeEntry.java	make/m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/repository/GitTreeEntry.java
+MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/repository/M3GitTreeSnapshot.java	make/m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/repository/GitTreeSnapshot.java
+MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/repository/M3JavaSemanticCensus.java	make/m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/repository/JavaSemanticCensus.java
+MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/repository/M3JavaSemanticExtractor.java	make/m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/repository/JavaSemanticExtractor.java
+MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/repository/M3RepositoryFileCensus.java	make/m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/repository/RepositoryFileCensus.java
+MOVE	m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/repository/M3SourceFamily.java	make/m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/repository/SourceFamily.java
+MOVE	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/repository/M3JavaSemanticCensusSelfTest.java	make/m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/repository/JavaSemanticCensusSelfTest.java
+MOVE	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/repository/M3RepositoryFileCensusSelfTest.java	make/m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/repository/RepositoryFileCensusSelfTest.java
+MOVE	m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/repository/M3RepositoryFileCensusTest.java	make/m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/repository/RepositoryFileCensusTest.java
+MOVE	m3/tooling/donor-catalogue/src/main/java/jdk/m3/tooling/donors/M3DonorCatalogue.java	make/m3/tooling/donor-catalogue/src/main/java/jdk/m3/tooling/donors/DonorCatalogue.java
+MOVE	m3/tooling/donor-catalogue/src/main/java/jdk/m3/tooling/donors/M3DonorDeltaPlanner.java	make/m3/tooling/donor-catalogue/src/main/java/jdk/m3/tooling/donors/DonorDeltaPlanner.java
+MOVE	m3/tooling/donor-catalogue/src/main/java/jdk/m3/tooling/donors/M3DonorTreeLanes.java	make/m3/tooling/donor-catalogue/src/main/java/jdk/m3/tooling/donors/DonorTreeLanes.java
+MOVE	m3/tooling/donor-catalogue/src/main/java/jdk/m3/tooling/donors/M3OpenJdkDeltaInventory.java	make/m3/tooling/donor-catalogue/src/main/java/jdk/m3/tooling/donors/OpenJdkDeltaInventory.java
+MOVE	m3/tooling/donor-catalogue/src/test/java/jdk/m3/tooling/donors/M3DonorCatalogueSelfTest.java	make/m3/tooling/donor-catalogue/src/test/java/jdk/m3/tooling/donors/DonorCatalogueSelfTest.java
+MOVE	m3/tooling/donor-catalogue/src/test/java/jdk/m3/tooling/donors/M3DonorDeltaPlannerSelfTest.java	make/m3/tooling/donor-catalogue/src/test/java/jdk/m3/tooling/donors/DonorDeltaPlannerSelfTest.java
+MOVE	m3/tooling/donor-catalogue/src/test/java/jdk/m3/tooling/donors/M3DonorSortedFastPathProof.java	make/m3/tooling/donor-catalogue/src/test/java/jdk/m3/tooling/donors/DonorSortedFastPathProof.java
+MOVE	m3/tooling/donor-catalogue/src/test/java/jdk/m3/tooling/donors/M3DonorTreeLanesGrowthTest.java	make/m3/tooling/donor-catalogue/src/test/java/jdk/m3/tooling/donors/DonorTreeLanesGrowthTest.java
+MOVE	m3/tooling/donor-catalogue/src/test/java/jdk/m3/tooling/donors/M3DonorTreeLanesSelfTest.java	make/m3/tooling/donor-catalogue/src/test/java/jdk/m3/tooling/donors/DonorTreeLanesSelfTest.java

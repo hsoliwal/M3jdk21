@@ -45,12 +45,12 @@ lines) are exactly the donor body lines after the declared rows, in order, and e
 drop (FILE rows: every line after the header, package and anchor is a donor line after the declared rows).
 
 Derived from m3/arrays/recipe/posting-index-20261106/relocate.py v2 (C/JNI/INCLUDE rows, anchors) and
-m3/collections/recipe/immutable-pools-20261106/relocate.py v2 (DROP_METHOD, DROP_LINE, REWRITE, INSERT rows, REPO row,
+make/m3/collections/recipe/immutable-pools-20261106/relocate.py v2 (DROP_METHOD, DROP_LINE, REWRITE, INSERT rows, REPO row,
 read-back body_match, anchors naming blob and commit without a repository URL). New in v3: MERGE (member insertion
 into an existing type, import-block union, host/base pins) and APPEND (C source extension) rows, MEMBER rows,
 INSERT_BLOCK rows, BASE rows.
 
-New in v4 (m3/collections/qualification/census-*-20261106): a donor path ending in .java.txt (hash-pinned postimage
+New in v4 (make/m3/collections/qualification/census-*-20261106): a donor path ending in .java.txt (hash-pinned postimage
 resources of a recipe crate) is read as Java (type name = the stem before .java.txt); a donor that opens with a
 block-comment license header carrying SPDX-License-Identifier keeps that header verbatim (its attribution lines, e.g.
 design references, survive) instead of receiving the two-line M3JDK header; WRAP <ProofType> <target .java> <args>

@@ -31,7 +31,7 @@ The Maven fork's opt-in compiler configuration and the Gradle fork's worker
 hooks use this same compiler-owned API. A provider attaches to the original
 task; it must not call `JavaCompiler.getTask`, `parse`, or `analyze` to construct
 a second frontend. The Gradle receiver provider is maintained under
-`m3/tooling/module-packs/build-support/gradle-provider`.
+`make/m3/tooling/module-packs/build-support/gradle-provider`.
 
 Each forked JVM has its own javac context, classes, symbols and live trees.
 Sharing a compiler distribution and attaching multiple consumers within each

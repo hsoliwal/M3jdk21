@@ -5,15 +5,15 @@ on:
     branches:
       - "m3/jep423-materialize-current-*"
     paths:
-      - "m3/backports/**"
-      - "m3/tooling/backport-dag/**"
-      - "m3/backports/recipes/jep-423-region-pinning/CURRENT_TREE_PROOF_REQUEST.tsv"
+      - "make/m3/backports/**"
+      - "make/m3/tooling/backport-dag/**"
+      - "make/m3/backports/recipes/jep-423-region-pinning/CURRENT_TREE_PROOF_REQUEST.tsv"
       - ".github/workflows/m3-jep423-current-materialize.yml"
   pull_request:
     paths:
-      - "m3/backports/**"
-      - "m3/tooling/backport-dag/**"
-      - "m3/backports/recipes/jep-423-region-pinning/CURRENT_TREE_PROOF_REQUEST.tsv"
+      - "make/m3/backports/**"
+      - "make/m3/tooling/backport-dag/**"
+      - "make/m3/backports/recipes/jep-423-region-pinning/CURRENT_TREE_PROOF_REQUEST.tsv"
       - ".github/workflows/m3-jep423-current-materialize.yml"
   workflow_dispatch:
 
@@ -47,14 +47,14 @@ jobs:
           set -euo pipefail
           git diff --check
           python3 -m py_compile \
-            m3/backports/current_tree_preimage_inventory.py \
-            m3/backports/file_delta_inventory.py \
-            m3/backports/generate_recipe_crates.py \
-            m3/backports/materialize_generated_crates.py \
-            m3/backports/recipes/jep-423-region-pinning/validate_lineage.py \
-            m3/backports/recipes/jep-423-region-pinning/validate_current_admission.py
+            make/m3/backports/current_tree_preimage_inventory.py \
+            make/m3/backports/file_delta_inventory.py \
+            make/m3/backports/generate_recipe_crates.py \
+            make/m3/backports/materialize_generated_crates.py \
+            make/m3/backports/recipes/jep-423-region-pinning/validate_lineage.py \
+            make/m3/backports/recipes/jep-423-region-pinning/validate_current_admission.py
           (
-            cd m3/backports
+            cd make/m3/backports
             python3 -m unittest -v \
               test_current_tree_preimage_inventory.py \
               test_file_delta_inventory.py \
@@ -84,10 +84,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          packet=m3/backports/recipes/jep-423-region-pinning
+          packet=make/m3/backports/recipes/jep-423-region-pinning
           python3 "$packet/validate_lineage.py"
           mkdir -p "$RUNNER_TEMP/jep423"
-          python3 m3/backports/current_tree_preimage_inventory.py \
+          python3 make/m3/backports/current_tree_preimage_inventory.py \
             --root . \
             --paths-file "$packet/CUMULATIVE_ADMIT_PATHS.txt" \
             --out "$RUNNER_TEMP/jep423/CURRENT_PREIMAGES.tsv" \
@@ -103,13 +103,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          packet=m3/backports/recipes/jep-423-region-pinning
-          python3 m3/backports/file_delta_inventory.py \
+          packet=make/m3/backports/recipes/jep-423-region-pinning
+          python3 make/m3/backports/file_delta_inventory.py \
             --repo "$UPSTREAM" \
             --release 22 \
             --donor-ref 0d5f5e15d43f94a79c6133baecd5af217365d176 \
             --out "$RUNNER_TEMP/jep423/JDK21_TO_JEP423_FINAL.tsv"
-          python3 m3/backports/generate_recipe_crates.py \
+          python3 make/m3/backports/generate_recipe_crates.py \
             --repo "$UPSTREAM" \
             --release 22 \
             --donor-ref 0d5f5e15d43f94a79c6133baecd5af217365d176 \
@@ -131,15 +131,15 @@ jobs:
           mvn -B -ntp -f m3/vendor/third_party/pom.xml -DskipTests install
           # Build/install migration, A3, and DAG modules in reactor dependency order.
           # This is preparation only; focused G1/JNI/JFR tests and promotion gates stay intact.
-          mvn -B -ntp -f m3/pom.xml -pl tooling/backport-dag -am -DskipTests install
+          mvn -B -ntp -f make/m3/pom.xml -pl tooling/backport-dag -am -DskipTests install
 
       - name: 5 - Prove scoped recipe DAG before source mutation
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
+          mvn -B -ntp -f make/m3/tooling/backport-dag/pom.xml \
             -Dexec.mainClass=jdk.m3.tooling.dag.BackportPacketMain \
-            -Dexec.args="$PWD/m3/backports/recipes/jep-423-region-pinning/packet.tsv $PWD/m3/backports/recipes/jep-423-region-pinning/atom-evidence.tsv" \
+            -Dexec.args="$PWD/make/m3/backports/recipes/jep-423-region-pinning/packet.tsv $PWD/make/m3/backports/recipes/jep-423-region-pinning/atom-evidence.tsv" \
             exec:java
 
       - name: 6 - Check exact preimages then materialize recipe output
@@ -147,27 +147,27 @@ jobs:
         run: |
           set -euo pipefail
           generated="$RUNNER_TEMP/jep423/file-atoms"
-          python3 m3/backports/materialize_generated_crates.py \
+          python3 make/m3/backports/materialize_generated_crates.py \
             --root "$PWD" \
             --generated "$generated" \
             --mode check \
             --require-one-target-per-crate \
             --receipt "$RUNNER_TEMP/jep423/preimage.tsv"
           test -z "$(git status --porcelain=v1 -uall)"
-          python3 m3/backports/materialize_generated_crates.py \
+          python3 make/m3/backports/materialize_generated_crates.py \
             --root "$PWD" \
             --generated "$generated" \
             --mode apply \
             --require-one-target-per-crate \
             --receipt "$RUNNER_TEMP/jep423/apply.tsv"
-          python3 m3/backports/materialize_generated_crates.py \
+          python3 make/m3/backports/materialize_generated_crates.py \
             --root "$PWD" \
             --generated "$generated" \
             --mode verify-post \
             --require-one-target-per-crate \
             --receipt "$RUNNER_TEMP/jep423/postimage.tsv"
           before="$(git diff --binary | sha256sum | awk '{print $1}')"
-          python3 m3/backports/materialize_generated_crates.py \
+          python3 make/m3/backports/materialize_generated_crates.py \
             --root "$PWD" \
             --generated "$generated" \
             --mode apply \
@@ -255,7 +255,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          receipt=m3/backports/recipes/jep-423-region-pinning/CURRENT_TREE_RECEIPT.tsv
+          receipt=make/m3/backports/recipes/jep-423-region-pinning/CURRENT_TREE_RECEIPT.tsv
           post_root="$(sha256sum "$RUNNER_TEMP/jep423/postimage.tsv" | awk '{print $1}')"
           {
             printf 'field\tvalue\n'
@@ -322,7 +322,7 @@ jobs:
           java-version: "21"
 
       - name: 1 - Require materialization receipt
-        run: test -s m3/backports/recipes/jep-423-region-pinning/CURRENT_TREE_RECEIPT.tsv
+        run: test -s make/m3/backports/recipes/jep-423-region-pinning/CURRENT_TREE_RECEIPT.tsv
 
       - name: 2 - Fetch exact lineage donor
         shell: bash
@@ -341,10 +341,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          packet=m3/backports/recipes/jep-423-region-pinning
+          packet=make/m3/backports/recipes/jep-423-region-pinning
           mkdir -p "$RUNNER_TEMP/jep423"
           cp "$packet/CUMULATIVE_ADMIT_PATHS.txt" "$RUNNER_TEMP/jep423/MECHANICAL_PATHS.txt"
-          python3 m3/backports/generate_recipe_crates.py \
+          python3 make/m3/backports/generate_recipe_crates.py \
             --repo "$UPSTREAM" \
             --release 22 \
             --donor-ref 0d5f5e15d43f94a79c6133baecd5af217365d176 \
@@ -354,7 +354,7 @@ jobs:
             --include-native \
             --include-text \
             --out "$RUNNER_TEMP/jep423/file-atoms"
-          python3 m3/backports/materialize_generated_crates.py \
+          python3 make/m3/backports/materialize_generated_crates.py \
             --root "$PWD" \
             --generated "$RUNNER_TEMP/jep423/file-atoms" \
             --mode verify-post \
@@ -367,8 +367,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          grep -F $'source_materialized\ttrue' m3/backports/recipes/jep-423-region-pinning/CURRENT_TREE_RECEIPT.tsv
-          grep -F $'recipe_replay_fixed_point\tPASS' m3/backports/recipes/jep-423-region-pinning/CURRENT_TREE_RECEIPT.tsv
-          grep -F $'openjdk_fastdebug_build\tPASS' m3/backports/recipes/jep-423-region-pinning/CURRENT_TREE_RECEIPT.tsv
-          grep -F $'focused_g1_jni_jfr_jtreg\tPASS' m3/backports/recipes/jep-423-region-pinning/CURRENT_TREE_RECEIPT.tsv
-          grep -F $'promotion\tNOT_AUTHORIZED' m3/backports/recipes/jep-423-region-pinning/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'source_materialized\ttrue' make/m3/backports/recipes/jep-423-region-pinning/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'recipe_replay_fixed_point\tPASS' make/m3/backports/recipes/jep-423-region-pinning/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'openjdk_fastdebug_build\tPASS' make/m3/backports/recipes/jep-423-region-pinning/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'focused_g1_jni_jfr_jtreg\tPASS' make/m3/backports/recipes/jep-423-region-pinning/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'promotion\tNOT_AUTHORIZED' make/m3/backports/recipes/jep-423-region-pinning/CURRENT_TREE_RECEIPT.tsv

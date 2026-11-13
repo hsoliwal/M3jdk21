@@ -7,8 +7,8 @@ on:
     paths:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectIndexSnapshot.java'
       - 'test/jdk/jdk/m3/collections/M3ObjectPhysicalMask*'
-      - 'm3/collections/algorithm-catalog/object-physical-state-32bit-20261018.tsv'
-      - 'm3/collections/qualification/m3-object-physical-state-20261018/**'
+      - 'make/m3/collections/algorithm-catalog/object-physical-state-32bit-20261018.tsv'
+      - 'make/m3/collections/qualification/m3-object-physical-state-20261018/**'
       - '.github/workflows/m3-object-physical-slot-20261018.yml'
   workflow_dispatch:
 permissions:

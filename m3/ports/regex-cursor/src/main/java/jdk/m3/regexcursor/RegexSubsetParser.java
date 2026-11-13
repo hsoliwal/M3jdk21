@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 /**
  * Parser of the {@code java.util.regex} subset the cursor engines prove equal to the stock engine
- * (see m3/docs/regex-cursor/DESIGN.md section 4). Input patterns have already compiled with the
+ * (see doc/m3/regex-cursor/DESIGN.md section 4). Input patterns have already compiled with the
  * stock {@code Pattern}; anything outside the subset throws {@link M3RegexRefusal}.
  */
 final class RegexSubsetParser {

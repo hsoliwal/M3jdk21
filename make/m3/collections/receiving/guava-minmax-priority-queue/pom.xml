@@ -54,7 +54,7 @@
         <directory>${project.basedir}/src/main/resources</directory>
       </resource>
       <resource>
-        <directory>${project.basedir}/../../implementations/guava-minmax-priority-queue</directory>
+        <directory>${project.basedir}/../../../../../m3/collections/implementations/guava-minmax-priority-queue</directory>
         <targetPath>META-INF</targetPath>
         <includes>
           <include>LICENSE.txt</include>

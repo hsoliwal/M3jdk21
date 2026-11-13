@@ -4,10 +4,10 @@ on:
   pull_request:
     paths:
       - ".github/workflows/m3jdk21-community-forks.yml"
-      - "m3/backports/COMMUNITY_FORKS.tsv"
-      - "m3/backports/community_fork_inventory.py"
-      - "m3/backports/test_community_fork_inventory.py"
-      - "m3/backports/COMMUNITY_FORK_INTAKE.md"
+      - "make/m3/backports/COMMUNITY_FORKS.tsv"
+      - "make/m3/backports/community_fork_inventory.py"
+      - "make/m3/backports/test_community_fork_inventory.py"
+      - "make/m3/backports/COMMUNITY_FORK_INTAKE.md"
   workflow_dispatch:
 
 permissions:
@@ -27,7 +27,7 @@ jobs:
           persist-credentials: false
 
       - name: Unit-test fork inventory mechanics
-        run: python3 -m unittest -v m3/backports/test_community_fork_inventory.py
+        run: python3 -m unittest -v make/m3/backports/test_community_fork_inventory.py
 
       - name: Fetch pinned fork histories without blobs
         shell: bash
@@ -49,14 +49,14 @@ jobs:
               echo "::error::$fork_id pin drift: expected $pinned, found $actual"
               exit 1
             fi
-          done < m3/backports/COMMUNITY_FORKS.tsv
+          done < make/m3/backports/COMMUNITY_FORKS.tsv
 
       - name: Materialize fork-unique commit and path evidence
         shell: bash
         run: |
           set -euo pipefail
           rm -rf fork-inventory-output
-          python3 m3/backports/community_fork_inventory.py             --repo fork-universe             --catalog m3/backports/COMMUNITY_FORKS.tsv             --out-dir fork-inventory-output
+          python3 make/m3/backports/community_fork_inventory.py             --repo fork-universe             --catalog make/m3/backports/COMMUNITY_FORKS.tsv             --out-dir fork-inventory-output
 
           python3 - <<'PY'
           import csv

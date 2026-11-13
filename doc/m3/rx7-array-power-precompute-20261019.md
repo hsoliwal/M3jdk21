@@ -22,10 +22,10 @@ Full baseline, two intermediate source passes and final Java/JNI candidate each 
 Java21 compiled with `-Xlint:all -Werror`; C17 with `-O2 -Wall -Wextra -Werror`; native execution used `-Xcheck:jni`. No production stub replaced the complete RX7 owners. The packaged script was rerun successfully:
 
 ```sh
-M3_JAVA_HOME=/absolute/java21 bash m3/runtime-integration/check-m3rx7-array-power.sh
+M3_JAVA_HOME=/absolute/java21 bash make/m3/runtime-integration/check-m3rx7-array-power.sh
 ```
 
-This is a Linux host component proof using patched java.base and a qualification shared library, **not** a full source-built JDK, actual jtreg or production libjava linkage test. Source seals and executed/unrun status are in `m3/runtime-integration/evidence/rx7-array-power-20261019/host-receipt.json`. Canonical proof source, logs, catalogue and raw measurements are attached to PR #12413.
+This is a Linux host component proof using patched java.base and a qualification shared library, **not** a full source-built JDK, actual jtreg or production libjava linkage test. Source seals and executed/unrun status are in `make/m3/runtime-integration/evidence/rx7-array-power-20261019/host-receipt.json`. Canonical proof source, logs, catalogue and raw measurements are attached to PR #12413.
 
 ## Tradeoffs, not blanket speed claims
 

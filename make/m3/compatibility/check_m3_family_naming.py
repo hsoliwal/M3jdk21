@@ -10,11 +10,11 @@ import re
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 HERE = Path(__file__).resolve().parent
 PIN = HERE / "m3-family-naming-pin.tsv"
 DISPOSITION = HERE / "m3-family-naming-target-disposition.tsv"
-PORTING = ROOT / "m3/docs/M3JDK_M3_PORTING_INVARIANT.md"
+PORTING = ROOT / "doc/m3/M3JDK_M3_PORTING_INVARIANT.md"
 HEX40 = re.compile(r"^[0-9a-f]{40}$")
 
 # The pin TSV is the record of a donor handoff: the donor commit, paths and blobs are history as they were at that

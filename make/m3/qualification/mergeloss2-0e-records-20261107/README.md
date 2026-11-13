@@ -18,7 +18,7 @@ risk, not rename products). The lost lines of each leaf were re-tested against m
 `PROBES.tsv` is the mechanical form of every no-edit decision. `verify.py` re-checks it:
 
 ```text
-python -I m3/qualification/mergeloss2-0e-records-20261107/verify.py [--rev REV]
+python -I make/m3/qualification/mergeloss2-0e-records-20261107/verify.py [--rev REV]
 ```
 
 On `origin/master` (`2ec96ee32ff5`): probes=33, failures=0. On `baafdafdc817`, before #2653: the 3 leaf-45 probes fail. A

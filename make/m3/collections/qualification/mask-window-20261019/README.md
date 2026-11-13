@@ -20,7 +20,7 @@ does not claim they are wired into every collection wrapper.
 Reproduce the mandatory Java/JNI and UBSan checks on Linux with a JDK 21 and GCC:
 
 ```sh
-python3 m3/collections/verify_mask_viewport.py \
+python3 make/m3/collections/verify_mask_viewport.py \
   --jdk /absolute/path/to/jdk21 --out /absolute/path/to/fresh-proof
 ```
 

@@ -19,7 +19,7 @@ import java.util.Objects;
  * one result array and three bounded 1024-element scratch lanes, not pinned heap pointers.
  * Both implementations reject individual or aggregate overflow above Long.MAX_VALUE.
  */
-    //FLLDCIM: MRL - fold-close audit leaf L0028: ADD from PR #1084 head 6b16a20dcedf blob 1d260fdbfe5a, ancestry-only landing b42ab7605b86 (tree == first parent); recipe m3/collections/qualification/foldaudit-collections-20261107/apply.py v1
+    //FLLDCIM: MRL - fold-close audit leaf L0028: ADD from PR #1084 head 6b16a20dcedf blob 1d260fdbfe5a, ancestry-only landing b42ab7605b86 (tree == first parent); recipe make/m3/collections/qualification/foldaudit-collections-20261107/apply.py v1
 public final class CountLanes {
     public static final int SUM = 0;
     public static final int UNION = 1;

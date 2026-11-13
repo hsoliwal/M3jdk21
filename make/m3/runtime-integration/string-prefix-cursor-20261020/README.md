@@ -57,7 +57,7 @@ the same complete M3JDK21 build before any performance claim.
 ## Recipe and evidence
 
 The exact preimages and proposed postimages are in
-`m3/tooling/shared-frontend/recipe-custody/datasets/m3-prefix-cursor-20261020`.
+`make/m3/tooling/shared-frontend/recipe-custody/datasets/m3-prefix-cursor-20261020`.
 The named Java LST recipe reuses the product's existing
 `M3HashPinnedJavaSnapshotRecipe`, with exact source SHA-256, fixed-point,
 drift refusal, test sources and generated file integrity gates. No fresh
@@ -67,7 +67,7 @@ catalogue supplement its canonical source custody without shadowing it.
 Run:
 
 ```sh
-root="$PWD/m3/tooling/shared-frontend/recipe-custody"
+root="$PWD/make/m3/tooling/shared-frontend/recipe-custody"
 mvn -B -ntp -f "$root/pom.xml" -Pcontract \
   -Dm3.dataset=m3-prefix-cursor-20261020 \
   "-Drecipe.owner.root=$root/sdk-owner" verify
@@ -127,10 +127,10 @@ Run, in order:
 
 ```sh
 python3 -m unittest discover \
-  -s m3/runtime-integration/string-prefix-cursor-20261020 \
+  -s make/m3/runtime-integration/string-prefix-cursor-20261020 \
   -p 'test_verify_multi_pass.py' -v
-python3 m3/runtime-integration/string-prefix-cursor-20261020/verify_multi_pass.py --root .
-root="$PWD/m3/tooling/shared-frontend/recipe-custody"
+python3 make/m3/runtime-integration/string-prefix-cursor-20261020/verify_multi_pass.py --root .
+root="$PWD/make/m3/tooling/shared-frontend/recipe-custody"
 mvn -B -ntp -f "$root/pom.xml" \
   -Dm3.dataset=m3-prefix-cursor-20261020 \
   "-Drecipe.owner.root=$root/sdk-owner" -Pcontract verify

@@ -32,7 +32,7 @@ internal implementation owners do not become public merely by adding this relati
   purpose-based workflow paths. No new date/version suffixes such as
   `-20261022`, `V7`, or `-v2`; chronological history belongs to Git commits,
   manifests and canonical Synexia recipe receipts.
-- **Mapping:** `m3/docs/name-mapping.json` is the sole authoritative
+- **Mapping:** `doc/m3/name-mapping.json` is the sole authoritative
   migration/owner registry. Do not introduce new `name-mapping.d` fragments.
   Existing historical files remain readable for provenance until separately
   migrated through tested, source-pinned recipes.
@@ -60,7 +60,7 @@ the actual M3JDK21 SDK, without becoming an M3-on-JDK wrapper.
 
 ## Exact change gate
 
-`m3/compatibility/check_public_names.py` checks only newly added, copied,
+`make/m3/compatibility/check_public_names.py` checks only newly added, copied,
 or renamed Git paths. It refuses unstable path components, new naming-map
 fragments, a newly introduced `M3*` Java/JDK public type, and JDK/jtreg
 package or type/name disagreement. A modification to a *preexisting* type
@@ -70,8 +70,8 @@ No baseline-wide automated rename is performed; that would risk lost APIs,
 license notices, reflection consumers and native symbols.
 
 ```sh
-python3 -m unittest discover -s m3/compatibility -p test_public_names.py -v
-python3 m3/compatibility/check_public_names.py --base <base-commit-sha> --head <head-commit-sha>
+python3 -m unittest discover -s make/m3/compatibility -p test_public_names.py -v
+python3 make/m3/compatibility/check_public_names.py --base <base-commit-sha> --head <head-commit-sha>
 ```
 
 The workflow checks exact PR commit IDs with complete Git ancestry.

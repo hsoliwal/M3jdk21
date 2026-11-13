@@ -27,7 +27,7 @@ import java.util.function.ObjIntConsumer;
  * occurrences), are best-effort fail-fast, and support removal through the live owner.
  * Entry projections are immutable snapshots. Views themselves stay backed.
  */
-//FLLDCIM: MRL - fold-close audit leaf L0014: ADD from PR #1084 head 6b16a20dcedf blob 4bef22568f1d, ancestry-only landing b42ab7605b86 (tree == first parent); recipe m3/collections/qualification/foldaudit-collections-20261107/apply.py v1
+//FLLDCIM: MRL - fold-close audit leaf L0014: ADD from PR #1084 head 6b16a20dcedf blob 4bef22568f1d, ancestry-only landing b42ab7605b86 (tree == first parent); recipe make/m3/collections/qualification/foldaudit-collections-20261107/apply.py v1
 //FLLDCIM: MRL - the PR-head owner spelled size()/distinctSize()/add(long); master's LongBag (e6722c63e9b, blob d00efc879547) spells totalCount()/distinctCount()/add(long, long): calls renamed, contract unchanged (HANDOFF.tsv)
 public final class M3GuavaLongMultiset extends AbstractCollection<Long> implements Multiset<Long> {
     private final LongBag counts = new LongBag();

@@ -142,7 +142,7 @@
       "bytes": 7516,
       "sha256": "19f7e3fb8c5f4332ab721d1962ab9cac261c524a10d9d91272346636fbe86ada",
       "git_blob": "85f132217c82e67a599bde5f22a4c5a348e120ce",
-      "repository_path": "m3/tooling/a3/src/main/java/jdk/m3/a3/A3RegexMatrix.java",
+      "repository_path": "make/m3/tooling/a3/src/main/java/jdk/m3/a3/A3RegexMatrix.java",
       "expected_before_git_blob": "bf91afcd627d8e2faa9790ea6592b6bc9c1b0e33",
       "origin": "ACTUAL_CANONICAL_OPENREWRITE_RESULT"
     },
@@ -151,7 +151,7 @@
       "bytes": 7516,
       "sha256": "19f7e3fb8c5f4332ab721d1962ab9cac261c524a10d9d91272346636fbe86ada",
       "git_blob": "85f132217c82e67a599bde5f22a4c5a348e120ce",
-      "repository_path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+      "repository_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
       "expected_before_git_blob": "bf91afcd627d8e2faa9790ea6592b6bc9c1b0e33",
       "origin": "ACTUAL_CANONICAL_OPENREWRITE_RESULT"
     },
@@ -160,7 +160,7 @@
       "bytes": 658,
       "sha256": "e92d3c16a897a02084ca749d092a02402c2f1d0225bcb9c8755c0304f838dabd",
       "git_blob": "6e01de6e3fee61707edb6dfca073d0a9a839ad60",
-      "repository_path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+      "repository_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
       "expected_before_git_blob": "f18bdb2c7808e88dc2692e58acafbdfbc854b7e5",
       "origin": "ACTUAL_CANONICAL_OPENREWRITE_RESULT"
     }

@@ -14,8 +14,8 @@ A saved report is a snapshot; rerun it after any source or receipt changes.
 | Work | Existing authority | Disposition |
 | --- | --- | --- |
 | Release build/test/Java/JNI/UTF-16 proof | [release-contract.json](../release-contract.json) | Every mandatory gate needs a matching execution receipt |
-| Package/class/method naming | [name-plan.json](../../tooling/name-contract/name-plan.json) and [name-mapping.json](../../docs/name-mapping.json) | Queued proposals stay excluded until contract and caller closure are proved |
-| Recipe custody | [AGENTS.md](../../../AGENTS.md) and [porting invariant](../../docs/m3jdk21-porting-invariant.md) | Preserve historical copies and callers until executed Synexia cleanup; retained recipe source blocks final release |
+| Package/class/method naming | [name-plan.json](../../tooling/name-contract/name-plan.json) and [name-mapping.json](../../../../doc/m3/name-mapping.json) | Queued proposals stay excluded until contract and caller closure are proved |
+| Recipe custody | [AGENTS.md](../../../../AGENTS.md) and [porting invariant](../../../../doc/m3/m3jdk21-porting-invariant.md) | Preserve historical copies and callers until executed Synexia cleanup; retained recipe source blocks final release |
 | Historical code loss and branch conflicts | [retained_source_queue.py](../retained_source_queue.py) plus existing Synexia PR-stack/history recipes | Compare actual trees and source atoms; merged ancestry alone does not prove recovery |
 | Optimizations and donor candidates | Canonical Synexia algorithm catalogue and serial recipe crates | Compile/JUnit/JNI parity precedes promotion; cold/warm and memory measurements precede performance claims |
 

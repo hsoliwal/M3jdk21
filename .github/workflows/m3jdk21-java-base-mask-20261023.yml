@@ -8,8 +8,8 @@ on:
       - 'test/jdk/java/util/ArrayList/M3ArrayListVectorRemoveIfContract.java'
       - 'test/jdk/java/util/ArrayList/M3ArrayListVectorGcMutationContract.java'
       - 'test/jdk/java/util/ArrayList/M3CollectionMaskGcBarrierContract.java'
-      - 'm3/collections/qualification/java-base-mask-20261023/**'
-      - 'm3/collections/qualification/java-base-mask-current-master-20261027/**'
+      - 'make/m3/collections/qualification/java-base-mask-20261023/**'
+      - 'make/m3/collections/qualification/java-base-mask-current-master-20261027/**'
       - '.github/workflows/m3jdk21-java-base-mask-20261023.yml'
   workflow_dispatch:
 permissions:
@@ -31,4 +31,4 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Verify sealed JDK source and actual Java 21 kernel test
-        run: bash m3/collections/qualification/java-base-mask-current-master-20261027/verify.sh
+        run: bash make/m3/collections/qualification/java-base-mask-current-master-20261027/verify.sh

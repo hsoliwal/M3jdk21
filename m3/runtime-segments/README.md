@@ -94,7 +94,7 @@ against this intentionally different runtime layout.
 ```
 python3 m3/runtime-segments/recipe/apply.py --check
 python3 m3/runtime-segments/recipe/test_recipe.py
-# Use the isolated dependencies/boot JDK described in m3/docs/native-build.md:
+# Use the isolated dependencies/boot JDK described in doc/m3/native-build.md:
 make images JOBS=5
 M3_BOOT_JDK=/path/to/original-java21 M3_TEST_JDK=/path/to/matched-image \
   bash m3/runtime-segments/run-focused.sh

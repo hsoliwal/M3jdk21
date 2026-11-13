@@ -63,7 +63,7 @@ SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further detail
 ]]></system-err>
   </testcase>
   <testcase name="historicalConflictsAndDuplicateTargetsCannotPublishPartialHistory" classname="com.m3.rewrite.backport.JccMergeRecoveryTest" time="0.164">
-    <error message="source drift: m3/migration/test/test_jcc_source_final_handoff_packet.py" type="java.lang.IllegalStateException"><![CDATA[java.lang.IllegalStateException: source drift: m3/migration/test/test_jcc_source_final_handoff_packet.py
+    <error message="source drift: make/m3/migration/test/test_jcc_source_final_handoff_packet.py" type="java.lang.IllegalStateException"><![CDATA[java.lang.IllegalStateException: source drift: make/m3/migration/test/test_jcc_source_final_handoff_packet.py
 	at com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe.requireAdmissible(M3Jdk21HashPinnedTextSnapshotRecipe.java:212)
 	at com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe.generate(M3Jdk21HashPinnedTextSnapshotRecipe.java:142)
 	at com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe.generate(M3Jdk21HashPinnedTextSnapshotRecipe.java:37)

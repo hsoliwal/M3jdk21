@@ -4,7 +4,7 @@
 Licence of every file in this tree: Apache-2.0 (SPDX header on each file). Written for leaf P2 of
 `m3-parallel-vcpu-design.md` (2026-10-12). **No third-party source text is copied into this tree**; donors below were
 read and their semantics or patterns re-expressed. Reuse decisions: `FOSS_REUSE_DECISION.tsv` (this directory) plus
-the design ledger `m3/docs/m3sdk/FOSS_REUSE_DECISION.tsv` (OpenCLAW searched first = NO_FIT).
+the design ledger `doc/m3/m3sdk/FOSS_REUSE_DECISION.tsv` (OpenCLAW searched first = NO_FIT).
 
 ## Semantic donor (first party, ported)
 
@@ -14,7 +14,7 @@ the design ledger `m3/docs/m3sdk/FOSS_REUSE_DECISION.tsv` (OpenCLAW searched fir
 | same | same | `Rv32i.java`, `Rv32iBatch.java`, `CpuRv32iEngine.java`, `Rv32iAssembler.java` | Apache-2.0 | Compiled **in place** (never copied) by the `m3vcpu_jni_oracle_parity` ctest via `-DM3VCPU_DONOR_ORACLE_DIR=<staged donor dir>`. |
 
 Read from the staged SDK-intake copy `m3/vendor/synexia/synexia-tornadovm/m3/cpu-gpu/` (not yet in this repository;
-byte-identical to the pinned commit per `m3/docs/m3sdk/VCPU_DONOR_INVENTORY.md` §0).
+byte-identical to the pinned commit per `doc/m3/m3sdk/VCPU_DONOR_INVENTORY.md` §0).
 
 ## Pattern donors (no code copied)
 
@@ -38,8 +38,8 @@ Files: `src/backends/webgpu/` (backend, WGSL-twin table header, embed script), `
 |---|---|---|---|
 | `google/dawn` (Chrome's WebGPU engine) | `c943ea32b614ff53e4fe410fc8f4968b6b8fe46d`, release `v20261009.190412` (Windows, Release, static `lib/webgpu_dawn.lib`) | BSD-3-Clause (`third_party/` parts carry their own licences) | Linked statically into `m3vcpu_webgpu.dll` when `M3VCPU_BUILD_WEBGPU=ON` (`M3VCPU_DAWN_DIR`). Only standard `webgpu.h` entry points are called. No Dawn source or header text is copied into this tree; the header is used in place. `bin/tint.exe` from the same release was used offline to validate the WGSL (WGSL, SPIR-V and HLSL+DXC outputs). |
 | `webgpu-native/webgpu-headers` `webgpu.h` (as shipped by Dawn) | same release | BSD-3-Clause | The C ABI the backend codes against, so wgpu-native stays an alternate provider. |
-| First-party `m3/docs/m3sdk/webgpu/rv32im_alu.wgsl`, `dawn_alu_probe.c` | branch `m3/parallel-vcpu-20261012` (PR #779) | Apache-2.0 | MULHU from four 16-bit partial products, the MULH/MULHSU signed corrections and the RISC-V div/rem corner guards are restated in `rv32im_slice.wgsl`; the probe's `webgpu.h` sequence (instance, adapter, device, WGSL module, compute pipeline, bind group, dispatch, map) is the template of the backend. |
-| First-party `m3/docs/m3sdk/webgpu/msvc_stl_vectorized_shim.c` | same | Apache-2.0 | Compiled in place via `M3VCPU_DAWN_STL_SHIM` only to link the prebuilt Dawn with MSVC 14.44; drops out with a source-built Dawn. |
+| First-party `doc/m3/m3sdk/webgpu/rv32im_alu.wgsl`, `dawn_alu_probe.c` | branch `m3/parallel-vcpu-20261012` (PR #779) | Apache-2.0 | MULHU from four 16-bit partial products, the MULH/MULHSU signed corrections and the RISC-V div/rem corner guards are restated in `rv32im_slice.wgsl`; the probe's `webgpu.h` sequence (instance, adapter, device, WGSL module, compute pipeline, bind group, dispatch, map) is the template of the backend. |
+| First-party `doc/m3/m3sdk/webgpu/msvc_stl_vectorized_shim.c` | same | Apache-2.0 | Compiled in place via `M3VCPU_DAWN_STL_SHIM` only to link the prebuilt Dawn with MSVC 14.44; drops out with a source-built Dawn. |
 | `kernels/rv32im_slice.cl` (this tree) | sha256 `8ecfc67e…cfe66` | Apache-2.0 | Semantic source of the WGSL twin. The pin `m3k-twin-of: rv32im_slice.cl sha256=…` in the WGSL is checked by `m3vcpu_webgpu_embed.cmake`; a changed `.cl` stops the webgpu build until the twin is restated and re-proven. At run time the backend serves the twin only for the byte-identical `M3K_OPENCL_C` bundle blob it was built with. |
 
 Run-time binaries (not in the tree, not redistributed): Dawn's D3D12 path loads `dxcompiler.dll` + `dxil.dll`

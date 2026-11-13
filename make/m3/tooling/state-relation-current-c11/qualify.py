@@ -11,11 +11,11 @@ import runpy
 import subprocess
 
 HERE = Path(__file__).resolve().parent
-RECEIVER = HERE.parents[2]
+RECEIVER = HERE.parents[3]
 SDK = HERE / "sdk"
 ROOT = Path(os.environ["M3_PROOF_ROOT"]).resolve()
 ARTIFACTS = ROOT / "artifacts"
-PREFIX = "m3/tooling/state-relation-current-c11/"
+PREFIX = "make/m3/tooling/state-relation-current-c11/"
 WORKFLOW = ".github/workflows/m3-state-relation-current-c11.yml"
 SUITE = "jdk.internal.m3.rewrite.M3StateRelationCurrentC11RecipeTest"
 METHODS = ["exactFiveOwnersReplayAsFixedPointInBothOrders",

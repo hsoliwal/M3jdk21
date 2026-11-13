@@ -20,7 +20,7 @@ DONOR_ONLY	synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeNat
 DONOR_ONLY	synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeRabinKarpSearch.java	-	closure of ChallengeNativeSearch (its JNI self-check names it); corpus search lane, not this leaf
 DONOR_ONLY	synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeMultiPatternSearch.java	-	closure of ChallengeNativeSearch (its JNI self-check names it); corpus search lane, not this leaf
 DONOR_ONLY	synexia-algo/src/main/java/com/synexia/algorithms/string/StringsRabinKarp.java	-	closure of ChallengeRabinKarpSearch; NEC with the landed M3PrimitiveStringAlgorithms.rabinKarpIndexOf
-OWNED	synexia-job/src/main/java/com/synexia/job/IProgressMonitor.java	src/main/java/jdk/m3/algorithm/M3ProgressMonitor.java	ALREADY: owner m3/qualification/progress-monitor-unify-20261106 (adapter over jdk.m3.collections.M3ProgressMonitor); blob 62e5ceea645b
+OWNED	synexia-job/src/main/java/com/synexia/job/IProgressMonitor.java	src/main/java/jdk/m3/algorithm/M3ProgressMonitor.java	ALREADY: owner make/m3/qualification/progress-monitor-unify-20261106 (adapter over jdk.m3.collections.M3ProgressMonitor); blob 62e5ceea645b
 OWNED	synexia-job/src/main/java/com/synexia/job/ProgressSnapshot.java	-	donor progress closure (owner jdk.m3.collections.M3ProgressState)
 OWNED	synexia-job/src/main/java/com/synexia/job/ChildProgressMonitor.java	-	donor progress closure (owner jdk.m3.collections.M3ChildProgressMonitor)
 OWNED	synexia-job/src/main/java/com/synexia/job/utils/ProgressCalculationUtils.java	-	donor progress closure

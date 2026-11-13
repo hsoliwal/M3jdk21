@@ -17,7 +17,7 @@ engines = {
 }
 engine_path = Path('jdk/m3/rewrite/backport')
 for name, sha in engines.items():
-    source = base / 'm3/tooling/migration-recipes/src/main/java' / engine_path / name
+    source = base / 'make/m3/tooling/migration-recipes/src/main/java' / engine_path / name
     raw = source.read_bytes()
     if hashlib.sha256(raw).hexdigest() != sha:
         raise RuntimeError('existing engine drift: ' + name)
@@ -31,7 +31,7 @@ subprocess.run(['javac', '--release', '21', '-Xlint:all', '-Werror', '-d', str(c
 subprocess.run(['java', '-cp', str(classes), 'jdk.internal.m3.rewrite.RegionFoundationInputs', str(base), str(candidate)], check=True)
 resource = crate/'src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-region-foundation-20261016'
 resource.mkdir(parents=True, exist_ok=True)
-paths = ['.github/workflows/m3-foundation.yml', 'm3/docs/name-mapping.json',
+paths = ['.github/workflows/m3-foundation.yml', 'doc/m3/name-mapping.json',
          'test/jdk/java/lang/String/M3RegionMatchesNonPositive.java']
 rows = []
 for index, path in enumerate(paths):

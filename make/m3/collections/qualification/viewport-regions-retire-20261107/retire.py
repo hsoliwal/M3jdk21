@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 """Recipe VIEWPORT_REGIONS_RETIRE v1: retire the stale viewport region test and #2547's held M3MaskViewportNative twin.
 
-Derived from m3/collections/qualification/mergeloss-s1-20261106/apply.py v2 (anchored "sub" edits, every anchor exactly
+Derived from make/m3/collections/qualification/mergeloss-s1-20261106/apply.py v2 (anchored "sub" edits, every anchor exactly
 once, hash-pinned preimages, refusal on drift, idempotent, --check fixed point). Rule kinds:
   EDIT    the file must equal its pinned preimage blob (applied) or the postimage (no-op);
   RETIRE  the file must hold its pinned blob (removed) or be absent (no-op); a retire is never silent: every RETIRE rule
@@ -37,8 +37,8 @@ BASE_COMMIT = "0edcb45dc64"
 EDITS_NAME = "EDITS.tsv"
 EDITS_COLUMNS = ("file", "before_sha256", "after_sha256", "leaf", "decision", "cited_commits", "rule")
 REGIONS = "m3/collections/src/test/native/m3_mask_viewport_regions.c"
-VERIFY = "m3/collections/verify_mask_viewport.py"
-TWINS = "m3/qualification/retained-twins-core-lanes-20261106/"
+VERIFY = "make/m3/collections/verify_mask_viewport.py"
+TWINS = "make/m3/qualification/retained-twins-core-lanes-20261106/"
 HELD_FILE = TWINS + "held/m3/collections/src/main/java/jdk/m3/collections/M3MaskViewportNative.java"
 R1_CITED = "7fb4de24b1e8;d0cec9717801;2f9a1a2a9d0e (#1497)"
 R2_CITED = "mergeloss-s3-20261106 (#2656);487ed3c5b7aa (#1766);62a9d54fa777;facc2e13d0c6"
@@ -68,7 +68,7 @@ VERIFY_EDITS = [
 
 HELD_ROW = ("m3/collections/src/main/java/jdk/m3/collections/M3MaskViewportNative.java\tpr1766\tRETIRED\t"
             "909dddcbe68f6ec47755062ca76d8b960fe0c2aeb7ddac571f596e00aac8610d\t"
-            "retired 2026-11-07 by m3/collections/qualification/viewport-regions-retire-20261107 (R2), citing"
+            "retired 2026-11-07 by make/m3/collections/qualification/viewport-regions-retire-20261107 (R2), citing"
             " mergeloss-s3-20261106 (#2656, case 10 SUPERSEDED): the held copy only adds a second projectFramePage with"
             " master's exact descriptor ([I[IIIIIII[II[II[II)I; javac 'already defined'); master's single declaration"
             " (62a9d54fa777 C, facc2e13d0c6 Java) is the one method set; held/ copy removed\n")
@@ -179,7 +179,7 @@ def run(root: Path, check: bool, leaf: str | None) -> int:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--root", default=str(RECIPE_DIR.parents[3]), help="repository root (default: four up)")
+    parser.add_argument("--root", default=str(RECIPE_DIR.parents[4]), help="repository root (default: four up)")
     parser.add_argument("--check", action="store_true", help="write nothing; exit 1 when a run would change a file")
     parser.add_argument("--leaf", choices=sorted({rule[0] for rule in RULES}), help="apply one leaf's rules only")
     args = parser.parse_args(argv)

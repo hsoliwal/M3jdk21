@@ -4,7 +4,7 @@ This is a dated snapshot, not a completion claim.
 
 Regenerate repository-owned counts with:
 
-`python3 m3/backports/program_status.py --root .`
+`python3 make/m3/backports/program_status.py --root .`
 
 ## Released JEP denominator
 

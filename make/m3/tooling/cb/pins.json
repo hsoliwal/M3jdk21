@@ -126,7 +126,7 @@
   "target_base": "3ec445df10a3e8fc74aa983181f0700ac7bfbcad",
   "crate": "m3-cb",
   "scope": "MODULE; reflection snapshot and caller-owned Class bridge; no automatic ClassLoader/JVMTI hook",
-  "recipe_path": "m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+  "recipe_path": "make/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
   "recipe_sha256": "b96894a77e5c310addbda72b248ab56fedf8ceb24e5de81fe6e5d090982a4abc",
   "history_review": {
     "scope": "Read current pinned owner bodies and source commit metadata; not a complete-history admission",

@@ -40,14 +40,14 @@
       "bytes": 3703
     },
     {
-      "path": "m3/docs/name-mapping.json",
+      "path": "doc/m3/name-mapping.json",
       "before": "2cdc842793ad92cfc3da7183f0ddbdba582398f8",
       "sha": "1c80a11095bec62eb83c336e31b51754de4b9e4a",
       "sha256": "5edf3e2118c0b6fdf0bfbf5ce3f92add8559687f9b4fbc90be62cefc1677f34a",
       "bytes": 587963
     },
     {
-      "path": "m3/tooling/name-contract/name-plan.json",
+      "path": "make/m3/tooling/name-contract/name-plan.json",
       "before": "97014da6e79fcdcc6a9b618cbcd13d972449cbb4",
       "sha": "53f5f3a58b4f9ed58460bda13cfd1c8ba6a63774",
       "sha256": "763ee4f9a4d2a0031160352e13b41530b2bd7d6d1dd4de5afed642aad32d7fb2",
@@ -93,8 +93,8 @@
     "baseline_files": 2561,
     "received_files": 2564,
     "modified": [
-      "m3/docs/name-mapping.json",
-      "m3/tooling/name-contract/name-plan.json",
+      "doc/m3/name-mapping.json",
+      "make/m3/tooling/name-contract/name-plan.json",
       "src/java.base/share/classes/jdk/internal/mindex/M3RegexDpPlan.java"
     ],
     "added": [

@@ -21,7 +21,7 @@ ROOT=$(cd "$Q/../../.." && pwd)
 DONOR=$1; REV=$2; mkdir -p "$3"; S=$(winpath "$3"); OPS=${4:-1000000}; BASE=${5:-origin/master}
 J="${JAVA_HOME:?JAVA_HOME must point at a JDK 21}/bin"
 SEED=0x4d334a42434f5731
-LEAF=m3/qualification/$(basename "$Q")/
+LEAF=make/m3/qualification/$(basename "$Q")/
 OWNER=src/java.base/share/classes/java/util/CollectionViews.java
 FLAGS=(-g -Xlint:all -Werror -Xlint:-this-escape -XDstringConcat=inline)
 status=PASS
@@ -81,7 +81,7 @@ b=$(bash "$Q/tests.sh" "$S/side/whatif/cls" "$S/tests-whatif" $T | grep -E '^TES
 v=FAIL; [ "$a" = "TESTS pass=13 fail=0" ] && [ "$b" = "FilteredBulkMutationContractTest " ] && v=PASS
 gate tests $v "owner: $a; census-hunk counterfactual fails: ${b:-none}"
 
-naming=$(cd "$ROOT" && python -I m3/tooling/jdk-naming/jdk_naming.py plan --root . --only "$LEAF" 2>&1 | grep -E "^(JDK_NAMING|REFUSED)" | tail -1)
+naming=$(cd "$ROOT" && python -I make/m3/tooling/jdk-naming/jdk_naming.py plan --root . --only "$LEAF" 2>&1 | grep -E "^(JDK_NAMING|REFUSED)" | tail -1)
 case "$naming" in *"moves=0 rewrites=0 refusals=0"*) gate naming PASS "$naming" ;; *) gate naming FAIL "$naming" ;; esac
 
 changed=$(cd "$ROOT" && { git diff --name-only "$BASE"; git diff --name-only --cached; git ls-files --others --exclude-standard; } | sort -u)

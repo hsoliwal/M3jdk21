@@ -8,7 +8,7 @@ from the iHarder public-domain library), for HTTP authentication, Amazon S3 and 
 
 ## Change
 
-- Recipe `m3/tooling/jdk-superset/retarget/tools/jgit_base64_to_jdk.py` on DONOR_OVERLAY v2 (re-runs to a fixed
+- Recipe `make/m3/tooling/jdk-superset/retarget/tools/jgit_base64_to_jdk.py` on DONOR_OVERLAY v2 (re-runs to a fixed
   point; `--check` writes nothing). The class and its four public methods stay:
   - `encodeBytes(source, off, len)` encodes with `java.util.Base64.getEncoder()` over `ByteBuffer.wrap(source, off,
     len)`, so the input is not copied. The private `encode3to4` goes.

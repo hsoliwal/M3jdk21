@@ -24,7 +24,7 @@ OWNER_GIT = {
     "src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java": "d70a152bdedc380ed8b28861ea94ef4c2adbea90",
     "src/java.base/share/native/libjava/M3StateRelation.c": "89b3127f0f262de3e00ba28a01079a659013dce2",
     "src/java.base/share/native/libjava/m3_state_relation.h": "0e0c70e60b2cee61c3df31982a26f4251955cb61",
-    "m3/compatibility/regex-relations-20261014/M3RelationPortProof.java": "e9a6beee8916cf97d5d4aac2383e7ac2fa8843e0"
+    "make/m3/compatibility/regex-relations-20261014/M3RelationPortProof.java": "e9a6beee8916cf97d5d4aac2383e7ac2fa8843e0"
 }
 C_OWNER = "src/java.base/share/native/libjava/M3StateRelation.c"
 C_BEFORE_SHA = "0df1989292b23b1f185f222db61ad55d5e38b30d5b758436ca9d62b8de277bbd"

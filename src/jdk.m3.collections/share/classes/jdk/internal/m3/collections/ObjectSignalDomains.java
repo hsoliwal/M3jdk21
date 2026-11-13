@@ -3,7 +3,7 @@
 package jdk.internal.m3.collections;
 
 /** Reserved semantic domains for built-in projections. Custom domains should start at CUSTOM_BASE. */
-//FLLDCIM: RELOCATE - donor blob eca8021ef308 at commit 3385d79a2968 (repository, path, URL and digests: m3/collections/qualification/object-signal-20261107/PROVENANCE.tsv); recipe m3/collections/qualification/object-signal-20261107/relocate.py v1
+//FLLDCIM: RELOCATE - donor blob eca8021ef308 at commit 3385d79a2968 (repository, path, URL and digests: make/m3/collections/qualification/object-signal-20261107/PROVENANCE.tsv); recipe make/m3/collections/qualification/object-signal-20261107/relocate.py v1
 public final class ObjectSignalDomains {
     public static final int STRING = 1;
     public static final int INDEX_STRING_BASE = 0x0001_0000;

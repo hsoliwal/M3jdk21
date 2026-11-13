@@ -119,8 +119,8 @@
     "tornadovm": {
       "owner": "M3JDK21",
       "source": "m3/vendor/tornadovm",
-      "mapping": "m3/docs/name-mapping.d/m3-tornado-integrated-runtime-20261021.json",
-      "build": "m3/build-tornado.sh",
+      "mapping": "doc/m3/name-mapping.d/m3-tornado-integrated-runtime-20261021.json",
+      "build": "make/m3/build-tornado.sh",
       "claim": "CONDITIONAL_ON_EXACT_MATCHED_IMAGE_RECEIPT",
       "required_gates": [
         "PINNED_SOURCE_AND_RUNTIME_DEPENDENCIES",
@@ -142,7 +142,7 @@
   },
   "execution_evidence": {
     "schema": "M3_RELEASE_EVIDENCE_V1",
-    "default_manifest": "m3/release/queue/current/evidence.json",
+    "default_manifest": "make/m3/release/queue/current/evidence.json",
     "require_exact_commit_and_tree": true,
     "require_clean_source": true,
     "artifact_paths_relative_to": "manifest_directory",
@@ -150,7 +150,7 @@
     "gate_owners": {
       "M3_MAVEN_CONTROL_REACTOR": "hsoliwal/M3jdk21"
     },
-    "maven_gate_scope": "The existing M3_MAVEN_CONTROL_REACTOR gate is produced inside hsoliwal/M3jdk21 by executing its complete default m3/pom.xml product reactor with clean verify, tests enabled and cache reuse disabled. Product execution remains standalone. canonical_recipe records only the exact Synexia source revision and recipe identity that produced the reviewed build outputs; it is passive provenance and never a target-side recipe invocation. Legacy recipe custody and unresolved executable recipe dependencies prevent this producer from starting Maven. Other release and runtime gates remain independently required.",
+    "maven_gate_scope": "The existing M3_MAVEN_CONTROL_REACTOR gate is produced inside hsoliwal/M3jdk21 by executing its complete default make/m3/pom.xml product reactor with clean verify, tests enabled and cache reuse disabled. Product execution remains standalone. canonical_recipe records only the exact Synexia source revision and recipe identity that produced the reviewed build outputs; it is passive provenance and never a target-side recipe invocation. Legacy recipe custody and unresolved executable recipe dependencies prevent this producer from starting Maven. Other release and runtime gates remain independently required.",
     "required_manifest_fields": [
       "schema",
       "source_commit",
@@ -182,13 +182,13 @@
     ],
     "policy_valid_is_release_ready": false,
     "evidence_scope": "The verifier checks receipt structure, current source identity and artifact bytes. Actual contract coverage and execution provenance still require review.",
-    "visible_queue_source": "m3/tooling/name-contract/name-plan.json",
-    "visible_queue_authority": "m3/docs/name-mapping.json",
-    "queue_output_command": "python3 m3/release/verify_release_admission.py --queue-out m3/release/queue/current/README.md --json-out m3/release/queue/current/admission.json"
+    "visible_queue_source": "make/m3/tooling/name-contract/name-plan.json",
+    "visible_queue_authority": "doc/m3/name-mapping.json",
+    "queue_output_command": "python3 make/m3/release/verify_release_admission.py --queue-out make/m3/release/queue/current/README.md --json-out make/m3/release/queue/current/admission.json"
   },
   "standalone": {
     "required_for_release": true,
-    "baseline": "m3/release/STANDALONE_BASELINE.tsv",
+    "baseline": "make/m3/release/STANDALONE_BASELINE.tsv",
     "rule": "The M3JDK21 target builds and runs without another repository. check_standalone.py retains the dependency ratchet and requires zero executable cross-repository dependencies for release. The separately verified canonical recipe execution receipt is provenance data, not a recipe executable or runtime dependency."
   },
   "coverage_policy": {

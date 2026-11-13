@@ -6,21 +6,21 @@ on:
       - "m3/jep493-*"
       - "m3/recover-jep493-current-master-20261005"
     paths:
-      - "m3/backports/generate_recipe_crates.py"
-      - "m3/backports/file_delta_inventory.py"
-      - "m3/backports/test_generate_recipe_crates.py"
-      - "m3/backports/test_file_delta_inventory.py"
-      - "m3/backports/recipes/jep-493-runtime-image/**"
-      - "m3/tooling/migration-recipes/**"
+      - "make/m3/backports/generate_recipe_crates.py"
+      - "make/m3/backports/file_delta_inventory.py"
+      - "make/m3/backports/test_generate_recipe_crates.py"
+      - "make/m3/backports/test_file_delta_inventory.py"
+      - "make/m3/backports/recipes/jep-493-runtime-image/**"
+      - "make/m3/tooling/migration-recipes/**"
       - ".github/workflows/m3-jep493-runtime-image-inventory.yml"
   pull_request:
     paths:
-      - "m3/backports/generate_recipe_crates.py"
-      - "m3/backports/file_delta_inventory.py"
-      - "m3/backports/test_generate_recipe_crates.py"
-      - "m3/backports/test_file_delta_inventory.py"
-      - "m3/backports/recipes/jep-493-runtime-image/**"
-      - "m3/tooling/migration-recipes/**"
+      - "make/m3/backports/generate_recipe_crates.py"
+      - "make/m3/backports/file_delta_inventory.py"
+      - "make/m3/backports/test_generate_recipe_crates.py"
+      - "make/m3/backports/test_file_delta_inventory.py"
+      - "make/m3/backports/recipes/jep-493-runtime-image/**"
+      - "make/m3/tooling/migration-recipes/**"
       - ".github/workflows/m3-jep493-runtime-image-inventory.yml"
   workflow_dispatch:
 
@@ -60,7 +60,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          cd m3/backports
+          cd make/m3/backports
           python3 -m unittest -v test_file_delta_inventory.py test_generate_recipe_crates.py test_jep493_ga_policy.py
 
       - name: Inventory exact JDK21 to JDK24 deltas
@@ -68,13 +68,13 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p target/jep493
-          python3 m3/backports/file_delta_inventory.py             --repo "$UPSTREAM"             --release 24             --out target/jep493/JDK21_TO_JDK24.tsv
+          python3 make/m3/backports/file_delta_inventory.py             --repo "$UPSTREAM"             --release 24             --out target/jep493/JDK21_TO_JDK24.tsv
 
       - name: Generate one Java/text recipe atom per selected JEP493 path
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/backports/generate_recipe_crates.py             --repo "$UPSTREAM"             --release 24             --paths-file m3/backports/recipes/jep-493-runtime-image/PATHS.txt             --crate-size 1             --include-text             --out target/jep493/file-atoms
+          python3 make/m3/backports/generate_recipe_crates.py             --repo "$UPSTREAM"             --release 24             --paths-file make/m3/backports/recipes/jep-493-runtime-image/PATHS.txt             --crate-size 1             --include-text             --out target/jep493/file-atoms
 
       - name: Prove 46 GA paths plus one typed exclusion account for the 47-path denominator
         shell: bash
@@ -86,14 +86,14 @@ jobs:
 
           selected = {
               line.strip()
-              for line in Path("m3/backports/recipes/jep-493-runtime-image/PATHS.txt")
+              for line in Path("make/m3/backports/recipes/jep-493-runtime-image/PATHS.txt")
                   .read_text(encoding="utf-8").splitlines()
               if line.strip()
           }
           if len(selected) != 46:
               raise SystemExit(f"expected 46 GA materialization paths, found {len(selected)}")
 
-          with Path("m3/backports/recipes/jep-493-runtime-image/TYPED_EXCLUSIONS.tsv").open(
+          with Path("make/m3/backports/recipes/jep-493-runtime-image/TYPED_EXCLUSIONS.tsv").open(
               encoding="utf-8", newline=""
           ) as handle:
               policy_exclusions = list(csv.DictReader(handle, delimiter="\t"))
@@ -152,23 +152,23 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f m3/backports/pom.xml verify
+          mvn -B -ntp -f make/m3/backports/pom.xml verify
 
       - name: Validate JEP493 composition DAG
         run: |
           set -euo pipefail
-          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
+          mvn -B -ntp -f make/m3/tooling/backport-dag/pom.xml \
             -Dexec.mainClass=jdk.m3.tooling.dag.BackportPacketMain \
-            -Dexec.args="$PWD/m3/backports/recipes/jep-493-runtime-image/packet.tsv $PWD/m3/backports/recipes/jep-493-runtime-image/atom-evidence.tsv" \
+            -Dexec.args="$PWD/make/m3/backports/recipes/jep-493-runtime-image/packet.tsv $PWD/make/m3/backports/recipes/jep-493-runtime-image/atom-evidence.tsv" \
             exec:java
 
       - name: Project JEP493 DAG to Camel Airflow and Drools
         run: |
           set -euo pipefail
           mkdir -p target/jep493/projections
-          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
+          mvn -B -ntp -f make/m3/tooling/backport-dag/pom.xml \
             -Dexec.mainClass=jdk.m3.tooling.dag.OrchestrationProjectionMain \
-            -Dexec.args="$PWD/m3/backports/recipes/jep-493-runtime-image/packet.tsv $PWD/target/jep493/projections $PWD/m3/backports/recipes/jep-493-runtime-image/atom-evidence.tsv" \
+            -Dexec.args="$PWD/make/m3/backports/recipes/jep-493-runtime-image/packet.tsv $PWD/target/jep493/projections $PWD/make/m3/backports/recipes/jep-493-runtime-image/atom-evidence.tsv" \
             exec:java
           test -s target/jep493/projections/M3BackportRoutes.java
           test -s target/jep493/projections/m3_backport_dag.py

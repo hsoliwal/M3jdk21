@@ -5,7 +5,7 @@ set -euo pipefail
 root=$(cd "$(dirname "$0")/../../.." && pwd)
 : "${M3_TEST_JDK:?Set the absolute path of the freshly built fastdebug M3JDK image}"
 image=$(cd "$M3_TEST_JDK" && pwd)
-out="$root/m3/tooling/tq/target/image"
+out="$root/make/m3/tooling/tq/target/image"
 mkdir -p "$out/classes" "$out/headers"
 "$image/bin/java" -version > "$out/version.log" 2>&1
 if ! grep -q fastdebug "$out/version.log"; then

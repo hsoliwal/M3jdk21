@@ -7,7 +7,7 @@ This source-only lane adapts the already executed regex hosted workflow e114945b
 
 ## Receiving layout and binding
 
-Mirror the 21 canonical task files into m3/tooling/charcopy-current-successor with the same relative SDK/root-POM layout. Map hosted/qualify.py and hosted/README.md into that module, and map hosted/qualification.yml to .github/workflows/m3-charcopy-current-successor.yml. Do not make a redundant hosted workflow copy. These are exactly 24 bound authoring files. The caller creates module source-binding.json afterward and seals its exact contents by the receiving commit.
+Mirror the 21 canonical task files into make/m3/tooling/charcopy-current-successor with the same relative SDK/root-POM layout. Map hosted/qualify.py and hosted/README.md into that module, and map hosted/qualification.yml to .github/workflows/m3-charcopy-current-successor.yml. Do not make a redundant hosted workflow copy. These are exactly 24 bound authoring files. The caller creates module source-binding.json afterward and seals its exact contents by the receiving commit.
 
 The source binding requires repository=hsoliwal/com.synexia, receiverRepository=hsoliwal/M3jdk21, an immutable sourceCommit, receiverBaseCommit=677437be295b23f7ccf7409be287008944d0e8b0, runtimeApplied=false, phaseAdvanced=false; files[] has each of the 24 targetPath/gitBlob/bytes/sha256 identities. receiverFiles[] must equal INPUTS.json's exact eight receiver rows. Preserve sourcePath attribution and canonical revision metadata when assembling that binding.
 

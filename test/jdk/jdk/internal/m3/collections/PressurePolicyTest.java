@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.util.concurrent.atomic.AtomicReference;
 
 /** Deterministic heap-pressure and pin-safety simulation; runs without JNI or a forced OOME. */
-//FLLDCIM: RELOCATE - donor blob 25149a9daf48 at 165ceb5a0202; recipe m3/collections/recipe/residency-paged-array-20261107/relocate.py v4
+//FLLDCIM: RELOCATE - donor blob 25149a9daf48 at 165ceb5a0202; recipe make/m3/collections/recipe/residency-paged-array-20261107/relocate.py v4
 public final class PressurePolicyTest {
     public static void main(String[] args) throws Exception {
         Path root = Files.createTempDirectory("m3-pressure-policy-");

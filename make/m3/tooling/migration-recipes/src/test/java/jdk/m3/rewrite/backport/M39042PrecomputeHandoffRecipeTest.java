@@ -35,9 +35,9 @@ class M39042PrecomputeHandoffRecipeTest {
         assertEquals(
                 List.of(
                         ".github/workflows/m3-pr9042-code-text-precompute.yml",
-                        "m3/compatibility/check_m3_pr9042_code_text_precompute.py",
-                        "m3/compatibility/m3-pr9042-code-text-precompute.tsv",
-                        "m3/docs/m3-pr9042-code-text-precompute-handoff.md"),
+                        "make/m3/compatibility/check_m3_pr9042_code_text_precompute.py",
+                        "make/m3/compatibility/m3-pr9042-code-text-precompute.tsv",
+                        "doc/m3/m3-pr9042-code-text-precompute-handoff.md"),
                 paths);
 
         List<SourceFile> materialized =

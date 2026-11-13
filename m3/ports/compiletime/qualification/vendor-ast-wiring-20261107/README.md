@@ -12,7 +12,7 @@
    builds them.
 
    Fix: the `default-compile` execution adds those three directories as source roots. This is the same shape as
-   `m3/tooling/m3jdk-a3-recipes`, which compiles `m3/vendor/m3/m3-openrewrite-recipes`. Tests keep the default
+   `make/m3/tooling/m3jdk-a3-recipes`, which compiles `m3/vendor/m3/m3-openrewrite-recipes`. Tests keep the default
    test root. All 138 main files compile with `-Xlint:all -Werror` and 0 warnings.
 
 2. **Stale annotation descriptors.** With the module compiling, 8 of its 30 tests failed.

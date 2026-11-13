@@ -26,11 +26,11 @@ No pom.xml, module-info.java, CMake or workflow change. Decisions are in [DECISI
 ## Recipes
 
 ```sh
-python -I m3/collections/qualification/object-signal-20261107/relocate.py --donor-git <m3scale clone> \
+python -I make/m3/collections/qualification/object-signal-20261107/relocate.py --donor-git <m3scale clone> \
     --donor-rev 3385d79a2968c770aedf1d3398b2a62f05ebc092 [--check]       # v2: KEEP rows, C FILE row, JNI row
-python -I m3/collections/qualification/object-signal-native-20261107/apply.py [--check]
-bash m3/collections/qualification/object-signal-20261107/differential.sh <m3scale clone> 3385d79a2968 <scratch> 20000
-bash m3/collections/qualification/object-signal-native-20261107/native-gate.sh <out> <scratch> 20000   # Linux / WSL
+python -I make/m3/collections/qualification/object-signal-native-20261107/apply.py [--check]
+bash make/m3/collections/qualification/object-signal-20261107/differential.sh <m3scale clone> 3385d79a2968 <scratch> 20000
+bash make/m3/collections/qualification/object-signal-native-20261107/native-gate.sh <out> <scratch> 20000   # Linux / WSL
 ```
 
 `native-gate.sh` checks:

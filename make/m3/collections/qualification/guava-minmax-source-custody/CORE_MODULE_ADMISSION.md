@@ -9,9 +9,9 @@ Actual CI Guava runs 41442598712 (Java/JNI) and diagnostic run 41442598681 (arti
 
 ## Source modifications and exact source custody
 
-- `m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/run.py` is the **existing** original qualification runtime. Add a *bounded explicit* first module build from existing `m3/arrays/src/main/java/**/*.java` into scratch, use original `common` strict javac flags. Supply compiled module through `--module-path` to original `core130` javac and classpath to existing queue fixtures, without skipping any source or test.
-- `m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/verify.py` remains original entrypoint and retains full immutable V1/165-row and V2 predecessor source proof. Source successor now admits exactly three specific original packet rows (workflow, verifier, runner), all other 162 unchanged. Do not repin original V1 packet.
-- `m3/collections/qualification/guava-minmax-source-custody/source-bindings.json` advances exactly these three rows with full SHA256 and byte counts; original V1 frozen packet remains unchanged; V2 prior image stays reachable by original Git commit and canonical full-byte template.
+- `make/m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/run.py` is the **existing** original qualification runtime. Add a *bounded explicit* first module build from existing `m3/arrays/src/main/java/**/*.java` into scratch, use original `common` strict javac flags. Supply compiled module through `--module-path` to original `core130` javac and classpath to existing queue fixtures, without skipping any source or test.
+- `make/m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/verify.py` remains original entrypoint and retains full immutable V1/165-row and V2 predecessor source proof. Source successor now admits exactly three specific original packet rows (workflow, verifier, runner), all other 162 unchanged. Do not repin original V1 packet.
+- `make/m3/collections/qualification/guava-minmax-source-custody/source-bindings.json` advances exactly these three rows with full SHA256 and byte counts; original V1 frozen packet remains unchanged; V2 prior image stays reachable by original Git commit and canonical full-byte template.
 
 No public runtime Java, C, C++/JNI or Maven POM is rewritten, and no test is waived. `M3ArrayNative` required-native behavior and previous Apache JNI receipts remain separate.
 

@@ -64,7 +64,7 @@ owner; no `java.base` consumer exists, so the plan's `jdk.internal.mindex` place
 | recipe | `relocate.py` v5 (`RELOCATE_CANONICAL_LITERALS`, derived from `../intern-space-20261106/relocate.py` v4, itself from `m3/arrays/recipe/bitmatrix-20261106/relocate.py` v3): REPO, CLOSURE, CLOSURE_PATH and REWRITE rows and the `declared_rewrites` provenance column added |
 | map | `RELOCATION_MAP.tsv`: 1 REPO, 1 CLOSURE, 13 CLOSURE_PATH, 2 FILE, 1 PACKAGE, 3 TYPE (2 identity, 1 dependency), 1 EXTERNAL (JUnit 5), 8 REWRITE, 9 PIN, 11 OMIT |
 | provenance | `PROVENANCE.tsv`: `body_match=FALSE`, `body_match_renamed=TRUE` for both files (`declared_rewrites` 3 and 5): read back from disk, every byte that is not a declared row equals the donor's |
-| naming | `python -I m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/intern/` (files staged first): 0 moves, 0 rewrites, 0 refusals |
+| naming | `python -I make/m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/intern/` (files staged first): 0 moves, 0 rewrites, 0 refusals |
 
 REWRITE rows (the adapter, nothing else):
 

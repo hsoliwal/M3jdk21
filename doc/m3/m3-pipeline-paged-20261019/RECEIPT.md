@@ -22,7 +22,7 @@ Those are exact reviewed source bytes. The canonical emitter's four-atom output 
 - Local `BUILD_ALLOCATION.tsv` contains measured medians from separate baseline/candidate OpenJDK21 patch-module JVM runs; construction of 8,192 operations: **138,937,160 → 8,094,544 bytes** thread allocation; 64 operations: **13,384 → 15,440 bytes**, a regression. Traversal latency mixed. These are host-specific medians, not universal throughput claims.
 
 ## Code tests and continuous gate
-`bash m3/tooling/pipeline-paged-20261019/verify.sh` compiles the exact java.base owner, the two new regression classes and three pre-existing pipeline tests, then executes them on a patched Java 21 bootstrap. The GitHub workflow runs the same script on pull requests; this local host ran the two new regression classes, but the full workflow and the three pre-existing classes await CI.
+`bash make/m3/tooling/pipeline-paged-20261019/verify.sh` compiles the exact java.base owner, the two new regression classes and three pre-existing pipeline tests, then executes them on a patched Java 21 bootstrap. The GitHub workflow runs the same script on pull requests; this local host ran the two new regression classes, but the full workflow and the three pre-existing classes await CI.
 
 ## Other M3JDK21 product work retained
 - Existing `java.util.Collections` filtered/sorted/navigable wrappers and native `libjava` bitmap index selection remain independently reviewed in [M3JDK21 PR #1435](https://github.com/hsoliwal/M3JDK21/pull/1435). This pipeline code does not pretend to replace or qualify those contracts.

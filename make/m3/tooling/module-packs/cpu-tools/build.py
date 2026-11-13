@@ -279,8 +279,8 @@ def description_name(description):
 
 def qualify(args):
     repo = args.repo_root.resolve(strict=True)
-    owner = repo / "m3/tooling/module-packs/cpu-tools"
-    existing = repo / "m3/tooling/module-packs/text-tools"
+    owner = repo / "make/m3/tooling/module-packs/cpu-tools"
+    existing = repo / "make/m3/tooling/module-packs/text-tools"
     source_roots = (existing / "src", owner / "src")
     native_source = required_file(existing / "native/m3textio.c")
     native_text_source = required_file(existing / "native/m3textops.c")
@@ -295,7 +295,7 @@ def qualify(args):
             if path.is_file():
                 notices.append(required_file(path))
     notices = tuple(notices)
-    packager = required_file(repo / "m3/tooling/jmod-recipes/tools/jmod_pack.py")
+    packager = required_file(repo / "make/m3/tooling/jmod-recipes/tools/jmod_pack.py")
     packager_support = required_file(packager.with_name("jmod_image.py"))
     fixture_files = tuple(required_file(owner / "fixtures" / (name + ".java")) for name in FIXTURES)
     existing_smoke = required_file(existing / "fixtures/src/test/java/M3TextSmoke.java")
@@ -553,7 +553,7 @@ def qualify(args):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--jdk-home", type=Path, required=True)
-    parser.add_argument("--repo-root", type=Path, default=Path(__file__).resolve().parents[4])
+    parser.add_argument("--repo-root", type=Path, default=Path(__file__).resolve().parents[5])
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--cc", default=os.environ.get("CC", "cc"))
     qualify(parser.parse_args())

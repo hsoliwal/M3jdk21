@@ -26,7 +26,7 @@
       "after_sha256": "08ad216c46c4af75da082119e92d522fa07cbf352799b21e2377bf700388311a"
     },
     {
-      "path": "m3/tooling/module-packs/cpu-tools/README.md",
+      "path": "make/m3/tooling/module-packs/cpu-tools/README.md",
       "mode": "100644",
       "before_git_blob": "51c8b05bbf93b4b540896e917fa5bd372b60e093",
       "before_sha256": "1b32edaa3fb05b52f234feecbd93cbdac7fd4657da3f7acd54e6be80bc641f46",
@@ -34,7 +34,7 @@
       "after_sha256": "1bcbd60e655a9121cb1e3116214d91809a9b7a2f36407a0c1a4424445824682c"
     },
     {
-      "path": "m3/tooling/module-packs/cpu-tools/fixtures/M3AffixIndexBenchmark.java",
+      "path": "make/m3/tooling/module-packs/cpu-tools/fixtures/M3AffixIndexBenchmark.java",
       "mode": "100644",
       "before_git_blob": null,
       "before_sha256": null,
@@ -42,7 +42,7 @@
       "after_sha256": "895acd3cc0e907266a4f1dd0d9941ac287069c0f1cf960081f6bac64d4db38e0"
     },
     {
-      "path": "m3/tooling/module-packs/cpu-tools/fixtures/M3AffixIndexTest.java",
+      "path": "make/m3/tooling/module-packs/cpu-tools/fixtures/M3AffixIndexTest.java",
       "mode": "100644",
       "before_git_blob": null,
       "before_sha256": null,
@@ -50,7 +50,7 @@
       "after_sha256": "43d057a8d3b6c02bb193f49f0ecd6ca11bb4fac6927b0ec7a2206bfafcbd0e24"
     },
     {
-      "path": "m3/tooling/module-packs/cpu-tools/fixtures/M3BoundedDiffTest.java",
+      "path": "make/m3/tooling/module-packs/cpu-tools/fixtures/M3BoundedDiffTest.java",
       "mode": "100644",
       "before_git_blob": null,
       "before_sha256": null,
@@ -58,7 +58,7 @@
       "after_sha256": "e668e04779b437cd787c9c9042307221dbcf4929f2679530835b258a7acfb03e"
     },
     {
-      "path": "m3/tooling/module-packs/cpu-tools/fixtures/M3CpuToolsTest.java",
+      "path": "make/m3/tooling/module-packs/cpu-tools/fixtures/M3CpuToolsTest.java",
       "mode": "100644",
       "before_git_blob": "a7d37b77360b151251f88c9d12630a4f82c2a326",
       "before_sha256": "54265effbe2e595f1b4fd69df6e4741124b48f9cbdc0d1de6c121d483bbb9c15",
@@ -66,7 +66,7 @@
       "after_sha256": "217123955970c2b5a01d2924f042707a8eb6d30e329abb033b7c5c67037678c1"
     },
     {
-      "path": "m3/tooling/module-packs/cpu-tools/fixtures/M3DonorToolsTest.java",
+      "path": "make/m3/tooling/module-packs/cpu-tools/fixtures/M3DonorToolsTest.java",
       "mode": "100644",
       "before_git_blob": "d94b63788b2bd4a807416e614c0395996e9bd39a",
       "before_sha256": "c087fce928a4dc3afad0ff63466f1ee1d327aba5bc7a16154a07e718eddc6d3d",
@@ -74,7 +74,7 @@
       "after_sha256": "74e4d5f299b4be68392d2fb72634eb7169e8d6e05cc9f97e509946ac7006c535"
     },
     {
-      "path": "m3/tooling/module-packs/cpu-tools/fixtures/M3GramIndexBenchmark.java",
+      "path": "make/m3/tooling/module-packs/cpu-tools/fixtures/M3GramIndexBenchmark.java",
       "mode": "100644",
       "before_git_blob": null,
       "before_sha256": null,
@@ -82,7 +82,7 @@
       "after_sha256": "902da75d77f4f5430ccfef3329e93b13ced85ef6128c746e31a79d3f963a5d5d"
     },
     {
-      "path": "m3/tooling/module-packs/cpu-tools/fixtures/M3GramIndexTest.java",
+      "path": "make/m3/tooling/module-packs/cpu-tools/fixtures/M3GramIndexTest.java",
       "mode": "100644",
       "before_git_blob": null,
       "before_sha256": null,
@@ -90,7 +90,7 @@
       "after_sha256": "57b4e9346165923ad0a8b0da7e39a992c0ff8897a86f1606d983db518d36727b"
     },
     {
-      "path": "m3/tooling/module-packs/cpu-tools/fixtures/M3PreparedRankBenchmark.java",
+      "path": "make/m3/tooling/module-packs/cpu-tools/fixtures/M3PreparedRankBenchmark.java",
       "mode": "100644",
       "before_git_blob": null,
       "before_sha256": null,
@@ -98,7 +98,7 @@
       "after_sha256": "081dc654dd8dc5892e578243ebd9b39cba94a983864d7afe18b26df35a35c4b0"
     },
     {
-      "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/CpuTools.java",
+      "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/CpuTools.java",
       "mode": "100644",
       "before_git_blob": "36f29eb71abb1fc7b156f4832322da1ed90b3794",
       "before_sha256": "ea6ccee666237e0dfe9fee9dd0937188bebe559d06ea453d481fd96ac3099b0c",
@@ -106,7 +106,7 @@
       "after_sha256": "35f41502fc63cbbeef138fdb645d2fa539a3611e1be32d63b55509cdf4fd4bb8"
     },
     {
-      "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/CpuToolsCli.java",
+      "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/CpuToolsCli.java",
       "mode": "100644",
       "before_git_blob": "7f10d670f2c97f8422700fdd253cfa8c9f9fe56c",
       "before_sha256": "14fda8a14704005a17bab6b1b43f9612b726513f12f6098670ca18156094f89f",
@@ -114,7 +114,7 @@
       "after_sha256": "7e543846cdf463e754f3cd50250f30d77d8861fc9bcc425f2157e53b446b87c1"
     },
     {
-      "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.diff/jdk/m3/tools/text/diff/BoundedDiff.java",
+      "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.diff/jdk/m3/tools/text/diff/BoundedDiff.java",
       "mode": "100644",
       "before_git_blob": null,
       "before_sha256": null,
@@ -122,7 +122,7 @@
       "after_sha256": "1cb240e5ed100cb7bebb5b7506229a14eff04328f563a13bfa39b549e2be7dc7"
     },
     {
-      "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.diff/jdk/m3/tools/text/diff/LineDiff.java",
+      "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.diff/jdk/m3/tools/text/diff/LineDiff.java",
       "mode": "100644",
       "before_git_blob": null,
       "before_sha256": null,
@@ -130,7 +130,7 @@
       "after_sha256": "364c177f2d23befd528b32ae278f99eb7d5a5d22b11df4cdefc367156c626e57"
     },
     {
-      "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.diff/jdk/m3/tools/text/diff/LineThreeWayMerge.java",
+      "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.diff/jdk/m3/tools/text/diff/LineThreeWayMerge.java",
       "mode": "100644",
       "before_git_blob": null,
       "before_sha256": null,
@@ -138,7 +138,7 @@
       "after_sha256": "1018159525ba369afb0622c10ec0f47a6c9854ba7c55126a43b29c760a0df798"
     },
     {
-      "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.diff/jdk/m3/tools/text/diff/ThreeWayMerge.java",
+      "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.diff/jdk/m3/tools/text/diff/ThreeWayMerge.java",
       "mode": "100644",
       "before_git_blob": null,
       "before_sha256": null,
@@ -146,7 +146,7 @@
       "after_sha256": "c9ebccdebc781d34298a191eed88f57e05b3579e56ef0838d4e8c7c7c8d877bd"
     },
     {
-      "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.index/jdk/m3/tools/text/index/Bm25Ranker.java",
+      "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.index/jdk/m3/tools/text/index/Bm25Ranker.java",
       "mode": "100644",
       "before_git_blob": null,
       "before_sha256": null,
@@ -154,7 +154,7 @@
       "after_sha256": "71af8726128655458941c394f78795c54a1fbf7e68bfa3d979ba8d6c7c325546"
     },
     {
-      "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.index/jdk/m3/tools/text/index/InvertedIndex.java",
+      "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.index/jdk/m3/tools/text/index/InvertedIndex.java",
       "mode": "100644",
       "before_git_blob": "d42084435c43fab99be16719dd11c7229656038a",
       "before_sha256": "fe5bb68d37c09d33d8baae2e76a223fbdd627018e30b8532735e66e201ed846c",
@@ -162,7 +162,7 @@
       "after_sha256": "e99efdde463daa6c2aaa14652ac4a8fb05c614db639f8919b9ab69b028ab4496"
     },
     {
-      "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.ngram/jdk/m3/tools/text/ngram/NGramIndex.java",
+      "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.ngram/jdk/m3/tools/text/ngram/NGramIndex.java",
       "mode": "100644",
       "before_git_blob": null,
       "before_sha256": null,
@@ -170,7 +170,7 @@
       "after_sha256": "4ce85c66718b824891eb343099c7aa9d06d64affc6ec881d886ec82e98e17eab"
     },
     {
-      "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.ngram/jdk/m3/tools/text/ngram/NGrams.java",
+      "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.ngram/jdk/m3/tools/text/ngram/NGrams.java",
       "mode": "100644",
       "before_git_blob": "831892219ea440b18f5420003c26fc5f3c17fe9e",
       "before_sha256": "0cde8da1762345362e5ed10efef9d27b6a7757f70d7ee5b8935b440660373442",
@@ -178,7 +178,7 @@
       "after_sha256": "add106ee36fe33eb4a9e384000356d64398bbf19a8a87e2646a3eb9af9a73506"
     },
     {
-      "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.regex/jdk/m3/tools/text/regex/RegexMatcher.java",
+      "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.regex/jdk/m3/tools/text/regex/RegexMatcher.java",
       "mode": "100644",
       "before_git_blob": "6b556bbdedf67cea9aa7e0233888bed587e7e293",
       "before_sha256": "7c01f9b2b62a7544de11f006658a1527c809b5275057cfdc3c34b2fb8aa579df",
@@ -186,7 +186,7 @@
       "after_sha256": "1b7633e2a11eb3b4da984e5812938f55df282c4c3b42bd698425d517c846bbf8"
     },
     {
-      "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.search/jdk/m3/tools/text/search/AffixIndex.java",
+      "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.search/jdk/m3/tools/text/search/AffixIndex.java",
       "mode": "100644",
       "before_git_blob": null,
       "before_sha256": null,
@@ -194,7 +194,7 @@
       "after_sha256": "78b90f73e3a818f8cb6bc4d5a0bf4ad0a3c61392d6e30fafd6eaf02c56495c0a"
     },
     {
-      "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.search/jdk/m3/tools/text/search/MultiLiteralSearch.java",
+      "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.search/jdk/m3/tools/text/search/MultiLiteralSearch.java",
       "mode": "100644",
       "before_git_blob": null,
       "before_sha256": null,
@@ -202,7 +202,7 @@
       "after_sha256": "456ffe713c4c1fcb0cc806376c8b3ee34b035edf35a52693e14258a16867627d"
     },
     {
-      "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.similarity/jdk/m3/tools/text/similarity/TextSignatures.java",
+      "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.similarity/jdk/m3/tools/text/similarity/TextSignatures.java",
       "mode": "100644",
       "before_git_blob": null,
       "before_sha256": null,
@@ -210,7 +210,7 @@
       "after_sha256": "d1dca1beccf35a7181b8d5026c73a5b187f68b1af27f38c120abf61b2a1f8ac3"
     },
     {
-      "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.tokenize/jdk/m3/tools/text/tokenize/WordTokenizer.java",
+      "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.tokenize/jdk/m3/tools/text/tokenize/WordTokenizer.java",
       "mode": "100644",
       "before_git_blob": "04cf09a2733bac29ce148211861473a1ea7d16b9",
       "before_sha256": "5b8f130337dc6ae2ad813e8d7ce89dc6bcff2371eb9ac3f067aa83ea9fa37911",
@@ -227,7 +227,7 @@
     "current_master_helpers_preserved": true,
     "aggregate_only_changes_excluded": [
       ".github/workflows/m3jdk21-name-contract.yml",
-      "m3/tooling/name-contract/name-plan.json"
+      "make/m3/tooling/name-contract/name-plan.json"
     ]
   },
   "compilation": {

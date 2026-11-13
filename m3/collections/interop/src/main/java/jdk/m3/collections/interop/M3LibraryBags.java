@@ -10,7 +10,7 @@ import java.util.stream.Collector;
 import org.eclipse.collections.api.bag.primitive.LongBag;
 
 /** Explicit library boundaries for M3-owned long counts; no expanded-occurrence storage. */
-//FLLDCIM: MRL - fold-close audit leaf L0050: ADD from PR #1084 head 6b16a20dcedf blob f22e5603a10d, ancestry-only landing b42ab7605b86 (tree == first parent); recipe m3/collections/qualification/foldaudit-collections-20261107/apply.py v1
+//FLLDCIM: MRL - fold-close audit leaf L0050: ADD from PR #1084 head 6b16a20dcedf blob f22e5603a10d, ancestry-only landing b42ab7605b86 (tree == first parent); recipe make/m3/collections/qualification/foldaudit-collections-20261107/apply.py v1
 //FLLDCIM: MRL - the PR-head owner spelled size()/distinctSize()/add(long); master's jdk.m3.collections.LongBag (e6722c63e9b, blob d00efc879547) spells totalCount()/distinctCount()/add(long, long): calls renamed, contract unchanged (HANDOFF.tsv)
 public final class M3LibraryBags {
     private M3LibraryBags() { }

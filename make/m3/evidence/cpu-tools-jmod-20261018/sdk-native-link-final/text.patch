@@ -5,7 +5,7 @@ index 98f715b..4eb96c3 100644
 @@ -19,3 +19,4 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
  ${OUT}/MODULE_ARTIFACTS.json	Actual modular JAR/JMOD names, requirements and SHA-256 values	Produced by build.py
  ${OUT}/BUILD_RECEIPT.json	Authoritative result of that exact build; requires status PASS and all declared gates	Produced by build.py; missing/FAILED is unqualified
- m3/evidence/cpu-tools-jmod-20261018/**	Published exact recipe, build and qualification receipts; generated tool evidence	Task evidence output; source payload remains sealed
+ make/m3/evidence/cpu-tools-jmod-20261018/**	Published exact recipe, build and qualification receipts; generated tool evidence	Task evidence output; source payload remains sealed
 +${OUT}/native/libm3textio.so; native-expected/libm3textio.so	Original compiled JNI and separate expected objcopy -g result; JMOD/member/linked hashes and native tool identities in BUILD_RECEIPT.json	Produced by build.py; original JNI C and existing packager unchanged
 diff --git a/m3/tooling/module-packs/cpu-tools/README.md b/m3/tooling/module-packs/cpu-tools/README.md
 index 4a7e0f9..bb5b51b 100644
@@ -24,7 +24,7 @@ index 4a7e0f9..bb5b51b 100644
 @@ -128,7 +129,16 @@
  The driver compiles source with `-source 21 -target 21`, compiles the original
  `text-tools/native/m3textio.c`, and calls the existing
- `m3/tooling/jmod-recipes/tools/jmod_pack.py` for JMOD creation and image linking.
+ `make/m3/tooling/jmod-recipes/tools/jmod_pack.py` for JMOD creation and image linking.
 -There is no second packager. The staging legal directory preserves both
 +There is no second packager. On Linux its `--strip-debug` option applies
 +`objcopy -g` to native libraries. The driver requires exact original compiled

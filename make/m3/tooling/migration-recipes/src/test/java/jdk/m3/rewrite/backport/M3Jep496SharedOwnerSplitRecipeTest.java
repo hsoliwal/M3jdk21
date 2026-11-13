@@ -14,9 +14,9 @@ import org.openrewrite.text.PlainText;
 
 final class M3Jep496SharedOwnerSplitRecipeTest {
     private static final String WORKFLOW=".github/workflows/m3-jep496-mlkem-inventory.yml";
-    private static final String README="m3/backports/recipes/jep-496-mlkem/README.md";
-    private static final String MATERIALIZE="m3/backports/recipes/jep-496-mlkem/MATERIALIZE_PATHS.txt";
-    private static final String SHARED="m3/backports/recipes/jep-496-mlkem/SHARED_OWNER_PATHS.txt";
+    private static final String README="make/m3/backports/recipes/jep-496-mlkem/README.md";
+    private static final String MATERIALIZE="make/m3/backports/recipes/jep-496-mlkem/MATERIALIZE_PATHS.txt";
+    private static final String SHARED="make/m3/backports/recipes/jep-496-mlkem/SHARED_OWNER_PATHS.txt";
 
     @Test void exactPriorInventoryTransformsAndReachesFixedPoint() {
         var recipe=new M3Jep496SharedOwnerSplitRecipe();

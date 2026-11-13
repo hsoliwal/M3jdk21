@@ -4,7 +4,7 @@
 
 Base: `master@351ed627035c13dea148b409809e16196c2c3e8a` (merge of #2498). The absorb-primitives waves #2494 and #2496
 landed ten sources under `m3/collections/src/main/java/jdk/m3/collections/` whose lineage Javadoc still names the
-donor path and recipe in Synexia spelling. `python -I m3/tooling/jdk-naming/jdk_naming.py plan --tree HEAD` on master
+donor path and recipe in Synexia spelling. `python -I make/m3/tooling/jdk-naming/jdk_naming.py plan --tree HEAD` on master
 (workflow "M3 JDK naming standard", run 42198122643) stops at `rewrites=10 CONST=10 KEBAB=10 PKG_PATH=10`; this leaf
 brings the module to the fixed point with the recipe as the only editor. No hand edit.
 

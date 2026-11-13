@@ -5,7 +5,7 @@ on:
     paths:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3StateMaskArrays.java'
       - 'test/jdk/jdk/m3/collections/M3StateMaskSelectContract.java'
-      - 'm3/collections/qualification/state-mask-select-20261022/**'
+      - 'make/m3/collections/qualification/state-mask-select-20261022/**'
       - '.github/workflows/m3-state-mask-select-20261022.yml'
   workflow_dispatch:
 permissions:

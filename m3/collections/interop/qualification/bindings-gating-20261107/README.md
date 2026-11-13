@@ -1,13 +1,13 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 # Interop SDK bindings JDK naming + JNI test gating (2026-11-07)
 
-Follow-up of the merge-loss restore #2638 (`m3/collections/qualification/mergeloss-01-15-20261106`, merged), whose
+Follow-up of the merge-loss restore #2638 (`make/m3/collections/qualification/mergeloss-01-15-20261106`, merged), whose
 inventory rows and JNI-dependent test this change needs; recipe preimages are pinned at its head 7e14ce2d8f0. Recipe `apply.py`
 (INTEROP_BINDINGS_GATING v1, hash-pinned preimages, `EDITS.tsv`):
 
 1. `m3/collections/interop/sdk-family-bindings.tsv` named its 25 master owners `com.m3.collections.*`, so
    `M3LibraryBinding` refused to load the inventory ("not an M3 collection owner") and M3SdkFamiliesTest /
-   M3SpringCaseInsensitiveSdkFactoryTest errored on master. `m3/tooling/jdk-naming/jdk_naming.py` cannot apply it:
+   M3SpringCaseInsensitiveSdkFactoryTest errored on master. `make/m3/tooling/jdk-naming/jdk_naming.py` cannot apply it:
    `DOC_SUFFIXES` holds `.tsv`, so `is_lineage()` is true and `in_scope()` false (the rename deliberately leaves TSV
    ledgers alone; this TSV is a runtime resource, packaged as `META-INF/m3/sdk-family-bindings.tsv`). The recipe
    therefore calls the tool's own `rewrite_text` (NAMING_RULES.tsv rule PKG_COM_M3: 45 tokens in 25 rows) on this one
@@ -19,7 +19,7 @@ inventory rows and JNI-dependent test this change needs; recipe preimages are pi
    `EXCLUDED.tsv` (pinned sha256), and the profile `m3-collections-native` (`<excludes combine.self="override"/>`,
    `m3.arrays.native.path=${m3.collections.native.dir}/${prefix}m3_arrays${suffix}`, `lib`/`.so`).
 
-Enumeration: `python -I m3/collections/qualification/jni-test-gating-20261106/tools/failing_classes.py
+Enumeration: `python -I make/m3/collections/qualification/jni-test-gating-20261106/tools/failing_classes.py
 <surefire-reports> FAILING_CLASSES.tsv EXCLUDED.tsv` (the core crate's tool, reused in place) over the interop
 `mvn test` without the library after step 1: 40 classes run, 33 failing, all kind JNI, OTHER 0.
 

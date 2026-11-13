@@ -21,7 +21,7 @@ byte-for-byte.
 * Owner: no M3JDK owner of LZ4/Snappy encoding, LZ match finding, a bounded compression sink or a content-addressed
   compressed-chunk cache exists
   ([DECISION.tsv](DECISION.tsv)); the atoms need `java.base` only, so they form their own leaf module rather than
-  joining `m3/algorithms` (which requires `jdk.m3.collections`). The module is a default module of `m3/pom.xml`.
+  joining `m3/algorithms` (which requires `jdk.m3.collections`). The module is a default module of `make/m3/pom.xml`.
 * FOSS: the donor is first-party and not derived from lz4-java, snappy-java or Commons Compress (token check,
   [FOSS_REUSE_DECISION.tsv](FOSS_REUSE_DECISION.tsv)); the published LZ4 block format and Snappy format descriptions
   are the contract. No third-party jar is a dependency; four third-party decoders ran only in a scratch differential.

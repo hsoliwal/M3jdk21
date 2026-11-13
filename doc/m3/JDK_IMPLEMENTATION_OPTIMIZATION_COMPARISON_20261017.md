@@ -19,9 +19,9 @@ our pinned OpenJDK21 base and current M3 fork files before making a code change.
 - Receiving product branch: \`m3/jdk-codepoint-rank-cursor-20261017\`.
   \`M3StringCodePointPrecompute\` retains its original internal JDK owner, bounded
   weak-owner cache, Java public methods and GPLv2+Classpath source license.
-- Source-only proof \`python3 m3/runtime-integration/verify-codepoint-rank-cursor-receiver.py\`.
+- Source-only proof \`python3 make/m3/runtime-integration/verify-codepoint-rank-cursor-receiver.py\`.
   Source-extracted Java reference differential:
-  \`python3 m3/runtime-integration/codepoint-rank/verify_source_oracle.py\`.
+  \`python3 make/m3/runtime-integration/codepoint-rank/verify_source_oracle.py\`.
   This second test compiles the **exact algorithm body extracted from the fork source** against
   Java 21, not a separate hand-copied kernel. It is still **not** a compiled modified-JDK test.
 - Native/source-built acceptance requires full M3JDK21 image, matching

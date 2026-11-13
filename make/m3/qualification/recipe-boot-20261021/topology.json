@@ -70,7 +70,7 @@
       "disposition": "EXCLUDE",
       "classification": "CUSTODY"
     },
-    "m3/backports/pom.xml": {
+    "make/m3/backports/pom.xml": {
       "gav": [
         "com.m3",
         "jdk21-backport-admission",
@@ -82,7 +82,7 @@
       "before_sha256": "372361324395430d44fee72fe5c2ce94fdc150f74e9bbaa6e24986a603ee8564",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/backports/pom.xml"
+      "install_root": "make/m3/backports/pom.xml"
     },
     "m3/collections/gc-interop/pom.xml": {
       "gav": [
@@ -2524,7 +2524,7 @@
       "classification": "ACTIVE_BUILD",
       "install_root": "m3/collections/pom.xml"
     },
-    "m3/collections/qualification/bimap-mainline-20261017/recipe/native-test/pom.xml": {
+    "make/m3/collections/qualification/bimap-mainline-20261017/recipe/native-test/pom.xml": {
       "gav": [
         "com.m3",
         "m3-bimap-mainline-native-test",
@@ -2536,9 +2536,9 @@
       "before_sha256": "aede8bb2bf7cdd67159dd90b81ff44a17ed85cb363fae830a447b36c9796e9ff",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/bimap-mainline-20261017/recipe/native-test/pom.xml"
+      "install_root": "make/m3/collections/qualification/bimap-mainline-20261017/recipe/native-test/pom.xml"
     },
-    "m3/collections/qualification/bimap-mainline-20261017/recipe/pom.xml": {
+    "make/m3/collections/qualification/bimap-mainline-20261017/recipe/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "m3-bimap-mainline-recipe",
@@ -2550,9 +2550,9 @@
       "before_sha256": "f9eda62aa40c5fbd9357e2a74409a1e9340b551e3048edfcbd977eb0a3b055c7",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/bimap-mainline-20261017/recipe/pom.xml"
+      "install_root": "make/m3/collections/qualification/bimap-mainline-20261017/recipe/pom.xml"
     },
-    "m3/collections/qualification/deque-zero-mask-20261018/pom.xml": {
+    "make/m3/collections/qualification/deque-zero-mask-20261018/pom.xml": {
       "gav": [
         "jdk.m3.collections",
         "m3-deque-zero-mask-recipe",
@@ -2564,9 +2564,9 @@
       "before_sha256": "a546e8c7af367beb7e50eb2f085cf6afa6d0c99954f5cb30b72835f6712cee1c",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/deque-zero-mask-20261018/pom.xml"
+      "install_root": "make/m3/collections/qualification/deque-zero-mask-20261018/pom.xml"
     },
-    "m3/collections/qualification/direct-generic-deque-heap-20261018/recipe/pom.xml": {
+    "make/m3/collections/qualification/direct-generic-deque-heap-20261018/recipe/pom.xml": {
       "gav": [
         "com.m3",
         "m3-direct-generic-deque-heap-recipe",
@@ -2578,9 +2578,9 @@
       "before_sha256": "12632d096090bfda4e1c02c884a4048aa3891a581e2b349b03e0f1974c4e9cde",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/direct-generic-deque-heap-20261018/recipe/pom.xml"
+      "install_root": "make/m3/collections/qualification/direct-generic-deque-heap-20261018/recipe/pom.xml"
     },
-    "m3/collections/qualification/filtered-list-mutation-20261018/pom.xml": {
+    "make/m3/collections/qualification/filtered-list-mutation-20261018/pom.xml": {
       "gav": [
         "jdk.internal.m3.verification",
         "m3-filtered-list-mutation-receiver-proof",
@@ -2592,9 +2592,9 @@
       "before_sha256": "fabb68b193095114b21938372cc94bfe5e59a236b708ca531dceb3e2b5281eaf",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/filtered-list-mutation-20261018/pom.xml"
+      "install_root": "make/m3/collections/qualification/filtered-list-mutation-20261018/pom.xml"
     },
-    "m3/collections/qualification/filtered-terminal-fusion-20261017/pom.xml": {
+    "make/m3/collections/qualification/filtered-terminal-fusion-20261017/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-filtered-terminal-fusion-recipe",
@@ -2606,9 +2606,9 @@
       "before_sha256": "b9d58b87a26cf6aa4b8cc1b29bba12fd3aebcc43bfa128aaac0eec0af78cf55a",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/filtered-terminal-fusion-20261017/pom.xml"
+      "install_root": "make/m3/collections/qualification/filtered-terminal-fusion-20261017/pom.xml"
     },
-    "m3/collections/qualification/five-library-prepared-rows-20261018/recipe/pom.xml": {
+    "make/m3/collections/qualification/five-library-prepared-rows-20261018/recipe/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "m3-five-library-prepared-rows-recipe",
@@ -2620,9 +2620,9 @@
       "before_sha256": "8f7e16bbbd9c3ba125c149d3aa6c2697f3aee46573fb13cb10b8a00a5bea48ca",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/five-library-prepared-rows-20261018/recipe/pom.xml"
+      "install_root": "make/m3/collections/qualification/five-library-prepared-rows-20261018/recipe/pom.xml"
     },
-    "m3/collections/qualification/five-provider-count-recovery-20261018/recipe/pom.xml": {
+    "make/m3/collections/qualification/five-provider-count-recovery-20261018/recipe/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "five-provider-count-recovery-recipe",
@@ -2634,9 +2634,9 @@
       "before_sha256": "f894b8733d52a2126ea686d4f3014c306af26fcb1edfbac4457597ab3273e2f5",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/five-provider-count-recovery-20261018/recipe/pom.xml"
+      "install_root": "make/m3/collections/qualification/five-provider-count-recovery-20261018/recipe/pom.xml"
     },
-    "m3/collections/qualification/long-range-set-20261017/recipe/pom.xml": {
+    "make/m3/collections/qualification/long-range-set-20261017/recipe/pom.xml": {
       "gav": [
         "com.m3",
         "m3-long-range-set-receiving-recipe",
@@ -2648,9 +2648,9 @@
       "before_sha256": "1642c3c6481106b73466a5e91b4ce1d6268da87aae9621b662c328be4554204f",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/long-range-set-20261017/recipe/pom.xml"
+      "install_root": "make/m3/collections/qualification/long-range-set-20261017/recipe/pom.xml"
     },
-    "m3/collections/qualification/m3-arrayification-20261018/recipe/pom.xml": {
+    "make/m3/collections/qualification/m3-arrayification-20261018/recipe/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "m3-arrayification-20261018-recipe",
@@ -2662,9 +2662,9 @@
       "before_sha256": "5593df33e97f72d17b7e9638c38a3651d2760329dfa2d90f0c74c7d9d58a4d23",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/m3-arrayification-20261018/recipe/pom.xml"
+      "install_root": "make/m3/collections/qualification/m3-arrayification-20261018/recipe/pom.xml"
     },
-    "m3/collections/qualification/m3-commons-bag-20261018/recipe/pom.xml": {
+    "make/m3/collections/qualification/m3-commons-bag-20261018/recipe/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "m3-commons-bag-recipe-20261018",
@@ -2676,9 +2676,9 @@
       "before_sha256": "d84014f5b0c887061cee6cdb63cb0be86316601814762ef291433dd145f0b5f7",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/m3-commons-bag-20261018/recipe/pom.xml"
+      "install_root": "make/m3/collections/qualification/m3-commons-bag-20261018/recipe/pom.xml"
     },
-    "m3/collections/qualification/m3-counted-sdk-20261017/recipe/pom.xml": {
+    "make/m3/collections/qualification/m3-counted-sdk-20261017/recipe/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "m3-counted-sdk-recipe",
@@ -2690,9 +2690,9 @@
       "before_sha256": "80f9fba2e70db6cb16e497628a5d2ef4639d74e96ddccb17fb7ca352dfceada0",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/m3-counted-sdk-20261017/recipe/pom.xml"
+      "install_root": "make/m3/collections/qualification/m3-counted-sdk-20261017/recipe/pom.xml"
     },
-    "m3/collections/qualification/m3-entry-facade-cache-20261018/recipe/pom.xml": {
+    "make/m3/collections/qualification/m3-entry-facade-cache-20261018/recipe/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "m3-entry-facade-cache-recipe",
@@ -2704,9 +2704,9 @@
       "before_sha256": "68a55a8eee4b3798ad76a469d68d1435c755e6d0d91bd172bfe97ab02a0107b5",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/m3-entry-facade-cache-20261018/recipe/pom.xml"
+      "install_root": "make/m3/collections/qualification/m3-entry-facade-cache-20261018/recipe/pom.xml"
     },
-    "m3/collections/qualification/m3-filtered-navigation-20261018/evidence/recipe/sdk-results/m3/collections/qualification/m3-filtered-navigation-20261018/runtime/pom.xml": {
+    "make/m3/collections/qualification/m3-filtered-navigation-20261018/evidence/recipe/sdk-results/m3/collections/qualification/m3-filtered-navigation-20261018/runtime/pom.xml": {
       "gav": [
         "jdk.m3.qualification",
         "filtered-navigation-runtime-20261018",
@@ -2719,7 +2719,7 @@
       "disposition": "EXCLUDE",
       "classification": "RETAINED_EVIDENCE"
     },
-    "m3/collections/qualification/m3-filtered-navigation-20261018/recipe/pom.xml": {
+    "make/m3/collections/qualification/m3-filtered-navigation-20261018/recipe/pom.xml": {
       "gav": [
         "jdk.internal.m3.verification",
         "m3-collections-contract-refinement-recipe-proof",
@@ -2731,9 +2731,9 @@
       "before_sha256": "4c90faaa9e64aebeeba14fb2196731c6334293781d0fdcafbf190f2f5662eb7d",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/m3-filtered-navigation-20261018/recipe/pom.xml"
+      "install_root": "make/m3/collections/qualification/m3-filtered-navigation-20261018/recipe/pom.xml"
     },
-    "m3/collections/qualification/m3-filtered-navigation-20261018/runtime/pom.xml": {
+    "make/m3/collections/qualification/m3-filtered-navigation-20261018/runtime/pom.xml": {
       "gav": [
         "jdk.m3.qualification",
         "filtered-navigation-runtime-20261018",
@@ -2745,9 +2745,9 @@
       "before_sha256": "c8a9d47d33eba3efb07aaf031b75bf38f61645ac6f0fbc9d182493825d1266e3",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/m3-filtered-navigation-20261018/runtime/pom.xml"
+      "install_root": "make/m3/collections/qualification/m3-filtered-navigation-20261018/runtime/pom.xml"
     },
-    "m3/collections/qualification/m3-five-fork-prepared-20261018/recipe/pom.xml": {
+    "make/m3/collections/qualification/m3-five-fork-prepared-20261018/recipe/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "m3-five-fork-prepared-recipe",
@@ -2759,9 +2759,9 @@
       "before_sha256": "78821c5c076be704223d8ed5ae27702061760f87def5887fd6f0409999f761e8",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/m3-five-fork-prepared-20261018/recipe/pom.xml"
+      "install_root": "make/m3/collections/qualification/m3-five-fork-prepared-20261018/recipe/pom.xml"
     },
-    "m3/collections/qualification/m3-five-library-occurrences-20261018/recipe/pom.xml": {
+    "make/m3/collections/qualification/m3-five-library-occurrences-20261018/recipe/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "m3-five-library-occurrence-recipe",
@@ -2773,9 +2773,9 @@
       "before_sha256": "e07da228477dd48aa6c0628d9142430b0c72efbc668cee1f6878e72c3a496e37",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/m3-five-library-occurrences-20261018/recipe/pom.xml"
+      "install_root": "make/m3/collections/qualification/m3-five-library-occurrences-20261018/recipe/pom.xml"
     },
-    "m3/collections/qualification/m3-five-provider-bimaps-master-20261017/recipe/pom.xml": {
+    "make/m3/collections/qualification/m3-five-provider-bimaps-master-20261017/recipe/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "m3-five-provider-bidi-master-recipe",
@@ -2787,9 +2787,9 @@
       "before_sha256": "3447931bc81a62f43387d6ad3656cb75ca24221678cc39ae910d5065eb30929c",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/m3-five-provider-bimaps-master-20261017/recipe/pom.xml"
+      "install_root": "make/m3/collections/qualification/m3-five-provider-bimaps-master-20261017/recipe/pom.xml"
     },
-    "m3/collections/qualification/m3-five-provider-current-census-20261017/recipe/pom.xml": {
+    "make/m3/collections/qualification/m3-five-provider-current-census-20261017/recipe/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "m3-five-provider-current-census-recipe",
@@ -2801,9 +2801,9 @@
       "before_sha256": "f0cef7045875cea74f836ffc11bb0278dca3fcdfb3b584637a97ef4dfa40fc45",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/m3-five-provider-current-census-20261017/recipe/pom.xml"
+      "install_root": "make/m3/collections/qualification/m3-five-provider-current-census-20261017/recipe/pom.xml"
     },
-    "m3/collections/qualification/m3-generic-object-list-20261017/recipe/pom.xml": {
+    "make/m3/collections/qualification/m3-generic-object-list-20261017/recipe/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "m3-generic-object-list-recipe",
@@ -2815,9 +2815,9 @@
       "before_sha256": "3d70599df80e973d64533b72dba8caa23f98d19c08aa101dba06ec1604ae28ae",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/m3-generic-object-list-20261017/recipe/pom.xml"
+      "install_root": "make/m3/collections/qualification/m3-generic-object-list-20261017/recipe/pom.xml"
     },
-    "m3/collections/qualification/m3-guava-setmultimap-20261018/recipe/pom.xml": {
+    "make/m3/collections/qualification/m3-guava-setmultimap-20261018/recipe/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "m3-guava-setmultimap-recipe",
@@ -2829,9 +2829,9 @@
       "before_sha256": "4eda504c13bd32b39255ae08cdbea072fa9320c5e76ce0febd2eb2670baddcba",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/m3-guava-setmultimap-20261018/recipe/pom.xml"
+      "install_root": "make/m3/collections/qualification/m3-guava-setmultimap-20261018/recipe/pom.xml"
     },
-    "m3/collections/qualification/m3-index-mask-window-20261017/pom.xml": {
+    "make/m3/collections/qualification/m3-index-mask-window-20261017/pom.xml": {
       "gav": [
         "jdk.m3.verification",
         "m3-index-mask-window-recipe-proof",
@@ -2843,9 +2843,9 @@
       "before_sha256": "3a38de3f42882dc05e27621d6c6de2ef45e5ebc496d6d13317f278bcf1146ded",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/m3-index-mask-window-20261017/pom.xml"
+      "install_root": "make/m3/collections/qualification/m3-index-mask-window-20261017/pom.xml"
     },
-    "m3/collections/qualification/m3-int-array-index-20261018/recipe/pom.xml": {
+    "make/m3/collections/qualification/m3-int-array-index-20261018/recipe/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "m3-int-array-index-source-recipe",
@@ -2857,9 +2857,9 @@
       "before_sha256": "48f6a09bd22c35abd818e6dff5c38b6be5404120720991d6d95b6dcd90db48c3",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/m3-int-array-index-20261018/recipe/pom.xml"
+      "install_root": "make/m3/collections/qualification/m3-int-array-index-20261018/recipe/pom.xml"
     },
-    "m3/collections/qualification/m3-linked-list-live-mask-20261017/recipe/pom.xml": {
+    "make/m3/collections/qualification/m3-linked-list-live-mask-20261017/recipe/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "m3-linked-list-live-mask-recipe",
@@ -2871,9 +2871,9 @@
       "before_sha256": "8684f8bf0c64ed9268764a7527f537acaa0f25c095cbbbcafef35e4fc97e97fe",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/m3-linked-list-live-mask-20261017/recipe/pom.xml"
+      "install_root": "make/m3/collections/qualification/m3-linked-list-live-mask-20261017/recipe/pom.xml"
     },
-    "m3/collections/qualification/m3-long-bitmap-algebra-20261017/recipe/pom.xml": {
+    "make/m3/collections/qualification/m3-long-bitmap-algebra-20261017/recipe/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "m3-long-bitmap-algebra-recipe",
@@ -2885,9 +2885,9 @@
       "before_sha256": "0c48074961e36fdfeb45688638b67a8d173734ab5caca337fdd38998fc2f2977",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/m3-long-bitmap-algebra-20261017/recipe/pom.xml"
+      "install_root": "make/m3/collections/qualification/m3-long-bitmap-algebra-20261017/recipe/pom.xml"
     },
-    "m3/collections/qualification/m3-long-bitmap-cache-20261017/recipe/pom.xml": {
+    "make/m3/collections/qualification/m3-long-bitmap-cache-20261017/recipe/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "m3-long-bitmap-filter-recipe",
@@ -2899,9 +2899,9 @@
       "before_sha256": "dd4e1fce8f9a436b579bada2006d0baf187c4475288e82218e6d8aaa95578a11",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/m3-long-bitmap-cache-20261017/recipe/pom.xml"
+      "install_root": "make/m3/collections/qualification/m3-long-bitmap-cache-20261017/recipe/pom.xml"
     },
-    "m3/collections/qualification/m3-long-dag-doop-20261017/pom.xml": {
+    "make/m3/collections/qualification/m3-long-dag-doop-20261017/pom.xml": {
       "gav": [
         "jdk.m3.verification",
         "m3-long-doop-dag-recipe",
@@ -2913,9 +2913,9 @@
       "before_sha256": "dc1004e8832d9f9c3cff783469fc0e23d0bbd23f935028f58721f5aba2fd9993",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/m3-long-dag-doop-20261017/pom.xml"
+      "install_root": "make/m3/collections/qualification/m3-long-dag-doop-20261017/pom.xml"
     },
-    "m3/collections/qualification/m3-long-direct-address-kernel-20261017/recipe/pom.xml": {
+    "make/m3/collections/qualification/m3-long-direct-address-kernel-20261017/recipe/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "m3-long-direct-address-kernel-recipe",
@@ -2927,9 +2927,9 @@
       "before_sha256": "0637b9cf03c04e50bdb2c758aed342641d742a1f9c8595d1bd9c42b1a5b95208",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/m3-long-direct-address-kernel-20261017/recipe/pom.xml"
+      "install_root": "make/m3/collections/qualification/m3-long-direct-address-kernel-20261017/recipe/pom.xml"
     },
-    "m3/collections/qualification/m3-long-index-path-jni-20261018/recipe/pom.xml": {
+    "make/m3/collections/qualification/m3-long-index-path-jni-20261018/recipe/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "m3-long-index-path-jni-recipe",
@@ -2941,9 +2941,9 @@
       "before_sha256": "ce21bf7003df1440e67e097b6325ef59d046f693df3745368afe0037f2bfac6e",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/m3-long-index-path-jni-20261018/recipe/pom.xml"
+      "install_root": "make/m3/collections/qualification/m3-long-index-path-jni-20261018/recipe/pom.xml"
     },
-    "m3/collections/qualification/m3-long-index-path-masks-20261018/recipe/pom.xml": {
+    "make/m3/collections/qualification/m3-long-index-path-masks-20261018/recipe/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "m3-long-index-path-mask-recipe",
@@ -2955,9 +2955,9 @@
       "before_sha256": "0b66fdfdcb0e138d954ac44ab8afe7d931b6e4a5b6474a4955016ed1c3144a01",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/m3-long-index-path-masks-20261018/recipe/pom.xml"
+      "install_root": "make/m3/collections/qualification/m3-long-index-path-masks-20261018/recipe/pom.xml"
     },
-    "m3/collections/qualification/m3-long-index-projection-20261017/recipe/pom.xml": {
+    "make/m3/collections/qualification/m3-long-index-projection-20261017/recipe/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "m3-long-index-projection-recipe",
@@ -2969,9 +2969,9 @@
       "before_sha256": "cc1cf1e366a964f98b35e2792c66415f01ccc0502b60c3a6128c30564faf0d62",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/m3-long-index-projection-20261017/recipe/pom.xml"
+      "install_root": "make/m3/collections/qualification/m3-long-index-projection-20261017/recipe/pom.xml"
     },
-    "m3/collections/qualification/m3-long-path-input-budget-20261018/recipe/pom.xml": {
+    "make/m3/collections/qualification/m3-long-path-input-budget-20261018/recipe/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "m3-long-path-input-budget-recipe",
@@ -2983,9 +2983,9 @@
       "before_sha256": "15335ca6353321018f6a9faa7e3203e9afc1434e23e1b2bc7d8c2d985247ab47",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/m3-long-path-input-budget-20261018/recipe/pom.xml"
+      "install_root": "make/m3/collections/qualification/m3-long-path-input-budget-20261018/recipe/pom.xml"
     },
-    "m3/collections/qualification/m3-native-five-provider-core-20261018/recipe/pom.xml": {
+    "make/m3/collections/qualification/m3-native-five-provider-core-20261018/recipe/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "m3-five-provider-native-core-recipe",
@@ -2997,9 +2997,9 @@
       "before_sha256": "82f08cd71b8308365a9b6b487413eca7ca0f178aceb2b04db69a09354741230f",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/m3-native-five-provider-core-20261018/recipe/pom.xml"
+      "install_root": "make/m3/collections/qualification/m3-native-five-provider-core-20261018/recipe/pom.xml"
     },
-    "m3/collections/qualification/m3-native-indexed-table-20261017/recipe-mirror/pom.xml": {
+    "make/m3/collections/qualification/m3-native-indexed-table-20261017/recipe-mirror/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-native-indexed-table-recipe",
@@ -3012,7 +3012,7 @@
       "disposition": "EXCLUDE",
       "classification": "CUSTODY"
     },
-    "m3/collections/qualification/m3-sdk-families-20261017/recipe-v3/pom.xml": {
+    "make/m3/collections/qualification/m3-sdk-families-20261017/recipe-v3/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "m3-sdk-sorted-contract-recipe",
@@ -3024,9 +3024,9 @@
       "before_sha256": "53e3966722d31a05776684b8414290b45fccaa2b2a267a73c4a93ab621ac8197",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/m3-sdk-families-20261017/recipe-v3/pom.xml"
+      "install_root": "make/m3/collections/qualification/m3-sdk-families-20261017/recipe-v3/pom.xml"
     },
-    "m3/collections/qualification/m3-sdk-families-20261017/recipe/pom.xml": {
+    "make/m3/collections/qualification/m3-sdk-families-20261017/recipe/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "m3-collection-sdk-names-recipe",
@@ -3038,9 +3038,9 @@
       "before_sha256": "0642e8d0c37232a2d0149bf676e214e1c2c2a2707c23efdd0867abd03394f245",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/m3-sdk-families-20261017/recipe/pom.xml"
+      "install_root": "make/m3/collections/qualification/m3-sdk-families-20261017/recipe/pom.xml"
     },
-    "m3/collections/qualification/m3-sdk-provider-names-20261017/recipe/pom.xml": {
+    "make/m3/collections/qualification/m3-sdk-provider-names-20261017/recipe/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "m3-sdk-provider-names-recipe",
@@ -3052,9 +3052,9 @@
       "before_sha256": "d8185b8e7d6148d29465f611254370dc324a04916dc24bcad20b12530abba17f",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/m3-sdk-provider-names-20261017/recipe/pom.xml"
+      "install_root": "make/m3/collections/qualification/m3-sdk-provider-names-20261017/recipe/pom.xml"
     },
-    "m3/collections/qualification/m3-state-mask-arrays-20261017/recipe/pom.xml": {
+    "make/m3/collections/qualification/m3-state-mask-arrays-20261017/recipe/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "m3-state-mask-arrays-recipe",
@@ -3066,9 +3066,9 @@
       "before_sha256": "e2f8371bcd4cb3642c33ed7fb3f5ba2cd0e22dfa8946e60844ce0e11632b5dfd",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/m3-state-mask-arrays-20261017/recipe/pom.xml"
+      "install_root": "make/m3/collections/qualification/m3-state-mask-arrays-20261017/recipe/pom.xml"
     },
-    "m3/collections/qualification/mask-window-sparse-20261017/tooling/m3-openrewrite-recipes/recipe-crates/m3-mask-window-sparse-20261017/pom.xml": {
+    "make/m3/collections/qualification/mask-window-sparse-20261017/tooling/m3-openrewrite-recipes/recipe-crates/m3-mask-window-sparse-20261017/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "mask-window-sparse-proof",
@@ -3080,9 +3080,9 @@
       "before_sha256": "e0309d1cc2abb5eefe001bb11f2e16f58c008097fc36ead8f20de691f424acad",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/mask-window-sparse-20261017/tooling/m3-openrewrite-recipes/recipe-crates/m3-mask-window-sparse-20261017/pom.xml"
+      "install_root": "make/m3/collections/qualification/mask-window-sparse-20261017/tooling/m3-openrewrite-recipes/recipe-crates/m3-mask-window-sparse-20261017/pom.xml"
     },
-    "m3/collections/qualification/object-state-batch-28/pom.xml": {
+    "make/m3/collections/qualification/object-state-batch-28/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-object-state-batch28-recipe",
@@ -3094,9 +3094,9 @@
       "before_sha256": "5a6e82c0a8c9d175e447f354f3840cb0b13f153c9bc246017eb2bf86b98742fb",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/object-state-batch-28/pom.xml"
+      "install_root": "make/m3/collections/qualification/object-state-batch-28/pom.xml"
     },
-    "m3/collections/qualification/sdk-bulk-capture-20261017/recipe/pom.xml": {
+    "make/m3/collections/qualification/sdk-bulk-capture-20261017/recipe/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "sdk-bulk-capture-recipe-receiver",
@@ -3108,9 +3108,9 @@
       "before_sha256": "f9a6ab5ac71a24576183a285e5a6a6dff448071bdd565a535928ce9248a01f11",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/sdk-bulk-capture-20261017/recipe/pom.xml"
+      "install_root": "make/m3/collections/qualification/sdk-bulk-capture-20261017/recipe/pom.xml"
     },
-    "m3/collections/qualification/sdk-five-owner-repair-20261018/recipe/pom.xml": {
+    "make/m3/collections/qualification/sdk-five-owner-repair-20261018/recipe/pom.xml": {
       "gav": [
         "com.m3",
         "m3-five-sdk-owner-repair-recipe",
@@ -3122,9 +3122,9 @@
       "before_sha256": "f9ed3866b6564178a4b5bdc74817e85b087bac263199e4957c202f078e270457",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/sdk-five-owner-repair-20261018/recipe/pom.xml"
+      "install_root": "make/m3/collections/qualification/sdk-five-owner-repair-20261018/recipe/pom.xml"
     },
-    "m3/collections/qualification/sdk-mask-bounded-current-20261017/recipe/pom.xml": {
+    "make/m3/collections/qualification/sdk-mask-bounded-current-20261017/recipe/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "sdk-mask-bounded-current-recipe",
@@ -3136,9 +3136,9 @@
       "before_sha256": "961dff90f59d8a3b65fabfd76fccb36394fe5196f65d247c3617b93bf60eaf27",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/sdk-mask-bounded-current-20261017/recipe/pom.xml"
+      "install_root": "make/m3/collections/qualification/sdk-mask-bounded-current-20261017/recipe/pom.xml"
     },
-    "m3/collections/qualification/stable-order-restoration-20261020/recipe-custody/catalogue/recipe-host/pom.xml": {
+    "make/m3/collections/qualification/stable-order-restoration-20261020/recipe-custody/catalogue/recipe-host/pom.xml": {
       "gav": [
         "jdk.internal.m3.verification",
         "m3-wrapper-convergence-recipe-proof",
@@ -3151,7 +3151,7 @@
       "disposition": "EXCLUDE",
       "classification": "CUSTODY"
     },
-    "m3/collections/qualification/stable-order-restoration-20261020/recipe-custody/recipe-host/pom.xml": {
+    "make/m3/collections/qualification/stable-order-restoration-20261020/recipe-custody/recipe-host/pom.xml": {
       "gav": [
         "jdk.internal.m3.verification",
         "m3-wrapper-convergence-recipe-proof",
@@ -3164,7 +3164,7 @@
       "disposition": "EXCLUDE",
       "classification": "CUSTODY"
     },
-    "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/pom.xml": {
+    "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/pom.xml": {
       "gav": [
         "jdk.internal.m3.verification",
         "m3-wrapper-convergence-recipe-proof",
@@ -3177,7 +3177,7 @@
       "disposition": "EXCLUDE",
       "classification": "CUSTODY"
     },
-    "m3/collections/receiving/guava-minmax-priority-queue/pom.xml": {
+    "make/m3/collections/receiving/guava-minmax-priority-queue/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-owned-guava-minmax-priority-queue-recipe",
@@ -3189,9 +3189,9 @@
       "before_sha256": "d9a2259e3463db925ae15f7027e4ec4a2c1319cc11910efc63a8691f10b88919",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/receiving/guava-minmax-priority-queue/pom.xml"
+      "install_root": "make/m3/collections/receiving/guava-minmax-priority-queue/pom.xml"
     },
-    "m3/collections/recipe/collection-file-review-batch80-20261017/pom.xml": {
+    "make/m3/collections/recipe/collection-file-review-batch80-20261017/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-collection-file-review-batch80-recipe",
@@ -3203,9 +3203,9 @@
       "before_sha256": "259241bfe97d21a88117ee758eb2d5036797ddb926c416313248d7cce66f02c0",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/recipe/collection-file-review-batch80-20261017/pom.xml"
+      "install_root": "make/m3/collections/recipe/collection-file-review-batch80-20261017/pom.xml"
     },
-    "m3/collections/recipe/counted-bag-iterator-remove-20261018/pom.xml": {
+    "make/m3/collections/recipe/counted-bag-iterator-remove-20261018/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-counted-bag-iterator-remove-recipe",
@@ -3217,9 +3217,9 @@
       "before_sha256": "beba98707f9d9fc0f27c5560cbc570a01f0ecabf45fc56bc83ace71c5776d7cc",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/recipe/counted-bag-iterator-remove-20261018/pom.xml"
+      "install_root": "make/m3/collections/recipe/counted-bag-iterator-remove-20261018/pom.xml"
     },
-    "m3/collections/recipe/cpu-mask-runs-20261017/pom.xml": {
+    "make/m3/collections/recipe/cpu-mask-runs-20261017/pom.xml": {
       "gav": [
         "jdk.internal.m3.verification",
         "m3-cpu-mask-runs-recipe",
@@ -3231,9 +3231,9 @@
       "before_sha256": "c4283041025c3ab117757a0ad382734008af5d4f44a335b6d6e24e2146afc471",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/recipe/cpu-mask-runs-20261017/pom.xml"
+      "install_root": "make/m3/collections/recipe/cpu-mask-runs-20261017/pom.xml"
     },
-    "m3/collections/recipe/keyed-ordered-ring-20261019/pom.xml": {
+    "make/m3/collections/recipe/keyed-ordered-ring-20261019/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-keyed-order-ring-recipe",
@@ -3245,9 +3245,9 @@
       "before_sha256": "41a89e6c73f0653a553149e6d03b75b2d7e08deba7ff4139da5c342b1286bca6",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/recipe/keyed-ordered-ring-20261019/pom.xml"
+      "install_root": "make/m3/collections/recipe/keyed-ordered-ring-20261019/pom.xml"
     },
-    "m3/collections/recipe/order-statistics/pom.xml": {
+    "make/m3/collections/recipe/order-statistics/pom.xml": {
       "gav": [
         "com.m3",
         "m3-order-statistics-recipe",
@@ -3259,9 +3259,9 @@
       "before_sha256": "e0b3085b3b47a9c8d4f83531ef47e717c22fdd532982560e00bd2137b7df971b",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/recipe/order-statistics/pom.xml"
+      "install_root": "make/m3/collections/recipe/order-statistics/pom.xml"
     },
-    "m3/collections/recipe/owned-apache-bidimap-20261017/pom.xml": {
+    "make/m3/collections/recipe/owned-apache-bidimap-20261017/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-owned-apache-bidimap-recipe",
@@ -3273,9 +3273,9 @@
       "before_sha256": "3b5d503435d4cbbe583cebebe2b5c238c7e699fedfb9f435d7f54c5d44344597",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/recipe/owned-apache-bidimap-20261017/pom.xml"
+      "install_root": "make/m3/collections/recipe/owned-apache-bidimap-20261017/pom.xml"
     },
-    "m3/collections/recipe/owned-apache-circular-fifo-20261018/pom.xml": {
+    "make/m3/collections/recipe/owned-apache-circular-fifo-20261018/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-owned-apache-circular-fifo-queue-recipe",
@@ -3287,9 +3287,9 @@
       "before_sha256": "56628aca3d70348533b5604d5d85973bdaea46b3837135b80555170b344c642d",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/recipe/owned-apache-circular-fifo-20261018/pom.xml"
+      "install_root": "make/m3/collections/recipe/owned-apache-circular-fifo-20261018/pom.xml"
     },
-    "m3/collections/recipe/owned-apache-dual-linked-hash-bidi-map-20261019/pom.xml": {
+    "make/m3/collections/recipe/owned-apache-dual-linked-hash-bidi-map-20261019/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-owned-apache-dual-linked-hash-bidi-map-recipe",
@@ -3301,9 +3301,9 @@
       "before_sha256": "e9bc17b933ed7a28acdb91de3fa004483fb01eb389210af0d2a4a8da0ecb37d9",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/recipe/owned-apache-dual-linked-hash-bidi-map-20261019/pom.xml"
+      "install_root": "make/m3/collections/recipe/owned-apache-dual-linked-hash-bidi-map-20261019/pom.xml"
     },
-    "m3/collections/recipe/owned-apache-hash-bag-20261019/pom.xml": {
+    "make/m3/collections/recipe/owned-apache-hash-bag-20261019/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-owned-apache-hash-bag-recipe",
@@ -3315,9 +3315,9 @@
       "before_sha256": "1c610f179388b07565b7edab04422ae69a9855ad93b6066ba46ef98dca24ede8",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/recipe/owned-apache-hash-bag-20261019/pom.xml"
+      "install_root": "make/m3/collections/recipe/owned-apache-hash-bag-20261019/pom.xml"
     },
-    "m3/collections/recipe/owned-apache-multivalue-20261018/pom.xml": {
+    "make/m3/collections/recipe/owned-apache-multivalue-20261018/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-owned-apache-multivalue-recipe",
@@ -3329,9 +3329,9 @@
       "before_sha256": "da4cc1e70bb339d8b27c62e907115f0da6fb42838bbff01884f6e7a0fdb3a0a6",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/recipe/owned-apache-multivalue-20261018/pom.xml"
+      "install_root": "make/m3/collections/recipe/owned-apache-multivalue-20261018/pom.xml"
     },
-    "m3/collections/recipe/owned-guava-array-list-multimap-20261018/pom.xml": {
+    "make/m3/collections/recipe/owned-guava-array-list-multimap-20261018/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-owned-guava-array-list-multimap-recipe",
@@ -3343,9 +3343,9 @@
       "before_sha256": "6826dacecc773ef377c9e7f139c1bd5cae88895e43b55fe95f10ae43c527ea94",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/recipe/owned-guava-array-list-multimap-20261018/pom.xml"
+      "install_root": "make/m3/collections/recipe/owned-guava-array-list-multimap-20261018/pom.xml"
     },
-    "m3/collections/recipe/owned-guava-enum-bi-map-20261019/pom.xml": {
+    "make/m3/collections/recipe/owned-guava-enum-bi-map-20261019/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-owned-guava-enum-bi-map-recipe",
@@ -3357,9 +3357,9 @@
       "before_sha256": "050f4c0f9dd2393c0c81ff83765e2b7038da8c1c8b3c36930919849ea27424a5",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/recipe/owned-guava-enum-bi-map-20261019/pom.xml"
+      "install_root": "make/m3/collections/recipe/owned-guava-enum-bi-map-20261019/pom.xml"
     },
-    "m3/collections/recipe/owned-guava-enum-hash-bi-map-20261019/pom.xml": {
+    "make/m3/collections/recipe/owned-guava-enum-hash-bi-map-20261019/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-owned-guava-enum-hash-bi-map-recipe",
@@ -3371,9 +3371,9 @@
       "before_sha256": "01f762164e1fe895f40550c368be142490907f6b4c612a01f5752af0ebc12e29",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/recipe/owned-guava-enum-hash-bi-map-20261019/pom.xml"
+      "install_root": "make/m3/collections/recipe/owned-guava-enum-hash-bi-map-20261019/pom.xml"
     },
-    "m3/collections/recipe/owned-guava-enum-multiset-20261019/pom.xml": {
+    "make/m3/collections/recipe/owned-guava-enum-multiset-20261019/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-owned-guava-enum-multiset-recipe",
@@ -3385,9 +3385,9 @@
       "before_sha256": "44a2246e778d5dadb9892c240f606826a1597f55d77eeb1310951babb4cb5702",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/recipe/owned-guava-enum-multiset-20261019/pom.xml"
+      "install_root": "make/m3/collections/recipe/owned-guava-enum-multiset-20261019/pom.xml"
     },
-    "m3/collections/recipe/owned-guava-evicting-queue-20261018/pom.xml": {
+    "make/m3/collections/recipe/owned-guava-evicting-queue-20261018/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-owned-guava-evicting-queue-recipe",
@@ -3399,9 +3399,9 @@
       "before_sha256": "e17ec90a308a67c5976461744f098a177bab8b9abc4484a8dfac1060060794de",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/recipe/owned-guava-evicting-queue-20261018/pom.xml"
+      "install_root": "make/m3/collections/recipe/owned-guava-evicting-queue-20261018/pom.xml"
     },
-    "m3/collections/recipe/owned-guava-hash-bimap-20261017/pom.xml": {
+    "make/m3/collections/recipe/owned-guava-hash-bimap-20261017/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-owned-guava-hash-bimap-recipe",
@@ -3413,9 +3413,9 @@
       "before_sha256": "7c6f2a5d0b2e52f7b5cd161833b60d7c6ebf6206f37506c4761008a2ed33f94c",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/recipe/owned-guava-hash-bimap-20261017/pom.xml"
+      "install_root": "make/m3/collections/recipe/owned-guava-hash-bimap-20261017/pom.xml"
     },
-    "m3/collections/recipe/owned-guava-hash-multiset-20261018/pom.xml": {
+    "make/m3/collections/recipe/owned-guava-hash-multiset-20261018/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-owned-guava-hash-multiset-recipe",
@@ -3427,9 +3427,9 @@
       "before_sha256": "ed20b2e595318818b0ac4efa95f57a4cedef7fee7ffa4aca5295c261edd51af4",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/recipe/owned-guava-hash-multiset-20261018/pom.xml"
+      "install_root": "make/m3/collections/recipe/owned-guava-hash-multiset-20261018/pom.xml"
     },
-    "m3/collections/recipe/owned-guava-linked-hash-multiset-20261019/pom.xml": {
+    "make/m3/collections/recipe/owned-guava-linked-hash-multiset-20261019/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-owned-guava-linked-hash-multiset-recipe",
@@ -3441,9 +3441,9 @@
       "before_sha256": "294e9b67602442f375b09d737cb4599a12c41dae344bc36fd91bb23c35bd846b",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/recipe/owned-guava-linked-hash-multiset-20261019/pom.xml"
+      "install_root": "make/m3/collections/recipe/owned-guava-linked-hash-multiset-20261019/pom.xml"
     },
-    "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/pom.xml": {
+    "make/m3/collections/recipe/owned-spring-case-insensitive-map-20261018/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-owned-spring-case-insensitive-map-recipe",
@@ -3455,9 +3455,9 @@
       "before_sha256": "c1e750ba3e3b0d1cdb5000cb58ca63d50a575aebe437e4f76873d33222bb4ca3",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/pom.xml"
+      "install_root": "make/m3/collections/recipe/owned-spring-case-insensitive-map-20261018/pom.xml"
     },
-    "m3/collections/recipe/owned-spring-multi-value-map-adapter-20261019/pom.xml": {
+    "make/m3/collections/recipe/owned-spring-multi-value-map-adapter-20261019/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-owned-spring-multi-value-map-adapter-recipe",
@@ -3469,9 +3469,9 @@
       "before_sha256": "1c9b263edf60080e5c1af941e9a3f1323cf4852a7ae995521be5f15337e91ed7",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/recipe/owned-spring-multi-value-map-adapter-20261019/pom.xml"
+      "install_root": "make/m3/collections/recipe/owned-spring-multi-value-map-adapter-20261019/pom.xml"
     },
-    "m3/collections/recipe/owned-spring-multivalue-map-20261017/pom.xml": {
+    "make/m3/collections/recipe/owned-spring-multivalue-map-20261017/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-owned-spring-multivalue-map-recipe",
@@ -3483,9 +3483,9 @@
       "before_sha256": "350dac2594b41ad7d78994a3dc6c6589409488756024b3983bb4004dcc87b1cf",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/recipe/owned-spring-multivalue-map-20261017/pom.xml"
+      "install_root": "make/m3/collections/recipe/owned-spring-multivalue-map-20261017/pom.xml"
     },
-    "m3/collections/recipe/pom.xml": {
+    "make/m3/collections/recipe/pom.xml": {
       "gav": [
         "jdk.internal.m3.verification",
         "m3-collection-lane-recipe-proof",
@@ -3497,9 +3497,9 @@
       "before_sha256": "85705511c828c8753bbe2702d238311c062056e56ce63a2b770ecc21d8d6edd6",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/recipe/pom.xml"
+      "install_root": "make/m3/collections/recipe/pom.xml"
     },
-    "m3/collections/recipe/sdk-binding-successor-v3-20261018/pom.xml": {
+    "make/m3/collections/recipe/sdk-binding-successor-v3-20261018/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-sdk-binding-successor-v3-recipe",
@@ -3512,7 +3512,7 @@
       "disposition": "EXCLUDE",
       "classification": "SOURCE_SEALED_RECIPE_PROOF"
     },
-    "m3/collections/recipe/spring-single-value-view-widen-20261019/pom.xml": {
+    "make/m3/collections/recipe/spring-single-value-view-widen-20261019/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-spring-single-value-view-widen-recipe",
@@ -3524,9 +3524,9 @@
       "before_sha256": "0fd00e5c7b6a3c7893f1bce88859e28b5b2e34b837a3b6aeec8437ae9fdefe96",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/recipe/spring-single-value-view-widen-20261019/pom.xml"
+      "install_root": "make/m3/collections/recipe/spring-single-value-view-widen-20261019/pom.xml"
     },
-    "m3/collections/recipe/zero-mask-window-copy-20261017/pom.xml": {
+    "make/m3/collections/recipe/zero-mask-window-copy-20261017/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-zero-mask-window-copy-recipe",
@@ -3538,9 +3538,9 @@
       "before_sha256": "ea2ed20b9980eee560217fd3deff29c6b0190a12ce7d1b96e00bd072e42ccbbc",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/recipe/zero-mask-window-copy-20261017/pom.xml"
+      "install_root": "make/m3/collections/recipe/zero-mask-window-copy-20261017/pom.xml"
     },
-    "m3/collections/recipes/native-index-range-20261017/pom.xml": {
+    "make/m3/collections/recipes/native-index-range-20261017/pom.xml": {
       "gav": [
         "jdk.internal.m3.recipes",
         "native-index-range-20261017",
@@ -3552,9 +3552,9 @@
       "before_sha256": "c42ebae1e141ad51f129b19fcc308fec1fe858d46ee5f9e213e8d52cdd7e7d6c",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/recipes/native-index-range-20261017/pom.xml"
+      "install_root": "make/m3/collections/recipes/native-index-range-20261017/pom.xml"
     },
-    "m3/collections/recipes/sdk-family-names-20261017/before/m3/collections/interop/pom.xml": {
+    "make/m3/collections/recipes/sdk-family-names-20261017/before/m3/collections/interop/pom.xml": {
       "gav": [
         "com.m3",
         "m3-collections-interop",
@@ -3567,7 +3567,7 @@
       "disposition": "EXCLUDE",
       "classification": "REPLAY_FIXTURE"
     },
-    "m3/collections/recipes/sdk-family-names-20261017/pom.xml": {
+    "make/m3/collections/recipes/sdk-family-names-20261017/pom.xml": {
       "gav": [
         "jdk.internal.m3.recipes",
         "sdk-family-names-20261017",
@@ -3579,9 +3579,9 @@
       "before_sha256": "0083ba7c20228b4812fe113ea57575e32b28f6cb3bd77438597826cca8c2472b",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/recipes/sdk-family-names-20261017/pom.xml"
+      "install_root": "make/m3/collections/recipes/sdk-family-names-20261017/pom.xml"
     },
-    "m3/collections/recipes/sdk-family-names-20261017/src/main/resources/jdk/internal/m3/rewrite/sdk-family-names-20261017/templates/m3/collections/interop/pom.xml": {
+    "make/m3/collections/recipes/sdk-family-names-20261017/src/main/resources/jdk/internal/m3/rewrite/sdk-family-names-20261017/templates/m3/collections/interop/pom.xml": {
       "gav": [
         "com.m3",
         "m3-collections-interop",
@@ -3594,7 +3594,7 @@
       "disposition": "EXCLUDE",
       "classification": "REPLAY_FIXTURE"
     },
-    "m3/collections/recipes/sdk-guava-bimap-20261017/pom.xml": {
+    "make/m3/collections/recipes/sdk-guava-bimap-20261017/pom.xml": {
       "gav": [
         "jdk.internal.m3.recipes",
         "sdk-guava-bimap-20261017",
@@ -3606,9 +3606,9 @@
       "before_sha256": "24fba8355b1c9c5dffdfc8488da7572bdaae106c01006ad3392e376268c64c82",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/recipes/sdk-guava-bimap-20261017/pom.xml"
+      "install_root": "make/m3/collections/recipes/sdk-guava-bimap-20261017/pom.xml"
     },
-    "m3/collections/relocation/five-provider-20261018/pom.xml": {
+    "make/m3/collections/relocation/five-provider-20261018/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "five-provider-package-relocation-recipes",
@@ -3620,7 +3620,7 @@
       "before_sha256": "9861cc0cf029273d526e58191462861bbb4a5f2aff04e61a84ad1842227d1fac",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/relocation/five-provider-20261018/pom.xml"
+      "install_root": "make/m3/collections/relocation/five-provider-20261018/pom.xml"
     },
     "m3/collections/signal-codegen/pom.xml": {
       "gav": [
@@ -3636,7 +3636,7 @@
       "classification": "ACTIVE_BUILD",
       "install_root": "m3/collections/signal-codegen/pom.xml"
     },
-    "m3/collections/snapshot-recipe-20261017/pom.xml": {
+    "make/m3/collections/snapshot-recipe-20261017/pom.xml": {
       "gav": [
         "jdk.internal.m3.verification",
         "m3-long-sorted-snapshot-recipe-proof",
@@ -3648,9 +3648,9 @@
       "before_sha256": "602f372b058569b594481b76fa7c870f9ba691f5a1547c9a1ade8bd6fe9dcace",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/snapshot-recipe-20261017/pom.xml"
+      "install_root": "make/m3/collections/snapshot-recipe-20261017/pom.xml"
     },
-    "m3/collections/verification/tombstone-reuse-20261017/pom.xml": {
+    "make/m3/collections/verification/tombstone-reuse-20261017/pom.xml": {
       "gav": [
         "jdk.m3.verification",
         "tombstone-reuse-receiver",
@@ -3662,9 +3662,9 @@
       "before_sha256": "9b683157bed2070827ec7ea4bada4bf0faa21764cd00a70d0e5256eeef6d797e",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/verification/tombstone-reuse-20261017/pom.xml"
+      "install_root": "make/m3/collections/verification/tombstone-reuse-20261017/pom.xml"
     },
-    "m3/collections/wrappers/composition-20261017/recipe/pom.xml": {
+    "make/m3/collections/wrappers/composition-20261017/recipe/pom.xml": {
       "gav": [
         "jdk.internal.m3.verification",
         "wrapper-composition-20261017",
@@ -3676,7 +3676,7 @@
       "before_sha256": "70bfa0bbf90400ed7a72583f601dcaf048faf4be90bf5d46f4112c376590ce2d",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/wrappers/composition-20261017/recipe/pom.xml"
+      "install_root": "make/m3/collections/wrappers/composition-20261017/recipe/pom.xml"
     },
     "m3/compiler/source-signals/pom.xml": {
       "gav": [
@@ -3776,13 +3776,13 @@
       "classification": "ACTIVE_BUILD",
       "install_root": "m3/eclipse/framework/recipe/pom.xml"
     },
-    "m3/eclipse/jdt/receiving/array-nodelist-20261019/compiler/pom.xml": {
+    "make/m3/eclipse/jdt/receiving/array-nodelist-20261019/compiler/pom.xml": {
       "gav": [
         "jdk.internal.m3.receiving",
         "jdt-exact-compiler-source",
         "20261019"
       ],
-      "parent": "m3/eclipse/jdt/receiving/array-nodelist-20261019/pom.xml",
+      "parent": "make/m3/eclipse/jdt/receiving/array-nodelist-20261019/pom.xml",
       "reason": "LOCAL_PARENT",
       "git_blob": "4e96ea49cb9d3659ab6efc1936b1491313d0fc11",
       "before_sha256": "07e7a6b26afd0da99d1c41dc41e933dd608654b73f5566c1ba48fdaa1e5a5d27",
@@ -3791,18 +3791,18 @@
         "jdt-array-nodelist-source",
         "20261019"
       ],
-      "parent_candidate": "m3/eclipse/jdt/receiving/array-nodelist-20261019/pom.xml",
+      "parent_candidate": "make/m3/eclipse/jdt/receiving/array-nodelist-20261019/pom.xml",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/eclipse/jdt/receiving/array-nodelist-20261019/pom.xml"
+      "install_root": "make/m3/eclipse/jdt/receiving/array-nodelist-20261019/pom.xml"
     },
-    "m3/eclipse/jdt/receiving/array-nodelist-20261019/core/pom.xml": {
+    "make/m3/eclipse/jdt/receiving/array-nodelist-20261019/core/pom.xml": {
       "gav": [
         "jdk.internal.m3.receiving",
         "jdt-exact-core-source",
         "20261019"
       ],
-      "parent": "m3/eclipse/jdt/receiving/array-nodelist-20261019/pom.xml",
+      "parent": "make/m3/eclipse/jdt/receiving/array-nodelist-20261019/pom.xml",
       "reason": "LOCAL_PARENT",
       "git_blob": "0105308e5011bbb7c07614acc55246d6a2ba9b81",
       "before_sha256": "23c9d2027f18f58c7e53df5f6563ec3a9f2d97cd0ee54729f51ea38f6b2313f3",
@@ -3811,12 +3811,12 @@
         "jdt-array-nodelist-source",
         "20261019"
       ],
-      "parent_candidate": "m3/eclipse/jdt/receiving/array-nodelist-20261019/pom.xml",
+      "parent_candidate": "make/m3/eclipse/jdt/receiving/array-nodelist-20261019/pom.xml",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/eclipse/jdt/receiving/array-nodelist-20261019/pom.xml"
+      "install_root": "make/m3/eclipse/jdt/receiving/array-nodelist-20261019/pom.xml"
     },
-    "m3/eclipse/jdt/receiving/array-nodelist-20261019/pom.xml": {
+    "make/m3/eclipse/jdt/receiving/array-nodelist-20261019/pom.xml": {
       "gav": [
         "jdk.internal.m3.receiving",
         "jdt-array-nodelist-source",
@@ -3828,9 +3828,9 @@
       "before_sha256": "d5e4ea179f6c61c5da4bd4a13c8e0460bd76bdd21eb3742161a3acb6f2676165",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/eclipse/jdt/receiving/array-nodelist-20261019/pom.xml"
+      "install_root": "make/m3/eclipse/jdt/receiving/array-nodelist-20261019/pom.xml"
     },
-    "m3/eclipse/jdt/receiving/array-nodelist-20261019/recipe-custody/m3-openrewrite-recipes/verification/parser-collections-sdk-20261019/pom.xml": {
+    "make/m3/eclipse/jdt/receiving/array-nodelist-20261019/recipe-custody/m3-openrewrite-recipes/verification/parser-collections-sdk-20261019/pom.xml": {
       "gav": [
         "jdk.internal.m3.verification",
         "parser-collections-sdk",
@@ -3961,7 +3961,7 @@
       "disposition": "EXCLUDE",
       "classification": "UPSTREAM_PAYLOAD"
     },
-    "m3/history/pom.xml": {
+    "make/m3/history/pom.xml": {
       "gav": [
         "com.m3",
         "history-audit-recipe",
@@ -3973,7 +3973,7 @@
       "before_sha256": "2d6d1d17ae39dfbb7ecd75ddf8d064e21af2571742aa13cba96296fdcb5c1b0d",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/history/pom.xml"
+      "install_root": "make/m3/history/pom.xml"
     },
     "m3/indexdb/pom.xml": {
       "gav": [
@@ -4017,7 +4017,7 @@
       "classification": "ACTIVE_BUILD",
       "install_root": "m3/lexicon/receiver/pom.xml"
     },
-    "m3/migration/original-provider-20261017/sdk/pom.xml": {
+    "make/m3/migration/original-provider-20261017/sdk/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-original-cli-provider-recipe",
@@ -4029,9 +4029,9 @@
       "before_sha256": "f3f2a72dbe469776766a02184b59702b55917b5f8a1b397d0aa615f342678ae8",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/migration/original-provider-20261017/sdk/pom.xml"
+      "install_root": "make/m3/migration/original-provider-20261017/sdk/pom.xml"
     },
-    "m3/migration/pom.xml": {
+    "make/m3/migration/pom.xml": {
       "gav": [
         "com.m3",
         "migration-recipes",
@@ -4043,9 +4043,9 @@
       "before_sha256": "3a767bfc01c6982c4d739963fa12c13dcf06c59b5a536e09de97e5963e0dffd5",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/migration/pom.xml"
+      "install_root": "make/m3/migration/pom.xml"
     },
-    "m3/migration/rx7-codec-cap-20261018/sdk/pom.xml": {
+    "make/m3/migration/rx7-codec-cap-20261018/sdk/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-rx7-codec-cap-recipe",
@@ -4057,7 +4057,7 @@
       "before_sha256": "d5881a6ebaefe391099a7224f683fb9af66bb7e8f6a42c64d098744b6d70fa67",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/migration/rx7-codec-cap-20261018/sdk/pom.xml"
+      "install_root": "make/m3/migration/rx7-codec-cap-20261018/sdk/pom.xml"
     },
     "m3/optane/pom.xml": {
       "gav": [
@@ -4073,7 +4073,7 @@
       "classification": "ACTIVE_BUILD",
       "install_root": "m3/optane/pom.xml"
     },
-    "m3/pom.xml": {
+    "make/m3/pom.xml": {
       "gav": [
         "com.m3",
         "m3jdk21-control-reactor",
@@ -4085,7 +4085,7 @@
       "before_sha256": "bb92b89ec5fde6b507a67346cf3378babf824cce3fecfe3c836227498f3a46cf",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/pom.xml"
+      "install_root": "make/m3/pom.xml"
     },
     "m3/ports/capability-runtime/pom.xml": {
       "gav": [
@@ -4269,7 +4269,7 @@
       "classification": "ACTIVE_BUILD",
       "install_root": "m3/ports/vcpu/pom.xml"
     },
-    "m3/runtime-integration/fix-root-ascii-case/pom.xml": {
+    "make/m3/runtime-integration/fix-root-ascii-case/pom.xml": {
       "gav": [
         "jdk.m3.tooling",
         "root-ascii-case-fix",
@@ -4281,9 +4281,9 @@
       "before_sha256": "a1cbe79f8ce75fc4426b02ee9ef63f639192b5199c7cfd32c0df716e7513a559",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/runtime-integration/fix-root-ascii-case/pom.xml"
+      "install_root": "make/m3/runtime-integration/fix-root-ascii-case/pom.xml"
     },
-    "m3/runtime-integration/fix/pom.xml": {
+    "make/m3/runtime-integration/fix/pom.xml": {
       "gav": [
         "jdk.m3.tooling",
         "jni-fix",
@@ -4295,9 +4295,9 @@
       "before_sha256": "22209814be992b3d987da64bde26e72e9cd286041551e8475bd6c487e0c2ff8c",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/runtime-integration/fix/pom.xml"
+      "install_root": "make/m3/runtime-integration/fix/pom.xml"
     },
-    "m3/runtime-integration/primitive-address-identity/pom.xml": {
+    "make/m3/runtime-integration/primitive-address-identity/pom.xml": {
       "gav": [
         "jdk.m3.proof",
         "primitive-address-identity-receiver",
@@ -4309,9 +4309,9 @@
       "before_sha256": "1b57732b6a2e11c80787bb73d91a88f8fb62f37ddbce1b0583d84fc0603b8a45",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/runtime-integration/primitive-address-identity/pom.xml"
+      "install_root": "make/m3/runtime-integration/primitive-address-identity/pom.xml"
     },
-    "m3/runtime-integration/qualification/bitlane-count-skip-20261019/recipes/m3jdk21-bitlane-runtime-count-skip-20261019/pom.xml": {
+    "make/m3/runtime-integration/qualification/bitlane-count-skip-20261019/recipes/m3jdk21-bitlane-runtime-count-skip-20261019/pom.xml": {
       "gav": [
         "jdk.internal.m3.verification",
         "m3jdk21-bitlane-runtime-count-skip-proof",
@@ -4323,9 +4323,9 @@
       "before_sha256": "b3f529704915bf2336eb879f919df90e7a574a8297bd311745b5871adf4557a8",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/runtime-integration/qualification/bitlane-count-skip-20261019/recipes/m3jdk21-bitlane-runtime-count-skip-20261019/pom.xml"
+      "install_root": "make/m3/runtime-integration/qualification/bitlane-count-skip-20261019/recipes/m3jdk21-bitlane-runtime-count-skip-20261019/pom.xml"
     },
-    "m3/runtime-integration/regex-precompute/pom.xml": {
+    "make/m3/runtime-integration/regex-precompute/pom.xml": {
       "gav": [
         "jdk.m3.proof",
         "regex-precompute-receiver",
@@ -4337,9 +4337,9 @@
       "before_sha256": "c2a1fda62dfb0c73f4fd9052d9712eb23ceec301f8a884bda2b196cc86f6d6db",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/runtime-integration/regex-precompute/pom.xml"
+      "install_root": "make/m3/runtime-integration/regex-precompute/pom.xml"
     },
-    "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-runtime-facade-custody-1-v1/retained/pom.xml": {
+    "make/m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-runtime-facade-custody-1-v1/retained/pom.xml": {
       "gav": [
         "jdk.internal.m3.verification",
         "m3-collections-contract-refinement-recipe-proof",
@@ -4352,7 +4352,7 @@
       "disposition": "EXCLUDE",
       "classification": "CUSTODY"
     },
-    "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-runtime-facade-v1/retained/pom.xml": {
+    "make/m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-runtime-facade-v1/retained/pom.xml": {
       "gav": [
         "jdk.internal.m3.verification",
         "m3-collections-contract-refinement-recipe-proof",
@@ -4365,7 +4365,7 @@
       "disposition": "EXCLUDE",
       "classification": "CUSTODY"
     },
-    "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/parser-source/rewrite-java-21/pom.xml": {
+    "make/m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/parser-source/rewrite-java-21/pom.xml": {
       "gav": [
         "jdk.internal.m3.sourcebuilt.openrewrite",
         "rewrite-java-21",
@@ -4378,7 +4378,7 @@
       "disposition": "EXCLUDE",
       "classification": "CUSTODY"
     },
-    "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/pom.xml": {
+    "make/m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/pom.xml": {
       "gav": [
         "jdk.internal.m3.verification",
         "m3-runtime-progress-facade-recipe-proof",
@@ -4391,7 +4391,7 @@
       "disposition": "EXCLUDE",
       "classification": "CUSTODY"
     },
-    "m3/runtime-integration/utf8-cursor-20261014/recipe/canonical/pom.xml": {
+    "make/m3/runtime-integration/utf8-cursor-20261014/recipe/canonical/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-utf8-receiving-sdk-2530",
@@ -4444,13 +4444,13 @@
       "disposition": "EXCLUDE",
       "classification": "CUSTODY"
     },
-    "m3/tooling/a3/pom.xml": {
+    "make/m3/tooling/a3/pom.xml": {
       "gav": [
         "com.m3",
         "a3",
         "0.1.0-SNAPSHOT"
       ],
-      "parent": "m3/pom.xml",
+      "parent": "make/m3/pom.xml",
       "reason": "LOCAL_PARENT",
       "git_blob": "c983649d5150a89d5d0d7eb09d348a07c6388550",
       "before_sha256": "1fd8cbc4025d985defb18ad7c2118d0cb5d98385a25df80a018ffdcf4c0a8ea4",
@@ -4459,12 +4459,12 @@
         "m3jdk21-control-reactor",
         "0.1.0-SNAPSHOT"
       ],
-      "parent_candidate": "m3/pom.xml",
+      "parent_candidate": "make/m3/pom.xml",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/pom.xml"
+      "install_root": "make/m3/pom.xml"
     },
-    "m3/tooling/atom-logic-receiver/before/pom.xml": {
+    "make/m3/tooling/atom-logic-receiver/before/pom.xml": {
       "gav": [
         "com.m3",
         "m3jdk21-control-reactor",
@@ -4477,7 +4477,7 @@
       "disposition": "EXCLUDE",
       "classification": "REPLAY_FIXTURE"
     },
-    "m3/tooling/atom-logic-receiver/pom.xml": {
+    "make/m3/tooling/atom-logic-receiver/pom.xml": {
       "gav": [
         "jdk.m3.tooling",
         "atom-logic-receiver-profile",
@@ -4489,9 +4489,9 @@
       "before_sha256": "9ad2ddda8272952a75bdbf1154b5d6bb5f6203e3bf1d823a67a45601eb1bbaf0",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/atom-logic-receiver/pom.xml"
+      "install_root": "make/m3/tooling/atom-logic-receiver/pom.xml"
     },
-    "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/pom.xml": {
+    "make/m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-string-matched-build-workflow-sdk-1c1b-38df",
@@ -4504,7 +4504,7 @@
       "disposition": "EXCLUDE",
       "classification": "SOURCE_SEALED_RECIPE_PROOF"
     },
-    "m3/tooling/backport-contract-current-owner/sdk/pom.xml": {
+    "make/m3/tooling/backport-contract-current-owner/sdk/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-string-matched-build-workflow-sdk-1c1b-38df",
@@ -4517,7 +4517,7 @@
       "disposition": "EXCLUDE",
       "classification": "SOURCE_SEALED_RECIPE_PROOF"
     },
-    "m3/tooling/backport-dag/pom.xml": {
+    "make/m3/tooling/backport-dag/pom.xml": {
       "gav": [
         "jdk.m3.tooling",
         "backport-dag",
@@ -4529,9 +4529,9 @@
       "before_sha256": "149cd0299708fe4da0d349100ae17b1e73eeb49697da513df46387024ca34a85",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/backport-dag/pom.xml"
+      "install_root": "make/m3/tooling/backport-dag/pom.xml"
     },
-    "m3/tooling/backport-wave-current-output/sdk/pom.xml": {
+    "make/m3/tooling/backport-wave-current-output/sdk/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-string-matched-build-workflow-sdk-1c1b-38df",
@@ -4544,7 +4544,7 @@
       "disposition": "EXCLUDE",
       "classification": "SOURCE_SEALED_RECIPE_PROOF"
     },
-    "m3/tooling/cb/pom.xml": {
+    "make/m3/tooling/cb/pom.xml": {
       "gav": [
         "com.m3",
         "cb",
@@ -4556,9 +4556,9 @@
       "before_sha256": "3e595ff6afa50acfab094969d55cd1f320d709eca31e51ca0abbb1043b8bb91f",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/cb/pom.xml"
+      "install_root": "make/m3/tooling/cb/pom.xml"
     },
-    "m3/tooling/charcopy-current-successor/pom.xml": {
+    "make/m3/tooling/charcopy-current-successor/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "charcopy-current-successor-proof",
@@ -4571,7 +4571,7 @@
       "disposition": "EXCLUDE",
       "classification": "SOURCE_SEALED_QUALIFICATION"
     },
-    "m3/tooling/charcopy-current-successor/sdk/pom.xml": {
+    "make/m3/tooling/charcopy-current-successor/sdk/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-string-matched-build-workflow-sdk-1c1b-38df",
@@ -4584,7 +4584,7 @@
       "disposition": "EXCLUDE",
       "classification": "SOURCE_SEALED_QUALIFICATION"
     },
-    "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/pom.xml": {
+    "make/m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-string-matched-build-workflow-sdk-1c1b-38df",
@@ -4597,7 +4597,7 @@
       "disposition": "EXCLUDE",
       "classification": "SOURCE_SEALED_RECIPE_PROOF"
     },
-    "m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/pom.xml": {
+    "make/m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-string-matched-build-workflow-sdk-1c1b-38df",
@@ -4610,7 +4610,7 @@
       "disposition": "EXCLUDE",
       "classification": "SOURCE_SEALED_RECIPE_PROOF"
     },
-    "m3/tooling/hash-pinned-target-paths/sdk/pom.xml": {
+    "make/m3/tooling/hash-pinned-target-paths/sdk/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-string-matched-build-workflow-sdk-1c1b-38df",
@@ -4623,7 +4623,7 @@
       "disposition": "EXCLUDE",
       "classification": "SOURCE_SEALED_RECIPE_PROOF"
     },
-    "m3/tooling/jmod-recipes/cpu-tools/model-quantize/pom.xml": {
+    "make/m3/tooling/jmod-recipes/cpu-tools/model-quantize/pom.xml": {
       "gav": [
         "jdk.m3.tools",
         "model-quantize",
@@ -4635,9 +4635,9 @@
       "before_sha256": "2099da9562163a37bca6c090dd7271a5d36380dd13f9e21ad514e137bc513279",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/jmod-recipes/cpu-tools/model-quantize/pom.xml"
+      "install_root": "make/m3/tooling/jmod-recipes/cpu-tools/model-quantize/pom.xml"
     },
-    "m3/tooling/jmod-recipes/pom.xml": {
+    "make/m3/tooling/jmod-recipes/pom.xml": {
       "gav": [
         "com.m3",
         "jmod-descriptor-recipes",
@@ -4649,9 +4649,9 @@
       "before_sha256": "826ef8303d354b947a35e87b2fc9e534846d78d90a908fd479c0455d184bcf01",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/jmod-recipes/pom.xml"
+      "install_root": "make/m3/tooling/jmod-recipes/pom.xml"
     },
-    "m3/tooling/jmod-recipes/quantize-recipe-20261017/pom.xml": {
+    "make/m3/tooling/jmod-recipes/quantize-recipe-20261017/pom.xml": {
       "gav": [
         "jdk.internal.m3.verification",
         "m3-cpu-int8-receiver-recipe",
@@ -4663,9 +4663,9 @@
       "before_sha256": "bf056b4b18fc207a3f77bd1f4d27bc936ac732728d7421320e30cdd8f924240f",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/jmod-recipes/quantize-recipe-20261017/pom.xml"
+      "install_root": "make/m3/tooling/jmod-recipes/quantize-recipe-20261017/pom.xml"
     },
-    "m3/tooling/joined-range-directory/fresh-owned/sdk/pom.xml": {
+    "make/m3/tooling/joined-range-directory/fresh-owned/sdk/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-string-matched-build-workflow-sdk-1c1b-38df",
@@ -4678,7 +4678,7 @@
       "disposition": "EXCLUDE",
       "classification": "SOURCE_SEALED_RECIPE_PROOF"
     },
-    "m3/tooling/joined-range-directory/sdk/pom.xml": {
+    "make/m3/tooling/joined-range-directory/sdk/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-string-matched-build-workflow-sdk-1c1b-38df",
@@ -4691,7 +4691,7 @@
       "disposition": "EXCLUDE",
       "classification": "SOURCE_SEALED_RECIPE_PROOF"
     },
-    "m3/tooling/lane28/pom.xml": {
+    "make/m3/tooling/lane28/pom.xml": {
       "gav": [
         "com.m3",
         "lane28",
@@ -4703,9 +4703,9 @@
       "before_sha256": "99ad7436c316e93cca0574828c45c32fe8d19ad0ab81df0ed32f9486f0552829",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/lane28/pom.xml"
+      "install_root": "make/m3/tooling/lane28/pom.xml"
     },
-    "m3/tooling/migration-recipes/apache-reuse/pom.xml": {
+    "make/m3/tooling/migration-recipes/apache-reuse/pom.xml": {
       "gav": [
         "jdk.internal.m3.build",
         "apache-public-reuse-proof",
@@ -4717,9 +4717,9 @@
       "before_sha256": "6483c17a9caa6e5522bd662fbb5c1b101452d440bfe053e8eaaae5aa04a662a3",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/migration-recipes/apache-reuse/pom.xml"
+      "install_root": "make/m3/tooling/migration-recipes/apache-reuse/pom.xml"
     },
-    "m3/tooling/migration-recipes/pom.xml": {
+    "make/m3/tooling/migration-recipes/pom.xml": {
       "gav": [
         "jdk.m3.tooling",
         "migration-recipes",
@@ -4731,9 +4731,9 @@
       "before_sha256": "02972fa670771862db3b3b16ba3ee6070a5c2304560e52c8a37cdf2e6cd76f46",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/migration-recipes/pom.xml"
+      "install_root": "make/m3/tooling/migration-recipes/pom.xml"
     },
-    "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/a3-mastery-receipt-workflow/before/pom.xml": {
+    "make/m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/a3-mastery-receipt-workflow/before/pom.xml": {
       "gav": [
         "com.m3",
         "a3",
@@ -4752,7 +4752,7 @@
       "disposition": "EXCLUDE",
       "classification": "REPLAY_FIXTURE"
     },
-    "m3/tooling/migration-recipes/tasks/a3-code-string-repair-20261006/verification/pom.xml": {
+    "make/m3/tooling/migration-recipes/tasks/a3-code-string-repair-20261006/verification/pom.xml": {
       "gav": [
         "jdk.m3.verification",
         "a3-code-string-repair",
@@ -4764,9 +4764,9 @@
       "before_sha256": "45d2b9b3e80903e08e202bad33cf429191f2c3cb235f915c3b0160ffde03b304",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/migration-recipes/tasks/a3-code-string-repair-20261006/verification/pom.xml"
+      "install_root": "make/m3/tooling/migration-recipes/tasks/a3-code-string-repair-20261006/verification/pom.xml"
     },
-    "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/pom.xml": {
+    "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/pom.xml": {
       "gav": [
         "jdk.m3.tooling",
         "atom-spectrum-proof",
@@ -4778,9 +4778,9 @@
       "before_sha256": "a09b07b72a49a12e9a8e5190ab60a8fe0713fccf13062f0d686aeb69a8fabad3",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/pom.xml"
+      "install_root": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/pom.xml"
     },
-    "m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/a3-behavior-verification/pom.xml": {
+    "make/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/a3-behavior-verification/pom.xml": {
       "gav": [
         "jdk.m3.verification",
         "jcc-ci-a3-behavior",
@@ -4792,9 +4792,9 @@
       "before_sha256": "bfcf26d81d960353b7229a2c5436c502016e7193b1962d7bc2ed66dcb90897b1",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/a3-behavior-verification/pom.xml"
+      "install_root": "make/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/a3-behavior-verification/pom.xml"
     },
-    "m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/verification/pom.xml": {
+    "make/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/verification/pom.xml": {
       "gav": [
         "jdk.m3.verification",
         "jcc-ci-repair",
@@ -4806,9 +4806,9 @@
       "before_sha256": "113965acfa9ee75c8598f420e8d623af602a42333023523cf2b52767b6cf0f4c",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/verification/pom.xml"
+      "install_root": "make/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/verification/pom.xml"
     },
-    "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/epoch-review-v01/input-epoch/guards/m3/tooling/migration-recipes/pom.xml": {
+    "make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/epoch-review-v01/input-epoch/guards/m3/tooling/migration-recipes/pom.xml": {
       "gav": [
         "jdk.m3.tooling",
         "migration-recipes",
@@ -4821,7 +4821,7 @@
       "disposition": "EXCLUDE",
       "classification": "REPLAY_FIXTURE"
     },
-    "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/pom.xml": {
+    "make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/pom.xml": {
       "gav": [
         "jdk.m3.verification",
         "jcc-merge-mapping-recovery-v03",
@@ -4833,9 +4833,9 @@
       "before_sha256": "b9c8e0537f8cd463a274ca7fb093436445fa474f16203df526c2e9a3117123d8",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/pom.xml"
+      "install_root": "make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/pom.xml"
     },
-    "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/receiving-input/guards/m3/tooling/migration-recipes/pom.xml": {
+    "make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/receiving-input/guards/m3/tooling/migration-recipes/pom.xml": {
       "gav": [
         "jdk.m3.tooling",
         "migration-recipes",
@@ -4848,7 +4848,7 @@
       "disposition": "EXCLUDE",
       "classification": "REPLAY_FIXTURE"
     },
-    "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/template-history/mapping-v02/pom.xml": {
+    "make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/template-history/mapping-v02/pom.xml": {
       "gav": [
         "jdk.m3.verification",
         "jcc-merge-mapping-recovery-v02",
@@ -4861,7 +4861,7 @@
       "disposition": "EXCLUDE",
       "classification": "REPLAY_FIXTURE"
     },
-    "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/template-history/mapping-v03/pom.xml": {
+    "make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/template-history/mapping-v03/pom.xml": {
       "gav": [
         "jdk.m3.verification",
         "jcc-merge-mapping-recovery-v03",
@@ -4874,7 +4874,7 @@
       "disposition": "EXCLUDE",
       "classification": "REPLAY_FIXTURE"
     },
-    "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/template-history/mapping-v03/previous-input-epoch-01/pom.xml": {
+    "make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/template-history/mapping-v03/previous-input-epoch-01/pom.xml": {
       "gav": [
         "jdk.m3.verification",
         "jcc-merge-mapping-recovery-v03",
@@ -4887,7 +4887,7 @@
       "disposition": "EXCLUDE",
       "classification": "REPLAY_FIXTURE"
     },
-    "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/template-history/mapping/pom.xml": {
+    "make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/template-history/mapping/pom.xml": {
       "gav": [
         "jdk.m3.verification",
         "jcc-merge-mapping-recovery",
@@ -4900,7 +4900,7 @@
       "disposition": "EXCLUDE",
       "classification": "REPLAY_FIXTURE"
     },
-    "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/pom.xml": {
+    "make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/pom.xml": {
       "gav": [
         "jdk.m3.verification",
         "jcc-merge-mapping-recovery-v04",
@@ -4912,9 +4912,9 @@
       "before_sha256": "55455533ea02b52aa4a6d09dc6bb76cb4747d2f5b9a4ce7be250f659a64228ea",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/pom.xml"
+      "install_root": "make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/pom.xml"
     },
-    "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/receiving-input/guards/m3/tooling/migration-recipes/pom.xml": {
+    "make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/receiving-input/guards/m3/tooling/migration-recipes/pom.xml": {
       "gav": [
         "jdk.m3.tooling",
         "migration-recipes",
@@ -4927,7 +4927,7 @@
       "disposition": "EXCLUDE",
       "classification": "REPLAY_FIXTURE"
     },
-    "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/template-history/mapping-v04/pom.xml": {
+    "make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/template-history/mapping-v04/pom.xml": {
       "gav": [
         "jdk.m3.verification",
         "jcc-merge-mapping-recovery-v04",
@@ -4940,7 +4940,7 @@
       "disposition": "EXCLUDE",
       "classification": "REPLAY_FIXTURE"
     },
-    "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/verification/pom.xml": {
+    "make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/verification/pom.xml": {
       "gav": [
         "jdk.m3.verification",
         "jcc-merge-recovery",
@@ -4952,9 +4952,9 @@
       "before_sha256": "a91939e9e97afae4074a9fed683a8c7475018dad9789352fe226983ea33c8577",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/verification/pom.xml"
+      "install_root": "make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/verification/pom.xml"
     },
-    "m3/tooling/migration-recipes/tasks/jdk-focus/pom.xml": {
+    "make/m3/tooling/migration-recipes/tasks/jdk-focus/pom.xml": {
       "gav": [
         "jdk.m3.tooling",
         "focus-proof",
@@ -4966,9 +4966,9 @@
       "before_sha256": "f9ced1ea5e78f934658d911d4770307ea1ef34df1915630f09cc0de64f4aff28",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/migration-recipes/tasks/jdk-focus/pom.xml"
+      "install_root": "make/m3/tooling/migration-recipes/tasks/jdk-focus/pom.xml"
     },
-    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/followup/pom.xml": {
+    "make/m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/followup/pom.xml": {
       "gav": [
         "jdk.internal.m3.verification",
         "m3-current-followup-c0",
@@ -4980,9 +4980,9 @@
       "before_sha256": "f94b90c91394499e5f65a1d50d89ec9d2e103350747681833f3d4d0981ca180e",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/followup/pom.xml"
+      "install_root": "make/m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/followup/pom.xml"
     },
-    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/pattern-hidden/pom.xml": {
+    "make/m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/pattern-hidden/pom.xml": {
       "gav": [
         "jdk.internal.m3.verification",
         "m3-current-pattern-hidden-c0",
@@ -4994,9 +4994,9 @@
       "before_sha256": "260b697a35f762e3e7f4d7840ffb915a5670fbf97d7feacbab1402af4ebfd2f4",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/pattern-hidden/pom.xml"
+      "install_root": "make/m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/pattern-hidden/pom.xml"
     },
-    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/pom.xml": {
+    "make/m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/pom.xml": {
       "gav": [
         "jdk.internal.m3.verification",
         "m3-current-integration-c0",
@@ -5008,9 +5008,9 @@
       "before_sha256": "c94bd82a8c0a6928f5991cfa22c85521c8633eb1bdcdad3f58b662c62e7c9cb8",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/pom.xml"
+      "install_root": "make/m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/pom.xml"
     },
-    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/runtime-checker/pom.xml": {
+    "make/m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/runtime-checker/pom.xml": {
       "gav": [
         "jdk.internal.m3.verification",
         "m3-current-runtime-checker-c0",
@@ -5022,9 +5022,9 @@
       "before_sha256": "d0c03058120c23d82e849a70545f6084f98aada2721d3109c94e60721037b333",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/runtime-checker/pom.xml"
+      "install_root": "make/m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/runtime-checker/pom.xml"
     },
-    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/src/test/resources/before/m3/tooling/a3/pom.xml": {
+    "make/m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/src/test/resources/before/m3/tooling/a3/pom.xml": {
       "gav": [
         "com.m3",
         "a3",
@@ -5043,7 +5043,7 @@
       "disposition": "EXCLUDE",
       "classification": "REPLAY_FIXTURE"
     },
-    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/src/test/resources/before/m3/tooling/backport-dag/pom.xml": {
+    "make/m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/src/test/resources/before/m3/tooling/backport-dag/pom.xml": {
       "gav": [
         "jdk.m3.tooling",
         "backport-dag",
@@ -5056,7 +5056,7 @@
       "disposition": "EXCLUDE",
       "classification": "REPLAY_FIXTURE"
     },
-    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/src/test/resources/before/m3/tooling/migration-recipes/pom.xml": {
+    "make/m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/src/test/resources/before/m3/tooling/migration-recipes/pom.xml": {
       "gav": [
         "jdk.m3.tooling",
         "migration-recipes",
@@ -5069,7 +5069,7 @@
       "disposition": "EXCLUDE",
       "classification": "REPLAY_FIXTURE"
     },
-    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/pom.xml": {
+    "make/m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/pom.xml": {
       "gav": [
         "jdk.internal.m3.verification",
         "m3-current-string-c0",
@@ -5081,9 +5081,9 @@
       "before_sha256": "807c892bd410392d1cc65476a7aae10f6fc91cfcdc519f39b5102ba7c5b5b941",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/pom.xml"
+      "install_root": "make/m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/pom.xml"
     },
-    "m3/tooling/migration-recipes/verification/jcc-handoff/pom.xml": {
+    "make/m3/tooling/migration-recipes/verification/jcc-handoff/pom.xml": {
       "gav": [
         "jdk.m3.verification",
         "jcc-handoff",
@@ -5095,9 +5095,9 @@
       "before_sha256": "c730cedc7030dbb8c94d76493e25e603999583c160cecb8da422cc456621f4d9",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/migration-recipes/verification/jcc-handoff/pom.xml"
+      "install_root": "make/m3/tooling/migration-recipes/verification/jcc-handoff/pom.xml"
     },
-    "m3/tooling/migration-recipes/verification/jcc-receiving/pom.xml": {
+    "make/m3/tooling/migration-recipes/verification/jcc-receiving/pom.xml": {
       "gav": [
         "jdk.m3.verification",
         "jcc-receiving-fixture",
@@ -5109,9 +5109,9 @@
       "before_sha256": "a5226a7fbed0b4b8fbb835c67b858fcdd8941586bf3d502ae36cb4883a125886",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/migration-recipes/verification/jcc-receiving/pom.xml"
+      "install_root": "make/m3/tooling/migration-recipes/verification/jcc-receiving/pom.xml"
     },
-    "m3/tooling/migration-recipes/verification/jcc-source-final-handoff/pom.xml": {
+    "make/m3/tooling/migration-recipes/verification/jcc-source-final-handoff/pom.xml": {
       "gav": [
         "jdk.m3.verification",
         "jcc-source-final-handoff",
@@ -5123,9 +5123,9 @@
       "before_sha256": "e245e79b92082185f20cb374aac84a084a9eb7788accecd48404ecbc3c8ff9ea",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/migration-recipes/verification/jcc-source-final-handoff/pom.xml"
+      "install_root": "make/m3/tooling/migration-recipes/verification/jcc-source-final-handoff/pom.xml"
     },
-    "m3/tooling/migration-recipes/verification/jcc-source-recovery-handoff/pom.xml": {
+    "make/m3/tooling/migration-recipes/verification/jcc-source-recovery-handoff/pom.xml": {
       "gav": [
         "jdk.m3.verification",
         "jcc-source-recovery-handoff",
@@ -5137,9 +5137,9 @@
       "before_sha256": "f28435abf679f72e967edbf8f6cddb86b434435404d079bef11cb6bbb02b17b7",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/migration-recipes/verification/jcc-source-recovery-handoff/pom.xml"
+      "install_root": "make/m3/tooling/migration-recipes/verification/jcc-source-recovery-handoff/pom.xml"
     },
-    "m3/tooling/migration-recipes/verification/jni/pom.xml": {
+    "make/m3/tooling/migration-recipes/verification/jni/pom.xml": {
       "gav": [
         "jdk.m3.verification",
         "jni-packet",
@@ -5151,9 +5151,9 @@
       "before_sha256": "88c43c72365d93a53ffa3cd34653d6747f56bc8e0f8111cda0c06e82ff33b326",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/migration-recipes/verification/jni/pom.xml"
+      "install_root": "make/m3/tooling/migration-recipes/verification/jni/pom.xml"
     },
-    "m3/tooling/module-packs/build-support/graal-build-api/upstream/openjson/pom.xml": {
+    "make/m3/tooling/module-packs/build-support/graal-build-api/upstream/openjson/pom.xml": {
       "gav": [
         "com.github.openjson",
         "openjson",
@@ -5166,7 +5166,7 @@
       "disposition": "EXCLUDE",
       "classification": "SOURCE_SEALED_UPSTREAM"
     },
-    "m3/tooling/module-packs/build-support/gradle-provider/pom.xml": {
+    "make/m3/tooling/module-packs/build-support/gradle-provider/pom.xml": {
       "gav": [
         "org.m3jdk.tooling",
         "m3-gradle-ast-provider",
@@ -5178,9 +5178,9 @@
       "before_sha256": "f3467d28d5184aa914652c01113033e122c816ed95ac4285ee2ca02572b14ca1",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/module-packs/build-support/gradle-provider/pom.xml"
+      "install_root": "make/m3/tooling/module-packs/build-support/gradle-provider/pom.xml"
     },
-    "m3/tooling/module-packs/build-support/native-api/pom.xml": {
+    "make/m3/tooling/module-packs/build-support/native-api/pom.xml": {
       "gav": [
         "org.m3jdk.tooling",
         "native-api",
@@ -5192,15 +5192,15 @@
       "before_sha256": "085bb9640143d65d8cabc1aac0219f98bef12ff834718f804b2ca7f040b56120",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/module-packs/build-support/native-api/pom.xml"
+      "install_root": "make/m3/tooling/module-packs/build-support/native-api/pom.xml"
     },
-    "m3/tooling/module-packs/build-support/native-api/upstream/maven-native-api/pom.xml": {
+    "make/m3/tooling/module-packs/build-support/native-api/upstream/maven-native-api/pom.xml": {
       "gav": [
         "org.codehaus.mojo.natives",
         "maven-native-api",
         "1.1.0"
       ],
-      "parent": "m3/tooling/module-packs/build-support/native-api/upstream/pom.xml",
+      "parent": "make/m3/tooling/module-packs/build-support/native-api/upstream/pom.xml",
       "reason": "LOCAL_PARENT",
       "git_blob": "0beafad8a669e5aa051dbae82664b161ac614446",
       "before_sha256": "3664e5bd68f13b15bc01f40d7129f51f5d59069a06ea1a99a5d3822e5dbdb26d",
@@ -5209,17 +5209,17 @@
         "maven-native",
         "1.1.0"
       ],
-      "parent_candidate": "m3/tooling/module-packs/build-support/native-api/upstream/pom.xml",
+      "parent_candidate": "make/m3/tooling/module-packs/build-support/native-api/upstream/pom.xml",
       "disposition": "EXCLUDE",
       "classification": "SOURCE_SEALED_UPSTREAM"
     },
-    "m3/tooling/module-packs/build-support/native-api/upstream/maven-native-components/maven-native-generic-c/pom.xml": {
+    "make/m3/tooling/module-packs/build-support/native-api/upstream/maven-native-components/maven-native-generic-c/pom.xml": {
       "gav": [
         "org.codehaus.mojo.natives",
         "maven-native-generic-c",
         "1.1.0"
       ],
-      "parent": "m3/tooling/module-packs/build-support/native-api/upstream/maven-native-components/pom.xml",
+      "parent": "make/m3/tooling/module-packs/build-support/native-api/upstream/maven-native-components/pom.xml",
       "reason": "LOCAL_PARENT",
       "git_blob": "f68d242fe0ee7df517ac8638345a6a68388f451d",
       "before_sha256": "e56a3195b884a4cffb871bccd62dbc39befde0282d478e90b6ea638c7e51a349",
@@ -5228,17 +5228,17 @@
         "maven-native-components",
         "1.1.0"
       ],
-      "parent_candidate": "m3/tooling/module-packs/build-support/native-api/upstream/maven-native-components/pom.xml",
+      "parent_candidate": "make/m3/tooling/module-packs/build-support/native-api/upstream/maven-native-components/pom.xml",
       "disposition": "EXCLUDE",
       "classification": "SOURCE_SEALED_UPSTREAM"
     },
-    "m3/tooling/module-packs/build-support/native-api/upstream/maven-native-components/pom.xml": {
+    "make/m3/tooling/module-packs/build-support/native-api/upstream/maven-native-components/pom.xml": {
       "gav": [
         "org.codehaus.mojo.natives",
         "maven-native-components",
         "1.1.0"
       ],
-      "parent": "m3/tooling/module-packs/build-support/native-api/upstream/pom.xml",
+      "parent": "make/m3/tooling/module-packs/build-support/native-api/upstream/pom.xml",
       "reason": "LOCAL_PARENT",
       "git_blob": "56469db16104087cbafc53c1d5b53178d2dcd500",
       "before_sha256": "451da30a1d3f95ffb71e78f6f345421f7acd63b640b8a354c1754cbf3585ee9e",
@@ -5247,11 +5247,11 @@
         "maven-native",
         "1.1.0"
       ],
-      "parent_candidate": "m3/tooling/module-packs/build-support/native-api/upstream/pom.xml",
+      "parent_candidate": "make/m3/tooling/module-packs/build-support/native-api/upstream/pom.xml",
       "disposition": "EXCLUDE",
       "classification": "SOURCE_SEALED_UPSTREAM"
     },
-    "m3/tooling/module-packs/build-support/native-api/upstream/pom.xml": {
+    "make/m3/tooling/module-packs/build-support/native-api/upstream/pom.xml": {
       "gav": [
         "org.codehaus.mojo.natives",
         "maven-native",
@@ -5266,11 +5266,11 @@
         "mojo-parent",
         "97"
       ],
-      "parent_candidate": "m3/tooling/module-packs/build-support/native-api/pom.xml",
+      "parent_candidate": "make/m3/tooling/module-packs/build-support/native-api/pom.xml",
       "disposition": "EXCLUDE",
       "classification": "SOURCE_SEALED_UPSTREAM"
     },
-    "m3/tooling/module-packs/collections/pom.xml": {
+    "make/m3/tooling/module-packs/collections/pom.xml": {
       "gav": [
         "jdk.m3.tooling",
         "m3-collections-pack",
@@ -5282,9 +5282,9 @@
       "before_sha256": "d7c9f2d737f776009dd8ed10a72b5c7d0a253600a84337937ec3c4e2952d051a",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/module-packs/collections/pom.xml"
+      "install_root": "make/m3/tooling/module-packs/collections/pom.xml"
     },
-    "m3/tooling/module-packs/cpu-tools/pom.xml": {
+    "make/m3/tooling/module-packs/cpu-tools/pom.xml": {
       "gav": [
         "jdk.m3.tooling",
         "m3-cpu-tools-pack",
@@ -5296,9 +5296,9 @@
       "before_sha256": "fb477a8b1733ce09d30d423eeaad5f201f135400e9fd9c02428848f520eaf101",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/module-packs/cpu-tools/pom.xml"
+      "install_root": "make/m3/tooling/module-packs/cpu-tools/pom.xml"
     },
-    "m3/tooling/module-packs/jackson/pom.xml": {
+    "make/m3/tooling/module-packs/jackson/pom.xml": {
       "gav": [
         "jdk.m3.tooling",
         "jackson-jmod-pack",
@@ -5310,15 +5310,15 @@
       "before_sha256": "ec881499d8fb4df5f89c378d95585d8acd573de1ddbf24673513a339f947bdb3",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/module-packs/jackson/pom.xml"
+      "install_root": "make/m3/tooling/module-packs/jackson/pom.xml"
     },
-    "m3/tooling/module-packs/kernel/pom.xml": {
+    "make/m3/tooling/module-packs/kernel/pom.xml": {
       "gav": [
         "jdk.m3.tooling",
         "module-pack-kernel",
         "0.1.0-SNAPSHOT"
       ],
-      "parent": "m3/tooling/module-packs/pom.xml",
+      "parent": "make/m3/tooling/module-packs/pom.xml",
       "reason": "LOCAL_PARENT",
       "git_blob": "780b3f793ef69415e0cfce8b57db8fed3a27b68c",
       "before_sha256": "2ba891be0bd56483e3ca3a5b3511dd45f717c4f1d960902fce9f9b5dd03d2772",
@@ -5327,12 +5327,12 @@
         "module-packs",
         "0.1.0-SNAPSHOT"
       ],
-      "parent_candidate": "m3/tooling/module-packs/pom.xml",
+      "parent_candidate": "make/m3/tooling/module-packs/pom.xml",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/module-packs/pom.xml"
+      "install_root": "make/m3/tooling/module-packs/pom.xml"
     },
-    "m3/tooling/module-packs/nlp-search/recipe-custody/pom.xml": {
+    "make/m3/tooling/module-packs/nlp-search/recipe-custody/pom.xml": {
       "gav": [
         "jdk.internal.m3.verification",
         "m3-nlp-search-integration-receiver-proof",
@@ -5345,7 +5345,7 @@
       "disposition": "EXCLUDE",
       "classification": "CUSTODY"
     },
-    "m3/tooling/module-packs/parser/pom.xml": {
+    "make/m3/tooling/module-packs/parser/pom.xml": {
       "gav": [
         "jdk.m3.tooling",
         "m3-parser-jmod-pack",
@@ -5357,9 +5357,9 @@
       "before_sha256": "1c15c82225cb11d0d8bf7ff088cb910c90975c095117127080cb0bb2aa3f52c6",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/module-packs/parser/pom.xml"
+      "install_root": "make/m3/tooling/module-packs/parser/pom.xml"
     },
-    "m3/tooling/module-packs/parser/qualification/owner-current-20261019/recipe-custody/m3-openrewrite-recipes/verification/parser-collections-sdk-20261019/pom.xml": {
+    "make/m3/tooling/module-packs/parser/qualification/owner-current-20261019/recipe-custody/m3-openrewrite-recipes/verification/parser-collections-sdk-20261019/pom.xml": {
       "gav": [
         "jdk.internal.m3.verification",
         "parser-collections-sdk",
@@ -5372,7 +5372,7 @@
       "disposition": "EXCLUDE",
       "classification": "CUSTODY"
     },
-    "m3/tooling/module-packs/parser/real-providers/pom.xml": {
+    "make/m3/tooling/module-packs/parser/real-providers/pom.xml": {
       "gav": [
         "jdk.m3.validation",
         "m3-ast-real-providers",
@@ -5384,9 +5384,9 @@
       "before_sha256": "82753eb27b6a7bfa3a5c9924f589e4dd3bcba8e668c4172486bbaa1ffb7694b8",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/module-packs/parser/real-providers/pom.xml"
+      "install_root": "make/m3/tooling/module-packs/parser/real-providers/pom.xml"
     },
-    "m3/tooling/module-packs/parser/verification/one-pass-20261020/qualification/one-pass-final/dependency-pack/flat/org.slf4j/META-INF/maven/org.slf4j/slf4j-api/pom.xml": {
+    "make/m3/tooling/module-packs/parser/verification/one-pass-20261020/qualification/one-pass-final/dependency-pack/flat/org.slf4j/META-INF/maven/org.slf4j/slf4j-api/pom.xml": {
       "gav": [
         "org.slf4j",
         "slf4j-api",
@@ -5401,11 +5401,11 @@
         "slf4j-parent",
         "2.0.13"
       ],
-      "parent_candidate": "m3/tooling/module-packs/parser/verification/one-pass-20261020/qualification/one-pass-final/dependency-pack/flat/org.slf4j/META-INF/maven/org.slf4j/parent/pom.xml",
+      "parent_candidate": "make/m3/tooling/module-packs/parser/verification/one-pass-20261020/qualification/one-pass-final/dependency-pack/flat/org.slf4j/META-INF/maven/org.slf4j/parent/pom.xml",
       "disposition": "EXCLUDE",
       "classification": "UPSTREAM_PAYLOAD"
     },
-    "m3/tooling/module-packs/parser/verification/one-pass-20261020/qualification/one-pass-final/dependency-pack/flat/org.xerial.sqlitejdbc/META-INF/maven/org.xerial/sqlite-jdbc/pom.xml": {
+    "make/m3/tooling/module-packs/parser/verification/one-pass-20261020/qualification/one-pass-final/dependency-pack/flat/org.xerial.sqlitejdbc/META-INF/maven/org.xerial/sqlite-jdbc/pom.xml": {
       "gav": [
         "org.xerial",
         "sqlite-jdbc",
@@ -5418,7 +5418,7 @@
       "disposition": "EXCLUDE",
       "classification": "UPSTREAM_PAYLOAD"
     },
-    "m3/tooling/module-packs/pom.xml": {
+    "make/m3/tooling/module-packs/pom.xml": {
       "gav": [
         "jdk.m3.tooling",
         "module-packs",
@@ -5430,15 +5430,15 @@
       "before_sha256": "01bf9ea92395866df8b948eb1592818feadd9975e9a784dbbaa0a32a061321e6",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/module-packs/pom.xml"
+      "install_root": "make/m3/tooling/module-packs/pom.xml"
     },
-    "m3/tooling/module-packs/recipes/pom.xml": {
+    "make/m3/tooling/module-packs/recipes/pom.xml": {
       "gav": [
         "jdk.m3.tooling",
         "module-pack-recipes",
         "0.1.0-SNAPSHOT"
       ],
-      "parent": "m3/tooling/module-packs/pom.xml",
+      "parent": "make/m3/tooling/module-packs/pom.xml",
       "reason": "LOCAL_PARENT",
       "git_blob": "87d34dd5f3074de8b04c722c330ee39780c032f0",
       "before_sha256": "ed1014c7664596db31981ce1e8bd90c9eade6577e44a233dc6d1c17ea7725736",
@@ -5447,12 +5447,12 @@
         "module-packs",
         "0.1.0-SNAPSHOT"
       ],
-      "parent_candidate": "m3/tooling/module-packs/pom.xml",
+      "parent_candidate": "make/m3/tooling/module-packs/pom.xml",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/module-packs/pom.xml"
+      "install_root": "make/m3/tooling/module-packs/pom.xml"
     },
-    "m3/tooling/module-packs/verification/jdk-execution/pom.xml": {
+    "make/m3/tooling/module-packs/verification/jdk-execution/pom.xml": {
       "gav": [
         "jdk.m3.tooling",
         "jdk-execution-verification",
@@ -5464,9 +5464,9 @@
       "before_sha256": "3f14a05c25ce177329d13ce5e104185685d3e0bee0a36b72b4fa69909e35f2c1",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/module-packs/verification/jdk-execution/pom.xml"
+      "install_root": "make/m3/tooling/module-packs/verification/jdk-execution/pom.xml"
     },
-    "m3/tooling/mr/pom.xml": {
+    "make/m3/tooling/mr/pom.xml": {
       "gav": [
         "com.m3",
         "mr",
@@ -5478,9 +5478,9 @@
       "before_sha256": "b1453d4d2f403d291d92e894136ff30c6c9cdd1a5fac027b66ece382251c0007",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/mr/pom.xml"
+      "install_root": "make/m3/tooling/mr/pom.xml"
     },
-    "m3/tooling/netbeans-gap-boundary-20261019/m3-openrewrite-recipes/recipe-crates/netbeans-gap-boundary-20261019/pom.xml": {
+    "make/m3/tooling/netbeans-gap-boundary-20261019/m3-openrewrite-recipes/recipe-crates/netbeans-gap-boundary-20261019/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "netbeans-gap-boundary-proof",
@@ -5492,9 +5492,9 @@
       "before_sha256": "675e68a6c0bbc00ecc6fcd4aada1d25d21dc9e5a64471fa480d5cd44e08b956a",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/netbeans-gap-boundary-20261019/m3-openrewrite-recipes/recipe-crates/netbeans-gap-boundary-20261019/pom.xml"
+      "install_root": "make/m3/tooling/netbeans-gap-boundary-20261019/m3-openrewrite-recipes/recipe-crates/netbeans-gap-boundary-20261019/pom.xml"
     },
-    "m3/tooling/recipe-agent-api/pom.xml": {
+    "make/m3/tooling/recipe-agent-api/pom.xml": {
       "gav": [
         "jdk.m3.tooling",
         "recipe-agent-api",
@@ -5506,9 +5506,9 @@
       "before_sha256": "7cdc6df7667fb7f1f1f1e915cae5acf9a945d394fb3c3aa4b37cf2d5a37b0d0c",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/recipe-agent-api/pom.xml"
+      "install_root": "make/m3/tooling/recipe-agent-api/pom.xml"
     },
-    "m3/tooling/regex-ascii-lexical-receiver/sdk/pom.xml": {
+    "make/m3/tooling/regex-ascii-lexical-receiver/sdk/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-string-matched-build-workflow-sdk-1c1b-38df",
@@ -5521,7 +5521,7 @@
       "disposition": "EXCLUDE",
       "classification": "SOURCE_SEALED_RECIPE_PROOF"
     },
-    "m3/tooling/regex-ascii-live-owner-custody/sdk/pom.xml": {
+    "make/m3/tooling/regex-ascii-live-owner-custody/sdk/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-string-matched-build-workflow-sdk-1c1b-38df",
@@ -5534,7 +5534,7 @@
       "disposition": "EXCLUDE",
       "classification": "SOURCE_SEALED_RECIPE_PROOF"
     },
-    "m3/tooling/regex-relations-current-owner/sdk/pom.xml": {
+    "make/m3/tooling/regex-relations-current-owner/sdk/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-string-matched-build-workflow-sdk-1c1b-38df",
@@ -5546,9 +5546,9 @@
       "before_sha256": "f0ab99c3dafb38e82f8e5fd4c6d22db07831808c251c4622f292114c83e6673e",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/regex-relations-current-owner/sdk/pom.xml"
+      "install_root": "make/m3/tooling/regex-relations-current-owner/sdk/pom.xml"
     },
-    "m3/tooling/region-foundation-repair/pom.xml": {
+    "make/m3/tooling/region-foundation-repair/pom.xml": {
       "gav": [
         "jdk.internal.m3.rewrite",
         "m3jdk-region-foundation-repair",
@@ -5560,9 +5560,9 @@
       "before_sha256": "d7e8cdad1df9bf26e745b160f6c0e914af7a78da5975c544e3b996f01349cb80",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/region-foundation-repair/pom.xml"
+      "install_root": "make/m3/tooling/region-foundation-repair/pom.xml"
     },
-    "m3/tooling/shared-frontend/eclipse-jdt/pom.xml": {
+    "make/m3/tooling/shared-frontend/eclipse-jdt/pom.xml": {
       "gav": [
         "org.m3jdk.tooling",
         "m3-eclipse-jdt-contracts",
@@ -5574,9 +5574,9 @@
       "before_sha256": "8496b7583089eeb6b3cebb0730314f64148143cc35e8dbdd5c145406eb2d9aa7",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/shared-frontend/eclipse-jdt/pom.xml"
+      "install_root": "make/m3/tooling/shared-frontend/eclipse-jdt/pom.xml"
     },
-    "m3/tooling/shared-frontend/openrewrite-runtime/pom.xml": {
+    "make/m3/tooling/shared-frontend/openrewrite-runtime/pom.xml": {
       "gav": [
         "org.m3jdk.tooling",
         "m3-openrewrite-runtime",
@@ -5588,9 +5588,9 @@
       "before_sha256": "f90996fcfa174a0c95225e45248e9c6f2d372ef09c835f1df08cf3727dac4a35",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/shared-frontend/openrewrite-runtime/pom.xml"
+      "install_root": "make/m3/tooling/shared-frontend/openrewrite-runtime/pom.xml"
     },
-    "m3/tooling/shared-frontend/openrewrite-tool/pom.xml": {
+    "make/m3/tooling/shared-frontend/openrewrite-tool/pom.xml": {
       "gav": [
         "org.m3jdk.tooling",
         "m3-openrewrite-tool",
@@ -5602,9 +5602,9 @@
       "before_sha256": "b486de013cf39a2d5d2962a965dd848415a4800e0fc71f8543fb02b82e9cdaf5",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/shared-frontend/openrewrite-tool/pom.xml"
+      "install_root": "make/m3/tooling/shared-frontend/openrewrite-tool/pom.xml"
     },
-    "m3/tooling/shared-frontend/openrewrite/pom.xml": {
+    "make/m3/tooling/shared-frontend/openrewrite/pom.xml": {
       "gav": [
         "org.m3jdk.tooling",
         "m3-shared-openrewrite-frontend",
@@ -5616,9 +5616,9 @@
       "before_sha256": "f6dd1edf87821933d42e0adf549c7c180506455c52526a2d3e46471b58a17382",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/shared-frontend/openrewrite/pom.xml"
+      "install_root": "make/m3/tooling/shared-frontend/openrewrite/pom.xml"
     },
-    "m3/tooling/shared-frontend/recipe-custody/pom.xml": {
+    "make/m3/tooling/shared-frontend/recipe-custody/pom.xml": {
       "gav": [
         "jdk.internal.m3.verification",
         "m3-ast-build-reverse-recipe-proof",
@@ -5631,7 +5631,7 @@
       "disposition": "EXCLUDE",
       "classification": "CUSTODY"
     },
-    "m3/tooling/sort-recipes/m3-java-util-sorts-20261018/pom.xml": {
+    "make/m3/tooling/sort-recipes/m3-java-util-sorts-20261018/pom.xml": {
       "gav": [
         "jdk.internal.m3.recipes",
         "m3-java-util-sorts-20261018",
@@ -5644,7 +5644,7 @@
       "disposition": "EXCLUDE",
       "classification": "SOURCE_SEALED_RECIPE_PROOF"
     },
-    "m3/tooling/state-relation-current-c11/sdk/pom.xml": {
+    "make/m3/tooling/state-relation-current-c11/sdk/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-string-matched-build-workflow-sdk-1c1b-38df",
@@ -5657,7 +5657,7 @@
       "disposition": "EXCLUDE",
       "classification": "SOURCE_SEALED_RECIPE_PROOF"
     },
-    "m3/tooling/state-relation-sparse-c11/sdk/pom.xml": {
+    "make/m3/tooling/state-relation-sparse-c11/sdk/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-string-matched-build-workflow-sdk-1c1b-38df",
@@ -5670,7 +5670,7 @@
       "disposition": "EXCLUDE",
       "classification": "SOURCE_SEALED_RECIPE_PROOF"
     },
-    "m3/tooling/m3jdk-a3-recipes/pom.xml": {
+    "make/m3/tooling/m3jdk-a3-recipes/pom.xml": {
       "gav": [
         "com.synexia",
         "m3jdk-a3-recipes",
@@ -5682,9 +5682,9 @@
       "before_sha256": "adb92d8db5802590986586d0de67f0e75888d40fdaf3df080de10b59165982e1",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/m3jdk-a3-recipes/pom.xml"
+      "install_root": "make/m3/tooling/m3jdk-a3-recipes/pom.xml"
     },
-    "m3/tooling/text-metadata-current-owner/source/m3-openrewrite-recipes/tasks/composite-summary-20261012/pom.xml": {
+    "make/m3/tooling/text-metadata-current-owner/source/m3-openrewrite-recipes/tasks/composite-summary-20261012/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "composite-summary-proof",
@@ -5697,7 +5697,7 @@
       "disposition": "EXCLUDE",
       "classification": "SOURCE_SEALED_QUALIFICATION"
     },
-    "m3/tooling/text-metadata-current-owner/source/m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/guard-sdk/pom.xml": {
+    "make/m3/tooling/text-metadata-current-owner/source/m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/guard-sdk/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-string-matched-build-workflow-sdk-1c1b-38df",
@@ -5710,7 +5710,7 @@
       "disposition": "EXCLUDE",
       "classification": "SOURCE_SEALED_QUALIFICATION"
     },
-    "m3/tooling/text-metadata-current-owner/source/m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/pom.xml": {
+    "make/m3/tooling/text-metadata-current-owner/source/m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/pom.xml": {
       "gav": [
         "jdk.internal.m3",
         "text-metadata-current-owner-proof",
@@ -5723,7 +5723,7 @@
       "disposition": "EXCLUDE",
       "classification": "SOURCE_SEALED_QUALIFICATION"
     },
-    "m3/tooling/tq-sync/pom.xml": {
+    "make/m3/tooling/tq-sync/pom.xml": {
       "gav": [
         "com.m3",
         "tq-sync",
@@ -5735,9 +5735,9 @@
       "before_sha256": "5c2fbb500abc786721bf169d182c2b0cf73d56e1753340b78b6a45a38a01e827",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/tq-sync/pom.xml"
+      "install_root": "make/m3/tooling/tq-sync/pom.xml"
     },
-    "m3/tooling/tq-sync/source-reactor/pom.xml": {
+    "make/m3/tooling/tq-sync/source-reactor/pom.xml": {
       "gav": [
         "jdk.internal.m3.recipe",
         "source-qualified-tq-reactor",
@@ -5749,9 +5749,9 @@
       "before_sha256": "42ec58451eeba5f133666c41c8cc9e05ff0c13a9e9f8f78b674f128dac74629e",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/tq-sync/source-reactor/pom.xml"
+      "install_root": "make/m3/tooling/tq-sync/source-reactor/pom.xml"
     },
-    "m3/tooling/tq/pom.xml": {
+    "make/m3/tooling/tq/pom.xml": {
       "gav": [
         "com.m3",
         "tq",
@@ -5763,9 +5763,9 @@
       "before_sha256": "d204e937f2df21cb8c25ae1fdc267fbfed902deb02057ef2ed5cba5bf0f377b3",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/tq/pom.xml"
+      "install_root": "make/m3/tooling/tq/pom.xml"
     },
-    "m3/tooling/vendor-recipes/pom.xml": {
+    "make/m3/tooling/vendor-recipes/pom.xml": {
       "gav": [
         "com.m3",
         "vendored-pin-recipes",
@@ -5777,9 +5777,9 @@
       "before_sha256": "907cb23857b8907542880f2afc8e45b242dc40c1a0718a0f37f42a54e1561007",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/vendor-recipes/pom.xml"
+      "install_root": "make/m3/tooling/vendor-recipes/pom.xml"
     },
-    "m3/tooling/vi/pom.xml": {
+    "make/m3/tooling/vi/pom.xml": {
       "gav": [
         "com.m3",
         "vi",
@@ -5791,7 +5791,7 @@
       "before_sha256": "7345158e6018ae05c3fb15e5fafaf11e40ec62c93d90fb12b62ea334dee450d1",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/vi/pom.xml"
+      "install_root": "make/m3/tooling/vi/pom.xml"
     },
     "m3/vendor/m3/snapshots/m3-build-collections-20261017/m3-openrewrite-recipes/verification/m3-build-shared-ast-20261017/pom.xml": {
       "gav": [

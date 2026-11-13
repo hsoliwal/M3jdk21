@@ -15,8 +15,8 @@ REPO = ROOT.parents[2]
 PROVENANCE = ROOT / "PROVENANCE.tsv"
 RECIPE = ROOT / "recipe.json"
 # Standalone (2026-10-31): the donor repository is lineage, kept once in the standalone ledger and never
-# fetched; this verifier compares provenance against that ledger row (m3/tooling/standalone/M3_REFS.tsv).
-LINEAGE = REPO / "m3" / "tooling" / "standalone" / "LINEAGE_SOURCES.tsv"
+# fetched; this verifier compares provenance against that ledger row (make/m3/tooling/standalone/M3_REFS.tsv).
+LINEAGE = REPO / "make" / "m3" / "tooling" / "standalone" / "LINEAGE_SOURCES.tsv"
 LINEAGE_KEY = "synexia"
 
 EXPECTED = {

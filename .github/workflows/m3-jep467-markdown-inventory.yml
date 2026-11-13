@@ -7,23 +7,23 @@ on:
       - "m3/recover-jep467-current-master-20261005"
       - "m3/recover-jep467-materialization-current-20261007"
     paths:
-      - "m3/backports/generate_recipe_crates.py"
-      - "m3/backports/test_generate_recipe_crates.py"
-      - "m3/backports/materialize_generated_crates.py"
-      - "m3/backports/test_materialize_generated_crates.py"
-      - "m3/backports/recipes/jep-467-markdown/**"
-      - "m3/tooling/migration-recipes/**"
-      - "m3/tooling/backport-dag/**"
+      - "make/m3/backports/generate_recipe_crates.py"
+      - "make/m3/backports/test_generate_recipe_crates.py"
+      - "make/m3/backports/materialize_generated_crates.py"
+      - "make/m3/backports/test_materialize_generated_crates.py"
+      - "make/m3/backports/recipes/jep-467-markdown/**"
+      - "make/m3/tooling/migration-recipes/**"
+      - "make/m3/tooling/backport-dag/**"
       - ".github/workflows/m3-jep467-markdown-inventory.yml"
   pull_request:
     paths:
-      - "m3/backports/materialize_generated_crates.py"
-      - "m3/backports/test_materialize_generated_crates.py"
-      - "m3/backports/generate_recipe_crates.py"
-      - "m3/backports/test_generate_recipe_crates.py"
-      - "m3/backports/recipes/jep-467-markdown/**"
-      - "m3/tooling/migration-recipes/**"
-      - "m3/tooling/backport-dag/**"
+      - "make/m3/backports/materialize_generated_crates.py"
+      - "make/m3/backports/test_materialize_generated_crates.py"
+      - "make/m3/backports/generate_recipe_crates.py"
+      - "make/m3/backports/test_generate_recipe_crates.py"
+      - "make/m3/backports/recipes/jep-467-markdown/**"
+      - "make/m3/tooling/migration-recipes/**"
+      - "make/m3/tooling/backport-dag/**"
       - ".github/workflows/m3-jep467-markdown-inventory.yml"
   workflow_dispatch:
 
@@ -75,7 +75,7 @@ jobs:
           repo = Path(__import__("os").environ["UPSTREAM"])
           expected = [
               line.strip()
-              for line in Path("m3/backports/recipes/jep-467-markdown/PATHS.txt")
+              for line in Path("make/m3/backports/recipes/jep-467-markdown/PATHS.txt")
                   .read_text(encoding="utf-8").splitlines()
               if line.strip()
           ]
@@ -105,7 +105,7 @@ jobs:
           repo = Path(os.environ["UPSTREAM"])
           paths = [
               line.strip()
-              for line in Path("m3/backports/recipes/jep-467-markdown/PATHS.txt")
+              for line in Path("make/m3/backports/recipes/jep-467-markdown/PATHS.txt")
                   .read_text(encoding="utf-8").splitlines()
               if line.strip()
           ]
@@ -128,18 +128,18 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m py_compile             m3/backports/generate_recipe_crates.py             m3/backports/materialize_generated_crates.py
-          cd m3/backports
+          python3 -m py_compile             make/m3/backports/generate_recipe_crates.py             make/m3/backports/materialize_generated_crates.py
+          cd make/m3/backports
           python3 -m unittest -v             test_generate_recipe_crates.py             test_materialize_generated_crates.py             test_jep467_ga_policy.py
 
       - name: Generate candidate FILE atoms from JDK23 GA
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/backports/generate_recipe_crates.py \
+          python3 make/m3/backports/generate_recipe_crates.py \
             --repo "$UPSTREAM" \
             --release 23 \
-            --paths-file m3/backports/recipes/jep-467-markdown/MATERIALIZATION_PATHS.txt \
+            --paths-file make/m3/backports/recipes/jep-467-markdown/MATERIALIZATION_PATHS.txt \
             --crate-size 1 \
             --include-text \
             --out target/jep467/file-atoms
@@ -154,13 +154,13 @@ jobs:
 
           selected = {
               line.strip()
-              for line in Path("m3/backports/recipes/jep-467-markdown/MATERIALIZATION_PATHS.txt")
+              for line in Path("make/m3/backports/recipes/jep-467-markdown/MATERIALIZATION_PATHS.txt")
                   .read_text(encoding="utf-8").splitlines()
               if line.strip()
           }
           denominator = {
               line.strip()
-              for line in Path("m3/backports/recipes/jep-467-markdown/PATHS.txt")
+              for line in Path("make/m3/backports/recipes/jep-467-markdown/PATHS.txt")
                   .read_text(encoding="utf-8").splitlines()
               if line.strip()
           }
@@ -169,7 +169,7 @@ jobs:
           if len(selected) != 250:
               raise SystemExit(f"expected 250 GA materialization paths, found {len(selected)}")
 
-          with Path("m3/backports/recipes/jep-467-markdown/TYPED_EXCLUSIONS.tsv").open(
+          with Path("make/m3/backports/recipes/jep-467-markdown/TYPED_EXCLUSIONS.tsv").open(
               encoding="utf-8", newline=""
           ) as handle:
               policy_exclusions = list(csv.DictReader(handle, delimiter="\t"))
@@ -211,18 +211,18 @@ jobs:
 
       - name: Validate evidence-bound JEP467 composition DAG
         run: |
-          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
+          mvn -B -ntp -f make/m3/tooling/backport-dag/pom.xml \
             -Dexec.mainClass=jdk.m3.tooling.dag.BackportPacketMain \
-            -Dexec.args="$PWD/m3/backports/recipes/jep-467-markdown/packet.tsv $PWD/m3/backports/recipes/jep-467-markdown/atom-evidence.tsv" \
+            -Dexec.args="$PWD/make/m3/backports/recipes/jep-467-markdown/packet.tsv $PWD/make/m3/backports/recipes/jep-467-markdown/atom-evidence.tsv" \
             exec:java
 
       - name: Project JEP467 DAG to Camel Airflow and Drools
         run: |
           set -euo pipefail
           mkdir -p target/jep467/projections
-          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
+          mvn -B -ntp -f make/m3/tooling/backport-dag/pom.xml \
             -Dexec.mainClass=jdk.m3.tooling.dag.OrchestrationProjectionMain \
-            -Dexec.args="$PWD/m3/backports/recipes/jep-467-markdown/packet.tsv $PWD/target/jep467/projections $PWD/m3/backports/recipes/jep-467-markdown/atom-evidence.tsv" \
+            -Dexec.args="$PWD/make/m3/backports/recipes/jep-467-markdown/packet.tsv $PWD/target/jep467/projections $PWD/make/m3/backports/recipes/jep-467-markdown/atom-evidence.tsv" \
             exec:java
           test -s target/jep467/projections/M3BackportRoutes.java
           test -s target/jep467/projections/m3_backport_dag.py
@@ -239,7 +239,7 @@ jobs:
 
           selected = [
               line.strip()
-              for line in Path("m3/backports/recipes/jep-467-markdown/MATERIALIZATION_PATHS.txt")
+              for line in Path("make/m3/backports/recipes/jep-467-markdown/MATERIALIZATION_PATHS.txt")
                   .read_text(encoding="utf-8").splitlines()
               if line.strip()
           ]
@@ -268,18 +268,18 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/backports/materialize_generated_crates.py             --root "$PWD"             --generated "$PWD/target/jep467/file-atoms"             --mode check             --require-one-target-per-crate             --receipt "$PWD/target/jep467/preimage.tsv"
+          python3 make/m3/backports/materialize_generated_crates.py             --root "$PWD"             --generated "$PWD/target/jep467/file-atoms"             --mode check             --require-one-target-per-crate             --receipt "$PWD/target/jep467/preimage.tsv"
           test -z "$(git status --porcelain=v1 -uall)"
 
       - name: Materialize exact JEP467 candidate and prove fixed point
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/backports/materialize_generated_crates.py             --root "$PWD"             --generated "$PWD/target/jep467/file-atoms"             --mode apply             --require-one-target-per-crate             --receipt "$PWD/target/jep467/apply.tsv"
-          python3 m3/backports/materialize_generated_crates.py             --root "$PWD"             --generated "$PWD/target/jep467/file-atoms"             --mode verify-post             --require-one-target-per-crate             --receipt "$PWD/target/jep467/postimage.tsv"
+          python3 make/m3/backports/materialize_generated_crates.py             --root "$PWD"             --generated "$PWD/target/jep467/file-atoms"             --mode apply             --require-one-target-per-crate             --receipt "$PWD/target/jep467/apply.tsv"
+          python3 make/m3/backports/materialize_generated_crates.py             --root "$PWD"             --generated "$PWD/target/jep467/file-atoms"             --mode verify-post             --require-one-target-per-crate             --receipt "$PWD/target/jep467/postimage.tsv"
           git diff --check
           before="$(git diff --binary | sha256sum | awk '{print $1}')"
-          python3 m3/backports/materialize_generated_crates.py             --root "$PWD"             --generated "$PWD/target/jep467/file-atoms"             --mode apply             --require-one-target-per-crate
+          python3 make/m3/backports/materialize_generated_crates.py             --root "$PWD"             --generated "$PWD/target/jep467/file-atoms"             --mode apply             --require-one-target-per-crate
           after="$(git diff --binary | sha256sum | awk '{print $1}')"
           test "$before" = "$after"
 

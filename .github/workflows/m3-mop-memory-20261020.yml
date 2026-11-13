@@ -4,7 +4,7 @@ on:
   pull_request:
     paths:
       - 'm3/mop/**'
-      - 'm3/tooling/shared-frontend/recipe-custody/datasets/m3-mop-recipe-memory-20261020/**'
+      - 'make/m3/tooling/shared-frontend/recipe-custody/datasets/m3-mop-recipe-memory-20261020/**'
       - '.github/workflows/m3-mop-memory-20261020.yml'
   workflow_dispatch:
 permissions:
@@ -34,7 +34,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          root="$PWD/m3/tooling/shared-frontend/recipe-custody"
+          root="$PWD/make/m3/tooling/shared-frontend/recipe-custody"
           mvn -B -ntp -f "$root/pom.xml" \
             -Dm3.dataset=m3-mop-recipe-memory-20261020 \
             "-Drecipe.owner.root=$root/sdk-owner" -Pcontract verify

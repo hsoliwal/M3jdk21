@@ -37,7 +37,7 @@ final class JccHandoffTest {
             "/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/" + CRATE + "/";
     private static final String SOURCE = "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc";
     private static final String DESTINATION = "da958d00d24154c0db87beca0ec80a7df2b43b73";
-    private static final String REGISTRY = "m3/docs/name-mapping.json";
+    private static final String REGISTRY = "doc/m3/name-mapping.json";
     private static final String BASELINE_SHA256 =
             "67d40925b97a38c3c1a85f337806524ac590a540bd39647b3e4b0988f2ae3fbb";
     private static final String DESCRIPTOR = "m3.counterpart.MIndexJvmDescriptor";
@@ -45,10 +45,10 @@ final class JccHandoffTest {
             "m3.jcc-recipe-laboratory", "m3.jcc-java-jni-regression");
     private static final Map<String, String> OUTPUTS = Map.of(
             REGISTRY, "after00-name-mapping.json.txt",
-            "m3/docs/jcc-source-handoff.md", "01-jcc-source-handoff.md.txt",
-            "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
+            "doc/m3/jcc-source-handoff.md", "01-jcc-source-handoff.md.txt",
+            "make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
                     "02-source-destination-bindings.json.txt",
-            "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
+            "make/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
                     "03-root-coverage-obligations.tsv.txt");
     private static final ObjectMapper JSON = new ObjectMapper();
 
@@ -283,7 +283,7 @@ final class JccHandoffTest {
         assertEquals("jdk.m3.rewrite.backport.Descriptor", snapshot.path("id").asText());
         assertEquals("snapshot@39702564163c017f9dc0350a305b032b06274857",
                 snapshot.path("version").asText());
-        assertEquals("m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/"
+        assertEquals("make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/"
                         + "jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
                 snapshot.path("path").asText());
         assertTrue(snapshot.path("sha256").asText().matches("[0-9a-f]{64}"));

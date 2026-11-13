@@ -11,7 +11,7 @@ Exact target-first source-sealed OpenRewrite recipe:
 [hsoliwal/com.synexia#11866](https://github.com/hsoliwal/com.synexia/pull/11866),
 commit `7370b3e158e5463b76dc1639b1f943e6a597a446`.
 Receiving baseline: M3JDK21 `855afe57a679aeb454052630de7beddcb25f5f8f`.
-Runtime postimages: `m3/collections/qualification/mask-selection-postimages-20261016.tsv`.
+Runtime postimages: `make/m3/collections/qualification/mask-selection-postimages-20261016.tsv`.
 The target retains its Apache-2.0 module license, first-party attribution and
 current `com.m3.collections` package ownership.
 
@@ -45,7 +45,7 @@ performance gates remain independent. Preserve the canonical receiving order
 **String → arrays → collections → AST/compiler**; no phase promotion.
 
 ## Reproduce on a Linux Java21 native host
-Run `python3 m3/collections/qualification/verify_mask_selection.py` first.
+Run `python3 make/m3/collections/qualification/verify_mask_selection.py` first.
 The focused workflow `.github/workflows/m3-collections-mask-receiver.yml`
 compiles all existing core Java sources with Java21 warnings-as-errors,
 compiles/runs the actual receiver self-test in Java mode, builds the target JNI

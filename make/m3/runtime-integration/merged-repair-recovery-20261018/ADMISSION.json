@@ -59,7 +59,7 @@
   ],
   "targets": [
     {
-      "path": "m3/backports/ALGORITHM_CATALOGUE.tsv",
+      "path": "make/m3/backports/ALGORITHM_CATALOGUE.tsv",
       "current_sha256": "e225689ee0fc93496070e819f7b637aea299c3b677d3c72c833408343b4de72c",
       "current_git_blob": "20fea633392da6bd108c23ce13292487359905a6",
       "original_preimage_sha256": "3ab761465800d4fcb67c4a1024174292ee983b617db8708e1c8d451185730cdc",
@@ -78,7 +78,7 @@
       ]
     },
     {
-      "path": "m3/compatibility/check_object_adapter_progress_receiver_20261017.py",
+      "path": "make/m3/compatibility/check_object_adapter_progress_receiver_20261017.py",
       "current_sha256": "5e44ba190257db7d9715d80e7870d6a1b69f8c76cc3c285182193e80fc0da443",
       "current_git_blob": "23384a1f7e7317024b56a2b5c8e8b8c2b650bf89",
       "original_preimage_sha256": "5e44ba190257db7d9715d80e7870d6a1b69f8c76cc3c285182193e80fc0da443",
@@ -97,7 +97,7 @@
       ]
     },
     {
-      "path": "m3/compatibility/m3-functional-progress-doclint-20261018.tsv",
+      "path": "make/m3/compatibility/m3-functional-progress-doclint-20261018.tsv",
       "current_sha256": "ABSENT",
       "current_git_blob": null,
       "original_preimage_sha256": "ABSENT",
@@ -116,7 +116,7 @@
       ]
     },
     {
-      "path": "m3/compatibility/m3-progress-doclint-20261018.tsv",
+      "path": "make/m3/compatibility/m3-progress-doclint-20261018.tsv",
       "current_sha256": "ABSENT",
       "current_git_blob": null,
       "original_preimage_sha256": "ABSENT",
@@ -135,7 +135,7 @@
       ]
     },
     {
-      "path": "m3/compatibility/m3-progress-scope-lint-20261018.tsv",
+      "path": "make/m3/compatibility/m3-progress-scope-lint-20261018.tsv",
       "current_sha256": "ABSENT",
       "current_git_blob": null,
       "original_preimage_sha256": "ABSENT",
@@ -154,7 +154,7 @@
       ]
     },
     {
-      "path": "m3/compatibility/test_object_adapter_progress_receiver_20261018.py",
+      "path": "make/m3/compatibility/test_object_adapter_progress_receiver_20261018.py",
       "current_sha256": "ABSENT",
       "current_git_blob": null,
       "original_preimage_sha256": "ABSENT",
@@ -173,7 +173,7 @@
       ]
     },
     {
-      "path": "m3/compatibility/verify_m3_default_template_20261017.py",
+      "path": "make/m3/compatibility/verify_m3_default_template_20261017.py",
       "current_sha256": "856910b716021260d387c0e3230c774223d7afc6ba62eab8e0c35668ffc8f2da",
       "current_git_blob": "94340b0e9c118d8b821e5dc02f99ae966815630e",
       "original_preimage_sha256": "856910b716021260d387c0e3230c774223d7afc6ba62eab8e0c35668ffc8f2da",
@@ -192,7 +192,7 @@
       ]
     },
     {
-      "path": "m3/docs/name-mapping.json",
+      "path": "doc/m3/name-mapping.json",
       "current_sha256": "a28f218198b30d1292d51836c8912d1f69229ef9bef40a4726a2808bcdcb4d46",
       "current_git_blob": "986147e2df24ef25076d451c49782d8e7e354a11",
       "original_preimage_sha256": "a28f218198b30d1292d51836c8912d1f69229ef9bef40a4726a2808bcdcb4d46",
@@ -211,7 +211,7 @@
       ]
     },
     {
-      "path": "m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv",
+      "path": "make/m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv",
       "current_sha256": "ABSENT",
       "current_git_blob": null,
       "original_preimage_sha256": "ABSENT",
@@ -230,7 +230,7 @@
       ]
     },
     {
-      "path": "m3/runtime-integration/runtime-repair-20261018/CURRENT_OWNERS.json",
+      "path": "make/m3/runtime-integration/runtime-repair-20261018/CURRENT_OWNERS.json",
       "current_sha256": "ABSENT",
       "current_git_blob": null,
       "original_preimage_sha256": "ABSENT",
@@ -249,7 +249,7 @@
       ]
     },
     {
-      "path": "m3/runtime-integration/runtime-repair-20261018/FILE_REVIEW.tsv",
+      "path": "make/m3/runtime-integration/runtime-repair-20261018/FILE_REVIEW.tsv",
       "current_sha256": "ABSENT",
       "current_git_blob": null,
       "original_preimage_sha256": "ABSENT",
@@ -268,7 +268,7 @@
       ]
     },
     {
-      "path": "m3/runtime-integration/runtime-repair-20261018/README.md",
+      "path": "make/m3/runtime-integration/runtime-repair-20261018/README.md",
       "current_sha256": "ABSENT",
       "current_git_blob": null,
       "original_preimage_sha256": "ABSENT",

@@ -34,39 +34,39 @@
   },
   "packaging_owners": [
     {
-      "path": "m3/tooling/jmod-recipes/tools/jmod_pack.py",
+      "path": "make/m3/tooling/jmod-recipes/tools/jmod_pack.py",
       "sha256": "f74c8861494fefefe978ad5c038e7309c9ec3e2e9bd41c913e827458a950a200"
     },
     {
-      "path": "m3/tooling/jmod-recipes/tools/jmod_image.py",
+      "path": "make/m3/tooling/jmod-recipes/tools/jmod_image.py",
       "sha256": "407622e9a4db86f1b9abae2e451638713b151f14256190c0e28fe7d0739eb7cf"
     },
     {
-      "path": "m3/tooling/module-packs/tool_packs.py",
+      "path": "make/m3/tooling/module-packs/tool_packs.py",
       "sha256": "24edd66788009d00eddcae9b2ba1bc61fd492b28aefb5f34c1439eff9e6b5acf"
     },
     {
-      "path": "m3/tooling/module-packs/kernel/src/main/java/jdk/m3/tools/modulepack/M3ModuleArtifact.java",
+      "path": "make/m3/tooling/module-packs/kernel/src/main/java/jdk/m3/tools/modulepack/M3ModuleArtifact.java",
       "sha256": "0da80eb22f2c356089d7da5c914b3bf939d9723a9aee7708e2de5d79cc117439"
     },
     {
-      "path": "m3/tooling/module-packs/kernel/src/main/java/jdk/m3/tools/modulepack/M3ModuleGraph.java",
+      "path": "make/m3/tooling/module-packs/kernel/src/main/java/jdk/m3/tools/modulepack/M3ModuleGraph.java",
       "sha256": "c1fa4ca74d190654fabb662db83a61ab9b0cdf617da5e0806ff96b5d99b015ac"
     },
     {
-      "path": "m3/tooling/module-packs/kernel/src/main/java/jdk/m3/tools/modulepack/M3ModuleInspector.java",
+      "path": "make/m3/tooling/module-packs/kernel/src/main/java/jdk/m3/tools/modulepack/M3ModuleInspector.java",
       "sha256": "6243fd822320cbbc8cf64855d06247f84f73e17a2e2b8655855033eadaee8b01"
     },
     {
-      "path": "m3/tooling/module-packs/kernel/src/main/java/jdk/m3/tools/modulepack/M3ModuleInventory.java",
+      "path": "make/m3/tooling/module-packs/kernel/src/main/java/jdk/m3/tools/modulepack/M3ModuleInventory.java",
       "sha256": "f9f7d948de83d875b2e96ade22f9c40b680d972a53b224cdfc509640d855fdb2"
     },
     {
-      "path": "m3/tooling/module-packs/kernel/src/main/java/module-info.java",
+      "path": "make/m3/tooling/module-packs/kernel/src/main/java/module-info.java",
       "sha256": "f8c4096e7d38dec851e5aae6121dbd160aba89d99a7c2fe09eee57c6e9c084af"
     }
   ],
-  "predecessor_path": "m3/evidence/java-base/number-parse-jackson/SOURCE_LOCK_PREDECESSOR.json",
+  "predecessor_path": "make/m3/evidence/java-base/number-parse-jackson/SOURCE_LOCK_PREDECESSOR.json",
   "predecessor_sha256": "58ef61641b1a505ac7f74b5b68bf5fec41d09085a26a72509bf05cd7525b5b90",
   "schema": 1,
   "target_base_revision": "5c47b0edf08d7ecd12e5c2afecc5530ac6930209",

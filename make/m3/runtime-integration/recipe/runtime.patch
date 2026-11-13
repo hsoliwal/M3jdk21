@@ -13352,7 +13352,7 @@ index 0000000000000000000000000000000000000000..1116f4cb0ffd361e764688640adb53af
 +
 +/**
 + * Caller-declared release provenance; spelling references use the existing JDK String owner.
-+ * Adapted from Synexia MIndexLibraryRelease; see m3/tooling/vi/README.md for pinned lineage. Exact raw labels survive comparison-equal versions.
++ * Adapted from Synexia MIndexLibraryRelease; see make/m3/tooling/vi/README.md for pinned lineage. Exact raw labels survive comparison-equal versions.
 + * This descriptor performs no resolution, download, signature verification or class loading.
 + * A content digest is a candidate seal, not proof of a loaded class's definition bytes.
 + */
@@ -13490,7 +13490,7 @@ index 0000000000000000000000000000000000000000..533a07b77061e757d476627557413f6d
 + * TQ (Trigram Query): conservative boolean queries over UTF-16 trigrams.
 + *
 + * <p>JDK-owned adaptation of Synexia MIndexRegexTrigramQuery. No Synexia module is
-+ * required at build time or runtime. See m3/tooling/tq for exact provenance.</p>
++ * required at build time or runtime. See make/m3/tooling/tq for exact provenance.</p>
 + *
 + * <p>The query is a necessary condition only: a false result proves that a regex cannot match,
 + * while a true result always requires the authoritative regex verifier. This is deliberately the
@@ -13982,7 +13982,7 @@ index 0000000000000000000000000000000000000000..087aa55bef9b57189d03f3388fb2e1f3
 + * Schemes must be deterministic, immutable and bound to a precise semantic revision.
 + * This internal kernel stores references to existing JDK Strings, not a spelling dictionary.
 + * It performs no module resolution, class loading, dependency selection or implementation routing.
-+ * Adapted from Synexia MIndexVersionTable; see m3/tooling/vi/README.md for pinned lineage.
++ * Adapted from Synexia MIndexVersionTable; see make/m3/tooling/vi/README.md for pinned lineage.
 + */
 +public final class M3VI<T> {
 +    /** JDK-owned callback boundary; null means no reporting or cancellation. */
@@ -14116,7 +14116,7 @@ index 0000000000000000000000000000000000000000..4eee1ea522800ea2444911d8ae85631c
 +license/NOTICE disposition before product inclusion.
 +
 +The machine-readable receiving policy is
-+`m3/compatibility/m3-public-target-policy.tsv`. Source-license admission is independent of
++`make/m3/compatibility/m3-public-target-policy.tsv`. Source-license admission is independent of
 +build, API/ABI, runtime, native, jtreg and platform acceptance.
 +
 +## Synexia Lane28 collection kernels
@@ -14128,7 +14128,7 @@ index 0000000000000000000000000000000000000000..4eee1ea522800ea2444911d8ae85631c
 +Adapted from the complete Synexia segmented primitive-lane sources, including
 +lazy rank/select counts and their mutation maintenance. Changes: JDK internal
 +package/names and libjava JNI symbol/header. Exact originals, source revisions,
-+LICENSE, NOTICE, hashes and reproduction are retained under m3/tooling/lane28.
++LICENSE, NOTICE, hashes and reproduction are retained under make/m3/tooling/lane28.
 +Existing OpenJDK and other third-party notices retain their scope.
 +
 +## Synexia TQ precompute kernel
@@ -14148,7 +14148,7 @@ index 0000000000000000000000000000000000000000..4eee1ea522800ea2444911d8ae85631c
 +M3Boundary, M3CB, M3CI, M3Class, M3ClassFlags, M3Constructor, M3Descriptor, M3Field, M3Member, M3MemberFlags, M3MemberKind, M3Method, M3PC, M3RecordComponent.
 +Copyright 2026 Hitesh Soliwal and contributors.
 +
-+Source originals, LICENSE, NOTICE and hashes: m3/tooling/cb/donor and pins.json.
++Source originals, LICENSE, NOTICE and hashes: make/m3/tooling/cb/donor and pins.json.
 +Modifications: JDK package/names; existing String references and local primitive symbol lanes;
 +M3VI progress boundary; exact text fingerprints; effective declared-release lookup and immutable
 +String-based precompute inputs. M3CI includes the int-lane lowerBound/upperBound bodies from
@@ -14161,8 +14161,8 @@ index 0000000000000000000000000000000000000000..4eee1ea522800ea2444911d8ae85631c
 +Copyright 2026 Hitesh Soliwal and contributors.
 +
 +Adapted from hsoliwal/com.synexia; exact source and modification provenance is retained in
-+m3/tooling/vi/pins.json and m3/tooling/vi/README.md. The original implementation and scoped
-+license/NOTICE snapshots are retained in m3/tooling/vi/donor.
++m3/tooling/vi/pins.json and make/m3/tooling/vi/README.md. The original implementation and scoped
++license/NOTICE snapshots are retained in make/m3/tooling/vi/donor.
 +Modifications: JDK-owned package/names, String and progress callback boundary, and refusal
 +of observed version-scheme drift during preparation. Existing OpenJDK code retains its notices.
 +

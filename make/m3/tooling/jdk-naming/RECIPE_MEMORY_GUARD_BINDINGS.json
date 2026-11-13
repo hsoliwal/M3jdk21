@@ -8,7 +8,7 @@
       "trigger": "PATTERN:SPLIT_PACKAGE_NAME_COLLISION",
       "original_guard": "unify.py refuses a move onto an existing path unless a RENAME row vacates it first, and pins the rename count per token and file",
       "resolved_guard": "test_jdk_naming.py#test_split_package_file_unify_receipt",
-      "evidence_path": "m3/qualification/file-unify-20261106/NAME_COLLISION.tsv"
+      "evidence_path": "make/m3/qualification/file-unify-20261106/NAME_COLLISION.tsv"
     },
     {
       "utc": "2026-11-07T03:10:00Z",

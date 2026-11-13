@@ -5,21 +5,21 @@ on:
     branches:
       - "m3/jep475-*"
     paths:
-      - "m3/backports/file_delta_inventory.py"
-      - "m3/backports/generate_recipe_crates.py"
-      - "m3/backports/selected_path_inventory.py"
-      - "m3/backports/test_selected_path_inventory.py"
-      - "m3/backports/test_jep475_inventory_policy.py"
-      - "m3/backports/recipes/jep-475-late-barrier-g1/**"
+      - "make/m3/backports/file_delta_inventory.py"
+      - "make/m3/backports/generate_recipe_crates.py"
+      - "make/m3/backports/selected_path_inventory.py"
+      - "make/m3/backports/test_selected_path_inventory.py"
+      - "make/m3/backports/test_jep475_inventory_policy.py"
+      - "make/m3/backports/recipes/jep-475-late-barrier-g1/**"
       - ".github/workflows/m3-jep475-late-barrier-g1-inventory.yml"
   pull_request:
     paths:
-      - "m3/backports/file_delta_inventory.py"
-      - "m3/backports/generate_recipe_crates.py"
-      - "m3/backports/selected_path_inventory.py"
-      - "m3/backports/test_selected_path_inventory.py"
-      - "m3/backports/test_jep475_inventory_policy.py"
-      - "m3/backports/recipes/jep-475-late-barrier-g1/**"
+      - "make/m3/backports/file_delta_inventory.py"
+      - "make/m3/backports/generate_recipe_crates.py"
+      - "make/m3/backports/selected_path_inventory.py"
+      - "make/m3/backports/test_selected_path_inventory.py"
+      - "make/m3/backports/test_jep475_inventory_policy.py"
+      - "make/m3/backports/recipes/jep-475-late-barrier-g1/**"
       - ".github/workflows/m3-jep475-late-barrier-g1-inventory.yml"
   workflow_dispatch:
 
@@ -58,10 +58,10 @@ jobs:
         run: |
           set -euo pipefail
           python3 -m py_compile \
-            m3/backports/file_delta_inventory.py \
-            m3/backports/generate_recipe_crates.py \
-            m3/backports/selected_path_inventory.py
-          cd m3/backports
+            make/m3/backports/file_delta_inventory.py \
+            make/m3/backports/generate_recipe_crates.py \
+            make/m3/backports/selected_path_inventory.py
+          cd make/m3/backports
           python3 -m unittest -v \
             test_selected_path_inventory.py \
             test_generate_recipe_crates.py \
@@ -88,10 +88,10 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/jep475"
-          python3 m3/backports/file_delta_inventory.py \
+          python3 make/m3/backports/file_delta_inventory.py \
             --repo "$UPSTREAM" --release 24 --donor-ref "$IMPLEMENTATION_COMMIT" \
             --out "$RUNNER_TEMP/jep475/integration-delta.tsv"
-          python3 m3/backports/file_delta_inventory.py \
+          python3 make/m3/backports/file_delta_inventory.py \
             --repo "$UPSTREAM" --release 24 \
             --out "$RUNNER_TEMP/jep475/ga-delta.tsv"
 
@@ -99,8 +99,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/backports/selected_path_inventory.py \
-            --paths m3/backports/recipes/jep-475-late-barrier-g1/INTEGRATION_PATHS.txt \
+          python3 make/m3/backports/selected_path_inventory.py \
+            --paths make/m3/backports/recipes/jep-475-late-barrier-g1/INTEGRATION_PATHS.txt \
             --integration-delta "$RUNNER_TEMP/jep475/integration-delta.tsv" \
             --ga-delta "$RUNNER_TEMP/jep475/ga-delta.tsv" \
             --out "$RUNNER_TEMP/jep475/selected-paths.tsv"
@@ -135,7 +135,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/backports/generate_recipe_crates.py \
+          python3 make/m3/backports/generate_recipe_crates.py \
             --repo "$UPSTREAM" \
             --release 24 \
             --paths-file "$RUNNER_TEMP/jep475/MATERIALIZE_PATHS.txt" \
@@ -182,7 +182,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f m3/backports/pom.xml verify
+          mvn -B -ntp -f make/m3/backports/pom.xml verify
 
       - name: 9 - Upload JEP475 inventory and ephemeral recipe evidence
         if: always()

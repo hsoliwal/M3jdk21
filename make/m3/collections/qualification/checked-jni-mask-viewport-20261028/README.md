@@ -34,7 +34,7 @@ frame-output buffers, as required by the JNI implementation.
 With Java 21, GCC, Maven and Linux JNI headers available:
 
 ```sh
-bash m3/collections/qualification/checked-jni-mask-viewport-20261028/verify.sh
+bash make/m3/collections/qualification/checked-jni-mask-viewport-20261028/verify.sh
 ```
 
 The script pins all four participating source Git blobs and builds

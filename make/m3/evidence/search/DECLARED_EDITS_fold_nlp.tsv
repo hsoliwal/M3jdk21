@@ -1,3 +1,3 @@
 file	edit	reason
 m3/search/README.md	28 tokens M3<Name> -> <Name> where jdk.m3.search.<Name> exists (renamed by #2818 without --doc); new section 'Folded from m3/nlp'	module doc follows the code (D2C)
-m3/tooling/jdk-naming/PACKAGE_BASELINE.tsv	rows ROOT m3/nlp REAL, PACKAGE jdk.m3.nlp and 30 PREFIXED m3/nlp/... removed	the root, the package and the prefixed files are gone (removals pass the gate)
+make/m3/tooling/jdk-naming/PACKAGE_BASELINE.tsv	rows ROOT m3/nlp REAL, PACKAGE jdk.m3.nlp and 30 PREFIXED m3/nlp/... removed	the root, the package and the prefixed files are gone (removals pass the gate)

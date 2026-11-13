@@ -6,7 +6,7 @@
 ## Scope and authority
 
 This is a read-only **diagnostic** for the historical
-`m3/compatibility/check_object_adapter_progress_receiver_20261017.py`
+`make/m3/compatibility/check_object_adapter_progress_receiver_20261017.py`
 checker. That original checker, its five history manifests, and all public
 Java/JNI APIs remain unchanged. The census is a separate evidence lane, not a
 new acceptance path. In particular, a successful census must **never** be

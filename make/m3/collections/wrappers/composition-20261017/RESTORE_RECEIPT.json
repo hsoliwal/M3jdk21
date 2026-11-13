@@ -5,7 +5,7 @@
   "target_base": "master",
   "canonical_recipe": {
     "repository": "hsoliwal/M3JDK21",
-    "path": "m3/collections/wrappers/composition-20261017/recipe",
+    "path": "make/m3/collections/wrappers/composition-20261017/recipe",
     "recipe": "com.synexia.rewrite.M3WrapperCompositionRecipe",
     "historical_qualification_pr": 1077,
     "historical_source_template_blob": "258452f8442df0e257db791bdc99d1a7604ba7bc"
@@ -29,7 +29,7 @@
     "public_api_policy": "No new java.util public API; M3-owned facade only."
   },
   "qualification": {
-    "historical_recipe_evidence": "See m3/collections/wrappers/composition-20261017/recipe/evidence/RESULTS.json and README.md.",
+    "historical_recipe_evidence": "See make/m3/collections/wrappers/composition-20261017/recipe/evidence/RESULTS.json and README.md.",
     "current_receiver_compile_and_runtime": "NOT_RUN_IN_THIS_SESSION",
     "promotion_status": "DRAFT"
   }

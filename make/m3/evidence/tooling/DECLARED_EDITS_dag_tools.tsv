@@ -1,3 +1,3 @@
 file	before	after	reason
-m3/backports/README.md	-Dexec.mainClass=com.m3.tooling.dag.M3OrchestrationProjectionMain \	-Dexec.mainClass=jdk.m3.tooling.dag.OrchestrationProjectionMain \	the launch line named the pre-relocation package com.m3; the class is jdk.m3.tooling.dag.OrchestrationProjectionMain
-m3/tooling/backport-dag/README.md	-Dexec.mainClass=com.m3.tooling.dag.M3BackportPacketMain \	-Dexec.mainClass=jdk.m3.tooling.dag.BackportPacketMain \	the launch line named the pre-relocation package com.m3; the class is jdk.m3.tooling.dag.BackportPacketMain
+make/m3/backports/README.md	-Dexec.mainClass=com.m3.tooling.dag.M3OrchestrationProjectionMain \	-Dexec.mainClass=jdk.m3.tooling.dag.OrchestrationProjectionMain \	the launch line named the pre-relocation package com.m3; the class is jdk.m3.tooling.dag.OrchestrationProjectionMain
+make/m3/tooling/backport-dag/README.md	-Dexec.mainClass=com.m3.tooling.dag.M3BackportPacketMain \	-Dexec.mainClass=jdk.m3.tooling.dag.BackportPacketMain \	the launch line named the pre-relocation package com.m3; the class is jdk.m3.tooling.dag.BackportPacketMain

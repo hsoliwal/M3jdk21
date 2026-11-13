@@ -5,29 +5,29 @@ on:
     branches:
       - "m3/jep485-opt-in-control-20261005"
     paths:
-      - "m3/backports/recipes/jep-485-gatherers/**"
-      - "m3/backports/JEP_CATALOGUE.tsv"
-      - "m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv"
-      - "m3/tooling/recipe-catalogue.tsv"
-      - "m3/tooling/migration-recipes/**"
-      - "m3/tooling/backport-dag/**"
-      - "m3/migration/prepare_immutable_inputs.py"
-      - "m3/migration/recipe.py"
-      - "m3/tooling/migration-recipes/verification/ci8891-20261006/prepared-inputs/**"
-      - "m3/tooling/migration-recipes/verification/ci8891-20261006/bridge-875/**"
+      - "make/m3/backports/recipes/jep-485-gatherers/**"
+      - "make/m3/backports/JEP_CATALOGUE.tsv"
+      - "make/m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv"
+      - "make/m3/tooling/recipe-catalogue.tsv"
+      - "make/m3/tooling/migration-recipes/**"
+      - "make/m3/tooling/backport-dag/**"
+      - "make/m3/migration/prepare_immutable_inputs.py"
+      - "make/m3/migration/recipe.py"
+      - "make/m3/tooling/migration-recipes/verification/ci8891-20261006/prepared-inputs/**"
+      - "make/m3/tooling/migration-recipes/verification/ci8891-20261006/bridge-875/**"
       - ".github/workflows/m3-jep485-stream-gatherers-optin.yml"
   pull_request:
     paths:
-      - "m3/backports/recipes/jep-485-gatherers/**"
-      - "m3/backports/JEP_CATALOGUE.tsv"
-      - "m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv"
-      - "m3/tooling/recipe-catalogue.tsv"
-      - "m3/tooling/migration-recipes/**"
-      - "m3/tooling/backport-dag/**"
-      - "m3/migration/prepare_immutable_inputs.py"
-      - "m3/migration/recipe.py"
-      - "m3/tooling/migration-recipes/verification/ci8891-20261006/prepared-inputs/**"
-      - "m3/tooling/migration-recipes/verification/ci8891-20261006/bridge-875/**"
+      - "make/m3/backports/recipes/jep-485-gatherers/**"
+      - "make/m3/backports/JEP_CATALOGUE.tsv"
+      - "make/m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv"
+      - "make/m3/tooling/recipe-catalogue.tsv"
+      - "make/m3/tooling/migration-recipes/**"
+      - "make/m3/tooling/backport-dag/**"
+      - "make/m3/migration/prepare_immutable_inputs.py"
+      - "make/m3/migration/recipe.py"
+      - "make/m3/tooling/migration-recipes/verification/ci8891-20261006/prepared-inputs/**"
+      - "make/m3/tooling/migration-recipes/verification/ci8891-20261006/bridge-875/**"
       - ".github/workflows/m3-jep485-stream-gatherers-optin.yml"
   workflow_dispatch:
 
@@ -59,14 +59,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m py_compile             m3/backports/recipes/jep-485-gatherers/materialize.py             m3/backports/recipes/jep-485-gatherers/test_materialize.py
-          python3 m3/backports/recipes/jep-485-gatherers/test_materialize.py
+          python3 -m py_compile             make/m3/backports/recipes/jep-485-gatherers/materialize.py             make/m3/backports/recipes/jep-485-gatherers/test_materialize.py
+          python3 make/m3/backports/recipes/jep-485-gatherers/test_materialize.py
 
       - name: 3 - Prove OpenRewrite replay scope and fixed point
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3Jep485StreamGatherersBackportRecipeTest,M3RecipeScopeDeclarationTest             test
+          mvn -B -ntp -f make/m3/tooling/migration-recipes/pom.xml             -Dtest=M3Jep485StreamGatherersBackportRecipeTest,M3RecipeScopeDeclarationTest             test
 
       - name: 4 - Prove Java21 identity policy remains opt-in
         shell: bash
@@ -75,9 +75,9 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
 
-          catalogue = Path("m3/backports/JEP_CATALOGUE.tsv").read_text(encoding="utf-8").splitlines()
-          priority = Path("m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv").read_text(encoding="utf-8").splitlines()
-          policy = Path("m3/backports/recipes/jep-485-gatherers/POLICY.tsv").read_text(encoding="utf-8").splitlines()
+          catalogue = Path("make/m3/backports/JEP_CATALOGUE.tsv").read_text(encoding="utf-8").splitlines()
+          priority = Path("make/m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv").read_text(encoding="utf-8").splitlines()
+          policy = Path("make/m3/backports/recipes/jep-485-gatherers/POLICY.tsv").read_text(encoding="utf-8").splitlines()
 
           catalogue_rows = [line.split("\t") for line in catalogue[1:] if line.startswith("24\t485\t")]
           assert len(catalogue_rows) == 1, catalogue_rows
@@ -102,23 +102,23 @@ jobs:
 
       - name: Prepare exact historical packet input
         shell: bash
-        run: python3 -S m3/migration/prepare_immutable_inputs.py --root .
+        run: python3 -S make/m3/migration/prepare_immutable_inputs.py --root .
 
       - name: Build and install the complete DAG dependency reactor
-        run: mvn -B -ntp -f m3/pom.xml -pl tooling/backport-dag -am install
+        run: mvn -B -ntp -f make/m3/pom.xml -pl tooling/backport-dag -am install
 
       - name: 5 - Validate packet and atom evidence
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=jdk.m3.tooling.dag.M3BackportPacketMain             -Dexec.args="$PWD/m3/backports/recipes/jep-485-gatherers/packet.tsv $PWD/m3/backports/recipes/jep-485-gatherers/atom-evidence.tsv"             exec:java
+          mvn -B -ntp -f make/m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=jdk.m3.tooling.dag.M3BackportPacketMain             -Dexec.args="$PWD/make/m3/backports/recipes/jep-485-gatherers/packet.tsv $PWD/make/m3/backports/recipes/jep-485-gatherers/atom-evidence.tsv"             exec:java
 
       - name: 6 - Project exact packet to Camel Airflow and Drools
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p target/jep485-projection
-          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=jdk.m3.tooling.dag.M3OrchestrationProjectionMain             -Dexec.args="$PWD/m3/backports/recipes/jep-485-gatherers/packet.tsv $PWD/target/jep485-projection $PWD/m3/backports/recipes/jep-485-gatherers/atom-evidence.tsv"             exec:java
+          mvn -B -ntp -f make/m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=jdk.m3.tooling.dag.M3OrchestrationProjectionMain             -Dexec.args="$PWD/make/m3/backports/recipes/jep-485-gatherers/packet.tsv $PWD/target/jep485-projection $PWD/make/m3/backports/recipes/jep-485-gatherers/atom-evidence.tsv"             exec:java
           test -s target/jep485-projection/M3BackportRoutes.java
           test -s target/jep485-projection/m3_backport_dag.py
           test -s target/jep485-projection/m3_backport_rules.drl
@@ -128,8 +128,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f m3/backports/pom.xml verify
-          python3 m3/backports/program_status.py --root .             --json-out target/jep485-program-status.json             --tsv-out target/jep485-program-status.tsv
+          mvn -B -ntp -f make/m3/backports/pom.xml verify
+          python3 make/m3/backports/program_status.py --root .             --json-out target/jep485-program-status.json             --tsv-out target/jep485-program-status.tsv
 
       - name: 8 - Upload recipe DAG evidence
         if: always()
@@ -138,7 +138,7 @@ jobs:
           name: jep485-optin-recipe-dag-${{ github.run_id }}
           path: |
             target/jep485-projection
-            m3/backports/recipes/jep-485-gatherers/POLICY.tsv
+            make/m3/backports/recipes/jep-485-gatherers/POLICY.tsv
             target/jep485-program-status.json
             target/jep485-program-status.tsv
           if-no-files-found: warn
@@ -162,15 +162,15 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p $RUNNER_TEMP/jep485-proof
-          python3 m3/backports/recipes/jep-485-gatherers/materialize.py             --root "$PWD"             --mode check             --receipt $RUNNER_TEMP/jep485-proof/preimage.tsv
+          python3 make/m3/backports/recipes/jep-485-gatherers/materialize.py             --root "$PWD"             --mode check             --receipt $RUNNER_TEMP/jep485-proof/preimage.tsv
           test -z "$(git status --porcelain=v1 -uall)"
 
       - name: 2 - Materialize opt-in candidate in ephemeral checkout
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/backports/recipes/jep-485-gatherers/materialize.py             --root "$PWD"             --mode apply             --acknowledge-opt-in-se-api JEP485             --receipt $RUNNER_TEMP/jep485-proof/apply.tsv
-          python3 m3/backports/recipes/jep-485-gatherers/materialize.py             --root "$PWD"             --mode verify-post             --receipt $RUNNER_TEMP/jep485-proof/postimage.tsv
+          python3 make/m3/backports/recipes/jep-485-gatherers/materialize.py             --root "$PWD"             --mode apply             --acknowledge-opt-in-se-api JEP485             --receipt $RUNNER_TEMP/jep485-proof/apply.tsv
+          python3 make/m3/backports/recipes/jep-485-gatherers/materialize.py             --root "$PWD"             --mode verify-post             --receipt $RUNNER_TEMP/jep485-proof/postimage.tsv
           git diff --check
 
       - name: 3 - Prove only manifest-declared product paths changed
@@ -182,7 +182,7 @@ jobs:
           import subprocess
 
           manifest = Path(
-              "m3/tooling/migration-recipes/src/main/resources/"
+              "make/m3/tooling/migration-recipes/src/main/resources/"
               "jdk/m3/rewrite/backport/jdk21-hash-pinned/"
               "jdk24-jep485-stream-gatherers/manifest.tsv"
           )

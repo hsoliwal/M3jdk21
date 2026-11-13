@@ -10,7 +10,7 @@ import sys
 
 sys.dont_write_bytecode = True
 repo = Path(sys.argv[1])
-pack = repo / "m3/tooling/module-packs/jackson"
+pack = repo / "make/m3/tooling/module-packs/jackson"
 spec = importlib.util.spec_from_file_location("m3_jackson_pack_build", pack / "build.py")
 build = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(build)

@@ -30,31 +30,31 @@
   "additional_runtime_iterator_cases": 8,
   "immutable_V1_files": [
     {
-      "path": "m3/collections/recipe/owned-apache-bidimap-20261017/engine-src/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "path": "make/m3/collections/recipe/owned-apache-bidimap-20261017/engine-src/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "sha256": "9dc65793cb1f4fb20866f99f4e5d0043d54734aa03cf0fe297c0cadbba2d1c37"
     },
     {
-      "path": "m3/collections/recipe/owned-apache-bidimap-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-apache-bidimap/M3BidiMap.java.txt",
+      "path": "make/m3/collections/recipe/owned-apache-bidimap-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-apache-bidimap/M3BidiMap.java.txt",
       "sha256": "e296581ad9e8b7e9fab4a35d9667a1ab5f4143b342af7bc6aacf1a8c98d4879b"
     },
     {
-      "path": "m3/collections/recipe/owned-apache-bidimap-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-apache-bidimap/M3BidiMapSelfTest.java.txt",
+      "path": "make/m3/collections/recipe/owned-apache-bidimap-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-apache-bidimap/M3BidiMapSelfTest.java.txt",
       "sha256": "1c171bc2d22b5371290472feb78fe074a67f016e46c3bc6f6c4d083b7f357576"
     },
     {
-      "path": "m3/collections/recipe/owned-apache-bidimap-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-apache-bidimap/manifest.tsv",
+      "path": "make/m3/collections/recipe/owned-apache-bidimap-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-apache-bidimap/manifest.tsv",
       "sha256": "cdd62527eda72fb947656b3e760eed61e2320793cdb00430623506afa8a1095a"
     },
     {
-      "path": "m3/collections/recipe/owned-apache-bidimap-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-apache-bidimap/source-receipt.tsv",
+      "path": "make/m3/collections/recipe/owned-apache-bidimap-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-apache-bidimap/source-receipt.tsv",
       "sha256": "271d02025cbb5b1e0ccb8eaadc1126a91b675da1dbedd42f29368649fdf56560"
     },
     {
-      "path": "m3/collections/recipe/owned-apache-bidimap-20261017/src/main/resources/META-INF/rewrite/m3-owned-apache-bidimap.yml",
+      "path": "make/m3/collections/recipe/owned-apache-bidimap-20261017/src/main/resources/META-INF/rewrite/m3-owned-apache-bidimap.yml",
       "sha256": "981f4a1e62543648d06dc954e9fe3418cbe648a41a9c379b781fae4f5fff7c77"
     },
     {
-      "path": "m3/collections/recipe/owned-apache-bidimap-20261017/src/test/java/jdk/internal/m3/rewrite/M3OwnedApacheBidiMapRecipeTest.java",
+      "path": "make/m3/collections/recipe/owned-apache-bidimap-20261017/src/test/java/jdk/internal/m3/rewrite/M3OwnedApacheBidiMapRecipeTest.java",
       "sha256": "9d5da88b58250b2a74783910e5733d5320a0d4782e69305a72cf151dfe88cab5"
     }
   ]

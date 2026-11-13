@@ -5,10 +5,10 @@ on:
   pull_request:
     paths:
       - 'AGENTS.md'
-      - 'm3/docs/name-mapping.json'
-      - 'm3/docs/name-mapping.schema.json'
-      - 'm3/migration/requirements.txt'
-      - 'm3/compatibility/check_public_names.py'
+      - 'doc/m3/name-mapping.json'
+      - 'doc/m3/name-mapping.schema.json'
+      - 'make/m3/migration/requirements.txt'
+      - 'make/m3/compatibility/check_public_names.py'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/arrays/**'
       - 'src/java.base/share/classes/java/util/Arrays.java'
       - 'src/java.base/share/classes/java/lang/Object.java'
@@ -20,8 +20,8 @@ on:
       - 'src/java.base/share/classes/java/security/SHA256Adapter.java'
       - 'test/jdk/java/lang/Object/SHA256ObjectAdapterTest.java'
       - 'test/jdk/java/lang/Object/libSHA256ObjectAdapterTest.c'
-      - 'm3/docs/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md'
-      - 'm3/tooling/name-contract/**'
+      - 'doc/m3/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md'
+      - 'make/m3/tooling/name-contract/**'
       - '.github/workflows/m3jdk21-name-contract.yml'
   workflow_dispatch:
 permissions:
@@ -41,12 +41,12 @@ jobs:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             AGENTS.md
-            m3/docs/name-mapping.json
-            m3/docs/name-mapping.schema.json
-            m3/migration/requirements.txt
-            m3/docs/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md
-            m3/tooling/name-contract/**
-            m3/compatibility/check_public_names.py
+            doc/m3/name-mapping.json
+            doc/m3/name-mapping.schema.json
+            make/m3/migration/requirements.txt
+            doc/m3/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md
+            make/m3/tooling/name-contract/**
+            make/m3/compatibility/check_public_names.py
             src/jdk.m3.collections/share/classes/jdk/m3/arrays/**
             make/m3/arrays/**
             src/jdk.m3.collections/share/native/libm3arrays/**
@@ -81,7 +81,7 @@ jobs:
             src/java.base/share/native/libjava/m3_state_relation.h
             src/jdk.compiler/share/classes/com/sun/tools/javac/m3/**
             m3/algorithms/src/jdk/m3/algorithm/PrefixZ.java
-            m3/tooling/migration-recipes/src/**
+            make/m3/tooling/migration-recipes/src/**
             m3/fs/src/main/java/jdk/m3/fs/**
             test/jdk/java/lang/String/M3StringHierarchicalRegexTest.java
             m3/collections/implementations/guava-evicting-queue/src/main/java/jdk/m3/collections/guava/M3EvictingQueue.java
@@ -109,11 +109,11 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install pinned naming schema test dependency
-        run: python3 -m pip install -r m3/migration/requirements.txt
+        run: python3 -m pip install -r make/m3/migration/requirements.txt
       - name: Canonical name and package mapping gate
-        run: python3 m3/tooling/name-contract/check.py
+        run: python3 make/m3/tooling/name-contract/check.py
       - name: Canonical target class and JNI owner census
-        run: python3 m3/tooling/name-contract/audit.py --strict
+        run: python3 make/m3/tooling/name-contract/audit.py --strict
       - name: Adversarial source-queue refusal tests
         if: always()
-        run: python3 -m unittest discover -s m3/tooling/name-contract -p 'test_*.py' -v
+        run: python3 -m unittest discover -s make/m3/tooling/name-contract -p 'test_*.py' -v

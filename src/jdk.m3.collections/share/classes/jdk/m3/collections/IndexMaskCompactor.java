@@ -727,7 +727,7 @@ public final class IndexMaskCompactor {
     private static native int[] selectNative(int[] orderedRows, byte[] rowStates,
                                               int requiredMask);
 
-    //FLLDCIM: RELOCATE-MERGE begin - donor blob c4f8c5865932 at ac5feec00a6d; recipe m3/collections/recipe/entryless-lane-kernel-20261106/relocate.py v3
+    //FLLDCIM: RELOCATE-MERGE begin - donor blob c4f8c5865932 at ac5feec00a6d; recipe make/m3/collections/recipe/entryless-lane-kernel-20261106/relocate.py v3
     public static final int LIVE = 1;
 
     public static boolean laneKernelNativeAvailable() { return NativeLaneKernel.AVAILABLE; }

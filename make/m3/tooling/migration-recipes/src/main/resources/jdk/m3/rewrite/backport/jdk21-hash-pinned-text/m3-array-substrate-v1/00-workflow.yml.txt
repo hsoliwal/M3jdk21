@@ -5,13 +5,13 @@ on:
   pull_request:
     paths:
       - 'm3/arrays/**'
-      - 'm3/docs/m3jdk21-porting-invariant.md'
-      - 'm3/docs/name-mapping.json'
-      - 'm3/docs/m3-array-port-map.tsv'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-array-substrate.yml'
+      - 'doc/m3/m3jdk21-porting-invariant.md'
+      - 'doc/m3/name-mapping.json'
+      - 'doc/m3/m3-array-port-map.tsv'
+      - 'make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-array-substrate.yml'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-array-substrate-v1/**'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-array-substrate-v1/**'
-      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3ArraySubstrateRecipeTest.java'
+      - 'make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3ArraySubstrateRecipeTest.java'
       - '.github/workflows/m3-array-substrate.yml'
   workflow_dispatch:
 
@@ -31,7 +31,7 @@ jobs:
           cache: maven
       - name: Recipe fixed point and refusal
         run: >
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
+          mvn -B -ntp -f make/m3/tooling/migration-recipes/pom.xml
           -Dtest=M3ArraySubstrateRecipeTest
           test
 
@@ -48,7 +48,7 @@ jobs:
       - name: Immutable array contracts
         run: mvn -B -ntp -f m3/arrays/pom.xml test
       - name: Mapping JSON syntax
-        run: python3 -m json.tool m3/docs/name-mapping.json >/dev/null
+        run: python3 -m json.tool doc/m3/name-mapping.json >/dev/null
       - name: Provenance JSON syntax
         run: python3 -m json.tool m3/arrays/provenance.json >/dev/null
 

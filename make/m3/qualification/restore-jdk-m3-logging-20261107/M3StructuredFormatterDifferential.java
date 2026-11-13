@@ -17,7 +17,7 @@ import java.util.logging.LogRecord;
 import jdk.m3.logging.M3StructuredFormatter;
 
 /**
- * Differential fixture for the jdk.m3.logging restore (recipe m3/qualification/restore-jdk-m3-logging-20261107):
+ * Differential fixture for the jdk.m3.logging restore (recipe make/m3/qualification/restore-jdk-m3-logging-20261107):
  * writes the formatter's output over a fixed record set and the escape/unescape atoms over a fixed string set to the
  * file named by args[0] (UTF-8). Run once against the module compiled from the receiver head 7c23ff3612ef and once
  * against the module compiled from this branch; the two files must be byte-identical. Every input is fixed (instants,

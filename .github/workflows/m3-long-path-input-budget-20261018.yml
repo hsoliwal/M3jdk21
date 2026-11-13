@@ -2,7 +2,7 @@ name: M3 long-path bounded-input Java21 JNI proof
 on:
   pull_request:
     paths:
-      - 'm3/collections/qualification/m3-long-path-input-budget-20261018/**'
+      - 'make/m3/collections/qualification/m3-long-path-input-budget-20261018/**'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongIndexPathBudget.java'
       - 'test/jdk/jdk/m3/collections/M3LongIndexPathBudgetSelfTest.java'
       - '.github/workflows/m3-long-path-input-budget-20261018.yml'
@@ -26,7 +26,7 @@ jobs:
       - name: Compile Maven source-admission recipe
         run: |
           set -euo pipefail
-          ROOT=m3/collections/qualification/m3-long-path-input-budget-20261018/recipe
+          ROOT=make/m3/collections/qualification/m3-long-path-input-budget-20261018/recipe
           mvn -B -ntp -f "$ROOT/pom.xml" package
           java -cp "$ROOT/target/classes" jdk.internal.m3.M3LongPathInputBudgetRecipeSelfTest "$ROOT/templates"
           java -cp "$ROOT/target/classes" jdk.internal.m3.M3LongPathInputBudgetRecipe --check . "$ROOT/templates"

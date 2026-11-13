@@ -2,8 +2,8 @@
 import hashlib
 from pathlib import Path
 
-ROOT=Path(__file__).resolve().parents[4]
-RECIPE=ROOT/'m3/collections/recipe/zero-mask-window-copy-20261017'
+ROOT=Path(__file__).resolve().parents[5]
+RECIPE=ROOT/'make/m3/collections/recipe/zero-mask-window-copy-20261017'
 RES=RECIPE/'src/main/resources/jdk/internal/m3/rewrite'
 EXPECTED={
  'm3/collections/src/test/java/jdk/m3/collections/M3IndexMaskCompactorSelfTest.java':('native-zero-mask-window-java','hash-pinned-java','86eb2c9a436aac6f6e5b99f5c275636ca272d849dd08aa07f8796271167c63a1','c81601d08eb3d7442d4fe952a9ba580da17bd3dbe74fb581daa04ebf2f575996'),

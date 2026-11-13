@@ -5,7 +5,7 @@ on:
     paths:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexedLiveView.java'
       - 'test/jdk/jdk/m3/collections/IndexedLiveSortedSpliterator*.java'
-      - 'm3/pom.xml'
+      - 'make/m3/pom.xml'
       - '.github/workflows/indexed-live-sorted-spliterator.yml'
   workflow_dispatch:
 permissions:
@@ -31,7 +31,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f m3/pom.xml -Pm3-extended -pl :m3-collections -am \
+          mvn -B -ntp -f make/m3/pom.xml -Pm3-extended -pl :m3-collections -am \
             -Dsurefire.failIfNoSpecifiedTests=false \
             -Dtest=IndexedLiveSortedSpliteratorTest test
           report=m3/collections/target/surefire-reports/TEST-jdk.m3.collections.IndexedLiveSortedSpliteratorTest.xml

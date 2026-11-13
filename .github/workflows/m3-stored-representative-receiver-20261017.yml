@@ -9,7 +9,7 @@ on:
       - "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredViews.java"
       - "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3MutableFilteredViews.java"
       - "test/jdk/jdk/m3/collections/M3StoredRepresentative*"
-      - "m3/collections/qualification/stored-representative-20261017/**"
+      - "make/m3/collections/qualification/stored-representative-20261017/**"
       - ".github/workflows/m3-stored-representative-receiver-20261017.yml"
 
 permissions:
@@ -32,15 +32,15 @@ jobs:
             src/jdk.m3.collections/share/classes/jdk/m3/collections/M3MutableFilteredViews.java
             test/jdk/jdk/m3/collections/M3StoredRepresentativeContract.java
             test/jdk/jdk/m3/collections/M3StoredRepresentativeTest.java
-            m3/collections/qualification/stored-representative-20261017/
-            m3/collections/verify_donation.py
-            m3/collections/recipe/filtered-sorted-views-20261017/manifest.tsv
-            m3/collections/recipe/stored-representative-20261017/manifest.tsv
+            make/m3/collections/qualification/stored-representative-20261017/
+            make/m3/collections/verify_donation.py
+            make/m3/collections/recipe/filtered-sorted-views-20261017/manifest.tsv
+            make/m3/collections/recipe/stored-representative-20261017/manifest.tsv
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: "21"
       - name: Compile and test installed exact Java21 owner and interpreter variant
-        run: bash m3/collections/qualification/stored-representative-20261017/verify.sh
+        run: bash make/m3/collections/qualification/stored-representative-20261017/verify.sh
       # The canonical Maven/OpenRewrite source-first recipe must also qualify
       # in Synexia; this thin job does not claim a whole-module Maven/JNI pass.

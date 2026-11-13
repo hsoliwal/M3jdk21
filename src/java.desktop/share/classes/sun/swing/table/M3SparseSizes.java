@@ -49,7 +49,7 @@ import sun.security.action.GetBooleanAction;
  * Above {@link #LIMIT} custom sizes the sparse form loses (an insert in the middle of the lanes and the
  * prefix rebuilt after each change are O(k), against O(log n) for the stock tree), so the store moves to a
  * dense {@code SizeSequence}, the stock structure, and stays there until {@link #setSizes}. Design and
- * proof: m3/docs/swing-viewport/DESIGN.md section 15.
+ * proof: doc/m3/swing-viewport/DESIGN.md section 15.
  */
 //FLLDCIM: M3 swing-viewport leaf 8 - JTable row heights as one sparse store per order, no dense copies
 public final class M3SparseSizes {

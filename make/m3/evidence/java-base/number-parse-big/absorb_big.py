@@ -1,6 +1,6 @@
 """absorb_big.py <donor dir> <java.base classes dir> : NUMBER_PARSE_ABSORB v2 (big numbers) - the FastDoubleParser 1.0.90
 classes behind JavaBigDecimalParser / JavaBigIntegerParser join java.base as jdk.internal.math.M3* next to the 13
-classes absorbed on 2026-10-31 (TYPE_RENAME.tsv of m3/tooling/jdk-superset/number-parse): package
+classes absorbed on 2026-10-31 (TYPE_RENAME.tsv of make/m3/tooling/jdk-superset/number-parse): package
 ch.randelshofer.fastdoubleparser -> jdk.internal.math, type T -> M3T for every absorbed type (old and new), a donor
 facade named only in Javadoc ({@link JavaBigDecimalParser}) becomes {@code ...}. Prints one ABSORB row per class and
 the TYPE_RENAME rows it adds."""

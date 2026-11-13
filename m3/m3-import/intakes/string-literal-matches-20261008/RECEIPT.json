@@ -18,7 +18,7 @@
     "regex syntax ownership stays out of M3String"
   ],
   "verification": {
-    "source_checker": "m3/runtime-integration/check-m3string-literal-matches.py",
+    "source_checker": "make/m3/runtime-integration/check-m3string-literal-matches.py",
     "jtreg": "test/jdk/java/lang/String/M3StringLiteralMatchesTest.java",
     "jdk_build": "NOT_RUN",
     "jtreg_run": "NOT_RUN",

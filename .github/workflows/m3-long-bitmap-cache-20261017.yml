@@ -5,7 +5,7 @@ on:
     paths:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongBitmapFilteredSnapshot.java'
       - 'test/jdk/jdk/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java'
-      - 'm3/collections/qualification/m3-long-bitmap-cache-20261017/**'
+      - 'make/m3/collections/qualification/m3-long-bitmap-cache-20261017/**'
       - '.github/workflows/m3-long-bitmap-cache-20261017.yml'
   workflow_dispatch:
 concurrency:
@@ -24,7 +24,7 @@ jobs:
       - name: Qualify canonical source-sealed Maven recipe
         run: |
           set -eu
-          DIR=m3/collections/qualification/m3-long-bitmap-cache-20261017/recipe
+          DIR=make/m3/collections/qualification/m3-long-bitmap-cache-20261017/recipe
           mvn -B -ntp -f "$DIR/pom.xml" verify
           java -cp "$DIR/target/classes" jdk.internal.m3.M3LongBitmapFilteredSnapshotRecipe --check .
       - name: Strict Java 21 selected-source contract gate

@@ -7,7 +7,7 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SourceSignalQualityFactory.java'
       - 'test/jdk/jdk/m3/collections/M3Signal*.java'
       - 'test/jdk/jdk/m3/collections/M3LongTreeSetMaskCompactionContract.java'
-      - 'm3/collections/qualification/signal-*/**'
+      - 'make/m3/collections/qualification/signal-*/**'
       - '.github/workflows/m3-signal-nearest-boolean-20261025.yml'
   workflow_dispatch:
 permissions:
@@ -31,7 +31,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          receipt="m3/collections/qualification/signal-consolidation-20261025/RECEIVER.tsv"
+          receipt="make/m3/collections/qualification/signal-consolidation-20261025/RECEIVER.tsv"
           test -s "$receipt"
           count=0
           previous=""

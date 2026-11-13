@@ -16,7 +16,7 @@ import unittest
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[2]
+ROOT = HERE.parents[3]
 SOURCE_ID = "dictlang.numbers.0-10000"
 SOURCE_REVISION = "64a2ea61c73b548413fed6686a9daeeb0b9b0564"
 EXPECTED_COUNT = 10_001
@@ -32,14 +32,14 @@ FIXTURE_COLUMNS = (
 )
 
 SPEC = importlib.util.spec_from_file_location(
-    "m3_export", ROOT / "m3/runtime-integration/export-m3-lexicon.py")
+    "m3_export", ROOT / "make/m3/runtime-integration/export-m3-lexicon.py")
 EXPORT = importlib.util.module_from_spec(SPEC)
 assert SPEC.loader is not None
 sys.modules[SPEC.name] = EXPORT
 SPEC.loader.exec_module(EXPORT)
 
 VERIFY_SPEC = importlib.util.spec_from_file_location(
-    "m3_verify", ROOT / "m3/runtime-integration/verify-m3-lexicon.py")
+    "m3_verify", ROOT / "make/m3/runtime-integration/verify-m3-lexicon.py")
 VERIFY = importlib.util.module_from_spec(VERIFY_SPEC)
 assert VERIFY_SPEC.loader is not None
 sys.modules[VERIFY_SPEC.name] = VERIFY
@@ -136,7 +136,7 @@ class M3NumberSpaceExportTest(unittest.TestCase):
             field_map = ROOT / "m3/lexicon/m3-precompute-field-map.tsv"
             output_a = root / "export-a"
             output_b = root / "export-b"
-            exporter = ROOT / "m3/runtime-integration/export-m3-lexicon.py"
+            exporter = ROOT / "make/m3/runtime-integration/export-m3-lexicon.py"
 
             def run_export(output: Path, records: Path = records_path) -> dict[str, object]:
                 completed = subprocess.run([
@@ -193,7 +193,7 @@ class M3NumberSpaceExportTest(unittest.TestCase):
                     "source_revision": SOURCE_REVISION,
                 }, json.loads(row["precompute_payload"]))
 
-            verifier = ROOT / "m3/runtime-integration/verify-m3-lexicon.py"
+            verifier = ROOT / "make/m3/runtime-integration/verify-m3-lexicon.py"
             for output in (output_a, output_b):
                 completed = subprocess.run(
                     [sys.executable, "-B", str(verifier), str(output)],

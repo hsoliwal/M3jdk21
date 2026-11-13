@@ -45,11 +45,11 @@ source drift and a second-run fixed point are tested by `M3JdkExecutionFollowthr
 Source-seal checks do not establish general behavior equivalence or measured coverage.
 
 ```
-python3 -S m3/tooling/module-packs/build_pack.py --jdk /path/to/jdk21 \
+python3 -S make/m3/tooling/module-packs/build_pack.py --jdk /path/to/jdk21 \
   --profile developer --out /fresh/developer
-python3 -S m3/tooling/module-packs/verify_backport.py --jdk /path/to/jdk21 \
+python3 -S make/m3/tooling/module-packs/verify_backport.py --jdk /path/to/jdk21 \
   --out /fresh/password
-mvn -o -B -ntp -f m3/tooling/module-packs/verification/jdk-execution/pom.xml clean verify
+mvn -o -B -ntp -f make/m3/tooling/module-packs/verification/jdk-execution/pom.xml clean verify
 ```
 
 The Maven aggregator includes the existing migration-recipe and module-pack reactors and their

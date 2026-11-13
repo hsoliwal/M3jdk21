@@ -12,7 +12,7 @@ import java.util.HexFormat;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /** Independent no-native 20,000-record proof of source/content-bound replay. */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/m3-pmem-sdk/src/test/java/com/synexia/m3/pmem/PmemTaskReplaySmokeTest.java blob ead08b77f59d; recipe m3/optane/recipe/pmem-task-log-replay-20261106/relocate.py v3
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/m3-pmem-sdk/src/test/java/com/synexia/m3/pmem/PmemTaskReplaySmokeTest.java blob ead08b77f59d; recipe make/m3/optane/recipe/pmem-task-log-replay-20261106/relocate.py v3
 public final class PmemTaskReplaySmokeTest {
     private static final String SOURCE = "a".repeat(64);
     private static final byte[] OUTPUT = "candidate-review-only".getBytes(StandardCharsets.UTF_8);

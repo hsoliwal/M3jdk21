@@ -74,7 +74,7 @@ public final class A3Alg {
     public static List<Row> load(Path root) throws IOException {
         Path path =
                 A3Fs.root(root)
-                        .resolve("m3/backports/ALGORITHM_CATALOGUE.tsv");
+                        .resolve("make/m3/backports/ALGORITHM_CATALOGUE.tsv");
         if (!Files.isRegularFile(path)) {
             throw new IOException("missing A3 algorithm catalogue: " + path);
         }

@@ -20,17 +20,17 @@ SOURCE_REF = "refs/heads/aix/jcc-canonical-integration-20261005"
 E2 = "df06cdee5a8526f573b3ad89622824d0b49e2f25"
 E2_TREE = "e3e079ba36553bae517c3e53a5a834b24452a82e"
 CRATE_NAME = "jcc-source-final-handoff-20261005"
-PREFIX = Path("m3/tooling/migration-recipes")
+PREFIX = Path("make/m3/tooling/migration-recipes")
 CRATE = OVERLAY / PREFIX / "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text" / CRATE_NAME
 E2_CRATE = CRATE.parent / "jcc-handoff-20261005"
 TASK = PREFIX / "tasks" / CRATE_NAME
 LAB = "m3.jcc-recipe-laboratory"
 JNI = "m3.jcc-java-jni-regression"
 IDS = (LAB, JNI)
-MAPPING = "m3/docs/name-mapping.json"
-BINDING = "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json"
-COVERAGE = "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv"
-DOCUMENT = "m3/docs/jcc-source-handoff.md"
+MAPPING = "doc/m3/name-mapping.json"
+BINDING = "make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json"
+COVERAGE = "make/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv"
+DOCUMENT = "doc/m3/jcc-source-handoff.md"
 
 
 def digest(data: bytes) -> str:

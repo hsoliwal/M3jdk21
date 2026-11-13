@@ -39,7 +39,7 @@ payload was rejected because it adds an unnecessary allocation and changes the
 failure boundary.
 
 The searchable entry `ALG-NUMERIC-COPY-RUNS` in
-`m3/backports/ALGORITHM_CATALOGUE.tsv` and the adjacent `CATALOGUE.json` record
+`make/m3/backports/ALGORITHM_CATALOGUE.tsv` and the adjacent `CATALOGUE.json` record
 the candidates, exact source owners, license decisions and required proof.
 LeetCode, HackerRank and GeeksforGeeks supply problem-category references;
 their solutions and editorials are not copied. The existing first-party

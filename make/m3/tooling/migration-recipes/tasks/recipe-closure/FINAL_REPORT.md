@@ -34,6 +34,6 @@ The existing catalogue reports82 JEP rows:43 decided-no-direct-backport and39 pe
 
 ## Reproduction and evidence
 
-Run mvn -B -ntp -fae -f m3/pom.xml clean verify with a full JDK21 and the pinned dependencies. In this execution, offline Maven used the recovered cache. Run the configured migration JaCoCo report/check separately to inspect coverage after failing tests; this never makes the failed tests optional. Run bash m3/tooling/migration-recipes/tasks/recipe-closure/verify-descriptor.sh <JDK21_HOME> <repository> <new-output-directory> for the scoped runtime experiment.
+Run mvn -B -ntp -fae -f make/m3/pom.xml clean verify with a full JDK21 and the pinned dependencies. In this execution, offline Maven used the recovered cache. Run the configured migration JaCoCo report/check separately to inspect coverage after failing tests; this never makes the failed tests optional. Run bash make/m3/tooling/migration-recipes/tasks/recipe-closure/verify-descriptor.sh <JDK21_HOME> <repository> <new-output-directory> for the scoped runtime experiment.
 
 JUNIT.tsv, FAILURES.tsv and COVERAGE.tsv are mechanically extracted from the final reports. SOURCE_SEALS.tsv identifies the code and templates. EVIDENCE_SHA256.tsv binds raw logs, prior counterexamples and XML reports in the companion downloadable bundle. Their existence and this prose do not independently certify acceptance.

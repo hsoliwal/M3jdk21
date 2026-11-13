@@ -8,8 +8,8 @@ from pathlib import Path
 import tempfile
 
 CRATE = Path(__file__).resolve().parent
-ROOT = CRATE.parents[2]
-spec = importlib.util.spec_from_file_location('sealed', ROOT / 'm3/migration/recipe.py')
+ROOT = CRATE.parents[3]
+spec = importlib.util.spec_from_file_location('sealed', ROOT / 'make/m3/migration/recipe.py')
 sealed = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(sealed)
 plan_path = CRATE / 'plan.json'
@@ -34,7 +34,7 @@ def retained_mapping(current, expected):
 sealed.observe_guards(ROOT, plan)
 for row in rows:
     current = (ROOT / row['path']).read_bytes()
-    if row['path'] == 'm3/docs/name-mapping.json':
+    if row['path'] == 'doc/m3/name-mapping.json':
         retained_mapping(json.loads(current), json.loads(row['after']))
     else:
         assert current == row['after'], row['path']
@@ -43,7 +43,7 @@ for row in rows:
 
 # Only the existing TQ record may advance; preserve the other 51 records and
 # every top-level authority field, including all 20 gates. No status promotion.
-mapping = next(row for row in rows if row['path'] == 'm3/docs/name-mapping.json')
+mapping = next(row for row in rows if row['path'] == 'doc/m3/name-mapping.json')
 before_map = json.loads(mapping['before'])
 after_map = json.loads(mapping['after'])
 identity = 'm3.counterpart.MIndexRegexTrigramQuery'

@@ -15,14 +15,14 @@
   "target_base": "bb66a8c16642a4e898dbc5fc7c3af0d5ed572136",
   "outputs": [
     {
-      "path": "m3/runtime-integration/check-m3string-invariants.py",
+      "path": "make/m3/runtime-integration/check-m3string-invariants.py",
       "before_sha256": "16d78a045be8fea93dfd665568fe747db35e3dbc43264192b4446ccaf97ed688",
       "before_git_blob": "75b10f957f8004bb780a9befa4f1910a372524e5",
       "after_sha256": "7c5304aa001eacb53dc47b6911c7536b295269a298cd5351e76d1be7a6d6728d",
       "after_git_blob": "bc60472ba646850f43064b915e2a5c8c8343db85"
     },
     {
-      "path": "m3/runtime-integration/test_string_layout.py",
+      "path": "make/m3/runtime-integration/test_string_layout.py",
       "before_sha256": "1eb253a2d5350af9f8d6ace012ac2628f1908615e2eb32edf837d9f41aba14fb",
       "before_git_blob": "0451ca1ca3ff5e5113b4d482d855f46fd7a4e454",
       "after_sha256": "b9de683cf94eb59f050d3b1343980eb0971c0ce581377eaab19faec8f08a24dd",

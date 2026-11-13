@@ -35,7 +35,7 @@ gate in order; use that exact output and source revision for this workload.
 Generate fixture outside the repository; its SHA-256 is printed:
 
 ~~~sh
-python3 m3/tooling/module-packs/jackson/bench/generate_json_100m.py /scratch/m3-100m.json
+python3 make/m3/tooling/module-packs/jackson/bench/generate_json_100m.py /scratch/m3-100m.json
 ~~~
 
 From the repository root on a POSIX Java 21 host with an already qualified

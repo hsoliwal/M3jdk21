@@ -16,21 +16,21 @@ import unittest
 
 CRATE = Path(__file__).resolve().parents[3]
 ROOT = CRATE.parents[2]
-MAP = 'm3/docs/name-mapping.json'
+MAP = 'doc/m3/name-mapping.json'
 WORKFLOW = '.github/workflows/m3-lane28.yml'
 CURRENT_WORKFLOW_SHA = '2d6a9817ac4c24db803b02cfc1baa91fc38397fea813163acbab7e2ed0cec82d'
 CURRENT_MAP_SHA = '1d061025b81107d52e5c2fa52f1ad156b4d941c32bbd2fba725caebefc92b21b'
 CURRENT_SOURCE_SHA = {
     WORKFLOW: CURRENT_WORKFLOW_SHA,
     '.github/workflows/m3-tq.yml': 'ee42d6c6c11e06f7c4032407668baea5453dbdeb19104cd2aaf53d7c07e33e84',
-    'm3/tooling/tq/verify-plan.py': '4bbcd11479a302c65944e44de96be8b2e70fc128376cb03423649dbb0e7d8125',
+    'make/m3/tooling/tq/verify-plan.py': '4bbcd11479a302c65944e44de96be8b2e70fc128376cb03423649dbb0e7d8125',
 }
 
 
 class Ic0ContextTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        spec = importlib.util.spec_from_file_location('tsc_sealed', ROOT / 'm3/migration/recipe.py')
+        spec = importlib.util.spec_from_file_location('tsc_sealed', ROOT / 'make/m3/migration/recipe.py')
         sealed = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(sealed)
         cls.plan, cls.rows = sealed.sealed_plan(CRATE / 'plan.json')
@@ -56,7 +56,7 @@ class Ic0ContextTest(unittest.TestCase):
             **{str(ROOT / name): body for name, body in cls.current_sources.items()},
             str(ROOT / WORKFLOW): cls.current_workflow,
             str(CRATE / 'verify-plan.py'): (CRATE / 'verify-plan.py').read_bytes(),
-            str(ROOT / 'm3/migration/recipe.py'): (ROOT / 'm3/migration/recipe.py').read_bytes(),
+            str(ROOT / 'make/m3/migration/recipe.py'): (ROOT / 'make/m3/migration/recipe.py').read_bytes(),
             str(ROOT / MAP): cls.current_map,
             **{str(CRATE / 'target/generated' / p): b for p, b in cls.generated.items()},
         }
@@ -71,7 +71,7 @@ class Ic0ContextTest(unittest.TestCase):
         self.temporary = tempfile.TemporaryDirectory(prefix='m3-tsc-context-')
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name)
-        self.crate = self.root / 'm3/tooling/tq-sync'
+        self.crate = self.root / 'make/m3/tooling/tq-sync'
         self.crate.mkdir(parents=True)
         shutil.copyfile(CRATE / 'plan.json', self.crate / 'plan.json')
         shutil.copyfile(CRATE / 'verify-plan.py', self.crate / 'verify-plan.py')
@@ -80,9 +80,9 @@ class Ic0ContextTest(unittest.TestCase):
             path = self.root / guard['path']
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_bytes((ROOT / guard['path']).read_bytes())
-        recipe = self.root / 'm3/migration/recipe.py'
+        recipe = self.root / 'make/m3/migration/recipe.py'
         recipe.parent.mkdir(parents=True, exist_ok=True)
-        recipe.write_bytes((ROOT / 'm3/migration/recipe.py').read_bytes())
+        recipe.write_bytes((ROOT / 'make/m3/migration/recipe.py').read_bytes())
         for name, body in self.generated.items():
             for path in (self.root / name, self.crate / 'target/generated' / name):
                 path.parent.mkdir(parents=True, exist_ok=True)
@@ -101,7 +101,7 @@ class Ic0ContextTest(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stderr.decode(errors='replace'))
             self.assertEqual(result.stderr, b'')
             after = self.snapshot()
-            custody = 'm3/tooling/tq-sync/target/custody.json'
+            custody = 'make/m3/tooling/tq-sync/target/custody.json'
             self.assertEqual(set(after) - set(before), {custody})
             self.assertEqual({k: v for k, v in after.items() if k != custody}, before)
             record = json.loads(after[custody])
@@ -266,7 +266,7 @@ class Ic0ContextTest(unittest.TestCase):
 
     def test_symlink_ancestor_is_refused(self):
         self.composed()
-        path = self.root / 'm3/docs'
+        path = self.root / 'doc/m3'
         backing = self.root / 'retained-documents'
         path.rename(backing)
         path.symlink_to(backing, target_is_directory=True)

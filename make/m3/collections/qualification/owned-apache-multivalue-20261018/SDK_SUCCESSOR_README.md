@@ -17,9 +17,9 @@ The receiving host uses Rewrite 8.17.1 and Jupiter 5.10.2. Local tests use their
 To reproduce from a checkout with the exact current source:
 
 ```sh
-python -I -S -B m3/collections/qualification/owned-apache-multivalue-20261018/verify_source_binding_successor_v3.py --jar /scratch/commons-collections4-4.5.0.jar --args /scratch/owned.args
-python -I -S -B m3/collections/qualification/owned-apache-multivalue-20261018/probe_source_binding_successor_v3.py --jar /scratch/commons-collections4-4.5.0.jar --work /scratch/new-guard-probe
-mvn -f m3/collections/recipe/sdk-binding-successor-v3-20261018/pom.xml -Dmaven.repo.local=/scratch/m2 -Dm3.recipe.output=/scratch/recipe-target test
+python -I -S -B make/m3/collections/qualification/owned-apache-multivalue-20261018/verify_source_binding_successor_v3.py --jar /scratch/commons-collections4-4.5.0.jar --args /scratch/owned.args
+python -I -S -B make/m3/collections/qualification/owned-apache-multivalue-20261018/probe_source_binding_successor_v3.py --jar /scratch/commons-collections4-4.5.0.jar --work /scratch/new-guard-probe
+mvn -f make/m3/collections/recipe/sdk-binding-successor-v3-20261018/pom.xml -Dmaven.repo.local=/scratch/m2 -Dm3.recipe.output=/scratch/recipe-target test
 ```
 
 Use an existing explicit scratch parent outside the checkout with at least 8 GiB free after bounded output. The provider is the pinned Commons Collections 4.5.0 artifact, not a renamed compatible jar. Paths and custody are in the sealed receipt; retained historical resources and their raw-byte inventory permit subsequent passes to reuse this qualification instead of reseeding old evidence.

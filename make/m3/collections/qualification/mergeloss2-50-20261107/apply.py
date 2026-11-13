@@ -17,7 +17,7 @@ reproduces the origin edit byte-for-byte plus one //FLLDCIM: MRL anchor per file
 build it in a full-tree layout and in each sparse closure. While DECISION.tsv says KEEP_LOCAL it refuses to write
 into its own repository; --root may name a probe copy.
 
-Derived from m3/collections/qualification/mergeloss-20-20261107/apply.py v1 (anchored edits, every anchor exactly
+Derived from make/m3/collections/qualification/mergeloss-20-20261107/apply.py v1 (anchored edits, every anchor exactly
 once, pinned preimage blob, refuses drift, idempotent; --check writes nothing).
 
 usage: python -I apply.py [--root DIR] [--check]

@@ -3,12 +3,12 @@ name: M3 Bulk Scope Registry Closure
 on:
   pull_request:
     paths:
-      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3RecipeScopeRegistry.java'
-      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/scope/M3ScopeCoverageClosureTest.java'
-      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3BulkScopeRegistryRecoveryReceiverRecipe.java'
-      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BulkScopeRegistryRecoveryReceiverRecipeTest.java'
+      - 'make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3RecipeScopeRegistry.java'
+      - 'make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/scope/M3ScopeCoverageClosureTest.java'
+      - 'make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3BulkScopeRegistryRecoveryReceiverRecipe.java'
+      - 'make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BulkScopeRegistryRecoveryReceiverRecipeTest.java'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-bulk-scope-recovery-20261014/**'
-      - 'm3/tooling/migration-recipes/tasks/bulk-scope-registry-recovery/**'
+      - 'make/m3/tooling/migration-recipes/tasks/bulk-scope-registry-recovery/**'
       - '.github/workflows/m3-bulk-scope-registry-closure.yml'
   workflow_dispatch:
 
@@ -30,7 +30,7 @@ jobs:
           from pathlib import Path
           from hashlib import sha256
           root = Path('.')
-          base = root/'m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-bulk-scope-recovery-20261014/'
+          base = root/'make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-bulk-scope-recovery-20261014/'
           rows = [x.split('\t') for x in (base/'manifest.tsv').read_text().splitlines() if x]
           assert len(rows) == 2
           for target, before, after, resource in rows:
@@ -60,14 +60,14 @@ jobs:
         run: bash m3/m3-import/pure-int-recipe-custody/install.sh "$PWD"
       - name: Execute full registry and receipt tests
         run: >
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
+          mvn -B -ntp -f make/m3/tooling/migration-recipes/pom.xml
           -Dtest=M3ScopeCoverageClosureTest,M3BulkScopeRegistryRecoveryReceiverRecipeTest
           test
       - name: Install target recipe classpath
-        run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -DskipTests install
+        run: mvn -B -ntp -f make/m3/tooling/migration-recipes/pom.xml -DskipTests install
       - name: Require OpenRewrite fixed point
         run: >
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
+          mvn -B -ntp -f make/m3/tooling/migration-recipes/pom.xml
           -Drewrite.recipeArtifactCoordinates=jdk.m3.tooling:migration-recipes:0.1.0-SNAPSHOT
           -Drewrite.activeRecipes=jdk.m3.rewrite.backport.M3BulkScopeRegistryRecoveryReceiverRecipe
           rewrite:dryRun

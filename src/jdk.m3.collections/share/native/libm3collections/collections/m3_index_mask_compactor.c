@@ -706,7 +706,7 @@ Java_jdk_m3_collections_IndexMaskCompactor_selectPositionsPageNative(
     return (((jlong)end) << 32) | (jlong)(unsigned int)written;
 }
 
-//FLLDCIM: RELOCATE-MERGE begin - donor blob b20d77f0f2d8 at ac5feec00a6d; recipe m3/collections/recipe/entryless-lane-kernel-20261106/relocate.py v3
+//FLLDCIM: RELOCATE-MERGE begin - donor blob b20d77f0f2d8 at ac5feec00a6d; recipe make/m3/collections/recipe/entryless-lane-kernel-20261106/relocate.py v3
 /* Candidate-only batched primitive lane oracle. Does not allocate or pin Java object arrays. */
 #include <jni.h>
 #include <stdint.h>

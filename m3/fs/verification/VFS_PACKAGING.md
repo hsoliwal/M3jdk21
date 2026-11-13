@@ -98,7 +98,7 @@ The helper refuses source inventory/hash drift, missing dependencies, dependency
 hash drift, descriptor drift, changed legal bytes, and an occupied output path.
 It compiles all current M3FS product Java sources plus the selected VFS core,
 creates the modular product JAR with the POM's OSGi metadata, and invokes
-`m3/tooling/jmod-recipes/tools/jmod_pack.py` without replacing or modifying it.
+`make/m3/tooling/jmod-recipes/tools/jmod_pack.py` without replacing or modifying it.
 
 `JMOD_IMAGE.tsv` carries the product JAR and four dependencies with published
 descriptors. `DESCRIPTOR_MANIFEST.tsv` carries Commons Logging with exactly one

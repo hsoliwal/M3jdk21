@@ -4,11 +4,11 @@ name: M3JDK21 source-bound JNI declaration/export join
 on:
   pull_request:
     paths:
-      - 'm3/tooling/atom-census/**'
+      - 'make/m3/tooling/atom-census/**'
       - '.github/workflows/m3jdk21-jni-export-join-20261101.yml'
   push:
     paths:
-      - 'm3/tooling/atom-census/**'
+      - 'make/m3/tooling/atom-census/**'
       - '.github/workflows/m3jdk21-jni-export-join-20261101.yml'
 permissions:
   contents: read
@@ -32,7 +32,7 @@ jobs:
           from pathlib import Path
           import hashlib
           import json
-          root=Path('m3/tooling/atom-census')
+          root=Path('make/m3/tooling/atom-census')
           receipt=json.loads((root/'contract/M3_JNI_EXPORT_JOIN_RECEIPT.json').read_text())
           assert receipt['schema']=='M3_JNI_EXPORT_JOIN_RECEIVER/1'
           required={
@@ -55,9 +55,9 @@ jobs:
           PY
       - name: Java21 strict compile, 28 JNI source/header checks, GCC and Clang Xcheck:jni
         shell: bash
-        run: bash m3/tooling/atom-census/verify-jni-export-join.sh
+        run: bash make/m3/tooling/atom-census/verify-jni-export-join.sh
       - name: Real JUnit / Surefire in the existing atom census Maven owner
         shell: bash
-        run: mvn -B -ntp -f m3/tooling/atom-census/pom.xml -Dtest=JniExportJoinTest test
+        run: mvn -B -ntp -f make/m3/tooling/atom-census/pom.xml -Dtest=JniExportJoinTest test
       - name: Preserve product qualification hold
         run: echo 'TESTED_JAVA21_TOOL_NOT_SOURCE_BUILT_M3JDK21_ABI_JTREG_JCK'

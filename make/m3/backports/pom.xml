@@ -34,7 +34,7 @@
               <arguments>
                 <argument>verify.py</argument>
                 <argument>--root</argument>
-                <argument>${project.basedir}/../..</argument>
+                <argument>${project.basedir}/../../..</argument>
               </arguments>
             </configuration>
           </execution>
@@ -66,7 +66,7 @@
               <arguments>
                 <argument>backport_recipe_dag.py</argument>
                 <argument>--root</argument>
-                <argument>${project.basedir}/../..</argument>
+                <argument>${project.basedir}/../../..</argument>
                 <argument>--out</argument>
                 <argument>${project.build.directory}/backport-recipe-dag.tsv</argument>
                 <argument>--summary</argument>
@@ -90,7 +90,7 @@
               <arguments>
                 <argument>backport_execution_waves.py</argument>
                 <argument>--root</argument>
-                <argument>${project.basedir}/../..</argument>
+                <argument>${project.basedir}/../../..</argument>
                 <argument>--tsv-out</argument>
                 <argument>${project.build.directory}/backport-execution-waves.tsv</argument>
                 <argument>--json-out</argument>
@@ -110,7 +110,7 @@
               <arguments>
                 <argument>backport_programme_status.py</argument>
                 <argument>--root</argument>
-                <argument>${project.basedir}/../..</argument>
+                <argument>${project.basedir}/../../..</argument>
                 <argument>--tsv-out</argument>
                 <argument>${project.build.directory}/backport-programme-status.tsv</argument>
                 <argument>--json-out</argument>
@@ -130,7 +130,7 @@
               <arguments>
                 <argument>jep_source_witness.py</argument>
                 <argument>--root</argument>
-                <argument>${project.basedir}/../..</argument>
+                <argument>${project.basedir}/../../..</argument>
                 <argument>--out</argument>
                 <argument>${project.build.directory}/jep-source-witness.tsv</argument>
               </arguments>
@@ -148,7 +148,7 @@
               <arguments>
                 <argument>all_jep_matrix.py</argument>
                 <argument>--root</argument>
-                <argument>${project.basedir}/../..</argument>
+                <argument>${project.basedir}/../../..</argument>
                 <argument>--out</argument>
                 <argument>${project.build.directory}/all-jep-matrix.tsv</argument>
                 <argument>--json-out</argument>
@@ -168,7 +168,7 @@
               <arguments>
                 <argument>program_status.py</argument>
                 <argument>--root</argument>
-                <argument>${project.basedir}/../..</argument>
+                <argument>${project.basedir}/../../..</argument>
                 <argument>--json-out</argument>
                 <argument>${project.build.directory}/program-status.json</argument>
                 <argument>--tsv-out</argument>

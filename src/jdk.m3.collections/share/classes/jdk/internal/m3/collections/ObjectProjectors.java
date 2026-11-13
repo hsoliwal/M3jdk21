@@ -9,7 +9,7 @@ import java.util.function.Function;
 import java.util.function.ToLongFunction;
 
 /** Safe explicit projection factories. No factory implicitly calls Object.toString(). */
-//FLLDCIM: RELOCATE - donor blob 59388d348356 at commit 3385d79a2968 (repository, path, URL and digests: m3/collections/qualification/object-signal-20261107/PROVENANCE.tsv); recipe m3/collections/qualification/object-signal-20261107/relocate.py v1
+//FLLDCIM: RELOCATE - donor blob 59388d348356 at commit 3385d79a2968 (repository, path, URL and digests: make/m3/collections/qualification/object-signal-20261107/PROVENANCE.tsv); recipe make/m3/collections/qualification/object-signal-20261107/relocate.py v1
 public final class ObjectProjectors {
     private ObjectProjectors() { }
 

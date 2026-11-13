@@ -6,7 +6,7 @@ m3_arrays native library is red (master 0b7482c3263: 1682 tests, 5 failures, 49 
 298 classes, 22 failing classes; the same 22 classes with identical per-class counts at 927e79becaf (1,633 tests,
 the first enumeration, #2530), f5a7f80b2c0, cf0429ac1d4 and e65f0f664fa; on 97631687006 and the push base 9b7269e00fd
 m3/collections does not compile under its -Werror (#2561), see GATES.tsv push_base_*).
-Since #2524 `collections` is a default module of `m3/pom.xml`, so this reddens the default reactor verify as well.
+Since #2524 `collections` is a default module of `make/m3/pom.xml`, so this reddens the default reactor verify as well.
 
 ## Pattern copied from m3/search/pom.xml
 

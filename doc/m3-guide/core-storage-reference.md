@@ -20,7 +20,7 @@ authoring/review pass**. Hosted CI is separate evidence tied to its exact commit
 and workflow scope; this statement does not erase earlier or later CI results.
 
 The [descriptor][MODULE] exports `com.m3.text` as an independent experimental
-module. [m3/build.sh][BUILD] requires `M3_JDK` as its tool-directory variable,
+module. [make/m3/build.sh][BUILD] requires `M3_JDK` as its tool-directory variable,
 compiles with `--release 21`, builds
 `com.m3.text.jar`, and defines four FoundationTest launch modes. Those are source
 instructions, not executed receipts. The script does not probe or certify the

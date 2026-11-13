@@ -26,7 +26,7 @@
       "before_git_blob": "1c012956c7ae68a9651144f4643a6013a3cdb9a2",
       "before_sha256": "ef145204809b2ab1b3fa79b75ce740dfddb1d536f98f65b14ba50eea057fc4fc",
       "before_source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/files/current/m3/history/README.md",
-      "path": "m3/history/README.md",
+      "path": "make/m3/history/README.md",
       "source_capture": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/calls/current_m3__history__README.md.json",
       "source_capture_sha256": "bcc33dc81bf34892a61bf2fdf4f13f0324573bc4765dff6146b00461105f5e1f",
       "template": "README.md.txt"
@@ -39,7 +39,7 @@
       "before_git_blob": "8c02223c7af8ca2e415103dcdea930d6ad9c7beb",
       "before_sha256": "14c29126da786a7456a55ce400f5a800dfe53693e6c329e7342bf2fabb087e11",
       "before_source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/files/current/m3/history/retention-pom.xml",
-      "path": "m3/history/retention-pom.xml",
+      "path": "make/m3/history/retention-pom.xml",
       "source_capture": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/calls/current_m3__history__retention-pom.xml.json",
       "source_capture_sha256": "47e48349946a858d8fe20642659abb27b97e738659928b0d4f269d69e06897b5",
       "template": "retention-pom.xml.txt"
@@ -52,7 +52,7 @@
       "before_git_blob": "3bb3bba9a620c253ac1ad82736a923e0660c6ae2",
       "before_sha256": "06c713d051ce0411b9c8a4faeafeaa3245b75ff4350e8f9afd94f15dd86451e4",
       "before_source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/files/current/m3/history/retention.py",
-      "path": "m3/history/retention.py",
+      "path": "make/m3/history/retention.py",
       "source_capture": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/calls/current_m3__history__retention.py.json",
       "source_capture_sha256": "3f5f8a37eef1e8fcddd5d52622ac461512a82838fa727959f9c1eab7f2337f20",
       "template": "retention.py.txt"
@@ -65,7 +65,7 @@
       "before_git_blob": "87e86678a7ea7238f9f30c3974dd1962e26a71a4",
       "before_sha256": "68ae3ae0be2f45f9746c9573bf949698221a99696715065a14a293729c022a0c",
       "before_source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/files/current/m3/history/test_retention.py",
-      "path": "m3/history/test_retention.py",
+      "path": "make/m3/history/test_retention.py",
       "source_capture": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/calls/current_m3__history__test_retention.py.json",
       "source_capture_sha256": "cad6fa1b4fdc1bc248eb68115f0dc299fa3987d6d738c309b64915ef22530cf8",
       "template": "test_retention.py.txt"

@@ -23,10 +23,10 @@ class M3A3ReceiverMainAuthorityRecipeTest {
     private static final String ROOT =
             "/jdk/m3/rewrite/backport/jdk21-hash-pinned/" + CRATE + "/";
     private static final String ENGINE =
-            "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/"
+            "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/"
                     + "M3Jdk21HashPinnedSnapshotRecipe.java";
     private static final String AUTHORITY_TEST =
-            "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/"
+            "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/"
                     + "M3A3M3ReceiverAuthorityTest.java";
 
     @Test

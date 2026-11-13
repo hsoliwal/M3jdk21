@@ -1,6 +1,6 @@
-# Receipt: m3/tooling/search (com.synexia sorted batch bounds, Java 21 + C17/JNI)
+# Receipt: make/m3/tooling/search (com.synexia sorted batch bounds, Java 21 + C17/JNI)
 
-New module `m3/tooling/search` (`jdk.m3.tooling.search`). It is an opt-in tooling primitive: lower and upper
+New module `make/m3/tooling/search` (`jdk.m3.tooling.search`). It is an opt-in tooling primitive: lower and upper
 bounds for a sorted `int[]` or `long[]` segment, answered for a whole batch of keys. Java and JNI implementations
 are kept at parity. `java.util.Arrays.binarySearch` is not touched.
 

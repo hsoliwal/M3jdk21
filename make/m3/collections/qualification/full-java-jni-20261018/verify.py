@@ -10,7 +10,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 import zipfile
 
-ROOT = Path(__file__).resolve().parents[4]
+ROOT = Path(__file__).resolve().parents[5]
 MODULE = ROOT / 'm3/collections'
 OUT = MODULE / 'target/full-java-jni'
 JAVA = Path(os.environ['JAVA_HOME'])

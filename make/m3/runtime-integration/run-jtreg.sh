@@ -2,7 +2,7 @@
 # Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
 # SPDX-License-Identifier: Apache-2.0
 set -euo pipefail
-root=$(cd "$(dirname "$0")/../.." && pwd)
+root=$(cd "$(dirname "$0")/../../.." && pwd)
 : "${M3_TEST_JDK:?Set matched runtime image}"
 : "${M3_BOOT_JDK:?Set private original Java21}"
 : "${JTREG_JAR:?Set jtreg.jar path}"

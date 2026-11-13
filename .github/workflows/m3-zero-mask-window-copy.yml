@@ -5,9 +5,9 @@ on:
     paths:
       - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c'
       - 'test/jdk/jdk/m3/collections/M3IndexMaskCompactorSelfTest.java'
-      - 'm3/collections/recipe/zero-mask-window-copy-20261017/**'
-      - 'm3/collections/qualification/zero-mask-window-copy-20261017/**'
-      - 'm3/collections/qualification/zero-mask-window-successor-20261031/**'
+      - 'make/m3/collections/recipe/zero-mask-window-copy-20261017/**'
+      - 'make/m3/collections/qualification/zero-mask-window-copy-20261017/**'
+      - 'make/m3/collections/qualification/zero-mask-window-successor-20261031/**'
       - 'test/jdk/jdk/m3/collections/M3ZeroMaskSuccessorTest.java'
       - 'test/jdk/jdk/m3/collections/M3ZeroMaskSuccessorIT.java'
       - '.github/workflows/m3-zero-mask-window-copy.yml'
@@ -44,8 +44,8 @@ jobs:
       - name: Refuse recipe/output drift and prove named recipe
         run: |
           set -euxo pipefail
-          python3 -I -S -B m3/collections/qualification/zero-mask-window-successor-20261031/verify_source_v2.py --product . --original-checkout old-zero-mask-20261017
-          mvn -B -ntp -f m3/collections/recipe/zero-mask-window-copy-20261017/pom.xml test
+          python3 -I -S -B make/m3/collections/qualification/zero-mask-window-successor-20261031/verify_source_v2.py --product . --original-checkout old-zero-mask-20261017
+          mvn -B -ntp -f make/m3/collections/recipe/zero-mask-window-copy-20261017/pom.xml test
       - name: Strict Java and Java-only contract
         run: |
           set -euxo pipefail
@@ -74,8 +74,8 @@ jobs:
       - name: Count state reads and reject original implementation
         run: |
           set -euxo pipefail
-          QUAL=m3/collections/qualification/zero-mask-window-copy-20261017
-          BEFORE="$PWD/m3/collections/recipe/zero-mask-window-copy-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/native-zero-mask-window-c/m3_index_mask_compactor.c.before"
+          QUAL=make/m3/collections/qualification/zero-mask-window-copy-20261017
+          BEFORE="$PWD/make/m3/collections/recipe/zero-mask-window-copy-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/native-zero-mask-window-c/m3_index_mask_compactor.c.before"
           gcc -std=c17 -O2 -Wall -Wextra -Werror -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" "$QUAL/mask_zero_read_probe.c" -o proof/native/read-probe
           proof/native/read-probe
           gcc -std=c17 -O2 -Wall -Wextra -Werror -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" "-DM3_MASK_SOURCE=\"$BEFORE\"" "$QUAL/mask_zero_read_probe.c" -o proof/native/original-probe
@@ -89,7 +89,7 @@ jobs:
             -Djava.library.path="$PWD/proof/native" \
             --module-path "proof/core:proof/m3-arrays.jar" \
             --module jdk.m3.collections/jdk.m3.collections.M3IndexMaskCompactorSelfTest --native
-          python3 -I -S -B m3/collections/qualification/zero-mask-window-successor-20261031/verify_source_v2.py --product . --original-checkout old-zero-mask-20261017
+          python3 -I -S -B make/m3/collections/qualification/zero-mask-window-successor-20261031/verify_source_v2.py --product . --original-checkout old-zero-mask-20261017
           git diff --exit-code
       - name: Execute independently named Java and required-JNI JUnit atoms
         run: |
@@ -127,4 +127,4 @@ jobs:
           name: m3-zero-mask-${{ github.event.pull_request.head.sha }}
           path: |
             proof/
-            m3/collections/recipe/zero-mask-window-copy-20261017/target/surefire-reports/
+            make/m3/collections/recipe/zero-mask-window-copy-20261017/target/surefire-reports/

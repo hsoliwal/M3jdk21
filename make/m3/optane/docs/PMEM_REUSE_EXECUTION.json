@@ -30,7 +30,7 @@
     "runtimeAndTestOutputs": 13,
     "documentationMetadataOutputs": 2,
     "coveredNonSelfOutputs": 15,
-    "receiptPath": "m3/optane/docs/PMEM_REUSE_EXECUTION.json",
+    "receiptPath": "make/m3/optane/docs/PMEM_REUSE_EXECUTION.json",
     "receiptSelfHashExcluded": true,
     "receiptMaterialization": "Separate actual canonical text-recipe stage after immutable source A; own postimage and remote identity verified by the private B-stage manifest and readback",
     "receiptRecipeId": "pmem-reuse-receipt-m3jdk-text-20261112",
@@ -115,13 +115,13 @@
         "gitBlobSha": "03a3d989126ee3000ace66846641b626f0893ade"
       },
       {
-        "path": "m3/optane/PORT-MAPPING.pending.json",
+        "path": "make/m3/optane/PORT-MAPPING.pending.json",
         "sha256": "f65ec107463566c355fffc843b3e662cded808ecedfd229092311f786da6daeb",
         "recipe": "pmem-reuse-docs-m3jdk-text-20261112",
         "gitBlobSha": "937c2b479b564425776288b9f42191c1c8fa7ac2"
       },
       {
-        "path": "m3/optane/docs/PMEM_AI_REUSE.md",
+        "path": "make/m3/optane/docs/PMEM_AI_REUSE.md",
         "sha256": "91fc4113aec9f44a1d56fafd1411163a83f9744baa702cd420a3e1e33fc6a8a7",
         "recipe": "pmem-reuse-docs-m3jdk-text-20261112",
         "gitBlobSha": "23df98551c3c1a2d5a58a2cc7de9712fce4249ee"

@@ -10,7 +10,7 @@
   <version>0.1.0-SNAPSHOT</version>
   <name>M3JDK :: Tooling :: Atom JIT gate</name>
   <description>jdk.m3.tooling.atomjit (automatic module org.m3jdk.tooling.atomjit): the per-atom JIT retest gate.
-    Ordered passes ATOMIZE (the M3 atom census, m3/tooling/atom-census) -> JIT (child JVM interpreted vs forced
+    Ordered passes ATOMIZE (the M3 atom census, make/m3/tooling/atom-census) -> JIT (child JVM interpreted vs forced
     compilation, digest equality plus a PrintCompilation witness) -> PATTERNIZE (census catalogue pattern and exact
     source digest) -> JIT retest; the serial per-atom phase ledger review (one JDK runtime root per plan); the
     whole-estate source work-order gate; the installed-image mask JIT probe and the M3IndexMaskCompactor JNI parity
@@ -24,7 +24,7 @@
     <junit.artifact.version>5.10.2</junit.artifact.version>
   </properties>
   <dependencies>
-    <!-- the atomizer: install it first (mvn -f m3/tooling/atom-census/pom.xml -DskipTests install) -->
+    <!-- the atomizer: install it first (mvn -f make/m3/tooling/atom-census/pom.xml -DskipTests install) -->
     <dependency>
       <groupId>jdk.m3.tooling</groupId>
       <artifactId>m3-atom-census</artifactId>
@@ -57,7 +57,7 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.2.5</version>
         <configuration>
-          <!-- classpath tooling like m3/tooling/atom-census (no module descriptor; the jar names its module) -->
+          <!-- classpath tooling like make/m3/tooling/atom-census (no module descriptor; the jar names its module) -->
           <useModulePath>false</useModulePath>
           <trimStackTrace>false</trimStackTrace>
           <failIfNoTests>true</failIfNoTests>

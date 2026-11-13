@@ -33,7 +33,7 @@ state), `hashFile(Path)` / `hashFile(Path, long)` (256 KiB direct-buffer `FileCh
 | superseded | `aacddfa8b7dca10d4a3ab5f658213046939f7234` = the live develop `synexia-fileindex/.../XXHash64.java` = the crate's PRE-image (`XXHash64.java.before.txt`): `new byte[32]` per stripe; one hunk apart (lines 288-290); OMIT row |
 | tests | `XXHash64StreamingTest` `e813c1ae9577`, `XXHash64StandaloneProof` `a5303cc84a1b`, `XXHash64AllocationProbe` `2b3d933711d9` (identical on the develop path and under retained-variants/pr14848) |
 | held | `third_party/lz4-java/.../StreamingXXHash64.java` `db1e88b4dcc5` and `XXHash64.java` `32572072b95a`: a second streaming family in the donor tree, NEC (not decided, nothing copied) |
-| recipe | `recipe/relocate.py` v4: `python -I m3/qualification/hash-xxhash64-streaming-20261106/recipe/relocate.py --donor-git <clone> --donor-rev ca1aafc4d94f [--check]` |
+| recipe | `recipe/relocate.py` v4: `python -I make/m3/qualification/hash-xxhash64-streaming-20261106/recipe/relocate.py --donor-git <clone> --donor-rev ca1aafc4d94f [--check]` |
 | map | `recipe/RELOCATION_MAP.tsv`: 4 FILE, 1 PACKAGE, 1 EXTERNAL, 4 TYPE, 3 UNNAMED, 1 NESTED, 3 LIFT, 4 REPLACE, 2 DROP (Lombok), 8 TOKEN, 5 INSERT, 1 OWNER, 4 OMIT, 2 NEC |
 | provenance | `recipe/PROVENANCE.tsv`: donor commit, blob, donor and target sha256 per FILE row (`body_match_renamed` = SPLIT for the owner, TRUE for the tests), OWNER pre/post sha256 |
 
@@ -48,7 +48,7 @@ donor's column-0 closing braces (whitespace only). Idempotent: `--check` reports
 
 ## Gates (2026-11-06, JDK 21.0.9; see GATES.tsv)
 
-`JAVA_HOME=<JDK 21> bash m3/qualification/hash-xxhash64-streaming-20261106/recipe/verify.sh <donor clone> ca1aafc4d94f9dd1ee288226dcca070cc60991c9 <scratch> <maven repo> 10000 <base>`
+`JAVA_HOME=<JDK 21> bash make/m3/qualification/hash-xxhash64-streaming-20261106/recipe/verify.sh <donor clone> ca1aafc4d94f9dd1ee288226dcca070cc60991c9 <scratch> <maven repo> 10000 <base>`
 
 | Gate | Result |
 |---|---|

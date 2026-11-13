@@ -21,7 +21,7 @@ weaken `check_synexia_full_borrow_receiver.py` or create a fabricated receipt.
 
 ## Verification
 
-Run `python3 m3/compatibility/check_m3_full_borrow_receiver.py` and the
+Run `python3 make/m3/compatibility/check_m3_full_borrow_receiver.py` and the
 full-borrow receiver workflow. All 32 families must remain present exactly
 once and source-only; this does not authorize implementation or runtime
 promotion.

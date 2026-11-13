@@ -4,7 +4,7 @@ index 4eb96c3..44090b0 100644
 +++ b/m3/tooling/module-packs/cpu-tools/OUTPUT_CONTRACT.tsv
 @@ -20,3 +20,4 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
  ${OUT}/BUILD_RECEIPT.json	Authoritative result of that exact build; requires status PASS and all declared gates	Produced by build.py; missing/FAILED is unqualified
- m3/evidence/cpu-tools-jmod-20261018/**	Published exact recipe, build and qualification receipts; generated tool evidence	Task evidence output; source payload remains sealed
+ make/m3/evidence/cpu-tools-jmod-20261018/**	Published exact recipe, build and qualification receipts; generated tool evidence	Task evidence output; source payload remains sealed
  ${OUT}/native/libm3textio.so; native-expected/libm3textio.so	Original compiled JNI and separate expected objcopy -g result; JMOD/member/linked hashes and native tool identities in BUILD_RECEIPT.json	Produced by build.py; original JNI C and existing packager unchanged
 +${OUT}/java-tmp/**	Scoped transient Java scratch for nested JMOD/jlink/native-strip operations; normalized path recorded in COMMANDS.json	Created by build.py for the packager command only; not a consumer runtime artifact
 diff --git a/m3/tooling/module-packs/cpu-tools/README.md b/m3/tooling/module-packs/cpu-tools/README.md

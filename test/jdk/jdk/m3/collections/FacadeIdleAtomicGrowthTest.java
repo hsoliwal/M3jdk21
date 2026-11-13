@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 
 /** Paired idle Object[]/long[] admission must be atomic across copy failure. */
-//FLLDCIM: RELOCATE - donor blob ea6e96263034 at ff83fd2a685b; recipe m3/collections/qualification/doop-facade-fixes-20261107/apply.py v1
+//FLLDCIM: RELOCATE - donor blob ea6e96263034 at ff83fd2a685b; recipe make/m3/collections/qualification/doop-facade-fixes-20261107/apply.py v1
 final class FacadeIdleAtomicGrowthTest {
     private static final class Cell {
         long id;

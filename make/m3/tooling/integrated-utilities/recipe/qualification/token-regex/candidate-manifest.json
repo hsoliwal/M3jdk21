@@ -2,25 +2,25 @@
   "base_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
   "targets": [
     {
-      "path": "m3/runtime-integration/token-regex/README.md",
+      "path": "make/m3/runtime-integration/token-regex/README.md",
       "candidate": "/workspace/scratch/0125adabf4e6/m3jdk21-work/token-candidates/postimages/m3/runtime-integration/token-regex/README.md",
       "pre_sha256": null,
       "post_sha256": "695ed953a1b31c3b382dca3cac2901e3d5071fe8328212a8ca166c3072db9a19"
     },
     {
-      "path": "m3/runtime-integration/token-regex/behavioral-atoms.json",
+      "path": "make/m3/runtime-integration/token-regex/behavioral-atoms.json",
       "candidate": "/workspace/scratch/0125adabf4e6/m3jdk21-work/token-candidates/postimages/m3/runtime-integration/token-regex/behavioral-atoms.json",
       "pre_sha256": null,
       "post_sha256": "97d379a6380173a759275dd55bc5f541ddc9d1771e29b40797556770542cdf20"
     },
     {
-      "path": "m3/runtime-integration/token-regex/contract-catalogue.json",
+      "path": "make/m3/runtime-integration/token-regex/contract-catalogue.json",
       "candidate": "/workspace/scratch/0125adabf4e6/m3jdk21-work/token-candidates/postimages/m3/runtime-integration/token-regex/contract-catalogue.json",
       "pre_sha256": null,
       "post_sha256": "b4b5279f88bed412a78cd533563b417b86b25fc19e9a0283f64d20ab8e686491"
     },
     {
-      "path": "m3/runtime-integration/token-regex/verify.py",
+      "path": "make/m3/runtime-integration/token-regex/verify.py",
       "candidate": "/workspace/scratch/0125adabf4e6/m3jdk21-work/token-candidates/postimages/m3/runtime-integration/token-regex/verify.py",
       "pre_sha256": null,
       "post_sha256": "0d605a28b5fd82374dbb19b2ae9f3d1fdc13dddb1dda52ccaed10bd780e39849"

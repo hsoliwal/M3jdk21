@@ -4,9 +4,9 @@ on:
   pull_request:
     paths:
       - ".github/workflows/m3jdk21-upstream-inventory.yml"
-      - "m3/backports/inventory.py"
-      - "m3/backports/compatibility_queue.py"
-      - "m3/backports/test_compatibility_queue.py"
+      - "make/m3/backports/inventory.py"
+      - "make/m3/backports/compatibility_queue.py"
+      - "make/m3/backports/test_compatibility_queue.py"
   workflow_dispatch:
 
 permissions:
@@ -60,17 +60,17 @@ jobs:
         shell: bash
         run: |
           mkdir -p inventory-output
-          python3 m3/backports/inventory.py             --repo upstream-jdk             --out inventory-output/UPSTREAM_CHANGES.tsv
+          python3 make/m3/backports/inventory.py             --repo upstream-jdk             --out inventory-output/UPSTREAM_CHANGES.tsv
 
       - name: Unit-test compatibility queue
         shell: bash
         run: |
-          python3 -m unittest -v m3/backports/test_compatibility_queue.py
+          python3 -m unittest -v make/m3/backports/test_compatibility_queue.py
 
       - name: Build deterministic compatibility proof queue
         shell: bash
         run: |
-          python3 m3/backports/compatibility_queue.py \
+          python3 make/m3/backports/compatibility_queue.py \
             --inventory inventory-output/UPSTREAM_CHANGES.tsv \
             --out inventory-output/COMPATIBILITY_QUEUE.tsv
           python3 - <<'PY'

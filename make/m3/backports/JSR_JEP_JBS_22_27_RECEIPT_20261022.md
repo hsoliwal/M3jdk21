@@ -73,7 +73,7 @@ Candidate normalized inventory: SHA-256 `7defa67185f4bb1c695ac3add006ede120153a4
 
 **Second repair needed:** the raw inventory contains a 191,224-character TSV line. The unmodified compatibility queue failed at Python's 131,072-byte default CSV field limit; a bounded process-local 262,144-byte field limit allowed generation. Canonical input-size handling and a regression fixture must be repaired and executed in Synexia; this run did not edit public programme source.
 
-**Actual focused checks:** `bash m3/backports/recipes/jdk-8357439/test_jcmd_completion.sh` **PASS** (Bash completion stub contract). The 198-test Python backport suite ran: **196 PASS, 2 FAIL**. Both failures were JDK-8364182 source-lineage gates: `src/hotspot/share/classfile/vmSymbols.hpp` is now SHA-256 `7e65d715fb0098213a28ec63e5c1150699062716eecf9e8db32bf8366df3fa08`, not the receipt's accepted target/superseded hashes. Current source still includes the security-properties symbol and added M3 String symbols; this is **not** an equivalence proof. A later [M3 String owner source commit](https://github.com/hsoliwal/M3jdk21/commit/4402dca8d07dc7a98eb70bc6d003a78a1f08803f) touches this file. Hold this JBS packet for independent source-history, canonical recipe and HotSpot/JNI tests.
+**Actual focused checks:** `bash make/m3/backports/recipes/jdk-8357439/test_jcmd_completion.sh` **PASS** (Bash completion stub contract). The 198-test Python backport suite ran: **196 PASS, 2 FAIL**. Both failures were JDK-8364182 source-lineage gates: `src/hotspot/share/classfile/vmSymbols.hpp` is now SHA-256 `7e65d715fb0098213a28ec63e5c1150699062716eecf9e8db32bf8366df3fa08`, not the receipt's accepted target/superseded hashes. Current source still includes the security-properties symbol and added M3 String symbols; this is **not** an equivalence proof. A later [M3 String owner source commit](https://github.com/hsoliwal/M3jdk21/commit/4402dca8d07dc7a98eb70bc6d003a78a1f08803f) touches this file. Hold this JBS packet for independent source-history, canonical recipe and HotSpot/JNI tests.
 
 **Next action:** repair these two ingestion/proof failures through the Synexia-owned source-sealed Maven/OpenRewrite/text recipe with adversarial numeric-prefix/multi-ID, wide-TSV and current-source fixtures, then replay against M3JDK21 and run authoritative product gates. No direct source acceptance or branch merge is authorized by this receipt.
 
@@ -160,7 +160,7 @@ state.
 | `test_inventory.py` | Real temporary-Git inventory, supported subject forms and unrelated-number decoys remain covered. | `f950084cc94b52df228f5d6ef4b49b61604140436b2697ff57160ce21da33486` |
 | `test_compatibility_queue.py` | Wide-field roundtrip, oversized-field refusal, limit restoration and retained classification behavior remain covered. | `ae5aa733bc812dbde1593e6d17cdc76fd16bf77a1fddf78fe5b02d61cff1c38e` |
 
-Executed against those exact receiver bytes, from `m3/backports`:
+Executed against those exact receiver bytes, from `make/m3/backports`:
 
 ```sh
 python3 -m unittest test_inventory test_compatibility_queue -v
@@ -193,18 +193,18 @@ are sizes of the existing ledgers, without a whole-repository coverage claim.
 | --- | ---: | --- |
 | [JEP catalogue](JEP_CATALOGUE.tsv) | 85 | 10 ordinary candidates, 19 high-risk candidates, 13 holds, 23 Java-21-baseline rejections and 20 superseded lineage rows. |
 | [JEP residue queue](JEP_RESIDUE_QUEUE.tsv) | 42 | 29 candidates and 13 holds; ten `MATERIALIZED_PACKET`, five `PACKET_EVIDENCE` and 27 `NO_RECIPE_EVIDENCE` labels. Materialization still requires the recorded target gates. |
-| [Operational migration map](../docs/name-mapping.json) | 76 records | Two `implemented-tested`, 32 `implemented-unverified`, 40 `pending` and two `blocked` labels. Each label retains its own recorded scope and evidence. |
+| [Operational migration map](../../../doc/m3/name-mapping.json) | 76 records | Two `implemented-tested`, 32 `implemented-unverified`, 40 `pending` and two `blocked` labels. Each label retains its own recorded scope and evidence. |
 
 Continue through those authorities and their existing DAG, execution-wave and
 programme-status owners. Some historical evidence paths refer to target-side
-recipe copies. The current [repository instructions](../../AGENTS.md) classify
+recipe copies. The current [repository instructions](../../../AGENTS.md) classify
 those copies as migration residue; canonical recipes remain in Synexia.
 
 Resolve the exact capability record before each package move. For example,
 `m3.arrays.packed.signed` and `m3.arrays.packed.vint64` currently name receiver
 paths under `src/jdk.m3.collections/share/classes/jdk/m3/arrays/packed/`.
 Their `implemented-unverified` status and remaining module/runtime gates carry
-forward. The existing [name and package contract](../docs/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md)
+forward. The existing [name and package contract](../../../doc/m3/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md)
 retains public Java SE names and separate provider contracts.
 
 ### Compatibility and remaining proof

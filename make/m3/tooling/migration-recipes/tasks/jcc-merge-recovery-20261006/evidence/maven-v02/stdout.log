@@ -28,7 +28,7 @@
 [INFO] Running com.m3.rewrite.backport.JccMergeRecoveryTest
 [ERROR] Tests run: 6, Failures: 1, Errors: 2, Skipped: 0, Time elapsed: 1.990 s <<< FAILURE! -- in com.m3.rewrite.backport.JccMergeRecoveryTest
 [ERROR] com.m3.rewrite.backport.JccMergeRecoveryTest.historicalConflictsAndDuplicateTargetsCannotPublishPartialHistory -- Time elapsed: 0.164 s <<< ERROR!
-java.lang.IllegalStateException: source drift: m3/migration/test/test_jcc_source_final_handoff_packet.py
+java.lang.IllegalStateException: source drift: make/m3/migration/test/test_jcc_source_final_handoff_packet.py
 	at com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe.requireAdmissible(M3Jdk21HashPinnedTextSnapshotRecipe.java:212)
 	at com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe.generate(M3Jdk21HashPinnedTextSnapshotRecipe.java:142)
 	at com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe.generate(M3Jdk21HashPinnedTextSnapshotRecipe.java:37)
@@ -85,7 +85,7 @@ java.lang.IllegalStateException: required JDK21 text source missing: .github/wor
 [ERROR]   JccMergeRecoveryTest.existingRecipeProduces449ExactOutputsAndFreshReplayMakesNoChanges:104 expected: <Markers(id=af9e669a-83f5-4c7b-b338-b74f2f4ccb6c, markers=[])> but was: <Markers(id=af9e669a-83f5-4c7b-b338-b74f2f4ccb6c, markers=[RecipesThatMadeChanges(id=b686c8ee-f2b1-40b6-b3dc-35e523da16c4, recipes=[[com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe@3cceba25]])])>
 [ERROR] Errors: 
 [ERROR]   JccMergeRecoveryTest.everyCurrentMissingOrDriftedInputRefusesWithoutPartialUpdates:161->reject:243 » IllegalState required JDK21 text source missing: .github/workflows/m3-retained-capability-audit.yml
-[ERROR]   JccMergeRecoveryTest.historicalConflictsAndDuplicateTargetsCannotPublishPartialHistory:172->reject:243 » IllegalState source drift: m3/migration/test/test_jcc_source_final_handoff_packet.py
+[ERROR]   JccMergeRecoveryTest.historicalConflictsAndDuplicateTargetsCannotPublishPartialHistory:172->reject:243 » IllegalState source drift: make/m3/migration/test/test_jcc_source_final_handoff_packet.py
 [INFO] 
 [ERROR] Tests run: 6, Failures: 1, Errors: 2, Skipped: 0
 [INFO] 

@@ -7,7 +7,7 @@
   "canonical_recipe_repository": "hsoliwal/com.synexia",
   "canonical_revision": "5e972536d98ac7f4aab37fb66333ed4696584bdd",
   "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-collection-composite-20261019",
-  "source_handoff": "m3/runtime-integration/collection-composite-20261019/M3_HANDOFF.json",
+  "source_handoff": "make/m3/runtime-integration/collection-composite-20261019/M3_HANDOFF.json",
   "runtime_dependency": false,
   "new_public_api": false,
   "receiving_sequence_advanced": false,

@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 # Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
 set -euo pipefail
-ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd)"
+ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../../.." && pwd)"
 : "${M3_JAVA_HOME:?set M3_JAVA_HOME to a Java 21 host JDK}"
 CXX="${CXX:-g++}"
 [[ "$(uname -s)" == Linux ]] || { echo 'This component proof is Linux-only.' >&2; exit 2; }
 WORK="$(mktemp -d "${TMPDIR:-/tmp}/m3-tq-array.XXXXXX")"
 trap 'rm -rf -- "$WORK"' EXIT
-EVIDENCE="$ROOT/m3/runtime-integration/evidence/tq-primitive-composition-20261021"
+EVIDENCE="$ROOT/make/m3/runtime-integration/evidence/tq-primitive-composition-20261021"
 (cd "$ROOT" && sha256sum -c "$EVIDENCE/INPUTS.sha256")
 mkdir -p "$WORK/source/jdk/internal/mindex" "$WORK/classes" "$WORK/tests" "$WORK/headers"
 for name in M3TQ.java M3StringBacking.java; do

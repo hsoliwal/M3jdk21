@@ -39,7 +39,7 @@ and compiled into the module's `libm3_arrays` by the `native-linux` profile (one
 | recipe | `relocate.py` v2: `python -I m3/arrays/recipe/posting-index-20261106/relocate.py --donor-git <clone> --donor-rev <rev> [--module m3/arrays] [--check]` |
 | map | `RELOCATION_MAP.tsv`: 12 `FILE` rows, 2 `PACKAGE` rows (`com.synexia.matcollections`, `com.synexia.matvalue` -> `jdk.m3.arrays`), 11 `TYPE` rows, 1 `JNI` row (symbol prefix), 1 `INCLUDE` row (javac -h header -> `<jni.h>`), 1 `DROP` row, no `EXTERNAL` row |
 | provenance | `PROVENANCE.tsv`: donor commit, blob sha, donor sha256, target sha256, `body_match`, `body_match_renamed`, `declared_drops` per file |
-| naming | `python -I m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/arrays/`: 0 moves, 0 rewrites, 0 refusals (fixed point) |
+| naming | `python -I make/m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/arrays/`: 0 moves, 0 rewrites, 0 refusals (fixed point) |
 
 The recipe rewrites only the license header (M3JDK style, inside the C block comment too), the `package` line, mapped
 `import` lines (including nested members such as `MatIntPostingIndex.Backend.NATIVE_REQUIRED`), the mapped type

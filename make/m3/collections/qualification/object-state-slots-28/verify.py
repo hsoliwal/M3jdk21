@@ -4,7 +4,7 @@
 import hashlib
 from pathlib import Path
 here = Path(__file__).resolve().parent
-root = here.parents[3]
+root = here.parents[4]
 for manifest, relative in (("SOURCE_RECEIPT.tsv", root), ("M3_OWNER_SHA256.tsv", root / "src/jdk.m3.collections/share/classes/jdk/m3/collections")):
     seen = set()
     for line in (here / manifest).read_text().splitlines():

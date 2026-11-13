@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # SPDX-License-Identifier: Apache-2.0
 set -euo pipefail
-root=$(cd "$(dirname "$0")/../../.." && pwd)
+root=$(cd "$(dirname "$0")/../../../.." && pwd)
 : "${M3JDK:?Set the matching built M3jdk21 image}"
 : "${M3_BOOT_JDK:?Set the boot JDK for the jtreg harness}"
 : "${M3_JTREG:?Set jtreg.jar}"
-out=${M3_RESULTS:-$root/m3/tooling/cb/target/image}
+out=${M3_RESULTS:-$root/make/m3/tooling/cb/target/image}
 mkdir -p "$out/classes" "$out/source"
 "$M3JDK/bin/java" -version > "$out/version.log" 2>&1
 cc -shared -fPIC -Wall -Wextra -Werror -I"$M3JDK/include" -I"$M3JDK/include/linux" \
@@ -18,9 +18,9 @@ cc -shared -fPIC -Wall -Wextra -Werror -I"$M3JDK/include" -I"$M3JDK/include/linu
 
 # Reuse the existing JNI/String semantic oracle; no alternate probe framework.
 "$M3JDK/bin/javac" -d "$out/classes" \
-  "$root/m3/runtime-integration/tests/StringApiProbe.java"
+  "$root/make/m3/runtime-integration/tests/StringApiProbe.java"
 cc -shared -fPIC -Wall -Wextra -Werror -I"$M3JDK/include" -I"$M3JDK/include/linux" \
-  "$root/m3/runtime-integration/tests/string_api_probe.c" -o "$out/libstring_api_probe.so"
+  "$root/make/m3/runtime-integration/tests/string_api_probe.c" -o "$out/libstring_api_probe.so"
 "$M3JDK/bin/java" -Xmixed -Xcheck:jni --add-opens java.base/java.lang=ALL-UNNAMED \
   -Dprobe.native="$out/libstring_api_probe.so" -cp "$out/classes" StringApiProbe \
   > "$out/jni-default.log" 2>&1
@@ -29,7 +29,7 @@ cc -shared -fPIC -Wall -Wextra -Werror -I"$M3JDK/include" -I"$M3JDK/include/linu
   -cp "$out/classes" StringApiProbe > "$out/jni-enabled.log" 2>&1
 
 # Execute the retained VI oracle on this image, without patching java.base.
-cp "$root/m3/tooling/vi/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-vi/VIProbe.java.txt" \
+cp "$root/make/m3/tooling/vi/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-vi/VIProbe.java.txt" \
   "$out/source/VIProbe.java"
 "$M3JDK/bin/javac" --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
   -d "$out/classes" "$out/source/VIProbe.java"

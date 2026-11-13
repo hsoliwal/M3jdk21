@@ -5,23 +5,23 @@ on:
     branches:
       - "m3/jep404-*"
     paths:
-      - "m3/backports/file_delta_inventory.py"
-      - "m3/backports/generate_recipe_crates.py"
-      - "m3/backports/materialize_generated_crates.py"
-      - "m3/backports/selected_path_inventory.py"
-      - "m3/backports/test_selected_path_inventory.py"
-      - "m3/backports/test_jep404_inventory_policy.py"
-      - "m3/backports/recipes/jep-404-generational-shenandoah/**"
+      - "make/m3/backports/file_delta_inventory.py"
+      - "make/m3/backports/generate_recipe_crates.py"
+      - "make/m3/backports/materialize_generated_crates.py"
+      - "make/m3/backports/selected_path_inventory.py"
+      - "make/m3/backports/test_selected_path_inventory.py"
+      - "make/m3/backports/test_jep404_inventory_policy.py"
+      - "make/m3/backports/recipes/jep-404-generational-shenandoah/**"
       - ".github/workflows/m3-jep404-generational-shenandoah-inventory.yml"
   pull_request:
     paths:
-      - "m3/backports/file_delta_inventory.py"
-      - "m3/backports/generate_recipe_crates.py"
-      - "m3/backports/materialize_generated_crates.py"
-      - "m3/backports/selected_path_inventory.py"
-      - "m3/backports/test_selected_path_inventory.py"
-      - "m3/backports/test_jep404_inventory_policy.py"
-      - "m3/backports/recipes/jep-404-generational-shenandoah/**"
+      - "make/m3/backports/file_delta_inventory.py"
+      - "make/m3/backports/generate_recipe_crates.py"
+      - "make/m3/backports/materialize_generated_crates.py"
+      - "make/m3/backports/selected_path_inventory.py"
+      - "make/m3/backports/test_selected_path_inventory.py"
+      - "make/m3/backports/test_jep404_inventory_policy.py"
+      - "make/m3/backports/recipes/jep-404-generational-shenandoah/**"
       - ".github/workflows/m3-jep404-generational-shenandoah-inventory.yml"
   workflow_dispatch:
 
@@ -56,11 +56,11 @@ jobs:
         run: |
           set -euo pipefail
           python3 -m py_compile \
-            m3/backports/file_delta_inventory.py \
-            m3/backports/generate_recipe_crates.py \
-            m3/backports/materialize_generated_crates.py \
-            m3/backports/selected_path_inventory.py
-          cd m3/backports
+            make/m3/backports/file_delta_inventory.py \
+            make/m3/backports/generate_recipe_crates.py \
+            make/m3/backports/materialize_generated_crates.py \
+            make/m3/backports/selected_path_inventory.py
+          cd make/m3/backports
           python3 -m unittest -v \
             test_selected_path_inventory.py \
             test_materialize_generated_crates.py \
@@ -83,14 +83,14 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/jep404"
-          python3 m3/backports/file_delta_inventory.py             --repo "$UPSTREAM"             --release 24             --donor-ref "$IMPLEMENTATION_COMMIT"             --out "$RUNNER_TEMP/jep404/integration-delta.tsv"
-          python3 m3/backports/file_delta_inventory.py             --repo "$UPSTREAM"             --release 24             --out "$RUNNER_TEMP/jep404/ga-delta.tsv"
+          python3 make/m3/backports/file_delta_inventory.py             --repo "$UPSTREAM"             --release 24             --donor-ref "$IMPLEMENTATION_COMMIT"             --out "$RUNNER_TEMP/jep404/integration-delta.tsv"
+          python3 make/m3/backports/file_delta_inventory.py             --repo "$UPSTREAM"             --release 24             --out "$RUNNER_TEMP/jep404/ga-delta.tsv"
 
       - name: 5 - Join exact 228-path denominator to final GA state
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/backports/selected_path_inventory.py             --paths m3/backports/recipes/jep-404-generational-shenandoah/INTEGRATION_PATHS.txt             --integration-delta "$RUNNER_TEMP/jep404/integration-delta.tsv"             --ga-delta "$RUNNER_TEMP/jep404/ga-delta.tsv"             --out "$RUNNER_TEMP/jep404/selected-paths.tsv"
+          python3 make/m3/backports/selected_path_inventory.py             --paths make/m3/backports/recipes/jep-404-generational-shenandoah/INTEGRATION_PATHS.txt             --integration-delta "$RUNNER_TEMP/jep404/integration-delta.tsv"             --ga-delta "$RUNNER_TEMP/jep404/ga-delta.tsv"             --out "$RUNNER_TEMP/jep404/selected-paths.tsv"
           python3 - <<'PY'
           import csv
           import os
@@ -122,7 +122,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/backports/generate_recipe_crates.py             --repo "$UPSTREAM"             --release 24             --paths-file "$RUNNER_TEMP/jep404/MATERIALIZE_PATHS.txt"             --crate-size 1             --include-native             --include-text             --out "$RUNNER_TEMP/jep404/file-atoms"
+          python3 make/m3/backports/generate_recipe_crates.py             --repo "$UPSTREAM"             --release 24             --paths-file "$RUNNER_TEMP/jep404/MATERIALIZE_PATHS.txt"             --crate-size 1             --include-native             --include-text             --out "$RUNNER_TEMP/jep404/file-atoms"
 
       - name: 7 - Prove generator accounting without applying candidate
         shell: bash
@@ -162,7 +162,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/backports/materialize_generated_crates.py \
+          python3 make/m3/backports/materialize_generated_crates.py \
             --root "$PWD" \
             --generated "$RUNNER_TEMP/jep404/file-atoms" \
             --mode check \
@@ -174,13 +174,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/backports/materialize_generated_crates.py \
+          python3 make/m3/backports/materialize_generated_crates.py \
             --root "$PWD" \
             --generated "$RUNNER_TEMP/jep404/file-atoms" \
             --mode apply \
             --require-one-target-per-crate \
             --receipt "$RUNNER_TEMP/jep404/apply.tsv"
-          python3 m3/backports/materialize_generated_crates.py \
+          python3 make/m3/backports/materialize_generated_crates.py \
             --root "$PWD" \
             --generated "$RUNNER_TEMP/jep404/file-atoms" \
             --mode verify-post \
@@ -188,7 +188,7 @@ jobs:
             --receipt "$RUNNER_TEMP/jep404/postimage.tsv"
           git diff --check
           before="$(git diff --binary | sha256sum | awk '{print $1}')"
-          python3 m3/backports/materialize_generated_crates.py \
+          python3 make/m3/backports/materialize_generated_crates.py \
             --root "$PWD" \
             --generated "$RUNNER_TEMP/jep404/file-atoms" \
             --mode apply \
@@ -234,8 +234,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f m3/backports/pom.xml verify
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
+          mvn -B -ntp -f make/m3/backports/pom.xml verify
+          mvn -B -ntp -f make/m3/tooling/migration-recipes/pom.xml \
             -Dtest=M3RecipeScopeDeclarationTest test
 
       - name: 12 - Install OpenJDK build prerequisites

@@ -11,7 +11,7 @@ import java.util.Random;
  * Contract oracle for the recipe-owned private int[] stable-run reversal.
  * Runs on the original IndexedListSnapshot API; no test-only runtime owner.
  */
-//FLLDCIM: RELOCATE - donor blob 826f84199948 at d5ad5090d87e; recipe m3/collections/qualification/census2-c3-20261106/relocate.py v1
+//FLLDCIM: RELOCATE - donor blob 826f84199948 at d5ad5090d87e; recipe make/m3/collections/qualification/census2-c3-20261106/relocate.py v1
 public final class StableGroupReversalSelfTest {
     private static final long SEED = 0x4d334a444b3231L;
     private static int cases;

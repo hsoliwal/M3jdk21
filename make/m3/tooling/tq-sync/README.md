@@ -4,7 +4,7 @@
 Synexia is the convergence workspace and contributor. M3JDK21 is the independent
 runtime target. This successor packet repairs the target's recipe custody while
 retaining its current runtime owner byte for byte. The repository-wide port stream is
-documented in [`m3-porting.md`](../../docs/m3-porting.md), following the established
+documented in [`m3-porting.md`](../../../../doc/m3/m3-porting.md), following the established
 M3String names and ownership model. Maven/OpenRewrite and the
 native TQ oracle remain build/test tooling; the runtime patch depends only on
 `java.base`.
@@ -51,14 +51,14 @@ mode and zero nmethods. The image script uses the existing strict XML checker.
 Run from this repository with Java 21 and Maven 3.9.9:
 
 ```sh
-mvn -B -ntp -f m3/tooling/tq-sync/pom.xml verify
-python3 m3/tooling/tq-sync/verify-plan.py
-mvn -B -ntp -f m3/tooling/tq/pom.xml verify
-mvn -B -ntp -f m3/tooling/tq/pom.xml -Dtq.sanitize=true verify
-python3 m3/tooling/tq/verify-plan.py
-mvn -B -ntp -f m3/tooling/lane28/pom.xml verify
-python3 m3/tooling/lane28/verify-plan.py
-python3 m3/migration/migration.py validate .
+mvn -B -ntp -f make/m3/tooling/tq-sync/pom.xml verify
+python3 make/m3/tooling/tq-sync/verify-plan.py
+mvn -B -ntp -f make/m3/tooling/tq/pom.xml verify
+mvn -B -ntp -f make/m3/tooling/tq/pom.xml -Dtq.sanitize=true verify
+python3 make/m3/tooling/tq/verify-plan.py
+mvn -B -ntp -f make/m3/tooling/lane28/pom.xml verify
+python3 make/m3/tooling/lane28/verify-plan.py
+python3 make/m3/migration/migration.py validate .
 ```
 
 The successor passes exact output/fixed-point, missing/duplicate/drift and

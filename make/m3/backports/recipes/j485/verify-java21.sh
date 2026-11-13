@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 set -euo pipefail
 
-repo=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../../../.." && pwd)
+repo=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../../../../.." && pwd)
 jdk=${1:-${JAVA_HOME:-}}
 out=${2:-"$repo/m3/build/j485"}
 
@@ -21,7 +21,7 @@ done
 
 "$jdk/bin/javac" -source 21 -target 21 -proc:none -Xlint:all -Werror   --patch-module java.base="$out/patch-src"   -d "$out/patch"   "$out/patch-src/java/util/stream/"*.java   >"$out/logs/patch-compile.log" 2>&1
 
-"$jdk/bin/javac" -source 21 -target 21 -proc:none -Xlint:all -Werror   --patch-module java.base="$out/patch"   -d "$out/smoke"   "$repo/m3/backports/recipes/j485/J485Smoke.java"   >"$out/logs/smoke-compile.log" 2>&1
+"$jdk/bin/javac" -source 21 -target 21 -proc:none -Xlint:all -Werror   --patch-module java.base="$out/patch"   -d "$out/smoke"   "$repo/make/m3/backports/recipes/j485/J485Smoke.java"   >"$out/logs/smoke-compile.log" 2>&1
 
 "$jdk/bin/java" -Xcheck:jni --patch-module java.base="$out/patch"   -cp "$out/smoke" m3.j485.J485Smoke | tee "$out/logs/smoke-jit.log"
 "$jdk/bin/java" -Xint -Xcheck:jni --patch-module java.base="$out/patch"   -cp "$out/smoke" m3.j485.J485Smoke | tee "$out/logs/smoke-int.log"

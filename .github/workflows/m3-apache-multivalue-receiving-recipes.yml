@@ -2,7 +2,7 @@ name: M3 Apache multivalue receiving recipes
 on:
   pull_request:
     paths:
-      - 'm3/collections/recipe/owned-apache-multivalue-20261018/**'
+      - 'make/m3/collections/recipe/owned-apache-multivalue-20261018/**'
       - '.github/workflows/m3-apache-multivalue-receiving-recipes.yml'
   workflow_dispatch:
 permissions:
@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
-          sparse-checkout: m3/collections/recipe/owned-apache-multivalue-20261018
+          sparse-checkout: make/m3/collections/recipe/owned-apache-multivalue-20261018
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -30,4 +30,4 @@ jobs:
           MAVEN_OPTS: -Xmx512m -XX:ActiveProcessorCount=2 -XX:-UsePerfData
         run: |
           set -euo pipefail
-          mvn -B -ntp -f m3/collections/recipe/owned-apache-multivalue-20261018/pom.xml -Dmaven.repo.local="$RUNNER_TEMP/m3-recipe-m2" -DforkCount=0 -Dmaven.compiler.fork=false test
+          mvn -B -ntp -f make/m3/collections/recipe/owned-apache-multivalue-20261018/pom.xml -Dmaven.repo.local="$RUNNER_TEMP/m3-recipe-m2" -DforkCount=0 -Dmaven.compiler.fork=false test

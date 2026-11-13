@@ -14,8 +14,8 @@ performance checks are **NOT_RUN** in this documentation pass.
 
 These are independently scoped receiver/derived-data APIs. They do not introduce
 fields into `java.lang.String`, create a second canonical text interner, or
-establish target receiving acceptance. The [porting invariant](../../m3/docs/m3jdk21-porting-invariant.md)
-and [name map](../../m3/docs/name-mapping.json) remain authoritative. The existing
+establish target receiving acceptance. The [porting invariant](../m3/m3jdk21-porting-invariant.md)
+and [name map](../m3/name-mapping.json) remain authoritative. The existing
 [text-piece and image reference](m3-packages.md#sharedlexiconimage-file-and-lifetime-contract)
 covers the six storage owners; this page adds catalog and derived-owner contracts
 without repeating that storage review. Instance-index, number-space, LangDex and

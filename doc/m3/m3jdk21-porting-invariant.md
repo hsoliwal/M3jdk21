@@ -63,7 +63,7 @@ This is an engineering admission rule, not permission to weaken OpenJDK licensin
 
 M3JDK21 may consume Synexia broadly, but the intake **mode** is part of the proof.
 
-The machine-readable authority is `m3/docs/m3-intake-policy.tsv`. The repository's own
+The machine-readable authority is `doc/m3/m3-intake-policy.tsv`. The repository's own
 `ADDITIONAL_LICENSE_INFO` explicitly distinguishes independently licensed Apache-2.0 programs
 from copying incompatible-license code into GPLv2 source files. Therefore:
 
@@ -80,10 +80,10 @@ from copying incompatible-license code into GPLv2 source files. Therefore:
   from all necessary rightsholders under target-compatible terms and correct target headers.
 - `EXISTING_DIRECT_COPY_REVIEW` — historical Synexia records already marked
   `copied_code=true` under `src/**` are not silently grandfathered. They are enumerated in
-  `m3/docs/m3-direct-copy-review.tsv` and remain review-required until either compatible
+  `doc/m3/m3-direct-copy-review.tsv` and remain review-required until either compatible
   relicensing is proven or the target is replaced by a target-owned implementation.
 
-`m3/runtime-integration/verify-m3-intake.py` fails closed if the mode set, direct-copy
+`make/m3/runtime-integration/verify-m3-intake.py` fails closed if the mode set, direct-copy
 review inventory, FOSS provenance, or repository licensing boundary drifts.
 
 ## Canonical Synexia M3Index implementation ownership
@@ -103,7 +103,7 @@ exact Apache-2.0 custody snapshot, but the snapshot is not a second canonical im
 | vendored data structures | `com.synexia:synexia-m3index-data-structure` | pinned custody |
 | vendored precompute API | `com.synexia:synexia-m3index-precompute-api` | pinned custody |
 | reusable Maven/OpenRewrite recipes | Synexia `synexia-openrewrite-recipes` | execute only in Synexia; receive postimages and passive receipts |
-| `m3/runtime-integration`, OpenJDK/HotSpot/JNI receivers | M3JDK21 | target-specific |
+| `make/m3/runtime-integration`, OpenJDK/HotSpot/JNI receivers | M3JDK21 | target-specific |
 
 The receiver map is `m3/m3-import/m3index-family-receiver.tsv`. Automatic vendor intake
 must mirror the exact Synexia relative path below `m3/vendor/synexia/`; renaming or relocating
@@ -356,14 +356,14 @@ service or package dependency is introduced into Java/HotSpot/JNI.
 
 Do not delete historical target-local recipe copies until their exact source,
 dependencies and callers are preserved in Synexia and the cleanup is qualified.
-Track that work in the [visible release queue](../release/queue/README.md).
+Track that work in the [visible release queue](../../make/m3/release/queue/README.md).
 
 
 ## Full-family machine pin
 
 The receiving authority for the complete Synexia MIndex/M3Index lineage is
-`m3/compatibility/m3-full-family-pin.tsv`, enforced by
-`m3/compatibility/check_m3_full_family.py`.
+`make/m3/compatibility/m3-full-family-pin.tsv`, enforced by
+`make/m3/compatibility/check_m3_full_family.py`.
 
 The pin deliberately remains qualification-only while the source PR is open and while all 4,770
 catalogue rows remain unevaluated. It cannot enable automatic application, target relicensing or a
@@ -533,7 +533,7 @@ recorded compatible rights or target-owned implementation mode. Independent Apac
 remains scoped. No Synexia runtime service/package dependency enters Java/HotSpot/JNI.
 
 Licence text: https://www.apache.org/licenses/LICENSE-2.0
-Canonical target policy: m3/docs/m3jdk21-porting-invariant.md in hsoliwal/M3jdk21.
+Canonical target policy: doc/m3/m3jdk21-porting-invariant.md in hsoliwal/M3jdk21.
 
 ## Lean collection second-pass receiving gate
 
@@ -584,9 +584,9 @@ Track these dimensions explicitly when one owner contains both qualified atoms a
 From the M3JDK21 repository root:
 
 ```sh
-rg -n --glob '*.tsv' 'M3LongIndexProjection|M3IndexMaskWindow|M3FilteredLists' m3/collections/algorithm-catalog
-rg -n --glob '*.tsv' 'ARRAY_OFFSETS|BIT_STATE|stable_indirect_order|ordered_native_compaction' m3/collections/algorithm-catalog
-rg -n --glob '*.tsv' 'REFUSED|REJECT|PENDING|PROOF_REQUIRED|NOT_EVALUATED' m3/collections/algorithm-catalog
+rg -n --glob '*.tsv' 'M3LongIndexProjection|M3IndexMaskWindow|M3FilteredLists' make/m3/collections/algorithm-catalog
+rg -n --glob '*.tsv' 'ARRAY_OFFSETS|BIT_STATE|stable_indirect_order|ordered_native_compaction' make/m3/collections/algorithm-catalog
+rg -n --glob '*.tsv' 'REFUSED|REJECT|PENDING|PROOF_REQUIRED|NOT_EVALUATED' make/m3/collections/algorithm-catalog
 ```
 
 Use existing Synexia catalogue/search components when their admitted data format applies; plain TSV search remains sufficient for these records. This invariant does not promote the global `STRING -> ARRAYS -> COLLECTIONS -> AST_COMPILER -> REMAINING_FAMILIES` sequence or declare any family complete. Independently licensed collection proving-ground work retains its existing scope and receiving gates.

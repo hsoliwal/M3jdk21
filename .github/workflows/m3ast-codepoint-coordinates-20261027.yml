@@ -3,9 +3,9 @@ name: M3 AST codepoint to UTF16 and UTF8 exact source coordinates
 on:
   pull_request:
     paths:
-      - 'm3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3CodePointSourceMap.java'
-      - 'm3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3CodePointSourceContract.java'
-      - 'm3/tooling/module-packs/parser/build.py'
+      - 'make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3CodePointSourceMap.java'
+      - 'make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3CodePointSourceContract.java'
+      - 'make/m3/tooling/module-packs/parser/build.py'
       - '.github/workflows/m3ast-codepoint-coordinates-20261027.yml'
   workflow_dispatch:
 permissions:
@@ -30,8 +30,8 @@ jobs:
           set -euo pipefail
           classes="$RUNNER_TEMP/m3ast-codepoint-coordinate-classes"
           mkdir -p "$classes"
-          parser=m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser
-          test=m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test
+          parser=make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser
+          test=make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test
           javac --release 21 -Xlint:all -Werror -d "$classes" \
             "$parser/M3File.java" \
             "$parser/M3Utf8SourceMap.java" \

@@ -13,7 +13,7 @@ import hashlib
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[1]
+ROOT = HERE.parents[2]
 RECEIPT = HERE / "qualification/object-state-offset-jni-20261017.tsv"
 RECEIPT_SHA256 = "de3504abbbefb2c67cf94c0ad61974ffbce3339ac4f4f530443e1af82635f9a4"
 EXPECTED = (

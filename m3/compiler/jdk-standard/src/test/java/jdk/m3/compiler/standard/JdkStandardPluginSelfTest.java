@@ -152,7 +152,7 @@ public final class JdkStandardPluginSelfTest {
 
     /**
      * The donor word, assembled at run time: as a literal, the JDK naming recipe
-     * (m3/tooling/jdk-naming) renames it like any other name, and the 2026-11-06 rename turned
+     * (make/m3/tooling/jdk-naming) renames it like any other name, and the 2026-11-06 rename turned
      * this fixture into M3 names (scheme=m3 then found none).
      */
     private static final String DONOR = "Syn" + "exia";

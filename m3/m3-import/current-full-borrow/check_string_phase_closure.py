@@ -41,14 +41,14 @@ PINNED_GATES = (
 )
 
 RECEIPTS = (
-    "m3/compatibility/m3-string-focused-recipe-receipt-20261008.tsv",
-    "m3/compatibility/m3-regex-oracle-harness-receipt.json",
-    "m3/compatibility/m3-regex-required-literal-receipt.json",
-    "m3/compatibility/m3-string-utf16-differential-receipt.json",
-    "m3/compatibility/m3-string-owner-range-lifetime-receipt.json",
-    "m3/compatibility/m3-string-jni-shadow-lifetime-receipt.json",
-    "m3/compatibility/m3-string-representation-consumers-receipt.json",
-    "m3/compatibility/m3-string-phase1-resources-receipt.json",
+    "make/m3/compatibility/m3-string-focused-recipe-receipt-20261008.tsv",
+    "make/m3/compatibility/m3-regex-oracle-harness-receipt.json",
+    "make/m3/compatibility/m3-regex-required-literal-receipt.json",
+    "make/m3/compatibility/m3-string-utf16-differential-receipt.json",
+    "make/m3/compatibility/m3-string-owner-range-lifetime-receipt.json",
+    "make/m3/compatibility/m3-string-jni-shadow-lifetime-receipt.json",
+    "make/m3/compatibility/m3-string-representation-consumers-receipt.json",
+    "make/m3/compatibility/m3-string-phase1-resources-receipt.json",
 )
 
 

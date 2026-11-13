@@ -50,7 +50,7 @@
               <mainClass>jdk.internal.m3.M3SdkBulkCaptureRecipe</mainClass>
               <arguments>
                 <argument>--check</argument>
-                <argument>${project.basedir}/../../../../..</argument>
+                <argument>${project.basedir}/../../../../../..</argument>
               </arguments>
             </configuration>
           </execution>

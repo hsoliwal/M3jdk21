@@ -6,7 +6,7 @@ from hashlib import sha256
 from pathlib import Path
 import sys
 
-ROOT = Path(__file__).resolve().parents[3]
+ROOT = Path(__file__).resolve().parents[4]
 FILES = {
     "src/java.base/share/classes/java/util/Collections.java":
         "7dcb1bde18923274518b747ad4e65e3019046ca7742714ead678c615d99499ba",

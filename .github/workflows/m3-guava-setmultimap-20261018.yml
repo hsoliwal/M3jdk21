@@ -5,7 +5,7 @@ on:
     paths:
       - 'm3/collections/interop/src/main/java/jdk/m3/collections/interop/M3GuavaSetMultimap.java'
       - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3GuavaSetMultimapTest.java'
-      - 'm3/collections/qualification/m3-guava-setmultimap-20261018/**'
+      - 'make/m3/collections/qualification/m3-guava-setmultimap-20261018/**'
       - '.github/workflows/m3-guava-setmultimap-20261018.yml'
   workflow_dispatch:
 concurrency:
@@ -23,7 +23,7 @@ jobs:
           java-version: '21'
           cache: maven
       - name: Run canonical existing OpenRewrite SDK recipe, drift and fixed-point tests
-        run: mvn -B -ntp -f m3/collections/qualification/m3-guava-setmultimap-20261018/recipe/pom.xml clean verify
+        run: mvn -B -ntp -f make/m3/collections/qualification/m3-guava-setmultimap-20261018/recipe/pom.xml clean verify
       - name: Verify installed exact SHA-256 source and oracle
         run: |
           python3 - <<'PY'

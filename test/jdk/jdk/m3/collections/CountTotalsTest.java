@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import jdk.internal.m3.collections.CountLanes;
 import jdk.internal.m3.collections.CountTotals;
 
-//FLLDCIM: MRL - fold-close audit leaf L0107: ADD from PR #1084 head 6b16a20dcedf blob 67d23af6cc9c, ancestry-only landing b42ab7605b86 (tree == first parent); recipe m3/collections/qualification/foldaudit-collections-20261107/apply.py v1
+//FLLDCIM: MRL - fold-close audit leaf L0107: ADD from PR #1084 head 6b16a20dcedf blob 67d23af6cc9c, ancestry-only landing b42ab7605b86 (tree == first parent); recipe make/m3/collections/qualification/foldaudit-collections-20261107/apply.py v1
 //FLLDCIM: MRL - MAPPED: the origin counts/ module has no pom on master; the file joins the real module tree
 final class CountTotalsTest {
     //FLLDCIM: MRL - the origin refused to run without the count library; on master the Java path runs always, the native path when the property names the library, and -Dm3.test.native.required=true restores the refusal

@@ -5,7 +5,7 @@ on:
     paths:
       - 'src/java.base/share/classes/jdk/internal/util/M3PipelinePlan.java'
       - 'test/jdk/jdk/internal/util/M3Pipeline*Test.java'
-      - 'm3/tooling/pipeline-paged-20261019/**'
+      - 'make/m3/tooling/pipeline-paged-20261019/**'
       - '.github/workflows/m3jdk21-pipeline-paged.yml'
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -22,4 +22,4 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Verify Java 21 in-place java.base
-        run: bash m3/tooling/pipeline-paged-20261019/verify.sh
+        run: bash make/m3/tooling/pipeline-paged-20261019/verify.sh

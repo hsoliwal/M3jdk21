@@ -19,9 +19,9 @@ import sys
 import tempfile
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[3]
-V4 = "m3/collections/qualification/owned-apache-multivalue-20261024/"
-D1 = ("m3/collections/recipe/owned-apache-multivalue-20261024/src/main/"
+ROOT = HERE.parents[4]
+V4 = "make/m3/collections/qualification/owned-apache-multivalue-20261024/"
+D1 = ("make/m3/collections/recipe/owned-apache-multivalue-20261024/src/main/"
       "resources/jdk/internal/m3/rewrite/hash-pinned-java/apache-multivalue-v2-to-v3/")
 RECEIPT_BLOB = "46b471a59c346b72633621d67c274b91bf453d93"
 EXPECTED_V4_BLOB = "f9527b590a06c0a3e045c87f09761ecaf0412f41"
@@ -75,7 +75,7 @@ def original_module(root: Path):
 def verify(root: Path = ROOT, jar: Path | None = None,
            args_file: Path | None = None, probe: bool = False) -> dict:
     root = root.resolve()
-    raw_receipt = read(root, "m3/collections/qualification/apache-multivalue-source-successor/RECEIPT.json")
+    raw_receipt = read(root, "make/m3/collections/qualification/apache-multivalue-source-successor/RECEIPT.json")
     if blob(raw_receipt) != RECEIPT_BLOB:
         raise ValueError("v5 successor receipt drift")
     successor = json.loads(raw_receipt)
@@ -111,7 +111,7 @@ def verify(root: Path = ROOT, jar: Path | None = None,
             raise ValueError("source successor lacks an exact original v4 pin: " + path)
         current = read(root, path)
         pin(current, row["current"], path)
-        snapshot = read(root, "m3/collections/qualification/apache-multivalue-source-successor/"
+        snapshot = read(root, "make/m3/collections/qualification/apache-multivalue-source-successor/"
                         + row["snapshot"])
         pin(snapshot, row["previous"], path + " historical")
         if current == snapshot:

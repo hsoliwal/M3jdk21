@@ -5,7 +5,7 @@ on:
     paths:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongCompositeViews.java'
       - 'test/jdk/jdk/m3/collections/M3LongCompositeLateBind*'
-      - 'm3/collections/qualification/composite-latebind-20261017/**'
+      - 'make/m3/collections/qualification/composite-latebind-20261017/**'
       - '.github/workflows/m3-composite-latebind-20261017.yml'
   workflow_dispatch:
 permissions:
@@ -28,7 +28,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          sha256sum --check m3/collections/qualification/composite-latebind-20261017/SHA256SUMS
+          sha256sum --check make/m3/collections/qualification/composite-latebind-20261017/SHA256SUMS
       - name: Compile existing M3 owners and differential oracle under strict Java21
         shell: bash
         run: |

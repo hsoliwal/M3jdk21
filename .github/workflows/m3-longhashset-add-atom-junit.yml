@@ -5,7 +5,7 @@ on:
     paths:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongHashSet.java'
       - 'test/jdk/jdk/m3/collections/M3LongHashSetAddAtomTest.java'
-      - 'm3/collections/qualification/leetcodify-longhashset-onepass/**'
+      - 'make/m3/collections/qualification/leetcodify-longhashset-onepass/**'
       - '.github/workflows/m3-longhashset-add-atom-junit.yml'
   workflow_dispatch:
 permissions:

@@ -50,10 +50,10 @@ m3/collections/src/main/java/jdk/m3/collections/M3LongSortedViews.java: OK
 m3/collections/src/main/java/com/m3/collections/M3ObjectSize.java: OK
 m3/collections/src/main/native/collections/m3_index_mask_compactor.c: OK
 m3/collections/src/main/native/collections/m3_object_size.c: OK
-m3/collections/verification/size-views-20261017/src/test/java/com/m3/collections/MaskChecks.java: OK
-m3/collections/verification/size-views-20261017/src/test/java/com/m3/collections/SizeAgent.java: OK
-m3/collections/verification/size-views-20261017/src/test/java/com/m3/collections/SizeChecks.java: OK
-m3/collections/verification/size-views-20261017/src/test/java/com/m3/collections/ViewsChecks.java: OK
+make/m3/collections/verification/size-views-20261017/src/test/java/com/m3/collections/MaskChecks.java: OK
+make/m3/collections/verification/size-views-20261017/src/test/java/com/m3/collections/SizeAgent.java: OK
+make/m3/collections/verification/size-views-20261017/src/test/java/com/m3/collections/SizeChecks.java: OK
+make/m3/collections/verification/size-views-20261017/src/test/java/com/m3/collections/ViewsChecks.java: OK
 openjdk version "21.0.12.1" 2026-08-18
 OpenJDK Runtime Environment (build 21.0.12.1+1-1-deb13u1-Debian)
 OpenJDK 64-Bit Server VM (build 21.0.12.1+1-1-deb13u1-Debian, mixed mode, sharing)

@@ -8,10 +8,10 @@ on:
       - 'm3/core/**'
       - 'm3/lexicon/native/**'
       - 'm3/ports/compiletime/**'
-      - 'm3/verify-fixed-address-jni.py'
-      - 'm3/verify-gvas-literal-precompute.py'
+      - 'make/m3/verify-fixed-address-jni.py'
+      - 'make/m3/verify-gvas-literal-precompute.py'
       - 'src/java.base/share/classes/java/lang/M3CodeText*.java'
-      - 'm3/tooling/joined-range-directory/current-module/**'
+      - 'make/m3/tooling/joined-range-directory/current-module/**'
       - '.github/workflows/m3-applied-lexicon-contracts.yml'
   workflow_dispatch:
 permissions:
@@ -68,7 +68,7 @@ jobs:
           root=pathlib.Path(os.environ['GITHUB_WORKSPACE'])
           head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True).strip()
           assert head==os.environ['M3_HEAD']
-          raw=(root/'m3/tooling/joined-range-directory/current-module/COMPOSITION_BINDING.json').read_bytes()
+          raw=(root/'make/m3/tooling/joined-range-directory/current-module/COMPOSITION_BINDING.json').read_bytes()
           assert hashlib.sha256(raw).hexdigest()=='1a827ea287629995ee0eb62cd2ffa35d3c0b48c680b67da592cb0a37305d0853'
           binding=json.loads(raw)
           assert hashlib.sha256((root/binding['targetPath']).read_bytes()).hexdigest()==binding['after']['sha256']
@@ -83,10 +83,10 @@ jobs:
           set -euo pipefail
           case "$M3_CONTRACT" in
             fixed-address)
-              M3JDK="$JAVA_HOME" python3 -I -S -B m3/verify-fixed-address-jni.py 2>&1 | tee "$EVIDENCE/contract.log"
+              M3JDK="$JAVA_HOME" python3 -I -S -B make/m3/verify-fixed-address-jni.py 2>&1 | tee "$EVIDENCE/contract.log"
               ;;
             literal)
-              M3JDK="$JAVA_HOME" python3 -I -S -B m3/verify-gvas-literal-precompute.py 2>&1 | tee "$EVIDENCE/contract.log"
+              M3JDK="$JAVA_HOME" python3 -I -S -B make/m3/verify-gvas-literal-precompute.py 2>&1 | tee "$EVIDENCE/contract.log"
               ;;
             code-text)
               test ! -e m3/build/m3-code-text-host

@@ -20,7 +20,7 @@ FILES = [
     'm3/collections/src/main/java/jdk/m3/collections/M3LongIterator.java',
     'm3/collections/src/main/java/jdk/m3/collections/M3LongLongConsumer.java',
 ]
-ROOT = Path(__file__).resolve().parents[4]
+ROOT = Path(__file__).resolve().parents[5]
 CONFIG = Path(__file__).with_name('receiver.json')
 TEST = ROOT / 'm3/collections/src/test/java/jdk/m3/collections/M3TombstoneReuseSelfTest.java'
 TARGETS = FILES[:2]
@@ -113,7 +113,7 @@ def main():
                  'api_descriptors':'IDENTICAL','repeat_classes':'IDENTICAL',
                  'jtreg':'NOT_RUN','full_maven_reactor':'NOT_RUN','native_jni':'UNCHANGED_NOT_RUN',
                  'hotspot_image':'NOT_RUN','performance':'PAYLOAD_ONLY_NO_BENCHMARK'}
-        dest=(args.output or root/'m3/collections/verification/tombstone-reuse-20261017/receipts').resolve()
+        dest=(args.output or root/'make/m3/collections/verification/tombstone-reuse-20261017/receipts').resolve()
         dest.mkdir(parents=True,exist_ok=True)
         (dest/'SUMMARY.json').write_text(json.dumps(summary,indent=2)+'\n')
         (dest/'COMMANDS.json').write_text(json.dumps(receipts,indent=2)+'\n')

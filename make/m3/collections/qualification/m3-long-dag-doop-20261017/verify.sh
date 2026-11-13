@@ -1,8 +1,8 @@
 #!/bin/sh
 # SPDX-License-Identifier: Apache-2.0
 set -eu
-ROOT=$(CDPATH= cd -- "$(dirname "$0")/../../../.." && pwd)
-TASK="$ROOT/m3/collections/qualification/m3-long-dag-doop-20261017"
+ROOT=$(CDPATH= cd -- "$(dirname "$0")/../../../../.." && pwd)
+TASK="$ROOT/make/m3/collections/qualification/m3-long-dag-doop-20261017"
 SOURCE="$ROOT/m3/collections/src/main/java"
 TEST="$ROOT/m3/collections/src/test/java/jdk/m3/collections/M3LongDagContract.java"
 TMP=$(mktemp -d)

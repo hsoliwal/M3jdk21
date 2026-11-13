@@ -22,7 +22,7 @@ def digest(path):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--jdk", required=True, type=Path)
-    parser.add_argument("--repository", type=Path, default=Path(__file__).resolve().parents[3])
+    parser.add_argument("--repository", type=Path, default=Path(__file__).resolve().parents[4])
     parser.add_argument("--out", required=True, type=Path)
     parser.add_argument("--maven", type=Path)
     parser.add_argument("--maven-repository", type=Path)
@@ -71,7 +71,7 @@ def main():
         if args.maven_repository:
             command.append("-Dmaven.repo.local=" + str(args.maven_repository.resolve()))
         command.extend(["-Dm3.proof.directory=" + str(out / "rewrite"), "-f",
-                        repository / "m3/tooling/shared-frontend/openrewrite/pom.xml", "verify"])
+                        repository / "make/m3/tooling/shared-frontend/openrewrite/pom.xml", "verify"])
         run("openrewrite", command)
         rewrite = True
     receipt = {

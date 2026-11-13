@@ -10,7 +10,7 @@ import re
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 LEDGER = Path(__file__).with_name("m3-recipe-ownership.tsv")
 PIN = Path(__file__).with_name("m3-recipe-home-pin.tsv")
 RESIDUE = Path(__file__).with_name("m3-canonical-residue-gitblobs.tsv")
@@ -91,13 +91,13 @@ def load(path: Path = LEDGER) -> list[dict[str, str]]:
     revisions: set[str] = set()
     legacy_roots = (
         "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/atom/",
-        "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/",
+        "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/",
         "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/pass/",
-        "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/semantic/",
+        "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/semantic/",
     )
     canonical_roots = (
         "m3/m3-import/pure-int-recipe-custody/src/main/java/jdk/internal/m3/rewrite/",
-        "m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/semantic/",
+        "make/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/semantic/",
     )
     pending_canonical_root = (
         "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/"
@@ -163,16 +163,16 @@ def load(path: Path = LEDGER) -> list[dict[str, str]]:
 def reusable_residue_paths() -> set[str]:
     result: set[str] = set()
     for exact in (
-        "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceCatalog.java",
-        "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceRecipe.java",
+        "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceCatalog.java",
+        "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceRecipe.java",
     ):
         if (ROOT / exact).is_file():
             result.add(exact)
 
     for directory in (
         "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/atom",
-        "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/semantic",
-        "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/a3",
+        "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/semantic",
+        "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/a3",
         "m3/indexdb/src/main/java/com/m3",
     ):
         start = ROOT / directory

@@ -24,7 +24,7 @@ cd "$REPO"
 RECIPE=m3/indexdb/recipe/hash-family-20261106
 python -I "$RECIPE/relocate.py" --donor-git "$DONOR_GIT" --donor-rev "$REV" --check | tee "$SCRATCH/relocate-check.txt" | tail -n 2
 grep -q ' changed=0 provenance=UNCHANGED' "$SCRATCH/relocate-check.txt"
-python -I m3/tooling/jdk-naming/jdk_naming.py plan --root . --only m3/indexdb/ | tee "$SCRATCH/naming-plan.txt" | tail -n 1
+python -I make/m3/tooling/jdk-naming/jdk_naming.py plan --root . --only m3/indexdb/ | tee "$SCRATCH/naming-plan.txt" | tail -n 1
 grep -q 'moves=0 rewrites=0 refusals=0' "$SCRATCH/naming-plan.txt"
 revs=(--rev "$REV")
 for rev in "$@"; do revs+=(--rev "$rev"); done

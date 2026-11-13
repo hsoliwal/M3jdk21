@@ -10,7 +10,7 @@ Repository: hsoliwal/M3jdk21. Parent: 081780ea02c11e8fd41a5445ac169b6a28ac5d25 (
 
 Repair the actual reusable Maven/OpenRewrite recipe owners, then execute their retained tests and the broader control reactor. Use existing recipe mechanisms for source changes. Retain atomization, patternization, IOP, documentation, scope gates, in-memory multipass testing and all old counterexamples. Reuse reviewed sibling-PR fixes rather than writing another engine. Preserve the wider JDK task denominator in tasks/map-utf/TODO.tsv.
 
-Targets: m3/tooling/migration-recipes/**; any existing exact-source runtime test/descriptor packet admitted and documented during this pass. Product, public/protected APIs, native ABI, canonical refs, root POM, dependency versions, previous workflows and coverage thresholds are locked. No skip, exclusion, stubbed production owner, type-validation disablement, force-push, rebase, squash or automatic merge. A full native build is a separate acceptance lane and is not implied by a recipe test pass.
+Targets: make/m3/tooling/migration-recipes/**; any existing exact-source runtime test/descriptor packet admitted and documented during this pass. Product, public/protected APIs, native ABI, canonical refs, root POM, dependency versions, previous workflows and coverage thresholds are locked. No skip, exclusion, stubbed production owner, type-validation disablement, force-push, rebase, squash or automatic merge. A full native build is a separate acceptance lane and is not implied by a recipe test pass.
 
 ## Observed first blocker
 

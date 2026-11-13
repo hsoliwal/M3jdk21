@@ -9,7 +9,7 @@ import subprocess
 import sys
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[3]
+ROOT = HERE.parents[4]
 MODULE = ROOT / 'm3/collections'
 OUT = MODULE / 'target/filtered-splits-mask-spans'
 JAVA = Path(os.environ['JAVA_HOME'])

@@ -25,7 +25,7 @@ python -I m3/ast/recipe/syntax-index-facts-20261106/apply.py --donor-git <hsoliw
 ```
 
 Rule kinds (one block per crate, in manifest stacking order): `EDIT` (the crate's preimage and postimage read as
-donor blobs and mapped through `m3/tooling/jdk-naming` (`jdk_naming.rewrite_text`, `target_path` for the manifest
+donor blobs and mapped through `make/m3/tooling/jdk-naming` (`jdk_naming.rewrite_text`, `target_path` for the manifest
 path); the owner without its `//FLLDCIM:` lines must equal the mapped preimage, otherwise the recipe refuses; the
 postimage is the mapped crate postimage plus one `//FLLDCIM: MRL` anchor per edited declaration naming the crate),
 `FILE` (the crate proof relocated into `src/test/java/jdk/m3/ast`: module header, `package jdk.m3.ast`, the declared

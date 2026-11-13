@@ -12,7 +12,7 @@ channel writer and the indexed-text readers on 2026-11-02, after that port.
 | file | content |
 |---|---|
 | `DECISION.tsv` | one decision per unexplained MEMBER_GAPS row (82): RESTORE 16, PRESENT_EVOLVED 65, NEC 1 |
-| `apply.py` | recipe CENSUS3_GAPS v1 (from `m3/collections/qualification/census-small-batch-20261106/apply.py`): hash-pinned anchored edits over 6 owners, `--check` fixed point, refuses drift (exit 2) |
+| `apply.py` | recipe CENSUS3_GAPS v1 (from `make/m3/collections/qualification/census-small-batch-20261106/apply.py`): hash-pinned anchored edits over 6 owners, `--check` fixed point, refuses drift (exit 2) |
 | `EDITS.tsv` | file, before/after sha256, leaf, donor blob, rule (written by apply.py) |
 | `oracle/census3/` | seeded differential driver + `OwnerFile`; `oracle/SIDE_MAP.tsv` + `mkdonor.py` generate the donor side |
 | `differential.sh` | compiles both sides, runs default JIT and `-Xint`, requires byte-identical output |

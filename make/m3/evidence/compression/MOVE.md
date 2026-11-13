@@ -4,7 +4,7 @@ This is the first step of the layout you approved on 2026-11-08. M3 product code
 JDK modules, and the runtime internals go into `java.base` as `jdk.internal.m3.<area>`. `jdk.m3.compression` had no
 consumer outside its own module.
 
-`m3/tooling/jdk-naming/move_area.py` (MOVE_TO_JDK_MODULE v1) does the whole move; `MOVES.tsv` lists every old path,
+`make/m3/tooling/jdk-naming/move_area.py` (MOVE_TO_JDK_MODULE v1) does the whole move; `MOVES.tsv` lists every old path,
 its new path, and the rules applied:
 
 | From `m3/compression/` | To |
@@ -14,9 +14,9 @@ its new path, and the rules applied:
 | `src/main/native/m3_lz_jni.c` | `src/java.base/share/native/libm3compression/` (JNI symbols `Java_jdk_internal_m3_compression_*`; still the opt-in library loaded from `-Dm3.lz.library`) |
 | `src/main/native/tests/m3_lz_test.c` | `test/jdk/jdk/internal/m3/compression/native/` |
 | `src/main/native/CMakeLists.txt` | `make/m3/compression/CMakeLists.txt` (sources re-pointed) |
-| `recipe/compression-20261106/*` | `m3/evidence/compression/recipe/` (one store; no dated directory) |
+| `recipe/compression-20261106/*` | `make/m3/evidence/compression/recipe/` (one store; no dated directory) |
 | `NOTICE` | `src/java.base/share/legal/m3compression.md` (placement sentence updated) |
-| `pom.xml`, `module-info.java` (`org.m3jdk.compression`) | removed; `m3/pom.xml` drops the module |
+| `pom.xml`, `module-info.java` (`org.m3jdk.compression`) | removed; `make/m3/pom.xml` drops the module |
 
 The only test change is a declared rule: `MethodHandles.publicLookup()` becomes `MethodHandles.lookup()` in 3 test
 helpers, because an internal `java.base` package is not unconditionally exported.

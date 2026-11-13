@@ -9,7 +9,7 @@
 # usage: mutants.sh <differential-scratch-dir> <scratch-dir> [queries] [seed]   (run differential.sh first; JAVA_HOME)
 set -euo pipefail
 case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) SEP=';'; winpath() { (cd "$1" && pwd -W); } ;; *) SEP=':'; winpath() { (cd "$1" && pwd); } ;; esac
-MODULE=$(winpath "$(dirname "$0")/../..")
+MODULE=$(winpath "$(dirname "$0")/../../../../../m3/collections")
 DIFF=$(winpath "$1")
 mkdir -p "$2"
 SCRATCH=$(winpath "$2")

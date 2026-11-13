@@ -4,7 +4,7 @@
 
 Status: DESIGN + proving ground (`m3/ports/regex-cursor`, Apache-2.0). No `src/java.base` change.
 Branch `m3/regex-cursor-20261018`, base master `2f2beb2eff7a`.
-Donor ledger: [`m3/ports/regex-cursor/FOSS_REUSE_DECISION.tsv`](../../ports/regex-cursor/FOSS_REUSE_DECISION.tsv).
+Donor ledger: [`m3/ports/regex-cursor/FOSS_REUSE_DECISION.tsv`](../../../m3/ports/regex-cursor/FOSS_REUSE_DECISION.tsv).
 
 ## 1. Problem
 

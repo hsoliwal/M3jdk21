@@ -6,7 +6,7 @@ This is an **additive, review-only** receiving slice for the [structured-text-to
 
 ## Reused implementation owners
 
-The existing `jdk.m3.text` module already owns immutable `TextFrame` and `TextLine` framing, `Limits`, 17 CPU text atoms, and a deterministic pipeline model; `jdk.m3.io` owns the two opt-in filesystem atoms. Their JMOD build is `build.py` delegating to the canonical `m3/tooling/jmod-recipes/tools/jmod_pack.py`. The new `jdk.m3.structured` **requires transitive** `jdk.m3.text` and exports only `jdk.m3.structured`. The builder now creates three JMODs and packages the developer image with existing tooling. The native Linux FIFO implementation is unchanged; no additional JNI symbols are introduced.
+The existing `jdk.m3.text` module already owns immutable `TextFrame` and `TextLine` framing, `Limits`, 17 CPU text atoms, and a deterministic pipeline model; `jdk.m3.io` owns the two opt-in filesystem atoms. Their JMOD build is `build.py` delegating to the canonical `make/m3/tooling/jmod-recipes/tools/jmod_pack.py`. The new `jdk.m3.structured` **requires transitive** `jdk.m3.text` and exports only `jdk.m3.structured`. The builder now creates three JMODs and packages the developer image with existing tooling. The native Linux FIFO implementation is unchanged; no additional JNI symbols are introduced.
 
 Portable donor and recipe source: `hsoliwal/com.synexia`, review branch `m3/structured-text-jmods-20261015`. The canonical named OpenRewrite recipe is `com.synexia.m3.StructuredTextJmods` using the **existing** `M3HashPinnedJavaSnapshotRecipe` owner and six ABSENT-before manifest/template pins. Receiver transformation is the deterministic package mapping `com.synexia.unix4jm3` -> `jdk.m3.structured`, substituting the existing target API imports, and the existing module descriptor/JMOD packager. No original M3 text type is renamed or discarded. The prior `SOURCE_REF.json`, `PROVENANCE.json`, and `COVERAGE.json` remain **historical 19-atom receipts**, not proof of this successor. New qualification is recorded separately.
 
@@ -34,13 +34,13 @@ printf '%s\n' '{"a":[1,2]}' | image/bin/java -m jdk.m3.structured/jdk.m3.structu
 Run the existing opt-in image builder from the repository root:
 
 ```sh
-python3 m3/tooling/module-packs/text-tools/build.py \
+python3 make/m3/tooling/module-packs/text-tools/build.py \
   --jdk-home "$JAVA_HOME" \
-  --sources m3/tooling/module-packs/text-tools/src \
-  --native-source m3/tooling/module-packs/text-tools/native/m3textio.c \
-  --smoke m3/tooling/module-packs/text-tools/fixtures/src/test/java/M3TextSmoke.java \
-  --legal-notices m3/tooling/module-packs/text-tools/legal \
-  --packager m3/tooling/jmod-recipes/tools/jmod_pack.py \
+  --sources make/m3/tooling/module-packs/text-tools/src \
+  --native-source make/m3/tooling/module-packs/text-tools/native/m3textio.c \
+  --smoke make/m3/tooling/module-packs/text-tools/fixtures/src/test/java/M3TextSmoke.java \
+  --legal-notices make/m3/tooling/module-packs/text-tools/legal \
+  --packager make/m3/tooling/jmod-recipes/tools/jmod_pack.py \
   --out build/m3-text-tools-structured
 ```
 

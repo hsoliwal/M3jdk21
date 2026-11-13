@@ -25,7 +25,7 @@ that were considered and rejected are in [DECISION.tsv](DECISION.tsv): reusing t
 sampled-at epoch.
 
 ```
-python -I m3/collections/qualification/residency-pressure-alloc-20261107/apply.py [--check]
+python -I make/m3/collections/qualification/residency-pressure-alloc-20261107/apply.py [--check]
 ```
 
 ## Proof

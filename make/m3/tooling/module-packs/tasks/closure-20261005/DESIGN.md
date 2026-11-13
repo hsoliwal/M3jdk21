@@ -2,7 +2,7 @@
 
 Task: finish the complete previously declared M3JDK21 programme, beginning with genuine failing build gates rather than another candidate-only control engine.
 
-Parent: `ec2b8502f2758da48b3bc8aa6dc0126ea3793e1e` (PR104), retaining PR99/103/104 source and history. The full packet denominator remains `m3/docs/whole-jdk-work-packets-and-resume.md`; the 31-row `m3/tooling/migration-recipes/tasks/map-utf/TODO.tsv` is not replaced or reduced by this leaf.
+Parent: `ec2b8502f2758da48b3bc8aa6dc0126ea3793e1e` (PR104), retaining PR99/103/104 source and history. The full packet denominator remains `doc/m3/whole-jdk-work-packets-and-resume.md`; the 31-row `make/m3/tooling/migration-recipes/tasks/map-utf/TODO.tsv` is not replaced or reduced by this leaf.
 
 ## Recovered execution inputs
 

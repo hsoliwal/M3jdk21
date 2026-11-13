@@ -172,7 +172,7 @@
     "jni_symbol": "Java_com_m3_collections_M3IndexMaskCompactor_selectNative",
     "action": "COMPILE_ORIGINAL_UNCHANGED"
   },
-  "proof_entrypoint": "m3/tooling/module-packs/collections/build.py",
+  "proof_entrypoint": "make/m3/tooling/module-packs/collections/build.py",
   "gates": [
     "Canonical real Maven/OpenRewrite SDK application and fixed point",
     "Java 21 lint/Werror and frozen projected collection/primitive oracles",

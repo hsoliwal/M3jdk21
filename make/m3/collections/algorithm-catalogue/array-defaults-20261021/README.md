@@ -161,8 +161,8 @@ Rows are deterministically ordered by pattern identifier or source owner.
 ## Admission and reproduction
 
 The authorities remain root `AGENTS.md`, the
-[porting invariant](../../../docs/m3jdk21-porting-invariant.md), the global
-[naming map](../../../docs/name-mapping.json) and the collection
+[porting invariant](../../../../../doc/m3/m3jdk21-porting-invariant.md), the global
+[naming map](../../../../../doc/m3/name-mapping.json) and the collection
 [mapping](../../name-mapping.json). Reusable implementations and recipes remain
 canonical in Synexia. Public class names, existing wrappers and retained
 specialized structures remain unchanged by this catalogue.

@@ -75,7 +75,7 @@
       "java.lang.StringConcatHelper"
     ],
     "publicJdkApiChange": false,
-    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed against c5bd7772ea: 66 targets, four after-images updated; apply.py --check state=after; test_recipe.py 8/8",
+    "runtimeRecipe": "make/m3/runtime-integration/recipe re-sealed against c5bd7772ea: 66 targets, four after-images updated; apply.py --check state=after; test_recipe.py 8/8",
     "reappliedBase": "master 5f68880c6f (A8 owner a37bf443f1, A9 owner c66aacba5f, A6 owner aec42c5a02, refusal-safe binary join 3c3d66694a); original base: m3/equality-gates-20261009 (A9, #501) on m3/facts-scan-fused-20261008 (A8, #499) on m3/facts-thick-20261008 (A4, #486) on master da6084c4ef"
   },
   "runtimeDependencyOnSynexia": false,

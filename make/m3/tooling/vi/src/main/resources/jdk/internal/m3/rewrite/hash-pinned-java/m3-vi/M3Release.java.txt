@@ -5,7 +5,7 @@ import java.util.Objects;
 
 /**
  * Caller-declared release provenance; spelling references use the existing JDK String owner.
- * Adapted from Synexia MIndexLibraryRelease; see m3/tooling/vi/README.md for pinned lineage. Exact raw labels survive comparison-equal versions.
+ * Adapted from Synexia MIndexLibraryRelease; see make/m3/tooling/vi/README.md for pinned lineage. Exact raw labels survive comparison-equal versions.
  * This descriptor performs no resolution, download, signature verification or class loading.
  * A content digest is a candidate seal, not proof of a loaded class's definition bytes.
  */

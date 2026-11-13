@@ -11,8 +11,8 @@ from pathlib import Path
 import re
 import unittest
 
-ROOT = Path(__file__).resolve().parents[2]
-CHECKER = ROOT / 'm3/runtime-integration/check-m3string-invariants.py'
+ROOT = Path(__file__).resolve().parents[3]
+CHECKER = ROOT / 'make/m3/runtime-integration/check-m3string-invariants.py'
 OWNERS = {
     'm3': 'M3String.java',
     'string': 'String.java',

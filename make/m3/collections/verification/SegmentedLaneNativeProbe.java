@@ -30,6 +30,6 @@ public final class SegmentedLaneNativeProbe {
     private static void check(M3BitLane28 lane, int from, int to) {
         int expected = lane.cardinality(from, to);
         int actual = lane.cardinalityNative(from, to);
-        if (expected != actual) throw new AssertionError(from + ".." + to + ": " + expected + " != " + actual);
+        if (expected != actual) throw new AssertionError(from + "../../../../m3/collections" + to + ": " + expected + " != " + actual);
     }
 }

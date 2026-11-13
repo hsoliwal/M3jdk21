@@ -71,7 +71,7 @@ final class M3DecoratorGeneratorTest {
     static final String PROP_JAVA_HOME = "java.home";
     static final String DEFAULT_REV = "bb66a8c16642a4e898dbc5fc7c3af0d5ed572136";
     static final String SURFACE_TSV =
-            "m3/collections/qualification/five-provider-inventory-20261018/SCAFFOLD_SURFACE.tsv";
+            "make/m3/collections/qualification/five-provider-inventory-20261018/SCAFFOLD_SURFACE.tsv";
     static final String OUTPUT_CONTRACT = "OUTPUT_CONTRACT.tsv";
     static final String GENERATOR = "M3DecoratorFill";
     static final String SCAFFOLD = "scaffold.java";

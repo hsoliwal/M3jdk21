@@ -1,7 +1,7 @@
 # java.base jdk.internal.m3 and jdk.internal.m3.hash: product prefix dropped (2026-11-08)
 
 User rule 2026-11-08: no naming sprawl in the JDK, so types inside M3 packages carry no `M3` prefix.
-`m3/tooling/jdk-naming/rename_types.py` v1.5 renamed 55 types (`RENAME.tsv`):
+`make/m3/tooling/jdk-naming/rename_types.py` v1.5 renamed 55 types (`RENAME.tsv`):
 - 26 product types in `src/java.base/share/classes/jdk/internal/m3{,/hash}`;
 - 29 tests in the default-package jtreg directories under `test/jdk/jdk/internal/m3` (new `--test-dir` option).
 
@@ -14,7 +14,7 @@ What follows the rename:
 - four workflows;
 - the hashing tools and their type ledger;
 - the atom-test specs;
-- docs and `m3/docs/name-mapping.json`.
+- docs and `doc/m3/name-mapping.json`.
 
 HotSpot names none of these classes. Recipe, qualification, custody, compatibility and history records keep their
 bytes.

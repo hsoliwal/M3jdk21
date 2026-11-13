@@ -9,13 +9,13 @@ License, Version 2.0.
 
 ### Changes made by Synexia (2026-10-31)
 
-The changes were mechanical, and the tools that made them are in `m3/tooling/annotations-absorb`:
+The changes were mechanical, and the tools that made them are in `make/m3/tooling/annotations-absorb`:
 
 - The package `org.jspecify.annotations` was renamed `jdk.m3.annotations`, in code and in documentation.
 - Each file carries a modification notice in its license header.
 
 The annotation types are otherwise the donor's: the same targets, retention, elements and meta-annotations (checked
-by `m3/tooling/annotations-absorb/gate.sh`). `ABSORB_MANIFEST.tsv` binds each file to its donor by SHA-256.
+by `make/m3/tooling/annotations-absorb/gate.sh`). `ABSORB_MANIFEST.tsv` binds each file to its donor by SHA-256.
 
 ### Apache License 2.0
 

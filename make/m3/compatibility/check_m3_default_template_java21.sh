@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # JDK21 isolated progress subset; NOT an M3/OpenJDK build or jtreg gate.
 set -euo pipefail
-ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
-python3 "$ROOT/m3/compatibility/verify_m3_default_template_20261017.py"
+ROOT="$(cd "$(dirname "$0")/../../.." && pwd)"
+python3 "$ROOT/make/m3/compatibility/verify_m3_default_template_20261017.py"
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
 mkdir -p "$TMP/patch/java/util/concurrent" "$TMP/classes"

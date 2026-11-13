@@ -8,7 +8,7 @@ M3JDK21 owns the delivered product. Canonical recipes and convergence evidence
 remain in Synexia, without a Synexia runtime dependency.
 
 This contract composes the existing [content-delta contract](build-delta-invariant.md),
-the [shared compiler frontend](../tooling/shared-frontend/README.md), and the
+the [shared compiler frontend](../../make/m3/tooling/shared-frontend/README.md), and the
 existing module-pack installer. It does not replace the Maven/Gradle build model,
 dependency planner, native toolchain or OpenRewrite scheduler.
 

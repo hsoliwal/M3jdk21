@@ -1,7 +1,7 @@
 # Consolidation: jdk.m3.tooling.search folded into jdk.m3.search
 
 M3jdk21 keeps a few fixed packages; a JDK has one search package, not two. #2793/#2794/#2798 had received the com.synexia
-sorted-bounds stack as a separate module `m3/tooling/search` (package `jdk.m3.tooling.search`). This change moves
+sorted-bounds stack as a separate module `make/m3/tooling/search` (package `jdk.m3.tooling.search`). This change moves
 its 14 files into the existing module `m3/search` (package `jdk.m3.search`) and removes the old module root.
 
 `consolidate_search.py` (CONSOLIDATE_PACKAGE v1) is the whole transformation; `MOVES_search.tsv` lists every old
@@ -12,7 +12,7 @@ path, new path and the rules each file needed:
   (kept out of `CMakeLists.txt`: their qualification scripts generate the JNI header they include);
 - READMEs and the two verify scripts to `m3/search/qualification/sorted-bounds/`, re-rooted at the module, the
   long-bounds script compiling only the sorted-bounds sources.
-No class name collides in `jdk.m3.search`. The receipt evidence under `m3/qualification/receive-m3-tooling-search-*`,
+No class name collides in `jdk.m3.search`. The receipt evidence under `make/m3/qualification/receive-m3-tooling-search-*`,
 `union-15117-*` and `receive-15186-*` keeps the old paths as a record of what was received.
 
 ## Gates

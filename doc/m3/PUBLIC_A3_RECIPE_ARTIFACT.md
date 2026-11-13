@@ -23,7 +23,7 @@ The exact Apache-2.0 export source is mirrored under:
 
 The target-local module:
 
-`m3/tooling/synexia-jdk-a3-recipes`
+`make/m3/tooling/synexia-jdk-a3-recipes`
 
 contains build/proof glue only. Its Maven source directory points at the mirrored Synexia source and
 compiles only the eight classes listed by the canonical export manifest.

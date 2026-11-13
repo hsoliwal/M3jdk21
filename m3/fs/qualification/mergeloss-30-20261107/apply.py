@@ -14,7 +14,7 @@ caller of that overload; this leaf is its consumer.
 
 Observable difference: the borrowed ByteLayer callback receives up to 64 KiB per call instead of 8 KiB (the same
 bytes, in order, through the same checked channel); hashes, fingerprints, progress totals and inventory rows are
-unchanged. Derived from m3/collections/qualification/census-small-batch-20261106/apply.py v1 (anchored edits, every
+unchanged. Derived from make/m3/collections/qualification/census-small-batch-20261106/apply.py v1 (anchored edits, every
 anchor exactly once, pinned preimage blob, refuses drift, idempotent; --check writes nothing).
 
 usage: python -I apply.py [--root DIR] [--check]

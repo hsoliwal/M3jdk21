@@ -29,7 +29,7 @@ recipe execution itself performs no network access. No new recipe engine is intr
 
 ## Reproduction
 
-`python3 m3/compatibility/chat-convergence-20261021/verify-core.py --output /tmp/m3-core-fresh`
+`python3 make/m3/compatibility/chat-convergence-20261021/verify-core.py --output /tmp/m3-core-fresh`
 compiles the actual owners, generates JNI headers and runs Java fallback, real checked
 JNI, forced-portable bit scanning, fatal UBSan and interpreter cases on Linux.
 `--java-only` omits native execution explicitly. The script patches only these actual

@@ -8,7 +8,7 @@ Copies every FILE, FIXTURE and SERVICE row of RELOCATION_MAP.tsv from a donor gi
 module. A FILE row (Java source) is rewritten only in (1) the leading license header lines, replaced by the M3JDK
 header, (2) the package line, through the PACKAGE rows, (3) import lines of mapped packages and types, through the
 PACKAGE and TYPE rows, (4) the TYPE rows whose donor and target names differ, (5) whole comment lines, through the
-PROSE rows (the product-name rules of m3/tooling/jdk-naming, so that jdk_naming.py is a fixed point over the output),
+PROSE rows (the product-name rules of make/m3/tooling/jdk-naming, so that jdk_naming.py is a fixed point over the output),
 (6) one //FLLDCIM: anchor line inserted before the top-level type declaration, naming the donor blob URL at the donor
 commit, and (7) CRLF line ends, normalized to LF (the repository stores LF; its .gitattributes is "* -text"). A
 FIXTURE row gets (7) only; a SERVICE row (java.util.ServiceLoader descriptor) maps each line as a fully qualified type

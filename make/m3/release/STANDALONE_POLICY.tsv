@@ -4,13 +4,13 @@
 # line stops being policy when it is edited, or when its file fetches, checks out or builds from the donor or
 # holds any other counted donor reference.
 path	line	reason
-m3/compatibility/check_m3_collection_port_recipe.py	"reusable_recipe_owner": "hsoliwal/com.synexia",	RECIPE_OWNER_PIN: reusable recipe owner field of the collection-port handoff pin
-m3/compatibility/check_m3_family_naming.py	"reusable_recipe_owner": "hsoliwal/com.synexia",	RECIPE_OWNER_PIN: reusable recipe owner field of the family-naming handoff pin
-m3/compatibility/check_m3_full_borrow_intake_20261011.py	"canonical_owner": "hsoliwal/com.synexia",	RECIPE_OWNER_PIN: canonical owner field of the 2026-10-11 full-borrow intake pin
-m3/compatibility/check_m3_recipe_ownership.py	f"{target}; improve {owner} in hsoliwal/com.synexia and consume a pinned handoff"	RECIPE_OWNER_MESSAGE: drift message sending reusable-residue changes to the recipe owner
-m3/compatibility/test_m3_public_target_policy.py	("hsoliwal/com.synexia", "hsoliwal/M3jdk21"),	RECIPE_OWNER_TEST: mutation pair proving the handoff pin refuses another canonical owner
-m3/compatibility/test_nebula_proven_recipe_transfer.py	"M3_CANONICAL_OWNER": "hsoliwal/com.synexia",	RECIPE_OWNER_TEST: expected repository of the recipe-home stages of the Nebula transfer receipt
-m3/compatibility/test_nebula_proven_recipe_transfer.py	"M3_NEBULA_PROVEN_RECIPE": "hsoliwal/com.synexia",	RECIPE_OWNER_TEST: expected repository of the recipe-home stages of the Nebula transfer receipt
-m3/runtime-integration/test_m3_intake_custody.py	target_scope="hsoliwal/com.synexia only",	RECIPE_SCOPE_TEST: intake-policy fixture rows (recipe tooling scope; donor FOSS ledger row)
-m3/runtime-integration/test_m3_intake_custody.py	"https://github.com/hsoliwal/com.synexia\tApache-2.0\tTARGET_OWNED_PORT\tfixture\n")	RECIPE_SCOPE_TEST: intake-policy fixture rows (recipe tooling scope; donor FOSS ledger row)
-m3/runtime-integration/verify-m3-intake.py	policy["EXTERNAL_RECIPE_TOOL"]["target_scope"] == "hsoliwal/com.synexia only",	RECIPE_SCOPE_GUARD: intake policy requires recipe authoring and execution to stay in the donor (AGENTS.md)
+make/m3/compatibility/check_m3_collection_port_recipe.py	"reusable_recipe_owner": "hsoliwal/com.synexia",	RECIPE_OWNER_PIN: reusable recipe owner field of the collection-port handoff pin
+make/m3/compatibility/check_m3_family_naming.py	"reusable_recipe_owner": "hsoliwal/com.synexia",	RECIPE_OWNER_PIN: reusable recipe owner field of the family-naming handoff pin
+make/m3/compatibility/check_m3_full_borrow_intake_20261011.py	"canonical_owner": "hsoliwal/com.synexia",	RECIPE_OWNER_PIN: canonical owner field of the 2026-10-11 full-borrow intake pin
+make/m3/compatibility/check_m3_recipe_ownership.py	f"{target}; improve {owner} in hsoliwal/com.synexia and consume a pinned handoff"	RECIPE_OWNER_MESSAGE: drift message sending reusable-residue changes to the recipe owner
+make/m3/compatibility/test_m3_public_target_policy.py	("hsoliwal/com.synexia", "hsoliwal/M3jdk21"),	RECIPE_OWNER_TEST: mutation pair proving the handoff pin refuses another canonical owner
+make/m3/compatibility/test_nebula_proven_recipe_transfer.py	"M3_CANONICAL_OWNER": "hsoliwal/com.synexia",	RECIPE_OWNER_TEST: expected repository of the recipe-home stages of the Nebula transfer receipt
+make/m3/compatibility/test_nebula_proven_recipe_transfer.py	"M3_NEBULA_PROVEN_RECIPE": "hsoliwal/com.synexia",	RECIPE_OWNER_TEST: expected repository of the recipe-home stages of the Nebula transfer receipt
+make/m3/runtime-integration/test_m3_intake_custody.py	target_scope="hsoliwal/com.synexia only",	RECIPE_SCOPE_TEST: intake-policy fixture rows (recipe tooling scope; donor FOSS ledger row)
+make/m3/runtime-integration/test_m3_intake_custody.py	"https://github.com/hsoliwal/com.synexia\tApache-2.0\tTARGET_OWNED_PORT\tfixture\n")	RECIPE_SCOPE_TEST: intake-policy fixture rows (recipe tooling scope; donor FOSS ledger row)
+make/m3/runtime-integration/verify-m3-intake.py	policy["EXTERNAL_RECIPE_TOOL"]["target_scope"] == "hsoliwal/com.synexia only",	RECIPE_SCOPE_GUARD: intake policy requires recipe authoring and execution to stay in the donor (AGENTS.md)

@@ -13,11 +13,11 @@ import org.openrewrite.internal.InMemoryLargeSourceSet;
 final class M3Jep497MlDsaInventoryRecipeTest {
     private static final List<String> TARGETS = List.of(
             ".github/workflows/m3-jep497-mldsa-inventory.yml",
-            "m3/backports/recipes/jep-497-mldsa/DEPENDENCY_CLOSURE.tsv",
-            "m3/backports/recipes/jep-497-mldsa/GA_PATH_STATE.tsv",
-            "m3/backports/recipes/jep-497-mldsa/MATERIALIZE_PATHS.txt",
-            "m3/backports/recipes/jep-497-mldsa/README.md",
-            "m3/backports/recipes/jep-497-mldsa/UPSTREAM_AUTHORITY.tsv");
+            "make/m3/backports/recipes/jep-497-mldsa/DEPENDENCY_CLOSURE.tsv",
+            "make/m3/backports/recipes/jep-497-mldsa/GA_PATH_STATE.tsv",
+            "make/m3/backports/recipes/jep-497-mldsa/MATERIALIZE_PATHS.txt",
+            "make/m3/backports/recipes/jep-497-mldsa/README.md",
+            "make/m3/backports/recipes/jep-497-mldsa/UPSTREAM_AUTHORITY.tsv");
 
     @Test void usesExistingHashPinnedTextOwnerWithoutProductAuthority() {
         var recipe = new M3Jep497MlDsaInventoryRecipe();
@@ -45,13 +45,13 @@ final class M3Jep497MlDsaInventoryRecipeTest {
         var recipe = new M3Jep497MlDsaInventoryRecipe();
         List<SourceFile> files = recipe.run(new InMemoryLargeSourceSet(List.of()), context(), 1)
                 .getChangeset().getAllResults().stream().map(Result::getAfter).toList();
-        String state = find(files, "m3/backports/recipes/jep-497-mldsa/GA_PATH_STATE.tsv");
+        String state = find(files, "make/m3/backports/recipes/jep-497-mldsa/GA_PATH_STATE.tsv");
         assertEquals(10, state.lines().skip(1).count());
         assertEquals(3, state.lines().filter(line -> line.contains("ABSENT_AT_GA")).count());
-        String materialize = find(files, "m3/backports/recipes/jep-497-mldsa/MATERIALIZE_PATHS.txt");
+        String materialize = find(files, "make/m3/backports/recipes/jep-497-mldsa/MATERIALIZE_PATHS.txt");
         assertEquals(7, materialize.lines().filter(line -> !line.isBlank()).count());
         assertFalse(materialize.contains("internalProjection.json"));
-        String deps = find(files, "m3/backports/recipes/jep-497-mldsa/DEPENDENCY_CLOSURE.tsv");
+        String deps = find(files, "make/m3/backports/recipes/jep-497-mldsa/DEPENDENCY_CLOSURE.tsv");
         assertTrue(deps.contains("JEP-496"));
         assertTrue(deps.contains("JDK-8345057"));
         assertTrue(deps.contains("JDK-8345533"));

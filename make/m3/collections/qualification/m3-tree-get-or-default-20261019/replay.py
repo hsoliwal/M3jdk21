@@ -17,7 +17,7 @@ OPTIONS.add_argument('--output', type=pathlib.Path, required=True)
 ARGS = OPTIONS.parse_args()
 ROOT = ARGS.repository.resolve()
 JAVA_HOME = pathlib.Path(os.environ['JAVA_HOME']).resolve()
-OLD = ROOT / 'm3/collections/qualification/tree-empty-lookup-admission-20261019'
+OLD = ROOT / 'make/m3/collections/qualification/tree-empty-lookup-admission-20261019'
 OUT = ARGS.output.resolve()
 OUT.mkdir(parents=True, exist_ok=True)
 CLASSES = ROOT / 'm3/collections/target/classes'

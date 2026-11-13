@@ -11,6 +11,6 @@ The existing `AlgorithmCatalogue`, `PinnedAlgorithmDonorCatalog`, `ProblemCatego
 Run the narrow checks from the repository root:
 
 ```sh
-python3 -I -S -B m3/collections/qualification/collection-file-review-batch80-20261017/verify.py
-mvn -B -ntp -f m3/collections/recipe/collection-file-review-batch80-20261017/pom.xml test
+python3 -I -S -B make/m3/collections/qualification/collection-file-review-batch80-20261017/verify.py
+mvn -B -ntp -f make/m3/collections/recipe/collection-file-review-batch80-20261017/pom.xml test
 ```

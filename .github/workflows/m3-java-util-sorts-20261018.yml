@@ -14,10 +14,10 @@ on:
       - "src/java.base/share/classes/java/util/DualPivotQuicksort.java"
       - "src/java.base/share/classes/java/util/Arrays.java"
       - "test/jdk/java/util/Sorts/**"
-      - "m3/tooling/sort-recipes/m3-java-util-sorts-20261018/**"
-      - "m3/verification/sorting/**"
-      - "m3/docs/sorting/**"
-      - "m3/docs/name-mapping.d/m3-java-util-sorts.json"
+      - "make/m3/tooling/sort-recipes/m3-java-util-sorts-20261018/**"
+      - "make/m3/verification/sorting/**"
+      - "doc/m3/sorting/**"
+      - "doc/m3/name-mapping.d/m3-java-util-sorts.json"
       - ".github/workflows/m3-java-util-sorts-20261018.yml"
   workflow_dispatch:
 
@@ -39,16 +39,16 @@ jobs:
           distribution: temurin
           java-version: "21"
           cache: maven
-          cache-dependency-path: m3/tooling/sort-recipes/m3-java-util-sorts-20261018/pom.xml
+          cache-dependency-path: make/m3/tooling/sort-recipes/m3-java-util-sorts-20261018/pom.xml
       - name: Exercise the actual OpenRewrite recipes
-        run: mvn -B -ntp -f m3/tooling/sort-recipes/m3-java-util-sorts-20261018/pom.xml verify
+        run: mvn -B -ntp -f make/m3/tooling/sort-recipes/m3-java-util-sorts-20261018/pom.xml verify
       - name: Check exact postimages and recipe fixed point
         run: |
-          mvn -B -ntp -f m3/tooling/sort-recipes/m3-java-util-sorts-20261018/pom.xml compile exec:java \
+          mvn -B -ntp -f make/m3/tooling/sort-recipes/m3-java-util-sorts-20261018/pom.xml compile exec:java \
             -DtargetRoot="$GITHUB_WORKSPACE" -DapplyMode=check \
             -DreceiptPath="$RUNNER_TEMP/m3-sorts-check.tsv"
       - name: Compile and exercise the actual java.util API
-        run: python3 m3/verification/sorting/verify.py --java-home "$JAVA_HOME"
+        run: python3 make/m3/verification/sorting/verify.py --java-home "$JAVA_HOME"
       - name: Retain bounded qualification evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -56,6 +56,6 @@ jobs:
           name: m3-java-util-sorts-qualification
           path: |
             build/m3-sorting-qualification/
-            m3/tooling/sort-recipes/m3-java-util-sorts-20261018/target/surefire-reports/
+            make/m3/tooling/sort-recipes/m3-java-util-sorts-20261018/target/surefire-reports/
             /home/runner/work/_temp/m3-sorts-check.tsv
           if-no-files-found: error

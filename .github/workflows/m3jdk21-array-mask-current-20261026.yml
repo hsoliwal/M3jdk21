@@ -7,7 +7,7 @@ on:
       - 'm3/arrays/pom.xml'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ArrayList.java'
       - 'test/jdk/jdk/m3/collections/M3ArrayListShortWordMaskContract.java'
-      - 'm3/collections/qualification/array-mask-current-20261026/**'
+      - 'make/m3/collections/qualification/array-mask-current-20261026/**'
       - '.github/workflows/m3jdk21-array-mask-current-20261026.yml'
   workflow_dispatch:
 permissions:
@@ -41,8 +41,8 @@ jobs:
           java-version: '21'
       - name: Refuse source/custody drift before compiling
         run: |
-          python3 m3/collections/qualification/array-mask-current-20261026/verify.py
-          python3 -m unittest discover -s m3/collections/qualification/array-mask-current-20261026 -p 'test_*.py' -v
+          python3 make/m3/collections/qualification/array-mask-current-20261026/verify.py
+          python3 -m unittest discover -s make/m3/collections/qualification/array-mask-current-20261026 -p 'test_*.py' -v
       - name: Build and test actual M3 arrays with JNI
         run: mvn -B -ntp -f m3/arrays/pom.xml -Pnative-linux -DskipTests install
       - name: Bind real array-JNI library for collection tests

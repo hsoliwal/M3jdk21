@@ -59,9 +59,9 @@ verifier are **target-specific read-only receivers**, not a forked recipe.
    unconditional mass move. Retain all historical provenance and source digests.
 
 This receiving contract extends, but does not override,
-`m3/compatibility/m3-family-naming-target-disposition.tsv`,
-`m3/docs/m3jdk21-porting-invariant.md` and the machine-readable
-`m3/docs/name-mapping.json`.
+`make/m3/compatibility/m3-family-naming-target-disposition.tsv`,
+`doc/m3/m3jdk21-porting-invariant.md` and the machine-readable
+`doc/m3/name-mapping.json`.
 
 The manifest and verifier themselves are independently authored first-party
 Apache-2.0; target OpenJDK source retains its original license.

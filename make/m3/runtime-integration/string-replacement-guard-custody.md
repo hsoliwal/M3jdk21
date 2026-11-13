@@ -61,11 +61,11 @@ The six files mirrored below `m3/vendor/synexia/` preserve their exact Synexia
 relative paths and bytes. They are authoring/proof tooling, not a dependency of
 `java.base`, HotSpot or JNI. The canonical POM and README remain in Synexia.
 Apache-2.0 terms are retained; the existing full license is
-`m3/history/licenses/Synexia-Apache-2.0.txt`. New first-party expression remains
+`make/m3/history/licenses/Synexia-Apache-2.0.txt`. New first-party expression remains
 Copyright 2026 Hitesh Soliwal and contributors. OpenJDK licenses are unchanged.
 
 The mirror is independently hash-checked by
-`m3/runtime-integration/string-replacement-guard-sha256.txt`.
+`make/m3/runtime-integration/string-replacement-guard-sha256.txt`.
 The recipe modifies only the source invariant checker and generates its two new
 proof files plus an application receipt. `String.java` is a hash-pinned KEEP owner.
 

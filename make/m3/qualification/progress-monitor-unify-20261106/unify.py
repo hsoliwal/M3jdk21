@@ -34,7 +34,7 @@ from pathlib import Path
 RECIPE = "unify.py"
 VERSION = "v1"
 RECIPE_DIR = Path(__file__).resolve().parent
-RECIPE_DIR_REL = "m3/qualification/progress-monitor-unify-20261106"
+RECIPE_DIR_REL = "make/m3/qualification/progress-monitor-unify-20261106"
 BASE_COMMIT = "4072669632159f9cd58e3a5c8c185f09316edfe1"
 OWNER = "jdk.m3.collections.M3ProgressMonitor"
 PLAN_NAME = "PLAN.tsv"
@@ -46,7 +46,7 @@ DEPENDENCY = (
     "      <artifactId>m3-collections</artifactId>\n"
     "      <version>0.1.0-SNAPSHOT</version>\n"
     "    </dependency>\n")
-POOLS = "m3/collections/recipe/immutable-pools-20261106"
+POOLS = "make/m3/collections/recipe/immutable-pools-20261106"
 POOL_MONITOR_TARGET = "src/main/java/jdk/m3/collections/M3PoolProgressMonitor.java"
 POOL_SUPERSEDED_NOTE = (
     "; superseded 2026-11-06 by " + RECIPE_DIR_REL + "/unify.py v1: an adapter over " + OWNER
@@ -129,7 +129,7 @@ RULES = (
           "`" + OWNER + "`, which `jdk.m3.file.M3ProgressMonitor` extends since\n"
           "`" + RECIPE_DIR_REL + "`) is the only dependency outside `java.base`.\n")]),
     # --- reactor: two default modules now depend on m3-collections, so arrays and collections join the default set --
-    ("EDIT", "m3/pom.xml", "d543afc55dcdc79e523f8c7b2b3956fc181f2645",
+    ("EDIT", "make/m3/pom.xml", "d543afc55dcdc79e523f8c7b2b3956fc181f2645",
      "arrays and collections move from the m3-extended profile to the default modules (before ports/file); preimage re-pinned"
      " at 40726696321 (98deed79d8d registered ports/collections and native)", [
          ("sub", "        <module>arrays</module>\n        <module>collections</module>\n        <module>search</module>\n",
@@ -356,7 +356,7 @@ def run(root: Path, check: bool) -> int:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--root", default=str(RECIPE_DIR.parents[2]), help="repository root (default: three up)")
+    parser.add_argument("--root", default=str(RECIPE_DIR.parents[3]), help="repository root (default: three up)")
     parser.add_argument("--check", action="store_true", help="write nothing; exit 1 when a run would change a file")
     args = parser.parse_args(argv)
     try:

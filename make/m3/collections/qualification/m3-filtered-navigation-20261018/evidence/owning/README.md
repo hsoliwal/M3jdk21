@@ -41,7 +41,7 @@ The owning command enabled `-Xcheck:jni` and supplied the already built `libm3_c
 
 ## Reproduction and finite admission boundary
 
-The repository's existing source prerequisite is documented at `m3/docs/a3-vendored-build-prerequisite-20261015.md` (Git blob `4939e7c2148a8db90f2336d1df364e4b86757efe`). On a full checkout, its reactor selection for this closure is:
+The repository's existing source prerequisite is documented at `doc/m3/a3-vendored-build-prerequisite-20261015.md` (Git blob `4939e7c2148a8db90f2336d1df364e4b86757efe`). On a full checkout, its reactor selection for this closure is:
 
 ```sh
 mvn -B -ntp -f m3/vendor/third_party/pom.xml \

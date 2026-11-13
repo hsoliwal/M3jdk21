@@ -20,7 +20,7 @@ This is not a replacement for backed filtered, sorted, navigable Set/Map/List wr
 ## Focused build and proof
 
 ```bash
-bash m3/collections/qualification/natural-run-20261021/verify.sh
+bash make/m3/collections/qualification/natural-run-20261021/verify.sh
 ```
 
 The focused product script refuses source SHA-256 drift, compiles the *exact* original Java21 owner and dependencies and original baseline blob with strict javac, verifies public descriptors against baseline, and runs the same standalone JDK stable-index oracle under mixed and interpreter modes. The JUnit adapter also participates in the existing `m3/collections/pom.xml` owning module when that module's pinned Maven dependencies are available.

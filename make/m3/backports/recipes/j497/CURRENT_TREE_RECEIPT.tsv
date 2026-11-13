@@ -2,7 +2,7 @@ field	value
 jep	497
 current_tree_state	CANDIDATE_MATERIALIZED_UNVERIFIED
 blocking_dependency	JEP496_SHAKE_PROOF_AND_SYNX_FILE_CONVERGENCE_PR285
-dependency_receipt	m3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv
+dependency_receipt	make/m3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv
 named_key_framework	PRESENT_CURRENT_TREE
 feature_upstream	8b98f958dc1afedc02b9d9c98089d6cb1ca3a5b7
 coexistence_fix	8c2b4f62714f26ab3bc4808c734502af632a1eef

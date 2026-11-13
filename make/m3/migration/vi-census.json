@@ -2,7 +2,7 @@
   "schema": 1,
   "source_commit": "e0319c9fce2aabacb07302e806d997ea7e77c50c",
   "kind": "bounded-filename-census",
-  "canonical_mapping": "m3/docs/name-mapping.json",
+  "canonical_mapping": "doc/m3/name-mapping.json",
   "source_tree_complete": false,
   "selection": "MIndex*.java and MatIndex*.java under src/main/java in listed subtrees",
   "trees": [

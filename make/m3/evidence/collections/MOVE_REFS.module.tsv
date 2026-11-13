@@ -1,4 +1,4 @@
-# MOVE_REFS v1 rules (m3/tooling/jdk-naming/move_refs.py) for the m3/collections + m3/algorithms move into the JDK module
+# MOVE_REFS v1 rules (make/m3/tooling/jdk-naming/move_refs.py) for the m3/collections + m3/algorithms move into the JDK module
 # src/jdk.m3.collections (MOVE_TO_JDK_MODULE v3, keep-pom mode): the module jdk.m3.collections of the Maven bridge is
 # its descriptor m3/collections/src/main/java/module-info.java plus the package sources under
 # src/jdk.m3.collections/share/classes/jdk/{m3,internal/m3}/collections; tests under test/jdk/jdk/{m3,internal/m3}/collections;
@@ -6,48 +6,48 @@
 # FILES: every workflow, and the scripts and poms a workflow runs that name the old paths (census 2026-11-08).
 # Literals never end in a space.
 FILES	.github/workflows/*.yml
-FILES	m3/collections/qualification/array-mask-current-20261026/verify.py
-FILES	m3/collections/qualification/checked-jni-mask-viewport-20261028/verify.sh
-FILES	m3/collections/qualification/compound-signals-20261018/verify.sh
-FILES	m3/collections/qualification/cow-filtered-owner-20261021/verify.sh
-FILES	m3/collections/qualification/doops-entryless-verify.sh
-FILES	m3/collections/qualification/filtered-isempty-20261021/verify.sh
-FILES	m3/collections/qualification/filtered-list-history-restore-20261017/verify.py
-FILES	m3/collections/qualification/filtered-navigable-consolidation-20261017/verify.sh
-FILES	m3/collections/qualification/filtered-plan-current-master-20261027/verify.sh
-FILES	m3/collections/qualification/indexed-live-views-20261021/verify.sh
-FILES	m3/collections/qualification/indexpath-bulk-20261021/verify_history.py
-FILES	m3/collections/qualification/leetcodify-empty-value-20261105/verify_java21.sh
-FILES	m3/collections/qualification/long-sorted-masked-window-20261021/verify.sh
-FILES	m3/collections/qualification/m3-filtered-navigation-20261018/runtime/verify.py
-FILES	m3/collections/qualification/m3-native-bag-rank-index-20261018/verify.py
-FILES	m3/collections/qualification/m3-native-indexed-table-20261017/verify.py
-FILES	m3/collections/qualification/m3-native-object-range-map-20261018/verify.py
-FILES	m3/collections/qualification/m3-object-slot-index-snapshot-20261017/verify.py
-FILES	m3/collections/qualification/m3-readonly-filtered-map-defaults-20261017/verify.py
-FILES	m3/collections/qualification/natural-run-20261021/verify.sh
-FILES	m3/collections/qualification/object-state-slots-28/verify.py
-FILES	m3/collections/qualification/pathmask-classification-20261021/verify.sh
-FILES	m3/collections/qualification/pathmask-stage-cache-20261020/verify.sh
-FILES	m3/collections/qualification/required-excluded-mask-selector-20261018/verify.sh
-FILES	m3/collections/qualification/residency-state-mask-20261017/verify.sh
-FILES	m3/collections/qualification/signal-mask-order-20261017/verify.sh
-FILES	m3/collections/qualification/signal-mask32-20261018/verify.sh
-FILES	m3/collections/qualification/state-slots-constructor-20261017/verify.sh
-FILES	m3/collections/qualification/tree-plan-commit-identity/verify_receipt.py
-FILES	m3/collections/qualification/window-recovery-20261017/verify.py
-FILES	m3/collections/recipe/state-mask-histogram-20261017/verify.sh
-FILES	m3/collections/verification/filtered-object-deques-20261017/verify.sh
-FILES	m3/collections/verification/mask-all-select-20261017/verify.py
-FILES	m3/collections/verification/primitive-filtered-sequences-20261017/verify.sh
-FILES	m3/collections/verification/tombstone-reuse-20261017/verify.py
-FILES	m3/collections/verification/zero-slot-growth-20261017/verify.py
+FILES	make/m3/collections/qualification/array-mask-current-20261026/verify.py
+FILES	make/m3/collections/qualification/checked-jni-mask-viewport-20261028/verify.sh
+FILES	make/m3/collections/qualification/compound-signals-20261018/verify.sh
+FILES	make/m3/collections/qualification/cow-filtered-owner-20261021/verify.sh
+FILES	make/m3/collections/qualification/doops-entryless-verify.sh
+FILES	make/m3/collections/qualification/filtered-isempty-20261021/verify.sh
+FILES	make/m3/collections/qualification/filtered-list-history-restore-20261017/verify.py
+FILES	make/m3/collections/qualification/filtered-navigable-consolidation-20261017/verify.sh
+FILES	make/m3/collections/qualification/filtered-plan-current-master-20261027/verify.sh
+FILES	make/m3/collections/qualification/indexed-live-views-20261021/verify.sh
+FILES	make/m3/collections/qualification/indexpath-bulk-20261021/verify_history.py
+FILES	make/m3/collections/qualification/leetcodify-empty-value-20261105/verify_java21.sh
+FILES	make/m3/collections/qualification/long-sorted-masked-window-20261021/verify.sh
+FILES	make/m3/collections/qualification/m3-filtered-navigation-20261018/runtime/verify.py
+FILES	make/m3/collections/qualification/m3-native-bag-rank-index-20261018/verify.py
+FILES	make/m3/collections/qualification/m3-native-indexed-table-20261017/verify.py
+FILES	make/m3/collections/qualification/m3-native-object-range-map-20261018/verify.py
+FILES	make/m3/collections/qualification/m3-object-slot-index-snapshot-20261017/verify.py
+FILES	make/m3/collections/qualification/m3-readonly-filtered-map-defaults-20261017/verify.py
+FILES	make/m3/collections/qualification/natural-run-20261021/verify.sh
+FILES	make/m3/collections/qualification/object-state-slots-28/verify.py
+FILES	make/m3/collections/qualification/pathmask-classification-20261021/verify.sh
+FILES	make/m3/collections/qualification/pathmask-stage-cache-20261020/verify.sh
+FILES	make/m3/collections/qualification/required-excluded-mask-selector-20261018/verify.sh
+FILES	make/m3/collections/qualification/residency-state-mask-20261017/verify.sh
+FILES	make/m3/collections/qualification/signal-mask-order-20261017/verify.sh
+FILES	make/m3/collections/qualification/signal-mask32-20261018/verify.sh
+FILES	make/m3/collections/qualification/state-slots-constructor-20261017/verify.sh
+FILES	make/m3/collections/qualification/tree-plan-commit-identity/verify_receipt.py
+FILES	make/m3/collections/qualification/window-recovery-20261017/verify.py
+FILES	make/m3/collections/recipe/state-mask-histogram-20261017/verify.sh
+FILES	make/m3/collections/verification/filtered-object-deques-20261017/verify.sh
+FILES	make/m3/collections/verification/mask-all-select-20261017/verify.py
+FILES	make/m3/collections/verification/primitive-filtered-sequences-20261017/verify.sh
+FILES	make/m3/collections/verification/tombstone-reuse-20261017/verify.py
+FILES	make/m3/collections/verification/zero-slot-growth-20261017/verify.py
 FILES	m3/eclipse/optional-jmod/build.py
 FILES	m3/ports/collections/verify_collection_port_wave1.py
-FILES	m3/collections/qualification/filtered-terminal-fusion-20261017/pom.xml
-FILES	m3/collections/qualification/object-state-batch-28/pom.xml
-FILES	m3/collections/recipes/native-index-range-20261017/pom.xml
-FILES	m3/collections/qualification/m3-filtered-navigation-20261018/runtime/pom.xml
+FILES	make/m3/collections/qualification/filtered-terminal-fusion-20261017/pom.xml
+FILES	make/m3/collections/qualification/object-state-batch-28/pom.xml
+FILES	make/m3/collections/recipes/native-index-range-20261017/pom.xml
+FILES	make/m3/collections/qualification/m3-filtered-navigation-20261018/runtime/pom.xml
 REPLACE	m3/collections/src/test/java/MaskWindowConvergence.java	test/jdk/jdk/m3/collections/MaskWindowConvergence.java
 REPLACE	m3/collections/src/main/java/jdk/	src/jdk.m3.collections/share/classes/jdk/
 REPLACE	m3/collections/src/test/java/jdk/	test/jdk/jdk/
@@ -96,5 +96,5 @@ KEEP	src/jdk.m3.collections/share m3/collections/src/main/java
 PROTECT	baseline/m3/
 KEEP	            m3/collections/src/main/java
 KEEP	            m3/collections/src/test/java
-# m3/collections/verify_donation.py is not in FILES: its recorded custody keys stay; it locates them by its own
+# make/m3/collections/verify_donation.py is not in FILES: its recorded custody keys stay; it locates them by its own
 # MOVED_PREFIXES table (cm/patch_verify_donation.py), the same map as these REPLACE rows

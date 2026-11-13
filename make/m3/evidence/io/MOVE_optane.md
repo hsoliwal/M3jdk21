@@ -4,7 +4,7 @@ M3JDK is one JDK, not an m3/ side tree next to src/ (the user's instruction). Th
 into one JDK module (jdk.m3.io = fs + file + optane). Optane goes first: it depends only on JUnit, has no dependents,
 and its M3 prefixes are gone (#2845).
 
-`m3/tooling/jdk-naming/move_module_area.py . optane jdk.m3.io --keep-pom` (MOVE_TO_JDK_MODULE v3; rows in
+`make/m3/tooling/jdk-naming/move_module_area.py . optane jdk.m3.io --keep-pom` (MOVE_TO_JDK_MODULE v3; rows in
 `MOVES_optane.tsv`) moved the area, with git mv for history:
 - src/main/java/jdk/{m3,internal/m3}/optane goes to src/jdk.m3.io/share/classes/...;
 - the JUnit tests go to test/jdk/jdk/{m3,internal/m3}/optane;
@@ -21,7 +21,7 @@ The generated module-info Javadoc named the collections lane; it now names the I
 
 The live references follow by `move_refs.py` (MOVE_REFS v1.1, rules `MOVE_REFS_optane.tsv`), with residue 0 and a
 fixed point:
-- m3/optane/verify.sh (sources and natives);
+- make/m3/optane/verify.sh (sources and natives);
 - the CMake usage line;
 - the README commands;
 - PORT-MAPPING.pending.json.
@@ -36,6 +36,6 @@ module's recipe/ and docs/ records stay under m3/optane for the evidence-store s
 | javac main (-h) / test | rc=0 49 classes 3 headers / rc=0 43 | same |
 | JUnit (from m3/optane, as Maven) | 97: 57 pass, 35 fail, 5 skipped | same, per-test status identical (117 rows) |
 | C sources -Werror against the headers (3 libraries, 2 test oracles) | 5/5, every Java_ symbol declared | same |
-| m3/optane/verify.sh (contract, natives, jar, jmod, jlink runtime) | OPTANE_CONTRACT_PASS 1151 / 1149 no-native, OPTANE_JMOD_BUILD_PASS | same |
+| make/m3/optane/verify.sh (contract, natives, jar, jmod, jlink runtime) | OPTANE_CONTRACT_PASS 1151 / 1149 no-native, OPTANE_JMOD_BUILD_PASS | same |
 
 The 35 JUnit failures are the CPU host's missing PMEM library, on both sides.

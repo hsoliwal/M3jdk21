@@ -12,7 +12,7 @@ import org.openrewrite.TreeVisitor;
 import org.openrewrite.xml.XmlParser;
 
 /**
- * Exact pre/postimage registration of the new subreactor at m3/pom.xml.
+ * Exact pre/postimage registration of the new subreactor at make/m3/pom.xml.
  * Pattern/IOP role: BuildAdapter. Authority: MULTI_MODULE, not FILE.
  */
 public final class M3RegisterModulePacksRecipe extends Recipe {
@@ -28,7 +28,7 @@ public final class M3RegisterModulePacksRecipe extends Recipe {
             public Tree preVisit(Tree tree, ExecutionContext context) {
                 if (!(tree instanceof SourceFile source)) return tree;
                 stopAfterPreVisit();
-                if (!source.getSourcePath().toString().replace('\\', '/').equals("m3/pom.xml")) return tree;
+                if (!source.getSourcePath().toString().replace('\\', '/').equals("make/m3/pom.xml")) return tree;
                 String before = resource("reactor-before.xml");
                 String after = resource("reactor-after.xml");
                 if (source.printAll().equals(after)) return tree;

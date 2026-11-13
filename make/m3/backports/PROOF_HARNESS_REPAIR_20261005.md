@@ -7,7 +7,7 @@ It changes no OpenJDK product source, API, JNI ABI, recipe semantics, dependency
 
 Workflow run 37271044303 compared the pinned implementation commit
 `0a58cffe88ba823e71fcdcca64b784ed04ca5398` against
-`m3/backports/recipes/jep-467-markdown/PATHS.txt` and found one omitted path:
+`make/m3/backports/recipes/jep-467-markdown/PATHS.txt` and found one omitted path:
 
 `test/langtools/tools/javac/processing/model/util/elements/TestGetDocComments.java`
 

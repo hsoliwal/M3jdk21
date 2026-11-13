@@ -21,4 +21,4 @@ mvn -B -ntp $REPO -f "$MODULE/pom.xml" package | grep -E "BUILD|Tests run:|_PASS
 "${JAVA_HOME:?JAVA_HOME must point at a JDK 21}/bin/jar" --describe-module \
     --file "$MODULE/target/m3-native-0.1.0-SNAPSHOT.jar" | head -n 3
 bash "$RECIPE_DIR/differential.sh" "$1" "$2" "$3" "${4:-100000}"
-"$PY" -I "$ROOT/m3/tooling/jdk-naming/jdk_naming.py" plan --root "$ROOT" --only m3/native/
+"$PY" -I "$ROOT/make/m3/tooling/jdk-naming/jdk_naming.py" plan --root "$ROOT" --only m3/native/

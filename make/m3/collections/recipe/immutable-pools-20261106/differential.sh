@@ -14,7 +14,7 @@
 set -euo pipefail
 case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) SEP=';'; winpath() { (cd "$1" && pwd -W); } ;; *) SEP=':'; winpath() { (cd "$1" && pwd); } ;; esac
 RECIPE_DIR=$(winpath "$(dirname "$0")")
-MODULE=$(winpath "$(dirname "$0")/../..")
+MODULE=$(winpath "$(dirname "$0")/../../../../../m3/collections")
 DONOR_GIT=$1
 REV=$2
 mkdir -p "$3/src" "$3/classes"

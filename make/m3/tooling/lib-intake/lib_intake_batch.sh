@@ -4,9 +4,9 @@
 # LIB_INTAKE_TO_JMOD batch: runs lib_intake.sh for every INTAKE.tsv row (or the libs given), records BATCH.tsv (lib, module,
 # result, last stage), then lib_intake_combine.sh links every passing JMOD into ONE image with the JDK's jmods and validates it
 # (COMBINED_IMAGE.tsv): the M3JDK 21 optional-module set as one runtime.
-# Usage (repository root): bash m3/tooling/lib-intake/lib_intake_batch.sh <work root> [lib ...]
+# Usage (repository root): bash make/m3/tooling/lib-intake/lib_intake_batch.sh <work root> [lib ...]
 set -uo pipefail
-WR="$1"; shift; D=m3/tooling/lib-intake; BIN="$JAVA_HOME/bin"; SEP=":"; case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) SEP=";";; esac
+WR="$1"; shift; D=make/m3/tooling/lib-intake; BIN="$JAVA_HOME/bin"; SEP=":"; case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) SEP=";";; esac
 libs=("$@"); [ "${#libs[@]}" -gt 0 ] || mapfile -t libs < <(awk -F'\t' 'NR > 1 && $1 !~ /^#/ { print $1 }' "$D/INTAKE.tsv")
 printf 'lib\tmodule\tresult\tlast_stage\n' > "$D/BATCH.tsv"; mods=(); paths=()
 for lib in "${libs[@]}"; do

@@ -243,5 +243,5 @@
   "acceptance": "NOT_EVALUATED_IN_THIS_LEDGER",
   "repositoryCompletion": "NOT_PROVEN",
   "receiver": "hsoliwal/M3jdk21",
-  "targetPolicy": "m3/docs/m3jdk21-porting-invariant.md"
+  "targetPolicy": "doc/m3/m3jdk21-porting-invariant.md"
 }

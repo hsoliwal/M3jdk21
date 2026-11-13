@@ -5,7 +5,7 @@
 existing m3/optane files the relocated classes need: the m3pmemaccel CMake target, the surefire filter and native
 profile property of pom.xml, one README section).
 
-Derived from m3/qualification/census2-small-batch-20261106/apply.py v1 (#2611): every rule names the git blob sha of
+Derived from make/m3/qualification/census2-small-batch-20261106/apply.py v1 (#2611): every rule names the git blob sha of
 its preimage at the base commit; a target must equal the preimage (the rule is applied) or the postimage (already
 applied, no-op); anything else is a drifted preimage and the recipe refuses (exit 2) without writing. Every preimage is
 verified before the first write. The anchored edits live in hunks/<leaf>.edits (@@@ FILE/HUNK/OLD/NEW/END, every OLD
@@ -53,7 +53,7 @@ RULES = (
      "MERGE: the default surefire filter excludes M3PmemAcceleratorJUnitTest (libm3pmemaccel.so absent on the Java"
      " path); the profile m3-optane-native passes -Dpmem.accelerator.native=true (its filter *Test already includes"
      " the test)"),
-    ("L008", "m3/optane/README.md", "98b4fd6c4cf5e57f1333a6c182ec4ad40cc0c75a",
+    ("L008", "make/m3/optane/README.md", "98b4fd6c4cf5e57f1333a6c182ec4ad40cc0c75a",
      "m3-pmem-ordered-avx512-20261030 + m3-pmem-16source-numa-convergence-20261031",
      "census L008 + L047 (C:/m3-superset/conv/record/census/LEAVES_PROPOSED.tsv) -> recipe/pmem-accelerator-20261107",
      "MERGE: one section after the pmem-region-core relocation table naming the accelerator, the CPU-list parser,"
@@ -154,7 +154,7 @@ def run(root: Path, check: bool, leaf: str | None) -> int:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--root", default=str(RECIPE_DIR.parents[3]), help="repository root (default: four up)")
+    parser.add_argument("--root", default=str(RECIPE_DIR.parents[4]), help="repository root (default: four up)")
     parser.add_argument("--check", action="store_true", help="write nothing; exit 1 when a run would change a file")
     parser.add_argument("--leaf", choices=sorted({rule[0] for rule in RULES}), help="apply one leaf's rules only")
     args = parser.parse_args(argv)

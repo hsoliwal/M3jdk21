@@ -7,7 +7,7 @@ This document precedes source transfer on this **isolated** branch, stacked on o
 
 The exact existing workflow `.github/workflows/m3-owned-apache-multivalue.yml` preimage Git blob `6970a9bcfdc9c5e0d846400689a73e812bb7e3c2` (SHA256 `6ddd49fc642dca308ea06505b6c2188ee4eb651160f0a664e38626d634762423`) is to be replaced only by the qualified canonical Synexia template.
 
-The stable undated directory `m3/collections/qualification/apache-multivalue-source-custody/` is the receiving output for three previously absent verifier/receipt leaves. This avoids the correctly enforced public JDK naming policy's rejection of date-stamped *new* paths; no policy bypass is authorized.
+The stable undated directory `make/m3/collections/qualification/apache-multivalue-source-custody/` is the receiving output for three previously absent verifier/receipt leaves. This avoids the correctly enforced public JDK naming policy's rejection of date-stamped *new* paths; no policy bypass is authorized.
 
 The original 3397-byte V5 JSON receipt is **byte-identical** to historical #2265 source, Git blob `ac361caf86326a25185d917c26822656fce53819`, SHA256 `5498404216725b2a8742599a83f820867a615edf000b4b39d34f845ca4301249`. The original Python V5 verifier and negative probe are reused, only module/import paths migrated from the historical V4 dated directory to the stable successor directory. Original V4 receipt and verifier, V3/V2 history, first-party source ownership, original source checks and negative tamper/bom/crlf/revert tests remain intact.
 

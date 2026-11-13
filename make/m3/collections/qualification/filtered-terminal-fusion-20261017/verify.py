@@ -5,7 +5,7 @@ from pathlib import Path
 import hashlib
 
 HERE = Path(__file__).resolve().parent
-REPO = HERE.parents[3]
+REPO = HERE.parents[4]
 R = HERE / "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/filtered-terminal-fusion"
 
 def digest(p):

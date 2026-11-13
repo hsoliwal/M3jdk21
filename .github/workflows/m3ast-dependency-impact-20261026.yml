@@ -3,9 +3,9 @@ name: M3AST conservative dependency impact source oracle
 on:
   pull_request:
     paths:
-      - 'm3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTDependencyImpact.java'
-      - 'm3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTDependencyImpactContract.java'
-      - 'm3/tooling/module-packs/parser/build.py'
+      - 'make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTDependencyImpact.java'
+      - 'make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTDependencyImpactContract.java'
+      - 'make/m3/tooling/module-packs/parser/build.py'
       - '.github/workflows/m3ast-dependency-impact-20261026.yml'
   workflow_dispatch:
 concurrency:
@@ -28,7 +28,7 @@ jobs:
           set -euo pipefail
           classes="$RUNNER_TEMP/m3ast-impact"
           mkdir -p "$classes"
-          root=m3/tooling/module-packs/parser/src
+          root=make/m3/tooling/module-packs/parser/src
           javac --release 21 -Xlint:all -Werror -d "$classes" \
             "$root/main/java/jdk/m3/parser/M3File.java" \
             "$root/main/java/jdk/m3/parser/M3ASTIndex.java" \

@@ -42,7 +42,7 @@ lines, comments), so the API's own default is RFC 4180 and each donor's defaults
 ## Re-run
 
 ```
-OUT=<scratch> bash m3/tooling/jdk-superset/csv-spec/tools/run_gates.sh
+OUT=<scratch> bash make/m3/tooling/jdk-superset/csv-spec/tools/run_gates.sh
 ```
 
 | Tool | Does |
@@ -57,4 +57,4 @@ Needs Python 3 and the sparse paths `m3/vendor/third_party/{univocity-parsers,co
 
 Per capability, one discriminator input run through each donor and through each facade on the single M3
 implementation, outputs equal; then one LLD per `jdk.m3.csv` type and one Chrome generation call per file. The
-atoms of the three donors (#2215, `m3/tooling/jdk-superset/csv/`) are the implementation's starting material.
+atoms of the three donors (#2215, `make/m3/tooling/jdk-superset/csv/`) are the implementation's starting material.

@@ -84,26 +84,26 @@ final class JccMergeMappingRecoveryTest {
     private record Guard(String path, String hash) {}
     // Resource numbering follows bind_mapping.PATHS; manifest and plan order is tested separately.
     private static final List<Target> TARGETS = List.of(
-            new Target("m3/docs/name-mapping.json", "before-00.txt", "after-00.txt",
+            new Target("doc/m3/name-mapping.json", "before-00.txt", "after-00.txt",
                     "62506a2532ed354bb6193aca6bb26894209cdd21abdd31c538ec25f8375ccf73",
                     "__UNRESOLVED_ACTUAL_AFTER_00_SHA256__"),
-            new Target("m3/docs/jcc-source-handoff.md", "before-01.txt", "after-01.txt",
+            new Target("doc/m3/jcc-source-handoff.md", "before-01.txt", "after-01.txt",
                     "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337",
                     "__UNRESOLVED_ACTUAL_AFTER_01_SHA256__"),
-            new Target("m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
+            new Target("make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
                     "before-02.txt", "after-02.txt",
                     "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126",
                     "__UNRESOLVED_ACTUAL_AFTER_02_SHA256__"),
-            new Target("m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
+            new Target("make/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
                     "before-03.txt", "after-03.txt",
                     "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b",
                     "__UNRESOLVED_ACTUAL_AFTER_03_SHA256__"));
     private static final List<Guard> GUARDS = List.of(
-            new Guard("m3/docs/name-mapping.schema.json", "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b"),
-            new Guard("m3/migration/migration.py", "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e"),
-            new Guard("m3/migration/recipe.py", "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"),
+            new Guard("doc/m3/name-mapping.schema.json", "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b"),
+            new Guard("make/m3/migration/migration.py", "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e"),
+            new Guard("make/m3/migration/recipe.py", "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"),
             new Guard(TEXT_OWNER, TEXT_OWNER_SHA256),
-            new Guard("m3/tooling/migration-recipes/pom.xml", "3eb73bbf38c0c591b8f714f6e9923eaa25a35b5ffc7f0512b8ec7fd3602b5531"),
+            new Guard("make/m3/tooling/migration-recipes/pom.xml", "3eb73bbf38c0c591b8f714f6e9923eaa25a35b5ffc7f0512b8ec7fd3602b5531"),
             new Guard("src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
                     "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67"),
             new Guard("m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/"
@@ -631,7 +631,7 @@ final class JccMergeMappingRecoveryTest {
         assertEquals(packet.path("execution_summary"), after.path("source_execution").path("summary"));
         assertBoolean(after.path("source_execution").path("source_export_admitted"), false);
         assertBoolean(after.path("source_execution").path("destination_gates_passed"), false);
-        assertEquals("m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/source-publication-input.json",
+        assertEquals("make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/source-publication-input.json",
                 after.path("merge_recovery").path("source_publication_input").asText());
         String earlier = resource("before-01.txt");
         String prose = resource("after-01.txt");

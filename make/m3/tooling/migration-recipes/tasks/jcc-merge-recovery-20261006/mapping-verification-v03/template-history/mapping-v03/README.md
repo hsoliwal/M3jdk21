@@ -46,10 +46,10 @@ It writes four repository artifacts and `RENDERED_TEMPLATE_RECEIPT.json`:
 
 | Artifact | Repository destination |
 | --- | --- |
-| JUnit test | `m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccMergeMappingRecoveryV03Test.java` |
-| Focused POM | `m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/pom.xml` |
-| Named recipe | `m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jcc-merge-mapping-recovery-v03.yml` |
-| Test input summary | `m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/jcc-merge-recovery-20261006-mapping-v03/publication-input-summary.json` |
+| JUnit test | `make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccMergeMappingRecoveryV03Test.java` |
+| Focused POM | `make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/pom.xml` |
+| Named recipe | `make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jcc-merge-mapping-recovery-v03.yml` |
+| Test input summary | `make/m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/jcc-merge-recovery-20261006-mapping-v03/publication-input-summary.json` |
 
 The renderer does not write the four operational mapping files, beforeimages,
 afterimages, or the original source packet. Its summary strips source bodies and
@@ -90,7 +90,7 @@ also includes these two existing historical resources from
 From the execution workspace's repository root:
 
 ```sh
-mvn -f m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/pom.xml \
+mvn -f make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/pom.xml \
   -Dm3.mapping.materialized=/absolute/path/to/new-actual-result-directory test
 ```
 

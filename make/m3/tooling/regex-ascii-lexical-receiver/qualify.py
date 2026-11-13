@@ -11,11 +11,11 @@ import runpy
 import subprocess
 
 HERE = Path(__file__).resolve().parent
-RECEIVER = HERE.parents[2]
+RECEIVER = HERE.parents[3]
 SDK = HERE / "sdk"
 ROOT = Path(os.environ["M3_PROOF_ROOT"]).resolve()
 ARTIFACTS = ROOT / "artifacts"
-PREFIX = "m3/tooling/regex-ascii-lexical-receiver/"
+PREFIX = "make/m3/tooling/regex-ascii-lexical-receiver/"
 WORKFLOW = ".github/workflows/m3-regex-ascii-lexical-receiver.yml"
 SUITE = "jdk.internal.m3.rewrite.M3RegexAsciiLexicalReceiverRecipeTest"
 METHODS = ["all8PartialStatesBothOrdersReachExactFixedPoint",

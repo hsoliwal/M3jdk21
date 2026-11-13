@@ -13,32 +13,32 @@
       "git_blob": "15dcb122d63d63a28f3660859e6fe7dde60f0cc1"
     },
     {
-      "path": "m3/runtime-integration/regex-mandatory-affixes/run_source_extracted_java21.py",
+      "path": "make/m3/runtime-integration/regex-mandatory-affixes/run_source_extracted_java21.py",
       "sha256": "255d220275c0647fe8ed9fb9f64f99ea16d4a3214b6fffb5efa400154449724a",
       "git_blob": "e0192d2011f101e46846a1cb4b1f9e7201c40cd6"
     },
     {
-      "path": "m3/runtime-integration/regex-plan-amalgamation/source_extracted_java21.py",
+      "path": "make/m3/runtime-integration/regex-plan-amalgamation/source_extracted_java21.py",
       "sha256": "3bf4dfa321385c051c1ecc36875323dac9022c6dced9cb0897e0cd0bed97f319",
       "git_blob": "ac22219e5993d401ad9a1cbeb179a9b46a18b8e1"
     },
     {
-      "path": "m3/runtime-integration/regex-plan-amalgamation/verify_receiver.py",
+      "path": "make/m3/runtime-integration/regex-plan-amalgamation/verify_receiver.py",
       "sha256": "e8add2128c074f13a093b880fe638592051c8e55ef26e598d5dabce7253586ee",
       "git_blob": "95301db0d0884f27dac59c2d8554c914d2ff2ff2"
     },
     {
-      "path": "m3/runtime-integration/regex-required-ngrams/verify.py",
+      "path": "make/m3/runtime-integration/regex-required-ngrams/verify.py",
       "sha256": "6768087f1d9c9de0197164064cec489f6c9d462ba60015c55ce7481e16cd13a0",
       "git_blob": "6e3acdfd1c156a0b9cf6b8a91f4f332dd2b1b3e9"
     },
     {
-      "path": "m3/runtime-integration/regex-rolling-cursor/run_source_extracted_java21.py",
+      "path": "make/m3/runtime-integration/regex-rolling-cursor/run_source_extracted_java21.py",
       "sha256": "f35e7b2c4e8088d1e8aae4e547a3f3d66c2fb8d2c9cdd14bf8b78c9306147eab",
       "git_blob": "d3dcc29025a0a45c8adc0d9b10ef1044a4575d67"
     },
     {
-      "path": "m3/runtime-integration/regex-rolling-cursor/verify_exact_source.py",
+      "path": "make/m3/runtime-integration/regex-rolling-cursor/verify_exact_source.py",
       "sha256": "85c461d44e0c8efebef58042fe732b5912fe1a199090c929d83f6a57722abe0c",
       "git_blob": "ea8171f51178ac568826877af2ce1e3d519423d9"
     }

@@ -2,10 +2,10 @@
 # SPDX-License-Identifier: Apache-2.0
 # Linux image qualification. No patch-module: use the built fork's java.base.
 set -euo pipefail
-root=$(cd "$(dirname "$0")/../../.." && pwd)
+root=$(cd "$(dirname "$0")/../../../.." && pwd)
 : "${M3_TEST_JDK:?Set the absolute path of the freshly built fastdebug M3JDK image}"
 image=$(cd "$M3_TEST_JDK" && pwd)
-out="$root/m3/tooling/tq/target/image"
+out="$root/make/m3/tooling/tq/target/image"
 mkdir -p "$out/classes" "$out/headers"
 "$image/bin/java" -version > "$out/version.log" 2>&1
 if ! grep -q fastdebug "$out/version.log"; then
@@ -55,9 +55,9 @@ for mode in interpreter mixed c1 c2 m3-c1 m3-c2 m3-c2-nocompact; do
   if [[ -n "$compiler" ]]; then
     evidence_flags=()
     if [[ "$mode" == m3-* ]]; then evidence_flags+=(--m3-interpreter); fi
-    python3 "$root/m3/tooling/lane28/check-log.py" \
+    python3 "$root/make/m3/tooling/lane28/check-log.py" \
       "$out/$mode-compilation.xml" "$compiler" jdk.internal.mindex.M3TQ "${evidence_flags[@]}"
-    python3 "$root/m3/tooling/lane28/check-log.py" \
+    python3 "$root/make/m3/tooling/lane28/check-log.py" \
       "$out/$mode-compilation.xml" "$compiler" 'jdk.internal.mindex.M3TQ$Facts containsAll' "${evidence_flags[@]}"
   fi
 done

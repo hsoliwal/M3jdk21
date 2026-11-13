@@ -10,7 +10,7 @@ closure and builds opt-in images. It does not install into JAVA_HOME or download
 The host JDK and third-party archives remain read-only. All generated work stays in a new,
 explicit output directory. An occupied output is refused; failed runs are retained as evidence.
 
-The source authority is m3/docs/community-capability-admission.md. The backport and
+The source authority is doc/m3/community-capability-admission.md. The backport and
 name-mapping authorities remain unchanged. The new exported tooling API has LIBRARY_API authority; reactor registration has
 MULTI_MODULE authority. These are additive, approved tooling surfaces, not FILE-only
 refactors. Existing JDK and library contracts remain locked.
@@ -35,16 +35,16 @@ not linkable. Static requires do not silently expand the runtime closure.
 
 ## Run
 
-Maven control: `mvn -B -ntp -f m3/tooling/module-packs/pom.xml clean verify`.
+Maven control: `mvn -B -ntp -f make/m3/tooling/module-packs/pom.xml clean verify`.
 Kernel requires Java 21 only; the separate recipe module carries OpenRewrite dependencies.
 JaCoCo gates >=99% line and branch coverage; no exclusions. Do not claim the gate passed
 unless the report and successful check actually exist.
 
 Offline executable checks:
-`python3 m3/tooling/module-packs/verify.py --jdk /path/to/jdk21 --out /new/proof/dir`
+`python3 make/m3/tooling/module-packs/verify.py --jdk /path/to/jdk21 --out /new/proof/dir`
 
 Diagnostics image:
-`python3 m3/tooling/module-packs/build_pack.py --jdk /path/to/jdk21 --out /new/image/dir`
+`python3 make/m3/tooling/module-packs/build_pack.py --jdk /path/to/jdk21 --out /new/image/dir`
 
 JavaFX image:
 add `--javafx-lock /path/to/reviewed-lock.json`. Lock schema/example is in

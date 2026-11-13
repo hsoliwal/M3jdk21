@@ -6,7 +6,7 @@ from pathlib import Path
 import hashlib
 
 HERE = Path(__file__).resolve().parent
-REPOSITORY = HERE.parents[3]
+REPOSITORY = HERE.parents[4]
 RECIPE = HERE / "recipe-mirror"
 EXPECTED = {
     "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexedTable.java":

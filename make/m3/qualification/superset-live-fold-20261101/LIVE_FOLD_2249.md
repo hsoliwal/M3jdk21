@@ -6,7 +6,7 @@ PR https://github.com/hsoliwal/M3jdk21/pull/2249
 Patch https://github.com/hsoliwal/M3jdk21/pull/2249.patch
 
 All original 49 source files have status `added`, with complete original changed-file count 49/49. Five complete donor source subtrees were checked recursively for every original Git blob SHA and mode, and were absent from the receiver. No existing file may be overwritten. Original subtree Git tree OIDs:
-- m3/tooling/atom-tests | ffe8777dc3c76b81d290d09f3367f79215ef064d | 30 files
+- make/m3/tooling/atom-tests | ffe8777dc3c76b81d290d09f3367f79215ef064d | 30 files
 - test/jdk/java/lang/M3Atoms | d48e57a03aa521443a2c112678e9232832bdace0 | 6 files
 - test/jdk/java/util/M3Atoms | da9c74d4c4ba327ee89c1ef465e739da0b00fee4 | 7 files
 - test/jdk/jdk/internal/m3/atoms | 04867abb609f8784dd9dbef920577e905b4b5296 | 5 files

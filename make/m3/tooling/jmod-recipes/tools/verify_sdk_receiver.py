@@ -13,30 +13,30 @@ from pathlib import Path, PurePosixPath
 
 HEADER = "path\tgit_blob_sha1\tsource_pr\tsource_commit"
 SOURCE_COMMIT = "3c7f331a65e31fdbe4c198d79c7bfcb4c226cda2"
-PREFIXES = ("m3/tooling/jmod-recipes/", "m3/vendor/third_party-m3/")
+PREFIXES = ("make/m3/tooling/jmod-recipes/", "m3/vendor/third_party-m3/")
 
 # The PR #788 receipt remains immutable. These two exact successors were emitted
 # and qualified by the Synexia text/JNI recipe, then received in target PR #855.
 # This is a finite source-custody transition, never permission to refresh hashes.
 SUCCESSOR_COMMIT = "c49cca384837ebd9dc71b6141c71ab0bcb938d10"
 SUCCESSORS = {
-    "m3/tooling/jmod-recipes/src/main/java/jdk/m3/rewrite/jmod/M3ModuleDescriptorRecipe.java": (
+    "make/m3/tooling/jmod-recipes/src/main/java/jdk/m3/rewrite/jmod/M3ModuleDescriptorRecipe.java": (
         "83b7ecc23b00c2fe026de54c8fa03ce9000612d3",
         "9882f9773cc299ef80477fbf4de080ba763ab781",
         "m3-openrewrite-recipes/src/main/java/jdk/m3/rewrite/jmod/M3ModuleDescriptorRecipe.java",
     ),
-    "m3/tooling/jmod-recipes/tools/jmod_pack.py": (
+    "make/m3/tooling/jmod-recipes/tools/jmod_pack.py": (
         "6824ea4419d769b71af846c5b6eee64f9a7454d1",
         "1b20225a72caf20a7c02f9ef1ca2cb068294bff6",
         "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/m3jdk21-build/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-m3jdk21-build/0001-jmod_pack.py.txt",
     ),
     # Exact source-qualified successors from integration packet A.
-    "m3/tooling/jmod-recipes/src/main/java/jdk/m3/rewrite/jmod/M3ModuleDescriptorApply.java": (
+    "make/m3/tooling/jmod-recipes/src/main/java/jdk/m3/rewrite/jmod/M3ModuleDescriptorApply.java": (
         "4cbc985224b08979d4834d59f3ac1fb71a76fcb8",
         "4555e7423b3b1696518067141cf1540457764b9e",
         "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0080-M3ModuleDescriptorApply.java.txt",
     ),
-    "m3/tooling/jmod-recipes/src/test/java/jdk/m3/rewrite/jmod/M3ModuleDescriptorRecipeTest.java": (
+    "make/m3/tooling/jmod-recipes/src/test/java/jdk/m3/rewrite/jmod/M3ModuleDescriptorRecipeTest.java": (
         "4f0a50066835ec3db08969f71d932f45c2d5ba22",
         "2e89346c5fab68ef33bc7d1132841036cca83089",
         "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0081-M3ModuleDescriptorRecipeTest.java.txt",
@@ -46,13 +46,13 @@ SUCCESSORS = {
 # The shared-frontend source-qualified successor is already in the retained target tree.
 # Preserve the earlier text/JNI identity as ancestry evidence; exact current bytes still refuse drift.
 SUCCESSOR_COMMITS = {
-    "m3/tooling/jmod-recipes/tools/jmod_pack.py": "c05613123249b74ac4243fe0b924b68494116931",
+    "make/m3/tooling/jmod-recipes/tools/jmod_pack.py": "c05613123249b74ac4243fe0b924b68494116931",
     # Exact source-qualified successors from integration packet A.
-    "m3/tooling/jmod-recipes/src/main/java/jdk/m3/rewrite/jmod/M3ModuleDescriptorApply.java": "c4ae7e361c9253aaced47e843549a06e505d924d",
-    "m3/tooling/jmod-recipes/src/test/java/jdk/m3/rewrite/jmod/M3ModuleDescriptorRecipeTest.java": "c4ae7e361c9253aaced47e843549a06e505d924d",
+    "make/m3/tooling/jmod-recipes/src/main/java/jdk/m3/rewrite/jmod/M3ModuleDescriptorApply.java": "c4ae7e361c9253aaced47e843549a06e505d924d",
+    "make/m3/tooling/jmod-recipes/src/test/java/jdk/m3/rewrite/jmod/M3ModuleDescriptorRecipeTest.java": "c4ae7e361c9253aaced47e843549a06e505d924d",
 }
 PREVIOUS_SUCCESSORS = {
-    "m3/tooling/jmod-recipes/tools/jmod_pack.py": "83b1483c6c5e6a39c519f82af603382914eed3e5",
+    "make/m3/tooling/jmod-recipes/tools/jmod_pack.py": "83b1483c6c5e6a39c519f82af603382914eed3e5",
 }
 
 
@@ -60,19 +60,19 @@ PREVIOUS_SUCCESSORS = {
 # ledger and the earlier Synexia source-qualified successors. These are exact
 # source identities; neither recipe-boot policy nor image/runtime is admitted.
 CURRENT_SOURCE_SUCCESSORS = {
-    "m3/tooling/jmod-recipes/pom.xml": (
+    "make/m3/tooling/jmod-recipes/pom.xml": (
         "bea579cf4ffe9ebfa6cbe8bfd445b4f96dce9543",
         "5e330226ed95bebe3870fe2bd6d0913e69f0753a",
         "49791e92b1c063a2cb65875831976cc9c599e8e0",
         "PENDING_RECIPE_BOOT_POLICY_AND_MAVEN",
     ),
-    "m3/tooling/jmod-recipes/tools/descriptor_gen.py": (
+    "make/m3/tooling/jmod-recipes/tools/descriptor_gen.py": (
         "fb25328725a1ccd6398083c43e8d851eacbb0b74",
         "43e21664d531443095106e7605c8e4d6eaa039c4",
         "87e01c7d4045c6e321aef3c76522c781b0667806",
         "PENDING_DESCRIPTOR_RELEASE_BEHAVIOR",
     ),
-    "m3/tooling/jmod-recipes/tools/jmod_pack.py": (
+    "make/m3/tooling/jmod-recipes/tools/jmod_pack.py": (
         "1b20225a72caf20a7c02f9ef1ca2cb068294bff6",
         "31def48398799524beeddf912dcbc05bc263f826",
         "6ac06f20bcbdce518581b5c17c9e8b85c3752d96",
@@ -91,7 +91,7 @@ CURRENT_SOURCE_SUCCESSORS = {
 # Original PR #788 custody: immutable 52-file source ledger, not merely a
 # replaceable table of individually matching Git blobs. These are the original
 # target Git-object and SHA-256 identities at M3JDK 21 master 0ab28ea86ccb.
-ORIGINAL_LEDGER_RELATIVE = "m3/tooling/jmod-recipes/RECEIVED_SDK_JMOD_BLOBS.tsv"
+ORIGINAL_LEDGER_RELATIVE = "make/m3/tooling/jmod-recipes/RECEIVED_SDK_JMOD_BLOBS.tsv"
 ORIGINAL_LEDGER_GIT_BLOB = "e1f463b9fa54f9c92d0bbeacc79e7902be00bd2c"
 ORIGINAL_LEDGER_SHA256 = "db9c42ea9b0ec9af0986009a8022064eb419ed7e57104fa229b97dd625970046"
 
@@ -232,7 +232,7 @@ def main(argv=None):
     parser.add_argument("--repo", type=Path, default=Path("."))
     parser.add_argument("--ledger", type=Path)
     args = parser.parse_args(argv)
-    ledger = args.ledger or args.repo / "m3/tooling/jmod-recipes/RECEIVED_SDK_JMOD_BLOBS.tsv"
+    ledger = args.ledger or args.repo / "make/m3/tooling/jmod-recipes/RECEIVED_SDK_JMOD_BLOBS.tsv"
     result = verify(args.repo, ledger)
     print(json.dumps(result, sort_keys=True))
     return 0

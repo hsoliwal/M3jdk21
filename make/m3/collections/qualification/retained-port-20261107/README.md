@@ -114,7 +114,7 @@ to the collection, and are not listed.
 ## When the curation lifts
 
 Apply order: write the 29 RESTORE.tsv blobs to their planned (curated) targets, run
-`python m3/tooling/jdk-naming/jdk_naming.py apply --only m3/collections/src/main/java/jdk/m3/collections` (stage new
+`python make/m3/tooling/jdk-naming/jdk_naming.py apply --only m3/collections/src/main/java/jdk/m3/collections` (stage new
 files first) until it is a fixed point, port the 11 tests, then the gates of the original brief: real pom
 `-Xlint:all -Werror` 0 warnings, failing set equal to the baseline above, donor-vs-restored differential on a seeded
 corpus, javap -p for adapted classes (none planned), untouched class files byte-identical, 0 deletions.

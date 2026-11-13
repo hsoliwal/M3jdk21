@@ -3,13 +3,13 @@
 # SPDX-License-Identifier: Apache-2.0
 # Runs every gate of recipe atom-jit-gate-20261106 in order and prints one line per gate (see GATES.tsv):
 #   recipe     relocate.py --check is a fixed point (changed=0 provenance=UNCHANGED)
-#   5_package  mvn install of m3/tooling/atom-census (the atomizer the gate binds), then mvn package of the gate on
+#   5_package  mvn install of make/m3/tooling/atom-census (the atomizer the gate binds), then mvn package of the gate on
 #              JDK 21 with -Xlint:all -Werror (0 compiler warnings) and its JUnit 5 tests (surefire counts)
 #   1_hotloop  jit-oracles.sh part 1: -Xint / forced C2 / -Xcomp digest equality, donor and relocated, hotLoop witness
 #   2_longset  jit-oracles.sh part 2: M3LongHashSet add proof under -Xint, C1 tier 1, C2 tier 4, donor and relocated
 #   4_verdicts differential.sh: 20,000 serial gate ledgers and 15 work-order queues, donor vs relocated verdicts
 #   phase_a    phase-a-nec.sh: the NEC evidence of Phase A (donor pattern groups vs census groups)
-#   naming     jdk_naming.py apply --only m3/tooling/atom-jit-gate/ (and the workflow): 0 moves, 0 rewrites, 0 refusals
+#   naming     jdk_naming.py apply --only make/m3/tooling/atom-jit-gate/ (and the workflow): 0 moves, 0 rewrites, 0 refusals
 #   3_fixture  fixture-gate.sh (Linux: gcc/g++, nm, JDK 21 headers): on Linux it runs directly; on Windows set
 #              M3_ATOMJIT_FIXTURE_GATE=wsl to run it through WSL, otherwise SKIP
 # usage: JAVA_HOME=<JDK 21> verify.sh <donor-git-dir> <donor-rev> <scratch-dir> [maven-repo-local]
@@ -27,9 +27,9 @@ gate() { local name=$1 verdict=$2; shift 2; echo "GATE $name $verdict $*"; [ "$v
 out=$(python -I "$RECIPE_DIR/relocate.py" --donor-git "$DONOR_GIT" --donor-rev "$REV" --check 2>&1 | tail -1)
 case "$out" in *"changed=0 provenance=UNCHANGED"*) gate recipe PASS "$out" ;; *) gate recipe FAIL "$out" ;; esac
 
-(cd "$ROOT" && mvn "${MVN_ARGS[@]}" -q -f m3/tooling/atom-census/pom.xml -DskipTests install > "$SCRATCH/census-install.log" 2>&1)
+(cd "$ROOT" && mvn "${MVN_ARGS[@]}" -q -f make/m3/tooling/atom-census/pom.xml -DskipTests install > "$SCRATCH/census-install.log" 2>&1)
 census=$?
-(cd "$ROOT" && mvn "${MVN_ARGS[@]}" -f m3/tooling/atom-jit-gate/pom.xml clean package > "$SCRATCH/mvn-package.log" 2>&1)
+(cd "$ROOT" && mvn "${MVN_ARGS[@]}" -f make/m3/tooling/atom-jit-gate/pom.xml clean package > "$SCRATCH/mvn-package.log" 2>&1)
 built=$?
 warnings=$(grep -c -E '^\[WARNING\].*\.java' "$SCRATCH/mvn-package.log"); warnings=${warnings:-0}
 if [ "$census" = 0 ] && [ "$built" = 0 ] && grep -q 'BUILD SUCCESS' "$SCRATCH/mvn-package.log" && [ "$warnings" = 0 ]; then
@@ -52,7 +52,7 @@ if bash "$RECIPE_DIR/phase-a-nec.sh" "$DONOR_GIT" "$REV" "$SCRATCH/phase-a" > "$
     gate phase_a PASS "NEC evidence: $(grep -E '^FILES=' "$SCRATCH/phase-a.log" | tr '\n' ' ' | cut -c1-260)"
 else gate phase_a FAIL "log=$SCRATCH/phase-a.log"; fi
 
-naming=$(cd "$ROOT" && python -I m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/tooling/atom-jit-gate/ \
+naming=$(cd "$ROOT" && python -I make/m3/tooling/jdk-naming/jdk_naming.py apply --root . --only make/m3/tooling/atom-jit-gate/ \
     --only .github/workflows/m3-tooling-atom-jit-gate-20261106.yml 2>&1 | grep -E "^(JDK_NAMING|REFUSED)" | tail -1)
 case "$naming" in *"moves=0 rewrites=0 refusals=0"*) gate naming PASS "$naming" ;; *) gate naming FAIL "$naming" ;; esac
 

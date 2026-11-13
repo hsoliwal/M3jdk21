@@ -12,7 +12,7 @@ The laws are the ones recorded for SWT and Nebula in Synexia PR #10921
 
 | Area | Licence | Rule |
 |---|---|---|
-| `src/java.desktop/**` (Swing, AWT) | GPLv2 with Classpath Exception | Changes are TARGET_OWNED_PORT. No Apache code is pasted in. Engine copies into `java.desktop` are EXPLICIT_RELICENSE_PORT under `m3/docs/m3-item-residency-explicit-relicense.md` (PR #826). |
+| `src/java.desktop/**` (Swing, AWT) | GPLv2 with Classpath Exception | Changes are TARGET_OWNED_PORT. No Apache code is pasted in. Engine copies into `java.desktop` are EXPLICIT_RELICENSE_PORT under `doc/m3/m3-item-residency-explicit-relicense.md` (PR #826). |
 | `m3/ports/swing-viewport/**` | Apache-2.0 | New first-party code. The engine under `engine/` is `EPL-2.0 OR Apache-2.0`; this module takes Apache-2.0. |
 | SwingX (`3dcitydb/swingx-all@94f86aab`) | LGPL-2.1 | Design notes only (section 9). No SwingX code is copied into Apache or GPL files. SwingX is not vendored under `m3/vendor` (checked). |
 | OpenJDK `Default*Model` classes | GPLv2 with Classpath Exception | Runtime differential oracles in tests only. No code copied. |
@@ -126,7 +126,7 @@ state: each call forwards to the model's packed lanes and arrays.
 
 Package `com.m3.swing.viewport`. The engine is under `com.m3.swing.viewport.engine.{residency,swap}` and
 `engine.PackedHeapGrowth`. It was produced by the hash-pinned rename recipe of PR #826
-(`m3/tooling/residency-rename`, manifest SHA-256 `1a5abf31dc07…`, source SWT commit `136df9c62ba5`): 21 files, a second
+(`make/m3/tooling/residency-rename`, manifest SHA-256 `1a5abf31dc07…`, source SWT commit `136df9c62ba5`): 21 files, a second
 run reported `CHANGED 0 OF 21`, and `javac --release 21 -Xlint:all` is clean.
 
 | Class | Interface | Storage |

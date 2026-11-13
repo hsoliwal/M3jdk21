@@ -15,7 +15,7 @@
   ],
   "existing_public_contracts": "No changes to Arrays, Collections, TimSort, ComparableTimSort or DualPivotQuicksort",
   "algorithm_count": 34,
-  "algorithm_table": "m3/docs/sorting/algorithms.tsv",
+  "algorithm_table": "doc/m3/sorting/algorithms.tsv",
   "mappings": [
     {
       "source": "Target-owned explicit sorting selector",

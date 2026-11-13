@@ -12,13 +12,13 @@
   "runtime_dependencies_added": [],
   "postimages": [
     {
-      "path": "m3/optane/README.md",
+      "path": "make/m3/optane/README.md",
       "sha256": "344a4a248454f1f5bf888653a9ad41c3407c02671f8fb5d12d866bdbbac0d69d",
       "git_blob": "62d248a9ee6f5d45eb12a9e220be7d6fad045e33",
       "bytes": 14927
     },
     {
-      "path": "m3/optane/docs/NATIVE_BUILD_CONTRACT.md",
+      "path": "make/m3/optane/docs/NATIVE_BUILD_CONTRACT.md",
       "sha256": "989f6e4a939544ca8a786bdc854a185d620878abc935456bcf0de500be713eca",
       "git_blob": "2771c20fb143899cd6f3a33aa7e5c0c4e31c1aa8",
       "bytes": 3644

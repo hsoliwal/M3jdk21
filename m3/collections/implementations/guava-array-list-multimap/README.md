@@ -22,7 +22,7 @@ Validation (`mvn -f pom.xml test`, Java 21, `-Xlint:all -Werror`): 22 JUnit test
 differential run applies 96,000 operations to the real Guava provider and this class and makes 1,025,276
 comparisons; JaCoCo line and branch coverage are 100% for every class, gated at 99%. The steady-state
 allocation probe measures 0 bytes for put/containsEntry/containsKey/keys().count/remove/forEach.
-See `m3/collections/qualification/owned-guava-array-list-multimap-20261018/`.
+See `make/m3/collections/qualification/owned-guava-array-list-multimap-20261018/`.
 
 ## 2026-10-27 Guava public Multimap API source closure
 

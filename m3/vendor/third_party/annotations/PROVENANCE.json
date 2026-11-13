@@ -3,7 +3,7 @@
   "automatic_module_name": "",
   "build": "commands",
   "build_reason": "MODULE_DESCRIPTOR_OR_MULTI_RELEASE",
-  "consumers": "M3jdk21 m3/tooling (declared, unused)",
+  "consumers": "M3jdk21 make/m3/tooling (declared, unused)",
   "coordinate": "org.jetbrains:annotations:24.1.0-m3-source-1",
   "decision": "DIRECT_IMPORT",
   "delomboked": false,

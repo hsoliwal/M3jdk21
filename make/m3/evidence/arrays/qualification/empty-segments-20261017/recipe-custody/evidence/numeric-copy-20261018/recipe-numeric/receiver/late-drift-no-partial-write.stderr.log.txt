@@ -6,4 +6,4 @@ Traceback (most recent call last):
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-numeric-v2/receiver-proof/isolated-o86qqbmp/late-drift/crate/receive.py", line 154, in receive
     raise ValueError("target source drift: " + relative)
-ValueError: target source drift: m3/backports/ALGORITHM_CATALOGUE.tsv
+ValueError: target source drift: make/m3/backports/ALGORITHM_CATALOGUE.tsv

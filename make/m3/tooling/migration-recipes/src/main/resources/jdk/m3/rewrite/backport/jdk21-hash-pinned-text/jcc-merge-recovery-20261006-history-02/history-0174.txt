@@ -9,7 +9,7 @@
   "source_output_proofs": null,
   "receipts": {
     "CURRENT_SOURCE_MANIFEST.json": {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/CURRENT_SOURCE_MANIFEST.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/CURRENT_SOURCE_MANIFEST.json",
       "bytes": 1891080,
       "sha256": "20fd857cb00711e02c34cd27445bd2c057db8f57a0cafb8ed9a455b453f3b37c",
       "git_blob_sha1": "f1892501332d65721bfd6164597d93f3a298a10a",
@@ -17,7 +17,7 @@
       "scope": "Recorded current-input body/context availability; not output qualification"
     },
     "PARENT_BUILD_CONTEXT.json": {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/PARENT_BUILD_CONTEXT.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/PARENT_BUILD_CONTEXT.json",
       "bytes": 112397,
       "sha256": "c2ba69331b7d22a467e72369ebf06cebe16e9b09f5b9c3f2900247d540773bfc",
       "git_blob_sha1": "8d43fa29a81040d3572525b3c864841a7a35643b",
@@ -25,7 +25,7 @@
       "scope": "Recorded current-input body/context availability; not output qualification"
     },
     "CURRENT_PROJECTION.json": {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/CURRENT_PROJECTION.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/CURRENT_PROJECTION.json",
       "bytes": 596276,
       "sha256": "8626cc0e739dac6cc3b2e77496d16e7c75025f7de99f30e1b93f42796e6c4799",
       "git_blob_sha1": "3c187aada912a867711f1f3adcf32fe99e99f26e",
@@ -33,7 +33,7 @@
       "scope": "Recorded current-input body/context availability; not output qualification"
     },
     "CURRENT_CONTEXT_MANIFEST.json": {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/CURRENT_CONTEXT_MANIFEST.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/CURRENT_CONTEXT_MANIFEST.json",
       "bytes": 70459,
       "sha256": "936730925c534f0744d5a3ed5831812c221c3ac919b889c1be5ebdfe294396ce",
       "git_blob_sha1": "56f05d9af349f29cbfda8f12b158702606517fba",
@@ -41,7 +41,7 @@
       "scope": "Recorded current-input body/context availability; not output qualification"
     },
     "BUILD_ROLE_MAP.json": {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/BUILD_ROLE_MAP.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/BUILD_ROLE_MAP.json",
       "bytes": 63816,
       "sha256": "13a191d4ef3e137518df6ebd1eebc9c8858370b7ffeb9af1db7d37fd0d90e3d7",
       "git_blob_sha1": "2bb90dc2511c26ea6181e949b68c1d7013c9b157",
@@ -49,7 +49,7 @@
       "scope": "Recorded current-input body/context availability; not output qualification"
     },
     "INVENTORY_REVIEW.json": {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/INVENTORY_REVIEW.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/INVENTORY_REVIEW.json",
       "bytes": 14727,
       "sha256": "cae9bd963f45edd0c766f0f0a4cd6801d3239d888ef2175aea2cf965ca5f8ea6",
       "git_blob_sha1": "b8c254769db1c67a930d4946c491619a56ea8052",
@@ -57,7 +57,7 @@
       "scope": "Recorded current-input body/context availability; not output qualification"
     },
     "AMENDMENT.json": {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/AMENDMENT.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/AMENDMENT.json",
       "bytes": 1177,
       "sha256": "921e421259c9bd68bd70c2412f75cffc187c2a61c725053506c4470c129e7fa3",
       "git_blob_sha1": "fa4cdc735f58059920dc217be6b00819a859eeba",
@@ -65,7 +65,7 @@
       "scope": "Recorded current-input body/context availability; not output qualification"
     },
     "INVENTORY_REVIEW.md": {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/INVENTORY_REVIEW.md",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/INVENTORY_REVIEW.md",
       "bytes": 13344,
       "sha256": "17af04df1ca7db7329bbff3f2cfa840b39ab69d93ef3a61caa988b71bb221400",
       "git_blob_sha1": "2f4e377117ec1355537aac0e9a1de8fa141f5ea2",
@@ -73,7 +73,7 @@
       "scope": "Recorded current-input body/context availability; not output qualification"
     },
     "INVENTORY_FILE_SEALS.json": {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/INVENTORY_FILE_SEALS.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/INVENTORY_FILE_SEALS.json",
       "bytes": 183376,
       "sha256": "066f885acc4b2fd877a668c746b9efcfe844b9968982269b10371dad9d6853d9",
       "git_blob_sha1": "d3abd93bdb9fd469679539885ee9b672c713695d",
@@ -81,7 +81,7 @@
       "scope": "Recorded current-input body/context availability; not output qualification"
     },
     "RECOVERY_SOURCE_INCLUDES.txt": {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/RECOVERY_SOURCE_INCLUDES.txt",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/RECOVERY_SOURCE_INCLUDES.txt",
       "bytes": 39132,
       "sha256": "dfb5dd0243103456154d96398cfa1591265455fd3ae0e512afa0b72361477988",
       "git_blob_sha1": "e91d85faf0dce29a4bc7e13b4bffb9dd250387ac",

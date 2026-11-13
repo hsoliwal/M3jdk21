@@ -1,13 +1,13 @@
 # RECORD of #2836 (landed d9ffdf5a722b on master 51d5facf94de): not re-run after #2837 rewrote verify.sh by hand.
-# MOVE_REFS v1 rules (m3/tooling/jdk-naming/move_refs.py) for the m3/arrays move of #2825 (MOVE_TO_JDK_MODULE v2):
+# MOVE_REFS v1 rules (make/m3/tooling/jdk-naming/move_refs.py) for the m3/arrays move of #2825 (MOVE_TO_JDK_MODULE v2):
 # the module jdk.m3.arrays is now the bridge descriptor m3/arrays/src/main/java/module-info.java plus the package sources
 # under src/jdk.m3.collections/share/classes/jdk/m3/arrays; the native library builds from make/m3/arrays (sources in
 # src/jdk.m3.collections/share/native/libm3arrays, C tests in test/jdk/jdk/m3/arrays/native).
 # Literals never end in a space (editors strip trailing blanks; a lost blank glued 'arrays-type' in the first run).
 FILES	.github/workflows/*.yml
-FILES	m3/collections/verification/primitive-filtered-sequences-20261017/verify.sh
-FILES	m3/collections/qualification/doops-entryless-verify.sh
-FILES	m3/collections/qualification/full-java-jni-20261018/verify.py
+FILES	make/m3/collections/verification/primitive-filtered-sequences-20261017/verify.sh
+FILES	make/m3/collections/qualification/doops-entryless-verify.sh
+FILES	make/m3/collections/qualification/full-java-jni-20261018/verify.py
 FILES	m3/eclipse/optional-jmod/build.py
 REPLACE	find m3/arrays/src/main/java	find m3/arrays/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/arrays
 REPLACE	cmake -S m3/arrays/src/main/native	cmake -S make/m3/arrays

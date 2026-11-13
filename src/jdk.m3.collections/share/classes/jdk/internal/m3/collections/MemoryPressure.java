@@ -3,7 +3,7 @@
 package jdk.internal.m3.collections;
 
 /** JVM heap is authoritative; optional JNI physical-memory samples only tighten pressure. */
-//FLLDCIM: RELOCATE - donor blob 14413aa63563 at 165ceb5a0202; recipe m3/collections/recipe/residency-paged-array-20261107/relocate.py v4
+//FLLDCIM: RELOCATE - donor blob 14413aa63563 at 165ceb5a0202; recipe make/m3/collections/recipe/residency-paged-array-20261107/relocate.py v4
 public final class MemoryPressure {
     private MemoryPressure() { }
 

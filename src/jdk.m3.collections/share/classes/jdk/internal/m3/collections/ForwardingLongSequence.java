@@ -9,7 +9,7 @@ import jdk.m3.collections.LongIterator;
 import jdk.m3.collections.LongSequence;
 
 /** Primitive direct forwarding, including native bulk and primitive traversal. */
-//FLLDCIM: RELOCATE - donor blob 492ecb94f0de at d5ad5090d87e; recipe m3/collections/qualification/census2-t2-20261106/relocate.py v6
+//FLLDCIM: RELOCATE - donor blob 492ecb94f0de at d5ad5090d87e; recipe make/m3/collections/qualification/census2-t2-20261106/relocate.py v6
 public abstract class ForwardingLongSequence implements LongSequence {
     protected ForwardingLongSequence() { }
     protected abstract LongSequence delegate();

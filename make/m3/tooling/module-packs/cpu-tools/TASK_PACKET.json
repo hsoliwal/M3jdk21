@@ -1,7 +1,7 @@
 {
   "task_packet": "active",
   "task_id": "m3-cpu-tools-jmod-20261018",
-  "source_doc": "m3/docs/community-capability-admission.md",
+  "source_doc": "doc/m3/community-capability-admission.md",
   "invariant_id": "M3-COMMUNITY-1-2-4",
   "base_commit": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
   "canonical_repository": "hsoliwal/com.synexia",
@@ -16,12 +16,12 @@
     "shard_index": 0
   },
   "targets": [
-    "m3/tooling/module-packs/cpu-tools/**",
-    "m3/tooling/module-packs/text-tools/src/jdk.m3.io/jdk/m3/io/M3File.java",
-    "m3/docs/name-mapping.d/m3-cpu-tools-jmod-20261018.json",
-    "m3/tooling/module-packs/text-tools/build.py",
-    "m3/tooling/module-packs/text-tools/README.md",
-    "m3/evidence/cpu-tools-jmod-20261018/**"
+    "make/m3/tooling/module-packs/cpu-tools/**",
+    "make/m3/tooling/module-packs/text-tools/src/jdk.m3.io/jdk/m3/io/M3File.java",
+    "doc/m3/name-mapping.d/m3-cpu-tools-jmod-20261018.json",
+    "make/m3/tooling/module-packs/text-tools/build.py",
+    "make/m3/tooling/module-packs/text-tools/README.md",
+    "make/m3/evidence/cpu-tools-jmod-20261018/**"
   ],
   "invariant_locks": {
     "JDK_PRODUCT_SOURCE": "LOCKED",
@@ -37,7 +37,7 @@
     "task-local build, tests, legal notices, naming and receipts",
     "explicit fresh-output image assembly through existing packager",
     "existing text-tools build source/target mode and documentation for the additive M3File custom-JDK API",
-    "generated tool evidence under m3/evidence/cpu-tools-jmod-20261018; source payload remains sealed"
+    "generated tool evidence under make/m3/evidence/cpu-tools-jmod-20261018; source payload remains sealed"
   ],
   "forbidden": [
     "editing generated production sources outside canonical recipe",

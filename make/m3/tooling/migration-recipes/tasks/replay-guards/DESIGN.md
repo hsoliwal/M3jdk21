@@ -4,7 +4,7 @@ Continuation of A3 replay at fb0b69967733a00b160af63bba1096f9e63b6471. Use exist
 
 ## Observed path-guard failure
 
-The real broader module JUnit run fails M3VerbatimJavaPairRecipeTest.driftAndMalformedDescriptorsFailClosed. Its first malformed descriptor, ../escape.java, is admitted: the guard detects /../ inside a path but misses a leading ../. Preserve accepted relative source paths and separator normalization; reject leading parent traversal with the same existing exception. Strengthen the original test with slash/backslash traversal variants and valid leading ./ normalization. No new path framework or source rewriter.
+The real broader module JUnit run fails M3VerbatimJavaPairRecipeTest.driftAndMalformedDescriptorsFailClosed. Its first malformed descriptor, ../escape.java, is admitted: the guard detects /../ inside a path but misses a leading .. Preserve accepted relative source paths and separator normalization; reject leading parent traversal with the same existing exception. Strengthen the original test with slash/backslash traversal variants and valid leading ./ normalization. No new path framework or source rewriter.
 
 ## Observed proof-kit trigger gap
 

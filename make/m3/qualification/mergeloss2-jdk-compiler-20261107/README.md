@@ -22,7 +22,7 @@ of declared shape. Four have an empty base and resolve as ours, then theirs. The
 master's `retainSyntax || relations != null` is kept, inside the origin's scoped-open choice. Any other hunk count,
 shape or postimage hash is refused.
 
-The parser-pack half of the origin (its scope contracts and `M3ASTIndex` changes under `m3/tooling`) is leaf 116,
+The parser-pack half of the origin (its scope contracts and `M3ASTIndex` changes under `make/m3/tooling`) is leaf 116,
 lane com-synexia-4d, and is not part of this PR. The origin's `M3ASTScopeContract` was run against the result as a
 gate (GATES.tsv).
 
@@ -35,6 +35,6 @@ gate (GATES.tsv).
 | `gate103.sh` | the compiler-patch / parser-module / consumers / contracts gate (after `m3astpc-pr2357/parser_pack_gate.sh`) |
 
 ```text
-python -I m3/qualification/mergeloss2-jdk-compiler-20261107/apply.py [--check]
-bash m3/qualification/mergeloss2-jdk-compiler-20261107/gate103.sh <tree archive> <dir with the 3 restored owners> <out>
+python -I make/m3/qualification/mergeloss2-jdk-compiler-20261107/apply.py [--check]
+bash make/m3/qualification/mergeloss2-jdk-compiler-20261107/gate103.sh <tree archive> <dir with the 3 restored owners> <out>
 ```

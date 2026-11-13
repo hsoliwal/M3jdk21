@@ -78,7 +78,7 @@ jtreg/runtime proof and serial promotion remain authoritative.
 
 ## Maven evidence
 
-`mvn -f m3/backports/pom.xml verify` emits:
+`mvn -f make/m3/backports/pom.xml verify` emits:
 
 - `target/backport-recipe-dag.tsv`;
 - `target/backport-recipe-dag.json`;

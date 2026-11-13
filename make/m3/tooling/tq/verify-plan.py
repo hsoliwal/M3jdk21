@@ -10,8 +10,8 @@ from pathlib import Path
 import tempfile
 
 CRATE = Path(__file__).resolve().parent
-ROOT = CRATE.parents[2]
-spec = importlib.util.spec_from_file_location('sealed', ROOT / 'm3/migration/recipe.py')
+ROOT = CRATE.parents[3]
+spec = importlib.util.spec_from_file_location('sealed', ROOT / 'make/m3/migration/recipe.py')
 sealed = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(sealed)
 plan_path = CRATE / 'plan.json'
@@ -30,7 +30,7 @@ sealed.observe_guards(ROOT, plan)
 # These three documents have shared ownership across serial port packets. Their
 # historical postimages remain byte-exact in the replay fixture below. The live
 # tree may append other ports, but must retain all this packet's authority.
-shared = {'m3/docs/name-mapping.json', 'm3/docs/counterpart-naming.md',
+shared = {'doc/m3/name-mapping.json', 'doc/m3/counterpart-naming.md',
           'src/java.base/share/legal/synexia.md'}
 for row in rows:
     if args.context == 'ic0':
@@ -43,7 +43,7 @@ for row in rows:
         assert hashlib.sha256(current).hexdigest() == current_workflow_sha256, 'Unadmitted ic0 workflow'
     elif row['path'] not in shared:
         assert current == row['after'], row['path']
-    elif row['path'] == 'm3/docs/name-mapping.json':
+    elif row['path'] == 'doc/m3/name-mapping.json':
         if args.context == 'ic0':
             assert hashlib.sha256(current).hexdigest() == current_mapping_sha256, 'Unadmitted ic0 mapping'
         current_map = json.loads(current)
@@ -55,7 +55,7 @@ for row in rows:
         projected['migration']['records'] = [r for r in projected['migration']['records'] if r['id'] in ids]
         assert projected == expected_map, 'Existing mapping records/gates/authority changed'
         assert len({r['id'] for r in current_map['migration']['records']}) == len(current_map['migration']['records'])
-    elif row['path'] == 'm3/docs/counterpart-naming.md':
+    elif row['path'] == 'doc/m3/counterpart-naming.md':
         lines = iter(current.decode().splitlines())
         assert all(any(candidate == line for candidate in lines)
                    for line in row['after'].decode().splitlines()), 'Naming lineage removed'
@@ -66,7 +66,7 @@ for row in rows:
 
 before_path = CRATE / 'src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/name-mapping.json.txt.before'
 before = json.loads(before_path.read_text())
-after = json.loads(next(row['after'] for row in rows if row['path'] == 'm3/docs/name-mapping.json'))
+after = json.loads(next(row['after'] for row in rows if row['path'] == 'doc/m3/name-mapping.json'))
 retained = copy.deepcopy(after)
 record = retained['migration']['records'].pop()
 assert record['id'] == 'm3.counterpart.MIndexRegexTrigramQuery'

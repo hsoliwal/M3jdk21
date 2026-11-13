@@ -34,11 +34,11 @@ path prefix, not automatic rename authority.
 
 | Original path category | MOVE | REWRITE | Rows | First action |
 | --- | ---: | ---: | ---: | --- |
-| `m3/runtime-integration/regex-rope-affix-effects/` | 34 | 13 | 47 | Seal historical recipe/code/fixtures and decide canonical Synexia custody before any move |
+| `make/m3/runtime-integration/regex-rope-affix-effects/` | 34 | 13 | 47 | Seal historical recipe/code/fixtures and decide canonical Synexia custody before any move |
 | `m3/ports/indexstring/recipe/` | 0 | 26 | 26 | Check stub/donor package identities; do not blindly rewrite historical fixtures |
 | `m3/collections/` | 1 | 6 | 7 | Separate current tests from recipe/qualification evidence and register source map IDs |
 | `m3/search/` | 0 | 4 | 4 | Reconcile exact historical search-recipe pins and their downstream consumers |
-| `m3/tooling/name-contract/` | 0 | 3 | 3 | Check canonical map/plan authority and preserve intentional negative-case fixtures |
+| `make/m3/tooling/name-contract/` | 0 | 3 | 3 | Check canonical map/plan authority and preserve intentional negative-case fixtures |
 | Other workflow/compiler/jtreg paths | 0 | 4 | 4 | Qualify each name with its actual contract and owner |
 | **Total** | **35** | **56** | **91** | **HOLD** until provenance and gates pass |
 
@@ -58,12 +58,12 @@ For the **current** candidate, on its own complete, clean source checkout:
 
 ```sh
 git rev-parse HEAD 'HEAD^{tree}'
-python3 -I m3/tooling/jdk-naming/test_jdk_naming.py
-python3 -I m3/tooling/jdk-naming/test_reseal.py
-python3 -I m3/tooling/jdk-naming/jdk_naming.py plan --tree HEAD \
+python3 -I make/m3/tooling/jdk-naming/test_jdk_naming.py
+python3 -I make/m3/tooling/jdk-naming/test_reseal.py
+python3 -I make/m3/tooling/jdk-naming/jdk_naming.py plan --tree HEAD \
   --tsv /absolute/evidence/current-naming-plan.tsv
-python3 m3/tooling/name-contract/check.py
-python3 m3/release/audit_release_identity.py --root . --release
+python3 make/m3/tooling/name-contract/check.py
+python3 make/m3/release/audit_release_identity.py --root . --release
 ```
 
 The plan is **read-only**, a candidate preflight. A release naming fixed-point

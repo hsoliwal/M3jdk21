@@ -5,11 +5,11 @@ on:
   pull_request:
     paths:
       - 'm3/core/**'
-      - 'm3/build.sh'
+      - 'make/m3/build.sh'
       - 'm3/lexicon/*.tsv'
       - 'm3/lexicon/english-demo.txt'
-      - 'm3/tooling/joined-range-directory/current-baseline/**'
-      - 'm3/tooling/joined-range-directory/current-module/**'
+      - 'make/m3/tooling/joined-range-directory/current-baseline/**'
+      - 'make/m3/tooling/joined-range-directory/current-module/**'
       - '.github/workflows/m3-core-current-baseline.yml'
   workflow_dispatch:
 permissions:
@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     env:
-      Q: m3/tooling/joined-range-directory/current-baseline
+      Q: make/m3/tooling/joined-range-directory/current-baseline
       PROOF: ${{ github.workspace }}/m3-core-runtime-${{ github.run_id }}-${{ github.run_attempt }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262

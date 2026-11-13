@@ -15,8 +15,8 @@ import re
 import subprocess
 import sys
 
-MAPPING = "m3/docs/name-mapping.json"
-FRAGMENT = "m3/docs/name-mapping.d/m3-integrated-utility-families-20261018.json"
+MAPPING = "doc/m3/name-mapping.json"
+FRAGMENT = "doc/m3/name-mapping.d/m3-integrated-utility-families-20261018.json"
 REQUIRED_FAMILIES = frozenset("objects strings arrays collections iterators spliterators streams collectors functions reflection classes handles io files paths buffers channels resources charsets regex numbers math bits time concurrency processes network archives digests jdbc modules".split())
 CATALOGUE_HEADER = ["category", "candidate", "source", "version_or_revision", "rights", "contract_decision", "cost", "validation", "selection"]
 CANDIDATE_STATUS = "CANDIDATE_REQUIRES_SOURCE_AND_RUNTIME_QUALIFICATION"
@@ -158,7 +158,7 @@ def owner_disposition(module: str, meta: dict) -> str:
 
 def verify_module_index(repository: Path, overlay: Path | None, fragment: dict, core_apis: dict) -> dict:
     index_path = fragment["module_wide_index"]
-    require(index_path == "m3/docs/name-mapping.d/m3jdk-module-owners-20261018.json", "module index authority drift")
+    require(index_path == "doc/m3/name-mapping.d/m3jdk-module-owners-20261018.json", "module index authority drift")
     index = json.loads(load_candidate(repository, overlay, index_path))
     require(index["schema"] == 1 and index["mapping_authority"] == MAPPING
             and index["core_family_fragment"] == FRAGMENT, "module index naming-map authority drift")
@@ -291,7 +291,7 @@ def verify(repository: Path, overlay: Path | None, require_candidates: bool = Fa
     mapping = json.loads(load_candidate(repository, overlay, MAPPING))
     fragment = json.loads(load_candidate(repository, overlay, FRAGMENT))
     require(fragment["schema"] == 1 and fragment["mapping_authority"] == MAPPING, "unexpected mapping authority")
-    require(fragment["canonical_policy"] == "m3/docs/m3jdk21-porting-invariant.md", "policy authority drift")
+    require(fragment["canonical_policy"] == "doc/m3/m3jdk21-porting-invariant.md", "policy authority drift")
     require(fragment["target_repository"] == "hsoliwal/M3jdk21", "target repository drift")
     for flag in ("receiving_sequence_advanced", "family_completion", "repository_completion"):
         require(fragment[flag] is False, "source inventory cannot claim " + flag)

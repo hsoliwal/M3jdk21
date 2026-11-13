@@ -58,7 +58,7 @@
             }
           ],
           "scope": "No public callable descriptor is added; inherited public descriptors can acquire explicit declaring-owner reflection metadata.",
-          "unreconciled_historical_map_guarantee": "PR#1204 README m3/collections/qualification/contracts-20261017/README.md (blob9d1e977abaceade36e51df6b0179e3b5db6540a3) promised strict empty sequenced endpoints for read-only maps and sorted sets. This candidate refines only Set guards. Current outer JDK-derived Map wrappers can still inherit NoSuchElementException on empty derived endpoints. That historical guarantee remains unreconciled, requiring separate admission of concrete wrapper/marker/delegation behavior."
+          "unreconciled_historical_map_guarantee": "PR#1204 README make/m3/collections/qualification/contracts-20261017/README.md (blob9d1e977abaceade36e51df6b0179e3b5db6540a3) promised strict empty sequenced endpoints for read-only maps and sorted sets. This candidate refines only Set guards. Current outer JDK-derived Map wrappers can still inherit NoSuchElementException on empty derived endpoints. That historical guarantee remains unreconciled, requiring separate admission of concrete wrapper/marker/delegation behavior."
         },
         {
           "category": "DECORATOR_RECURSION_ELIMINATION",

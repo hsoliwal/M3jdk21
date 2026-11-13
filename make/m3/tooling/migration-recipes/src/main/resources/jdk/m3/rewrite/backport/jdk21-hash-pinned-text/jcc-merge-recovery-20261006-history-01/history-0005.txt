@@ -25,7 +25,7 @@ The initial source CI observation returned zero PR-triggered runs through the wr
 
 ## One canonical authority and explicit source obligations
 
-`m3/docs/name-mapping.json` remains the only mapping authority. The existing operational schema, `migration.py`, retained text-snapshot recipe and `recipe.py` sealed installer are reused. No second registry, compiler, scanner, scheduler or importer is introduced.
+`doc/m3/name-mapping.json` remains the only mapping authority. The existing operational schema, `migration.py`, retained text-snapshot recipe and `recipe.py` sealed installer are reused. No second registry, compiler, scanner, scheduler or importer is introduced.
 
 Only `m3.jcc-recipe-laboratory` and `m3.jcc-java-jni-regression` advance their scoped source bindings. All 46 IDs and their order, the other 44 complete records, all 20 destination gates and every non-record global remain exact. This includes the entire reconciled Descriptor record and its historical evidence. Global source/mainline observations are not rewritten merely because this feature branch was published.
 
@@ -97,11 +97,11 @@ The inherited Descriptor reconciliation stays byte-identical in both the mapping
 
 The ordinary whole-map validator checks operational schema and lineage but skips target/recipe/evidence file hashes for blocked records. Explicit source/body/proof reference checks therefore accompany it. Full old source and receiver object preservation is tested independently of its location-only previous-record comparison. A valid map is distinct from the separate incomplete migration result.
 
-The new focused checks cover actual named/serialized text-recipe activation, four updates with a fresh fixed point, all four missing/drifted/duplicate/scan-mutated inputs, canonical map and historical evidence preservation, and actual installer check/apply/rollback/replay/refusals including all fourteen mixed before/after subsets. Their executed receipts belong under `m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/`; recipe definition alone is not a passing execution receipt.
+The new focused checks cover actual named/serialized text-recipe activation, four updates with a fresh fixed point, all four missing/drifted/duplicate/scan-mutated inputs, canonical map and historical evidence preservation, and actual installer check/apply/rollback/replay/refusals including all fourteen mixed before/after subsets. Their executed receipts belong under `make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/`; recipe definition alone is not a passing execution receipt.
 
 ```sh
-mvn -B -ntp -f m3/tooling/migration-recipes/verification/jcc-source-final-handoff/pom.xml clean verify
-python -B m3/migration/test/test_jcc_source_final_handoff_packet.py
+mvn -B -ntp -f make/m3/tooling/migration-recipes/verification/jcc-source-final-handoff/pom.xml clean verify
+python -B make/m3/migration/test/test_jcc_source_final_handoff_packet.py
 ```
 
 All four broad capability flags—source export admitted, source-qualified destination materialized, destination gates passed and complete capability read-back delivered—remain false. Exact committed artifact read-back is separately recorded. Source root accounting, finite source tests, the independent receiver, metadata replay, full-module coverage, CI, source export and JDK acceptance remain distinct evidence dimensions.

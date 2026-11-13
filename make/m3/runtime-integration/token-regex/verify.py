@@ -25,7 +25,7 @@ CONTRACT_TEST = 'test/jdk/java/util/regex/TokenPattern/TokenPatternTest.java'
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--java-home', default=os.environ.get('M3_TOKEN_JAVA_HOME'))
-    parser.add_argument('--repository', type=Path, default=Path(__file__).resolve().parents[3])
+    parser.add_argument('--repository', type=Path, default=Path(__file__).resolve().parents[4])
     parser.add_argument('--output', type=Path, help='optional source-bound JSON execution receipt')
     parser.add_argument('--temp-directory', default=os.environ.get('M3_TOKEN_TMPDIR'))
     options = parser.parse_args()

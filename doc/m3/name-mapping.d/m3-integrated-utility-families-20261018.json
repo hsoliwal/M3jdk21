@@ -1,9 +1,9 @@
 {
   "schema": 1,
-  "mapping_authority": "m3/docs/name-mapping.json",
+  "mapping_authority": "doc/m3/name-mapping.json",
   "target_repository": "hsoliwal/M3jdk21",
   "target_baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
-  "canonical_policy": "m3/docs/m3jdk21-porting-invariant.md",
+  "canonical_policy": "doc/m3/m3jdk21-porting-invariant.md",
   "scope": "Finite31-family core utility inventory plus a linked exact70-module source-tree ownership index. Neither is universal method/type/algorithm completeness or Java SE conformance.",
   "source_evidence_semantics": "A source declaration and exported module package prove discoverable ownership at the pinned baseline, not execution, complete behavior, benchmarks or target admission.",
   "candidate_semantics": "New candidate API names are design/implementation inputs until their exact source, recipe and runtime receipts are recorded. No candidate is marked implemented or qualified by this inventory.",
@@ -12,9 +12,9 @@
   "repository_completion": false,
   "no_companion_runtime": true,
   "public_existing_jdk_names_unchanged": true,
-  "existing_catalogue": "m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv",
-  "source_verifier": "m3/compatibility/check_integrated_utility_coverage.py",
-  "coverage_document": "m3/docs/INTEGRATED_UTILITY_COVERAGE_20261018.md",
+  "existing_catalogue": "make/m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv",
+  "source_verifier": "make/m3/compatibility/check_integrated_utility_coverage.py",
+  "coverage_document": "doc/m3/INTEGRATED_UTILITY_COVERAGE_20261018.md",
   "required_family_ids": [
     "objects",
     "strings",
@@ -669,8 +669,8 @@
           "linear-time guarantee",
           "token JNI acceleration"
         ],
-        "canonical_contract_catalogue": "m3/runtime-integration/token-regex/contract-catalogue.json",
-        "behavioral_atom_seal": "m3/runtime-integration/token-regex/behavioral-atoms.json",
+        "canonical_contract_catalogue": "make/m3/runtime-integration/token-regex/contract-catalogue.json",
+        "behavioral_atom_seal": "make/m3/runtime-integration/token-regex/behavioral-atoms.json",
         "source_evidence": "Exact frozen product SHA and declaration tokens; executed contracts remain in a separate source-bound receiver packet."
       }
     },
@@ -2444,7 +2444,7 @@
       "sha256": "8610e9fcedcc8eb698acbf3161bca8ea7d16194e61c66915f9e25fe47aae27f7"
     },
     {
-      "path": "m3/collections/algorithm-catalog/sdk-family-names-20261017.tsv",
+      "path": "make/m3/collections/algorithm-catalog/sdk-family-names-20261017.tsv",
       "git_blob": "defa93e232815f027f9e96b47aa18d896d1b4f31",
       "sha256": "dd2aed4d82561306a3bb901712b8c8bdbb08e103d32f192a2c9318363d16380a"
     },
@@ -2550,6 +2550,6 @@
       "receiving_sequence_advanced": false
     }
   ],
-  "source_verifier_tests": "m3/compatibility/test_integrated_utility_coverage.py",
-  "module_wide_index": "m3/docs/name-mapping.d/m3jdk-module-owners-20261018.json"
+  "source_verifier_tests": "make/m3/compatibility/test_integrated_utility_coverage.py",
+  "module_wide_index": "doc/m3/name-mapping.d/m3jdk-module-owners-20261018.json"
 }

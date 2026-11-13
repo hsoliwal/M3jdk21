@@ -21,7 +21,7 @@ This document precedes the source candidate. No verification result is implied.
 | hsoliwal/gradle | 419a77cf61af3924f60678510ed2440230047671 | PR 3 original-task provider SPI present, confirmed by exact blobs. |
 
 The Gradle documentation names an M3JDK provider under
-`m3/tooling/module-packs/build-support/gradle-provider`, absent in the inspected
+`make/m3/tooling/module-packs/build-support/gradle-provider`, absent in the inspected
 M3JDK module-pack subtree. Its receiver implementation is a separate leaf in this
 task. The Maven recovery must preserve both current compiler-configuration hooks.
 

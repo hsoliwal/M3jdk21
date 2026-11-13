@@ -20,27 +20,27 @@
       "git_blob": "75b06e079db97696f8a75f06c9993e7d47b4a3d7"
     },
     {
-      "path": "m3/docs/name-mapping.json",
+      "path": "doc/m3/name-mapping.json",
       "sha256": "d53285882f4b1092ec5b6d5f876f975152e56c806a8e25dcc9f894ec848d9163",
       "git_blob": "a6bb7e5b1bc6f59e0510da3d907cab542c9537b7"
     },
     {
-      "path": "m3/history/RETAINED_EVIDENCE.tsv",
+      "path": "make/m3/history/RETAINED_EVIDENCE.tsv",
       "sha256": "47d58b6f4fb5aa55022b59fb8a9a83a975b8e52336ac98c7c339251c0604210b",
       "git_blob": "9d8687c766a60d1188ccab93d7d4dbc5eb4850be"
     },
     {
-      "path": "m3/history/evidence-manifests/string-ci-20261014.tsv",
+      "path": "make/m3/history/evidence-manifests/string-ci-20261014.tsv",
       "sha256": "c049316c51ac8e361f84dc313bb645c2ca5c39e161be65da265af08b9e3d663b",
       "git_blob": "6cadf639436f6461f0b251c5129ffe6a3815eae5"
     },
     {
-      "path": "m3/runtime-integration/check-m3string-invariants.py",
+      "path": "make/m3/runtime-integration/check-m3string-invariants.py",
       "sha256": "fa88e6ee2b5903802a9463bec14133feb74a730009b08e722924064052afb10e",
       "git_blob": "adecb6c29d457db14951432b4bafd88ff2b0f074"
     },
     {
-      "path": "m3/runtime-integration/evidence/20261010-string-ci/receipt.json",
+      "path": "make/m3/runtime-integration/evidence/20261010-string-ci/receipt.json",
       "sha256": "750f56807f787f0c6fa1ecfd68f51bc295226ccb71b40a8c0f4fbf36063731ff",
       "git_blob": "d40383348ff43f196e96ab0edeaf07fbb2bbdf27"
     }
@@ -60,7 +60,7 @@
     "source_readback_files": 59
   },
   "history": {
-    "retained_receipt": "m3/runtime-integration/evidence/20261010-string-ci/receipt.json",
+    "retained_receipt": "make/m3/runtime-integration/evidence/20261010-string-ci/receipt.json",
     "receipt_scope": "Verbatim original 33-test evidence only; does not prove the current 37 target tests executed.",
     "audit_scope": "Pinned Oct11 complete reachable commit metadata; not a complete semantic patch audit and not refreshed to all current commits.",
     "prior_pr": 668,
@@ -70,7 +70,7 @@
     "source_pr": 11043,
     "source_commit": "0c2c4f6ee1ce01418ffd158485d7ddb0342f900a",
     "status": "DONOR_QUALIFIED_TARGET_PORT_PENDING",
-    "map": "m3/docs/name-mapping.json",
+    "map": "doc/m3/name-mapping.json",
     "runtime_port": false
   },
   "runtime_source_changes": false,

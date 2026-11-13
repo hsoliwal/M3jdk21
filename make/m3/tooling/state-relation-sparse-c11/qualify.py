@@ -11,11 +11,11 @@ import runpy
 import subprocess
 
 HERE = Path(__file__).resolve().parent
-RECEIVER = HERE.parents[2]
+RECEIVER = HERE.parents[3]
 SDK = HERE / "sdk"
 ROOT = Path(os.environ["M3_PROOF_ROOT"]).resolve()
 ARTIFACTS = ROOT / "artifacts"
-PREFIX = "m3/tooling/state-relation-sparse-c11/"
+PREFIX = "make/m3/tooling/state-relation-sparse-c11/"
 WORKFLOW = ".github/workflows/m3-state-relation-sparse-c11.yml"
 SUITE = "jdk.internal.m3.rewrite.M3StateRelationSparseC11RecipeTest"
 METHODS = ["bothPartialStatesRoundTripAndReachFixedPointsInBothOrders",
@@ -73,7 +73,7 @@ SOURCE_GIT = {
     "src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java": "d70a152bdedc380ed8b28861ea94ef4c2adbea90",
     "src/java.base/share/native/libjava/M3StateRelation.c": "89b3127f0f262de3e00ba28a01079a659013dce2",
     "src/java.base/share/native/libjava/m3_state_relation.h": "0e0c70e60b2cee61c3df31982a26f4251955cb61",
-    "m3/compatibility/regex-relations-20261014/M3RelationPortProof.java": "e9a6beee8916cf97d5d4aac2383e7ac2fa8843e0"
+    "make/m3/compatibility/regex-relations-20261014/M3RelationPortProof.java": "e9a6beee8916cf97d5d4aac2383e7ac2fa8843e0"
 }
 AFTER_GIT = {**SOURCE_GIT, TARGET_C: "816734640bdce057d1ab787a3a555cd50cf8a43e"}
 

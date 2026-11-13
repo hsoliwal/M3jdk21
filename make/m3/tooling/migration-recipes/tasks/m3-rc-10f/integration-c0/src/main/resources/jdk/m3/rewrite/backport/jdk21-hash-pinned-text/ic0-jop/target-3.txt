@@ -13,7 +13,7 @@ import sys
 
 
 CRATE = Path(
-    "m3/tooling/migration-recipes/src/main/resources/"
+    "make/m3/tooling/migration-recipes/src/main/resources/"
     "jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep485-stream-gatherers"
 )
 OPT_IN_TOKEN = "JEP485"

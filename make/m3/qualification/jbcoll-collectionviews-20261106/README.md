@@ -114,7 +114,7 @@ master tree, plus both crate postimage blobs.
 | differential | PASS. 0 unclassified across the 4 pairs |
 | tests | PASS. The 13 jtreg tests of `test/jdk/java/util/CollectionViews` run as plain mains under `--patch-module` (no jtreg on the host): 13/13. The counterfactual fails exactly `FilteredBulkMutationContractTest` |
 | naming | PASS. `jdk_naming.py` plan/apply over the leaf dir: moves=0, rewrites=0, refusals=0 |
-| scope | PASS. Only `m3/qualification/jbcoll-collectionviews-20261106/` |
+| scope | PASS. Only `make/m3/qualification/jbcoll-collectionviews-20261106/` |
 
 Not run: jtreg itself. M3CollectionViewsTest is out of scope: it tests `Collections.filtered*`, which is backed by
 `M3CollectionViews`, not by this class.

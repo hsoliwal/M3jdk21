@@ -15,7 +15,7 @@
     M3BitAlgorithms, the graph and trie families M3GraphAlgorithms and M3StringTrie (recipe/graph-trie-20261106),
     the M3AlgorithmShapeCatalog that names them, and the M3ProgressMonitor cancellation contract
     every loop observes (an adapter over the owner jdk.m3.collections.M3ProgressMonitor since
-    m3/qualification/progress-monitor-unify-20261106). Pure Java 21; com.m3:m3-collections is the only dependency
+    make/m3/qualification/progress-monitor-unify-20261106). Pure Java 21; com.m3:m3-collections is the only dependency
     outside java.base. Relocated by recipe
     (recipe/families-20261106/relocate.py with RELOCATION_MAP.tsv and PROVENANCE.tsv) from the m3scale donor at
     develop 3385d79a2968 (2026-11-06); the four donor oracles run in the test phase. The pre-existing M3PrefixZ under
@@ -40,7 +40,7 @@
   </dependencies>
   <build>
     <plugins>
-      <!-- MOVE_TO_JDK_MODULE v3 (keep-pom mode, m3/tooling/jdk-naming/move_module_area.py): the sources live in the
+      <!-- MOVE_TO_JDK_MODULE v3 (keep-pom mode, make/m3/tooling/jdk-naming/move_module_area.py): the sources live in the
            JDK module src/jdk.m3.collections and the tests in test/jdk; this pom keeps its own configuration and adds them. -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>

@@ -122,7 +122,7 @@
     "immutable_public_url": "https://github.com/hsoliwal/M3jdk21/tree/08181cf261f3b9224ec6916e352435ed0494a9a7/m3/collections/algorithm-catalog/challenge-forks-20261018",
     "inventory_status": "NOT_EVALUATED",
     "manifest_sha256": "3a8b36fe47266a7b4460bad200264ded602450c4e360d3b1cb38d43a847446ca",
-    "packet_path": "m3/collections/algorithm-catalog/challenge-forks-20261018",
+    "packet_path": "make/m3/collections/algorithm-catalog/challenge-forks-20261018",
     "publication_pin_status": "VERIFIED_BY_PUBLICATION_CONTROLLER",
     "pull_request": "https://github.com/hsoliwal/M3jdk21/pull/1323",
     "repository": "hsoliwal/M3jdk21"

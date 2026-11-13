@@ -41,7 +41,7 @@ final class JccSourceFinalHandoffTest {
     private static final String FINAL_SOURCE_COMMIT = "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906";
     private static final String FINAL_SOURCE_ROOT_TREE = "6f9b6a48f8cefa7a643f222c7aa1f621497725e7";
     private static final String FINAL_SOURCE_REF = "refs/heads/aix/jcc-canonical-integration-20261005";
-    private static final String REGISTRY = "m3/docs/name-mapping.json";
+    private static final String REGISTRY = "doc/m3/name-mapping.json";
     private static final String LAB = "m3.jcc-recipe-laboratory";
     private static final String JNI = "m3.jcc-java-jni-regression";
     private static final String RECEIVER = "jdk.m3.rewrite.atom.JccReceivingFixtureTest";
@@ -53,13 +53,13 @@ final class JccSourceFinalHandoffTest {
     private static final List<Target> OUTPUTS = List.of(
             new Target(REGISTRY, "before00-name-mapping.json.txt", "after00-name-mapping.json.txt",
                     "536af76dd7b7b7217707662c2f1437af4adaa53af898627b0884e0b4f4603ace"),
-            new Target("m3/docs/jcc-source-handoff.md", "before01-jcc-source-handoff.md.txt",
+            new Target("doc/m3/jcc-source-handoff.md", "before01-jcc-source-handoff.md.txt",
                     "after01-jcc-source-handoff.md.txt",
                     "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337"),
-            new Target("m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
+            new Target("make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
                     "before02-source-destination-bindings.json.txt", "after02-source-destination-bindings.json.txt",
                     "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126"),
-            new Target("m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
+            new Target("make/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
                     "before03-root-coverage-obligations.tsv.txt", "after03-root-coverage-obligations.tsv.txt",
                     "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b"));
 

@@ -13,10 +13,10 @@
     "targets": 5
   },
   "changed_targets": [
-    "m3/tooling/module-packs/cpu-tools/OUTPUT_CONTRACT.tsv",
-    "m3/tooling/module-packs/cpu-tools/README.md",
-    "m3/tooling/module-packs/cpu-tools/build.py",
-    "m3/tooling/module-packs/cpu-tools/fixtures/test_build.py"
+    "make/m3/tooling/module-packs/cpu-tools/OUTPUT_CONTRACT.tsv",
+    "make/m3/tooling/module-packs/cpu-tools/README.md",
+    "make/m3/tooling/module-packs/cpu-tools/build.py",
+    "make/m3/tooling/module-packs/cpu-tools/fixtures/test_build.py"
   ],
   "prepare_arguments": [
     "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",

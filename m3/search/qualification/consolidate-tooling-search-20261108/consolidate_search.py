@@ -1,13 +1,13 @@
 """consolidate_search.py <src-module> <out-root> : CONSOLIDATE_PACKAGE v1, jdk.m3.tooling.search -> jdk.m3.search.
 
-Folds the module m3/tooling/search (package jdk.m3.tooling.search, 14 files) into the existing module m3/search
+Folds the module make/m3/tooling/search (package jdk.m3.tooling.search, 14 files) into the existing module m3/search
 (package jdk.m3.search), so one search package exists. Path map:
   src/{main,test}/java/jdk/m3/tooling/search/X.java -> m3/search/src/{main,test}/java/jdk/m3/search/X.java
   src/main/native/X.c                              -> m3/search/src/main/native/X.c (not in CMakeLists.txt: built
                                                       by the qualification scripts, which generate the JNI header)
   README*.md, verify*.sh                           -> m3/search/qualification/sorted-bounds/
 Text rules, in order, on every file: jdk.m3.tooling.search -> jdk.m3.search; jdk_m3_tooling_search_ -> jdk_m3_search_
-(JNI symbols and javac -h header names); jdk/m3/tooling/search -> jdk/m3/search; m3/tooling/search -> m3/search.
+(JNI symbols and javac -h header names); jdk/m3/tooling/search -> jdk/m3/search; make/m3/tooling/search -> m3/search.
 Scripts only: the module root is now two directories above the script, and the long-bounds script compiles the
 sorted-bounds sources instead of every source of the (now larger) module. Prints old path, new path, rules applied."""
 import sys
@@ -15,7 +15,7 @@ from pathlib import Path
 
 SRC, OUT = Path(sys.argv[1]), Path(sys.argv[2])
 RULES = [("jdk.m3.tooling.search", "jdk.m3.search"), ("jdk_m3_tooling_search_", "jdk_m3_search_"),
-         ("jdk/m3/tooling/search", "jdk/m3/search"), ("m3/tooling/search", "m3/search")]
+         ("jdk/m3/tooling/search", "jdk/m3/search"), ("make/m3/tooling/search", "m3/search")]
 SCRIPT_RULES = [
     ('here=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)', 'here=$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)'),
     ("mapfile -t java_files < <(find \"$here/src/main/java\" \"$here/src/test/java\" -name '*.java' -type f",
@@ -44,4 +44,4 @@ for f in sorted(p for p in SRC.rglob("*") if p.is_file()):
     dst = OUT / target(rel)
     dst.parent.mkdir(parents=True, exist_ok=True)
     dst.write_bytes(text.encode("utf-8"))
-    print(f"m3/tooling/search/{rel}\t{target(rel)}\t{';'.join(applied)}")
+    print(f"make/m3/tooling/search/{rel}\t{target(rel)}\t{';'.join(applied)}")

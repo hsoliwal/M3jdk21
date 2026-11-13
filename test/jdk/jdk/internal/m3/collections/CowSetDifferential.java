@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
 /** Exact Java21 provider oracle; no JDK source or LeetCode implementation copied. */
-//FLLDCIM: RELOCATE - donor blob a55968fc1547 at ca1aafc4d94f; recipe m3/collections/qualification/census-g2-20261106/relocate.py v4
+//FLLDCIM: RELOCATE - donor blob a55968fc1547 at ca1aafc4d94f; recipe make/m3/collections/qualification/census-g2-20261106/relocate.py v4
 public final class CowSetDifferential {
     private static long checks;
 

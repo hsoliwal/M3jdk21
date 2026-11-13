@@ -54,9 +54,9 @@ The platform catalogue records first-party inventory first, then LeetCode, Hacke
 
 Both active Java proof inputs live under `src/test/java` so the existing canonical Java snapshot recipe admits their paths without any relaxation of its path rules:
 
-- `m3/runtime-integration/regex-mandatory-affixes/src/test/java/RegexAffixBeforeAfter.java`
-- `m3/runtime-integration/regex-plan-amalgamation/src/test/java/RegexAmalgamationBeforeAfter.java`
+- `make/m3/runtime-integration/regex-mandatory-affixes/src/test/java/RegexAffixBeforeAfter.java`
+- `make/m3/runtime-integration/regex-plan-amalgamation/src/test/java/RegexAmalgamationBeforeAfter.java`
 
-The historical flat `m3/runtime-integration/regex-plan-amalgamation/RegexAmalgamationBeforeAfter.java` remains untouched in the target. The corrected bound belongs to a new successor under `src/test/java`, and the active amalgamation Python runner selects that successor. Its original bytes are retained under this packet's `history/`, outside the before/after emission trees, so no delete or rewrite of the historical target is requested. The packet still contains 11 target payloads: seven modified paths and four new paths.
+The historical flat `make/m3/runtime-integration/regex-plan-amalgamation/RegexAmalgamationBeforeAfter.java` remains untouched in the target. The corrected bound belongs to a new successor under `src/test/java`, and the active amalgamation Python runner selects that successor. Its original bytes are retained under this packet's `history/`, outside the before/after emission trees, so no delete or rewrite of the historical target is requested. The packet still contains 11 target payloads: seven modified paths and four new paths.
 
 The first-party catalogue URL is pinned to reviewed Synexia commit `11c94feb18155a53cc213708c353791132edc4a7`, with canonical branch `develop`; both reviewed owner blobs were rechecked at that exact commit.

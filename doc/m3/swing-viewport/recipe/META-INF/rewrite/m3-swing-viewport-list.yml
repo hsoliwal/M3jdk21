@@ -5,7 +5,7 @@ type: specs.openrewrite.org/v1beta/recipe
 name: com.synexia.openrewrite.viewport.M3SwingViewportBasicListUI
 displayName: BasicListUI reads row offsets from a prefix lane and measures only edited rows when m3.swing.viewport is set
 description: >-
-  M3JDK Swing viewport leaf 3 (m3/docs/swing-viewport/DESIGN.md section 9). One field and two statement
+  M3JDK Swing viewport leaf 3 (doc/m3/swing-viewport/DESIGN.md section 9). One field and two statement
   blocks in javax.swing.plaf.basic.BasicListUI: getCellBounds(JList, int) takes the y of a vertical row
   from sun.swing.list.M3ListRows instead of summing cellHeights, and convertLocationToRow answers from
   the same offsets unless M3ListRows hands the decision back to the stock loop. Both blocks run before

@@ -16,7 +16,7 @@ views, stable ordering and native collection mask symbols remain unchanged.
 ## Java 21 qualification
 
 ```sh
-bash m3/compatibility/collection-views/verify.sh /new/absolute/evidence-path
+bash make/m3/compatibility/collection-views/verify.sh /new/absolute/evidence-path
 ```
 
 The verifier compiles exact previous/current `java.util.CollectionViews`

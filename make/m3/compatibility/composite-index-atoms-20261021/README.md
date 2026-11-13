@@ -43,8 +43,8 @@ survivor identity/order and discarded-tail behavior remain unchanged.
 From a checkout containing the generated packet:
 
 ```sh
-bash m3/compatibility/composite-index-atoms-20261021/run_contracts.sh "$PWD" /tmp/m3-atoms-proof
-python3 m3/compatibility/composite-index-atoms-20261021/work_probes.py "$PWD" /tmp/m3-atoms-work --require-pass
+bash make/m3/compatibility/composite-index-atoms-20261021/run_contracts.sh "$PWD" /tmp/m3-atoms-proof
+python3 make/m3/compatibility/composite-index-atoms-20261021/work_probes.py "$PWD" /tmp/m3-atoms-work --require-pass
 ```
 
 Work probes instrument scratch copies only. They are operation counts, not timing benchmarks.

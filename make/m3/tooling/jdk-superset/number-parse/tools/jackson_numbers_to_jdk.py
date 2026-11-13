@@ -16,12 +16,12 @@ vendored jackson-core, so the four vendored FastDoubleParser copies have no cons
 - The FastDoubleParser imports go; the first becomes a //FLLDCIM anchor.
 v2 (writing): JDK 19+ renders doubles and floats with Raffaello Giulietti's Schubfach (jdk.internal.math.DoubleToDecimal,
 FloatToDecimal); jackson-core carries a copy of the same algorithm (io.schubfach) whose output equals Double.toString and
-Float.toString on JDK 21 (m3/evidence/java-base/number-parse-jackson/SCHUBFACH_VS_JDK.txt).
+Float.toString on JDK 21 (make/m3/evidence/java-base/number-parse-jackson/SCHUBFACH_VS_JDK.txt).
 - NumberOutput: DoubleToDecimal.toString(v) -> Double.toString(v), FloatToDecimal.toString(v) -> Float.toString(v).
 - io.schubfach.DoubleToDecimal and FloatToDecimal keep their public members and delegate to java.base; the
   package-private MathUtils tables go (retained under upstream-excluded/). Nothing else changes.
 
-Custody is m3/tooling/jdk-superset/retarget/tools/donor_overlay.py (DONOR_OVERLAY v2), the donors' overlay mechanism
+Custody is make/m3/tooling/jdk-superset/retarget/tools/donor_overlay.py (DONOR_OVERLAY v2), the donors' overlay mechanism
 that FDP_DELEGATES_TO_JDK v1 introduced: each upstream file stays byte-identical under upstream-excluded/ (kind unmodified-production-superseded-by-m3-overlay), the overlay
 under src/main/java is pinned with its base and this recipe (kind m3-overlay-source), OVERLAY_SOURCES.json lists
 the overlays, and verify_source.py re-derives every overlay through overlay() below. The pom drops the
@@ -43,7 +43,7 @@ import sys
 
 sys.dont_write_bytecode = True
 
-TOOL_REL = "m3/tooling/jdk-superset/number-parse/tools/jackson_numbers_to_jdk.py"
+TOOL_REL = "make/m3/tooling/jdk-superset/number-parse/tools/jackson_numbers_to_jdk.py"
 RECIPE_ID = "JACKSON_NUMBERS_TO_JDK v2"
 VENDOR = "m3/vendor/third_party"
 DONORS = ("jackson-core-2.15.3", "jackson-core-2.16.1", "jackson-core-2.19.2")
@@ -60,9 +60,9 @@ FACADES = {"DoubleToDecimal": ("double", "Double"), "FloatToDecimal": ("float", 
 REMOVED = ("MathUtils",)
 TARGETS = (tuple(f"{PACKAGE_PATH}/{name}.java" for name in PARSE_TARGETS + ("NumberOutput",))
            + tuple(f"{SCHUBFACH_PATH}/{name}.java" for name in tuple(FACADES) + REMOVED))
-PACK_REL = "m3/tooling/module-packs/jackson"
+PACK_REL = "make/m3/tooling/module-packs/jackson"
 PACK_FDP_DONOR = "fastdoubleparser-1.0.90"
-PREDECESSOR_REL = "m3/evidence/java-base/number-parse-jackson/SOURCE_LOCK_PREDECESSOR.json"
+PREDECESSOR_REL = "make/m3/evidence/java-base/number-parse-jackson/SOURCE_LOCK_PREDECESSOR.json"
 BASE_REVISION = "5c47b0edf08d7ecd12e5c2afecc5530ac6930209"
 ENCODING = "utf-8"
 

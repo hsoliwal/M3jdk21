@@ -117,15 +117,15 @@ evidence and the #2603 donor figure.
 
 Only the differential kills M5.
 
-**jdk_naming.** `jdk_naming.py apply --only` and then `plan --only`, on `m3/tooling/module-packs/cpu-tools/` and this
+**jdk_naming.** `jdk_naming.py apply --only` and then `plan --only`, on `make/m3/tooling/module-packs/cpu-tools/` and this
 directory, report moves=0, rewrites=0, refusals=0: a fixed point.
 
 ## Run
 
 ```
-python -I m3/qualification/cpu-structured-waves-20261106/crate_chain2.py <wave9 hash-pinned-java dir>,<hash-pinned-text dir> <M3jdk21 git dir> <master> <fe35ea98841^> m3/tooling/jdk-naming <out>
-python -I m3/qualification/cpu-packed-spatial-index-20261106/split_contract.py <out>/m3/tooling/module-packs/cpu-tools/fixtures/M3Wave9FlowSpatialContract.java m3/tooling/module-packs/cpu-tools/fixtures/M3PackedSpatialIndexContract.java [--check]
-bash m3/qualification/cpu-packed-spatial-index-20261106/spatial_gate.sh <master> <com.synexia checkout> <develop rev> <scratch>
+python -I make/m3/qualification/cpu-structured-waves-20261106/crate_chain2.py <wave9 hash-pinned-java dir>,<hash-pinned-text dir> <M3jdk21 git dir> <master> <fe35ea98841^> make/m3/tooling/jdk-naming <out>
+python -I make/m3/qualification/cpu-packed-spatial-index-20261106/split_contract.py <out>/m3/tooling/module-packs/cpu-tools/fixtures/M3Wave9FlowSpatialContract.java make/m3/tooling/module-packs/cpu-tools/fixtures/M3PackedSpatialIndexContract.java [--check]
+bash make/m3/qualification/cpu-packed-spatial-index-20261106/spatial_gate.sh <master> <com.synexia checkout> <develop rev> <scratch>
 ```
 
 The donor dir names are the CLASS and CONTRACT rows of PROVENANCE.tsv.

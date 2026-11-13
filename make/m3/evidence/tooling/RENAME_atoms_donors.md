@@ -1,7 +1,7 @@
 # jdk.m3.tooling.atoms(.contract, .repository) and jdk.m3.tooling.donors: product prefix dropped (2026-11-08)
 
-`rename_types.py` (DROP_PRODUCT_PREFIX v1) renamed 48 types (`RENAME_atoms_donors.tsv`) in m3/tooling/atom-census and
-m3/tooling/donor-catalogue. Files, references (including atom-jit-gate, which imports them), qualified names in
+`rename_types.py` (DROP_PRODUCT_PREFIX v1) renamed 48 types (`RENAME_atoms_donors.tsv`) in make/m3/tooling/atom-census and
+make/m3/tooling/donor-catalogue. Files, references (including atom-jit-gate, which imports them), qualified names in
 strings, the module's verify scripts, READMEs and two workflows naming the mains all follow.
 
 A recipe defect showed up in this step and was fixed: imports were read after the qualified rule had rewritten them,

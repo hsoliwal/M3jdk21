@@ -62,7 +62,7 @@ class ReleaseAdmissionUnitTest(unittest.TestCase):
     def test_default_evidence_location_matches_visible_queue_contract(self):
         contract = json.loads((Path(__file__).with_name("release-contract.json")).read_text())
         self.assertEqual(release.DEFAULT_EVIDENCE, contract["execution_evidence"]["default_manifest"])
-        self.assertEqual(release.DEFAULT_EVIDENCE, "m3/release/queue/current/evidence.json")
+        self.assertEqual(release.DEFAULT_EVIDENCE, "make/m3/release/queue/current/evidence.json")
 
     def test_sha256_is_stable(self):
         with tempfile.TemporaryDirectory() as td:
@@ -90,11 +90,11 @@ class ExecutedReceiptAdmissionTest(unittest.TestCase):
         self.contract["release"]["upstream_baseline"] = self.upstream
         for relative in release.REQUIRED_FILES:
             self.put(self.root, relative, "fixture\n")
-        self.put(self.root, "m3/release/release-contract.json", self.contract)
+        self.put(self.root, "make/m3/release/release-contract.json", self.contract)
         self.put(self.root, "M3-SYNEXIA-NOTICE.md", "This notice does not relicense\nOpenJDK or JDK-derived source code as Apache-2.0.\n")
         self.put(self.root, "M3-SYNEXIA-RIGHTS.md", "All ownership and all rights not expressly granted by the applicable license\n")
-        self.put(self.root, "m3/README.md", "does **not** modify `java.lang.String`\nNo speedup, complete compatibility, or full jtreg pass is claimed.\n")
-        self.put(self.root, "m3/docs/name-mapping.json", {"porting_invariant": {"receiving_sequence": {
+        self.put(self.root, "make/m3/README.md", "does **not** modify `java.lang.String`\nNo speedup, complete compatibility, or full jtreg pass is claimed.\n")
+        self.put(self.root, "doc/m3/name-mapping.json", {"porting_invariant": {"receiving_sequence": {
             "order": release.EXPECTED_RECEIVING_ORDER, "active_phase": "STRING"}}})
         self.commit("candidate fixture")
         self.source = {"repository": release.REPOSITORY,
@@ -233,7 +233,7 @@ class ExecutedReceiptAdmissionTest(unittest.TestCase):
         source = self.put(self.root, "src/Untracked.java", "class Untracked {}\n")
         self.assert_held(self.result(), "git.source_and_ancestry")
         source.unlink()
-        self.put(self.root, "m3/release/queue/runs/prior/admission.json", {"release_ready": False})
+        self.put(self.root, "make/m3/release/queue/runs/prior/admission.json", {"release_ready": False})
         result = self.result(mode=False)
         self.assertTrue(result["evidence_integrity_ready"], result["blockers"])
 
@@ -304,14 +304,14 @@ class ExecutedReceiptAdmissionTest(unittest.TestCase):
     def test_weakened_gate_set_and_squash_policy_block(self):
         self.contract["mandatory_release_gates"] = []
         self.contract["release"]["single_fork_commit_required"] = True
-        self.put(self.root, "m3/release/release-contract.json", self.contract)
+        self.put(self.root, "make/m3/release/release-contract.json", self.contract)
         self.commit("invalid policy fixture")
         result = self.result(evidence=False)
         self.assert_held(result, "contract.mandatory_release_gates")
         self.assert_held(result, "contract.append_only_history")
 
     def test_missing_malformed_and_duplicate_key_contract_fail_closed(self):
-        path = self.root / "m3/release/release-contract.json"
+        path = self.root / "make/m3/release/release-contract.json"
         for value in [None, "{", '{"schema":1,"schema":2}', "[]"]:
             with self.subTest(value=value):
                 if value is None:
@@ -336,7 +336,7 @@ class ExecutedReceiptAdmissionTest(unittest.TestCase):
         policy = {"status": "QUALIFIED", "workflow": workflow, "workflow_blob": blob,
                   "jobs": [{"name": "Fixture target job", "required_steps": ["Run target JNI parity"]}]}
         self.contract["trusted_gate_producers"] = {gate: copy.deepcopy(policy) for gate in self.receipts}
-        self.put(self.root, "m3/release/release-contract.json", self.contract)
+        self.put(self.root, "make/m3/release/release-contract.json", self.contract)
         self.commit("synthetic producer policy fixture")
         self.source.update(commit=self.run_git("rev-parse", "HEAD"), tree=self.run_git("rev-parse", "HEAD^{tree}"))
         self.pack["source"] = dict(self.source)
@@ -435,7 +435,7 @@ class ExecutedReceiptAdmissionTest(unittest.TestCase):
         self.assert_held(self.result(), "git.source_and_ancestry")
 
     def test_only_exact_report_root_is_exempt_and_filename_whitespace_is_preserved(self):
-        self.put(self.root, " m3/release/queue/runs/impostor.json", {"fake": True})
+        self.put(self.root, " make/m3/release/queue/runs/impostor.json", {"fake": True})
         self.assert_held(self.result(), "git.source_and_ancestry")
 
     def test_proof_artifact_drift_during_live_verification_is_refused(self):
@@ -502,27 +502,27 @@ class ExecutedReceiptAdmissionTest(unittest.TestCase):
         self.assertEqual(original, metadata.read_bytes())
 
     def test_cli_report_root_does_not_exempt_previously_tracked_outputs(self):
-        target = self.put(self.root, "m3/release/queue/runs/historical/report.json", {"historical": True})
+        target = self.put(self.root, "make/m3/release/queue/runs/historical/report.json", {"historical": True})
         self.commit("tracked historical output fixture")
         original = target.read_bytes()
         self.assert_output_refused(self.run_output_cli("--json-out", str(target)))
         self.assertEqual(original, target.read_bytes())
 
     def test_custody_preflight_blocks_actual_recipe_residue_and_retains_it(self):
-        recipe = self.put(self.root, "m3/runtime-integration/recipe/apply.py", "raise RuntimeError('must never execute')\n")
+        recipe = self.put(self.root, "make/m3/runtime-integration/recipe/apply.py", "raise RuntimeError('must never execute')\n")
         self.commit("legacy residue fixture")
         result = release.custody_report(self.root, "foundation")
         self.assert_held(result)
-        self.assertIn("m3/runtime-integration/recipe/apply.py", result["residue"])
+        self.assertIn("make/m3/runtime-integration/recipe/apply.py", result["residue"])
         self.assertTrue(recipe.is_file())
         self.assertIn("Synexia", result["queue"][0]["next_action"])
 
     def test_custody_preflight_detects_actual_reactor_wiring(self):
-        self.put(self.root, "m3/pom.xml", '<project xmlns="http://maven.apache.org/POM/4.0.0"><modules><module>tooling/migration-recipes</module></modules></project>')
+        self.put(self.root, "make/m3/pom.xml", '<project xmlns="http://maven.apache.org/POM/4.0.0"><modules><module>tooling/migration-recipes</module></modules></project>')
         self.commit("legacy wiring fixture")
         result = release.custody_report(self.root, "control-reactor")
         self.assert_held(result)
-        self.assertEqual(["m3/pom.xml -> tooling/migration-recipes"], result["residue"])
+        self.assertEqual(["make/m3/pom.xml -> tooling/migration-recipes"], result["residue"])
 
     def test_release_cli_writes_reports_before_failing_missing_evidence(self):
         output = self.base / "visible-queue" / "admission.json"
@@ -548,18 +548,18 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
         self.contract["release"]["upstream_baseline"] = upstream
         # these fixtures test receipt integrity; the standalone rule has its own fixture below
         self.contract.setdefault("standalone", {})["required_for_release"] = False
-        self.write("m3/release/release-contract.json", json.dumps(self.contract))
+        self.write("make/m3/release/release-contract.json", json.dumps(self.contract))
         self.write(".gitignore", "/target/\n")
-        self.write("m3/release/queue/.gitignore", "/current/\n")
+        self.write("make/m3/release/queue/.gitignore", "/current/\n")
         self.write("M3-SYNEXIA-NOTICE.md", "This notice does not relicense\n"
                    "OpenJDK or JDK-derived source code as Apache-2.0.")
         self.write("M3-SYNEXIA-RIGHTS.md", "All ownership and all rights not expressly granted by the applicable license")
         self.write("M3-SYNEXIA-AUTHORS.md", "Synthetic rights fixture; not a product notice")
         self.write("LICENSE-M3-APACHE-2.0.txt", "Synthetic license fixture")
-        self.write("m3/README.md", "does **not** modify `java.lang.String`\n"
+        self.write("make/m3/README.md", "does **not** modify `java.lang.String`\n"
                    "No speedup, complete compatibility, or full jtreg pass is claimed.")
-        self.write("m3/release/README.md", "Synthetic release fixture")
-        self.write("m3/release/BENCHMARK_AND_COMPATIBILITY_SPEC.md", "No benchmark result")
+        self.write("make/m3/release/README.md", "Synthetic release fixture")
+        self.write("make/m3/release/BENCHMARK_AND_COMPATIBILITY_SPEC.md", "No benchmark result")
         self.write("src/example.java", "class Example {}\n")
         mapping = {
             "schema": 1,
@@ -677,7 +677,7 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
 
     def test_untracked_generated_reports_do_not_dirty_source(self):
         self.write("target/m3-release-proof/generated.json", "{}\n")
-        self.write("m3/release/queue/current/admission.json", "{}\n")
+        self.write("make/m3/release/queue/current/admission.json", "{}\n")
         self.assertTrue(self.result()["release_ready"])
 
     def test_default_manifest_in_visible_queue_is_consumed(self):
@@ -747,16 +747,16 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
                 self.assert_blocked(release.validate(self.root, True, self.manifest), "evidence.manifest")
 
     def test_missing_required_boundary_file_is_reported_without_crash(self):
-        (self.root / "m3/README.md").unlink()
-        self.assert_blocked(self.result(), "file:m3/README.md")
+        (self.root / "make/m3/README.md").unlink()
+        self.assert_blocked(self.result(), "file:make/m3/README.md")
 
     def test_malformed_contract_is_reported_without_crash(self):
-        self.write("m3/release/release-contract.json", "[]")
+        self.write("make/m3/release/release-contract.json", "[]")
         self.assert_blocked(self.result(), "contract.read")
 
     def test_gate_removal_from_contract_cannot_manufacture_readiness(self):
         self.contract["mandatory_release_gates"] = []
-        self.write("m3/release/release-contract.json", json.dumps(self.contract))
+        self.write("make/m3/release/release-contract.json", json.dumps(self.contract))
         self.assert_blocked(self.result(), "contract.mandatory_gates")
 
     def test_maven_gate_owner_and_recipe_identity_are_required(self):
@@ -773,7 +773,7 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
 
     def test_contract_naming_another_maven_gate_owner_is_refused(self):
         self.contract["execution_evidence"]["gate_owners"][release.MAVEN_GATE] = "example/another-repository"
-        self.write("m3/release/release-contract.json", json.dumps(self.contract))
+        self.write("make/m3/release/release-contract.json", json.dumps(self.contract))
         self.assert_blocked(self.result(), "contract.recipe_owner")
 
     def test_contract_delegating_any_other_gate_to_another_repository_is_refused(self):
@@ -782,7 +782,7 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
         other = "example/another-repository"
         ident = next(g for g in self.contract["mandatory_release_gates"] if g != release.MAVEN_GATE)
         self.contract["execution_evidence"]["gate_owners"][ident] = other
-        self.write("m3/release/release-contract.json", json.dumps(self.contract))
+        self.write("make/m3/release/release-contract.json", json.dumps(self.contract))
         self.git("add", ".")
         self.git("commit", "--amend", "-qm", "synthetic release tree delegating " + ident)
         self.evidence["source_commit"] = self.git("rev-parse", "HEAD")
@@ -833,7 +833,7 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
     def test_standalone_rule_refuses_release_while_the_contract_needs_another_repository(self):
         # the contract still names another repository as the M3_MAVEN_CONTROL_REACTOR owner: not standalone
         self.contract["standalone"]["required_for_release"] = True
-        self.write("m3/release/release-contract.json", json.dumps(self.contract))
+        self.write("make/m3/release/release-contract.json", json.dumps(self.contract))
         self.repin_queue()
         self.commit("enforce the standalone rule")
         self.evidence["source_commit"] = self.git("rev-parse", "HEAD")

@@ -9,7 +9,7 @@
   },
   "files": [
     {
-      "path": "m3/build.sh",
+      "path": "make/m3/build.sh",
       "before": {
         "bytes": 5330,
         "sha256": "c7b954a6faa16cc8a0cb4a2d13a8032c43fb308a739b225362b6ac3fd84864ee",
@@ -254,7 +254,7 @@
       {
         "cohort": "current",
         "group": "files",
-        "path": "m3/build.sh",
+        "path": "make/m3/build.sh",
         "declaredBytes": 5412,
         "actual": {
           "bytes": 5330,
@@ -463,7 +463,7 @@
       {
         "cohort": "historical",
         "group": "files",
-        "path": "m3/build.sh",
+        "path": "make/m3/build.sh",
         "declaredBytes": 5412,
         "actual": {
           "bytes": 5330,

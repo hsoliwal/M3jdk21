@@ -35,7 +35,7 @@ import org.apache.commons.collections4.MapIterator;
 import org.apache.commons.collections4.map.Flat3Map;
 
 /**
- * Seeded lockstep differential of census leaf L075 (m3/collections/qualification/flat3map-single-owner-20261106).
+ * Seeded lockstep differential of census leaf L075 (make/m3/collections/qualification/flat3map-single-owner-20261106).
  * {@code full}: Commons {@code Flat3Map} 4.5.0 against the facade {@link M3Flat3Map} over the whole Map/IterableMap
  * API; {@code subset}: Commons against the core {@code jdk.m3.collections.Flat3Map} over the API both share. Every
  * op draws its parameters once and applies them to both sides; each side's records feed its own SHA-256. Records

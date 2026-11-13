@@ -31,7 +31,7 @@ final class M3A3MasteryWorkflowRecipeTest {
                 Map.of(
                         ".github/workflows/m3-a3.yml",
                         resource(BEFORE_ROOT + "m3-a3.yml"),
-                        "m3/docs/a3-lab.md",
+                        "doc/m3/a3-lab.md",
                         resource(BEFORE_ROOT + "a3-lab.md"));
 
         Recipe recipe = new M3Jdk21HashPinnedTextSnapshotRecipe(CRATE);
@@ -45,10 +45,10 @@ final class M3A3MasteryWorkflowRecipeTest {
                 changed.get(".github/workflows/m3-a3.yml")
                         .contains("M3A3MasteryWorkflowRecipeTest"));
         assertTrue(
-                changed.get("m3/docs/a3-lab.md")
+                changed.get("doc/m3/a3-lab.md")
                         .contains("48 x 6 = 288 result rows"));
         assertTrue(
-                changed.get("m3/docs/a3-mastery.md")
+                changed.get("doc/m3/a3-mastery.md")
                         .contains("compiler and tests are authoritative"));
 
         Map<String, String> converged = new LinkedHashMap<>(before);

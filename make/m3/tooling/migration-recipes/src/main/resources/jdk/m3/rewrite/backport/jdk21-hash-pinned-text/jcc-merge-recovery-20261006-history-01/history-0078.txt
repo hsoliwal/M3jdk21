@@ -13,7 +13,7 @@ import xml.etree.ElementTree as ET
 BASE = Path(__file__).resolve().parent
 ROOT = BASE / "overlay"
 OUT = BASE / "verification"
-CRATE = ROOT / "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005"
+CRATE = ROOT / "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005"
 PLAN = CRATE / "plan.json"
 PYTHON = Path(os.environ.get("CODEX_PRIMARY_RUNTIME_PYTHON", "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3"))
 JDK = Path("/workspace/scratch/877d9513c002/toolchains/jdk-21.0.2")
@@ -74,11 +74,11 @@ def main():
         assert result.returncode == expected, "Unexpected result: " + name
         return stdout.read_text(), stderr.read_text()
 
-    installer = ROOT / "m3/migration/recipe.py"
+    installer = ROOT / "make/m3/migration/recipe.py"
     installer_args = ["--plan", PLAN, "--root", ROOT]
     out, _ = run("01-check-E2-preimages", [PYTHON, installer, "check", *installer_args])
     assert json.loads(out)["state"] == "before"
-    pom = ROOT / "m3/tooling/migration-recipes/verification/jcc-source-final-handoff/pom.xml"
+    pom = ROOT / "make/m3/tooling/migration-recipes/verification/jcc-source-final-handoff/pom.xml"
     run("02-actual-text-recipe-maven", [MAVEN, "-B", "-ntp", "-o", "-s", settings,
                                        "-Dmaven.repo.local=" + str(M2), "-f", pom, "clean", "verify"])
     xml_path = pom.parent / "target/surefire-reports/TEST-jdk.m3.rewrite.backport.JccSourceFinalHandoffTest.xml"
@@ -86,7 +86,7 @@ def main():
     assert {key: suite.attrib[key] for key in ("tests", "failures", "errors", "skipped")} == {
         "tests": "11", "failures": "0", "errors": "0", "skipped": "0"}
     (OUT / "JccSourceFinalHandoffTest.xml").write_bytes(xml_path.read_bytes())
-    run("03-actual-packet-contract", [PYTHON, "-B", ROOT / "m3/migration/test/test_jcc_source_final_handoff_packet.py"])
+    run("03-actual-packet-contract", [PYTHON, "-B", ROOT / "make/m3/migration/test/test_jcc_source_final_handoff_packet.py"])
     for name, mode, state, writes in (
             ("04-apply", "apply", "after", 4),
             ("05-apply-fixed-point", "apply", "after", 0),
@@ -96,7 +96,7 @@ def main():
         output, _ = run(name, [PYTHON, installer, mode, *installer_args])
         measured = json.loads(output)
         assert (measured["state"], measured["files"], measured["writes"]) == (state, 4, writes)
-    validator = ROOT / "m3/migration/migration.py"
+    validator = ROOT / "make/m3/migration/migration.py"
     previous = CRATE / "before00-name-mapping.json.txt"
     output, _ = run("09-whole-map-validate", [PYTHON, validator, "validate", ROOT, "--previous", previous])
     assert output.strip() == "MIGRATION_MANIFEST_VALID completion=INCOMPLETE"

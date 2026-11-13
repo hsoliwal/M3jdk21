@@ -2,7 +2,7 @@
 """Prepare a bounded canonical-owner proof; all original A3 methods stay unchanged."""
 from pathlib import Path
 import json,re,shutil,hashlib
-HERE=Path(__file__).resolve().parent;ROOT=HERE.parents[1];OVER=HERE/'candidate/overlay';BASE=Path('m3/tooling/migration-recipes');TASK=BASE/'tasks/a3-code-string-repair-20261006';OLD=ROOT/'current-ci/a3-behavior-v01/workspace'
+HERE=Path(__file__).resolve().parent;ROOT=HERE.parents[1];OVER=HERE/'candidate/overlay';BASE=Path('make/m3/tooling/migration-recipes');TASK=BASE/'tasks/a3-code-string-repair-20261006';OLD=ROOT/'current-ci/a3-behavior-v01/workspace'
 def put(path,text):
  path.parent.mkdir(parents=True,exist_ok=True)
  with path.open('x') as f:f.write(text)

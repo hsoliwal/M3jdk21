@@ -4,7 +4,7 @@ Continue the previously saved JDK module-pack class-version candidate on real up
 One existing private header recognizer changes. Preserve Java APIs, module descriptors, native ABI,
 existing tests/POMs and archive ownership. Validity changes are explicit conformance repairs, not
 behavior-identical refactoring. Reuse the existing M3HashPinnedJavaSnapshotRecipe; execute at
-m3/tooling/module-packs/kernel with module-relative paths. Do not import the previous standalone
+make/m3/tooling/module-packs/kernel with module-relative paths. Do not import the previous standalone
 source-export Git history or its second snapshot engine.
 
 The private ArchiveAdapter/ClassVersionAdmission atom enforces the Java21 non-preview header range.

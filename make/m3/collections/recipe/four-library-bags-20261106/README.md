@@ -54,8 +54,8 @@ names. Re-run on the rebased master immediately before the push (PR body).
 ## Run
 
 ```sh
-python -I m3/collections/recipe/four-library-bags-20261106/relocate.py --donor-git <com.synexia clone> --donor-rev d5ad5090d87ef8477a56317e60ac0d29c65029f7
-JAVA_HOME=<JDK 21> bash m3/collections/recipe/four-library-bags-20261106/verify.sh <com.synexia clone> d5ad5090d87e <scratch>
+python -I make/m3/collections/recipe/four-library-bags-20261106/relocate.py --donor-git <com.synexia clone> --donor-rev d5ad5090d87ef8477a56317e60ac0d29c65029f7
+JAVA_HOME=<JDK 21> bash make/m3/collections/recipe/four-library-bags-20261106/verify.sh <com.synexia clone> d5ad5090d87e <scratch>
 ```
 
 `relocate.py` is idempotent (`--check` exits 1 when a run would change a file) and writes `PROVENANCE.tsv` with

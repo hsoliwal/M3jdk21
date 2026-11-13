@@ -8,7 +8,7 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ListMultiValueMap.java'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3NativeFiveLibrarySdk.java'
       - 'test/jdk/jdk/m3/collections/M3NativeFiveLibrarySelfTest.java'
-      - 'm3/collections/qualification/m3-native-five-provider-core-20261018/**'
+      - 'make/m3/collections/qualification/m3-native-five-provider-core-20261018/**'
       - '.github/workflows/m3-native-five-provider-core-20261018.yml'
   workflow_dispatch:
 concurrency:
@@ -27,7 +27,7 @@ jobs:
       - name: Exact canonical Maven recipe and SHA256 fixed point
         run: |
           set -eu
-          R=m3/collections/qualification/m3-native-five-provider-core-20261018/recipe
+          R=make/m3/collections/qualification/m3-native-five-provider-core-20261018/recipe
           mvn -B -ntp -f "$R/pom.xml" verify
           java -cp "$R/target/classes" jdk.internal.m3.M3NativeFiveLibraryRecipe --check .
       - name: Enforce native-core-only dependency boundary

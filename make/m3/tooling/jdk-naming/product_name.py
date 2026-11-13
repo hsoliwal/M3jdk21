@@ -35,11 +35,11 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--root", required=True)
     ap.add_argument("--check", action="store_true")
-    ap.add_argument("--exclude", action="append", default=["m3/evidence/", "m3/qualification/", "m3/vendor/",
-                                                         "m3/tooling/jdk-naming/"])
+    ap.add_argument("--exclude", action="append", default=["make/m3/evidence/", "make/m3/qualification/", "m3/vendor/",
+                                                         "make/m3/tooling/jdk-naming/"])
     a = ap.parse_args()
     root = Path(a.root)
-    keep_file = root / "m3/tooling/jdk-naming/NAMING_KEEP.tsv"
+    keep_file = root / "make/m3/tooling/jdk-naming/NAMING_KEEP.tsv"
     keep = {line.split("\t")[0] for line in keep_file.read_text(encoding="utf-8").splitlines()[1:]} if keep_file.is_file() else set()
     changed = {}
     for p in sorted(root.rglob("*")):

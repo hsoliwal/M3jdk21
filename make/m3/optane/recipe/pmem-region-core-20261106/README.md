@@ -38,7 +38,7 @@ into the standard Maven layout by `git mv` with their content untouched.
 
 ## Recipe
 
-`python -I m3/optane/recipe/pmem-region-core-20261106/relocate.py --donor-git <clone> --donor-rev 36827ee8a798 [--check]`
+`python -I make/m3/optane/recipe/pmem-region-core-20261106/relocate.py --donor-git <clone> --donor-rev 36827ee8a798 [--check]`
 (`RELOCATE_PMEM_REGION_CORE` v2, derived from `m3/native/recipe/scoped-leases-20261106/relocate.py` v1). It rewrites only
 the license header (in the file's comment style: `//`, `/* */`, `#`, `<!-- -->`), the `package` line, mapped `import`
 lines, the declared type names (`Pmem* -> M3Pmem*`, `NativePmem -> M3NativePmem`, also inside the message
@@ -58,7 +58,7 @@ otherwise). Idempotent: `--check` reports `changed=0 provenance=UNCHANGED`, also
 | 3 differential, FILE backend (Windows) | donor develop `36827ee8a798` vs relocated: 9 oracle lanes + 100,000 seeded operations, `TOTAL operations=222225 exceptions=21814`, sha256 `7c8851ef0f426f39ef6875aa40c03e9f2686898cc340c78ab63179e0093418ec` both sides (6,834,315 bytes, 102,248 lines) |
 | 4 native matrix (WSL Ubuntu 24.04, gcc 13.3.0, Temurin 21.0.13) | both families `NATIVE_MATRIX PASS`: `-std=c17 -O2 -Wall -Wextra -Wpedantic -Werror`, PMDK not built, 14 symbols, KMP C oracle 8002 comparisons, `ATOMS_PASS 19`, native dump of 100,000 operations (`TOTAL operations=222268 exceptions=19452`) sha256 `dca833d7c0d894ed4068ba78d78f07f04ede6472f358e6b84ab7653e2faff093` identical across default/`-Xint`/C1 and across donor and relocated (6,724,248 bytes, 102,109 lines) |
 | 4b CMake project, 4c JMOD verifier | `libm3optane.so` + `libm3pmemsdk.so` built by `src/main/native/CMakeLists.txt` (option `M3_OPTANE_PMDK` OFF); `verify.sh` `OPTANE_JMOD_BUILD_PASS` with both libraries in the JMOD |
-| 5 scope | only `m3/optane/**` and one `m3/pom.xml` module line |
+| 5 scope | only `m3/optane/**` and one `make/m3/pom.xml` module line |
 | recipe fixed point, naming | `files=22 changed=0 provenance=UNCHANGED`; `jdk_naming.py apply --only m3/optane/`: `moves=0 rewrites=0 refusals=0` |
 
 ## Licence boundary

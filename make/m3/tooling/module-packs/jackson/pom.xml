@@ -23,7 +23,7 @@
     <m3.jackson.maven>${maven.home}/bin/mvn</m3.jackson.maven>
     <m3.jackson.maven.repo>${settings.localRepository}</m3.jackson.maven.repo>
     <m3.jackson.maven.offline>true</m3.jackson.maven.offline>
-    <m3.jackson.repo.root>${project.basedir}/../../../..</m3.jackson.repo.root>
+    <m3.jackson.repo.root>${project.basedir}/../../../../..</m3.jackson.repo.root>
     <m3.jackson.out>${project.build.directory}/pack</m3.jackson.out>
     <m3.jackson.stage>runtime</m3.jackson.stage>
   </properties>

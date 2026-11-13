@@ -6,7 +6,7 @@ This Maven module is a JDK authoring/proof tool. It is not part of the JDK runti
 
 ## Verify
 
-    mvn -B -ntp -f m3/pom.xml -pl tooling/a3 -am clean verify
+    mvn -B -ntp -f make/m3/pom.xml -pl tooling/a3 -am clean verify
 
 ## Inventory
 

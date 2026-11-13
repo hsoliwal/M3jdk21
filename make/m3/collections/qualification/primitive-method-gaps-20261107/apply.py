@@ -11,7 +11,7 @@ M3IntLongHashMap and M3LongLongHashMap; G4 M3IntArrayDeque.get(int). G1 also upd
 M3LongTreeSetTest.retainsOnlyPrimitiveLanes (one int[] lane and one int more). DECISION.tsv records ABSORB/ALREADY/NEC
 per member, NEC.tsv the same-shape/different-contract rows, PROVENANCE.tsv the donor blob of every method.
 
-Derived from m3/collections/qualification/census-small-batch-20261106/apply.py v1 (anchored "sub" edits, every anchor
+Derived from make/m3/collections/qualification/census-small-batch-20261106/apply.py v1 (anchored "sub" edits, every anchor
 exactly once). Every rule names the git blob of its preimage at the base commit; the on-disk file, normalized to LF,
 must equal the preimage (the rule applies) or the postimage (already applied, no-op); anything else is drift and the
 recipe refuses (exit 2) before writing anything. Payloads are LF and re-joined with the file's line ending, so a
@@ -482,7 +482,7 @@ def run(root: Path, check: bool, leaf: str | None) -> int:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--root", default=str(RECIPE_DIR.parents[3]), help="repository root (default: four up)")
+    parser.add_argument("--root", default=str(RECIPE_DIR.parents[4]), help="repository root (default: four up)")
     parser.add_argument("--check", action="store_true", help="write nothing; exit 1 when a run would change a file")
     parser.add_argument("--leaf", choices=sorted({rule[0] for rule in RULES}), help="apply one leaf's rules only")
     args = parser.parse_args(argv)

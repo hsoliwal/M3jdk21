@@ -195,9 +195,9 @@ final class M3RecipeReplayTest {
         assertEquals(2, first.changed().size());
         assertTrue(first.sources().stream().allMatch(PlainText.class::isInstance));
         assertEquals(resource("text", "sort-text-fixture", "Fixture.md.txt"),
-                texts(first.sources()).get("m3/docs/sort-fixture.md"));
+                texts(first.sources()).get("doc/m3/sort-fixture.md"));
         assertTrue(M3JavaUtilSortsApply.evaluate(recipe, first.sources()).changed().isEmpty());
-        SourceFile occupant = PlainText.builder().sourcePath(Path.of("m3/docs/sort-fixture.md"))
+        SourceFile occupant = PlainText.builder().sourcePath(Path.of("doc/m3/sort-fixture.md"))
                 .text("# unrelated owner\n").build();
         assertActualRunRefuses(recipe, List.of(occupant), "source drift");
         assertActualRunRefuses(new M3HashPinnedTextSnapshotRecipe("sort-text-bad-hash-fixture"),

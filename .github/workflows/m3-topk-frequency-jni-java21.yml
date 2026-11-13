@@ -9,7 +9,7 @@ on:
       - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_long_rank_batch_jni.c'
       - 'test/jdk/jdk/m3/collections/M3LongTopKFrequencyContract.java'
       - 'test/jdk/jdk/m3/collections/M3LongTopKFrequencyTest.java'
-      - 'm3/collections/qualification/topk-frequency-jni-20261026/**'
+      - 'make/m3/collections/qualification/topk-frequency-jni-20261026/**'
       - '.github/workflows/m3-topk-frequency-jni-java21.yml'
 
 permissions:

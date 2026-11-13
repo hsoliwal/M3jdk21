@@ -85,54 +85,54 @@ test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	299	22	M3NumberParseAtoms
 test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	301	57	M3NumberParseAtomsTest	corpus#1	12	int	MAX_JUNK_CHARS	DECLARED	Junk literals have 1 to MAX_JUNK_CHARS chars.
 test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	306	97	M3NumberParseAtomsTest	corpus#1	700	int	EXPONENT_SPAN	DECLARED	Random decimal exponents are uniform over EXPONENT_SPAN values.
 test/jdk/jdk/internal/math/M3NumberParseAtomsTest.java	306	104	M3NumberParseAtomsTest	corpus#1	350	int	EXPONENT_OFFSET	DECLARED	Random decimal exponents start at -EXPONENT_OFFSET.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	38	67	M3ParseDifferential	main#1	48	int	OUTPUT_CHARS_PER_LINE	DECLARED	Initial capacity of the output per corpus line.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	41	38	M3ParseDifferential	main#1	'\t'	char	FIELD_SEPARATOR	DECLARED	Separates the fields of an output line.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	41	64	M3ParseDifferential	main#2	'\t'	char	FIELD_SEPARATOR	DECLARED	Separates the fields of an output line.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	41	90	M3ParseDifferential	main#1	'\n'	char	LINE_END	DECLARED	Ends an output line.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	45	48	M3ParseDifferential	main#1	2	int	BENCH_ROUNDS_ARGUMENT	DECLARED	Argument index of the bench rounds.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	84	43	M3ParseDifferential	hexDigits#1	16	int	HEX_RADIX	DECLARED	Hex digits to choose from.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	93	51	M3ParseDifferential	hexCorpus#1	20261031L	long	CORPUS_SEED	DECLARED	Seed of every corpus of this gate.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	95	43	M3ParseDifferential	hexCorpus#1	8	int	WIDE_EXPONENT_ONE_IN	DECLARED	One hexdiff literal in WIDE_EXPONENT_ONE_IN gets a binary exponent from the wide range.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	95	63	M3ParseDifferential	hexCorpus#1	2400	int	WIDE_EXPONENT_SPAN	DECLARED	Wide binary exponents are uniform over WIDE_EXPONENT_SPAN values.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	95	71	M3ParseDifferential	hexCorpus#1	1200	int	WIDE_EXPONENT_OFFSET	DECLARED	Wide binary exponents start at -WIDE_EXPONENT_OFFSET.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	95	88	M3ParseDifferential	hexCorpus#1	200	int	NARROW_EXPONENT_SPAN	DECLARED	Narrow binary exponents are uniform over NARROW_EXPONENT_SPAN values.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	95	95	M3ParseDifferential	hexCorpus#1	100	int	NARROW_EXPONENT_OFFSET	DECLARED	Narrow binary exponents start at -NARROW_EXPONENT_OFFSET.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	96	37	M3ParseDifferential	hexCorpus#1	4	int	NEGATIVE_ONE_IN	DECLARED	One literal in NEGATIVE_ONE_IN is negative.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	97	32	M3ParseDifferential	hexCorpus#2	4	int	HEX_SHAPES	DECLARED	Shapes of the hexdiff round robin.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	100	57	M3ParseDifferential	hexCorpus#1	11	int	DOUBLE_ROUNDING_BIT	DECLARED	Bit of a 64-bit significand at which a double rounds (64 - 53).
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	100	62	M3ParseDifferential	hexCorpus#1	40	int	FLOAT_ROUNDING_BIT	DECLARED	Bit of a 64-bit significand at which a float rounds (64 - 24).
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	101	71	M3ParseDifferential	hexCorpus#1	3	int	HALFWAY_OFFSETS	DECLARED	The low bits sit at the halfway point minus 1, plus 0 or plus 1.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	108	63	M3ParseDifferential	hexCorpus#1	13	int	DOUBLE_FRACTION_HEX_DIGITS	DECLARED	Hex digits of a double's fraction (52 bits).
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	108	82	M3ParseDifferential	hexCorpus#1	5	int	FLOAT_FRACTION_HEX_DIGITS	DECLARED	Random hex digits of a float's fraction (a '0' follows them).
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	109	59	M3ParseDifferential	hexCorpus#1	12	int	MAX_TAIL_ZEROS	DECLARED	The tail after the halfway digit has 1 to MAX_TAIL_ZEROS - 1 zeros.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	112	22	M3ParseDifferential	hexCorpus#1	2	int	SHAPE_BOUNDARY_DIGITS	DECLARED	Case of the hexdiff round robin: random digits around the 16-digit boundary.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	114	55	M3ParseDifferential	hexCorpus#1	14	int	BOUNDARY_MIN_DIGITS	DECLARED	Fewest digits around the 16-digit boundary.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	114	59	M3ParseDifferential	hexCorpus#1	22	int	BOUNDARY_DIGITS_BOUND	DECLARED	Exclusive bound of the digits around the 16-digit boundary.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	119	58	M3ParseDifferential	hexCorpus#2	40	int	MAX_RANDOM_HEX_DIGITS	DECLARED	Random hex literals have 1 to MAX_RANDOM_HEX_DIGITS - 1 digits.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	121	42	M3ParseDifferential	hexCorpus#3	4	int	DOUBLE_SUFFIX_ONE_IN	DECLARED	One random hex literal in DOUBLE_SUFFIX_ONE_IN ends in d.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	131	51	M3ParseDifferential	swarCorpus#1	20261031L	long	CORPUS_SEED	DECLARED	Seed of every corpus of this gate.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	134	66	M3ParseDifferential	swarCorpus#1	8	int	SWAR_GROUP_DIGITS	DECLARED	Hex digits of the SWAR group after the point.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	135	27	M3ParseDifferential	swarCorpus#1	4	int	CLEAN_GROUP_ONE_IN	DECLARED	One SWAR group in CLEAN_GROUP_ONE_IN keeps its hex digits; the others get one non-hex char.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	136	43	M3ParseDifferential	swarCorpus#2	8	int	SWAR_GROUP_DIGITS	DECLARED	Hex digits of the SWAR group after the point.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	136	90	M3ParseDifferential	swarCorpus#1	2	int	G_LETTERS	DECLARED	The first G_LETTERS chars of the letter set are g and G, the letters next to the hex range.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	138	30	M3ParseDifferential	swarCorpus#2	4	int	NEGATIVE_ONE_IN	DECLARED	One literal in NEGATIVE_ONE_IN is negative.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	138	82	M3ParseDifferential	swarCorpus#1	3	int	MAX_INTEGER_HEX_DIGITS	DECLARED	Hex digits before the point: 0 to MAX_INTEGER_HEX_DIGITS - 1.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	138	125	M3ParseDifferential	swarCorpus#1	10	int	MAX_TRAILING_HEX_DIGITS	DECLARED	Hex digits after the SWAR group: 0 to MAX_TRAILING_HEX_DIGITS - 1.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	139	66	M3ParseDifferential	swarCorpus#1	200	int	NARROW_EXPONENT_SPAN	DECLARED	Narrow binary exponents are uniform over NARROW_EXPONENT_SPAN values.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	139	73	M3ParseDifferential	swarCorpus#1	100	int	NARROW_EXPONENT_OFFSET	DECLARED	Narrow binary exponents start at -NARROW_EXPONENT_OFFSET.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	146	51	M3ParseDifferential	corpus#1	20261031L	long	CORPUS_SEED	DECLARED	Seed of every corpus of this gate.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	150	32	M3ParseDifferential	corpus#1	6	int	CORPUS_SHAPES	DECLARED	Shapes of the diff round robin.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	153	22	M3ParseDifferential	corpus#1	2	int	SHAPE_DIGITS	DECLARED	Case of the diff round robin: random decimal digits.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	155	45	M3ParseDifferential	corpus#1	25	int	MAX_DIGITS	DECLARED	Random digit strings have 1 to MAX_DIGITS digits.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	157	58	M3ParseDifferential	corpus#1	10	int	DECIMAL_RADIX	DECLARED	Decimal digits to choose from.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	160	61	M3ParseDifferential	corpus#1	'.'	char	DECIMAL_POINT	DECLARED	The decimal point inserted into a digit string.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	162	35	M3ParseDifferential	corpus#1	3	int	EXPONENT_ONE_IN	DECLARED	One digit string in EXPONENT_ONE_IN gets a decimal exponent.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	163	34	M3ParseDifferential	corpus#1	'e'	char	EXPONENT_INDICATOR	DECLARED	The exponent indicator of a digit string.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	163	56	M3ParseDifferential	corpus#1	700	int	DECIMAL_EXPONENT_SPAN	DECLARED	Random decimal exponents are uniform over DECIMAL_EXPONENT_SPAN values.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	163	63	M3ParseDifferential	corpus#1	350	int	DECIMAL_EXPONENT_OFFSET	DECLARED	Random decimal exponents start at -DECIMAL_EXPONENT_OFFSET.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	167	22	M3ParseDifferential	corpus#2	3	int	SHAPE_HEX_STRING	DECLARED	Case of the diff round robin: Double.toHexString of random bits.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	168	22	M3ParseDifferential	corpus#1	4	int	SHAPE_JUNK	DECLARED	Case of the diff round robin: junk from the grammar's alphabet.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	170	45	M3ParseDifferential	corpus#1	12	int	MAX_JUNK_CHARS	DECLARED	Junk literals have 1 to MAX_JUNK_CHARS chars.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	176	44	M3ParseDifferential	corpus#2	4	int	PADDED_FLOAT_ONE_IN	DECLARED	One literal of the last shape in PADDED_FLOAT_ONE_IN is a padded float literal, the others a shifted random long.
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	176	77	M3ParseDifferential	corpus#1	1e6	double	PADDED_VALUE_RANGE	DECLARED	Padded float literals are uniform in [0, PADDED_VALUE_RANGE).
-m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	176	131	M3ParseDifferential	corpus#1	64	int	LONG_BITS	DECLARED	A random long is shifted right by 0 to LONG_BITS - 1.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	38	67	M3ParseDifferential	main#1	48	int	OUTPUT_CHARS_PER_LINE	DECLARED	Initial capacity of the output per corpus line.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	41	38	M3ParseDifferential	main#1	'\t'	char	FIELD_SEPARATOR	DECLARED	Separates the fields of an output line.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	41	64	M3ParseDifferential	main#2	'\t'	char	FIELD_SEPARATOR	DECLARED	Separates the fields of an output line.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	41	90	M3ParseDifferential	main#1	'\n'	char	LINE_END	DECLARED	Ends an output line.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	45	48	M3ParseDifferential	main#1	2	int	BENCH_ROUNDS_ARGUMENT	DECLARED	Argument index of the bench rounds.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	84	43	M3ParseDifferential	hexDigits#1	16	int	HEX_RADIX	DECLARED	Hex digits to choose from.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	93	51	M3ParseDifferential	hexCorpus#1	20261031L	long	CORPUS_SEED	DECLARED	Seed of every corpus of this gate.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	95	43	M3ParseDifferential	hexCorpus#1	8	int	WIDE_EXPONENT_ONE_IN	DECLARED	One hexdiff literal in WIDE_EXPONENT_ONE_IN gets a binary exponent from the wide range.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	95	63	M3ParseDifferential	hexCorpus#1	2400	int	WIDE_EXPONENT_SPAN	DECLARED	Wide binary exponents are uniform over WIDE_EXPONENT_SPAN values.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	95	71	M3ParseDifferential	hexCorpus#1	1200	int	WIDE_EXPONENT_OFFSET	DECLARED	Wide binary exponents start at -WIDE_EXPONENT_OFFSET.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	95	88	M3ParseDifferential	hexCorpus#1	200	int	NARROW_EXPONENT_SPAN	DECLARED	Narrow binary exponents are uniform over NARROW_EXPONENT_SPAN values.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	95	95	M3ParseDifferential	hexCorpus#1	100	int	NARROW_EXPONENT_OFFSET	DECLARED	Narrow binary exponents start at -NARROW_EXPONENT_OFFSET.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	96	37	M3ParseDifferential	hexCorpus#1	4	int	NEGATIVE_ONE_IN	DECLARED	One literal in NEGATIVE_ONE_IN is negative.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	97	32	M3ParseDifferential	hexCorpus#2	4	int	HEX_SHAPES	DECLARED	Shapes of the hexdiff round robin.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	100	57	M3ParseDifferential	hexCorpus#1	11	int	DOUBLE_ROUNDING_BIT	DECLARED	Bit of a 64-bit significand at which a double rounds (64 - 53).
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	100	62	M3ParseDifferential	hexCorpus#1	40	int	FLOAT_ROUNDING_BIT	DECLARED	Bit of a 64-bit significand at which a float rounds (64 - 24).
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	101	71	M3ParseDifferential	hexCorpus#1	3	int	HALFWAY_OFFSETS	DECLARED	The low bits sit at the halfway point minus 1, plus 0 or plus 1.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	108	63	M3ParseDifferential	hexCorpus#1	13	int	DOUBLE_FRACTION_HEX_DIGITS	DECLARED	Hex digits of a double's fraction (52 bits).
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	108	82	M3ParseDifferential	hexCorpus#1	5	int	FLOAT_FRACTION_HEX_DIGITS	DECLARED	Random hex digits of a float's fraction (a '0' follows them).
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	109	59	M3ParseDifferential	hexCorpus#1	12	int	MAX_TAIL_ZEROS	DECLARED	The tail after the halfway digit has 1 to MAX_TAIL_ZEROS - 1 zeros.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	112	22	M3ParseDifferential	hexCorpus#1	2	int	SHAPE_BOUNDARY_DIGITS	DECLARED	Case of the hexdiff round robin: random digits around the 16-digit boundary.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	114	55	M3ParseDifferential	hexCorpus#1	14	int	BOUNDARY_MIN_DIGITS	DECLARED	Fewest digits around the 16-digit boundary.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	114	59	M3ParseDifferential	hexCorpus#1	22	int	BOUNDARY_DIGITS_BOUND	DECLARED	Exclusive bound of the digits around the 16-digit boundary.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	119	58	M3ParseDifferential	hexCorpus#2	40	int	MAX_RANDOM_HEX_DIGITS	DECLARED	Random hex literals have 1 to MAX_RANDOM_HEX_DIGITS - 1 digits.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	121	42	M3ParseDifferential	hexCorpus#3	4	int	DOUBLE_SUFFIX_ONE_IN	DECLARED	One random hex literal in DOUBLE_SUFFIX_ONE_IN ends in d.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	131	51	M3ParseDifferential	swarCorpus#1	20261031L	long	CORPUS_SEED	DECLARED	Seed of every corpus of this gate.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	134	66	M3ParseDifferential	swarCorpus#1	8	int	SWAR_GROUP_DIGITS	DECLARED	Hex digits of the SWAR group after the point.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	135	27	M3ParseDifferential	swarCorpus#1	4	int	CLEAN_GROUP_ONE_IN	DECLARED	One SWAR group in CLEAN_GROUP_ONE_IN keeps its hex digits; the others get one non-hex char.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	136	43	M3ParseDifferential	swarCorpus#2	8	int	SWAR_GROUP_DIGITS	DECLARED	Hex digits of the SWAR group after the point.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	136	90	M3ParseDifferential	swarCorpus#1	2	int	G_LETTERS	DECLARED	The first G_LETTERS chars of the letter set are g and G, the letters next to the hex range.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	138	30	M3ParseDifferential	swarCorpus#2	4	int	NEGATIVE_ONE_IN	DECLARED	One literal in NEGATIVE_ONE_IN is negative.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	138	82	M3ParseDifferential	swarCorpus#1	3	int	MAX_INTEGER_HEX_DIGITS	DECLARED	Hex digits before the point: 0 to MAX_INTEGER_HEX_DIGITS - 1.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	138	125	M3ParseDifferential	swarCorpus#1	10	int	MAX_TRAILING_HEX_DIGITS	DECLARED	Hex digits after the SWAR group: 0 to MAX_TRAILING_HEX_DIGITS - 1.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	139	66	M3ParseDifferential	swarCorpus#1	200	int	NARROW_EXPONENT_SPAN	DECLARED	Narrow binary exponents are uniform over NARROW_EXPONENT_SPAN values.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	139	73	M3ParseDifferential	swarCorpus#1	100	int	NARROW_EXPONENT_OFFSET	DECLARED	Narrow binary exponents start at -NARROW_EXPONENT_OFFSET.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	146	51	M3ParseDifferential	corpus#1	20261031L	long	CORPUS_SEED	DECLARED	Seed of every corpus of this gate.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	150	32	M3ParseDifferential	corpus#1	6	int	CORPUS_SHAPES	DECLARED	Shapes of the diff round robin.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	153	22	M3ParseDifferential	corpus#1	2	int	SHAPE_DIGITS	DECLARED	Case of the diff round robin: random decimal digits.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	155	45	M3ParseDifferential	corpus#1	25	int	MAX_DIGITS	DECLARED	Random digit strings have 1 to MAX_DIGITS digits.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	157	58	M3ParseDifferential	corpus#1	10	int	DECIMAL_RADIX	DECLARED	Decimal digits to choose from.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	160	61	M3ParseDifferential	corpus#1	'.'	char	DECIMAL_POINT	DECLARED	The decimal point inserted into a digit string.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	162	35	M3ParseDifferential	corpus#1	3	int	EXPONENT_ONE_IN	DECLARED	One digit string in EXPONENT_ONE_IN gets a decimal exponent.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	163	34	M3ParseDifferential	corpus#1	'e'	char	EXPONENT_INDICATOR	DECLARED	The exponent indicator of a digit string.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	163	56	M3ParseDifferential	corpus#1	700	int	DECIMAL_EXPONENT_SPAN	DECLARED	Random decimal exponents are uniform over DECIMAL_EXPONENT_SPAN values.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	163	63	M3ParseDifferential	corpus#1	350	int	DECIMAL_EXPONENT_OFFSET	DECLARED	Random decimal exponents start at -DECIMAL_EXPONENT_OFFSET.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	167	22	M3ParseDifferential	corpus#2	3	int	SHAPE_HEX_STRING	DECLARED	Case of the diff round robin: Double.toHexString of random bits.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	168	22	M3ParseDifferential	corpus#1	4	int	SHAPE_JUNK	DECLARED	Case of the diff round robin: junk from the grammar's alphabet.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	170	45	M3ParseDifferential	corpus#1	12	int	MAX_JUNK_CHARS	DECLARED	Junk literals have 1 to MAX_JUNK_CHARS chars.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	176	44	M3ParseDifferential	corpus#2	4	int	PADDED_FLOAT_ONE_IN	DECLARED	One literal of the last shape in PADDED_FLOAT_ONE_IN is a padded float literal, the others a shifted random long.
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	176	77	M3ParseDifferential	corpus#1	1e6	double	PADDED_VALUE_RANGE	DECLARED	Padded float literals are uniform in [0, PADDED_VALUE_RANGE).
+make/m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java	176	131	M3ParseDifferential	corpus#1	64	int	LONG_BITS	DECLARED	A random long is shifted right by 0 to LONG_BITS - 1.

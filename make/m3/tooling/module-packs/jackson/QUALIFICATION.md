@@ -81,7 +81,7 @@ Both build tools record the integration/test source hashes and their own identit
 After all three proof lanes complete, verify their relationship:
 
 ```sh
-python3 m3/tooling/module-packs/jackson/verify-qualification.py \
+python3 make/m3/tooling/module-packs/jackson/verify-qualification.py \
   --runtime /new/jackson-proof \
   --compiler /new/jackson-compiler-proof \
   --upstream /new/jackson-upstream-proof \

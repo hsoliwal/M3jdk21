@@ -49,7 +49,7 @@
     </dependency>
   </dependencies>
   <build>
-    <sourceDirectory>${project.basedir}/../../../../tooling/migration-recipes/src/main/java</sourceDirectory>
+    <sourceDirectory>${project.basedir}/../../../../../make/m3/tooling/migration-recipes/src/main/java</sourceDirectory>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

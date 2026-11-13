@@ -40,7 +40,7 @@ original cpu-tools fixture paths. Wave21 adds exactly three columns
 to the complete 91-category Wave20 ledger: the preceding eight
 columns were verified byte-for-byte identical across all 91 rows.
 
-Existing `m3/tooling/module-packs/cpu-tools/build.py`, `pom.xml`,
+Existing `make/m3/tooling/module-packs/cpu-tools/build.py`, `pom.xml`,
 `src/com.m3.tools.cpu/module-info.java` and Wave20 Java/C source
 are locked unchanged. The new JNI library is an explicit sidecar
 for differential testing: no claim that the original M3JDK21 JMOD

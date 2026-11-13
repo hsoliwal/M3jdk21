@@ -10,7 +10,7 @@ import csv
 import hashlib
 from pathlib import Path
 
-root = Path('m3/collections/qualification/doops-entryless-receiver.tsv')
+root = Path('make/m3/collections/qualification/doops-entryless-receiver.tsv')
 assert root.is_file(), 'missing receiving provenance ledger'
 with root.open(encoding='utf-8', newline='') as stream:
     rows = list(csv.DictReader(stream, delimiter='\t'))

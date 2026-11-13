@@ -4,7 +4,7 @@ on:
     paths:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredLists.java'
       - 'test/jdk/jdk/m3/collections/M3FilteredLists*'
-      - 'm3/collections/qualification/filtered-list-history-restore-20261017/**'
+      - 'make/m3/collections/qualification/filtered-list-history-restore-20261017/**'
       - '.github/workflows/m3-filtered-list-history-restore.yml'
   workflow_dispatch:
 concurrency:
@@ -21,7 +21,7 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Canonical recipe source seal and mirror parity
-        run: python3 m3/collections/qualification/filtered-list-history-restore-20261017/verify.py
+        run: python3 make/m3/collections/qualification/filtered-list-history-restore-20261017/verify.py
       - name: Strict Java21 source compilation with real M3 owners
         run: |
           mkdir -p "$RUNNER_TEMP/classes"

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-"""Ledger rows of recipe/algorithm-extras-20261106 in m3/qualification/converge-collections-20261030/CONVERGE_COLLECTIONS.tsv.
+"""Ledger rows of recipe/algorithm-extras-20261106 in make/m3/qualification/converge-collections-20261030/CONVERGE_COLLECTIONS.tsv.
 
 One row per donor file of the donor catalogue directory (21): the FILE rows of RELOCATION_MAP.tsv as
 PRESENT_IN_M3JDK at their relocated target, the four catalog files (SKIP + NEC rows) as PRESENT_IN_M3JDK at their

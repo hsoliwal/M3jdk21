@@ -34,7 +34,7 @@ import java.util.zip.CheckedOutputStream;
  *
  * All public methods synchronize on this array. Storage is ephemeral and local.
  */
-//FLLDCIM: RELOCATE - donor blob 32b1aaeee5f3 at 165ceb5a0202; recipe m3/collections/recipe/residency-paged-array-20261107/relocate.py v4
+//FLLDCIM: RELOCATE - donor blob 32b1aaeee5f3 at 165ceb5a0202; recipe make/m3/collections/recipe/residency-paged-array-20261107/relocate.py v4
 public final class PagedArray<T> implements AutoCloseable {
     private static final int MAGIC = 0x4D335041; // M3PA
     private static final int VERSION = 1;

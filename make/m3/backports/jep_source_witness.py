@@ -93,7 +93,7 @@ def read_receipt(path: Path) -> dict[str, str]:
 
 
 def packet_dirs(root: Path, jep: int) -> list[Path]:
-    directory = root / "m3" / "backports" / "recipes"
+    directory = root / "make" / "m3" / "backports" / "recipes"
     if not directory.is_dir() or directory.is_symlink():
         return []
     prefixes = (f"jep-{jep}", f"j{jep}")
@@ -179,7 +179,7 @@ def checked_output_path(root: Path, requested: Path) -> Path:
     try:
         suffix = dest.relative_to(target_root)
     except ValueError as exc:
-        raise ValueError("source-witness output must be under m3/backports/target") from exc
+        raise ValueError("source-witness output must be under make/m3/backports/target") from exc
     if not suffix.parts or any(p in {".", ".."} for p in suffix.parts):
         raise ValueError("invalid source-witness output")
     candidate = root
@@ -202,7 +202,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                    help="exit 2 if any receipt is invalid or a recorded hash drifts")
     args = p.parse_args(argv)
     root = args.root.resolve(strict=True)
-    rows = inspect(root, read_catalogue(root / "m3/backports/JEP_CATALOGUE.tsv"))
+    rows = inspect(root, read_catalogue(root / "make/m3/backports/JEP_CATALOGUE.tsv"))
     out = render_tsv(rows)
     if args.out:
         dest = checked_output_path(root, args.out)

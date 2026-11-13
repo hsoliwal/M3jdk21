@@ -25,8 +25,8 @@ No changes to public method descriptors, java.base, GC, HotSpot or production JN
 ## Execute
 
 From a checked-out M3JDK21 candidate with Java 21, Python3, GCC C17 and JNI headers:
-- python3 m3/collections/qualification/bitlane-indexed-navigation-20261017/verify.py
-- python3 m3/collections/qualification/bitlane-indexed-navigation-20261017/verify.py --jni
+- python3 make/m3/collections/qualification/bitlane-indexed-navigation-20261017/verify.py
+- python3 make/m3/collections/qualification/bitlane-indexed-navigation-20261017/verify.py --jni
 - mvn -B -ntp -f m3/collections/pom.xml test
 
 The verifier compiles actual Java21 product sources, standalone differential oracle, compares public javap descriptors with original source snapshot, compiles strict C17 native proof, runs -Xcheck:jni under tiered and -Xint. It checks exact source hashes, not partial snippets. The native C code is a test-only checked consumer of Java bitmap methods, not a product optimization kernel.

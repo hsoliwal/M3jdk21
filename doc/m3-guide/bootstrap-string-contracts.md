@@ -23,10 +23,10 @@ their full bodies are **DECLARATIONS_ONLY** in this review.
 
 All linked test sources were **read, NOT_RUN**. No JDK build, test, recipe,
 policy verifier, benchmark or native library was executed for this documentation.
-The [porting invariant](../../m3/docs/m3jdk21-porting-invariant.md),
-[naming map](../../m3/docs/name-mapping.json),
-[lineage](../../m3/docs/m3string-m3-lineage.md) and
-[runtime integration guide](../../m3/runtime-integration/README.md) retain their
+The [porting invariant](../m3/m3jdk21-porting-invariant.md),
+[naming map](../m3/name-mapping.json),
+[lineage](../m3/m3string-m3-lineage.md) and
+[runtime integration guide](../../make/m3/runtime-integration/README.md) retain their
 ownership, licensing and pending qualification boundaries. Documentation does not
 advance the ordered receiving phase or establish universal content interning,
 performance gains or zero-allocation execution.
@@ -275,7 +275,7 @@ exist only through JNI.”
 ### Standard UTF-8 is not JNI modified UTF-8
 
 Sources: [fact scan/composition][facts-scan], [whole-owner cached VM field][vm-mutf8-cache],
-[VM fallback][vm-mutf8-walk], [JNI ingress/egress guide](../../m3/docs/mindex-jni-string-ingress.md).
+[VM fallback][vm-mutf8-walk], [JNI ingress/egress guide](../m3/mindex-jni-string-ingress.md).
 
 | UTF-16 input | Standard UTF-8 replacement length | JNI modified UTF-8 length |
 | --- | --- | --- |

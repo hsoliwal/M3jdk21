@@ -11,7 +11,7 @@
   "receiverBase": "0220010ce5d6b87ee3c2a9121cc79cd6ca382a02",
   "outputs": [
     {
-      "path": "m3/runtime-integration/src/test/java/M3StringLayoutTest.java",
+      "path": "make/m3/runtime-integration/src/test/java/M3StringLayoutTest.java",
       "representation": "org.openrewrite.java.tree.J.CompilationUnit",
       "before": {
         "repository_full_name": "hsoliwal/M3jdk21",
@@ -26,7 +26,7 @@
       }
     },
     {
-      "path": "m3/runtime-integration/check-m3string-invariants.py",
+      "path": "make/m3/runtime-integration/check-m3string-invariants.py",
       "representation": "org.openrewrite.text.PlainText",
       "before": {
         "repository_full_name": "hsoliwal/M3jdk21",

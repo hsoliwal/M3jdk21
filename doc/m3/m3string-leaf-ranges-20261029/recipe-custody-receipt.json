@@ -1,6 +1,6 @@
 {
   "schema": "M3_PASSIVE_RECIPE_CUSTODY_RECEIPT_V1",
-  "public_source_path": "m3/docs/m3string-leaf-ranges-20261029/RECIPE_MEMORY.tsv",
+  "public_source_path": "doc/m3/m3string-leaf-ranges-20261029/RECIPE_MEMORY.tsv",
   "public_source_commit": "3569c790d5cc3f9bc871ab0ecd025dab0fd5cafc",
   "source_git_blob": "412efbe7499f506b94fc095b63b96e32ed05d7ba",
   "source_sha256": "73cbc4dca614fdce8c553449acded52e9d1cac1bb27ed6716d6fb0ac69d2f4af",

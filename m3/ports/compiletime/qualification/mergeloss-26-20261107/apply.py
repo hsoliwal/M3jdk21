@@ -14,7 +14,7 @@ is held as m3/qualification/master-landing-20261028/retained-variants/pr1538/m3/
 source-facts-reuse-20261020.
 
 Digest bytes are identical: same length prefix, same high/low byte order per raw UTF-16 unit (unpaired surrogates
-included), no charset encoder. Derived from m3/collections/qualification/census-small-batch-20261106/apply.py v1
+included), no charset encoder. Derived from make/m3/collections/qualification/census-small-batch-20261106/apply.py v1
 (anchored edits, every anchor exactly once, pinned preimage blob, refuses drift, idempotent; --check writes nothing).
 
 usage: python -I apply.py [--root DIR] [--check]

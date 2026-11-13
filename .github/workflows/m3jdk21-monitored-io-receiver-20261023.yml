@@ -8,7 +8,7 @@ on:
       - 'src/java.base/share/classes/java/io/Reader.java'
       - 'src/java.base/share/classes/java/io/Writer.java'
       - 'test/jdk/java/io/MonitoredIoOperations.java'
-      - 'm3/qualification/monitored-io-20261023/**'
+      - 'make/m3/qualification/monitored-io-20261023/**'
       - '.github/workflows/m3jdk21-monitored-io-receiver-20261023.yml'
   workflow_dispatch:
 permissions:
@@ -29,5 +29,5 @@ jobs:
           java-version: '21'
       - name: Verify JDK21 patched-host regression in normal and interpreter mode
         run: |
-          bash -n m3/qualification/monitored-io-20261023/verify-host-patch.sh
-          bash m3/qualification/monitored-io-20261023/verify-host-patch.sh
+          bash -n make/m3/qualification/monitored-io-20261023/verify-host-patch.sh
+          bash make/m3/qualification/monitored-io-20261023/verify-host-patch.sh

@@ -36,12 +36,12 @@
       "post": "27c10ce99e288c924d190d12e8d6702a628ae620be0c91c290459ac0b00440b0"
     },
     {
-      "path": "m3/tooling/atom-census/contract/JNI_DECLARATION_PROJECTION_V1.md",
+      "path": "make/m3/tooling/atom-census/contract/JNI_DECLARATION_PROJECTION_V1.md",
       "pre": "ABSENT",
       "post": "9e2831bae2e58b92e8f6e26dc60c84e67e3e7c74c554cb2618b182d7bd2382e2"
     },
     {
-      "path": "m3/tooling/atom-census/verify-jni-projection.sh",
+      "path": "make/m3/tooling/atom-census/verify-jni-projection.sh",
       "pre": "ABSENT",
       "post": "8e45457f6f6be9e673b15019387d8570405d461d2a6ca384f106aa12aec9ac81"
     }

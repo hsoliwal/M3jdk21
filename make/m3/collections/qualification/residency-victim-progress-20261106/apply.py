@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 """Recipe RESIDENCY_DONOR_ATOMS v1: the reentrant-eviction atom of crate m3-doop-reuse-20261030 on M3ObjectResidency.
 
-Derived from m3/collections/qualification/census-small-batch-20261106/apply.py v1 (anchored "sub" edits, every anchor
+Derived from make/m3/collections/qualification/census-small-batch-20261106/apply.py v1 (anchored "sub" edits, every anchor
 exactly once, LF payloads re-joined with the preimage's line ending, every preimage verified before the first write).
 The rule names the git blob sha of its preimage (M3JDK master 3beb791e741; unchanged since 107d96051f5); a target
 must equal the preimage (the rule is applied) or the postimage (already applied, no-op); anything else is a drifted
@@ -165,7 +165,7 @@ def run(root: Path, check: bool) -> int:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--root", default=str(RECIPE_DIR.parents[3]), help="repository root (default: four up)")
+    parser.add_argument("--root", default=str(RECIPE_DIR.parents[4]), help="repository root (default: four up)")
     parser.add_argument("--check", action="store_true", help="write nothing; exit 1 when a run would change a file")
     args = parser.parse_args(argv)
     try:

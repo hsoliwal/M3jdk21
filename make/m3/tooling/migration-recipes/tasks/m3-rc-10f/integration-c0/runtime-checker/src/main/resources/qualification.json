@@ -26,7 +26,7 @@
           "beforeBytes": 48850,
           "beforeSHA256": "c9eb51298f2a6a7a1798051c24074cd7f23a8e0805ed6d50420ff3bcd12cacb4",
           "operation": "REPLACE",
-          "path": "m3/runtime-integration/check-m3string-invariants.py"
+          "path": "make/m3/runtime-integration/check-m3string-invariants.py"
         },
         {
           "afterBytes": 778,
@@ -34,7 +34,7 @@
           "beforeBytes": 778,
           "beforeSHA256": "c0af7bc99ace3f9dcc5e0e9085d9bac66eeb1a497b2153a54bb11ca250916c14",
           "operation": "REPLACE",
-          "path": "m3/runtime-integration/fix-root-ascii-case/manifest.json"
+          "path": "make/m3/runtime-integration/fix-root-ascii-case/manifest.json"
         },
         {
           "afterBytes": 79672,
@@ -42,7 +42,7 @@
           "beforeBytes": 79659,
           "beforeSHA256": "597b99f17221abf7b7301cf82a96c113f7fc9e9fd26a24145a9e6e973198be30",
           "operation": "REPLACE",
-          "path": "m3/tooling/image-gates/current-c0.json"
+          "path": "make/m3/tooling/image-gates/current-c0.json"
         }
       ],
       "yamlPath": "META-INF/rewrite/rf0-rfc.yml",

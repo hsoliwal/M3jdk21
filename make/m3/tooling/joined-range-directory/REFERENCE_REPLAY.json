@@ -6,7 +6,7 @@
   "currentValidationWorkflow": ".github/workflows/m3-current-nlp-search-jmods-20261018.yml",
   "triggerPaths": [
     ".github/workflows/m3-joined-range-directory.yml",
-    "m3/tooling/joined-range-directory/REFERENCE_REPLAY.json"
+    "make/m3/tooling/joined-range-directory/REFERENCE_REPLAY.json"
   ],
   "historicalClosure": {
     "toolingFiles": 39,

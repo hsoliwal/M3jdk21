@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 /** Zero-dependency LC #75 Java/JNI byte-for-byte permutation oracle. */
-//FLLDCIM: RELOCATE - donor blob 43abd6148088 at d5ad5090d87e; recipe m3/collections/qualification/census2-t1-20261106/relocate.py v5
+//FLLDCIM: RELOCATE - donor blob 43abd6148088 at d5ad5090d87e; recipe make/m3/collections/qualification/census2-t1-20261106/relocate.py v5
 public final class LanePartition3PreparedContract {
     private static long checks;
     private LanePartition3PreparedContract() { }

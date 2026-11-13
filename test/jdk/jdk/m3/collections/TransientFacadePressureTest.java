@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.Test;
 
-//FLLDCIM: RELOCATE - donor blob ad0e9c56e43d at fd9a233680b4; recipe m3/collections/recipe/transient-facade-20261106/relocate.py v4
+//FLLDCIM: RELOCATE - donor blob ad0e9c56e43d at fd9a233680b4; recipe make/m3/collections/recipe/transient-facade-20261106/relocate.py v4
 class TransientFacadePressureTest {
     private static final int MODE = TransientFacadeStore.RETAIN_UNEXPOSED
             | TransientFacadeStore.PIN_EXPOSED

@@ -110,7 +110,7 @@ execute('regression-compile', ['javac', '--release', '21', '-Xlint:all', '-Werro
 for mode, options in [('compact', []), ('utf16', ['-XX:-CompactStrings']), ('interpreter', ['-Xint']),
                       ('c2', ['-Xbatch', '-XX:-TieredCompilation'])]:
     execute('regression-'+mode, ['java', '-ea', *options, '-cp', str(classes), 'M3RegionMatchesNonPositive'])
-json.loads((delivery/'m3/docs/name-mapping.json').read_text())
+json.loads((delivery/'doc/m3/name-mapping.json').read_text())
 (evidence/'qualification-scope.json').write_text(json.dumps({
     'source_base': '855afe57a679aeb454052630de7beddcb25f5f8f',
     'stock_jdk_regression': 'PASS', 'actual_source_prefix': 'PASS',

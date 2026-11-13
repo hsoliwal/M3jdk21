@@ -48,7 +48,7 @@ The Java 21 class file `LegacyPreAliasSubclass` is compiled once against unmodif
 - Independent Java 21 model: a previously compiled subclass invokes correctly when a base alias is introduced as non-final. Replacing only the model base with a final alias causes the expected `IncompatibleClassChangeError`.
 - This model does **not** establish actual M3JDK jtreg or HotSpot image success.
 
-The historical `m3/compatibility/check_object_adapter_progress_receiver_20261017.py` source seal remains unchanged and intentionally refuses the evolved `Object.java` SHA-256. GitHub Actions for the initial alias PR reported this refusal; it is not converted into a green result. A separate successor acceptance receipt must pin the new source identity without weakening that historical check.
+The historical `make/m3/compatibility/check_object_adapter_progress_receiver_20261017.py` source seal remains unchanged and intentionally refuses the evolved `Object.java` SHA-256. GitHub Actions for the initial alias PR reported this refusal; it is not converted into a green result. A separate successor acceptance receipt must pin the new source identity without weakening that historical check.
 
 ## Strict scoped verifier and host-JDK fixture lane
 

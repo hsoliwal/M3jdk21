@@ -2,7 +2,7 @@
 
 ## Scope and authority
 
-This document consolidates the requirements relevant to the first implementation tranche. The broader three-route design remains `m3/docs/shared-atom-concatenation.md`; none of its proposed runtime contracts becomes accepted merely by being restated here. The machine-readable source-to-target authority is the existing `m3/docs/name-mapping.json`, extended rather than replaced. Every observed item remains visible with a disposition; the current observations are incomplete.
+This document consolidates the requirements relevant to the first implementation tranche. The broader three-route design remains `doc/m3/shared-atom-concatenation.md`; none of its proposed runtime contracts becomes accepted merely by being restated here. The machine-readable source-to-target authority is the existing `doc/m3/name-mapping.json`, extended rather than replaced. Every observed item remains visible with a disposition; the current observations are incomplete.
 
 ## Layering
 

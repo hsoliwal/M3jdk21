@@ -67,7 +67,7 @@
       }
     },
     {
-      "path": "m3/docs/counterpart-naming.md",
+      "path": "doc/m3/counterpart-naming.md",
       "before": {
         "resource": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/counterpart-naming.md.txt.before",
         "sha256": "ade03ecee5e0b9e2d3961c6b24816e096f6f735484b94396891db01bfada3460"
@@ -78,7 +78,7 @@
       }
     },
     {
-      "path": "m3/docs/name-mapping.json",
+      "path": "doc/m3/name-mapping.json",
       "before": {
         "resource": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/name-mapping.json.txt.before",
         "sha256": "08459dd797747dab7ec120f25215e36bd0e568e0cc343b00ecdb98b78c9f1511"
@@ -89,7 +89,7 @@
       }
     },
     {
-      "path": "m3/tooling/lane28/feedback/cost-1.log",
+      "path": "make/m3/tooling/lane28/feedback/cost-1.log",
       "before": null,
       "after": {
         "resource": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/cost-1.log.txt",
@@ -97,7 +97,7 @@
       }
     },
     {
-      "path": "m3/tooling/lane28/feedback/cost-2.log",
+      "path": "make/m3/tooling/lane28/feedback/cost-2.log",
       "before": null,
       "after": {
         "resource": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/cost-2.log.txt",
@@ -105,7 +105,7 @@
       }
     },
     {
-      "path": "m3/tooling/lane28/feedback/lane28-20261005.json",
+      "path": "make/m3/tooling/lane28/feedback/lane28-20261005.json",
       "before": null,
       "after": {
         "resource": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/feedback.json.txt",
@@ -113,7 +113,7 @@
       }
     },
     {
-      "path": "m3/tooling/lane28/feedback/lane28-20261005.md",
+      "path": "make/m3/tooling/lane28/feedback/lane28-20261005.md",
       "before": null,
       "after": {
         "resource": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/feedback.md.txt",
@@ -121,7 +121,7 @@
       }
     },
     {
-      "path": "m3/tooling/lane28/verify-image.sh",
+      "path": "make/m3/tooling/lane28/verify-image.sh",
       "before": null,
       "after": {
         "resource": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/verify-image.sh.txt",
@@ -129,7 +129,7 @@
       }
     },
     {
-      "path": "m3/tooling/tq/README.md",
+      "path": "make/m3/tooling/tq/README.md",
       "before": {
         "resource": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/tq-README.md.txt.before",
         "sha256": "3221941a93918c528cc9951223f9bf40c56de927512f08430a50668ed6fb6f3a"
@@ -140,7 +140,7 @@
       }
     },
     {
-      "path": "m3/tooling/tq/verify-plan.py",
+      "path": "make/m3/tooling/tq/verify-plan.py",
       "before": {
         "resource": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/tq-verify-plan.py.txt.before",
         "sha256": "9073d2710bd9497f6e76871cdc8f9e291608ed3024af6bf76ed36306fd191d9a"
@@ -172,11 +172,11 @@
   ],
   "guards": [
     {
-      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
+      "path": "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
       "sha256": "fd376487d4497fef3f3f058584cd04abb5622abcff14364600b96a53df588862"
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "path": "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
       "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795"
     },
     {
@@ -188,7 +188,7 @@
       "sha256": "19450c4b44091c4f37689be1fa45bb30b822cd2f962a323d0991529fc65f6a71"
     },
     {
-      "path": "m3/migration/recipe.py",
+      "path": "make/m3/migration/recipe.py",
       "sha256": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"
     },
     {

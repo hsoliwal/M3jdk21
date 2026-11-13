@@ -63,7 +63,7 @@ are selected through the existing module-pack graph and lock API.
 Create an image with the OpenRewrite bundle using the existing selector:
 
 ```sh
-python3 m3/tooling/module-packs/build_pack.py \
+python3 make/m3/tooling/module-packs/build_pack.py \
   --jdk /path/to/source-built-m3jdk21 \
   --out /path/to/new-selected-image-output \
   --profile diagnostics \
@@ -129,9 +129,9 @@ Use the source-built M3JDK21 image as `JAVA_HOME`. Build/install the existing
 frontend first, then build the Java runner and the complete runtime aggregator:
 
 ```sh
-mvn -f m3/tooling/shared-frontend/openrewrite/pom.xml install
-mvn -f m3/tooling/shared-frontend/openrewrite-tool/pom.xml package
-mvn -f m3/tooling/shared-frontend/openrewrite-runtime/pom.xml package
+mvn -f make/m3/tooling/shared-frontend/openrewrite/pom.xml install
+mvn -f make/m3/tooling/shared-frontend/openrewrite-tool/pom.xml package
+mvn -f make/m3/tooling/shared-frontend/openrewrite-runtime/pom.xml package
 ```
 
 The last command is a POM-only runtime aggregator with real, explicitly bound
@@ -145,13 +145,13 @@ candidates.
 Run the pack assembler against those exact outputs:
 
 ```sh
-python3 m3/tooling/module-packs/build-tools/openrewrite_pack.py \
-  --project-pom m3/tooling/shared-frontend/openrewrite-tool/pom.xml \
-  --frontend-pom m3/tooling/shared-frontend/openrewrite/pom.xml \
-  --runtime-pom m3/tooling/shared-frontend/openrewrite-runtime/pom.xml \
-  --runner-jar m3/tooling/shared-frontend/openrewrite-tool/target/m3-openrewrite-tool-1.0-SNAPSHOT.jar \
-  --runtime-classpath m3/tooling/shared-frontend/openrewrite-runtime/target/runtime-classpath.txt \
-  --runtime-dependencies m3/tooling/shared-frontend/openrewrite-runtime/target/runtime-dependencies.txt \
+python3 make/m3/tooling/module-packs/build-tools/openrewrite_pack.py \
+  --project-pom make/m3/tooling/shared-frontend/openrewrite-tool/pom.xml \
+  --frontend-pom make/m3/tooling/shared-frontend/openrewrite/pom.xml \
+  --runtime-pom make/m3/tooling/shared-frontend/openrewrite-runtime/pom.xml \
+  --runner-jar make/m3/tooling/shared-frontend/openrewrite-tool/target/m3-openrewrite-tool-1.0-SNAPSHOT.jar \
+  --runtime-classpath make/m3/tooling/shared-frontend/openrewrite-runtime/target/runtime-classpath.txt \
+  --runtime-dependencies make/m3/tooling/shared-frontend/openrewrite-runtime/target/runtime-dependencies.txt \
   --maven-repository /path/to/the/resolved/maven-repository \
   --distribution /path/to/new-openrewrite-distribution \
   --out /path/to/new-openrewrite-lock.json \
@@ -190,7 +190,7 @@ export M3_REWRITE_TOOL_PROOF=/path/to/qualified-runner-output
 export M3_REWRITE_RUNTIME_PROOF=/path/to/qualified-full-runtime-output
 export M3_REWRITE_TOOL_POM=/path/to/emitted/openrewrite-tool/pom.xml
 export M3_REWRITE_RUNTIME_POM=/path/to/emitted/openrewrite-runtime/pom.xml
-python3 m3/tooling/module-packs/build-tools/test_openrewrite_pack.py
+python3 make/m3/tooling/module-packs/build-tools/test_openrewrite_pack.py
 ```
 
 The suite uses the real resolved framework and source-built runner, including

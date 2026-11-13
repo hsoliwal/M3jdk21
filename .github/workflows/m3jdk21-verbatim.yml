@@ -7,8 +7,8 @@ on:
       - 'src/**'
       - 'test/**'
       - 'make/**'
-      - 'm3/tooling/baseline/**'
-      - 'm3/docs/jdk21-verbatim-baseline.md'
+      - 'make/m3/tooling/baseline/**'
+      - 'doc/m3/jdk21-verbatim-baseline.md'
       - '.github/workflows/m3jdk21-verbatim.yml'
   workflow_dispatch:
 permissions:

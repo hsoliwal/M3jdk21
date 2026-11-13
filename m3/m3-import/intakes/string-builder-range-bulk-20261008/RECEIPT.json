@@ -20,7 +20,7 @@
     "M3 bulk lane never materializes String.value"
   ],
   "verification": {
-    "source_checker": "m3/runtime-integration/check-m3string-builder-range-bulk.py",
+    "source_checker": "make/m3/runtime-integration/check-m3string-builder-range-bulk.py",
     "jtreg": "test/jdk/java/lang/String/M3StringBuilderRangeBulkTest.java",
     "jdk_build": "NOT_RUN",
     "jtreg_run": "NOT_RUN",

@@ -13,7 +13,7 @@ import zipfile
 HERE = Path(__file__).resolve().parent
 JAVA = Path('src/main/java/jdk/m3/tooling/image/M3ClassFileParser.java')
 NATIVE = Path('src/main/native/libm3image/M3ReachabilityKernel.c')
-PRODUCT = Path('m3/tooling/m3-image')
+PRODUCT = Path('make/m3/tooling/m3-image')
 RESOURCE = HERE / 'resources/com/synexia/rewrite/hash-pinned-java/m3-image-class-edges-20261104'
 STAGES = ('lint', 'compile', 'test', 'runtime')
 KERNEL_DRIFT_ALLOWED = {'src/main/java/jdk/m3/tooling/image/M3JniReachabilityKernel.java', 'src/main/native/libm3image/M3ReachabilityKernel.c'}

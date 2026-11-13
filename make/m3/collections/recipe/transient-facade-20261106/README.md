@@ -88,7 +88,7 @@ in Java lanes (the owner's JNI lane is the scan), not in a JNI-adjusted direct-b
 ### Phase 2A not needed
 
 The target module is m3/collections (beside `M3ObjectResidency` and `M3RuntimeHeap`, which the store's package-private
-seams need). m3/lazyobjects has no pom.xml and is not in m3/pom.xml; `m3/tooling/jdk-naming/RENAME_MAP.tsv` plans no
+seams need). m3/lazyobjects has no pom.xml and is not in make/m3/pom.xml; `make/m3/tooling/jdk-naming/RENAME_MAP.tsv` plans no
 rename of `org.m3.runtime.lazy`. Its package naming stays an open item for its own leaf.
 
 ## Phase 2B: the port
@@ -142,6 +142,6 @@ trim and fault over RETAIN_UNEXPOSED owners); the eight earlier family digests a
 * `relocate.py` (`--check` for the fixed point), `differential.sh`, `verify.sh`.
 
 ```
-python -I m3/collections/recipe/transient-facade-20261106/relocate.py --donor-git <com.synexia clone> --donor-rev fd9a233680b43197eb8c5745a729c342ca56c4e2 --check
-JAVA_HOME=<JDK 21> bash m3/collections/recipe/transient-facade-20261106/verify.sh <com.synexia clone> fd9a233680b43197eb8c5745a729c342ca56c4e2 <scratch>
+python -I make/m3/collections/recipe/transient-facade-20261106/relocate.py --donor-git <com.synexia clone> --donor-rev fd9a233680b43197eb8c5745a729c342ca56c4e2 --check
+JAVA_HOME=<JDK 21> bash make/m3/collections/recipe/transient-facade-20261106/verify.sh <com.synexia clone> fd9a233680b43197eb8c5745a729c342ca56c4e2 <scratch>
 ```

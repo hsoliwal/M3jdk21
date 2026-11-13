@@ -7,10 +7,10 @@ from hashlib import sha256
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-ROOT = Path(__file__).resolve().parents[4]
-VERIFIER = ROOT / "m3/collections/verify_donation.py"
-OLD = ROOT / "m3/collections/recipe/filtered-sorted-views-20261017/manifest.tsv"
-NEW = ROOT / "m3/collections/recipe/stored-representative-20261017/manifest.tsv"
+ROOT = Path(__file__).resolve().parents[5]
+VERIFIER = ROOT / "make/m3/collections/verify_donation.py"
+OLD = ROOT / "make/m3/collections/recipe/filtered-sorted-views-20261017/manifest.tsv"
+NEW = ROOT / "make/m3/collections/recipe/stored-representative-20261017/manifest.tsv"
 
 def refuse(call, why):
     try:

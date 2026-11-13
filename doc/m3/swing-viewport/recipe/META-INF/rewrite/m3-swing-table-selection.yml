@@ -6,7 +6,7 @@ name: com.synexia.openrewrite.viewport.M3SwingTableSortManagerSelection
 displayName: JTable's SortManager restores the right selection with a row filter (JDK-8366188, JDK-6727200)
 description: >-
   Two defects of JTable.SortManager, the selection cache JTable keeps while a RowSorter is set
-  (m3/docs/swing-viewport/UPSTREAM_DEFECTS.tsv D5, D6). D5, JDK-8366188: with a filter that hides rows, the
+  (doc/m3/swing-viewport/UPSTREAM_DEFECTS.tsv D5, D6). D5, JDK-8366188: with a filter that hides rows, the
   selection is kept in model terms after a sorter event and shifted on an insert with
   DefaultListSelectionModel.insertIndexInterval(start, length, true), which selects the new indices when the
   index at the insertion point is selected; the inserted model rows are now deselected right after the shift,

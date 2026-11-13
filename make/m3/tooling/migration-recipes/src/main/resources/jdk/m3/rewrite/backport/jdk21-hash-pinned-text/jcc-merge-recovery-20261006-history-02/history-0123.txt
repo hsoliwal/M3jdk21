@@ -12,7 +12,7 @@
  from pathlib import Path
 +from publication_custody_v3 import admit_publication_custody
  B=Path(__file__).resolve().parent;R=B/'overlay';P=B.parent/'successor-e04-prep'
- NAME='jcc-source-recovery-handoff-20261005';PREFIX=Path('m3/tooling/migration-recipes');TASK=PREFIX/'tasks'/NAME
+ NAME='jcc-source-recovery-handoff-20261005';PREFIX=Path('make/m3/tooling/migration-recipes');TASK=PREFIX/'tasks'/NAME
  C=R/PREFIX/'src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text'/NAME
 @@ -33,13 +34,14 @@
   return {k:copy.deepcopy(row[k]) for k in ('repo','commit','module','path','symbol','signatures','sha256','git_blob_sha1','fingerprint','revision_role','tracking_ref')}

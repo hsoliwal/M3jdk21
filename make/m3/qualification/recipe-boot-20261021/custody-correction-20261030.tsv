@@ -1,12 +1,12 @@
 field	value
 schema	M3_RECIPE_BOOT_CUSTODY_CORRECTION_V1
 date	2026-10-30
-path	m3/migration/original-provider-20261017/sdk/pom.xml
+path	make/m3/migration/original-provider-20261017/sdk/pom.xml
 previous_disposition	INSTALLED (coverage.tsv row 282, installer commit 49791e92b1c063a2cb65875831976cc9c599e8e0)
 corrected_disposition	EXCLUDED
 reason	CUSTODY
 custody_owner	hsoliwal/com.synexia synexia-openrewrite-recipes/recipes/m3-original-mapping-provider-20261017/sdk
-custody_binding	m3/migration/original-provider-20261017/source-binding.json (M3_ORIGINAL_MAPPING_PROVIDER_RECEIVER_BINDING_V1, moduleGitTree c93b25915d57178bec19458ba9ddc34383d92639)
+custody_binding	make/m3/migration/original-provider-20261017/source-binding.json (M3_ORIGINAL_MAPPING_PROVIDER_RECEIVER_BINDING_V1, moduleGitTree c93b25915d57178bec19458ba9ddc34383d92639)
 canonical_source_commit	f44400ead6a4c65e9bb9fc371a5b1c2deecc9c6b
 canonical_tree_at_develop_head	c93b25915d57178bec19458ba9ddc34383d92639 (eeb6ad2ca5, 2026-10-30; canonical SDK unchanged)
 drifted_git_blob	4197e02af76dc6c63c00fb10736007889e4f55e6

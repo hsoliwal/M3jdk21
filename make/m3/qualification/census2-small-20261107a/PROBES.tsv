@@ -14,7 +14,7 @@ P2-104	M3GpuToolFabric.java	NO_BASENAME	-
 P2-104	m3/fs/src/main/java/jdk/m3/fs/M3PreparedBytePatternMachine.java	PRESENT	long outputMaskAt(int state);
 P2-113	RfbFramebuffer.java	NO_BASENAME	-
 P2-113	M3RfbFramebuffer.java	NO_BASENAME	-
-P2-113	m3/docs/m3sdk/FOSS_REUSE_DECISION.tsv	PRESENT	remote-screen-vnc-rfb-viewer
+P2-113	doc/m3/m3sdk/FOSS_REUSE_DECISION.tsv	PRESENT	remote-screen-vnc-rfb-viewer
 P2-118	PixelMask.java	NO_BASENAME	-
 P2-118	M3PixelMask.java	NO_BASENAME	-
 P2-118	PixelFrame.java	NO_BASENAME	-

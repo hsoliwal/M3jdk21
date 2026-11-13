@@ -81,7 +81,7 @@ def main():
     combined = out / "combined-tool-lock.json"
     combined.write_text(json.dumps({"schema_version": 1, "packs": packs}, indent=2) + "\n")
     build_output = out / "linked"
-    run([sys.executable, repository / "m3/tooling/module-packs/build_pack.py",
+    run([sys.executable, repository / "make/m3/tooling/module-packs/build_pack.py",
          "--jdk", jdk, "--out", build_output, "--tool-pack-lock", combined,
          "--tool-pack", "maven", "--tool-pack", "openrewrite"], "build-selected-image", timeout=1800)
     assembly = json.loads((build_output / "RECEIPT.json").read_text())
@@ -192,7 +192,7 @@ recipeList:
             raise ValueError("Supplied pack lock changed during execution")
     receipt = {"status": "SELECTED_MAVEN_OPENREWRITE_IMAGE_PASS", "image": str(image),
                "source_jdk": str(jdk), "source_jdk_sha256": source_image,
-               "builder_sha256": digest(repository / "m3/tooling/module-packs/build_pack.py"),
+               "builder_sha256": digest(repository / "make/m3/tooling/module-packs/build_pack.py"),
                "verifier_sha256": digest(__file__), "selected_packs": ["maven", "openrewrite"],
                "input_locks": lock_inputs, "combined_lock_sha256": digest(combined),
                "relocated_with_spaces": True, "verified_asset_count": len(assets),

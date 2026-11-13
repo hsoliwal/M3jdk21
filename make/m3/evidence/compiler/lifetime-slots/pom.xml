@@ -11,7 +11,7 @@
   <name>M3JDK :: Compiler Lifetime Slots</name>
   <description>jdk.m3.compiler.lifetime (module org.m3jdk.compiler.lifetime): M3DoopLifetimeSlotPlanner, the read-only
     candidate planner that turns half-open local lifetime intervals (the shape produced by the lifetime census,
-    m3/qualification/lifetime-census-20261030) into the exact minimum number of logical slots, per compatibility
+    make/m3/qualification/lifetime-census-20261030) into the exact minimum number of logical slots, per compatibility
     group, with primitive scratch arrays only. Pure Java 21, no dependency outside java.base. Relocated by recipe
     (recipe/relocate.py, RELOCATION_MAP.tsv, PROVENANCE.tsv) from the donor hsoliwal/com.synexia develop
     64652588f0d4; the four donor self-tests (two seeded oracles, two JUnit 5 wrappers) run in the test phase.</description>

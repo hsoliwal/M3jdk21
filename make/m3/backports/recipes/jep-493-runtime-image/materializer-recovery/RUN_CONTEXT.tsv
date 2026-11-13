@@ -6,8 +6,8 @@ source_pr	144
 source_head	63502fa69cda832c98d10fc752beef32da30a5b7
 jep	493
 selected_paths	47
-generator	m3/backports/generate_recipe_crates.py
-executor	m3/backports/materialize_generated_crates.py
+generator	make/m3/backports/generate_recipe_crates.py
+executor	make/m3/backports/materialize_generated_crates.py
 crate_size	1
 include_text	true
 file_scope	FILE

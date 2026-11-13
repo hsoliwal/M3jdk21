@@ -71,7 +71,7 @@ from pathlib import Path
 RECIPE = "relocate.py"
 VERSION = "v4"
 RECIPE_DIR = Path(__file__).resolve().parent
-RECIPE_PATH = "m3/qualification/" + RECIPE_DIR.parent.name + "/recipe/" + RECIPE
+RECIPE_PATH = "make/m3/qualification/" + RECIPE_DIR.parent.name + "/recipe/" + RECIPE
 DONOR_REPO = "hsoliwal/com.synexia"
 DONOR_BLOB_URL = "https://github.com/" + DONOR_REPO + "/blob/"
 MAP_NAME = "RELOCATION_MAP.tsv"
@@ -528,7 +528,7 @@ def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--donor-git", required=True, help="donor git directory (a blobless clone is enough)")
     parser.add_argument("--donor-rev", required=True, help="donor revision (commit sha; never a moving FETCH_HEAD)")
-    parser.add_argument("--module", default=str(RECIPE_DIR.parent.parent.parent.parent), help="repository root")
+    parser.add_argument("--module", default=str(RECIPE_DIR.parent.parent.parent.parent.parent), help="repository root")
     parser.add_argument("--check", action="store_true", help="write nothing; exit 1 when a run would change a file")
     args = parser.parse_args(argv)
     try:

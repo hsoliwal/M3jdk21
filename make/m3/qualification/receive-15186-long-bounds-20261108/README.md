@@ -1,4 +1,4 @@
-# Receipt: com.synexia #15186 on m3/tooling/search (signed-long JNI)
+# Receipt: com.synexia #15186 on make/m3/tooling/search (signed-long JNI)
 
 #15186 (`m3(recipe): signed-long JNI prefetch and ordered merge`, head `67aa239b73fd`) is the in-place successor
 of #15120 on the crate `m3jdk-sorted-long-batch-bounds-20261101`. Both merged into

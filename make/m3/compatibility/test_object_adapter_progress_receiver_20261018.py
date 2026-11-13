@@ -15,7 +15,7 @@ import tempfile
 import unittest
 
 sys.dont_write_bytecode = True
-REPOSITORY = Path(__file__).resolve().parents[2]
+REPOSITORY = Path(__file__).resolve().parents[3]
 SPEC = importlib.util.spec_from_file_location("object_progress_receiver",
         Path(__file__).with_name("check_object_adapter_progress_receiver_20261017.py"))
 CHECKER = importlib.util.module_from_spec(SPEC)

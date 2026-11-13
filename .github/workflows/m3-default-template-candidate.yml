@@ -8,8 +8,8 @@ on:
       - 'src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java'
       - 'src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java'
       - 'test/jdk/java/lang/Object/M3MonitoredTemplateTest.java'
-      - 'm3/compatibility/*default*template*'
-      - 'm3/compatibility/M3_DEFAULT_TEMPLATE_RECEIVER_20261017.md'
+      - 'make/m3/compatibility/*default*template*'
+      - 'make/m3/compatibility/M3_DEFAULT_TEMPLATE_RECEIVER_20261017.md'
   workflow_dispatch:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -25,6 +25,6 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Verify exact source seals and isolated progress subset
-        run: bash m3/compatibility/check_m3_default_template_java21.sh
+        run: bash make/m3/compatibility/check_m3_default_template_java21.sh
       - name: State limitations explicitly
         run: echo 'Full Maven/OpenRewrite, JDK build, jtreg, HotSpot, native and compatibility gates remain pending.'

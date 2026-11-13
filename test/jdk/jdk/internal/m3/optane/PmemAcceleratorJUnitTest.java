@@ -12,12 +12,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledIfSystemProperty;
 
 /**
- * Surefire entry of the donor oracle {@link PmemAcceleratorSelfTest} (recipe m3/optane/recipe/pmem-accelerator-20261107,
+ * Surefire entry of the donor oracle {@link PmemAcceleratorSelfTest} (recipe make/m3/optane/recipe/pmem-accelerator-20261107,
  * census L008): runs its main once and asserts the printed figure. Needs libm3pmemaccel.so on java.library.path
  * (Linux; the CMake target of src/main/native), so it runs under the profile m3-optane-native only
  * (-Dpmem.accelerator.native=true); the default filter excludes it.
  */
-//FLLDCIM: RELOCATE - M3JDK-authored JUnit entry of recipe m3/optane/recipe/pmem-accelerator-20261107 (census L008); the oracle is the donor's PmemAcceleratorSelfTest
+//FLLDCIM: RELOCATE - M3JDK-authored JUnit entry of recipe make/m3/optane/recipe/pmem-accelerator-20261107 (census L008); the oracle is the donor's PmemAcceleratorSelfTest
 final class PmemAcceleratorJUnitTest {
     /** The donor oracle's own counter: 2,048 column-order cases, the tile lanes x rows, 44 parities and the fixed checks. */
     static final String FIGURE = "PASS m3-pmem Java21/JNI cases=";

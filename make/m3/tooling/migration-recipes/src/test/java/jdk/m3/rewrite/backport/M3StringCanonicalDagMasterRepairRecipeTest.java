@@ -76,17 +76,17 @@ final class M3StringCanonicalDagMasterRepairRecipeTest {
                         "04-workflow.yml.txt"),
                 text("doc/mindex-string-backing.md",
                         "06-backing-doc.md.txt"),
-                text("m3/docs/m3-runtime-invariants.tsv",
+                text("doc/m3/m3-runtime-invariants.tsv",
                         "00-runtime-invariants.tsv.txt"),
-                text("m3/docs/name-mapping.json",
+                text("doc/m3/name-mapping.json",
                         "01-name-mapping.json.txt"),
-                text("m3/docs/m3-string-precompute-port-map.tsv",
+                text("doc/m3/m3-string-precompute-port-map.tsv",
                         "02-port-map.tsv.txt"),
-                text("m3/runtime-integration/README.md",
+                text("make/m3/runtime-integration/README.md",
                         "05-runtime-readme.md.txt"),
-                text("m3/runtime-integration/check-m3string-invariants.py",
+                text("make/m3/runtime-integration/check-m3string-invariants.py",
                         "03-invariants.py.txt"),
-                text("m3/runtime-integration/tests/M3StringInvariant.java",
+                text("make/m3/runtime-integration/tests/M3StringInvariant.java",
                         "07-M3StringInvariant.java.txt"));
     }
 

@@ -43,7 +43,7 @@ from pathlib import Path
 import re
 import types
 
-REPO = Path(__file__).resolve().parents[5]
+REPO = Path(__file__).resolve().parents[6]
 VENDOR = "m3/vendor/third_party"
 SOURCE_ROOT = "src/main/java"
 RETAINED_ROOT = "upstream-excluded"

@@ -5,7 +5,7 @@
  */
 #include <jni.h>
 #include <stdio.h>
-//FLLDCIM: RESTORE-ADD includes - retained variant pr1882 blob 055eee1f1194 lines 6-7 (stdlib.h: malloc/free; stdint.h: uint32_t, SIZE_MAX of the restored exports); recipe m3/collections/qualification/lane-kernel-native-20261106/add_rows.py v1
+//FLLDCIM: RESTORE-ADD includes - retained variant pr1882 blob 055eee1f1194 lines 6-7 (stdlib.h: malloc/free; stdint.h: uint32_t, SIZE_MAX of the restored exports); recipe make/m3/collections/qualification/lane-kernel-native-20261106/add_rows.py v1
 #include <stdlib.h>
 #include <stdint.h>
 
@@ -83,7 +83,7 @@ Java_jdk_m3_collections_LongAddressKernel_gatherNative(
     }
 }
 
-//FLLDCIM: RESTORE-ADD begin - retained variant pr1882 blob 055eee1f1194 lines 78-367 (gatherSelectedNative, slidingMaximumIndices0, partition3Long0, partition3Int0); recipe m3/collections/qualification/lane-kernel-native-20261106/add_rows.py v1
+//FLLDCIM: RESTORE-ADD begin - retained variant pr1882 blob 055eee1f1194 lines 78-367 (gatherSelectedNative, slidingMaximumIndices0, partition3Long0, partition3Int0); recipe make/m3/collections/qualification/lane-kernel-native-20261106/add_rows.py v1
 static jint m3_match_bits(jbyte flags, jint required, jint forbidden) {
     jint state = (jint) (unsigned char) flags;
     return (state & required) == required && (state & forbidden) == 0;

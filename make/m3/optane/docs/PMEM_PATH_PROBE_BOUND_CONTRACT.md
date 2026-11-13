@@ -1,6 +1,6 @@
 <!-- Copyright 2026 Hitesh Soliwal and contributors -->
 <!-- SPDX-License-Identifier: Apache-2.0 -->
-<!-- FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/m3-pmem-sdk/docs/PMEM_PATH_PROBE_BOUND_CONTRACT.md blob 90e888d8cf3b; recipe m3/optane/recipe/pmem-source-image-20261106/relocate.py v3 -->
+<!-- FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/m3-pmem-sdk/docs/PMEM_PATH_PROBE_BOUND_CONTRACT.md blob 90e888d8cf3b; recipe make/m3/optane/recipe/pmem-source-image-20261106/relocate.py v3 -->
 # M3 PMEM bounded-probe insertion correction — exact original helper leaf
 
 Canonical source: hsoliwal/com.synexia PR #15356 at 20de3ad8748255bd2cf1de30fd2d3deac25210e1.

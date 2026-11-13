@@ -21,8 +21,8 @@ Current receiver state:
 
 Exact machine receipts:
 
-- `m3/backports/M3_NEBULA_RECIPE_DAG_HANDOFF.tsv`;
-- `m3/tooling/backport-dag/src/main/resources/jdk/m3/tooling/dag/m3-canonical-dag-binding.tsv`;
+- `make/m3/backports/M3_NEBULA_RECIPE_DAG_HANDOFF.tsv`;
+- `make/m3/tooling/backport-dag/src/main/resources/jdk/m3/tooling/dag/m3-canonical-dag-binding.tsv`;
 - `m3/m3-import/nebula-mastered-dag-receiver-v2.tsv`.
 
 Historical draft/blocked receipts remain in-tree as evidence and are not rewritten.

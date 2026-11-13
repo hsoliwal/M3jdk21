@@ -4,7 +4,7 @@ on:
   pull_request:
     paths:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SparseExtents.java'
-      - 'm3/collections/viewport-proof/fixtures/M3ViewportGeometryTest.txt'
+      - 'make/m3/collections/viewport-proof/fixtures/M3ViewportGeometryTest.txt'
       - '.github/workflows/m3-sparse-viewport-geometry.yml'
 permissions:
   contents: read
@@ -38,7 +38,7 @@ jobs:
           SOURCE=src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SparseExtents.java
           HEAP=src/jdk.m3.collections/share/classes/jdk/m3/collections/M3HeapGrowth.java
           WINDOW=src/jdk.m3.collections/share/classes/jdk/m3/collections/M3WindowPlan.java
-          FIXTURE=m3/collections/viewport-proof/fixtures/M3ViewportGeometryTest.txt
+          FIXTURE=make/m3/collections/viewport-proof/fixtures/M3ViewportGeometryTest.txt
           test "$(git hash-object "$SOURCE")" = ea42717003948d450a606b827628964c58896a23
           test "$(git hash-object "$HEAP")" = bee6711572ebc905a3a14cca303acf2491fed1b2
           test "$(git hash-object "$WINDOW")" = 3af2f3ff5f3941e481eb5e09f3e0570262fda8ba
@@ -57,7 +57,7 @@ jobs:
             mkdir -p "$MODULE/src/main/java/jdk/m3/collections" "$MODULE/src/test/java/jdk/m3/collections"
             cp src/jdk.m3.collections/share/classes/jdk/m3/collections/M3HeapGrowth.java "$MODULE/src/main/java/jdk/m3/collections/"
             cp src/jdk.m3.collections/share/classes/jdk/m3/collections/M3WindowPlan.java "$MODULE/src/main/java/jdk/m3/collections/"
-            cp m3/collections/viewport-proof/fixtures/M3ViewportGeometryTest.txt "$MODULE/src/test/java/jdk/m3/collections/M3ViewportGeometryTest.java"
+            cp make/m3/collections/viewport-proof/fixtures/M3ViewportGeometryTest.txt "$MODULE/src/test/java/jdk/m3/collections/M3ViewportGeometryTest.java"
             if [[ "$state" == before ]]; then
               cp "$RUNNER_TEMP/M3SparseExtents-before.java" "$MODULE/src/main/java/jdk/m3/collections/M3SparseExtents.java"
             else

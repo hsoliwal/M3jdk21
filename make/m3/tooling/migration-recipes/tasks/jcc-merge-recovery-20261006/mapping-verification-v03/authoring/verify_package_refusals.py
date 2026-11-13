@@ -28,12 +28,12 @@ HERE = Path(__file__).resolve().parent
 PACKAGER = HERE / "package_mapping.py"
 EPOCH_SHA256 = "027e47d20c7fb854e028487ceef341c929877a6421dbb75f6433b5cd007fe5ee"
 BEFORE_BINDINGS_SHA256 = "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126"
-TASK = "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006"
+TASK = "make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006"
 PROOF = TASK + "/mapping-verification-v03"
-RESOURCE = "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v03"
-PATHS = {"m3/docs/name-mapping.json", "m3/docs/jcc-source-handoff.md",
-         "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
-         "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv"}
+RESOURCE = "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v03"
+PATHS = {"doc/m3/name-mapping.json", "doc/m3/jcc-source-handoff.md",
+         "make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
+         "make/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv"}
 CACHE_PROOFS = ("VERIFIED_CACHE.json", "OFFLINE_DIAGNOSTIC_CACHE_V02.json", "RECEIVER_ASM93_ADDON.json")
 
 
@@ -230,7 +230,7 @@ def main():
                 mutation = {"field": "actual_source_binding.source_commit", "from": source["commit"],
                             "to": historical["source_commit"], "identity_origin": "Exact actual historical before-02.txt"}
             elif name == "02-changed-actual-output":
-                path = "m3/docs/name-mapping.json"
+                path = "doc/m3/name-mapping.json"
                 target = copied_execution / "materialized" / path
                 target.write_bytes(target.read_bytes() + b"\nPACKAGE_REFUSAL_PROBE\n")
                 mutation = {"path": "materialized/" + path, "kind": "append bytes to isolated actual Result copy"}

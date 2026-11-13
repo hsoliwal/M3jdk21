@@ -33,12 +33,12 @@ OWNER = 'da958d00d24154c0db87beca0ec80a7df2b43b73'
 REF = 'refs/heads/aix/jcc-source-merge-recovery-20261005'
 IDS = ('m3.jcc-recipe-laboratory', 'm3.jcc-java-jni-regression')
 NAME = 'jcc-source-recovery-handoff-20261005'
-TASK = PurePosixPath('m3/tooling/migration-recipes/tasks') / NAME
-CRATE = ROOT / 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text' / NAME
-MAP = 'm3/docs/name-mapping.json'
-DOC = 'm3/docs/jcc-source-handoff.md'
-BIND = 'm3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json'
-COV = 'm3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv'
+TASK = PurePosixPath('make/m3/tooling/migration-recipes/tasks') / NAME
+CRATE = ROOT / 'make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text' / NAME
+MAP = 'doc/m3/name-mapping.json'
+DOC = 'doc/m3/jcc-source-handoff.md'
+BIND = 'make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json'
+COV = 'make/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv'
 FIELD_HASH = '65f10e830243ed927aabedee9d0734daa46eed3b37ae4212e28ab85131fe9e9d'
 ROOT_HASH = '30dadc5274823dba2443d663000051a48c0785eb92042ba8e684520bc2ce5942'
 CONTEXT_HASH = 'ab9828692a1ca02adfabf22ff679e47e1e62a9d755b97f4071c42d5225698bc5'
@@ -438,7 +438,7 @@ def main():
             for index, child in enumerate(value):
                 nested_dest(child, f'{location}[{index}]')
 
-    old_plan = load(OLD / 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/plan.json')
+    old_plan = load(OLD / 'make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/plan.json')
     assert plan['guards'] == old_plan['guards'] and len(plan['guards']) == 7
     for index, guard in enumerate(plan['guards']):
         dest(guard, f'plan.guards[{index}]')

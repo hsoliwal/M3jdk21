@@ -2,17 +2,17 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright 2026 Hitesh Soliwal and contributors.
 set -euo pipefail
-RX7_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd)"
+RX7_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../../.." && pwd)"
 : "${M3_JAVA_HOME:?set M3_JAVA_HOME to a Java 21 JDK}"
 export JAVA_HOME="$M3_JAVA_HOME"
 export PATH="$M3_JAVA_HOME/bin:$PATH"
 RX7_WORK="$(mktemp -d "${TMPDIR:-/tmp}/m3rx7-convergence.XXXXXX")"
 trap 'rm -rf -- "$RX7_WORK"' EXIT
 cd "$RX7_ROOT"
-python3 m3/compatibility/check_m3_full_borrow_receiver.py
-bash m3/runtime-integration/check-m3rx7-v7-receiver.sh
-bash m3/runtime-integration/check-m3rx7-v7-image-codec.sh
-bash m3/runtime-integration/check-m3rx7-transition-native.sh
+python3 make/m3/compatibility/check_m3_full_borrow_receiver.py
+bash make/m3/runtime-integration/check-m3rx7-v7-receiver.sh
+bash make/m3/runtime-integration/check-m3rx7-v7-image-codec.sh
+bash make/m3/runtime-integration/check-m3rx7-transition-native.sh
 mkdir -p "$RX7_WORK/source/jdk/internal/mindex" "$RX7_WORK/patch" "$RX7_WORK/tests" "$RX7_WORK/collections"
 cp src/java.base/share/classes/jdk/internal/mindex/M3RX7.java "$RX7_WORK/source/jdk/internal/mindex/"
 cp src/java.base/share/classes/jdk/internal/mindex/M3RX7Transitions.java "$RX7_WORK/source/jdk/internal/mindex/"

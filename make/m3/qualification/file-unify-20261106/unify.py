@@ -20,9 +20,9 @@ Every user of the NIO pair follows through declared rows: "words" renames every 
 of a file whose tokens all mean the NIO pair (in-module m3/file users, m3/fs, eclipse optional-jmod, native-api);
 "qualified" renames only jdk.m3.file.M3File(Delta) where a file also uses another M3File (jdk.m3.parser.M3File in the
 parser integration contracts). Each row pins the exact count per token. KEEP lists the users whose only mentions are
-prose and whose bytes an immutable receipt pins (m3/history/verify_m3_handoff.py over
-m3/docs/m3-m3jdk21-eclipse-recipe-handoff-20261022.tsv): they are not edited, and the recipe refuses if a KEEP file
-names the pair outside a comment line. m3/tooling/jdk-naming/RENAME_MAP.tsv records the two path moves and its
+prose and whose bytes an immutable receipt pins (make/m3/history/verify_m3_handoff.py over
+doc/m3/m3-m3jdk21-eclipse-recipe-handoff-20261022.tsv): they are not edited, and the recipe refuses if a KEEP file
+names the pair outside a comment line. make/m3/tooling/jdk-naming/RENAME_MAP.tsv records the two path moves and its
 RECIPE_MEMORY.tsv the pattern (APPEND rows).
 
 Hash-pinned: every move, rename and edit names the git blob of its preimage at BASE_COMMIT. A source must carry the
@@ -47,7 +47,7 @@ from pathlib import Path
 RECIPE = "unify.py"
 VERSION = "v2"
 RECIPE_DIR = Path(__file__).resolve().parent
-RECIPE_DIR_REL = "m3/qualification/file-unify-20261106"
+RECIPE_DIR_REL = "make/m3/qualification/file-unify-20261106"
 BASE_COMMIT = "c4e268d495a0f87ea672f52c2f05c923562f4c04"
 OLD = "m3/ports/file"
 NEW = "m3/file"
@@ -67,10 +67,10 @@ WORDS = tuple((re.compile(r"\b" + old + r"\b"), new) for old, new in RENAMED)
 QUALIFIED = tuple((re.compile(r"\bjdk\.m3\.file\." + old + r"\b"), "jdk.m3.file." + new) for old, new in RENAMED)
 # Users of the NIO pair whose only mentions are prose and whose bytes an immutable receipt pins: never edited.
 KEEP = (
-    (NEW_SRC + "M3FileMoveCandidates.java", "m3/docs/m3-m3jdk21-eclipse-recipe-handoff-20261022.tsv (verify_m3_handoff.py)"),
-    (NEW_SRC + "M3ResourceLocks.java", "m3/docs/m3-m3jdk21-source-successions.tsv (verify_m3_handoff.py)"),
+    (NEW_SRC + "M3FileMoveCandidates.java", "doc/m3/m3-m3jdk21-eclipse-recipe-handoff-20261022.tsv (verify_m3_handoff.py)"),
+    (NEW_SRC + "M3ResourceLocks.java", "doc/m3/m3-m3jdk21-source-successions.tsv (verify_m3_handoff.py)"),
     (NEW + "/src/test/java/jdk/m3/file/M3FileMoveCandidatesContract.java",
-     "m3/docs/m3-m3jdk21-eclipse-recipe-handoff-20261022.tsv (verify_m3_handoff.py)"),
+     "doc/m3/m3-m3jdk21-eclipse-recipe-handoff-20261022.tsv (verify_m3_handoff.py)"),
 )
 PROSE_LINE = re.compile(r"^\s*(?:\*|//|/\*)")
 
@@ -86,13 +86,13 @@ def target_of(rel: str) -> str:
     return NEW + "/" + rel
 
 
-MIGRATION = "m3/tooling/migration-recipes/src/"
+MIGRATION = "make/m3/tooling/migration-recipes/src/"
 PATH_LITERAL = ("m3/ports/file/src/main/java/jdk/m3/file/", "m3/file/src/main/java/jdk/m3/file/")
 WORDS_ALL = "words"
 FS = "m3/fs/src/"
 ECLIPSE = "m3/eclipse/optional-jmod/src/"
-PARSER_IT = "m3/tooling/module-packs/parser/integration/src/test/java/jdk/m3/parser/test/"
-NATIVE_API = "m3/tooling/module-packs/build-support/native-api/"
+PARSER_IT = "make/m3/tooling/module-packs/parser/integration/src/test/java/jdk/m3/parser/test/"
+NATIVE_API = "make/m3/tooling/module-packs/build-support/native-api/"
 FILE_TEST = NEW + "/src/test/java/jdk/m3/file/"
 
 # kind, path (after the moves), preimage blob at BASE_COMMIT, rule note, payload.
@@ -181,8 +181,8 @@ RULES = (
          ("sub", "# m3/ports/file build\n", "# m3/file build\n"),
          ("sub", "`com.m3:m3-ports-file:0.1.0-SNAPSHOT`, Java 21;", "`com.m3:m3-file:0.1.0-SNAPSHOT`, Java 21;"),
          ("sub", "`mvn -f m3/ports/file/pom.xml package`", "`mvn -f m3/file/pom.xml package`"),
-         ("sub", "`mvn -f m3/pom.xml -pl ports/file package` (`ports/file` is a default module of `m3/pom.xml`)",
-          "`mvn -f m3/pom.xml -pl file package` (`file` is a default module of `m3/pom.xml`)"),
+         ("sub", "`mvn -f make/m3/pom.xml -pl ports/file package` (`ports/file` is a default module of `make/m3/pom.xml`)",
+          "`mvn -f make/m3/pom.xml -pl file package` (`file` is a default module of `make/m3/pom.xml`)"),
          ("sub", "`cmake -S m3/ports/file/native -B <build> && cmake --build <build>`",
           "`cmake -S m3/file/src/main/native -B <build> && cmake --build <build>`"),
          ("sub", "`bash m3/ports/file/qualification/m3fmt-shared-lexicon-20261021/verify.sh`",
@@ -198,7 +198,7 @@ RULES = (
          ("sub", "<artifactId>m3-ports-file</artifactId>", "<artifactId>m3-file</artifactId>")]),
     ("EDIT", "m3/search/README.md", "5060ab09ea7088acd3abc7957e95b16acb57cf92", "path string of the loader owner", [
          ("sub", "(m3/ports/file, #2492).", "(m3/file since " + RECIPE_DIR_REL + ", #2492).")]),
-    ("EDIT", "m3/pom.xml", "6d88b5304aa484609dd5c7ef89c4bb07a5dc9bdb",
+    ("EDIT", "make/m3/pom.xml", "6d88b5304aa484609dd5c7ef89c4bb07a5dc9bdb",
      "reactor module ports/file -> file at the same position (after collections, its dependency); preimage re-pinned"
      " at dec547222b30 (#2528 registered compiler/nullness-facts) and at c4e268d495a0 (#2549 intern, #2534 optane)", [
          ("sub", "    <module>ports/file</module>\n", "    <module>file</module>\n")]),
@@ -222,9 +222,9 @@ RULES = (
     ("EDIT", "m3/THIRD_PARTY_NOTICES.md", "2a773f58781c435a5a93f88b4778e13cf063e67d",
      "one attribution line for Apache Commons Text (LevenshteinDistance rolling-row lineage of #2531), wording of"
      " m3/file/NOTICE", [
-         ("sub", "`m3/compatibility/synexia-*-receipt.json` and `m3/docs/name-mapping.d/*.json`. Nothing in this\n"
+         ("sub", "`make/m3/compatibility/synexia-*-receipt.json` and `doc/m3/name-mapping.d/*.json`. Nothing in this\n"
                  "section requires a third-party notice.\n",
-          "`m3/compatibility/synexia-*-receipt.json` and `m3/docs/name-mapping.d/*.json`. Nothing in this\n"
+          "`make/m3/compatibility/synexia-*-receipt.json` and `doc/m3/name-mapping.d/*.json`. Nothing in this\n"
           "section requires a third-party notice.\n\n"
           "Attribution (2026-11-06, `m3/file`): `jdk.m3.file.M3ChunkDeltaGenerator.editDistance`"
           " (`m3/file/recipe/delta-generator-20261106`) adapts the rolling-row recurrence of Apache Commons Text"
@@ -245,12 +245,12 @@ RULES = (
           "        run: bash m3/file/qualification/m3fmt-shared-lexicon-20261021/verify.sh\n")]),
     ("EDIT", ".github/workflows/m3sdk-jmod-receiver.yml", "54cd42d687f3f99c2f817526d5254a9361bb904f", "path trigger", [
          ("sub", "      - 'm3/ports/file/**'\n", "      - 'm3/file/**'\n")]),
-    ("EDIT", "m3/tooling/module-packs/nlp-search/build.py", "442bf36b866e5c36f329f9426f199e8df40c7574",
+    ("EDIT", "make/m3/tooling/module-packs/nlp-search/build.py", "442bf36b866e5c36f329f9426f199e8df40c7574",
      "path strings: module source root and native directory (the INPUTS.json lock keeps its 2026-10-18 inventory)", [
          ("sub", 'root / "m3/ports/file/src/main/java")', 'root / "m3/file/src/main/java")'),
          ("sub", '(root / "m3/ports/file/native").glob("*.c")', '(root / "m3/file/src/main/native").glob("*.c")'),
          ("sub", '"-I" + str(root / "m3/ports/file/native")', '"-I" + str(root / "m3/file/src/main/native")')]),
-    ("EDIT", "m3/tooling/module-packs/nlp-search/README.md", "9d668154c0c35c108d69064038a9c1fcff64f822",
+    ("EDIT", "make/m3/tooling/module-packs/nlp-search/README.md", "9d668154c0c35c108d69064038a9c1fcff64f822",
      "path strings: the module link and the indexed sample path", [
          ("sub", "[`m3/ports/file`](../../../ports/file).", "[`m3/file`](../../../file)."),
          ("sub", "  m3/ports/file/src/main/java/jdk/m3/file/M3File.java\n", "  m3/file/src/main/java/jdk/m3/file/M3File.java\n")]),
@@ -345,11 +345,11 @@ RULES = (
     ("EDIT", ".github/workflows/m3-original-provider-parser-capture-20261026.yml",
      "58e1bed5a1447cee2519d4c0b9e442b45b0a3889", "path of the renamed NIO boundary", [
          ("sub", '            "$file/M3File.java" \\\n', '            "$file/M3NioFile.java" \\\n')]),
-    ("APPEND", "m3/tooling/jdk-naming/RENAME_MAP.tsv", "3c4f0155fa606e178208f0478dd1f4b977dd9d88",
+    ("APPEND", "make/m3/tooling/jdk-naming/RENAME_MAP.tsv", "3c4f0155fa606e178208f0478dd1f4b977dd9d88",
      "the two path moves of the decided name collision",
      NEW_SRC + "M3File.java\t" + NEW_SRC + "M3NioFile.java\n" + NEW_SRC + "M3FileDelta.java\t" + NEW_SRC
      + "M3NioFileDelta.java\n"),
-    ("APPEND", "m3/tooling/jdk-naming/RECIPE_MEMORY.tsv", "1611c8eceaf433c3da367d1c1cb959e605b0f326",
+    ("APPEND", "make/m3/tooling/jdk-naming/RECIPE_MEMORY.tsv", "1611c8eceaf433c3da367d1c1cb959e605b0f326",
      "pattern row SPLIT_PACKAGE_NAME_COLLISION",
      "2026-11-06T12:49:41Z\tjdk_naming.py\tPATTERN:SPLIT_PACKAGE_NAME_COLLISION\tthe rename fe35ea98841 moved the"
      " m3/ports/file package into jdk.m3.file, which m3/file already exported; jdk.m3.file.M3File and"
@@ -616,7 +616,7 @@ def run(root: Path, check: bool) -> int:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--root", default=str(RECIPE_DIR.parents[2]), help="repository root (default: three up)")
+    parser.add_argument("--root", default=str(RECIPE_DIR.parents[3]), help="repository root (default: three up)")
     parser.add_argument("--check", action="store_true", help="write nothing; exit 1 when a run would change a file")
     args = parser.parse_args(argv)
     try:

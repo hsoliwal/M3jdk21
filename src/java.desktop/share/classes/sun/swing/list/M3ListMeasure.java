@@ -59,7 +59,7 @@ import javax.swing.plaf.metal.MetalLabelUI;
  * {@code java.desktop} are required; everything else keeps the stock loop. Cached sizes also
  * require immutable simple text model values: icons and other objects can change their dimensions
  * or text independently of list data events, so they are remeasured. Design and proof:
- * m3/docs/swing-viewport/DESIGN.md section 10.
+ * doc/m3/swing-viewport/DESIGN.md section 10.
  */
 //FLLDCIM: M3 swing-viewport leaf 4 - JList measures only the rows that list data events touched
 public final class M3ListMeasure {

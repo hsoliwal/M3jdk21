@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 /**
  * Compiled regex for chunk cursors: the regex-cursor meta strategy with M3 gates in front and the
- * stock engine last (m3/docs/regex-cursor/DESIGN.md section 3).
+ * stock engine last (doc/m3/regex-cursor/DESIGN.md section 3).
  *
  * <p>Strategy chosen at compile time: {@link #STRATEGY_LITERAL} (pure literal, literal search is
  * the engine), {@link #STRATEGY_DFA} (assertion-free subset: lazy DFA, PikeVM for groups),

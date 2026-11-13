@@ -58,7 +58,7 @@ build and the receiver's original JUnit execution.
 Run this preparation before the runtime qualification phases:
 
 ```sh
-python3 m3/runtime-integration/tornado/build_junit_support.py \
+python3 make/m3/runtime-integration/tornado/build_junit_support.py \
   --repo-root /absolute/M3JDK21 \
   --jdk-home /absolute/jdk21 \
   --maven /absolute/apache-maven-3.9.9/bin/mvn \

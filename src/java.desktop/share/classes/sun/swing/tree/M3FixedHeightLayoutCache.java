@@ -55,7 +55,7 @@ import sun.swing.SwingUtilities2;
  * <p>
  * Selected by {@code BasicTreeUI.createLayoutCache} when {@code isLargeModel()}, the row height is
  * positive and {@code m3.swing.viewport} is {@code true}; off by default. Design and proof:
- * {@code m3/docs/swing-viewport/DESIGN.md} section 7 (M3 TARGET_OWNED_PORT).
+ * {@code doc/m3/swing-viewport/DESIGN.md} section 7 (M3 TARGET_OWNED_PORT).
  */
 //FLLDCIM: M3 swing-viewport leaf 2 - data-oriented FixedHeightLayoutCache, same answers as stock
 public class M3FixedHeightLayoutCache extends FixedHeightLayoutCache {

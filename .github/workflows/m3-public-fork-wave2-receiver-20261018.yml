@@ -3,10 +3,10 @@ name: M3 Public Fork Wave2 Java21 Recipe Proof
 on:
   pull_request:
     paths:
-      - 'm3/compatibility/canonical-wave2-*-20261018.tsv'
-      - 'm3/docs/m3-public-fork-wave2-20261018.md'
+      - 'make/m3/compatibility/canonical-wave2-*-20261018.tsv'
+      - 'doc/m3/m3-public-fork-wave2-20261018.md'
       - '.github/workflows/m3-public-fork-wave2-receiver-20261018.yml'
-      - 'm3/collections/qualification/**'
+      - 'make/m3/collections/qualification/**'
       - 'm3/collections/src/**'
   push:
     branches:
@@ -37,21 +37,21 @@ jobs:
           set -euo pipefail
           mkdir -p /tmp/m3-wave2-recipe-classes
           javac --release 21 -Xlint:all -Werror -d /tmp/m3-wave2-recipe-classes \
-            m3/collections/qualification/m3-counted-sdk-20261017/recipe/src/main/java/jdk/internal/m3/M3CountedSdkRecipe.java \
-            m3/collections/qualification/m3-generic-object-list-20261017/recipe/src/main/java/jdk/internal/m3/M3GenericObjectListRecipe.java \
-            m3/collections/qualification/m3-long-bitmap-algebra-20261017/recipe/src/main/java/jdk/internal/m3/M3LongBitmapFilterPlanRecipe.java \
-            m3/collections/qualification/m3-sdk-provider-names-20261017/recipe/src/main/java/jdk/internal/m3/M3SdkNamesRecipe.java \
-            m3/collections/qualification/m3-linked-list-live-mask-20261017/recipe/src/main/java/jdk/internal/m3/M3LinkedListLiveMaskRecipe.java \
-            m3/collections/qualification/sdk-bulk-capture-20261017/recipe/src/main/java/jdk/internal/m3/M3SdkBulkCaptureRecipe.java \
-            m3/collections/qualification/sdk-mask-bounded-current-20261017/recipe/src/main/java/jdk/internal/m3/M3MaskBoundedCurrentRecipe.java \
-            m3/collections/qualification/m3-sdk-families-20261017/recipe-v3/src/main/java/jdk/internal/m3/M3SdkSortedContractRecipe.java \
-            m3/collections/qualification/m3-long-direct-address-kernel-20261017/recipe/src/main/java/jdk/internal/m3/M3LongDirectAddressKernelRecipe.java \
-            m3/collections/qualification/m3-sdk-families-20261017/recipe/src/main/java/jdk/internal/m3/M3CollectionSdkNamesRecipe.java
+            make/m3/collections/qualification/m3-counted-sdk-20261017/recipe/src/main/java/jdk/internal/m3/M3CountedSdkRecipe.java \
+            make/m3/collections/qualification/m3-generic-object-list-20261017/recipe/src/main/java/jdk/internal/m3/M3GenericObjectListRecipe.java \
+            make/m3/collections/qualification/m3-long-bitmap-algebra-20261017/recipe/src/main/java/jdk/internal/m3/M3LongBitmapFilterPlanRecipe.java \
+            make/m3/collections/qualification/m3-sdk-provider-names-20261017/recipe/src/main/java/jdk/internal/m3/M3SdkNamesRecipe.java \
+            make/m3/collections/qualification/m3-linked-list-live-mask-20261017/recipe/src/main/java/jdk/internal/m3/M3LinkedListLiveMaskRecipe.java \
+            make/m3/collections/qualification/sdk-bulk-capture-20261017/recipe/src/main/java/jdk/internal/m3/M3SdkBulkCaptureRecipe.java \
+            make/m3/collections/qualification/sdk-mask-bounded-current-20261017/recipe/src/main/java/jdk/internal/m3/M3MaskBoundedCurrentRecipe.java \
+            make/m3/collections/qualification/m3-sdk-families-20261017/recipe-v3/src/main/java/jdk/internal/m3/M3SdkSortedContractRecipe.java \
+            make/m3/collections/qualification/m3-long-direct-address-kernel-20261017/recipe/src/main/java/jdk/internal/m3/M3LongDirectAddressKernelRecipe.java \
+            make/m3/collections/qualification/m3-sdk-families-20261017/recipe/src/main/java/jdk/internal/m3/M3CollectionSdkNamesRecipe.java
       - name: Execute all ten temporary-receiver recipe selftests
         shell: bash
         run: |
           set -euo pipefail
-          cp="/tmp/m3-wave2-recipe-classes:m3/collections/qualification/m3-counted-sdk-20261017/recipe/src/main/resources:m3/collections/qualification/m3-generic-object-list-20261017/recipe/src/main/resources:m3/collections/qualification/m3-long-bitmap-algebra-20261017/recipe/src/main/resources:m3/collections/qualification/m3-sdk-provider-names-20261017/recipe/src/main/resources:m3/collections/qualification/m3-linked-list-live-mask-20261017/recipe/src/main/resources:m3/collections/qualification/sdk-bulk-capture-20261017/recipe/src/main/resources:m3/collections/qualification/sdk-mask-bounded-current-20261017/recipe/src/main/resources:m3/collections/qualification/m3-sdk-families-20261017/recipe-v3/src/main/resources:m3/collections/qualification/m3-long-direct-address-kernel-20261017/recipe/src/main/resources:m3/collections/qualification/m3-sdk-families-20261017/recipe/src/main/resources"
+          cp="/tmp/m3-wave2-recipe-classes:make/m3/collections/qualification/m3-counted-sdk-20261017/recipe/src/main/resources:make/m3/collections/qualification/m3-generic-object-list-20261017/recipe/src/main/resources:make/m3/collections/qualification/m3-long-bitmap-algebra-20261017/recipe/src/main/resources:make/m3/collections/qualification/m3-sdk-provider-names-20261017/recipe/src/main/resources:make/m3/collections/qualification/m3-linked-list-live-mask-20261017/recipe/src/main/resources:make/m3/collections/qualification/sdk-bulk-capture-20261017/recipe/src/main/resources:make/m3/collections/qualification/sdk-mask-bounded-current-20261017/recipe/src/main/resources:make/m3/collections/qualification/m3-sdk-families-20261017/recipe-v3/src/main/resources:make/m3/collections/qualification/m3-long-direct-address-kernel-20261017/recipe/src/main/resources:make/m3/collections/qualification/m3-sdk-families-20261017/recipe/src/main/resources"
           java -cp "$cp" jdk.internal.m3.M3CountedSdkRecipe --selftest
           java -cp "$cp" jdk.internal.m3.M3GenericObjectListRecipe --selftest
           java -cp "$cp" jdk.internal.m3.M3LongBitmapFilterPlanRecipe --selftest
@@ -66,7 +66,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          cp="/tmp/m3-wave2-recipe-classes:m3/collections/qualification/m3-counted-sdk-20261017/recipe/src/main/resources:m3/collections/qualification/m3-generic-object-list-20261017/recipe/src/main/resources:m3/collections/qualification/m3-long-bitmap-algebra-20261017/recipe/src/main/resources:m3/collections/qualification/m3-sdk-provider-names-20261017/recipe/src/main/resources:m3/collections/qualification/m3-linked-list-live-mask-20261017/recipe/src/main/resources:m3/collections/qualification/sdk-bulk-capture-20261017/recipe/src/main/resources:m3/collections/qualification/sdk-mask-bounded-current-20261017/recipe/src/main/resources:m3/collections/qualification/m3-sdk-families-20261017/recipe-v3/src/main/resources:m3/collections/qualification/m3-long-direct-address-kernel-20261017/recipe/src/main/resources:m3/collections/qualification/m3-sdk-families-20261017/recipe/src/main/resources"
+          cp="/tmp/m3-wave2-recipe-classes:make/m3/collections/qualification/m3-counted-sdk-20261017/recipe/src/main/resources:make/m3/collections/qualification/m3-generic-object-list-20261017/recipe/src/main/resources:make/m3/collections/qualification/m3-long-bitmap-algebra-20261017/recipe/src/main/resources:make/m3/collections/qualification/m3-sdk-provider-names-20261017/recipe/src/main/resources:make/m3/collections/qualification/m3-linked-list-live-mask-20261017/recipe/src/main/resources:make/m3/collections/qualification/sdk-bulk-capture-20261017/recipe/src/main/resources:make/m3/collections/qualification/sdk-mask-bounded-current-20261017/recipe/src/main/resources:make/m3/collections/qualification/m3-sdk-families-20261017/recipe-v3/src/main/resources:make/m3/collections/qualification/m3-long-direct-address-kernel-20261017/recipe/src/main/resources:make/m3/collections/qualification/m3-sdk-families-20261017/recipe/src/main/resources"
           root="$GITHUB_WORKSPACE"
           java -cp "$cp" jdk.internal.m3.M3LongBitmapFilterPlanRecipe --check "$root"
           java -cp "$cp" jdk.internal.m3.M3LongBitmapFilterPlanRecipe --apply "$root"

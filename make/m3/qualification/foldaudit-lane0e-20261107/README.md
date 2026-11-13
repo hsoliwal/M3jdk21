@@ -29,7 +29,7 @@ No leaf qualifies for RESTORE, so this PR changes no source.
 
 `0890555a47c2` ("merge(superset): preserve conflicting and stacked M3 Java/JNI PR ancestry") has six parents; its tree
 `8b9fd78cca7a` equals its first parent's tree. The #1080 head `6adadadf64ae` is parent 5. The crate
-`m3/runtime-integration/regex-rope-affix-effects` (278 paths on the head) and its sibling crates
+`make/m3/runtime-integration/regex-rope-affix-effects` (278 paths on the head) and its sibling crates
 `regex-mandatory-affixes` (3) and `regex-plan-amalgamation` (5) have 0 paths on master.
 
 ## User decision needed: #2234 (L0017)
@@ -54,5 +54,5 @@ Heads and the defs each carries that master lacks:
 | `19d1d4a91f87` | #650 | `test_directed_related_lexeme_families_round_trip_and_require_input` |
 
 The owner on master (`export-m3-lexicon.py`, 673 lines) has no `load_family_sidecars`; the #627 owner (680 lines) has
-it. Restore the owners (L0403, L0326) first, then these defs, in one `m3/runtime-integration` PR with its own
+it. Restore the owners (L0403, L0326) first, then these defs, in one `make/m3/runtime-integration` PR with its own
 hash-pinned recipe; the test file alone would fail on master.

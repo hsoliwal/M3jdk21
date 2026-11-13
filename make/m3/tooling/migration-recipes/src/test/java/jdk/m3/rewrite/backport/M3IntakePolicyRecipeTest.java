@@ -21,11 +21,11 @@ final class M3IntakePolicyRecipeTest {
             "/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-intake-policy/";
 
     private static final String WORKFLOW = ".github/workflows/m3-intake-policy.yml";
-    private static final String PORTING = "m3/docs/m3jdk21-porting-invariant.md";
-    private static final String DIRECT = "m3/docs/m3-direct-copy-review.tsv";
-    private static final String POLICY = "m3/docs/m3-intake-policy.tsv";
-    private static final String FOSS = "m3/runtime-integration/FOSS_REUSE_DECISION.tsv";
-    private static final String VERIFY = "m3/runtime-integration/verify-m3-intake.py";
+    private static final String PORTING = "doc/m3/m3jdk21-porting-invariant.md";
+    private static final String DIRECT = "doc/m3/m3-direct-copy-review.tsv";
+    private static final String POLICY = "doc/m3/m3-intake-policy.tsv";
+    private static final String FOSS = "make/m3/runtime-integration/FOSS_REUSE_DECISION.tsv";
+    private static final String VERIFY = "make/m3/runtime-integration/verify-m3-intake.py";
 
     @Test
     void exactCurrentMasterPreimagesReplayAndThenReachFixedPoint() {

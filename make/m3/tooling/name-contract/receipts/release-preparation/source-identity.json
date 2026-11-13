@@ -202,7 +202,7 @@
       "sha256": "ae463a91f9ed5268a5330fac27656a8348eaf287b1e84def47da3e4c40036644"
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceRecipe.java",
+      "path": "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceRecipe.java",
       "git_blob_sha1": "92a0a0702c5c45bc22c03d16f3914f91fece41b4",
       "sha256": "31a46d55b7aed55942e602b53b216f9e8e3ef5c0447d74c33ab9aac0cd13d714"
     },

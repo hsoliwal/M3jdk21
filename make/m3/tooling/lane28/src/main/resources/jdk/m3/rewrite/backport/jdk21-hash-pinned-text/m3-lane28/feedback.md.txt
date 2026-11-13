@@ -40,6 +40,6 @@ No blanket native speedup, inferred hardware crossover or complete-JDK pass is
 claimed. The sparse-zero-fill and address opportunities still need measurements.
 
 The port uses the existing Maven/OpenRewrite snapshot engines. Reproduce with
-`mvn -f m3/tooling/lane28/pom.xml verify` in its M3JDK candidate; raw cost logs
+`mvn -f make/m3/tooling/lane28/pom.xml verify` in its M3JDK candidate; raw cost logs
 and `M3Lane28Cost` are retained there. Each future port should emit similarly
 revision-bound feedback; both-side source/target edits require reconciliation.

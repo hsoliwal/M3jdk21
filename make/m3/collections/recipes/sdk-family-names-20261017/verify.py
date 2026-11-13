@@ -4,7 +4,7 @@
 import argparse, hashlib, json, shutil, subprocess, tempfile, xml.etree.ElementTree as ET
 from pathlib import Path
 TASK=Path(__file__).resolve().parent
-ROOT=TASK.parents[3]
+ROOT=TASK.parents[4]
 RES=TASK/'src/main/resources/jdk/internal/m3/rewrite/sdk-family-names-20261017'
 PRODUCT='m3/collections/interop/'
 SOURCE=PRODUCT+'src/main/java/jdk/m3/collections/interop/'

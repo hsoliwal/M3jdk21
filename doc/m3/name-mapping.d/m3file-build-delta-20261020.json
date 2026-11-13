@@ -14,7 +14,7 @@
   "canonical_dataset": "file-content-delta-20261020",
   "canonical_repository": "hsoliwal/com.synexia",
   "verification": "m3/file/verify.py",
-  "build_contract": "m3/docs/build-delta-invariant.md",
+  "build_contract": "doc/m3/build-delta-invariant.md",
   "fork_planner_receivers": "PENDING",
   "full_product_qualification": "PENDING",
   "receiving_sequence_advanced": false,

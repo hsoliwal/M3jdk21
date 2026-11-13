@@ -63,13 +63,13 @@
       "owner": "jdk.internal.mindex.M3Address28",
       "provenance": {
         "copied_code": true,
-        "license": "Apache-2.0; exact source, LICENSE and NOTICE retained under m3/tooling/lane28/donor. Existing JDK licenses retain their scope.",
+        "license": "Apache-2.0; exact source, LICENSE and NOTICE retained under make/m3/tooling/lane28/donor. Existing JDK licenses retain their scope.",
         "publication": "User requested incremental Synexia-to-JDK inlining and evidence-based upstream feedback."
       },
       "reason": "Complete bounded collection kernel in java.base; full-image and automatic JDK consumer admission remain open.",
       "recipe": {
         "id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
-        "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+        "path": "make/m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
         "preconditions": [
           "Explicit absent Java targets and exact source/template/dependency hashes.",
           "Actual OpenRewrite Java/text execution, refusal/fixed-point and sealed custody gates."
@@ -131,11 +131,11 @@
       "tests": [
         {
           "id": "lane28-port",
-          "receipt": "m3/tooling/lane28/evidence/receipt.json"
+          "receipt": "make/m3/tooling/lane28/evidence/receipt.json"
         },
         {
           "id": "lane28-restoration-szf",
-          "receipt": "m3/tooling/lane28/evidence/20261006/receipt.json"
+          "receipt": "make/m3/tooling/lane28/evidence/20261006/receipt.json"
         }
       ]
     },
@@ -203,13 +203,13 @@
       "owner": "jdk.internal.mindex.M3IntLane28",
       "provenance": {
         "copied_code": true,
-        "license": "Apache-2.0; exact source, LICENSE and NOTICE retained under m3/tooling/lane28/donor. Existing JDK licenses retain their scope.",
+        "license": "Apache-2.0; exact source, LICENSE and NOTICE retained under make/m3/tooling/lane28/donor. Existing JDK licenses retain their scope.",
         "publication": "User requested incremental Synexia-to-JDK inlining and evidence-based upstream feedback."
       },
       "reason": "Complete bounded collection kernel in java.base; full-image and automatic JDK consumer admission remain open.",
       "recipe": {
         "id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
-        "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+        "path": "make/m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
         "preconditions": [
           "Explicit absent Java targets and exact source/template/dependency hashes.",
           "Actual OpenRewrite Java/text execution, refusal/fixed-point and sealed custody gates."
@@ -286,11 +286,11 @@
       "tests": [
         {
           "id": "lane28-port",
-          "receipt": "m3/tooling/lane28/evidence/receipt.json"
+          "receipt": "make/m3/tooling/lane28/evidence/receipt.json"
         },
         {
           "id": "lane28-restoration-szf",
-          "receipt": "m3/tooling/lane28/evidence/20261006/receipt.json"
+          "receipt": "make/m3/tooling/lane28/evidence/20261006/receipt.json"
         }
       ]
     },
@@ -358,13 +358,13 @@
       "owner": "jdk.internal.mindex.M3LongLane28",
       "provenance": {
         "copied_code": true,
-        "license": "Apache-2.0; exact source, LICENSE and NOTICE retained under m3/tooling/lane28/donor. Existing JDK licenses retain their scope.",
+        "license": "Apache-2.0; exact source, LICENSE and NOTICE retained under make/m3/tooling/lane28/donor. Existing JDK licenses retain their scope.",
         "publication": "User requested incremental Synexia-to-JDK inlining and evidence-based upstream feedback."
       },
       "reason": "Complete bounded collection kernel in java.base; full-image and automatic JDK consumer admission remain open.",
       "recipe": {
         "id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
-        "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+        "path": "make/m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
         "preconditions": [
           "Explicit absent Java targets and exact source/template/dependency hashes.",
           "Actual OpenRewrite Java/text execution, refusal/fixed-point and sealed custody gates."
@@ -441,11 +441,11 @@
       "tests": [
         {
           "id": "lane28-port",
-          "receipt": "m3/tooling/lane28/evidence/receipt.json"
+          "receipt": "make/m3/tooling/lane28/evidence/receipt.json"
         },
         {
           "id": "lane28-restoration-szf",
-          "receipt": "m3/tooling/lane28/evidence/20261006/receipt.json"
+          "receipt": "make/m3/tooling/lane28/evidence/20261006/receipt.json"
         }
       ]
     },
@@ -526,13 +526,13 @@
       "owner": "jdk.internal.mindex.M3BitLane28",
       "provenance": {
         "copied_code": true,
-        "license": "Apache-2.0; exact source, LICENSE and NOTICE retained under m3/tooling/lane28/donor. Existing JDK licenses retain their scope.",
+        "license": "Apache-2.0; exact source, LICENSE and NOTICE retained under make/m3/tooling/lane28/donor. Existing JDK licenses retain their scope.",
         "publication": "User requested incremental Synexia-to-JDK inlining and evidence-based upstream feedback."
       },
       "reason": "Complete bounded collection kernel in java.base; full-image and automatic JDK consumer admission remain open.",
       "recipe": {
         "id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
-        "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+        "path": "make/m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
         "preconditions": [
           "Explicit absent Java targets and exact source/template/dependency hashes.",
           "Actual OpenRewrite Java/text execution, refusal/fixed-point and sealed custody gates."
@@ -622,11 +622,11 @@
       "tests": [
         {
           "id": "lane28-port",
-          "receipt": "m3/tooling/lane28/evidence/receipt.json"
+          "receipt": "make/m3/tooling/lane28/evidence/receipt.json"
         },
         {
           "id": "lane28-restoration-szf",
-          "receipt": "m3/tooling/lane28/evidence/20261006/receipt.json"
+          "receipt": "make/m3/tooling/lane28/evidence/20261006/receipt.json"
         }
       ]
     },
@@ -693,13 +693,13 @@
       "owner": "jdk.internal.mindex.M3Bits",
       "provenance": {
         "copied_code": true,
-        "license": "Apache-2.0; exact source, LICENSE and NOTICE retained under m3/tooling/lane28/donor. Existing JDK licenses retain their scope.",
+        "license": "Apache-2.0; exact source, LICENSE and NOTICE retained under make/m3/tooling/lane28/donor. Existing JDK licenses retain their scope.",
         "publication": "User requested incremental Synexia-to-JDK inlining and evidence-based upstream feedback."
       },
       "reason": "Complete bounded collection kernel in java.base; full-image and automatic JDK consumer admission remain open.",
       "recipe": {
         "id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
-        "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+        "path": "make/m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
         "preconditions": [
           "Explicit absent Java targets and exact source/template/dependency hashes.",
           "Actual OpenRewrite Java/text execution, refusal/fixed-point and sealed custody gates."
@@ -761,11 +761,11 @@
       "tests": [
         {
           "id": "lane28-port",
-          "receipt": "m3/tooling/lane28/evidence/receipt.json"
+          "receipt": "make/m3/tooling/lane28/evidence/receipt.json"
         },
         {
           "id": "lane28-restoration-szf",
-          "receipt": "m3/tooling/lane28/evidence/20261006/receipt.json"
+          "receipt": "make/m3/tooling/lane28/evidence/20261006/receipt.json"
         }
       ]
     }
@@ -953,7 +953,7 @@
         "reason": "MR adapts completed-work reuse to the existing JDK Matcher lifecycle; exact immutable input and region facts survive same-input reset. Scoped tests pass; complete-image admission remains open.",
         "recipe": {
           "id": "mr-1",
-          "path": "m3/tooling/mr/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv",
+          "path": "make/m3/tooling/mr/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv",
           "preconditions": [
             "Exact current Java preimages; original dependency pins; candidate-only recipe admission."
           ],
@@ -1033,7 +1033,7 @@
         "tests": [
           {
             "id": "mr-local",
-            "receipt": "m3/tooling/mr/evidence/receipt.json"
+            "receipt": "make/m3/tooling/mr/evidence/receipt.json"
           }
         ]
       },
@@ -1230,7 +1230,7 @@
           "algorithm-architecture-idea-reference"
         ],
         "candidate_source": "whole qualified hsoliwal/com.synexia workspace",
-        "canonical_document": "m3/docs/m3jdk21-porting-invariant.md",
+        "canonical_document": "doc/m3/m3jdk21-porting-invariant.md",
         "first_party_rule": "Synexia-original Apache-2.0 material is a target donor candidate; contribution under different target terms requires actual rights and an explicit target-side licensing decision.",
         "generated_output_rule": "A recipe license does not relicense its inputs or outputs; generated postimages must satisfy source provenance and destination licensing.",
         "id": "M3JDK-DONOR-ARTIFACTS-1",
@@ -1344,7 +1344,7 @@
       ],
       "porting_invariant": {
         "authority": "M3JDK21",
-        "canonical_document": "m3/docs/m3jdk21-porting-invariant.md",
+        "canonical_document": "doc/m3/m3jdk21-porting-invariant.md",
         "id": "M3JDK-PORT-1",
         "naming_analogy": "MIndexString -> java.lang.M3String while public java.lang.String remains String",
         "rules": [
@@ -1375,7 +1375,7 @@
       "file": "current/m3/docs/jcc-source-handoff.md",
       "git_blob": "f7991e22d16e01c9d9626add7d6894a1404dc19c",
       "membership": "Actual 090758 readback/reconstructed tree; exact-commit descriptor capture",
-      "path": "m3/docs/jcc-source-handoff.md",
+      "path": "doc/m3/jcc-source-handoff.md",
       "sha256": "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337",
       "status": "EXACT"
     },
@@ -1385,7 +1385,7 @@
       "file": "current/m3/docs/name-mapping.json",
       "git_blob": "44c966eca8e52d8c86925478d5b3ffbb45882e82",
       "membership": "Actual 090758 readback/reconstructed tree; exact-commit descriptor capture",
-      "path": "m3/docs/name-mapping.json",
+      "path": "doc/m3/name-mapping.json",
       "sha256": "e76133a4d1bb472dfc88a41e8d8560d5ac0e08ba4d227b3b6c8fbd95915e6ebc",
       "status": "EXACT"
     },
@@ -1395,7 +1395,7 @@
       "file": "current/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
       "git_blob": "5ed0454b97e046042a6ffce38f29a06776016378",
       "membership": "Actual 090758 readback/reconstructed tree; exact-commit descriptor capture",
-      "path": "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
+      "path": "make/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
       "sha256": "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b",
       "status": "EXACT"
     },
@@ -1405,7 +1405,7 @@
       "file": "current/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
       "git_blob": "375a65a82dd39b5fa278e52472f3a99bdd5c9fdf",
       "membership": "Actual 090758 readback/reconstructed tree; exact-commit descriptor capture",
-      "path": "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
+      "path": "make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
       "sha256": "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126",
       "status": "EXACT"
     }
@@ -1476,7 +1476,7 @@
       "file": "guards/m3/docs/name-mapping.schema.json",
       "git_blob": "40f032174baa2f1c19e3b02686723bc37f37122c",
       "membership": "Actual 090758 readback/reconstructed tree; exact-commit descriptor capture",
-      "path": "m3/docs/name-mapping.schema.json",
+      "path": "doc/m3/name-mapping.schema.json",
       "sha256": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
       "status": "EXACT"
     },
@@ -1486,7 +1486,7 @@
       "file": "guards/m3/migration/migration.py",
       "git_blob": "d976f4a5d7f8983ade85d5d2cf608e3f6b2885d7",
       "membership": "Actual 090758 readback/reconstructed tree; exact-commit descriptor capture",
-      "path": "m3/migration/migration.py",
+      "path": "make/m3/migration/migration.py",
       "sha256": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e",
       "status": "EXACT"
     },
@@ -1496,7 +1496,7 @@
       "file": "guards/m3/migration/recipe.py",
       "git_blob": "02f88f9f8b1eb8930fff59684c81bb30819800ad",
       "membership": "Actual 090758 readback/reconstructed tree; exact-commit descriptor capture",
-      "path": "m3/migration/recipe.py",
+      "path": "make/m3/migration/recipe.py",
       "sha256": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628",
       "status": "EXACT"
     },
@@ -1506,7 +1506,7 @@
       "file": "guards/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
       "git_blob": "3fdc75a71290e2fd1659bfbc7fa532828363275b",
       "membership": "Actual 090758 readback/reconstructed tree; exact-commit descriptor capture",
-      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "path": "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
       "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
       "status": "EXACT"
     },
@@ -1516,7 +1516,7 @@
       "file": "guards/m3/tooling/migration-recipes/pom.xml",
       "git_blob": "e41cf1ce137961fc4f9eef9092acedd06425d33e",
       "membership": "Actual 090758 readback/reconstructed tree; exact-commit descriptor capture",
-      "path": "m3/tooling/migration-recipes/pom.xml",
+      "path": "make/m3/tooling/migration-recipes/pom.xml",
       "sha256": "3eb73bbf38c0c591b8f714f6e9923eaa25a35b5ffc7f0512b8ec7fd3602b5531",
       "status": "EXACT"
     },
@@ -1536,7 +1536,7 @@
       "file": "guards/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
       "git_blob": "f54f1a1e1ac98d3206e65387a629860673fb5d8c",
       "membership": "Actual 090758 readback/reconstructed tree; exact-commit descriptor capture",
-      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+      "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
       "sha256": "8006b173253ea7502efe7f7a77738b65f9df9e2871d4d6c29ff4fb8fb058c8c6",
       "status": "EXACT"
     }
@@ -1631,7 +1631,7 @@
       "reason": "JDK-owned TQ kernel and explicit canonical-backing range bridge. Finite module/JNI qualification is separate from complete-image and automatic regex dispatch admission.",
       "recipe": {
         "id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-tq",
-        "path": "m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
+        "path": "make/m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
         "preconditions": [
           "Explicit ABSENT Java targets, exact template hashes, pinned existing recipe and backing owners.",
           "Actual Java and text recipes execute fixed-point/refusal gates before sealed-install materialization."
@@ -1704,11 +1704,11 @@
       "tests": [
         {
           "id": "tq-port",
-          "receipt": "m3/tooling/tq/evidence/receipt.json"
+          "receipt": "make/m3/tooling/tq/evidence/receipt.json"
         },
         {
           "id": "tq-sync",
-          "receipt": "m3/tooling/tq-sync/evidence/receipt.json"
+          "receipt": "make/m3/tooling/tq-sync/evidence/receipt.json"
         }
       ]
     },
@@ -1767,7 +1767,7 @@
       "reason": "JDK-owned TQ kernel and explicit canonical-backing range bridge. Finite module/JNI qualification is separate from complete-image and automatic regex dispatch admission.",
       "recipe": {
         "id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-tq",
-        "path": "m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
+        "path": "make/m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
         "preconditions": [
           "Explicit ABSENT Java targets, exact template hashes, pinned existing recipe and backing owners.",
           "Actual Java and text recipes execute fixed-point/refusal gates before sealed-install materialization."
@@ -1838,7 +1838,7 @@
       "tests": [
         {
           "id": "tq-port",
-          "receipt": "m3/tooling/tq/evidence/receipt.json"
+          "receipt": "make/m3/tooling/tq/evidence/receipt.json"
         }
       ]
     },

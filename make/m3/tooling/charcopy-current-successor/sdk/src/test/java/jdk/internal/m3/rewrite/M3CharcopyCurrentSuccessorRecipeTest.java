@@ -31,7 +31,7 @@ final class M3CharcopyCurrentSuccessorRecipeTest {
     private static final String OVERFLOW = "test/jdk/java/lang/String/M3StringConcatLengthOverflowTest.java";
     private static final List<String> LEGACY = List.of(
             "src/java.base/share/classes/java/lang/MIndexString.java",
-            "m3/runtime-integration/tests/MIndexStringInvariant.java");
+            "make/m3/runtime-integration/tests/MIndexStringInvariant.java");
     private static final Set<String> PASSED = new LinkedHashSet<>();
     private static int successfulRuns;
     private static int refusedRuns;

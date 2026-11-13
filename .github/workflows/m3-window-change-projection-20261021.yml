@@ -6,8 +6,8 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3WindowPlan.java'
       - 'test/jdk/jdk/m3/collections/M3WindowPlanChangeContract.java'
       - 'test/jdk/jdk/m3/collections/M3WindowPlanChangeTest.java'
-      - 'm3/collections/qualification/window-delta-20261021/**'
-      - 'm3/docs/eclipse-jdk-gap-20261021/**'
+      - 'make/m3/collections/qualification/window-delta-20261021/**'
+      - 'doc/m3/eclipse-jdk-gap-20261021/**'
       - '.github/workflows/m3-window-change-projection-20261021.yml'
   workflow_dispatch:
 

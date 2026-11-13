@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 /** Java 21 standalone differential oracle, reusable by the Maven/JUnit wrapper. */
-//FLLDCIM: RELOCATE - donor blob eefb67e38f65 at ac5feec00a6d; recipe m3/collections/recipe/entryless-lane-kernel-20261106/relocate.py v3
+//FLLDCIM: RELOCATE - donor blob eefb67e38f65 at ac5feec00a6d; recipe make/m3/collections/recipe/entryless-lane-kernel-20261106/relocate.py v3
 public final class IndexMaskLaneKernelProof {
     private IndexMaskLaneKernelProof() { }
     private static int checked;

@@ -7,4 +7,4 @@ METHOD	m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java	86	missing
 METHOD	m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java	110	materializeRollsBackEarlierAddsWhenALaterWriteFails	synexia	m3	122,123
 METHOD	m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java	156	strictCliRequiresManifestRevisionAndCleanTrackedCheckout	synexia	m3	165,166,193,209,225,229,237,246,269,277,300
 METHOD	m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java	307	intermediateSymlinksFailClosedWhenSupported	synexia	m3	317
-METHOD	m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-full-delivery-a3/M3ImportPlanTest.java	417	fixture	synexia	m3	444,445,446,447
+METHOD	make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-full-delivery-a3/M3ImportPlanTest.java	417	fixture	synexia	m3	444,445,446,447

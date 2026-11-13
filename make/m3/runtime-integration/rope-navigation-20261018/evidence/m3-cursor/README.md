@@ -41,7 +41,7 @@ The earlier eager-path and adaptive-path candidates are preserved here, includin
 
 ## Reproduction
 
-Use the installed support directory `m3/runtime-integration/rope-navigation-20261018`, a complete pinned M3 source tree, the SDK-emitted target tree and Java 21. The exact original commands, source hashes, class-load records and sample logs are preserved in the raw bundles. The installed runner SHA256 is `8ea3fb522542f0430e4714294636065446710923305852dcd5a110e6e1c72b69`; benchmark source SHA256 is `bfb53263c24edc292788f8852109477714b1db1fdd4af8691a77cbb3bb631ba2`.
+Use the installed support directory `make/m3/runtime-integration/rope-navigation-20261018`, a complete pinned M3 source tree, the SDK-emitted target tree and Java 21. The exact original commands, source hashes, class-load records and sample logs are preserved in the raw bundles. The installed runner SHA256 is `8ea3fb522542f0430e4714294636065446710923305852dcd5a110e6e1c72b69`; benchmark source SHA256 is `bfb53263c24edc292788f8852109477714b1db1fdd4af8691a77cbb3bb631ba2`.
 
 For a baseline run, set `M3_INPUT` and `M3_SYMBOLS` to the pinned before tree and `M3_EXPECTED_BLOB` to its M3String blob. For the final run, set `M3_INPUT` to the SDK-emitted tree, `M3_SYMBOLS` to the before tree, and `M3_EXPECTED_BLOB` to the final blob. `M3_TEST` points to the final installed test in either run. `M3_OUT` must be a fresh output directory. The original proof used Temurin/OpenJDK 21.0.12.1.
 

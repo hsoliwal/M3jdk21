@@ -4,13 +4,13 @@ name: M3JDK21 backport programme status
 on:
   pull_request:
     paths:
-      - 'm3/backports/JEP_CATALOGUE.tsv'
-      - 'm3/backports/backport_recipe_dag.py'
-      - 'm3/backports/backport_execution_waves.py'
-      - 'm3/backports/backport_programme_status.py'
-      - 'm3/backports/pom.xml'
-      - 'm3/backports/test_backport_programme_status.py'
-      - 'm3/backports/BACKPORT_PROGRAMME_STATUS.md'
+      - 'make/m3/backports/JEP_CATALOGUE.tsv'
+      - 'make/m3/backports/backport_recipe_dag.py'
+      - 'make/m3/backports/backport_execution_waves.py'
+      - 'make/m3/backports/backport_programme_status.py'
+      - 'make/m3/backports/pom.xml'
+      - 'make/m3/backports/test_backport_programme_status.py'
+      - 'make/m3/backports/BACKPORT_PROGRAMME_STATUS.md'
       - '.github/workflows/m3jdk21-backport-programme-status.yml'
   workflow_dispatch:
 
@@ -38,11 +38,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p m3/backports/target
-          python3 m3/backports/backport_programme_status.py \
+          mkdir -p make/m3/backports/target
+          python3 make/m3/backports/backport_programme_status.py \
             --root . \
-            --tsv-out m3/backports/target/backport-programme-status.tsv \
-            --json-out m3/backports/target/backport-programme-status.json
+            --tsv-out make/m3/backports/target/backport-programme-status.tsv \
+            --json-out make/m3/backports/target/backport-programme-status.json
 
       - name: Verify authority-free output
         shell: bash
@@ -51,7 +51,7 @@ jobs:
           python3 - <<'PY'
           import json
           from pathlib import Path
-          path = Path("m3/backports/target/backport-programme-status.json")
+          path = Path("make/m3/backports/target/backport-programme-status.json")
           payload = json.loads(path.read_text(encoding="utf-8"))
           assert payload["schema"] == "M3JDK21_BACKPORT_PROGRAMME_STATUS_V1"
           assert payload["jeps"] > 0
@@ -67,5 +67,5 @@ jobs:
         with:
           name: m3jdk21-backport-programme-status
           path: |
-            m3/backports/target/backport-programme-status.tsv
-            m3/backports/target/backport-programme-status.json
+            make/m3/backports/target/backport-programme-status.tsv
+            make/m3/backports/target/backport-programme-status.json

@@ -15,7 +15,7 @@ TMP="-Djava.io.tmpdir=S:/m3-scratch/eb-conv/m3log/tmp"
 RECEIVER=7c23ff3612ef08dc265bd3bab5461e4dcf3ee47c
 MOD=src/jdk.m3.logging/share/classes
 SOURCES="$MOD/module-info.java $MOD/jdk/m3/logging/M3StructuredFormatter.java $MOD/jdk/m3/logging/package-info.java"
-RECIPE=m3/qualification/restore-jdk-m3-logging-20261107
+RECIPE=make/m3/qualification/restore-jdk-m3-logging-20261107
 mkdir -p "$OUT/head/mods" "$OUT/base/mods" "$OUT/head/test" "$OUT/src7c23" "$OUT/diff" "$OUT/javap" "$OUT/logs"
 WOUT=$(cd "$OUT" && pwd -W 2>/dev/null || pwd)
 
@@ -67,7 +67,7 @@ done
 sha256sum "$OUT"/head/mods/jdk.m3.logging/jdk/m3/logging/M3StructuredFormatter.class "$OUT"/base/mods/jdk.m3.logging/jdk/m3/logging/M3StructuredFormatter.class
 
 echo "GATE jdk_naming (fixed point on the three prefixes)"
-python -I m3/tooling/jdk-naming/jdk_naming.py plan --only src/jdk.m3.logging --only make/modules/jdk.m3.logging \
+python -I make/m3/tooling/jdk-naming/jdk_naming.py plan --only src/jdk.m3.logging --only make/modules/jdk.m3.logging \
     --only test/jdk/jdk/m3/logging
 echo "GATE recipe (--check writes nothing; exit 0 = fixed point)"
 python -I "$RECIPE/apply.py" --check

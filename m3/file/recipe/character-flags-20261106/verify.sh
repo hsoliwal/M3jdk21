@@ -28,6 +28,6 @@ grep -E "BUILD (SUCCESS|FAILURE)|WARNING\].*\.java|ERROR\].*\.java" "$3/file-pac
 grep -q "BUILD SUCCESS" "$3/file-package.log"
 MODULE_REL=$(git -C "$MODULE" rev-parse --show-prefix)
 TARGET_REL=$(awk -F'\t' '$1 == "FILE" {print $3; exit}' "$RECIPE/RELOCATION_MAP.tsv")
-(cd "$ROOT" && "$PY" -I m3/tooling/jdk-naming/jdk_naming.py plan --only "$MODULE_REL$TARGET_REL" \
+(cd "$ROOT" && "$PY" -I make/m3/tooling/jdk-naming/jdk_naming.py plan --only "$MODULE_REL$TARGET_REL" \
     --only "${MODULE_REL}recipe/${RECIPE##*/}/" | tail -n 1)
 bash "$RECIPE/differential.sh" "$3/differential"

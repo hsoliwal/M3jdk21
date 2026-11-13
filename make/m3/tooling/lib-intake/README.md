@@ -36,7 +36,7 @@ The columns are lib, source_dir, mappings, module, version, layer_dir, mop_class
 
 ```bash
 unset MSYS_NO_PATHCONV        # Maven and Windows tools need MSYS path conversion
-JAVA_HOME="C:/Program Files/Java/jdk-21" bash m3/tooling/lib-intake/lib_intake_batch.sh <empty work root> [lib ...]
+JAVA_HOME="C:/Program Files/Java/jdk-21" bash make/m3/tooling/lib-intake/lib_intake_batch.sh <empty work root> [lib ...]
 ```
 
 ## Wave 1
@@ -52,7 +52,7 @@ The JMODs and images are build products and are not committed. Each `runs/<lib>/
 **Next leaves, all as proposals:**
 - the consolidation queues;
 - lowering the refactor baselines with MOP recipes;
-- registering the modules in `m3/tooling/module-packs` for the M3JDK21 image build;
+- registering the modules in `make/m3/tooling/module-packs` for the M3JDK21 image build;
 - more `INTAKE.tsv` rows from the vendored set.
 
 ## Apps
@@ -99,7 +99,7 @@ each consolidation.
 The libraries are JavaEWAH, re2j, fastfilter, pcollections, HdrHistogram (also an app), dec, xz, commonmark,
 commons-codec, jsoup (`requires static jdk.m3.re2j`), snakeyaml, commons-lang3, commons-io, antlr4-runtime, commons-net,
 classgraph (explicit two-root mapping), fastdoubleparser and jackson-core (`requires jdk.m3.fastdoubleparser`).
-`m3/docs/name-mapping.d/lib-intake-<lib>.json` holds 18 name-mapping records, generated from the run ledgers by
+`doc/m3/name-mapping.d/lib-intake-<lib>.json` holds 18 name-mapping records, generated from the run ledgers by
 `name_mapping.py`.
 
 New in the recipe:

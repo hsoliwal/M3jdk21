@@ -29,7 +29,7 @@ jobs:
             test/jdk/jdk/m3/collections
             test/jdk/jdk/internal/m3/collections
             m3/native/include
-            m3/tooling/migration-recipes
+            make/m3/tooling/migration-recipes
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -42,7 +42,7 @@ jobs:
           set -euo pipefail
           mvn -B -ntp \
             -f m3/collections/interop/qualification/m3-guava-row-sorted-table-20261018/pom.xml \
-            "-Dm3.engine.sources=$GITHUB_WORKSPACE/m3/tooling/migration-recipes/src/main/java" \
+            "-Dm3.engine.sources=$GITHUB_WORKSPACE/make/m3/tooling/migration-recipes/src/main/java" \
             clean test
       - name: Build m3/arrays and its JNI library, which the M3 core owners require
         run: mvn -B -ntp -f m3/arrays/pom.xml -Pnative-linux -DskipTests install

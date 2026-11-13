@@ -9,7 +9,7 @@ import org.openrewrite.text.PlainText;
 
 /** Records the optional M3 parallel bulk provider without changing the existing JDK scheduler. */
 public final class M3ParallelBulkBridgeNameMappingRecipe extends Recipe {
-    static final String PATH = "m3/docs/name-mapping.json";
+    static final String PATH = "doc/m3/name-mapping.json";
     static final String MARKER =
             "\"source_family\": \"Synexia/M3JDK reviewed bulk executor plus M3 parallel fabric\"";
     static final String ANCHOR = "\n  ],\n  \"recipe_authority\": {";

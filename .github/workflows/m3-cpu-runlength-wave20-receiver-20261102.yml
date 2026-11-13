@@ -3,7 +3,7 @@ name: M3JDK21 Wave20 original CPU run-length Java21/C17/JNI receiver
 on:
   pull_request:
     paths:
-      - 'm3/tooling/module-packs/cpu-tools/**'
+      - 'make/m3/tooling/module-packs/cpu-tools/**'
       - '.github/workflows/m3-cpu-runlength-wave20-receiver-20261102.yml'
   workflow_dispatch:
 permissions:
@@ -25,7 +25,7 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           import hashlib, re, subprocess
-          home = Path('m3/tooling/module-packs/cpu-tools')
+          home = Path('make/m3/tooling/module-packs/cpu-tools')
           manifest = home / 'refinement-proofs/cpu-structured-wave20-20261102/SOURCE_RECEIPT.tsv'
           rows = manifest.read_text(encoding='utf-8').splitlines()
           expected_header = 'wave\tpath\tpreimage\tsha256_after\tgit_blob_sha1_after\tdonor_role\tadmission'
@@ -42,7 +42,7 @@ jobs:
               if len(cells) != 7: raise RuntimeError('invalid receipt row')
               wave, name, before, after, blob, role, admission = cells
               parts = name.split('/')
-              if (wave not in ('19','20') or not name.startswith('m3/tooling/module-packs/cpu-tools/')
+              if (wave not in ('19','20') or not name.startswith('make/m3/tooling/module-packs/cpu-tools/')
                   or any(p in ('','.','..') for p in parts) or '\\' in name or name in seen):
                   raise RuntimeError('invalid/duplicate canonical path')
               seen.add(name)
@@ -67,8 +67,8 @@ jobs:
                  for wave in ('19','20')):
               raise RuntimeError('91 category rows lost')
           fixed = {
-              'm3/tooling/module-packs/cpu-tools/build.py': '0415ed2fd2e49b6b26bcafc76e13023e2ba14411',
-              'm3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/module-info.java': '7edba36737dff219cf58c7f9707a03cc6d3a44d7',
+              'make/m3/tooling/module-packs/cpu-tools/build.py': '0415ed2fd2e49b6b26bcafc76e13023e2ba14411',
+              'make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/module-info.java': '7edba36737dff219cf58c7f9707a03cc6d3a44d7',
           }
           for path, blob in fixed.items():
               if subprocess.check_output(['git','hash-object','--',path], text=True).strip() != blob:
@@ -91,7 +91,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          R=m3/tooling/module-packs/cpu-tools
+          R=make/m3/tooling/module-packs/cpu-tools
           OUT="$RUNNER_TEMP/m3-wave20-receiver"
           mkdir -p "$OUT/classes" "$OUT/headers" "$OUT/logs"
           javac --release 21 -proc:none -Xlint:all -Werror -h "$OUT/headers" -d "$OUT/classes" \
@@ -108,7 +108,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          R=m3/tooling/module-packs/cpu-tools
+          R=make/m3/tooling/module-packs/cpu-tools
           OUT="$RUNNER_TEMP/m3-wave20-receiver"
           GCC=(gcc -std=c17 -pedantic -Wall -Wextra -Werror -O2 -I "$JAVA_HOME/include" -I "$JAVA_HOME/include/linux")
           "${GCC[@]}" -fPIC -shared "$R/native/m3_runlength_postings.c" -o "$OUT/libm3runlength.so" 2>&1 | tee "$OUT/logs/native-compile.log"

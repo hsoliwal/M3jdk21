@@ -4,7 +4,7 @@ on:
     paths:
       - 'test/jdk/java/lang/String/M3StringRegexNativeBridgeTest.java'
       - 'test/jdk/java/lang/String/M3StringRegexNativeBridgeTest.c'
-      - 'm3/runtime-integration/regex-jni-oracle/**'
+      - 'make/m3/runtime-integration/regex-jni-oracle/**'
       - '.github/workflows/m3-regex-jni-host-oracle.yml'
   workflow_dispatch:
 permissions:
@@ -23,11 +23,11 @@ jobs:
           sparse-checkout: |
             test/jdk/java/lang/String/M3StringRegexNativeBridgeTest.java
             test/jdk/java/lang/String/M3StringRegexNativeBridgeTest.c
-            m3/runtime-integration/regex-jni-oracle/run-host-proof.sh
+            make/m3/runtime-integration/regex-jni-oracle/run-host-proof.sh
           sparse-checkout-cone-mode: false
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '21'
       - name: Compile and execute strict JNI host oracle
-        run: bash m3/runtime-integration/regex-jni-oracle/run-host-proof.sh
+        run: bash make/m3/runtime-integration/regex-jni-oracle/run-host-proof.sh

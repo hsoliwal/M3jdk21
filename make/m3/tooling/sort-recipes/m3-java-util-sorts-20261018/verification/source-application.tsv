@@ -14,11 +14,11 @@ fixed_point_changed_count	0
 target_tree_sha256	2558322dea284d16fedfe332450c1d7d32abfac3a843b153495bce6d61d69c23
 kind	path	preimage	observed_before	postimage	changed
 TEXT	.github/workflows/m3-java-util-sorts-20261018.yml	ABSENT	ABSENT	c7c83e0340c6af8e7862d7b21dd2c8c34d56c2f478957f019c7f668254909ab8	true
-TEXT	m3/docs/name-mapping.d/m3-java-util-sorts.json	ABSENT	ABSENT	cc11cfa3ed9f575a7b0eef72f1a0b3fedbe92e0c70bd5e7d5fd53d694f079644	true
-TEXT	m3/docs/sorting/README.md	ABSENT	ABSENT	617ff12e313dbcc416def50abd6766d07cceef3fe475a92dac75c3567fb9e51c	true
-TEXT	m3/docs/sorting/USAGE.md	ABSENT	ABSENT	1a1cb2513886124f76547d8c47768b5d09a0f878d86b3f0cd796618824276490	true
-TEXT	m3/docs/sorting/algorithms.tsv	ABSENT	ABSENT	fdd13991d79f91091b7633983e1dedaff2896aef7f308c5af9b9df9297d8b7a1	true
-TEXT	m3/verification/sorting/verify.py	ABSENT	ABSENT	96e4ed9e928691bf26353d051b3bd219772133dd571a0382877ae6d60dbd0a5f	true
+TEXT	doc/m3/name-mapping.d/m3-java-util-sorts.json	ABSENT	ABSENT	cc11cfa3ed9f575a7b0eef72f1a0b3fedbe92e0c70bd5e7d5fd53d694f079644	true
+TEXT	doc/m3/sorting/README.md	ABSENT	ABSENT	617ff12e313dbcc416def50abd6766d07cceef3fe475a92dac75c3567fb9e51c	true
+TEXT	doc/m3/sorting/USAGE.md	ABSENT	ABSENT	1a1cb2513886124f76547d8c47768b5d09a0f878d86b3f0cd796618824276490	true
+TEXT	doc/m3/sorting/algorithms.tsv	ABSENT	ABSENT	fdd13991d79f91091b7633983e1dedaff2896aef7f308c5af9b9df9297d8b7a1	true
+TEXT	make/m3/verification/sorting/verify.py	ABSENT	ABSENT	96e4ed9e928691bf26353d051b3bd219772133dd571a0382877ae6d60dbd0a5f	true
 JAVA	src/java.base/share/classes/java/util/M3ComparisonSorts.java	ABSENT	ABSENT	26d2607b568822c589076c5f8eebb8b9cf970dd5f082eb587aea04d2311b9540	true
 JAVA	src/java.base/share/classes/java/util/M3DistributionSorts.java	ABSENT	ABSENT	0f8a3d4205b0e25319cfe1e8ef3ab066727f8c713fbcca7413b7c3a806dbbdf9	true
 JAVA	src/java.base/share/classes/java/util/M3SortContext.java	ABSENT	ABSENT	ca8ac207624e1965532d4c09a00b0abe8cc8e10721fd736290c2a200a9c44239	true

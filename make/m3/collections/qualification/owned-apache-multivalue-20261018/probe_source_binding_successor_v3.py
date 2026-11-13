@@ -12,7 +12,7 @@ import subprocess
 import sys
 
 HERE = Path(__file__).resolve().parent
-PREFIX = "m3/collections/qualification/owned-apache-multivalue-20261018/"
+PREFIX = "make/m3/collections/qualification/owned-apache-multivalue-20261018/"
 SEALED = "9432e17d44f32a6b672484ec6e63f28221b3422722f48db9a809fa663921c5c4"
 
 def main() -> None:
@@ -21,7 +21,7 @@ def main() -> None:
     parser.add_argument("--work", type=Path, required=True)
     parser.add_argument("--jar", type=Path, required=True)
     args = parser.parse_args()
-    root = (args.root if args.root is not None else HERE.parents[3]).resolve()
+    root = (args.root if args.root is not None else HERE.parents[4]).resolve()
     work = args.work.resolve()
     if args.work.is_symlink() or work.is_relative_to(root) or work.exists():
         raise ValueError("use a new explicit work directory outside the source checkout")

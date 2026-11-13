@@ -6,7 +6,7 @@ from hashlib import sha256
 from pathlib import Path
 import sys
 
-ROOT = Path(__file__).resolve().parents[4]
+ROOT = Path(__file__).resolve().parents[5]
 EXPECTED = {
     "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java":
         "9ec03f9f01b6bfdfbc6f76ce320422d8599f56119a0e317a21904452a615e256",
@@ -35,9 +35,9 @@ for claim in ["private Entry<K, V> storedEntry(Object key)",
     if claim not in write:
         sys.exit("M3_STORED_REP_RECEIVER_FAIL deleted mutable atom=" + claim)
 METADATA = {
-    "m3/collections/verify_donation.py":
+    "make/m3/collections/verify_donation.py":
         "66a0483ff0c6ca11ad83f20fa02162e7960dc516089314d697ab456dcbcca133",
-    "m3/collections/recipe/stored-representative-20261017/manifest.tsv":
+    "make/m3/collections/recipe/stored-representative-20261017/manifest.tsv":
         "4558799d12aa2ac5dd8789af591beb8789da632c93ad9020681062d10e664931"
 }
 for name, expected in METADATA.items():

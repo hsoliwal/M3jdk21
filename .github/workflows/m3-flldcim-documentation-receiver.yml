@@ -5,7 +5,7 @@ on:
     paths:
       - 'm3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HierarchicalDocumentation*.java'
       - 'm3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3HierarchicalDocumentation*.java'
-      - 'm3/docs/m3-flldcim-receiver-*'
+      - 'doc/m3/m3-flldcim-receiver-*'
       - '.github/workflows/m3-flldcim-documentation-receiver.yml'
   workflow_dispatch:
 permissions:
@@ -32,6 +32,6 @@ jobs:
           git diff --check
           mkdir -p "$RUNNER_TEMP/m3-doc"
           javac --release 21 -Xlint:all -Werror -d "$RUNNER_TEMP/m3-doc" \
-            m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HierarchicalDocumentation.java \
-            m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3HierarchicalDocumentationSelfTest.java
+            make/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HierarchicalDocumentation.java \
+            make/m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3HierarchicalDocumentationSelfTest.java
           java -cp "$RUNNER_TEMP/m3-doc" jdk.internal.m3.rewrite.M3HierarchicalDocumentationSelfTest

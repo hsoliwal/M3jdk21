@@ -21,7 +21,7 @@ import org.junit.jupiter.api.io.TempDir;
  * Owning-module test of the restored receiver ledger query (fold-close audit leaf L0054, PR #1084): the restored
  * catalogue.tsv is read whole, a literal query returns exactly its matching rows, and malformed rows or arguments refuse.
  */
-//FLLDCIM: MRL - fold-close audit leaf L0054: NEW test of this recipe (the origin shipped no test of the main); recipe m3/collections/qualification/foldaudit-collections-20261107/apply.py v1
+//FLLDCIM: MRL - fold-close audit leaf L0054: NEW test of this recipe (the origin shipped no test of the main); recipe make/m3/collections/qualification/foldaudit-collections-20261107/apply.py v1
 final class CountedCatalogueTest {
     private static final String LEDGER = "counts/catalogue.tsv";
 

@@ -12,7 +12,7 @@ m2="$HOME/.m2/repository"
 junit=${JUNIT_JAR:-"$m2/org/junit/platform/junit-platform-console-standalone/1.11.4/junit-platform-console-standalone-1.11.4.jar"}
 agent=${JACOCO_AGENT:-"$m2/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar"}
 cli=${JACOCO_CLI:-"$m2/org/jacoco/org.jacoco.cli/0.8.15/org.jacoco.cli-0.8.15-nodeps.jar"}
-tools="$wt/m3/tooling/jdk-superset/viewport-swing"
+tools="$wt/make/m3/tooling/jdk-superset/viewport-swing"
 win() { cygpath -m "$1"; }
 lst="$out/reach/listener"; ana="$out/reach/analyzer"; data="$out/reach/exec"
 rm -rf "$out/reach"; mkdir -p "$lst/META-INF/services" "$ana" "$data"

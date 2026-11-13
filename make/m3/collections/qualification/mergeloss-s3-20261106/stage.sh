@@ -18,6 +18,6 @@ g "$M:m3/collections/src/main/c/m3maskviewport.c" native/master_m3maskviewport.c
 g "d0cec9717801b9f81f308053dd1648ba43a25af9:m3/collections/src/main/c/m3maskviewport.c" native/d0cec971780_m3maskviewport.c
 g "3f4e51ad80a3c3664b532b16f7c905ce5b1d07ba:m3/collections/src/main/c/m3maskviewport.c" native/3f4e51ad80a_m3maskviewport.c
 g "$M:m3/collections/src/test/native/m3_mask_viewport_regions.c" native/m3_mask_viewport_regions.c
-g "$M:m3/qualification/retained-twins-core-lanes-20261106/held/$J/M3MaskViewportNative.java" held/jdk/m3/collections/M3MaskViewportNative.java
+g "$M:make/m3/qualification/retained-twins-core-lanes-20261106/held/$J/M3MaskViewportNative.java" held/jdk/m3/collections/M3MaskViewportNative.java
 cp "$OUT/master/jdk/m3/collections/M3MaskViewportKernel.java" "$OUT/held/jdk/m3/collections/"
 echo "staged $(find "$OUT" -type f | wc -l) files"

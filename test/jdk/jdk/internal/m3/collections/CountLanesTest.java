@@ -9,7 +9,7 @@ import java.util.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-//FLLDCIM: MRL - fold-close audit leaf L0166: ADD from PR #1084 head 6b16a20dcedf blob 6d1e3be27b43, ancestry-only landing b42ab7605b86 (tree == first parent); recipe m3/collections/qualification/foldaudit-collections-20261107/apply.py v1
+//FLLDCIM: MRL - fold-close audit leaf L0166: ADD from PR #1084 head 6b16a20dcedf blob 6d1e3be27b43, ancestry-only landing b42ab7605b86 (tree == first parent); recipe make/m3/collections/qualification/foldaudit-collections-20261107/apply.py v1
 //FLLDCIM: MRL - MAPPED: the origin counts/ module has no pom on master; the file joins the real module tree
 final class CountLanesTest {
     //FLLDCIM: MRL - the origin refused to run without the count library; on master the Java path runs always, the native path when the property names the library, and -Dm3.test.native.required=true restores the refusal

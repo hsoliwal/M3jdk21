@@ -3,7 +3,7 @@ from pathlib import Path
 from datetime import datetime
 import ast, hashlib, json, re, xml.etree.ElementTree as ET
 B=Path('/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04');R=B/'overlay';V=B/'verification-v3';O=B/'execution-review-v3';S=O/'inputs'
-P='m3/tooling/migration-recipes';C=R/P/'src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005';SOURCE='0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8';ROOT='0361e4a07b77a01df170523033fef01c4052ddc5';SEAL='0aa1f4a3e080c36d233066f0a6e1dc8e1047e6f0592dba60829b8cca3177df64'
+P='make/m3/tooling/migration-recipes';C=R/P/'src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005';SOURCE='0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8';ROOT='0361e4a07b77a01df170523033fef01c4052ddc5';SEAL='0aa1f4a3e080c36d233066f0a6e1dc8e1047e6f0592dba60829b8cca3177df64'
 def load(p):return json.loads(Path(p).read_text())
 def identity(p):
  p=Path(p);assert p.is_file() and not p.is_symlink(),str(p);d=p.read_bytes();return {'path':str(p),'bytes':len(d),'sha256':hashlib.sha256(d).hexdigest(),'git_blob_sha1':hashlib.sha1(f'blob {len(d)}\0'.encode()+d).hexdigest(),'mode':oct(p.stat().st_mode&0o777)}
@@ -68,7 +68,7 @@ for run in receipt['runs']:
  for stream in ('stdout','stderr'):check(run[stream]['path'],run[stream]);snapshot(run[stream]['path'])
  summary.append({'id':name,'exit_code':run['exit_code'],'stdout_sha256':run['stdout']['sha256'],'stderr_sha256':run['stderr']['sha256']})
 assert previous_end<=datetime.fromisoformat(invocation['finished_utc'])
-python=receipt['toolchain']['python'];installer=str(R/'m3/migration/recipe.py');args=['--plan',str(C/'plan.json'),'--root',str(R)]
+python=receipt['toolchain']['python'];installer=str(R/'make/m3/migration/recipe.py');args=['--plan',str(C/'plan.json'),'--root',str(R)]
 expected_installer={ids[0]:('check','before',0),ids[3]:('apply','after',4),ids[4]:('apply','after',0),ids[5]:('rollback','before',4),ids[6]:('apply','after',4),ids[7]:('check','after',0)}
 installer_observed=[]
 for run in receipt['runs']:
@@ -83,11 +83,11 @@ assert xmlbytes==(pom.parent/'target/surefire-reports/TEST-jdk.m3.rewrite.backpo
 java=(R/P/'src/test/java/jdk/m3/rewrite/backport/JccSourceRecoveryHandoffTest.java').read_text();expected_methods=re.findall(r'@Test\s+void\s+(\w+)\(',java);cases=suite.findall('testcase');assert len(cases)==12 and {r.attrib['name'] for r in cases}==set(expected_methods)
 assert not suite.findall('.//failure') and not suite.findall('.//error') and not suite.findall('.//skipped');assert all(r.attrib['classname']==suite.attrib['name'] for r in cases)
 properties={r.attrib['name']:r.attrib['value'] for r in suite.findall('./properties/property')};assert properties['java.version']=='21.0.2' and properties['java.home']==receipt['toolchain']['jdk'] and properties['file.encoding']=='UTF-8'
-pythonrun=receipt['runs'][2];testpath=R/'m3/migration/test/test_jcc_source_recovery_handoff_packet.py';assert pythonrun['command']==[python,'-B',str(testpath)] and pythonrun['stdout']['bytes']==0
+pythonrun=receipt['runs'][2];testpath=R/'make/m3/migration/test/test_jcc_source_recovery_handoff_packet.py';assert pythonrun['command']==[python,'-B',str(testpath)] and pythonrun['stdout']['bytes']==0
 pyast=ast.parse(testpath.read_text());expected_python=[n.name for c in pyast.body if isinstance(c,ast.ClassDef) for n in c.body if isinstance(n,ast.FunctionDef) and n.name.startswith('test_')];pythonerr=Path(pythonrun['stderr']['path']).read_text();observed_python=re.findall(r'^(test_\w+) \(__main__\..*\) \.\.\. ok$',pythonerr,re.M);assert len(observed_python)==len(expected_python)==6 and set(observed_python)==set(expected_python);assert re.search(r'^Ran 6 tests in [0-9.]+s\n\nOK\n$',pythonerr,re.M)
 assert receipt['python_tests']==6 and receipt['python_refusal_checks']==(8+14+14+4+4)*3==132
 for run,mode,code in [(receipt['runs'][8],'validate',0),(receipt['runs'][9],'complete',2)]:
- assert run['command']==[python,str(R/'m3/migration/migration.py'),mode,str(R),'--previous',str(C/'before00-name-mapping.json.txt')] and run['exit_code']==code
+ assert run['command']==[python,str(R/'make/m3/migration/migration.py'),mode,str(R),'--previous',str(C/'before00-name-mapping.json.txt')] and run['exit_code']==code
  assert Path(run['stdout']['path']).read_text()=='MIGRATION_MANIFEST_VALID completion=INCOMPLETE\n'
 assert receipt['runs'][8]['stderr']['bytes']==0
 reasons=Path(receipt['runs'][9]['stderr']['path']).read_text();assert 'full source tree inventory is incomplete' in reasons and 'm3.jcc-recipe-laboratory: blocked' in reasons and 'm3.jcc-java-jni-regression: blocked' in reasons

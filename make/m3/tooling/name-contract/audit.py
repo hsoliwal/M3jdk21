@@ -15,9 +15,9 @@ from pathlib import Path
 import re
 import sys
 
-ROOT = Path(__file__).resolve().parents[3]
-MAP = "m3/docs/name-mapping.json"
-PLAN = "m3/tooling/name-contract/name-plan.json"
+ROOT = Path(__file__).resolve().parents[4]
+MAP = "doc/m3/name-mapping.json"
+PLAN = "make/m3/tooling/name-contract/name-plan.json"
 FQN = re.compile(r"^[A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*)+$")
 JAVA_DECL = re.compile(r"\b(?:class|interface|enum|record|@interface)\s+([\w$]+)\b")
 FIELDS = ("mapping_id", "record_state", "module", "target_path", "declared_symbol", "path_refs", "result")

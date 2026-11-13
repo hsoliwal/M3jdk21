@@ -2,7 +2,7 @@
  * SPDX-License-Identifier: Apache-2.0
  * Source lineage: jdk.internal.m3.indexstring.MIndexPrefixZ at
  * 73978088621dc70f5021befafa443f7e622b517e (Apache-2.0).
- * See m3/docs/name-mapping.json and m3/migration/docs/RESUME.md.
+ * See doc/m3/name-mapping.json and make/m3/migration/docs/RESUME.md.
  */
 package jdk.m3.algorithm;
 

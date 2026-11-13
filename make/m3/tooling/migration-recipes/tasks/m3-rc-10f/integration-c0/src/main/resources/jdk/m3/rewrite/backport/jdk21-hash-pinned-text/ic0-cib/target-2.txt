@@ -5,9 +5,9 @@ on:
     branches:
       - "m3/recover-jep458-current-master-v2-20261003"
     paths:
-      - "m3/backports/recipes/jep-458-current/**"
-      - "m3/tooling/migration-recipes/**"
-      - "m3/tooling/backport-dag/**"
+      - "make/m3/backports/recipes/jep-458-current/**"
+      - "make/m3/tooling/migration-recipes/**"
+      - "make/m3/tooling/backport-dag/**"
       - "make/CompileInterimLangtools.gmk"
       - "src/java.base/share/classes/module-info.java"
       - "src/java.base/share/classes/sun/launcher/resources/launcher.properties"
@@ -18,9 +18,9 @@ on:
       - ".github/workflows/m3-jep458-current-master.yml"
   pull_request:
     paths:
-      - "m3/backports/recipes/jep-458-current/**"
-      - "m3/tooling/migration-recipes/**"
-      - "m3/tooling/backport-dag/**"
+      - "make/m3/backports/recipes/jep-458-current/**"
+      - "make/m3/tooling/migration-recipes/**"
+      - "make/m3/tooling/backport-dag/**"
       - "make/CompileInterimLangtools.gmk"
       - "src/java.base/share/classes/module-info.java"
       - "src/java.base/share/classes/sun/launcher/resources/launcher.properties"
@@ -48,26 +48,26 @@ jobs:
 
       - name: Prove exact current-master recipe replay and fixed point
         run: |
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3Jep458BackportRecipeTest test
+          mvn -B -ntp -f make/m3/tooling/migration-recipes/pom.xml             -Dtest=M3Jep458BackportRecipeTest test
 
       - name: Build and install the complete DAG dependency reactor
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f m3/pom.xml -pl tooling/backport-dag -am install
+          mvn -B -ntp -f make/m3/pom.xml -pl tooling/backport-dag -am install
 
       - name: Validate exact JEP 458 packet and atom evidence
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=jdk.m3.tooling.dag.M3BackportPacketMain             -Dexec.args="$PWD/m3/backports/recipes/jep-458-current/packet.tsv $PWD/m3/backports/recipes/jep-458-current/atom-evidence.tsv"             exec:java
+          mvn -B -ntp -f make/m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=jdk.m3.tooling.dag.M3BackportPacketMain             -Dexec.args="$PWD/make/m3/backports/recipes/jep-458-current/packet.tsv $PWD/make/m3/backports/recipes/jep-458-current/atom-evidence.tsv"             exec:java
 
       - name: Project exact packet to Camel Airflow and Drools
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p target/jep458-projection
-          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=jdk.m3.tooling.dag.M3OrchestrationProjectionMain             -Dexec.args="$PWD/m3/backports/recipes/jep-458-current/packet.tsv $PWD/target/jep458-projection $PWD/m3/backports/recipes/jep-458-current/atom-evidence.tsv"             exec:java
+          mvn -B -ntp -f make/m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=jdk.m3.tooling.dag.M3OrchestrationProjectionMain             -Dexec.args="$PWD/make/m3/backports/recipes/jep-458-current/packet.tsv $PWD/target/jep458-projection $PWD/make/m3/backports/recipes/jep-458-current/atom-evidence.tsv"             exec:java
           test -s target/jep458-projection/M3BackportRoutes.java
           test -s target/jep458-projection/m3_backport_dag.py
           test -s target/jep458-projection/m3_backport_rules.drl

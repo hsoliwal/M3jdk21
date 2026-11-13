@@ -11,10 +11,10 @@
   <name>M3JDK21 Maven control reactor</name>
 
   <modules>
-    <module>indexdb</module>
-    <module>fs</module>
-    <module>m3-import</module>
-    <module>m3-import/pure-int-recipe-custody</module>
+    <module>../../m3/indexdb</module>
+    <module>../../m3/fs</module>
+    <module>../../m3/m3-import</module>
+    <module>../../m3/m3-import/pure-int-recipe-custody</module>
     <module>tooling/migration-recipes</module>
     <module>tooling/m3jdk-a3-recipes</module>
     <module>tooling/a3</module>
@@ -22,82 +22,82 @@
     <module>tooling/recipe-agent-api</module>
     <module>backports</module>
     <module>tooling/module-packs</module>
-    <module>arrays</module>
-    <module>collections</module>
-    <module>paradigm</module>
-    <module>intern</module>
-    <module>file</module>
-    <module>compiler</module>
-    <module>ports/collections</module>
-    <module>native</module>
-    <module>llm</module>
-    <module>algorithms</module>
-    <module>lexicon/receiver</module>
-    <module>optane</module>
+    <module>../../m3/arrays</module>
+    <module>../../m3/collections</module>
+    <module>../../m3/paradigm</module>
+    <module>../../m3/intern</module>
+    <module>../../m3/file</module>
+    <module>../../m3/compiler</module>
+    <module>../../m3/ports/collections</module>
+    <module>../../m3/native</module>
+    <module>../../m3/llm</module>
+    <module>../../m3/algorithms</module>
+    <module>../../m3/lexicon/receiver</module>
+    <module>../../m3/optane</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: eclipse/core-runtime WIRED (gate gate-eclipse-core-runtime, GATES.tsv) -->
-    <module>eclipse/core-runtime</module>
+    <module>../../m3/eclipse/core-runtime</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: eclipse/framework WIRED (gate gate-eclipse-framework, GATES.tsv) -->
-    <module>eclipse/framework</module>
+    <module>../../m3/eclipse/framework</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: migration WIRED (gate gate-migration, GATES.tsv) -->
     <module>migration</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: lexicon/hf-intake WIRED (gate gate-lexicon-hf-intake, GATES.tsv) -->
-    <module>lexicon/hf-intake</module>
+    <module>../../m3/lexicon/hf-intake</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/capability-runtime WIRED (gate gate-ports-capability-runtime, GATES.tsv) -->
-    <module>ports/capability-runtime</module>
+    <module>../../m3/ports/capability-runtime</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/precompute WIRED (gate gate-ports-precompute, GATES.tsv) -->
-    <module>ports/precompute</module>
+    <module>../../m3/ports/precompute</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/indexstring WIRED (gate gate-ports-indexstring, GATES.tsv) -->
-    <module>ports/indexstring</module>
+    <module>../../m3/ports/indexstring</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/parallel WIRED (gate gate-ports-parallel, GATES.tsv) -->
-    <module>ports/parallel</module>
+    <module>../../m3/ports/parallel</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/vcpu WIRED (gate gate-ports-vcpu, GATES.tsv) -->
-    <module>ports/vcpu</module>
+    <module>../../m3/ports/vcpu</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/regex-cursor WIRED (gate gate-ports-regex-cursor, GATES.tsv) -->
-    <module>ports/regex-cursor</module>
+    <module>../../m3/ports/regex-cursor</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: runtime-integration/primitive-address-identity WIRED (gate gate-runtime-integration-primitive-address-identity, GATES.tsv) -->
     <module>runtime-integration/primitive-address-identity</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: runtime-integration/regex-precompute WIRED (gate gate-runtime-integration-regex-precompute, GATES.tsv) -->
     <module>runtime-integration/regex-precompute</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 a4: collections/gc-interop WIRED (gate gate-collections-gc-interop, GATES.tsv) -->
-    <module>collections/gc-interop</module>
+    <module>../../m3/collections/gc-interop</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 a4: collections/interop WIRED (gate gate-collections-interop, GATES.tsv) -->
-    <module>collections/interop</module>
+    <module>../../m3/collections/interop</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 a4: collections/signal-codegen WIRED (gate gate-collections-signal-codegen, GATES.tsv) -->
-    <module>collections/signal-codegen</module>
+    <module>../../m3/collections/signal-codegen</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/swing-viewport WIRED (gate gate-ports-swing-viewport, GATES.tsv) -->
-    <module>ports/swing-viewport</module>
+    <module>../../m3/ports/swing-viewport</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/jfx-viewport WIRED (gate gate-ports-jfx-viewport, GATES.tsv) -->
-    <module>ports/jfx-viewport</module>
+    <module>../../m3/ports/jfx-viewport</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: history WIRED (gate gate-history, GATES.tsv) -->
     <module>history</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ast WIRED (gate gate-ast, GATES.tsv) -->
-    <module>ast</module>
+    <module>../../m3/ast</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/parallel-bulk WIRED (gate gate-ports-parallel-bulk, GATES.tsv) -->
-    <module>ports/parallel-bulk</module>
+    <module>../../m3/ports/parallel-bulk</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/compiletime WIRED (gate gate-ports-compiletime, GATES.tsv) -->
-    <module>ports/compiletime</module>
+    <module>../../m3/ports/compiletime</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 a4: collections/pcollections WIRED (gate gate-collections-pcollections, GATES.tsv) -->
-    <module>collections/pcollections</module>
+    <module>../../m3/collections/pcollections</module>
   </modules>
 
   <profiles>
     <profile>
       <id>m3fs-eclipse</id>
       <modules>
-        <module>eclipse/filesystem</module>
+        <module>../../m3/eclipse/filesystem</module>
       </modules>
     </profile>
     <profile>
       <id>m3-extended</id>
       <modules>
-        <module>search</module>
-        <module>viewport-core</module>
+        <module>../../m3/search</module>
+        <module>../../m3/viewport-core</module>
       </modules>
     </profile>
     <profile>
       <id>m3-tornado</id>
       <modules>
-        <module>ports/tornadovm-bulk</module>
+        <module>../../m3/ports/tornadovm-bulk</module>
       </modules>
     </profile>
     <profile>

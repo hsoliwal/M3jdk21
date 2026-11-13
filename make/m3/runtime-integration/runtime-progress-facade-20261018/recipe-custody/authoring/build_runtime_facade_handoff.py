@@ -17,7 +17,7 @@ import json
 OLD_PREFIX = "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017"
 NEW_PREFIX = "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018"
 PUBLIC_OLD = "m3/arrays/qualification/empty-segments-20261017/recipe-custody"
-PUBLIC_NEW = "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody"
+PUBLIC_NEW = "make/m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody"
 OLD_POM = "4c90faaa9e64aebeeba14fb2196731c6334293781d0fdcafbf190f2f5662eb7d"
 NEW_POM = "2658882451ec25f1ff3ebaea743a8934aa1221db023777537636439dafa6b1e1"
 PARSER_JAR = "bc5fef92a854c72e8706fc58f545a8ac3e9e4395a052b50810366b94869aef52"

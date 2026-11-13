@@ -23,17 +23,17 @@ def main():
     assert ident(a.original.read_bytes())['gitBlob']==current['historicalBaseline']['manifestGit']
     transition=None;receiver_transitions=[]
     if a.declared_transition is not None:
-        v1='m3/tooling/joined-range-directory/current-module/COMPOSITION_BINDING.json'
-        v2='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V2.json'
-        v3='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V3.json'
-        v4='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V4.json'
-        v5='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V5.json'
-        v6='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V6.json'
-        v7='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V7.json'
-        v8='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V8.json'
-        v9='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V9.json'
-        v10='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V10.json'
-        v11='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V11.json'
+        v1='make/m3/tooling/joined-range-directory/current-module/COMPOSITION_BINDING.json'
+        v2='make/m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V2.json'
+        v3='make/m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V3.json'
+        v4='make/m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V4.json'
+        v5='make/m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V5.json'
+        v6='make/m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V6.json'
+        v7='make/m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V7.json'
+        v8='make/m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V8.json'
+        v9='make/m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V9.json'
+        v10='make/m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V10.json'
+        v11='make/m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V11.json'
         allowed={v1:'1a827ea287629995ee0eb62cd2ffa35d3c0b48c680b67da592cb0a37305d0853',
                  v2:'0f7c12d9f170c0290db4a114dc3f32d2e08af9090b9be14d86b2e46576899afd',
                  v3:'819b65189f71f0776ca85bdf05bd1cc92494a0a661e67e10a30ea529f4839364',
@@ -76,7 +76,7 @@ def main():
                 'm3/core/test/FoundationTest.java'})
             if name in (v8,v9,v10):expected_paths.add('m3/core/src/jdk/m3/text/M3PrecomputePayload.java')
             if name==v11:expected_paths={
-                'm3/build.sh',
+                'make/m3/build.sh',
                 'm3/core/src/jdk/m3/text/JoinedM3StringPiece.java',
                 'm3/core/src/jdk/m3/text/M3BigString.java',
                 'm3/core/src/jdk/m3/text/M3PrecomputePayload.java',

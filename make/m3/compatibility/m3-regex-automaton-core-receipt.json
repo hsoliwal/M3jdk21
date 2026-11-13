@@ -59,9 +59,9 @@
     {"path": "test/jdk/java/util/regex/M3ChunkCursorTest.java", "before": "ABSENT", "after": "c67c253b47c0485a10f12d5ed4717341caca1277f41d9ab75443a19a8f637799", "resource": "07-M3ChunkCursorTest.java.txt"}
   ],
   "receiverCopy": {
-    "descriptor": "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-regex-automaton-core.yml",
+    "descriptor": "make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-regex-automaton-core.yml",
     "descriptorSha256": "53ba907b04200352818b4bd1913bd7237789ac6e6ced8e5944fc4fd53bd3e2c1",
-    "manifest": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-regex-automaton-core/manifest.tsv",
+    "manifest": "make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-regex-automaton-core/manifest.tsv",
     "manifestSha256": "7ff7dd94422024b7cd140e87cbbd16f70be6bbedc4db4854dc24c4fbf3d44888",
     "identity": "byte-identical to the Synexia crate resources at 583bb4ecdef2 (diff -r empty)"
   },

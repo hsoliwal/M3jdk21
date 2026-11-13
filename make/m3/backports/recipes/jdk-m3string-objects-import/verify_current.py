@@ -38,7 +38,7 @@ def verify(source: bytes) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[4])
+    parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[5])
     args = parser.parse_args()
     verify((args.root / RELATIVE).read_bytes())
     print("PASS: exact M3StringSearchPrecompute import-only postimage")

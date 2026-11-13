@@ -67,7 +67,7 @@ final class JccMergeMappingRecoveryV04Test {
     private static final String INPUT_EPOCH_SHA256 = "4fd3b3bd4fb09759d8bb02ca9ba45d0b2934625f24bcc4ae195f3e49394dff70";
     private static final String SOURCE_HISTORY = "becb01f90bda8302b25592c3705fc35c7a250676";
     private static final String RECEIVER_HISTORY = "946fd922c1d878e3f32309c83d132057a7ef8451";
-    private static final String TEXT_OWNER = "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/"
+    private static final String TEXT_OWNER = "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/"
             + "M3Jdk21HashPinnedTextSnapshotRecipe.java";
     private static final String TEXT_OWNER_SHA256 = "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795";
     private static final String PRIOR_MAP_SHA256 = "abfc59de62d46f6442b95717ac367461ab057cd74ed9dfffc6515d7fb0a1574c";
@@ -85,29 +85,29 @@ final class JccMergeMappingRecoveryV04Test {
     private record Guard(String path, String hash) {}
     // Resource numbering follows bind_mapping.PATHS; manifest and plan order is tested separately.
     private static final List<Target> TARGETS = List.of(
-            new Target("m3/docs/name-mapping.json", "before-00.txt", "after-00.txt",
+            new Target("doc/m3/name-mapping.json", "before-00.txt", "after-00.txt",
                     "e76133a4d1bb472dfc88a41e8d8560d5ac0e08ba4d227b3b6c8fbd95915e6ebc",
                     "23113e94eba0ac7b745fd8dee95d27fa80fc12100534a32f447c3124879c5e39"),
-            new Target("m3/docs/jcc-source-handoff.md", "before-01.txt", "after-01.txt",
+            new Target("doc/m3/jcc-source-handoff.md", "before-01.txt", "after-01.txt",
                     "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337",
                     "975d986ae5883e2851e39373705d7691d0aa74e6e7be3af47a75093c1ffe46dc"),
-            new Target("m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
+            new Target("make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
                     "before-02.txt", "after-02.txt",
                     "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126",
                     "73b3b5bd60eff1c1a904bd96517309067a9a93832060b63fa19c0c826e10630d"),
-            new Target("m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
+            new Target("make/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
                     "before-03.txt", "after-03.txt",
                     "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b",
                     "0cba435844da64936b50f039ebe12ffaa56fa39a3f86f20206c6d0874e61050c"));
     private static final List<Guard> GUARDS = List.of(
-            new Guard("m3/docs/name-mapping.schema.json", "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b"),
-            new Guard("m3/migration/migration.py", "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e"),
-            new Guard("m3/migration/recipe.py", "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"),
+            new Guard("doc/m3/name-mapping.schema.json", "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b"),
+            new Guard("make/m3/migration/migration.py", "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e"),
+            new Guard("make/m3/migration/recipe.py", "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"),
             new Guard(TEXT_OWNER, TEXT_OWNER_SHA256),
-            new Guard("m3/tooling/migration-recipes/pom.xml", "3eb73bbf38c0c591b8f714f6e9923eaa25a35b5ffc7f0512b8ec7fd3602b5531"),
+            new Guard("make/m3/tooling/migration-recipes/pom.xml", "3eb73bbf38c0c591b8f714f6e9923eaa25a35b5ffc7f0512b8ec7fd3602b5531"),
             new Guard("src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
                     "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67"),
-            new Guard("m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/"
+            new Guard("make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/"
                     + "jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
                     "8006b173253ea7502efe7f7a77738b65f9df9e2871d4d6c29ff4fb8fb058c8c6"));
 
@@ -515,7 +515,7 @@ final class JccMergeMappingRecoveryV04Test {
         JsonNode oldBindings = JSON.readTree(classpath(HISTORY + "history-0016.txt"));
         assertEquals(oldBindings.path("source_execution"), epochs.get(1).path("source_execution"));
         assertEquals(oldBindings.path("source_publication"), epochs.get(1).path("source_publication"));
-        assertEquals("m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/"
+        assertEquals("make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/"
                 + "jcc-source-recovery-handoff-20261005/after02-source-destination-bindings.json.txt",
                 epochs.get(1).path("binding_resource").asText());
         JsonNode recovery = bindings.path("merge_recovery");
@@ -526,7 +526,7 @@ final class JccMergeMappingRecoveryV04Test {
         assertEquals("4990edbf4ba4afaa14e0ba2d7613331c31e21e9e", recovery.path("donor_catalogue_history").path("source_commit").asText());
         assertEquals(DESTINATION, recovery.path("current_input").asText());
         assertEquals(DESTINATION_ROOT, recovery.path("current_input_root").asText());
-        assertEquals("m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-input-epoch-v04.json",
+        assertEquals("make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-input-epoch-v04.json",
                 recovery.path("current_input_epoch").asText());
         assertEquals(INPUT_EPOCH_SHA256, recovery.path("current_input_epoch_sha256").asText());
         JsonNode qualifiedInput = recovery.path("previous_qualified_input");
@@ -682,7 +682,7 @@ final class JccMergeMappingRecoveryV04Test {
         assertEquals(packet.path("execution_summary"), after.path("source_execution").path("summary"));
         assertBoolean(after.path("source_execution").path("source_export_admitted"), false);
         assertBoolean(after.path("source_execution").path("destination_gates_passed"), false);
-        assertEquals("m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/source-publication-input-v04.json",
+        assertEquals("make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/source-publication-input-v04.json",
                 after.path("merge_recovery").path("source_publication_input").asText());
         String earlier = resource("before-01.txt");
         String prose = resource("after-01.txt");

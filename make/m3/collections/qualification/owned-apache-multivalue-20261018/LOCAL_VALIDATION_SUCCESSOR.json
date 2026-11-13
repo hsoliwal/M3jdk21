@@ -317,35 +317,35 @@
         "passed": true
       },
       {
-        "case": "byte-drift:m3/collections/qualification/owned-apache-multivalue-20261018/SDK_HISTORICAL_7020.java.txt",
+        "case": "byte-drift:make/m3/collections/qualification/owned-apache-multivalue-20261018/SDK_HISTORICAL_7020.java.txt",
         "expectedRefusal": true,
         "optimized": false,
         "returncode": 1,
         "passed": true
       },
       {
-        "case": "byte-drift:m3/collections/qualification/owned-apache-multivalue-20261018/SDK_SOURCE_BINDING_SUCCESSOR_V3.json",
+        "case": "byte-drift:make/m3/collections/qualification/owned-apache-multivalue-20261018/SDK_SOURCE_BINDING_SUCCESSOR_V3.json",
         "expectedRefusal": true,
         "optimized": false,
         "returncode": 1,
         "passed": true
       },
       {
-        "case": "byte-drift:m3/collections/qualification/owned-apache-multivalue-20261018/SOURCE_QUALIFICATION_V2.json",
+        "case": "byte-drift:make/m3/collections/qualification/owned-apache-multivalue-20261018/SOURCE_QUALIFICATION_V2.json",
         "expectedRefusal": true,
         "optimized": false,
         "returncode": 1,
         "passed": true
       },
       {
-        "case": "byte-drift:m3/collections/qualification/owned-apache-multivalue-20261018/source-provenance.json",
+        "case": "byte-drift:make/m3/collections/qualification/owned-apache-multivalue-20261018/source-provenance.json",
         "expectedRefusal": true,
         "optimized": false,
         "returncode": 1,
         "passed": true
       },
       {
-        "case": "byte-drift:m3/collections/qualification/owned-apache-multivalue-20261018/verify.py",
+        "case": "byte-drift:make/m3/collections/qualification/owned-apache-multivalue-20261018/verify.py",
         "expectedRefusal": true,
         "optimized": false,
         "returncode": 1,

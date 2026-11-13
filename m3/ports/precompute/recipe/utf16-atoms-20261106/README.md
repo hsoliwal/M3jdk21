@@ -33,7 +33,7 @@ javac/JUnit/standalone proofs executed, no Maven/OpenRewrite replay); here they 
 | recipe | `relocate.py` v1 (`RELOCATE_UTF16_ATOMS`): `python -I m3/ports/precompute/recipe/utf16-atoms-20261106/relocate.py --donor-git <clone> --donor-rev <rev> [--check]` |
 | map | `RELOCATION_MAP.tsv`: 6 `FILE` rows (two donor files split in two targets each), `PACKAGE com.synexia.m3.proof -> jdk.m3.precompute`, 4 `TYPE` rows, 2 `QUALIFIED` rows, 32 `MEMBER` rows, 4 `IMPORT` rows, `EXTERNAL org.junit.jupiter.api` |
 | provenance | `PROVENANCE.tsv`: donor commit, blob sha, donor sha256, target sha256, members, `body_match`, `type_renames` per target |
-| naming | `python -I m3/tooling/jdk-naming/jdk_naming.py apply --only m3/ports/precompute/`: 0 moves, 0 rewrites, 0 refusals, fixed point |
+| naming | `python -I make/m3/tooling/jdk-naming/jdk_naming.py apply --only m3/ports/precompute/`: 0 moves, 0 rewrites, 0 refusals, fixed point |
 
 The recipe rewrites only the license header (M3JDK style), the `package` line, the import block (mapped, filtered to
 what a split half uses, extended by the `IMPORT` rows), type names (`QUALIFIED` then `TYPE` rows) and inserts one

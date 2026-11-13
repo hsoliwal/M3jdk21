@@ -38,7 +38,7 @@ FAILED (errors=1)
 
 ## follow-up (owner decision 2026-11-09): queued op m3.prefix-z types follow the rename; V2 arrays live-successor receipt
 PLAN_OP m3.prefix-z -> jdk.m3.algorithm.PrefixZ jdk.m3.algorithms.PrefixZ
-V2 m3/tooling/name-contract/receipts/release-preparation/arrays-live-successor-v2.json b28cf5fd243ca9883c22a4d3291dc9779f9437da 8eb4cb45cda28664fc8caecc5ce67f56eed8377c7474338570b4dd6f55fed6c7
+V2 make/m3/tooling/name-contract/receipts/release-preparation/arrays-live-successor-v2.json b28cf5fd243ca9883c22a4d3291dc9779f9437da 8eb4cb45cda28664fc8caecc5ce67f56eed8377c7474338570b4dd6f55fed6c7
 VERIFY updated
 M3JDK21_NAME_RECEIVER_PASS queued=4 mappingIDs=synexia.counterpart.MIndexClass,synexia.collections.SegmentedAddress28,m3.prefix-z,m3.collections.evicting-queue.owner-naming qualifiedJdkPromotions=0 productSourceEdits=0
 check exit=0

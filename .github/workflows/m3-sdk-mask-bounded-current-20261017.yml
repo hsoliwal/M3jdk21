@@ -8,7 +8,7 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexMaskWindow.java'
       - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_window.c'
       - 'test/jdk/jdk/m3/collections/M3BudgetedMaskWindowContract.java'
-      - 'm3/collections/qualification/sdk-mask-bounded-current-20261017/**'
+      - 'make/m3/collections/qualification/sdk-mask-bounded-current-20261017/**'
       - '.github/workflows/m3-sdk-mask-bounded-current-20261017.yml'
   workflow_dispatch:
 permissions:
@@ -31,10 +31,10 @@ jobs:
           java-version: '21'
           cache: maven
       - name: Maven recipe, fixed point and refusal
-        run: mvn -B -ntp -f m3/collections/qualification/sdk-mask-bounded-current-20261017/recipe/pom.xml verify
+        run: mvn -B -ntp -f make/m3/collections/qualification/sdk-mask-bounded-current-20261017/recipe/pom.xml verify
       - name: Check the installed two postimages
         run: |
-          java -cp m3/collections/qualification/sdk-mask-bounded-current-20261017/recipe/target/classes \
+          java -cp make/m3/collections/qualification/sdk-mask-bounded-current-20261017/recipe/target/classes \
             jdk.internal.m3.M3MaskBoundedCurrentRecipe --check "$PWD"
       - name: Java21 real owner and JNI strict compile
         shell: bash
@@ -60,7 +60,7 @@ jobs:
             jdk.m3.collections.M3BudgetedMaskWindowContract --native
           java -ea -Xcheck:jni -Djava.library.path="$RUNNER_TEMP/no-library" \
             -cp "$RUNNER_TEMP/m3-classes" jdk.m3.collections.M3BudgetedMaskWindowContract --missing
-          cp m3/collections/qualification/sdk-mask-bounded-current-20261017/recipe/src/main/resources/jdk/internal/m3/m3_index_mask_window.c.before.txt "$RUNNER_TEMP/m3-oldnative/old_window.c"
+          cp make/m3/collections/qualification/sdk-mask-bounded-current-20261017/recipe/src/main/resources/jdk/internal/m3/m3_index_mask_window.c.before.txt "$RUNNER_TEMP/m3-oldnative/old_window.c"
           gcc -std=c17 -O2 -Wall -Wextra -Werror -pedantic -fPIC -shared \
             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" -include "$javahdr" \
             "$RUNNER_TEMP/m3-oldnative/old_window.c" \

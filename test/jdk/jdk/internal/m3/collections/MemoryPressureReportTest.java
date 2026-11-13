@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /** Direct JVM proof: Xmx/current heap are observed, not passed by the programmer. */
-//FLLDCIM: RELOCATE - donor blob f8abd3252b7b at 165ceb5a0202; recipe m3/collections/recipe/residency-paged-array-20261107/relocate.py v4
+//FLLDCIM: RELOCATE - donor blob f8abd3252b7b at 165ceb5a0202; recipe make/m3/collections/recipe/residency-paged-array-20261107/relocate.py v4
 public final class MemoryPressureReportTest {
     private MemoryPressureReportTest() { }
 

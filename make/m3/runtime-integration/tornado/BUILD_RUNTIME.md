@@ -146,7 +146,7 @@ does not relicense those files.
 Use the same options for each ordered phase:
 
 ```sh
-python3 m3/runtime-integration/tornado/build_runtime.py \
+python3 make/m3/runtime-integration/tornado/build_runtime.py \
   --repo-root /absolute/M3JDK21 \
   --jdk-home /absolute/source-built-m3jdk \
   --m3jdk-receipt /absolute/m3-jdk-source-build.json \

@@ -22,7 +22,7 @@ perfc=$5
 oracle=$6
 jbin=${M3_GATE_JDK:-"C:/Program Files/Java/jdk-21"}/bin
 clean=${M3_JIT_CLEAN:-1}
-lane=$repo/m3/tooling/jdk-superset/hashing
+lane=$repo/make/m3/tooling/jdk-superset/hashing
 logs=$out/$variant
 mkdir -p "$logs"
 run="--patch-module java.base=$patch --add-opens java.base/jdk.internal.m3.hash=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED"

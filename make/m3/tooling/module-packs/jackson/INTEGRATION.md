@@ -224,7 +224,7 @@ is parsed into a second reflection or type-resolution engine.
 To build and exercise the optional compiler JMOD after the runtime pack:
 
 ```sh
-python3 m3/tooling/module-packs/jackson/compiler-build.py \
+python3 make/m3/tooling/module-packs/jackson/compiler-build.py \
   --jdk-home /path/to/jdk21 --repo-root . \
   --jars /new/jackson-proof/jars --out /new/jackson-compiler-proof
 ```

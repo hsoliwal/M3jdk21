@@ -7,7 +7,7 @@ Scheme: modules and exported packages jdk.m3.<area>; internal packages jdk.inter
 jdk.internal.m3.*; Synexia* -> M3*; synexia-* -> m3-*; SYNEXIA_* -> M3_*. Legacy recipe code is renamed and kept
 (absorb by rename), not deleted. Untouched: copyright, SPDX and license lines; references to the hsoliwal/com.synexia
 repository (dependencies, removed by the standalone work, not renamed); documentation and lineage (Markdown, TSV
-ledgers, provenance and evidence JSON, NOTICE/LICENSE, m3/docs, release audits).
+ledgers, provenance and evidence JSON, NOTICE/LICENSE, doc/m3, release audits).
 
 plan: every tracked path gets its renamed path (refused on collision); every in-scope text file gets its rewrite
 count per rule. apply: moves plus rewrites, only when the plan has no refusal and every in-scope file is checked out
@@ -39,7 +39,7 @@ from pathlib import Path
 # conformance/). Ordered: the first matching rule rewrites a token; earlier rules are more specific. Paths are renamed
 # by the same rules (renamed_path), so a reference in text and the file it names always agree (pass 1 had separate
 # path rules that accepted _synexia_ after an underscore while the text rules needed \b: files moved, their callers
-# did not; 17 workflows called m3/compatibility/check_synexia_*.py after the move: PATH_TEXT_AGREEMENT).
+# did not; 17 workflows called make/m3/compatibility/check_synexia_*.py after the move: PATH_TEXT_AGREEMENT).
 # No rule renames the bare word Synexia: it names the donor project in attribution and lineage prose ("Adapted from
 # Synexia MIndexRegexTrigramQuery", "No Synexia runtime dependency", a GPL modification notice) and renaming it would
 # make those statements false; identifiers never keep it. Copyright and SPDX lines are kept whole; dependencies are
@@ -49,7 +49,7 @@ from pathlib import Path
 RULES_FILE = Path(__file__).with_name("NAMING_RULES.tsv")
 # every path move of the tree-mode apply, so the old path of any file stays mapped to its new one (reseal.py maps
 # the digests the same way in RENAME_RESEAL.tsv)
-RENAME_MAP = "m3/tooling/jdk-naming/RENAME_MAP.tsv"
+RENAME_MAP = "make/m3/tooling/jdk-naming/RENAME_MAP.tsv"
 MAP_HEADER = b"path_before\tpath_after"
 
 
@@ -84,8 +84,8 @@ DOC_SUFFIXES = {".md", ".tsv", ".rst", ".adoc", ".html", ".log", ".patch"}
 DOC_NAMES = {"NOTICE", "LICENSE", "COPYRIGHT", "AUTHORS", "THIRD_PARTY_NOTICES"}
 LINEAGE_HINTS = ("provenance", "evidence", "receipt", "manifest", "SOURCE_SHA256", "FINAL_", "readback")
 # files that define Synexia patterns on purpose: this recipe and the standalone check (renaming them blinds the check)
-SELF_PREFIX = "m3/tooling/jdk-naming/"
-SELF = {"m3/release/check_standalone.py", "m3/release/test_check_standalone.py"}
+SELF_PREFIX = "make/m3/tooling/jdk-naming/"
+SELF = {"make/m3/release/check_standalone.py", "make/m3/release/test_check_standalone.py"}
 
 
 # files outside this recipe that name Synexia/com.m3 on purpose (user decision 2026-11-08: an explicit KEEP list,
@@ -128,7 +128,7 @@ def tracked(root: Path) -> list[str]:
 def is_lineage(path: str) -> bool:
     p = Path(path)
     suffixes = {"." + part for part in p.name.lower().split(".")[1:]}  # x.log.txt is a log
-    return (suffixes & DOC_SUFFIXES or p.name in DOC_NAMES or path.startswith(("m3/docs/", "m3/release/audit-"))
+    return (suffixes & DOC_SUFFIXES or p.name in DOC_NAMES or path.startswith(("doc/m3/", "make/m3/release/audit-"))
             or "/evidence/" in path or "/receipts/" in path or "/surefire-reports/" in path
             or p.name.startswith("TEST-") and p.suffix.lower() == ".xml"
             or p.suffix.lower() == ".json" and any(h.lower() in path.lower() for h in LINEAGE_HINTS))

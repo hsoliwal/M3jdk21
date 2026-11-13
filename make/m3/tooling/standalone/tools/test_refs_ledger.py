@@ -3,7 +3,7 @@
 # Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
 """Tests for REFS_LEDGER v2 and for the LINEAGE_LEDGER_REF v1 consumers it introduced.
 
-Run from the repository root: python3 -m unittest -v m3/tooling/standalone/tools/test_refs_ledger.py
+Run from the repository root: python3 -m unittest -v make/m3/tooling/standalone/tools/test_refs_ledger.py
 """
 from __future__ import annotations
 
@@ -18,8 +18,8 @@ import unittest
 from pathlib import Path
 
 TOOLS = Path(__file__).resolve().parent
-REPO = TOOLS.parents[3]
-LEDGER = REPO / "m3" / "tooling" / "standalone" / "LINEAGE_SOURCES.tsv"
+REPO = TOOLS.parents[4]
+LEDGER = REPO / "make" / "m3" / "tooling" / "standalone" / "LINEAGE_SOURCES.tsv"
 LEDGER_KEY = "synexia"
 WORKFLOWS = REPO / ".github" / "workflows"
 PORT = REPO / "m3" / "ports" / "collections"
@@ -211,12 +211,12 @@ class LineageLedgerTest(unittest.TestCase):
 
     def test_jep493_receiver_step_reads_the_ledger(self):
         self.check_receiver_step("m3-jep493-runtime-image-materialize.yml",
-                                 "m3/backports/recipes/jep-493-runtime-image/WORKFLOW_VALIDATOR_RECEIVER.tsv")
+                                 "make/m3/backports/recipes/jep-493-runtime-image/WORKFLOW_VALIDATOR_RECEIVER.tsv")
 
     def test_jep485_receiver_step_reads_the_ledger(self):
         # the j485 receiver lacks its field/value header (pre-existing); the step logic is tested on a headed copy
         self.check_receiver_step("m3-jep485-stream-gatherers.yml",
-                                 "m3/backports/recipes/j485/WORKFLOW_VALIDATOR_RECEIVER.tsv")
+                                 "make/m3/backports/recipes/j485/WORKFLOW_VALIDATOR_RECEIVER.tsv")
 
 
 if __name__ == "__main__":

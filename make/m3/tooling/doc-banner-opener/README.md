@@ -12,12 +12,12 @@ line 1 matches `^/\*{3,}$` and line 2 starts with ` * Copyright (c) 20..` and na
 unchanged. `--check` is the fixed-point gate: it exits 1 while any file still matches.
 
 ```sh
-python3 m3/tooling/doc-banner-opener/tools/doc_banner_opener.py --check src/jdk.m3*   # gate
-python3 m3/tooling/doc-banner-opener/tools/doc_banner_opener.py src/jdk.m3*           # apply
+python3 make/m3/tooling/doc-banner-opener/tools/doc_banner_opener.py --check src/jdk.m3*   # gate
+python3 make/m3/tooling/doc-banner-opener/tools/doc_banner_opener.py src/jdk.m3*           # apply
 ```
 
 The two generators that emitted the old opener now emit the new one:
-- `m3/collections/qualification/array-map-fill-20261031/templates/ARRAY_MAP.java.tmpl`
-- the `HEADER` literal in `m3/collections/qualification/stale-contracts-20261106/apply.py`
+- `make/m3/collections/qualification/array-map-fill-20261031/templates/ARRAY_MAP.java.tmpl`
+- the `HEADER` literal in `make/m3/collections/qualification/stale-contracts-20261106/apply.py`
 
 Doclint and `-Werror` stay fully on. Run the recipe again after any intake that brings in new banner files.

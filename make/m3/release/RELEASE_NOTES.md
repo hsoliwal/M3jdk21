@@ -62,7 +62,7 @@ retain their original source pins and cannot fill these current-source rows.
 | Gate | Producer |
 | --- | --- |
 | `RIGHTS_AND_LICENSE_BOUNDARY`, `SOURCE_TREE_AND_UPSTREAM_BASELINE`, `RELEASE_CLAIMS_VALIDATION`, `PROOF_PACK_SHA256` | `verify_release_admission.py` (local or `m3-first-release-admission.yml` job `contract`) |
-| `M3_FOUNDATION_TESTS` | `bash ./m3/build.sh` (job `foundation`) |
+| `M3_FOUNDATION_TESTS` | `bash ./make/m3/build.sh` (job `foundation`) |
 | `PRECOMPUTE_JAVA_DIFFERENTIAL` | `mvn -B -ntp -f m3/ports/precompute/pom.xml test` (job `precompute`) |
 | `PRECOMPUTE_JNI_NATIVE_PARITY` | `mvn -B -ntp -f m3/ports/precompute/pom.xml -Pnative test` (job `precompute`) |
 | `OPENJDK_SANITY_MATRIX` | `.github/workflows/main.yml` (OpenJDK GHA Sanity Checks), CI only |
@@ -208,9 +208,9 @@ Recompute build, test and coverage evidence against the final candidate commit a
 | Surface | Required producer / evidence | Preparation disposition |
 | --- | --- | --- |
 | Naming and canonical target census | `name-contract/check.py`, `audit.py --strict`, and all `test_*.py` in that directory | Executed on the candidate text/source snapshot; no installed-image claim |
-| Release tooling | All `m3/release/test_*.py` | Executed on candidate tooling and isolated fixture repositories |
+| Release tooling | All `make/m3/release/test_*.py` | Executed on candidate tooling and isolated fixture repositories |
 | Canonical transformation | Existing Synexia source-sealed recipe and real SDK replay/fixed-point/refusal tests | Separate execution receipt required for final receiving bytes |
-| Immutable text foundation | `bash ./m3/build.sh` at the exact final candidate | NOT RUN by this preparation; current-source receipt required |
+| Immutable text foundation | `bash ./make/m3/build.sh` at the exact final candidate | NOT RUN by this preparation; current-source receipt required |
 | Precompute Java parity | `mvn -B -ntp -f m3/ports/precompute/pom.xml test` | NOT RUN by this preparation; current-source receipt required |
 | Precompute JNI/native parity | Same POM with `-Pnative test`, matched OS/architecture/toolchain | NOT RUN by this preparation; platform-specific receipt required |
 | String UTF-16 contract | Source-built M3JDK image, affected String/jtreg/VM tests | PENDING; no dedicated first-release workflow producer bound to `STRING_UTF16_CONTRACT` |
@@ -228,7 +228,7 @@ upgrade gates are listed in `claim_upgrade_gates`.
 
 | Contract claim | State | Upgrade requires |
 | --- | --- | --- |
-| `java_lang_string_backed_by_m3_string` | NOT_CLAIMED. `m3/README.md`: the P0 foundation does not modify `java.lang.String`. | product build, relevant jtreg, interpreter/C1/C2, GC matrix, CDS, UTF-16 and unpaired-surrogate contract, substring/equals/hash/compare/intern contract |
+| `java_lang_string_backed_by_m3_string` | NOT_CLAIMED. `make/m3/README.md`: the P0 foundation does not modify `java.lang.String`. | product build, relevant jtreg, interpreter/C1/C2, GC matrix, CDS, UTF-16 and unpaired-surrogate contract, substring/equals/hash/compare/intern contract |
 | `full_regex_precompute` | NOT_CLAIMED | 10,000+ regex cases against the `java.util.regex` oracle, cold vs warm, sealed cache keys, invalidation and corruption refusal, JNI parity where used |
 | `full_jtreg_compatibility` | NOT_CLAIMED | a recorded jtreg run on a built image |
 | `performance_superiority_over_openjdk21` | NOT_CLAIMED | same-host A/B against the exact baseline with raw data ([spec](BENCHMARK_AND_COMPATIBILITY_SPEC.md)) |
@@ -264,9 +264,9 @@ performed by this preparation. No pending-gate publication is admitted here.
 
 First-party M3/Synexia expression retains Apache-2.0 and
 Copyright 2026 Hitesh Soliwal and contributors. See
-[LICENSE-M3-APACHE-2.0.txt](../../LICENSE-M3-APACHE-2.0.txt),
-[M3-SYNEXIA-NOTICE.md](../../M3-SYNEXIA-NOTICE.md), and
-[M3-SYNEXIA-RIGHTS.md](../../M3-SYNEXIA-RIGHTS.md). OpenJDK-derived source and
+[LICENSE-M3-APACHE-2.0.txt](../../../LICENSE-M3-APACHE-2.0.txt),
+[M3-SYNEXIA-NOTICE.md](../../../M3-SYNEXIA-NOTICE.md), and
+[M3-SYNEXIA-RIGHTS.md](../../../M3-SYNEXIA-RIGHTS.md). OpenJDK-derived source and
 patch data retain the applicable GPL-2.0/Classpath Exception terms; recipe
 licensing does not relicense their output.
 

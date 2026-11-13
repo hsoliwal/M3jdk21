@@ -21,7 +21,7 @@ import jdk.m3.tooling.atoms.contract.M3AtomRecord;
 /**
  * Read-only OpenJDK FILE atom -> actual HotSpot JIT -> pattern review -> JIT retest.
  *
- * <p>The atoms and their patterns come from the M3 atom census ({@code m3/tooling/atom-census}, {@code --semantic}):
+ * <p>The atoms and their patterns come from the M3 atom census ({@code make/m3/tooling/atom-census}, {@code --semantic}):
  * its closed catalogue pattern and the exact source digest of each executable Java atom. The census carries no
  * contract/structure/logic projection, so the donor's projection-recurrence states are not produced here.</p>
  */

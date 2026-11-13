@@ -75,7 +75,7 @@
     "public_mirror": ".m3/recipe-source-custody-20261018/binding",
     "targets": [
       {
-        "path": "m3/compatibility/m3-recipe-home-pin.tsv",
+        "path": "make/m3/compatibility/m3-recipe-home-pin.tsv",
         "before_sha256": "fa40ccd547a93da26d1de01a0655fd2daa9384fc09816b363812dd8cdea3aeca",
         "after_sha256": "6675f11687f8db693b739852937e843a78a7576c1f859383e53423bc851ce07a",
         "before_git_blob": "770a41b27bd58da5f849e3c359fe4ee077f55c13",
@@ -97,7 +97,7 @@
         "reason": "Keep the existing current-home document consistent with its strict source pin."
       },
       {
-        "path": "m3/docs/m3-public-fork-recipe-intake-20261017.md",
+        "path": "doc/m3/m3-public-fork-recipe-intake-20261017.md",
         "before_sha256": "8b0a102143a144b62604ae09daf4a70d939482b0c085d8a856da72eb706f1d3e",
         "after_sha256": "4dc6f12a66d719fb6b7ca23d8b19d059a611718a5ba663488949bc97da3140bf",
         "before_git_blob": "cc4c327fd0af87a2c9b35c379b81489802f33704",

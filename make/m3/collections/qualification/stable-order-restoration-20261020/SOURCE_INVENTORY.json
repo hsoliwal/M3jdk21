@@ -29,56 +29,56 @@
       "local_path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/NOTICE"
     },
     {
-      "target_path": "m3/collections/M3-DONATION-NOTICE.txt",
+      "target_path": "make/m3/collections/M3-DONATION-NOTICE.txt",
       "git_blob": "01ec00c2f31beababe8a5f35ce629a0cf4f9cdac",
       "sha256": "24bd01bcc6496fa7c2c05998838e2c706472a9aab49ddd6e719420bacd47ae48",
       "bytes": 1831,
       "local_path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/M3-DONATION-NOTICE.txt"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/HANDOFF.json",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/HANDOFF.json",
       "git_blob": "2402249b2ce87bd19c58b878afdd91873812373a",
       "sha256": "5e89017447d68baf33772df998a7ef6ea51c0ba0b20311f7f16ca6e9f3bcc03c",
       "bytes": 9190,
       "local_path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/qualification/wrapper-convergence-20261018/HANDOFF.json"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/THIRD_PARTY_NOTICES.md",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/THIRD_PARTY_NOTICES.md",
       "git_blob": "52a702d19b926c0a109a10aba2e44652e460a98c",
       "sha256": "5eb041b7a14c1bf2eae0965ad691acbbf45e5fd906091b103144459ac1c12b02",
       "bytes": 11449,
       "local_path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/qualification/wrapper-convergence-20261018/THIRD_PARTY_NOTICES.md"
     },
     {
-      "target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/ACCEPTED_ATOMS.tsv",
+      "target_path": "make/m3/collections/algorithm-catalog/wrapper-convergence-20261018/ACCEPTED_ATOMS.tsv",
       "git_blob": "e144a03604e25b8de1bd4d78401a1a1542e3beab",
       "sha256": "abe44a6cd8a76e6aefefb3545fb5d0c00bccdfcd07069c0c0cdb53b2e013a3b0",
       "bytes": 2646,
       "local_path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/algorithm-catalog/wrapper-convergence-20261018/ACCEPTED_ATOMS.tsv"
     },
     {
-      "target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/index-candidates/HISTORY.tsv",
+      "target_path": "make/m3/collections/algorithm-catalog/wrapper-convergence-20261018/index-candidates/HISTORY.tsv",
       "git_blob": "77337a15f71da7f447bb0e125d2cc7989bb80706",
       "sha256": "82c2967c874542c172e0f102a663f5b463ff270e6215fc247fd22840fe3621a9",
       "bytes": 2365,
       "local_path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/algorithm-catalog/wrapper-convergence-20261018/index-candidates/HISTORY.tsv"
     },
     {
-      "target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/index-candidates/DONOR_NOTES.md",
+      "target_path": "make/m3/collections/algorithm-catalog/wrapper-convergence-20261018/index-candidates/DONOR_NOTES.md",
       "git_blob": "df00ffff54cd77a221c197e919c97f6f15adb42b",
       "sha256": "967e9b909a83215f34a311405b6578431786a71ae34d1bb44a3bc6181233151d",
       "bytes": 9535,
       "local_path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/algorithm-catalog/wrapper-convergence-20261018/index-candidates/DONOR_NOTES.md"
     },
     {
-      "target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/index-candidates/PLAN.md",
+      "target_path": "make/m3/collections/algorithm-catalog/wrapper-convergence-20261018/index-candidates/PLAN.md",
       "git_blob": "db453e1c57deeba29f9402680c18190d42618a97",
       "sha256": "1645157b9953f41949c358690ab008a9cf5438fb92ac6ab97877ffca196da3f8",
       "bytes": 6545,
       "local_path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/algorithm-catalog/wrapper-convergence-20261018/index-candidates/PLAN.md"
     },
     {
-      "target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/RECIPE_CUSTODY_COPY_MANIFEST.tsv",
+      "target_path": "make/m3/collections/algorithm-catalog/wrapper-convergence-20261018/RECIPE_CUSTODY_COPY_MANIFEST.tsv",
       "git_blob": "bff7fd61a46d854d4a84cf4e95a68676f533437d",
       "sha256": "da8c8f9a3031a8ad98d5e087c28148f4a8c6b38a52103c6f2920603495c7d245",
       "bytes": 25240,
@@ -192,7 +192,7 @@
   ],
   "exact_custody_records": [
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/CONTRACT.md",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/CONTRACT.md",
       "git_blob": "242adcdc819c8dc4a0f10ad37368d4e3060d8b38",
       "sha256": "eb82ea381fd2fc5b044c9c8821682697ba3b1885c05c12378ddeaea31863987b",
       "bytes": 5770,
@@ -200,7 +200,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/CONTRACT.md"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/DEPENDENCIES.md",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/DEPENDENCIES.md",
       "git_blob": "b5f604a3206b44f204d1e9012154e82989d4e6cc",
       "sha256": "872fe357afc423e9d9f04751a1aa2601db476fa77bb0f456cf390e21604eb7ed",
       "bytes": 2520,
@@ -208,7 +208,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/DEPENDENCIES.md"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/ENGINE_SOURCES.tsv",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/ENGINE_SOURCES.tsv",
       "git_blob": "fe5773a69c88494c37a1ebeff9fd567c5122e0bb",
       "sha256": "61e6229847829b8351a0ae9b685ce7e00403c504d976a31ff029068a3ab5c9c5",
       "bytes": 1637,
@@ -216,7 +216,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/ENGINE_SOURCES.tsv"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/HARNESS_LINEAGE.json",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/HARNESS_LINEAGE.json",
       "git_blob": "ef95e473fb70ba740c7a255ebdc53257b3e8b21b",
       "sha256": "df3330d7f2815fe06f157db85d67dfefe3f78b5f310b1cbb88782a54e07771b3",
       "bytes": 1209,
@@ -224,7 +224,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/HARNESS_LINEAGE.json"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/HOST_ADAPTATION.diff",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/HOST_ADAPTATION.diff",
       "git_blob": "aff0ad5e1d6e5d6de73357cb4dbcd6b498ce785f",
       "sha256": "b23f70eaf7999608b6f790cf5688729b24cb90a341416241108a9ab310c039ac",
       "bytes": 32908,
@@ -232,7 +232,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/HOST_ADAPTATION.diff"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/README.md",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/README.md",
       "git_blob": "a16b50365c528cf243eee277c03887064f7e55b1",
       "sha256": "a6b34dbdbd628e8f6891a6417989f09a5a0f8775f8f8276d338a02b8772debcf",
       "bytes": 5208,
@@ -240,7 +240,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/README.md"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/fixture-java/resources/META-INF/rewrite/m3-wrapper-fixture-java.yml",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/fixture-java/resources/META-INF/rewrite/m3-wrapper-fixture-java.yml",
       "git_blob": "4e5557316f7e9e68d502275aedcea43b5a7b553c",
       "sha256": "6209a81b50548b8402e588f51200eb97a59c3b95cb861162aeaac4d9b7739188",
       "bytes": 478,
@@ -248,7 +248,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/fixture-java/resources/META-INF/rewrite/m3-wrapper-fixture-java.yml"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/fixture-java/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-fixture-java/Window.java.txt",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/fixture-java/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-fixture-java/Window.java.txt",
       "git_blob": "f16c9aad1d640c4bb855c5288f63ddc6a6022731",
       "sha256": "ec4fd44137fe751c210fa0d4555955aa866b59b02315f633f0e48e5bb3b0640d",
       "bytes": 442,
@@ -256,7 +256,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/fixture-java/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-fixture-java/Window.java.txt"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/fixture-java/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-fixture-java/manifest.tsv",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/fixture-java/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-fixture-java/manifest.tsv",
       "git_blob": "864428e15b94c6059ffb7a7f16d7ed349c74f049",
       "sha256": "618b0fa2677ae293ad92dab8869facceedaac4aaca71ea14fdf4934f1a8d33ea",
       "bytes": 231,
@@ -264,7 +264,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/fixture-java/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-fixture-java/manifest.tsv"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/fixture-java/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-fixture-java/pre/Window.java.txt",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/fixture-java/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-fixture-java/pre/Window.java.txt",
       "git_blob": "5a8e9c64360f5317586240e5f587f18352efad40",
       "sha256": "574d6f055d6bb63e4d463f622d0015a7523efdbe4eaff8aa56925a84ff398e4b",
       "bytes": 411,
@@ -272,7 +272,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/fixture-java/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-fixture-java/pre/Window.java.txt"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/fixture-text/resources/META-INF/rewrite/m3-wrapper-fixture-text.yml",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/fixture-text/resources/META-INF/rewrite/m3-wrapper-fixture-text.yml",
       "git_blob": "b481f0f7eb1feaec23976265c34175e2e8ef1e00",
       "sha256": "6241131d58e490c4a59e427d1575704526b92075afd761dd7b9adf5e0927e902",
       "bytes": 478,
@@ -280,7 +280,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/fixture-text/resources/META-INF/rewrite/m3-wrapper-fixture-text.yml"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/fixture-text/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-fixture-text/manifest.tsv",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/fixture-text/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-fixture-text/manifest.tsv",
       "git_blob": "45effed827a3580d2a8713b901afa490d9896136",
       "sha256": "1d93e72b35aa993da603eb137e82f97b065d0fc86b217adba68bbfc123909af5",
       "bytes": 219,
@@ -288,7 +288,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/fixture-text/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-fixture-text/manifest.tsv"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/fixture-text/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-fixture-text/pre/window.c.txt",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/fixture-text/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-fixture-text/pre/window.c.txt",
       "git_blob": "349a84c06795504d9550e0d3c3a107fbf2cd6ca6",
       "sha256": "e2c34fdbab5128cf93ce00ad5c4f4eff790d156679ea4afec3e0501a48e6e31b",
       "bytes": 297,
@@ -296,7 +296,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/fixture-text/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-fixture-text/pre/window.c.txt"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/fixture-text/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-fixture-text/window.c.txt",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/fixture-text/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-fixture-text/window.c.txt",
       "git_blob": "ff0c3fb03e52f892f90e1f3187fe5bf4ae553489",
       "sha256": "835c01233ff0798bb1bd078dca2a5695def69587586625396d7427dde8c49dde",
       "bytes": 320,
@@ -304,7 +304,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/fixture-text/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-fixture-text/window.c.txt"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/index-contract/PASS.md",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/index-contract/PASS.md",
       "git_blob": "c360f55bd2ee2a203d4123b5f880dd039d10aa2f",
       "sha256": "e0b423c6bf4d1a37f99251a651fd88e0fbf808d7db6a3b14df835b17e6f43b1d",
       "bytes": 928,
@@ -312,7 +312,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/index-contract/PASS.md"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/index-contract/resources/META-INF/rewrite/m3-wrapper-index-contract.yml",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/index-contract/resources/META-INF/rewrite/m3-wrapper-index-contract.yml",
       "git_blob": "abec231bfd7a7d6f2808b2e7568b6bc740839af0",
       "sha256": "5e9f834e769ed8faf9ba2bf770a440e8083712e7b28d5014abb141e0e657203e",
       "bytes": 480,
@@ -320,7 +320,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/index-contract/resources/META-INF/rewrite/m3-wrapper-index-contract.yml"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/index-contract/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-index-contract/M3IndexOrderWindowContract.java.txt",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/index-contract/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-index-contract/M3IndexOrderWindowContract.java.txt",
       "git_blob": "411b69ea33c059d4243afedd5a1bc53b6e7f7122",
       "sha256": "7c1c055ec9a58a9c807fc05be3ec4a83b0a411729f41c259e3180d1e45262b94",
       "bytes": 24937,
@@ -328,7 +328,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/index-contract/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-index-contract/M3IndexOrderWindowContract.java.txt"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/index-contract/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-index-contract/manifest.tsv",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/index-contract/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-index-contract/manifest.tsv",
       "git_blob": "a3e09f5046d046a7b7b9545da09ddaa909f6931b",
       "sha256": "d1796ac6bb21725814f013935cad111ab8e2e3a2a0220cfd7a9d4d457b4ecc11",
       "bytes": 231,
@@ -336,7 +336,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/index-contract/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-index-contract/manifest.tsv"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/index-junit/PASS.md",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/index-junit/PASS.md",
       "git_blob": "4cb852f2cd33e0f57d521a256c86cf31d74cc18a",
       "sha256": "0b415b295c7c90cef112ae2915c114afd531ed8ad88c8a98ba11f8d6a658d7db",
       "bytes": 921,
@@ -344,7 +344,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/index-junit/PASS.md"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/index-junit/resources/META-INF/rewrite/m3-wrapper-index-junit.yml",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/index-junit/resources/META-INF/rewrite/m3-wrapper-index-junit.yml",
       "git_blob": "f346bb67f666380ffb73ca5ead9655710665208e",
       "sha256": "a5cee03251d4fa2eff5839f0ddd3101c291267bc1879da9c711eb6d092f5c45c",
       "bytes": 477,
@@ -352,7 +352,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/index-junit/resources/META-INF/rewrite/m3-wrapper-index-junit.yml"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/index-junit/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-index-junit/M3IndexOrderWindowTest.java.txt",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/index-junit/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-index-junit/M3IndexOrderWindowTest.java.txt",
       "git_blob": "88d8719a3a3b085a991056654b11010d5413af35",
       "sha256": "2d0b1bb9a515eefd48c3de29b32dced613c4e9f05c0547d677d8c8f67c004397",
       "bytes": 546,
@@ -360,7 +360,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/index-junit/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-index-junit/M3IndexOrderWindowTest.java.txt"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/index-junit/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-index-junit/manifest.tsv",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/index-junit/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-index-junit/manifest.tsv",
       "git_blob": "e0e5d78d5244e01582ca7768755811e152557799",
       "sha256": "caa2a996931c78f583433f8d3e25aab66d02872c7e04ab3ca73c3c11992cd36f",
       "bytes": 223,
@@ -368,7 +368,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/index-junit/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-index-junit/manifest.tsv"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/index-resource-probe/PASS.md",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/index-resource-probe/PASS.md",
       "git_blob": "7770c40eb778a0d5bc8c8e7c539ed5757a7993ab",
       "sha256": "cf7d97a2dffa55babfafd2f7193f463eb2ccc2a0e02d8520eae12e7b7e15b497",
       "bytes": 939,
@@ -376,7 +376,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/index-resource-probe/PASS.md"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/index-resource-probe/resources/META-INF/rewrite/m3-wrapper-index-resource-probe.yml",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/index-resource-probe/resources/META-INF/rewrite/m3-wrapper-index-resource-probe.yml",
       "git_blob": "0ad3e08084e351b56d29c334b084969fbbc16d72",
       "sha256": "99bfbf43750e25d303bb560c745bd44db75e552c09fead32ca04dfe8740c1360",
       "bytes": 486,
@@ -384,7 +384,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/index-resource-probe/resources/META-INF/rewrite/m3-wrapper-index-resource-probe.yml"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/index-resource-probe/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-index-resource-probe/M3IndexOrderWindowResourceProbe.java.txt",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/index-resource-probe/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-index-resource-probe/M3IndexOrderWindowResourceProbe.java.txt",
       "git_blob": "d257ffdef41b1a276edac2742f784a246b968694",
       "sha256": "a9dfb46285a65001c135fda31e3b69fe7a3882e00412029fe2abd64b1384fb9e",
       "bytes": 9288,
@@ -392,7 +392,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/index-resource-probe/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-index-resource-probe/M3IndexOrderWindowResourceProbe.java.txt"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/index-resource-probe/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-index-resource-probe/manifest.tsv",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/index-resource-probe/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-index-resource-probe/manifest.tsv",
       "git_blob": "14b7dd97be9eb4641cc897c97337b50b871534c7",
       "sha256": "5ffe405d456008d7b4807c3a18dc33c55376e8c2a3b72d8ec2f6d2c11a2e1881",
       "bytes": 241,
@@ -400,7 +400,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/index-resource-probe/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-index-resource-probe/manifest.tsv"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/invariant-policy/PASS.md",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/invariant-policy/PASS.md",
       "git_blob": "97556d048a3f44a8e93faabff71706552f29835b",
       "sha256": "5dcff2e367ef87a0f84ed9675062a665742f69f5a81ceae6496eca7d089c27d2",
       "bytes": 3019,
@@ -408,7 +408,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/invariant-policy/PASS.md"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/invariant-policy/resources/META-INF/rewrite/m3-wrapper-invariant-policy.yml",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/invariant-policy/resources/META-INF/rewrite/m3-wrapper-invariant-policy.yml",
       "git_blob": "5a8c3a98a76aa4fa43f6cc9d5b161751abaad090",
       "sha256": "37df0e333d755583852aa50d2154b79ed07bcf3901040d4ec33d5174a68bbb89",
       "bytes": 482,
@@ -416,7 +416,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/invariant-policy/resources/META-INF/rewrite/m3-wrapper-invariant-policy.yml"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/invariant-policy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-invariant-policy/m3jdk21-porting-invariant.md.txt",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/invariant-policy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-invariant-policy/m3jdk21-porting-invariant.md.txt",
       "git_blob": "a05cbc0a2fe41df08dd71797fb530e57765ef08b",
       "sha256": "95a5d111f0d9b2467bcc84828adc5b0efcfd1091e35a1b5c1bf1c484a2066b03",
       "bytes": 37648,
@@ -424,7 +424,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/invariant-policy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-invariant-policy/m3jdk21-porting-invariant.md.txt"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/invariant-policy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-invariant-policy/manifest.tsv",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/invariant-policy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-invariant-policy/manifest.tsv",
       "git_blob": "e9baabe816c98d05476511ad44dddcb254569484",
       "sha256": "b399afa9b06660ecb1cbc1e91af429af39bc4ffff493d2dbd844b359ee5e4a89",
       "bytes": 367,
@@ -432,7 +432,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/invariant-policy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-invariant-policy/manifest.tsv"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/invariant-policy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-invariant-policy/pre/m3jdk21-porting-invariant.md.txt",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/invariant-policy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-invariant-policy/pre/m3jdk21-porting-invariant.md.txt",
       "git_blob": "d933c7f8a4ba875b318c499214857146724fc4da",
       "sha256": "604ef82225fdb9e6ecf00e14f7630fb0956b85ec89e5c9241537733d4054f39a",
       "bytes": 30964,
@@ -440,7 +440,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/invariant-policy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-invariant-policy/pre/m3jdk21-porting-invariant.md.txt"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/native-region-proof/PASS.md",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/native-region-proof/PASS.md",
       "git_blob": "137a5acdf9c1a2880a1c47d93fca41c0c395e809",
       "sha256": "4c3e4a57e9a00b26563c8a03e7201f0cc08cf17560d0fd727676d5814ae83a33",
       "bytes": 967,
@@ -448,7 +448,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/native-region-proof/PASS.md"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/native-region-proof/resources/META-INF/rewrite/m3-wrapper-native-region-proof.yml",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/native-region-proof/resources/META-INF/rewrite/m3-wrapper-native-region-proof.yml",
       "git_blob": "490d24cca3762a55f5cfcdf56fd8e2f4df517707",
       "sha256": "8290add06821c851510518a941bd2e8b426765051d52b5915c373ccfbc47759d",
       "bytes": 485,
@@ -456,7 +456,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/native-region-proof/resources/META-INF/rewrite/m3-wrapper-native-region-proof.yml"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/native-region-proof/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-native-region-proof/m3_mask_window_regions.c.txt",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/native-region-proof/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-native-region-proof/m3_mask_window_regions.c.txt",
       "git_blob": "a77c1d7e63e365608842d3bec87d1d78a3982a76",
       "sha256": "3b1de8c0e8d046841425289aa8c0b244b1497ef8033508c0d5fe59ad64b86141",
       "bytes": 7970,
@@ -464,7 +464,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/native-region-proof/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-native-region-proof/m3_mask_window_regions.c.txt"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/native-region-proof/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-native-region-proof/manifest.tsv",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/native-region-proof/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-native-region-proof/manifest.tsv",
       "git_blob": "5fb56737eb50c0909fe61c0421258e86fc746273",
       "sha256": "4fbbc5788158f1f709c427474c986afcb5305029db8d84d5db18de390dff8dd5",
       "bytes": 258,
@@ -472,7 +472,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/native-region-proof/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-native-region-proof/manifest.tsv"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/native-region-proof/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-native-region-proof/pre/m3_mask_window_regions.c.txt",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/native-region-proof/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-native-region-proof/pre/m3_mask_window_regions.c.txt",
       "git_blob": "6eeb08136b1851f78254f9628ceba460ccfe1f4f",
       "sha256": "0b56e30eeda0022644fd6dd9448ccc3689aa7f05e515d5a4087dc0ed02fb4ec2",
       "bytes": 3178,
@@ -480,7 +480,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/native-region-proof/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-native-region-proof/pre/m3_mask_window_regions.c.txt"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/native-row-suffix/PASS.md",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/native-row-suffix/PASS.md",
       "git_blob": "7bcd6525d96ec84d42ba9f3b12eadec26de1a4b1",
       "sha256": "8cf4306baaabb0390a163bef9203a67c1d7047a9f23b72af80e5cce441da6c4e",
       "bytes": 848,
@@ -488,7 +488,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/native-row-suffix/PASS.md"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/native-row-suffix/resources/META-INF/rewrite/m3-wrapper-native-row-suffix.yml",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/native-row-suffix/resources/META-INF/rewrite/m3-wrapper-native-row-suffix.yml",
       "git_blob": "a196445fc4cdf96a3ec38695841510afad1bbc52",
       "sha256": "1f1ff84cc2df44d1f1c9e1d39ad94b019a9fb45f8569734fe9ddda1a81dcc45d",
       "bytes": 483,
@@ -496,7 +496,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/native-row-suffix/resources/META-INF/rewrite/m3-wrapper-native-row-suffix.yml"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/native-row-suffix/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-native-row-suffix/m3_index_mask_window.c.txt",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/native-row-suffix/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-native-row-suffix/m3_index_mask_window.c.txt",
       "git_blob": "effcaebbd353890eac9f8e1bbd611b586e4d4806",
       "sha256": "3361cebc637103be73d7928e61b69ecc7fd6899abd4f8078019c39dfce6b3960",
       "bytes": 6455,
@@ -504,7 +504,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/native-row-suffix/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-native-row-suffix/m3_index_mask_window.c.txt"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/native-row-suffix/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-native-row-suffix/manifest.tsv",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/native-row-suffix/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-native-row-suffix/manifest.tsv",
       "git_blob": "375f9070aa4a9602b542a0d5cf903f8d7956211f",
       "sha256": "c020b509006d8b5f3b2a08b8f338532704ac7cc9e0383c3e1fb4363274c1fd49",
       "bytes": 266,
@@ -512,7 +512,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/native-row-suffix/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-native-row-suffix/manifest.tsv"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/native-row-suffix/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-native-row-suffix/pre/m3_index_mask_window.c.txt",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/native-row-suffix/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-native-row-suffix/pre/m3_index_mask_window.c.txt",
       "git_blob": "e621934162b1e6b34a1749841f6183ee4873f132",
       "sha256": "e57a418a183326d17cd117bcb81c2ddd49202b8195778f38a06b970c1058f16d",
       "bytes": 6234,
@@ -520,7 +520,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/native-row-suffix/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-wrapper-native-row-suffix/pre/m3_index_mask_window.c.txt"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/readonly-iterator/PASS.md",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/readonly-iterator/PASS.md",
       "git_blob": "6911e2f708e0f1aa0a26c928ec4e7a6a9bb8b4aa",
       "sha256": "c4f35e0e361db99eda39bea57d20e2c6984a37b50a9ce69b453b4c050bfc35bb",
       "bytes": 958,
@@ -528,7 +528,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/readonly-iterator/PASS.md"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/readonly-iterator/resources/META-INF/rewrite/m3-wrapper-readonly-iterator.yml",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/readonly-iterator/resources/META-INF/rewrite/m3-wrapper-readonly-iterator.yml",
       "git_blob": "227bd6dd53e4d5b2fbf480fd644b5cd58ccd54c6",
       "sha256": "e8e11227803b792d7e797d7ca0d4295196f06fda47eb880da2ed67a543918180",
       "bytes": 483,
@@ -536,7 +536,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/readonly-iterator/resources/META-INF/rewrite/m3-wrapper-readonly-iterator.yml"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/readonly-iterator/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-readonly-iterator/M3FilteredLists.java.txt",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/readonly-iterator/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-readonly-iterator/M3FilteredLists.java.txt",
       "git_blob": "39dde593da4de3d7caaa4c12afc3deae7ce6a9f3",
       "sha256": "bb0ff9a8008521576530b0cea64d00b4f22e6e4b8424b8e5df7f416a6a8b6051",
       "bytes": 19677,
@@ -544,7 +544,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/readonly-iterator/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-readonly-iterator/M3FilteredLists.java.txt"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/readonly-iterator/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-readonly-iterator/manifest.tsv",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/readonly-iterator/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-readonly-iterator/manifest.tsv",
       "git_blob": "e80690720e2db1d814c062cc0bc4311d4548b7ce",
       "sha256": "d19c1951bf674fc2c067fe5f6b2c62c1fe6f8b129a4b9f93fc5a439708fdf2a2",
       "bytes": 267,
@@ -552,7 +552,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/readonly-iterator/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-readonly-iterator/manifest.tsv"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/readonly-iterator/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-readonly-iterator/pre/M3FilteredLists.java.txt",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/readonly-iterator/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-readonly-iterator/pre/M3FilteredLists.java.txt",
       "git_blob": "d8a0a04dd3d9106ba641f8b657bacacc49678e3c",
       "sha256": "f1e3e21c37cbe084ef6b9446b86293d5039cd9b2bc6c1bf86d63a86793e3b8d5",
       "bytes": 18947,
@@ -560,7 +560,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/readonly-iterator/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-readonly-iterator/pre/M3FilteredLists.java.txt"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/stable-order-groups/PASS.md",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/stable-order-groups/PASS.md",
       "git_blob": "325b58f89cad6bccab1d3e218f210eda64d2f645",
       "sha256": "353e2baabc59c1035e0e29bde2218d97d1bfaf068734cd30a16f4919134962f1",
       "bytes": 882,
@@ -568,7 +568,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/stable-order-groups/PASS.md"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/stable-order-groups/resources/META-INF/rewrite/m3-wrapper-stable-order-groups.yml",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/stable-order-groups/resources/META-INF/rewrite/m3-wrapper-stable-order-groups.yml",
       "git_blob": "620bb8b382087a79d99d5b56e799c25689a4fb73",
       "sha256": "4f38e462d9230353ef89420b3162df512b30077ef4e9d54000c0e280fefc5646",
       "bytes": 485,
@@ -576,7 +576,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/stable-order-groups/resources/META-INF/rewrite/m3-wrapper-stable-order-groups.yml"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/stable-order-groups/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-stable-order-groups/M3LongIndexProjection.java.txt",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/stable-order-groups/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-stable-order-groups/M3LongIndexProjection.java.txt",
       "git_blob": "d98d8a45725f102292a63180a44e6054bf9b57c8",
       "sha256": "bf601d711667e1078ca30246da6fa89b43d7ed951a3179e0a161365526581959",
       "bytes": 9679,
@@ -584,7 +584,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/stable-order-groups/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-stable-order-groups/M3LongIndexProjection.java.txt"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/stable-order-groups/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-stable-order-groups/manifest.tsv",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/stable-order-groups/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-stable-order-groups/manifest.tsv",
       "git_blob": "1b59e450a91b5027e4c9f1972b542aad90f567ab",
       "sha256": "286da7f63f6c307cb81db7673bb6317106e0358dfd41122190c88581d86cf408",
       "bytes": 279,
@@ -592,7 +592,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/stable-order-groups/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-stable-order-groups/manifest.tsv"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/stable-order-groups/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-stable-order-groups/pre/M3LongIndexProjection.java.txt",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/stable-order-groups/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-stable-order-groups/pre/M3LongIndexProjection.java.txt",
       "git_blob": "09c10e2b4874f70ece8c1e4392a574db652945f7",
       "sha256": "6be07c18dbbbe9ae259ff85821bb3f4ec666fddd820b0950f4115c4256f45deb",
       "bytes": 8421,
@@ -600,7 +600,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/stable-order-groups/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-stable-order-groups/pre/M3LongIndexProjection.java.txt"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/wrapper-contract-v2/PASS.md",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/wrapper-contract-v2/PASS.md",
       "git_blob": "55fe0a7d0dcc0b722fc799baed7b2472e95d290c",
       "sha256": "83dee3a2c91e95c67748642a2c6d3024cc4b81eb825dca9b48a26a680747aeb2",
       "bytes": 2510,
@@ -608,7 +608,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/wrapper-contract-v2/PASS.md"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/wrapper-contract-v2/resources/META-INF/rewrite/m3-wrapper-wrapper-contract-v2.yml",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/wrapper-contract-v2/resources/META-INF/rewrite/m3-wrapper-wrapper-contract-v2.yml",
       "git_blob": "b325002d74d079257e453a4f0eaaaa50e18b4f46",
       "sha256": "0e17a6eceffeddb4697175730f78a4f16d1cf71b2b530c00e1670eb251b5f036",
       "bytes": 485,
@@ -616,7 +616,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/wrapper-contract-v2/resources/META-INF/rewrite/m3-wrapper-wrapper-contract-v2.yml"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/wrapper-contract-v2/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-wrapper-contract-v2/M3WrapperConvergenceContract.java.txt",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/wrapper-contract-v2/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-wrapper-contract-v2/M3WrapperConvergenceContract.java.txt",
       "git_blob": "ab8483d19b40f2b79ef743d906dec0147f14e777",
       "sha256": "989507e15f05f3d931c51e7ae65d65dbc3fac7b80bc94984e4b9922ea17e8335",
       "bytes": 19318,
@@ -624,7 +624,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/wrapper-contract-v2/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-wrapper-contract-v2/M3WrapperConvergenceContract.java.txt"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/wrapper-contract-v2/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-wrapper-contract-v2/manifest.tsv",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/wrapper-contract-v2/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-wrapper-contract-v2/manifest.tsv",
       "git_blob": "a23055fb7217a8487c57fb493072b097aa8514b6",
       "sha256": "f02e8dc7edaf6e15eb3e619155c786bef1e8cbb92f8e5dd543c544a9b4411ffa",
       "bytes": 359,
@@ -632,7 +632,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/wrapper-contract-v2/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-wrapper-contract-v2/manifest.tsv"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/wrapper-junit-v2/PASS.md",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/wrapper-junit-v2/PASS.md",
       "git_blob": "d3a09ade1578e099a62953ac74e7bcf6173c4fd7",
       "sha256": "ca8455645879fd2b67329c6cebe10fa269d9cfac0c1cde6cbf84f5c46d3f056d",
       "bytes": 2612,
@@ -640,7 +640,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/wrapper-junit-v2/PASS.md"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/wrapper-junit-v2/resources/META-INF/rewrite/m3-wrapper-wrapper-junit-v2.yml",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/wrapper-junit-v2/resources/META-INF/rewrite/m3-wrapper-wrapper-junit-v2.yml",
       "git_blob": "d06b08260b30b2715392fba225572fe27d951e52",
       "sha256": "a6aa64fdfd595ec29f0c727fce53f22cf4a25c70ec7c8cda473a4254e9064149",
       "bytes": 482,
@@ -648,7 +648,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/wrapper-junit-v2/resources/META-INF/rewrite/m3-wrapper-wrapper-junit-v2.yml"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/wrapper-junit-v2/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-wrapper-junit-v2/M3WrapperConvergenceTest.java.txt",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/wrapper-junit-v2/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-wrapper-junit-v2/M3WrapperConvergenceTest.java.txt",
       "git_blob": "98c2f1b84592bd563f969e577ad0ef3d2b9f8dd0",
       "sha256": "37373c5fe47db51de219365a602737b278feb9b2ca34bc888dd0c0a1661e4e89",
       "bytes": 453,
@@ -656,7 +656,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/wrapper-junit-v2/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-wrapper-junit-v2/M3WrapperConvergenceTest.java.txt"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/wrapper-junit-v2/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-wrapper-junit-v2/manifest.tsv",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/wrapper-junit-v2/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-wrapper-junit-v2/manifest.tsv",
       "git_blob": "15a80d13adcb24cf53e54b005325ef640af61710",
       "sha256": "2a67b3a6512578dfac7efbc635b84083a763698e0f5d484f746995485298e1eb",
       "bytes": 351,
@@ -664,7 +664,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/wrapper-junit-v2/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-wrapper-junit-v2/manifest.tsv"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/pom.xml",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/pom.xml",
       "git_blob": "ddd9bdf7915dee69a314539f1982af3a6e1e5074",
       "sha256": "0a1c81dcc36ef6a77c6ba812797cde06fa8d7ffdafa73f13b6ef846b3ab2a572",
       "bytes": 4455,
@@ -672,7 +672,7 @@
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/pom.xml"
     },
     {
-      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/src/test/java/jdk/internal/m3/rewrite/M3TaskRecipeTest.java",
+      "target_path": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/src/test/java/jdk/internal/m3/rewrite/M3TaskRecipeTest.java",
       "git_blob": "a8de035efb0dbfeacc3330f3d07440b0099972d3",
       "sha256": "76e5159a9cb350df2b58d410ee4aaae0ad1f96ddaedb1be420163802954154d8",
       "bytes": 25425,

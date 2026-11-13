@@ -6,7 +6,7 @@
 #   1        mvn clean package of m3/compiler/mat-sortable on JDK 21 (-Xlint:all -Werror on main and test sources), 0 [WARNING]
 #   2        the donor contract and the processor oracle ran in the test phase (surefire totals, assertion and check counts)
 #   3        differential.sh: processor oracle donor vs relocated byte-identical, javap, mutants refused, contracts
-#   reactor  mvn -f m3/pom.xml -DskipTests package -pl compiler/mat-sortable -am (the module is a default reactor module;
+#   reactor  mvn -f make/m3/pom.xml -DskipTests package -pl compiler/mat-sortable -am (the module is a default reactor module;
 #            m3-collections is its test-scope dependency, so the reactor builds arrays, collections and this module)
 #   siblings every m3/compiler/<dir> module descriptor is 'module org.m3jdk.compiler.<x>' exporting jdk.m3.compiler.<x>, every
 #            m3/compiler pom has groupId com.m3, and every main source package is jdk.m3.compiler.<x> (this module included)
@@ -30,9 +30,9 @@ gate() { local name=$1 verdict=$2; shift 2; echo "GATE $name $verdict $*"; [ "$v
 out=$(python -I "$RECIPE_DIR/relocate.py" --donor-git "$DONOR_GIT" --donor-rev "$REV" --module "$MODULE" --check 2>&1 | tail -1)
 case "$out" in *"changed=0 provenance=UNCHANGED"*) gate recipe PASS "$out" ;; *) gate recipe FAIL "$out" ;; esac
 
-(cd "$ROOT" && mvn "${MVN_COMMON[@]}" -f m3/pom.xml -DskipTests package -pl compiler/mat-sortable -am > "$SCRATCH/reactor-package.log" 2>&1)
+(cd "$ROOT" && mvn "${MVN_COMMON[@]}" -f make/m3/pom.xml -DskipTests package -pl compiler/mat-sortable -am > "$SCRATCH/reactor-package.log" 2>&1)
 if grep -q "BUILD SUCCESS" "$SCRATCH/reactor-package.log" && ! grep -qE "^\[ERROR\]" "$SCRATCH/reactor-package.log"; then
-    gate reactor PASS "mvn -f m3/pom.xml -DskipTests package -pl compiler/mat-sortable -am: BUILD SUCCESS ($(grep -cE '^\[INFO\] Building ' "$SCRATCH/reactor-package.log") projects) log=$SCRATCH/reactor-package.log"
+    gate reactor PASS "mvn -f make/m3/pom.xml -DskipTests package -pl compiler/mat-sortable -am: BUILD SUCCESS ($(grep -cE '^\[INFO\] Building ' "$SCRATCH/reactor-package.log") projects) log=$SCRATCH/reactor-package.log"
 else
     gate reactor FAIL "log=$SCRATCH/reactor-package.log"
 fi
@@ -80,7 +80,7 @@ EOF
 )
 case "$siblings" in OK*) gate siblings PASS "$siblings" ;; *) gate siblings FAIL "$siblings" ;; esac
 
-naming=$(cd "$ROOT" && python -I m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/compiler/mat-sortable/ 2>&1 | grep -E "^(JDK_NAMING|REFUSED)" | tail -1)
+naming=$(cd "$ROOT" && python -I make/m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/compiler/mat-sortable/ 2>&1 | grep -E "^(JDK_NAMING|REFUSED)" | tail -1)
 case "$naming" in *"moves=0 rewrites=0 refusals=0"*) gate naming PASS "$naming" ;; *) gate naming FAIL "$naming" ;; esac
 echo "VERIFY $status"
 [ "$status" = PASS ]

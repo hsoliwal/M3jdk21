@@ -4,7 +4,7 @@ SPDX-License-Identifier: Apache-2.0 -->
 
 This builds the actual tool implementations and packages eight JMODs. Original
 public APIs/module names remain intact. The canonical naming policy/map stays in
-`m3/docs/name-mapping.json`; String runtime qualification remains the active phase.
+`doc/m3/name-mapping.json`; String runtime qualification remains the active phase.
 
 The complete OpenNLP source is in `m3/vendor/third_party/opennlp-tools`. Existing
 Lucene and SLF4J vendor source is reused. The two exact recipe outputs under
@@ -15,7 +15,7 @@ pins that handoff. The small source-build mirror retains its canonical source
 identity and all locks. Improvements return to Synexia.
 
 ```sh
-python3 m3/tooling/module-packs/nlp-search/build.py \
+python3 make/m3/tooling/module-packs/nlp-search/build.py \
   --jdk-home "$JAVA_HOME" --out build/m3-nlp-search
 build/m3-nlp-search/pack/image/bin/java \
   -m org.apache.opennlp.tools/opennlp.tools.cmdline.CLI

@@ -23,4 +23,4 @@ Original `M3FilteredViews.SortedSetView` now explicitly refuses `removeFirst/rem
 
 Full Maven/OpenRewrite, target module/reflective API and JUnit, source-built JDK21, jtreg/HotSpot/JNI, installed SDK tests, five provider families (JDK, Guava, Eclipse Collections, Apache Commons Collections, Spring Framework), JMH CPU/heap/native memory **NOT EXECUTED**. No installed-product or phase completion claim. String -> arrays -> collections remains the acceptance order.
 
-Problem category / algorithm / donor comparisons: `m3/collections/algorithm-catalog/filtered-sorted-readonly-forward-20261019.tsv`. Continue deterministic serial per-file recipe application; reject any source drift.
+Problem category / algorithm / donor comparisons: `make/m3/collections/algorithm-catalog/filtered-sorted-readonly-forward-20261019.tsv`. Continue deterministic serial per-file recipe application; reject any source drift.

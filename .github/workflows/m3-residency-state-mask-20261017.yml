@@ -8,7 +8,7 @@ on:
       - "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ResidencyStateMaskIndex.java"
       - "test/jdk/jdk/m3/collections/M3ResidencyStateMask*"
       - "src/jdk.m3.collections/share/native/libm3collections/collections/m3_residency_state_mask.c"
-      - "m3/collections/qualification/residency-state-mask-20261017/**"
+      - "make/m3/collections/qualification/residency-state-mask-20261017/**"
       - ".github/workflows/m3-residency-state-mask-20261017.yml"
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -24,7 +24,7 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Exact SHA256 source-to-recipe and JNI five-collector compatibility
-        run: sh m3/collections/qualification/residency-state-mask-20261017/verify.sh
+        run: sh make/m3/collections/qualification/residency-state-mask-20261017/verify.sh
   existing-module-tests:
     runs-on: ubuntu-latest
     steps:

@@ -11,7 +11,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 BASE = ROOT / "m3" / "m3-import" / "intakes" / "full-borrow-20261011"
 PIN = BASE / "pin.tsv"
 ESTATE = BASE / "m3-estate.tsv"

@@ -79,7 +79,7 @@ def build(blobs, rows):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--check', action='store_true')
-    parser.add_argument('--repo', default=str(HERE.parents[3]))
+    parser.add_argument('--repo', default=str(HERE.parents[4]))
     args = parser.parse_args()
     repo = Path(args.repo)
     roles = {row['role']: row for row in table('THREE_WAY.tsv')}

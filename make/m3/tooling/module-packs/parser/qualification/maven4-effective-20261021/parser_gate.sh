@@ -9,7 +9,7 @@
 #   test:           every CONTRACTS row of merged_build.py as its own JVM; PASS = its marker printed
 # Pass = post compiles clean, no contract passing on live fails on post, and the new contract prints its marker.
 cd "$(dirname "$0")"
-J="C:/Program Files/Java/jdk-21/bin"; A=$(cygpath -m "$PWD"); P=m3/tooling/module-packs/parser
+J="C:/Program Files/Java/jdk-21/bin"; A=$(cygpath -m "$PWD"); P=make/m3/tooling/module-packs/parser
 G=/h/m3-scratch/repos/M3jdk21-release.git; R=${1:?master}
 M2=$(cygpath -m ~/.m2/repository); EXTRA="$(ls $M2/org/xerial/sqlite-jdbc/3.45.*/sqlite-jdbc-3.45.*.jar | tail -1);$(ls $M2/org/slf4j/slf4j-api/2.*/slf4j-api-2.*.jar | tail -1)"  # build.py: newest 3.45.x driver + slf4j-api
 rm -rf cpatch-src && mkdir -p cpatch-src

@@ -37,7 +37,7 @@ The JNI fixture includes the actual product C source. Source discovery uses the 
 Use a matching JDK 21 GA compiler and runtime with a Linux GCC/G++ toolchain. For the pinned 21.0.0 HotSpot, the qualified configuration uses a pristine Temurin 21+35 compiler JDK and a separate complete Temurin 21+35 runtime overlay with only `lib/server/libjvm.so` replaced by the built VM. A HotSpot-only build directory lacks its boot class libraries; a newer update runtime may require different native VM exports. A newer compiler platform can also select standard-library methods absent from GA, even for unchanged source. Keep the pristine compiler separate because the M3 VM requires the complete Object and M3 String patch to boot. The script downloads nothing and refuses source drift against `sources.tsv`:
 
 ```sh
-python3 m3/compatibility/object-doop-events-20261018/verify.py \
+python3 make/m3/compatibility/object-doop-events-20261018/verify.py \
   --java-home /path/to/pristine-jdk-21+35 \
   --output /path/to/fresh-evidence \
   --hotspot-jvm /path/to/matching-runtime/lib/server/libjvm.so
@@ -49,4 +49,4 @@ Canonical recipe: `hsoliwal/com.synexia/synexia-openrewrite-recipes`, named `com
 
 The source manifest includes the fourteen existing M3 String bootstrap dependencies required by this fork's VM. Thirteen are unchanged at the pinned base; `M3TQ.java` receives only its missing final LF through the canonical recipe. These are compiled with the Object candidate. The existing M3 String storage feature retains its default disabled state; its separate native storage and concatenation paths are outside this object qualification.
 
-The additive role mapping is `m3/docs/name-mapping.d/m3-object-doop-events-20261018.json`. Existing MIndex snapshot/sidecar owners are conceptual donors, not renamed or replaced by this live capability.
+The additive role mapping is `doc/m3/name-mapping.d/m3-object-doop-events-20261018.json`. Existing MIndex snapshot/sidecar owners are conceptual donors, not renamed or replaced by this live capability.

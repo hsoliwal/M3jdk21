@@ -1,7 +1,7 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
-# m3/tooling/jmod-recipes — every vendored library as a JMOD, descriptors written by OpenRewrite
+# make/m3/tooling/jmod-recipes — every vendored library as a JMOD, descriptors written by OpenRewrite
 
-Design: `m3/docs/m3sdk/m3-parallel-vcpu-design.md` §6 (SDK packaging as JMODs).
+Design: `doc/m3/m3sdk/m3-parallel-vcpu-design.md` §6 (SDK packaging as JMODs).
 
 | Step | Tool | Output |
 |---|---|---|

@@ -5,8 +5,8 @@ on:
     branches:
       - 'm3/a3-portable-mastery-gate-20261007'
     paths:
-      - 'm3/tooling/a3/**'
-      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java'
+      - 'make/m3/tooling/a3/**'
+      - 'make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-*.yml'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-a3-*/**'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-a3-*/**'
@@ -14,8 +14,8 @@ on:
       - '.github/workflows/m3-a3-portable-mastery-gate-java21.yml'
   pull_request:
     paths:
-      - 'm3/tooling/a3/**'
-      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java'
+      - 'make/m3/tooling/a3/**'
+      - 'make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-*.yml'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-a3-*/**'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-a3-*/**'
@@ -68,7 +68,7 @@ jobs:
       - name: 3 prove receiver authority and mastery-gate recipes
         run: >
           mvn -B -ntp
-          -f m3/pom.xml
+          -f make/m3/pom.xml
           -pl tooling/migration-recipes
           -Dtest=M3A3ReceiverMainAuthorityRecipeTest,M3A3M3ReceiverAuthorityTest,M3A3PortableMasteryGateRecipeTest
           -Dsurefire.failIfNoSpecifiedTests=false
@@ -77,7 +77,7 @@ jobs:
       - name: 4 compile and test A3 mastery receiver
         run: >
           mvn -B -ntp
-          -f m3/pom.xml
+          -f make/m3/pom.xml
           -pl tooling/a3
           -am
           -Dtest=A3RecipeHomeTest,A3MasteryTest,A3ApplyTest

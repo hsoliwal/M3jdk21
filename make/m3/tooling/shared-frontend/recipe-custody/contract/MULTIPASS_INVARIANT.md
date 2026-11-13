@@ -77,7 +77,7 @@ Use the M3String dataset, which already owns three ordered one-file
 pass stages, as the first concrete instance:
 
 ```sh
-root="$PWD/m3/tooling/shared-frontend/recipe-custody"
+root="$PWD/make/m3/tooling/shared-frontend/recipe-custody"
 mvn -B -ntp -f "$root/pom.xml" -Pcontract \
   -Dm3.dataset=m3-prefix-cursor-20261020 \
   "-Drecipe.owner.root=$root/sdk-owner" verify

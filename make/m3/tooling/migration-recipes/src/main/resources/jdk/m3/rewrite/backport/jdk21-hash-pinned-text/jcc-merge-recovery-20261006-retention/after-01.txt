@@ -28,7 +28,7 @@ those files and a particular first-parent commit deleted them.
 Reuse native Git for graph traversal and binary-capable exact patches, Python's
 standard library for records, and the existing standalone Maven exec-plugin
 convention for recipe invocation. Do not build another parser/refactoring engine.
-The existing `m3/migration`, `m3/tooling`, foundation recipes and name-mapping
+The existing `make/m3/migration`, `make/m3/tooling`, foundation recipes and name-mapping
 remain their respective authorities. This module supplies PSE/CCPS evidence to
 those owners; it does not replace their scanners, recipes or mapping schema.
 
@@ -45,8 +45,8 @@ Python 3.10+ and Git are required. Run from a complete local clone; the output
 must be a new directory outside both the worktree and Git administration paths:
 
 ```sh
-python3 -B -m unittest discover -s m3/history -p 'test_*.py' -v
-python3 -B m3/history/audit.py --repo . --snapshot m3/history/snapshot.json --output /tmp/m3-history-audit
+python3 -B -m unittest discover -s make/m3/history -p 'test_*.py' -v
+python3 -B make/m3/history/audit.py --repo . --snapshot make/m3/history/snapshot.json --output /tmp/m3-history-audit
 ```
 
 The default snapshot is immutable. It intentionally does not follow a moving
@@ -58,10 +58,10 @@ Do not run against a concurrently modified object database; the tool detects ref
 movement but cannot make noncooperating writers transactional.
 
 The Maven entry point reuses exec-maven-plugin 3.6.4 already used by
-`m3/migration/pom.xml`, without making Maven an OpenJDK bootstrap dependency:
+`make/m3/migration/pom.xml`, without making Maven an OpenJDK bootstrap dependency:
 
 ```sh
-mvn -f m3/history/pom.xml verify -Dm3.repo=/absolute/clone -Dm3.output=/tmp/m3-history-audit
+mvn -f make/m3/history/pom.xml verify -Dm3.repo=/absolute/clone -Dm3.output=/tmp/m3-history-audit
 ```
 
 Maven acceptance must be recorded separately from direct Python execution.
@@ -138,7 +138,7 @@ PRs are never pre-declared as retained.
 Maven/CI entry point:
 
 ```sh
-mvn -B -f m3/history/retention-pom.xml verify \
+mvn -B -f make/m3/history/retention-pom.xml verify \
   -Dm3.repo=/absolute/full-clone \
   -Dm3.retentionCommit=<full-commit-id> \
   -Dm3.output=/outside-worktree/retention
@@ -186,12 +186,12 @@ SHA-256 characters. The legacy path's parsing and file-mode behavior remain unch
 Examples:
 
 ```sh
-python3 -B m3/history/retention.py --repo /absolute/full-clone \
+python3 -B make/m3/history/retention.py --repo /absolute/full-clone \
   --commit <full-candidate-id> --include-parents \
   --baseline-commit <full-base-id> --baseline-commit <another-full-baseline-id> \
   --require-no-missing --output /outside-worktree/retention
 
-mvn -B -f m3/history/retention-pom.xml verify \
+mvn -B -f make/m3/history/retention-pom.xml verify \
   -Dm3.repo=/absolute/full-clone -Dm3.retentionCommit=<full-candidate-id> \
   -Dm3.retentionBaseline=<full-base-id> -Dm3.output=/outside-worktree/retention
 ```

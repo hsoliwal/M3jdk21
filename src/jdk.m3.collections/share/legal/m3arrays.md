@@ -10,6 +10,6 @@ module is a proving ground for internal immutable/snapshot/range owners and
 explicit materialization boundaries; it is not a replacement for public
 byte[], char[], int[], long[] or T[] contracts.
 
-See m3/evidence/arrays/provenance.json, m3/evidence/arrays/PACKED_NOTICES.md and m3/docs/m3-array-port-map.tsv for exact donor
+See make/m3/evidence/arrays/provenance.json, make/m3/evidence/arrays/PACKED_NOTICES.md and doc/m3/m3-array-port-map.tsv for exact donor
 revision/path/blob identities, adaptations, deferred shared/mapped owners and
 remaining JDK integration gates.

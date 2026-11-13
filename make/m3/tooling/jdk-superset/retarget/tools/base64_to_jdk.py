@@ -30,7 +30,7 @@ import re
 import sys
 
 RECIPE_ID = "BASE64_TO_JDK v1"
-TOOL_REL = "m3/tooling/jdk-superset/retarget/tools/base64_to_jdk.py"
+TOOL_REL = "make/m3/tooling/jdk-superset/retarget/tools/base64_to_jdk.py"
 DONORS = ("HdrHistogram",)
 TARGETS = ("org/HdrHistogram/Base64Helper.java",)
 RELOCATED = {"HdrHistogram": ("m3/vendor/third_party-m3/relocated/HdrHistogram",
@@ -67,7 +67,7 @@ README_TEXT = (
     ("No speed, allocation or behaviour change is claimed. The published sources jar carries no test suite; the\n"
      "compile from source and the consumers' own tests are the proof lane. Upstream tests remain a follow-up with\n"
      "their own recipe.",
-     "The overlay's proof is `m3/evidence/java-base/BASE64_HDRHISTOGRAM.md`. Outside it no speed, allocation or\n"
+     "The overlay's proof is `make/m3/evidence/java-base/BASE64_HDRHISTOGRAM.md`. Outside it no speed, allocation or\n"
      "behaviour change is claimed. The published sources jar carries no test suite; the compile from source and\n"
      "the consumers' own tests are the proof lane. Upstream tests remain a follow-up with their own recipe."),
 )

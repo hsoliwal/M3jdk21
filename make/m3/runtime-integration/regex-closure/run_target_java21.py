@@ -96,7 +96,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--stage", required=True, choices=("static", "compile", "test", "benchmark"))
     parser.add_argument("--jdk", required=True, type=Path)
-    parser.add_argument("--repo", type=Path, default=HERE.parents[2])
+    parser.add_argument("--repo", type=Path, default=HERE.parents[3])
     parser.add_argument("--baseline", type=Path,
                         help="Optional exact before-image directory; otherwise read pinned git blobs.")
     parser.add_argument("--output", type=Path, default=HERE / "evidence/local")

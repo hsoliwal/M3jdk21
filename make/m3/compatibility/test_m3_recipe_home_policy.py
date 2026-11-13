@@ -26,8 +26,8 @@ class M3RecipeHomePolicyTest(unittest.TestCase):
         self.assertEqual(7, len(retired))
         for row in retired:
             self.assertIn("/jdk/m3/rewrite/atom/", row["legacy_path"])
-            self.assertFalse((ROOT.parent / row["legacy_path"]).exists(), row["legacy_path"])
-            self.assertTrue((ROOT.parent / row["canonical_path"]).is_file(), row["canonical_path"])
+            self.assertFalse((ROOT.parent.parent / row["legacy_path"]).exists(), row["legacy_path"])
+            self.assertTrue((ROOT.parent.parent / row["canonical_path"]).is_file(), row["canonical_path"])
 
         frozen = [
             row for row in rows
@@ -35,8 +35,8 @@ class M3RecipeHomePolicyTest(unittest.TestCase):
         ]
         self.assertGreater(len(frozen), 0)
         for row in frozen:
-            self.assertTrue((ROOT.parent / row["legacy_path"]).is_file(), row["legacy_path"])
-            self.assertTrue((ROOT.parent / row["canonical_path"]).is_file(), row["canonical_path"])
+            self.assertTrue((ROOT.parent.parent / row["legacy_path"]).is_file(), row["legacy_path"])
+            self.assertTrue((ROOT.parent.parent / row["canonical_path"]).is_file(), row["canonical_path"])
 
     def test_pending_m3_scope_migration_is_pinned_but_not_claimed_borrowed(self) -> None:
         ownership = ROOT / "compatibility" / "m3-recipe-ownership.tsv"
@@ -73,7 +73,7 @@ class M3RecipeHomePolicyTest(unittest.TestCase):
             )
             self.assertEqual(40, len(row["m3_git_blob"]))
             self.assertFalse(
-                (ROOT.parent / row["canonical_path"]).exists(),
+                (ROOT.parent.parent / row["canonical_path"]).exists(),
                 "pending external canonical path must not masquerade as local borrowed custody",
             )
 
@@ -133,7 +133,7 @@ class M3RecipeHomePolicyTest(unittest.TestCase):
         }
         for file_name, expected in scope_expectations.items():
             surface = (
-                "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/"
+                "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/"
                 + file_name
             )
             row = by_surface[surface]
@@ -144,31 +144,31 @@ class M3RecipeHomePolicyTest(unittest.TestCase):
         self.assertEqual(
             "RECEIVER_ADAPTER_ONLY",
             by_surface[
-                "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-regex-memory-lab.yml"
+                "make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-regex-memory-lab.yml"
             ]["disposition"],
         )
         self.assertEqual(
             "jdk.internal.m3.rewrite.M3A3RegexMemoryLab",
             by_surface[
-                "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-regex-memory-lab.yml"
+                "make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-regex-memory-lab.yml"
             ]["canonical_owner"],
         )
         self.assertEqual(
             "TARGET_PRODUCT_ADAPTER",
             by_surface[
-                "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-regex-memory-workflow.yml"
+                "make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-regex-memory-workflow.yml"
             ]["disposition"],
         )
         self.assertEqual(
             "TARGET_PRODUCT_ADAPTER",
             by_surface[
-                "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jni-newstring-admission.yml"
+                "make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jni-newstring-admission.yml"
             ]["disposition"],
         )
         self.assertEqual(
             "jdk.internal.m3.rewrite.M3JdkHandoff",
             by_surface[
-                "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jni-newstring-admission.yml"
+                "make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jni-newstring-admission.yml"
             ]["canonical_owner"],
         )
 
@@ -191,9 +191,9 @@ class M3RecipeHomePolicyTest(unittest.TestCase):
             rows = {row["local_surface"]: row for row in csv.DictReader(handle, delimiter="\t")}
 
         expected = {
-            "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceCatalog.java":
+            "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceCatalog.java":
                 ("RECEIVER_ADAPTER_ONLY", "jdk.internal.m3.rewrite.M3Jdk21FileConvergenceRecipe"),
-            "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceRecipe.java":
+            "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceRecipe.java":
                 ("RECEIVER_ADAPTER_ONLY", "jdk.internal.m3.rewrite.M3Jdk21FileConvergenceRecipe"),
         }
         for surface, (disposition, owner) in expected.items():
@@ -202,7 +202,7 @@ class M3RecipeHomePolicyTest(unittest.TestCase):
             self.assertEqual("true", rows[surface]["handoff_required"])
 
         compatibility = rows[
-            "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/InstallIndexStringCompatibility.java"
+            "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/InstallIndexStringCompatibility.java"
         ]
         self.assertEqual("RECEIVER_ADAPTER_ONLY", compatibility["disposition"])
         self.assertEqual(
@@ -241,7 +241,7 @@ class M3RecipeHomePolicyTest(unittest.TestCase):
                 row["canonical_m3_owner"].startswith("com.synexia")
                 or row["canonical_m3_owner"].startswith("synexia-")
             )
-            path = ROOT.parent / relative
+            path = ROOT.parent.parent / relative
             data = path.read_bytes()
             actual_blob = hashlib.sha1(
                 f"blob {len(data)}\0".encode("ascii") + data
@@ -252,7 +252,7 @@ class M3RecipeHomePolicyTest(unittest.TestCase):
         with POLICY.open(encoding="utf-8", newline="") as handle:
             rows = {row["local_surface"]: row for row in csv.DictReader(handle, delimiter="\t")}
 
-        a3 = rows["m3/tooling/a3/src/main/java/jdk/m3/a3/A3Lab.java"]
+        a3 = rows["make/m3/tooling/a3/src/main/java/jdk/m3/a3/A3Lab.java"]
         self.assertEqual("TARGET_PROOF_CONSUMER", a3["disposition"])
         self.assertEqual(
             "jdk.internal.m3.rewrite.M3PureIntConvergenceRecipe",

@@ -12,7 +12,7 @@
   ],
   "files": [
     {
-      "path": "m3/collections/qualification/jdk-rx7-view-convergence-20261019/proof/MaskWindowConvergence.java",
+      "path": "make/m3/collections/qualification/jdk-rx7-view-convergence-20261019/proof/MaskWindowConvergence.java",
       "before_sha256": "ABSENT",
       "after_sha256": "56d80d68aa1908064c6e90d33999f70081ada2d150bbcb6899fa08de497e371e",
       "before_blob": null,
@@ -84,7 +84,7 @@
       "group": "1445files"
     },
     {
-      "path": "m3/collections/verification/view-refinement-20261019/M3FilteredNullNavigationProbe.java",
+      "path": "make/m3/collections/verification/view-refinement-20261019/M3FilteredNullNavigationProbe.java",
       "before_sha256": "ABSENT",
       "after_sha256": "b86e87efbc2960ee90f030a8ebd9b7bb286c1f1799fa853d926f7bc9d082287f",
       "before_blob": null,
@@ -93,7 +93,7 @@
       "group": "tests"
     },
     {
-      "path": "m3/collections/verification/view-refinement-20261019/M3ProjectionRefinementProbe.java",
+      "path": "make/m3/collections/verification/view-refinement-20261019/M3ProjectionRefinementProbe.java",
       "before_sha256": "ABSENT",
       "after_sha256": "8475e188b527840dd43464d4e8a064e431b8e70ef7941f37709ac0620a56dce9",
       "before_blob": null,

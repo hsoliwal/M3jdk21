@@ -131,7 +131,7 @@
   "target": {
     "repository": "hsoliwal/M3jdk21",
     "base_commit": "536edcc0e57c3ca13e499e382ea565ed47df763f",
-    "generated_map": "m3/docs/name-mapping.json",
+    "generated_map": "doc/m3/name-mapping.json",
     "generated_map_git_blob": "d181bf3e2602a9392b405c00d6d92cf8167740bb",
     "application": "Exact OpenRewrite 8.17.1 SDK Result; receipt generated from published source proof.",
     "new_runtime_sources": 0

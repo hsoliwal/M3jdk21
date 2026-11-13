@@ -23,7 +23,7 @@ See [CATALOGUE.tsv](CATALOGUE.tsv). Categories: `PREDICATE_ANY`, `SHORT_CIRCUIT`
 ## Execute full focused gate
 
 ```bash
-bash m3/collections/qualification/filtered-isempty-20261021/verify.sh
+bash make/m3/collections/qualification/filtered-isempty-20261021/verify.sh
 ```
 
 This script verifies the SHA-256 source and two test postimages; uses Git's retained original preimage for strict Java21 original/candidate compilation; checks `javap -public` API identity; runs identical Java21 contract tests on baseline and candidate under normal and interpreted `-Xint` modes. Tests log original owner iterator/predicate calls and exceptions, including zero/first/last match, nulls, duplicates, source and predicate failures, sorted/navigable inherited views and late backing edits. The paired Synexia Maven/OpenRewrite JUnit tests must verify exact source rendering, drift/missing/wrong-kind/duplicate refusal and replay fixed point **before** product promotion.

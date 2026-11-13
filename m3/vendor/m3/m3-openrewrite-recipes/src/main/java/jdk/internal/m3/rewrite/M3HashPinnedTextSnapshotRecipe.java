@@ -340,7 +340,7 @@ public final class M3HashPinnedTextSnapshotRecipe
         "(?:[A-Za-z0-9_.-]+/)*src/(?:main|test)/resources/META-INF/services/"
             + "[A-Za-z_$][A-Za-z0-9_$]*(?:\\.[A-Za-z_$][A-Za-z0-9_$]*)*");
     boolean m3BuildLauncher = value.matches(
-        "m3/tooling/module-packs/build-tools/launchers/m3-(?:ant|gradle|mvn)(?:[.]cmd)?");
+        "make/m3/tooling/module-packs/build-tools/launchers/m3-(?:ant|gradle|mvn)(?:[.]cmd)?");
     // Keep the existing Gradle compiler-argument contract in its native source language.
     boolean gradleCompilerArgumentsContract = value.equals(
         "platforms/jvm/java-compiler-worker/src/test/groovy/org/gradle/api/internal/tasks/compile/JavaCompilerArgumentsBuilderTest.groovy");

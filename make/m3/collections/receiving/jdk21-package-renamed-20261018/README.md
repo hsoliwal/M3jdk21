@@ -3,7 +3,7 @@
 
 Copyright 2026 Hitesh Soliwal and contributors. Authored receiving metadata is Apache-2.0; imported source retains its original rights.
 
-The package-first pass imports complete source bodies into [the implementation directory](../../implementations/jdk21-package-renamed/). FULL_SOURCE_BINDINGS.tsv records each original/target path, mode, Git blob and raw SHA-256. File counts describe this finite inventory, not implemented collection contracts.
+The package-first pass imports complete source bodies into [the implementation directory](../../../../../m3/collections/implementations/jdk21-package-renamed/). FULL_SOURCE_BINDINGS.tsv records each original/target path, mode, Git blob and raw SHA-256. File counts describe this finite inventory, not implemented collection contracts.
 
 All59 selected sources have exact raw inverses and preserved headers. Full compilation fails with78 errors and one warning on internal APIs/package-private dependencies. Only four helpers compile in the finite strict profile; no collection runtime was initialized or validated.
 

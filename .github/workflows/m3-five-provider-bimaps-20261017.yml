@@ -4,7 +4,7 @@ on:
   pull_request:
     paths:
       - 'm3/collections/interop/**'
-      - 'm3/collections/qualification/m3-five-provider-bimaps-20261017/**'
+      - 'make/m3/collections/qualification/m3-five-provider-bimaps-20261017/**'
       - '.github/workflows/m3-five-provider-bimaps-20261017.yml'
   workflow_dispatch:
 jobs:
@@ -17,14 +17,14 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Run actual OpenRewrite Maven JUnit fixed-point/drift/9-postimage proof
-        run: mvn -B -ntp -f m3/collections/qualification/m3-five-provider-bimaps-20261017/recipe/pom.xml clean verify
+        run: mvn -B -ntp -f make/m3/collections/qualification/m3-five-provider-bimaps-20261017/recipe/pom.xml clean verify
       - name: Check installed bytes against canonical SHA256 templates
         run: |
           python3 - <<'PY'
           from pathlib import Path
           import hashlib
           root=Path(".")
-          template=root/"m3/collections/qualification/m3-five-provider-bimaps-20261017/recipe/src/main/resources/jdk/internal/m3/rewrite/m3-five-provider-bimaps-20261017"
+          template=root/"make/m3/collections/qualification/m3-five-provider-bimaps-20261017/recipe/src/main/resources/jdk/internal/m3/rewrite/m3-five-provider-bimaps-20261017"
           for line in (template/"manifest.tsv").read_text(encoding="utf-8").splitlines():
               path,before,after,resource=line.split("\t")
               expected=(template/resource).read_bytes()

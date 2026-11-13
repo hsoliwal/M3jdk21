@@ -71,8 +71,8 @@ No Java 21 API/removal or language-semantic change is admitted by this inventory
 The repository retains the executor required to turn the deterministic generator output into an
 exact candidate without hand-editing any jlink file:
 
-- generator: `m3/backports/generate_recipe_crates.py`;
-- executor: `m3/backports/materialize_generated_crates.py`;
+- generator: `make/m3/backports/generate_recipe_crates.py`;
+- executor: `make/m3/backports/materialize_generated_crates.py`;
 - implementation denominator: 47 upstream implementation paths;
 - selected materialization set: 46 GA-final paths in `PATHS.txt`;
 - typed exclusion: one `GA_REMOVED_DO_NOT_ADD` row in `TYPED_EXCLUSIONS.tsv`;

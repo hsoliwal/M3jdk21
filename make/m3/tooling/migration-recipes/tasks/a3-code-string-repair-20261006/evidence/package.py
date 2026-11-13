@@ -2,7 +2,7 @@
 """Freeze actual A3 repair outputs and disjoint evidence for root publication."""
 from pathlib import Path
 import json,hashlib,shutil,datetime,xml.etree.ElementTree as ET
-HERE=Path(__file__).resolve().parent;ROOT=HERE.parents[1];PREFIX=Path('m3/tooling/migration-recipes/tasks/a3-code-string-repair-20261006');OVER=HERE/'publication/overlay'
+HERE=Path(__file__).resolve().parent;ROOT=HERE.parents[1];PREFIX=Path('make/m3/tooling/migration-recipes/tasks/a3-code-string-repair-20261006');OVER=HERE/'publication/overlay'
 def ident(p):
  b=p.read_bytes();return {'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest(),'git_blob':hashlib.sha1(b'blob '+str(len(b)).encode()+b'\0'+b).hexdigest()}
 def put(p,d):

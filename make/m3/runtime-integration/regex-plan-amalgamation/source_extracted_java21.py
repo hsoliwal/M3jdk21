@@ -13,7 +13,7 @@ from tempfile import TemporaryDirectory
 import subprocess
 import sys
 
-ROOT = Path(__file__).resolve().parents[3]
+ROOT = Path(__file__).resolve().parents[4]
 SOURCE = "src/java.base/share/classes/java/lang/M3StringRegexDp.java"
 STRING = "src/java.base/share/classes/java/lang/M3String.java"
 FACTS = "src/java.base/share/classes/java/lang/M3StringFacts.java"

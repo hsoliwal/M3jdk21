@@ -8,7 +8,7 @@ Until this change, nothing built the C sources in `src/jdk.m3.collections/share/
 - `make/m3/arrays/CMakeLists.txt` builds only `libm3arrays`.
 - `m3/native/CMakeLists.txt` still named the sources by their pre-move paths, `m3/arrays/src/main/native` and
   `m3/collections/src/main/native`. Neither path exists after #2849, so its CMake configure step failed.
-- `m3/collections/viewport-proof` also points at pre-move paths. It is left unchanged here (see Open items).
+- `make/m3/collections/viewport-proof` also points at pre-move paths. It is left unchanged here (see Open items).
 
 `tools/native_census.py` compares every Java `native` method of the module with the C symbols that exist.
 `NATIVE_CENSUS.tsv` and `NATIVE_LIBS.tsv` hold the result for 45 classes:
@@ -65,9 +65,9 @@ N7 of the plan.
 
 ```
 # Linux
-JAVA_HOME=<jdk21> bash m3/collections/qualification/native-build-20261109/tools/build_check.sh . /tmp/m3coll
+JAVA_HOME=<jdk21> bash make/m3/collections/qualification/native-build-20261109/tools/build_check.sh . /tmp/m3coll
 # Windows (MinGW)
-JAVA_HOME=<jdk21> bash m3/collections/qualification/native-build-20261109/tools/build_check.sh . <dir> -G Ninja -DCMAKE_C_COMPILER=gcc
+JAVA_HOME=<jdk21> bash make/m3/collections/qualification/native-build-20261109/tools/build_check.sh . <dir> -G Ninja -DCMAKE_C_COMPILER=gcc
 # Java side: build make/m3/arrays too, then
 mvn -f m3/collections/pom.xml verify -Pm3-collections-native -Dm3.collections.native.dir=<arrays build> \
     -Dm3.collections.jni.dir=<collections build>
@@ -88,7 +88,7 @@ See `GATES.tsv`.
 - **`m3.native.path`.** `ArrayStorageNativeContractTest` and the `MaskViewport*Contract` mains both read this one
   property, but they need different libraries. ArrayStorage needs the packed-array natives, which are ABSENT (N2).
   The profile therefore leaves the property unset.
-- **`m3/collections/viewport-proof`.** It and `verify_mask_viewport.py` still name pre-move paths. Retiring them in
+- **`make/m3/collections/viewport-proof`.** It and `verify_mask_viewport.py` still name pre-move paths. Retiring them in
   favour of this build, or repointing them, is a later leaf.
 - **N2 to N7.** These leaves absorb the com.synexia C for the 99 ABSENT methods into this CMake, and hunt for or
   retire the five classes that have no C anywhere (`nativecrate/PLAN.md` in the com.synexia recipe crate).

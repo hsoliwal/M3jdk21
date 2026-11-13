@@ -13,7 +13,7 @@
     },
     {
       "source": "CPUTOOLS(6).txt; 91 categories and 19 Unix tool names",
-      "target": "m3/tooling/jmod-recipes/CPU_TOOL_CATEGORY_MATRIX_20261017.tsv",
+      "target": "make/m3/tooling/jmod-recipes/CPU_TOOL_CATEGORY_MATRIX_20261017.tsv",
       "status": "catalogue only, not all algorithms implemented",
       "target_rule": "Review pinned providers per concrete contract; command binaries external with separate licenses."
     }

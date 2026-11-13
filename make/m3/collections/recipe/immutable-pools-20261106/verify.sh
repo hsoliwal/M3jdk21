@@ -11,8 +11,8 @@
 set -euo pipefail
 case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) SEP=';'; winpath() { (cd "$1" && pwd -W); } ;; *) SEP=':'; winpath() { (cd "$1" && pwd); } ;; esac
 RECIPE_DIR=$(winpath "$(dirname "$0")")
-MODULE=$(winpath "$(dirname "$0")/../..")
-ROOT=$(winpath "$(dirname "$0")/../../../..")
+MODULE=$(winpath "$(dirname "$0")/../../../../../m3/collections")
+ROOT=$(winpath "$(dirname "$0")/../../../../..")
 mkdir -p "$3"
 SCRATCH=$(winpath "$3")
 PY=${PYTHON:-python}
@@ -28,7 +28,7 @@ for oracle in M3ImmutablePoolSelfTest M3Uuid128SelfTest M3UuidBinarySelfTest; do
     "$JAVA_BIN/java" -cp "$MODULE/target/classes$SEP$MODULE/target/test-classes" "jdk.m3.collections.$oracle"
 done
 bash "$RECIPE_DIR/differential.sh" "$1" "$2" "$SCRATCH" "${4:-100000}" "${5:-20261106}"
-(cd "$ROOT" && "$PY" -I m3/tooling/jdk-naming/jdk_naming.py plan --root . --only m3/collections/ | tail -n 1)
+(cd "$ROOT" && "$PY" -I make/m3/tooling/jdk-naming/jdk_naming.py plan --root . --only m3/collections/ | tail -n 1)
 if [ "${FULL_TESTS:-0}" = 1 ]; then
     mvn -B -ntp $REPO -f "$MODULE/pom.xml" test > "$SCRATCH/module-test.log" 2>&1 || true
     grep -E "Tests run: [0-9]+, Failures.*Skipped: [0-9]+" "$SCRATCH/module-test.log" | tail -n 1 | tr -d '\r'

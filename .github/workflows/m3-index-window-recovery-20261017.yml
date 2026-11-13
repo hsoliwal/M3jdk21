@@ -5,7 +5,7 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexMaskCompactor.java'
       - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c'
       - 'test/jdk/jdk/m3/collections/M3IndexMaskWindowRecovery*'
-      - 'm3/collections/qualification/window-recovery-20261017/**'
+      - 'make/m3/collections/qualification/window-recovery-20261017/**'
       - '.github/workflows/m3-index-window-recovery-20261017.yml'
   workflow_dispatch:
 permissions:
@@ -27,7 +27,7 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Verify source hashes before compilation
-        run: python3 m3/collections/qualification/window-recovery-20261017/verify.py
+        run: python3 make/m3/collections/qualification/window-recovery-20261017/verify.py
       - name: Compile real owner and run Java21 / actual JNI / UBSan parity
         shell: bash
         run: |

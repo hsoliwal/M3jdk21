@@ -5,7 +5,7 @@
   "canonical_crate": "m3-openrewrite-recipes/crates/m3-nlp-search/current-forks-20261018",
   "canonical_publication": "REVIEW_BRANCH_PENDING",
   "target_base_commit": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
-  "receiver": "m3/tooling/module-packs/nlp-search/current-forks",
+  "receiver": "make/m3/tooling/module-packs/nlp-search/current-forks",
   "source_bases": {
     "hsoliwal/lucene": "d1b7235f1ba1c1eea5b04a5b7e6554595a90719e",
     "hsoliwal/opennlp": "368337311ad94b665fd178f8d3ced005a73b2370"

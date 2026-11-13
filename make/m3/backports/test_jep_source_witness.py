@@ -32,7 +32,7 @@ class WitnessTest(unittest.TestCase):
         self.root = Path(self.temp.name)
         self.row = dict(release="27", jep="523", title="Default G1",
                         disposition="candidate")
-        self.packet = self.root / "m3/backports/recipes/jep-523-g1-default"
+        self.packet = self.root / "make/m3/backports/recipes/jep-523-g1-default"
         self.packet.mkdir(parents=True)
 
     def write_receipt(self, text):
@@ -115,18 +115,18 @@ class WitnessTest(unittest.TestCase):
         self.assertEqual("INVALID_RECEIPT", self.witness().witness_state)
 
     def test_exact_names_no_cross_jep_alias(self):
-        other = self.root / "m3/backports/recipes/jep-5234-fake"
+        other = self.root / "make/m3/backports/recipes/jep-5234-fake"
         other.mkdir(parents=True)
         self.assertEqual(1, self.witness().packet_count)
 
     def test_output_confined_and_does_not_follow_alias(self):
-        safe = self.root / "m3/backports/target/receipts/audit.tsv"
+        safe = self.root / "make/m3/backports/target/receipts/audit.tsv"
         self.assertEqual(safe, self.mod.checked_output_path(self.root, safe))
         with self.assertRaisesRegex(ValueError, "must be under"):
             self.mod.checked_output_path(self.root, self.root / "src/Product.java")
         with self.assertRaisesRegex(ValueError, "traversal"):
             self.mod.checked_output_path(self.root, safe.parent / "../audit.tsv")
-        target = self.root / "m3/backports/target"
+        target = self.root / "make/m3/backports/target"
         target.mkdir(parents=True)
         external = self.root / "external"
         external.mkdir()
@@ -135,7 +135,7 @@ class WitnessTest(unittest.TestCase):
             self.mod.checked_output_path(self.root, target / "aliased/audit.tsv")
 
     def test_hard_link_receipt_is_not_overwritten(self):
-        target = self.root / "m3/backports/target"
+        target = self.root / "make/m3/backports/target"
         target.mkdir(parents=True)
         original = self.root / "source.java"
         original.write_text("preserve", encoding="utf-8")

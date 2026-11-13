@@ -4,10 +4,10 @@ name: M3JDK21 JDK-8364182 source lineage proof
 on:
   pull_request:
     paths:
-      - 'm3/backports/recipes/jdk-8364182/adaptation.tsv'
-      - 'm3/backports/verify.py'
-      - 'm3/backports/test_jdk8364182_source_lineage.py'
-      - 'm3/docs/jdk8364182-vmsymbols-superseded-state-20261011.md'
+      - 'make/m3/backports/recipes/jdk-8364182/adaptation.tsv'
+      - 'make/m3/backports/verify.py'
+      - 'make/m3/backports/test_jdk8364182_source_lineage.py'
+      - 'doc/m3/jdk8364182-vmsymbols-superseded-state-20261011.md'
       - '.github/workflows/m3jdk8364182-superseded-vmsymbols.yml'
   workflow_dispatch:
 
@@ -30,7 +30,7 @@ jobs:
         run: |
           set -euo pipefail
           git diff --check
-          python3 -m py_compile m3/backports/verify.py m3/backports/test_jdk8364182_source_lineage.py
+          python3 -m py_compile make/m3/backports/verify.py make/m3/backports/test_jdk8364182_source_lineage.py
       - name: 2 - JDK-8364182 exact source lineage differential tests
         run: |
           set -euo pipefail
@@ -38,4 +38,4 @@ jobs:
       - name: 3 - Existing full backport catalogue/implementation integrity gate
         run: |
           set -euo pipefail
-          python3 m3/backports/verify.py --root .
+          python3 make/m3/backports/verify.py --root .

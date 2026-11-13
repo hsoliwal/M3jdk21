@@ -3,7 +3,7 @@
 # m3/compiler/parent-owned: the @M3ParentOwned annotation processor
 
 Module `org.m3jdk.compiler.parentowned` (package `jdk.m3.compiler.parentowned`), Maven coordinates
-`com.m3:m3-compiler-parent-owned:0.1.0-SNAPSHOT`, Java 21; a default module of `m3/pom.xml`.
+`com.m3:m3-compiler-parent-owned:0.1.0-SNAPSHOT`, Java 21; a default module of `make/m3/pom.xml`.
 
 `M3ParentOwnedProcessor` is the opt-in JSR-269 processor of `jdk.m3.collections.M3ParentOwned`. It writes the
 deterministic, conservative `META-INF/m3/parent-owned-v1.tsv` sidecar: one row per annotated class, field and method

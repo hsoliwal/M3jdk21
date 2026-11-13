@@ -3,7 +3,7 @@ name: M3 bounded filtered current-master receiver
 on:
   pull_request:
     paths:
-      - 'm3/collections/qualification/m3-filtered-bounded-current-20261018/**'
+      - 'make/m3/collections/qualification/m3-filtered-bounded-current-20261018/**'
       - 'm3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java'
       - 'm3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java'
       - 'm3/collections/src/test/java/jdk/m3/collections/M3BoundedFilteredNavigationContract.java'
@@ -23,11 +23,11 @@ jobs:
         run: |
           set -eu
           awk -F '\t' '{print $3 "  " $1}' \
-            m3/collections/qualification/m3-filtered-bounded-current-20261018/recipe/manifest.tsv | sha256sum -c -
+            make/m3/collections/qualification/m3-filtered-bounded-current-20261018/recipe/manifest.tsv | sha256sum -c -
       - name: Independently check mirrored recipe resource hashes
         run: |
           set -eu
-          Q=m3/collections/qualification/m3-filtered-bounded-current-20261018/recipe
+          Q=make/m3/collections/qualification/m3-filtered-bounded-current-20261018/recipe
           awk -F '\t' -v q="$Q" '{print $3 "  " q "/" $4}' "$Q/manifest.tsv" | sha256sum -c -
           cmp "$Q/M3FilteredViews.java.txt" m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java
           cmp "$Q/M3MutableFilteredViews.java.txt" m3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java

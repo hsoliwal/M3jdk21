@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # Current-master Java21 qualification. Historical source receipts are not modified.
 set -euo pipefail
-cd "$(dirname "${BASH_SOURCE[0]}")/../../../.."
+cd "$(dirname "${BASH_SOURCE[0]}")/../../../../.."
 source_file=src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredViews.java
 expected=45ad6df3a51e83c67dc70de7c7acd82bec2305d3
 actual=$(git hash-object "$source_file")

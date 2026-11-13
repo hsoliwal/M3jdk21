@@ -9,7 +9,7 @@ on:
       - 'test/jdk/jdk/m3/collections/M3SignalDependencyEpochs*.java'
       - 'test/jdk/jdk/m3/collections/M3SignalQualitySchema*.java'
       - 'test/jdk/jdk/m3/collections/M3SourceSignalQualityFactory*.java'
-      - 'm3/collections/qualification/signal-dependency-epochs-20261024/**'
+      - 'make/m3/collections/qualification/signal-dependency-epochs-20261024/**'
       - '.github/workflows/m3-signal-dependency-epochs-20261024.yml'
   workflow_dispatch:
 permissions:

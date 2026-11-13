@@ -5,7 +5,7 @@
 import hashlib
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[4]
+ROOT = Path(__file__).resolve().parents[5]
 RECEIPT = Path(__file__).with_name('manifest.tsv')
 PIN = '5a31e842ac133187201a6a1fab8c08e3d057e4fd1fb60e43c19f5472921f2b09'
 PATHS = ('src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexMaskCompactor.java', 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c', 'test/jdk/jdk/m3/collections/M3IndexMaskWindowRecoverySelfTest.java', 'test/jdk/jdk/m3/collections/M3IndexMaskWindowRecoveryTest.java')

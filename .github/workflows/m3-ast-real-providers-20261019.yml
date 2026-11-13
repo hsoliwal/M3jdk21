@@ -6,8 +6,8 @@ on:
     branches: [m3/ast-original-providers-20261019]
   pull_request:
     paths:
-      - m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTAuthoritativeModels.java
-      - m3/tooling/module-packs/parser/real-providers/**
+      - make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTAuthoritativeModels.java
+      - make/m3/tooling/module-packs/parser/real-providers/**
       - .github/workflows/m3-ast-real-providers-20261019.yml
   workflow_dispatch:
 
@@ -35,7 +35,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          PACK=m3/tooling/module-packs/parser/real-providers
+          PACK=make/m3/tooling/module-packs/parser/real-providers
           mkdir -p "$RUNNER_TEMP/m3-real"
           mvn -B -ntp -f "$PACK/pom.xml" \
             org.apache.maven.plugins:maven-dependency-plugin:3.9.0:build-classpath \
@@ -45,7 +45,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          PACK=m3/tooling/module-packs/parser
+          PACK=make/m3/tooling/module-packs/parser
           CP="$(cat "$RUNNER_TEMP/m3-real/classpath.txt")"
           mkdir -p "$RUNNER_TEMP/m3-real/classes"
           javac --release 21 -Xlint:all,-deprecation,-removal -Werror -proc:none \

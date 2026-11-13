@@ -18,8 +18,8 @@ The implementation snapshots `long[]` once and represents logical sequences with
 Source recipe: hash-sealed Maven module; `javac --release 21 -Xlint:all -Werror` direct verification is possible without Maven. `--apply` preflights all files, refuses occupied/drifted/symlinked paths, writes only absent targets and is fixed-point/idempotent. `--check` demands exact template-byte identity. An existing-file transformation in any future revision MUST use a qualified OpenRewrite recipe rather than manually patch the generated file.
 
 ```sh
-mvn -f m3/collections/qualification/m3-long-index-projection-20261017/recipe/pom.xml verify
-java -cp m3/collections/qualification/m3-long-index-projection-20261017/recipe/target/classes com.synexia.m3.M3LongIndexProjectionRecipe --check .
+mvn -f make/m3/collections/qualification/m3-long-index-projection-20261017/recipe/pom.xml verify
+java -cp make/m3/collections/qualification/m3-long-index-projection-20261017/recipe/target/classes com.synexia.m3.M3LongIndexProjectionRecipe --check .
 # source materialization is `--apply .`, only on an admitted absent receiver
 ```
 

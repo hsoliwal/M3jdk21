@@ -18,7 +18,7 @@
 set -euo pipefail
 case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) SEP=';'; winpath() { (cd "$1" && pwd -W); } ;; *) SEP=':'; winpath() { (cd "$1" && pwd); } ;; esac
 RECIPE_DIR=$(winpath "$(dirname "$0")")
-MODULE=$(winpath "$(dirname "$0")/../..")
+MODULE=$(winpath "$(dirname "$0")/../../../../../m3/optane")
 DONOR_GIT=$1
 REV=$2
 OPERATIONS=${4:-100000}

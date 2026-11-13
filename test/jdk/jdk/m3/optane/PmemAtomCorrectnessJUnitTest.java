@@ -6,7 +6,7 @@ package jdk.m3.optane;
 import org.junit.jupiter.api.Test;
 
 /** Recipe-generated; do not hand-edit. */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/36827ee8a798ef6ce07f6fc55a2ac371b1382c06/m3-pmem-sdk/src/junit/java/test/PmemAtomCorrectnessJUnitTest.java blob 5ca643f45d85; recipe m3/optane/recipe/pmem-region-core-20261106/relocate.py v2
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/36827ee8a798ef6ce07f6fc55a2ac371b1382c06/m3-pmem-sdk/src/junit/java/test/PmemAtomCorrectnessJUnitTest.java blob 5ca643f45d85; recipe make/m3/optane/recipe/pmem-region-core-20261106/relocate.py v2
 public final class PmemAtomCorrectnessJUnitTest {
     @Test
     void test_PmemSdk_capabilities() throws Exception { PmemAtomCases.verify("capabilities"); }

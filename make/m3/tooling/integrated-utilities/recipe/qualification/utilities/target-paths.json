@@ -1,8 +1,8 @@
 [
-  "m3/runtime-integration/integrated-utilities/README.md",
-  "m3/runtime-integration/integrated-utilities/behavioral-atoms.json",
-  "m3/runtime-integration/integrated-utilities/contract-catalogue.json",
-  "m3/runtime-integration/integrated-utilities/verify.py",
+  "make/m3/runtime-integration/integrated-utilities/README.md",
+  "make/m3/runtime-integration/integrated-utilities/behavioral-atoms.json",
+  "make/m3/runtime-integration/integrated-utilities/contract-catalogue.json",
+  "make/m3/runtime-integration/integrated-utilities/verify.py",
   "src/java.base/share/classes/java/io/IOUtils.java",
   "src/java.base/share/classes/java/lang/reflect/Reflection.java",
   "src/java.base/share/classes/java/util/Strings.java",

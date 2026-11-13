@@ -30,7 +30,7 @@ Consult `../../algorithm-catalog/netbeans-collection-atoms-20261019.tsv` for cat
 With JDK 21, Maven, a C17 compiler, and the source-JUnit dependency closure available, run from the repository root:
 
 ```sh
-python3 m3/collections/qualification/full-java-jni-20261018/verify.py
+python3 make/m3/collections/qualification/full-java-jni-20261018/verify.py
 ```
 
 Set `JAVA_HOME`, `MVN`, and optionally `M2_REPO`; set `M3_MAVEN_OFFLINE=1` to require the resolved cache. `EXPECTED_HEAD` can bind the checkout commit. The gate checks source inventories, fresh Java compilation, generated JNI headers, all product native libraries, fatal undefined-behavior sanitization, Java-only and required-native Maven suites, explicit native contracts, unavailable-library refusal, packaged legal/provenance bytes, and the `java.base` runtime dependency boundary. Native-only tests may skip only in the Java-only run; the required-native run must have zero skips.
@@ -49,7 +49,7 @@ Parallel candidate research and independent proof preparation are permitted. Rec
 
 The active combined catalogue is `../../algorithm-catalog/netbeans-collection-atoms-20261019.tsv`.
 The 20-row same-named file in this qualification directory is an unmodified donor-input receipt;
-its relative links preserve the original `m3/collections/algorithm-catalog` path base. It is not a
+its relative links preserve the original `make/m3/collections/algorithm-catalog` path base. It is not a
 second active catalogue. `REVIEWED_CANDIDATES.tsv` and `DONOR_DECISION.md` describe that frozen
 input, while the active catalogue adds current-owner contract and qualification decisions.
 `DONOR_SHA256SUMS.txt` checks the relocated supporting payloads. The diagnostic benchmark is

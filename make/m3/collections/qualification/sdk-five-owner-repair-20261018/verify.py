@@ -6,7 +6,7 @@ import hashlib
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[3]
+ROOT = HERE.parents[4]
 RES = HERE / "recipe/src/main/resources/jdk/internal/m3/rewrite/m3-five-sdk-owner-repair-20261018"
 
 def checked(path: Path) -> bytes:

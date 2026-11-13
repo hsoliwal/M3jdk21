@@ -5,8 +5,8 @@ import pathlib
 import re
 import sys
 
-ROOT = pathlib.Path(__file__).resolve().parents[2]
-LEDGER = ROOT / "m3/docs/m3string-history-recovery.tsv"
+ROOT = pathlib.Path(__file__).resolve().parents[3]
+LEDGER = ROOT / "doc/m3/m3string-history-recovery.tsv"
 EXPECTED = {
     "mindex.string.char-array-ingress",
     "mindex.string.char-array-ingress-recipe",

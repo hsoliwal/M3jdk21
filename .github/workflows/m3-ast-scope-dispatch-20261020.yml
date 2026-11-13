@@ -6,7 +6,7 @@ on:
       - 'm3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ASTLeafIndex.java'
       - 'm3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3ASTScopeDispatchProof.java'
       - 'm3/ports/compiletime/qualification/ast-scope-dispatch-20261020/**'
-      - 'm3/tooling/shared-frontend/recipe-custody/datasets/ast-scope-dispatch-20261020/**'
+      - 'make/m3/tooling/shared-frontend/recipe-custody/datasets/ast-scope-dispatch-20261020/**'
       - '.github/workflows/m3-ast-scope-dispatch-20261020.yml'
   workflow_dispatch:
 permissions:
@@ -30,7 +30,7 @@ jobs:
             m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3ASTLeafIndexSelfTest.java
             m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3ASTScopeDispatchProof.java
             m3/ports/compiletime/qualification/ast-scope-dispatch-20261020/
-            m3/tooling/shared-frontend/recipe-custody/
+            make/m3/tooling/shared-frontend/recipe-custody/
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -52,7 +52,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          root="$PWD/m3/tooling/shared-frontend/recipe-custody"
+          root="$PWD/make/m3/tooling/shared-frontend/recipe-custody"
           mvn -B -ntp -f "$root/pom.xml" \
             -Dm3.dataset=ast-scope-dispatch-20261020 \
             "-Drecipe.owner.root=$root/sdk-owner" -Pcontract verify

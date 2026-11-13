@@ -16,5 +16,5 @@ echo "E2 map: $(awk -F'\t' 'NR>1{print $3}' "RENAME_MAP_E2_$T.tsv" | sort | uniq
 cp "RENAME_MAP_E2_$T.tsv" RENAME_MAP_E2.tsv
 CURATE_CORE=jdk.m3.collections TESTS_AS_OWNERS=1 EXTRA_SKIP_DIRS=recipes,recipe,verification python -I curate_rename_e.py bcw RENAME_MAP_E2.tsv | tail -1
 G=bcw/m3/tooling/jdk-naming/pom_dependents.py
-[ -f "$G" ] && (cd bcw && python -I m3/tooling/jdk-naming/pom_dependents.py --help 2>&1 | head -3)
+[ -f "$G" ] && (cd bcw && python -I make/m3/tooling/jdk-naming/pom_dependents.py --help 2>&1 | head -3)
 bash e2_verify.sh "$T"

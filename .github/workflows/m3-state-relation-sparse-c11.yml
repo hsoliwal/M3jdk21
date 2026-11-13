@@ -6,12 +6,12 @@ on:
   pull_request:
     paths:
       - '.github/workflows/m3-state-relation-sparse-c11.yml'
-      - 'm3/tooling/state-relation-sparse-c11/**'
+      - 'make/m3/tooling/state-relation-sparse-c11/**'
       - 'src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java'
       - 'src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java'
       - 'src/java.base/share/native/libjava/M3StateRelation.c'
       - 'src/java.base/share/native/libjava/m3_state_relation.h'
-      - 'm3/compatibility/regex-relations-20261014/M3RelationPortProof.java'
+      - 'make/m3/compatibility/regex-relations-20261014/M3RelationPortProof.java'
 permissions:
   contents: read
 concurrency:
@@ -128,7 +128,7 @@ jobs:
           root=pathlib.Path(os.environ["M3_PROOF_ROOT"])
           source=pathlib.Path(os.environ["M3_SOURCE_ROOT"])
           bundle=root/"artifacts";bundle.mkdir(exist_ok=False)
-          sdk=source/"m3/tooling/state-relation-sparse-c11/sdk"
+          sdk=source/"make/m3/tooling/state-relation-sparse-c11/sdk"
           start=time.monotonic()
           active_command=None
           class CensusRescan(RuntimeError):pass
@@ -289,7 +289,7 @@ jobs:
               gate()
               if code!=expected:raise RuntimeError(name+" failed with "+str(code)+" expected "+str(expected))
           py=[os.environ["M3_PYTHON"],"-I","-S","-B"]
-          qualifier=source/"m3/tooling/state-relation-sparse-c11/qualify.py"
+          qualifier=source/"make/m3/tooling/state-relation-sparse-c11/qualify.py"
           settings=root/"home/.m2"
           maven=["mvn","-B","-ntp","-s",str(settings/"settings.xml"),"-gs",str(settings/"global-settings.xml"),"-Dmaven.repo.local="+str(root/"m2"),"-Dstyle.color=never"]
           try:
@@ -305,7 +305,7 @@ jobs:
               if any((sdk/"target"/name).exists() for name in ("classes","test-classes","surefire-reports")):raise RuntimeError("SDK compilation and test outputs must start absent")
               run("sdk-maven",maven+["-f",str(sdk/"pom.xml"),"-DskipTests=false","-Dmaven.test.skip=false","test"],deadline=600)
               run("sdk-reports",py+[str(sdk/"verify.py"),"--reports"],deadline=90)
-              runtime=source/"m3/tooling/state-relation-sparse-c11/runtime/qualify.py"
+              runtime=source/"make/m3/tooling/state-relation-sparse-c11/runtime/qualify.py"
               run("native-inputs",py+[str(runtime),"--output-root",str(root),"--inputs-only"],deadline=90)
               run("native-proof",py+[str(runtime),"--output-root",str(root),"--run"],deadline=600)
               run("sdk-report",py+[str(qualifier),"report"],deadline=180)

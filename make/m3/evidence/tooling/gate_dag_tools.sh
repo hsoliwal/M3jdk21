@@ -14,7 +14,7 @@ RW=$(find $M2/org/openrewrite -path '*/8.17.1/*.jar' ! -name '*sources*' ! -name
      find $M2/com/fasterxml/jackson $M2/io/micrometer $M2/org/jspecify $M2/org/jetbrains/annotations $M2/com/google/code/findbugs \
           -name '*.jar' ! -name '*sources*' ! -name '*javadoc*' 2>/dev/null)
 RW=$(echo "$RW" | tr '\n' ':')
-DSP=$D/m3/tooling/a3/src/main/java:$D/m3/tooling/migration-recipes/src/main/java:$D/m3/vendor/m3/m3-openrewrite-recipes/src/main/java
+DSP=$D/make/m3/tooling/a3/src/main/java:$D/make/m3/tooling/migration-recipes/src/main/java:$D/m3/vendor/m3/m3-openrewrite-recipes/src/main/java
 EXCL=""  # regex of type stems left out of a build, with every file that names one (closure), on both trees alike
 excluded() {  # <files...> : the files to leave out under EXCL, closed over references
   [ -n "$EXCL" ] || return 0
@@ -48,7 +48,7 @@ run() {  # <name> <module dir> <classpath> [props]
     --scan-class-path "$O/$n/test" --disable-banner --details=tree > "$O/$n/junit.log" 2>&1)
   echo "$n junit rc=$? $(grep -E 'tests (found|successful|failed|skipped|aborted)' "$O/$n/junit.log" | tr -s ' []' ' ' | tr '\n' ' ')"
 }
-M=$T/m3/tooling
+M=$T/make/m3/tooling
 build dag "$M/backport-dag" "$RW" "$DSP"
 # master does not compile these two (stale A3Apply.run signature, record accessor shadowing path()); the rest is gated
 EXCL="A3BackportPreparation|PacketDagComposer" build dagx "$M/backport-dag" "$RW" "$DSP"

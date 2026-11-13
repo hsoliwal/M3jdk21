@@ -15,7 +15,7 @@ final class M3BulkExecutorGateRepairRecipeTest {
         assertFalse(recipe.promotionAuthority());
         assertEquals(
                 List.of(
-                        "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BulkExecutorPortRecipeTest.java",
+                        "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BulkExecutorPortRecipeTest.java",
                         "src/java.base/share/classes/java/lang/String.java"),
                 new M3Jdk21HashPinnedSnapshotRecipe(recipe.CRATE).targetPaths());
         assertEquals(

@@ -10,19 +10,19 @@
   "files": [
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/build/README.md",
-      "targetPath": "m3/tooling/tq-sync/source-build/README.md",
+      "targetPath": "make/m3/tooling/tq-sync/source-build/README.md",
       "gitBlob": "c3407507948c931178daf4e44d2de9d74585e019",
       "bytes": 5579
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/build/build-inputs.json",
-      "targetPath": "m3/tooling/tq-sync/source-build/build-inputs.json",
+      "targetPath": "make/m3/tooling/tq-sync/source-build/build-inputs.json",
       "gitBlob": "ab126598479466e0b6c52a55939eef4f299d67a0",
       "bytes": 67195
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/build/qualify.py",
-      "targetPath": "m3/tooling/tq-sync/source-build/qualify.py",
+      "targetPath": "make/m3/tooling/tq-sync/source-build/qualify.py",
       "gitBlob": "8834da888b8b86f60a221f12ca72a969771251ea",
       "bytes": 43773
     },
@@ -34,19 +34,19 @@
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/recipe/README.md",
-      "targetPath": "m3/tooling/tq-sync/source-reactor/README.md",
+      "targetPath": "make/m3/tooling/tq-sync/source-reactor/README.md",
       "gitBlob": "26146304d14884ac1ebf3b487e4fb290a0fe24fc",
       "bytes": 1984
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/recipe/expected-projects.json",
-      "targetPath": "m3/tooling/tq-sync/source-reactor/expected-projects.json",
+      "targetPath": "make/m3/tooling/tq-sync/source-reactor/expected-projects.json",
       "gitBlob": "462b7e1dfa3f6d74ceda23a2c3109b89777c98ca",
       "bytes": 35277
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/recipe/pom.xml",
-      "targetPath": "m3/tooling/tq-sync/source-reactor/pom.xml",
+      "targetPath": "make/m3/tooling/tq-sync/source-reactor/pom.xml",
       "gitBlob": "67f9d07050c93e4268fd6d09b93b6c967a93050b",
       "bytes": 836
     },
@@ -58,67 +58,67 @@
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/recipe/test_reactor.py",
-      "targetPath": "m3/tooling/tq-sync/source-reactor/test_reactor.py",
+      "targetPath": "make/m3/tooling/tq-sync/source-reactor/test_reactor.py",
       "gitBlob": "e92978b80d8f1ac49d8b255fe9d99e307d95e7cf",
       "bytes": 9823
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/build/fixture-repair/src/main/resources/META-INF/rewrite/m3-tq-manifest-consistency-20261019.yml",
-      "targetPath": "m3/tooling/tq-sync/src/main/resources/META-INF/rewrite/m3-tq-manifest-consistency-20261019.yml",
+      "targetPath": "make/m3/tooling/tq-sync/src/main/resources/META-INF/rewrite/m3-tq-manifest-consistency-20261019.yml",
       "gitBlob": "a63a89ce6ab43249ab408982f2643399b670d326",
       "bytes": 510
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/build/fixture-repair/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-manifest-consistency-20261019/manifest.tsv",
-      "targetPath": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-manifest-consistency-20261019/manifest.tsv",
+      "targetPath": "make/m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-manifest-consistency-20261019/manifest.tsv",
       "gitBlob": "e9ac464baf3db3ef0fddc6746be993461d5b6f19",
       "bytes": 412
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/build/fixture-repair/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-manifest-consistency-20261019/tq-manifest.tsv.txt",
-      "targetPath": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-manifest-consistency-20261019/tq-manifest.tsv.txt",
+      "targetPath": "make/m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-manifest-consistency-20261019/tq-manifest.tsv.txt",
       "gitBlob": "cf3d2768e2ccda9b8caa64e5b445285d3565d628",
       "bytes": 5292
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/build/fixture-repair/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-manifest-consistency-20261019/tq-manifest.tsv.txt.before",
-      "targetPath": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-manifest-consistency-20261019/tq-manifest.tsv.txt.before",
+      "targetPath": "make/m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-manifest-consistency-20261019/tq-manifest.tsv.txt.before",
       "gitBlob": "d39b06b66d6d1e30dae8e1e85c1f37be2edcea23",
       "bytes": 5292
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/build/fixture-repair/src/main/resources/META-INF/rewrite/m3-tq-manifest-consistency-20261019-inverse.yml",
-      "targetPath": "m3/tooling/tq-sync/src/main/resources/META-INF/rewrite/m3-tq-manifest-consistency-20261019-inverse.yml",
+      "targetPath": "make/m3/tooling/tq-sync/src/main/resources/META-INF/rewrite/m3-tq-manifest-consistency-20261019-inverse.yml",
       "gitBlob": "3ba77a54aa6f125763fa40a74494d4dc3bb77368",
       "bytes": 531
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/build/fixture-repair/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-manifest-consistency-20261019-inverse/manifest.tsv",
-      "targetPath": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-manifest-consistency-20261019-inverse/manifest.tsv",
+      "targetPath": "make/m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-manifest-consistency-20261019-inverse/manifest.tsv",
       "gitBlob": "4c0830d72b587234273da0898cbb711a77449471",
       "bytes": 412
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/build/fixture-repair/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-manifest-consistency-20261019-inverse/tq-manifest.tsv.txt",
-      "targetPath": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-manifest-consistency-20261019-inverse/tq-manifest.tsv.txt",
+      "targetPath": "make/m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-manifest-consistency-20261019-inverse/tq-manifest.tsv.txt",
       "gitBlob": "d39b06b66d6d1e30dae8e1e85c1f37be2edcea23",
       "bytes": 5292
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/build/fixture-repair/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-manifest-consistency-20261019-inverse/tq-manifest.tsv.txt.before",
-      "targetPath": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-manifest-consistency-20261019-inverse/tq-manifest.tsv.txt.before",
+      "targetPath": "make/m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-manifest-consistency-20261019-inverse/tq-manifest.tsv.txt.before",
       "gitBlob": "cf3d2768e2ccda9b8caa64e5b445285d3565d628",
       "bytes": 5292
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/build/fixture-repair/src/test/java/jdk/m3/tq/TQFixtureManifestConsistencyTest.java",
-      "targetPath": "m3/tooling/tq-sync/src/test/java/jdk/m3/tq/TQFixtureManifestConsistencyTest.java",
+      "targetPath": "make/m3/tooling/tq-sync/src/test/java/jdk/m3/tq/TQFixtureManifestConsistencyTest.java",
       "gitBlob": "44a88344c137ddcbe3e06dd665da6d5ee20c96b2",
       "bytes": 12909
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/build/fixture-repair/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-manifest-consistency-20261019/tq-manifest.tsv.txt",
-      "targetPath": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/manifest.tsv",
+      "targetPath": "make/m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/manifest.tsv",
       "gitBlob": "cf3d2768e2ccda9b8caa64e5b445285d3565d628",
       "bytes": 5292
     }

@@ -96,7 +96,7 @@
   "publication": "Compose onto qualified master tree, then overlay all 36 existing branch entries followed by this exact packet; preserve two parent histories",
   "qualified_master": "974687e3d3d69410466207624cf56e7bb62caedf",
   "qualified_master_tree": "4a423270d518c114605ab6ca9166ce7f2195de39",
-  "recipe": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3StringLeafCursorConvergenceRecipe.java",
+  "recipe": "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3StringLeafCursorConvergenceRecipe.java",
   "recipe_after": {
     "bytes": 7666,
     "git_blob": "0dcb7d37e7f04d6db2d1ed6b2ed05dd67ae07af8",

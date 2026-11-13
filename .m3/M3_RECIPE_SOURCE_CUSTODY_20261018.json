@@ -76,10 +76,10 @@
     "state": "PINNED_PUBLIC_SOURCE_MIRRORS",
     "roots": [
       ".m3/openrewrite-recipes",
-      "m3/backports/recipes",
+      "make/m3/backports/recipes",
       "m3/collections",
       "m3/m3-import",
-      "m3/tooling",
+      "make/m3/tooling",
       "m3/vendor/synexia"
     ],
     "source_revision": "275b610f26c191cd70420172ac65b634a8a4df49",

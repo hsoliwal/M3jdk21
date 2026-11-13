@@ -383,7 +383,7 @@ class CoverageGateTest(unittest.TestCase):
     def test_legacy_parser_cannot_emit_claimed_complete_issue_index(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
-            output = root / "m3/backports/target/all-issues.tsv"
+            output = root / "make/m3/backports/target/all-issues.tsv"
             with patch.object(upstream_inventory, "_subject_jbs_ids", None, create=True):
                 with self.assertRaisesRegex(
                         ValueError, "JBS_ISSUE_INDEX_NUMERIC_PARSER_MISSING"):

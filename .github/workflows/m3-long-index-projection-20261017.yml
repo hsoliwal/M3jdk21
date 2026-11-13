@@ -5,7 +5,7 @@ on:
     paths:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongIndexProjection.java'
       - 'test/jdk/jdk/m3/collections/M3LongIndexProjectionSelfTest.java'
-      - 'm3/collections/qualification/m3-long-index-projection-20261017/**'
+      - 'make/m3/collections/qualification/m3-long-index-projection-20261017/**'
       - '.github/workflows/m3-long-index-projection-20261017.yml'
   workflow_dispatch:
 concurrency:
@@ -24,8 +24,8 @@ jobs:
       - name: Verify exact sealed Maven recipe
         run: |
           set -eu
-          mvn -B -ntp -f m3/collections/qualification/m3-long-index-projection-20261017/recipe/pom.xml verify
-          java -cp m3/collections/qualification/m3-long-index-projection-20261017/recipe/target/classes jdk.internal.m3.M3LongIndexProjectionRecipe --check .
+          mvn -B -ntp -f make/m3/collections/qualification/m3-long-index-projection-20261017/recipe/pom.xml verify
+          java -cp make/m3/collections/qualification/m3-long-index-projection-20261017/recipe/target/classes jdk.internal.m3.M3LongIndexProjectionRecipe --check .
       - name: Compile selected owner against actual existing M3 index mask backend
         run: |
           set -eu

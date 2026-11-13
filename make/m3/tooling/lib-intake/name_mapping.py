@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 # Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others.
 # SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
-"""LIB_INTAKE name-mapping record (template-first): one m3/docs/name-mapping.d/lib-intake-<lib>.json per library whose
+"""LIB_INTAKE name-mapping record (template-first): one doc/m3/name-mapping.d/lib-intake-<lib>.json per library whose
 intake run passed every stage, in the shape of the existing name-mapping.d records (schema, product, intake mode, target
 module and path, recipe owner, source, runtime packages, mappings, receipts, legal notice). Values come only from the run
 ledgers (RUN_CONTEXT.tsv, RELOCATION_MAP.tsv, STAGES.tsv) and the vendored UPSTREAM_LICENSE.json / PROVENANCE.json;
 nothing is typed by hand. Usage (repository root): name_mapping.py [lib ...]   (default: every runs/<lib> with S8 PASS)"""
 import csv, json, os, sys
 
-RUNS = "m3/tooling/lib-intake/runs"
-OUT = "m3/docs/name-mapping.d"
+RUNS = "make/m3/tooling/lib-intake/runs"
+OUT = "doc/m3/name-mapping.d"
 
 
 def tsv(path):
@@ -42,7 +42,7 @@ def record(lib):
         "intake_mode": "LIB_INTAKE_TO_JMOD_V2",
         "target_module": ctx["module"],
         "target_path": ctx["layer"],
-        "canonical_recipe": "m3/tooling/lib-intake/lib_intake.sh (pattern LIB_INTAKE_TO_JMOD v2)",
+        "canonical_recipe": "make/m3/tooling/lib-intake/lib_intake.sh (pattern LIB_INTAKE_TO_JMOD v2)",
         "canonical_recipe_owners": ["org.openrewrite.java.ChangePackage (recursive=false, longest first; boundary-checked form of com.synexia M3BoundaryCheckedPackageRenameRecipe)"],
         "source_path": src,
         "source_coordinate": prov.get("coordinate", ""),

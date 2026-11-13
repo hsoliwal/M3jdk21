@@ -29,7 +29,7 @@ The existing authorities remain canonical:
 - `JEP_CATALOGUE.tsv`;
 - `UPSTREAM_CHANGE_SEEDS.tsv`;
 - `COMMUNITY_CAPABILITY_CANDIDATES.tsv`;
-- checked-in packets under `m3/backports/recipes/`.
+- checked-in packets under `make/m3/backports/recipes/`.
 
 `backport_recipe_dag.py` projects those decisions. It never upgrades a hold/reject/superseded row
 to executable work.
@@ -133,7 +133,7 @@ jtreg/runtime, VM/JNI or performance acceptance gates have passed.
 ## Existing Java DAG engine
 
 M3JDK21 already owns the generic execution/projection substrate under
-`m3/tooling/backport-dag`.
+`make/m3/tooling/backport-dag`.
 
 The generated packet is parsed by `BackportPacketLoader`, composed by
 `PacketDagComposer`, and rejoined into the canonical verification tail.
@@ -182,7 +182,7 @@ dependency readiness but never edit JDK sources or promote a backport.
 
 ## Maven evidence
 
-`mvn -f m3/backports/pom.xml verify` now emits:
+`mvn -f make/m3/backports/pom.xml verify` now emits:
 
 - `target/backport-recipe-dag.tsv`;
 - `target/backport-recipe-dag.json`;

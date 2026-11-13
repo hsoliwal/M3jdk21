@@ -7,7 +7,7 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexMaskCompactor.java'
       - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c'
       - 'test/jdk/jdk/m3/collections/M3RequiredExcludedWindow*'
-      - 'm3/collections/qualification/required-excluded-windows-20261021/**'
+      - 'make/m3/collections/qualification/required-excluded-windows-20261021/**'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-required-excluded-offset-window*.yml'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-required-excluded-offset-window*/**'
       - '.github/workflows/m3-required-excluded-offset-windows-20261021.yml'
@@ -32,4 +32,4 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          bash m3/collections/qualification/required-excluded-windows-20261021/verify.sh
+          bash make/m3/collections/qualification/required-excluded-windows-20261021/verify.sh

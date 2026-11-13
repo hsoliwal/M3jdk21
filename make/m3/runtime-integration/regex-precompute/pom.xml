@@ -48,7 +48,7 @@
         <argument>-B</argument>
         <argument>${project.basedir}/verify.py</argument>
         <argument>--target</argument>
-        <argument>${project.basedir}/../../..</argument>
+        <argument>${project.basedir}/../../../..</argument>
         <argument>--java-home</argument>
         <argument>${m3.test.jdk}</argument>
         <argument>--output</argument>

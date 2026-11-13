@@ -10,6 +10,6 @@
   },
   "verification_files": {
     "test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java": "825bf78d1684665fb85c3a93241700cb1e5d9403f9cb71603db7208303abcc56",
-    "m3/runtime-integration/check-m3string-invariants.py": "7b6c2a0978c11269507089a9b1dd46c186094886238aad21eec7639943fcf9ae"
+    "make/m3/runtime-integration/check-m3string-invariants.py": "7b6c2a0978c11269507089a9b1dd46c186094886238aad21eec7639943fcf9ae"
   }
 }

@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright 2026 Hitesh Soliwal and contributors.
 set -euo pipefail
-root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
-manifest="$root/m3/collections/qualification/indexpath-bulk-20261021/SOURCE_MANIFEST.tsv"
+root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../../.." && pwd)"
+manifest="$root/make/m3/collections/qualification/indexpath-bulk-20261021/SOURCE_MANIFEST.tsv"
 count=0
 previous=''
 while IFS=$'\t' read -r path before after git_blob; do

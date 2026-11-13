@@ -1,6 +1,6 @@
 gate	command	result
 toolchain	python --version; git version	Python 3.12.6, git 2.53.0.windows.2; donors read from M3JDK master 52fb81c4
-v1_input	sha256sum inputs/CSV_API_SUPERSET.v1.tsv	PASS: 78e3e80f1f2177e4e6459130a8eb1a93b9c87932ade2458be83a5ff6d7713537 = #2215 m3/tooling/jdk-superset/csv/CSV_API_SUPERSET.tsv (commit d51b01e296e); 242 keys, 8 matched across donors by name
+v1_input	sha256sum inputs/CSV_API_SUPERSET.v1.tsv	PASS: 78e3e80f1f2177e4e6459130a8eb1a93b9c87932ade2458be83a5ff6d7713537 = #2215 make/m3/tooling/jdk-superset/csv/CSV_API_SUPERSET.tsv (commit d51b01e296e); 242 keys, 8 matched across donors by name
 donor_docs	python tools/csv_donor_docs.py m3/vendor/third_party inputs/DONOR_METHODS.tsv inputs/DONOR_FEATURES.tsv inputs/DONOR_EXTRA.tsv (twice, cmp)	PASS: 313 configuration methods (297 with Javadoc), 30 enum options, 106 keys outside v1 (18 gap-config, 88 operation); re-run byte-identical
 capability_gate	python tools/csv_capabilities.py inputs/CSV_API_SUPERSET.v1.tsv inputs/DONOR_FEATURES.tsv inputs/DONOR_EXTRA.tsv CSV_CAPABILITY_SYNONYMS.tsv CSV_CAPABILITIES.tsv	PASS: 386/386 donor keys mapped exactly once to 78 capabilities (27 CORE, 44 EXTENDED, 6 INTEGRATION, 1 INTERNAL); 0 duplicate, 0 unknown, 0 empty; first run found 1 MISSING (jackson addNumberColumn), fixed
 capability_fixed_point	csv_capabilities.py twice, cmp	PASS: CSV_CAPABILITIES.tsv sha256 bc915785e9e3f421... byte-identical

@@ -18,7 +18,7 @@ class A3PlanTest {
     @Test
     void plansJepJbsAndCommunityRowsWithoutErasingDisposition()
             throws Exception {
-        Path backports = root.resolve("m3/backports");
+        Path backports = root.resolve("make/m3/backports");
         Files.createDirectories(backports);
 
         Files.writeString(

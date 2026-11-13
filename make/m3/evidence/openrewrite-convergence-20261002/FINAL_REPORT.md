@@ -44,7 +44,7 @@ resolve external GitHub/Maven hosts.
 Do **not** apply the convergence DAG repository-wide until an execution environment runs:
 
 ```bash
-mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify
+mvn -B -ntp -f make/m3/tooling/migration-recipes/pom.xml clean verify
 ```
 
 successfully under Java 21, including JUnit and the 99% JaCoCo gates. Canonical promotion remains

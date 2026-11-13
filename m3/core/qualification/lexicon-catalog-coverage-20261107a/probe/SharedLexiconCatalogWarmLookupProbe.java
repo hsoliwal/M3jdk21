@@ -20,7 +20,7 @@ import java.util.stream.IntStream;
 
 /**
  * Probe for the b31bda6823f contract: a warm {@code findPrecomputePayload} must not re-enter
- * {@code ConcurrentHashMap.computeIfAbsent}. This is a qualification probe, not an m3/build.sh
+ * {@code ConcurrentHashMap.computeIfAbsent}. This is a qualification probe, not an make/m3/build.sh
  * test. It records why no m3/core test covers that contract.
  *
  * <p>Default route, through the public API only: it can show that warm lookups return the
@@ -32,7 +32,7 @@ import java.util.stream.IntStream;
  * <p>{@code --reflective} route: swaps the private {@code payloads} map for a counting subclass,
  * as the com.synexia crate harness M3PayloadWarmLookupRedTest did. That needs deep reflection
  * into {@code jdk.m3.text}, which the module exports but does not open. On the module path
- * (m3/build.sh), it fails unless the JVM runs with
+ * (make/m3/build.sh), it fails unless the JVM runs with
  * {@code --add-opens jdk.m3.text/jdk.m3.text=ALL-UNNAMED}.</p>
  */
 public final class SharedLexiconCatalogWarmLookupProbe {

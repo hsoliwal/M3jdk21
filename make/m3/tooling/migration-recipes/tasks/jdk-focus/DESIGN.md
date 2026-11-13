@@ -4,7 +4,7 @@ Apply task, candidate branch only. Canonical baseline: M3jdk21 master
 `a8d0b7bebfc89ad5e7eb57a5a95470385adc9441`. The recovered complete source export is
 `081780ea02c11e8fd41a5445ac169b6a28ac5d25`, whose reconstructed Git tree was checked
 against `02854e6c82fdd4f07fd1bc79a442bc237743950e`. The entire src, test, make,
-m3/tooling, m3/indexdb and m3/pom.xml trees match canonical master exactly; current
+make/m3/tooling, m3/indexdb and make/m3/pom.xml trees match canonical master exactly; current
 backport/community and workflow additions are outside that shared baseline and must
 not be overwritten. No upstream history is fabricated in the local export.
 

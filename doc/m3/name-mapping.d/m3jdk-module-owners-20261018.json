@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "mapping_authority": "m3/docs/name-mapping.json",
-  "core_family_fragment": "m3/docs/name-mapping.d/m3-integrated-utility-families-20261018.json",
+  "mapping_authority": "doc/m3/name-mapping.json",
+  "core_family_fragment": "doc/m3/name-mapping.d/m3-integrated-utility-families-20261018.json",
   "target_repository": "hsoliwal/M3jdk21",
   "target_baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
   "scope": "Every module declaration and source root observable in the pinned src tree; public owner examples are representative, not every method/type or universal utility completeness.",

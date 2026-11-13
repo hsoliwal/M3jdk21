@@ -11,11 +11,11 @@ import runpy
 import subprocess
 
 HERE = Path(__file__).resolve().parent
-RECEIVER = HERE.parents[2]
+RECEIVER = HERE.parents[3]
 SDK = HERE / "sdk"
 ROOT = Path(os.environ["M3_PROOF_ROOT"]).resolve()
 ARTIFACTS = ROOT / "artifacts"
-PREFIX = "m3/tooling/backport-contract-current-owner/"
+PREFIX = "make/m3/tooling/backport-contract-current-owner/"
 WORKFLOW = ".github/workflows/m3-backport-contract-current-owner.yml"
 SUITE = "jdk.internal.m3.rewrite.M3BackportContractCurrentOwnerRecipeTest"
 METHODS = ["allEightPartialStatesBothOrdersReachExactFixedPoint","allEightInverseStatesBothOrdersRecoverExactBefore","eachOwnedInputRefusesDriftMissingAndDuplicateOwnership"]

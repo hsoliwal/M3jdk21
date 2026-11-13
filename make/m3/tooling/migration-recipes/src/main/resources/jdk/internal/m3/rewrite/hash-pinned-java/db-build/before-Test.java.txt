@@ -126,7 +126,7 @@ final class DbRecipeTest {
     @Test
     void metadataRecoveryPreservesTheReactorAndRejectsUnreviewedPoms() {
         String root = "/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/db-meta/";
-        var before = PlainText.builder().sourcePath(Path.of("m3/pom.xml"))
+        var before = PlainText.builder().sourcePath(Path.of("make/m3/pom.xml"))
                 .text(resourceAt(root + "before-pom.xml.txt")).build();
         var recipe = new M3Jdk21HashPinnedTextSnapshotRecipe("db-meta");
         var results = recipe.run(new InMemoryLargeSourceSet(List.of(before)), context(), 1)

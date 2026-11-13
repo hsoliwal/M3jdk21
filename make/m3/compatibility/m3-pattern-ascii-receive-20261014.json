@@ -12,7 +12,7 @@
   "native_disposition": "TEST_ONLY_JNI_ORACLE; no production native dispatch",
   "runtime_dependency_on_synexia": false,
   "promotion_status": "HOLD_FULL_TARGET_GATES",
-  "naming_fragment": "m3/docs/name-mapping.d/m3-pattern-ascii-frontier.json",
+  "naming_fragment": "doc/m3/name-mapping.d/m3-pattern-ascii-frontier.json",
   "verification_boundaries": [
     "exact M3PatternQuery and real target dependencies may be patch-module qualified on stock Java21",
     "source-built M3JDK21 with canonical M3String/HotSpot/JIT/GC/CDS not qualified by that scoped proof",

@@ -3,7 +3,7 @@
 # Integrated M3JDK21 utility coverage
 
 This table is the human-readable projection of the existing naming map fragment
-`m3/docs/name-mapping.d/m3-integrated-utility-families-20261018.json`. The existing `m3/docs/name-mapping.json` remains the registry authority.
+`doc/m3/name-mapping.d/m3-integrated-utility-families-20261018.json`. The existing `doc/m3/name-mapping.json` remains the registry authority.
 
 M3JDK21 supplies these APIs in their owning JDK modules. Existing public JDK names remain
 unchanged; new utility entry points are explicit additive candidates. No companion M3 utility
@@ -49,7 +49,7 @@ pass/implemented status. The existing receiving plan and all phase statuses are 
 
 ## Complete source-module ownership index
 
-The linked naming-map fragment `m3/docs/name-mapping.d/m3jdk-module-owners-20261018.json`
+The linked naming-map fragment `doc/m3/name-mapping.d/m3jdk-module-owners-20261018.json`
 is generated from every `src/<module>/<platform>/classes/module-info.java` in the pinned Git tree.
 It covers **70 source module declarations and 227 unqualified exported packages**, with
 **366 representative public source types** across the core and extended indexes. All modules
@@ -170,7 +170,7 @@ module index. No row advances the ordered receiving plan.
 
 ## Collection and I/O boundaries
 
-The existing collection category catalogue is extended at `m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv`.
+The existing collection category catalogue is extended at `make/m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv`.
 Live filters preserve backing identity, encounter order, duplicates and observable callback
 behavior. Detached snapshots own captured visible `Object[]` values with offset/reverse windows.
 Primitive masks and selected physical indexes prepare filtered captures; snapshots do not retain
@@ -254,7 +254,7 @@ linear-time, JNI acceleration or performance claim.
 
 The same family fragment pins both product hashes and exact declaration tokens. The
 contract catalogue and compiler-derived 68-method source seal live under
-`m3/runtime-integration/token-regex/`. Those observations do not promote the baseline
+`make/m3/runtime-integration/token-regex/`. Those observations do not promote the baseline
 source inventory into executed runtime or product-image acceptance. Fresh source-bound
 contract receipts belong to the canonical recipe's token qualification packet.
 
@@ -270,10 +270,10 @@ same character string. No Apache donor implementation text is imported into JDK 
 
 ## Source verification
 
-Run `python3 m3/compatibility/check_integrated_utility_coverage.py --repository .`. The verifier checks the named baseline Git blobs,
+Run `python3 make/m3/compatibility/check_integrated_utility_coverage.py --repository .`. The verifier checks the named baseline Git blobs,
 SHA-256 values, public declarations, owning module exports, the complete source-module set (including conditional providers), representative owner references, coverage keys and preservation of
 all previous naming-map and receiving-plan values. It never infers behavioral qualification
 from an inventory count and does not advance a receiving phase. New source candidates need
 their own recipe, compilation, contract and applicable native/JDK-image receipts.
 
-Reusable refusal tests: `python3 m3/compatibility/test_integrated_utility_coverage.py --repository .`. They exercise real pinned Git source reads and refuse phase changes, source seal drift, missing families/modules, fabricated exports, misclassified conditional/internal/unsupported owners, omitted public provider routes and fabricated qualification.
+Reusable refusal tests: `python3 make/m3/compatibility/test_integrated_utility_coverage.py --repository .`. They exercise real pinned Git source reads and refuse phase changes, source seal drift, missing families/modules, fabricated exports, misclassified conditional/internal/unsupported owners, omitted public provider routes and fabricated qualification.

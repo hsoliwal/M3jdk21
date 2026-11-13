@@ -18,7 +18,7 @@ CHECKLIST_BRANCH = re.compile(r"(?m)^\|\s*Release branch\s*\|\s*\x60([^\x60]+)\x
 
 def audit(root: Path) -> dict:
     root = root.resolve()
-    release = root / "m3/release"
+    release = root / "make/m3/release"
     contract = json.loads((release / "release-contract.json").read_text(encoding="utf-8"))
     notes = (release / "RELEASE_NOTES.md").read_text(encoding="utf-8")
     checklist = (release / "RELEASE_CHECKLIST.md").read_text(encoding="utf-8")

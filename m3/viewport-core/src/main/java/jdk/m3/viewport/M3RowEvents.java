@@ -6,7 +6,7 @@ package jdk.m3.viewport;
 
 /**
  * Toolkit events mapped to logical rows, delivered by an adapter to the viewport core (adapter contract, see
- * {@code m3/docs/viewport-everywhere/DESIGN.md} section 5). The adapter translates native indices of the resident
+ * {@code doc/m3/viewport-everywhere/DESIGN.md} section 5). The adapter translates native indices of the resident
  * window to logical rows before it calls these methods.
  */
 public interface M3RowEvents {

@@ -81,9 +81,9 @@ run these tests.
 | Item | Value |
 |---|---|
 | donor | `hsoliwal/com.synexia` `m3-pmem-sdk`, develop `36827ee8a798ef6ce07f6fc55a2ac371b1382c06` (the merge of #16749, which restored the `NativePmem.java` blob `adb94eb2f091` that the superset landing had cut to 11 natives; `PROVENANCE.tsv`, all rows `base_kind=DEVELOP`); family commits `c499b6e38b0`, `3fe3997b800`, `cd52a10a650` (2026-11-01), `489b43816dd`, `4fdaa292540` (2026-11-02) |
-| recipe | `python -I m3/optane/recipe/pmem-region-core-20261106/relocate.py --donor-git <clone> --donor-rev 36827ee8a798 [--check]` (`RELOCATE_PMEM_REGION_CORE` v2): header, package line, imports, M3 type names, JNI prefixes and declared TEXT rows; everything else byte for byte; one `FLLDCIM: RELOCATE` anchor per file; idempotent |
+| recipe | `python -I make/m3/optane/recipe/pmem-region-core-20261106/relocate.py --donor-git <clone> --donor-rev 36827ee8a798 [--check]` (`RELOCATE_PMEM_REGION_CORE` v2): header, package line, imports, M3 type names, JNI prefixes and declared TEXT rows; everything else byte for byte; one `FLLDCIM: RELOCATE` anchor per file; idempotent |
 | map, provenance | `recipe/pmem-region-core-20261106/RELOCATION_MAP.tsv` (22 FILE rows, 2 PACKAGE, 14 TYPE, 2 EXTERNAL, 2 JNI, 4 TEXT, SKIP and DROP rows with reasons), `PROVENANCE.tsv` (donor commit, blob, sha256 pairs, `body_match`, `body_match_renamed`, `base_kind`) |
-| naming | `python -I m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/optane/`: 0 moves, 0 rewrites, 0 refusals |
+| naming | `python -I make/m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/optane/`: 0 moves, 0 rewrites, 0 refusals |
 | gates | `recipe/pmem-region-core-20261106/GATES.tsv`, lessons in `RECIPE_MEMORY.tsv` |
 
 ### Census pass-1 remainder: the PMem tensor accelerator and the CPU-list parser (`recipe/pmem-accelerator-20261107`)
@@ -94,7 +94,7 @@ run these tests.
 | `jdk.internal.m3.optane.PmemAccelerator` (L008) | read-only `mmap` of a tensor file, FS-DAX attribute through `statx`, NUMA pin of the calling thread, bounded signed-Q8 x FP32 matrix-vector kernel folded in strict FP32 column order (scalar/AVX2 dispatch; the AVX-512 kernel of crate `m3-pmem-ordered-avx512-20261030` is HOLD until an AVX-512 host runs it); JNI library `m3pmemaccel` (CMake target, `src/main/native/m3pmemaccel.c`); NEC with the SDK's `PmemRegion` family (same shape, other contract), nothing of the SDK edited |
 | `jdk.internal.m3.optane.NumaTopology` (L047) | the strict one-pass Linux CPU-list parser `parseCpuList` (`0-3,7,10-11`, optional leading `+`, refusals for empty elements, inverted ranges, indexes above 65535 and bad separators); `discover()`/`nativeFeatures()` of the donor are HOLD (they need the accelerator jmod family's JNI and a multi-node host) |
 | oracles | `PmemAcceleratorSelfTest` (donor, 2,048 FP32 column-order cases, 64-row tile boundaries, > 2 GiB mapping, FS-DAX gate) through `PmemAcceleratorJUnitTest` under `-Pm3-optane-native`; `NumaTopologyCpuListTest` (hand-derived table and a reference-model differential) on every build |
-| recipe | `python -I m3/optane/recipe/pmem-accelerator-20261107/relocate.py --donor-git <clone> --donor-rev 56cbdc631259 [--check]` (`RELOCATE_CENSUS1_REMAINDER` v4) and `python -I m3/optane/recipe/pmem-accelerator-20261107/apply.py [--check]` for the three edited files (this section, the CMake target, the surefire filter); gates in `GATES.tsv`, decisions in `DECISION.tsv` |
+| recipe | `python -I make/m3/optane/recipe/pmem-accelerator-20261107/relocate.py --donor-git <clone> --donor-rev 56cbdc631259 [--check]` (`RELOCATE_CENSUS1_REMAINDER` v4) and `python -I make/m3/optane/recipe/pmem-accelerator-20261107/apply.py [--check]` for the three edited files (this section, the CMake target, the surefire filter); gates in `GATES.tsv`, decisions in `DECISION.tsv` |
 
 ## Build and use
 
@@ -103,11 +103,11 @@ run these tests.
 | compile, test, jar | `JAVA_HOME=<JDK 21> mvn -B -ntp -f m3/optane/pom.xml package` (`-Xlint:all -Werror`, `proc none`; surefire runs the FILE oracle lanes and the Java-path replay on every OS; the native lanes are filtered) |
 | native lanes | build the libraries, then `mvn -Pm3-optane-native -Dm3.optane.library.path=<build dir> -f m3/optane/pom.xml test` (Linux; `-Xcheck:jni`), or the JUnit console launcher over `target/classes:target/test-classes` |
 | libraries | `cmake -S make/m3/optane -B <build> && cmake --build <build>` (JDK 21 `javac` and JNI headers; `-DM3_OPTANE_PMDK=ON` adds the libpmem2 backend from the build host) |
-| from the control reactor | `mvn -f m3/pom.xml -pl optane package` |
-| JMOD / jlink verifier | `bash m3/optane/verify.sh` (Linux x86_64; `M3_OPTANE_NO_NATIVE=1` for Java only; `M3_OPTANE_BUILD` selects the output) or `mvn -Pm3-optane-jmod -f m3/optane/pom.xml verify` |
-| differential | `bash m3/optane/recipe/pmem-region-core-20261106/differential.sh <donor clone> <donor rev> <scratch> [operations]` after `package` |
-| native matrix (Linux) | `bash m3/optane/recipe/pmem-region-core-20261106/native-matrix.sh jdk.m3.optane M3 jdk.m3.optane src/jdk.m3.io/share/native/libm3optane/m3pmemsdk.c test/jdk/jdk/m3/optane/native/M3PmemKmpPrefix32Oracle.c <scratch> <operations> <the ten owners> <PmemAtomCases> <PmemDump>` |
-| all Java gates | `bash m3/optane/recipe/pmem-region-core-20261106/verify.sh <donor clone> <donor rev> <scratch>` |
+| from the control reactor | `mvn -f make/m3/pom.xml -pl optane package` |
+| JMOD / jlink verifier | `bash make/m3/optane/verify.sh` (Linux x86_64; `M3_OPTANE_NO_NATIVE=1` for Java only; `M3_OPTANE_BUILD` selects the output) or `mvn -Pm3-optane-jmod -f m3/optane/pom.xml verify` |
+| differential | `bash make/m3/optane/recipe/pmem-region-core-20261106/differential.sh <donor clone> <donor rev> <scratch> [operations]` after `package` |
+| native matrix (Linux) | `bash make/m3/optane/recipe/pmem-region-core-20261106/native-matrix.sh jdk.m3.optane M3 jdk.m3.optane src/jdk.m3.io/share/native/libm3optane/m3pmemsdk.c test/jdk/jdk/m3/optane/native/M3PmemKmpPrefix32Oracle.c <scratch> <operations> <the ten owners> <PmemAtomCases> <PmemDump>` |
+| all Java gates | `bash make/m3/optane/recipe/pmem-region-core-20261106/verify.sh <donor clone> <donor rev> <scratch>` |
 
 ```java
 try (PmemRegion model = PmemSdk.open(Path.of("/pmem/models/weights.bin"), 0, 8192,
@@ -135,7 +135,7 @@ Java 21 software tests do not prove a source-built M3JDK image.
 | PmemSourceImage/Slices/PathIndex, PmemMultiPattern, PmemTaskLog/Replay | Next leaves (plan fs-pmem ranks 3-5), SKIP rows of the map |
 
 The target mapping is recorded in PORT-MAPPING.pending.json (the relocated owners as RELOCATED rows). It is still a
-**PENDING optional-module admission**, not a new authority that supersedes the canonical m3/docs/name-mapping.json or
+**PENDING optional-module admission**, not a new authority that supersedes the canonical doc/m3/name-mapping.json or
 advances String -> arrays -> collections -> compiler receiving stages. Full registry admission and automatic callers
 remain open.
 
@@ -169,4 +169,4 @@ controller counters. A process restart alone does not establish cold page/cache 
 - https://man7.org/linux/man-pages/man2/mmap.2.html
 - https://pmem.io/pmdk/libpmem2/ (BSD-3-Clause; optional, never shipped)
 - https://github.com/hsoliwal/com.synexia/blob/develop/synexia-mindex/native-jni/PMDK_SOURCE_SDK.md
-- https://github.com/hsoliwal/M3jdk21/blob/master/m3/docs/m3jdk21-porting-invariant.md
+- https://github.com/hsoliwal/M3jdk21/blob/master/doc/m3/m3jdk21-porting-invariant.md

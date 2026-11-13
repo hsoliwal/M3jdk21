@@ -17,9 +17,9 @@ import unittest
 
 CRATE = Path(__file__).resolve().parents[3]
 ROOT = CRATE.parents[2]
-MAP = 'm3/docs/name-mapping.json'
+MAP = 'doc/m3/name-mapping.json'
 WORKFLOW = '.github/workflows/m3-lane28.yml'
-NAMING = 'm3/docs/counterpart-naming.md'
+NAMING = 'doc/m3/counterpart-naming.md'
 LEGAL = 'src/java.base/share/legal/synexia.md'
 CURRENT_MAP_SHA = '1d061025b81107d52e5c2fa52f1ad156b4d941c32bbd2fba725caebefc92b21b'
 CURRENT_WORKFLOW_SHA = '2d6a9817ac4c24db803b02cfc1baa91fc38397fea813163acbab7e2ed0cec82d'
@@ -28,7 +28,7 @@ CURRENT_WORKFLOW_SHA = '2d6a9817ac4c24db803b02cfc1baa91fc38397fea813163acbab7e2e
 class Ic0ContextTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        spec = importlib.util.spec_from_file_location('lane_context_sealed', ROOT / 'm3/migration/recipe.py')
+        spec = importlib.util.spec_from_file_location('lane_context_sealed', ROOT / 'make/m3/migration/recipe.py')
         sealed = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(sealed)
         cls.plan, cls.rows = sealed.sealed_plan(CRATE / 'plan.json')
@@ -44,7 +44,7 @@ class Ic0ContextTest(unittest.TestCase):
         for name, expected in ((MAP, CURRENT_MAP_SHA), (WORKFLOW, CURRENT_WORKFLOW_SHA)):
             if hashlib.sha256(cls.current[name]).hexdigest() != expected:
                 raise AssertionError('Actual selected Ic0 body required: ' + name)
-        source_paths = {CRATE / 'plan.json', CRATE / 'verify-plan.py', ROOT / 'm3/migration/recipe.py'}
+        source_paths = {CRATE / 'plan.json', CRATE / 'verify-plan.py', ROOT / 'make/m3/migration/recipe.py'}
         source_paths.update(ROOT / guard['path'] for guard in cls.plan['guards'])
         source_paths.update(p for p in (CRATE / 'src/main/resources').rglob('*') if p.is_file())
         cls.sources = {p.relative_to(ROOT).as_posix(): p.read_bytes() for p in source_paths}
@@ -62,7 +62,7 @@ class Ic0ContextTest(unittest.TestCase):
         temporary = tempfile.TemporaryDirectory(prefix='m3-lane-context-')
         self.addCleanup(temporary.cleanup)
         self.root = Path(temporary.name)
-        self.crate = self.root / 'm3/tooling/lane28'
+        self.crate = self.root / 'make/m3/tooling/lane28'
         for name, body in self.sources.items():
             path = self.root / name
             path.parent.mkdir(parents=True, exist_ok=True)
@@ -96,7 +96,7 @@ class Ic0ContextTest(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stderr.decode(errors='replace'))
             self.assertEqual(result.stderr, b'')
             after = self.snapshot()
-            custody = 'm3/tooling/lane28/target/custody.json'
+            custody = 'make/m3/tooling/lane28/target/custody.json'
             self.assertEqual(set(after) - set(before), {custody})
             self.assertEqual({k: v for k, v in after.items() if k != custody}, before)
             record = json.loads(after[custody][2])

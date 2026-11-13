@@ -95,7 +95,7 @@
 2026-10-05T12:33:57.5905200Z [36;1mset -euo pipefail[0m
 2026-10-05T12:33:57.5905448Z [36;1mjava -version[0m
 2026-10-05T12:33:57.5905671Z [36;1mmvn -version[0m
-2026-10-05T12:33:57.5906023Z [36;1mmvn -B -ntp -f "$REPO/m3/tooling/migration-recipes/pom.xml" clean verify[0m
+2026-10-05T12:33:57.5906023Z [36;1mmvn -B -ntp -f "$REPO/make/m3/tooling/migration-recipes/pom.xml" clean verify[0m
 2026-10-05T12:33:57.5984551Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
 2026-10-05T12:33:57.5984916Z env:
 2026-10-05T12:33:57.5985123Z   REPO: /home/runner/work/_temp/repo

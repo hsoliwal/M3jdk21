@@ -42,4 +42,4 @@ Exit status: 0 PASS, 1 REFUSED or FAIL, 2 usage, 3 HOLD (no fixed-point witness)
 `CHAIN.tsv`, `RECEIPT.jsonl` (`M3-MOP-RECEIPT/1`). Write outputs under a run directory, never under
 `m3/`; promotion into M3JDK21 sources remains the existing recipe/PR gate.
 
-Lineage: [m3-mop-pillars-20261030.json](../docs/name-mapping.d/m3-mop-pillars-20261030.json).
+Lineage: [m3-mop-pillars-20261030.json](../../doc/m3/name-mapping.d/m3-mop-pillars-20261030.json).

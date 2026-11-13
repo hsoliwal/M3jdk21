@@ -14,10 +14,10 @@ import subprocess
 import sys
 import traceback
 
-RESOURCE = "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text"
+RESOURCE = "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text"
 CRATES = ["jcc-merge-recovery-20261006-history-01", "jcc-merge-recovery-20261006-history-02",
           "jcc-merge-recovery-20261006-retention"]
-CATALOGUE = "m3/history/RETAINED_CAPABILITIES.tsv"
+CATALOGUE = "make/m3/history/RETAINED_CAPABILITIES.tsv"
 
 
 def digest(data):
@@ -55,13 +55,13 @@ def main():
     output.mkdir(parents=True, exist_ok=False)
     start = datetime.now(timezone.utc).isoformat()
     commands, checks, refusals = [], [], []
-    installer = load("jcc_existing_installer", repository / "m3/migration/recipe.py")
+    installer = load("jcc_existing_installer", repository / "make/m3/migration/recipe.py")
     plans = [repository / RESOURCE / name / "plan.json" for name in CRATES]
     loaded = [installer.sealed_plan(path) for path in plans]
     inputs = {str(path.relative_to(repository)): digest(path.read_bytes())
               for base in [repository / RESOURCE / name for name in CRATES]
               for path in base.rglob("*") if path.is_file()}
-    for path in ["m3/migration/recipe.py", "m3/history/git_graph.py"]:
+    for path in ["make/m3/migration/recipe.py", "make/m3/history/git_graph.py"]:
         inputs[path] = digest((repository / path).read_bytes())
     fixture = output / "installer-fixture"
     fixture.mkdir()
@@ -167,8 +167,8 @@ def main():
         git("add", ".")
         git("commit", "-qm", "synthetic restored JCC custody")
         candidate = git("rev-parse", "HEAD")
-        sys.path.insert(0, str(git_fixture / "m3/history"))
-        retention = load("jcc_materialized_retention", git_fixture / "m3/history/retention.py")
+        sys.path.insert(0, str(git_fixture / "make/m3/history"))
+        retention = load("jcc_materialized_retention", git_fixture / "make/m3/history/retention.py")
         exact = retention.inspect(git_fixture, candidate, CATALOGUE,
                                   baseline_commits=(baseline,), include_parents=True)
         assert exact["targets"] == 469 and exact["retained_exact"] == 469
@@ -195,7 +195,7 @@ def main():
         assert {c["kind"] for c in lost["declaration_conflicts"]} == {"CAPABILITY_REMOVED"}
         assert lost["declaration_conflict_count"] == 2
         json_file(output / "retention-dropped.json", lost)
-        cli = run("retention-loss-cli", [sys.executable, "-B", str(git_fixture / "m3/history/retention.py"),
+        cli = run("retention-loss-cli", [sys.executable, "-B", str(git_fixture / "make/m3/history/retention.py"),
             "--repo", str(git_fixture), "--commit", dropped, "--catalogue", CATALOGUE,
             "--output", str(output / "retention-cli-report"), "--baseline-commit", candidate,
             "--include-parents", "--require-no-missing"], git_fixture)

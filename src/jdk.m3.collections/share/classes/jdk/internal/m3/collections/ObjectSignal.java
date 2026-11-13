@@ -10,7 +10,7 @@ import java.util.Objects;
  * <p>The source object's raw identity is never rewritten. Masks/features are separate derived
  * signals, so admission/rejection cannot corrupt or reinterpret caller-visible IDs.</p>
  */
-//FLLDCIM: RELOCATE - donor blob 90323e1c792f at commit 3385d79a2968 (repository, path, URL and digests: m3/collections/qualification/object-signal-20261107/PROVENANCE.tsv); recipe m3/collections/qualification/object-signal-20261107/relocate.py v1
+//FLLDCIM: RELOCATE - donor blob 90323e1c792f at commit 3385d79a2968 (repository, path, URL and digests: make/m3/collections/qualification/object-signal-20261107/PROVENANCE.tsv); recipe make/m3/collections/qualification/object-signal-20261107/relocate.py v1
 public record ObjectSignal(
         ObjectProjectionKind kind,
         int domain,

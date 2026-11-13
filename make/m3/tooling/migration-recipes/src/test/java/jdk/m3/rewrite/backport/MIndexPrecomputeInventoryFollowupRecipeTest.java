@@ -40,10 +40,10 @@ final class MIndexPrecomputeInventoryFollowupRecipeTest {
 
     private static List<SourceFile> after() {
         return List.of(
-                text("m3/docs/name-mapping.json", "00-name-mapping.json.txt"),
-                text("m3/docs/m3-mindex-precompute-inventory.tsv",
+                text("doc/m3/name-mapping.json", "00-name-mapping.json.txt"),
+                text("doc/m3/m3-mindex-precompute-inventory.tsv",
                         "01-precompute-inventory.tsv.txt"),
-                text("m3/runtime-integration/check-m3string-invariants.py",
+                text("make/m3/runtime-integration/check-m3string-invariants.py",
                         "02-invariants.py.txt"));
     }
 

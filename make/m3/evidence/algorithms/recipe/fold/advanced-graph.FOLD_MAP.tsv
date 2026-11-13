@@ -1,4 +1,4 @@
-# FOLD_MEMBERS v1.1 map (m3/tooling/jdk-naming/fold_members.py): AdvancedGraphAlgorithms folds into PrimitiveGraphAlgorithms, one owner per concept (2026-11-08).
+# FOLD_MEMBERS v1.1 map (make/m3/tooling/jdk-naming/fold_members.py): AdvancedGraphAlgorithms folds into PrimitiveGraphAlgorithms, one owner per concept (2026-11-08).
 # Its one member, zeroOneBfs, runs over PrimitiveGraphAlgorithms.WeightedCsrGraph; the owner already imports java.util.Arrays and java.util.Objects. An adjective split, not a concept.
 kind	a	b	c	d
 OWNER	m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveGraphAlgorithms.java

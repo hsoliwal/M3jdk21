@@ -1,8 +1,8 @@
 # M3String-backed String — JDK integration contract
 
 Status: historical first-stage design, retained for provenance. The current runtime authority is
-`m3/docs/m3-runtime-invariants.tsv`, `m3/docs/name-mapping.json`, and
-`m3/docs/m3string-m3-lineage.md`.
+`doc/m3/m3-runtime-invariants.tsv`, `doc/m3/name-mapping.json`, and
+`doc/m3/m3string-m3-lineage.md`.
 
 Synexia uses the donor name `MIndexString`; M3JDK uses the target name `M3String`.
 

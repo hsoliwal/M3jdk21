@@ -6,31 +6,31 @@ on:
       - master
       - "m3/**"
     paths:
-      - "m3/tooling/a3/**"
-      - "m3/tooling/migration-recipes/**"
-      - "m3/backports/JEP_CATALOGUE.tsv"
-      - "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv"
-      - "m3/backports/COMMUNITY_CAPABILITY_CANDIDATES.tsv"
-      - "m3/backports/ALGORITHM_CATALOGUE.tsv"
-      - "m3/docs/a3.md"
-      - "m3/docs/a3-lab.md"
-      - "m3/docs/a3-alg.md"
-      - "m3/docs/atom-pattern-admission-and-tooling-boundary.md"
-      - "m3/pom.xml"
+      - "make/m3/tooling/a3/**"
+      - "make/m3/tooling/migration-recipes/**"
+      - "make/m3/backports/JEP_CATALOGUE.tsv"
+      - "make/m3/backports/UPSTREAM_CHANGE_SEEDS.tsv"
+      - "make/m3/backports/COMMUNITY_CAPABILITY_CANDIDATES.tsv"
+      - "make/m3/backports/ALGORITHM_CATALOGUE.tsv"
+      - "doc/m3/a3.md"
+      - "doc/m3/a3-lab.md"
+      - "doc/m3/a3-alg.md"
+      - "doc/m3/atom-pattern-admission-and-tooling-boundary.md"
+      - "make/m3/pom.xml"
       - ".github/workflows/m3-a3.yml"
   pull_request:
     paths:
-      - "m3/tooling/a3/**"
-      - "m3/tooling/migration-recipes/**"
-      - "m3/backports/JEP_CATALOGUE.tsv"
-      - "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv"
-      - "m3/backports/COMMUNITY_CAPABILITY_CANDIDATES.tsv"
-      - "m3/backports/ALGORITHM_CATALOGUE.tsv"
-      - "m3/docs/a3.md"
-      - "m3/docs/a3-lab.md"
-      - "m3/docs/a3-alg.md"
-      - "m3/docs/atom-pattern-admission-and-tooling-boundary.md"
-      - "m3/pom.xml"
+      - "make/m3/tooling/a3/**"
+      - "make/m3/tooling/migration-recipes/**"
+      - "make/m3/backports/JEP_CATALOGUE.tsv"
+      - "make/m3/backports/UPSTREAM_CHANGE_SEEDS.tsv"
+      - "make/m3/backports/COMMUNITY_CAPABILITY_CANDIDATES.tsv"
+      - "make/m3/backports/ALGORITHM_CATALOGUE.tsv"
+      - "doc/m3/a3.md"
+      - "doc/m3/a3-lab.md"
+      - "doc/m3/a3-alg.md"
+      - "doc/m3/atom-pattern-admission-and-tooling-boundary.md"
+      - "make/m3/pom.xml"
       - ".github/workflows/m3-a3.yml"
   workflow_dispatch:
 
@@ -89,15 +89,15 @@ jobs:
           # The shared migration-recipes module currently has independent String/LST
           # regression failures. Compile/install its exact sources without converting
           # those unrelated tests into an A3Lab verdict.
-          mvn -B -ntp -f "$REPO/m3/pom.xml" \
+          mvn -B -ntp -f "$REPO/make/m3/pom.xml" \
             -pl tooling/a3 -am -DskipTests install
 
       - name: Run focused A3 JUnit and recipe replay proof
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" test
-          mvn -B -ntp -f "$REPO/m3/tooling/migration-recipes/pom.xml" \
+          mvn -B -ntp -f "$REPO/make/m3/tooling/a3/pom.xml" test
+          mvn -B -ntp -f "$REPO/make/m3/tooling/migration-recipes/pom.xml" \
             -Dtest=M3A3LabDeliveryRecipeTest,M3A3MasteryWorkflowRecipeTest \
             -Dsurefire.failIfNoSpecifiedTests=false test
 
@@ -105,7 +105,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java \
+          mvn -B -ntp -f "$REPO/make/m3/tooling/a3/pom.xml" exec:java \
             -Dexec.mainClass=jdk.m3.a3.A3 \
             -Dexec.args="lab --root $REPO --out m3/build/a3/lab"
           LAB="$REPO/m3/build/a3/lab/results.tsv"
@@ -128,7 +128,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=jdk.m3.a3.A3             -Dexec.args="inv --root $REPO --out m3/build/a3/inventory.tsv"
+          mvn -B -ntp -f "$REPO/make/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=jdk.m3.a3.A3             -Dexec.args="inv --root $REPO --out m3/build/a3/inventory.tsv"
           test -s "$REPO/m3/build/a3/inventory.tsv"
           JAVA_ROWS="$(awk -F '\t' 'NR > 1 && $5 == "JAVA" {n++} END {print n+0}' "$REPO/m3/build/a3/inventory.tsv")"
           NATIVE_ROWS="$(awk -F '\t' 'NR > 1 && $5 == "NATIVE" {n++} END {print n+0}' "$REPO/m3/build/a3/inventory.tsv")"
@@ -140,7 +140,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=jdk.m3.a3.A3             -Dexec.args="alg --root $REPO --out m3/build/a3/algorithms.tsv"
+          mvn -B -ntp -f "$REPO/make/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=jdk.m3.a3.A3             -Dexec.args="alg --root $REPO --out m3/build/a3/algorithms.tsv"
           ALG="$REPO/m3/build/a3/algorithms.tsv"
           test -s "$ALG"
           ALG_ROWS="$(awk -F '\t' 'NR > 1 {n++} END {print n+0}' "$ALG")"
@@ -155,7 +155,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=jdk.m3.a3.A3             -Dexec.args="plan --root $REPO --out m3/build/a3/plan.tsv"
+          mvn -B -ntp -f "$REPO/make/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=jdk.m3.a3.A3             -Dexec.args="plan --root $REPO --out m3/build/a3/plan.tsv"
           PLAN="$REPO/m3/build/a3/plan.tsv"
           test -s "$PLAN"
           JEP_ROWS="$(awk -F '\t' 'NR > 1 && $1 == "JEP" {n++} END {print n+0}' "$PLAN")"
@@ -179,7 +179,7 @@ jobs:
           0	27	1111111111111111111111111111111111111111	JDK-A3-WORK	A3 serial work integration	core-libs	candidate	HIGH	MULTI_MODULE	CORE_LIBRARY	MIXED_PACKET_OPENREWRITE_PLUS_VERBATIM	35	PENDING_COMPATIBILITY_PROOF	PROVE_CORE_LIBRARY_BACKPORT	src/java.base/share/classes/java/lang/String.java,src/hotspot/share/runtime/os.cpp,make/autoconf/flags.m4
           TSV
 
-          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java \
+          mvn -B -ntp -f "$REPO/make/m3/tooling/a3/pom.xml" exec:java \
             -Dexec.mainClass=jdk.m3.a3.A3 \
             -Dexec.args="work --root $REPO --inventory m3/build/a3/inventory.tsv --queue m3/build/a3/work-queue.tsv --out m3/build/a3/work.tsv"
 
@@ -209,7 +209,7 @@ jobs:
           JAVA
           cp "$SRC" "$RUNNER_TEMP/Sample.before"
 
-          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=jdk.m3.a3.A3             -Dexec.args="apply --root $FIX --out m3/build/a3/apply --file src/java.base/share/classes/example/Sample.java"
+          mvn -B -ntp -f "$REPO/make/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=jdk.m3.a3.A3             -Dexec.args="apply --root $FIX --out m3/build/a3/apply --file src/java.base/share/classes/example/Sample.java"
 
           cmp "$SRC" "$RUNNER_TEMP/Sample.before"
           CANDIDATE="$FIX/m3/build/a3/apply/candidate/src/java.base/share/classes/example/Sample.java"

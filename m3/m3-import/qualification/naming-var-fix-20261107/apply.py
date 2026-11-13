@@ -4,7 +4,7 @@
 """Recipe NAMING_VAR_FIX v1: one spelling for the donor-root variable of the m3/m3-import tests.
 
 Root cause (README.md): the JDK naming rename fe35ea98841 (recipe JDK_NAMING_RENAME) applied the text rule
-SEGMENT_DOT of m3/tooling/jdk-naming/NAMING_RULES.tsv, meant for a dotted name segment, to Java code. A local or
+SEGMENT_DOT of make/m3/tooling/jdk-naming/NAMING_RULES.tsv, meant for a dotted name segment, to Java code. A local or
 record component named synexia was renamed where a dot followed it (a method call on it) and kept where it was
 declared or passed as an argument, so the three test classes named the variable two ways and test-compile failed
 with 24 errors "cannot find symbol: variable m3". jdk_naming.py has no rule for a bare identifier (the bare word names

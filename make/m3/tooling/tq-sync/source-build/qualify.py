@@ -18,11 +18,11 @@ import xml.etree.ElementTree as ET
 import zipfile
 
 HERE = Path(__file__).resolve().parent
-RECEIVER = HERE.parents[3]
+RECEIVER = HERE.parents[4]
 ROOT = Path(os.environ["M3_PROOF_ROOT"]).resolve()
 ARTIFACTS = ROOT / "artifacts"
 INPUTS = json.loads((HERE / "build-inputs.json").read_bytes())
-MODEL = runpy.run_path(str(RECEIVER / "m3/tooling/tq-sync/source-reactor/test_reactor.py"),
+MODEL = runpy.run_path(str(RECEIVER / "make/m3/tooling/tq-sync/source-reactor/test_reactor.py"),
                        run_name="m3_model_custody_reuse")
 blob = MODEL["blob"]
 gav = MODEL["gav"]
@@ -144,27 +144,27 @@ def sources(require_fresh=False):
         path = regular(RECEIVER / ("m3/vendor/third_party/" + row["module"] + "/pom.xml"))
         if blob(path.read_bytes()) != row["pomBlob"]:
             raise RuntimeError("collected model drift")
-    tq = RECEIVER / "m3/tooling/tq-sync"
+    tq = RECEIVER / "make/m3/tooling/tq-sync"
     if require_fresh:
         if (tq / "target").exists() or any((ROOT / "m2").rglob("*.jar")):
             raise RuntimeError("TQ targets and Maven repository must start fresh")
-    if git("rev-parse", "HEAD:m3/tooling/tq-sync/src") != INPUTS["tqInputs"]["srcGitTree"]:
+    if git("rev-parse", "HEAD:make/m3/tooling/tq-sync/src") != INPUTS["tqInputs"]["srcGitTree"]:
         raise RuntimeError("TQ fixture source tree drift")
     for row in INPUTS["tqInputs"]["engines"]:
         if blob(regular(RECEIVER / row["path"]).read_bytes()) != row["gitBlob"]:
             raise RuntimeError("shared recipe engine drift")
         owner_paths.append(row["path"])
     tq_pins = {
-        "m3/tooling/tq-sync/pom.xml": INPUTS["tqInputs"]["pomBlob"],
-        "m3/tooling/tq-sync/src/test/java/jdk/m3/tq/TQSyncTest.java": INPUTS["tqInputs"]["testBlob"],
-        "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/manifest.tsv":
+        "make/m3/tooling/tq-sync/pom.xml": INPUTS["tqInputs"]["pomBlob"],
+        "make/m3/tooling/tq-sync/src/test/java/jdk/m3/tq/TQSyncTest.java": INPUTS["tqInputs"]["testBlob"],
+        "make/m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/manifest.tsv":
             INPUTS["tqInputs"]["manifestBlob"],
     }
     for relative, expected in tq_pins.items():
         if blob(regular(RECEIVER / relative).read_bytes()) != expected:
             raise RuntimeError("TQ source owner drift: " + relative)
-    owner_paths += ["m3/tooling/tq-sync/src", "m3/tooling/tq-sync/pom.xml",
-                    "m3/tooling/tq-sync/source-reactor", "m3/tooling/tq-sync/source-build",
+    owner_paths += ["make/m3/tooling/tq-sync/src", "make/m3/tooling/tq-sync/pom.xml",
+                    "make/m3/tooling/tq-sync/source-reactor", "make/m3/tooling/tq-sync/source-build",
                     HELPER["path"], ".github/workflows/m3-source-qualified-tq-model.yml",
                     ".github/workflows/m3-source-qualified-tq-build.yml"]
     subprocess.run(["git", "diff", "--exit-code", "--no-ext-diff", "--", *owner_paths],
@@ -703,7 +703,7 @@ def report():
     consumer = logged_gavs(ARTIFACTS / "tq-verify.log")
     if consumer != ["com.m3:tq-sync:1.0-SNAPSHOT"]:
         raise RuntimeError("unexpected consumer reactor selection")
-    tq = RECEIVER / "m3/tooling/tq-sync"
+    tq = RECEIVER / "make/m3/tooling/tq-sync"
     reports = sorted((tq / "target/surefire-reports").glob("TEST-*.xml"))
     expected_suites = {
         "jdk.m3.tq.TQSyncTest": {
@@ -754,7 +754,7 @@ def report():
     actual = {str(p.relative_to(generated).as_posix()) for p in generated.rglob("*") if p.is_file()}
     if len(postimages) != 24 or len(actual) != 24 or actual != {r["path"] for r in postimages}:
         raise RuntimeError("exact 24 generated fixture postimages required")
-    live_path = ("m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/"
+    live_path = ("make/m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/"
                  "jdk21-hash-pinned-text/m3-tq-sync/manifest.tsv")
     manifest_root = tq / "target/generated-recipe"
     manifest_output = regular(manifest_root / live_path)

@@ -3,7 +3,7 @@ Test set: com.m3.rewrite.backport.JccMergeRecoveryTest
 -------------------------------------------------------------------------------
 Tests run: 6, Failures: 1, Errors: 2, Skipped: 0, Time elapsed: 2.175 s <<< FAILURE! -- in com.m3.rewrite.backport.JccMergeRecoveryTest
 com.m3.rewrite.backport.JccMergeRecoveryTest.historicalConflictsAndDuplicateTargetsCannotPublishPartialHistory -- Time elapsed: 0.160 s <<< ERROR!
-java.lang.IllegalStateException: source drift: m3/migration/test/test_jcc_source_final_handoff_packet.py
+java.lang.IllegalStateException: source drift: make/m3/migration/test/test_jcc_source_final_handoff_packet.py
 	at com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe.requireAdmissible(M3Jdk21HashPinnedTextSnapshotRecipe.java:212)
 	at com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe.generate(M3Jdk21HashPinnedTextSnapshotRecipe.java:142)
 	at com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe.generate(M3Jdk21HashPinnedTextSnapshotRecipe.java:37)

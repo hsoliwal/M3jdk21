@@ -5,8 +5,8 @@ on:
     paths:
       - 'src/jdk.m3.collections/share/classes/**'
       - 'm3/collections/implementations/spring/**'
-      - 'm3/collections/recipe/owned-spring-multivalue-map-20261017/**'
-      - 'm3/collections/qualification/owned-spring-multivalue-map-20261017/**'
+      - 'make/m3/collections/recipe/owned-spring-multivalue-map-20261017/**'
+      - 'make/m3/collections/qualification/owned-spring-multivalue-map-20261017/**'
       - '.github/workflows/m3-owned-spring-multivalue-map.yml'
 permissions:
   contents: read
@@ -29,13 +29,13 @@ jobs:
       - name: Qualify exact receiving recipe
         run: |
           set -euxo pipefail
-          python3 -I -S -B m3/collections/qualification/owned-spring-multivalue-map-20261017/verify.py
-          mvn -B -ntp -f m3/collections/recipe/owned-spring-multivalue-map-20261017/pom.xml test
+          python3 -I -S -B make/m3/collections/qualification/owned-spring-multivalue-map-20261017/verify.py
+          mvn -B -ntp -f make/m3/collections/recipe/owned-spring-multivalue-map-20261017/pom.xml test
       - name: Compile current core and owned Spring protocol
         run: |
           set -euxo pipefail
           mkdir -p proof/core proof/owned
-          POM=m3/collections/recipe/owned-spring-multivalue-map-20261017/pom.xml
+          POM=make/m3/collections/recipe/owned-spring-multivalue-map-20261017/pom.xml
           for ARTIFACT in org.springframework:spring-core:6.2.0 org.springframework:spring-jcl:6.2.0 com.google.code.findbugs:jsr305:3.0.2; do
             mvn -B -ntp -f "$POM" org.apache.maven.plugins:maven-dependency-plugin:3.6.1:get -Dartifact="$ARTIFACT" -Dtransitive=false
           done
@@ -44,11 +44,11 @@ jobs:
           ANNOTATIONS="$HOME/.m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar"
           find m3/collections/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/collections src/jdk.m3.collections/share/classes/jdk/internal/m3/collections -name '*.java' -print0 | sort -z | xargs -0 javac --release 21 -proc:none -Xlint:all,-module -Werror -d proof/core
           CP="proof/owned:proof/core:$CORE:$JCL:$ANNOTATIONS"
-          javac --release 21 -proc:none -Xlint:all -Werror -cp "$CP" -d proof/owned m3/collections/implementations/spring/src/main/java/jdk/m3/collections/spring/M3MultiValueMap.java m3/collections/implementations/spring/src/main/java/jdk/m3/collections/spring/M3SingleValueMapView.java m3/collections/implementations/spring/src/test/java/jdk/m3/collections/spring/M3MultiValueMapSelfTest.java m3/collections/qualification/owned-spring-multivalue-map-20261017/SpringProtocolPreimageProbe.java m3/collections/qualification/owned-spring-multivalue-map-20261017/SingletonTraversalDiscriminator.java
+          javac --release 21 -proc:none -Xlint:all -Werror -cp "$CP" -d proof/owned m3/collections/implementations/spring/src/main/java/jdk/m3/collections/spring/M3MultiValueMap.java m3/collections/implementations/spring/src/main/java/jdk/m3/collections/spring/M3SingleValueMapView.java m3/collections/implementations/spring/src/test/java/jdk/m3/collections/spring/M3MultiValueMapSelfTest.java make/m3/collections/qualification/owned-spring-multivalue-map-20261017/SpringProtocolPreimageProbe.java make/m3/collections/qualification/owned-spring-multivalue-map-20261017/SingletonTraversalDiscriminator.java
           java -Xmx512m -cp "$CP" jdk.m3.collections.spring.M3MultiValueMapSelfTest
           java -Xmx512m -cp "$CP" SpringProtocolPreimageProbe
           java -Xmx512m -cp "$CP" SingletonTraversalDiscriminator
-          python3 -I -S -B m3/collections/qualification/owned-spring-multivalue-map-20261017/verify.py
+          python3 -I -S -B make/m3/collections/qualification/owned-spring-multivalue-map-20261017/verify.py
           git diff --exit-code
       - uses: actions/upload-artifact@v4
         if: always()
@@ -56,4 +56,4 @@ jobs:
           name: m3-owned-spring-${{ github.event.pull_request.head.sha }}
           path: |
             proof/
-            m3/collections/recipe/owned-spring-multivalue-map-20261017/target/surefire-reports/
+            make/m3/collections/recipe/owned-spring-multivalue-map-20261017/target/surefire-reports/

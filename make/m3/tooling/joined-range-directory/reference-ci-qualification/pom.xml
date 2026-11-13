@@ -3,7 +3,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"><modelVersion>4.0.0</modelVersion>
 <groupId>com.m3.qualification</groupId><artifactId>joined-reference-workflow</artifactId><version>1</version>
 <properties><maven.compiler.release>21</maven.compiler.release><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-<m3.python>python3</m3.python><m3.bash>bash</m3.bash><m3.receiver.root>${project.basedir}/../../../..</m3.receiver.root></properties>
+<m3.python>python3</m3.python><m3.bash>bash</m3.bash><m3.receiver.root>${project.basedir}/../../../../..</m3.receiver.root></properties>
 <dependencies><dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2</version><scope>test</scope></dependency>
 <dependency><groupId>org.yaml</groupId><artifactId>snakeyaml</artifactId><version>2.3</version><scope>test</scope></dependency></dependencies>
 <build><directory>${m3.build.root}</directory><plugins>

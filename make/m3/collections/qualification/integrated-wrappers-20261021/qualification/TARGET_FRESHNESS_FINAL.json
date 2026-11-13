@@ -144,7 +144,7 @@
     "ahead_by": 4,
     "changed_files": [
       {
-        "path": "m3/docs/ECLIPSE_CAPABILITY_CONVERGENCE.md",
+        "path": "doc/m3/ECLIPSE_CAPABILITY_CONVERGENCE.md",
         "status": "added",
         "git_blob": "36f5d5ca09d94717c777ab6d3640ead8044ba006"
       },

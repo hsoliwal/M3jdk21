@@ -9,7 +9,7 @@ This is the P2-116 family of the residency fold: census2 crates `m3-pressure-adm
   `4a2e6452a7a` (2026-10-31). The crates' postimages are earlier states of the same files (SKIP rows).
 * Host: M3JDK master `a3ee7b9f5848a0df33f46fcd9335ebebf1f63b8d` (decisions), gates re-run after the rebase onto
   `e03bb28d54b`; module `m3/collections`, package `jdk.m3.collections`.
-* The fold's other rows are in `m3/collections/qualification/residency-fold-20261107/DECISION.tsv`: the
+* The fold's other rows are in `make/m3/collections/qualification/residency-fold-20261107/DECISION.tsv`: the
   pressure-sampling atom and P2-079.
 
 | Donor | Verdict | Target |
@@ -47,8 +47,8 @@ builds, normal and `-Xint`. The arguments are: none, `behavior`, `resources`, `j
 1-in-1024 hot-path trim. Outputs must be byte-identical. Live heap digits, thread-allocated bytes and nanos are masked.
 
 ```
-python -I m3/collections/recipe/residency-paged-array-20261107/relocate.py --donor-git <com.synexia clone> --donor-rev 165ceb5a020291e99ebeb89783b88e8a9686ae5c --check
-JAVA_HOME=<JDK 21> JTMP=<tmp> bash m3/collections/recipe/residency-paged-array-20261107/differential.sh <com.synexia clone> 165ceb5a020291e99ebeb89783b88e8a9686ae5c m3/collections/target/classes m3/collections/target/test-classes <out> 60 400
+python -I make/m3/collections/recipe/residency-paged-array-20261107/relocate.py --donor-git <com.synexia clone> --donor-rev 165ceb5a020291e99ebeb89783b88e8a9686ae5c --check
+JAVA_HOME=<JDK 21> JTMP=<tmp> bash make/m3/collections/recipe/residency-paged-array-20261107/differential.sh <com.synexia clone> 165ceb5a020291e99ebeb89783b88e8a9686ae5c m3/collections/target/classes m3/collections/target/test-classes <out> 60 400
 ```
 
 Gate results: `GATES.tsv`. Corrections: `RECIPE_MEMORY.tsv`.

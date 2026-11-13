@@ -6,7 +6,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-//FLLDCIM: MRL - RESTORE-ADD JNI theirs ab263bf672f9 lines 8-32 (leaves 38; origins 47762a83fcc); dropped by retain merge d92ed3c91214; recipe m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
+//FLLDCIM: MRL - RESTORE-ADD JNI theirs ab263bf672f9 lines 8-32 (leaves 38; origins 47762a83fcc); dropped by retain merge d92ed3c91214; recipe make/m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
 /*
  * LeetCode 34/35 (two insertion boundaries) + LeetCode 88 (merge of sorted
  * streams), adapted independently to primitive JNI batch search.
@@ -106,7 +106,7 @@ Java_jdk_internal_m3_collections_LongRankBatchNative_lowerBounds0(
     (*env)->ReleaseLongArrayElements(env, sorted, values, JNI_ABORT);
 }
 
-//FLLDCIM: MRL - RESTORE-ADD JNI theirs ab263bf672f9 lines 99-933 (leaves 5 7 12 18 21 23 24 25 34 38 40 55; origins 8403833238f e97b7d77295 47762a83fcc 6e86f2b03c3 ce5bc144337 efa61222bcc 56460c92634 74278253fa3 3be5e14402f a08a353b192 66a5e9127ee 28a25d16452 35662be63ca); dropped by retain merge d92ed3c91214; recipe m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
+//FLLDCIM: MRL - RESTORE-ADD JNI theirs ab263bf672f9 lines 99-933 (leaves 5 7 12 18 21 23 24 25 34 38 40 55; origins 8403833238f e97b7d77295 47762a83fcc 6e86f2b03c3 ce5bc144337 efa61222bcc 56460c92634 74278253fa3 3be5e14402f a08a353b192 66a5e9127ee 28a25d16452 35662be63ca); dropped by retain merge d92ed3c91214; recipe make/m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
 /*
  * LeetCode 34 category, M3 contract: one sorted long[] plus a batch of
  * queries yields interleaved [lower, upper) insertion coordinates. Unlike
@@ -1160,7 +1160,7 @@ Java_jdk_internal_m3_collections_LongRankBatchNative_topKFrequent0(
     return output;
 }
 
-//FLLDCIM: MRL - RESTORE-ADD JNI theirs ab263bf672f9 lines 1067-1168 (leaves 6; origins 66ddfd93f75); dropped by retain merge d92ed3c91214; recipe m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
+//FLLDCIM: MRL - RESTORE-ADD JNI theirs ab263bf672f9 lines 1067-1168 (leaves 6; origins 66ddfd93f75); dropped by retain merge d92ed3c91214; recipe make/m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
 /*
  * LC #532 first-party primitive distinct K-diff count. This is an ADDITIVE
  * entrypoint to the original m3rankbatch JNI owner, not another library.
@@ -1380,7 +1380,7 @@ Java_jdk_internal_m3_collections_LongRankBatchNative_pairDistanceCounts0(
     }
 }
 
-//FLLDCIM: MRL - RESTORE-ADD JNI theirs ab263bf672f9 lines 1286-1524 (leaves 2 8 29; origins 2b78514275f fdf8f2875a2 1411c67f4e3); dropped by retain merge d92ed3c91214; recipe m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
+//FLLDCIM: MRL - RESTORE-ADD JNI theirs ab263bf672f9 lines 1286-1524 (leaves 2 8 29; origins 2b78514275f fdf8f2875a2 1411c67f4e3); dropped by retain merge d92ed3c91214; recipe make/m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
 /*
  * LeetCode #34/#35 boundary search and #88 monotone two-pointer query scan.
  * Original shared m3rankbatch JNI library: appended ABI, no new native owner.
@@ -1723,7 +1723,7 @@ Java_jdk_internal_m3_collections_LongRankBatchNative_countSmallerRight0(
     (*env)->SetIntArrayRegion(env, output, 0, length, counts);
     free(values); free(indices); free(scratch); free(counts);
 }
-//FLLDCIM: MRL - RESTORE-ADD JNI theirs ab263bf672f9 lines 1628-1712 (leaves 14; origins 30e8bbd762c); dropped by retain merge d92ed3c91214; recipe m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
+//FLLDCIM: MRL - RESTORE-ADD JNI theirs ab263bf672f9 lines 1628-1712 (leaves 14; origins 30e8bbd762c); dropped by retain merge d92ed3c91214; recipe make/m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
 /*
  * LeetCode #658: selected-window start on sorted signed-long owners.
  * Unsigned positive differences handle Long.MIN_VALUE/Long.MAX_VALUE exactly;
@@ -1912,7 +1912,7 @@ Java_jdk_internal_m3_collections_LongRankBatchNative_kthPairDistancesInto0(
     }
 }
 
-//FLLDCIM: MRL - RESTORE-ADD JNI theirs ab263bf672f9 lines 1815-1945 (leaves 15 20; origins 401dadb98a7 610f780df14); dropped by retain merge d92ed3c91214; recipe m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
+//FLLDCIM: MRL - RESTORE-ADD JNI theirs ab263bf672f9 lines 1815-1945 (leaves 15 20; origins 401dadb98a7 610f780df14); dropped by retain merge d92ed3c91214; recipe make/m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
 /* LeetCode #167 two-pointer sorted two-sum over signed long coordinates.
  * Reuse existing 2 x 256-long JNI array-region pages: no full-array copy,
  * critical pin, per-element object, VM pointer retention or callback bridge.

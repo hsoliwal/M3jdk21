@@ -33,7 +33,7 @@ No automatic native dispatch is added. Existing owner names and public JDK APIs 
 On Linux with a Java 21 JDK, GCC, nm and Python 3, from this checkout:
 
 ```sh
-python3 m3/qualification/jdk-sorted-mask-20261019/verify.py \
+python3 make/m3/qualification/jdk-sorted-mask-20261019/verify.py \
   --target "$PWD" --output /absolute/new-directory-outside-the-checkout
 ```
 

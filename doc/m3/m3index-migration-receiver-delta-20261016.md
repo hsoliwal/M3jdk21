@@ -7,12 +7,12 @@ This is a small delta, not a second master catalogue. Canonical source recipe
 ownership stays in hsoliwal/com.synexia, while M3JDK21 is the Java 21 product
 owner. Preserve the existing target authorities:
 
-- m3/docs/m3jdk21-porting-invariant.md and m3/docs/name-mapping.json
-- m3/docs/m3-full-family-catalogue.json (4,770 scoped historical
+- doc/m3/m3jdk21-porting-invariant.md and doc/m3/name-mapping.json
+- doc/m3/m3-full-family-catalogue.json (4,770 scoped historical
   named-path candidates, not whole-portfolio completion)
 - m3/synexia-import/current-full-borrow/ (32 intake-family categories with
   independent statuses and source revision)
-- m3/compatibility/m3-family-naming-target-disposition.tsv
+- make/m3/compatibility/m3-family-naming-target-disposition.tsv
 - Public JDK Java APIs, HotSpot/JNI/GC compatibility and license/NOTICE rules.
 
 ## Exact source custody
@@ -52,12 +52,12 @@ does not itself establish remote availability or correct compilation.
 
 ## Local source-only verifier
 
-    python3 m3/compatibility/check_mindex_rename_m3_delta.py --self-test
+    python3 make/m3/compatibility/check_mindex_rename_m3_delta.py --self-test
 
 The independent full-family receiver remains mandatory for later M3JDK target
 promotion, but requires Git ancestry reaching its historical pinned baseline:
 
-    python3 m3/compatibility/check_m3_full_borrow_receiver.py
+    python3 make/m3/compatibility/check_m3_full_borrow_receiver.py
 
 Run that independent check from a complete-history checkout. The bounded
 source-only delta workflow intentionally does not equate a shallow clone's

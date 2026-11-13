@@ -1,8 +1,8 @@
 # M3String-backed String — JDK integration contract
 
 Status: historical first-stage design, retained for provenance. The current runtime authority is
-`m3/docs/m3-runtime-invariants.tsv`, `m3/docs/name-mapping.json`, and
-`m3/docs/m3string-m3-lineage.md`.
+`doc/m3/m3-runtime-invariants.tsv`, `doc/m3/name-mapping.json`, and
+`doc/m3/m3string-m3-lineage.md`.
 
 Synexia uses the donor name `MIndexString`; M3JDK uses the target name `M3String`.
 
@@ -10,9 +10,9 @@ Synexia uses the donor name `MIndexString`; M3JDK uses the target name `M3String
 
 The first-stage sections below are historical; in particular, “String is not changed”
 and “no JNI library is loaded” do not describe the later integrated runtime. For the
-current candidate use the [runtime guide](../m3/runtime-integration/README.md),
-[JNI contract](../m3/docs/mindex-jni-string-ingress.md) and
-[build/configuration matrix](../m3/docs/native-build.md).
+current candidate use the [runtime guide](../make/m3/runtime-integration/README.md),
+[JNI contract](m3/mindex-jni-string-ingress.md) and
+[build/configuration matrix](m3/native-build.md).
 
 At the reviewed source revision, the ownership path is:
 

@@ -67,5 +67,5 @@ WRITE	src/jdk.m3.io/share/classes/module-info.java
 WRITE	make/modules/jdk.m3.io/Java.gmk
 WRITE	make/conf/module-loader-map.conf
 WRITE	m3/optane/pom.xml
-WRITE	m3/tooling/jdk-naming/PACKAGE_BASELINE.tsv
+WRITE	make/m3/tooling/jdk-naming/PACKAGE_BASELINE.tsv
 MOVE_TO_JDK_MODULE v3 area=m3/optane module=jdk.m3.io exports=jdk.m3.optane dry_run=False

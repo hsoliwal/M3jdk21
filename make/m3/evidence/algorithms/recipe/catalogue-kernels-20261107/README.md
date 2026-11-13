@@ -15,7 +15,7 @@ rows and of their closure. Phase 2 relocates the product algorithms into `org.m3
 | decision | rows | where |
 |---|---|---|
 | ABSORB, this leaf | 12 | 5 main classes and 7 donor tests, below |
-| ABSORB, handoff | 41 | catalogue, corpus data and CLIs go to m3/tooling (ChallengeCategoryCatalog, the LeetCode atlases and the replay/export/parity gates, ProblemCatalogue/ProblemCategory*, AlgorithmShape, CompetitiveProblemReview, ChallengeDonorPassLedger, CompetitiveCapabilityPlanIndex, DonorMechanicalShapeCatalog -> m3/tooling/donor-catalogue); M3ProblemShapeCatalogue -> make/m3/recipes (jdk.internal.m3.recipe); M3CompilerPatternHints -> jdk.compiler (owner present, census2 UNAPPLIED); M3Wave9RollbackContract -> cpu-tools |
+| ABSORB, handoff | 41 | catalogue, corpus data and CLIs go to make/m3/tooling (ChallengeCategoryCatalog, the LeetCode atlases and the replay/export/parity gates, ProblemCatalogue/ProblemCategory*, AlgorithmShape, CompetitiveProblemReview, ChallengeDonorPassLedger, CompetitiveCapabilityPlanIndex, DonorMechanicalShapeCatalog -> make/m3/tooling/donor-catalogue); M3ProblemShapeCatalogue -> make/m3/recipes (jdk.internal.m3.recipe); M3CompilerPatternHints -> jdk.compiler (owner present, census2 UNAPPLIED); M3Wave9RollbackContract -> cpu-tools |
 | HELD, handoff | 1 | PatternDetectionAlgorithm: modified DP-CORE (Apache-2.0), but its `parser.*` closure has no M3 owner |
 | ALREADY | 2 | wave9 flow contract (census2-a5-20261106); the donor progress contract = `M3ProgressMonitor` |
 | NEC | 4 | wave9 `M3MinCostFlow` (census2-a5); `ChallengePostingQuery` + its test vs `jdk.m3.arrays.M3IntPostingIndex`; the lombok `Strings` facade vs the landed string families |

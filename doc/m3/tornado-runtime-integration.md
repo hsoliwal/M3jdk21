@@ -31,7 +31,7 @@ source reactor. It does not certify the mismatched source/runtime combination or
 silently treat unported fork changes as included. The legacy RV32IM provider has
 its own exact source pin and custody record.
 
-`m3/runtime-integration/tornado/source-lock.json` records every selected donor
+`make/m3/runtime-integration/tornado/source-lock.json` records every selected donor
 path, original Git mode, blob identity and raw SHA-256, all excluded paths and
 their reasons, and the exact runtime dependency JAR hashes. Upstream source bytes
 and headers are preserved. Compiler support dependencies are explicitly pinned;
@@ -68,7 +68,7 @@ the selected backend's compiler and execution contracts.
 ## Build, image and execution boundaries
 
 Use the ordered phases documented by
-[`BUILD_RUNTIME.md`](../runtime-integration/tornado/BUILD_RUNTIME.md):
+[`BUILD_RUNTIME.md`](../../make/m3/runtime-integration/tornado/BUILD_RUNTIME.md):
 patch, lint, compile, tests, installed-image runtime, receipt and recipe replay.
 Every phase checks the admitted source/dependency identities, preserves command
 logs and requires its predecessor's successful receipt. A source change requires

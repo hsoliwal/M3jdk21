@@ -3,9 +3,9 @@ name: M3AST real ANTLR4 generated parser Unicode fidelity
 on:
   pull_request:
     paths:
-      - 'm3/tooling/module-packs/parser/integration/antlr4/**'
-      - 'm3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3CodePointSourceMap.java'
-      - 'm3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTExternalIngress.java'
+      - 'make/m3/tooling/module-packs/parser/integration/antlr4/**'
+      - 'make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3CodePointSourceMap.java'
+      - 'make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTExternalIngress.java'
       - '.github/workflows/m3ast-antlr4-real-parser-20261027.yml'
   workflow_dispatch:
 permissions:
@@ -28,8 +28,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          pom=m3/tooling/module-packs/parser/integration/antlr4/pom.xml
-          grammar=m3/tooling/module-packs/parser/integration/antlr4
+          pom=make/m3/tooling/module-packs/parser/integration/antlr4/pom.xml
+          grammar=make/m3/tooling/module-packs/parser/integration/antlr4
           mkdir -p "$grammar/src/main/antlr4"
           cp "$grammar/grammar/M3UnicodeTiny.g4.txt" "$grammar/src/main/antlr4/M3UnicodeTiny.g4"
           mvn -B -ntp -f "$pom" generate-sources \
@@ -40,7 +40,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          root=m3/tooling/module-packs/parser
+          root=make/m3/tooling/module-packs/parser
           cpfile="$RUNNER_TEMP/m3-antlr4-runtime-cp.txt"
           classes="$RUNNER_TEMP/m3-antlr4-real-classes"
           mkdir -p "$classes"

@@ -19,7 +19,7 @@ sys.dont_write_bytecode = True
 
 SOURCE = "src/java.base/share/classes/java/lang/M3StringRegexDp.java"
 TEST = "test/jdk/java/lang/String/M3StringRegexDpTest.java"
-SUPPORT = "m3/runtime-integration/regex-plan-amalgamation/source_extracted_java21.py"
+SUPPORT = "make/m3/runtime-integration/regex-plan-amalgamation/source_extracted_java21.py"
 BEFORE_SHA = "9536a6df2042fe047f02ef07834edca91ce7a863e5b3c1daafffe55fdad48e6e"
 AFTER_SHA = "3029950078524419af52edbcbaaccab545bd5b1bed824ee80218250b8c748ef4"
 TEST_SHA = "b9bbf14010da526e41d0e78945e728d5e9aa1cab8ccc732a815a9a14a253ee2a"
@@ -51,7 +51,7 @@ def once(source, before, after):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--source-root", type=Path, default=Path(__file__).resolve().parents[3])
+    parser.add_argument("--source-root", type=Path, default=Path(__file__).resolve().parents[4])
     parser.add_argument("--candidate-root", type=Path)
     parser.add_argument("--java-home", type=Path)
     args = parser.parse_args()

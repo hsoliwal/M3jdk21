@@ -62,7 +62,7 @@
       "bytes": 15860
     },
     {
-      "path": "m3/tooling/migration-recipes/verification/jcc-receiving/pom.xml",
+      "path": "make/m3/tooling/migration-recipes/verification/jcc-receiving/pom.xml",
       "role": "original_candidate_tooling_fixture",
       "sha256": "fda1ac1823bf912f10d975659dc1bfe7f89573d1581af3a7bfa7e45d99a70ba2",
       "bytes": 3152

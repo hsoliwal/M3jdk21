@@ -15,7 +15,7 @@ def check():
   assert ident(Path(row['path']))['sha256']==row['sha256'],row['path']
  return len(d['rows'])
 def main():
- count=check();work=HERE/'workspace';pom=work/'m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/a3-behavior-verification/pom.xml'
+ count=check();work=HERE/'workspace';pom=work/'make/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/a3-behavior-verification/pom.xml'
  env=os.environ.copy();env['JAVA_HOME']=str(ROOT/'toolchain/jdk-21+35');env['PATH']=env['JAVA_HOME']+'/bin:'+env.get('PATH','')
  cmd=[str(ROOT/'toolchain/apache-maven-3.9.9/bin/mvn'),'-o','-B','-ntp','-Dmaven.repo.local='+str(HERE/'cache'),'-f',str(pom),'test']
  request={'schema':'m3-a3-behavior-process/1','argv':cmd,'cwd':str(work),'java_home':env['JAVA_HOME'],'start_utc':utc(),'inputs':ident(HERE/'INPUTS.json'),'runner':ident(Path(__file__)),'staged_input_count':count,'scope':'Four unchanged original A3 recipe tests; no whole-module, foundation workflow, runtime/JNI or JDK build qualification.'}

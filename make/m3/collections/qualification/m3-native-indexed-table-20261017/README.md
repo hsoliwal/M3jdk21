@@ -47,8 +47,8 @@ Local Maven not installed. No speedup or full JDK superset is claimed.
 
 Reviewer:
 ```sh
-python3 m3/collections/qualification/m3-native-indexed-table-20261017/verify.py
-mvn -B -ntp -f m3/collections/qualification/m3-native-indexed-table-20261017/recipe-mirror/pom.xml verify
+python3 make/m3/collections/qualification/m3-native-indexed-table-20261017/verify.py
+mvn -B -ntp -f make/m3/collections/qualification/m3-native-indexed-table-20261017/recipe-mirror/pom.xml verify
 mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3IndexedTableTest test
 ```
 

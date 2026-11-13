@@ -9,14 +9,14 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3BitLane28.java'
       - 'test/jdk/jdk/m3/collections/M3BitLaneJumpProof.java'
       - 'test/jdk/jdk/m3/collections/native/m3_bitlane_jump_jni.c'
-      - 'm3/collections/qualification/bitlane-indexed-navigation-20261017/**'
+      - 'make/m3/collections/qualification/bitlane-indexed-navigation-20261017/**'
       - '.github/workflows/m3-bitlane-indexed-navigation-20261017.yml'
   pull_request:
     paths:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3BitLane28.java'
       - 'test/jdk/jdk/m3/collections/M3BitLaneJumpProof.java'
       - 'test/jdk/jdk/m3/collections/native/m3_bitlane_jump_jni.c'
-      - 'm3/collections/qualification/bitlane-indexed-navigation-20261017/**'
+      - 'make/m3/collections/qualification/bitlane-indexed-navigation-20261017/**'
       - '.github/workflows/m3-bitlane-indexed-navigation-20261017.yml'
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -40,9 +40,9 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Exact SHA-256 and public descriptors, Java21 tiered and interpreter oracles
-        run: python3 m3/collections/qualification/bitlane-indexed-navigation-20261017/verify.py
+        run: python3 make/m3/collections/qualification/bitlane-indexed-navigation-20261017/verify.py
       - name: Strict C17 UBSan and checked JNI differential (test-only native)
-        run: python3 m3/collections/qualification/bitlane-indexed-navigation-20261017/verify.py --jni
+        run: python3 make/m3/collections/qualification/bitlane-indexed-navigation-20261017/verify.py --jni
       - name: No file mutations from source verification
         run: git diff --exit-code -- m3/collections
   owning-maven-module:

@@ -6,19 +6,19 @@ on:
     branches: ['m3/string-replacement-guard-20261012']
     paths:
       - '.github/workflows/m3-string-replacement-guard-proof.yml'
-      - 'm3/runtime-integration/**'
+      - 'make/m3/runtime-integration/**'
       - 'm3/vendor/m3/m3-openrewrite-recipes/**'
       - 'src/java.base/share/classes/java/lang/String.java'
       - '.github/workflows/mindex-string-backing.yml'
-      - 'm3/docs/m3-mindex-precompute-inventory.tsv'
-      - 'm3/docs/m3-runtime-invariants.tsv'
-      - 'm3/docs/m3-string-precompute-port-map.tsv'
-      - 'm3/docs/m3-string-recipe-authority.tsv'
-      - 'm3/docs/name-mapping.json'
-      - 'm3/docs/string-precompute-completeness.tsv'
-      - 'm3/history/licenses/**'
-      - 'm3/history/string-literal-replacement-lineage.tsv'
-      - 'm3/history/string-literal-replacement-notice.md'
+      - 'doc/m3/m3-mindex-precompute-inventory.tsv'
+      - 'doc/m3/m3-runtime-invariants.tsv'
+      - 'doc/m3/m3-string-precompute-port-map.tsv'
+      - 'doc/m3/m3-string-recipe-authority.tsv'
+      - 'doc/m3/name-mapping.json'
+      - 'doc/m3/string-precompute-completeness.tsv'
+      - 'make/m3/history/licenses/**'
+      - 'make/m3/history/string-literal-replacement-lineage.tsv'
+      - 'make/m3/history/string-literal-replacement-notice.md'
       - 'src/hotspot/share/cds/archiveHeapWriter.cpp'
       - 'src/hotspot/share/classfile/javaClasses.inline.hpp'
       - 'src/hotspot/share/classfile/stringTable.cpp'
@@ -36,19 +36,19 @@ on:
   pull_request:
     paths:
       - '.github/workflows/m3-string-replacement-guard-proof.yml'
-      - 'm3/runtime-integration/**'
+      - 'make/m3/runtime-integration/**'
       - 'm3/vendor/m3/m3-openrewrite-recipes/**'
       - 'src/java.base/share/classes/java/lang/String.java'
       - '.github/workflows/mindex-string-backing.yml'
-      - 'm3/docs/m3-mindex-precompute-inventory.tsv'
-      - 'm3/docs/m3-runtime-invariants.tsv'
-      - 'm3/docs/m3-string-precompute-port-map.tsv'
-      - 'm3/docs/m3-string-recipe-authority.tsv'
-      - 'm3/docs/name-mapping.json'
-      - 'm3/docs/string-precompute-completeness.tsv'
-      - 'm3/history/licenses/**'
-      - 'm3/history/string-literal-replacement-lineage.tsv'
-      - 'm3/history/string-literal-replacement-notice.md'
+      - 'doc/m3/m3-mindex-precompute-inventory.tsv'
+      - 'doc/m3/m3-runtime-invariants.tsv'
+      - 'doc/m3/m3-string-precompute-port-map.tsv'
+      - 'doc/m3/m3-string-recipe-authority.tsv'
+      - 'doc/m3/name-mapping.json'
+      - 'doc/m3/string-precompute-completeness.tsv'
+      - 'make/m3/history/licenses/**'
+      - 'make/m3/history/string-literal-replacement-lineage.tsv'
+      - 'make/m3/history/string-literal-replacement-notice.md'
       - 'src/hotspot/share/cds/archiveHeapWriter.cpp'
       - 'src/hotspot/share/classfile/javaClasses.inline.hpp'
       - 'src/hotspot/share/classfile/stringTable.cpp'
@@ -88,15 +88,15 @@ jobs:
       - name: Install pinned workflow parser
         run: python3 -m pip install --disable-pip-version-check --no-input PyYAML==6.0.3
       - name: Verify retained historical custody without recipe execution
-        run: sha256sum -c m3/runtime-integration/string-replacement-guard-sha256.txt
+        run: sha256sum -c make/m3/runtime-integration/string-replacement-guard-sha256.txt
       - name: Verify executed target source and test custody
-        run: sha256sum --strict -c m3/runtime-integration/string-replacement-target-sha256.txt
+        run: sha256sum --strict -c make/m3/runtime-integration/string-replacement-target-sha256.txt
       - name: Run target-owned pool, cursor and workflow contracts
         run: |
-          python3 m3/runtime-integration/test_string_pool_precompute.py
-          python3 m3/runtime-integration/test_string_cursor_and_ingress.py
-          python3 m3/runtime-integration/test_string_workflow_contract.py
+          python3 make/m3/runtime-integration/test_string_pool_precompute.py
+          python3 make/m3/runtime-integration/test_string_cursor_and_ingress.py
+          python3 make/m3/runtime-integration/test_string_workflow_contract.py
       - name: Run replacement route mutation tests on exact String source
-        run: python3 m3/runtime-integration/test_string_replacement_routes.py
+        run: python3 make/m3/runtime-integration/test_string_replacement_routes.py
       - name: Run complete M3 String source invariants without bypass
-        run: python3 m3/runtime-integration/check-m3string-invariants.py
+        run: python3 make/m3/runtime-integration/check-m3string-invariants.py

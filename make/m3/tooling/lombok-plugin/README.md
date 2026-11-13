@@ -55,7 +55,7 @@ classes are generated through Chrome local AI, one call per file, and Chrome is 
 
 ```
 LOMBOK_JAR=<lombok-1.18.48.jar> COM_SYNEXIA=<com.synexia checkout> M3_RG=<rg.exe> OUT=<scratch> \
-    bash m3/tooling/lombok-plugin/tools/run_gates.sh
+    bash make/m3/tooling/lombok-plugin/tools/run_gates.sh
 ```
 
 On a shared blobless clone add `SKIP_CENSUS=1`: the census gates (`git grep` over `m3/` at HEAD) print SKIP. Use it

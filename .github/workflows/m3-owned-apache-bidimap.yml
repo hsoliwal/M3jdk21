@@ -10,8 +10,8 @@ on:
       - 'test/jdk/jdk/**/collections/**'
       - 'm3/native/include/**'
       - 'm3/collections/implementations/apache/**'
-      - 'm3/collections/recipe/owned-apache-bidimap-20261017/**'
-      - 'm3/collections/qualification/owned-apache-bidimap-20261017/**'
+      - 'make/m3/collections/recipe/owned-apache-bidimap-20261017/**'
+      - 'make/m3/collections/qualification/owned-apache-bidimap-20261017/**'
       - '.github/workflows/m3-owned-apache-bidimap.yml'
 permissions:
   contents: read
@@ -34,8 +34,8 @@ jobs:
       - name: Qualify exact source receiving recipe
         run: |
           set -euxo pipefail
-          python3 -I -S -B m3/collections/qualification/owned-apache-bidimap-20261017/verify.py
-          mvn -B -ntp -f m3/collections/recipe/owned-apache-bidimap-20261017/pom.xml test
+          python3 -I -S -B make/m3/collections/qualification/owned-apache-bidimap-20261017/verify.py
+          mvn -B -ntp -f make/m3/collections/recipe/owned-apache-bidimap-20261017/pom.xml test
       - name: Build required M3 arrays JNI allocator from source
         run: |
           set -euxo pipefail
@@ -51,20 +51,20 @@ jobs:
         run: |
           set -euxo pipefail
           mkdir -p proof/arrays proof/core proof/owned
-          mvn -B -ntp -f m3/collections/recipe/owned-apache-bidimap-20261017/pom.xml org.apache.maven.plugins:maven-dependency-plugin:3.6.1:get -Dartifact=org.apache.commons:commons-collections4:4.5.0 -Dtransitive=false
+          mvn -B -ntp -f make/m3/collections/recipe/owned-apache-bidimap-20261017/pom.xml org.apache.maven.plugins:maven-dependency-plugin:3.6.1:get -Dartifact=org.apache.commons:commons-collections4:4.5.0 -Dtransitive=false
           PROVIDER="$HOME/.m2/repository/org/apache/commons/commons-collections4/4.5.0/commons-collections4-4.5.0.jar"
           find m3/arrays/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/arrays -name '*.java' -print0 | sort -z | xargs -0 javac --release 21 -proc:none -Xlint:all,-module -Werror -d proof/arrays
           find m3/collections/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/collections src/jdk.m3.collections/share/classes/jdk/internal/m3/collections -name '*.java' -print0 | sort -z | xargs -0 javac --release 21 --module-path proof/arrays -proc:none -Xlint:all,-module -Werror -d proof/core
           NATIVE="$GITHUB_WORKSPACE/proof/array-native-build/libm3_arrays.so"
           test -s "$NATIVE"
           CP="proof/owned:proof/core:proof/arrays:$PROVIDER"
-          javac --release 21 -proc:none -Xlint:all -Werror -cp "$CP" -d proof/owned m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3BidiMap.java m3/collections/implementations/apache/src/test/java/jdk/m3/collections/apache/M3BidiMapSelfTest.java m3/collections/qualification/owned-apache-bidimap-20261017/BidiViewTraversalDiscriminator.java m3/collections/qualification/owned-apache-bidimap-20261017/BidiProviderDiscriminator.java m3/collections/qualification/owned-apache-bidimap-20261017/BidiValueReplacementDiscriminator.java
+          javac --release 21 -proc:none -Xlint:all -Werror -cp "$CP" -d proof/owned m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3BidiMap.java m3/collections/implementations/apache/src/test/java/jdk/m3/collections/apache/M3BidiMapSelfTest.java make/m3/collections/qualification/owned-apache-bidimap-20261017/BidiViewTraversalDiscriminator.java make/m3/collections/qualification/owned-apache-bidimap-20261017/BidiProviderDiscriminator.java make/m3/collections/qualification/owned-apache-bidimap-20261017/BidiValueReplacementDiscriminator.java
           java -Xmx512m -Xcheck:jni "-Dm3.arrays.native.path=$NATIVE" -cp "$CP" jdk.m3.collections.apache.M3BidiMapSelfTest
           java -Xmx512m -Xcheck:jni "-Dm3.arrays.native.path=$NATIVE" -cp "$CP" BidiProviderDiscriminator
           java -Xmx512m -Xcheck:jni "-Dm3.arrays.native.path=$NATIVE" -cp "$CP" BidiValueReplacementDiscriminator
           java -Xmx512m -Xcheck:jni "-Dm3.arrays.native.path=$NATIVE" -cp "$CP" BidiViewTraversalDiscriminator >proof/view-traversal.jsonl
           python3 -I -S -B -c 'import json; p=json.loads(open("proof/view-traversal.jsonl").read().splitlines()[-1]); assert p["cases"]==66 and p["equivalent"]==66 and p["different"]==0,p'
-          python3 -I -S -B m3/collections/qualification/owned-apache-bidimap-20261017/verify.py
+          python3 -I -S -B make/m3/collections/qualification/owned-apache-bidimap-20261017/verify.py
           git diff --exit-code
       - uses: actions/upload-artifact@v4
         if: always()
@@ -72,4 +72,4 @@ jobs:
           name: m3-owned-bidimap-${{ github.event.pull_request.head.sha }}
           path: |
             proof/
-            m3/collections/recipe/owned-apache-bidimap-20261017/target/surefire-reports/
+            make/m3/collections/recipe/owned-apache-bidimap-20261017/target/surefire-reports/

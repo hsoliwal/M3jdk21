@@ -13,7 +13,7 @@ variable `Path synexia` (also a record component, read as `fixture.synexia()`) a
 
 Commit `fe35ea98841157594d9aeac71c734b2476d07da4` (JDK naming: rename every Synexia name, recipe
 JDK_NAMING_RENAME) moved `m3/synexia-import` to `m3/m3-import` and applied the text rule `SEGMENT_DOT` of
-`m3/tooling/jdk-naming/NAMING_RULES.tsv` to Java code. The rule is meant for a dotted name segment
+`make/m3/tooling/jdk-naming/NAMING_RULES.tsv` to Java code. The rule is meant for a dotted name segment
 (`com.m3.<word>.importer`, a schema id) and matches the bare word when a dot and a letter follow it. In Java
 that is exactly a method call on a variable of that name: `<word>.resolve(..)` and `<word>.toString()` became
 `m3.resolve(..)` and `m3.toString()`, while the declaration `Path <word> = ..` and every use as an argument
@@ -48,7 +48,7 @@ simple-name receiver `m3.` and reports methods that declare one spelling and use
 
 | file | method | uses |
 |---|---|---|
-| `m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-full-delivery-a3/M3ImportPlanTest.java` | `fixture` (line 417) | 444-447 |
+| `make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-full-delivery-a3/M3ImportPlanTest.java` | `fixture` (line 417) | 444-447 |
 
 It is a hash-pinned resource (a recipe's expected Java), not compiled by any module; a fix must reseal its pin.
 

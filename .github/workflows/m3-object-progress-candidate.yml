@@ -8,8 +8,8 @@ on:
       - 'src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java'
       - 'src/java.base/share/classes/java/util/concurrent/Executor*.java'
       - 'src/java.base/share/classes/java/util/function/*.java'
-      - 'm3/compatibility/*object*progress*'
-      - 'm3/compatibility/M3ObjectProgressStandaloneProbe.java'
+      - 'make/m3/compatibility/*object*progress*'
+      - 'make/m3/compatibility/M3ObjectProgressStandaloneProbe.java'
       - '.github/workflows/m3-object-progress-candidate.yml'
   workflow_dispatch:
 concurrency:
@@ -26,6 +26,6 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Check exact source handoff and isolated progress implementation
-        run: bash m3/compatibility/verify-object-progress-standalone.sh
+        run: bash make/m3/compatibility/verify-object-progress-standalone.sh
       - name: Scope disclaimer
         run: echo 'This is not modified JDK compilation, jtreg, HotSpot, JNI or Maven/OpenRewrite qualification.'

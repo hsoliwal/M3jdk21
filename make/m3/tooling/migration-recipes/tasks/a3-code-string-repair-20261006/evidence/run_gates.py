@@ -2,7 +2,7 @@
 """Materialize the reviewed exact recipe outputs and run unchanged A3 behavior gates."""
 from pathlib import Path
 import json,hashlib,datetime,os,subprocess,shutil,xml.etree.ElementTree as ET
-HERE=Path(__file__).resolve().parent;ROOT=HERE.parents[1];BASE=Path('m3/tooling/migration-recipes');TASK=BASE/'tasks/a3-code-string-repair-20261006';ENV=os.environ.copy();ENV['JAVA_HOME']=str(ROOT/'toolchain/jdk-21+35');ENV['PATH']=ENV['JAVA_HOME']+'/bin:'+ENV.get('PATH','')
+HERE=Path(__file__).resolve().parent;ROOT=HERE.parents[1];BASE=Path('make/m3/tooling/migration-recipes');TASK=BASE/'tasks/a3-code-string-repair-20261006';ENV=os.environ.copy();ENV['JAVA_HOME']=str(ROOT/'toolchain/jdk-21+35');ENV['PATH']=ENV['JAVA_HOME']+'/bin:'+ENV.get('PATH','')
 def utc():return datetime.datetime.now(datetime.timezone.utc).isoformat()
 def ident(p):
  b=p.read_bytes();return {'path':str(p),'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest(),'git_blob':hashlib.sha1(b'blob '+str(len(b)).encode()+b'\0'+b).hexdigest()}

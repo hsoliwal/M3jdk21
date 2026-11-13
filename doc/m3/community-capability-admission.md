@@ -10,14 +10,14 @@ OpenJDK and the Java ecosystem; projects do not need to become competitors, be r
 reimplemented to be useful parts of the distribution.
 
 The full compatible-backport obligation remains in
-[COMPATIBILITY_ADMISSION.md](../backports/COMPATIBILITY_ADMISSION.md). Community demand controls
+[COMPATIBILITY_ADMISSION.md](../../make/m3/backports/COMPATIBILITY_ADMISSION.md). Community demand controls
 scheduling and optional-pack selection; it must never remove a compatible upstream change from
 that inventory. Security and correctness work is not popularity-contingent.
 
 The existing [atom/pattern/tooling boundary](atom-pattern-admission-and-tooling-boundary.md)
 remains authoritative. This document adds distribution planning, not a competing compatibility,
-naming or recipe registry. `m3/docs/name-mapping.json` remains the naming authority.
-The companion [candidate ledger](../backports/COMMUNITY_CAPABILITY_CANDIDATES.tsv) is a demand
+naming or recipe registry. `doc/m3/name-mapping.json` remains the naming authority.
+The companion [candidate ledger](../../make/m3/backports/COMMUNITY_CAPABILITY_CANDIDATES.tsv) is a demand
 overlay, not an implementation or compatibility verdict.
 
 ## Three delivery planes
@@ -168,7 +168,7 @@ configure/make as product build authority.
 These packets are a starting order, not a finite feature whitelist. Backport intake continues for
 every compatible upstream change. Add further community candidates as evidence is collected.
 
-The existing control entry is `mvn -B -ntp -f m3/pom.xml clean verify` [R3]. Product configure/make,
+The existing control entry is `mvn -B -ntp -f make/m3/pom.xml clean verify` [R3]. Product configure/make,
 jtreg and final image execution remain separate required gates. This documentation packet did not
 execute that reactor or build a JMOD.
 
@@ -178,9 +178,9 @@ Repository references are inspected at `bc175dd7b5a250477479354ce9fd9d4304416fd6
 corresponding files read during this packet's inventory. Web sources were inspected on 2026-10-03.
 They substantiate capabilities and constraints, not target-build readiness.
 
-- [R1] m3/backports/COMPATIBILITY_ADMISSION.md
-- [R2] m3/docs/atom-pattern-admission-and-tooling-boundary.md
-- [R3] m3/README.md
+- [R1] make/m3/backports/COMPATIBILITY_ADMISSION.md
+- [R2] doc/m3/atom-pattern-admission-and-tooling-boundary.md
+- [R3] make/m3/README.md
 - [W1] https://docs.oracle.com/en/java/javase/21/docs/specs/man/jmod.html
 - [W2] https://docs.oracle.com/en/java/javase/21/docs/specs/man/jlink.html
 - [W3] https://openjfx.io/openjfx-docs/modular

@@ -16,7 +16,7 @@ import shutil
 RUNTIME = "src/java.base/share/classes/java/lang/Runtime.java"
 BEFORE = "daacc198e43203c8bfabaf925569da40964f2758b9f1513dfce88b77e8da8c87"
 BASELINE = "4b24824c3aa09d802121447f8970d442a855f064"
-QUALIFICATION = "m3/runtime-integration/runtime-progress-facade-20261018"
+QUALIFICATION = "make/m3/runtime-integration/runtime-progress-facade-20261018"
 IMPORTS = "import java.util.concurrent.ProgressMonitor;\nimport java.util.concurrent.ProgressMonitors;\n"
 COPYRIGHT = " * Copyright (c) 2026 Hitesh Soliwal and contributors.\n"
 FACADE = """    /**

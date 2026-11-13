@@ -27,15 +27,15 @@ final class M3BackportContractCurrentOwnerRecipeTest {
     private static final String ROOT = "/jdk/internal/m3/rewrite/backport-contract-current-owner-20261019/";
     private static final String DESCRIPTOR = "/META-INF/rewrite/backport-contract-current-owner-20261019.yml";
     private static final Set<String> CHANGE = Set.of(
-            "m3/backports/test_compatibility_policy.py",
-            "m3/backports/test_backport_execution_waves.py",
-            "m3/backports/BACKPORT_EXECUTION_WAVES.md");
+            "make/m3/backports/test_compatibility_policy.py",
+            "make/m3/backports/test_backport_execution_waves.py",
+            "make/m3/backports/BACKPORT_EXECUTION_WAVES.md");
     private static final Set<String> KEEP = Set.of(
-            "m3/backports/compatibility_policy.py",
-            "m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv",
-            "m3/backports/JEP_CATALOGUE.tsv",
-            "m3/backports/RELEASE_JEP_AUTHORITY.tsv",
-            "m3/backports/backport_execution_waves.py");
+            "make/m3/backports/compatibility_policy.py",
+            "make/m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv",
+            "make/m3/backports/JEP_CATALOGUE.tsv",
+            "make/m3/backports/RELEASE_JEP_AUTHORITY.tsv",
+            "make/m3/backports/backport_execution_waves.py");
     private static final Set<String> PASSED = new LinkedHashSet<>();
     private static int forwardApplies;
     private static int inverseApplies;

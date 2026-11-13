@@ -17,8 +17,8 @@ HEADER = "\t".join(("path", "git_blob_sha1", "mode", "file_kind", "owner_family"
                     "method_level_recipe_gate", "target_runtime_gate", "status"))
 PREFIXES = ("src/java.base/share/classes/java/lang/", "src/java.base/share/classes/java/util/",
             "src/java.base/share/native/", "src/hotspot/share/opto/", "src/jdk.compiler/share/classes/com/sun/tools/javac/main/",
-            "m3/collections/src/", "m3/tooling/atom-census/", "m3/vendor/", "test/jdk/java/util/Arrays/", "make/",
-            ".m3/", "m3/qualification/superset-landing-20261101/")
+            "m3/collections/src/", "make/m3/tooling/atom-census/", "m3/vendor/", "test/jdk/java/util/Arrays/", "make/",
+            ".m3/", "make/m3/qualification/superset-landing-20261101/")
 KINDS = {".java": "JAVA", ".c": "NATIVE_C", ".cpp": "NATIVE_CPP", ".cc": "NATIVE_CPP", ".hpp": "NATIVE_HEADER",
          ".h": "NATIVE_HEADER", ".m": "NATIVE_OBJC", ".s": "ASSEMBLY", ".S": "ASSEMBLY", ".sh": "SCRIPT",
          ".py": "SCRIPT", ".template": "CODE_TEMPLATE"}

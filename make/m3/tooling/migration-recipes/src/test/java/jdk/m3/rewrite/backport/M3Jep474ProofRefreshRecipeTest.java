@@ -20,7 +20,7 @@ final class M3Jep474ProofRefreshRecipeTest {
     private static final String WORKFLOW =
             ".github/workflows/m3-jep474-zgc-equivalence.yml";
     private static final String RECEIPT =
-            "m3/backports/recipes/jep-474-generational-zgc/CURRENT_TREE_RECEIPT.tsv";
+            "make/m3/backports/recipes/jep-474-generational-zgc/CURRENT_TREE_RECEIPT.tsv";
 
     @Test
     void exactPreimagesTransformAndSecondPassIsFixedPoint() {

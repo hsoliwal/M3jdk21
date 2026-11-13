@@ -23,7 +23,7 @@ EXPORT=--add-exports=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED
 case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) SEP=';' ;; *) SEP=':' ;; esac
 rm -rf "$OUT"; mkdir -p "$OUT/classes" "$OUT/test-classes"
 "$PY" -I "$RECIPE_DIR/apply.py" --donor-git "$DONOR" --root "$ROOT" --check
-"$PY" -I "$ROOT/m3/tooling/jdk-naming/jdk_naming.py" plan --root "$ROOT" --only m3/ast/ | tail -n 1
+"$PY" -I "$ROOT/make/m3/tooling/jdk-naming/jdk_naming.py" plan --root "$ROOT" --only m3/ast/ | tail -n 1
 mvn -B -ntp $REPO -Dmaven.test.skip=true -f "$ROOT/m3/ast/pom.xml" clean package > "$OUT/mvn-main.log" 2>&1 || true
 grep -q 'BUILD SUCCESS' "$OUT/mvn-main.log" || { echo "MAIN BUILD FAILED (see $OUT/mvn-main.log)"; exit 1; }
 echo "MAIN_BUILD SUCCESS warnings=$(grep -c '^\[WARNING\]' "$OUT/mvn-main.log" || true)"

@@ -54,7 +54,7 @@ The validator refuses direct-source modes for proprietary donors and for GPLv3-o
 ## Verification
 
 ```sh
-bash m3/tooling/donor-catalogue/verify.sh
+bash make/m3/tooling/donor-catalogue/verify.sh
 ```
 
 The script executes, in order:
@@ -74,7 +74,7 @@ After a local repository contains both exact commit objects, run:
 
 ```sh
 java -cp <classes> jdk.m3.tooling.donors.OpenJdkDeltaInventory \
-  m3/tooling/donor-catalogue \
+  make/m3/tooling/donor-catalogue \
   bisheng-jdk-21 \
   /path/to/local/combined-git-repository \
   build/m3-donor-catalogue/bisheng

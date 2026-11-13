@@ -3,7 +3,7 @@
 # Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
 """Recipe JBCOLL_ARRAYLIST_INLINE v1: census leaf L002 (java.base java/util/ArrayList.java + one new jtreg test).
 
-Derived from m3/qualification/progress-monitor-unify-20261106/unify.py. Crate m3jdk21-java-base-arraylist-inline-
+Derived from make/m3/qualification/progress-monitor-unify-20261106/unify.py. Crate m3jdk21-java-base-arraylist-inline-
 20261025 (census row UNAPPLIED, added_present=0/19; its preimage blob 885d891b0f81 IS the live owner blob, so the
 3-way merge base = ours and the merge is the crate postimage). Two rules:
 
@@ -43,7 +43,7 @@ OWNER = "src/java.base/share/classes/java/util/ArrayList.java"
 PRE_BLOB = "885d891b0f817080824622d592691a27cf8ffa26"
 CRATE_POST_SHA256 = "62d73bd98166651c82e55395bd1a6e7b68662ba2018bf0fa7fd418d0f973198a"
 POST_SHA256 = "732324a2ad40629521e7253b57fde0715606fcfaebbb5caa030ed3614836835c"
-# the JDK naming recipe (m3/tooling/jdk-naming, rule PROSE_PRODUCT_VERSION) puts a space between the product name and
+# the JDK naming recipe (make/m3/tooling/jdk-naming, rule PROSE_PRODUCT_VERSION) puts a space between the product name and
 # its version in the crate comment; the owner postimage is the crate postimage with exactly this rewrite (checked with
 # --donor-git). The crate spelling is assembled so that the naming recipe does not rewrite this recipe's own anchor.
 NAMING = (("            // M3JDK" + "21: inline the ephemeral", "            // M3JDK 21: inline the ephemeral"),)
@@ -228,7 +228,7 @@ def whatif(root: Path, out: Path) -> int:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--root", default=str(RECIPE_DIR.parents[2]), help="repository root (default: three up)")
+    parser.add_argument("--root", default=str(RECIPE_DIR.parents[3]), help="repository root (default: three up)")
     parser.add_argument("--check", action="store_true", help="write nothing; exit 1 when a run would change a file")
     parser.add_argument("--donor-git", help="com.synexia clone holding the crate blobs")
     parser.add_argument("--donor-rev", help="com.synexia revision of the census pin")

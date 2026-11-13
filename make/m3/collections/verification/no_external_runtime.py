@@ -149,7 +149,7 @@ def verify(root: Path) -> tuple[Result, ...]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[3])
+    parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[4])
     args = parser.parse_args()
     try:
         results = verify(args.root)

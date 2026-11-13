@@ -89,5 +89,5 @@ already renamed, and the 2 new MRL anchors.
 `oracle/DoopFacadeFixesDifferential.java` is the seeded differential over the existing public API.
 
 ```sh
-python -I m3/collections/qualification/doop-facade-fixes-20261107/apply.py --donor-git <blobless donor clone> [--check]
+python -I make/m3/collections/qualification/doop-facade-fixes-20261107/apply.py --donor-git <blobless donor clone> [--check]
 ```

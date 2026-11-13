@@ -88,7 +88,7 @@ exceptional operation. This family introduces no native object callback path.
 
 Run from the generated M3JDK21 checkout:
 
-    python3 m3/runtime-integration/token-regex/verify.py \
+    python3 make/m3/runtime-integration/token-regex/verify.py \
       --java-home "$M3_TOKEN_JAVA_HOME" \
       --output /tmp/m3-token-regex-contract-results.json
 

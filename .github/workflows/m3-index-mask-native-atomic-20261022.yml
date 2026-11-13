@@ -7,7 +7,7 @@ on:
       - 'test/jdk/jdk/m3/collections/M3MaskWindowNativeStagingContract.java'
       - 'test/jdk/jdk/m3/collections/native/m3_mask_fault.c'
       - '.github/workflows/m3-index-mask-native-atomic-20261022.yml'
-      - 'm3/collections/qualification/mask-window-atomic-20261022/**'
+      - 'make/m3/collections/qualification/mask-window-atomic-20261022/**'
   workflow_dispatch:
 permissions:
   contents: read

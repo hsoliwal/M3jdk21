@@ -15,8 +15,8 @@ Run from the M3JDK21 repository root:
 
 ```sh
 bash -n src/jdk.jcmd/share/conf/bash-completion/jcmd
-bash -n m3/backports/recipes/jdk-8357439/test_jcmd_completion.sh
-bash m3/backports/recipes/jdk-8357439/test_jcmd_completion.sh
+bash -n make/m3/backports/recipes/jdk-8357439/test_jcmd_completion.sh
+bash make/m3/backports/recipes/jdk-8357439/test_jcmd_completion.sh
 ```
 
 Canonical source-changing recipe: `com.synexia.rewrite.M3Jdk8357439CompletionProofRecipe`
@@ -25,6 +25,6 @@ reach an exact second-pass fixed point. This packet only supplies deterministic
 behavior/packaging evidence; a full M3JDK21 image build, image-copy proof,
 recipe JUnit, and applicable jtreg remain separately required for promotion.
 
-The original `m3/backports/recipes/jdk-8357439/manifest.tsv` continues to pin
+The original `make/m3/backports/recipes/jdk-8357439/manifest.tsv` continues to pin
 the exact upstream implementation blobs. Do not rewrite that historical receipt
 merely because additional verification has been added.

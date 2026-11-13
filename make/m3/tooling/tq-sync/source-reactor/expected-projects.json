@@ -9,7 +9,7 @@
     "gav": "jdk.m3.vendor:third-party-sources:1.0.0-SNAPSHOT"
   },
   "consumer": {
-    "module": "m3/tooling/tq-sync",
+    "module": "make/m3/tooling/tq-sync",
     "pomBlob": "ee408306125c6d8bf5b5aecf7d74eb75cdac3377",
     "gav": "com.m3:tq-sync:1.0-SNAPSHOT"
   },

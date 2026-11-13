@@ -6,8 +6,8 @@ import hashlib
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
-CRATE = ROOT / "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-regex-string-precompute-v2"
-POLICY = ROOT / "m3/docs/m3jdk-m3-porting-policy.tsv"
+CRATE = ROOT / "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-regex-string-precompute-v2"
+POLICY = ROOT / "doc/m3/m3jdk-m3-porting-policy.tsv"
 PROVENANCE = ROOT / "m3/ports/precompute/REGEX_STRING_V2_PROVENANCE.tsv"
 MAPPING = ROOT / "m3/ports/precompute/REGEX_STRING_V2_MAP.tsv"
 

@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static jdk.m3.collections.PolicyAssertions.*;
 import jdk.internal.m3.collections.ValidatingLongSequence;
 
-//FLLDCIM: RELOCATE - donor blob fcb332079031 at d5ad5090d87e; recipe m3/collections/qualification/census2-t2-20261106/relocate.py v6
+//FLLDCIM: RELOCATE - donor blob fcb332079031 at d5ad5090d87e; recipe make/m3/collections/qualification/census2-t2-20261106/relocate.py v6
 public final class ValidatingLongSequenceProof {
     public static void main(String[] args) {
         fails(NullPointerException.class,()->new ValidatingLongSequence(null,v->true));

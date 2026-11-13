@@ -28,7 +28,7 @@ class ProgramStatusTest(unittest.TestCase):
             program_status.classify_seed("mystery")
 
     def test_repository_snapshot_has_locked_denominators(self):
-        root = Path(__file__).resolve().parents[2]
+        root = Path(__file__).resolve().parents[3]
         data = program_status.snapshot(root)
         self.assertEqual(85, data["jep_rows"])
         self.assertEqual(85, sum(data["jep_states"].values()))
@@ -47,7 +47,7 @@ class ProgramStatusTest(unittest.TestCase):
         self.assertGreaterEqual(data["materialized_packet_count"], 2)
 
     def test_tsv_is_deterministic(self):
-        root = Path(__file__).resolve().parents[2]
+        root = Path(__file__).resolve().parents[3]
         data = program_status.snapshot(root)
         first = program_status.render_tsv(data)
         second = program_status.render_tsv(data)

@@ -10,7 +10,7 @@ import java.util.stream.*;
 import org.eclipse.collections.impl.bag.mutable.primitive.LongHashBag;
 import org.junit.jupiter.api.Test;
 
-//FLLDCIM: MRL - fold-close audit leaf L0151: ADD from PR #1084 head 6b16a20dcedf blob a15150ccdb81, ancestry-only landing b42ab7605b86 (tree == first parent); recipe m3/collections/qualification/foldaudit-collections-20261107/apply.py v1
+//FLLDCIM: MRL - fold-close audit leaf L0151: ADD from PR #1084 head 6b16a20dcedf blob a15150ccdb81, ancestry-only landing b42ab7605b86 (tree == first parent); recipe make/m3/collections/qualification/foldaudit-collections-20261107/apply.py v1
 //FLLDCIM: MRL - MAPPED: the origin counts/ module has no pom on master; the file joins the real module tree
 final class M3BagInteropTest {
     static void same(Multiset<Long> expected, Multiset<Long> actual) {

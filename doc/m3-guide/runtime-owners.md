@@ -10,9 +10,9 @@ These are five source-sampled package boundaries inside java.base. They suppleme
 
 `M3String` stores an owner and a packed coordinate. The sampled source describes native/mapped atom payloads and persistent tuple ownership rather than retaining byte[], char[] or segment arrays in the value itself. `M3StringOwner` is the canonical owner node; owner/range facts and explicit JNI compatibility shadows have separate responsibilities. Public `java.lang.String` remains the API authority.
 
-Source: [M3String](../../src/java.base/share/classes/java/lang/M3String.java), [M3StringOwner](../../src/java.base/share/classes/java/lang/M3StringOwner.java). Start with [backing and current-source contracts](../mindex-string-backing.md) and [JNI ingress/egress](../../m3/docs/mindex-jni-string-ingress.md). The source-directory catalogue links all sibling owners.
+Source: [M3String](../../src/java.base/share/classes/java/lang/M3String.java), [M3StringOwner](../../src/java.base/share/classes/java/lang/M3StringOwner.java). Start with [backing and current-source contracts](../mindex-string-backing.md) and [JNI ingress/egress](../m3/mindex-jni-string-ingress.md). The source-directory catalogue links all sibling owners.
 
-Constraints: preserve Java UTF-16 behavior, equality/hash/order, owner lifetime, bootstrap, native acquire/release and all public String contracts. Array projections do not become a second canonical spelling store. Tests under `test/jdk/java/lang/String` and `m3/runtime-integration/tests` are located; no test was run in this pass. Full method-by-method error, GC and VM-layout review remains open.
+Constraints: preserve Java UTF-16 behavior, equality/hash/order, owner lifetime, bootstrap, native acquire/release and all public String contracts. Array projections do not become a second canonical spelling store. Tests under `test/jdk/java/lang/String` and `make/m3/runtime-integration/tests` are located; no test was run in this pass. Full method-by-method error, GC and VM-layout review remains open.
 
 For member-level detail at the reviewed public snapshot, continue with [bootstrap String ownership and admission](bootstrap-string-ownership.md) and [String operations and facts](bootstrap-string-contracts.md). These bounded references cover six foundational source bodies and selected String/native boundaries; the remaining sibling bodies, whole-package review and runtime/GC qualification stay open.
 
@@ -28,7 +28,7 @@ Constraints include input/region identity, UTF-16 keys, callback/effect behavior
 
 `M3TQ` implements conservative boolean queries over UTF-16 trigram facts. It is a target-owned internal adaptation with a candidate-only contract: false can establish absence under its preconditions; true does not prove a regex match. The package also contains primitive address/bit/number lanes, String backing, class/member and version metadata owners. Their names do not imply every donor capability is received.
 
-Source: [M3TQ](../../src/java.base/share/classes/jdk/internal/mindex/M3TQ.java) and [package directory](../../src/java.base/share/classes/jdk/internal/mindex). Its module owner is java.base; compiler-only dependencies cannot be imported into it. Read the [canonical naming map](../../m3/docs/name-mapping.json) for each concrete owner.
+Source: [M3TQ](../../src/java.base/share/classes/jdk/internal/mindex/M3TQ.java) and [package directory](../../src/java.base/share/classes/jdk/internal/mindex). Its module owner is java.base; compiler-only dependencies cannot be imported into it. Read the [canonical naming map](../m3/name-mapping.json) for each concrete owner.
 
 Open gaps: independent contract/error/lifecycle documentation for each sibling owner, actual consumers, retained/native-memory budgets and exact target tests. Source samples and historical receipts are not full-family acceptance.
 

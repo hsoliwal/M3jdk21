@@ -5,7 +5,7 @@ import argparse, os, shutil, subprocess, sys
 from pathlib import Path
 p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True)
 p.add_argument('--java-only',action='store_true');a=p.parse_args()
-root=Path(__file__).resolve().parents[3];out=a.output.resolve()
+root=Path(__file__).resolve().parents[4];out=a.output.resolve()
 if out.exists() or out==root or root in out.parents: p.error('fresh output outside checkout required')
 out.mkdir(parents=True);classes=out/'classes';headers=out/'headers'
 j=root/'src/java.base/share/classes/jdk/internal/mindex'

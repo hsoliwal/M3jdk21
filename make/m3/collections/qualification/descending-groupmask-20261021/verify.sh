@@ -3,8 +3,8 @@
 # Copyright 2026 Hitesh Soliwal and contributors.
 set -euo pipefail
 export LC_ALL=C
-repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
-manifest="$repo_root/m3/collections/qualification/descending-groupmask-20261021/SOURCE_MANIFEST.tsv"
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../../.." && pwd)"
+manifest="$repo_root/make/m3/collections/qualification/descending-groupmask-20261021/SOURCE_MANIFEST.tsv"
 previous=''
 count=0
 while IFS=$'\t' read -r path before after git_blob; do

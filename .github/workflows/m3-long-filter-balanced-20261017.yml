@@ -9,7 +9,7 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongSortedViews.java'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongPredicates.java'
       - 'test/jdk/jdk/m3/collections/M3LongDeepFilterSelfTest.java'
-      - 'm3/collections/qualification/long-predicate-balance-20261017/**'
+      - 'make/m3/collections/qualification/long-predicate-balance-20261017/**'
       - '.github/workflows/m3-long-filter-balanced-20261017.yml'
 permissions:
   contents: read

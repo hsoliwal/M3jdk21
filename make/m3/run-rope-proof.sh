@@ -3,7 +3,7 @@
 # Compile and test the separately built M3 text module without altering java.base.
 set -euo pipefail
 
-root="$(cd "$(dirname "$0")/.." && pwd)"
+root="$(cd "$(dirname "$0")/../.." && pwd)"
 jdk="$(printenv M3JDK 2>/dev/null || printenv JAVA_HOME 2>/dev/null || true)"
 if [[ -z "$jdk" || ! -x "$jdk/bin/javac" || ! -x "$jdk/bin/java" ]]; then
   echo "Set M3JDK (or JAVA_HOME) to a real Java 21 JDK" >&2

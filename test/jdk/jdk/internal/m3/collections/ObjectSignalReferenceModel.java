@@ -20,7 +20,7 @@ import java.util.function.BiFunction;
  * the donor's 256-word JNI threshold), with and without initial candidates; the projectors must keep the literal
  * containment law (no false negative) for String and byte[] signatures.</p>
  */
-//FLLDCIM: TOP - reference model of ObjectSignalTable / ObjectSignalQuery / ObjectSignalMatcher; recipe m3/collections/qualification/object-signal-20261107
+//FLLDCIM: TOP - reference model of ObjectSignalTable / ObjectSignalQuery / ObjectSignalMatcher; recipe make/m3/collections/qualification/object-signal-20261107
 public final class ObjectSignalReferenceModel {
     private static final int[] SIZES = {0, 1, 2, 63, 64, 65, 127, 128, 129, 191, 500, 1000, 4096, 4097, 16449};
     private static final long[] EDGE_MASKS = {0L, -1L, 1L, Long.MIN_VALUE, Long.MAX_VALUE, 0x5555_5555_5555_5555L,

@@ -23,7 +23,7 @@ ROOT=$(cd "$Q/../../.." && pwd)
 mkdir -p "$1"; S=$(winpath "$1"); CASES=${2:-1000000}; BASE=${3:-origin/master}
 J="${JAVA_HOME:?JAVA_HOME must point at a JDK 21}/bin"
 SEED=0x4d334a424d534b31
-LEAF=m3/qualification/$(basename "$Q")/
+LEAF=make/m3/qualification/$(basename "$Q")/
 U=src/java.base/share/classes/java/util
 OWNER=src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java
 FLAGS=(-g -Xlint:all -Werror -Xlint:-this-escape -XDstringConcat=inline)
@@ -75,7 +75,7 @@ echo "INFO tests_with_postimage_compactor $b"
 p=$(timeout 120 "$J/java" "${RUN[@]}" --add-opens java.base/jdk.internal.mindex=ALL-UNNAMED CompactorDifferential probe postimage 2>&1 | tr '\n' ';')
 echo "INFO probe $p"
 
-naming=$(cd "$ROOT" && python -I m3/tooling/jdk-naming/jdk_naming.py plan --root . --only "$LEAF" 2>&1 | grep -E "^(JDK_NAMING|REFUSED)" | tail -1)
+naming=$(cd "$ROOT" && python -I make/m3/tooling/jdk-naming/jdk_naming.py plan --root . --only "$LEAF" 2>&1 | grep -E "^(JDK_NAMING|REFUSED)" | tail -1)
 case "$naming" in *"moves=0 rewrites=0 refusals=0"*) gate naming PASS "$naming" ;; *) gate naming FAIL "$naming" ;; esac
 
 changed=$(cd "$ROOT" && { git diff --name-only "$BASE"; git diff --name-only --cached; git ls-files --others --exclude-standard; } | sort -u)

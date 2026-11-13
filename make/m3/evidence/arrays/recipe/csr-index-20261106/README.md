@@ -27,7 +27,7 @@ refused (`IllegalArgumentException`, `IndexOutOfBoundsException`, `ArithmeticExc
 | recipe | `relocate.py` v1: `python -I m3/arrays/recipe/csr-index-20261106/relocate.py --donor-git <clone> --donor-rev <rev> [--module m3/arrays] [--check]` |
 | map | `RELOCATION_MAP.tsv`: 2 `FILE` rows, `PACKAGE com.synexia.matvalue -> jdk.m3.arrays`, `TYPE MatCsrIndex -> M3CsrIndex`, `TYPE MatCsrDirectContract -> M3CsrIndexContract`, no `EXTERNAL` row |
 | provenance | `PROVENANCE.tsv`: donor commit, blob sha, donor sha256, target sha256, `body_match`, `body_match_renamed` per file |
-| naming | `python -I m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/arrays/`: 0 moves, 0 rewrites (before and after) |
+| naming | `python -I make/m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/arrays/`: 0 moves, 0 rewrites (before and after) |
 
 The recipe rewrites only the license header (M3JDK style), the `package` line, mapped `import` lines and the two
 mapped type names (whole-word tokens), and inserts one `//FLLDCIM: RELOCATE` anchor before the top-level type naming

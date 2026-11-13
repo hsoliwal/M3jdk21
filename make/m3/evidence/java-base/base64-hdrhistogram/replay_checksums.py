@@ -13,7 +13,7 @@ import importlib.util
 from pathlib import Path
 import sys
 
-ROOT = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else Path(__file__).resolve().parents[4]
+ROOT = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else Path(__file__).resolve().parents[5]
 sys.dont_write_bytecode = True
 
 
@@ -24,8 +24,8 @@ def load(name, path):
     return module
 
 
-recipe = load("checksums_to_jdk", ROOT / "m3/tooling/jdk-superset/hashing/tools/checksums_to_jdk.py")
-donor_overlay = load("donor_overlay", ROOT / "m3/tooling/jdk-superset/retarget/tools/donor_overlay.py")
+recipe = load("checksums_to_jdk", ROOT / "make/m3/tooling/jdk-superset/hashing/tools/checksums_to_jdk.py")
+donor_overlay = load("donor_overlay", ROOT / "make/m3/tooling/jdk-superset/retarget/tools/donor_overlay.py")
 donor_overlay.REPO = ROOT
 if not hasattr(recipe, "README_TEXT"):  # the recipe before DONOR_OVERLAY v2 carried its own custody
     recipe.README_TEXT = tuple(zip(recipe.README_OLD, recipe.README_NEW))

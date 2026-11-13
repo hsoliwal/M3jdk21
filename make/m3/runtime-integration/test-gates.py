@@ -2,7 +2,7 @@
 # Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
 # SPDX-License-Identifier: Apache-2.0
 import json,os,pathlib,subprocess,time,selectors,re
-root=pathlib.Path(__file__).resolve().parents[2]
+root=pathlib.Path(__file__).resolve().parents[3]
 jdk=pathlib.Path(os.environ['M3_TEST_JDK']);result=pathlib.Path(os.environ.get('M3_RESULTS',str(root/'m3/build/runtime-integration')))
 java=str(jdk/'bin/java');flags=['-XX:+UnlockExperimentalVMOptions','-XX:+UseM3StringStorage','-XX:-CreateCoredumpOnCrash']
 reports=[]

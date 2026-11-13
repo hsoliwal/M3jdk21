@@ -6,19 +6,19 @@
     "sha256": "fb907640aa9615ce28c61bb802da39e6cb16030b9f95aad266aa6c68531b4074"
   },
   {
-    "path": "m3/collections/qualification/verify_mask_selection.py",
+    "path": "make/m3/collections/qualification/verify_mask_selection.py",
     "gitBlob": "74181552384d222ad4cddea7dbca403baedc5859",
     "revision": "7c0d2493edbf93ac5cb726667ce83046d3519e3e",
     "sha256": "1dbed85fcd21e29f55d9b9045d317a3e62bfae1e34cdd60160a039cb49ba7201"
   },
   {
-    "path": "m3/collections/qualification/mask-selection-postimages-20261016.tsv",
+    "path": "make/m3/collections/qualification/mask-selection-postimages-20261016.tsv",
     "gitBlob": "cb251fa758ab863149f5c7d498a13c86032de3b9",
     "revision": "7c0d2493edbf93ac5cb726667ce83046d3519e3e",
     "sha256": "2e04cf39dc82d39bb80accc1f32da6f396873bb666f0423b182326e0234b7542"
   },
   {
-    "path": "m3/collections/qualification/m3-index-mask-position-selection-20261018/verify.py",
+    "path": "make/m3/collections/qualification/m3-index-mask-position-selection-20261018/verify.py",
     "gitBlob": "a725651a410d6a89895f3a1c3d478626bb5998b0",
     "revision": "7c0d2493edbf93ac5cb726667ce83046d3519e3e",
     "sha256": "85c40c8f829c90d1070d9f5512c26c343f8d3875897dfe13a3d3325414678408"

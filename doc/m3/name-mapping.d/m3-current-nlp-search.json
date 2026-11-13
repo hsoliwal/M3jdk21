@@ -23,6 +23,6 @@
   ],
   "canonical_repository": "hsoliwal/com.synexia",
   "canonical_crate": "synexia-openrewrite-recipes/crates/m3-nlp-search/current-forks-20261018",
-  "source_receipt": "m3/tooling/module-packs/nlp-search/current-forks/SOURCE_REF.json",
+  "source_receipt": "make/m3/tooling/module-packs/nlp-search/current-forks/SOURCE_REF.json",
   "license": "Apache-2.0 first-party adapter expression; preserve source-owner licenses."
 }

@@ -7,9 +7,9 @@
 cd "$(dirname "$0")"
 J="C:/Program Files/Java/jdk-21/bin"; G=/h/m3-scratch/repos/M3jdk21-release.git; R=${1:?master}; A=$(cygpath -m "$PWD")
 P=src/jdk.compiler/share/classes; F="com/sun/source/util/M3AST.java com/sun/tools/javac/m3/M3ASTPC.java com/sun/tools/javac/m3/M3CompilerPatternHints.java com/sun/tools/javac/m3/M3PrimitiveImageCompiler.java com/sun/tools/javac/main/JavaCompiler.java"
-GIT_DIR=$G git ls-tree -r $R -- $P m3/tooling/module-packs/parser/src/main | awk '{print $3}' | GIT_DIR=$G git fetch -q --filter=blob:none --stdin origin 2>/dev/null
+GIT_DIR=$G git ls-tree -r $R -- $P make/m3/tooling/module-packs/parser/src/main | awk '{print $3}' | GIT_DIR=$G git fetch -q --filter=blob:none --stdin origin 2>/dev/null
 rm -rf jc.tar; GIT_NO_LAZY_FETCH=1 GIT_DIR=$G git archive --format=tar $R:$P > jc.tar
-rm -rf parser && mkdir parser && GIT_NO_LAZY_FETCH=1 GIT_DIR=$G git archive --format=tar $R:m3/tooling/module-packs/parser/src/main/java | (cd parser && tar -xf -)
+rm -rf parser && mkdir parser && GIT_NO_LAZY_FETCH=1 GIT_DIR=$G git archive --format=tar $R:make/m3/tooling/module-packs/parser/src/main/java | (cd parser && tar -xf -)
 for side in live fix; do
   rm -rf $side && mkdir -p $side/tree && (cd $side/tree && tar -xf ../../jc.tar)
   [ $side = fix ] && cp M3ASTPC.java $side/tree/com/sun/tools/javac/m3/M3ASTPC.java

@@ -76,20 +76,20 @@ class ReactorContract(unittest.TestCase):
             dest = receiver / path.relative_to(RECEIVER)
             dest.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(path, dest)
-        for relative in ("m3/vendor/third_party/pom.xml", "m3/tooling/tq-sync/pom.xml",
-                         "m3/tooling/tq-sync/source-reactor/pom.xml"):
+        for relative in ("m3/vendor/third_party/pom.xml", "make/m3/tooling/tq-sync/pom.xml",
+                         "make/m3/tooling/tq-sync/source-reactor/pom.xml"):
             dest = receiver / relative
             dest.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(RECEIVER / relative, dest)
         return receiver
 
-    def maven(self, label, receiver=RECEIVER, relative="../../../..", selected="com.m3:tq-sync"):
+    def maven(self, label, receiver=RECEIVER, relative="../../../../..", selected="com.m3:tq-sync"):
         command = ["mvn", "-B", "-ntp", "-o",
                    "-s", str(ROOT / "home/.m2/settings.xml"),
                    "-gs", str(ROOT / "home/.m2/global-settings.xml"),
                    "-Dmaven.repo.local=" + str(ROOT / "m2"),
                    "-Dstyle.color=never",
-                   "-f", str(receiver / "m3/tooling/tq-sync/source-reactor/pom.xml")]
+                   "-f", str(receiver / "make/m3/tooling/tq-sync/source-reactor/pom.xml")]
         if relative is not None:
             command.append("-Dm3.receiver.relative=" + relative)
         command += ["-pl", selected, "-am", "validate"]

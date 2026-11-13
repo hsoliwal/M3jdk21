@@ -44,7 +44,7 @@ public final class LongRankIndex {
     private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
     private final long[] values;
     private final boolean distinct;
-    //FLLDCIM: MRL - RESTORE-ADD RLI theirs e884b52485f3 lines 32-35 (leaves 23; origins 35662be63ca); dropped by retain merge d92ed3c91214; recipe m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
+    //FLLDCIM: MRL - RESTORE-ADD RLI theirs e884b52485f3 lines 32-35 (leaves 23; origins 35662be63ca); dropped by retain merge d92ed3c91214; recipe make/m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
     // Immutable snapshot fact sidecar. Benign concurrent first reads may
     // recompute, but volatile publication makes subsequent reads allocation-free.
     // Nonnegative packing permits -1L as an unequivocal UNCOMPUTED sentinel.
@@ -226,7 +226,7 @@ public final class LongRankIndex {
         return LongRankBatchNative.lowerBounds(values, queries);
     }
 
-    //FLLDCIM: MRL - RESTORE-ADD RLI theirs e884b52485f3 lines 212-245 (leaves 8; origins fdf8f2875a2); dropped by retain merge d92ed3c91214; recipe m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
+    //FLLDCIM: MRL - RESTORE-ADD RLI theirs e884b52485f3 lines 212-245 (leaves 8; origins fdf8f2875a2); dropped by retain merge d92ed3c91214; recipe make/m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
     /**
      * LC #4 order-statistic category: select the zero-based rank from the
      * multiset merge of two immutable sorted M3 long snapshots. The original
@@ -286,7 +286,7 @@ public final class LongRankIndex {
         return LongRankBatchNative.topKFrequent(values, k);
     }
 
-    //FLLDCIM: MRL - RESTORE-ADD RLI theirs e884b52485f3 lines 418-470 (leaves 6 20 23; origins 35662be63ca 66ddfd93f75 610f780df14); dropped by retain merge d92ed3c91214; recipe m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
+    //FLLDCIM: MRL - RESTORE-ADD RLI theirs e884b52485f3 lines 418-470 (leaves 6 20 23; origins 35662be63ca 66ddfd93f75 610f780df14); dropped by retain merge d92ed3c91214; recipe make/m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
     /**
      * Number of different signed-long values in this immutable snapshot.
      * LeetCode #26 (sorted duplicate runs) supplies the problem category,
@@ -353,7 +353,7 @@ public final class LongRankIndex {
         return values.clone();
     }
 
-    //FLLDCIM: MRL - RESTORE-ADD RLI theirs e884b52485f3 lines 251-401 (leaves 2 5 7 12 18 24 25 34 46; origins 8403833238f 2b78514275f 6e86f2b03c3 660a5f0e493 56460c92634 74278253fa3 a08a353b192 66a5e9127ee 28a25d16452); dropped by retain merge d92ed3c91214; recipe m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
+    //FLLDCIM: MRL - RESTORE-ADD RLI theirs e884b52485f3 lines 251-401 (leaves 2 5 7 12 18 24 25 34 46; origins 8403833238f 2b78514275f 6e86f2b03c3 660a5f0e493 56460c92634 74278253fa3 a08a353b192 66a5e9127ee 28a25d16452); dropped by retain merge d92ed3c91214; recipe make/m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
     /**
      * Batched half-open [lower, upper) coordinates in a flat primitive int[].
      * Pair i resides at offsets 2*i and 2*i+1, including insertion coordinates
@@ -554,7 +554,7 @@ public final class LongRankIndex {
                 values, ranks, rankFrom, length, output, outputFrom, false);
     }
 
-    //FLLDCIM: MRL - RESTORE-ADD RLI theirs e884b52485f3 lines 519-555 (leaves 14 15; origins 30e8bbd762c 401dadb98a7); dropped by retain merge d92ed3c91214; recipe m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
+    //FLLDCIM: MRL - RESTORE-ADD RLI theirs e884b52485f3 lines 519-555 (leaves 14 15; origins 30e8bbd762c 401dadb98a7); dropped by retain merge d92ed3c91214; recipe make/m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
     /**
      * LeetCode #658: primitive starting coordinates of the k nearest elements
      * for each query, over this original immutable signed-long index.

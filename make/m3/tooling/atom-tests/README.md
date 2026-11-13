@@ -66,10 +66,10 @@ The test library lives next to the generated classes in `test/jdk/jdk/internal/<
 Run, from a worktree with the sparse checkout of the package and its tests:
 
 ```
-bash m3/tooling/atom-tests/finalize_run.sh <worktree> <out_dir> <worktree>/m3/tooling/atom-tests/runs/mindex-<date> \
+bash make/m3/tooling/atom-tests/finalize_run.sh <worktree> <out_dir> <worktree>/m3/tooling/atom-tests/runs/mindex-<date> \
   <census_root holding per_atom_test_census.py and m3jdk/> <reference test root> mindex jdk.internal.mindex
-bash m3/tooling/atom-tests/mutation_run.sh <worktree> <out_dir> <run_dir>/MUTANTS.tsv <run_dir>/MUTATION.tsv
-python m3/tooling/atom-tests/scenario_shapes.py census m3/tooling/atom-tests/specs/mindex m3/tooling/atom-tests/templates <out.tsv>
+bash make/m3/tooling/atom-tests/mutation_run.sh <worktree> <out_dir> <run_dir>/MUTANTS.tsv <run_dir>/MUTATION.tsv
+python make/m3/tooling/atom-tests/scenario_shapes.py census make/m3/tooling/atom-tests/specs/mindex make/m3/tooling/atom-tests/templates <out.tsv>
 ```
 
 The shape proof replays from the spec set before the extraction (the specs at 1594d1e8d): `scenario_shapes.py extract

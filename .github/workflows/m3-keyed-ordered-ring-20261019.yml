@@ -5,9 +5,9 @@ on:
     paths:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3KeyedParallelismPlan.java'
       - 'test/jdk/jdk/m3/collections/M3KeyedOrderRing*'
-      - 'm3/collections/recipe/keyed-ordered-ring-20261019/**'
+      - 'make/m3/collections/recipe/keyed-ordered-ring-20261019/**'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/keyed-ordered-ring-20261019/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-keyed-ordered-ring-20261019.yml'
+      - 'make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-keyed-ordered-ring-20261019.yml'
       - '.github/workflows/m3-keyed-ordered-ring-20261019.yml'
   workflow_dispatch:
 
@@ -33,7 +33,7 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Qualify actual OpenRewrite SDK receipt and fixed-point/refusals
-        run: mvn -B -ntp -f m3/collections/recipe/keyed-ordered-ring-20261019/pom.xml clean test
+        run: mvn -B -ntp -f make/m3/collections/recipe/keyed-ordered-ring-20261019/pom.xml clean test
       - name: Run owning M3JDK21 collection JUnit contracts
         run: mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3KeyedOrderRingTest,M3ObjectStreamContractTest test
       - name: Retain verification receipts
@@ -42,6 +42,6 @@ jobs:
         with:
           name: m3-keyed-ring-${{ github.event.pull_request.head.sha || github.sha }}
           path: |
-            m3/collections/recipe/keyed-ordered-ring-20261019/target/surefire-reports/
+            make/m3/collections/recipe/keyed-ordered-ring-20261019/target/surefire-reports/
             m3/collections/target/surefire-reports/
           if-no-files-found: warn

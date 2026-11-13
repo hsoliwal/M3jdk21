@@ -27,8 +27,8 @@ from zlibsvm_pack import prepare as prepare_zlibsvm
 
 
 HERE = Path(__file__).resolve().parent
-TARGET = HERE.parents[4]
-TOOLS = TARGET / "m3/tooling/jmod-recipes/tools"
+TARGET = HERE.parents[5]
+TOOLS = TARGET / "make/m3/tooling/jmod-recipes/tools"
 BRIDGE = HERE.parent / "m3-bridge"
 CAPABILITY = TARGET / "m3/ports/capability-runtime/src/main/java"
 DATE = "2026-10-18T00:00:00Z"

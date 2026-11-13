@@ -10,12 +10,12 @@ static` does not. Service providers needed at runtime must be explicit roots.
 ## Build a reviewed selection
 
 ```
-python3 m3/tooling/module-packs/lock_tool_distribution.py \
+python3 make/m3/tooling/module-packs/lock_tool_distribution.py \
   --tool maven --distribution /inputs/apache-maven-3.9.11 \
   --version 3.9.11 --source '<reviewed distribution URL or source revision>' \
   --license Apache-2.0 --out /inputs/maven-lock.json
 
-python3 m3/tooling/module-packs/build_pack.py \
+python3 make/m3/tooling/module-packs/build_pack.py \
   --jdk /inputs/jdk21 --out /fresh/maven-image \
   --tool-pack-lock /inputs/maven-lock.json --tool-pack maven
 
@@ -90,7 +90,7 @@ that evidence, including forked/worker compilation and processor behavior.
 M3_TEST_JDK=/inputs/jdk21 python3 -m unittest -v test_tool_packs
 ```
 
-Run that command from `m3/tooling/module-packs`. The suite compiles real modules,
+Run that command from `make/m3/tooling/module-packs`. The suite compiles real modules,
 links and executes selected images, proves runtime dependency/static-requires and
 explicit provider selection, preserves JMOD launcher/config/resource/library/legal
 assets, checks retained executable bytes, and covers refusal paths. Synthetic lock

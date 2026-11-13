@@ -90,7 +90,7 @@ def run(name, argv, cwd, timeout=300):
 
 
 def original_build(label, directory, java):
-    code, log = run(label + "-original-build", ["bash", str(directory / "m3/build.sh")],
+    code, log = run(label + "-original-build", ["bash", str(directory / "make/m3/build.sh")],
                     directory, timeout=600)
     build_logs = directory / "m3/build/logs"
     raw_logs = sorted(path for path in build_logs.rglob("*") if path.is_file()) if build_logs.is_dir() else []

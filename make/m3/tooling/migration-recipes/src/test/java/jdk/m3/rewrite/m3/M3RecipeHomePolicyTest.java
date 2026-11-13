@@ -23,7 +23,7 @@ final class M3RecipeHomePolicyTest {
     @Test
     void reusableM3Jdk21RecipeAndM3IndexSurfacesAreConsumerOnly() throws Exception {
         Path root = repositoryRoot();
-        Path policy = root.resolve("m3/compatibility/m3-recipe-home-policy.tsv");
+        Path policy = root.resolve("make/m3/compatibility/m3-recipe-home-policy.tsv");
         assertTrue(Files.isRegularFile(policy));
 
         List<String> lines = Files.readAllLines(policy);
@@ -46,8 +46,8 @@ final class M3RecipeHomePolicyTest {
                 "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/semantic/**",
                 "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/a3/**",
                 "m3/indexdb/**",
-                "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceCatalog.java",
-                "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceRecipe.java")) {
+                "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceCatalog.java",
+                "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceRecipe.java")) {
             String[] row = rows.get(surface);
             assertNotNull(row, surface);
             assertEquals("MIGRATION_RESIDUE_NOT_CANONICAL", row[4], surface);
@@ -93,10 +93,10 @@ final class M3RecipeHomePolicyTest {
                 rows.get("m3/ports/**")[5]);
         assertEquals(
                 "RECEIVER_ADAPTER_ONLY",
-                rows.get("m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/InstallIndexStringCompatibility.java")[4]);
+                rows.get("make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/InstallIndexStringCompatibility.java")[4]);
 
         String[] pureIntReceiver = rows.get(
-                "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-pure-int.yml");
+                "make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-pure-int.yml");
         assertNotNull(pureIntReceiver);
         assertEquals("RECEIVER_ADAPTER_ONLY", pureIntReceiver[4]);
         assertEquals(
@@ -111,13 +111,13 @@ final class M3RecipeHomePolicyTest {
         Map<String, String[]> rows = rows();
 
         Map<String, String[]> expected = Map.of(
-                "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-string-stream-traversal.yml",
+                "make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-string-stream-traversal.yml",
                 new String[] {"RECEIVER_ADAPTER_ONLY", "jdk.internal.m3.rewrite.M3Jdk21StringDirectStreamTraversal"},
-                "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-string-canonical-dag-master-repair.yml",
+                "make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-string-canonical-dag-master-repair.yml",
                 new String[] {"TARGET_PRODUCT_ADAPTER", "m3.m3jdk.string.canonical-dag.20261006"},
-                "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-regex-string-precompute-v2.yml",
+                "make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-regex-string-precompute-v2.yml",
                 new String[] {"MIGRATION_RESIDUE_NOT_CANONICAL", "jdk.internal.m3.indexstring.M3InstallCodeTextRegexPrecompute"},
-                "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-string-mechanical-donor-map.yml",
+                "make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-string-mechanical-donor-map.yml",
                 new String[] {"MIGRATION_RESIDUE_NOT_CANONICAL", "jdk.internal.m3.M3MechanicalDonorShapeReview;jdk.internal.m3.rewrite.M3MechanicalPrecomputeInvariant"});
 
         for (Map.Entry<String, String[]> entry : expected.entrySet()) {
@@ -154,7 +154,7 @@ final class M3RecipeHomePolicyTest {
         Path root = repositoryRoot();
         List<PolicyRow> policy = policyRows();
         Path recipeRoot =
-                root.resolve("m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite");
+                root.resolve("make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite");
 
         List<String> sourcePaths;
         try (var files = Files.walk(recipeRoot)) {
@@ -190,7 +190,7 @@ final class M3RecipeHomePolicyTest {
     void reusableResidueIsContentFrozenAgainstIndependentTargetEvolution() throws Exception {
         Path root = repositoryRoot();
         Path manifest =
-                root.resolve("m3/compatibility/m3-canonical-residue-gitblobs.tsv");
+                root.resolve("make/m3/compatibility/m3-canonical-residue-gitblobs.tsv");
         assertTrue(Files.isRegularFile(manifest));
 
         List<String> lines = Files.readAllLines(manifest);
@@ -231,18 +231,18 @@ final class M3RecipeHomePolicyTest {
     private static Set<String> reusableResiduePaths(Path root) throws Exception {
         TreeSet<String> result = new TreeSet<>();
         for (String exact : List.of(
-                "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceCatalog.java",
-                "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceRecipe.java")) {
+                "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceCatalog.java",
+                "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceRecipe.java")) {
             if (Files.isRegularFile(root.resolve(exact))) {
                 result.add(exact);
             }
         }
 
         for (String directory : List.of(
-                "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope",
+                "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope",
                 "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/atom",
-                "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/semantic",
-                "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/a3",
+                "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/semantic",
+                "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/a3",
                 "m3/indexdb/src/main/java")) {
             Path start = root.resolve(directory);
             if (!Files.isDirectory(start)) {
@@ -270,7 +270,7 @@ final class M3RecipeHomePolicyTest {
 
     private static List<PolicyRow> policyRows() throws Exception {
         List<String> lines = Files.readAllLines(
-                repositoryRoot().resolve("m3/compatibility/m3-recipe-home-policy.tsv"));
+                repositoryRoot().resolve("make/m3/compatibility/m3-recipe-home-policy.tsv"));
         List<PolicyRow> result = new ArrayList<>();
         for (String line : lines.subList(1, lines.size())) {
             String[] columns = line.split("\t", -1);
@@ -286,7 +286,7 @@ final class M3RecipeHomePolicyTest {
 
     private static Map<String, String[]> rows() throws Exception {
         List<String> lines = Files.readAllLines(
-                repositoryRoot().resolve("m3/compatibility/m3-recipe-home-policy.tsv"));
+                repositoryRoot().resolve("make/m3/compatibility/m3-recipe-home-policy.tsv"));
         Map<String, String[]> result = new HashMap<>();
         for (String line : lines.subList(1, lines.size())) {
             String[] columns = line.split("\t", -1);
@@ -302,7 +302,7 @@ final class M3RecipeHomePolicyTest {
             String owner,
             String handoff) {
         String surface =
-                "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/" + file;
+                "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/" + file;
         String[] row = rows.get(surface);
         assertNotNull(row, surface);
         assertEquals(disposition, row[4], surface);

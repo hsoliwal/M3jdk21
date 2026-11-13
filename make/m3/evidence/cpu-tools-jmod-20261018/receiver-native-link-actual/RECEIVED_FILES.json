@@ -1,366 +1,366 @@
 [
   {
-    "path": "m3/docs/name-mapping.d/m3-cpu-tools-jmod-20261018.json",
+    "path": "doc/m3/name-mapping.d/m3-cpu-tools-jmod-20261018.json",
     "sha256": "ffc8d74989ed7eac31b85218db352e4750c0e9236334ddcaa8de2b232ae6761c",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/COVERAGE.tsv",
+    "path": "make/m3/tooling/module-packs/cpu-tools/COVERAGE.tsv",
     "sha256": "51102ac3422f2f7182851d8e4c130f2b6c6c373b88f22b6df82db0d1bb434767",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/DONOR_CHANGES.tsv",
+    "path": "make/m3/tooling/module-packs/cpu-tools/DONOR_CHANGES.tsv",
     "sha256": "e8074a1c1edc9b8c79305261f5d58631b6fddcdfe51499df610d41becbdfef8a",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/DONOR_CONTRACTS.md",
+    "path": "make/m3/tooling/module-packs/cpu-tools/DONOR_CONTRACTS.md",
     "sha256": "9dfb0b16ba27b041135bc1a7d1ae644934ef6f511a862c9dd5c70bed7bbb72c9",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/DONOR_MODULES.tsv",
+    "path": "make/m3/tooling/module-packs/cpu-tools/DONOR_MODULES.tsv",
     "sha256": "62f5a9ba0a60a3df5901a720823a8f3a8fac7ad4c467fa11e7aee0965e6854c3",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/DONOR_QUALIFICATION.md",
+    "path": "make/m3/tooling/module-packs/cpu-tools/DONOR_QUALIFICATION.md",
     "sha256": "ef89bf57d605900c31f67048cf67687fe48feba8da179ba35314bc941a83ed5c",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/FINAL_REPORT.md",
+    "path": "make/m3/tooling/module-packs/cpu-tools/FINAL_REPORT.md",
     "sha256": "f18c2b5b386ff5acac8f02c3f7e6c79f0695deef5045778c1fb1da7075ba80b2",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/OUTPUT_CONTRACT.tsv",
+    "path": "make/m3/tooling/module-packs/cpu-tools/OUTPUT_CONTRACT.tsv",
     "sha256": "864629fa69d9864a8f5730330edcc9efc31f479e4218ec996838636810177ca2",
     "mode": "0644",
     "dataset": "native-link"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/PROVENANCE.tsv",
+    "path": "make/m3/tooling/module-packs/cpu-tools/PROVENANCE.tsv",
     "sha256": "2f54c0bafaa52fbde0fcc1374c4057443876aaed42092e35251b5286ffc5be8a",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/README.md",
+    "path": "make/m3/tooling/module-packs/cpu-tools/README.md",
     "sha256": "6148cb7abd904b0e111a24bab16eeb34d381b38ab31f749efa954816d5080c2a",
     "mode": "0644",
     "dataset": "native-link"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/RUN_CONTEXT.tsv",
+    "path": "make/m3/tooling/module-packs/cpu-tools/RUN_CONTEXT.tsv",
     "sha256": "051b27709264e963c1a981342a8f02ccc2466022e5fa2dae97d7851095f6bf36",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/STATUS.tsv",
+    "path": "make/m3/tooling/module-packs/cpu-tools/STATUS.tsv",
     "sha256": "cb58db77693345ebc416fed9f246dd998a222888eb004d7ff2db19987edae616",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/TASK_PACKET.json",
+    "path": "make/m3/tooling/module-packs/cpu-tools/TASK_PACKET.json",
     "sha256": "83abb90abbd9682f82daf60e2289e78bfbe67d890845ab324616e538191e3e07",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/VERIFY_CONTRACT.tsv",
+    "path": "make/m3/tooling/module-packs/cpu-tools/VERIFY_CONTRACT.tsv",
     "sha256": "8630fc8751cec3bca62616685971701225b5834ecc02b55d90f36de03a110fc8",
     "mode": "0644",
     "dataset": "native-link"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/build.py",
+    "path": "make/m3/tooling/module-packs/cpu-tools/build.py",
     "sha256": "33890d1b1a971e2559e8d198e114433e80c86162ea6b533d0f616c7d77e730e3",
     "mode": "0644",
     "dataset": "native-link"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/fixtures/M3CpuToolsTest.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/fixtures/M3CpuToolsTest.java",
     "sha256": "54265effbe2e595f1b4fd69df6e4741124b48f9cbdc0d1de6c121d483bbb9c15",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/fixtures/M3DonorToolsTest.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/fixtures/M3DonorToolsTest.java",
     "sha256": "c087fce928a4dc3afad0ff63466f1ee1d327aba5bc7a16154a07e718eddc6d3d",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/fixtures/M3SourceToolsTest.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/fixtures/M3SourceToolsTest.java",
     "sha256": "af69362c97ad4142ddaaa838a9dec9377725f32bf243c0488c510d42a99e401c",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/fixtures/test_build.py",
+    "path": "make/m3/tooling/module-packs/cpu-tools/fixtures/test_build.py",
     "sha256": "cb700bf04f971c98695b73d6d1669bc8d26a53eb738eeed9240d985e88242856",
     "mode": "0644",
     "dataset": "native-link"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/legal/LICENSE.txt",
+    "path": "make/m3/tooling/module-packs/cpu-tools/legal/LICENSE.txt",
     "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/legal/NOTICE.txt",
+    "path": "make/m3/tooling/module-packs/cpu-tools/legal/NOTICE.txt",
     "sha256": "10a7216cbfc22f3ba250e402f1c7f0ecd78e42eb79e5d1c66fdfa48f12c73243",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/pom.xml",
+    "path": "make/m3/tooling/module-packs/cpu-tools/pom.xml",
     "sha256": "fb477a8b1733ce09d30d423eeaad5f201f135400e9fd9c02428848f520eaf101",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.codec.varint/jdk/m3/tools/codec/varint/VarInts.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.codec.varint/jdk/m3/tools/codec/varint/VarInts.java",
     "sha256": "727e6f87e0494ad4dd6864a619e323c2fee97ab50015da0b60aa93e65f107671",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.codec.varint/module-info.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.codec.varint/module-info.java",
     "sha256": "4dfaa0010d9a791b0613860cbd77390896716624445ad7151a98a1648df25b86",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.constraint.interval/jdk/m3/tools/constraint/interval/Intervals.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.constraint.interval/jdk/m3/tools/constraint/interval/Intervals.java",
     "sha256": "364ea0481635019fe057e8cbb56120a1d01034cdff3b3c1307309b891d2f80bb",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.constraint.interval/module-info.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.constraint.interval/module-info.java",
     "sha256": "5bdf7cf5c4b5d57c7b5b9deb78a53c2193750a9710201e043140050709143cfe",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/CpuTools.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/CpuTools.java",
     "sha256": "ea6ccee666237e0dfe9fee9dd0937188bebe559d06ea453d481fd96ac3099b0c",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/CpuToolsCli.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/CpuToolsCli.java",
     "sha256": "14fda8a14704005a17bab6b1b43f9612b726513f12f6098670ca18156094f89f",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/M3AstTools.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/M3AstTools.java",
     "sha256": "3e2b9a55dc75a9ff328826c6670bc12f3389619a3c6ce42e241644fc77f6de5d",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/module-info.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/module-info.java",
     "sha256": "045874cc3c4bccefbf7ed9bdc4d93dab456c1f81c3856c60391a92f8699c2de8",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.paths/jdk/m3/tools/graph/paths/ShortestPaths.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.paths/jdk/m3/tools/graph/paths/ShortestPaths.java",
     "sha256": "c88608bc4362856d9a263b4b97819fb80ab8d944727764130e3d9bcbe6144416",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.paths/module-info.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.paths/module-info.java",
     "sha256": "89e811b835a7afad11a60970c42fc1ee3b9abc2e7522b951d2331142f7695635",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.topology/jdk/m3/tools/graph/topology/TopologicalOrder.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.topology/jdk/m3/tools/graph/topology/TopologicalOrder.java",
     "sha256": "14e7378411cb1c78b9b5abfcea81ba8f039ccd89786cebbcc3f363ea567379f9",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.topology/module-info.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.topology/module-info.java",
     "sha256": "00f0f71038d3ab67f4f260557e7fd086700c379a2edbe08a3a929682e087a0c1",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.plan.priority/jdk/m3/tools/plan/priority/StablePriorityQueue.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.plan.priority/jdk/m3/tools/plan/priority/StablePriorityQueue.java",
     "sha256": "abebf89af99ff624f1a03751831145dbfa1af29e958478f66eba003ac861e4cb",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.plan.priority/module-info.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.plan.priority/module-info.java",
     "sha256": "0ef7bbc1d2fa26231240007fa41273e95768383782ec68c17b083289f836c0f9",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.stats.streaming/jdk/m3/tools/stats/streaming/RunningStatistics.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.stats.streaming/jdk/m3/tools/stats/streaming/RunningStatistics.java",
     "sha256": "f84f2ebb7d32f73db1aa0ebbfa8a088e13dfb815baf848fcd152708c70b261b7",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.stats.streaming/module-info.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.stats.streaming/module-info.java",
     "sha256": "e3444eafb5e81a011ed1d93c56be512301ea4f36a1929bb26cb6fa8e4fb63f54",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.diff/jdk/m3/tools/text/diff/TextDelta.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.diff/jdk/m3/tools/text/diff/TextDelta.java",
     "sha256": "779448e86648711b20810aa8a82264cbc98073149447b00690c8f16b256e1811",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.diff/module-info.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.diff/module-info.java",
     "sha256": "26b71c5f02338b0195746c0895dcae0dd76ee9ba8d91a3dafd80cae47c1b16c5",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.frequency/jdk/m3/tools/text/frequency/TermFrequency.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.frequency/jdk/m3/tools/text/frequency/TermFrequency.java",
     "sha256": "968c74c80fbf119f90e5bb02e4c15cd271aba341e30e49f709dcc91c64272dff",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.frequency/module-info.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.frequency/module-info.java",
     "sha256": "ea37386c16c7b284107dc98e43810df6dee8365810433512ed5dc164605f8732",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.index/jdk/m3/tools/text/index/InvertedIndex.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.index/jdk/m3/tools/text/index/InvertedIndex.java",
     "sha256": "fe5bb68d37c09d33d8baae2e76a223fbdd627018e30b8532735e66e201ed846c",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.index/module-info.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.index/module-info.java",
     "sha256": "aacacfc948ff4f9d56925e4fc9c38c0af52ba22da8a6ff70fc4f1e8dc16359e1",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.ngram/jdk/m3/tools/text/ngram/NGrams.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.ngram/jdk/m3/tools/text/ngram/NGrams.java",
     "sha256": "0cde8da1762345362e5ed10efef9d27b6a7757f70d7ee5b8935b440660373442",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.ngram/module-info.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.ngram/module-info.java",
     "sha256": "035920afd021691bc712f31c898f65b599b652067c3f17e9c4568f2bd5892a62",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.normalize/jdk/m3/tools/text/normalize/UnicodeNormalizer.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.normalize/jdk/m3/tools/text/normalize/UnicodeNormalizer.java",
     "sha256": "8412d7c628d2e4e32fb81f62f48697f229f14bcb3ee3b08628ef96b3e2514ee0",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.normalize/module-info.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.normalize/module-info.java",
     "sha256": "6f46e1e08418d796a56a823fe170455302426a52d69df16ed2ded756dcc2ed15",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.regex/jdk/m3/tools/text/regex/RegexMatcher.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.regex/jdk/m3/tools/text/regex/RegexMatcher.java",
     "sha256": "7c01f9b2b62a7544de11f006658a1527c809b5275057cfdc3c34b2fb8aa579df",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.regex/module-info.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.regex/module-info.java",
     "sha256": "0023883ea478a63d02ae09f029b61f32b4ef8314db250036f193656c306ca92f",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.search/jdk/m3/tools/text/search/ExactSearch.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.search/jdk/m3/tools/text/search/ExactSearch.java",
     "sha256": "e0f1df2028c4f8098d86595a45545f2d48540004fbbf01adea1cb833e4b78b32",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.search/module-info.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.search/module-info.java",
     "sha256": "5f23b208d895f1cf05850e9f27edfbbe3a1a95cb82dcf6b240384aeab603d52f",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.similarity/jdk/m3/tools/text/similarity/EditDistance.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.similarity/jdk/m3/tools/text/similarity/EditDistance.java",
     "sha256": "46046967b3f3d3a573b025e28f4ec23e320e3e8b16a47ce12623fa5658153115",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.similarity/module-info.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.similarity/module-info.java",
     "sha256": "8ae0bf4fc45876171c948e459feb1bfdcf4b540dc2903563b5fab9c49d31084b",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.tokenize/jdk/m3/tools/text/tokenize/WordTokenizer.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.tokenize/jdk/m3/tools/text/tokenize/WordTokenizer.java",
     "sha256": "5b8f130337dc6ae2ad813e8d7ce89dc6bcff2371eb9ac3f067aa83ea9fa37911",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.tokenize/module-info.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.tokenize/module-info.java",
     "sha256": "3ddebe14556ed8e4fd2e1aeed52bc2e7e099b988dbee9781c0cefba02b3b9253",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.verify.sha256/jdk/m3/tools/verify/sha256/Sha256.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.verify.sha256/jdk/m3/tools/verify/sha256/Sha256.java",
     "sha256": "b5a78b494c67bb6bc5773f2eb957f81336ff4c6c1eeb88796a922f01d8188d59",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.verify.sha256/module-info.java",
+    "path": "make/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.verify.sha256/module-info.java",
     "sha256": "cdf42904dd792a820ea85c00edc9f989ebadef4017527986883b3e20f7cddf71",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/text-tools/README.md",
+    "path": "make/m3/tooling/module-packs/text-tools/README.md",
     "sha256": "602ab56cf3a5a33a673c532380505a0bc8bbc93800bd579882823f51364c3a6b",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/text-tools/build.py",
+    "path": "make/m3/tooling/module-packs/text-tools/build.py",
     "sha256": "bfb955548ca56c7f85131895b8912f48ebdb59a218aa993103a14307b5920c13",
     "mode": "0644",
     "dataset": "current"
   },
   {
-    "path": "m3/tooling/module-packs/text-tools/src/jdk.m3.io/jdk/m3/io/M3File.java",
+    "path": "make/m3/tooling/module-packs/text-tools/src/jdk.m3.io/jdk/m3/io/M3File.java",
     "sha256": "c5f1ff03ce88ba4875fc54358c8f11ac6a9d1ce84d3ad5f90d0f48bb0dbdbc37",
     "mode": "0644",
     "dataset": "current"

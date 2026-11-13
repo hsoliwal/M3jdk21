@@ -51,7 +51,7 @@ Parallel mode is available, not a promise that every workload is faster.
 ## Representation and regression checklist
 
 This library's primitive lanes are not interchangeable with the reference-bearing
-backends of `java.util`. The [JDK collection replacement specification](../docs/collections-replacement-spec.md)
+backends of `java.util`. The [JDK collection replacement specification](../../../doc/m3/collections-replacement-spec.md)
 is a design/acceptance document; its proposed changes are not installed by building
 this module. Keep mutable owner identity, topology, presence and slot generations
 separate from primitive values. A zero can be a valid value; absence needs the owner's
@@ -83,7 +83,7 @@ Set `JAVA_HOME` and `JUNIT_CONSOLE_JAR` to real installed Java 21 and Console St
 paths. `MVN`, `M2_REPO`, `CC`, and `M3_MAVEN_OFFLINE=1` are optional overrides.
 
 ```sh
-python3 m3/collections/verify.py
+python3 make/m3/collections/verify.py
 ```
 
 This executes real OpenRewrite 8.17.1 recipes, verifies fixed-point/refusal and all 21 sealed
@@ -124,9 +124,9 @@ Current product verification uses the exact 88-Java installed manifest and prese
 current primitive, identity and enum owners in the existing com.m3.collections package.
 
 ```sh
-mvn -f m3/collections/recipe/pom.xml verify
+mvn -f make/m3/collections/recipe/pom.xml verify
 JUNIT_CONSOLE_JAR=/path/to/junit-platform-console-standalone-1.12.2.jar \
-  python3 m3/collections/verify_donation.py --cost-probe
+  python3 make/m3/collections/verify_donation.py --cost-probe
 ```
 
 Java 21, Linux and GCC/UBSan are required by the complete product verifier. It runs

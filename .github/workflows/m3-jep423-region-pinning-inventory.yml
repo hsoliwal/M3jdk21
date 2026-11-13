@@ -6,29 +6,29 @@ on:
       - "m3/jep423-region-pinning-inventory-20261006"
       - "m3/jep423-current-tree-admission-repair-20261007"
     paths:
-      - "m3/backports/recipes/jep-423-region-pinning/**"
-      - "m3/backports/generate_recipe_crates.py"
-      - "m3/backports/file_delta_inventory.py"
-      - "m3/backports/current_tree_preimage_inventory.py"
-      - "m3/backports/test_current_tree_preimage_inventory.py"
-      - "m3/backports/test_jep423_current_admission.py"
-      - "m3/backports/test_generate_recipe_crates.py"
-      - "m3/backports/test_file_delta_inventory.py"
-      - "m3/tooling/migration-recipes/**"
-      - "m3/tooling/backport-dag/**"
+      - "make/m3/backports/recipes/jep-423-region-pinning/**"
+      - "make/m3/backports/generate_recipe_crates.py"
+      - "make/m3/backports/file_delta_inventory.py"
+      - "make/m3/backports/current_tree_preimage_inventory.py"
+      - "make/m3/backports/test_current_tree_preimage_inventory.py"
+      - "make/m3/backports/test_jep423_current_admission.py"
+      - "make/m3/backports/test_generate_recipe_crates.py"
+      - "make/m3/backports/test_file_delta_inventory.py"
+      - "make/m3/tooling/migration-recipes/**"
+      - "make/m3/tooling/backport-dag/**"
       - ".github/workflows/m3-jep423-region-pinning-inventory.yml"
   pull_request:
     paths:
-      - "m3/backports/recipes/jep-423-region-pinning/**"
-      - "m3/backports/generate_recipe_crates.py"
-      - "m3/backports/file_delta_inventory.py"
-      - "m3/backports/current_tree_preimage_inventory.py"
-      - "m3/backports/test_current_tree_preimage_inventory.py"
-      - "m3/backports/test_jep423_current_admission.py"
-      - "m3/backports/test_generate_recipe_crates.py"
-      - "m3/backports/test_file_delta_inventory.py"
-      - "m3/tooling/migration-recipes/**"
-      - "m3/tooling/backport-dag/**"
+      - "make/m3/backports/recipes/jep-423-region-pinning/**"
+      - "make/m3/backports/generate_recipe_crates.py"
+      - "make/m3/backports/file_delta_inventory.py"
+      - "make/m3/backports/current_tree_preimage_inventory.py"
+      - "make/m3/backports/test_current_tree_preimage_inventory.py"
+      - "make/m3/backports/test_jep423_current_admission.py"
+      - "make/m3/backports/test_generate_recipe_crates.py"
+      - "make/m3/backports/test_file_delta_inventory.py"
+      - "make/m3/tooling/migration-recipes/**"
+      - "make/m3/tooling/backport-dag/**"
       - ".github/workflows/m3-jep423-region-pinning-inventory.yml"
   workflow_dispatch:
 
@@ -77,7 +77,7 @@ jobs:
 
           root = Path(".")
           repo = Path(os.environ["UPSTREAM"])
-          packet = root / "m3/backports/recipes/jep-423-region-pinning"
+          packet = root / "make/m3/backports/recipes/jep-423-region-pinning"
 
           expected = [
               line.strip()
@@ -134,8 +134,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/backports/recipes/jep-423-region-pinning/validate_lineage.py
-          cd m3/backports
+          python3 make/m3/backports/recipes/jep-423-region-pinning/validate_lineage.py
+          cd make/m3/backports
           python3 -m unittest -v test_jep423_lineage.py
 
       - name: Prove pinned upstream commit identities
@@ -149,7 +149,7 @@ jobs:
           from pathlib import Path
 
           repo = Path(os.environ["UPSTREAM"])
-          packet = Path("m3/backports/recipes/jep-423-region-pinning")
+          packet = Path("make/m3/backports/recipes/jep-423-region-pinning")
           with (packet / "LINEAGE.tsv").open(encoding="utf-8", newline="") as stream:
               rows = list(csv.DictReader(stream, delimiter="\t"))
 
@@ -172,63 +172,63 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/backports/current_tree_preimage_inventory.py \
+          python3 make/m3/backports/current_tree_preimage_inventory.py \
             --root . \
-            --paths-file m3/backports/recipes/jep-423-region-pinning/CUMULATIVE_ADMIT_PATHS.txt \
+            --paths-file make/m3/backports/recipes/jep-423-region-pinning/CUMULATIVE_ADMIT_PATHS.txt \
             --out target/jep423/CURRENT_PREIMAGES.tsv \
             --baseline-git "$UPSTREAM" \
             --baseline-ref jdk-21+35 \
             --admission-out target/jep423/CURRENT_TREE_FILE_ADMISSION.tsv \
             --mechanical-paths-out target/jep423/MECHANICAL_PATHS.txt
-          python3 m3/backports/recipes/jep-423-region-pinning/validate_current_admission.py \
-            --packet m3/backports/recipes/jep-423-region-pinning \
+          python3 make/m3/backports/recipes/jep-423-region-pinning/validate_current_admission.py \
+            --packet make/m3/backports/recipes/jep-423-region-pinning \
             --admission target/jep423/CURRENT_TREE_FILE_ADMISSION.tsv
 
       - name: Unit-test whole-tree comparator and mixed FILE-crate generator
         shell: bash
         run: |
           set -euo pipefail
-          cd m3/backports
+          cd make/m3/backports
           python3 -m unittest -v             test_current_tree_preimage_inventory.py             test_file_delta_inventory.py             test_generate_recipe_crates.py             test_jep423_current_admission.py
 
       - name: Inventory exact JDK21 to JDK22 GA deltas
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/backports/file_delta_inventory.py             --repo "$UPSTREAM"             --release 22             --donor-ref 0d5f5e15d43f94a79c6133baecd5af217365d176             --out target/jep423/JDK21_TO_JEP423_FINAL.tsv
+          python3 make/m3/backports/file_delta_inventory.py             --repo "$UPSTREAM"             --release 22             --donor-ref 0d5f5e15d43f94a79c6133baecd5af217365d176             --out target/jep423/JDK21_TO_JEP423_FINAL.tsv
 
       - name: Generate one source-sealed FILE atom per admitted JEP423 path
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/backports/generate_recipe_crates.py             --repo "$UPSTREAM"             --release 22             --donor-ref 0d5f5e15d43f94a79c6133baecd5af217365d176             --paths-file target/jep423/MECHANICAL_PATHS.txt                         --donor-map m3/backports/recipes/jep-423-region-pinning/PATH_DONOR_OVERRIDES.tsv --crate-size 1             --include-native             --include-text             --out target/jep423/file-atoms
+          python3 make/m3/backports/generate_recipe_crates.py             --repo "$UPSTREAM"             --release 22             --donor-ref 0d5f5e15d43f94a79c6133baecd5af217365d176             --paths-file target/jep423/MECHANICAL_PATHS.txt                         --donor-map make/m3/backports/recipes/jep-423-region-pinning/PATH_DONOR_OVERRIDES.tsv --crate-size 1             --include-native             --include-text             --out target/jep423/file-atoms
 
       - name: Account for all admitted and preserved paths
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/backports/recipes/jep-423-region-pinning/validate_current_admission.py \
-            --packet m3/backports/recipes/jep-423-region-pinning \
+          python3 make/m3/backports/recipes/jep-423-region-pinning/validate_current_admission.py \
+            --packet make/m3/backports/recipes/jep-423-region-pinning \
             --runner target/jep423
 
       - name: Verify M3 backport and recipe substrate
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f m3/backports/pom.xml verify
+          mvn -B -ntp -f make/m3/backports/pom.xml verify
 
       - name: Validate evidence-bound JEP423 packet DAG
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=jdk.m3.tooling.dag.BackportPacketMain             -Dexec.args="$PWD/m3/backports/recipes/jep-423-region-pinning/packet.tsv $PWD/m3/backports/recipes/jep-423-region-pinning/atom-evidence.tsv"             exec:java
+          mvn -B -ntp -f make/m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=jdk.m3.tooling.dag.BackportPacketMain             -Dexec.args="$PWD/make/m3/backports/recipes/jep-423-region-pinning/packet.tsv $PWD/make/m3/backports/recipes/jep-423-region-pinning/atom-evidence.tsv"             exec:java
 
       - name: Project JEP423 DAG to Camel Airflow and Drools
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p target/jep423/projections
-          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=jdk.m3.tooling.dag.OrchestrationProjectionMain             -Dexec.args="$PWD/m3/backports/recipes/jep-423-region-pinning/packet.tsv $PWD/target/jep423/projections $PWD/m3/backports/recipes/jep-423-region-pinning/atom-evidence.tsv"             exec:java
+          mvn -B -ntp -f make/m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=jdk.m3.tooling.dag.OrchestrationProjectionMain             -Dexec.args="$PWD/make/m3/backports/recipes/jep-423-region-pinning/packet.tsv $PWD/target/jep423/projections $PWD/make/m3/backports/recipes/jep-423-region-pinning/atom-evidence.tsv"             exec:java
           test -s target/jep423/projections/M3BackportRoutes.java
           test -s target/jep423/projections/m3_backport_dag.py
           test -s target/jep423/projections/m3_backport_rules.drl

@@ -6,5 +6,5 @@ pull_request	36
 contract_mode	BEHAVIOR_AND_CONTRACT_PRESERVING
 edit_scope	FILE for convergence DAG
 java_release	21
-recipe_module	m3/tooling/migration-recipes
-verify_command	mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify
+recipe_module	make/m3/tooling/migration-recipes
+verify_command	mvn -B -ntp -f make/m3/tooling/migration-recipes/pom.xml clean verify

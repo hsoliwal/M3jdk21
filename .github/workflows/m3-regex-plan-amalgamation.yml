@@ -8,7 +8,7 @@ on:
     paths:
       - "src/java.base/share/classes/java/lang/M3StringRegexDp.java"
       - "test/jdk/java/lang/String/M3StringRegexDpTest.java"
-      - "m3/runtime-integration/regex-plan-amalgamation/**"
+      - "make/m3/runtime-integration/regex-plan-amalgamation/**"
       - ".github/workflows/m3-regex-plan-amalgamation.yml"
 
 permissions:
@@ -25,7 +25,7 @@ jobs:
           fetch-depth: 1
           sparse-checkout-cone-mode: false
           sparse-checkout: |
-            m3/runtime-integration/regex-plan-amalgamation/
+            make/m3/runtime-integration/regex-plan-amalgamation/
             src/java.base/share/classes/java/lang/M3StringRegexDp.java
             src/java.base/share/classes/java/lang/M3String.java
             src/java.base/share/classes/java/lang/M3StringFacts.java
@@ -36,9 +36,9 @@ jobs:
           distribution: temurin
           java-version: "21"
       - name: Confirm sealed M3JDK owner files and native path preservation
-        run: python3 m3/runtime-integration/regex-plan-amalgamation/verify_receiver.py
+        run: python3 make/m3/runtime-integration/regex-plan-amalgamation/verify_receiver.py
       - name: Compile complete exact old/new regex engines with extracted M3 facts and cursor
-        run: python3 m3/runtime-integration/regex-plan-amalgamation/source_extracted_java21.py
+        run: python3 make/m3/runtime-integration/regex-plan-amalgamation/source_extracted_java21.py
       - name: Compile exact enlarged jtreg harness (stock Java21 syntax-only)
         run: |
           mkdir -p "$RUNNER_TEMP/m3-regex-amalgam-jtreg"

@@ -23,17 +23,17 @@ final class M3A3NativeJniLaneRecipeTest {
 
     private static final Map<String, String> PREIMAGES =
             Map.of(
-                    "m3/backports/README.md",
+                    "make/m3/backports/README.md",
                     "README.md.before.txt",
-                    "m3/backports/file_delta_inventory.py",
+                    "make/m3/backports/file_delta_inventory.py",
                     "file_delta_inventory.py.before.txt",
-                    "m3/backports/generate_recipe_crates.py",
+                    "make/m3/backports/generate_recipe_crates.py",
                     "generate_recipe_crates.py.before.txt",
-                    "m3/backports/test_file_delta_inventory.py",
+                    "make/m3/backports/test_file_delta_inventory.py",
                     "test_file_delta_inventory.py.before.txt",
-                    "m3/backports/test_generate_recipe_crates.py",
+                    "make/m3/backports/test_generate_recipe_crates.py",
                     "test_generate_recipe_crates.py.before.txt",
-                    "m3/docs/a3.md",
+                    "doc/m3/a3.md",
                     "a3.md.before.txt");
 
     @Test
@@ -66,24 +66,24 @@ final class M3A3NativeJniLaneRecipeTest {
         }
 
         assertTrue(
-                after.get("m3/backports/file_delta_inventory.py")
+                after.get("make/m3/backports/file_delta_inventory.py")
                         .printAll()
                         .contains("SOURCE_SEALED_NATIVE_PAIR"));
         assertTrue(
-                after.get("m3/backports/generate_recipe_crates.py")
+                after.get("make/m3/backports/generate_recipe_crates.py")
                         .printAll()
                         .contains("--include-native"));
         assertTrue(
-                after.get("m3/backports/test_generate_recipe_crates.py")
+                after.get("make/m3/backports/test_generate_recipe_crates.py")
                         .printAll()
                         .contains("jdk24-native-0001"));
-        assertTrue(after.containsKey("m3/docs/a3-native-jni.md"));
+        assertTrue(after.containsKey("doc/m3/a3-native-jni.md"));
         assertTrue(
-                after.get("m3/backports/README.md")
+                after.get("make/m3/backports/README.md")
                         .printAll()
                         .contains("--include-native"));
         assertTrue(
-                after.get("m3/docs/a3.md")
+                after.get("doc/m3/a3.md")
                         .printAll()
                         .contains("a3-native-jni.md"));
 

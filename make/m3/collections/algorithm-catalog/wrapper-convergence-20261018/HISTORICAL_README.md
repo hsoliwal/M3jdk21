@@ -34,7 +34,7 @@ are not automatically registered in `AlgorithmCatalogue.search(...)` or the
 authoritative `PinnedAlgorithmDonorCatalog` manifest merely by existing here.
 
 The schema extends, rather than replaces, the baseline's
-`m3/collections/algorithm-catalog/collection-candidate-comparison-20261017.tsv`.
+`make/m3/collections/algorithm-catalog/collection-candidate-comparison-20261017.tsv`.
 Related mask/rank/provenance tables are listed and hashed in
 `SOURCE_PROVENANCE.json`. Existing Synexia catalogue, problem-category and
 serial-review APIs remain the implementation owners. Local curated categories

@@ -17,10 +17,10 @@ import org.openrewrite.internal.InMemoryLargeSourceSet;
 import org.openrewrite.text.PlainText;
 
 final class M3BackportExecutionWaveReceiverRecipeTest {
-    private static final String DOC = "m3/backports/BACKPORT_EXECUTION_WAVES.md";
-    private static final String PLANNER = "m3/backports/backport_execution_waves.py";
-    private static final String POM = "m3/backports/pom.xml";
-    private static final String TEST = "m3/backports/test_backport_execution_waves.py";
+    private static final String DOC = "make/m3/backports/BACKPORT_EXECUTION_WAVES.md";
+    private static final String PLANNER = "make/m3/backports/backport_execution_waves.py";
+    private static final String POM = "make/m3/backports/pom.xml";
+    private static final String TEST = "make/m3/backports/test_backport_execution_waves.py";
     private static final String PRE =
             "/jdk/m3/rewrite/backport/backport-execution-waves/pre/";
 

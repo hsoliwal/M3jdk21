@@ -15,7 +15,7 @@ def main():
     parser.add_argument('--output', type=Path, required=True, help='New directory outside the checkout')
     args = parser.parse_args()
     here = Path(__file__).resolve().parent
-    root = here.parents[3]
+    root = here.parents[4]
     out = args.output.resolve()
     if out == root or root in out.parents:
         raise ValueError('proof output must be outside the checkout')

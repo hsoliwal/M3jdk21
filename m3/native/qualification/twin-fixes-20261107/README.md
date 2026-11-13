@@ -3,7 +3,7 @@
 
 The twins `jdk.m3.jni.M3NativeLeaseScan` and `jdk.m3.jni.M3JniArrayReferences` were relocated from the donor's
 primitives module by recipe `recipe/scoped-leases-20261106` (311d9e6c71a). The donor merged one fix for each on
-develop. This recipe ports both with the method of `m3/collections/qualification/doop-facade-fixes-20261107` (#2687):
+develop. This recipe ports both with the method of `make/m3/collections/qualification/doop-facade-fixes-20261107` (#2687):
 hash-pinned donor pre/post snapshots, relocation with the twin's own map, 3-way merge against the pinned twin blob.
 
 | Leaf | Donor PR (merged) | Merge commit | Twin | Fix |

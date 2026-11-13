@@ -21,37 +21,37 @@
 
 | Source path | Original blob SHA | PR |
 | --- | --- | --- |
-| `m3/runtime-integration/regex-state-mask-20261014/receipt.json` | `969631b8d10ebb1b999100ae656d7d133fd12e6a` | #889 |
+| `make/m3/runtime-integration/regex-state-mask-20261014/receipt.json` | `969631b8d10ebb1b999100ae656d7d133fd12e6a` | #889 |
 | `test/jdk/java/util/regex/M3PatternStateMaskTest.java` | `ebaf8c4b91dd8e65ddc525864e2c92e69bad9f42` | #889 |
-| `m3/compatibility/regex-relations-20261014/M3RelationPortProof.java` | `e9a6beee8916cf97d5d4aac2383e7ac2fa8843e0` | #896 |
-| `m3/docs/name-mappings/regex-relations-20261014.json` | `63c0143abf061391d269303daf74909521464fee` | #896 |
+| `make/m3/compatibility/regex-relations-20261014/M3RelationPortProof.java` | `e9a6beee8916cf97d5d4aac2383e7ac2fa8843e0` | #896 |
+| `doc/m3/name-mappings/regex-relations-20261014.json` | `63c0143abf061391d269303daf74909521464fee` | #896 |
 | `src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java` | `d70a152bdedc380ed8b28861ea94ef4c2adbea90` | #896 |
 | `src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java` | `30359b57b7b553e78355d3672119c685051ec1da` | #896 |
 | `src/java.base/share/native/libjava/M3StateRelation.c` | `89b3127f0f262de3e00ba28a01079a659013dce2` | #896 |
 | `src/java.base/share/native/libjava/m3_state_relation.h` | `0e0c70e60b2cee61c3df31982a26f4251955cb61` | #896 |
 | `test/jdk/java/lang/String/M3StringHierarchicalRegexTest.java` | `5d47787597630efc70a4e3b173f2e788dfb6aa3a` | #896 |
-| `m3/docs/name-mapping-regex-effects-20261014.json` | `17cadc255d96c3d21d3134da7eb72357c2efe3b4` | #894 |
-| `m3/docs/regex-effects-receiving.md` | `38ddbb2c533e7baf72f54f94f23fbfc84661bb4d` | #894 |
-| `m3/docs/regex-power-receiving-20261015.md` | `4c7b237f01f9cd231d5af7f4dc4361810bb39ece` | #894 |
-| `m3/docs/regex-pressure-receiving-20261014.md` | `2a06459bc418cde5b9e9d63934c53ea52d1debf6` | #894 |
-| `m3/docs/regex-utf16-receiving-20261015.md` | `c75ab7e9bb1845c39df02d9e6cc4d11416e5c0f0` | #894 |
+| `doc/m3/name-mapping-regex-effects-20261014.json` | `17cadc255d96c3d21d3134da7eb72357c2efe3b4` | #894 |
+| `doc/m3/regex-effects-receiving.md` | `38ddbb2c533e7baf72f54f94f23fbfc84661bb4d` | #894 |
+| `doc/m3/regex-power-receiving-20261015.md` | `4c7b237f01f9cd231d5af7f4dc4361810bb39ece` | #894 |
+| `doc/m3/regex-pressure-receiving-20261014.md` | `2a06459bc418cde5b9e9d63934c53ea52d1debf6` | #894 |
+| `doc/m3/regex-utf16-receiving-20261015.md` | `c75ab7e9bb1845c39df02d9e6cc4d11416e5c0f0` | #894 |
 | `src/java.base/share/classes/jdk/internal/mindex/M3RegexDpPlan.java` | `650b5506b13c4180cae48a99eb0f866b0eceea7a` | #894 |
 | `src/java.base/share/native/libjava/M3RegexDpPlan.c` | `a64bceb4379d14fa668d1b247b8ad12181d0cffd` | #894 |
 | `test/jdk/java/lang/String/M3StringRegexEffectsTest.java` | `5386449b7a1bcbec0c6e6b3c2293cac02cc0f69c` | #894 |
 | `test/jdk/java/lang/String/M3StringRegexPowerTest.java` | `88f9ba07382735f3b9bbe8b9a3cde302b654f411` | #894 |
 | `test/jdk/java/lang/String/M3StringRegexReuseTest.java` | `a913b9dc61447efafad9d68e534b838e9ada66f3` | #894 |
 | `test/jdk/java/lang/String/M3StringRegexUtf16Test.java` | `2bc23aab599cc15008d6faefc41c4fc2499f3a6d` | #894 |
-| `m3/compatibility/relation-images-20261014/RelationImageProof.java` | `8b87b9a3c80c591cdd40423356bc30ff3ef60cb2` | #896 |
-| `m3/docs/name-mappings/relation-images-20261014.json` | `09054ddba5a2fa2e765785048b0e0a1cdda5516b` | #896 |
+| `make/m3/compatibility/relation-images-20261014/RelationImageProof.java` | `8b87b9a3c80c591cdd40423356bc30ff3ef60cb2` | #896 |
+| `doc/m3/name-mappings/relation-images-20261014.json` | `09054ddba5a2fa2e765785048b0e0a1cdda5516b` | #896 |
 | `src/java.base/share/classes/jdk/internal/mindex/M3RelationImage.java` | `9c6fefa415f3bc2897a0ae3fdb17dd499ee4a21f` | #896 |
-| `m3/tooling/module-packs/text-tools/CSV_M3_STRING_RECEIVER_20261015.md` | `9ee2c2bd70de6b4e1e75b3ee6db93781db0b1a14` | #916 |
-| `m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/CsvTools.java` | `dd2c3635c87cad4fcad50c7295011ddbacb7b722` | #916 |
-| `m3/backports/NEBULA_PROOF_GATED_ADMISSION_20261015.tsv` | `96891444042f6dd4cb51c9d8e3236b038474cc42` | #934 |
-| `m3/backports/NEBULA_UPSTREAM_PROOF_ADMISSION_20261016.tsv` | `ffff78cb1e9def6fadea247c3667961bf0539892` | #934 |
-| `m3/backports/nebula_proof_admission.py` | `f0ee29290dcefdf19f3a7a59d378946a08da0432` | #934 |
-| `m3/backports/nebula_upstream_proof_admission.py` | `e6d21a2f48c5863dfa7e5b478401b9e605d954f2` | #934 |
-| `m3/backports/test_nebula_proof_admission.py` | `41e23d01d0436f9a1495dff0913fda6582e257ff` | #934 |
-| `m3/backports/test_nebula_upstream_proof_admission.py` | `0d7aaf1dddccbf4e979baf2b9ee75c5ec3a2caff` | #934 |
+| `make/m3/tooling/module-packs/text-tools/CSV_M3_STRING_RECEIVER_20261015.md` | `9ee2c2bd70de6b4e1e75b3ee6db93781db0b1a14` | #916 |
+| `make/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/CsvTools.java` | `dd2c3635c87cad4fcad50c7295011ddbacb7b722` | #916 |
+| `make/m3/backports/NEBULA_PROOF_GATED_ADMISSION_20261015.tsv` | `96891444042f6dd4cb51c9d8e3236b038474cc42` | #934 |
+| `make/m3/backports/NEBULA_UPSTREAM_PROOF_ADMISSION_20261016.tsv` | `ffff78cb1e9def6fadea247c3667961bf0539892` | #934 |
+| `make/m3/backports/nebula_proof_admission.py` | `f0ee29290dcefdf19f3a7a59d378946a08da0432` | #934 |
+| `make/m3/backports/nebula_upstream_proof_admission.py` | `e6d21a2f48c5863dfa7e5b478401b9e605d954f2` | #934 |
+| `make/m3/backports/test_nebula_proof_admission.py` | `41e23d01d0436f9a1495dff0913fda6582e257ff` | #934 |
+| `make/m3/backports/test_nebula_upstream_proof_admission.py` | `0d7aaf1dddccbf4e979baf2b9ee75c5ec3a2caff` | #934 |
 | `.github/workflows/m3-cpu-byte-pattern-set-20261016.yml` | `0ed9d20d064954db08ed2ba6e79b043fe99cf430` | #947 |
 | `m3/ports/capability-runtime/M3_BYTE_PATTERN_SET.md` | `aabed6eddd62ceeeb07e3f47b2e8d8ad778e2cf5` | #947 |
 | `m3/ports/capability-runtime/native/byte_pattern_set_jni.c` | `0ca7b4f58e44e662ad078158214c209e4c587492` | #947 |
@@ -65,20 +65,20 @@ These are source-conflict/integration candidates, not proof that changes are mis
 
 | Existing modified path | Incoming PRs |
 | --- | --- |
-| `m3/docs/m3-string-precompute-port-map.tsv` | #889 |
+| `doc/m3/m3-string-precompute-port-map.tsv` | #889 |
 | `src/java.base/share/classes/java/util/regex/M3PatternQuery.java` | #889, #897 |
 | `src/java.base/share/classes/java/lang/M3StringRegexDp.java` | #891, #894, #896, #907 |
 | `AGENTS.md` | #894 |
-| `m3/compatibility/m3-pattern-ascii-receive-20261014.json` | #897 |
-| `m3/docs/name-mapping.d/m3-pattern-ascii-frontier.json` | #897 |
+| `make/m3/compatibility/m3-pattern-ascii-receive-20261014.json` | #897 |
+| `doc/m3/name-mapping.d/m3-pattern-ascii-frontier.json` | #897 |
 | `test/jdk/java/util/regex/M3PatternAsciiFrontierTest.java` | #897 |
 | `test/jdk/java/util/regex/libM3PatternAsciiFrontierTest.c` | #897 |
 | `test/jdk/java/lang/String/M3StringRegexDpTest.java` | #907 |
-| `m3/tooling/module-packs/text-tools/fixtures/src/test/java/M3TextSmoke.java` | #916 |
+| `make/m3/tooling/module-packs/text-tools/fixtures/src/test/java/M3TextSmoke.java` | #916 |
 | `.github/workflows/m3jdk21-backport-dag.yml` | #934 |
-| `m3/backports/BACKPORT_PROGRAMME_STATUS.md` | #934 |
-| `m3/backports/M3_NEBULA_RECIPE_DAG_HANDOFF.tsv` | #934 |
-| `m3/backports/pom.xml` | #934 |
+| `make/m3/backports/BACKPORT_PROGRAMME_STATUS.md` | #934 |
+| `make/m3/backports/M3_NEBULA_RECIPE_DAG_HANDOFF.tsv` | #934 |
+| `make/m3/backports/pom.xml` | #934 |
 | `m3/ports/capability-runtime/src/test/java/jdk/m3/runtime/proof/CapabilityImageSmoke.java` | #947 |
 | `m3/ports/capability-runtime/verify_native.py` | #947 |
 | `m3/m3-import/current-full-borrow/check_string_phase.py` | #952 |

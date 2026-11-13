@@ -23,7 +23,7 @@ class M3StringConcatOverflowCurrentTest(unittest.TestCase):
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name)
-        source = Path(__file__).resolve().parents[2]
+        source = Path(__file__).resolve().parents[3]
         for name in DIGESTS:
             destination = self.root / name
             destination.parent.mkdir(parents=True, exist_ok=True)

@@ -4,7 +4,7 @@
 """Recipe MERGELOSS_RESTORE v1: merge-loss audit leaf 74 (m3/eclipse/framework M3EclipseIndexedSnapshot).
 
 Engine: m3/core/qualification/mergeloss-67-69-20261107/apply.py v1 (itself derived from
-m3/collections/qualification/census-small-batch-20261106/apply.py v1): anchored "sub" edits, every anchor exactly once,
+make/m3/collections/qualification/census-small-batch-20261106/apply.py v1): anchored "sub" edits, every anchor exactly once,
 LF payloads re-joined with the preimage's line ending, a per-file leaf chain whose accepted states are the base (pinned
 by git blob id, or ABSENT) and each chain prefix. Anything else is drift and the recipe refuses (exit 2) before any
 write. Extension for ABSENT bases: a create edit (old None) takes its bytes from a pinned donor git blob, checks the

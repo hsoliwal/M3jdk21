@@ -6,15 +6,15 @@ on:
   pull_request:
     paths:
       - '.github/workflows/m3-backport-contract-current-owner.yml'
-      - 'm3/tooling/backport-contract-current-owner/**'
-      - 'm3/backports/test_compatibility_policy.py'
-      - 'm3/backports/compatibility_policy.py'
-      - 'm3/backports/POST21_PRIORITY_COMPATIBILITY.tsv'
-      - 'm3/backports/JEP_CATALOGUE.tsv'
-      - 'm3/backports/RELEASE_JEP_AUTHORITY.tsv'
-      - 'm3/backports/test_backport_execution_waves.py'
-      - 'm3/backports/backport_execution_waves.py'
-      - 'm3/backports/BACKPORT_EXECUTION_WAVES.md'
+      - 'make/m3/tooling/backport-contract-current-owner/**'
+      - 'make/m3/backports/test_compatibility_policy.py'
+      - 'make/m3/backports/compatibility_policy.py'
+      - 'make/m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv'
+      - 'make/m3/backports/JEP_CATALOGUE.tsv'
+      - 'make/m3/backports/RELEASE_JEP_AUTHORITY.tsv'
+      - 'make/m3/backports/test_backport_execution_waves.py'
+      - 'make/m3/backports/backport_execution_waves.py'
+      - 'make/m3/backports/BACKPORT_EXECUTION_WAVES.md'
 permissions:
   contents: read
 concurrency:
@@ -130,8 +130,8 @@ jobs:
           root=pathlib.Path(os.environ["M3_PROOF_ROOT"])
           source=pathlib.Path(os.environ["M3_SOURCE_ROOT"])
           bundle=root/"artifacts";bundle.mkdir(exist_ok=False)
-          sdk=source/"m3/tooling/backport-contract-current-owner/sdk"
-          authoring=source/"m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk"
+          sdk=source/"make/m3/tooling/backport-contract-current-owner/sdk"
+          authoring=source/"make/m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk"
           start=time.monotonic()
           active_command=None
           class CensusRescan(RuntimeError):pass
@@ -235,9 +235,9 @@ jobs:
               (bundle/"storage-guard-receipt.json").write_text(json.dumps(receipt,indent=2)+"\n",encoding="utf-8")
               print("PASS: eleven actual-inline mocked storage guard discriminators")
           def authoring_binding():
-              sdk_prefix="m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/"
+              sdk_prefix="make/m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/"
               workflow_path=".github/workflows/m3-backport-contract-current-owner.yml"
-              binding_path="m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-source-binding.json"
+              binding_path="make/m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-source-binding.json"
               path=source/binding_path
               if not path.is_file() or any(p.is_symlink() for p in [path,*path.parents]):raise RuntimeError("missing or redirected authoring source binding")
               raw=path.read_bytes()
@@ -348,7 +348,7 @@ jobs:
               gate()
               if code!=expected:raise RuntimeError(name+" failed with "+str(code)+" expected "+str(expected))
           py=[os.environ["M3_PYTHON"],"-I","-S","-B"]
-          qualifier=source/"m3/tooling/backport-contract-current-owner/qualify.py"
+          qualifier=source/"make/m3/tooling/backport-contract-current-owner/qualify.py"
           settings=root/"home/.m2"
           maven=["mvn","-B","-ntp","-s",str(settings/"settings.xml"),"-gs",str(settings/"global-settings.xml"),"-Dmaven.repo.local="+str(root/"m2"),"-Dstyle.color=never"]
           try:
@@ -385,7 +385,7 @@ jobs:
                           or len(controls["cases"])!=count or len(set(controls["cases"]))!=count):raise RuntimeError("complete helper constructor controls required")
               for key in ("runtimeApplied","phaseAdvanced","productTargetApplied"):
                   if authoring_receipt[key] is not False:raise RuntimeError("helper authoring source-only scope drift")
-              runtime=source/"m3/tooling/backport-contract-current-owner/runtime/qualify.py"
+              runtime=source/"make/m3/tooling/backport-contract-current-owner/runtime/qualify.py"
               run("runtime-inputs",py+[str(runtime),"--output-root",str(root),"--inputs-only"],deadline=90)
               run("runtime-proof",py+[str(runtime),"--output-root",str(root),"--run"],deadline=300)
               run("sdk-report",py+[str(qualifier),"report"],deadline=90)

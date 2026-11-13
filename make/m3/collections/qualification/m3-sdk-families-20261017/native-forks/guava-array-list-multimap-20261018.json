@@ -4,7 +4,7 @@
   "catalogue": {
     "repository": "hsoliwal/M3jdk21",
     "revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
-    "path": "m3/collections/qualification/m3-sdk-families-20261017/FAMILY_CATALOG.tsv",
+    "path": "make/m3/collections/qualification/m3-sdk-families-20261017/FAMILY_CATALOG.tsv",
     "git_blob": "160aa9dae22852b3cdc5838db50105426373dcd0",
     "main_catalogue_bytes_changed": false,
     "main_catalogue_rows_preserved": 107,

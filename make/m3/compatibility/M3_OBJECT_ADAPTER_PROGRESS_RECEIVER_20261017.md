@@ -15,7 +15,7 @@ Status **DRAFT / UNQUALIFIED**. No existing JDK public surface, String/arrays/co
 - `ProgressMonitor` and `ProgressMonitors` live in java.base with a process default, weighted child, lexical scope, bounded completion and explicit handoff. Zero Object resident fields. Not an Eclipse JobManager replacement; jobs, families, scheduling-rule locks and UI services require separate design.
 - This API does not replace M3Index collections or filtered/sorted wrappers. Follow already active #1061-#1070, respecting array/index/offset/mask storage ownership and serial recipe gates.
 - No JNI implementation is proposed for these Java-only progress operations; if a native consumer becomes necessary it needs independent JNI ABI and lifetime tests.
-- A target `m3/docs/name-mapping.json` addition is held for qualification, not silently asserted by a draft that has not run JVM product gates.
+- A target `doc/m3/name-mapping.json` addition is held for qualification, not silently asserted by a draft that has not run JVM product gates.
 
 ## Actual evidence / unexecuted gates
 - Standalone Java 21 compiler and runtime proof for progress classes executed locally with `--patch-module java.base`: PASS for scoped lookup, child weights, large integer scaling, cancellation and idempotent completion. This is **not** a modified M3JDK21 build.
@@ -25,6 +25,6 @@ Status **DRAFT / UNQUALIFIED**. No existing JDK public surface, String/arrays/co
 
 ## Commands
 ```sh
-python3 m3/compatibility/check_object_adapter_progress_receiver_20261017.py
-bash m3/compatibility/verify-object-progress-standalone.sh
+python3 make/m3/compatibility/check_object_adapter_progress_receiver_20261017.py
+bash make/m3/compatibility/verify-object-progress-standalone.sh
 ```

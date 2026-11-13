@@ -50,7 +50,7 @@ class CurrentContextTest(unittest.TestCase):
         with mock.patch.object(current.subprocess, 'run', side_effect=AssertionError('replay started')):
             with self.assertRaisesRegex(current.Refusal, marker):
                 current.qualify(self.root)
-        self.assertFalse((self.root / 'm3/tooling/image-gates/target/currentc0').exists())
+        self.assertFalse((self.root / 'make/m3/tooling/image-gates/target/currentc0').exists())
 
     def test_protected_current_string_workflow_drift(self):
         path = self.root / '.github/workflows/mindex-string-backing.yml'
@@ -58,12 +58,12 @@ class CurrentContextTest(unittest.TestCase):
         self.refuses_before_replay('identity drift')
 
     def test_current_tq_owner_drift(self):
-        path = self.root / 'm3/tooling/tq/src/test/java/jdk/m3/tq/TQTest.java'
+        path = self.root / 'make/m3/tooling/tq/src/test/java/jdk/m3/tq/TQTest.java'
         path.write_bytes(path.read_bytes() + b'\n// foreign change\n')
         self.refuses_before_replay('identity drift')
 
     def test_corrected_memory_manifest_cannot_be_rolled_back(self):
-        relative = 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv'
+        relative = 'make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv'
         task = next(t for t in self.source['tasks'] if t['id'] == 'image-gates')
         old = dict(task['images'])[relative]
         self.assertNotEqual(old, (self.root / relative).read_bytes())
@@ -71,7 +71,7 @@ class CurrentContextTest(unittest.TestCase):
         self.refuses_before_replay('identity drift')
 
     def test_missing_cia_supplier(self):
-        (self.root / 'm3/tooling/a3/src/main/java/jdk/m3/a3/A3RegexMatrix.java').unlink()
+        (self.root / 'make/m3/tooling/a3/src/main/java/jdk/m3/a3/A3RegexMatrix.java').unlink()
         self.refuses_before_replay('missing file')
 
     def test_legacy_string_owner_cannot_return(self):
@@ -107,12 +107,12 @@ class CurrentContextTest(unittest.TestCase):
         self.refuses_before_replay('symlink refused')
 
     def test_guard_drift_is_rejected(self):
-        path = self.root / 'm3/migration/recipe.py'
+        path = self.root / 'make/m3/migration/recipe.py'
         path.write_bytes(path.read_bytes() + b'\n# drift\n')
         self.refuses_before_replay('identity drift')
 
     def test_resource_drift_is_rejected(self):
-        path = self.root / 'm3/tooling/ci-repair/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-repair/foundation.yml.txt'
+        path = self.root / 'make/m3/tooling/ci-repair/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-repair/foundation.yml.txt'
         path.write_bytes(path.read_bytes() + b'\n# drift\n')
         self.refuses_before_replay('identity drift')
 
@@ -125,12 +125,12 @@ class CurrentContextTest(unittest.TestCase):
     def test_historical_receipt_cannot_substitute_generated_output(self):
         task = self.source['tasks'][0]
         path = self.root / task['crate'] / 'target/generated' / task['images'][0][0]
-        receipt = self.root / 'm3/tooling/ci-repair/evidence/ci-repair-custody.json'
+        receipt = self.root / 'make/m3/tooling/ci-repair/evidence/ci-repair-custody.json'
         path.write_bytes(receipt.read_bytes())
         self.refuses_before_replay('Maven generated output drift')
 
     def test_original_verifier_failure_propagates_despite_old_result(self):
-        old = self.root / 'm3/tooling/image-gates/target/currentc0/old/RESULT.json'
+        old = self.root / 'make/m3/tooling/image-gates/target/currentc0/old/RESULT.json'
         old.parent.mkdir(parents=True)
         old.write_text('{"status":"PASS"}\n')
         failed = subprocess.CompletedProcess([], 3, b'', b'forced refusal\n')

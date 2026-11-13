@@ -17,7 +17,7 @@ contributors.
 
 ### Changes made by Synexia (2026-10-31)
 
-Made by the recipe in m3/tooling/jdk-superset/hashing (hash_jdk_form.py, then absorb_rename_generic.py, then
+Made by the recipe in make/m3/tooling/jdk-superset/hashing (hash_jdk_form.py, then absorb_rename_generic.py, then
 literal_constants.py); every changed file says so above its package line.
 
 - Package net.openhft.hashing -> jdk.internal.m3.hash and type T -> M3T (UnsafeAccess -> M3ByteArrayAccess,
@@ -37,7 +37,7 @@ literal_constants.py); every changed file says so above its package line.
   (byte) cast in XXH3 is removed.
 - Magic literals (all except 0, 1, -1, the initializers of the donor's named constants, the XXH3 default secret
   table and annotation arguments) are private static final constants named by role, declared at the top of their
-  class with a one-line Javadoc (LITERAL_CONSTANTS v1.1; m3/tooling/jdk-superset/hashing/CONSTANT_NAMES.tsv). Each
+  class with a one-line Javadoc (LITERAL_CONSTANTS v1.1; make/m3/tooling/jdk-superset/hashing/CONSTANT_NAMES.tsv). Each
   keeps the literal's type and spelling, so javac folds it back and the compiled methods are unchanged.
 - For the JIT: XXH3's 64- and 128-bit functions are split along the input-length classes of the xxHash reference
   into private methods of the same class (XXH3_len_0to16, 1to3, 4to8, 9to16, 17to128 and 129to240 for each width,

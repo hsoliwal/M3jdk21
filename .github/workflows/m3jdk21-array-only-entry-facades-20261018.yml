@@ -6,7 +6,7 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LFUCache.java'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ApiEntryFacades.java'
       - 'test/jdk/jdk/m3/collections/M3ArrayOnlyFacadeSelfTest.java'
-      - 'm3/collections/qualification/jdk21-array-only-entry-facades-20261018/**'
+      - 'make/m3/collections/qualification/jdk21-array-only-entry-facades-20261018/**'
       - '.github/workflows/m3jdk21-array-only-entry-facades-20261018.yml'
   workflow_dispatch:
 jobs:
@@ -21,11 +21,11 @@ jobs:
       - name: Run real Maven OpenRewrite source-seal and fixed-point tests
         run: |
           set -eu
-          mvn -B -ntp -f m3/collections/qualification/jdk21-array-only-entry-facades-20261018/recipe/pom.xml verify
+          mvn -B -ntp -f make/m3/collections/qualification/jdk21-array-only-entry-facades-20261018/recipe/pom.xml verify
       - name: Check actual generated files against canonical recipe templates
         run: |
           set -eu
-          BASE=m3/collections/qualification/jdk21-array-only-entry-facades-20261018/recipe/src/main/resources/jdk/internal/m3/rewrite/jdk21-array-only-entry-facades-20261018
+          BASE=make/m3/collections/qualification/jdk21-array-only-entry-facades-20261018/recipe/src/main/resources/jdk/internal/m3/rewrite/jdk21-array-only-entry-facades-20261018
           cmp "$BASE/M3LFUCache.java.txt" src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LFUCache.java
           cmp "$BASE/M3ApiEntryFacades.java.txt" src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ApiEntryFacades.java
           cmp "$BASE/M3ArrayOnlyFacadeSelfTest.java.txt" test/jdk/jdk/m3/collections/M3ArrayOnlyFacadeSelfTest.java

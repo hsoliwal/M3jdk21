@@ -9,7 +9,7 @@ import unittest
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[2]
+ROOT = HERE.parents[3]
 spec = importlib.util.spec_from_file_location("integration_recipe", HERE / "apply.py")
 recipe = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(recipe)

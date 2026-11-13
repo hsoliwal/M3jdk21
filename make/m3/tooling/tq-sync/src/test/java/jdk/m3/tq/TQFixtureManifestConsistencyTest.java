@@ -45,7 +45,7 @@ final class TQFixtureManifestConsistencyTest {
             "/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/";
     private static final String OWNER_ROOT = RESOURCE_BASE + "m3-tq-sync/";
     private static final String TARGET =
-            "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/manifest.tsv";
+            "make/m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/manifest.tsv";
     private static final String BEFORE_SHA = "b40e5e2fd6cbf8ad487f10ecd60bfdb9f893da88578194a1d8ad1221d7815740";
     private static final String AFTER_SHA = "5b4e8a514d7c44dd46447e76fde8bbf9a8cec9f2a1dacdc9e2a9d3bfe814d525";
     private static final Path CRATE = Path.of(System.getProperty("m3.crate"));

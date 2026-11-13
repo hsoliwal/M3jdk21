@@ -72,7 +72,7 @@ class HandoffLineageTests(TestCase):
         self.assertEqual((5, 1), verifier.verify(self.root))
 
     def test_fixture_recipe_ids_match_immutable_history(self):
-        history = (Path(__file__).resolve().parents[2] / verifier.HISTORY).read_bytes()
+        history = (Path(__file__).resolve().parents[3] / verifier.HISTORY).read_bytes()
         self.assertEqual(self.original_history_blob, verifier.git_blob_sha1(history))
 
         def identity_pairs(contents):

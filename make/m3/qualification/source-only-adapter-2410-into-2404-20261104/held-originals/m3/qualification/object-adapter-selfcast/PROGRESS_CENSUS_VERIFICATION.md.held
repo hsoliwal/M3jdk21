@@ -28,7 +28,7 @@ using SHA-256, including a known-vector-tested implementation. Results:
   `ExecutorService.java`, `ProgressMonitor.java`, `ProgressMonitors.java`,
   `Consumer.java`, `Function.java`, and `Supplier.java`.
 - Four-column, 14-row deterministic TSV:
-  `m3/compatibility/m3-object-progress-current-census-20261103.tsv`.
+  `make/m3/compatibility/m3-object-progress-current-census-20261103.tsv`.
 - Exact census SHA-256:
   `f333de2f423f079f3f28b49e4c531548aa29511af30227dd84c10efa7b7a48cf`.
 - Historical manifest SHA-256 identities were verified and left untouched.
@@ -44,7 +44,7 @@ still requires the original fail-closed historical gate for acceptance.
   **PASS**.
 - Strict ledger lint: 14 sorted unique paths, exactly 8 divergent and 6
   identical historical digests: **PASS**.
-- `python3 -B -m unittest discover -s m3/compatibility
+- `python3 -B -m unittest discover -s make/m3/compatibility
   -p 'test_object_progress_current_census_20261103.py' -v`:
   **8 tests, 7 PASS, 1 SKIP** (full receiver checkout not mounted).
 - The 7 locally executed tests covered exact cryptographic seal, source-row

@@ -6,7 +6,7 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3TreeWindowPlan.java'
       - 'test/jdk/jdk/m3/collections/M3TreeWindowShiftContract.java'
       - 'test/jdk/jdk/m3/collections/M3TreeWindowShiftTest.java'
-      - 'm3/collections/qualification/tree-shift-20261021/**'
+      - 'make/m3/collections/qualification/tree-shift-20261021/**'
       - '.github/workflows/m3-tree-shift-20261021.yml'
   workflow_dispatch:
 

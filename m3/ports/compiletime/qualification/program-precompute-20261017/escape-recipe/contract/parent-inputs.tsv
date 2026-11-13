@@ -54,7 +54,7 @@ m3/ports/precompute/src/main/java/jdk/m3/precompute/M3SimilarityBatchNative.java
 m3/ports/precompute/src/main/java/jdk/m3/precompute/M3SimilarityPrecompute.java	d2e94f06244ea4f3892e4b22bc2b2103c62aea18702883fff2fede9f0c65c1be
 m3/ports/precompute/src/main/java/jdk/m3/precompute/M3TextMetrics.java	5f42c0983f206118c5493cd9ecc2e9b582ca3e339de83972dabe8d775a89ee8a
 m3/ports/precompute/src/main/java/jdk/m3/precompute/M3TextSignals.java	22ef43339c76cdb80e7972ebbcff823a34454624f50b2cd4059f4c0d751f976f
-m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-compiletime-regex-precompute/manifest.tsv	fff56c5927f0d5fa03dc90f025bf519eb5e6c1c4a059364305835e91f370aae9
+make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-compiletime-regex-precompute/manifest.tsv	fff56c5927f0d5fa03dc90f025bf519eb5e6c1c4a059364305835e91f370aae9
 m3/vendor/third_party/asm-9.6/src/main/java/org/objectweb/asm/AnnotationVisitor.java	832f9959de57820f80d63e4678da82872f0599157be9364d7e352f220e4164f3
 m3/vendor/third_party/asm-9.6/src/main/java/org/objectweb/asm/AnnotationWriter.java	d3ce6cfe8866e7124b446ef1bd8ad23770a45c03ab4af3166cdddf6147a2c983
 m3/vendor/third_party/asm-9.6/src/main/java/org/objectweb/asm/Attribute.java	1f205141aef85d14890effea5d67963f81f7b5a8ecb088e91714d2ea84854db2

@@ -11,7 +11,7 @@ The existing owners are the seven
 `com.m3.rewrite.atom` classes and the package-private `MemJava` test compiler. Reuse those owners;
 do not introduce another transformation engine or modify OpenJDK product sources.
 
-The authoring namespace is `m3/tooling/migration-recipes`. This task changes test/recipe resources,
+The authoring namespace is `make/m3/tooling/migration-recipes`. This task changes test/recipe resources,
 focused proof wiring and task evidence only unless an executed regression identifies a production
 recipe defect. Any such repair requires a reviewed exact-source OpenRewrite snapshot crate.
 Root files, product APIs, JNI ABI, dependency versions, the default reactor, and the existing

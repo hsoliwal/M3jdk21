@@ -5,7 +5,7 @@ from pathlib import Path
 from hashlib import sha256
 
 HERE = Path(__file__).resolve().parent
-REPO = HERE.parents[3]
+REPO = HERE.parents[4]
 manifest = HERE / "manifest.tsv"
 rows = [line.split("\t") for line in manifest.read_text(encoding="utf-8").splitlines()
         if line and not line.startswith("#")]

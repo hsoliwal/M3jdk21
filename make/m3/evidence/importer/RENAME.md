@@ -13,7 +13,7 @@ m3-openrewrite-recipes dependency serves the rewrite plugin). No open PR touches
 
 | | Before | After |
 |---|---|---|
-| javac main / test (-Xlint:all -Werror), m3/evidence/native/gate_module.sh | rc=0 / rc=0 | same |
+| javac main / test (-Xlint:all -Werror), make/m3/evidence/native/gate_module.sh | rc=0 / rc=0 | same |
 | JUnit | 50 found: 48 pass, 2 fail | same, per-test status identical (59 rows) |
 | .m3/atomize-patternize/public-verify.sh | rc=0 | rc=0 |
 

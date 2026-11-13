@@ -1,7 +1,7 @@
 ce9d68bcfc38a2f5d5f5f0fb19e6656ee77e71dc
 dev exit 0
 rel exit 1
-FAILED m3/release/test_release_admission.py::ReleaseEvidenceGitTest::test_untracked_source_is_refused
+FAILED make/m3/release/test_release_admission.py::ReleaseEvidenceGitTest::test_untracked_source_is_refused
 1 failed, 27 passed, 25 subtests passed in 87.21s (0:01:27)
 56 K:/codex-work/agent-temp/claude/e--ws2-com-synexia/a6de83fe-6489-4056-8689-f1217602e9cc/scratchpad/audit/contract_diff_superset.patch
 m3/superset-landing-20261030 vendor/asm PASS 0 errors 26 warnings

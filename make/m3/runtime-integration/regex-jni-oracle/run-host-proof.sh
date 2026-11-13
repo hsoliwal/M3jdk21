@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # Host JDK21 JNI UTF-16 / regex oracle only; not a matched M3JDK runtime pass.
 set -euo pipefail
-root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
+root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
 source_dir="$root/test/jdk/java/lang/String"
 work="$(mktemp -d)"
 trap 'rm -rf "$work"' EXIT

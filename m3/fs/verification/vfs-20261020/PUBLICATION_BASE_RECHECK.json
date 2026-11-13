@@ -12,7 +12,7 @@
         "complete_patch_checked_against_file": true,
         "deletions": 0,
         "git_blob": "2c1bec2968ac323428c0f20874dbb5ec2466cfd8",
-        "path": "m3/collections/algorithm-catalogue/challenge-patterns-20261018/FOSS_REUSE_DECISION.tsv",
+        "path": "make/m3/collections/algorithm-catalogue/challenge-patterns-20261018/FOSS_REUSE_DECISION.tsv",
         "sha256": "21007c8ddc9d8e9ce270a26c39d8d86a0b4d457ed86ac26aaaed47905a7c928f",
         "status": "added"
       },
@@ -22,7 +22,7 @@
         "complete_patch_checked_against_file": true,
         "deletions": 0,
         "git_blob": "206ab17412c95758a52a2b9dda48a7d435e3d7c6",
-        "path": "m3/collections/algorithm-catalogue/challenge-patterns-20261018/PRIMARY_SOURCES.tsv",
+        "path": "make/m3/collections/algorithm-catalogue/challenge-patterns-20261018/PRIMARY_SOURCES.tsv",
         "sha256": "7ccc2c248884a8b6d0ec21e7d397a6e7901c3854231897b6ffead85411cc50d3",
         "status": "added"
       },
@@ -32,7 +32,7 @@
         "complete_patch_checked_against_file": true,
         "deletions": 0,
         "git_blob": "fa88b8d2db96e24cbb2b44daa4755846d4d77569",
-        "path": "m3/collections/algorithm-catalogue/challenge-patterns-20261018/README.md",
+        "path": "make/m3/collections/algorithm-catalogue/challenge-patterns-20261018/README.md",
         "sha256": "1b764bada1b1c852490d0a276d29014bfc6a2b990a268f507c4793bd2a9dfa6d",
         "status": "added"
       },
@@ -94,7 +94,7 @@
     "master_rechecked_at_end": "065e3626aac2de62d2f531aec3bed2fca533c9f9",
     "payload_or_frozen_evidence_edits": 0,
     "policy_review": {
-      "authoritative_existing_spec": "m3/docs/mop-recipe-improvement-memory.md; M3-MOP-RECIPE-MEMORY-1; MOP-RCM/1.0; linked from unchanged AGENTS.md",
+      "authoritative_existing_spec": "doc/m3/mop-recipe-improvement-memory.md; M3-MOP-RECIPE-MEMORY-1; MOP-RCM/1.0; linked from unchanged AGENTS.md",
       "canonical_memory_paths": [
         "m3-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/memory/LESSONS.md",
         "m3-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/memory/events/07aa0aa54d63800c7cb988f214a150d7e428adb5dc1e61bc8ab10f04e8896bfd.json",
@@ -197,7 +197,7 @@
           "head": "21fb3de7afa913f77ede1ec5fe9eb9ac177d84f9",
           "kind": "tree"
         },
-        "m3/collections/pom-m3-index-mask-window-20261017.xml": {
+        "make/m3/collections/pom-m3-index-mask-window-20261017.xml": {
           "base": "605fd80762f910644d21c9af025ffa837b1b5988",
           "equal": true,
           "head": "605fd80762f910644d21c9af025ffa837b1b5988",

@@ -7,8 +7,8 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongRank*.java'
       - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_long_rank_batch_jni.c'
       - 'test/jdk/jdk/m3/collections/M3LongRankIndex*.java'
-      - 'm3/collections/recipe/order-statistics/**'
-      - 'm3/collections/algorithm-catalog/order-statistics.tsv'
+      - 'make/m3/collections/recipe/order-statistics/**'
+      - 'make/m3/collections/algorithm-catalog/order-statistics.tsv'
       - '.github/workflows/m3-order-statistics-java-jni.yml'
   push:
     branches:
@@ -48,7 +48,7 @@ jobs:
         shell: bash
         run: |
           git diff --check HEAD^ HEAD
-          mvn -B -ntp -f m3/collections/recipe/order-statistics/pom.xml verify
+          mvn -B -ntp -f make/m3/collections/recipe/order-statistics/pom.xml verify
       - name: Compile independent Java 21 rank contract
         shell: bash
         run: |

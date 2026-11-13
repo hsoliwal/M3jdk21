@@ -4,8 +4,8 @@
 import hashlib
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[4]
-JAVA = ROOT / "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cpu-int8-receiver-20261017"
+ROOT = Path(__file__).resolve().parents[5]
+JAVA = ROOT / "make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cpu-int8-receiver-20261017"
 META = Path(__file__).resolve().with_name("text-manifest.tsv")
 
 
@@ -45,7 +45,7 @@ def verify():
     for path, expected in records:
         if len(expected) != 64 or digest(source(path)) != expected:
             raise ValueError("native/legal/metadata SHA drift: " + path)
-    prefix = ROOT / "m3/tooling/jmod-recipes"
+    prefix = ROOT / "make/m3/tooling/jmod-recipes"
     count = []
     for file in ("CPU_TOOL_DONOR_CATALOGUE_PIN_20261015.tsv",
                  "CPU_TOOL_RECEIVER_MAP_20261014.tsv",

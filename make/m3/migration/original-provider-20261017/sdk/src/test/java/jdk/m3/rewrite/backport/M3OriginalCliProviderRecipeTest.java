@@ -508,13 +508,13 @@ final class M3OriginalCliProviderRecipeTest {
         }
         assertEquals(55, result.size(), "independent frozen PRE file count");
         assertEquals(795_620L, bytes, "independent frozen PRE bytes");
-        assertEquals(PRE_MAP_SHA256, sha(result.get("m3/docs/name-mapping.json")));
+        assertEquals(PRE_MAP_SHA256, sha(result.get("doc/m3/name-mapping.json")));
         for (String excluded : List.of(
                 ".github/workflows/m3-original-mapping-provider-qualification.yml",
-                "m3/migration/provider/python312-linux-x86_64/bootstrap.py",
-                "m3/migration/provider/python312-linux-x86_64/previous-name-mapping.json",
-                "m3/migration/provider/python312-linux-x86_64/test_bootstrap.py",
-                "m3/migration/provider/python312-linux-x86_64/wheels.lock.json")) {
+                "make/m3/migration/provider/python312-linux-x86_64/bootstrap.py",
+                "make/m3/migration/provider/python312-linux-x86_64/previous-name-mapping.json",
+                "make/m3/migration/provider/python312-linux-x86_64/test_bootstrap.py",
+                "make/m3/migration/provider/python312-linux-x86_64/wheels.lock.json")) {
             assertFalse(result.containsKey(excluded), "not part of frozen PRE: " + excluded);
         }
         return Collections.unmodifiableMap(result);
@@ -624,8 +624,8 @@ final class M3OriginalCliProviderRecipeTest {
         frozenPlacement(baseline, sdk, output, build);
         checkFrozenInventory(baseline, frozen, false);
         Map<String, String> installed = assertReplay(images(), true);
-        assertNotEquals(frozen.get("m3/docs/name-mapping.json"),
-                installed.get("m3/docs/name-mapping.json"), "PRE cannot be derived from installed POST");
+        assertNotEquals(frozen.get("doc/m3/name-mapping.json"),
+                installed.get("doc/m3/name-mapping.json"), "PRE cannot be derived from installed POST");
         Path base = temporaryBase();
         try {
             Path post = base.resolve("installed-post");
@@ -637,8 +637,8 @@ final class M3OriginalCliProviderRecipeTest {
                     () -> deliverFrozenPre(substitution, installed, frozen));
             assertEmptyDirectory(substitution);
             Map<String, String> postMapOnly = new TreeMap<>(frozen);
-            postMapOnly.put("m3/docs/name-mapping.json",
-                    installed.get("m3/docs/name-mapping.json"));
+            postMapOnly.put("doc/m3/name-mapping.json",
+                    installed.get("doc/m3/name-mapping.json"));
             assertEquals(55, postMapOnly.size());
             assertThrows(AssertionError.class,
                     () -> deliverFrozenPre(substitution, postMapOnly, frozen));
@@ -737,7 +737,7 @@ final class M3OriginalCliProviderRecipeTest {
 
     @Test void currentMappingReconciliationPreservesNewFieldsAndReviewedMigration()
             throws Exception {
-        String name = "m3/docs/name-mapping.json";
+        String name = "doc/m3/name-mapping.json";
         Row mapping = ROWS.stream().filter(row -> row.path().equals(name))
                 .findFirst().orElseThrow();
         String before = beforeText(mapping);

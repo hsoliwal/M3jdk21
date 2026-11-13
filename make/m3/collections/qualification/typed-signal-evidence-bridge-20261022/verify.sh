@@ -3,8 +3,8 @@
 # Copyright 2026 Hitesh Soliwal and contributors.
 set -euo pipefail
 export LC_ALL=C
-root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
-manifest="$root/m3/collections/qualification/typed-signal-evidence-bridge-20261022/SOURCE_MANIFEST.tsv"
+root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../../.." && pwd)"
+manifest="$root/make/m3/collections/qualification/typed-signal-evidence-bridge-20261022/SOURCE_MANIFEST.tsv"
 [[ -f "$manifest" ]] || { echo "FAIL: source manifest absent"; exit 11; }
 previous=''
 count=0

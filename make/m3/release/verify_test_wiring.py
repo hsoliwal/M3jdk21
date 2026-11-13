@@ -13,8 +13,8 @@ import json
 import re
 from pathlib import Path
 
-PRIMARY = "m3/build.sh"
-SUPPLEMENTAL = "m3/release/run_extra_core_contracts.sh"
+PRIMARY = "make/m3/build.sh"
+SUPPLEMENTAL = "make/m3/release/run_extra_core_contracts.sh"
 WORKFLOW = ".github/workflows/m3-first-release-admission.yml"
 COMPILED = re.compile(r"\bcore/test/([A-Za-z][A-Za-z0-9_]*Test)\.java\b")
 EXECUTED = re.compile(
@@ -40,8 +40,8 @@ def audit(root: Path) -> dict:
             source[rel] = path.read_text(encoding="utf-8")
     workflow = root / WORKFLOW
     contents = workflow.read_text(encoding="utf-8") if workflow.is_file() else ""
-    invoked = ("bash ./m3/build.sh" in contents
-               and "bash ./m3/release/run_extra_core_contracts.sh" in contents)
+    invoked = ("bash ./make/m3/build.sh" in contents
+               and "bash ./make/m3/release/run_extra_core_contracts.sh" in contents)
     discovered = {p.stem for p in directory.glob("*Test.java") if p.is_file()}
     compiled = set().union(*(set(COMPILED.findall(txt)) for txt in source.values()))
     executed = set().union(*(set(EXECUTED.findall(txt)) for txt in source.values()))

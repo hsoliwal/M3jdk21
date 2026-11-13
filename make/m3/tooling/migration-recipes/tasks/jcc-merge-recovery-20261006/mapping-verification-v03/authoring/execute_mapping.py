@@ -27,7 +27,7 @@ ROOT = AUDIT.parent
 TEMPLATE_PACKET_SHA256 = "9d24eaf99ff3cc614688f3f1193aaafc96be71a290a080d2835d4d62c267ddd5"
 BINDER_SHA256 = "7004dfc94aea795a56ea8b1c377bdb83f33fb67b6b5d259391ff5bc985d845ec"
 INSTALLER_TEST_SHA256 = "0fe81adbb88301c6e98ae0c16dd1239758c8efc790124a942da8959a7dc15175"
-POM_PATH = "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/pom.xml"
+POM_PATH = "make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/pom.xml"
 TEST_CLASS = "jdk.m3.rewrite.backport.JccMergeMappingRecoveryV03Test"
 CACHE_RECEIPTS = {
     "OFFLINE_DIAGNOSTIC_CACHE_V02.json": "034d226e546825818559e5517ce62bb00dd855f9ce59760fa607049388280da9",

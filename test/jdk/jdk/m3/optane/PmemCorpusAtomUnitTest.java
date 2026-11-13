@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.HexFormat;
 
 /** Dependency-free finite unit oracle, executable against real JNI or injected test stubs. */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/m3-pmem-sdk/src/corpus-test/java/com/synexia/m3/pmem/PmemCorpusAtomUnitTest.java blob a40b1e04c918; recipe m3/optane/recipe/pmem-source-image-20261106/relocate.py v3
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/m3-pmem-sdk/src/corpus-test/java/com/synexia/m3/pmem/PmemCorpusAtomUnitTest.java blob a40b1e04c918; recipe make/m3/optane/recipe/pmem-source-image-20261106/relocate.py v3
 public final class PmemCorpusAtomUnitTest {
     private PmemCorpusAtomUnitTest() { }
     static int passed;

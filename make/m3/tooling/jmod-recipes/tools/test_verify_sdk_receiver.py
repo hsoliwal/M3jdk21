@@ -20,7 +20,7 @@ class SdkReceiverTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
         self.names = (
-            "m3/tooling/jmod-recipes/proof.txt",
+            "make/m3/tooling/jmod-recipes/proof.txt",
             "m3/vendor/third_party-m3/proof.txt",
         )
         self.blobs = (b"recipe source\n", b"descriptor source\n")
@@ -69,7 +69,7 @@ class SdkReceiverTests(unittest.TestCase):
 
     def test_path_escape_and_foreign_origin_are_refused(self):
         text = self.ledger.read_text()
-        for bad in ("m3/tooling/jmod-recipes/../escape", "/m3/tooling/jmod-recipes/x"):
+        for bad in ("make/m3/tooling/jmod-recipes/../escape", "/m3/tooling/jmod-recipes/x"):
             with self.subTest(path=bad):
                 tampered = text.replace(self.names[0], bad)
                 with self.assertRaisesRegex(ValueError, "INVALID_IDENTITY"):
@@ -78,7 +78,7 @@ class SdkReceiverTests(unittest.TestCase):
             rows_from_text(text.replace(SOURCE_COMMIT, "0" * 40), 2)
 
     def test_exact_qualified_successors_and_drift_refusal(self):
-        repo = Path(__file__).resolve().parents[4]
+        repo = Path(__file__).resolve().parents[5]
         for name, (predecessor, successor, canonical) in SUCCESSORS.items():
             with self.subTest(path=name):
                 source = repo / name if (repo / name).is_file() else repo / canonical
@@ -112,12 +112,12 @@ class SdkReceiverTests(unittest.TestCase):
     def test_three_current_source_owners_are_not_relicensed_or_promoted(self):
         self.assertEqual(3, len(CURRENT_SOURCE_SUCCESSORS))
         self.assertEqual(
-            SUCCESSORS["m3/tooling/jmod-recipes/tools/jmod_pack.py"][1],
-            CURRENT_SOURCE_SUCCESSORS["m3/tooling/jmod-recipes/tools/jmod_pack.py"][0],
+            SUCCESSORS["make/m3/tooling/jmod-recipes/tools/jmod_pack.py"][1],
+            CURRENT_SOURCE_SUCCESSORS["make/m3/tooling/jmod-recipes/tools/jmod_pack.py"][0],
         )
         for name, (prior, current, commit, gate) in CURRENT_SOURCE_SUCCESSORS.items():
             with self.subTest(path=name):
-                self.assertTrue(name.startswith("m3/tooling/jmod-recipes/"))
+                self.assertTrue(name.startswith("make/m3/tooling/jmod-recipes/"))
                 for field in (prior, current, commit):
                     self.assertRegex(field, r"^[a-f0-9]{40}$")
                 self.assertNotEqual(prior, current)

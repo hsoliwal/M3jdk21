@@ -22,28 +22,28 @@ SCHEMA = 'm3.currentc0.historical-tasks/1'
 CONTEXT = 'currentc0-history-1'
 HEAD = 'c0a14387009aefc7d62bd3268055d526e04f9074'
 TREE = '491bbd80a51483d0710fc12c1bad3a037b385ba0'
-MANIFEST = 'm3/tooling/image-gates/current-c0.json'
+MANIFEST = 'make/m3/tooling/image-gates/current-c0.json'
 COUNTS = {'selected_outputs': 31, 'guards': 8, 'protected_current': 101,
           'task_inputs': 85, 'historical_records': 33, 'extension_inputs': 2}
 TASKS = {'ci-repair': (4, 'm3.ci-repair-custody/1'),
          'image-gates': (29, 'm3.image-gates-custody/1')}
 LEGACY = [
-    'm3/runtime-integration/tests/MIndexIntegration.java',
-    'm3/runtime-integration/tests/MIndexStringInvariant.java',
+    'make/m3/runtime-integration/tests/MIndexIntegration.java',
+    'make/m3/runtime-integration/tests/MIndexStringInvariant.java',
     'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-precompute/0002-MIndexString.java.txt',
     'src/java.base/share/classes/java/lang/MIndexString.java',
     'src/java.base/share/classes/java/lang/MIndexStringPool.java',
     'src/java.base/share/classes/jdk/internal/mindex/MIndexMappedStringBacking.java',
     'src/java.base/share/classes/jdk/internal/mindex/MIndexStringBacking.java',
     'test/jdk/java/lang/String/MIndexMappedStringBackingTest.java',
-    'm3/tooling/lane28/plan-current-875.json',
+    'make/m3/tooling/lane28/plan-current-875.json',
     'm3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28-current-875/counterpart.after.md',
     'm3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28-current-875/counterpart.before.md',
     'm3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28-current-875/legal.before.md',
     'm3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28-current-875/mapping.after.json',
     'm3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28-current-875/mapping.before.json',
     'm3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28-current-875/workflow.after.yml',
-    'm3/tooling/lane28/test_current_context.py',
+    'make/m3/tooling/lane28/test_current_context.py',
 ]
 
 
@@ -177,7 +177,7 @@ def load_context(root, relative=MANIFEST):
         if set(task) != {'id', 'plan_sha256'}:
             raise Refusal('unknown historical task field')
         name = task['id']
-        crate = 'm3/tooling/' + name
+        crate = 'make/m3/tooling/' + name
         plan_path = crate + '/plan.json'
         script = crate + '/verify-plan.py'
         if plan_path not in memberships['task_inputs'] or script not in memberships['task_inputs']:
@@ -292,7 +292,7 @@ def validate_custody(task, result):
 def qualify(root, relative=MANIFEST):
     admission = load_context(root, relative)
     generated = generated_outputs(admission)
-    output = checked(admission['root'], 'm3/tooling/image-gates/target/currentc0')
+    output = checked(admission['root'], 'make/m3/tooling/image-gates/target/currentc0')
     output.mkdir(parents=True, exist_ok=True)
     if not output.is_dir():
         raise Refusal('result location is not a directory')

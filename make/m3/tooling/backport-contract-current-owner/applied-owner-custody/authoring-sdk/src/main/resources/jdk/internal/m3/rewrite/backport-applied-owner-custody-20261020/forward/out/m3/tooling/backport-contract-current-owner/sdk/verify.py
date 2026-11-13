@@ -17,28 +17,28 @@ RESOURCE = "src/main/resources/jdk/internal/m3/rewrite/backport-contract-current
 SUITE = "jdk.internal.m3.rewrite.M3BackportContractCurrentOwnerRecipeTest"
 METHODS = ["allEightPartialStatesBothOrdersReachExactFixedPoint","allEightInverseStatesBothOrdersRecoverExactBefore","eachOwnedInputRefusesDriftMissingAndDuplicateOwnership"]
 SUITES = {SUITE: METHODS}
-CHANGE_PATHS = ["m3/backports/test_compatibility_policy.py","m3/backports/test_backport_execution_waves.py","m3/backports/BACKPORT_EXECUTION_WAVES.md"]
-KEEP_PATHS = ["m3/backports/compatibility_policy.py","m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv","m3/backports/JEP_CATALOGUE.tsv","m3/backports/RELEASE_JEP_AUTHORITY.tsv","m3/backports/backport_execution_waves.py"]
+CHANGE_PATHS = ["make/m3/backports/test_compatibility_policy.py","make/m3/backports/test_backport_execution_waves.py","make/m3/backports/BACKPORT_EXECUTION_WAVES.md"]
+KEEP_PATHS = ["make/m3/backports/compatibility_policy.py","make/m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv","make/m3/backports/JEP_CATALOGUE.tsv","make/m3/backports/RELEASE_JEP_AUTHORITY.tsv","make/m3/backports/backport_execution_waves.py"]
 TARGET_PATHS = CHANGE_PATHS + KEEP_PATHS
 OWNER_BEFORE_GIT = {
-    "m3/backports/test_compatibility_policy.py": "14f15fff4c3cfcf940c0de01eb50da27792c9fc9",
-    "m3/backports/compatibility_policy.py": "89673d65b2ad42fc694d809d5c6f4d0eab7adbd8",
-    "m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv": "db7579c96d7dfc9c0c70fb4b28773cf89bad76ca",
-    "m3/backports/JEP_CATALOGUE.tsv": "a0ef9aa95da17a19c3df8ab8aded355fad4f4598",
-    "m3/backports/RELEASE_JEP_AUTHORITY.tsv": "745a26772b8050c28dd93d05c724bfa9c2ad5e18",
-    "m3/backports/test_backport_execution_waves.py": "e10ae062eb1b86a6335e7d64fd520d2206a4b4c4",
-    "m3/backports/backport_execution_waves.py": "cc2a6ceb90b56d3b05d1307e705586c8d7cf1b40",
-    "m3/backports/BACKPORT_EXECUTION_WAVES.md": "a5421ae43c55cbcce025f95cf49838a112a507bc"
+    "make/m3/backports/test_compatibility_policy.py": "14f15fff4c3cfcf940c0de01eb50da27792c9fc9",
+    "make/m3/backports/compatibility_policy.py": "89673d65b2ad42fc694d809d5c6f4d0eab7adbd8",
+    "make/m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv": "db7579c96d7dfc9c0c70fb4b28773cf89bad76ca",
+    "make/m3/backports/JEP_CATALOGUE.tsv": "a0ef9aa95da17a19c3df8ab8aded355fad4f4598",
+    "make/m3/backports/RELEASE_JEP_AUTHORITY.tsv": "745a26772b8050c28dd93d05c724bfa9c2ad5e18",
+    "make/m3/backports/test_backport_execution_waves.py": "e10ae062eb1b86a6335e7d64fd520d2206a4b4c4",
+    "make/m3/backports/backport_execution_waves.py": "cc2a6ceb90b56d3b05d1307e705586c8d7cf1b40",
+    "make/m3/backports/BACKPORT_EXECUTION_WAVES.md": "a5421ae43c55cbcce025f95cf49838a112a507bc"
 }
 OWNER_AFTER_GIT = {
-    "m3/backports/test_compatibility_policy.py": "cd7b5a28ce3ec1f5a4475a145b40a3074b1a5c21",
-    "m3/backports/compatibility_policy.py": "89673d65b2ad42fc694d809d5c6f4d0eab7adbd8",
-    "m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv": "db7579c96d7dfc9c0c70fb4b28773cf89bad76ca",
-    "m3/backports/JEP_CATALOGUE.tsv": "a0ef9aa95da17a19c3df8ab8aded355fad4f4598",
-    "m3/backports/RELEASE_JEP_AUTHORITY.tsv": "745a26772b8050c28dd93d05c724bfa9c2ad5e18",
-    "m3/backports/test_backport_execution_waves.py": "7a3b961caa4302a2ebd1675360e29e6b1df9697b",
-    "m3/backports/backport_execution_waves.py": "cc2a6ceb90b56d3b05d1307e705586c8d7cf1b40",
-    "m3/backports/BACKPORT_EXECUTION_WAVES.md": "428d775ca476b187dceb26a012401b11b975bbbb"
+    "make/m3/backports/test_compatibility_policy.py": "cd7b5a28ce3ec1f5a4475a145b40a3074b1a5c21",
+    "make/m3/backports/compatibility_policy.py": "89673d65b2ad42fc694d809d5c6f4d0eab7adbd8",
+    "make/m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv": "db7579c96d7dfc9c0c70fb4b28773cf89bad76ca",
+    "make/m3/backports/JEP_CATALOGUE.tsv": "a0ef9aa95da17a19c3df8ab8aded355fad4f4598",
+    "make/m3/backports/RELEASE_JEP_AUTHORITY.tsv": "745a26772b8050c28dd93d05c724bfa9c2ad5e18",
+    "make/m3/backports/test_backport_execution_waves.py": "7a3b961caa4302a2ebd1675360e29e6b1df9697b",
+    "make/m3/backports/backport_execution_waves.py": "cc2a6ceb90b56d3b05d1307e705586c8d7cf1b40",
+    "make/m3/backports/BACKPORT_EXECUTION_WAVES.md": "428d775ca476b187dceb26a012401b11b975bbbb"
 }
 DIRECTIONS = ("forward", "inverse")
 RECEIVER_OUTPUTS: dict[str, str] = {}

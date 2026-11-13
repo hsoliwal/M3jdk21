@@ -20,7 +20,7 @@ This port owns the broader second-pass fabric:
 - `M3MeasuredRope` with `M3RopeArena`, `M3RopeMeasure`, `M3RopeMetric` and `M3RopeMeasures`: a persistent
   rope whose nodes carry pluggable monoid measures (hash, code points, UTF-8, lines, whitespace, DFA
   transfer) in primitive arena lanes, with range summaries and metric seek (Synexia crate
-  `m3-measured-rope`, receipt `m3/compatibility/m3-measured-rope-receipt.json`);
+  `m3-measured-rope`, receipt `make/m3/compatibility/m3-measured-rope-receipt.json`);
 - `M3TextSignals`: character, bigram and trigram histograms, safe edit lower bounds,
   SimHash and MinHash/Jaccard sketches;
 - `M3RegexShape`: fail-closed literal/prefix/suffix/exact regex recognition;
@@ -121,7 +121,7 @@ mvn -B -ntp -f m3/ports/precompute/pom.xml \
   -Dtest=M3RegexStringSignalsTest,M3RegexStringTrialImageTest test
 mvn -B -ntp -f m3/ports/precompute/pom.xml -Pnative \
   -Dtest=M3RegexStringTrialImageTest,M3NativeParityTest test
-mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
+mvn -B -ntp -f make/m3/tooling/migration-recipes/pom.xml \
   -Dtest=M3RegexStringPrecomputeSupersetRecipeTest test
 ```
 

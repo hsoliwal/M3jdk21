@@ -105,7 +105,7 @@
     "recipeFixedPointAndRefusal": "Synexia crate test M3CatalogueGapsV1RecipeTest 2/2, 6 targets (mvn log sha256 0f35299c7bb918cfac370eeef3ab1d627e85ca8785390ea93d9c5ef18fb982e8)",
     "gitDiffCheck": "PASS_WINDOWS",
     "jdkBuildJtregRuntime": "PENDING_LINUX",
-    "ci": "PENDING_QUEUE; m3/collections/verify_donation.py line 99 'Java source set changed; qualify a successor packet' refuses new m3/collections source until a successor installed-source manifest is qualified (not run in this leaf)"
+    "ci": "PENDING_QUEUE; make/m3/collections/verify_donation.py line 99 'Java source set changed; qualify a successor packet' refuses new m3/collections source until a successor installed-source manifest is qualified (not run in this leaf)"
   },
   "semanticDecisions": [
     "M3LongLfuCache: capacity fixed at construction (1..2^29); table sized once to >= 1.5 x capacity, never grows; tombstone sweep rebuilds same-size lanes keeping bucket ids and order",

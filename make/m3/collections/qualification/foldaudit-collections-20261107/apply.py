@@ -32,7 +32,7 @@ from pathlib import Path
 
 RECIPE, VERSION = "apply.py", "v1"
 HERE = Path(__file__).resolve().parent
-RECIPE_REL = "m3/collections/qualification/foldaudit-collections-20261107"
+RECIPE_REL = "make/m3/collections/qualification/foldaudit-collections-20261107"
 EDITS_COLUMNS = ("leaf", "kind", "file", "before_sha256", "after_sha256", "donor_blob", "origin", "dropped_by", "rule")
 CORE = "m3/collections/src/main/java/jdk/m3/collections/"
 CTEST = "m3/collections/src/test/java/jdk/m3/collections/"
@@ -40,7 +40,7 @@ CRES = "m3/collections/src/test/resources/jdk/m3/collections/counts/"
 NATIVE = "m3/collections/src/main/native/collections/"
 IMAIN = "m3/collections/interop/src/main/java/jdk/m3/collections/interop/"
 ITEST = "m3/collections/interop/src/test/java/jdk/m3/collections/interop/"
-RECRES = "m3/collections/counts/recipe/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-counted-receiver/"
+RECRES = "make/m3/collections/counts/recipe/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-counted-receiver/"
 # The donors spell the legacy package; it is assembled at run time so the JDK naming recipe leaves this file alone.
 LEG = "com" + ".m3.collections"
 JNI_LEG = "Java_" + "com_" + "m3_" + "collections_"
@@ -254,7 +254,7 @@ def postimage(root: Path, rule) -> tuple[bytes | None, bytes, str]:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--root", default=str(HERE.parents[3]))
+    parser.add_argument("--root", default=str(HERE.parents[4]))
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args()
     root = Path(args.root).resolve()

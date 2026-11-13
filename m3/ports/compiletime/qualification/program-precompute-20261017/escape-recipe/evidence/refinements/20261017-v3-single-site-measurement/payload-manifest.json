@@ -28,7 +28,7 @@
       "resource": "m3__ports__compiletime__src__test__java__com__m3__compiletime__M3EscapePreparedTest.java.txt"
     },
     {
-      "path": "m3/docs/name-mapping.d/m3-program-escape-precompute.json",
+      "path": "doc/m3/name-mapping.d/m3-program-escape-precompute.json",
       "before_sha256": "ABSENT",
       "after_sha256": "159a44eeb638aff38ba84add724dcb2a0d64e9be29411b1224ce81f499c90078",
       "resource": "m3__docs__name-mapping.d__m3-program-escape-precompute.json.txt"

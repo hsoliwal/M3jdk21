@@ -450,5 +450,5 @@ acceptance is supplied by this documentation increment.
 [cmake]: ../../m3/ports/precompute/src/main/native/CMakeLists.txt
 [overview]: ../../m3/ports/precompute/docs/M3_CPU_TOOLS_PRECOMPUTE_20261014.md
 [readme]: ../../m3/ports/precompute/README.md
-[policy]: ../../m3/docs/m3jdk21-porting-invariant.md
-[mapping]: ../../m3/docs/name-mapping.json
+[policy]: ../m3/m3jdk21-porting-invariant.md
+[mapping]: ../m3/name-mapping.json

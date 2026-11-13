@@ -9,7 +9,7 @@ import java.util.stream.LongStream;
 import jdk.internal.m3.collections.ForwardingLongSequence;
 
 /** Actual LongArrayList backend plus one-dispatch operation counters. */
-//FLLDCIM: RELOCATE - donor blob c5ed056f42fe at d5ad5090d87e; recipe m3/collections/qualification/census2-t2-20261106/relocate.py v6
+//FLLDCIM: RELOCATE - donor blob c5ed056f42fe at d5ad5090d87e; recipe make/m3/collections/qualification/census2-t2-20261106/relocate.py v6
 final class PolicyProbe extends ForwardingLongSequence {
     final LongArrayList data;
     int adds,addIfs,bulks,inserts,sets,removeAts,removes,filters,clears,trims;

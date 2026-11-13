@@ -43,7 +43,7 @@ remain stable.
 Use the precise native lane:
 
 ```bash
-python3 m3/backports/generate_recipe_crates.py \
+python3 make/m3/backports/generate_recipe_crates.py \
   --repo . \
   --release 27 \
   --paths-file target/selected-native-paths.txt \

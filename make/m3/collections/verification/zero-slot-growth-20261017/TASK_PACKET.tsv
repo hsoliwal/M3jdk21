@@ -1,5 +1,5 @@
 field	value
-source_doc	m3/docs/m3jdk21-porting-invariant.md
+source_doc	doc/m3/m3jdk21-porting-invariant.md
 run.mode	apply candidate after Synexia recipe/source seal
 run.profile	selected Java21 proof
 selected_base	970a34350ebdf6a3f1c5ff5acc8445d0f3515f55

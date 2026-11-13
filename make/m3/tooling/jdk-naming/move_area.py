@@ -6,7 +6,7 @@ Moves one m3/<area> Maven module whose single package is jdk.m3.<area> into java
   src/main/native/X.c                 -> src/java.base/share/native/libm3<area>/X.c   (opt-in library, unchanged)
   src/main/native/tests/X.c           -> test/jdk/jdk/internal/m3/<area>/native/X.c
   src/main/native/CMakeLists.txt      -> make/m3/<area>/CMakeLists.txt (sources re-pointed)
-  recipe/<name>/...                   -> m3/evidence/<area>/recipe/...   (one store, no dated directory)
+  recipe/<name>/...                   -> make/m3/evidence/<area>/recipe/...   (one store, no dated directory)
   NOTICE                              -> src/java.base/share/legal/m3<area>.md
   pom.xml, src/main/java/module-info.java -> removed (java.base owns the package; not exported)
 Text rules on moved Java and C: jdk.m3.<area> -> jdk.internal.m3.<area>; JNI jdk_m3_<area>_ -> jdk_internal_m3_<area>_.
@@ -35,7 +35,7 @@ def target(rel):
         return f"src/java.base/share/native/libm3{AREA}/" + rel.rsplit("/", 1)[1]
     if rel.startswith("recipe/"):
         parts = rel.split("/")
-        return f"m3/evidence/{AREA}/recipe/" + "/".join(parts[2:])
+        return f"make/m3/evidence/{AREA}/recipe/" + "/".join(parts[2:])
     if rel == "NOTICE":
         return f"src/java.base/share/legal/m3{AREA}.md"
     if rel in ("pom.xml", "src/main/java/module-info.java"):

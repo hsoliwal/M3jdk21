@@ -19,10 +19,10 @@ Executed using the exact files:
 
 ```sh
 javac --release 21 -Xlint:all -Werror -d build \
-  m3/compatibility/M3AtomicLeafReceiverVerifier.java
+  make/m3/compatibility/M3AtomicLeafReceiverVerifier.java
 java -cp build M3AtomicLeafReceiverVerifier --self-test \
-  m3/compatibility/m3-four-leaf-candidate-20261017.tsv \
-  m3/compatibility/m3-filtered-wrapper-candidates-20261017.tsv
+  make/m3/compatibility/m3-four-leaf-candidate-20261017.tsv \
+  make/m3/compatibility/m3-filtered-wrapper-candidates-20261017.tsv
 ```
 
 Observed output:

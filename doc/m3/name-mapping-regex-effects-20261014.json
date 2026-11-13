@@ -35,7 +35,7 @@
     "recipe_first": true
   },
   "schema": 1,
-  "canonical_map": "m3/docs/name-mapping.json",
+  "canonical_map": "doc/m3/name-mapping.json",
   "canonical_map_blob": "288f20575d3f9d106571990f21944e7f46b0cf71",
   "policy": "additive scoped supplement; does not replace the canonical map or advance receiving phases",
   "source_repository": "hsoliwal/com.synexia",

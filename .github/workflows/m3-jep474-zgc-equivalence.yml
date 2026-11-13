@@ -5,11 +5,11 @@ on:
     branches:
       - "m3/jep474-proof-refresh-20261013"
     paths:
-      - "m3/backports/recipes/jep-474-generational-zgc/**"
+      - "make/m3/backports/recipes/jep-474-generational-zgc/**"
       - ".github/workflows/m3-jep474-zgc-equivalence.yml"
   pull_request:
     paths:
-      - "m3/backports/recipes/jep-474-generational-zgc/**"
+      - "make/m3/backports/recipes/jep-474-generational-zgc/**"
       - ".github/workflows/m3-jep474-zgc-equivalence.yml"
   workflow_dispatch:
 
@@ -41,7 +41,7 @@ jobs:
           git fetch --no-tags origin master
           BASE_SHA="$(git merge-base HEAD origin/master)"
           test -n "$BASE_SHA"
-          git diff --exit-code "$BASE_SHA...HEAD" -- $(cat m3/backports/recipes/jep-474-generational-zgc/PATHS.txt)
+          git diff --exit-code "$BASE_SHA...HEAD" -- $(cat make/m3/backports/recipes/jep-474-generational-zgc/PATHS.txt)
 
 
       - name: Fetch exact JEP474 implementation commit
@@ -64,7 +64,7 @@ jobs:
           import subprocess
           from pathlib import Path
 
-          packet = Path("m3/backports/recipes/jep-474-generational-zgc")
+          packet = Path("make/m3/backports/recipes/jep-474-generational-zgc")
           expected = [
               line.strip()
               for line in (packet / "PATHS.txt").read_text(encoding="utf-8").splitlines()

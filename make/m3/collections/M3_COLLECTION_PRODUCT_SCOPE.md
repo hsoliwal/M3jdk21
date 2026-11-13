@@ -8,7 +8,7 @@ User requirement, 2026-10-12: all collection families and useful combinations be
 
 **Synexia owns reusable convergence and recipes. M3JDK owns the delivered runtime.**
 
-Use the existing porting/naming authority in `m3/docs/m3jdk21-porting-invariant.md`, the existing naming maps and collection owners. This supplements their collection scope; it does not replace them, create a second hierarchy, change licenses or advance the active STRING receiving phase.
+Use the existing porting/naming authority in `doc/m3/m3jdk21-porting-invariant.md`, the existing naming maps and collection owners. This supplements their collection scope; it does not replace them, create a second hierarchy, change licenses or advance the active STRING receiving phase.
 
 There are two runtime delivery surfaces:
 

@@ -8,28 +8,28 @@ on:
     paths:
       - "src/hotspot/share/gc/shared/gcConfig.cpp"
       - "test/hotspot/jtreg/gc/arguments/TestSelectDefaultGC.java"
-      - "m3/backports/recipes/jep-523-g1-default/**"
-      - "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep523BackportRecipe.java"
+      - "make/m3/backports/recipes/jep-523-g1-default/**"
+      - "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep523BackportRecipe.java"
       - "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk27-jep523-g1-default-java/**"
       - "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jdk27-jep523-g1-default-text/**"
-      - "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep523BackportRecipeTest.java"
+      - "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep523BackportRecipeTest.java"
       - "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/jdk27-jep523-g1-default/**"
       - ".github/workflows/m3-jep523-g1-default.yml"
-      - "m3/tooling/validators/WorkflowStructureCheck.java"
-      - "m3/compatibility/m3-workflow-structure-check-receipt-20261008.tsv"
+      - "make/m3/tooling/validators/WorkflowStructureCheck.java"
+      - "make/m3/compatibility/m3-workflow-structure-check-receipt-20261008.tsv"
   pull_request:
     paths:
       - "src/hotspot/share/gc/shared/gcConfig.cpp"
       - "test/hotspot/jtreg/gc/arguments/TestSelectDefaultGC.java"
-      - "m3/backports/recipes/jep-523-g1-default/**"
-      - "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep523BackportRecipe.java"
+      - "make/m3/backports/recipes/jep-523-g1-default/**"
+      - "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep523BackportRecipe.java"
       - "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk27-jep523-g1-default-java/**"
       - "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jdk27-jep523-g1-default-text/**"
-      - "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep523BackportRecipeTest.java"
+      - "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep523BackportRecipeTest.java"
       - "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/jdk27-jep523-g1-default/**"
       - ".github/workflows/m3-jep523-g1-default.yml"
-      - "m3/tooling/validators/WorkflowStructureCheck.java"
-      - "m3/compatibility/m3-workflow-structure-check-receipt-20261008.tsv"
+      - "make/m3/tooling/validators/WorkflowStructureCheck.java"
+      - "make/m3/compatibility/m3-workflow-structure-check-receipt-20261008.tsv"
   workflow_dispatch:
 
 permissions:
@@ -57,10 +57,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git hash-object m3/tooling/validators/WorkflowStructureCheck.java)" = \
+          test "$(git hash-object make/m3/tooling/validators/WorkflowStructureCheck.java)" = \
             "f61be81f5a15bea78f1c5ae7d5555844c9cd2ea7"
-          java m3/tooling/validators/WorkflowStructureCheck.java --self-test
-          java m3/tooling/validators/WorkflowStructureCheck.java \
+          java make/m3/tooling/validators/WorkflowStructureCheck.java --self-test
+          java make/m3/tooling/validators/WorkflowStructureCheck.java \
             .github/workflows/m3-jep523-g1-default.yml
 
       - name: Diff hygiene

@@ -69,7 +69,7 @@ equivalence**. Actual compiler, JUnit and runtime gates remain separate.
 To run when Maven and required dependencies are installed:
 
 ```sh
-mvn -f m3/collections/recipe/keyed-ordered-ring-20261019/pom.xml test
+mvn -f make/m3/collections/recipe/keyed-ordered-ring-20261019/pom.xml test
 mvn -f m3/collections/pom.xml -Dtest=M3KeyedOrderRingTest,M3ObjectStreamContractTest test
 ```
 

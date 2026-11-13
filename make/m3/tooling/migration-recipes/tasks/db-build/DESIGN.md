@@ -23,7 +23,7 @@ charset and BOM flag before invalidating the stale checksum.
 
 DbBuild uses the existing M3HashPinnedJavaSnapshotRecipe, with exact original
 and corrected Java LST templates for both production and test sources. Execution
-root is m3/tooling/migration-recipes.
+root is make/m3/tooling/migration-recipes.
 The existing DbRecipeTest gains repair/replay and direct JDK-recipe behavior
 tests using a small test-only pinned fixture. All six prior tests remain.
 

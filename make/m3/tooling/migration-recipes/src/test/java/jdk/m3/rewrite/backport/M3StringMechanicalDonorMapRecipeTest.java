@@ -38,10 +38,10 @@ final class M3StringMechanicalDonorMapRecipeTest {
 
     private static List<SourceFile> after() {
         return List.of(
-                text("m3/docs/string-precompute-completeness.tsv", "00-completeness.tsv.txt"),
-                text("m3/docs/m3-string-precompute-port-map.tsv", "01-port-map.tsv.txt"),
-                text("m3/docs/m3-mindex-precompute-inventory.tsv", "02-inventory.tsv.txt"),
-                text("m3/runtime-integration/check-m3string-invariants.py", "03-invariants.py.txt"));
+                text("doc/m3/string-precompute-completeness.tsv", "00-completeness.tsv.txt"),
+                text("doc/m3/m3-string-precompute-port-map.tsv", "01-port-map.tsv.txt"),
+                text("doc/m3/m3-mindex-precompute-inventory.tsv", "02-inventory.tsv.txt"),
+                text("make/m3/runtime-integration/check-m3string-invariants.py", "03-invariants.py.txt"));
     }
 
     private static PlainText text(String path, String resource) {

@@ -96,7 +96,7 @@
     "performance": "NOT_MEASURED"
   },
   "name_mapping": {
-    "path": "m3/docs/name-mapping.json",
+    "path": "doc/m3/name-mapping.json",
     "git_blob": "c46790d3c7c89581b0e19e4f58d6532c042744ac",
     "capability_id": null,
     "disposition": "DEFERRED_TARGET_ADMISSION",

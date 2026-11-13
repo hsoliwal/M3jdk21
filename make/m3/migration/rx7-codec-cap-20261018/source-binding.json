@@ -4,7 +4,7 @@
   "sourceCommit": "ea431c714633f93927b9366967e4a132b6a575ab",
   "sourcePullRequest": "https://github.com/hsoliwal/com.synexia/pull/12338",
   "canonicalPath": "m3-openrewrite-recipes/tasks/string-concat-typed-compile-20261018/sdk",
-  "receiverCorePath": "m3/migration/rx7-codec-cap-20261018/sdk",
+  "receiverCorePath": "make/m3/migration/rx7-codec-cap-20261018/sdk",
   "moduleGitTree": "b0adad8e6699eb14794923681bc14048b32f821b",
   "pinsSha256": "286ea02799c2eba85175ee167d7def18a7b97322b144e930e985c7bfacc522c5",
   "launcherSha256": "f75b94ddf053d3b060af8fd839559baf37a7271d7ec960242fb643cd5db2ab81",

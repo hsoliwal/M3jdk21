@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # M3JDK 21 focused Java21 / JNI C17 product-owner qualification, not a full JDK release.
 set -euo pipefail
-root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
+root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../../.." && pwd)"
 work="$(mktemp -d)"
 trap 'rm -rf "$work"' EXIT
 
@@ -10,7 +10,7 @@ from hashlib import sha256
 from pathlib import Path
 import sys
 root = Path(sys.argv[1])
-crate = root / "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-index-pathmask-classification-20261021"
+crate = root / "make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-index-pathmask-classification-20261021"
 expected_paths = [
   "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexPathMasks.java",
   "test/jdk/jdk/m3/collections/M3IndexPathMaskClassificationProof.java",

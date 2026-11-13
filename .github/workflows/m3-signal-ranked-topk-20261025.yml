@@ -7,7 +7,7 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalExactIntegerDistance.java'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalBooleanQuery.java'
       - 'test/jdk/jdk/m3/collections/M3SignalRankedQuery*.java'
-      - 'm3/collections/qualification/signal-ranked-topk-20261025/**'
+      - 'make/m3/collections/qualification/signal-ranked-topk-20261025/**'
       - '.github/workflows/m3-signal-ranked-topk-20261025.yml'
   workflow_dispatch:
 permissions:

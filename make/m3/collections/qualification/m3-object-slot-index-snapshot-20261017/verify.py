@@ -6,9 +6,9 @@ import hashlib
 import json
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[4]
+ROOT = Path(__file__).resolve().parents[5]
 HERE = Path(__file__).resolve().parent
-MIRROR = ROOT / "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017"
+MIRROR = ROOT / "make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017"
 
 TARGETS = {
     "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectIndexSnapshot.java":
@@ -77,11 +77,11 @@ def main() -> None:
             raise ValueError("installed bytes differ from canonical mirror: " + target)
 
     local_catalogue = HERE / "CATEGORY_REVIEW.tsv"
-    shared_catalogue = ROOT / "m3/collections/algorithm-catalog/object-slot-index-snapshot-20261017.tsv"
+    shared_catalogue = ROOT / "make/m3/collections/algorithm-catalog/object-slot-index-snapshot-20261017.tsv"
     if local_catalogue.read_bytes() != shared_catalogue.read_bytes():
         raise ValueError("shared algorithm catalogue drift")
 
-    mapping = json.loads((ROOT / "m3/docs/name-mapping.json").read_text(encoding="utf-8"))
+    mapping = json.loads((ROOT / "doc/m3/name-mapping.json").read_text(encoding="utf-8"))
     plan = mapping["porting_invariant"]["receiving_sequence"]
     if plan["active_phase"] != "STRING":
         raise ValueError("String is no longer the active predecessor")

@@ -5,7 +5,7 @@
   "product": "M3JDK21",
   "module": "jdk.m3fs",
   "authoritative_mapping": {
-    "path": "m3/docs/name-mapping.json",
+    "path": "doc/m3/name-mapping.json",
     "record_collection": "migration.records",
     "capability_id": "m3.fs.provider-defaults"
   },

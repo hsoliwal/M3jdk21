@@ -5,7 +5,7 @@ package jdk.m3.collections;
 import java.util.Arrays;
 
 /** Independent reduced-state Java 21 proof of two-lane idle allocation; NOT production store. */
-//FLLDCIM: RELOCATE - donor blob 4d7d82a826c2 at ff83fd2a685b; recipe m3/collections/qualification/doop-facade-fixes-20261107/apply.py v1
+//FLLDCIM: RELOCATE - donor blob 4d7d82a826c2 at ff83fd2a685b; recipe make/m3/collections/qualification/doop-facade-fixes-20261107/apply.py v1
 public final class IdleArrayGrowthOracle {
     private IdleArrayGrowthOracle() { }
 

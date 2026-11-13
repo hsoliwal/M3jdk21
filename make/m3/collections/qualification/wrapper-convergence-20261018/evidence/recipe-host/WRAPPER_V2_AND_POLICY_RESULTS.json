@@ -209,7 +209,7 @@
       ],
       "postimages": [
         {
-          "path": "m3/docs/m3jdk21-porting-invariant.md",
+          "path": "doc/m3/m3jdk21-porting-invariant.md",
           "preimage_sha256": "604ef82225fdb9e6ecf00e14f7630fb0956b85ec89e5c9241537733d4054f39a",
           "postimage_sha256": "95a5d111f0d9b2467bcc84828adc5b0efcfd1091e35a1b5c1bf1c484a2066b03"
         }
@@ -219,22 +219,22 @@
         {
           "case": "duplicate-source",
           "diagnostic_sha256": "862b3e50a9ba265077ea93103fdd7c312308dc324f78183cf4fe6e78f18a2126",
-          "diagnostic": "java.lang.IllegalStateException: duplicate target: m3/docs/m3jdk21-porting-invariant.md\\n"
+          "diagnostic": "java.lang.IllegalStateException: duplicate target: doc/m3/m3jdk21-porting-invariant.md\\n"
         },
         {
           "case": "missing-source",
           "diagnostic_sha256": "5d68ea13e9d2de2aac05bb4ba03897f37fc05411629da53587a36546af9fa18a",
-          "diagnostic": "java.lang.IllegalStateException: required source missing: m3/docs/m3jdk21-porting-invariant.md\\n"
+          "diagnostic": "java.lang.IllegalStateException: required source missing: doc/m3/m3jdk21-porting-invariant.md\\n"
         },
         {
           "case": "post-scan-drift",
           "diagnostic_sha256": "d4144079cfa737e87e6011f2ae220852cf42f8d21a1db6328a9f3460fbf7b13f",
-          "diagnostic": "org.openrewrite.internal.RecipeRunException: java.lang.IllegalStateException: target changed after scan: m3/docs/m3jdk21-porting-invariant.md\\njava.lang.IllegalStateException: target changed after scan: m3/docs/m3jdk21-porting-invariant.md\\n"
+          "diagnostic": "org.openrewrite.internal.RecipeRunException: java.lang.IllegalStateException: target changed after scan: doc/m3/m3jdk21-porting-invariant.md\\njava.lang.IllegalStateException: target changed after scan: doc/m3/m3jdk21-porting-invariant.md\\n"
         },
         {
           "case": "source-drift",
           "diagnostic_sha256": "d00d58379d7d3013cea673b726f581291784d901593f62dbc40dbe0d51652b11",
-          "diagnostic": "java.lang.IllegalStateException: source drift: m3/docs/m3jdk21-porting-invariant.md\\n"
+          "diagnostic": "java.lang.IllegalStateException: source drift: doc/m3/m3jdk21-porting-invariant.md\\n"
         }
       ],
       "candidate_files": {

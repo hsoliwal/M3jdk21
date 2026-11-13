@@ -13,8 +13,8 @@ E3 = BASE / 'work/m3jdk21-current/successor-e03'
 ROOT = E3 / 'overlay'
 PROOF = E3 / 'verification'
 OUT = BASE / 'work/publication-current/m3-final-gate-review'
-CRATE = ROOT / 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005'
-BUILD = ROOT / 'm3/tooling/migration-recipes/verification/jcc-source-final-handoff/target'
+CRATE = ROOT / 'make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005'
+BUILD = ROOT / 'make/m3/tooling/migration-recipes/verification/jcc-source-final-handoff/target'
 INPUTS = {}
 
 
@@ -128,10 +128,10 @@ require(counts == {'tests': 11, 'failures': 0, 'errors': 0, 'skipped': 0}, 'JUni
 cases = x.findall('testcase')
 require(len(cases) == 11 and all(not any(t.find(k) is not None for k in ('failure', 'error', 'skipped')) for t in cases),
         'JUnit testcase details differ')
-java_source = ROOT / 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccSourceFinalHandoffTest.java'
+java_source = ROOT / 'make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccSourceFinalHandoffTest.java'
 java_methods = re.findall(r'@Test\s+void\s+(\w+)\(', read(java_source).decode())
 require(set(java_methods) == {c.get('name') for c in cases} and len(java_methods) == 11, 'Executed Java test scope differs')
-for category, expected in [('compile', ROOT / 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java'),
+for category, expected in [('compile', ROOT / 'make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java'),
                             ('testCompile', java_source)]:
     filename = 'default-compile' if category == 'compile' else 'default-testCompile'
     input_list = BUILD / ('maven-status/maven-compiler-plugin/' + category + '/' + filename + '/inputFiles.lst')
@@ -144,17 +144,17 @@ maven_output = read(PROOF / '02-actual-text-recipe-maven.stdout.log').decode()
 require('[INFO] BUILD SUCCESS' in maven_output and 'BUILD FAILURE' not in maven_output, 'Maven did not pass')
 maven_command = receipt['runs'][1]['command']
 require('-o' in maven_command and maven_command[-2:] == ['clean', 'verify'], 'Wrong Maven gate')
-read(ROOT / 'm3/tooling/migration-recipes/verification/jcc-source-final-handoff/pom.xml')
+read(ROOT / 'make/m3/tooling/migration-recipes/verification/jcc-source-final-handoff/pom.xml')
 resource_copies = []
 for path in sorted((BUILD / 'classes').rglob('*')):
     if path.is_file() and path.suffix != '.class':
         rel = path.relative_to(BUILD / 'classes')
-        source = ROOT / 'm3/tooling/migration-recipes/src/main/resources' / rel
+        source = ROOT / 'make/m3/tooling/migration-recipes/src/main/resources' / rel
         require(read(source) == read(path), 'Test-loaded resource differs from sealed input')
         resource_copies.append(str(rel))
 require(len(resource_copies) == 11, 'Unexpected test-loaded resource count')
 
-python_path = ROOT / 'm3/migration/test/test_jcc_source_final_handoff_packet.py'
+python_path = ROOT / 'make/m3/migration/test/test_jcc_source_final_handoff_packet.py'
 python_source = read(python_path).decode()
 python_tree = ast.parse(python_source)
 python_methods = [n.name for n in ast.walk(python_tree) if isinstance(n, ast.FunctionDef) and n.name.startswith('test_')]
@@ -165,18 +165,18 @@ require(set(logged_methods) == set(python_methods) and len(logged_methods) == le
 require(re.search(r'Ran 6 tests in [0-9.]+s\s+OK\s*$', python_output), 'Python summary not successful')
 require(receipt['python_tests'] == 6 and receipt['python_refusal_checks'] == 132, 'Receipt Python count differs')
 
-mapping = load(ROOT / 'm3/docs/name-mapping.json')
+mapping = load(ROOT / 'doc/m3/name-mapping.json')
 records = mapping['migration']['records']
 jcc_records = [r for r in records if r['id'] in ('m3.jcc-recipe-laboratory', 'm3.jcc-java-jni-regression')]
 require(len(records) == 46 and len(jcc_records) == 2 and all(r['status'] == 'blocked' and r['tests'] == [] for r in jcc_records),
         'Blocked capability status was changed')
-binding = load(ROOT / 'm3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json')
+binding = load(ROOT / 'make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json')
 require(set(binding['acceptance']) == {'source_export_admitted', 'destination_materialized', 'destination_gates_passed', 'remote_read_back_delivered'}
         and all(type(v) is bool and not v for v in binding['acceptance'].values()), 'Capability acceptance changed')
 require(not receipt['source_export_admitted'] and not receipt['receiver_behavior_rerun'] and not receipt['jdk_acceptance'],
         'Scope receipt incorrectly promotes acceptance')
 read(E3 / 'run_verification.py')
-validator = read(ROOT / 'm3/migration/migration.py').decode()
+validator = read(ROOT / 'make/m3/migration/migration.py').decode()
 require("implemented = record['status'] in {'implemented-tested', 'implemented-unverified'}" in validator,
         'Validator implementation condition changed')
 

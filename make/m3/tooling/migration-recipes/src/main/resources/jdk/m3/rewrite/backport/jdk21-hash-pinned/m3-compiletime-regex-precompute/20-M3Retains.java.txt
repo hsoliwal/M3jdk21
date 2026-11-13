@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 /**
  * The annotated method (or parameter) stores its transient argument beyond the call, so passing a transient handle to it makes the obtaining site RETAINS.
  *
- * <p>CLASS retention: visible to the build-time ASM pass (m3/docs/m3-item-residency-metadata.md),
+ * <p>CLASS retention: visible to the build-time ASM pass (doc/m3/m3-item-residency-metadata.md),
  * absent at run time.</p>
  */
 @Documented

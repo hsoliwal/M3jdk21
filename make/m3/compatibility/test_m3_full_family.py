@@ -93,7 +93,7 @@ class M3FullFamilyPolicyTest(unittest.TestCase):
         self.assertFalse(plan["family_completion"])
 
     def test_receiving_plan_refuses_skips_claims_rights_and_contract_loss(self) -> None:
-        baseline = json.loads((family.ROOT / "m3/docs/name-mapping.json").read_text())
+        baseline = json.loads((family.ROOT / "doc/m3/name-mapping.json").read_text())
         cases = [
             ("active_phase", "ARRAYS"), ("order", list(reversed(family.RECEIVING_ORDER))),
             ("public_jdk_names_unchanged", False), ("canonical_payload_owner_unchanged", False),
@@ -163,7 +163,7 @@ class M3FullFamilyPolicyTest(unittest.TestCase):
             "synexia-openrewrite-recipes/verification/synexia-m3jdk-full-family-20261007/CATALOGUE_INDEX.json",
             pin["catalogue_path"],
         )
-        baseline = json.loads((family.ROOT / "m3/docs/name-mapping.json").read_text())
+        baseline = json.loads((family.ROOT / "doc/m3/name-mapping.json").read_text())
         self.assertEqual("M3-JDK-PORT-1", baseline["porting_invariant"]["id"])
         self.assertIn("synexia_recipe_revision_and_manifest", family.validate_receiving_sequence()["atom_evidence"])
         candidate = copy.deepcopy(baseline)
@@ -262,7 +262,7 @@ class M3FullFamilyPolicyTest(unittest.TestCase):
                             family.validate_family_index()
 
     def test_receiving_plan_requires_phase_shape_and_exact_baseline_boundaries(self) -> None:
-        baseline = json.loads((family.ROOT / "m3/docs/name-mapping.json").read_text())
+        baseline = json.loads((family.ROOT / "doc/m3/name-mapping.json").read_text())
         cases = (
             ("phases", {}, "missing or extra receiving phase"),
             ("target_baseline", "main", "missing exact target baseline"),

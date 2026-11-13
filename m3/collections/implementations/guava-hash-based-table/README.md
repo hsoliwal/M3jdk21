@@ -13,6 +13,6 @@ Planned lanes: `Object[] rowKeys`, `Object[] columnKeys`, `int[] rowIndex`, `int
 
 Reuse when filling: core M3IndexedTable; viewport int-pair-keyed map.
 
-The row in `m3/collections/qualification/five-provider-inventory-20261018/INVENTORY.tsv` is `SCAFFOLD`;
+The row in `make/m3/collections/qualification/five-provider-inventory-20261018/INVENTORY.tsv` is `SCAFFOLD`;
 the owning PR flips it to `DONE #PR`. Regenerate with the generator in that directory rather than editing
 this module by hand until the owning PR replaces the bodies.

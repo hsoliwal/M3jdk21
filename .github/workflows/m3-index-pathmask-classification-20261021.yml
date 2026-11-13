@@ -5,10 +5,10 @@ on:
     paths:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexPathMasks.java'
       - 'test/jdk/jdk/m3/collections/M3IndexPathMaskClassificationProof.java'
-      - 'm3/collections/qualification/pathmask-classification-20261021/**'
-      - 'm3/collections/algorithm-catalog/pathmask-terminal-classification-20261021.tsv'
+      - 'make/m3/collections/qualification/pathmask-classification-20261021/**'
+      - 'make/m3/collections/algorithm-catalog/pathmask-terminal-classification-20261021.tsv'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-index-pathmask-classification-20261021/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-index-pathmask-classification-20261021.yml'
+      - 'make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-index-pathmask-classification-20261021.yml'
       - '.github/workflows/m3-index-pathmask-classification-20261021.yml'
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -25,4 +25,4 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Source seals, Java 21 differentials and checked C17 JNI
-        run: bash m3/collections/qualification/pathmask-classification-20261021/verify.sh
+        run: bash make/m3/collections/qualification/pathmask-classification-20261021/verify.sh

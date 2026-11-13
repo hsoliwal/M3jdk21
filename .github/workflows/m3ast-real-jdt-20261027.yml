@@ -3,8 +3,8 @@ name: M3AST real Eclipse JDT source identity
 on:
   pull_request:
     paths:
-      - 'm3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIngress.java'
-      - 'm3/tooling/module-packs/parser/integration/jdt/**'
+      - 'make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIngress.java'
+      - 'make/m3/tooling/module-packs/parser/integration/jdt/**'
       - '.github/workflows/m3ast-real-jdt-20261027.yml'
   workflow_dispatch:
 permissions:
@@ -27,7 +27,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f m3/tooling/module-packs/parser/integration/jdt/pom.xml \
+          mvn -B -ntp -f make/m3/tooling/module-packs/parser/integration/jdt/pom.xml \
             org.apache.maven.plugins:maven-dependency-plugin:3.6.1:build-classpath \
             -Dmdep.outputFile="$RUNNER_TEMP/m3-jdt-cp.txt"
           test -s "$RUNNER_TEMP/m3-jdt-cp.txt"
@@ -35,7 +35,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          owner=m3/tooling/module-packs/parser
+          owner=make/m3/tooling/module-packs/parser
           classes="$RUNNER_TEMP/m3-jdt-real-classes"
           mkdir -p "$classes"
           javac --release 21 -Xlint:all -Werror -d "$classes" \

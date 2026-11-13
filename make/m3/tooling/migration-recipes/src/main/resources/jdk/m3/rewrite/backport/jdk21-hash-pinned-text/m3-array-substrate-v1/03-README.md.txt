@@ -67,7 +67,7 @@ native proof itself must execute before claiming JNI parity.
 ## Recipe custody
 
 Canonical materialization is the target-specific declarative recipe
-`com.m3.M3ArraySubstrate` in `m3/tooling/migration-recipes`. It composes the
+`com.m3.M3ArraySubstrate` in `make/m3/tooling/migration-recipes`. It composes the
 canonical Synexia `M3HashPinnedJavaSnapshotRecipe` with M3JDK21's existing
 text/native snapshot owner using crate `m3-array-substrate-v1`.
 

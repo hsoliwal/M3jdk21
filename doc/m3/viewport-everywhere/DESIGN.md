@@ -83,7 +83,7 @@ typed to toolkit classes: `GridRowTree` (601, `AbstractList<GridItem>`), `GridSe
 
 M3JDK Swing (hsoliwal/M3jdk21 `m3/swing-viewport-20261017`, PR #1001): `sun.swing.tree.M3VariableHeightLayoutCache`
 and `M3FixedHeightLayoutCache` (GPLv2+CPE, `src/java.desktop`); seams documented in that branch's
-`m3/docs/swing-viewport/DESIGN.md` section 7a. Already on master: `m3/ports/swing-viewport` (Apache-2.0 Swing/AWT
+`doc/m3/swing-viewport/DESIGN.md` section 7a. Already on master: `m3/ports/swing-viewport` (Apache-2.0 Swing/AWT
 packed models, `M3DesktopViewportAdapters`, the item-residency engine under the `EXPLICIT_RELICENSE_PORT` record) and
 `m3/ports/jfx-viewport`.
 
@@ -113,7 +113,7 @@ in its five-provider INVENTORY as CLAIMED by viewport-everywhere; they do not du
 Existing owners reused instead of new types: `M3LongLongHashMap` (wave 2), `M3IntIntHashMap`, `M3IntLongHashMap`,
 `M3BitLane28` (block-lazy flags; M3BitLanes differs: dense row-indexed lanes with insert/remove shifting),
 `M3SpanIndex` (Grid row spans, already extracted). Each new owner gets a `JDK_FAMILY_MAP.tsv` row (`VIEWPORT_EXTRACTED_V1`)
-and a `name-mapping.json` fragment (`m3/collections/recipe/viewport-everywhere-name-mapping.json`).
+and a `name-mapping.json` fragment (`make/m3/collections/recipe/viewport-everywhere-name-mapping.json`).
 
 ### 3b. UI-specific logic goes to `m3/viewport-core` (package `com.m3.viewport`)
 
@@ -136,7 +136,7 @@ The SWT fork keeps its classes. Later, an SWT recipe can switch SWT to the M3 ow
 
 ### 3c. Recipe route (rule 3, rule 14, rule 20)
 
-`m3/docs/viewport-everywhere/recipe/` holds:
+`doc/m3/viewport-everywhere/recipe/` holds:
 - `META-INF/rewrite/m3-viewport-everywhere.yml`: `org.openrewrite.java.ChangePackage` and `ChangeType` per row of 3a/3b,
   plus two local recipes;
 - `M3ApacheHeader` (replaces the leading licence comment with the m3/** Apache-2.0 header and a provenance line naming
@@ -226,7 +226,7 @@ only / donor pattern, **-** no such widget.
 
 - **Phase 1 (this branch):** this page and `FOSS_REUSE_DECISION.tsv` first; then wave 1 of 3a and 3b by recipe; gate:
   `-Xlint:all,-module -Werror` compile of both modules, ported tests pass, JaCoCo line and branch >= 99% (report in
-  `m3/viewport-core/coverage/` and `m3/collections/qualification/viewport-everywhere-20261018/`).
+  `m3/viewport-core/coverage/` and `make/m3/collections/qualification/viewport-everywhere-20261018/`).
 - **Phase 2:** adapters, smallest first, each a draft PR with a recorded stock-vs-viewport differential:
   1. AWT `java.awt.List` (peer-safe model, `--patch-module` proof);
   2. SwingX JXList/JXTree/JXTable as M3 Swing adapters over the core, reusing the #1001 caches (that branch is not
@@ -308,7 +308,7 @@ entry objects). They compose, so a view can wrap another view:
 | M3SparseExtents | scroll geometry (done) | Fenwick |
 
 The collections-superset INVENTORY lists all of these as first-party viewport types CLAIMED by viewport-everywhere
-(`m3/collections/recipe/viewport-everywhere-20261018/CLAIMED.tsv`).
+(`make/m3/collections/recipe/viewport-everywhere-20261018/CLAIMED.tsv`).
 
 **Consumers re-pointed:**
 - SWT Tree/Table/List: an M3WindowView or M3TreeWindow plus an SWT `M3RowHost`.

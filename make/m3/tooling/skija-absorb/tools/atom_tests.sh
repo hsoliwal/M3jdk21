@@ -22,7 +22,7 @@ HEARTBEAT_SECONDS=180
 PINNED=(-XX:+UnlockExperimentalVMOptions -XX:hashCode=2)
 PERF_FLAGS=(-Xmx512m -XX:-TieredCompilation -Xbatch -XX:+UnlockExperimentalVMOptions
             -XX:CompileCommand=blackhole,M3GraphicsAtomsPerfSupport::consume)
-TOOLS=m3/tooling/skija-absorb/tools
+TOOLS=make/m3/tooling/skija-absorb/tools
 TESTS=test/jdk/jdk/m3/graphics
 
 if [ "$#" -ne 3 ]; then

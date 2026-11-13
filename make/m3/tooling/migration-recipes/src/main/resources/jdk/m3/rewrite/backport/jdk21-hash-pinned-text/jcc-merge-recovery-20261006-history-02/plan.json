@@ -7,7 +7,7 @@
   "scope": "Exact restoration of previously published JCC recipe/test/evidence files. Historical execution claims retain their original epochs. No runtime acceptance.",
   "outputs": [
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/PUBLICATION_CUSTODY.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/PUBLICATION_CUSTODY.json",
       "before": null,
       "after": {
         "resource": "history-0000.txt",
@@ -15,7 +15,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-00.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-00.json",
       "before": null,
       "after": {
         "resource": "history-0001.txt",
@@ -23,7 +23,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-01.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-01.json",
       "before": null,
       "after": {
         "resource": "history-0002.txt",
@@ -31,7 +31,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-02.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-02.json",
       "before": null,
       "after": {
         "resource": "history-0003.txt",
@@ -39,7 +39,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-03.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-03.json",
       "before": null,
       "after": {
         "resource": "history-0004.txt",
@@ -47,7 +47,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-04.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-04.json",
       "before": null,
       "after": {
         "resource": "history-0005.txt",
@@ -55,7 +55,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-05.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-05.json",
       "before": null,
       "after": {
         "resource": "history-0006.txt",
@@ -63,7 +63,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-06.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-06.json",
       "before": null,
       "after": {
         "resource": "history-0007.txt",
@@ -71,7 +71,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-07.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-07.json",
       "before": null,
       "after": {
         "resource": "history-0008.txt",
@@ -79,7 +79,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-08.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-08.json",
       "before": null,
       "after": {
         "resource": "history-0009.txt",
@@ -87,7 +87,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-09.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-09.json",
       "before": null,
       "after": {
         "resource": "history-0010.txt",
@@ -95,7 +95,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-10.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-10.json",
       "before": null,
       "after": {
         "resource": "history-0011.txt",
@@ -103,7 +103,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-11.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-11.json",
       "before": null,
       "after": {
         "resource": "history-0012.txt",
@@ -111,7 +111,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-12.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-12.json",
       "before": null,
       "after": {
         "resource": "history-0013.txt",
@@ -119,7 +119,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-13.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-13.json",
       "before": null,
       "after": {
         "resource": "history-0014.txt",
@@ -127,7 +127,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-14.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-14.json",
       "before": null,
       "after": {
         "resource": "history-0015.txt",
@@ -135,7 +135,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-15.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-15.json",
       "before": null,
       "after": {
         "resource": "history-0016.txt",
@@ -143,7 +143,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-16.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-16.json",
       "before": null,
       "after": {
         "resource": "history-0017.txt",
@@ -151,7 +151,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-17.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-17.json",
       "before": null,
       "after": {
         "resource": "history-0018.txt",
@@ -159,7 +159,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-18.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-18.json",
       "before": null,
       "after": {
         "resource": "history-0019.txt",
@@ -167,7 +167,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-19.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-19.json",
       "before": null,
       "after": {
         "resource": "history-0020.txt",
@@ -175,7 +175,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-20.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-20.json",
       "before": null,
       "after": {
         "resource": "history-0021.txt",
@@ -183,7 +183,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-21.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-21.json",
       "before": null,
       "after": {
         "resource": "history-0022.txt",
@@ -191,7 +191,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-22.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-22.json",
       "before": null,
       "after": {
         "resource": "history-0023.txt",
@@ -199,7 +199,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-publication-calls/commit.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-publication-calls/commit.json",
       "before": null,
       "after": {
         "resource": "history-0024.txt",
@@ -207,7 +207,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-publication-calls/pull_request.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-publication-calls/pull_request.json",
       "before": null,
       "after": {
         "resource": "history-0025.txt",
@@ -215,7 +215,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-publication-calls/ref.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-publication-calls/ref.json",
       "before": null,
       "after": {
         "resource": "history-0026.txt",
@@ -223,7 +223,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/transport/INDEX.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/transport/INDEX.json",
       "before": null,
       "after": {
         "resource": "history-0027.txt",
@@ -231,7 +231,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/prepare_publication.py",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/prepare_publication.py",
       "before": null,
       "after": {
         "resource": "history-0028.txt",
@@ -239,7 +239,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/CUSTODY_INPUT.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/CUSTODY_INPUT.json",
       "before": null,
       "after": {
         "resource": "history-0029.txt",
@@ -247,7 +247,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/PROBE_CUSTODY_RESULT.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/PROBE_CUSTODY_RESULT.json",
       "before": null,
       "after": {
         "resource": "history-0030.txt",
@@ -255,7 +255,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/PROBE_EXECUTION.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/PROBE_EXECUTION.json",
       "before": null,
       "after": {
         "resource": "history-0031.txt",
@@ -263,7 +263,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/PROTOCOL.md",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/PROTOCOL.md",
       "before": null,
       "after": {
         "resource": "history-0032.txt",
@@ -271,7 +271,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/create-call-0.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/create-call-0.json",
       "before": null,
       "after": {
         "resource": "history-0033.txt",
@@ -279,7 +279,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/create-call-1.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/create-call-1.json",
       "before": null,
       "after": {
         "resource": "history-0034.txt",
@@ -287,7 +287,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/create-call-2.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/create-call-2.json",
       "before": null,
       "after": {
         "resource": "history-0035.txt",
@@ -295,7 +295,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/create-call-3.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/create-call-3.json",
       "before": null,
       "after": {
         "resource": "history-0036.txt",
@@ -303,7 +303,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/draft-T01/raw_custody_v3.py",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/draft-T01/raw_custody_v3.py",
       "before": null,
       "after": {
         "resource": "history-0037.txt",
@@ -311,7 +311,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/draft-T01/verify_publication_v3.py",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/draft-T01/verify_publication_v3.py",
       "before": null,
       "after": {
         "resource": "history-0038.txt",
@@ -319,7 +319,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/0b445a9f02146e1ef34f499ae801d0f9001b6313.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/0b445a9f02146e1ef34f499ae801d0f9001b6313.json",
       "before": null,
       "after": {
         "resource": "history-0039.txt",
@@ -327,7 +327,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/1f7ac77c503cb40df683a7831d94b0c6a381b811.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/1f7ac77c503cb40df683a7831d94b0c6a381b811.json",
       "before": null,
       "after": {
         "resource": "history-0040.txt",
@@ -335,7 +335,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/1f8b33bc67afb0a0537c93dddd7ed5d94476dd8a.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/1f8b33bc67afb0a0537c93dddd7ed5d94476dd8a.json",
       "before": null,
       "after": {
         "resource": "history-0041.txt",
@@ -343,7 +343,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/2e1ea5ea0076af3e2947a20dcddf8b306249d46c.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/2e1ea5ea0076af3e2947a20dcddf8b306249d46c.json",
       "before": null,
       "after": {
         "resource": "history-0042.txt",
@@ -351,7 +351,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/7de7c1ae7d22f70481a6dc0c5e81e3de73423e70.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/7de7c1ae7d22f70481a6dc0c5e81e3de73423e70.json",
       "before": null,
       "after": {
         "resource": "history-0043.txt",
@@ -359,7 +359,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/8582ac8a6a16142f1ee2b8151085238304fb7aa3.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/8582ac8a6a16142f1ee2b8151085238304fb7aa3.json",
       "before": null,
       "after": {
         "resource": "history-0044.txt",
@@ -367,7 +367,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/894e5ba1d9e4e747a308d05f7acb254614f3fe0c.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/894e5ba1d9e4e747a308d05f7acb254614f3fe0c.json",
       "before": null,
       "after": {
         "resource": "history-0045.txt",
@@ -375,7 +375,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/89e0c45dbf11305c45c0574ab73486c66a8fe7b2.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/89e0c45dbf11305c45c0574ab73486c66a8fe7b2.json",
       "before": null,
       "after": {
         "resource": "history-0046.txt",
@@ -383,7 +383,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/8de0927ad179c1a668e215fde234824f0b302797.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/8de0927ad179c1a668e215fde234824f0b302797.json",
       "before": null,
       "after": {
         "resource": "history-0047.txt",
@@ -391,7 +391,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/9988b4d8f0482cb1e10e41b38e36fd79f5c7bc10.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/9988b4d8f0482cb1e10e41b38e36fd79f5c7bc10.json",
       "before": null,
       "after": {
         "resource": "history-0048.txt",
@@ -399,7 +399,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/aee49a1388a9853f238d6360549181611d8168c4.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/aee49a1388a9853f238d6360549181611d8168c4.json",
       "before": null,
       "after": {
         "resource": "history-0049.txt",
@@ -407,7 +407,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/bf2b8fe43cda47f0c6363c8d376f61419e647e4d.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/bf2b8fe43cda47f0c6363c8d376f61419e647e4d.json",
       "before": null,
       "after": {
         "resource": "history-0050.txt",
@@ -415,7 +415,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/cac95ee10acb1ef18280347dcee30e626ff0e2b2.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/cac95ee10acb1ef18280347dcee30e626ff0e2b2.json",
       "before": null,
       "after": {
         "resource": "history-0051.txt",
@@ -423,7 +423,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/d7bce8c8d93693af06d95f1121257d65ca7d9f19.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/d7bce8c8d93693af06d95f1121257d65ca7d9f19.json",
       "before": null,
       "after": {
         "resource": "history-0052.txt",
@@ -431,7 +431,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/de28521cc91ed2316af7806f04d933543a3e3637.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/de28521cc91ed2316af7806f04d933543a3e3637.json",
       "before": null,
       "after": {
         "resource": "history-0053.txt",
@@ -439,7 +439,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/e6cb4eaa71784811361312b305d2723cf886ac1e.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/e6cb4eaa71784811361312b305d2723cf886ac1e.json",
       "before": null,
       "after": {
         "resource": "history-0054.txt",
@@ -447,7 +447,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/fa58808396946d716c50398bc880a9bc570148db.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/fa58808396946d716c50398bc880a9bc570148db.json",
       "before": null,
       "after": {
         "resource": "history-0055.txt",
@@ -455,7 +455,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/verification-file-reads.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/verification-file-reads.json",
       "before": null,
       "after": {
         "resource": "history-0056.txt",
@@ -463,7 +463,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw_custody_v3.py",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw_custody_v3.py",
       "before": null,
       "after": {
         "resource": "history-0057.txt",
@@ -471,7 +471,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/COMPANION_BINDING.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/COMPANION_BINDING.json",
       "before": null,
       "after": {
         "resource": "history-0058.txt",
@@ -479,7 +479,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/FILE_SEALS.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/FILE_SEALS.json",
       "before": null,
       "after": {
         "resource": "history-0059.txt",
@@ -487,7 +487,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/INPUT_SEALS.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/INPUT_SEALS.json",
       "before": null,
       "after": {
         "resource": "history-0060.txt",
@@ -495,7 +495,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/REVIEW.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/REVIEW.json",
       "before": null,
       "after": {
         "resource": "history-0061.txt",
@@ -503,7 +503,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/REVIEW.md",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/REVIEW.md",
       "before": null,
       "after": {
         "resource": "history-0062.txt",
@@ -511,7 +511,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/audit_base.py",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/audit_base.py",
       "before": null,
       "after": {
         "resource": "history-0063.txt",
@@ -519,7 +519,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/prepare_publication.py",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/prepare_publication.py",
       "before": null,
       "after": {
         "resource": "history-0064.txt",
@@ -527,7 +527,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/PROTOCOL.md",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/PROTOCOL.md",
       "before": null,
       "after": {
         "resource": "history-0065.txt",
@@ -535,7 +535,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/draft-T01/raw_custody_v3.py",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/draft-T01/raw_custody_v3.py",
       "before": null,
       "after": {
         "resource": "history-0066.txt",
@@ -543,7 +543,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/draft-T01/verify_publication_v3.py",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/draft-T01/verify_publication_v3.py",
       "before": null,
       "after": {
         "resource": "history-0067.txt",
@@ -551,7 +551,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw_custody_v3.py",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw_custody_v3.py",
       "before": null,
       "after": {
         "resource": "history-0068.txt",
@@ -559,7 +559,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/verify_publication.py",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/verify_publication.py",
       "before": null,
       "after": {
         "resource": "history-0069.txt",
@@ -567,7 +567,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/verify_publication_v3.py",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/verify_publication_v3.py",
       "before": null,
       "after": {
         "resource": "history-0070.txt",
@@ -575,7 +575,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inspect_inputs.py",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inspect_inputs.py",
       "before": null,
       "after": {
         "resource": "history-0071.txt",
@@ -583,7 +583,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/raw_custody_v3.py.T01-T02.diff",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/raw_custody_v3.py.T01-T02.diff",
       "before": null,
       "after": {
         "resource": "history-0072.txt",
@@ -591,7 +591,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/verify_publication_v3.py.T01-T02.diff",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/verify_publication_v3.py.T01-T02.diff",
       "before": null,
       "after": {
         "resource": "history-0073.txt",
@@ -599,7 +599,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/FILE_SEALS.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/FILE_SEALS.json",
       "before": null,
       "after": {
         "resource": "history-0074.txt",
@@ -607,7 +607,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/INPUT_SEALS.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/INPUT_SEALS.json",
       "before": null,
       "after": {
         "resource": "history-0075.txt",
@@ -615,7 +615,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/READ_CAPABILITIES.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/READ_CAPABILITIES.json",
       "before": null,
       "after": {
         "resource": "history-0076.txt",
@@ -623,7 +623,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/REVIEW.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/REVIEW.json",
       "before": null,
       "after": {
         "resource": "history-0077.txt",
@@ -631,7 +631,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/REVIEW.md",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/REVIEW.md",
       "before": null,
       "after": {
         "resource": "history-0078.txt",
@@ -639,7 +639,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/inspect.py",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/inspect.py",
       "before": null,
       "after": {
         "resource": "history-0079.txt",
@@ -647,7 +647,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/FETCH_FILE_CAPABILITY.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/FETCH_FILE_CAPABILITY.json",
       "before": null,
       "after": {
         "resource": "history-0080.txt",
@@ -655,7 +655,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/FILE_SEALS.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/FILE_SEALS.json",
       "before": null,
       "after": {
         "resource": "history-0081.txt",
@@ -663,7 +663,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/INPUT_SEALS.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/INPUT_SEALS.json",
       "before": null,
       "after": {
         "resource": "history-0082.txt",
@@ -671,7 +671,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/REVIEW.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/REVIEW.json",
       "before": null,
       "after": {
         "resource": "history-0083.txt",
@@ -679,7 +679,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/REVIEW.md",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/REVIEW.md",
       "before": null,
       "after": {
         "resource": "history-0084.txt",
@@ -687,7 +687,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/inspect.py",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/inspect.py",
       "before": null,
       "after": {
         "resource": "history-0085.txt",
@@ -695,7 +695,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/FILE_SEALS.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/FILE_SEALS.json",
       "before": null,
       "after": {
         "resource": "history-0086.txt",
@@ -703,7 +703,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/INPUT_SEALS.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/INPUT_SEALS.json",
       "before": null,
       "after": {
         "resource": "history-0087.txt",
@@ -711,7 +711,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/REVIEW.md",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/REVIEW.md",
       "before": null,
       "after": {
         "resource": "history-0088.txt",
@@ -719,7 +719,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/audit_base.py.txt",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/audit_base.py.txt",
       "before": null,
       "after": {
         "resource": "history-0089.txt",
@@ -727,7 +727,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/prepare_publication.py.txt",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/prepare_publication.py.txt",
       "before": null,
       "after": {
         "resource": "history-0090.txt",
@@ -735,7 +735,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/v1-v2.diff",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/v1-v2.diff",
       "before": null,
       "after": {
         "resource": "history-0091.txt",
@@ -743,7 +743,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/verify_publication.py.txt",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/verify_publication.py.txt",
       "before": null,
       "after": {
         "resource": "history-0092.txt",
@@ -751,7 +751,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/FILE_SEALS.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/FILE_SEALS.json",
       "before": null,
       "after": {
         "resource": "history-0093.txt",
@@ -759,7 +759,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/INPUT_SEALS.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/INPUT_SEALS.json",
       "before": null,
       "after": {
         "resource": "history-0094.txt",
@@ -767,7 +767,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/REVIEW.md",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/REVIEW.md",
       "before": null,
       "after": {
         "resource": "history-0095.txt",
@@ -775,7 +775,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/FILE_SEALS.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/FILE_SEALS.json",
       "before": null,
       "after": {
         "resource": "history-0096.txt",
@@ -783,7 +783,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/INPUT_SEALS.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/INPUT_SEALS.json",
       "before": null,
       "after": {
         "resource": "history-0097.txt",
@@ -791,7 +791,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/REVIEW.md",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/REVIEW.md",
       "before": null,
       "after": {
         "resource": "history-0098.txt",
@@ -799,7 +799,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/T01_T02.diff",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/T01_T02.diff",
       "before": null,
       "after": {
         "resource": "history-0099.txt",
@@ -807,7 +807,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/V2_V3.diff",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/V2_V3.diff",
       "before": null,
       "after": {
         "resource": "history-0100.txt",
@@ -815,7 +815,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/verify_publication.py",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/verify_publication.py",
       "before": null,
       "after": {
         "resource": "history-0101.txt",
@@ -823,7 +823,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/verify_publication_v3.py",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/verify_publication_v3.py",
       "before": null,
       "after": {
         "resource": "history-0102.txt",
@@ -831,7 +831,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-manifest/FINAL_MANIFEST.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-manifest/FINAL_MANIFEST.json",
       "before": null,
       "after": {
         "resource": "history-0103.txt",
@@ -839,7 +839,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/DESIGNATED_SOURCE_OUTPUTS.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/DESIGNATED_SOURCE_OUTPUTS.json",
       "before": null,
       "after": {
         "resource": "history-0104.txt",
@@ -847,7 +847,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/E4_EXECUTION_INPUT.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/E4_EXECUTION_INPUT.json",
       "before": null,
       "after": {
         "resource": "history-0105.txt",
@@ -855,7 +855,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/FINAL_T03_REVIEW.md",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/FINAL_T03_REVIEW.md",
       "before": null,
       "after": {
         "resource": "history-0106.txt",
@@ -863,7 +863,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/RECOVERY_REPORT.md",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/RECOVERY_REPORT.md",
       "before": null,
       "after": {
         "resource": "history-0107.txt",
@@ -871,7 +871,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/RECOVERY_RESULT.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/RECOVERY_RESULT.json",
       "before": null,
       "after": {
         "resource": "history-0108.txt",
@@ -879,7 +879,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/ROOT_POM.xml",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/ROOT_POM.xml",
       "before": null,
       "after": {
         "resource": "history-0109.txt",
@@ -887,7 +887,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/ROOT_POM_RECOVERY_CALL.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/ROOT_POM_RECOVERY_CALL.json",
       "before": null,
       "after": {
         "resource": "history-0110.txt",
@@ -895,7 +895,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/ROOT_POM_RESTORATION.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/ROOT_POM_RESTORATION.json",
       "before": null,
       "after": {
         "resource": "history-0111.txt",
@@ -903,7 +903,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/admission-fixes/FILE_SEALS.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/admission-fixes/FILE_SEALS.json",
       "before": null,
       "after": {
         "resource": "history-0112.txt",
@@ -911,7 +911,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/admission-fixes/REVIEW.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/admission-fixes/REVIEW.json",
       "before": null,
       "after": {
         "resource": "history-0113.txt",
@@ -919,7 +919,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/admission-fixes/REVIEW.md",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/admission-fixes/REVIEW.md",
       "before": null,
       "after": {
         "resource": "history-0114.txt",
@@ -927,7 +927,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/admission-fixes/STATIC_CHECKS.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/admission-fixes/STATIC_CHECKS.json",
       "before": null,
       "after": {
         "resource": "history-0115.txt",
@@ -935,7 +935,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/admission-fixes/author_e04.py.diff",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/admission-fixes/author_e04.py.diff",
       "before": null,
       "after": {
         "resource": "history-0116.txt",
@@ -943,7 +943,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/admission-fixes/run_verification.py.diff",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/admission-fixes/run_verification.py.diff",
       "before": null,
       "after": {
         "resource": "history-0117.txt",
@@ -951,7 +951,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/FILE_SEALS.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/FILE_SEALS.json",
       "before": null,
       "after": {
         "resource": "history-0118.txt",
@@ -959,7 +959,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/INPUTS.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/INPUTS.json",
       "before": null,
       "after": {
         "resource": "history-0119.txt",
@@ -967,7 +967,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/REVIEW.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/REVIEW.json",
       "before": null,
       "after": {
         "resource": "history-0120.txt",
@@ -975,7 +975,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/REVIEW.md",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/REVIEW.md",
       "before": null,
       "after": {
         "resource": "history-0121.txt",
@@ -983,7 +983,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/STATIC_CHECKS.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/STATIC_CHECKS.json",
       "before": null,
       "after": {
         "resource": "history-0122.txt",
@@ -991,7 +991,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/author_e04_v3.py.diff",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/author_e04_v3.py.diff",
       "before": null,
       "after": {
         "resource": "history-0123.txt",
@@ -999,7 +999,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/derive_source_handoff_v3.py.diff",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/derive_source_handoff_v3.py.diff",
       "before": null,
       "after": {
         "resource": "history-0124.txt",
@@ -1007,7 +1007,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/run_verification_v3.py.diff",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/run_verification_v3.py.diff",
       "before": null,
       "after": {
         "resource": "history-0125.txt",
@@ -1015,7 +1015,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/fixture-freeze/FILE_SEALS.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/fixture-freeze/FILE_SEALS.json",
       "before": null,
       "after": {
         "resource": "history-0126.txt",
@@ -1023,7 +1023,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/fixture-freeze/REVIEW.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/fixture-freeze/REVIEW.json",
       "before": null,
       "after": {
         "resource": "history-0127.txt",
@@ -1031,7 +1031,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/fixture-freeze/REVIEW.md",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/fixture-freeze/REVIEW.md",
       "before": null,
       "after": {
         "resource": "history-0128.txt",
@@ -1039,7 +1039,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/fixture-freeze/STATIC_CHECKS.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/fixture-freeze/STATIC_CHECKS.json",
       "before": null,
       "after": {
         "resource": "history-0129.txt",
@@ -1047,7 +1047,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/fixture-freeze/revision.diff",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/fixture-freeze/revision.diff",
       "before": null,
       "after": {
         "resource": "history-0130.txt",
@@ -1055,7 +1055,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/initial/FILE_SEALS.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/initial/FILE_SEALS.json",
       "before": null,
       "after": {
         "resource": "history-0131.txt",
@@ -1063,7 +1063,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/initial/INPUTS.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/initial/INPUTS.json",
       "before": null,
       "after": {
         "resource": "history-0132.txt",
@@ -1071,7 +1071,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/initial/REVIEW.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/initial/REVIEW.json",
       "before": null,
       "after": {
         "resource": "history-0133.txt",
@@ -1079,7 +1079,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/initial/REVIEW.md",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/initial/REVIEW.md",
       "before": null,
       "after": {
         "resource": "history-0134.txt",
@@ -1087,7 +1087,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/initial/STATIC_INPUT_CHECKS.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/initial/STATIC_INPUT_CHECKS.json",
       "before": null,
       "after": {
         "resource": "history-0135.txt",
@@ -1095,7 +1095,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/01-check-E3-preimages.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/01-check-E3-preimages.json",
       "before": null,
       "after": {
         "resource": "history-0136.txt",
@@ -1103,7 +1103,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/01-check-E3-preimages.stderr.log",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/01-check-E3-preimages.stderr.log",
       "before": null,
       "after": {
         "resource": "history-0137.txt",
@@ -1111,7 +1111,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/01-check-E3-preimages.stdout.log",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/01-check-E3-preimages.stdout.log",
       "before": null,
       "after": {
         "resource": "history-0138.txt",
@@ -1119,7 +1119,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/02-actual-text-recipe-maven.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/02-actual-text-recipe-maven.json",
       "before": null,
       "after": {
         "resource": "history-0139.txt",
@@ -1127,7 +1127,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/02-actual-text-recipe-maven.stderr.log",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/02-actual-text-recipe-maven.stderr.log",
       "before": null,
       "after": {
         "resource": "history-0140.txt",
@@ -1135,7 +1135,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/02-actual-text-recipe-maven.stdout.log",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/02-actual-text-recipe-maven.stdout.log",
       "before": null,
       "after": {
         "resource": "history-0141.txt",
@@ -1143,7 +1143,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/03-actual-packet-contract.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/03-actual-packet-contract.json",
       "before": null,
       "after": {
         "resource": "history-0142.txt",
@@ -1151,7 +1151,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/03-actual-packet-contract.stderr.log",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/03-actual-packet-contract.stderr.log",
       "before": null,
       "after": {
         "resource": "history-0143.txt",
@@ -1159,7 +1159,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/03-actual-packet-contract.stdout.log",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/03-actual-packet-contract.stdout.log",
       "before": null,
       "after": {
         "resource": "history-0144.txt",
@@ -1167,7 +1167,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/04-apply.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/04-apply.json",
       "before": null,
       "after": {
         "resource": "history-0145.txt",
@@ -1175,7 +1175,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/04-apply.stderr.log",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/04-apply.stderr.log",
       "before": null,
       "after": {
         "resource": "history-0146.txt",
@@ -1183,7 +1183,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/04-apply.stdout.log",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/04-apply.stdout.log",
       "before": null,
       "after": {
         "resource": "history-0147.txt",
@@ -1191,7 +1191,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/05-apply-fixed-point.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/05-apply-fixed-point.json",
       "before": null,
       "after": {
         "resource": "history-0148.txt",
@@ -1199,7 +1199,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/05-apply-fixed-point.stderr.log",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/05-apply-fixed-point.stderr.log",
       "before": null,
       "after": {
         "resource": "history-0149.txt",
@@ -1207,7 +1207,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/05-apply-fixed-point.stdout.log",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/05-apply-fixed-point.stdout.log",
       "before": null,
       "after": {
         "resource": "history-0150.txt",
@@ -1215,7 +1215,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/06-rollback.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/06-rollback.json",
       "before": null,
       "after": {
         "resource": "history-0151.txt",
@@ -1223,7 +1223,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/06-rollback.stderr.log",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/06-rollback.stderr.log",
       "before": null,
       "after": {
         "resource": "history-0152.txt",
@@ -1231,7 +1231,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/06-rollback.stdout.log",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/06-rollback.stdout.log",
       "before": null,
       "after": {
         "resource": "history-0153.txt",
@@ -1239,7 +1239,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/07-replay.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/07-replay.json",
       "before": null,
       "after": {
         "resource": "history-0154.txt",
@@ -1247,7 +1247,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/07-replay.stderr.log",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/07-replay.stderr.log",
       "before": null,
       "after": {
         "resource": "history-0155.txt",
@@ -1255,7 +1255,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/07-replay.stdout.log",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/07-replay.stdout.log",
       "before": null,
       "after": {
         "resource": "history-0156.txt",
@@ -1263,7 +1263,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/08-check-final.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/08-check-final.json",
       "before": null,
       "after": {
         "resource": "history-0157.txt",
@@ -1271,7 +1271,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/08-check-final.stderr.log",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/08-check-final.stderr.log",
       "before": null,
       "after": {
         "resource": "history-0158.txt",
@@ -1279,7 +1279,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/08-check-final.stdout.log",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/08-check-final.stdout.log",
       "before": null,
       "after": {
         "resource": "history-0159.txt",
@@ -1287,7 +1287,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/09-whole-map-validate.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/09-whole-map-validate.json",
       "before": null,
       "after": {
         "resource": "history-0160.txt",
@@ -1295,7 +1295,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/09-whole-map-validate.stderr.log",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/09-whole-map-validate.stderr.log",
       "before": null,
       "after": {
         "resource": "history-0161.txt",
@@ -1303,7 +1303,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/09-whole-map-validate.stdout.log",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/09-whole-map-validate.stdout.log",
       "before": null,
       "after": {
         "resource": "history-0162.txt",
@@ -1311,7 +1311,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/10-completion-remains-blocked.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/10-completion-remains-blocked.json",
       "before": null,
       "after": {
         "resource": "history-0163.txt",
@@ -1319,7 +1319,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/10-completion-remains-blocked.stderr.log",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/10-completion-remains-blocked.stderr.log",
       "before": null,
       "after": {
         "resource": "history-0164.txt",
@@ -1327,7 +1327,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/10-completion-remains-blocked.stdout.log",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/10-completion-remains-blocked.stdout.log",
       "before": null,
       "after": {
         "resource": "history-0165.txt",
@@ -1335,7 +1335,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/JccSourceRecoveryHandoffTest.xml",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/JccSourceRecoveryHandoffTest.xml",
       "before": null,
       "after": {
         "resource": "history-0166.txt",
@@ -1343,7 +1343,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/empty-maven-settings.xml",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/empty-maven-settings.xml",
       "before": null,
       "after": {
         "resource": "history-0167.txt",
@@ -1351,7 +1351,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/inputs.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/inputs.json",
       "before": null,
       "after": {
         "resource": "history-0168.txt",
@@ -1359,7 +1359,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/receipt.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/receipt.json",
       "before": null,
       "after": {
         "resource": "history-0169.txt",
@@ -1367,7 +1367,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/DERIVATION_INPUTS_V3.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/DERIVATION_INPUTS_V3.json",
       "before": null,
       "after": {
         "resource": "history-0170.txt",
@@ -1375,7 +1375,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/FINAL_SOURCE_INPUTS_V3.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/FINAL_SOURCE_INPUTS_V3.json",
       "before": null,
       "after": {
         "resource": "history-0171.txt",
@@ -1383,7 +1383,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/author_e04_v3.py",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/author_e04_v3.py",
       "before": null,
       "after": {
         "resource": "history-0172.txt",
@@ -1391,7 +1391,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/check_references_v3.py",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/check_references_v3.py",
       "before": null,
       "after": {
         "resource": "history-0173.txt",
@@ -1399,7 +1399,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/current-context/CONTEXT_REFERENCES.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/current-context/CONTEXT_REFERENCES.json",
       "before": null,
       "after": {
         "resource": "history-0174.txt",
@@ -1407,7 +1407,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/custody-v3-proposal/LOCAL_EXPECTATIONS.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/custody-v3-proposal/LOCAL_EXPECTATIONS.json",
       "before": null,
       "after": {
         "resource": "history-0175.txt",
@@ -1415,7 +1415,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/custody-v3-proposal/READINESS_T01.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/custody-v3-proposal/READINESS_T01.json",
       "before": null,
       "after": {
         "resource": "history-0176.txt",
@@ -1423,7 +1423,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/custody-v3-proposal/READINESS_T02.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/custody-v3-proposal/READINESS_T02.json",
       "before": null,
       "after": {
         "resource": "history-0177.txt",
@@ -1431,7 +1431,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/custody-v3-proposal/revisions/before-two-fixture-freeze/revision.diff",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/custody-v3-proposal/revisions/before-two-fixture-freeze/revision.diff",
       "before": null,
       "after": {
         "resource": "history-0178.txt",
@@ -1439,7 +1439,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/derive_source_handoff_v3.py",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/derive_source_handoff_v3.py",
       "before": null,
       "after": {
         "resource": "history-0179.txt",
@@ -1447,7 +1447,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/publication_custody_v3.py",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/publication_custody_v3.py",
       "before": null,
       "after": {
         "resource": "history-0180.txt",
@@ -1455,7 +1455,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/run_verification_v3.py",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/run_verification_v3.py",
       "before": null,
       "after": {
         "resource": "history-0181.txt",
@@ -1463,7 +1463,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/seal_publication_v3.py",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/seal_publication_v3.py",
       "before": null,
       "after": {
         "resource": "history-0182.txt",
@@ -1471,7 +1471,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/source-prepublication/DESIGNATED_COMPARISON.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/source-prepublication/DESIGNATED_COMPARISON.json",
       "before": null,
       "after": {
         "resource": "history-0183.txt",
@@ -1479,7 +1479,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/source-prepublication/PROOF_SELECTION.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/source-prepublication/PROOF_SELECTION.json",
       "before": null,
       "after": {
         "resource": "history-0184.txt",
@@ -1487,7 +1487,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/verification/jcc-source-final-handoff/pom.xml",
+      "path": "make/m3/tooling/migration-recipes/verification/jcc-source-final-handoff/pom.xml",
       "before": null,
       "after": {
         "resource": "history-0185.txt",
@@ -1495,7 +1495,7 @@
       }
     },
     {
-      "path": "m3/tooling/migration-recipes/verification/jcc-source-recovery-handoff/pom.xml",
+      "path": "make/m3/tooling/migration-recipes/verification/jcc-source-recovery-handoff/pom.xml",
       "before": null,
       "after": {
         "resource": "history-0186.txt",
@@ -1505,23 +1505,23 @@
   ],
   "guards": [
     {
-      "path": "m3/docs/name-mapping.schema.json",
+      "path": "doc/m3/name-mapping.schema.json",
       "sha256": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b"
     },
     {
-      "path": "m3/migration/migration.py",
+      "path": "make/m3/migration/migration.py",
       "sha256": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e"
     },
     {
-      "path": "m3/migration/recipe.py",
+      "path": "make/m3/migration/recipe.py",
       "sha256": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "path": "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
       "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795"
     },
     {
-      "path": "m3/tooling/migration-recipes/pom.xml",
+      "path": "make/m3/tooling/migration-recipes/pom.xml",
       "sha256": "3eb73bbf38c0c591b8f714f6e9923eaa25a35b5ffc7f0512b8ec7fd3602b5531"
     },
     {
@@ -1529,7 +1529,7 @@
       "sha256": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67"
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+      "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
       "sha256": "8006b173253ea7502efe7f7a77738b65f9df9e2871d4d6c29ff4fb8fb058c8c6"
     }
   ],

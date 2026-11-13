@@ -25,7 +25,7 @@ names them:
 | `M3BacktrackingAlgorithms` | subsets, permutations, combinationSumUnique, nQueens, generateParentheses |
 | `M3BitAlgorithms` | hammingWeight, reverseBits, singleNumberTriples, missingNumber (`singleNumber` dropped: `java.base` `jdk.internal.m3.M3IntAlgorithms.singleNumberOfPairs` owns it) |
 | `M3AlgorithmShapeCatalog` | 51 `Shape` rows over 18 `Family` values (the GRAPH, UNION_FIND and TRIE rows name leaf-2 types by string) |
-| `M3ProgressMonitor` | the donor contract: `int UNKNOWN`, `beginTask(String,int)`, `worked(int)`, `checkCanceled()`, every method default, `none()`. Since 2026-11-06 an adapter over `jdk.m3.collections.M3ProgressMonitor` (`m3/qualification/progress-monitor-unify-20261106`, int units widen to long); its map row is `SUPERSEDED` |
+| `M3ProgressMonitor` | the donor contract: `int UNKNOWN`, `beginTask(String,int)`, `worked(int)`, `checkCanceled()`, every method default, `none()`. Since 2026-11-06 an adapter over `jdk.m3.collections.M3ProgressMonitor` (`make/m3/qualification/progress-monitor-unify-20261106`, int units widen to long); its map row is `SUPERSEDED` |
 
 The pre-existing `M3PrefixZ` (`src/jdk/m3/algorithm`, a `java.base` `M3StringPiece` input, qualified by its own
 workflow) is untouched and outside this Maven build.
@@ -39,7 +39,7 @@ workflow) is untouched and outside this Maven build.
 | recipe | `relocate.py` v1 (`RELOCATE_ALGORITHM_FAMILIES`): `python -I recipe/families-20261106/relocate.py --donor-git <clone> --donor-rev <rev> [--check]` |
 | map | `RELOCATION_MAP.tsv`: 1 `REPO`, 17 `FILE`, 1 `SUPERSEDED` (the progress monitor, since 2026-11-06), 2 `PACKAGE` (`com.synexia.m3scale.{algorithm,progress} -> jdk.m3.algorithm`), 18 `TYPE` (M3 prefix, `M3ProgressMonitor` identity), 1 `EXTERNAL`, 2 `DROP_METHOD`, 2 `DROP_LINE`, 1 `DROP_DUMP`, 8 `SKIP`, 2 `NEC` |
 | provenance | `PROVENANCE.tsv`: donor commit, blob, sha256, URL, target sha256, counts of renamed / mapped / dropped lines, `body_match` per file |
-| naming | `python -I m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/algorithms/`: 0 moves, 0 rewrites, 0 refusals |
+| naming | `python -I make/m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/algorithms/`: 0 moves, 0 rewrites, 0 refusals |
 
 The recipe rewrites only the license header (M3JDK style), the `package` line, mapped `import` lines, the declared
 type names (whole words, on every line, the catalog's entry-point strings included because they name these types),
@@ -66,7 +66,7 @@ leaf-2 types `GraphAlgorithms`, `IntUnionFind`, `StringTrie`) and its one `singl
 | Step | Command |
 |---|---|
 | compile, test, jar | `JAVA_HOME=<JDK 21> mvn -q -B -ntp -f m3/algorithms/pom.xml package` (`-Xlint:all -Werror`, `proc none`; surefire 3.5.4 runs the four oracles) |
-| from the control reactor | `mvn -f m3/pom.xml -pl algorithms package` (`algorithms` is a default module of `m3/pom.xml`) |
+| from the control reactor | `mvn -f make/m3/pom.xml -pl algorithms package` (`algorithms` is a default module of `make/m3/pom.xml`) |
 | differential | `bash recipe/families-20261106/differential.sh <donor clone> <rev> <scratch> [cases]` after `package`: compiles the donor families from the donor tree, replays the same seeded inputs through both sides with `M3AlgorithmFamiliesDump`, normalizes the donor dump by the map (type names inside messages and catalog strings, the dropped catalog element) and compares byte for byte |
 | all gates | `bash recipe/families-20261106/verify.sh <donor clone> <rev> <scratch> [cases]` |
 
@@ -93,7 +93,7 @@ and `requires org.m3jdk.algorithms;` in their module descriptor.
 | 4 `jar --describe-module` | `org.m3jdk.algorithms` exports `jdk.m3.algorithm`, requires `java.base` |
 | 5 `jdk_naming.py apply --only m3/algorithms/` | 0 moves, 0 rewrites, 0 refusals |
 | 6 `CONVERGE_COLLECTIONS.tsv` | 14 owner rows added after the StringTrie row (which stays GAP for leaf 2) |
-| 7 `m3/pom.xml` default module | `algorithms` after `compiler/lifetime-slots` |
+| 7 `make/m3/pom.xml` default module | `algorithms` after `compiler/lifetime-slots` |
 
 Hard-limit notes for a later pass, recorded not fixed: donor bodies use loops throughout and several methods
 exceed 15 lines (`M3ArrayAlgorithms` 526 lines); `HeapAlgorithms.mergeSorted` and the generic `Node<T>` families are

@@ -4,7 +4,7 @@
   "recorded_utc": "2026-10-18T13:29:08.971591+00:00",
   "source_lock": "SOURCE_LOCK.json",
   "source_lock_sha256": "6004b332fe0ea3882613289da36cb46cdf4cf25fca65590e52026157e4fab486",
-  "receiver_prefix": "m3/tooling/module-packs/build-support/gradle-provider/",
+  "receiver_prefix": "make/m3/tooling/module-packs/build-support/gradle-provider/",
   "receiving_files": 9,
   "implementation_sha256": "92a7700275af7759c6a8c80e636fc19e9ac1affa84c0cfa15b8063ae70244557",
   "actual_host_contract": {
@@ -223,8 +223,8 @@
     "receiver_second_changes": 0,
     "manifest_normalization": "FINAL_PREPARATION.json",
     "engine_scope": "Unchanged existing class-backed Java/Text snapshots and unchanged actual existing SDK harness.",
-    "public_mirror": "m3/tooling/shared-frontend/recipe-custody/datasets/gradle-provider-20261018",
-    "evidence_mirror": "m3/tooling/shared-frontend/recipe-custody/enhancements/20261018-gradle-provider",
+    "public_mirror": "make/m3/tooling/shared-frontend/recipe-custody/datasets/gradle-provider-20261018",
+    "evidence_mirror": "make/m3/tooling/shared-frontend/recipe-custody/enhancements/20261018-gradle-provider",
     "canonical_evidence": "enhancements/20261018-gradle-provider"
   },
   "historical_failures_preserved": [

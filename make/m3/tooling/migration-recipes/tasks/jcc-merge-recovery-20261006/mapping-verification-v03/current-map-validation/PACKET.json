@@ -6,7 +6,7 @@
         "actual_sha256": "30b9aee3598aa556a9de57e612a1b3e3b045586b6d7382d53dc92798177338fb",
         "declared_git_blob_sha1": null,
         "expected_sha256": "245e252da59d310ea7e4229e5cafa5d25e322fee82d349337b37eab8a1f161a1",
-        "path": "m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
+        "path": "make/m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
         "record": "m3.counterpart.MIndexRegexTrigramQuery",
         "role": "recipe",
         "sha256_matches_declared": false,

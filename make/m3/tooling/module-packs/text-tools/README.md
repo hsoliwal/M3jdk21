@@ -19,13 +19,13 @@ APIs for bounded file admission and cooperative cancellation. The driver checks
 the actual supplied image with `javap` before compiling any module sources.
 
 ```sh
-python3 m3/tooling/module-packs/text-tools/build.py \
+python3 make/m3/tooling/module-packs/text-tools/build.py \
   --jdk-home "$JAVA_HOME" \
-  --sources m3/tooling/module-packs/text-tools/src \
-  --native-source m3/tooling/module-packs/text-tools/native/m3textio.c \
-  --smoke m3/tooling/module-packs/text-tools/fixtures/src/test/java/M3TextSmoke.java \
-  --legal-notices m3/tooling/module-packs/text-tools/legal \
-  --packager m3/tooling/jmod-recipes/tools/jmod_pack.py \
+  --sources make/m3/tooling/module-packs/text-tools/src \
+  --native-source make/m3/tooling/module-packs/text-tools/native/m3textio.c \
+  --smoke make/m3/tooling/module-packs/text-tools/fixtures/src/test/java/M3TextSmoke.java \
+  --legal-notices make/m3/tooling/module-packs/text-tools/legal \
+  --packager make/m3/tooling/jmod-recipes/tools/jmod_pack.py \
   --out build/m3-text-tools
 ```
 

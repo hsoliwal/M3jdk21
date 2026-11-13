@@ -28,19 +28,19 @@ policy/recipe/custody verifiers for these documentation passes are **NOT_RUN**.
   [dependency-first build instructions](../../m3/ports/compiletime/README.md)
 - No module-info.java occurs anywhere in the complete compiletime project
   tree. The artifact is not a member of the
-  [root control reactor's module/profile module lists](../../m3/pom.xml).
+  [root control reactor's module/profile module lists](../../make/m3/pom.xml).
   Java package membership does not imply JPMS admission or root-reactor build
 - The same project also has three production annotation sources in
   `com.m3.residency`: M3BehaviourOnly, M3Retains and M3Transient. They are
   residency-scanner dependencies, outside this 19-owner denominator; their
   presence does not count as another completed package
 - The project has four JUnit classes and three fixtures. The
-  [29-target custody manifest](../../m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-compiletime-regex-precompute/manifest.tsv)
+  [29-target custody manifest](../../make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-compiletime-regex-precompute/manifest.tsv)
   copies 19 + 3 production sources and those seven test/fixture files. Custody
   copies are not additional implementation owners or semantic qualification
 - The separate [precompute package map](precompute-source-coverage.md),
   [bootstrap Pattern/query reference](bootstrap-pattern-query-contracts.md)
-  and [existing compiletime design](../../m3/docs/m3-compiletime-precompute.md)
+  and [existing compiletime design](../m3/m3-compiletime-precompute.md)
   retain their own source, license, execution and authority boundaries
 
 ## Complete owner routes
@@ -92,7 +92,7 @@ reference and are not extra source owners.
   packages, vendor/custody trees, native/JDK integration, other repositories,
   license admission or the M3 porting sequence
 
-The [porting invariant](../../m3/docs/m3jdk21-porting-invariant.md) remains
+The [porting invariant](../m3/m3jdk21-porting-invariant.md) remains
 unchanged. This map and its references add documentation/navigation only.
 
 ## Pinned production-file identities

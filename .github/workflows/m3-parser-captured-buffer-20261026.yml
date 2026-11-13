@@ -3,10 +3,10 @@ name: M3 captured-buffer original parser source proof
 on:
   pull_request:
     paths:
-      - 'm3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3File.java'
-      - 'm3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3Utf8SourceMap.java'
-      - 'm3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3CapturedSourceContract.java'
-      - 'm3/tooling/module-packs/parser/build.py'
+      - 'make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3File.java'
+      - 'make/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3Utf8SourceMap.java'
+      - 'make/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3CapturedSourceContract.java'
+      - 'make/m3/tooling/module-packs/parser/build.py'
       - '.github/workflows/m3-parser-captured-buffer-20261026.yml'
   workflow_dispatch:
 concurrency:
@@ -29,7 +29,7 @@ jobs:
           set -euo pipefail
           dir="$RUNNER_TEMP/m3captured-source"
           mkdir -p "$dir/classes" "$dir/work"
-          root=m3/tooling/module-packs/parser/src
+          root=make/m3/tooling/module-packs/parser/src
           javac --release 21 -Xlint:all -Werror -d "$dir/classes" \
             "$root/main/java/jdk/m3/parser/M3File.java" \
             "$root/main/java/jdk/m3/parser/M3Utf8SourceMap.java" \

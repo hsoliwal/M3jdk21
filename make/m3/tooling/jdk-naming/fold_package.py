@@ -65,7 +65,7 @@ def retire(root, module, evidence, pkg_path, aggregator, check):
     if aggregator:
         pom = root / aggregator
         text = pom.read_bytes().decode("utf-8")
-        # the module's path relative to the reactor pom's directory (m3/pom.xml names m3/compiler/x as compiler/x)
+        # the module's path relative to the reactor pom's directory (make/m3/pom.xml names m3/compiler/x as compiler/x)
         name = Path(module).relative_to(Path(aggregator).parent).as_posix() if Path(aggregator).parent != Path(".") \
             else module
         line = re.compile(rf"^[ \t]*<module>{re.escape(name)}/?</module>[ \t]*\r?\n", re.M)
@@ -79,7 +79,7 @@ def main():
     ap = argparse.ArgumentParser()
     for name in ("--root", "--from-root", "--from-package", "--to-root", "--to-package"):
         ap.add_argument(name, required=True)
-    ap.add_argument("--exclude", action="append", default=["m3/evidence/", "m3/qualification/"])
+    ap.add_argument("--exclude", action="append", default=["make/m3/evidence/", "make/m3/qualification/"])
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--retire-to", help="evidence dir: the rest of module A (pom, descriptor, records) moves there "
                                         "byte for byte first, and A's root is gone after the fold")

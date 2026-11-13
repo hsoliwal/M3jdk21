@@ -44,11 +44,11 @@ Its claims must not be conflated with the actual public API qualification here.
 From the generated M3JDK21 checkout, with a Java 21 JDK:
 
 ~~~sh
-python3 m3/verification/sorting/verify.py --java-home "$JAVA_HOME"
+python3 make/m3/verification/sorting/verify.py --java-home "$JAVA_HOME"
 ~~~
 
 The default recipe location is the exact canonical proof-tooling mirror under
-m3/tooling/sort-recipes/m3-java-util-sorts-20261018. The local execution selected
+make/m3/tooling/sort-recipes/m3-java-util-sorts-20261018. The local execution selected
 the canonical crate explicitly with --recipe-crate and retained build output
 outside the product checkout. Those path choices do not change the sources.
 

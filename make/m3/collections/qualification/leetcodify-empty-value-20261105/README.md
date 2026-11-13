@@ -16,7 +16,7 @@ Reusable algorithm taxonomy comes from existing Synexia `crates/m3-mop/leetcodif
 
 ## Reproducible source-sealed Maven recipe
 
-Named recipe: `com.synexia.m3.PrimitiveMapEmptyValueScan20261105` delegates to the **existing** M3 collection Maven recipe crate `m3/collections/recipe/pom.xml`, which already compiles the inherited Synexia `M3HashPinnedJavaSnapshotRecipe`. The single target manifests under `m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-empty-value-scan-20261105/` pin full pre/post hashes. The test `M3LongLongHashMapEmptyValueRecipeTest` executes real OpenRewrite application, SHA-256 output, second-run fixed point, required-source and drift refusal. This adds **one named child recipe**, not a duplicate parser/catalogue/engine.
+Named recipe: `com.synexia.m3.PrimitiveMapEmptyValueScan20261105` delegates to the **existing** M3 collection Maven recipe crate `make/m3/collections/recipe/pom.xml`, which already compiles the inherited Synexia `M3HashPinnedJavaSnapshotRecipe`. The single target manifests under `m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-empty-value-scan-20261105/` pin full pre/post hashes. The test `M3LongLongHashMapEmptyValueRecipeTest` executes real OpenRewrite application, SHA-256 output, second-run fixed point, required-source and drift refusal. This adds **one named child recipe**, not a duplicate parser/catalogue/engine.
 
 ## Verification and admission boundaries
 

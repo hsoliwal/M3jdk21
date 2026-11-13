@@ -83,12 +83,12 @@ no regression; the three retained variants in the tree are older (`pr15403` pre-
 | 5 scope | only `m3/collections/**` changes |
 | naming | `jdk_naming.py apply --only m3/collections/`: 0 moves, 0 rewrites, 0 refusals |
 
-Run everything: `JAVA_HOME=<JDK 21> MAVEN_REPO_LOCAL=<m2> FULL_TESTS=1 bash m3/collections/recipe/entryless-lane-kernel-20261106/verify.sh <com.synexia clone> ac5feec00a6d6206194b3ba954c6f738aae07126 <scratch>`;
+Run everything: `JAVA_HOME=<JDK 21> MAVEN_REPO_LOCAL=<m2> FULL_TESTS=1 bash make/m3/collections/recipe/entryless-lane-kernel-20261106/verify.sh <com.synexia clone> ac5feec00a6d6206194b3ba954c6f738aae07126 <scratch>`;
 on a Linux host `M3_LANE_NATIVE_GATE=1` adds gate 4 (`native-gate.sh <scratch>/differential <scratch>/native`).
 
 ## Follow-ups (not in this PR)
 
-- `m3/collections/qualification/doops-entryless-receiver.tsv` pins `post_sha256` values of `M3IndexMaskCompactor.java`
+- `make/m3/collections/qualification/doops-entryless-receiver.tsv` pins `post_sha256` values of `M3IndexMaskCompactor.java`
   and `m3_index_mask_compactor.c` that master no longer has (the JDK naming v2 pass changed both before this leaf), so
   the `doops-entryless-receiver` workflow is red before and after this PR; its custody lane owns the reseal.
 - Unifying the two page packings and parameterising the lane kernel's live bit are API decisions for a later leaf.

@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import jdk.internal.m3.collections.LazyElementFlags;
 
 /** Retains source module contract and runs the independent 499k-case oracle. */
-//FLLDCIM: RELOCATE - donor blob 7cd338c319a8 at fd9a233680b4; recipe m3/collections/recipe/transient-facade-20261106/relocate.py v4
+//FLLDCIM: RELOCATE - donor blob 7cd338c319a8 at fd9a233680b4; recipe make/m3/collections/recipe/transient-facade-20261106/relocate.py v4
 class ResidentTrimPlannerTopKTest {
     @Test
     void fullSortedOracleAndPinnedIdentity() throws Exception {

@@ -11,8 +11,8 @@
 set -euo pipefail
 case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) SEP=';'; winpath() { (cd "$1" && pwd -W); } ;; *) SEP=':'; winpath() { (cd "$1" && pwd); } ;; esac
 RECIPE_DIR=$(winpath "$(dirname "$0")")
-MODULE=$(winpath "$(dirname "$0")/../..")
-ROOT=$(winpath "$(dirname "$0")/../../../..")
+MODULE=$(winpath "$(dirname "$0")/../../../../../m3/collections")
+ROOT=$(winpath "$(dirname "$0")/../../../../..")
 mkdir -p "$3"
 SCRATCH=$(winpath "$3")
 PY=${PYTHON:-python}
@@ -31,7 +31,7 @@ for main in M3InternalLeaseRecyclerSelfTest M3InternalLeaseRecyclerLazySelfTest 
 done
 gate 2_oracle "$oracle"
 bash "$RECIPE_DIR/differential.sh" "$1" "$2" "$SCRATCH/differential" "${4:-100000}" "${5:-20261106}" && gate 3_differential PASS || gate 3_differential FAIL
-(cd "$ROOT" && "$PY" -I m3/tooling/jdk-naming/jdk_naming.py plan --root . --only m3/collections/ | tail -n 1 | tee "$SCRATCH/naming.txt")
+(cd "$ROOT" && "$PY" -I make/m3/tooling/jdk-naming/jdk_naming.py plan --root . --only m3/collections/ | tail -n 1 | tee "$SCRATCH/naming.txt")
 grep -q "refusals=0" "$SCRATCH/naming.txt" && gate naming PASS || gate naming FAIL
 if [ "${FULL_TESTS:-0}" = 1 ]; then
     mvn -B -ntp $REPO -f "$MODULE/pom.xml" test > "$SCRATCH/module-test.log" 2>&1 || true

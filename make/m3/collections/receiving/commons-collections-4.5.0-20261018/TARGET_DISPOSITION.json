@@ -3,7 +3,7 @@
   "authority": {
     "repository": "hsoliwal/M3jdk21",
     "revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
-    "policy": "m3/docs/m3jdk21-porting-invariant.md"
+    "policy": "doc/m3/m3jdk21-porting-invariant.md"
   },
   "sourceTree": "85d65d12644db9eb41ea4749262120f9a606a9de",
   "scope": "Complete independently licensed Commons source namespace pass",

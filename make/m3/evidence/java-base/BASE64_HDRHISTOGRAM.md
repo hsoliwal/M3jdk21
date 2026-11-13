@@ -9,7 +9,7 @@ the relocated module `jdk.m3.hdrhistogram` in the JDK image.
 
 ## Change
 
-- Recipe `m3/tooling/jdk-superset/retarget/tools/base64_to_jdk.py` (re-runs to a fixed point; `--check` writes
+- Recipe `make/m3/tooling/jdk-superset/retarget/tools/base64_to_jdk.py` (re-runs to a fixed point; `--check` writes
   nothing):
   - `printBase64Binary` -> `Base64.getEncoder().encodeToString`;
   - `parseBase64Binary` -> `Base64.getDecoder().decode`;
@@ -17,7 +17,7 @@ the relocated module `jdk.m3.hdrhistogram` in the JDK image.
   - the import `java.lang.reflect.Method` becomes `java.util.Base64`, which is Java 8 API and within the pom's
     `--release 8`;
   - the class Javadoc gains one paragraph.
-- Custody: the new shared module `m3/tooling/jdk-superset/retarget/tools/donor_overlay.py` (DONOR_OVERLAY v1), the
+- Custody: the new shared module `make/m3/tooling/jdk-superset/retarget/tools/donor_overlay.py` (DONOR_OVERLAY v1), the
   donors' overlay mechanism in one place:
   - the upstream file stays byte-identical under `upstream-excluded/`;
   - `PROVENANCE.json` and `OVERLAY_SOURCES.json` pin the overlay, its base and the recipe;
@@ -26,7 +26,7 @@ the relocated module `jdk.m3.hdrhistogram` in the JDK image.
   - Pom and README describe the overlay. The relocated module gets the name-mapped overlay.
 - DONOR_OVERLAY v1 is a faithful extraction. `base64-hdrhistogram/replay_checksums.py` replays CHECKSUMS_TO_JDK v1
   through it in `--check` mode on the landed checksum files: fixed point, nothing changed (`DONOR_OVERLAY_REPLAY.txt`).
-- `m3/tooling/jdk-superset/retarget/tools/maven_gate.sh` is the reusable Maven gate (build master and branch, run
+- `make/m3/tooling/jdk-superset/retarget/tools/maven_gate.sh` is the reusable Maven gate (build master and branch, run
   `verify_source.py` with the jar, compare the jars).
 
 ## Gates

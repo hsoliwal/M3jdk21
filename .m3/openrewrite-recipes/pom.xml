@@ -235,6 +235,6 @@
     <!-- The m3-recipe-boot profile was retired on 2026-11-10 (standalone rule, release-contract.json "standalone").
          When .m3/recipe-boot.properties existed it ran jdk.internal.m3.prstack.M3RecipeBoot from a plugin
          dependency that no module of this repository builds. Pre-image blob 536b013f1ec2c6ff2d4f908d7507baf92df3a22f;
-         ledger m3/release/STANDALONE_RETIRED.tsv. -->
+         ledger make/m3/release/STANDALONE_RETIRED.tsv. -->
   </profiles>
 </project>

@@ -34,7 +34,7 @@
   </dependencies>
   <build>
     <!-- Compile only the real product owners, never a hand-maintained test copy. -->
-    <sourceDirectory>${project.basedir}/../../src/main/java</sourceDirectory>
+    <sourceDirectory>${project.basedir}/../../../../../m3/collections/src/main/java</sourceDirectory>
     <testSourceDirectory>${project.basedir}/../../src/test/java</testSourceDirectory>
     <plugins>
       <plugin>

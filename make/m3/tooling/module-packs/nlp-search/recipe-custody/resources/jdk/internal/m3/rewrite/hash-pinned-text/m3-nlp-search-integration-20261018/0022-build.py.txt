@@ -119,7 +119,7 @@ def main():
 
     # Compile against the exact existing descriptor, avoiding an automatic-module
     # approximation while checking the new exported frontend surface.
-    nlp_descriptor = root / "m3/tooling/module-packs/nlp-search/src/org.apache.opennlp.tools/module-info.java"
+    nlp_descriptor = root / "make/m3/tooling/module-packs/nlp-search/src/org.apache.opennlp.tools/module-info.java"
     descriptor_classes = out / "opennlp-descriptor"
     run("opennlp-compile-descriptor", [jdk / "bin/javac", "-source", "21", "-target", "21",
         "--module-path", os.pathsep.join(map(str, (jars[0], jars[1]))), "--patch-module",
@@ -147,11 +147,11 @@ def main():
         if artifact != "opennlp-tools":
             rows.append(f"{artifact}\t1\t{out / 'tools' / (artifact + '.jar')}\t{module}\t-\tJMOD")
     (out / "IMAGE.tsv").write_text("\n".join(rows) + "\n")
-    descriptor = "m3/tooling/module-packs/nlp-search/src/org.apache.opennlp.tools/module-info.java"
+    descriptor = "make/m3/tooling/module-packs/nlp-search/src/org.apache.opennlp.tools/module-info.java"
     (out / "DESCRIPTORS.tsv").write_text("module\tartifacts\tunit_jars\ttarget\tsha256\tgenerated\n"
         + f"org.apache.opennlp.tools\topennlp-tools\t{out / 'tools/opennlp-tools.jar'}\t{descriptor}\t"
         + f"{digest(root / descriptor)}\t{root / descriptor}\n")
-    run("pack", [sys.executable, root / "m3/tooling/jmod-recipes/tools/jmod_pack.py", "--jdk-home", jdk,
+    run("pack", [sys.executable, root / "make/m3/tooling/jmod-recipes/tools/jmod_pack.py", "--jdk-home", jdk,
         "--image-tsv", out / "IMAGE.tsv", "--manifest", out / "DESCRIPTORS.tsv", "--layer-root", root,
         "--out", out / "pack", "--add-modules",
         "java.se,jdk.unsupported,jdk.management,jdk.compiler,jdk.jlink,jdk.jartool,jdk.jdeps,jdk.charsets", *native_args])
@@ -214,7 +214,7 @@ def main():
                 *program_args])
             if case["marker"] not in output:
                 raise ValueError("Probe completion missing: " + case["name"])
-    run("shared-frontend-contracts", [sys.executable, root / "m3/tooling/shared-frontend/verify_frontend.py",
+    run("shared-frontend-contracts", [sys.executable, root / "make/m3/tooling/shared-frontend/verify_frontend.py",
         "--jdk", image, "--out", out / "compiler-contracts"])
     run("final-module-validation", [*runtime, "--validate-modules"])
     result = {

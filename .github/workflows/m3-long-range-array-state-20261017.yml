@@ -7,8 +7,8 @@ on:
     paths:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongRangeSet.java'
       - 'test/jdk/jdk/m3/collections/M3LongRangeSet*'
-      - 'm3/collections/qualification/range-atom/successor/**'
-      - 'm3/collections/qualification/m3-long-range-arrays-20261017/**'
+      - 'make/m3/collections/qualification/range-atom/successor/**'
+      - 'make/m3/collections/qualification/m3-long-range-arrays-20261017/**'
       - '.github/workflows/m3-long-range-array-state-20261017.yml'
 permissions:
   contents: read
@@ -32,7 +32,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 -S m3/collections/qualification/range-atom/successor/verify.py
+          python3 -S make/m3/collections/qualification/range-atom/successor/verify.py
       - name: Compile actual Java21 M3 array and mask owners
         shell: bash
         run: |

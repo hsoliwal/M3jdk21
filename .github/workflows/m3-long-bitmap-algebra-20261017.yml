@@ -5,7 +5,7 @@ on:
     paths:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongBitmapFilterPlan.java'
       - 'test/jdk/jdk/m3/collections/M3LongBitmapFilterPlanSelfTest.java'
-      - 'm3/collections/qualification/m3-long-bitmap-algebra-20261017/**'
+      - 'make/m3/collections/qualification/m3-long-bitmap-algebra-20261017/**'
       - '.github/workflows/m3-long-bitmap-algebra-20261017.yml'
   workflow_dispatch:
 concurrency:
@@ -24,7 +24,7 @@ jobs:
       - name: Exact source-sealed recipe verification
         run: |
           set -eu
-          RECIPE=m3/collections/qualification/m3-long-bitmap-algebra-20261017/recipe
+          RECIPE=make/m3/collections/qualification/m3-long-bitmap-algebra-20261017/recipe
           mvn -B -ntp -f "$RECIPE/pom.xml" verify
           java -cp "$RECIPE/target/classes" jdk.internal.m3.M3LongBitmapFilterPlanRecipe --check .
       - name: Owning collection Maven tests

@@ -3,7 +3,7 @@
 # Additive stable-order catalogue record
 
 Admit exactly CANDIDATES.tsv, README.md, DISCOVERY.json and SOURCE_PINS.json under
-m3/collections/algorithm-catalog/stable-order-restoration-20261020. Existing
+make/m3/collections/algorithm-catalog/stable-order-restoration-20261020. Existing
 catalogue history, production source and all earlier SDK receipts are unchanged.
 The four files record observed source loss, reuse of the exact published stable
 group recipe, current generated Java/JNI evidence, retained stronger native and

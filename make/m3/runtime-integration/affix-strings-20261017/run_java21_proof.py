@@ -8,7 +8,7 @@ from tempfile import TemporaryDirectory
 import subprocess
 import sys
 here = Path(__file__).resolve().parent
-repo = here.parents[2]
+repo = here.parents[3]
 paths = {"M3StringAffixPrecompute.java": "src/java.base/share/classes/java/lang/M3StringAffixPrecompute.java",
          "M3StringRegexRowPrecompute.java": "src/java.base/share/classes/java/lang/M3StringRegexRowPrecompute.java",
          "Strings.java": "src/java.base/share/classes/java/util/Strings.java",

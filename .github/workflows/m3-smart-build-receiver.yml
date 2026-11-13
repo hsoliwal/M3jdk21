@@ -3,7 +3,7 @@ name: M3JDK21 SmartBuild receiver
 on:
   pull_request:
     paths:
-      - 'm3/tooling/smart-build/**'
+      - 'make/m3/tooling/smart-build/**'
       - '.github/workflows/m3-smart-build-receiver.yml'
   workflow_dispatch:
 permissions:
@@ -23,14 +23,14 @@ jobs:
         if: github.event_name == 'pull_request'
         run: git diff --check "${{ github.event.pull_request.base.sha }}...HEAD"
       - name: Java 21 zero-runtime-dependency receiver tests
-        run: mvn -B -ntp -f m3/tooling/smart-build/pom.xml verify
+        run: mvn -B -ntp -f make/m3/tooling/smart-build/pom.xml verify
       - name: Verify 3 executed unskipped JUnit cases
         shell: bash
         run: |
           python3 - <<'PY'
           import xml.etree.ElementTree as ET
           from pathlib import Path
-          p = Path('m3/tooling/smart-build/target/surefire-reports/TEST-jdk.m3.tooling.smartbuild.SmartBuildReceiverTest.xml')
+          p = Path('make/m3/tooling/smart-build/target/surefire-reports/TEST-jdk.m3.tooling.smartbuild.SmartBuildReceiverTest.xml')
           if not p.is_file():
               raise SystemExit(f'missing receiver test report: {p}')
           suite = ET.parse(p).getroot()
@@ -46,4 +46,4 @@ jobs:
           name: m3-smart-build-receiver-junit
           retention-days: 14
           if-no-files-found: warn
-          path: m3/tooling/smart-build/target/surefire-reports/
+          path: make/m3/tooling/smart-build/target/surefire-reports/

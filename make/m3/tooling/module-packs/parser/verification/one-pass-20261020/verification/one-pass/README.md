@@ -5,7 +5,7 @@ Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-
 This is an opt-in qualification harness outside product APIs. It composes the
 already-qualified generated `jdk.m3fs` and `jdk.m3.parser` JMODs with the original
 SQLite JDBC 3.45.1.0 JNI distribution and the explicit SLF4J API 2.0.13 module.
-The existing `m3/tooling/jmod-recipes/tools/jmod_pack.py` packages the two original
+The existing `make/m3/tooling/jmod-recipes/tools/jmod_pack.py` packages the two original
 dependencies and this consumer; the JDK's `jlink` links the combined image.
 There is no new native engine, descriptor replacement for SQLite/SLF4J, or
 production source/class overlay. Original license resources and the actual Linux

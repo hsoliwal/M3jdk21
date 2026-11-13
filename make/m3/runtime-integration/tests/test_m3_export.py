@@ -16,13 +16,13 @@ import unittest
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[2]
-SPEC = importlib.util.spec_from_file_location("m3_export", ROOT / "m3/runtime-integration/export-m3-lexicon.py")
+ROOT = HERE.parents[3]
+SPEC = importlib.util.spec_from_file_location("m3_export", ROOT / "make/m3/runtime-integration/export-m3-lexicon.py")
 EXPORT = importlib.util.module_from_spec(SPEC)
 assert SPEC.loader is not None
 sys.modules[SPEC.name] = EXPORT
 SPEC.loader.exec_module(EXPORT)
-VERIFY_SPEC = importlib.util.spec_from_file_location("m3_verify", ROOT / "m3/runtime-integration/verify-m3-lexicon.py")
+VERIFY_SPEC = importlib.util.spec_from_file_location("m3_verify", ROOT / "make/m3/runtime-integration/verify-m3-lexicon.py")
 VERIFY = importlib.util.module_from_spec(VERIFY_SPEC)
 assert VERIFY_SPEC.loader is not None
 sys.modules[VERIFY_SPEC.name] = VERIFY

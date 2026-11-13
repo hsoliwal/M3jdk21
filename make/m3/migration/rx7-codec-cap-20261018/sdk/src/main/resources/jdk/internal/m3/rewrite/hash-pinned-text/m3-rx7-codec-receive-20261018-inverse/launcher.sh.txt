@@ -11,10 +11,10 @@ import hashlib,json,os,pathlib,re,resource,shutil,signal,stat,subprocess,time
 import xml.etree.ElementTree as ET
 MIB=1024**2
 RESERVE,CAP,LOG_CAP,PROOF_CAP=8*1024**3,512*MIB,128*1024,2*MIB
-SOURCE_PATH="m3/migration/rx7-codec-cap-20261018/sdk"
-BINDING_PATH="m3/migration/rx7-codec-cap-20261018/source-binding.json"
+SOURCE_PATH="make/m3/migration/rx7-codec-cap-20261018/sdk"
+BINDING_PATH="make/m3/migration/rx7-codec-cap-20261018/source-binding.json"
 WORKFLOW_PATH=".github/workflows/m3rx7-v7-image-codec-20261014.yml"
-SCRIPT_PATH="m3/runtime-integration/check-m3rx7-v7-image-codec.sh"
+SCRIPT_PATH="make/m3/runtime-integration/check-m3rx7-v7-image-codec.sh"
 CORE="src/java.base/share/classes/jdk/internal/mindex/"
 TEST="test/jdk/java/util/regex/"
 OLD={
@@ -23,7 +23,7 @@ OLD={
  CORE+"M3RX7Codec.java":"fc6727011d2cc9027d43280ce692c4646c378438c0fb7be9c8f7ae7d0c1102c9",
  TEST+"M3RX7Test.java":"0c7d8ef062693a987d57c8fc36d7a69f015e08b12662d5a5774164276697d634",
  TEST+"M3RX7CodecTest.java":"bd2ed346fb4ba3945b0d7a14c04418f4996b2f11c4945e8fc14bdba24a99bd6a",
- "m3/docs/name-mapping.d/m3-regex-v7-image-codec.json":"32155be04c0d9635d7be7678609dde08a2b5dd797504a9a93752cf1c5050dfb6"}
+ "doc/m3/name-mapping.d/m3-regex-v7-image-codec.json":"32155be04c0d9635d7be7678609dde08a2b5dd797504a9a93752cf1c5050dfb6"}
 EXPORTS={CORE+"M3RX7Codec.java":"8f224f3fb094f1b99a9a16a72c694bbb6914dfb629e1ad6421da2aa3364f7f5d",
  TEST+"M3RX7CodecBoundsTest.java":"4b7902424a6f6ad2640f38ffbdd5220a8cbbbfdecf7d0f1a0ca065e78eac1575"}
 MARKER="M3_RX7_CODEC_CAP_SDK_PASS forwardStates=8 inverseStates=4 fixedPoints=12 compilerCases=3 originalOracles=2 boundedHeapProof=NOT_RUN outputs=2"

@@ -144,8 +144,8 @@ AST/compiler → remaining families**. Its active phase is **STRING**; arrays an
 collections remain `WAITING_FOR_PREDECESSOR`. This independent module repair does
 not promote a family, the repository, an optional `jdk.m3.collections` publication
 pack, or an installed JDK image. The relevant existing authorities are the
-[porting invariant](../../../docs/m3jdk21-porting-invariant.md),
-[naming and receiving map](../../../docs/name-mapping.json),
+[porting invariant](../../../../../doc/m3/m3jdk21-porting-invariant.md),
+[naming and receiving map](../../../../../doc/m3/name-mapping.json),
 [intake policy](../../../docs/synexia-intake-policy.tsv) and
 [collection product scope](../../M3_COLLECTION_PRODUCT_SCOPE.md).
 
@@ -251,7 +251,7 @@ author did not rerun or invent runtime results while projecting this evidence.
 From the repository root, check the bounded packet and all six received files:
 
 ```bash
-sha256sum -c m3/collections/qualification/readonly-set-null-mask-alias-20261018/SHA256SUMS
+sha256sum -c make/m3/collections/qualification/readonly-set-null-mask-alias-20261018/SHA256SUMS
 ```
 
 `SHA256SUMS` covers the six admitted Java files, the category table and all packet
@@ -269,7 +269,7 @@ and [filtered-view receiving evidence](../../docs/FILTERED_SORTED_VIEWS_RECEIVIN
 remain applicable. Search the existing category tables with, for example:
 
 ```bash
-rg -n 'FILTERED_NAVIGATION|ROW_MASK_FILTER|JNI_OBJECT_PREDICATE' m3/collections/algorithm-catalog
+rg -n 'FILTERED_NAVIGATION|ROW_MASK_FILTER|JNI_OBJECT_PREDICATE' make/m3/collections/algorithm-catalog
 ```
 
 The separate public challenge/fork catalogue packet is sealed by manifest SHA-256
@@ -308,5 +308,5 @@ owning gates.
 
 All six received files retain their original qualified copyright and license
 bytes. Newly authored receiver records are Apache-2.0 first-party expression;
-the module's [LICENSE](../../LICENSE) and [NOTICE](../../NOTICE) remain applicable.
+the module's [LICENSE](../../../../../m3/collections/LICENSE) and [NOTICE](../../NOTICE) remain applicable.
 No third-party donor source was newly copied into the two production refinements.

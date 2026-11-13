@@ -41,15 +41,15 @@
     "commit": "2738eeec8cbd494962b2260bc8a51c53db5802d9",
     "paths": [
       {
-        "path": "m3/collections/recipe/owned-apache-multivalue-20261018/pom.xml",
+        "path": "make/m3/collections/recipe/owned-apache-multivalue-20261018/pom.xml",
         "git_blob": "7fc5c6c5cd18090422ff5d863df869d869926e2b"
       },
       {
-        "path": "m3/collections/recipe/owned-apache-multivalue-20261018/src/main/resources/META-INF/rewrite/m3-sdk-duplicate-sorted-factories.yml",
+        "path": "make/m3/collections/recipe/owned-apache-multivalue-20261018/src/main/resources/META-INF/rewrite/m3-sdk-duplicate-sorted-factories.yml",
         "git_blob": "b826fd1deba761eaab090643d9491189f7aff6a5"
       },
       {
-        "path": "m3/collections/recipe/owned-apache-multivalue-20261018/src/test/java/jdk/internal/m3/rewrite/M3OwnedApacheMultiValueV2RecipeTest.java",
+        "path": "make/m3/collections/recipe/owned-apache-multivalue-20261018/src/test/java/jdk/internal/m3/rewrite/M3OwnedApacheMultiValueV2RecipeTest.java",
         "git_blob": "6fc3032396642da34c11a1b6ac18baf847165f6a",
         "member": "exactCorePrerequisiteTransitionFixedPointAndThreeRefusals"
       }

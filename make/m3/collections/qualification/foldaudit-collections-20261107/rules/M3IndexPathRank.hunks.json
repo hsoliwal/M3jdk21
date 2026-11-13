@@ -10,7 +10,7 @@
   "pre_line": 31,
   "old": [],
   "new": [
-   "    //FLLDCIM: MRL - fold-close audit leaf L0048: RESTORE from PR #1791 head f452419fdcee (retained variant blob 54de439ba38d on master), dropped by the retain merge of #2070 (2028b1fb5f4) which kept master's pre-identity owner; 3-way base = pr1791 parent 5b779429120f blob 4a60fd1fab76, ours = master blob 647d2dc0452d, theirs = 905797a33244: clean except Window.copySelectedRowIds (one token, rowIdAt); recipe m3/collections/qualification/foldaudit-collections-20261107/apply.py v1",
+   "    //FLLDCIM: MRL - fold-close audit leaf L0048: RESTORE from PR #1791 head f452419fdcee (retained variant blob 54de439ba38d on master), dropped by the retain merge of #2070 (2028b1fb5f4) which kept master's pre-identity owner; 3-way base = pr1791 parent 5b779429120f blob 4a60fd1fab76, ours = master blob 647d2dc0452d, theirs = 905797a33244: clean except Window.copySelectedRowIds (one token, rowIdAt); recipe make/m3/collections/qualification/foldaudit-collections-20261107/apply.py v1",
    "    private final int sourceLength;"
   ]
  },

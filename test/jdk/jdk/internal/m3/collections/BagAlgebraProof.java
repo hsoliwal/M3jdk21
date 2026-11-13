@@ -11,7 +11,7 @@ import jdk.internal.m3.collections.packed.PackedLongBag;
 import jdk.internal.m3.collections.packed.PackedLongLongHashMap;
 
 /** Finite differential proof of the actual primitive owners; boxed maps are test-only. */
-//FLLDCIM: RELOCATE - donor blob 99fddd7065bc at commit d5ad5090d87e (repository, path, URL and digests: m3/collections/recipe/four-library-bags-20261106/PROVENANCE.tsv); recipe m3/collections/recipe/four-library-bags-20261106/relocate.py v1
+//FLLDCIM: RELOCATE - donor blob 99fddd7065bc at commit d5ad5090d87e (repository, path, URL and digests: make/m3/collections/recipe/four-library-bags-20261106/PROVENANCE.tsv); recipe make/m3/collections/recipe/four-library-bags-20261106/relocate.py v1
 public final class BagAlgebraProof {
     private static long checks;
     private static long operations;

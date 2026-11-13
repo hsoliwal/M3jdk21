@@ -12,8 +12,8 @@
 set -euo pipefail
 case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) SEP=';'; winpath() { (cd "$1" && pwd -W); } ;; *) SEP=':'; winpath() { (cd "$1" && pwd); } ;; esac
 RECIPE_DIR=$(winpath "$(dirname "$0")")
-MODULE=$(winpath "$(dirname "$0")/../..")
-ROOT=$(winpath "$(dirname "$0")/../../../..")
+MODULE=$(winpath "$(dirname "$0")/../../../../../m3/collections")
+ROOT=$(winpath "$(dirname "$0")/../../../../..")
 mkdir -p "$3"
 SCRATCH=$(winpath "$3")
 PY=${PYTHON:-python}
@@ -31,7 +31,7 @@ echo "compiler warnings: $(grep -c 'WARNING.*\.java' "$SCRATCH/mvn-package.log" 
 "$JAVA_BIN/java" -Xmx16m -cp "$CP" jdk.m3.collections.M3BagMapFailureProof remove
 "$JAVA_BIN/java" -cp "$CP" jdk.m3.collections.M3FourLibraryBagsReferenceModel 1000000 "${5:-20261106}"
 bash "$RECIPE_DIR/differential.sh" "$1" "$2" "$SCRATCH" "${4:-200000}" "${5:-20261106}"
-(cd "$ROOT" && "$PY" -I m3/tooling/jdk-naming/jdk_naming.py plan --root . --only m3/collections/ --tsv "$SCRATCH/naming-plan.tsv" | tail -n 1)
+(cd "$ROOT" && "$PY" -I make/m3/tooling/jdk-naming/jdk_naming.py plan --root . --only m3/collections/ --tsv "$SCRATCH/naming-plan.tsv" | tail -n 1)
 echo "naming rows in this recipe's files: $(grep -cE '/(M3PackedLongLongHashMap|M3PackedLongBag|M3PackedLongBagContract|M3PackedLongLongMap|M3PackedHashAtoms|M3PackedSupport|M3LongLongPredicate|M3BagAlgebraProof|M3BagMapFailureProof|M3FourLibraryBags[A-Za-z]*)[.]java|/four-library-bags-20261106/' "$SCRATCH/naming-plan.tsv" || true)"
 if [ "${FULL_TESTS:-0}" = 1 ]; then
     mvn -B -ntp $REPO -f "$MODULE/pom.xml" test > "$SCRATCH/module-test.log" 2>&1 || true

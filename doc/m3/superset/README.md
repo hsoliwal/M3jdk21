@@ -7,7 +7,7 @@ row per PR with MERGED (merge commit on this branch) or CONFLICT (left out; its 
 
 The conflicts are the fill: 84 PRs were already dirty against master, the rest conflict with PRs merged before
 them in this branch (shared owners: m3/collections M3FilteredViews, M3IndexedListSnapshot, M3LongIndexProjection;
-m3/docs/name-mapping.json). They are resolved one PR at a time by agents (merge the superset into the PR branch,
+doc/m3/name-mapping.json). They are resolved one PR at a time by agents (merge the superset into the PR branch,
 resolve as a superset, gate with the module's Maven build, push a side branch, merge that into the superset) and
 never by hand-editing shared ledgers (feedback-com-synexia-push-api-fallback).
 

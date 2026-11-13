@@ -41,10 +41,10 @@ fixed point remain required before promotion.
 ## Execution
 
 ```bash
-python3 m3/backports/backport_programme_status.py \
+python3 make/m3/backports/backport_programme_status.py \
   --root . \
-  --tsv-out m3/backports/target/backport-programme-status.tsv \
-  --json-out m3/backports/target/backport-programme-status.json
+  --tsv-out make/m3/backports/target/backport-programme-status.tsv \
+  --json-out make/m3/backports/target/backport-programme-status.json
 ```
 
 The output is suitable for review dashboards and for Camel/Airflow/Drools scheduling decisions
@@ -62,6 +62,6 @@ Only an all-READY, all-FILE wave set becomes `FILE_READY`. An all-READY wave set
 atom becomes `SCOPE_READY`; this requires the scheduler's explicit scope approval but **does not**
 prove the target JDK image, recipe JUnit, jtreg, JNI/runtime parity, or fixed point.
 
-`mvn -B -ntp -f m3/backports/pom.xml verify` now emits the scoped programme evidence into
+`mvn -B -ntp -f make/m3/backports/pom.xml verify` now emits the scoped programme evidence into
 `target/backport-programme-status.tsv` and `target/backport-programme-status.json`.
 Both outputs are read-only receipts. The older `program-status.json` aggregate remains intact.

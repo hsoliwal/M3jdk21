@@ -25,7 +25,7 @@
     "forward and reverse from-index semantics are preserved"
   ],
   "verification": {
-    "source_checker": "m3/runtime-integration/check-m3string-byte-source-needle.py",
+    "source_checker": "make/m3/runtime-integration/check-m3string-byte-source-needle.py",
     "jtreg": "test/jdk/java/lang/String/M3StringByteSourceNeedleTest.java",
     "jdk_build": "NOT_RUN",
     "jtreg_run": "NOT_RUN",

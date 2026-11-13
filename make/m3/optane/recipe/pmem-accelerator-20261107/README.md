@@ -3,7 +3,7 @@
 # recipe pmem-accelerator-20261107: the PMem tensor accelerator and the CPU-list parser relocated into jdk.internal.m3.optane
 
 Census pass-1 leaves **L008** and **L047** (`C:/m3-superset/conv/record/census/LEAVES_PROPOSED.tsv`; ledger row 110, lane
-com-synexia-0e; qualification record `m3/qualification/census1-remainder-20261107a/`): the read-only PMem tensor
+com-synexia-0e; qualification record `make/m3/qualification/census1-remainder-20261107a/`): the read-only PMem tensor
 accelerator of `hsoliwal/com.synexia` (`synexia-m3-jmods/accelerator-pmem` and its JNI library) and the strict Linux CPU-list
 parser of the recipe crate `m3-pmem-16source-numa-convergence-20261031` become part of `m3/optane` (module
 `org.m3jdk.optane`) by recipe, in the NON-EXPORTED package `jdk.internal.m3.optane`. Hardware the gate machine lacks
@@ -43,13 +43,13 @@ passes `-Dpmem.accelerator.native=true`), `README.md` (one section). `module-inf
 
 ## Recipe
 
-`python -I m3/optane/recipe/pmem-accelerator-20261107/relocate.py --donor-git <clone> --donor-rev 56cbdc631259 [--check]`
+`python -I make/m3/optane/recipe/pmem-accelerator-20261107/relocate.py --donor-git <clone> --donor-rev 56cbdc631259 [--check]`
 (`RELOCATE_CENSUS1_REMAINDER` v4: pmem-gram-index v3 plus DROP_METHOD rows, one-line methods included, and a
 module-derived recipe path; the same text as `m3/ast/recipe/null-flow-20261107/relocate.py`). Map: 4 FILE rows, 2 PACKAGE,
 3 TYPE, 1 JNI (`Java_..._PmemAccelerator_` -> `Java_jdk_internal_m3_optane_M3PmemAccelerator_`), 1 TEXT (the library
 name), 2 DROP_METHOD, 3 MERGE, SKIP rows for the HOLD/SUPERSEDED chains and the crate records. `PROVENANCE.tsv`: 4 rows
 `body_match_renamed=TRUE` (`M3NumaTopology` `dropped_lines=25`). Then
-`python -I m3/optane/recipe/pmem-accelerator-20261107/apply.py [--root DIR] [--check]` for the three edited files.
+`python -I make/m3/optane/recipe/pmem-accelerator-20261107/apply.py [--root DIR] [--check]` for the three edited files.
 
 ## Gates (2026-11-07, `GATES.tsv`)
 

@@ -15,7 +15,7 @@
 set -euo pipefail
 case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) SEP=';'; winpath() { (cd "$1" && pwd -W); } ;; *) SEP=':'; winpath() { (cd "$1" && pwd); } ;; esac
 RECIPE_DIR=$(winpath "$(dirname "$0")")
-MODULE=$(winpath "$(dirname "$0")/../..")
+MODULE=$(winpath "$(dirname "$0")/../../../../../m3/collections")
 DONOR=$1; REV=$2; mkdir -p "$3"; SCRATCH=$(winpath "$3"); OPS=${4:-100000}; SEED=${5:-20261106}
 JAVA_BIN="${JAVA_HOME:?JAVA_HOME must point at a JDK 21}/bin"
 MAP="$RECIPE_DIR/RELOCATION_MAP.tsv"

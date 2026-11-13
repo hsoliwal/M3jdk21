@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "authority": "m3/docs/name-mapping.json",
+  "authority": "doc/m3/name-mapping.json",
   "status": "source-implemented; numeric Java/JNI qualified; full M3JDK target promotion HOLD",
   "synexia_base": "8200bd6a92b5e4f81522c177ed0e668bf03664aa",
   "m3jdk21_base": "d5abed865bd47c4dd5ad78e95704348fe2095ed2",

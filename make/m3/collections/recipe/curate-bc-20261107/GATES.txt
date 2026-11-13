@@ -2,7 +2,7 @@ module tests (m3/arrays + m3/collections reactor of the gate tree):
 base   [WARNING] Tests run: 2278, Failures: 0, Errors: 0, Skipped: 135
 curated [WARNING] Tests run: 2278, Failures: 0, Errors: 0, Skipped: 135
 
-reactor (37's gate: m3/qualification/reactor-wiring-20261107, -o -T1 -fae -am, module -Werror):
+reactor (37's gate: make/m3/qualification/reactor-wiring-20261107, -o -T1 -fae -am, module -Werror):
 M3IndexDB 0.1.0-SNAPSHOT SUCCESS [  9.520 s]
 M3 array substrate 0.1.0-SNAPSHOT SUCCESS [ 13.678 s]
 M3 collection lanes 0.1.0-SNAPSHOT SUCCESS [01:53 min]

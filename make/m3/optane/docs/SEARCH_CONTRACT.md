@@ -1,6 +1,6 @@
 <!-- Copyright 2026 Hitesh Soliwal and contributors -->
 <!-- SPDX-License-Identifier: Apache-2.0 -->
-<!-- FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/36827ee8a798ef6ce07f6fc55a2ac371b1382c06/m3-pmem-sdk/docs/SEARCH_CONTRACT.md blob ae47ff5bf921; recipe m3/optane/recipe/pmem-region-core-20261106/relocate.py v2 -->
+<!-- FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/36827ee8a798ef6ce07f6fc55a2ac371b1382c06/m3-pmem-sdk/docs/SEARCH_CONTRACT.md blob ae47ff5bf921; recipe make/m3/optane/recipe/pmem-region-core-20261106/relocate.py v2 -->
 # M3 mapped-byte search: v0.4 contract
 
 ## Public API and ownership

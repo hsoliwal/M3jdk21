@@ -11,7 +11,7 @@ The receiving path starts with selected build-tool packs and retained runtime
 assets, then Maven/Gradle/Ant compiler arguments, the existing compiler task and
 OpenRewrite conversion, canonical existing-unit cache ingestion, and explicit
 name/provenance reconciliation. See the adjacent algorithm catalogue and
-`m3/docs/name-mapping.d/m3-shared-frontend.json`.
+`doc/m3/name-mapping.d/m3-shared-frontend.json`.
 
 ## Compiler use
 
@@ -121,7 +121,7 @@ target transformation; the canonical source PR owns its convergence history.
 Run the actual compiler and Rewrite contracts against a supplied built JDK:
 
 ```sh
-python3 m3/tooling/shared-frontend/verify_frontend.py \
+python3 make/m3/tooling/shared-frontend/verify_frontend.py \
   --jdk /path/to/m3jdk --out /fresh/frontend-proof \
   --maven /path/to/mvn --maven-repository /path/to/maven-cache
 ```
@@ -130,4 +130,4 @@ The receipt pins the supplied image's modules and test source. Full JDK source
 build, fork source builds, target CI, other operating systems, and benchmarks
 have separate receipts; a packaging success never promotes those gates.
 The build-tool adapters and selector are documented under
-`m3/tooling/module-packs/build-tools/`.
+`make/m3/tooling/module-packs/build-tools/`.

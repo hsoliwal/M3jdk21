@@ -1,11 +1,11 @@
 {
   "schema": "M3JDK21_NAME_AUTHORITY_PIN_RECEIPT_V1",
   "target_base": "bfe711ae1e1c390c008ae0c1d47d89f60546f0f2",
-  "target": "m3/tooling/name-contract/name-plan.json",
+  "target": "make/m3/tooling/name-contract/name-plan.json",
   "before_sha256": "3f51a4975e9f423196a4ee5c715d4edc2c2e937c34d9d5a1e3d2276dcd47752e",
   "after_sha256": "693177266d8d142bfd00e459899ac5f43bf75eeb5b2317bde48355537eb7e233",
   "authority_map": {
-    "path": "m3/docs/name-mapping.json",
+    "path": "doc/m3/name-mapping.json",
     "git_blob_sha1": "2cdc842793ad92cfc3da7183f0ddbdba582398f8",
     "source_commit": "bfe711ae1e1c390c008ae0c1d47d89f60546f0f2"
   },

@@ -9,7 +9,7 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalOrder*.java'
       - 'test/jdk/jdk/m3/collections/M3SignalOrder*.java'
       - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_signal_order_jni.c'
-      - 'm3/collections/qualification/signal-mask-order-20261017/**'
+      - 'make/m3/collections/qualification/signal-mask-order-20261017/**'
       - '.github/workflows/m3-signal-mask-order-20261017.yml'
   workflow_dispatch:
 permissions:
@@ -31,6 +31,6 @@ jobs:
       - name: Exact source seal, Java21 differential, real checked JNI and UBSan
         env:
           M3_UBSAN: '1'
-        run: bash m3/collections/qualification/signal-mask-order-20261017/verify.sh
+        run: bash make/m3/collections/qualification/signal-mask-order-20261017/verify.sh
       - name: Owning Maven JUnit module test (additional product admission gate)
         run: mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3SignalOrderJUnitTest test

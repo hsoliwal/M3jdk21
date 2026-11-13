@@ -16,7 +16,7 @@ import java.util.Objects;
 import java.util.Random;
 
 /** Independent ordered-model checks, run unchanged against baseline and delivery. */
-//FLLDCIM: RELOCATE - donor blob c78d0a13148c at ca1aafc4d94f; recipe m3/collections/qualification/census-g5-20261106/relocate.py v4
+//FLLDCIM: RELOCATE - donor blob c78d0a13148c at ca1aafc4d94f; recipe make/m3/collections/qualification/census-g5-20261106/relocate.py v4
 public final class M3CircularFifoShiftProof {
     private static long checks;
     private static final Field ELEMENTS;

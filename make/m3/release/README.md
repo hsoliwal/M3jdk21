@@ -91,12 +91,12 @@ lexical and mapping checks, not a substitute for Java compilation or jtreg.
 Run the complete naming suite as well as the live receiver and census:
 
 ```sh
-python3 -m unittest discover -s m3/tooling/name-contract -p 'test_*.py' -v
-python3 m3/tooling/name-contract/check.py
-python3 m3/tooling/name-contract/audit.py --strict
+python3 -m unittest discover -s make/m3/tooling/name-contract -p 'test_*.py' -v
+python3 make/m3/tooling/name-contract/check.py
+python3 make/m3/tooling/name-contract/audit.py --strict
 ```
 
-The naming workflow installs `m3/migration/requirements.txt`, checks out the
+The naming workflow installs `make/m3/migration/requirements.txt`, checks out the
 schema and every concrete mapped target, and runs its refusal tests even when
 the live authority gate fails. A successful synthetic fixture suite does not
 make a stale authority pin, missing lineage, schema violation or source hash
@@ -117,16 +117,16 @@ For a reproducible local tooling measurement, install `coverage==7.13.4` in an
 isolated Python 3.12 environment and use separate data files:
 
 ```sh
-python3 -m coverage run --branch --source=m3/release --omit='*/test_*.py' \
+python3 -m coverage run --branch --source=make/m3/release --omit='*/test_*.py' \
   --data-file=/tmp/m3-release.coverage \
-  -m unittest discover -s m3/release -p 'test_*.py' -v
+  -m unittest discover -s make/m3/release -p 'test_*.py' -v
 python3 -m coverage report --data-file=/tmp/m3-release.coverage --show-missing
 python3 -m coverage json --data-file=/tmp/m3-release.coverage \
   -o /tmp/m3-release-coverage.json
 
 python3 -m coverage run --branch --include='*/m3/tooling/name-contract/check.py' \
   --data-file=/tmp/m3-naming-receiver.coverage \
-  -m unittest discover -s m3/tooling/name-contract -p 'test_check.py' -v
+  -m unittest discover -s make/m3/tooling/name-contract -p 'test_check.py' -v
 python3 -m coverage report --data-file=/tmp/m3-naming-receiver.coverage --show-missing
 python3 -m coverage json --data-file=/tmp/m3-naming-receiver.coverage \
   -o /tmp/m3-naming-receiver-coverage.json
@@ -207,8 +207,8 @@ See:
 - `release-contract.json`
 - `BENCHMARK_AND_COMPATIBILITY_SPEC.md`
 - `verify_release_admission.py`
-- `../../M3-SYNEXIA-NOTICE.md`
-- `../../M3-SYNEXIA-RIGHTS.md`
+- `../../../M3-SYNEXIA-NOTICE.md`
+- `../../../M3-SYNEXIA-RIGHTS.md`
 
 ## Inspect readiness and publish the work queue
 
@@ -236,8 +236,8 @@ Both `Object.toAdapter(Class<T>)` and the exact compatibility spelling
 
 ## Recipe ownership and product acceptance
 
-[AGENTS.md](../../AGENTS.md) and the
-[porting invariant](../docs/m3jdk21-porting-invariant.md) place all recipe
+[AGENTS.md](../../../AGENTS.md) and the
+[porting invariant](../../../doc/m3/m3jdk21-porting-invariant.md) place all recipe
 creation, execution, qualification and improvement memory in canonical Synexia.
 This target receives executed product postimages, target tests and passive
 provenance receipts. It does not run a recipe command supplied in a receipt.
@@ -272,11 +272,11 @@ proceed independently; only exact target evidence can advance a phase.
 Run these from the target root after installing the pinned schema dependency:
 
 ```sh
-python3 -m pip install -r m3/migration/requirements.txt
-python3 m3/tooling/name-contract/check.py
-python3 m3/tooling/name-contract/audit.py --strict
-python3 -m unittest discover -s m3/tooling/name-contract -p 'test_*.py' -v
-python3 -m unittest discover -s m3/release -p 'test_*.py' -v
+python3 -m pip install -r make/m3/migration/requirements.txt
+python3 make/m3/tooling/name-contract/check.py
+python3 make/m3/tooling/name-contract/audit.py --strict
+python3 -m unittest discover -s make/m3/tooling/name-contract -p 'test_*.py' -v
+python3 -m unittest discover -s make/m3/release -p 'test_*.py' -v
 ```
 
 These checks cover queue/map identity, current package/type/path declarations,
@@ -296,11 +296,11 @@ On a full checkout, write inspection output outside the source tree so the
 report itself does not dirty the candidate:
 
 ```sh
-python3 m3/release/verify_release_admission.py --root . \
+python3 make/m3/release/verify_release_admission.py --root . \
   --json-out /absolute/path/to/proof/admission-development.json \
   --queue-out /absolute/path/to/proof/README.md \
   --sha256-out /absolute/path/to/proof/SHA256SUMS
-python3 m3/release/verify_release_admission.py --root . --release \
+python3 make/m3/release/verify_release_admission.py --root . --release \
   --evidence /absolute/path/to/proof/evidence.json \
   --json-out /absolute/path/to/proof/admission-release.json
 ```
@@ -373,7 +373,7 @@ checked-in evidence manifest and never executes a command contained in a receipt
 
 The producer requires a complete clean Git worktree at the expected commit,
 Maven >=3.9 running on Java 21, a POSIX host, and an empty evidence directory
-outside the source tree. It executes the complete default `m3/pom.xml` reactor
+outside the source tree. It executes the complete default `make/m3/pom.xml` reactor
 with `clean verify`, offline dependencies, tests enabled and Maven build-cache
 reuse disabled. It accepts no module-selection, profile or arbitrary-goal options.
 Repository Maven CLI/JVM configuration and ambient Maven/JVM options require
@@ -383,7 +383,7 @@ log are retained. A timeout terminates the Maven process group. Source changes
 before or during execution refuse a passing receipt.
 
 Canonical provenance is read from the committed data-only file
-`m3/release/maven-control-origin.json`. Its `repository`, `commit` and `recipe_id`
+`make/m3/release/maven-control-origin.json`. Its `repository`, `commit` and `recipe_id`
 identify the exact executed Synexia recipe for this build integration. Attach that
 origin only after the canonical recipe has actually executed; a placeholder is
 not execution proof. The producer copies its bytes to the evidence directory and

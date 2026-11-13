@@ -9,7 +9,7 @@
   <packaging>pom</packaging>
   <description>Read-only PSE/CCPS recipe; no OpenJDK bootstrap dependency and no source apply mode.</description>
   <properties>
-    <m3.repo>${project.basedir}/../..</m3.repo>
+    <m3.repo>${project.basedir}/../../..</m3.repo>
     <m3.snapshot>${project.basedir}/snapshot.json</m3.snapshot>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: audit.py refuses an existing output; one directory per build session so two reactor runs on one tmpdir both pass -->
     <maven.build.timestamp.format>yyyyMMdd-HHmmss-SSS</maven.build.timestamp.format>

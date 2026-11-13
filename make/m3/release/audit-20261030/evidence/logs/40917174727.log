@@ -250,7 +250,7 @@ genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:4
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0302251Z [36;1mreserve,cap=8*1024**3,512*1024**2[0m
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0302702Z [36;1mroot=pathlib.Path(os.environ["M3_PROOF_ROOT"])[0m
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0303186Z [36;1msource=pathlib.Path(os.environ["M3_SOURCE_ROOT"])[0m
-genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0303696Z [36;1msdk=source/"m3/migration/original-provider-20261017/sdk"[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0303696Z [36;1msdk=source/"make/m3/migration/original-provider-20261017/sdk"[0m
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0304152Z [36;1mstart=time.monotonic()[0m
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0304666Z [36;1mdef traversal_error(error):raise RuntimeError("storage census failed") from error[0m
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0305219Z [36;1mdef gate(limit=480*1024**2):[0m
@@ -272,8 +272,8 @@ genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:4
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0313528Z [36;1mgate()[0m
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0313812Z [36;1mhead=getgit("rev-parse","HEAD")[0m
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0314481Z [36;1mif head!=os.environ["EXPECTED_SOURCE_SHA"] or not re.fullmatch("[0-9a-f]{40}",head):raise RuntimeError("checkout is not exact candidate head")[0m
-genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0315555Z [36;1mbinding=json.loads((source/"m3/migration/original-provider-20261017/source-binding.json").read_bytes())[0m
-genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0316622Z [36;1mif binding["repository"]!="hsoliwal/com.synexia" or binding["receiverCorePath"]!="m3/migration/original-provider-20261017/sdk":raise RuntimeError("canonical owner drift")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0315555Z [36;1mbinding=json.loads((source/"make/m3/migration/original-provider-20261017/source-binding.json").read_bytes())[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0316622Z [36;1mif binding["repository"]!="hsoliwal/com.synexia" or binding["receiverCorePath"]!="make/m3/migration/original-provider-20261017/sdk":raise RuntimeError("canonical owner drift")[0m
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0317662Z [36;1mif not re.fullmatch("[0-9a-f]{40}",binding["sourceCommit"]):raise RuntimeError("missing canonical commit")[0m
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0318511Z [36;1mif binding["runtimeApplied"] is not False or binding["phaseAdvanced"] is not False:raise RuntimeError("scope drift")[0m
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0319428Z [36;1mtree=getgit("rev-parse","HEAD:"+binding["receiverCorePath"])[0m
@@ -328,7 +328,7 @@ genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:4
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0347851Z [36;1mpy=[os.environ["M3_PYTHON"],"-I","-S","-B"][0m
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0348301Z [36;1mbuild=root/"target";overlay=root/"emitted";baseline=root/"baseline"[0m
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0349143Z [36;1mrunid=os.environ["GITHUB_RUN_ID"]+"-"+os.environ["GITHUB_RUN_ATTEMPT"]+"-"+head[:12][0m
-genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0349807Z [36;1mbootstrap=overlay/"m3/migration/provider/python312-linux-x86_64/bootstrap.py"[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0349807Z [36;1mbootstrap=overlay/"make/m3/migration/provider/python312-linux-x86_64/bootstrap.py"[0m
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0350304Z [36;1msettings=root/"home/.m2"[0m
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0350598Z [36;1mtry:[0m
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0351168Z [36;1m    run("closed-sdk-source-and-current-target-custody",py+[str(sdk/"verify.py"),"--self-test","--receiver",str(source)])[0m
@@ -380,7 +380,7 @@ genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:4
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0402586Z [36;1m        with log.open("rb") as f:f.seek(max(0,log.stat().st_size-32768));tail=f.read(32768)[0m
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0403036Z [36;1m    try:[0m
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0403292Z [36;1m        before=gate(496*1024**2)[0m
-genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0404568Z [36;1m        selected=[root/"recipe-execution.json",root/"recipe-after-provider.json",root/"hosted-receipt.json",source/"m3/migration/original-provider-20261017/source-binding.json",sdk/"src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/baseline-pre.tsv"][0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0404568Z [36;1m        selected=[root/"recipe-execution.json",root/"recipe-after-provider.json",root/"hosted-receipt.json",source/"make/m3/migration/original-provider-20261017/source-binding.json",sdk/"src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/baseline-pre.tsv"][0m
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0405954Z [36;1m        selected+=sorted(build.glob("surefire-reports/TEST-*.xml"))[0m
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0406435Z [36;1m        selected+=sorted((root/"provider").glob("*.json"))[0m
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0406914Z [36;1m        selected+=sorted((root/"provider-boundaries").glob("*.json"))[0m

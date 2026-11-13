@@ -1,5 +1,5 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
-<!-- TEMPLATE of m3/collections/qualification/flat3map-single-owner-20261106/apply.py (census leaf L075); edit through that recipe. -->
+<!-- TEMPLATE of make/m3/collections/qualification/flat3map-single-owner-20261106/apply.py (census leaf L075); edit through that recipe. -->
 # M3Flat3Map: Commons-compatible facade
 
 `jdk.m3.collections.apache.M3Flat3Map` keeps the public surface of `org.apache.commons.collections4.map.Flat3Map`
@@ -24,7 +24,7 @@ iteration results as sorted entry sets and counts raw order differences separate
 Proof: `M3Flat3MapCommonsDifferentialTest` runs the seeded lockstep differential `M3Flat3MapDifferential`
 (1,000,000 ops: Commons `Flat3Map` against the facade over the whole API, and against the core over the shared
 subset). Recipe, hunk verdicts, design decisions and gates:
-`m3/collections/qualification/flat3map-single-owner-20261106/`.
+`make/m3/collections/qualification/flat3map-single-owner-20261106/`.
 
 Build: `mvn -f m3/collections/pom.xml install` first (the facade depends on `com.m3:m3-collections:0.1.0-SNAPSHOT`),
 then `mvn -f m3/collections/implementations/apache-flat3-map/pom.xml package`.

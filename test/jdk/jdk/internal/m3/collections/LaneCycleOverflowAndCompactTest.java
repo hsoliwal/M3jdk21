@@ -12,7 +12,7 @@ import java.util.Random;
 import org.junit.jupiter.api.Test;
 
 /** Additional original-owner Java21 differential for LeetCode 189 and 27 atoms. */
-//FLLDCIM: RELOCATE - donor blob 32e1b1ec051c at d5ad5090d87e; recipe m3/collections/qualification/census2-c3-20261106/relocate.py v1
+//FLLDCIM: RELOCATE - donor blob 32e1b1ec051c at d5ad5090d87e; recipe make/m3/collections/qualification/census2-c3-20261106/relocate.py v1
 final class LaneCycleOverflowAndCompactTest {
     @Test void wrapSafeCycleStepForHugeLogicalLengths() {
         assertEquals(Integer.MAX_VALUE - 3, LaneAlgorithms.nextCyclicIndex(

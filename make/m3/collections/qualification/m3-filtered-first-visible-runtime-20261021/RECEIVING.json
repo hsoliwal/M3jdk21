@@ -214,7 +214,7 @@
     "target_notice_retention": "Canonical NOTICE retained verbatim as the prefix of this target packet NOTICE.md; target-specific receiving attribution appended"
   },
   "root_mapping_reference": {
-    "path": "m3/docs/name-mapping.json",
+    "path": "doc/m3/name-mapping.json",
     "revision": "7c0d2493edbf93ac5cb726667ce83046d3519e3e",
     "git_blob": "ce76431af299d15823c1cd30f9083ab1a9186f03",
     "sha256": "ac0b133afdfedcf68727332c91e82390a951f3a03350a6cffa9de0e6edcb77f0",
@@ -227,37 +227,37 @@
   "receiving_sequence": "STRING remains active; subsequent family acceptance and the global plan remain unchanged",
   "fresh_target_bindings": {
     "preimage_custody": {
-      "path": "m3/collections/qualification/m3-filtered-first-visible-runtime-20261021/preimage-custody.json",
+      "path": "make/m3/collections/qualification/m3-filtered-first-visible-runtime-20261021/preimage-custody.json",
       "sha256": "f451876b339e26bb5318e569fcc052115429e8aa305e1776e0558984500fd566",
       "status": "BOUND_TO_ACTUAL_OBSERVED_RECEIPT"
     },
     "application_receipt": {
-      "path": "m3/collections/qualification/m3-filtered-first-visible-runtime-20261021/evidence/copier-apply.receipt.json",
+      "path": "make/m3/collections/qualification/m3-filtered-first-visible-runtime-20261021/evidence/copier-apply.receipt.json",
       "sha256": "51f39ec1fb75f8d8483ac6c876b0918fccb87a5e88f2cadd69249354e7ef5003",
       "status": "BOUND_TO_ACTUAL_OBSERVED_RECEIPT"
     },
     "replay_receipt": {
-      "path": "m3/collections/qualification/m3-filtered-first-visible-runtime-20261021/evidence/copier-replay.receipt.json",
+      "path": "make/m3/collections/qualification/m3-filtered-first-visible-runtime-20261021/evidence/copier-replay.receipt.json",
       "sha256": "57d59d1057171de01097b3ac7940086c54bf841eb72fba472d366dd9973e0a55",
       "status": "BOUND_TO_ACTUAL_OBSERVED_RECEIPT"
     },
     "readback_receipt": {
-      "path": "m3/collections/qualification/m3-filtered-first-visible-runtime-20261021/source-blobs-readback.json",
+      "path": "make/m3/collections/qualification/m3-filtered-first-visible-runtime-20261021/source-blobs-readback.json",
       "sha256": "65decf3eab8ca1e347b832c36a826fc8c18faeba72abca0149e8e7c07679ebd1",
       "status": "BOUND_TO_ACTUAL_OBSERVED_RECEIPT"
     },
     "verification_receipt": {
-      "path": "m3/collections/qualification/m3-filtered-first-visible-runtime-20261021/evidence/results.json",
+      "path": "make/m3/collections/qualification/m3-filtered-first-visible-runtime-20261021/evidence/results.json",
       "sha256": "b38d83d0e9cf791501e999fa2d31ef60da1380a5e5fa498dddb7fe0e3e1ba119",
       "status": "BOUND_TO_ACTUAL_OBSERVED_RECEIPT"
     },
     "commands_receipt": {
-      "path": "m3/collections/qualification/m3-filtered-first-visible-runtime-20261021/evidence/commands.json",
+      "path": "make/m3/collections/qualification/m3-filtered-first-visible-runtime-20261021/evidence/commands.json",
       "sha256": "a87960cb8ef9dd28765327b9503b414504ace881fb58ecb0375e859995548204",
       "status": "BOUND_TO_ACTUAL_OBSERVED_RECEIPT"
     },
     "comparisons_receipt": {
-      "path": "m3/collections/qualification/m3-filtered-first-visible-runtime-20261021/evidence/comparisons.json",
+      "path": "make/m3/collections/qualification/m3-filtered-first-visible-runtime-20261021/evidence/comparisons.json",
       "sha256": "aad840fc686fd314661c47287f787ddd4dbbfb6eef982f7e80758de28416721c",
       "status": "BOUND_TO_ACTUAL_OBSERVED_RECEIPT"
     }
@@ -303,7 +303,7 @@
     "performance_claim": "NONE"
   },
   "target_verifier": {
-    "path": "m3/collections/qualification/m3-filtered-first-visible-runtime-20261021/verification/verify_target_wrappers.py",
+    "path": "make/m3/collections/qualification/m3-filtered-first-visible-runtime-20261021/verification/verify_target_wrappers.py",
     "sha256": "c7c048a262887b6ebd17fac9357dd05fac6a9d396ea3309234622ae0a2614480",
     "scope": "Selected-source application and Java verification; consumes qualified output and preserves existing oracles; no transformation engine",
     "license": "Apache-2.0",
@@ -317,7 +317,7 @@
       {
         "repository": "hsoliwal/M3JDK21",
         "revision": "6d9bad615851f346e3062e3034ccd74cbe2776af",
-        "path": "m3/collections/qualification/m3-mask-native-atoms-runtime-20261021/verification/verify_target_native.py",
+        "path": "make/m3/collections/qualification/m3-mask-native-atoms-runtime-20261021/verification/verify_target_native.py",
         "sha256": "6b6bd9bafd1d275fcc13e62320e9788afc197d8f9e56cb7258bf93858017ad52"
       }
     ]

@@ -14,9 +14,9 @@ def main():
  jars=build.compile_tools(view,out/'tools',home,root/'m3/vendor/third_party-m3/nlp-search')
  names={'slf4j-api-2.0.12':'org.slf4j','slf4j-simple':'org.slf4j.simple','opennlp-tools':'org.apache.opennlp.tools',**{'lucene-'+x:'org.apache.lucene.'+('analysis.common' if x=='analysis-common' else x) for x in ['core','analysis-common','queries','sandbox','queryparser']}}
  rows=['artifact\tversion\tjar\tmodule\trequires\tdisposition']+[f'{n}\t1\t{out/"tools"/(n+".jar")}\t{module}\t-\tJMOD' for n,module in names.items() if n!='opennlp-tools'];(out/'IMAGE.tsv').write_text('\n'.join(rows)+'\n')
- path='m3/tooling/module-packs/nlp-search/src/org.apache.opennlp.tools/module-info.java';source=root/path
+ path='make/m3/tooling/module-packs/nlp-search/src/org.apache.opennlp.tools/module-info.java';source=root/path
  (out/'DESCRIPTORS.tsv').write_text('module\tartifacts\tunit_jars\ttarget\tsha256\tgenerated\n'+f'org.apache.opennlp.tools\topennlp-tools\t{out/"tools/opennlp-tools.jar"}\t{path}\t{hashlib.sha256(source.read_bytes()).hexdigest()}\t{source}\n')
- build.run([sys.executable,root/'m3/tooling/jmod-recipes/tools/jmod_pack.py','--jdk-home',home,'--image-tsv',out/'IMAGE.tsv','--manifest',out/'DESCRIPTORS.tsv','--layer-root',root,'--out',out/'pack','--add-modules','java.se,jdk.unsupported,jdk.management,jdk.compiler,jdk.jlink,jdk.jartool,jdk.jdeps'],out/'pack.log')
+ build.run([sys.executable,root/'make/m3/tooling/jmod-recipes/tools/jmod_pack.py','--jdk-home',home,'--image-tsv',out/'IMAGE.tsv','--manifest',out/'DESCRIPTORS.tsv','--layer-root',root,'--out',out/'pack','--add-modules','java.se,jdk.unsupported,jdk.management,jdk.compiler,jdk.jlink,jdk.jartool,jdk.jdeps'],out/'pack.log')
  image=out/'pack/image';mods=','.join(names.values());classes=out/'probe';classes.mkdir()
  build.run([image/'bin/javac','-source','21','-target','21','--add-modules',mods,'-d',classes,Path(__file__).parent/'fixtures/src/test/java/ToolsProbe.java'],out/'probe-compile.log')
  build.run([image/'bin/java','-Djava.util.logging.SimpleFormatter.format=%4$s: %5$s%n','-Dorg.slf4j.simpleLogger.defaultLogLevel=warn','--add-modules',mods,'--add-opens','org.apache.lucene.queryparser/org.apache.lucene.queryparser.classic=ALL-UNNAMED','-Xmx256m','-cp',classes,'ToolsProbe'],out/'image.behavior.log')

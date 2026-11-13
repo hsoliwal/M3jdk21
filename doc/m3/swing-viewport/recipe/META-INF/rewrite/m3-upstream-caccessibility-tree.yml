@@ -6,7 +6,7 @@ name: com.synexia.openrewrite.viewport.M3UpstreamCAccessibilityTree
 displayName: CAccessibility answers a JTree's accessible children from its rows (JDK-8317771, upstream port)
 description: >-
   Upstream port of JDK-8317771 (openjdk/jdk PR 17165, commit ffa33d7b807bfef6ff05c9adba869dddf813cf68, fixed in
-  JDK 23; m3/docs/swing-viewport/UPSTREAM_PORTS.tsv). On macOS 14 expanding or collapsing a JTree node from the
+  JDK 23; doc/m3/swing-viewport/UPSTREAM_PORTS.tsv). On macOS 14 expanding or collapsing a JTree node from the
   keyboard froze the application: the accessibility bridge walked the tree's accessible children through the generic
   recursion. Upstream answers a JTree's children (all, or the selected ones) from its rows, one AccessibleJTreeNode per
   row, before the generic walk. The added method and the new body of getChildrenAndRolesRecursive are upstream's,

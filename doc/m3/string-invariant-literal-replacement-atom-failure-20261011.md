@@ -3,7 +3,7 @@
 ## Observed failure
 
 The `M3JDK String owner-coordinate runtime` workflow ran
-`m3/runtime-integration/check-m3string-invariants.py` and failed with
+`make/m3/runtime-integration/check-m3string-invariants.py` and failed with
 `M3_STRING_INVARIANT_FAIL: M3String canonical literal replacement path missing`.
 
 The checker currently requires the declaration
@@ -38,6 +38,6 @@ overload.
 ## Other failures are separate
 
 The same workflow batch also reports a missing
-`m3/compatibility/m3-string-representation-consumers-receipt.json`,
+`make/m3/compatibility/m3-string-representation-consumers-receipt.json`,
 a full-borrow self-promotion refusal, and broad migration-recipe failures.
 Do not weaken those gates or bundle them into this atom-boundary repair.

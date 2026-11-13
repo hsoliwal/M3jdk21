@@ -23,8 +23,8 @@ The historical original installed-source ledger and the preceding six-file
 filtered/sorted overlay remain immutable. A further **canonical Synexia TEXT
 recipe** `com.synexia.m3.Jdk21StoredRepresentativeMetadata20261017`
 (pinned with the two Java recipe crates in Synexia #12009) changes precisely
-`m3/collections/verify_donation.py` and creates
-`m3/collections/recipe/stored-representative-20261017/manifest.tsv`.
+`make/m3/collections/verify_donation.py` and creates
+`make/m3/collections/recipe/stored-representative-20261017/manifest.tsv`.
 The new manifest replaces exactly two already-approved source SHA-256 values
 and admits precisely two new test files. Both bytes are read back from the
 source-bound text postimages; no direct handpatch of emitted runtime code.

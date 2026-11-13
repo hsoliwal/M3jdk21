@@ -6,7 +6,7 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3Patch.java'
       - 'test/jdk/jdk/m3/collections/M3PatchApplyRunsContract.java'
       - 'test/jdk/jdk/m3/collections/M3PatchApplyRunsTest.java'
-      - 'm3/collections/qualification/patch-runs-20261021/**'
+      - 'make/m3/collections/qualification/patch-runs-20261021/**'
       - '.github/workflows/m3-patch-run-apply-20261021.yml'
   workflow_dispatch:
 

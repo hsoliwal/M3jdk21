@@ -23,7 +23,7 @@ P2-029	m3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/M3File.java	ABS
 P2-030	m3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/M3JavacASTIndex.java	BLOB	cb867305b4f9be16afa4e2c7c6186fab47df4a88
 P2-030	m3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/M3JavacASTIndex.java	PRESENT	private static final class FrozenInputs implements SourceResolver {
 P2-030	m3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/M3JavacASTIndex.java	ABSENT	Map<URI, M3File> frozen = Map.copyOf(files);
-P2-093	m3/ports/compiletime/pom.xml	PRESENT	<compileSourceRoot>${project.basedir}/../../vendor/m3/m3-mindex/compiler/src/main/java</compileSourceRoot>
+P2-093	m3/ports/compiletime/pom.xml	PRESENT	<compileSourceRoot>${project.basedir}/../../../../m3/vendor/m3/m3-mindex/compiler/src/main/java</compileSourceRoot>
 P2-093	m3/vendor/m3/m3-mindex/compiler/src/main/java/jdk/internal/m3/mindex/compiler/ast/MIndexASTDocument.java	PRESENT	public record MIndexASTDocument(
 P2-093	m3/vendor/m3/m3-mindex/compiler/src/main/java/jdk/internal/m3/mindex/compiler/ast/MIndexASTOccurrence.java	PRESENT	public record MIndexASTOccurrence(
 P2-093	m3/vendor/m3/m3-mindex/compiler/src/main/java/jdk/internal/m3/mindex/compiler/ast/MIndexJavaAST.java	PRESENT	public final class MIndexJavaAST {

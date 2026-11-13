@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
 # Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
-"""Compose m3/tooling/fdp-delegate/GATES.tsv mechanically from one gate run.
+"""Compose make/m3/tooling/fdp-delegate/GATES.tsv mechanically from one gate run.
 
   python gates_tsv.py <run dir> [--out <file>]
 
@@ -53,7 +53,7 @@ HEADER = ("gate", "command", "result")
 RUN_GATES = ("a_compile", "m3_patch_compile", "b_fdp_differential_stock", "b_fdp_differential_m3",
              "c_jackson_differential_stock", "c_jackson_differential_m3")
 NOT_RUN = ("not_run", "jackson pack Maven build (build.py runtime, verify-qualification.py), jtreg, "
-           "m3/tooling/name-contract", "NOT RUN: needs the annotations/databind donor trees, a Maven cache and a full "
+           "make/m3/tooling/name-contract", "NOT RUN: needs the annotations/databind donor trees, a Maven cache and a full "
            "checkout, which the shared H: drive could not hold during this run")
 
 

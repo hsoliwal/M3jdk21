@@ -30,7 +30,7 @@ After the rename no `org.eclipse.swt` reference remains in any file; see the `re
 - the ported Synexia swap files stay Apache-2.0.
 
 Copies into `java.desktop` internals are an explicit relicence, recorded in
-[`m3/docs/m3-item-residency-explicit-relicense.md`](../../docs/m3-item-residency-explicit-relicense.md).
+[`doc/m3/m3-item-residency-explicit-relicense.md`](../../../../doc/m3/m3-item-residency-explicit-relicense.md).
 
 | File | Role |
 |---|---|

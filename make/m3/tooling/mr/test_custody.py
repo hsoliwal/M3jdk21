@@ -8,8 +8,8 @@ import sys
 import unittest
 
 CRATE = Path(__file__).resolve().parent
-ROOT = CRATE.parents[2]
-source = Path(sys.argv.pop(1)) if len(sys.argv) > 1 else ROOT / 'm3/tooling/tq-sync/verify-plan.py'
+ROOT = CRATE.parents[3]
+source = Path(sys.argv.pop(1)) if len(sys.argv) > 1 else ROOT / 'make/m3/tooling/tq-sync/verify-plan.py'
 tree = ast.parse(source.read_text())
 function = next(node for node in tree.body if isinstance(node, ast.FunctionDef) and node.name == 'retained_mapping')
 namespace = {'copy': copy}

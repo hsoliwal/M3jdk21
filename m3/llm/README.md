@@ -4,7 +4,7 @@
 `jdk.m3.llm` is the M3JDK-owned Java21 module for the received Synexia text,
 evidence and Chrome inference capabilities. Its runtime dependencies are
 JDK modules only: `java.base` and `jdk.httpserver`. It is an independently
-Apache-2.0-licensed product module in the shared `m3/pom.xml` reactor.
+Apache-2.0-licensed product module in the shared `make/m3/pom.xml` reactor.
 
 This receiving change is a component candidate. Its Java/module tests and
 linked-image checks are recorded separately from full source-built M3JDK
@@ -51,7 +51,7 @@ a separate API path.
 ```sh
 mvn -f m3/llm/pom.xml verify
 # In a complete checkout, through the shared reactor:
-mvn -f m3/pom.xml -pl llm verify
+mvn -f make/m3/pom.xml -pl llm verify
 ```
 
 There are no runtime donor JARs. JUnit is a test-only dependency. Maven and

@@ -1,6 +1,6 @@
 <!-- Copyright 2026 Hitesh Soliwal and contributors -->
 <!-- SPDX-License-Identifier: Apache-2.0 -->
-<!-- FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/m3-pmem-sdk/recipes/source-slices-v2/PROGRESS.md blob 72b49c504e79; recipe m3/optane/recipe/pmem-source-image-20261106/relocate.py v3 -->
+<!-- FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/m3-pmem-sdk/recipes/source-slices-v2/PROGRESS.md blob 72b49c504e79; recipe make/m3/optane/recipe/pmem-source-image-20261106/relocate.py v3 -->
 # SDD ledger — plan: m3-pmem-sdk/recipes/source-slices-v2/PLAN.md
 
 ## Frozen input and scope

@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.HexFormat;
 
 /** Actual M3IndexMaskCompactor Java-vs-required-native parity; no duplicate JNI backend. */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/b65df53330e3d82f6b2d5509ded971f19883f4ca/synexia-openrewrite-recipes/crates/m3-openjdk-atom-jit-pattern-20261031/src/main/java/com/synexia/m3/qualification/M3OpenJdkIndexMaskJniProbe.java blob c4ef5be4a18d; recipe m3/tooling/atom-jit-gate/recipe/atom-jit-gate-20261106/relocate.py v4
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/b65df53330e3d82f6b2d5509ded971f19883f4ca/synexia-openrewrite-recipes/crates/m3-openjdk-atom-jit-pattern-20261031/src/main/java/com/synexia/m3/qualification/M3OpenJdkIndexMaskJniProbe.java blob c4ef5be4a18d; recipe make/m3/tooling/atom-jit-gate/recipe/atom-jit-gate-20261106/relocate.py v4
 public final class OpenJdkIndexMaskJniProbe {
     private static final int[] LENGTHS = {0, 1, 2, 63, 64, 65, 255, 256, 257, 1023, 1024};
     private static final int[] MASKS = {0, 1, 2, 3, 15, 63, 127, 128, 255};

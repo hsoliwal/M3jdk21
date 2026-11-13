@@ -145,7 +145,7 @@
       "exact_copy": true
     }
   ],
-  "receiving_contract": "README.md; m3/docs/name-mapping.d/m3-jackson-jmod.json",
+  "receiving_contract": "README.md; doc/m3/name-mapping.d/m3-jackson-jmod.json",
   "dispositions": {
     "MIndexAST": "adapted four-file primitive-lane and exact hash-consing mechanism; per-document lifetime and receiving String/hash domain",
     "M3File": "bounded immutable snapshot and strict decoder/source-hash atoms",

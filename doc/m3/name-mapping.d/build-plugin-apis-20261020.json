@@ -12,7 +12,7 @@
     {
       "source": "OpenRewrite8.17.1 Recipe/SourceFile/ExecutionContext/RecipeRun",
       "target": "org.m3jdk.tooling.rewrite.M3RewriteTool.execute",
-      "target_path": "m3/tooling/shared-frontend/openrewrite-tool/src/main/java/org/m3jdk/tooling/rewrite/M3RewriteTool.java",
+      "target_path": "make/m3/tooling/shared-frontend/openrewrite-tool/src/main/java/org/m3jdk/tooling/rewrite/M3RewriteTool.java",
       "rule": "Add a typed entry point to the existing owner; preserve native framework objects and scheduling, no compiler task or parser at this boundary",
       "dataset": "retained-api-20261020"
     },
@@ -20,7 +20,7 @@
       "source": "MojoHaus maven-native1.1.0 compiler/linker API and generic-C provider",
       "source_commit": "59b9d76471f42265141e1edd3594f9dca156099a",
       "target": "org.codehaus.mojo.natives.compiler.Compiler and org.codehaus.mojo.natives.linker.Linker",
-      "target_path": "m3/tooling/module-packs/build-support/native-api",
+      "target_path": "make/m3/tooling/module-packs/build-support/native-api",
       "rule": "Preserve original public packages and per-file MIT/Apache-2.0 rights; source-build selected capability with original dependencies",
       "intake_mode": "INDEPENDENT_SELECTED_BUILD_CAPABILITY"
     },
@@ -33,7 +33,7 @@
       "source": "GraalVM Native Build Tools1.1.13 utils and reachability-metadata modules",
       "source_commit": "71d6b71f52be9747ffc6b552bce8fe19687218eb",
       "target": "org.graalvm.buildtools.agent, org.graalvm.buildtools.utils, org.graalvm.reachability",
-      "target_path": "m3/tooling/module-packs/build-support/graal-build-api",
+      "target_path": "make/m3/tooling/module-packs/build-support/graal-build-api",
       "rule": "Source-build original common APIs with original UPL rights; agent argument generation and metadata selection do not provide the AOT engine"
     },
     {
@@ -49,11 +49,11 @@
     },
     {
       "source": "Existing module-pack installer and module graph",
-      "target": "m3/tooling/module-packs and com.m3.tools.modulepack",
+      "target": "make/m3/tooling/module-packs and com.m3.tools.modulepack",
       "rule": "Reuse selected installation and graph owners; do not create a competing registry or attach build libraries to java.base"
     }
   ],
-  "contract": "m3/docs/build-api-invariant.md",
+  "contract": "doc/m3/build-api-invariant.md",
   "public_jdk_api_changes": false,
   "synexia_runtime_dependency": false,
   "new_generic_plugin_engine": false,

@@ -261,7 +261,7 @@
     "m3-program-escape-precompute-20261017": {
       "name": "m3-program-escape-precompute-20261017",
       "targets": {
-        "m3/docs/name-mapping.d/m3-program-escape-precompute.json": "d293b891ed743279037f4cf4417bf8efaae9fab186dee4a3cc6bb69dc78a0e8f",
+        "doc/m3/name-mapping.d/m3-program-escape-precompute.json": "d293b891ed743279037f4cf4417bf8efaae9fab186dee4a3cc6bb69dc78a0e8f",
         "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3EscapeFlow.java": "f8e14d9ab9e4499457ab58ad0776a8e8124331f28ab48de23bb69bc2f83adaff",
         "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3GvasLiteralHarvester.java": "cbe859bcfd97ee2e7bec6122c96de66d25159d00770cc84c5f0227c64f96f814",
         "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ItemReferenceScan.java": "4c504f5272d2d66b3e1de78e8db4dd4690aa4795b98eba91a828b15bbe409994",

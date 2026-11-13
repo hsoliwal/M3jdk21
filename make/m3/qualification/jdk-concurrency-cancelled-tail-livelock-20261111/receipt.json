@@ -73,7 +73,7 @@
       "license": "GPL-2.0-only"
     },
     {
-      "path": "m3/docs/name-mapping.json",
+      "path": "doc/m3/name-mapping.json",
       "before_sha256": "96b9a958a5a083c3b6b86383afd90791dbd18d7ac8cee55041235716cc852e47",
       "before_blob": "5dd1f5890ff3685db0661994b85c57660a09ceec",
       "after_sha256": "d47986f9e64a16e406f76ca1c9dcdb7aa543e3ce77e89abb3f906cb4fa26882e",
@@ -83,7 +83,7 @@
       "license": "Apache-2.0"
     },
     {
-      "path": "m3/tooling/name-contract/name-plan.json",
+      "path": "make/m3/tooling/name-contract/name-plan.json",
       "before_sha256": "de6af3cc4cfaf6a91b0f461e653a9a9aaf123b0a6b2d371fc4782a4541f4c4d9",
       "before_blob": "46046f47a90c7125e47c6ca69940316b27ae3de4",
       "after_sha256": "b835e88bd08c4fcfde5a2ba08caad9fab884db1e94c5bfc876967d1090b57ffe",
@@ -93,7 +93,7 @@
       "license": "Apache-2.0"
     }
   ],
-  "passive_receipt_path": "m3/qualification/jdk-concurrency-cancelled-tail-livelock-20261111/receipt.json",
+  "passive_receipt_path": "make/m3/qualification/jdk-concurrency-cancelled-tail-livelock-20261111/receipt.json",
   "receipt_identity": "The receiving Git tree binds this passive receipt; no circular self-hash or invented future receiving commit is recorded.",
   "sdk_execution": {
     "status": "PASS",
@@ -274,7 +274,7 @@
       "receiving_source_commit": "caff5b3864be33eb705f253d29c325decd738abb",
       "receiving_source_tree": "9c5c67564871451a45527ec9741f29949bd153fb",
       "previous_receipt": {
-        "path": "m3/qualification/jdk-concurrency-cancelled-tail-livelock-20261111/receipt.json",
+        "path": "make/m3/qualification/jdk-concurrency-cancelled-tail-livelock-20261111/receipt.json",
         "commit": "caff5b3864be33eb705f253d29c325decd738abb",
         "bytes": 11754,
         "sha256": "a3a49b9c91d33c93a05be900ccdb48d225415373bf9253a9bd819536682a2679",

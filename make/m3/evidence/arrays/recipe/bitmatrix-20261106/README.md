@@ -44,7 +44,7 @@ by the `native-linux` profile (one `target_sources` block appended to `src/main/
 | recipe | `relocate.py` v3: `python -I m3/arrays/recipe/bitmatrix-20261106/relocate.py --donor-git <clone> --donor-rev <rev> [--module m3/arrays] [--check]` |
 | map | `RELOCATION_MAP.tsv`: 4 `FILE` rows, 1 `PACKAGE` row (`com.synexia.matcollections` -> `jdk.m3.arrays`), 4 `TYPE` rows (one maps `MatIntList` to the module's existing `M3IntPostingList`, relocated by PR #2512 from the same donor blob: no second copy), 1 `JNI` row (symbol prefix), 1 `LITERAL` row (the property name), 3 `NEC` rows, 3 `OMIT` rows, no `INCLUDE` / `DROP` / `EXTERNAL` row |
 | provenance | `PROVENANCE.tsv`: donor commit, blob sha, donor sha256, target sha256, `body_match`, `body_match_renamed`, `declared_drops` per `FILE` row |
-| naming | `python -I m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/arrays/`: 0 moves, 0 rewrites, 0 refusals before and after (fixed point) |
+| naming | `python -I make/m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/arrays/`: 0 moves, 0 rewrites, 0 refusals before and after (fixed point) |
 
 The recipe rewrites only the license header (M3JDK style, inside the C block comment too), the `package` line, mapped
 `import` lines, the mapped type names (whole-word tokens), the JNI symbol prefix (`Java_jdk_m3_arrays_M3BitMatrix_*`),

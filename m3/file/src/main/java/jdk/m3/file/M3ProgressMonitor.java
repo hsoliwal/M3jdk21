@@ -33,7 +33,7 @@ import java.time.Instant;
  *
  * @since ContextOS 1.0
  */
-//FLLDCIM: UNIFY - adapter over jdk.m3.collections.ProgressMonitor (long units on both sides; jdk.m3.file.M3Progress, M3ProgressChild and ProgressState retired); recipe m3/qualification/progress-monitor-unify-20261106/unify.py v1
+//FLLDCIM: UNIFY - adapter over jdk.m3.collections.ProgressMonitor (long units on both sides; jdk.m3.file.M3Progress, M3ProgressChild and ProgressState retired); recipe make/m3/qualification/progress-monitor-unify-20261106/unify.py v1
 public interface M3ProgressMonitor extends jdk.m3.collections.ProgressMonitor {
 
     /**

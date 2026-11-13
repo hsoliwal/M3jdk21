@@ -4,12 +4,12 @@ name: M3 Synexia PR9042 Precompute Handoff
 on:
   pull_request:
     paths:
-      - 'm3/compatibility/m3-pr9042-code-text-precompute.tsv'
-      - 'm3/compatibility/check_m3_pr9042_code_text_precompute.py'
-      - 'm3/docs/m3-pr9042-code-text-precompute-handoff.md'
+      - 'make/m3/compatibility/m3-pr9042-code-text-precompute.tsv'
+      - 'make/m3/compatibility/check_m3_pr9042_code_text_precompute.py'
+      - 'doc/m3/m3-pr9042-code-text-precompute-handoff.md'
       - 'm3/ports/precompute/**'
       - 'm3/tooling/migration-recipes/src/main/resources/**/m3-pr9042-precompute-handoff/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-pr9042-precompute-handoff.yml'
+      - 'make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-pr9042-precompute-handoff.yml'
       - '.github/workflows/m3-pr9042-code-text-precompute.yml'
   workflow_dispatch:
 
@@ -32,7 +32,7 @@ jobs:
           java-version: '21'
           cache: maven
       - name: Exact handoff receipt and M3 naming boundary
-        run: python3 m3/compatibility/check_m3_pr9042_code_text_precompute.py
+        run: python3 make/m3/compatibility/check_m3_pr9042_code_text_precompute.py
       - name: Java precompute proof
         run: mvn -B -ntp -f m3/ports/precompute/pom.xml test
       - name: Java JNI native parity

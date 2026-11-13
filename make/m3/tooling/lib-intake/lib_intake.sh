@@ -25,14 +25,14 @@
 # layer_dir may be "auto": common package root R -> jdk.m3.lib.<last segment of R, lower case>, module jdk.m3.<same>,
 # version from the source pom, layer m3/vendor/third_party-m3/relocated/<lib>.
 # Usage (repository root, JDK 21 at JAVA_HOME, m3-work-maven-plugin 0.1.1 installed, MSYS path conversion on):
-#   bash m3/tooling/lib-intake/lib_intake.sh <lib> <work dir> [<intake.tsv>]
+#   bash make/m3/tooling/lib-intake/lib_intake.sh <lib> <work dir> [<intake.tsv>]
 set -uo pipefail
 export LC_ALL=C   # sed/grep/awk treat source bytes as bytes: a non-UTF-8 byte must never be rewritten
 LIB="$1"; W="$2"; INTAKE="${3:-m3/tooling/lib-intake/INTAKE.tsv}"
 REPO=$(pwd); BIN="$JAVA_HOME/bin"; SEP=":"; case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) SEP=";";; esac
 row=$(awk -F'\t' -v l="$LIB" '$1 == l' "$INTAKE"); [ -n "$row" ] || { echo "LIB_INTAKE_FAIL no row for $LIB in $INTAKE"; exit 2; }
 IFS=$'\t' read -r _ SRC MAPS MODULE VERSION LAYER MOP OWNERS CDEPS MAIN IDEPS <<< "$row"; CDEPS="${CDEPS:--}"; MAIN="${MAIN:--}"; IDEPS="${IDEPS:--}"
-RUN="m3/tooling/lib-intake/runs/$LIB"; rm -rf "$RUN/relocation"; mkdir -p "$RUN"; rm -rf "$W"
+RUN="make/m3/tooling/lib-intake/runs/$LIB"; rm -rf "$RUN/relocation"; mkdir -p "$RUN"; rm -rf "$W"
 mkdir -p "$W/orig/java" "$W/orig/resources" "$W/proj/src/main/java" "$W/proj/src/main/resources"
 ST="$RUN/STAGES.tsv"; printf 'stage\tstatus\tevidence\n' > "$ST"
 stage() { printf '%s\t%s\t%s\n' "$1" "$2" "$3" >> "$ST"; echo "LIB_INTAKE $LIB $1 $2 $3"; [ "$2" = PASS ] || { echo "LIB_INTAKE_FAIL $LIB $1"; exit 3; }; }
@@ -76,7 +76,7 @@ fi
 ALLMAPS="$MAPS"; IREQ=""; ISTATIC=""; ICLS=""; IJMODS=""; IMODS=""
 if [ "$IDEPS" != - ]; then
 	for d in ${IDEPS//,/ }; do
-		dl="${d%%:*}"; ctx="m3/tooling/lib-intake/runs/$dl/RUN_CONTEXT.tsv"; wd="$(dirname "$W")/$dl"
+		dl="${d%%:*}"; ctx="make/m3/tooling/lib-intake/runs/$dl/RUN_CONTEXT.tsv"; wd="$(dirname "$W")/$dl"
 		{ [ -f "$ctx" ] && [ -d "$wd/classes" ]; } || stage S0_DEPS FAIL "intake dependency $dl has no relocated run in $(dirname "$W") (order it first)"
 		ALLMAPS="$ALLMAPS;$(awk -F'\t' '$1 == "mappings" { print $2 }' "$ctx")"; dmod=$(awk -F'\t' '$1 == "module" { print $2 }' "$ctx")
 		ICLS="$ICLS${ICLS:+$SEP}$wd/classes"; IJMODS="$IJMODS$SEP$wd/jmods"; IMODS="$IMODS,$dmod"
@@ -180,7 +180,7 @@ awk -F'\t' 'NR > 1 { c[$5 "\t" $9]++ } END { print "state\tnext_action\tpatterns
 
 # S4 CONSOLIDATE --------------------------------------------------------------------------------------------------------------
 head -1 "$W/atoms/ATOMS.tsv" > "$W/empty-ATOMS.tsv"; mkdir -p "$W/absorb"
-python -I "$REPO/m3/collections/qualification/converge-commons-20261030/absorb_plan.py" "$W/atoms/ATOMS.tsv" "$W/empty-ATOMS.tsv" "$OWNERS" "$W/absorb" > "$RUN/s4-absorb.log" 2>&1; rc=$?
+python -I "$REPO/make/m3/collections/qualification/converge-commons-20261030/absorb_plan.py" "$W/atoms/ATOMS.tsv" "$W/empty-ATOMS.tsv" "$OWNERS" "$W/absorb" > "$RUN/s4-absorb.log" 2>&1; rc=$?
 cp "$W/absorb/SUMMARY.tsv" "$RUN/ABSORB_SUMMARY.tsv" 2>/dev/null
 awk -F'\t' 'NR == 1 || $6 == "OWNER_CONTRACT"' "$W/absorb/ABSORPTION_PLAN.tsv" | cut -f1-6,9 > "$RUN/CONSOLIDATION_QUEUE.tsv" 2>/dev/null
 [ "$rc" -eq 0 ] && stage S4_CONSOLIDATE PASS "owner_contract_atoms=$(($(wc -l < "$RUN/CONSOLIDATION_QUEUE.tsv") - 1)) (proposal queue)" || stage S4_CONSOLIDATE FAIL "rc=$rc"
@@ -231,7 +231,7 @@ if [ -f "$RUN/SMOKE.java" ]; then
 	smoke=$("$W/image/bin/java" --add-modules "$MODULE" "$RUN/SMOKE.java" 2>&1 | tr -d '\r' | tail -1); want=$(sed -n 's#^// expect: ##p' "$RUN/SMOKE.java")
 else
 	"$BIN/jmod" list "$W/jmods/$MODULE.jmod" | tr -d '\r' | sed -n 's#^classes/\(.*\)\.class$#\1#p' | grep -v '^module-info$' | tr '/' '.' > "$W/classlist.txt"
-	cp "$REPO/m3/tooling/lib-intake/LoadAll.java" "$W/LoadAll.java"
+	cp "$REPO/make/m3/tooling/lib-intake/LoadAll.java" "$W/LoadAll.java"
 	smoke=$("$W/image/bin/java" --add-modules "$MODULE" "$W/LoadAll.java" "$W/classlist.txt" 2>&1 | tr -d '\r' | tail -1); want="loaded=$(wc -l < "$W/classlist.txt") failed=0"
 fi
 echo "$smoke" > "$RUN/s7-smoke.log"

@@ -30,7 +30,7 @@ before = (resources / "pre" / row[3]).read_bytes()
 after = (crate / "target/candidate" / source_path).read_bytes()
 if hashlib.sha256(before).hexdigest() != row[1] or hashlib.sha256(after).hexdigest() != row[2]:
     raise ValueError("probe source identity differs from qualified recipe")
-spec = importlib.util.spec_from_file_location("source_support", root / "m3/runtime-integration/regex-plan-amalgamation/source_extracted_java21.py")
+spec = importlib.util.spec_from_file_location("source_support", root / "make/m3/runtime-integration/regex-plan-amalgamation/source_extracted_java21.py")
 support = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(support)
 with tempfile.TemporaryDirectory(prefix="m3-affix-probe-") as directory:

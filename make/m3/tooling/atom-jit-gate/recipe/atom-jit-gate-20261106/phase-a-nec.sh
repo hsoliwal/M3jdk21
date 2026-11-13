@@ -8,13 +8,13 @@
 #   donor: the NEC/OMIT rows of RELOCATION_MAP.tsv (the atomizer closure + the index) compiled from the donor git tree
 #          with javac --release 21 -sourcepath; phase-a/DonorPatternDump.java drives it reflectively (the donor
 #          package comes from the map, so no file in the naming scope names it).
-#   census: m3/tooling/atom-census/src/main/java compiled as is; phase-a/CensusPerFile.java runs its CLI --semantic
+#   census: make/m3/tooling/atom-census/src/main/java compiled as is; phase-a/CensusPerFile.java runs its CLI --semantic
 #          once per file (a refused file does not hide the others).
 # usage: JAVA_HOME=<JDK 21> phase-a-nec.sh <donor-git-dir> <donor-rev> <scratch-dir>
 set -euo pipefail
 case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) SEP=';'; winpath() { (cd "$1" && pwd -W); } ;; *) SEP=':'; winpath() { (cd "$1" && pwd); } ;; esac
 RECIPE_DIR=$(winpath "$(dirname "$0")")
-ROOT=$(winpath "$(dirname "$0")/../../../../..")
+ROOT=$(winpath "$(dirname "$0")/../../../../../..")
 DONOR_GIT=$1
 REV=$2
 mkdir -p "$3"
@@ -36,13 +36,13 @@ echo "DONOR $(git -C "$DONOR_GIT" rev-parse "$REV^{commit}") closure=${#closure[
     $(find "$SCRATCH/donor-src" -name '*.java')
 "$JAVA_BIN/javac" --release 21 -d "$SCRATCH/donor-classes" "$RECIPE_DIR/phase-a/DonorPatternDump.java"
 "$JAVA_BIN/javac" --release 21 -proc:none -Xlint:all -Werror -d "$SCRATCH/census-classes" \
-    $(find "$ROOT/m3/tooling/atom-census/src/main/java" -name '*.java')
+    $(find "$ROOT/make/m3/tooling/atom-census/src/main/java" -name '*.java')
 "$JAVA_BIN/javac" --release 21 -d "$SCRATCH/census-classes" "$RECIPE_DIR/phase-a/CensusPerFile.java"
 git -C "$ROOT" archive HEAD m3/collections/src/main/java m3/algorithms/src/main/java | tar -x -C "$SCRATCH/corpus"
 echo "CORPUS $(git -C "$ROOT" rev-parse HEAD) files=$(find "$SCRATCH/corpus" -name '*.java' | wc -l)"
 (cd "$SCRATCH" && "$JAVA_BIN/java" -cp donor-classes DonorPatternDump "$package" corpus donor-out \
     m3/collections/src/main/java m3/algorithms/src/main/java)
-(cd "$SCRATCH" && "$JAVA_BIN/java" -cp census-classes CensusPerFile "$ROOT/m3/tooling/atom-census/PATTERN_RULES.tsv" \
+(cd "$SCRATCH" && "$JAVA_BIN/java" -cp census-classes CensusPerFile "$ROOT/make/m3/tooling/atom-census/PATTERN_RULES.tsv" \
     corpus census-out m3/collections/src/main/java m3/algorithms/src/main/java)
 echo "CENSUS_REFUSAL_KINDS $(cut -f3 "$SCRATCH/census-out/CENSUS_REFUSALS.tsv" | sed 's/:.*//' | sort | uniq -c | tr -s ' ' | tr '\n' ';')"
 python -I "$RECIPE_DIR/phase-a/nec_join.py" "$SCRATCH"

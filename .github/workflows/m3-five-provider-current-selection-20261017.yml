@@ -30,7 +30,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/collections/verify_donation.py
+          python3 make/m3/collections/verify_donation.py
           JAR="$GITHUB_WORKSPACE/m3/collections/target/donation-verification/m3-collections.jar"
           test "$(jdeps --print-module-deps "$JAR")" = java.base
           (cd "$RUNNER_TEMP" && mvn -B -ntp org.apache.maven.plugins:maven-install-plugin:3.1.3:install-file -Dfile="$JAR" -DgroupId=com.m3 -DartifactId=m3-collections -Dversion=0.1.0-SNAPSHOT -Dpackaging=jar -DgeneratePom=true)

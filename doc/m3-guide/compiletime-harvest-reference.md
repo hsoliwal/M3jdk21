@@ -12,7 +12,7 @@ The [19-owner map](compiletime-source-coverage.md) keeps their boundaries separa
 
 **Verification: NOT_RUN.** These command-line tools, examples, tests, benchmarks,
 recipe and custody scripts were not executed for this documentation. The
-[design's 2026-10-13 results](../../m3/docs/m3-compiletime-precompute.md#10-first-vertical-leaf-constant-regex-proven)
+[design's 2026-10-13 results](../m3/m3-compiletime-precompute.md#10-first-vertical-leaf-constant-regex-proven)
 are historical finite-corpus results, not results of this source review or a
 new guarantee about another JDK, input set or deployment.
 
@@ -25,7 +25,7 @@ which depends on ASM/ASM tree/ASM analysis and the separate `m3-precompute`
 artifact. The [POM](../../m3/ports/compiletime/pom.xml) has no parent/modules
 and Surefire uses `useModulePath=false`. No `module-info.java` occurs in the
 complete project tree, and the project is not part of the
-[root control reactor's module/profile module lists](../../m3/pom.xml).
+[root control reactor's module/profile module lists](../../make/m3/pom.xml).
 
 The [existing README](../../m3/ports/compiletime/README.md) gives the explicit
 precompute-install, compiletime-test and dependency-classpath build order.
@@ -277,7 +277,7 @@ internal methods are included to make output and measurement behavior traceable.
 
 ## Historical evidence and custody boundaries
 
-The existing [design](../../m3/docs/m3-compiletime-precompute.md#10-first-vertical-leaf-constant-regex-proven)
+The existing [design](../m3/m3-compiletime-precompute.md#10-first-vertical-leaf-constant-regex-proven)
 records a 2026-10-13 Windows 11 / Oracle JDK 21.0.9+7-LTS-338 run on a shared
 host, including 556 harvested keys, 2,965 sampled inputs and a separate frozen
 10,000 × 64 oracle corpus. Its zero finite mismatch counts, image digest and
@@ -298,14 +298,14 @@ can leave a partial crate. The manifest's additive ABSENT rows describe recipe
 metadata, not the seal script's filesystem effects. It does not analyze regex
 correctness. Both scripts were inspected as source only and remain **NOT_RUN**.
 
-The pinned [crate manifest](../../m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-compiletime-regex-precompute/manifest.tsv)
+The pinned [crate manifest](../../make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-compiletime-regex-precompute/manifest.tsv)
 contains 29 Java targets: 19 compiletime production owners, three residency
 annotations and seven test/fixture files. Those copies are not extra source
-owners in the 19-row package denominator. The [recipe wrapper](../../m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3CompileTimeRegexPrecomputeRecipe.java)
+owners in the 19-row package denominator. The [recipe wrapper](../../make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3CompileTimeRegexPrecomputeRecipe.java)
 delegates to the hash-pinned snapshot recipe and explicitly returns false for
 both bootstrapPromotionAuthority and semanticAuthority.
 
-Its [two test methods](../../m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3CompileTimeRegexPrecomputeRecipeTest.java)
+Its [two test methods](../../make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3CompileTimeRegexPrecomputeRecipeTest.java)
 assert materialization/fixed point and the wrapper's no-authority flags; they
 were read, **NOT_RUN**, and do not execute harvest/gate semantics. The complete
 compiletime project test tree contains four JUnit classes and three fixtures;

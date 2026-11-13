@@ -2,14 +2,14 @@
 # SPDX-License-Identifier: Apache-2.0
 set -euo pipefail
 
-ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
 cd "$ROOT"
 echo "M3JDK21 integrated java.base/libjava + primitive index + filtered owner verification"
 
 # Verify each independent, canonical-source-sealed product atom against its
 # original baseline and run the same Java21 oracle in normal and -Xint modes.
-bash m3/collections/qualification/natural-run-20261021/verify.sh
-bash m3/collections/qualification/filtered-isempty-20261021/verify.sh
+bash make/m3/collections/qualification/natural-run-20261021/verify.sh
+bash make/m3/collections/qualification/filtered-isempty-20261021/verify.sh
 
 JAVA="src/java.base/share/classes/jdk/internal/misc/M3ObjectMemory.java"
 NATIVE="src/java.base/share/native/libjava/M3ObjectMemory.c"

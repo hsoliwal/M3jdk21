@@ -15,7 +15,7 @@ ADAPT rows are written, from the JDK-named master copies of the retained PR #161
 | `apply.py` | recipe RETAINED_PORT v2: git-id-verified blobs, package rule, ADAPT rule `HOIST_DEFAULT_RESIDENCY` (value re-read from the held owner's blob), one `//FLLDCIM` anchor per file, hash pins, `--check` fixed point, refuses drift (exit 2), idempotent |
 | `differential.sh`, `differential/TreeLeafDifferential.java` | seeded tree-corpus differential: the retained PR #1619 module snapshot (47 sources, compiled whole) vs today's module with the ported leaves; JIT and -Xint; byte-identical output |
 | `mutants.py`, `MUTANTS.tsv` | one mutant of the adapted class, killed by the differential driver against the donor output |
-| `MEMDIFF.txt` | member-level check with `m3/qualification/foldaudit2-jbdrop-4d-20261107/memdiff.py` (closest master owner per file) and a same-name member scan over every master `src/main` of m3/file, m3/fs and m3/collections: no member of the 5 ported files exists on master under another name (no PRESENT_EVOLVED) |
+| `MEMDIFF.txt` | member-level check with `make/m3/qualification/foldaudit2-jbdrop-4d-20261107/memdiff.py` (closest master owner per file) and a same-name member scan over every master `src/main` of m3/file, m3/fs and m3/collections: no member of the 5 ported files exists on master under another name (no PRESENT_EVOLVED) |
 | `GATES.tsv`, `RECIPE_MEMORY.tsv` | gates with numbers; corrections made while building the recipe |
 
 ## Decisions

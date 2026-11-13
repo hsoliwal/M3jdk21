@@ -33,7 +33,7 @@ prefixes and the first parent's `make/conf/module-loader-map.conf`.
   PLATFORM_MODULES (sorted position) and one `# //FLLDCIM: MRL` make-comment anchor above the declaration (the
   anchor cannot sit inside the backslash-continued list). Preimage and postimage sha256 are pinned; anything else is
   refused with nothing written.
-- The JDK naming fixed point (`m3/tooling/jdk-naming/jdk_naming.py plan|apply --only <3 prefixes>`) is
+- The JDK naming fixed point (`make/m3/tooling/jdk-naming/jdk_naming.py plan|apply --only <3 prefixes>`) is
   `moves=0 rewrites=0 refusals=0 absent=0 shadows=0`, so RENAME_APPLIED is empty: the restore bytes are the bytes
   master's law requires.
 
@@ -51,6 +51,6 @@ generation. The only new files are this recipe's own tools and ledgers.
 | `M3StructuredFormatterDifferential.java` | fixed-fixture driver: formatter output and escape/unescape over fixed inputs, run against both builds |
 
 ```text
-python -I m3/qualification/restore-jdk-m3-logging-20261107/apply.py [--check]
-bash m3/qualification/restore-jdk-m3-logging-20261107/gates.sh <repo root> <out dir on S:> [JDK21] [junit console jar]
+python -I make/m3/qualification/restore-jdk-m3-logging-20261107/apply.py [--check]
+bash make/m3/qualification/restore-jdk-m3-logging-20261107/gates.sh <repo root> <out dir on S:> [JDK21] [junit console jar]
 ```

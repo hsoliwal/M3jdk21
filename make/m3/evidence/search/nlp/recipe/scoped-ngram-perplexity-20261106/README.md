@@ -48,7 +48,7 @@ differs from `contextTotal(word)` or exceeds `count(word)`.
 | 4 `javap -p` parity | identical under the map, 19 member lines |
 | 5 untouched classes | 10/10 master class files byte-identical |
 | 6 naming | `jdk_naming.py apply --only m3/nlp/`: 0 moves, 0 rewrites, 0 refusals; FIXED_POINT 0/0; recipe `--check` changed=0 afterwards |
-| 7 scope | `m3/nlp/**` only; `m3/pom.xml` untouched |
+| 7 scope | `m3/nlp/**` only; `make/m3/pom.xml` untouched |
 
 `bash verify.sh <donor clone> <scratch>` runs them (the module's `verify.sh` calls it after the first leaf's gates).
 Hard limits are recorded, not fixed: the relocated owner keeps the donor's 6 `for` statements and 4 methods over 15

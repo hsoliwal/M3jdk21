@@ -15,7 +15,7 @@ import time
 import xml.etree.ElementTree as ET
 
 TARGET = Path("/tmp/m3-publication/string")
-MIRROR = TARGET / "m3/runtime-integration/regex-rope-affix-effects/recipe"
+MIRROR = TARGET / "make/m3/runtime-integration/regex-rope-affix-effects/recipe"
 OUTPUT = Path("/tmp/m3-publication/string-mirror-qualification")
 BOOT = Path("/tmp/m3-toolchain/jdk-21.0.12.1+1")
 MAVEN = Path("/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn")

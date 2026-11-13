@@ -1,15 +1,15 @@
-# reactor-wiring-20261107 — wire off-reactor Maven modules into m3/pom.xml, one gate per module
+# reactor-wiring-20261107 — wire off-reactor Maven modules into make/m3/pom.xml, one gate per module
 
 Lane 37 of the standalone-build programme (plus four `collections/*` modules gated by request of lane a4).
 Base: `a33f82c8af9` (master 2026-11-07). Branch `m3/reactor-wiring-20261107a`. Pom edits only; no module source
-was touched. Every module that has a `pom.xml` under `m3/` but was outside the `<module>` closure of `m3/pom.xml`
+was touched. Every module that has a `pom.xml` under `m3/` but was outside the `<module>` closure of `make/m3/pom.xml`
 and is in this lane's set was gated once with its own `-Werror`/surefire settings:
 
 ```
-mvn -B -ntp -T1 -f m3/pom.xml -pl <module> -am -DskipTests=false package
+mvn -B -ntp -T1 -f make/m3/pom.xml -pl <module> -am -DskipTests=false package
 ```
 
-GREEN (`BUILD SUCCESS`) -> `<module>` line in the default `<modules>` of `m3/pom.xml` (WIRED).
+GREEN (`BUILD SUCCESS`) -> `<module>` line in the default `<modules>` of `make/m3/pom.xml` (WIRED).
 RED -> `<module>` line in profile `m3-offreactor-held` of the same pom (HELD; `-Pm3-offreactor-held` builds it),
 first error recorded in `DECISION.tsv` (file/class, line, message). Each added line carries an
 `<!-- //FLLDCIM: MRL - reactor-wiring-20261107 ... -->` anchor (CNPCDA).
@@ -22,7 +22,7 @@ Not this lane (recorded, untouched): `collections/recipe`, `collections/snapshot
 | file | role |
 |------|------|
 | `apply.py` | hash-pinned replay of `EDITS.tsv` (`apply` idempotent, refuses drift; `verify`; `edit`/`record` used by the gates; ops `insert-before`, `delete-block`) |
-| `EDITS.tsv` | the linear sha256 chain of every `m3/pom.xml` edit (anchor + payload as JSON strings) |
+| `EDITS.tsv` | the linear sha256 chain of every `make/m3/pom.xml` edit (anchor + payload as JSON strings) |
 | `gate.sh` | one module gate: temporary wiring, one Maven run, revert, decision, recorded edit, ledger rows, one commit |
 | `unhold.sh`, `held_payload.py` | take a HELD module out of the profile (recorded `delete-block`) so `gate.sh` can re-gate it |
 | `DECISION.tsv` | module, lane, WIRED/HELD, GAV, reactor deps, gate, first error (file, line, message), own tests |
@@ -33,8 +33,8 @@ Not this lane (recorded, untouched): `collections/recipe`, `collections/snapshot
 | `BASELINE_POST2781_*.tsv`, `FULL_UNHOLD_*.tsv` | the same on master 7b155a401e8 before and after the un-hold (section below) |
 | `reconfirm.sh` | DECISION.tsv row re-confirming a HELD module from CPU evidence, no Maven run |
 
-Replay on a checkout of the base: `python -I m3/qualification/reactor-wiring-20261107/apply.py apply --root .`
-(`verify` reports whether `m3/pom.xml` is at the chain's final sha256).
+Replay on a checkout of the base: `python -I make/m3/qualification/reactor-wiring-20261107/apply.py apply --root .`
+(`verify` reports whether `make/m3/pom.xml` is at the chain's final sha256).
 
 ## Decisions
 
@@ -89,9 +89,9 @@ Wiring order followed the dependency edges found in the poms (`ports/precompute`
 
 | run | command | result |
 |-----|---------|--------|
-| full-package | `mvn -B -ntp -T1 -f m3/pom.xml -DskipTests package` | BUILD FAILURE at `m3-file` (pre-existing: `verify.py` `RuntimeError: module contract inventory changed`, same as the untouched baseline); fail-fast skipped everything after it |
+| full-package | `mvn -B -ntp -T1 -f make/m3/pom.xml -DskipTests package` | BUILD FAILURE at `m3-file` (pre-existing: `verify.py` `RuntimeError: module contract inventory changed`, same as the untouched baseline); fail-fast skipped everything after it |
 | full-package-fae | the same with `-fae` | 39 modules SUCCESS, all 15 WIRED modules among them; FAILURE only in previously-in-reactor modules with the same baseline reasons (`m3-file`, `tooling/migration-recipes`, `tooling/m3jdk-a3-recipes`, `tooling/module-pack-recipes`: `org.openrewrite:rewrite-*:8.17.1-m3-source-1` unresolvable; `backports`: exec exit 1); SKIPPED `fs`, `tooling/a3`, `tooling/backport-dag` (depend on those) |
-| full-verify | `mvn -B -ntp -T1 -fae -f m3/pom.xml verify -Dmaven.test.failure.ignore=true` | 3238 tests run, 2 failures, 2 errors, 162 skipped (baseline on the untouched pom: 2911 / 2 / 2 / 160). `FULL_FAILING.tsv` = `BASELINE_FAILING.tsv` (9 rows, byte-identical) + 3 rows from newly wired modules (below). No previously-in-reactor module changed its result. |
+| full-verify | `mvn -B -ntp -T1 -fae -f make/m3/pom.xml verify -Dmaven.test.failure.ignore=true` | 3238 tests run, 2 failures, 2 errors, 162 skipped (baseline on the untouched pom: 2911 / 2 / 2 / 160). `FULL_FAILING.tsv` = `BASELINE_FAILING.tsv` (9 rows, byte-identical) + 3 rows from newly wired modules (below). No previously-in-reactor module changed its result. |
 
 Newly wired modules' own `verify`-phase results (their `package` gate was GREEN; `verify` runs their exec contracts):
 
@@ -102,7 +102,7 @@ Newly wired modules' own `verify`-phase results (their `package` gate was GREEN;
 | runtime-integration/regex-precompute | FAILURE — `verify.py` path contains the unset property `${m3.checkout}` (the recipe expects `-Dm3.checkout=<com.synexia checkout>`; external checkout, not part of the standalone tree) |
 | the other 12 | SUCCESS; test counts in `FULL_TESTS.tsv` (eclipse/core-runtime 37, eclipse/framework 25, ports/precompute 120 (2 skipped), ports/parallel 31, ports/vcpu 34, ports/regex-cursor 54, collections/interop 26; migration, ports/indexstring, collections/signal-codegen 0 tests; lexicon/hf-intake, ports/capability-runtime, collections/gc-interop, the two receivers: no surefire) |
 
-`jdk_naming.py plan --only m3/pom.xml --only m3/qualification/reactor-wiring-20261107`: moves=0 rewrites=0 refusals=0
+`jdk_naming.py plan --only make/m3/pom.xml --only make/m3/qualification/reactor-wiring-20261107`: moves=0 rewrites=0 refusals=0
 (fixed point). Maven logs: `S:/m3-scratch/eb-conv/reactor/logs/` (sha256 of each gate log in `GATES.tsv`).
 
 ## Un-hold 2026-11-07 (reactor-unhold-20261107; branch `m3/reactor-unhold-20261107a`)
@@ -116,14 +116,14 @@ run (`-pl <module> -am -DskipTests=false package`, module's own `-Werror`, JDK 2
 | ast | WIRED | `maven.compiler.source/target` 21 instead of `release` (javac refuses an add-exports of a java.base package together with `--release`); javac `--add-exports java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED` (the only `jdk.internal.org.objectweb.asm.*` package the test imports); surefire `argLine` with the same export. No m3 module had a JDK-internal-ASM precedent (`grep add-exports m3/**/pom.xml`: only vendored guava/eclipse-collections `-J` flags); the form is ports/parallel-bulk's. | gate-ast run 2, 28 s (run 1: non-parseable POM, `--` inside an XML comment of the fix; reworded) | 19 / 0 / 0 / 0 |
 | ports/swing-viewport | WIRED | test dependency `org.junit.platform:junit-platform-launcher:1.10.2-m3-source-1` (the platform version `junit-jupiter:5.10.2-m3-source-1` already brings; jar with classes in the tail repo) | gate-ports-swing-viewport, 17 s | 375 / 0 / 0 / 0 |
 | ports/jfx-viewport | WIRED | none (its only error was the HELD dependency) | gate-ports-jfx-viewport, 13 s | no surefire |
-| ports/parallel-bulk | WIRED | maven-compiler-plugin 3.13.0 (every other m3 module; m3/pom.xml has no pluginManagement) did NOT remove the testCompile NPE (`AbstractCompilerMojo.execute:1152`, `getPathElements()` null for a test compile without a module descriptor when `--patch-module`/`--add-exports` are given as two tokens: the plugin's `META-INF/jpms.args` post-processing); fix: one-token `--patch-module=java.base=...` and `--add-exports=java.base/jdk.internal.vm.parallel=ALL-UNNAMED` javac args (javac accepts `option=value`). The Ant `<copy>` source path of #2779 is kept (`src/java.base/share/classes/jdk/internal/vm/parallel` is in the sparse set). | gate-ports-parallel-bulk run 2, 5 s (run 1: 3.13.0 pin alone, same NPE) | 6 / 0 / 0 / 0 |
+| ports/parallel-bulk | WIRED | maven-compiler-plugin 3.13.0 (every other m3 module; make/m3/pom.xml has no pluginManagement) did NOT remove the testCompile NPE (`AbstractCompilerMojo.execute:1152`, `getPathElements()` null for a test compile without a module descriptor when `--patch-module`/`--add-exports` are given as two tokens: the plugin's `META-INF/jpms.args` post-processing); fix: one-token `--patch-module=java.base=...` and `--add-exports=java.base/jdk.internal.vm.parallel=ALL-UNNAMED` javac args (javac accepts `option=value`). The Ant `<copy>` source path of #2779 is kept (`src/java.base/share/classes/jdk/internal/vm/parallel` is in the sparse set). | gate-ports-parallel-bulk run 2, 5 s (run 1: 3.13.0 pin alone, same NPE) | 6 / 0 / 0 / 0 |
 | history | WIRED | test-harness fix in `test_audit.py` setUp: on `os.name == 'nt'` the odd fixture path is `spaces tab and newlines-λ.java` (NTFS refuses tab/newline: `OSError 22`); POSIX fixture unchanged; `test_odd_paths_binary_patches_and_hashes` still asserts the JSON path round trip. Not a contract change. | gate-history, 44 s (unittest: 78 tests OK; was 22 errors) | python unittest 78 OK |
 | ports/compiletime | HELD (re-confirmed, no Maven run) | `org.ow2.asm:asm{,-tree,-analysis}:9.6-m3-source-1`: only `.lastUpdated` markers in both local repos, not in Central | reconfirm-ports-compiletime | - |
 | collections/pcollections | HELD (re-confirmed) | `org.pcollections:pcollections:5.0.0-m3-source-1`: only `.lastUpdated` markers (tail repo has 3.2.0, 4.0.2) | reconfirm-collections-pcollections | - |
 | runtime-integration/fix | HELD (re-confirmed) | `manifest.json`/`runtime.patch` pin `src/hotspot/share/prims/jni.cpp` (moved java.base/hotspot input outside `m3/`: lane d7) | reconfirm-runtime-integration-fix | - |
 | runtime-integration/fix-root-ascii-case | HELD (re-confirmed) | `test_fix.py:108` pins `src/java.base/share/classes/java/lang/String.java` (lane d7 input) | reconfirm-runtime-integration-fix-root-ascii-case | - |
 
-Full-reactor runs (`mvn -B -ntp -T1 -fae -f m3/pom.xml verify -Dmaven.test.failure.ignore=true`, both on master `7b155a401e8`):
+Full-reactor runs (`mvn -B -ntp -T1 -fae -f make/m3/pom.xml verify -Dmaven.test.failure.ignore=true`, both on master `7b155a401e8`):
 
 | run | pom | result |
 |---|---|---|
@@ -147,12 +147,12 @@ usual `unhold.sh` + `gate.sh` pair gated the module. Base: master `a4c85e8b397` 
 | ports/compiletime | `stage0-asm-9.6`: `-f m3/vendor/third_party/pom.xml -pl asm-9.6,asm-tree,asm-analysis,asm-util install -DskipTests`, 13 s, `org.ow2.asm:asm{,-tree,-analysis,-util}:9.6-m3-source-1` installed | WIRED (gate-ports-compiletime, 27 s) | 30/0/0/0 |
 | collections/pcollections (a4's module; its HELD row was a4's gate) | `stage0-pcollections`: `-f m3/vendor/third_party/pcollections/pom.xml install -DskipTests`, 9 s, `org.pcollections:pcollections:5.0.0-m3-source-1` installed. That pom is NOT a `<module>` of the vendor aggregator although the aggregator README says "Build all" installs every vendored artifact (debt, vendor lane) | WIRED (gate-collections-pcollections, 89 s) | 4/0/0/0 |
 
-Full-reactor runs (`mvn -B -ntp -T1 -fae -f m3/pom.xml verify -Dmaven.test.failure.ignore=true`), compared with #2783's
+Full-reactor runs (`mvn -B -ntp -T1 -fae -f make/m3/pom.xml verify -Dmaven.test.failure.ignore=true`), compared with #2783's
 `FULL_UNHOLD_FAILING.tsv` (its `full-verify-unhold` run on master `7b155a401e8` + that branch):
 
 | run | result |
 |---|---|
-| full-verify-vendorhold (run 1) | 3677 tests, 2 failures, 2 errors, 162 skipped; failing set = #2783's + ONE row: `history-audit-recipe` exec `read-only-history-recipe` refused (`AUDIT_REFUSED: output must not already exist`): `m3/history/pom.xml` wrote the audit to the fixed name `${java.io.tmpdir}/m3-history-audit`, and the shared Maven tmpdir (`S:/m3-scratch/eb-conv/reactor/tmp`) still held #2783's output. Environment-order defect of the module, not of this branch; kept as evidence (`FULL_VENDORHOLD_*.tsv`) |
+| full-verify-vendorhold (run 1) | 3677 tests, 2 failures, 2 errors, 162 skipped; failing set = #2783's + ONE row: `history-audit-recipe` exec `read-only-history-recipe` refused (`AUDIT_REFUSED: output must not already exist`): `make/m3/history/pom.xml` wrote the audit to the fixed name `${java.io.tmpdir}/m3-history-audit`, and the shared Maven tmpdir (`S:/m3-scratch/eb-conv/reactor/tmp`) still held #2783's output. Environment-order defect of the module, not of this branch; kept as evidence (`FULL_VENDORHOLD_*.tsv`) |
 | regate-history-verify | after the recorded fix (`m3.output` = `${java.io.tmpdir}/m3-history-audit-${maven.build.timestamp}`, format `yyyyMMdd-HHmmss-SSS`, one directory per build session): BUILD SUCCESS, 290 s (`regate.sh history lane37 verify`) |
 | full-verify-vendorhold2 (run 2) | 3677 tests, 2 failures, 2 errors, 162 skipped; `FULL_VENDORHOLD2_FAILING.tsv` byte-identical to `FULL_UNHOLD_FAILING.tsv`; per-module diff of `FULL_VENDORHOLD2_TESTS.tsv` against `FULL_UNHOLD_TESTS.tsv` = only the two added SUCCESS rows (m3-compiletime-precompute 30, m3-pcollections 4) |
 

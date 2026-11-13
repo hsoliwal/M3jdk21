@@ -152,7 +152,7 @@ final class M3Jdk8359706BackportRecipeTest {
         while (current != null) {
             if (Files.isRegularFile(
                             current.resolve(
-                                    "m3/tooling/migration-recipes/pom.xml"))
+                                    "make/m3/tooling/migration-recipes/pom.xml"))
                     && Files.isRegularFile(
                             current.resolve(
                                     "src/hotspot/share/runtime/os.hpp"))) {

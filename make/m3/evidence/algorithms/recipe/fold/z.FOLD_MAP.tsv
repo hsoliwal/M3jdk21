@@ -1,4 +1,4 @@
-# FOLD_MEMBERS v1 map (m3/tooling/jdk-naming/fold_members.py): the Z family of jdk.m3.algorithm folds into StringAlgorithms, one owner per concept (2026-11-08).
+# FOLD_MEMBERS v1 map (make/m3/tooling/jdk-naming/fold_members.py): the Z family of jdk.m3.algorithm folds into StringAlgorithms, one owner per concept (2026-11-08).
 # StringAlgorithms.zFunction owns the Z array; ZAlgorithm.zArray computes the same array (catalogue-kernels-20261107 DECISION.tsv, NEC-equal) and is not folded: callers take zFunction(x, ProgressMonitor.none()).
 # zSearch keeps its O(m)-memory first-hit geometry (catalog shape z-search); prefixMatchLengths keeps its virtual-separator geometry; both become StringAlgorithms members.
 kind	a	b	c	d

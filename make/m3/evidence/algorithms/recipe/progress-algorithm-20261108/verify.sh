@@ -32,7 +32,7 @@ mkdir -p "$3"
 
 "$PY" -I -B "$RECIPE_DIR/relocate.py" --donor-git "$1" --donor-rev "$2" --check | tail -n 1
 "$PY" -I -B "$RECIPE_DIR/apply.py" --check | tail -n 1
-(cd "$ROOT" && "$PY" -I -B m3/tooling/jdk-naming/jdk_naming.py plan --root . --only m3/algorithms/ | tail -n 2)
+(cd "$ROOT" && "$PY" -I -B make/m3/tooling/jdk-naming/jdk_naming.py plan --root . --only m3/algorithms/ | tail -n 2)
 MAVEN_OPTS="${MAVEN_OPTS:-} $TMP" mvn -q -B -ntp -T1 -Dmaven.repo.local="$M2" ${MAVEN_REPO_TAIL:+-Dmaven.repo.local.tail=$MAVEN_REPO_TAIL} \
     "-DargLine=$TMP" -f "$MODULE/pom.xml" clean package
 "${JAVA_HOME:?JAVA_HOME must point at a JDK 21}/bin/jar" --describe-module \

@@ -3,15 +3,15 @@
 # SPDX-License-Identifier: Apache-2.0
 """Recipe MERGELOSS2_RESTORE v1: restore merge-loss audit phase-2 leaf 102 (m3/lexicon/receiver).
 
-Same engine as m3/collections/qualification/mergeloss2-20261107/apply.py (derived from
-m3/collections/qualification/census-small-batch-20261106/apply.py v1): anchored "sub" edits with a declared anchor
+Same engine as make/m3/collections/qualification/mergeloss2-20261107/apply.py (derived from
+make/m3/collections/qualification/census-small-batch-20261106/apply.py v1): anchored "sub" edits with a declared anchor
 count, LF payloads re-joined with the preimage's line ending. The rule pins the git blob sha of its preimage on master;
 the target must equal the preimage (the rule is applied) or the postimage (already applied, no-op); anything else is a
 drifted preimage and the recipe refuses (exit 2) without writing. Idempotent: a second run reports changed=0 and
 EDITS.tsv is a fixed point. --check writes nothing and exits 1 when a run would change a file.
 
 The rule cites the origin commit of the lost line, the merge that dropped it, and the 3-way merge it was checked
-against: base = origin commit's parent blob, theirs = origin commit's blob (both through m3/tooling/jdk-naming
+against: base = origin commit's parent blob, theirs = origin commit's blob (both through make/m3/tooling/jdk-naming
 rewrite_text), ours = the pinned master blob.
 
 usage: python -I apply.py [--root DIR] [--check] [--leaf 102]

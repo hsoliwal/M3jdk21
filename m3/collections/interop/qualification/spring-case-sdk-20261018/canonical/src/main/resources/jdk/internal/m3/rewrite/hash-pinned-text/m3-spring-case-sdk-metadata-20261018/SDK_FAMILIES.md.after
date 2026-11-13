@@ -88,15 +88,15 @@ No new native ABI or duplicated compaction engine is needed for these named adap
 
 ## Recipe and verification
 
-Canonical task: `m3/collections/recipes/sdk-family-names-20261017`.
+Canonical task: `make/m3/collections/recipes/sdk-family-names-20261017`.
 Named recipe: `com.synexia.m3.SdkFamilyNames20261017`, extending the existing unchanged
 Synexia source-seal kernel and OpenRewrite wrapper. Changes belong in reviewed templates;
 qualify the recipe, emit per-file outputs, then verify exact bytes. Never patch generated
 outputs. Recipe/tests/evidence and product outputs are reviewed in that order.
 
 ```sh
-python3 m3/collections/recipes/sdk-family-names-20261017/verify.py
-mvn -B -f m3/collections/recipes/sdk-family-names-20261017/pom.xml clean verify
+python3 make/m3/collections/recipes/sdk-family-names-20261017/verify.py
+mvn -B -f make/m3/collections/recipes/sdk-family-names-20261017/pom.xml clean verify
 # Requires the existing M3 core artifact and the real pinned donor dependencies:
 mvn -B -f m3/collections/interop/pom.xml clean verify
 ```

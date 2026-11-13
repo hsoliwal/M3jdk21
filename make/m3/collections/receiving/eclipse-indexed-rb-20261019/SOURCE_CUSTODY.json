@@ -15,7 +15,7 @@
     "repository": "hsoliwal/M3jdk21",
     "parent": "677437be295b23f7ccf7409be287008944d0e8b0",
     "baseTree": "bb8a0483b84cafe1d55abc347a0bbc93a6ae60b4",
-    "prefix": "m3/collections/receiving/eclipse-indexed-rb-20261019/",
+    "prefix": "make/m3/collections/receiving/eclipse-indexed-rb-20261019/",
     "compiledRootsOrDependenciesChanged": false,
     "receivingSequenceAdvanced": false,
     "sequence": "String -> arrays -> collections -> AST/compiler -> remaining families",

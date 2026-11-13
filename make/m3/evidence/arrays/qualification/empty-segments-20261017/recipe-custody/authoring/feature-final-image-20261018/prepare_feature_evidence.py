@@ -151,7 +151,7 @@ def main():
         "phase": "STRING_UNCHANGED", "hosted_ci_claim": False, "jck_claim": False,
         "whole_sdk_completion_claim": False, "image_files": execution["image_files"],
         "separately_built_m3_modules": "Earlier owning-module receipts remain separate; not rerun by this image witness",
-        "runtime_recipe_entrypoint": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/README.md",
+        "runtime_recipe_entrypoint": "make/m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/README.md",
         "primitive_fixture_origin": "Existing primitive-address-identity verifier, SHA retained by execution receipt",
     }
     generated = output / "QUALIFICATION.json"
@@ -209,7 +209,7 @@ CI success, JCK certification, automatic console/UI wiring or whole-SDK completi
 
 ## Recipe replay
 
-Use `m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/README.md`
+Use `make/m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/README.md`
 for the qualified Runtime parser host and source-built OpenRewrite dependency.
 That successor entrypoint supersedes the older predecessor-host reference in
 the feature introduction. ProgressJob and the current 31-target restoration use

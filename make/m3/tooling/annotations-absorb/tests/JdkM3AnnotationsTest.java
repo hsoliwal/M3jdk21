@@ -45,7 +45,7 @@ final class JdkM3AnnotationsTest {
     static final String MAP = "MAP";
     static final String ARROW = " -> ";
     static final String PROP_RULES = "m3.annotations.rules";
-    static final String DEFAULT_RULES = "m3/tooling/annotations-absorb/MAP_RULES.tsv";
+    static final String DEFAULT_RULES = "make/m3/tooling/annotations-absorb/MAP_RULES.tsv";
     static final String NOT_ANNOTATION = "owner is not an annotation type: ";
     static final String NO_TYPE_USE = "owner does not target TYPE_USE or a declaration context: ";
     static final Path RULES = Path.of(System.getProperty(PROP_RULES, DEFAULT_RULES));

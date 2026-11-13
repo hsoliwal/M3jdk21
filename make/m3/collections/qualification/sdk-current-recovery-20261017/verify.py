@@ -6,7 +6,7 @@ import hashlib
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[3]
+ROOT = HERE.parents[4]
 RECEIPT = HERE / "RECEIPT.tsv"
 RECEIPT_SHA256 = "39709c1339a9d4e47a2c80ef21174d47f629b474afcc3a101cffc9db66aad99e"
 TARGETS = (

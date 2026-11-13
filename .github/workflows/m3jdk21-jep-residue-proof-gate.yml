@@ -4,13 +4,13 @@ name: M3 JDK21 JEP residue proof-gate repair
 on:
   pull_request:
     paths:
-      - 'm3/backports/JEP_RESIDUE_QUEUE.tsv'
-      - 'm3/backports/jep_residue.py'
-      - 'm3/backports/test_jep_residue.py'
-      - 'm3/backports/test_m3_extension_residue.py'
-      - 'm3/backports/recipes/jep-residue-proof-gate/**'
-      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3JepResidueProofGateReceiverRecipe.java'
-      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3JepResidueProofGateReceiverRecipeTest.java'
+      - 'make/m3/backports/JEP_RESIDUE_QUEUE.tsv'
+      - 'make/m3/backports/jep_residue.py'
+      - 'make/m3/backports/test_jep_residue.py'
+      - 'make/m3/backports/test_m3_extension_residue.py'
+      - 'make/m3/backports/recipes/jep-residue-proof-gate/**'
+      - 'make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3JepResidueProofGateReceiverRecipe.java'
+      - 'make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3JepResidueProofGateReceiverRecipeTest.java'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jdk21-jep-residue-proof/**'
       - 'm3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/jep-residue-proof/**'
       - '.github/workflows/m3jdk21-jep-residue-proof-gate.yml'
@@ -33,11 +33,11 @@ jobs:
         run: |
           set -euo pipefail
           git diff --check
-          python3 -m py_compile m3/backports/jep_residue.py m3/backports/test_jep_residue.py m3/backports/test_m3_extension_residue.py
+          python3 -m py_compile make/m3/backports/jep_residue.py make/m3/backports/test_jep_residue.py make/m3/backports/test_m3_extension_residue.py
       - name: Released-JEP residue tests
         run: |
           set -euo pipefail
-          python3 -m unittest -v m3/backports/test_jep_residue.py m3/backports/test_m3_extension_residue.py
-          python3 m3/backports/jep_residue.py --root . --out /tmp/m3-jep-residue.tsv
-          cmp /tmp/m3-jep-residue.tsv m3/backports/JEP_RESIDUE_QUEUE.tsv
+          python3 -m unittest -v make/m3/backports/test_jep_residue.py make/m3/backports/test_m3_extension_residue.py
+          python3 make/m3/backports/jep_residue.py --root . --out /tmp/m3-jep-residue.tsv
+          cmp /tmp/m3-jep-residue.tsv make/m3/backports/JEP_RESIDUE_QUEUE.tsv
 

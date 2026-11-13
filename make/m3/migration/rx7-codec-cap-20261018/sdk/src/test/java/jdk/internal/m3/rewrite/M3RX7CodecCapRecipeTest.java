@@ -169,12 +169,12 @@ final class M3RX7CodecCapRecipeTest {
         Map<String, String> before = Map.of(
                 ".github/workflows/m3rx7-v7-image-codec-20261014.yml",
                 textResource(inverse, "workflow.yml.txt"),
-                "m3/runtime-integration/check-m3rx7-v7-image-codec.sh",
+                "make/m3/runtime-integration/check-m3rx7-v7-image-codec.sh",
                 textResource(inverse, "launcher.sh.txt"));
         Map<String, String> after = Map.of(
                 ".github/workflows/m3rx7-v7-image-codec-20261014.yml",
                 textResource(forward, "workflow.yml.txt"),
-                "m3/runtime-integration/check-m3rx7-v7-image-codec.sh",
+                "make/m3/runtime-integration/check-m3rx7-v7-image-codec.sh",
                 textResource(forward, "launcher.sh.txt"));
         Environment environment = recipeEnvironment();
         for (String name : List.of(namedForward, namedForward + "Inverse")) {
@@ -255,7 +255,7 @@ final class M3RX7CodecCapRecipeTest {
         if (exportReceiveResults) {
             assertNotNull(actualTextResults, "full-BEFORE named forward Results required");
             Map<String, String> missingResult = new TreeMap<>(actualTextResults);
-            missingResult.remove("m3/runtime-integration/check-m3rx7-v7-image-codec.sh");
+            missingResult.remove("make/m3/runtime-integration/check-m3rx7-v7-image-codec.sh");
             AssertionError missingRefusal = assertThrows(AssertionError.class,
                     () -> exportTextResults(before, after, missingResult));
             assertTrue(missingRefusal.getMessage().contains("exact named forward Result allowlist"));
@@ -649,7 +649,7 @@ final class M3RX7CodecCapRecipeTest {
             Map<String, String> expected, Map<String, String> actual) throws Exception {
         Set<String> allowed = Set.of(
                 ".github/workflows/m3rx7-v7-image-codec-20261014.yml",
-                "m3/runtime-integration/check-m3rx7-v7-image-codec.sh");
+                "make/m3/runtime-integration/check-m3rx7-v7-image-codec.sh");
         assertEquals(allowed, before.keySet(), "exact text preimage allowlist");
         assertEquals(allowed, expected.keySet(), "exact text postimage allowlist");
         assertEquals(allowed, actual.keySet(), "exact named forward Result allowlist");
@@ -748,7 +748,7 @@ final class M3RX7CodecCapRecipeTest {
         assertTrue(Files.getFileStore(build).getUsableSpace() >= 8L * 1024 * 1024 * 1024);
         assertEquals(Set.of(
                 ".github/workflows/m3rx7-v7-image-codec-20261014.yml",
-                "m3/runtime-integration/check-m3rx7-v7-image-codec.sh", "receipt.tsv"),
+                "make/m3/runtime-integration/check-m3rx7-v7-image-codec.sh", "receipt.tsv"),
                 observed.keySet(), "exact text Result carrier allowlist");
         StringBuilder carrier = new StringBuilder();
         for (var entry : observed.entrySet()) {
@@ -1073,7 +1073,7 @@ final class M3RX7CodecCapRecipeTest {
         String namedForward = "jdk.internal.m3.StringConcatNullString20261018";
         String factory = "src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java";
         String test = "test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java";
-        String manifest = "m3/runtime-integration/recipe/manifest.json";
+        String manifest = "make/m3/runtime-integration/recipe/manifest.json";
         String seed = "qualification/UnrelatedConcatSeed.java";
         String seedText = "package qualification; final class UnrelatedConcatSeed { int value = 11; }\n";
         Map<String, String> before = Map.of(
@@ -1264,7 +1264,7 @@ final class M3RX7CodecCapRecipeTest {
                 javaSources.put(path, entry.getValue());
             } else {
                 assertTrue(Set.of("src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java",
-                        "m3/runtime-integration/recipe/manifest.json").contains(path));
+                        "make/m3/runtime-integration/recipe/manifest.json").contains(path));
                 sources.add(withCustodyMarker(PlainText.builder()
                         .sourcePath(Path.of(entry.getKey())).text(entry.getValue()).build()));
             }
@@ -1346,7 +1346,7 @@ final class M3RX7CodecCapRecipeTest {
             Map<String, String> after, List<org.openrewrite.Result> actual) throws Exception {
         String factory = "src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java";
         String test = "test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java";
-        String manifest = "m3/runtime-integration/recipe/manifest.json";
+        String manifest = "make/m3/runtime-integration/recipe/manifest.json";
         Map<String, String> patchNames = Map.of(factory, "StringConcatFactory.java.patch",
                 test, "M3StringConcatReferenceDagTest.java.patch",
                 manifest, "runtime-manifest.json.patch");

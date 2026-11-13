@@ -10,9 +10,9 @@
   <packaging>pom</packaging>
 
   <properties>
-    <m3.repo>${project.basedir}/../..</m3.repo>
+    <m3.repo>${project.basedir}/../../..</m3.repo>
     <m3.retentionCommit>0000000000000000000000000000000000000000</m3.retentionCommit>
-    <m3.retentionCatalogue>m3/history/RETAINED_CAPABILITIES.tsv</m3.retentionCatalogue>
+    <m3.retentionCatalogue>make/m3/history/RETAINED_CAPABILITIES.tsv</m3.retentionCatalogue>
     <m3.output>${java.io.tmpdir}/m3-retained-capability-audit</m3.output>
     <m3.python>python3</m3.python>
   </properties>

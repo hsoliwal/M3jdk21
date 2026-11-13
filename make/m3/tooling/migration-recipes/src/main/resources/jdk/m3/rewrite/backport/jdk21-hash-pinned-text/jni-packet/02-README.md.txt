@@ -25,7 +25,7 @@ String admission hook and existing native/Java fixtures read as dependency conte
 
 ## Execution and custody
 
-`mvn -f m3/runtime-integration/fix/pom.xml verify` runs recipe-contract tests and checks source
+`mvn -f make/m3/runtime-integration/fix/pom.xml verify` runs recipe-contract tests and checks source
 readiness without changing source. `-Papply` explicitly applies the two-file packet before verify.
 The adapter loads the existing engine into an isolated resource context; the engine source checksum
 is locked. Historical runtime supersession is extended separately so older patches cannot undo the

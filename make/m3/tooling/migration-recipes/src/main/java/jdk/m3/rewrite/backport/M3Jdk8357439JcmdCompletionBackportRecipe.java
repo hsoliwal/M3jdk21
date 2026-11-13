@@ -12,7 +12,7 @@ import org.openrewrite.Recipe;
  * {@code 8549d1896054dd230ba3038c83bce23b10dcda22}. Both target paths were absent in
  * the JDK21 baseline, so this recipe is a two-file additive UTF-8 text crate. The already-merged
  * product bytes are byte-identical to the upstream Git blobs recorded in
- * {@code m3/backports/recipes/jdk-8357439/manifest.tsv}.</p>
+ * {@code make/m3/backports/recipes/jdk-8357439/manifest.tsv}.</p>
  */
 public final class M3Jdk8357439JcmdCompletionBackportRecipe extends Recipe {
     public static final String UPSTREAM_COMMIT =

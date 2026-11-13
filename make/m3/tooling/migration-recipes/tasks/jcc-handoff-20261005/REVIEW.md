@@ -6,7 +6,7 @@ The inspected destination production preimage is [M3jdk21 `da958d00d24154c0db87b
 
 ## Canonical mapping and scope
 
-The existing `m3/docs/name-mapping.json` remains the only operational mapping authority. Its actual schema, validator, replay owner, retained compiler and atom owners, owning POM and workflows are unchanged.
+The existing `doc/m3/name-mapping.json` remains the only operational mapping authority. Its actual schema, validator, replay owner, retained compiler and atom owners, owning POM and workflows are unchanged.
 
 | Mapping change | Recorded state and evidence |
 | --- | --- |
@@ -18,11 +18,11 @@ The existing `m3/docs/name-mapping.json` remains the only operational mapping au
 
 The two JCC capability `tests[]` arrays remain empty. Their finite tooling receipts are separately scoped; they cannot be read as source-export or whole-JDK proof. No source Mastery engine, duplicate compiler, new eligibility mechanism, second registry, automatic cross-repository scheduler or product dependency is introduced.
 
-The derived source root ledger accounts for all 343 root entries: 255 trees, 87 blobs and one gitlink. The root POM has 201 distinct declarations, comprising 190 direct paths and 11 nested paths across eight root trees. Four of those containers also appear as direct modules; the union is 194 referenced root trees. Descendant file and semantic dependency completeness remain unestablished. See the [handoff](../../../../docs/jcc-source-handoff.md) and the canonical binding/coverage receipts linked there.
+The derived source root ledger accounts for all 343 root entries: 255 trees, 87 blobs and one gitlink. The root POM has 201 distinct declarations, comprising 190 direct paths and 11 nested paths across eight root trees. Four of those containers also appear as direct modules; the union is 194 referenced root trees. Descendant file and semantic dependency completeness remain unestablished. See the [handoff](../../../../../../doc/m3/jcc-source-handoff.md) and the canonical binding/coverage receipts linked there.
 
 ## Actual recipe and installer
 
-The retained `M3Jdk21HashPinnedTextSnapshotRecipe` executes crate `jcc-handoff-20261005`; the named declarative entrypoint is `com.m3.rewrite.backport.JccSourceHandoff`. The existing `m3/migration/recipe.py` uses the matching `m3.sealed-install/1` plan. The reviewed epoch is `jcc-handoff-20261005/2` with seal `70283e86d30abf8e30a09b10d77be40f99160371a98927dc151d680e3c2e4a87`.
+The retained `M3Jdk21HashPinnedTextSnapshotRecipe` executes crate `jcc-handoff-20261005`; the named declarative entrypoint is `com.m3.rewrite.backport.JccSourceHandoff`. The existing `make/m3/migration/recipe.py` uses the matching `m3.sealed-install/1` plan. The reviewed epoch is `jcc-handoff-20261005/2` with seal `70283e86d30abf8e30a09b10d77be40f99160371a98927dc151d680e3c2e4a87`.
 
 Both mechanisms describe the same four exact output paths: the canonical map, handoff document, source/destination binding receipt and every-root coverage ledger. Seven unchanged guards bind the schema, validator, installer, text transformer, owning POM, Descriptor Java target and Descriptor recipe manifest. The canonical map preimage is SHA256 `67d40925b97a38c3c1a85f337806524ac590a540bd39647b3e4b0988f2ae3fbb`; the epoch 2 postimage is `536af76dd7b7b7217707662c2f1437af4adaa53af898627b0884e0b4f4603ace`.
 

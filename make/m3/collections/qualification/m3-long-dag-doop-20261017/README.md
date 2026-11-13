@@ -6,7 +6,7 @@
 **First-party convergence owner:** the existing Synexia `M3HashPinnedJavaSnapshotRecipe`,
 not a second source transformer. New named declarative recipe:
 `com.synexia.rewrite.M3Jdk21LongDoopDag20261017` in
-`m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-long-dag-doop-20261017.yml`.
+`make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-long-dag-doop-20261017.yml`.
 Its `crateName` parameter is `m3-long-dag-doop-20261017`.
 
 Five ABSENT-before Java targets are sealed in the classpath manifest by SHA-256.
@@ -21,8 +21,8 @@ optional JNI mask backend.
 ## Direct proof
 
 ```sh
-mvn -f m3/collections/qualification/m3-long-dag-doop-20261017/pom.xml verify
-sh m3/collections/qualification/m3-long-dag-doop-20261017/verify.sh
+mvn -f make/m3/collections/qualification/m3-long-dag-doop-20261017/pom.xml verify
+sh make/m3/collections/qualification/m3-long-dag-doop-20261017/verify.sh
 mvn -f m3/collections/pom.xml test
 ```
 

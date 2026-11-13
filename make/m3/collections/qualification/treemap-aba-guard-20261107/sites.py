@@ -132,7 +132,7 @@ def sites(root: Path):
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--root", default=str(HERE.parents[3]))
+    parser.add_argument("--root", default=str(HERE.parents[4]))
     parser.add_argument("--check", action="store_true", help="only verify the guards; write nothing")
     args = parser.parse_args(argv)
     root = Path(args.root).resolve()

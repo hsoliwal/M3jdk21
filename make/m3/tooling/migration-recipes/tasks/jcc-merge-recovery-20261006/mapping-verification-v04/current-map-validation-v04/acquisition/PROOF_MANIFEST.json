@@ -12,7 +12,7 @@
       "bytes": 13827,
       "git_blob_sha1": "21fd85a0573c5b36c4f15c23f096f75fa31c61e6",
       "local": "publication/M3_LATEST_PORTING_INVARIANT.md",
-      "path": "m3/docs/m3jdk21-porting-invariant.md",
+      "path": "doc/m3/m3jdk21-porting-invariant.md",
       "read": true,
       "sha256": "0db242bfdb61256d24d21ec8fbf81c77dddeb98de2fc088824586972c38e652b"
     }
@@ -160,7 +160,7 @@
       "git_blob_sha1": "d23517ac24eb1ba428f53bd34f304d70eb468406",
       "membership_verified": true,
       "mode": "100644",
-      "path": "m3/tooling/mr/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv",
+      "path": "make/m3/tooling/mr/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv",
       "sha256": "5b44008f02f49ce0a48fafcb4da24af69ea526a67f88041c209d6d574ed788da"
     }
   ],

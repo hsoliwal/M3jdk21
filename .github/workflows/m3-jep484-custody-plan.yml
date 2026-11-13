@@ -6,11 +6,11 @@ on:
       - "m3/jep484-*"
       - "m3/j484-custody-plan-20261006"
     paths:
-      - "m3/backports/recipes/jep-484-classfile-api/**"
+      - "make/m3/backports/recipes/jep-484-classfile-api/**"
       - ".github/workflows/m3-jep484-custody-plan.yml"
   pull_request:
     paths:
-      - "m3/backports/recipes/jep-484-classfile-api/**"
+      - "make/m3/backports/recipes/jep-484-classfile-api/**"
       - ".github/workflows/m3-jep484-custody-plan.yml"
   workflow_dispatch:
 
@@ -41,11 +41,11 @@ jobs:
         run: |
           set -euo pipefail
           # Standalone (2026-10-31): the validator is absorbed byte-identically (canonical Git blob
-          # below; receiver record in m3/compatibility/); no other repository is fetched
-          # (m3/tooling/standalone/M3_REFS.tsv).
-          test "$(git hash-object m3/tooling/validators/WorkflowStructureCheck.java)" = \
+          # below; receiver record in make/m3/compatibility/); no other repository is fetched
+          # (make/m3/tooling/standalone/M3_REFS.tsv).
+          test "$(git hash-object make/m3/tooling/validators/WorkflowStructureCheck.java)" = \
             "f61be81f5a15bea78f1c5ae7d5555844c9cd2ea7"
-          java m3/tooling/validators/WorkflowStructureCheck.java \
+          java make/m3/tooling/validators/WorkflowStructureCheck.java \
             .github/workflows/m3-jep484-custody-plan.yml
 
       - name: Diff hygiene
@@ -53,9 +53,9 @@ jobs:
 
       - name: Unit-test map and custody planners
         run: |
-          python3 m3/backports/recipes/jep-484-classfile-api/test_path_map.py
-          python3 m3/backports/recipes/jep-484-classfile-api/test_custody_plan.py
-          python3 m3/backports/recipes/jep-484-classfile-api/test_scope_plan.py
+          python3 make/m3/backports/recipes/jep-484-classfile-api/test_path_map.py
+          python3 make/m3/backports/recipes/jep-484-classfile-api/test_custody_plan.py
+          python3 make/m3/backports/recipes/jep-484-classfile-api/test_scope_plan.py
 
       - name: Fetch exact OpenJDK JDK21 and JDK24 donor refs
         run: |
@@ -67,7 +67,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p target/j484
-          python3 m3/backports/recipes/jep-484-classfile-api/path_map.py             --repo .             --jdk21-ref refs/tags/m3jdk21             --jdk24-ref refs/tags/m3jdk24             --out target/j484/map
+          python3 make/m3/backports/recipes/jep-484-classfile-api/path_map.py             --repo .             --jdk21-ref refs/tags/m3jdk21             --jdk24-ref refs/tags/m3jdk24             --out target/j484/map
           python3 - <<'PY'
           import json
           d=json.load(open("target/j484/map/summary.json",encoding="utf-8"))
@@ -87,7 +87,7 @@ jobs:
       - name: Classify current M3JDK21 source custody without mutation
         run: |
           set -euo pipefail
-          python3 m3/backports/recipes/jep-484-classfile-api/custody_plan.py             --target-root "$PWD"             --map-dir target/j484/map             --out target/j484/custody
+          python3 make/m3/backports/recipes/jep-484-classfile-api/custody_plan.py             --target-root "$PWD"             --map-dir target/j484/map             --out target/j484/custody
           python3 - <<'PY'
           import csv
           from collections import Counter
@@ -110,7 +110,7 @@ jobs:
       - name: Scope-separate internal mechanics from public API and version holds
         run: |
           set -euo pipefail
-          python3 m3/backports/recipes/jep-484-classfile-api/scope_plan.py             --map-dir target/j484/map             --custody-dir target/j484/custody             --out target/j484/scope
+          python3 make/m3/backports/recipes/jep-484-classfile-api/scope_plan.py             --map-dir target/j484/map             --custody-dir target/j484/custody             --out target/j484/scope
           python3 - <<'PY'
           import csv
           from collections import Counter
@@ -151,8 +151,8 @@ jobs:
       - name: Re-run existing JEP484 inventory verifier and OpenRewrite inventory proof
         run: |
           set -euo pipefail
-          python3 m3/backports/recipes/jep-484-classfile-api/verify.py
-          python3 m3/backports/recipes/jep-484-classfile-api/test_verify.py
+          python3 make/m3/backports/recipes/jep-484-classfile-api/verify.py
+          python3 make/m3/backports/recipes/jep-484-classfile-api/test_verify.py
 
       - name: Upload JEP484 custody evidence
         uses: actions/upload-artifact@v4

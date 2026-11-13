@@ -17,7 +17,7 @@ A 4,096-entry native stack staging array defers the bounded output write until c
 Canonical source recipe: `hsoliwal/com.synexia`, `synexia-m3-recipe/recipes/m3-long-index-path-jni-20261018/`, developed separately from the public receiver. It **reuses** the prior source-sealed Java recipe mechanics, extends them to three absent Java/C source paths, and stores SHA-256 identities for each authoritative template. It verifies all template hashes and all occupied paths before writing, refuses symlinks and drift, is serial per file, and is idempotent. Source/test/native receiver files were emitted **by executing this recipe** in an isolated local checkout; no generated production files were edited by hand.
 
 ```sh
-ROOT=m3/collections/qualification/m3-long-index-path-jni-20261018/recipe
+ROOT=make/m3/collections/qualification/m3-long-index-path-jni-20261018/recipe
 mvn -B -ntp -f "$ROOT/pom.xml" package
 java -cp "$ROOT/target/classes" com.synexia.m3.M3LongIndexPathJNIRecipe --check . "$ROOT/templates"
 # To generate in a fresh checkout containing the already merged Java owner:

@@ -5,23 +5,23 @@
 
 | Package | Module | Types |
 |---|---|---|
-| jdk.m3.tooling.dag | m3/tooling/backport-dag | 41 |
-| jdk.m3.tooling.atomjit | m3/tooling/atom-jit-gate | 11 |
-| jdk.m3.tooling.recipe.agent | m3/tooling/recipe-agent-api | 4 |
-| jdk.m3.tooling.cds | m3/tooling/cds-training | 3 |
-| jdk.m3.tooling.smartbuild | m3/tooling/smart-build | 2 |
-| jdk.m3.tooling.priority | m3/tooling/lazy-priority-frontier | 2 |
+| jdk.m3.tooling.dag | make/m3/tooling/backport-dag | 41 |
+| jdk.m3.tooling.atomjit | make/m3/tooling/atom-jit-gate | 11 |
+| jdk.m3.tooling.recipe.agent | make/m3/tooling/recipe-agent-api | 4 |
+| jdk.m3.tooling.cds | make/m3/tooling/cds-training | 3 |
+| jdk.m3.tooling.smartbuild | make/m3/tooling/smart-build | 2 |
+| jdk.m3.tooling.priority | make/m3/tooling/lazy-priority-frontier | 2 |
 
 `pom_dependents.py` found no Maven dependent of any of the four artifacts. A scan of every text file under m3/,
 .github/ and make/ (qualified, path and bare forms) found these consumers, and they follow:
 - 14 workflows that run the DAG mains, the smart-build receiver and the atom-jit gate;
 - backport-dag/pom.xml: 15 jar include filters and 2 main classes;
 - the cds-training and lazy-priority-frontier launchers;
-- module READMEs, m3/backports/*.md, m3/docs/recipe-atom-evidence-and-dag.md.
+- module READMEs, make/m3/backports/*.md, doc/m3/recipe-atom-evidence-and-dag.md.
 
 The following are records and keep their bytes:
 - migration-recipes and hash-pinned-target-paths (pinned texts, before/after workflow fixtures, task ledgers);
-- m3/compatibility maps;
+- make/m3/compatibility maps;
 - the lazy-priority-frontier application and provenance records;
 - the recipe-agent-api custody receipt;
 - the module recipe/ and fixtures/ directories;

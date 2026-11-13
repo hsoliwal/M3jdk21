@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 
 /** Cleanup callbacks may rethrow identical Throwables: keep the original primary. */
-//FLLDCIM: RELOCATE - donor blob c26720b9c57a at eaacff5931ef; recipe m3/collections/recipe/transient-facade-20261106/relocate.py v4
+//FLLDCIM: RELOCATE - donor blob c26720b9c57a at eaacff5931ef; recipe make/m3/collections/recipe/transient-facade-20261106/relocate.py v4
 final class FacadeSharedThrowableSuppressionTest {
     private static final class Facade {
         long id;

@@ -9,7 +9,7 @@ The source donor is [hsoliwal/eclipse.jdt.core at 623f17c961840a8c2b48672e0b7168
 Use Maven 3.9.11, Python 3, and a Java 21 or newer JDK. Check out the exact source donor and supply its absolute path:
 
 ```sh
-mvn -f m3/eclipse/jdt/receiving/array-nodelist-20261019/pom.xml \
+mvn -f make/m3/eclipse/jdt/receiving/array-nodelist-20261019/pom.xml \
   -Djdt.source=/absolute/path/to/eclipse.jdt.core \
   -Dproof.build=/tmp/jdt-array-nodelist-receiving \
   clean verify

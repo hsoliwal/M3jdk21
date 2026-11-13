@@ -5,15 +5,15 @@
 import hashlib
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[4]
-CRATE = ROOT / "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-indexed-live-views-20261021"
+ROOT = Path(__file__).resolve().parents[5]
+CRATE = ROOT / "make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-indexed-live-views-20261021"
 PRE = Path(__file__).resolve().parent / "pre"
 
 # Historical six-row manifest is immutable; later, separately accepted product
 # implementations are admitted only through this exact, Git-blob-sealed source
 # ancestry. This is verification data, NOT a second naming registry.
 HISTORY_PATH = Path(
-    "m3/collections/qualification/arraylist-dual-word-20261023/SOURCE_HISTORY_DAG_20261025.md"
+    "make/m3/collections/qualification/arraylist-dual-word-20261023/SOURCE_HISTORY_DAG_20261025.md"
 )
 HISTORY_BLOB_SHA1 = "3471cdbd56dae532d06842a08a6d5cd770220152"
 SUCCESSOR_CHAINS = {

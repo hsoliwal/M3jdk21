@@ -28,13 +28,13 @@ final class M3HandoffV2ReceiverRecipeTest {
     private static final String ROOT =
             "/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-handoff-v2-receiver/";
     private static final String GUARD =
-            "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/"
+            "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/"
                     + "M3HandoffGuardRecipe.java";
     private static final String RECEIVER_TEST =
-            "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/"
+            "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/"
                     + "M3HandoffReceiverTest.java";
     private static final String RECIPE_TEST =
-            "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/"
+            "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/"
                     + "M3HandoffV2ReceiverRecipeTest.java";
 
     @Test

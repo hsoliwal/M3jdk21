@@ -269,8 +269,8 @@ Installed Java 21 collections and JNI	UNKNOWN STEP	2026-10-29T22:55:48.1002101Z
 Installed Java 21 collections and JNI	UNKNOWN STEP	2026-10-29T22:55:48.1841689Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
 Installed Java 21 collections and JNI	UNKNOWN STEP	2026-10-29T22:55:48.1842460Z 100 2880k  100 2880k    0     0  33.3M      0 --:--:-- --:--:-- --:--:-- 33.4M
 Installed Java 21 collections and JNI	UNKNOWN STEP	2026-10-29T22:55:48.1997576Z /home/runner/work/_temp/m3-junit-console.jar: OK
-Installed Java 21 collections and JNI	UNKNOWN STEP	2026-10-29T22:55:48.2051107Z ##[group]Run python3 m3/collections/verify_donation.py --cost-probe
-Installed Java 21 collections and JNI	UNKNOWN STEP	2026-10-29T22:55:48.2051609Z [36;1mpython3 m3/collections/verify_donation.py --cost-probe[0m
+Installed Java 21 collections and JNI	UNKNOWN STEP	2026-10-29T22:55:48.2051107Z ##[group]Run python3 make/m3/collections/verify_donation.py --cost-probe
+Installed Java 21 collections and JNI	UNKNOWN STEP	2026-10-29T22:55:48.2051609Z [36;1mpython3 make/m3/collections/verify_donation.py --cost-probe[0m
 Installed Java 21 collections and JNI	UNKNOWN STEP	2026-10-29T22:55:48.2119283Z shell: /usr/bin/bash -e {0}
 Installed Java 21 collections and JNI	UNKNOWN STEP	2026-10-29T22:55:48.2119545Z env:
 Installed Java 21 collections and JNI	UNKNOWN STEP	2026-10-29T22:55:48.2119803Z   JAVA_HOME: /home/runner/work/_temp/jdk-21.0.12.1+1
@@ -585,8 +585,8 @@ Full collection Java and JNI at exact head	UNKNOWN STEP	2026-10-29T22:57:15.3778
 Full collection Java and JNI at exact head	UNKNOWN STEP	2026-10-29T22:57:15.4421218Z  89  197M   89  176M    0     0   168M      0  0:00:01  0:00:01 --:--:--  168M
 Full collection Java and JNI at exact head	UNKNOWN STEP	2026-10-29T22:57:15.4422131Z 100  197M  100  197M    0     0   177M      0  0:00:01  0:00:01 --:--:--  332M
 Full collection Java and JNI at exact head	UNKNOWN STEP	2026-10-29T22:57:16.3028413Z /home/runner/work/_temp/m3-jdk21.tar.gz: OK
-Full collection Java and JNI at exact head	UNKNOWN STEP	2026-10-29T22:57:18.5558889Z ##[group]Run python3 m3/collections/qualification/full-java-jni-20261018/verify.py
-Full collection Java and JNI at exact head	UNKNOWN STEP	2026-10-29T22:57:18.5559533Z [36;1mpython3 m3/collections/qualification/full-java-jni-20261018/verify.py[0m
+Full collection Java and JNI at exact head	UNKNOWN STEP	2026-10-29T22:57:18.5558889Z ##[group]Run python3 make/m3/collections/qualification/full-java-jni-20261018/verify.py
+Full collection Java and JNI at exact head	UNKNOWN STEP	2026-10-29T22:57:18.5559533Z [36;1mpython3 make/m3/collections/qualification/full-java-jni-20261018/verify.py[0m
 Full collection Java and JNI at exact head	UNKNOWN STEP	2026-10-29T22:57:18.5630409Z shell: /usr/bin/bash -e {0}
 Full collection Java and JNI at exact head	UNKNOWN STEP	2026-10-29T22:57:18.5630669Z env:
 Full collection Java and JNI at exact head	UNKNOWN STEP	2026-10-29T22:57:18.5630917Z   JAVA_HOME: /home/runner/work/_temp/jdk-21.0.12.1+1
@@ -1615,8 +1615,8 @@ Historical lane recipe with real SDK	UNKNOWN STEP	2026-10-29T22:57:06.1016235Z
 Historical lane recipe with real SDK	UNKNOWN STEP	2026-10-29T22:57:06.1424637Z  90  197M   90  180M    0     0   209M      0 --:--:-- --:--:-- --:--:--  209M
 Historical lane recipe with real SDK	UNKNOWN STEP	2026-10-29T22:57:06.1425049Z 100  197M  100  197M    0     0   219M      0 --:--:-- --:--:-- --:--:--  446M
 Historical lane recipe with real SDK	UNKNOWN STEP	2026-10-29T22:57:06.5469007Z /home/runner/work/_temp/m3-jdk21.tar.gz: OK
-Historical lane recipe with real SDK	UNKNOWN STEP	2026-10-29T22:57:08.3558410Z ##[group]Run mvn --batch-mode --no-transfer-progress --file m3/collections/recipe/pom.xml verify
-Historical lane recipe with real SDK	UNKNOWN STEP	2026-10-29T22:57:08.3558810Z [36;1mmvn --batch-mode --no-transfer-progress --file m3/collections/recipe/pom.xml verify[0m
+Historical lane recipe with real SDK	UNKNOWN STEP	2026-10-29T22:57:08.3558410Z ##[group]Run mvn --batch-mode --no-transfer-progress --file make/m3/collections/recipe/pom.xml verify
+Historical lane recipe with real SDK	UNKNOWN STEP	2026-10-29T22:57:08.3558810Z [36;1mmvn --batch-mode --no-transfer-progress --file make/m3/collections/recipe/pom.xml verify[0m
 Historical lane recipe with real SDK	UNKNOWN STEP	2026-10-29T22:57:08.3587470Z shell: /usr/bin/bash -e {0}
 Historical lane recipe with real SDK	UNKNOWN STEP	2026-10-29T22:57:08.3587618Z env:
 Historical lane recipe with real SDK	UNKNOWN STEP	2026-10-29T22:57:08.3587757Z   JAVA_HOME: /home/runner/work/_temp/jdk-21.0.12.1+1
@@ -1651,7 +1651,7 @@ Historical lane recipe with real SDK	UNKNOWN STEP	2026-10-29T22:57:13.8851701Z #
 Historical lane recipe with real SDK	UNKNOWN STEP	2026-10-29T22:57:13.8915265Z ##[group]Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
 Historical lane recipe with real SDK	UNKNOWN STEP	2026-10-29T22:57:13.8915486Z with:
 Historical lane recipe with real SDK	UNKNOWN STEP	2026-10-29T22:57:13.8915695Z   name: m3-collections-historical-recipe-052ebcf7a26352c0285251eb671ee6c3640fd3ff
-Historical lane recipe with real SDK	UNKNOWN STEP	2026-10-29T22:57:13.8915970Z   path: m3/collections/recipe/target/surefire-reports/
+Historical lane recipe with real SDK	UNKNOWN STEP	2026-10-29T22:57:13.8915970Z   path: make/m3/collections/recipe/target/surefire-reports/
 Historical lane recipe with real SDK	UNKNOWN STEP	2026-10-29T22:57:13.8916359Z   if-no-files-found: warn
 Historical lane recipe with real SDK	UNKNOWN STEP	2026-10-29T22:57:13.8916495Z   compression-level: 6
 Historical lane recipe with real SDK	UNKNOWN STEP	2026-10-29T22:57:13.8916616Z   overwrite: false
@@ -1661,7 +1661,7 @@ Historical lane recipe with real SDK	UNKNOWN STEP	2026-10-29T22:57:13.8917124Z  
 Historical lane recipe with real SDK	UNKNOWN STEP	2026-10-29T22:57:13.8917285Z ##[endgroup]
 Historical lane recipe with real SDK	UNKNOWN STEP	2026-10-29T22:57:13.9907352Z (node:2120) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
 Historical lane recipe with real SDK	UNKNOWN STEP	2026-10-29T22:57:13.9907753Z (Use `node --trace-deprecation ...` to show where the warning was created)
-Historical lane recipe with real SDK	UNKNOWN STEP	2026-10-29T22:57:13.9928991Z ##[warning]No files were found with the provided path: m3/collections/recipe/target/surefire-reports/. No artifacts will be uploaded.
+Historical lane recipe with real SDK	UNKNOWN STEP	2026-10-29T22:57:13.9928991Z ##[warning]No files were found with the provided path: make/m3/collections/recipe/target/surefire-reports/. No artifacts will be uploaded.
 Historical lane recipe with real SDK	UNKNOWN STEP	2026-10-29T22:57:14.0048109Z Post job cleanup.
 Historical lane recipe with real SDK	UNKNOWN STEP	2026-10-29T22:57:14.0584551Z [command]/usr/bin/git version
 Historical lane recipe with real SDK	UNKNOWN STEP	2026-10-29T22:57:14.0610725Z git version 2.56.0

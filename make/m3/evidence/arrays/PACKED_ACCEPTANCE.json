@@ -49,7 +49,7 @@
     "m3/arrays/src/main/native/tests/m3_packed_codec_checks.c": "2dbfff24d49243132268625614fb7043624e4aaa95eb764a050eca22331b3e20",
     "m3/arrays/src/main/native/tests/m3_packed_codec_jni_fault_test.c": "e581cbff3905edc3ca151f978f90d6179b2d23c49af8682c27291c5f3f8930fb",
     "m3/arrays/src/main/native/tests/m3_packed_null_fixture.c": "439f27cf29604f435ffebbb0feaedba1577168168244cd42c44a049bd16ed935",
-    "m3/tooling/module-packs/build_pack.py": "da87cbebdf47dce0929bd55d2badfe9e9be98ae1d29a8d1628fc1a954dd07bc6"
+    "make/m3/tooling/module-packs/build_pack.py": "da87cbebdf47dce0929bd55d2badfe9e9be98ae1d29a8d1628fc1a954dd07bc6"
   },
   "intake_mode": "INDEPENDENT_APACHE_MODULE",
   "java_jni": {
@@ -250,9 +250,9 @@
     ]
   },
   "packaging_source_sha256": {
-    "m3/tooling/jmod-recipes/tools/jmod_pack.py": "f74c8861494fefefe978ad5c038e7309c9ec3e2e9bd41c913e827458a950a200",
-    "m3/tooling/jmod-recipes/tools/test_jmod_resolution.py": "cde8b6560b784f967a713f5a35cbe33a9c8d4fc29532c7a5d22ab3cdabb05d97",
-    "m3/tooling/module-packs/build_pack.py": "da87cbebdf47dce0929bd55d2badfe9e9be98ae1d29a8d1628fc1a954dd07bc6"
+    "make/m3/tooling/jmod-recipes/tools/jmod_pack.py": "f74c8861494fefefe978ad5c038e7309c9ec3e2e9bd41c913e827458a950a200",
+    "make/m3/tooling/jmod-recipes/tools/test_jmod_resolution.py": "cde8b6560b784f967a713f5a35cbe33a9c8d4fc29532c7a5d22ab3cdabb05d97",
+    "make/m3/tooling/module-packs/build_pack.py": "da87cbebdf47dce0929bd55d2badfe9e9be98ae1d29a8d1628fc1a954dd07bc6"
   },
   "platform": {
     "arch": "x86_64",
@@ -620,7 +620,7 @@
         "unittest",
         "discover",
         "-s",
-        "m3/tooling/jmod-recipes/tools",
+        "make/m3/tooling/jmod-recipes/tools",
         "-p",
         "test_jmod_resolution.py",
         "-v"

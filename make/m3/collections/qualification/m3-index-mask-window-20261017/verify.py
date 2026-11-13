@@ -13,9 +13,9 @@ import hashlib
 import tempfile
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[4]
+ROOT = Path(__file__).resolve().parents[5]
 OWN = Path(__file__).resolve().parent
-JAVA_CRATE = ROOT / 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-index-mask-window-20261017'
+JAVA_CRATE = ROOT / 'make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-index-mask-window-20261017'
 NATIVE_CRATE = OWN
 
 

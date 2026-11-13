@@ -5,10 +5,10 @@ on:
     paths:
       - "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongRangeSet.java"
       - "test/jdk/jdk/m3/collections/M3LongRangeSet*.java"
-      - "m3/collections/qualification/range-atom/successor/**"
-      - "m3/collections/qualification/long-range-set-20261017/**"
+      - "make/m3/collections/qualification/range-atom/successor/**"
+      - "make/m3/collections/qualification/long-range-set-20261017/**"
       - "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-long-range-array-flags-20261017/**"
-      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3jdk21-long-range-array-flags-20261017.yml"
+      - "make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3jdk21-long-range-array-flags-20261017.yml"
       - ".github/workflows/m3-long-range-arrays-jni-20261017.yml"
   push:
     branches: [m3/range-array-mask-receiver-20261017]
@@ -34,12 +34,12 @@ jobs:
         shell: bash
         run: |
           set -euxo pipefail
-          python3 -S m3/collections/qualification/range-atom/successor/verify.py
+          python3 -S make/m3/collections/qualification/range-atom/successor/verify.py
       - name: Actual Maven OpenRewrite AST source generation and refusals
         shell: bash
         run: |
           set -euxo pipefail
-          mvn -B -ntp -f m3/collections/qualification/long-range-set-20261017/recipe/pom.xml test
+          mvn -B -ntp -f make/m3/collections/qualification/long-range-set-20261017/recipe/pom.xml test
       - name: Build actual Java21 m3-arrays dependency before strict module compilation
         shell: bash
         run: |
@@ -92,7 +92,7 @@ jobs:
           mvn -B -ntp -f m3/collections/pom.xml \
             '-Dtest=M3LongRangeSetAtomTest' \
             "-DargLine=-Xcheck:jni -Djava.library.path=$PWD/proof/native" test
-          python3 -S m3/collections/qualification/range-atom/successor/verify.py
+          python3 -S make/m3/collections/qualification/range-atom/successor/verify.py
           git diff --exit-code
       - name: Retain build evidence and actual errors
         if: always()
@@ -102,5 +102,5 @@ jobs:
           retention-days: 30
           path: |
             proof/
-            m3/collections/qualification/long-range-set-20261017/recipe/target/surefire-reports/
+            make/m3/collections/qualification/long-range-set-20261017/recipe/target/surefire-reports/
             m3/collections/target/surefire-reports/

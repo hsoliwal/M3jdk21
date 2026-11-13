@@ -3,7 +3,7 @@ name: M3JDK21 historical receipt lineage and current filtered successor
 on:
   pull_request:
     paths:
-      - 'm3/collections/qualification/filtered-plan-current-master-20261027/**'
+      - 'make/m3/collections/qualification/filtered-plan-current-master-20261027/**'
       - '.github/workflows/m3-filtered-receipt-lineage-20261027.yml'
   workflow_dispatch:
 permissions:
@@ -26,6 +26,6 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Verify immutable predecessor receipts independently of successor files
-        run: python3 m3/collections/qualification/filtered-plan-current-master-20261027/verify_historical_lineage.py
+        run: python3 make/m3/collections/qualification/filtered-plan-current-master-20261027/verify_historical_lineage.py
       - name: Compile and test actual current-master filtered implementation
-        run: bash m3/collections/qualification/filtered-plan-current-master-20261027/verify.sh
+        run: bash make/m3/collections/qualification/filtered-plan-current-master-20261027/verify.sh

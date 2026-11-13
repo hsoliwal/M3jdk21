@@ -9,6 +9,8 @@ on:
       - 'M3-SYNEXIA-RIGHTS.md'
       - 'M3-SYNEXIA-AUTHORS.md'
       - 'm3/**'
+      - 'make/m3/**'
+      - 'doc/m3/**'
       - '.github/workflows/m3-first-release-admission.yml'
       - '.github/workflows/m3-release.yml'
   push:
@@ -37,69 +39,69 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install pinned naming-schema test dependencies
-        run: python3 -m pip install --disable-pip-version-check -r m3/migration/requirements.txt
+        run: python3 -m pip install --disable-pip-version-check -r make/m3/migration/requirements.txt
       - name: Diff hygiene
         run: git diff --check
       - name: Unit-test the release verifier
-        run: python3 -m unittest discover -s m3/release -p 'test_*.py' -v
+        run: python3 -m unittest discover -s make/m3/release -p 'test_*.py' -v
       - name: Fail if standalone M3 core tests are omitted
         run: |
-          python3 m3/release/verify_test_wiring.py --root . --strict \
-            --json-out m3/release/queue/current/core-test-wiring.json
+          python3 make/m3/release/verify_test_wiring.py --root . --strict \
+            --json-out make/m3/release/queue/current/core-test-wiring.json
       - name: Record human/machine release branch identity
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p m3/release/queue/current
+          mkdir -p make/m3/release/queue/current
           mode=()
           if [[ "${GITHUB_REF}" == refs/heads/release/* ]]; then mode=(--release); fi
-          python3 m3/release/audit_release_identity.py --root . \
-            --json-out m3/release/queue/current/release-identity.json "${mode[@]}"
+          python3 make/m3/release/audit_release_identity.py --root . \
+            --json-out make/m3/release/queue/current/release-identity.json "${mode[@]}"
       - name: Test canonical naming and package refusals
-        run: python3 -m unittest discover -s m3/tooling/name-contract -p 'test_*.py' -v
+        run: python3 -m unittest discover -s make/m3/tooling/name-contract -p 'test_*.py' -v
       - name: Validate release claims and boundaries
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p m3/release/queue/current
+          mkdir -p make/m3/release/queue/current
           mode=()
           if [[ "${GITHUB_REF}" == refs/heads/release/* ]]; then
             mode=(--release)
           fi
-          python3 m3/release/verify_release_admission.py \
+          python3 make/m3/release/verify_release_admission.py \
             --root . "${mode[@]}" \
-            --json-out m3/release/queue/current/admission.json \
-            --queue-out m3/release/queue/current/README.md \
-            --sha256-out m3/release/queue/current/SHA256SUMS
-          git rev-parse HEAD | tee m3/release/queue/current/HEAD
-          git rev-parse 'HEAD^{tree}' | tee m3/release/queue/current/TREE
-          git status --porcelain=v1 --untracked-files=no | tee m3/release/queue/current/WORKTREE
-          test ! -s m3/release/queue/current/WORKTREE
+            --json-out make/m3/release/queue/current/admission.json \
+            --queue-out make/m3/release/queue/current/README.md \
+            --sha256-out make/m3/release/queue/current/SHA256SUMS
+          git rev-parse HEAD | tee make/m3/release/queue/current/HEAD
+          git rev-parse 'HEAD^{tree}' | tee make/m3/release/queue/current/TREE
+          git status --porcelain=v1 --untracked-files=no | tee make/m3/release/queue/current/WORKTREE
+          test ! -s make/m3/release/queue/current/WORKTREE
       - name: Export canonical naming and retained source queues
         if: always()
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p m3/release/queue/current
-          python3 m3/tooling/name-contract/check.py | tee m3/release/queue/current/name-check.txt
-          python3 m3/tooling/name-contract/audit.py > m3/release/queue/current/name-census.tsv
+          mkdir -p make/m3/release/queue/current
+          python3 make/m3/tooling/name-contract/check.py | tee make/m3/release/queue/current/name-check.txt
+          python3 make/m3/tooling/name-contract/audit.py > make/m3/release/queue/current/name-census.tsv
           queue_mode=()
           if [[ "${GITHUB_REF}" == refs/heads/release/* ]]; then
             queue_mode=(--strict)
           fi
-          python3 m3/release/retained_source_queue.py --root . \
-            --tsv-out m3/release/queue/current/retained-source-queue.tsv \
-            --summary-out m3/release/queue/current/retained-source-summary.json \
+          python3 make/m3/release/retained_source_queue.py --root . \
+            --tsv-out make/m3/release/queue/current/retained-source-queue.tsv \
+            --summary-out make/m3/release/queue/current/retained-source-summary.json \
             "${queue_mode[@]}"
       - name: Show retained-source review queue
         if: always()
         shell: bash
         run: |
-          if test -f m3/release/queue/current/retained-source-summary.json; then
+          if test -f make/m3/release/queue/current/retained-source-summary.json; then
             python3 - <<'PY' >> "$GITHUB_STEP_SUMMARY"
           import json
           from pathlib import Path
-          info = json.loads(Path('m3/release/queue/current/retained-source-summary.json').read_text(encoding='utf-8'))
+          info = json.loads(Path('make/m3/release/queue/current/retained-source-summary.json').read_text(encoding='utf-8'))
           print('## M3JDK21 archived-source review queue')
           print()
           print('Exact HEAD: `' + info['tree_head'] + '`')
@@ -118,15 +120,15 @@ jobs:
         if: always()
         shell: bash
         run: |
-          if test -f m3/release/queue/current/README.md; then
-            cat m3/release/queue/current/README.md >> "$GITHUB_STEP_SUMMARY"
+          if test -f make/m3/release/queue/current/README.md; then
+            cat make/m3/release/queue/current/README.md >> "$GITHUB_STEP_SUMMARY"
           fi
       - name: Upload contract evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: m3-release-contract-${{ github.sha }}
-          path: m3/release/queue/current
+          path: make/m3/release/queue/current
           retention-days: 90
           if-no-files-found: error
 
@@ -153,20 +155,20 @@ jobs:
           echo "JAVA_HOME=$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"
           echo "$RUNNER_TEMP/jdk-21+35/bin" >> "$GITHUB_PATH"
       - name: Build and test P0 immutable text foundation
-        run: bash ./m3/build.sh
+        run: bash ./make/m3/build.sh
       - name: Execute separately qualified additional core contracts
-        run: bash ./m3/release/run_extra_core_contracts.sh
+        run: bash ./make/m3/release/run_extra_core_contracts.sh
       - name: Verify Synexia compatibility and shared mapping
         run: |
-          python3 m3/compatibility/check-m3.py
-          python3 m3/verify-shared-mapping.py
+          python3 make/m3/compatibility/check-m3.py
+          python3 make/m3/verify-shared-mapping.py
       - name: Record core suite wiring and hash raw test logs
         if: always()
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p m3/build/logs
-          python3 m3/release/verify_test_wiring.py --root . --strict \
+          python3 make/m3/release/verify_test_wiring.py --root . --strict \
             --json-out m3/build/logs/core-test-wiring.json
           find m3/build/logs -maxdepth 1 -type f -name '*.log' -print0 | \
             sort -z | xargs -0 -r sha256sum > m3/build/logs/test-log-sha256.txt
@@ -232,7 +234,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/release/run_maven_control_reactor.py --root . \
+          python3 make/m3/release/run_maven_control_reactor.py --root . \
             --expected-commit "$EXPECTED_SOURCE_COMMIT" \
             --out "$RUNNER_TEMP/m3-maven-control" --timeout-seconds 1800
       - name: Require the same-run product Maven receipt
@@ -249,7 +251,7 @@ jobs:
           import json
           import os
           from pathlib import Path
-          path = Path('m3/release/verify_release_admission.py')
+          path = Path('make/m3/release/verify_release_admission.py')
           spec = importlib.util.spec_from_file_location('release_admission', path)
           module = importlib.util.module_from_spec(spec)
           spec.loader.exec_module(module)
@@ -264,9 +266,9 @@ jobs:
       - name: Full-family and receiving-policy verification
         if: always()
         run: |
-          if test -f m3/compatibility/check_m3_full_family.py; then
-            python3 m3/compatibility/check_m3_full_family.py
-            python3 -m unittest discover -s m3/compatibility -p 'test_m3_full_family.py' -v
+          if test -f make/m3/compatibility/check_m3_full_family.py; then
+            python3 make/m3/compatibility/check_m3_full_family.py
+            python3 -m unittest discover -s make/m3/compatibility -p 'test_m3_full_family.py' -v
           fi
 
       - name: Upload product Maven execution or refusal evidence

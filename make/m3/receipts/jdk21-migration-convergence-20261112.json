@@ -33,7 +33,7 @@
       "recipe_id": "com.synexia.m3.DequeRemoveMask20261112"
     },
     {
-      "path": "m3/backports/JSR_JEP_JBS_22_27_RECEIPT_20261022.md",
+      "path": "make/m3/backports/JSR_JEP_JBS_22_27_RECEIPT_20261022.md",
       "before_sha256": "b8cd4cdc45085c4d9317eb8db314d14aea2c53d87415a0d567ec3f49767ac1e5",
       "after_sha256": "79ff729d6fd92d74d43b655aa6ed291a4d2d74f02a0e2676bd5e019fa9adc79e",
       "after_git_blob_sha1": "14d4352d30d8e5b347ecba9d9ce170d5034cb55e",

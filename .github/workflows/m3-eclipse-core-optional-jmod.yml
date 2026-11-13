@@ -9,7 +9,7 @@ on:
       - 'm3/arrays/src/**'
       - 'm3/ast/src/**'
       - 'm3/collections/src/**'
-      - 'm3/docs/name-mapping.d/eclipse-core-optional-jmod-20261018.tsv'
+      - 'doc/m3/name-mapping.d/eclipse-core-optional-jmod-20261018.tsv'
       - '.github/workflows/m3-eclipse-core-optional-jmod.yml'
   workflow_dispatch:
 permissions:
@@ -37,8 +37,8 @@ jobs:
             test/jdk/jdk/internal/m3/collections
             m3/file
             m3/eclipse/optional-jmod
-            m3/tooling/migration-recipes
-            m3/docs/name-mapping.d/eclipse-core-optional-jmod-20261018.tsv
+            make/m3/tooling/migration-recipes
+            doc/m3/name-mapping.d/eclipse-core-optional-jmod-20261018.tsv
             m3/LICENSE
             m3/NOTICE
       - uses: actions/setup-java@v4

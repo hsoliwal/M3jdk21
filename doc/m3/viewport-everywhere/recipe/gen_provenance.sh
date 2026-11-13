@@ -15,8 +15,8 @@ for module in collections; do
   out="$M3/$module/provenance-viewport-20261018.json"
   {
     printf '{\n  "source_repository": "hsoliwal/eclipse.platform.swt",\n  "source_commit": "%s",\n' $SRC
-    printf '  "recipe": "m3/docs/viewport-everywhere/recipe/META-INF/rewrite/m3-viewport-everywhere.yml",\n'
-    printf '  "authority": "m3/docs/viewport-everywhere/RELICENSE_RECORD.md",\n  "files": [\n'
+    printf '  "recipe": "doc/m3/viewport-everywhere/recipe/META-INF/rewrite/m3-viewport-everywhere.yml",\n'
+    printf '  "authority": "doc/m3/viewport-everywhere/RELICENSE_RECORD.md",\n  "files": [\n'
     awk -F'\t' -v m=$module 'NR>1 && $3==m' "$MAP" | while IFS=$'\t' read -r cls dir mod target kind; do
       if [ $kind = main ]; then donor="$DONOR/swt/$cls.java"; tree=main; spath="$BASE/$dir/$cls.java"
       else donor="$DONOR/swt-tests/$cls.java"; tree=test; spath="$TESTS/$cls.java"; fi

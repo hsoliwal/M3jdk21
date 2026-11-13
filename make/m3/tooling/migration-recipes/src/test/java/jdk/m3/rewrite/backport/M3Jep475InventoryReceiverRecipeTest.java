@@ -18,15 +18,15 @@ final class M3Jep475InventoryReceiverRecipeTest {
     private static final String WORKFLOW =
             ".github/workflows/m3-jep475-late-barrier-g1-inventory.yml";
     private static final String PATHS =
-            "m3/backports/recipes/jep-475-late-barrier-g1/INTEGRATION_PATHS.txt";
+            "make/m3/backports/recipes/jep-475-late-barrier-g1/INTEGRATION_PATHS.txt";
     private static final String POLICY =
-            "m3/backports/recipes/jep-475-late-barrier-g1/MATERIALIZATION_POLICY.tsv";
+            "make/m3/backports/recipes/jep-475-late-barrier-g1/MATERIALIZATION_POLICY.tsv";
     private static final String PLAN =
-            "m3/backports/recipes/jep-475-late-barrier-g1/PACKET_PLAN.tsv";
+            "make/m3/backports/recipes/jep-475-late-barrier-g1/PACKET_PLAN.tsv";
     private static final String README =
-            "m3/backports/recipes/jep-475-late-barrier-g1/README.md";
+            "make/m3/backports/recipes/jep-475-late-barrier-g1/README.md";
     private static final String TEST =
-            "m3/backports/test_jep475_inventory_policy.py";
+            "make/m3/backports/test_jep475_inventory_policy.py";
 
     @Test
     void additivePacketGeneratesSixTargetsAndReachesFixedPoint() {

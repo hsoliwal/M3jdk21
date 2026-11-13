@@ -28,7 +28,7 @@ OWNERS = {
     "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java":
         "372e40bf4e12f0dd7a614388786ed7c9c7d92d848bdd63de099b9f7176657dba",
 }
-QUALIFICATION = "m3/collections/qualification/oracle-repair-20261018"
+QUALIFICATION = "make/m3/collections/qualification/oracle-repair-20261018"
 
 
 def sha(path):
@@ -190,9 +190,9 @@ def main():
         "algorithm_selection": "reuse the existing first-party M3 owners and JDK collection contracts; repair the four test premises demonstrated independently",
         "cases": cases,
         "existing_catalogues_consulted": [
-            "m3/collections/algorithm-catalog/full-m3-family-inventory-20261017/COLLECTION_SOURCE_INVENTORY.tsv",
-            "m3/collections/algorithm-catalog/collection-catalogue-input-provenance-20261017.tsv",
-            "m3/backports/ALGORITHM_CATALOGUE.tsv",
+            "make/m3/collections/algorithm-catalog/full-m3-family-inventory-20261017/COLLECTION_SOURCE_INVENTORY.tsv",
+            "make/m3/collections/algorithm-catalog/collection-catalogue-input-provenance-20261017.tsv",
+            "make/m3/backports/ALGORITHM_CATALOGUE.tsv",
         ],
         "primary_contract_sources": [
             "src/java.base/share/classes/java/util/ArrayList.java: remove(Object) and iterator removal",
@@ -211,7 +211,7 @@ def main():
         "claim_limit": "These repairs qualify the test premises. They do not establish complete SDK parity, application performance, native equivalence, or a new production algorithm improvement.",
     }
     (qualification / "CATALOGUE.json").write_text(json.dumps(catalogue, indent=2) + "\n")
-    index = output / "m3/collections/algorithm-catalog/collection-oracle-repair-20261018.tsv"
+    index = output / "make/m3/collections/algorithm-catalog/collection-oracle-repair-20261018.tsv"
     index.parent.mkdir(parents=True, exist_ok=True)
     columns = ["id", "category", "operation", "selection", "evidence", "production_changes"]
     lines = ["\t".join(columns)]
@@ -240,14 +240,14 @@ hidden reference remains before asserting that the last visible member is gone.
 `CATALOGUE.json` records the four operation categories, rejected and selected
 oracles, original source hashes, unchanged production hashes, donor evaluation,
 coverage, and evidence boundaries. The searchable module catalogue index is
-`m3/collections/algorithm-catalog/collection-oracle-repair-20261018.tsv`.
+`make/m3/collections/algorithm-catalog/collection-oracle-repair-20261018.tsv`.
 
 The independent witness needs only Java 21 and no M3 classes. From the repository
 root, use an isolated output directory:
 
 ```sh
 mkdir -p /tmp/m3-collection-oracle-classes
-javac -Xlint:all -Werror -d /tmp/m3-collection-oracle-classes m3/collections/qualification/oracle-repair-20261018/src/test/java/CollectionOracleWitness.java
+javac -Xlint:all -Werror -d /tmp/m3-collection-oracle-classes make/m3/collections/qualification/oracle-repair-20261018/src/test/java/CollectionOracleWitness.java
 java -Xmx128m -cp /tmp/m3-collection-oracle-classes CollectionOracleWitness
 ```
 

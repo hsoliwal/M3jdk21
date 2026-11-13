@@ -771,7 +771,7 @@ def _admit_intake(document, packet, root, authority_sha256):
         _intake_require(set(ref) == {'repo', 'commit', 'tree'} and ref['repo'] == repo
                         and _hex(COMMIT, ref['commit']) and _hex(COMMIT, ref['tree']), 'repository identity')
     authority = packet['authority']
-    _intake_require(authority.get('path') == 'm3/docs/name-mapping.json'
+    _intake_require(authority.get('path') == 'doc/m3/name-mapping.json'
                     and authority.get('sha256') == authority_sha256, 'canonical mapping binding')
     authority_path = _intake_artifact(root, authority)
     _intake_require(load_json(authority_path) == document, 'canonical mapping document differs')
@@ -902,7 +902,7 @@ def main(argv=None):
             write_output(args.output, content)
             print('MANIFEST_EXTENSION_RECIPE_PASS source_unchanged=true output_sha256=' + digest(content))
             return 0
-        manifest = args.manifest or args.root / 'm3/docs/name-mapping.json'
+        manifest = args.manifest or args.root / 'doc/m3/name-mapping.json'
         document = load_json(manifest)
         previous = load_json(args.previous) if args.previous else None
         errors = validate(document, args.root, previous)

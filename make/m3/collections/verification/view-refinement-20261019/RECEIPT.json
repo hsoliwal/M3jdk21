@@ -19,12 +19,12 @@
       "afterSha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
     },
     {
-      "path": "m3/collections/verification/view-refinement-20261019/M3FilteredNullNavigationProbe.java",
+      "path": "make/m3/collections/verification/view-refinement-20261019/M3FilteredNullNavigationProbe.java",
       "beforeSha256": "ABSENT",
       "afterSha256": "b86e87efbc2960ee90f030a8ebd9b7bb286c1f1799fa853d926f7bc9d082287f"
     },
     {
-      "path": "m3/collections/verification/view-refinement-20261019/M3ProjectionRefinementProbe.java",
+      "path": "make/m3/collections/verification/view-refinement-20261019/M3ProjectionRefinementProbe.java",
       "beforeSha256": "ABSENT",
       "afterSha256": "8475e188b527840dd43464d4e8a064e431b8e70ef7941f37709ac0620a56dce9"
     }

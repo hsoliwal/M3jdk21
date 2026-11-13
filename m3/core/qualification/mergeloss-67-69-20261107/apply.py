@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 """Recipe MERGELOSS_RESTORE v1: merge-loss audit leaves 67 and 69 (m3/core SharedLexiconImage).
 
-Derived from m3/collections/qualification/census-small-batch-20261106/apply.py v1 (anchored "sub" edits, every anchor
+Derived from make/m3/collections/qualification/census-small-batch-20261106/apply.py v1 (anchored "sub" edits, every anchor
 exactly once, LF payloads re-joined with the preimage's line ending), extended with a per-file leaf chain: the leaves
 of one file apply in origin date order, so the accepted states of a file are the base and each chain prefix. The base
 is pinned by git blob id; a file equal to a chain image is that state, anything else is drift and the recipe refuses

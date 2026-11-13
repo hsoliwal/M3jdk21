@@ -11,7 +11,7 @@ import java.util.WeakHashMap;
  * Weak canonicalization for immutable values when GC reclaimability is more important than stable
  * ids. Equal live values share one representative while that representative remains reachable.
  */
-//FLLDCIM: RELOCATE - donor blob 94b300cf78a8 at commit 3385d79a2968 (repository, path, URL and digests: m3/collections/recipe/immutable-pools-20261106/PROVENANCE.tsv); recipe m3/collections/recipe/immutable-pools-20261106/relocate.py v2
+//FLLDCIM: RELOCATE - donor blob 94b300cf78a8 at commit 3385d79a2968 (repository, path, URL and digests: make/m3/collections/recipe/immutable-pools-20261106/PROVENANCE.tsv); recipe make/m3/collections/recipe/immutable-pools-20261106/relocate.py v2
 public final class WeakValueCanonicalizer<T> {
     private final Map<T, WeakReference<T>> values = new WeakHashMap<>();
     private long hits;

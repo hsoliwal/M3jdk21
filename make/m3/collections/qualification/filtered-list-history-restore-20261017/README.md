@@ -46,7 +46,7 @@ Fix recipe defects in Synexia and re-emit every receiver postimage.
 
 Focused selected-source Java 21 proof:
 ```sh
-python3 m3/collections/qualification/filtered-list-history-restore-20261017/verify.py
+python3 make/m3/collections/qualification/filtered-list-history-restore-20261017/verify.py
 javac --release 21 -proc:none -Xlint:all -Werror -d /tmp/m3-list \
   m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java \
   m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java \

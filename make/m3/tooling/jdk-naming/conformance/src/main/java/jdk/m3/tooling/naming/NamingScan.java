@@ -38,8 +38,8 @@ public final class NamingScan {
     static final Set<String> DOC_NAMES = Set.of("NOTICE", "LICENSE", "COPYRIGHT", "AUTHORS", "THIRD_PARTY_NOTICES");
     static final List<String> LINEAGE_HINTS = List.of("provenance", "evidence", "receipt", "manifest",
             "source_sha256", "final_", "readback");
-    static final String SELF_PREFIX = "m3/tooling/jdk-naming/";
-    static final Set<String> SELF = Set.of("m3/release/check_standalone.py", "m3/release/test_check_standalone.py");
+    static final String SELF_PREFIX = "make/m3/tooling/jdk-naming/";
+    static final Set<String> SELF = Set.of("make/m3/release/check_standalone.py", "make/m3/release/test_check_standalone.py");
     /** Every rule contains one of these literals; a line without them is conformant (the recipe's QUICK). */
     static final Pattern QUICK = Pattern.compile("(?i)synexia|com[./_]{1,2}m3[./_]|m3([-_./])m3\\1|m3[ _-]?jdk");
     private static final int EXCERPT = 160;
@@ -63,7 +63,7 @@ public final class NamingScan {
         String[] parts = name.toLowerCase(Locale.ROOT).split("\\.");
         boolean docSuffix = Arrays.stream(parts).skip(1).anyMatch(part -> DOC_SUFFIXES.contains("." + part));
         return docSuffix || DOC_NAMES.contains(name)
-                || path.startsWith("m3/docs/") || path.startsWith("m3/release/audit-")
+                || path.startsWith("doc/m3/") || path.startsWith("make/m3/release/audit-")
                 || path.contains("/evidence/") || path.contains("/receipts/") || path.contains("/surefire-reports/")
                 || name.startsWith("TEST-") && suffix.equals(".xml")
                 || suffix.equals(".json") && LINEAGE_HINTS.stream().anyMatch(lower::contains);

@@ -4,7 +4,7 @@
 """REFS_LEDGER v2: classify every cross-repository finding of check_standalone.py into one ledger.
 
 Inputs are two check_standalone.py TSV scans (columns kind, path, line, text), taken before and after a change,
-and the ordered rule table (m3/tooling/standalone/*_RULES.tsv: order, leaf, kind, path, text, class, decision, action,
+and the ordered rule table (make/m3/tooling/standalone/*_RULES.tsv: order, leaf, kind, path, text, class, decision, action,
 evidence; kind/path/text are Python regular expressions searched in the finding, the first matching rule wins).
 Both scans are classified with the same rules. The ledger has one row per dependency finding (D_* kinds):
 path, kind, decision, action, evidence, line, class, state, text. A "before" finding is RESOLVED when the "after"

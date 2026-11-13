@@ -6,15 +6,15 @@ on:
     paths:
       - '.github/workflows/m3-tq.yml'
       - '.m3/openrewrite-recipes/**'
-      - 'm3/tooling/tq/**'
-      - 'm3/tooling/tq-sync/**'
+      - 'make/m3/tooling/tq/**'
+      - 'make/m3/tooling/tq-sync/**'
       - 'm3/m3-import/pure-int-recipe-custody/install.sh'
       - 'm3/m3-import/pure-int-recipe-custody/test_source_bootstrap.py'
-      - 'm3/tooling/lane28/**'
-      - 'm3/tooling/migration-recipes/**'
-      - 'm3/migration/**'
-      - 'm3/docs/name-mapping*'
-      - 'm3/docs/counterpart-naming.md'
+      - 'make/m3/tooling/lane28/**'
+      - 'make/m3/tooling/migration-recipes/**'
+      - 'make/m3/migration/**'
+      - 'doc/m3/name-mapping*'
+      - 'doc/m3/counterpart-naming.md'
       - 'src/java.base/**'
       - 'src/hotspot/**'
       - 'test/jdk/java/lang/String/**'
@@ -46,7 +46,7 @@ jobs:
         shell: bash
         run: |
           python3 -m venv "$RUNNER_TEMP/tq-python"
-          "$RUNNER_TEMP/tq-python/bin/python" -m pip install -r m3/migration/requirements.txt
+          "$RUNNER_TEMP/tq-python/bin/python" -m pip install -r make/m3/migration/requirements.txt
           echo "$RUNNER_TEMP/tq-python/bin" >> "$GITHUB_PATH"
       - name: Source-built TQ Maven dependencies
         shell: bash
@@ -55,35 +55,35 @@ jobs:
           python3 m3/m3-import/pure-int-recipe-custody/test_source_bootstrap.py
           bash m3/m3-import/pure-int-recipe-custody/install.sh "$GITHUB_WORKSPACE" --dependencies-only
       - name: Recipe, UTF-16, mapped-owner, JNI and compiled-kernel gates
-        run: mvn -B -ntp -f m3/tooling/tq/pom.xml verify
+        run: mvn -B -ntp -f make/m3/tooling/tq/pom.xml verify
       - name: TQ successor recipe and custody
         run: |
-          mvn -B -ntp -f m3/tooling/tq-sync/pom.xml verify
-          python3 m3/tooling/tq-sync/verify-plan.py
+          mvn -B -ntp -f make/m3/tooling/tq-sync/pom.xml verify
+          python3 make/m3/tooling/tq-sync/verify-plan.py
       - name: Preserve release evidence
         run: |
-          mkdir -p m3/tooling/tq/target/release
-          cp m3/tooling/tq/target/*.log m3/tooling/tq/target/release/
-          cp m3/tooling/tq/target/surefire-reports/TEST-*.xml m3/tooling/tq/target/release/
+          mkdir -p make/m3/tooling/tq/target/release
+          cp make/m3/tooling/tq/target/*.log make/m3/tooling/tq/target/release/
+          cp make/m3/tooling/tq/target/surefire-reports/TEST-*.xml make/m3/tooling/tq/target/release/
       - name: Native undefined-behavior gate
-        run: mvn -B -ntp -f m3/tooling/tq/pom.xml -Dtq.sanitize=true verify
+        run: mvn -B -ntp -f make/m3/tooling/tq/pom.xml -Dtq.sanitize=true verify
       - name: Installed bytes and retained mapping
         shell: bash
         run: |
-          python3 m3/tooling/tq/verify-plan.py
-          python3 m3/migration/migration.py validate . --previous m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/name-mapping.json.txt.before
+          python3 make/m3/tooling/tq/verify-plan.py
+          python3 make/m3/migration/migration.py validate . --previous make/m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/name-mapping.json.txt.before
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
           name: tq-recipe-${{ github.sha }}
           path: |
-            m3/tooling/tq-sync/target/surefire-reports/
-            m3/tooling/tq-sync/target/custody.json
-            m3/tooling/tq/target/*.log
-            m3/tooling/tq/target/*compilation.xml
-            m3/tooling/tq/target/custody.json
-            m3/tooling/tq/target/surefire-reports/
-            m3/tooling/tq/target/release/
+            make/m3/tooling/tq-sync/target/surefire-reports/
+            make/m3/tooling/tq-sync/target/custody.json
+            make/m3/tooling/tq/target/*.log
+            make/m3/tooling/tq/target/*compilation.xml
+            make/m3/tooling/tq/target/custody.json
+            make/m3/tooling/tq/target/surefire-reports/
+            make/m3/tooling/tq/target/release/
           if-no-files-found: error
   image:
     needs: recipe
@@ -103,16 +103,16 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p m3/tooling/tq/target/image
-          bash configure --with-boot-jdk="$JAVA_HOME" --with-debug-level=fastdebug --with-jvm-variants=server --enable-warnings-as-errors 2>&1 | tee m3/tooling/tq/target/image/configure.log
-          make JOBS=2 images 2>&1 | tee m3/tooling/tq/target/image/build.log
+          mkdir -p make/m3/tooling/tq/target/image
+          bash configure --with-boot-jdk="$JAVA_HOME" --with-debug-level=fastdebug --with-jvm-variants=server --enable-warnings-as-errors 2>&1 | tee make/m3/tooling/tq/target/image/configure.log
+          make JOBS=2 images 2>&1 | tee make/m3/tooling/tq/target/image/build.log
       - name: Match source with image and verify the M3 interpreter boundary
         env:
           M3_TEST_JDK: ${{ github.workspace }}/build/linux-x86_64-server-fastdebug/images/jdk
-        run: bash m3/tooling/tq/verify-image.sh
+        run: bash make/m3/tooling/tq/verify-image.sh
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
           name: tq-image-${{ github.sha }}
-          path: m3/tooling/tq/target/image/
+          path: make/m3/tooling/tq/target/image/
           if-no-files-found: error

@@ -26,7 +26,7 @@ import java.util.function.Predicate;
  * Mutable LiveEntry.getValue() has its own visibility check; selection comparisons
  * deliberately project the generic entry's key and read its JDK owner directly.
  */
-//FLLDCIM: RELOCATE - donor blob 97fa2d5b3158 at d5ad5090d87e; recipe m3/collections/qualification/filtered-views-owner-20261106/relocate.py v6
+//FLLDCIM: RELOCATE - donor blob 97fa2d5b3158 at d5ad5090d87e; recipe make/m3/collections/qualification/filtered-views-owner-20261106/relocate.py v6
 public final class FilteredCursorReadinessSelfTest {
     private static long checks;
 

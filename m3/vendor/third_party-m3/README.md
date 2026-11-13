@@ -9,7 +9,7 @@ its published jar. This directory holds what M3 adds on top of them. It never ed
   as a JMOD and linked by `jlink`.
   - Facts come from `jdeps --generate-module-info` over the gate-proven jar.
   - The files are written by the OpenRewrite recipe `com.m3.rewrite.jmod.M3ModuleDescriptorRecipe`
-    (`m3/tooling/jmod-recipes`), from a hash-pinned manifest (`m3/tooling/jmod-recipes/evidence/DESCRIPTOR_MANIFEST.tsv`).
+    (`make/m3/tooling/jmod-recipes`), from a hash-pinned manifest (`make/m3/tooling/jmod-recipes/evidence/DESCRIPTOR_MANIFEST.tsv`).
   - Do not edit them by hand: the recipe refuses to overwrite a drifted descriptor.
 
 The descriptors are M3 packaging metadata, licensed Apache-2.0 (see NOTICE). The libraries they describe keep their own

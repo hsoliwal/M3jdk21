@@ -7,7 +7,7 @@
   "canonical_crate": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/collections-library-interop",
   "receiver_baseline": "ed0d5435eb8796cfd4c9375edfc05b72bb16c8c6",
   "receiver_destination": "m3/collections/interop",
-  "receiver_engine_path": "m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+  "receiver_engine_path": "make/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
   "receiver_engine_git_blob": "907f176d32b55d78f13e3756a407f6877f25ca7d",
   "mirror_stage": "RECIPE_INPUTS_ONLY",
   "runtime_source_installed": false,

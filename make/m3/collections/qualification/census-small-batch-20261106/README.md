@@ -10,7 +10,7 @@ verdicts in `LEAVES.tsv`.
 | file | content |
 |---|---|
 | `PROTECTED.tsv` | owners this batch must not edit: the brief's 8 + `m3/ports/collections` (4 colliding, 11 scaffolds) + the jdk.m3.collections main sources added or modified by #2491, #2494, #2496, #2538, #2541, #2543 (`gh pr view --json files`), plus #2552 and #2555 (63, merged after the brief) |
-| `apply.py` | recipe CENSUS_SMALL_BATCH v1 (from `m3/qualification/progress-monitor-unify-20261106/unify.py`): hash-pinned anchored edits for L066 and L077; `--leaf` per commit, `--check` fixed point |
+| `apply.py` | recipe CENSUS_SMALL_BATCH v1 (from `make/m3/qualification/progress-monitor-unify-20261106/unify.py`): hash-pinned anchored edits for L066 and L077; `--leaf` per commit, `--check` fixed point |
 | `EDITS.tsv` | file, before/after sha256, leaf, crate, donor blobs, rule (written by apply.py) |
 | `oracle/` | `CensusResidencyDifferential` (L066), `CensusTreeDifferential` + `CensusTreeHooksCheck` (L076/L077), `classify_l066.py` |
 | `tools/` | `recensus.py` (census.py compare on a newer master; optional same-package type list), `failset.py` (surefire failing set) |

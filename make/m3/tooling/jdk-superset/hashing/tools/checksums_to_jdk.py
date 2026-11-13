@@ -14,7 +14,7 @@ keeps both public classes, with their constructors, methods and modifiers, and m
   SnappyFramed do; every other donor class compiles byte-identical to the published jar.
 - The lookup tables go; the class javadoc gains one paragraph naming java.base.
 
-Custody is m3/tooling/jdk-superset/retarget/tools/donor_overlay.py (DONOR_OVERLAY v2), the donors' overlay mechanism:
+Custody is make/m3/tooling/jdk-superset/retarget/tools/donor_overlay.py (DONOR_OVERLAY v2), the donors' overlay mechanism:
 each upstream file stays byte-identical under upstream-excluded/ (kind unmodified-production-superseded-by-m3-overlay),
 the overlay under src/main/java is pinned with its base and this recipe (kind m3-overlay-source), OVERLAY_SOURCES.json
 lists the overlays, and verify_source.py re-derives every overlay through overlay() below. The relocated commons-codec
@@ -29,7 +29,7 @@ from pathlib import Path
 import re
 import sys
 
-TOOL_REL = "m3/tooling/jdk-superset/hashing/tools/checksums_to_jdk.py"
+TOOL_REL = "make/m3/tooling/jdk-superset/hashing/tools/checksums_to_jdk.py"
 RECIPE_ID = "CHECKSUMS_TO_JDK v1"
 DONORS = ("commons-codec-1.17.1", "commons-codec-1.22.1")
 RELOCATED = {"commons-codec-1.22.1": ("m3/vendor/third_party-m3/relocated/commons-codec-1.22.1",
@@ -101,7 +101,7 @@ README_NEW = ("This directory compiles the {donor} sources from the published so
               "`PureJavaCrc32C` keep their public members and delegate to java.base (`java.util.zip.CRC32`, `CRC32C`),\n"
               "the JDK's one CRC implementation, instead of carrying their own lookup tables. The upstream files stay\n"
               "byte-identical under `upstream-excluded/`; `verify_source.py` re-derives each overlay from them.\n",
-              "The overlay's proof is `m3/evidence/java-base/CHECKSUMS_CODEC.md`. Outside it no speed, allocation or\n"
+              "The overlay's proof is `make/m3/evidence/java-base/CHECKSUMS_CODEC.md`. Outside it no speed, allocation or\n"
               "behaviour change is claimed. The published sources jar carries no test suite; the compile from source and\n"
               "the consumers' own tests are the proof lane. Upstream tests remain a follow-up with their own recipe.")
 README_TEXT = tuple(zip(README_OLD, README_NEW))

@@ -6,8 +6,8 @@ on:
     paths:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongSortedSnapshot.java'
       - 'test/jdk/jdk/m3/collections/M3LongSortedMaskedWindow*'
-      - 'm3/collections/qualification/long-sorted-masked-window-20261021/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-long-sorted-masked-window-20261021.yml'
+      - 'make/m3/collections/qualification/long-sorted-masked-window-20261021/**'
+      - 'make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-long-sorted-masked-window-20261021.yml'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-long-sorted-masked-window-20261021/**'
       - '.github/workflows/m3-long-sorted-masked-window-20261021.yml'
   workflow_dispatch:
@@ -31,4 +31,4 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          bash m3/collections/qualification/long-sorted-masked-window-20261021/verify.sh
+          bash make/m3/collections/qualification/long-sorted-masked-window-20261021/verify.sh

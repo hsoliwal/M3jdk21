@@ -36,7 +36,7 @@
       "java.lang.String"
     ],
     "publicJdkApiChange": false,
-    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed: 66 targets (M3StringCodePointPrecompute.java newly sealed; two drifted after-images absorbed), target_commit 0d0cc24b51; apply.py --check state=after; test_recipe.py 8/8"
+    "runtimeRecipe": "make/m3/runtime-integration/recipe re-sealed: 66 targets (M3StringCodePointPrecompute.java newly sealed; two drifted after-images absorbed), target_commit 0d0cc24b51; apply.py --check state=after; test_recipe.py 8/8"
   },
   "runtimeDependencyOnSynexia": false,
   "publicJdkReplacement": false,

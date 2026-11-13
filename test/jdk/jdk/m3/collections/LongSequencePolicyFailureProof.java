@@ -8,7 +8,7 @@ import jdk.internal.m3.collections.LongSequenceMetrics;
 import jdk.internal.m3.collections.ObservedLongSequence;
 import jdk.internal.m3.collections.ValidatingLongSequence;
 
-//FLLDCIM: RELOCATE - donor blob 70f63c4dac4b at d5ad5090d87e; recipe m3/collections/qualification/census2-t2-20261106/relocate.py v6
+//FLLDCIM: RELOCATE - donor blob 70f63c4dac4b at d5ad5090d87e; recipe make/m3/collections/qualification/census2-t2-20261106/relocate.py v6
 public final class LongSequencePolicyFailureProof {
     public static void main(String[] args) {
         PolicyProbe probe=new PolicyProbe();

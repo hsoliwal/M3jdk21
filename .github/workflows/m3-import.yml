@@ -5,33 +5,33 @@ on:
     branches:
       - "m3/m3-apache-import-*"
     paths:
-      - "m3/pom.xml"
+      - "make/m3/pom.xml"
       - "m3/NOTICE"
-      - "m3/README.md"
-      - "m3/docs/m3-delivery.md"
+      - "make/m3/README.md"
+      - "doc/m3/m3-delivery.md"
       - "m3/m3-import/**"
       - "m3/vendor/m3/**"
       - "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/m3/**"
-      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-import.yml"
+      - "make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-import.yml"
       - "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/m3/**"
-      - "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3RecipeScopeRegistry.java"
-      - "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/scope/M3RecipeScopeDeclarationTest.java"
-      - "m3/tooling/recipe-catalogue.tsv"
+      - "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3RecipeScopeRegistry.java"
+      - "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/scope/M3RecipeScopeDeclarationTest.java"
+      - "make/m3/tooling/recipe-catalogue.tsv"
       - ".github/workflows/m3-import.yml"
   pull_request:
     paths:
-      - "m3/pom.xml"
+      - "make/m3/pom.xml"
       - "m3/NOTICE"
-      - "m3/README.md"
-      - "m3/docs/m3-delivery.md"
+      - "make/m3/README.md"
+      - "doc/m3/m3-delivery.md"
       - "m3/m3-import/**"
       - "m3/vendor/m3/**"
       - "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/m3/**"
-      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-import.yml"
+      - "make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-import.yml"
       - "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/m3/**"
-      - "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3RecipeScopeRegistry.java"
-      - "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/scope/M3RecipeScopeDeclarationTest.java"
-      - "m3/tooling/recipe-catalogue.tsv"
+      - "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3RecipeScopeRegistry.java"
+      - "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/scope/M3RecipeScopeDeclarationTest.java"
+      - "make/m3/tooling/recipe-catalogue.tsv"
       - ".github/workflows/m3-import.yml"
   workflow_dispatch:
 
@@ -58,7 +58,7 @@ jobs:
       - name: Diff hygiene
         run: git diff --check origin/master...HEAD
       - name: Verify target-local recipe ownership classification
-        run: python3 m3/runtime-integration/verify-recipe-ownership.py
+        run: python3 make/m3/runtime-integration/verify-recipe-ownership.py
       - name: Verify imported Synexia vendor snapshot and canonical recipe ownership intake
         run: >
           mvn -B -ntp

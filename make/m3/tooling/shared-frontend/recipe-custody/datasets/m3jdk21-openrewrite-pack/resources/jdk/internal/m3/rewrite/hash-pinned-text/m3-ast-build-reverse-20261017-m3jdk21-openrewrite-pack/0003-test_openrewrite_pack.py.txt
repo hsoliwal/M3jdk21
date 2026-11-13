@@ -27,7 +27,7 @@ class OpenRewritePackTests(unittest.TestCase):
         cls.runtime = Path(os.environ["M3_REWRITE_RUNTIME_PROOF"])
         cls.project_pom = Path(os.environ["M3_REWRITE_TOOL_POM"])
         cls.runtime_pom = Path(os.environ["M3_REWRITE_RUNTIME_POM"])
-        cls.frontend_pom = cls.repository / "m3/tooling/shared-frontend/openrewrite/pom.xml"
+        cls.frontend_pom = cls.repository / "make/m3/tooling/shared-frontend/openrewrite/pom.xml"
         cls.maven = Path(os.environ.get("M3_TEST_MAVEN_REPOSITORY", str(Path.home() / ".m2/repository")))
         cls.temporary = tempfile.TemporaryDirectory(prefix="m3-rewrite-pack-")
         cls.addClassCleanup(cls.temporary.cleanup)

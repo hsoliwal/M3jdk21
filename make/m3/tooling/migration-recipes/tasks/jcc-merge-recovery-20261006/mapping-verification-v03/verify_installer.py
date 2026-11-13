@@ -19,13 +19,13 @@ import sys
 import traceback
 
 CRATE = "jcc-merge-recovery-20261006-mapping-v03"
-RESOURCE = "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/" + CRATE
-TASK = "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006"
-INSTALLER = "m3/migration/recipe.py"
+RESOURCE = "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/" + CRATE
+TASK = "make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006"
+INSTALLER = "make/m3/migration/recipe.py"
 INSTALLER_SHA256 = "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"
-TARGETS = {"m3/docs/name-mapping.json", "m3/docs/jcc-source-handoff.md",
-           "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
-           "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv"}
+TARGETS = {"doc/m3/name-mapping.json", "doc/m3/jcc-source-handoff.md",
+           "make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
+           "make/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv"}
 
 
 def digest(data):

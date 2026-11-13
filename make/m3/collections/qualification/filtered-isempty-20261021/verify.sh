@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 set -euo pipefail
 
-ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../../.." && pwd)"
 cd "$ROOT"
 SRC="src/jdk.m3.collections/share/classes/jdk/m3/collections/M3CollectionViews.java"
 CONTRACT="test/jdk/jdk/m3/collections/M3FilteredIsEmptyContract.java"

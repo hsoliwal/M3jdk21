@@ -4,97 +4,97 @@
   "source_ref": "SOURCE_REF.json",
   "outputs": [
     {
-      "path": "m3/tooling/module-packs/text-tools/src/jdk.m3.structured/jdk/m3/structured/JsonLinesTools.java",
+      "path": "make/m3/tooling/module-packs/text-tools/src/jdk.m3.structured/jdk/m3/structured/JsonLinesTools.java",
       "before_sha256": "7bffd3d88dcba9e74f4e74f6f10720fbca607f5dc0e7c23251e6598c8bb4b445",
       "after_sha256": "b2d8d4caf65216293214d06cc6a9703da6bd2abee526278c3056b968ded29507"
     },
     {
-      "path": "m3/tooling/module-packs/text-tools/src/jdk.m3.structured/jdk/m3/structured/StructuredTextTools.java",
+      "path": "make/m3/tooling/module-packs/text-tools/src/jdk.m3.structured/jdk/m3/structured/StructuredTextTools.java",
       "before_sha256": "f613c0dae0c0fb98c8c4db4167d6258a91305994e319b6adaa16693674b24df6",
       "after_sha256": "ee93e99b682afff657f959da0510ef918f66e422f5436774d1e2e452c17723b1"
     },
     {
-      "path": "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/CsvTools.java",
+      "path": "make/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/CsvTools.java",
       "before_sha256": "f07c5ef868f075ccae4b0732b20ecbb20634afbd73bd68a39e69a2ebf50d7a1b",
       "after_sha256": "7292f2743415b1b8f369fd7afba668e4af39e33d4d9bcbb93fd051dfdae008c1"
     },
     {
-      "path": "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/NativeLineOps.java",
+      "path": "make/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/NativeLineOps.java",
       "before_sha256": "42850be2dade74bbc9847a926636917de3c7d652a0b4bdb09b81b3003bbee120",
       "after_sha256": "a009e587a12c52222418afb11cf34826c4d2d1347da56a7dae9f4522aad28147"
     },
     {
-      "path": "m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/structured/FrozenJsonLinesTools.java",
+      "path": "make/m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/structured/FrozenJsonLinesTools.java",
       "before_sha256": "ABSENT",
       "after_sha256": "aee0ab9638b45afc329ce4b545fc343c2ba5e6b92a9e2b07e531eda33700d766"
     },
     {
-      "path": "m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/structured/FrozenStructuredTextTools.java",
+      "path": "make/m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/structured/FrozenStructuredTextTools.java",
       "before_sha256": "ABSENT",
       "after_sha256": "fd9ac641172230f4320c33fb88b78100908b6171b13bff47a5bfc8f8effc878a"
     },
     {
-      "path": "m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/structured/JsonLinesToolsContract.java",
+      "path": "make/m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/structured/JsonLinesToolsContract.java",
       "before_sha256": "ABSENT",
       "after_sha256": "820b533a428189c29053aa4a182de86a1ff9dfa423709ef487231349c3ad1f26"
     },
     {
-      "path": "m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/structured/JsonLinesToolsDifferentialTest.java",
+      "path": "make/m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/structured/JsonLinesToolsDifferentialTest.java",
       "before_sha256": "ABSENT",
       "after_sha256": "c9c6543d71b8089a4819a9f594b0bb87129854b0faacb65d114a2155a9bb11e3"
     },
     {
-      "path": "m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/structured/StructuredTextToolsContract.java",
+      "path": "make/m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/structured/StructuredTextToolsContract.java",
       "before_sha256": "ABSENT",
       "after_sha256": "a988f602d9a21227d7ec0f7ea39797293cbd08b2325f5fa58cc48accb828194a"
     },
     {
-      "path": "m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/structured/StructuredTextToolsDifferentialTest.java",
+      "path": "make/m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/structured/StructuredTextToolsDifferentialTest.java",
       "before_sha256": "ABSENT",
       "after_sha256": "b8511193cd15906c7f48e7525e82c28ac7e2b0b90597468b313066de4de9ac56"
     },
     {
-      "path": "m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/text/CsvDeniedNativeContract.java",
+      "path": "make/m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/text/CsvDeniedNativeContract.java",
       "before_sha256": "ABSENT",
       "after_sha256": "30286c6f497cd1606bc8d0e82e4455bf4ee982eaed68f270a8afe7a51ac075c2"
     },
     {
-      "path": "m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/text/CsvNativeContract.java",
+      "path": "make/m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/text/CsvNativeContract.java",
       "before_sha256": "ABSENT",
       "after_sha256": "3a8a2414089c03ae53b3dc3db1bc63592ba0ddd210f691b2a200d354f22d9e16"
     },
     {
-      "path": "m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/text/CsvNativeTest.java",
+      "path": "make/m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/text/CsvNativeTest.java",
       "before_sha256": "ABSENT",
       "after_sha256": "275cc3772980eae61a4d94a25531eb4c1db488f76857bf28392ef7c4e3da79ad"
     },
     {
-      "path": "m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/text/CsvRangeContract.java",
+      "path": "make/m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/text/CsvRangeContract.java",
       "before_sha256": "ABSENT",
       "after_sha256": "605a38ce8cc3885efd85c26b346d43a9e7548cc3fc3180c0787746d9b005847e"
     },
     {
-      "path": "m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/text/CsvToolsBefore.java",
+      "path": "make/m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/text/CsvToolsBefore.java",
       "before_sha256": "ABSENT",
       "after_sha256": "e419469556ec3ce314f1cf9110eb2b72455b7a36d6cbdd24f2c6657fd28ae3b5"
     },
     {
-      "path": "m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/text/CsvToolsDifferentialTest.java",
+      "path": "make/m3/tooling/module-packs/text-tools/src/test/java/jdk/m3/text/CsvToolsDifferentialTest.java",
       "before_sha256": "ABSENT",
       "after_sha256": "785621285ab0a893ac9e14069ccbb7c2fe87dacbde9ea99c522550f38d8fcb89"
     },
     {
-      "path": "m3/docs/name-mapping.json",
+      "path": "doc/m3/name-mapping.json",
       "before_sha256": "406cefb62b79fc677972e9d76a77342c3999b41ef6594f9faf5bd06795235dc3",
       "after_sha256": "c1dc98c6413d33cd9eaa692af4e1c37c5d648ce5f0b23932ae22f25cd31fe792"
     },
     {
-      "path": "m3/tooling/module-packs/text-tools/native/m3textops.c",
+      "path": "make/m3/tooling/module-packs/text-tools/native/m3textops.c",
       "before_sha256": "88c7507b116f8a4116c34119caafe26666ce9094b116f19eb01527832cd5e46e",
       "after_sha256": "7c7303ccf197ce058c7128fe0825c2619f27f6c8b28746f9a130e78ee5aed65d"
     },
     {
-      "path": "m3/tooling/name-contract/name-plan.json",
+      "path": "make/m3/tooling/name-contract/name-plan.json",
       "before_sha256": "3f51a4975e9f423196a4ee5c715d4edc2c2e937c34d9d5a1e3d2276dcd47752e",
       "after_sha256": "1baff1bd27a8aad4004fd6091d5e1c583484b9b13039f5774182d7591cadec9d"
     }

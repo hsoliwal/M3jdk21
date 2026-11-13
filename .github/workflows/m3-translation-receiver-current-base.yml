@@ -15,11 +15,11 @@ on:
       - "m3/lexicon/m3-precompute-field-map.tsv"
       - "m3/lexicon/m3-source-manifest.tsv"
       - "m3/lexicon/m3-number-target-map.tsv"
-      - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
-      - "m3/runtime-integration/export-m3-lexicon.py"
-      - "m3/runtime-integration/tests/test_m3_export.py"
-      - "m3/runtime-integration/tests/test_m3_number_space_export.py"
-      - "m3/runtime-integration/verify-m3-lexicon.py"
+      - "make/m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
+      - "make/m3/runtime-integration/export-m3-lexicon.py"
+      - "make/m3/runtime-integration/tests/test_m3_export.py"
+      - "make/m3/runtime-integration/tests/test_m3_number_space_export.py"
+      - "make/m3/runtime-integration/verify-m3-lexicon.py"
       - "m3/lexicon/M3_EXPORT.md"
       - ".github/workflows/m3-translation-receiver-current-base.yml"
   push:
@@ -37,11 +37,11 @@ on:
       - "m3/lexicon/m3-precompute-field-map.tsv"
       - "m3/lexicon/m3-source-manifest.tsv"
       - "m3/lexicon/m3-number-target-map.tsv"
-      - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
-      - "m3/runtime-integration/export-m3-lexicon.py"
-      - "m3/runtime-integration/tests/test_m3_export.py"
-      - "m3/runtime-integration/tests/test_m3_number_space_export.py"
-      - "m3/runtime-integration/verify-m3-lexicon.py"
+      - "make/m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
+      - "make/m3/runtime-integration/export-m3-lexicon.py"
+      - "make/m3/runtime-integration/tests/test_m3_export.py"
+      - "make/m3/runtime-integration/tests/test_m3_number_space_export.py"
+      - "make/m3/runtime-integration/verify-m3-lexicon.py"
       - "m3/lexicon/M3_EXPORT.md"
       - ".github/workflows/m3-translation-receiver-current-base.yml"
 
@@ -81,5 +81,5 @@ jobs:
           mkdir -p build/translation-receiver-current-base/python-temp
       - name: Verify Synexia export source-manifest contracts
         run: |
-          python -B m3/runtime-integration/tests/test_m3_export.py
-          python -B m3/runtime-integration/tests/test_m3_number_space_export.py --fixture m3/build/translation-receiver-current-base/number-space.tsv --scratch-dir m3/build/translation-receiver-current-base/python-temp
+          python -B make/m3/runtime-integration/tests/test_m3_export.py
+          python -B make/m3/runtime-integration/tests/test_m3_number_space_export.py --fixture m3/build/translation-receiver-current-base/number-space.tsv --scratch-dir m3/build/translation-receiver-current-base/python-temp

@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 
 /** Physical shell handoff before GC eligibility, not JVM object resurrection. */
-//FLLDCIM: RELOCATE - donor blob 0d3aee2044b8 at ca1aafc4d94f; recipe m3/collections/qualification/census-g7-20261106/relocate.py v5
+//FLLDCIM: RELOCATE - donor blob 0d3aee2044b8 at ca1aafc4d94f; recipe make/m3/collections/qualification/census-g7-20261106/relocate.py v5
 final class ObjectResidencyReuseContractTest {
     private static final int MODE = ObjectResidency.LAZY_CREATE
             | ObjectResidency.LRU | ObjectResidency.RECREATE

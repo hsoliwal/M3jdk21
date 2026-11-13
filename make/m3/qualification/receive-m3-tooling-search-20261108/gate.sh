@@ -1,5 +1,5 @@
 #!/bin/bash
-# Gate for receiving m3/tooling/search: the staged module's own verify scripts plus the three stacked
+# Gate for receiving make/m3/tooling/search: the staged module's own verify scripts plus the three stacked
 # com.synexia crate proofs (empty-keys, empty-range, lower-reuse) run on a mirror of the crate layout.
 set -u
 cd "$(dirname "$0")"

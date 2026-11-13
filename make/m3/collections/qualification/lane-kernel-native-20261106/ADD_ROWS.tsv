@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: Apache-2.0
 # ADD_ROWS.tsv - declared ADD rows of recipe RESTORE_ADD_ROWS v1 (add_rows.py): the 3-way of THREE_WAY.tsv conflicts, so the result is master's file (ours) plus exactly these rows, in table order; source theirs:<a>-<b> = lines of the retained variant blob 055eee1f1194 copied byte-for-byte (sha256_16 = first 16 hex of sha256 of the slice, LF-terminated lines); kind ANCHOR = one new CNPCDA line (text column). No other line of ours or theirs is used.
 row	kind	after_ours_line	source	sha256_16	symbols	text
-A01	ANCHOR	7	-	-	-	//FLLDCIM: RESTORE-ADD includes - retained variant pr1882 blob 055eee1f1194 lines 6-7 (stdlib.h: malloc/free; stdint.h: uint32_t, SIZE_MAX of the restored exports); recipe m3/collections/qualification/lane-kernel-native-20261106/add_rows.py v1
+A01	ANCHOR	7	-	-	-	//FLLDCIM: RESTORE-ADD includes - retained variant pr1882 blob 055eee1f1194 lines 6-7 (stdlib.h: malloc/free; stdint.h: uint32_t, SIZE_MAX of the restored exports); recipe make/m3/collections/qualification/lane-kernel-native-20261106/add_rows.py v1
 A02	INCLUDE	7	theirs:6-7	cd2acd9c459df9df	stdlib.h stdint.h	-
 A03	SEPARATOR	81	theirs:77-77	01ba4719c80b6fe9	-	-
-A04	ANCHOR	81	-	-	-	//FLLDCIM: RESTORE-ADD begin - retained variant pr1882 blob 055eee1f1194 lines 78-367 (gatherSelectedNative, slidingMaximumIndices0, partition3Long0, partition3Int0); recipe m3/collections/qualification/lane-kernel-native-20261106/add_rows.py v1
+A04	ANCHOR	81	-	-	-	//FLLDCIM: RESTORE-ADD begin - retained variant pr1882 blob 055eee1f1194 lines 78-367 (gatherSelectedNative, slidingMaximumIndices0, partition3Long0, partition3Int0); recipe make/m3/collections/qualification/lane-kernel-native-20261106/add_rows.py v1
 A05	HELPER	81	theirs:78-87	f82a5991f55c85c2	m3_match_bits m3_throw	-
 A06	EXPORT	81	theirs:88-173	b1ddb7509fe89e93	Java_jdk_m3_collections_M3LongAddressKernel_gatherSelectedNative	-
 A07	EXPORT	81	theirs:174-293	dce98f6bcc7b6f82	M3_MAX_PAGE m3_max_ring_slot m3_max_throw Java_jdk_m3_collections_M3LaneAlgorithms_slidingMaximumIndices0	-

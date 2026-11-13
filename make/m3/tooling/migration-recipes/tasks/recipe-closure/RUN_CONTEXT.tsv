@@ -14,7 +14,7 @@ resolution	offline recovered cache;no repository-owned mirror claimed
 resources	4CPU/4GiB;2active JVM processors;1Maven worker;bounded heaps
 distributed	false
 final_reactor_finished_utc	2026-10-05T05:16:16Z
-full_control_command	mvn -o -B -ntp -Dmaven.repo.local=<recovered-cache> -fae -f m3/pom.xml clean verify
+full_control_command	mvn -o -B -ntp -Dmaven.repo.local=<recovered-cache> -fae -f make/m3/pom.xml clean verify
 configured_coverage_check	org.jacoco:jacoco-maven-plugin:0.8.15:check@m3-coverage-check
 installed_jdk_changed	false
 promotion_authority	false

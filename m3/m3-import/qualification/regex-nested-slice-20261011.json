@@ -413,7 +413,7 @@
   "receiver_qualification": "EXACT_PINNED_CODEC_PREIMAGE_AND_SDK_POSTIMAGE; COMPLETE_RECEIVING_PROGRAM_AND_JDK_NOT_RUN",
   "full_borrow_gate": "BLOCKED: bounded file checkout has no Git ancestry; actual checker refusal retained in canonical packet",
   "mapping": {
-    "authority": "m3/docs/name-mapping.json",
+    "authority": "doc/m3/name-mapping.json",
     "authority_git_blob": "a092c8a68009f615039978eba0c927203799ab8b",
     "existing_source": "jdk.internal.m3.indexstring regex/search precompute families",
     "existing_target": "java.util.regex/internal M3 candidate-plan lanes where justified",

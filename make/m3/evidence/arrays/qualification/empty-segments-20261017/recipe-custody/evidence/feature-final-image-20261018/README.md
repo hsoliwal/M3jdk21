@@ -49,7 +49,7 @@ CI success, JCK certification, automatic console/UI wiring or whole-SDK completi
 
 ## Recipe replay
 
-Use `m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/README.md`
+Use `make/m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/README.md`
 for the qualified Runtime parser host and source-built OpenRewrite dependency.
 That successor entrypoint supersedes the older predecessor-host reference in
 the feature introduction. ProgressJob and the current 31-target restoration use

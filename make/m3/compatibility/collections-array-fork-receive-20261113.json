@@ -98,13 +98,13 @@
       "role": "product_test"
     },
     {
-      "path": "m3/docs/name-mapping.json",
+      "path": "doc/m3/name-mapping.json",
       "before_sha256": "8ffff346df0034fc64636f3a835bee40a2da74e194c844dde4cabce0e4380217",
       "after_sha256": "e6f437e00c290bdd443d125878feb0abd03406a7bfb2476ece52a52d9b317481",
       "role": "naming_or_workflow_metadata"
     },
     {
-      "path": "m3/tooling/name-contract/name-plan.json",
+      "path": "make/m3/tooling/name-contract/name-plan.json",
       "before_sha256": "53d67d5711c96c0a66dc34c68a21c43e05927debe66e941406a204ab89195101",
       "after_sha256": "0b6131a4f3421cba21162e293b72748e61bbd4d8e89633bffb94d09f4882542e",
       "role": "naming_or_workflow_metadata"

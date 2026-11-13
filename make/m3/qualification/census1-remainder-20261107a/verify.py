@@ -45,7 +45,7 @@ def git(root: Path, *args: str) -> subprocess.CompletedProcess:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--root", default=str(Path(__file__).resolve().parents[3]))
+    parser.add_argument("--root", default=str(Path(__file__).resolve().parents[4]))
     parser.add_argument("--rev", default="HEAD")
     args = parser.parse_args(argv)
     root = Path(args.root)

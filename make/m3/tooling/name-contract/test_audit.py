@@ -106,7 +106,7 @@ class TargetCensusTest(unittest.TestCase):
 
 
     def run_cli(self, *arguments: str, absolute: bool = False):
-        relative = "m3/tooling/name-contract/audit.py"
+        relative = "make/m3/tooling/name-contract/audit.py"
         script = self.root / relative
         script.parent.mkdir(parents=True, exist_ok=True)
         script.write_bytes((HERE / "audit.py").read_bytes())
@@ -148,7 +148,7 @@ class TargetCensusTest(unittest.TestCase):
 
 class WorkflowCoverageTest(unittest.TestCase):
     def test_schema_suite_is_in_the_live_name_contract_directory(self):
-        self.assertTrue((AUDIT.ROOT / "m3/tooling/name-contract/test_schema.py").is_file(),
+        self.assertTrue((AUDIT.ROOT / "make/m3/tooling/name-contract/test_schema.py").is_file(),
                         "retained variants do not replace the live schema regression suite")
 
     def test_sparse_checkout_covers_concrete_canonical_target_paths(self):
@@ -171,7 +171,7 @@ class WorkflowCoverageTest(unittest.TestCase):
         records = json.loads((root / AUDIT.MAP).read_text(encoding="utf-8"))["migration"]["records"]
         targets = {target["path"] for record in records for target in record.get("targets", [])
                    if isinstance(target, dict) and target.get("path") and target.get("symbol")}
-        targets.update(("m3/docs/name-mapping.schema.json", "m3/migration/requirements.txt"))
+        targets.update(("doc/m3/name-mapping.schema.json", "make/m3/migration/requirements.txt"))
         for record in records:
             relation = record.get("companion_of")
             if relation is None:
@@ -184,7 +184,7 @@ class WorkflowCoverageTest(unittest.TestCase):
             suffix = companion["symbol"].replace(".", "/") + ".java"
             self.assertTrue(companion["path"].endswith(suffix))
             targets.add(companion["path"][:-len(suffix)] + "module-info.java")
-            targets.add("m3/compatibility/check_public_names.py")
+            targets.add("make/m3/compatibility/check_public_names.py")
         # The workflow uses exact paths and explicit recursive owner subtrees.
         # Actual Git sparse-checkout behavior is also qualified in the recipe receipt.
         uncovered = sorted(path for path in targets
@@ -196,7 +196,7 @@ class WorkflowCoverageTest(unittest.TestCase):
 class CanonicalRelatedOwnerTest(unittest.TestCase):
     def test_related_target_class_owner_retains_method_contract(self):
         records = json.loads((AUDIT.ROOT / AUDIT.MAP).read_text(encoding="utf-8"))["migration"]["records"]
-        history = json.loads((AUDIT.ROOT / "m3/tooling/name-contract/receipts/"
+        history = json.loads((AUDIT.ROOT / "make/m3/tooling/name-contract/receipts/"
                               "release-preparation/source-identity.json").read_text())
         record = next(row for row in records
                       if row["id"] == history["anchors"]["related_source_range"])

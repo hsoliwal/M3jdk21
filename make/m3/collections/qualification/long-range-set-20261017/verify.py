@@ -6,8 +6,8 @@ import pathlib
 import sys
 
 HERE = pathlib.Path(__file__).resolve().parent
-ROOT = HERE.parents[3]  # repo root: m3/collections/qualification/<crate>/verify.py
-TEMPLATES = (ROOT / "m3/tooling/migration-recipes/src/main/resources"
+ROOT = HERE.parents[3]  # repo root: make/m3/collections/qualification/<crate>/verify.py
+TEMPLATES = (ROOT / "make/m3/tooling/migration-recipes/src/main/resources"
     / "jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-long-range-array-flags-20261017")
 MANIFEST = TEMPLATES / "manifest.tsv"
 

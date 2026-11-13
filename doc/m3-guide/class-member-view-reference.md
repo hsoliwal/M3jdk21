@@ -35,9 +35,9 @@ establish only a separate candidate-facts boundary. Selected `Class` native/refl
 methods and `VM` startup-state sections are dependency reads, not complete JDK-class or
 VM reviews. The linked companion references own those broader internal contracts.
 
-Use the [porting invariant](../../m3/docs/m3jdk21-porting-invariant.md),
-[naming map](../../m3/docs/name-mapping.json), [borrowing policy](../../M3_APACHE_BORROWING_POLICY.md)
-and [Class Bridge packet](../../m3/tooling/cb/README.md) for placement and lineage.
+Use the [porting invariant](../m3/m3jdk21-porting-invariant.md),
+[naming map](../m3/name-mapping.json), [borrowing policy](../../M3_APACHE_BORROWING_POLICY.md)
+and [Class Bridge packet](../../make/m3/tooling/cb/README.md) for placement and lineage.
 Reusable convergence/recipes retain their existing authority; target runtime acceptance
 belongs to M3JDK21. Existing per-file licenses and notices remain unchanged.
 This guide does not modify sealed source or advance the ordered receiving phases.
@@ -343,15 +343,15 @@ contracts; they are not a complete parity or platform matrix.
 | --- | --- |
 | [CBProbe](../../test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/CBProbe.java) and [VmFixture](../../test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/VmFixture.java) | Class-name/modifier/kind comparisons, direct-interface order, field/method/constructor counts, declared-method set and lookup round trips, inherited field declaring owner, two record components, first permitted-class identity, live cast/instance behavior, pairwise hierarchy checks, distinct defining loaders/hidden classes, no fixture initialization, compact bridge fallback, cross-snapshot refusal, budget/cancellation, repeat fingerprint and loader unloading. Record-component order, every typed predicate and every unavailable conversion are not exhaustively asserted |
 | [DescriptorTest](../../test/jdk/jdk/internal/mindex/descriptor/jdk/m3/descriptor/DescriptorTest.java) | Independent Class/MethodType descriptor comparisons, nominal/hidden/lambda/local/anonymous types, array ranks, same-name different-loader descriptors, nulls and no fixture initialization; tests the descriptor dependency, not wrapper enumeration/equality |
-| [CBTest](../../m3/tooling/cb/src/test/java/jdk/m3/cb/CBTest.java) | Recipe generation/fixed point, template/source hashes, tamper/parser/drift refusal, strict Java-21 patch-module compilation, generated probe runs and java.base-only jdeps expectation. These are source-defined tooling checks, not evidence they ran on this documentation candidate |
-| [CloseTest](../../m3/tooling/cb/src/test/java/jdk/m3/cb/CloseTest.java) and [NativeTest](../../m3/tooling/cb/src/test/java/jdk/m3/cb/NativeTest.java) | Historical backing-close rewrite and JNI-text recipe checks. The close target still names `MIndexStringBacking`; these bodies do not test the nine view contracts or prove current native execution |
+| [CBTest](../../make/m3/tooling/cb/src/test/java/jdk/m3/cb/CBTest.java) | Recipe generation/fixed point, template/source hashes, tamper/parser/drift refusal, strict Java-21 patch-module compilation, generated probe runs and java.base-only jdeps expectation. These are source-defined tooling checks, not evidence they ran on this documentation candidate |
+| [CloseTest](../../make/m3/tooling/cb/src/test/java/jdk/m3/cb/CloseTest.java) and [NativeTest](../../make/m3/tooling/cb/src/test/java/jdk/m3/cb/NativeTest.java) | Historical backing-close rewrite and JNI-text recipe checks. The close target still names `MIndexStringBacking`; these bodies do not test the nine view contracts or prove current native execution |
 
 The current CBProbe header requests interpreter and mixed runs with class unloading;
 DescriptorTest requests default, interpreter and `-XX:-CompactStrings` runs. Directly
 reproducing these tests requires a matched fork image, a configured jtreg harness and
 the correct OpenJDK build configuration. Consult the
 [first-build checklist](../../CONTRIBUTING.md#first-build-prerequisites-outputs-and-test-selection)
-and [native build routes](../../m3/docs/native-build.md#current-checkout-verification-routes).
+and [native build routes](../m3/native-build.md#current-checkout-verification-routes).
 One focused, **unexecuted** selection from the repository root is:
 
 ```sh
@@ -363,7 +363,7 @@ is available. This selection does not run the CB directory's native-null test or
 all String/JNI/GC behavior. External development probes also require an explicit internal
 package export, as shown in CBTest; that does not make the package a supported public API.
 
-The historical [run-image.sh](../../m3/tooling/cb/run-image.sh) needs `M3_JDK`,
+The historical [run-image.sh](../../make/m3/tooling/cb/run-image.sh) needs `M3_JDK`,
 `M3_BOOT_JDK`, `M3_JTREG`, a C compiler and Linux JNI headers/shared-library conventions.
 At the reviewed pin it still names
 `test/jdk/java/lang/String/MIndexMappedStringBackingTest.java`, whereas the current
@@ -378,7 +378,7 @@ selected method reads do not establish a whole-HotSpot absence proof. The demons
 consumer is the explicit caller-owned bridge/probe. There is no basis here to claim
 automatic Class attachment, Class-specific JNI routing or universal reflection replacement.
 String JNI backing is a separate boundary documented by the
-[JNI ingress/egress guide](../../m3/docs/mindex-jni-string-ingress.md).
+[JNI ingress/egress guide](../m3/mindex-jni-string-ingress.md).
 
 Remaining gates include every ordinal/mask error, typed-wrapper identity checks,
 record/nest ordering parity, unavailable-member conversions, changing access/redefinition

@@ -16,7 +16,7 @@ no chunk); invalid offsets still throw IndexOutOfBoundsException (Java) or Illeg
 because both fast returns follow the existing validation. The fast return only skips the JNI transition and the
 IsSameObject call.
 
-Derived from m3/collections/qualification/census-small-batch-20261106/apply.py v1 (see leaf 26 for the rules).
+Derived from make/m3/collections/qualification/census-small-batch-20261106/apply.py v1 (see leaf 26 for the rules).
 The m3_arrays_jni.c rule pins the leaf-26 postimage: run mergeloss-26-20261107/apply.py first.
 
 usage: python -I apply.py [--root DIR] [--check]

@@ -3,8 +3,8 @@ from pathlib import Path, PurePosixPath
 import base64, collections, hashlib, json, posixpath, re
 B=Path('/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04')
 O=B/'derivation-static-review/bound-v3'; S=O/'inputs'; SOURCE='0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8';ROOT='0361e4a07b77a01df170523033fef01c4052ddc5'
-TASK='m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/'
-PREFIX='m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005'
+TASK='make/m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/'
+PREFIX='make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005'
 def load(p):return json.loads(Path(p).read_text())
 def identity(p):
  p=Path(p);assert p.is_file() and not p.is_symlink(),p;d=p.read_bytes();return {'bytes':len(d),'sha256':hashlib.sha256(d).hexdigest(),'git_blob_sha1':hashlib.sha1(f'blob {len(d)}\0'.encode()+d).hexdigest(),'mode':'100755' if p.stat().st_mode&0o111 else '100644'}
@@ -111,7 +111,7 @@ links=[]
 for link in re.findall(r'\]\(([^)]+)\)',doc):
  if link.startswith('https://'):
   links.append({'link':link,'kind':'external-provenance'});continue
- target=posixpath.normpath(posixpath.join('m3/docs',link.split('#')[0]));assert target in planned or (B/'overlay'/target).is_file(),(link,target)
+ target=posixpath.normpath(posixpath.join('doc/m3',link.split('#')[0]));assert target in planned or (B/'overlay'/target).is_file(),(link,target)
  links.append({'link':link,'target':target,'kind':'planned-receipt' if target in planned else 'existing-preserved-file'})
 result={'schema':'jcc-e04-bound-package-review/1','scope':'Independent standard-library byte/hash/JSON/XML-relationship and path inspection; no candidate module imports/functions, generator, gates, or remote calls.','source_commit':SOURCE,'source_root_tree':ROOT,'packet_references_checked':14,'planned_receipt_copies':134,'additional_receipts':131,'exact_custody_additional_map_entries':123,'carried_original_files':121,'carried_original_bytes':15440298,'prior_draft_copies_checked':35,'omitted_envelopes_independently_hashed_and_bound':132,'omitted_by_status':dict(omitted_counts),'actual_tree_envelopes_matched_to_final_normalized_objects':830,'restored_root_pom_actual_capture_body_matched':True,'final_prose_has_no_unbound_tokens':True,'handoff_links':links,'all_planned_receipt_paths_absent_canonical_nonconflicting':True,'source_qualification_status':'BLOCKED','source_export_admitted':False,'promote_capability':False,'afterimages_generated':False,'receiving_execution':False,'snapshots':snapshots,'planned_paths':planned,'carried_files':carried,'omitted_files':omitted}
 (O/'PACKAGE_CHECKS.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps({k:v for k,v in result.items() if k not in ('snapshots','planned_paths','carried_files','omitted_files')},indent=2))

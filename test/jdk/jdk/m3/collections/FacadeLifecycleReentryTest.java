@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.Test;
 
 /** Reentrant callback closure must not retain GC-eligible idle roots. */
-//FLLDCIM: RELOCATE - donor blob 0cded62297c5 at fd9a233680b4; recipe m3/collections/recipe/transient-facade-20261106/relocate.py v4
+//FLLDCIM: RELOCATE - donor blob 0cded62297c5 at fd9a233680b4; recipe make/m3/collections/recipe/transient-facade-20261106/relocate.py v4
 class FacadeLifecycleReentryTest {
     private static final class Facade {
         long owner;

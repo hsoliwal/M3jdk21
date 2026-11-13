@@ -11,7 +11,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /** OS NUMA CPU placement discovery. PMem namespace-to-NUMA mapping must be verified separately. */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/56cbdc6312594f06e21ef56f0ce33b605383270b/synexia-openrewrite-recipes/recipe-crates/m3-pmem-16source-numa-convergence-20261031/src/main/resources/com/synexia/rewrite/pmem-16source-numa-convergence-20261031/NumaTopology.java.template blob 4972234a700a; recipe m3/optane/recipe/pmem-accelerator-20261107/relocate.py v4
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/56cbdc6312594f06e21ef56f0ce33b605383270b/synexia-openrewrite-recipes/recipe-crates/m3-pmem-16source-numa-convergence-20261031/src/main/resources/com/synexia/rewrite/pmem-16source-numa-convergence-20261031/NumaTopology.java.template blob 4972234a700a; recipe make/m3/optane/recipe/pmem-accelerator-20261107/relocate.py v4
 public final class NumaTopology {
     public record Node(int id, List<Integer> allowedCpus) { }
 

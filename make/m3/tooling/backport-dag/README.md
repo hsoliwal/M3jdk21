@@ -53,7 +53,7 @@ A DAG edge that broadens the inherited mutation boundary must declare
 
 From repository root:
 
-`mvn -B -ntp -f m3/pom.xml clean verify`
+`mvn -B -ntp -f make/m3/pom.xml clean verify`
 
 The default reactor verifies:
 
@@ -97,7 +97,7 @@ recipe atom
 The legacy one-file packet CLI remains useful for structural inspection. The evidence-bound form is:
 
 ```bash
-mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
+mvn -B -ntp -f make/m3/tooling/backport-dag/pom.xml \
   exec:java \
   -Dexec.mainClass=jdk.m3.tooling.dag.BackportPacketMain \
   -Dexec.args="packet.tsv atom-evidence.tsv"

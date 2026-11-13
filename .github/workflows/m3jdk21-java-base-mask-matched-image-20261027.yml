@@ -70,13 +70,13 @@ jobs:
           java -version
       - name: Recheck sealed in-JDK owner and current java.util callers
         shell: bash
-        run: bash m3/collections/qualification/java-base-mask-current-master-20261027/verify.sh
+        run: bash make/m3/collections/qualification/java-base-mask-current-master-20261027/verify.sh
       - name: Build full M3JDK21 fastdebug source image
         shell: bash
         run: |
           set -euo pipefail
           export M3_BOOT_JDK="$JAVA_HOME"
-          bash m3/build-openjdk.sh
+          bash make/m3/build-openjdk.sh
           mapfile -t images < <(find build -type f -path '*/images/jdk/bin/java' -print | sort)
           if [[ "${#images[@]}" -ne 1 ]]; then
             echo "REFUSAL expected exactly one product JDK image, got ${#images[@]}" >&2

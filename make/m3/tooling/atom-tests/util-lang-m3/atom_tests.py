@@ -29,7 +29,7 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.dirname(HERE))
-import literal_census  # noqa: E402  (m3/tooling/atom-tests/literal_census.py)
+import literal_census  # noqa: E402  (make/m3/tooling/atom-tests/literal_census.py)
 
 SECTION = re.compile(r"^//@@ (IMPORTS|CONSTANTS|HELPERS|PATTERN|SUPPORT)\b(.*)$", re.M)
 PACKAGE_DIRS = {

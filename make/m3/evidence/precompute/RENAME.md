@@ -8,7 +8,7 @@
 - the module provenance table and `verify_regex_string_v2.py`;
 - string literals that name these classes.
 
-Hash-pinned recipe manifests under `m3/tooling/migration-recipes` are seals of recorded files and keep their bytes,
+Hash-pinned recipe manifests under `make/m3/tooling/migration-recipes` are seals of recorded files and keep their bytes,
 as do the module's recipe and evidence directories.
 
 Recipe v1.6 adds the opt-in `--string-words`: inside string literals of files of the package (or importing it), every

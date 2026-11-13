@@ -61,7 +61,7 @@ import sun.security.action.GetBooleanAction;
  * {@code hashCode} and {@code equals} while the tree shows it. The index also holds the ancestors
  * of the keys, so a component whose hash changes while only its descendants are keys can make
  * {@link #expandedKeysBelow} miss a key that the stock loop, which uses only {@code equals},
- * finds. Design and proof: m3/docs/swing-viewport/DESIGN.md section 11.
+ * finds. Design and proof: doc/m3/swing-viewport/DESIGN.md section 11.
  */
 //FLLDCIM: M3 swing-viewport leaf 5 - JTree expansion table indexed by parent, same table and order
 @SuppressWarnings("serial") // transient in JTree, never serialized

@@ -8,23 +8,23 @@ Source owner: [hsoliwal/com.synexia PR #11810](https://github.com/hsoliwal/com.s
 
 ## What the profile does
 
-Add one optional profile to `m3/pom.xml` with the existing `rewrite-maven-plugin 5.23.1` and its existing Synexia snapshot coordinates. The profile activates the **read-only** `M3AtomLogicClusterRecipe` with `dryRun` (never `run` or `apply`), enables DataTables and refuses missing active recipes. The runner is an opt-in receipt-only scan of the **sources actually supplied to this Maven reactor**, *not* a claim that Maven automatically analyzes every OpenJDK `src/**/*.java` source or every other Git repository.
+Add one optional profile to `make/m3/pom.xml` with the existing `rewrite-maven-plugin 5.23.1` and its existing Synexia snapshot coordinates. The profile activates the **read-only** `M3AtomLogicClusterRecipe` with `dryRun` (never `run` or `apply`), enables DataTables and refuses missing active recipes. The runner is an opt-in receipt-only scan of the **sources actually supplied to this Maven reactor**, *not* a claim that Maven automatically analyzes every OpenJDK `src/**/*.java` source or every other Git repository.
 
 It emits the AtomLogic recipe's candidate relationships, occurrence identities, separate normalized logic and occurrence roots and status flags. **SHA-256 equality is only equality of the versioned projection. SimHash64 over ordered logic features is a neighbor signal; SimHash of the completed SHA256 is prohibited.** Neither fingerprint confers semantic equivalence, source mutation, automatic consolidation or API promotion.
 
 ## Reproducible recipe-first admission
 
-The new receiver recipe `m3/tooling/atom-logic-receiver/recipe.py` is an exact-source Maven-bound **XML profile transformation only**. Its `before/pom.xml` is an immutable exact Git-blob preimage. It validates unique source anchors, refuses source drift/duplicate profile, parses resulting Maven XML, asserts one read-only canonical recipe, checks that removal of the generated fragment returns byte-for-byte original source, and requires a second application to be a fixed point. Generated target source is committed after the receiver recipe and tests. No Java/JNI production source is changed.
+The new receiver recipe `make/m3/tooling/atom-logic-receiver/recipe.py` is an exact-source Maven-bound **XML profile transformation only**. Its `before/pom.xml` is an immutable exact Git-blob preimage. It validates unique source anchors, refuses source drift/duplicate profile, parses resulting Maven XML, asserts one read-only canonical recipe, checks that removal of the generated fragment returns byte-for-byte original source, and requires a second application to be a fixed point. Generated target source is committed after the receiver recipe and tests. No Java/JNI production source is changed.
 
 ```bash
-python3 m3/tooling/atom-logic-receiver/recipe.py self-test
-mvn -B -ntp -f m3/tooling/atom-logic-receiver/pom.xml verify
+python3 make/m3/tooling/atom-logic-receiver/recipe.py self-test
+mvn -B -ntp -f make/m3/tooling/atom-logic-receiver/pom.xml verify
 ```
 
 To **actually execute** the OpenRewrite profile, first independently qualify and install a class-backed Synexia snapshot containing `M3AtomLogicClusterRecipe`. Merely configuring the profile does not compile or run the underlying canonical recipe:
 
 ```bash
-mvn -B -ntp -f m3/pom.xml -Pm3-synexia-atomlogic-readonly verify
+mvn -B -ntp -f make/m3/pom.xml -Pm3-synexia-atomlogic-readonly verify
 ```
 
 Record the exact Synexia commit/artifact, Java 21 compiler version, parse coverage, source/revision seals and exported DataTables. No silently excluded files may count toward whole-codebase coverage. Distributed fan-in must reconcile full occurrence records and versions before producing any roots or candidate pairs. Original JDK source is untouched.

@@ -11,12 +11,12 @@ import unittest
 
 import yaml
 
-ROOT = Path(__file__).resolve().parents[2]
-CHECKER = ROOT / 'm3/runtime-integration/check-m3string-invariants.py'
+ROOT = Path(__file__).resolve().parents[3]
+CHECKER = ROOT / 'make/m3/runtime-integration/check-m3string-invariants.py'
 WORKFLOW = ROOT / '.github/workflows/mindex-string-backing.yml'
 GUARD_WORKFLOW = ROOT / '.github/workflows/m3-string-replacement-guard-proof.yml'
-INPUT_SEALS = ROOT / 'm3/runtime-integration/string-replacement-target-sha256.txt'
-REGEX_VERIFIER = ROOT / 'm3/runtime-integration/regex-precompute/verify.py'
+INPUT_SEALS = ROOT / 'make/m3/runtime-integration/string-replacement-target-sha256.txt'
+REGEX_VERIFIER = ROOT / 'make/m3/runtime-integration/regex-precompute/verify.py'
 
 
 def workflow_yaml(text):

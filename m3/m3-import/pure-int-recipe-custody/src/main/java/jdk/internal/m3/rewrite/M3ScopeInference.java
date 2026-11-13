@@ -15,9 +15,9 @@ import java.util.regex.Pattern;
 /** Narrowest physical target scope inferable from exact Java source paths. */
 public final class M3ScopeInference {
     private static final Pattern ABSOLUTE_WINDOWS_DRIVE_PREFIX = Pattern.compile("^[A-Za-z]:/");
-    private static final String M3_CPU_ROOT = "m3/tooling/module-packs/cpu-tools/";
+    private static final String M3_CPU_ROOT = "make/m3/tooling/module-packs/cpu-tools/";
     private static final String M3_CPU_SOURCE_ROOT = M3_CPU_ROOT + "src/";
-    private static final String M3_FILE_SOURCE_ROOT = "m3/tooling/module-packs/text-tools/src/jdk.m3.io/";
+    private static final String M3_FILE_SOURCE_ROOT = "make/m3/tooling/module-packs/text-tools/src/jdk.m3.io/";
     private static final Set<String> M3_CPU_MODULES = Set.of(
             "jdk.m3.tools.cpu",
             "jdk.m3.tools.codec.varint", "jdk.m3.tools.constraint.interval",
@@ -91,14 +91,14 @@ public final class M3ScopeInference {
             return location("m3/core", path.substring("m3/core/src/".length()), value);
         }
 
-        if (path.equals("m3/tooling/module-packs/parser/qualification/owner-current-20261019/proof-drivers/proof-src/M3ProjectionCacheResourceProbe.java")) {
-            return location("m3/tooling/module-packs/parser/qualification/owner-current-20261019",
+        if (path.equals("make/m3/tooling/module-packs/parser/qualification/owner-current-20261019/proof-drivers/proof-src/M3ProjectionCacheResourceProbe.java")) {
+            return location("make/m3/tooling/module-packs/parser/qualification/owner-current-20261019",
                     "M3ProjectionCacheResourceProbe.java", value);
         }
-        String collectionProofRoot = "m3/collections/qualification/owner-current-20261019/proof-src/";
+        String collectionProofRoot = "make/m3/collections/qualification/owner-current-20261019/proof-src/";
         if (path.equals(collectionProofRoot + "jdk/m3/collections/M3FilteredListMutationWitness.java")
                 || path.equals(collectionProofRoot + "jdk/m3/collections/IndexOrderWindowResourceProbe.java")) {
-            return location("m3/collections/qualification/owner-current-20261019",
+            return location("make/m3/collections/qualification/owner-current-20261019",
                     path.substring(collectionProofRoot.length()), value);
         }
 
@@ -210,12 +210,12 @@ public final class M3ScopeInference {
 
         // The source-backed NLP integration is one explicit receiver module owner.
         String nlpPackage = switch (path) {
-            case "m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/jdk/m3/nlp/search/LuceneSourceFields.java" -> "jdk.m3.nlp.search";
-            case "m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/jdk/m3/nlp/search/SourceDocument.java" -> "jdk.m3.nlp.search";
-            case "m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/jdk/m3/nlp/search/SourceSpans.java" -> "jdk.m3.nlp.search";
-            case "m3/tooling/module-packs/nlp-search/tests/ModelSourceProbe.java" -> "jdk.m3.nlp.search.test";
-            case "m3/tooling/module-packs/nlp-search/tests/SourceFactsProbe.java" -> "jdk.m3.nlp.search.test";
-            case "m3/tooling/module-packs/nlp-search/tests/SourceIntegrationProbe.java" -> "jdk.m3.nlp.search.test";
+            case "make/m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/jdk/m3/nlp/search/LuceneSourceFields.java" -> "jdk.m3.nlp.search";
+            case "make/m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/jdk/m3/nlp/search/SourceDocument.java" -> "jdk.m3.nlp.search";
+            case "make/m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/jdk/m3/nlp/search/SourceSpans.java" -> "jdk.m3.nlp.search";
+            case "make/m3/tooling/module-packs/nlp-search/tests/ModelSourceProbe.java" -> "jdk.m3.nlp.search.test";
+            case "make/m3/tooling/module-packs/nlp-search/tests/SourceFactsProbe.java" -> "jdk.m3.nlp.search.test";
+            case "make/m3/tooling/module-packs/nlp-search/tests/SourceIntegrationProbe.java" -> "jdk.m3.nlp.search.test";
             default -> null;
         };
         if (nlpPackage != null) return new JavaLocation("jdk.m3.nlp.search", nlpPackage);
@@ -280,9 +280,9 @@ public final class M3ScopeInference {
         }
 
         // Keep the existing SDK text module in its physical pack and Java package.
-        String m3TextTools = "m3/tooling/module-packs/text-tools/src/jdk.m3.text/";
+        String m3TextTools = "make/m3/tooling/module-packs/text-tools/src/jdk.m3.text/";
         if (path.startsWith(m3TextTools)) {
-            return location("m3/tooling/module-packs/text-tools",
+            return location("make/m3/tooling/module-packs/text-tools",
                     path.substring(m3TextTools.length()), value);
         }
 

@@ -281,7 +281,7 @@ abstract class M3Jdk21A3SourceSealedRecipe
 
     private static String canonical(Path path) {
         String value = path.normalize().toString().replace('\\', '/');
-        String prefix = "m3/tooling/a3/";
+        String prefix = "make/m3/tooling/a3/";
         return value.startsWith(prefix) ? value.substring(prefix.length()) : value;
     }
 

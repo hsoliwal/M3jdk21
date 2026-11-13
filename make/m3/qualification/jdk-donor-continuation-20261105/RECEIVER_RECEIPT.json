@@ -65,7 +65,7 @@
     {
       "repository": "hsoliwal/M3jdk21",
       "baseline_commit": "7c23ff3612ef08dc265bd3bab5461e4dcf3ee47c",
-      "path": "m3/tooling/module-packs/text-tools/build.py",
+      "path": "make/m3/tooling/module-packs/text-tools/build.py",
       "before_sha256": "c7f1b1a0d21770c30c3dc33c594f3bf9f55b737c6762fdda92b30ef3f97dcf76",
       "after_sha256": "d51d2e05787db697e1c9e893c045273e766946698e32f2f23a2a6aba5b937350",
       "before_git_blob": "18d136bd6ec9a981f7fd88b8cd5b29898d07b566",
@@ -75,7 +75,7 @@
     {
       "repository": "hsoliwal/M3jdk21",
       "baseline_commit": "7c23ff3612ef08dc265bd3bab5461e4dcf3ee47c",
-      "path": "m3/tooling/module-packs/text-tools/fixtures/src/test/java/M3OptionalNativeFallbackRegression.java",
+      "path": "make/m3/tooling/module-packs/text-tools/fixtures/src/test/java/M3OptionalNativeFallbackRegression.java",
       "before_sha256": "ABSENT",
       "after_sha256": "ec6538452e31d56ba0e0aaa1631e359896ca6b8d15471f035af0aedfc198eef2",
       "before_git_blob": null,
@@ -85,7 +85,7 @@
     {
       "repository": "hsoliwal/M3jdk21",
       "baseline_commit": "7c23ff3612ef08dc265bd3bab5461e4dcf3ee47c",
-      "path": "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/NativeLineOps.java",
+      "path": "make/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/NativeLineOps.java",
       "before_sha256": "42850be2dade74bbc9847a926636917de3c7d652a0b4bdb09b81b3003bbee120",
       "after_sha256": "0847209891c062ed6e14a1286427da5ecb8e5de1142c5d07a9084a256b849307",
       "before_git_blob": "a445dce8a386c2388f2eed09047f8ed2cc57a1b3",
@@ -95,7 +95,7 @@
     {
       "repository": "hsoliwal/M3jdk21",
       "baseline_commit": "7c23ff3612ef08dc265bd3bab5461e4dcf3ee47c",
-      "path": "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/NativeUtf16Literal.java",
+      "path": "make/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/NativeUtf16Literal.java",
       "before_sha256": "0ed9ea45a8cf6613db2836e3bfbdec30f6f26fe26dcb2d5bd4731c56a83a8beb",
       "after_sha256": "1375b67ada8b604b22c01e7cdb64e9c5e22ace5f3b1e6b464c0a5ff6e9d72ddc",
       "before_git_blob": "99e5e8f6955316c8a3b163c38e5e1d43587cb21d",
@@ -186,7 +186,7 @@
   "family_completion": false,
   "repository_completion": false,
   "naming_disposition": {
-    "canonical_map": "m3/docs/name-mapping.json",
+    "canonical_map": "doc/m3/name-mapping.json",
     "canonical_map_sha256": "0ed05297657e7077adfa1666845dd34dd3eda459bac05c1fb6546b7b21fcaf75",
     "status": "EXCLUDED_FROM_NEW_BACKEND_ADMISSION; DEFERRED_FAMILY_PROMOTION",
     "reason": "Maintenance of four existing production Java owners; no public renaming or new backend. No exact owner entry in existing72-record map. Canonical mapping/checker remains authoritative.",

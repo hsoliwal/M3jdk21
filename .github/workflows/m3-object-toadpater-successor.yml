@@ -7,7 +7,7 @@ on:
       - 'src/hotspot/share/classfile/classLoader.cpp'
       - 'test/jdk/java/lang/Object/ObjectToAdpater*.java'
       - 'test/jdk/java/lang/Object/libObjectToAdpaterNativeTest.c'
-      - 'm3/qualification/object-toadpater/**'
+      - 'make/m3/qualification/object-toadpater/**'
       - '.github/workflows/m3-object-toadpater-successor.yml'
   workflow_dispatch:
 
@@ -26,12 +26,12 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Verify exact candidate source identities
-        run: python3 m3/qualification/object-toadpater/verify_candidate.py
+        run: python3 make/m3/qualification/object-toadpater/verify_candidate.py
       - name: Recompile stock-JDK21 pre-alias subclass and run oracle
         shell: bash
         run: |
           set -euo pipefail
-          root="m3/qualification/object-toadpater"
+          root="make/m3/qualification/object-toadpater"
           mkdir -p "$RUNNER_TEMP/legacy-bytecode"
           cp "$root/LegacyPreAliasSubclass.java.txt" "$RUNNER_TEMP/legacy-bytecode/LegacyPreAliasSubclass.java"
           javac --release 21 -proc:none -Xlint:all -Werror -d "$RUNNER_TEMP/legacy-bytecode" \

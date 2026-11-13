@@ -50,17 +50,17 @@ TYPE	jdk.internal.m3.optane.M3PmemCorpusSelectedSearch	jdk.internal.m3.optane.Pm
 TYPE	jdk.internal.m3.optane.M3PmemGramIndexDump	jdk.internal.m3.optane.PmemGramIndexDump
 TYPE	jdk.internal.m3.optane.M3PmemGramIndexReplayTest	jdk.internal.m3.optane.PmemGramIndexReplayTest
 TYPE	jdk.internal.m3.optane.M3PmemGramOneGigabyteProof	jdk.internal.m3.optane.PmemGramOneGigabyteProof
-EDIT	m3/optane/docs/API_CONTRACT.md
-EDIT	m3/optane/docs/PMEM_PATH_PROBE_BOUND_CONTRACT.md
-EDIT	m3/optane/docs/SEARCH_CONTRACT.md
-EDIT	m3/optane/docs/SORTED_LONG_SEARCH.md
-EDIT	m3/optane/docs/SOURCE_PATH_LOOKUP_CONTRACT.md
-EDIT	m3/optane/docs/SOURCE_SLICES_CONTRACT.md
-EDIT	m3/optane/docs/TASK_LOG_CONTRACT.md
-EDIT	m3/optane/docs/TASK_REPLAY_CONTRACT.md
-EDIT	m3/optane/docs/TRANSFER_CONTRACT.md
-EDIT	m3/optane/PORT-MAPPING.pending.json
-EDIT	m3/optane/README.md
+EDIT	make/m3/optane/docs/API_CONTRACT.md
+EDIT	make/m3/optane/docs/PMEM_PATH_PROBE_BOUND_CONTRACT.md
+EDIT	make/m3/optane/docs/SEARCH_CONTRACT.md
+EDIT	make/m3/optane/docs/SORTED_LONG_SEARCH.md
+EDIT	make/m3/optane/docs/SOURCE_PATH_LOOKUP_CONTRACT.md
+EDIT	make/m3/optane/docs/SOURCE_SLICES_CONTRACT.md
+EDIT	make/m3/optane/docs/TASK_LOG_CONTRACT.md
+EDIT	make/m3/optane/docs/TASK_REPLAY_CONTRACT.md
+EDIT	make/m3/optane/docs/TRANSFER_CONTRACT.md
+EDIT	make/m3/optane/PORT-MAPPING.pending.json
+EDIT	make/m3/optane/README.md
 EDIT	m3/optane/src/main/java/jdk/internal/m3/optane/M3NumaTopology.java
 EDIT	m3/optane/src/main/java/jdk/internal/m3/optane/M3PmemAccelerator.java
 EDIT	m3/optane/src/main/java/jdk/internal/m3/optane/M3PmemCorpusGramIndex.java

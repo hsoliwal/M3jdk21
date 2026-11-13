@@ -50,7 +50,7 @@
       "java.lang.StringBuffer.toString/length/substring/lastIndexOf/writeObject"
     ],
     "publicJdkApiChange": false,
-    "runtimeRecipe": "PENDING_RESEAL: m3/runtime-integration/recipe/manifest.json seals AbstractStringBuilder.java (after a5e7213ca951, now 31f00f49bec8); on the pinned master apply.py --check already refuses with source drift: src/java.base/share/classes/java/lang/String.java (master b7a074c6f366, sealed after c49e422dfe0e, superseded eed88205feda); regeneration needs the upstream jdk-21+35 preimages, not run in this leaf"
+    "runtimeRecipe": "PENDING_RESEAL: make/m3/runtime-integration/recipe/manifest.json seals AbstractStringBuilder.java (after a5e7213ca951, now 31f00f49bec8); on the pinned master apply.py --check already refuses with source drift: src/java.base/share/classes/java/lang/String.java (master b7a074c6f366, sealed after c49e422dfe0e, superseded eed88205feda); regeneration needs the upstream jdk-21+35 preimages, not run in this leaf"
   },
   "runtimeDependencyOnSynexia": false,
   "publicJdkReplacement": false,

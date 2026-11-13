@@ -26,7 +26,7 @@ independently owned by `m3/fs`; this task adapter does not add a native ABI.
 ## Recipe custody
 
 The reusable, first-party OpenRewrite engine is the existing
-`M3HashPinnedJavaSnapshotRecipe` under `m3/tooling/migration-recipes`. The bounded recipe
+`M3HashPinnedJavaSnapshotRecipe` under `make/m3/tooling/migration-recipes`. The bounded recipe
 `com.synexia.rewrite.M3EclipseScheduledTasks20261021` installs two SHA-256 pinned
 ABSENT-before Java targets, including the nine-test regression suite.
 

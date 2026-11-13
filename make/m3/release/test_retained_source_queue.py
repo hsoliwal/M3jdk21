@@ -37,14 +37,14 @@ class RetainedSourceQueueTest(unittest.TestCase):
         self.prefix = QUEUE.ARCHIVE_ROOT
         self.archive("2084", "src/java.base/share/classes/java/lang/Exact.java", "exact\n")
         self.archive("2084", "src/java.base/share/classes/java/lang/Missing.java", "missing\n")
-        self.archive("1888", "m3/tools/Evolved.java", "original\n")
-        self.archive("1888", "m3/tools/Mode.java", "mode\n")
-        self.archive("1888", "m3/tools/README.md", "not code\n")
+        self.archive("1888", "make/m3/tools/Evolved.java", "original\n")
+        self.archive("1888", "make/m3/tools/Mode.java", "mode\n")
+        self.archive("1888", "make/m3/tools/README.md", "not code\n")
         put(self.root, "src/java.base/share/classes/java/lang/Exact.java", "exact\n")
-        put(self.root, "m3/tools/Evolved.java", "refined\n")
-        put(self.root, "m3/tools/Mode.java", "mode\n")
+        put(self.root, "make/m3/tools/Evolved.java", "refined\n")
+        put(self.root, "make/m3/tools/Mode.java", "mode\n")
         git(self.root, "add", ".")
-        git(self.root, "update-index", "--chmod=+x", "m3/tools/Mode.java")
+        git(self.root, "update-index", "--chmod=+x", "make/m3/tools/Mode.java")
         git(self.root, "commit", "-qm", "fixture")
 
     def archive(self, pr: str, path: str, content: str) -> None:
@@ -77,7 +77,7 @@ class RetainedSourceQueueTest(unittest.TestCase):
     def test_census_keeps_one_commit_when_head_advances(self):
         before = QUEUE.scan(self.root)
         original_head = before[2]["tree_head"]
-        put(self.root, "m3/tools/Evolved.java", "original\n")
+        put(self.root, "make/m3/tools/Evolved.java", "original\n")
         self.archive("2084", "src/java.base/share/classes/java/lang/Missing.java", "revised\n")
         git(self.root, "add", ".")
         git(self.root, "commit", "-qm", "advance both active and archived trees")
@@ -145,7 +145,7 @@ class RetainedSourceQueueTest(unittest.TestCase):
             QUEUE.scan(self.root)
 
     def test_archived_path_malformed_is_refused_not_misclassified(self):
-        self.archive("0", "m3/tools/Wrong.java", "not a valid PR\n")
+        self.archive("0", "make/m3/tools/Wrong.java", "not a valid PR\n")
         git(self.root, "add", ".")
         git(self.root, "commit", "-qm", "malformed")
         with self.assertRaisesRegex(ValueError, "ARCHIVE_PATH_MISSING_PR"):

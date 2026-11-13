@@ -2,7 +2,7 @@
 <!-- Copyright 2026 Hitesh Soliwal and contributors -->
 # m3/algorithms: the progress contract of an algorithm atom (leaf progress-algorithm-20261108)
 
-The landing lane (com-synexia-d7) is absorbing the challenge-catalogue tooling of `synexia-algo` into m3/tooling
+The landing lane (com-synexia-d7) is absorbing the challenge-catalogue tooling of `synexia-algo` into make/m3/tooling
 (`recipe/catalogue-kernels-20261107/HANDOFF_4D.tsv` + `recipe/corpus-search-20261108/HANDOFF_D7.tsv`, 304 + 41 rows)
 and found that those classes import two types of the donor package `com.synexia.algorithms.core`: `ProgressMonitors`
 (41 imports) and `ProgressAlgorithm` (13). The collections lane (com-synexia-a4) hands five monitor-bound structures to
@@ -53,7 +53,7 @@ javap_parity.py v2, apply.py + REPLACE_LINE). Lessons: [RECIPE_MEMORY.tsv](RECIP
 
 ## Next
 
-The contract unblocks three lanes: the m3/tooling catalogue absorption (d7), the five monitor-bound structures
+The contract unblocks three lanes: the make/m3/tooling catalogue absorption (d7), the five monitor-bound structures
 (lane 37 leaf 124: `IntRadix`, `LongRadix`, `PackedLongFenwickTree`, NEC rows for `IntAhoCorasick` and
 `IntWaveletMatrix`), and the `ChallengeSupersetKernels` verification (leaf 123: 24 lambda-shaped kernels bound to this
 contract, NEC member by member against the landed families).

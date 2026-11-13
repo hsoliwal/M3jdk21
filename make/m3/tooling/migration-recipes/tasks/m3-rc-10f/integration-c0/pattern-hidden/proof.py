@@ -33,15 +33,15 @@ METHODS = ['closedFamiliesAndResourcePins',
  'postScanDrift',
  'pureAdditionInputs']
 FAMILY_IDS = ('Phc',)
-FAMILIES = {'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ph0-phc': ('m3/tooling/image-gates/current-c0.json',
+FAMILIES = {'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ph0-phc': ('make/m3/tooling/image-gates/current-c0.json',
                                                             'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/10-Pattern.java.txt',
                                                             'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv',
-                                                            'm3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/atom/spectrum/CORPUS.tsv',
+                                                            'make/m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/atom/spectrum/CORPUS.tsv',
                                                             'src/java.base/share/classes/java/util/regex/Pattern.java')}
-REPLACEMENTS = ('m3/tooling/image-gates/current-c0.json',
+REPLACEMENTS = ('make/m3/tooling/image-gates/current-c0.json',
  'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/10-Pattern.java.txt',
  'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv',
- 'm3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/atom/spectrum/CORPUS.tsv',
+ 'make/m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/atom/spectrum/CORPUS.tsv',
  'src/java.base/share/classes/java/util/regex/Pattern.java')
 COUNTS = {'additions': 0,
  'families': 1,

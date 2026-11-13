@@ -76,7 +76,7 @@ transformation outputs and immutable provenance references to public targets.
 ## Pinned canonical recipe home
 
 The exact Synexia canonical recipe-home authority consumed by this repository is recorded in
-`m3/compatibility/m3-recipe-home-pin.tsv`. That pin binds:
+`make/m3/compatibility/m3-recipe-home-pin.tsv`. That pin binds:
 
 - the exact `hsoliwal/com.synexia` revision;
 - `synexia-openrewrite-recipes/CANONICAL_RECIPE_HOME.tsv`;
@@ -91,8 +91,8 @@ M3JDK21 receives the qualified generated product source and immutable handoff re
 
 ## Machine policy
 
-`m3/compatibility/m3-public-target-policy.tsv` is the target-side license/disposition table.
-`m3/compatibility/check_m3_public_target.py` validates it and can validate an exported
+`make/m3/compatibility/m3-public-target-policy.tsv` is the target-side license/disposition table.
+`make/m3/compatibility/check_m3_public_target.py` validates it and can validate an exported
 `SYNEXIA_M3_HANDOFF_V1` packet before receiver application.
 
 Missing/unknown license classification fails closed. This policy complements, and does not replace,
@@ -137,7 +137,7 @@ in Synexia and received as qualified product result files only.
 
 The initial moved family is the pure-int FILE convergence stack. Its canonical namespace is
 `com.synexia.rewrite.atom`; the exact Synexia source revision and Git blob identities are bound in
-`m3/compatibility/m3-recipe-ownership.tsv`.
+`make/m3/compatibility/m3-recipe-ownership.tsv`.
 
 A canonical recipe executes under Synexia custody against source-sealed target
 inputs. M3JDK21 independently verifies the received output with scope, license,
@@ -154,7 +154,7 @@ M3JDK21.
 
 The custody chain is machine-readable at:
 
-`m3/compatibility/nebula-proven-recipe-transfer.tsv`
+`make/m3/compatibility/nebula-proven-recipe-transfer.tsv`
 
 The required semantic path is:
 
@@ -197,7 +197,7 @@ The nine-stage source/target admission sequence is Inventory -> Dated additive c
 -> Catalogue by problem category -> Inline -> Atomize -> Patternize -> Comment ->
 compile/test gates -> reviewable PR. Its canonical Java/Maven implementation is proposed
 in Synexia PR #11983; M3JDK21 uses the target-only Java 21 receiver documented in
-[m3/docs/ordered-convergence-receiving-20261017.md](ordered-convergence-receiving-20261017.md).
+[doc/m3/ordered-convergence-receiving-20261017.md](ordered-convergence-receiving-20261017.md).
 Ancestry, taxonomy, atom/pattern evidence and the source receipt never bypass
 M3JDK21 product build, jtreg/JNI, license, GC/JIT/CDS or runtime gates. The receiver
 cannot copy/relicense source or mutate java.base, HotSpot or JDK Git history.

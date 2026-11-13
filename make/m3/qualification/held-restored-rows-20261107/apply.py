@@ -3,11 +3,11 @@
 # SPDX-License-Identifier: Apache-2.0
 """Recipe HELD_RESTORED_ROWS v1: RESTORED status rows for the two loss-guard held tests that #2649 moved back live.
 
-Derived from m3/collections/qualification/mergeloss-s1-20261106/apply.py (anchored "sub" edits, every anchor exactly
+Derived from make/m3/collections/qualification/mergeloss-s1-20261106/apply.py (anchored "sub" edits, every anchor exactly
 once, hash-pinned preimage, refusal on drift (exit 2) before any write, idempotent, --check fixed point).
 
 #2649 (merge 664dd18c7eef, merge-loss case 05, mergeloss-s1-20261106 leaf L2) moved
-m3/qualification/loss-guard-restore-20261106/held/.../M3IndexPathMasksLong{SelfTest,Test}.java back to their HELD.tsv
+make/m3/qualification/loss-guard-restore-20261106/held/.../M3IndexPathMasksLong{SelfTest,Test}.java back to their HELD.tsv
 paths byte for byte, after its L1 restored M3IndexPathMasks.selectLong. HELD.tsv kept only the original HELD rows. This
 recipe appends one status row per test and keeps the original rows. The rows use the file's own five columns (path,
 source_blob, reason, evidence, owner_action: the loss-guard writer's schema, not hold.py's path/labels/gate/held_sha256/
@@ -31,7 +31,7 @@ RECIPE_DIR = Path(__file__).resolve().parent
 BASE_COMMIT = "0d639c11986"
 EDITS_NAME = "EDITS.tsv"
 EDITS_COLUMNS = ("file", "before_sha256", "after_sha256", "leaf", "decision", "cited_commits", "rule")
-HELD_TSV = "m3/qualification/loss-guard-restore-20261106/HELD.tsv"
+HELD_TSV = "make/m3/qualification/loss-guard-restore-20261106/HELD.tsv"
 HELD_BLOB = "b5c1f1083ec530f2581c7279bfb81fc37d6afae5"
 TEST = "m3/collections/src/test/java/jdk/m3/collections/"
 CITED = "#2649 664dd18c7eef;mergeloss-s1-20261106 L2;held by #2517"
@@ -120,7 +120,7 @@ def run(root: Path, check: bool) -> int:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--root", default=str(RECIPE_DIR.parents[2]), help="repository root (default: three up)")
+    parser.add_argument("--root", default=str(RECIPE_DIR.parents[3]), help="repository root (default: three up)")
     parser.add_argument("--check", action="store_true", help="write nothing; exit 1 when a run would change a file")
     args = parser.parse_args(argv)
     try:

@@ -79,7 +79,7 @@
       }
     },
     {
-      "path": "m3/docs/name-mapping.json",
+      "path": "doc/m3/name-mapping.json",
       "preimage": {
         "bytes": 679895,
         "git_blob_sha1": "a86796e630d04c0ab38022bb10a6619a6dd3f379",
@@ -92,7 +92,7 @@
       }
     },
     {
-      "path": "m3/tooling/name-contract/name-plan.json",
+      "path": "make/m3/tooling/name-contract/name-plan.json",
       "preimage": {
         "bytes": 2444,
         "git_blob_sha1": "3ebacec8bd7d1b2bb83c8eeb4b6cc3c36efbc5ad",
@@ -223,7 +223,7 @@
     "full_borrow": {
       "result": "FAIL_EXISTING_BASELINE_METADATA_DRIFT",
       "receiving": "PENDING",
-      "checker": "m3/compatibility/check_m3_full_borrow_receiver.py",
+      "checker": "make/m3/compatibility/check_m3_full_borrow_receiver.py",
       "checker_sha256": "444514e43ba0805375cd1894c372ad3493aea7291604103b700c37e741b0ff68",
       "metadata": "m3/m3-import/current-full-borrow/pin.tsv",
       "evidence": {
@@ -249,7 +249,7 @@
     "Existing per-file destination licences are retained. No foreign implementation source is imported by this product correction; this receipt grants no new copying permission or product promotion."
   ],
   "receipt_custody": {
-    "path": "m3/qualification/primitive-image-completion-20261112/RECEIVER_RECEIPT.json",
+    "path": "make/m3/qualification/primitive-image-completion-20261112/RECEIVER_RECEIPT.json",
     "self_hash": "EXTERNAL_CUSTODY",
     "rule": "The receipt's final bytes and receiving commit are bound by separate canonical execution/provenance records after materialization; this file does not contain or approve its own hash."
   },

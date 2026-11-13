@@ -177,7 +177,7 @@ def build(args):
     out.mkdir(parents=True, exist_ok=False)
     (out / "jars").mkdir()
     (out / "legal").mkdir()
-    packager = root / "m3/tooling/jmod-recipes/tools/jmod_pack.py"
+    packager = root / "make/m3/tooling/jmod-recipes/tools/jmod_pack.py"
     opennlp = args.opennlp_source.resolve()
     lucene = args.lucene_source.resolve()
     environment = dict(os.environ, JAVA_HOME=str(jdk))

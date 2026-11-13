@@ -3,7 +3,7 @@ name: M3 SDK cross-library names and filtered/sorted receivers
 on:
   pull_request:
     paths:
-      - 'm3/collections/qualification/m3-sdk-families-20261017/**'
+      - 'make/m3/collections/qualification/m3-sdk-families-20261017/**'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3CollectionSdk*.java'
       - 'test/jdk/jdk/m3/collections/M3CollectionSdk*.java'
       - '.github/workflows/m3-sdk-families-20261017.yml'
@@ -24,7 +24,7 @@ jobs:
       - name: Replay exact v2 catalogue and canonical v3 sorted-contract recipe
         run: |
           set -eu
-          Q=m3/collections/qualification/m3-sdk-families-20261017
+          Q=make/m3/collections/qualification/m3-sdk-families-20261017
           V2="$Q/recipe"
           V3="$Q/recipe-v3"
           mvn -B -ntp -f "$V2/pom.xml" verify

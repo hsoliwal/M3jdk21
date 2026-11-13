@@ -34,15 +34,15 @@ final class M3BackportWaveCurrentOutputRecipeTest {
     private static final String WAVE_OWNER = ".github/workflows/m3jdk21-backport-wave-admission.yml";
     private static final String WAVE_AFTER = "942fe1f46b1b4f7c91418ded4c94b045576ec31b52dfed3ce0ac45ed4608ff25";
     private static final Map<String, String> BEFORE = Map.ofEntries(
-            Map.entry("m3/backports/test_compatibility_policy.py", "69694e6e3725aeee8687a8c58bce477c7256f626d8425c04a9ce9772250a2bb6"),
-            Map.entry("m3/backports/compatibility_policy.py", "d51301d3ea225e89b000a2256855ab7806a1faf20c5fa493eb5666de1e7880c2"),
-            Map.entry("m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv", "4d813438bb68106c65781b3891c43afd4b35d288e0440ec4d27f83305b780c1a"),
-            Map.entry("m3/backports/JEP_CATALOGUE.tsv", "d47f07c2ee9829bfb91f4c4e2162bb221e86206aada802e0580aaef79d7fd250"),
-            Map.entry("m3/backports/RELEASE_JEP_AUTHORITY.tsv", "05341181f89e150ae602644ddaca9d53596be533cb2695e4032f11c0e1a70709"),
-            Map.entry("m3/backports/test_backport_execution_waves.py", "5a59d038e108010c484f66f545ab5bc745a791182ed4794556b414ffde315dd0"),
-            Map.entry("m3/backports/backport_execution_waves.py", "2cb19465a6a0d4f24dc228921eb1a2d7c2bbc4e53ce68e635b0e60ddb2a563dc"),
-            Map.entry("m3/backports/BACKPORT_EXECUTION_WAVES.md", "df2aca41ab120bdbc8c165d4abe3552c54a91c591aab116b718b94283ae23f28"),
-            Map.entry("m3/compatibility/m3-wave-admission-pin-20261014.tsv", "984af6023eb4f4e0b917a700c5e75bd936083b7ae2f0daef07c37ad6a3e2ddd4"),
+            Map.entry("make/m3/backports/test_compatibility_policy.py", "69694e6e3725aeee8687a8c58bce477c7256f626d8425c04a9ce9772250a2bb6"),
+            Map.entry("make/m3/backports/compatibility_policy.py", "d51301d3ea225e89b000a2256855ab7806a1faf20c5fa493eb5666de1e7880c2"),
+            Map.entry("make/m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv", "4d813438bb68106c65781b3891c43afd4b35d288e0440ec4d27f83305b780c1a"),
+            Map.entry("make/m3/backports/JEP_CATALOGUE.tsv", "d47f07c2ee9829bfb91f4c4e2162bb221e86206aada802e0580aaef79d7fd250"),
+            Map.entry("make/m3/backports/RELEASE_JEP_AUTHORITY.tsv", "05341181f89e150ae602644ddaca9d53596be533cb2695e4032f11c0e1a70709"),
+            Map.entry("make/m3/backports/test_backport_execution_waves.py", "5a59d038e108010c484f66f545ab5bc745a791182ed4794556b414ffde315dd0"),
+            Map.entry("make/m3/backports/backport_execution_waves.py", "2cb19465a6a0d4f24dc228921eb1a2d7c2bbc4e53ce68e635b0e60ddb2a563dc"),
+            Map.entry("make/m3/backports/BACKPORT_EXECUTION_WAVES.md", "df2aca41ab120bdbc8c165d4abe3552c54a91c591aab116b718b94283ae23f28"),
+            Map.entry("make/m3/compatibility/m3-wave-admission-pin-20261014.tsv", "984af6023eb4f4e0b917a700c5e75bd936083b7ae2f0daef07c37ad6a3e2ddd4"),
             Map.entry(".github/workflows/m3jdk21-backport-wave-admission.yml", "3a7744e60786b90a474b16468fdec6f4d51fe576e3c99ed92bbf0b7b25909f57"));
     private static final Set<String> PASSED = new LinkedHashSet<>();
     private static final Map<Boolean, String> EMITTED = new HashMap<>();
@@ -237,12 +237,12 @@ final class M3BackportWaveCurrentOutputRecipeTest {
     @Test void exactCurrentWorkflowPinsPreserveHistoricalReceipt() throws Exception {
         validateComposition();
         Map<String, String> expected = Map.of(
-                "m3/backports/backport_execution_waves.py", BEFORE.get("m3/backports/backport_execution_waves.py"),
-                "m3/backports/test_backport_execution_waves.py", BEFORE.get("m3/backports/test_backport_execution_waves.py"),
-                "m3/backports/BACKPORT_EXECUTION_WAVES.md", BEFORE.get("m3/backports/BACKPORT_EXECUTION_WAVES.md"));
+                "make/m3/backports/backport_execution_waves.py", BEFORE.get("make/m3/backports/backport_execution_waves.py"),
+                "make/m3/backports/test_backport_execution_waves.py", BEFORE.get("make/m3/backports/test_backport_execution_waves.py"),
+                "make/m3/backports/BACKPORT_EXECUTION_WAVES.md", BEFORE.get("make/m3/backports/BACKPORT_EXECUTION_WAVES.md"));
         assertEquals(expected, workflowHashes(resource(ROOT + "out/" + WAVE_OWNER)));
         assertNotEquals(expected, workflowHashes(resource(ROOT + "before/" + WAVE_OWNER)));
-        String receipt = "m3/compatibility/m3-wave-admission-pin-20261014.tsv";
+        String receipt = "make/m3/compatibility/m3-wave-admission-pin-20261014.tsv";
         assertEquals(resource(ROOT + "before/" + receipt), resource(ROOT + "out/" + receipt));
         assertTrue(resource(ROOT + "out/" + receipt).contains(
                 "canonical_recipe_commit\t0537c17d77d2613362ec0e3b8cad4830f179a74f\n"));

@@ -33,6 +33,6 @@ remain NOT_RUN/BLOCKED. The source-seal script is not an OpenRewrite substitute.
 
 ## Artifact paths
 
-`m3/collections/qualification/m3-index-path-rank-20261017/`,
-`m3/collections/algorithm-catalog/index-path-rank-20261017.tsv`,
+`make/m3/collections/qualification/m3-index-path-rank-20261017/`,
+`make/m3/collections/algorithm-catalog/index-path-rank-20261017.tsv`,
 `m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-index-path-rank-20261017/`.

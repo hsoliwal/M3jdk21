@@ -54,7 +54,7 @@ replacement of JDK `java.util`, nor runtime String→arrays→collections promot
 
 ## Algorithm and reuse accounting
 
-See `m3/collections/algorithm-catalog/index-path-rank-20261017.tsv` for individual
+See `make/m3/collections/algorithm-catalog/index-path-rank-20261017.tsv` for individual
 categories, candidates, complexity, compatibility and licensing. LeetCode 303/338,
 HackerRank Java BitSet and GeeksforGeeks prefix-sum are problem-category references
 only: no challenge code or explanation is copied. Existing M3 Java/JNI owns behavior.

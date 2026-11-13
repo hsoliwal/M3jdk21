@@ -5,7 +5,7 @@ on:
     paths:
       - 'm3/ports/parallel-bulk/pom.xml'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-parallel-bulk-compiler-repair/**'
-      - 'm3/tooling/migration-recipes/tasks/parallel-bulk-compiler-repair/source-lock-v2-20261014.json'
+      - 'make/m3/tooling/migration-recipes/tasks/parallel-bulk-compiler-repair/source-lock-v2-20261014.json'
       - '.github/workflows/m3-parallel-bulk-compiler-v2.yml'
   workflow_dispatch:
 
@@ -27,7 +27,7 @@ jobs:
           import hashlib, xml.etree.ElementTree as ET
           from pathlib import Path
           root = Path('.')
-          source = root / 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-parallel-bulk-compiler-repair/'
+          source = root / 'make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-parallel-bulk-compiler-repair/'
           target, before, after, template = (source/'manifest.tsv').read_text().strip().split('\t')
           data = (root/target).read_bytes()
           assert hashlib.sha256(data).hexdigest() == after

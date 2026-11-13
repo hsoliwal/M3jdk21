@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
 set -euo pipefail
-root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
+root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../../.." && pwd)"
 cd "$root"
 
 sha256sum --check <<'HASHES'

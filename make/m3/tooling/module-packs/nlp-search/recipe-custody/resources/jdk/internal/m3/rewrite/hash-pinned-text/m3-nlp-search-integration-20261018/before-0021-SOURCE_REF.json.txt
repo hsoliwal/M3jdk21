@@ -4,7 +4,7 @@
   "canonical_commit": "c49cca384837ebd9dc71b6141c71ab0bcb938d10",
   "canonical_crate": "m3-openrewrite-recipes/crates/m3-nlp-search",
   "file_receipt": "m3-openrewrite-recipes/crates/m3-nlp-search/RECEIVER_FILES.json",
-  "receiver": "m3/tooling/module-packs/nlp-search",
+  "receiver": "make/m3/tooling/module-packs/nlp-search",
   "scope": "Full source tool implementations; preserve upstream API/module identity; two qualified internal owner changes",
   "qualification": "Local Linux Java21 full-source/API/behavior/CLI/eight-JMOD and isolated receiver passed",
   "phase_advanced": false,
@@ -20,7 +20,7 @@
   "license": "Apache/embedded OpenNLP and Lucene notices; SLF4J MIT; first-party integration Apache-2.0",
   "previous_receipt": {
     "target_commit": "f9b3a0ce84dcdbd0cc75df956def7710ac5d04fd",
-    "path": "m3/tooling/module-packs/nlp-search/SOURCE_REF.json",
+    "path": "make/m3/tooling/module-packs/nlp-search/SOURCE_REF.json",
     "git_blob": "e65dc6621efbedc64c76f4eaba8511342ad56f51"
   },
   "source_restoration_commit": "ebff714f37756273594086226098137d0a37b30a",

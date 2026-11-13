@@ -18,8 +18,8 @@ The companion references cover canonical payload ownership, native/mapped lifeti
 admission, tuples, fixed facts and String operations. Together the three references
 cover the twelve inventoried M3-prefixed source files, not all `java.lang`,
 all public String observables, the StringBacking family, or runtime acceptance.
-The [porting invariant](../../m3/docs/m3jdk21-porting-invariant.md),
-[naming map](../../m3/docs/name-mapping.json), and existing provenance and per-file
+The [porting invariant](../m3/m3jdk21-porting-invariant.md),
+[naming map](../m3/name-mapping.json), and existing provenance and per-file
 licenses remain authoritative. No private source was used. Ordered receiving
 remains String → arrays → collections → AST/compiler → remaining families.
 
@@ -407,7 +407,7 @@ two test mains. It also checks the field-map row count and receiver-schema
 marker. That isolated host route does not patch String or qualify the modified
 Java/HotSpot runtime; its definition is not evidence that its jobs ran or passed
 for this documentation head. Follow [contributor build/test selection](../../CONTRIBUTING.md#first-build-prerequisites-outputs-and-test-selection)
-and the [runtime guide](../../m3/runtime-integration/README.md); no stock-JVM
+and the [runtime guide](../../make/m3/runtime-integration/README.md); no stock-JVM
 String.class transplant or unverified reproduction command is proposed here.
 
 ### Source-observed gaps

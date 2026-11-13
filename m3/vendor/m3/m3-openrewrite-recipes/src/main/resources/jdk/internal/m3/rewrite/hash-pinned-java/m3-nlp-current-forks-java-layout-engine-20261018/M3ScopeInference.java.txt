@@ -112,12 +112,12 @@ public final class M3ScopeInference {
 
         // The source-backed NLP integration is one explicit receiver module owner.
         String nlpPackage = switch (path) {
-            case "m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/jdk/m3/nlp/search/LuceneSourceFields.java" -> "jdk.m3.nlp.search";
-            case "m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/jdk/m3/nlp/search/SourceDocument.java" -> "jdk.m3.nlp.search";
-            case "m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/jdk/m3/nlp/search/SourceSpans.java" -> "jdk.m3.nlp.search";
-            case "m3/tooling/module-packs/nlp-search/tests/ModelSourceProbe.java" -> "jdk.m3.nlp.search.test";
-            case "m3/tooling/module-packs/nlp-search/tests/SourceFactsProbe.java" -> "jdk.m3.nlp.search.test";
-            case "m3/tooling/module-packs/nlp-search/tests/SourceIntegrationProbe.java" -> "jdk.m3.nlp.search.test";
+            case "make/m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/jdk/m3/nlp/search/LuceneSourceFields.java" -> "jdk.m3.nlp.search";
+            case "make/m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/jdk/m3/nlp/search/SourceDocument.java" -> "jdk.m3.nlp.search";
+            case "make/m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/jdk/m3/nlp/search/SourceSpans.java" -> "jdk.m3.nlp.search";
+            case "make/m3/tooling/module-packs/nlp-search/tests/ModelSourceProbe.java" -> "jdk.m3.nlp.search.test";
+            case "make/m3/tooling/module-packs/nlp-search/tests/SourceFactsProbe.java" -> "jdk.m3.nlp.search.test";
+            case "make/m3/tooling/module-packs/nlp-search/tests/SourceIntegrationProbe.java" -> "jdk.m3.nlp.search.test";
             default -> null;
         };
         if (nlpPackage != null) return new JavaLocation("jdk.m3.nlp.search", nlpPackage);

@@ -21,7 +21,7 @@ new function framework, whole-JDK build, jtreg, JEP-completion, release or canon
 The saved source-export Git history was not spliced into upstream. New source/template blobs are
 identical and documented before materialization on the retained real upstream feature ancestry.
 
-Recipe execution root: m3/tooling/module-packs/kernel. Named recipe: com.m3.rewrite.packs.Version.
+Recipe execution root: make/m3/tooling/module-packs/kernel. Named recipe: com.m3.rewrite.packs.Version.
 Three targets: one inspector update and two explicit absent-before Java test additions. The existing
 M3HashPinnedJavaSnapshotRecipe remains the engine; the old unpublished custom inspector recipe is
 not duplicated into this repository.

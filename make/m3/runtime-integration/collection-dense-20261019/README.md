@@ -13,7 +13,7 @@ partial selections preserve the original sparse extraction loops. Java remains d
 
 The canonical recipe is com.synexia.m3.CollectionDense20261019. The exact source revision,
 hashes and target authoring mirror are recorded in SYNEXIA_HANDOFF.json beside this file.
-The public mirror under m3/tooling/collection-dense-20261019/synexia-openrewrite-recipes
+The public mirror under make/m3/tooling/collection-dense-20261019/synexia-openrewrite-recipes
 contains the named recipe, tests, fixtures, category catalogue, licenses and evidence.
 It excludes private Synexia-wide ledgers and custody fixtures.
 

@@ -51,7 +51,7 @@ final class M3DecoratorAtomTest {
     /** The policy argument that selects the harness default. */
     static final String DEFAULT_POLICY = "-";
     static final String PROP_DIR = "m3.decorator.dir";
-    static final String DEFAULT_DIR = "m3/collections/qualification/decorator-fill-20261030";
+    static final String DEFAULT_DIR = "make/m3/collections/qualification/decorator-fill-20261030";
     static final String TARGETS = "TARGETS.tsv";
     static final String CONTRACT = "class contract";
     static final String NEVER_EXERCISED = "never exercised by the seeded steps";

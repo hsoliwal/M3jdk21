@@ -6,9 +6,9 @@ import json
 from pathlib import Path, PurePosixPath
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[3]
+ROOT = HERE.parents[4]
 ENGINE = "src/java.base/share/classes/java/lang/MIndexString.java"
-TEST = "m3/runtime-integration/tests/MIndexStringInvariant.java"
+TEST = "make/m3/runtime-integration/tests/MIndexStringInvariant.java"
 
 OLD_COPY = """    void getChars(int srcBegin, int srcEnd, char[] dst, int dstBegin) {
         String.checkBoundsBeginEnd(srcBegin, srcEnd, length);

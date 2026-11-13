@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-# fullrun.sh <log-name> <TAG>: record one full-reactor run (`mvn -B -ntp -T1 -fae -f m3/pom.xml verify
+# fullrun.sh <log-name> <TAG>: record one full-reactor run (`mvn -B -ntp -T1 -fae -f make/m3/pom.xml verify
 # -Dmaven.test.failure.ignore=true`, already executed through mvn.sh) as a GATES.tsv row and two ledgers,
 # <TAG>_TESTS.tsv (testsum.py, one row per module) and <TAG>_FAILING.tsv (testsum.py --failing, sorted, for cmp with
 # an earlier run's failing set). Runs no Maven; wall time from the log's START/END stamps.
@@ -9,7 +9,7 @@
 set -u
 NAME=$1; TAG=$2
 W=${W:-/s/m3-scratch/eb-conv/wt-reactor}; R=${R:-/s/m3-scratch/eb-conv/reactor}
-Q=$W/m3/qualification/reactor-wiring-20261107
+Q=$W/make/m3/qualification/reactor-wiring-20261107
 LOG=$R/logs/$NAME.log
 cd "$W" || exit 9
 test -f "$LOG" || { echo "FULLRUN_ABORT no log $LOG"; exit 8; }

@@ -10,7 +10,7 @@ on:
       - 'src/java.base/share/classes/java/security/SHA256Adapter.java'
       - 'test/jdk/java/lang/Object/SHA256ObjectAdapterTest.java'
       - 'test/jdk/java/lang/Object/libSHA256ObjectAdapterTest.c'
-      - 'm3/qualification/sha256-object-adapter-20261105/**'
+      - 'make/m3/qualification/sha256-object-adapter-20261105/**'
       - '.github/workflows/m3-sha256-object-adapter-receiver-20261105.yml'
   pull_request:
     paths:
@@ -18,7 +18,7 @@ on:
       - 'src/java.base/share/classes/java/security/SHA256Adapter.java'
       - 'test/jdk/java/lang/Object/SHA256ObjectAdapterTest.java'
       - 'test/jdk/java/lang/Object/libSHA256ObjectAdapterTest.c'
-      - 'm3/qualification/sha256-object-adapter-20261105/**'
+      - 'make/m3/qualification/sha256-object-adapter-20261105/**'
       - '.github/workflows/m3-sha256-object-adapter-receiver-20261105.yml'
   workflow_dispatch:
 permissions:
@@ -54,7 +54,7 @@ jobs:
           import hashlib
           import json
           from pathlib import Path
-          receipt = json.loads(Path("m3/qualification/sha256-object-adapter-20261105/RECEIVER_RECEIPT.json").read_text(encoding="utf-8"))
+          receipt = json.loads(Path("make/m3/qualification/sha256-object-adapter-20261105/RECEIVER_RECEIPT.json").read_text(encoding="utf-8"))
           assert receipt["qualification"] == "DRAFT_HOLD"
           assert receipt["canonical_recipe_commit"] == "208e7d340642958801e7e0778b057e4a1cf05f09"
           rows = receipt["generated_targets"]
@@ -62,7 +62,7 @@ jobs:
           for row in rows:
               content = Path(row["path"]).read_bytes()
               assert hashlib.sha256(content).hexdigest() == row["postimage_sha256"], row["path"]
-          assert "m3.object-sha256-adapter" in Path("m3/docs/name-mapping.json").read_text(encoding="utf-8")
+          assert "m3.object-sha256-adapter" in Path("doc/m3/name-mapping.json").read_text(encoding="utf-8")
           print("M3_SHA256_RECEIVER_SOURCE_SEALS_PASS entries=4")
           PY
       - name: Compile isolated java.security.SHA256Adapter and native jtreg C source

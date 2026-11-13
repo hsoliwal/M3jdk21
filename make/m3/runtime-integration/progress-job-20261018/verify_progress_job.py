@@ -13,7 +13,7 @@ import subprocess
 import traceback
 
 
-PREFIX = "m3/runtime-integration/progress-job-20261018"
+PREFIX = "make/m3/runtime-integration/progress-job-20261018"
 OWNER = "src/java.base/share/classes/java/util/concurrent/ProgressJob.java"
 JDK_TEST = "test/jdk/java/util/concurrent/ProgressJob/M3ProgressJob.java"
 JDK_FLAGS = ["-g:none", "-proc:none", "-Xlint:all", "-Xlint:-this-escape", "-Werror",

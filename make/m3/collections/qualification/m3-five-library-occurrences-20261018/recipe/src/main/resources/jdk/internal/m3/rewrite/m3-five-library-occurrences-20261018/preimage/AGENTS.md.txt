@@ -1,8 +1,8 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 # M3JDK21 agent instructions
 
-Read and follow the existing [porting and naming invariant](m3/docs/m3jdk21-porting-invariant.md)
-and [naming/migration map](m3/docs/name-mapping.json) before M3 source work. They remain the target
+Read and follow the existing [porting and naming invariant](doc/m3/m3jdk21-porting-invariant.md)
+and [naming/migration map](doc/m3/name-mapping.json) before M3 source work. They remain the target
 policy authorities; this file makes the existing invariant discoverable to repository agents.
 
 Synexia (`hsoliwal/com.synexia`) is the donor-convergence workspace. M3JDK21 owns the delivered
@@ -35,13 +35,13 @@ target delivery; retain pending gates and partial coverage explicitly.
 
 ## Full Synexia lineage is mandatory
 
-Read `m3/compatibility/m3-full-family-pin.tsv`, `m3/docs/m3-full-family-catalogue.json`, and the M3-SYNEXIA-RECEIVER-1 section of the canonical porting invariant before MIndex*/String/AST/precompute work. Also read the current successor snapshot under `m3/synexia-import/current-full-borrow/` and run `m3/compatibility/check_m3_full_borrow_receiver.py`; the successor snapshot adds exact current Synexia family-tree identities but does not supersede historical catalogue evidence or advance any target phase. The pinned Synexia source catalogue covers4,770namedpaths within13checkedroots and keeps every row unevaluated until exact target evidence exists. Carry the whole canonical String/data-structure/AST/static-regex lineage forward; representative tables or the literal replacement atom do not prove full receiving parity. Preserve Apache-2.0 Synexia first-party attribution, `Copyright 2026 Hitesh Soliwal and contributors`, and per-file third-party/OpenJDK licensing.
+Read `make/m3/compatibility/m3-full-family-pin.tsv`, `doc/m3/m3-full-family-catalogue.json`, and the M3-SYNEXIA-RECEIVER-1 section of the canonical porting invariant before MIndex*/String/AST/precompute work. Also read the current successor snapshot under `m3/synexia-import/current-full-borrow/` and run `make/m3/compatibility/check_m3_full_borrow_receiver.py`; the successor snapshot adds exact current Synexia family-tree identities but does not supersede historical catalogue evidence or advance any target phase. The pinned Synexia source catalogue covers4,770namedpaths within13checkedroots and keeps every row unevaluated until exact target evidence exists. Carry the whole canonical String/data-structure/AST/static-regex lineage forward; representative tables or the literal replacement atom do not prove full receiving parity. Preserve Apache-2.0 Synexia first-party attribution, `Copyright 2026 Hitesh Soliwal and contributors`, and per-file third-party/OpenJDK licensing.
 
 Repository policy distinguishes the copyrighted first-party work from abstract ideas: Synexia-original implementation/source, recipes, tests, fixtures, original expressive design documentation, manifests/schemas and original generated configuration retain `Copyright 2026 Hitesh Soliwal and contributors` and Apache-2.0; abstract ideas/algorithms/concepts/methods are not relabeled as copyrighted source expression. Third-party/OpenJDK rights remain unchanged.
 
 ## Remember the ordered M3JDK21 receiving invariant
 
-**String -> arrays -> collections -> AST/compiler -> remaining families.** Read `m3/docs/m3jdk21-porting-invariant.md`
+**String -> arrays -> collections -> AST/compiler -> remaining families.** Read `doc/m3/m3jdk21-porting-invariant.md`
 and its existing machine plan before each continuation. String qualification is the active stage;
 no phase advances from a donor test, catalogue count, copied snapshot or merge alone. Preserve
 public JDK contracts, one canonical payload owner, original copyright/Apache-2.0 expression and

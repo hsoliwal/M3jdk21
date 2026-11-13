@@ -7,7 +7,7 @@ Dataset: `synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-2026101
 Product preimage: `3ed252b92a5b029ea6ae00816ab6a4a4cda56ce1`.
 
 This pass receives three actual Maven/OpenRewrite Results in the existing
-`m3/collections/viewport-proof` directory: a CMake native build, ordered Python
+`make/m3/collections/viewport-proof` directory: a CMake native build, ordered Python
 verifier, and the original shell entrypoint delegated to that verifier. Reusable
 recipe source, donor comparison, source seals and refusal tests remain in Synexia.
 Runtime Java/C owners, original tests, public APIs and native exports are unchanged.
@@ -21,7 +21,7 @@ linkage does not link a second libjvm into the host. No new runtime layer, widge
 collection wrapper or model store is introduced.
 
 ```sh
-bash m3/collections/viewport-proof/verify.sh --output /absolute/new-proof
+bash make/m3/collections/viewport-proof/verify.sh --output /absolute/new-proof
 ```
 
 The original no-argument invocation also works; it creates a new retained evidence

@@ -12,7 +12,7 @@
    mergeloss-01-15-20261106 (#2638), which raised the inventory to 30 while this pin still errored on step 1.
 3. m3/collections/interop/pom.xml: core's JNI test gating (m3/collections/pom.xml, jni-test-gating-20261106 /
    #2577) copied: default surefire <excludes> of the m3_arrays JNI-dependent classes, generated from EXCLUDED.tsv
-   (pinned sha256; enumerated from surefire XML by m3/collections/qualification/jni-test-gating-20261106/tools/
+   (pinned sha256; enumerated from surefire XML by make/m3/collections/qualification/jni-test-gating-20261106/tools/
    failing_classes.py), and the profile m3-collections-native re-including them with m3.arrays.native.path.
 
 Every rule names its preimage blob; a target must equal the preimage or the postimage, else the recipe refuses
@@ -37,7 +37,7 @@ INTEROP = "m3/collections/interop/"
 TSV = INTEROP + "sdk-family-bindings.tsv"
 POM = INTEROP + "pom.xml"
 TEST = INTEROP + "src/test/java/jdk/m3/collections/interop/M3SpringCaseInsensitiveSdkFactoryTest.java"
-TOOL = "m3/tooling/jdk-naming/jdk_naming.py"
+TOOL = "make/m3/tooling/jdk-naming/jdk_naming.py"
 TSV_PRE_BLOB = "b387cf78bd30f9d4a521c58e40aac7a00b2c9a91"
 TSV_POST_SHA256 = "97654ada7e6d7e386f8e42927ccba0c97ae6b17f7071f61cd99cf08d2f3fbaad"
 POM_PRE_BLOB = "3cc5eff7ceb22f89d79eff6ea3902504878a7aba"

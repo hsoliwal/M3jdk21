@@ -51,7 +51,7 @@ rather than wrapping legitimate refusal errors in `AssertionError`.
 
 ### Required promotion gates
 
-1. `mvn -B -ntp -f m3/pom.xml -pl tooling/migration-recipes -am test`
+1. `mvn -B -ntp -f make/m3/pom.xml -pl tooling/migration-recipes -am test`
    (including named JEP-residue and both M3 String text regression suites).
 2. Existing source-sealed recipe replay, negative drift/refusal and fixed
    point tests, exact current tree source/postimage SHA readback.

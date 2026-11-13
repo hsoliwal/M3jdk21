@@ -12,7 +12,7 @@ On 2026-11-09 the user decided:
 |---|---|
 | Module | `src/jdk.m3.paradigm/share/classes/module-info.java`: `requires jdk.m3.collections`, exports nothing |
 | Build | `make/modules/jdk.m3.paradigm/Java.gmk` (as jdk.m3.collections: `-Xlint:all,-module -Werror`, doclint without the missing group) and a `PLATFORM_MODULES` entry in `make/conf/module-loader-map.conf` |
-| Maven bridge | `m3/paradigm/pom.xml` and the bridge `module-info.java`; reactor entry in `m3/pom.xml` |
+| Maven bridge | `m3/paradigm/pom.xml` and the bridge `module-info.java`; reactor entry in `make/m3/pom.xml` |
 | jdk.m3.collections | Both its module-infos (src and the m3/collections bridge) gain `exports jdk.internal.m3.collections to jdk.m3.paradigm`, so absorbed code can use PlaceholderLogger and landed owners. The custody tip is resealed. |
 
 ## AnOP batch

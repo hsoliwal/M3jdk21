@@ -83,7 +83,7 @@
     },
     {
       "repository": "hsoliwal/M3jdk21",
-      "path": "m3/tooling/module-packs/text-tools/build.py",
+      "path": "make/m3/tooling/module-packs/text-tools/build.py",
       "before_sha256": "ec542aee7f33696fc020a5f90a790e37d074fb372fca9aff2eb93afd90e21af7",
       "after_sha256": "c7f1b1a0d21770c30c3dc33c594f3bf9f55b737c6762fdda92b30ef3f97dcf76",
       "source_kind": "TEXT_NATIVE",
@@ -92,7 +92,7 @@
     },
     {
       "repository": "hsoliwal/M3jdk21",
-      "path": "m3/tooling/module-packs/text-tools/fixtures/src/test/java/M3TextKernelRegression.java",
+      "path": "make/m3/tooling/module-packs/text-tools/fixtures/src/test/java/M3TextKernelRegression.java",
       "before_sha256": "ABSENT",
       "after_sha256": "64e0bf9f28674c20e5e17ecdc21ed041eb74bcdffdf0f237c2f7fec8f2627964",
       "source_kind": "JAVA",
@@ -101,7 +101,7 @@
     },
     {
       "repository": "hsoliwal/M3jdk21",
-      "path": "m3/tooling/module-packs/text-tools/native/m3textops.c",
+      "path": "make/m3/tooling/module-packs/text-tools/native/m3textops.c",
       "before_sha256": "88c7507b116f8a4116c34119caafe26666ce9094b116f19eb01527832cd5e46e",
       "after_sha256": "a89b55724384f0bf8f691a0e018eba5090224baecd25575481fbe581910c8f0a",
       "source_kind": "TEXT_NATIVE",
@@ -110,7 +110,7 @@
     },
     {
       "repository": "hsoliwal/M3jdk21",
-      "path": "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/NativeUtf16Literal.java",
+      "path": "make/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/NativeUtf16Literal.java",
       "before_sha256": "d2981f376d64aba4cb65d90f733065882d374ae15933fc47c484d0daa295a5c3",
       "after_sha256": "0ed9ea45a8cf6613db2836e3bfbdec30f6f26fe26dcb2d5bd4731c56a83a8beb",
       "source_kind": "JAVA",
@@ -189,7 +189,7 @@
       "exit_code": 2,
       "command": [
         "python3",
-        "m3/tooling/name-contract/check.py"
+        "make/m3/tooling/name-contract/check.py"
       ],
       "stdout_sha256": "87f9f7bc4d5902f30db1dfe7723e599fd797e3f801076e0dd8ca7290aeb22285",
       "stdout_path": "synexia-openrewrite-recipes/recipes/m3-jdk-donor-refinement-20261102/qualification/generated/name-preflight.log",
@@ -206,7 +206,7 @@
       "exit_code": 0,
       "command": [
         "python3",
-        "m3/compatibility/check_m3_full_borrow_receiver.py"
+        "make/m3/compatibility/check_m3_full_borrow_receiver.py"
       ],
       "stdout_sha256": "69354cd1ab04227bdf9f5a5a912361e57b90b1d8315146d447827e2636a259e5",
       "stdout_path": "synexia-openrewrite-recipes/recipes/m3-jdk-donor-refinement-20261102/qualification/generated/full-borrow-preflight.log",
@@ -563,7 +563,7 @@
   "family_completion": false,
   "repository_completion": false,
   "naming_disposition": {
-    "canonical_map": "m3/docs/name-mapping.json",
+    "canonical_map": "doc/m3/name-mapping.json",
     "canonical_map_sha256": "406cefb62b79fc677972e9d76a77342c3999b41ef6594f9faf5bd06795235dc3",
     "status": "EXCLUDED_FROM_NEW_BACKEND_ADMISSION; DEFERRED_FAMILY_PROMOTION",
     "reason": "Maintenance of six existing production owners without public class/package/method renaming or a new JDK backend. No exact owner entry exists in the current 71-record map. The existing naming policy remains authoritative; this receipt is not a parallel mapping registry or a waiver.",

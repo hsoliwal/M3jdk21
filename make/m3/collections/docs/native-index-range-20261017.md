@@ -3,7 +3,7 @@
 Product owner: `hsoliwal/M3jdk21`. This refines existing `M3LongIndexProjection` and
 `M3IndexMaskCompactor`; it does not introduce another collection, viewport, row store or
 object-lifetime model. Canonical recipe/test packet is under
-`m3/collections/recipes/native-index-range-20261017` in this same public receiver.
+`make/m3/collections/recipes/native-index-range-20261017` in this same public receiver.
 The original Apache-2.0 Synexia recipe engine is reused as build tooling only.
 
 ## Arrays, indexes, offsets and state masks
@@ -60,8 +60,8 @@ both. The new owning-module JUnit adapter invokes the same generated self-test.
 From repository root:
 
 ```sh
-python3 m3/collections/recipes/native-index-range-20261017/verify.py
-mvn -B -f m3/collections/recipes/native-index-range-20261017/pom.xml clean verify
+python3 make/m3/collections/recipes/native-index-range-20261017/verify.py
+mvn -B -f make/m3/collections/recipes/native-index-range-20261017/pom.xml clean verify
 ```
 
 To update generated sources, edit templates/recipe and reviewed hashes, qualify, then use
@@ -72,5 +72,5 @@ multi-file filesystem transaction. Check the evidence before treating any gate a
 Catalogue search uses the accumulated TSV files, for example:
 
 ```sh
-grep -inE 'native-range|stable-order' m3/collections/algorithm-catalog/*.tsv
+grep -inE 'native-range|stable-order' make/m3/collections/algorithm-catalog/*.tsv
 ```

@@ -7,5 +7,5 @@
   "algorithm_count": 34,
   "benchmark_rows": 140,
   "test_source": "test/jdk/java/util/Sorts/SortsContract.java",
-  "verifier": "m3/verification/sorting/verify.py"
+  "verifier": "make/m3/verification/sorting/verify.py"
 }

@@ -10,7 +10,7 @@ on:
       - 'test/jdk/jdk/m3/collections/M3IndexSortAdaptiveTest.java'
       - 'test/jdk/jdk/m3/collections/M3IndexSortStrictContract.java'
       - 'test/jdk/jdk/m3/collections/M3IndexSortStrictTest.java'
-      - 'm3/collections/qualification/index-sort-adaptive/**'
+      - 'make/m3/collections/qualification/index-sort-adaptive/**'
       - '.github/workflows/m3-index-sort-adaptive-java21.yml'
 
 permissions:
@@ -103,4 +103,4 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
-          bash m3/collections/qualification/index-sort-adaptive/verify-module-java21.sh "$PWD"
+          bash make/m3/collections/qualification/index-sort-adaptive/verify-module-java21.sh "$PWD"

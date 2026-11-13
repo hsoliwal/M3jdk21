@@ -1,6 +1,6 @@
 # M3String Synexia donor lineage
 
-Status: runtime-port authority supplement. The operational mapping remains `m3/docs/name-mapping.json`.
+Status: runtime-port authority supplement. The operational mapping remains `doc/m3/name-mapping.json`.
 
 Synexia is the donor/reference repository. M3JDK deliberately uses M3 target names. This file records
 the source history used to reconstruct semantics so a future sync does not copy one accidental

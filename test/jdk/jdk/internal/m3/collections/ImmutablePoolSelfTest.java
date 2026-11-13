@@ -6,7 +6,7 @@ import java.util.concurrent.Executors;
 import java.util.stream.IntStream;
 
 /** Dependency-free deterministic verification for the complete immutable-pooling stack. */
-//FLLDCIM: RELOCATE - donor blob 77d4ddabf134 at commit 3385d79a2968 (repository, path, URL and digests: m3/collections/recipe/immutable-pools-20261106/PROVENANCE.tsv); recipe m3/collections/recipe/immutable-pools-20261106/relocate.py v2
+//FLLDCIM: RELOCATE - donor blob 77d4ddabf134 at commit 3385d79a2968 (repository, path, URL and digests: make/m3/collections/recipe/immutable-pools-20261106/PROVENANCE.tsv); recipe make/m3/collections/recipe/immutable-pools-20261106/relocate.py v2
 public final class ImmutablePoolSelfTest {
     private static int checks;
 

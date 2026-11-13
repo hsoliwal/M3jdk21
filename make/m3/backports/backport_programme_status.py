@@ -205,7 +205,7 @@ def summary(rows: Sequence[ProgrammeRow]) -> dict[str, object]:
 
 
 def compile_root(root_path: Path) -> list[ProgrammeRow]:
-    backports = root_path / "m3" / "backports"
+    backports = root_path / "make" / "m3" / "backports"
     dag = _load(backports / "backport_recipe_dag.py", "m3_backport_programme_dag")
     waves = _load(backports / "backport_execution_waves.py", "m3_backport_programme_waves")
     atoms = dag.compile_root(root_path)
@@ -239,7 +239,7 @@ def write_json(rows: Sequence[ProgrammeRow], path: Path) -> None:
 
 def _args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[2])
+    parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[3])
     parser.add_argument("--tsv-out", type=Path, required=True)
     parser.add_argument("--json-out", type=Path, required=True)
     return parser.parse_args(argv)

@@ -47,10 +47,10 @@
           <useModulePath>false</useModulePath>
           <failIfNoTests>true</failIfNoTests>
           <systemPropertyVariables>
-            <m3.repo.root>${project.basedir}/../../../../..</m3.repo.root>
+            <m3.repo.root>${project.basedir}/../../../../../..</m3.repo.root>
           </systemPropertyVariables>
           <systemPropertyVariables>
-            <m3.repo.root>${project.basedir}/../../../../..</m3.repo.root>
+            <m3.repo.root>${project.basedir}/../../../../../..</m3.repo.root>
           </systemPropertyVariables>
         </configuration>
       </plugin>

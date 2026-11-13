@@ -18,10 +18,10 @@ import subprocess
 import sys
 
 HERE = Path(__file__).resolve().parent
-PREFIX = "m3/collections/qualification/apache-multivalue-source-custody/"
-HISTORY_PREFIX = "m3/collections/qualification/owned-apache-multivalue-20261024/"
+PREFIX = "make/m3/collections/qualification/apache-multivalue-source-custody/"
+HISTORY_PREFIX = "make/m3/collections/qualification/owned-apache-multivalue-20261024/"
 VERIFIER = PREFIX + "verify_source_binding_successor.py"
-TEMPLATES = "m3/collections/recipe/owned-apache-multivalue-20261024/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/apache-multivalue-v2-to-v3/"
+TEMPLATES = "make/m3/collections/recipe/owned-apache-multivalue-20261024/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/apache-multivalue-v2-to-v3/"
 SEALED = "5498404216725b2a8742599a83f820867a615edf000b4b39d34f845ca4301249"
 RESERVE = 256 * 1024**2
 
@@ -31,7 +31,7 @@ def main() -> None:
     parser.add_argument("--work", type=Path, required=True)
     parser.add_argument("--jar", type=Path, required=True)
     args = parser.parse_args()
-    root = (args.root if args.root is not None else HERE.parents[3]).resolve()
+    root = (args.root if args.root is not None else HERE.parents[4]).resolve()
     work = args.work.resolve()
     if args.work.is_symlink() or work.is_relative_to(root) or work.exists():
         raise ValueError("use a new explicit work directory outside the source checkout")

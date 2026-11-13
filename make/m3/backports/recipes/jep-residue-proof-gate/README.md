@@ -20,9 +20,9 @@ Canonical Apache-2.0 owner: hsoliwal/com.synexia PR #10724, at
 The source-sealed Synexia recipe is
 `M3Jdk21JepResidueProofRepairRecipe`, applied to only:
 
-- `m3/backports/JEP_RESIDUE_QUEUE.tsv` (15-column canonical generated snapshot)
-- `m3/backports/jep_residue.py`
-- `m3/backports/test_jep_residue.py`
+- `make/m3/backports/JEP_RESIDUE_QUEUE.tsv` (15-column canonical generated snapshot)
+- `make/m3/backports/jep_residue.py`
+- `make/m3/backports/test_jep_residue.py`
 
 This JDK receiver uses the existing `M3Jdk21HashPinnedTextSnapshotRecipe`; no new
 general recipe framework is introduced. The mirrored manifest requires exact SHA-256

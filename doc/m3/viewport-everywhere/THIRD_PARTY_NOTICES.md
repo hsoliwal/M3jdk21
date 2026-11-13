@@ -7,7 +7,7 @@
   `m3/viewport-integration-20261016`): the `Virtual*`/`Viewport*` classes listed in `FOSS_REUSE_DECISION.tsv`.
   At source they carry `SPDX-License-Identifier: EPL-2.0`; every commit touching them is by Hitesh Soliwal. Their
   copies in `m3/collections` and `m3/viewport-core` carry Apache-2.0 under the record in `RELICENSE_RECORD.md`.
-  `PackedHeapGrowth` is already `EPL-2.0 OR Apache-2.0` (`m3/docs/m3-item-residency-explicit-relicense.md`).
+  `PackedHeapGrowth` is already `EPL-2.0 OR Apache-2.0` (`doc/m3/m3-item-residency-explicit-relicense.md`).
 - **hsoliwal/com.synexia** `af4494b143270d03cf4d3f33d1e7b4f84325f5dd`:
   `synexia-primitives/src/main/java/com/synexia/primitives/LongOrderStatisticMultiset.java` (Apache-2.0,
   Copyright 2026 Hitesh Soliwal and contributors), the origin of the AVL lanes in `M3OrderStatisticForest`.

@@ -31,12 +31,12 @@ import sys
 sys.dont_write_bytecode = True
 
 REPO = Path(__file__).resolve().parents[4]
-TOOL_REL = "m3/tooling/fdp-delegate/tools/fdp_delegate_overlay.py"
+TOOL_REL = "make/m3/tooling/fdp-delegate/tools/fdp_delegate_overlay.py"
 DONOR_REL = "m3/vendor/third_party/fastdoubleparser-1.0.90"
 PACKAGE_PATH = "ch/randelshofer/fastdoubleparser"
 SOURCE_ROOT = "src/main/java"
 RETAINED_ROOT = "upstream-excluded"
-PACK_REL = "m3/tooling/module-packs/jackson"
+PACK_REL = "make/m3/tooling/module-packs/jackson"
 PACK_DONOR_KEY = "fastdoubleparser-1.0.90"
 PREDECESSOR_REL = "qualification/fdp-delegate/SOURCE_LOCK_PREDECESSOR.json"
 BASE_REVISION = "52fb81c483c74448a12eecb63aa9465e42cdb82c"

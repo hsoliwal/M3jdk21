@@ -22,7 +22,7 @@
     {
       "case": "late-drift-no-partial-write",
       "exit_code": 1,
-      "expected_refusal": "target source drift: m3/tooling/module-packs/text-tools/src/jdk.m3.io/jdk/m3/io/M3File.java"
+      "expected_refusal": "target source drift: make/m3/tooling/module-packs/text-tools/src/jdk.m3.io/jdk/m3/io/M3File.java"
     },
     {
       "case": "non-directory-parent-no-partial-write",
@@ -37,7 +37,7 @@
     {
       "case": "sdk-result-tamper",
       "exit_code": 1,
-      "expected_refusal": "SDK result changed after qualification: m3/tooling/module-packs/text-tools/src/jdk.m3.io/jdk/m3/io/M3File.java"
+      "expected_refusal": "SDK result changed after qualification: make/m3/tooling/module-packs/text-tools/src/jdk.m3.io/jdk/m3/io/M3File.java"
     },
     {
       "case": "symlink-target",

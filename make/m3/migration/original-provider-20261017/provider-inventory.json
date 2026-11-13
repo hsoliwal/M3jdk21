@@ -14,7 +14,7 @@
   },
   "priorClosureAudit": "4437ac925c6aa2990af247c1a65c498fd4c6b798",
   "originalValidator": {
-    "path": "m3/migration/migration.py",
+    "path": "make/m3/migration/migration.py",
     "gitBlob": "d976f4a5d7f8983ade85d5d2cf608e3f6b2885d7",
     "sha256": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e",
     "imports": "from jsonschema import Draft202012Validator",

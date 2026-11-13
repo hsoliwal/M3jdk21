@@ -14,7 +14,7 @@ with a status row, none silent:
   and passes on master (it failed before). No CTest exists to wire into.
 * **R2** #2547's held `M3MaskViewportNative.java` (pr1766): a second `projectFramePage` with master's exact descriptor.
   RETIRED citing #2656; a `RETIRED` row (hold.py's five columns) is appended to
-  `m3/qualification/retained-twins-core-lanes-20261106/HELD.tsv` and the held copy is removed.
+  `make/m3/qualification/retained-twins-core-lanes-20261106/HELD.tsv` and the held copy is removed.
 
 | file | content |
 |---|---|

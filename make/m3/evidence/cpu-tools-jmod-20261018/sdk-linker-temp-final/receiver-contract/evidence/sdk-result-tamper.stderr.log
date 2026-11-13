@@ -9,4 +9,4 @@ Traceback (most recent call last):
                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/dev/shm/m3-cpu-tools-f4826e049195-workspace/com.synexia/synexia-openrewrite-recipes/recipes/m3-cpu-tools-jmod-20261018/target/linker-temp/receiver-proof/isolated-bm772bdd/result-tamper/crate/receive.py", line 139, in qualification
     raise ValueError("SDK result changed after qualification: " + path)
-ValueError: SDK result changed after qualification: m3/tooling/module-packs/cpu-tools/fixtures/test_build.py
+ValueError: SDK result changed after qualification: make/m3/tooling/module-packs/cpu-tools/fixtures/test_build.py

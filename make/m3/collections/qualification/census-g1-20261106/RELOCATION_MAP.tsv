@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-# Relocation map of qualification/census-g1-20261106/relocate.py (recipe RELOCATE_CENSUS v4, derived from m3/collections/recipe/entryless-lane-kernel-20261106/relocate.py v3). M3JDK convergence census group G1 = leaves L069 + L070 (crate m3-deep-filter-list-20261017, census S:/m3-scratch/eb-conv/census pins develop ca1aafc4d94f / master 80743e25b9e6, re-run on the base of this branch).
+# Relocation map of qualification/census-g1-20261106/relocate.py (recipe RELOCATE_CENSUS v4, derived from make/m3/collections/recipe/entryless-lane-kernel-20261106/relocate.py v3). M3JDK convergence census group G1 = leaves L069 + L070 (crate m3-deep-filter-list-20261017, census S:/m3-scratch/eb-conv/census pins develop ca1aafc4d94f / master 80743e25b9e6, re-run on the base of this branch).
 # Donor: hsoliwal/com.synexia develop ca1aafc4d94f9dd1ee288226dcca070cc60991c9, crate synexia-openrewrite-recipes/recipe-crates/m3-deep-filter-list-20261017 (hash-pinned-java postimages; manifest.tsv after_sha256 equals each relocated donor blob sha256 in PROVENANCE.tsv).
 # Row kinds as in recipe v3 (REPO, FILE, PACKAGE, TYPE, EXTERNAL, DROP_LINE, REWRITE, SKIP, NEC) plus WRAP <ProofType> <target> <args>: the module JUnit 5 wrapper template of a standalone proof main (no donor bytes).
 kind	donor	target	note

@@ -7,8 +7,8 @@ on:
     paths:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexedLiveView.java'
       - 'test/jdk/jdk/m3/collections/M3IndexedLiveViewPreparationContract.java'
-      - 'm3/collections/qualification/indexed-live-callback-epoch-20261022/**'
-      - 'm3/collections/algorithm-catalogue/indexed-live-callback-epoch-20261022.tsv'
+      - 'make/m3/collections/qualification/indexed-live-callback-epoch-20261022/**'
+      - 'make/m3/collections/algorithm-catalogue/indexed-live-callback-epoch-20261022.tsv'
       - '.github/workflows/m3-indexed-live-callback-epoch-20261022.yml'
   push:
     branches:

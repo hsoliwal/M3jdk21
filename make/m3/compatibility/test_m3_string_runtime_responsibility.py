@@ -58,7 +58,7 @@ class M3StringRuntimeResponsibilityTest(unittest.TestCase):
                 row["state"],
             )
             self.assertTrue(row["unresolved_gates"])
-            target = ROOT.parent / row["target_path"]
+            target = ROOT.parent.parent / row["target_path"]
             self.assertTrue(target.is_file(), row["target_path"])
             self.assertEqual(row["target_git_blob"], git_blob(target), row["target_path"])
 
@@ -88,7 +88,7 @@ class M3StringRuntimeResponsibilityTest(unittest.TestCase):
             rows = list(csv.DictReader(handle, delimiter="\t"))
         revision = rows[0]["target_revision"]
         result = subprocess.run(
-            ["git", "-C", str(ROOT.parent), "merge-base", "--is-ancestor", revision, "HEAD"],
+            ["git", "-C", str(ROOT.parent.parent), "merge-base", "--is-ancestor", revision, "HEAD"],
             check=False,
         )
         self.assertEqual(0, result.returncode)

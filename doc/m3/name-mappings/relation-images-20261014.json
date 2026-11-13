@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "authority": "m3/docs/name-mapping.json",
+  "authority": "doc/m3/name-mapping.json",
   "recipe": "com.synexia.m3.RelationImagesReceiver",
   "source_recipe_path": "synexia-openrewrite-recipes/recipes/relation-images-20261014",
   "donor_parent": "f5516518ebee79fbef7d789e85cac528d027001b",

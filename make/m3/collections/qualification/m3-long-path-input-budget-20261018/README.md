@@ -17,7 +17,7 @@ The source will reside in M3JDK21 as `com.m3.collections.M3LongIndexPathBudget` 
 The canonical recipe is Maven-built on Java 21, with SHA-256-sealed Java source and test templates. It preflights *all* paths, refuses symlinks, drifted output and altered templates, creates only absent files, and converges to a byte-for-byte fixed point. The generator does not manually edit existing production files. For any later existing-Java transformation use the existing Synexia OpenRewrite engine.
 
 ```sh
-ROOT=m3/collections/qualification/m3-long-path-input-budget-20261018/recipe
+ROOT=make/m3/collections/qualification/m3-long-path-input-budget-20261018/recipe
 mvn -B -ntp -f "$ROOT/pom.xml" package
 java -cp "$ROOT/target/classes" com.synexia.m3.M3LongPathInputBudgetRecipeSelfTest "$ROOT/templates"
 java -cp "$ROOT/target/classes" com.synexia.m3.M3LongPathInputBudgetRecipe --check . "$ROOT/templates"

@@ -27,15 +27,15 @@ final class M3BackportAppliedOwnerCustodyRecipeTest {
     private static final String ROOT = "/jdk/internal/m3/rewrite/backport-applied-owner-custody-20261020/";
     private static final String DESCRIPTOR = "/META-INF/rewrite/backport-applied-owner-custody-20261020.yml";
     private static final Set<String> CHANGE = Set.of(
-            "m3/tooling/backport-contract-current-owner/qualify.py",
-            "m3/tooling/backport-contract-current-owner/README.md",
-            "m3/tooling/backport-contract-current-owner/runtime/INPUTS.json",
-            "m3/tooling/backport-contract-current-owner/runtime/qualify.py",
-            "m3/tooling/backport-contract-current-owner/runtime/README.md",
+            "make/m3/tooling/backport-contract-current-owner/qualify.py",
+            "make/m3/tooling/backport-contract-current-owner/README.md",
+            "make/m3/tooling/backport-contract-current-owner/runtime/INPUTS.json",
+            "make/m3/tooling/backport-contract-current-owner/runtime/qualify.py",
+            "make/m3/tooling/backport-contract-current-owner/runtime/README.md",
             ".github/workflows/m3-backport-contract-current-owner.yml");
     private static final Set<String> KEEP = Set.of(
-            "m3/tooling/backport-contract-current-owner/sdk/pins.json",
-            "m3/tooling/backport-contract-current-owner/sdk/verify.py");
+            "make/m3/tooling/backport-contract-current-owner/sdk/pins.json",
+            "make/m3/tooling/backport-contract-current-owner/sdk/verify.py");
     private static final Set<String> PASSED = new LinkedHashSet<>();
     private static int forwardApplies;
     private static int inverseApplies;

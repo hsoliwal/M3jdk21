@@ -2,7 +2,7 @@ SYNEXIA_FULL_BORROW_RECEIVER_PASS families=32 source=296323958b1019edd59b60b9c05
 src/java.base/share/classes/jdk/internal/mindex/M3RX7.java: OK
 src/java.base/share/classes/jdk/internal/mindex/M3RX7Transitions.java: OK
 test/jdk/java/util/regex/M3RX7Test.java: OK
-m3/docs/name-mapping.d/m3-regex-v7-dfa.json: OK
+doc/m3/name-mapping.d/m3-regex-v7-dfa.json: OK
 M3RX7Test candidate_oracle_checks=2165 PASS
 M3RX7Test candidate_oracle_checks=2165 PASS
 M3RX7_RECEIVER_STANDALONE_PASS; host component only; full source-built M3JDK21 jtreg/HotSpot/JNI/GC NOT_RUN
@@ -11,7 +11,7 @@ src/java.base/share/classes/jdk/internal/mindex/M3RX7Transitions.java: OK
 src/java.base/share/classes/jdk/internal/mindex/M3RX7Image.java: OK
 src/java.base/share/classes/jdk/internal/mindex/M3RX7Codec.java: OK
 test/jdk/java/util/regex/M3RX7CodecTest.java: OK
-m3/docs/name-mapping.d/m3-regex-v7-image-codec.json: OK
+doc/m3/name-mapping.d/m3-regex-v7-image-codec.json: OK
 M3RX7CodecTest checks=97 PASS
 M3RX7CodecTest checks=97 PASS
 M3RX7_IMAGE_CODEC_STANDALONE_PASS; host component only; full source-built M3JDK21 jtreg/HotSpot/JNI/GC NOT_RUN

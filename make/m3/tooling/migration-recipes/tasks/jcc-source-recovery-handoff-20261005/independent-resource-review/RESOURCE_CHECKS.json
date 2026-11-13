@@ -6,28 +6,28 @@
   "plan_seal": "0aa1f4a3e080c36d233066f0a6e1dc8e1047e6f0592dba60829b8cca3177df64",
   "four_operational_targets_still_before": true,
   "generated_outputs": {
-    "m3/docs/jcc-source-handoff.md": {
+    "doc/m3/jcc-source-handoff.md": {
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/after01-jcc-source-handoff.md.txt",
       "bytes": 29680,
       "sha256": "d5e18258027f457a1fcdc45ff30b4e2e7a0723825ea95b651933af23f27fd28d",
       "git_blob_sha1": "9d15a9ebf080117a70e4e17cc4c0793d3971d2f7",
       "mode": "100644"
     },
-    "m3/docs/name-mapping.json": {
+    "doc/m3/name-mapping.json": {
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/after00-name-mapping.json.txt",
       "bytes": 251524,
       "sha256": "abfc59de62d46f6442b95717ac367461ab057cd74ed9dfffc6515d7fb0a1574c",
       "git_blob_sha1": "f350c7c79e265c788d9e3278eb0103733b301327",
       "mode": "100644"
     },
-    "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv": {
+    "make/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv": {
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/after03-root-coverage-obligations.tsv.txt",
       "bytes": 107597,
       "sha256": "1c4eedbf3f155bac469693da312c577d26999e7776ca1f85870f6cce125f1e35",
       "git_blob_sha1": "d906315e566c4434f2637ffebb58e36e4914cc37",
       "mode": "100644"
     },
-    "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json": {
+    "make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json": {
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/after02-source-destination-bindings.json.txt",
       "bytes": 167811,
       "sha256": "59b1491a232e3eabfd0530cbf47b01265603e6f493e382aa3c394c629b0516b6",

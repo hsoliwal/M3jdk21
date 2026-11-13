@@ -1,6 +1,6 @@
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-"""Whole-tree service-descriptor check: m3/tooling/jdk-naming/jdk_naming.py plan_tree restricted to every
+"""Whole-tree service-descriptor check: make/m3/tooling/jdk-naming/jdk_naming.py plan_tree restricted to every
 META-INF/services/ directory of REV, i.e. the recipe's tree plan projected onto the java.util.ServiceLoader
 descriptors (a few hundred small blobs, so it also runs in a blobless clone, where an unrestricted tree plan would
 need every blob). A descriptor that names a provider under a pre-rename package shows up as a REWRITE row; a clean
@@ -12,7 +12,7 @@ import sys
 from pathlib import Path
 
 root, rev, out = Path(sys.argv[1]), sys.argv[2], Path(sys.argv[3])
-spec = importlib.util.spec_from_file_location("jdk_naming", root / "m3/tooling/jdk-naming/jdk_naming.py")
+spec = importlib.util.spec_from_file_location("jdk_naming", root / "make/m3/tooling/jdk-naming/jdk_naming.py")
 jn = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(jn)
 paths = subprocess.run(["git", "-C", str(root), "ls-tree", "-r", "--name-only", rev], check=True,

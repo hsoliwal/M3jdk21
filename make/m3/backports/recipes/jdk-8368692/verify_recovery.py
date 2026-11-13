@@ -13,8 +13,8 @@ def rows(path: Path):
         return list(csv.DictReader(stream, delimiter="\t"))
 
 def main() -> int:
-    root = Path(__file__).resolve().parents[4]
-    adaptation = rows(root / "m3/backports/recipes/jdk-8368692/adaptation.tsv")
+    root = Path(__file__).resolve().parents[5]
+    adaptation = rows(root / "make/m3/backports/recipes/jdk-8368692/adaptation.tsv")
     if len(adaptation) != 3:
         raise SystemExit(f"expected 3 adaptation rows, found {len(adaptation)}")
     for row in adaptation:
@@ -26,7 +26,7 @@ def main() -> int:
         actual = hashlib.sha256(path.read_bytes()).hexdigest()
         if actual != row["target_sha256"]:
             raise SystemExit(f"target drift: {row['target_path']}: {actual}")
-    seeds = rows(root / "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv")
+    seeds = rows(root / "make/m3/backports/UPSTREAM_CHANGE_SEEDS.tsv")
     seed = next((r for r in seeds if r["jbs"] == "JDK-8368692"), None)
     if seed is None or seed["upstream_commit"] != UPSTREAM:
         raise SystemExit("JDK-8368692 seed lineage missing")

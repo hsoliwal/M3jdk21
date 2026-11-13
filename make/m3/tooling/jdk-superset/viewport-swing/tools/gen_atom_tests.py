@@ -8,7 +8,7 @@ parameter types), each calling the pattern harness of the file's family with the
 pattern templates (templates/<pkg>/*.java, templates/common/*.java), copied next to the tests with the Synexia header.
 Gates (generation fails): every atom has exactly one dynamic test; every atom name has a case in its family's harness
 dispatch (static check of the template text); no test class lacks atoms; no written file has a numeric literal outside a
-named constant (m3/tooling/atom-tests/literal_census.py --strict). The oneTestPerAtom check of each class is tagged
+named constant (make/m3/tooling/atom-tests/literal_census.py --strict). The oneTestPerAtom check of each class is tagged
 generator-consistency: it tests the generator, and reports count it apart from the atom tests.
 Writes ATOM_SPEC.tsv (atom -> test, probe)."""
 import collections
@@ -18,9 +18,9 @@ import re
 import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "atom-tests"))
-import literal_census  # noqa: E402  (m3/tooling/atom-tests/literal_census.py)
+import literal_census  # noqa: E402  (make/m3/tooling/atom-tests/literal_census.py)
 
-GENERATOR = "m3/tooling/jdk-superset/viewport-swing/tools/gen_atom_tests.py"
+GENERATOR = "make/m3/tooling/jdk-superset/viewport-swing/tools/gen_atom_tests.py"
 GENERATOR_CHECK_TAG = "generator-consistency"
 HEADER = ("/*\n * SPDX-License-Identifier: Apache-2.0 OR EPL-2.0\n"
           " * Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others\n */\n"

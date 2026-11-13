@@ -256,7 +256,7 @@
   "goal": "ACTIVE",
   "delivered_provenance": {
     "reuse_ledger_sha256": "c54755c056bc6f59eceee1f7d5a18ab7693239d6e8eed1c6cb19aec904cf3496",
-    "notice_path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-item-reference-safety-v2/NOTICE",
+    "notice_path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-item-reference-safety-v2/NOTICE",
     "notice_sha256": "39f882d11742e2d2712290e8376e10ca192fe035d0baa9b0e90d83d273e4fdb1"
   }
 }

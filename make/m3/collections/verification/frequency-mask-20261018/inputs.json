@@ -20,15 +20,15 @@
     "sha256": "294edbd47de881eed1987c2d9603a9cd35518d14746879c927d2ae9879d7b874"
   },
   {
-    "path": "m3/collections/verification/frequency-mask-20261018/M3FrequencyMaskChecks.java",
+    "path": "make/m3/collections/verification/frequency-mask-20261018/M3FrequencyMaskChecks.java",
     "sha256": "83646955cd51020bdeb8cc93318aebd3992ec5b216f4d51325b2737700bd565a"
   },
   {
-    "path": "m3/collections/verification/frequency-mask-20261018/donor/jdk/internal/m3/primitives/DenseHash.java",
+    "path": "make/m3/collections/verification/frequency-mask-20261018/donor/jdk/internal/m3/primitives/DenseHash.java",
     "sha256": "aa93fe9ffdbce99dc341b3341d45e19e747f914b1330eacbd97d8df93ba7a2c7"
   },
   {
-    "path": "m3/collections/verification/frequency-mask-20261018/donor/jdk/internal/m3/primitives/IntIntHashMap.java",
+    "path": "make/m3/collections/verification/frequency-mask-20261018/donor/jdk/internal/m3/primitives/IntIntHashMap.java",
     "sha256": "5e417a279c0b56a0eb0ab430d933e11cc6326d7a4fc2104a241b2ed9ddbc5354"
   }
 ]

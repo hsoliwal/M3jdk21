@@ -12,7 +12,7 @@ import java.util.Objects;
  * Candidate for a future jdk.m3.accelerator.pmem product JMOD; this vendor-scoped
  * source is not a GPU, a full LLM runtime, or a proof of Optane residency.
  */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/56cbdc6312594f06e21ef56f0ce33b605383270b/synexia-m3-jmods/accelerator-pmem/src/main/java/com/synexia/m3/accelerator/pmem/PmemAccelerator.java blob fd3669994196; recipe m3/optane/recipe/pmem-accelerator-20261107/relocate.py v4
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/56cbdc6312594f06e21ef56f0ce33b605383270b/synexia-m3-jmods/accelerator-pmem/src/main/java/com/synexia/m3/accelerator/pmem/PmemAccelerator.java blob fd3669994196; recipe make/m3/optane/recipe/pmem-accelerator-20261107/relocate.py v4
 public final class PmemAccelerator {
     static { System.loadLibrary("m3pmemaccel"); }
 

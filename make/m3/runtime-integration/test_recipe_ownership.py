@@ -16,7 +16,7 @@ import unittest
 
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[1]
+ROOT = HERE.parents[2]
 SPEC = importlib.util.spec_from_file_location("recipe_ownership", HERE / "verify-recipe-ownership.py")
 assert SPEC and SPEC.loader
 OWNERSHIP = importlib.util.module_from_spec(SPEC)
@@ -26,7 +26,7 @@ SPEC.loader.exec_module(OWNERSHIP)
 class RecipeOwnershipTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.original = (ROOT / "m3/docs/m3-recipe-ownership-classification.tsv").read_text()
+        cls.original = (ROOT / "doc/m3/m3-recipe-ownership-classification.tsv").read_text()
         reader = csv.DictReader(cls.original.splitlines(), delimiter="\t")
         cls.columns = tuple(reader.fieldnames or ())
         cls.rows = list(reader)
@@ -37,7 +37,7 @@ class RecipeOwnershipTest(unittest.TestCase):
             and (ROOT / row["local_path"]).is_file()
         )
         cls.second_path = (
-            "m3/tooling/migration-recipes/src/main/java/"
+            "make/m3/tooling/migration-recipes/src/main/java/"
             "jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java"
         )
         cls.second_bytes = (ROOT / cls.second_path).read_bytes()
@@ -47,7 +47,7 @@ class RecipeOwnershipTest(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
-        self.ledger = self.root / "m3/docs/m3-recipe-ownership-classification.tsv"
+        self.ledger = self.root / "doc/m3/m3-recipe-ownership-classification.tsv"
         self.ledger.parent.mkdir(parents=True)
         (self.root / OWNERSHIP.SOURCE_PATH).mkdir(parents=True)
         self.ledger.write_text(self.original, encoding="utf-8")

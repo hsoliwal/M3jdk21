@@ -32,7 +32,7 @@ final class M3JdkExecutionFollowthroughRecipeTest {
             "/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/" + TEXT_CRATE + "/";
     private static final String JAVA_ROOT =
             "/jdk/m3/rewrite/backport/jdk21-hash-pinned/" + JAVA_CRATE + "/";
-    private static final String BUILDER = "m3/tooling/module-packs/build_pack.py";
+    private static final String BUILDER = "make/m3/tooling/module-packs/build_pack.py";
     private static final String PROBE =
             "test/jdk/sun/security/util/Password/M3PasswordPolicyCases.java";
     private static final String NAME = "jdk.m3.rewrite.packs.JdkExecutionFollowthrough";
@@ -81,7 +81,7 @@ final class M3JdkExecutionFollowthroughRecipeTest {
         duplicates.add(text(BUILDER, duplicates.getFirst().printAll()));
         reject(new M3Jdk21HashPinnedTextSnapshotRecipe(TEXT_CRATE), duplicates);
         List<SourceFile> occupied = new ArrayList<>(baseline());
-        occupied.add(text("m3/tooling/module-packs/developer_tools.py", "occupied\n"));
+        occupied.add(text("make/m3/tooling/module-packs/developer_tools.py", "occupied\n"));
         reject(new M3Jdk21HashPinnedTextSnapshotRecipe(TEXT_CRATE), occupied);
     }
 

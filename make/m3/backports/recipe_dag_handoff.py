@@ -152,7 +152,7 @@ def validate(rows: Iterable[Mapping[str, str]]) -> list[dict[str, str]]:
         or nebula["commit"] != NEBULA_PROOF_COMMIT
         or nebula["contentHashAlgorithm"] != "GIT-BLOB-SHA1"
         or nebula["contentHash"] != NEBULA_PROOF_BLOB
-        or nebula["path"] != "m3/docs/FINAL_PROVEN_TRANSFER_20261006.md"
+        or nebula["path"] != "doc/m3/FINAL_PROVEN_TRANSFER_20261006.md"
         or nebula["delivery"] != "REFERENCE_ONLY"
         or nebula["applicationPolicy"] != "PROVING_REFERENCE_ONLY"
     ):

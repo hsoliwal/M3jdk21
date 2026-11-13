@@ -1,7 +1,7 @@
 # Whole-JDK execution packets, mapping, evidence and rollout
 
 Status: **implementation handoff; proposed work and gates are not executed results**.
-This document completes the [architecture](whole-jdk-architecture.md), [source-root inventory](whole-jdk-inventory.md), [collections](whole-jdk-collections.md), and [text operations](whole-jdk-text-operations.md) specifications. The existing [mapping lifecycle](migration-mapping-lifecycle.md), [worked port decisions](migration-worked-port-decisions.md), [acceptance matrix](migration-acceptance-matrix.md), and [resume guide](../migration/docs/RESUME.md) remain authoritative within their stated scopes.
+This document completes the [architecture](whole-jdk-architecture.md), [source-root inventory](whole-jdk-inventory.md), [collections](whole-jdk-collections.md), and [text operations](whole-jdk-text-operations.md) specifications. The existing [mapping lifecycle](migration-mapping-lifecycle.md), [worked port decisions](migration-worked-port-decisions.md), [acceptance matrix](migration-acceptance-matrix.md), and [resume guide](../../make/m3/migration/docs/RESUME.md) remain authoritative within their stated scopes.
 
 ## 1. Dependency-aware passes and present status
 
@@ -83,9 +83,9 @@ Do not invent an enabled runtime flag in documentation. A future per-subsystem o
 
 ### Reconcile, do not replace
 
-The retained `m3/docs/name-mapping.json` contains `migration.records`, including actual retained migration IDs. Its operational schema and existing validators remain the target authority. Preserve the early top-level mappings as historical directions rather than overwriting stable records. The existing explanatory `migration-mapping.schema.json` and example are proposals, not the deployed registry.
+The retained `doc/m3/name-mapping.json` contains `migration.records`, including actual retained migration IDs. Its operational schema and existing validators remain the target authority. Preserve the early top-level mappings as historical directions rather than overwriting stable records. The existing explanatory `migration-mapping.schema.json` and example are proposals, not the deployed registry.
 
-The separate [#12 manifest at d543255294ae85e4c8015812a3c8a97aaf498354](https://github.com/hsoliwal/M3jdk21/blob/d543255294ae85e4c8015812a3c8a97aaf498354/m3/migration/manifest.json) belongs to its feature-stack lineage. Its absence at the inspected master path does not mean other `m3/migration` tooling is absent. The private [source inventory #7696](https://github.com/hsoliwal/com.synexia/pull/7696) has its own source-obligation schema and producer/input pins; those rows do not admit target implementations or authorize publication.
+The separate [#12 manifest at d543255294ae85e4c8015812a3c8a97aaf498354](https://github.com/hsoliwal/M3jdk21/blob/d543255294ae85e4c8015812a3c8a97aaf498354/m3/migration/manifest.json) belongs to its feature-stack lineage. Its absence at the inspected master path does not mean other `make/m3/migration` tooling is absent. The private [source inventory #7696](https://github.com/hsoliwal/com.synexia/pull/7696) has its own source-obligation schema and producer/input pins; those rows do not admit target implementations or authorize publication.
 
 Reconcile these through an explicit reviewed crosswalk into the retained target authority. Preserve source-obligation identities, capability identities and legacy IDs as distinct roles. A source path hash can identify an initial inventory item without being the final stable semantic capability identity. A rename/split/consolidation needs lineage, not a freshly disconnected registry.
 

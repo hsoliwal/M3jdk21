@@ -6,7 +6,7 @@ on:
     paths:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredViews.java'
       - 'test/jdk/jdk/m3/collections/M3FilteredNavigableComparator*.java'
-      - 'm3/collections/qualification/filtered-nav-comparator-20261023/**'
+      - 'make/m3/collections/qualification/filtered-nav-comparator-20261023/**'
       - '.github/workflows/m3-filtered-nav-comparator-20261023.yml'
   workflow_dispatch:
 

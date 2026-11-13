@@ -10,7 +10,7 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3BitLane28.java'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SlotAllocator28.java'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3Residency.java'
-      - 'm3/tooling/object-residency/**'
+      - 'make/m3/tooling/object-residency/**'
       - '.github/workflows/m3-object-residency-pressure.yml'
   push:
     branches: [master]
@@ -21,7 +21,7 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3BitLane28.java'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SlotAllocator28.java'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3Residency.java'
-      - 'm3/tooling/object-residency/**'
+      - 'make/m3/tooling/object-residency/**'
       - '.github/workflows/m3-object-residency-pressure.yml'
   workflow_dispatch:
 
@@ -56,7 +56,7 @@ jobs:
             src/jdk.m3.collections/share/classes/jdk/m3/collections/M3BitLane28.java \
             src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SlotAllocator28.java \
             src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectResidency.java \
-            m3/tooling/object-residency/M3ResidencyPressureProbe.java
+            make/m3/tooling/object-residency/M3ResidencyPressureProbe.java
       - name: Execute real small-Xmx LRU/recreation proof
         shell: bash
         run: |

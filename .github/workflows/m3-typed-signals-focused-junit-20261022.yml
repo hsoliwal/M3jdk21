@@ -3,7 +3,7 @@ name: M3 typed signals focused public JUnit Java21 proof
 on:
   pull_request:
     paths:
-      - 'm3/collections/qualification/typed-signals-junit-20261022/**'
+      - 'make/m3/collections/qualification/typed-signals-junit-20261022/**'
       - '.github/workflows/m3-typed-signals-focused-junit-20261022.yml'
   workflow_dispatch:
 permissions:
@@ -32,5 +32,5 @@ jobs:
       - name: Compile actual typed columns, image/CSR and TopK; run public JUnit suite
         run: >
           mvn -B -ntp
-          -f m3/collections/qualification/typed-signals-junit-20261022/pom.xml
+          -f make/m3/collections/qualification/typed-signals-junit-20261022/pom.xml
           test

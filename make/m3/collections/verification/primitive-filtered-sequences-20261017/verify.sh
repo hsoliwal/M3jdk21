@@ -2,7 +2,7 @@
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
 set -euo pipefail
-cd "$(dirname "$0")/../../../.."
+cd "$(dirname "$0")/../../../../.."
 work="$(mktemp -d)"
 trap 'rm -rf "$work"' EXIT
 classes="$work/classes"

@@ -36,7 +36,7 @@ The renderer writes exactly four repository artifacts and its own receipt:
 | Artifact | Repository destination |
 | --- | --- |
 | Rendered JUnit test | `m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JccMergeMappingRecoveryTest.java` |
-| Focused POM | `m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification/pom.xml` |
+| Focused POM | `make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification/pom.xml` |
 | Named recipe | `m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jcc-merge-mapping-recovery.yml` |
 | Test input summary | `m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/backport/jcc-merge-recovery-20261006-mapping/publication-input-summary.json` |
 
@@ -66,7 +66,7 @@ The POM also includes exactly two existing historical recipe resources:
 Use a fresh execution workspace for each harness revision. From its repository root:
 
 ```sh
-mvn -f m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification/pom.xml \
+mvn -f make/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification/pom.xml \
   -Dm3.mapping.materialized=/absolute/path/to/new-actual-result-directory test
 ```
 

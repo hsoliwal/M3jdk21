@@ -7,8 +7,8 @@ on:
     paths:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongCompositeViews.java'
       - 'test/jdk/jdk/m3/collections/M3LongSortedAlgebra*.java'
-      - 'm3/collections/JDK_FAMILY_MAP.tsv'
-      - 'm3/collections/qualification/*sorted*algebra*'
+      - 'make/m3/collections/JDK_FAMILY_MAP.tsv'
+      - 'make/m3/collections/qualification/*sorted*algebra*'
       - '.github/workflows/m3-sorted-algebra-master-receive-20261017.yml'
   workflow_dispatch:
 
@@ -37,7 +37,7 @@ jobs:
           java-version: '21'
       - name: Fail closed on any unsealed generated Java or missing source
         shell: bash
-        run: python3 m3/collections/qualification/verify_sorted_set_algebra.py
+        run: python3 make/m3/collections/qualification/verify_sorted_set_algebra.py
       - name: Compile complete current primitive collection owners under Java21
         shell: bash
         run: |

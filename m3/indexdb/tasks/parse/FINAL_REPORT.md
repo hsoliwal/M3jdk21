@@ -82,7 +82,7 @@ was verified in this packet. ACTION_QUEUE.tsv preserves their existing owners.
 The exact-head workflow supplies the authoritative future gates:
 ```
 mvn -B -ntp -f m3/indexdb/pom.xml clean verify
-mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=DbRecipeTest test
+mvn -B -ntp -f make/m3/tooling/migration-recipes/pom.xml -Dtest=DbRecipeTest test
 ```
 The second command is focused recipe JUnit, not whole-reactor coverage acceptance.
 

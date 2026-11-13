@@ -13,7 +13,7 @@ No row needs an edit in this repository, so this PR changes no source.
 | decision | rows | edit |
 |---|---|---|
 | ALREADY | P2-016 | none: after the JDK naming rename, the donor is byte-identical to `m3/core/test/FoundationTest.java` (blob `6074d4cc060c`) |
-| SUPERSEDED | P2-067, P2-068 | none: `6311c7c8bb3` replaced the crate's transcript-hash contract (also recorded in `m3/collections/qualification/census2-c2-20261106`) |
+| SUPERSEDED | P2-067, P2-068 | none: `6311c7c8bb3` replaced the crate's transcript-hash contract (also recorded in `make/m3/collections/qualification/census2-c2-20261106`) |
 | HANDOFF | P2-104 | lane com-synexia-4d: the owner would be java.base `jdk.internal.m3.classictools` |
 | HELD | P2-113 | needs a remote-display owner (Sequoyah WRAP row, not landed) and the `synexia_recipe_native` JNI library |
 | HELD | P2-118 | needs `com.synexia.visual.PixelFrame`, which has no owner on master. NEC with `M3ImageFilter.makeDilate`/`makeErode` |
@@ -27,7 +27,7 @@ No row needs an edit in this repository, so this PR changes no source.
 `verify.py` re-checks the probes:
 
 ```text
-python -I m3/qualification/census2-small-20261107a/verify.py [--rev REV]
+python -I make/m3/qualification/census2-small-20261107a/verify.py [--rev REV]
 ```
 
 On `2274e18709b8` the result is probes=27, failures=0. A FAIL means master moved under a decision, and that row needs a

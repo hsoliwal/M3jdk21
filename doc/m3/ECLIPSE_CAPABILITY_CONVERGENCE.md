@@ -5,7 +5,7 @@ Status: design and qualification backlog; no implementation or performance claim
 
 ## Authority and design invariants
 
-M3JDK21 is the JDK-derived product, **not** an M3 sidecar attached to stock Java. Existing JDK API names and Eclipse extension contracts stay intact unless explicitly versioned. Synexia is the recipe/donor convergence workspace, not a runtime dependency. Reuse existing M3 owners and `m3/docs/name-mapping.json`; any new public or internal name requires a reviewed mapping record.
+M3JDK21 is the JDK-derived product, **not** an M3 sidecar attached to stock Java. Existing JDK API names and Eclipse extension contracts stay intact unless explicitly versioned. Synexia is the recipe/donor convergence workspace, not a runtime dependency. Reuse existing M3 owners and `doc/m3/name-mapping.json`; any new public or internal name requires a reviewed mapping record.
 
 All production transformations must be produced by tested Maven/OpenRewrite recipes, then verified against the unmodified contracts. Do not manually patch transformed production outputs. Preserve donor attribution and license records. No performance or compatibility claim without reproducible evidence. Do not rebase the append-only Synexia develop evidence branch.
 

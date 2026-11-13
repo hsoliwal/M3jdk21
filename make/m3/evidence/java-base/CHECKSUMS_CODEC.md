@@ -9,7 +9,7 @@ the relocated module `jdk.m3.codec` (`third_party-m3/relocated/commons-codec-1.2
 
 ## Change
 
-- Recipe `m3/tooling/jdk-superset/hashing/tools/checksums_to_jdk.py` (re-runs to a fixed point; `--check` writes
+- Recipe `make/m3/tooling/jdk-superset/hashing/tools/checksums_to_jdk.py` (re-runs to a fixed point; `--check` writes
   nothing). Both classes keep their public members (constructor, `getValue`, `reset`, both `update` methods, the
   `final` modifiers) and delegate to a `java.util.zip.CRC32` or `CRC32C` field. The lookup tables go, and the class
   Javadoc gains one paragraph naming java.base.

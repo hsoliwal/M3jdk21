@@ -14,10 +14,10 @@ from pathlib import Path
 import re
 import subprocess
 
-ROOT = Path(__file__).resolve().parents[4]
-OLD_DIR = (ROOT / "m3/tooling/migration-recipes/src/main/resources"
+ROOT = Path(__file__).resolve().parents[5]
+OLD_DIR = (ROOT / "make/m3/tooling/migration-recipes/src/main/resources"
            "/jdk/internal/m3/rewrite/hash-pinned-java/m3-index-path-rank-20261017")
-NEW_DIR = ROOT / "m3/collections/qualification/indexpath-bulk-20261021"
+NEW_DIR = ROOT / "make/m3/collections/qualification/indexpath-bulk-20261021"
 OLD_NAMES = {
     "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexPathRank.java",
     "test/jdk/jdk/m3/collections/M3IndexPathRankNativeSelfTest.java",

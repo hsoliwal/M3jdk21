@@ -96,7 +96,7 @@
       }
     },
     {
-      "repository_path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java",
+      "repository_path": "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java",
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate-v02/execution/materialized-01/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java",
       "bytes": 5380,
       "sha256": "5b3bab6188d1f33360f6d5042dac7b0c0ae599ff36c621c6c7e3f0a4debd8933",
@@ -110,7 +110,7 @@
       }
     },
     {
-      "repository_path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java",
+      "repository_path": "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java",
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate-v02/execution/materialized-01/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java",
       "bytes": 4975,
       "sha256": "83d970effb393f67462e5cb269118e6a390d82f74f70eb16905fd4ba948a4416",

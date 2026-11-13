@@ -2,7 +2,7 @@
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
 # All gates of recipe durable-extent-store-20261107 in one run, from the repository root of a checkout that has
-# m3/file and m3/tooling/jdk-naming (a sparse worktree is enough):
+# m3/file and make/m3/tooling/jdk-naming (a sparse worktree is enough):
 #   recipe   relocate.py --check (changed=0) and apply.py --check (changed=0)
 #   naming   jdk_naming.py plan --only m3/file/ (moves=0 rewrites=0 refusals=0)
 #   package  mvn package of m3/file with its own pom (-Xlint:all,-module -Werror, surefire); the run passes when the
@@ -29,7 +29,7 @@ r1=$?; tail -1 "$SCRATCH/relocate.log"
 python -I "$RECIPE_DIR/apply.py" --check > "$SCRATCH/apply.log" 2>&1
 r2=$?; tail -1 "$SCRATCH/apply.log"
 gate recipe "$([ $r1 -eq 0 ] && [ $r2 -eq 0 ] && echo PASS || echo FAIL)"
-python -I m3/tooling/jdk-naming/jdk_naming.py plan --root . --only m3/file/ > "$SCRATCH/naming.log" 2>&1
+python -I make/m3/tooling/jdk-naming/jdk_naming.py plan --root . --only m3/file/ > "$SCRATCH/naming.log" 2>&1
 tail -1 "$SCRATCH/naming.log"
 gate naming "$(grep -q 'moves=0 rewrites=0 refusals=0' "$SCRATCH/naming.log" && echo PASS || echo FAIL)"
 MAVEN_OPTS="$TMPDIR_ARG" mvn -B -ntp "${REPO_ARGS[@]}" "-DargLine=$TMPDIR_ARG" -Dmaven.test.failure.ignore=true \

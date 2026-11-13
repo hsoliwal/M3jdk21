@@ -36,10 +36,10 @@ UNQUALIFIED_CLAIMS = {
 }
 REQUIRED_FILES = [
     "M3-SYNEXIA-NOTICE.md", "M3-SYNEXIA-RIGHTS.md", "M3-SYNEXIA-AUTHORS.md",
-    "LICENSE-M3-APACHE-2.0.txt", "m3/README.md",
-    "m3/release/release-contract.json", "m3/release/README.md",
-    "m3/release/BENCHMARK_AND_COMPATIBILITY_SPEC.md",
-    "m3/docs/name-mapping.json", "m3/tooling/name-contract/name-plan.json",
+    "LICENSE-M3-APACHE-2.0.txt", "make/m3/README.md",
+    "make/m3/release/release-contract.json", "make/m3/release/README.md",
+    "make/m3/release/BENCHMARK_AND_COMPATIBILITY_SPEC.md",
+    "doc/m3/name-mapping.json", "make/m3/tooling/name-contract/name-plan.json",
     "make/conf/version-numbers.conf",
 ]
 REQUIRED_GATES = frozenset({
@@ -51,24 +51,24 @@ REQUIRED_GATES = frozenset({
 })
 RECIPE_ROOTS = (
     ".m3/openrewrite-recipes", ".m3/task-crates", "m3/recipes",
-    "m3/tooling/migration-recipes", "m3/tooling/m3jdk-a3-recipes",
+    "make/m3/tooling/migration-recipes", "make/m3/tooling/m3jdk-a3-recipes",
     "m3/m3-import/pure-int-recipe-custody",
-    "m3/runtime-integration/recipe",
-    "m3/runtime-integration/char-array-copy/recipe",
-    "m3/runtime-integration/utf8-cursor-20261014/recipe/canonical",
+    "make/m3/runtime-integration/recipe",
+    "make/m3/runtime-integration/char-array-copy/recipe",
+    "make/m3/runtime-integration/utf8-cursor-20261014/recipe/canonical",
 )
 # Custody of every executable candidate under RECIPE_ROOTS is decided in one committed ledger
 # (ABSORB | MOVE | RETIRE). MOVE/RETIRE rows must be applied (blob at destination, source gone);
 # ABSORB keeps a blob-pinned file in place or folds it into an owner outside the legacy roots.
-CUSTODY_LEDGER = "m3/release/LEGACY_RECIPE_CUSTODY_LEDGER.tsv"
+CUSTODY_LEDGER = "make/m3/release/LEGACY_RECIPE_CUSTODY_LEDGER.tsv"
 CUSTODY_COLUMNS = ("path", "blob", "mode", "decision", "destination", "reason", "callers")
 CUSTODY_DECISIONS = frozenset({"ABSORB", "MOVE", "RETIRE"})
 RETIRE_ARCHIVE = "m3/qualification/master-landing-20261028/retained-variants/"
 RETIRE_ENTRY = re.compile(r"pr[1-9][0-9]*/(.+)\Z")
-NAME_MAP = "m3/docs/name-mapping.json"
-NAME_PLAN = "m3/tooling/name-contract/name-plan.json"
+NAME_MAP = "doc/m3/name-mapping.json"
+NAME_PLAN = "make/m3/tooling/name-contract/name-plan.json"
 EVIDENCE_SCHEMA = "M3_RELEASE_EVIDENCE_V1"
-DEFAULT_EVIDENCE = "m3/release/queue/current/evidence.json"
+DEFAULT_EVIDENCE = "make/m3/release/queue/current/evidence.json"
 # Product gates are independently accepted here. The Maven product build runs in
 # M3jdk21; its canonical recipe origin is passive Synexia provenance, never an
 # instruction to fetch or execute a transformation in the product repository.
@@ -76,14 +76,14 @@ PRODUCT_REPOSITORY = "hsoliwal/M3jdk21"
 CANONICAL_RECIPE_REPOSITORY = "hsoliwal/com.synexia"
 MAVEN_GATE = "M3_MAVEN_CONTROL_REACTOR"
 MAVEN_REACTOR_SCOPE = "FULL_DEFAULT_REACTOR"
-MAVEN_ORIGIN_PATH = "m3/release/maven-control-origin.json"
+MAVEN_ORIGIN_PATH = "make/m3/release/maven-control-origin.json"
 MAVEN_RAW_ARTIFACTS = frozenset({"canonical-origin.json", "reactor-inputs.json",
                                  "producer-result.json", "maven.log", "toolchain.log"})
 XML_NS = {"m": "http://maven.apache.org/POM/4.0.0"}
 MAX_POMS = 4096
 MAX_POM_BYTES = 4 * 1024 * 1024
 MAVEN_CONTROL_ARGS = (
-    "-B", "-ntp", "-o", "-f", "m3/pom.xml",
+    "-B", "-ntp", "-o", "-f", "make/m3/pom.xml",
     "-Dmaven.test.skip=false", "-DskipTests=false", "-DskipITs=false",
     "-Dmaven.build.cache.enabled=false", "clean", "verify",
 )
@@ -222,7 +222,7 @@ def maven_reactor_inputs(root: Path, tracked: set[str]) -> list[dict]:
     and dependency checks. It does not activate optional profiles or replace Maven
     model construction. Both producer and consumer use this exact input seal.
     """
-    pending, seen, records, pom_texts = ["m3/pom.xml"], set(), [], {}
+    pending, seen, records, pom_texts = ["make/m3/pom.xml"], set(), [], {}
     while pending:
         relative = pending.pop()
         if relative in seen:
@@ -262,7 +262,7 @@ def maven_reactor_inputs(root: Path, tracked: set[str]) -> list[dict]:
                 if name.startswith("skip") and value not in ("", "false"):
                     raise ValueError("unqualified skip configuration in product reactor: " + relative)
         records.append({"path": relative, "sha256": sha256(pom)})
-        # .// includes profile modules deliberately: inspecting them does not run them.
+        # ././ includes profile modules deliberately: inspecting them does not run them.
         children = [item.text or "" for item in model.findall(".//m:modules/m:module", XML_NS)]
         parent = model.find("m:parent", XML_NS)
         if parent is not None:
@@ -636,7 +636,7 @@ def validate(root: Path, release_mode: bool = False,
         else:
             block("file:" + rel, "required release-boundary file is missing")
 
-    contract = read_object(root / "m3/release/release-contract.json", "contract.read")
+    contract = read_object(root / "make/m3/release/release-contract.json", "contract.read")
     if contract.get("schema") == "M3_RELEASE_CONTRACT_V1":
         passed("contract.schema")
     else:
@@ -715,7 +715,7 @@ def validate(root: Path, release_mode: bool = False,
         passed("rights.reservation")
     else:
         block("rights.reservation", "first-party rights reservation missing")
-    m3_readme = read_text("m3/README.md")
+    m3_readme = read_text("make/m3/README.md")
     if "does **not** modify `java.lang.String`" in m3_readme:
         passed("claims.current_string_boundary")
     else:
@@ -913,7 +913,7 @@ def validate(root: Path, release_mode: bool = False,
                 if (tuple(command[1:]) != MAVEN_CONTROL_ARGS
                         or not isinstance(reactor, dict)
                         or reactor.get("scope") != MAVEN_REACTOR_SCOPE
-                        or reactor.get("pom") != "m3/pom.xml"
+                        or reactor.get("pom") != "make/m3/pom.xml"
                         or reactor.get("maven_executed") is not True
                         or reactor.get("source_preserved") is not True):
                     raise ValueError("full default Maven clean/verify execution evidence missing or narrowed")
@@ -983,7 +983,7 @@ def render_queue(result: dict) -> str:
             row["id"], row["state"], "yes" if row["blocking"] else "no", detail)) + " |")
     if not result["queue"]:
         lines.append("| No pending items | VERIFIED_RECEIPTS | no | Review the exact proof pack before publication. |")
-    lines.extend(["", "This is a generated view of gate evidence and `m3/tooling/name-contract/name-plan.json`. "
+    lines.extend(["", "This is a generated view of gate evidence and `make/m3/tooling/name-contract/name-plan.json`. "
                   "It creates no second naming registry, recipe authority, or release claim.", ""])
     return "\n".join(lines)
 
@@ -1006,7 +1006,7 @@ def main(argv=None) -> int:
         args.json_out.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     if args.sha256_out:
         lines = []
-        for rel in REQUIRED_FILES + ["m3/release/verify_release_admission.py"]:
+        for rel in REQUIRED_FILES + ["make/m3/release/verify_release_admission.py"]:
             path = root / rel
             if path.is_file():
                 lines.append(f"{sha256(path)}  {rel}")

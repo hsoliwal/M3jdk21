@@ -1,17 +1,17 @@
 # SPDX-License-Identifier: Apache-2.0
-# Registration of m3/tooling/atom-jit-gate (written by m3/tooling/atom-jit-gate/recipe/atom-jit-gate-20261106/relocate.py,
-# the way m3/tooling/atom-census is registered: a standalone pom.xml with its own workflow).
+# Registration of make/m3/tooling/atom-jit-gate (written by make/m3/tooling/atom-jit-gate/recipe/atom-jit-gate-20261106/relocate.py,
+# the way make/m3/tooling/atom-census is registered: a standalone pom.xml with its own workflow).
 name: M3JDK21 per-atom JIT retest gate (tooling)
 on:
   pull_request:
     paths:
-      - 'm3/tooling/atom-jit-gate/**'
-      - 'm3/tooling/atom-census/**'
+      - 'make/m3/tooling/atom-jit-gate/**'
+      - 'make/m3/tooling/atom-census/**'
       - '.github/workflows/m3-tooling-atom-jit-gate-20261106.yml'
   push:
     paths:
-      - 'm3/tooling/atom-jit-gate/**'
-      - 'm3/tooling/atom-census/**'
+      - 'make/m3/tooling/atom-jit-gate/**'
+      - 'make/m3/tooling/atom-census/**'
       - '.github/workflows/m3-tooling-atom-jit-gate-20261106.yml'
 permissions:
   contents: read
@@ -28,14 +28,14 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Install the atom census the gate atomizes with
-        run: mvn -B -ntp -q -f m3/tooling/atom-census/pom.xml -DskipTests install
+        run: mvn -B -ntp -q -f make/m3/tooling/atom-census/pom.xml -DskipTests install
       - name: Package the gate (-Xlint:all -Werror) and run its JUnit tests
-        run: mvn -B -ntp -f m3/tooling/atom-jit-gate/pom.xml package
+        run: mvn -B -ntp -f make/m3/tooling/atom-jit-gate/pom.xml package
       - name: Fixture gate (javac -h, C17/C++20 JNI, nm exports, four JVM modes, negative control)
         shell: bash
         run: |
           set -euo pipefail
-          gate=m3/tooling/atom-jit-gate/fixture-gate
+          gate=make/m3/tooling/atom-jit-gate/fixture-gate
           python3 -I "$gate/verify.py" --evidence "$RUNNER_TEMP/atom-jit-fixture" --timeout-seconds 120
           python3 -I "$gate/verify.py" --evidence "$RUNNER_TEMP/atom-jit-negative" --timeout-seconds 120 --negative-test
           (cd "$gate" && python3 -m unittest -q test_verify)

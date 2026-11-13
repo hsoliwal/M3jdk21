@@ -31,7 +31,7 @@ Run the current-tree proof with Java 21, Linux C17 and the standard JUnit consol
 
 ```sh
 JAVA_HOME=/path/to/jdk21 JUNIT_CONSOLE_JAR=/path/to/junit-platform-console-standalone-1.12.2.jar \
-  python3 m3/collections/qualification/filtered-splits-mask-spans-20261018/verify.py
+  python3 make/m3/collections/qualification/filtered-splits-mask-spans-20261018/verify.py
 ```
 
 The runner compiles every current collection production/test source, then runs the selected

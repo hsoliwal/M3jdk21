@@ -6,7 +6,7 @@ This is a child of the existing draft M3JDK21 #1647 integration stack, not a cha
 
 ## One exact file-local hunk repair
 
-Previously held path: m3/docs/synexia-recipe-ownership-classification.tsv. Stage preimage Git blob f9374e36999960c203ab0077eebb8061219bc819 contains no physical LF at the end. Original GitHub PR #1621 patch has a single @@ -39,4 +39,6 @@ hunk and an exact missing-final-LF marker on the old last line. The existing Synexia OpenRewrite/Maven source recipe was enhanced in [com.synexia PR #12677](https://github.com/hsoliwal/com.synexia/pull/12677), stacked on the original per-file replay recipe #12662.
+Previously held path: doc/m3/synexia-recipe-ownership-classification.tsv. Stage preimage Git blob f9374e36999960c203ab0077eebb8061219bc819 contains no physical LF at the end. Original GitHub PR #1621 patch has a single @@ -39,4 +39,6 @@ hunk and an exact missing-final-LF marker on the old last line. The existing Synexia OpenRewrite/Maven source recipe was enhanced in [com.synexia PR #12677](https://github.com/hsoliwal/com.synexia/pull/12677), stacked on the original per-file replay recipe #12662.
 
 The real GitHub patch was independently checked against its exact source. Resulting content equals original donor Git blob 9a9fa4164d19b02db17203bac1e3a872ecbc11e5, including final LF, not a guessed/fuzzy/whole-file preference. This commit restores exactly that original donor blob; no generated Java source was hand-edited.
 

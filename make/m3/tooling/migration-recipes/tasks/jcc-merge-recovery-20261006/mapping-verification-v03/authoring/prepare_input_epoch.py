@@ -13,7 +13,7 @@ COMMIT = "c0a14387009aefc7d62bd3268055d526e04f9074"
 TREE = "491bbd80a51483d0710fc12c1bad3a037b385ba0"
 MAP_SHA = "335045274ea3ae01d576290b56704ec3409ef1bd27c8c220348815c5bbb711da"
 MAP_GIT = "34253f1b73b9ba3531a86f778f00c5e95cd2fbf1"
-MAP = "m3/docs/name-mapping.json"
+MAP = "doc/m3/name-mapping.json"
 
 
 def sha(path):

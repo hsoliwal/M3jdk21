@@ -27,7 +27,7 @@ for recipe in algorithm-extras-20261106 graph-trie-20261106 families-20261106; d
     "$PY" -I "$MODULE/recipe/$recipe/relocate.py" --donor-git "$1" --donor-rev "$2" --check | tail -n 1
 done
 "$PY" -I "$RECIPE_DIR/converge_rows.py" --check
-(cd "$ROOT" && "$PY" -I m3/tooling/jdk-naming/jdk_naming.py plan --root . --only m3/algorithms/ | tail -n 2)
+(cd "$ROOT" && "$PY" -I make/m3/tooling/jdk-naming/jdk_naming.py plan --root . --only m3/algorithms/ | tail -n 2)
 mvn -q -B -ntp $REPO -f "$MODULE/pom.xml" package
 "${JAVA_HOME:?JAVA_HOME must point at a JDK 21}/bin/jar" --describe-module \
     --file "$MODULE/target/m3-algorithms-0.1.0-SNAPSHOT.jar" | head -n 1

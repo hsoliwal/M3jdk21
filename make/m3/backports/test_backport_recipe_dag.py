@@ -38,7 +38,7 @@ class BackportRecipeDagTest(unittest.TestCase):
             writer.writerows(rows)
 
     def fixture(self, root: Path) -> None:
-        backports = root / "m3" / "backports"
+        backports = root / "make" / "m3" / "backports"
         recipes = backports / "recipes"
         (recipes / "jep-423-region-pinning").mkdir(parents=True)
         (recipes / "jdk-9000001-tool").mkdir(parents=True)
@@ -230,7 +230,7 @@ class BackportRecipeDagTest(unittest.TestCase):
             self.assertEqual("a3-document", parsed[4][5])
             self.assertEqual("a3-fixed-point", parsed[5][5])
             self.assertEqual(
-                "m3/backports/recipes/jep-423-region-pinning",
+                "make/m3/backports/recipes/jep-423-region-pinning",
                 parsed[5][4],
             )
             self.assertTrue(parsed[1][4].startswith("A3:JEP-423:A3_ATOMIZE"))
@@ -266,7 +266,7 @@ class BackportRecipeDagTest(unittest.TestCase):
             self.assertTrue(saw_broad_scope, "fixture must exercise MODULE/MULTI_MODULE")
 
     def test_current_repository_packets_are_recognized_without_duplicate_authoring(self) -> None:
-        root = Path(__file__).resolve().parents[2]
+        root = Path(__file__).resolve().parents[3]
         atoms = self.mod.compile_root(root)
         self.mod.validate(atoms)
 

@@ -37,4 +37,4 @@ responsible for creating the referenced artifacts and proving that their recorde
 - `contract/ATOM_COVERAGE_SCHEMA.tsv`: exact ledger columns and constraints.
 - `contract/GATE_PROFILES.tsv`: generated required-gate profile for every atom kind.
 - `contract/STATUS_CONTRACT.tsv`: closed evidence-state semantics.
-- `m3/docs/M3JDK21_MACHINE_MAINTAINED_MECHANICAL_SUPERSET.md`: repository-wide invariant.
+- `doc/m3/M3JDK21_MACHINE_MAINTAINED_MECHANICAL_SUPERSET.md`: repository-wide invariant.

@@ -3,30 +3,30 @@ on:
   pull_request:
     paths:
       - 'src/java.base/share/classes/jdk/internal/mindex/**'
-      - 'm3/docs/m3-runtime-invariants.tsv'
-      - 'm3/docs/m3string-history-recovery.tsv'
-      - 'm3/docs/name-mapping.json'
-      - 'm3/docs/name-mapping.d/**'
-      - 'm3/docs/m3-string-recipe-authority.tsv'
-      - 'm3/docs/m3jdk21-porting-invariant.md'
-      - 'm3/docs/m3string-m3-lineage.md'
+      - 'doc/m3/m3-runtime-invariants.tsv'
+      - 'doc/m3/m3string-history-recovery.tsv'
+      - 'doc/m3/name-mapping.json'
+      - 'doc/m3/name-mapping.d/**'
+      - 'doc/m3/m3-string-recipe-authority.tsv'
+      - 'doc/m3/m3jdk21-porting-invariant.md'
+      - 'doc/m3/m3string-m3-lineage.md'
       - 'm3/m3-import/current-full-borrow/STRING_PHASE.md'
       - 'm3/m3-import/current-full-borrow/string-source-target-map.tsv'
       - 'm3/m3-import/current-full-borrow/string-phase-gates.tsv'
       - 'm3/m3-import/current-full-borrow/string-phase-work-orders.tsv'
       - 'm3/m3-import/current-full-borrow/check_string_phase.py'
       - 'm3/m3-import/current-full-borrow/receiver-status.tsv'
-      - 'm3/docs/m3-string-precompute-port-map.tsv'
-      - 'm3/docs/string-precompute-completeness.tsv'
-      - 'm3/runtime-integration/**'
-      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceRecipe.java'
-      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3Java21ConvergenceRecipeTest.java'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-atom-pattern.yml'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-file-inventory.yml'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-java21-convergence.yml'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-token-regex-convergence.yml'
+      - 'doc/m3/m3-string-precompute-port-map.tsv'
+      - 'doc/m3/string-precompute-completeness.tsv'
+      - 'make/m3/runtime-integration/**'
+      - 'make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceRecipe.java'
+      - 'make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3Java21ConvergenceRecipeTest.java'
+      - 'make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-atom-pattern.yml'
+      - 'make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-file-inventory.yml'
+      - 'make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-java21-convergence.yml'
+      - 'make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-token-regex-convergence.yml'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-token-regex-convergence/**'
-      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3TokenRegexConvergenceRecipeTest.java'
+      - 'make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3TokenRegexConvergenceRecipeTest.java'
       - 'src/hotspot/share/prims/jni.cpp'
       - 'src/hotspot/share/gc/shared/stringdedup/stringDedupTable.cpp'
       - 'src/hotspot/share/classfile/vmClassMacros.hpp'
@@ -70,7 +70,7 @@ on:
       - 'test/jdk/java/util/regex/M3RegexLiteralTQTest.java'
       - 'test/jdk/java/util/regex/M3RegexReuseTest.java'
       - 'src/java.base/share/classes/java/util/regex/**'
-      - 'm3/tooling/mr/**'
+      - 'make/m3/tooling/mr/**'
       - 'doc/mindex-string-backing.md'
       - 'src/java.base/share/classes/java/lang/M3FrozenLexiconIndex.java'
       - 'src/java.base/share/native/libjava/M3StringPool.c'
@@ -113,35 +113,35 @@ jobs:
       - name: Verify full-borrow MIndexString to M3String custody
         run: python3 m3/m3-import/current-full-borrow/check_string_phase.py
       - name: Verify String completeness admission and refusal controls
-        run: python3 m3/runtime-integration/test_string_completeness.py
+        run: python3 make/m3/runtime-integration/test_string_completeness.py
       - name: Verify compiler-parsed M3 String layout
-        run: python3 m3/runtime-integration/test_string_layout.py
+        run: python3 make/m3/runtime-integration/test_string_layout.py
       - name: Verify M3 String source invariants
-        run: python3 m3/runtime-integration/check-m3string-invariants.py
+        run: python3 make/m3/runtime-integration/check-m3string-invariants.py
       - name: Check current MIndexString history parity
-        run: python3 m3/runtime-integration/check-m3string-history-recovery.py
+        run: python3 make/m3/runtime-integration/check-m3string-history-recovery.py
       - name: Check compiler concat reference DAG
-        run: python3 m3/runtime-integration/check-m3string-concat-reference-dag.py
+        run: python3 make/m3/runtime-integration/check-m3string-concat-reference-dag.py
       - name: Check bounded M3 String code-point geometry
-        run: python3 m3/runtime-integration/check-m3string-codepoint-geometry.py
+        run: python3 make/m3/runtime-integration/check-m3string-codepoint-geometry.py
       - name: Check conservative literal String.matches receiver
-        run: python3 m3/runtime-integration/check-m3string-literal-matches.py
+        run: python3 make/m3/runtime-integration/check-m3string-literal-matches.py
       - name: Check centralized M3 String precompute bridge
-        run: python3 m3/runtime-integration/check-m3string-precompute-bridge.py
+        run: python3 make/m3/runtime-integration/check-m3string-precompute-bridge.py
       - name: Check prepared M3 builder range bulk receiver
-        run: python3 m3/runtime-integration/check-m3string-builder-range-bulk.py
+        run: python3 make/m3/runtime-integration/check-m3string-builder-range-bulk.py
       - name: Check byte-source canonical M3 needle receiver
-        run: python3 m3/runtime-integration/check-m3string-byte-source-needle.py
+        run: python3 make/m3/runtime-integration/check-m3string-byte-source-needle.py
       - name: Check mixed canonical literal replacement receiver
-        run: python3 m3/runtime-integration/check-m3string-mixed-literal-replace.py
+        run: python3 make/m3/runtime-integration/check-m3string-mixed-literal-replace.py
       - name: Prove immutable Matcher fact reuse
-        run: mvn -B -ntp -f m3/tooling/mr/pom.xml test
+        run: mvn -B -ntp -f make/m3/tooling/mr/pom.xml test
       - name: Verify current M3 String concat length and updated jtreg contract
         run: |
-          python3 m3/runtime-integration/test_m3string_concat_overflow_current.py -v
-          python3 m3/runtime-integration/check-m3string-concat-overflow-current.py
+          python3 make/m3/runtime-integration/test_m3string_concat_overflow_current.py -v
+          python3 make/m3/runtime-integration/check-m3string-concat-overflow-current.py
       - name: Check current M3 String regex split receiver
-        run: python3 m3/runtime-integration/check-m3string-regex-split-current.py
+        run: python3 make/m3/runtime-integration/check-m3string-regex-split-current.py
       - name: Set up Java 20 boot JDK for OpenJDK 21 build
         uses: actions/setup-java@v4
         with:
@@ -163,7 +163,7 @@ jobs:
           test -x "$M3_TEST_JDK/bin/java"
           printf 'M3_TEST_JDK=%s\n' "$M3_TEST_JDK" >> "$GITHUB_ENV"
       - name: Collect Phase-1 String cold warm resource evidence
-        run: bash m3/runtime-integration/run-phase1-string-resources.sh
+        run: bash make/m3/runtime-integration/run-phase1-string-resources.sh
       - name: Upload Phase-1 String resource evidence
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
@@ -229,7 +229,7 @@ jobs:
           printf 'source_commit=%s\nsource_tree=%s\nimage=%s\n' \
             "$(git rev-parse HEAD)" "$(git rev-parse 'HEAD^{tree}')" "$image" \
             > build/linux-x64-string-keys/regex-source-image.txt
-          mvn -B -ntp -f m3/runtime-integration/regex-precompute/pom.xml \
+          mvn -B -ntp -f make/m3/runtime-integration/regex-precompute/pom.xml \
             -Dm3.test.jdk="$image" verify 2>&1 \
             | tee build/linux-x64-string-keys/regex-precompute-maven.log
       - name: Run focused String key and owner-lifetime jtreg
@@ -258,6 +258,6 @@ jobs:
             build/linux-x64-string-keys/configure.log
             build/linux-x64-string-keys/regex-source-image.txt
             build/linux-x64-string-keys/regex-precompute-maven.log
-            m3/runtime-integration/regex-precompute/target/product-verification
+            make/m3/runtime-integration/regex-precompute/target/product-verification
           if-no-files-found: warn
           retention-days: 30

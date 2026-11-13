@@ -6,7 +6,7 @@ package jdk.m3.viewport;
 
 /**
  * Native or peer row operations a toolkit adapter supplies to the viewport core (adapter contract, see
- * {@code m3/docs/viewport-everywhere/DESIGN.md} section 5).
+ * {@code doc/m3/viewport-everywhere/DESIGN.md} section 5).
  * <p>The core calls these only for rows of the resident window, so the work per frame is O(window). Rows are
  * logical int coordinates; handles are toolkit handles packed in a {@code long} (0 = none). A handle may be reused by
  * the toolkit after a delete, so the core checks {@link #isHandleLive(long, int)} with the generation it recorded

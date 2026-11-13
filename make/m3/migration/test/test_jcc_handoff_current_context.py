@@ -16,11 +16,11 @@ class JccHandoffCurrentContextTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         override = os.environ.get("M3_JCC_CANDIDATE_ROOT")
-        cls.candidate = Path(override).resolve() if override else Path(__file__).resolve().parents[3]
+        cls.candidate = Path(override).resolve() if override else Path(__file__).resolve().parents[4]
         previous = sys.dont_write_bytecode
         sys.dont_write_bytecode = True
         cls.addClassCleanup(setattr, sys, "dont_write_bytecode", previous)
-        path = cls.candidate / "m3/migration/test/test_jcc_handoff_context_profiles.py"
+        path = cls.candidate / "make/m3/migration/test/test_jcc_handoff_context_profiles.py"
         spec = importlib.util.spec_from_file_location("jcc_current_retained_profiles", path)
         if spec is None or spec.loader is None:
             raise AssertionError("Cannot load exact JCC context fixture")

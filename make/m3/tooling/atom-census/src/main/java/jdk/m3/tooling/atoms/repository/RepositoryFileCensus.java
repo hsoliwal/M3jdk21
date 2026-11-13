@@ -38,7 +38,7 @@ public final class RepositoryFileCensus {
     /** Deterministic receipt header. */
     public static final String RECEIPT_HEADER = "key\tvalue";
     /** Normative repository-complete contract document. */
-    public static final String CONTRACT_PATH = "m3/docs/M3JDK21_MACHINE_MAINTAINED_MECHANICAL_SUPERSET.md";
+    public static final String CONTRACT_PATH = "doc/m3/M3JDK21_MACHINE_MAINTAINED_MECHANICAL_SUPERSET.md";
     /** Normative contract section bound to generated file-container atoms. */
     public static final String CONTRACT_REF = CONTRACT_PATH + "#repository-complete-invariant";
 

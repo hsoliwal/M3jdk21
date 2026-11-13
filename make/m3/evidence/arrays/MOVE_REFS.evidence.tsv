@@ -1,16 +1,16 @@
-# MOVE_REFS v1 rules (m3/tooling/jdk-naming/move_refs.py): the arrays evidence leaves the m3/ side tree for the one
-# evidence store m3/evidence/arrays (approved layout 2026-11-08: one evidence store m3/evidence/<area>, leaf dir names
+# MOVE_REFS v1 rules (make/m3/tooling/jdk-naming/move_refs.py): the arrays evidence leaves the m3/ side tree for the one
+# evidence store make/m3/evidence/arrays (approved layout 2026-11-08: one evidence store make/m3/evidence/<area>, leaf dir names
 # kept). Frozen records (relocate.py lineage, //FLLDCIM anchors, census and ledger TSVs) keep their bytes, as the
-# compression move did (m3/evidence/compression/MOVES.tsv); only live references follow.
+# compression move did (make/m3/evidence/compression/MOVES.tsv); only live references follow.
 FILES	.github/workflows/*.yml
-FILES	m3/tooling/jdk-naming/PACKAGE_BASELINE.tsv
-FILES	m3/tooling/standalone/M3_REFS.tsv
+FILES	make/m3/tooling/jdk-naming/PACKAGE_BASELINE.tsv
+FILES	make/m3/tooling/standalone/M3_REFS.tsv
 FILES	src/jdk.m3.collections/share/legal/m3arrays.md
 FILES	m3/arrays/pom.xml
-REPLACE	m3/arrays/provenance.json	m3/evidence/arrays/provenance.json
-REPLACE	m3/arrays/qualification/	m3/evidence/arrays/qualification/
-REPLACE	m3/arrays/recipe/	m3/evidence/arrays/recipe/
-REPLACE	See provenance.json and	See m3/evidence/arrays/provenance.json, m3/evidence/arrays/PACKED_NOTICES.md and
+REPLACE	m3/arrays/provenance.json	make/m3/evidence/arrays/provenance.json
+REPLACE	m3/arrays/qualification/	make/m3/evidence/arrays/qualification/
+REPLACE	m3/arrays/recipe/	make/m3/evidence/arrays/recipe/
+REPLACE	See provenance.json and	See make/m3/evidence/arrays/provenance.json, make/m3/evidence/arrays/PACKED_NOTICES.md and
 RESIDUE	m3/arrays/provenance.json
 RESIDUE	m3/arrays/qualification
 RESIDUE	m3/arrays/recipe

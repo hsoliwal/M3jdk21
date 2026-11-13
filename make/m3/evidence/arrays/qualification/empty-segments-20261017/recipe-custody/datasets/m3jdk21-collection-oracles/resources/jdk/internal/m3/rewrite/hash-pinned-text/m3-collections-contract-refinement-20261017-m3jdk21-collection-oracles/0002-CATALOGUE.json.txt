@@ -67,9 +67,9 @@
     }
   ],
   "existing_catalogues_consulted": [
-    "m3/collections/algorithm-catalog/full-m3-family-inventory-20261017/COLLECTION_SOURCE_INVENTORY.tsv",
-    "m3/collections/algorithm-catalog/collection-catalogue-input-provenance-20261017.tsv",
-    "m3/backports/ALGORITHM_CATALOGUE.tsv"
+    "make/m3/collections/algorithm-catalog/full-m3-family-inventory-20261017/COLLECTION_SOURCE_INVENTORY.tsv",
+    "make/m3/collections/algorithm-catalog/collection-catalogue-input-provenance-20261017.tsv",
+    "make/m3/backports/ALGORITHM_CATALOGUE.tsv"
   ],
   "primary_contract_sources": [
     "src/java.base/share/classes/java/util/ArrayList.java: remove(Object) and iterator removal",
@@ -105,7 +105,7 @@
     "test_reference_removal": "O(n) scan and O(1) auxiliary space"
   },
   "independent_witness": {
-    "path": "m3/collections/qualification/oracle-repair-20261018/src/test/java/CollectionOracleWitness.java",
+    "path": "make/m3/collections/qualification/oracle-repair-20261018/src/test/java/CollectionOracleWitness.java",
     "source_sha256": "d870c4819d2354bfbc2bc129329375780adaab0629e27c02bdf6039dccad8fd8",
     "receipt_sha256": "44846f0397778801b5746fbd2369655a4157da3e14f24b770c2a09c8f339e70e",
     "status": "PASS",

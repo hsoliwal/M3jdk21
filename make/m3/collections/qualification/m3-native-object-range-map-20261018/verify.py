@@ -6,7 +6,7 @@ from pathlib import Path
 from hashlib import sha256
 
 HERE = Path(__file__).resolve().parent
-REPO = HERE.parents[3]
+REPO = HERE.parents[4]
 MIRROR = HERE / "recipe-mirror"
 TARGETS = {
     "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectRangeMap.java":

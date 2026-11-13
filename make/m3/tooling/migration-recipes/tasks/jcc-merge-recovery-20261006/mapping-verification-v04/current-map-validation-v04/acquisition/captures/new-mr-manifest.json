@@ -1,7 +1,7 @@
 {
   "request": {
     "repository_full_name": "hsoliwal/M3jdk21",
-    "path": "m3/tooling/mr/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv",
+    "path": "make/m3/tooling/mr/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv",
     "ref": "09075810b55229662329a158923287e8a7118f86",
     "encoding": "base64"
   },

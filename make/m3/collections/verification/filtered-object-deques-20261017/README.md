@@ -12,7 +12,7 @@ class spelling are not current production owners.
 Run from a checkout with Java 21 on `PATH`:
 
 ```sh
-bash m3/collections/verification/filtered-object-deques-20261017/verify.sh
+bash make/m3/collections/verification/filtered-object-deques-20261017/verify.sh
 ```
 
 The command compiles those two unchanged actual product owners with

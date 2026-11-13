@@ -37,7 +37,7 @@ import sun.security.action.GetBooleanAction;
  * {@code updateLayoutState}, so the array's identity is its version. Only {@code BasicListUI} and
  * its {@code java.desktop} subclasses take this path; a subclass from another module may write
  * {@code cellHeights} in place, so it keeps the stock loops. Design and proof:
- * m3/docs/swing-viewport/DESIGN.md section 9.
+ * doc/m3/swing-viewport/DESIGN.md section 9.
  */
 //FLLDCIM: M3 swing-viewport leaf 3 - JList row offsets by prefix lane, same answers as the stock loops
 public final class M3ListRows {

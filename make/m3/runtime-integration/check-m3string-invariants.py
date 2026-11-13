@@ -11,7 +11,7 @@ import os
 import subprocess
 import sys
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 
 def read(path: str) -> str:
     return (ROOT / path).read_text(encoding="utf-8")
@@ -41,11 +41,11 @@ stringopts = read("src/hotspot/share/opto/stringopts.cpp")
 archive_writer = read("src/hotspot/share/cds/archiveHeapWriter.cpp")
 dedup = read("src/hotspot/share/gc/shared/stringdedup/stringDedupTable.cpp")
 stringtable = read("src/hotspot/share/classfile/stringTable.cpp")
-mapping = read("m3/docs/name-mapping.json")
-port_map = read("m3/docs/m3-string-precompute-port-map.tsv")
-recipe_authority = read("m3/docs/m3-string-recipe-authority.tsv")
-precompute_inventory = read("m3/docs/m3-mindex-precompute-inventory.tsv")
-completeness = read("m3/docs/string-precompute-completeness.tsv")
+mapping = read("doc/m3/name-mapping.json")
+port_map = read("doc/m3/m3-string-precompute-port-map.tsv")
+recipe_authority = read("doc/m3/m3-string-recipe-authority.tsv")
+precompute_inventory = read("doc/m3/m3-mindex-precompute-inventory.tsv")
+completeness = read("doc/m3/string-precompute-completeness.tsv")
 workflow = read(".github/workflows/mindex-string-backing.yml")
 native_string = read("src/java.base/share/native/libjava/String.c")
 pattern = read("src/java.base/share/classes/java/util/regex/Pattern.java")
@@ -240,7 +240,7 @@ for row in critical_port_map_rows:
     if row not in port_map:
         fail(f"String precompute port/completeness drift: {row}")
 
-if "m3/docs/string-precompute-completeness.tsv" not in workflow:
+if "doc/m3/string-precompute-completeness.tsv" not in workflow:
     fail("M3 String workflow does not trigger on completeness ledger changes")
 
 # Field-level parity for the fixed semantic donor bundle.
@@ -291,7 +291,7 @@ for forbidden in [
 def check_m3string_layout() -> None:
     java = str(Path(os.environ["JAVA_HOME"]) / "bin/java") if os.environ.get("JAVA_HOME") else "java"
     command = [java, "--source", "21",
-               str(ROOT / "m3/runtime-integration/src/main/java/M3StringLayout.java"),
+               str(ROOT / "make/m3/runtime-integration/src/main/java/M3StringLayout.java"),
                str(ROOT / "src/java.base/share/classes/java/lang/M3String.java")]
     try:
         result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, timeout=45)
@@ -308,7 +308,7 @@ check_m3string_layout()
 def check_m3string_replacement_routes() -> None:
     java = str(Path(os.environ["JAVA_HOME"]) / "bin/java") if os.environ.get("JAVA_HOME") else "java"
     command = [java, "--source", "21",
-               str(ROOT / "m3/runtime-integration/src/main/java/M3StringReplacementRoutes.java"),
+               str(ROOT / "make/m3/runtime-integration/src/main/java/M3StringReplacementRoutes.java"),
                str(ROOT / "src/java.base/share/classes/java/lang/String.java")]
     try:
         result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, timeout=45)
@@ -920,11 +920,11 @@ for surface, marker in critical_surfaces.items():
         fail(f"critical String surface lost M3 route: {surface}")
 
 # Recovered indexed regex replacement is a conservative literal atom, not a regex engine.
-literal_history = read("m3/history/string-literal-replacement-lineage.tsv")
+literal_history = read("make/m3/history/string-literal-replacement-lineage.tsv")
 literal_test = read("test/jdk/java/lang/String/M3StringRegexReplacementTest.java")
-if "Apache-2.0" not in read("m3/history/string-literal-replacement-notice.md"):
+if "Apache-2.0" not in read("make/m3/history/string-literal-replacement-notice.md"):
     fail("indexed literal replacement lost donor attribution")
-if "Apache License" not in read("m3/history/licenses/Synexia-Apache-2.0.txt"):
+if "Apache License" not in read("make/m3/history/licenses/Synexia-Apache-2.0.txt"):
     fail("indexed literal replacement lost retained donor license")
 for pin in [
     "55af6236dc304042094fe05b26dceb4264ba0707",
@@ -1990,7 +1990,7 @@ def check_string_jtreg_schedule(workflow: str) -> None:
     for trigger in ["test/jdk/java/lang/String/M3*.java", "test/jdk/java/lang/String/libM3TQTest.cpp"]:
         if not re.search(r"^\s+- ['\"]" + re.escape(trigger) + r"['\"]\s*$", workflow, re.MULTILINE):
             fail(f"M3 String workflow lost source/support trigger: {trigger}")
-    if not re.search(r'^\s+run: python3 m3/runtime-integration/check-m3string-regex-split-current\.py\s*$',
+    if not re.search(r'^\s+run: python3 make/m3/runtime-integration/check-m3string-regex-split-current\.py\s*$',
                      workflow, re.MULTILINE):
         fail("M3 String workflow lost current regex-split source check")
 
@@ -2026,10 +2026,10 @@ def check_string_workflow_contract(workflow: str) -> None:
 
 check_string_workflow_contract(workflow)
 
-if "STRING_RECIPE_EXECUTABLE_VERIFIER_IS_SYNEXIA_OPENREWRITE" not in read("m3/docs/m3-runtime-invariants.tsv"):
+if "STRING_RECIPE_EXECUTABLE_VERIFIER_IS_SYNEXIA_OPENREWRITE" not in read("doc/m3/m3-runtime-invariants.tsv"):
     fail("M3 String runtime invariant lost Synexia executable verifier binding")
 
-if "SYNEXIA_PORTABLE_HISTORY_CONVERGENCE_RECIPE_AUTHORITY" not in read("m3/docs/m3-runtime-invariants.tsv"):
+if "SYNEXIA_PORTABLE_HISTORY_CONVERGENCE_RECIPE_AUTHORITY" not in read("doc/m3/m3-runtime-invariants.tsv"):
     fail("M3 String runtime invariant lost Synexia history-convergence authority binding")
 
 print("M3_STRING_SOURCE_INVARIANTS_PASS")

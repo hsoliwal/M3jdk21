@@ -7,7 +7,7 @@ on:
       - 'm3/collections/interop/src/main/java/jdk/m3/collections/interop/M3LibraryCollections.java'
       - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3GuavaBiMap*Test.java'
       - 'm3/collections/interop/sdk-family-bindings.tsv'
-      - 'm3/collections/recipes/sdk-guava-bimap-20261017/**'
+      - 'make/m3/collections/recipes/sdk-guava-bimap-20261017/**'
       - '.github/workflows/m3-sdk-guava-bimap-20261017.yml'
   workflow_dispatch:
 concurrency:
@@ -24,13 +24,13 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Execute actual Maven/OpenRewrite SDK recipe qualification
-        run: mvn -B -ntp -f m3/collections/recipes/sdk-guava-bimap-20261017/pom.xml clean test
+        run: mvn -B -ntp -f make/m3/collections/recipes/sdk-guava-bimap-20261017/pom.xml clean test
       - name: Verify installed source matches all five sealed postimages
         run: |
           python3 - <<'PY'
           import hashlib
           from pathlib import Path
-          root=Path('m3/collections/recipes/sdk-guava-bimap-20261017/src/main/resources/jdk/internal/m3/rewrite/m3-guava-bimap-20261017')
+          root=Path('make/m3/collections/recipes/sdk-guava-bimap-20261017/src/main/resources/jdk/internal/m3/rewrite/m3-guava-bimap-20261017')
           for row in (root/'manifest.tsv').read_text().splitlines():
               path,before,after,template=row.split('\t')
               installed=Path(path).read_bytes()

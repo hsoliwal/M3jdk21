@@ -3,7 +3,7 @@
 """Fail-closed source-image custody for the canonical Synexia recipe receiver."""
 from pathlib import Path
 from hashlib import sha256
-root=Path(__file__).resolve().parents[3]
+root=Path(__file__).resolve().parents[4]
 expected={
     "src/java.base/share/classes/java/util/ArrayList.java":
         "d05d5efd61e1ae8514c904d28cea7335eec824becddbf62dcb0b425ec7790c7b",

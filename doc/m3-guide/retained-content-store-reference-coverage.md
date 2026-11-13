@@ -269,8 +269,8 @@ String qualification active, later phases waiting, runtime source ownership in
 the target and reusable mechanics in the canonical Synexia lineage. No source,
 policy, recipe, license or provenance file is changed by this reference.
 
-The complete retained-tree listing and inspected `m3/pom.xml`,
-`m3/m3-import/pom.xml`, `m3/ports/indexstring/pom.xml` and `m3/build.sh`
+The complete retained-tree listing and inspected `make/m3/pom.xml`,
+`m3/m3-import/pom.xml`, `m3/ports/indexstring/pom.xml` and `make/m3/build.sh`
 support the bounded source-set conclusion: the retained fs package has no
 standalone descriptor; the reactor/importer, compatibility bridge and core shell
 build are separate. These are static file observations, not an executed

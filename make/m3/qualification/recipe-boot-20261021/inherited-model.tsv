@@ -6,11 +6,11 @@ m3/collections/implementations/guava-33.4.8/guava-gwt/pom.xml	PASS	PASS	PASS	PAS
 m3/collections/implementations/guava-33.4.8/guava-testlib/pom.xml	PASS	PASS	PASS	PASS	PASS
 m3/collections/implementations/guava-33.4.8/guava-tests/pom.xml	PASS	PASS	PASS	PASS	PASS
 m3/collections/implementations/guava-33.4.8/guava/pom.xml	PASS	PASS	PASS	PASS	PASS
-m3/eclipse/jdt/receiving/array-nodelist-20261019/compiler/pom.xml	PASS	PASS	PASS	PASS	PASS
-m3/eclipse/jdt/receiving/array-nodelist-20261019/core/pom.xml	PASS	PASS	PASS	PASS	PASS
-m3/tooling/a3/pom.xml	PASS	PASS	PASS	PASS	PASS
-m3/tooling/module-packs/kernel/pom.xml	PASS	PASS	PASS	PASS	PASS
-m3/tooling/module-packs/recipes/pom.xml	PASS	PASS	PASS	PASS	PASS
+make/m3/eclipse/jdt/receiving/array-nodelist-20261019/compiler/pom.xml	PASS	PASS	PASS	PASS	PASS
+make/m3/eclipse/jdt/receiving/array-nodelist-20261019/core/pom.xml	PASS	PASS	PASS	PASS	PASS
+make/m3/tooling/a3/pom.xml	PASS	PASS	PASS	PASS	PASS
+make/m3/tooling/module-packs/kernel/pom.xml	PASS	PASS	PASS	PASS	PASS
+make/m3/tooling/module-packs/recipes/pom.xml	PASS	PASS	PASS	PASS	PASS
 src/utils/IdealGraphVisualizer/Bytecodes/pom.xml	PASS	PASS	PASS	PASS	PASS
 src/utils/IdealGraphVisualizer/ControlFlow/pom.xml	PASS	PASS	PASS	PASS	PASS
 src/utils/IdealGraphVisualizer/Coordinator/pom.xml	PASS	PASS	PASS	PASS	PASS

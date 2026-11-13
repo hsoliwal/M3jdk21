@@ -4,7 +4,7 @@ on:
   pull_request:
     paths:
       - 'm3/collections/pom.xml'
-      - 'm3/collections/qualification/junit-resolution-20261022/**'
+      - 'make/m3/collections/qualification/junit-resolution-20261022/**'
       - '.github/workflows/m3-collections-junit-resolution-20261022.yml'
   workflow_dispatch:
 permissions:

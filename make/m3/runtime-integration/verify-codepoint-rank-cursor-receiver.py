@@ -6,7 +6,7 @@ from hashlib import sha256
 from pathlib import Path
 import sys
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 OWNER = "src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java"
 JTREG = "test/jdk/java/lang/String/M3StringCodePointRankCursorTest.java"
 PINNED = {

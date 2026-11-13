@@ -49,7 +49,7 @@ final class PublicA3ExportMirrorTest {
         }
 
         String pom = Files.readString(
-                repository.resolve("m3/tooling/m3jdk-a3-recipes/pom.xml"),
+                repository.resolve("make/m3/tooling/m3jdk-a3-recipes/pom.xml"),
                 StandardCharsets.UTF_8);
         for (String source : compiledSources) {
             String relative = source.substring("src/main/java/".length());

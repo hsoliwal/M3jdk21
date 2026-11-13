@@ -30,7 +30,7 @@
           <arguments>
             <argument>${project.basedir}/build.py</argument>
             <argument>--repo-root</argument>
-            <argument>${project.basedir}/../../../..</argument>
+            <argument>${project.basedir}/../../../../..</argument>
             <argument>--jdk-home</argument>
             <argument>${m3.parser.jdk}</argument>
             <argument>--out</argument>

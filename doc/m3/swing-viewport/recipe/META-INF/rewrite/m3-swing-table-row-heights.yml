@@ -5,7 +5,7 @@ type: specs.openrewrite.org/v1beta/recipe
 name: com.synexia.openrewrite.viewport.M3SwingTableRowHeights
 displayName: JTable keeps its custom row heights in sparse stores when m3.swing.viewport is set
 description: >-
-  M3JDK Swing viewport leaf 8 (m3/docs/swing-viewport/DESIGN.md section 15). Stock JTable keeps custom row heights
+  M3JDK Swing viewport leaf 8 (doc/m3/swing-viewport/DESIGN.md section 15). Stock JTable keeps custom row heights
   in two dense SizeSequences, rowModel in view order and SortManager.modelRowSizes in model order, 4n bytes each.
   With the property set the same two stores are sun.swing.table.M3SparseSizes, holding only the rows whose height
   differs from the default: m3RowSizes beside rowModel and SortManager.m3ModelSizes beside modelRowSizes, with the

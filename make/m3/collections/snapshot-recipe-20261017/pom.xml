@@ -11,7 +11,7 @@
   <properties>
     <maven.compiler.release>21</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <repo.root>${project.basedir}/../../..</repo.root>
+    <repo.root>${project.basedir}/../../../..</repo.root>
     <rewrite.version>8.17.1</rewrite.version>
   </properties>
   <dependencies>
@@ -40,10 +40,10 @@
     </dependency>
   </dependencies>
   <build>
-    <sourceDirectory>${repo.root}/m3/tooling/migration-recipes/src/main/java</sourceDirectory>
+    <sourceDirectory>${repo.root}/make/m3/tooling/migration-recipes/src/main/java</sourceDirectory>
     <resources>
       <resource>
-        <directory>${repo.root}/m3/tooling/migration-recipes/src/main/resources</directory>
+        <directory>${repo.root}/make/m3/tooling/migration-recipes/src/main/resources</directory>
         <includes>
           <include>jdk/internal/m3/rewrite/hash-pinned-java/m3long-sorted-snapshot-20261017/**</include>
           <include>META-INF/rewrite/m3long-sorted-snapshot-20261017.yml</include>

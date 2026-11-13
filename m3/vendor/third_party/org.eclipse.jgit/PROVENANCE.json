@@ -4798,7 +4798,7 @@
       "base_sha256": "8abe13c904e97722019c414858e3b8a6ba49c17e33277fd688d5148a06aedc98",
       "kind": "m3-overlay-source",
       "overlay": "JGIT_BASE64_TO_JDK v1",
-      "recipe": "m3/tooling/jdk-superset/retarget/tools/jgit_base64_to_jdk.py",
+      "recipe": "make/m3/tooling/jdk-superset/retarget/tools/jgit_base64_to_jdk.py",
       "recipe_sha256": "6619e764d6f90ad50e9a2fcb69d2fcf3e7aa753847db95d325cf04933c6b83ea",
       "repository": "m3/vendor/third_party/org.eclipse.jgit/src/main/java/org/eclipse/jgit/util/Base64.java",
       "sha256": "45be92b2b35567d2889d36f18ccbffcace35dfd5a2d18190fff6a31e660be47d",
@@ -5306,14 +5306,14 @@
       "kind": "m3-overlay-record",
       "repository": "m3/vendor/third_party/org.eclipse.jgit/OVERLAY_SOURCES.json",
       "sha256": "e319c2ba93cdc0d037c726a32868eb022b4bd201aa460d2dc22bb8922c06ae4f",
-      "upstream": "m3/tooling/jdk-superset/retarget/tools/jgit_base64_to_jdk.py"
+      "upstream": "make/m3/tooling/jdk-superset/retarget/tools/jgit_base64_to_jdk.py"
     }
   ],
   "group": "org.eclipse.jgit",
   "kind": "MODULE",
   "license": "UNDECLARED (see LICENSE)",
   "license_file": "LICENSE",
-  "modifications": "M3 overlays JGIT_BASE64_TO_JDK v1: util.Base64 encodes with java.util.Base64, and decodes with it when the input is in the canonical form; other input keeps JGit's lenient decoding loop (recipe m3/tooling/jdk-superset/retarget/tools/jgit_base64_to_jdk.py; the unchanged upstream file is retained under upstream-excluded/). No other upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "modifications": "M3 overlays JGIT_BASE64_TO_JDK v1: util.Base64 encodes with java.util.Base64, and decodes with it when the input is in the canonical form; other input keeps JGit's lenient decoding loop (recipe make/m3/tooling/jdk-superset/retarget/tools/jgit_base64_to_jdk.py; the unchanged upstream file is retained under upstream-excluded/). No other upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
   "module_descriptors": [],
   "multi_release_overlays": {
     "not_reproduced": [],

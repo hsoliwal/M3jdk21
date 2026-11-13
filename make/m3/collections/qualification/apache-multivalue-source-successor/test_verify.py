@@ -25,7 +25,7 @@ class ApacheSourceSuccessorV5Test(unittest.TestCase):
     def test_current_source_drift_is_not_admitted(self):
         receipt = __import__("json").loads(
             V5.read(V5.ROOT,
-                    "m3/collections/qualification/apache-multivalue-source-successor/RECEIPT.json"))
+                    "make/m3/collections/qualification/apache-multivalue-source-successor/RECEIPT.json"))
         for row in receipt["successors"]:
             real = V5.read(V5.ROOT, row["path"])
             with self.subTest(path=row["path"]):
@@ -35,10 +35,10 @@ class ApacheSourceSuccessorV5Test(unittest.TestCase):
     def test_historical_snapshot_mutation_is_refused(self):
         receipt = __import__("json").loads(
             V5.read(V5.ROOT,
-                    "m3/collections/qualification/apache-multivalue-source-successor/RECEIPT.json"))
+                    "make/m3/collections/qualification/apache-multivalue-source-successor/RECEIPT.json"))
         for row in receipt["successors"]:
             original = V5.read(V5.ROOT,
-                               "m3/collections/qualification/apache-multivalue-source-successor/"
+                               "make/m3/collections/qualification/apache-multivalue-source-successor/"
                                + row["snapshot"])
             with self.subTest(path=row["path"]):
                 with self.assertRaisesRegex(ValueError, "identity drift"):
@@ -48,7 +48,7 @@ class ApacheSourceSuccessorV5Test(unittest.TestCase):
     def test_unapproved_traversal_paths_and_missing_inputs_refused(self):
         for path in ("../escape", "/etc/passwd",
                      "m3/collections/../../etc/shadow",
-                     "m3/collections/qualification/absent-source.java"):
+                     "make/m3/collections/qualification/absent-source.java"):
             with self.subTest(path=path):
                 with self.assertRaises(ValueError):
                     V5.read(V5.ROOT, path)

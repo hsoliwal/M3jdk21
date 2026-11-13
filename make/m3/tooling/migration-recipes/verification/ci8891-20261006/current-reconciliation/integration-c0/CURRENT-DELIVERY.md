@@ -16,6 +16,6 @@ No receiving, latest-head integration, full JDK/runtime, performance or hosted-w
 
 One static wiring finding remains explicit: the TQ-sync default verifier requires the historical 24-file sealed after-state, including a 52-row mapping, while the fresh task generates an 87-row mapping preserving those 52 records plus 35 pending records. A separate current-context profile is being prepared. This is a source inspection, not an executed workflow failure. No hosted-workflow or supplemental-verifier success is claimed.
 
-An earlier alleged JEP485 catalogue mismatch was withdrawn: its workflow reads `m3/backports/JEP_CATALOGUE.tsv`, whose relevant value is `candidate`; the `CANDIDATE_UNVERIFIED`/`PENDING_CI` fields belong to a different catalogue. No JEP485 blocker was established by that comparison.
+An earlier alleged JEP485 catalogue mismatch was withdrawn: its workflow reads `make/m3/backports/JEP_CATALOGUE.tsv`, whose relevant value is `candidate`; the `CANDIDATE_UNVERIFIED`/`PENDING_CI` fields belong to a different catalogue. No JEP485 blocker was established by that comparison.
 
 The physical selection contains 338 files per repository: the original 318 task/package rows, 17 execution/review rows, and these three explanatory files. [PAIRED-FILES.json](PAIRED-FILES.json) intentionally identifies the initial 318-row cohort. `CURRENT-DELIVERY.json` enumerates the 17 additional rows and the three-envelope boundary; the final external publication manifest binds all 338 exact physical identities without a self-hash cycle.

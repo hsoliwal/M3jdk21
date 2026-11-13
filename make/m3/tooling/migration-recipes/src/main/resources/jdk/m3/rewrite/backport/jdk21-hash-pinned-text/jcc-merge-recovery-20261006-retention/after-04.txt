@@ -391,7 +391,7 @@ def main() -> int:
     parser.add_argument("--commit", required=True)
     parser.add_argument(
         "--catalogue",
-        default="m3/history/RETAINED_CAPABILITIES.tsv",
+        default="make/m3/history/RETAINED_CAPABILITIES.tsv",
     )
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--require-no-missing", action="store_true")

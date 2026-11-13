@@ -81,7 +81,7 @@ hierarchical default-method progress accounting.
 
 Two **source-sealed Java OpenRewrite recipe** postimages have
 `ABSENT` preimages and exact SHA-256 plus canonical engine custody
-under `m3/tooling/shared-frontend/recipe-custody/datasets/
+under `make/m3/tooling/shared-frontend/recipe-custody/datasets/
 m3-file-shadow-20261020`. The existing Maven/OpenRewrite
 `M3HashPinnedJavaSnapshotRecipe`, SDK JUnit refusal and fixed-point
 gates remain authoritative; no new recipe engine is introduced.
@@ -99,7 +99,7 @@ this shadow stream does not duplicate or overwrite those owners.
 ## Repeat and admission
 
 ```sh
-root="$PWD/m3/tooling/shared-frontend/recipe-custody"
+root="$PWD/make/m3/tooling/shared-frontend/recipe-custody"
 mvn -B -ntp -f "$root/pom.xml" -Pcontract \
   -Dm3.dataset=m3-file-shadow-20261020 \
   "-Drecipe.owner.root=$root/sdk-owner" verify

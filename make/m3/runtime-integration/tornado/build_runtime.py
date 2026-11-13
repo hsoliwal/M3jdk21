@@ -291,7 +291,7 @@ class Build:
     def __init__(self, args):
         self.a = args
         self.repo = args.repo_root.resolve()
-        self.lock_path = (args.source_lock or self.repo / "m3/runtime-integration/tornado/source-lock.json").resolve()
+        self.lock_path = (args.source_lock or self.repo / "make/m3/runtime-integration/tornado/source-lock.json").resolve()
         self.lock = json.loads(self.lock_path.read_text(encoding="utf-8"))
         self.source = (args.source_root or self.repo / relative_path(self.lock["source"]["root"])).resolve()
         self.receiver = (args.receiver_source or self.repo / "m3/ports/tornadovm-bulk").resolve()
@@ -343,7 +343,7 @@ class Build:
             require(value == row["sha256"], "packager owner changed: " + row["path"])
             owners[row["path"]] = value
         for name in ("descriptor_gen.py", "split_packages.py"):
-            path = self.repo / "m3/tooling/jmod-recipes/tools" / name
+            path = self.repo / "make/m3/tooling/jmod-recipes/tools" / name
             owners[str(path.relative_to(self.repo))] = sha(path)
         notices = {}
         for row in self.lock.get("legal_notices", []):
@@ -705,7 +705,7 @@ class Build:
         if candidates[0] == versioned:
             shutil.copyfile(versioned, descriptor)
         # Reuse the target's descriptor normalizer, not a second descriptor owner.
-        owner = self.repo / "m3/tooling/jmod-recipes/tools/descriptor_gen.py"
+        owner = self.repo / "make/m3/tooling/jmod-recipes/tools/descriptor_gen.py"
         spec = importlib.util.spec_from_file_location("m3_descriptor_owner", owner)
         module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
@@ -717,7 +717,7 @@ class Build:
             path.stem + "\t" + str(path) + "\tMODULAR_JAR\n" for path in sorted(self.jars.glob("*.jar")) if path != math), encoding="utf-8")
         manifest = self.out / "DESCRIPTOR_MANIFEST.tsv"
         manifest.write_text("module\tunit_jars\ttarget\ncommons.math3\t" + str(math) + "\tcommons.math3/module-info.java\n", encoding="utf-8")
-        self.run("jmod-pack", [sys.executable, self.repo / "m3/tooling/jmod-recipes/tools/jmod_pack.py",
+        self.run("jmod-pack", [sys.executable, self.repo / "make/m3/tooling/jmod-recipes/tools/jmod_pack.py",
                  "--image-tsv", named, "--manifest", manifest, "--layer-root", descriptors,
                  "--out", self.out / "packed", "--jdk-home", self.jdk, "--release", "21", "--date", STAMP,
                  "--jmods-only", "--legal-notices", legal])

@@ -3,10 +3,10 @@ review-code-signal	RECIPE	FILE	false	false	false	com.synexia.rewrite.M3CodeSigna
 review-atom-pattern	RECIPE	FILE	false	false	false	com.synexia.rewrite.M3AtomPatternSignalChain	review-code-signal
 review-problem-planner	RECIPE	FILE	false	false	false	com.synexia.M3ProblemRecipePlanner	review-atom-pattern
 review-jni-contract	RECIPE	FILE	false	false	false	com.synexia.rewrite.M3JniContractInventoryRecipe	review-problem-planner
-inventory	INVENTORY	FILE	false	false	false	m3/backports/inventory.py	review-jni-contract
-compatibility-proof	COMPATIBILITY	FILE	false	false	false	m3/backports/compatibility_queue.py	inventory
+inventory	INVENTORY	FILE	false	false	false	make/m3/backports/inventory.py	review-jni-contract
+compatibility-proof	COMPATIBILITY	FILE	false	false	false	make/m3/backports/compatibility_queue.py	inventory
 dependency-closure	COMPATIBILITY	FILE	false	false	false	dependency-review	compatibility-proof
-file-delta	INVENTORY	FILE	false	false	false	m3/backports/file_delta_inventory.py	dependency-closure
+file-delta	INVENTORY	FILE	false	false	false	make/m3/backports/file_delta_inventory.py	dependency-closure
 a3-preparation	RECIPE	FILE	false	false	false	com.m3.tooling.dag.M3A3BackportPreparation	file-delta
 recipe-crate	RECIPE	FILE	true	false	false	com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe	a3-preparation
 recipe-junit	VERIFICATION	FILE	false	false	false	mvn:migration-recipes:test	recipe-crate

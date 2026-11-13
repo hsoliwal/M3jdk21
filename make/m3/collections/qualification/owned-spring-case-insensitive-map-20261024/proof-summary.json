@@ -194,15 +194,15 @@
     "freshExecution": "No passed behavioral/native/receiving suite rerun for compaction; only byte custody and actual captured stdout replay."
   },
   "includedRootReceiptPaths": [
-    "m3/collections/qualification/owned-spring-case-insensitive-map-20261018/archive/proof-owned-v2/OWNED_RECEIPT.json",
-    "m3/collections/qualification/owned-spring-case-insensitive-map-20261018/archive/proof-baseline-v1/BASELINE_RECEIPT.json",
-    "m3/collections/qualification/owned-spring-case-insensitive-map-20261018/archive/proof-constructor-v1/CONSTRUCTOR_RECEIPT.json",
-    "m3/collections/qualification/owned-spring-case-insensitive-map-20261018/archive/supplementals-v2/SUPPLEMENTAL_RECEIPT.json",
-    "m3/collections/qualification/owned-spring-case-insensitive-map-20261018/archive/supplementals-v2/CONSTRUCTOR_RECEIPT.json",
-    "m3/collections/qualification/owned-spring-case-insensitive-map-20261018/archive/mask-projection/run-owned-v2/RECEIPT.json",
-    "m3/collections/qualification/owned-spring-case-insensitive-map-20261018/RECEIVING_PROOF-v2.json",
-    "m3/collections/qualification/owned-spring-case-insensitive-map-20261018/CURRENT_BASE_RUNTIME_V3.json",
-    "m3/collections/qualification/owned-spring-case-insensitive-map-20261018/CURRENT_BASE_RUNTIME_V5.json"
+    "make/m3/collections/qualification/owned-spring-case-insensitive-map-20261018/archive/proof-owned-v2/OWNED_RECEIPT.json",
+    "make/m3/collections/qualification/owned-spring-case-insensitive-map-20261018/archive/proof-baseline-v1/BASELINE_RECEIPT.json",
+    "make/m3/collections/qualification/owned-spring-case-insensitive-map-20261018/archive/proof-constructor-v1/CONSTRUCTOR_RECEIPT.json",
+    "make/m3/collections/qualification/owned-spring-case-insensitive-map-20261018/archive/supplementals-v2/SUPPLEMENTAL_RECEIPT.json",
+    "make/m3/collections/qualification/owned-spring-case-insensitive-map-20261018/archive/supplementals-v2/CONSTRUCTOR_RECEIPT.json",
+    "make/m3/collections/qualification/owned-spring-case-insensitive-map-20261018/archive/mask-projection/run-owned-v2/RECEIPT.json",
+    "make/m3/collections/qualification/owned-spring-case-insensitive-map-20261018/RECEIVING_PROOF-v2.json",
+    "make/m3/collections/qualification/owned-spring-case-insensitive-map-20261018/CURRENT_BASE_RUNTIME_V3.json",
+    "make/m3/collections/qualification/owned-spring-case-insensitive-map-20261018/CURRENT_BASE_RUNTIME_V5.json"
   ],
   "selectedBaseCommit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
   "selectedBaseTree": "a493469edd30b3345cc32f608fca19b55b4a378a",

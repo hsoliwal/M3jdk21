@@ -31,7 +31,7 @@ package sun.swing.list;
  * events edit the pieces in O(pieces); the next layout copies the old measurements piece by piece
  * in one O(n) pass and measures only the new runs. A piece table, as in text editors (and the gap
  * buffer of {@code javax.swing.text.GapContent}); chosen over shifting the lanes on every event by
- * measurement (m3/docs/swing-viewport/ALGORITHM_CATALOGUE.tsv). Design: DESIGN.md section 10.
+ * measurement (doc/m3/swing-viewport/ALGORITHM_CATALOGUE.tsv). Design: DESIGN.md section 10.
  */
 //FLLDCIM: M3 swing-viewport leaf 4 - piece table over the rows measured at the last layout
 public final class M3RowPieces {

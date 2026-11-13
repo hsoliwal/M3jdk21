@@ -19,7 +19,7 @@ mkdir -p "$3"
 mvn -B -ntp $REPO -f "$MODULE/pom.xml" package > "$3/mvn-package.log" 2>&1 || true
 grep -E "_PASS |PASS actual|BUILD (SUCCESS|FAILURE)|ERROR|warning:" "$3/mvn-package.log" || true
 grep -q "BUILD SUCCESS" "$3/mvn-package.log"
-if [ -f "$ROOT/m3/tooling/jdk-naming/jdk_naming.py" ]; then
-    (cd "$ROOT" && "$PY" -I m3/tooling/jdk-naming/jdk_naming.py plan --only m3/ports/indexstring/ | tail -n 1)
+if [ -f "$ROOT/make/m3/tooling/jdk-naming/jdk_naming.py" ]; then
+    (cd "$ROOT" && "$PY" -I make/m3/tooling/jdk-naming/jdk_naming.py plan --only m3/ports/indexstring/ | tail -n 1)
 fi
 bash "$RECIPE/differential.sh" "$1" "$2" "$3/differential"

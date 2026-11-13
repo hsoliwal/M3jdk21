@@ -20,8 +20,8 @@ import jdk.internal.m3.collections.LazyElementFlags;
  * swap belongs to the existing immutable/versioned M3 swap owners. Pressure trimming here
  * only drops unpinned facades that can be reconstructed from parent state.</p>
  */
-//FLLDCIM: RELOCATE - donor blob de85b08a83a7 at fd9a233680b4; recipe m3/collections/recipe/transient-facade-20261106/relocate.py v4
-//FLLDCIM: RELOCATE - donor blob 2dc527d4efa1 at eaacff5931ef; recipe m3/collections/recipe/transient-facade-20261106/relocate.py v4
+//FLLDCIM: RELOCATE - donor blob de85b08a83a7 at fd9a233680b4; recipe make/m3/collections/recipe/transient-facade-20261106/relocate.py v4
+//FLLDCIM: RELOCATE - donor blob 2dc527d4efa1 at eaacff5931ef; recipe make/m3/collections/recipe/transient-facade-20261106/relocate.py v4
 public final class TransientFacadeStore<T> implements AutoCloseable {
     public static final int RECREATE_UNEXPOSED = 1 << 0;
     public static final int RETAIN_UNEXPOSED = 1 << 1;

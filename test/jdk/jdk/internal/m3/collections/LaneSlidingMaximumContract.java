@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 /** Standalone LeetCode #239 Java/native differential, no Maven dependencies. */
-//FLLDCIM: RELOCATE - donor blob 84cfbc24efa4 at d5ad5090d87e; recipe m3/collections/qualification/census2-t1-20261106/relocate.py v5
+//FLLDCIM: RELOCATE - donor blob 84cfbc24efa4 at d5ad5090d87e; recipe make/m3/collections/qualification/census2-t1-20261106/relocate.py v5
 public final class LaneSlidingMaximumContract {
     private static long assertions;
     private LaneSlidingMaximumContract() { }

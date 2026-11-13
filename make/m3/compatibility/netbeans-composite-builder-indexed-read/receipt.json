@@ -14,8 +14,8 @@
   "target_base_revision": "677437be295b23f7ccf7409be287008944d0e8b0",
   "target_readback_head": "677437be295b23f7ccf7409be287008944d0e8b0",
   "receiving_proof_files": [
-    "m3/compatibility/netbeans-composite-builder-indexed-read/README.md",
-    "m3/compatibility/netbeans-composite-builder-indexed-read/receipt.json"
+    "make/m3/compatibility/netbeans-composite-builder-indexed-read/README.md",
+    "make/m3/compatibility/netbeans-composite-builder-indexed-read/receipt.json"
   ],
   "recipe": {
     "name": "com.synexia.m3.CompositeBuilderIndexedRead",
@@ -53,7 +53,7 @@
   "target_outputs": [
     {
       "kind": "text",
-      "path": "m3/docs/name-mapping.json",
+      "path": "doc/m3/name-mapping.json",
       "before_sha256": "63b28070e1a3657cc3e7bda16661eaf85c2baba2eef8ec57b0f945a787fb6c9f",
       "after_sha256": "8fe79a773eb0e840a57c32d690c2e1716d4425e5355a8fd573c27882b02bd48a",
       "receiving_tree_sha256": "8fe79a773eb0e840a57c32d690c2e1716d4425e5355a8fd573c27882b02bd48a",

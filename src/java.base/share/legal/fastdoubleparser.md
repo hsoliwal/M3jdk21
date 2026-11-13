@@ -18,7 +18,7 @@ from the parsers, which square only powers of ten); LITERAL_CONSTANTS v1 (no mag
 the 13 source files became 205 private static final constants named by role, each with the literal's own type and
 spelling and a one-line Javadoc giving the role, under one //FLLDCIM anchor comment in each of the 10 classes that
 declare them (nested classes included); javac folds the constants back, so the method bytecode is unchanged
-(m3/tooling/jdk-superset/number-parse/CONSTANTS.tsv, BYTECODE_IDENTITY.tsv); DEC_EXPONENT_CLAMP v1: when the exponent
+(make/m3/tooling/jdk-superset/number-parse/CONSTANTS.tsv, BYTECODE_IDENTITY.tsv); DEC_EXPONENT_CLAMP v1: when the exponent
 number reaches MAX_EXPONENT_NUMBER, parseDecFloatLiteral of both Java-grammar templates passes DECLINED_EXPONENT
 (private static final int, Integer.MIN_VALUE) as both exponents to valueOfFloatLiteral (in the JIT_ATOMIZE v1 split
 below, valueOfTruncatedDecFloatLiteral passes a declined exponent on as the truncated exponent), so the decimal
@@ -49,7 +49,7 @@ new owner; HEX_RECONCILE v1: with HEX_ROUTE v1 merged, the hex gates run with HE
 false against HEX_ROUNDING v1 and SWAR_HEX_BORROW v1 still failed on the exponent clamp (0x.1p10240 gave 2^1020
 instead of Infinity), so the route stays and HEX_ROUNDING v1 was removed again: the donor body and TWO_POW_64 are
 back behind the constant as in HEX_ROUTE v1, unsignedToDouble and unsignedToFloat are gone, their //FLLDCIM anchor
-comments stay (gates: GATES.tsv and RECIPE_MEMORY.tsv in m3/tooling/jdk-superset/number-parse).
+comments stay (gates: GATES.tsv and RECIPE_MEMORY.tsv in make/m3/tooling/jdk-superset/number-parse).
 Nothing else was changed.
 
 ### LICENSE
@@ -197,5 +197,5 @@ which are not absorbed, became {@code ...}. The new class jdk.internal.math.M3Bi
 Classpath exception) is the one entry point. java.math.BigInteger(String, int) for radix 10 and
 java.math.BigDecimal(char[], int, int, MathContext) at unlimited precision ask it first, for literals of 400 characters
 or more (the measured crossover). A literal it rejects, and every shorter literal, takes the original JDK parser, so
-results and exceptions are exactly the JDK's (m3/evidence/java-base/NUMBER_PARSE_BIG.md). The donor's
+results and exceptions are exactly the JDK's (make/m3/evidence/java-base/NUMBER_PARSE_BIG.md). The donor's
 JavaBigDecimalFromCharSequence is not absorbed: java.math parses BigDecimal from char[].

@@ -5,7 +5,7 @@ package jdk.internal.m3.collections;
 import java.util.Objects;
 
 /** Allocation-free hashing and lossy feature-bit extraction used only for first-pass rejection. */
-//FLLDCIM: RELOCATE - donor blob 3116563a7230 at commit 3385d79a2968 (repository, path, URL and digests: m3/collections/qualification/object-signal-20261107/PROVENANCE.tsv); recipe m3/collections/qualification/object-signal-20261107/relocate.py v1
+//FLLDCIM: RELOCATE - donor blob 3116563a7230 at commit 3385d79a2968 (repository, path, URL and digests: make/m3/collections/qualification/object-signal-20261107/PROVENANCE.tsv); recipe make/m3/collections/qualification/object-signal-20261107/relocate.py v1
 public final class ObjectSignalMath {
     private static final long FNV_OFFSET = 0xcbf29ce484222325L;
     private static final long FNV_PRIME = 0x100000001b3L;

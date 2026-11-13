@@ -69,7 +69,7 @@ public final class M3Lex001Image {
     }
 
     /**
-     * One {@code m3.shards.tsv} row as read by {@code m3/runtime-integration/verify-m3-lexicon.py}
+     * One {@code m3.shards.tsv} row as read by {@code make/m3/runtime-integration/verify-m3-lexicon.py}
      * (columns shard_id, file, first_lexeme, last_lexeme, image_records, utf16_units, sha256); lexemes use
      * that tool's UTF-16-preserving sidecar escaping ({@code \\} and {@code \\uXXXX}).
      */

@@ -12,7 +12,7 @@ before = {r["path"]: q.regular(src / q.relative(r["path"])) for r in rows}
 q.admit(rows, before)
 java = {p.relative_to(src).as_posix() for d in ("m3/core/src", "m3/core/test") for p in (src / d).rglob("*.java")}
 assert java == {p for p in before if p.endswith(".java")}, "unlisted Java source"
-build = before["m3/build.sh"].decode("utf-8")
+build = before["make/m3/build.sh"].decode("utf-8")
 selected = re.findall(r'-cp build/tests ([A-Za-z0-9_]+) \| tee "build/logs/([^"]+)\-\$mode\.log"', build)
 assert [r[0] for r in selected] == manifest["programs"] and len(selected) == nprog
 assert set(manifest["markers"]) == set(manifest["programs"])

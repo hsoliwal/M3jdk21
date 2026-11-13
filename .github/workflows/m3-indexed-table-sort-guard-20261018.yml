@@ -5,7 +5,7 @@ on:
     paths:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexedTable.java'
       - 'test/jdk/jdk/m3/collections/M3IndexedTableReentrantSort*'
-      - 'm3/collections/qualification/m3jdk21-table-sort-guard-20261018/**'
+      - 'make/m3/collections/qualification/m3jdk21-table-sort-guard-20261018/**'
       - '.github/workflows/m3-indexed-table-sort-guard-20261018.yml'
   workflow_dispatch:
 concurrency:
@@ -27,7 +27,7 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           from hashlib import sha256
-          rows = Path('m3/collections/qualification/m3jdk21-table-sort-guard-20261018/manifest.tsv').read_text(encoding='utf-8').splitlines()
+          rows = Path('make/m3/collections/qualification/m3jdk21-table-sort-guard-20261018/manifest.tsv').read_text(encoding='utf-8').splitlines()
           assert len(rows) == 3, "unexpected target count"
           for row in rows:
               path, before, post, template = row.split('\t')

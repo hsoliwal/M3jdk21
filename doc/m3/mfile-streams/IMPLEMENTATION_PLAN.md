@@ -29,8 +29,8 @@ selective archive layers, depth limits, lambda result projection, provider facto
 and stream-owned input/output. Default methods share monitored I/O and synchronous
 shadows. Explicit observations/deltas reuse existing content/structure identities. It also supplies the attributed VFS core profile and the
 existing M3FS JMOD packaging integration. Exact test and image results belong to
-[`qualification.json`](../../fs/verification/vfs-20261020/qualification.json) and
-[`RESULTS.json`](../../fs/verification/vfs-20261020/RESULTS.json), not this task table.
+[`qualification.json`](../../../m3/fs/verification/vfs-20261020/qualification.json) and
+[`RESULTS.json`](../../../m3/fs/verification/vfs-20261020/RESULTS.json), not this task table.
 
 | Task | Bounded source overlap | Remaining richer contract |
 | --- | --- | --- |
@@ -235,7 +235,7 @@ mvn -B -ntp -f m3/fs/pom.xml -Pm3-vfs-core clean verify
 python3 m3/fs/verification/test_vfs_packaging.py
 ~~~
 
-See [VFS_PACKAGING.md](../../fs/verification/VFS_PACKAGING.md) for the sealed-source
+See [VFS_PACKAGING.md](../../../m3/fs/verification/VFS_PACKAGING.md) for the sealed-source
 Java/JMOD lane and required native wrapper inputs. Listing a command here does not
 claim it passed; consult the checked receipt and cross-gate report.
 

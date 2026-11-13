@@ -15,7 +15,7 @@ final class M3ScopeLiteralRepairRecipeTest implements RewriteTest {
     private static final String ROOT =
             "/jdk/internal/m3/rewrite/hash-pinned-java/scope-backslash-literal/";
     private static final String PATH =
-            "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3ScopeInference.java";
+            "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3ScopeInference.java";
 
     @Test
     void repairsExactMalformedPreimageAndReachesFixedPoint() {

@@ -710,7 +710,7 @@
       "git_blob": "f405a14690a3ab181bb5c021ca27b09258c74e65"
     },
     {
-      "path": "m3/compatibility/fifo-bitset-20261113.json",
+      "path": "make/m3/compatibility/fifo-bitset-20261113.json",
       "branch": "564dac91eebf041f3f322e48c3b6165503bcea8d",
       "git_blob": "1cecc5ba05bf97f236d8c5310c73c4bdf14b6a2e",
       "bytes": 24309,
@@ -729,13 +729,13 @@
         "crate": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
         "recipe_name": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
         "dataset": "fifo-bitset-receipt-20261113",
-        "target": "m3/compatibility/fifo-bitset-20261113.json",
+        "target": "make/m3/compatibility/fifo-bitset-20261113.json",
         "before": "ABSENT",
         "self_seal": "The subsequent private dataset binds receipt bytes and its actual SDK/receiver evidence without a self-referential hash."
       }
     },
     {
-      "path": "m3/docs/name-mapping.json",
+      "path": "doc/m3/name-mapping.json",
       "preimage_sha256": "3c92d298c8901b0434b7bd7692b7480528e36d452f896fae72aa21783e065c9e",
       "postimage_sha256": "bf87f45d1867a5d63eeda28c4e5b8700b2c3203bc4c374e05ab123be0538fea0",
       "dataset": "collection-ec670-v2-20261113",
@@ -745,7 +745,7 @@
       "git_blob": "233bbd86d88eb16a6749b691374e22e3ca961ec9"
     },
     {
-      "path": "m3/tooling/name-contract/name-plan.json",
+      "path": "make/m3/tooling/name-contract/name-plan.json",
       "preimage_sha256": "ae2f799f725ae3a8c6cf83757138e996ad98e14e3bc393f30a7a7baa9e8b5498",
       "postimage_sha256": "4831068b91454e5cb2d28315ffdbbeb8e67921b72e5246a998f4666c5a2e71b3",
       "dataset": "collection-ec670-v2-20261113",
@@ -770,7 +770,7 @@
         "qualification_scope": "Immutable final leaf templates/POMs and separate source-bound historical execution epochs. No final-commit leaf rerun is implied."
       },
       "preimage_sha256": "7df86459e62a3fd979fad73955c49892c3bfaa610bb640291790a0e33c05516e",
-      "executed_receipt": "m3/compatibility/fifo-bitset-20261113.json"
+      "executed_receipt": "make/m3/compatibility/fifo-bitset-20261113.json"
     },
     {
       "path": "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongByteHashMap.java",
@@ -798,7 +798,7 @@
         "qualification_scope": "Immutable final leaf templates/POMs and separate source-bound historical execution epochs. No final-commit leaf rerun is implied."
       },
       "preimage_sha256": "2cebc170b5b3bcf76904a5b4ef6cb8d64173b34903d42c5863f89678335ce95e",
-      "executed_receipt": "m3/compatibility/fifo-bitset-20261113.json"
+      "executed_receipt": "make/m3/compatibility/fifo-bitset-20261113.json"
     },
     {
       "path": "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongIntHashMap.java",
@@ -836,7 +836,7 @@
         "qualification_scope": "Immutable final leaf templates/POMs and separate source-bound historical execution epochs. No final-commit leaf rerun is implied."
       },
       "preimage_sha256": "ABSENT",
-      "executed_receipt": "m3/compatibility/fifo-bitset-20261113.json"
+      "executed_receipt": "make/m3/compatibility/fifo-bitset-20261113.json"
     },
     {
       "path": "test/jdk/jdk/m3/collections/LongCircularFifoQueueBulkTest.java",
@@ -854,7 +854,7 @@
         "qualification_scope": "Immutable final leaf templates/POMs and separate source-bound historical execution epochs. No final-commit leaf rerun is implied."
       },
       "preimage_sha256": "ABSENT",
-      "executed_receipt": "m3/compatibility/fifo-bitset-20261113.json"
+      "executed_receipt": "make/m3/compatibility/fifo-bitset-20261113.json"
     },
     {
       "path": "test/jdk/jdk/m3/collections/PrimitiveMapGrowthTest.java",
@@ -1228,7 +1228,7 @@
     "current_source_and_receiving_preimages": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/authoring/collection-forks-20261113/ec670-bindings/HEAD_BINDINGS.json"
   },
   "historical_receipt": {
-    "path": "m3/compatibility/primitive-map-growth-20261113.json",
+    "path": "make/m3/compatibility/primitive-map-growth-20261113.json",
     "preserved_byte_identical": true,
     "scope": "Earlier source/metadata epoch; this continuation records the current metadata and module qualification"
   },

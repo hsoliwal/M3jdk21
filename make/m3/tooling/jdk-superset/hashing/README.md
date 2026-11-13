@@ -380,4 +380,4 @@ SPDX lines as `#` comments, which every reader skips (`PERF.tsv`'s own conventio
 `tools/checksums_to_jdk.py` (CHECKSUMS_TO_JDK v1) makes commons-codec's `PureJavaCrc32` and `PureJavaCrc32C`
 (1.17.1, 1.22.1 and the relocated `jdk.m3.codec`) delegate to `java.util.zip.CRC32` and `CRC32C`, whose lookup tables
 they used to copy. Values are identical to the upstream classes on every valid call; see
-`m3/evidence/java-base/CHECKSUMS_CODEC.md`.
+`make/m3/evidence/java-base/CHECKSUMS_CODEC.md`.

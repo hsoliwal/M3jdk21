@@ -9,7 +9,7 @@ on:
       - "src/java.base/share/classes/java/util/HashMap.java"
       - "src/java.base/share/classes/java/util/Collections.java"
       - "test/jdk/java/util/HashMap/M3HashMapBulkCopyTest.java"
-      - "m3/runtime-integration/hashmap27/**"
+      - "make/m3/runtime-integration/hashmap27/**"
       - ".github/workflows/m3-hashmap27-bulk-backport.yml"
 
 permissions:
@@ -31,7 +31,7 @@ jobs:
           distribution: temurin
           java-version: "21"
       - name: Seal source and test postimages
-        run: python3 m3/runtime-integration/hashmap27/verify_receiver.py
+        run: python3 make/m3/runtime-integration/hashmap27/verify_receiver.py
       - name: Compile exact target JDK21 java.base HashMap class with package-private JDK access
         run: |
           set -euo pipefail
@@ -50,7 +50,7 @@ jobs:
           javac --release 21 -proc:none -Xlint:all,-serial -Werror \
                 -d "$RUNNER_TEMP/m3-hashmap/test" \
                 test/jdk/java/util/HashMap/M3HashMapBulkCopyTest.java \
-                m3/runtime-integration/hashmap27/M3HashMapBeforeAfterBench.java
+                make/m3/runtime-integration/hashmap27/M3HashMapBeforeAfterBench.java
       - name: Validate stock Java21 baseline and key-hash callback counts
         run: |
           java -ea -Dm3.hashmap.fastExpected=false \
@@ -73,7 +73,7 @@ jobs:
                -Dm3.variant=patched \
                -cp "$RUNNER_TEMP/m3-hashmap/test" M3HashMapBeforeAfterBench \
                | tee "$RUNNER_TEMP/m3-hashmap/after.txt"
-          python3 m3/runtime-integration/hashmap27/compare_bench.py \
+          python3 make/m3/runtime-integration/hashmap27/compare_bench.py \
             "$RUNNER_TEMP/m3-hashmap/before.txt" "$RUNNER_TEMP/m3-hashmap/after.txt"
       # Important: Java21 --patch-module tests this exact Java class on a stock
       # VM. It is not a source-built M3JDK 21 image with matched JNI/HotSpot.

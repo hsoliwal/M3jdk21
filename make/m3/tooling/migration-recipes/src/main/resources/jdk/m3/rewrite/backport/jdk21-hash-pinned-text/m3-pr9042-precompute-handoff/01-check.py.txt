@@ -9,7 +9,7 @@ import hashlib
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-RECEIPT = ROOT / "m3/compatibility/m3-pr9042-code-text-precompute.tsv"
+RECEIPT = ROOT / "make/m3/compatibility/m3-pr9042-code-text-precompute.tsv"
 
 EXPECTED_PR = "9042"
 EXPECTED_HEAD = "aa9b4ff7bd69ff58beba0c3cdd2c66b878c781ed"

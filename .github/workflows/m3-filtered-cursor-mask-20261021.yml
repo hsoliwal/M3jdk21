@@ -9,7 +9,7 @@ on:
       - 'test/jdk/jdk/m3/collections/M3FilteredCursorState*.java'
       - 'src/java.base/share/classes/java/util/CollectionViews.java'
       - 'test/jdk/java/util/CollectionViews/M3CollectionViewsCursorMaskContract.java'
-      - 'm3/collections/qualification/filtered-cursor-mask-20261021/**'
+      - 'make/m3/collections/qualification/filtered-cursor-mask-20261021/**'
       - '.github/workflows/m3-filtered-cursor-mask-20261021.yml'
   workflow_dispatch:
 permissions:
@@ -35,8 +35,8 @@ jobs:
         run: |
           set -euo pipefail
           git diff --check origin/master...HEAD
-          bash m3/collections/qualification/filtered-cursor-mask-20261021/verify.sh
-          bash m3/collections/qualification/descending-groupmask-20261021/verify.sh
+          bash make/m3/collections/qualification/filtered-cursor-mask-20261021/verify.sh
+          bash make/m3/collections/qualification/descending-groupmask-20261021/verify.sh
       - name: Strict Java 21 actual M3 List/Deque/Sorted wrappers and existing oracles
         shell: bash
         run: |
@@ -121,7 +121,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f m3/pom.xml -Pm3-extended -pl :m3-collections -am \
+          mvn -B -ntp -f make/m3/pom.xml -Pm3-extended -pl :m3-collections -am \
             -Dsurefire.failIfNoSpecifiedTests=false \
             -Dtest=M3FilteredCursorStateTest,M3IndexedDescendingGroupMaskTest,M3IndexedFilterSortFusionTest,M3FilteredDequesTest,M3FilteredViewsTest,M3FilteredListsTest,M3FilteredListsOwnerRemovalTest \
             test

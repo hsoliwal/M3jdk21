@@ -3,7 +3,7 @@
   "baseline_pr_head": "087b4769022aea0564eb3bfdaaf2ee67b2c3ecbf",
   "reviewed_checkpoint": "5abd351343edb81ddcf8e170191d2a1232b9d6d4",
   "base": "ce005d25b29fb6246e013bffb462afd5ed070362",
-  "policy": "m3/compatibility/check_public_names.py",
+  "policy": "make/m3/compatibility/check_public_names.py",
   "source_paths": [
     {
       "old": "m3-machine-compiler-hints-20261102/COMPILER_INTEGRATION_PLAN.md",

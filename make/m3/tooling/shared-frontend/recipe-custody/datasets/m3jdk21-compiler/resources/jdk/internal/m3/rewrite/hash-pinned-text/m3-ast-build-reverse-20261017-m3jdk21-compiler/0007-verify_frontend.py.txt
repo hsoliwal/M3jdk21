@@ -71,7 +71,7 @@ def main():
         if args.maven_repository:
             command.append("-Dmaven.repo.local=" + str(args.maven_repository.resolve()))
         command.extend(["-Dm3.proof.directory=" + str(out / "rewrite"), "-f",
-                        repository / "m3/tooling/shared-frontend/openrewrite/pom.xml", "verify"])
+                        repository / "make/m3/tooling/shared-frontend/openrewrite/pom.xml", "verify"])
         run("openrewrite", command)
         rewrite = True
     receipt = {

@@ -4,7 +4,7 @@
 import hashlib
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[3]
+ROOT = Path(__file__).resolve().parents[4]
 MANIFEST = Path(__file__).with_name("sorted-set-algebra-postimages-20261017.tsv")
 
 def main() -> None:
@@ -17,7 +17,7 @@ def main() -> None:
             raise SystemExit("invalid sorted-set-algebra manifest row")
         path, digest, state = row
         relative = Path(path)
-        if (relative.is_absolute() or ".." in relative.parts
+        if (relative.is_absolute() or "../../../../m3/collections" in relative.parts
                 or relative.parts[:2] != ("m3", "collections")
                 or relative.suffix != ".java"
                 or state != "MODULE_SOURCE_NOT_INSTALLED_JDK"):

@@ -24,8 +24,8 @@ Synexia donor reports strict Java21 and 411,913 checks across 20,000 seeded edit
 
 Run:
 \`\`\`sh
-python3 m3/collections/qualification/long-range-set-20261017/verify.py
-mvn -B -ntp -f m3/collections/qualification/long-range-set-20261017/recipe/pom.xml test
+python3 make/m3/collections/qualification/long-range-set-20261017/verify.py
+mvn -B -ntp -f make/m3/collections/qualification/long-range-set-20261017/recipe/pom.xml test
 mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3LongRangeSetTest test
 \`\`\`
 

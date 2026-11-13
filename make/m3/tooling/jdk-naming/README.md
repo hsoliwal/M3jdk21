@@ -38,7 +38,7 @@ same rules.
 ## Gates
 
 `.github/workflows/m3jdk-naming.yml` runs the recipe tests, the tree fixed point and the JUnit conformance on every
-pull request. The standalone check (`m3/release/check_standalone.py`) must not grow a D-kind; its N-kinds drop.
+pull request. The standalone check (`make/m3/release/check_standalone.py`) must not grow a D-kind; its N-kinds drop.
 
 
 ## Historical recipe-memory guard integrity (2026-11-07)
@@ -65,8 +65,8 @@ classfile descriptor strings, and historical donor/sidecar alignment. They
 are **source/receipt checks**; they do not rerun historical product proofs or
 replace the source-built product, Maven, JUnit, JNI, jtreg or performance gates.
 
-Re-run `python3 -I m3/tooling/jdk-naming/test_jdk_naming.py` and
-`python3 -I m3/tooling/jdk-naming/test_reseal.py` on the exact
+Re-run `python3 -I make/m3/tooling/jdk-naming/test_jdk_naming.py` and
+`python3 -I make/m3/tooling/jdk-naming/test_reseal.py` on the exact
 candidate tree. Never suppress a malformed future guard by adding a wildcard
 or by making the parser ignore rows.
 
@@ -78,7 +78,7 @@ The dependents closure of a Maven artifact from the HEAD tree: `python pom_depen
 
 FOLD_PACKAGE v1: one package of one module joins another package of another module (approved layout: families fold
 into their owner). `python -I fold_package.py --root . --from-root m3/nlp --from-package jdk.m3.nlp --to-root m3/search
---to-package jdk.m3.search --retire-to m3/evidence/search/nlp --aggregator m3/pom.xml` moves the package's sources and
+--to-package jdk.m3.search --retire-to make/m3/evidence/search/nlp --aggregator make/m3/pom.xml` moves the package's sources and
 resources. The package declaration, imports, and the dotted, path, full-path and JNI references of its types follow;
 a package that only shares the prefix (jdk.m3.nlp.search) does not. The module's records move byte for byte to the
 evidence dir, and its reactor line goes. Refused: sub-packages, a split package, a name already in the target package,

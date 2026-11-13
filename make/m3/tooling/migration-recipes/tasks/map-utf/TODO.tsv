@@ -3,7 +3,7 @@ P0	BUILD	Full native image and focused/tier jtreg	NOT_CLOSED_HERE	Full matched c
 P0	RECIPE	Maven/OpenRewrite/JUnit acceptance	NOT_CLOSED_HERE	Run all existing and new recipe suites; fix actual old failures without exclusions
 P0	MAP-UTF	Text projection leaf product acceptance	NOT_CLOSED_HERE	Runtime subset passes; independent recipe, coverage, jtreg and platform gates remain
 P0	WP-00	Whole-source inventory and dependency graph	NOT_CLOSED_HERE	Pinned complete src/test/generated/native closure; classify every tracked item
-P0	WP-01	Mapping authority reconciliation	NOT_CLOSED_HERE	Retain and reconcile m3/docs/name-mapping.json; no competing registry
+P0	WP-01	Mapping authority reconciliation	NOT_CLOSED_HERE	Retain and reconcile doc/m3/name-mapping.json; no competing registry
 P1	WP-02	Bootstrap primitive foundation	NOT_CLOSED_HERE	Overflow, ownership, lifetime, exact source recipes and allocation proof
 P1	WP-10	Explicit text Route A	NOT_CLOSED_HERE	Retain all UTF16/slice/join/regex/encoding and owner/interner contracts
 P1	WP-11	Compiler lowering Route B	NOT_CLOSED_HERE	Typed safe sites, evaluation order, exception/identity refusal, fixed point

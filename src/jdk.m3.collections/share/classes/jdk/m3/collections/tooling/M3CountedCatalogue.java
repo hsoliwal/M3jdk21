@@ -9,7 +9,7 @@ import java.nio.file.Path;
 import java.util.Locale;
 
 /** Read-only searchable receiver evaluation ledger linked to the canonical bag catalogue. */
-    //FLLDCIM: MRL - fold-close audit leaf L0054: ADD from PR #1084 head 6b16a20dcedf blob ffc026d13caa, ancestry-only landing b42ab7605b86 (tree == first parent); recipe m3/collections/qualification/foldaudit-collections-20261107/apply.py v1
+    //FLLDCIM: MRL - fold-close audit leaf L0054: ADD from PR #1084 head 6b16a20dcedf blob ffc026d13caa, ancestry-only landing b42ab7605b86 (tree == first parent); recipe make/m3/collections/qualification/foldaudit-collections-20261107/apply.py v1
     //FLLDCIM: MRL - MAPPED: the origin counts/ module has no pom on master; the file joins the real module tree
 public final class M3CountedCatalogue {
     private M3CountedCatalogue() { }

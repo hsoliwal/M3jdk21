@@ -17,4 +17,4 @@ origin's own contract test) 4/4, M3ArrayExpansionTest (runs M3ArrayDequeGrowthCo
 (jni-test-gating-20261106) and not part of the default run.
 
 The competing variants stay retained byte for byte under
-`m3/collections/qualification/master-landing-20261028/retained-variants/pr1330|pr1332|pr1335/`.
+`make/m3/collections/qualification/master-landing-20261028/retained-variants/pr1330|pr1332|pr1335/`.

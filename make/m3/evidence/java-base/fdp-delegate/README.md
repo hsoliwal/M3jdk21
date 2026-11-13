@@ -4,9 +4,9 @@ Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
 -->
 # fdp-delegate: one number parser for Jackson and the JDK
 
-> Retired 2026-11-09 by `JACKSON_NUMBERS_TO_JDK v1` (`m3/tooling/jdk-superset/number-parse`): Jackson core calls
+> Retired 2026-11-09 by `JACKSON_NUMBERS_TO_JDK v1` (`make/m3/tooling/jdk-superset/number-parse`): Jackson core calls
 > java.base directly, and the four vendored FastDoubleParser copies this lane overlaid are removed. Its records
-> and tools moved here from `m3/tooling/fdp-delegate`; the paths below are the paths at the time. See
+> and tools moved here from `make/m3/tooling/fdp-delegate`; the paths below are the paths at the time. See
 > `../NUMBER_PARSE_JACKSON.md`.
 
 Jackson 2.19.2 parses floating-point numbers with FastDoubleParser 1.0.90 when
@@ -53,19 +53,19 @@ as `jdk.internal.math.M3*` (#2215). This lane makes the vendored FastDoubleParse
 | `tools/m3src_pin.py` | Provenance for the M3 rows. It checks that the java.base sources a run compiled are the blobs of one M3JDK commit (git blob ids against `git ls-tree`, no fetch). |
 | `tools/custody_gate.py` | Gate (d). It runs `verify_source.py`, the recipe fixed point, the pack lock check and the central crate rule, plus 6 tamper probes and one unmodified control. It records the HEAD it checked. |
 | `tools/class_load_trace.py` | Gate (c) evidence. It lists the FastDoubleParser classes each build loads while Jackson parses, and fails if the overlay build loads a bit parser. |
-| `tools/public_names_gate.py` | Runs `m3/compatibility/check_public_names.py` over the branch and records base, head, exit code and violations. |
+| `tools/public_names_gate.py` | Runs `make/m3/compatibility/check_public_names.py` over the branch and records base, head, exit code and violations. |
 | `tools/gates_tsv.py` | Builds `GATES.tsv` from one run directory. Every verdict and count comes from the run's files; it writes nothing and exits 1 when a record's status disagrees with its counts, two files disagree, or a gate's inputs changed after it ran. |
 | `tools/gates_tsv_probes.py` | The composer's guard: 19 mutations of a scratch copy of the run (statuses against counts, digests, pin, probes, heads); each must be refused for its reason, and the unmodified copy must compose. |
 
 ```text
-python -I m3/tooling/fdp-delegate/tools/fdp_delegate_overlay.py --check
-python -I m3/tooling/fdp-delegate/tools/run_gates.py --jdk <jdk21> --out <dir> --m3-src <M3JDK tree>
-python -I m3/tooling/fdp-delegate/tools/m3src_pin.py --run <dir> --commit <M3JDK commit> --label <pull request>
-python -I m3/tooling/fdp-delegate/tools/custody_gate.py --out <dir>/custody
-python -I m3/tooling/fdp-delegate/tools/class_load_trace.py --jdk <jdk21> --run <dir>
-python -I m3/tooling/fdp-delegate/tools/public_names_gate.py --base <master commit> --out <dir> [--checker <copy>]
-python -I m3/tooling/fdp-delegate/tools/gates_tsv.py <dir>
-python -I m3/tooling/fdp-delegate/tools/gates_tsv_probes.py <dir> --scratch <scratch dir>
+python -I make/m3/tooling/fdp-delegate/tools/fdp_delegate_overlay.py --check
+python -I make/m3/tooling/fdp-delegate/tools/run_gates.py --jdk <jdk21> --out <dir> --m3-src <M3JDK tree>
+python -I make/m3/tooling/fdp-delegate/tools/m3src_pin.py --run <dir> --commit <M3JDK commit> --label <pull request>
+python -I make/m3/tooling/fdp-delegate/tools/custody_gate.py --out <dir>/custody
+python -I make/m3/tooling/fdp-delegate/tools/class_load_trace.py --jdk <jdk21> --run <dir>
+python -I make/m3/tooling/fdp-delegate/tools/public_names_gate.py --base <master commit> --out <dir> [--checker <copy>]
+python -I make/m3/tooling/fdp-delegate/tools/gates_tsv.py <dir>
+python -I make/m3/tooling/fdp-delegate/tools/gates_tsv_probes.py <dir> --scratch <scratch dir>
 ```
 
 Results are in `GATES.tsv`. Corrections are in `RECIPE_MEMORY.tsv`. A gate that ran at an earlier commit

@@ -24,7 +24,7 @@ python synexia-m3-recipe/scripts/generate_agent_receiver.py \
 From the M3JDK21 tree, run the actual Maven qualification gate:
 
 ```sh
-mvn -f m3/tooling/recipe-agent-api/pom.xml verify
+mvn -f make/m3/tooling/recipe-agent-api/pom.xml verify
 ```
 
 A plain Java 21 compiler can independently compile `RecipeAgent`, `RecipeCatalogue`

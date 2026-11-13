@@ -76,11 +76,11 @@ merge ancestry and exact source epochs before creating a successor code PR.
 ## Existing source owners
 
 - [M3JDK21 Eclipse substrate contract](../../M3_ECLIPSE_SUBSTRATE_CONTRACT.md)
-- [Current Eclipse framework forwarding coverage](../../framework/ECLIPSE_FORWARDING_COVERAGE.tsv)
-- [Core runtime receiving status](../../core-runtime/ECLIPSE_SUBSYSTEM_M3_RECEIVING.tsv)
-- [M3FS backend](../../../fs/README.md)
-- [M3File delta invariant](../../../docs/build-delta-invariant.md)
-- [M3JDK21 porting invariant](../../../docs/m3jdk21-porting-invariant.md)
+- [Current Eclipse framework forwarding coverage](../../../../../m3/eclipse/framework/ECLIPSE_FORWARDING_COVERAGE.tsv)
+- [Core runtime receiving status](../../../../../m3/eclipse/core-runtime/ECLIPSE_SUBSYSTEM_M3_RECEIVING.tsv)
+- [M3FS backend](../../../../../m3/fs/README.md)
+- [M3File delta invariant](../../../../../doc/m3/build-delta-invariant.md)
+- [M3JDK21 porting invariant](../../../../../doc/m3/m3jdk21-porting-invariant.md)
 - [Canonical Synexia recipe ownership](https://github.com/hsoliwal/com.synexia/tree/develop/synexia-openrewrite-recipes)
 
 Open issues: full Eclipse platform, EMF/JDT/SWT/Workbench compatibility,

@@ -29,7 +29,7 @@ import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
 /** Exact owner tests. Run with -Xss256k to expose linear predicate recursion. */
-//FLLDCIM: RELOCATE - donor blob bcb6ae82460e at ca1aafc4d94f; recipe m3/collections/qualification/census-g1-20261106/relocate.py v4
+//FLLDCIM: RELOCATE - donor blob bcb6ae82460e at ca1aafc4d94f; recipe make/m3/collections/qualification/census-g1-20261106/relocate.py v4
 public final class DeepFilterCompositionProof {
     private static long checks;
     private DeepFilterCompositionProof() { }

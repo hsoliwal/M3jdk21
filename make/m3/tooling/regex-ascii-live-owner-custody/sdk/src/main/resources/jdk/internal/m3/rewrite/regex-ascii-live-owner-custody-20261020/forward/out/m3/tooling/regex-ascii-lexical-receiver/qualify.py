@@ -15,7 +15,7 @@ RECEIVER = HERE.parents[2]
 SDK = HERE / "sdk"
 ROOT = Path(os.environ["M3_PROOF_ROOT"]).resolve()
 ARTIFACTS = ROOT / "artifacts"
-PREFIX = "m3/tooling/regex-ascii-lexical-receiver/"
+PREFIX = "make/m3/tooling/regex-ascii-lexical-receiver/"
 WORKFLOW = ".github/workflows/m3-regex-ascii-lexical-receiver.yml"
 SUITE = "jdk.internal.m3.rewrite.M3RegexAsciiLexicalReceiverRecipeTest"
 METHODS = ["all8PartialStatesBothOrdersReachExactFixedPoint",
@@ -69,7 +69,7 @@ def write(name, value):
 
 
 SOURCE_GIT = {
-    "m3/docs/name-mapping.json": "ce76431af299d15823c1cd30f9083ab1a9186f03",
+    "doc/m3/name-mapping.json": "ce76431af299d15823c1cd30f9083ab1a9186f03",
     "src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java": "61d6d3d991c5dd7bb14ce1872cc5d6d1dd5278fb",
     "src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java": "0b81a6684ac4ea70930949edd58840eb57651105",
     "src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java": "a7f325d456b55f6269d086ff8ddacad7205d1876",
@@ -79,7 +79,7 @@ SOURCE_GIT = {
     "test/jdk/java/util/regex/M3AutomatonDifferentialTest.java": "160100dbe5854b1448627a85171cbc60d7e24d85"
 }
 AFTER_GIT = {
-    "m3/docs/name-mapping.json": "ffaa8dd8e5d707bffcecc7b43e7be27b8fd53960",
+    "doc/m3/name-mapping.json": "ffaa8dd8e5d707bffcecc7b43e7be27b8fd53960",
     "src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java": "61d6d3d991c5dd7bb14ce1872cc5d6d1dd5278fb",
     "src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java": "0b81a6684ac4ea70930949edd58840eb57651105",
     "src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java": "a7f325d456b55f6269d086ff8ddacad7205d1876",

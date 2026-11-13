@@ -4,7 +4,7 @@ on:
   pull_request:
     paths:
       - 'test/jdk/jdk/m3/collections/M3MaskViewportCheckedJniContract.java'
-      - 'm3/collections/qualification/checked-jni-mask-viewport-20261028/**'
+      - 'make/m3/collections/qualification/checked-jni-mask-viewport-20261028/**'
       - '.github/workflows/m3-checked-jni-mask-viewport-20261028.yml'
   workflow_dispatch:
 permissions:
@@ -30,7 +30,7 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          bash m3/collections/qualification/checked-jni-mask-viewport-20261028/verify.sh \
+          bash make/m3/collections/qualification/checked-jni-mask-viewport-20261028/verify.sh \
             2>&1 | tee m3-checked-jni-viewport.log
       - name: Retain exact native/JVM compiler and parity evidence
         if: always()

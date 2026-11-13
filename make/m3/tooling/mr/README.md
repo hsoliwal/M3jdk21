@@ -34,10 +34,10 @@ metadata while the same matcher/input remains live; there is no global cache.
 ## How the whole structure moves
 
 The migration is a many-to-many capability adaptation, not a prefix replacement.
-`m3/docs/name-mapping.json` remains the authority. This packet preserves its
+`doc/m3/name-mapping.json` remains the authority. This packet preserves its
 existing 52 records and 20 gates unchanged, adds a Matcher lifecycle record and
 explicit pending RXM/RXA records. The serial port plan remains
-`m3/docs/m3-porting.md`. `evidence/census.tsv` is a pinned review queue, not another
+`doc/m3/m3-porting.md`. `evidence/census.tsv` is a pinned review queue, not another
 registry or a claim of semantic coverage.
 
 | Donor responsibility | M3JDK21 destination | Admission work |
@@ -131,9 +131,9 @@ remaining query work and retained metadata.
 Reproduce with Java 21 and Maven 3.9.9:
 
 ```sh
-bash m3/tooling/mr/verify.sh
+bash make/m3/tooling/mr/verify.sh
 # In an exclusively owned worktree, materialize through the recipe:
-mvn -B -ntp -f m3/tooling/mr/pom.xml -Dmr.materialize=true test
+mvn -B -ntp -f make/m3/tooling/mr/pom.xml -Dmr.materialize=true test
 ```
 
 The existing String workflow gains this recipe proof, a matching `make images`

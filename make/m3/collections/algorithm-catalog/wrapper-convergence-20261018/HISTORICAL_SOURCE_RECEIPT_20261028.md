@@ -10,7 +10,7 @@ The old PR changed 376 paths: 339 catalogue paths, 30 source paths and
 seven other paths. Against current master, **338 catalogue paths are absent**
 and the original `README.md` differs. The first documented review batch
 receives only the **23 missing top-level catalogue files** of
-`m3/collections/algorithm-catalog/wrapper-convergence-20261018/` with original Git blob IDs, modes and byte lengths.
+`make/m3/collections/algorithm-catalog/wrapper-convergence-20261018/` with original Git blob IDs, modes and byte lengths.
 
 Their immutable original Git blob IDs, mode `100644` and full byte
 sizes are recorded in `SOURCE_CUSTODY_20261028.tsv`. Original target

@@ -8,7 +8,7 @@ tool copies the class source into <work_dir>/mutants/<id>/src, applies the edit,
 module classes into <work_dir>/mutants/<id>/classes, and runs the generated JUnit tests with the mutant classes first
 on the class path, with identity hashes pinned as the jtreg @run lines do, then again without (result_unpinned: there
 a hashCode with an identity-hashed part compares by partition only). A mutant is KILLED when at least one atom test
-reports a mismatching case (its ATOM row) and the run fails. Writes m3/tooling/skija-absorb/leaf1/ATOM_MUTANTS.tsv and
+reports a mismatching case (its ATOM row) and the run fails. Writes make/m3/tooling/skija-absorb/leaf1/ATOM_MUTANTS.tsv and
 prints one line per mutant; the exit status follows the pinned results (1 when a mutant survives or does not apply).
 javac/java come from $JDK_BIN, else $JAVA_HOME/bin, else PATH.
 """
@@ -18,7 +18,7 @@ import subprocess
 import sys
 
 SRC = "src/jdk.m3.graphics/share/classes"
-LEDGER = "m3/tooling/skija-absorb/leaf1/ATOM_MUTANTS.tsv"
+LEDGER = "make/m3/tooling/skija-absorb/leaf1/ATOM_MUTANTS.tsv"
 PINNED = ["-XX:+UnlockExperimentalVMOptions", "-XX:hashCode=2"]
 MAX_SHOWN = 160
 TAB = "\t"

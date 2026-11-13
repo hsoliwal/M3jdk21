@@ -93,7 +93,7 @@ class M3FocusedStringRecipeReceiptTest(unittest.TestCase):
                 "ALREADY_ABSORBED_MASTER@c9b07049c57ecdf43175f5885e11998918416a00",
                 row["runtime_state"],
             )
-            runtime = ROOT.parent / row["runtime_path"]
+            runtime = ROOT.parent.parent / row["runtime_path"]
             self.assertTrue(runtime.is_file(), row["runtime_path"])
             self.assertEqual(row["runtime_git_blob"], git_blob(runtime), row["runtime_path"])
 
@@ -153,7 +153,7 @@ class M3FocusedStringRecipeReceiptTest(unittest.TestCase):
         )
         self.assertEqual("9859", row["focused_recipe_pr"])
         self.assertEqual(
-            "m3/compatibility/m3-string-focused-recipe-receipt-20261008.tsv",
+            "make/m3/compatibility/m3-string-focused-recipe-receipt-20261008.tsv",
             row["focused_receipt_path"],
         )
         self.assertEqual(
@@ -168,7 +168,7 @@ class M3FocusedStringRecipeReceiptTest(unittest.TestCase):
 
     def test_runtime_contains_absorbed_focused_lanes(self) -> None:
         search = (
-            ROOT.parent
+            ROOT.parent.parent
             / "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java"
         ).read_text(encoding="utf-8")
         for required in (
@@ -179,7 +179,7 @@ class M3FocusedStringRecipeReceiptTest(unittest.TestCase):
             self.assertIn(required, search)
 
         positions = (
-            ROOT.parent
+            ROOT.parent.parent
             / "src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java"
         ).read_text(encoding="utf-8")
         for required in (

@@ -15,8 +15,8 @@ import subprocess
 import sys
 from pathlib import Path
 
-HELD_TSV = "m3/qualification/loss-guard-restore-20261106/HELD.tsv"
-HELD_DIR = "m3/qualification/loss-guard-restore-20261106/held/"
+HELD_TSV = "make/m3/qualification/loss-guard-restore-20261106/HELD.tsv"
+HELD_DIR = "make/m3/qualification/loss-guard-restore-20261106/held/"
 ORIGINAL_BLOB = "b5c1f1083ec530f2581c7279bfb81fc37d6afae5"
 
 
@@ -26,7 +26,7 @@ def blob_sha(data: bytes) -> str:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--root", default=str(Path(__file__).resolve().parents[3]))
+    parser.add_argument("--root", default=str(Path(__file__).resolve().parents[4]))
     root = Path(parser.parse_args().root)
     data = (root / HELD_TSV).read_bytes()
     original = subprocess.run(["git", "-C", str(root), "cat-file", "blob", ORIGINAL_BLOB], capture_output=True,
@@ -57,7 +57,7 @@ def main() -> int:
     failures += [] if len(restored) == 2 else ["expected 2 RESTORED rows"]
     refs = subprocess.run(["git", "-C", str(root), "grep", "-l", "loss-guard-restore-20261106/HELD.tsv", "--", "."],
                           capture_output=True, text=True).stdout.split()
-    readers = [r for r in refs if not r.startswith("m3/qualification/held-restored-rows-20261107/")]
+    readers = [r for r in refs if not r.startswith("make/m3/qualification/held-restored-rows-20261107/")]
     print("other files naming this HELD.tsv: %d %s" % (len(readers), readers))
     print("CHECK_ROWS %s" % ("PASS" if not failures else "FAIL " + "; ".join(failures)))
     return 0 if not failures else 1

@@ -28,7 +28,7 @@ final class M3JoinedReferenceWorkflowTest {
     static final String REF = "1a79e669ec536ac45bf7a1566596aa05977bf18b";
     static final String LEGACY = ".github/workflows/m3-joined-range-directory.yml";
     static final String NLP = ".github/workflows/m3-current-nlp-search-jmods-20261018.yml";
-    static final String MANIFEST = "m3/tooling/joined-range-directory/REFERENCE_REPLAY.json";
+    static final String MANIFEST = "make/m3/tooling/joined-range-directory/REFERENCE_REPLAY.json";
     static String legacyBefore, nlpBefore, legacyAfter, nlpAfter, reference;
     static int rejected, bashChecks, pythonChecks, commands;
     record Scalar(String tag, String value) { }

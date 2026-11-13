@@ -1,6 +1,6 @@
 <!-- Copyright 2026 Hitesh Soliwal and contributors -->
 <!-- SPDX-License-Identifier: Apache-2.0 -->
-<!-- FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/synexia-openrewrite-recipes/recipe-crates/m3-pmem-task-replay-20261102/RECIPE_MEMORY.md blob 95755c4f32ff; recipe m3/optane/recipe/pmem-task-log-replay-20261106/relocate.py v3 -->
+<!-- FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/synexia-openrewrite-recipes/recipe-crates/m3-pmem-task-replay-20261102/RECIPE_MEMORY.md blob 95755c4f32ff; recipe make/m3/optane/recipe/pmem-task-log-replay-20261106/relocate.py v3 -->
 # M3 correction memory — exact source and candidate-bound PMEM replay
 
 - Date/parent: 2026-11-02, draft PR #15292 head

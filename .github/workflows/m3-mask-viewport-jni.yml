@@ -7,7 +7,7 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3MaskViewport*.java'
       - 'src/jdk.m3.collections/share/native/libm3collections/m3maskviewport.c'
       - 'test/jdk/jdk/m3/collections/M3MaskViewportKernelContract.java'
-      - 'm3/collections/viewport-proof/**'
+      - 'make/m3/collections/viewport-proof/**'
       - '.github/workflows/m3-mask-viewport-jni.yml'
       - '.github/workflows/m3-viewport-family-composed.yml'
   workflow_dispatch:
@@ -27,4 +27,4 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Strict Java 21 and C17 JNI differential
-        run: bash m3/collections/viewport-proof/verify.sh
+        run: bash make/m3/collections/viewport-proof/verify.sh

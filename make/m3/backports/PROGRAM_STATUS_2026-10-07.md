@@ -36,7 +36,7 @@ No compatibility decision changes.
 
 ### JEP 523 receipt correction
 
-Current master contains `m3/backports/recipes/jep-523-g1-default/CURRENT_TREE_RECEIPT.tsv`.
+Current master contains `make/m3/backports/recipes/jep-523-g1-default/CURRENT_TREE_RECEIPT.tsv`.
 It proves the reviewed recipe postimages are already present for
 `gcConfig.cpp` and `TestSelectDefaultGC.java`, with zero recipe replay source delta.
 
@@ -70,7 +70,7 @@ promotion remains `NOT_AUTHORIZED`.
 ## Nebula/Synexia recipe transfer
 
 The reusable FILE-local atomization/patternization recipe authority remains Synexia.
-M3JDK21's `m3/tooling/a3` receiver pins:
+M3JDK21's `make/m3/tooling/a3` receiver pins:
 
 - Synexia commit `a062661e91e769a00c2d027e1f04a7a0c8f9dc28`
 - export manifest Git blob `b691460aebcd458f5d5fb0d508b4a4a05ef8d6c5`
@@ -100,7 +100,7 @@ The queue, not conversation order, remains the scheduling authority.
 ### JEP 485 current product receipt
 
 Current master Git-object readback proves all seven product owners in
-`m3/backports/recipes/j485/CURRENT_PRODUCT.tsv` match exactly:
+`make/m3/backports/recipes/j485/CURRENT_PRODUCT.tsv` match exactly:
 
 - `Gatherer.java`
 - `GathererOp.java`
@@ -119,7 +119,7 @@ and fixed-point/readback remain pending. Promotion remains `NOT_AUTHORIZED`.
 ### JEP 454 FFM finalization inventory
 
 JEP 454 is now represented by a dependency-only packet at
-`m3/backports/recipes/jep-454-ffm/`.
+`make/m3/backports/recipes/jep-454-ffm/`.
 
 Pinned lineage:
 

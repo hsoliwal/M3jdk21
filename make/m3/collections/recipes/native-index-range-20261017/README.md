@@ -21,11 +21,11 @@ prevent promotion. The SDK scheduler is a separate gate from direct kernel repla
 
 ```sh
 # From repository root; no product writes, requires already-generated outputs:
-python3 m3/collections/recipes/native-index-range-20261017/verify.py
+python3 make/m3/collections/recipes/native-index-range-20261017/verify.py
 # Explicit qualification then serial promotion in an isolated checkout:
-python3 m3/collections/recipes/native-index-range-20261017/verify.py --apply
+python3 make/m3/collections/recipes/native-index-range-20261017/verify.py --apply
 # Real public OpenRewrite 8.17.1 + JUnit + Maven verify binding:
-mvn -B -f m3/collections/recipes/native-index-range-20261017/pom.xml clean verify
+mvn -B -f make/m3/collections/recipes/native-index-range-20261017/pom.xml clean verify
 ```
 
 The Maven POM compiles the actual two product owners and their generated JUnit adapter,

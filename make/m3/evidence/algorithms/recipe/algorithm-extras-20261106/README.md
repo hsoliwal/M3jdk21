@@ -63,7 +63,7 @@ not a test) `M3AlgorithmExtrasDump`.
 | differences from the lineage | DROP_METHOD may select one overload (`Type.method(type,...)`); a dropped declaration takes its leading Javadoc; new row kind DROP_TYPE (nested type); the declaration matcher refuses a call statement (type must start with a word character and not be `return`/`new`/...) |
 | map | `RELOCATION_MAP.tsv`: 1 REPO, 17 FILE, 1 OWNED, 2 PACKAGE, 18 TYPE, 1 EXTERNAL, 81 DROP_METHOD, 7 DROP_TYPE, 9 DROP_LINE (imports only dropped members used), 2 INSERT_AFTER (explicit constructors of IntMinStack and MedianTracker, missing-explicit-ctor), 2 SKIP, 5 NEC |
 | provenance | `PROVENANCE.tsv`: body_match=TRUE 17/17 (every kept line a donor line or its renamed form) |
-| ledger | `converge_rows.py`: 21 rows in `m3/qualification/converge-collections-20261030/CONVERGE_COLLECTIONS.tsv` (PRESENT_IN_M3JDK 75 -> 96); re-run after a rebase |
+| ledger | `converge_rows.py`: 21 rows in `make/m3/qualification/converge-collections-20261030/CONVERGE_COLLECTIONS.tsv` (PRESENT_IN_M3JDK 75 -> 96); re-run after a rebase |
 | naming | `jdk_naming.py apply --only m3/algorithms/`: 0 moves, 0 rewrites, 0 refusals; fixed point 0/0 on the committed tree (the recipe scripts read donor package and repository names from `RELOCATION_MAP.tsv`; `OverlapAgreement.java` is a `DONOR_PACKAGE` template) |
 
 ## NEC observations (`OVERLAP.tsv`, landed or owner body wins)

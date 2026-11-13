@@ -40,7 +40,7 @@ public final class NativeIndexRangeReplay {
         Path repo = Path.of(args[0]).toRealPath();
         Path output = Path.of(args[1]).toAbsolutePath().normalize();
         if (Files.exists(output)) throw new IllegalStateException("candidate directory must not exist");
-        Path resources = repo.resolve("m3/collections/recipes/native-index-range-20261017/src/main/resources");
+        Path resources = repo.resolve("make/m3/collections/recipes/native-index-range-20261017/src/main/resources");
         M3GpuToolJoinManifest.Resources loader = name -> Files.newInputStream(resources.resolve(name.substring(1)));
         var manifest = M3GpuToolJoinManifest.load(ROOT, loader, M3GpuToolJoinManifest.NOOP);
         var scan = manifest.scan();

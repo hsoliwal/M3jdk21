@@ -68,7 +68,7 @@
       "canonical_template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-filtered-splits-mask-spans-20261018/.github__workflows__m3-collections.yml.txt"
     },
     {
-      "target_path": "m3/collections/qualification/filtered-splits-mask-spans-20261018/verify.py",
+      "target_path": "make/m3/collections/qualification/filtered-splits-mask-spans-20261018/verify.py",
       "before_sha256": "ABSENT",
       "after_sha256": "d7ed1f2181a3a381a92bbe6d1145b369c6540eebabb65b9cb1b9b696ddfad05d",
       "canonical_template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-filtered-splits-mask-spans-20261018/m3__collections__qualification__filtered-splits-mask-spans-20261018__verify.py.txt"

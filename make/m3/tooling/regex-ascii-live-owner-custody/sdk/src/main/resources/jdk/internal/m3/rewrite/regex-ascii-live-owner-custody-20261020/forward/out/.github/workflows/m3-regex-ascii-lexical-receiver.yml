@@ -6,7 +6,7 @@ on:
   pull_request:
     paths:
       - '.github/workflows/m3-regex-ascii-lexical-receiver.yml'
-      - 'm3/tooling/regex-ascii-lexical-receiver/**'
+      - 'make/m3/tooling/regex-ascii-lexical-receiver/**'
 permissions:
   contents: read
 jobs:
@@ -118,7 +118,7 @@ jobs:
           root=pathlib.Path(os.environ["M3_PROOF_ROOT"])
           source=pathlib.Path(os.environ["M3_SOURCE_ROOT"])
           bundle=root/"artifacts";bundle.mkdir(exist_ok=False)
-          sdk=source/"m3/tooling/regex-ascii-lexical-receiver/sdk"
+          sdk=source/"make/m3/tooling/regex-ascii-lexical-receiver/sdk"
           start=time.monotonic()
           active_command=None
           class CensusRescan(RuntimeError):pass
@@ -277,7 +277,7 @@ jobs:
               gate()
               if code!=expected:raise RuntimeError(name+" failed with "+str(code)+" expected "+str(expected))
           py=[os.environ["M3_PYTHON"],"-I","-S","-B"]
-          qualifier=source/"m3/tooling/regex-ascii-lexical-receiver/qualify.py"
+          qualifier=source/"make/m3/tooling/regex-ascii-lexical-receiver/qualify.py"
           settings=root/"home/.m2"
           maven=["mvn","-B","-ntp","-s",str(settings/"settings.xml"),"-gs",str(settings/"global-settings.xml"),"-Dmaven.repo.local="+str(root/"m2"),"-Dstyle.color=never"]
           try:

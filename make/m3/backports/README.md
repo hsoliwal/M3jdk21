@@ -6,8 +6,8 @@ Status: active downstream backport programme. Target baseline is OpenJDK 21 sema
 
 **Canonical transformation work runs in `hsoliwal/com.synexia`; M3JDK21 receives
 the executed product changes and independently qualifies them.** This is the
-current [repository policy](../../AGENTS.md) and
-[porting contract](../docs/m3jdk21-porting-invariant.md). Historical recipe
+current [repository policy](../../../AGENTS.md) and
+[porting contract](../../../doc/m3/m3jdk21-porting-invariant.md). Historical recipe
 copies, generators and recipe profiles below remain custody debt, even where
 older sections describe them as execution entry points. Do not execute them in
 the public product or remove them before their exact source and callers have
@@ -22,8 +22,8 @@ count the same thing:
 | JEPs | `RELEASE_JEP_AUTHORITY.tsv`, `JEP_CATALOGUE.tsv`, `JEP_RESIDUE_QUEUE.tsv`, `JEP_SOURCE_WITNESS.md` | Exact implementation/dependency paths and target tests; a catalogue disposition or matching blob is not installed-image acceptance |
 | JBS fixes and non-JEP changes | `inventory.py`, `UPSTREAM_CHANGE_SEEDS.tsv`, `compatibility_queue.py` | Original issue and commit, follow-up/backout dependencies, adapted patch, regression and target evidence |
 | JDK vendors and other implementations | `COMMUNITY_FORKS.tsv`, `COMMUNITY_FORK_CAPABILITIES.tsv`, `VENDOR_BEST_OF.tsv`; Synexia donor catalogue and vendor-delta recipe | Pinned donor/licence and one reviewed adaptation into the existing target owner |
-| Synexia String, arrays, collections, AST, files and precompute | `m3/docs/name-mapping.json`, full-family pins and the Synexia `CANONICAL_RECIPE_HOME.tsv` | Stable capability ID, correct package/module, exact generated source and independent target acceptance |
-| Maven/build work | Existing Synexia build planners and Maven extension owners; target `m3/pom.xml` and release contract | Executed product build/test configuration and source-bound receipts; reusable recipes remain in Synexia |
+| Synexia String, arrays, collections, AST, files and precompute | `doc/m3/name-mapping.json`, full-family pins and the Synexia `CANONICAL_RECIPE_HOME.tsv` | Stable capability ID, correct package/module, exact generated source and independent target acceptance |
+| Maven/build work | Existing Synexia build planners and Maven extension owners; target `make/m3/pom.xml` and release contract | Executed product build/test configuration and source-bound receipts; reusable recipes remain in Synexia |
 
 The same feature may have a JSR obligation, a JEP, several JBS issues and
 multiple vendor commits. Preserve those relationships in its existing packet;
@@ -231,7 +231,7 @@ to run in this target**). Execute the corresponding qualified canonical Synexia
 recipe against pinned target inputs:
 
 ```bash
-python3 m3/backports/generate_recipe_crates.py \
+python3 make/m3/backports/generate_recipe_crates.py \
   --repo . \
   --release 27 \
   --paths-file target/selected-java-paths.txt \
@@ -247,7 +247,7 @@ is recorded below for custody reconciliation. Use the corresponding Synexia
 text recipe for new work; do not run the retained target generator:
 
 ```bash
-python3 m3/backports/generate_recipe_crates.py \
+python3 make/m3/backports/generate_recipe_crates.py \
   --repo . \
   --release 24 \
   --paths-file target/selected-jdk24-paths.txt \
@@ -271,7 +271,7 @@ native/HotSpot/JNI source with unchanged regular-file mode. Execute its qualifie
 canonical counterpart in Synexia, not this retained target generator:
 
 ```bash
-python3 m3/backports/generate_recipe_crates.py \
+python3 make/m3/backports/generate_recipe_crates.py \
   --repo . \
   --release 27 \
   --paths-file target/selected-native-paths.txt \
@@ -285,13 +285,13 @@ The inventory marks C/C++/header/assembly rows with `native_source=true` and nat
 `jdk<release>-native-<ordinal>` one-file crates through
 `M3Jdk21HashPinnedTextSnapshotRecipe`. This is exact preimage/postimage custody only; it does not
 pretend OpenRewrite PlainText is a C/C++ AST. Native build, JNI/HotSpot semantics and scope-join proof
-remain mandatory. See `m3/docs/a3-native-jni.md`.
+remain mandatory. See `doc/m3/a3-native-jni.md`.
 
 
 ## Recipe DAG control plane
 
 Backport execution is composed from small immutable recipe/work atoms through the framework-neutral
-DAG in `m3/tooling/backport-dag`.
+DAG in `make/m3/tooling/backport-dag`.
 
 The canonical authority is `m3-backport-dag.tsv` plus the Java validator `RecipeDag`.
 Camel, Airflow and Drools files are orchestration/admission projections only; they do not gain
@@ -305,7 +305,7 @@ Independent FILE recipe atoms may share one parallel DAG layer. Any broader muta
 explicit scope-promotion approval. Canonical promotion is one serial terminal node after recipe
 JUnit, diff, lint, compile, jtreg and runtime gates.
 
-The product Maven control reactor is `m3/pom.xml`. Its eventual full execution
+The product Maven control reactor is `make/m3/pom.xml`. Its eventual full execution
 must preserve the complete reviewed product scope and generate the exact-source
 release receipt described in [release preparation](../release/README.md).
 Historical recipe roots and callers must first be reconciled with Synexia.
@@ -318,9 +318,9 @@ orchestration binding. Reusable recipe scheduling/execution stays in Synexia;
 this example is a custody reference, not a target recipe-execution entry point:
 
 ```bash
-mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
+mvn -B -ntp -f make/m3/tooling/backport-dag/pom.xml \
   -Dexec.mainClass=jdk.m3.tooling.dag.OrchestrationProjectionMain \
-  -Dexec.args="m3/backports/recipes/<packet>/packet.tsv target/m3-orchestration/<packet>" \
+  -Dexec.args="make/m3/backports/recipes/<packet>/packet.tsv target/m3-orchestration/<packet>" \
   exec:java
 ```
 
@@ -376,7 +376,7 @@ records `UPSTREAM_MERGED_ACTIONS_STARTUP_BLOCKED_NO_JOBS`; no hosted green-build
 M3JDK21 keeps its richer product-side backport DAG as local build/promotion authority, but portable
 small-recipe DAG/orchestrator semantics are canonically owned in Synexia.
 
-`m3/tooling/backport-dag/M3SynexiaCanonicalDagBinding` binds the exact Synexia candidate PR/commit
+`make/m3/tooling/backport-dag/M3SynexiaCanonicalDagBinding` binds the exact Synexia candidate PR/commit
 and required laws. Until that upstream candidate is merged and its unified proof is green, the
 binding is pre-admission evidence only and returns:
 
@@ -407,7 +407,7 @@ mandatory. JUnit must prove the recipe or recipe DAG on Java 21 fixtures before 
 A one-off exact donor patch may remain the replay unit only when hash-pinned and independently
 verified.
 
-Existing `m3/docs/name-mapping.json` remains the M3 migration mapping authority. This directory is an
+Existing `doc/m3/name-mapping.json` remains the M3 migration mapping authority. This directory is an
 upstream-JDK backport catalogue and must not replace or fork that mapping authority.
 
 ## First admitted tool change

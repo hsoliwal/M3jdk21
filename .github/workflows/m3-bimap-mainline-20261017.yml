@@ -5,7 +5,7 @@ on:
     paths:
       - 'm3/collections/interop/src/main/java/jdk/m3/collections/interop/M3BiMap*.java'
       - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3BiMapTest.java'
-      - 'm3/collections/qualification/bimap-mainline-20261017/**'
+      - 'make/m3/collections/qualification/bimap-mainline-20261017/**'
       - 'test/jdk/jdk/m3/collections/native/collections/m3_bimap_consumer.c'
       - '.github/workflows/m3-bimap-mainline-20261017.yml'
   workflow_dispatch:
@@ -25,7 +25,7 @@ jobs:
       - name: Prove source-sealed OpenRewrite recipe and fixed point
         run: |
           set -eu
-          mvn -B -ntp "-Dm3.receiver.root=$PWD" -f m3/collections/qualification/bimap-mainline-20261017/recipe/pom.xml clean verify
+          mvn -B -ntp "-Dm3.receiver.root=$PWD" -f make/m3/collections/qualification/bimap-mainline-20261017/recipe/pom.xml clean verify
       - name: Verify current M3 collection owners and real Guava provider
         run: |
           set -eu
@@ -42,6 +42,6 @@ jobs:
       - name: Test real Java BiMap through checked JNI
         run: |
           set -eu
-          mvn -B -ntp -f m3/collections/qualification/bimap-mainline-20261017/native-test/pom.xml \
+          mvn -B -ntp -f make/m3/collections/qualification/bimap-mainline-20261017/native-test/pom.xml \
             "-Dm3.bimap.native=$RUNNER_TEMP/m3-bimap-native/libm3_bimap_consumer.so" \
             clean verify

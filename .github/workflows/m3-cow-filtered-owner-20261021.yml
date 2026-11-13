@@ -6,8 +6,8 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3CollectionViews.java'
       - 'test/jdk/jdk/m3/collections/M3FilteredCowOwnerContract.java'
       - 'test/jdk/jdk/m3/collections/M3FilteredCowOwnerTest.java'
-      - 'm3/collections/qualification/cow-filtered-owner-20261021/**'
-      - 'm3/collections/algorithm-catalog/cow-filtered-owner-20261021/**'
+      - 'make/m3/collections/qualification/cow-filtered-owner-20261021/**'
+      - 'make/m3/collections/algorithm-catalog/cow-filtered-owner-20261021/**'
       - '.github/workflows/m3-cow-filtered-owner-20261021.yml'
   workflow_dispatch:
 concurrency:
@@ -27,4 +27,4 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Preserve original combined owner API and early-stop behavior; qualify exact COW contract
-        run: bash m3/collections/qualification/cow-filtered-owner-20261021/verify.sh
+        run: bash make/m3/collections/qualification/cow-filtered-owner-20261021/verify.sh

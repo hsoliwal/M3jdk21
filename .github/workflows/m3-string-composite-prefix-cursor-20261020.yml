@@ -6,8 +6,8 @@ on:
       - 'src/java.base/share/classes/java/lang/M3String.java'
       - 'src/java.base/share/classes/java/lang/M3StringPrecomputeBridge.java'
       - 'test/jdk/java/lang/String/M3StringCompositePrefixCursorTest.java'
-      - 'm3/runtime-integration/string-prefix-cursor-20261020/**'
-      - 'm3/tooling/shared-frontend/recipe-custody/datasets/m3-prefix-cursor-20261020/**'
+      - 'make/m3/runtime-integration/string-prefix-cursor-20261020/**'
+      - 'make/m3/tooling/shared-frontend/recipe-custody/datasets/m3-prefix-cursor-20261020/**'
       - '.github/workflows/m3-string-composite-prefix-cursor-20261020.yml'
   workflow_dispatch:
 permissions:
@@ -29,8 +29,8 @@ jobs:
             src/java.base/share/classes/java/lang/M3String.java
             src/java.base/share/classes/java/lang/M3StringPrecomputeBridge.java
             test/jdk/java/lang/String/M3StringCompositePrefixCursorTest.java
-            m3/runtime-integration/string-prefix-cursor-20261020/
-            m3/tooling/shared-frontend/recipe-custody/
+            make/m3/runtime-integration/string-prefix-cursor-20261020/
+            make/m3/tooling/shared-frontend/recipe-custody/
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -40,18 +40,18 @@ jobs:
         run: |
           set -euo pipefail
           python3 -m unittest discover \
-            -s m3/runtime-integration/string-prefix-cursor-20261020 \
+            -s make/m3/runtime-integration/string-prefix-cursor-20261020 \
             -p 'test_verify_multi_pass.py' -v
-          python3 m3/runtime-integration/string-prefix-cursor-20261020/verify_multi_pass.py \
+          python3 make/m3/runtime-integration/string-prefix-cursor-20261020/verify_multi_pass.py \
             --root "$PWD"
-          python3 m3/tooling/shared-frontend/recipe-custody/contract/test_verify_stage_chain.py
-          python3 m3/tooling/shared-frontend/recipe-custody/contract/verify_stage_chain.py \
+          python3 make/m3/tooling/shared-frontend/recipe-custody/contract/test_verify_stage_chain.py
+          python3 make/m3/tooling/shared-frontend/recipe-custody/contract/verify_stage_chain.py \
             --root "$PWD" --dataset m3-prefix-cursor-20261020
       - name: Execute composed three-pass OpenRewrite SDK and exact receiver
         shell: bash
         run: |
           set -euo pipefail
-          root="$PWD/m3/tooling/shared-frontend/recipe-custody"
+          root="$PWD/make/m3/tooling/shared-frontend/recipe-custody"
           mvn -B -ntp -f "$root/pom.xml" \
             -Dm3.dataset=m3-prefix-cursor-20261020 \
             "-Drecipe.owner.root=$root/sdk-owner" -Pcontract verify

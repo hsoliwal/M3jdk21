@@ -6,7 +6,7 @@
   "target_repo": "hsoliwal/M3jdk21",
   "target_parent": "b68391863561ce80169663cd2b49c2845e084b74",
   "producer_recipe": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/m3-lane28",
-  "producer_crate": "m3/tooling/lane28",
+  "producer_crate": "make/m3/tooling/lane28",
   "environment": {
     "java": "Temurin 21.0.8+9",
     "compiler": "GCC 13.3.0 -O2",

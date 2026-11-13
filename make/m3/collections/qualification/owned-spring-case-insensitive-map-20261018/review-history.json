@@ -12,8 +12,8 @@
     "originalPublicFiles": 89,
     "whole89ModelReviewClaim": false,
     "machineTranscriptPaths": [
-      "m3/collections/qualification/owned-spring-case-insensitive-map-20261018/recorded/provider-protocol.jsonl",
-      "m3/collections/qualification/owned-spring-case-insensitive-map-20261018/recorded/owned-protocol.jsonl"
+      "make/m3/collections/qualification/owned-spring-case-insensitive-map-20261018/recorded/provider-protocol.jsonl",
+      "make/m3/collections/qualification/owned-spring-case-insensitive-map-20261018/recorded/owned-protocol.jsonl"
     ],
     "machineAuditScope": "Only two oversized generated protocol stdout transcripts excluded from model patch review; original frozen fixture/partition/parser plus exact source custody and captured-stdout comparison/replay already machine-audit all required rows and preserve seven separate diagnostics. They remain original exact public bytes in final tree and publication payload."
   },
@@ -106,7 +106,7 @@
           "confidence": 0.99,
           "category": "bug",
           "code_location": {
-            "file_path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-spring-case-insensitive-map/M3LinkedCaseInsensitiveMap.java.txt",
+            "file_path": "make/m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-spring-case-insensitive-map/M3LinkedCaseInsensitiveMap.java.txt",
             "line": 126
           }
         },
@@ -117,7 +117,7 @@
           "confidence": 0.95,
           "category": "bug",
           "code_location": {
-            "file_path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/main/resources/META-INF/rewrite/m3-owned-spring-case-insensitive-map.yml",
+            "file_path": "make/m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/main/resources/META-INF/rewrite/m3-owned-spring-case-insensitive-map.yml",
             "line": 9
           }
         },
@@ -128,7 +128,7 @@
           "confidence": 0.98,
           "category": "regression",
           "code_location": {
-            "file_path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-spring-case-insensitive-map/M3LinkedCaseInsensitiveMap.java.txt",
+            "file_path": "make/m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-spring-case-insensitive-map/M3LinkedCaseInsensitiveMap.java.txt",
             "line": 352
           }
         }
@@ -266,7 +266,7 @@
   "acceptedSuccessor": {
     "runtimeFindings": "Clone lexical hook owner and case-insensitive key-set containment preserved by exact Spring donor and captured provider/owned witnesses; no runtime fix",
     "documentation": {
-      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/README.md",
+      "path": "make/m3/collections/recipe/owned-spring-case-insensitive-map-20261018/README.md",
       "bytes": 3555,
       "sha256": "7a34860c6893dd0ebde14fb260d1c94801ddbc47b01b3b617396cb89a9dce041",
       "change": "Explicit lst:false PlainTextParser input and withSourcePath pipeline, absent-target omission and exact-postimage fresh reactivation; Java-LST representation refusal; runtime compilation/differential proofs separate"

@@ -1,6 +1,6 @@
 {
   "schema": "M3JDK21_NAME_CONTRACT_PLAN_V1",
-  "authority": "m3/docs/name-mapping.json",
+  "authority": "doc/m3/name-mapping.json",
   "authority_blob": "233bbd86d88eb16a6749b691374e22e3ca961ec9",
   "operations": [
     {

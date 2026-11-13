@@ -2634,7 +2634,7 @@ BEGIN_RAW_FILE final-current/00-baseline-integration.json sha256=66efbdb1be8a1c5
   "initial_commit": "e8fdab9a7abc4b0273438ce9e5d0ffd6255b1247",
   "publication_commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
   "publication_root_tree": "548f3d7c434c49c3989fc722f34ebba2ba9f0c5a",
-  "helper_path": "m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+  "helper_path": "make/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
   "before_sha256": "b96894a77e5c310addbda72b248ab56fedf8ceb24e5de81fe6e5d090982a4abc",
   "current_sha256": "9cf77c6e68a534e84b88230ca517fa6c5a76fb3e101ea3a1f68aa5222c3ec4d9",
   "current_git_blob_sha1": "717c3e01f8f0407ce96439e3ecc96190b10c1eed",
@@ -2667,56 +2667,56 @@ BEGIN_RAW_FILE final-current/00-publication-preflight.json sha256=078229832f13d3
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/atom-comment-custody/after.java.txt",
+      "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/atom-comment-custody/after.java.txt",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/atom-comment-custody/before.java.txt",
+      "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/atom-comment-custody/before.java.txt",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/atom-comment-custody/manifest.tsv",
+      "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/atom-comment-custody/manifest.tsv",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/atom-pattern-spectrum/after-atom.java.txt",
+      "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/atom-pattern-spectrum/after-atom.java.txt",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/atom-pattern-spectrum/after-pattern.java.txt",
+      "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/atom-pattern-spectrum/after-pattern.java.txt",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/atom-pattern-spectrum/before-atom.java.txt",
+      "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/atom-pattern-spectrum/before-atom.java.txt",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/atom-pattern-spectrum/before-pattern.java.txt",
+      "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/atom-pattern-spectrum/before-pattern.java.txt",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/atom-pattern-spectrum/manifest.tsv",
+      "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/atom-pattern-spectrum/manifest.tsv",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
@@ -2765,175 +2765,175 @@ BEGIN_RAW_FILE final-current/00-publication-preflight.json sha256=078229832f13d3
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/atom/spectrum/CORPUS.tsv",
+      "path": "make/m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/atom/spectrum/CORPUS.tsv",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/DESIGN.md",
+      "path": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/DESIGN.md",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/FINAL_REPORT.md",
+      "path": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/FINAL_REPORT.md",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/README.md",
+      "path": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/README.md",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/SOURCE_PINS.tsv",
+      "path": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/SOURCE_PINS.tsv",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/checkstyle.xml",
+      "path": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/checkstyle.xml",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/BASELINE.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/BASELINE.json",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/CORPUS_ADMISSION.tsv",
+      "path": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/CORPUS_ADMISSION.tsv",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/CORPUS_COUNTS.tsv",
+      "path": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/CORPUS_COUNTS.tsv",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/COUNTS.tsv",
+      "path": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/COUNTS.tsv",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/EVENTS.jsonl",
+      "path": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/EVENTS.jsonl",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/FINAL_COMMANDS.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/FINAL_COMMANDS.json",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/FINAL_CONTROL_SHA256.tsv",
+      "path": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/FINAL_CONTROL_SHA256.tsv",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/FINAL_SOURCE_SHA256.tsv",
+      "path": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/FINAL_SOURCE_SHA256.tsv",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/GATES.tsv",
+      "path": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/GATES.tsv",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/JUNIT.tsv",
+      "path": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/JUNIT.tsv",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/M3_GROUP.tsv",
+      "path": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/M3_GROUP.tsv",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/MATERIALIZATION.tsv",
+      "path": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/MATERIALIZATION.tsv",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/PERMUTATIONS.tsv",
+      "path": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/PERMUTATIONS.tsv",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/RAW_GATES.log",
+      "path": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/RAW_GATES.log",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/RAW_GATES_INDEX.tsv",
+      "path": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/RAW_GATES_INDEX.tsv",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/RUNTIME_AUDIT.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/RUNTIME_AUDIT.json",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/pom.xml",
+      "path": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/pom.xml",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/verify-runtime.py",
+      "path": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/verify-runtime.py",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/verify-static.py",
+      "path": "make/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/verify-static.py",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
@@ -2966,62 +2966,62 @@ BEGIN_RAW_FILE final-current/00-publication-preflight.json sha256=078229832f13d3
         "status": "added"
       },
       {
-        "path": "m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv",
+        "path": "make/m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv",
         "sha": "ebe8a2e68c3ebf7f1607f8d629ce9b5ac814c639",
         "status": "added"
       },
       {
-        "path": "m3/backports/PROOF_HARNESS_REPAIR_20261005.md",
+        "path": "make/m3/backports/PROOF_HARNESS_REPAIR_20261005.md",
         "sha": "d9999d6391ffe3b0a4b9b4b3b8f7142b8c2d9c2c",
         "status": "added"
       },
       {
-        "path": "m3/backports/compatibility_policy.py",
+        "path": "make/m3/backports/compatibility_policy.py",
         "sha": "b1e16c127f72338456075447e192f4c2f26bc5d3",
         "status": "added"
       },
       {
-        "path": "m3/backports/file_delta_inventory.py",
+        "path": "make/m3/backports/file_delta_inventory.py",
         "sha": "b7f9926f262ae5de4fb8089a52369cbcd36e3601",
         "status": "modified"
       },
       {
-        "path": "m3/backports/recipes/jep-467-markdown/PATHS.txt",
+        "path": "make/m3/backports/recipes/jep-467-markdown/PATHS.txt",
         "sha": "8875de188cf1ca221397f4e3e15a31bd79e14a85",
         "status": "modified"
       },
       {
-        "path": "m3/backports/test_compatibility_policy.py",
+        "path": "make/m3/backports/test_compatibility_policy.py",
         "sha": "40471960766b47ee03d1298564de20f94b440520",
         "status": "added"
       },
       {
-        "path": "m3/backports/test_file_delta_inventory.py",
+        "path": "make/m3/backports/test_file_delta_inventory.py",
         "sha": "3429a610f2f150b199948a7fafb6fff4290cc372",
         "status": "modified"
       },
       {
-        "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3ScopeInference.java",
+        "path": "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3ScopeInference.java",
         "sha": "72412b503295435163bb3c123a169ae43e97d090",
         "status": "modified"
       },
       {
-        "path": "m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+        "path": "make/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
         "sha": "717c3e01f8f0407ce96439e3ecc96190b10c1eed",
         "status": "modified"
       },
       {
-        "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/gate-java/04-M3MIndexJniNewStringAdmissionRecipeTest.java.txt",
+        "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/gate-java/04-M3MIndexJniNewStringAdmissionRecipeTest.java.txt",
         "sha": "a3af22c069251154ff3d578d71bda5e8a1101842",
         "status": "modified"
       },
       {
-        "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/gate-java/06-M3MIndexStringBulkCharBoundaryRecipeTest.java.txt",
+        "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/gate-java/06-M3MIndexStringBulkCharBoundaryRecipeTest.java.txt",
         "sha": "b682dd8ff33fdb63347d7d9fe8d00f2e51c439d4",
         "status": "modified"
       },
       {
-        "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/gate-java/manifest.tsv",
+        "path": "make/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/gate-java/manifest.tsv",
         "sha": "3818c7c2456ff64d85008c208370851a6a6cb95d",
         "status": "modified"
       },
@@ -3036,34 +3036,34 @@ BEGIN_RAW_FILE final-current/00-publication-preflight.json sha256=078229832f13d3
         "status": "added"
       },
       {
-        "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/scope/M3ScopeCoverageClosureTest.java",
+        "path": "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/scope/M3ScopeCoverageClosureTest.java",
         "sha": "de9d1dfd025818d5aae8ef2ab3c9381775e356a5",
         "status": "added"
       },
       {
-        "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/scope/M3ScopeDefensiveBranchTest.java",
+        "path": "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/scope/M3ScopeDefensiveBranchTest.java",
         "sha": "5780dae3964cb143397e2b3d5b5c063f0a261e19",
         "status": "added"
       },
       {
-        "path": "m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3MIndexJniNewStringAdmissionRecipeTest.java",
+        "path": "make/m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3MIndexJniNewStringAdmissionRecipeTest.java",
         "sha": "a3af22c069251154ff3d578d71bda5e8a1101842",
         "status": "modified"
       },
       {
-        "path": "m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3MIndexStringBulkCharBoundaryRecipeTest.java",
+        "path": "make/m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3MIndexStringBulkCharBoundaryRecipeTest.java",
         "sha": "b682dd8ff33fdb63347d7d9fe8d00f2e51c439d4",
         "status": "modified"
       },
       {
-        "path": "m3/tooling/migration-recipes/tasks/recipe-closure/PARSER_CUSTODY.md",
+        "path": "make/m3/tooling/migration-recipes/tasks/recipe-closure/PARSER_CUSTODY.md",
         "sha": "dfa4460db8394111f92442adab8740e36f33a03e",
         "status": "added"
       }
     ]
   },
   "generic": {
-    "path": "m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+    "path": "make/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
     "git_blob": "717c3e01f8f0407ce96439e3ecc96190b10c1eed",
     "sha256": "9cf77c6e68a534e84b88230ca517fa6c5a76fb3e101ea3a1f68aa5222c3ec4d9"
   },

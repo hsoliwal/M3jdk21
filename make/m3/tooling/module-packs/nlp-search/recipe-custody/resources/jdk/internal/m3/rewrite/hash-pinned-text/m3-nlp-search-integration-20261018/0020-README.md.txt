@@ -104,7 +104,7 @@ For a normal build, supply an already built M3JDK with the actual M3AST API and
 matching compiler hook:
 
 ```sh
-python3 m3/tooling/module-packs/nlp-search/build.py \
+python3 make/m3/tooling/module-packs/nlp-search/build.py \
   --jdk-home "$M3JDK_HOME" \
   --out build/m3-nlp-search
 ```
@@ -123,7 +123,7 @@ CI and local integration work can use a stock Java 21 JDK by requesting the
 bounded compiler proof explicitly:
 
 ```sh
-python3 m3/tooling/module-packs/nlp-search/build.py \
+python3 make/m3/tooling/module-packs/nlp-search/build.py \
   --jdk-home "$JAVA_HOME" \
   --compiler-source-proof \
   --out build/m3-nlp-search-proof

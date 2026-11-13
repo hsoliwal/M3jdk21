@@ -30,9 +30,9 @@ exits 1 when a run would change a file. Refuses (exit 2) an unmapped package, an
 package, nor a mapped donor package, nor a declared EXTERNAL package, a DROP, REWRITE or INSERT_AFTER row matching no
 line (or a DROP_METHOD or INSERT_AFTER row matching more than one), or a file without a top-level type. The donor repository and its
 paths live only in RELOCATION_MAP.tsv and PROVENANCE.tsv (the anchor names blob and commit, so no source line
-carries a donor repository name: m3/tooling/jdk-naming rewrites synexia-* tokens).
+carries a donor repository name: make/m3/tooling/jdk-naming rewrites synexia-* tokens).
 
-v1 of this recipe is derived from m3/collections/recipe/immutable-pools-20261106/relocate.py v2 (RELOCATE_IMMUTABLE_POOLS,
+v1 of this recipe is derived from make/m3/collections/recipe/immutable-pools-20261106/relocate.py v2 (RELOCATE_IMMUTABLE_POOLS,
 same module, same donor-subset differential) with four changes: (a) the donor type is the file name up to its first dot,
 so a hash-pinned recipe template X.java.txt (the donor crate's sealed postimage, not yet promoted to the donor's live
 source tree) relocates like X.java; (b) a leading block-comment license header (/* ... Copyright ... Licensed ... */) is
@@ -65,7 +65,7 @@ from pathlib import Path
 RECIPE = "relocate.py"
 VERSION = "v1"
 RECIPE_DIR = Path(__file__).resolve().parent
-RECIPE_DIR_REL = "m3/collections/recipe/four-library-bags-20261106"
+RECIPE_DIR_REL = "make/m3/collections/recipe/four-library-bags-20261106"
 MAP_NAME = "RELOCATION_MAP.tsv"
 PROVENANCE_NAME = "PROVENANCE.tsv"
 PROVENANCE_COLUMNS = ("donor_repo", "donor_commit", "donor_path", "donor_blob", "donor_sha256", "donor_url",

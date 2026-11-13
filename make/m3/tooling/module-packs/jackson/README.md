@@ -12,13 +12,13 @@ annotations/core/databind 2.19.2. `SOURCE_LOCK.json` pins their complete
 source/build/legal trees. Their exact Maven POMs perform the source builds and
 multi-release compilation in fresh staging directories. No upstream source or
 POM is patched by this build. Jackson core carries one recorded M3 overlay,
-`JACKSON_NUMBERS_TO_JDK v2` (`m3/tooling/jdk-superset/number-parse`): its
+`JACKSON_NUMBERS_TO_JDK v2` (`make/m3/tooling/jdk-superset/number-parse`): its
 `NumberInput`, `BigDecimalParser` and `BigIntegerParser` call `Double.parseDouble`,
 `Float.parseFloat`, `new BigDecimal` and `new BigInteger`, and `NumberOutput` calls
 `Double.toString` and `Float.toString`, so Jackson and the JDK use one number parser
 and one Schubfach, the ones in java.base.
 
-The existing `m3/tooling/jmod-recipes/tools/jmod_pack.py` owns JMOD assembly and
+The existing `make/m3/tooling/jmod-recipes/tools/jmod_pack.py` owns JMOD assembly and
 release-21 flattening. Its existing module graph checks the selected closure and
 split packages. The linked image explicitly includes `java.se`, retaining the
 JDK modules that Jackson's descriptor marks as optional. Four JMODs are produced:
@@ -45,7 +45,7 @@ materialize the needed donor trees before an offline build.
 First populate the Maven build-plugin cache if necessary:
 
 ```sh
-python3 m3/tooling/module-packs/jackson/build.py \
+python3 make/m3/tooling/module-packs/jackson/build.py \
   --jdk-home /path/to/jdk21 --maven /path/to/maven/bin/mvn \
   --maven-repo /path/to/maven-cache --resolve-build-tools \
   --out /new/jackson-proof
@@ -61,7 +61,7 @@ task settings without changing global Maven configuration.
 The standalone Maven entry point is:
 
 ```sh
-mvn -B -ntp -f m3/tooling/module-packs/jackson/pom.xml verify \
+mvn -B -ntp -f make/m3/tooling/module-packs/jackson/pom.xml verify \
   -Dm3.jackson.out=/new/jackson-proof \
   -Dm3.jackson.maven.repo=/path/to/maven-cache
 ```
@@ -99,7 +99,7 @@ without the compiler bridge.
 After the core build succeeds, the compiler qualification entry point is:
 
 ```sh
-python3 m3/tooling/module-packs/jackson/compiler-build.py \
+python3 make/m3/tooling/module-packs/jackson/compiler-build.py \
   --jdk-home /path/to/jdk21 --repo-root /path/to/M3jdk21 \
   --jars /new/jackson-proof/jars --out /new/jackson-compiler-proof
 ```

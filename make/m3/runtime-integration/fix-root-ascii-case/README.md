@@ -17,10 +17,10 @@ are checked before any product write.
 
 Run:
 
-`mvn -f m3/runtime-integration/fix-root-ascii-case/pom.xml verify`
+`mvn -f make/m3/runtime-integration/fix-root-ascii-case/pom.xml verify`
 
 Opt-in apply on an exact preimage:
 
-`mvn -f m3/runtime-integration/fix-root-ascii-case/pom.xml -Papply verify`
+`mvn -f make/m3/runtime-integration/fix-root-ascii-case/pom.xml -Papply verify`
 
 The retained runtime patch engine refuses drift, mixed states, unsafe paths and symlinks.

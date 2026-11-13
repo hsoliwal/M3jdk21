@@ -13,9 +13,9 @@
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
 /*
- * Derived by recipe (m3/docs/viewport-everywhere/recipe) from hsoliwal/eclipse.platform.swt 553eefd41d9961d303c41e0e4e181712e64a1e45,
+ * Derived by recipe (doc/m3/viewport-everywhere/recipe) from hsoliwal/eclipse.platform.swt 553eefd41d9961d303c41e0e4e181712e64a1e45,
  * VirtualTreeSiblingIndex.java; Apache-2.0 elected from its Apache-2.0 OR EPL-2.0 publication
- * (m3/docs/viewport-everywhere/LICENSE_ELECTION.tsv).
+ * (doc/m3/viewport-everywhere/LICENSE_ELECTION.tsv).
  * The AVL order-statistic lanes are adapted from hsoliwal/com.synexia
  * m3-primitives/src/main/java/jdk/internal/m3/primitives/LongOrderStatisticMultiset.java
  * (af4494b143270d03cf4d3f33d1e7b4f84325f5dd), Copyright 2026 Hitesh Soliwal and

@@ -13,7 +13,7 @@
     {
       "source": "JDK21 API-family names from per-module inventory",
       "source_commit": "JDK21 module naming; no external copied implementation",
-      "target": "m3/docs/m3-utility-families.tsv",
+      "target": "doc/m3/m3-utility-families.tsv",
       "status": "FAMILY_CATALOGUE_ONLY",
       "target_rule": "One meaningful M3 utility per API family where justified, but no placeholders; reuse qualified M3 owners; require per-contract tests and canonical Synexia recipe before runtime replacement"
     }

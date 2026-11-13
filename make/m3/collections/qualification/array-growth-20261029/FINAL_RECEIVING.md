@@ -24,7 +24,7 @@ Nine Java owners, two C owners, six target test sources and the historical passi
 
 | Product path | SHA-256 |
 |---|---|
-| `m3/collections/qualification/array-growth-20261029/RECEIPT.md` | `1dea3c58d781b817e931f83ae1f2fa5e1ed974fb342b609ea7faca5a7b0a8b4d` |
+| `make/m3/collections/qualification/array-growth-20261029/RECEIPT.md` | `1dea3c58d781b817e931f83ae1f2fa5e1ed974fb342b609ea7faca5a7b0a8b4d` |
 | `m3/collections/src/main/java/jdk/m3/collections/M3ArrayDeque.java` | `55be5f7d9747f88c751987e69f9c2587559d27f55ece13c0e8aef84506f04108` |
 | `m3/collections/src/main/java/jdk/m3/collections/M3ColumnarLanes.java` | `fb44d6095f7107a6f8407d290b5fa5a2e91f68e96921e7d259167bbbbe0cc49f` |
 | `m3/collections/src/main/java/jdk/m3/collections/M3IntIntHashMap.java` | `9fb476f33f85532d0e8809cc107dcf270d38ff9381fb155a4d1131f13b0bbf5e` |

@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "authority": "m3/docs/name-mapping.json",
+  "authority": "doc/m3/name-mapping.json",
   "status": "TARGET_OWNED_PORT received as candidate owners; Pattern/Matcher not wired; full M3JDK target promotion HOLD",
   "synexia_base": "11c94feb18155a53cc213708c353791132edc4a7",
   "synexia_commit": "583bb4ecdef2df9b5e3e0f2170141fa433dca5b7",

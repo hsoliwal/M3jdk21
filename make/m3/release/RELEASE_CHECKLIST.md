@@ -101,7 +101,7 @@ checkout of the release commit:
 ```sh
 REL=$(git rev-parse origin/release/m3jdk-21.0.14-m3.1-preview)
 test "$(git rev-parse "$REL^")" = 890adb6410dab4606a4f26a942aed02fb2f55387
-python3 -I m3/release/verify_release_admission.py --root . --release \
+python3 -I make/m3/release/verify_release_admission.py --root . --release \
   --evidence /absolute/path/to/evidence.json --json-out admission-release.json
 ```
 
@@ -122,7 +122,7 @@ After the tag, the released history is immutable (`released_history_immutable_af
 
 ```sh
 gh release create m3jdk-21.0.14-m3.1-preview -R hsoliwal/M3jdk21 --verify-tag --prerelease \
-  --title "M3JDK21 21.0.14 m3.1 technical preview" --notes-file m3/release/RELEASE_NOTES.md \
+  --title "M3JDK21 21.0.14 m3.1 technical preview" --notes-file make/m3/release/RELEASE_NOTES.md \
   evidence.json admission-release.json SHA256SUMS
 ```
 

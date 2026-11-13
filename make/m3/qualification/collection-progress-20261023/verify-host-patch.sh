@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # Java21 host patch verification; NOT a modified M3JDK 21 image qualification.
 set -euo pipefail
-root="$(cd "$(dirname "$0")/../../.." && pwd)"
+root="$(cd "$(dirname "$0")/../../../.." && pwd)"
 tmp="$(mktemp -d)"
 trap 'rm -rf "$tmp"' EXIT
 mkdir -p "$tmp/patch/java/lang" "$tmp/patch/java/util/concurrent" "$tmp/patch/java/util" "$tmp/classes" "$tmp/tests"

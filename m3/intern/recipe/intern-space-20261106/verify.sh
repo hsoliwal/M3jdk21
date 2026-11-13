@@ -8,10 +8,10 @@
 #   2        the seven proof mains print the crate README figures (default JIT and -Xint -Xmx128m)
 #   3        differential.sh: donor tree vs relocated classes, proofs + the seeded dump byte-identical (default, -Xint)
 #   4        javap -p parity of every main class modulo the PACKAGE map (printed by differential.sh)
-#   5        scope: nothing outside m3/intern changes except one <module> line of m3/pom.xml; the reactor build of
-#            m3/pom.xml -pl intern produces class files byte-identical to the standalone build
+#   5        scope: nothing outside m3/intern changes except one <module> line of make/m3/pom.xml; the reactor build of
+#            make/m3/pom.xml -pl intern produces class files byte-identical to the standalone build
 #   6        naming: jdk_naming.py apply --only m3/intern/ reports 0 moves, 0 rewrites, 0 refusals (files staged first)
-#   7        m3/pom.xml parses and lists intern after collections (help:evaluate -N)
+#   7        make/m3/pom.xml parses and lists intern after collections (help:evaluate -N)
 # usage: JAVA_HOME=<JDK 21> verify.sh <donor-git-dir> <donor-rev> <scratch-dir> [maven-repo-local] [base-rev]
 set -uo pipefail
 RECIPE_DIR=$(cd "$(dirname "$0")" && pwd)
@@ -66,20 +66,20 @@ else
 fi
 
 outside=$(cd "$ROOT" && { git diff --name-only "$BASE" -- . ; git ls-files --others --exclude-standard; } | sort -u | grep -v '^m3/intern/' | tr '\n' ' ')
-pom_delta=$(cd "$ROOT" && git diff "$BASE" -- m3/pom.xml | grep -E '^[+-] ' | tr -d '\n')
+pom_delta=$(cd "$ROOT" && git diff "$BASE" -- make/m3/pom.xml | grep -E '^[+-] ' | tr -d '\n')
 mkdir -p "$SCRATCH/standalone-classes" && rm -rf "$SCRATCH/standalone-classes" && cp -r "$MODULE/target/classes" "$SCRATCH/standalone-classes"
-if [ "$outside" = "m3/pom.xml " ] && [ "$pom_delta" = "+    <module>intern</module>" ] \
-    && (cd "$ROOT" && "${MVN[@]}" -q -f m3/pom.xml -pl intern -DskipTests clean package > "$SCRATCH/reactor.log" 2>&1) \
+if [ "$outside" = "make/m3/pom.xml " ] && [ "$pom_delta" = "+    <module>intern</module>" ] \
+    && (cd "$ROOT" && "${MVN[@]}" -q -f make/m3/pom.xml -pl intern -DskipTests clean package > "$SCRATCH/reactor.log" 2>&1) \
     && diff -r "$SCRATCH/standalone-classes" "$MODULE/target/classes" > /dev/null; then
-    gate 5_scope_untouched PASS "outside m3/intern: m3/pom.xml (+1 line '<module>intern</module>'); reactor -pl intern class files IDENTICAL to standalone ($(find "$MODULE/target/classes" -name '*.class' | wc -l) files)"
+    gate 5_scope_untouched PASS "outside m3/intern: make/m3/pom.xml (+1 line '<module>intern</module>'); reactor -pl intern class files IDENTICAL to standalone ($(find "$MODULE/target/classes" -name '*.class' | wc -l) files)"
 else
     gate 5_scope_untouched FAIL "outside=[$outside] pom=[$pom_delta] log=$SCRATCH/reactor.log"
 fi
 
-naming=$(cd "$ROOT" && python -I m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/intern/ 2>&1 | grep -E "^(JDK_NAMING|REFUSED)" | tail -1)
+naming=$(cd "$ROOT" && python -I make/m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/intern/ 2>&1 | grep -E "^(JDK_NAMING|REFUSED)" | tail -1)
 case "$naming" in *"moves=0 rewrites=0 refusals=0"*) gate 6_naming PASS "$naming" ;; *) gate 6_naming FAIL "$naming (stage the m3/intern files first: jdk_naming.py reads git ls-files)" ;; esac
 
-modules=$(cd "$ROOT" && "${MVN[@]}" -q -N -f m3/pom.xml help:evaluate -Dexpression=project.modules -DforceStdout 2>&1 | tr -d '\r\n ' )
+modules=$(cd "$ROOT" && "${MVN[@]}" -q -N -f make/m3/pom.xml help:evaluate -Dexpression=project.modules -DforceStdout 2>&1 | tr -d '\r\n ' )
 case "$modules" in *"<string>collections</string><string>intern</string>"*) gate 7_pom_parses PASS "$(echo "$modules" | grep -o '<string>' | wc -l) default modules, intern after collections" ;; *) gate 7_pom_parses FAIL "$modules" ;; esac
 echo "VERIFY $status $(( $(date +%s) - started ))s"
 [ "$status" = PASS ]

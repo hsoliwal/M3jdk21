@@ -11,7 +11,7 @@ from tempfile import TemporaryDirectory
 import subprocess
 import sys
 
-ROOT = Path(__file__).resolve().parents[3]
+ROOT = Path(__file__).resolve().parents[4]
 OWNER = ROOT / "src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java"
 TEST = Path(__file__).with_name("CodePointRankExtractedOracle.java")
 source = OWNER.read_text(encoding="utf-8")

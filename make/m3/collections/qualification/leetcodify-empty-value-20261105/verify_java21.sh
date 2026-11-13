@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # Full-owner Java21 proof for the reviewed empty-value search receiver.
 set -euo pipefail
-ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../../.." && pwd)"
 cd "$ROOT"
 SRC="src/jdk.m3.collections/share/classes/jdk/m3/collections"
 TEST="test/jdk/jdk/m3/collections"

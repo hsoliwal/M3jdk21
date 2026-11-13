@@ -1,8 +1,8 @@
 {
   "source_repository": "hsoliwal/eclipse.platform.swt",
   "source_commit": "553eefd41d9961d303c41e0e4e181712e64a1e45",
-  "recipe": "m3/docs/viewport-everywhere/recipe/META-INF/rewrite/m3-viewport-everywhere.yml",
-  "authority": "m3/docs/viewport-everywhere/RELICENSE_RECORD.md",
+  "recipe": "doc/m3/viewport-everywhere/recipe/META-INF/rewrite/m3-viewport-everywhere.yml",
+  "authority": "doc/m3/viewport-everywhere/RELICENSE_RECORD.md",
   "files": [
     {"source": "bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/widgets/VirtualTreeSiblingIndex.java", "source_blob": "4563f5e6d0d312a548e6728a5707f243173c2f49", "source_sha256": "0b85fb2c948c541b4025216374b97233809e9f3d2b21cd5facb2a8858cdd16ec",
      "target": "m3/collections/src/main/java/jdk/m3/collections/M3OrderStatisticForest.java", "target_sha256": "bbbfe6a58d8797a451a522a8a944c4efbd70881340c7da5b416e75ccc201a4bb",

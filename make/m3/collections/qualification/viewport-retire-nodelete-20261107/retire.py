@@ -5,7 +5,7 @@
 
 Split of #2673 (VIEWPORT_REGIONS_RETIRE v1), which removed two tracked files; deleting a tracked file waits for the
 user's explicit approval, so v2 makes no deletion unless --delete is given (default off). Derived from
-m3/collections/qualification/mergeloss-s1-20261106/apply.py v2 (anchored "sub" edits, every anchor exactly once,
+make/m3/collections/qualification/mergeloss-s1-20261106/apply.py v2 (anchored "sub" edits, every anchor exactly once,
 hash-pinned preimages, refusal on drift, idempotent, --check fixed point). Rule kinds:
   EDIT    the file must equal its pinned preimage blob (applied) or the postimage (no-op);
   RETIRE  the file must hold its pinned blob or be absent; without --delete the rule only reports PENDING_DELETE and
@@ -41,8 +41,8 @@ BASE_COMMIT = "8ad25365b6a"
 EDITS_NAME = "EDITS.tsv"
 EDITS_COLUMNS = ("file", "before_sha256", "after_sha256", "leaf", "decision", "cited_commits", "rule")
 REGIONS = "m3/collections/src/test/native/m3_mask_viewport_regions.c"
-VERIFY = "m3/collections/verify_mask_viewport.py"
-TWINS = "m3/qualification/retained-twins-core-lanes-20261106/"
+VERIFY = "make/m3/collections/verify_mask_viewport.py"
+TWINS = "make/m3/qualification/retained-twins-core-lanes-20261106/"
 HELD_FILE = TWINS + "held/m3/collections/src/main/java/jdk/m3/collections/M3MaskViewportNative.java"
 R1_CITED = "7fb4de24b1e8;d0cec9717801;2f9a1a2a9d0e (#1497)"
 R2_CITED = "mergeloss-s3-20261106 (#2656);487ed3c5b7aa (#1766);62a9d54fa777;facc2e13d0c6"
@@ -72,7 +72,7 @@ VERIFY_EDITS = [
 
 HELD_ROW = ("m3/collections/src/main/java/jdk/m3/collections/M3MaskViewportNative.java\tpr1766\tRETIRED_PENDING_DELETE\t"
             "909dddcbe68f6ec47755062ca76d8b960fe0c2aeb7ddac571f596e00aac8610d\t"
-            "retire decided 2026-11-07 by m3/collections/qualification/viewport-retire-nodelete-20261107 (R2), citing"
+            "retire decided 2026-11-07 by make/m3/collections/qualification/viewport-retire-nodelete-20261107 (R2), citing"
             " mergeloss-s3-20261106 (#2656: cases 10 and 14 SUPERSEDED by 62a9d54fa777/facc2e13d0c6 and 7fb4de24b1e8)."
             " Run evidence (#2656 proof.sh): javac of the held copy with master's kernel 'method projectFramePage(...) is"
             " already defined'; projectFramePage declarations held 2, master 1; master descriptor ([I[IIIIIII[II[II[II)I"
@@ -192,7 +192,7 @@ def run(root: Path, check: bool, leaf: str | None, delete: bool = False) -> int:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--root", default=str(RECIPE_DIR.parents[3]), help="repository root (default: four up)")
+    parser.add_argument("--root", default=str(RECIPE_DIR.parents[4]), help="repository root (default: four up)")
     parser.add_argument("--check", action="store_true", help="write nothing; exit 1 when a run would change a file")
     parser.add_argument("--leaf", choices=sorted({rule[0] for rule in RULES}), help="apply one leaf's rules only")
     parser.add_argument("--delete", action="store_true",

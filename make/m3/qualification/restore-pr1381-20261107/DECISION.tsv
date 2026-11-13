@@ -9,6 +9,6 @@ test/jdk/jdk/internal/mindex/M3RX7NativeBootstrap.java	RESTORE_EXACT	bootstrap-l
 test/jdk/jdk/internal/mindex/M3RX7TransitionCompositionContract.java	OWNER_REVIEW	#1381 also removed the String fields programRoot/alphabetRoot from TokenIndex (primitive-only prepared metadata); master still has them and this contract enforces their removal; changing TokenIndex is held for the owner
 src/java.base/share/classes/java/util/ReverseOrderSortedSetView.java	SUPERSEDED	#1381 reverts bounds tracking, remove() and endpoint validation that its own base had; master has a later fixed version
 M3RX7.usefulStates, M3RX7.TokenIndex.matches	NEC	#1381 inlined/re-expressed them; master keeps the base form (static usefulStates helper still used elsewhere; advance vs nextState loop)
-java/util/SortedSet.java, M3RX7Transitions.java, SortedSetSplitOrder.java, 3 m3/docs files	ALREADY	byte-identical on master
+java/util/SortedSet.java, M3RX7Transitions.java, SortedSetSplitOrder.java, 3 doc/m3 files	ALREADY	byte-identical on master
 m3/collections (M3FilteredViews, m3_index_mask_window.c, M3FilteredSortedEdges* tests)	HELD	jdk.m3.collections absorption paused by the user
-m3/runtime-integration check scripts and evidence receipts (14 files)	SUPERSEDED	each conflicts with a later master version of the same receipt
+make/m3/runtime-integration check scripts and evidence receipts (14 files)	SUPERSEDED	each conflicts with a later master version of the same receipt

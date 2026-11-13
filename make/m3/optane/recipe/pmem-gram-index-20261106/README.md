@@ -13,7 +13,7 @@ package `jdk.internal.m3.optane`.
 The plan relocates the index "as internal class" (package-private in Synexia; census `NEW:jdk.internal.m3.pmem.campaign`)
 and keeps the consumer-facing search APIs unexported until the search session decides them. The campaign package maps to
 `jdk.internal.m3.optane`: internal packages follow `jdk.internal.m3.<area>` in the JDK naming scheme of
-`m3/tooling/jdk-naming`, the area being the module's (`optane`); `module-info.java` is unchanged (`exports jdk.m3.optane`
+`make/m3/tooling/jdk-naming`, the area being the module's (`optane`); `module-info.java` is unchanged (`exports jdk.m3.optane`
 only), so the public `M3PmemCorpusSearch` is not reachable outside the module. The classes reach the SDK through its
 exported API only (`M3PmemSourceImage`, `M3PmemSearch`).
 
@@ -47,7 +47,7 @@ conjunction and three-gram proofs) pin older owners and test-only `PmemSourceIma
 
 ## Recipe
 
-`python -I m3/optane/recipe/pmem-gram-index-20261106/relocate.py --donor-git <clone> --donor-rev 5ecfe052562c [--check]`
+`python -I make/m3/optane/recipe/pmem-gram-index-20261106/relocate.py --donor-git <clone> --donor-rev 5ecfe052562c [--check]`
 (`RELOCATE_PMEM_GRAM_INDEX` v3: the same v3 as `recipe/pmem-source-image-20261106`). PACKAGE rows map the campaign package
 to `jdk.internal.m3.optane` (listed before the SDK package) and the SDK package to `jdk.m3.optane`; TYPE rows repeat the
 two earlier leaves' maps and add the seven types of this leaf; one JNI row renames the oracle export. 8 FILE rows

@@ -16,7 +16,7 @@ import xml.etree.ElementTree as ET
 HERE = Path(__file__).resolve().parent
 CANDIDATE = HERE.parent
 WORK = HERE / "maven-workspace"
-TASK = "m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006"
+TASK = "make/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006"
 POM = WORK / TASK / "verification/pom.xml"
 ROOT = CANDIDATE.parents[1]
 JDK = ROOT / "toolchain/jdk-21+35"

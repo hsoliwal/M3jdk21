@@ -12,15 +12,15 @@
 # v1.5 (Transformed family): transformer lanes, TRANSFORM_* lane members, TRANSFORMED_FACTORY and LANE_VIEW over a
 # plain-constructor factory of the class itself or of a sibling the Commons source imports.
 # Ledgers: METHOD_ATOMS.tsv (one row per method atom), DIFFERENTIAL.tsv (one row per target), PROBES.tsv, MISMATCHES.tsv.
-# Usage (repository root): bash m3/collections/qualification/decorator-fill-20261030/run.sh <commons-collections4-4.5.0.jar>
+# Usage (repository root): bash make/m3/collections/qualification/decorator-fill-20261030/run.sh <commons-collections4-4.5.0.jar>
 #   <unpacked commons-collections4-4.5.0-sources dir> [work dir]
 # JAVA_HOME must be a JDK 21. Exit 0 = every target compiled, showed no mismatch, and every negative control was caught.
 set -euo pipefail
 JAR="$1"; SRC="$2"; WORK="${3:-${TMPDIR:-/tmp}/m3-decorator-fill}"
 # Scaffolds are read from this revision (the five-provider scaffold as generated), so reruns are idempotent.
 SCAFFOLD_REV="${SCAFFOLD_REV:-bb66a8c16642a4e898dbc5fc7c3af0d5ed572136}"
-Q=m3/collections/qualification/decorator-fill-20261030; I=m3/collections/implementations
-S=m3/collections/qualification/five-provider-inventory-20261018/SCAFFOLD_SURFACE.tsv
+Q=make/m3/collections/qualification/decorator-fill-20261030; I=m3/collections/implementations
+S=make/m3/collections/qualification/five-provider-inventory-20261018/SCAFFOLD_SURFACE.tsv
 BIN="$JAVA_HOME/bin"; SEP=":"; case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) SEP=";";; esac
 readme() {
 	version=v1.6

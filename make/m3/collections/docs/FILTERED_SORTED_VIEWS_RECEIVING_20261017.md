@@ -13,7 +13,7 @@ Canonical recipe/provenance ownership is in Synexia:
   named recipe `com.synexia.m3.Jdk21FilteredSortedViews`;
 - current consolidation/refinement: [com.synexia #12098](https://github.com/hsoliwal/com.synexia/pull/12098),
   Maven recipe `M3FilteredNavigableFacadeRecipe`, with exact M3JDK21 preimages and postimages;
-- target receipts: `m3/collections/qualification/FILTERED_SORTED_VIEWS_20261017.md` and
+- target receipts: `make/m3/collections/qualification/FILTERED_SORTED_VIEWS_20261017.md` and
   `qualification/filtered-navigable-consolidation-20261017/SOURCE_RECEIPT.tsv`.
 
 The earlier statement that this wrapper had no qualified recipe is therefore superseded. The
@@ -67,7 +67,7 @@ Exact decisions for the current refinement are in
 Selected Java21 proof:
 
 ```sh
-bash m3/collections/qualification/filtered-navigable-consolidation-20261017/verify.sh
+bash make/m3/collections/qualification/filtered-navigable-consolidation-20261017/verify.sh
 ```
 
 It verifies exact generated Git blobs, compiles with `--release 21 -proc:none -Xlint:all -Werror`,

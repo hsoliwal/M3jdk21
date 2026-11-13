@@ -72,7 +72,7 @@ These are bounded observations from one process per implementation. Raw wall/CPU
 
 ## Algorithm catalogue
 
-The existing `m3/collections/algorithm-catalog/collection-candidate-comparison-20261017.tsv` is extended additively with the incumbent, selected generation guard, rejected callback retry and insufficient monitor-only alternatives. The existing category/donor inventory remains intact.
+The existing `make/m3/collections/algorithm-catalog/collection-candidate-comparison-20261017.tsv` is extended additively with the incumbent, selected generation guard, rejected callback retry and insufficient monitor-only alternatives. The existing category/donor inventory remains intact.
 
 Rebuild complexity stays O(n) for the source/capture contract; unchanged-epoch cache lookup stays O(1) plus the caller's revision supplier. The selected guard adds one primitive field and no retained per-element nodes or wrappers. Automatic retry is rejected because it changes callback counts/effects and can fail to terminate when callbacks invalidate every pass. Locking alone is insufficient because Java intrinsic monitors permit same-thread reentry.
 

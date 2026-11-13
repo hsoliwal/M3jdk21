@@ -26,7 +26,7 @@ Synexia runtime service is needed for this receiving check. The two exact Apache
 sources under donor/ are verification-only fixtures, not product/runtime dependencies.
 
 ```sh
-python3 m3/collections/verification/frequency-mask-20261018/verify.py \
+python3 make/m3/collections/verification/frequency-mask-20261018/verify.py \
   --output /absolute/new-directory-outside-this-checkout
 ```
 

@@ -3,9 +3,9 @@
 Status: **source-pinned receiver plan; no family acceptance implied**.
 
 Controlling target policy remains:
-- `m3/docs/m3jdk21-porting-invariant.md`
-- `m3/docs/name-mapping.json`
-- `m3/docs/M3_CONVERGENCE_MODEL.md`
+- `doc/m3/m3jdk21-porting-invariant.md`
+- `doc/m3/name-mapping.json`
+- `doc/m3/M3_CONVERGENCE_MODEL.md`
 
 Controlling Synexia ownership remains:
 `SYNEXIA-M3JDK21-CANONICAL-OWNERSHIP-1`.
@@ -130,8 +130,8 @@ Run the receiver from a target checkout with the recorded baseline in its Git
 history, then run its independent regression tests:
 
 ```sh
-python3 -B m3/compatibility/check_m3_full_borrow_receiver.py
-python3 -B m3/compatibility/test_m3_full_borrow_receiver.py
+python3 -B make/m3/compatibility/check_m3_full_borrow_receiver.py
+python3 -B make/m3/compatibility/test_m3_full_borrow_receiver.py
 ```
 
 The first command checks real target ancestry and the complete packet. The

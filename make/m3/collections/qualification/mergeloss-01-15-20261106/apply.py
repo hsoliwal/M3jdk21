@@ -8,7 +8,7 @@ Merge-loss audit (S:/m3-scratch/eb-conv/mergeloss, leaves 01 and 15) on m3/colle
   case 15 NEC: ancestry merge 0efc1719ca57 (#1214 #1218 #1221) dropped origin 50779ade2a3 (PR #1218); its
   guavaMultiset/apacheMultiSet are the case-01 members (same bodies); its jdkArrayList, eclipseListMultimap and
   eclipseSetMultimap were never in the SDK binding inventory (DECISION.tsv, HUNKS.tsv): no rule here.
-Derived from m3/collections/qualification/census-small-batch-20261106/apply.py v1 (anchored "sub" edits, every
+Derived from make/m3/collections/qualification/census-small-batch-20261106/apply.py v1 (anchored "sub" edits, every
 anchor exactly once, LF payloads re-joined with the preimage's line ending), extended with one CREATE rule kind: a
 target absent on master is generated from a pinned donor blob by the same anchored edits. Every EDIT rule names the
 git blob sha of its preimage on master b28b7c938e2; a target must equal the preimage (the rule is applied) or the
@@ -363,7 +363,7 @@ def run(root: Path, check: bool) -> int:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--root", default=str(RECIPE_DIR.parents[3]), help="repository root (default: four up)")
+    parser.add_argument("--root", default=str(RECIPE_DIR.parents[4]), help="repository root (default: four up)")
     parser.add_argument("--check", action="store_true", help="write nothing; exit 1 when a run would change a file")
     args = parser.parse_args(argv)
     try:

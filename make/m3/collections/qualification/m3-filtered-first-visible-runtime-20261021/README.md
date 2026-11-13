@@ -127,7 +127,7 @@ selected-source reproduction and its limits.
 | Fresh target test result | `evidence/results.json` |
 | Fresh target commands | `evidence/commands.json` |
 | Fresh output comparisons | `evidence/comparisons.json` |
-| Target source readback | `m3/collections/qualification/m3-filtered-first-visible-runtime-20261021/source-blobs-readback.json` |
+| Target source readback | `make/m3/collections/qualification/m3-filtered-first-visible-runtime-20261021/source-blobs-readback.json` |
 
 `RECEIVING.json` binds the observed local application and verification receipts
 by exact hash, the published canonical recipe revision and the actual GitHub
@@ -153,7 +153,7 @@ tooling with no new runtime dependency. This does not relicense OpenJDK or any
 external repository.
 
 This target-local mapping points to existing
-`m3/docs/name-mapping.json#/family_name_mapping/3`. The root map and ordered
+`doc/m3/name-mapping.json#/family_name_mapping/3`. The root map and ordered
 receiving plan remain unchanged: STRING remains active. Generic task admission,
 its donor prerequisite, whole-repository serial review, installed-source
 inventory, whole-module/reactor/image/jtreg execution and broader platform,

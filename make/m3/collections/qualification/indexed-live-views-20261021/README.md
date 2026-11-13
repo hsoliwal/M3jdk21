@@ -6,15 +6,15 @@ The existing `M3FilteredLists` retains the mutable, live-filtered List contract.
 
 ## Reusable catalogue and mechanical recipe
 
-The searchable TSV is `m3/collections/algorithm-catalog/indexed-live-views-20261021.tsv` and records each algorithm problem category, candidate source, complexity and decision rationale. LeetCode, GeeksForGeeks, HackerRank, Guava and Swift Collections are used only as comparisons or contract taxonomy; **no third-party source is copied**.
+The searchable TSV is `make/m3/collections/algorithm-catalog/indexed-live-views-20261021.tsv` and records each algorithm problem category, candidate source, complexity and decision rationale. LeetCode, GeeksForGeeks, HackerRank, Guava and Swift Collections are used only as comparisons or contract taxonomy; **no third-party source is copied**.
 
 Six exact postimage templates and SHA-256 source seals live in `m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-indexed-live-views-20261021/`. The original two source preimages are retained in `pre/`. The existing M3JDK21 receiver implementation of `com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe` is reused unmodified; `META-INF/rewrite/m3-indexed-live-views-20261021.yml` names the candidate. The product files were received serially from the templates, refusing Git source-blob drift. Future corrections should regenerate sealed templates and rerun the canonical Synexia OpenRewrite recipe, never manually change generated product outputs.
 
 ## Commands and proof limitations
 
-- `python3 m3/collections/qualification/indexed-live-views-20261021/verify_recipe.py` checks each original/source SHA-256 and generated receiver/template exact identity.
-- `bash m3/collections/qualification/indexed-live-views-20261021/verify.sh` runs the pin check, strict actual owner Java 21 compilation and normal plus interpreted standalone differential assertions.
-- `mvn -B -ntp -f m3/collections/qualification/indexed-live-views-20261021/pom.xml test` runs the real OpenRewrite Java LST receipt test (fresh outputs, fixed point, refusal).
+- `python3 make/m3/collections/qualification/indexed-live-views-20261021/verify_recipe.py` checks each original/source SHA-256 and generated receiver/template exact identity.
+- `bash make/m3/collections/qualification/indexed-live-views-20261021/verify.sh` runs the pin check, strict actual owner Java 21 compilation and normal plus interpreted standalone differential assertions.
+- `mvn -B -ntp -f make/m3/collections/qualification/indexed-live-views-20261021/pom.xml test` runs the real OpenRewrite Java LST receipt test (fresh outputs, fixed point, refusal).
 
 The standalone oracle checks nulls, duplicate occurrences, stable ordering and physical indexes, read-only/no-op mutation refusal, owner structural and set invalidation, JNI-required absence, predicate reentrancy, and a 1,000-step seeded mutation differential.
 

@@ -9,7 +9,7 @@ import tempfile
 
 CRATE = Path(__file__).resolve().parent
 ROOT = CRATE.parents[2]
-spec = importlib.util.spec_from_file_location('sealed', ROOT / 'm3/migration/recipe.py')
+spec = importlib.util.spec_from_file_location('sealed', ROOT / 'make/m3/migration/recipe.py')
 sealed = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(sealed)
 plan_path = CRATE / 'plan.json'
@@ -20,7 +20,7 @@ for row in rows:
 
 before_path = CRATE / 'src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/name-mapping.json.txt.before'
 before = json.loads(before_path.read_text())
-after = json.loads((ROOT / 'm3/docs/name-mapping.json').read_text())
+after = json.loads((ROOT / 'doc/m3/name-mapping.json').read_text())
 retained = copy.deepcopy(after)
 record = retained['migration']['records'].pop()
 assert record['id'] == 'synexia.counterpart.MIndexRegexTrigramQuery'

@@ -6,7 +6,7 @@ on:
     paths:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3TreeWindowPlan.java'
       - 'test/jdk/jdk/m3/collections/M3TreeCommitPlanIdentityTest.java'
-      - 'm3/collections/qualification/tree-plan-commit-identity/**'
+      - 'make/m3/collections/qualification/tree-plan-commit-identity/**'
       - '.github/workflows/m3jdk21-tree-plan-commit-identity.yml'
   workflow_dispatch:
 permissions:
@@ -28,14 +28,14 @@ jobs:
           sparse-checkout: |
             src/jdk.m3.collections/share/classes/jdk/m3/collections/M3TreeWindowPlan.java
             test/jdk/jdk/m3/collections/M3TreeCommitPlanIdentityTest.java
-            m3/collections/qualification/tree-plan-commit-identity/**
+            make/m3/collections/qualification/tree-plan-commit-identity/**
             .github/workflows/m3jdk21-tree-plan-commit-identity.yml
       - name: Verify exact Java identities and the immutable canonical catalogue reference
         run: |
           python3 -m unittest discover -v \
-            -s m3/collections/qualification/tree-plan-commit-identity \
+            -s make/m3/collections/qualification/tree-plan-commit-identity \
             -p 'test_*.py'
-          python3 m3/collections/qualification/tree-plan-commit-identity/verify_receipt.py
+          python3 make/m3/collections/qualification/tree-plan-commit-identity/verify_receipt.py
 
   actual-java21-collection-contract:
     runs-on: ubuntu-24.04

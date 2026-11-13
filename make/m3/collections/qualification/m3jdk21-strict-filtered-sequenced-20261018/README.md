@@ -32,7 +32,7 @@ sorted/navigable operations remain live and comparator-aware.
 ## Reproduction and verification
 
 ```sh
-python3 m3/collections/qualification/m3jdk21-strict-filtered-sequenced-20261018/verify.py
+python3 make/m3/collections/qualification/m3jdk21-strict-filtered-sequenced-20261018/verify.py
 mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3StrictFilteredSequencedTest,M3FilteredViewsTest test
 ```
 

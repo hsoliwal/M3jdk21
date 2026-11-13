@@ -1,6 +1,6 @@
 # M3 collection-wrapper algorithm catalogue
 
-Status: living catalogue and verification contract. Entries are implementation claims only when linked to exact source postimages and test evidence. This catalogue supplements, rather than replaces, the broader source inventory at `m3/collections/qualification/filtered-navigable-consolidation-20261017/CATALOGUE.tsv` and the current bounded-navigation catalogue at `m3/collections/qualification/m3-filtered-bounded-current-20261018/recipe/CATALOGUE.tsv`.
+Status: living catalogue and verification contract. Entries are implementation claims only when linked to exact source postimages and test evidence. This catalogue supplements, rather than replaces, the broader source inventory at `make/m3/collections/qualification/filtered-navigable-consolidation-20261017/CATALOGUE.tsv` and the current bounded-navigation catalogue at `make/m3/collections/qualification/m3-filtered-bounded-current-20261018/recipe/CATALOGUE.tsv`.
 
 ## Invariant
 

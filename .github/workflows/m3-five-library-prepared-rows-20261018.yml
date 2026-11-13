@@ -5,7 +5,7 @@ on:
     paths:
       - 'm3/collections/interop/src/main/java/jdk/m3/collections/interop/M3FiveLibraryPreparedRows.java'
       - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryPreparedRowsTest.java'
-      - 'm3/collections/qualification/five-library-prepared-rows-20261018/**'
+      - 'make/m3/collections/qualification/five-library-prepared-rows-20261018/**'
       - '.github/workflows/m3-five-library-prepared-rows-20261018.yml'
   workflow_dispatch:
 concurrency:
@@ -24,7 +24,7 @@ jobs:
       - name: Run actual OpenRewrite recipe tests and fixed point
         run: |
           set -eu
-          mvn -B -ntp -f m3/collections/qualification/five-library-prepared-rows-20261018/recipe/pom.xml clean verify
+          mvn -B -ntp -f make/m3/collections/qualification/five-library-prepared-rows-20261018/recipe/pom.xml clean verify
       - name: Compile real M3 collection owners
         run: |
           set -eu

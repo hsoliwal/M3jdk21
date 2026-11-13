@@ -12,7 +12,7 @@
         "manifestPath": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3jdk21-string-concat-typed-stringifier-invariant-20261009/manifest.tsv",
         "manifestGitBlob": "9cfa92fb8edc158620fcd0cb1bb40eab052167d3",
         "manifestRow": {
-          "path": "m3/runtime-integration/check-m3string-concat-reference-dag.py",
+          "path": "make/m3/runtime-integration/check-m3string-concat-reference-dag.py",
           "beforeSha256": "80894129e8a66544e27c7c55e06c84da8daae3ea3625015bb71d4e1978ba3b24",
           "afterSha256": "9fd82a96ad813f11c90e593c8cd3b93feae9d5658a7b7b68ca48e95f035b19fa",
           "template": "00-check-m3string-concat-reference-dag.py.txt"
@@ -44,7 +44,7 @@
     "baseCommit": "77035a8ac0448981e0581c736a7db46f0752fe6a",
     "changes": [
       {
-        "path": "m3/runtime-integration/check-m3string-concat-reference-dag.py",
+        "path": "make/m3/runtime-integration/check-m3string-concat-reference-dag.py",
         "beforeGitBlob": "b09f011e9f760efc093e467e3b494a903a6527ad",
         "beforeSha256": "80894129e8a66544e27c7c55e06c84da8daae3ea3625015bb71d4e1978ba3b24",
         "afterGitBlob": "bddd68cc9b36439fda39fe2fd655b8819fae7e0e",

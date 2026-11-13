@@ -38,7 +38,7 @@
         "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/source-check-v1/RESULT.json",
         "sha256": "8318f9176151b91c5d61eab0fa67903b1bffca3545965ee7d572dc85fdd2cc43"
       },
-      "path": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/runtime-checker/publication-parent/string-c0/source-check-v1/RESULT.json"
+      "path": "make/m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/runtime-checker/publication-parent/string-c0/source-check-v1/RESULT.json"
     },
     {
       "disposition": "BODY_IN_CURRENT_PUBLICATION",
@@ -47,7 +47,7 @@
         "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/m3-check-v2/RESULT.json",
         "sha256": "521714b3e615dd79bb50075122887b944f3f39e9130efe5491fb7e582869ec71"
       },
-      "path": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/runtime-checker/publication-parent/string-c0/m3-check-v2/RESULT.json"
+      "path": "make/m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/runtime-checker/publication-parent/string-c0/m3-check-v2/RESULT.json"
     },
     {
       "disposition": "BODY_IN_CURRENT_PUBLICATION",
@@ -56,7 +56,7 @@
         "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/root-check-execution-v1/m3/receipt.json",
         "sha256": "fd4dffac5c2610f8946212d082ca5effcd7ffd74e8f8ab1267c13f7ab5b1d273"
       },
-      "path": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/runtime-checker/publication-parent/string-c0/root-check-execution-v1/m3/receipt.json"
+      "path": "make/m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/runtime-checker/publication-parent/string-c0/root-check-execution-v1/m3/receipt.json"
     },
     {
       "disposition": "BODY_IN_CURRENT_PUBLICATION",
@@ -65,7 +65,7 @@
         "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/root-check-execution-v1/m3/stderr",
         "sha256": "0acab43041dc05470e0b4428395ea32dfa211da2c5b2172bcdb5ea83b57fc9e5"
       },
-      "path": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/runtime-checker/publication-parent/string-c0/root-check-execution-v1/m3/stderr"
+      "path": "make/m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/runtime-checker/publication-parent/string-c0/root-check-execution-v1/m3/stderr"
     },
     {
       "disposition": "BODY_IN_CURRENT_PUBLICATION",
@@ -74,7 +74,7 @@
         "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/root-check-execution-v1/m3/stdout",
         "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
       },
-      "path": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/runtime-checker/publication-parent/string-c0/root-check-execution-v1/m3/stdout"
+      "path": "make/m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/runtime-checker/publication-parent/string-c0/root-check-execution-v1/m3/stdout"
     }
   ],
   "publicationReceipt": {

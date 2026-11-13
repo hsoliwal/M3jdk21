@@ -4,7 +4,7 @@ on:
   pull_request:
     paths:
       - '.github/workflows/m3-collection-source-capture-20261020.yml'
-      - 'm3/collections/qualification/all-collection-preparation-20261019/**'
+      - 'make/m3/collections/qualification/all-collection-preparation-20261019/**'
 permissions:
   contents: read
 concurrency:
@@ -29,8 +29,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          git show --format= --check HEAD -- .github/workflows/m3-collection-source-capture-20261020.yml m3/collections/qualification/all-collection-preparation-20261019
-          cd m3/collections/qualification/all-collection-preparation-20261019
+          git show --format= --check HEAD -- .github/workflows/m3-collection-source-capture-20261020.yml make/m3/collections/qualification/all-collection-preparation-20261019
+          cd make/m3/collections/qualification/all-collection-preparation-20261019
           sha256sum --check TOOLS.sha256
           python3 - <<'PYLINT'
           from pathlib import Path
@@ -42,16 +42,16 @@ jobs:
           print('SOURCE_FORMAT_AND_HASH_LINT=PASS')
           PYLINT
       - name: Compile Python syntax
-        working-directory: m3/collections/qualification/all-collection-preparation-20261019
+        working-directory: make/m3/collections/qualification/all-collection-preparation-20261019
         run: python3 -m py_compile prepare.py test_prepare.py capture.py test_capture.py
       - name: Preparation and capture contract tests
-        working-directory: m3/collections/qualification/all-collection-preparation-20261019
+        working-directory: make/m3/collections/qualification/all-collection-preparation-20261019
         run: python3 -m unittest -v test_prepare test_capture
       - name: Serial pinned source capture
         shell: bash
         run: |
           set -euo pipefail
-          tool="$GITHUB_WORKSPACE/m3/collections/qualification/all-collection-preparation-20261019"
+          tool="$GITHUB_WORKSPACE/make/m3/collections/qualification/all-collection-preparation-20261019"
           python3 "$tool/capture.py" --inputs "$tool/INPUTS.tsv" --work "$RUNNER_TEMP/m3-collection-capture"
       - name: Retain exact public sources and receipts
         if: always()

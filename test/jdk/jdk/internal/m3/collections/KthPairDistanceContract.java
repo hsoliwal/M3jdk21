@@ -3,7 +3,7 @@
 package jdk.internal.m3.collections;
 import java.util.*;
 import java.math.BigInteger;
-//FLLDCIM: RELOCATE - donor blob d36e442bee52 at d5ad5090d87e; recipe m3/collections/qualification/census2-c4-20261106/relocate.py v1
+//FLLDCIM: RELOCATE - donor blob d36e442bee52 at d5ad5090d87e; recipe make/m3/collections/qualification/census2-c4-20261106/relocate.py v1
 public final class KthPairDistanceContract {
  static int assertions;
  static void yes(boolean p,String msg){assertions++;if(!p)throw new AssertionError(msg);}

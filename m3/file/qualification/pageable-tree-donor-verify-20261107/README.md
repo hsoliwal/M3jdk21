@@ -45,7 +45,7 @@ the differences are API-shape only (NEC findings below).
 
 ## Gate
 
-`gate-file-pageable` (GATES.tsv): `mvn -B -ntp -T1 -f m3/pom.xml -pl file -am -DskipTests=false package`, JDK 21,
+`gate-file-pageable` (GATES.tsv): `mvn -B -ntp -T1 -f make/m3/pom.xml -pl file -am -DskipTests=false package`, JDK 21,
 module `-Xlint:all,-module -Werror` for main and test sources (the donor fixtures compile warning-free). m3-file:
 49 tests, 1 failure, 0 errors (reactor baseline 43/1/0 + the 6 new tests, 0 new failures); the one failure is the
 baseline's `jdk.m3.file.M3FileDeltaTest.fullSourceClassAndCliContract` (`FULL_VENDORHOLD2_FAILING.tsv`, #2785).

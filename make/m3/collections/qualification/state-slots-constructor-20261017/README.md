@@ -14,7 +14,7 @@ ownership or public contract changes. The source is exactly generated from
 the SHA-256-pinned first-party Synexia Maven/OpenRewrite recipe in
 [Synexia canonical PR](https://github.com/hsoliwal/com.synexia/pulls).
 
-Execute `sh m3/collections/qualification/state-slots-constructor-20261017/verify.sh`
+Execute `sh make/m3/collections/qualification/state-slots-constructor-20261017/verify.sh`
 to prove the exact original/new source mutation, compile original (with only
 the specific old diagnostic disabled), compile candidate with strict
 `-Xlint:all -Werror`, compare old/new public method descriptors using

@@ -79,5 +79,5 @@
   "recipe": "jdk.internal.m3.ViewportFrameParity20261027",
   "schema": "M3_FRAME_PARITY_EXECUTION_V1",
   "source_epoch_note": "Saved SDK bindings are for immutable cce source epoch. Later parity metadata is not relabelled as executed; emitted output bytes are identical.",
-  "target": "m3/collections/viewport-proof/verify.py"
+  "target": "make/m3/collections/viewport-proof/verify.py"
 }

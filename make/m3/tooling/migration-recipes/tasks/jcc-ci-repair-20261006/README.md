@@ -18,7 +18,7 @@ from their complete hash-pinned preimages. PlainText is required for the two
 initially unparsable Java files. Real javac parsing verifies the original failures
 and repaired syntax; parsing is not type checking.
 
-The unchanged m3/migration/recipe.py consumes plan.json through its
+The unchanged make/m3/migration/recipe.py consumes plan.json through its
 m3.sealed-install/1 schema. It checks all targets and five dependency guards before
 writing and provides check, apply, rollback and recovery. No new installer or
 runtime owner is introduced.
@@ -55,20 +55,20 @@ runtime acceptance require their own complete input closure and receipts.
 
 Run the focused Maven verification using an admitted JDK 21 and artifact cache:
 
-    mvn -o -B -ntp -f m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/verification/pom.xml \
+    mvn -o -B -ntp -f make/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/verification/pom.xml \
       -Dm3.ci.materialized=/absolute/fresh/proof-directory clean verify
 
 Run the six installer tests against a complete before-image workspace:
 
-    python3 m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/test_installer.py \
+    python3 make/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/test_installer.py \
       --repo /absolute/before-workspace \
-      --plan m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/plan.json \
+      --plan make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/plan.json \
       --out /absolute/fresh/installer-proof
 
 Use the retained installer for the actual reviewed transition:
 
-    python3 m3/migration/recipe.py check --root . --plan PATH_TO_PLAN
-    python3 m3/migration/recipe.py apply --root . --plan PATH_TO_PLAN
+    python3 make/m3/migration/recipe.py check --root . --plan PATH_TO_PLAN
+    python3 make/m3/migration/recipe.py apply --root . --plan PATH_TO_PLAN
 
 INPUTS.json describes authored inputs and keeps that status historically accurate.
 Execution receipts, when present, identify what actually ran. Prior CI observations

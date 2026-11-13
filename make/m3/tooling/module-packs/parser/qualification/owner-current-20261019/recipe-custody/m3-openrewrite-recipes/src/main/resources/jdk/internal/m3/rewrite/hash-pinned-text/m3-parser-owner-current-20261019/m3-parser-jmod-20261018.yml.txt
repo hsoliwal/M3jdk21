@@ -5,10 +5,10 @@ name: M3 parser JMOD source and compiler overlay qualification
 on:
   pull_request:
     paths:
-      - 'm3/tooling/module-packs/parser/**'
-      - 'm3/tooling/jmod-recipes/tools/jmod_pack.py'
-      - 'm3/tooling/jmod-recipes/tools/jmod_image.py'
-      - 'm3/docs/name-mapping.d/m3-parser-jmod-20261018.json'
+      - 'make/m3/tooling/module-packs/parser/**'
+      - 'make/m3/tooling/jmod-recipes/tools/jmod_pack.py'
+      - 'make/m3/tooling/jmod-recipes/tools/jmod_image.py'
+      - 'doc/m3/name-mapping.d/m3-parser-jmod-20261018.json'
       - 'src/jdk.compiler/share/classes/com/sun/source/util/M3AST.java'
       - 'src/jdk.compiler/share/classes/com/sun/tools/javac/m3/**'
       - 'src/jdk.compiler/share/classes/com/sun/tools/javac/main/JavaCompiler.java'
@@ -35,29 +35,29 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/compatibility/check_m3_full_family.py
-          python3 m3/compatibility/check_m3_full_borrow_receiver.py
-          python3 m3/runtime-integration/verify-m3-intake.py
+          python3 make/m3/compatibility/check_m3_full_family.py
+          python3 make/m3/compatibility/check_m3_full_borrow_receiver.py
+          python3 make/m3/runtime-integration/verify-m3-intake.py
       - name: Lint source structure and seal inputs
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/tooling/module-packs/parser/build.py --repo-root "$PWD" --jdk-home "$JAVA_HOME" --out "$RUNNER_TEMP/m3-parser-proof" --phase lint
+          python3 make/m3/tooling/module-packs/parser/build.py --repo-root "$PWD" --jdk-home "$JAVA_HOME" --out "$RUNNER_TEMP/m3-parser-proof" --phase lint
       - name: Compile actual compiler owners, parser and all consumers
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/tooling/module-packs/parser/build.py --repo-root "$PWD" --jdk-home "$JAVA_HOME" --out "$RUNNER_TEMP/m3-parser-proof" --phase compile
+          python3 make/m3/tooling/module-packs/parser/build.py --repo-root "$PWD" --jdk-home "$JAVA_HOME" --out "$RUNNER_TEMP/m3-parser-proof" --phase compile
       - name: Execute source, grammar and direct M3AST contracts
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/tooling/module-packs/parser/build.py --repo-root "$PWD" --jdk-home "$JAVA_HOME" --out "$RUNNER_TEMP/m3-parser-proof" --phase test
+          python3 make/m3/tooling/module-packs/parser/build.py --repo-root "$PWD" --jdk-home "$JAVA_HOME" --out "$RUNNER_TEMP/m3-parser-proof" --phase test
       - name: Package JMOD and execute precompiled linked-image consumers
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/tooling/module-packs/parser/build.py --repo-root "$PWD" --jdk-home "$JAVA_HOME" --out "$RUNNER_TEMP/m3-parser-proof" --phase runtime
+          python3 make/m3/tooling/module-packs/parser/build.py --repo-root "$PWD" --jdk-home "$JAVA_HOME" --out "$RUNNER_TEMP/m3-parser-proof" --phase runtime
       - uses: actions/upload-artifact@v4
         if: always()
         with:

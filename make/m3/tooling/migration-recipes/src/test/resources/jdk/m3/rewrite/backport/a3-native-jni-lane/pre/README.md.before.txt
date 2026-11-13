@@ -157,7 +157,7 @@ the packet DAG.
 Example file-atomic generation:
 
 ```bash
-python3 m3/backports/generate_recipe_crates.py \
+python3 make/m3/backports/generate_recipe_crates.py \
   --repo . \
   --release 27 \
   --paths-file target/selected-java-paths.txt \
@@ -172,7 +172,7 @@ For JDK tooling/build/resource changes that are not Java compilation units, opt 
 text candidates:
 
 ```bash
-python3 m3/backports/generate_recipe_crates.py \
+python3 make/m3/backports/generate_recipe_crates.py \
   --repo . \
   --release 24 \
   --paths-file target/selected-jdk24-paths.txt \
@@ -195,7 +195,7 @@ fake PlainText success.
 ## Recipe DAG control plane
 
 Backport execution is composed from small immutable recipe/work atoms through the framework-neutral
-DAG in `m3/tooling/backport-dag`.
+DAG in `make/m3/tooling/backport-dag`.
 
 The canonical authority is `m3-backport-dag.tsv` plus the Java validator `M3RecipeDag`.
 Camel, Airflow and Drools files are orchestration/admission projections only; they do not gain
@@ -211,7 +211,7 @@ JUnit, diff, lint, compile, jtreg and runtime gates.
 
 The Maven control entry point is:
 
-`mvn -B -ntp -f m3/pom.xml clean verify`
+`mvn -B -ntp -f make/m3/pom.xml clean verify`
 
 This verifies the OpenRewrite recipe substrate, the 99%-gated DAG semantic kernel and the backport
 inventory/admission module without replacing OpenJDK's native configure/make build.
@@ -220,9 +220,9 @@ For one concrete packet TSV, all three framework projections are generated from 
 composed DAG with one shared semantic SHA-256 root:
 
 ```bash
-mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
+mvn -B -ntp -f make/m3/tooling/backport-dag/pom.xml \
   -Dexec.mainClass=com.m3.tooling.dag.M3OrchestrationProjectionMain \
-  -Dexec.args="m3/backports/recipes/<packet>/packet.tsv target/m3-orchestration/<packet>" \
+  -Dexec.args="make/m3/backports/recipes/<packet>/packet.tsv target/m3-orchestration/<packet>" \
   exec:java
 ```
 
@@ -260,7 +260,7 @@ mandatory. JUnit must prove the recipe or recipe DAG on Java 21 fixtures before 
 A one-off exact donor patch may remain the replay unit only when hash-pinned and independently
 verified.
 
-Existing `m3/docs/name-mapping.json` remains the M3 migration mapping authority. This directory is an
+Existing `doc/m3/name-mapping.json` remains the M3 migration mapping authority. This directory is an
 upstream-JDK backport catalogue and must not replace or fork that mapping authority.
 
 ## First admitted tool change

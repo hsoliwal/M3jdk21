@@ -17,8 +17,8 @@ All examples, builds, tests, scripts, runtime checks and measurements are
 **NOT_RUN in this documentation pass**. Test descriptions below identify
 assertions present in source, not results from executing them. The source map
 does not establish inline-package documentation, whole-project completion or
-receiving acceptance. The [porting invariant](../../m3/docs/m3jdk21-porting-invariant.md)
-and [name mapping](../../m3/docs/name-mapping.json) retain their authority.
+receiving acceptance. The [porting invariant](../m3/m3jdk21-porting-invariant.md)
+and [name mapping](../m3/name-mapping.json) retain their authority.
 
 ## Choose the boundary
 

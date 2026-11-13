@@ -13,11 +13,11 @@
  CURRENT_RECEIPT_SHA='ae4758723f215fda7db7568df5441d83a773eabc7791f86505ca9dfc7c1416db'
  REGISTRY_SHA='245fcd73135ef418a30ee350049719574f86222e08c63219d883119b3dc8321f'
 +JCC_CRATE='m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005'
-+JCC_POM='m3/tooling/migration-recipes/pom.xml'
++JCC_POM='make/m3/tooling/migration-recipes/pom.xml'
 +OLD_POM_SHA='3eb73bbf38c0c591b8f714f6e9923eaa25a35b5ffc7f0512b8ec7fd3602b5531'
 +CURRENT_POM_SHA='bc5ee8573f4a4d70319b345173c6dfee37a5cd8f4c2a929a86857328ac8107f2'
 +ADDED_TARGETS={
-+    'm3/migration/test/test_jcc_handoff_current_context.py',
++    'make/m3/migration/test/test_jcc_handoff_current_context.py',
 +    JCC_CRATE+'/plan-intake-752-ci.json',
 +    JCC_CRATE+'/pom-before-752.xml',
 +}
@@ -70,20 +70,20 @@
 +    require(json.loads(recipe('installer-rollback','rollback')[0])['writes']==target_count and inventory(installed)==before and all(not (installed/p).exists() for p in ADDED_TARGETS),'rollback including three ABSENT additions')
      require(json.loads(recipe('installer-reapply','apply')[0])['writes']==target_count and inventory(installed)==expected,'reapply')
      # The retained invalid source must remain evidence of the actual NUL defect.
-     policy=[r for r in rows if r['path']=='m3/backports/compatibility_policy.py'][0]
+     policy=[r for r in rows if r['path']=='make/m3/backports/compatibility_policy.py'][0]
 @@ -112,17 +139,26 @@
      for mode,code in [('validate',0),('complete',2)]:
          out,_=run('canonical-'+mode,[python,str(validator),mode,str(installed),'--previous',str(installed/OLDTASK/'inputs/master.json')],installed,code)
          require(b'MIGRATION_MANIFEST_VALID completion=INCOMPLETE' in out and inventory(installed)==expected,'bounded canonical validation')
 -    # Retain all six behavior bodies under both exact known JCC validator profiles.
 +    # Retain all six behavior bodies under all three exact validator/POM pairs.
-     old_plan_path=source/'m3/migration/intake-20261005/crate/plan.json';old_plan=load(old_plan_path)
+     old_plan_path=source/'make/m3/migration/intake-20261005/crate/plan.json';old_plan=load(old_plan_path)
      migration_row=next(r for r in old_plan['outputs'] if r['path']==MIGRATION);profiles=[]
 -    for state in ['before','after']:
 -        root=area/('jcc-'+state);shutil.copytree(source,root);image=migration_row[state]
 +    old_pom=(source/JCC_CRATE/'pom-before-752.xml').read_bytes();current_pom=(source/JCC_POM).read_bytes()
 +    require(sha(old_pom)==OLD_POM_SHA and sha(current_pom)==CURRENT_POM_SHA,'exact historical and current JCC POM images')
-+    packet_ast=ast.parse((source/'m3/migration/test/test_jcc_handoff_packet.py').read_text())
++    packet_ast=ast.parse((source/'make/m3/migration/test/test_jcc_handoff_packet.py').read_text())
 +    packet_names=sorted(n.name for c in packet_ast.body if isinstance(c,ast.ClassDef) and c.name=='JccHandoffPacketTests' for n in c.body if isinstance(n,ast.FunctionDef) and n.name.startswith('test_'))
 +    require(len(packet_names)==6,'six retained packet methods')
 +    for state,migration_state,pom_sha,plan_name,plan_sha,recipe_id,plan_seal in JCC_PROFILES:
@@ -94,7 +94,7 @@
 +        selected=root/JCC_CRATE/plan_name;selected_plan=load(selected)
 +        require(sha(selected.read_bytes())==plan_sha and selected_plan['recipe_id']==recipe_id and selected_plan['plan_sha256']==plan_seal,'exact selected JCC plan')
          frozen=inventory(root)
-         out,err=run('jcc-'+state,[python,'-m','unittest','discover','-s',str(root/'m3/migration/test'),'-p','test_jcc_handoff_packet.py','-v'],root,jcc=root)
+         out,err=run('jcc-'+state,[python,'-m','unittest','discover','-s',str(root/'make/m3/migration/test'),'-p','test_jcc_handoff_packet.py','-v'],root,jcc=root)
 -        text=(out+b'\n'+err).decode();observed=re.findall(r'^test_\w+ \([^)]+\) \.\.\. ok$',text,re.M)
 -        require(len(observed)==6 and re.findall(r'^Ran ([0-9]+) tests? in ',text,re.M)==['6'] and inventory(root)==frozen,'six retained JCC tests per profile')
 -        profiles.append({'profile':state,'tests':6,'validatorSHA256':image['sha256'],'files':frozen})

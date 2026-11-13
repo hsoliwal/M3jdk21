@@ -5,15 +5,15 @@ on:
   workflow_dispatch:
   pull_request:
     paths:
-      - 'm3/tooling/jmod-recipes/cpu-tools/model-quantize/**'
-      - 'm3/tooling/jmod-recipes/quantize-recipe-20261017/**'
-      - 'm3/tooling/jmod-recipes/CPU_TOOL_DONOR_CATALOGUE_PIN_20261015.tsv'
-      - 'm3/tooling/jmod-recipes/CPU_TOOL_RECEIVER_MAP_20261014.tsv'
-      - 'm3/tooling/jmod-recipes/CPU_TOOL_RECEIVER_ALGORITHM_CATALOGUE_20261015.tsv'
-      - 'm3/tooling/jmod-recipes/CPU_TOOL_QUANTIZE_RECEIVER_20261017.md'
-      - 'm3/tooling/jmod-recipes/src/test/java/jdk/m3/rewrite/jmod/CpuToolReceiverAdmissionChecks.java'
+      - 'make/m3/tooling/jmod-recipes/cpu-tools/model-quantize/**'
+      - 'make/m3/tooling/jmod-recipes/quantize-recipe-20261017/**'
+      - 'make/m3/tooling/jmod-recipes/CPU_TOOL_DONOR_CATALOGUE_PIN_20261015.tsv'
+      - 'make/m3/tooling/jmod-recipes/CPU_TOOL_RECEIVER_MAP_20261014.tsv'
+      - 'make/m3/tooling/jmod-recipes/CPU_TOOL_RECEIVER_ALGORITHM_CATALOGUE_20261015.tsv'
+      - 'make/m3/tooling/jmod-recipes/CPU_TOOL_QUANTIZE_RECEIVER_20261017.md'
+      - 'make/m3/tooling/jmod-recipes/src/test/java/jdk/m3/rewrite/jmod/CpuToolReceiverAdmissionChecks.java'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cpu-int8-receiver-20261017/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-cpu-int8-receiver-20261017.yml'
+      - 'make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-cpu-int8-receiver-20261017.yml'
       - '.github/workflows/m3-cpu-int8-quantize-receiver-20261017.yml'
 
 permissions:
@@ -39,9 +39,9 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Verify recipe and rights source custody
-        run: python3 m3/tooling/jmod-recipes/quantize-recipe-20261017/verify_sources.py
+        run: python3 make/m3/tooling/jmod-recipes/quantize-recipe-20261017/verify_sources.py
       - name: Strict standalone Java21 JMOD and differential tests
-        run: python3 m3/tooling/jmod-recipes/cpu-tools/model-quantize/verify_quantize.py
+        run: python3 make/m3/tooling/jmod-recipes/cpu-tools/model-quantize/verify_quantize.py
 
   native-jni:
     name: CPU JNI C11 parity (${{ matrix.os }})
@@ -58,7 +58,7 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: C11 JNI generated headers and Java-checked native parity
-        run: python3 m3/tooling/jmod-recipes/cpu-tools/model-quantize/verify_quantize.py --jni
+        run: python3 make/m3/tooling/jmod-recipes/cpu-tools/model-quantize/verify_quantize.py --jni
 
   receiver-closure:
     name: Existing exact Java receiver and refusals
@@ -76,13 +76,13 @@ jobs:
           set -euo pipefail
           tmp="$(mktemp -d)"
           javac --release 21 -Xlint:all -Werror -d "$tmp" \
-            m3/tooling/jmod-recipes/src/main/java/jdk/m3/rewrite/jmod/CpuToolReceiverAdmission.java \
-            m3/tooling/jmod-recipes/src/test/java/jdk/m3/rewrite/jmod/CpuToolReceiverAdmissionChecks.java
+            make/m3/tooling/jmod-recipes/src/main/java/jdk/m3/rewrite/jmod/CpuToolReceiverAdmission.java \
+            make/m3/tooling/jmod-recipes/src/test/java/jdk/m3/rewrite/jmod/CpuToolReceiverAdmissionChecks.java
           java -cp "$tmp" jdk.m3.rewrite.jmod.CpuToolReceiverAdmissionChecks
           java -cp "$tmp" jdk.m3.rewrite.jmod.CpuToolReceiverAdmission \
-            m3/tooling/jmod-recipes/CPU_TOOL_DONOR_CATALOGUE_PIN_20261015.tsv \
-            m3/tooling/jmod-recipes/CPU_TOOL_RECEIVER_MAP_20261014.tsv \
-            m3/tooling/jmod-recipes/CPU_TOOL_RECEIVER_DEFERRALS_20261015.tsv
+            make/m3/tooling/jmod-recipes/CPU_TOOL_DONOR_CATALOGUE_PIN_20261015.tsv \
+            make/m3/tooling/jmod-recipes/CPU_TOOL_RECEIVER_MAP_20261014.tsv \
+            make/m3/tooling/jmod-recipes/CPU_TOOL_RECEIVER_DEFERRALS_20261015.tsv
 
   openrewrite-sdk:
     name: Maven OpenRewrite Java LST application fixed point and refusal
@@ -95,4 +95,4 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Run real OpenRewrite SDK source-admission tests
-        run: mvn -B -ntp -f m3/tooling/jmod-recipes/quantize-recipe-20261017/pom.xml test
+        run: mvn -B -ntp -f make/m3/tooling/jmod-recipes/quantize-recipe-20261017/pom.xml test

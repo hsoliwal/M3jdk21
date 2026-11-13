@@ -5,8 +5,8 @@
   "authority": {
     "repository": "hsoliwal/M3jdk21",
     "revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
-    "policy": "m3/docs/m3jdk21-porting-invariant.md",
-    "mapping": "m3/docs/name-mapping.json"
+    "policy": "doc/m3/m3jdk21-porting-invariant.md",
+    "mapping": "doc/m3/name-mapping.json"
   },
   "namespaceMapping": {
     "source": "org.springframework.util",

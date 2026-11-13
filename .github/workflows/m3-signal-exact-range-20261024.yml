@@ -7,7 +7,7 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalQualitySchema.java'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalExactRangeIndex.java'
       - 'test/jdk/jdk/m3/collections/M3SignalExactRangeIndex*.java'
-      - 'm3/collections/qualification/signal-exact-range-20261024/**'
+      - 'make/m3/collections/qualification/signal-exact-range-20261024/**'
       - '.github/workflows/m3-signal-exact-range-20261024.yml'
   workflow_dispatch:
 permissions:

@@ -3,7 +3,7 @@
 # Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
 # land_e1.sh <tag> <message-file>: land CURATE_E pass E1 from e1_rebase.sh <tag> outputs.
 # The curated tree mvn_<tag>/tree is a clone of base_<tag> with the recipe applied: its git status (minus build output)
-# is the change set. The recipe crate goes to m3/collections/recipe/curate-e-20261108/. One API commit on the base master,
+# is the change set. The recipe crate goes to make/m3/collections/recipe/curate-e-20261108/. One API commit on the base master,
 # PR, merge with the head pinned. Refuses unless E1_<tag>.txt shows CLEAN maven, a bytecode verdict and equal test lines.
 set -euo pipefail
 H=$(cd "$(dirname "$0")" && pwd); cd "$H"; H=$(cygpath -m "$H"); T="$1"; MSG="$2"; R="E1_$T.txt"
@@ -19,7 +19,7 @@ git -C "$TR" status --porcelain -uall -- m3 | grep -v '/target/' | while IFS= re
         *) echo "$p=$H/$TR/$p" >> "$SP";;
     esac
 done
-C=m3/collections/recipe/curate-e-20261108
+C=make/m3/collections/recipe/curate-e-20261108
 for f in curate-e/README.md curate_rename_e.py make_curate_e.py curate_e_classify.py gen_map_e1.py carry_map_e1.py \
          curate_e_place.py curate_e_fastloop.sh curate_e_loop.sh curate_e_unmove.py curate_e_bytecode.py \
          make_curate_e_bytecode.py sprawl_census.py reach_census.py e1_rebase.sh land_e1.sh DEQUALIFY.tsv curate-e/E1_TEST_EDITS.json; do

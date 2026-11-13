@@ -5,7 +5,7 @@
   "target_base": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
   "branch": "codex/m3-parser-jmod-20261018",
   "intake_mode": "INDEPENDENT_APACHE_MODULE",
-  "scope": ["m3/tooling/module-packs/parser", "m3/docs/name-mapping.d/m3-parser-jmod-20261018.json", "optional module registration and qualification workflow"],
+  "scope": ["make/m3/tooling/module-packs/parser", "doc/m3/name-mapping.d/m3-parser-jmod-20261018.json", "optional module registration and qualification workflow"],
   "existing_public_contracts": "preserved",
   "runtime_receiving_sequence_advanced": false,
   "canonical_recipe_repository": "hsoliwal/com.synexia",

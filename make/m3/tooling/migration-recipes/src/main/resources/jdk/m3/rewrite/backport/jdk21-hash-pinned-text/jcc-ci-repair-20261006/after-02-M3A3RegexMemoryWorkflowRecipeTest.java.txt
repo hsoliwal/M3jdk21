@@ -31,9 +31,9 @@ final class M3A3RegexMemoryWorkflowRecipeTest {
                 Map.of(
                         ".github/workflows/m3-a3.yml",
                         resource(BEFORE_ROOT + "workflow.yml"),
-                        "m3/docs/a3-lab.md",
+                        "doc/m3/a3-lab.md",
                         resource(BEFORE_ROOT + "a3-lab.md"),
-                        "m3/docs/a3-mastery.md",
+                        "doc/m3/a3-mastery.md",
                         resource(BEFORE_ROOT + "a3-mastery.md"));
 
         Recipe recipe = new M3Jdk21HashPinnedTextSnapshotRecipe(CRATE);
@@ -44,10 +44,10 @@ final class M3A3RegexMemoryWorkflowRecipeTest {
                 changed.get(".github/workflows/m3-a3.yml")
                         .contains("$13 == \"true\""));
         assertTrue(
-                changed.get("m3/docs/a3-lab.md")
+                changed.get("doc/m3/a3-lab.md")
                         .contains("16 x 17 = 272 deterministic cells"));
         assertTrue(
-                changed.get("m3/docs/a3-mastery.md")
+                changed.get("doc/m3/a3-mastery.md")
                         .contains("Thicker regex/string precompute"));
 
         Map<String, String> converged = new LinkedHashMap<>(before);

@@ -38,15 +38,15 @@ to be faster.
 Use Java 21, Maven 3.9.9 and Linux GCC/JNI headers:
 
 ```sh
-mvn -B -ntp -f m3/tooling/lane28/pom.xml verify
-mvn -B -ntp -f m3/tooling/lane28/pom.xml -Dlane28.sanitize=true verify
-mvn -B -ntp -f m3/tooling/tq/pom.xml verify
-python3 m3/tooling/lane28/verify-plan.py
-python3 m3/tooling/tq/verify-plan.py
-python3 m3/migration/migration.py validate .
+mvn -B -ntp -f make/m3/tooling/lane28/pom.xml verify
+mvn -B -ntp -f make/m3/tooling/lane28/pom.xml -Dlane28.sanitize=true verify
+mvn -B -ntp -f make/m3/tooling/tq/pom.xml verify
+python3 make/m3/tooling/lane28/verify-plan.py
+python3 make/m3/tooling/tq/verify-plan.py
+python3 make/m3/migration/migration.py validate .
 ```
 
-The mapping validator uses `m3/migration/requirements.txt`. The existing Java
+The mapping validator uses `make/m3/migration/requirements.txt`. The existing Java
 and text snapshot engines execute generation, exact postimage/fixed-point,
 occupied-target, parser, duplicate, missing-input, drift and tamper gates. The
 existing bootstrap task recipe receives the exact crate path/root. The legacy

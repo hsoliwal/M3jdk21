@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026, Hitesh Soliwal and contributors.
 set -euo pipefail
-ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd)"
+ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../../.." && pwd)"
 : "${M3_JAVA_HOME:?set M3_JAVA_HOME to a Java 21 host JDK}"
 CC="${CC:-cc}"
 [[ "$(uname -s)" == Linux ]] || { echo 'This executed host proof is Linux-only; other platforms remain unqualified.' >&2; exit 2; }

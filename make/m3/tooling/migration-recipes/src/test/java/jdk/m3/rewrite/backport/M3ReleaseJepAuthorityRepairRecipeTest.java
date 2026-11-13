@@ -41,7 +41,7 @@ final class M3ReleaseJepAuthorityRepairRecipeTest {
         var policy = M3RecipeScopeRegistry.require(M3ReleaseJepAuthorityRepairRecipe.class);
         assertEquals(M3EditScope.MULTI_MODULE, policy.minimumScope());
         assertEquals(M3ContractMode.BEHAVIOR_AND_CONTRACT_PRESERVING, policy.contractMode());
-        assertFalse(policy.fileLocalMechanical(List.of("m3/backports/JEP_CATALOGUE.tsv")));
+        assertFalse(policy.fileLocalMechanical(List.of("make/m3/backports/JEP_CATALOGUE.tsv")));
 
         var activated =
                 Environment.builder()
@@ -77,22 +77,22 @@ final class M3ReleaseJepAuthorityRepairRecipeTest {
             assertEquals(resource(ROOT + row.resource()), source.printAll());
         }
 
-        String catalogue = after.get("m3/backports/JEP_CATALOGUE.tsv").printAll();
+        String catalogue = after.get("make/m3/backports/JEP_CATALOGUE.tsv").printAll();
         assertTrue(catalogue.contains("24\t404\tGenerational Shenandoah (Experimental)"));
         assertFalse(catalogue.contains("26\t401\tValue Classes and Objects"));
         assertTrue(catalogue.indexOf("25\t520\t") < catalogue.indexOf("25\t521\t"));
 
-        String priority = after.get("m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv").printAll();
+        String priority = after.get("make/m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv").printAll();
         assertTrue(priority.contains("24\t404\tGenerational Shenandoah (Experimental)"));
         assertFalse(priority.contains("26\t401\tValue Classes and Objects"));
 
-        String residue = after.get("m3/backports/JEP_RESIDUE_QUEUE.tsv").printAll();
+        String residue = after.get("make/m3/backports/JEP_RESIDUE_QUEUE.tsv").printAll();
         assertTrue(residue.contains("22\t423\tRegion Pinning for G1\tgc\tcandidate\t20\tMATERIALIZED_PACKET"));
         assertTrue(residue.contains("23\t474\tZGC: Generational Mode by Default\tgc-runtime\tcandidate\t20\tMATERIALIZED_PACKET"));
         assertTrue(residue.contains("24\t484\tClass-File API\tlibrary\tcandidate\t20\tMATERIALIZED_PACKET"));
         assertTrue(residue.contains("24\t404\tGenerational Shenandoah (Experimental)\tgc-runtime\tcandidate-high-risk"));
 
-        String authority = after.get("m3/backports/RELEASE_JEP_AUTHORITY.tsv").printAll();
+        String authority = after.get("make/m3/backports/RELEASE_JEP_AUTHORITY.tsv").printAll();
         assertTrue(authority.contains(
                 "24\tRELEASED\t404,450,472,475,478,479,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499,501"));
         assertTrue(authority.contains(
@@ -111,7 +111,7 @@ final class M3ReleaseJepAuthorityRepairRecipeTest {
     @Test
     void staleCurrentMasterPreimageFailsClosed() throws Exception {
         List<SourceFile> before = baseline();
-        int index = indexOf(before, "m3/backports/JEP_CATALOGUE.tsv");
+        int index = indexOf(before, "make/m3/backports/JEP_CATALOGUE.tsv");
         SourceFile current = before.get(index);
         before.set(
                 index,

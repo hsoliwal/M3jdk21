@@ -31,7 +31,7 @@
       "after_sha256": "bdb57731ac5382d38c6f1607980e18f4b7cd344dd08e1872873e1bcdab89e5d0"
     },
     {
-      "path": "m3/tooling/atom-census/contract/SEMANTIC_SOURCE_CENSUS_V1.md",
+      "path": "make/m3/tooling/atom-census/contract/SEMANTIC_SOURCE_CENSUS_V1.md",
       "before": "ABSENT",
       "after_sha256": "aa28e2e9a05ae515f7abd860067271bb85228e330cef1b34de3c88d652132b9a"
     }

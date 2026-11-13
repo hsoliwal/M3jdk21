@@ -9,7 +9,7 @@ import java.util.function.Supplier;
  * Lightweight, admission-cadenced pressure feedback for the canonical parent
  * facade store. It never owns a separate cache, array or eviction policy.
  */
-//FLLDCIM: RELOCATE - donor blob 0d8fcea8e52e at fd9a233680b4; recipe m3/collections/recipe/transient-facade-20261106/relocate.py v4
+//FLLDCIM: RELOCATE - donor blob 0d8fcea8e52e at fd9a233680b4; recipe make/m3/collections/recipe/transient-facade-20261106/relocate.py v4
 final class FacadePressureController {
     private static final int SAMPLE_MASK = 63;
     private final Supplier<RuntimeHeap.Snapshot> source;

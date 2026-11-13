@@ -13,7 +13,7 @@
     "m3/collections/src/test/java/jdk/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java",
     "m3/collections/src/test/java/jdk/m3/collections/M3StateMaskHistogramSelfTest.java"
   ],
-  "proof": "m3/qualification/string-index-reverse-20261018/collections",
+  "proof": "make/m3/qualification/string-index-reverse-20261018/collections",
   "receiving_sequence_advanced": false,
   "family_completion": false,
   "repository_completion": false,

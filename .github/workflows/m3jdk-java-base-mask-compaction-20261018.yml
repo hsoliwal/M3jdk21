@@ -9,7 +9,7 @@ on:
       - "src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java"
       - "test/jdk/java/util/ArrayList/M3MaskCompactionDifferential.java"
       - "test/jdk/java/util/ArrayList/M3JdkRemoveIfMaskContracts.java"
-      - "m3/qualification/native-java-base-collection-mask-20261018/**"
+      - "make/m3/qualification/native-java-base-collection-mask-20261018/**"
       - ".github/workflows/m3jdk-java-base-mask-compaction-20261018.yml"
 permissions:
   contents: read
@@ -30,7 +30,7 @@ jobs:
           distribution: temurin
           java-version: "21"
       - name: Fail closed on source drift, missing generated files or unexpected JDK edits
-        run: python3 m3/qualification/native-java-base-collection-mask-20261018/verify.py
+        run: python3 make/m3/qualification/native-java-base-collection-mask-20261018/verify.py
       - name: Compile actual modified java.base ArrayList Vector and M3 internal mask atom
         shell: bash
         run: |

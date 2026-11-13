@@ -9,7 +9,7 @@ The initial recent-commit search is bounded, not a complete history walk.
 
 The direct candidate-to-target comparison reports **ahead 143, behind 0**, with
 `3776d6e674d6c9b04539ca24aca2504aa88d4a57` as its merge base. Nevertheless its canonical
-`java.lang.MIndexString` / `MIndexStringPool` and `m3/runtime-integration`,
+`java.lang.MIndexString` / `MIndexStringPool` and `make/m3/runtime-integration`,
 `m3/runtime-segments`, `m3/runtime-stage1` content is absent from the target comparison.
 This is not proof those files once existed on master's first-parent line.
 
@@ -51,7 +51,7 @@ capability families, not a license to concatenate incompatible implementations.
 
 ## Files changed
 
-Only new `m3/history/**` files and `.github/workflows/m3-history-audit.yml` are
+Only new `make/m3/history/**` files and `.github/workflows/m3-history-audit.yml` are
 proposed. No pre-existing runtime, build, workflow, recipe-pinned README, license,
 private source, or installed JDK is changed. The new tooling has no apply mode.
 

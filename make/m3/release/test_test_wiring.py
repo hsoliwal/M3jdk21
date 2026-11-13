@@ -29,8 +29,8 @@ class CoreTestWiringTest(unittest.TestCase):
         self.workflow = self.root / wiring.WORKFLOW
         self.workflow.parent.mkdir(parents=True, exist_ok=True)
         self.workflow.write_text(
-            "run: bash ./m3/build.sh\n"
-            "run: bash ./m3/release/run_extra_core_contracts.sh\n")
+            "run: bash ./make/m3/build.sh\n"
+            "run: bash ./make/m3/release/run_extra_core_contracts.sh\n")
 
     def write_script(self, *, compile_beta=False, execute_beta=False, orphan=False):
         primary = [
@@ -86,7 +86,7 @@ class CoreTestWiringTest(unittest.TestCase):
 
     def test_runner_not_invoked_by_workflow_is_a_blocker(self):
         self.write_script(compile_beta=True, execute_beta=True)
-        self.workflow.write_text("run: bash ./m3/build.sh\n")
+        self.workflow.write_text("run: bash ./make/m3/build.sh\n")
         report = wiring.audit(self.root)
         self.assertFalse(report["passed"])
         self.assertFalse(report["release_workflow_invokes_both"])

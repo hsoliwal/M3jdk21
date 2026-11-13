@@ -13,7 +13,7 @@ from pathlib import Path
 import re
 import sys
 
-ROOT = Path(__file__).resolve().parents[4]
+ROOT = Path(__file__).resolve().parents[5]
 RECEIPT = Path(__file__).resolve().parent / "RECEIVER_RECEIPT.json"
 SCHEMA = "M3JDK21_NATIVE_TREE_PLAN_COMMIT_RECEIVER_V1"
 SHA1 = re.compile(r"^[0-9a-f]{40}$")

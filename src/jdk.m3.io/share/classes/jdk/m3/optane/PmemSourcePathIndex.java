@@ -10,7 +10,7 @@ import java.util.Objects;
  * The canonical sorted names remain authoritative. All unresolved probes
  * fall back to the original exact binary search, including adversarial hashes.
  */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/PmemSourcePathIndex.java blob f26a4f709e52; recipe m3/optane/recipe/pmem-source-image-20261106/relocate.py v3
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/PmemSourcePathIndex.java blob f26a4f709e52; recipe make/m3/optane/recipe/pmem-source-image-20261106/relocate.py v3
 final class PmemSourcePathIndex {
     private static final int MIN_FILES = 64;
     private static final int MAX_PROBES = 16;

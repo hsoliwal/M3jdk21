@@ -33,7 +33,7 @@ def main():
         dest=WORK/row['repository_path'];save(dest,src.read_bytes())
         rows.append({**ident(dest),'repository_path':row['repository_path'],'origin':'ACTUAL_CI_OPENREWRITE_RESULT','source':i})
     pom=HERE/'pom.xml'
-    dest=WORK/'m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/a3-behavior-verification/pom.xml'
+    dest=WORK/'make/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/a3-behavior-verification/pom.xml'
     save(dest,pom.read_bytes())
     rows.append({**ident(dest),'repository_path':str(dest.relative_to(WORK)),'origin':'FOCUSED_VERIFICATION_POM'})
     source_cache=ROOT/'current-ci/repair-candidate/execution/cache-v02'

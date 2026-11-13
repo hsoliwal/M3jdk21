@@ -10,7 +10,7 @@ import re
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 PIN = Path(__file__).with_name("m3-m3indexdb-v1-pin.tsv")
 RESIDUE = Path(__file__).with_name("m3-canonical-residue-gitblobs.tsv")
 LEGACY = (

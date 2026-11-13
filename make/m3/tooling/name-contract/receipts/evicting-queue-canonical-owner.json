@@ -39,7 +39,7 @@
   ],
   "note": "No vendor API renamed; old type is retained unchanged. The exact duplicated body is a temporary compatibility migration, not an approved permanent second collection implementation.",
   "authority_map": {
-    "path": "m3/docs/name-mapping.json",
+    "path": "doc/m3/name-mapping.json",
     "git_blob_sha1": "fbdde4dc25d9b63d1f6bde9cd48169debe4bdf7b",
     "proposal_status": "review-only additive target; downstream INTERNAL_MOVE still QUEUED"
   },

@@ -139,7 +139,7 @@
     <profile>
       <id>m3-collections</id>
       <modules>
-        <module>../../collections</module>
+        <module>../../../../m3/collections</module>
         <module>collections</module>
       </modules>
     </profile>

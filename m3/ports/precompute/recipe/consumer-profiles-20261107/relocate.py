@@ -13,7 +13,7 @@ replaced by the M3JDK header, (2) the package line, through the PACKAGE rows, (3
 and types, through the PACKAGE and TYPE rows (an import of a nested member such as a.b.Type.Nested.MEMBER maps its
 longest mapped package prefix and the type that follows it), (4) the TYPE rows whose donor and target names differ,
 as whole-word tokens, (5) the LITERAL rows, declared string-literal tokens renamed as whole tokens, exactly the
-rename the JDK naming rules would apply (m3/tooling/jdk-naming/NAMING_RULES.tsv) so that jdk_naming.py and this
+rename the JDK naming rules would apply (make/m3/tooling/jdk-naming/NAMING_RULES.tsv) so that jdk_naming.py and this
 recipe share one fixed point, (6) the DROP rows: a declared donor line (pinned by the sha256 of its bytes) removed
 from a named file, refused unless it occurs exactly once, and (7) one //FLLDCIM: anchor line inserted before the
 top-level type declaration, naming the donor blob URL at the donor commit. Every other byte is kept (CRLF too).

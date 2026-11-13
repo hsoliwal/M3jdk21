@@ -27,12 +27,12 @@ final class M3RegexAsciiLiveOwnerCustodyRecipeTest {
     private static final String ROOT = "/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/";
     private static final String DESCRIPTOR = "/META-INF/rewrite/regex-ascii-live-owner-custody-20261020.yml";
     private static final Set<String> CHANGE = Set.of(
-            "m3/tooling/regex-ascii-lexical-receiver/qualify.py",
-            "m3/tooling/regex-ascii-lexical-receiver/README.md",
+            "make/m3/tooling/regex-ascii-lexical-receiver/qualify.py",
+            "make/m3/tooling/regex-ascii-lexical-receiver/README.md",
             ".github/workflows/m3-regex-ascii-lexical-receiver.yml");
     private static final Set<String> KEEP = Set.of(
-            "m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json",
-            "m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py");
+            "make/m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json",
+            "make/m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py");
     private static final Set<String> PASSED = new LinkedHashSet<>();
     private static int forwardApplies;
     private static int inverseApplies;

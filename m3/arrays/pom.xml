@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- SPDX-License-Identifier: Apache-2.0 -->
-<!-- Maven BRIDGE of the area m3/arrays, written by m3/tooling/jdk-naming/move_module_area.py (MOVE_TO_JDK_MODULE v2,
+<!-- Maven BRIDGE of the area m3/arrays, written by make/m3/tooling/jdk-naming/move_module_area.py (MOVE_TO_JDK_MODULE v2,
      approved layout 2026-11-08): the product sources live in the JDK module src/jdk.m3.collections/share/classes and the
      tests in test/jdk; this pom compiles those package directories under the same artifact so every Maven consumer
      keeps building until it has moved too. src/main/java holds only the bridge module descriptor. -->

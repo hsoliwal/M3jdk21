@@ -6,7 +6,7 @@ on:
     paths:
       - 'src/java.base/share/classes/java/lang/M3StringRegexRowPrecompute.java'
       - 'test/jdk/java/lang/String/M3StringRegexRowPrecomputeTest.java'
-      - 'm3/runtime-integration/regex-row-precompute/**'
+      - 'make/m3/runtime-integration/regex-row-precompute/**'
       - '.github/workflows/m3-regex-row-precompute-20261016.yml'
 permissions:
   contents: read
@@ -25,4 +25,4 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Strict source seal, Java21 --patch-module and JDK Pattern oracle
-        run: python3 m3/runtime-integration/regex-row-precompute/verify.py
+        run: python3 make/m3/runtime-integration/regex-row-precompute/verify.py

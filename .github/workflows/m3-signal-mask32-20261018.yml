@@ -7,7 +7,7 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalOrder.java'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalDimensions.java'
       - 'test/jdk/jdk/m3/collections/M3SignalMask32*.java'
-      - 'm3/collections/qualification/signal-mask32-20261018/**'
+      - 'make/m3/collections/qualification/signal-mask32-20261018/**'
       - '.github/workflows/m3-signal-mask32-20261018.yml'
   workflow_dispatch:
 
@@ -35,7 +35,7 @@ jobs:
         run: git diff --check "${{ github.event.pull_request.base.sha }}...HEAD"
       - name: Java21 differential and C11 JNI parity
         shell: bash
-        run: bash m3/collections/qualification/signal-mask32-20261018/verify.sh
+        run: bash make/m3/collections/qualification/signal-mask32-20261018/verify.sh
 
   maven-contract:
     runs-on: ubuntu-24.04

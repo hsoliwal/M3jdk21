@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 """Recipe CENSUS3_GAPS v1 (m3/arrays): the RESTORE members of census pass 3 leaves P3-007 (M3ArgumentRoleBits, M3StringTypeBits); P3-002, P3-003, P3-004 are decision-only (HOLD_DEP).
 
-Derived from m3/collections/qualification/census-small-batch-20261106/apply.py v1 (anchored "sub" edits, every anchor
+Derived from make/m3/collections/qualification/census-small-batch-20261106/apply.py v1 (anchored "sub" edits, every anchor
 exactly once, LF payloads re-joined with the preimage's line ending). Every rule names the git blob sha of its
 preimage at the base commit; a target must equal the preimage (the rule is applied) or the postimage (already
 applied, no-op); anything else is a drifted preimage and the recipe refuses (exit 2) without writing (every

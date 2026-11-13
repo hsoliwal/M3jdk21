@@ -279,7 +279,7 @@
   "qualification": {
     "status": "PASSED_ISOLATED_JAVA21_PATCH_MODULE",
     "execution_date": "2026-10-19",
-    "verifier": "m3/runtime-integration/token-regex/verify.py",
+    "verifier": "make/m3/runtime-integration/token-regex/verify.py",
     "test": "test/jdk/java/util/regex/TokenPattern/TokenPatternTest.java",
     "modes": [
       "mixed",
@@ -303,6 +303,6 @@
     "src/java.base/share/classes/java/util/regex/TokenPattern.java": "GPL-2.0-only WITH Classpath-exception-2.0",
     "src/java.base/share/classes/java/util/regex/TokenMatcher.java": "GPL-2.0-only WITH Classpath-exception-2.0",
     "test/jdk/java/util/regex/TokenPattern/TokenPatternTest.java": "GPL-2.0-only",
-    "m3/runtime-integration/token-regex/": "Apache-2.0"
+    "make/m3/runtime-integration/token-regex/": "Apache-2.0"
   }
 }

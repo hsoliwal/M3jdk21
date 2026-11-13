@@ -3,7 +3,7 @@
 # m3/compiler/mat-sortable: the mat sortable annotation processor
 
 Module `org.m3jdk.compiler.matsortable` (package `jdk.m3.compiler.matsortable`), Maven coordinates
-`com.m3:m3-compiler-mat-sortable:0.1.0-SNAPSHOT`, Java 21; a default module of `m3/pom.xml`.
+`com.m3:m3-compiler-mat-sortable:0.1.0-SNAPSHOT`, Java 21; a default module of `make/m3/pom.xml`.
 
 `M3MatSortableProcessor` is the opt-in JSR-269 annotation processor of the mat sortables. For every class or record
 carrying `jdk.m3.collections.M3Sortable` it writes one deterministic companion `<Type>Sortable`: the schema and

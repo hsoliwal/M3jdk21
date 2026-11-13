@@ -11,7 +11,7 @@
   <properties>
     <maven.compiler.release>21</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <m3.target>${project.basedir}/../../../../..</m3.target>
+    <m3.target>${project.basedir}/../../../../../..</m3.target>
     <m3.runtime.output>${project.basedir}/target/runtime</m3.runtime.output>
     <m3.native.path>${project.build.directory}/empty-lib</m3.native.path>
   </properties>

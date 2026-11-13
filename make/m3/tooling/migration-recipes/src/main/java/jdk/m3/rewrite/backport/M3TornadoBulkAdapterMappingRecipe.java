@@ -9,8 +9,8 @@ import org.openrewrite.text.PlainText;
 
 /** Records the optional TornadoVM provider under the existing M3 bulk-scheduler family. */
 public final class M3TornadoBulkAdapterMappingRecipe extends Recipe {
-    static final String MAP = "m3/docs/name-mapping.json";
-    static final String CATALOGUE = "m3/tooling/recipe-catalogue.tsv";
+    static final String MAP = "doc/m3/name-mapping.json";
+    static final String CATALOGUE = "make/m3/tooling/recipe-catalogue.tsv";
     static final String FAMILY =
             "\"source_family\": \"Synexia BulkTask/BulkExecutor/M3BulkExecutor"
                     + " + TornadoVM verified RV32IM bulk provider\"";

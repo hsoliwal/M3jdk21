@@ -24,25 +24,25 @@ final class A3M {
 
     private static final List<String> PIN_PATHS =
             List.of(
-                    "m3/tooling/a3/pom.xml",
-                    "m3/tooling/a3/src/main/java/jdk/m3/a3/A3.java",
-                    "m3/tooling/a3/src/main/java/jdk/m3/a3/A3Cases.java",
-                    "m3/tooling/a3/src/main/java/jdk/m3/a3/A3Fs.java",
-                    "m3/tooling/a3/src/main/java/jdk/m3/a3/A3Lab.java",
-                    "m3/tooling/a3/src/main/java/jdk/m3/a3/A3M.java",
-                    "m3/tooling/a3/src/main/java/jdk/m3/a3/A3MCodec.java",
-                    "m3/tooling/a3/src/main/java/jdk/m3/a3/A3MemoryCompiler.java",
-                    "m3/tooling/a3/src/main/java/jdk/m3/a3/A3RegexMatrix.java",
-                    "m3/tooling/migration-recipes/pom.xml",
-                    "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceCatalog.java",
-                    "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceRecipe.java",
+                    "make/m3/tooling/a3/pom.xml",
+                    "make/m3/tooling/a3/src/main/java/jdk/m3/a3/A3.java",
+                    "make/m3/tooling/a3/src/main/java/jdk/m3/a3/A3Cases.java",
+                    "make/m3/tooling/a3/src/main/java/jdk/m3/a3/A3Fs.java",
+                    "make/m3/tooling/a3/src/main/java/jdk/m3/a3/A3Lab.java",
+                    "make/m3/tooling/a3/src/main/java/jdk/m3/a3/A3M.java",
+                    "make/m3/tooling/a3/src/main/java/jdk/m3/a3/A3MCodec.java",
+                    "make/m3/tooling/a3/src/main/java/jdk/m3/a3/A3MemoryCompiler.java",
+                    "make/m3/tooling/a3/src/main/java/jdk/m3/a3/A3RegexMatrix.java",
+                    "make/m3/tooling/migration-recipes/pom.xml",
+                    "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceCatalog.java",
+                    "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceRecipe.java",
                     "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java",
                     "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java",
                     "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/atom/M3FileAtomCandidateTable.java",
                     "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/atom/M3InventoryPureIntAtomCandidates.java",
                     "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
                     "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/atom/M3PureIntAtomEligibility.java",
-                    "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-java21-convergence.yml");
+                    "make/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-java21-convergence.yml");
 
     record Pin(String path, String sha256) {
         Pin {

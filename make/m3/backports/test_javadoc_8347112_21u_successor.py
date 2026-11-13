@@ -10,7 +10,7 @@ import verify
 
 class Javadoc8347112SuccessorTest(unittest.TestCase):
     def setUp(self):
-        self.root = Path(__file__).resolve().parents[2]
+        self.root = Path(__file__).resolve().parents[3]
         self.target = self.root / verify.JDK_8347112_HANDLER_PATH
         self.data = self.target.read_bytes()
         self.digest = hashlib.sha256(self.data).hexdigest()

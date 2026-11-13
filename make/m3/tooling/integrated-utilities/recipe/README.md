@@ -6,7 +6,7 @@ SPDX-License-Identifier: Apache-2.0
 
 Canonical destination: `hsoliwal/com.synexia`,
 `synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018`.
-Target-owned proof mirror: `m3/tooling/integrated-utilities/recipe`.
+Target-owned proof mirror: `make/m3/tooling/integrated-utilities/recipe`.
 
 The existing `M3GpuToolJoinRecipe` and `M3GpuToolJoinManifest` are copied byte-for-byte
 from the pinned M3JDK21 proof mirror recorded in `ENGINE_PROVENANCE.json`. Their

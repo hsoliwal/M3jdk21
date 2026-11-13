@@ -21,7 +21,7 @@ retained as ancestry but its policy document was absent. This remains absent at
 receiving base `b4c26ad42d37198162e02d85ae57cc24ed7a80ef`; the build-script guard
 still has blob `7ab72a5c85e84b2d97fdad3c305a885c233d0dd1`.
 
-Recover only `m3/docs/M3JDK21_PORTING_INVARIANT.md` as a review candidate from
+Recover only `doc/m3/M3JDK21_PORTING_INVARIANT.md` as a review candidate from
 historical document `05daa15c75524cb2ed76cfdb0b44d62bacaa47fb`, with a corrected
 preamble and complete-asset reuse section. Do not claim the machine policy,
 BSR/runtime/tooling or full #207 changes have been restored. Existing maps,

@@ -5,7 +5,7 @@ on:
     paths:
       - "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3CollectionSdk.java"
       - "test/jdk/jdk/m3/collections/M3SdkOwnerFactory*.java"
-      - "m3/collections/qualification/sdk-five-owner-repair-20261018/**"
+      - "make/m3/collections/qualification/sdk-five-owner-repair-20261018/**"
       - ".github/workflows/m3-five-sdk-owner-repair-20261018.yml"
   push:
     branches: [m3/five-sdk-owner-repair-receiver-20261018]
@@ -27,11 +27,11 @@ jobs:
       - name: Refuse drift from exact approved JDK/Native owners
         run: |
           set -euxo pipefail
-          python3 -S m3/collections/qualification/sdk-five-owner-repair-20261018/verify.py
+          python3 -S make/m3/collections/qualification/sdk-five-owner-repair-20261018/verify.py
       - name: Actual original Maven/OpenRewrite source-sealed recipe
         run: |
           set -euxo pipefail
-          mvn -B -ntp -f m3/collections/qualification/sdk-five-owner-repair-20261018/recipe/pom.xml test
+          mvn -B -ntp -f make/m3/collections/qualification/sdk-five-owner-repair-20261018/recipe/pom.xml test
       - name: Strict current core Java21, seeded factory/JDK sorted wrapper oracle
         run: |
           set -euxo pipefail
@@ -60,7 +60,7 @@ jobs:
           UBSAN_OPTIONS=halt_on_error=1 java -Xmx512m -Xcheck:jni \
             -Djava.library.path="$PWD/proof/native" -cp proof/classes \
             jdk.m3.collections.M3IndexMaskCompactorSelfTest --native | tee proof/native.log
-          python3 -S m3/collections/qualification/sdk-five-owner-repair-20261018/verify.py
+          python3 -S make/m3/collections/qualification/sdk-five-owner-repair-20261018/verify.py
           git diff --exit-code
       - name: Record optional five-provider interop compilation gap
         continue-on-error: true
@@ -75,5 +75,5 @@ jobs:
           retention-days: 30
           path: |
             proof/
-            m3/collections/qualification/sdk-five-owner-repair-20261018/recipe/target/surefire-reports/
+            make/m3/collections/qualification/sdk-five-owner-repair-20261018/recipe/target/surefire-reports/
             m3/collections/target/surefire-reports/

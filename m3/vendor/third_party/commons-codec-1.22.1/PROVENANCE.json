@@ -341,7 +341,7 @@
       "base_sha256": "c0df0c43aac27b857152831938d24e1bbc365a5ee8264adafb831db0e92ecb42",
       "kind": "m3-overlay-source",
       "overlay": "CHECKSUMS_TO_JDK v1",
-      "recipe": "m3/tooling/jdk-superset/hashing/tools/checksums_to_jdk.py",
+      "recipe": "make/m3/tooling/jdk-superset/hashing/tools/checksums_to_jdk.py",
       "recipe_sha256": "35cbfacaa45b45ddd7e90ee56cd56859c99d644c427ca3617e6c0d6aec7e7769",
       "repository": "m3/vendor/third_party/commons-codec-1.22.1/src/main/java/org/apache/commons/codec/digest/PureJavaCrc32.java",
       "sha256": "029d6a35afca4c96792cb558b9e5c09525f91dc19d9614f1641e7fefa8f3bcc0",
@@ -352,7 +352,7 @@
       "base_sha256": "fc3fa167e9eca96eb362c17d582138f52d8751ccd421f19e0860816465e1cf7e",
       "kind": "m3-overlay-source",
       "overlay": "CHECKSUMS_TO_JDK v1",
-      "recipe": "m3/tooling/jdk-superset/hashing/tools/checksums_to_jdk.py",
+      "recipe": "make/m3/tooling/jdk-superset/hashing/tools/checksums_to_jdk.py",
       "recipe_sha256": "35cbfacaa45b45ddd7e90ee56cd56859c99d644c427ca3617e6c0d6aec7e7769",
       "repository": "m3/vendor/third_party/commons-codec-1.22.1/src/main/java/org/apache/commons/codec/digest/PureJavaCrc32C.java",
       "sha256": "7ddebb063b2f6cbcabbf0a58f76d7121022462d70dc00a3596a7e9e6156fd753",
@@ -1389,14 +1389,14 @@
       "kind": "m3-overlay-record",
       "repository": "m3/vendor/third_party/commons-codec-1.22.1/OVERLAY_SOURCES.json",
       "sha256": "cb44601b4d4325e19cdf0ea30cc39f5112325c27482f15cf45de123af600c8c6",
-      "upstream": "m3/tooling/jdk-superset/hashing/tools/checksums_to_jdk.py"
+      "upstream": "make/m3/tooling/jdk-superset/hashing/tools/checksums_to_jdk.py"
     }
   ],
   "group": "commons-codec",
   "kind": "MODULE",
   "license": "Apache License, Version 2.0 (from the license text; pom declares none)",
   "license_file": "LICENSE",
-  "modifications": "M3 overlays CHECKSUMS_TO_JDK v1: digest.PureJavaCrc32 and PureJavaCrc32C keep their public members and delegate to java.base (java.util.zip.CRC32, CRC32C; PureJavaCrc32C through one MethodHandle because the donor compiles with --release 8), so their lookup tables are gone (recipe m3/tooling/jdk-superset/hashing/tools/checksums_to_jdk.py; the unchanged upstream files are retained under upstream-excluded/). No other upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "modifications": "M3 overlays CHECKSUMS_TO_JDK v1: digest.PureJavaCrc32 and PureJavaCrc32C keep their public members and delegate to java.base (java.util.zip.CRC32, CRC32C; PureJavaCrc32C through one MethodHandle because the donor compiles with --release 8), so their lookup tables are gone (recipe make/m3/tooling/jdk-superset/hashing/tools/checksums_to_jdk.py; the unchanged upstream files are retained under upstream-excluded/). No other upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
   "module_descriptors": [],
   "multi_release_overlays": {
     "not_reproduced": [],

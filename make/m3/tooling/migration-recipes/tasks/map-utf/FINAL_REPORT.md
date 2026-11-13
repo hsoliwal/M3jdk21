@@ -72,11 +72,11 @@ and all other wire corruption categories are not proved by this packet.
 ## Reproduction
 Run in a matching patched FULL repository or exact supplied source slice:
 
-    bash m3/tooling/migration-recipes/tasks/map-utf/verify.sh JDK21 REPOSITORY FRESH_OUTPUT
+    bash make/m3/tooling/migration-recipes/tasks/map-utf/verify.sh JDK21 REPOSITORY FRESH_OUTPUT
 
 That is the executed kernel gate. In the actual complete repository, also run:
 
-    mvn -o -B -ntp -f m3/tooling/migration-recipes/pom.xml verify
+    mvn -o -B -ntp -f make/m3/tooling/migration-recipes/pom.xml verify
     make test TEST="test/jdk/java/lang/String/MIndexMappedStringBackingTest.java test/jdk/java/lang/String/MapGuardTest.java test/jdk/java/lang/String/MapFactsTest.java test/jdk/java/lang/String/MapUtfTest.java"
 
 The latter commands remain unverified and need the normal complete native

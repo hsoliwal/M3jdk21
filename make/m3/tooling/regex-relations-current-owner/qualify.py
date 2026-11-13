@@ -12,7 +12,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 HERE = Path(__file__).resolve().parent
-RECEIVER = HERE.parents[2]
+RECEIVER = HERE.parents[3]
 SDK = HERE / "sdk"
 ROOT = Path(os.environ["M3_PROOF_ROOT"]).resolve()
 ARTIFACTS = ROOT / "artifacts"
@@ -76,7 +76,7 @@ def binding(fresh=False):
     if head != os.environ["EXPECTED_SOURCE_SHA"] or len(head) != 40:
         raise RuntimeError("checkout is not exact candidate head")
     binding_data = regular(HERE / "source-binding.json").read_bytes()
-    if blob(binding_data) != git("rev-parse", "HEAD:m3/tooling/regex-relations-current-owner/source-binding.json"):
+    if blob(binding_data) != git("rev-parse", "HEAD:make/m3/tooling/regex-relations-current-owner/source-binding.json"):
         raise RuntimeError("source binding itself differs from exact checkout")
     record = json.loads(binding_data)
     if (record["repository"] != "hsoliwal/com.synexia"
@@ -89,8 +89,8 @@ def binding(fresh=False):
     rows = record["files"]
     if not 23 <= len(rows) <= 32:
         raise RuntimeError("bounded complete SDK and hosted source binding required")
-    sdk_relative = "m3/tooling/regex-relations-current-owner/sdk/"
-    prefix = "m3/tooling/regex-relations-current-owner/"
+    sdk_relative = "make/m3/tooling/regex-relations-current-owner/sdk/"
+    prefix = "make/m3/tooling/regex-relations-current-owner/"
     seen = set()
     for row in rows:
         path = str(relative(row["targetPath"]))

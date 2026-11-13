@@ -6,7 +6,7 @@
  ROOT = BASE / "overlay"
 -OUT = BASE / "verification"
 +OUT = BASE / "verification-v3"
- CRATE = ROOT / "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005"
+ CRATE = ROOT / "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005"
  PLAN = CRATE / "plan.json"
  PYTHON = Path(os.environ.get("CODEX_PRIMARY_RUNTIME_PYTHON", "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3"))
 @@ -105,8 +105,8 @@

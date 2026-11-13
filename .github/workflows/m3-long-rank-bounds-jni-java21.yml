@@ -10,7 +10,7 @@ on:
       - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_long_rank_batch_jni.c'
       - 'test/jdk/jdk/m3/collections/M3LongRankBoundsContract.java'
       - 'test/jdk/jdk/m3/collections/M3LongRankBoundsTest.java'
-      - 'm3/collections/qualification/rank-bounds-jni-20261029/**'
+      - 'make/m3/collections/qualification/rank-bounds-jni-20261029/**'
 
 permissions:
   contents: read

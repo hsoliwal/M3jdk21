@@ -12,8 +12,8 @@ import pathlib
 import subprocess
 import sys
 
-ROOT = pathlib.Path(__file__).resolve().parents[4]
-MANIFEST = ROOT / "m3/collections/qualification/filtered-cursor-mask-20261021/SOURCE_MANIFEST.tsv"
+ROOT = pathlib.Path(__file__).resolve().parents[5]
+MANIFEST = ROOT / "make/m3/collections/qualification/filtered-cursor-mask-20261021/SOURCE_MANIFEST.tsv"
 
 
 SEALED_MANIFEST_BLOB = "5907fcead4a2468a9d31b08b07731876c9d7d954"

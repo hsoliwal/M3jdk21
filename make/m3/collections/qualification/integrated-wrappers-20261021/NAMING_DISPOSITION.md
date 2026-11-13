@@ -14,4 +14,4 @@ or new JNI export. Existing-owner in-place changes are explicitly excluded
 from the migration queue; they do not qualify a replacement java.util backend.
 
 Source-built current-JDK, full jtreg/JCK/platform and ordered family promotion
-remain independent gates. The target authority remains m3/docs/name-mapping.json.
+remain independent gates. The target authority remains doc/m3/name-mapping.json.

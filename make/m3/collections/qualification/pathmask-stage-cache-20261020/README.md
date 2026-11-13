@@ -25,7 +25,7 @@ Each recipe refuses unknown source drift, preserves already-qualified targets as
 ## Local Java/JNI test
 
 ```sh
-bash m3/collections/qualification/pathmask-stage-cache-20261020/verify.sh
+bash make/m3/collections/qualification/pathmask-stage-cache-20261020/verify.sh
 ```
 
 Requires a JDK 21, C17 compiler, Python 3, JNI headers and UBSan on Linux. It compiles the **actual repo M3IndexPathMasks.java owner** and new test, compiles the actual C JNI owner with warnings-as-errors and UBSan, runs Java CheckJNI and verifies all three source seals.

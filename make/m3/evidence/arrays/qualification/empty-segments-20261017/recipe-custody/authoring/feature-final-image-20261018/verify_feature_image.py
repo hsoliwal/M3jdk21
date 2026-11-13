@@ -89,7 +89,7 @@ def main():
     sources = [
         repo / "test/jdk/java/lang/Runtime/M3RuntimeProgressFacade.java",
         repo / "test/jdk/java/util/concurrent/ProgressJob/M3ProgressJob.java",
-        repo / "m3/runtime-integration/progress-job-20261018/src/test/java/EclipseStatusIdentity.java",
+        repo / "make/m3/runtime-integration/progress-job-20261018/src/test/java/EclipseStatusIdentity.java",
         repo / "test/jdk/jdk/internal/mindex/M3PrimitiveIdentityTest.java",
         repo / "test/jdk/jdk/internal/mindex/M3PrimitiveFixedArenaProbe.java",
     ]

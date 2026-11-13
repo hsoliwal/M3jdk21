@@ -34,13 +34,13 @@ requires its own source/binary compatibility, export and behavioral review.
 ## Authoritative mapping and file placement
 
 For every source change, start with
-[`m3/docs/name-mapping.json`](name-mapping.json), specifically the durable
+[`doc/m3/name-mapping.json`](name-mapping.json), specifically the durable
 `migration.records[].id` plus source/target symbol, module, path, revision,
 license, recipe, tests and state. Follow the existing
 [`m3jdk21-porting-invariant.md`](m3jdk21-porting-invariant.md) and
 [`counterpart-naming.md`](counterpart-naming.md). Name proposals add or amend
 entries in that **same authority** and retain the stable mapping ID; the queue under
-`m3/tooling/name-contract/name-plan.json` references that authority but is not
+`make/m3/tooling/name-contract/name-plan.json` references that authority but is not
 a second registry. Preserve earlier lineage when packages/classes move.
 
 | Role | Actual class/package policy | File location |
@@ -54,7 +54,7 @@ a second registry. Preserve earlier lineage when packages/classes move.
 | Optional public M3 companion | Existing `jdk.m3.*` static operations or owner-sharing typed views; standard Java owner remains unchanged | Existing owner/module, initially `m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java` in `jdk.m3.arrays` |
 | Isolated SDK/port candidate | Source presence or a `jdk.m3.*` name does not establish installed-image admission or standard-API equivalence | Existing `m3/<family>/**` source layout |
 | JNI/HotSpot implementation | Target-owned symbols/headers in owning module; no stale heap pointer; preserve ABI | `src/<module>/share/native/**`, `src/hotspot/**` where applicable |
-| Recipe and evidence | Canonical reusable Maven/OpenRewrite implementation remains in Synexia; M3JDK target-only receiver, tests, jtreg and receipts here | Synexia `synexia-openrewrite-recipes/**`; target `m3/tooling/**` |
+| Recipe and evidence | Canonical reusable Maven/OpenRewrite implementation remains in Synexia; M3JDK target-only receiver, tests, jtreg and receipts here | Synexia `synexia-openrewrite-recipes/**`; target `make/m3/tooling/**` |
 
 Use **JDK conventional name** when implementing a JDK type. Keep the
 existing class/constructor names unchanged and retain package-visible,
@@ -86,7 +86,7 @@ exact compatibility spelling **`toAdpater(Class<T>)`**. Documentation, mapping,
 JNI consumers and test fixtures must preserve both names. This preparation
 changes naming metadata and tests, not those method declarations.
 
-The data-only [source identity receipt](../tooling/name-contract/receipts/release-preparation/source-identity.json)
+The data-only [source identity receipt](../../make/m3/tooling/name-contract/receipts/release-preparation/source-identity.json)
 pins the inspected source and restores the original
 `synexia.lexicons.related-source-range` record without changing its
 `implemented-unverified` state. Prior symbols, method signatures and source
@@ -185,14 +185,14 @@ only where a performance claim is made and never sufficient for promotion.
 
 ## Executable queue and verification
 
-`m3/tooling/name-contract/name-plan.json` holds reviewed **queued**
+`make/m3/tooling/name-contract/name-plan.json` holds reviewed **queued**
 ideas with existing mapping IDs and an exact canonical map blob, not active
 source edits. `check.py` verifies the map pin, actual mapped Java
 package/class/location, queue safety and AGENTS.md discoverability.
 
 ```sh
-python3 m3/tooling/name-contract/check.py
-python3 -m unittest discover -s m3/tooling/name-contract -p 'test_*.py' -v
+python3 make/m3/tooling/name-contract/check.py
+python3 -m unittest discover -s make/m3/tooling/name-contract -p 'test_*.py' -v
 
 # From a separate pinned com.synexia checkout, no hidden global edits:
 mvn -B -f synexia-openrewrite-recipes/crates/m3jdk21-owner-naming/pom.xml test
@@ -216,7 +216,7 @@ package/type name is **not** proof of ABI, behavior, performance or installed
 JDK admission, and this is not a full-source inventory.
 
 ```sh
-python3 m3/tooling/name-contract/audit.py --strict
+python3 make/m3/tooling/name-contract/audit.py --strict
 ```
 
 This fails for broken path/type pairs, missing files claimed by an implemented
@@ -278,7 +278,7 @@ make run-test TEST=test/jdk/java/lang/String/M3CanonicalApiBoundaryTest.java
 ```
 
 The data-only receipt is under
-`m3/docs/qualification/current-api-internality-20261027/RECEIVER_RECEIPT.json`.
+`doc/m3/qualification/current-api-internality-20261027/RECEIVER_RECEIPT.json`.
 Until the source-built M3JDK21 image runs jtreg, mark that gate **NOT RUN**,
 irrespective of success on a stock JDK patched with stubs. Full
 serialization/JNI/GC/JMM and performance gates remain independent.

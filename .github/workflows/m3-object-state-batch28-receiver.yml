@@ -5,7 +5,7 @@ on:
     paths:
       - "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectStateBatch28.java"
       - "test/jdk/jdk/m3/collections/M3ObjectStateBatch28SelfTest.java"
-      - "m3/collections/qualification/object-state-batch-28/**"
+      - "make/m3/collections/qualification/object-state-batch-28/**"
       - "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/object-state-batch-28/**"
       - ".github/workflows/m3-object-state-batch28-receiver.yml"
   push:
@@ -32,14 +32,14 @@ jobs:
         shell: bash
         run: |
           set -euxo pipefail
-          python3 -S m3/collections/qualification/object-state-batch-28/verify.py
+          python3 -S make/m3/collections/qualification/object-state-batch-28/verify.py
       - name: Real Maven OpenRewrite recipe SDK, output and refusal checks
         shell: bash
         run: |
           set -euxo pipefail
-          mvn -B -ntp -f m3/collections/qualification/object-state-batch-28/pom.xml test
-          diff -u m3/collections/qualification/object-state-batch-28/evidence/QUALIFIED.tsv \
-            m3/collections/qualification/object-state-batch-28/target/sdk-batch-28/QUALIFIED.tsv
+          mvn -B -ntp -f make/m3/collections/qualification/object-state-batch-28/pom.xml test
+          diff -u make/m3/collections/qualification/object-state-batch-28/evidence/QUALIFIED.tsv \
+            make/m3/collections/qualification/object-state-batch-28/target/sdk-batch-28/QUALIFIED.tsv
       - name: Original M3 core compile and Java/JNI regression
         shell: bash
         run: |
@@ -63,7 +63,7 @@ jobs:
           UBSAN_OPTIONS=halt_on_error=1 java -Xmx256m -Xcheck:jni \
             -Djava.library.path="$PWD/proof/native" -cp proof/classes \
             jdk.m3.collections.M3IndexMaskCompactorSelfTest --native
-          python3 -S m3/collections/qualification/object-state-batch-28/verify.py
+          python3 -S make/m3/collections/qualification/object-state-batch-28/verify.py
           git diff --exit-code
       - name: Preserve receipt and failed-gate logs
         if: always()
@@ -72,6 +72,6 @@ jobs:
           name: m3-state-batch-${{ github.event.pull_request.head.sha || github.sha }}
           retention-days: 30
           path: |
-            m3/collections/qualification/object-state-batch-28/target/surefire-reports/
-            m3/collections/qualification/object-state-batch-28/target/sdk-batch-28/
+            make/m3/collections/qualification/object-state-batch-28/target/surefire-reports/
+            make/m3/collections/qualification/object-state-batch-28/target/sdk-batch-28/
             proof/native/

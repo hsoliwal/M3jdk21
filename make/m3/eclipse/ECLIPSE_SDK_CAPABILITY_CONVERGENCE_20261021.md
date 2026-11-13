@@ -21,7 +21,7 @@ Eclipse EFS/Resources teaches provider-aware filesystem identity, workspace delt
 | Indexed state/collections | `M3LongArrayList`, `M3IntArrayList`, `M3ObjectStateSlots28`, filtered view and JNI mask owners | No per-entry object store, no general provider substitutability without contract testing |
 | UI, compiler, metadata | existing M3 viewport owners, `M3AST`, JDT source probes, indexed extension/bundle snapshots | No complete SWT/EMF/Equinox/JDT port or universal performance gain is claimed |
 
-The detailed family-by-family state and next tests are in [ECLIPSE_SDK_CAPABILITY_LEDGER_20261021.tsv](ECLIPSE_SDK_CAPABILITY_LEDGER_20261021.tsv). See the earlier [Eclipse substrate contract](M3_ECLIPSE_SUBSTRATE_CONTRACT.md), [existing framework coverage](framework/ECLIPSE_FORWARDING_COVERAGE.tsv), and [build delta invariant](../docs/build-delta-invariant.md); those are unchanged, not overridden.
+The detailed family-by-family state and next tests are in [ECLIPSE_SDK_CAPABILITY_LEDGER_20261021.tsv](ECLIPSE_SDK_CAPABILITY_LEDGER_20261021.tsv). See the earlier [Eclipse substrate contract](M3_ECLIPSE_SUBSTRATE_CONTRACT.md), [existing framework coverage](framework/ECLIPSE_FORWARDING_COVERAGE.tsv), and [build delta invariant](../../../doc/m3/build-delta-invariant.md); those are unchanged, not overridden.
 
 ## Bounded implementation in this branch: indexed change journal
 

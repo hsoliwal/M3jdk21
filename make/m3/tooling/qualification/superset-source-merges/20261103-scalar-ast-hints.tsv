@@ -12,8 +12,8 @@ PR	STATUS	MODE	PATH	GIT_BLOB
 2308	modified	100644	.github/workflows/m3-compiler-signal-facts-20261022.yml	5fdbf34f190c6ce23b8192af2c7b8e39c59e57f8
 2315	added	100644	doc/m3-compiler-pattern-hints-20261102.json	6be52e8c0bba3805337f3f93cdc7c574aa689c1c
 2350	modified	100644	m3/collections/implementations/spring/src/main/java/com/m3/collections/spring/M3SingleValueMapView.java	bf28adb8154e25ef64bce8ad8f5b55bce46d70bb
-2350	added	100644	m3/collections/qualification/spring-scalar-constructor-abi/QUALIFICATION.json	62ea199e10e4420911702bcb0ecaa293bba234e7
-2350	added	100644	m3/collections/qualification/spring-scalar-constructor-abi/README.md	084b0d473f2f03ad507d45a88a85869c1940f4ab
+2350	added	100644	make/m3/collections/qualification/spring-scalar-constructor-abi/QUALIFICATION.json	62ea199e10e4420911702bcb0ecaa293bba234e7
+2350	added	100644	make/m3/collections/qualification/spring-scalar-constructor-abi/README.md	084b0d473f2f03ad507d45a88a85869c1940f4ab
 2308	added	100644	m3/collections/signal-codegen/qualification/compiler-machine-hints/COMPILER_INTEGRATION_PLAN.md	263b22fac7e2432b436e0d613075420c99ff245f
 2308	added	100644	m3/collections/signal-codegen/qualification/compiler-machine-hints/README.md	65a6a18b1bf515c6ba237168581c6bfb01021aaf
 2308	added	100644	m3/collections/signal-codegen/qualification/compiler-machine-hints/SOURCE_MANIFEST.tsv	597829b6e4ed5619597c2d1ddb350645642acb83

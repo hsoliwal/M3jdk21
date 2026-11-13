@@ -5,21 +5,21 @@ on:
     branches:
       - "m3/jep497-mldsa-inventory-20261007"
     paths:
-      - "m3/backports/recipes/jep-497-mldsa/**"
-      - "m3/backports/generate_recipe_crates.py"
-      - "m3/backports/file_delta_inventory.py"
-      - "m3/backports/test_generate_recipe_crates.py"
-      - "m3/backports/test_file_delta_inventory.py"
-      - "m3/tooling/migration-recipes/**"
+      - "make/m3/backports/recipes/jep-497-mldsa/**"
+      - "make/m3/backports/generate_recipe_crates.py"
+      - "make/m3/backports/file_delta_inventory.py"
+      - "make/m3/backports/test_generate_recipe_crates.py"
+      - "make/m3/backports/test_file_delta_inventory.py"
+      - "make/m3/tooling/migration-recipes/**"
       - ".github/workflows/m3-jep497-mldsa-inventory.yml"
   pull_request:
     paths:
-      - "m3/backports/recipes/jep-497-mldsa/**"
-      - "m3/backports/generate_recipe_crates.py"
-      - "m3/backports/file_delta_inventory.py"
-      - "m3/backports/test_generate_recipe_crates.py"
-      - "m3/backports/test_file_delta_inventory.py"
-      - "m3/tooling/migration-recipes/**"
+      - "make/m3/backports/recipes/jep-497-mldsa/**"
+      - "make/m3/backports/generate_recipe_crates.py"
+      - "make/m3/backports/file_delta_inventory.py"
+      - "make/m3/backports/test_generate_recipe_crates.py"
+      - "make/m3/backports/test_file_delta_inventory.py"
+      - "make/m3/tooling/migration-recipes/**"
       - ".github/workflows/m3-jep497-mldsa-inventory.yml"
   workflow_dispatch:
 
@@ -41,7 +41,7 @@ jobs:
           cache: maven
       - name: Prove source-sealed inventory recipe and fixed point
         run: >
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
+          mvn -B -ntp -f make/m3/tooling/migration-recipes/pom.xml
           -Dtest=M3Jep497MlDsaInventoryRecipeTest,M3Jep497SharedOwnerSplitRecipeTest
           -Dsurefire.failIfNoSpecifiedTests=false test
       - name: Fetch exact implementation and JDK24 GA donor states
@@ -67,7 +67,7 @@ jobs:
           import csv, os, subprocess
           from pathlib import Path
           repo = Path(os.environ["UPSTREAM"])
-          packet = Path("m3/backports/recipes/jep-497-mldsa")
+          packet = Path("make/m3/backports/recipes/jep-497-mldsa")
           impl = "8b98f958dc1afedc02b9d9c98089d6cb1ca3a5b7"
           ga = "6705a9255d28f351950e7fbca9d05e73942a4e27"
           actual = subprocess.check_output(
@@ -122,17 +122,17 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          cd m3/backports
+          cd make/m3/backports
           python3 -m unittest -v test_file_delta_inventory.py test_generate_recipe_crates.py
       - name: Generate one source-sealed FILE atom per JDK24-GA surviving path
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p target/jep497
-          python3 m3/backports/generate_recipe_crates.py \
+          python3 make/m3/backports/generate_recipe_crates.py \
             --repo "$UPSTREAM" \
             --release 24 \
-            --paths-file m3/backports/recipes/jep-497-mldsa/MATERIALIZE_PATHS.txt \
+            --paths-file make/m3/backports/recipes/jep-497-mldsa/MATERIALIZE_PATHS.txt \
             --crate-size 1 \
             --include-native \
             --include-text \
@@ -152,7 +152,7 @@ jobs:
           print(f"JEP497_EXCLUSIONS={len(exclusions)}")
           PY
       - name: Verify repository backport substrate
-        run: mvn -B -ntp -f m3/backports/pom.xml verify
+        run: mvn -B -ntp -f make/m3/backports/pom.xml verify
       - name: Upload JEP497 inventory and generated FILE atoms
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:

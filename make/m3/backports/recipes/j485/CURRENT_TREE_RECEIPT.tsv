@@ -2,7 +2,7 @@ field	value
 jep	485
 title	Stream Gatherers
 proof_base	da6084c4efd4a0128fe36e92ea46d16f67304530
-product_manifest	m3/backports/recipes/j485/CURRENT_PRODUCT.tsv
+product_manifest	make/m3/backports/recipes/j485/CURRENT_PRODUCT.tsv
 product_targets	7
 product_blob_matches	7
 current_tree_state	CANDIDATE_MATERIALIZED_UNVERIFIED
@@ -22,4 +22,4 @@ proof_requested	2026-10-08
 proof_branch	m3/jep485-current-master-reproof-20261008
 previous_failed_run	37581932480
 previous_failures	PRIVATE_SYNEXIA_FETCH_PLUS_STALE_STRING_MINDEX_BOOTSTRAP
-workflow_receiver	m3/backports/recipes/j485/WORKFLOW_VALIDATOR_RECEIVER.tsv
+workflow_receiver	make/m3/backports/recipes/j485/WORKFLOW_VALIDATOR_RECEIVER.tsv

@@ -6,17 +6,17 @@ the M3 prefix: 4 main, 26 test.
 
 The fold ran as one recipe command (`FOLD_nlp.tsv` holds the rows):
 
-    python -I m3/tooling/jdk-naming/fold_package.py --root . --from-root m3/nlp --from-package jdk.m3.nlp \
-      --to-root m3/search --to-package jdk.m3.search --exclude m3/tooling/jdk-naming/ \
-      --retire-to m3/evidence/search/nlp --aggregator m3/pom.xml
-    python -I m3/tooling/jdk-naming/rename_types.py --root . --package jdk.m3.search \
-      --exclude m3/tooling/jdk-naming/ --doc m3/search/ --string-words --comment-words
+    python -I make/m3/tooling/jdk-naming/fold_package.py --root . --from-root m3/nlp --from-package jdk.m3.nlp \
+      --to-root m3/search --to-package jdk.m3.search --exclude make/m3/tooling/jdk-naming/ \
+      --retire-to make/m3/evidence/search/nlp --aggregator make/m3/pom.xml
+    python -I make/m3/tooling/jdk-naming/rename_types.py --root . --package jdk.m3.search \
+      --exclude make/m3/tooling/jdk-naming/ --doc m3/search/ --string-words --comment-words
 
 `fold_package.py` (FOLD_PACKAGE v1, new, 7 fixture tests) did the following:
 - moved the package's sources;
-- moved the module's records byte for byte to `m3/evidence/search/nlp/`: GATES, PROVENANCE, RELOCATION_MAP,
+- moved the module's records byte for byte to `make/m3/evidence/search/nlp/`: GATES, PROVENANCE, RELOCATION_MAP,
   RECIPE_MEMORY, README, recipe/ with the three relocation leaves, verify.sh, pom.xml and module-info.java;
-- removed `<module>nlp</module>` from m3/pom.xml.
+- removed `<module>nlp</module>` from make/m3/pom.xml.
 
 `rename_types.py` v1.7 then dropped the prefix. A hand-sequenced run (retire, fold, rename) produced the same tree,
 byte for byte, apart from the two declared edits in `DECLARED_EDITS_fold_nlp.tsv`: the search README (stale names

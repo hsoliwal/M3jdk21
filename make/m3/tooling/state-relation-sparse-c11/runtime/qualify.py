@@ -21,7 +21,7 @@ OWNER = "src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java"
 ADAPTER = "src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java"
 NATIVE = "src/java.base/share/native/libjava/M3StateRelation.c"
 HEADER = "src/java.base/share/native/libjava/m3_state_relation.h"
-PROOF = "m3/compatibility/regex-relations-20261014/M3RelationPortProof.java"
+PROOF = "make/m3/compatibility/regex-relations-20261014/M3RelationPortProof.java"
 PINNED = {
     OWNER: "30359b57b7b553e78355d3672119c685051ec1da",
     ADAPTER: "d70a152bdedc380ed8b28861ea94ef4c2adbea90",

@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # Selected in-java.base source and jtreg-oracle smoke gate, not an M3JDK image build.
 set -euo pipefail
-cd "$(dirname "$0")/../../../.."
+cd "$(dirname "$0")/../../../../.."
 src=src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java
 test=test/jdk/java/util/ArrayList/M3CollectionMaskCompactorContract.java
 source_blob=$(git hash-object "$src")

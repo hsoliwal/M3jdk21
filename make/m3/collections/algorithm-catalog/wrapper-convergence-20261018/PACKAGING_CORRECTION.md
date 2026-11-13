@@ -29,7 +29,7 @@ the engine or packing evidence into an opaque archive:
 [DELIVERY_PARTITIONS.json](DELIVERY_PARTITIONS.json) binds exact membership and
 counts. Both sets are within 256 targets, their intersection is empty, and their
 union is the corrected catalogue. Every receiving path remains under
-`m3/collections/algorithm-catalog/wrapper-convergence-20261018/`, absent at the
+`make/m3/collections/algorithm-catalog/wrapper-convergence-20261018/`, absent at the
 exact 2f baseline. The corrected datasets still require actual SDK and receiving
 qualification by the parent; static packaging checks are not an execution pass.
 

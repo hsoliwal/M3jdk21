@@ -37,7 +37,7 @@ The following uses the actual M3JDK development image, including its existing
 M3AST compiler API and matching JMODs. A fresh output directory is required.
 
 ```sh
-python3 m3/tooling/module-packs/nlp-search/build.py \
+python3 make/m3/tooling/module-packs/nlp-search/build.py \
   --jdk-home /path/to/m3jdk21 \
   --with-compiler \
   --out build/m3-source-search
@@ -162,7 +162,7 @@ The Apache library source trees remain unchanged. New fork source and generated
 overlays carry exact source commits, SHA-256 and original notices. Existing
 source-lock and overlay entries are preserved. The canonical successor recipe
 owns the new manifests, templates, tests and source seals. `SOURCE_REF.json` and
-`m3/docs/name-mapping.d/m3-nlp-source-jmods-20261018.json` record the handoff.
+`doc/m3/name-mapping.d/m3-nlp-source-jmods-20261018.json` record the handoff.
 First-party integration is Apache-2.0 with Hitesh Soliwal and contributor
 attribution. Apache, embedded third-party, SLF4J and OpenJDK rights remain scoped
 to their actual source and payloads.

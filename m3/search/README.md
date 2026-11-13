@@ -36,7 +36,7 @@ Not run: the Maven reactor build on CI, and the native kernels (leaf 2).
 
 Received by M3_SEARCH_RELOCATE v2 (`qualification/relocation-20261106-native/`). v2 adds JNI symbol and class-name
 rewriting for C, plus the native-loader mapping onto `jdk.m3.file.M3JniLibraryLoader` / `M3NativeLibrarySpec`
-(m3/file since m3/qualification/file-unify-20261106, #2492). The library's logical name `synexia_m3` becomes `m3search`.
+(m3/file since make/m3/qualification/file-unify-20261106, #2492). The library's logical name `synexia_m3` becomes `m3search`.
 
 | M3 owner | Donor |
 |---|---|
@@ -117,4 +117,4 @@ and its descriptor `org.m3jdk.nlp` are retired. `fold_package.py` (FOLD_PACKAGE 
 | `ScopedNgrams` | scoped n-gram counts with top-k admission |
 
 The relocation records of the nlp leaves (GATES, PROVENANCE, RELOCATION_MAP, recipe/, verify.sh, pom and descriptor)
-are kept byte for byte in `m3/evidence/search/nlp/`. The fold itself is recorded in `m3/evidence/search/FOLD_nlp.md`.
+are kept byte for byte in `make/m3/evidence/search/nlp/`. The fold itself is recorded in `make/m3/evidence/search/FOLD_nlp.md`.

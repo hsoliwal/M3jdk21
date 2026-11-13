@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 """Generator of the module source successor (2026-11-09) of the collections donation custody chain.
 
-usage: python3 m3/collections/qualification/module-source-successor-20261109.py [--check]
+usage: python3 make/m3/collections/qualification/module-source-successor-20261109.py [--check]
 1. Replays the sealed chain of verify_donation.py (installed manifest -> successors -> Tools4j -> Superset -> Master)
    and derives the exact predecessor SHA-256 before each pinned stage. The JDK_NAMING_RESEAL of 2026-10-31
    (caf39c93e4c) rewrote the installed-source rows and the packet pin but not the three chain pins, so the chain stopped at
@@ -18,7 +18,7 @@ usage: python3 m3/collections/qualification/module-source-successor-20261109.py 
 Idempotent: a second run changes nothing; --check writes nothing and exits 1 when a run would change a file.
 Tip rule: this successor is the chain's tip (source_set_successor_current) and describes the current tree, so a lane that
 adds, renames or removes module sources reruns this generator in the same PR and the tip is re-sealed in place; the
-earlier receipts (installed manifest .. Master 20261031) are never modified."""
+earlier receipts (installed manifest ../../../../m3/collections Master 20261031) are never modified."""
 import hashlib
 import importlib.util
 import json
@@ -43,7 +43,7 @@ def seal(rows):
 def put(path, text):
     if path.exists() and path.read_text(encoding="utf-8") == text:
         return
-    changed.append(path.relative_to(HERE.parents[1]).as_posix())
+    changed.append(path.relative_to(HERE.parents[2]).as_posix())
     if not CHECK:
         path.write_text(text, encoding="utf-8", newline="\n")
 
@@ -127,7 +127,7 @@ record = {
               "recorded keys stay in the m3/collections/src key space (verify_donation.py located/recorded)",
     "chain_repins": "JDK_NAMING_RESEAL caf39c93e4c left the Tools4j, Superset and Master predecessor pins stale; "
                     "derived by replaying the sealed chain",
-    "recipe": "m3/collections/qualification/module-source-successor-20261109.py",
+    "recipe": "make/m3/collections/qualification/module-source-successor-20261109.py",
     "phase_advance": False,
 }
 body = json.dumps(record, indent=2, ensure_ascii=False).replace("\n", "\n  ")

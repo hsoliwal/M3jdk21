@@ -69,17 +69,17 @@
     },
     {
       "git_blob": "2ba7e8c149a503850019a4435cd2637f47483ae1",
-      "path": "m3/collections/qualification/tree-plan-commit-identity/RECEIVER_RECEIPT.json",
+      "path": "make/m3/collections/qualification/tree-plan-commit-identity/RECEIVER_RECEIPT.json",
       "sha256": "81492283a96d9a67139d1661bb2b168f3cf25375a7d5f1e63261f4259850772b"
     },
     {
       "git_blob": "b5a5ad87fa2c2a5789fbc46295d4d40f835b2f78",
-      "path": "m3/collections/qualification/tree-plan-commit-identity/test_verify_receipt.py",
+      "path": "make/m3/collections/qualification/tree-plan-commit-identity/test_verify_receipt.py",
       "sha256": "1074c5923c623d4087ff5099120cd42525c335d2dac9b83b0041d663898c2953"
     },
     {
       "git_blob": "55bbe67a09c96980c58b12187e9625cb2143c389",
-      "path": "m3/collections/qualification/tree-plan-commit-identity/verify_receipt.py",
+      "path": "make/m3/collections/qualification/tree-plan-commit-identity/verify_receipt.py",
       "sha256": "d8e26a6fca59342281c5eaabfcf81ce13d378b6d72ad021183ec928150c350fc"
     },
     {
@@ -105,19 +105,19 @@
     },
     {
       "old_git_blob": "6f088b752df3c085cc2563ef05ecff803c67515d",
-      "path": "m3/collections/algorithm-catalog/tree-plan-commit-identity-20261027.tsv"
+      "path": "make/m3/collections/algorithm-catalog/tree-plan-commit-identity-20261027.tsv"
     },
     {
       "old_git_blob": "7661bc68afa4d0517875e21cd13bdf5070febc23",
-      "path": "m3/collections/qualification/tree-plan-commit-identity-20261027/RECEIVER_RECEIPT.json"
+      "path": "make/m3/collections/qualification/tree-plan-commit-identity-20261027/RECEIVER_RECEIPT.json"
     },
     {
       "old_git_blob": "5b2273073c01ef7b55501401690fcd709ac227fb",
-      "path": "m3/collections/qualification/tree-plan-commit-identity-20261027/test_verify_receipt.py"
+      "path": "make/m3/collections/qualification/tree-plan-commit-identity-20261027/test_verify_receipt.py"
     },
     {
       "old_git_blob": "38fed15ba43617b05e79ab423ed735a1f2c5da7b",
-      "path": "m3/collections/qualification/tree-plan-commit-identity-20261027/verify_receipt.py"
+      "path": "make/m3/collections/qualification/tree-plan-commit-identity-20261027/verify_receipt.py"
     }
   ],
   "runtime_release_qualified": false,
@@ -159,7 +159,7 @@
     "baseline": "05e947be6fe9a25d3ca0b4803777beebfb52876a",
     "checked_paths": 11,
     "local_proof_commit": "e3d90f72bb07e6e4cb85f4002b193311f1852cb1",
-    "original_public_checker": "m3/compatibility/check_public_names.py",
+    "original_public_checker": "make/m3/compatibility/check_public_names.py",
     "original_target_verifier_tests_passed": 9,
     "violations": 0
   },

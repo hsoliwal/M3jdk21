@@ -9,7 +9,7 @@ M3 String · Regex and precompute · Lean collections · JNI/native boundaries �
 
 [![Java 21 target](https://img.shields.io/badge/target-Java%2021-007396?style=flat-square)](https://openjdk.org/projects/jdk/21/)
 [![M3 project](https://img.shields.io/badge/M%C2%B3-research%20%26%20engineering-5b55b2?style=flat-square)](#project-goals-and-plan)
-[![Proof first](https://img.shields.io/badge/principle-contracts%20%2B%20evidence-247a55?style=flat-square)](m3/release/BENCHMARK_AND_COMPATIBILITY_SPEC.md)
+[![Proof first](https://img.shields.io/badge/principle-contracts%20%2B%20evidence-247a55?style=flat-square)](make/m3/release/BENCHMARK_AND_COMPATIBILITY_SPEC.md)
 
 **[Start here](#start-here)** · **[Architecture](#architecture-at-a-glance)** · **[Eclipse ecosystem](#the-eclipse-desktop-lab)** · **[Open invitation](#an-open-technical-invitation)** · **[Roadmap](#project-goals-and-plan)**
 
@@ -28,12 +28,12 @@ M3 String · Regex and precompute · Lean collections · JNI/native boundaries �
 
 | Follow the engineering | Open the source or evidence |
 | --- | --- |
-| **M3 String** — canonical text, views and compositions; String/JNI integration target | [M3 String migration and lineage](m3/docs/m3string-m3-lineage.md) · [String porting invariant](m3/docs/m3jdk21-porting-invariant.md) |
-| **Regex and precompute** — planned reusable indexes, caches and bounded metadata | [Regex and text contracts](m3/docs/string-text-replacement-spec.md) · [Compatibility/benchmark spec](m3/release/BENCHMARK_AND_COMPATIBILITY_SPEC.md) |
+| **M3 String** — canonical text, views and compositions; String/JNI integration target | [M3 String migration and lineage](doc/m3/m3string-m3-lineage.md) · [String porting invariant](doc/m3/m3jdk21-porting-invariant.md) |
+| **Regex and precompute** — planned reusable indexes, caches and bounded metadata | [Regex and text contracts](doc/m3/string-text-replacement-spec.md) · [Compatibility/benchmark spec](make/m3/release/BENCHMARK_AND_COMPATIBILITY_SPEC.md) |
 | **Collections and arrays** — lean storage, indexed signals and mechanical improvement | [Collections workstream](m3/collections/) · [Array workstream](m3/arrays/) |
 | **Recipes and convergence** — transformations executed in Synexia; exact results received here | [Canonical Synexia recipes](https://github.com/hsoliwal/com.synexia/tree/develop/synexia-openrewrite-recipes) · [Receiving policy](AGENTS.md) |
-| **The actual runtime** — OpenJDK-derived Java 21 sources and M3 integration areas | [JDK sources](src/) · [M3 runtime integration](m3/runtime-integration/) |
-| **Release discipline** — what is admitted, tested, measured or still exploratory | [Release evidence](m3/release/README.md) · [Visible release queue](m3/release/queue/README.md) · [Machine-readable contract](m3/release/release-contract.json) |
+| **The actual runtime** — OpenJDK-derived Java 21 sources and M3 integration areas | [JDK sources](src/) · [M3 runtime integration](make/m3/runtime-integration/) |
+| **Release discipline** — what is admitted, tested, measured or still exploratory | [Release evidence](make/m3/release/README.md) · [Visible release queue](make/m3/release/queue/README.md) · [Machine-readable contract](make/m3/release/release-contract.json) |
 
 <!-- fork-homepage-guide:begin -->
 ## A first experiment: learn the representation before the runtime
@@ -58,7 +58,7 @@ without installing a replacement JDK or changing your system Java.
 ### Quickstart: the independent foundation
 
 Use Git, Bash 4+ (the script uses `mapfile`), a full JDK 21, and the shell utilities
-used by [m3/build.sh](m3/build.sh), including `sha256sum`. Run from the checkout root:
+used by [make/m3/build.sh](make/m3/build.sh), including `sha256sum`. Run from the checkout root:
 
 ```sh
 git clone https://github.com/hsoliwal/M3jdk21.git
@@ -66,7 +66,7 @@ cd M3jdk21
 git rev-parse HEAD
 export M3JDK=/absolute/path/to/jdk-21
 "$M3JDK/bin/java" -version
-bash m3/build.sh
+bash make/m3/build.sh
 ```
 
 The build script requires the exact environment variable `M3JDK` (not `M3_JDK`) and compiles the `jdk.m3.text` module.
@@ -95,7 +95,7 @@ The original is copied into owned immutable storage. The two ranges share that
 storage; the join records leaves; each `flatten()` explicitly allocates a normal
 String. Follow [LocalM3Arena](m3/core/src/jdk/m3/text/LocalM3Arena.java),
 [M3StringPiece](m3/core/src/jdk/m3/text/M3StringPiece.java), and the
-[worked source tour](m3/docs/first-session-guide.md) to see where each cost occurs.
+[worked source tour](doc/m3/first-session-guide.md) to see where each cost occurs.
 The comments are source-derived expectations, not captured output from this documentation update.
 
 ### Command and evidence cheat sheet
@@ -103,11 +103,11 @@ The comments are source-derived expectations, not captured output from this docu
 | Question | Command or route | What to read in the result |
 | --- | --- | --- |
 | Which checkout is this? | `git rev-parse HEAD` | Record the exact revision with every result |
-| Are package/class names mapped correctly? | `python3 m3/tooling/name-contract/check.py` | The canonical map and queued proposals; this does not approve a rename |
-| What is blocking release? | `python3 m3/release/verify_release_admission.py --root . --json-out m3/release/queue/current/admission.json --queue-out m3/release/queue/current/README.md` | Exact inspected revision, missing receipts, naming candidates and custody blockers |
+| Are package/class names mapped correctly? | `python3 make/m3/tooling/name-contract/check.py` | The canonical map and queued proposals; this does not approve a rename |
+| What is blocking release? | `python3 make/m3/release/verify_release_admission.py --root . --json-out make/m3/release/queue/current/admission.json --queue-out make/m3/release/queue/current/README.md` | Exact inspected revision, missing receipts, naming candidates and custody blockers |
 | Where are recipe proofs run? | [Synexia owner-naming crate](https://github.com/hsoliwal/com.synexia/tree/develop/synexia-openrewrite-recipes/crates/m3jdk21-owner-naming) | Maven/OpenRewrite execution, refusal and fixed-point proofs remain in Synexia |
-| How do I build the runtime? | [Native build guide](m3/docs/native-build.md) | Host prerequisites, boot JDK and matched-image output |
-| What has actually been admitted? | [Release contract](m3/release/release-contract.json) and [current String phase](m3/m3-import/current-full-borrow/STRING_PHASE.md) | Exact scope and still-open gates |
+| How do I build the runtime? | [Native build guide](doc/m3/native-build.md) | Host prerequisites, boot JDK and matched-image output |
+| What has actually been admitted? | [Release contract](make/m3/release/release-contract.json) and [current String phase](m3/m3-import/current-full-borrow/STRING_PHASE.md) | Exact scope and still-open gates |
 
 At the reviewed baseline, the release contract records the immutable text
 foundation as implemented with a repository test surface. It explicitly does
@@ -115,14 +115,14 @@ not claim full String replacement, full regex precompute, full jtreg compatibili
 qualified arrays/collections/Eclipse integration, or performance superiority.
 Candidate source can exist without those gates being complete. Read the exact
 commit-bound receipts in the release queue; this guide grants no claim upgrade.
-The historical `m3/recipes/` scripts and recipe-bearing `m3/pom.xml` are
+The historical `m3/recipes/` scripts and recipe-bearing `make/m3/pom.xml` are
 inventoried migration residue, not supported product transformation commands.
 
 <!-- fork-homepage-guide:end -->
 
 ## Developer reading and verification routes
 
-For a hands-on source tour and command cheat sheet, see the [first-session guide](m3/docs/first-session-guide.md).
+For a hands-on source tour and command cheat sheet, see the [first-session guide](doc/m3/first-session-guide.md).
 
 Start with the route you are changing; these are different artifacts and evidence scopes.
 For your first checkout, use the [build prerequisites and output checklist](CONTRIBUTING.md#first-build-prerequisites-outputs-and-test-selection)
@@ -130,11 +130,11 @@ to select the shell, JDK variables, logs and matching test configuration.
 
 | Task | Entry point | What it establishes |
 | --- | --- | --- |
-| Build the separate text foundation | [M3 module guide](m3/README.md#build-and-test) | A stock-Java module and fixture tests, not a replacement JDK |
-| Build or inspect the modified runtime | [Native build guide](m3/docs/native-build.md) and [runtime integration](m3/runtime-integration/README.md) | A matched Java/HotSpot image is required; feature gates remain explicit |
-| Trace String ownership or JNI | [Backing contract](doc/mindex-string-backing.md) and [JNI ingress/egress](m3/docs/mindex-jni-string-ingress.md) | Canonical owners, compatibility copies and native pointer lifetimes |
-| Work on separate collections | [Collection module](m3/collections/README.md) | Explicit library APIs; this does not replace `java.util` |
-| Port or document a donor enhancement | [Contributor checklist](CONTRIBUTING.md) and [canonical porting invariant](m3/docs/m3jdk21-porting-invariant.md) | Recipe authority, exact provenance and target acceptance |
+| Build the separate text foundation | [M3 module guide](make/m3/README.md#build-and-test) | A stock-Java module and fixture tests, not a replacement JDK |
+| Build or inspect the modified runtime | [Native build guide](doc/m3/native-build.md) and [runtime integration](make/m3/runtime-integration/README.md) | A matched Java/HotSpot image is required; feature gates remain explicit |
+| Trace String ownership or JNI | [Backing contract](doc/mindex-string-backing.md) and [JNI ingress/egress](doc/m3/mindex-jni-string-ingress.md) | Canonical owners, compatibility copies and native pointer lifetimes |
+| Work on separate collections | [Collection module](make/m3/collections/README.md) | Explicit library APIs; this does not replace `java.util` |
+| Port or document a donor enhancement | [Contributor checklist](CONTRIBUTING.md) and [canonical porting invariant](doc/m3/m3jdk21-porting-invariant.md) | Recipe authority, exact provenance and target acceptance |
 | Run upstream tests | [OpenJDK testing guide](doc/testing.md) | Harness configuration and test selection; presence of a workflow is not a passing run |
 
 The receiving order remains **String → arrays → collections → AST/compiler → remaining families**.
@@ -182,7 +182,7 @@ These forks retain **their own upstream project identity, authors, license and c
 > Challenge a design decision. Trace a code path. Bring a counterexample, a profiler trace, a reproducible workload, or a smaller and better algorithm. Let's discuss **real engineering in public**, where the source and the evidence can disagree with anyone's intuition—including ours.
 
 - **Inspect the implementation:** [OpenJDK tree](src/) and [M3 workstreams](m3/); follow actual commits and PRs, not headline claims.
-- **Start with the design:** [M3 technical paper](m3/papers/M3_SHARED_STRUCTURE_AND_REUSABLE_COMPUTATION.md) and [compatibility benchmark plan](m3/release/BENCHMARK_AND_COMPATIBILITY_SPEC.md).
+- **Start with the design:** [M3 technical paper](doc/m3/papers/M3_SHARED_STRUCTURE_AND_REUSABLE_COMPUTATION.md) and [compatibility benchmark plan](make/m3/release/BENCHMARK_AND_COMPATIBILITY_SPEC.md).
 - **Bring an experiment:** provide JDK version, OS/CPU, exact command, baseline, inputs, repetitions, CPU time, allocation, retained memory, and regressions.
 - **Contribute with boundaries:** [open issues](https://github.com/hsoliwal/M3jdk21/issues) or [propose a pull request](https://github.com/hsoliwal/M3jdk21/pulls); preserve licenses, attribution, and JDK semantics.
 
@@ -210,10 +210,10 @@ then extends to **lean collections** and **SWT/Eclipse IDE integration**.
 M3JDK21 is the Java 21 product/runtime target for this work, led by
 Hitesh Soliwal and Contributors to the Synexia Project.
 
-**Read the design paper:** [M3: Shared Structure and Reusable Computation in a Java Runtime](m3/papers/M3_SHARED_STRUCTURE_AND_REUSABLE_COMPUTATION.md).
+**Read the design paper:** [M3: Shared Structure and Reusable Computation in a Java Runtime](doc/m3/papers/M3_SHARED_STRUCTURE_AND_REUSABLE_COMPUTATION.md).
 
 **Take a closer look:** explore the roadmap below, follow the linked repositories,
-and examine the [compatibility and benchmark approach](m3/release/BENCHMARK_AND_COMPATIBILITY_SPEC.md).
+and examine the [compatibility and benchmark approach](make/m3/release/BENCHMARK_AND_COMPATIBILITY_SPEC.md).
 The source, design, and measurements offer a way to assess where this idea is
 useful and help shape what comes next.
 
@@ -264,9 +264,9 @@ context for reading the implementation and comparing its tradeoffs across worklo
 
 Explore:
 
-- [First-release evidence pack](m3/release/README.md)
-- [Machine-readable release contract](m3/release/release-contract.json)
-- [Benchmark and compatibility evidence specification](m3/release/BENCHMARK_AND_COMPATIBILITY_SPEC.md)
+- [First-release evidence pack](make/m3/release/README.md)
+- [Machine-readable release contract](make/m3/release/release-contract.json)
+- [Benchmark and compatibility evidence specification](make/m3/release/BENCHMARK_AND_COMPATIBILITY_SPEC.md)
 - [M3/Synexia first-party rights and provenance](M3-SYNEXIA-RIGHTS.md)
 
 ---

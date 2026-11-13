@@ -29,16 +29,16 @@ final class M3A3LevenshteinEvidenceClosureRecipeTest {
     void exactCurrentTextPreimagesCloseEvidenceAndReplayAtFixedPoint() {
         Map<String, String> before =
                 Map.of(
-                        "m3/backports/ALGORITHM_CATALOGUE.tsv",
+                        "make/m3/backports/ALGORITHM_CATALOGUE.tsv",
                         resource(BEFORE_ROOT + "algorithm-catalogue.tsv"),
-                        "m3/docs/a3-alg.md",
+                        "doc/m3/a3-alg.md",
                         resource(BEFORE_ROOT + "a3-alg.md"));
 
         Recipe recipe = new M3Jdk21HashPinnedTextSnapshotRecipe(CRATE);
         Map<String, String> changed = apply(recipe, before);
 
         assertEquals(2, changed.size());
-        String catalogue = changed.get("m3/backports/ALGORITHM_CATALOGUE.tsv");
+        String catalogue = changed.get("make/m3/backports/ALGORITHM_CATALOGUE.tsv");
         assertTrue(
                 catalogue.contains(
                         "ALG-LEV\tFUZZY_SEARCH\tLEVENSHTEIN_AUTOMATON\thold-contract"));
@@ -47,10 +47,10 @@ final class M3A3LevenshteinEvidenceClosureRecipeTest {
                         "https://www.geeksforgeeks.org/dsa/edit-distance-dp-5/"));
         assertTrue(catalogue.contains("\tREFERENCE_ONLY\t"));
         assertTrue(
-                changed.get("m3/docs/a3-alg.md")
+                changed.get("doc/m3/a3-alg.md")
                         .contains("Fuzzy-search evidence closure"));
         assertTrue(
-                changed.get("m3/docs/a3-alg.md")
+                changed.get("doc/m3/a3-alg.md")
                         .contains("real JDK fuzzy/string owner"));
 
         Map<String, String> converged = new LinkedHashMap<>(before);

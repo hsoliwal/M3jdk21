@@ -23,22 +23,22 @@
     },
     {
       "detail": "",
-      "name": "file:m3/README.md",
+      "name": "file:make/m3/README.md",
       "status": "PASS"
     },
     {
       "detail": "",
-      "name": "file:m3/release/release-contract.json",
+      "name": "file:make/m3/release/release-contract.json",
       "status": "PASS"
     },
     {
       "detail": "",
-      "name": "file:m3/release/README.md",
+      "name": "file:make/m3/release/README.md",
       "status": "PASS"
     },
     {
       "detail": "",
-      "name": "file:m3/release/BENCHMARK_AND_COMPATIBILITY_SPEC.md",
+      "name": "file:make/m3/release/BENCHMARK_AND_COMPATIBILITY_SPEC.md",
       "status": "PASS"
     },
     {

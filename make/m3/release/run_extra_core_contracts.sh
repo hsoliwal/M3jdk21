@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # SPDX-License-Identifier: Apache-2.0
-# Additive release-qualification runner; never edit pinned m3/build.sh.
+# Additive release-qualification runner; never edit pinned make/m3/build.sh.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 : "${M3JDK:?Set M3JDK to an isolated JDK 21 directory}"
-test -s build/jdk.m3.text.jar || { echo 'HOLD: run the historical m3/build.sh first' >&2; exit 1; }
+test -s build/jdk.m3.text.jar || { echo 'HOLD: run the historical make/m3/build.sh first' >&2; exit 1; }
 mkdir -p build/tests build/logs
 
 # Deliberately compile all additional executable tests against the *built*

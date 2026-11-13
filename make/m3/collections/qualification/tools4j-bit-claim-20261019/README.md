@@ -17,4 +17,4 @@ Contract: existing bitset operations unchanged. New claimFirstClearBit scans par
 
 Verification: PASS_LOCAL Java 21 javac --release 21 -Xlint:all -Werror, exact-source recipe replay, fixed point, changed-code/comment refusal, independent JDK BitSet differential model, capacity tails and concurrent 8/16-thread uniqueness, source hashes. PENDING Maven canonical recipe execution and target JUnit/reactor, source-built OpenJDK and installed-image smoke, JNI/HotSpot/jtreg, JMH performance, CPU/heap/native memory, full five-provider contract acceptance.
 
-The related searchable donor problem-category catalogue is m3/collections/algorithm-catalog/tools4j-lowlatency-20261019.tsv; unqualified candidates remain held. Preserve STRING -> arrays -> collections target receiving order and draft PR status until later gates are actually executed.
+The related searchable donor problem-category catalogue is make/m3/collections/algorithm-catalog/tools4j-lowlatency-20261019.tsv; unqualified candidates remain held. Preserve STRING -> arrays -> collections target receiving order and draft PR status until later gates are actually executed.

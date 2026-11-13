@@ -4,10 +4,10 @@ name: M3JDK21 ordered convergence receiver Java21
 on:
   pull_request:
     paths:
-      - 'm3/compatibility/M3OrderedConvergenceReceiver.java'
-      - 'm3/compatibility/M3OrderedConvergenceReceiverTest.java'
-      - 'm3/docs/ordered-convergence-receiving-20261017.md'
-      - 'm3/docs/M3_CONVERGENCE_MODEL.md'
+      - 'make/m3/compatibility/M3OrderedConvergenceReceiver.java'
+      - 'make/m3/compatibility/M3OrderedConvergenceReceiverTest.java'
+      - 'doc/m3/ordered-convergence-receiving-20261017.md'
+      - 'doc/m3/M3_CONVERGENCE_MODEL.md'
       - '.github/workflows/m3-ordered-convergence-receiver-20261017.yml'
   workflow_dispatch:
 
@@ -53,7 +53,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 -B m3/compatibility/check_m3_public_target.py
+          python3 -B make/m3/compatibility/check_m3_public_target.py
 
       - name: 3 - Compile receiver Java 21 with warnings as errors
         shell: bash
@@ -61,8 +61,8 @@ jobs:
           set -euo pipefail
           mkdir -p build/m3-ordered-receiver
           javac --release 21 -Xlint:all -Werror -d build/m3-ordered-receiver \
-            m3/compatibility/M3OrderedConvergenceReceiver.java \
-            m3/compatibility/M3OrderedConvergenceReceiverTest.java
+            make/m3/compatibility/M3OrderedConvergenceReceiver.java \
+            make/m3/compatibility/M3OrderedConvergenceReceiverTest.java
 
       - name: 4 - Execute independent Git fixture and hostile handoff tests
         shell: bash
@@ -74,14 +74,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 -B -m unittest discover -s m3/history -p 'test_*.py' -v
+          python3 -B -m unittest discover -s make/m3/history -p 'test_*.py' -v
 
       - name: 6 - Enforce target admission boundary
         shell: bash
         run: |
           set -euo pipefail
-          grep -F '"JTREG"' m3/compatibility/M3OrderedConvergenceReceiver.java
-          grep -F '"JNI_PARITY"' m3/compatibility/M3OrderedConvergenceReceiver.java
-          grep -F '"RUNTIME"' m3/compatibility/M3OrderedConvergenceReceiver.java
-          grep -F 'automaticSourceCopy' m3/compatibility/M3OrderedConvergenceReceiver.java
+          grep -F '"JTREG"' make/m3/compatibility/M3OrderedConvergenceReceiver.java
+          grep -F '"JNI_PARITY"' make/m3/compatibility/M3OrderedConvergenceReceiver.java
+          grep -F '"RUNTIME"' make/m3/compatibility/M3OrderedConvergenceReceiver.java
+          grep -F 'automaticSourceCopy' make/m3/compatibility/M3OrderedConvergenceReceiver.java
           echo 'M3JDK21 RECEIVER-ONLY PROOF: no JDK product build, JNI, jtreg, GC/JIT/CDS or runtime acceptance claimed.'

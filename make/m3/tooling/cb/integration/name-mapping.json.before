@@ -25,8 +25,8 @@
         "format": {"schema": null, "abi": null, "bootstrap": "Application algorithm outside java.base; no JNI or OpenRewrite bootstrap dependency."},
         "dependencies": [{"id": "m3.p0-view-dependencies", "resolution": "resolved", "reason": "Five exact actual target classes verified by SHA-256 and Git blob hashes; canonical-family acceptance remains separate."}],
         "materialization": {"admission": "Existing M3StringPiece; no new text admission.", "joins": "No character or byte payload joins.", "outputs": "One int[n] lane; the budget is 4*n primitive payload bytes, excluding headers and owners.", "cached_facts": "Immutable per-result facts; no global cache; O(n) comparisons and O(n log(s+1)) existing-owner lookup worst case."},
-        "recipe": {"id": "m3.prefix-z.port.v1", "version": "1", "path": "m3/migration/recipes/prefix-z-v1.tsv", "sha256": "54251ed210b9ed280919968a6ea13f0b6ed6e590fbf92090d13b4495f05f4217", "preconditions": ["Exact source file at PR7526 and five exact target owner file hashes.", "Absent target or identical existing postimage; no modified destinations or unsafe paths."], "rollback": "ExactFileRecipe rollback deletes only equal additions owned by its plan receipt; preserves prior or modified files."},
-        "tests": [{"id": "prefix-z-normal", "receipt": "m3/migration/evidence/local-20261002-final/receipt.json"}, {"id": "prefix-z-interpreter", "receipt": "m3/migration/evidence/local-20261002-final/receipt.json"}],
+        "recipe": {"id": "m3.prefix-z.port.v1", "version": "1", "path": "make/m3/migration/recipes/prefix-z-v1.tsv", "sha256": "54251ed210b9ed280919968a6ea13f0b6ed6e590fbf92090d13b4495f05f4217", "preconditions": ["Exact source file at PR7526 and five exact target owner file hashes.", "Absent target or identical existing postimage; no modified destinations or unsafe paths."], "rollback": "ExactFileRecipe rollback deletes only equal additions owned by its plan receipt; preserves prior or modified files."},
+        "tests": [{"id": "prefix-z-normal", "receipt": "make/m3/migration/evidence/local-20261002-final/receipt.json"}, {"id": "prefix-z-interpreter", "receipt": "make/m3/migration/evidence/local-20261002-final/receipt.json"}],
         "provenance": {"license": "Apache-2.0 source notice retained. OpenJDK licensing unchanged.", "publication": "Only the user-authorized prefix algorithm adaptation; private raw source fixture not included.", "copied_code": true},
         "sync": {"source_revision": "73978088621dc70f5021befafa443f7e622b517e", "target_revision": "3a8e21dcea32b97e869f3bdbb5817e1f9927ca4f", "direction": "source-to-target", "target_adaptations": ["MIndexString/IProgressMonitor API is not replaced. Target accepts existing sealed M3StringPiece and BooleanSupplier.", "No beginTask/worked/done callback adaptation; cancellation also polls the inner equal-prefix scan and thread interruption.", "Source metadata budget counts its ends[] lane; target delegates lookup and counts only int[n] fact payload."], "pending": [], "conflicts": []},
         "lineage": {"previous_sources": [], "previous_targets": [], "supersedes": []},
@@ -617,7 +617,7 @@
         "recipe": {
           "id": "m3-vi",
           "version": "1",
-          "path": "m3/tooling/vi/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
+          "path": "make/m3/tooling/vi/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
           "sha256": "c47151b5df79d6d2711e6de748bff3fb08e2c01af5e9c6ac0b4b3b91ac97425c",
           "preconditions": [
             "Exact source/template pins; absent new targets or exact converged outputs."
@@ -627,7 +627,7 @@
         "tests": [
           {
             "id": "vi-module-runtime",
-            "receipt": "m3/tooling/vi/evidence/receipt.json"
+            "receipt": "make/m3/tooling/vi/evidence/receipt.json"
           }
         ],
         "provenance": {
@@ -657,7 +657,7 @@
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "See m3/docs/counterpart-naming.md; runtime effective implementation selection is not installed."
+        "observation": "See doc/m3/counterpart-naming.md; runtime effective implementation selection is not installed."
       },
       {
         "id": "synexia.counterpart.MIndexLibraryRelease",
@@ -736,7 +736,7 @@
         "recipe": {
           "id": "m3-vi",
           "version": "1",
-          "path": "m3/tooling/vi/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
+          "path": "make/m3/tooling/vi/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
           "sha256": "c47151b5df79d6d2711e6de748bff3fb08e2c01af5e9c6ac0b4b3b91ac97425c",
           "preconditions": [
             "Exact source/template pins; absent new targets or exact converged outputs."
@@ -746,7 +746,7 @@
         "tests": [
           {
             "id": "vi-module-runtime",
-            "receipt": "m3/tooling/vi/evidence/receipt.json"
+            "receipt": "make/m3/tooling/vi/evidence/receipt.json"
           }
         ],
         "provenance": {
@@ -776,7 +776,7 @@
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "See m3/docs/counterpart-naming.md; runtime effective implementation selection is not installed."
+        "observation": "See doc/m3/counterpart-naming.md; runtime effective implementation selection is not installed."
       },
       {
         "id": "synexia.counterpart.MIndexVmSession",
@@ -886,7 +886,7 @@
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "See m3/docs/counterpart-naming.md; runtime effective implementation selection is not installed."
+        "observation": "See doc/m3/counterpart-naming.md; runtime effective implementation selection is not installed."
       },
       {
         "id": "synexia.counterpart.MIndexVmPrecomputeKey",
@@ -996,7 +996,7 @@
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "See m3/docs/counterpart-naming.md; runtime effective implementation selection is not installed."
+        "observation": "See doc/m3/counterpart-naming.md; runtime effective implementation selection is not installed."
       },
       {
         "id": "synexia.counterpart.MIndexClass",
@@ -1106,7 +1106,7 @@
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "See m3/docs/counterpart-naming.md; runtime effective implementation selection is not installed."
+        "observation": "See doc/m3/counterpart-naming.md; runtime effective implementation selection is not installed."
       },
       {
         "id": "synexia.counterpart.MIndexClassIndex",
@@ -1216,7 +1216,7 @@
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "See m3/docs/counterpart-naming.md; runtime effective implementation selection is not installed."
+        "observation": "See doc/m3/counterpart-naming.md; runtime effective implementation selection is not installed."
       },
       {
         "id": "synexia.counterpart.MIndexAST",
@@ -1326,7 +1326,7 @@
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "See m3/docs/counterpart-naming.md; runtime effective implementation selection is not installed."
+        "observation": "See doc/m3/counterpart-naming.md; runtime effective implementation selection is not installed."
       },
       {
         "id": "synexia.counterpart.MIndexASTPrecompute",
@@ -1436,7 +1436,7 @@
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "See m3/docs/counterpart-naming.md; runtime effective implementation selection is not installed."
+        "observation": "See doc/m3/counterpart-naming.md; runtime effective implementation selection is not installed."
       },
       {
         "id": "synexia.counterpart.MIndexCompilerASTPrecompute",
@@ -1546,7 +1546,7 @@
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "See m3/docs/counterpart-naming.md; runtime effective implementation selection is not installed."
+        "observation": "See doc/m3/counterpart-naming.md; runtime effective implementation selection is not installed."
       }
     ]
   }

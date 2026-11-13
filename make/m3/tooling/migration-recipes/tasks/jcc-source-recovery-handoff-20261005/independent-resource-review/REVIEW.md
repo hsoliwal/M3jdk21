@@ -8,10 +8,10 @@
 
 | Operational output | Admitted afterimage SHA256 |
 | --- | --- |
-| `m3/docs/jcc-source-handoff.md` | `d5e18258027f457a1fcdc45ff30b4e2e7a0723825ea95b651933af23f27fd28d` |
-| `m3/docs/name-mapping.json` | `abfc59de62d46f6442b95717ac367461ab057cd74ed9dfffc6515d7fb0a1574c` |
-| `m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv` | `1c4eedbf3f155bac469693da312c577d26999e7776ca1f85870f6cce125f1e35` |
-| `m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json` | `59b1491a232e3eabfd0530cbf47b01265603e6f493e382aa3c394c629b0516b6` |
+| `doc/m3/jcc-source-handoff.md` | `d5e18258027f457a1fcdc45ff30b4e2e7a0723825ea95b651933af23f27fd28d` |
+| `doc/m3/name-mapping.json` | `abfc59de62d46f6442b95717ac367461ab057cd74ed9dfffc6515d7fb0a1574c` |
+| `make/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv` | `1c4eedbf3f155bac469693da312c577d26999e7776ca1f85870f6cce125f1e35` |
+| `make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json` | `59b1491a232e3eabfd0530cbf47b01265603e6f493e382aa3c394c629b0516b6` |
 
 The plan's canonical seal independently recomputes to `0aa1f4a3e080c36d233066f0a6e1dc8e1047e6f0592dba60829b8cca3177df64`; the serialized plan file is SHA256 `68d9e65e8d45d1c6e8eea04de4f9e2ab0326b7d66fef7f3d86f832fb0c8197e2`. The manifest SHA256 is `f9e38d31f89d71ee6fcbb107d2ea0d12636196b16094d951b64b9a4b74bd5c0b`. All four sorted manifest rows equal the plan's exact before/after hashes and resource names. Every before-image equals its previously admitted E3 preimage, and all four operational files still contain those original before-images. The seven guards equal the complete original E3 guard objects and actual current bytes.
 

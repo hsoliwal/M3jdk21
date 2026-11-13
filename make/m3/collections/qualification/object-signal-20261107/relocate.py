@@ -37,9 +37,9 @@ unmapped package, an import that is neither a JDK package, nor a mapped donor pa
 a DROP, REWRITE, ADAPT or INSERT_AFTER row matching no line (a DROP_METHOD, DROP_BLOCK or INSERT_AFTER row matching
 more than one), a DROP_BLOCK whose line count or sha256 differs from its pin, or a file without a top-level type. The
 donor repository and its paths live only in RELOCATION_MAP.tsv and PROVENANCE.tsv (the anchor names blob and commit,
-so no source line carries a donor repository name: m3/tooling/jdk-naming rewrites synexia-* tokens).
+so no source line carries a donor repository name: make/m3/tooling/jdk-naming rewrites synexia-* tokens).
 
-Derived from m3/collections/recipe/immutable-pools-20261106/relocate.py v2 (RELOCATE_IMMUTABLE_POOLS, same donor
+Derived from make/m3/collections/recipe/immutable-pools-20261106/relocate.py v2 (RELOCATE_IMMUTABLE_POOLS, same donor
 repository and module) by adding the relocate-only DROP_BLOCK and ADAPT rows, the doc comment of a DROP_METHOD, the
 non-verbatim main subset with declared rows, the HELD and OMIT rows and the adapted_lines provenance column; every v2
 rule is unchanged.
@@ -73,7 +73,7 @@ VERSION = "v2"
 # only add the C kernel and turn the DROP_BLOCK seam into KEEP rows), so a v1 anchor stays true for the whole family.
 ANCHOR_VERSION = "v1"
 RECIPE_DIR = Path(__file__).resolve().parent
-RECIPE_DIR_REL = "m3/collections/qualification/object-signal-20261107"
+RECIPE_DIR_REL = "make/m3/collections/qualification/object-signal-20261107"
 MAP_NAME = "RELOCATION_MAP.tsv"
 PROVENANCE_NAME = "PROVENANCE.tsv"
 PROVENANCE_COLUMNS = ("donor_repo", "donor_commit", "donor_path", "donor_blob", "donor_sha256", "donor_url",

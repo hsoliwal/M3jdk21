@@ -1,4 +1,4 @@
-$ ['/workspace/scratch/b37f6ba1283f/synexia-continuation/toolchain/apache-maven-3.9.9/bin/mvn', '-B', '-ntp', '-o', '-Dmaven.repo.local=/workspace/scratch/b37f6ba1283f/synexia-continuation/dependencies/m2', '-f', 'm3/collections/recipe/pom.xml', 'test']
+$ ['/workspace/scratch/b37f6ba1283f/synexia-continuation/toolchain/apache-maven-3.9.9/bin/mvn', '-B', '-ntp', '-o', '-Dmaven.repo.local=/workspace/scratch/b37f6ba1283f/synexia-continuation/dependencies/m2', '-f', 'make/m3/collections/recipe/pom.xml', 'test']
 [INFO] Scanning for projects...
 [INFO] 
 [INFO] ------< com.synexia.verification:m3-collection-lane-recipe-proof >------

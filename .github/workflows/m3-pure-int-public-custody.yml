@@ -4,7 +4,7 @@ name: M3 Synexia pure-int public custody
 on:
   pull_request:
     paths:
-      - 'm3/pom.xml'
+      - 'make/m3/pom.xml'
       - 'm3/m3-import/pure-int-recipe-custody/**'
       - '.github/workflows/m3-pure-int-public-custody.yml'
   workflow_dispatch:

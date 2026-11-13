@@ -14,27 +14,27 @@
       "sha256": "ebe702139e903ac5fc4b3e1b6c6f0180a1c4fda7d6db9175532bf96979296aa5"
     },
     {
-      "path": "m3/runtime-integration/regex-mandatory-affixes/run_source_extracted_java21.py",
+      "path": "make/m3/runtime-integration/regex-mandatory-affixes/run_source_extracted_java21.py",
       "sha256": "c37c699cf23dc460d8831252aafd069edd9245338ab0d62316c6ade66d1d0b12"
     },
     {
-      "path": "m3/runtime-integration/regex-plan-amalgamation/source_extracted_java21.py",
+      "path": "make/m3/runtime-integration/regex-plan-amalgamation/source_extracted_java21.py",
       "sha256": "5a22761bf63817b885bec21d1547d3ccc756c47990ed8958f45aa67b5c47ccdf"
     },
     {
-      "path": "m3/runtime-integration/regex-plan-amalgamation/verify_receiver.py",
+      "path": "make/m3/runtime-integration/regex-plan-amalgamation/verify_receiver.py",
       "sha256": "4ed634cf9d795b9d49416cc74e310c8056bb1f7e69c932f0ebc2e61fb6362ee3"
     },
     {
-      "path": "m3/runtime-integration/regex-required-ngrams/verify.py",
+      "path": "make/m3/runtime-integration/regex-required-ngrams/verify.py",
       "sha256": "e3d537b3b3284588bc00a53915734551464d0dd9011dbe67571a2172b81a523b"
     },
     {
-      "path": "m3/runtime-integration/regex-rolling-cursor/run_source_extracted_java21.py",
+      "path": "make/m3/runtime-integration/regex-rolling-cursor/run_source_extracted_java21.py",
       "sha256": "6a9e531d39805d054eef9a228b8b7ca7d0d9b089f1d0e6a1922b576e1012bac5"
     },
     {
-      "path": "m3/runtime-integration/regex-rolling-cursor/verify_exact_source.py",
+      "path": "make/m3/runtime-integration/regex-rolling-cursor/verify_exact_source.py",
       "sha256": "f78316956a02ac9020709bc7e397d8c1fa0fcb141b545112d9717483b81d48bd"
     }
   ],

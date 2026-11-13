@@ -1,10 +1,10 @@
-# MOVE_REFS v1 rules (m3/tooling/jdk-naming/move_refs.py): the algorithms recipe evidence leaves the m3/ side tree for
-# the one evidence store m3/evidence/algorithms (approved layout 2026-11-08, leaf dir names kept). Frozen records keep
+# MOVE_REFS v1 rules (make/m3/tooling/jdk-naming/move_refs.py): the algorithms recipe evidence leaves the m3/ side tree for
+# the one evidence store make/m3/evidence/algorithms (approved layout 2026-11-08, leaf dir names kept). Frozen records keep
 # their bytes (relocate.py lineage, //FLLDCIM anchors citing m3/algorithms/recipe/<leaf>/PROVENANCE.tsv, which
 # MOVES.tsv maps to the new home); only live references follow.
 FILES	.github/workflows/*.yml
-FILES	m3/tooling/jdk-naming/PACKAGE_BASELINE.tsv
-FILES	m3/tooling/standalone/M3_REFS.tsv
+FILES	make/m3/tooling/jdk-naming/PACKAGE_BASELINE.tsv
+FILES	make/m3/tooling/standalone/M3_REFS.tsv
 FILES	m3/algorithms/pom.xml
-REPLACE	m3/algorithms/recipe/	m3/evidence/algorithms/recipe/
+REPLACE	m3/algorithms/recipe/	make/m3/evidence/algorithms/recipe/
 RESIDUE	m3/algorithms/recipe

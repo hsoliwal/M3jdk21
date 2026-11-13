@@ -151,5 +151,5 @@ TSV escape (`tsvEscapes`), jackson `CsvSchema.escapeChar` is the CSV escape (`es
 ## Next (not in this spec)
 
 - Behaviour tests per capability: one discriminator input per option, run through each donor and through each
-  facade on the M3 implementation, outputs equal (atoms from `m3/tooling/jdk-superset/csv/` in #2215).
+  facade on the M3 implementation, outputs equal (atoms from `make/m3/tooling/jdk-superset/csv/` in #2215).
 - The generation inputs for Chrome: one LLD per type above, then one generation call per file.

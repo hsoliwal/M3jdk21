@@ -26,7 +26,7 @@ TESTS = ["test/jdk/java/util/Collections/" + name + ".java"
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--repository", type=Path, default=Path(__file__).resolve().parents[3])
+    parser.add_argument("--repository", type=Path, default=Path(__file__).resolve().parents[4])
     parser.add_argument("--java-home", type=Path, required=True)
     parser.add_argument("--cc", default="cc")
     parser.add_argument("--temp-directory", type=Path)

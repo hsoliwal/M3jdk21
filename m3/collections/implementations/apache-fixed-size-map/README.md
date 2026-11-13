@@ -13,6 +13,6 @@ Planned lanes: `Object backing`, `int state`.
 
 Reuse when filling: existing M3SlotArrays/M3SlotMap lane mechanics.
 
-The row in `m3/collections/qualification/five-provider-inventory-20261018/INVENTORY.tsv` is `SCAFFOLD`;
+The row in `make/m3/collections/qualification/five-provider-inventory-20261018/INVENTORY.tsv` is `SCAFFOLD`;
 the owning PR flips it to `DONE #PR`. Regenerate with the generator in that directory rather than editing
 this module by hand until the owning PR replaces the bodies.

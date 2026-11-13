@@ -1,7 +1,7 @@
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
 #
-# Wave 1 of viewport-everywhere (m3/docs/viewport-everywhere/DESIGN.md section 3): copy the toolkit-neutral SWT
+# Wave 1 of viewport-everywhere (doc/m3/viewport-everywhere/DESIGN.md section 3): copy the toolkit-neutral SWT
 # viewport classes into m3/collections (com.m3.collections) and m3/viewport-core (com.m3.viewport).
 # Source: hsoliwal/eclipse.platform.swt 553eefd41d9961d303c41e0e4e181712e64a1e45. Apply twice: pass 2 is UNCHANGED.
 ---

@@ -12,6 +12,6 @@
   <name>Compose existing source-qualified producers before TQ</name>
   <modules>
     <module>${m3.receiver.relative}/m3/vendor/third_party</module>
-    <module>${m3.receiver.relative}/m3/tooling/tq-sync</module>
+    <module>${m3.receiver.relative}/make/m3/tooling/tq-sync</module>
   </modules>
 </project>

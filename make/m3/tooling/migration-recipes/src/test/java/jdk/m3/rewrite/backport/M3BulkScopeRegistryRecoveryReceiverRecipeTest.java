@@ -14,8 +14,8 @@ final class M3BulkScopeRegistryRecoveryReceiverRecipeTest {
         assertEquals(1, receiver.getRecipeList().size());
         assertFalse(receiver.promotionAuthority());
         assertEquals(List.of(
-                "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3RecipeScopeRegistry.java",
-                "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/scope/M3ScopeCoverageClosureTest.java"),
+                "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3RecipeScopeRegistry.java",
+                "make/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/scope/M3ScopeCoverageClosureTest.java"),
                 new M3Jdk21HashPinnedSnapshotRecipe(
                         M3BulkScopeRegistryRecoveryReceiverRecipe.CRATE)
                         .targetPaths());

@@ -14,7 +14,7 @@ writes nothing and exits 1 when a run would change a file.
 Lineage: recipe/corpus-search-20261108/apply.py plus one row kind, REPLACE_LINE (v2): the anchor is one exact, unique
 line of the owner and the row line replaces it (line ending kept); INSERT_AFTER is unchanged. Here the one edit makes
 jdk.m3.algorithm.M3ProgressChecks public: the donor progress helper (ProgressMonitors.nonNull / checkCanceled) is
-imported by 41 catalogue tooling classes bound for m3/tooling and by the five monitor-bound structures of the
+imported by 41 catalogue tooling classes bound for make/m3/tooling and by the five monitor-bound structures of the
 collections lane, which live outside this package.
 
 usage: python -I apply.py [--module DIR] [--check]

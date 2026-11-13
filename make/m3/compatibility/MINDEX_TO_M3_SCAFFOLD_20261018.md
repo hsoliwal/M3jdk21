@@ -13,7 +13,7 @@ FACTS, AST) are mapped only.
 | --- | --- |
 | `MINDEX_TO_M3_MAP_20261018.tsv` | 2,253 `MIndex*`/`M3Index*` classes at Synexia develop `11c94feb1815`: family, naming-law family, existing M3 target (MAPPED / TOKEN_MATCH / NONE), PROPOSED M3 name, target module, status, third-party deps, live fleet branch/PR, batch |
 | `MINDEX_TO_M3_SCAFFOLD_LEDGER.tsv` | one row per received skeleton: batch, status, target path/type, SHA-256, deferred members, donor path, Git blob, donor SHA-256, families, co-donors |
-| `../docs/name-mapping.d/m3-mindex-to-m3-scaffold.json` | name-mapping fragment (source -> target lineage) for the serial manifest reducer |
+| `../../../doc/m3/name-mapping.d/m3-mindex-to-m3-scaffold.json` | name-mapping fragment (source -> target lineage) for the serial manifest reducer |
 
 Receiving packages follow `m3-family-naming-target-disposition.tsv`: `com.m3.util` (GENERAL_COLLECTIONS)
 and `com.m3.ds` / `com.m3.graph` (SPECIALIZED_DATA_STRUCTURES / DAG_GRAPH_RELATION) in

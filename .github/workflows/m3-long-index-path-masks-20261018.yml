@@ -2,7 +2,7 @@ name: M3 long index path masks Java21
 on:
   pull_request:
     paths:
-      - 'm3/collections/qualification/m3-long-index-path-masks-20261018/**'
+      - 'make/m3/collections/qualification/m3-long-index-path-masks-20261018/**'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongIndexPathMasks.java'
       - 'test/jdk/jdk/m3/collections/M3LongIndexPathMasksSelfTest.java'
       - '.github/workflows/m3-long-index-path-masks-20261018.yml'
@@ -31,10 +31,10 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Maven source recipe compilation
-        run: mvn -B -ntp -f m3/collections/qualification/m3-long-index-path-masks-20261018/recipe/pom.xml package
+        run: mvn -B -ntp -f make/m3/collections/qualification/m3-long-index-path-masks-20261018/recipe/pom.xml package
       - name: Check exact recipe-emitted source
         run: |
-          RECIPE=m3/collections/qualification/m3-long-index-path-masks-20261018/recipe
+          RECIPE=make/m3/collections/qualification/m3-long-index-path-masks-20261018/recipe
           java -cp "$RECIPE/target/classes" jdk.internal.m3.M3LongIndexPathMasksRecipe --check . "$RECIPE/templates"
       - name: Strict Java21 compile and differential test
         run: |
@@ -46,6 +46,6 @@ jobs:
       - name: Recipe fixed-point and drift refusal
         run: |
           set -eu
-          RECIPE=m3/collections/qualification/m3-long-index-path-masks-20261018/recipe
+          RECIPE=make/m3/collections/qualification/m3-long-index-path-masks-20261018/recipe
           java -cp "$RECIPE/target/classes" jdk.internal.m3.M3LongIndexPathMasksRecipe --apply . "$RECIPE/templates"
           java -cp "$RECIPE/target/classes" jdk.internal.m3.M3LongIndexPathMasksRecipe --check . "$RECIPE/templates"

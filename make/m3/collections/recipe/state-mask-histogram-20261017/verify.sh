@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
 set -euo pipefail
-ROOT=$(cd "$(dirname "$0")/../../../.." && pwd)
-RECIPE="$ROOT/m3/collections/recipe/state-mask-histogram-20261017"
+ROOT=$(cd "$(dirname "$0")/../../../../.." && pwd)
+RECIPE="$ROOT/make/m3/collections/recipe/state-mask-histogram-20261017"
 OUT=$(mktemp -d)
 trap 'rm -rf "$OUT"' EXIT
 python3 - "$ROOT" "$RECIPE" <<'PY'

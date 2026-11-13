@@ -46,7 +46,7 @@ else
     gate 3_differential FAIL "log=$SCRATCH/differential.log"; tail -5 "$SCRATCH/differential.log"
 fi
 
-naming=$(cd "$ROOT" && python -I m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/arrays/ 2>&1 | grep -E "^(JDK_NAMING|REFUSED)" | tail -1)
+naming=$(cd "$ROOT" && python -I make/m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/arrays/ 2>&1 | grep -E "^(JDK_NAMING|REFUSED)" | tail -1)
 case "$naming" in *"moves=0 rewrites=0 refusals=0"*) gate naming PASS "$naming" ;; *) gate naming FAIL "$naming" ;; esac
 
 if [ -n "${M3_POSTING_NATIVE_GATE:-}" ]; then

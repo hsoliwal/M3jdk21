@@ -108,7 +108,7 @@ their original native exports retain their contracts.
 
 The stable naming records are `m3.arrays.packed.signed`,
 `m3.arrays.packed.vint64` and `m3.arrays.packed.native` in the existing
-`m3/docs/name-mapping.json`. They retain `implemented-unverified` because the
+`doc/m3/name-mapping.json`. They retain `implemented-unverified` because the
 global String -> arrays -> collections receiving sequence is separate from this
 bounded component result. The candidate passed all 34 Java tests and three native
 tests on the matched source JDK. The linked SDK separately passed 104 legacy-client

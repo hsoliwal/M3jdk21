@@ -5,7 +5,7 @@ Product parent: [M3JDK21 #2326](https://github.com/hsoliwal/M3jdk21/pull/2326), 
 
 ## Source inventory completed before creation
 
-Existing frozen Guava MinMax source packet `m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/source-bindings.json` is immutable: Git blob `bcd8e0462ef7fcd323c7521979d8c54f1ea563f6`, SHA256 `da37bfacf6b8bfa91e5ded6bb74947c54c8d54a8c70f6b15cc58c1eb94208bea`. It records 131 historical core-source Git pins and 34 packet-file exact source hashes. Actual full inventory: 33 of 34 live packet files match; one differs, the existing Guava workflow.
+Existing frozen Guava MinMax source packet `make/m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/source-bindings.json` is immutable: Git blob `bcd8e0462ef7fcd323c7521979d8c54f1ea563f6`, SHA256 `da37bfacf6b8bfa91e5ded6bb74947c54c8d54a8c70f6b15cc58c1eb94208bea`. It records 131 historical core-source Git pins and 34 packet-file exact source hashes. Actual full inventory: 33 of 34 live packet files match; one differs, the existing Guava workflow.
 
 The historical workflow has Git blob `5fd71e4300b60d37f89bc48c04defff4c7c09e2c` and SHA256 `9543ed2e6b8430e6a80888064750beda48e486b005bf125488cc95b513d3d4b9`, length 2220. The current workflow has blob `656e4d6c0ffe8bdeb7a5eec4e044761252a8d14a`, SHA256 `ed17db300c020733c0edc6b20aa0180a9314bb183a7cf0b7307989fc3e8d277b`, length 2311. An independent complete line diff is **four added lines** for GitHub Actions concurrency, with no changed commands, API, ABI, semantics or test skip. Original historical Git blob is retained, not altered to match current file.
 
@@ -13,8 +13,8 @@ Original `verify.py` blob `35208fa06bead288e90f81e9b0d6098450f0f9f3`, SHA256 `a8
 
 ## Exact two-target, source-owned product receiver
 
-1. Review original verifier file in its grandfathered historical path `m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/verify.py` with current Git preimage above. Receive only the Synexia exact postimage Git blob `a9cc7492afcd0f9a3da8366619771356e7cdc2c4`, SHA256 `fa0c31d15d2c936e1dc66a17d712297ad1a5621be975a890c8ef836196acb5de`, bytes 7580.
-2. Create exactly one stable, undated and unversioned passive new file `m3/collections/qualification/guava-minmax-source-custody/source-bindings.json`, ABSENT-before, from exact Synexia Git template blob `d33b006b27c3b35c63c29e53a6b20cccc130515b`, SHA256 `09a547681643b5e983d8012d202b9acf20537890f66fb73add7a3a2caf1632bc`, bytes 62699.
+1. Review original verifier file in its grandfathered historical path `make/m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/verify.py` with current Git preimage above. Receive only the Synexia exact postimage Git blob `a9cc7492afcd0f9a3da8366619771356e7cdc2c4`, SHA256 `fa0c31d15d2c936e1dc66a17d712297ad1a5621be975a890c8ef836196acb5de`, bytes 7580.
+2. Create exactly one stable, undated and unversioned passive new file `make/m3/collections/qualification/guava-minmax-source-custody/source-bindings.json`, ABSENT-before, from exact Synexia Git template blob `d33b006b27c3b35c63c29e53a6b20cccc130515b`, SHA256 `09a547681643b5e983d8012d202b9acf20537890f66fb73add7a3a2caf1632bc`, bytes 62699.
 
 The new source packet is exactly the original 165-row document with **only two changed rows**: the original workflow and the verifier. All other 163 rows, roles, paths, metadata and historical core refs are identical, including all original provider and module dependency pinning. Source verifier explicitly checks predecessor SHA before reading candidate, demands exact two-row geometry and expected workflow digest, then checks every original full packet path and historical 131-core Git tree.
 

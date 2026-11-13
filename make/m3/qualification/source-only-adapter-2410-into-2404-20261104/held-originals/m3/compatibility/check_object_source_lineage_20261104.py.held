@@ -15,7 +15,7 @@ import check_object_adapter_progress_receiver_20261017 as historical
 
 ROOT = Path(__file__).resolve().parents[2]
 TARGET = "src/java.base/share/classes/java/lang/Object.java"
-LEDGER = "m3/qualification/object-adapter-selfcast/OBJECT_SOURCE_LINEAGE_20261104.json"
+LEDGER = "make/m3/qualification/object-adapter-selfcast/OBJECT_SOURCE_LINEAGE_20261104.json"
 LEDGER_GIT_BLOB = "949c7db8f195cab7fed92d402b99fba6bd6d58f0"
 STAGES = (
     ("2026-10-17", "829fb37093cf3e8d11b3c1e3d42f898f0c86f3b697e7a66cefe09934be3bb259",

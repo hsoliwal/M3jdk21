@@ -242,7 +242,7 @@ The port consumer is enabled by the `m3.precompute.constantRegex.image` property
 
 ## 9. License boundary
 
-- `m3/ports/compiletime/**`, `m3/docs/**`, the recipe crate and the image format are Apache-2.0
+- `m3/ports/compiletime/**`, `doc/m3/**`, the recipe crate and the image format are Apache-2.0
   (M3JDK first-party; Synexia rule lineage Apache-2.0).
 - `src/**` postimages (a future `Pattern`/`Matcher` consumer, a jlink plugin) are GPLv2 with the
   Classpath Exception. No GPL+CPE text is copied into the Apache tools: `M3PatternQuery` is a rule

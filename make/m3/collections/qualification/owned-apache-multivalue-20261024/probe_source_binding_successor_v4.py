@@ -18,9 +18,9 @@ import subprocess
 import sys
 
 HERE = Path(__file__).resolve().parent
-PREFIX = "m3/collections/qualification/owned-apache-multivalue-20261024/"
+PREFIX = "make/m3/collections/qualification/owned-apache-multivalue-20261024/"
 VERIFIER = PREFIX + "verify_source_binding_successor_v4.py"
-TEMPLATES = "m3/collections/recipe/owned-apache-multivalue-20261024/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/apache-multivalue-v2-to-v3/"
+TEMPLATES = "make/m3/collections/recipe/owned-apache-multivalue-20261024/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/apache-multivalue-v2-to-v3/"
 SEALED = "505f340763e19d7ddb2e05cc8f14f1b3e4b2a8bf56cd88033ded08b91da82038"
 RESERVE = 256 * 1024**2
 
@@ -30,7 +30,7 @@ def main() -> None:
     parser.add_argument("--work", type=Path, required=True)
     parser.add_argument("--jar", type=Path, required=True)
     args = parser.parse_args()
-    root = (args.root if args.root is not None else HERE.parents[3]).resolve()
+    root = (args.root if args.root is not None else HERE.parents[4]).resolve()
     work = args.work.resolve()
     if args.work.is_symlink() or work.is_relative_to(root) or work.exists():
         raise ValueError("use a new explicit work directory outside the source checkout")

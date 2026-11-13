@@ -28,7 +28,7 @@
       },
       {
         "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexOracleCorpus.java",
-        "receipt": "m3/compatibility/m3-regex-oracle-harness-receipt.json",
+        "receipt": "make/m3/compatibility/m3-regex-oracle-harness-receipt.json",
         "target": "M3PatternQueryDifferential / M3PatternQueryTest",
         "mechanics": "frozen 10k x 64 proof corpus (A5)"
       }
@@ -44,7 +44,7 @@
       "java.util.regex.Pattern (compile() installs the derived query)"
     ],
     "publicJdkApiChange": false,
-    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed: 65 targets, target_commit ce17ebce9b, patch sha256 8b7c50d1009b…; absorbs 4 java/lang after-images that had drifted on master (AbstractStringBuilder, M3StringSearchPrecompute, String, StringConcatHelper)"
+    "runtimeRecipe": "make/m3/runtime-integration/recipe re-sealed: 65 targets, target_commit ce17ebce9b, patch sha256 8b7c50d1009b…; absorbs 4 java/lang after-images that had drifted on master (AbstractStringBuilder, M3StringSearchPrecompute, String, StringConcatHelper)"
   },
   "runtimeDependencyOnSynexia": false,
   "publicJdkReplacement": false,

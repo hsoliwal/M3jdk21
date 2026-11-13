@@ -7,7 +7,7 @@ on:
       - m3/ast-eclipse-maven-gradle-jackson-20261019
   pull_request:
     paths:
-      - m3/tooling/module-packs/parser/**
+      - make/m3/tooling/module-packs/parser/**
       - .github/workflows/m3-ast-cross-frontends-20261019.yml
   workflow_dispatch:
 
@@ -34,7 +34,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          BASE=m3/tooling/module-packs/parser/src
+          BASE=make/m3/tooling/module-packs/parser/src
           OUT="$RUNNER_TEMP/m3-ast-classes"
           mkdir -p "$OUT"
           javac --release 21 -Xlint:all -Werror -proc:none -implicit:none -d "$OUT" \
@@ -56,9 +56,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          grep -F 'requires java.xml;' m3/tooling/module-packs/parser/src/main/java/module-info.java
+          grep -F 'requires java.xml;' make/m3/tooling/module-packs/parser/src/main/java/module-info.java
           grep -F 'M3CrossFrontendContract", "M3_AST_MULTIFRONTEND_PASS"' \
-            m3/tooling/module-packs/parser/build.py
+            make/m3/tooling/module-packs/parser/build.py
       - name: Upload proof receipt
         if: always()
         uses: actions/upload-artifact@v4

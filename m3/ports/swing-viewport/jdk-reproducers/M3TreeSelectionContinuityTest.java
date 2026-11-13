@@ -24,7 +24,7 @@ import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
 /**
- * D2 (m3/docs/swing-viewport/UPSTREAM_DEFECTS.tsv). {@code insureRowContinuity} keeps the first run
+ * D2 (doc/m3/swing-viewport/UPSTREAM_DEFECTS.tsv). {@code insureRowContinuity} keeps the first run
  * of contiguous selected rows: it sizes the new selection to that run and copies every selected
  * path whose row is below the first gap, {@code newSel[row - min]}. A selected path that is not
  * visible has row -1, which is below every gap, so the index is negative. A CONTIGUOUS selection

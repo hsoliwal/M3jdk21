@@ -6,7 +6,7 @@ name: com.synexia.openrewrite.viewport.M3UpstreamLWListPeerSelection
 displayName: LWListPeer keeps the AWT List selection on select and setMultipleMode (JDK-8369327, upstream port)
 description: >-
   Upstream port of JDK-8369327 (openjdk/jdk PR 27682, commit 8bef687f2e20e403df1f7aa4e1a47421f89ec39d;
-  m3/docs/swing-viewport/UPSTREAM_PORTS.tsv). On macOS, java.awt.List is a lightweight peer over a JList. select
+  doc/m3/swing-viewport/UPSTREAM_PORTS.tsv). On macOS, java.awt.List is a lightweight peer over a JList. select
   replaced the selection instead of adding to it and accepted invalid indices; setMultipleMode let the JList's
   selection mode change clear the selection, so a List added to a Frame lost the items selected before. The two
   method bodies are upstream's, with fully qualified names in place of the imports upstream added. Unconditional.

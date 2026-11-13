@@ -6,11 +6,11 @@ import shutil
 import tempfile
 import unittest
 
-ROOT = Path(__file__).resolve().parents[3]
-SPEC = importlib.util.spec_from_file_location('intake_existing_installer', ROOT / 'm3/migration/recipe.py')
+ROOT = Path(__file__).resolve().parents[4]
+SPEC = importlib.util.spec_from_file_location('intake_existing_installer', ROOT / 'make/m3/migration/recipe.py')
 RECIPE = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(RECIPE)
-PLAN = ROOT / 'm3/migration/intake-20261005/crate/plan.json'
+PLAN = ROOT / 'make/m3/migration/intake-20261005/crate/plan.json'
 
 
 class IntakeRecipeTest(unittest.TestCase):
@@ -48,7 +48,7 @@ class IntakeRecipeTest(unittest.TestCase):
         self.assertEqual(before, self.snapshot())
 
     def test_destination_drift_refuses_before_any_output(self):
-        (self.root / 'm3/migration/migration.py').write_bytes(b'concurrent contributor change\n')
+        (self.root / 'make/m3/migration/migration.py').write_bytes(b'concurrent contributor change\n')
         before = self.snapshot()
         with self.assertRaises(RECIPE.Refusal):
             RECIPE.execute(PLAN, self.root, 'apply')

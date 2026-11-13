@@ -177,7 +177,7 @@ compilation/execution. The exact recipe commit remains CANDIDATE until that CI p
 The CI proof command is:
 
 ```bash
-mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify
+mvn -B -ntp -f make/m3/tooling/migration-recipes/pom.xml clean verify
 ```
 
 Repository-wide application remains a later, separately admitted step. CI first proves the recipe

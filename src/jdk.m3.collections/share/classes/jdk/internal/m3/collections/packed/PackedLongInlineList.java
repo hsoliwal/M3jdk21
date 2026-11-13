@@ -20,7 +20,7 @@ import jdk.internal.m3.collections.HeapGrowth;
  * primitive payload array. The fifth value spills once into the ordinary primitive-array regime.
  * Existing {@code M3LongArrayList} remains the general one-array owner.</p>
  */
-//FLLDCIM: RELOCATE - donor blob c0b02969ffe9 at d5ad5090d87e; recipe m3/collections/qualification/census2-t2-20261106/relocate.py v6
+//FLLDCIM: RELOCATE - donor blob c0b02969ffe9 at d5ad5090d87e; recipe make/m3/collections/qualification/census2-t2-20261106/relocate.py v6
 public final class PackedLongInlineList implements LongSequence, LongStack {
     public static final int INLINE_CAPACITY = 4;
 

@@ -25,11 +25,11 @@ import jdk.m3.tooling.atoms.contract.AtomRecord;
 /**
  * Read-only OpenJDK FILE atom -> actual HotSpot JIT -> pattern review -> JIT retest.
  *
- * <p>The atoms and their patterns come from the M3 atom census ({@code m3/tooling/atom-census}, {@code --semantic}):
+ * <p>The atoms and their patterns come from the M3 atom census ({@code make/m3/tooling/atom-census}, {@code --semantic}):
  * its closed catalogue pattern and the exact source digest of each executable Java atom. The census carries no
  * contract/structure/logic projection, so the donor's projection-recurrence states are not produced here.</p>
  */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/b65df53330e3d82f6b2d5509ded971f19883f4ca/synexia-maven-plugin/src/main/java/com/synexia/ai/m3scale/M3OpenJdkOrderedPasses.java blob 698de807e693; recipe m3/tooling/atom-jit-gate/recipe/atom-jit-gate-20261106/relocate.py v4
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/b65df53330e3d82f6b2d5509ded971f19883f4ca/synexia-maven-plugin/src/main/java/com/synexia/ai/m3scale/M3OpenJdkOrderedPasses.java blob 698de807e693; recipe make/m3/tooling/atom-jit-gate/recipe/atom-jit-gate-20261106/relocate.py v4
 public final class OpenJdkOrderedPasses {
     private static final long MAX_FILE_BYTES = 16L * 1024 * 1024;
     private static final int MAX_VM_OUTPUT = 1 << 20;
@@ -212,7 +212,7 @@ public final class OpenJdkOrderedPasses {
     /** Columns of the census SEMANTIC_CENSUS_&lt;repo&gt;.tsv ledger (contract/SEMANTIC_SOURCE_CENSUS_V1.md). */
     private static final int CENSUS_COLUMNS = 12;
     private static final String CENSUS_HEADER_PREFIX = "atom_id\trepo\tpath\tkind\towner\tname\tsignature\t";
-    private static final String CENSUS_CONTRACT = "m3/tooling/atom-census SEMANTIC_CENSUS_V1";
+    private static final String CENSUS_CONTRACT = "make/m3/tooling/atom-census SEMANTIC_CENSUS_V1";
 
     /** Runs the census CLI ({@code --semantic}) on the one file at its logical path; keeps executable Java atoms. */
     private static List<AtomRecord> census(String module, String path, byte[] source, Path rules) {

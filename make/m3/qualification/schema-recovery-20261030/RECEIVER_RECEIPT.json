@@ -16,27 +16,27 @@
       "after_sha256": "0c1fd0b68c3dac50fa6bf045c49c6bc8db960b0b82364aa9aeeba127365e728c"
     },
     {
-      "path": "m3/docs/name-mapping.json",
+      "path": "doc/m3/name-mapping.json",
       "before_sha256": "0551c4d6f78269484247d2a434ff8e7b70b5f432a51bea494e6d8f9d3bf54c9d",
       "after_sha256": "689249563245a8743c3575de4da657106d48dc879effe960c1811bd7bffb3f5f"
     },
     {
-      "path": "m3/docs/name-mapping.schema.json",
+      "path": "doc/m3/name-mapping.schema.json",
       "before_sha256": "33a4a70132666ce7525025783c4c72c0030ce26b53774d2396a7d027f4d6aa73",
       "after_sha256": "cb22482ccd7887fcd3632cb636b63e3f4c4e71bc523472c3424a4888a72f2349"
     },
     {
-      "path": "m3/tooling/name-contract/name-plan.json",
+      "path": "make/m3/tooling/name-contract/name-plan.json",
       "before_sha256": "c5c4176275518116061cfc26fc29be4d48cca57613badf9792e1555efd39b05b",
       "after_sha256": "978d6504c6c2160e7122946172601e61e709c9860e02875311991aadcb2b4a5f"
     },
     {
-      "path": "m3/tooling/name-contract/test_audit.py",
+      "path": "make/m3/tooling/name-contract/test_audit.py",
       "before_sha256": "5364b2e8934e841929c4b4b1d9d09e30ee19dde5ab4d0e2303df3642e1102aa7",
       "after_sha256": "0e9207bfe8a600106da0839ad48e4801bf513aec711c2703d4cceb53be81f2cd"
     },
     {
-      "path": "m3/tooling/name-contract/test_schema.py",
+      "path": "make/m3/tooling/name-contract/test_schema.py",
       "before_sha256": "ABSENT",
       "after_sha256": "a12e99359f645526b634030d628a0fb5a1ace61b2dd0bb7e9097942aa82ae81f"
     }

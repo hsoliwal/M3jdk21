@@ -140,7 +140,7 @@ the answers are the same (such sizes stay 0), the call counts are not. (3) After
 | Leaf 2: `M3FixedHeightLayoutCacheTest` (JUnit 5): the fixed differential 60 seeds x 300 steps, the `ENABLED` property check and 8 edge scenarios (row-height contract, expansion below collapsed nodes, edits around state children, enumerations, 2,000 siblings, null and empty input, no model and no root, no selection model) | **10/10 pass; JaCoCo 100.00% lines (490/490), 99.70% branches (337/338)**; the missed branch is `walk`'s reuse of a state child whose path is not in the map, reachable only after model edits without events |
 | Leaf 2: `M3JTreeViewportDifferential`, the M3 UI swapping both caches; `-Ddiff.fixed=true` starts both trees large-model at row height 16 | as above, through `JTree` | **fixed: 60 of 60 seeds x 250 steps pass, 9,889 steps on the fixed cache, 1,560 pixel comparisons equal; variable: 30 of 30 x 250 pass, 1,194 steps on the fixed cache, 780 pixel comparisons equal** |
 | `javac -Xlint:all` of the patched classes against JDK 21.0.9 | | clean for both new classes; `BasicTreeUI` keeps its two existing `this-escape` warnings |
-| Hook recipe `com.synexia.openrewrite.viewport.M3SwingViewportBasicTreeUI` (`m3/docs/swing-viewport/recipe/`) via `M3PerFileApply` | | pass 1 CHANGED, pass 2 UNCHANGED (fixed point) |
+| Hook recipe `com.synexia.openrewrite.viewport.M3SwingViewportBasicTreeUI` (`doc/m3/swing-viewport/recipe/`) via `M3PerFileApply` | | pass 1 CHANGED, pass 2 UNCHANGED (fixed point) |
 | `make`, jtreg (`@run` lines are in the tests) | | PENDING_CI (no OpenJDK build on this host) |
 
 ## 6. Benchmarks (headless, CPU only, `-XX:+UseSerialGC -Xmx1500m`, one JVM at a time)

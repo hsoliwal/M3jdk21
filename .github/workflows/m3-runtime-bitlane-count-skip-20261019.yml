@@ -6,7 +6,7 @@ on:
   pull_request:
     paths:
       - '.github/workflows/m3-runtime-bitlane-count-skip-20261019.yml'
-      - 'm3/runtime-integration/qualification/bitlane-count-skip-20261019/**'
+      - 'make/m3/runtime-integration/qualification/bitlane-count-skip-20261019/**'
       - 'src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java'
       - 'src/java.base/share/classes/jdk/internal/mindex/M3Address28.java'
       - 'src/java.base/share/classes/jdk/internal/mindex/M3Bits.java'
@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     env:
-      Q: m3/runtime-integration/qualification/bitlane-count-skip-20261019
+      Q: make/m3/runtime-integration/qualification/bitlane-count-skip-20261019
     steps:
       - uses: actions/checkout@v5
         with:
@@ -30,7 +30,7 @@ jobs:
           persist-credentials: false
           fetch-depth: 1
           sparse-checkout: |
-            m3/runtime-integration/qualification/bitlane-count-skip-20261019
+            make/m3/runtime-integration/qualification/bitlane-count-skip-20261019
             src/java.base/share/classes/jdk/internal/mindex
             src/java.base/share/native/libjava
       - uses: actions/setup-java@v5

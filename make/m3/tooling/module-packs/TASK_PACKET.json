@@ -1,6 +1,6 @@
 {
   "task_packet": "active",
-  "source_doc": "m3/docs/community-capability-admission.md",
+  "source_doc": "doc/m3/community-capability-admission.md",
   "invariant_id": "M3-COMMUNITY-1-2-4",
   "run": {
     "mode": "apply",
@@ -11,9 +11,9 @@
   },
   "base_commit": "700d4414169164c71807b43fd4d93bf6d50ceeed",
   "targets": [
-    "m3/tooling/module-packs/**",
-    "m3/pom.xml",
-    "m3/evidence/community-module-packs-20261003/**"
+    "make/m3/tooling/module-packs/**",
+    "make/m3/pom.xml",
+    "make/m3/evidence/community-module-packs-20261003/**"
   ],
   "invariant_locks": {
     "JDK_PRODUCT_SOURCE": "LOCKED",

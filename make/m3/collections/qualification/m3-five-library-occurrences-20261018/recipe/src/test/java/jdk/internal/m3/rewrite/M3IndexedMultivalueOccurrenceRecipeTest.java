@@ -36,8 +36,8 @@ public final class M3IndexedMultivalueOccurrenceRecipeTest {
         "m3/collections/src/test/java/jdk/m3/collections/M3IndexedMultiValueOccurrenceSelfTest.java",
         "m3/collections/src/test/java/jdk/m3/collections/M3IndexedMultiValueOccurrenceTest.java",
         "AGENTS.md",
-        "m3/collections/qualification/m3-five-library-occurrences-20261018/README.md",
-        "m3/collections/qualification/m3-five-library-occurrences-20261018/CATALOGUE.tsv",
+        "make/m3/collections/qualification/m3-five-library-occurrences-20261018/README.md",
+        "make/m3/collections/qualification/m3-five-library-occurrences-20261018/CATALOGUE.tsv",
         ".github/workflows/m3-five-library-occurrences-20261018.yml"
     };
     private static final String[] NAMES = {

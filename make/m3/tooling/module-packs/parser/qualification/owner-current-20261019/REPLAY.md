@@ -4,7 +4,7 @@
 
 `QUALIFICATION.md` distinguishes the current ordered parser-pack proof from the earlier integrated owner proof and states the measured costs. `SOURCE_SEALS.json` and the SDK receipt identify the eleven exact current targets. The adjoining `recipe-custody/` contains the original runnable canonical recipe snapshot and immutable source hashes.
 
-The integrated runtime driver and its required sibling Java probe are exact copies of the executed proof inputs. They reuse the already checked-in `m3/tooling/shared-frontend/recipe-custody/enhancements/20261018-source-seals/runtime/qualify_runtime.py` implementation for source custody, module descriptors, hashes and native payload preservation. No source text transformation occurs in either driver.
+The integrated runtime driver and its required sibling Java probe are exact copies of the executed proof inputs. They reuse the already checked-in `make/m3/tooling/shared-frontend/recipe-custody/enhancements/20261018-source-seals/runtime/qualify_runtime.py` implementation for source custody, module descriptors, hashes and native payload preservation. No source text transformation occurs in either driver.
 
 First replay the selected SDK recipe as described by `recipe-custody/CUSTODY.md`. Apply only its exact returned eleven files to a checkout that satisfies their preimages. Then run the checked-in parser pack driver with its ordinary ordered lint, compile, test and runtime phases in a fresh proof directory. Each phase must pass before advancing; retain its STATE.json and hash-linked phase receipts. The parser module's own README/build.py describe the explicit JDK and output arguments.
 

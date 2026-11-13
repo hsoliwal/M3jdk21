@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 set -euo pipefail
 
-root="$(cd "$(dirname "$0")/../../../.." && pwd)"
+root="$(cd "$(dirname "$0")/../../../../.." && pwd)"
 owner="$root/m3/collections"
 work="$(mktemp -d)"
 trap 'rm -rf "$work"' EXIT

@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 """Recipe CENSUS_SMALL_BATCH v1: the APPLICABLE/MAPPED hunks of census leaves L066 and L077 (m3/collections).
 
-Derived from m3/qualification/progress-monitor-unify-20261106/unify.py v1 (EDIT rules only: anchored "sub" edits,
+Derived from make/m3/qualification/progress-monitor-unify-20261106/unify.py v1 (EDIT rules only: anchored "sub" edits,
 every anchor exactly once, LF payloads re-joined with the preimage's line ending). Every rule names the git blob sha
 of its preimage at the base commit; a target must equal the preimage (the rule is applied) or the postimage (already
 applied, no-op); anything else is a drifted preimage and the recipe refuses (exit 2) without writing. Idempotent: a
@@ -158,7 +158,7 @@ def run(root: Path, check: bool, leaf: str | None) -> int:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--root", default=str(RECIPE_DIR.parents[3]), help="repository root (default: four up)")
+    parser.add_argument("--root", default=str(RECIPE_DIR.parents[4]), help="repository root (default: four up)")
     parser.add_argument("--check", action="store_true", help="write nothing; exit 1 when a run would change a file")
     parser.add_argument("--leaf", choices=sorted({rule[0] for rule in RULES}), help="apply one leaf's rules only")
     args = parser.parse_args(argv)

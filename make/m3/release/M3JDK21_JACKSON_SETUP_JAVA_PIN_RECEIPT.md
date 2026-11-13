@@ -52,7 +52,7 @@ No other job's Java selector is in scope.
 
 `M3String.java` source-seal drift (run 40804547130);
 ClassVer missing `02-compile.stdout.log` (40804547292);
-JMOD receiver ledger drift in `m3/tooling/jmod-recipes/pom.xml`
+JMOD receiver ledger drift in `make/m3/tooling/jmod-recipes/pom.xml`
 (40804547171); and public naming rejection of a date-stamped experimental
 directory (40804547149). This repair may unblock the Jackson job's setup-java
 step; it does not resolve those other errors, production readiness, or any

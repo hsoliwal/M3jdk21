@@ -15,15 +15,15 @@ Preserve the two existing JUnit methods and extend the same test class. Verify e
 Run in a complete checkout:
 
 ```
-mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3Java21ConvergenceRecipeTest test
-mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify
+mvn -B -ntp -f make/m3/tooling/migration-recipes/pom.xml -Dtest=M3Java21ConvergenceRecipeTest test
+mvn -B -ntp -f make/m3/tooling/migration-recipes/pom.xml clean verify
 ```
 
 The second command retains the complete module lifecycle and existing coverage gates. It must not be replaced by selected fixture compilation. A3 candidate processing, original OpenJDK configure/make, jtreg, JNI/GC/JIT and platform checks remain independently required for product acceptance.
 
 ## Authority and provenance
 
-Existing caller: m3/tooling/a3/src/main/java/jdk/m3/a3/A3Apply.java (blob b348370f5b37c8fc91109bb6ec503d6717254d38).
+Existing caller: make/m3/tooling/a3/src/main/java/jdk/m3/a3/A3Apply.java (blob b348370f5b37c8fc91109bb6ec503d6717254d38).
 Pinned dependency source: openrewrite/rewrite tag v8.17.1, rewrite-java/src/main/java/org/openrewrite/java/RemoveUnusedImports.java; implementation is referenced through the existing dependency, not copied.
 Catalogue: https://docs.openrewrite.org/recipes/java/removeunusedimports .
 Reviewed but not enabled: https://docs.openrewrite.org/recipes/java/orderimports .

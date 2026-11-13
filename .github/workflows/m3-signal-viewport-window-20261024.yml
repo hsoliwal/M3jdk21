@@ -7,7 +7,7 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalExactIntegerDistance.java'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalBooleanQuery.java'
       - 'test/jdk/jdk/m3/collections/M3SignalViewportWindow*.java'
-      - 'm3/collections/qualification/signal-viewport-window-20261024/**'
+      - 'make/m3/collections/qualification/signal-viewport-window-20261024/**'
       - '.github/workflows/m3-signal-viewport-window-20261024.yml'
   workflow_dispatch:
 permissions:

@@ -6,7 +6,7 @@
   "intake_mode": "LIB_INTAKE_TO_JMOD_V2",
   "target_module": "jdk.m3.io",
   "target_path": "m3/vendor/third_party-m3/relocated/commons-io-2.18.0",
-  "canonical_recipe": "m3/tooling/lib-intake/lib_intake.sh (pattern LIB_INTAKE_TO_JMOD v2)",
+  "canonical_recipe": "make/m3/tooling/lib-intake/lib_intake.sh (pattern LIB_INTAKE_TO_JMOD v2)",
   "canonical_recipe_owners": [
     "org.openrewrite.java.ChangePackage (recursive=false, longest first; boundary-checked form of com.synexia M3BoundaryCheckedPackageRenameRecipe)"
   ],
@@ -21,8 +21,8 @@
     "com.m3.lib.io"
   ],
   "intake_dependencies": "-",
-  "qualification_receipt": "m3/tooling/lib-intake/runs/commons-io-2.18.0/STAGES.tsv",
-  "relocation_map": "m3/tooling/lib-intake/runs/commons-io-2.18.0/RELOCATION_MAP.tsv",
+  "qualification_receipt": "make/m3/tooling/lib-intake/runs/commons-io-2.18.0/STAGES.tsv",
+  "relocation_map": "make/m3/tooling/lib-intake/runs/commons-io-2.18.0/RELOCATION_MAP.tsv",
   "legal_notice": "m3/vendor/third_party-m3/relocated/commons-io-2.18.0",
   "mappings": [
     {

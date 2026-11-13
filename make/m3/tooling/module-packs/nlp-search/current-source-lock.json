@@ -36,7 +36,7 @@
       ]
     },
     "jdk.m3.compiletime": {
-      "descriptor": "m3/tooling/module-packs/nlp-search/src/jdk.m3.compiletime/module-info.java",
+      "descriptor": "make/m3/tooling/module-packs/nlp-search/src/jdk.m3.compiletime/module-info.java",
       "files": {
         "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/M3AST.java": "36fc71b1bf655c29340408d536cc068b4362241d2d4df49bff35c6457a13ab34",
         "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/M3ASTCodec.java": "c0cfce2fbffb278b0bcd3bc6ed4919ed5ed68141236f9baff5ff67cffc0f4311",
@@ -48,7 +48,7 @@
         "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/M3File.java": "3826e2676368551c238e7fe0eb6398ac8cae87f4d22120bb0573efcb972f9b37",
         "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/M3FileSourceFacts.java": "defa4c14489bc8eb7e1e6ea954743f28e7bb73364977bfef8159d8827d1f0259",
         "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/M3JavacASTIndex.java": "7250c9b5d7c92ed26e2931937af45cf05b91e59810294c48ebb5faa383b39045",
-        "m3/tooling/module-packs/nlp-search/src/jdk.m3.compiletime/module-info.java": "ca2acaa6994d3cffd474ff11e234410a61fdd7bedf8447a3aeede19d66c02afa",
+        "make/m3/tooling/module-packs/nlp-search/src/jdk.m3.compiletime/module-info.java": "ca2acaa6994d3cffd474ff11e234410a61fdd7bedf8447a3aeede19d66c02afa",
         "m3/vendor/m3/m3-mindex/compiler/src/main/java/jdk/internal/m3/mindex/compiler/ast/M3AST.java": "4f0d204398d7d16576b50a2e9fb66277965f1568fc4a0d56d0a9283d4d9eb3d7",
         "m3/vendor/m3/m3-mindex/compiler/src/main/java/jdk/internal/m3/mindex/compiler/ast/M3ASTCodec.java": "34696acc5ec1a5c0bfc7598a4676cdd2577ec0c7381d782ecd91df8f5f8640c3",
         "m3/vendor/m3/m3-mindex/compiler/src/main/java/jdk/internal/m3/mindex/compiler/ast/M3ASTPlugin.java": "8cf37729e428ee61c92b53013ea2f421c9600d84026aafba815d0af49df5878b",
@@ -162,15 +162,15 @@
       }
     },
     "jdk.m3.nlp.search": {
-      "descriptor": "m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/module-info.java",
+      "descriptor": "make/m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/module-info.java",
       "files": {
-        "m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/jdk/m3/nlp/search/LuceneSourceFields.java": "9fbb60874f6fa68e5982da5e112116bc97082eaa8dfbbb19d40b5b1ce4505050",
-        "m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/jdk/m3/nlp/search/SourceDocument.java": "ad6c7b7bce509d0343a1962ef0ff196d9b8a5106b556f94fc89087ca413ee697",
-        "m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/jdk/m3/nlp/search/SourceSpans.java": "a289d3ec4c9e16c5176f8f70946d280f969ce9d41992f07f33aaffc804f72314",
-        "m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/module-info.java": "b9cd2d94692e1f41d5322e0d25bdbf84d62bb257b7a18081e29453bc37fe4635"
+        "make/m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/jdk/m3/nlp/search/LuceneSourceFields.java": "9fbb60874f6fa68e5982da5e112116bc97082eaa8dfbbb19d40b5b1ce4505050",
+        "make/m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/jdk/m3/nlp/search/SourceDocument.java": "ad6c7b7bce509d0343a1962ef0ff196d9b8a5106b556f94fc89087ca413ee697",
+        "make/m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/jdk/m3/nlp/search/SourceSpans.java": "a289d3ec4c9e16c5176f8f70946d280f969ce9d41992f07f33aaffc804f72314",
+        "make/m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/module-info.java": "b9cd2d94692e1f41d5322e0d25bdbf84d62bb257b7a18081e29453bc37fe4635"
       },
       "source_roots": [
-        "m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search"
+        "make/m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search"
       ]
     }
   },

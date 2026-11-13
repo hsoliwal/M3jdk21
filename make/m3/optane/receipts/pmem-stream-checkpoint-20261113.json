@@ -34,7 +34,7 @@
     "qualified_inputs_equal_at_receiving_base": 94,
     "products": [
       {
-        "path": "m3/optane/docs/CHECKPOINT_STREAMS.md",
+        "path": "make/m3/optane/docs/CHECKPOINT_STREAMS.md",
         "sha256": "5e2038390edcaf74f39df57b64baa54be3f7c5a759b8dd43067b4ec583bfbe06",
         "bytes": 8119,
         "git_blob": "2cd8e7e1b852552bcb874ecc96c140ffc8034e64"
@@ -58,13 +58,13 @@
         "git_blob": "09eec5f1df64e768d369492784f82a256179be80"
       },
       {
-        "path": "m3/docs/name-mapping.json",
+        "path": "doc/m3/name-mapping.json",
         "sha256": "f4a7ee4a2ecf7815445e67d9c48e1265a018f36d764bd084283ccaa61ace303f",
         "bytes": 722713,
         "git_blob": "ff36cf048cad8d0244050522319b9c9b7c5b2d3b"
       },
       {
-        "path": "m3/tooling/name-contract/name-plan.json",
+        "path": "make/m3/tooling/name-contract/name-plan.json",
         "sha256": "b875f055e66df3a88fcd8d1410f137133ba9726181f54b77542229941b808e68",
         "bytes": 2444,
         "git_blob": "0803d5d733faaef74fe1efdbe695f77af0f10a73"

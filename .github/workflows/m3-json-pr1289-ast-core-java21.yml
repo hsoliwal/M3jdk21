@@ -3,7 +3,7 @@ on:
   pull_request:
     paths:
       - 'm3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3AST*.java'
-      - 'm3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/M3ASTCoreReceiptContract.java'
+      - 'make/m3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/M3ASTCoreReceiptContract.java'
       - '.github/workflows/m3-json-pr1289-ast-core-java21.yml'
   workflow_dispatch:
 concurrency:
@@ -25,7 +25,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          root=m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson
+          root=make/m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson
           test "$(git hash-object "$root/M3AST.java")" = "75ea01311add41395741adb0d85c2018e1a776f6"
           test "$(git hash-object "$root/M3ASTAtom.java")" = "bde7dfdb2e05f2df7118a330c2b2a89b3d77f098"
           test "$(git hash-object "$root/M3ASTBuilder.java")" = "48bf00ce264c542b8f0f2d720af4ae56c5d6360c"
@@ -35,7 +35,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          root=m3/tooling/module-packs/jackson
+          root=make/m3/tooling/module-packs/jackson
           classes="${RUNNER_TEMP}/m3-ast-core"
           mkdir -p "$classes"
           javac --release 21 -proc:none -Xlint:all -Werror -d "$classes" \

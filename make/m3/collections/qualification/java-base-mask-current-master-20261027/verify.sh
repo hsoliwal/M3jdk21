@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # In-JDK compactor receiver: exact current-master java.util call sites + focused Java 21 proof.
 set -euo pipefail
-cd "$(dirname "${BASH_SOURCE[0]}")/../../../.."
+cd "$(dirname "${BASH_SOURCE[0]}")/../../../../.."
 
 verify_blob() {
   local expected=$1 path=$2 actual
@@ -26,7 +26,7 @@ for owner in ArrayList Vector; do
 done
 
 # The historical proof script is reused, never rewritten or weakened.
-bash m3/collections/qualification/java-base-mask-20261023/verify.sh
+bash make/m3/collections/qualification/java-base-mask-20261023/verify.sh
 # The public GC oracle is a stock-JDK reference here; a separate jtreg
 # workflow must run it against the actual source-built M3JDK 21 image.
 build=$(mktemp -d)

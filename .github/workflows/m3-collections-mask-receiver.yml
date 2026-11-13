@@ -7,7 +7,7 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongArrayDeque.java'
       - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c'
       - 'test/jdk/jdk/m3/collections/M3IndexMaskCompactorSelfTest.java'
-      - 'm3/collections/qualification/mask-selection-postimages-20261016.tsv'
+      - 'make/m3/collections/qualification/mask-selection-postimages-20261016.tsv'
       - '.github/workflows/m3-collections-mask-receiver.yml'
   push:
     branches:
@@ -32,7 +32,7 @@ jobs:
       - name: Verify source-sealed generation-safe object-state offset receipts
         run: python3 -m unittest discover -s m3/collections -p 'test_verify_object_state_offset.py' -v
       - name: Verify sealed postimages before compilation
-        run: python3 m3/collections/qualification/verify_mask_selection.py
+        run: python3 make/m3/collections/qualification/verify_mask_selection.py
       - name: Compile current M3 core and actual mask tests as Java 21
         shell: bash
         run: |

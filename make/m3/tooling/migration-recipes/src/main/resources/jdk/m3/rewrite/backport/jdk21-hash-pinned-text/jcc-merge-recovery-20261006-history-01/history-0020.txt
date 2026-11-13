@@ -1,6 +1,6 @@
 {
   "schema": "m3.jcc-receiving-review/1",
-  "authority": "m3/docs/name-mapping.json",
+  "authority": "doc/m3/name-mapping.json",
   "purpose": "Referenced review/evidence receipt, not a second mapping authority or an export-admission receipt.",
   "source_commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
   "source_root_tree": "6f9b6a48f8cefa7a643f222c7aa1f621497725e7",
@@ -26,7 +26,7 @@
     "root_pom_git_blob": "a65f71452613662769dda64100c6d64dd90ae5da",
     "whole_repository_file_count": null,
     "semantic_dependency_closure_complete": false,
-    "coverage_receipt_path": "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
+    "coverage_receipt_path": "make/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
     "coverage_receipt_sha256": "59c4c970ac75a56aa5d5a3e2f3e88f5caa831eb06be788266c725202b8c64b12"
   },
   "new_capability_records": [
@@ -260,8 +260,8 @@
     {
       "repo": "hsoliwal/M3jdk21",
       "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
-      "module": "m3/tooling/migration-recipes",
-      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceRecipe.java",
+      "module": "make/m3/tooling/migration-recipes",
+      "path": "make/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceRecipe.java",
       "symbol": "jdk.m3.rewrite.M3Java21ConvergenceRecipe",
       "signatures": [
         "java.util.List<org.openrewrite.Recipe> getRecipeList()"
@@ -275,7 +275,7 @@
     {
       "repo": "hsoliwal/M3jdk21",
       "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
-      "module": "m3/tooling/migration-recipes",
+      "module": "make/m3/tooling/migration-recipes",
       "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/atom/M3PureIntConvergenceRecipe.java",
       "symbol": "jdk.m3.rewrite.atom.M3PureIntConvergenceRecipe",
       "signatures": [
@@ -290,7 +290,7 @@
     {
       "repo": "hsoliwal/M3jdk21",
       "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
-      "module": "m3/tooling/migration-recipes",
+      "module": "make/m3/tooling/migration-recipes",
       "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/atom/M3PureIntAtomEligibility.java",
       "symbol": "jdk.m3.rewrite.atom.M3PureIntAtomEligibility",
       "signatures": [
@@ -306,7 +306,7 @@
     {
       "repo": "hsoliwal/M3jdk21",
       "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
-      "module": "m3/tooling/migration-recipes",
+      "module": "make/m3/tooling/migration-recipes",
       "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/atom/MemJava.java",
       "symbol": "jdk.m3.rewrite.atom.MemJava",
       "signatures": [
@@ -321,7 +321,7 @@
     {
       "repo": "hsoliwal/M3jdk21",
       "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
-      "module": "m3/tooling/migration-recipes",
+      "module": "make/m3/tooling/migration-recipes",
       "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/atom/M3IntRecipeProjectTest.java",
       "symbol": "jdk.m3.rewrite.atom.M3IntRecipeProjectTest",
       "signatures": [
@@ -468,7 +468,7 @@
       "recipe": {
         "id": "m3-cb",
         "version": "1",
-        "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+        "path": "make/m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
         "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
         "preconditions": [
           "Pinned source bodies, exact retained OpenRewrite owner, absent targets or exact fixed point."
@@ -478,7 +478,7 @@
       "tests": [
         {
           "id": "cb-module-runtime",
-          "receipt": "m3/tooling/cb/evidence/receipt.json"
+          "receipt": "make/m3/tooling/cb/evidence/receipt.json"
         }
       ],
       "provenance": {
@@ -510,7 +510,7 @@
         "supersedes": []
       },
       "source_state": "experimental",
-      "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
+      "observation": "See make/m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
     },
     "observed_historical_target": {
       "repo": "hsoliwal/M3jdk21",
@@ -559,14 +559,14 @@
     "source_bytes_unchanged": true,
     "target_contract_change": "Class.descriptorString corrects hidden-class spelling; source retains the older getName substitution algorithm. Public method signatures are unchanged by the retained fix.",
     "historical_cb_receipt": {
-      "path": "m3/tooling/cb/evidence/receipt.json",
+      "path": "make/m3/tooling/cb/evidence/receipt.json",
       "sha256": "59dad7e343be1af3d9a29a0adfe0baa1de788ce7ff88e74908e485539d53417f",
       "qualification": "Historical source7b5d/target-base3ec scoped packet; not a current descriptor or whole-image rerun."
     },
     "historical_descriptor_receipts": [
-      "m3/tooling/migration-recipes/tasks/recipe-closure/FINAL_REPORT.md",
-      "m3/tooling/migration-recipes/tasks/recipe-closure/JUNIT.tsv",
-      "m3/tooling/migration-recipes/tasks/recipe-closure/SOURCE_SEALS.tsv"
+      "make/m3/tooling/migration-recipes/tasks/recipe-closure/FINAL_REPORT.md",
+      "make/m3/tooling/migration-recipes/tasks/recipe-closure/JUNIT.tsv",
+      "make/m3/tooling/migration-recipes/tasks/recipe-closure/SOURCE_SEALS.tsv"
     ],
     "qualification": "Target/recipe identity and lineage reconciliation only. implemented-unverified retained; no Java mutation or new behavior/image pass."
   },
@@ -577,7 +577,7 @@
     "candidate_artifact": {
       "repo": "hsoliwal/M3jdk21",
       "commit": "df06cdee5a8526f573b3ad89622824d0b49e2f25",
-      "module": "m3/tooling/migration-recipes",
+      "module": "make/m3/tooling/migration-recipes",
       "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/atom/JccReceivingFixtureTest.java",
       "symbol": "jdk.m3.rewrite.atom.JccReceivingFixtureTest",
       "signatures": [
@@ -592,7 +592,7 @@
       "revision_role": "pinned"
     },
     "verification_pom": {
-      "path": "m3/tooling/migration-recipes/verification/jcc-receiving/pom.xml",
+      "path": "make/m3/tooling/migration-recipes/verification/jcc-receiving/pom.xml",
       "sha256": "fda1ac1823bf912f10d975659dc1bfe7f89573d1581af3a7bfa7e45d99a70ba2",
       "bytes": 3152
     },
@@ -644,27 +644,27 @@
       "Source/member preservation, isolated loader state and malformed/numeric/string negative controls."
     ],
     "corpus_contract": {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/receiving-e02/CORPUS_CONTRACT.md",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/receiving-e02/CORPUS_CONTRACT.md",
       "sha256": "40cec6db1b58dd19a0eaaaaf51396202db496188b755233883ec871f909d1a84",
       "bytes": 6920
     },
     "input_receipt": {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/receiving-e02/STAGING_RECEIPT.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/receiving-e02/STAGING_RECEIPT.json",
       "sha256": "19b3265052459b5cddb95b695c7801d2090733d30527e6553eed823597690d17",
       "bytes": 6235
     },
     "verification_receipt": {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/receiving-e02/VERIFICATION_RECEIPT.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/receiving-e02/VERIFICATION_RECEIPT.json",
       "sha256": "b1d9d2a9d1492c2c69c62a1bc0fda5277cade749fc1ad690d355bc3ca71905ef",
       "bytes": 1974
     },
     "maven_log": {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/receiving-e02/maven-verify.log",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/receiving-e02/maven-verify.log",
       "sha256": "673e9e8687b9bccbea5ed768a9ed97954fc208edd2a781338d80d574ad517cfc",
       "bytes": 3020
     },
     "surefire_xml": {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/receiving-e02/JccReceivingFixtureTest.xml",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/receiving-e02/JccReceivingFixtureTest.xml",
       "sha256": "883bdd4d574b6e8f338e749d3b6a07ba01b117b2f378223308c472aa79914622",
       "bytes": 18766
     },
@@ -676,7 +676,7 @@
       "time": "5.937"
     },
     "whole_module_gate": {
-      "path": "m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/owning-module-frontier/REVIEW.json",
+      "path": "make/m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/owning-module-frontier/REVIEW.json",
       "sha256": "ac128a680edefc7d38daac9b4fe7ce9cebf474a5b6f3d2136bc2a58eb6635d16",
       "bytes": 4807
     },
@@ -690,8 +690,8 @@
     "merge_commit": "8131f535300c005afd27443d0281ede11198522f",
     "old_source_commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
     "old_source_root": "3a270e543f9a547582ebda8ac8b69bfd134c41be",
-    "preserved_crate": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005",
-    "old_binding_resource": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/02-source-destination-bindings.json.txt",
+    "preserved_crate": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005",
+    "old_binding_resource": "make/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/02-source-destination-bindings.json.txt",
     "scope": "Publication lineage only. All old canonical source and candidate receiver artifact objects remain in operational lineage; complete E2 recipe/evidence remains unchanged."
   },
   "source_publication": {
@@ -709,49 +709,49 @@
     "source_gate_or_export_authority_granted": false,
     "receipts": {
       "source_fields": {
-        "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/SOURCE_FIELDS_AND_PROOFS.json",
+        "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/SOURCE_FIELDS_AND_PROOFS.json",
         "bytes": 64185,
         "sha256": "d4fa5704926ea9becfd7fea3b73928183724b5e63ed1814ac9aa0d4521e7136f",
         "git_blob_sha1": "5d23a15a5e29eb2ffeb54d81e4dee76330310add"
       },
       "source_review": {
-        "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/SOURCE_REVIEW.md",
+        "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/SOURCE_REVIEW.md",
         "bytes": 12537,
         "sha256": "7f5f0c54cbac2b8d8201bb386678a03284f99cacdf9295eb4cac3ae9689b85d0",
         "git_blob_sha1": "7ff0f759dcaa03c662b656ad09f86995fad0df36"
       },
       "root_accounting": {
-        "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/ROOT_ACCOUNTING.json",
+        "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/ROOT_ACCOUNTING.json",
         "bytes": 114933,
         "sha256": "9d393cb0e1154049b8cf5e53ccc6e49b80e7de802a9604de056e2231b1140b25",
         "git_blob_sha1": "6c9529b5187f647f022ef73876171c600b775ae0"
       },
       "publication_readback": {
-        "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/SOURCE_IMPLEMENTATION_PUBLICATION_VERIFIED.json",
+        "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/SOURCE_IMPLEMENTATION_PUBLICATION_VERIFIED.json",
         "bytes": 370323,
         "sha256": "c6500d09f2056e7ea1dad619cfbae3f8763e39ebdeedd4d63440540a2dd46146",
         "git_blob_sha1": "349017b19d5aac98b98ec2c26b55c27671d002e4"
       },
       "production_body_readback": {
-        "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/SOURCE_PRODUCTION_BODY_READBACK.json",
+        "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/SOURCE_PRODUCTION_BODY_READBACK.json",
         "bytes": 3206,
         "sha256": "0abd6ddcbe96eac76da9a708a2ffc9350c546c1c63382686c600dad3f7fc20df",
         "git_blob_sha1": "a33428c6607f9ff928748e6d25fe90cee2f9d336"
       },
       "pr_observation": {
-        "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/PR_STATE_AFTER_SOURCE_PUBLICATION.json",
+        "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/PR_STATE_AFTER_SOURCE_PUBLICATION.json",
         "bytes": 814,
         "sha256": "c23d1948cb21f8b3a5e294d3fb0c6c14527a9bed646e082a4dc94ae98832ceb5",
         "git_blob_sha1": "dc87ed373e521d39ea72bddd81aeabb8dbdb1b99"
       },
       "source_ci_observation": {
-        "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/SOURCE_INITIAL_CI_OBSERVATION.json",
+        "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/SOURCE_INITIAL_CI_OBSERVATION.json",
         "bytes": 683,
         "sha256": "6268a6944bf4f5a17f7783daaee5e462f68f2e1cb0853121dba9dc9049a077e9",
         "git_blob_sha1": "8c66af2495565eea86d01fbe3af09313ccc35a15"
       },
       "master_preimage_observation": {
-        "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/M3_CURRENT_MASTER_PREIMAGES.json",
+        "path": "make/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/M3_CURRENT_MASTER_PREIMAGES.json",
         "bytes": 1137,
         "sha256": "6e3d2c9760ee93a10b0da660e84a77d002ea2312954b42d3459803c867b57475",
         "git_blob_sha1": "ea4fb9e885a4e393b48faa479af8b1c1663e8edd"

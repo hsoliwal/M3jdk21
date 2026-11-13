@@ -10,16 +10,16 @@ The inspected destination mapping contains 44 operational records and 20 gate re
 
 ## Proposed scope
 
-The operational authority remains [name-mapping.json](name-mapping.json), governed by [name-mapping.schema.json](name-mapping.schema.json) and [migration.py](../migration/migration.py). The proposed increment adds `synexia.jcc-recipe-laboratory` and `synexia.jcc-java-jni-regression` in the schema's actual `blocked` lifecycle, with empty capability test claims. Existing target owners are reuse candidates with explicit domain and API differences.
+The operational authority remains [name-mapping.json](name-mapping.json), governed by [name-mapping.schema.json](name-mapping.schema.json) and [migration.py](../../make/m3/migration/migration.py). The proposed increment adds `synexia.jcc-recipe-laboratory` and `synexia.jcc-java-jni-regression` in the schema's actual `blocked` lifecycle, with empty capability test claims. Existing target owners are reuse candidates with explicit domain and API differences.
 
 The one permitted existing-row reconciliation is `synexia.counterpart.MIndexJvmDescriptor`. Its target Java remains unchanged and its status remains `implemented-unverified`. The other 43 existing operational records, all 20 gates, legacy mappings, global observations and incomplete coverage flags are preserved exactly.
 
 The planned four materialized outputs are:
 
-- `m3/docs/name-mapping.json`: the reviewed canonical postimage.
-- `m3/docs/jcc-source-handoff.md`: the capability, interface and proof crosswalk.
-- `m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json`: selected source/target identities, historical Descriptor record and separate acceptance flags.
-- `m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv`: explicit disposition obligations for every observed source root entry.
+- `doc/m3/name-mapping.json`: the reviewed canonical postimage.
+- `doc/m3/jcc-source-handoff.md`: the capability, interface and proof crosswalk.
+- `make/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json`: selected source/target identities, historical Descriptor record and separate acceptance flags.
+- `make/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv`: explicit disposition obligations for every observed source root entry.
 
 The installation uses the retained `M3Jdk21HashPinnedTextSnapshotRecipe` and the existing `recipe.py` sealed-install format. The exact preimage/postimage crate and plan must describe the same four outputs. Guards bind the schema, validator, replay owner, text transformer, owning POM, Descriptor target and Descriptor recipe. The existing `migration.py extend` command is a one-time initializer and is not an update mechanism for this existing extension. The co-retained `lineage.py` uses a different historical dialect and is not a replacement authority.
 

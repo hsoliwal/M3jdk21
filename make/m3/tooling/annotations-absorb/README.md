@@ -59,6 +59,6 @@ do not apply: annotation types have no runtime behaviour to time.
 3. **ABSORB_NEXT** owners for the annotations M3JDK sources use. Then drop the donor copies once nothing references
    them.
 
-Rerun the absorption: `python -I m3/tooling/annotations-absorb/tools/absorb_rename.py
+Rerun the absorption: `python -I make/m3/tooling/annotations-absorb/tools/absorb_rename.py
 m3/vendor/third_party/jspecify-1.0.1/src/main/java org.jspecify.annotations jdk.m3.annotations
-src/jdk.m3.annotations/share/classes "<notice>"`. Rerun the ledger and checks: `bash m3/tooling/annotations-absorb/gate.sh`.
+src/jdk.m3.annotations/share/classes "<notice>"`. Rerun the ledger and checks: `bash make/m3/tooling/annotations-absorb/gate.sh`.

@@ -14,7 +14,7 @@ import java.util.Objects;
  */
 public final class LongRankBatchNative {
     private static final int NATIVE_MIN_BATCH = 64;
-    //FLLDCIM: MRL - RESTORE-ADD RBN theirs 878518da1d55 lines 17-20 (leaves 6 20; origins 610f780df14 66ddfd93f75); dropped by retain merge d92ed3c91214; recipe m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
+    //FLLDCIM: MRL - RESTORE-ADD RBN theirs 878518da1d55 lines 17-20 (leaves 6 20; origins 610f780df14 66ddfd93f75); dropped by retain merge d92ed3c91214; recipe make/m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
     private static final int NATIVE_MIN_TRIPLET = 192;
     private static volatile boolean TRIPLET_ABI_MISSING;
     private static final int NATIVE_MIN_KDIFF = 256;
@@ -25,14 +25,14 @@ public final class LongRankBatchNative {
     private static final boolean FUSED_AVAILABLE = detectFusedCapability();
     private static final int NATIVE_MIN_FREQUENCY_TOP_K = 256;
     private static volatile boolean TOP_K_FREQUENCY_ABI_MISSING;
-    //FLLDCIM: MRL - RESTORE-ADD RBN theirs 878518da1d55 lines 35-36 (leaves 14; origins 30e8bbd762c); dropped by retain merge d92ed3c91214; recipe m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
+    //FLLDCIM: MRL - RESTORE-ADD RBN theirs 878518da1d55 lines 35-36 (leaves 14; origins 30e8bbd762c); dropped by retain merge d92ed3c91214; recipe make/m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
     private static final int NATIVE_MIN_CLOSEST_WINDOW_BATCH = 64;
     private static volatile boolean CLOSEST_WINDOW_ABI_MISSING;
     //FLLDCIM: MRL - census P2-073, crate m3jdk21-lc719-pair-distance-java-20261026 (donor blob 83ce0911f53f): LC 719 pair-distance batch thresholds and ABI flag
     private static final int NATIVE_MIN_PAIR_DISTANCE_BATCH = 64;
     private static final int NATIVE_MIN_PAIR_DISTANCE_OWNER = 128;
     private static volatile boolean PAIR_DISTANCE_ABI_MISSING;
-    //FLLDCIM: MRL - RESTORE-ADD RBN theirs 878518da1d55 lines 24-32 (leaves 2 7 12 18 21 23 24; origins 74278253fa3 6e86f2b03c3 3be5e14402f 2b78514275f a08a353b192 66a5e9127ee 35662be63ca); dropped by retain merge d92ed3c91214; recipe m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
+    //FLLDCIM: MRL - RESTORE-ADD RBN theirs 878518da1d55 lines 24-32 (leaves 2 7 12 18 21 23 24; origins 74278253fa3 6e86f2b03c3 3be5e14402f 2b78514275f a08a353b192 66a5e9127ee 35662be63ca); dropped by retain merge d92ed3c91214; recipe make/m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
     private static final int NATIVE_MIN_INTERSECTION = 128;
     private static final int MODE_UPPER = 1;
     private static final int MODE_COUNT = 2;
@@ -43,7 +43,7 @@ public final class LongRankBatchNative {
     private static volatile boolean RUN_STATISTICS_ABI_MISSING;
     //FLLDCIM: MRL - follow-up of #2693: per-export ABI flags for the three restored natives whose callers had none,
     // so an older libm3rankbatch (master 7-export build) falls back to Java like every other restored kernel;
-    // the hot path reads one volatile boolean, no allocation; recipe m3/collections/qualification/rank-stack-followup-20261107/pinned_edits.py v1
+    // the hot path reads one volatile boolean, no allocation; recipe make/m3/collections/qualification/rank-stack-followup-20261107/pinned_edits.py v1
     private static volatile boolean BOUND_BATCH_ABI_MISSING;
     private static volatile boolean RANGE_COUNT_ABI_MISSING;
     private static volatile boolean INTERSECTION_COUNT_ABI_MISSING;
@@ -92,7 +92,7 @@ public final class LongRankBatchNative {
         return results;
     }
 
-    //FLLDCIM: MRL - RESTORE-ADD RBN theirs 878518da1d55 lines 53-604 (leaves 2 5 7 12 18 21 24 25 34 40 46; origins efa61222bcc dac71636c03 8403833238f 2b78514275f 6e86f2b03c3 660a5f0e493 56460c92634 74278253fa3 3be5e14402f a08a353b192 66a5e9127ee 28a25d16452); dropped by retain merge d92ed3c91214; recipe m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
+    //FLLDCIM: MRL - RESTORE-ADD RBN theirs 878518da1d55 lines 53-604 (leaves 2 5 7 12 18 21 24 25 34 40 46; origins efa61222bcc dac71636c03 8403833238f 2b78514275f 6e86f2b03c3 660a5f0e493 56460c92634 74278253fa3 3be5e14402f a08a353b192 66a5e9127ee 28a25d16452); dropped by retain merge d92ed3c91214; recipe make/m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
     /**
      * LeetCode #35: write signed-long lower-bound coordinates directly into an
      * existing primitive output lane. All windows are validated before writes.
@@ -774,7 +774,7 @@ public final class LongRankBatchNative {
         return size;
     }
 
-    //FLLDCIM: MRL - RESTORE-ADD RBN theirs 878518da1d55 lines 717-841 (leaves 6 23; origins 35662be63ca 66ddfd93f75); dropped by retain merge d92ed3c91214; recipe m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
+    //FLLDCIM: MRL - RESTORE-ADD RBN theirs 878518da1d55 lines 717-841 (leaves 6 23; origins 35662be63ca 66ddfd93f75); dropped by retain merge d92ed3c91214; recipe make/m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
     /**
      * LeetCode #26/#128 categories: distinct cardinality and longest run of
      * consecutive signed-long values in an immutable sorted primitive lane.
@@ -1027,7 +1027,7 @@ public final class LongRankBatchNative {
         }
     }
 
-    //FLLDCIM: MRL - RESTORE-ADD RBN theirs 878518da1d55 lines 916-1006 (leaves 8 29; origins fdf8f2875a2 1411c67f4e3); dropped by retain merge d92ed3c91214; recipe m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
+    //FLLDCIM: MRL - RESTORE-ADD RBN theirs 878518da1d55 lines 916-1006 (leaves 8 29; origins fdf8f2875a2 1411c67f4e3); dropped by retain merge d92ed3c91214; recipe make/m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
     private static final int NATIVE_MIN_MERGED_SELECT_BATCH = 64;
     private static volatile boolean MERGED_SELECT_ABI_MISSING;
 
@@ -1120,7 +1120,7 @@ public final class LongRankBatchNative {
     private static final int NATIVE_MIN_FLOOR_BATCH = 64;
     private static volatile boolean FLOOR_ABI_MISSING;
 
-    //FLLDCIM: MRL - RESTORE-ADD RBN theirs 878518da1d55 lines 1009-1051 (leaves 29; origins 1411c67f4e3); dropped by retain merge d92ed3c91214; recipe m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
+    //FLLDCIM: MRL - RESTORE-ADD RBN theirs 878518da1d55 lines 1009-1051 (leaves 29; origins 1411c67f4e3); dropped by retain merge d92ed3c91214; recipe make/m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
     /**
      * LeetCode #35 lower/upper-bound category: index of the last signed-long
      * value <= each query, or -1 if none. All queries and outputs are primitive
@@ -1249,7 +1249,7 @@ public final class LongRankBatchNative {
     /** Appended primitive JNI ABI in the existing original m3rankbatch owner. */
     private static native void countSmallerRight0(long[] input, int[] output);
 
-    //FLLDCIM: MRL - RESTORE-ADD RBN theirs 878518da1d55 lines 1136-1192 (leaves 20; origins 610f780df14); dropped by retain merge d92ed3c91214; recipe m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
+    //FLLDCIM: MRL - RESTORE-ADD RBN theirs 878518da1d55 lines 1136-1192 (leaves 20; origins 610f780df14); dropped by retain merge d92ed3c91214; recipe make/m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
     /** LeetCode #15: count unique signed-long value triplets summing to target. */
     static long distinctTripletSumCount(long[] sorted, long target) {
         Objects.requireNonNull(sorted, "sorted");
@@ -1434,7 +1434,7 @@ public final class LongRankBatchNative {
     private static native void kthPairDistancesInto0(long[] sorted, long[] ranks,
             int rankFrom, int length, long[] output, int outputFrom);
 
-    //FLLDCIM: MRL - RESTORE-ADD RBN theirs 878518da1d55 lines 1452-1524 (leaves 15; origins 401dadb98a7); dropped by retain merge d92ed3c91214; recipe m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
+    //FLLDCIM: MRL - RESTORE-ADD RBN theirs 878518da1d55 lines 1452-1524 (leaves 15; origins 401dadb98a7); dropped by retain merge d92ed3c91214; recipe make/m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
     // LeetCode #167: two distinct sorted coordinates; no per-pair objects.
     private static final int NATIVE_MIN_TWO_SUM_BATCH = 32;
     private static final int NATIVE_MIN_TWO_SUM_OWNER = 64;
@@ -1527,7 +1527,7 @@ public final class LongRankBatchNative {
     /** Additive LC #347 source-owned m3rankbatch JNI symbol. */
     private static native long[] topKFrequent0(long[] sorted, int k);
 
-    //FLLDCIM: MRL - RESTORE-ADD RBN theirs 878518da1d55 lines 1212-1216 (leaves 6 23; origins 35662be63ca 66ddfd93f75); dropped by retain merge d92ed3c91214; recipe m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
+    //FLLDCIM: MRL - RESTORE-ADD RBN theirs 878518da1d55 lines 1212-1216 (leaves 6 23; origins 35662be63ca 66ddfd93f75); dropped by retain merge d92ed3c91214; recipe make/m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
     /** Same existing m3rankbatch JNI library: bounded native run-statistic scan. */
     private static native long runStatistics0(long[] sorted);
 
@@ -1537,7 +1537,7 @@ public final class LongRankBatchNative {
 
     private static native void lowerBounds0(long[] sorted, long[] queries, int[] results);
 
-    //FLLDCIM: MRL - RESTORE-ADD RBN theirs 878518da1d55 lines 1220-1325 (leaves 2 5 7 12 14 18 21 24 25 34; origins 8403833238f 6e86f2b03c3 2b78514275f 56460c92634 74278253fa3 3be5e14402f a08a353b192 66a5e9127ee 28a25d16452 30e8bbd762c); dropped by retain merge d92ed3c91214; recipe m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
+    //FLLDCIM: MRL - RESTORE-ADD RBN theirs 878518da1d55 lines 1220-1325 (leaves 2 5 7 12 14 18 21 24 25 34; origins 8403833238f 6e86f2b03c3 2b78514275f 56460c92634 74278253fa3 3be5e14402f a08a353b192 66a5e9127ee 28a25d16452 30e8bbd762c); dropped by retain merge d92ed3c91214; recipe make/m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
     private static native void equalRanges0(long[] sorted, long[] queries, int[] ranges);
 
     /** Additive same-library ABI: bounded 256-key pages and no full-array JNI copies. */

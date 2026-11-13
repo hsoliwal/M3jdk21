@@ -4,7 +4,7 @@
 """Recipe MERGELOSS_RESTORE v1: merge-loss audit leaf 71 (m3/ast M3SyntaxDelta and its contract).
 
 Engine: m3/core/qualification/mergeloss-67-69-20261107/apply.py v1 (itself derived from
-m3/collections/qualification/census-small-batch-20261106/apply.py v1): anchored "sub" edits, every anchor exactly once,
+make/m3/collections/qualification/census-small-batch-20261106/apply.py v1): anchored "sub" edits, every anchor exactly once,
 LF payloads re-joined with the preimage's line ending, a per-file leaf chain whose accepted states are the base (pinned
 by git blob id) and each chain prefix. Anything else is drift and the recipe refuses (exit 2) before any write.
 Idempotent: a second run reports files_changed=0 and EDITS.tsv is a fixed point. --check writes nothing and exits 1

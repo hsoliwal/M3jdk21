@@ -17,7 +17,7 @@ class ChainTest(unittest.TestCase):
         self.root = Path(self.tmp.name)
         self.name = 'stage-chain-fixture'
         self.crate = 'm3-stage-chain-fixture'
-        self.data = self.root / 'm3/tooling/shared-frontend/recipe-custody/datasets' / self.name
+        self.data = self.root / 'make/m3/tooling/shared-frontend/recipe-custody/datasets' / self.name
         self.resources = self.data / 'resources'
         self.data.mkdir(parents=True)
         self.targets = {

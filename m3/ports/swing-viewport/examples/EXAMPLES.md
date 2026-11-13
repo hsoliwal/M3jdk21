@@ -58,6 +58,6 @@ Screenshots and `examples.tsv` are in `S:\m3-scratch\swing\examples\` (`tree-var
 How to read the table:
 - **Setup** includes building the model, which is the same in both columns.
 - **The list's first layout measures every row either way.** Leaf 4 speeds up the layouts after model edits, not the
-  first one. The edit numbers are in `m3/docs/swing-viewport/bench/LIST_MEASURE_20261019.tsv`.
+  first one. The edit numbers are in `doc/m3/swing-viewport/bench/LIST_MEASURE_20261019.tsv`.
 - **The p95 values are single samples of 60 frames on a shared machine** and move from run to run. The benches under
-  `m3/docs/swing-viewport/bench/` repeat the measurements.
+  `doc/m3/swing-viewport/bench/` repeat the measurements.

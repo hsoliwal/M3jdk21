@@ -6,7 +6,7 @@ on:
       - "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ArrayDeque.java"
       - "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3PriorityQueue.java"
       - "test/jdk/jdk/m3/collections/M3GenericReferenceOwners*.java"
-      - "m3/collections/qualification/direct-generic-deque-heap-20261018/**"
+      - "make/m3/collections/qualification/direct-generic-deque-heap-20261018/**"
       - "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-native-generic-deque-priority-20261018/**"
       - ".github/workflows/m3-direct-generic-deque-heap-20261018.yml"
   push:
@@ -32,12 +32,12 @@ jobs:
         shell: bash
         run: |
           set -euxo pipefail
-          python3 -S m3/collections/qualification/direct-generic-deque-heap-20261018/verify.py
+          python3 -S make/m3/collections/qualification/direct-generic-deque-heap-20261018/verify.py
       - name: Real Maven/OpenRewrite Java LST recipe and fixed point/refusal
         shell: bash
         run: |
           set -euxo pipefail
-          mvn -B -ntp -f m3/collections/qualification/direct-generic-deque-heap-20261018/recipe/pom.xml test
+          mvn -B -ntp -f make/m3/collections/qualification/direct-generic-deque-heap-20261018/recipe/pom.xml test
       - name: Strict full current M3 core compile and JDK contract
         shell: bash
         run: |
@@ -69,7 +69,7 @@ jobs:
             -Djava.library.path="$PWD/proof/native" -cp proof/classes \
             jdk.m3.collections.M3GenericReferenceOwnersProof --native | tee proof/native-direct.log
           grep -q 'native=true' proof/native-direct.log
-          python3 -S m3/collections/qualification/direct-generic-deque-heap-20261018/verify.py
+          python3 -S make/m3/collections/qualification/direct-generic-deque-heap-20261018/verify.py
           git diff --exit-code
       - name: Retain test and native receipts
         if: always()
@@ -79,4 +79,4 @@ jobs:
           retention-days: 14
           path: |
             proof/
-            m3/collections/qualification/direct-generic-deque-heap-20261018/recipe/target/surefire-reports/
+            make/m3/collections/qualification/direct-generic-deque-heap-20261018/recipe/target/surefire-reports/

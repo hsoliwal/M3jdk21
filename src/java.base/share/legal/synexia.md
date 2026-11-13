@@ -7,7 +7,7 @@ source is not made Apache-2.0 by passing through Synexia and requires its own ar
 license/NOTICE disposition before product inclusion.
 
 The machine-readable receiving policy is
-`m3/compatibility/m3-public-target-policy.tsv`. Source-license admission is independent of
+`make/m3/compatibility/m3-public-target-policy.tsv`. Source-license admission is independent of
 build, API/ABI, runtime, native, jtreg and platform acceptance.
 
 ## Synexia Lane28 collection kernels
@@ -19,7 +19,7 @@ Copyright 2026 Hitesh Soliwal and contributors.
 Adapted from the complete Synexia segmented primitive-lane sources, including
 lazy rank/select counts and their mutation maintenance. Changes: JDK internal
 package/names and libjava JNI symbol/header. Exact originals, source revisions,
-LICENSE, NOTICE, hashes and reproduction are retained under m3/tooling/lane28.
+LICENSE, NOTICE, hashes and reproduction are retained under make/m3/tooling/lane28.
 Existing OpenJDK and other third-party notices retain their scope.
 
 ## Synexia TQ precompute kernel
@@ -31,7 +31,7 @@ Adapted from Synexia MIndexRegexTrigramQuery. Changes: JDK internal package and
 short TQ name, public internal query factories, and an explicit existing-backing
 range reader. The independently authored JNI oracle is test-only. Exact source,
 LICENSE, NOTICE, source hashes and adaptation details are retained under
-m3/tooling/tq. Existing OpenJDK and other donor notices retain their scope.
+make/m3/tooling/tq. Existing OpenJDK and other donor notices retain their scope.
 
 ## Synexia Class bridge additions
 
@@ -39,7 +39,7 @@ Apache-2.0 also applies to these adapted Synexia owners in jdk.internal.mindex, 
 M3Boundary, M3CB, M3CI, M3Class, M3ClassFlags, M3Constructor, M3Descriptor, M3Field, M3Member, M3MemberFlags, M3MemberKind, M3Method, M3PC, M3RecordComponent.
 Copyright 2026 Hitesh Soliwal and contributors.
 
-Source originals, LICENSE, NOTICE and hashes: m3/tooling/cb/donor and pins.json.
+Source originals, LICENSE, NOTICE and hashes: make/m3/tooling/cb/donor and pins.json.
 Modifications: JDK package/names; existing String references and local primitive symbol lanes;
 M3VI progress boundary; exact text fingerprints; effective declared-release lookup and immutable
 String-based precompute inputs. M3CI includes the int-lane lowerBound/upperBound bodies from
@@ -52,8 +52,8 @@ jdk.internal.mindex.M3VI and jdk.internal.mindex.M3Release, including their nest
 Copyright 2026 Hitesh Soliwal and contributors.
 
 Adapted from hsoliwal/com.synexia; exact source and modification provenance is retained in
-m3/tooling/vi/pins.json and m3/tooling/vi/README.md. The original implementation and scoped
-license/NOTICE snapshots are retained in m3/tooling/vi/donor.
+make/m3/tooling/vi/pins.json and make/m3/tooling/vi/README.md. The original implementation and scoped
+license/NOTICE snapshots are retained in make/m3/tooling/vi/donor.
 Modifications: JDK-owned package/names, String and progress callback boundary, and refusal
 of observed version-scheme drift during preparation. Existing OpenJDK code retains its notices.
 

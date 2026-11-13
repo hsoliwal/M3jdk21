@@ -2,7 +2,7 @@
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
  */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/56cbdc6312594f06e21ef56f0ce33b605383270b/synexia-m3-jmods/native/accelerator-pmem/m3pmem.c blob 6a49c7787c76; recipe m3/optane/recipe/pmem-accelerator-20261107/relocate.py v4
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/56cbdc6312594f06e21ef56f0ce33b605383270b/synexia-m3-jmods/native/accelerator-pmem/m3pmem.c blob 6a49c7787c76; recipe make/m3/optane/recipe/pmem-accelerator-20261107/relocate.py v4
 #define _GNU_SOURCE
 #include <jni.h>
 #include <errno.h>

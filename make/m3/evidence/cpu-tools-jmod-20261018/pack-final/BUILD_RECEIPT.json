@@ -12,7 +12,7 @@
   "jar_timestamp": "2026-01-01T00:00:00Z",
   "jdk_release_sha256": "4c2ea1b8681670ccb0bd91d2d67d7e3dab97745087dc52f3bee9329e5a9c6e9a",
   "jmod_byte_reproducibility": "NOT_CLAIMED",
-  "jni_owner": "m3/tooling/module-packs/text-tools/native/m3textio.c",
+  "jni_owner": "make/m3/tooling/module-packs/text-tools/native/m3textio.c",
   "jni_sha256": "90698e92e4a06b5c8ee49227bcf2965d0e2352423585d465a34aaa8a148db38b",
   "legal_jmod_and_image_readback": "EXACT_HASH_MATCH_ALL_20_MODULES",
   "legal_notice_roots": [
@@ -67,7 +67,7 @@
     "jmod_member_sha256": "8d571afd8504fdc70c0eca4eec60b41f7dacac9f8e6565471f21a75ec0c0b16f",
     "linked": "pack/image/lib/libm3textio.so",
     "linked_sha256": "90698e92e4a06b5c8ee49227bcf2965d0e2352423585d465a34aaa8a148db38b",
-    "source": "m3/tooling/module-packs/text-tools/native/m3textio.c",
+    "source": "make/m3/tooling/module-packs/text-tools/native/m3textio.c",
     "transformation": "objcopy -g"
   },
   "native_tools": {
@@ -103,7 +103,7 @@
     }
   },
   "native_tools_before_after": "EXACT_PATH_RESOLUTION_AND_EXECUTABLE_HASH_MATCH",
-  "packager": "m3/tooling/jmod-recipes/tools/jmod_pack.py",
+  "packager": "make/m3/tooling/jmod-recipes/tools/jmod_pack.py",
   "runtime_artifacts": [
     {
       "path": "release",

@@ -31,7 +31,7 @@ def main():
     java_version = subprocess.check_output(['java', '-version'], stderr=subprocess.STDOUT, text=True)
     if 'version "21.' not in java_version:
         raise SystemExit('These receipts require a stock Java 21 execution environment')
-    pins = json.loads((ROOT / 'm3/migration/pinned-dependencies.json').read_text())
+    pins = json.loads((ROOT / 'make/m3/migration/pinned-dependencies.json').read_text())
     for path, expected in pins['files'].items():
         if sha(ROOT / path) != expected['sha256']:
             raise SystemExit('Pinned target dependency drift: ' + path)
@@ -40,13 +40,13 @@ def main():
         'm3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java',
         'm3/algorithms/test/PrefixZContractTest.java',
         'm3/algorithms/test/ViewInteropContractTest.java',
-        'm3/migration/src/jdk/m3/migration/ExactFileRecipe.java',
-        'm3/migration/test/RecipeContractTest.java'])
+        'make/m3/migration/src/jdk/m3/migration/ExactFileRecipe.java',
+        'make/m3/migration/test/RecipeContractTest.java'])
     java_inputs = {p: sha(ROOT / p) for p in sources}
-    python_paths = ['m3/migration/migration.py', 'm3/migration/test/test_migration.py',
-                    'm3/docs/name-mapping.schema.json', 'm3/migration/requirements.txt']
+    python_paths = ['make/m3/migration/migration.py', 'make/m3/migration/test/test_migration.py',
+                    'doc/m3/name-mapping.schema.json', 'make/m3/migration/requirements.txt']
     python_inputs = {p: sha(ROOT / p) for p in python_paths}
-    runner_inputs = {p: sha(ROOT / p) for p in ['m3/migration/run-tests.py', 'm3/migration/pinned-dependencies.json']}
+    runner_inputs = {p: sha(ROOT / p) for p in ['make/m3/migration/run-tests.py', 'make/m3/migration/pinned-dependencies.json']}
     runs = []
     def run(identifier, command, inputs):
         completed = subprocess.run(command, cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=False)
@@ -68,7 +68,7 @@ def main():
                 for test, identifier in [('PrefixZContractTest', 'prefix-z'), ('ViewInteropContractTest', 'view-interop')]:
                     run(identifier + '-' + mode, ['java', *flags, '-ea', '-cp', temp, test], java_inputs)
             run('exact-recipe-contract', ['java', '-ea', '-cp', temp, 'RecipeContractTest'], java_inputs)
-        run('migration-validator', [sys.executable, '-m', 'unittest', 'discover', '-s', 'm3/migration/test', '-p', 'test_migration.py', '-v'], python_inputs)
+        run('migration-validator', [sys.executable, '-m', 'unittest', 'discover', '-s', 'make/m3/migration/test', '-p', 'test_migration.py', '-v'], python_inputs)
         run('stock-string-surface', ['javap', '-public', '-s', 'java.lang.String'], {})
     except (RuntimeError, OSError) as problem:
         failure = str(problem)

@@ -18,9 +18,9 @@ ROOT = AUDIT.parent
 CURRENT = "c0a14387009aefc7d62bd3268055d526e04f9074"
 TREE = "491bbd80a51483d0710fc12c1bad3a037b385ba0"
 EPOCH_SHA = "2a4878ce5eeeeeccfe216dae36e62faa3e5da06c7baa654e7a43ce3d823c5139"
-MAP = "m3/docs/name-mapping.json"
-VALIDATOR = "m3/migration/migration.py"
-SCHEMA = "m3/docs/name-mapping.schema.json"
+MAP = "doc/m3/name-mapping.json"
+VALIDATOR = "make/m3/migration/migration.py"
+SCHEMA = "doc/m3/name-mapping.schema.json"
 
 
 def sha(body):
@@ -151,7 +151,7 @@ def main():
             shutil.copyfile(capture_path, destination)
             origin = old_commit["sha"]
         else:
-            require(relative == "m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv", "unreviewed changed artifact")
+            require(relative == "make/m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv", "unreviewed changed artifact")
             destination = HERE / "calls/changed-tq-manifest.json"
             origin = CURRENT
         envelope = json.loads(destination.read_bytes())

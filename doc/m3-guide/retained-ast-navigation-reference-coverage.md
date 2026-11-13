@@ -294,11 +294,11 @@ bodies were read only for the stated boundary.
 | [m3/m3-import/intakes/ast-navigation-20261007/evidence/QUALIFICATION.json](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/m3-import/intakes/ast-navigation-20261007/evidence/QUALIFICATION.json) | 56 / 2048 | `9b6337b9d925bd085898f13a26f9b3dca47733ba` | `2ffe18cb3a68aa9a9a0e24fbd86e1ee42cdbf053d0c3277111bd0d423d07cb08` |
 | [m3/vendor/m3/README.md](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/README.md) | 79 / 3492 | `e9a7f0159de1e2c069662455202065a1c93fb522` | `95317a8e1f02ce87776d4b042781ffbbd3a8f38321ff7ed30e1891a51a315ca7` |
 | [m3/vendor/m3/NOTICE](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/NOTICE) | 303 / 14991 | `cf6694a1316785ba2aa45394314bbae2e856c7fe` | `31cec4f2c4936b0e7a71a77847a3c20b0959e119a02ef5cf537f4f707fff9427` |
-| [m3/pom.xml](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/pom.xml) | 229 / 11214 | `e01cddcbac3751bfa79368c3727343754c7e3b21` | `37b503fb5aee9a1f3a02d0efaa8b224f31c9c2aaa5d8e0079143bc9bd8fb73fb` |
+| [make/m3/pom.xml](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/pom.xml) | 229 / 11214 | `e01cddcbac3751bfa79368c3727343754c7e3b21` | `37b503fb5aee9a1f3a02d0efaa8b224f31c9c2aaa5d8e0079143bc9bd8fb73fb` |
 | [m3/m3-import/pom.xml](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/m3-import/pom.xml) | 258 / 12210 | `6b3fa2948f055227790041553700f6abdef79eb5` | `d85d3d4ed6c2ed2b2c637d64805c5f9462e2157ba66019be15075ca1bafbddb0` |
-| [m3/build.sh](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/build.sh) | 55 / 5412 | `be764d854ce1d7686fd53da8953110a382ec1dec` | `c7b954a6faa16cc8a0cb4a2d13a8032c43fb308a739b225362b6ac3fd84864ee` |
+| [make/m3/build.sh](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/build.sh) | 55 / 5412 | `be764d854ce1d7686fd53da8953110a382ec1dec` | `c7b954a6faa16cc8a0cb4a2d13a8032c43fb308a739b225362b6ac3fd84864ee` |
 | [m3/ports/indexstring/pom.xml](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/ports/indexstring/pom.xml) | 184 / 10841 | `d3fb14b11cf2cf76185c02ea1ffac82167356ba6` | `d07cf94116968269d1367e6e4ad41c6bc847bb9410ade7ff542255a74d2f346b` |
-| [m3/docs/m3jdk21-porting-invariant.md](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/docs/m3jdk21-porting-invariant.md) | 499 / 30964 | `d933c7f8a4ba875b318c499214857146724fc4da` | `604ef82225fdb9e6ecf00e14f7630fb0956b85ec89e5c9241537733d4054f39a` |
+| [doc/m3/m3jdk21-porting-invariant.md](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/docs/m3jdk21-porting-invariant.md) | 499 / 30964 | `d933c7f8a4ba875b318c499214857146724fc4da` | `604ef82225fdb9e6ecf00e14f7630fb0956b85ec89e5c9241537733d4054f39a` |
 
 The [preserved NOTICE][notice] records architectural donor acknowledgments for
 AST precompute; its original descriptions and license distinctions remain
@@ -327,7 +327,7 @@ five test/oracle files were included in byte custody.
 - `m3/m3-import/pom.xml` defines an import-verifier artifact with its own
   compiler, test and coverage setup; those settings are not evidence the retained
   AST tree was compiled or measured
-- `m3/build.sh` compiles `core/src` and named foundation tests. Reading the script
+- `make/m3/build.sh` compiles `core/src` and named foundation tests. Reading the script
   does not run it or select this retained AST source family
 - `m3/ports/indexstring/pom.xml` defines the separate Java-21 retained-view bridge
   and its two main-class tests; it is not the imported AST module

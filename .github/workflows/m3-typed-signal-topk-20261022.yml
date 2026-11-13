@@ -6,7 +6,7 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalColumns.java'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalTopK.java'
       - 'test/jdk/jdk/m3/collections/M3SignalTopK*.java'
-      - 'm3/collections/qualification/typed-signal-topk-20261022/**'
+      - 'make/m3/collections/qualification/typed-signal-topk-20261022/**'
       - '.github/workflows/m3-typed-signal-topk-20261022.yml'
   workflow_dispatch:
 permissions:
@@ -85,7 +85,7 @@ jobs:
             -pl junit-jupiter-5.10.2 -am -DskipTests install
           mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
           mvn -B -ntp \
-            -f m3/collections/qualification/typed-signal-topk-20261022/pom.xml \
+            -f make/m3/collections/qualification/typed-signal-topk-20261022/pom.xml \
             -Dtest=M3SignalTopKTest,M3SignalColumnsTest test
       - name: Scope limitation
         run: |

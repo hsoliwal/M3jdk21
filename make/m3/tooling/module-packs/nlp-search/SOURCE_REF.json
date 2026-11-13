@@ -4,7 +4,7 @@
   "canonical_crate": "m3-openrewrite-recipes/crates/m3-nlp-search",
   "canonical_integration": "integration-20261018",
   "canonical_recipe": "jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe",
-  "receiver": "m3/tooling/module-packs/nlp-search",
+  "receiver": "make/m3/tooling/module-packs/nlp-search",
   "target_repository": "hsoliwal/M3jdk21",
   "target_base_commit": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
   "handoff_policy": "Canonical Synexia recipe templates are the editable owner. M3JDK files are admitted by exact preimage and recipe postimage hashes; regeneration and the receiver recipe-custody mirror record application evidence.",
@@ -146,7 +146,7 @@
     },
     "previous_receipt": {
       "target_commit": "f9b3a0ce84dcdbd0cc75df956def7710ac5d04fd",
-      "path": "m3/tooling/module-packs/nlp-search/SOURCE_REF.json",
+      "path": "make/m3/tooling/module-packs/nlp-search/SOURCE_REF.json",
       "git_blob": "e65dc6621efbedc64c76f4eaba8511342ad56f51"
     }
   },

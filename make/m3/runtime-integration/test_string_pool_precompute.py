@@ -14,9 +14,9 @@ from pathlib import Path
 import re
 import unittest
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 CHECKER = Path(os.environ.get("M3_POOL_CHECKER", str(
-    ROOT / "m3/runtime-integration/check-m3string-invariants.py")))
+    ROOT / "make/m3/runtime-integration/check-m3string-invariants.py")))
 POOL = Path(os.environ.get("M3_POOL_FIXTURE", str(
     ROOT / "src/java.base/share/classes/java/lang/M3StringPool.java")))
 FROZEN_INDEX = Path(os.environ.get("M3_FROZEN_INDEX_FIXTURE", str(

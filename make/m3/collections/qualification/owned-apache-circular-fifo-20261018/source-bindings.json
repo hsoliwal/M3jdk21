@@ -942,151 +942,151 @@
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-apache-circular-fifo-20261018/README.md",
+      "path": "make/m3/collections/qualification/owned-apache-circular-fifo-20261018/README.md",
       "bytes": 3617,
       "sha256": "da2c582729c08264133a3541a99399a4098c9fc12343fa3d22bf4f16ca1b9f9f",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-apache-circular-fifo-20261018/FOSS_REUSE_DECISION.tsv",
+      "path": "make/m3/collections/qualification/owned-apache-circular-fifo-20261018/FOSS_REUSE_DECISION.tsv",
       "bytes": 4092,
       "sha256": "09641a8944dd47007d255d90c62ca8530d7d1d87c91da7ad8dbdc4bb51d3d4b8",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-apache-circular-fifo-20261018/SOURCE_INVENTORY.tsv",
+      "path": "make/m3/collections/qualification/owned-apache-circular-fifo-20261018/SOURCE_INVENTORY.tsv",
       "bytes": 9092,
       "sha256": "988c97a771a42ff654cda06d9181c17b325d46ac824ccb9306724982ed9356aa",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-apache-circular-fifo-20261018/ALGORITHM_CATALOGUE.tsv",
+      "path": "make/m3/collections/qualification/owned-apache-circular-fifo-20261018/ALGORITHM_CATALOGUE.tsv",
       "bytes": 4086,
       "sha256": "f174b4fa26c925581ac5fe8da02b380e18d6a677b575179eeae75ff59e9f78a7",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-apache-circular-fifo-20261018/THIRD_PARTY_NOTICES.md",
+      "path": "make/m3/collections/qualification/owned-apache-circular-fifo-20261018/THIRD_PARTY_NOTICES.md",
       "bytes": 1281,
       "sha256": "048988498bf7b58142242bc2a60344f89bad65d06716207fda6bdf29a27363bf",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-apache-circular-fifo-20261018/verify.py",
+      "path": "make/m3/collections/qualification/owned-apache-circular-fifo-20261018/verify.py",
       "bytes": 928,
       "sha256": "91aa767fa9c156af561af82bc898e025a2044309c4c84306d94b2dbbc2156a04",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-apache-circular-fifo-20261018/compare.py",
+      "path": "make/m3/collections/qualification/owned-apache-circular-fifo-20261018/compare.py",
       "bytes": 659,
       "sha256": "64ae2b1180458ab50a4d7f38a08cbe168c846c3257cab9c054d6cb6e6bada3e8",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-apache-circular-fifo-20261018/verify_module.py",
+      "path": "make/m3/collections/qualification/owned-apache-circular-fifo-20261018/verify_module.py",
       "bytes": 781,
       "sha256": "9e7f1f3548971cd056d856143042935107d5d486243baccde3df516391092224",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-apache-circular-fifo-20261018/CircularFifoAllocationProbe.java",
+      "path": "make/m3/collections/qualification/owned-apache-circular-fifo-20261018/CircularFifoAllocationProbe.java",
       "bytes": 1436,
       "sha256": "43287e976a430c56f64ec7a93c37f9558113287addb89927d36ca90f0f364b37",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-apache-circular-fifo-20261018/CircularFifoMutationProbe.java",
+      "path": "make/m3/collections/qualification/owned-apache-circular-fifo-20261018/CircularFifoMutationProbe.java",
       "bytes": 2882,
       "sha256": "ff94e9398aba553d166ec39652e43a040cea1a26ff3dd4836f057f7ab5d8ce40",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-apache-circular-fifo-20261018/CircularFifoNullConstructorProbe.java",
+      "path": "make/m3/collections/qualification/owned-apache-circular-fifo-20261018/CircularFifoNullConstructorProbe.java",
       "bytes": 683,
       "sha256": "e90ad329a017c8cd628f963190b0283209fbc49db32e5b6edc6e3d01d8f43656",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-apache-circular-fifo-20261018/CircularFifoProtocolProof.java",
+      "path": "make/m3/collections/qualification/owned-apache-circular-fifo-20261018/CircularFifoProtocolProof.java",
       "bytes": 13431,
       "sha256": "658a9e774f8b06f93cd40f344f9db4e5e7f59f593a5fce9057a7b919a148dc7f",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-apache-circular-fifo-20261018/CircularFifoSubclassProof.java",
+      "path": "make/m3/collections/qualification/owned-apache-circular-fifo-20261018/CircularFifoSubclassProof.java",
       "bytes": 2324,
       "sha256": "4402e8fdfb62ff4051937eb7d6e4c3d859fafe50f5098a9fc51604091bc89098",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-apache-circular-fifo-20261018/donor/CircularFifoQueue.java.txt",
+      "path": "make/m3/collections/qualification/owned-apache-circular-fifo-20261018/donor/CircularFifoQueue.java.txt",
       "bytes": 12350,
       "sha256": "24c19ec17f1de5dcdbaf1f915d928da1dab3ee5ca91ed813dd89fb0cb15f1af9",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/qualification/owned-apache-circular-fifo-20261018/donor/BoundedCollection.java.txt",
+      "path": "make/m3/collections/qualification/owned-apache-circular-fifo-20261018/donor/BoundedCollection.java.txt",
       "bytes": 1703,
       "sha256": "6181998960430cdff1578bd90691b5aecc7058c488f6b1db98d1692e7f12a8b3",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-apache-circular-fifo-20261018/engine-src/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "path": "make/m3/collections/recipe/owned-apache-circular-fifo-20261018/engine-src/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "bytes": 13805,
       "sha256": "9dc65793cb1f4fb20866f99f4e5d0043d54734aa03cf0fe297c0cadbba2d1c37",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-apache-circular-fifo-20261018/FOSS_REUSE_DECISION.tsv",
+      "path": "make/m3/collections/recipe/owned-apache-circular-fifo-20261018/FOSS_REUSE_DECISION.tsv",
       "bytes": 1482,
       "sha256": "126b084bcc0dd4f8c38cdca82592863d15bf3136e2db93d3794b762acafaa209",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-apache-circular-fifo-20261018/pom.xml",
+      "path": "make/m3/collections/recipe/owned-apache-circular-fifo-20261018/pom.xml",
       "bytes": 2685,
       "sha256": "56628aca3d70348533b5604d5d85973bdaea46b3837135b80555170b344c642d",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-apache-circular-fifo-20261018/README.md",
+      "path": "make/m3/collections/recipe/owned-apache-circular-fifo-20261018/README.md",
       "bytes": 2812,
       "sha256": "6dd5f7d59bf635bcbc16ee7afe4d2eba35b704ad9707e5156b9a5233b65cedfc",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-apache-circular-fifo-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-apache-circular-fifo/engine-receipt.tsv",
+      "path": "make/m3/collections/recipe/owned-apache-circular-fifo-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-apache-circular-fifo/engine-receipt.tsv",
       "bytes": 179,
       "sha256": "42f35e73d1b645a4df4e116145f6d079ab9952adc14db5e8da1fef4f8f44fb5d",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-apache-circular-fifo-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-apache-circular-fifo/M3CircularFifoQueue.java.txt",
+      "path": "make/m3/collections/recipe/owned-apache-circular-fifo-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-apache-circular-fifo/M3CircularFifoQueue.java.txt",
       "bytes": 12743,
       "sha256": "71c4a3a325a99526f67228f6f34429b6f21b27d0bbfa8a5a3e5799442e8e9514",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-apache-circular-fifo-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-apache-circular-fifo/manifest.tsv",
+      "path": "make/m3/collections/recipe/owned-apache-circular-fifo-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-apache-circular-fifo/manifest.tsv",
       "bytes": 218,
       "sha256": "5af91afca03d5b8c567214f9e94d0ba3685a90130d42ff78cc6ee091b734c26a",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-apache-circular-fifo-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-apache-circular-fifo/source-receipt.tsv",
+      "path": "make/m3/collections/recipe/owned-apache-circular-fifo-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-apache-circular-fifo/source-receipt.tsv",
       "bytes": 188,
       "sha256": "172ffb2016f01a44f00b4b526c2b43f93d29145070a257414a5598525ba64a56",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-apache-circular-fifo-20261018/src/main/resources/META-INF/rewrite/m3-owned-apache-circular-fifo.yml",
+      "path": "make/m3/collections/recipe/owned-apache-circular-fifo-20261018/src/main/resources/META-INF/rewrite/m3-owned-apache-circular-fifo.yml",
       "bytes": 539,
       "sha256": "6470d4570676ff8efcd1e99a7dfa5d36bc09d3ac05f8604ba27f3cb7b3362354",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-apache-circular-fifo-20261018/src/test/java/jdk/internal/m3/rewrite/M3OwnedApacheCircularFifoQueueRecipeTest.java",
+      "path": "make/m3/collections/recipe/owned-apache-circular-fifo-20261018/src/test/java/jdk/internal/m3/rewrite/M3OwnedApacheCircularFifoQueueRecipeTest.java",
       "bytes": 13503,
       "sha256": "96f402f96eececb15a564072b9b11fad747b73af25a46fcaf421641098434440",
       "scope": "new packet input"

@@ -5,7 +5,7 @@ on:
     paths:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalDimensions.java'
       - 'test/jdk/jdk/m3/collections/M3SignalDimensions*.java'
-      - 'm3/collections/qualification/compound-signals-20261018/**'
+      - 'make/m3/collections/qualification/compound-signals-20261018/**'
       - '.github/workflows/m3-compound-signals-20261018.yml'
   workflow_dispatch:
 
@@ -30,7 +30,7 @@ jobs:
           java-version: '21'
       - name: Exact source seal and Java 21/JNI parity
         shell: bash
-        run: bash m3/collections/qualification/compound-signals-20261018/verify.sh
+        run: bash make/m3/collections/qualification/compound-signals-20261018/verify.sh
 
   module-junit:
     runs-on: ubuntu-24.04

@@ -7,9 +7,9 @@ from pathlib import Path, PurePosixPath
 import sys
 
 SCHEMA = "M3JDK21_RECIPE_OWNERSHIP_V1"
-ROOT = Path(__file__).resolve().parents[2]
-SOURCE_PATH = PurePosixPath("m3/tooling/migration-recipes/src/main/java")
-LEDGER = ROOT / "m3/docs/m3-recipe-ownership-classification.tsv"
+ROOT = Path(__file__).resolve().parents[3]
+SOURCE_PATH = PurePosixPath("make/m3/tooling/migration-recipes/src/main/java")
+LEDGER = ROOT / "doc/m3/m3-recipe-ownership-classification.tsv"
 
 # These are source-policy identities in the existing receiving ledger, not
 # target Java names. Renaming them severs the canonical ownership record.

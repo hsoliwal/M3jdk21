@@ -2,17 +2,17 @@
   "schema": "M3_APACHE_MULTIVALUE_SOURCE_SUCCESSOR_V5",
   "scope": "Read-only effective-source successor; replay unchanged v4 source admission on an isolated exact v4 snapshot, then verify current Java/C owner changes.",
   "predecessor": {
-    "path": "m3/collections/qualification/owned-apache-multivalue-20261024/SDK_SOURCE_BINDING_SUCCESSOR_V4.json",
+    "path": "make/m3/collections/qualification/owned-apache-multivalue-20261024/SDK_SOURCE_BINDING_SUCCESSOR_V4.json",
     "bytes": 8204,
     "sha256": "505f340763e19d7ddb2e05cc8f14f1b3e4b2a8bf56cd88033ded08b91da82038",
     "gitBlob": "f9527b590a06c0a3e045c87f09761ecaf0412f41"
   },
   "originalVerifier": {
-    "path": "m3/collections/qualification/owned-apache-multivalue-20261024/verify_source_binding_successor_v4.py",
+    "path": "make/m3/collections/qualification/owned-apache-multivalue-20261024/verify_source_binding_successor_v4.py",
     "gitBlob": "49ff3794a24dd25fd5ab9e690cb5e8d53f0e851c"
   },
   "originalProbe": {
-    "path": "m3/collections/qualification/owned-apache-multivalue-20261024/probe_source_binding_successor_v4.py",
+    "path": "make/m3/collections/qualification/owned-apache-multivalue-20261024/probe_source_binding_successor_v4.py",
     "gitBlob": "dbad467d3dd1cf6af42d65b60cff2d2123291aca"
   },
   "successors": [

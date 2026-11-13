@@ -2,7 +2,7 @@
   "schema": "M3JDK21_SOURCE_EXACT_POSTIMAGE_RECEIPT_V1",
   "product_repository": "hsoliwal/M3jdk21",
   "product_base_commit": "b98bf8c065818aac3447be165909e2a013325d9a",
-  "source_path": "m3/collections/qualification/full-java-jni-20261018/verify.py",
+  "source_path": "make/m3/collections/qualification/full-java-jni-20261018/verify.py",
   "before_git_blob_sha1": "79ebcde5d348e58b5a71f1bbaa876cd8601cee31",
   "before_sha256": "ad7751a1a930a31110a771388cf5446acf544b622abc80ad0abf4bbdc4077119",
   "after_git_blob_sha1": "7c2bfa47b925a93e48cb444d95364779c1ad0266",

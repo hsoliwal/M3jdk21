@@ -8,7 +8,7 @@ FILE	synexia-algo/src/main/java/com/synexia/algorithms/core/ProgressAlgorithm.ja
 DONOR_ONLY	synexia-algo/src/main/java/com/synexia/algorithms/core/ProgressMonitors.java	-	DRIVER ALREADY relocated as M3ProgressChecks by catalogue-kernels-20261107 (TYPE row; made public by this leaf through apply.py); the driver calls its nonNull / checkCanceled on both sides (blob 8507c2772316)
 DONOR_ONLY	synexia-algo/src/main/java/com/synexia/algorithms/core/IAlgorithm.java	-	OMIT: the older compatibility contract (slf4j logging, timed/logged/retry/when/map over child slices); named by the dropped asAlgorithm, compiled on the donor side only
 DONOR_ONLY	synexia-algo/src/main/java/com/synexia/algorithms/core/AlgorithmException.java	-	OMIT: RuntimeException subclass that logs through slf4j in its constructors; closure of IAlgorithm.retry
-OWNED	synexia-job/src/main/java/com/synexia/job/IProgressMonitor.java	src/main/java/jdk/m3/algorithm/M3ProgressMonitor.java	ALREADY: owner m3/qualification/progress-monitor-unify-20261106 (adapter over jdk.m3.collections.M3ProgressMonitor); blob 62e5ceea645b
+OWNED	synexia-job/src/main/java/com/synexia/job/IProgressMonitor.java	src/main/java/jdk/m3/algorithm/M3ProgressMonitor.java	ALREADY: owner make/m3/qualification/progress-monitor-unify-20261106 (adapter over jdk.m3.collections.M3ProgressMonitor); blob 62e5ceea645b
 OWNED	synexia-job/src/main/java/com/synexia/job/ProgressSnapshot.java	-	donor progress closure (owner jdk.m3.collections.M3ProgressState)
 OWNED	synexia-job/src/main/java/com/synexia/job/ChildProgressMonitor.java	-	donor progress closure (owner jdk.m3.collections.M3ChildProgressMonitor)
 OWNED	synexia-job/src/main/java/com/synexia/job/utils/ProgressCalculationUtils.java	-	donor progress closure

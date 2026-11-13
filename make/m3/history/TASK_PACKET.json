@@ -12,7 +12,7 @@
   },
   "targets": {
     "files": [
-      "m3/history/**",
+      "make/m3/history/**",
       ".github/workflows/m3-history-audit.yml"
     ]
   },

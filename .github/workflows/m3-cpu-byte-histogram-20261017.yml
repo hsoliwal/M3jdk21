@@ -6,9 +6,9 @@ on:
   pull_request:
     paths:
       - 'm3/ports/capability-runtime/**'
-      - 'm3/tooling/jmod-recipes/CPU_TOOL_CATEGORY_MATRIX_20261017.tsv'
-      - 'm3/tooling/jmod-recipes/CPU_TOOL_HISTOGRAM_ADMISSION_20261017.md'
-      - 'm3/docs/name-mapping.d/m3-cpu-byte-histogram-20261017.json'
+      - 'make/m3/tooling/jmod-recipes/CPU_TOOL_CATEGORY_MATRIX_20261017.tsv'
+      - 'make/m3/tooling/jmod-recipes/CPU_TOOL_HISTOGRAM_ADMISSION_20261017.md'
+      - 'doc/m3/name-mapping.d/m3-cpu-byte-histogram-20261017.json'
       - '.github/workflows/m3-cpu-byte-histogram-20261017.yml'
 
 permissions:

@@ -108,7 +108,7 @@
       "wrapper-junit-v2",
       "invariant-policy"
     ],
-    "pass_manifest_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/SDK_QUALIFIED_PASSES.tsv",
+    "pass_manifest_path": "make/m3/collections/algorithm-catalog/wrapper-convergence-20261018/SDK_QUALIFIED_PASSES.tsv",
     "pass_manifest_sha256": "8367e21361918e8837be808d8130c1828d4cf10d89cc3f4c6b4df672d15a43bb"
   },
   "public_host_portability": {
@@ -156,16 +156,16 @@
     "override_requirement": "Resolve owner_root against the repository root to an absolute path and pass -Drecipe.owner.root=<absolute-path>.",
     "new_engine_source_copies": 0,
     "new_production_runtime_dependency": false,
-    "engine_sources_manifest": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/ENGINE_SOURCES.tsv",
+    "engine_sources_manifest": "make/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/ENGINE_SOURCES.tsv",
     "engine_sources_manifest_sha256": "61e6229847829b8351a0ae9b685ce7e00403c504d976a31ff029068a3ab5c9c5"
   },
   "copy_custody": {
     "catalogue_files": 31,
-    "canonical_copy_manifest": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/CANONICAL_COPY_MANIFEST.tsv",
+    "canonical_copy_manifest": "make/m3/collections/algorithm-catalog/wrapper-convergence-20261018/CANONICAL_COPY_MANIFEST.tsv",
     "canonical_copy_manifest_sha256": "64b2c9bd37f0c98a5cfa4314dc4a372e4b0de61a0efafd8adcf4aa6315af22b4",
     "canonical_copies_checksum_sha256": "80e4ddff41be3ce01fd5490f52da5754b7e9a37bc2b6b68b8caa64fd3e9e292f",
     "recipe_source_files": 61,
-    "recipe_copy_manifest": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/RECIPE_CUSTODY_COPY_MANIFEST.tsv",
+    "recipe_copy_manifest": "make/m3/collections/algorithm-catalog/wrapper-convergence-20261018/RECIPE_CUSTODY_COPY_MANIFEST.tsv",
     "recipe_copy_manifest_sha256": "da8c8f9a3031a8ad98d5e087c28148f4a8c6b38a52103c6f2920603495c7d245",
     "original_owner_catalogue_sha256": "644f170f3857f8391cd0554c82e06b0980c6e600f115c22843310703e0029022",
     "integration_owner_census_sha256": "caaf1684b3e6db0d8e1304672a2fd30dce260f145b1eb8da1e25d247a85ba7a9",
@@ -178,9 +178,9 @@
     "Ordinary read-only iterator predicate work.",
     "Backing fail-fast behavior of the ordinary read-only iterator."
   ],
-  "current_acceptance_path": "m3/collections/qualification/wrapper-convergence-20261018/ACCEPTANCE.json",
-  "public_evidence_root": "m3/collections/qualification/wrapper-convergence-20261018/evidence",
-  "attribution_path": "m3/collections/qualification/wrapper-convergence-20261018/THIRD_PARTY_NOTICES.md",
+  "current_acceptance_path": "make/m3/collections/qualification/wrapper-convergence-20261018/ACCEPTANCE.json",
+  "public_evidence_root": "make/m3/collections/qualification/wrapper-convergence-20261018/evidence",
+  "attribution_path": "make/m3/collections/qualification/wrapper-convergence-20261018/THIRD_PARTY_NOTICES.md",
   "publication_exclusions": [
     "Ignored recipe-host/target outputs",
     "Toolchain archives and binaries",

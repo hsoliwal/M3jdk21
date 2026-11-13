@@ -14,7 +14,7 @@ The existing validateClass leaf remains cohesive. Pattern/IOP: ArchiveAdapter / 
 
 ## Existing work reused
 
-The inspector postimage and two behavioral test sources are the exact saved ClassVersion candidate. The previous unlanded task-specific snapshot-engine proposal is not installed. Instead `com.m3.rewrite.packs.ClassVer` configures the existing M3Jdk21HashPinnedSnapshotRecipe from PR95. Run its manifest with `m3/tooling/module-packs/kernel` as source root. Three Java targets: inspector, shared checks, JUnit wrapper.
+The inspector postimage and two behavioral test sources are the exact saved ClassVersion candidate. The previous unlanded task-specific snapshot-engine proposal is not installed. Instead `com.m3.rewrite.packs.ClassVer` configures the existing M3Jdk21HashPinnedSnapshotRecipe from PR95. Run its manifest with `make/m3/tooling/module-packs/kernel` as source root. Three Java targets: inspector, shared checks, JUnit wrapper.
 
 The shared corpus tests actual Java21 class-loader acceptance and real JAR/JMOD inspection, legacy/modern/preview/out-of-range headers, multi-release effective-entry selection, read-only inputs, and a real jmod-produced control archive. Standalone checks are not described as JUnit/JaCoCo execution.
 

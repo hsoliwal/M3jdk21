@@ -13,7 +13,7 @@ Every incoming path has been inventoried. The existing `InflaterOutputStream.jav
 |---|---|---|
 | `src/java.base/share/classes/java/util/zip/InflaterOutputStream.java` | `7b08d5b45385caaecec8d14ceee6c3eb3ec3a4f9` | `19a56deb5977c64e16d3e8593fb74dc8444e90eb` |
 | `test/jdk/java/util/zip/InflaterOutputStream/Jbs8369181Oracle.java` | ABSENT | `0aa7b0d58ac0f8dfb4aabec750b313def068d09b` |
-| `m3/backports/qualification/JDK-8369181_INFLATER_FINISH_RECEIPT.md` | ABSENT | `84009aa9d0c0176b3684a50799458073ab84514a` |
+| `make/m3/backports/qualification/JDK-8369181_INFLATER_FINISH_RECEIPT.md` | ABSENT | `84009aa9d0c0176b3684a50799458073ab84514a` |
 
 Original Java owner is 9,043 bytes; reviewed donor postimage is 9,329 bytes. This explicitly intended, scoped behavior correction preserves all public Java signatures/JNI exports. It records a private `defaultInflaterClosed` state after owned `finish()` and throws `IOException("Inflater closed")` on invalid subsequent writes, preserving caller-owned Inflater lifetime. No other JDK API or native source may be changed during this source fold.
 

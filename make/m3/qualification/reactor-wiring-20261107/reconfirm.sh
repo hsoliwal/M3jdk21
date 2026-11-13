@@ -6,7 +6,7 @@
 # cite the CPU evidence (ls of the local repos, grep of the verify script). No pom change, no commit here.
 set -u
 M=$1; REASON=$2
-W=${W:-/s/m3-scratch/eb-conv/wt-unhold}; Q=$W/m3/qualification/reactor-wiring-20261107
+W=${W:-/s/m3-scratch/eb-conv/wt-unhold}; Q=$W/make/m3/qualification/reactor-wiring-20261107
 SLUG=$(echo "$M" | tr '/' '-')
 LAST=$(awk -F'\t' -v m="$M" '$2==m' "$Q/DECISION.tsv" | tail -1)
 [ -n "$LAST" ] || { echo "RECONFIRM_ABORT $M no row"; exit 8; }

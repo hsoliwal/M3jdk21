@@ -13,7 +13,7 @@ found no other live reference, and no open PR touches either module.
 
 | | Before | After |
 |---|---|---|
-| m3/intern javac main/test (-Xlint:all -Werror, -h), m3/evidence/native/gate_module.sh | rc=0 / rc=0 | same |
+| m3/intern javac main/test (-Xlint:all -Werror, -h), make/m3/evidence/native/gate_module.sh | rc=0 / rc=0 | same |
 | m3/intern JUnit | 31/31 | same, per-test status identical |
 | test natives (gcc -Werror against the javac -h headers) | 2/2, each Java_ symbol declared | same |
-| consumer chain, m3/evidence/precompute/gate_ports.sh (intern from source -> precompute, regex-cursor, indexstring) | all javac rc=0; precompute 123/125 (2 aborted), regex-cursor 54/54 | same |
+| consumer chain, make/m3/evidence/precompute/gate_ports.sh (intern from source -> precompute, regex-cursor, indexstring) | all javac rc=0; precompute 123/125 (2 aborted), regex-cursor 54/54 | same |

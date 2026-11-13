@@ -1,6 +1,6 @@
 {
   "task_packet": "active",
-  "source_doc": "m3/tooling/migration-recipes/tasks/gate/DESIGN.md",
+  "source_doc": "make/m3/tooling/migration-recipes/tasks/gate/DESIGN.md",
   "invariant_id": "M3_RECIPE_GATE_CLOSURE",
   "base_commit": "2aa6c8dcc7bc23e482c2a12e3b49e4de43fb2695",
   "run": {
@@ -12,12 +12,12 @@
   },
   "targets": {
     "modules": [
-      "m3/tooling/migration-recipes"
+      "make/m3/tooling/migration-recipes"
     ],
     "files": [
-      "m3/tooling/migration-recipes/src/test/**",
+      "make/m3/tooling/migration-recipes/src/test/**",
       "m3/tooling/migration-recipes/src/main/resources/**",
-      "m3/tooling/migration-recipes/tasks/gate/**"
+      "make/m3/tooling/migration-recipes/tasks/gate/**"
     ]
   },
   "invariant_locks": {

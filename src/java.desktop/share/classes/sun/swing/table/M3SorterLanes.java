@@ -41,7 +41,7 @@ import sun.security.action.GetBooleanAction;
  * <p>
  * The sorter binds a {@link Host} that gives the lanes its comparison, filter, keys, flags and
  * event; the public {@code sort()} runs through the host so that an override still applies. Design
- * and proof: m3/docs/swing-viewport/DESIGN.md section 14.
+ * and proof: doc/m3/swing-viewport/DESIGN.md section 14.
  */
 //FLLDCIM: M3 swing-viewport leaf 7 - DefaultRowSorter order as int lanes, no Row objects
 public final class M3SorterLanes {

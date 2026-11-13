@@ -58,7 +58,7 @@ def verify(root: Path, manifest: Path) -> int:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[2])
+    parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[3])
     parser.add_argument("--manifest", type=Path, default=MANIFEST)
     args = parser.parse_args()
     try:

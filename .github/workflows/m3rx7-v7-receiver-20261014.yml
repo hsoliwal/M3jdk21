@@ -5,8 +5,8 @@ on:
     paths:
       - 'src/java.base/share/classes/jdk/internal/mindex/M3RX7.java'
       - 'test/jdk/java/util/regex/M3RX7Test.java'
-      - 'm3/docs/name-mapping.d/m3-regex-v7-dfa.json'
-      - 'm3/runtime-integration/check-m3rx7-v7-receiver.sh'
+      - 'doc/m3/name-mapping.d/m3-regex-v7-dfa.json'
+      - 'make/m3/runtime-integration/check-m3rx7-v7-receiver.sh'
       - '.github/workflows/m3rx7-v7-receiver-20261014.yml'
   workflow_dispatch:
 permissions:
@@ -26,4 +26,4 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Exact Synexia recipe receiver bytes and executable Java21 oracle
-        run: sh m3/runtime-integration/check-m3rx7-v7-receiver.sh
+        run: sh make/m3/runtime-integration/check-m3rx7-v7-receiver.sh

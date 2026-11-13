@@ -40,13 +40,13 @@
       "git_blob_sha1": "71e8337fcffbd9ce9935ce92157988c21426935d"
     },
     {
-      "path": "m3/docs/name-mapping.json",
+      "path": "doc/m3/name-mapping.json",
       "before_sha256": "406cefb62b79fc677972e9d76a77342c3999b41ef6594f9faf5bd06795235dc3",
       "after_sha256": "0551c4d6f78269484247d2a434ff8e7b70b5f432a51bea494e6d8f9d3bf54c9d",
       "git_blob_sha1": "78318cbdff9ebe88f8a76361a2db340f58aa4589"
     },
     {
-      "path": "m3/tooling/name-contract/name-plan.json",
+      "path": "make/m3/tooling/name-contract/name-plan.json",
       "before_sha256": "3f51a4975e9f423196a4ee5c715d4edc2c2e937c34d9d5a1e3d2276dcd47752e",
       "after_sha256": "c5c4176275518116061cfc26fc29be4d48cca57613badf9792e1555efd39b05b",
       "git_blob_sha1": "d7fdec0136237edffb6f558db92ba46e85b94c6c"
