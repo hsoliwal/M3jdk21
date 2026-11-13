@@ -36,7 +36,7 @@
     "noExecutableRecipeTransfer": true
   },
   "qualification": {
-    "canonicalSourceRecipe": "PASS_LOCAL_FROZEN_PROFILE_AS_REPORTED_IN_SYNYXIA_PR_17234",
+    "canonicalSourceRecipe": "PASS_LOCAL_FROZEN_PROFILE_REPORTED_BY_SYNXIA_PR_17234",
     "canonicalStrictJava21": "PASS_REPORTED",
     "canonicalOpenRewriteJUnit": 8,
     "canonicalCpuChecks": 26,
@@ -44,7 +44,7 @@
     "canonicalActualJniRankChecks": 237179,
     "canonicalJavaFallbackChecks": 172254,
     "targetPreimage": "EXACT_GITHUB_BLOB",
-    "targetPostimage": "PENDING_GITHUB_READBACK",
+    "targetPostimage": "EXACT_GITHUB_READBACK",
     "targetPythonCompile": "NOT_RUN",
     "targetCollectionsCI": "NOT_RUN",
     "targetInstalledImage": "NOT_RUN",
