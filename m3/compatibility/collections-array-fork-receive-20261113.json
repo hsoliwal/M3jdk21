@@ -1,0 +1,281 @@
+{
+  "schema": "M3_COLLECTIONS_ARRAY_FORK_RECEIVE_V1",
+  "status": "QUALIFIED_BOUNDED_COMPONENT_RECEIVE",
+  "task_date": "2026-11-13",
+  "product": {
+    "repository": "hsoliwal/M3jdk21",
+    "baseline_revision": "0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb"
+  },
+  "canonical": {
+    "repository": "hsoliwal/com.synexia",
+    "revision": "ce1639cfdc580af168be3ba32c047c6825432d02",
+    "recipe_source_pin": "2cbfb107709e0901d25ed56636ec226bca920343",
+    "recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+    "dataset": "fork-array-receive-20261113",
+    "dataset_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/fork-array-receive-20261113"
+  },
+  "proofs": {
+    "sdk_execution": {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/authoring/collections-array-fork-receive-20261113/execution/maven-verify.log",
+      "sha256": "84d27a136a9dfdba4819ecc32640c9766ca61f785aa7f9f0d404fe3a78e37a52"
+    },
+    "sdk_inputs": {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/authoring/collections-array-fork-receive-20261113/execution/SDK_INPUTS.tsv",
+      "sha256": "66a2b4917c3e145073f7c50d45973cc02dd9d1b464d8d6154b8dc221703ae2e5"
+    },
+    "sdk_results": {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/authoring/collections-array-fork-receive-20261113/execution/SDK_RESULTS.tsv",
+      "sha256": "c8c731974d82248cd25adfde8da07cc9389efeb10c87df35f3770120a726133b"
+    },
+    "reception": {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/authoring/collections-array-fork-receive-20261113/execution/RECEPTION.json",
+      "sha256": "0726186741feb01c22fbe9c64efe7bcefca81d4789a4bd86fc40e6cd14f7ec45"
+    },
+    "target_clean_build": {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/authoring/collections-array-fork-receive-20261113/target-proof/maven-summary.json",
+      "sha256": "6de6f8c1b869a94cfd49fd559c14ddcdf619ede47b7d3885712ea463d74e3606"
+    },
+    "received_runtime": {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/authoring/collections-array-fork-receive-20261113/target-proof/results/20261113T032645Z/SUMMARY.json",
+      "sha256": "51853ef5a1b7795d48cf048dd8e35becd47dbc7cf16db581abf256c6b3838a19"
+    },
+    "provider": {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/authoring/collections-array-fork-receive-20261113/provider-proof/PROVIDER_QUALIFICATION.json",
+      "sha256": "7099e2480b9ec0a3cdb83a1f98784118106a6809ac159f54f36e3b2888eb2f1d"
+    },
+    "naming": {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/authoring/collections-array-fork-receive-20261113/execution/target-naming-suite.log",
+      "sha256": "8ffbdbe317dbe3f6ec5f802ad237cea98c52ef26c411a3a33b59bc8c18c76537"
+    }
+  },
+  "source_and_test_outputs": [
+    {
+      "path": ".github/workflows/m3jdk21-name-contract.yml",
+      "before_sha256": "a96282c5f53a1ff8756a25ba049247ff3baa289c5f7afc0e1ec08a4c6521f97d",
+      "after_sha256": "f953fd1b2f55e8eadbb86b99c32aa2101b2b8915bf68f8f4c7e1ee070fc5daa2",
+      "role": "naming_or_workflow_metadata"
+    },
+    {
+      "path": "m3/collections/implementations/commons-collections-4.5.0/src/main/java/jdk/m3/collections/apache/iterators/PermutationIterator.java",
+      "before_sha256": "2d3f1a09beecc89860f45cca5b3f1ae2173969aa34f33ddad5b555fce1ec1ac9",
+      "after_sha256": "10a8a201b38aa8c15a9564c682033b319847acd8cc01854af68024dd288bfa96",
+      "role": "provider_source"
+    },
+    {
+      "path": "m3/collections/implementations/commons-collections-4.5.0/src/main/java/jdk/m3/collections/apache/queue/CircularFifoQueue.java",
+      "before_sha256": "3f049edade65af154184df0fad68966e276f036e77325b65d436c02f07901cd8",
+      "after_sha256": "24117940dea109bd9ce9421214ab06a5085ce36257c724fe172d9a123ecabb9e",
+      "role": "provider_source"
+    },
+    {
+      "path": "m3/collections/implementations/commons-collections-4.5.0/src/test/java/jdk/m3/collections/apache/iterators/PermutationIteratorArrayCapacityTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "fb6093a708141eb5f332274f548f5481d62edf61802d4d021582909307a92150",
+      "role": "product_test"
+    },
+    {
+      "path": "m3/collections/implementations/commons-collections-4.5.0/src/test/java/jdk/m3/collections/apache/queue/CircularFifoQueueTwoSpanIndexTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "efe60c776564d0a3ef285a0a8c79b6cc0a9a15cf0852533ac05ab22d9aa32b82",
+      "role": "product_test"
+    },
+    {
+      "path": "m3/collections/implementations/spring-core-6.2.0-collections/src/main/java/jdk/m3/collections/spring/MultiToSingleValueMapAdapter.java",
+      "before_sha256": "2c97bcd302305b3a4ef16d7ad05131324443900c4017c63d11ab1f06842864e5",
+      "after_sha256": "04871d44f866bfedc7a2952d143988551e4a0eb263862bda13d12512319ef0de",
+      "role": "provider_source"
+    },
+    {
+      "path": "m3/collections/implementations/spring-core-6.2.0-collections/src/main/java/jdk/m3/collections/spring/SingleToMultiValueMapAdapter.java",
+      "before_sha256": "1f38e26ff89c7e70cb48e82b7a44662984e98c0360de36b7ea36dee9ba92b2f9",
+      "after_sha256": "d5e63316ac7fef812a6cb2778721fa2de0772386c9d051ba27dfe02c446bae5f",
+      "role": "provider_source"
+    },
+    {
+      "path": "m3/collections/implementations/spring-core-6.2.0-collections/src/test/java/jdk/m3/collections/spring/SpringEntryProjectionFreeTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "3f03b529e4c6f1d6dfb0dde86885b90134c9f0341424a66d25d198863a3e2d67",
+      "role": "product_test"
+    },
+    {
+      "path": "m3/docs/name-mapping.json",
+      "before_sha256": "8ffff346df0034fc64636f3a835bee40a2da74e194c844dde4cabce0e4380217",
+      "after_sha256": "e6f437e00c290bdd443d125878feb0abd03406a7bfb2476ece52a52d9b317481",
+      "role": "naming_or_workflow_metadata"
+    },
+    {
+      "path": "m3/tooling/name-contract/name-plan.json",
+      "before_sha256": "53d67d5711c96c0a66dc34c68a21c43e05927debe66e941406a204ab89195101",
+      "after_sha256": "0b6131a4f3421cba21162e293b72748e61bbd4d8e89633bffb94d09f4882542e",
+      "role": "naming_or_workflow_metadata"
+    },
+    {
+      "path": "src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ListMultiValueMap.java",
+      "before_sha256": "64c9cd2d9891938f49b02055232b0b359ba7406c99668a73a4f941a5c178745f",
+      "after_sha256": "0617602e785114fbfebb1496df3631b2f140f97239cf2d17aec6f8cfee0651e9",
+      "role": "active_module_source"
+    },
+    {
+      "path": "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongOrderStatisticMultiset.java",
+      "before_sha256": "0ce425aed59b6ecc77b25a12f222e349f70023693ceab0e8059095ab5eaf800b",
+      "after_sha256": "c7584931491a5dd88ada451b3fe628070574cb199cbb5cfe7eba82ea9cd8499c",
+      "role": "active_module_source"
+    },
+    {
+      "path": "test/jdk/jdk/internal/m3/collections/ListMultiValueMapScalarContainsValueContract.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "dc9038a7ff67f1dd02b688e183e65109274d111bec41eccfcab390f960cf625f",
+      "role": "product_test"
+    },
+    {
+      "path": "test/jdk/jdk/internal/m3/collections/ListMultiValueMapScalarContainsValueTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "7ac31ddf7014f09f7a7e64446be5ac3f05625a26d4036f714594c089f480e134",
+      "role": "product_test"
+    },
+    {
+      "path": "test/jdk/jdk/m3/collections/GrowFailureOracle.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "1715b010eaae0db265e448b7c26d182c84cbc4b9258fe11b22cc49cdfbfc4a40",
+      "role": "product_test"
+    },
+    {
+      "path": "test/jdk/jdk/m3/collections/GrowthProbe.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "c88979dd892cbf39b3099395f537eba00e1494a3ef7335aa9c774ecbfb281029",
+      "role": "product_test"
+    },
+    {
+      "path": "test/jdk/jdk/m3/collections/LongOrderStatisticArrayGrowthJUnitTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "17344bb4124217013449771d8a116a05790fd8b3760b2940b6220a60703a1966",
+      "role": "product_test"
+    },
+    {
+      "path": "test/jdk/jdk/m3/collections/LongOrderStatisticArrayGrowthTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "27f15b2a567594633600cf5142b3bad306962f6768aaf171a515fda0027c0818",
+      "role": "product_test"
+    }
+  ],
+  "receiving": {
+    "sdk_junit_tests": 17,
+    "sdk_failures": 0,
+    "sdk_errors": 0,
+    "sdk_skipped": 0,
+    "input_sealing_tests": 23,
+    "receiver_integrity_cases": 9,
+    "outputs_applied": 18,
+    "second_receive_changes": 0,
+    "all_output_bytes_verified": true
+  },
+  "target_validation": {
+    "java": "Temurin 21.0.13+9",
+    "maven": {
+      "command": "mvn -o -f m3/collections/pom.xml clean test",
+      "tests": 2851,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 152,
+      "scope": "Actual module sources; provider mirror directories are not module source roots. Default native-dependent skips remain explicit."
+    },
+    "avl": {
+      "strict_compilation": "--release 21 -Xlint:all -Werror",
+      "growth_probe": "PASS_17th_insertion",
+      "differential_checks": 7152,
+      "oome_matrix": {
+        "cases": 16,
+        "collectors": [
+          "G1",
+          "Serial"
+        ],
+        "modes": [
+          "default",
+          "-Xint"
+        ],
+        "heaps_mib": [
+          16,
+          20,
+          24,
+          32
+        ],
+        "initial_lane_capacity": 300000,
+        "rollback_cases": 12,
+        "commit_cases": 4
+      },
+      "public_api": "UNCHANGED"
+    },
+    "native_scalar_view": {
+      "default_checks": 29,
+      "interpreter_checks": 29,
+      "baseline_interpreter_allocated_bytes": {
+        "64_mappings": 1648,
+        "4096_mappings": 98416
+      },
+      "received_allocated_bytes_both_modes": {
+        "64_mappings": 72,
+        "4096_mappings": 72
+      },
+      "measurement_scope": "Temporary allocation for these membership scans; no general throughput claim.",
+      "public_api": "UNCHANGED"
+    },
+    "existing_native_integration": {
+      "test": "NativeFiveLibrarySelfTest",
+      "checks": 1653019,
+      "status": "PASS",
+      "arrays_jar_sha256": "3cae77a2bf733409c9b2fc2f8a62d726b3000389eb0b9a5b69a962aa793ef4d6",
+      "arrays_jni_sha256": "221e904152b3ebab220f0c4e89e755f5e891c7ac365bb7cb53c70cae2fdbd67a"
+    },
+    "providers": {
+      "commons": {
+        "baseline_tests": 5,
+        "received_tests": 5,
+        "failures": 0,
+        "api_parity": "public_and_protected_unchanged",
+        "scope": "Exact FIFO/permutation source closure and selected contract tests; full provider Maven pending."
+      },
+      "spring": {
+        "real_main_sources_per_variant": 27,
+        "baseline_tests": 2,
+        "received_tests": 2,
+        "failures": 0,
+        "strict_test_compile": true,
+        "api_parity": "public_and_protected_unchanged",
+        "serial_uids_unchanged": true,
+        "null_equality_note": "The test records incumbent null asymmetry; implementation behavior is unchanged.",
+        "scope": "Whole retained provider main-source compile and selected tests; provider is outside active module roots."
+      }
+    },
+    "naming": {
+      "existing_records_preserved": 78,
+      "pending_records_added": 6,
+      "total_records": 84,
+      "queued_operations_preserved": 4,
+      "unchanged_suite_tests": 121,
+      "checker": "PASS"
+    },
+    "review": "Independent review found no remaining Critical or Important implementation issue within this receiving scope."
+  },
+  "held": [
+    {
+      "owner": "Eclipse UnifiedSet",
+      "source_received": false,
+      "test_received": false,
+      "target_sha256": "0db3b5beab1c4f3e13a2d2d69c17e9b3e6f726148278b30947e8f90cd209a081",
+      "reason": "Exact source closure cannot compile: generator namespace mismatch and primitiveHashSet template failure."
+    },
+    {
+      "owner": "Guava HashBiMap flooding fallback",
+      "source_received": false,
+      "reason": "The donor fallback retains HashMap nodes and boxed indexes; an array-native collision design and contract proof remain required."
+    }
+  ],
+  "pending": [
+    "Full source-built installed M3JDK21 and jtreg/platform qualification.",
+    "Live-module absorption of the four provider-source refinements.",
+    "Full native provider Maven/reactor builds and Eclipse source generation.",
+    "Broad throughput, retained-heap, process-memory and native-memory comparison.",
+    "Other collection forks, frozen collection contracts and Swift ownership/persistence."
+  ],
+  "custody": "Public result-only source/test/build outputs and passive provenance; executable recipe, fixtures and authoring remain in canonical Synexia."
+}

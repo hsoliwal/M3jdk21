@@ -12,6 +12,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Modified 2026 by Hitesh Soliwal and contributors: preserve backing entry-set
+ * caching while removing temporary entry projections from membership and
+ * equality scans.
  */
 
 package jdk.m3.collections.spring;
@@ -52,6 +56,10 @@ final class MultiToSingleValueMapAdapter<K, V> implements Map<K, V>, Serializabl
 	@Nullable
 	private transient Set<Entry<K, V>> entries;
 
+	/** Reuse the backing set captured by the caller-visible entry projection. */
+	@Nullable
+	private transient Set<Entry<K, List<V>>> backingEntries;
+
 
 	/**
 	 * Wrap the given target {@link MultiValueMap} as a {@link Map} adapter.
@@ -80,21 +88,13 @@ final class MultiToSingleValueMapAdapter<K, V> implements Map<K, V>, Serializabl
 
 	@Override
 	public boolean containsValue(@Nullable Object value) {
-		Iterator<Entry<K, V>> i = entrySet().iterator();
-		if (value == null) {
-			while (i.hasNext()) {
-				Entry<K, V> e = i.next();
-				if (e.getValue() == null) {
-					return true;
-				}
-			}
-		}
-		else {
-			while (i.hasNext()) {
-				Entry<K, V> e = i.next();
-				if (value.equals(e.getValue())) {
-					return true;
-				}
+		Iterator<Entry<K, List<V>>> iterator = backingEntrySet().iterator();
+		while (iterator.hasNext()) {
+			Entry<K, List<V>> entry = iterator.next();
+			entry.getKey(); // Preserve key-before-value callback behavior.
+			V candidate = entry.getValue().get(0);
+			if (value == null ? candidate == null : value.equals(candidate)) {
+				return true;
 			}
 		}
 		return false;
@@ -172,6 +172,7 @@ final class MultiToSingleValueMapAdapter<K, V> implements Map<K, V>, Serializabl
 		Set<Entry<K, V>> entries = this.entries;
 		if (entries == null) {
 			Set<Entry<K, List<V>>> targetEntries = this.targetMap.entrySet();
+			this.backingEntries = targetEntries;
 			entries = new AbstractSet<>() {
 				@Override
 				public Iterator<Entry<K, V>> iterator() {
@@ -198,6 +199,16 @@ final class MultiToSingleValueMapAdapter<K, V> implements Map<K, V>, Serializabl
 			this.entries = entries;
 		}
 		return entries;
+	}
+
+	/** Accesses the same backed set as the cached public entry-set view. */
+	private Set<Entry<K, List<V>>> backingEntrySet() {
+		if (this.entries == null) {
+			entrySet();
+		}
+		Set<Entry<K, List<V>>> source = this.backingEntries;
+		Assert.state(source != null, "Entry-set source was not initialized");
+		return source;
 	}
 
 	@Override
@@ -233,9 +244,9 @@ final class MultiToSingleValueMapAdapter<K, V> implements Map<K, V>, Serializabl
 		}
 		if (other instanceof Map<?,?> otherMap && size() == otherMap.size()) {
 			try {
-				for (Entry<K, V> e : entrySet()) {
+				for (Entry<K, List<V>> e : backingEntrySet()) {
 					K key = e.getKey();
-					V value = e.getValue();
+					V value = e.getValue().get(0);
 					if (value == null) {
 						if (otherMap.get(key) != null || !otherMap.containsKey(key)) {
 							return false;

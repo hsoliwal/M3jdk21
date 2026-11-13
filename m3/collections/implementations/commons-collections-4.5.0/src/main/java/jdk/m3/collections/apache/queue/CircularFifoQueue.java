@@ -199,7 +199,11 @@ public class CircularFifoQueue<E> extends AbstractCollection<E>
                                   Integer.valueOf(index), Integer.valueOf(sz)));
         }
 
-        final int idx = (start + index) % maxElements;
+        // Normal queue positions wrap at most once; size() is overridable, so
+        // a subclass may expose larger indices and need a cold multi-wrap path.
+        final int untilWrap = maxElements - start;
+        final int wrapped = index < untilWrap ? start + index : index - untilWrap;
+        final int idx = wrapped < maxElements ? wrapped : wrapped % maxElements;
         return elements[idx];
     }
 
