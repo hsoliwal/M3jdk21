@@ -396,9 +396,12 @@ public final class SharedLexiconCatalog {
             SourceMapping mapping = identityMapping(sourceId, recordId);
             if (mapping == null || !"dictlang.si-units".equals(mapping.sourceId())) return Optional.empty();
             imageAt(mapping.coordinate().shardId());
-            M3PrecomputePayload payload = payloads.computeIfAbsent(
-                    new SourceIdentity(sourceId, recordId),
-                    ignored -> M3PrecomputePayload.parse(mapping.precomputePayload()));
+            SourceIdentity identity = new SourceIdentity(sourceId, recordId);
+            M3PrecomputePayload payload = payloads.get(identity);
+            if (payload == null) {
+                payload = payloads.computeIfAbsent(identity,
+                        ignored -> M3PrecomputePayload.parse(mapping.precomputePayload()));
+            }
             return Optional.of(new M3LexiconPrecompute.SiUnitPrecompute(
                     payload.requireInt("si_decimal_exponent"),
                     payload.requireLong("si_dimension_packed"),
