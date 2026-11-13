@@ -1,0 +1,52 @@
+{
+  "schema": "m3.receiver-postimage-reference/v1",
+  "status": "DRAFT_UNADMITTED",
+  "repository": "hsoliwal/M3jdk21",
+  "parent": "abe63c8afbf49ef9941e29e5a7b6cb9ed656d2b7",
+  "canonical": {
+    "repository": "hsoliwal/com.synexia",
+    "PR": 17230,
+    "head": "42c4f03850a3643eb6cbfab9903bd63b55b9e979",
+    "path": "synexia-openrewrite-recipes/recipe-crates/array-allocation-typed-coverage-20261112",
+    "GAV": "com.synexia.verification:m3-array-allocation-typed-coverage-recipe:1.0.0",
+    "engine": "M3HashPinnedJavaSnapshotRecipe",
+    "crateId": "m3-array-allocation-typed-coverage-20261112"
+  },
+  "postimages": [
+    {
+      "path": "test/jdk/jdk/m3/arrays/ArrayAllocationCoverageTest.java",
+      "beforeGitBlob": "e7236122f7aef81991557ec7f652d3b8135f8ab6",
+      "gitBlob": "2ac15ee47c35bb51255ad3e37249cf9a82d7a91b",
+      "sha256": "3e41dc6a4d70429aaf53a1d4ea0f346c5bf9a8bdab274c530da3da9931e8f54a"
+    }
+  ],
+  "proof": {
+    "recipeJUnit": 9,
+    "guardCompilerJUnitExecutions": 32,
+    "guardFixtures": 16,
+    "Maven": "PASS_REAL_OFFLINE_SDK3_9_14",
+    "artifactCacheCopies": 0,
+    "freshReplayUnchangedInputs": 21,
+    "WindowsRealJNIJUnit": 36,
+    "XcheckJNI": true,
+    "nativeRequired": true,
+    "skipped": 0,
+    "jniWarnings": 0,
+    "productionInterfacesChanged": false
+  },
+  "scope": "One existing allocation coverage test owner; typed API signatures and explicit runnable selector checks. No product storage/API/JNI/native implementation change.",
+  "holds": {
+    "fullLinuxCollections": "PREDECESSOR_RUN43249349029_FAILED_JAVA_MODE_3_OF2937",
+    "installedModule": "PREDECESSOR_SOURCE_DRIFT",
+    "productPhasePromotion": false,
+    "globalCatalogueAdmission": "OPEN",
+    "globalPerAtomRuntimePerformance": "OPEN",
+    "repositoryComplete": false
+  },
+  "phase": {
+    "STRING": "QUALIFICATION_REQUIRED",
+    "ARRAYS": "WAITING_FOR_PREDECESSOR",
+    "COLLECTIONS": "WAITING_FOR_PREDECESSOR"
+  },
+  "custody": "Only exact executed postimage plus passive reference. Recipes, fixtures, Maven qualification and improvement memory stay exclusively in Synexia."
+}
