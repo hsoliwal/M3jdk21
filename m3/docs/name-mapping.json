@@ -13031,6 +13031,177 @@
             "fingerprint": null,
             "revision_role": "candidate",
             "visibility": "public"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.io",
+            "path": "src/jdk.m3.io/share/classes/jdk/m3/optane/PmemCheckpoint.java",
+            "symbol": "jdk.m3.optane.PmemCheckpoint",
+            "signatures": [
+              "public static int maxChunks(PmemBlockStore)",
+              "public static Info commit(PmemBlockStore, String, long, int, byte[], ChunkSource) throws IOException",
+              "public static Info inspect(PmemBlockStore, String) throws IOException",
+              "public static Info restore(PmemBlockStore, String, byte[], RestoreTarget) throws IOException",
+              "public static Info commitStream(PmemBlockStore, String, long, long, byte[], StreamWriter) throws IOException",
+              "public static <T> T readStream(PmemBlockStore, String, long, byte[], StreamReader<T>) throws IOException"
+            ],
+            "sha256": "e53559e8182e0d4de0fcb7536288a8d0b718ab0f4e3ef05081250d016df4b87c",
+            "git_blob_sha1": "798f1f2401da82d805f32f91c01b96be8f2372f9",
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "visibility": "public"
+          }
+        ],
+        "owner": "Existing M3JDK21 jdk.m3.io / jdk.m3.optane.PmemCheckpoint product owner; canonical reusable implementation and recipe custody remain hsoliwal/com.synexia.",
+        "identity": {
+          "namespace": "Existing caller-supplied checkpoint SHA-256 identity and unchanged M3PMEM_CHECKPOINT_MANIFEST_V1 / M3PMEM_CHECKPOINT_CHUNK_V1 domains.",
+          "generation": "Strictly increasing nonnegative generation for the same checkpoint identity; append-only chunk and manifest ordinals remain owned by PmemBlockStore and PmemTaskLog."
+        },
+        "contract": {
+          "differences": [
+            "Add commitStream and readStream with StreamWriter and StreamReader<T> callback interfaces; no existing signature is removed or renamed.",
+            "Bound scratch to the caller-owned transfer array plus the existing bounded manifest; publish only after successful writer completion.",
+            "Require validated complete reader consumption and reject caught stream failures, expired or foreign-thread stream use and callback mutation of the borrowed store."
+          ],
+          "compatibility_obligations": [
+            "Preserve all prior PmemCheckpoint public methods, nested Info/ChunkSource/RestoreTarget contracts and Java21 checked exceptions.",
+            "Retain M3CKPT01 version1 manifest bytes, chunk identities, persist-before-manifest publication and existing uncertain-append reopen rules.",
+            "Read earlier chunk-based checkpoints and restore stream-produced checkpoints through the earlier chunk API.",
+            "Retain the jdk.m3.io module, jdk.m3.optane package export, PmemBlockStore/PmemTaskLog owners and every existing native JNI ABI.",
+            "Keep standard Java APIs and optional-module/ordered-family admission unchanged; do not introduce a Synexia runtime dependency."
+          ],
+          "public_surface": [
+            "Existing jdk.m3.optane.PmemCheckpoint public APIs are retained.",
+            "Add public static commitStream(PmemBlockStore, String, long, long, byte[], StreamWriter) and readStream(PmemBlockStore, String, long, byte[], StreamReader<T>).",
+            "Add public nested StreamWriter.write(OutputStream) and StreamReader<T>.read(InputStream), both throwing IOException."
+          ]
+        },
+        "format": {
+          "schema": "Existing M3CKPT01 version1 checkpoint manifest and M3BLOCK1 block storage; no format version or domain change.",
+          "abi": "Additive Java API only. Existing public method signatures, module/package ownership, native methods and JNI symbols remain unchanged.",
+          "bootstrap": "Use existing jdk.m3.io owners and Java21 InputStream/OutputStream; no new module, runtime service, mapping engine or persistence log."
+        },
+        "dependencies": [
+          {
+            "id": "jdk.m3.optane.PmemBlockStore",
+            "resolution": "resolved",
+            "reason": "Reuse the existing product fixed-slot append, validation, checksum and reopen owner."
+          },
+          {
+            "id": "jdk.m3.optane.PmemTaskLog",
+            "resolution": "resolved",
+            "reason": "Reuse the existing block-store publication and recovery log without new native selectors."
+          },
+          {
+            "id": "java.base.java.io",
+            "resolution": "resolved",
+            "reason": "Use Java21 InputStream/OutputStream through existing module dependency direction."
+          },
+          {
+            "id": "m3jdk21.installed-image-and-platform-qualification",
+            "resolution": "pending",
+            "reason": "Source-built modified JDK, complete product/control-reactor and physical Optane/DAX/power-loss evidence remain separate receiving gates."
+          }
+        ],
+        "materialization": {
+          "admission": "Exact Synexia source preimage at d6c9c9fa6669377799b106a417fdec18f9501c25 and exact M3JDK21 target preimage at 0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb; revised source and target artifacts remain candidate revisions with explicit content seals.",
+          "joins": "Direct package adaptation into the existing product owner; no second payload store, hierarchy, backend or active KV owner.",
+          "outputs": "Existing PmemCheckpoint source, target-owned stream tests and passive metadata/documentation only. Canonical recipe assets remain in Synexia.",
+          "cached_facts": "No whole-checkpoint payload cache. The caller owns one bounded transfer array; the existing manifest bounds and exclusive immutable backing-store rules remain."
+        },
+        "recipe": {
+          "id": "pmem-stream-m3jdk-runtime-java-20261113",
+          "version": "20261113",
+          "path": null,
+          "sha256": null,
+          "preconditions": [
+            "Execute the canonical Synexia Maven/OpenRewrite recipe against exact pinned source/target preimages and transfer only verified postimages.",
+            "Source preimage SHA-256 a414c8454a62a0bc1eff1c9d8fce2880c787f5a6f80360e2cb2b05a8fa874bd9; target preimage SHA-256 89541c886e3f8a66adc8e98e654b8246715ad4e21f75a355b63c0d62d366562e.",
+            "Require first application, unchanged fixed point, source-drift/missing/duplicate and occupied-new-path refusal evidence.",
+            "Preserve every earlier mapping record and all four queued naming operations; update only the authority map blob pin.",
+            "Candidate content hashes are not committed-revision or complete product-runtime proof."
+          ],
+          "rollback": "Use an additive source-sealed correction recipe preserving independent receiving changes and previous checkpoint readability; never rewrite develop history.",
+          "canonical_repository": "hsoliwal/com.synexia",
+          "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-pmem-stream-checkpoint-20261113"
+        },
+        "tests": [],
+        "test_descriptions": [
+          "Focused source Java21/JIT/interpreted/JUnit checks cover FILE/POSIX, old/new checkpoint interoperability, callback ownership, caught failures and simulated persistence boundaries; exact execution receipts are separate from this mapping.",
+          "A separate 32 MiB FILE stream with a 16 MiB maximum Java heap and 256 KiB transfers verifies bounded payload allocation, close/reopen and an incremental content hash.",
+          "Target-owned PmemCheckpointStreamSmokeTest and PmemCheckpointStreamJUnitTest exercise emitted product code; target source-built JDK/jtreg/control-reactor and physical-PMem qualifications remain pending."
+        ],
+        "provenance": {
+          "license": "Apache-2.0 for Synexia-authored implementation, target package adaptation, tests and mapping metadata; preserve existing copyright and all unaffected OpenJDK/third-party rights.",
+          "publication": "Reviewable existing-owner extension with unchanged storage format and native ABI; no claim of release or complete platform admission.",
+          "copied_code": true,
+          "donor_boundary": "Receive independently authored Synexia source through the canonical recipe, adapting only its package for this runtime owner. No external donor implementation or runtime dependency is added."
+        },
+        "sync": {
+          "source_revision": null,
+          "target_revision": null,
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Package-only source adaptation from com.synexia.m3.pmem.PmemCheckpoint to jdk.m3.optane.PmemCheckpoint; target-owned test declarations and existing-owner documentation are separate emitted outputs."
+          ],
+          "pending": [
+            "Bind final immutable publication revision and passive executed-recipe/product receipts after verified publication; do not attribute revised bytes to either baseline commit.",
+            "Source-built modified M3JDK21 image, applicable real jtreg/control-reactor and repository release gates.",
+            "Physical Optane/DAX/PMDK persistence, power-loss and NUMA/platform qualification; no hardware-throughput claim.",
+            "Existing optional-module and String -> arrays -> collections -> AST/compiler receiving order remains unchanged."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d6c9c9fa6669377799b106a417fdec18f9501c25",
+              "module": "com.synexia.m3.pmem",
+              "path": "m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/PmemCheckpoint.java",
+              "symbol": "com.synexia.m3.pmem.PmemCheckpoint",
+              "signatures": [
+                "public static int maxChunks(PmemBlockStore)",
+                "public static Info commit(PmemBlockStore, String, long, int, byte[], ChunkSource) throws IOException",
+                "public static Info inspect(PmemBlockStore, String) throws IOException",
+                "public static Info restore(PmemBlockStore, String, byte[], RestoreTarget) throws IOException"
+              ],
+              "sha256": "a414c8454a62a0bc1eff1c9d8fce2880c787f5a6f80360e2cb2b05a8fa874bd9",
+              "git_blob_sha1": "c457990ee36119a9ae18e28bbf4ee581ccdde6b8",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "visibility": "public"
+            }
+          ],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb",
+              "module": "jdk.m3.io",
+              "path": "src/jdk.m3.io/share/classes/jdk/m3/optane/PmemCheckpoint.java",
+              "symbol": "jdk.m3.optane.PmemCheckpoint",
+              "signatures": [
+                "public static int maxChunks(PmemBlockStore)",
+                "public static Info commit(PmemBlockStore, String, long, int, byte[], ChunkSource) throws IOException",
+                "public static Info inspect(PmemBlockStore, String) throws IOException",
+                "public static Info restore(PmemBlockStore, String, byte[], RestoreTarget) throws IOException"
+              ],
+              "sha256": "89541c886e3f8a66adc8e98e654b8246715ad4e21f75a355b63c0d62d366562e",
+              "git_blob_sha1": "5cacbe29d1d5048393fb4958adb64cadb3e9e5cd",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "visibility": "public"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "implemented",
+        "observation": "Scoped existing-owner streaming implementation with explicit candidate source/target seals. This metadata does not itself establish recipe execution, an installed modified-JDK image, complete source inventory, physical PMem behavior or family/release promotion. Naming queue semantics and all prior records are retained."
+      },
+      {
         "id": "m3.collections.primitive-map-growth",
         "kind": "specialization",
         "status": "implemented-unverified",
@@ -14057,8 +14228,8 @@
         "dependencies": [
           {
             "id": "eclipse-collections-14-source-closure",
-            "resolution": "component-qualified",
-            "reason": "Finite namespace-correct generator/API/implementation source closure is separately evidenced; whole-runtime admission remains pending."
+            "resolution": "pending",
+            "reason": "Original dependency resolution: component-qualified. Finite namespace-correct generator/API/implementation source closure is separately evidenced; whole-runtime admission remains pending."
           }
         ],
         "materialization": {
@@ -14539,25 +14710,6 @@
             ],
             "sha256": "5ce788b74683b4e33b1ef27d5b7b4e797f62a1f995d957e550b82b90b7ea5a37",
             "git_blob_sha1": "49497e7d8d7e780444efb78ee81f3a29ee91229a",
-        "id": "synexia.collections.apache.m3nodecachinglinkedlist",
-        "kind": "specialization",
-        "status": "implemented-unverified",
-        "reason": "The previous all-throw Apache-compatible scaffold is replaced on PR #2971 by a JDK21-formatted, intrinsic array/offset/mask implementation in the integrated jdk.m3.collections module. Not merged to master until full product gates pass.",
-        "sources": [
-          {
-            "repo": "hsoliwal/com.synexia",
-            "commit": "27399015ded4179274eac7cdbcd7ad321940ab60",
-            "module": "synexia-openrewrite-recipes",
-            "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-apache-nodecache-owner-20261113/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-apache-nodecache-owner-20261113/0001-M3NodeCachingLinkedList.java.txt",
-            "symbol": "jdk.m3.collections.apache.M3NodeCachingLinkedList",
-            "signatures": [
-              "M3NodeCachingLinkedList()",
-              "M3NodeCachingLinkedList(int)",
-              "M3NodeCachingLinkedList(Collection<? extends E>)",
-              "List<E> reversed()"
-            ],
-            "sha256": "927f4faf79963228c5038330778a8c62f45281074f771cea527220bca0e3d2e8",
-            "git_blob_sha1": "3efc29e90f0bc0affa4af0567e5837e583e95eb3",
             "fingerprint": null,
             "revision_role": "pinned"
           }
@@ -14566,121 +14718,6 @@
           {
             "repo": "hsoliwal/M3jdk21",
             "commit": null,
-            "module": "jdk.m3.io",
-            "path": "src/jdk.m3.io/share/classes/jdk/m3/optane/PmemCheckpoint.java",
-            "symbol": "jdk.m3.optane.PmemCheckpoint",
-            "signatures": [
-              "public static int maxChunks(PmemBlockStore)",
-              "public static Info commit(PmemBlockStore, String, long, int, byte[], ChunkSource) throws IOException",
-              "public static Info inspect(PmemBlockStore, String) throws IOException",
-              "public static Info restore(PmemBlockStore, String, byte[], RestoreTarget) throws IOException",
-              "public static Info commitStream(PmemBlockStore, String, long, long, byte[], StreamWriter) throws IOException",
-              "public static <T> T readStream(PmemBlockStore, String, long, byte[], StreamReader<T>) throws IOException"
-            ],
-            "sha256": "e53559e8182e0d4de0fcb7536288a8d0b718ab0f4e3ef05081250d016df4b87c",
-            "git_blob_sha1": "798f1f2401da82d805f32f91c01b96be8f2372f9",
-            "fingerprint": null,
-            "revision_role": "candidate",
-            "visibility": "public"
-          }
-        ],
-        "owner": "Existing M3JDK21 jdk.m3.io / jdk.m3.optane.PmemCheckpoint product owner; canonical reusable implementation and recipe custody remain hsoliwal/com.synexia.",
-        "identity": {
-          "namespace": "Existing caller-supplied checkpoint SHA-256 identity and unchanged M3PMEM_CHECKPOINT_MANIFEST_V1 / M3PMEM_CHECKPOINT_CHUNK_V1 domains.",
-          "generation": "Strictly increasing nonnegative generation for the same checkpoint identity; append-only chunk and manifest ordinals remain owned by PmemBlockStore and PmemTaskLog."
-        },
-        "contract": {
-          "differences": [
-            "Add commitStream and readStream with StreamWriter and StreamReader<T> callback interfaces; no existing signature is removed or renamed.",
-            "Bound scratch to the caller-owned transfer array plus the existing bounded manifest; publish only after successful writer completion.",
-            "Require validated complete reader consumption and reject caught stream failures, expired or foreign-thread stream use and callback mutation of the borrowed store."
-          ],
-          "compatibility_obligations": [
-            "Preserve all prior PmemCheckpoint public methods, nested Info/ChunkSource/RestoreTarget contracts and Java21 checked exceptions.",
-            "Retain M3CKPT01 version1 manifest bytes, chunk identities, persist-before-manifest publication and existing uncertain-append reopen rules.",
-            "Read earlier chunk-based checkpoints and restore stream-produced checkpoints through the earlier chunk API.",
-            "Retain the jdk.m3.io module, jdk.m3.optane package export, PmemBlockStore/PmemTaskLog owners and every existing native JNI ABI.",
-            "Keep standard Java APIs and optional-module/ordered-family admission unchanged; do not introduce a Synexia runtime dependency."
-          ],
-          "public_surface": [
-            "Existing jdk.m3.optane.PmemCheckpoint public APIs are retained.",
-            "Add public static commitStream(PmemBlockStore, String, long, long, byte[], StreamWriter) and readStream(PmemBlockStore, String, long, byte[], StreamReader<T>).",
-            "Add public nested StreamWriter.write(OutputStream) and StreamReader<T>.read(InputStream), both throwing IOException."
-          ]
-        },
-        "format": {
-          "schema": "Existing M3CKPT01 version1 checkpoint manifest and M3BLOCK1 block storage; no format version or domain change.",
-          "abi": "Additive Java API only. Existing public method signatures, module/package ownership, native methods and JNI symbols remain unchanged.",
-          "bootstrap": "Use existing jdk.m3.io owners and Java21 InputStream/OutputStream; no new module, runtime service, mapping engine or persistence log."
-        },
-        "dependencies": [
-          {
-            "id": "jdk.m3.optane.PmemBlockStore",
-            "resolution": "resolved",
-            "reason": "Reuse the existing product fixed-slot append, validation, checksum and reopen owner."
-          },
-          {
-            "id": "jdk.m3.optane.PmemTaskLog",
-            "resolution": "resolved",
-            "reason": "Reuse the existing block-store publication and recovery log without new native selectors."
-          },
-          {
-            "id": "java.base.java.io",
-            "resolution": "resolved",
-            "reason": "Use Java21 InputStream/OutputStream through existing module dependency direction."
-          },
-          {
-            "id": "m3jdk21.installed-image-and-platform-qualification",
-            "resolution": "pending",
-            "reason": "Source-built modified JDK, complete product/control-reactor and physical Optane/DAX/power-loss evidence remain separate receiving gates."
-          }
-        ],
-        "materialization": {
-          "admission": "Exact Synexia source preimage at d6c9c9fa6669377799b106a417fdec18f9501c25 and exact M3JDK21 target preimage at 0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb; revised source and target artifacts remain candidate revisions with explicit content seals.",
-          "joins": "Direct package adaptation into the existing product owner; no second payload store, hierarchy, backend or active KV owner.",
-          "outputs": "Existing PmemCheckpoint source, target-owned stream tests and passive metadata/documentation only. Canonical recipe assets remain in Synexia.",
-          "cached_facts": "No whole-checkpoint payload cache. The caller owns one bounded transfer array; the existing manifest bounds and exclusive immutable backing-store rules remain."
-        },
-        "recipe": {
-          "id": "pmem-stream-m3jdk-runtime-java-20261113",
-          "version": "20261113",
-          "path": null,
-          "sha256": null,
-          "preconditions": [
-            "Execute the canonical Synexia Maven/OpenRewrite recipe against exact pinned source/target preimages and transfer only verified postimages.",
-            "Source preimage SHA-256 a414c8454a62a0bc1eff1c9d8fce2880c787f5a6f80360e2cb2b05a8fa874bd9; target preimage SHA-256 89541c886e3f8a66adc8e98e654b8246715ad4e21f75a355b63c0d62d366562e.",
-            "Require first application, unchanged fixed point, source-drift/missing/duplicate and occupied-new-path refusal evidence.",
-            "Preserve every earlier mapping record and all four queued naming operations; update only the authority map blob pin.",
-            "Candidate content hashes are not committed-revision or complete product-runtime proof."
-          ],
-          "rollback": "Use an additive source-sealed correction recipe preserving independent receiving changes and previous checkpoint readability; never rewrite develop history.",
-          "canonical_repository": "hsoliwal/com.synexia",
-          "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-pmem-stream-checkpoint-20261113"
-        },
-        "tests": [],
-        "test_descriptions": [
-          "Focused source Java21/JIT/interpreted/JUnit checks cover FILE/POSIX, old/new checkpoint interoperability, callback ownership, caught failures and simulated persistence boundaries; exact execution receipts are separate from this mapping.",
-          "A separate 32 MiB FILE stream with a 16 MiB maximum Java heap and 256 KiB transfers verifies bounded payload allocation, close/reopen and an incremental content hash.",
-          "Target-owned PmemCheckpointStreamSmokeTest and PmemCheckpointStreamJUnitTest exercise emitted product code; target source-built JDK/jtreg/control-reactor and physical-PMem qualifications remain pending."
-        ],
-        "provenance": {
-          "license": "Apache-2.0 for Synexia-authored implementation, target package adaptation, tests and mapping metadata; preserve existing copyright and all unaffected OpenJDK/third-party rights.",
-          "publication": "Reviewable existing-owner extension with unchanged storage format and native ABI; no claim of release or complete platform admission.",
-          "copied_code": true,
-          "donor_boundary": "Receive independently authored Synexia source through the canonical recipe, adapting only its package for this runtime owner. No external donor implementation or runtime dependency is added."
-        },
-        "sync": {
-          "source_revision": null,
-          "target_revision": null,
-          "direction": "source-to-target",
-          "target_adaptations": [
-            "Package-only source adaptation from com.synexia.m3.pmem.PmemCheckpoint to jdk.m3.optane.PmemCheckpoint; target-owned test declarations and existing-owner documentation are separate emitted outputs."
-          ],
-          "pending": [
-            "Bind final immutable publication revision and passive executed-recipe/product receipts after verified publication; do not attribute revised bytes to either baseline commit.",
-            "Source-built modified M3JDK21 image, applicable real jtreg/control-reactor and repository release gates.",
-            "Physical Optane/DAX/PMDK persistence, power-loss and NUMA/platform qualification; no hardware-throughput claim.",
-            "Existing optional-module and String -> arrays -> collections -> AST/compiler receiving order remains unchanged."
             "module": null,
             "path": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/list/mutable/FastList.java",
             "symbol": "jdk.m3.collections.eclipse.impl.list.mutable.FastList",
@@ -14689,17 +14726,6 @@
             ],
             "sha256": "5ce788b74683b4e33b1ef27d5b7b4e797f62a1f995d957e550b82b90b7ea5a37",
             "git_blob_sha1": "49497e7d8d7e780444efb78ee81f3a29ee91229a",
-            "module": "jdk.m3.collections",
-            "path": "src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3NodeCachingLinkedList.java",
-            "symbol": "jdk.m3.collections.apache.M3NodeCachingLinkedList",
-            "signatures": [
-              "M3NodeCachingLinkedList()",
-              "M3NodeCachingLinkedList(int)",
-              "M3NodeCachingLinkedList(Collection<? extends E>)",
-              "List<E> reversed()"
-            ],
-            "sha256": "65e2963f8d44e109a7a1c687714e0326084f8cfb870ed4a2cc880d58ccd22498",
-            "git_blob_sha1": "0639e6a9a0f4ef6c8d697ae1fa90f7a9542d15b9",
             "fingerprint": null,
             "revision_role": "candidate"
           }
@@ -14719,25 +14745,6 @@
           ],
           "public_surface": [
             "Preserve capacity, self/shared-array/covariant backing semantics and subclass callback/repair behavior."
-        "owner": "jdk.m3.collections.apache.M3NodeCachingLinkedList",
-        "identity": {
-          "namespace": "Keep the target-owned additive Apache-compatible type and its public/protected Java contracts; no rename to java.util.* and no external wrapper.",
-          "generation": "Object[] elements, int[] previous/next, long[] live mask, primitive free-slot chain; no retained Node or Entry per element."
-        },
-        "contract": {
-          "differences": [
-            "Replace all throwing method bodies with a real, independent flat-array implementation.",
-            "End insert/remove O(1); indexed operations O(min(index,n-index)) by physical links."
-          ],
-          "compatibility_obligations": [
-            "Preserve nulls, duplicates, index errors, iteration and backed views, serialization identities, and relevant Apache Commons Collections 4.5.0 behavior.",
-            "Do not change existing Java SE names, constructors or JNI symbols; run independent original-provider and installed-image tests."
-          ],
-          "public_surface": [
-            "M3NodeCachingLinkedList()",
-            "M3NodeCachingLinkedList(int)",
-            "M3NodeCachingLinkedList(Collection<? extends E>)",
-            "List<E> reversed()"
           ]
         },
         "format": {
@@ -14794,6 +14801,98 @@
             "Broader contract-family qualification and comparative resource evidence outside the finite probes.",
             "String -> arrays -> collections -> AST/compiler -> remaining families order remains unchanged.",
             "Live module absorption remains separate from receiving retained donor-source atoms."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "65d2636ee26956bc638d56e5433c9e275f70997d",
+              "module": null,
+              "path": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/list/mutable/FastList.java",
+              "symbol": "jdk.m3.collections.eclipse.impl.list.mutable.FastList",
+              "signatures": [
+                "boolean addAll(int, Collection)"
+              ],
+              "sha256": "371d5a81eb8fc21405c1967ea41e16b0c13b57018cb93362d5eb2774c441419b",
+              "git_blob_sha1": "df4379bf45b105e1e4ec0c8a177233c0b58b97c3",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "partial",
+        "observation": "Current exact source/component candidate supersedes earlier preimage/held descriptions only within this atom. Earlier source and target identities remain in lineage; historical proof is not transferred. Retained donor source under m3/collections/implementations; source/component qualification is not live module absorption or installed/source-built M3JDK21 admission."
+      },
+      {
+        "id": "synexia.collections.apache.m3nodecachinglinkedlist",
+        "kind": "specialization",
+        "status": "implemented-unverified",
+        "reason": "The previous all-throw Apache-compatible scaffold is replaced on PR #2971 by a JDK21-formatted, intrinsic array/offset/mask implementation in the integrated jdk.m3.collections module. Not merged to master until full product gates pass.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "27399015ded4179274eac7cdbcd7ad321940ab60",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-apache-nodecache-owner-20261113/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-apache-nodecache-owner-20261113/0001-M3NodeCachingLinkedList.java.txt",
+            "symbol": "jdk.m3.collections.apache.M3NodeCachingLinkedList",
+            "signatures": [
+              "M3NodeCachingLinkedList()",
+              "M3NodeCachingLinkedList(int)",
+              "M3NodeCachingLinkedList(Collection<? extends E>)",
+              "List<E> reversed()"
+            ],
+            "sha256": "927f4faf79963228c5038330778a8c62f45281074f771cea527220bca0e3d2e8",
+            "git_blob_sha1": "3efc29e90f0bc0affa4af0567e5837e583e95eb3",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.collections",
+            "path": "src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3NodeCachingLinkedList.java",
+            "symbol": "jdk.m3.collections.apache.M3NodeCachingLinkedList",
+            "signatures": [
+              "M3NodeCachingLinkedList()",
+              "M3NodeCachingLinkedList(int)",
+              "M3NodeCachingLinkedList(Collection<? extends E>)",
+              "List<E> reversed()"
+            ],
+            "sha256": "65e2963f8d44e109a7a1c687714e0326084f8cfb870ed4a2cc880d58ccd22498",
+            "git_blob_sha1": "0639e6a9a0f4ef6c8d697ae1fa90f7a9542d15b9",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "jdk.m3.collections.apache.M3NodeCachingLinkedList",
+        "identity": {
+          "namespace": "Keep the target-owned additive Apache-compatible type and its public/protected Java contracts; no rename to java.util.* and no external wrapper.",
+          "generation": "Object[] elements, int[] previous/next, long[] live mask, primitive free-slot chain; no retained Node or Entry per element."
+        },
+        "contract": {
+          "differences": [
+            "Replace all throwing method bodies with a real, independent flat-array implementation.",
+            "End insert/remove O(1); indexed operations O(min(index,n-index)) by physical links."
+          ],
+          "compatibility_obligations": [
+            "Preserve nulls, duplicates, index errors, iteration and backed views, serialization identities, and relevant Apache Commons Collections 4.5.0 behavior.",
+            "Do not change existing Java SE names, constructors or JNI symbols; run independent original-provider and installed-image tests."
+          ],
+          "public_surface": [
+            "M3NodeCachingLinkedList()",
+            "M3NodeCachingLinkedList(int)",
+            "M3NodeCachingLinkedList(Collection<? extends E>)",
+            "List<E> reversed()"
+          ]
+        },
+        "format": {
+          "schema": null,
           "abi": "JDK21 source-style four-space Java, explicit imports, Javadoc and @Serial; public method descriptors require full target ABI verification.",
           "bootstrap": "Native product owner is compiled from src/jdk.m3.collections/share/classes, module-info.java exports jdk.m3.collections.apache; no Synexia runtime dependency."
         },
@@ -14852,15 +14951,6 @@
           "previous_targets": [
             {
               "repo": "hsoliwal/M3jdk21",
-              "commit": "65d2636ee26956bc638d56e5433c9e275f70997d",
-              "module": null,
-              "path": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/list/mutable/FastList.java",
-              "symbol": "jdk.m3.collections.eclipse.impl.list.mutable.FastList",
-              "signatures": [
-                "boolean addAll(int, Collection)"
-              ],
-              "sha256": "371d5a81eb8fc21405c1967ea41e16b0c13b57018cb93362d5eb2774c441419b",
-              "git_blob_sha1": "df4379bf45b105e1e4ec0c8a177233c0b58b97c3",
               "commit": "0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb",
               "module": null,
               "path": "m3/collections/implementations/apache-node-caching-linked-list/src/main/java/jdk/m3/collections/apache/M3NodeCachingLinkedList.java",
@@ -14880,7 +14970,7 @@
           "supersedes": []
         },
         "source_state": "partial",
-        "observation": "Current exact source/component candidate supersedes earlier preimage/held descriptions only within this atom. Earlier source and target identities remain in lineage; historical proof is not transferred. Retained donor source under m3/collections/implementations; source/component qualification is not live module absorption or installed/source-built M3JDK21 admission."
+        "observation": "JDK style/Javadoc source-only candidate from Synexia #17302 on product draft #2971; master and SDK/image/release acceptance remain unqualified."
       },
       {
         "id": "synexia.collections.guava-compact-map-array-hash-jre",
@@ -14899,29 +14989,6 @@
             ],
             "sha256": "9ecfdcf320a41f77ea1a4aee509e58105b589777fd2458352029ab1dda57955d",
             "git_blob_sha1": "18e60ccf68cac0d0c64abcc0f2891b65fbfd03c0",
-        "observation": "JDK style/Javadoc source-only candidate from Synexia #17302 on product draft #2971; master and SDK/image/release acceptance remain unqualified."
-      },
-      {
-        "id": "synexia.collections.apache.m3treelist",
-        "kind": "specialization",
-        "status": "implemented-unverified",
-        "reason": "The previous all-throw Apache-compatible scaffold is replaced on PR #2971 by a JDK21-formatted, intrinsic array/offset/mask implementation in the integrated jdk.m3.collections module. Not merged to master until full product gates pass.",
-        "sources": [
-          {
-            "repo": "hsoliwal/com.synexia",
-            "commit": "80ab1a3125fc13ebc57d0eb81a60456c9d3df6b2",
-            "module": "synexia-openrewrite-recipes",
-            "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-apache-treelist-array-treap-20261113/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-apache-treelist-array-treap-20261113/0001-M3TreeList.java.txt",
-            "symbol": "jdk.m3.collections.apache.M3TreeList",
-            "signatures": [
-              "M3TreeList()",
-              "M3TreeList(Collection<? extends E>)",
-              "E get(int)",
-              "void add(int,E)",
-              "E remove(int)"
-            ],
-            "sha256": "68fce448cdc052e43a059f9b1e71c2deb228c5e6c6dd0d3b7789b150cccc4a0a",
-            "git_blob_sha1": "06dc7501a8f6efc837ff3e9f716058b9b0bab76e",
             "fingerprint": null,
             "revision_role": "pinned"
           }
@@ -14938,18 +15005,6 @@
             ],
             "sha256": "9ecfdcf320a41f77ea1a4aee509e58105b589777fd2458352029ab1dda57955d",
             "git_blob_sha1": "18e60ccf68cac0d0c64abcc0f2891b65fbfd03c0",
-            "module": "jdk.m3.collections",
-            "path": "src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3TreeList.java",
-            "symbol": "jdk.m3.collections.apache.M3TreeList",
-            "signatures": [
-              "M3TreeList()",
-              "M3TreeList(Collection<? extends E>)",
-              "E get(int)",
-              "void add(int,E)",
-              "E remove(int)"
-            ],
-            "sha256": "ad155c871d40d03dca1412443814e8670e8819c1ccd690f60f09f18e2ce9ca86",
-            "git_blob_sha1": "9da0a6ad147c423a0cfa718a8159890cc2c25977",
             "fingerprint": null,
             "revision_role": "candidate"
           }
@@ -14970,26 +15025,6 @@
           ],
           "public_surface": [
             "Preserve key/value callback snapshots, successor and final-entry failfast timing, linked/access ordering, delegate behavior and external subclass entrySet overrides."
-        "owner": "jdk.m3.collections.apache.M3TreeList",
-        "identity": {
-          "namespace": "Keep the target-owned additive Apache-compatible type and its public/protected Java contracts; no rename to java.util.* and no external wrapper.",
-          "generation": "Object[] elements, int[] left/right/weight/priority, long[] occupied bits, physical free-slot chain."
-        },
-        "contract": {
-          "differences": [
-            "Replace all throwing method bodies with a real, independent flat-array implementation.",
-            "Expected O(log n) indexed lookup/insertion/deletion by rank; no per-element TreeNode."
-          ],
-          "compatibility_obligations": [
-            "Preserve nulls, duplicates, index errors, iteration and backed views, serialization identities, and relevant Apache Commons Collections 4.5.0 behavior.",
-            "Do not change existing Java SE names, constructors or JNI symbols; run independent original-provider and installed-image tests."
-          ],
-          "public_surface": [
-            "M3TreeList()",
-            "M3TreeList(Collection<? extends E>)",
-            "E get(int)",
-            "void add(int,E)",
-            "E remove(int)"
           ]
         },
         "format": {
@@ -15046,6 +15081,101 @@
             "Broader contract-family qualification and comparative resource evidence outside the finite probes.",
             "String -> arrays -> collections -> AST/compiler -> remaining families order remains unchanged.",
             "Live module absorption remains separate from receiving retained donor-source atoms."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "65d2636ee26956bc638d56e5433c9e275f70997d",
+              "module": null,
+              "path": "m3/collections/implementations/guava-33.4.8/guava/src/jdk/m3/collections/guava/collect/CompactHashMap.java",
+              "symbol": "jdk.m3.collections.guava.collect.CompactHashMap",
+              "signatures": [
+                "int hashCode()"
+              ],
+              "sha256": "c39dd566d682860a551c0e4ab43a30653b2c442c6d2b2cca333918e14026b5b4",
+              "git_blob_sha1": "a54e9da75747d862e504bdacfa28b96582ea4bae",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "partial",
+        "observation": "Current exact source/component candidate supersedes earlier preimage/held descriptions only within this atom. Earlier source and target identities remain in lineage; historical proof is not transferred. Retained donor source under m3/collections/implementations; source/component qualification is not live module absorption or installed/source-built M3JDK21 admission."
+      },
+      {
+        "id": "synexia.collections.apache.m3treelist",
+        "kind": "specialization",
+        "status": "implemented-unverified",
+        "reason": "The previous all-throw Apache-compatible scaffold is replaced on PR #2971 by a JDK21-formatted, intrinsic array/offset/mask implementation in the integrated jdk.m3.collections module. Not merged to master until full product gates pass.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "80ab1a3125fc13ebc57d0eb81a60456c9d3df6b2",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-apache-treelist-array-treap-20261113/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-apache-treelist-array-treap-20261113/0001-M3TreeList.java.txt",
+            "symbol": "jdk.m3.collections.apache.M3TreeList",
+            "signatures": [
+              "M3TreeList()",
+              "M3TreeList(Collection<? extends E>)",
+              "E get(int)",
+              "void add(int,E)",
+              "E remove(int)"
+            ],
+            "sha256": "68fce448cdc052e43a059f9b1e71c2deb228c5e6c6dd0d3b7789b150cccc4a0a",
+            "git_blob_sha1": "06dc7501a8f6efc837ff3e9f716058b9b0bab76e",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.collections",
+            "path": "src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3TreeList.java",
+            "symbol": "jdk.m3.collections.apache.M3TreeList",
+            "signatures": [
+              "M3TreeList()",
+              "M3TreeList(Collection<? extends E>)",
+              "E get(int)",
+              "void add(int,E)",
+              "E remove(int)"
+            ],
+            "sha256": "ad155c871d40d03dca1412443814e8670e8819c1ccd690f60f09f18e2ce9ca86",
+            "git_blob_sha1": "9da0a6ad147c423a0cfa718a8159890cc2c25977",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "jdk.m3.collections.apache.M3TreeList",
+        "identity": {
+          "namespace": "Keep the target-owned additive Apache-compatible type and its public/protected Java contracts; no rename to java.util.* and no external wrapper.",
+          "generation": "Object[] elements, int[] left/right/weight/priority, long[] occupied bits, physical free-slot chain."
+        },
+        "contract": {
+          "differences": [
+            "Replace all throwing method bodies with a real, independent flat-array implementation.",
+            "Expected O(log n) indexed lookup/insertion/deletion by rank; no per-element TreeNode."
+          ],
+          "compatibility_obligations": [
+            "Preserve nulls, duplicates, index errors, iteration and backed views, serialization identities, and relevant Apache Commons Collections 4.5.0 behavior.",
+            "Do not change existing Java SE names, constructors or JNI symbols; run independent original-provider and installed-image tests."
+          ],
+          "public_surface": [
+            "M3TreeList()",
+            "M3TreeList(Collection<? extends E>)",
+            "E get(int)",
+            "void add(int,E)",
+            "E remove(int)"
+          ]
+        },
+        "format": {
+          "schema": null,
           "abi": "JDK21 source-style four-space Java, explicit imports, Javadoc and @Serial; public method descriptors require full target ABI verification.",
           "bootstrap": "Native product owner is compiled from src/jdk.m3.collections/share/classes, module-info.java exports jdk.m3.collections.apache; no Synexia runtime dependency."
         },
@@ -15100,57 +15230,10 @@
           "conflicts": []
         },
         "lineage": {
-          "previous_sources": [
-            {
-              "repo": "hsoliwal/com.synexia",
-              "commit": "d6c9c9fa6669377799b106a417fdec18f9501c25",
-              "module": "com.synexia.m3.pmem",
-              "path": "m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/PmemCheckpoint.java",
-              "symbol": "com.synexia.m3.pmem.PmemCheckpoint",
-              "signatures": [
-                "public static int maxChunks(PmemBlockStore)",
-                "public static Info commit(PmemBlockStore, String, long, int, byte[], ChunkSource) throws IOException",
-                "public static Info inspect(PmemBlockStore, String) throws IOException",
-                "public static Info restore(PmemBlockStore, String, byte[], RestoreTarget) throws IOException"
-              ],
-              "sha256": "a414c8454a62a0bc1eff1c9d8fce2880c787f5a6f80360e2cb2b05a8fa874bd9",
-              "git_blob_sha1": "c457990ee36119a9ae18e28bbf4ee581ccdde6b8",
-              "fingerprint": null,
-              "revision_role": "pinned",
-              "visibility": "public"
-            }
-          ],
-          "previous_targets": [
-            {
-              "repo": "hsoliwal/M3jdk21",
-              "commit": "0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb",
-              "module": "jdk.m3.io",
-              "path": "src/jdk.m3.io/share/classes/jdk/m3/optane/PmemCheckpoint.java",
-              "symbol": "jdk.m3.optane.PmemCheckpoint",
-              "signatures": [
-                "public static int maxChunks(PmemBlockStore)",
-                "public static Info commit(PmemBlockStore, String, long, int, byte[], ChunkSource) throws IOException",
-                "public static Info inspect(PmemBlockStore, String) throws IOException",
-                "public static Info restore(PmemBlockStore, String, byte[], RestoreTarget) throws IOException"
-              ],
-              "sha256": "89541c886e3f8a66adc8e98e654b8246715ad4e21f75a355b63c0d62d366562e",
-              "git_blob_sha1": "5cacbe29d1d5048393fb4958adb64cadb3e9e5cd",
-              "fingerprint": null,
-              "revision_role": "pinned",
-              "visibility": "public"
           "previous_sources": [],
           "previous_targets": [
             {
               "repo": "hsoliwal/M3jdk21",
-              "commit": "65d2636ee26956bc638d56e5433c9e275f70997d",
-              "module": null,
-              "path": "m3/collections/implementations/guava-33.4.8/guava/src/jdk/m3/collections/guava/collect/CompactHashMap.java",
-              "symbol": "jdk.m3.collections.guava.collect.CompactHashMap",
-              "signatures": [
-                "int hashCode()"
-              ],
-              "sha256": "c39dd566d682860a551c0e4ab43a30653b2c442c6d2b2cca333918e14026b5b4",
-              "git_blob_sha1": "a54e9da75747d862e504bdacfa28b96582ea4bae",
               "commit": "0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb",
               "module": null,
               "path": "m3/collections/implementations/apache-tree-list/src/main/java/jdk/m3/collections/apache/M3TreeList.java",
@@ -15171,7 +15254,7 @@
           "supersedes": []
         },
         "source_state": "partial",
-        "observation": "Current exact source/component candidate supersedes earlier preimage/held descriptions only within this atom. Earlier source and target identities remain in lineage; historical proof is not transferred. Retained donor source under m3/collections/implementations; source/component qualification is not live module absorption or installed/source-built M3JDK21 admission."
+        "observation": "JDK style/Javadoc source-only candidate from Synexia #17302 on product draft #2971; master and SDK/image/release acceptance remain unqualified."
       },
       {
         "id": "synexia.collections.guava-compact-map-array-hash-android",
@@ -15190,31 +15273,6 @@
             ],
             "sha256": "9fef4b014b9fea9497ea5886bc5af719a8b0320184d1bbea2b772e0e2951bd91",
             "git_blob_sha1": "a392a59ddd4d7e6b3dfd034ee95ec15b2a71cf10",
-        "observation": "JDK style/Javadoc source-only candidate from Synexia #17302 on product draft #2971; master and SDK/image/release acceptance remain unqualified."
-      },
-      {
-        "id": "synexia.collections.apache.m3arraystack",
-        "kind": "specialization",
-        "status": "implemented-unverified",
-        "reason": "The previous all-throw Apache-compatible scaffold is replaced on PR #2971 by a JDK21-formatted, intrinsic array/offset/mask implementation in the integrated jdk.m3.collections module. Not merged to master until full product gates pass.",
-        "sources": [
-          {
-            "repo": "hsoliwal/com.synexia",
-            "commit": "87b7675d936eb0389d09ad73d6709eeaa263b6df",
-            "module": "synexia-openrewrite-recipes",
-            "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-apache-array-stack-20261113/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-apache-array-stack-20261113/0001-M3ArrayStack.java.txt",
-            "symbol": "jdk.m3.collections.apache.M3ArrayStack",
-            "signatures": [
-              "M3ArrayStack()",
-              "M3ArrayStack(int)",
-              "E push(E)",
-              "E pop()",
-              "E peek()",
-              "E peek(int)",
-              "int search(Object)"
-            ],
-            "sha256": "ce1b38af531d1d863f6eb67bd6e2f975a39a02979777ed5a2f0af3d1756e7e45",
-            "git_blob_sha1": "237c205c40f92d9ac135c64113fbdae1427a0ef2",
             "fingerprint": null,
             "revision_role": "pinned"
           }
@@ -15231,20 +15289,6 @@
             ],
             "sha256": "9fef4b014b9fea9497ea5886bc5af719a8b0320184d1bbea2b772e0e2951bd91",
             "git_blob_sha1": "a392a59ddd4d7e6b3dfd034ee95ec15b2a71cf10",
-            "module": "jdk.m3.collections",
-            "path": "src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3ArrayStack.java",
-            "symbol": "jdk.m3.collections.apache.M3ArrayStack",
-            "signatures": [
-              "M3ArrayStack()",
-              "M3ArrayStack(int)",
-              "E push(E)",
-              "E pop()",
-              "E peek()",
-              "E peek(int)",
-              "int search(Object)"
-            ],
-            "sha256": "e8e3de6031e99bfa20583bdbccf29aa98b18523ecc3cdc08d3b263125c77f3d9",
-            "git_blob_sha1": "fc253468efae015e37bfd68ad0195e106e8222f5",
             "fingerprint": null,
             "revision_role": "candidate"
           }
@@ -15265,28 +15309,6 @@
           ],
           "public_surface": [
             "Preserve key/value callback snapshots, successor and final-entry failfast timing, linked/access ordering, delegate behavior and external subclass entrySet overrides."
-        "owner": "jdk.m3.collections.apache.M3ArrayStack",
-        "identity": {
-          "namespace": "Keep the target-owned additive Apache-compatible type and its public/protected Java contracts; no rename to java.util.* and no external wrapper.",
-          "generation": "One dynamic Object[] and int length; temporary long[] rejection mask only on bulk filtering; no per-element Node."
-        },
-        "contract": {
-          "differences": [
-            "Replace all throwing method bodies with a real, independent flat-array implementation.",
-            "Amortized O(1) push/pop, O(n) indexed insertion/deletion via contiguous System.arraycopy."
-          ],
-          "compatibility_obligations": [
-            "Preserve nulls, duplicates, index errors, iteration and backed views, serialization identities, and relevant Apache Commons Collections 4.5.0 behavior.",
-            "Do not change existing Java SE names, constructors or JNI symbols; run independent original-provider and installed-image tests."
-          ],
-          "public_surface": [
-            "M3ArrayStack()",
-            "M3ArrayStack(int)",
-            "E push(E)",
-            "E pop()",
-            "E peek()",
-            "E peek(int)",
-            "int search(Object)"
           ]
         },
         "format": {
@@ -15343,6 +15365,107 @@
             "Broader contract-family qualification and comparative resource evidence outside the finite probes.",
             "String -> arrays -> collections -> AST/compiler -> remaining families order remains unchanged.",
             "Live module absorption remains separate from receiving retained donor-source atoms."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "65d2636ee26956bc638d56e5433c9e275f70997d",
+              "module": null,
+              "path": "m3/collections/implementations/guava-33.4.8/android/guava/src/jdk/m3/collections/guava/collect/CompactHashMap.java",
+              "symbol": "jdk.m3.collections.guava.collect.CompactHashMap",
+              "signatures": [
+                "int hashCode()"
+              ],
+              "sha256": "43a6c0f941d5423d6d9236da5ff330815301b67e2833c93edabf9092d533196b",
+              "git_blob_sha1": "cc9e18be9eb681cf48d4be182b7cf5b5794a7a1c",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "partial",
+        "observation": "Current exact source/component candidate supersedes earlier preimage/held descriptions only within this atom. Earlier source and target identities remain in lineage; historical proof is not transferred. Retained donor source under m3/collections/implementations; source/component qualification is not live module absorption or installed/source-built M3JDK21 admission."
+      },
+      {
+        "id": "synexia.collections.apache.m3arraystack",
+        "kind": "specialization",
+        "status": "implemented-unverified",
+        "reason": "The previous all-throw Apache-compatible scaffold is replaced on PR #2971 by a JDK21-formatted, intrinsic array/offset/mask implementation in the integrated jdk.m3.collections module. Not merged to master until full product gates pass.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "87b7675d936eb0389d09ad73d6709eeaa263b6df",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-apache-array-stack-20261113/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-apache-array-stack-20261113/0001-M3ArrayStack.java.txt",
+            "symbol": "jdk.m3.collections.apache.M3ArrayStack",
+            "signatures": [
+              "M3ArrayStack()",
+              "M3ArrayStack(int)",
+              "E push(E)",
+              "E pop()",
+              "E peek()",
+              "E peek(int)",
+              "int search(Object)"
+            ],
+            "sha256": "ce1b38af531d1d863f6eb67bd6e2f975a39a02979777ed5a2f0af3d1756e7e45",
+            "git_blob_sha1": "237c205c40f92d9ac135c64113fbdae1427a0ef2",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.collections",
+            "path": "src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3ArrayStack.java",
+            "symbol": "jdk.m3.collections.apache.M3ArrayStack",
+            "signatures": [
+              "M3ArrayStack()",
+              "M3ArrayStack(int)",
+              "E push(E)",
+              "E pop()",
+              "E peek()",
+              "E peek(int)",
+              "int search(Object)"
+            ],
+            "sha256": "e8e3de6031e99bfa20583bdbccf29aa98b18523ecc3cdc08d3b263125c77f3d9",
+            "git_blob_sha1": "fc253468efae015e37bfd68ad0195e106e8222f5",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "jdk.m3.collections.apache.M3ArrayStack",
+        "identity": {
+          "namespace": "Keep the target-owned additive Apache-compatible type and its public/protected Java contracts; no rename to java.util.* and no external wrapper.",
+          "generation": "One dynamic Object[] and int length; temporary long[] rejection mask only on bulk filtering; no per-element Node."
+        },
+        "contract": {
+          "differences": [
+            "Replace all throwing method bodies with a real, independent flat-array implementation.",
+            "Amortized O(1) push/pop, O(n) indexed insertion/deletion via contiguous System.arraycopy."
+          ],
+          "compatibility_obligations": [
+            "Preserve nulls, duplicates, index errors, iteration and backed views, serialization identities, and relevant Apache Commons Collections 4.5.0 behavior.",
+            "Do not change existing Java SE names, constructors or JNI symbols; run independent original-provider and installed-image tests."
+          ],
+          "public_surface": [
+            "M3ArrayStack()",
+            "M3ArrayStack(int)",
+            "E push(E)",
+            "E pop()",
+            "E peek()",
+            "E peek(int)",
+            "int search(Object)"
+          ]
+        },
+        "format": {
+          "schema": null,
           "abi": "JDK21 source-style four-space Java, explicit imports, Javadoc and @Serial; public method descriptors require full target ABI verification.",
           "bootstrap": "Native product owner is compiled from src/jdk.m3.collections/share/classes, module-info.java exports jdk.m3.collections.apache; no Synexia runtime dependency."
         },
@@ -15401,15 +15524,6 @@
           "previous_targets": [
             {
               "repo": "hsoliwal/M3jdk21",
-              "commit": "65d2636ee26956bc638d56e5433c9e275f70997d",
-              "module": null,
-              "path": "m3/collections/implementations/guava-33.4.8/android/guava/src/jdk/m3/collections/guava/collect/CompactHashMap.java",
-              "symbol": "jdk.m3.collections.guava.collect.CompactHashMap",
-              "signatures": [
-                "int hashCode()"
-              ],
-              "sha256": "43a6c0f941d5423d6d9236da5ff330815301b67e2833c93edabf9092d533196b",
-              "git_blob_sha1": "cc9e18be9eb681cf48d4be182b7cf5b5794a7a1c",
               "commit": "0b7bb3ab0e0e1fec6c5818428dad81ae30e86fbb",
               "module": null,
               "path": "m3/collections/implementations/apache-array-stack/src/main/java/jdk/m3/collections/apache/M3ArrayStack.java",
@@ -15431,11 +15545,295 @@
           ],
           "supersedes": []
         },
-        "source_state": "implemented",
-        "observation": "Scoped existing-owner streaming implementation with explicit candidate source/target seals. This metadata does not itself establish recipe execution, an installed modified-JDK image, complete source inventory, physical PMem behavior or family/release promotion. Naming queue semantics and all prior records are retained."
         "source_state": "partial",
-        "observation": "Current exact source/component candidate supersedes earlier preimage/held descriptions only within this atom. Earlier source and target identities remain in lineage; historical proof is not transferred. Retained donor source under m3/collections/implementations; source/component qualification is not live module absorption or installed/source-built M3JDK21 admission."
         "observation": "JDK style/Javadoc source-only candidate from Synexia #17302 on product draft #2971; master and SDK/image/release acceptance remain unqualified."
+      },
+      {
+        "id": "synexia.collections.commons-treelist-iterative-index-walks",
+        "kind": "specialization",
+        "status": "implemented-unverified",
+        "reason": "Actual canonical SDK-received source passes scoped provider compiler, contract, ABI and bounded resource gates; installed-product integration remains unverified. Retained Commons fork source under m3/collections/implementations; distinct from the integrated jdk.m3.collections.apache.M3TreeList owner.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "52f3272653183c1b7b7614cd13c589dcdf29c74d",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/fork-array-hotpaths-20261113/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-fork-array-hotpaths-20261113/0001-TreeList.java.txt",
+            "symbol": "jdk.m3.collections.apache.list.TreeList",
+            "signatures": [
+              "E get(int)",
+              "ListIterator<E> listIterator(int)"
+            ],
+            "sha256": "934a71dfdea28401fafb13a3e788e894a24ba023e74babe7c6949baf4c602b80",
+            "git_blob_sha1": "e33331ddd6e957e1646175b0896136c1fab81bbc",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": null,
+            "path": "m3/collections/implementations/commons-collections-4.5.0/src/main/java/jdk/m3/collections/apache/list/TreeList.java",
+            "symbol": "jdk.m3.collections.apache.list.TreeList",
+            "signatures": [
+              "E get(int)",
+              "ListIterator<E> listIterator(int)"
+            ],
+            "sha256": "934a71dfdea28401fafb13a3e788e894a24ba023e74babe7c6949baf4c602b80",
+            "git_blob_sha1": "e33331ddd6e957e1646175b0896136c1fab81bbc",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "jdk.m3.collections.apache.list.TreeList",
+        "identity": {
+          "namespace": "Retain the existing jdk.m3 provider package and all public/protected declarations; no native-owner rename or module promotion.",
+          "generation": "Existing Object[] values, int[] left/right/relativePosition and byte[] height/state lanes; no new retained storage."
+        },
+        "contract": {
+          "differences": [
+            "Replace private SlotStore.get/min/max tail recursion with primitive-index loops over the existing lanes."
+          ],
+          "compatibility_obligations": [
+            "Preserve rank arithmetic, child/thread discrimination, iterator mutation/fail-fast behavior, payload identity, subtype dispatch and the existing nonserializable-parent contract."
+          ],
+          "public_surface": [
+            "Existing public/protected descriptors remain identical; no new Java SE or JNI API."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "Independent actual emitted-source descriptor parity passed; see the passive scoped receipt.",
+          "bootstrap": "Retained Commons fork source under m3/collections/implementations; distinct from the integrated jdk.m3.collections.apache.M3TreeList owner."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Exact preimages and postimages were qualified and received through the unchanged canonical Maven/OpenRewrite engine; provider runtime gates were then run on emitted Java.",
+          "joins": "Reuse the existing provider owner and storage; preserve all unrelated landed changes and native owner records.",
+          "outputs": "Passive product receipt m3/compatibility/fork-array-hotpaths-20261113.json; exact Java source/test outputs and original reused generator namespace correction only.",
+          "cached_facts": "No runtime dependency on Synexia, additional catalogue owner, payload hierarchy or general cache."
+        },
+        "recipe": {
+          "id": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+          "version": "fork-array-hotpaths-20261113",
+          "path": null,
+          "sha256": null,
+          "canonical_repository": "hsoliwal/com.synexia",
+          "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/fork-array-hotpaths-20261113",
+          "preconditions": [
+            "Current canonical execution source pin ccecdcca2e5f1e3a1b92ad2e9d2e6002597e2eac; new Java source dataset bound to its exact authoring commit.",
+            "Original source/behavior qualification base 796bd612b85fad87dd769558f4e7476c19556e3f; current receiving base ec67062ba55293d9175757ba39d97112d3cdcf8b retains exact source preimages and absent tests as verified by the current receiver qualification.",
+            "Actual current SDK tests, sealing tests, strict receiver cases, exact application and zero-change fixed point are recorded in the passive receipt; historical ce7 counts are kept separate from current qualification."
+          ],
+          "rollback": "Use a separately reviewed source-sealed inverse in canonical Synexia; preserve unrelated source, metadata and native owner records."
+        },
+        "tests": [
+          {
+            "id": "commons-treelist-emitted-product-contract-and-abi",
+            "receipt": "m3/compatibility/fork-array-hotpaths-20261113.json"
+          },
+          {
+            "id": "commons-treelist-bounded-cpu-allocation",
+            "receipt": "m3/compatibility/fork-array-hotpaths-20261113.json"
+          }
+        ],
+        "provenance": {
+          "license": "Existing Apache Commons Collections Apache-2.0 headers, modification notice and NOTICE lineage are retained.",
+          "publication": "Canonical authoring and detailed proof remain in hsoliwal/com.synexia; the target receives product source/tests and passive receipts only.",
+          "copied_code": true,
+          "donor_boundary": "Retained Commons fork source under m3/collections/implementations; distinct from the integrated jdk.m3.collections.apache.M3TreeList owner."
+        },
+        "sync": {
+          "source_revision": "52f3272653183c1b7b7614cd13c589dcdf29c74d",
+          "target_revision": "ec67062ba55293d9175757ba39d97112d3cdcf8b",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Replace private SlotStore.get/min/max tail recursion with primitive-index loops over the existing lanes."
+          ],
+          "pending": [
+            "Full source-built installed M3JDK21 image, applicable module/JNI/GC/jtreg/platform admission is not established.",
+            "No release packaging, native-memory/RSS or whole-application performance claim; benchmark scope remains bounded.",
+            "Global STRING -> ARRAYS -> COLLECTIONS -> AST_COMPILER -> REMAINING_FAMILIES order and active STRING phase remain unchanged."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "ce7cbe57d31d640a210bdd634d33054d0d28492e",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/commons-fork-hotpaths-20261113/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-commons-fork-hotpaths-20261113/0001-TreeList.java.txt",
+              "symbol": "com.m3.collections.apache.list.TreeList",
+              "signatures": [
+                "E get(int)",
+                "ListIterator<E> listIterator(int)"
+              ],
+              "sha256": "9f21fcf97ad5bda55f3b9885a0e050fd93a72685c3d6472ab66ca58ab8aa6c98",
+              "git_blob_sha1": "97e5b8ae8d0b5191f17b6e77ea1aff64dfdf362f",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "796bd612b85fad87dd769558f4e7476c19556e3f",
+              "module": null,
+              "path": "m3/collections/implementations/commons-collections-4.5.0/src/main/java/jdk/m3/collections/apache/list/TreeList.java",
+              "symbol": "jdk.m3.collections.apache.list.TreeList",
+              "signatures": [
+                "E get(int)",
+                "ListIterator<E> listIterator(int)"
+              ],
+              "sha256": "db45e66d463d1399f8ca405f39616e8b8c54163d5a1a14682390608f7ac2aa10",
+              "git_blob_sha1": "756d23fa5f62497837944f6d0795cfd14f3e06b3",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "partial",
+        "observation": "Reuses the prior canonical iterative-slot-walk atom as a minimal current-jdk.m3 projection, with fresh exact-source proof; the native M3TreeList record is unchanged."
+      },
+      {
+        "id": "synexia.collections.eclipse-unifiedmap-entryset-membership",
+        "kind": "specialization",
+        "status": "implemented-unverified",
+        "reason": "Actual canonical SDK-received source passes scoped provider compiler, contract, ABI and bounded resource gates; installed-product integration remains unverified. Retained relocated Eclipse provider source under m3/collections/implementations; not the native M3HashMap SlotMap owner or an exported installed-JDK provider.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "52f3272653183c1b7b7614cd13c589dcdf29c74d",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/fork-array-hotpaths-20261113/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-fork-array-hotpaths-20261113/0004-UnifiedMap.java.txt",
+            "symbol": "jdk.m3.collections.eclipse.impl.map.mutable.UnifiedMap",
+            "signatures": [
+              "Set<Map.Entry<K,V>> entrySet()",
+              "boolean EntrySet.contains(Object)"
+            ],
+            "sha256": "1efc8fe513e294925a66e15d4a826f68377b67013ddae0595456aa29c822ba05",
+            "git_blob_sha1": "3090bee2d479c4320277cad772d357ae2d9919ae",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": null,
+            "path": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/map/mutable/UnifiedMap.java",
+            "symbol": "jdk.m3.collections.eclipse.impl.map.mutable.UnifiedMap",
+            "signatures": [
+              "Set<Map.Entry<K,V>> entrySet()",
+              "boolean EntrySet.contains(Object)"
+            ],
+            "sha256": "1efc8fe513e294925a66e15d4a826f68377b67013ddae0595456aa29c822ba05",
+            "git_blob_sha1": "3090bee2d479c4320277cad772d357ae2d9919ae",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "jdk.m3.collections.eclipse.impl.map.mutable.UnifiedMap",
+        "identity": {
+          "namespace": "Retain the existing jdk.m3 provider package and all public/protected declarations; no native-owner rename or module promotion.",
+          "generation": "Existing interleaved Object[] table and collision chains; no new retained field, node or entry store."
+        },
+        "contract": {
+          "differences": [
+            "Probe existing flat and collision-chain Object[] lanes directly for EntrySet membership without an ImmutableEntry projection."
+          ],
+          "compatibility_obligations": [
+            "Preserve getKey/getValue/index/hash/equality callback order, flat-value capture and chain-value observation timing under reentrant mutation, nulls, subclass dispatch and entry lifetime.",
+            "Retain getEntry/chainGetEntry for retainAll and preserve WeakBoundEntry, iterators, forEach, toArray and serialization code."
+          ],
+          "public_surface": [
+            "Existing public/protected descriptors remain identical; no new Java SE or JNI API."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "Independent actual emitted-source descriptor parity passed; see the passive scoped receipt.",
+          "bootstrap": "Retained relocated Eclipse provider source under m3/collections/implementations; not the native M3HashMap SlotMap owner or an exported installed-JDK provider."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Exact preimages and postimages were qualified and received through the unchanged canonical Maven/OpenRewrite engine; provider runtime gates were then run on emitted Java.",
+          "joins": "Reuse the existing provider owner and storage; preserve all unrelated landed changes and native owner records.",
+          "outputs": "Passive product receipt m3/compatibility/fork-array-hotpaths-20261113.json; exact Java source/test outputs and original reused generator namespace correction only.",
+          "cached_facts": "No runtime dependency on Synexia, additional catalogue owner, payload hierarchy or general cache."
+        },
+        "recipe": {
+          "id": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+          "version": "fork-array-hotpaths-20261113",
+          "path": null,
+          "sha256": null,
+          "canonical_repository": "hsoliwal/com.synexia",
+          "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/fork-array-hotpaths-20261113",
+          "preconditions": [
+            "Current canonical execution source pin ccecdcca2e5f1e3a1b92ad2e9d2e6002597e2eac; new Java source dataset bound to its exact authoring commit.",
+            "Original source/behavior qualification base 796bd612b85fad87dd769558f4e7476c19556e3f; current receiving base ec67062ba55293d9175757ba39d97112d3cdcf8b retains exact source preimages and absent tests as verified by the current receiver qualification.",
+            "Actual current SDK tests, sealing tests, strict receiver cases, exact application and zero-change fixed point are recorded in the passive receipt; historical ce7 counts are kept separate from current qualification."
+          ],
+          "rollback": "Use a separately reviewed source-sealed inverse in canonical Synexia; preserve unrelated source, metadata and native owner records."
+        },
+        "tests": [
+          {
+            "id": "eclipse-unifiedmap-emitted-product-contract-and-abi",
+            "receipt": "m3/compatibility/fork-array-hotpaths-20261113.json"
+          },
+          {
+            "id": "eclipse-unifiedmap-bounded-cpu-allocation",
+            "receipt": "m3/compatibility/fork-array-hotpaths-20261113.json"
+          }
+        ],
+        "provenance": {
+          "license": "Existing Eclipse Collections Eclipse Public License v1.0 and Eclipse Distribution License v1.0 headers and distribution lineage are retained.",
+          "publication": "Canonical authoring and detailed proof remain in hsoliwal/com.synexia; the target receives product source/tests and passive receipts only.",
+          "copied_code": true,
+          "donor_boundary": "Retained relocated Eclipse provider source under m3/collections/implementations; not the native M3HashMap SlotMap owner or an exported installed-JDK provider."
+        },
+        "sync": {
+          "source_revision": "52f3272653183c1b7b7614cd13c589dcdf29c74d",
+          "target_revision": "ec67062ba55293d9175757ba39d97112d3cdcf8b",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Probe existing flat and collision-chain Object[] lanes directly for EntrySet membership without an ImmutableEntry projection."
+          ],
+          "pending": [
+            "Full source-built installed M3JDK21 image, applicable module/JNI/GC/jtreg/platform admission is not established.",
+            "No release packaging, native-memory/RSS or whole-application performance claim; benchmark scope remains bounded.",
+            "Global STRING -> ARRAYS -> COLLECTIONS -> AST_COMPILER -> REMAINING_FAMILIES order and active STRING phase remain unchanged."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "796bd612b85fad87dd769558f4e7476c19556e3f",
+              "module": null,
+              "path": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/map/mutable/UnifiedMap.java",
+              "symbol": "jdk.m3.collections.eclipse.impl.map.mutable.UnifiedMap",
+              "signatures": [
+                "Set<Map.Entry<K,V>> entrySet()",
+                "boolean EntrySet.contains(Object)"
+              ],
+              "sha256": "de4a4148b475aeed43c67cb9b832cef90f29cb62af74568fa248adeaf1027580",
+              "git_blob_sha1": "5e504f52d76162877378d7f3d472c52dac4d48fd",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "partial",
+        "observation": "Actual provider factory/code-generation closure and selected tests are qualified; the native JDK module and the existing org.eclipse interop dependency are unchanged."
       }
     ]
   },
