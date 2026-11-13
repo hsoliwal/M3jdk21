@@ -1,0 +1,1166 @@
+{
+  "schema": "M3_MSVC_ATOMIC_RECEIVING_QUALIFICATION_V1",
+  "status": "CONFIGURATION_QUALIFIED_MSVC_BUILD_PENDING",
+  "canonical": {
+    "repository": "hsoliwal/com.synexia",
+    "pullRequest": 17261,
+    "commit": "a3bd1cf791dde79114fe3290198dee1063ac6a13",
+    "inputBlob": "98c8640d86566fcc54d8008ee2dd8226cf82ca18",
+    "mavenProofBlob": "444e0b867a0a55b750a01295281d0f343b4a85ce",
+    "cleanMakeProofBlob": "63e9b99df20cbfa787a992ff2705aa3201a6bd89",
+    "finalCpuProofBlob": "caa957304ff9e2911f27e82800bb5a401d887208",
+    "recipeCrate": "synexia-openrewrite-recipes/recipe-crates/object-metrics-msvc-atomics/"
+  },
+  "target": {
+    "owner": "make/modules/java.base/lib/CoreLibraries.gmk",
+    "before": {
+      "bytes": 7086,
+      "sha256": "7050ed4eda3c32a6671c464cf4b4ae00bfe265d4e4edb738c45ffe9a2791c630",
+      "gitBlob": "6aa9fd6586c2b91bb79022034d106fab103297b5"
+    },
+    "after": {
+      "bytes": 7275,
+      "sha256": "b185770ac7360a3348f973e8e189b96696b05122dbead5cf8261b99bd7b70801",
+      "gitBlob": "b743c17f6160a539a3ee67130f1843193f3849d8"
+    },
+    "option": "BUILD_LIBJAVA_M3ObjectMetrics.c_CFLAGS += -experimental:c11atomics",
+    "condition": "TOOLCHAIN_TYPE == microsoft"
+  },
+  "unchangedOwners": {
+    "native": {
+      "path": "src/java.base/share/native/libjava/M3ObjectMetrics.c",
+      "gitBlob": "b747698eac6c403026b0705a16d258129af6fbbe"
+    },
+    "java": {
+      "path": "src/java.base/share/classes/jdk/internal/m3/ObjectMetrics.java",
+      "gitBlob": "1eb0a3e35a913f4ede9361160a0c2c041186d54d"
+    }
+  },
+  "javaToTextRecipe": {
+    "schema": "M3_MSVC_ATOMIC_RECIPE_COMPOSITION_QUALIFICATION_V1",
+    "status": "PASS",
+    "reports": [
+      {
+        "stage": "java-admission-recipe",
+        "exit": 0,
+        "reaped": true,
+        "elapsedSeconds": 22.375,
+        "argv": [
+          "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin\\mvn.cmd",
+          "-o",
+          "-B",
+          "-ntp",
+          "-f",
+          "F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\project\\pom.xml",
+          "-Dmaven.repo.local=F:\\codex-work\\lexicon-migration-20261031\\range-current-qualification\\proof\\repo-head",
+          "-Dmaven.repo.local.tail=C:/Users/hsoliwal/.m2/repository",
+          "-Dmaven.repo.local.tail.ignoreAvailability=false",
+          "-Dexec.args=\"-XX:-UsePerfData\" \"-Xmx512m\" \"-Djava.io.tmpdir=F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\temp\" \"-Duser.home=F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\home\" \"-Djunit.jupiter.execution.parallel.enabled=false\" \"-Dorg.xerial.snappy.lib.path=F:\\codex-work\\lexicon-migration-20261031\\code-text-oracle-recipe\\proof\\temp\" \"-Dorg.xerial.snappy.lib.name=snappy-1.1.10-6e0cfc58-474b-47d4-bdb8-4cb270ee6e0e-snappyjava.dll\" \"-cp\" \"C:\\Users\\hsoliwal\\.m2\\repository\\org\\yaml\\snakeyaml\\2.2\\snakeyaml-2.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java\\8.17.1\\rewrite-java-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-core\\8.17.1\\rewrite-core-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-databind\\2.16.1\\jackson-databind-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-core\\2.16.1\\jackson-core-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\dataformat\\jackson-dataformat-smile\\2.16.1\\jackson-dataformat-smile-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\module\\jackson-module-parameter-names\\2.16.1\\jackson-module-parameter-names-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\datatype\\jackson-datatype-jsr310\\2.16.1\\jackson-datatype-jsr310-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\tools\\java-object-diff\\1.0.1\\java-object-diff-1.0.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\quarkus\\gizmo\\gizmo\\1.0.11.Final\\gizmo-1.0.11.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jboss\\jandex\\2.4.2.Final\\jandex-2.4.2.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna-platform\\5.14.0\\jna-platform-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna\\5.14.0\\jna-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-compress\\1.26.0\\commons-compress-1.26.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-yaml\\8.17.1\\rewrite-yaml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-xml\\8.17.1\\rewrite-xml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\micrometer\\micrometer-core\\1.9.17\\micrometer-core-1.9.17.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\hdrhistogram\\HdrHistogram\\2.1.12\\HdrHistogram-2.1.12.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\latencyutils\\LatencyUtils\\2.0.3\\LatencyUtils-2.0.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jetbrains\\annotations\\24.1.0\\annotations-24.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-annotations\\2.16.1\\jackson-annotations-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\antlr\\antlr4-runtime\\4.11.1\\antlr4-runtime-4.11.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-text\\1.11.0\\commons-text-1.11.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\classgraph\\classgraph\\4.8.165\\classgraph-4.8.165.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\xerial\\snappy\\snappy-java\\1.1.10.5\\snappy-java-1.1.10.5.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\fastfilter\\fastfilter\\1.0.2\\fastfilter-1.0.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm\\9.6\\asm-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-util\\9.6\\asm-util-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-tree\\9.6\\asm-tree-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-analysis\\9.6\\asm-analysis-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java-21\\8.17.1\\rewrite-java-21-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0\\opentest4j-1.3.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2\\apiguardian-api-1.1.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-simple\\2.0.13\\slf4j-simple-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-api\\2.0.13\\slf4j-api-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\projectlombok\\lombok\\1.18.30\\lombok-1.18.30.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-lang3\\3.17.0\\commons-lang3-3.17.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-io\\commons-io\\2.17.0\\commons-io-2.17.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-codec\\commons-codec\\1.17.1\\commons-codec-1.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-csv\\1.12.0\\commons-csv-1.12.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\5.11.4\\junit-jupiter-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.11.4\\junit-jupiter-api-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\5.11.4\\junit-jupiter-params-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\5.11.4\\junit-jupiter-engine-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.11.4\\junit-platform-commons-1.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\1.11.4\\junit-platform-engine-1.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-launcher\\1.11.4\\junit-platform-launcher-1.11.4.jar\" \"--source\" \"21\" \"F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\project\\M3LexiconCpuProof.java\" \"http://127.0.0.1:65317/3bc7d428271f497894bbb3917aeb56fe/java-admission-recipe\" \"d827cb29bc662d5ed2e2b6143a43d982e0c642efc7f444f2f038a455f546023b\" \"com.synexia.rewrite.M3SnapshotCatalogueRecipeQualification\" \"http://127.0.0.1:65317/3bc7d428271f497894bbb3917aeb56fe/java-recipe\"",
+          "org.codehaus.mojo:exec-maven-plugin:3.3.0:exec"
+        ],
+        "packetIdentity": {
+          "bytes": 256794,
+          "sha256": "d827cb29bc662d5ed2e2b6143a43d982e0c642efc7f444f2f038a455f546023b",
+          "gitBlob": "c8851d18e1dc0f9c290c02161831ffc23b0d6b2c"
+        },
+        "sourcePins": {
+          "com.synexia.rewrite.M3ResourceEnvelope": {
+            "bytes": 3849,
+            "sha256": "2f5f0a1dd1fabe07c97bf7acf4ead51e1853d302a2b21f6fe011d019cc496c57",
+            "gitBlob": "1b0b84ab1dd08aab4c8edb5835bd00615d0cf908"
+          },
+          "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe": {
+            "bytes": 47665,
+            "sha256": "254df9622aa099c93136e5615012b23adc5e93d93dca472b58332d5b094c2730",
+            "gitBlob": "3da0e5fc43b491e79ab71ee375146193d9628164"
+          },
+          "com.synexia.rewrite.M3SnapshotCatalogueRecipeTest": {
+            "bytes": 5639,
+            "sha256": "747a15c20339a23db0742fbe90621206217c39ce64ef58212bf6f41e7ac2fe9f",
+            "gitBlob": "5084cfa701c6f96fd0afa9a41f91f2214a432656"
+          },
+          "com.synexia.rewrite.M3SnapshotCatalogueRecipeQualification": {
+            "bytes": 2026,
+            "sha256": "8d082908ad1d28944abfa8499bcd0c1a7fb0644a438ab95a30ded5c9360142dd",
+            "gitBlob": "376c9a438b04015202518e2562b60ab3a05acb90"
+          },
+          "com.synexia.rewrite.M3ScopeInference": {
+            "bytes": 27113,
+            "sha256": "09c53223424ca10acdb8cc6d7550a89cf40d6776afcab1195886ad0487f695a8",
+            "gitBlob": "d8d0d75cb42aa602c149e61026cd11b6fa702225"
+          },
+          "com.synexia.rewrite.M3EditScope": {
+            "bytes": 1139,
+            "sha256": "0dc762ef802b32ad0a40ff23e21cfbb67ad4bbd8a251b46b8a5954b647927824",
+            "gitBlob": "5e4cf8ea8df34090b5a17494ace72ab907161b9c"
+          }
+        },
+        "log": "[INFO] Scanning for projects...\r\n[INFO] \r\n[INFO] ---< com.synexia.verification:m3-shared-array-binding-qualification >---\r\n[INFO] Building m3-shared-array-binding-qualification 1\r\n[INFO]   from pom.xml\r\n[INFO] --------------------------------[ pom ]---------------------------------\r\n[INFO] \r\n[INFO] --- exec:3.3.0:exec (default-cli) @ m3-shared-array-binding-qualification ---\r\n\r\nTest run finished after 17461 ms\r\n[         2 containers found      ]\r\n[         0 containers skipped    ]\r\n[         2 containers started    ]\r\n[         0 containers aborted    ]\r\n[         2 containers successful ]\r\n[         0 containers failed     ]\r\n[         2 tests found           ]\r\n[         0 tests skipped         ]\r\n[         2 tests started         ]\r\n[         0 tests aborted         ]\r\n[         2 tests successful      ]\r\n[         0 tests failed          ]\r\n\r\nM3_SNAPSHOT_CATALOGUE_RECIPE_PASS tests=2 outputs=1\r\nM3_CPU_RAM_COMPILE_PASS sources=6 classes=14\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] BUILD SUCCESS\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] Total time:  20.159 s\r\n[INFO] Finished at: 2026-11-13T08:11:38+05:30\r\n[INFO] ------------------------------------------------------------------------\r\n",
+        "logIdentity": {
+          "bytes": 1302,
+          "sha256": "208d17c9c7debd5aa5dfb7e042db42df83552048a24fa27cfd28a3335a45fe36",
+          "gitBlob": "f48e86b4e389cfcebdf6ff30ee48420d1ab40df8"
+        },
+        "allocationAfter": 571469824,
+        "issues": []
+      },
+      {
+        "stage": "unchanged-text-admission-refusal",
+        "exit": 0,
+        "reaped": true,
+        "elapsedSeconds": 6.125,
+        "argv": [
+          "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin\\mvn.cmd",
+          "-o",
+          "-B",
+          "-ntp",
+          "-f",
+          "F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\project\\pom.xml",
+          "-Dmaven.repo.local=F:\\codex-work\\lexicon-migration-20261031\\range-current-qualification\\proof\\repo-head",
+          "-Dmaven.repo.local.tail=C:/Users/hsoliwal/.m2/repository",
+          "-Dmaven.repo.local.tail.ignoreAvailability=false",
+          "-Dexec.args=\"-XX:-UsePerfData\" \"-Xmx512m\" \"-Djava.io.tmpdir=F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\temp\" \"-Duser.home=F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\home\" \"-Djunit.jupiter.execution.parallel.enabled=false\" \"-Dorg.xerial.snappy.lib.path=F:\\codex-work\\lexicon-migration-20261031\\code-text-oracle-recipe\\proof\\temp\" \"-Dorg.xerial.snappy.lib.name=snappy-1.1.10-6e0cfc58-474b-47d4-bdb8-4cb270ee6e0e-snappyjava.dll\" \"-cp\" \"C:\\Users\\hsoliwal\\.m2\\repository\\org\\yaml\\snakeyaml\\2.2\\snakeyaml-2.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java\\8.17.1\\rewrite-java-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-core\\8.17.1\\rewrite-core-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-databind\\2.16.1\\jackson-databind-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-core\\2.16.1\\jackson-core-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\dataformat\\jackson-dataformat-smile\\2.16.1\\jackson-dataformat-smile-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\module\\jackson-module-parameter-names\\2.16.1\\jackson-module-parameter-names-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\datatype\\jackson-datatype-jsr310\\2.16.1\\jackson-datatype-jsr310-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\tools\\java-object-diff\\1.0.1\\java-object-diff-1.0.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\quarkus\\gizmo\\gizmo\\1.0.11.Final\\gizmo-1.0.11.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jboss\\jandex\\2.4.2.Final\\jandex-2.4.2.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna-platform\\5.14.0\\jna-platform-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna\\5.14.0\\jna-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-compress\\1.26.0\\commons-compress-1.26.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-yaml\\8.17.1\\rewrite-yaml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-xml\\8.17.1\\rewrite-xml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\micrometer\\micrometer-core\\1.9.17\\micrometer-core-1.9.17.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\hdrhistogram\\HdrHistogram\\2.1.12\\HdrHistogram-2.1.12.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\latencyutils\\LatencyUtils\\2.0.3\\LatencyUtils-2.0.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jetbrains\\annotations\\24.1.0\\annotations-24.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-annotations\\2.16.1\\jackson-annotations-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\antlr\\antlr4-runtime\\4.11.1\\antlr4-runtime-4.11.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-text\\1.11.0\\commons-text-1.11.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\classgraph\\classgraph\\4.8.165\\classgraph-4.8.165.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\xerial\\snappy\\snappy-java\\1.1.10.5\\snappy-java-1.1.10.5.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\fastfilter\\fastfilter\\1.0.2\\fastfilter-1.0.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm\\9.6\\asm-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-util\\9.6\\asm-util-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-tree\\9.6\\asm-tree-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-analysis\\9.6\\asm-analysis-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java-21\\8.17.1\\rewrite-java-21-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0\\opentest4j-1.3.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2\\apiguardian-api-1.1.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-simple\\2.0.13\\slf4j-simple-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-api\\2.0.13\\slf4j-api-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\projectlombok\\lombok\\1.18.30\\lombok-1.18.30.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-lang3\\3.17.0\\commons-lang3-3.17.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-io\\commons-io\\2.17.0\\commons-io-2.17.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-codec\\commons-codec\\1.17.1\\commons-codec-1.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-csv\\1.12.0\\commons-csv-1.12.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\5.11.4\\junit-jupiter-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.11.4\\junit-jupiter-api-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\5.11.4\\junit-jupiter-params-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\5.11.4\\junit-jupiter-engine-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.11.4\\junit-platform-commons-1.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\1.11.4\\junit-platform-engine-1.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-launcher\\1.11.4\\junit-platform-launcher-1.11.4.jar\" \"--source\" \"21\" \"F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\project\\M3LexiconCpuProof.java\" \"http://127.0.0.1:65317/3bc7d428271f497894bbb3917aeb56fe/unchanged-text-admission-refusal\" \"c28d999f1cac52715a8dede63ad7ad60f158346a5fb76d343a918cba1628482b\" \"com.synexia.rewrite.M3MsvcAtomicTextRecipeQualification\" \"REFUSAL\"",
+          "org.codehaus.mojo:exec-maven-plugin:3.3.0:exec"
+        ],
+        "packetIdentity": {
+          "bytes": 142099,
+          "sha256": "c28d999f1cac52715a8dede63ad7ad60f158346a5fb76d343a918cba1628482b",
+          "gitBlob": "dc0aac365ef43930d4bcdd6250a5c365407db75c"
+        },
+        "sourcePins": {
+          "com.synexia.rewrite.M3ResourceEnvelope": {
+            "bytes": 3849,
+            "sha256": "2f5f0a1dd1fabe07c97bf7acf4ead51e1853d302a2b21f6fe011d019cc496c57",
+            "gitBlob": "1b0b84ab1dd08aab4c8edb5835bd00615d0cf908"
+          },
+          "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe": {
+            "bytes": 49567,
+            "sha256": "ce17a2de4a52ed8ac8369b0818b42a10f4b341bec51e2f5b1cce289668395a2e",
+            "gitBlob": "ceec7fab80e894000f8cc7ca42ee55c565313aea"
+          },
+          "com.synexia.rewrite.M3MsvcAtomicTextRecipeTest": {
+            "bytes": 5707,
+            "sha256": "1a2c09d2de15f24d704468e3d8dd5f26ab57d4bb088587db0b08038d3577ff70",
+            "gitBlob": "1ea13da7db69e89ad6c5df5f0549f5b888b21ada"
+          },
+          "com.synexia.rewrite.M3MsvcAtomicTextRecipeQualification": {
+            "bytes": 2440,
+            "sha256": "8e61b701bb25e75b70d92cb73d9f2dbf96929480e54a23a5828fc694c1f3f3c9",
+            "gitBlob": "ad174e5d5078705408c7ef9b986cabd4fd0c487b"
+          }
+        },
+        "log": "[INFO] Scanning for projects...\r\n[INFO] \r\n[INFO] ---< com.synexia.verification:m3-shared-array-binding-qualification >---\r\n[INFO] Building m3-shared-array-binding-qualification 1\r\n[INFO]   from pom.xml\r\n[INFO] --------------------------------[ pom ]---------------------------------\r\n[INFO] \r\n[INFO] --- exec:3.3.0:exec (default-cli) @ m3-shared-array-binding-qualification ---\r\n\r\nTest run finished after 108 ms\r\n[         2 containers found      ]\r\n[         0 containers skipped    ]\r\n[         2 containers started    ]\r\n[         0 containers aborted    ]\r\n[         2 containers successful ]\r\n[         0 containers failed     ]\r\n[         1 tests found           ]\r\n[         0 tests skipped         ]\r\n[         1 tests started         ]\r\n[         0 tests aborted         ]\r\n[         1 tests successful      ]\r\n[         0 tests failed          ]\r\n\r\nM3_MSVC_ATOMIC_REFUSAL_PASS tests=1\r\nM3_CPU_RAM_COMPILE_PASS sources=4 classes=8\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] BUILD SUCCESS\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] Total time:  2.212 s\r\n[INFO] Finished at: 2026-11-13T08:11:49+05:30\r\n[INFO] ------------------------------------------------------------------------\r\n",
+        "logIdentity": {
+          "bytes": 1282,
+          "sha256": "97b4d2a2cd7a51a71f1aea582d8db54bf9364301abb25576f1b9c80069eb7dc7",
+          "gitBlob": "bc9aa9f719ed8e9780b41b137c7d4e81b8b0dc1c"
+        },
+        "allocationAfter": 571469824,
+        "issues": []
+      },
+      {
+        "stage": "updated-text-recipe",
+        "exit": 0,
+        "reaped": true,
+        "elapsedSeconds": 5.766,
+        "argv": [
+          "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin\\mvn.cmd",
+          "-o",
+          "-B",
+          "-ntp",
+          "-f",
+          "F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\project\\pom.xml",
+          "-Dmaven.repo.local=F:\\codex-work\\lexicon-migration-20261031\\range-current-qualification\\proof\\repo-head",
+          "-Dmaven.repo.local.tail=C:/Users/hsoliwal/.m2/repository",
+          "-Dmaven.repo.local.tail.ignoreAvailability=false",
+          "-Dexec.args=\"-XX:-UsePerfData\" \"-Xmx512m\" \"-Djava.io.tmpdir=F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\temp\" \"-Duser.home=F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\home\" \"-Djunit.jupiter.execution.parallel.enabled=false\" \"-Dorg.xerial.snappy.lib.path=F:\\codex-work\\lexicon-migration-20261031\\code-text-oracle-recipe\\proof\\temp\" \"-Dorg.xerial.snappy.lib.name=snappy-1.1.10-6e0cfc58-474b-47d4-bdb8-4cb270ee6e0e-snappyjava.dll\" \"-cp\" \"C:\\Users\\hsoliwal\\.m2\\repository\\org\\yaml\\snakeyaml\\2.2\\snakeyaml-2.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java\\8.17.1\\rewrite-java-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-core\\8.17.1\\rewrite-core-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-databind\\2.16.1\\jackson-databind-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-core\\2.16.1\\jackson-core-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\dataformat\\jackson-dataformat-smile\\2.16.1\\jackson-dataformat-smile-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\module\\jackson-module-parameter-names\\2.16.1\\jackson-module-parameter-names-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\datatype\\jackson-datatype-jsr310\\2.16.1\\jackson-datatype-jsr310-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\tools\\java-object-diff\\1.0.1\\java-object-diff-1.0.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\quarkus\\gizmo\\gizmo\\1.0.11.Final\\gizmo-1.0.11.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jboss\\jandex\\2.4.2.Final\\jandex-2.4.2.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna-platform\\5.14.0\\jna-platform-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna\\5.14.0\\jna-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-compress\\1.26.0\\commons-compress-1.26.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-yaml\\8.17.1\\rewrite-yaml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-xml\\8.17.1\\rewrite-xml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\micrometer\\micrometer-core\\1.9.17\\micrometer-core-1.9.17.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\hdrhistogram\\HdrHistogram\\2.1.12\\HdrHistogram-2.1.12.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\latencyutils\\LatencyUtils\\2.0.3\\LatencyUtils-2.0.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jetbrains\\annotations\\24.1.0\\annotations-24.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-annotations\\2.16.1\\jackson-annotations-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\antlr\\antlr4-runtime\\4.11.1\\antlr4-runtime-4.11.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-text\\1.11.0\\commons-text-1.11.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\classgraph\\classgraph\\4.8.165\\classgraph-4.8.165.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\xerial\\snappy\\snappy-java\\1.1.10.5\\snappy-java-1.1.10.5.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\fastfilter\\fastfilter\\1.0.2\\fastfilter-1.0.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm\\9.6\\asm-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-util\\9.6\\asm-util-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-tree\\9.6\\asm-tree-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-analysis\\9.6\\asm-analysis-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java-21\\8.17.1\\rewrite-java-21-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0\\opentest4j-1.3.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2\\apiguardian-api-1.1.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-simple\\2.0.13\\slf4j-simple-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-api\\2.0.13\\slf4j-api-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\projectlombok\\lombok\\1.18.30\\lombok-1.18.30.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-lang3\\3.17.0\\commons-lang3-3.17.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-io\\commons-io\\2.17.0\\commons-io-2.17.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-codec\\commons-codec\\1.17.1\\commons-codec-1.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-csv\\1.12.0\\commons-csv-1.12.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\5.11.4\\junit-jupiter-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.11.4\\junit-jupiter-api-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\5.11.4\\junit-jupiter-params-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\5.11.4\\junit-jupiter-engine-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.11.4\\junit-platform-commons-1.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\1.11.4\\junit-platform-engine-1.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-launcher\\1.11.4\\junit-platform-launcher-1.11.4.jar\" \"--source\" \"21\" \"F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\project\\M3LexiconCpuProof.java\" \"http://127.0.0.1:65317/3bc7d428271f497894bbb3917aeb56fe/updated-text-recipe\" \"c92dfa821b4c95163dafaa2ee8be8c3437b9fd4f677020765364d7034f24f873\" \"com.synexia.rewrite.M3MsvcAtomicTextRecipeQualification\" \"http://127.0.0.1:65317/3bc7d428271f497894bbb3917aeb56fe/text-recipe\"",
+          "org.codehaus.mojo:exec-maven-plugin:3.3.0:exec"
+        ],
+        "packetIdentity": {
+          "bytes": 142887,
+          "sha256": "c92dfa821b4c95163dafaa2ee8be8c3437b9fd4f677020765364d7034f24f873",
+          "gitBlob": "caf3c2a0b420fdd9ed79b8b77788592af829dbe7"
+        },
+        "sourcePins": {
+          "com.synexia.rewrite.M3ResourceEnvelope": {
+            "bytes": 3849,
+            "sha256": "2f5f0a1dd1fabe07c97bf7acf4ead51e1853d302a2b21f6fe011d019cc496c57",
+            "gitBlob": "1b0b84ab1dd08aab4c8edb5835bd00615d0cf908"
+          },
+          "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe": {
+            "bytes": 50159,
+            "sha256": "dde33ac6879f3412f05af38d58e87635463aa9566a28ce0bccc83dcaa8db8088",
+            "gitBlob": "94fe43f8b56a06a0cdd12b5e0c71242870a8262a"
+          },
+          "com.synexia.rewrite.M3MsvcAtomicTextRecipeTest": {
+            "bytes": 5707,
+            "sha256": "1a2c09d2de15f24d704468e3d8dd5f26ab57d4bb088587db0b08038d3577ff70",
+            "gitBlob": "1ea13da7db69e89ad6c5df5f0549f5b888b21ada"
+          },
+          "com.synexia.rewrite.M3MsvcAtomicTextRecipeQualification": {
+            "bytes": 2440,
+            "sha256": "8e61b701bb25e75b70d92cb73d9f2dbf96929480e54a23a5828fc694c1f3f3c9",
+            "gitBlob": "ad174e5d5078705408c7ef9b986cabd4fd0c487b"
+          }
+        },
+        "log": "[INFO] Scanning for projects...\r\n[INFO] \r\n[INFO] ---< com.synexia.verification:m3-shared-array-binding-qualification >---\r\n[INFO] Building m3-shared-array-binding-qualification 1\r\n[INFO]   from pom.xml\r\n[INFO] --------------------------------[ pom ]---------------------------------\r\n[INFO] \r\n[INFO] --- exec:3.3.0:exec (default-cli) @ m3-shared-array-binding-qualification ---\r\n\r\nTest run finished after 164 ms\r\n[         2 containers found      ]\r\n[         0 containers skipped    ]\r\n[         2 containers started    ]\r\n[         0 containers aborted    ]\r\n[         2 containers successful ]\r\n[         0 containers failed     ]\r\n[         5 tests found           ]\r\n[         0 tests skipped         ]\r\n[         5 tests started         ]\r\n[         0 tests aborted         ]\r\n[         5 tests successful      ]\r\n[         0 tests failed          ]\r\n\r\nM3_MSVC_ATOMIC_TEXT_RECIPE_PASS tests=5 outputs=1\r\nM3_CPU_RAM_COMPILE_PASS sources=4 classes=8\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] BUILD SUCCESS\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] Total time:  2.236 s\r\n[INFO] Finished at: 2026-11-13T08:12:00+05:30\r\n[INFO] ------------------------------------------------------------------------\r\n",
+        "logIdentity": {
+          "bytes": 1296,
+          "sha256": "6d53caba47608127f05d3606e7a0476b7787582bb1b202ff116b12d8720412ee",
+          "gitBlob": "c36862c401f8993744135eaa0e49891720134abf"
+        },
+        "allocationAfter": 571469824,
+        "issues": []
+      },
+      {
+        "stage": "wrong-before-tuple-refusal",
+        "exit": 0,
+        "reaped": true,
+        "elapsedSeconds": 5.578,
+        "argv": [
+          "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin\\mvn.cmd",
+          "-o",
+          "-B",
+          "-ntp",
+          "-f",
+          "F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\project\\pom.xml",
+          "-Dmaven.repo.local=F:\\codex-work\\lexicon-migration-20261031\\range-current-qualification\\proof\\repo-head",
+          "-Dmaven.repo.local.tail=C:/Users/hsoliwal/.m2/repository",
+          "-Dmaven.repo.local.tail.ignoreAvailability=false",
+          "-Dexec.args=\"-XX:-UsePerfData\" \"-Xmx512m\" \"-Djava.io.tmpdir=F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\temp\" \"-Duser.home=F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\home\" \"-Djunit.jupiter.execution.parallel.enabled=false\" \"-Dorg.xerial.snappy.lib.path=F:\\codex-work\\lexicon-migration-20261031\\code-text-oracle-recipe\\proof\\temp\" \"-Dorg.xerial.snappy.lib.name=snappy-1.1.10-6e0cfc58-474b-47d4-bdb8-4cb270ee6e0e-snappyjava.dll\" \"-cp\" \"C:\\Users\\hsoliwal\\.m2\\repository\\org\\yaml\\snakeyaml\\2.2\\snakeyaml-2.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java\\8.17.1\\rewrite-java-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-core\\8.17.1\\rewrite-core-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-databind\\2.16.1\\jackson-databind-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-core\\2.16.1\\jackson-core-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\dataformat\\jackson-dataformat-smile\\2.16.1\\jackson-dataformat-smile-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\module\\jackson-module-parameter-names\\2.16.1\\jackson-module-parameter-names-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\datatype\\jackson-datatype-jsr310\\2.16.1\\jackson-datatype-jsr310-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\tools\\java-object-diff\\1.0.1\\java-object-diff-1.0.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\quarkus\\gizmo\\gizmo\\1.0.11.Final\\gizmo-1.0.11.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jboss\\jandex\\2.4.2.Final\\jandex-2.4.2.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna-platform\\5.14.0\\jna-platform-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna\\5.14.0\\jna-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-compress\\1.26.0\\commons-compress-1.26.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-yaml\\8.17.1\\rewrite-yaml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-xml\\8.17.1\\rewrite-xml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\micrometer\\micrometer-core\\1.9.17\\micrometer-core-1.9.17.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\hdrhistogram\\HdrHistogram\\2.1.12\\HdrHistogram-2.1.12.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\latencyutils\\LatencyUtils\\2.0.3\\LatencyUtils-2.0.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jetbrains\\annotations\\24.1.0\\annotations-24.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-annotations\\2.16.1\\jackson-annotations-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\antlr\\antlr4-runtime\\4.11.1\\antlr4-runtime-4.11.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-text\\1.11.0\\commons-text-1.11.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\classgraph\\classgraph\\4.8.165\\classgraph-4.8.165.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\xerial\\snappy\\snappy-java\\1.1.10.5\\snappy-java-1.1.10.5.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\fastfilter\\fastfilter\\1.0.2\\fastfilter-1.0.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm\\9.6\\asm-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-util\\9.6\\asm-util-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-tree\\9.6\\asm-tree-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-analysis\\9.6\\asm-analysis-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java-21\\8.17.1\\rewrite-java-21-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0\\opentest4j-1.3.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2\\apiguardian-api-1.1.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-simple\\2.0.13\\slf4j-simple-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-api\\2.0.13\\slf4j-api-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\projectlombok\\lombok\\1.18.30\\lombok-1.18.30.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-lang3\\3.17.0\\commons-lang3-3.17.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-io\\commons-io\\2.17.0\\commons-io-2.17.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-codec\\commons-codec\\1.17.1\\commons-codec-1.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-csv\\1.12.0\\commons-csv-1.12.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\5.11.4\\junit-jupiter-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.11.4\\junit-jupiter-api-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\5.11.4\\junit-jupiter-params-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\5.11.4\\junit-jupiter-engine-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.11.4\\junit-platform-commons-1.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\1.11.4\\junit-platform-engine-1.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-launcher\\1.11.4\\junit-platform-launcher-1.11.4.jar\" \"--source\" \"21\" \"F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\project\\M3LexiconCpuProof.java\" \"http://127.0.0.1:65317/3bc7d428271f497894bbb3917aeb56fe/wrong-before-tuple-refusal\" \"96121a0eca13d1d3f637f94c868f1a4065b90d0b09feba8890ed3b780cb4b207\" \"com.synexia.rewrite.M3MsvcAtomicTextRecipeQualification\" \"REFUSAL\"",
+          "org.codehaus.mojo:exec-maven-plugin:3.3.0:exec"
+        ],
+        "packetIdentity": {
+          "bytes": 103176,
+          "sha256": "96121a0eca13d1d3f637f94c868f1a4065b90d0b09feba8890ed3b780cb4b207",
+          "gitBlob": "01ab121bcd60d62a677bc3a0808bb0c01a0bf414"
+        },
+        "sourcePins": {
+          "com.synexia.rewrite.M3ResourceEnvelope": {
+            "bytes": 3849,
+            "sha256": "2f5f0a1dd1fabe07c97bf7acf4ead51e1853d302a2b21f6fe011d019cc496c57",
+            "gitBlob": "1b0b84ab1dd08aab4c8edb5835bd00615d0cf908"
+          },
+          "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe": {
+            "bytes": 50159,
+            "sha256": "dde33ac6879f3412f05af38d58e87635463aa9566a28ce0bccc83dcaa8db8088",
+            "gitBlob": "94fe43f8b56a06a0cdd12b5e0c71242870a8262a"
+          },
+          "com.synexia.rewrite.M3MsvcAtomicTextRecipeTest": {
+            "bytes": 5707,
+            "sha256": "1a2c09d2de15f24d704468e3d8dd5f26ab57d4bb088587db0b08038d3577ff70",
+            "gitBlob": "1ea13da7db69e89ad6c5df5f0549f5b888b21ada"
+          },
+          "com.synexia.rewrite.M3MsvcAtomicTextRecipeQualification": {
+            "bytes": 2440,
+            "sha256": "8e61b701bb25e75b70d92cb73d9f2dbf96929480e54a23a5828fc694c1f3f3c9",
+            "gitBlob": "ad174e5d5078705408c7ef9b986cabd4fd0c487b"
+          }
+        },
+        "log": "[INFO] Scanning for projects...\r\n[INFO] \r\n[INFO] ---< com.synexia.verification:m3-shared-array-binding-qualification >---\r\n[INFO] Building m3-shared-array-binding-qualification 1\r\n[INFO]   from pom.xml\r\n[INFO] --------------------------------[ pom ]---------------------------------\r\n[INFO] \r\n[INFO] --- exec:3.3.0:exec (default-cli) @ m3-shared-array-binding-qualification ---\r\n\r\nTest run finished after 109 ms\r\n[         2 containers found      ]\r\n[         0 containers skipped    ]\r\n[         2 containers started    ]\r\n[         0 containers aborted    ]\r\n[         2 containers successful ]\r\n[         0 containers failed     ]\r\n[         1 tests found           ]\r\n[         0 tests skipped         ]\r\n[         1 tests started         ]\r\n[         0 tests aborted         ]\r\n[         1 tests successful      ]\r\n[         0 tests failed          ]\r\n\r\nM3_MSVC_ATOMIC_REFUSAL_PASS tests=1\r\nM3_CPU_RAM_COMPILE_PASS sources=4 classes=8\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] BUILD SUCCESS\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] Total time:  2.099 s\r\n[INFO] Finished at: 2026-11-13T08:12:11+05:30\r\n[INFO] ------------------------------------------------------------------------\r\n",
+        "logIdentity": {
+          "bytes": 1282,
+          "sha256": "7390b003ca4ac079818b41ba630d8f8b68d1ea20d0506e09075cc7b1543c3da8",
+          "gitBlob": "76f81de667d7ef84f8293121a4328a025b85df3f"
+        },
+        "allocationAfter": 571469824,
+        "issues": []
+      },
+      {
+        "stage": "wrong-after-tuple-refusal",
+        "exit": 0,
+        "reaped": true,
+        "elapsedSeconds": 5.719,
+        "argv": [
+          "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin\\mvn.cmd",
+          "-o",
+          "-B",
+          "-ntp",
+          "-f",
+          "F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\project\\pom.xml",
+          "-Dmaven.repo.local=F:\\codex-work\\lexicon-migration-20261031\\range-current-qualification\\proof\\repo-head",
+          "-Dmaven.repo.local.tail=C:/Users/hsoliwal/.m2/repository",
+          "-Dmaven.repo.local.tail.ignoreAvailability=false",
+          "-Dexec.args=\"-XX:-UsePerfData\" \"-Xmx512m\" \"-Djava.io.tmpdir=F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\temp\" \"-Duser.home=F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\home\" \"-Djunit.jupiter.execution.parallel.enabled=false\" \"-Dorg.xerial.snappy.lib.path=F:\\codex-work\\lexicon-migration-20261031\\code-text-oracle-recipe\\proof\\temp\" \"-Dorg.xerial.snappy.lib.name=snappy-1.1.10-6e0cfc58-474b-47d4-bdb8-4cb270ee6e0e-snappyjava.dll\" \"-cp\" \"C:\\Users\\hsoliwal\\.m2\\repository\\org\\yaml\\snakeyaml\\2.2\\snakeyaml-2.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java\\8.17.1\\rewrite-java-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-core\\8.17.1\\rewrite-core-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-databind\\2.16.1\\jackson-databind-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-core\\2.16.1\\jackson-core-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\dataformat\\jackson-dataformat-smile\\2.16.1\\jackson-dataformat-smile-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\module\\jackson-module-parameter-names\\2.16.1\\jackson-module-parameter-names-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\datatype\\jackson-datatype-jsr310\\2.16.1\\jackson-datatype-jsr310-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\tools\\java-object-diff\\1.0.1\\java-object-diff-1.0.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\quarkus\\gizmo\\gizmo\\1.0.11.Final\\gizmo-1.0.11.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jboss\\jandex\\2.4.2.Final\\jandex-2.4.2.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna-platform\\5.14.0\\jna-platform-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna\\5.14.0\\jna-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-compress\\1.26.0\\commons-compress-1.26.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-yaml\\8.17.1\\rewrite-yaml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-xml\\8.17.1\\rewrite-xml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\micrometer\\micrometer-core\\1.9.17\\micrometer-core-1.9.17.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\hdrhistogram\\HdrHistogram\\2.1.12\\HdrHistogram-2.1.12.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\latencyutils\\LatencyUtils\\2.0.3\\LatencyUtils-2.0.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jetbrains\\annotations\\24.1.0\\annotations-24.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-annotations\\2.16.1\\jackson-annotations-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\antlr\\antlr4-runtime\\4.11.1\\antlr4-runtime-4.11.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-text\\1.11.0\\commons-text-1.11.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\classgraph\\classgraph\\4.8.165\\classgraph-4.8.165.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\xerial\\snappy\\snappy-java\\1.1.10.5\\snappy-java-1.1.10.5.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\fastfilter\\fastfilter\\1.0.2\\fastfilter-1.0.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm\\9.6\\asm-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-util\\9.6\\asm-util-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-tree\\9.6\\asm-tree-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-analysis\\9.6\\asm-analysis-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java-21\\8.17.1\\rewrite-java-21-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0\\opentest4j-1.3.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2\\apiguardian-api-1.1.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-simple\\2.0.13\\slf4j-simple-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-api\\2.0.13\\slf4j-api-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\projectlombok\\lombok\\1.18.30\\lombok-1.18.30.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-lang3\\3.17.0\\commons-lang3-3.17.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-io\\commons-io\\2.17.0\\commons-io-2.17.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-codec\\commons-codec\\1.17.1\\commons-codec-1.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-csv\\1.12.0\\commons-csv-1.12.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\5.11.4\\junit-jupiter-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.11.4\\junit-jupiter-api-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\5.11.4\\junit-jupiter-params-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\5.11.4\\junit-jupiter-engine-5.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.11.4\\junit-platform-commons-1.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\1.11.4\\junit-platform-engine-1.11.4.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-launcher\\1.11.4\\junit-platform-launcher-1.11.4.jar\" \"--source\" \"21\" \"F:\\codex-work\\lexicon-migration-20261031\\shared-array-descriptors-20261112\\jni-proof\\project\\M3LexiconCpuProof.java\" \"http://127.0.0.1:65317/3bc7d428271f497894bbb3917aeb56fe/wrong-after-tuple-refusal\" \"5b1bf40efd5548107f9e80705ab12b57e5d7ff00cce193af53c6dd7f42d9687e\" \"com.synexia.rewrite.M3MsvcAtomicTextRecipeQualification\" \"REFUSAL\"",
+          "org.codehaus.mojo:exec-maven-plugin:3.3.0:exec"
+        ],
+        "packetIdentity": {
+          "bytes": 103180,
+          "sha256": "5b1bf40efd5548107f9e80705ab12b57e5d7ff00cce193af53c6dd7f42d9687e",
+          "gitBlob": "20bb949e1dcbbf7249681edbd712316a9c14c610"
+        },
+        "sourcePins": {
+          "com.synexia.rewrite.M3ResourceEnvelope": {
+            "bytes": 3849,
+            "sha256": "2f5f0a1dd1fabe07c97bf7acf4ead51e1853d302a2b21f6fe011d019cc496c57",
+            "gitBlob": "1b0b84ab1dd08aab4c8edb5835bd00615d0cf908"
+          },
+          "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe": {
+            "bytes": 50159,
+            "sha256": "dde33ac6879f3412f05af38d58e87635463aa9566a28ce0bccc83dcaa8db8088",
+            "gitBlob": "94fe43f8b56a06a0cdd12b5e0c71242870a8262a"
+          },
+          "com.synexia.rewrite.M3MsvcAtomicTextRecipeTest": {
+            "bytes": 5707,
+            "sha256": "1a2c09d2de15f24d704468e3d8dd5f26ab57d4bb088587db0b08038d3577ff70",
+            "gitBlob": "1ea13da7db69e89ad6c5df5f0549f5b888b21ada"
+          },
+          "com.synexia.rewrite.M3MsvcAtomicTextRecipeQualification": {
+            "bytes": 2440,
+            "sha256": "8e61b701bb25e75b70d92cb73d9f2dbf96929480e54a23a5828fc694c1f3f3c9",
+            "gitBlob": "ad174e5d5078705408c7ef9b986cabd4fd0c487b"
+          }
+        },
+        "log": "[INFO] Scanning for projects...\r\n[INFO] \r\n[INFO] ---< com.synexia.verification:m3-shared-array-binding-qualification >---\r\n[INFO] Building m3-shared-array-binding-qualification 1\r\n[INFO]   from pom.xml\r\n[INFO] --------------------------------[ pom ]---------------------------------\r\n[INFO] \r\n[INFO] --- exec:3.3.0:exec (default-cli) @ m3-shared-array-binding-qualification ---\r\n\r\nTest run finished after 103 ms\r\n[         2 containers found      ]\r\n[         0 containers skipped    ]\r\n[         2 containers started    ]\r\n[         0 containers aborted    ]\r\n[         2 containers successful ]\r\n[         0 containers failed     ]\r\n[         1 tests found           ]\r\n[         0 tests skipped         ]\r\n[         1 tests started         ]\r\n[         0 tests aborted         ]\r\n[         1 tests successful      ]\r\n[         0 tests failed          ]\r\n\r\nM3_MSVC_ATOMIC_REFUSAL_PASS tests=1\r\nM3_CPU_RAM_COMPILE_PASS sources=4 classes=8\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] BUILD SUCCESS\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] Total time:  2.117 s\r\n[INFO] Finished at: 2026-11-13T08:12:22+05:30\r\n[INFO] ------------------------------------------------------------------------\r\n",
+        "logIdentity": {
+          "bytes": 1282,
+          "sha256": "a2c00e23f34daaaca1e9cdd68909c1cfb81582ba6aa00e26e0d49e708fd80d60",
+          "gitBlob": "d1cf8e44227119dd25c19e1fd63982a1bdab56cc"
+        },
+        "allocationAfter": 571469824,
+        "issues": []
+      }
+    ],
+    "workOrder": {
+      "schema": "M3_MSVC_ATOMIC_RECIPE_COMPOSITION_V1",
+      "sourceHead": "d6c9c9fa6669377799b106a417fdec18f9501c25",
+      "owner": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "beforeGitBlob": "ceec7fab80e894000f8cc7ca42ee55c565313aea",
+      "recipe": "object-metrics-msvc-text-admission",
+      "receiverOwner": "make/modules/java.base/lib/CoreLibraries.gmk",
+      "receiverHead": "b98bf8c065818aac3447be165909e2a013325d9a",
+      "receiverBeforeGitBlob": "6aa9fd6586c2b91bb79022034d106fab103297b5",
+      "receiverAfterGitBlob": "b743c17f6160a539a3ee67130f1843193f3849d8",
+      "generationCalls": 0,
+      "atoms": [
+        "exact gmk admission path and crate/pre/post tuple",
+        "Java recipe produces evolved text recipe",
+        "text recipe produces gmk compiler configuration",
+        "single-file Microsoft CFLAGS opt-in"
+      ],
+      "scope": "Existing recipe registry and build configuration maintenance only; unchanged C/Java/JNI implementation and lifetime"
+    },
+    "sourceBefore": {
+      "bytes": 49567,
+      "sha256": "ce17a2de4a52ed8ac8369b0818b42a10f4b341bec51e2f5b1cce289668395a2e",
+      "gitBlob": "ceec7fab80e894000f8cc7ca42ee55c565313aea"
+    },
+    "sourceAfter": {
+      "bytes": 50159,
+      "sha256": "dde33ac6879f3412f05af38d58e87635463aa9566a28ce0bccc83dcaa8db8088",
+      "gitBlob": "94fe43f8b56a06a0cdd12b5e0c71242870a8262a"
+    },
+    "receiverBefore": {
+      "bytes": 7086,
+      "sha256": "7050ed4eda3c32a6671c464cf4b4ae00bfe265d4e4edb738c45ffe9a2791c630",
+      "gitBlob": "6aa9fd6586c2b91bb79022034d106fab103297b5"
+    },
+    "receiverAfter": {
+      "bytes": 7275,
+      "sha256": "b185770ac7360a3348f973e8e189b96696b05122dbead5cf8261b99bd7b70801",
+      "gitBlob": "b743c17f6160a539a3ee67130f1843193f3849d8"
+    },
+    "javaManifest": "# parse-context-sha256\t408b699153e304cbe065f61b484e8ced1cc3a8ddc1930ba1a3dac8b8aca68d2d\nsynexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java\tce17a2de4a52ed8ac8369b0818b42a10f4b341bec51e2f5b1cce289668395a2e\tdde33ac6879f3412f05af38d58e87635463aa9566a28ce0bccc83dcaa8db8088\t00-post.txt\n",
+    "textManifest": "make/modules/java.base/lib/CoreLibraries.gmk\t7050ed4eda3c32a6671c464cf4b4ae00bfe265d4e4edb738c45ffe9a2791c630\tb185770ac7360a3348f973e8e189b96696b05122dbead5cf8261b99bd7b70801\t00-post.txt\n",
+    "makeProofBlob": "3e96bf8551cce293e5a81ca315f2e399cac66817",
+    "allocationBefore": 571469824,
+    "allocationAfter": 571469824,
+    "capBytes": 571473920,
+    "freeBytes": 10850009088,
+    "httpErrors": [],
+    "generationCalls": 0,
+    "scope": "two actual Maven/OpenRewrite stages: Java recipe evolves exact text admission, evolved text recipe changes one gmk;10 JUnit executions incl old guard/wrong tuples/wrong crate/neighbor/noncanonical/missing/duplicate/drift/fixedpoint; actual GNUmake/GCC syntax proof separately bound; no MSVC compile/link, HotSpot/ARM libjava/JVMTI race execution or full-repository admission"
+  },
+  "makeAndSyntax": {
+    "schema": "M3_MSVC_C11_ATOMICS_CONFIGURATION_PROOF_V1",
+    "status": "PASS",
+    "sourceBefore": {
+      "bytes": 7086,
+      "sha256": "7050ed4eda3c32a6671c464cf4b4ae00bfe265d4e4edb738c45ffe9a2791c630",
+      "gitBlob": "6aa9fd6586c2b91bb79022034d106fab103297b5"
+    },
+    "sourceAfter": {
+      "bytes": 7275,
+      "sha256": "b185770ac7360a3348f973e8e189b96696b05122dbead5cf8261b99bd7b70801",
+      "gitBlob": "b743c17f6160a539a3ee67130f1843193f3849d8"
+    },
+    "delta": "# MSVC's optional C11 atomics are used only by this JVMTI environment owner.\nifeq ($(TOOLCHAIN_TYPE), microsoft)\n  BUILD_LIBJAVA_M3ObjectMetrics.c_CFLAGS += -experimental:c11atomics\nendif\n\n",
+    "sourcePins": {
+      "CoreLibraries": {
+        "bytes": 7086,
+        "sha256": "7050ed4eda3c32a6671c464cf4b4ae00bfe265d4e4edb738c45ffe9a2791c630",
+        "gitBlob": "6aa9fd6586c2b91bb79022034d106fab103297b5"
+      },
+      "NativeCompilation": {
+        "bytes": 58882,
+        "sha256": "976e8e35a243b945246fc6bf2fdab18887a1bf857da182fc5da7b972176c4c8b",
+        "gitBlob": "8ac516377412228706557c8eba82d84fe0201a46"
+      },
+      "CFlags": {
+        "bytes": 41177,
+        "sha256": "347aef909012e913f80353a90b55a0d981a7ec9f2bdc18e5a7fdb45788d5637f",
+        "gitBlob": "67731c8ae25c48cfe2297e5acd828113a8cd681a"
+      },
+      "NativeMetrics": {
+        "bytes": 2727,
+        "sha256": "f2781f64b22da12a3ac013537c2ab84838d032f08fa5c773d549534e4fd4e06f",
+        "gitBlob": "b747698eac6c403026b0705a16d258129af6fbbe"
+      },
+      "JavaMetrics": {
+        "bytes": 1128,
+        "sha256": "efb875b158341303ac52ec58682f51972c7bbab08586927a9544b876edf9535a",
+        "gitBlob": "1eb0a3e35a913f4ede9361160a0c2c041186d54d"
+      },
+      "MetricsTest": {
+        "bytes": 1293,
+        "sha256": "f2e6f748ae52a54ca2abc9539bdc512e5cf497ba66d93419a4c50b9f57838645",
+        "gitBlob": "3cbe23c6b8e2207c6a0ebed93d8e4880b65e1b5e"
+      },
+      "Workflow": {
+        "bytes": 13943,
+        "sha256": "357fe3e5b14f59cb8b2d7577e0f789d86f9329c76ed2f4faa56da47f224e9ebc",
+        "gitBlob": "2f8402d1dc345ab2ca7ea1a8e24dacc929c87fbd"
+      }
+    },
+    "make": {
+      "executable": "C:\\ProgramData\\chocolatey\\lib\\make\\tools\\install\\bin\\make.exe",
+      "identity": {
+        "bytes": 331425,
+        "sha256": "cc6dc291113dcbcc7735835acbfc23c52ed037e4e124ff2d7a0aeae6df563a9f",
+        "gitBlob": "8a83982b2336d5a2c49bc696050ad1481801f558"
+      },
+      "version": "GNU Make 4.4.1\r\nBuilt for Windows32\r\nCopyright (C) 1988-2023 Free Software Foundation, Inc.\r\nLicense GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>\r\nThis is free software: you are free to change and redistribute it.\r\nThere is NO WARRANTY, to the extent permitted by law.\r\n",
+      "runs": [
+        {
+          "os": "windows",
+          "toolchain": "microsoft",
+          "cpu": "x86_64",
+          "mode": "release",
+          "seed": false,
+          "variant": "before",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19509,
+            "sha256": "cc1050f3465c2fb9a084561dd5c255a4e8fe685bb78e3ab84923a324504fe162",
+            "gitBlob": "84d34d147b316a708f15bd4127ad41f173e22d12"
+          },
+          "commandLineChars": 19694,
+          "stdout": "M3_GLOBAL|-std:c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"x86_64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|| -std:c11 fixture-abi -DARCHPROPNAME='\"x86_64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std:c11 fixture-abi -DARCHPROPNAME='\"x86_64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std:c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.031
+        },
+        {
+          "os": "windows",
+          "toolchain": "microsoft",
+          "cpu": "x86_64",
+          "mode": "release",
+          "seed": false,
+          "variant": "after",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19698,
+            "sha256": "41870623c5b64f3ec06da8de569726801684d9b5abccfab326aff2d426729205",
+            "gitBlob": "e3593e2ea063cf8598dce9c03b3269807dc3dd69"
+          },
+          "commandLineChars": 19883,
+          "stdout": "M3_GLOBAL|-std:c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"x86_64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|-experimental:c11atomics | -std:c11 fixture-abi -DARCHPROPNAME='\"x86_64\"'   fixture-opt -experimental:c11atomics  -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std:c11 fixture-abi -DARCHPROPNAME='\"x86_64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std:c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.062
+        },
+        {
+          "os": "windows",
+          "toolchain": "microsoft",
+          "cpu": "x86_64",
+          "mode": "release",
+          "seed": true,
+          "variant": "before",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19569,
+            "sha256": "4286682e28c652f70bc017ae6375bcc6afb09be0e46730dfcf219f4996d36613",
+            "gitBlob": "135715997056373097bde4413d6ad524cb21dd30"
+          },
+          "commandLineChars": 19754,
+          "stdout": "M3_GLOBAL|-std:c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"x86_64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|fixture-preserved| -std:c11 fixture-abi -DARCHPROPNAME='\"x86_64\"'   fixture-opt fixture-preserved -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std:c11 fixture-abi -DARCHPROPNAME='\"x86_64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std:c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.094
+        },
+        {
+          "os": "windows",
+          "toolchain": "microsoft",
+          "cpu": "x86_64",
+          "mode": "release",
+          "seed": true,
+          "variant": "after",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19758,
+            "sha256": "cc0d62c028147947748301f6e8104289638df3ea50912a420c9bd512f742a333",
+            "gitBlob": "2e165c294b8f17ef97f78c42b7906b1b36759800"
+          },
+          "commandLineChars": 19943,
+          "stdout": "M3_GLOBAL|-std:c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"x86_64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|fixture-preserved -experimental:c11atomics| -std:c11 fixture-abi -DARCHPROPNAME='\"x86_64\"'   fixture-opt fixture-preserved -experimental:c11atomics -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std:c11 fixture-abi -DARCHPROPNAME='\"x86_64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std:c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.078
+        },
+        {
+          "os": "windows",
+          "toolchain": "microsoft",
+          "cpu": "x86_64",
+          "mode": "fastdebug",
+          "seed": false,
+          "variant": "before",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19508,
+            "sha256": "8ae4f6be36682ae108820a9f2c912a5f900da07948f3d26cb8b0f2046f24c0f2",
+            "gitBlob": "ca071b26b7f3f53e4c78db05179907dee87cabbb"
+          },
+          "commandLineChars": 19693,
+          "stdout": "M3_GLOBAL|-std:c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"x86_64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|| -std:c11 fixture-abi -DARCHPROPNAME='\"x86_64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std:c11 fixture-abi -DARCHPROPNAME='\"x86_64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std:c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.078
+        },
+        {
+          "os": "windows",
+          "toolchain": "microsoft",
+          "cpu": "x86_64",
+          "mode": "fastdebug",
+          "seed": false,
+          "variant": "after",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19697,
+            "sha256": "98df5764dd99b5c681d285c8699a7bac2fe7b5a92ba364f5c964a1ce551b608b",
+            "gitBlob": "9b2936fbe0d3816cfbe4fb15df880cfbf145efbd"
+          },
+          "commandLineChars": 19882,
+          "stdout": "M3_GLOBAL|-std:c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"x86_64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|-experimental:c11atomics | -std:c11 fixture-abi -DARCHPROPNAME='\"x86_64\"'   fixture-opt -experimental:c11atomics  -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std:c11 fixture-abi -DARCHPROPNAME='\"x86_64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std:c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.078
+        },
+        {
+          "os": "windows",
+          "toolchain": "microsoft",
+          "cpu": "x86_64",
+          "mode": "fastdebug",
+          "seed": true,
+          "variant": "before",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19568,
+            "sha256": "f94360257194ba36f680aa2edb92b68477369b618937e3f11895a52fdc43023a",
+            "gitBlob": "8e78c49478fadbb6fe0964af11aabf137d0aa7fb"
+          },
+          "commandLineChars": 19753,
+          "stdout": "M3_GLOBAL|-std:c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"x86_64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|fixture-preserved| -std:c11 fixture-abi -DARCHPROPNAME='\"x86_64\"'   fixture-opt fixture-preserved -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std:c11 fixture-abi -DARCHPROPNAME='\"x86_64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std:c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.078
+        },
+        {
+          "os": "windows",
+          "toolchain": "microsoft",
+          "cpu": "x86_64",
+          "mode": "fastdebug",
+          "seed": true,
+          "variant": "after",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19757,
+            "sha256": "f44a69b2e250ea1ebed71581afac5a443d864e4828ea2cea423df9abe80ec4d1",
+            "gitBlob": "bb7dc85e0d84f00d79d0e8134049e0749cd40a91"
+          },
+          "commandLineChars": 19942,
+          "stdout": "M3_GLOBAL|-std:c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"x86_64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|fixture-preserved -experimental:c11atomics| -std:c11 fixture-abi -DARCHPROPNAME='\"x86_64\"'   fixture-opt fixture-preserved -experimental:c11atomics -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std:c11 fixture-abi -DARCHPROPNAME='\"x86_64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std:c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.094
+        },
+        {
+          "os": "windows",
+          "toolchain": "microsoft",
+          "cpu": "aarch64",
+          "mode": "release",
+          "seed": false,
+          "variant": "before",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19510,
+            "sha256": "2e92ab4038a188e981a818f300b29068e8811e9a29f73385404242a46c8d0129",
+            "gitBlob": "45f633dd51ae68c9ef4dd253094b632da9b33747"
+          },
+          "commandLineChars": 19695,
+          "stdout": "M3_GLOBAL|-std:c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"aarch64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|| -std:c11 fixture-abi -DARCHPROPNAME='\"aarch64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std:c11 fixture-abi -DARCHPROPNAME='\"aarch64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std:c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.093
+        },
+        {
+          "os": "windows",
+          "toolchain": "microsoft",
+          "cpu": "aarch64",
+          "mode": "release",
+          "seed": false,
+          "variant": "after",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19699,
+            "sha256": "6a34bbfceb9c9a1a929e768b3808ea767ea3fbc058e324d48ec92b895232fb16",
+            "gitBlob": "ab02a8835cf6a2344ba5aa5ef34b7eb47e7a8738"
+          },
+          "commandLineChars": 19884,
+          "stdout": "M3_GLOBAL|-std:c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"aarch64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|-experimental:c11atomics | -std:c11 fixture-abi -DARCHPROPNAME='\"aarch64\"'   fixture-opt -experimental:c11atomics  -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std:c11 fixture-abi -DARCHPROPNAME='\"aarch64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std:c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.063
+        },
+        {
+          "os": "windows",
+          "toolchain": "microsoft",
+          "cpu": "aarch64",
+          "mode": "release",
+          "seed": true,
+          "variant": "before",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19570,
+            "sha256": "5e6da1108cc4c7137c4cf47f7034d8aa5f75f4617793157207c4726115f0e66e",
+            "gitBlob": "166c36e85eeafbc192da75b8cca5050f8e9da7f2"
+          },
+          "commandLineChars": 19755,
+          "stdout": "M3_GLOBAL|-std:c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"aarch64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|fixture-preserved| -std:c11 fixture-abi -DARCHPROPNAME='\"aarch64\"'   fixture-opt fixture-preserved -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std:c11 fixture-abi -DARCHPROPNAME='\"aarch64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std:c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.094
+        },
+        {
+          "os": "windows",
+          "toolchain": "microsoft",
+          "cpu": "aarch64",
+          "mode": "release",
+          "seed": true,
+          "variant": "after",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19759,
+            "sha256": "026413aa640da38d4cb921dd14cec1bc75e19ff8864e88b0832523e80de7271a",
+            "gitBlob": "d800fae42f5668121652b70f45462eb58f0d00b8"
+          },
+          "commandLineChars": 19944,
+          "stdout": "M3_GLOBAL|-std:c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"aarch64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|fixture-preserved -experimental:c11atomics| -std:c11 fixture-abi -DARCHPROPNAME='\"aarch64\"'   fixture-opt fixture-preserved -experimental:c11atomics -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std:c11 fixture-abi -DARCHPROPNAME='\"aarch64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std:c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.046
+        },
+        {
+          "os": "windows",
+          "toolchain": "microsoft",
+          "cpu": "aarch64",
+          "mode": "fastdebug",
+          "seed": false,
+          "variant": "before",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19509,
+            "sha256": "f5e9997cf031652d8bf977b11dfd355bf92259461c94b9aac209d726cfb5b1ac",
+            "gitBlob": "ca5e989195a160c58219e430abc5fb5ed5a0c344"
+          },
+          "commandLineChars": 19694,
+          "stdout": "M3_GLOBAL|-std:c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"aarch64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|| -std:c11 fixture-abi -DARCHPROPNAME='\"aarch64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std:c11 fixture-abi -DARCHPROPNAME='\"aarch64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std:c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.063
+        },
+        {
+          "os": "windows",
+          "toolchain": "microsoft",
+          "cpu": "aarch64",
+          "mode": "fastdebug",
+          "seed": false,
+          "variant": "after",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19698,
+            "sha256": "e49bfb13690804dd24a5468fb3a1e345a9bd152b5618907adf0fc409ba652bff",
+            "gitBlob": "790c467d0f79a859f2353f6ada03fdd1ba5cbe4b"
+          },
+          "commandLineChars": 19883,
+          "stdout": "M3_GLOBAL|-std:c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"aarch64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|-experimental:c11atomics | -std:c11 fixture-abi -DARCHPROPNAME='\"aarch64\"'   fixture-opt -experimental:c11atomics  -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std:c11 fixture-abi -DARCHPROPNAME='\"aarch64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std:c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.047
+        },
+        {
+          "os": "windows",
+          "toolchain": "microsoft",
+          "cpu": "aarch64",
+          "mode": "fastdebug",
+          "seed": true,
+          "variant": "before",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19569,
+            "sha256": "9e110d48b1da515cdd66a9f6130c0baf669c50b78ec374339add405e29ea00a9",
+            "gitBlob": "747ffed515a6ecf8a1926f465e8d1ced0c5a90c2"
+          },
+          "commandLineChars": 19754,
+          "stdout": "M3_GLOBAL|-std:c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"aarch64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|fixture-preserved| -std:c11 fixture-abi -DARCHPROPNAME='\"aarch64\"'   fixture-opt fixture-preserved -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std:c11 fixture-abi -DARCHPROPNAME='\"aarch64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std:c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.047
+        },
+        {
+          "os": "windows",
+          "toolchain": "microsoft",
+          "cpu": "aarch64",
+          "mode": "fastdebug",
+          "seed": true,
+          "variant": "after",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19758,
+            "sha256": "1015192f0cd7b8d2a1a2f8f65e3aced9f7806490fc160926de79156faefe4066",
+            "gitBlob": "d8165ac0dcacf62d24fb6c5286474a7105a1d116"
+          },
+          "commandLineChars": 19943,
+          "stdout": "M3_GLOBAL|-std:c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"aarch64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|fixture-preserved -experimental:c11atomics| -std:c11 fixture-abi -DARCHPROPNAME='\"aarch64\"'   fixture-opt fixture-preserved -experimental:c11atomics -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std:c11 fixture-abi -DARCHPROPNAME='\"aarch64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std:c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.046
+        },
+        {
+          "os": "windows",
+          "toolchain": "clang",
+          "cpu": "x86_64",
+          "mode": "release",
+          "seed": false,
+          "variant": "before",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19505,
+            "sha256": "428b3825d07e3f526359ee828ae8acdf93ead9e800cb6e13500e1ebce194ccb1",
+            "gitBlob": "1a95796814a887e1040ddbb5b52a5a240735276e"
+          },
+          "commandLineChars": 19690,
+          "stdout": "M3_GLOBAL|-std=c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"x86_64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|| -std=c11 fixture-abi -DARCHPROPNAME='\"x86_64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c -frandom-seed=\"M3ObjectMetrics.c\"\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std=c11 fixture-abi -DARCHPROPNAME='\"x86_64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c -frandom-seed=\"Sibling.c\"\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp -frandom-seed=\"CppSibling.cpp\"\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std=c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c -frandom-seed=\"M3ObjectMetrics.c\"\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.062
+        },
+        {
+          "os": "windows",
+          "toolchain": "clang",
+          "cpu": "x86_64",
+          "mode": "release",
+          "seed": false,
+          "variant": "after",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19694,
+            "sha256": "6666a105e02bf433ef4a87804572ea97400e9d557217bc274d5dc2dd45829011",
+            "gitBlob": "a087bfb1daa08b30453a426a5debff5a95e9f1d7"
+          },
+          "commandLineChars": 19879,
+          "stdout": "M3_GLOBAL|-std=c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"x86_64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|| -std=c11 fixture-abi -DARCHPROPNAME='\"x86_64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c -frandom-seed=\"M3ObjectMetrics.c\"\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std=c11 fixture-abi -DARCHPROPNAME='\"x86_64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c -frandom-seed=\"Sibling.c\"\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp -frandom-seed=\"CppSibling.cpp\"\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std=c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c -frandom-seed=\"M3ObjectMetrics.c\"\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.047
+        },
+        {
+          "os": "windows",
+          "toolchain": "clang",
+          "cpu": "x86_64",
+          "mode": "release",
+          "seed": true,
+          "variant": "before",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19565,
+            "sha256": "28267b75f05d067c9f8ebaf5ae84e97cfae2495d7016827db6ebe15b71d8fe05",
+            "gitBlob": "758f247c9fdfdce2fcb6b6e6676f79b8dc3104b8"
+          },
+          "commandLineChars": 19750,
+          "stdout": "M3_GLOBAL|-std=c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"x86_64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|fixture-preserved| -std=c11 fixture-abi -DARCHPROPNAME='\"x86_64\"'   fixture-opt fixture-preserved -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c -frandom-seed=\"M3ObjectMetrics.c\"\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std=c11 fixture-abi -DARCHPROPNAME='\"x86_64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c -frandom-seed=\"Sibling.c\"\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp -frandom-seed=\"CppSibling.cpp\"\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std=c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c -frandom-seed=\"M3ObjectMetrics.c\"\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.047
+        },
+        {
+          "os": "windows",
+          "toolchain": "clang",
+          "cpu": "x86_64",
+          "mode": "release",
+          "seed": true,
+          "variant": "after",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19754,
+            "sha256": "145044628a5bd93c38c2510f69eaf376bc0ef1e2a9b1779c374e65370f9f5e42",
+            "gitBlob": "c706aa971e09633b8ef34d23a57c99354a85a18f"
+          },
+          "commandLineChars": 19939,
+          "stdout": "M3_GLOBAL|-std=c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"x86_64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|fixture-preserved| -std=c11 fixture-abi -DARCHPROPNAME='\"x86_64\"'   fixture-opt fixture-preserved -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c -frandom-seed=\"M3ObjectMetrics.c\"\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std=c11 fixture-abi -DARCHPROPNAME='\"x86_64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c -frandom-seed=\"Sibling.c\"\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp -frandom-seed=\"CppSibling.cpp\"\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std=c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c -frandom-seed=\"M3ObjectMetrics.c\"\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.047
+        },
+        {
+          "os": "linux",
+          "toolchain": "gcc",
+          "cpu": "x86_64",
+          "mode": "release",
+          "seed": false,
+          "variant": "before",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19501,
+            "sha256": "5e245ce07f110a58b6763824d08c983fa9eebdb4f529a630f2e67da1566ae09d",
+            "gitBlob": "3f7b82ac2b534676ede72cb8bc0b19f7a5793e3f"
+          },
+          "commandLineChars": 19686,
+          "stdout": "M3_GLOBAL|-std=c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"x86_64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|| -std=c11 fixture-abi -DARCHPROPNAME='\"x86_64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c -frandom-seed=\"M3ObjectMetrics.c\"\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std=c11 fixture-abi -DARCHPROPNAME='\"x86_64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c -frandom-seed=\"Sibling.c\"\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp -frandom-seed=\"CppSibling.cpp\"\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std=c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c -frandom-seed=\"M3ObjectMetrics.c\"\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.062
+        },
+        {
+          "os": "linux",
+          "toolchain": "gcc",
+          "cpu": "x86_64",
+          "mode": "release",
+          "seed": false,
+          "variant": "after",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19690,
+            "sha256": "5f562dac4ee30661d3f6f59ad61defa3b79552137d2b46715072ba0b20b3c5b5",
+            "gitBlob": "ea2793cd4269fd66e8f14f4bbc0eca1036dddb25"
+          },
+          "commandLineChars": 19875,
+          "stdout": "M3_GLOBAL|-std=c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"x86_64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|| -std=c11 fixture-abi -DARCHPROPNAME='\"x86_64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c -frandom-seed=\"M3ObjectMetrics.c\"\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std=c11 fixture-abi -DARCHPROPNAME='\"x86_64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c -frandom-seed=\"Sibling.c\"\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp -frandom-seed=\"CppSibling.cpp\"\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std=c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c -frandom-seed=\"M3ObjectMetrics.c\"\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.063
+        },
+        {
+          "os": "linux",
+          "toolchain": "gcc",
+          "cpu": "x86_64",
+          "mode": "release",
+          "seed": true,
+          "variant": "before",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19561,
+            "sha256": "1c18d58849bd6aa78a4a385d8cdbbd8612e670c51709eb205bcbd6002078f0c7",
+            "gitBlob": "65bb109ef3f42846bd222ee4a985d9fef15d77b9"
+          },
+          "commandLineChars": 19746,
+          "stdout": "M3_GLOBAL|-std=c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"x86_64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|fixture-preserved| -std=c11 fixture-abi -DARCHPROPNAME='\"x86_64\"'   fixture-opt fixture-preserved -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c -frandom-seed=\"M3ObjectMetrics.c\"\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std=c11 fixture-abi -DARCHPROPNAME='\"x86_64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c -frandom-seed=\"Sibling.c\"\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp -frandom-seed=\"CppSibling.cpp\"\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std=c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c -frandom-seed=\"M3ObjectMetrics.c\"\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.063
+        },
+        {
+          "os": "linux",
+          "toolchain": "gcc",
+          "cpu": "x86_64",
+          "mode": "release",
+          "seed": true,
+          "variant": "after",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19750,
+            "sha256": "c3b4511d70afa681ac915139214c211f45030b061ab1881486bfde9f57665411",
+            "gitBlob": "7d12655966a71f0c4231e400e035cea96bd7fe4a"
+          },
+          "commandLineChars": 19935,
+          "stdout": "M3_GLOBAL|-std=c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"x86_64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|fixture-preserved| -std=c11 fixture-abi -DARCHPROPNAME='\"x86_64\"'   fixture-opt fixture-preserved -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c -frandom-seed=\"M3ObjectMetrics.c\"\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std=c11 fixture-abi -DARCHPROPNAME='\"x86_64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c -frandom-seed=\"Sibling.c\"\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp -frandom-seed=\"CppSibling.cpp\"\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std=c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c -frandom-seed=\"M3ObjectMetrics.c\"\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.063
+        },
+        {
+          "os": "linux",
+          "toolchain": "clang",
+          "cpu": "aarch64",
+          "mode": "fastdebug",
+          "seed": false,
+          "variant": "before",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19503,
+            "sha256": "03134762da1896ee83bad3796e1af67f4009dd101e1779215a0f9f768fa9b8db",
+            "gitBlob": "c033f7e9061d5e8bf7126da22871b23d175bf566"
+          },
+          "commandLineChars": 19688,
+          "stdout": "M3_GLOBAL|-std=c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"aarch64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|| -std=c11 fixture-abi -DARCHPROPNAME='\"aarch64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c -frandom-seed=\"M3ObjectMetrics.c\"\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std=c11 fixture-abi -DARCHPROPNAME='\"aarch64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c -frandom-seed=\"Sibling.c\"\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp -frandom-seed=\"CppSibling.cpp\"\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std=c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c -frandom-seed=\"M3ObjectMetrics.c\"\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.047
+        },
+        {
+          "os": "linux",
+          "toolchain": "clang",
+          "cpu": "aarch64",
+          "mode": "fastdebug",
+          "seed": false,
+          "variant": "after",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19692,
+            "sha256": "1cdf11c256104f364013946c8750c5a3a45feec3dd2ac5624aec6a6c0531d7ac",
+            "gitBlob": "9a25f02ff11763798faec509d01af99c08b26608"
+          },
+          "commandLineChars": 19877,
+          "stdout": "M3_GLOBAL|-std=c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"aarch64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|| -std=c11 fixture-abi -DARCHPROPNAME='\"aarch64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c -frandom-seed=\"M3ObjectMetrics.c\"\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std=c11 fixture-abi -DARCHPROPNAME='\"aarch64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c -frandom-seed=\"Sibling.c\"\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp -frandom-seed=\"CppSibling.cpp\"\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std=c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c -frandom-seed=\"M3ObjectMetrics.c\"\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.062
+        },
+        {
+          "os": "linux",
+          "toolchain": "clang",
+          "cpu": "aarch64",
+          "mode": "fastdebug",
+          "seed": true,
+          "variant": "before",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19563,
+            "sha256": "1a12173c6ce46605d8502a809805e9a54d1ea990652948725615e791b7a3a093",
+            "gitBlob": "9d57a07360f05307383bd939874002295e536612"
+          },
+          "commandLineChars": 19748,
+          "stdout": "M3_GLOBAL|-std=c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"aarch64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|fixture-preserved| -std=c11 fixture-abi -DARCHPROPNAME='\"aarch64\"'   fixture-opt fixture-preserved -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c -frandom-seed=\"M3ObjectMetrics.c\"\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std=c11 fixture-abi -DARCHPROPNAME='\"aarch64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c -frandom-seed=\"Sibling.c\"\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp -frandom-seed=\"CppSibling.cpp\"\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std=c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c -frandom-seed=\"M3ObjectMetrics.c\"\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.047
+        },
+        {
+          "os": "linux",
+          "toolchain": "clang",
+          "cpu": "aarch64",
+          "mode": "fastdebug",
+          "seed": true,
+          "variant": "after",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19752,
+            "sha256": "445d0c9804f9af12ff1f6957c12064e52b5b4c8808c3ab94ba302b9a5178531f",
+            "gitBlob": "6355beed2ba7cec187d41b1ed1164d3ae29f2abe"
+          },
+          "commandLineChars": 19937,
+          "stdout": "M3_GLOBAL|-std=c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"aarch64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|fixture-preserved| -std=c11 fixture-abi -DARCHPROPNAME='\"aarch64\"'   fixture-opt fixture-preserved -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c -frandom-seed=\"M3ObjectMetrics.c\"\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std=c11 fixture-abi -DARCHPROPNAME='\"aarch64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c -frandom-seed=\"Sibling.c\"\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp -frandom-seed=\"CppSibling.cpp\"\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std=c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c -frandom-seed=\"M3ObjectMetrics.c\"\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.047
+        },
+        {
+          "os": "macosx",
+          "toolchain": "clang",
+          "cpu": "aarch64",
+          "mode": "release",
+          "seed": false,
+          "variant": "before",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19505,
+            "sha256": "71da07a01297359914a35d5526915035b4cfe2ec24ed4dda5475c7a3cd12be0d",
+            "gitBlob": "a1b7d5d24616691927384ce20f817c363b61ecce"
+          },
+          "commandLineChars": 19690,
+          "stdout": "M3_GLOBAL|-std=c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"aarch64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|| -std=c11 fixture-abi -DARCHPROPNAME='\"aarch64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c -frandom-seed=\"M3ObjectMetrics.c\"\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std=c11 fixture-abi -DARCHPROPNAME='\"aarch64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c -frandom-seed=\"Sibling.c\"\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp -frandom-seed=\"CppSibling.cpp\"\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std=c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c -frandom-seed=\"M3ObjectMetrics.c\"\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.063
+        },
+        {
+          "os": "macosx",
+          "toolchain": "clang",
+          "cpu": "aarch64",
+          "mode": "release",
+          "seed": false,
+          "variant": "after",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19694,
+            "sha256": "1a0a337449f2dc9eab3331cbff79ea6a2006dab078f98e620380bccb60d1b559",
+            "gitBlob": "8c58e7777592e635923163adfbef0fffc4beb7e6"
+          },
+          "commandLineChars": 19879,
+          "stdout": "M3_GLOBAL|-std=c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"aarch64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|| -std=c11 fixture-abi -DARCHPROPNAME='\"aarch64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c -frandom-seed=\"M3ObjectMetrics.c\"\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std=c11 fixture-abi -DARCHPROPNAME='\"aarch64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c -frandom-seed=\"Sibling.c\"\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp -frandom-seed=\"CppSibling.cpp\"\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std=c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c -frandom-seed=\"M3ObjectMetrics.c\"\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.047
+        },
+        {
+          "os": "macosx",
+          "toolchain": "clang",
+          "cpu": "aarch64",
+          "mode": "release",
+          "seed": true,
+          "variant": "before",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19565,
+            "sha256": "bdc221290a2c0e44f6b5d83fd648e46733cc717ba5b6728ea9f03e665ed3ee3a",
+            "gitBlob": "a34e6cb39aedd8b570d41592d58e84f51df8193e"
+          },
+          "commandLineChars": 19750,
+          "stdout": "M3_GLOBAL|-std=c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"aarch64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|fixture-preserved| -std=c11 fixture-abi -DARCHPROPNAME='\"aarch64\"'   fixture-opt fixture-preserved -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c -frandom-seed=\"M3ObjectMetrics.c\"\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std=c11 fixture-abi -DARCHPROPNAME='\"aarch64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c -frandom-seed=\"Sibling.c\"\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp -frandom-seed=\"CppSibling.cpp\"\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std=c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c -frandom-seed=\"M3ObjectMetrics.c\"\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.063
+        },
+        {
+          "os": "macosx",
+          "toolchain": "clang",
+          "cpu": "aarch64",
+          "mode": "release",
+          "seed": true,
+          "variant": "after",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19754,
+            "sha256": "2997964f19fe2cf89abb95b5f17fd2930ae4f7ee765d55a78d3e258c1ad8564f",
+            "gitBlob": "eb2a3e891ca1bd54fee9781211f1279a30a37902"
+          },
+          "commandLineChars": 19939,
+          "stdout": "M3_GLOBAL|-std=c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"aarch64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|fixture-preserved| -std=c11 fixture-abi -DARCHPROPNAME='\"aarch64\"'   fixture-opt fixture-preserved -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c -frandom-seed=\"M3ObjectMetrics.c\"\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std=c11 fixture-abi -DARCHPROPNAME='\"aarch64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c -frandom-seed=\"Sibling.c\"\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp -frandom-seed=\"CppSibling.cpp\"\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std=c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c -frandom-seed=\"M3ObjectMetrics.c\"\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.047
+        },
+        {
+          "os": "aix",
+          "toolchain": "xlc",
+          "cpu": "ppc64",
+          "mode": "release",
+          "seed": false,
+          "variant": "before",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19498,
+            "sha256": "8798f5cdc416873b5dc125988face6f0488f8ded57ecfe29fe2509d30052ed41",
+            "gitBlob": "7ecb58228b78365dd3ea7bd277d72ea11ab86e7f"
+          },
+          "commandLineChars": 19683,
+          "stdout": "M3_GLOBAL|-std=c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"ppc64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|| -std=c11 fixture-abi -DARCHPROPNAME='\"ppc64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std=c11 fixture-abi -DARCHPROPNAME='\"ppc64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std=c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.047
+        },
+        {
+          "os": "aix",
+          "toolchain": "xlc",
+          "cpu": "ppc64",
+          "mode": "release",
+          "seed": false,
+          "variant": "after",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19687,
+            "sha256": "017f92b7bb764e65df92b073b3f164112e182e49d66e96698e8ff8157396ac42",
+            "gitBlob": "b25c1ad64d2083f80eee16402a7be5449268033c"
+          },
+          "commandLineChars": 19872,
+          "stdout": "M3_GLOBAL|-std=c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"ppc64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|| -std=c11 fixture-abi -DARCHPROPNAME='\"ppc64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std=c11 fixture-abi -DARCHPROPNAME='\"ppc64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std=c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.062
+        },
+        {
+          "os": "aix",
+          "toolchain": "xlc",
+          "cpu": "ppc64",
+          "mode": "release",
+          "seed": true,
+          "variant": "before",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19558,
+            "sha256": "54ca8db2e9f2770127947650d7861a7a18caf13da0f1a04db4a749df819219d6",
+            "gitBlob": "fcae5dc3a634bdcf6ab033b63b4ea6b5571047d2"
+          },
+          "commandLineChars": 19743,
+          "stdout": "M3_GLOBAL|-std=c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"ppc64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|fixture-preserved| -std=c11 fixture-abi -DARCHPROPNAME='\"ppc64\"'   fixture-opt fixture-preserved -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std=c11 fixture-abi -DARCHPROPNAME='\"ppc64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std=c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.063
+        },
+        {
+          "os": "aix",
+          "toolchain": "xlc",
+          "cpu": "ppc64",
+          "mode": "release",
+          "seed": true,
+          "variant": "after",
+          "exit": 0,
+          "programIdentity": {
+            "bytes": 19747,
+            "sha256": "4565679a20a936c27dc65eddf63285f6b5f752ba28609a8ea054f900911dffc3",
+            "gitBlob": "5bfaeaf3f70fddbeea225f34bdb129453e11edca"
+          },
+          "commandLineChars": 19932,
+          "stdout": "M3_GLOBAL|-std=c11 fixture-abi|fixture-cxxabi|-DARCHPROPNAME='\"ppc64\"'\r\nM3_FILE|BUILD_LIBJAVA_M3ObjectMetrics.c|fixture-preserved| -std=c11 fixture-abi -DARCHPROPNAME='\"ppc64\"'   fixture-opt fixture-preserved -c -FoRAM_UNUSED_BUILD_LIBJAVA/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nM3_FILE|BUILD_LIBJAVA_Sibling.c|| -std=c11 fixture-abi -DARCHPROPNAME='\"ppc64\"'   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBJAVA/Sibling.obj Sibling.c\r\nM3_FILE|BUILD_LIBJAVA_CppSibling.cpp|| fixture-cxxflags      -c -FoRAM_UNUSED_BUILD_LIBJAVA/CppSibling.obj CppSibling.cpp\r\nM3_FILE|BUILD_LIBVERIFY_M3ObjectMetrics.c|| -std=c11 fixture-abi   fixture-opt  -c -FoRAM_UNUSED_BUILD_LIBVERIFY/M3ObjectMetrics.obj M3ObjectMetrics.c\r\nmake: Nothing to be done for 'qualify'.\r\n",
+          "stderr": "",
+          "elapsedSeconds": 0.047
+        }
+      ],
+      "fragments": {
+        "characterDefinitions": {
+          "bytes": 129,
+          "sha256": "2e79a480d809571572b6dd9acddb58a76be608175d4021502a43e4beba590d34",
+          "gitBlob": "bb734a6b3a1217f64315ac29e81239d35a5ab1ee"
+        },
+        "utilityHelpers": {
+          "bytes": 488,
+          "sha256": "702b628e471715e89ccb6d0461ba03f0e02dc65e568042d1b9e5cd70c193eb92",
+          "gitBlob": "064d2099941a04629e0fb3eaf82c8d43397d41b9"
+        },
+        "namedParameterTemplate": {
+          "bytes": 946,
+          "sha256": "e8ddace13216dab37a57f4254bf622d9336d886476d2c21a0cd6a2f6abfef9c3",
+          "gitBlob": "61468041d8a110aa2c6f883dca2a505659719e43"
+        },
+        "nativeFileMacro": {
+          "bytes": 8398,
+          "sha256": "f83d933036411b37c2381e5f58db8c24a11ecb86d1592225680a5e0cddac205c",
+          "gitBlob": "bc43b6fdb98e6712929b99c24ce09a1a65d363b1"
+        },
+        "objectNameMacro": {
+          "bytes": 239,
+          "sha256": "94b4e4fffc49573ba485ea61bc7bcc6e2a92af41d3aac12dd385a42719dd00f6",
+          "gitBlob": "1704d13b75dc52b649fbf5bebcf2c45650ed993a"
+        }
+      }
+    },
+    "cSyntax": {
+      "executable": "C:\\ProgramData\\mingw64\\mingw64\\bin\\gcc.EXE",
+      "version": "gcc.EXE (x86_64-posix-seh-rev0, Built by MinGW-Builds project) 15.2.0\r\nCopyright (C) 2025 Free Software Foundation, Inc.\r\nThis is free software; see the source for copying conditions.  There is NO\r\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\r\n\r\n",
+      "argv": [
+        "C:\\ProgramData\\mingw64\\mingw64\\bin\\gcc.EXE",
+        "-x",
+        "c",
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fsyntax-only",
+        "-IC:\\Program Files\\Java\\jdk-21\\include",
+        "-IC:\\Program Files\\Java\\jdk-21\\include\\win32",
+        "-"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "headers": {
+        "C:\\Program Files\\Java\\jdk-21\\include\\jni.h": {
+          "bytes": 75021,
+          "sha256": "7c11817ffadcb8cb03d433aa9835e88e0d084300c66023de122d7b8aeee9f01d",
+          "gitBlob": "84c516ae9aba086cba03cd70403043775d00047b"
+        },
+        "C:\\Program Files\\Java\\jdk-21\\include\\jvmti.h": {
+          "bytes": 84670,
+          "sha256": "8574c7234b89532ef0fd7b093f1838de1b7e6d6f4a1245be9ffffe2dd1d4e4a5",
+          "gitBlob": "57a42879a9a9c27991ff40e0539796f54bb14930"
+        },
+        "C:\\Program Files\\Java\\jdk-21\\include\\win32\\jni_md.h": {
+          "bytes": 583,
+          "sha256": "a0d17d1d5dda93f81d723dcec4b9b0f47c8a5f9d2a1164f3fb3f9a882bb3cd34",
+          "gitBlob": "dd54175c5d6f248f05a05046a9b5b7086c41deba"
+        }
+      }
+    },
+    "allocationBefore": 571469824,
+    "allocationAfter": 571469824,
+    "freeBytes": 10854150144,
+    "capBytes": 571473920,
+    "generationCalls": 0,
+    "scope": "36 real GNUmake --eval expansions of full CoreLibraries and exact named/native option macros; fixture library metadata/dependency effect only, no builds or output; real GCC syntax-only unchanged C with installed JNI/JVMTI headers; MSVC compile/link, real JVMTI concurrency and ARM libjava remain unproven"
+  },
+  "scope": {
+    "mavenJUnitExecutions": 10,
+    "makeEvaluations": 36,
+    "nativeObjectsCreated": 0,
+    "localDiskBuildOutputCreated": 0,
+    "msvcCompileLink": "NOT_RUN_PENDING_RECEIVING_CI",
+    "jvmtiRuntimeConcurrency": "NOT_RUN",
+    "aarch64Libjava": "NOT_RUN; existing ARM workflow jobs are HotSpot-only",
+    "jtregOwnerIssue": "Existing ObjectMetricsTest @run/class mismatch remains separate"
+  },
+  "copyright": "2026 Hitesh Soliwal and contributors; unchanged JDK and gmk GPL-2.0-only WITH Classpath-exception-2.0 notices remain in original source; Synexia tooling Apache-2.0"
+}

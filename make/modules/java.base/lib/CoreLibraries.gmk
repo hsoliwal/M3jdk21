@@ -53,6 +53,11 @@ ifeq ($(call isTargetOs, macosx), true)
   BUILD_LIBJAVA_java_props_macosx.c_CFLAGS := -x objective-c
 endif
 
+# MSVC's optional C11 atomics are used only by this JVMTI environment owner.
+ifeq ($(TOOLCHAIN_TYPE), microsoft)
+  BUILD_LIBJAVA_M3ObjectMetrics.c_CFLAGS += -experimental:c11atomics
+endif
+
 $(eval $(call SetupJdkLibrary, BUILD_LIBJAVA, \
     NAME := java, \
     OPTIMIZATION := HIGH, \

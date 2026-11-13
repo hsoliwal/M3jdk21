@@ -300,7 +300,9 @@ jobs:
           sudo apt-get install -y --no-install-recommends \
             autoconf make gcc g++ zip unzip \
             libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev \
-            libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
+            libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev jtreg7
+          test -s /usr/share/jtreg/lib/jtreg.jar
+          dpkg-query -W jtreg7
 
       - name: Configure Java 21-compatible JDK
         shell: bash
@@ -310,6 +312,7 @@ jobs:
             --with-boot-jdk="$JAVA_HOME" \
             --with-debug-level=release \
             --with-jvm-variants=server \
+            --with-jtreg=/usr/share/jtreg \
             --disable-warnings-as-errors
 
       - name: Build jdk.javadoc module and launcher
@@ -343,7 +346,9 @@ jobs:
           sudo apt-get install -y --no-install-recommends \
             autoconf make gcc g++ zip unzip \
             libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev \
-            libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
+            libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev jtreg7
+          test -s /usr/share/jtreg/lib/jtreg.jar
+          dpkg-query -W jtreg7
 
       - name: Configure Java 21-compatible JDK
         shell: bash
@@ -353,6 +358,7 @@ jobs:
             --with-boot-jdk="$JAVA_HOME" \
             --with-debug-level=release \
             --with-jvm-variants=server \
+            --with-jtreg=/usr/share/jtreg \
             --disable-warnings-as-errors
 
       - name: Build JDK image with serviceability backport
@@ -392,7 +398,9 @@ jobs:
           sudo apt-get install -y --no-install-recommends \
             autoconf make gcc g++ zip unzip \
             libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev \
-            libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
+            libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev jtreg7
+          test -s /usr/share/jtreg/lib/jtreg.jar
+          dpkg-query -W jtreg7
 
       - name: Configure Java 21-compatible JDK
         shell: bash
@@ -402,6 +410,7 @@ jobs:
             --with-boot-jdk="$JAVA_HOME" \
             --with-debug-level=release \
             --with-jvm-variants=server \
+            --with-jtreg=/usr/share/jtreg \
             --disable-warnings-as-errors
 
       - name: Build JDK image with KeyStore Instant API
@@ -441,7 +450,9 @@ jobs:
           sudo apt-get install -y --no-install-recommends \
             autoconf make gcc g++ zip unzip \
             libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev \
-            libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
+            libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev jtreg7
+          test -s /usr/share/jtreg/lib/jtreg.jar
+          dpkg-query -W jtreg7
 
       - name: Configure Java 21-compatible JDK
         shell: bash
@@ -451,6 +462,7 @@ jobs:
             --with-boot-jdk="$JAVA_HOME" \
             --with-debug-level=release \
             --with-jvm-variants=server \
+            --with-jtreg=/usr/share/jtreg \
             --disable-warnings-as-errors
 
       - name: Build JDK image with open-FD diagnostics

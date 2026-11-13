@@ -1,7 +1,7 @@
 import "copyrightAndOthers.stg"
 import "primitiveAPI.stg"
 
-targetPath() ::= "com/m3/collections/eclipse/api/stack/primitive"
+targetPath() ::= "jdk/m3/collections/eclipse/api/stack/primitive"
 
 fileName(primitive) ::= "Immutable<primitive.name>Stack"
 
@@ -12,14 +12,14 @@ class(primitive) ::= <<
 body(type, name) ::= <<
 <copyrightAndOthers()>
 
-package com.m3.collections.eclipse.api.stack.primitive;
+package jdk.m3.collections.eclipse.api.stack.primitive;
 
-import com.m3.collections.eclipse.api.block.function.primitive.<name>IntToObjectFunction;
-import com.m3.collections.eclipse.api.block.function.primitive.<name>ToObjectFunction;
-import com.m3.collections.eclipse.api.block.predicate.primitive.<name>IntPredicate;
-import com.m3.collections.eclipse.api.block.predicate.primitive.<name>Predicate;
-import com.m3.collections.eclipse.api.block.procedure.primitive.<name>Procedure;
-import com.m3.collections.eclipse.api.stack.ImmutableStack;
+import jdk.m3.collections.eclipse.api.block.function.primitive.<name>IntToObjectFunction;
+import jdk.m3.collections.eclipse.api.block.function.primitive.<name>ToObjectFunction;
+import jdk.m3.collections.eclipse.api.block.predicate.primitive.<name>IntPredicate;
+import jdk.m3.collections.eclipse.api.block.predicate.primitive.<name>Predicate;
+import jdk.m3.collections.eclipse.api.block.procedure.primitive.<name>Procedure;
+import jdk.m3.collections.eclipse.api.stack.ImmutableStack;
 
 /**
  * This file was automatically generated from template file immutablePrimitiveStack.stg.

@@ -3,7 +3,7 @@ import "primitiveLiteral.stg"
 
 skipBoolean() ::= "true"
 
-targetPath() ::= "com/m3/collections/eclipse/impl/set/primitive"
+targetPath() ::= "jdk/m3/collections/eclipse/impl/set/primitive"
 
 fileName(primitive) ::= "Abstract<primitive.name>Set"
 
@@ -14,13 +14,13 @@ class(primitive) ::= <<
 body(type, name)::= <<
 <copyright()>
 
-package com.m3.collections.eclipse.impl.set.primitive;
+package jdk.m3.collections.eclipse.impl.set.primitive;
 
-import com.m3.collections.eclipse.api.set.primitive.<name>Set;
-import com.m3.collections.eclipse.impl.primitive.Abstract<name>Iterable;
-import com.m3.collections.eclipse.api.LazyIterable;
-import com.m3.collections.eclipse.api.tuple.primitive.<name><name>Pair;
-import com.m3.collections.eclipse.impl.factory.primitive.<name>Sets;
+import jdk.m3.collections.eclipse.api.set.primitive.<name>Set;
+import jdk.m3.collections.eclipse.impl.primitive.Abstract<name>Iterable;
+import jdk.m3.collections.eclipse.api.LazyIterable;
+import jdk.m3.collections.eclipse.api.tuple.primitive.<name><name>Pair;
+import jdk.m3.collections.eclipse.impl.factory.primitive.<name>Sets;
 
 /**
  * This file was automatically generated from template file abstractPrimitiveSet.stg.

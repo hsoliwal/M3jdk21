@@ -17,12 +17,15 @@
 // Array-operation contribution: Copyright (c) 2026 Hitesh Soliwal and Synexia contributors.
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project:
 // bounded contiguous-span compaction of the existing array-owned ring.
+// Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project:
+// export exact-owner ring spans without an intermediate iterator.
 package jdk.m3.collections.apache.queue;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.AbstractCollection;
 import java.util.Arrays;
 import java.util.Collection;
@@ -163,6 +166,20 @@ public class CircularFifoQueue<E> extends AbstractCollection<E>
     }
 
     /**
+     * Copies live elements in encounter order using the ring's contiguous spans.
+     *
+     * @param array the destination array
+     * @param size the number of live elements
+     */
+    private void copyToArray(final Object[] array, final int size) {
+        final int firstLength = Math.min(size, maxElements - start);
+        System.arraycopy(elements, start, array, 0, firstLength);
+        if (firstLength < size) {
+            System.arraycopy(elements, 0, array, firstLength, size - firstLength);
+        }
+    }
+
+    /**
      * Decrements the internal index.
      *
      * @param index  the index to decrement
@@ -199,7 +216,11 @@ public class CircularFifoQueue<E> extends AbstractCollection<E>
                                   Integer.valueOf(index), Integer.valueOf(sz)));
         }
 
-        final int idx = (start + index) % maxElements;
+        // Normal queue positions wrap at most once; size() is overridable, so
+        // a subclass may expose larger indices and need a cold multi-wrap path.
+        final int untilWrap = maxElements - start;
+        final int wrapped = index < untilWrap ? start + index : index - untilWrap;
+        final int idx = wrapped < maxElements ? wrapped : wrapped % maxElements;
         return elements[idx];
     }
 
@@ -423,6 +444,41 @@ public class CircularFifoQueue<E> extends AbstractCollection<E>
         }
 
         return size;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object[] toArray() {
+        // Subclasses retain AbstractCollection's size and iterator dispatch.
+        if (getClass() != CircularFifoQueue.class) {
+            return super.toArray();
+        }
+        final int size = size();
+        final Object[] array = new Object[size];
+        copyToArray(array, size);
+        return array;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T> T[] toArray(final T[] array) {
+        // Subclasses retain AbstractCollection's size and iterator dispatch.
+        if (getClass() != CircularFifoQueue.class) {
+            return super.toArray(array);
+        }
+        final int size = size();
+        final T[] result = array.length >= size ? array
+                : (T[]) Array.newInstance(array.getClass().getComponentType(), size);
+        copyToArray(result, size);
+        if (result.length > size) {
+            result[size] = null;
+        }
+        return result;
     }
 
     /**

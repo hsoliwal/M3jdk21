@@ -81,6 +81,8 @@ public final class M3PrecomputePayload {
             java.util.regex.Pattern.compile("[a-z][a-z0-9_]*");
     private static final Map<String, Expected> FIELD_TYPES = fieldTypes();
     private final Map<String, Field> fields;
+    private volatile String canonicalJson;
+    private volatile boolean canonicalJsonRendered;
 
     private M3PrecomputePayload(Map<String, Field> fields) {
         this.fields = Collections.unmodifiableMap(new TreeMap<>(fields));
@@ -109,7 +111,8 @@ public final class M3PrecomputePayload {
 
     public long requireLong(String name) { return require(name, Kind.INTEGER).integerValue(); }
     public double requireDouble(String name) {
-        Field field = Objects.requireNonNull(fields.get(name), "missing field: " + name);
+        Field field = fields.get(name);
+        if (field == null) field = Objects.requireNonNull(field, "missing field: " + name);
         if (field.kind() != Kind.INTEGER && field.kind() != Kind.DECIMAL)
             throw new IllegalArgumentException("field is not numeric: " + name);
         return field.kind() == Kind.INTEGER ? field.integerValue() : field.decimalValue();
@@ -134,6 +137,10 @@ public final class M3PrecomputePayload {
 
     /** Deterministic JSON useful for exact round-trip receipts and parity tests. */
     public String canonicalJson() {
+        String cached = canonicalJson;
+        // Keep a fresh API String while sharing the immutable rendered character storage.
+        if (cached != null) return new String(cached);
+        boolean retain = canonicalJsonRendered;
         StringBuilder out = new StringBuilder("{");
         boolean first = true;
         for (Map.Entry<String, Field> entry : fields.entrySet()) {
@@ -142,7 +149,15 @@ public final class M3PrecomputePayload {
             appendString(out, entry.getKey()).append(':');
             appendValue(out, entry.getValue());
         }
-        return out.append('}').toString();
+        String rendered = out.append('}').toString();
+        if (!retain) {
+            // An admission-only render must not retain a second full text.
+            canonicalJsonRendered = true;
+            return rendered;
+        }
+        canonicalJson = rendered;
+        // The private cached wrapper never escapes to callers.
+        return new String(rendered);
     }
 
     private Field require(String name, Kind kind) {
