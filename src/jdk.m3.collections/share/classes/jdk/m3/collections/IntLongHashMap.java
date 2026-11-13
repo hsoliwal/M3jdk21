@@ -1,6 +1,7 @@
 /*
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
+ * Modified 2026-11-12: reuse the matched slot for conditional removal, preserving back-shift policy.
  */
 package jdk.m3.collections;
 
@@ -165,10 +166,18 @@ public final class IntLongHashMap {
 
     /** Removes only when the key maps to {@code expectedValue}. */
     public boolean remove(int key, long expectedValue) {
-        if (!containsKey(key) || getOrDefault(key, 0L) != expectedValue) {
+        if (key == 0) {
+            return hasZero && zeroValue == expectedValue && remove(0);
+        }
+        int pos = find(key);
+        if (pos < 0 || values[pos] != expectedValue) {
             return false;
         }
-        return remove(key);
+        // The successful match already owns the deletion coordinate.
+        shiftKeys(pos);
+        size--;
+        modCount++;
+        return true;
     }
 
     public int size() {

@@ -1,6 +1,7 @@
 /*
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
+ * Modified 2026-11-12: cover matched-slot deletion, collision layout and iterator epoch.
  */
 package jdk.m3.collections;
 
@@ -145,5 +146,77 @@ final class IntLongHashMapTest {
         }
         assertEquals(10_000 - 3_334, map.size());
         assertTrue(map.capacity() >= map.size());
+    }
+
+    @Test
+    void conditionalDeletionPreservesWrappedBackShiftAndExactIteratorEpoch() throws Exception {
+        int[] keys = conditionalCollisionKeys(7, 6);
+        long[] values = {0, Long.MIN_VALUE, Long.MAX_VALUE, 0x445566, -1};
+        IntLongHashMap actual = new IntLongHashMap();
+        IntLongHashMap incumbent = new IntLongHashMap();
+        for (int i = 0; i < 5; i++) {
+            assertTrue(actual.put(keys[i], values[i]));
+            assertTrue(incumbent.put(keys[i], values[i]));
+        }
+        actual.put(0, Long.MIN_VALUE);
+        incumbent.put(0, Long.MIN_VALUE);
+        assertEquals(8, actual.capacity(), "zero sidecar consumes no probe slot");
+        assertFalse(actual.remove(keys[5], 0), "missing and zero-valued mappings differ");
+        assertConditionalState(incumbent, actual);
+        for (int index : new int[]{2, 0, 4, 1, 3}) {
+            Object ownedKeys = conditionalField(actual, "keys");
+            Object ownedValues = conditionalField(actual, "values");
+            int epoch = (Integer) conditionalField(actual, "modCount");
+            IntIterator cursor = actual.keyIterator();
+            assertFalse(actual.remove(keys[index], values[index] ^ 1));
+            assertTrue(cursor.hasNext(), "mismatch preserves iterator validity");
+            assertConditionalState(incumbent, actual);
+            assertTrue(actual.remove(keys[index], values[index]));
+            assertTrue(incumbent.remove(keys[index]));
+            assertSame(ownedKeys, conditionalField(actual, "keys"), "removal retains key lane");
+            assertSame(ownedValues, conditionalField(actual, "values"), "removal retains value lane");
+            assertEquals(epoch + 1, conditionalField(actual, "modCount"));
+            assertThrows(java.util.ConcurrentModificationException.class, cursor::hasNext);
+            assertThrows(java.util.ConcurrentModificationException.class, cursor::nextInt);
+            assertConditionalState(incumbent, actual);
+        }
+        IntIterator zeroCursor = actual.keyIterator();
+        assertFalse(actual.remove(0, Long.MAX_VALUE));
+        assertEquals(0, zeroCursor.nextInt());
+        assertTrue(actual.remove(0, Long.MIN_VALUE));
+        assertTrue(incumbent.remove(0));
+        assertThrows(java.util.ConcurrentModificationException.class, zeroCursor::hasNext);
+        assertConditionalState(incumbent, actual);
+        int epoch = (Integer) conditionalField(actual, "modCount");
+        assertFalse(actual.remove(0, 0));
+        assertEquals(epoch, conditionalField(actual, "modCount"));
+        assertTrue(actual.isEmpty());
+    }
+
+    private static int[] conditionalCollisionKeys(int home, int count) throws Exception {
+        int[] result = new int[count];
+        int found = 0;
+        for (int key = 1; found < count; key++) {
+            IntLongHashMap map = new IntLongHashMap();
+            map.put(key, key);
+            if (((int[]) conditionalField(map, "keys"))[home] != 0) result[found++] = key;
+        }
+        return result;
+    }
+
+    private static Object conditionalField(IntLongHashMap map, String name) throws Exception {
+        java.lang.reflect.Field field = IntLongHashMap.class.getDeclaredField(name);
+        field.setAccessible(true);
+        return field.get(map);
+    }
+
+    private static void assertConditionalState(IntLongHashMap expected, IntLongHashMap actual) throws Exception {
+        assertArrayEquals((int[]) conditionalField(expected, "keys"), (int[]) conditionalField(actual, "keys"));
+        assertArrayEquals((long[]) conditionalField(expected, "values"), (long[]) conditionalField(actual, "values"));
+        assertArrayEquals(expected.keysToArray(), actual.keysToArray());
+        for (String name : new String[]{"mask", "threshold", "size", "hasZero", "zeroValue", "modCount"}) {
+            assertEquals(conditionalField(expected, name), conditionalField(actual, name), name);
+        }
+        assertEquals(expected.payloadBytes(), actual.payloadBytes());
     }
 }
