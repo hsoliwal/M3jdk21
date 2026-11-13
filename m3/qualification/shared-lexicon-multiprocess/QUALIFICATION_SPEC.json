@@ -1,0 +1,55 @@
+{
+  "schema": "M3_SHARED_IMAGE_PROCESS_QUALIFICATION_SPEC_V1",
+  "status": "QUALIFIED_WINDOWS_X64_ONLY",
+  "productionOwnersChanged": 0,
+  "publicContractsChanged": 0,
+  "generationCalls": 0,
+  "atoms": [
+    {
+      "id": "recipe-1",
+      "behavior": "one exact absent Java probe, fixed point and refusal contracts",
+      "proof": "5 recipe JUnit tests"
+    },
+    {
+      "id": "image-1",
+      "behavior": "sorted version1 UTF16 fixture through existing writer",
+      "proof": "139 records, 2236-byte file"
+    },
+    {
+      "id": "reader-1",
+      "behavior": "lookup/lowerBound/prefix and code-unit parity",
+      "proof": "5 JUnit in each of 2 JVMs"
+    },
+    {
+      "id": "sharing-1",
+      "behavior": "actual live mappings bind same locked backing file and byte range",
+      "proof": "Windows QueryWorkingSetEx Valid, Shared, ShareCount2, PAGE_READONLY"
+    },
+    {
+      "id": "lifetime-1",
+      "behavior": "local arena copies remain locally owned; all children reaped before fixture removal",
+      "proof": "ownership JUnit, strict completion/cleanup receipt"
+    }
+  ],
+  "nonClaims": [
+    "same physical PFN or peers specifically identified by share count",
+    "equal virtual addresses",
+    "shared Java array/String storage",
+    "JNI custom DLL qualification",
+    "performance, startup, ARM, Android, macOS or microcontrollers",
+    "resolution of pending manifest Unicode metadata acceptance choice"
+  ],
+  "pinnedInput": "5f148594be6d26c4db1d5b559209068334739897",
+  "proofBlob": "7ce082ae159343df7539140a60081f34f4651297",
+  "failedInputs": [
+    {
+      "input": "210f8b86c79c1b9f94c9f245d4f7fbcedf4cd2a4",
+      "receipt": "f12dc6b53ee1736a3cd3c9697dbd15985cddef9d"
+    },
+    {
+      "input": "24df8608a0d51fe564149884e48385d29d5a7bf5",
+      "receipt": "62a88b870a8e6f5c6662c42f544d7047a0c3be9b"
+    }
+  ],
+  "copyright": "2026 Hitesh Soliwal, Synexia; Apache-2.0. Existing donor notices retained."
+}
