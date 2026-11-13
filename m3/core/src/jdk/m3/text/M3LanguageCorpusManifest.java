@@ -244,7 +244,7 @@ public final class M3LanguageCorpusManifest {
             new M3CorpusSourceReceipt(fields[11], URI.create(decode(fields[12])), decode(fields[13]),
                 decode(fields[14]), fields[15]),
             decode(fields[16]), URI.create(decode(fields[17])), Integer.parseInt(fields[18]),
-            decode(fields[19])));
+            fields[19].isEmpty() ? null : decode(fields[19])));
       } catch (IllegalArgumentException malformed) {
         throw new IOException("invalid corpus manifest line " + (line + 1), malformed);
       }
