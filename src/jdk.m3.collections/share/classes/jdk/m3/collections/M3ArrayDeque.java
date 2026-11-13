@@ -232,21 +232,34 @@ public final class M3ArrayDeque<E> extends AbstractCollection<E>
         }
         size = 0; head = 0; revision++;
     }
-    /** Evaluate callbacks first; if they fail, retain the original circular layout. */
+    /**
+     * Evaluate callbacks first; if they fail, retain the original circular layout.
+     * No-match calls allocate no removal workspace. A first rejection starts a
+     * packed bit mask for the remaining suffix; the accepted prefix stays in place.
+     */
     @Override public boolean removeIf(Predicate<? super E> predicate) {
         Objects.requireNonNull(predicate, "predicate");
         long expected = revision;
-        byte[] removed = new byte[size];
-        int rejected = 0;
-        for (int i = 0; i < removed.length; i++) {
+        int oldSize = size, firstRemoved = oldSize;
+        long[] removed = null;
+        for (int i = 0; i < oldSize; i++) {
             boolean selected = predicate.test(at(i));
             if (revision != expected) throw new ConcurrentModificationException("reentrant filtered deque mutation");
-            if (selected) { removed[i] = 1; rejected++; }
+            if (selected) {
+                if (removed == null) {
+                    firstRemoved = i;
+                    // Subtraction before rounding avoids overflow at maximum capacity.
+                    removed = new long[((oldSize - i - 1) >>> 6) + 1];
+                }
+                int bit = i - firstRemoved;
+                removed[bit >>> 6] |= 1L << (bit & (Long.SIZE - 1));
+            }
         }
-        if (rejected == 0) return false;
-        int oldSize = size, write = 0;
-        for (int read = 0; read < oldSize; read++) {
-            if (removed[read] == 0) {
+        if (removed == null) return false;
+        int write = firstRemoved;
+        for (int read = firstRemoved + 1; read < oldSize; read++) {
+            int bit = read - firstRemoved;
+            if ((removed[bit >>> 6] & (1L << (bit & (Long.SIZE - 1)))) == 0L) {
                 int src = position(read), dst = position(write++);
                 values[dst] = values[src]; states[dst] = states[src];
             }

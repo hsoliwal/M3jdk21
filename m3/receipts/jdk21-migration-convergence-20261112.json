@@ -1,0 +1,112 @@
+{
+  "schema": "M3_JDK21_MIGRATION_CONVERGENCE_RECEIPT_V1",
+  "spdx_file_copyright_text": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "spdx_license_identifier": "Apache-2.0",
+  "status": "EXECUTED_POSTIMAGES_SUBMITTED_FOR_REVIEW",
+  "observed_utc": "2026-11-12",
+  "product_repository": "hsoliwal/M3jdk21",
+  "product_preimage_revision": "b98bf8c065818aac3447be165909e2a013325d9a",
+  "canonical_recipe_repository": "hsoliwal/com.synexia",
+  "canonical_recipe_revision": "e56ad74ca16727a8c7154f13c4f84d1fe114d889",
+  "execution_authority_from_this_receipt": false,
+  "promotion_authority_from_this_receipt": false,
+  "postimages": [
+    {
+      "path": "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ArrayDeque.java",
+      "before_sha256": "8089bda146d61ee5d5290e6714e1dd51782d74f902e117947efab61f441e8331",
+      "after_sha256": "353b9c0e130f09915c5c40b974a632cb64389549ff7b6dfb98caf3c8a07b7464",
+      "after_git_blob_sha1": "4bef1d278e60f587488d12a7215c0ab0c39e6321",
+      "recipe_id": "com.synexia.m3.DequeRemoveMask20261112"
+    },
+    {
+      "path": "test/jdk/jdk/m3/collections/ArrayDequeRemoveIfContract.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "8b09ff2fd288447e24dbee1eb07aa21c8764da181d7015c5b413435e47b7a3dc",
+      "after_git_blob_sha1": "dfbb11501ecad93fb0d3f13153849d701d4981a6",
+      "recipe_id": "com.synexia.m3.DequeRemoveMask20261112"
+    },
+    {
+      "path": "test/jdk/jdk/m3/collections/ArrayDequeRemoveIfTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "e1ed06dd44f22ffe89b5e853b2071e6b074a61b480bf76765f38bad59d4c2b31",
+      "after_git_blob_sha1": "ad24c72291abf17ae22f8b61060de0e50d007793",
+      "recipe_id": "com.synexia.m3.DequeRemoveMask20261112"
+    },
+    {
+      "path": "m3/backports/JSR_JEP_JBS_22_27_RECEIPT_20261022.md",
+      "before_sha256": "b8cd4cdc45085c4d9317eb8db314d14aea2c53d87415a0d567ec3f49767ac1e5",
+      "after_sha256": "79ff729d6fd92d74d43b655aa6ed291a4d2d74f02a0e2676bd5e019fa9adc79e",
+      "after_git_blob_sha1": "14d4352d30d8e5b347ecba9d9ce170d5034cb55e",
+      "recipe_id": "com.synexia.m3.Jdk21JbsReceiptReconciliation20261112"
+    }
+  ],
+  "qualified_leaf_gates": {
+    "deque_recipe_sdk": {
+      "tests": 5,
+      "failures": 0,
+      "fixed_point_changes": 0
+    },
+    "deque_java21_strict_compile": "PASS",
+    "deque_removal_corpus": {
+      "cases": 7172,
+      "checks_per_run": 5562028,
+      "modes": [
+        "normal",
+        "-Xint"
+      ],
+      "result": "PASS"
+    },
+    "deque_existing_growth": {
+      "checks": 7055693,
+      "export_layouts": 16401,
+      "growth_layouts": 1504,
+      "result": "PASS"
+    },
+    "deque_fields_and_method_descriptors": "UNCHANGED",
+    "deque_receiving_junit": {
+      "tests": 1,
+      "failures": 0
+    },
+    "jbs_existing_sdk_tests": {
+      "tests": 33,
+      "failures": 0
+    },
+    "jbs_receipt_sdk_tests": {
+      "tests": 6,
+      "failures": 0
+    },
+    "jbs_python_behavior": {
+      "tests": 10,
+      "failures": 0
+    }
+  },
+  "pending_gates": [
+    "complete canonical provenance corpus",
+    "full Synexia reactor and recipe admission",
+    "receiving M3 Maven control reactor and complete module tests",
+    "source-built installed M3JDK image and jtreg",
+    "HotSpot and JNI/native integration",
+    "hosted CI",
+    "ordered String -> arrays -> collections admission",
+    "cross-JDK and multi-architecture qualification",
+    "full GA-census and JBS database reconciliation"
+  ],
+  "limits": [
+    "Allocation observations concern the stated Java21 runtime and cases; no throughput improvement is asserted",
+    "No whole-family, Java specification compatibility, or full migration completion is asserted",
+    "Original JBS census and Arrays exception observations were preserved, not rerun",
+    "No equivalent allocation-failure or OutOfMemoryError timing is established"
+  ],
+  "canonical_gate_evidence": {
+    "deque": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collection-atoms-20261030/deque-remove-mask-20261112/QUALIFICATION.json",
+      "sha256": "5d4b02554da41c8289d4298eb0c884ec2bfd16060a3cffebbb9097533a756cc6"
+    },
+    "jbs": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-jbs-census-intake-20261024/revisions/20261112-receipt-reconciliation/evidence/execution.json",
+      "sha256": "2b7ddf83b28ed07eec93a2d476b9a9a1db6c60083182fbdee417249b0a7a6041"
+    }
+  },
+  "canonical_pull_request": "https://github.com/hsoliwal/com.synexia/pull/17191",
+  "canonical_complete_provenance_gate": "HOLD_INHERITED_CORPUS_RECORDS"
+}
