@@ -29,7 +29,7 @@ jobs:
         run: |
           set -euo pipefail
           OWNER=src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3TreeList.java
-          test "$(git hash-object "$OWNER")" = '1a9f53aac41c24bb244b1f138f41ddaff0eb99c2'
+          test "$(git hash-object "$OWNER")" = 'f7e30a8b539afa8364ff430b9cf1be4381d499de'
           mkdir -p target/tree-cursor/before
           git show 778cd3eac266974e7b5155e79838f74ee516b535:"$OWNER" > target/tree-cursor/before/M3TreeList.java
           test "$(git hash-object target/tree-cursor/before/M3TreeList.java)" = '9da0a6ad147c423a0cfa718a8159890cc2c25977'
