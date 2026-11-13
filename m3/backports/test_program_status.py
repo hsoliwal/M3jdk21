@@ -40,7 +40,7 @@ class ProgramStatusTest(unittest.TestCase):
         self.assertEqual(27, data["released_jdk_ceiling"])
         self.assertEqual(13, data["seed_rows"])
         self.assertEqual(13, sum(data["seed_states"].values()))
-        self.assertEqual(13, data["community_fork_rows"])
+        self.assertEqual(19, data["community_fork_rows"])
         self.assertFalse(data["community_fork_source_copy_authority"])
         self.assertFalse(data["community_fork_selected_for_distribution"])
         self.assertFalse(data["completion_claim"])
@@ -56,7 +56,7 @@ class ProgramStatusTest(unittest.TestCase):
         self.assertIn("jep\ttotal\t85\n", first)
         self.assertIn("jep\tunique\t85\n", first)
         self.assertIn("jep-priority\ttotal\t36\n", first)
-        self.assertIn("community-fork\ttotal\t13\n", first)
+        self.assertIn("community-fork\ttotal\t19\n", first)
 
 if __name__ == "__main__":
     unittest.main()
