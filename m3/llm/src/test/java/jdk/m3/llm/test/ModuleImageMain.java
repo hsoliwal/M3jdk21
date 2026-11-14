@@ -12,8 +12,14 @@ import jdk.m3.llm.projection.CellKey;
 import jdk.m3.llm.projection.ExtractiveConsolidator;
 import jdk.m3.llm.projection.TextInventoryCell;
 import jdk.m3.llm.summary.LuhnSummary;
+import jdk.m3.llm.model.M3ModelInput;
+import jdk.m3.llm.model.M3NcmCodes;
+import jdk.m3.llm.model.M3NcmQuantizer;
+import jdk.m3.llm.model.M3SystemOneSchema;
+import jdk.m3.llm.model.M3SystemOneRequest;
 import java.lang.module.ModuleDescriptor;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
 import java.time.Duration;
 import java.util.List;
 import java.util.Set;
@@ -28,7 +34,7 @@ public final class ModuleImageMain {
         require(module == ChromeMlRunner.class.getModule(), "single product owner");
         require(!module.isExported("jdk.m3.llm.internal"), "internal helpers are not exported");
         require(!module.isExported("jdk.m3.llm.internal.json"), "private task JSON is not exported");
-        for (String name : List.of("chrome", "chrome.aix", "evidence", "extract", "summary", "projection"))
+        for (String name : List.of("chrome", "chrome.aix", "evidence", "extract", "summary", "projection", "model"))
             require(module.isExported("jdk.m3.llm." + name), "public package is exported: " + name);
         Set<String> requires = module.getDescriptor().requires().stream()
                 .map(ModuleDescriptor.Requires::name).collect(java.util.stream.Collectors.toSet());
@@ -59,7 +65,36 @@ public final class ModuleImageMain {
                 "x".repeat(9000), "", 3, 128, Duration.ofSeconds(5)));
         require(result.coverage().size() == 2 && result.receipts().size() == 3,
                 "named-module task map/reduce with explicit scripted runner");
-        System.out.println("M3_LLM_IMAGE_PASS module=jdk.m3.llm thirdPartyRuntimeDependencies=0 modelCalls=0");
+        String dependencyRoot = "a".repeat(64);
+        String exactModelSource = "Source \ud800 remains exact";
+        M3ModelInput modelInput = M3ModelInput.of(exactModelSource, dependencyRoot,
+                dependencyRoot, dependencyRoot, dependencyRoot);
+        require(modelInput.text() == exactModelSource, "ordinary immutable String is retained");
+        require(M3ModelInput.class.getModule() == module, "model input has product module owner");
+        M3NcmQuantizer quantizer = M3NcmQuantizer.of(2, 1, new int[] {1, 2},
+                new int[] {2, 2}, new float[] {0, 2, 0, 1}, M3NcmQuantizer.Backend.JAVA);
+        M3NcmCodes codes = quantizer.encode(modelInput, new float[] {2, 3});
+        require(codes.matches(modelInput, quantizer.codebookRoot()), "version-qualified code binding");
+        require(java.util.Arrays.equals(new float[] {2, 3}, quantizer.reconstruct(codes)),
+                "residual quantization primitive in named module");
+        M3SystemOneSchema schema = M3SystemOneSchema.compile(List.of(
+                new M3SystemOneSchema.NoulQuestion("supported", null, "source supports", "source does not support")));
+        M3ModelInput prepared = new M3SystemOneRequest("caller-model", exactModelSource, schema)
+                .prepare(dependencyRoot, dependencyRoot, dependencyRoot);
+        require(prepared.text() == exactModelSource && schema.rootHash().equals(prepared.namespace().schemaRoot()),
+                "typed request prepares exact ordinary String input");
+        require(M3SystemOneSchema.class.getModule() == module, "typed schema has product module owner");
+        require(args.length <= 1, "optional single explicit NCM native library path");
+        boolean nativeExecuted = args.length == 1;
+        if (nativeExecuted) {
+            M3NcmQuantizer.loadNative(Path.of(args[0]));
+            M3NcmQuantizer nativeQuantizer = M3NcmQuantizer.of(2, 1, new int[] {1, 2},
+                    new int[] {2, 2}, new float[] {0, 2, 0, 1}, M3NcmQuantizer.Backend.NATIVE);
+            require(codes.equals(nativeQuantizer.encode(modelInput, new float[] {2, 3})),
+                    "JNI numerical result agrees in named module");
+        }
+        System.out.println("M3_LLM_IMAGE_PASS module=jdk.m3.llm thirdPartyRuntimeDependencies=0 modelCalls=0"
+                + " ncmPrimitive=true systemOneStructure=true ncmNative=" + nativeExecuted);
     }
 
     private static void require(boolean condition, String description) {

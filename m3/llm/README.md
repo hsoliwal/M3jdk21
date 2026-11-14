@@ -26,6 +26,9 @@ The current broader JDK receiving phase is not advanced by this module.
 | Byte-budget projection | `jdk.m3.llm.projection.ExtractiveConsolidator` and `Bm25Index` | Whole UTF-8 passages, mandatory evidence, retained omissions, version-aware search and digest-checked snapshots |
 | Task summary and key points | `ChromeMlTaskService` and `ChromeBuiltInAiAdapters` | Surrogate-safe exact coverage, three-way map/reduce, whole-job call-budget preflight and per-call receipts |
 | Native inference process | `ChromeMlProcessRunner` and runtime/configuration owners | Explicit CPU/GPU/APU configuration, streaming, cancellation, bounded capture, asset pins and lifecycle checks |
+| Exact model input | `jdk.m3.llm.model.M3ModelInput` | Ordinary immutable String plus exact model/tokenizer/schema/context roots; no additional text pool |
+| Typed question structure | `M3SystemOneSchema` and `M3SystemOneRequest` | NOUL/Choice/Score structural validation and exact prepared input; no provider invocation |
+| Residual vector quantization | `M3NcmQuantizer` and `M3NcmCodes` | Supplied numerical latents, versioned codebooks, primitive code lanes and optional explicit JNI nearest-code acceleration |
 
 The browser native `Summarizer` and prompt-based AiX reduction paths retain
 different protocols. A successful native completion or valid result hash
@@ -74,6 +77,20 @@ For a source file, build an `AiXSourceSnapshot`, then use
 configured `ChromeMlRunner` to `AiXChromeMlMultipass.run`. Caller-constructed
 Plan/Chunk metadata does not gain source verification from `run` alone.
 Keep source snapshots and candidate output records separately.
+
+## Exact model input and numerical primitives
+
+The `jdk.m3.llm.model` package keeps exact input text, typed question structure
+and learned numerical codes as separate values. It retains the caller's ordinary
+immutable String, which follows the String implementation of the chosen JDK.
+It exposes no internal M3String coordinates and introduces no text pool or
+Synexia runtime dependency.
+
+The typed question structures follow the public Jev NOUL, Choice and Score
+shapes. The numerical component implements residual vector quantization over
+caller-supplied encoder latents. Neither API includes a provider, trained model,
+weights, encoder or decoder. [MODEL_TEXT.md](MODEL_TEXT.md) documents
+identity requirements, Java examples, explicit native builds and qualification.
 
 ## Browser and native runtime boundary
 
