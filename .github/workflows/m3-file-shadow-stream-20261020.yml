@@ -4,8 +4,7 @@ on:
   pull_request:
     paths:
       - 'm3/file/**'
-      - 'm3/arrays/**'
-      - 'm3/collections/**'
+      - 'src/jdk.m3.collections/**'
       - '.github/workflows/m3-file-shadow-stream-20261020.yml'
   workflow_dispatch:
 permissions:

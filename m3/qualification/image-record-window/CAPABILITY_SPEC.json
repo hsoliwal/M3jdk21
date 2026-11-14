@@ -1,0 +1,17 @@
+{
+  "schema": "M3_TYPED_ATOM_CAPABILITY_V1",
+  "owner": "m3/core/src/jdk/m3/text/SharedLexiconImage.java",
+  "pattern": "CONSTRUCTOR_LOCAL_READONLY_RECORD_WINDOW_V2",
+  "inputs": "Validated version1/2 image directory;physical offsets may overlap,movebackwards,leavegaps,orbeemptyatend.",
+  "outputs": "Exact originalrecord digests/IDs/refusals with independent owner cursor/private table.",
+  "mechanism": "Lazy local readonly recordView;rewind discardsmark/setsposition0;setvalidatedend thenbegin;MessageDigest consumes remaining;existing scratchcopypublishes table.",
+  "invariants": [
+    "rewind->limit(end)->position(begin) only after independently validated 0<=begin<=end<=logicalImageLimit",
+    "view cursor/mark independent of supplied image,including restrictedlimit/capacity/sliced backing",
+    "read-only content does not constrain provider cursor retention;post-admission retained cursor edits cannot affect owner",
+    "physical backwards/overlapping/empty record windows and both versions remain valid",
+    "no field/API/nonconstructor method changes,no native or collection storage redesign"
+  ],
+  "qualification": "Executed2recipe stages and6freshJVMs=118JUnit/336samples,all65536units/bothversions/22physicallayouts/restrictedlimit+sliceddata+marks/providers/corruption/concurrency;no fullFS/JDK/native/platform proof.",
+  "generationCalls": 0
+}

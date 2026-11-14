@@ -8,10 +8,10 @@
   "scope": "Qualify separate frozen PRE control before receiving provider outputs; retain unchanged provider/CLI and all completion blockers",
   "sourceBase": "69b5cc602485bd2a7354e1f1b364bd4af06ee241",
   "receiverBase": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
-  "sdkTree": "c93b25915d57178bec19458ba9ddc34383d92639",
+  "sdkTree": "0d2225996145946737eb5f06f19bed2ffe4b825b",
   "sdkFiles": 74,
-  "sdkBytes": 1955646,
-  "pinsSha256": "0392e66f35721a0abfabe4a2500e0305bbb9b6b1cc78a7db342fb6bde3278ed5",
+  "sdkBytes": 1954797,
+  "pinsSha256": "041479224c0e2d0209195007a8ea93f5acb4c62cd8700b34231721723a4e90b9",
   "targets": {
     "total": 60,
     "keep": 54,
@@ -29,7 +29,7 @@
     "hashObligations": 80,
     "completionBlockers": 158,
     "frozenPreFiles": 55,
-    "frozenPreBytes": 795620
+    "frozenPreBytes": 795367
   },
   "sourceReview": "INDEPENDENT_JAVA_POM_AND_PYTHON_WORKFLOW_REVIEW_CLEAR_SOURCE_ONLY",
   "execution": "RECIPE_HOSTED_11_28_38_26_PASS; RECEIVED_POST_CHECKOUT_NOT_RUN",
@@ -128,7 +128,7 @@
   "baselineProjection": {
     "foundation": "3f3508d22b5d3ad37aa2f5a45a1e469e904a80da",
     "evidence": "baseline-projection-20261018/source-review.json",
-    "frozenPreManifestSha256": "e0ec50d7f1608180e1fe831d137e26d51e691606b85379a1a38c12d064c702f5",
+    "frozenPreManifestSha256": "643d49f323068e6d4efc30726f7b80bf5c954c17259a32a623d3d792809517de",
     "beforeAfterProvider": true,
     "sourceReview": "CLEAR_SOURCE_ONLY",
     "execution": "PASS_AT613e5ff4; RECEIVED_POST_CHECKOUT_REQUALIFICATION_PENDING"
@@ -144,8 +144,8 @@
     "run": 39102078256,
     "job": 117600228618,
     "conclusion": "SUCCESS",
-    "sdkTree": "c93b25915d57178bec19458ba9ddc34383d92639",
-    "pinsSha256": "0392e66f35721a0abfabe4a2500e0305bbb9b6b1cc78a7db342fb6bde3278ed5",
+    "sdkTree": "0d2225996145946737eb5f06f19bed2ffe4b825b",
+    "pinsSha256": "041479224c0e2d0209195007a8ea93f5acb4c62cd8700b34231721723a4e90b9",
     "artifact": {
       "id": 12127665194,
       "zipBytes": 161703,
@@ -170,10 +170,10 @@
     "postAdded": 4,
     "postChanged": 2,
     "frozenPre": {
-      "bytes": 795620,
+      "bytes": 795367,
       "files": 55,
       "independentOfInstalledPost": true,
-      "manifestSha256": "e0ec50d7f1608180e1fe831d137e26d51e691606b85379a1a38c12d064c702f5",
+      "manifestSha256": "643d49f323068e6d4efc30726f7b80bf5c954c17259a32a623d3d792809517de",
       "preInventorySha256": "d2a4133059aca61b7c001951b9d9df8cbdcac108bd59c5403c8d3131c7cea0ef",
       "root": "/home/runner/work/_temp/m3-original-provider-39102078256-1/baseline",
       "beforeAfterByteIdentical": true,

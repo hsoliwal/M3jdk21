@@ -1,0 +1,18 @@
+{
+  "schema": "M3_IMAGE_HASH_FINITE_KERNEL_WORK_ORDER_V1",
+  "owner": "m3/core/src/jdk/m3/text/SharedLexiconImage.java",
+  "sourceRevision": "778cd3eac266974e7b5155e79838f74ee516b535",
+  "preimage": "570a22f733499729bdc0fe48813f755e52ebe963",
+  "reuseGateBlob": "1784f37b7f69d19317f14c25bbf991270ba9b47f",
+  "pattern": "M3_UTF16_ZERO_SINGLETON_HASH_V1",
+  "contract": {
+    "name": "record UTF16 Java hash",
+    "inputs": "validated immutable image record index",
+    "outputs": "exact int32 polynomial hash ofUTF16codeunits",
+    "effects": "Check index, read bounded record bytes; no new allocation, fields, provider calls, storage or public API",
+    "contract": "Every31multiply/add remains in logical code-unit order with Java overflow; malformed-directory and hash/order/checksum validation order unchanged; constructor and copyRecord digests unchanged."
+  },
+  "recipe": "M3HashPinnedJavaSnapshotRecipe/m3-image-hash-finite-kernel",
+  "scope": "After existing index check, hash(empty)=0 and hash(single UTF16unit)=unsigned unit. All records>=2use the exact incumbent byte loop. No new fields/API/provider/cache/storage; precomputed lengths already select the finite kernel.",
+  "generationCalls": 0
+}

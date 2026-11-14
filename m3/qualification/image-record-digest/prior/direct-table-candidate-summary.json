@@ -1,0 +1,452 @@
+{
+  "schema": "M3_IMAGE_DIGEST_QUALIFICATION_V1",
+  "status": "PASS",
+  "recipeTests": 8,
+  "productJUnitExecutions": 56,
+  "sourceBefore": {
+    "bytes": 15062,
+    "sha256": "c67fff80500a51457cbf171cfeb15cbf91562bac05614a3958e11985b4775028",
+    "gitBlob": "570a22f733499729bdc0fe48813f755e52ebe963"
+  },
+  "sourceAfter": {
+    "bytes": 15533,
+    "sha256": "26cbf4a95c578ade0e60b18f9939f50560adf504da31131535593cf5ae4bd328",
+    "gitBlob": "5aa4bf85b5f90a5a457d3f6692767d7d71e06961"
+  },
+  "comparison": {
+    "1024-boundary": {
+      "before": {
+        "medianNanosPerCall": 1180225,
+        "medianBytesPerCall": 516608,
+        "perProcess": [
+          {
+            "nanos": 1156225,
+            "bytes": 516608
+          },
+          {
+            "nanos": 1239500,
+            "bytes": 516608
+          }
+        ],
+        "samples": 14
+      },
+      "after": {
+        "medianNanosPerCall": 839012.5,
+        "medianBytesPerCall": 122872,
+        "perProcess": [
+          {
+            "nanos": 402100,
+            "bytes": 122872
+          },
+          {
+            "nanos": 1064850,
+            "bytes": 122872
+          }
+        ],
+        "samples": 14
+      }
+    },
+    "empty": {
+      "before": {
+        "medianNanosPerCall": 11171.875,
+        "medianBytesPerCall": 1568,
+        "perProcess": [
+          {
+            "nanos": 11103.125,
+            "bytes": 1568
+          },
+          {
+            "nanos": 11240.625,
+            "bytes": 1568
+          }
+        ],
+        "samples": 14
+      },
+      "after": {
+        "medianNanosPerCall": 10781.25,
+        "medianBytesPerCall": 1568,
+        "perProcess": [
+          {
+            "nanos": 10684.375,
+            "bytes": 1568
+          },
+          {
+            "nanos": 11190.625,
+            "bytes": 1568
+          }
+        ],
+        "samples": 14
+      }
+    },
+    "65536-ascii": {
+      "before": {
+        "medianNanosPerCall": 47281900,
+        "medianBytesPerCall": 28321344,
+        "perProcess": [
+          {
+            "nanos": 47145800,
+            "bytes": 28321344
+          },
+          {
+            "nanos": 50931700,
+            "bytes": 28321344
+          }
+        ],
+        "samples": 14
+      },
+      "after": {
+        "medianNanosPerCall": 39574000,
+        "medianBytesPerCall": 6825816,
+        "perProcess": [
+          {
+            "nanos": 40972500,
+            "bytes": 6825816
+          },
+          {
+            "nanos": 38356100,
+            "bytes": 6825816
+          }
+        ],
+        "samples": 14
+      }
+    },
+    "1024-ascii": {
+      "before": {
+        "medianNanosPerCall": 726937.5,
+        "medianBytesPerCall": 452160,
+        "perProcess": [
+          {
+            "nanos": 796950,
+            "bytes": 452160
+          },
+          {
+            "nanos": 721750,
+            "bytes": 452160
+          }
+        ],
+        "samples": 14
+      },
+      "after": {
+        "medianNanosPerCall": 584425,
+        "medianBytesPerCall": 116568,
+        "perProcess": [
+          {
+            "nanos": 573350,
+            "bytes": 116568
+          },
+          {
+            "nanos": 628250,
+            "bytes": 116568
+          }
+        ],
+        "samples": 14
+      }
+    },
+    "one": {
+      "before": {
+        "medianNanosPerCall": 11131.25,
+        "medianBytesPerCall": 2000,
+        "perProcess": [
+          {
+            "nanos": 10543.75,
+            "bytes": 2000
+          },
+          {
+            "nanos": 11537.5,
+            "bytes": 2000
+          }
+        ],
+        "samples": 14
+      },
+      "after": {
+        "medianNanosPerCall": 11407.8125,
+        "medianBytesPerCall": 1952,
+        "perProcess": [
+          {
+            "nanos": 11525,
+            "bytes": 1952
+          },
+          {
+            "nanos": 11225,
+            "bytes": 1952
+          }
+        ],
+        "samples": 14
+      }
+    },
+    "256-long": {
+      "before": {
+        "medianNanosPerCall": 8449937.5,
+        "medianBytesPerCall": 1164864,
+        "perProcess": [
+          {
+            "nanos": 8738050,
+            "bytes": 1164864
+          },
+          {
+            "nanos": 8213225,
+            "bytes": 1164864
+          }
+        ],
+        "samples": 14
+      },
+      "after": {
+        "medianNanosPerCall": 7958750,
+        "medianBytesPerCall": 40776,
+        "perProcess": [
+          {
+            "nanos": 7810725,
+            "bytes": 40776
+          },
+          {
+            "nanos": 8043225,
+            "bytes": 40776
+          }
+        ],
+        "samples": 14
+      }
+    },
+    "16384-multilingual": {
+      "before": {
+        "medianNanosPerCall": 15142450,
+        "medianBytesPerCall": 7349824,
+        "perProcess": [
+          {
+            "nanos": 14931500,
+            "bytes": 7349824
+          },
+          {
+            "nanos": 15883800,
+            "bytes": 7349824
+          }
+        ],
+        "samples": 14
+      },
+      "after": {
+        "medianNanosPerCall": 11328600,
+        "medianBytesPerCall": 1714024,
+        "perProcess": [
+          {
+            "nanos": 11255000,
+            "bytes": 1714024
+          },
+          {
+            "nanos": 11345500,
+            "bytes": 1714024
+          }
+        ],
+        "samples": 14
+      }
+    },
+    "64-ascii": {
+      "before": {
+        "medianNanosPerCall": 66718.75,
+        "medianBytesPerCall": 32320,
+        "perProcess": [
+          {
+            "nanos": 63025,
+            "bytes": 32320
+          },
+          {
+            "nanos": 69762.5,
+            "bytes": 32320
+          }
+        ],
+        "samples": 14
+      },
+      "after": {
+        "medianNanosPerCall": 46179.6875,
+        "medianBytesPerCall": 11608,
+        "perProcess": [
+          {
+            "nanos": 29078.125,
+            "bytes": 11608
+          },
+          {
+            "nanos": 48190.625,
+            "bytes": 11608
+          }
+        ],
+        "samples": 14
+      }
+    }
+  },
+  "storage": {
+    "readOnlyFInputBudgetBytes": 571469824,
+    "readOnlyFBaselineReceipt": "1091e30d98c3d7ed72c0a5c1d9c49e994895fd11",
+    "fFreshAllocationAudit": "NOT_COMPLETED_TIMEOUT_90S_PRIOR_PHASE",
+    "sBefore": 0,
+    "sAfter": 0,
+    "capBytes": 571473920,
+    "reserveBytes": 8589934592,
+    "sFree": 9861595136,
+    "peakObservedTaskAllocations": [
+      571469824
+    ],
+    "retainedBuildFiles": 0
+  },
+  "runs": [
+    {
+      "mode": "before",
+      "passed": 14,
+      "evidence": {
+        "allUnitVersionCases": 131072,
+        "apiFieldsFingerprint": "c61b9780c57d399c990507cdd64d0fbfd46a9a5a99ef0e99bb76f30d8cedb69c",
+        "boundaryRecords": 26,
+        "changedWhileOpeningRefused": true,
+        "concurrentImages": 64,
+        "defaultSpiFallbackCovered": true,
+        "directBufferSubtype": "java.nio.DirectByteBuffer",
+        "emptyFactories": 2,
+        "emptyVariants": 6,
+        "executedArrayDigests": 258,
+        "executedDirectDigests": 0,
+        "executedFactories": 258,
+        "filesystemCalls": 0,
+        "maximumRecords": 65536,
+        "nonConstructorFingerprint": "4d4b22b96d4f124df61eab4aa35fe7f6dc6ca027dc565e7ed2a2ee3feaad27bc",
+        "pinnedProviderHelperExecuted": true,
+        "postAdmissionMutationRefused": true,
+        "providerArrayDigests": 7,
+        "providerDirectDigests": 0,
+        "providerFactories": 7,
+        "refusalFamilies": 7,
+        "seededImages": 256,
+        "seededRows": 5200,
+        "sha256Provider": "SUN",
+        "utf16Units": 65536
+      }
+    },
+    {
+      "mode": "after",
+      "passed": 14,
+      "evidence": {
+        "allUnitVersionCases": 131072,
+        "apiFieldsFingerprint": "c61b9780c57d399c990507cdd64d0fbfd46a9a5a99ef0e99bb76f30d8cedb69c",
+        "boundaryRecords": 26,
+        "changedWhileOpeningRefused": true,
+        "concurrentImages": 64,
+        "defaultSpiFallbackCovered": true,
+        "directBufferSubtype": "java.nio.DirectByteBuffer",
+        "emptyFactories": 2,
+        "emptyVariants": 6,
+        "executedArrayDigests": 2,
+        "executedDirectDigests": 256,
+        "executedFactories": 3,
+        "filesystemCalls": 0,
+        "maximumRecords": 65536,
+        "nonConstructorFingerprint": "4d4b22b96d4f124df61eab4aa35fe7f6dc6ca027dc565e7ed2a2ee3feaad27bc",
+        "pinnedProviderHelperExecuted": true,
+        "postAdmissionMutationRefused": true,
+        "providerArrayDigests": 2,
+        "providerDirectDigests": 5,
+        "providerFactories": 3,
+        "refusalFamilies": 7,
+        "seededImages": 256,
+        "seededRows": 5200,
+        "sha256Provider": "SUN",
+        "utf16Units": 65536
+      }
+    },
+    {
+      "mode": "after",
+      "passed": 14,
+      "evidence": {
+        "allUnitVersionCases": 131072,
+        "apiFieldsFingerprint": "c61b9780c57d399c990507cdd64d0fbfd46a9a5a99ef0e99bb76f30d8cedb69c",
+        "boundaryRecords": 26,
+        "changedWhileOpeningRefused": true,
+        "concurrentImages": 64,
+        "defaultSpiFallbackCovered": true,
+        "directBufferSubtype": "java.nio.DirectByteBuffer",
+        "emptyFactories": 2,
+        "emptyVariants": 6,
+        "executedArrayDigests": 2,
+        "executedDirectDigests": 256,
+        "executedFactories": 3,
+        "filesystemCalls": 0,
+        "maximumRecords": 65536,
+        "nonConstructorFingerprint": "4d4b22b96d4f124df61eab4aa35fe7f6dc6ca027dc565e7ed2a2ee3feaad27bc",
+        "pinnedProviderHelperExecuted": true,
+        "postAdmissionMutationRefused": true,
+        "providerArrayDigests": 2,
+        "providerDirectDigests": 5,
+        "providerFactories": 3,
+        "refusalFamilies": 7,
+        "seededImages": 256,
+        "seededRows": 5200,
+        "sha256Provider": "SUN",
+        "utf16Units": 65536
+      }
+    },
+    {
+      "mode": "before",
+      "passed": 14,
+      "evidence": {
+        "allUnitVersionCases": 131072,
+        "apiFieldsFingerprint": "c61b9780c57d399c990507cdd64d0fbfd46a9a5a99ef0e99bb76f30d8cedb69c",
+        "boundaryRecords": 26,
+        "changedWhileOpeningRefused": true,
+        "concurrentImages": 64,
+        "defaultSpiFallbackCovered": true,
+        "directBufferSubtype": "java.nio.DirectByteBuffer",
+        "emptyFactories": 2,
+        "emptyVariants": 6,
+        "executedArrayDigests": 258,
+        "executedDirectDigests": 0,
+        "executedFactories": 258,
+        "filesystemCalls": 0,
+        "maximumRecords": 65536,
+        "nonConstructorFingerprint": "4d4b22b96d4f124df61eab4aa35fe7f6dc6ca027dc565e7ed2a2ee3feaad27bc",
+        "pinnedProviderHelperExecuted": true,
+        "postAdmissionMutationRefused": true,
+        "providerArrayDigests": 7,
+        "providerDirectDigests": 0,
+        "providerFactories": 7,
+        "refusalFamilies": 7,
+        "seededImages": 256,
+        "seededRows": 5200,
+        "sha256Provider": "SUN",
+        "utf16Units": 65536
+      }
+    }
+  ],
+  "stages": [
+    {
+      "stage": "product-recipe",
+      "exit": 0,
+      "reaped": true,
+      "seconds": 9.782
+    },
+    {
+      "stage": "before-0",
+      "exit": 0,
+      "reaped": true,
+      "seconds": 25.625
+    },
+    {
+      "stage": "after-1",
+      "exit": 0,
+      "reaped": true,
+      "seconds": 23.797
+    },
+    {
+      "stage": "after-2",
+      "exit": 0,
+      "reaped": true,
+      "seconds": 25.14
+    },
+    {
+      "stage": "before-3",
+      "exit": 0,
+      "reaped": true,
+      "seconds": 24.453
+    }
+  ],
+  "incumbentProgramChecks": {
+    "before-0": [],
+    "after-1": [],
+    "after-2": [],
+    "before-3": []
+  }
+}

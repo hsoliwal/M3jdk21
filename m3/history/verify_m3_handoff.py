@@ -15,7 +15,7 @@ import re
 
 HISTORY = "m3/docs/m3-m3jdk21-eclipse-recipe-handoff-20261022.tsv"
 SUCCESSIONS = "m3/docs/m3-m3jdk21-source-successions.tsv"
-HISTORY_BLOB = "30d5224faaa7c923bf72af4f7a1b1d15bbdad207"
+HISTORY_BLOB = "af3809e105bde54bc231a476e433e4e1c5822743"
 EVOLVED_OWNER = "m3/file/src/main/java/jdk/m3/file/M3ResourceLocks.java"
 HISTORICAL_OWNER_SHA = "18d05ae54945d4129c46d62e26551cbc4fd200b31c185e020b9ee6240fdc9599"
 CURRENT_OWNER_SHA = "bc671502c1500b60562240c1de2aa44776bf89a90ea32ab220ea646ed8491a6b"

@@ -470,6 +470,56 @@ class StandaloneCheckTest(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     cs.scan(self.root)
 
+    # Naming lineage (2026-11-10): attribution and donor identities are not names; identifiers and live names are.
+    def test_bare_synexia_in_prose_and_the_license_class_are_attribution(self):
+        self.put("m3/a/notes.py", '# Adapted from Synexia MIndexRegexTrigramQuery\n'
+                 '"""Receives the Synexia postimage."""\n'
+                 'MESSAGE = f"invalid Synexia recipe-home pin {1}"\n'
+                 'LICENSE_POLICY = "SYNEXIA_FIRST_PARTY_APACHE2_V1"\n'
+                 'ROWS = ("SYNEXIA_FIRST_PARTY", "Apache-2.0")\n')
+        self.put("m3/a/run.sh", "# Copyright (c) 2026 Synexia, Hitesh Soliwal and contributors\necho ok\n")
+        self.put(".github/workflows/w.yml", "name: Synexia lineage audit\njobs: {}\n")
+        result = cs.scan(self.root)
+        self.assertEqual((0, 7), (result["counts"]["N_NAME"], result["attribution"]["A_ATTRIBUTION"]))
+        cs.write_baseline(self.root, result)
+        status, detail = cs.verdict(result, cs.read_baseline(self.root), True)
+        self.assertEqual("PASS", status)
+        self.assertIn("A_ATTRIBUTION=7", detail)
+
+    def test_a_synexia_identifier_or_a_bare_word_in_code_is_still_a_name(self):
+        self.put("m3/a/code.py", "SynexiaBuilder = object\nSYNEXIA_HOME = '/opt'\nSynexia = 1\nprint(Synexia)\n")
+        self.put("m3/a/run.sh", "export SYNEXIA_HOME=/opt\n")
+        self.put("m3/a/broken.py", "# Synexia\nx = (Synexia\n")  # does not tokenize: whole-line comments only
+        result = cs.scan(self.root)
+        self.assertEqual((6, 1), (result["counts"]["N_NAME"], result["attribution"]["A_ATTRIBUTION"]))
+        self.assertEqual("HOLD", cs.verdict(result, {k: 99 for k in cs.KINDS}, True)[0])
+
+    def test_donor_identities_are_lineage_unless_this_repository_carries_the_name(self):
+        self.put("m3/a/check.py", 'OWNER = row["canonical_owner"].startswith("com.synexia")\n'
+                 'PATH = "synexia-openrewrite-recipes/recipe-crates/x"\n'
+                 '# relocated from com.synexia.common.collections.LongBitSet (Synexia)\n'
+                 'if row["schema"] != "SYNEXIA_M3JDK21_FULL_BORROW_V1":\n    raise SystemExit(1)\n')
+        self.put("m3/a/check.sh", 'test "$(jq -r .gate r.json)" = "SYNEXIA_SEPARATE_GATE"\nexport SYNEXIA_HOME=/opt\n')
+        counts, lineage = self.lineage()
+        self.assertEqual((1, 5), (counts["N_NAME"], lineage["L_LINEAGE"]))  # the unquoted constant stays a name
+        self.put("m3/b/pom.xml", POM.format(group="com.synexia.m3", artifact="b", deps=""))
+        self.put("m3/a/build.sh", "mvn -DgroupId=com.synexia.m3 install\n")  # the groupId this repository builds
+        self.put("m3/synexia-tools/run.py", "print(1)\n")
+        self.put("m3/a/use.sh", "python3 m3/synexia-tools/run.py\n")  # a live path, not a donor identity
+        counts, lineage = self.lineage()
+        self.assertEqual((4, 1, 5), (counts["N_NAME"], counts["N_PATH"], lineage["L_LINEAGE"]))
+
+    def test_pinned_lineage_paths_are_lineage_but_their_dependencies_still_count(self):
+        base = cs.LINEAGE_PATHS[0]
+        self.put(base + "recipe/src/main/java/com/synexia/rewrite/A.java", "package x;\n")
+        self.put(base + "SYNEXIA_HANDOFF.json", "{}\n")
+        self.put(base + "recipe/pom.xml", POM.format(group="com.synexia.m3", artifact="r", deps=""))
+        self.put(base + "recipe/fetch.sh", "git clone https://github.com/hsoliwal/com.synexia\n")
+        counts, lineage = self.lineage()
+        self.assertEqual((0, 0, 1, 3), (counts["N_NAME"], counts["N_PATH"], counts["D_REPO_REF"], lineage["L_LINEAGE"]))
+        self.put("m3/x/SYNEXIA_HANDOFF.json", "{}\n")  # the same name outside the listed paths
+        self.assertEqual(1, self.lineage()[0]["N_PATH"])
+
     def test_unscanned_scoped_file_holds_release(self):
         self.put("m3/x/run.sh", "echo ok\n")
         result = cs.scan(self.root)

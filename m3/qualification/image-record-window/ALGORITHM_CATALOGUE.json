@@ -1,0 +1,65 @@
+{
+  "schema": "M3_PROBLEM_CATEGORY_CATALOGUE_V1",
+  "category": "precompute/immutable-lexicon-admission/record-buffer-windows",
+  "pattern": "CONSTRUCTOR_LOCAL_READONLY_RECORD_WINDOW_V2",
+  "gate": "bc55d0f8cc165d1923cda9ac19a88d37d74de71a",
+  "candidates": [
+    {
+      "id": "original",
+      "source": {
+        "bytes": 15062,
+        "sha256": "c67fff80500a51457cbf171cfeb15cbf91562bac05614a3958e11985b4775028",
+        "gitBlob": "570a22f733499729bdc0fe48813f755e52ebe963"
+      },
+      "status": "REFERENCE",
+      "allocationModel": "Per-record SHA256 engine/result/view;existing metadata arrays."
+    },
+    {
+      "id": "digest-and-scratch",
+      "source": {
+        "bytes": 15702,
+        "sha256": "bda0232f9dece4748b5ac36c7e65631d1330ee68607da8e95f8e252c3a4be190",
+        "gitBlob": "bd331777fd17c85d64ecfcf6e5df4cbdaab58d50"
+      },
+      "status": "QUALIFIED_INTERMEDIATE_R237_PRESERVED",
+      "receipt": "4256a5fcfdabd8cce56b2ddfb8fd5c8ffa6892db",
+      "allocationModel": "Local record digest+32byte scratch/privatecopy;Nrecordviews remain."
+    },
+    {
+      "id": "clear-window",
+      "source": {
+        "bytes": 15986,
+        "sha256": "3e0b2c83a02dec8d7bb60fb1c148e36ba64498705d5e57315b870eff4e7e0a04",
+        "gitBlob": "4daf9749b8a52951dd972b916221ef52ee703c2d"
+      },
+      "status": "NOT_SELECTED",
+      "receipt": "82a6b4ead7a6d95e57220a9a74364a8f03a10aa5",
+      "reason": "Correct118JUnit but several slower local corpora versusdigest-only;full3way data retained."
+    },
+    {
+      "id": "rewind-window",
+      "source": {
+        "bytes": 15987,
+        "sha256": "ea7bd90f6efe3705df3d39f9d749c9b3db238be768cbe399a2ebdc2268828f00",
+        "gitBlob": "4c8e6f8b173a84afa67d85abb04823386dbc363b"
+      },
+      "status": "SELECTED_REWIND_RECORD_WINDOW_WITH_RECORDED_TRADEOFFS",
+      "receipt": "b5aa6a589ee93ef171f98549c911410d3d592e34",
+      "allocationModel": "Same linear work and immutable retained arrays;one local record view. Calls4whole-image slices plus1ROrecordview independent ofrecordCount;MDfactory3ifnonempty,2ifempty."
+    },
+    {
+      "id": "strict-declarative-two-stage-chain",
+      "status": "REJECTED_SOURCE_DRIFT",
+      "receipt": "eedf253a559c669bb0422d66e721e64418b0e447",
+      "reason": "OpenRewrite scanner runs preimages before ordered visitor updates;also finaloutput cannot satisfy intermediate snapshot."
+    },
+    {
+      "id": "cumulative-snapshot-yaml-entrypoint",
+      "status": "QUALIFIED_4_JUNIT",
+      "receipt": "9683d98ba0fc437fe334d702c100ae331d65394a",
+      "mechanism": "Replay single cumulative constructor atom original->final through existing engine;preserve proven granular manifests separately."
+    }
+  ],
+  "tradeoffs": "Long-record timing+0.11% versusdigest-only,zero-record+0.86%;small-corpus timing variation and zero/one-record allocation unchanged. Do not credit large single-record timing differences as a guaranteed view-reuse benefit. DefaultSPI may copy/allocate internally;timings localSUN/WindowsJava21 only.",
+  "remaining": "Full migration/OS/JNI/platform and hierarchical-body admission remain incomplete;do not treat this source-owner proof as whole-lexicon completion."
+}

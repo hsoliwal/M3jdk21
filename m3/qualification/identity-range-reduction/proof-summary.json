@@ -1,0 +1,277 @@
+{
+  "sourceBefore": {
+    "bytes": 44362,
+    "sha256": "4f3241c045253d15e96dd8163c4c9171acc96b8852f92c1512349cadbadca5d6",
+    "gitBlob": "a0cbbcedebc00cf886a611aff193ae8f47301e92"
+  },
+  "sourceAfter": {
+    "bytes": 44599,
+    "sha256": "ac3c5c3741f81322a02c15d0091f34e728d812a96a77b4dc9830ce963dd94a7c",
+    "gitBlob": "bb6c0eb0b5ea0dd134e2377dfa83dc85ee6f060e"
+  },
+  "manifest": "m3/core/src/jdk/m3/text/SharedLexiconCatalog.java\t4f3241c045253d15e96dd8163c4c9171acc96b8852f92c1512349cadbadca5d6\tac3c5c3741f81322a02c15d0091f34e728d812a96a77b4dc9830ce963dd94a7c\tSharedLexiconCatalog.java.txt\n",
+  "comparison": {
+    "numeric-hits": {
+      "before": {
+        "medianNanos": 277772649.5,
+        "medianBytes": 16000000,
+        "perProcess": [
+          {
+            "nanos": 265630100,
+            "bytes": 16000000
+          },
+          {
+            "nanos": 342075200,
+            "bytes": 16000000
+          }
+        ],
+        "samples": 14,
+        "callsPerSample": 1000000,
+        "probes": {
+          "maxProbes": 22,
+          "probes": 12587,
+          "wrappedSteps": 0,
+          "slots": 20052,
+          "queries": 8192
+        }
+      },
+      "after": {
+        "medianNanos": 27216199.5,
+        "medianBytes": 16000000,
+        "perProcess": [
+          {
+            "nanos": 27612400,
+            "bytes": 16000000
+          },
+          {
+            "nanos": 26819999,
+            "bytes": 16000000
+          }
+        ],
+        "samples": 14,
+        "callsPerSample": 1000000,
+        "probes": {
+          "slots": 20052,
+          "wrappedSteps": 0,
+          "probes": 9364,
+          "maxProbes": 6,
+          "queries": 8192
+        }
+      }
+    },
+    "numeric-misses": {
+      "before": {
+        "medianNanos": 189583249.5,
+        "medianBytes": 0,
+        "perProcess": [
+          {
+            "nanos": 179287200,
+            "bytes": 0
+          },
+          {
+            "nanos": 210609300,
+            "bytes": 0
+          }
+        ],
+        "samples": 14,
+        "callsPerSample": 1000000,
+        "probes": {
+          "maxProbes": 28,
+          "probes": 20471,
+          "wrappedSteps": 0,
+          "slots": 20052,
+          "queries": 8192
+        }
+      },
+      "after": {
+        "medianNanos": 26989499.5,
+        "medianBytes": 0,
+        "perProcess": [
+          {
+            "nanos": 29970300,
+            "bytes": 0
+          },
+          {
+            "nanos": 26108900,
+            "bytes": 0
+          }
+        ],
+        "samples": 14,
+        "callsPerSample": 1000000,
+        "probes": {
+          "slots": 20052,
+          "wrappedSteps": 0,
+          "probes": 15694,
+          "maxProbes": 9,
+          "queries": 8192
+        }
+      }
+    },
+    "mixed-language": {
+      "before": {
+        "medianNanos": 280594349.5,
+        "medianBytes": 16000000,
+        "perProcess": [
+          {
+            "nanos": 248495799,
+            "bytes": 16000000
+          },
+          {
+            "nanos": 299682800,
+            "bytes": 16000000
+          }
+        ],
+        "samples": 14,
+        "callsPerSample": 1000000,
+        "probes": {
+          "maxProbes": 21,
+          "probes": 12137,
+          "wrappedSteps": 0,
+          "slots": 40054,
+          "queries": 8192
+        }
+      },
+      "after": {
+        "medianNanos": 37806950,
+        "medianBytes": 16000000,
+        "perProcess": [
+          {
+            "nanos": 36288000,
+            "bytes": 16000000
+          },
+          {
+            "nanos": 43657000,
+            "bytes": 16000000
+          }
+        ],
+        "samples": 14,
+        "callsPerSample": 1000000,
+        "probes": {
+          "slots": 40054,
+          "wrappedSteps": 0,
+          "probes": 10662,
+          "maxProbes": 9,
+          "queries": 8192
+        }
+      }
+    }
+  },
+  "oracle": {
+    "donor": "a70431b21c943506f2bf790693502160d274b939",
+    "source": {
+      "bytes": 376,
+      "sha256": "9dfcfb4c457818d1aa32ae1a86170869ea0bc5a68bfdf40410bf076b1d66ab60",
+      "gitBlob": "198118b0a2729df677c7f278b2d9f099e1776fbb"
+    },
+    "function": {
+      "bytes": 123,
+      "sha256": "7fe48e62e7c577b7c25a1011d47dcf5fb6225f4e863ea521c5ca3110d7818198",
+      "gitBlob": "30889a8d10379033ec7180f899ced7e245a830f2"
+    },
+    "module": {
+      "bytes": 327,
+      "sha256": "afbc677ddb5a937c6df03fb73062d8774e7d9263503c711c5c5f9a2adc2774f8",
+      "gitBlob": "ded3ee6a18fd2cabe696b76aebc4175a65b7eb21"
+    },
+    "compileArgv": [
+      "C:\\Program Files\\LLVM\\bin\\clang.exe",
+      "--target=wasm32",
+      "-O2",
+      "-g0",
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-ident",
+      "-nostdinc",
+      "-ffreestanding",
+      "-c",
+      "-x",
+      "c",
+      "-o",
+      "-",
+      "-"
+    ],
+    "compileExit": 0,
+    "nodeExit": 0,
+    "nodeScript": {
+      "bytes": 630,
+      "sha256": "eac5469047fc826dfb369276f204f97a35fdc83d1b66f4f5468fa3e9a0cc0759",
+      "gitBlob": "5d564dcb19aee4103f66adf8e43754809b820439"
+    },
+    "nodeInput": {
+      "bytes": 218812,
+      "sha256": "e0d33d2bcaa7af2e6e5076560823c026d824277cd030b0131d390dba79010db0",
+      "gitBlob": "fe0542fbf2a4f3d9e3c4c648b655ddd805bc4e00"
+    },
+    "nodeAnswers": {
+      "bytes": 57348,
+      "sha256": "d2782693c2ffa91998a87a6a8b35ca2e30d454a8a53e0b060f1c4b43852050de",
+      "gitBlob": "215ea3d370686d15256930a389e0d0895057363d"
+    },
+    "resource": {
+      "bytes": 560023,
+      "sha256": "e65ddd8ff26e49099008a695b7ff85f63037671c962880dd9746f65b609f9e51",
+      "gitBlob": "812b13352285bd5ca9d2b6297a5e819db2814d21"
+    },
+    "vectors": 12288,
+    "sFilesAfter": 0,
+    "scope": "Exact C donor function compiled to a327byte Wasm object and executed through existing V8fromRAM. Portable arithmetic differential only; no host JNI/native-platform pass."
+  },
+  "existingImage": {
+    "path": "F:\\codex-work\\lexicon-migration-20261031\\case-hyphen-v9-recipe\\proof2\\transport-none\\image\\part-0.m3lex",
+    "identity": {
+      "bytes": 260,
+      "sha256": "eb5aaccfa999ef2be511453a5709c83afef4990c613870791671b78e431cc423",
+      "gitBlob": "2c59ee6e9741e586f98541853634f9544388b03b"
+    },
+    "unchanged": true
+  },
+  "storage": {
+    "readOnlyFInputBudgetBytes": 571469824,
+    "readOnlyFBaselineReceipt": "1091e30d98c3d7ed72c0a5c1d9c49e994895fd11",
+    "fFreshAllocationAudit": "NOT_COMPLETED_TIMEOUT_90S",
+    "sBefore": 0,
+    "sAfter": 0,
+    "capBytes": 571473920,
+    "reserveBytes": 8589934592,
+    "sFree": 10356289536,
+    "peakObservedTaskAllocations": [
+      571469824
+    ],
+    "retainedBuildFiles": 0
+  },
+  "recipeTests": 7,
+  "productTests": 40,
+  "proofSha256": "f66ec8beb9b13ec281bcda839774abb96dd017038b6cd98eee7274bbe385b9b6",
+  "fieldApiFingerprint": "d7763085c4e095495a4666c818d8eed03cfda5a39c5d64af868fa4e08cb10f1a",
+  "collisionBefore": 69189,
+  "collisionAfter": 69476,
+  "reports": [
+    {
+      "stage": "recipe",
+      "exit": 0,
+      "reaped": true
+    },
+    {
+      "stage": "before-0",
+      "exit": 0,
+      "reaped": true
+    },
+    {
+      "stage": "after-1",
+      "exit": 0,
+      "reaped": true
+    },
+    {
+      "stage": "after-2",
+      "exit": 0,
+      "reaped": true
+    },
+    {
+      "stage": "before-3",
+      "exit": 0,
+      "reaped": true
+    }
+  ]
+}

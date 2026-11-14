@@ -1,0 +1,55 @@
+{
+  "schema": "M3_ARRAY_NATIVE_PROVIDER_PREFLIGHT_SUMMARY_V1",
+  "status": "QUALIFIED_PREFLIGHT_CURRENT_NATIVE_HOLD",
+  "sealedInput": "bdaf3d179af37851d125fc03ab9efdc8fb3b7418",
+  "receipt": "1091e30d98c3d7ed72c0a5c1d9c49e994895fd11",
+  "receiptUncompressedSha256": "54ffe30cf4919db672b4fcf9a366ace980dd171e00281493b566bc27aa26b2b7",
+  "receiptUncompressedBytes": 31283,
+  "receiptVerified": {
+    "sha256": true,
+    "length": true,
+    "verifierExit": 0
+  },
+  "qualification": {
+    "strictC11Syntax": "PASS -Wall -Wextra -Wpedantic -Werror; exact current source/header composition",
+    "javaFallback": {
+      "found": 5,
+      "passed": 5,
+      "failed": 0,
+      "aborted": 0,
+      "loaded": false
+    },
+    "legacyDllNegativeControl": {
+      "found": 7,
+      "passed": 0,
+      "failed": 7,
+      "aborted": 0,
+      "loaded": true,
+      "requiredNative": true,
+      "failureKind": "UnsatisfiedLinkError in every failed test"
+    },
+    "currentDll": "NOT_BUILT_NOT_RUN",
+    "productChanges": 0,
+    "performance": "UNMEASURED"
+  },
+  "storage": {
+    "fBefore": 571469824,
+    "sBefore": 0,
+    "fAfter": 571469824,
+    "sAfter": 0,
+    "capBytes": 571473920,
+    "reserveBytes": 8589934592,
+    "sFree": 10361409536,
+    "peakObservedTaskAllocations": [
+      571469824
+    ],
+    "limitInterpretation": "Observed sampled allocation and final file enumeration, not exhaustive filesystem write interception; no new native/object/class artifacts retained."
+  },
+  "approval": {
+    "status": "PENDING_NO_ANSWER",
+    "proposalBlob": "2f3dab012b982bf0f8140e0bad2eb6db8bede233",
+    "requestedIncreaseBytes": 131072,
+    "proposedCapBytes": 571604992
+  },
+  "goal": "ACTIVE; preflight evidence is progress, not completion."
+}

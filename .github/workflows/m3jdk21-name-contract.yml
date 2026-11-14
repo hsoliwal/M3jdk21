@@ -89,6 +89,13 @@ jobs:
             m3/collections/implementations/commons-collections-4.5.0/src/main/java/jdk/m3/collections/apache/iterators/PermutationIterator.java
             m3/collections/implementations/commons-collections-4.5.0/src/main/java/jdk/m3/collections/apache/queue/CircularFifoQueue.java
             m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/set/mutable/UnifiedSet.java
+            m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/map/sorted/mutable/IndexedTreeArena.java
+            m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/map/sorted/mutable/IndexedRedBlackMap.java
+            m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/map/sorted/mutable/IndexedSortedMap.java
+            m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/list/mutable/FastList.java
+            m3/collections/implementations/guava-33.4.8/guava/src/jdk/m3/collections/guava/collect/CompactHashMap.java
+            m3/collections/implementations/guava-33.4.8/android/guava/src/jdk/m3/collections/guava/collect/CompactHashMap.java
+            src/jdk.m3.io/share/classes/jdk/m3/optane/PmemCheckpoint.java
             m3/collections/implementations/spring-core-6.2.0-collections/src/main/java/jdk/m3/collections/spring/MultiToSingleValueMapAdapter.java
             m3/collections/implementations/spring-core-6.2.0-collections/src/main/java/jdk/m3/collections/spring/SingleToMultiValueMapAdapter.java
             src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongLongHashMap.java

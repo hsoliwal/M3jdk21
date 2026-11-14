@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package jdk.m3.rewrite.synexia;
+package jdk.m3.rewrite.m3;
 
 import java.util.ArrayList;
 import java.util.Comparator;

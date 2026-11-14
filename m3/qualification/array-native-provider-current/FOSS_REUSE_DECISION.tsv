@@ -1,0 +1,2 @@
+capability	classification	donor	commit	paths	license	fit	qualification
+current-jdk-array-native-provider	WRAP_EXISTING_OWNERS	hsoliwal/M3jdk21	778cd3eac266974e7b5155e79838f74ee516b535	ArrayNative.java;ArrayNativeTest.java;m3_arrays_jni.c;m3_arrays.c;m3_arrays.h;m3_jni_core.h	Apache-2.0	Unmodified current JNI owner; explicit materialization rather than joined representation; existing Maven/RAM compiler and current JUnit suite	Strict C11 syntax; Java fallback; legacy namespace negative discriminator; current binary required before parity claim

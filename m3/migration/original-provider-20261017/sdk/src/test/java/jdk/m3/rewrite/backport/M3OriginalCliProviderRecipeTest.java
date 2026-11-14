@@ -481,7 +481,7 @@ final class M3OriginalCliProviderRecipeTest {
 
 
     private static final String FROZEN_PRE_MANIFEST_SHA256 =
-            "e0ec50d7f1608180e1fe831d137e26d51e691606b85379a1a38c12d064c702f5";
+            "643d49f323068e6d4efc30726f7b80bf5c954c17259a32a623d3d792809517de";
     private static final String PRE_MAP_SHA256 =
             "a28f218198b30d1292d51836c8912d1f69229ef9bef40a4726a2808bcdcb4d46";
 
@@ -731,7 +731,7 @@ final class M3OriginalCliProviderRecipeTest {
         // Do not export until the independent fixture and every refusal have qualified.
         deliverFrozenPre(baseline, frozen, frozen);
         checkFrozenInventory(baseline, frozen, true);
-        System.out.println("M3_FROZEN_PRE_BASELINE_EXPORTED files=55 bytes=795620"
+        System.out.println("M3_FROZEN_PRE_BASELINE_EXPORTED files=55 bytes=795367"
                 + " independentOfInstalledPost=true");
     }
 

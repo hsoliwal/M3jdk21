@@ -1,0 +1,19 @@
+{
+  "schema": "M3_IMAGE_HASH_TEST_INVENTORY_V1",
+  "source": "22be10f7028eb6983c36126454fe4f36790277b8",
+  "executedUnchangedMethods": [
+    "semantics",
+    "warm",
+    "concurrent"
+  ],
+  "existingReadonlyFile": "F:\\codex-work\\lexicon-migration-20261031\\case-hyphen-v9-recipe\\proof2\\transport-none\\image\\part-0.m3lex",
+  "newQualTests": 16,
+  "scope": "Actual private constructor through RAM direct buffers; publicopen/copy on existingreadonlyimage; no new filesystem fixtures.",
+  "notRun": [
+    "FullrootJDK reactor/jtreg",
+    "Cross-platform hostJNI",
+    "Publicmanifest admission filesystem suite",
+    "ARM/Android/macOS/ESP/Pico runtime validation"
+  ],
+  "oracle": "Stock String.hashCode on everyUTF16codeunit,5141packed/random strings with4gaps and2imageversions; actual image find/lowerBound/startsWith and source IDs0..10000."
+}

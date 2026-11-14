@@ -1,0 +1,23 @@
+{
+  "schema": "M3_CANONICAL_RECIPE_BINDING_V1",
+  "repository": "hsoliwal/com.synexia",
+  "commit": "35144270d074a7e17a0170e3cc1cb40ef51a41ee",
+  "pullRequest": 17333,
+  "recipe": "com.synexia.rewrite.M3LangDexReceiverPayloadAtom",
+  "crate": "synexia-openrewrite-recipes/recipe-crates/langdex-receiver-payload-atom",
+  "sourceBefore": {
+    "bytes": 16374,
+    "sha256": "3e64b5d4b869a0458c5e1ec5127d55600fee30f0e1993d880fe2733903600ec7",
+    "gitBlob": "dd4dd7ae46460446f465a75cae3bd0b53bbc0a06"
+  },
+  "sourceAfter": {
+    "bytes": 16338,
+    "sha256": "2b6f5b5e030505eb78054d64280854fa614dfdb538fc25062cd4e7bea1d5ea43",
+    "gitBlob": "9e5a0fb2bfc673185636c4ac48e1a2dd87608e68"
+  },
+  "hostPrerequisite": "06031842825f33a1c9ea0aba2e25c804bf9ee829",
+  "qualification": "ff35f5da5940704457d315ad122c01da9beb1856",
+  "canonicalCpu": "79dfd4fa4baf43a1cdb2d2c00b9151c29b684e42",
+  "canonicalTree": "d671721d37dc4e5a342e5d1ef8ae36299ad5f8df",
+  "policy": "Executable Maven/OpenRewrite recipes remain exclusively in canonical Synexia; this is passive receiver binding."
+}

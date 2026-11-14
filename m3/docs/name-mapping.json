@@ -15547,6 +15547,259 @@
         },
         "source_state": "partial",
         "observation": "JDK style/Javadoc source-only candidate from Synexia #17302 on product draft #2971; master and SDK/image/release acceptance remain unqualified."
+      },
+      {
+        "id": "m3.collections.eclipse-indexed-tree-traversal",
+        "kind": "specialization",
+        "status": "implemented-unverified",
+        "reason": "Optimize optional entry-projection storage and import a semantically refined array-slot Map.forEach into the existing retained Eclipse donor-source owners. Bounded component proofs do not establish complete provider or installed-JDK admission.",
+        "sources": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "65d2636ee26956bc638d56e5433c9e275f70997d",
+            "module": null,
+            "path": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/map/sorted/mutable/IndexedTreeArena.java",
+            "symbol": "jdk.m3.collections.eclipse.impl.map.sorted.mutable.IndexedTreeArena",
+            "signatures": [],
+            "sha256": "7df02a2ded60b6884f90934503d35f68998f1649f7363861b96c92589746e8e5",
+            "git_blob_sha1": "40187c40f3fb419163cf62a25054dae96189eaac",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "visibility": "package-private"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "65d2636ee26956bc638d56e5433c9e275f70997d",
+            "module": null,
+            "path": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/map/sorted/mutable/IndexedRedBlackMap.java",
+            "symbol": "jdk.m3.collections.eclipse.impl.map.sorted.mutable.IndexedRedBlackMap",
+            "signatures": [],
+            "sha256": "a9aa33ab54daef8ba13c2165c691d9644433766f710d70c04a37e8afd7a9a53d",
+            "git_blob_sha1": "24f6e20cc3b86f8f362ed75c9fe231ba305e9ede",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "visibility": "package-private"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "65d2636ee26956bc638d56e5433c9e275f70997d",
+            "module": null,
+            "path": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/map/sorted/mutable/IndexedSortedMap.java",
+            "symbol": "jdk.m3.collections.eclipse.impl.map.sorted.mutable.IndexedSortedMap",
+            "signatures": [],
+            "sha256": "0fbc3f571cdfcab9f94899f7bd8b30b77eaa8b3e6da3d11b0644799541f96207",
+            "git_blob_sha1": "4dbbfb228473749fce9adc0e00f17838b5d104b2",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "visibility": "package-private"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": null,
+            "path": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/map/sorted/mutable/IndexedTreeArena.java",
+            "symbol": "jdk.m3.collections.eclipse.impl.map.sorted.mutable.IndexedTreeArena",
+            "signatures": [],
+            "sha256": "c37adff2700e0e8d7c304a75560b700e81da51ea118d805abe8eeb40a1e516b8",
+            "git_blob_sha1": "8f3115cad7c62840a7ed1152e83802aa9d6baf97",
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "visibility": "package-private"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": null,
+            "path": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/map/sorted/mutable/IndexedRedBlackMap.java",
+            "symbol": "jdk.m3.collections.eclipse.impl.map.sorted.mutable.IndexedRedBlackMap",
+            "signatures": [],
+            "sha256": "4dcc0fda7a1afd6520cd916186fb23795d6fe65ef495884fe658f42fec65fb55",
+            "git_blob_sha1": "530072dc449f86a0262992b2991578b71eb91e00",
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "visibility": "package-private"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": null,
+            "path": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/map/sorted/mutable/IndexedSortedMap.java",
+            "symbol": "jdk.m3.collections.eclipse.impl.map.sorted.mutable.IndexedSortedMap",
+            "signatures": [],
+            "sha256": "48fa3f57ed645895ff0e6a3a134c3cbca74abee6d1ee8d4097bb5433461af2c5",
+            "git_blob_sha1": "102047a9b58220577e1153dd68423f1ba6f3188b",
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "visibility": "package-private"
+          }
+        ],
+        "owner": "jdk.m3.collections.eclipse.impl.map.sorted.mutable.IndexedTreeArena, IndexedRedBlackMap and IndexedSortedMap",
+        "identity": {
+          "namespace": "Retain the existing jdk.m3.collections.eclipse.impl.map.sorted.mutable package, class names and effective public Map API. All three owners remain package-private retained donor sources.",
+          "generation": "Existing indexed key/value/link/mask lanes, slot reuse and tree epochs remain authoritative. The weak entry-view reference lane becomes an optional capacity prefix; explicitly requested entries retain their existing identity and detachment lifetime."
+        },
+        "contract": {
+          "differences": [
+            "Allocate or grow the entryViews reference lane only when an explicit entry projection needs a slot; ordinary payload growth does not copy that lane.",
+            "Map.forEach traverses existing array slots without creating implicit EntryView/WeakReference pairs. Validate the positioned live slot to preserve the receiver entry-iterator failure discovered in the donor override."
+          ],
+          "compatibility_obligations": [
+            "Preserve retained live-entry identity, backed setValue, successor payload-copy observations, release snapshots, detached writes and isolation from reused slots; preserve weak and strong GC ownership.",
+            "Stage optional projection-array growth, EntryView and WeakReference allocations before publishing the replacement lane; genuine projection-allocation failure preserves state and permits retry.",
+            "Preserve Map.forEach order, key/value reference identity, null policies, comparator/callback schedule, partial mutation progress, exception identity and iterator-equivalent fail-fast timing.",
+            "Preserve the existing forEachKeyValue helper behavior; reject the blind donor forEach override that visits a released lower-bound slot with null key/value instead of throwing.",
+            "Preserve serialized fields, serialVersionUID values, serialized map bytes and effective public descriptors; no additional synchronization or data-race guarantee."
+          ],
+          "public_surface": [
+            "Existing package/class names and effective public Map methods remain unchanged. IndexedSortedMap now declares an override of inherited Map.forEach; package/private helpers are added. Declared-method sets are not claimed identical."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "Existing effective Java descriptors, serial fields and serialVersionUID values; no JNI/native or installed-JDK symbols.",
+          "bootstrap": "Retained donor-source owners under m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6; no promotion into src/jdk.m3.collections, new runtime module or installed-JDK admission."
+        },
+        "dependencies": [
+          {
+            "id": "java.base",
+            "resolution": "resolved",
+            "reason": "Existing arrays, Map APIs, WeakReference, serialization and exceptions in the qualified four-owner closure."
+          },
+          {
+            "id": "eclipse-indexed-tree-four-owner-closure",
+            "resolution": "resolved",
+            "reason": "Actual IndexedTreeArena, IndexedRedBlackTree, IndexedRedBlackMap and IndexedSortedMap compile strictly at release 17 and 21 on JDK 21.0.13+9; combined source controls pass."
+          },
+          {
+            "id": "eclipse-complete-provider-runtime",
+            "resolution": "pending",
+            "reason": "Complete Eclipse reactor/public wrapper module and installed M3JDK runtime acceptance remain outside these component proofs. The unrelated held UnifiedSet record remains unchanged."
+          }
+        ],
+        "materialization": {
+          "admission": "Execute the canonical eclipse-projection-20261113 and eclipse-foreach-20261113 datasets, then verify exact received postimages and passive receipt evidence.",
+          "joins": "Retain one indexed tree arena and existing caller-owned entry projections; expand only the optional projection prefix when required, and traverse authoritative slots for Map.forEach.",
+          "outputs": "Three existing runtime-source owners, the minimally adapted existing arena test, two new standalone product regressions and passive receiving metadata.",
+          "cached_facts": "Retain the existing weak per-exposed-slot entry cache for identity/lifetime compatibility. No cache pool, aliased reusable public entry, new hierarchy or runtime Synexia dependency."
+        },
+        "recipe": {
+          "id": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+          "version": "collection-forks-20261113",
+          "path": null,
+          "sha256": null,
+          "canonical_repository": "hsoliwal/com.synexia",
+          "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+          "preconditions": [
+            "Exact three receiver source preimages at 65d2636ee26956bc638d56e5433c9e275f70997d, verified equal to the earlier 0b7bb3ab and fff5dea8 owner preimages.",
+            "Execute datasets/eclipse-projection-20261113 for optional projection storage and datasets/eclipse-foreach-20261113 for refined Map.forEach; actual Maven/OpenRewrite execution, fixed point and stale-source refusal remain required.",
+            "Compile and run the exact emitted source closure, original controls, protocol/lifetime/GC/OOME regressions, effective API and scoped resource checks."
+          ],
+          "rollback": "Restore exact preimages through a separately reviewed sealed successor; preserve unrelated source and naming records."
+        },
+        "tests": [
+          {
+            "id": "eclipse-indexed-tree-controls",
+            "receipt": "m3/compatibility/collection-forks-20261113.json"
+          },
+          {
+            "id": "eclipse-projection-lifetime-storage-gc",
+            "receipt": "m3/compatibility/collection-forks-20261113.json"
+          },
+          {
+            "id": "eclipse-projection-real-oome",
+            "receipt": "m3/compatibility/collection-forks-20261113.json"
+          },
+          {
+            "id": "eclipse-foreach-protocol-storage",
+            "receipt": "m3/compatibility/collection-forks-20261113.json"
+          },
+          {
+            "id": "eclipse-indexed-tree-api",
+            "receipt": "m3/compatibility/collection-forks-20261113.json"
+          },
+          {
+            "id": "eclipse-indexed-tree-resources",
+            "receipt": "m3/compatibility/collection-forks-20261113.json"
+          }
+        ],
+        "provenance": {
+          "license": "Existing Apache-2.0 OR EPL-2.0 owner and control-test headers remain intact; new standalone product regressions are Apache-2.0.",
+          "publication": "Maintenance of existing published collection owners; public delivery contains runtime sources, product tests and passive receipts. Canonical recipes, private authoring probes and rejected candidate machinery remain with Synexia.",
+          "copied_code": true,
+          "donor_boundary": "Pinned hsoliwal/eclipse-collections@4f68f25805305f3c40e065265ce7acd43367c5d1. Lazy projection storage is qualified in both existing com and jdk namespaces. The donor forEach override is refined for the receiving default-Map protocol; no donor forEach behavior change is included. Retained source integration does not establish live module absorption."
+        },
+        "sync": {
+          "source_revision": "65d2636ee26956bc638d56e5433c9e275f70997d",
+          "target_revision": "65d2636ee26956bc638d56e5433c9e275f70997d",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Retain existing receiver names and three owners; introduce an optional projection prefix lane and validated direct Map.forEach traversal.",
+            "Preserve the receiver released-slot exception when a comparator removes the initially positioned node; do not blindly transplant the donor traversal."
+          ],
+          "pending": [
+            "Canonical dataset execution and independent exact received-source verification until recorded by the passive receipt",
+            "Complete Eclipse reactor/public wrapper module and dependency-closure qualification",
+            "Source-built installed M3JDK21, JDK-17 runtime and all-platform acceptance",
+            "Broader workload performance and native process-memory accounting",
+            "String -> arrays -> collections phase remains unchanged; unrelated held UnifiedSet source and metadata remain unchanged"
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "65d2636ee26956bc638d56e5433c9e275f70997d",
+              "module": null,
+              "path": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/map/sorted/mutable/IndexedTreeArena.java",
+              "symbol": "jdk.m3.collections.eclipse.impl.map.sorted.mutable.IndexedTreeArena",
+              "signatures": [],
+              "sha256": "7df02a2ded60b6884f90934503d35f68998f1649f7363861b96c92589746e8e5",
+              "git_blob_sha1": "40187c40f3fb419163cf62a25054dae96189eaac",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "visibility": "package-private"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "65d2636ee26956bc638d56e5433c9e275f70997d",
+              "module": null,
+              "path": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/map/sorted/mutable/IndexedRedBlackMap.java",
+              "symbol": "jdk.m3.collections.eclipse.impl.map.sorted.mutable.IndexedRedBlackMap",
+              "signatures": [],
+              "sha256": "a9aa33ab54daef8ba13c2165c691d9644433766f710d70c04a37e8afd7a9a53d",
+              "git_blob_sha1": "24f6e20cc3b86f8f362ed75c9fe231ba305e9ede",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "visibility": "package-private"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "65d2636ee26956bc638d56e5433c9e275f70997d",
+              "module": null,
+              "path": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/map/sorted/mutable/IndexedSortedMap.java",
+              "symbol": "jdk.m3.collections.eclipse.impl.map.sorted.mutable.IndexedSortedMap",
+              "signatures": [],
+              "sha256": "0fbc3f571cdfcab9f94899f7bd8b30b77eaa8b3e6da3d11b0644799541f96207",
+              "git_blob_sha1": "4dbbfb228473749fce9adc0e00f17838b5d104b2",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "visibility": "package-private"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "partial",
+        "observation": "Both changes are confined to retained Eclipse donor-source owners. Bounded source/API/protocol/lifetime and resource results are recorded separately; no whole-family arrayification, installed-JDK promotion, universal zero allocation or general speedup is asserted.",
+        "test_descriptions": [
+          "Candidate evidence: original arena 5,328 checks, tree 5,040 permutations/174,670 topology-invariant checks and map 8,283 operations; refined forEach 776 differential scenarios/1,607 contract checks and 4,103 storage checks. Combined candidate passes lazy projection lifetime/storage/GC and actual 16-MiB Serial GC OOME/retry.",
+          "Lazy-lane resource observations at 65,536 slots: no-exposure projection capacity 65,536 to 0; one low-slot exposure to 8. Measured construction allocation decreases 524,480 and 524,432 bytes per arena respectively; all-exposed allocation is unchanged. All-exposed wall-time median increases 23.16 to 26.07 ms while thread CPU changes 17.98 to 18.10 ms; no general speedup or non-regression claim.",
+          "Scoped warmed forEach observations at 65,536 previously unexposed entries: baseline 4,194,376 allocated bytes and 65,536 implicit projection pairs; refined candidate 0 observed allocated bytes and no projections. Combined lazy/forEach candidate observes 0 or 40 bytes and keeps the projection lane empty. JIT cursor elimination and this environment bound the zero-allocation observation.",
+          "Named receipt locators require actual root receiving runs and exact input hashes; candidate source evidence alone does not advance complete provider or installed-JDK gates."
+        ]
       }
     ]
   },

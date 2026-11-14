@@ -11,8 +11,8 @@ CRATE = "m3-original-mapping-provider-20261017"
 RESOURCE = "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/" + CRATE + "/"
 SUITE = "jdk.m3.rewrite.backport.M3OriginalCliProviderRecipeTest"
 BASELINE_MANIFEST = RESOURCE + "baseline-pre.tsv"
-BASELINE_MANIFEST_SHA = "e0ec50d7f1608180e1fe831d137e26d51e691606b85379a1a38c12d064c702f5"
-BASELINE_FILES, BASELINE_BYTES = 55, 795620
+BASELINE_MANIFEST_SHA = "643d49f323068e6d4efc30726f7b80bf5c954c17259a32a623d3d792809517de"
+BASELINE_FILES, BASELINE_BYTES = 55, 795367
 METHODS = ["allMutableStatesBothOrdersAndFixedPoint","exactRecipeResultsDeliveredToDeclaredOutput","everyUnknownTargetRefusesAfterItsPositiveBaseline","everyDuplicateTargetRefusesAfterItsPositiveBaseline","everyRequiredTargetMissingRefusesAfterItsPositiveBaseline","everyNonPlainTextTargetRefusesAfterItsPositiveBaseline","everyChangedAfterScanTargetRefusesAfterItsPositiveBaseline","sealedManifestPathSafetyAndConvergedIdentity","deliveryPrechecksForeignContentsAndAllSymlinkComponents","currentMappingReconciliationPreservesNewFieldsAndReviewedMigration","frozenPreBaselineRemainsIndependentOfInstalledPost"]
 def digest(data):
     return hashlib.sha256(data).hexdigest()
@@ -163,7 +163,7 @@ def emitted(base,pins):
 def frozen_pre(files):
     # Independent original state(0), never derived from successor targets or installed POST.
     raw=files[BASELINE_MANIFEST]
-    if len(raw)!=7605 or digest(raw)!=BASELINE_MANIFEST_SHA:
+    if len(raw)!=7613 or digest(raw)!=BASELINE_MANIFEST_SHA:
         raise ValueError("frozen PRE manifest identity drift")
     rows=[];total=0
     for line in raw.decode("utf-8",errors="strict").splitlines():

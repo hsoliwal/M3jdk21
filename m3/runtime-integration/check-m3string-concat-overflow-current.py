@@ -17,10 +17,11 @@ POOL = "src/java.base/share/classes/java/lang/M3StringPool.java"
 JTREG = "test/jdk/java/lang/String/M3StringConcatLengthOverflowTest.java"
 WORKFLOW = ".github/workflows/mindex-string-backing.yml"
 DIGESTS = {
-    POOL: "f8bac45d1623d25470e1b79beffa276f271db10e297ef5b434d5335c9d4c908b",
-    JTREG: "587f7f63fb419970ffdc889bca05335eb3f49ebcc97d3810906b3587ff9e7ab4",
-    WORKFLOW: "927ba49c51709896a4610d89daf4d669217e27713153cd46f863aafb0dd63989",
+    POOL: "3ebe07554c2ad5a9018e5c11e0b944611e2cede43b70094afbcee6db16b2feb6",
+    JTREG: "a07590946ce9330772bb30a21dc35f1f1da0b87b671fdcf30c8630db33a91ac3",
+    WORKFLOW: "91beb0a47d7dcb51a2b8f09fd73a441b5187fbdeb8498eebbae33218790ee72a",
 }
+JTREG_SELECTORS = 48
 GUARD = (
     "if ((long) left.length() + right.length() > Integer.MAX_VALUE) {\n"
     '            throw new OutOfMemoryError("Required length exceeds implementation limit");\n'
@@ -90,7 +91,7 @@ def verify(root: Path) -> dict[str, int]:
     if len(matches) != 1:
         raise SourceRefusal("M3JDK21_REFUSE|jtreg_selector_command")
     selectors = matches[0].split()
-    if len(selectors) != 24 or len(set(selectors)) != 24 or JTREG not in selectors:
+    if len(selectors) != JTREG_SELECTORS or len(set(selectors)) != JTREG_SELECTORS or JTREG not in selectors:
         raise SourceRefusal("M3JDK21_REFUSE|jtreg_selector_set")
     gate = workflow.find("check-m3string-concat-overflow-current.py")
     build = workflow.find("run: make java.base-java-only")
