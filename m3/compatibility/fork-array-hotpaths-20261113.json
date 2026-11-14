@@ -1,0 +1,496 @@
+{
+  "schema": "M3_COLLECTION_FORK_HOTPATHS_RECEIPT_V1",
+  "state": "SCOPED_ACTUAL_SOURCE_QUALIFICATION",
+  "target_repository": "hsoliwal/M3jdk21",
+  "receiving_baseline_ref": "ec67062ba55293d9175757ba39d97112d3cdcf8b",
+  "original_product_qualification_base": "796bd612b85fad87dd769558f4e7476c19556e3f",
+  "current_sdk_qualification_base": "ec67062ba55293d9175757ba39d97112d3cdcf8b",
+  "canonical_authority": {
+    "repository": "hsoliwal/com.synexia",
+    "source_commit": "52f3272653183c1b7b7614cd13c589dcdf29c74d",
+    "current_execution_revision": "ccecdcca2e5f1e3a1b92ad2e9d2e6002597e2eac",
+    "historical_engine_and_generator_revision": "ce7cbe57d31d640a210bdd634d33054d0d28492e",
+    "java_dataset": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/fork-array-hotpaths-20261113",
+    "java_manifest_sha256": "02a9b6083712345dc6bc40124c43a08f1eed239976cde629d4e6dcc7e69754d7",
+    "qualification": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/authoring/fork-array-hotpaths-20261113/QUALIFICATION.json",
+    "sdk_handoff": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/fork-array-hotpaths-20261113/SDK_HANDOFF.json",
+    "current_runtime_handoff": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/fork-array-hotpaths-20261113/SDK_HANDOFF.json",
+    "new_runtime_owners_created": false
+  },
+  "java_outputs": [
+    {
+      "path": "m3/collections/implementations/commons-collections-4.5.0/src/main/java/jdk/m3/collections/apache/list/TreeList.java",
+      "before_sha256": "db45e66d463d1399f8ca405f39616e8b8c54163d5a1a14682390608f7ac2aa10",
+      "sha256": "934a71dfdea28401fafb13a3e788e894a24ba023e74babe7c6949baf4c602b80",
+      "git_blob_sha1": "e33331ddd6e957e1646175b0896136c1fab81bbc",
+      "bytes": 33384,
+      "canonical_resource": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/fork-array-hotpaths-20261113/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-fork-array-hotpaths-20261113/0001-TreeList.java.txt",
+      "canonical_commit": "52f3272653183c1b7b7614cd13c589dcdf29c74d",
+      "status": "ACTUAL_SDK_RECEIVED_AND_PRODUCT_VERIFIED"
+    },
+    {
+      "path": "m3/collections/implementations/commons-collections-4.5.0/src/test/java/jdk/m3/collections/apache/list/TreeListIndexTraversalContract.java",
+      "before_sha256": "ABSENT",
+      "sha256": "87fae8abdcc95126498ed03df42507ecdc74e118eb1706e286daf862115b1e11",
+      "git_blob_sha1": "7aee7cbd7b642df6ebdaf3eb1127e12296cd657e",
+      "bytes": 13408,
+      "canonical_resource": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/fork-array-hotpaths-20261113/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-fork-array-hotpaths-20261113/0002-TreeListIndexTraversalContract.java.txt",
+      "canonical_commit": "52f3272653183c1b7b7614cd13c589dcdf29c74d",
+      "status": "ACTUAL_SDK_RECEIVED_AND_PRODUCT_VERIFIED"
+    },
+    {
+      "path": "m3/collections/implementations/commons-collections-4.5.0/src/test/java/jdk/m3/collections/apache/list/TreeListIndexTraversalTest.java",
+      "before_sha256": "ABSENT",
+      "sha256": "133e9e8bac1fb0a5f0511cac709e2a1895413daa7e6aa3006b298fe83dc3ff92",
+      "git_blob_sha1": "0c77e22f712e1df5e79274b55401f8f0f2265401",
+      "bytes": 479,
+      "canonical_resource": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/fork-array-hotpaths-20261113/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-fork-array-hotpaths-20261113/0003-TreeListIndexTraversalTest.java.txt",
+      "canonical_commit": "52f3272653183c1b7b7614cd13c589dcdf29c74d",
+      "status": "ACTUAL_SDK_RECEIVED_AND_PRODUCT_VERIFIED"
+    },
+    {
+      "path": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/map/mutable/UnifiedMap.java",
+      "before_sha256": "de4a4148b475aeed43c67cb9b832cef90f29cb62af74568fa248adeaf1027580",
+      "sha256": "1efc8fe513e294925a66e15d4a826f68377b67013ddae0595456aa29c822ba05",
+      "git_blob_sha1": "3090bee2d479c4320277cad772d357ae2d9919ae",
+      "bytes": 118596,
+      "canonical_resource": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/fork-array-hotpaths-20261113/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-fork-array-hotpaths-20261113/0004-UnifiedMap.java.txt",
+      "canonical_commit": "52f3272653183c1b7b7614cd13c589dcdf29c74d",
+      "status": "ACTUAL_SDK_RECEIVED_AND_PRODUCT_VERIFIED"
+    },
+    {
+      "path": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/unit-tests/src/test/java/jdk/m3/collections/eclipse/impl/map/mutable/UnifiedMapEntrySetMembershipTest.java",
+      "before_sha256": "ABSENT",
+      "sha256": "e6fdeda0db726b26f4f95c662f47fc7276734ec8e7406b737cd4f73db4485098",
+      "git_blob_sha1": "3ac4bf639bbce8875ac82c28a8f82dde19573978",
+      "bytes": 15103,
+      "canonical_resource": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/fork-array-hotpaths-20261113/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-fork-array-hotpaths-20261113/0005-UnifiedMapEntrySetMembershipTest.java.txt",
+      "canonical_commit": "52f3272653183c1b7b7614cd13c589dcdf29c74d",
+      "status": "ACTUAL_SDK_RECEIVED_AND_PRODUCT_VERIFIED"
+    }
+  ],
+  "generator_reuse": {
+    "dataset": "m3-eclipse-generator-20261113",
+    "origin_canonical_revision": "ce7cbe57d31d640a210bdd634d33054d0d28492e",
+    "reused_unchanged": true,
+    "canonical_files_reused_unchanged": 751,
+    "original_generator_baseline_ref": "65d2636ee26956bc638d56e5433c9e275f70997d",
+    "target_state": "ALREADY_PRESENT_ON_CURRENT_RECEIVING_BASELINE",
+    "receiving_baseline_ref": "ec67062ba55293d9175757ba39d97112d3cdcf8b",
+    "new_template_changes_in_this_receiving_batch": 0,
+    "current_git_object_postimages_verified": 373,
+    "template_files": 373,
+    "api_templates": 80,
+    "implementation_templates": 118,
+    "test_templates": 175,
+    "manifest_sha256": "f955f46f327b15df86f5aa23d9010d9abc64cd5a767556f1867097cb47e90054",
+    "changes": "Only com.m3.collections.eclipse and com/m3/collections/eclipse become corresponding jdk.m3 spellings; all template algorithms and license text preserved."
+  },
+  "actual_sdk_and_receiver": {
+    "datasets": {
+      "java": {
+        "dataset": "fork-array-hotpaths-20261113",
+        "maven_exit_code": 0,
+        "offline": true,
+        "sdk_tests": 45,
+        "input_sealing_tests": 23,
+        "receiver_cases": 9,
+        "targets": 5,
+        "reception_changes": [
+          5,
+          5,
+          0
+        ],
+        "sdk_inputs_sha256": "1c3fe1af91feac0fb8ee498254e50e2b2c861980c8cd62c409a8096daaf117f0",
+        "sdk_results_sha256": "8cda72ca557826e51d0bfd35cab98b8f56b7aed94eecead616066209e1da1d66",
+        "maven_log_sha256": "60fdf1b18ec4330a5600d941795bdd4963ecc1c61ca84fc11cfc6ccae03d1608"
+      }
+    },
+    "fixed_point": "The current actual receiver changed zero files on replay and preserved bytes, modes and timestamps.",
+    "nine_cases_per_dataset": [
+      "check-no-write",
+      "apply-exact-sdk",
+      "fixed-point-no-write",
+      "late-drift-no-partial-write",
+      "qualified-input-tamper",
+      "sdk-result-tamper",
+      "symlink-target",
+      "mixed-pre-postimages",
+      "failed-sdk-test-refusal"
+    ],
+    "historical_fixture_refusal_retained": true
+  },
+  "historical_ce7_sdk_and_receiver": {
+    "canonical_revision": "ce7cbe57d31d640a210bdd634d33054d0d28492e",
+    "receiving_base": "796bd612b85fad87dd769558f4e7476c19556e3f",
+    "role": "Historical qualification only; these 36-test counts and 373-template changes do not describe the current receiving diff.",
+    "datasets": {
+      "generator": {
+        "dataset": "m3-eclipse-generator-20261113",
+        "sdk_tests": 36,
+        "input_sealing_tests": 23,
+        "receiver_cases": 9,
+        "targets": 373,
+        "reception_changes": [
+          373,
+          373,
+          0
+        ],
+        "sdk_inputs_sha256": "8f73b979af78d7844645722ac74e4501d887bea4f4ccd9d59c75542d40505f1f",
+        "sdk_results_sha256": "5233d52e8ced0045ff5e91196dc86deffc7259bd27d6613bfd94930e6369f422"
+      },
+      "java": {
+        "dataset": "fork-array-hotpaths-20261113",
+        "sdk_tests": 36,
+        "input_sealing_tests": 23,
+        "receiver_cases": 9,
+        "targets": 5,
+        "reception_changes": [
+          5,
+          5,
+          0
+        ],
+        "sdk_inputs_sha256": "6ff5f3b3d0a405ef95f5a8d88579853ed39b88ad498f88f41e2c1460a6309cac",
+        "sdk_results_sha256": "8cda72ca557826e51d0bfd35cab98b8f56b7aed94eecead616066209e1da1d66"
+      }
+    }
+  },
+  "commons": {
+    "capability_id": "synexia.collections.commons-treelist-iterative-index-walks",
+    "owner": "jdk.m3.collections.apache.list.TreeList",
+    "classification": "Reuses the prior get/min/max iterative algorithm as a minimal current-jdk.m3 successor projection; preserves current target behavior rather than copying prior broader com.m3 source changes. This is fresh exact-source qualification, not a new algorithm.",
+    "prior_canonical_atom": {
+      "repo": "hsoliwal/com.synexia",
+      "revision": "ce7cbe57d31d640a210bdd634d33054d0d28492e",
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/commons-fork-hotpaths-20261113/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-commons-fork-hotpaths-20261113/0001-TreeList.java.txt",
+      "gitBlobSha": "97e5b8ae8d0b5191f17b6e77ea1aff64dfdf362f",
+      "sha256": "9f21fcf97ad5bda55f3b9885a0e050fd93a72685c3d6472ab66ca58ab8aa6c98",
+      "relationship": "Reuses the prior get/min/max iterative algorithm as a minimal current-jdk.m3 successor projection; preserves current target behavior rather than copying prior broader com.m3 source changes. This is fresh exact-source qualification, not a new algorithm."
+    },
+    "actual_emitted_replay": {
+      "strict_java21_compilation": "PASS",
+      "classpath_hotspot": "PASS",
+      "classpath_interpreter": "PASS",
+      "junit_jupiter_5_11_4": "PASS",
+      "automatic_module_fixture": "PASS",
+      "checks_per_run": 684371,
+      "physical_state_digest": "9317ab0aa114b330",
+      "public_protected_abi_equal": true,
+      "private_descriptors_equal": true
+    },
+    "contracts": {
+      "independentModel": "ArrayList with deterministic 40000 mixed mutation/iteration steps and separate recursive rank, AVL, thread, payload identity, free-chain and complete lane-state checks.",
+      "sizes": [
+        0,
+        1,
+        2,
+        3,
+        7,
+        8,
+        9,
+        15,
+        16,
+        17,
+        31,
+        32,
+        33,
+        255,
+        256,
+        257,
+        1023,
+        1024,
+        1025,
+        8191,
+        8192,
+        8193
+      ],
+      "checksPerRun": 684371,
+      "physicalStateDigest": "9317ab0aa114b330",
+      "modes": [
+        "HotSpot classpath",
+        "-Xint classpath",
+        "actual-source Automatic-Module-Name jar fixture",
+        "JUnit Jupiter 5.11.4 bridge"
+      ],
+      "otherContracts": [
+        "Subclass get dispatch from public get/remove and direct iterator owner traversal.",
+        "Existing NotSerializableException for empty and nonempty TreeList.",
+        "Serializable subclass retains its own state while the nonserializable parent reconstructs empty."
+      ],
+      "publicProtectedAbiSha256": "fc4ff854a5b43f4db69ae5438cbbd6b001c7163cb8f9a17caeed6eb5f133d06b",
+      "allPrivateDescriptorsSha256": "26013bc69681309cf6d66d67fa5289f696489a03936bbfa5dc5ad2c83990d987"
+    },
+    "bounded_measurements": {
+      "paired_jvms": 3,
+      "samples_per_case_per_jvm": 7,
+      "random_get_cpu": [
+        {
+          "size": 31,
+          "baseline_cpu_ns_per_op": 26.9600248336792,
+          "candidate_cpu_ns_per_op": 26.256020545959473,
+          "candidate_change_percent": -2.611289463058153
+        },
+        {
+          "size": 1023,
+          "baseline_cpu_ns_per_op": 58.04287910461426,
+          "candidate_cpu_ns_per_op": 52.332374572753906,
+          "candidate_change_percent": -9.838423971987941
+        },
+        {
+          "size": 65535,
+          "baseline_cpu_ns_per_op": 145.36428451538086,
+          "candidate_cpu_ns_per_op": 136.18963718414307,
+          "candidate_change_percent": -6.31148659509072
+        }
+      ],
+      "allocation_reduction_claimed": false,
+      "limits": [
+        "Bounded custom public-operation comparison using thread CPU time and allocated bytes; not JMH, a whole-JDK benchmark, or an asymptotic claim.",
+        "Three isolated alternating JVM pairs, eight warmup batches, seven retained samples per case; some individual paired forks regress and all raw samples are retained.",
+        "All nine median-of-fork-median CPU changes favor candidate; 1023-entry and 65535-entry random get medians improve about 9.8% and 6.3%.",
+        "No heap-allocation improvement claimed. Allocation ranges are identical; the smallest random-get case includes one 152-byte startup sample in each fork of both variants, while other random-get samples allocate zero bytes."
+      ]
+    },
+    "integration_boundary": {
+      "actualForkFqn": "jdk.m3.collections.apache.list.TreeList",
+      "forkPomBlobSha": "16967d0b56ff5e252ba0e629b52caa6482916a43",
+      "forkMavenArtifact": "org.apache.commons:commons-collections4:4.5.0",
+      "automaticModuleName": "jdk.m3.collections.apache",
+      "normalInstallAndDeploy": "disabled by current fork pom; this source proof does not enable publication",
+      "distinctIntegratedOwner": "jdk.m3.collections.apache.M3TreeList",
+      "distinctIntegratedPath": "src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3TreeList.java",
+      "distinctIntegratedBlobSha": "9da0a6ad147c423a0cfa718a8159890cc2c25977",
+      "distinctIntegratedFinding": "Its rank-selection loop is already iterative; it is unchanged and its synexia.collections.apache.m3treelist mapping must not be repinned to the fork."
+    }
+  },
+  "eclipse": {
+    "capability_id": "synexia.collections.eclipse-unifiedmap-entryset-membership",
+    "membership_change": {
+      "canonical_dataset": "fork-array-hotpaths-20261113",
+      "changed_methods": [
+        "EntrySet.containsEntry",
+        "new private EntrySet.chainContainsEntry"
+      ],
+      "storage": "Probe the existing interleaved Object[] table/collision chain; no added storage fields or retained owner.",
+      "unchanged": [
+        "getEntry and chainGetEntry retained for retainAll",
+        "all WeakBoundEntry, iterator, forEach, toArray, serialization and entry lifetime code"
+      ],
+      "callback_contract": "getKey -> getValue -> overridable index/hash -> stored-key equality -> query-value equality. Flat value captured before key equality; chain value read after matching-key equality. No fresh table read after equality callbacks."
+    },
+    "source_closure": {
+      "pinned_context_files_verified_by_git_blob": 1962,
+      "full_api_implementation_java_sources_compiled": 3754,
+      "distinct_generated_api_files": 1354,
+      "distinct_generated_implementation_files": 1478,
+      "distinct_generated_test_files": 2347,
+      "all_original_generated_and_new_test_sources_compiled": 2950,
+      "generator_reported_api_writes": 1370,
+      "generator_count_note": "Original generator reports writes; 16 API paths are written more than once. Distinct-file counts above come from the actual output tree.",
+      "scope": "Exact original provider code generator and templates emitted through canonical SDK; full actual API/implementation closure compiled with javac. The literal received UnifiedMap and new test are compiled against this shared qualified dependency context. All provider test sources compile; selected existing tests execute."
+    },
+    "actual_emitted_runtime": {
+      "original_plus_new_junit_tests": 575,
+      "junit_successes": 575,
+      "junit_failures": 0,
+      "test_classes": [
+        "jdk.m3.collections.eclipse.impl.map.mutable.UnifiedMapTest",
+        "jdk.m3.collections.eclipse.impl.map.mutable.UnifiedMapOverridesTest",
+        "jdk.m3.collections.eclipse.impl.map.mutable.UnifiedMapEntrySetMembershipTest"
+      ],
+      "default_contract_oracle": "PASS",
+      "interpreter_contract_oracle": "PASS",
+      "independent_random_model_steps_per_oracle": 20000,
+      "public_protected_descriptor_classes_compared": 11,
+      "public_protected_abi_equal": true,
+      "public_protected_abi_sha256": "10f78eef55319e68652bd276ce8ccc96a3d5ec251bde436fc729629dac0cc279",
+      "factory_runtime": {
+        "mapped_factory_classes_and_empty_results": 239,
+        "direct_strategy_factories": 5,
+        "classpath_mode": "Existing reflection fallback and actual class resources, not release BND service descriptors.",
+        "unreachable_fallback_table_rows": 16,
+        "unreachable_note": "These name nonexistent Boolean-key factory API types; they cannot be selected by the Class-based service loader. No source change is needed for the exercised real factory APIs."
+      },
+      "additional_current_dependency_junit_tests": 8,
+      "total_selected_current_tests": 583,
+      "current_target_ref": "ec67062ba55293d9175757ba39d97112d3cdcf8b"
+    },
+    "current_refresh": {
+      "target_revision": "ec67062ba55293d9175757ba39d97112d3cdcf8b",
+      "source_counts": {
+        "api_and_implementation": 3754,
+        "distinct_generated": {
+          "eclipse-collections-api": 1354,
+          "eclipse-collections": 1478
+        },
+        "generated_tests": 2347,
+        "all_test_sources": 2950
+      },
+      "tests": {
+        "baseline_unifiedmap": 575,
+        "emitted_unifiedmap": 575,
+        "new_current_dependency_tests": 8,
+        "failures": 0,
+        "default_contract_oracle": "PASS",
+        "interpreter_contract_oracle": "PASS",
+        "model_steps_per_oracle": 20000,
+        "public_protected_abi_classes_equal": 11,
+        "factory_runtime": "PASS 239 mapped plus 5 direct factories",
+        "short_emitted_allocation_replay": "PASS all five workloads below 0.01 B/op"
+      },
+      "prior_evidence_unchanged": true,
+      "limits": [
+        "Fresh current provider source compilation and selected runtime proof only; full installed M3JDK image/module/JNI/GC/jtreg/platform admission is not run.",
+        "No new optimization or full benchmark matrix was performed. Historical timings remain qualified only under their recorded earlier dependency context.",
+        "Provider Maven full-reactor and release BND service descriptor packaging are not run; actual generator/javac/JUnit and the existing reflection fallback are exercised.",
+        "All test sources compile; executed tests are the 575 affected UnifiedMap cases plus the eight newly received dependency tests."
+      ]
+    },
+    "bounded_measurements": {
+      "original_qualification_base": "796bd612b85fad87dd769558f4e7476c19556e3f",
+      "historical_measurements": {
+        "jit": {
+          "fresh_paired_jvms_per_side": 5,
+          "measured_rounds_per_jvm": 3,
+          "warmup_operations_per_workload": 2000000,
+          "measured_operations_per_round_workload": 3000000,
+          "successful_membership_bytes_per_operation": {
+            "baseline": 24,
+            "emitted_candidate": 0
+          },
+          "median_cpu_ns_per_operation": {
+            "chain8-hit": {
+              "baseline": 16.166703,
+              "candidate": 11.521887
+            },
+            "chain8-value-miss": {
+              "baseline": 18.535058,
+              "candidate": 17.065393
+            },
+            "flat16-hit": {
+              "baseline": 7.768872,
+              "candidate": 3.838451
+            },
+            "flat4096-hit": {
+              "baseline": 7.086958,
+              "candidate": 3.874842
+            },
+            "flat4096-value-miss": {
+              "baseline": 5.158238,
+              "candidate": 4.527877
+            }
+          }
+        },
+        "interpreter": {
+          "fresh_paired_jvms_per_side": 5,
+          "measured_rounds_per_jvm": 3,
+          "cpu_affinity": 0,
+          "warmup_operations_per_workload": 20000,
+          "measured_operations_per_round_workload": 150000,
+          "successful_membership_bytes_per_operation": {
+            "baseline": 24,
+            "emitted_candidate": 0
+          },
+          "initial_miss_timing_note": "An initial unpinned single-pair miss slowdown did not reproduce in five paired same-CPU runs; raw initial data are retained."
+        },
+        "actual_emitted_allocation_replay": "PASS all five workloads below 0.01 B/op; successful probes no longer allocate ImmutableEntry."
+      },
+      "current_scope": "Historical timing matrix remains limited to its earlier dependency context. Current refreshed source/ABI/factory checks and short emitted-allocation replay passed; no new current-dependency CPU matrix is claimed."
+    },
+    "integration_boundary": {
+      "provider_caller_chain": [
+        "jdk.m3.collections.eclipse.api.factory.Maps.mutable",
+        "ServiceLoaderUtils.loadServiceClass(MutableMapFactory.class)",
+        "jdk.m3.collections.eclipse.impl.map.mutable.MutableMapFactoryImpl",
+        "UnifiedMap.newMap()"
+      ],
+      "native_owner": "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3HashMap.java is a distinct SlotMap owner with structural rewalk semantics, not this provider fork.",
+      "existing_build": "m3/collections/pom.xml adds the native module source roots, not implementations/eclipse-collections-14.0.0-snapshot-00a668d6.",
+      "module_export": "Actual src/jdk.m3.collections/share/classes/module-info.java does not export Eclipse packages.",
+      "interop": "Existing m3/collections/interop still consumes org.eclipse.collections:eclipse-collections:11.1.0 and org.eclipse.* APIs, not this relocated fork."
+    },
+    "limits": [
+      "Full installed M3JDK21 build/image/module/JNI/GC/jtreg/platform admission NOT RUN.",
+      "Provider Maven full reactor and release BND packaging/service descriptor generation NOT RUN; actual original code generation, full javac source closure and relevant JUnit/runtime factories are proven.",
+      "The entire provider test source set compiles; only the 575 selected tests are executed.",
+      "CPU/allocation measurements apply to recorded microbenchmarks on the pinned stock JDK21 host, not whole SDK or application throughput.",
+      "Retained heap/native memory/RSS comparison was not measured; implementation fields and retained storage shape are unchanged.",
+      "No global provenance history or policy repair was performed. Separate baseline canonical-ledger inspection was blocked retrieving its 8.37 MB first member; no canonical ledger PASS or inherited content failure is claimed."
+    ]
+  },
+  "spring": {
+    "verdict": "HOLD",
+    "product_outputs": [],
+    "reason": "Three public CompositeMap consumer scenarios regress in all three paired JVM forks; root admission gate forbids reproducible public-consumer regression.",
+    "reproducible_public_regressions": [
+      {
+        "operation": "hash_overlap_0",
+        "size": 8,
+        "pairedCpuChangePercent": [
+          40.212233898773356,
+          26.18070010059279,
+          28.997980531823252
+        ],
+        "medianCpuChangePercent": 34.49671544200819
+      },
+      {
+        "operation": "linked_overlap_50",
+        "size": 8,
+        "pairedCpuChangePercent": [
+          12.14329718921272,
+          15.895137816198401,
+          10.324585211536675
+        ],
+        "medianCpuChangePercent": 15.1937494184746
+      },
+      {
+        "operation": "linked_overlap_100",
+        "size": 8,
+        "pairedCpuChangePercent": [
+          9.40437950878492,
+          11.573743257414094,
+          6.568783580445192
+        ],
+        "medianCpuChangePercent": 11.573743257414094
+      }
+    ],
+    "policy": "Candidate remains private; no Spring code or tests are received by this batch."
+  },
+  "integration_limits": [
+    "This receipt proves recorded retained-fork source/component gates, not live module absorption or whole-library completion.",
+    "No full source-built installed M3JDK image, release packaging, JNI/GC/jtreg or cross-platform acceptance is claimed.",
+    "Commons full Maven suite and Eclipse full Maven reactor/release BND service generation are not established by these source fixtures.",
+    "All 2950 current Eclipse provider test sources compile; executed tests are 575 selected UnifiedMap cases plus eight current dependency tests.",
+    "Bounded stock-JDK21 CPU/allocation measurements do not establish application throughput, retained heap, native memory or RSS improvement.",
+    "The integrated M3TreeList, native M3HashMap, existing provider interop and all unrelated records remain unchanged.",
+    "Global receiving order and active STRING phase remain unchanged; this receipt does not promote COLLECTIONS or any queued naming operation."
+  ],
+  "naming_reconciliation": {
+    "canonical_evidence": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/authoring/fork-array-hotpaths-20261113/RECONCILIATION.json",
+    "source_commit": "52f3272653183c1b7b7614cd13c589dcdf29c74d",
+    "malformed_input": {
+      "path": "m3/docs/name-mapping.json",
+      "sha256": "3c92d298c8901b0434b7bd7692b7480528e36d452f896fae72aa21783e065c9e",
+      "git_blob_sha1": "bedf108e1d164c692c18aef7df81b470f4b1c4ed",
+      "bytes": 859018
+    },
+    "authoritative_inherited_records": 94,
+    "new_distinct_fork_records": 2,
+    "resulting_records": 96,
+    "structural_rule": "Union complete records from exact valid parents. Select only the unique per-record change relative to the valid common base; refuse competing changes. Preserve the current text's 94 distinct capability-ID order and every byte outside migration.records. No field is inferred from the malformed structure.",
+    "authorized_dependency_normalizations": [
+      {
+        "record_id": "synexia.collections.eclipse-unified-set-bulk-clear",
+        "dependency_id": "eclipse-collections-14-source-closure",
+        "source_commit": "f764f422cdcba24ae91c61db261d237fd86163fe",
+        "resolution_before": "component-qualified",
+        "resolution_after": "pending",
+        "reason_before": "Finite namespace-correct generator/API/implementation source closure is separately evidenced; whole-runtime admission remains pending.",
+        "reason_after": "Original dependency resolution: component-qualified. Finite namespace-correct generator/API/implementation source closure is separately evidenced; whole-runtime admission remains pending.",
+        "rule": "Conservative closed-vocabulary repair. Retain the exact original scoped component qualification and literal in reason; installed integration stays pending. No status or unrelated field changes."
+      }
+    ],
+    "global_phase_and_existing_statuses_preserved": true,
+    "schema_validation_after_binding_required": true
+  }
+}
