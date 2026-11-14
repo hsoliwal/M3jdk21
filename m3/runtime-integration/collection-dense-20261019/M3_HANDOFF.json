@@ -3362,8 +3362,8 @@
     {
       "path": "m3/tooling/collection-dense-20261019/m3-openrewrite-recipes/recipe-crates/m3jdk-collection-dense-20261019/pom.xml",
       "source_path": "m3-openrewrite-recipes/recipe-crates/m3jdk-collection-dense-20261019/pom.xml",
-      "source_git_blob": "faf228a24914b01fa2139e275f31f8c2ff7afe38",
-      "sha256": "442beac92137cd919ccd6e7827840b4624ab0e4141d1e1ab426885dac06ffdbd",
+      "source_git_blob": "97056ae804048b523b2b06a9dd4abbaa78cc61f0",
+      "sha256": "e41c7634559e802ba9150c5187f0c0caed40ea3d3374c1b925e1b3d8451c6819",
       "role": "PINNED_NONCANONICAL_AUTHORING_MIRROR"
     },
     {

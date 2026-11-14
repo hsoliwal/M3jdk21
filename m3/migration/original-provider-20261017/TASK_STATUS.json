@@ -11,7 +11,7 @@
   "sdkTree": "0d2225996145946737eb5f06f19bed2ffe4b825b",
   "sdkFiles": 74,
   "sdkBytes": 1954797,
-  "pinsSha256": "041479224c0e2d0209195007a8ea93f5acb4c62cd8700b34231721723a4e90b9",
+  "pinsSha256": "0904fb6218a179edba6e148a612a9cf411b2da672f3cde7d06abed7195bd1adc",
   "targets": {
     "total": 60,
     "keep": 54,
@@ -76,7 +76,7 @@
   "classpathCorrection": {
     "gate": "8a74df4eef1650a76f0c9a38734966a6eca081e8",
     "evidence": "annotations-classpath-20261017/execution-evidence.json",
-    "donor": "d79867bcc09ad6329e12418e15907e54b8ab025f",
+    "donor": "059259ca746466389cccac4094c3d664b0d79e6d",
     "scope": "Existing Maven recipe authoring input only; generated migration resources unchanged",
     "candidateExecution": "PASS_IN_EXACT_RECEIVER_HOSTED_MAVEN"
   },
@@ -145,7 +145,7 @@
     "job": 117600228618,
     "conclusion": "SUCCESS",
     "sdkTree": "0d2225996145946737eb5f06f19bed2ffe4b825b",
-    "pinsSha256": "041479224c0e2d0209195007a8ea93f5acb4c62cd8700b34231721723a4e90b9",
+    "pinsSha256": "0904fb6218a179edba6e148a612a9cf411b2da672f3cde7d06abed7195bd1adc",
     "artifact": {
       "id": 12127665194,
       "zipBytes": 161703,

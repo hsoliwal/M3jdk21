@@ -46,16 +46,16 @@
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/pins.json",
       "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/pins.json",
-      "gitBlob": "7a316c069f6e7c611d631851b7ebecba0d9301d5",
+      "gitBlob": "1a6d6c45242f578e422791d330e18e3dfd16f3b0",
       "bytes": 10269,
-      "sha256": "d730a4f8f2cadcc2bc6a02f98289bc3a0ac7cb822a6427ff31ac78c8bcce7426"
+      "sha256": "2877a123586a66fb57ca640dd5f28e5d2c1fcca6c7e6272ce864d02b5142a651"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/pom.xml",
       "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/pom.xml",
-      "gitBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f",
+      "gitBlob": "059259ca746466389cccac4094c3d664b0d79e6d",
       "bytes": 2678,
-      "sha256": "f0ab99c3dafb38e82f8e5fd4c6d22db07831808c251c4622f292114c83e6673e"
+      "sha256": "5b3f3f04f9539178d43ffa75068366d8ff1c037e25f67c2d31aa3bdb6e0ede1e"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/README.md",
@@ -221,9 +221,9 @@
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/verify.py",
       "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/verify.py",
-      "gitBlob": "9d7815f4f345d5cc4eafbf955d5c7eab84764e07",
+      "gitBlob": "87bf99346e6360462a685e66dc4f6776e2315dcb",
       "bytes": 25712,
-      "sha256": "404647928d4da986779761062069232ba460b274a4a4591f27e9a3ccdf628b4b"
+      "sha256": "33dfab00149dcdcf019723794dd450eccb92d342f4266022aa7ba7f0034570d3"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/qualify.py",

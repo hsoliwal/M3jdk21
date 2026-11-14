@@ -7,11 +7,11 @@
   },
   "generated_receipt": {
     "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/generated/RESULTS.json",
-    "sha256": "8447b5d391ae2e8e21875d6952509ec174049a727b5140f59fd4dc23b12c0293"
+    "sha256": "b340533c2d863a7bcd83830b1b84ba39c2b0eff10ef54b2a4cda85535af89fb6"
   },
   "sdk_receipt": {
     "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/sdk/RESULTS.json",
-    "sha256": "162a5d8ebcb52c9bf05c284f315ffc2146773f446861bd8fc12db851c1488eaf"
+    "sha256": "12bb10c44e837ef30aef11cfdbe98962b7f415af40f619ea7d405f0e88d2574f"
   },
   "diagnostic_comparison_retained_separately": {
     "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/DIAGNOSTIC_COMPARISON.json",

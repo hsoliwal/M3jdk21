@@ -21,7 +21,7 @@ CONTRACTS = {
     "scope": {
         "sourceCommit": "723b74515f35d3192834dded9f163af671c5bac7",
         "sourceTree": "3e3a863f12be6cd1cc390579655f7e31a5766e50",
-        "sdkFiles": 22, "verifyGitBlob": "e6b55bf76ae197e64e54884301d67227a0b09da1",
+        "sdkFiles": 22, "verifyGitBlob": "ed5762bea01ea3b9e7a87e7abe28ef3222039cf2",
         "baselineCounterexamples": 9,
         "suites": {"jdk.internal.m3.rewrite.M3CanonicalScopeBoundaryRecipeTest": [
             "bothPartialStatesRoundTripAndReachFixedPointsInBothOrders",

@@ -10,15 +10,15 @@
   "files": [
     {
       "path": "FOSS_REUSE_DECISION.tsv",
-      "gitBlob": "d707e8ffe5158e3d31459417dc242a9e0012b235",
+      "gitBlob": "25f841d401ba0de64f944f3eece3321afae096dd",
       "bytes": 798,
-      "sha256": "194c3d438ad1412615e6314f9f0e0087f4b24fa3f0e2f6083babd0d2c6db19da"
+      "sha256": "45f24786de71613c6720a6a960067fb451a648889e8b102bb6aebacbd125ee56"
     },
     {
       "path": "README.md",
-      "gitBlob": "966e22328a70fcc4d8d5bb1fa671223eb6094ff7",
+      "gitBlob": "683886e118a41829f7b92ee379d056d07a234263",
       "bytes": 2650,
-      "sha256": "36eafc4fe29b098815a7929808c1e591399e582fa29177856e45ff744cae3c33"
+      "sha256": "6115528b5d488cac0f9fa2e30ac0e0e45720b98a7111a691884770edfae9b0be"
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
@@ -58,9 +58,9 @@
     },
     {
       "path": "pom.xml",
-      "gitBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f",
+      "gitBlob": "059259ca746466389cccac4094c3d664b0d79e6d",
       "bytes": 2678,
-      "sha256": "f0ab99c3dafb38e82f8e5fd4c6d22db07831808c251c4622f292114c83e6673e"
+      "sha256": "5b3f3f04f9539178d43ffa75068366d8ff1c037e25f67c2d31aa3bdb6e0ede1e"
     },
     {
       "path": "src/main/resources/META-INF/rewrite/release-jep-manifest-order-20261020-inverse.yml",
@@ -346,15 +346,15 @@
     },
     {
       "path": "support/owned_state_relation_verify.py",
-      "gitBlob": "56c7d75fdf56b736cfb57d59e626afdac820531c",
+      "gitBlob": "7016191fe3ff4cb0c372bc5163309b9898489454",
       "bytes": 24947,
-      "sha256": "2d658433e2695d5ffa0bd3e440dc3bddbc41fe187ee9f01135e29eb46c333c86"
+      "sha256": "131841a9c15cd8d1e75ffb214aea0bf38b4f423af4ad0a65d6bccde3b8ecc247"
     },
     {
       "path": "verify.py",
-      "gitBlob": "90b8eb8ebca8c9b98d016a9429c910739cad1b22",
+      "gitBlob": "0fe2b0625c83195ad75e70207f22dfd32bee6e47",
       "bytes": 20582,
-      "sha256": "ca64043cc4e8f55e9dce35a6dffed1f0851cea9fe9a9923d014a1bed4bef4e02"
+      "sha256": "6bada70b0173564dd85d3588044cc9e788ea5f6aac0fd0ce8caa5c1bace3ba53"
     }
   ]
 }

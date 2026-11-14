@@ -2,11 +2,11 @@
 <!-- Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <parent><groupId>com.synexia.receiving</groupId><artifactId>jdt-array-nodelist-source</artifactId><version>20261019</version></parent>
+  <parent><groupId>com.m3.receiving</groupId><artifactId>jdt-array-nodelist-source</artifactId><version>20261019</version></parent>
   <artifactId>jdt-exact-core-source</artifactId>
   <properties><maven.compiler.release>${jdt.core.release}</maven.compiler.release></properties>
   <dependencies>
-    <dependency><groupId>com.synexia.receiving</groupId><artifactId>jdt-exact-compiler-source</artifactId><version>${project.version}</version></dependency>
+    <dependency><groupId>com.m3.receiving</groupId><artifactId>jdt-exact-compiler-source</artifactId><version>${project.version}</version></dependency>
     <dependency><groupId>org.eclipse.platform</groupId><artifactId>org.eclipse.core.resources</artifactId><version>3.24.100</version></dependency>
     <dependency><groupId>org.eclipse.platform</groupId><artifactId>org.eclipse.core.runtime</artifactId><version>3.35.0</version></dependency>
     <dependency><groupId>org.eclipse.platform</groupId><artifactId>org.eclipse.core.filesystem</artifactId><version>1.11.500</version></dependency>

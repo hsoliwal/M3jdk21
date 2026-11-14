@@ -106,8 +106,8 @@
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/pom.xml",
       "target_path": "m3/tooling/integrated-utilities/recipe/pom.xml",
-      "sha256": "e9c468164b598c968db91a1e75496f9530a5917df59ba046959d033319bc7293",
-      "git_blob": "29372e3605c65dd0ca4e6f63b6416f901f57ce14"
+      "sha256": "4567c058af571ab5519e8232de1ceba8619d85e5c7909a7123f20ee9ba6ae87c",
+      "git_blob": "bdc3c074490d3223b4240ab7774629cc7b540a94"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/catalogue/baseline-source-verification.json",
@@ -790,8 +790,8 @@
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/recipe/production-sdk-receipt-1.json",
       "target_path": "m3/tooling/integrated-utilities/recipe/qualification/recipe/production-sdk-receipt-1.json",
-      "sha256": "79ae6033d3b853e85ab171bcd7d1fa89ba758b7e0d0fbebdd66305c11e9f5bd2",
-      "git_blob": "a12b1dbca7dfc40cb0bf90e6ccd968d705d64066"
+      "sha256": "d6bd7e74193c30afbd989b8484ddea2447a292ff261e1acc0fbb26862da4eb06",
+      "git_blob": "7187638550ea156e48b735e1923e3e054d94dde6"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/recipe/received-collections-receipt.json",
@@ -814,8 +814,8 @@
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/sdk-fixture-receipt.json",
       "target_path": "m3/tooling/integrated-utilities/recipe/qualification/sdk-fixture-receipt.json",
-      "sha256": "a278b3701ba1c365b19a947a8a69b56e235ad3d1b436c71e2e2cbebdbe995e2d",
-      "git_blob": "35bdc2c1f3ccb539f3a3269a88b87d89d1c228ad"
+      "sha256": "f38baec76213aa55e4a050507503a736a5d73f6519453055968acf8805f5be8b",
+      "git_blob": "d1938c675abdcb6561807af12b61454c5148570a"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/utilities/behavioral-atoms.raw.json",

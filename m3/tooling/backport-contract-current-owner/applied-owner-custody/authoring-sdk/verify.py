@@ -27,8 +27,8 @@ OWNER_BEFORE_GIT = {
     "m3/tooling/backport-contract-current-owner/runtime/qualify.py": "4c64fbf724649bd9527e95b6456bcda842ec8086",
     "m3/tooling/backport-contract-current-owner/runtime/README.md": "0dfce38a83bfcc3abee720bf38d07e79d056abfb",
     ".github/workflows/m3-backport-contract-current-owner.yml": "5ab3cba8a55c95095e3db09b8c959938aeab91e1",
-    "m3/tooling/backport-contract-current-owner/sdk/pins.json": "f205864458b8dfa91445a26643bec1ab7b2e1859",
-    "m3/tooling/backport-contract-current-owner/sdk/verify.py": "8ad669b3954a0958820f6962de2e55f6b1988bc2"
+    "m3/tooling/backport-contract-current-owner/sdk/pins.json": "b9c390a194f56f3dbb65f210ea5bec6d8ab9a687",
+    "m3/tooling/backport-contract-current-owner/sdk/verify.py": "6e7c4946a3422b25436892d088c84395a4ce6b44"
 }
 OWNER_AFTER_GIT = {
     "m3/tooling/backport-contract-current-owner/qualify.py": "735f880afd81739cd21313302de947d49626d202",
@@ -37,8 +37,8 @@ OWNER_AFTER_GIT = {
     "m3/tooling/backport-contract-current-owner/runtime/qualify.py": "a3f8492416876547eefed9c5a2d8bc5583ddd8ec",
     "m3/tooling/backport-contract-current-owner/runtime/README.md": "67d987cbad0af4aa3de0ed17a56dc69b2a1afc7b",
     ".github/workflows/m3-backport-contract-current-owner.yml": "b992bdbfb5187f868fbf3388d01edb7d9e9d905c",
-    "m3/tooling/backport-contract-current-owner/sdk/pins.json": "f205864458b8dfa91445a26643bec1ab7b2e1859",
-    "m3/tooling/backport-contract-current-owner/sdk/verify.py": "8ad669b3954a0958820f6962de2e55f6b1988bc2"
+    "m3/tooling/backport-contract-current-owner/sdk/pins.json": "b9c390a194f56f3dbb65f210ea5bec6d8ab9a687",
+    "m3/tooling/backport-contract-current-owner/sdk/verify.py": "6e7c4946a3422b25436892d088c84395a4ce6b44"
 }
 DIRECTIONS = ("forward", "inverse")
 RECEIVER_OUTPUTS: dict[str, str] = {}
@@ -59,7 +59,7 @@ REQUIRED_PATHS = sorted([
 ORIGINAL_GIT = {
     "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
     "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java": "78d5fb68f13872164973a8918cc7886c5f548bca",
-    "pom.xml": "d79867bcc09ad6329e12418e15907e54b8ab025f",
+    "pom.xml": "059259ca746466389cccac4094c3d664b0d79e6d",
 }
 PROVIDERS = {"openrewriteAdapter": ORIGINAL_GIT["pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java"],
              "manifestKernel": ORIGINAL_GIT["pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java"]}
