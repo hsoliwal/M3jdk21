@@ -52,7 +52,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/sdk/FOSS_REUSE_DECISION.tsv",
       "targetPath": "m3/tooling/backport-contract-current-owner/sdk/FOSS_REUSE_DECISION.tsv",
-      "gitBlob": "c080d9ce7d468762b2a2cdd1bc9ff389549f646a",
+      "gitBlob": "6ba25fdddd4cc0f3cd0571d42e6068b5b00fca57",
       "bytes": 1493
     },
     {
@@ -64,7 +64,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/sdk/THIRD_PARTY_NOTICES.md",
       "targetPath": "m3/tooling/backport-contract-current-owner/sdk/THIRD_PARTY_NOTICES.md",
-      "gitBlob": "ce6a35d31db0acdedf761fe5aa3cc9b219e053af",
+      "gitBlob": "3cb46a0b7af92e7012d474eb53108edc2d26a2ba",
       "bytes": 2254
     },
     {
@@ -94,13 +94,13 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/sdk/pins.json",
       "targetPath": "m3/tooling/backport-contract-current-owner/sdk/pins.json",
-      "gitBlob": "f205864458b8dfa91445a26643bec1ab7b2e1859",
+      "gitBlob": "b9c390a194f56f3dbb65f210ea5bec6d8ab9a687",
       "bytes": 14116
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/sdk/pom.xml",
       "targetPath": "m3/tooling/backport-contract-current-owner/sdk/pom.xml",
-      "gitBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f",
+      "gitBlob": "059259ca746466389cccac4094c3d664b0d79e6d",
       "bytes": 2678
     },
     {
@@ -322,7 +322,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/sdk/verify.py",
       "targetPath": "m3/tooling/backport-contract-current-owner/sdk/verify.py",
-      "gitBlob": "8ad669b3954a0958820f6962de2e55f6b1988bc2",
+      "gitBlob": "6e7c4946a3422b25436892d088c84395a4ce6b44",
       "bytes": 25355
     }
   ],

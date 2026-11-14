@@ -1,7 +1,0 @@
-category	platform	problem	semantic_difference	authority
-interval_intersection	Synexia Wave23	M3 signed half-open interval algebra	Exact first-party Java/C JNI from canonical Maven images	RECEIVE_EXACT_SOURCE
-interval_intersection	LeetCode	986 Interval List Intersections	Closed touching endpoints differ from empty half-open intersection	REFERENCE_ONLY_NO_COPY
-interval_merge	LeetCode	56 Merge Intervals	Inclusive endpoints differ from signed half-open union	REFERENCE_ONLY_NO_COPY
-interval_coverage	HackerRank	Gridland Metro	1-indexed inclusive cells require explicit conversion	REFERENCE_ONLY_NO_COPY
-interval_merge	GeeksforGeeks	Merging intervals	Sort/sweep shape reference, not identical Java API	REFERENCE_ONLY_NO_COPY
-compressed_bitmap	GitHub RoaringBitmap	Bitmap membership	Not equal to normalized signed interval-pair algebra	REFERENCE_ONLY_NO_COPY

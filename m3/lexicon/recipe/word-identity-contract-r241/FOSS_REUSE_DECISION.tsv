@@ -1,6 +1,0 @@
-capability	classification	repository	revision	path	blob	license	proof
-word-identity-and-precompute-contract	DIRECT_REUSE_UNMODIFIED	hsoliwal/M3jdk21	7409479266ddb37c29182550e6354665066d9ff6	m3/core/src/jdk/m3/text/M3WordRows.java	651c03f6b1a1e672ac97e2d0830473bcfc06207b	Apache-2.0	proof/qualification.json
-word-identity-and-precompute-contract	DIRECT_REUSE_UNMODIFIED	hsoliwal/M3jdk21	7409479266ddb37c29182550e6354665066d9ff6	m3/core/src/jdk/m3/text/M3WordRowsNative.java	a68f0d75eaae64707cf6d073a2b50f89c5dfdc78	Apache-2.0	proof/qualification.json
-word-identity-and-precompute-contract	DIRECT_REUSE_UNMODIFIED	hsoliwal/M3jdk21	7409479266ddb37c29182550e6354665066d9ff6	m3/core/test/jdk/m3/text/M3WordRowsImageRefusalContractTest.java	fe728db21aa55ff96fbaa0971ef582bd8bbbfbce	Apache-2.0	proof/qualification.json
-word-identity-and-precompute-contract	DIRECT_REUSE_UNMODIFIED	hsoliwal/M3jdk21	7409479266ddb37c29182550e6354665066d9ff6	m3/lexicon/receiver/src/main/java/jdk/m3/lexicon/M3TokenId.java	ce9eeb45e1e694f79080adbfa9c67d49746bd957	Apache-2.0	proof/qualification.json
-word-identity-and-precompute-contract	DIRECT_REUSE_UNMODIFIED	hsoliwal/com.synexia	f2ce596a39f9a9a4ba6f48d40eb62db0a1af2757	synexia-dictlang/shared/api/src/main/java/com/synexia/dictshared/api/IndexHandle.java	75b956f0163d98e0828a614a3ab4da6a77764898	Apache-2.0	proof/qualification.json

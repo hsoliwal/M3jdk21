@@ -1,4 +1,0 @@
-DIAGNOSTIC ordinarySourceForEach original=0 target=0 (dispatch count not asserted)
-PASS ancillary=java.util.HashMap ordinarySourceForEachOriginal=0 ordinarySourceForEachTarget=0 (dispatch count diagnostic)
-PASS ancillary=java.util.LinkedHashMap ordinarySourceForEachOriginal=0 ordinarySourceForEachTarget=0 (dispatch count diagnostic)
-PASS scenarios=113 checks=257323 expectedSHA256=4f2e09f686f46224e45ae7a09b252aa942f5e2130b3e36e566e341c2cd6255d8 target=java.util.TreeMap invariantCalls=0 lazyProviderAvailable=false providerLoadsDiagnostic=0

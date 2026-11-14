@@ -1,8 +1,0 @@
-# Copyright 2026 Hitesh Soliwal, Synexia. SPDX-License-Identifier: Apache-2.0
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.CorpusOptionalPeriodJava
-displayName: Corpus optional-period java step
-description: Exact source-sealed java step. Follow qualified bootstrap/rebuild order.
-recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
-      crateName: m3-corpus-optional-period-java

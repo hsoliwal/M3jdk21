@@ -88,11 +88,11 @@ FROZEN_GIT = {
   "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
   "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java": "78d5fb68f13872164973a8918cc7886c5f548bca",
   "pinned-engine/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java": "73779dee8c80a0913b88fff17637ed3f44b33ea3",
-  "pom.xml": "d79867bcc09ad6329e12418e15907e54b8ab025f",
+  "pom.xml": "059259ca746466389cccac4094c3d664b0d79e6d",
   "src/test/resources/frozen/M3ReleaseJepAuthorityRepairRecipeTest.java.txt": "9f4f4288c1a0e19b0b6cd3e48c1442263a64a17a",
   "src/test/resources/frozen/M3Jdk21HashPinnedTextSnapshotRecipeTest.java.txt": "3ba1c6924668d068c47f7608aa63dfa082b8c96a",
   "src/test/resources/frozen/M3ReleaseJepAuthorityRepairRecipe.java.txt": "dfb78083265f32c6e9ebc57f4302f3ef6d6ce274",
-  "support/owned_state_relation_verify.py": "56c7d75fdf56b736cfb57d59e626afdac820531c"
+  "support/owned_state_relation_verify.py": "7016191fe3ff4cb0c372bc5163309b9898489454"
 }
 BEFORE_SHA = "fca288fddb97ea486df2f21d6601848dad6df016aae0bd53c291d16e8181efd3"
 AFTER_SHA = "bfec24cb63b353c5dbbc72ef14f7820f8ce315d244bff3a714a21232f6bff803"
@@ -179,7 +179,7 @@ def inputs():
 
 def owned_report_validator(files):
     path = "support/owned_state_relation_verify.py"
-    require(blob(files[path]) == "56c7d75fdf56b736cfb57d59e626afdac820531c", "owned XML validator identity")
+    require(blob(files[path]) == "7016191fe3ff4cb0c372bc5163309b9898489454", "owned XML validator identity")
     return runpy.run_path(str(regular(ROOT / path)), run_name="m3_authority_manifest_owned_xml")
 
 def validate_counters(counter, ident, head):

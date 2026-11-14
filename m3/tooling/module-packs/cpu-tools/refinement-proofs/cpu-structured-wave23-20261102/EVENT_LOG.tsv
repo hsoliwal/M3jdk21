@@ -1,8 +1,0 @@
-date	stage	input	status
-2026-11-02	inventory	M3JDK21 Wave22 #2306 and Synexia Wave23 #15316	PASS
-2026-11-02	category	LeetCode 986/56 HackerRank Gridland GeeksforGeeks bitmap	REFERENCE_ONLY
-2026-11-02	donor_blob	8 original Maven postimages with independent SHA256 and Git SHA	PASS
-2026-11-02	java-receiver	Two original interval algebra Java classes	SOURCE_BLOB_PASS
-2026-11-02	native-receiver	Original C17 intersection JNI source	SOURCE_BLOB_PASS
-2026-11-02	oracles	3 Java fixtures, one C oracle, 91 category rows	SOURCE_BLOB_PASS
-2026-11-02	ci-gate	Source/strict Java/C17/JNI/UBSan and runtime	AUTHORED_HOLD

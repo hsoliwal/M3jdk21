@@ -7,7 +7,7 @@
     },
     "pom.xml": {
       "disposition": "EXACT_EXISTING_HOST_REUSE",
-      "sha256": "0a1c81dcc36ef6a77c6ba812797cde06fa8d7ffdafa73f13b6ef846b3ab2a572",
+      "sha256": "f1bd00c207f44ee59939cac93cd72d8173dc1d004b2e7688efc2e7d30781fbd0",
       "source": "m3-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/recipe-host/pom.xml"
     },
     "src/test/java/jdk/internal/m3/rewrite/M3TaskRecipeTest.java": {

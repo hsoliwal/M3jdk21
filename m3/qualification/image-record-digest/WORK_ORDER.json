@@ -1,5 +1,0 @@
-{
-  "schema": "M3_IMAGE_RECORD_DIGEST_WORK_ORDER_V2",
-  "scope": "One existing constructor atom. Lazy local SHA256+32-byte scratch reuse; copy into published table. Preserve count0 path and first-record validation order, all formats/fields/API/storage/lifetime/native owners. Retaining provider regression included.",
-  "generationCalls": 0
-}

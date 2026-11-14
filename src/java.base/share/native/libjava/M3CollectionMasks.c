@@ -188,6 +188,36 @@ Java_java_util_M3CollectionMasks_selected0(JNIEnv *env, jclass type,
             jint index = block + offset;
             uint64_t word = m3_mask_window(input[offset], index,
                     first_word, last_word, from, to);
+            if (word == UINT64_MAX) {
+                jint emitted = 0;
+                jint base = (jint)((uint32_t)index << 6);
+                if (count - written < 64) {
+                    m3_mask_throw(env, "java/util/ConcurrentModificationException",
+                            "selection mask changed during extraction");
+                    return NULL;
+                }
+                /* Preserve the established 256-index JNI flush boundaries while
+                 * replacing full-word bit decoding with consecutive stores. */
+                while (emitted < 64) {
+                    jint available = M3_MASK_INDEX_CHUNK - buffered;
+                    jint take = 64 - emitted;
+                    jint position;
+                    if (take > available) take = available;
+                    for (position = 0; position < take; position++) {
+                        output[buffered + position] = base + emitted + position;
+                    }
+                    buffered += take;
+                    written += take;
+                    emitted += take;
+                    if (buffered == M3_MASK_INDEX_CHUNK) {
+                        (*env)->SetIntArrayRegion(env, result, written - buffered,
+                                buffered, output);
+                        if ((*env)->ExceptionCheck(env)) return NULL;
+                        buffered = 0;
+                    }
+                }
+                continue;
+            }
             while (word != UINT64_C(0)) {
                 if (written == count) {
                     m3_mask_throw(env, "java/util/ConcurrentModificationException",

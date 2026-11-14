@@ -1,4 +1,0 @@
-base (master a33f82c8af9916d56f9ae5fca2adcec744d2cba4, tree 10899a4):
-[WARNING] Tests run: 2278, Failures: 0, Errors: 0, Skipped: 135
-curated (tree b0b5610):
-[WARNING] Tests run: 2278, Failures: 0, Errors: 0, Skipped: 135

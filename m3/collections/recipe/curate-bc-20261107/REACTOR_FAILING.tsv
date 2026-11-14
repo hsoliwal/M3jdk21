@@ -1,2 +1,0 @@
-com.synexia:m3-openrewrite-recipes	GOAL: There are test failures.
-com.synexia:m3-openrewrite-recipes	jdk.internal.m3.rewrite.M3PureIntCustodyTest.custodySourcesRemainExactM3GitBlobs

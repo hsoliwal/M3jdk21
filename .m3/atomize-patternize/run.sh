@@ -107,7 +107,7 @@ fi
 
 version="${M3_RECIPE_VERSION:?set M3_RECIPE_VERSION to an installed m3-openrewrite-recipes version}"
 plugin="${M3_REWRITE_PLUGIN_VERSION:-5.23.1}"
-artifact="com.synexia:m3-openrewrite-recipes:${version}"
+artifact="com.m3:m3-openrewrite-recipes:${version}"
 printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
 
 if [[ -x "$repo/mvnw" ]]; then

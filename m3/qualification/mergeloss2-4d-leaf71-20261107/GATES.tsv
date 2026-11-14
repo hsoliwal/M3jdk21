@@ -1,9 +1,0 @@
-# SPDX-License-Identifier: Apache-2.0
-# Merge-loss leaf 71 (mergeloss2 CLEAN_4D), origin 43f50e1f76e (2026-10-25 "Compact metadata in original Matcher and M3TQ ..."), master 657fc39f0dd709328f2cc617ec0920a5cb86197b, stock JDK 21.0.9.
-gate	command	state	evidence
-1_three_way	git merge-file ours=master base=43f50e1f76e^ theirs=43f50e1f76e (Matcher.java, M3TQ.java)	PASS	both CLEAN
-2_patch_compile	javac --patch-module java.base=<master share/classes + leaf files> Pattern.java Matcher.java M3TQ.java (closure)	PASS	rc=0, 0 errors, master and leaf
-3_m3tq_differential	TqProbe <seed> 200000, seeds 1/2, --patch-module java.base=<regex+mindex classes>, master vs leaf	PASS	digests identical (1015822f7c8f5160, 6cd2f337398d1f2d); hasScanPlan identical on every query (157,861 + 158,356 plans); testScanning == testPrecomputed(precompute(window)) on every planned query (0 disagreements) - the flat path (testFlat over the original key plane) answers as the compiled ScanPlan did
-4_matcher_review	stamp review of Matcher.m3TqAllows / usePattern / reset(CharSequence)	PASS	the Boolean verdict reuses the Facts stamps only while no Facts are retained (from = allowed, ~from = rejected, to = -1 unset); its query changes only through usePattern, which now clears the stamps when no Facts exist; reset(CharSequence) clears all as before; Pattern.LITERAL stays on the facts path; 4 fields per Matcher removed
-5_matcher_runtime	Matcher.find under --patch-module on a stock VM	NOT_RUN	master's Matcher calls JavaLangAccess.stringM3TrigramFacts, which exists only in M3JDK's java.lang (NoSuchMethodError on a stock VM)
-6_scope	compare master...head	PASS	java.util.regex.Matcher, jdk.internal.mindex.M3TQ + this directory

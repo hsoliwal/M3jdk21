@@ -1,7 +1,0 @@
-gate	host	result	evidence
-census	any	203 native methods: BOUND 187, ABSENT 16	tools/native_census.py v1.2
-build_windows	Windows 11, MinGW gcc 15.2, CMake 4.3.1, JDK 21	20 libraries; m3_index_mask_search.c compiled into m3_collections_mask with the IndexMaskCompactor header force-included	tools/build_check.sh
-exports_windows	same	exported 150 = expected 150, missing 0, extra 0, non-JNI 0	tools/export_check.sh v1.1
-mutant_windows	same	without header survived, with header killed	tools/mutant_check.sh
-kind_abi	any	PrimitiveKind constants BOOLEAN BYTE SHORT CHAR INT LONG FLOAT DOUBLE = the kernel's ordinal ABI	src/jdk.m3.collections/.../PrimitiveKind.java
-suite_windows_native	Windows, JDK 21	2854 tests, 0 failures, 0 errors, 1 skipped; IndexMaskCompactorM3ApiTest 3/3	mvn verify -Pm3-collections-native

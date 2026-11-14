@@ -24,15 +24,15 @@ OWNER_BEFORE_GIT = {
     "m3/tooling/regex-ascii-lexical-receiver/qualify.py": "eb47ae9f9343948b0d93e3a01682ff980835587b",
     "m3/tooling/regex-ascii-lexical-receiver/README.md": "28f4187fd8470dc0d036cb77ec24d471eebb3941",
     ".github/workflows/m3-regex-ascii-lexical-receiver.yml": "43282c4c40dfd5f195fa2b6380d69ff4a7ce2d3c",
-    "m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json": "ce9727c7585c8f90f62a23524bf8e8245ea59858",
-    "m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py": "3b388c656fc0af06173735c8d9dc16f641b51de6"
+    "m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json": "9ac2600209b7bde604b0d73766eedbdf67e8f623",
+    "m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py": "c76938329b5c0a40aaf74319bfd2caecbd2b6795"
 }
 OWNER_AFTER_GIT = {
     "m3/tooling/regex-ascii-lexical-receiver/qualify.py": "5b733379de482250fb0ef23f62db4dbc62aab455",
     "m3/tooling/regex-ascii-lexical-receiver/README.md": "d73a374eff026de3557f6163a4094d1c69222355",
     ".github/workflows/m3-regex-ascii-lexical-receiver.yml": "543bed1285bb8903db5fb67ac89f6b6cf4183d93",
-    "m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json": "ce9727c7585c8f90f62a23524bf8e8245ea59858",
-    "m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py": "3b388c656fc0af06173735c8d9dc16f641b51de6"
+    "m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json": "9ac2600209b7bde604b0d73766eedbdf67e8f623",
+    "m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py": "c76938329b5c0a40aaf74319bfd2caecbd2b6795"
 }
 DIRECTIONS = ("forward", "inverse")
 RECEIVER_OUTPUTS: dict[str, str] = {}
@@ -53,7 +53,7 @@ REQUIRED_PATHS = sorted([
 ORIGINAL_GIT = {
     "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
     "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java": "78d5fb68f13872164973a8918cc7886c5f548bca",
-    "pom.xml": "d79867bcc09ad6329e12418e15907e54b8ab025f",
+    "pom.xml": "059259ca746466389cccac4094c3d664b0d79e6d",
 }
 PROVIDERS = {"openrewriteAdapter": ORIGINAL_GIT["pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java"],
              "manifestKernel": ORIGINAL_GIT["pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java"]}

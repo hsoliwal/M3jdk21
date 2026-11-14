@@ -11,7 +11,7 @@
     "repository": "hsoliwal/com.synexia",
     "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
     "path": "m3-openrewrite-recipes/recipes/m3-regex-relations-current-owner-20261017/sdk",
-    "pomBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f"
+    "pomBlob": "059259ca746466389cccac4094c3d664b0d79e6d"
   },
   "files": [
     {
@@ -100,9 +100,9 @@
     },
     {
       "path": "m3-openrewrite-recipes/tasks/composite-summary-20261012/pom.xml",
-      "gitBlob": "27bd7463aa551f50a0b6dd75e78feeea64a0f3c6",
+      "gitBlob": "76a983e2e79ef26ddaadf2ce068e2e2c27aec0d6",
       "bytes": 1119,
-      "sha256": "a92cb6833cdb7cb0af13a38f59ff1ccf0db35b75dc4da80cd8331db145f432c5",
+      "sha256": "bf30c5ee1892095e6379713314deef1597ad1649ba00976caa9c385157975063",
       "role": "PRESERVED_HISTORICAL_SOURCE"
     },
     {
@@ -226,9 +226,9 @@
     },
     {
       "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/guard-sdk/pom.xml",
-      "gitBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f",
+      "gitBlob": "059259ca746466389cccac4094c3d664b0d79e6d",
       "bytes": 2678,
-      "sha256": "f0ab99c3dafb38e82f8e5fd4c6d22db07831808c251c4622f292114c83e6673e",
+      "sha256": "5b3f3f04f9539178d43ffa75068366d8ff1c037e25f67c2d31aa3bdb6e0ede1e",
       "role": "AUTHORING_INPUT"
     },
     {
@@ -387,9 +387,9 @@
     },
     {
       "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/pom.xml",
-      "gitBlob": "5151da36791af8dcb513644808f9f1a409603e9b",
+      "gitBlob": "081c76905cb5890ef4a8b228979c2c974eaf02b1",
       "bytes": 1307,
-      "sha256": "6710b7b5dbd2470ef75db4bd2f643ccb8c25ff19c59787759f5a52540b6d9cdf",
+      "sha256": "6820164391711d24f8581c7accbd70f422d8d6f72c13eeac5438344ee9fd7941",
       "role": "AUTHORING_INPUT"
     },
     {
@@ -401,9 +401,9 @@
     },
     {
       "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/README.md",
-      "gitBlob": "aca5b74e516f2c21e5e88f87b18e7290694ab16a",
+      "gitBlob": "408146432c83a7fa0d9587c09678814f2673ae85",
       "bytes": 5290,
-      "sha256": "f290f296e7c34c3dedf3ef6b55bafdf1fa0a913a430603e4667c14fb00633990",
+      "sha256": "dfe4c3d5e4dfb5a17ef4e61c580d3427f993ac4a53ce783e17d0f280f19e4304",
       "role": "AUTHORING_INPUT"
     },
     {

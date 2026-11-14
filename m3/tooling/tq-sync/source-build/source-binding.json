@@ -47,7 +47,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/recipe/pom.xml",
       "targetPath": "m3/tooling/tq-sync/source-reactor/pom.xml",
-      "gitBlob": "67f9d07050c93e4268fd6d09b93b6c967a93050b",
+      "gitBlob": "4b2b78493ac0e7fea539aff8aef0488774486293",
       "bytes": 836
     },
     {

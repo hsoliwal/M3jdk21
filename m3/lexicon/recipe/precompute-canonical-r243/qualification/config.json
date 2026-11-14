@@ -78,11 +78,11 @@
     },
     "pom": {
       "path": "inputs/borrowed-harness-pom.xml",
-      "sha256": "299a594c452d6c5cdaac78d1b7ee2974f777817ff6b6cce05e879866c5e42a11"
+      "sha256": "64aa3aaed54ee7670e0dda486ae27e1d611dfadb3207b1b9354b6c75a3e9ccce"
     },
     "taskPom": {
       "path": "../pom.xml",
-      "sha256": "850766d5e909eec75cd47c55803dcc75bc5f20380d195e8f792fa4f64a949857"
+      "sha256": "6832198b68677e2530373f19d2054e186a0c887803578446bef1be30fb48b40e"
     },
     "manifest": {
       "path": "../recipe/manifest.tsv",

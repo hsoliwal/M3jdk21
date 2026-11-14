@@ -1339,7 +1339,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/runtime-facade/prepare_runtime_facade_host.py",
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/authoring/prepare_runtime_facade_host.py",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/authoring/prepare_runtime_facade_host.py",
-      "sha256": "4dd3761f7c4ec32ca9cf62aec235353051dda8ffe8ce7963a6d3327d3653972f",
+      "sha256": "f3559d4edea21faabb0ea7fe5045cfee2c7962324fab3a70c57ba5c0e5e88a7d",
       "size_bytes": 13401,
       "classification": "FIRST_PARTY"
     },

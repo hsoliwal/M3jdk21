@@ -62,3 +62,35 @@ endif()
 target_sources(m3_precompute PRIVATE
   src/m3_precompute_pair_jni.c
   src/m3_precompute_tuple_jni.c)
+
+# Checked numeric codebook batches share the existing optional precompute library.
+target_sources(m3_precompute PRIVATE
+  src/m3_ncm_codebook.c
+  src/m3_ncm_codebook_jni.c)
+target_compile_features(m3_precompute PRIVATE c_std_17)
+
+if(MSVC)
+  set_source_files_properties(src/m3_ncm_codebook.c
+    PROPERTIES COMPILE_OPTIONS "/fp:strict")
+else()
+  set_source_files_properties(src/m3_ncm_codebook.c
+    PROPERTIES COMPILE_OPTIONS "-fno-fast-math;-ffp-contract=off")
+endif()
+
+if(BUILD_TESTING)
+  add_executable(m3_ncm_codebook_checks
+    tests/m3_ncm_codebook_checks.c
+    src/m3_ncm_codebook.c)
+  target_include_directories(m3_ncm_codebook_checks
+    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+  target_compile_features(m3_ncm_codebook_checks PRIVATE c_std_17)
+  if(MSVC)
+    target_compile_options(m3_ncm_codebook_checks PRIVATE /W4 /WX /fp:strict)
+  else()
+    target_compile_options(m3_ncm_codebook_checks PRIVATE
+      -Wall -Wextra -Werror -Wconversion -Wshadow -Wpedantic
+      -fno-fast-math -ffp-contract=off)
+    target_link_libraries(m3_ncm_codebook_checks PRIVATE m)
+  endif()
+  add_test(NAME m3_ncm_codebook_checks COMMAND m3_ncm_codebook_checks)
+endif()

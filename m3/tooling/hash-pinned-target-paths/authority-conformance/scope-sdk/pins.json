@@ -23,9 +23,9 @@
   "files": [
     {
       "path": "FOSS_REUSE_DECISION.tsv",
-      "gitBlob": "9832aa75bdc51f6241539c3d7e8a13442f7117b6",
+      "gitBlob": "b726a14d3740a49179daeafa4a88ee18f7d818c5",
       "bytes": 898,
-      "sha256": "c4ccbc45127f5abcfb25cc23b3b50cfa1cba9428574c10c30ea0c08117c8d3d5"
+      "sha256": "f137ca01602b8aad76df2665d29d11b5f753ea1969e6167f931552790fc79360"
     },
     {
       "path": "README.md",
@@ -65,9 +65,9 @@
     },
     {
       "path": "pom.xml",
-      "gitBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f",
+      "gitBlob": "059259ca746466389cccac4094c3d664b0d79e6d",
       "bytes": 2678,
-      "sha256": "f0ab99c3dafb38e82f8e5fd4c6d22db07831808c251c4622f292114c83e6673e"
+      "sha256": "5b3f3f04f9539178d43ffa75068366d8ff1c037e25f67c2d31aa3bdb6e0ede1e"
     },
     {
       "path": "src/main/resources/META-INF/rewrite/canonical-scope-boundary-20261020-inverse.yml",
@@ -143,9 +143,9 @@
     },
     {
       "path": "verify.py",
-      "gitBlob": "e6b55bf76ae197e64e54884301d67227a0b09da1",
+      "gitBlob": "ed5762bea01ea3b9e7a87e7abe28ef3222039cf2",
       "bytes": 26196,
-      "sha256": "33812d4f96bfe649fa995cf2e1959fe0d122b751bfc313f5dfb930aeec0fb71f"
+      "sha256": "d914821e9ee620b315507670da10bb9e2758750ed5ea1040bc3439a0bf1126c8"
     }
   ]
 }
