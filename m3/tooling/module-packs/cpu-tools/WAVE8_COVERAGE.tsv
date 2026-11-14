@@ -1,5 +1,0 @@
-# SPDX-License-Identifier: Apache-2.0
-attachment_line	original_family	wave8_owner	wave8_status	contract_boundary	prior_owners_retained
-15	SAT / SMT solvers	M3TwoSat	EXACT_BOUNDED_2_CNF_SCC	0..8192 Boolean variables; 0..131072 two-literal clauses; not SMT or general SAT	M3CnfSat
-16	Constraint solvers / CSP	M3ArcConsistency	SOUND_BOUNDED_BINARY_AC	0..64 variables, 1..16 values, 0..4096 binary constraints; only propagation, not global satisfiability	M3ConstraintCsp
-18	Graph algorithms	M3DagReduction	EXACT_FORWARD_DAG_TRANSITIVE_REDUCTION	0..2048 topologically indexed nodes; sorted forward edges; not cyclic general graph reduction	M3ArrayGraph;M3DominatorLanes

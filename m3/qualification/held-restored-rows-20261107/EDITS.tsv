@@ -1,2 +1,0 @@
-file	before_sha256	after_sha256	leaf	decision	cited_commits	rule
-m3/qualification/loss-guard-restore-20261106/HELD.tsv	ce17eccef650d4d62abbe959fb744976dc49f0e8ba5b1df4578d3cddcfa6efcb	16a89d84bf359484382868b5918af0c2b59f8b017545d5834e4f0d23c950dbe9	R	RESTORED	#2649 664dd18c7eef;mergeloss-s1-20261106 L2;held by #2517	EDIT: append 2 RESTORED status rows (file schema: path, source_blob, reason, evidence, owner_action)

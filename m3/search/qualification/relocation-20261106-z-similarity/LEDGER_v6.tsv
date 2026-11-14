@@ -1,6 +1,0 @@
-main	fs/M3ZSimilarity.java	a8b8c5146cb7452ba2efa4c8f92bf10ade4b2a41	m3/search/src/main/java/jdk/m3/search/M3ZSimilarity.java	05ea70d6b3031270
-test	fst/M3ZSimilarityTest.java	7fb55d126eec33c2279403fcf844a5ba4b2b263b	m3/search/src/test/java/jdk/m3/search/M3ZSimilarityTest.java	80db2c9bbbfd7848
-test	fst/M3ZSimilarityNativeTest.java	273f0dd82a3597936268a31b5dd23b58fb1ccc6d	m3/search/src/test/java/jdk/m3/search/M3ZSimilarityNativeTest.java	f3d43afa59b4b3d8
-test	fst/M3ZSimilarityPeriodTwoNativeTest.java	4a3d9943de108ae728dc9dd3a6c218d065660e00	m3/search/src/test/java/jdk/m3/search/M3ZSimilarityPeriodTwoNativeTest.java	0d91836e09aefbc4
-test	fst/M3ZSimilarityUniformNativeTest.java	0bfeb575adece0896484a665d1e083d51a944fc2	m3/search/src/test/java/jdk/m3/search/M3ZSimilarityUniformNativeTest.java	84f5f14ab00a2e2f
-native	native/jni_z_similarity.c	8523d9a5aaf30e7f311efb923295f5e5d046e20e	m3/search/src/main/native/jni_z_similarity.c	01595e1d5d8aa243

@@ -1,5 +1,0 @@
-proof	command	executed_result	scope
-java21-jit	java -ea LongDequeRingSpanOracle	PASS 6688180 checks	full scalar-vs-span physical ring equivalence
-java21-interpreter	java -ea -Xint LongDequeRingSpanOracle --quick	PASS 104924 checks	small exhaustive ring + seeded random
-m3-jdk-module	jtreg test/jdk/jdk/m3/collections/LongArrayDequeRingSpanTest.java	NOT_EXECUTED	actual module, JUnit, full code closure
-jdk-compatibility	full JDK/Maven receiver	NOT_EXECUTED	full source and binary behavior

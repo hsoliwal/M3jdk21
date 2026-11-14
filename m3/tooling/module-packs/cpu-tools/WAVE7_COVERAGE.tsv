@@ -1,4 +1,0 @@
-operation_id	owner	status	contract_limit
-DIFFERENCE_CONSTRAINT_FEASIBILITY	M3DifferenceConstraints	BOUNDED_ATOM	1..4096 variables; 131072 edges; 50M relaxations; returns feasible witness or negative-cycle refusal; no SMT
-INTEGER_FUNCTIONAL_DEPENDENCY	M3FunctionalDependency	BOUNDED_ATOM	0..8192 rows; 0..64 signed-int columns; earliest FD witness; no SQL null/collation model
-MERKLE_DAG_NODE_HASHES	M3MerkleDag	BOUNDED_ATOM	0..4096 sorted nodes; <=131072 ordered child edges; SHA256 exact byte framing; no universal provenance proof

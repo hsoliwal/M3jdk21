@@ -1,7 +1,0 @@
-# SPDX-License-Identifier: Apache-2.0
-# Merge-loss leaf 88 (mergeloss2 CLEAN_4D), origin a12623b2633 (2026-10-21), master 2ec96ee32ff5a735148933c789354a7fdd6beb3b, stock JDK 21.0.9 VM.
-gate	command	state	evidence
-1_three_way	mergeloss_batch.py: ours=master, base=a12623b2633^, theirs=a12623b2633	PASS	CLEAN=theirs: ThreadBoundFuture runs executor.taskComplete(thread) in run()'s finally instead of done(); Oracle copyright year 2023 -> 2025 (the upstream form of the class)
-2_baseline	diff master ThreadPerTaskExecutor.java vs JDK 21.0.9 src.zip	PASS	bodies identical (only the license header block differs); 21.0.9 still has done()
-3_close_after_cancel	CloseProbe 40 under --patch-module java.base=<the class>, master vs leaf: a running, interrupt-ignoring task whose future is cancel(true)ed; does close() return before it finishes?	PASS	master: 40/40 rounds close() returned early (done() ran taskComplete on the cancelling thread); leaf: 0/40
-4_scope	compare master...head	PASS	one java.util.concurrent file + this directory

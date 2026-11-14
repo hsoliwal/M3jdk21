@@ -1,4 +1,0 @@
-capability	donor	classification	fit	license
-Complete Commons namespace source	apache/commons-collections@7f7fb0244abc940a2e9dd28b67508c0483a58c3e	ADAPT	All 904 files; original algorithms retained; explicit namespace identity exception	Apache-2.0; LICENSE and NOTICE unchanged
-Typed serialization observation	javaobj-py3@a3b67d208fb041e5a40dd7fe4e12c4a6ab5b7ce7	ADAPT	Borrow unchanged grammar/reader with narrow qualified slot observer; namespace bytes only	Apache-2.0; preserve parser attribution
-Exact source receiving	Existing namespace Git/blob/protected-span recipes	REUSE_MECHANISM	Complete paths, modes and raw hashes; binary via exact create_blob	First-party metadata does not relicense input

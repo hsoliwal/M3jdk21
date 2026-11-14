@@ -1,8 +1,0 @@
-gate	result
-m3/tooling/search/verify.sh (newest int sources; javac -Werror, JNI header + nm export, -Xint / C1 / tiered self-test, benchmark, native identity)	rc=0: M3_SORTED_INT_BOUNDS_TEST checks=161748 java=PASS native_jni=PASS in all 3 modes; M3_HOST_JNI_PROOF state=PASS
-m3/tooling/search/verify-long-bounds.sh (compiles every module source, int and long)	rc=0: native preconditions checks=4; M3_SORTED_LONG_BOUNDS_TEST checks=668444 java=PASS native_jni=PASS in all 3 modes; M3_LONG_JNI_HOST state=PASS
-step 1 proof m3jdk-sorted-empty-keys-20261101/verification/verify-jni.sh	rc=0: M3_JNI_EMPTY_KEYS_GATE_PASS native_abi=unchanged java_api=unchanged
-step 2 proof m3jdk-sorted-empty-range-20261101/verification/verify-jni.sh	rc=0: M3_EMPTY_RANGE_GATE_PASS java_api=unchanged jni_abi=unchanged
-step 3 proof m3jdk-sorted-lower-reuse-20261102/verification/verify-jni.sh	rc=0: M3_SORTED_LOWER_REUSE_PASS Java21 JNI JIT_C1_C2 OOME, public API unchanged; 3,530,681 checks digest eb18d80247d35a3a per stage and mode
-JDK-naming fixed point	0 of 12 in-scope files
-target paths	all 14 NEW on master (m3/tooling/search absent); module stays off the m3 reactor like the other verify.sh tooling modules

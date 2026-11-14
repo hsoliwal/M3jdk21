@@ -1,4 +1,0 @@
-category	donor	adaptation	license
-circular-ring span copy	Swift Collections segment-copy pattern (concept)	Use 1-3 System.arraycopy segments for in-place head/tail shifts; no donor source copied	Apache-2.0 first-party
-physical ring clear	OpenJDK Arrays.fill	Zero wrapped live spans only; keep bitmask offsets and modification count	JDK 21 standard API
-algorithm verification	LeetCode rotate-array/ring-buffer pattern categories	Independent previous scalar oracle for physical-state equivalence; no challenge solutions copied	first-party tests
