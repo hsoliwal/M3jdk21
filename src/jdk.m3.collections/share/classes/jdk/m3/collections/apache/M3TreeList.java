@@ -382,12 +382,56 @@ public final class M3TreeList<E> extends AbstractList<E>
 
     @Override
     public int indexOf(Object value) {
-        return super.indexOf(value);
+        // AbstractList.indexOf uses a rank-based ListIterator. On the
+        // implicit tree that means O(log n) work for each of n elements.
+        // The large-list iterator visits the stored child-index lanes in
+        // order, so a complete unsuccessful search costs O(n).
+        if (size < 64) {
+            return super.indexOf(value);
+        }
+        int position = 0;
+        for (Iterator<E> scan = iterator(); scan.hasNext(); position++) {
+            E element = scan.next();
+            if (value == null ? element == null : value.equals(element)) {
+                return position;
+            }
+        }
+        return -1;
     }
 
     @Override
     public int lastIndexOf(Object value) {
-        return super.lastIndexOf(value);
+        // The inherited ListIterator(size) repeatedly resolves rank in the
+        // tree. Visit the existing right/left index lanes in reverse order
+        // instead: O(n) worst-case search, O(tree height) int[] scratch.
+        if (size < 64) {
+            return super.lastIndexOf(value);
+        }
+        int expectedModCount = modCount;
+        int[] ancestors = new int[8];
+        int depth = 0;
+        int slot = root;
+        int position = size - 1;
+        while (slot != NONE || depth != 0) {
+            if (expectedModCount != modCount) {
+                throw new java.util.ConcurrentModificationException();
+            }
+            while (slot != NONE) {
+                if (depth == ancestors.length) {
+                    ancestors = Arrays.copyOf(ancestors, depth + (depth >>> 1) + 1);
+                }
+                ancestors[depth++] = slot;
+                slot = right[slot];
+            }
+            int candidate = ancestors[--depth];
+            E element = elementAt(candidate);
+            if (value == null ? element == null : value.equals(element)) {
+                return position;
+            }
+            position--;
+            slot = left[candidate];
+        }
+        return -1;
     }
 
     @Override
@@ -442,7 +486,100 @@ public final class M3TreeList<E> extends AbstractList<E>
 
     @Override
     public Iterator<E> iterator() {
-        return super.iterator();
+        // Keep the allocation-free inherited ordinal cursor for tiny lists.
+        // A large treap otherwise pays O(log n) for every get(cursor).
+        if (size < 64) {
+            return super.iterator();
+        }
+        return new Iterator<>() {
+            private int expectedModCount = modCount;
+            private int cursor;
+            private int lastReturned = -1;
+            // Only O(tree height) primitive coordinates; no entry/node objects.
+            private int[] ancestors = new int[8];
+            private int depth;
+
+            {
+                pushLeft(root);
+            }
+
+            private void push(int slot) {
+                if (depth == ancestors.length) {
+                    ancestors = Arrays.copyOf(ancestors, depth + (depth >>> 1) + 1);
+                }
+                ancestors[depth++] = slot;
+            }
+
+            private void pushLeft(int slot) {
+                while (slot != NONE) {
+                    push(slot);
+                    slot = left[slot];
+                }
+            }
+
+            private void restoreAfterRemoval(int position) {
+                depth = 0;
+                int slot = root;
+                int rank = position;
+                // Keep only the ancestor path to the next in-order slot.
+                // All skipped left subtrees are already consumed.
+                while (slot != NONE) {
+                    int leftSize = count(left[slot]);
+                    if (rank <= leftSize) {
+                        push(slot);
+                        slot = left[slot];
+                    } else {
+                        rank -= leftSize + 1;
+                        slot = right[slot];
+                    }
+                }
+            }
+
+            private void checkEpoch() {
+                if (expectedModCount != modCount) {
+                    throw new java.util.ConcurrentModificationException();
+                }
+            }
+
+            @Override
+            public boolean hasNext() {
+                // AbstractList's iterator does not check epochs in hasNext().
+                return cursor != size;
+            }
+
+            @Override
+            public E next() {
+                checkEpoch();
+                if (cursor >= size) {
+                    throw new NoSuchElementException();
+                }
+                if (depth == 0) {
+                    throw new java.util.ConcurrentModificationException();
+                }
+                int slot = ancestors[--depth];
+                E result = elementAt(slot);
+                pushLeft(right[slot]);
+                lastReturned = cursor++;
+                return result;
+            }
+
+            @Override
+            public void remove() {
+                if (lastReturned < 0) {
+                    throw new IllegalStateException();
+                }
+                checkEpoch();
+                try {
+                    M3TreeList.this.remove(lastReturned);
+                    cursor = lastReturned;
+                    lastReturned = -1;
+                    expectedModCount = modCount;
+                    restoreAfterRemoval(cursor);
+                } catch (IndexOutOfBoundsException failure) {
+                    throw new java.util.ConcurrentModificationException();
+                }
+            }
+        };
     }
 
     @Override
