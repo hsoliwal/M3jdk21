@@ -1,0 +1,122 @@
+{
+  "schema": "m3-jdk-library-convergence-receipt/1",
+  "recordType": "PASSIVE_QUALIFICATION_RECEIPT",
+  "status": "DRAFT_HOLD_FULL_JDK_IMAGE_JTREG_PLATFORM_AND_NATIVE_CROSSOVER_GATES",
+  "canonicalRepository": "hsoliwal/com.synexia",
+  "canonicalCommit": "351830384d50f86ec8620b025d44f7f52d09a286",
+  "canonicalPullRequest": "https://github.com/hsoliwal/com.synexia/pull/17413",
+  "canonicalRecipe": "com.synexia.m3.JdkLibraryConvergence20261114",
+  "canonicalCrate": "https://github.com/hsoliwal/com.synexia/tree/351830384d50f86ec8620b025d44f7f52d09a286/synexia-openrewrite-recipes/recipe-crates/m3-jdk-library-convergence-20261114",
+  "canonicalSdk": "8.17.1-synexia-source-1",
+  "canonicalExecutionSha256": "de93edcb3a320611848374c4c40aa162b25186c9cda3dbccac2cf50968e92a76",
+  "canonicalOutputManifestSha256": "65067d0e839ddd2600bd11cc501ab99c05aae7bb1f84d3ec9127d1858a61130e",
+  "canonicalResultsSha256": "50274cbebe5a3d084de75a677b553b04c3afbd3883377f2dddc1d5c904d931cb",
+  "runtimeQualificationBase": "7409479266ddb37c29182550e6354665066d9ff6",
+  "runtimeReceivingBase": "ab6ef923dca4d32e1f003db71a800138911b5ffa",
+  "baseAdvancement": {
+    "status": "ALL_RUNTIME_AND_SUPPORT_INPUTS_VERIFIED_UNCHANGED",
+    "preservedChange": "PR #2981 naming-record recovery",
+    "evidence": "https://github.com/hsoliwal/com.synexia/tree/351830384d50f86ec8620b025d44f7f52d09a286/synexia-openrewrite-recipes/recipe-crates/m3-jdk-library-convergence-20261114/evidence/sdk/base-advancement.json"
+  },
+  "files": [
+    {
+      "stage": "10-collections",
+      "repository": "hsoliwal/M3jdk21",
+      "path": "src/java.base/share/classes/java/util/M3CollectionMasks.java",
+      "kind": "java",
+      "dataset": "m3-jdk-library-convergence-20261114-10",
+      "before": "e3b37e1d8b317d3251c3281b26a0a91eb88dad8a3522c617ac29390b8d49e034",
+      "after": "cf98b1fb05d2fb13c14c36ad2b89c15fc0fb3f7d9d68ad1d24ca737e4455c15c",
+      "gitBlob": "31a0bc82cb9b13320116832aede87ffd3372b8cd",
+      "bytes": 8742
+    },
+    {
+      "stage": "11-collections",
+      "repository": "hsoliwal/M3jdk21",
+      "path": "src/java.base/share/classes/java/util/M3CollectionViews.java",
+      "kind": "java",
+      "dataset": "m3-jdk-library-convergence-20261114-11",
+      "before": "9a5e1cf30b4d60381c30d43e1e3398143b380206d0303cd14af2175e4712fa47",
+      "after": "a901de1caba67646a32ffc652041b2c8302450e21792445ead6a2e8f15ee9d48",
+      "gitBlob": "acb55fc188435b9d5243b3f8e7c12903b249b0e7",
+      "bytes": 52211
+    },
+    {
+      "stage": "12-collections",
+      "repository": "hsoliwal/M3jdk21",
+      "path": "src/java.base/share/native/libjava/M3CollectionMasks.c",
+      "kind": "text",
+      "dataset": "m3-jdk-library-convergence-20261114-12",
+      "before": "e65c7488d0f0821175a63373e6efbe0ad5476ba9e26fa52b584b88af4800ab02",
+      "after": "ff0f3ab57ff2de9f4ca5bf57e4ae4aab00b121f78af52deada6b916a98ccda6e",
+      "gitBlob": "41117c0cf622a34fff19d5f202461a74e8e39a00",
+      "bytes": 9873
+    },
+    {
+      "stage": "13-collections",
+      "repository": "hsoliwal/M3jdk21",
+      "path": "test/jdk/java/util/CollectionViews/CollectionMaskReferenceCopyTest.java",
+      "kind": "java",
+      "dataset": "m3-jdk-library-convergence-20261114-13",
+      "before": "ABSENT",
+      "after": "f2dd272b7d800fb659f69194ff8af16fe8b40a654526e2abb7fb78b2e501c22a",
+      "gitBlob": "4013a7a12a77cc9142c405f584a7e9262e9bcd2a",
+      "bytes": 9763
+    },
+    {
+      "stage": "14-collections",
+      "repository": "hsoliwal/M3jdk21",
+      "path": "test/jdk/java/util/CollectionViews/CollectionMaskValuesCountTest.java",
+      "kind": "java",
+      "dataset": "m3-jdk-library-convergence-20261114-14",
+      "before": "ABSENT",
+      "after": "7c8c50cec52b7a290c0e56308ff68a54dc6e223ef89f9a706a4730863929c900",
+      "gitBlob": "2e34bf3117d634959a1ee16d2b0cabe8b867705d",
+      "bytes": 3205
+    }
+  ],
+  "qualification": {
+    "productGatesPassed": 11,
+    "probeStagesPassed": 18,
+    "javaAssertionsPerMode": 2632902,
+    "javaModes": [
+      "JAVA_DEFAULT",
+      "MISSING_NATIVE_FALLBACK",
+      "INTERPRETER",
+      "C1"
+    ],
+    "actualJniAssertions": 2650978,
+    "jniCheck": "-Xcheck:jni",
+    "knownCountChecksPerMode": 51,
+    "asanUbsanChecks": 8132052,
+    "leakSanitizer": "NOT_EXECUTED_PTRACE_LIMITATION",
+    "nativeExportsAdded": 0,
+    "existingNativeExport": "Java_java_util_M3CollectionMasks_selected0",
+    "publicDescriptorsChanged": false,
+    "fullJdkImage": "NOT_EXECUTED",
+    "fullJtregPlatformMatrix": "NOT_EXECUTED",
+    "evidence": "https://github.com/hsoliwal/com.synexia/tree/351830384d50f86ec8620b025d44f7f52d09a286/synexia-openrewrite-recipes/recipe-crates/m3-jdk-library-convergence-20261114/collection-proof",
+    "knownCountModes": [
+      "JAVA_DEFAULT",
+      "ACTUAL_JNI"
+    ]
+  },
+  "performance": {
+    "partialSnapshotAllocation": "REMOVES_ONE_INT_ARRAY_OF_ACCEPTED_SIZE",
+    "allPassSnapshot": "UNCHANGED",
+    "nativeDispatch": "REMAINS_OPT_IN",
+    "denseNativeCandidateToBaselineRatios": [
+      0.729,
+      0.665,
+      0.769,
+      0.527
+    ],
+    "initialSparseWallRatio": 1.206,
+    "focusedSparseMedianCpuRatio": 1.034661,
+    "focusedSparsePairs": 31,
+    "nativeNoRegression": "NOT_ESTABLISHED",
+    "scope": "LOCAL_SCREENING_MEASUREMENTS"
+  },
+  "runtimeDependenciesAdded": 0,
+  "recipeOrHarnessImplementationAddedToRuntimeRepository": false
+}
