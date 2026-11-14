@@ -1,0 +1,14 @@
+{
+  "schema": "M3_INSTANCE_NORMALIZE_PACKET_ASSEMBLY_R247",
+  "checker": "Reused R245 readable packet CPU assembler",
+  "receipt": {
+    "schema": "M3_FIXED_LIFETIME_PACKET_ASSEMBLY_R245",
+    "status": "PASS",
+    "files": 34,
+    "reconstructedConfigSha256": "716ee10d79e52e52a7c20cca2d9c43d336dafa2eebec125fa315480fa57165f1",
+    "resourceRefsVerified": true,
+    "pythonSyntax": true,
+    "pomSyntax": true,
+    "writes": 0
+  }
+}

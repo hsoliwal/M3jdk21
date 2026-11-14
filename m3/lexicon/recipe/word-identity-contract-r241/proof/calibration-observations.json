@@ -1,0 +1,41 @@
+{
+  "allocatedBytes": [
+    56,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "checksums": [
+    0,
+    0,
+    16,
+    91,
+    9100000,
+    9100000,
+    27300000
+  ],
+  "iterations": [
+    0,
+    0,
+    1,
+    3,
+    300000,
+    300000,
+    900000
+  ],
+  "java": "21.0.9+7-LTS-338",
+  "meterClass": "com.sun.management.internal.HotSpotThreadImpl",
+  "nanos": [
+    300,
+    200,
+    200,
+    200,
+    6052800,
+    5802300,
+    4493900
+  ],
+  "status": "OBSERVATION_ONLY"
+}

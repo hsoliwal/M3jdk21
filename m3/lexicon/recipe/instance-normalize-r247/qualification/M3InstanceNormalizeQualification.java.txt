@@ -1,0 +1,221 @@
+// Copyright 2026 Hitesh Soliwal, Synexia. SPDX-License-Identifier: Apache-2.0
+package jdk.m3.text;
+
+import java.lang.management.ManagementFactory;
+import java.net.*;
+import java.util.*;
+import java.util.function.Supplier;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.*;
+import org.junit.platform.launcher.core.*;
+import org.junit.platform.launcher.listeners.*;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.platform.engine.discovery.DiscoverySelectors.selectClass;
+
+public final class M3InstanceNormalizeQualification {
+    static long cases;
+    static volatile String stringSink;
+    static volatile long longSink;
+
+    static void same(String input) {
+        String expected = null, actual = null;
+        Throwable referenceFailure = null, actualFailure = null;
+        try { expected = M3InstanceNormalizeReference.normalizedInstanceName(input); }
+        catch (Throwable failure) { referenceFailure = failure; }
+        try { actual = M3InstanceIndexPrecompute.normalizedInstanceName(input); }
+        catch (Throwable failure) { actualFailure = failure; }
+        cases++;
+        if (referenceFailure != null || actualFailure != null) {
+            if (referenceFailure == null || actualFailure == null
+                    || referenceFailure.getClass() != actualFailure.getClass()
+                    || !Objects.equals(referenceFailure.getMessage(), actualFailure.getMessage())
+                    || !Objects.equals(referenceFailure.getCause(), actualFailure.getCause())) {
+                throw new AssertionError("normalization refusal drift", actualFailure);
+            }
+        } else {
+            assertEquals(expected, actual);
+            assertEquals(expected.length(), actual.length());
+            assertEquals(expected.hashCode(), actual.hashCode());
+            assertNotSame(input, actual, "successful result must stay fresh");
+            assertNotSame(expected, actual);
+            assertNotSame(actual, M3InstanceIndexPrecompute.normalizedInstanceName(input));
+        }
+    }
+
+    static void sameAction(Supplier<String> reference, Supplier<String> current) {
+        String expected = null, actual = null;
+        Throwable a = null, b = null;
+        try { expected = reference.get(); } catch (Throwable failure) { a = failure; }
+        try { actual = current.get(); } catch (Throwable failure) { b = failure; }
+        cases++;
+        if (a == null && b == null) assertEquals(expected, actual);
+        else {
+            assertNotNull(a); assertNotNull(b);
+            assertEquals(a.getClass(), b.getClass()); assertEquals(a.getMessage(), b.getMessage());
+        }
+    }
+
+    @Test void everyUtf16UnitStandaloneAndInsideAsciiFold() {
+        for (int value = 0; value <= 0xffff; value++) {
+            char item = (char) value;
+            same(String.valueOf(item)); same("A" + item + "Z");
+        }
+        same(null);
+    }
+
+    @Test void exhaustiveShortBlankControlAndSurrogatePermutations() {
+        char[] alphabet = {0, 9, 10, 11, 12, 13, 31, 32, '@', 'A', 'Z', '[', 'a', 127, 160, 0x2003, 0xd800, 0xdbff, 0xdc00, 0xdfff};
+        same("");
+        for (char a : alphabet) {
+            same(String.valueOf(a));
+            for (char b : alphabet) {
+                same(new String(new char[] {a, b}));
+                for (char c : alphabet) same(new String(new char[] {a, b, c}));
+            }
+        }
+    }
+
+    @Test void seededLongAndMultilingualNames() {
+        Random random = new Random(0x247c0deL);
+        for (int i = 0; i < 20000; i++) {
+            char[] chars = new char[random.nextInt(81)];
+            for (int j = 0; j < chars.length; j++) chars[j] = (char) random.nextInt(65536);
+            same(new String(chars));
+        }
+        for (String name : List.of("LONDON", " lower ", "ÀBC Z", "İstanbul", "Istanbul", "Straße",
+                "Σίσυφος", "Москва", "漢字", "e\u0301 É", "\ud83d\ude00aBC", "\ud800\udc00",
+                "\udbff\udfff", "\u00a0", "\u2003", "\u007f", "\ufffe", "\uffff")) same(name);
+    }
+
+    @Test void freshResultsAndExactFailurePrecedence() {
+        String interned = "already-lower";
+        String copied = M3InstanceIndexPrecompute.normalizedInstanceName(interned);
+        assertEquals(interned, copied); assertNotSame(interned, copied);
+        assertSame(interned, copied.intern());
+        for (String item : List.of("lower", "UPPER", "aBc", "漢字", "\ud83d\ude00",
+                " ", "\t\n", "\u0000\ud800", "\ud800\u0000", "\udc00\u0001",
+                "\ud800\udc00\u0001", "\u000b", "\u000c")) same(item);
+        IllegalArgumentException surrogate = assertThrows(IllegalArgumentException.class,
+                () -> M3InstanceIndexPrecompute.normalizedInstanceName("\u0000\ud800"));
+        assertEquals("name contains an unpaired surrogate", surrogate.getMessage());
+        IllegalArgumentException blank = assertThrows(IllegalArgumentException.class,
+                () -> M3InstanceIndexPrecompute.normalizedInstanceName("\t\n"));
+        assertEquals("name must be nonblank UTF-8", blank.getMessage());
+    }
+
+    @Test void metadataKeysAndValuesKeepTheirSeparateValidation() {
+        List<String> samples = Arrays.asList(null, "", " ", "\t", "\u0000", "\u000b", "A",
+                "a", "漢字", "\u00a0", "\u2003", "\ud800", "\udc00", "\u0000\ud800", "\ud83d\ude00");
+        for (String key : samples) {
+            Map<String,String> metadata = new LinkedHashMap<>(); metadata.put(key, "value");
+            sameAction(() -> new M3InstanceNormalizeReference.InstanceRecord("Name",
+                            M3InstanceNormalizeReference.InstanceType.PERSON, 7, metadata).toString(),
+                    () -> new M3InstanceIndexPrecompute.InstanceRecord("Name",
+                            M3InstanceIndexPrecompute.InstanceType.PERSON, 7, metadata).toString());
+        }
+        for (String value : samples) {
+            Map<String,String> metadata = new LinkedHashMap<>(); metadata.put("KEY", value);
+            sameAction(() -> new M3InstanceNormalizeReference.InstanceRecord("Name",
+                            M3InstanceNormalizeReference.InstanceType.PERSON, 7, metadata).toString(),
+                    () -> new M3InstanceIndexPrecompute.InstanceRecord("Name",
+                            M3InstanceIndexPrecompute.InstanceType.PERSON, 7, metadata).toString());
+        }
+        var record = new M3InstanceIndexPrecompute.InstanceRecord("Name",
+                M3InstanceIndexPrecompute.InstanceType.PERSON, 7, Map.of("UPPER", "\u0000\t"));
+        assertTrue(record.metadata().containsKey("UPPER"));
+        assertFalse(record.metadata().containsKey("upper"));
+        assertEquals("\u0000\t", record.metadata().get("UPPER"));
+    }
+
+    @Test void scopeAndReturnedViewsRemainIndependentOfNameValidation() {
+        var record = new M3InstanceIndexPrecompute.InstanceRecord("ALICE",
+                M3InstanceIndexPrecompute.InstanceType.PERSON, 7, Map.of("KEY", "Value"));
+        Map<String,M3InstanceIndexPrecompute.InstanceRecord> records = new LinkedHashMap<>();
+        records.put("alice", record);
+        String unusualScope = "x\u0000\ud800";
+        var index = new M3InstanceIndexPrecompute(unusualScope, "revision", "fingerprint", "normalization", Set.of(7L), records);
+        assertTrue(index.appliesTo(unusualScope, "revision", "fingerprint", "normalization"));
+        assertFalse(index.appliesTo(null, "revision", "fingerprint", "normalization"));
+        assertSame(record, index.findByName("ALICE"));
+        assertNull(index.recordsByName().get("\ud800"));
+        assertThrows(IllegalArgumentException.class, () -> index.findByName("\ud800"));
+        records.clear(); assertEquals(1, index.size());
+        assertThrows(UnsupportedOperationException.class, () -> index.recordsByName().clear());
+        assertThrows(UnsupportedOperationException.class, () -> index.instancesOf(7).clear());
+        assertThrows(UnsupportedOperationException.class, () -> index.namesByConceptX().get(7L).clear());
+        assertThrows(IllegalArgumentException.class, () -> new M3InstanceIndexPrecompute(
+                "\u2003", "r", "f", "n", Set.of(7L), Map.of()));
+        assertEquals("\u00a0", new M3InstanceIndexPrecompute(
+                "\u00a0", "r", "f", "n", Set.of(7L), Map.of()).sourceId());
+    }
+
+    static long normalizeLoop(int count, String[] inputs) {
+        long result = 0;
+        for (int i = 0; i < count; i++) {
+            String input = inputs[i & 63];
+            String normalized = M3InstanceIndexPrecompute.normalizedInstanceName(input);
+            if (normalized == input) throw new AssertionError("fresh result identity lost");
+            stringSink = normalized; result += normalized.length();
+        }
+        longSink = result; return result;
+    }
+
+    static Map<String,Object> normalizationMeasurements() {
+        String[] lower = new String[64], upper = new String[64];
+        for (int i = 0; i < 64; i++) {
+            lower[i] = "instance" + "漢\ud83d\ude00".repeat(i & 7) + i;
+            upper[i] = "INSTANCE" + "漢\ud83d\ude00".repeat(i & 7) + i;
+        }
+        normalizeLoop(40000, lower); normalizeLoop(40000, upper);
+        var out = new TreeMap<String,Object>(); out.put("queriesPerRoundPerOperation", 20000);
+        var bean = (com.sun.management.ThreadMXBean) ManagementFactory.getThreadMXBean();
+        if (!bean.isThreadAllocatedMemorySupported()) { out.put("allocation", "NOT_SUPPORTED"); return out; }
+        bean.setThreadAllocatedMemoryEnabled(true); long thread = Thread.currentThread().threadId();
+        long[] lowerBytes = new long[5], upperBytes = new long[5], lowerNanos = new long[5], upperNanos = new long[5];
+        long expectedLower = normalizeLoop(20000, lower), expectedUpper = normalizeLoop(20000, upper);
+        for (int round = 0; round < 5; round++) {
+            long allocated = bean.getThreadAllocatedBytes(thread), start = System.nanoTime();
+            long result = normalizeLoop(20000, lower);
+            lowerNanos[round] = System.nanoTime() - start; lowerBytes[round] = bean.getThreadAllocatedBytes(thread) - allocated;
+            if (result != expectedLower) throw new AssertionError("lower normalization checksum");
+            allocated = bean.getThreadAllocatedBytes(thread); start = System.nanoTime();
+            result = normalizeLoop(20000, upper);
+            upperNanos[round] = System.nanoTime() - start; upperBytes[round] = bean.getThreadAllocatedBytes(thread) - allocated;
+            if (result != expectedUpper) throw new AssertionError("upper normalization checksum");
+        }
+        out.put("escapingLowerAllocatedBytes", lowerBytes); out.put("escapingUpperAllocatedBytes", upperBytes);
+        out.put("lowerNanos", lowerNanos); out.put("upperNanos", upperNanos);
+        out.put("lowerChecksum", expectedLower); out.put("upperChecksum", expectedUpper);
+        return out;
+    }
+
+    public static void main(String[] args) throws Exception {
+        var listener = new SummaryGeneratingListener(); var launcher = LauncherFactory.create();
+        launcher.registerTestExecutionListeners(listener);
+        launcher.execute(LauncherDiscoveryRequestBuilder.request().selectors(
+                selectClass(M3InstanceNormalizeQualification.class),
+                selectClass(M3InstanceUtf8Qualification.class)).build());
+        var summary = listener.getSummary(); var failures = new ArrayList<String>();
+        summary.getFailures().forEach(f -> failures.add(f.getException().toString()));
+        var out = new TreeMap<String,Object>(); out.put("mode", args[1]);
+        out.put("found", summary.getTestsFoundCount()); out.put("passed", summary.getTestsSucceededCount());
+        out.put("failed", summary.getTestsFailedCount()); out.put("aborted", summary.getTestsAbortedCount());
+        out.put("skipped", summary.getTestsSkippedCount()); out.put("failures", failures); out.put("normalizationCases", cases);
+        var comparisons = M3InstanceUtf8Qualification.class.getDeclaredField("comparisons");
+        comparisons.setAccessible(true); out.put("encodingComparisons", comparisons.getLong(null));
+        for (String name : List.of("M3InstanceIndexPrecomputeTest", "M3InstanceIndexPrecomputeEdgeContractTest")) {
+            Class<?> test = Class.forName(name); test.getMethod("main", String[].class).invoke(null, (Object) new String[0]);
+            var checks = test.getDeclaredField("checks"); checks.setAccessible(true); out.put(name, checks.getInt(null));
+        }
+        out.put("lookupMeasurements", M3InstanceUtf8Qualification.measure());
+        out.put("normalizationMeasurements", normalizationMeasurements());
+        out.put("javaVersion", System.getProperty("java.runtime.version"));
+        out.put("freshResults", true);
+        var connection = (HttpURLConnection) URI.create(args[0]).toURL().openConnection();
+        connection.setDoOutput(true); connection.setRequestMethod("POST");
+        byte[] bytes = new ObjectMapper().writeValueAsBytes(out); connection.setFixedLengthStreamingMode(bytes.length);
+        try (var stream = connection.getOutputStream()) { stream.write(bytes); }
+        if (connection.getResponseCode() != 204) throw new AssertionError("receipt refused"); connection.disconnect();
+        if (summary.getTestsSucceededCount() != 11 || summary.getTestsFailedCount() != 0) throw new AssertionError(out);
+    }
+}

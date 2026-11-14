@@ -1,0 +1,39 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.synexia.unicodex.langdex;
+
+import java.util.Objects;
+
+/** Language-independent PanLex meaning identity carried by LangDex. */
+public record LangDexConcept(long conceptId, String gloss) {
+    /** Matches the existing UnicodeX/MIndex 48-bit semantic lane without hashing. */
+    public static final long MAX_CONCEPT_ID = (1L << 48) - 1L;
+
+    public LangDexConcept {
+        validateId(conceptId);
+        gloss = Objects.requireNonNullElse(gloss, "");
+    }
+
+    /** External arbitrary-precision coordinate for this fast-lane PanLex concept. */
+    public ConceptCoordinate coordinate() {
+        return ConceptCoordinate.panLex(conceptId);
+    }
+
+    public static LangDexConcept fromCoordinate(ConceptCoordinate coordinate, String gloss) {
+        Objects.requireNonNull(coordinate, "coordinate");
+        if (coordinate.namespace() != ConceptCoordinate.Namespace.PANLEX
+                || !coordinate.fitsSemanticLane()) {
+            throw new IllegalArgumentException(
+                    "coordinate does not fit the current 48-bit PanLex semantic lane: "
+                            + coordinate.externalKey());
+        }
+        return new LangDexConcept(coordinate.semanticLaneId(), gloss);
+    }
+
+    public static long validateId(long conceptId) {
+        if (conceptId <= 0 || conceptId > MAX_CONCEPT_ID) {
+            throw new IllegalArgumentException(
+                    "PanLex concept ID must fit the nonzero 48-bit semantic lane: " + conceptId);
+        }
+        return conceptId;
+    }
+}

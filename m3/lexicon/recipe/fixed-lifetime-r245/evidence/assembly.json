@@ -1,0 +1,10 @@
+{
+  "schema": "M3_FIXED_LIFETIME_PACKET_ASSEMBLY_R245",
+  "status": "PASS",
+  "files": 34,
+  "reconstructedConfigSha256": "a469f0b20ecdd20ecc01ff20aba540cbceedcb61cafdcdee8072cad6c93994b7",
+  "resourceRefsVerified": true,
+  "pythonSyntax": true,
+  "pomSyntax": true,
+  "writes": 0
+}

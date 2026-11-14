@@ -1,0 +1,3 @@
+Copyright 2026 Hitesh Soliwal, Synexia. SPDX-License-Identifier: Apache-2.0
+
+The mapping owner, native rejection implementation, OpenRewrite recipe and UnicodeX Java fixtures are existing Synexia/M3 sources. Their original headers are preserved in the exact fixtures/templates. UnicodeX module license anchors and source blob IDs are recorded in catalogue/unicodex-donors.tsv. The qualification uses the existing offline OpenRewrite, JUnit, Jackson, Maven and compiler dependencies without vendoring their binaries or changing their licenses. Referenced Unicode corpus entries have not been downloaded or admitted; module licensing does not establish third-party dataset licensing. No LeetCode, HackerRank, GeeksforGeeks or other solution text is copied by this slice.

@@ -1,0 +1,7 @@
+{
+  "schema": "M3_NORMALIZE_INITIAL_PASS_R247",
+  "status": "PASS",
+  "blob": "3cf984f430bc8fcc008fc5e86d19f42e1fab55cb",
+  "sha256": "cd4b9462e9b48646e4da0a41009eaca0eb7df82e52136c52a3799fd9d84a0e33",
+  "scope": "Three-stage normalization-only proof before observing merged R245 SDK registration. Final five-stage qualification supersedes it; same normalization postimage."
+}

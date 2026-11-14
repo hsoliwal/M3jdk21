@@ -1,0 +1,2 @@
+# target	before_sha256	after_sha256	resource
+m3/runtime-integration/export-m3-lexicon.py	9104057d264523ae55080634c5ddb23071a2d5a35d8f9c947879545ff41df052	4da17cdb737e8a1665b5b5253ba4e4f6dc00113aeadfad2de3c445e20551194f	export-m3-lexicon.py.txt

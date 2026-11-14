@@ -1,0 +1,65 @@
+{
+  "schema": "M3_INSTANCE_NORMALIZATION_ATOMS_PATTERNS_R247",
+  "version": 1,
+  "owner": "m3/core/src/jdk/m3/text/M3InstanceIndexPrecompute.java",
+  "atoms": [
+    {
+      "id": "ascii-blank-membership",
+      "law": "Only SPACE TAB CR LF define name blankness. Retain original predicate; scan code units without stream objects."
+    },
+    {
+      "id": "rejection-precedence",
+      "law": "After null/empty/blank refusal, validate the entire UTF-16 sequence before checking ASCII controls. Do not fuse into an early control refusal."
+    },
+    {
+      "id": "fresh-normalized-result",
+      "law": "Every accepted call returns a distinct String from input and from other accepted calls. Reuse immutable String backing through its existing copy constructor when no ASCII uppercase is present."
+    },
+    {
+      "id": "ascii-fold-only",
+      "law": "Fold only ASCII A-Z; do not trim, use locale/Unicode case folding or normalize combining sequences."
+    },
+    {
+      "id": "separate-field-contracts",
+      "law": "Metadata keys are name-validated without folding; values permit empty/control text if UTF-16 is valid; source fields retain their String.isBlank-only scope contract."
+    },
+    {
+      "id": "owner-stage-replay",
+      "law": "Current-default SDK reconciliation preserves R245 and admits the existing R246 instance path; replay R246 comparator then normalization, one owner at a time. No broad path rule or new runtime owner."
+    }
+  ],
+  "patterns": [
+    {
+      "id": "M3.FRESH_IMMUTABLE_STRING_COPY",
+      "version": 1,
+      "source": "OpenJDK String(String) public runtime API"
+    },
+    {
+      "id": "M3.ASCII_PREDICATE_SCAN",
+      "version": 1,
+      "source": "existing owner predicate"
+    },
+    {
+      "id": "M3.HASH_PINNED_OWNER_FOLLOWUP",
+      "version": 1
+    }
+  ],
+  "generation": {
+    "calls": 0,
+    "classification": "Bounded maintenance under existing API and storage contract; no new runtime interface or owner."
+  },
+  "tests": {
+    "recipeJUnit": 9,
+    "behaviorJUnitPerStage": 11,
+    "normalizationCasesPerStage": 159555,
+    "utf8ComparisonsPerStage": 1408801,
+    "unchangedChecksPerStage": 84
+  },
+  "reference": "Pinned R246 owner, projected by exact class-identifier rename only, compiled beside actual owner as test-only oracle.",
+  "storage": "C below8GiB reserve: write hold; K verified, 545MiB total cap, one transient4KiB POM, zero retained task files.",
+  "ownerSequence": [
+    "M3Jdk21HashPinnedSnapshotRecipe existing SDK reconciliation",
+    "M3InstanceIndexPrecompute comparator",
+    "M3InstanceIndexPrecompute normalization"
+  ]
+}

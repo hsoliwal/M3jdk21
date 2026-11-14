@@ -1,0 +1,33 @@
+// Copyright 2026 Hitesh Soliwal, Synexia. SPDX-License-Identifier: Apache-2.0
+package jdk.m3.rewrite.backport;
+import java.io.*;import java.net.*;import java.nio.charset.StandardCharsets;import java.nio.file.Path;import java.util.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.*;import org.junit.platform.launcher.core.*;import org.junit.platform.launcher.listeners.*;import org.junit.platform.launcher.TagFilter;
+import org.openrewrite.*;import org.openrewrite.internal.InMemoryLargeSourceSet;import org.openrewrite.java.JavaParser;
+import static org.junit.jupiter.api.Assertions.*;import static org.junit.platform.engine.discovery.DiscoverySelectors.selectClass;
+public final class M3InstanceNormalizeRecipeTest {
+ static final String RECIPE="m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java";
+ static final String TARGET="m3/core/src/jdk/m3/text/M3InstanceIndexPrecompute.java";
+ static final Map<String,Object> metrics=new TreeMap<>();static String generated;
+ static String text(String path)throws Exception{try(var in=M3InstanceNormalizeRecipeTest.class.getClassLoader().getResourceAsStream(path)){return new String(Objects.requireNonNull(in,path).readAllBytes(),StandardCharsets.UTF_8);}}
+ static InMemoryExecutionContext context(){return new InMemoryExecutionContext(t->{throw new AssertionError(t);});}
+ static SourceFile parse(String path,String source){var list=JavaParser.fromJavaVersion().classpath(JavaParser.runtimeClasspath()).build().parseInputs(List.of(Parser.Input.fromString(Path.of(path),source)),null,context()).toList();assertEquals(1,list.size());return list.getFirst();}
+ static List<org.openrewrite.Result> apply(String crate,List<SourceFile> sources){return new M3Jdk21HashPinnedSnapshotRecipe(crate).run(new InMemoryLargeSourceSet(sources),context(),1).getChangeset().getAllResults();}
+ @Test @Tag("index") void exactOwnerAcceptedAndNeighborsRemainRejected(){
+  assertTrue(M3Jdk21HashPinnedSnapshotRecipe.jdkJavaPath(TARGET));assertTrue(M3Jdk21HashPinnedSnapshotRecipe.synexiaReceiverJavaPath(TARGET));
+  for(String p:List.of(TARGET.replace("Precompute.java","PrecomputeOther.java"),TARGET.replace("/text/","/other/"),"../"+TARGET,"/"+TARGET,TARGET.replace("/text/","/text/../text/"),TARGET.replace('/','\\'),TARGET.replace("/src/","/src//"),TARGET+".bak")){
+   assertFalse(M3Jdk21HashPinnedSnapshotRecipe.jdkJavaPath(p),p);assertFalse(M3Jdk21HashPinnedSnapshotRecipe.synexiaReceiverJavaPath(p),p);
+  }
+  assertTrue(M3Jdk21HashPinnedSnapshotRecipe.jdkJavaPath("src/java.base/share/classes/java/lang/String.java"));assertFalse(M3Jdk21HashPinnedSnapshotRecipe.synexiaReceiverJavaPath("src/java.base/share/classes/java/lang/String.java"));assertTrue(M3Jdk21HashPinnedSnapshotRecipe.synexiaReceiverJavaPath(RECIPE));
+ }
+ @Test @Tag("index") void coreOwnerReplayedExactlyAndFixedPoint()throws Exception{
+  var before=parse(TARGET,text("instance-before.java"));var results=apply("synexia-instance-normalize-r247",List.of(before));assertEquals(1,results.size());var after=Objects.requireNonNull(results.getFirst().getAfter());assertEquals(text("instance-after.java"),after.printAll());assertEquals(before.getId(),after.getId());generated=after.printAll();assertTrue(apply("synexia-instance-normalize-r247",List.of(after)).isEmpty());metrics.put("indexOwnersChanged",1);
+ }
+ @Test @Tag("index") void coreRejectsMissingForeignAndDuplicate()throws Exception{
+  assertThrows(RuntimeException.class,()->apply("synexia-instance-normalize-r247",List.of()));var foreign=parse(TARGET,"package jdk.m3.text; public class M3InstanceIndexPrecompute {}\n");assertThrows(RuntimeException.class,()->apply("synexia-instance-normalize-r247",List.of(foreign)));var before=parse(TARGET,text("instance-before.java"));assertThrows(RuntimeException.class,()->apply("synexia-instance-normalize-r247",List.of(before,before.withId(Tree.randomId()))));
+ }
+ public static void main(String[] args)throws Exception{
+  var listener=new SummaryGeneratingListener();var launcher=LauncherFactory.create();launcher.registerTestExecutionListeners(listener);launcher.execute(LauncherDiscoveryRequestBuilder.request().selectors(selectClass(M3InstanceNormalizeRecipeTest.class)).filters(TagFilter.includeTags(args[1])).build());var s=listener.getSummary();var failures=new ArrayList<String>();s.getFailures().forEach(f->failures.add(f.getException().toString()));var out=new TreeMap<String,Object>();out.put("tag",args[1]);out.put("found",s.getTestsFoundCount());out.put("passed",s.getTestsSucceededCount());out.put("failed",s.getTestsFailedCount());out.put("skipped",s.getTestsSkippedCount());out.put("aborted",s.getTestsAbortedCount());out.put("failures",failures);out.put("metrics",metrics);out.put("generated",generated);
+  var c=(HttpURLConnection)URI.create(args[0]).toURL().openConnection();c.setDoOutput(true);c.setRequestMethod("POST");var b=new ObjectMapper().writeValueAsBytes(out);c.setFixedLengthStreamingMode(b.length);try(var stream=c.getOutputStream()){stream.write(b);}if(c.getResponseCode()!=204)throw new AssertionError("receipt refused");c.disconnect();if(s.getTestsSucceededCount()!=3||s.getTestsFailedCount()!=0)throw new AssertionError(out);
+ }
+}

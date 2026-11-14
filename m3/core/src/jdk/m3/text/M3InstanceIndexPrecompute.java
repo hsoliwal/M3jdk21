@@ -141,8 +141,18 @@ public final class M3InstanceIndexPrecompute {
 
     public static String normalizedInstanceName(String name) {
         String value = validateName(name, "name");
+        int firstUpper = 0;
+        while (firstUpper < value.length()
+                && (value.charAt(firstUpper) < 'A' || value.charAt(firstUpper) > 'Z')) {
+            firstUpper++;
+        }
+        if (firstUpper == value.length()) {
+            // Keep a fresh result while reusing String's immutable backing when possible.
+            return new String(value);
+        }
         StringBuilder result = new StringBuilder(value.length());
-        for (int index = 0; index < value.length(); index++) {
+        result.append(value, 0, firstUpper);
+        for (int index = firstUpper; index < value.length(); index++) {
             char item = value.charAt(index);
             result.append(item >= 'A' && item <= 'Z'
                     ? (char) (item - 'A' + 'a') : item);
@@ -212,7 +222,7 @@ public final class M3InstanceIndexPrecompute {
 
     private static String validateName(String value, String field) {
         if (value == null || value.isEmpty()
-                || value.chars().allMatch(M3InstanceIndexPrecompute::asciiWhitespace)) {
+                || asciiBlank(value)) {
             throw new IllegalArgumentException(field + " must be nonblank UTF-8");
         }
         validateUtf8(value, field);
@@ -222,6 +232,13 @@ public final class M3InstanceIndexPrecompute {
             }
         }
         return value;
+    }
+
+    private static boolean asciiBlank(String value) {
+        for (int index = 0; index < value.length(); index++) {
+            if (!asciiWhitespace(value.charAt(index))) return false;
+        }
+        return true;
     }
 
     private static boolean asciiWhitespace(int value) {

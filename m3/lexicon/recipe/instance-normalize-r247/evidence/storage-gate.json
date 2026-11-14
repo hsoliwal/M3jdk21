@@ -1,0 +1,13 @@
+{
+  "schema": "M3_LEXICON_STORAGE_GATE_R247",
+  "kFree": 10926833664,
+  "fFree": 3647594496,
+  "sFree": 7073759232,
+  "cFree": 5884346368,
+  "scratchFiles": 0,
+  "cWriteHold": true,
+  "cap": 571473920,
+  "reserve": 8589934592,
+  "route": "K:\\codex-work\\agent-temp\\lexicon-maven-r241",
+  "action": "C write hold remains; task output stays within verified K lane; F inputs read-only"
+}

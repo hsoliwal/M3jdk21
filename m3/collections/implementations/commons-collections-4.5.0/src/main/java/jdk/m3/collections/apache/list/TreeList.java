@@ -235,21 +235,32 @@ public class TreeList<E> extends AbstractList<E> {
             return (E) values[slot];
         }
 
-        private int get(final int slot, final int index) {
-            final int relative = index - relativePosition[slot];
-            if (relative == 0) {
-                return slot;
+        private int get(int slot, int index) {
+            while (true) {
+                final int relative = index - relativePosition[slot];
+                if (relative == 0) {
+                    return slot;
+                }
+                slot = relative < 0 ? leftSubTree(slot) : rightSubTree(slot);
+                if (slot == NONE) {
+                    return NONE;
+                }
+                index = relative;
             }
-            final int next = relative < 0 ? leftSubTree(slot) : rightSubTree(slot);
-            return next == NONE ? NONE : get(next, relative);
         }
 
-        private int min(final int slot) {
-            return leftSubTree(slot) == NONE ? slot : min(left[slot]);
+        private int min(int slot) {
+            while (leftSubTree(slot) != NONE) {
+                slot = left[slot];
+            }
+            return slot;
         }
 
-        private int max(final int slot) {
-            return rightSubTree(slot) == NONE ? slot : max(right[slot]);
+        private int max(int slot) {
+            while (rightSubTree(slot) != NONE) {
+                slot = right[slot];
+            }
+            return slot;
         }
 
         private int next(final int slot) {

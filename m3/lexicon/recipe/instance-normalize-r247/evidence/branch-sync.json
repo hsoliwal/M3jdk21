@@ -1,0 +1,15 @@
+{
+  "schema": "M3_INSTANCE_ADDITIVE_BRANCH_SYNC_R247",
+  "originalHeads": {
+    "synexia": "ac3d682838dd4334d6f57214691cc34c731144e4",
+    "m3jdk21": "12f431c0231121c089e11631d5e6f3da8fed2749"
+  },
+  "observedDefaultHeads": {
+    "synexia": "d9c58adf9bb018f99290d5eb94095ebe5bbc5055",
+    "m3jdk21": "a9787a45ba4c91fdb6cacd358325f7d5c702c16e"
+  },
+  "observedDefaultSdkBlob": "c211c4651622b5028b29746300f1066e92f9d38c",
+  "qualifiedSdkSuperset": "f225240fbf36205a4f330610e86c1b0eb35c70b1",
+  "strategy": "Fresh default root plus exact retained R246 packet/resources, new R247 packet/resources, qualified final SDK and index. Both original review head and default head are commit parents; expected-head fast-forward only. Preserve existing mapping fix and unrelated default files.",
+  "sourceDriftPolicy": "Refuse unexpected changes; no blind owner overwrite."
+}
