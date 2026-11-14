@@ -9404,7 +9404,7 @@
             "After existing lanes return UNKNOWN, attempt bounded invocation-local repeated UTF16 effects using the existing M3RegexDpPlan and numeric JNI power/composition."
           ],
           "compatibility_obligations": [
-            "Preserve actual master class facts, <=32 bit/native, 33–63 ordered relation, rolling and fallback selectors and cache capacities.",
+            "Preserve actual master class facts, <=32 bit/native, 33\u201363 ordered relation, rolling and fallback selectors and cache capacities.",
             "Require equal canonical child owner identity and exact coordinates; preserve supplementary and cross-copy surrogate seams.",
             "Do not flatten canonical text, retain text shadows, add per-entry owners or claim persistent cross-call cache reuse.",
             "UNKNOWN, optional allocation OOM and unsupported grammar retain exact String/Pattern fallback; fence borrowed source reachability.",
@@ -15800,6 +15800,1100 @@
           "Scoped warmed forEach observations at 65,536 previously unexposed entries: baseline 4,194,376 allocated bytes and 65,536 implicit projection pairs; refined candidate 0 observed allocated bytes and no projections. Combined lazy/forEach candidate observes 0 or 40 bytes and keeps the projection lane empty. JIT cursor elimination and this environment bound the zero-allocation observation.",
           "Named receipt locators require actual root receiving runs and exact input hashes; candidate source evidence alone does not advance complete provider or installed-JDK gates."
         ]
+      },
+      {
+        "id": "m3.llm.semantic-identity",
+        "kind": "specialization",
+        "status": "implemented-tested",
+        "reason": "Canonical SDK emitted and hash-verified this additive component candidate; Java 21 and C17/C++20 JNI component suites passed. Installed source-built M3JDK and new-source promotion remain HOLD. Exact framed UTF-16 hashing binds model roots, backend, schema, ordered segments, optional segment metadata, owner/snapshot and context/source ranges. It retains hashes and ranges, never spelling.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "d7564cadc43864f0c9c94a7129b2e0fdfa089218",
+            "module": "synexia-index-precompute",
+            "path": "synexia-index-precompute/src/main/java/com/synexia/precompute/MIndexSemanticIdentity.java",
+            "symbol": "com.synexia.precompute.MIndexSemanticIdentity",
+            "signatures": [
+              "com.synexia.precompute.MIndexSemanticIdentity :: public static final int FORMAT_VERSION;",
+              "com.synexia.precompute.MIndexSemanticIdentity :: public java.lang.String rootHash();",
+              "com.synexia.precompute.MIndexSemanticIdentity :: public java.lang.String stateRoot();",
+              "com.synexia.precompute.MIndexSemanticIdentity :: public java.lang.String schemaRoot();",
+              "com.synexia.precompute.MIndexSemanticIdentity :: public com.synexia.precompute.MIndexSemanticIdentity$Model model();",
+              "com.synexia.precompute.MIndexSemanticIdentity :: public com.synexia.precompute.MIndexSemanticIdentity$Scope scope();",
+              "com.synexia.precompute.MIndexSemanticIdentity :: public int segmentCount();",
+              "com.synexia.precompute.MIndexSemanticIdentity :: public long utf16Length();",
+              "com.synexia.precompute.MIndexSemanticIdentity :: public boolean equals(java.lang.Object);",
+              "com.synexia.precompute.MIndexSemanticIdentity :: public int hashCode();",
+              "com.synexia.precompute.MIndexSemanticIdentity :: public static com.synexia.precompute.MIndexSemanticIdentity$Builder builder(java.lang.CharSequence, com.synexia.precompute.MIndexSemanticIdentity$Model, java.lang.CharSequence, java.lang.String, int);",
+              "com.synexia.precompute.MIndexSemanticIdentity :: public static com.synexia.precompute.MIndexSemanticIdentity$Builder builder(java.lang.CharSequence, com.synexia.precompute.MIndexSemanticIdentity$Model, java.lang.CharSequence, java.lang.String, int, com.synexia.precompute.MIndexSemanticIdentity$Scope);",
+              "com.synexia.precompute.MIndexSemanticIdentity :: public static com.synexia.precompute.MIndexSemanticIdentity$Hasher hasher(java.lang.String);",
+              "com.synexia.precompute.MIndexSemanticIdentity$Model :: public com.synexia.precompute.MIndexSemanticIdentity$Model(java.lang.String, java.lang.String, java.lang.String, java.lang.String);",
+              "com.synexia.precompute.MIndexSemanticIdentity$Model :: public final java.lang.String toString();",
+              "com.synexia.precompute.MIndexSemanticIdentity$Model :: public final int hashCode();",
+              "com.synexia.precompute.MIndexSemanticIdentity$Model :: public final boolean equals(java.lang.Object);",
+              "com.synexia.precompute.MIndexSemanticIdentity$Model :: public java.lang.String weightsRoot();",
+              "com.synexia.precompute.MIndexSemanticIdentity$Model :: public java.lang.String tokenizerRoot();",
+              "com.synexia.precompute.MIndexSemanticIdentity$Model :: public java.lang.String configurationRoot();",
+              "com.synexia.precompute.MIndexSemanticIdentity$Model :: public java.lang.String backendVersionRoot();",
+              "com.synexia.precompute.MIndexSemanticIdentity$Scope :: public com.synexia.precompute.MIndexSemanticIdentity$Scope(java.lang.String, java.lang.String, java.lang.String, long, long, long, long);",
+              "com.synexia.precompute.MIndexSemanticIdentity$Scope :: public static com.synexia.precompute.MIndexSemanticIdentity$Scope whole(java.lang.String, long);",
+              "com.synexia.precompute.MIndexSemanticIdentity$Scope :: public void requireContextLength(long);",
+              "com.synexia.precompute.MIndexSemanticIdentity$Scope :: public final java.lang.String toString();",
+              "com.synexia.precompute.MIndexSemanticIdentity$Scope :: public final int hashCode();",
+              "com.synexia.precompute.MIndexSemanticIdentity$Scope :: public final boolean equals(java.lang.Object);",
+              "com.synexia.precompute.MIndexSemanticIdentity$Scope :: public java.lang.String ownerRoot();",
+              "com.synexia.precompute.MIndexSemanticIdentity$Scope :: public java.lang.String snapshotRoot();",
+              "com.synexia.precompute.MIndexSemanticIdentity$Scope :: public java.lang.String contextRoot();",
+              "com.synexia.precompute.MIndexSemanticIdentity$Scope :: public long sourceStart();",
+              "com.synexia.precompute.MIndexSemanticIdentity$Scope :: public long sourceEnd();",
+              "com.synexia.precompute.MIndexSemanticIdentity$Scope :: public long contextStart();",
+              "com.synexia.precompute.MIndexSemanticIdentity$Scope :: public long contextEnd();",
+              "com.synexia.precompute.MIndexSemanticIdentity$Builder :: public com.synexia.precompute.MIndexSemanticIdentity$Builder segment(java.lang.CharSequence);",
+              "com.synexia.precompute.MIndexSemanticIdentity$Builder :: public com.synexia.precompute.MIndexSemanticIdentity$Builder segment(java.lang.CharSequence, int, int);",
+              "com.synexia.precompute.MIndexSemanticIdentity$Builder :: public com.synexia.precompute.MIndexSemanticIdentity$Builder segment(java.lang.CharSequence, int, int, java.lang.String);",
+              "com.synexia.precompute.MIndexSemanticIdentity$Builder :: public com.synexia.precompute.MIndexSemanticIdentity build();",
+              "com.synexia.precompute.MIndexSemanticIdentity$Hasher :: public com.synexia.precompute.MIndexSemanticIdentity$Hasher integer(int);",
+              "com.synexia.precompute.MIndexSemanticIdentity$Hasher :: public com.synexia.precompute.MIndexSemanticIdentity$Hasher longValue(long);",
+              "com.synexia.precompute.MIndexSemanticIdentity$Hasher :: public com.synexia.precompute.MIndexSemanticIdentity$Hasher text(java.lang.CharSequence);",
+              "com.synexia.precompute.MIndexSemanticIdentity$Hasher :: public com.synexia.precompute.MIndexSemanticIdentity$Hasher text(java.lang.CharSequence, int, int);",
+              "com.synexia.precompute.MIndexSemanticIdentity$Hasher :: public com.synexia.precompute.MIndexSemanticIdentity$Hasher nullableText(java.lang.CharSequence);",
+              "com.synexia.precompute.MIndexSemanticIdentity$Hasher :: public com.synexia.precompute.MIndexSemanticIdentity$Hasher root(java.lang.String);",
+              "com.synexia.precompute.MIndexSemanticIdentity$Hasher :: public java.lang.String finish();"
+            ],
+            "sha256": "459014e3cbf2946a293abd5b0b26574de1ec1aa611a7378279dd85e5a0ec8796",
+            "git_blob_sha1": "c43dead58331bdd76827d83b9c9a5e3175a49d5c",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "visibility": "public"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/llm/src/main/java/jdk/m3/llm/projection/M3SemanticIdentity.java",
+            "symbol": "jdk.m3.llm.projection.M3SemanticIdentity",
+            "signatures": [
+              "jdk.m3.llm.projection.M3SemanticIdentity :: public static final int FORMAT_VERSION;",
+              "jdk.m3.llm.projection.M3SemanticIdentity :: public java.lang.String rootHash();",
+              "jdk.m3.llm.projection.M3SemanticIdentity :: public java.lang.String stateRoot();",
+              "jdk.m3.llm.projection.M3SemanticIdentity :: public java.lang.String schemaRoot();",
+              "jdk.m3.llm.projection.M3SemanticIdentity :: public jdk.m3.llm.projection.M3SemanticIdentity$Model model();",
+              "jdk.m3.llm.projection.M3SemanticIdentity :: public jdk.m3.llm.projection.M3SemanticIdentity$Scope scope();",
+              "jdk.m3.llm.projection.M3SemanticIdentity :: public int segmentCount();",
+              "jdk.m3.llm.projection.M3SemanticIdentity :: public long utf16Length();",
+              "jdk.m3.llm.projection.M3SemanticIdentity :: public boolean equals(java.lang.Object);",
+              "jdk.m3.llm.projection.M3SemanticIdentity :: public int hashCode();",
+              "jdk.m3.llm.projection.M3SemanticIdentity :: public static jdk.m3.llm.projection.M3SemanticIdentity$Builder builder(java.lang.CharSequence, jdk.m3.llm.projection.M3SemanticIdentity$Model, java.lang.CharSequence, java.lang.String, int);",
+              "jdk.m3.llm.projection.M3SemanticIdentity :: public static jdk.m3.llm.projection.M3SemanticIdentity$Builder builder(java.lang.CharSequence, jdk.m3.llm.projection.M3SemanticIdentity$Model, java.lang.CharSequence, java.lang.String, int, jdk.m3.llm.projection.M3SemanticIdentity$Scope);",
+              "jdk.m3.llm.projection.M3SemanticIdentity :: public static jdk.m3.llm.projection.M3SemanticIdentity$Hasher hasher(java.lang.String);",
+              "jdk.m3.llm.projection.M3SemanticIdentity$Model :: public jdk.m3.llm.projection.M3SemanticIdentity$Model(java.lang.String, java.lang.String, java.lang.String, java.lang.String);",
+              "jdk.m3.llm.projection.M3SemanticIdentity$Model :: public final java.lang.String toString();",
+              "jdk.m3.llm.projection.M3SemanticIdentity$Model :: public final int hashCode();",
+              "jdk.m3.llm.projection.M3SemanticIdentity$Model :: public final boolean equals(java.lang.Object);",
+              "jdk.m3.llm.projection.M3SemanticIdentity$Model :: public java.lang.String weightsRoot();",
+              "jdk.m3.llm.projection.M3SemanticIdentity$Model :: public java.lang.String tokenizerRoot();",
+              "jdk.m3.llm.projection.M3SemanticIdentity$Model :: public java.lang.String configurationRoot();",
+              "jdk.m3.llm.projection.M3SemanticIdentity$Model :: public java.lang.String backendVersionRoot();",
+              "jdk.m3.llm.projection.M3SemanticIdentity$Scope :: public jdk.m3.llm.projection.M3SemanticIdentity$Scope(java.lang.String, java.lang.String, java.lang.String, long, long, long, long);",
+              "jdk.m3.llm.projection.M3SemanticIdentity$Scope :: public static jdk.m3.llm.projection.M3SemanticIdentity$Scope whole(java.lang.String, long);",
+              "jdk.m3.llm.projection.M3SemanticIdentity$Scope :: public void requireContextLength(long);",
+              "jdk.m3.llm.projection.M3SemanticIdentity$Scope :: public final java.lang.String toString();",
+              "jdk.m3.llm.projection.M3SemanticIdentity$Scope :: public final int hashCode();",
+              "jdk.m3.llm.projection.M3SemanticIdentity$Scope :: public final boolean equals(java.lang.Object);",
+              "jdk.m3.llm.projection.M3SemanticIdentity$Scope :: public java.lang.String ownerRoot();",
+              "jdk.m3.llm.projection.M3SemanticIdentity$Scope :: public java.lang.String snapshotRoot();",
+              "jdk.m3.llm.projection.M3SemanticIdentity$Scope :: public java.lang.String contextRoot();",
+              "jdk.m3.llm.projection.M3SemanticIdentity$Scope :: public long sourceStart();",
+              "jdk.m3.llm.projection.M3SemanticIdentity$Scope :: public long sourceEnd();",
+              "jdk.m3.llm.projection.M3SemanticIdentity$Scope :: public long contextStart();",
+              "jdk.m3.llm.projection.M3SemanticIdentity$Scope :: public long contextEnd();",
+              "jdk.m3.llm.projection.M3SemanticIdentity$Builder :: public jdk.m3.llm.projection.M3SemanticIdentity$Builder segment(java.lang.CharSequence);",
+              "jdk.m3.llm.projection.M3SemanticIdentity$Builder :: public jdk.m3.llm.projection.M3SemanticIdentity$Builder segment(java.lang.CharSequence, int, int);",
+              "jdk.m3.llm.projection.M3SemanticIdentity$Builder :: public jdk.m3.llm.projection.M3SemanticIdentity$Builder segment(java.lang.CharSequence, int, int, java.lang.String);",
+              "jdk.m3.llm.projection.M3SemanticIdentity$Builder :: public jdk.m3.llm.projection.M3SemanticIdentity build();",
+              "jdk.m3.llm.projection.M3SemanticIdentity$Hasher :: public jdk.m3.llm.projection.M3SemanticIdentity$Hasher integer(int);",
+              "jdk.m3.llm.projection.M3SemanticIdentity$Hasher :: public jdk.m3.llm.projection.M3SemanticIdentity$Hasher longValue(long);",
+              "jdk.m3.llm.projection.M3SemanticIdentity$Hasher :: public jdk.m3.llm.projection.M3SemanticIdentity$Hasher text(java.lang.CharSequence);",
+              "jdk.m3.llm.projection.M3SemanticIdentity$Hasher :: public jdk.m3.llm.projection.M3SemanticIdentity$Hasher text(java.lang.CharSequence, int, int);",
+              "jdk.m3.llm.projection.M3SemanticIdentity$Hasher :: public jdk.m3.llm.projection.M3SemanticIdentity$Hasher nullableText(java.lang.CharSequence);",
+              "jdk.m3.llm.projection.M3SemanticIdentity$Hasher :: public jdk.m3.llm.projection.M3SemanticIdentity$Hasher root(java.lang.String);",
+              "jdk.m3.llm.projection.M3SemanticIdentity$Hasher :: public java.lang.String finish();"
+            ],
+            "sha256": "b01397327426d3e69935e647fb614d86fb2aff062ad8683c8b4ae0f9f3d6dc26",
+            "git_blob_sha1": "782b47a6e695631e9cc63939ce597753cec0ed59",
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "visibility": "public"
+          }
+        ],
+        "owner": "Portable semantics and recipe custody remain hsoliwal/com.synexia; M3JDK21 owns jdk.m3.llm.projection.M3SemanticIdentity, its target ABI, packaging and final product admission. Caller-owned exact text is not replaced.",
+        "identity": {
+          "namespace": "Application semantic projection in the existing jdk.m3.llm module; no java.lang.String companion declaration or Java SE replacement authority.",
+          "generation": "Exact model/backend/schema/source/context hashes and immutable numeric state determine validity where applicable. Learned codes and probabilities never establish exact String equality."
+        },
+        "contract": {
+          "differences": [
+            "Exact framed UTF-16 hashing binds model roots, backend, schema, ordered segments, optional segment metadata, owner/snapshot and context/source ranges. It retains hashes and ranges, never spelling.",
+            "Canonical package/type names are lowered from com.synexia.precompute.MIndex* to jdk.m3.llm.projection.M3*. Existing exported projection package and module ownership are reused.",
+            "Private MIndex engine/catalogue/facet integrations remain private. No per-token graph, new String payload/field, alternate text store or Synexia runtime dependency is introduced."
+          ],
+          "compatibility_obligations": [
+            "Preserve exact UTF-16 identity, complete numerical distributions, defensive-copy ownership, finite-value refusals and documented resource/cancellation boundaries.",
+            "Do not infer semantic certainty, canonical text equivalence, decision authority or substitution authority from these results.",
+            "Retain donor/source license notices; source-built installed-JDK, platform/native lifetime and matched performance/memory qualification remain separate gates.",
+            "Do not advance any full-borrow phase or String/arrays receiving gate. Chrome local AI generation was NOT_INVOKED and new-source promotion remains HOLD."
+          ],
+          "public_surface": [
+            "jdk.m3.llm.projection.M3SemanticIdentity",
+            "jdk.m3.llm.projection.M3SemanticIdentity.Model",
+            "jdk.m3.llm.projection.M3SemanticIdentity.Scope",
+            "jdk.m3.llm.projection.M3SemanticIdentity.Builder",
+            "jdk.m3.llm.projection.M3SemanticIdentity.Hasher"
+          ]
+        },
+        "format": {
+          "schema": "M3SemanticIdentity FORMAT_VERSION=1; SHA-256 framed UTF-16 identity; absent/present segment metadata is explicit.",
+          "abi": "Additive application-facing Java 21 API; no new JNI or Java SE ABI replacement.",
+          "bootstrap": "Optional existing jdk.m3.llm module; no java.base initialization, String field, VM intrinsic or automatic model load is added."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "REVIEW_CANDIDATE_ONLY; installed-JDK and new-source promotion HOLD; caller explicitly requests evaluation or numerical operations.",
+          "joins": "All joins must retain the exact declared identity and hierarchy/model generation. Equal lossy codes or probabilities do not authorize text, owner or context substitution.",
+          "outputs": "Hash-only immutable evidence; caller-owned text and model artifacts remain outside the result.",
+          "cached_facts": "No global model cache or token graph is introduced. Callers own result retention; sidecar physical storage claims count independent allocations independently."
+        },
+        "recipe": {
+          "id": "m3-jev-ncm-public-java-20261114",
+          "version": "20261114",
+          "path": null,
+          "sha256": null,
+          "canonical_repository": "hsoliwal/com.synexia",
+          "canonical_path": "synexia-openrewrite-recipes/crates/m3-jev-ncm-20261114",
+          "preconditions": [
+            "Use the exact reviewed Java pre/postimage hashes and actual OpenRewrite SDK execution.",
+            "The paired m3-jev-ncm-public-text-20261114 recipe owns JNI/build/license postimages; all existing preimages must match.",
+            "No recipes, runners or recipe memory are copied into the public receiver."
+          ],
+          "rollback": "Revert this additive component and its paired generated build/metadata changes together; do not change unrelated queued owners or full-borrow phase records."
+        },
+        "tests": [
+          {
+            "id": "m3.llm.jev-ncm.component-20261114",
+            "receipt": "m3/llm/JEV_NCM_RECEIVER_RECEIPT.json"
+          }
+        ],
+        "provenance": {
+          "license": "Apache-2.0",
+          "publication": "Public result-only component candidate from the canonical private recipe; exact emitted files and retained notices are listed in m3/llm/JEV_NCM_PROVENANCE.json.",
+          "copied_code": true,
+          "donor_boundary": "Portable Synexia canonical source. Jev-style result shapes are an abstract API reference; no Jev source, weights, model, tokenizer, training or service was copied."
+        },
+        "sync": {
+          "source_revision": "d7564cadc43864f0c9c94a7129b2e0fdfa089218",
+          "target_revision": null,
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Explicit target package and type names; use existing jdk.m3.llm projection export."
+          ],
+          "pending": [
+            "Review exact target component receipts before integration.",
+            "Installed source-built M3JDK, live-model, platform and performance/memory admission are not established.",
+            "Chrome local AI generation NOT_INVOKED; new-source promotion HOLD."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "experimental"
+      },
+      {
+        "id": "m3.llm.system-one-batch",
+        "kind": "specialization",
+        "status": "implemented-tested",
+        "reason": "Canonical SDK emitted and hash-verified this additive component candidate; Java 21 and C17/C++20 JNI component suites passed. Installed source-built M3JDK and new-source promotion remain HOLD. Caller-supplied finite logits produce complete Noul, Choice and bounded integer Score distributions. Evaluation uses one immutable exact context, bounded workers and deterministic schema-order freeze. No Jev model or proprietary confidence formula is implemented.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "d7564cadc43864f0c9c94a7129b2e0fdfa089218",
+            "module": "synexia-index-precompute",
+            "path": "synexia-index-precompute/src/main/java/com/synexia/precompute/MIndexSystemOneBatch.java",
+            "symbol": "com.synexia.precompute.MIndexSystemOneBatch",
+            "signatures": [
+              "com.synexia.precompute.MIndexSystemOneBatch :: public com.synexia.precompute.MIndexSemanticIdentity identity();",
+              "com.synexia.precompute.MIndexSystemOneBatch :: public int size();",
+              "com.synexia.precompute.MIndexSystemOneBatch :: public com.synexia.precompute.MIndexSystemOneBatch$Kind kind(int);",
+              "com.synexia.precompute.MIndexSystemOneBatch :: public double[] probabilities(int);",
+              "com.synexia.precompute.MIndexSystemOneBatch :: public com.synexia.precompute.MIndexSystemOneBatch$Noul noul(int);",
+              "com.synexia.precompute.MIndexSystemOneBatch :: public com.synexia.precompute.MIndexSystemOneBatch$Choice choice(int);",
+              "com.synexia.precompute.MIndexSystemOneBatch :: public com.synexia.precompute.MIndexSystemOneBatch$Score score(int);",
+              "com.synexia.precompute.MIndexSystemOneBatch :: public boolean decisionAuthority();",
+              "com.synexia.precompute.MIndexSystemOneBatch :: public boolean substitutionAuthority();",
+              "com.synexia.precompute.MIndexSystemOneBatch :: public static com.synexia.precompute.MIndexSystemOneBatch evaluate(java.lang.String, com.synexia.precompute.MIndexSystemOneBatch$Schema, java.lang.String, com.synexia.precompute.MIndexSemanticIdentity$Model, java.lang.String, com.synexia.precompute.MIndexSystemOneBatch$Backend, int) throws java.lang.InterruptedException;",
+              "com.synexia.precompute.MIndexSystemOneBatch :: public static com.synexia.precompute.MIndexSystemOneBatch evaluate(java.lang.String, com.synexia.precompute.MIndexSystemOneBatch$Schema, java.lang.String, com.synexia.precompute.MIndexSemanticIdentity$Model, java.lang.String, com.synexia.precompute.MIndexSystemOneBatch$Backend, int, com.synexia.precompute.MIndexSemanticIdentity$Scope) throws java.lang.InterruptedException;",
+              "com.synexia.precompute.MIndexSystemOneBatch$Kind :: public static final com.synexia.precompute.MIndexSystemOneBatch$Kind NOUL;",
+              "com.synexia.precompute.MIndexSystemOneBatch$Kind :: public static final com.synexia.precompute.MIndexSystemOneBatch$Kind CHOICE;",
+              "com.synexia.precompute.MIndexSystemOneBatch$Kind :: public static final com.synexia.precompute.MIndexSystemOneBatch$Kind SCORE;",
+              "com.synexia.precompute.MIndexSystemOneBatch$Kind :: public static com.synexia.precompute.MIndexSystemOneBatch$Kind[] values();",
+              "com.synexia.precompute.MIndexSystemOneBatch$Kind :: public static com.synexia.precompute.MIndexSystemOneBatch$Kind valueOf(java.lang.String);",
+              "com.synexia.precompute.MIndexSystemOneBatch$Question :: public com.synexia.precompute.MIndexSystemOneBatch$Question(java.lang.String, java.lang.String, com.synexia.precompute.MIndexSystemOneBatch$Kind, java.util.List<java.lang.String>, int, int);",
+              "com.synexia.precompute.MIndexSystemOneBatch$Question :: public static com.synexia.precompute.MIndexSystemOneBatch$Question noul(java.lang.String, java.lang.String);",
+              "com.synexia.precompute.MIndexSystemOneBatch$Question :: public static com.synexia.precompute.MIndexSystemOneBatch$Question choice(java.lang.String, java.lang.String, java.util.List<java.lang.String>);",
+              "com.synexia.precompute.MIndexSystemOneBatch$Question :: public static com.synexia.precompute.MIndexSystemOneBatch$Question score(java.lang.String, java.lang.String, int, int);",
+              "com.synexia.precompute.MIndexSystemOneBatch$Question :: public int outcomeCount();",
+              "com.synexia.precompute.MIndexSystemOneBatch$Question :: public final java.lang.String toString();",
+              "com.synexia.precompute.MIndexSystemOneBatch$Question :: public final int hashCode();",
+              "com.synexia.precompute.MIndexSystemOneBatch$Question :: public final boolean equals(java.lang.Object);",
+              "com.synexia.precompute.MIndexSystemOneBatch$Question :: public java.lang.String id();",
+              "com.synexia.precompute.MIndexSystemOneBatch$Question :: public java.lang.String instructions();",
+              "com.synexia.precompute.MIndexSystemOneBatch$Question :: public com.synexia.precompute.MIndexSystemOneBatch$Kind kind();",
+              "com.synexia.precompute.MIndexSystemOneBatch$Question :: public java.util.List<java.lang.String> choices();",
+              "com.synexia.precompute.MIndexSystemOneBatch$Question :: public int minimumScore();",
+              "com.synexia.precompute.MIndexSystemOneBatch$Question :: public int maximumScore();",
+              "com.synexia.precompute.MIndexSystemOneBatch$Schema :: public com.synexia.precompute.MIndexSystemOneBatch$Schema(java.util.List<com.synexia.precompute.MIndexSystemOneBatch$Question>);",
+              "com.synexia.precompute.MIndexSystemOneBatch$Schema :: public int size();",
+              "com.synexia.precompute.MIndexSystemOneBatch$Schema :: public com.synexia.precompute.MIndexSystemOneBatch$Question question(int);",
+              "com.synexia.precompute.MIndexSystemOneBatch$Schema :: public java.util.List<com.synexia.precompute.MIndexSystemOneBatch$Question> questions();",
+              "com.synexia.precompute.MIndexSystemOneBatch$Schema :: public java.lang.String rootHash();",
+              "com.synexia.precompute.MIndexSystemOneBatch$Backend :: public abstract double[] logits(java.lang.String, com.synexia.precompute.MIndexSystemOneBatch$Question, com.synexia.precompute.MIndexSemanticIdentity) throws java.lang.Exception;",
+              "com.synexia.precompute.MIndexSystemOneBatch$Noul :: public double probability();",
+              "com.synexia.precompute.MIndexSystemOneBatch$Noul :: public double falseProbability();",
+              "com.synexia.precompute.MIndexSystemOneBatch$Noul :: public boolean value();",
+              "com.synexia.precompute.MIndexSystemOneBatch$Choice :: public double[] probabilities();",
+              "com.synexia.precompute.MIndexSystemOneBatch$Choice :: public int value();",
+              "com.synexia.precompute.MIndexSystemOneBatch$Choice :: public double confidence();",
+              "com.synexia.precompute.MIndexSystemOneBatch$Score :: public int minimum();",
+              "com.synexia.precompute.MIndexSystemOneBatch$Score :: public int maximum();",
+              "com.synexia.precompute.MIndexSystemOneBatch$Score :: public double[] probabilities();",
+              "com.synexia.precompute.MIndexSystemOneBatch$Score :: public int value();",
+              "com.synexia.precompute.MIndexSystemOneBatch$Score :: public double expectedScore();",
+              "com.synexia.precompute.MIndexSystemOneBatch$Score :: public double confidence();"
+            ],
+            "sha256": "0dc958a71cf81f3fea046a5e6d27b81a1078cd6c45ce8f57d0fe6afe8d015386",
+            "git_blob_sha1": "c49d81372d9661796e1f0fb042ad89b8aa6629ce",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "visibility": "public"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/llm/src/main/java/jdk/m3/llm/projection/M3SystemOneBatch.java",
+            "symbol": "jdk.m3.llm.projection.M3SystemOneBatch",
+            "signatures": [
+              "jdk.m3.llm.projection.M3SystemOneBatch :: public jdk.m3.llm.projection.M3SemanticIdentity identity();",
+              "jdk.m3.llm.projection.M3SystemOneBatch :: public int size();",
+              "jdk.m3.llm.projection.M3SystemOneBatch :: public jdk.m3.llm.projection.M3SystemOneBatch$Kind kind(int);",
+              "jdk.m3.llm.projection.M3SystemOneBatch :: public double[] probabilities(int);",
+              "jdk.m3.llm.projection.M3SystemOneBatch :: public jdk.m3.llm.projection.M3SystemOneBatch$Noul noul(int);",
+              "jdk.m3.llm.projection.M3SystemOneBatch :: public jdk.m3.llm.projection.M3SystemOneBatch$Choice choice(int);",
+              "jdk.m3.llm.projection.M3SystemOneBatch :: public jdk.m3.llm.projection.M3SystemOneBatch$Score score(int);",
+              "jdk.m3.llm.projection.M3SystemOneBatch :: public boolean decisionAuthority();",
+              "jdk.m3.llm.projection.M3SystemOneBatch :: public boolean substitutionAuthority();",
+              "jdk.m3.llm.projection.M3SystemOneBatch :: public static jdk.m3.llm.projection.M3SystemOneBatch evaluate(java.lang.String, jdk.m3.llm.projection.M3SystemOneBatch$Schema, java.lang.String, jdk.m3.llm.projection.M3SemanticIdentity$Model, java.lang.String, jdk.m3.llm.projection.M3SystemOneBatch$Backend, int) throws java.lang.InterruptedException;",
+              "jdk.m3.llm.projection.M3SystemOneBatch :: public static jdk.m3.llm.projection.M3SystemOneBatch evaluate(java.lang.String, jdk.m3.llm.projection.M3SystemOneBatch$Schema, java.lang.String, jdk.m3.llm.projection.M3SemanticIdentity$Model, java.lang.String, jdk.m3.llm.projection.M3SystemOneBatch$Backend, int, jdk.m3.llm.projection.M3SemanticIdentity$Scope) throws java.lang.InterruptedException;",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Kind :: public static final jdk.m3.llm.projection.M3SystemOneBatch$Kind NOUL;",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Kind :: public static final jdk.m3.llm.projection.M3SystemOneBatch$Kind CHOICE;",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Kind :: public static final jdk.m3.llm.projection.M3SystemOneBatch$Kind SCORE;",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Kind :: public static jdk.m3.llm.projection.M3SystemOneBatch$Kind[] values();",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Kind :: public static jdk.m3.llm.projection.M3SystemOneBatch$Kind valueOf(java.lang.String);",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Question :: public jdk.m3.llm.projection.M3SystemOneBatch$Question(java.lang.String, java.lang.String, jdk.m3.llm.projection.M3SystemOneBatch$Kind, java.util.List<java.lang.String>, int, int);",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Question :: public static jdk.m3.llm.projection.M3SystemOneBatch$Question noul(java.lang.String, java.lang.String);",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Question :: public static jdk.m3.llm.projection.M3SystemOneBatch$Question choice(java.lang.String, java.lang.String, java.util.List<java.lang.String>);",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Question :: public static jdk.m3.llm.projection.M3SystemOneBatch$Question score(java.lang.String, java.lang.String, int, int);",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Question :: public int outcomeCount();",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Question :: public final java.lang.String toString();",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Question :: public final int hashCode();",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Question :: public final boolean equals(java.lang.Object);",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Question :: public java.lang.String id();",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Question :: public java.lang.String instructions();",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Question :: public jdk.m3.llm.projection.M3SystemOneBatch$Kind kind();",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Question :: public java.util.List<java.lang.String> choices();",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Question :: public int minimumScore();",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Question :: public int maximumScore();",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Schema :: public jdk.m3.llm.projection.M3SystemOneBatch$Schema(java.util.List<jdk.m3.llm.projection.M3SystemOneBatch$Question>);",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Schema :: public int size();",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Schema :: public jdk.m3.llm.projection.M3SystemOneBatch$Question question(int);",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Schema :: public java.util.List<jdk.m3.llm.projection.M3SystemOneBatch$Question> questions();",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Schema :: public java.lang.String rootHash();",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Backend :: public abstract double[] logits(java.lang.String, jdk.m3.llm.projection.M3SystemOneBatch$Question, jdk.m3.llm.projection.M3SemanticIdentity) throws java.lang.Exception;",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Noul :: public double probability();",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Noul :: public double falseProbability();",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Noul :: public boolean value();",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Choice :: public double[] probabilities();",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Choice :: public int value();",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Choice :: public double confidence();",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Score :: public int minimum();",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Score :: public int maximum();",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Score :: public double[] probabilities();",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Score :: public int value();",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Score :: public double expectedScore();",
+              "jdk.m3.llm.projection.M3SystemOneBatch$Score :: public double confidence();"
+            ],
+            "sha256": "7846cfdba4ccf6c3113f0f9377d755384158b3818551716db8c544126c5ea816",
+            "git_blob_sha1": "94e626a7403738e6760ed1729b56c65ba6925bb9",
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "visibility": "public"
+          }
+        ],
+        "owner": "Portable semantics and recipe custody remain hsoliwal/com.synexia; M3JDK21 owns jdk.m3.llm.projection.M3SystemOneBatch, its target ABI, packaging and final product admission. Caller-owned exact text is not replaced.",
+        "identity": {
+          "namespace": "Application semantic projection in the existing jdk.m3.llm module; no java.lang.String companion declaration or Java SE replacement authority.",
+          "generation": "Exact model/backend/schema/source/context hashes and immutable numeric state determine validity where applicable. Learned codes and probabilities never establish exact String equality."
+        },
+        "contract": {
+          "differences": [
+            "Caller-supplied finite logits produce complete Noul, Choice and bounded integer Score distributions. Evaluation uses one immutable exact context, bounded workers and deterministic schema-order freeze. No Jev model or proprietary confidence formula is implemented.",
+            "Canonical package/type names are lowered from com.synexia.precompute.MIndex* to jdk.m3.llm.projection.M3*. Existing exported projection package and module ownership are reused.",
+            "Private MIndex engine/catalogue/facet integrations remain private. No per-token graph, new String payload/field, alternate text store or Synexia runtime dependency is introduced."
+          ],
+          "compatibility_obligations": [
+            "Preserve exact UTF-16 identity, complete numerical distributions, defensive-copy ownership, finite-value refusals and documented resource/cancellation boundaries.",
+            "Do not infer semantic certainty, canonical text equivalence, decision authority or substitution authority from these results.",
+            "Retain donor/source license notices; source-built installed-JDK, platform/native lifetime and matched performance/memory qualification remain separate gates.",
+            "Do not advance any full-borrow phase or String/arrays receiving gate. Chrome local AI generation was NOT_INVOKED and new-source promotion remains HOLD."
+          ],
+          "public_surface": [
+            "jdk.m3.llm.projection.M3SystemOneBatch",
+            "jdk.m3.llm.projection.M3SystemOneBatch.Kind",
+            "jdk.m3.llm.projection.M3SystemOneBatch.Question",
+            "jdk.m3.llm.projection.M3SystemOneBatch.Schema",
+            "jdk.m3.llm.projection.M3SystemOneBatch.Backend",
+            "jdk.m3.llm.projection.M3SystemOneBatch.Noul",
+            "jdk.m3.llm.projection.M3SystemOneBatch.Choice",
+            "jdk.m3.llm.projection.M3SystemOneBatch.Score"
+          ]
+        },
+        "format": {
+          "schema": "SYNEXIA_SYSTEM_ONE_BATCH_SCHEMA_V1; primitive complete probability lanes; no serialized batch format is exposed.",
+          "abi": "Additive application-facing Java 21 API; no new JNI or Java SE ABI replacement.",
+          "bootstrap": "Optional existing jdk.m3.llm module; no java.base initialization, String field, VM intrinsic or automatic model load is added."
+        },
+        "dependencies": [
+          {
+            "id": "m3.llm.semantic-identity",
+            "resolution": "resolved",
+            "reason": "Exact companion component candidate is emitted and source-sealed in this same existing module; product admission remains pending."
+          }
+        ],
+        "materialization": {
+          "admission": "REVIEW_CANDIDATE_ONLY; installed-JDK and new-source promotion HOLD; caller explicitly requests evaluation or numerical operations.",
+          "joins": "All joins must retain the exact declared identity and hierarchy/model generation. Equal lossy codes or probabilities do not authorize text, owner or context substitution.",
+          "outputs": "Numerical probabilities and concentration only; no source text, schema, question text or labels retained by a completed result.",
+          "cached_facts": "No global model cache or token graph is introduced. Callers own result retention; sidecar physical storage claims count independent allocations independently."
+        },
+        "recipe": {
+          "id": "m3-jev-ncm-public-java-20261114",
+          "version": "20261114",
+          "path": null,
+          "sha256": null,
+          "canonical_repository": "hsoliwal/com.synexia",
+          "canonical_path": "synexia-openrewrite-recipes/crates/m3-jev-ncm-20261114",
+          "preconditions": [
+            "Use the exact reviewed Java pre/postimage hashes and actual OpenRewrite SDK execution.",
+            "The paired m3-jev-ncm-public-text-20261114 recipe owns JNI/build/license postimages; all existing preimages must match.",
+            "No recipes, runners or recipe memory are copied into the public receiver."
+          ],
+          "rollback": "Revert this additive component and its paired generated build/metadata changes together; do not change unrelated queued owners or full-borrow phase records."
+        },
+        "tests": [
+          {
+            "id": "m3.llm.jev-ncm.component-20261114",
+            "receipt": "m3/llm/JEV_NCM_RECEIVER_RECEIPT.json"
+          }
+        ],
+        "provenance": {
+          "license": "Apache-2.0",
+          "publication": "Public result-only component candidate from the canonical private recipe; exact emitted files and retained notices are listed in m3/llm/JEV_NCM_PROVENANCE.json.",
+          "copied_code": true,
+          "donor_boundary": "Portable Synexia canonical source. Jev-style result shapes are an abstract API reference; no Jev source, weights, model, tokenizer, training or service was copied."
+        },
+        "sync": {
+          "source_revision": "d7564cadc43864f0c9c94a7129b2e0fdfa089218",
+          "target_revision": null,
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Explicit target package and type names; use existing jdk.m3.llm projection export."
+          ],
+          "pending": [
+            "Review exact target component receipts before integration.",
+            "Installed source-built M3JDK, live-model, platform and performance/memory admission are not established.",
+            "Chrome local AI generation NOT_INVOKED; new-source promotion HOLD."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "experimental"
+      },
+      {
+        "id": "m3.llm.ncm-ops",
+        "kind": "specialization",
+        "status": "implemented-tested",
+        "reason": "Canonical SDK emitted and hash-verified this additive component candidate; Java 21 and C17/C++20 JNI component suites passed. Installed source-built M3JDK and new-source promotion remain HOLD. Explicit scalar FP32 AREA_LINEAR_RVQ_V1 profile: expanded-norm nearest code, area and half-pixel linear resize, supplied three-tap Phi transforms and tied-codebook logits. Lowest-index ties, finite-value refusals, cumulative allocation/work bounds and cooperative cancellation are part of the contract.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "d7564cadc43864f0c9c94a7129b2e0fdfa089218",
+            "module": "synexia-index-precompute",
+            "path": "synexia-index-precompute/src/main/java/com/synexia/precompute/MIndexNcmOps.java",
+            "symbol": "com.synexia.precompute.MIndexNcmOps",
+            "signatures": [
+              "com.synexia.precompute.MIndexNcmOps :: public static final java.lang.String PROFILE;",
+              "com.synexia.precompute.MIndexNcmOps :: public static final java.lang.String DONOR_REVISION;",
+              "com.synexia.precompute.MIndexNcmOps :: public static final com.synexia.precompute.MIndexNcmOps$Budget DEFAULT_BUDGET;",
+              "com.synexia.precompute.MIndexNcmOps :: public static int[] nearest(float[], int, float[]);",
+              "com.synexia.precompute.MIndexNcmOps :: public static int[] nearest(float[], int, float[], com.synexia.precompute.MIndexNcmOps$Budget, com.synexia.precompute.MIndexNcmOps$Cancellation);",
+              "com.synexia.precompute.MIndexNcmOps :: public static float[] areaResize(float[], int, int, int, int);",
+              "com.synexia.precompute.MIndexNcmOps :: public static float[] areaResize(float[], int, int, int, int, com.synexia.precompute.MIndexNcmOps$Budget, com.synexia.precompute.MIndexNcmOps$Cancellation);",
+              "com.synexia.precompute.MIndexNcmOps :: public static float[] linearResize(float[], int, int, int, int);",
+              "com.synexia.precompute.MIndexNcmOps :: public static float[] linearResize(float[], int, int, int, int, com.synexia.precompute.MIndexNcmOps$Budget, com.synexia.precompute.MIndexNcmOps$Cancellation);",
+              "com.synexia.precompute.MIndexNcmOps :: public static float[] phi(float[], int, int, int, float[], float[], float);",
+              "com.synexia.precompute.MIndexNcmOps :: public static float[] phi(float[], int, int, int, float[], float[], float, com.synexia.precompute.MIndexNcmOps$Budget, com.synexia.precompute.MIndexNcmOps$Cancellation);",
+              "com.synexia.precompute.MIndexNcmOps :: public static float[] tiedLogits(float[], int, float[], float, float[]);",
+              "com.synexia.precompute.MIndexNcmOps :: public static float[] tiedLogits(float[], int, float[], float, float[], com.synexia.precompute.MIndexNcmOps$Budget, com.synexia.precompute.MIndexNcmOps$Cancellation);",
+              "com.synexia.precompute.MIndexNcmOps$Budget :: public com.synexia.precompute.MIndexNcmOps$Budget(long, long);",
+              "com.synexia.precompute.MIndexNcmOps$Budget :: public void check(long, long);",
+              "com.synexia.precompute.MIndexNcmOps$Budget :: public final java.lang.String toString();",
+              "com.synexia.precompute.MIndexNcmOps$Budget :: public final int hashCode();",
+              "com.synexia.precompute.MIndexNcmOps$Budget :: public final boolean equals(java.lang.Object);",
+              "com.synexia.precompute.MIndexNcmOps$Budget :: public long maxElements();",
+              "com.synexia.precompute.MIndexNcmOps$Budget :: public long maxWork();",
+              "com.synexia.precompute.MIndexNcmOps$Cancellation :: public static final com.synexia.precompute.MIndexNcmOps$Cancellation NONE;",
+              "com.synexia.precompute.MIndexNcmOps$Cancellation :: public abstract void checkpoint();"
+            ],
+            "sha256": "eaa95e60d4291f5e628b56e2c96ad50c54f8fbe717bcb5fd2e7b2fc386b30bd7",
+            "git_blob_sha1": "b5a0549752c955ad54dac7dd61274b899f1038e6",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "visibility": "public"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/llm/src/main/java/jdk/m3/llm/projection/M3NcmOps.java",
+            "symbol": "jdk.m3.llm.projection.M3NcmOps",
+            "signatures": [
+              "jdk.m3.llm.projection.M3NcmOps :: public static final java.lang.String PROFILE;",
+              "jdk.m3.llm.projection.M3NcmOps :: public static final java.lang.String DONOR_REVISION;",
+              "jdk.m3.llm.projection.M3NcmOps :: public static final jdk.m3.llm.projection.M3NcmOps$Budget DEFAULT_BUDGET;",
+              "jdk.m3.llm.projection.M3NcmOps :: public static int[] nearest(float[], int, float[]);",
+              "jdk.m3.llm.projection.M3NcmOps :: public static int[] nearest(float[], int, float[], jdk.m3.llm.projection.M3NcmOps$Budget, jdk.m3.llm.projection.M3NcmOps$Cancellation);",
+              "jdk.m3.llm.projection.M3NcmOps :: public static float[] areaResize(float[], int, int, int, int);",
+              "jdk.m3.llm.projection.M3NcmOps :: public static float[] areaResize(float[], int, int, int, int, jdk.m3.llm.projection.M3NcmOps$Budget, jdk.m3.llm.projection.M3NcmOps$Cancellation);",
+              "jdk.m3.llm.projection.M3NcmOps :: public static float[] linearResize(float[], int, int, int, int);",
+              "jdk.m3.llm.projection.M3NcmOps :: public static float[] linearResize(float[], int, int, int, int, jdk.m3.llm.projection.M3NcmOps$Budget, jdk.m3.llm.projection.M3NcmOps$Cancellation);",
+              "jdk.m3.llm.projection.M3NcmOps :: public static float[] phi(float[], int, int, int, float[], float[], float);",
+              "jdk.m3.llm.projection.M3NcmOps :: public static float[] phi(float[], int, int, int, float[], float[], float, jdk.m3.llm.projection.M3NcmOps$Budget, jdk.m3.llm.projection.M3NcmOps$Cancellation);",
+              "jdk.m3.llm.projection.M3NcmOps :: public static float[] tiedLogits(float[], int, float[], float, float[]);",
+              "jdk.m3.llm.projection.M3NcmOps :: public static float[] tiedLogits(float[], int, float[], float, float[], jdk.m3.llm.projection.M3NcmOps$Budget, jdk.m3.llm.projection.M3NcmOps$Cancellation);",
+              "jdk.m3.llm.projection.M3NcmOps$Budget :: public jdk.m3.llm.projection.M3NcmOps$Budget(long, long);",
+              "jdk.m3.llm.projection.M3NcmOps$Budget :: public void check(long, long);",
+              "jdk.m3.llm.projection.M3NcmOps$Budget :: public final java.lang.String toString();",
+              "jdk.m3.llm.projection.M3NcmOps$Budget :: public final int hashCode();",
+              "jdk.m3.llm.projection.M3NcmOps$Budget :: public final boolean equals(java.lang.Object);",
+              "jdk.m3.llm.projection.M3NcmOps$Budget :: public long maxElements();",
+              "jdk.m3.llm.projection.M3NcmOps$Budget :: public long maxWork();",
+              "jdk.m3.llm.projection.M3NcmOps$Cancellation :: public static final jdk.m3.llm.projection.M3NcmOps$Cancellation NONE;",
+              "jdk.m3.llm.projection.M3NcmOps$Cancellation :: public abstract void checkpoint();"
+            ],
+            "sha256": "ae5eb28cb0468ed40d3aede5d351322d1bb308cdd62904b277acd6b6192fafa0",
+            "git_blob_sha1": "87d918e3dfb2e31239d0646b098ea69ce27f5a41",
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "visibility": "public"
+          }
+        ],
+        "owner": "Portable semantics and recipe custody remain hsoliwal/com.synexia; M3JDK21 owns jdk.m3.llm.projection.M3NcmOps, its target ABI, packaging and final product admission. Caller-owned exact text is not replaced.",
+        "identity": {
+          "namespace": "Application semantic projection in the existing jdk.m3.llm module; no java.lang.String companion declaration or Java SE replacement authority.",
+          "generation": "Exact model/backend/schema/source/context hashes and immutable numeric state determine validity where applicable. Learned codes and probabilities never establish exact String equality."
+        },
+        "contract": {
+          "differences": [
+            "Explicit scalar FP32 AREA_LINEAR_RVQ_V1 profile: expanded-norm nearest code, area and half-pixel linear resize, supplied three-tap Phi transforms and tied-codebook logits. Lowest-index ties, finite-value refusals, cumulative allocation/work bounds and cooperative cancellation are part of the contract.",
+            "Canonical package/type names are lowered from com.synexia.precompute.MIndex* to jdk.m3.llm.projection.M3*. Existing exported projection package and module ownership are reused.",
+            "Private MIndex engine/catalogue/facet integrations remain private. No per-token graph, new String payload/field, alternate text store or Synexia runtime dependency is introduced."
+          ],
+          "compatibility_obligations": [
+            "Preserve exact UTF-16 identity, complete numerical distributions, defensive-copy ownership, finite-value refusals and documented resource/cancellation boundaries.",
+            "Do not infer semantic certainty, canonical text equivalence, decision authority or substitution authority from these results.",
+            "Retain donor/source license notices; source-built installed-JDK, platform/native lifetime and matched performance/memory qualification remain separate gates.",
+            "Do not advance any full-borrow phase or String/arrays receiving gate. Chrome local AI generation was NOT_INVOKED and new-source promotion remains HOLD."
+          ],
+          "public_surface": [
+            "jdk.m3.llm.projection.M3NcmOps",
+            "jdk.m3.llm.projection.M3NcmOps.Budget",
+            "jdk.m3.llm.projection.M3NcmOps.Cancellation"
+          ]
+        },
+        "format": {
+          "schema": "AREA_LINEAR_RVQ_V1; contiguous FP32 batch/length/channel and vocabulary/channel tensors.",
+          "abi": "Additive application-facing Java 21 API; no new JNI or Java SE ABI replacement.",
+          "bootstrap": "Optional existing jdk.m3.llm module; no java.base initialization, String field, VM intrinsic or automatic model load is added."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "REVIEW_CANDIDATE_ONLY; installed-JDK and new-source promotion HOLD; caller explicitly requests evaluation or numerical operations.",
+          "joins": "All joins must retain the exact declared identity and hierarchy/model generation. Equal lossy codes or probabilities do not authorize text, owner or context substitution.",
+          "outputs": "Caller-supplied tensors and codebooks produce owned primitive arrays; no model training or inferred text semantics.",
+          "cached_facts": "No global model cache or token graph is introduced. Callers own result retention; sidecar physical storage claims count independent allocations independently."
+        },
+        "recipe": {
+          "id": "m3-jev-ncm-public-java-20261114",
+          "version": "20261114",
+          "path": null,
+          "sha256": null,
+          "canonical_repository": "hsoliwal/com.synexia",
+          "canonical_path": "synexia-openrewrite-recipes/crates/m3-jev-ncm-20261114",
+          "preconditions": [
+            "Use the exact reviewed Java pre/postimage hashes and actual OpenRewrite SDK execution.",
+            "The paired m3-jev-ncm-public-text-20261114 recipe owns JNI/build/license postimages; all existing preimages must match.",
+            "No recipes, runners or recipe memory are copied into the public receiver."
+          ],
+          "rollback": "Revert this additive component and its paired generated build/metadata changes together; do not change unrelated queued owners or full-borrow phase records."
+        },
+        "tests": [
+          {
+            "id": "m3.llm.jev-ncm.component-20261114",
+            "receipt": "m3/llm/JEV_NCM_RECEIVER_RECEIPT.json"
+          }
+        ],
+        "provenance": {
+          "license": "MIT",
+          "publication": "Public result-only component candidate from the canonical private recipe; exact emitted files and retained notices are listed in m3/llm/JEV_NCM_PROVENANCE.json.",
+          "copied_code": true,
+          "donor_boundary": "NCM numerical translation derives from HazyResearch/ncm models/quant.py and models/next_concept.py at c70274273f489abc73832b2b98584a8483b6b203. Preserve donor MIT notices. No model weights, tokenizer, training corpus, PyTorch runtime or full NCM inference implementation is shipped."
+        },
+        "sync": {
+          "source_revision": "d7564cadc43864f0c9c94a7129b2e0fdfa089218",
+          "target_revision": null,
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Explicit target package and type names; use existing jdk.m3.llm projection export."
+          ],
+          "pending": [
+            "Review exact target component receipts before integration.",
+            "Installed source-built M3JDK, live-model, platform and performance/memory admission are not established.",
+            "Chrome local AI generation NOT_INVOKED; new-source promotion HOLD."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "experimental"
+      },
+      {
+        "id": "m3.llm.ncm-hierarchy",
+        "kind": "specialization",
+        "status": "implemented-tested",
+        "reason": "Canonical SDK emitted and hash-verified this additive component candidate; Java 21 and C17/C++20 JNI component suites passed. Installed source-built M3JDK and new-source promotion remain HOLD. Immutable supplied residual hierarchy with separate codebooks per level, versioned fingerprint, exact level offsets, prefix decode and next-level conditioning. Scalar AREA_LINEAR_RVQ_V1 is an explicit implementation profile rather than a full PyTorch model claim.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "d7564cadc43864f0c9c94a7129b2e0fdfa089218",
+            "module": "synexia-index-precompute",
+            "path": "synexia-index-precompute/src/main/java/com/synexia/precompute/MIndexNcmHierarchy.java",
+            "symbol": "com.synexia.precompute.MIndexNcmHierarchy",
+            "signatures": [
+              "com.synexia.precompute.MIndexNcmHierarchy :: public com.synexia.precompute.MIndexNcmHierarchy(java.lang.String, int, int[], float[][]);",
+              "com.synexia.precompute.MIndexNcmHierarchy :: public com.synexia.precompute.MIndexNcmHierarchy(java.lang.String, int, int[], float[][], float[][], float[][], float[], com.synexia.precompute.MIndexNcmOps$Budget);",
+              "com.synexia.precompute.MIndexNcmHierarchy :: public java.lang.String profile();",
+              "com.synexia.precompute.MIndexNcmHierarchy :: public java.lang.String modelVersion();",
+              "com.synexia.precompute.MIndexNcmHierarchy :: public int channels();",
+              "com.synexia.precompute.MIndexNcmHierarchy :: public int levelCount();",
+              "com.synexia.precompute.MIndexNcmHierarchy :: public int fullLength();",
+              "com.synexia.precompute.MIndexNcmHierarchy :: public int totalCodes();",
+              "com.synexia.precompute.MIndexNcmHierarchy :: public int vocabularySize(int);",
+              "com.synexia.precompute.MIndexNcmHierarchy :: public int[] levelLengths();",
+              "com.synexia.precompute.MIndexNcmHierarchy :: public int[] prefixOffsets();",
+              "com.synexia.precompute.MIndexNcmHierarchy :: public java.lang.String fingerprint();",
+              "com.synexia.precompute.MIndexNcmHierarchy :: public float[] codebook(int);",
+              "com.synexia.precompute.MIndexNcmHierarchy :: public int[] encode(float[], int);",
+              "com.synexia.precompute.MIndexNcmHierarchy :: public int[] encode(float[], int, com.synexia.precompute.MIndexNcmOps$Budget, com.synexia.precompute.MIndexNcmOps$Cancellation);",
+              "com.synexia.precompute.MIndexNcmHierarchy :: public float[] decode(int[], int);",
+              "com.synexia.precompute.MIndexNcmHierarchy :: public float[] decode(int[], int, com.synexia.precompute.MIndexNcmOps$Budget, com.synexia.precompute.MIndexNcmOps$Cancellation);",
+              "com.synexia.precompute.MIndexNcmHierarchy :: public float[] decodePrefix(int[], int, int);",
+              "com.synexia.precompute.MIndexNcmHierarchy :: public float[] decodePrefix(int[], int, int, com.synexia.precompute.MIndexNcmOps$Budget, com.synexia.precompute.MIndexNcmOps$Cancellation);",
+              "com.synexia.precompute.MIndexNcmHierarchy :: public float[] nextCondition(int[], int, int);",
+              "com.synexia.precompute.MIndexNcmHierarchy :: public float[] nextCondition(int[], int, int, com.synexia.precompute.MIndexNcmOps$Budget, com.synexia.precompute.MIndexNcmOps$Cancellation);"
+            ],
+            "sha256": "45b56fa05852abb6750d3a1adde61b6c2fa97a2e0627f0fd8891d2c67433b3f7",
+            "git_blob_sha1": "3ab7ec2e4e27b852a5f2333083548b6645ada06e",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "visibility": "public"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/llm/src/main/java/jdk/m3/llm/projection/M3NcmHierarchy.java",
+            "symbol": "jdk.m3.llm.projection.M3NcmHierarchy",
+            "signatures": [
+              "jdk.m3.llm.projection.M3NcmHierarchy :: public jdk.m3.llm.projection.M3NcmHierarchy(java.lang.String, int, int[], float[][]);",
+              "jdk.m3.llm.projection.M3NcmHierarchy :: public jdk.m3.llm.projection.M3NcmHierarchy(java.lang.String, int, int[], float[][], float[][], float[][], float[], jdk.m3.llm.projection.M3NcmOps$Budget);",
+              "jdk.m3.llm.projection.M3NcmHierarchy :: public java.lang.String profile();",
+              "jdk.m3.llm.projection.M3NcmHierarchy :: public java.lang.String modelVersion();",
+              "jdk.m3.llm.projection.M3NcmHierarchy :: public int channels();",
+              "jdk.m3.llm.projection.M3NcmHierarchy :: public int levelCount();",
+              "jdk.m3.llm.projection.M3NcmHierarchy :: public int fullLength();",
+              "jdk.m3.llm.projection.M3NcmHierarchy :: public int totalCodes();",
+              "jdk.m3.llm.projection.M3NcmHierarchy :: public int vocabularySize(int);",
+              "jdk.m3.llm.projection.M3NcmHierarchy :: public int[] levelLengths();",
+              "jdk.m3.llm.projection.M3NcmHierarchy :: public int[] prefixOffsets();",
+              "jdk.m3.llm.projection.M3NcmHierarchy :: public java.lang.String fingerprint();",
+              "jdk.m3.llm.projection.M3NcmHierarchy :: public float[] codebook(int);",
+              "jdk.m3.llm.projection.M3NcmHierarchy :: public int[] encode(float[], int);",
+              "jdk.m3.llm.projection.M3NcmHierarchy :: public int[] encode(float[], int, jdk.m3.llm.projection.M3NcmOps$Budget, jdk.m3.llm.projection.M3NcmOps$Cancellation);",
+              "jdk.m3.llm.projection.M3NcmHierarchy :: public float[] decode(int[], int);",
+              "jdk.m3.llm.projection.M3NcmHierarchy :: public float[] decode(int[], int, jdk.m3.llm.projection.M3NcmOps$Budget, jdk.m3.llm.projection.M3NcmOps$Cancellation);",
+              "jdk.m3.llm.projection.M3NcmHierarchy :: public float[] decodePrefix(int[], int, int);",
+              "jdk.m3.llm.projection.M3NcmHierarchy :: public float[] decodePrefix(int[], int, int, jdk.m3.llm.projection.M3NcmOps$Budget, jdk.m3.llm.projection.M3NcmOps$Cancellation);",
+              "jdk.m3.llm.projection.M3NcmHierarchy :: public float[] nextCondition(int[], int, int);",
+              "jdk.m3.llm.projection.M3NcmHierarchy :: public float[] nextCondition(int[], int, int, jdk.m3.llm.projection.M3NcmOps$Budget, jdk.m3.llm.projection.M3NcmOps$Cancellation);"
+            ],
+            "sha256": "41fac02eb3b46c7136e3c520436471609995d9b86dafa5d7dc4c2befbcde3708",
+            "git_blob_sha1": "c2fd6e371bb2e692ac36860e9beb93d3d1c06452",
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "visibility": "public"
+          }
+        ],
+        "owner": "Portable semantics and recipe custody remain hsoliwal/com.synexia; M3JDK21 owns jdk.m3.llm.projection.M3NcmHierarchy, its target ABI, packaging and final product admission. Caller-owned exact text is not replaced.",
+        "identity": {
+          "namespace": "Application semantic projection in the existing jdk.m3.llm module; no java.lang.String companion declaration or Java SE replacement authority.",
+          "generation": "Exact model/backend/schema/source/context hashes and immutable numeric state determine validity where applicable. Learned codes and probabilities never establish exact String equality."
+        },
+        "contract": {
+          "differences": [
+            "Immutable supplied residual hierarchy with separate codebooks per level, versioned fingerprint, exact level offsets, prefix decode and next-level conditioning. Scalar AREA_LINEAR_RVQ_V1 is an explicit implementation profile rather than a full PyTorch model claim.",
+            "Canonical package/type names are lowered from com.synexia.precompute.MIndex* to jdk.m3.llm.projection.M3*. Existing exported projection package and module ownership are reused.",
+            "Private MIndex engine/catalogue/facet integrations remain private. No per-token graph, new String payload/field, alternate text store or Synexia runtime dependency is introduced."
+          ],
+          "compatibility_obligations": [
+            "Preserve exact UTF-16 identity, complete numerical distributions, defensive-copy ownership, finite-value refusals and documented resource/cancellation boundaries.",
+            "Do not infer semantic certainty, canonical text equivalence, decision authority or substitution authority from these results.",
+            "Retain donor/source license notices; source-built installed-JDK, platform/native lifetime and matched performance/memory qualification remain separate gates.",
+            "Do not advance any full-borrow phase or String/arrays receiving gate. Chrome local AI generation was NOT_INVOKED and new-source promotion remains HOLD."
+          ],
+          "public_surface": [
+            "jdk.m3.llm.projection.M3NcmHierarchy"
+          ]
+        },
+        "format": {
+          "schema": "AREA_LINEAR_RVQ_V1 hierarchy fingerprint binds version, sizes, codebooks and all supplied transforms using exact raw FP32 lanes.",
+          "abi": "Additive application-facing Java 21 API; no new JNI or Java SE ABI replacement.",
+          "bootstrap": "Optional existing jdk.m3.llm module; no java.base initialization, String field, VM intrinsic or automatic model load is added."
+        },
+        "dependencies": [
+          {
+            "id": "m3.llm.ncm-ops",
+            "resolution": "resolved",
+            "reason": "Exact companion component candidate is emitted and source-sealed in this same existing module; product admission remains pending."
+          }
+        ],
+        "materialization": {
+          "admission": "REVIEW_CANDIDATE_ONLY; installed-JDK and new-source promotion HOLD; caller explicitly requests evaluation or numerical operations.",
+          "joins": "All joins must retain the exact declared identity and hierarchy/model generation. Equal lossy codes or probabilities do not authorize text, owner or context substitution.",
+          "outputs": "Immutable model tensors belong to the hierarchy; returned local code IDs and reconstruction tensors are owned primitive arrays.",
+          "cached_facts": "No global model cache or token graph is introduced. Callers own result retention; sidecar physical storage claims count independent allocations independently."
+        },
+        "recipe": {
+          "id": "m3-jev-ncm-public-java-20261114",
+          "version": "20261114",
+          "path": null,
+          "sha256": null,
+          "canonical_repository": "hsoliwal/com.synexia",
+          "canonical_path": "synexia-openrewrite-recipes/crates/m3-jev-ncm-20261114",
+          "preconditions": [
+            "Use the exact reviewed Java pre/postimage hashes and actual OpenRewrite SDK execution.",
+            "The paired m3-jev-ncm-public-text-20261114 recipe owns JNI/build/license postimages; all existing preimages must match.",
+            "No recipes, runners or recipe memory are copied into the public receiver."
+          ],
+          "rollback": "Revert this additive component and its paired generated build/metadata changes together; do not change unrelated queued owners or full-borrow phase records."
+        },
+        "tests": [
+          {
+            "id": "m3.llm.jev-ncm.component-20261114",
+            "receipt": "m3/llm/JEV_NCM_RECEIVER_RECEIPT.json"
+          }
+        ],
+        "provenance": {
+          "license": "MIT",
+          "publication": "Public result-only component candidate from the canonical private recipe; exact emitted files and retained notices are listed in m3/llm/JEV_NCM_PROVENANCE.json.",
+          "copied_code": true,
+          "donor_boundary": "NCM numerical translation derives from HazyResearch/ncm models/quant.py and models/next_concept.py at c70274273f489abc73832b2b98584a8483b6b203. Preserve donor MIT notices. No model weights, tokenizer, training corpus, PyTorch runtime or full NCM inference implementation is shipped."
+        },
+        "sync": {
+          "source_revision": "d7564cadc43864f0c9c94a7129b2e0fdfa089218",
+          "target_revision": null,
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Explicit target package and type names; use existing jdk.m3.llm projection export."
+          ],
+          "pending": [
+            "Review exact target component receipts before integration.",
+            "Installed source-built M3JDK, live-model, platform and performance/memory admission are not established.",
+            "Chrome local AI generation NOT_INVOKED; new-source promotion HOLD."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "experimental"
+      },
+      {
+        "id": "m3.llm.ncm-native-ops",
+        "kind": "adapter",
+        "status": "implemented-tested",
+        "reason": "Canonical SDK emitted and hash-verified this additive component candidate; Java 21 and C17/C++20 JNI component suites passed. Installed source-built M3JDK and new-source promotion remain HOLD. Optional coarse CPU JNI operations mirror the Java numerical owner. JAVA, AUTO and NATIVE_REQUIRED are observable; required mode refuses an absent ABI. Public loading uses target-local m3_llm_ncm, with no Synexia loader or runtime artifact.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "d7564cadc43864f0c9c94a7129b2e0fdfa089218",
+            "module": "synexia-index-precompute",
+            "path": "synexia-index-precompute/src/main/java/com/synexia/precompute/MIndexNcmNativeOps.java",
+            "symbol": "com.synexia.precompute.MIndexNcmNativeOps",
+            "signatures": [
+              "com.synexia.precompute.MIndexNcmNativeOps :: public static boolean available();",
+              "com.synexia.precompute.MIndexNcmNativeOps :: public static int[] nearest(float[], int, float[], com.synexia.precompute.MIndexNcmNativeOps$Mode);",
+              "com.synexia.precompute.MIndexNcmNativeOps :: public static float[] areaResize(float[], int, int, int, int, com.synexia.precompute.MIndexNcmNativeOps$Mode);",
+              "com.synexia.precompute.MIndexNcmNativeOps :: public static float[] linearResize(float[], int, int, int, int, com.synexia.precompute.MIndexNcmNativeOps$Mode);",
+              "com.synexia.precompute.MIndexNcmNativeOps :: public static float[] phi(float[], int, int, int, float[], float[], float, com.synexia.precompute.MIndexNcmNativeOps$Mode);",
+              "com.synexia.precompute.MIndexNcmNativeOps :: public static float[] tiedLogits(float[], int, float[], float, float[], com.synexia.precompute.MIndexNcmNativeOps$Mode);",
+              "com.synexia.precompute.MIndexNcmNativeOps$Mode :: public static final com.synexia.precompute.MIndexNcmNativeOps$Mode JAVA;",
+              "com.synexia.precompute.MIndexNcmNativeOps$Mode :: public static final com.synexia.precompute.MIndexNcmNativeOps$Mode AUTO;",
+              "com.synexia.precompute.MIndexNcmNativeOps$Mode :: public static final com.synexia.precompute.MIndexNcmNativeOps$Mode NATIVE_REQUIRED;",
+              "com.synexia.precompute.MIndexNcmNativeOps$Mode :: public static com.synexia.precompute.MIndexNcmNativeOps$Mode[] values();",
+              "com.synexia.precompute.MIndexNcmNativeOps$Mode :: public static com.synexia.precompute.MIndexNcmNativeOps$Mode valueOf(java.lang.String);"
+            ],
+            "sha256": "bc550362dd3a1a22b7be8969cdf39568e4542c1e5101b0a3520a07509fa19eb3",
+            "git_blob_sha1": "87b67b143a74904e3fd7eec232252590a0e8303d",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "visibility": "public"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "d7564cadc43864f0c9c94a7129b2e0fdfa089218",
+            "module": "synexia-index-precompute",
+            "path": "synexia-index-precompute/native/src/ncm_jni.c",
+            "symbol": null,
+            "signatures": [],
+            "sha256": "b307d48fcf1735ee3d05c7629ee1f9fc557006649bdd39e997aa704ab21b752f",
+            "git_blob_sha1": "bfe4378e43547db3374e52af502fa527917b2085",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/llm/src/main/java/jdk/m3/llm/projection/M3NcmNativeOps.java",
+            "symbol": "jdk.m3.llm.projection.M3NcmNativeOps",
+            "signatures": [
+              "jdk.m3.llm.projection.M3NcmNativeOps :: public static boolean available();",
+              "jdk.m3.llm.projection.M3NcmNativeOps :: public static int[] nearest(float[], int, float[], jdk.m3.llm.projection.M3NcmNativeOps$Mode);",
+              "jdk.m3.llm.projection.M3NcmNativeOps :: public static float[] areaResize(float[], int, int, int, int, jdk.m3.llm.projection.M3NcmNativeOps$Mode);",
+              "jdk.m3.llm.projection.M3NcmNativeOps :: public static float[] linearResize(float[], int, int, int, int, jdk.m3.llm.projection.M3NcmNativeOps$Mode);",
+              "jdk.m3.llm.projection.M3NcmNativeOps :: public static float[] phi(float[], int, int, int, float[], float[], float, jdk.m3.llm.projection.M3NcmNativeOps$Mode);",
+              "jdk.m3.llm.projection.M3NcmNativeOps :: public static float[] tiedLogits(float[], int, float[], float, float[], jdk.m3.llm.projection.M3NcmNativeOps$Mode);",
+              "jdk.m3.llm.projection.M3NcmNativeOps$Mode :: public static final jdk.m3.llm.projection.M3NcmNativeOps$Mode JAVA;",
+              "jdk.m3.llm.projection.M3NcmNativeOps$Mode :: public static final jdk.m3.llm.projection.M3NcmNativeOps$Mode AUTO;",
+              "jdk.m3.llm.projection.M3NcmNativeOps$Mode :: public static final jdk.m3.llm.projection.M3NcmNativeOps$Mode NATIVE_REQUIRED;",
+              "jdk.m3.llm.projection.M3NcmNativeOps$Mode :: public static jdk.m3.llm.projection.M3NcmNativeOps$Mode[] values();",
+              "jdk.m3.llm.projection.M3NcmNativeOps$Mode :: public static jdk.m3.llm.projection.M3NcmNativeOps$Mode valueOf(java.lang.String);"
+            ],
+            "sha256": "b6bacbd249535ab560c5cf48c6b74471c8d7c08c7ec872120f02531413d1fe17",
+            "git_blob_sha1": "275a7e71b6472e5ef5cf0aff2e93247b3440b05e",
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "visibility": "public"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/llm/native/ncm_jni.c",
+            "symbol": null,
+            "signatures": [],
+            "sha256": "2147a95b1e93a9d6c23fa9732c71f47fca7449901c8d2545ea499cb85b0cfd6b",
+            "git_blob_sha1": "c3468b7377fe192603edfd41a8ec8b9b6fca44cf",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "Portable semantics and recipe custody remain hsoliwal/com.synexia; M3JDK21 owns jdk.m3.llm.projection.M3NcmNativeOps, its target ABI, packaging and final product admission. Caller-owned exact text is not replaced.",
+        "identity": {
+          "namespace": "Application semantic projection in the existing jdk.m3.llm module; no java.lang.String companion declaration or Java SE replacement authority.",
+          "generation": "Exact model/backend/schema/source/context hashes and immutable numeric state determine validity where applicable. Learned codes and probabilities never establish exact String equality."
+        },
+        "contract": {
+          "differences": [
+            "Optional coarse CPU JNI operations mirror the Java numerical owner. JAVA, AUTO and NATIVE_REQUIRED are observable; required mode refuses an absent ABI. Public loading uses target-local m3_llm_ncm, with no Synexia loader or runtime artifact.",
+            "Canonical package/type names are lowered from com.synexia.precompute.MIndex* to jdk.m3.llm.projection.M3*. Existing exported projection package and module ownership are reused.",
+            "Private MIndex engine/catalogue/facet integrations remain private. No per-token graph, new String payload/field, alternate text store or Synexia runtime dependency is introduced."
+          ],
+          "compatibility_obligations": [
+            "Preserve exact UTF-16 identity, complete numerical distributions, defensive-copy ownership, finite-value refusals and documented resource/cancellation boundaries.",
+            "Do not infer semantic certainty, canonical text equivalence, decision authority or substitution authority from these results.",
+            "Retain donor/source license notices; source-built installed-JDK, platform/native lifetime and matched performance/memory qualification remain separate gates.",
+            "Do not advance any full-borrow phase or String/arrays receiving gate. Chrome local AI generation was NOT_INVOKED and new-source promotion remains HOLD."
+          ],
+          "public_surface": [
+            "jdk.m3.llm.projection.M3NcmNativeOps",
+            "jdk.m3.llm.projection.M3NcmNativeOps.Mode"
+          ]
+        },
+        "format": {
+          "schema": "JNI numerical ABI 1; target symbols Java_jdk_m3_llm_projection_M3NcmNativeOps_*; no retained native pointer ABI.",
+          "abi": "Additive application-facing Java 21 API; JNI numerical ABI 1.",
+          "bootstrap": "Optional existing jdk.m3.llm module; no java.base initialization, String field, VM intrinsic or automatic model load is added."
+        },
+        "dependencies": [
+          {
+            "id": "m3.llm.ncm-ops",
+            "resolution": "resolved",
+            "reason": "Exact companion component candidate is emitted and source-sealed in this same existing module; product admission remains pending."
+          }
+        ],
+        "materialization": {
+          "admission": "REVIEW_CANDIDATE_ONLY; installed-JDK and new-source promotion HOLD; caller explicitly requests evaluation or numerical operations.",
+          "joins": "All joins must retain the exact declared identity and hierarchy/model generation. Equal lossy codes or probabilities do not authorize text, owner or context substitution.",
+          "outputs": "Each JNI call releases borrowed arrays and frees temporary allocations. Java dimension/work admission is distinct from VM-dependent peak memory including JNI copies and scratch/result overlap.",
+          "cached_facts": "No global model cache or token graph is introduced. Callers own result retention; sidecar physical storage claims count independent allocations independently."
+        },
+        "recipe": {
+          "id": "m3-jev-ncm-public-java-20261114",
+          "version": "20261114",
+          "path": null,
+          "sha256": null,
+          "canonical_repository": "hsoliwal/com.synexia",
+          "canonical_path": "synexia-openrewrite-recipes/crates/m3-jev-ncm-20261114",
+          "preconditions": [
+            "Use the exact reviewed Java pre/postimage hashes and actual OpenRewrite SDK execution.",
+            "The paired m3-jev-ncm-public-text-20261114 recipe owns JNI/build/license postimages; all existing preimages must match.",
+            "No recipes, runners or recipe memory are copied into the public receiver."
+          ],
+          "rollback": "Revert this additive component and its paired generated build/metadata changes together; do not change unrelated queued owners or full-borrow phase records."
+        },
+        "tests": [
+          {
+            "id": "m3.llm.jev-ncm.component-20261114",
+            "receipt": "m3/llm/JEV_NCM_RECEIVER_RECEIPT.json"
+          }
+        ],
+        "provenance": {
+          "license": "Apache-2.0 AND MIT",
+          "publication": "Public result-only component candidate from the canonical private recipe; exact emitted files and retained notices are listed in m3/llm/JEV_NCM_PROVENANCE.json.",
+          "copied_code": true,
+          "donor_boundary": "NCM numerical translation derives from HazyResearch/ncm models/quant.py and models/next_concept.py at c70274273f489abc73832b2b98584a8483b6b203. Preserve donor MIT notices. No model weights, tokenizer, training corpus, PyTorch runtime or full NCM inference implementation is shipped."
+        },
+        "sync": {
+          "source_revision": "d7564cadc43864f0c9c94a7129b2e0fdfa089218",
+          "target_revision": null,
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Explicit target package and type names; use existing jdk.m3.llm projection export.",
+            "Target-local library m3_llm_ncm and JNI symbols; disabled/absent feature is observable."
+          ],
+          "pending": [
+            "Review exact target component receipts before integration.",
+            "Installed source-built M3JDK, live-model, platform and performance/memory admission are not established.",
+            "Chrome local AI generation NOT_INVOKED; new-source promotion HOLD."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "experimental"
+      },
+      {
+        "id": "m3.llm.ncm-sidecar",
+        "kind": "specialization",
+        "status": "implemented-tested",
+        "reason": "Canonical SDK emitted and hash-verified this additive component candidate; Java 21 and C17/C++20 JNI component suites passed. Installed source-built M3JDK and new-source promotion remain HOLD. A bounded data-only learned-code sidecar binds exact source/context identity and hierarchy fingerprint. It validates local code IDs, returns defensive copies and refuses stale or malformed serialized envelopes. Physical storage claims distinguish separate equal allocations.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "d7564cadc43864f0c9c94a7129b2e0fdfa089218",
+            "module": "synexia-index-precompute",
+            "path": "synexia-index-precompute/src/main/java/com/synexia/precompute/MIndexNcmSidecar.java",
+            "symbol": "com.synexia.precompute.MIndexNcmSidecar",
+            "signatures": [
+              "com.synexia.precompute.MIndexNcmSidecar :: public static com.synexia.precompute.MIndexNcmSidecar of(com.synexia.precompute.MIndexSemanticIdentity, com.synexia.precompute.MIndexNcmHierarchy, int[], int);",
+              "com.synexia.precompute.MIndexNcmSidecar :: public com.synexia.precompute.MIndexSemanticIdentity identity();",
+              "com.synexia.precompute.MIndexNcmSidecar :: public java.lang.String hierarchyRoot();",
+              "com.synexia.precompute.MIndexNcmSidecar :: public java.lang.String rootHash();",
+              "com.synexia.precompute.MIndexNcmSidecar :: public java.lang.String storageKey();",
+              "com.synexia.precompute.MIndexNcmSidecar :: public int batch();",
+              "com.synexia.precompute.MIndexNcmSidecar :: public int[] codes();",
+              "com.synexia.precompute.MIndexNcmSidecar :: public int[] prefixOffsets();",
+              "com.synexia.precompute.MIndexNcmSidecar :: public long retainedBytes();",
+              "com.synexia.precompute.MIndexNcmSidecar :: public int codeAt(int, int, int);",
+              "com.synexia.precompute.MIndexNcmSidecar :: public boolean matches(com.synexia.precompute.MIndexSemanticIdentity, com.synexia.precompute.MIndexNcmHierarchy);",
+              "com.synexia.precompute.MIndexNcmSidecar :: public float[] decode(com.synexia.precompute.MIndexNcmHierarchy);",
+              "com.synexia.precompute.MIndexNcmSidecar :: public byte[] toBytes();",
+              "com.synexia.precompute.MIndexNcmSidecar :: public byte[] toBytes(int);",
+              "com.synexia.precompute.MIndexNcmSidecar :: public static com.synexia.precompute.MIndexNcmSidecar fromBytes(com.synexia.precompute.MIndexSemanticIdentity, com.synexia.precompute.MIndexNcmHierarchy, byte[]);"
+            ],
+            "sha256": "80c1b369238905e86c3b770b56985f6d4ee846c73b7dcd11129e73ff0a36944c",
+            "git_blob_sha1": "604d44fd4e8a473d1807997b4a97d1b675b7e4ce",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "visibility": "public"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/llm/src/main/java/jdk/m3/llm/projection/M3NcmSidecar.java",
+            "symbol": "jdk.m3.llm.projection.M3NcmSidecar",
+            "signatures": [
+              "jdk.m3.llm.projection.M3NcmSidecar :: public static jdk.m3.llm.projection.M3NcmSidecar of(jdk.m3.llm.projection.M3SemanticIdentity, jdk.m3.llm.projection.M3NcmHierarchy, int[], int);",
+              "jdk.m3.llm.projection.M3NcmSidecar :: public jdk.m3.llm.projection.M3SemanticIdentity identity();",
+              "jdk.m3.llm.projection.M3NcmSidecar :: public java.lang.String hierarchyRoot();",
+              "jdk.m3.llm.projection.M3NcmSidecar :: public java.lang.String rootHash();",
+              "jdk.m3.llm.projection.M3NcmSidecar :: public java.lang.String storageKey();",
+              "jdk.m3.llm.projection.M3NcmSidecar :: public int batch();",
+              "jdk.m3.llm.projection.M3NcmSidecar :: public int[] codes();",
+              "jdk.m3.llm.projection.M3NcmSidecar :: public int[] prefixOffsets();",
+              "jdk.m3.llm.projection.M3NcmSidecar :: public long retainedBytes();",
+              "jdk.m3.llm.projection.M3NcmSidecar :: public int codeAt(int, int, int);",
+              "jdk.m3.llm.projection.M3NcmSidecar :: public boolean matches(jdk.m3.llm.projection.M3SemanticIdentity, jdk.m3.llm.projection.M3NcmHierarchy);",
+              "jdk.m3.llm.projection.M3NcmSidecar :: public float[] decode(jdk.m3.llm.projection.M3NcmHierarchy);",
+              "jdk.m3.llm.projection.M3NcmSidecar :: public byte[] toBytes();",
+              "jdk.m3.llm.projection.M3NcmSidecar :: public byte[] toBytes(int);",
+              "jdk.m3.llm.projection.M3NcmSidecar :: public static jdk.m3.llm.projection.M3NcmSidecar fromBytes(jdk.m3.llm.projection.M3SemanticIdentity, jdk.m3.llm.projection.M3NcmHierarchy, byte[]);"
+            ],
+            "sha256": "cbfaa05ecdde6501472eba8eb9a5405a362b29f0db8c7a040336339014485f4f",
+            "git_blob_sha1": "7a403b4f4bc1e43e0e9defd8044dbe966808bde3",
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "visibility": "public"
+          }
+        ],
+        "owner": "Portable semantics and recipe custody remain hsoliwal/com.synexia; M3JDK21 owns jdk.m3.llm.projection.M3NcmSidecar, its target ABI, packaging and final product admission. Caller-owned exact text is not replaced.",
+        "identity": {
+          "namespace": "Application semantic projection in the existing jdk.m3.llm module; no java.lang.String companion declaration or Java SE replacement authority.",
+          "generation": "Exact model/backend/schema/source/context hashes and immutable numeric state determine validity where applicable. Learned codes and probabilities never establish exact String equality."
+        },
+        "contract": {
+          "differences": [
+            "A bounded data-only learned-code sidecar binds exact source/context identity and hierarchy fingerprint. It validates local code IDs, returns defensive copies and refuses stale or malformed serialized envelopes. Physical storage claims distinguish separate equal allocations.",
+            "Canonical package/type names are lowered from com.synexia.precompute.MIndex* to jdk.m3.llm.projection.M3*. Existing exported projection package and module ownership are reused.",
+            "Private MIndex engine/catalogue/facet integrations remain private. No per-token graph, new String payload/field, alternate text store or Synexia runtime dependency is introduced."
+          ],
+          "compatibility_obligations": [
+            "Preserve exact UTF-16 identity, complete numerical distributions, defensive-copy ownership, finite-value refusals and documented resource/cancellation boundaries.",
+            "Do not infer semantic certainty, canonical text equivalence, decision authority or substitution authority from these results.",
+            "Retain donor/source license notices; source-built installed-JDK, platform/native lifetime and matched performance/memory qualification remain separate gates.",
+            "Do not advance any full-borrow phase or String/arrays receiving gate. Chrome local AI generation was NOT_INVOKED and new-source promotion remains HOLD."
+          ],
+          "public_surface": [
+            "jdk.m3.llm.projection.M3NcmSidecar"
+          ]
+        },
+        "format": {
+          "schema": "NCM sidecar envelope magic 0x4e434d53, version 1, big endian, 112-byte header, SHA-256 integrity root and bounded int code lanes.",
+          "abi": "Additive application-facing Java 21 API; no new JNI or Java SE ABI replacement.",
+          "bootstrap": "Optional existing jdk.m3.llm module; no java.base initialization, String field, VM intrinsic or automatic model load is added."
+        },
+        "dependencies": [
+          {
+            "id": "m3.llm.semantic-identity",
+            "resolution": "resolved",
+            "reason": "Exact companion component candidate is emitted and source-sealed in this same existing module; product admission remains pending."
+          },
+          {
+            "id": "m3.llm.ncm-hierarchy",
+            "resolution": "resolved",
+            "reason": "Exact companion component candidate is emitted and source-sealed in this same existing module; product admission remains pending."
+          }
+        ],
+        "materialization": {
+          "admission": "REVIEW_CANDIDATE_ONLY; installed-JDK and new-source promotion HOLD; caller explicitly requests evaluation or numerical operations.",
+          "joins": "All joins must retain the exact declared identity and hierarchy/model generation. Equal lossy codes or probabilities do not authorize text, owner or context substitution.",
+          "outputs": "Hashes, ranges, level metadata and owned int codes only; no original text, model tensors or native pointer retained.",
+          "cached_facts": "No global model cache or token graph is introduced. Callers own result retention; sidecar physical storage claims count independent allocations independently."
+        },
+        "recipe": {
+          "id": "m3-jev-ncm-public-java-20261114",
+          "version": "20261114",
+          "path": null,
+          "sha256": null,
+          "canonical_repository": "hsoliwal/com.synexia",
+          "canonical_path": "synexia-openrewrite-recipes/crates/m3-jev-ncm-20261114",
+          "preconditions": [
+            "Use the exact reviewed Java pre/postimage hashes and actual OpenRewrite SDK execution.",
+            "The paired m3-jev-ncm-public-text-20261114 recipe owns JNI/build/license postimages; all existing preimages must match.",
+            "No recipes, runners or recipe memory are copied into the public receiver."
+          ],
+          "rollback": "Revert this additive component and its paired generated build/metadata changes together; do not change unrelated queued owners or full-borrow phase records."
+        },
+        "tests": [
+          {
+            "id": "m3.llm.jev-ncm.component-20261114",
+            "receipt": "m3/llm/JEV_NCM_RECEIVER_RECEIPT.json"
+          }
+        ],
+        "provenance": {
+          "license": "Apache-2.0",
+          "publication": "Public result-only component candidate from the canonical private recipe; exact emitted files and retained notices are listed in m3/llm/JEV_NCM_PROVENANCE.json.",
+          "copied_code": true,
+          "donor_boundary": "Portable Synexia canonical source. Jev-style result shapes are an abstract API reference; no Jev source, weights, model, tokenizer, training or service was copied."
+        },
+        "sync": {
+          "source_revision": "d7564cadc43864f0c9c94a7129b2e0fdfa089218",
+          "target_revision": null,
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Explicit target package and type names; use existing jdk.m3.llm projection export."
+          ],
+          "pending": [
+            "Review exact target component receipts before integration.",
+            "Installed source-built M3JDK, live-model, platform and performance/memory admission are not established.",
+            "Chrome local AI generation NOT_INVOKED; new-source promotion HOLD."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "experimental"
       }
     ]
   },

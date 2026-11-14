@@ -1,0 +1,214 @@
+{
+  "schema": "M3_LLM_JEV_NCM_RECEIVER_V1",
+  "status": "COMPONENT_CANDIDATE_PRODUCT_ADMISSION_HOLD",
+  "source_repository": "hsoliwal/com.synexia",
+  "source_commit": "d7564cadc43864f0c9c94a7129b2e0fdfa089218",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_base": "ab6ef923dca4d32e1f003db71a800138911b5ffa",
+  "module": "jdk.m3.llm",
+  "package": "jdk.m3.llm.projection",
+  "provenance": "m3/llm/JEV_NCM_PROVENANCE.json",
+  "canonical_recipe_path": "synexia-openrewrite-recipes/crates/m3-jev-ncm-20261114",
+  "verification": {
+    "java_toolchain": "Temurin 21.0.13+9",
+    "java_language_release": 21,
+    "actual_canonical_sdk": {
+      "status": "PASS",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "postimages_exact": 40,
+      "fixed_point_and_refusal": "PASS"
+    },
+    "observed_public_junit_reports": {
+      "status": "PASS",
+      "tests": 84,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "run_mode": "JAVA_WITH_NATIVE_EXPLICITLY_DISABLED",
+      "suites": [
+        {
+          "suite": "jdk.m3.llm.chrome.ChromeBuiltInAiAdaptersTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report_sha256": "7af3c1a7ea203bbc66ab05ef9603e918050fc65ea94b554f4142b28805f99aaf"
+        },
+        {
+          "suite": "jdk.m3.llm.chrome.ChromeMlTaskServiceMigrationTest",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report_sha256": "77eba7a6be22a8febe9386244f4307e297fca6eab23c9312140a520a6d15ae7d"
+        },
+        {
+          "suite": "jdk.m3.llm.chrome.ReceivedContractTest",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report_sha256": "baacc4fbd83f44859e3ef1593e3fdebd4f8810eeccc7c55ad362249522fc0bc3"
+        },
+        {
+          "suite": "jdk.m3.llm.evidence.BrowserSummaryTreeCandidateProviderTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report_sha256": "df73f5229fab7e8c2740b9fdce2effeb048902ffb468fca9310e4050a8577ef3"
+        },
+        {
+          "suite": "jdk.m3.llm.evidence.ChromeBrowserSummarizerCandidateProviderTest",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report_sha256": "381591a1e97814742c8c7ed3b20b05c184445695c6497ecc7fa17ee943d90057"
+        },
+        {
+          "suite": "jdk.m3.llm.evidence.MixedModeSummaryConsolidatorTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report_sha256": "c465c0bf4fff2ca11d23b497cd25974c728ede4ac4db4e9d18263f2ad078b486"
+        },
+        {
+          "suite": "jdk.m3.llm.internal.CanonicalJsonGrammarRegressionTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report_sha256": "fcdcf62cd5e40ad0ab62a65c774c7130d971533e3b46eb287675147e21818d82"
+        },
+        {
+          "suite": "jdk.m3.llm.projection.ExtractiveProjectionTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report_sha256": "93cb2c46464038cc82d3a4a8635d756b9afe5ebac42a20aeb09325196256cc3b"
+        },
+        {
+          "suite": "jdk.m3.llm.projection.M3NcmNativeOpsTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report_sha256": "218d5fbe04c814751961dbffdde6ed04bbb9307bfa005415db09f5085546fbcb"
+        },
+        {
+          "suite": "jdk.m3.llm.projection.M3NcmOpsTest",
+          "tests": 25,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report_sha256": "d1adc58b6cbe4b3b49770a5b5b22959981a20b42dae813a0bfed92c2ec3b5176"
+        },
+        {
+          "suite": "jdk.m3.llm.projection.M3NcmSidecarTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report_sha256": "565ac3bc5420f9038866b6dcf0f24caf4ba6a7e3cdc6400488acc245f70abb0d"
+        },
+        {
+          "suite": "jdk.m3.llm.projection.M3SemanticIdentityTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report_sha256": "7009c8d8e456f7a4d8bca0d5b443bbcd735568d6d3edd10dca7062244572cd8f"
+        },
+        {
+          "suite": "jdk.m3.llm.projection.M3SystemOneBatchTest",
+          "tests": 14,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report_sha256": "ab6fe021098400c771c4f9bfd060b62308be307a80169c9e7d95363a62b15a16"
+        }
+      ]
+    },
+    "semantic_identity_contract_groups": 11,
+    "typed_batch_contract_tests": 14,
+    "target_maven_verify": {
+      "status": "PASS",
+      "tests": 84,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "native_disabled": true,
+      "argLine": "-Dm3.llm.ncm.disableNative=true",
+      "evidence_log_sha256": "9f26718758a5ee103a178dbc9d7f12d52cc379fa186480d23cab8c5c0c749e3e"
+    },
+    "target_native_c17_and_cpp20": {
+      "status": "PASS",
+      "platform": "Linux x86_64",
+      "modes": [
+        {
+          "language": "C17",
+          "tests": 84,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "language": "C++20",
+          "tests": 84,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "jni_checks": "-Xcheck:jni; NATIVE_REQUIRED asserted available",
+      "floating_point": "-fno-fast-math -ffp-contract=off",
+      "strict_compile": "-Wall -Wextra -Werror -Wconversion -Wshadow -Wpedantic; generated JNI header included",
+      "evidence_log_sha256": "9b76e7bb0eb9455be560f83a133bf7d7577bca20ea07646dccfa05200113b7c8"
+    },
+    "target_name_contract": {
+      "status": "PASS",
+      "queued_operations": 4,
+      "qualified_jdk_promotions": 0,
+      "checker_modified": false,
+      "scope": "Unchanged official checker executed in the actual public receiver checkout after passive metadata application.",
+      "evidence_sha256": "ab5694754665e8bd006829419fd9ce8bdf59e843414168a19e2815feb5743be9"
+    },
+    "full_borrow_receiver": "HISTORY_UNAVAILABLE",
+    "source_built_m3jdk_image": "NOT_RUN",
+    "live_model_or_jev_execution": "NOT_RUN",
+    "chrome_local_ai_generation": "NOT_INVOKED",
+    "windows_or_other_cpu_architecture": "NOT_RUN",
+    "matched_performance_and_peak_memory": "NOT_MEASURED",
+    "name_mapping_schema": "PASS"
+  },
+  "scope": {
+    "input_ownership": "Caller-owned exact immutable text; source/context identity is hash-bound without retaining spelling.",
+    "results": "Complete typed probability distributions and model-bound numeric code sidecars; no decision/substitution authority.",
+    "native_memory": "No retained JNI allocations or global references. Java dimensions/work bounds do not account for all VM-dependent peak native memory or array-copy overlap.",
+    "cancellation": "Cooperative backend/worker cancellation only; no forced termination or hard deadline claim.",
+    "model_provenance": "Model/backend identities are caller declarations, not authenticated attestations.",
+    "numerical_profile": "AREA_LINEAR_RVQ_V1 is explicit and does not claim full PyTorch bicubic or complete NCM/Jev inference equivalence."
+  },
+  "metadata_repair": {
+    "upstream_name_plan_duplicate_key": "authority_blob",
+    "old_pins": [
+      "0e46cb93d1f83a721910525563355e07f6a38c27",
+      "233bbd86d88eb16a6749b691374e22e3ca961ec9"
+    ],
+    "reviewed_map_blob": "5b56f8101b331f11910b396ea672b22102fbe9aa",
+    "operation_queue_preserved_byte_for_byte": true,
+    "checker_modified": false
+  },
+  "new_source_promotion": "HOLD",
+  "source_built_product_admission": "HOLD",
+  "receiving_sequence_advanced": false,
+  "qualified_jdk_promotions": 0,
+  "string_layout_or_payload_changed": false,
+  "source_pr": "https://github.com/hsoliwal/com.synexia/pull/17414"
+}
