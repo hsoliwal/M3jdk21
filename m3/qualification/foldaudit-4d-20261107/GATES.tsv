@@ -1,7 +1,0 @@
-# SPDX-License-Identifier: Apache-2.0
-# L0062 gates, master b93686c9c2f78ba9d89a552886b27aab84aa4de1, stock JDK 21.0.9, --patch-module java.base=<java/util/regex + jdk/internal/{mindex,m3} classes>.
-gate	command	state	evidence
-1_patch_compile	javac --patch-module java.base=<master share/classes + leaf file> Pattern.java M3PatternQuery.java	PASS	rc=0, 0 errors, master and leaf
-2_predicate_vs_matcher	RegexPredProbe 20261107 20000 and 7 20000, master vs leaf	PASS	480,000 checks per side, 0 mismatches against matcher().matches(), digests identical master vs leaf (62e0e3e4c5336e3e, 736da1664dec04d9)
-3_tail_bench	TailBench, 3 forks per side: 200 non-ASCII units then 4,000 ASCII units, two >= 8-atom plans	RECORDED	master 75-98 us/op, leaf 25-30 us/op (about 3x); results identical (sink equal)
-4_scope	compare master...head	PASS	one java.util.regex file + this directory

@@ -1,3 +1,0 @@
-date	owner	observed_precondition	correction	status
-2026-11-02	SOURCE_RECEIPT.tsv:Wave20-M3RunLengthPostingIndex.java	Draft-receiver postimage token had 62 SHA-256 digits	Replaced only recipient ledger token with 64-digit independently hashed original Synexia source	RECEIPT_CORRECTED_BEFORE_PRODUCT_WRITE
-2026-11-02	Synexia-original-Wave20-manifest	Canonical source manifest already contains correct 64-digit postimage	No change to original source recipe or donor Git blob	ORIGINAL_UNCHANGED

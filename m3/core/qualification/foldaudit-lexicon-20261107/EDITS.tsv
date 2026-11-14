@@ -1,2 +1,0 @@
-file	before_sha256	after_sha256	leaf	origin	dropping_merge	donor_blobs	rule
-m3/core/src/jdk/m3/text/M3PrecomputePayload.java	39acf405e78697e73bbb1afba6041fbe1a091d55105cb85bf413719413d45775	741dc7259cf79d6c305719fe0a18a8c084f3a8563e2af2b7c8d41a1ccb7cd08d	L0064	d58ff13e9544	b9445775f4a3	post=c6325cf501f9 pre=83f625d94819 (M3PrecomputePayload.java at d58ff13e954, #2447)	RESTORE FIELD_NAME_PATTERN: the #2447 postimage compiles the field-name expression once and validates each name with a Matcher; same regex, flags, message and API as master's String.matches line

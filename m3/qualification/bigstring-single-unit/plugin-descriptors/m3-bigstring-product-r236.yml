@@ -1,7 +1,0 @@
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.rewrite.M3BigStringSingleUnitSearchR236
-displayName: Reuse chunk summaries for M3BigString single-unit search
-description: Replay one qualified hash-pinned source atom and refuse source drift.
-recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
-      crateName: m3-bigstring-single-unit

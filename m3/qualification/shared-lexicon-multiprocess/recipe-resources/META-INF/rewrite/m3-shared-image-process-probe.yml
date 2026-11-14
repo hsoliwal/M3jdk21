@@ -1,8 +1,0 @@
-# Copyright 2026 Hitesh Soliwal, Synexia. SPDX-License-Identifier: Apache-2.0
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.SharedLexiconImageProcessProbe
-displayName: Add M3 shared lexicon image process qualification
-description: Adds the exact reviewed QA probe without replacing production owners.
-recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
-      crateName: m3-shared-image-process-probe

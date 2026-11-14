@@ -1,7 +1,0 @@
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.M3PayloadHexNibblesR235
-displayName: Replace payload Unicode formatter with fixed hex nibble emission
-description: Qualified R235 private escape atom, exact source snapshot and legacy escape/cache policy.
-recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
-      crateName: m3-payload-hex-nibbles

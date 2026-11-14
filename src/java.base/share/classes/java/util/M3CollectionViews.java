@@ -586,10 +586,7 @@ final class M3CollectionViews {
             // Every value already belongs to this detached capture. If all pass,
             // retain it instead of materializing an identity index and a second copy.
             if (accepted != values.length) {
-                int[] selected = M3CollectionMasks.selected(mask, 0, values.length);
-                Object[] kept = new Object[selected.length];
-                for (int i = 0; i < selected.length; i++) kept[i] = values[selected[i]];
-                values = kept;
+                values = M3CollectionMasks.selectedValues(mask, values, accepted);
             }
         }
         // The captured values belong exclusively to this detached snapshot.

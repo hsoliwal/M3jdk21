@@ -1,9 +1,0 @@
-gate	result	note
-javac --release 21 -Xlint:all -Werror (master atom-census contract + 7 repository classes + self-tests)	rc=0, 0 warnings	Windows JDK 21.0.9 and WSL OpenJDK 21
-javadoc --release 21 -Werror -Xdoclint:all (repository package)	rc=0	the doclint gate of verify-repository-census.sh
-M3RepositoryFileCensusSelfTest	PASS checks=34	WSL, C.UTF-8
-M3JavaSemanticCensusSelfTest	PASS checks=48	WSL, C.UTF-8
-cds-training verify.sh (javac -Werror + M3CdsTrainReplaySelfTest), after the schema rename	PASS checks=38	WSL; on Windows the self-test refuses non-UTF-8 native encoding by design
-JDK-naming fixed point (a3/jn/jdk_naming.py)	0 of 16 in-scope files would change	after the PRODUCT_ID respelling of the cds schema id
-postimage target check	20 NEW on master, 1 EXISTS_UNCHANGED (atom-census README.md equals the receiver base 3a25863c1377, so the postimage applies)	-
-M3RepositoryFileCensus run over a full repository checkout; workflow m3-repository-file-census.yml	NOT_RUN	no full checkout on this machine; the added workflow runs it in CI

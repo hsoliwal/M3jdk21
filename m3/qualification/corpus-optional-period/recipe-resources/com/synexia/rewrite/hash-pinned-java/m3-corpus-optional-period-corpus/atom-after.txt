@@ -1,1 +1,0 @@
-            fields[19].isEmpty() ? null : decode(fields[19])));

@@ -7,7 +7,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Objects;
-import jdk.m3.intern.InternSpace;
+import jdk.internal.m3.intern.InternSpace;
 
 /**
  * Append-only canonical arena for Java class metadata.
