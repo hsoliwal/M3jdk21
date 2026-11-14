@@ -18,6 +18,8 @@ BACKPORTS = Path(__file__).resolve().parent
 REPOSITORY = BACKPORTS.parents[1]
 sys.path.insert(0, str(BACKPORTS))
 TARGET = "src/hotspot/share/classfile/vmSymbols.hpp"
+DIAGNOSTIC_CPP = "src/hotspot/share/services/diagnosticCommand.cpp"
+DIAGNOSTIC_HPP = "src/hotspot/share/services/diagnosticCommand.hpp"
 LEDGER = "m3/backports/recipes/jdk-8364182/adaptation.tsv"
 SEEDS = "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv"
 HISTORICAL_SUPERSEDED = "4f752ab79abf854d144e53118a2cc57a4b3cc2432140e9297079cca86dd2abab"
@@ -195,6 +197,38 @@ class Jdk8364182LineageTest(unittest.TestCase):
                 row["baseline_sha256"] = SUCCESSOR
         write_rows(self.root / LEDGER, self.columns, self.records)
         with self.assertRaisesRegex(AssertionError, "aliases a pinned state"):
+            self.verify.verify_security_properties_8364182_backport(self.root)
+
+    def test_diagnostic_vitals_descendant_is_admitted_only_exactly(self) -> None:
+        path = self.root / DIAGNOSTIC_CPP
+        current = path.read_bytes()
+        hunks = self.verify.JDK_8364182_21U_SUCCESSORS[DIAGNOSTIC_CPP][3]
+        jdk21u = current
+        for hunk in hunks:
+            jdk21u = jdk21u.replace(hunk, b"", 1)
+        path.write_bytes(jdk21u)  # the exact JDK21u merge source
+        self.verify.verify_security_properties_8364182_backport(self.root)
+        for drifted in (
+            current.replace(hunks[0], b"", 1),  # one of the two Vitals hunks
+            current + hunks[1],  # a duplicated registration
+            current + b"\n// unauthorized drift\n",
+        ):
+            path.write_bytes(drifted)
+            with self.assertRaisesRegex(AssertionError, "target drift"):
+                self.verify.verify_security_properties_8364182_backport(self.root)
+
+    def test_diagnostic_header_admits_only_the_exact_jdk21u_source(self) -> None:
+        path = self.root / DIAGNOSTIC_HPP
+        path.write_bytes(path.read_bytes() + b"\n// unauthorized drift\n")
+        with self.assertRaisesRegex(AssertionError, "target drift"):
+            self.verify.verify_security_properties_8364182_backport(self.root)
+
+    def test_diagnostic_successor_needs_the_original_pin(self) -> None:
+        for row in self.records:
+            if row["target_path"] == DIAGNOSTIC_CPP:
+                row["target_sha256"] = "0" * 64
+        write_rows(self.root / LEDGER, self.columns, self.records)
+        with self.assertRaisesRegex(AssertionError, "target drift"):
             self.verify.verify_security_properties_8364182_backport(self.root)
 
 
