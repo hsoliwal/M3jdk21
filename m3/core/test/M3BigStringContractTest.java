@@ -126,6 +126,33 @@ public final class M3BigStringContractTest {
         check(window.mayContainLiteral("dab"), "present code units are candidates");
         refused(NullPointerException.class, "needle", () -> window.indexOf(null, 0));
         refused(NullPointerException.class, "literal", () -> window.mayContainLiteral(null));
+        singleUnitSearch();
+    }
+
+    /**
+     * One-unit String needles take the single-unit scan. Every unit and every start of String- and
+     * slice-backed views is compared with String.indexOf: a hit at the start, the last index, chunks
+     * the bloom filter skips, first chunks with only earlier hits, later-chunk hits and misses,
+     * scans cut by the range end and scans past the last chunk.
+     */
+    private static void singleUnitSearch() {
+        M3BigString rope = M3BigString.of("abca", "dd", "xbz", "aq", "bb");
+        // Partial chunk ranges are copied by concat as slice chunks, not Strings.
+        M3BigString sliced = M3BigString.concat(rope.subSequence(1, 6), rope.subSequence(7, 12));
+        M3BigString[] views = {
+            rope, rope.subSequence(0, 5), rope.subSequence(2, 9), sliced, sliced.subSequence(1, 8)
+        };
+        for (M3BigString view : views) {
+            String oracle = view.flatten();
+            for (char unit : "abcdqxyz".toCharArray()) {
+                for (int from = -1; from <= oracle.length() + 1; from++) {
+                    same(
+                            (long) oracle.indexOf(unit, Math.max(0, from)),
+                            view.indexOf(String.valueOf(unit), from),
+                            "unit " + unit + " from " + from + " in " + oracle);
+                }
+            }
+        }
     }
 
     private static void facades() {

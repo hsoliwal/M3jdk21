@@ -88,6 +88,7 @@ public final class M3InstanceIndexPrecomputeEdgeContractTest {
     public static void main(String[] args) {
         identityAndViews();
         utf8OrderAndNormalization();
+        malformedProbesUseTheByteOrder();
         recordRefusals();
         indexRefusals();
         System.out.println("M3_INSTANCE_INDEX_EDGE_CONTRACT_PASS checks=" + checks);
@@ -166,6 +167,27 @@ public final class M3InstanceIndexPrecomputeEdgeContractTest {
                 UnsupportedOperationException.class,
                 null,
                 () -> withMetadata.metadata().put("x", "y"));
+    }
+
+    /**
+     * Lookup probes are not validated, so malformed UTF-16 and null reach the comparator. Those take
+     * its byte path: a probe matches a key exactly when their String.getBytes(UTF_8) forms are equal
+     * (an unpaired surrogate encodes as '?'), and a null probe is refused.
+     */
+    private static void malformedProbesUseTheByteOrder() {
+        String key = "a?b";
+        Map<String, String> metadata =
+                new InstanceRecord("Name", InstanceType.ORGANIZATION, 3L, Map.of(key, "v")).metadata();
+        byte[] keyBytes = key.getBytes(java.nio.charset.StandardCharsets.UTF_8);
+        for (String probe : List.of("a\uD800b", "a\uD800", "\uDC00", "a\uDBFFb\uD800")) {
+            boolean sameBytes = java.util.Arrays.equals(
+                    probe.getBytes(java.nio.charset.StandardCharsets.UTF_8), keyBytes);
+            check(metadata.containsKey(probe) == sameBytes, "byte-order lookup of a malformed probe");
+        }
+        check(metadata.containsKey("a\uD800b"), "unpaired surrogate compares as its '?' encoding");
+        check(!metadata.containsKey("a\uD800"), "equal bytes, shorter probe");
+        check(!metadata.containsKey("\uDC00"), "first byte differs");
+        expect(NullPointerException.class, null, () -> metadata.containsKey(null));
     }
 
     private static void recordRefusals() {

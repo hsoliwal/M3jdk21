@@ -42,6 +42,9 @@ public final class M3SiUnitDecoderTest {
             check(unit.decimalExponent() == -6, "decimal exponent");
             check(unit.dimensionPacked() == 42L, "packed dimension");
             check(unit.offset() == 0.0d && unit.prefixable(), "offset and prefixability");
+            // The second decode reads the payload the first one cached.
+            check(catalog.findSiUnitPrecompute("dictlang.si-units", "A").orElseThrow().equals(unit),
+                    "cached decode is identical");
             check(catalog.findSiUnitPrecompute("dictlang.acronyms", "A").isEmpty(),
                     "source family isolation");
             check(catalog.findSiUnitPrecompute("dictlang.si-units", "missing").isEmpty(),

@@ -112,7 +112,7 @@ public final class M3PrecomputePayload {
     public long requireLong(String name) { return require(name, Kind.INTEGER).integerValue(); }
     public double requireDouble(String name) {
         Field field = fields.get(name);
-        if (field == null) field = Objects.requireNonNull(field, "missing field: " + name);
+        if (field == null) throw new NullPointerException("missing field: " + name);
         if (field.kind() != Kind.INTEGER && field.kind() != Kind.DECIMAL)
             throw new IllegalArgumentException("field is not numeric: " + name);
         return field.kind() == Kind.INTEGER ? field.integerValue() : field.decimalValue();
