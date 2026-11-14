@@ -1,5 +1,0 @@
-gate	result
-verify.sh (javac --release 21 -Xlint:all -Werror, 4 main proofs)	rc=0: M3CompanionPlanTest 26, M3ClassfileSealTest 19 (String.class sha256 831a11d5c76c), M3SystemApiCensusTest 15 (7961 installed / 2930 base candidates), M3SystemApiReviewTest 26 (REVIEW 4545, REFUSED_NOT_PUBLIC 3227, HOLD_MODULE_NOT_RESOLVED 189)
-pre-naming differential (gate_pre.sh)	same proofs before the naming rewrite: byte-identical output
-JDK-naming fixed point	0 of 7 in-scope files after the rewrite
-target paths	all NEW on master (m3/tooling/companion absent); off the m3 reactor like the other verify.sh tooling modules

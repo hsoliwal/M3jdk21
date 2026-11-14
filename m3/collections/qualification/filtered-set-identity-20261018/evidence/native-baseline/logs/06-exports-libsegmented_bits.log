@@ -1,4 +1,0 @@
-$ ["nm", "-D", "--defined-only", "/workspace/scratch/f8287c652798/proof/native-collections/lib/libsegmented_bits.so"]
-00000000000012c0 T Java_com_m3_collections_M3BitLane28_cardinality0
-
-EXIT=0

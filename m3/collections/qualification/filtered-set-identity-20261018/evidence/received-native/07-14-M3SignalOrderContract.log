@@ -1,3 +1,0 @@
-PASS M3SignalOrderContract backend=NATIVE_REQUIRED checks=2010
-
-EXIT=0

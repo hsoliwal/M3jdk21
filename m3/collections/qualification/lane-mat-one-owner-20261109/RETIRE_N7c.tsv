@@ -1,3 +1,0 @@
-duplicate	survivor	evidence
-jdk.internal.m3.collections.mat.MatBits	jdk.m3.arrays.SelectionBits	javap -c -p equal modulo names (master 72e8fd758303 classes)
-jdk.internal.m3.collections.mat.MatSelection	jdk.m3.arrays.IntSelection	javap -c -p equal once MatBits = SelectionBits
