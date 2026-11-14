@@ -1,0 +1,2 @@
+# path	before_sha256	after_sha256	resource
+m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java	d7e4b8a76da2c7b7b2988ab999115e3e158f9b5417e1e036098a10a5776350ad	99e2ffa2b52ab4902fec7498def1ecfc48d9359e65d18dce9dff27d6ecfb846d	recipe-owner.java.txt

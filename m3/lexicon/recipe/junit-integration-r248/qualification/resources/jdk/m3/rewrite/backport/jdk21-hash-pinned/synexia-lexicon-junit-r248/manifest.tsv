@@ -1,0 +1,2 @@
+# path	before_sha256	after_sha256	resource
+m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3LexiconNormalizationRecipeTest.java	ABSENT	eff50dcf2341bd84c80e67974eb674901274474ff2802e59fb03ece797c72487	M3LexiconNormalizationRecipeTest.java.txt

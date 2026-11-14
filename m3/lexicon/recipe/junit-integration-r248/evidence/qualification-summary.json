@@ -1,0 +1,84 @@
+{
+  "schema": "M3_LEXICON_MAVEN_JUNIT_INTEGRATION_R248",
+  "status": "PASS",
+  "failure": null,
+  "reports": [
+    {
+      "stage": "maven-tests-recipe-install",
+      "pid": 40036,
+      "packetIdentity": {
+        "bytes": 110554,
+        "sha256": "7657ee2c5de819a10877208c21e169c642cd42bfd7b56ad8d789910f7a6d057b",
+        "gitBlob": "aa34ea57ecf6f40203c8ef58fd1338b5f0ff4b6b"
+      },
+      "exit": 0,
+      "reaped": true,
+      "elapsedSeconds": 13.563,
+      "logIdentity": {
+        "bytes": 967,
+        "sha256": "d98f90b0c8daa4f3aef1841d461ea54bfc62985234917240235a136c8a7b2db5",
+        "gitBlob": "379bacfe4a96037d76aadfde2c70d6bda0e86e5b"
+      }
+    },
+    {
+      "stage": "maven-tests-custom-jupiter",
+      "pid": 51944,
+      "packetIdentity": {
+        "bytes": 121696,
+        "sha256": "d4348fb4397e9afc5fd0f7da94a66693d4d0fb68ea55dce87d22ca5b07726202",
+        "gitBlob": "72f831442f75f483fe1209ee51845e2adec835ad"
+      },
+      "exit": 0,
+      "reaped": true,
+      "elapsedSeconds": 14.859,
+      "logIdentity": {
+        "bytes": 967,
+        "sha256": "13ee95055164c54103d260b1bc3649e560d1eb980a16cbe0375df022097c603c",
+        "gitBlob": "addaea513f446bcb363260e8c890a06141d6dfb5"
+      }
+    }
+  ],
+  "results": [
+    {
+      "fixedPoints": 2,
+      "fixturePath": "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/lexicon-contracts/r248/instance-before.java.txt",
+      "javaPath": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3LexiconNormalizationRecipeTest.java",
+      "refusals": 6,
+      "javaIdentity": {
+        "bytes": 11228,
+        "sha256": "eff50dcf2341bd84c80e67974eb674901274474ff2802e59fb03ece797c72487",
+        "gitBlob": "87c232d73997512e8aad7f5ba02db72b4555ac34"
+      },
+      "fixtureIdentity": {
+        "bytes": 10835,
+        "sha256": "a40be1c52aa7dd71755abe81ca5ad42fd2376569205ad015195b85dca9863d42",
+        "gitBlob": "6f9f14312e18e8ffa0a310801278bed846cd0d34"
+      }
+    },
+    {
+      "aborted": 0,
+      "failed": 0,
+      "failures": [],
+      "found": 6,
+      "javaVersion": "21.0.9+7-LTS-338",
+      "junitApiOrigin": "file:/C:/Users/hsoliwal/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.2-m3-source-1/junit-jupiter-api-5.10.2-m3-source-1.jar",
+      "junitPlatformOrigin": "file:/C:/Users/hsoliwal/.m2/repository/org/junit/platform/junit-platform-launcher/1.10.2-m3-source-1/junit-platform-launcher-1.10.2-m3-source-1.jar",
+      "normalizationCases": 131098,
+      "passed": 6,
+      "skipped": 0
+    }
+  ],
+  "storage": {
+    "before": 0,
+    "after": 0,
+    "readOnlyFBytes": 571469824,
+    "cap": 571473920,
+    "reserve": 8589934592,
+    "free": 10907025408,
+    "peaks": [
+      571473920
+    ]
+  },
+  "generationCalls": 0,
+  "scope": "Exact Java/text recipe installation, then generated ordinary Jupiter tests run with cached source-custom JUnit5.10.2/Platform1.10.2 and official OpenRewrite8.17.1. Source-custom OpenRewrite artifacts absent locally; actual module Maven clean verify and CI provisioning NOT_RUN. No runtime production source or POM dependency mutation."
+}

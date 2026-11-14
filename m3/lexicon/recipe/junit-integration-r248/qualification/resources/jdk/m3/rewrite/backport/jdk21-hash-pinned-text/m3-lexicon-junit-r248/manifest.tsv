@@ -1,0 +1,2 @@
+# path	before_sha256	after_sha256	resource
+m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/lexicon-contracts/r248/instance-before.java.txt	ABSENT	a40be1c52aa7dd71755abe81ca5ad42fd2376569205ad015195b85dca9863d42	instance-before.java.txt

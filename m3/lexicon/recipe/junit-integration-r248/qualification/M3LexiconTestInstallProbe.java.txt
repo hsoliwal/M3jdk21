@@ -1,0 +1,30 @@
+// Copyright 2026 Hitesh Soliwal, Synexia. SPDX-License-Identifier: Apache-2.0
+package jdk.m3.rewrite.backport;
+import java.net.*;import java.util.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.openrewrite.*;import org.openrewrite.internal.InMemoryLargeSourceSet;
+import org.openrewrite.java.JavaParser;import org.openrewrite.text.PlainText;
+public final class M3LexiconTestInstallProbe {
+ static InMemoryExecutionContext context(){return new InMemoryExecutionContext(t->{throw new AssertionError(t);});}
+ static java.util.List<org.openrewrite.Result> javaApply(java.util.List<SourceFile> files){return new M3Jdk21HashPinnedSnapshotRecipe("synexia-lexicon-junit-r248").run(new InMemoryLargeSourceSet(files),context(),1).getChangeset().getAllResults();}
+ static java.util.List<org.openrewrite.Result> textApply(java.util.List<SourceFile> files){return new M3Jdk21HashPinnedTextSnapshotRecipe("m3-lexicon-junit-r248").run(new InMemoryLargeSourceSet(files),context(),1).getChangeset().getAllResults();}
+ static void require(boolean value,String message){if(!value)throw new AssertionError(message);}
+ static void refuse(Runnable work){try{work.run();}catch(RuntimeException|AssertionError expected){return;}throw new AssertionError("expected refusal");}
+ public static void main(String[]args)throws Exception{
+  var java=new M3Jdk21HashPinnedSnapshotRecipe("synexia-lexicon-junit-r248");
+  var text=new M3Jdk21HashPinnedTextSnapshotRecipe("m3-lexicon-junit-r248");
+  var addedJava=javaApply(List.of());var addedText=textApply(List.of());
+  require(addedJava.size()==1&&addedText.size()==1,"one owner per recipe");
+  SourceFile j=Objects.requireNonNull(addedJava.getFirst().getAfter()),t=Objects.requireNonNull(addedText.getFirst().getAfter());
+  require(java.targetPaths().equals(List.of(j.getSourcePath().toString().replace('\\','/'))),"Java owner path");
+  require(text.targetPaths().equals(List.of(t.getSourcePath().toString().replace('\\','/'))),"fixture owner path");
+  require(javaApply(List.of(j)).isEmpty()&&textApply(List.of(t)).isEmpty(),"fixed point");
+  var foreign=JavaParser.fromJavaVersion().classpath(JavaParser.runtimeClasspath()).build().parse("package jdk.m3.rewrite.backport; final class M3LexiconNormalizationRecipeTest {}").findFirst().orElseThrow().withSourcePath(j.getSourcePath());
+  refuse(()->javaApply(List.of(foreign)));refuse(()->javaApply(List.of(j,j.withId(Tree.randomId()))));
+  var wrong=PlainText.builder().sourcePath(j.getSourcePath()).text(j.printAll()).build();refuse(()->javaApply(List.of(wrong)));
+  var changed=PlainText.builder().sourcePath(t.getSourcePath()).text("drift").build();refuse(()->textApply(List.of(changed)));refuse(()->textApply(List.of(t,t.withId(Tree.randomId()))));
+  var wrongText=foreign.withSourcePath(t.getSourcePath());refuse(()->textApply(List.of(wrongText)));
+  var out=new TreeMap<String,Object>();out.put("java",j.printAll());out.put("fixture",t.printAll());out.put("javaPath",j.getSourcePath().toString().replace('\\','/'));out.put("fixturePath",t.getSourcePath().toString().replace('\\','/'));out.put("fixedPoints",2);out.put("refusals",6);
+  var c=(HttpURLConnection)URI.create(args[0]).toURL().openConnection();c.setDoOutput(true);c.setRequestMethod("POST");byte[] b=new ObjectMapper().writeValueAsBytes(out);c.setFixedLengthStreamingMode(b.length);try(var s=c.getOutputStream()){s.write(b);}if(c.getResponseCode()!=204)throw new AssertionError("receipt refused");c.disconnect();
+ }
+}

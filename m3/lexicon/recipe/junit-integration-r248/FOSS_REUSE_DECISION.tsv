@@ -1,0 +1,6 @@
+capability	classification	owner	revision	fit_evidence	license	decision
+ordinary-sdk-junit	ADAPT	M3Jdk21HashPinnedTextSnapshotRecipeTest	3ba1c6924668d068c47f7608aa63dfa082b8c96a	Existing package-local Jupiter test style; no launcher or network callback in test owner	Apache-2.0	SELECTED
+runtime-fixture-compiler	ADAPT_QA_ONLY	M3LexiconCpuProof RAM compiler	ffad2daf59d13eac412c41165936880d2d26ffac338ebeb7713601d70a1992b2	Memory class output, reviewed source fixtures, isolated loaders; no production compiler owner or filesystem class output	Apache-2.0	SELECTED
+java-test-installation	DIRECT_REUSE	M3Jdk21HashPinnedSnapshotRecipe	f225240fbf36205a4f330610e86c1b0eb35c70b1	Existing SDK src/test path supports additive ABSENT Java atom	Apache-2.0	SELECTED
+fixture-installation	DIRECT_REUSE	M3Jdk21HashPinnedTextSnapshotRecipe	73779dee8c80a0913b88fff17637ed3f44b33ea3	Exact UTF8 test-resource admission; no runtime Java bypass	Apache-2.0	SELECTED
+dependency-substitution	NO_FIT	Official47-JAR proof versus source-custom module POM	5c325b00da6a20db50f158832f6dfb64d9374f50	Official compatibility proof cannot attest source-custom Maven resolution; preserve declared coordinates and report separately	Not imported	REFUSE_SILENT_SUBSTITUTION

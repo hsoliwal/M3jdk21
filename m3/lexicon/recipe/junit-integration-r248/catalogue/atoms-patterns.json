@@ -1,0 +1,58 @@
+{
+  "schema": "M3_LEXICON_TEST_AND_DONOR_ATOMS_R248",
+  "version": 1,
+  "productionChanges": 0,
+  "patterns": [
+    {
+      "id": "M3.HASH_PINNED_AST_SELF_REPLAY",
+      "version": 1,
+      "classification": "DIRECT_REUSE"
+    },
+    {
+      "id": "M3.HASH_PINNED_TEXT_SNAPSHOT",
+      "version": 1,
+      "classification": "DIRECT_REUSE"
+    },
+    {
+      "id": "M3.QA_ISOLATED_RAM_COMPILER",
+      "version": 1,
+      "classification": "ADAPT_QA_ONLY"
+    }
+  ],
+  "atoms": [
+    {
+      "id": "ordinary-jupiter-contract",
+      "owner": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3LexiconNormalizationRecipeTest.java",
+      "law": "Six ordinary package-local Jupiter tests; no HTTP callback/launcher in test owner"
+    },
+    {
+      "id": "exact-fixture-binding",
+      "law": "Before/after source hashes checked before isolated Java21 compilation; all 65536 UTF16 code units standalone and within A...Z; input/result identity and exact error contract retained"
+    },
+    {
+      "id": "test-resource-admission",
+      "law": "Existing Java/text recipes install only exact ABSENT test/fixture paths; preserve SourceFile ID and path, second pass zero changes; six invalid inputs refuse"
+    },
+    {
+      "id": "lexical-identity",
+      "law": "Donor IDs, language registry/source-root fingerprints, subject taxonomy and semantic crosswalk remain explicit; do not silently renumber or admit ambiguous rows"
+    }
+  ],
+  "qualification": {
+    "passed": 6,
+    "normalizationCases": 131098,
+    "installationFixedPoints": 2,
+    "installationRefusals": 6,
+    "junit": "5.10.2-m3-source-1 / Platform1.10.2-m3-source-1",
+    "rewrite": "Official8.17.1 compatibility lane",
+    "fullModuleMaven": "NOT_RUN",
+    "jni": "NOT_RUN",
+    "platformParity": "NOT_RUN"
+  },
+  "storage": {
+    "retainedNewLocalFiles": 0,
+    "taskCapBytes": 571473920,
+    "reserveBytes": 8589934592
+  },
+  "generationCalls": 0
+}

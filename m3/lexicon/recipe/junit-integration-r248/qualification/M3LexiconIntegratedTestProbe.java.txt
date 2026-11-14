@@ -1,0 +1,19 @@
+// Copyright 2026 Hitesh Soliwal, Synexia. SPDX-License-Identifier: Apache-2.0
+package jdk.m3.rewrite.backport;
+import java.net.*;import java.util.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.platform.launcher.core.*;import org.junit.platform.launcher.listeners.*;
+import static org.junit.platform.engine.discovery.DiscoverySelectors.selectClass;
+public final class M3LexiconIntegratedTestProbe {
+ public static void main(String[] args)throws Exception{
+  var listener=new SummaryGeneratingListener();var launcher=LauncherFactory.create();launcher.registerTestExecutionListeners(listener);
+  launcher.execute(LauncherDiscoveryRequestBuilder.request().selectors(selectClass(M3LexiconNormalizationRecipeTest.class)).build());
+  var s=listener.getSummary();var failures=new ArrayList<String>();s.getFailures().forEach(f->failures.add(f.getException().toString()));
+  var out=new TreeMap<String,Object>();out.put("found",s.getTestsFoundCount());out.put("passed",s.getTestsSucceededCount());out.put("failed",s.getTestsFailedCount());out.put("skipped",s.getTestsSkippedCount());out.put("aborted",s.getTestsAbortedCount());out.put("failures",failures);
+  out.put("junitApiOrigin",org.junit.jupiter.api.Test.class.getProtectionDomain().getCodeSource().getLocation().toString());
+  out.put("junitPlatformOrigin",LauncherFactory.class.getProtectionDomain().getCodeSource().getLocation().toString());
+  out.put("javaVersion",System.getProperty("java.runtime.version"));out.put("normalizationCases",M3LexiconNormalizationRecipeTest.comparedCases.get());
+  var c=(HttpURLConnection)URI.create(args[0]).toURL().openConnection();c.setDoOutput(true);c.setRequestMethod("POST");byte[] b=new ObjectMapper().writeValueAsBytes(out);c.setFixedLengthStreamingMode(b.length);try(var stream=c.getOutputStream()){stream.write(b);}if(c.getResponseCode()!=204)throw new AssertionError("receipt refused");c.disconnect();
+  if(s.getTestsSucceededCount()!=6||s.getTestsFailedCount()!=0)throw new AssertionError(out);
+ }
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "M3_LEXICON_JUNIT_ASSEMBLY_R248",
+  "status": "PASS",
+  "reusedChecker": {
+    "schema": "M3_FIXED_LIFETIME_PACKET_ASSEMBLY_R245",
+    "status": "PASS",
+    "files": 29,
+    "reconstructedConfigSha256": "587aa6a2cf8f258861e37c9be4e45dde14f420a696c31505926dfe811725fde0",
+    "resourceRefsVerified": true,
+    "pythonSyntax": true,
+    "pomSyntax": true,
+    "writes": 0
+  },
+  "proofScope": "Exact readable config reconstructs executed R248 configuration; no application/runtime proof added"
+}

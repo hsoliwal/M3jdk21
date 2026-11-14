@@ -1,0 +1,30 @@
+{
+  "schema": "M3_LEXICON_QUALIFICATION_GAPS_R248",
+  "scope": "Source review and recorded evidence; no new donor runtime or native execution",
+  "nativeOwner": {
+    "implementation": "synexia-unicodex/native/langdex/langdex_jni.c",
+    "gitBlob": "ca4649093b1adfed2e61324cc3aa873eeedcc7ed",
+    "shimBlob": "ceec3d0be9dd53b06b5d61a6bba4e4bf9d14aba9",
+    "historicalReceiptBlob": "05a66918d23333ba90fdcebe528eec20573d906c",
+    "generalVerifierBlob": "91803483f69cd35606b6d962926cffc919f75b92",
+    "verifierIssue": "General *SelfTest loop supplies no backend argument to LangDexNativeParitySelfTest; dedicated v2 verifier supplies it",
+    "currentNative": "NOT_RUN"
+  },
+  "mavenCustomClosure": {
+    "installer": "m3/m3-import/pure-int-recipe-custody/install.sh",
+    "installerBlob": "220166673219b4afab1e9dea874bca966f30406e",
+    "custodyPomBlob": "1064b6bc13f6caaf80f56b09bbd070a275b17552",
+    "agentSourceFindings": [
+      "Custody POM published Rewrite8.17.1 differs from checker requirement8.17.1-m3-source-1",
+      "Installer custody JAR group-path mismatch and hardcoded home .m2 path",
+      "Bootstrap SLF4J2.0.9 expectation differs from installer2.0.12"
+    ],
+    "fullModuleCleanVerify": "NOT_RUN"
+  },
+  "receiverAdmission": {
+    "langdexIds": "Preserve original; reject ambiguous at M3 admission",
+    "fingerprintMapping": "UNPROVEN",
+    "typedPrecomputeSourceGate": "dictlang.* only; do not disguise source family",
+    "lifetime": "Donor runtime image close and M3 process-lifetime published mappings need explicit bridge"
+  }
+}
