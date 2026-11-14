@@ -85,7 +85,13 @@ public final class M3NcmOps {
     }
 
     static int[] nearest(float[] rows, int channels, float[] codebook, Work work) {
-        int rowCount = checkNearest(rows, channels, codebook, work);
+        checkNearest(rows, channels, codebook, work);
+        return nearestValidated(rows, channels, codebook, work);
+    }
+
+    /** Internal arithmetic only; the caller must validate and admit this operation once. */
+    static int[] nearestValidated(float[] rows, int channels, float[] codebook, Work work) {
+        int rowCount = rows.length / channels;
         int vocabulary = codebook.length / channels;
         float[] norms = codeNorms(codebook, channels, work.cancellation);
         int[] result = new int[rowCount];
@@ -124,7 +130,13 @@ public final class M3NcmOps {
 
     static float[] areaResize(float[] values, int batch, int fromLength,
                               int channels, int toLength, Work work) {
-        int count = checkResize(values, batch, fromLength, channels, toLength, work);
+        checkResize(values, batch, fromLength, channels, toLength, work);
+        return areaResizeValidated(values, batch, fromLength, channels, toLength, work);
+    }
+
+    static float[] areaResizeValidated(float[] values, int batch, int fromLength,
+                                       int channels, int toLength, Work work) {
+        int count = batch * toLength * channels;
         float[] result = new float[count];
         for (int b = 0; b < batch; b++) {
             work.cancellation.checkpoint();
@@ -157,7 +169,13 @@ public final class M3NcmOps {
 
     static float[] linearResize(float[] values, int batch, int fromLength,
                                 int channels, int toLength, Work work) {
-        int count = checkResize(values, batch, fromLength, channels, toLength, work);
+        checkResize(values, batch, fromLength, channels, toLength, work);
+        return linearResizeValidated(values, batch, fromLength, channels, toLength, work);
+    }
+
+    static float[] linearResizeValidated(float[] values, int batch, int fromLength,
+                                         int channels, int toLength, Work work) {
+        int count = batch * toLength * channels;
         float[] result = new float[count];
         float scale = (float) fromLength / toLength;
         for (int b = 0; b < batch; b++) {
@@ -194,7 +212,13 @@ public final class M3NcmOps {
 
     static float[] phi(float[] values, int batch, int length, int channels,
                        float[] weights, float[] bias, float ratio, Work work) {
-        int count = checkPhi(values, batch, length, channels, weights, bias, ratio, work);
+        checkPhi(values, batch, length, channels, weights, bias, ratio, work);
+        return phiValidated(values, batch, length, channels, weights, bias, ratio, work);
+    }
+
+    static float[] phiValidated(float[] values, int batch, int length, int channels,
+                                float[] weights, float[] bias, float ratio, Work work) {
+        int count = values.length;
         float[] result = new float[count];
         for (int b = 0; b < batch; b++) {
             work.cancellation.checkpoint();
@@ -229,11 +253,22 @@ public final class M3NcmOps {
     public static float[] tiedLogits(float[] projectedRows, int channels,
                                       float[] codebook, float logInverseTemperature,
                                       float[] bias, Budget budget, Cancellation cancellation) {
-        Work work = new Work(budget, cancellation);
-        int count = checkTiedLogits(projectedRows, channels, codebook,
-                logInverseTemperature, bias, work);
+        return tiedLogits(projectedRows, channels, codebook, logInverseTemperature,
+                bias, new Work(budget, cancellation));
+    }
+
+    static float[] tiedLogits(float[] projectedRows, int channels, float[] codebook,
+                              float logInverseTemperature, float[] bias, Work work) {
+        checkTiedLogits(projectedRows, channels, codebook, logInverseTemperature, bias, work);
+        return tiedLogitsValidated(projectedRows, channels, codebook, logInverseTemperature, bias, work);
+    }
+
+    static float[] tiedLogitsValidated(float[] projectedRows, int channels, float[] codebook,
+                                       float logInverseTemperature, float[] bias, Work work) {
+        Cancellation cancellation = work.cancellation;
         int vocabulary = codebook.length / channels;
         int rowCount = projectedRows.length / channels;
+        int count = rowCount * vocabulary;
         float[] norms = codeNorms(codebook, channels, cancellation);
         float normSum = 0;
         for (float norm : norms) normSum += norm;
@@ -273,7 +308,7 @@ public final class M3NcmOps {
         return checkNearest(rows, channels, codebook, new Work(DEFAULT_BUDGET, Cancellation.NONE));
     }
 
-    private static int checkNearest(float[] rows, int channels, float[] codebook, Work work) {
+    static int checkNearest(float[] rows, int channels, float[] codebook, Work work) {
         int rowCount = rows(rows, channels, "rows");
         int vocabulary = rows(codebook, channels, "codebook");
         long cost = add(mul(4, add(rows.length, codebook.length)),
@@ -288,8 +323,8 @@ public final class M3NcmOps {
                 new Work(DEFAULT_BUDGET, Cancellation.NONE));
     }
 
-    private static int checkResize(float[] values, int batch, int fromLength,
-                                    int channels, int toLength, Work work) {
+    static int checkResize(float[] values, int batch, int fromLength,
+                            int channels, int toLength, Work work) {
         int input = tensorSize(batch, fromLength, channels);
         int output = tensorSize(batch, toLength, channels);
         length(values, input, "values");
@@ -304,8 +339,8 @@ public final class M3NcmOps {
                 new Work(DEFAULT_BUDGET, Cancellation.NONE));
     }
 
-    private static int checkPhi(float[] values, int batch, int length, int channels,
-                                 float[] weights, float[] bias, float ratio, Work work) {
+    static int checkPhi(float[] values, int batch, int length, int channels,
+                         float[] weights, float[] bias, float ratio, Work work) {
         int output = tensorSize(batch, length, channels);
         length(values, output, "values");
         int weightCount = arraySize(mul(mul(channels, channels), 3));
@@ -325,8 +360,8 @@ public final class M3NcmOps {
                 bias, new Work(DEFAULT_BUDGET, Cancellation.NONE));
     }
 
-    private static int checkTiedLogits(float[] projectedRows, int channels, float[] codebook,
-                                        float logInverseTemperature, float[] bias, Work work) {
+    static int checkTiedLogits(float[] projectedRows, int channels, float[] codebook,
+                               float logInverseTemperature, float[] bias, Work work) {
         int rowCount = rows(projectedRows, channels, "projectedRows");
         int vocabulary = rows(codebook, channels, "codebook");
         int output = arraySize(mul(rowCount, vocabulary));

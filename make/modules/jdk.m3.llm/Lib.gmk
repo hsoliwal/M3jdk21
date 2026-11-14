@@ -1,0 +1,48 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+
+include LibCommon.gmk
+
+# Preserve the current single NCM library and its separate arithmetic contracts:
+# binary64 ordered differences, FP32 expanded norms, and the binary64 offset
+# codebook ABI. The existing C++ JNI wrappers and C17 codebook sources share this
+# library; adding controlled FP32 calls does not replace either binary64 kernel.
+ifneq ($(filter gcc clang microsoft, $(TOOLCHAIN_TYPE)), )
+  M3_NCM_HEADER_DIR := $(SUPPORT_OUTPUTDIR)/headers/$(MODULE)
+  M3_NCM_F64_HEADER := $(M3_NCM_HEADER_DIR)/jdk_m3_llm_model_M3NcmNative.h
+  M3_NCM_FP32_HEADER := $(M3_NCM_HEADER_DIR)/jdk_m3_llm_projection_M3NcmNativeOps.h
+  M3_NCM_BASE_CFLAGS := $(filter-out -std=% /std:%, $(CFLAGS_JDKLIB))
+  M3_NCM_BASE_CXXFLAGS := $(filter-out -std=% /std:% -fno-exceptions, $(CXXFLAGS_JDKLIB))
+
+  ifeq ($(TOOLCHAIN_TYPE), microsoft)
+    M3_NCM_STRICT := /W4 /WX /fp:strict
+    M3_NCM_CFLAGS := /std:c17 $(M3_NCM_STRICT)
+    M3_NCM_CXXFLAGS := /std:c++20 /EHsc $(M3_NCM_STRICT) \
+        /FIjdk_m3_llm_model_M3NcmNative.h \
+        /FIjdk_m3_llm_projection_M3NcmNativeOps.h
+  else
+    M3_NCM_STRICT := -Wall -Wextra -Werror -Wconversion -Wshadow -Wpedantic \
+        -fno-fast-math -ffp-contract=off
+    M3_NCM_CFLAGS := -std=c17 $(M3_NCM_STRICT)
+    M3_NCM_CXXFLAGS := -std=c++20 -fexceptions $(M3_NCM_STRICT) \
+        -include jdk_m3_llm_model_M3NcmNative.h \
+        -include jdk_m3_llm_projection_M3NcmNativeOps.h
+  endif
+
+  # The F64 boundary uses std::vector and catches allocation exceptions. Retain
+  # C++ exception support and the C++ linker while compiling .c files as C17.
+  $(eval $(call SetupJdkLibrary, BUILD_LIBM3_NCM, \
+      NAME := m3_ncm, \
+      TOOLCHAIN := TOOLCHAIN_LINK_CXX, \
+      INCLUDE_FILES := ncm_kernel.cpp ncm_jni.cpp ncm_projection_jni.cpp \
+          m3_ncm_codebook.c m3_ncm_codebook_jni.c, \
+      OPTIMIZATION := HIGH, \
+      CFLAGS := $(M3_NCM_BASE_CFLAGS) $(M3_NCM_CFLAGS), \
+      CXXFLAGS := $(M3_NCM_BASE_CXXFLAGS) $(M3_NCM_CXXFLAGS), \
+      EXTRA_DEPS := $(M3_NCM_F64_HEADER) $(M3_NCM_FP32_HEADER), \
+      LDFLAGS := $(LDFLAGS_JDKLIB) $(call SET_SHARED_LIBRARY_ORIGIN), \
+      LIBS_unix := -lm, \
+  ))
+
+  TARGETS += $(BUILD_LIBM3_NCM)
+endif
