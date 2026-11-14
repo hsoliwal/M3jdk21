@@ -6,7 +6,7 @@ SPDX-License-Identifier: Apache-2.0
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
  <modelVersion>4.0.0</modelVersion>
- <groupId>com.synexia.m3.recipes</groupId><artifactId>m3jdk21-integrated-utilities-20261018</artifactId><version>1.0.0-SNAPSHOT</version>
+ <groupId>com.m3.recipes</groupId><artifactId>m3jdk21-integrated-utilities-20261018</artifactId><version>1.0.0-SNAPSHOT</version>
  <name>M3JDK21 integrated utility source recipe</name>
  <properties><maven.compiler.release>21</maven.compiler.release><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   <maven.install.skip>true</maven.install.skip><maven.deploy.skip>true</maven.deploy.skip></properties>

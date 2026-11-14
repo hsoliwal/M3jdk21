@@ -27,7 +27,7 @@ PROFILE = """    <profile>
         <artifactId>rewrite-maven-plugin</artifactId>
         <version>5.23.1</version>
         <dependencies><dependency>
-          <groupId>com.synexia</groupId>
+          <groupId>com.m3</groupId>
           <artifactId>m3-openrewrite-recipes</artifactId>
           <version>1.0.0-SNAPSHOT</version>
         </dependency></dependencies>

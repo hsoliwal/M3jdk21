@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"><modelVersion>4.0.0</modelVersion>
-<groupId>com.synexia.verification</groupId><artifactId>m3-joined-retention-cpu</artifactId><version>1</version>
+<groupId>com.m3.verification</groupId><artifactId>m3-joined-retention-cpu</artifactId><version>1</version>
 <properties><maven.compiler.release>21</maven.compiler.release><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding><m3.jvm.extra></m3.jvm.extra></properties>
 <dependencies>
 <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2</version><scope>test</scope></dependency>

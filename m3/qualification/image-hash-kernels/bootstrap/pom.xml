@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2026 Hitesh Soliwal, Synexia. SPDX-License-Identifier: Apache-2.0 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0">
-<modelVersion>4.0.0</modelVersion><groupId>com.synexia.verification</groupId>
+<modelVersion>4.0.0</modelVersion><groupId>com.m3.verification</groupId>
 <artifactId>m3-shared-array-binding-qualification</artifactId><version>1</version><packaging>pom</packaging>
 <build><plugins><plugin><groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.3.0</version>
 <executions><execution><id>qualify-shared-array-binding</id><phase>test</phase><goals><goal>exec</goal></goals></execution></executions>

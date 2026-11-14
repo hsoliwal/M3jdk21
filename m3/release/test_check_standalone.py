@@ -503,7 +503,7 @@ class StandaloneCheckTest(unittest.TestCase):
         counts, lineage = self.lineage()
         self.assertEqual((1, 5), (counts["N_NAME"], lineage["L_LINEAGE"]))  # the unquoted constant stays a name
         self.put("m3/b/pom.xml", POM.format(group="com.synexia.m3", artifact="b", deps=""))
-        self.put("m3/a/build.sh", "mvn -DgroupId=com.synexia.m3 install\n")  # the groupId this repository builds
+        self.put("m3/a/build.sh", "mvn -DgroupId=com.m3 install\n")  # the groupId this repository builds
         self.put("m3/synexia-tools/run.py", "print(1)\n")
         self.put("m3/a/use.sh", "python3 m3/synexia-tools/run.py\n")  # a live path, not a donor identity
         counts, lineage = self.lineage()
