@@ -12,27 +12,39 @@ static_assert(sizeof(float) == 4 && std::numeric_limits<float>::is_iec559);
 static_assert(sizeof(double) == 8 && std::numeric_limits<double>::is_iec559);
 static_assert(sizeof(int) == 4);
 
-extern "C" int m3_ncm_nearest(
-        const float *vectors, size_t vector_count, size_t rows, size_t channels,
-        const float *codebook, size_t codebook_count, size_t codebook_size,
-        int *output, size_t output_count) {
-    if (channels == 0 || codebook_size == 0 || codebook_size > static_cast<size_t>(INT_MAX)
+namespace {
+// Shared layout contract of both nearest-code entry points.
+bool layout_valid(const float *vectors, size_t vector_count, size_t rows, size_t channels,
+                  const float *codebook, size_t codebook_count, size_t codebook_size,
+                  const int *output, size_t output_count) {
+    return !(channels == 0 || codebook_size == 0 || codebook_size > static_cast<size_t>(INT_MAX)
             || rows > std::numeric_limits<size_t>::max() / channels
             || codebook_size > std::numeric_limits<size_t>::max() / channels
             || vector_count != rows * channels || codebook_count != codebook_size * channels
             || output_count != rows || codebook == nullptr
-            || (rows != 0 && (vectors == nullptr || output == nullptr))) {
+            || (rows != 0 && (vectors == nullptr || output == nullptr)));
+}
+
+bool all_finite(const float *values, size_t count) {
+    for (size_t i = 0; i < count; ++i) {
+        if (!std::isfinite(values[i])) {
+            return false;
+        }
+    }
+    return true;
+}
+}
+
+extern "C" int m3_ncm_nearest(
+        const float *vectors, size_t vector_count, size_t rows, size_t channels,
+        const float *codebook, size_t codebook_count, size_t codebook_size,
+        int *output, size_t output_count) {
+    if (!layout_valid(vectors, vector_count, rows, channels, codebook, codebook_count,
+                      codebook_size, output, output_count)) {
         return 1;
     }
-    for (size_t i = 0; i < vector_count; ++i) {
-        if (!std::isfinite(vectors[i])) {
-            return 2;
-        }
-    }
-    for (size_t i = 0; i < codebook_count; ++i) {
-        if (!std::isfinite(codebook[i])) {
-            return 2;
-        }
+    if (!all_finite(vectors, vector_count) || !all_finite(codebook, codebook_count)) {
+        return 2;
     }
     for (size_t row = 0; row < rows; ++row) {
         double best_distance = std::numeric_limits<double>::infinity();
@@ -58,6 +70,62 @@ extern "C" int m3_ncm_nearest(
                 if (best_distance == 0.0) {
                     break;
                 }
+            }
+        }
+        output[row] = static_cast<int>(best);
+    }
+    return 0;
+}
+
+extern "C" int m3_ncm_nearest_expanded_f32(
+        const float *vectors, size_t vector_count, size_t rows, size_t channels,
+        const float *codebook, size_t codebook_count, size_t codebook_size,
+        float *code_norms, size_t code_norm_count, int *output, size_t output_count) {
+    if (!layout_valid(vectors, vector_count, rows, channels, codebook, codebook_count,
+                      codebook_size, output, output_count)
+            || code_norms == nullptr || code_norm_count != codebook_size) {
+        return 1;
+    }
+    if (!all_finite(vectors, vector_count) || !all_finite(codebook, codebook_count)) {
+        return 2;
+    }
+    // Same operation order as M3NcmOps.nearest: every code norm first, then per row
+    // its norm and, per code, (rowNorm + codeNorm) - 2 * dot, all in binary32.
+    for (size_t code = 0; code < codebook_size; ++code) {
+        float sum = 0.0f;
+        for (size_t channel = 0; channel < channels; ++channel) {
+            const float value = codebook[code * channels + channel];
+            sum = sum + value * value;
+        }
+        if (!std::isfinite(sum)) {
+            return 3;
+        }
+        code_norms[code] = sum;
+    }
+    for (size_t row = 0; row < rows; ++row) {
+        const size_t input_base = row * channels;
+        float row_norm = 0.0f;
+        for (size_t channel = 0; channel < channels; ++channel) {
+            row_norm = row_norm + vectors[input_base + channel] * vectors[input_base + channel];
+        }
+        if (!std::isfinite(row_norm)) {
+            return 3;
+        }
+        float best_distance = std::numeric_limits<float>::infinity();
+        size_t best = 0;
+        for (size_t code = 0; code < codebook_size; ++code) {
+            const size_t code_base = code * channels;
+            float dot = 0.0f;
+            for (size_t channel = 0; channel < channels; ++channel) {
+                dot = dot + vectors[input_base + channel] * codebook[code_base + channel];
+            }
+            const float distance = (row_norm + code_norms[code]) - 2.0f * dot;
+            if (!std::isfinite(distance)) {
+                return 3;
+            }
+            if (distance < best_distance) {
+                best_distance = distance;
+                best = code;
             }
         }
         output[row] = static_cast<int>(best);

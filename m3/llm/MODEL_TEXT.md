@@ -202,6 +202,12 @@ ctest --test-dir m3/llm/target/ncm-native --output-on-failure
 
 The shared library is `libm3_ncm.so` on Linux, `libm3_ncm.dylib` on macOS or
 `m3_ncm.dll` on Windows, subject to the chosen generator's output directories.
+This is the only NCM native library: the same target also carries the
+`jdk.m3.llm.projection.M3NcmNativeOps` resize, Phi and tied-logit primitives, and
+their nearest-code entry uses the kernel's FP32 expanded-norm entry
+`m3_ncm_nearest_expanded_f32`, matching `M3NcmOps.nearest` bit for bit. `M3NcmNativeOps`
+loads it at class initialization from `-Dm3.ncm.library` when set, otherwise with
+`System.loadLibrary("m3_ncm")`; `-Dm3.llm.ncm.disableNative=true` keeps it Java-only.
 There are no implied platform qualification results from this build recipe.
 The strict compiler settings disable fast-math and floating-point contraction;
 retain them for agreement with the Java oracle.
@@ -229,6 +235,8 @@ primitive numerical arrays only; no String internals cross JNI.
 mvn -f m3/llm/pom.xml verify
 # After the explicit native build, provide the absolute path for JNI tests:
 mvn -f m3/llm/pom.xml -Dm3.ncm.library=/absolute/path/libm3_ncm.so verify
+# The same path also drives M3NcmNativeOps; require it and check JNI use:
+mvn -f m3/llm/pom.xml "-DargLine=-Xcheck:jni -Dm3.ncm.library=/absolute/path/libm3_ncm.so -Dncm.test.native.required=true" verify
 # Optional standalone C ABI sanitizers on a compatible compiler/runtime:
 cmake -S m3/llm/src/main/native -B m3/llm/target/ncm-sanitized \
   -DM3_NCM_TESTS=ON -DM3_NCM_SANITIZERS=ON

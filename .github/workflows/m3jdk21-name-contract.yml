@@ -83,6 +83,7 @@ jobs:
             m3/algorithms/src/jdk/m3/algorithm/PrefixZ.java
             m3/tooling/migration-recipes/src/**
             m3/fs/src/main/java/jdk/m3/fs/**
+            m3/llm/src/main/java/jdk/m3/llm/projection/**
             test/jdk/java/lang/String/M3StringHierarchicalRegexTest.java
             m3/collections/implementations/guava-evicting-queue/src/main/java/jdk/m3/collections/guava/M3EvictingQueue.java
             m3/collections/implementations/evicting-queue/src/main/java/jdk/m3/collections/queue/M3EvictingQueue.java
