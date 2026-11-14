@@ -7,6 +7,9 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3TreeList.java'
       - 'test/jdk/jdk/m3/collections/M3TreeListCursorContract.java'
       - 'test/jdk/jdk/m3/collections/M3TreeListCursorJTReg.java'
+      - 'test/jdk/jdk/m3/collections/TreeListCursorAllocationFailure.java'
+      - 'test/jdk/jdk/m3/collections/verify_tree_cursor_fault.py'
+      - 'test/jdk/jdk/m3/collections/TreeListCursorFaultProof.README.md'
       - '.github/workflows/m3-apache-tree-cursor-20261113.yml'
   workflow_dispatch:
 
@@ -35,6 +38,8 @@ jobs:
           mkdir -p target/tree-cursor/before
           git show 778cd3eac266974e7b5155e79838f74ee516b535:"$OWNER" > target/tree-cursor/before/M3TreeList.java
           test "$(git hash-object target/tree-cursor/before/M3TreeList.java)" = '9da0a6ad147c423a0cfa718a8159890cc2c25977'
+      - name: Lint independent disposable fault verifier
+        run: python3 -m py_compile test/jdk/jdk/m3/collections/verify_tree_cursor_fault.py
       - name: Strict Java 21 source and original-target contracts
         shell: bash
         run: |
@@ -62,6 +67,11 @@ jobs:
             | tee target/tree-cursor/candidate-cursor.out
           java -Xint -cp target/tree-cursor/candidate M3TreeListCursorContract \
             | tee target/tree-cursor/candidate-cursor-interpreted.out
+      - name: Prove actual canonical source allocation-failure retry
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 test/jdk/jdk/m3/collections/verify_tree_cursor_fault.py .
       - name: Attach source and behavioral evidence
         if: always()
         uses: actions/upload-artifact@v4
