@@ -44,10 +44,12 @@ public final class NcmCodebookParity {
       nativeMethod.setAccessible(true);
     }
     fixedCases();
+    roundingWitnesses();
     legacyOperations();
     invalidCases();
     exactOracleProperties();
     binary64ParityProperties();
+    nearTieParityProperties();
     concurrentCalls();
   }
 
@@ -93,6 +95,20 @@ public final class NcmCodebookParity {
         "result must be fresh caller-owned storage");
   }
 
+  // Both witnesses choose a different code under an illegal arithmetic rewrite.
+  private static void roundingWitnesses() {
+    double x = 0x1.0000002000001p0;
+    double y = 0x1p-27;
+    check(Math.fma(x, x, y * y) > x * x + y * y,
+        "FMA witness must distinguish contraction");
+    compare(new double[2], 0, 1, new double[] {y, x, 0, x}, 0, 2, 2, new int[] {0});
+    double z = 0x1.4p-27;
+    double small = z * z;
+    check(1 + (small + small) > (1 + small) + small,
+        "sum witness must distinguish reassociation");
+    compare(new double[3], 0, 1, new double[] {1, z, z, 1, 0, 0}, 0, 2, 3, new int[] {0});
+  }
+
   private static void invalidCases() {
     invalid(NullPointerException.class, null, 0, 1, new double[] {0}, 0, 1, 1);
     invalid(NullPointerException.class, new double[] {0}, 0, 1, null, 0, 1, 1);
@@ -128,6 +144,9 @@ public final class NcmCodebookParity {
     // Finding an exact match does not waive overflow checks for other selected codes.
     invalid(ArithmeticException.class, new double[] {0}, 0, 1,
         new double[] {0, Double.MAX_VALUE}, 0, 2, 1);
+    // A later row may overflow after native scratch already contains a result.
+    invalid(ArithmeticException.class, new double[] {0, Double.MAX_VALUE}, 0, 2,
+        new double[] {0}, 0, 1, 1);
     expect(IllegalArgumentException.class, () -> NcmCodebook.nearest(
         new double[] {0}, 0, 1, new double[] {0}, 0, 1, 1, -1));
   }
@@ -191,6 +210,27 @@ public final class NcmCodebookParity {
       for (int i = 0; i < codebook.length; i++) codebook[i] = randomDouble(random);
       int[] expected = NcmCodebook.nearestJava(vectors, 0, rows, codebook, 0, codes, dimensions);
       compare(vectors, 0, rows, codebook, 0, codes, dimensions, expected);
+    }
+  }
+
+  private static void nearTieParityProperties() {
+    Random random = new Random(0x5449454e434dL);
+    for (int trial = 0; trial < 1_024; trial++) {
+      int dimensions = 2 + random.nextInt(32);
+      int codes = 2 + random.nextInt(7);
+      double[] vectors = new double[dimensions];
+      double[] codebook = new double[codes * dimensions];
+      for (int d = 0; d < dimensions; d++) {
+        double value = Math.scalb(0.5 + random.nextDouble(), random.nextInt(101) - 50);
+        for (int code = 0; code < codes; code++) codebook[code * dimensions + d] = value;
+      }
+      for (int code = 1; code < codes; code++) {
+        int coordinate = code * dimensions + random.nextInt(dimensions);
+        codebook[coordinate] = random.nextBoolean()
+            ? Math.nextUp(codebook[coordinate]) : Math.nextDown(codebook[coordinate]);
+      }
+      int[] expected = NcmCodebook.nearestJava(vectors, 0, 1, codebook, 0, codes, dimensions);
+      compare(vectors, 0, 1, codebook, 0, codes, dimensions, expected);
     }
   }
 

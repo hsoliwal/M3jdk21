@@ -1,0 +1,93 @@
+{
+  "schema": "M3_NCM_NATIVE_SUCCESSOR_OBSERVATION_V1",
+  "kind": "PASSIVE_BOUNDED_CANONICAL_KERNEL_MEASUREMENT",
+  "canonical_recipe": "com.synexia.m3.ModelTextJdk21Native20261114",
+  "canonical_source_hashes": [
+    {
+      "path": "synexia-index-precompute/native/src/mindex_ncm_codebook.c",
+      "before_sha256": "b4378449ca8fb1cfbe42b49110da02e50e8420828d1bb04fc60e273ac0b79401",
+      "after_sha256": "f6c238f857ad369ad409b50254bef18d8dd3c0f2bbc0a0ce1346566a44f83f8c"
+    },
+    {
+      "path": "synexia-index-precompute/native/src/mindex_ncm_codebook.h",
+      "before_sha256": "9a3ea16887fb48daf1b7ce491059ab94f3ad91ee20af5b9b69227c3f30c49146",
+      "after_sha256": "0acad9d3c2652387935d26fc087fffdbb334c821de13d23034a152e8ae40e310"
+    },
+    {
+      "path": "synexia-index-precompute/native/tests/ncm_codebook_test.c",
+      "before_sha256": "eafe18b9c9da98995570d3c4cc3abcecd55af9f053fb85c522ffbb6db546ed4d",
+      "after_sha256": "b46ddbdbd3aef765fcb7453f3de0617c66a20017414bdadd628ea8e5c8e3f97c"
+    },
+    {
+      "path": "synexia-index-precompute/src/test/java/com/synexia/precompute/MIndexNcmCodebookParity.java",
+      "before_sha256": "fb1e42cf214d05e7f904a1c0cf40d12986245ae43cfef779055f42f677735d70",
+      "after_sha256": "fab553da00d6f7e59e4f38968272f96b347945bb7f6e20833cc968e91ba15253"
+    }
+  ],
+  "measurement_receipt_sha256": "e74632db43f8c88c2ddf4c134ebc00d19ca031ece75bfde0bd7302f82c232631",
+  "measurement_environment": {
+    "machine": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz",
+    "cpu_affinity": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "compiler": "gcc (Debian 14.2.0-19) 14.2.0",
+    "java": "openjdk version \"21.0.13\" 2026-10-20\nOpenJDK Runtime Environment (build 21.0.13+9-1-deb13u2-Debian)\nOpenJDK 64-Bit Server VM (build 21.0.13+9-1-deb13u2-Debian, mixed mode, sharing)",
+    "java_language_flags": [
+      "-source",
+      "21",
+      "-target",
+      "21",
+      "-proc:none",
+      "-Xlint:all",
+      "-Werror"
+    ],
+    "native_FLT_EVAL_METHOD": 0,
+    "fallback_check_FLT_EVAL_METHOD": 2
+  },
+  "benchmark": {
+    "harness_source_sha256": "c0ebfaa556600df56fbad9fc2a27aa984dd3bcbfe9ecd13ce115a4bcb4672e72",
+    "pairs": 5,
+    "accepted_forks": 10,
+    "input_output_roots_equal_all_forks": true,
+    "nontrivial_shapes": 7,
+    "nontrivial_raw_paired_median_ratio_range": [
+      0.32862718901930504,
+      0.5297406267109982
+    ],
+    "nontrivial_java_control_normalized_median_ratio_range": [
+      0.37471906256062704,
+      0.6487872260337119
+    ],
+    "all_35_nontrivial_raw_and_normalized_paired_ratios_below_one": true,
+    "normalization": "For each paired fork: (candidate JNI ns / candidate Java ns) / (baseline JNI ns / baseline Java ns). Report median of five paired ratios. This is a descriptive control adjustment, not a statistical confidence interval.",
+    "tiny_shape_caveat": "1x1x1 and 256x1x1 have normalized medians 1.037 and 1.057; no kernel speedup claim for those shapes.",
+    "prior_wrapper_attempt": {
+      "accepted": false,
+      "numerical_failure": false,
+      "reason": "First baseline JVM exited zero, but a perfdata lock warning preceded CSV header and wrapper parsing rejected it. Both accepted lanes then used -XX:-UsePerfData; exact header parsing fixed. Original attempt retained in scratch.",
+      "status_sha256": "32ce8008b8f7235a6622bf68a0ad88b21cf09be3aec01a94c43d83934e9b58d5",
+      "stdout_sha256": "d508eeced203f792b0ea91f62b2385e13a72e92a2e634a91e206c0a32bbcbf1f"
+    },
+    "limitations": [
+      "Shared Linux x86_64 environment; no exclusive hardware reservation or frequency lock",
+      "128MiB fixed heap in both lanes; same existing JVM bytecode and JNI boundary",
+      "Alternated baseline/candidate fork order, five pairs; within-fork seven alternating lane rounds",
+      "Existing harness warms for 200ms per shape and uses median per lane; bounded observation only",
+      "All shape input/output roots match across all ten runs",
+      "No automatic threshold or Java default change is justified by this experiment",
+      "Unchanged Java control lanes show substantial host/JIT variability; small-shape improvements are not attributed confidently to the kernel change"
+    ]
+  },
+  "dispatch_decision": "Java remains default; explicit JNI opt-in is preserved.",
+  "scope": "Historical local paired measurement of the exact canonical kernel adapted into this recipient; separate emitted-product tests and handoff evidence qualify delivery. No whole-model, installed-JDK, all-platform or universal speedup claim.",
+  "preserved_observation": "BENCHMARK_OBSERVATION.json remains unchanged as the preceding kernel observation."
+}

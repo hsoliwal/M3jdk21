@@ -2,6 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.precompute;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
+import java.nio.file.Path;
 import java.util.Objects;
 
 /**
@@ -19,9 +23,9 @@ public final class NativePrecomputeOps {
     boolean loaded = false;
     if (!Boolean.getBoolean("m3.precompute.disableNative")) {
       try {
-        System.loadLibrary("m3_precompute");
+        loadNativeLibrary();
         loaded = nativeAbiVersion() == 1;
-      } catch (UnsatisfiedLinkError ignored) {
+      } catch (IOException | InvalidPathException | UnsatisfiedLinkError ignored) {
         loaded = false;
       }
     }
@@ -38,6 +42,23 @@ public final class NativePrecomputeOps {
       catch (UnsatisfiedLinkError oldLibrary) { ncmCodebook = false; }
     }
     NCM_CODEBOOK_AVAILABLE = ncmCodebook;
+  }
+
+  /** The configured path is authoritative; a failed optional load keeps the Java oracle. */
+  private static void loadNativeLibrary() throws IOException {
+    String explicit = System.getProperty("m3.precompute.native.path");
+    if (explicit != null && !explicit.isBlank()) {
+      System.load(Path.of(explicit).toAbsolutePath().normalize().toString());
+      return;
+    }
+    String pathFile = System.getProperty("m3.precompute.native.pathFile");
+    if (pathFile != null && !pathFile.isBlank()) {
+      String path = Files.readString(Path.of(pathFile)).strip();
+      if (path.isEmpty()) throw new IOException("empty precompute native path file");
+      System.load(Path.of(path).toAbsolutePath().normalize().toString());
+      return;
+    }
+    System.loadLibrary("m3_precompute");
   }
 
   private NativePrecomputeOps() {}

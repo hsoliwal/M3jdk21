@@ -90,6 +90,7 @@ if(BUILD_TESTING)
     target_compile_options(m3_ncm_codebook_checks PRIVATE
       -Wall -Wextra -Werror -Wconversion -Wshadow -Wpedantic
       -fno-fast-math -ffp-contract=off)
+    target_link_libraries(m3_ncm_codebook_checks PRIVATE m)
   endif()
   add_test(NAME m3_ncm_codebook_checks COMMAND m3_ncm_codebook_checks)
 endif()

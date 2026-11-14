@@ -15821,37 +15821,37 @@
           },
           {
             "repo": "hsoliwal/com.synexia",
-            "commit": "8ae88b8323241bb30de87f29d21a4fa8ad94cf27",
+            "commit": "9c53be215489b1e80be88d3e7f5661155bc8bc89",
             "module": "synexia-index-precompute",
             "path": "synexia-index-precompute/src/main/java/com/synexia/precompute/NativePrecomputeOps.java",
             "symbol": "com.synexia.precompute.NativePrecomputeOps",
             "signatures": [],
-            "sha256": "d72d9487c87c3c160178c5ece396ead0f336d5cd05ddcebe8a7bca448a9dda6e",
-            "git_blob_sha1": "603ba7e908c9d1507478c2b4d5a472996896b8ca",
+            "sha256": "d911e8f340e2092aacc914e0a09c8e69443419de60e2a97511f8dd3409498584",
+            "git_blob_sha1": "87a5bf410d2caa2ec202021190d8286dd7999d84",
             "fingerprint": null,
             "revision_role": "pinned"
           },
           {
             "repo": "hsoliwal/com.synexia",
-            "commit": "8ae88b8323241bb30de87f29d21a4fa8ad94cf27",
+            "commit": "9c53be215489b1e80be88d3e7f5661155bc8bc89",
             "module": "synexia-index-precompute",
             "path": "synexia-index-precompute/native/src/mindex_ncm_codebook.h",
             "symbol": "m3_ncm_status",
             "signatures": [],
-            "sha256": "9a3ea16887fb48daf1b7ce491059ab94f3ad91ee20af5b9b69227c3f30c49146",
-            "git_blob_sha1": "ac610c724002ac9c6987d7bde7c8d574c2307390",
+            "sha256": "0acad9d3c2652387935d26fc087fffdbb334c821de13d23034a152e8ae40e310",
+            "git_blob_sha1": "f38376869a5974c0c75bc71174ac3d0965fd401b",
             "fingerprint": null,
             "revision_role": "pinned"
           },
           {
             "repo": "hsoliwal/com.synexia",
-            "commit": "8ae88b8323241bb30de87f29d21a4fa8ad94cf27",
+            "commit": "9c53be215489b1e80be88d3e7f5661155bc8bc89",
             "module": "synexia-index-precompute",
             "path": "synexia-index-precompute/native/src/mindex_ncm_codebook.c",
             "symbol": "m3_ncm_nearest",
             "signatures": [],
-            "sha256": "b4378449ca8fb1cfbe42b49110da02e50e8420828d1bb04fc60e273ac0b79401",
-            "git_blob_sha1": "1e713dd947fadc930e9c00b8692300021b4212e6",
+            "sha256": "f6c238f857ad369ad409b50254bef18d8dd3c0f2bbc0a0ce1346566a44f83f8c",
+            "git_blob_sha1": "243b79a66456126f5c0a271956b15432b9b0bff0",
             "fingerprint": null,
             "revision_role": "pinned"
           },
@@ -15888,8 +15888,8 @@
             "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/NativePrecomputeOps.java",
             "symbol": "jdk.m3.precompute.NativePrecomputeOps",
             "signatures": [],
-            "sha256": "91f3c5f7e4343819afc810e733afdc7f1c92d02da807d11097c460fe2d8c7a89",
-            "git_blob_sha1": "a28c9398c1f9dcdb940111848b0007032b53fcd8",
+            "sha256": "bf74ea38ebca66cb8a94e530f35835120966bffa355ce86c0c1c61b29e2b79c4",
+            "git_blob_sha1": "d68dc1a486af881bcebead974edac517c92d977a",
             "fingerprint": null,
             "revision_role": "candidate"
           },
@@ -15900,8 +15900,8 @@
             "path": "m3/ports/precompute/src/main/native/include/m3_ncm_codebook.h",
             "symbol": "m3_ncm_status",
             "signatures": [],
-            "sha256": "91143798ef54e6b04ec439fa3f7b90c1c95ad6112633a4084b1ae454c5ef924a",
-            "git_blob_sha1": "a05a75ead4dab7b0038d677be510f33f87a35271",
+            "sha256": "b1ac9bfd605f5f101a923199f0447856f403330a28221be1b6ed356b8a680ca7",
+            "git_blob_sha1": "0ea569c54bb051350c3ee643ae89adeab3905dd8",
             "fingerprint": null,
             "revision_role": "candidate"
           },
@@ -15912,8 +15912,8 @@
             "path": "m3/ports/precompute/src/main/native/src/m3_ncm_codebook.c",
             "symbol": "m3_ncm_nearest",
             "signatures": [],
-            "sha256": "fc7e39b1aba282afa75897543be89bbf5c23d2c1e071a7e0e3bccd0c5ab87bde",
-            "git_blob_sha1": "77c433cbcd51f425a6b828925026f273947b3828",
+            "sha256": "1a6bc8198b4d1ae03c6cd5e39fca0ece1421d45a7c002523252920b7af15f5ca",
+            "git_blob_sha1": "7a64067ee7cc8d8dc9dd0e06489bf0a94494b488",
             "fingerprint": null,
             "revision_role": "candidate"
           },
@@ -15979,7 +15979,7 @@
           "cached_facts": "No cache, interner, retained input or global codebook."
         },
         "recipe": {
-          "id": "m3-model-text-jdk21-20261114",
+          "id": "m3-model-text-jdk21-native-20261114",
           "version": "20261114",
           "path": null,
           "sha256": null,
@@ -15996,16 +15996,18 @@
           "license": "Synexia first-party source remains Apache-2.0 with SPDX copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project; existing target and OpenJDK rights remain unchanged.",
           "publication": "Only executed product source/build/test postimages and passive receiving metadata; no recipe source, template, executor or improvement-memory copy enters this repository.",
           "copied_code": true,
-          "donor_boundary": "Canonical source bytes are pinned to Synexia commit 8ae88b8323241bb30de87f29d21a4fa8ad94cf27 with exact SHA-256 and Git blob identities. Private receiving evidence separately binds the committed recipe execution inputs and emitted target outputs."
+          "donor_boundary": "The three changed canonical runtime sources are pinned to Synexia commit 9c53be215489b1e80be88d3e7f5661155bc8bc89; the unchanged Java oracle and JNI bridge retain their original 8ae88b8323241bb30de87f29d21a4fa8ad94cf27 source pins. Exact SHA-256 and Git blob identities, previous sources/targets and private committed execution evidence are retained."
         },
         "sync": {
-          "source_revision": "8ae88b8323241bb30de87f29d21a4fa8ad94cf27",
-          "target_revision": "778cd3eac266974e7b5155e79838f74ee516b535",
+          "source_revision": "9c53be215489b1e80be88d3e7f5661155bc8bc89",
+          "target_revision": "733678935bdff44249e01aab3c2f81a18499af25",
           "direction": "source-to-target",
           "target_adaptations": [
             "Retain target package, loader and old pair/tuple JNI symbols.",
             "Add independent NCM feature negotiation and optional numeric batching.",
-            "Extend the existing native CMake target with C17 and strict floating-point semantics."
+            "Extend the existing native CMake target with C17 and strict floating-point semantics.",
+            "Honor explicit native.path and UTF-8 native.pathFile selection in the existing loader; native-profile tests require the built NCM feature. Keep Java default and legacy/disabled fallbacks.",
+            "Use register intermediates only when FLT_EVAL_METHOD is zero; retain volatile rounding for other evaluation formats, strict noncontracting arithmetic and stable first-minimum ties."
           ],
           "pending": [
             "String remains the active receiving phase; this component does not advance a family.",
@@ -16015,7 +16017,44 @@
           "conflicts": []
         },
         "lineage": {
-          "previous_sources": [],
+          "previous_sources": [
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "8ae88b8323241bb30de87f29d21a4fa8ad94cf27",
+              "module": "synexia-index-precompute",
+              "path": "synexia-index-precompute/src/main/java/com/synexia/precompute/NativePrecomputeOps.java",
+              "symbol": "com.synexia.precompute.NativePrecomputeOps",
+              "signatures": [],
+              "sha256": "d72d9487c87c3c160178c5ece396ead0f336d5cd05ddcebe8a7bca448a9dda6e",
+              "git_blob_sha1": "603ba7e908c9d1507478c2b4d5a472996896b8ca",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "8ae88b8323241bb30de87f29d21a4fa8ad94cf27",
+              "module": "synexia-index-precompute",
+              "path": "synexia-index-precompute/native/src/mindex_ncm_codebook.h",
+              "symbol": "m3_ncm_status",
+              "signatures": [],
+              "sha256": "9a3ea16887fb48daf1b7ce491059ab94f3ad91ee20af5b9b69227c3f30c49146",
+              "git_blob_sha1": "ac610c724002ac9c6987d7bde7c8d574c2307390",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "8ae88b8323241bb30de87f29d21a4fa8ad94cf27",
+              "module": "synexia-index-precompute",
+              "path": "synexia-index-precompute/native/src/mindex_ncm_codebook.c",
+              "symbol": "m3_ncm_nearest",
+              "signatures": [],
+              "sha256": "b4378449ca8fb1cfbe42b49110da02e50e8420828d1bb04fc60e273ac0b79401",
+              "git_blob_sha1": "1e713dd947fadc930e9c00b8692300021b4212e6",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
           "previous_targets": [
             {
               "repo": "hsoliwal/M3jdk21",
@@ -16028,17 +16067,56 @@
               "git_blob_sha1": "81369bbcd3db2a532d70cb55147614a1259575a6",
               "fingerprint": null,
               "revision_role": "pinned"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "733678935bdff44249e01aab3c2f81a18499af25",
+              "module": "m3/ports/precompute",
+              "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/NativePrecomputeOps.java",
+              "symbol": "jdk.m3.precompute.NativePrecomputeOps",
+              "signatures": [],
+              "sha256": "91f3c5f7e4343819afc810e733afdc7f1c92d02da807d11097c460fe2d8c7a89",
+              "git_blob_sha1": "a28c9398c1f9dcdb940111848b0007032b53fcd8",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "733678935bdff44249e01aab3c2f81a18499af25",
+              "module": "m3/ports/precompute",
+              "path": "m3/ports/precompute/src/main/native/include/m3_ncm_codebook.h",
+              "symbol": "m3_ncm_status",
+              "signatures": [],
+              "sha256": "91143798ef54e6b04ec439fa3f7b90c1c95ad6112633a4084b1ae454c5ef924a",
+              "git_blob_sha1": "a05a75ead4dab7b0038d677be510f33f87a35271",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "733678935bdff44249e01aab3c2f81a18499af25",
+              "module": "m3/ports/precompute",
+              "path": "m3/ports/precompute/src/main/native/src/m3_ncm_codebook.c",
+              "symbol": "m3_ncm_nearest",
+              "signatures": [],
+              "sha256": "fc7e39b1aba282afa75897543be89bbf5c23d2c1e071a7e0e3bccd0c5ab87bde",
+              "git_blob_sha1": "77c433cbcd51f425a6b828925026f273947b3828",
+              "fingerprint": null,
+              "revision_role": "pinned"
             }
           ],
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "New canonical source postimages are committed at 8ae88b8323241bb30de87f29d21a4fa8ad94cf27; their exact artifact hashes remain unchanged. Recipe/tool execution inputs and target parent equivalence are independently bound by the final private handoff evidence. The receiving preimage base remains 778cd3eac266974e7b5155e79838f74ee516b535.",
+        "observation": "This forward successor binds canonical runtime commit 9c53be215489b1e80be88d3e7f5661155bc8bc89 and receiving parent 733678935bdff44249e01aab3c2f81a18499af25. Native library-selection, strict scalar arithmetic and focused module qualification remain component evidence. The historical benchmark observation is unchanged; NATIVE_SUCCESSOR_OBSERVATION.json records the bounded paired experiment. Full installed-image and cross-platform acceptance remain pending.",
         "test_descriptions": [
           "Target NcmCodebookTest and NcmCodebookParity: independent exact dyadic oracle, binary64 parity, invalid shape/nonfinite/overflow, offsets/aliasing/concurrency and existing pair/tuple regression.",
           "Separate actual new-native, forced-Java and older-library processes; JNI runs use -Xcheck:jni.",
           "Native standalone strict C and UBSan checks; CMake/CTest are independently recorded if available.",
-          "Passive bounded dispatch evidence: m3/qualification/ncm-codebook-20261114/BENCHMARK_OBSERVATION.json; this design observation does not close the pending runtime performance gates."
+          "Passive bounded dispatch evidence: m3/qualification/ncm-codebook-20261114/BENCHMARK_OBSERVATION.json; this design observation does not close the pending runtime performance gates.",
+          "NativePrecomputeLoadingTest exercises 18 fresh-JVM precedence, malformed/absent/disabled configuration and required-native scenarios; selected native Maven tests total 20.",
+          "The emitted complete precompute source/test module compiles under genuine Java 21 --release 21; three actual CTests and selected Java/JNI tests are independently recorded. The inherited full-suite DistanceFrontierTest heap failure and exact exec-maven-plugin 3.3.0 resolution hold remain explicit.",
+          "Enhanced parity checks include strict C17, generated JNI symbol agreement, pure Java, actual new JNI and real older-library fallback; the public result-only handoff binds all eleven successor outputs."
         ]
       }
     ]

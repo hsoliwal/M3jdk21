@@ -13,6 +13,15 @@ _Static_assert(FLT_RADIX == 2 && DBL_MANT_DIG == 53 && DBL_MAX_EXP == 1024
     && DBL_MIN_EXP == -1021 && sizeof(double) == 8,
     "NCM codebook requires IEEE-754 binary64 double");
 
+/* The strict build disables contraction and reassociation. With no excess
+ * evaluation precision, binary64 intermediates can remain in registers. Other
+ * evaluation methods retain the original volatile store-rounding path. */
+#if defined(FLT_EVAL_METHOD) && FLT_EVAL_METHOD == 0
+typedef double m3_ncm_intermediate;
+#else
+typedef volatile double m3_ncm_intermediate;
+#endif
+
 static int range_fits(size_t length, int32_t offset, int32_t rows, int32_t dimensions) {
   if (offset < 0 || (size_t) offset > length) return 0;
   return (size_t) rows <= (length - (size_t) offset) / (size_t) dimensions;
@@ -58,10 +67,10 @@ m3_ncm_status m3_ncm_nearest(
     double best_distance = INFINITY;
     size_t code_base = (size_t) codebook_offset;
     for (int32_t code = 0; code < code_count; code++, code_base += dimension_count) {
-      volatile double distance = 0.0;
+      m3_ncm_intermediate distance = 0.0;
       for (size_t dimension = 0; dimension < dimension_count; dimension++) {
-        volatile double difference = vectors[vector_base + dimension] - codebook[code_base + dimension];
-        volatile double square = difference * difference;
+        m3_ncm_intermediate difference = vectors[vector_base + dimension] - codebook[code_base + dimension];
+        m3_ncm_intermediate square = difference * difference;
         distance = distance + square;
       }
       if (!isfinite(distance)) return M3_NCM_DISTANCE_OVERFLOW;

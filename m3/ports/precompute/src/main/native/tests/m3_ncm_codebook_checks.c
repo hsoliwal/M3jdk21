@@ -64,6 +64,47 @@ static void invalid_cases(void) {
   check(tied[0] == 0 && tied[1] == 0, "first underflow tie");
 }
 
+/* These witnesses change the winning code if arithmetic is contracted or
+ * reassociated. Volatile oracle intermediates make the intended rounding
+ * explicit independently of the optimized kernel's intermediate type. */
+static void rounding_witnesses(void) {
+  const double x = 0x1.0000002000001p0;
+  const double y = 0x1p-27;
+  volatile double x_square = x * x;
+  volatile double y_square = y * y;
+  volatile double separate = x_square + y_square;
+  check(fma(x, x, y_square) > separate, "FMA witness must distinguish contraction");
+  const double zero2[] = {0, 0};
+  const double fma_codes[] = {y, x, 0, x};
+  int32_t result[] = {-1};
+  check(m3_ncm_nearest(zero2, 2, 0, 1, fma_codes, 4, 0, 2, 2, result, 1) == M3_NCM_OK,
+      "FMA witness status");
+  check(result[0] == 0, "separate rounding must retain the first tied code");
+
+  const double z = 0x1.4p-27;
+  volatile double small = z * z;
+  volatile double first = 1.0 + small;
+  volatile double serial = first + small;
+  volatile double pair = small + small;
+  volatile double regrouped = 1.0 + pair;
+  check(regrouped > serial, "sum witness must distinguish reassociation");
+  const double zero3[] = {0, 0, 0};
+  const double sum_codes[] = {1, z, z, 1, 0, 0};
+  check(m3_ncm_nearest(zero3, 3, 0, 1, sum_codes, 6, 0, 2, 3, result, 1) == M3_NCM_OK,
+      "sum witness status");
+  check(result[0] == 0, "dimension order must retain the first tied code");
+
+  const double losing_overflow[] = {0, DBL_MAX};
+  check(m3_ncm_nearest(zero2, 2, 0, 1, losing_overflow, 2, 0, 2, 1, result, 1)
+      == M3_NCM_DISTANCE_OVERFLOW, "exact match must not skip losing-code overflow");
+  const double late_overflow[] = {0, DBL_MAX};
+  check(m3_ncm_nearest(late_overflow, 2, 0, 2, zero2, 2, 0, 1, 1, result, 1)
+      == M3_NCM_INVALID_ARGUMENT, "output length is validated before distance overflow");
+  int32_t partial[2] = {-1, -1};
+  check(m3_ncm_nearest(late_overflow, 2, 0, 2, zero2, 2, 0, 1, 1, partial, 2)
+      == M3_NCM_DISTANCE_OVERFLOW, "later-row overflow is refused");
+}
+
 static void exact_properties(void) {
   for (int trial = 0; trial < 4096; trial++) {
     int32_t rows = (int32_t) (next_random() % 8U);
@@ -109,6 +150,7 @@ static void exact_properties(void) {
 
 int main(void) {
   invalid_cases();
+  rounding_witnesses();
   exact_properties();
   printf("NCM_CODEBOOK_C_PASS checks=%zu\n", checks);
   return 0;

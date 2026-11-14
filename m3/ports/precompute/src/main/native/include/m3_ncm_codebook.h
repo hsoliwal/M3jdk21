@@ -30,7 +30,9 @@ m3_ncm_status m3_ncm_validate_layout(
  *
  * Compile with strict binary64 semantics (no fast-math or contraction); execution
  * requires the default round-to-nearest and gradual-underflow environment used by
- * the JVM. Volatile intermediates force separately rounded binary64 operations.
+ * the JVM. When FLT_EVAL_METHOD is zero, strict separate binary64 operations use
+ * ordinary double intermediates; other evaluation methods retain the original
+ * volatile store-rounding path. No contraction or reassociation is permitted.
  * Invalid layout or nonfinite input is rejected before output is written.
  * On distance overflow, output may be partial and must be discarded; the JNI
  * bridge keeps its fresh result private until success and throws on failure.
