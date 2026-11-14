@@ -43,7 +43,7 @@ final class M3RecipeHomePolicyTest {
         }
 
         for (String surface : List.of(
-                "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/semantic/**",
+                "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/semantic/**",
                 "m3/indexdb/**")) {
             String[] row = rows.get(surface);
             assertNotNull(row, surface);
@@ -52,7 +52,7 @@ final class M3RecipeHomePolicyTest {
         }
         // The ledger records A3 and the convergence pair as Synexia receiver adapters since 2026-10-13.
         for (Map.Entry<String, String> adapter : Map.of(
-                        "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/a3/**",
+                        "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/**",
                         "com.synexia.rewrite.M3Jdk21A3AlgorithmCatalogueRecipe;com.synexia.rewrite.M3Jdk21A3SerialFileWorkRecipe",
                         "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceCatalog.java",
                         "com.synexia.rewrite.M3Jdk21FileConvergenceRecipe",
@@ -160,12 +160,12 @@ final class M3RecipeHomePolicyTest {
     void jdkBackportNamespaceRemainsTargetSpecific() throws Exception {
         Map<String, String[]> rows = rows();
         String[] backport = rows.get(
-                "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/**");
+                "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/**");
         assertEquals("JDK_TARGET_SPECIFIC", backport[4]);
         assertEquals("false", backport[7]);
 
         String[] receiver = rows.get(
-                "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/m3/**");
+                "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/synexia/**");
         assertEquals("RECEIVER_ADAPTER_ONLY", receiver[4]);
         assertEquals("true", receiver[7]);
         assertFalse(receiver[5].isBlank());
@@ -217,13 +217,13 @@ final class M3RecipeHomePolicyTest {
 
         List<String> lines = Files.readAllLines(manifest);
         assertEquals(
-                "path\tgit_blob_sha1\tdisposition\tcanonical_synexia_owner\tlicense",
+                "path\tgit_blob_sha1\tdisposition\tcanonical_synexia_owner\tlicense\tprevious_git_blob_sha1\tprevious_pin_commit",
                 lines.getFirst());
 
         Map<String, FrozenRow> frozen = new HashMap<>();
         for (String line : lines.subList(1, lines.size())) {
             String[] columns = line.split("\t", -1);
-            assertEquals(5, columns.length);
+            assertEquals(7, columns.length);
             assertTrue(columns[1].matches("[0-9a-f]{40}"), columns[0]);
             assertEquals("MIGRATION_RESIDUE_NOT_CANONICAL", columns[2], columns[0]);
             assertTrue(
@@ -234,8 +234,14 @@ final class M3RecipeHomePolicyTest {
             frozen.put(columns[0], new FrozenRow(columns[1], columns[3]));
         }
 
+        // Same closed set as m3/compatibility/check_m3_recipe_ownership.py (RESIDUE_DIRS) and its Python test:
+        // the semantic directory is closed; m3/indexdb is a live module, so its eight rows are pinned by blob
+        // below without closing the directory.
         Set<String> actual = reusableResiduePaths(root);
-        assertEquals(new TreeSet<>(frozen.keySet()), actual);
+        assertEquals(
+                new TreeSet<>(frozen.keySet().stream().filter(path -> path.contains("/rewrite/semantic/")).toList()),
+                actual);
+        assertEquals(8L, frozen.keySet().stream().filter(path -> path.startsWith("m3/indexdb/")).count());
 
         for (Map.Entry<String, FrozenRow> entry : frozen.entrySet()) {
             Path file = root.resolve(entry.getKey());
@@ -252,20 +258,8 @@ final class M3RecipeHomePolicyTest {
 
     private static Set<String> reusableResiduePaths(Path root) throws Exception {
         TreeSet<String> result = new TreeSet<>();
-        for (String exact : List.of(
-                "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceCatalog.java",
-                "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceRecipe.java")) {
-            if (Files.isRegularFile(root.resolve(exact))) {
-                result.add(exact);
-            }
-        }
-
         for (String directory : List.of(
-                "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope",
-                "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/atom",
-                "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/semantic",
-                "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/a3",
-                "m3/indexdb/src/main/java")) {
+                "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/semantic")) {
             Path start = root.resolve(directory);
             if (!Files.isDirectory(start)) {
                 continue;
@@ -349,7 +343,11 @@ final class M3RecipeHomePolicyTest {
             boolean handoffRequired) {
         boolean matches(String path) {
             if (surface.endsWith("/**")) {
-                return path.startsWith(surface.substring(0, surface.length() - 2));
+                // The ledger keeps the surface it recorded before the naming rename (#2257); the directory moved.
+                return path.startsWith(
+                        surface.substring(0, surface.length() - 2)
+                                .replace("/com/m3/rewrite/synexia/", "/jdk/m3/rewrite/m3/")
+                                .replace("/com/m3/rewrite/", "/jdk/m3/rewrite/"));
             }
             return surface.equals(path);
         }

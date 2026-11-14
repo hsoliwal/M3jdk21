@@ -1132,6 +1132,9 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
     def test_standalone_baseline_does_not_waive_the_release_naming_gate(self):
         self.contract["standalone"]["required_for_release"] = True
         self.write("m3/release/release-contract.json", json.dumps(self.contract))
+        # A real naming leftover: attribution and donor identities are not names (A_ATTRIBUTION, L_LINEAGE), so the
+        # fixture plants an unquoted SYNEXIA_* constant, which the naming gate still holds for a release.
+        self.write("m3/tooling/legacy-env.sh", "export SYNEXIA_HOME=/opt/legacy\n")
         spec = importlib.util.spec_from_file_location(
             "standalone_clean_fixture", Path(__file__).with_name("check_standalone.py"))
         standalone = importlib.util.module_from_spec(spec)
