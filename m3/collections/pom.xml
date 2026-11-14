@@ -142,9 +142,12 @@
           </execution>
         </executions>
         <configuration>
+          <!-- Keep leaf-root package metadata identical to fresh javac. -->
+          <createMissingPackageInfoClass>false</createMissingPackageInfoClass>
           <compilerArgs>
             <arg>-Xlint:all,-module</arg>
             <arg>-Werror</arg>
+            <arg>-Xpkginfo:always</arg>
           </compilerArgs>
         </configuration>
       </plugin>
