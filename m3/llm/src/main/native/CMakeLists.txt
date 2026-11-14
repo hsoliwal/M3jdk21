@@ -4,9 +4,13 @@ project(m3_llm_ncm LANGUAGES CXX)
 
 find_package(JNI REQUIRED)
 
-# Independently implemented residual-VQ nearest-code acceleration. Java remains the oracle.
-# No weights, inference server, third-party runtime or automatic library loading is added.
-add_library(m3_ncm SHARED src/ncm_kernel.cpp src/ncm_jni.cpp)
+# The single jdk.m3.llm NCM native owner. Independently implemented residual-VQ
+# nearest-code acceleration (ncm_kernel.cpp, M3NcmNative via ncm_jni.cpp) plus the
+# M3NcmNativeOps primitives (ncm_projection_jni.cpp): nearest routed to the same
+# kernel, resize, Phi and tied logits translated from HazyResearch/ncm (MIT, see
+# NCM_DONOR_NOTICE.md). Java remains the oracle.
+# No weights, inference server or third-party runtime is added.
+add_library(m3_ncm SHARED src/ncm_kernel.cpp src/ncm_jni.cpp src/ncm_projection_jni.cpp)
 target_include_directories(m3_ncm PRIVATE ${JNI_INCLUDE_DIRS} include)
 target_compile_features(m3_ncm PRIVATE cxx_std_20)
 if(MSVC)
