@@ -286,6 +286,56 @@ def _object_without_duplicate_keys(pairs: list[tuple[str, object]]) -> dict[str,
     return result
 
 
+# Keep the producer wire text identical to the existing Java 21 payload reader.
+# Reuse Python's shortest-round-trip conversion rather than porting a float engine.
+_PRECOMPUTE_JSON_LEXEMES = re.compile(
+    r'"(?:[^"\\]|\\.)*"|-?[0-9]+(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?')
+_PRECOMPUTE_JSON_ESCAPE = re.compile(r'\\(?:u007f|.)')
+
+
+def _decimal_parts(text: str) -> tuple[str, int]:
+    mantissa, _, exponent = text.lower().partition("e")
+    whole, _, fraction = mantissa.partition(".")
+    digits = (whole + fraction).lstrip("0")
+    power = int(exponent or "0") - len(fraction)
+    trimmed = digits.rstrip("0")
+    return trimmed, power + len(digits) - len(trimmed)
+
+
+def _java_double_text(value: float) -> str:
+    """Java 21 Double.toString selection and presentation for a finite double."""
+    if not math.isfinite(value):
+        raise ValueError("non-finite precompute double")
+    if value == 0.0:
+        return repr(value)  # Retain the sign of zero.
+    sign = "-" if value < 0.0 else ""
+    magnitude = abs(value)
+    digits, power = _decimal_parts(repr(magnitude))
+    if len(digits) == 1:
+        # Java selects the closest of one AND two significant digits in this case.
+        digits, power = _decimal_parts(format(magnitude, ".2g"))
+    exponent = len(digits) + power - 1
+    if -3 <= exponent < 0:
+        return sign + "0." + "0" * (-exponent - 1) + digits
+    if 0 <= exponent < 7:
+        if power >= 0:
+            return sign + digits + "0" * power + ".0"
+        point = len(digits) + power
+        return sign + digits[:point] + "." + digits[point:]
+    return sign + digits[0] + "." + (digits[1:] or "0") + "E" + str(exponent)
+
+
+def _canonical_precompute_token(match: re.Match[str]) -> str:
+    token = match.group()
+    if token.startswith('"'):
+        # Match complete JSON escapes so a literal backslash-u007f stays literal.
+        return _PRECOMPUTE_JSON_ESCAPE.sub(
+            lambda escape: "\x7f" if escape.group() == r"\u007f" else escape.group(),
+            token,
+        ) if r"\u007f" in token else token
+    return _java_double_text(float(token)) if "." in token or "e" in token or "E" in token else token
+
+
 def canonical_precompute_payload(value: str) -> str:
     """Normalize an owner payload without interpreting its domain-specific fields."""
     if len(value.encode("utf-8", "surrogatepass")) > MAX_PRECOMPUTE_PAYLOAD_BYTES:
@@ -299,6 +349,7 @@ def canonical_precompute_payload(value: str) -> str:
         raise ValueError("precompute payload must be a JSON object")
     canonical = json.dumps(payload, ensure_ascii=True, sort_keys=True,
                            separators=(",", ":"), allow_nan=False)
+    canonical = _PRECOMPUTE_JSON_LEXEMES.sub(_canonical_precompute_token, canonical)
     if len(canonical.encode("utf-8")) > MAX_PRECOMPUTE_PAYLOAD_BYTES:
         raise ValueError("canonical precompute payload exceeds 1 MiB")
     return canonical

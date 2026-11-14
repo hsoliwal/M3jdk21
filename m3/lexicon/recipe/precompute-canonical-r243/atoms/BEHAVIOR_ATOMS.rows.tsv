@@ -1,0 +1,5 @@
+atom_id	owner	input_contract	output_contract	pattern	proof
+DECIMAL_PARTS_V1	_decimal_parts	Positive nonzero Python decimal text	Normalized digits and base10 power	NORMALIZE_DECIMAL_V1	Java21 finite-bit corpus
+JAVA21_DOUBLE_TEXT_V1	_java_double_text	Finite Python binary64	Java21 decimal selection and spelling; signed zero	WRAP_CPYTHON_SHORTEST_V1	28092 raw-bit round trips and exact oracle text
+JSON_TOKEN_TEXT_V1	_canonical_precompute_token	Complete quoted string or numeric token from json.dumps	Same JSON value with Java21 spelling	LEXICAL_TOKEN_ISOLATION_V1	272 payloads; literal escape and nested-value tests
+PAYLOAD_CANONICAL_V1	canonical_precompute_payload	Existing JSON object input and 1MiB budget	Existing validation and shape acceptance; Java21 numeric/string spelling	EXISTING_OWNER_BOUNDARY_V1	7 Python tests; size/refusal/fixed-point checks
