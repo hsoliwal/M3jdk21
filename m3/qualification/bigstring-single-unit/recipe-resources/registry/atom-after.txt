@@ -1,0 +1,2 @@
+            case "m3/core/src/jdk/m3/text/LocalM3Arena.java" -> true;
+            case "m3/core/src/jdk/m3/text/M3BigString.java" -> true;
