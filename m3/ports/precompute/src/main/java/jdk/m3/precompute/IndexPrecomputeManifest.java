@@ -196,6 +196,14 @@ public final class IndexPrecomputeManifest {
 
     java.util.HashSet<String> sourceIds = new java.util.HashSet<>();
     this.sources.forEach(source -> sourceIds.add(source.id()));
+    if (sourceIds.size() != this.sources.size()) {
+      for (int i = 1; i < this.sources.size(); i++) {
+        if (this.sources.get(i - 1).id().equals(this.sources.get(i).id())) {
+          throw new IllegalArgumentException(
+              "duplicate precompute source id " + this.sources.get(i).id());
+        }
+      }
+    }
     ArrayList<SourceCapabilityBinding> bindings =
         new ArrayList<>(
             Objects.requireNonNull(sourceCapabilityBindings, "sourceCapabilityBindings"));

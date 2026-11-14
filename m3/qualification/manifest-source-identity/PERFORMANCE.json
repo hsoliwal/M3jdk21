@@ -1,0 +1,798 @@
+{
+  "schema": "M3_MANIFEST_IDENTITY_MEASUREMENTS_V1",
+  "claim": "NONE; correctness/identity repair with one cardinality check on the unchanged valid path",
+  "workload": "public manifest construction followed by parseCanonical; source descriptors 1 and 32; 200 warm calls then five samples of 100 iterations in each before/after/after/before JVM",
+  "donor": {
+    "summary": {
+      "1-before": {
+        "samples": 10,
+        "bytesPerConstructorAndParse": 13296.88,
+        "nanosPerConstructorAndParse": 16777.5,
+        "minNanos": 14947,
+        "maxNanos": 22148
+      },
+      "1-after": {
+        "samples": 10,
+        "bytesPerConstructorAndParse": 13296.439999999999,
+        "nanosPerConstructorAndParse": 17224.5,
+        "minNanos": 13192,
+        "maxNanos": 28480
+      },
+      "32-before": {
+        "samples": 10,
+        "bytesPerConstructorAndParse": 119016,
+        "nanosPerConstructorAndParse": 75855.5,
+        "minNanos": 64416,
+        "maxNanos": 103648
+      },
+      "32-after": {
+        "samples": 10,
+        "bytesPerConstructorAndParse": 119016,
+        "nanosPerConstructorAndParse": 70755,
+        "minNanos": 63475,
+        "maxNanos": 96692
+      }
+    },
+    "samples": [
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "sourceRecords": 1,
+        "sample": 0,
+        "iterations": 100,
+        "nanos": 2193800,
+        "allocatedBytes": 1330416
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "sourceRecords": 1,
+        "sample": 1,
+        "iterations": 100,
+        "nanos": 2186200,
+        "allocatedBytes": 1329688
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "sourceRecords": 1,
+        "sample": 2,
+        "iterations": 100,
+        "nanos": 1565600,
+        "allocatedBytes": 1329600
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "sourceRecords": 1,
+        "sample": 3,
+        "iterations": 100,
+        "nanos": 1494700,
+        "allocatedBytes": 1329600
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "sourceRecords": 1,
+        "sample": 4,
+        "iterations": 100,
+        "nanos": 1536700,
+        "allocatedBytes": 1329752
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "sourceRecords": 32,
+        "sample": 0,
+        "iterations": 100,
+        "nanos": 10364800,
+        "allocatedBytes": 11901840
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "sourceRecords": 32,
+        "sample": 1,
+        "iterations": 100,
+        "nanos": 8276800,
+        "allocatedBytes": 11901600
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "sourceRecords": 32,
+        "sample": 2,
+        "iterations": 100,
+        "nanos": 8338000,
+        "allocatedBytes": 11901600
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "sourceRecords": 32,
+        "sample": 3,
+        "iterations": 100,
+        "nanos": 7783600,
+        "allocatedBytes": 11902392
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "sourceRecords": 32,
+        "sample": 4,
+        "iterations": 100,
+        "nanos": 6544100,
+        "allocatedBytes": 11901600
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "sourceRecords": 1,
+        "sample": 0,
+        "iterations": 100,
+        "nanos": 2848000,
+        "allocatedBytes": 1330416
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "sourceRecords": 1,
+        "sample": 1,
+        "iterations": 100,
+        "nanos": 1822800,
+        "allocatedBytes": 1329688
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "sourceRecords": 1,
+        "sample": 2,
+        "iterations": 100,
+        "nanos": 1622100,
+        "allocatedBytes": 1329600
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "sourceRecords": 1,
+        "sample": 3,
+        "iterations": 100,
+        "nanos": 1340600,
+        "allocatedBytes": 1329600
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "sourceRecords": 1,
+        "sample": 4,
+        "iterations": 100,
+        "nanos": 1319200,
+        "allocatedBytes": 1329600
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "sourceRecords": 32,
+        "sample": 0,
+        "iterations": 100,
+        "nanos": 8425500,
+        "allocatedBytes": 11901840
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "sourceRecords": 32,
+        "sample": 1,
+        "iterations": 100,
+        "nanos": 9669200,
+        "allocatedBytes": 11901600
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "sourceRecords": 32,
+        "sample": 2,
+        "iterations": 100,
+        "nanos": 7181800,
+        "allocatedBytes": 11901600
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "sourceRecords": 32,
+        "sample": 3,
+        "iterations": 100,
+        "nanos": 6969200,
+        "allocatedBytes": 11902392
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "sourceRecords": 32,
+        "sample": 4,
+        "iterations": 100,
+        "nanos": 6510400,
+        "allocatedBytes": 11901600
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "sourceRecords": 1,
+        "sample": 0,
+        "iterations": 100,
+        "nanos": 1953500,
+        "allocatedBytes": 1330416
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "sourceRecords": 1,
+        "sample": 1,
+        "iterations": 100,
+        "nanos": 1991300,
+        "allocatedBytes": 1329688
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "sourceRecords": 1,
+        "sample": 2,
+        "iterations": 100,
+        "nanos": 1858300,
+        "allocatedBytes": 1329600
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "sourceRecords": 1,
+        "sample": 3,
+        "iterations": 100,
+        "nanos": 1541400,
+        "allocatedBytes": 1329600
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "sourceRecords": 1,
+        "sample": 4,
+        "iterations": 100,
+        "nanos": 1486800,
+        "allocatedBytes": 1329752
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "sourceRecords": 32,
+        "sample": 0,
+        "iterations": 100,
+        "nanos": 8395300,
+        "allocatedBytes": 11901840
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "sourceRecords": 32,
+        "sample": 1,
+        "iterations": 100,
+        "nanos": 7292800,
+        "allocatedBytes": 11901600
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "sourceRecords": 32,
+        "sample": 2,
+        "iterations": 100,
+        "nanos": 6834700,
+        "allocatedBytes": 11902392
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "sourceRecords": 32,
+        "sample": 3,
+        "iterations": 100,
+        "nanos": 6933800,
+        "allocatedBytes": 11901600
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "sourceRecords": 32,
+        "sample": 4,
+        "iterations": 100,
+        "nanos": 6347500,
+        "allocatedBytes": 11901600
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "sourceRecords": 1,
+        "sample": 0,
+        "iterations": 100,
+        "nanos": 2214800,
+        "allocatedBytes": 1330416
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "sourceRecords": 1,
+        "sample": 1,
+        "iterations": 100,
+        "nanos": 1888200,
+        "allocatedBytes": 1329688
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "sourceRecords": 1,
+        "sample": 2,
+        "iterations": 100,
+        "nanos": 1789900,
+        "allocatedBytes": 1329600
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "sourceRecords": 1,
+        "sample": 3,
+        "iterations": 100,
+        "nanos": 1506400,
+        "allocatedBytes": 1329752
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "sourceRecords": 1,
+        "sample": 4,
+        "iterations": 100,
+        "nanos": 1525800,
+        "allocatedBytes": 1329600
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "sourceRecords": 32,
+        "sample": 0,
+        "iterations": 100,
+        "nanos": 8138400,
+        "allocatedBytes": 11901840
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "sourceRecords": 32,
+        "sample": 1,
+        "iterations": 100,
+        "nanos": 7387500,
+        "allocatedBytes": 11902392
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "sourceRecords": 32,
+        "sample": 2,
+        "iterations": 100,
+        "nanos": 6995500,
+        "allocatedBytes": 11901600
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "sourceRecords": 32,
+        "sample": 3,
+        "iterations": 100,
+        "nanos": 7201800,
+        "allocatedBytes": 11901600
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "sourceRecords": 32,
+        "sample": 4,
+        "iterations": 100,
+        "nanos": 6441600,
+        "allocatedBytes": 11901600
+      }
+    ]
+  },
+  "receiver": {
+    "summary": {
+      "1-before": {
+        "samples": 10,
+        "bytesPerConstructorAndParse": 13296.439999999999,
+        "nanosPerConstructorAndParse": 17554,
+        "minNanos": 15460,
+        "maxNanos": 22936
+      },
+      "1-after": {
+        "samples": 10,
+        "bytesPerConstructorAndParse": 13296.88,
+        "nanosPerConstructorAndParse": 17848,
+        "minNanos": 14593,
+        "maxNanos": 27232
+      },
+      "32-before": {
+        "samples": 10,
+        "bytesPerConstructorAndParse": 119016,
+        "nanosPerConstructorAndParse": 84752.5,
+        "minNanos": 76339,
+        "maxNanos": 97528
+      },
+      "32-after": {
+        "samples": 10,
+        "bytesPerConstructorAndParse": 119016,
+        "nanosPerConstructorAndParse": 80433,
+        "minNanos": 62511,
+        "maxNanos": 109476
+      }
+    },
+    "samples": [
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "sourceRecords": 1,
+        "sample": 0,
+        "iterations": 100,
+        "nanos": 2293600,
+        "allocatedBytes": 1330496
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "sourceRecords": 1,
+        "sample": 1,
+        "iterations": 100,
+        "nanos": 1983000,
+        "allocatedBytes": 1329600
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "sourceRecords": 1,
+        "sample": 2,
+        "iterations": 100,
+        "nanos": 1648000,
+        "allocatedBytes": 1329688
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "sourceRecords": 1,
+        "sample": 3,
+        "iterations": 100,
+        "nanos": 1725700,
+        "allocatedBytes": 1329600
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "sourceRecords": 1,
+        "sample": 4,
+        "iterations": 100,
+        "nanos": 1867800,
+        "allocatedBytes": 1329752
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "sourceRecords": 32,
+        "sample": 0,
+        "iterations": 100,
+        "nanos": 9627000,
+        "allocatedBytes": 11901840
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "sourceRecords": 32,
+        "sample": 1,
+        "iterations": 100,
+        "nanos": 8446300,
+        "allocatedBytes": 11901600
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "sourceRecords": 32,
+        "sample": 2,
+        "iterations": 100,
+        "nanos": 8271900,
+        "allocatedBytes": 11901600
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "sourceRecords": 32,
+        "sample": 3,
+        "iterations": 100,
+        "nanos": 7633900,
+        "allocatedBytes": 11902392
+      },
+      {
+        "stage": "product-0-before",
+        "variant": "before",
+        "sourceRecords": 32,
+        "sample": 4,
+        "iterations": 100,
+        "nanos": 7918000,
+        "allocatedBytes": 11901600
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "sourceRecords": 1,
+        "sample": 0,
+        "iterations": 100,
+        "nanos": 1800600,
+        "allocatedBytes": 1330416
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "sourceRecords": 1,
+        "sample": 1,
+        "iterations": 100,
+        "nanos": 1769000,
+        "allocatedBytes": 1329688
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "sourceRecords": 1,
+        "sample": 2,
+        "iterations": 100,
+        "nanos": 1473600,
+        "allocatedBytes": 1329600
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "sourceRecords": 1,
+        "sample": 3,
+        "iterations": 100,
+        "nanos": 1459300,
+        "allocatedBytes": 1329600
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "sourceRecords": 1,
+        "sample": 4,
+        "iterations": 100,
+        "nanos": 1673800,
+        "allocatedBytes": 1329752
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "sourceRecords": 32,
+        "sample": 0,
+        "iterations": 100,
+        "nanos": 10947600,
+        "allocatedBytes": 11901840
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "sourceRecords": 32,
+        "sample": 1,
+        "iterations": 100,
+        "nanos": 7893900,
+        "allocatedBytes": 11901600
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "sourceRecords": 32,
+        "sample": 2,
+        "iterations": 100,
+        "nanos": 7784300,
+        "allocatedBytes": 11902392
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "sourceRecords": 32,
+        "sample": 3,
+        "iterations": 100,
+        "nanos": 7010400,
+        "allocatedBytes": 11901600
+      },
+      {
+        "stage": "product-1-after",
+        "variant": "after",
+        "sourceRecords": 32,
+        "sample": 4,
+        "iterations": 100,
+        "nanos": 6251100,
+        "allocatedBytes": 11901600
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "sourceRecords": 1,
+        "sample": 0,
+        "iterations": 100,
+        "nanos": 2490900,
+        "allocatedBytes": 1330416
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "sourceRecords": 1,
+        "sample": 1,
+        "iterations": 100,
+        "nanos": 1802300,
+        "allocatedBytes": 1329688
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "sourceRecords": 1,
+        "sample": 2,
+        "iterations": 100,
+        "nanos": 1648300,
+        "allocatedBytes": 1329600
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "sourceRecords": 1,
+        "sample": 3,
+        "iterations": 100,
+        "nanos": 2411700,
+        "allocatedBytes": 1329600
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "sourceRecords": 1,
+        "sample": 4,
+        "iterations": 100,
+        "nanos": 2723200,
+        "allocatedBytes": 1329752
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "sourceRecords": 32,
+        "sample": 0,
+        "iterations": 100,
+        "nanos": 9589000,
+        "allocatedBytes": 11901840
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "sourceRecords": 32,
+        "sample": 1,
+        "iterations": 100,
+        "nanos": 9055400,
+        "allocatedBytes": 11901600
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "sourceRecords": 32,
+        "sample": 2,
+        "iterations": 100,
+        "nanos": 8803400,
+        "allocatedBytes": 11902392
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "sourceRecords": 32,
+        "sample": 3,
+        "iterations": 100,
+        "nanos": 8192700,
+        "allocatedBytes": 11901600
+      },
+      {
+        "stage": "product-2-after",
+        "variant": "after",
+        "sourceRecords": 32,
+        "sample": 4,
+        "iterations": 100,
+        "nanos": 6773400,
+        "allocatedBytes": 11901600
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "sourceRecords": 1,
+        "sample": 0,
+        "iterations": 100,
+        "nanos": 2038100,
+        "allocatedBytes": 1330496
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "sourceRecords": 1,
+        "sample": 1,
+        "iterations": 100,
+        "nanos": 1785100,
+        "allocatedBytes": 1329600
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "sourceRecords": 1,
+        "sample": 2,
+        "iterations": 100,
+        "nanos": 1546000,
+        "allocatedBytes": 1329688
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "sourceRecords": 1,
+        "sample": 3,
+        "iterations": 100,
+        "nanos": 1592600,
+        "allocatedBytes": 1329600
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "sourceRecords": 1,
+        "sample": 4,
+        "iterations": 100,
+        "nanos": 1705900,
+        "allocatedBytes": 1329600
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "sourceRecords": 32,
+        "sample": 0,
+        "iterations": 100,
+        "nanos": 9752800,
+        "allocatedBytes": 11901840
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "sourceRecords": 32,
+        "sample": 1,
+        "iterations": 100,
+        "nanos": 8526500,
+        "allocatedBytes": 11901752
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "sourceRecords": 32,
+        "sample": 2,
+        "iterations": 100,
+        "nanos": 8350200,
+        "allocatedBytes": 11901600
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "sourceRecords": 32,
+        "sample": 3,
+        "iterations": 100,
+        "nanos": 8551000,
+        "allocatedBytes": 11901600
+      },
+      {
+        "stage": "product-3-before",
+        "variant": "before",
+        "sourceRecords": 32,
+        "sample": 4,
+        "iterations": 100,
+        "nanos": 8504200,
+        "allocatedBytes": 11901600
+      }
+    ]
+  },
+  "limits": [
+    "timing ranges overlap; not a latency improvement proof",
+    "allocation figures include round-trip serialization and instrumentation; no zero-allocation claim",
+    "not lookup/startup/retained heap/native/platform/full-JDK evidence"
+  ]
+}
