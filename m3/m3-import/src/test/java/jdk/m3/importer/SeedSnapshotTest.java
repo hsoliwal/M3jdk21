@@ -22,7 +22,7 @@ final class SeedSnapshotTest {
                 "62aea466cf2f2bb4668f38aad9343d59525965b5",
                 manifest.sourceRevision());
         assertEquals(
-                "aca867c7bc1f7beda95f99641c68559cf03df5b0b60d6b9ac010214c4d3eaba8",
+                "153e76e966c790046057caa72a238c13fdfb10815b26e7956154b3dcb828fd8d",
                 manifest.root());
         assertEquals(15, manifest.entries().size());
 
