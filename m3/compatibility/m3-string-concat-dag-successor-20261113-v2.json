@@ -1,0 +1,48 @@
+{
+  "schema": "M3JDK21_STRING_CONCAT_DAG_SUCCESSOR_V2",
+  "scope": "TOOLING_ONLY_NO_RUNTIME_PROMOTION",
+  "predecessor": {
+    "receiptPath": "m3/compatibility/m3-string-concat-dag-successor-20261013.json",
+    "receiptGitBlob": "9472c11edb8442e2fbea3778a61d7b9d560a3f81",
+    "receiptSha256": "b1a541b50cf3be5102a6a549b38418a02e1b455058651136cb3e11667f4cdfe8",
+    "targetAfterGitBlob": "bddd68cc9b36439fda39fe2fd655b8819fae7e0e",
+    "targetAfterSha256": "9fd82a96ad813f11c90e593c8cd3b93feae9d5658a7b7b68ca48e95f035b19fa"
+  },
+  "cause": {
+    "repository": "hsoliwal/M3jdk21",
+    "pullRequest": 2904,
+    "commit": "836693acf8a7c8e9ed4278a7a9252b5b5d499ff8",
+    "mergeCommit": "de40bdd9a587e9bb577dbfe20bbf106185db92b4",
+    "productPath": "src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java",
+    "effect": "m3Stringifier no longer returns null for String.class; a null String operand renders as \"null\" (JLS 15.18.1)"
+  },
+  "source": {
+    "repository": "hsoliwal/M3jdk21",
+    "pullRequest": 2994,
+    "changeCommit": "a27fd5f826d068a2dc301e896f9d5d6233f64fea",
+    "head": "b609edcbc630902bbc0ec21180c026bf6a7c3e6c",
+    "mergeCommit": "b6b875f84c449f91300569c35fc4a167a78b0bf0",
+    "stateAtCapture": "MERGED",
+    "donorResource": "NONE_M3JDK_OWNED_SUCCESSOR"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "baseCommit": "778cd3eac266974e7b5155e79838f74ee516b535",
+    "path": "m3/runtime-integration/check-m3string-concat-reference-dag.py",
+    "beforeGitBlob": "bddd68cc9b36439fda39fe2fd655b8819fae7e0e",
+    "beforeSha256": "9fd82a96ad813f11c90e593c8cd3b93feae9d5658a7b7b68ca48e95f035b19fa",
+    "afterGitBlob": "af8fc6d5eada04198893d6810d7bd2099ebd2cdf",
+    "afterSha256": "a2db6a123cf7f0e55caf1812bbf91d076ab0dd1158c047b269664d2c4bed4356"
+  },
+  "change": {
+    "relation": "M3JDK_OWNED_SUCCESSOR_NOT_DONOR_BYTE_IDENTICAL",
+    "oldMarker": "\"if (type == String.class)\",",
+    "newMarker": "M3_STRING_CONCAT_RECEIVER_FAIL|stringifier=String operand bypasses stringOf",
+    "expectedOccurrences": 1,
+    "v1HistoryPreserved": true,
+    "runtimeProductFilesChanged": false,
+    "runtimePromotionAuthorized": false,
+    "runtimeAcceptance": "NOT_CLAIMED",
+    "performanceEvidence": "NOT_MEASURED"
+  }
+}
