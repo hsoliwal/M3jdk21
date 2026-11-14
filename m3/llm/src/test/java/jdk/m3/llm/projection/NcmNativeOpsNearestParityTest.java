@@ -25,7 +25,7 @@ import org.junit.jupiter.api.Test;
  * values. Near-tie inputs outside this corpus can rank differently, because the
  * shared kernel accumulates binary64 ordered differences.
  */
-final class M3NcmNativeOpsNearestParityTest {
+final class NcmNativeOpsNearestParityTest {
     private static final long SEED = 0x4e434d50L;
     private static final int CASES = 384;
     private static final int GOLDEN_ROWS = 2307;
