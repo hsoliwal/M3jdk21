@@ -1,0 +1,22 @@
+owner	git_blob	qualification	evaluation
+LangDexNativeKernels	481cab01c40c949209a379779daa9c224ab3ad8c	EXECUTED_UNCHANGED_JAVA	O(log n) equal range; O(range) count/into; destination offsets, any-overlap masks, inclusive confidence; optional JNI not run
+LangDexConcept	83aa6971c8d1f38b2f13809e7ea27e4df3301e01	COMPILED_UNCHANGED_CLOSURE	Nonzero 48-bit PanLex ID; original identity retained
+ConceptCoordinate	851c493bb5289cb5660b9eacb39ad4a8312ecfe6	COMPILED_UNCHANGED_CLOSURE	Arbitrary-precision external coordinate and namespace; no hash/truncation
+CanonicalVarInt	bda0615d07d58254ae6533a6415792dcd37da464	COMPILED_UNCHANGED_CLOSURE	JDK-only canonical coordinate dependency
+LangDexNativeSupportSelfTest	dd03108b7a4ee73f394498a0e04e36fc9f6a4429	EXECUTED_UNCHANGED_JAVA	83975 reported checks; independent oracles, invalid/no-write cases, sign bits, concurrent readers
+M3JdkLangDexIdentityProjection	abd674e6438596676da0a26ea801cd20ef7407f4	SOURCE_REVIEW	Concept-domain canonical bytes and identity envelope; plain SHA and domain-separated digest must stay distinct
+PrecompiledWord	eed3463ff7e942d2b1b53aaa0a370d9e1c750aec	SOURCE_REVIEW	Word facets and derivations; broader dependency closure pending
+CompiledWordTypeImage	cfefeb7cbf67dac4a8b04b6a1cba4ffd62f94721	SOURCE_REVIEW	Image facets/evidence ranges and provenance; convenience projections require separate allocation/lifetime qualification
+UnicodeCorpusRegistry	c34e301f124d790efb5f94b21f9ae5fad14b1d64	AGENT_SOURCE_REVIEW	References UCD, emoji, confusables; referenced bytes/version/license/completeness not verified
+UnicodeDataIngester	5da90330a19e26f31c43029f07c6d1205d01e4d3	AGENT_SOURCE_REVIEW	Blocks/UnicodeData only; skips placeholder names; not complete UCD or normalization proof; output entrypoint not run
+InternPass	7e73f269359253f3c9dab368acbfa0d56ab5271b	AGENT_SOURCE_REVIEW_NO_FIT	Global retained map, append-only text, cache key omits table path; no storage admission
+ConceptRegistryUnicodeTest	efe3646c54c00f11878ad7178a9f837f49054078	AGENT_SOURCE_REVIEW_NOT_RUN	Multiscript keys, symbol distinction, generation refusal/immutability; no normalization conformance claim
+ConceptRegistry	805a29545454cbb03fe9031192d144b0a40259f5	TREE_ONLY	Owner inventory; no runtime claim
+PrecompiledWordSemanticIndex	ae870cad9332f2e23541fb5dd0ab4995ae1e1481	TREE_ONLY	Semantic lookup candidate
+WordTypeImageCompiler	e1f960f45521463865ae5e2a05e9a01c14a16b9f	TREE_ONLY	Compiler candidate
+WordFacetBitsCompiler	d8aef26f8a02e323d7a5739d2ef95cb2061c30e1	TREE_ONLY	Facet precompute candidate
+WordDerivationCompiler	66145dd1695aa45117214eca91adb98b1cfa3611	TREE_ONLY	Derivation precompute candidate
+native/langdex/langdex_jni.c	ca4649093b1adfed2e61324cc3aa873eeedcc7ed	TREE_ONLY_NOT_BUILT	First native implementation surface
+src/main/native/langdex_jni.c	ceec3d0be9dd53b06b5d61a6bba4e4bf9d14aba9	TREE_ONLY_NOT_BUILT	Second native implementation surface; owner convergence required
+LICENSE-APACHE-2.0	29f81d812f3e768fa89638d1f72920dbfd1413a8	TREE_ANCHOR	Inspected Java headers identify Apache-2.0; external corpus licensing remains separate
+LICENSE.spdx	d46eb3c9b64531e14c3d972fc6c84bcb3d912cb6	TREE_ANCHOR	Module license anchor

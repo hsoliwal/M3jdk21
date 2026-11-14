@@ -1,0 +1,16 @@
+# Copyright 2026 Hitesh Soliwal, Synexia. SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: jdk.m3.rewrite.backport.SynexiaFixedOwnerPathR245
+displayName: Register the exact fixed mapping owner
+description: Replays only the pinned recipe owner; recompile it before the separate lifetime recipe.
+recipeList:
+  - jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: synexia-fixed-owner-path-r245
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: jdk.m3.rewrite.backport.SynexiaFixedLifetimeR245
+displayName: Release verified unpublished mapping on admission failure
+description: Replays only the pinned mapper source with unchanged public API and successful owner lifetime.
+recipeList:
+  - jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: synexia-fixed-lifetime-r245

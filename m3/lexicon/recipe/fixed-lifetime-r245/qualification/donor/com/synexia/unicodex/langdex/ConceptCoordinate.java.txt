@@ -1,0 +1,108 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.synexia.unicodex.langdex;
+
+import com.synexia.unicodex.varint.CanonicalVarInt;
+import java.math.BigInteger;
+import java.util.Objects;
+
+/**
+ * Arbitrary-precision external semantic identity.
+ *
+ * <p>The current MIndex/UnicodeX hot lane keeps PanLex IDs in 48 bits. This value type preserves
+ * provider identity outside that lane and encodes it canonically without hashing or truncation.</p>
+ */
+public record ConceptCoordinate(Namespace namespace, BigInteger value)
+        implements Comparable<ConceptCoordinate> {
+    public static final int COMPACT_PAYLOAD_BITS = 56;
+    private static final BigInteger COMPACT_LIMIT = BigInteger.ONE.shiftLeft(COMPACT_PAYLOAD_BITS);
+    private static final long COMPACT_MASK = 0x00ff_ffff_ffff_ffffL;
+
+    public ConceptCoordinate {
+        namespace = Objects.requireNonNull(namespace, "namespace");
+        value = Objects.requireNonNull(value, "value");
+        if (value.signum() < 0) throw new IllegalArgumentException("concept coordinate must be unsigned");
+    }
+
+    public static ConceptCoordinate panLex(long value) {
+        if (value < 0) throw new IllegalArgumentException("PanLex ID must be non-negative");
+        return new ConceptCoordinate(Namespace.PANLEX, BigInteger.valueOf(value));
+    }
+
+    public static ConceptCoordinate panLex(String value) {
+        String text = Objects.requireNonNull(value, "value").strip();
+        if (text.isEmpty()) throw new IllegalArgumentException("blank PanLex ID");
+        return new ConceptCoordinate(Namespace.PANLEX, new BigInteger(text));
+    }
+
+    public boolean fitsSemanticLane() {
+        return namespace == Namespace.PANLEX
+                && value.signum() > 0
+                && value.bitLength() <= 48;
+    }
+
+    public long semanticLaneId() {
+        if (!fitsSemanticLane()) {
+            throw new IllegalStateException("coordinate is outside the 48-bit PanLex semantic lane");
+        }
+        return value.longValueExact();
+    }
+
+    public boolean isCompact64() {
+        return value.compareTo(COMPACT_LIMIT) < 0;
+    }
+
+    public long compact64() {
+        if (!isCompact64()) throw new IllegalStateException("coordinate exceeds compact 56-bit payload");
+        return ((long) namespace.code() << COMPACT_PAYLOAD_BITS)
+                | (value.longValue() & COMPACT_MASK);
+    }
+
+    public static ConceptCoordinate fromCompact64(long packed) {
+        int code = (int) ((packed >>> COMPACT_PAYLOAD_BITS) & 0xffL);
+        return new ConceptCoordinate(
+                Namespace.fromCode(code),
+                BigInteger.valueOf(packed & COMPACT_MASK));
+    }
+
+    /** Namespace byte followed by canonical unsigned LEB128. */
+    public byte[] canonicalBytes() {
+        byte[] payload =
+                CanonicalVarInt.encode(value, CanonicalVarInt.MAX_IDENTIFIER_BYTES - 1);
+        byte[] result = new byte[payload.length + 1];
+        result[0] = (byte) namespace.code();
+        System.arraycopy(payload, 0, result, 1, payload.length);
+        return result;
+    }
+
+    public String externalKey() {
+        return namespace.externalName() + ":" + value;
+    }
+
+    @Override
+    public int compareTo(ConceptCoordinate other) {
+        int byNamespace = Integer.compare(namespace.code(), other.namespace.code());
+        return byNamespace != 0 ? byNamespace : value.compareTo(other.value);
+    }
+
+    public enum Namespace {
+        PANLEX(1, "panlex"),
+        WIKIDATA(2, "wikidata"),
+        SYNEXIA(3, "synexia");
+
+        private final int code;
+        private final String externalName;
+
+        Namespace(int code, String externalName) {
+            this.code = code;
+            this.externalName = externalName;
+        }
+
+        public int code() { return code; }
+        public String externalName() { return externalName; }
+
+        static Namespace fromCode(int code) {
+            for (Namespace value : values()) if (value.code == code) return value;
+            throw new IllegalArgumentException("unknown concept namespace code: " + code);
+        }
+    }
+}

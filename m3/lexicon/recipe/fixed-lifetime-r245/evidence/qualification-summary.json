@@ -1,0 +1,190 @@
+{
+  "schema": "M3_FIXED_MAPPING_LIFETIME_AND_UNICODEX_R245",
+  "status": "PASS",
+  "failure": null,
+  "reports": [
+    {
+      "stage": "lifetime-registration-replay",
+      "pid": 40964,
+      "packetIdentity": {
+        "bytes": 120858,
+        "sha256": "079e249dd58a323c633977db977519ee63913b35ba3888088c809bb272467897",
+        "gitBlob": "a9d0f6c334aaff42b6be0323510b81b8899335bc"
+      },
+      "exit": 0,
+      "reaped": true,
+      "elapsedSeconds": 14.765,
+      "logIdentity": {
+        "bytes": 954,
+        "sha256": "079ba3f9d0934e86fd2d21b8547a4c332f9caa7eeb74e0f145b896b00adb7e7c",
+        "gitBlob": "b3800ae836f0bbb15483e5ef6701f054d9171c97"
+      }
+    },
+    {
+      "stage": "lifetime-core-replay",
+      "pid": 36792,
+      "packetIdentity": {
+        "bytes": 121234,
+        "sha256": "e60827cf52dae407b04e0b1f4caa7d107d6c85fa4d27554128ea9bd4f8f3f9e6",
+        "gitBlob": "f904ee52ec2019918a726c5f4e9e14f9724eb29b"
+      },
+      "exit": 0,
+      "reaped": true,
+      "elapsedSeconds": 12.469,
+      "logIdentity": {
+        "bytes": 954,
+        "sha256": "4bedb70488fd74c56abfecf5d48013464b4d6c9859c11a02645a042886243963",
+        "gitBlob": "f1a0a25b726517e01b6b7247a879047f055824fc"
+      }
+    },
+    {
+      "stage": "lifetime-native-after",
+      "pid": 39816,
+      "packetIdentity": {
+        "bytes": 14891,
+        "sha256": "066ddeeb16d941d7f1a1fc735c86defec318ea096a55b1cd8f2f0251bbf0fb38",
+        "gitBlob": "b30c67c02b05cdb99fb62bc8b77560294c91ca6f"
+      },
+      "exit": 0,
+      "reaped": true,
+      "elapsedSeconds": 2.922,
+      "logIdentity": {
+        "bytes": 1010,
+        "sha256": "33ea71e27225cf5bb51782f91dcda57add3f5974bbbf94d896bdb485c5849878",
+        "gitBlob": "3f52db67672d0d350760e25ad58da93d43c4678a"
+      }
+    },
+    {
+      "stage": "lifetime-native-faults",
+      "pid": 38864,
+      "packetIdentity": {
+        "bytes": 20220,
+        "sha256": "3ab3ca6083d2cbc1612ef7cfbbdc19755fa6f6742eec93066c6f8b67a0a14e56",
+        "gitBlob": "9bbcb6a28f66864ae46b1c9cee857c784de4ba96"
+      },
+      "exit": 0,
+      "reaped": true,
+      "elapsedSeconds": 3.39,
+      "logIdentity": {
+        "bytes": 953,
+        "sha256": "f597f59b6ef4ef831009efdf177047cae4ea93bc03c9e5d3b53b2d956c091757",
+        "gitBlob": "8f92320cf5095b22a94572d86937f12fdfe5b04f"
+      }
+    },
+    {
+      "stage": "unicodex-existing-java-donor",
+      "pid": 47740,
+      "packetIdentity": {
+        "bytes": 55879,
+        "sha256": "eba974a0008076a9fc23a488ebe804d89e498e470907473d61f06cae2382c8f2",
+        "gitBlob": "7912d11d8d4c4c0ae3cca090d34def649d910c52"
+      },
+      "exit": 0,
+      "reaped": true,
+      "elapsedSeconds": 3.438,
+      "logIdentity": {
+        "bytes": 1001,
+        "sha256": "9c5c3dea3188fc18c770cdd6bce36be8857fa71f11a7dfb9e2e1ddbdc89fc349",
+        "gitBlob": "65f22fed8092c5a3863c10f9361f46f86b137703"
+      }
+    }
+  ],
+  "results": [
+    {
+      "aborted": 0,
+      "failed": 0,
+      "failures": [],
+      "found": 3,
+      "metrics": {
+        "registrationOwnersChanged": 1
+      },
+      "passed": 3,
+      "skipped": 0,
+      "tag": "registration",
+      "generatedIdentity": {
+        "bytes": 15437,
+        "sha256": "d7e4b8a76da2c7b7b2988ab999115e3e158f9b5417e1e036098a10a5776350ad",
+        "gitBlob": "c211c4651622b5028b29746300f1066e92f9d38c"
+      }
+    },
+    {
+      "aborted": 0,
+      "failed": 0,
+      "failures": [],
+      "found": 3,
+      "metrics": {
+        "mappingOwnersChanged": 1
+      },
+      "passed": 3,
+      "skipped": 0,
+      "tag": "mapping",
+      "generatedIdentity": {
+        "bytes": 7549,
+        "sha256": "a4c9da6d286590be288747bc734a8d49ade3542b6da8ddde912a5e4c6991de15",
+        "gitBlob": "c89a81375949a0538ba77ee120dec62ad8329fb4"
+      }
+    },
+    {
+      "abiProjection": "Only package declaration: current jdk.m3.text source -> cached com.m3.text JNI ABI",
+      "checks": 9,
+      "firstCause": "java.security.NoSuchAlgorithmException: SHA-256 MessageDigest not available",
+      "firstFailure": "java.lang.AssertionError: java.security.NoSuchAlgorithmException: SHA-256 MessageDigest not available",
+      "image": "F:\\codex-work\\lexicon-migration-20261031\\gvas-native-qualification\\attempt-1\\canonical-image.bin",
+      "javaVersion": "21.0.9+7-LTS-338",
+      "mode": "after",
+      "nativeLibrary": "F:\\codex-work\\lexicon-migration-20261031\\gvas-native-qualification\\attempt-1\\m3gvas.dll",
+      "requiredSha256": "4682f934be542b0561a0d9ae6d061d59034df9ee58f7df01e702193deb6b2c28",
+      "retry": "ADMITTED",
+      "unpublishedAddressLeaked": false
+    },
+    {
+      "aborted": 0,
+      "failed": 0,
+      "failures": [],
+      "found": 8,
+      "javaVersion": "21.0.9+7-LTS-338",
+      "metrics": {
+        "constructorInjection": "Private Image constructor only; actual open/release bodies unchanged"
+      },
+      "nativeAbi": "Cached legacy ABI with explicit package projection",
+      "passed": 8,
+      "skipped": 0,
+      "instrumentedSourceIdentity": {
+        "bytes": 7671,
+        "sha256": "11d51f49c39abd7093913dad75f7d80902b6eacede280d5489b5a4c1d0c036e5",
+        "gitBlob": "6e934b83ea6b49d1902cc49a4dd9223a58a68365"
+      },
+      "instrumentation": "One private Image-constructor throw hook plus the explicit JNI namespace projection. Actual open/release method bodies preserved."
+    },
+    {
+      "allocationGate": "Measurement only; no portable zero-allocation or speedup claim.",
+      "calibrationAllocatedBytes": 0,
+      "javaVersion": "21.0.9+7-LTS-338",
+      "measuredQueriesPerOperationPerRound": 100000,
+      "native": false,
+      "scope": "Unchanged Java donor kernels/concept coordinate/varint and self-test; warmed caller-owned loop only. Native/corpus/image integration NOT_RUN.",
+      "unchangedDonorChecks": 83975,
+      "warmLoopAllocatedBytesByRound": [
+        1048,
+        0,
+        0,
+        0,
+        0
+      ],
+      "warmLoopResult": 19100000
+    }
+  ],
+  "storage": {
+    "before": 0,
+    "after": 0,
+    "readOnlyFBytes": 571469824,
+    "cap": 571473920,
+    "reserve": 8589934592,
+    "free": 10926833664,
+    "peaks": [
+      571473920
+    ]
+  },
+  "generationCalls": 0,
+  "scope": "Sequential AST recipe registration and mapping repair. Cached Windows native ABI with explicit namespace projection; no new native binary/current-ABI/platform build. UnicodeX exact Java donor self-test and warmed allocation discriminator; corpus/native UnicodeX paths NOT_RUN."
+}

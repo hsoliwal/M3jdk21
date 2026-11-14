@@ -108,14 +108,41 @@ public final class M3FixedAddressMapping {
                 || directAddress0(raw) != address) {
             throw new IllegalStateException("JNI mapping did not return exact requested address");
         }
-        String actual = digest(raw.asReadOnlyBuffer());
+        String actual;
+        try {
+            actual = digest(raw.asReadOnlyBuffer());
+        } catch (RuntimeException | Error failure) {
+            releaseFailedAdmission(address, length, failure);
+            throw failure;
+        }
         if (!actual.equals(digest)) {
             unmapRejected0(address, length);
             throw new IOException("M3 canonical image SHA-256 mismatch");
         }
-        Image admitted = new Image(file, address, actual, raw);
+        Image admitted;
+        try {
+            admitted = new Image(file, address, actual, raw);
+        } catch (RuntimeException | Error failure) {
+            releaseFailedAdmission(address, length, failure);
+            throw failure;
+        }
         IMAGES.put(address, admitted);
         return admitted;
+    }
+
+    /** Release only an exact, still-unpublished mapping while retaining its original failure. */
+    private static void releaseFailedAdmission(long address, long length, Throwable failure) {
+        try {
+            unmapRejected0(address, length);
+        } catch (Throwable cleanup) {
+            if (cleanup != failure) {
+                try {
+                    failure.addSuppressed(cleanup);
+                } catch (Throwable suppressionFailure) {
+                    // Suppression bookkeeping must not replace the original admission failure.
+                }
+            }
+        }
     }
 
     private static String digest(ByteBuffer buffer) {
