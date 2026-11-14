@@ -1,4 +1,4 @@
-m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/CUSTODY-SOURCE.json	ABSENT	4c043b5252853a59683317f42da01de5814381c0d825df1491878588d6ab9abf	0001-CUSTODY-SOURCE.json.txt
+m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/CUSTODY-SOURCE.json	ABSENT	b3bedec1f56e975010756ee30c96c2236b0dfab81bedef0a41d0e8008702eb8e	0001-CUSTODY-SOURCE.json.txt
 m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/ENGINE_SOURCES.tsv	ABSENT	ae731c5780c73a98f6fc81079b5f863613fddea50d2a6c893c6dfd2aa2030b5c	0002-ENGINE_SOURCES.tsv.txt
 m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/HOST_PARSER_LINEAGE.json	ABSENT	e149228dff38675a48d66fe40c4c621aa21a518b775e921a68194d001b1eb6ce	0003-HOST_PARSER_LINEAGE.json.txt
 m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/README.md	ABSENT	ca9999995e140aa349400f6538298a64765845dea588ac9a2c2bbe9e34b91d8d	0004-README.md.txt
@@ -15,7 +15,7 @@ m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/authoring
 m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/authoring/parser-upstream/rewrite-java-21-8.17.1.pom.txt	ABSENT	9465d6d13672fc36b517e7c06ad649a081829340b53ee3872bf08349ca9310c7	0015-rewrite-java-21-8.17.1.pom.txt.txt
 m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/authoring/prepare_parser_successor.py	ABSENT	4189d3acbcfa6694e654a7420c18a8b0848129ecdaea33f1722d56cd72377f4a	0016-prepare_parser_successor.py.txt
 m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/authoring/prepare_runtime_facade.py	ABSENT	791d170c3924b4c2fe638fde307d68cb95344f55e0348e4ac6445208043aec8d	0017-prepare_runtime_facade.py.txt
-m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/authoring/prepare_runtime_facade_host.py	ABSENT	4dd3761f7c4ec32ca9cf62aec235353051dda8ffe8ce7963a6d3327d3653972f	0018-prepare_runtime_facade_host.py.txt
+m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/authoring/prepare_runtime_facade_host.py	ABSENT	f3559d4edea21faabb0ea7fe5045cfee2c7962324fab3a70c57ba5c0e5e88a7d	0018-prepare_runtime_facade_host.py.txt
 m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/authoring/verify_parser_successor.py	ABSENT	d6c967004c1e26583458f5d2f0f815f2000b6a8139e8591a2f858497748889a3	0021-verify_parser_successor.py.txt
 m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/authoring/verify_runtime_facade.py	ABSENT	67694ffd780aba0ae6ea79c20190fe34771d50d576fa952b3e9a8b745a96e4be	0022-verify_runtime_facade.py.txt
 m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/bootstrap-source/datasets/m3-openrewrite-javadoc/DATASET.json	ABSENT	a26d6b6461532b91456b23db099df07adb4a2b7d0cc68c58db2067327af37f4d	0023-DATASET.json.txt

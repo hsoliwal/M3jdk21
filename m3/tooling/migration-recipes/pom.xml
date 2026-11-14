@@ -39,7 +39,7 @@
     </dependency>
     <!-- Canonical reusable recipe implementation is supplied by the provenance-pinned Synexia custody module in this reactor. -->
     <dependency>
-      <groupId>com.synexia</groupId>
+      <groupId>com.m3</groupId>
       <artifactId>m3-openrewrite-recipes</artifactId>
       <version>${m3.version}</version>
     </dependency>
@@ -130,7 +130,7 @@
             <version>5.23.1</version>
             <dependencies>
               <dependency>
-                <groupId>com.synexia</groupId>
+                <groupId>com.m3</groupId>
                 <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${m3.version}</version>
               </dependency>
@@ -152,7 +152,7 @@
             <version>5.23.1</version>
             <dependencies>
               <dependency>
-                <groupId>com.synexia</groupId>
+                <groupId>com.m3</groupId>
                 <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
               </dependency>
@@ -240,7 +240,7 @@
             <version>5.23.1</version>
             <dependencies>
               <dependency>
-                <groupId>com.synexia</groupId>
+                <groupId>com.m3</groupId>
                 <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
               </dependency>

@@ -11,8 +11,8 @@
     {
       "path": "FOSS_REUSE_DECISION.tsv",
       "bytes": 2781,
-      "sha256": "37f4f574766229fd509077f8c9c2fd483db2676122da87b6a5fde69ca559e4b2",
-      "gitBlob": "560903dd0b02e0c43e782fbe67e1dcbef49f544f"
+      "sha256": "482d8a04966b3f1b4d23e7f3c3204b0323645e3fa0c7b66125c2f82c7fe9e4a8",
+      "gitBlob": "7e16f673c59559e2ab0b330c9016474505d4ed7b"
     },
     {
       "path": "README.md",
@@ -23,14 +23,14 @@
     {
       "path": "THIRD_PARTY_NOTICES.md",
       "bytes": 2503,
-      "sha256": "9e14fbd4253739f197cb2fc22d9c28e080e50f7fa62c56798e5490969c6321ed",
-      "gitBlob": "9c129af99790adbfd482f041db20abcd672769c9"
+      "sha256": "b7550d06ffe49004960bb2708e872d657d54da091b29fb6f9ccab103dba132f0",
+      "gitBlob": "d467eb584a8e21fb9ee312798ef1643234c171d8"
     },
     {
       "path": "pom.xml",
       "bytes": 1136,
-      "sha256": "549dffc66823506f2df8baabc8122b7ac5e286569b5270fba87cf7c30a57c84a",
-      "gitBlob": "ca41ab4bbcb92b7bcefdd926aef2248f4f32081e"
+      "sha256": "b7f05e9220cca5d3a852616ba21c9112a32ff09c0676e65af2ce01e37764bc75",
+      "gitBlob": "5fe260d60d521a18aa3472156eff348543b60794"
     },
     {
       "path": "qualify.py",
@@ -71,8 +71,8 @@
     {
       "path": "sdk/pom.xml",
       "bytes": 2678,
-      "sha256": "f0ab99c3dafb38e82f8e5fd4c6d22db07831808c251c4622f292114c83e6673e",
-      "gitBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f"
+      "sha256": "5b3f3f04f9539178d43ffa75068366d8ff1c037e25f67c2d31aa3bdb6e0ede1e",
+      "gitBlob": "059259ca746466389cccac4094c3d664b0d79e6d"
     },
     {
       "path": "sdk/src/main/resources/META-INF/rewrite/charcopy-current-successor-20261019.yml",
@@ -196,7 +196,7 @@
     "sourceRepository": "hsoliwal/com.synexia",
     "sourceRevision": "515f2f2153aa6afbc758da34c495c7223ee7997a",
     "sdkTree": "955bcfbcfb09a72a327f3d541a74c1f1a45b733d",
-    "sdkPom": "d79867bcc09ad6329e12418e15907e54b8ab025f",
+    "sdkPom": "059259ca746466389cccac4094c3d664b0d79e6d",
     "recipeEngine": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
     "manifestKernel": "78d5fb68f13872164973a8918cc7886c5f548bca"
   },

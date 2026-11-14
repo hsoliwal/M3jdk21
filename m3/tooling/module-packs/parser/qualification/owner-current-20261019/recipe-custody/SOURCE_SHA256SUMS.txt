@@ -58,4 +58,4 @@ a9c444c87f45079c025f0fd1a7954f12babc9a2d006d2919228b80ba81609ce6  m3-openrewrite
 2385c3a74e219471484ad4f320ef6d84fbe17ec863507623b2fd9fd22c66f3fc  m3-openrewrite-recipes/src/test/resources/jdk/internal/m3/rewrite/hash-pinned-text/jdt-java21-bootstrap-refusal-20261019/manifest.tsv
 30865eb8f8af8f71cc2c755aa20c2efdd6f61a1eac84559bde364f8e4c2d9585  m3-openrewrite-recipes/src/test/resources/jdk/internal/m3/rewrite/jdt-java21-bootstrap-20261019/JavaBuilder.java.txt
 e2ab091ce00d8098aa259bddeabff98eb63949731639a773d186f93874090627  m3-openrewrite-recipes/src/test/resources/jdk/internal/m3/rewrite/jdt-java21-bootstrap-20261019/pre-JavaBuilder.java.txt
-56137a012f70ee765aa10741138dbc3f9d6ff5b7c9294016475080626b7ed8ee  m3-openrewrite-recipes/verification/parser-collections-sdk-20261019/pom.xml
+44d552e09253f98ba144495a93fb504a63a03cf4330ad7f47d1aeac47cd17184  m3-openrewrite-recipes/verification/parser-collections-sdk-20261019/pom.xml

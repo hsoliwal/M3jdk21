@@ -1339,7 +1339,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/runtime-facade/prepare_runtime_facade_host.py",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/authoring/prepare_runtime_facade_host.py",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/authoring/prepare_runtime_facade_host.py",
-      "sha256": "4dd3761f7c4ec32ca9cf62aec235353051dda8ffe8ce7963a6d3327d3653972f",
+      "sha256": "f3559d4edea21faabb0ea7fe5045cfee2c7962324fab3a70c57ba5c0e5e88a7d",
       "size_bytes": 13401,
       "classification": "FIRST_PARTY"
     },
@@ -2691,7 +2691,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-runtime-facade-custody-1-v1/retained/CUSTODY-SOURCE.json",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/evidence/recipe-runtime-facade-custody-1-v1/retained/CUSTODY-SOURCE.json",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-runtime-facade-custody-1-v1/retained/CUSTODY-SOURCE.json",
-      "sha256": "4c043b5252853a59683317f42da01de5814381c0d825df1491878588d6ab9abf",
+      "sha256": "b3bedec1f56e975010756ee30c96c2236b0dfab81bedef0a41d0e8008702eb8e",
       "size_bytes": 414170,
       "classification": "GENERATED"
     },
@@ -2699,7 +2699,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-runtime-facade-custody-1-v1/retained/RETENTION.json",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/evidence/recipe-runtime-facade-custody-1-v1/retained/RETENTION.json",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-runtime-facade-custody-1-v1/retained/RETENTION.json",
-      "sha256": "87342ffd25e88810ab20dfd62e3465a563afbf1c483b6c26f8b2f61879e16a30",
+      "sha256": "9e7790418207d12ef92e7a6adb4dc7998ebe70bec53bdfeb558c0a0b09adf1e2",
       "size_bytes": 2500,
       "classification": "GENERATED"
     },
@@ -2715,7 +2715,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-runtime-facade-custody-1-v1/retained/canonical-artifacts.json",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/evidence/recipe-runtime-facade-custody-1-v1/retained/canonical-artifacts.json",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-runtime-facade-custody-1-v1/retained/canonical-artifacts.json",
-      "sha256": "fcae62f8f3839ac414f07433849a16ee2eeb4987cd1a47984c7abfd0bd5cf721",
+      "sha256": "f7fae8d08e1c8fab89f7fdbd549f2e1779fbbf27e3b7c9949ca0ce8277ad7d39",
       "size_bytes": 413251,
       "classification": "GENERATED"
     },
@@ -2763,7 +2763,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-runtime-facade-custody-1-v1/retained/datasets/m3-runtime-facade-custody-1/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-facade-custody-1/manifest.tsv",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/evidence/recipe-runtime-facade-custody-1-v1/retained/datasets/m3-runtime-facade-custody-1/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-facade-custody-1/manifest.tsv",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-runtime-facade-custody-1-v1/retained/datasets/m3-runtime-facade-custody-1/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-facade-custody-1/manifest.tsv",
-      "sha256": "b681a99dcb6d2ae289674ace42ef8b0ac69f3486bfefb638cad22180bcfba304",
+      "sha256": "e75bc93f8761c5e26ca649b9389c31e2f89ea8399a5d82c18255e0c87771a292",
       "size_bytes": 79237,
       "classification": "GENERATED"
     },

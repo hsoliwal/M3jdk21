@@ -25,16 +25,16 @@
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/FOSS_REUSE_DECISION.tsv",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/FOSS_REUSE_DECISION.tsv",
-      "gitBlob": "d707e8ffe5158e3d31459417dc242a9e0012b235",
+      "gitBlob": "25f841d401ba0de64f944f3eece3321afae096dd",
       "bytes": 798,
-      "sha256": "194c3d438ad1412615e6314f9f0e0087f4b24fa3f0e2f6083babd0d2c6db19da"
+      "sha256": "45f24786de71613c6720a6a960067fb451a648889e8b102bb6aebacbd125ee56"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/README.md",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/README.md",
-      "gitBlob": "966e22328a70fcc4d8d5bb1fa671223eb6094ff7",
+      "gitBlob": "683886e118a41829f7b92ee379d056d07a234263",
       "bytes": 2650,
-      "sha256": "36eafc4fe29b098815a7929808c1e591399e582fa29177856e45ff744cae3c33"
+      "sha256": "6115528b5d488cac0f9fa2e30ac0e0e45720b98a7111a691884770edfae9b0be"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/THIRD_PARTY_NOTICES.md",
@@ -81,16 +81,16 @@
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/pins.json",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/pins.json",
-      "gitBlob": "3730ed5beed5f300f429dbe2ca32947a77cbfc2c",
+      "gitBlob": "a8ed97d07de871256443665dd60cb5d0829c5ec6",
       "bytes": 18181,
-      "sha256": "627091dc4cfcd41824b3402ef7cc201bba96897155b5d99de6fcd2e84dc0c6fc"
+      "sha256": "c5014f5333a6d9046a9ceff51f9b05ae88de5e37ef40313c00e332f06a3fd41c"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/pom.xml",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/pom.xml",
-      "gitBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f",
+      "gitBlob": "059259ca746466389cccac4094c3d664b0d79e6d",
       "bytes": 2678,
-      "sha256": "f0ab99c3dafb38e82f8e5fd4c6d22db07831808c251c4622f292114c83e6673e"
+      "sha256": "5b3f3f04f9539178d43ffa75068366d8ff1c037e25f67c2d31aa3bdb6e0ede1e"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/main/resources/META-INF/rewrite/release-jep-manifest-order-20261020-inverse.yml",
@@ -424,30 +424,30 @@
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/support/owned_state_relation_verify.py",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/support/owned_state_relation_verify.py",
-      "gitBlob": "56c7d75fdf56b736cfb57d59e626afdac820531c",
+      "gitBlob": "7016191fe3ff4cb0c372bc5163309b9898489454",
       "bytes": 24947,
-      "sha256": "2d658433e2695d5ffa0bd3e440dc3bddbc41fe187ee9f01135e29eb46c333c86"
+      "sha256": "131841a9c15cd8d1e75ffb214aea0bf38b4f423af4ad0a65d6bccde3b8ecc247"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/verify.py",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/verify.py",
-      "gitBlob": "90b8eb8ebca8c9b98d016a9429c910739cad1b22",
+      "gitBlob": "0fe2b0625c83195ad75e70207f22dfd32bee6e47",
       "bytes": 20582,
-      "sha256": "ca64043cc4e8f55e9dce35a6dffed1f0851cea9fe9a9923d014a1bed4bef4e02"
+      "sha256": "6bada70b0173564dd85d3588044cc9e788ea5f6aac0fd0ce8caa5c1bace3ba53"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/qualify.py",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/hosted/qualify.py",
-      "gitBlob": "5db558dd49d11c966e7d7fe1b5c87b57963fac9a",
+      "gitBlob": "b526cf352a1efac8e6014508360f2c3bb7ae4ec3",
       "bytes": 19506,
-      "sha256": "2eced8dbaa8e7eb9a20dbebb662e0232613557b7fac8a57a45e9a7c25ef8f488"
+      "sha256": "5e3b587b64b5643460fb0ae71201a354f38f258d0ca742b89222bc3e4494d313"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/FOSS_REUSE_DECISION.tsv",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/scope-sdk/FOSS_REUSE_DECISION.tsv",
-      "gitBlob": "9832aa75bdc51f6241539c3d7e8a13442f7117b6",
+      "gitBlob": "b726a14d3740a49179daeafa4a88ee18f7d818c5",
       "bytes": 898,
-      "sha256": "c4ccbc45127f5abcfb25cc23b3b50cfa1cba9428574c10c30ea0c08117c8d3d5"
+      "sha256": "f137ca01602b8aad76df2665d29d11b5f753ea1969e6167f931552790fc79360"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/README.md",
@@ -494,16 +494,16 @@
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/pins.json",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/scope-sdk/pins.json",
-      "gitBlob": "dc5cbff6c5be6e35e8da00c75e75e8df1a67b8f4",
+      "gitBlob": "69e7576489fe592e8918b2d2631b00b0e583cc62",
       "bytes": 6691,
-      "sha256": "6db85957d577a799a51c65acf4a08256d33876b9b7fc5b9041efd3edca2c2075"
+      "sha256": "dff1d07079bd2ecbcd1ce07753812adbd31e2af5c8a1b012b26d74de20bfecd0"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/pom.xml",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/scope-sdk/pom.xml",
-      "gitBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f",
+      "gitBlob": "059259ca746466389cccac4094c3d664b0d79e6d",
       "bytes": 2678,
-      "sha256": "f0ab99c3dafb38e82f8e5fd4c6d22db07831808c251c4622f292114c83e6673e"
+      "sha256": "5b3f3f04f9539178d43ffa75068366d8ff1c037e25f67c2d31aa3bdb6e0ede1e"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/src/main/resources/META-INF/rewrite/canonical-scope-boundary-20261020-inverse.yml",
@@ -592,9 +592,9 @@
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/verify.py",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/scope-sdk/verify.py",
-      "gitBlob": "e6b55bf76ae197e64e54884301d67227a0b09da1",
+      "gitBlob": "ed5762bea01ea3b9e7a87e7abe28ef3222039cf2",
       "bytes": 26196,
-      "sha256": "33812d4f96bfe649fa995cf2e1959fe0d122b751bfc313f5dfb930aeec0fb71f"
+      "sha256": "d914821e9ee620b315507670da10bb9e2758750ed5ea1040bc3439a0bf1126c8"
     }
   ],
   "sdkClosures": {
@@ -605,9 +605,9 @@
       "sdkFiles": 22,
       "inputPins": {
         "path": "scope-sdk/pins.json",
-        "gitBlob": "dc5cbff6c5be6e35e8da00c75e75e8df1a67b8f4",
+        "gitBlob": "69e7576489fe592e8918b2d2631b00b0e583cc62",
         "bytes": 6691,
-        "sha256": "6db85957d577a799a51c65acf4a08256d33876b9b7fc5b9041efd3edca2c2075"
+        "sha256": "dff1d07079bd2ecbcd1ce07753812adbd31e2af5c8a1b012b26d74de20bfecd0"
       },
       "suites": {
         "jdk.internal.m3.rewrite.M3CanonicalScopeBoundaryRecipeTest": [
@@ -633,9 +633,9 @@
       "sdkFiles": 59,
       "inputPins": {
         "path": "manifest-sdk/pins.json",
-        "gitBlob": "3730ed5beed5f300f429dbe2ca32947a77cbfc2c",
+        "gitBlob": "a8ed97d07de871256443665dd60cb5d0829c5ec6",
         "bytes": 18181,
-        "sha256": "627091dc4cfcd41824b3402ef7cc201bba96897155b5d99de6fcd2e84dc0c6fc"
+        "sha256": "c5014f5333a6d9046a9ceff51f9b05ae88de5e37ef40313c00e332f06a3fd41c"
       },
       "suites": {
         "jdk.internal.m3.rewrite.M3ReleaseJepManifestOrderRecipeTest": [

@@ -419,7 +419,7 @@ class M3RecipeHomePolicyTest(unittest.TestCase):
             "m:build/m:plugins/m:plugin/m:dependencies/m:dependency", ns
         )
         self.assertIsNotNone(dependency)
-        self.assertEqual("com.synexia", dependency.find("m:groupId", ns).text)
+        self.assertEqual("com.m3", dependency.find("m:groupId", ns).text)
         self.assertEqual(
             "m3-openrewrite-recipes", dependency.find("m:artifactId", ns).text
         )

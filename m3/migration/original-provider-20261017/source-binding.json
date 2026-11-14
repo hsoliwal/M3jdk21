@@ -6,7 +6,7 @@
   "sourcePath": "m3-openrewrite-recipes/recipes/m3-original-mapping-provider-20261017/sdk",
   "receiverCorePath": "m3/migration/original-provider-20261017/sdk",
   "moduleGitTree": "0d2225996145946737eb5f06f19bed2ffe4b825b",
-  "pinsSha256": "041479224c0e2d0209195007a8ea93f5acb4c62cd8700b34231721723a4e90b9",
+  "pinsSha256": "0904fb6218a179edba6e148a612a9cf411b2da672f3cde7d06abed7195bd1adc",
   "workflowSha256": "cf50454866b05d902ce6712b3152ee1f8217298cd0755b30838e048ba7783742",
   "workflowGitBlob": "7c4771e658aebf110aa184c7a289e623ac7e3118",
   "receiverBase": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",

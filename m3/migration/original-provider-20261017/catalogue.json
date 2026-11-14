@@ -40,7 +40,7 @@
     {
       "category": "build-classpath/transitive-api-annotations",
       "chosen": "Restore existing same-owner donor SDK annotations24.1.0 provided declaration",
-      "donorBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f",
+      "donorBlob": "059259ca746466389cccac4094c3d664b0d79e6d",
       "license": "Apache-2.0",
       "baselineEvidence": "annotations-classpath-20261017/execution-evidence.json",
       "evaluation": "Actual Java21 strict compilation disproves the historical source-only unused-dependency assumption; core OpenRewrite APIs expose Language annotation metadata.",

@@ -37,8 +37,8 @@
     },
     {
       "target_path": "m3/collections/qualification/wrapper-convergence-20261018/HANDOFF.json",
-      "git_blob": "2402249b2ce87bd19c58b878afdd91873812373a",
-      "sha256": "5e89017447d68baf33772df998a7ef6ea51c0ba0b20311f7f16ca6e9f3bcc03c",
+      "git_blob": "bbe2a0d6beb5755839cabcf0decab476149693de",
+      "sha256": "1dc554af384f672b912d0901762e5a63add0d20699bde62585660759673e7ce8",
       "bytes": 9190,
       "local_path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/qualification/wrapper-convergence-20261018/HANDOFF.json"
     },
@@ -79,8 +79,8 @@
     },
     {
       "target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/RECIPE_CUSTODY_COPY_MANIFEST.tsv",
-      "git_blob": "bff7fd61a46d854d4a84cf4e95a68676f533437d",
-      "sha256": "da8c8f9a3031a8ad98d5e087c28148f4a8c6b38a52103c6f2920603495c7d245",
+      "git_blob": "1d12d1aaef2e3dd0d52662a325fcd41252ea1ea4",
+      "sha256": "e6d04cd533217759d0602929326155d53c8164da8ddaaa53e3ba02107cc1e50b",
       "bytes": 25240,
       "local_path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/algorithm-catalog/wrapper-convergence-20261018/RECIPE_CUSTODY_COPY_MANIFEST.tsv"
     },
@@ -665,8 +665,8 @@
     },
     {
       "target_path": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/pom.xml",
-      "git_blob": "ddd9bdf7915dee69a314539f1982af3a6e1e5074",
-      "sha256": "0a1c81dcc36ef6a77c6ba812797cde06fa8d7ffdafa73f13b6ef846b3ab2a572",
+      "git_blob": "620ef7e736377db82a14c2f4f592f3a9a6f92969",
+      "sha256": "f1bd00c207f44ee59939cac93cd72d8173dc1d004b2e7688efc2e7d30781fbd0",
       "bytes": 4455,
       "local_path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/custody/m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/pom.xml",
       "canonical_source_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/pom.xml"

@@ -71,7 +71,7 @@ def main():
         "<artifactId>m3-runtime-progress-facade-recipe-proof</artifactId>")
     pom = once(pom,
         "<dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java-21</artifactId><version>${rewrite.version}</version><scope>runtime</scope></dependency>",
-        "<dependency><groupId>com.synexia.sourcebuilt.openrewrite</groupId><artifactId>rewrite-java-21</artifactId><version>8.17.1-m3-javadoc-1</version><scope>runtime</scope></dependency>")
+        "<dependency><groupId>com.m3.sourcebuilt.openrewrite</groupId><artifactId>rewrite-java-21</artifactId><version>8.17.1-m3-javadoc-1</version><scope>runtime</scope></dependency>")
     validation = """      <plugin><groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.5.0</version>
         <executions><execution><id>verify-source-built-parser-identity</id><phase>validate</phase><goals><goal>exec</goal></goals>
           <configuration><executable>python3</executable><arguments>

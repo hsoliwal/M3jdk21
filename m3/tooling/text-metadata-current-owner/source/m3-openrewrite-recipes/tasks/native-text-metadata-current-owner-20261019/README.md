@@ -14,7 +14,7 @@ proof does not build CMake or qualify that full mixed-language library.
 
 ## Existing composition
 
-The guard-sdk POM is byte-exact d79867bcc09ad6329e12418e15907e54b8ab025f from
+The guard-sdk POM is byte-exact 059259ca746466389cccac4094c3d664b0d79e6d from
 source515f2f2153aa6afbc758da34c495c7223ee7997a. Its Central coordinates/plugins,
 M3GpuToolJoinRecipe1c1b and Manifest38df remain unchanged. A thin adapter and explicit
 YAML name select the current tuple. Three actual SDK JUnit methods exercise
