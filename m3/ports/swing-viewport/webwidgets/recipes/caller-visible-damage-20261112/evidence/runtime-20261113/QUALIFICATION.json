@@ -1,0 +1,92 @@
+{
+  "schema": "m3.selected-producer-runtime-evidence/v1",
+  "qualification": "PASS",
+  "receiverInput": "hsoliwal/M3jdk21@778cd3eac266974e7b5155e79838f74ee516b535",
+  "canonicalInput": "hsoliwal/com.synexia@b3e975ae0749db17aa700c6cf2ff90155cb0553b",
+  "producerReport": "d9496ac9bdaffb04ffc60626886f9cac9be50224564e4f561ef58eb4576319bc",
+  "ledgerReport": "ef79329cc55b7ae97534337e9ec02e7d1c4b15c1a48453493acefc862ed5084a",
+  "outputs": {
+    "qualify-001/manifest/GENERATED.tsv.candidate": {
+      "bytes": 66135,
+      "sha256": "bf0f4a8ae085f115c4691aac6f4d95041157040c4ecf75bc1e33cffbe73b4e42"
+    },
+    "qualify-001/selected-producer/after-sources/m3/ports/swing-viewport/src/main/java/jdk/m3/swing/web/model/M3WebLanes.java": {
+      "bytes": 9603,
+      "sha256": "70264dc0e1183b6c0dcc82dc998ba027e02f8301072e6b6ae05324ed053805fd"
+    },
+    "qualify-001/selected-producer/after-sources/m3/ports/swing-viewport/src/test/java/jdk/m3/swing/web/model/M3WebChecks.java": {
+      "bytes": 25582,
+      "sha256": "2513cc95b19daad0883a14d727c138a95d0abca28b74a8f686f6b76dc80871f1"
+    }
+  },
+  "resourceStop": {
+    "all_owned_native_handles_closed": true,
+    "assigned_to_job": true,
+    "cleanup_errors": [],
+    "creation_FILETIME": "134390343330448188",
+    "error_phase": "supervisor-check",
+    "exitcode": 125,
+    "job_active_processes": 0,
+    "job_handle_closed": true,
+    "job_total_processes": 2,
+    "pid": 46564,
+    "primary_traceback": "Traceback (most recent call last):\n  File \"S:\\codex-work\\storage-recovery-20261013\\native-process-cwd-recipe-20261016\\templates\\OwnedJobSupervisor.py\", line 152, in run_owned\n    check()\n  File \"S:\\codex-work\\ui-caller-runtime-qualification-20261113\\RUN_QUALIFICATION_V2.py\", line 43, in check\n    assert m.availPhys>=1610612736 and m.availPageFile>=8858370048,json.dumps({'memoryReserve':'FAIL','physicalAvailable':m.availPhys,'commitAvailable':m.availPageFile})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: {\"memoryReserve\": \"FAIL\", \"physicalAvailable\": 1579683840, \"commitAvailable\": 27483250688}\n",
+    "process_handle_closed": true,
+    "resumed": true,
+    "same_handle_wait": 0,
+    "supervisor_error": "AssertionError: {\"memoryReserve\": \"FAIL\", \"physicalAvailable\": 1579683840, \"commitAvailable\": 27483250688}",
+    "terminal": true,
+    "terminate_job_succeeded": true,
+    "termination_requested": true,
+    "thread_handle_closed": true
+  },
+  "firstApplyProofLimit": {
+    "job": "apply-001",
+    "pid": 58652,
+    "creationFILETIME": "134390342516535320",
+    "logBytes": 0,
+    "nativeOutcomeReceipt": "MISSING; old controller post-guard raised before persisting it",
+    "receivingBytes": "All three before-hashes unchanged; no apply output files; PID absent at bounded subsequent read"
+  },
+  "priorHostedFailure": {
+    "run": 43250472845,
+    "head": "f65afb78ebe941a261d2a0b0d737a03fe17ea1b3",
+    "error": "NoClassDefFoundError org/slf4j/LoggerFactory",
+    "selectedProducer": "PASS",
+    "junit": "NOT_RUN"
+  },
+  "applicationBehavior": "Focused caller7 and originalCore4 PASS; unchanged approved18 FAIL12/6; full suite/native/JNI/platform/performance unproved",
+  "fullGoal": "ACTIVE/INCOMPLETE",
+  "productionPromotion": false,
+  "additionalSourceCompilation": {
+    "report": "reports/junit-compile-focused.json",
+    "status": "PASS_COMPILATION_ONLY",
+    "classes": 3
+  },
+  "additionalResourceStop": {
+    "report": "reports/apply-003.json",
+    "native": {
+      "all_owned_native_handles_closed": true,
+      "assigned_to_job": true,
+      "cleanup_errors": [],
+      "creation_FILETIME": "134390349077890139",
+      "error_phase": "supervisor-check",
+      "exitcode": 125,
+      "job_active_processes": 0,
+      "job_handle_closed": true,
+      "job_total_processes": 6,
+      "pid": 43608,
+      "primary_traceback": "Traceback (most recent call last):\n  File \"S:\\codex-work\\storage-recovery-20261013\\native-process-cwd-recipe-20261016\\templates\\OwnedJobSupervisor.py\", line 152, in run_owned\n    check()\n  File \"S:\\codex-work\\ui-caller-runtime-qualification-20261113\\RUN_QUALIFICATION_V2.py\", line 43, in check\n    assert m.availPhys>=1610612736 and m.availPageFile>=8858370048,json.dumps({'memoryReserve':'FAIL','physicalAvailable':m.availPhys,'commitAvailable':m.availPageFile})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: {\"memoryReserve\": \"FAIL\", \"physicalAvailable\": 13583785984, \"commitAvailable\": 7462998016}\n",
+      "process_handle_closed": true,
+      "resumed": true,
+      "same_handle_wait": 0,
+      "supervisor_error": "AssertionError: {\"memoryReserve\": \"FAIL\", \"physicalAvailable\": 13583785984, \"commitAvailable\": 7462998016}",
+      "terminal": true,
+      "terminate_job_succeeded": true,
+      "termination_requested": true,
+      "thread_handle_closed": true
+    }
+  },
+  "junitPreflight": "TEST_PREFLIGHT_HOLD.json; no tests executed",
+  "postRepairBehaviorReport": "FOCUSED_BEHAVIOR.json"
+}

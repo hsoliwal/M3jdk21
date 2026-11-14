@@ -1,0 +1,81 @@
+{
+  "after": {
+    "charged": 2368637,
+    "commitAvailable": 23399346176,
+    "kFree": 11239624704,
+    "logical": 2368637,
+    "peak": {
+      "charged": 2368637,
+      "ordinaryLogBytes": 4945
+    },
+    "physicalAvailable": 18096721920,
+    "sFree": 10557800448
+  },
+  "before": {
+    "charged": 2357296,
+    "commitAvailable": 23069511680,
+    "kFree": 11239677952,
+    "logical": 2357296,
+    "peak": {
+      "charged": 2357296,
+      "ordinaryLogBytes": 4945
+    },
+    "physicalAvailable": 17825669120,
+    "sFree": 10558341120
+  },
+  "command": [
+    "C:\\Program Files\\Java\\jdk-21\\bin\\javac.exe",
+    "-J-Xmx128m",
+    "-J-XX:+UseSerialGC",
+    "-J-XX:ActiveProcessorCount=2",
+    "-J-Djava.io.tmpdir=S:\\codex-work\\ui-caller-runtime-qualification-20261113\\tmp",
+    "-J-Duser.home=S:\\codex-work\\ui-caller-runtime-qualification-20261113\\home",
+    "--release",
+    "21",
+    "-proc:none",
+    "-implicit:none",
+    "-encoding",
+    "UTF-8",
+    "-classpath",
+    "S:\\codex-work\\ui-caller-runtime-qualification-20261113\\qualify-001\\selected-producer\\after-classes;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-console-standalone\\1.10.1\\junit-platform-console-standalone-1.10.1.jar",
+    "-sourcepath",
+    "S:\\codex-work\\ui-caller-runtime-qualification-20261113\\qualify-001\\selected-producer\\empty-classpath",
+    "-Xlint:all",
+    "-Werror",
+    "-d",
+    "S:\\codex-work\\ui-caller-runtime-qualification-20261113\\focused-tests\\classes",
+    "S:\\codex-work\\ui-caller-runtime-qualification-20261113\\receiver\\m3\\ports\\swing-viewport\\src\\test\\java\\jdk\\m3\\swing\\web\\model\\M3CollectionChecks.java",
+    "S:\\codex-work\\ui-caller-runtime-qualification-20261113\\receiver\\m3\\ports\\swing-viewport\\src\\test\\java\\jdk\\m3\\swing\\web\\model\\M3CollectionModesTest.java",
+    "S:\\codex-work\\ui-caller-runtime-qualification-20261113\\receiver\\m3\\ports\\swing-viewport\\src\\test\\java\\jdk\\m3\\swing\\viewport\\M3ViewportCoreApiTest.java"
+  ],
+  "controllerSha256": "eec750f5fe5f3a566d0c8e4e7d01d0071e21607eb639a101edd77b984525cb09",
+  "counts": {},
+  "endedUnix": 1794561425.937404,
+  "job": "compile-focused",
+  "logBytes": 0,
+  "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "native": {
+    "all_owned_native_handles_closed": true,
+    "assigned_to_job": true,
+    "cleanup_errors": [],
+    "creation_FILETIME": "134390350234109769",
+    "exitcode": 0,
+    "job_active_processes": 0,
+    "job_handle_closed": true,
+    "job_total_processes": 2,
+    "pid": 58432,
+    "process_handle_closed": true,
+    "resumed": true,
+    "same_handle_wait": 0,
+    "supervisor_error": null,
+    "terminal": true,
+    "termination_requested": false,
+    "thread_handle_closed": true
+  },
+  "postGuardError": null,
+  "productionPromotion": false,
+  "runner": "JUnit Platform Console standalone1.10.1; distinct from hosted vendored1.10.2",
+  "runnerSha256": "b42eaa53d13576d17db5fb8b280722a6ae9e36daf95f4262bc6e96d4cb20725f",
+  "schema": "m3.owned-cpu-qualification/v1",
+  "startedUnix": 1794561423.4080021
+}

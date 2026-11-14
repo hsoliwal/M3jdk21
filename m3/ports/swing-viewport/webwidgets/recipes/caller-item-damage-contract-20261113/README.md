@@ -1,0 +1,7 @@
+# Nonempty item damage test contract
+
+The complete 375-test public suite exposed one failure after the caller repair: `M3AlertBannerTest.sampleContract`. Its alert is dismissed, leaving a positive-width, zero-height item. Production correctly rejects that empty damage rectangle; the shared test required damage after checking width alone.
+
+This Maven/OpenRewrite recipe corrects only the shared test precondition to require positive width and height. All damage assertions for nonempty items remain unchanged; the original eighteen-method oracle and production source are unchanged. It uses the existing FindAndReplace recipe for the exact owning template and one generated-ledger row, then the existing M3WebGen selected producer to emit the test helper. It proves exact output, zero-write replay, strict compilation, unchanged helper API, the original failing alert state and the corrected alert contract in separate class loaders.
+
+Use the existing guarded S-only 32MiB qualification root, bound FULL_SUITE_INPUTS.json, sealed307/151 source/class closure, provisioned offline Maven/JDK21 and existing resource/process controls. The script is CPU validation and bounded test maintenance, with zero local-AI generation calls. Maven runs with absolute m3.caller.receiverRoot/recipeRoot/outputRoot properties; receiverRoot is the qualification root containing the sealed source/class closure, not an arbitrary checkout. The full 375-test run and unchanged18oracle remain separate required checks. No native/JNI/performance/full-superset admission follows from these tests.

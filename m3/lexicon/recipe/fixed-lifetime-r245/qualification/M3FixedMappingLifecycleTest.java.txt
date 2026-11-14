@@ -1,0 +1,70 @@
+// Copyright 2026 Hitesh Soliwal, Synexia. SPDX-License-Identifier: Apache-2.0
+package com.m3.text;
+import java.io.*;import java.lang.reflect.*;import java.net.*;import java.nio.*;import java.nio.file.*;import java.security.*;import java.util.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.*;import org.junit.platform.launcher.core.*;import org.junit.platform.launcher.listeners.*;
+import static org.junit.jupiter.api.Assertions.*;import static org.junit.platform.engine.discovery.DiscoverySelectors.selectClass;
+public final class M3FixedMappingLifecycleTest {
+ static Path library,image;static String hash;static final long BASE=M3FixedAddressMapping.DEFAULT_BASE,STRIDE=0x10_0000L;
+ public static volatile Error constructFailure;static volatile Throwable digestFailure;
+ static final String PROVIDER="M3DigestFailureProbe";static final Map<String,Object> metrics=new TreeMap<>();
+ static long address(int slot){return BASE+slot*STRIDE;}
+ static M3FixedAddressMapping.Image open(int slot)throws Exception{return M3FixedAddressMapping.open(image,address(slot),hash,library);}
+ static void unbound(int slot)throws Exception{var field=M3FixedAddressMapping.class.getDeclaredField("IMAGES");field.setAccessible(true);assertFalse(((Map<?,?>)field.get(null)).containsKey(address(slot)));}
+ static void readable(M3FixedAddressMapping.Image owner)throws Exception{
+  var buffer=owner.readOnlyBuffer();assertTrue(buffer.isDirect());assertTrue(buffer.isReadOnly());var sha=MessageDigest.getInstance("SHA-256");sha.update(buffer);assertEquals(hash,HexFormat.of().formatHex(sha.digest()));assertThrows(ReadOnlyBufferException.class,()->owner.readOnlyBuffer().put(0,(byte)7));
+ }
+ public static final class BrokenDigest extends MessageDigestSpi {
+  public BrokenDigest(){}
+  static void fail(){Throwable f=digestFailure;if(f instanceof Error e)throw e;throw (RuntimeException)f;}
+  @Override protected void engineUpdate(byte value){fail();}
+  @Override protected void engineUpdate(byte[] value,int offset,int length){fail();}
+  @Override protected byte[] engineDigest(){fail();return new byte[0];}
+  @Override protected void engineReset(){}
+ }
+ public static final class FaultProvider extends Provider {
+  private static final long serialVersionUID=1L;
+  FaultProvider(){super(PROVIDER,"1","M3 test-only digest failure");put("MessageDigest.SHA-256",BrokenDigest.class.getName());}
+ }
+ static void injectedDigest(int slot,Throwable failure)throws Exception{
+  assertNull(Security.getProvider(PROVIDER));digestFailure=failure;Security.insertProviderAt(new FaultProvider(),1);Throwable actual;
+  try{actual=assertThrows(Throwable.class,()->open(slot));}finally{Security.removeProvider(PROVIDER);digestFailure=null;}
+  assertSame(failure,actual);unbound(slot);var owner=open(slot);readable(owner);assertSame(owner,open(slot));
+ }
+ @Test void missingProviderReleasesVerifiedMapping()throws Exception{
+  var providers=Security.getProviders();Throwable failure;
+  try{for(var p:providers)Security.removeProvider(p.getName());failure=assertThrows(AssertionError.class,()->open(0));}
+  finally{for(int i=0;i<providers.length;i++)Security.insertProviderAt(providers[i],i+1);}
+  assertInstanceOf(NoSuchAlgorithmException.class,failure.getCause());unbound(0);readable(open(0));
+ }
+ @Test void runtimeProviderFailureRetainsIdentityAndAllowsRetry()throws Exception{injectedDigest(1,new IllegalStateException("injected digest update failure"));}
+ @Test void errorProviderFailureRetainsIdentityAndAllowsRetry()throws Exception{injectedDigest(2,new OutOfMemoryError("injected failure without exhausting memory"));}
+ @Test void imageConstructionFailureReleasesBeforePublication()throws Exception{
+  var expected=new OutOfMemoryError("injected Image constructor failure");constructFailure=expected;Throwable actual;
+  try{actual=assertThrows(OutOfMemoryError.class,()->open(3));}finally{constructFailure=null;}
+  assertSame(expected,actual);unbound(3);readable(open(3));metrics.put("constructorInjection","Private Image constructor only; actual open/release bodies unchanged");
+ }
+ @Test void cleanupFailureIsSuppressedAndKeepsExistingViews()throws Exception{
+  var owner=open(4);var failure=new AssertionError("primary admission failure");
+  var method=M3FixedAddressMapping.class.getDeclaredMethod("releaseFailedAdmission",long.class,long.class,Throwable.class);method.setAccessible(true);
+  method.invoke(null,1L,1L,failure);assertEquals(1,failure.getSuppressed().length);assertInstanceOf(IllegalArgumentException.class,failure.getSuppressed()[0]);assertEquals("invalid unmap range",failure.getSuppressed()[0].getMessage());readable(owner);assertSame(owner,open(4));
+ }
+ @Test void digestMismatchKeepsPriorExceptionAndReleases()throws Exception{
+  String wrong=(hash.charAt(0)=='0'?"1":"0")+hash.substring(1);var failure=assertThrows(IOException.class,()->M3FixedAddressMapping.open(image,address(5),wrong,library));assertEquals("M3 canonical image SHA-256 mismatch",failure.getMessage());unbound(5);readable(open(5));
+ }
+ @Test void collisionReservationIsNeverReleasedByRejection()throws Exception{
+  M3FixedAddressMapping.reserveCollisionForProof(address(6),4096,library);
+  for(int i=0;i<2;i++){var failure=assertThrows(IOException.class,()->open(6));assertEquals("exact Windows address unavailable (no relocation)",failure.getMessage());}
+  unbound(6);
+ }
+ @Test void successfulOwnersRemainStableAfterConflicts()throws Exception{
+  var owner=open(7);String wrong=(hash.charAt(0)=='0'?"1":"0")+hash.substring(1);
+  assertThrows(IllegalStateException.class,()->M3FixedAddressMapping.open(image,address(7),wrong,library));
+  var failure=assertThrows(IllegalStateException.class,()->M3FixedAddressMapping.open(image,address(8),hash,image));assertEquals("M3 fixed mapper JNI library already bound",failure.getMessage());assertSame(owner,open(7));readable(owner);readable(open(8));
+ }
+ public static void main(String[] args)throws Exception{
+  library=Path.of(args[1]);image=Path.of(args[2]);hash=args[3];
+  var listener=new SummaryGeneratingListener();var launcher=LauncherFactory.create();launcher.registerTestExecutionListeners(listener);launcher.execute(LauncherDiscoveryRequestBuilder.request().selectors(selectClass(M3FixedMappingLifecycleTest.class)).build());var s=listener.getSummary();var failures=new ArrayList<String>();s.getFailures().forEach(f->failures.add(f.getTestIdentifier().getDisplayName()+": "+f.getException()));var out=new TreeMap<String,Object>();out.put("found",s.getTestsFoundCount());out.put("passed",s.getTestsSucceededCount());out.put("failed",s.getTestsFailedCount());out.put("skipped",s.getTestsSkippedCount());out.put("aborted",s.getTestsAbortedCount());out.put("failures",failures);out.put("metrics",metrics);out.put("nativeAbi","Cached legacy ABI with explicit package projection");out.put("javaVersion",System.getProperty("java.runtime.version"));
+  var c=(HttpURLConnection)URI.create(args[0]).toURL().openConnection();c.setDoOutput(true);c.setRequestMethod("POST");var b=new ObjectMapper().writeValueAsBytes(out);c.setFixedLengthStreamingMode(b.length);try(var stream=c.getOutputStream()){stream.write(b);}if(c.getResponseCode()!=204)throw new AssertionError("receipt refused");c.disconnect();if(s.getTestsSucceededCount()!=8||s.getTestsFailedCount()!=0)throw new AssertionError(out);
+ }
+}

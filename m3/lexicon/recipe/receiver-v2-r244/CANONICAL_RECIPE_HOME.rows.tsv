@@ -1,0 +1,2 @@
+crate	canonical_repository	canonical_path	receiver_repository	receiver_path
+m3-lexicons-receiver-v2	hsoliwal/com.synexia	synexia-openrewrite-recipes/crates/m3-lexicons-receiver-v2	hsoliwal/M3JDK21	m3/lexicon/recipe/receiver-v2-r244

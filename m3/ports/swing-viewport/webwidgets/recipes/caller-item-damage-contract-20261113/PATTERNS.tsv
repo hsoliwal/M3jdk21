@@ -1,0 +1,2 @@
+pattern	version	atom	owner	discriminator
+M3P-CORE-NONEMPTY-TEST	1	count-and-positive-width-height precondition -> unchanged visible-item damage assertions	M3WebChecks.itemDamage via owning template	Dismissed alert retains positive width and zero height; old test fails, corrected test passes; all375 existing public tests pass; original18 still12pass6fail
