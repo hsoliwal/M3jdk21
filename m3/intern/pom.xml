@@ -9,7 +9,7 @@
   <artifactId>m3-intern</artifactId>
   <version>0.1.0-SNAPSHOT</version>
   <name>M3JDK :: Intern Space</name>
-  <description>jdk.m3.intern (module org.m3jdk.intern): the owner-scoped primitive intern space M3InternSpace (ByteStore,
+  <description>jdk.internal.m3.intern (module org.m3jdk.intern): the owner-scoped primitive intern space M3InternSpace (ByteStore,
     TupleStore, GraphStore over 64-KiB byte and 8,192-long pages, page-bounded Arrays.mismatch collision checks, the
     deterministic insertion-order archive with magic M3IS version 1), the typed structural shapes M3InternShapes, the
     prefix-sharing lexical path trie M3InternPathTrie and the bounded SHA-256 archive container M3InternArchiveGuard.
@@ -37,6 +37,39 @@
   </dependencies>
   <build>
     <plugins>
+      <!-- MOVE_TO_JDK_MODULE v1.2 (keep-pom mode, jdk-naming/move_area.py): the sources live in
+           java.base (jdk.internal.m3.intern) and the tests in test/jdk; this pom keeps its own configuration. -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>3.6.1</version>
+        <executions>
+          <execution>
+            <id>jdk-module-sources</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${project.basedir}/../../src/java.base/share/classes/jdk/internal/m3/intern</source>
+              </sources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>jdk-module-test-sources</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-test-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${project.basedir}/../../test/jdk/jdk/internal/m3/intern</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
