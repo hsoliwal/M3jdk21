@@ -4,6 +4,15 @@ on:
   pull_request:
     branches: [master]
     paths:
+      - 'm3/arrays/LICENSE'
+      - 'm3/arrays/pom.xml'
+      - 'm3/arrays/src/main/java/module-info.java'
+      - 'm3/collections/LICENSE'
+      - 'm3/collections/provenance.json'
+      - 'm3/collections/name-mapping.json'
+      - 'm3/collections/pom.xml'
+      - 'm3/collections/src/main/java/module-info.java'
+      - 'm3/evidence/arrays/provenance.json'
       - 'm3/collections/interop/**'
       - 'src/jdk.m3.collections/share/classes/**'
       - 'src/jdk.m3.collections/share/**'
@@ -27,6 +36,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           sparse-checkout: |
             m3/arrays
+            m3/evidence/arrays
             src/jdk.m3.collections/share
             make/m3/arrays
             test/jdk/jdk/m3/arrays
@@ -47,16 +57,27 @@ jobs:
           mkdir -p proof/arrays/META-INF proof/collections/META-INF
           find m3/arrays/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/arrays -name '*.java' | sort > proof/array-sources.txt
           javac --release 21 -Xlint:all,-module -Werror -d proof/arrays @proof/array-sources.txt
-          cp m3/arrays/{LICENSE,NOTICE,provenance.json} proof/arrays/META-INF/
+          # Approved layout: legal notice and historical donor provenance have current owners.
+          test "$(git hash-object src/jdk.m3.collections/share/legal/m3arrays.md)" = f7002b4c480e10e8af6a0e279cc9582db7de7b9e
+          test "$(git hash-object m3/evidence/arrays/provenance.json)" = 619a6822a3a62ff2a652e3b6e011081359132115
+          cp m3/arrays/LICENSE proof/arrays/META-INF/LICENSE
+          cp src/jdk.m3.collections/share/legal/m3arrays.md proof/arrays/META-INF/NOTICE
+          cp m3/evidence/arrays/provenance.json proof/arrays/META-INF/provenance.json
+          cmp m3/arrays/LICENSE proof/arrays/META-INF/LICENSE
+          cmp src/jdk.m3.collections/share/legal/m3arrays.md proof/arrays/META-INF/NOTICE
+          cmp m3/evidence/arrays/provenance.json proof/arrays/META-INF/provenance.json
           jar --create --file proof/m3-arrays.jar -C proof/arrays .
           find m3/collections/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/collections src/jdk.m3.collections/share/classes/jdk/internal/m3/collections -name '*.java' | sort > proof/core-sources.txt
           javac --release 21 -Xlint:all,-module -Werror --module-path proof/m3-arrays.jar \
             -d proof/collections @proof/core-sources.txt
-          cp m3/collections/{LICENSE,NOTICE,provenance.json,name-mapping.json} proof/collections/META-INF/
+          cp m3/collections/{LICENSE,provenance.json,name-mapping.json} proof/collections/META-INF/
+          test "$(git hash-object src/jdk.m3.collections/share/legal/m3collections.md)" = c35cf82657474282058afc7ffbcb98c46fd865e3
+          cp src/jdk.m3.collections/share/legal/m3collections.md proof/collections/META-INF/NOTICE
+          cmp src/jdk.m3.collections/share/legal/m3collections.md proof/collections/META-INF/NOTICE
           jar --create --file proof/m3-collections.jar -C proof/collections .
           jdeps --print-module-deps --module-path proof/m3-arrays.jar proof/m3-collections.jar \
             > proof/module-closure.txt
-          test "$(cat proof/module-closure.txt)" = jdk.m3.arrays,java.base
+          test "$(cat proof/module-closure.txt)" = java.base,jdk.m3.arrays
           ARRAYS="$GITHUB_WORKSPACE/proof/m3-arrays.jar"
           (cd "$RUNNER_TEMP" && mvn -B -ntp org.apache.maven.plugins:maven-install-plugin:3.1.3:install-file \
             -Dfile="$ARRAYS" -DpomFile="$GITHUB_WORKSPACE/m3/arrays/pom.xml")
@@ -84,8 +105,8 @@ jobs:
           LIBRARY="$GITHUB_WORKSPACE/proof/native/libm3_arrays.so"
           SDK=m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3SdkFamiliesTest.java
           SPRING=m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3SpringCaseInsensitiveSdkFactoryTest.java
-          test "$(git hash-object "$SDK")" = 4cfdcb18cb8417c607bb582069bfdc07975d9998
-          test "$(git hash-object "$SPRING")" = 4cec6718324f96d96ff5e183087569d8503758ce
+          test "$(git hash-object "$SDK")" = f4aa93c3a674e91d56bdb112dba86af3c97307d9
+          test "$(git hash-object "$SPRING")" = fcfbab2a9a49218b57df018992afc3ff1651f8e8
           mvn -B -ntp -f m3/collections/interop/pom.xml \
             '-Dtest=M3SdkFamiliesTest,M3SpringCaseInsensitiveSdkFactoryTest' \
             "-DargLine=-Xcheck:jni -Dm3.arrays.native.path=$LIBRARY" \

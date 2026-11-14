@@ -1,0 +1,120 @@
+{
+  "schema": "M3_MODEL_TEXT_COMPLETION_RESULT_V1",
+  "source_repository": "hsoliwal/com.synexia",
+  "source_commit": "62dd0abd0473a9494ab680088b3c6fec0afaf550",
+  "source_recipe": "com.synexia.m3.ModelTextCompletionJdk20261114",
+  "receiving_repository": "hsoliwal/M3jdk21",
+  "receiving_parent": "3ccc5245c26fce20a6b55c2c823561f74fb78ce3",
+  "historical_receipt": {
+    "path": "m3/llm/model-text-receipt.json",
+    "sha256": "9a3c422433cdff6d6fd148db16bb76b0eb85795806d033f99dd6428ab5fd005c"
+  },
+  "product_output_count": 9,
+  "entries": [
+    {
+      "path": "m3/llm/src/main/java/jdk/m3/llm/model/M3NcmNative.java",
+      "kind": "java",
+      "preimage_sha256": "fd0bbf95b1d5fadc51f4060ff7304d300d7fc7673ec3105fec471e89872ab7eb",
+      "postimage_sha256": "3edec0fafaacea0913d3f88de636d7684865d3d48f2c0cb1533d72d56b91b910"
+    },
+    {
+      "path": "m3/llm/src/main/java/jdk/m3/llm/model/M3NcmQuantizer.java",
+      "kind": "java",
+      "preimage_sha256": "da5ba8ad1fb913e9fc87fb47d89a965ed399141b45a5b42237e303bec7c7d0b3",
+      "postimage_sha256": "2940769810bd24ec89d04c9cf3cbfa103d15e9dee527640351e092f78aa05208"
+    },
+    {
+      "path": "m3/llm/src/test/java/jdk/m3/llm/model/M3NcmCheckpointTest.java",
+      "kind": "java",
+      "preimage_sha256": "ABSENT",
+      "postimage_sha256": "a587dafed60751ddfe9ee14849280e9e062fdceec77eee884a9de409dc5ad7a1"
+    },
+    {
+      "path": "m3/llm/src/test/java/jdk/m3/llm/model/M3NcmNearestPruningTest.java",
+      "kind": "java",
+      "preimage_sha256": "ABSENT",
+      "postimage_sha256": "41ad9eb2405cf4d3619ef94f71159cc72e4a6a16678f5d97e100d7d182887b06"
+    },
+    {
+      "path": "m3/llm/src/test/java/jdk/m3/llm/model/M3NcmNextConceptTest.java",
+      "kind": "java",
+      "preimage_sha256": "ABSENT",
+      "postimage_sha256": "51d8cf8c555fa15fcfa7f4237bea4f11c29dfbdecc807352dcee723e25f9546d"
+    },
+    {
+      "path": "m3/llm/src/test/java/jdk/m3/llm/test/ModuleImageMain.java",
+      "kind": "java",
+      "preimage_sha256": "9cc045fa704791e815eb3fd6b564a19b3c07aaa8c5b05020edb5532f14263676",
+      "postimage_sha256": "847ce56c9e1b039c0d6ce214917ca98c167a36e2e8326c3262120222025b2ed9"
+    },
+    {
+      "path": "m3/llm/MODEL_TEXT.md",
+      "kind": "text",
+      "preimage_sha256": "da92a48c9dc98f1e1ed9c411b43e4527c4a48457f21f306c0475a71557bf63ac",
+      "postimage_sha256": "34da679b699f30a423e0c683bd524b97acc65929a5e3a44ce79f20ba2c50e5e1"
+    },
+    {
+      "path": "m3/llm/src/main/native/src/ncm_kernel.cpp",
+      "kind": "text",
+      "preimage_sha256": "86e1cbea706baf12baef45429a7aad137b19e59b92dff9b1a6eb345e4be1ee32",
+      "postimage_sha256": "fff3b8633dd4326b1f0792c930b3f5853bdf26d04f031135cb44d28ae1ed3f64"
+    },
+    {
+      "path": "m3/llm/src/main/native/tests/ncm_kernel_test.cpp",
+      "kind": "text",
+      "preimage_sha256": "b74f78ccb9e2181529429195efc2f15c8009dbb9df15a4ac1425b756763e9ebf",
+      "postimage_sha256": "2645c4c66b891a9fa8f875a651f4ce5318f0e9ba1add2bec77f0f4fc0f813b33"
+    }
+  ],
+  "canonical_evidence": [
+    {
+      "path": "synexia-openrewrite-recipes/crates/m3-model-text-completion-jdk-20261114/evidence/executed/RESULT.json",
+      "sha256": "d08a9844774d073b5d74c808f514251a0d11da4aab0b8661db1b1fadd8dcc3c6"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/crates/m3-model-text-completion-jdk-20261114/evidence/executed/package-check.json",
+      "sha256": "57963f4cf3aadb7ff441e646dabe6da0ae7143ecd5ff62a9b6b81fbb8d61b12d"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/crates/m3-model-text-completion-20261114/QUALIFICATION.json",
+      "sha256": "e36e8cabaa37de651b9748fc97d0bf044ef292ccc04fd51ae0ba0a19253c6d0e"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/crates/m3-model-text-completion-20261114/evidence/compatibility/RESULT.json",
+      "sha256": "7cadc128ad17bd50bdf6521b9a5672ddc4ecfe60e08a98cea5df8a8358c39380"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/crates/m3-model-text-completion-20261114/evidence/provenance/final/RESULT.json",
+      "sha256": "8a3bec87658f9a15c6fa4907963f66c538d8c152783fe4a367ff4d35a53ec4ad"
+    }
+  ],
+  "verification": {
+    "sdk_tests": 6,
+    "receiving_maven_tests": 95,
+    "receiving_test_failures": 0,
+    "receiving_test_errors": 0,
+    "receiving_test_skips": 0,
+    "explicit_jni": true,
+    "xcheck_jni": true,
+    "unpruned_distance_cases_per_backend": 4000,
+    "native_c_abi_random_cases": 1200,
+    "checkpoint_bidirectional_backend_pairs": 25,
+    "checkpoint_compatibility_checks": 3576,
+    "stock_java21_linked_module_java": "PASS",
+    "stock_java21_linked_module_jni": "PASS",
+    "packaged_notice_resources_exact": 4,
+    "canonical_ledger_members": 211,
+    "canonical_ledger_unique_rows": 129201,
+    "canonical_pr_paths_validated": 300
+  },
+  "scope": "Executed product results and passive receipt only; no recipe, template, executor or model weights",
+  "limits": [
+    "Version 1 quantizer format supports identity and blend Conv1d only",
+    "Supplied encoder latents require separately established source/tokenizer/model provenance",
+    "No pretrained tokenizer/encoder/decoder/transformer or Jev inference/training is qualified",
+    "Exact parent original Maven control gate HOLD before Maven due 794 inherited recipe candidates",
+    "Source JDK configure blocked at missing autoconf; no source-built JDK/HotSpot/jtreg/release acceptance",
+    "Named M3ResultOnlyHandoffGate not located; no replacement gate is claimed",
+    "No model-accuracy, PyTorch-bitwise-parity, GPU or measured speedup claim"
+  ]
+}

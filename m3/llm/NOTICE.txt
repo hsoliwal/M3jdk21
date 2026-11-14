@@ -1,0 +1,14 @@
+M3JDK exact model input and numerical primitives
+Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project.
+
+Exact text model inputs and typed System One request structures retain ordinary
+String values and add no runtime text-storage dependency. The request structures
+follow the public Jev NOUL/Choice/Score shapes; no Jev provider is included.
+
+The residual vector quantizer adapts the public numerical design reviewed in
+HazyResearch/ncm at c70274273f489abc73832b2b98584a8483b6b203.
+The donor copyright is Copyright (c) 2025 hermann kumbong, licensed under MIT.
+The adapted Java quantizer retains Apache-2.0 AND MIT notices; the full MIT
+permission and modification statement are in META-INF/NCM_DONOR_NOTICE.md
+(packaged from src/main/native/NCM_DONOR_NOTICE.md). No donor model weights,
+training data, Python framework or third-party inference runtime are included.

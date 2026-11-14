@@ -1,0 +1,13 @@
+recipeChanges	2
+changedTemplateConditions	1
+changedLedgerRows	1
+actualGeneratedFiles	1
+freshProducerReplayWrites	0
+namedReplayChanges	0
+wrongPathChanges	0
+strictCompile	PASS
+testHelperProtectedApiEqual	true
+beforeAlertContract	FAIL: item change damages, item width positive and height zero
+afterAlertContract	PASS
+original18FixtureChanged	false
+productionSourceChanged	false

@@ -69,10 +69,10 @@
   },
   "sources": {
     "jdk.m3.text.M3InstanceIndexPrecompute": {
-      "sha": "d63ab6113aaaaca413e4657ab5a50b1a67f6ed37",
+      "sha": "6f9f14312e18e8ffa0a310801278bed846cd0d34",
       "content": {
         "text_resource": "resources/instance-before.java",
-        "sha256": "fc2d6bf85df01fec9fb7149e357f5f3160f1e2ec747ff663f8be9a11d63548ca"
+        "sha256": "a40be1c52aa7dd71755abe81ca5ad42fd2376569205ad015195b85dca9863d42"
       }
     }
   },
@@ -115,24 +115,24 @@
   },
   "ownerAfter": {
     "text_resource": "resources/instance-after.java",
-    "sha256": "1fb0339939abf08a95eebbc3c0d8ffb7b7ac0e613c1e13392142ea583cecb0f6"
+    "sha256": "2cfed3d012c472927c7afe5f35ad5b456b16a9e38174676ec5f8484ac8ebfe7d"
   },
   "resources": {
     "jdk/m3/rewrite/backport/jdk21-hash-pinned/synexia-instance-normalize-r247/manifest.tsv": {
       "text_resource": "resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/synexia-instance-normalize-r247/manifest.tsv",
-      "sha256": "8700d5a5e4f55d51d7a4f008e569edca18699ae00f774130f7a92f278e35b45a"
+      "sha256": "08e3d6b07888a19c677bab1b5f089f31df932552cb229ff602e7bb03ac7508c3"
     },
     "jdk/m3/rewrite/backport/jdk21-hash-pinned/synexia-instance-normalize-r247/M3InstanceIndexPrecompute.java.txt": {
       "text_resource": "resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/synexia-instance-normalize-r247/M3InstanceIndexPrecompute.java.txt",
-      "sha256": "1fb0339939abf08a95eebbc3c0d8ffb7b7ac0e613c1e13392142ea583cecb0f6"
+      "sha256": "2cfed3d012c472927c7afe5f35ad5b456b16a9e38174676ec5f8484ac8ebfe7d"
     },
     "instance-before.java": {
       "text_resource": "resources/instance-before.java",
-      "sha256": "fc2d6bf85df01fec9fb7149e357f5f3160f1e2ec747ff663f8be9a11d63548ca"
+      "sha256": "a40be1c52aa7dd71755abe81ca5ad42fd2376569205ad015195b85dca9863d42"
     },
     "instance-after.java": {
       "text_resource": "resources/instance-after.java",
-      "sha256": "1fb0339939abf08a95eebbc3c0d8ffb7b7ac0e613c1e13392142ea583cecb0f6"
+      "sha256": "2cfed3d012c472927c7afe5f35ad5b456b16a9e38174676ec5f8484ac8ebfe7d"
     },
     "jdk/m3/rewrite/backport/jdk21-hash-pinned/synexia-instance-reconcile-r247/manifest.tsv": {
       "text_resource": "resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/synexia-instance-reconcile-r247/manifest.tsv",
@@ -157,7 +157,7 @@
   },
   "code": {
     "text_resource": "runner.py",
-    "sha256": "e7a15bc844ad828d6e80848a522bd17f52f694ceb673c21f7ca8dc1fbd66cb6f"
+    "sha256": "69cd8b2525cf17e151068007c0bc90188d6085d7a29f91147a95a41f8cfd41a6"
   },
   "recipeAfter": {
     "text_resource": "resources/recipe-after.java",
@@ -166,30 +166,5 @@
   "reconcileQa": {
     "text_resource": "M3InstanceReconcileRecipeTest.java.txt",
     "sha256": "f36de13efe9dbf649c581f2eac8768a8acf2f78f1fcedc9fb7bc6400e897b89c"
-  },
-  "originalOwner": {
-    "sha": "c4a499d6ef46e38ed5f12b0789683cae53309964",
-    "content": {
-      "text_resource": "legacy-resources/instance-before.java",
-      "sha256": "2be8634db1d545bce03ba34cab2569b2adbb869b19544acd2f42bb4e02a7b5f1"
-    }
-  },
-  "legacyResources": {
-    "jdk/m3/rewrite/backport/jdk21-hash-pinned/synexia-instance-utf8-r246/manifest.tsv": {
-      "text_resource": "legacy-resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/synexia-instance-utf8-r246/manifest.tsv",
-      "sha256": "cdf9df640aea0f8ea24e17f62d42fef09965187fcf6dc628ee5b5eabf7b2420b"
-    },
-    "jdk/m3/rewrite/backport/jdk21-hash-pinned/synexia-instance-utf8-r246/M3InstanceIndexPrecompute.java.txt": {
-      "text_resource": "legacy-resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/synexia-instance-utf8-r246/M3InstanceIndexPrecompute.java.txt",
-      "sha256": "fc2d6bf85df01fec9fb7149e357f5f3160f1e2ec747ff663f8be9a11d63548ca"
-    },
-    "instance-before.java": {
-      "text_resource": "legacy-resources/instance-before.java",
-      "sha256": "2be8634db1d545bce03ba34cab2569b2adbb869b19544acd2f42bb4e02a7b5f1"
-    },
-    "instance-after.java": {
-      "text_resource": "legacy-resources/instance-after.java",
-      "sha256": "fc2d6bf85df01fec9fb7149e357f5f3160f1e2ec747ff663f8be9a11d63548ca"
-    }
   }
 }

@@ -4,8 +4,8 @@
   "receipt": {
     "schema": "M3_FIXED_LIFETIME_PACKET_ASSEMBLY_R245",
     "status": "PASS",
-    "files": 34,
-    "reconstructedConfigSha256": "716ee10d79e52e52a7c20cca2d9c43d336dafa2eebec125fa315480fa57165f1",
+    "files": 30,
+    "reconstructedConfigSha256": "ac8e4e34b1dd050cba186198ca54c53d5d64dc133b6ad88ea2cd8348058d650b",
     "resourceRefsVerified": true,
     "pythonSyntax": true,
     "pomSyntax": true,

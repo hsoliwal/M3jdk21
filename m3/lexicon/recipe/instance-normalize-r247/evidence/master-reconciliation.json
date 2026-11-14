@@ -1,0 +1,16 @@
+{
+  "schema": "M3_INSTANCE_CURRENT_OWNER_RECONCILIATION_R247",
+  "defaultHead": "e45db508573415e4572a1cd6f5283db0ed94df19",
+  "incomingOwnerBlob": "6f9f14312e18e8ffa0a310801278bed846cd0d34",
+  "incomingOwnerCommit": "9ee83d68fdcc3023c037cef5de2120dd447037af",
+  "comparatorPreservedByteForByte": true,
+  "priorReviewHeads": {
+    "synexia": "7e2c89eba4bfbe709cfc3fc97945251c72ff27ad",
+    "m3jdk21": "c129a1f08d8f21b4298a950700972a950c8cb36a"
+  },
+  "previousFiveStageProof": {
+    "blob": "95d3c7e2e1638ea8572b9ca8f2ddf370e7fdced6",
+    "sha256": "9c43e01ae0b7ef790e2166649e8248dd78dd40efb0a862fc519401d41fece44d"
+  },
+  "currentProof": "Four stages: incoming-owner baseline, SDK reconciliation, normalization replay, generated-owner behavior. Prior comparator proposal is historical only; current default comparator is retained."
+}

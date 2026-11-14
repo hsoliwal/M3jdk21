@@ -25,7 +25,7 @@
     },
     {
       "id": "owner-stage-replay",
-      "law": "Current-default SDK reconciliation preserves R245 and admits the existing R246 instance path; replay R246 comparator then normalization, one owner at a time. No broad path rule or new runtime owner."
+      "law": "Reconcile the current SDK then apply the normalization delta to the current default instance owner. Keep the incoming comparator byte-for-byte; R246 comparator proof is historical."
     }
   ],
   "patterns": [
@@ -49,17 +49,16 @@
     "classification": "Bounded maintenance under existing API and storage contract; no new runtime interface or owner."
   },
   "tests": {
-    "recipeJUnit": 9,
+    "recipeJUnit": 6,
     "behaviorJUnitPerStage": 11,
     "normalizationCasesPerStage": 159555,
     "utf8ComparisonsPerStage": 1408801,
     "unchangedChecksPerStage": 84
   },
-  "reference": "Pinned R246 owner, projected by exact class-identifier rename only, compiled beside actual owner as test-only oracle.",
+  "reference": "Current default owner6f9f14312e18e8ffa0a310801278bed846cd0d34, identifier-only projection; incoming comparator unchanged.",
   "storage": "C below8GiB reserve: write hold; K verified, 545MiB total cap, one transient4KiB POM, zero retained task files.",
   "ownerSequence": [
-    "M3Jdk21HashPinnedSnapshotRecipe existing SDK reconciliation",
-    "M3InstanceIndexPrecompute comparator",
-    "M3InstanceIndexPrecompute normalization"
+    "Current SDK reconciliation preserving mapping and instance registrations",
+    "Current default instance owner normalization only"
   ]
 }

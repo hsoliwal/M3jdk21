@@ -22,15 +22,15 @@ var bind=hash.apply(recipe.resolve("bindings.tsv"));
 var sel=cli.resolve("selected-producer");
 need.accept(Files.readString(sel.resolve("PASS.sentinel")).equals("M3_CALLER_SELECTED_PRODUCER_PASS\nmode="+mode+"\nbindingsSha256="+bind+"\n"),"sel producer proof");
 var path="m3/ports/swing-viewport/webwidgets/GENERATED.tsv";
-var bh="8cb45f082b5c18347549b486d84ca311cdc6aef5476e6446677a1efaf3b6f205";var ah="bf0f4a8ae085f115c4691aac6f4d95041157040c4ecf75bc1e33cffbe73b4e42";
+var bh="8cb45f082b5c18347549b486d84ca311cdc6aef5476e6446677a1efaf3b6f205";var ah="1085e4679fb7624127d08d27bf62a07c5daeff7c0482e47c9b1cbd4072406a8e";
 var pins=recipe.resolve("resources/manifest-pins.tsv");var pinsHash=hash.apply(pins);
 need.accept(Files.readString(pins).equals(path+"\t"+bh+"\t"+ah+"\n"),"seal");
 var yamlPath=recipe.resolve("resources/META-INF/rewrite/m3-caller-visible-damage-ledger-20261112.yml");var yaml=Files.readAllBytes(yamlPath);
-need.accept(yaml.length==1236&&sha.apply(yaml).equals("637b18ef7aa159d5f1fd9f66b9c6a7c8d5943a388a20d623a6fb9ad2118da2fe"),"YAML seal");
+need.accept(yaml.length==1236&&sha.apply(yaml).equals("c244973c92f3ced223d6019349a6b932d7d9d916e6f12e222806d9f1c8d85d09"),"YAML seal");
 var paths=List.of("src/main/java/com/m3/swing/web/model/M3WebLanes.java","src/test/java/com/m3/swing/web/model/M3WebChecks.java");
 var tmpl=List.of("core/M3WebLanes.java.tmpl","core/M3WebChecks.java.tmpl");
 var from=List.of("414d5263113ea721782421c13e2c8a2a0b09b49f13ab6118ae6a1dfb6087ff23","6d8e2f8f103858b86418bf279fc4c0957606daaadc1e92aa1b9ebd06167f3d23");
-var to=List.of("70264dc0e1183b6c0dcc82dc998ba027e02f8301072e6b6ae05324ed053805fd","2513cc95b19daad0883a14d727c138a95d0abca28b74a8f686f6b76dc80871f1");
+var to=List.of("70264dc0e1183b6c0dcc82dc998ba027e02f8301072e6b6ae05324ed053805fd","47c58002bd3bb75e8eac6d2cb950a54bd1bb760aa17c57ee9467678b3c868ecd");
 var old=new ArrayList<String>();var next=new ArrayList<String>();
 for(int i=0;i<2;i++){old.add(paths.get(i)+"\t"+tmpl.get(i)+"\t"+from.get(i)+"\n");next.add(paths.get(i).replace("/com/m3/","/jdk/m3/")+"\t"+tmpl.get(i)+"\t"+to.get(i)+"\n");var source="m3/ports/swing-viewport/"+paths.get(i).replace("/com/m3/","/jdk/m3/");need.accept(hash.apply(sel.resolve("after-sources").resolve(source)).equals(to.get(i)),"producer after");if(mode.equals("apply"))need.accept(hash.apply(receiver.resolve(source)).equals(to.get(i)),"receiver after");}
 BiFunction<String,String,Integer> count=(text,token)->text.split(java.util.regex.Pattern.quote(token),-1).length-1;

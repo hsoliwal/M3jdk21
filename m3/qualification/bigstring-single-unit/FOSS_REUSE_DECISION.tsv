@@ -1,0 +1,5 @@
+capability	problem_category	classification	donor_revision	mechanism	qualification	decision
+segmented-single-unit-search	search/segmented-text/single-UTF16-unit-literal	REUSE	M3BigString@485099044c7576c3fc934d22097da07dfd0330e1	existing parallel-array chunk directory and Bloom lanes	83 JUnit; exact unit/callback/long/view/summary evidence	SELECT_WITH_RECORDED_TIMING_TRADEOFFS
+bounded-string-leaf-search	search/UTF16/code-unit	DIRECT_USE_PLATFORM_API	openjdk/jdk@890adb6410dab4606a4f26a942aed02fb2f55387	String.indexOf(int,int,int),since21; no GPL source copied	all65536 units; bounded window and collision cases	DIRECT_USE
+registry-merge-compatibility	transformation/three-way-merge	DIRECT_USE_TEST_DEPENDENCY	eclipse-jgit/jgit@d764bc34fc15079379a71bb638e7c1b5836e061e	pre-existing JGit6.9 MergeAlgorithm/RawText/MergeFormatter	3 exact merges; combined registry compiled and recipe replayed	QUALIFICATION_ONLY
+interview-catalogues	search/literal/search-strategy	NO_COPY	LeetCode/HackerRank/GeeksforGeeks	problem-category discovery; existing M3/JDK owners cover gap	no implementation/license invented	NO_ADDITIONAL_DONOR_IMPLEMENTATION

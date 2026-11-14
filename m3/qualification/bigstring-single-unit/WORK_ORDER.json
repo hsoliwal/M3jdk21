@@ -1,0 +1,6 @@
+{
+  "schema": "M3_BIGSTRING_UNIT_WORK_ORDER_V1",
+  "generationCalls": 0,
+  "scope": "Same typed helper contract, first valid unit read before Bloom/range dispatch; remaining text stays structural. Original general KMP and all fields/API unchanged.",
+  "variant": "V3_LOCATED_FIRST_UNIT_PEEK"
+}

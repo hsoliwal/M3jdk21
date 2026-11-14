@@ -3,6 +3,7 @@
  */
 package jdk.m3.text;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -244,20 +245,37 @@ public final class M3InstanceIndexPrecompute {
     }
 
     private static int compareUtf8(String left, String right) {
-        int leftIndex = 0;
-        int rightIndex = 0;
-        while (leftIndex < left.length() && rightIndex < right.length()) {
-            int leftPoint = left.codePointAt(leftIndex);
-            int rightPoint = right.codePointAt(rightIndex);
-            leftIndex += Character.charCount(leftPoint);
-            rightIndex += Character.charCount(rightPoint);
-            // String.getBytes(UTF_8) replaces each unpaired surrogate with '?'.
-            if (leftPoint >= Character.MIN_SURROGATE
-                    && leftPoint <= Character.MAX_SURROGATE) leftPoint = '?';
-            if (rightPoint >= Character.MIN_SURROGATE
-                    && rightPoint <= Character.MAX_SURROGATE) rightPoint = '?';
-            if (leftPoint != rightPoint) return Integer.compare(leftPoint, rightPoint);
+        // UTF-8 order follows Unicode scalar order (Lucene CharsRef, Apache-2.0).
+        // Retain the byte path for encountered malformed UTF-16 and null operands.
+        if (left != null && right != null) {
+            int leftLength = left.length(), rightLength = right.length();
+            int common = Math.min(leftLength, rightLength);
+            boolean scalarPrefix = true;
+            int at = 0;
+            while (at < common) {
+                int leftPoint = left.codePointAt(at), rightPoint = right.codePointAt(at);
+                if ((leftPoint >= Character.MIN_SURROGATE && leftPoint <= Character.MAX_SURROGATE)
+                        || (rightPoint >= Character.MIN_SURROGATE
+                        && rightPoint <= Character.MAX_SURROGATE)) {
+                    scalarPrefix = false;
+                    break;
+                }
+                int comparison = Integer.compare(leftPoint, rightPoint);
+                if (comparison != 0) return comparison;
+                at += Character.charCount(leftPoint);
+            }
+            if (scalarPrefix) return Integer.compare(leftLength, rightLength);
         }
-        return Integer.compare(left.length() - leftIndex, right.length() - rightIndex);
+        byte[] leftBytes = left.getBytes(StandardCharsets.UTF_8);
+        byte[] rightBytes = right.getBytes(StandardCharsets.UTF_8);
+        int limit = Math.min(leftBytes.length, rightBytes.length);
+        for (int index = 0; index < limit; index++) {
+            int leftValue = leftBytes[index] & 0xff;
+            int rightValue = rightBytes[index] & 0xff;
+            if (leftValue != rightValue) {
+                return Integer.compare(leftValue, rightValue);
+            }
+        }
+        return Integer.compare(leftBytes.length, rightBytes.length);
     }
 }

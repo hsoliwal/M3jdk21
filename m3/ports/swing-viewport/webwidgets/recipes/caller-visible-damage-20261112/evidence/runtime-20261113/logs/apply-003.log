@@ -1,0 +1,19 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------< com.synexia.m3:caller-visible-damage-20261112 >------------
+[INFO] Building Selected caller producer qualification and apply 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (validate-selected-producer-inputs) @ caller-visible-damage-20261112 ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireJavaVersion passed
+[INFO] Rule 1: org.apache.maven.enforcer.rules.property.RequireProperty passed
+[INFO] Rule 2: org.apache.maven.enforcer.rules.property.RequireProperty passed
+[INFO] Rule 3: org.apache.maven.enforcer.rules.property.RequireProperty passed
+[INFO] Rule 4: org.apache.maven.enforcer.rules.property.RequireProperty passed
+[INFO] Rule 5: org.apache.maven.enforcer.rules.files.RequireFilesDontExist passed
+[INFO] 
+[INFO] --- antrun:3.2.0:run (selected-producer-and-result-check) @ caller-visible-damage-20261112 ---
+[INFO] Executing tasks
+[INFO]     [mkdir] Created dir: S:\codex-work\ui-caller-runtime-qualification-20261113\apply-003\maven-controller\tmp
+[INFO]     [mkdir] Created dir: S:\codex-work\ui-caller-runtime-qualification-20261113\apply-003\maven-controller\jshell-home

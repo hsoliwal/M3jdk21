@@ -156,11 +156,6 @@ try:
  run("normalize-sdk-reconcile",{recipeClass:cfg["recipeSources"][recipeClass]["content"],reconcileTest:cfg["reconcileQa"]},resources,reconcileTest,[base+callback,"registration"],retainedOutputBytes=s_before+4096)
  value=received[callback];assert value["found"]==value["passed"]==3 and value["failed"]==value["skipped"]==value["aborted"]==0,value
  recipeAfter=value.pop("generated");assert recipeAfter==cfg["recipeAfter"];value["generatedIdentity"]=ident(raw(recipeAfter));results.append(value)
- callback=nonce+"/result-comparator"
- legacy={name:raw(text) for name,text in cfg["legacyResources"].items()}
- run("normalize-comparator-chain",{recipeClass:recipeAfter,reconcileTest:cfg["reconcileQa"]},legacy,reconcileTest,[base+callback,"index"],retainedOutputBytes=s_before+4096)
- value=received[callback];assert value["found"]==value["passed"]==3 and value["failed"]==value["skipped"]==value["aborted"]==0,value
- comparatorAfter=value.pop("generated");assert comparatorAfter==cfg["sources"][ownerClass]["content"];value["generatedIdentity"]=ident(raw(comparatorAfter));results.append(value)
  recipeTest="jdk.m3.rewrite.backport.M3InstanceNormalizeRecipeTest";callback=nonce+"/result-recipe"
  run("normalize-owner-recipe",{recipeClass:recipeAfter,recipeTest:cfg["recipeQa"]},resources,recipeTest,[base+callback,"index"],retainedOutputBytes=s_before+4096)
  value=received[callback];assert value["found"]==value["passed"]==3 and value["failed"]==value["skipped"]==value["aborted"]==0,value
@@ -190,6 +185,6 @@ finally:
    owned_pom.unlink()
   except Exception as ex:failure=dict(type="TemporaryPomCleanupRefused",message=str(ex))
  stop.set();watcher.join(timeout=10);server.shutdown();server.server_close();serverThread.join(timeout=5)
-out=dict(schema="M3_INSTANCE_NORMALIZATION_QUALIFICATION_R247",status="PASS" if failure is None and len(results)==5 and not errors and not watchErrors and allocation(S)==s_before else "FAIL",failure=failure,reports=reports,results=results,storage=dict(before=s_before,after=allocation(S),readOnlyFBytes=f_before,cap=cap,reserve=reserve,free=shutil.disk_usage(S).free,peaks=observedPeaks,cWriteHold=True),generationCalls=0,scope="Serial existing-owner changes: reconcile SDK preserving R245, replay R246 comparator, then R247 normalization. Pinned before-source reference uses only class-identifier projection. Fresh String identity, exact validation precedence, UTF-8 ordering and original contracts tested; fixed-round local allocation observations. No native/current-ABI/platform/full-reactor proof.")
+out=dict(schema="M3_INSTANCE_NORMALIZATION_QUALIFICATION_R247",status="PASS" if failure is None and len(results)==4 and not errors and not watchErrors and allocation(S)==s_before else "FAIL",failure=failure,reports=reports,results=results,storage=dict(before=s_before,after=allocation(S),readOnlyFBytes=f_before,cap=cap,reserve=reserve,free=shutil.disk_usage(S).free,peaks=observedPeaks,cWriteHold=True),generationCalls=0,scope="Serial SDK reconciliation preserving R245, then normalization over the current default owner with its incoming comparator preserved byte-for-byte. Pinned before-source reference uses only class-identifier projection. Fresh String identity, exact validation precedence, UTF-8 ordering and original contracts tested; fixed-round local allocation observations. No native/current-ABI/platform/full-reactor proof.")
 EMIT(out)
 if out["status"]!="PASS":raise SystemExit(2)

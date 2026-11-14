@@ -5,87 +5,70 @@
   "reports": [
     {
       "stage": "normalize-before",
-      "pid": 19176,
+      "pid": 8244,
       "packetIdentity": {
-        "bytes": 85166,
-        "sha256": "d7825030ae92dffa346a0a71160209a5ae17088b3155a8b20a1ed65f3f141492",
-        "gitBlob": "17391c887044516d262a6ddc08dc5abd63c68a91"
+        "bytes": 87438,
+        "sha256": "e850f03b32573da987d8d02a4b704caaecbd44a13c559343c41adc55e136d7a9",
+        "gitBlob": "97a047c6d0b5a1521745a86fd07098f851fcc37c"
       },
       "exit": 0,
       "reaped": true,
-      "elapsedSeconds": 5.328,
+      "elapsedSeconds": 6.985,
       "logIdentity": {
         "bytes": 1059,
-        "sha256": "64cc0636401dbab6093bfde024eb73a00ffdf299e2a6fcb6d5a8d86440d25f88",
-        "gitBlob": "dbecf61427083ec5719bc752490065e06276b942"
+        "sha256": "bc3bdcec425ff9a00ecdd0780d3076bd862c4770c4147a2b14d7c4160e0a7a5c",
+        "gitBlob": "88671df04987ff93e66fcfa8c535d631bc21bf9c"
       }
     },
     {
       "stage": "normalize-sdk-reconcile",
-      "pid": 39736,
+      "pid": 18248,
       "packetIdentity": {
-        "bytes": 135773,
-        "sha256": "4915eb73d55fbc8bbcd78fb3885620ef837815fb36b7f2e8d0fd0fa287bb38b4",
-        "gitBlob": "1d640232aacb8087ab125bb5662a73ff34a6958d"
+        "bytes": 139181,
+        "sha256": "19f03111fe8f5c4656e87a76f94868bb7b3ae903274a568c9a1add0de74c33ff",
+        "gitBlob": "dfe10e38009f259bc4bd1776777b7f202e9b956e"
       },
       "exit": 0,
       "reaped": true,
-      "elapsedSeconds": 8.422,
+      "elapsedSeconds": 7.234,
       "logIdentity": {
         "bytes": 962,
-        "sha256": "1bbf6cb9f32280283615b1111d0ffd380ed430947148f7789ccbab3b681f9e33",
-        "gitBlob": "ce4c15d1f7cd001cd4cacee6023d8ac7127d6842"
-      }
-    },
-    {
-      "stage": "normalize-comparator-chain",
-      "pid": 42216,
-      "packetIdentity": {
-        "bytes": 70863,
-        "sha256": "1aa00a76612cf317747e2ba62c42b5721a1daaf7b6ab1e5efa503a363b5ea765",
-        "gitBlob": "2c4380f9fa9079b78a9af6c8b473b117a844c3f8"
-      },
-      "exit": 0,
-      "reaped": true,
-      "elapsedSeconds": 7.594,
-      "logIdentity": {
-        "bytes": 962,
-        "sha256": "16304fa9bf7b90b547a9b87159951a64e4e78a5faa4551a264aff8b658a1d4f6",
-        "gitBlob": "892f0bebd14d34afe6422ba726afb684900b7304"
+        "sha256": "1d605c242c10eb95fcbe1fc23320420bc87a4ff27f67fa9ba1e8f480209bb493",
+        "gitBlob": "57daff4f6ba0bc2c4c08e58383e15490d1c8d76e"
       }
     },
     {
       "stage": "normalize-owner-recipe",
-      "pid": 26904,
+      "pid": 39852,
       "packetIdentity": {
-        "bytes": 133629,
-        "sha256": "ac11a5eade3348097793f42883edc9b7040b28248e7db0520e98c455f049b751",
-        "gitBlob": "d3f246b6c38e629d1349b6479608fedfce9b1f5a"
+        "bytes": 137037,
+        "sha256": "945818df2024c5442e27d98d778b6d6d113e1ed239b6d34cd62e74e4785b4b79",
+        "gitBlob": "cdc994ef80b1c75c75bf7e6c04606477b396b9e5"
       },
       "exit": 0,
       "reaped": true,
-      "elapsedSeconds": 6.828,
+      "elapsedSeconds": 6.516,
       "logIdentity": {
         "bytes": 962,
-        "sha256": "cfef2386eb1598ae1144e878f61b85afda97953e2a9db79a34a915fd401670e0",
-        "gitBlob": "6d260f5b5b1fd4af67d03a9ece66d0437a1c114b"
+        "sha256": "bb2a767cf058957f8e6e5693c4864d88ccaa7ed258c155866240741ecadb1672",
+        "gitBlob": "8cdce9f83f491e3e386cfe7764091948644f6a7b"
       }
     },
     {
       "stage": "normalize-after",
-      "pid": 39356,
+      "pid": 37652,
       "packetIdentity": {
-        "bytes": 85978,
-        "sha256": "0bb8179621f7e73b86e3a0e2942bceaa9bd931c91628a915b3eed529c14c927e",
-        "gitBlob": "18b2c31607aa68a8c86edbc8eea2137adfc31fbc"
+        "bytes": 88250,
+        "sha256": "7c0413807d51214811cc6b226d9c9b4cb6a04b79146df6ac8b8d9ea415a6299f",
+        "gitBlob": "b4d145731a9c381278a5ac9af578ac98b57f1a45"
       },
       "exit": 0,
       "reaped": true,
-      "elapsedSeconds": 5,
+      "elapsedSeconds": 4.25,
       "logIdentity": {
         "bytes": 1059,
-        "sha256": "74b3163c433a34b0e23c82c15b154c08f7d58792bda0071e75a7de374e9913a5",
-        "gitBlob": "14bac348b71e15d1d54e541f649e555515e9d79d"
+        "sha256": "2adeb96fb12ae5b1522a25dc86dbc0654bd799582d79fd839f16c61ddefba0e3",
+        "gitBlob": "bc09e2f192a5c7e7877aca822e72c10ff2110181"
       }
     }
   ],
@@ -109,11 +92,11 @@
           0
         ],
         "compareNanos": [
-          2357700,
-          1555500,
-          872500,
-          6590300,
-          921900
+          2072000,
+          1621300,
+          1898500,
+          1416200,
+          1423700
         ],
         "lookupAllocatedBytes": [
           6262472,
@@ -123,11 +106,11 @@
           6262472
         ],
         "lookupNanos": [
-          11192300,
-          8679400,
-          8088100,
-          8935300,
-          10003700
+          14620900,
+          11458800,
+          11020200,
+          11443200,
+          11806100
         ],
         "queriesPerRoundPerOperation": 20000
       },
@@ -150,28 +133,28 @@
         ],
         "lowerChecksum": 406870,
         "lowerNanos": [
-          4265600,
-          3431300,
-          3126100,
-          3316000,
-          3354800
+          2629200,
+          2282200,
+          2314200,
+          2497500,
+          2400300
         ],
         "queriesPerRoundPerOperation": 20000,
         "upperChecksum": 406870,
         "upperNanos": [
-          3264400,
-          4101700,
-          3328500,
-          3471500,
-          6838300
+          2347800,
+          2470700,
+          2524400,
+          2609400,
+          2486400
         ]
       },
       "passed": 11,
       "skipped": 0,
       "referenceProjectionIdentity": {
-        "bytes": 9996,
-        "sha256": "b22b805ec78e002831df5f6406780697111ca843d0bf98ef6ebf4e75330c6fd6",
-        "gitBlob": "74c9d0099e7b209f5aede44f9f74500922a740e9"
+        "bytes": 10847,
+        "sha256": "15cdfae1133540f52f2b9369744bfded2403eda86c68f415f1e50c882caf8ea1",
+        "gitBlob": "32c55858438e35bb80867dabae0a4f8bb089dff2"
       }
     },
     {
@@ -203,26 +186,9 @@
       "skipped": 0,
       "tag": "index",
       "generatedIdentity": {
-        "bytes": 9984,
-        "sha256": "fc2d6bf85df01fec9fb7149e357f5f3160f1e2ec747ff663f8be9a11d63548ca",
-        "gitBlob": "d63ab6113aaaaca413e4657ab5a50b1a67f6ed37"
-      }
-    },
-    {
-      "aborted": 0,
-      "failed": 0,
-      "failures": [],
-      "found": 3,
-      "metrics": {
-        "indexOwnersChanged": 1
-      },
-      "passed": 3,
-      "skipped": 0,
-      "tag": "index",
-      "generatedIdentity": {
-        "bytes": 10592,
-        "sha256": "1fb0339939abf08a95eebbc3c0d8ffb7b7ac0e613c1e13392142ea583cecb0f6",
-        "gitBlob": "3f9872d93e6ade752c272e248fa6de6162a10842"
+        "bytes": 11443,
+        "sha256": "2cfed3d012c472927c7afe5f35ad5b456b16a9e38174676ec5f8484ac8ebfe7d",
+        "gitBlob": "74c2c5f68d15aca0322b2fe322192204dfba6e22"
       }
     },
     {
@@ -244,11 +210,11 @@
           0
         ],
         "compareNanos": [
-          1526500,
-          1477400,
-          977900,
-          1012500,
-          1020500
+          2280000,
+          1618100,
+          1181600,
+          1313600,
+          1274400
         ],
         "lookupAllocatedBytes": [
           480000,
@@ -258,11 +224,11 @@
           480000
         ],
         "lookupNanos": [
-          27716800,
-          5872200,
-          5587900,
-          5740200,
-          5269600
+          20398300,
+          7791000,
+          7542200,
+          7701000,
+          6992600
         ],
         "queriesPerRoundPerOperation": 20000
       },
@@ -285,20 +251,20 @@
         ],
         "lowerChecksum": 406870,
         "lowerNanos": [
-          865400,
-          707800,
-          709200,
-          722400,
-          716600
+          678500,
+          540200,
+          529500,
+          524500,
+          675600
         ],
         "queriesPerRoundPerOperation": 20000,
         "upperChecksum": 406870,
         "upperNanos": [
-          2205700,
-          2122300,
-          2144300,
-          2174200,
-          2187300
+          1541900,
+          1477500,
+          1410400,
+          1543500,
+          1538700
         ]
       },
       "passed": 11,
@@ -311,12 +277,12 @@
     "readOnlyFBytes": 571469824,
     "cap": 571473920,
     "reserve": 8589934592,
-    "free": 10919809024,
+    "free": 10919235584,
     "peaks": [
       571473920
     ],
     "cWriteHold": true
   },
   "generationCalls": 0,
-  "scope": "Serial existing-owner changes: reconcile SDK preserving R245, replay R246 comparator, then R247 normalization. Pinned before-source reference uses only class-identifier projection. Fresh String identity, exact validation precedence, UTF-8 ordering and original contracts tested; fixed-round local allocation observations. No native/current-ABI/platform/full-reactor proof."
+  "scope": "Serial SDK reconciliation preserving R245, then normalization over the current default owner with its incoming comparator preserved byte-for-byte. Pinned before-source reference uses only class-identifier projection. Fresh String identity, exact validation precedence, UTF-8 ordering and original contracts tested; fixed-round local allocation observations. No native/current-ABI/platform/full-reactor proof."
 }
