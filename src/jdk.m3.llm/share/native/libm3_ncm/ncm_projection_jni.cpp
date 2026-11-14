@@ -12,12 +12,15 @@
  * Flat FP32 CPU batches; no retained JNI references or native allocations.
  * ABI 1 retains its default allocation ceiling. Controlled capability 1 supplies
  * a per-call ceiling and an optional checkpoint() callback on the calling thread.
+ * Modified 2026-11-14: avoid a second ID buffer for identical kernel/JNI types;
+ * preserve distinct-type conversion, transfer checkpoints and exception cleanup.
  */
 #include <jni.h>
 #include "m3_ncm_kernel.h"
 #include <math.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <type_traits>
 
 #define JCALL(name, ...) env->name(__VA_ARGS__)
 #define JNI_NAME(name) Java_jdk_m3_llm_projection_M3NcmNativeOps_##name
@@ -124,6 +127,34 @@ static jintArray int_result(JNIEnv *env,const Control *control,const jint *data,
     }
     return result;
 }
+
+template <typename Id>
+static jint *allocate_transfer(JNIEnv *env,const Control *control,size_t size) {
+    if constexpr (std::is_same_v<Id,jint>) {
+        return NULL;
+    } else {
+        return (jint *)allocate(env,control,(uint64_t)size,sizeof(jint));
+    }
+}
+
+template <typename Id>
+static jintArray selected_result(JNIEnv *env,const Control *control,const Id *selected,
+        jint *transfer,size_t size) {
+    if constexpr (std::is_same_v<Id,jint>) {
+        // The old conversion checked before IDs 65535, 131071, ... . Retain
+        // those observations without copying; subtraction cannot wrap SIZE_MAX.
+        for (size_t remaining=size;remaining >= (size_t)65536;remaining-=(size_t)65536)
+            if (!checkpoint(env,control)) return NULL;
+        return int_result(env,control,selected,size);
+    } else {
+        for (size_t i=0;i<size;i++) {
+            if ((i & (size_t)65535) == (size_t)65535 && !checkpoint(env,control)) return NULL;
+            transfer[i]=static_cast<jint>(selected[i]);
+        }
+        return int_result(env,control,transfer,size);
+    }
+}
+
 static int shape3(jint batch,jint length,jint channels,jsize actual) {
     if (batch <= 0 || length <= 0 || channels <= 0 || actual <= 0) return 0;
     /* Two positive jint factors fit uint64_t; divide before the third product. */
@@ -155,25 +186,16 @@ static jintArray nearest(JNIEnv *env,jfloatArray rows,jint channels,jfloatArray 
     }
     int *selected=(int *)allocate(env,control,(uint64_t)r,sizeof(int));
     float *norms=selected == NULL ? NULL : (float *)allocate(env,control,(uint64_t)v,sizeof(float));
-    jint *transfer=norms == NULL ? NULL : (jint *)allocate(env,control,(uint64_t)r,sizeof(jint));
+    jint *transfer=norms == NULL ? NULL : allocate_transfer<int>(env,control,r);
     jintArray result=NULL;
-    if (transfer != NULL) {
+    if (norms != NULL && (std::is_same_v<int,jint> || transfer != NULL)) {
         KernelControl call={env,control};
         /* Both original and controlled JNI use the one current FP32 numerical owner. */
         int status=m3_ncm_nearest_expanded_f32_controlled(x.data,(size_t)x.size,r,c,
                 e.data,(size_t)e.size,v,norms,v,selected,r,
                 control->cancellation == NULL ? NULL : kernel_checkpoint,&call);
         if (status != 0) invalid(env); /* fail() preserves a pending callback exception. */
-        else {
-            int valid=1;
-            for (size_t i=0;i<r;i++) {
-                if ((i & (size_t)65535) == (size_t)65535 && !checkpoint(env,control)) {
-                    valid=0; break;
-                }
-                transfer[i]=(jint)selected[i];
-            }
-            if (valid) result=int_result(env,control,transfer,r);
-        }
+        else result=selected_result<int>(env,control,selected,transfer,r);
     }
     free(transfer); free(norms); free(selected); release(env,&e); release(env,&x); return result;
 }
