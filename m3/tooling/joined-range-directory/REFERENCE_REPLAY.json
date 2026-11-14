@@ -15,8 +15,8 @@
     "originalSourceFiles": 27,
     "originalTestFiles": 25
   },
-  "legacyBindingGit": "566cb6abe154054cf7b08cf1a1db8d5042830e1d",
-  "freshBindingGit": "2dec31f75e5d3237beb52243a90e988feadc9203",
+  "legacyBindingGit": "ce2d727539974dd65625cbb50ff49dd4b0561b6d",
+  "freshBindingGit": "98aa76a9cdfd0c2f38514867d9a6e5b29e9e3b14",
   "unchangedV8DeclarationSha256": "6f90d22fb6db68af59668138e3757f3c29826af552592b14322c927b372c3873",
   "unchangedNlpLockedJavaSources": 145,
   "qualifiedReceiverHead": "142ee65092cc61cb02cdd58d1fa5d47b800663bb",

@@ -166,7 +166,7 @@
     "canonical_copies_checksum_sha256": "80e4ddff41be3ce01fd5490f52da5754b7e9a37bc2b6b68b8caa64fd3e9e292f",
     "recipe_source_files": 61,
     "recipe_copy_manifest": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/RECIPE_CUSTODY_COPY_MANIFEST.tsv",
-    "recipe_copy_manifest_sha256": "da8c8f9a3031a8ad98d5e087c28148f4a8c6b38a52103c6f2920603495c7d245",
+    "recipe_copy_manifest_sha256": "e6d04cd533217759d0602929326155d53c8164da8ddaaa53e3ba02107cc1e50b",
     "original_owner_catalogue_sha256": "644f170f3857f8391cd0554c82e06b0980c6e600f115c22843310703e0029022",
     "integration_owner_census_sha256": "caaf1684b3e6db0d8e1304672a2fd30dce260f145b1eb8da1e25d247a85ba7a9",
     "index_candidate_catalogue_sha256": "1fa3f63d01d9b9f0f10a0c20a85a377f42ed30892730587111435b3566869f72",

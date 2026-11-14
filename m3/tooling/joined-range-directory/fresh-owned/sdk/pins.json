@@ -9,9 +9,9 @@
   "files": [
     {
       "path": "FOSS_REUSE_DECISION.tsv",
-      "gitBlob": "9b316759508ba751b1a661b55f02fd2efe510e42",
+      "gitBlob": "9ac3819ba5897912e66ee73061758126582c092a",
       "bytes": 1564,
-      "sha256": "78dbac72e2e58d7a1db197e689bd39a707787bec9c726591b4e38cd6b68df4ec"
+      "sha256": "679441854395d55b677471df2f22bee6b6589d066951d67c9ad5b4fbbb435302"
     },
     {
       "path": "README.md",
@@ -51,9 +51,9 @@
     },
     {
       "path": "pom.xml",
-      "gitBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f",
+      "gitBlob": "059259ca746466389cccac4094c3d664b0d79e6d",
       "bytes": 2678,
-      "sha256": "f0ab99c3dafb38e82f8e5fd4c6d22db07831808c251c4622f292114c83e6673e"
+      "sha256": "5b3f3f04f9539178d43ffa75068366d8ff1c037e25f67c2d31aa3bdb6e0ede1e"
     },
     {
       "path": "src/main/resources/META-INF/rewrite/joined-range-directory-20261020.yml",
@@ -207,9 +207,9 @@
     },
     {
       "path": "verify.py",
-      "gitBlob": "c1687dec6070a5af3dcf1fa7ae467de60632caa9",
+      "gitBlob": "be9b93439e6a85325ad40ee8eacd195576de2ce9",
       "bytes": 25785,
-      "sha256": "6a35c27ec3e7ea4e1b5195fff0014a4da8a9c7bcb605ba27ccadfd54e4daf071"
+      "sha256": "4c4f844ffa5c20a250178e75590bbffb156f7d0d6858c57e72b24fbaf54e1c84"
     }
   ]
 }

@@ -53,13 +53,13 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/pins.json",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json",
-      "gitBlob": "ce9727c7585c8f90f62a23524bf8e8245ea59858",
+      "gitBlob": "9ac2600209b7bde604b0d73766eedbdf67e8f623",
       "bytes": 14670
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/pom.xml",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/pom.xml",
-      "gitBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f",
+      "gitBlob": "059259ca746466389cccac4094c3d664b0d79e6d",
       "bytes": 2678
     },
     {
@@ -281,7 +281,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/verify.py",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py",
-      "gitBlob": "3b388c656fc0af06173735c8d9dc16f641b51de6",
+      "gitBlob": "c76938329b5c0a40aaf74319bfd2caecbd2b6795",
       "bytes": 23045
     },
     {

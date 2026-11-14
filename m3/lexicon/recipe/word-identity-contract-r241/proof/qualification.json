@@ -135,8 +135,8 @@
   },
   "taskPomIdentity": {
     "bytes": 780,
-    "sha256": "aaf82ea412e9ea5487645fda552be1b890efefd545ceee145260da44c9028804",
-    "gitBlob": "11f24647b5e18dbe9dfbd131f9d26e7192fd5f23"
+    "sha256": "71d913584762074fe6477c22fd0ea3a4a5e6f3f7cf02053927c80535ae3bb996",
+    "gitBlob": "f86ea8bda3b7823c5d0081f8763d6927caf4f186"
   },
   "temporaryPomRemoved": true,
   "generationCalls": 0,

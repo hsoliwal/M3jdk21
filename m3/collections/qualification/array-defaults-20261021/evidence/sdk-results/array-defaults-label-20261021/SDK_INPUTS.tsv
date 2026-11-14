@@ -6,7 +6,7 @@ host/passes/array-defaults-label-20261021/resources/META-INF/rewrite/m3-wrapper-
 host/passes/array-defaults-label-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-wrapper-array-defaults-label-20261021/JDK_FAMILY_MAP.tsv.txt	6d6b535e84832b85ac261cb07207f168c4fc3f4941ea78304cfce33322232adf
 host/passes/array-defaults-label-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-wrapper-array-defaults-label-20261021/manifest.tsv	9e03c9ff8635c561028bc195f5ac5785d022000c7bda6bc1f92300aa345e11f8
 host/passes/array-defaults-label-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-wrapper-array-defaults-label-20261021/pre/JDK_FAMILY_MAP.tsv.txt	88ed35987b8956046ac8644ee8200d2aadea7ad9dd7a3175989f1e2043b9b83b
-host/pom.xml	0a1c81dcc36ef6a77c6ba812797cde06fa8d7ffdafa73f13b6ef846b3ab2a572
+host/pom.xml	f1bd00c207f44ee59939cac93cd72d8173dc1d004b2e7688efc2e7d30781fbd0
 host/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java	76e5159a9cb350df2b58d410ee4aaae0ad1f96ddaedb1be420163802954154d8
 contract/CONTRACT.md	5842fef287080a7064fff35bb7f949a150532396a5073855d3b61e9c18bd6e40
 owner/src/main/java/com/synexia/rewrite/M3EditScope.java	962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab

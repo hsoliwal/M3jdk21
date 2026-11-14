@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- SPDX-License-Identifier: Apache-2.0. Adapted from pinned receiving POM d79867bcc09ad6329e12418e15907e54b8ab025f. -->
+<!-- SPDX-License-Identifier: Apache-2.0. Adapted from pinned receiving POM 059259ca746466389cccac4094c3d664b0d79e6d. -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
  <modelVersion>4.0.0</modelVersion><groupId>com.m3</groupId><artifactId>m3-original-cli-provider-recipe</artifactId><version>1.0-SNAPSHOT</version>
  <properties><m3.build.root>${project.basedir}/target</m3.build.root><m3.output.root>${project.build.directory}/emitted</m3.output.root><m3.baseline.root>${m3.build.root}/frozen-pre-baseline</m3.baseline.root><maven.compiler.release>21</maven.compiler.release><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding></properties>

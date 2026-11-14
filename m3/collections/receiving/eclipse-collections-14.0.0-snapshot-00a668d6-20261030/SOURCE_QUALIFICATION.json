@@ -17,8 +17,8 @@
     "bindings": {
       "path": "m3/collections/receiving/eclipse-collections-14.0.0-snapshot-00a668d6-20261024/FULL_SOURCE_BINDINGS.tsv",
       "bytes": 1515189,
-      "sha256": "7ef1a2ad3d46db2cb27f73f35fe7fb7885d931e3b49fe201ec99e61f24343399",
-      "gitBlob": "2f1c896c2994da77b3d08a2a06e6bbbf38b62e3c",
+      "sha256": "9614654b17bbce5d2020f5979cf6a14d9c5768e5373a61edff81e25b2a846121",
+      "gitBlob": "cf45c3fda5e3233bb95e046610963bbb88afab46",
       "pinnedSha256": "3041aefce4749455078c674d043892d01090a77733af5027c280b09d8cdf666b",
       "pinCheck": "The pinned value is reproduced when the pom.xml and m3/stream-interop/pom.xml rows carry the prep-tree after values (blob ccf693ca084b, SHA-256 f8aaffe1381d, 57682 bytes; blob 6f8071c80af2, SHA-256 e4a5142ccede, 1437 bytes). The file at the base carries the config successor A2 values for those two rows, so its SHA-256 differs from the pin. Recorded here; the predecessor is not edited."
     }
@@ -88,7 +88,7 @@
   ],
   "notTaken": [
     {"path": "pom.xml", "forkBlob": "ccf693ca084b91c0ec81163be84f104cc4471fb9", "receivedBlob": "178141e62322b5d78166e870f1fa3462be7e640b", "reason": "The fork never had the config successor A2 lines; the received blob is kept"},
-    {"path": "m3/stream-interop/pom.xml", "forkBlob": "6f8071c80af2603db64651adfb391009c310d849", "receivedBlob": "e3125c4387374768fae8465691fc34a3564f2895", "reason": "Same as pom.xml"}
+    {"path": "m3/stream-interop/pom.xml", "forkBlob": "6f8071c80af2603db64651adfb391009c310d849", "receivedBlob": "28127b99c0a50f7f5dacc011c5251fceaa6e7b6e", "reason": "Same as pom.xml"}
   ],
   "bindings": {
     "file": "FULL_SOURCE_BINDINGS.tsv",
@@ -97,8 +97,8 @@
     "changedRows": 5,
     "addedRows": 1,
     "bytes": 1515373,
-    "sha256": "caa4b1f504ed739806b9e6fd28c2b2e303290b319483b52346d32fb2b8336c2a",
-    "gitBlob": "c90c032d7d2e9e2d89bf9f23de9bb0798cb8329d"
+    "sha256": "c9e7fcad1f334eca04f7a61ebdca5a355f9c1b3cb0bed41339a24edca3f5d0c7",
+    "gitBlob": "31d6c7338b56dcb14e6a3b34b0c7937e7d482373"
   },
   "otherPins": [
     {"path": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/m3/package-import-rename-20261018/FINAL_SOURCE_HASHES.tsv", "lines": [675, 682, 2932], "handling": "Fork file of the 20261018 rename, byte-equal with the fork head; kept. EXECUTION.json is the fork successor for these three rows"},

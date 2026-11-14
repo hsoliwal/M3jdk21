@@ -8,7 +8,7 @@ files are imported verbatim and keep their original SPDX notices:
 
 - M3GpuToolJoinRecipe.java, Git blob 2ec479b8609459a28fdfd8a7a7d63cc44e919f00.
 - M3GpuToolJoinManifest.java, Git blob 78d5fb68f13872164973a8918cc7886c5f548bca.
-- pom.xml, Git blob d79867bcc09ad6329e12418e15907e54b8ab025f.
+- pom.xml, Git blob 059259ca746466389cccac4094c3d664b0d79e6d.
 
 They are Apache-2.0 Synexia files, reused from the previously qualified guard SDKs
 d183c3c0210eeba355182f4c0e13b1357eae19c3 and

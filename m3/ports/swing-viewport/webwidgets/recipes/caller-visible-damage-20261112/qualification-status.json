@@ -82,7 +82,7 @@
     "enrolledRecipe": {
       "status": "PASS",
       "receipt": "evidence/runtime-20261113/reports/enrolled-qualify-001.json",
-      "receiptSHA256": "4c53c214bb9e825fe4501a6e27fafa6a57975b74bc7d8c3000ac1d5d13575140",
+      "receiptSHA256": "3ed3bb3ac7fc9d843d6c3e1db86a550bc14243cf51f777cba91378bc97733d52",
       "strictCompiler": "17-source before/after closures",
       "apiEqual": true,
       "replay": true,

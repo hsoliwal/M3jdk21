@@ -13,15 +13,15 @@
     "nonselfPins": 34,
     "pins": {
       "path": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/pins.json",
-      "gitBlob": "e934d8aff6f42b151eb61294bd50d6acf7f68107",
+      "gitBlob": "0c3d5a5c5d3500aecf571cfc683e73095e156988",
       "bytes": 10316,
-      "sha256": "569e786a33993d45780352e9d799dbc75834f7b5c33f3f4389d5a350468f5cc5"
+      "sha256": "5e7698edce26022dfb0f3ea84b2c3071b430cc586e451f6662c92aac6d2bdd42"
     },
     "verifier": {
       "path": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/verify.py",
-      "gitBlob": "c1687dec6070a5af3dcf1fa7ae467de60632caa9",
+      "gitBlob": "be9b93439e6a85325ad40ee8eacd195576de2ce9",
       "bytes": 25785,
-      "sha256": "6a35c27ec3e7ea4e1b5195fff0014a4da8a9c7bcb605ba27ccadfd54e4daf071"
+      "sha256": "4c4f844ffa5c20a250178e75590bbffb156f7d0d6858c57e72b24fbaf54e1c84"
     },
     "test": {
       "path": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/test/java/jdk/internal/m3/rewrite/M3JoinedRangeDirectoryRecipeTest.java",

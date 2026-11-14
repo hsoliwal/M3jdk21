@@ -56,19 +56,19 @@
   "qualification_receipts": {
     "verification/sdk/RESULTS.json": {
       "target_path": "m3/collections/qualification/stable-order-restoration-20261020/verification/sdk/RESULTS.json",
-      "sha256": "162a5d8ebcb52c9bf05c284f315ffc2146773f446861bd8fc12db851c1488eaf"
+      "sha256": "12bb10c44e837ef30aef11cfdbe98962b7f415af40f619ea7d405f0e88d2574f"
     },
     "verification/generated/RESULTS.json": {
       "target_path": "m3/collections/qualification/stable-order-restoration-20261020/verification/generated/RESULTS.json",
-      "sha256": "8447b5d391ae2e8e21875d6952509ec174049a727b5140f59fd4dc23b12c0293"
+      "sha256": "b340533c2d863a7bcd83830b1b84ba39c2b0eff10ef54b2a4cda85535af89fb6"
     },
     "verification/GENERATED_COMPARISON.json": {
       "target_path": "m3/collections/qualification/stable-order-restoration-20261020/verification/GENERATED_COMPARISON.json",
-      "sha256": "d8f0ae2fdbf6f119c2e6b892fdc480f950a2486425297313ebb0d664d2b04496"
+      "sha256": "9261bd157d78ddb16a518a70807d6452acadb32aad5a9de339677d3861ac9592"
     },
     "verification/native-final/RESULTS.json": {
       "target_path": "m3/collections/qualification/stable-order-restoration-20261020/verification/native-final/RESULTS.json",
-      "sha256": "2778ab5de34dd286019154fc180310ad60cdf6b126db48f676ea774c0494aaca"
+      "sha256": "05032c3e851d1645cab0483af1c8ba03d71f21facff45e4f50be8a02ec36364f"
     },
     "verification/retained-wrappers/RESULTS.json": {
       "target_path": "m3/collections/qualification/stable-order-restoration-20261020/verification/retained-wrappers/RESULTS.json",

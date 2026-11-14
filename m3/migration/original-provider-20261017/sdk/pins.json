@@ -406,8 +406,8 @@
     },
     {
       "path": "pom.xml",
-      "gitBlob": "bb4994b86272405a0de2a30ad55509548cd1a2ff",
-      "sha256": "f3f2a72dbe469776766a02184b59702b55917b5f8a1b397d0aa615f342678ae8",
+      "gitBlob": "de49e8f5b958dc1f7bfc4781a4ccefba00668aca",
+      "sha256": "19293c5dbc93e96eef22fdfc569f14a5e967ba957b613fc9b8d483294de686e3",
       "bytes": 2986
     },
     {
@@ -814,8 +814,8 @@
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
-      "gitBlob": "607abb25d11aef09154f28a07d07355ca5c0a558",
-      "sha256": "765fea6288e244b8ba1ec0d7e851aeeaba74cd3b55186667dae8057688119977",
+      "gitBlob": "dceffcd9aa73a397253061d56b1465f60b621277",
+      "sha256": "766f8c8f6bcb9eb47f120695fd58f98bf0c8ad5b2e9ee7740f9c7e70d6af5055",
       "bytes": 1477
     },
     {

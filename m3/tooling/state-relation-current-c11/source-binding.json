@@ -10,7 +10,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/state-relation-current-c11-20261019/sdk/FOSS_REUSE_DECISION.tsv",
       "targetPath": "m3/tooling/state-relation-current-c11/sdk/FOSS_REUSE_DECISION.tsv",
-      "gitBlob": "8b653256d4daff814dad69fea07dc109d0ad9139",
+      "gitBlob": "cdabcf1bffad046507c14abb9253cbf4d55ce0fd",
       "bytes": 1410
     },
     {
@@ -22,7 +22,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/state-relation-current-c11-20261019/sdk/THIRD_PARTY_NOTICES.md",
       "targetPath": "m3/tooling/state-relation-current-c11/sdk/THIRD_PARTY_NOTICES.md",
-      "gitBlob": "a85e04215e6c4d38d190cc300ed8dca5d5c4b659",
+      "gitBlob": "6343875e97f06d5b2d26a2e91ba10f222a868999",
       "bytes": 2061
     },
     {
@@ -46,13 +46,13 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/state-relation-current-c11-20261019/sdk/pins.json",
       "targetPath": "m3/tooling/state-relation-current-c11/sdk/pins.json",
-      "gitBlob": "d2d636c615e5d1119255008fd13a092de2f0cbe7",
+      "gitBlob": "12c0d3e4fe9f4cf48d4ac09e9dec199b080ef137",
       "bytes": 6665
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/state-relation-current-c11-20261019/sdk/pom.xml",
       "targetPath": "m3/tooling/state-relation-current-c11/sdk/pom.xml",
-      "gitBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f",
+      "gitBlob": "059259ca746466389cccac4094c3d664b0d79e6d",
       "bytes": 2678
     },
     {
@@ -142,7 +142,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/state-relation-current-c11-20261019/sdk/verify.py",
       "targetPath": "m3/tooling/state-relation-current-c11/sdk/verify.py",
-      "gitBlob": "a80c6f48aebe6249239c52277ad0fc53f21179b6",
+      "gitBlob": "c176eaf274572385d286ad4bed014c1c9b4d1257",
       "bytes": 22427
     },
     {

@@ -97,8 +97,8 @@
       "source": "https://github.com/hsoliwal/com.synexia/blob/528aaf79cfae79c5dbfe7c307340329d320e8c44/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/stable-order-groups/resources/com/synexia/rewrite/hash-pinned-java/m3-wrapper-stable-order-groups/pre/M3LongIndexProjection.java.txt"
     },
     "pom.xml": {
-      "git_blob": "ddd9bdf7915dee69a314539f1982af3a6e1e5074",
-      "sha256": "0a1c81dcc36ef6a77c6ba812797cde06fa8d7ffdafa73f13b6ef846b3ab2a572",
+      "git_blob": "620ef7e736377db82a14c2f4f592f3a9a6f92969",
+      "sha256": "f1bd00c207f44ee59939cac93cd72d8173dc1d004b2e7688efc2e7d30781fbd0",
       "source": "https://github.com/hsoliwal/com.synexia/blob/528aaf79cfae79c5dbfe7c307340329d320e8c44/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/pom.xml"
     },
     "src/test/java/jdk/internal/m3/rewrite/M3TaskRecipeTest.java": {

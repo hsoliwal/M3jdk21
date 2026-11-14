@@ -54,7 +54,7 @@ REQUIRED_PATHS = sorted([
 ORIGINAL_GIT = {
     "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
     "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java": "78d5fb68f13872164973a8918cc7886c5f548bca",
-    "pom.xml": "d79867bcc09ad6329e12418e15907e54b8ab025f",
+    "pom.xml": "059259ca746466389cccac4094c3d664b0d79e6d",
 }
 PROVIDERS = {"openrewriteAdapter": ORIGINAL_GIT["pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java"],
              "manifestKernel": ORIGINAL_GIT["pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java"]}

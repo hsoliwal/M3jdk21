@@ -22,8 +22,8 @@
     },
     {
       "path": "pom.xml",
-      "unchangedGitBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f",
-      "sha256": "f0ab99c3dafb38e82f8e5fd4c6d22db07831808c251c4622f292114c83e6673e"
+      "unchangedGitBlob": "059259ca746466389cccac4094c3d664b0d79e6d",
+      "sha256": "5b3f3f04f9539178d43ffa75068366d8ff1c037e25f67c2d31aa3bdb6e0ede1e"
     },
     {
       "path": "src/main/resources/META-INF/rewrite/m3-regex-relations-current-owner-20261017.yml",
@@ -102,8 +102,8 @@
     },
     {
       "path": "verify.py",
-      "unchangedGitBlob": "1f35127bf21fbc00c9abf66ba7b93d1772984d8c",
-      "sha256": "49046bb5ecfd80d7eb4568057113f5411cad998628121cec08a1ee30df07625d"
+      "unchangedGitBlob": "4fb3b3510d7e069d241e616cdf1680d6e062e22a",
+      "sha256": "6f81b6026e455d3937ea9d4093fa3b7cf37947000b253fcecf4c7cedf16f6cc6"
     }
   ]
 }

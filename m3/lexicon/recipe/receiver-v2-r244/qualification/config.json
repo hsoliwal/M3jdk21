@@ -5,7 +5,7 @@
   },
   "pom": {
     "text_resource": "inputs/borrowed-harness-pom.xml",
-    "sha256": "299a594c452d6c5cdaac78d1b7ee2974f777817ff6b6cce05e879866c5e42a11"
+    "sha256": "64aa3aaed54ee7670e0dda486ae27e1d611dfadb3207b1b9354b6c75a3e9ccce"
   },
   "jars": {
     "C:\\Users\\hsoliwal\\.m2\\repository\\org\\yaml\\snakeyaml\\2.2\\snakeyaml-2.2.jar": "1467931448a0817696ae2805b7b8b20bfb082652bf9c4efaed528930dc49389b",
@@ -209,7 +209,7 @@
   },
   "taskPom": {
     "text_resource": "../pom.xml",
-    "sha256": "97383c341e4989d9e9a331155ca2e512f459a0cf8185b3d35bdafd0e14210f97"
+    "sha256": "618de3f63b10da853d3e719c17a97f0cc928f4e8b8b7b617113421ca9166391a"
   },
   "resources": {
     "com/synexia/rewrite/hash-pinned-java/m3-lexicons-receiver-v1/manifest.tsv": {

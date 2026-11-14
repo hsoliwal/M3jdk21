@@ -45,16 +45,16 @@
     },
     {
       "targetPath": "m3/tooling/backport-wave-current-output/sdk/pins.json",
-      "gitBlob": "bf3f74b42a63422afa4fae029d4f1183d93ed081",
+      "gitBlob": "f77ffc7b737f28bcbd6c1bfeb49a6b8daa6d6d27",
       "bytes": 10594,
-      "sha256": "b6d1fcef8ce4f11d7991dd0809b67fac854949523aae24cf80ef9acbf23818b8",
+      "sha256": "7ae3d247f82cead4ffbaebbd4aca9242de350101d1646df6670412c46c70c0a1",
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/pins.json"
     },
     {
       "targetPath": "m3/tooling/backport-wave-current-output/sdk/pom.xml",
-      "gitBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f",
+      "gitBlob": "059259ca746466389cccac4094c3d664b0d79e6d",
       "bytes": 2678,
-      "sha256": "f0ab99c3dafb38e82f8e5fd4c6d22db07831808c251c4622f292114c83e6673e",
+      "sha256": "5b3f3f04f9539178d43ffa75068366d8ff1c037e25f67c2d31aa3bdb6e0ede1e",
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/pom.xml"
     },
     {
@@ -255,9 +255,9 @@
     },
     {
       "targetPath": "m3/tooling/backport-wave-current-output/sdk/verify.py",
-      "gitBlob": "2d45eb9e4fd77a14c3e7af7c126f7cbd06126957",
+      "gitBlob": "06dc4dd7806329c6ab2f685e98b5739314813409",
       "bytes": 25000,
-      "sha256": "9278d7714e2c81a87b79396b5539b41c2e389dc11a3bc990793260611dec538b",
+      "sha256": "7f83b1bdb262be38e876e0767eb5574d55a6b2b3278b47fedeff0fb875312095",
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/verify.py"
     },
     {
