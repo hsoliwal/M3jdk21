@@ -1,6 +1,0 @@
-category	operation	incumbent	candidate	evaluation	selection	proof
-text-ordering	unsigned UTF8 comparison	encode both Strings for each comparison	compare valid Unicode scalars until decision; exact byte fallback for malformed/null	72 JUnit; all units/scalars; 100000 seeded pairs; no public or field changes	SELECT	source and receipt hashes in ADMISSION_DECISION.json
-search/ordered-index	proper-name raw TreeMap.get	UTF8 byte-array comparator	allocation-free valid comparator under same TreeMap	0 bytes/raw lookup; corpus medians 17-65 percent lower time; O(log n) unchanged	SELECT	real before/after/after/before 4 JVMs
-search/normalization	normalized findByName	existing ASCII-only normalization	unchanged normalization plus selected comparator	224-328 bytes/call remain for normalization in measured corpora	PRESERVE API	raw proof
-text-ordering/reverse-views	reverse name snapshots	UTF16 natural TreeSet(Collection) order	unchanged	baseline oracle initially assumed UTF8; actual incumbent behavior recovered and preserved	RETAIN	two failed QA receipts retained
-discovery/categories	string ordering and indexed lookup	LeetCode/HackerRank/GeeksforGeeks discovery categories	Lucene primary licensed source and existing Synexia owner	no site implementation copied or license inferred	USE LICENSED PRIMARY DONOR	donor source LICENSE NOTICE

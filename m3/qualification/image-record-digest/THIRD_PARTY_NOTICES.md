@@ -1,9 +1,0 @@
-Copyright 2026 Hitesh Soliwal, Synexia. SPDX-License-Identifier: Apache-2.0
-
-The production owner is the existing Apache-2.0 SharedLexiconImage from M3jdk21 commit778cd3eac266974e7b5155e79838f74ee516b535/blob570a22f733499729bdc0fe48813f755e52ebe963. Its Hitesh Soliwal/Synexia and 2009 Guava Authors word-comparison notices are preserved. The comparison code is unchanged. The actual m3/LICENSE is retained in donor/M3-APACHE-LICENSE (blobd645695673349e3947e8e5ae42332d0ac3164cd7).
-
-OpenJDK jdk-21+35 commit890adb6410dab4606a4f26a942aed02fb2f55387 supplies reviewed MessageDigest/MessageDigestSpi/DigestBase platform contracts. Only existing Java21 APIs are invoked. No OpenJDK GPL implementation is copied or redistributed. Their exact paths/blobs and API reasoning are in donor/PLATFORM_API_PROVENANCE.json. A MessageDigest instance resets after completed digest; default SPI output may still allocate. The final provider output goes to construction-local scratch, never the published private digest table.
-
-The reference is the exact pinned original class with only its self type identifier mechanically renamed to SharedLexiconImageReference inside the original package, retaining package-private arena access. The pinned SharedLexiconImageContractTest is retained unchanged; only its image/seal/provider helpers execute. Its filesystem main is not invoked or claimed. The original source and all notices remain. Initial cross-package oracle compilation failure is retained as unadmitted evidence.
-
-Recipe engine, Maven/RAM compiler and test adapters retain their existing Apache-2.0 notices. Qualification provider classes are small wrappers over installed JCA/SUN APIs, not copied digest implementations. No additional production dependency or JAR is bundled. No LeetCode/HackerRank/GeeksforGeeks implementation is copied; the category catalogue reuses the existing owner and platform capability.
