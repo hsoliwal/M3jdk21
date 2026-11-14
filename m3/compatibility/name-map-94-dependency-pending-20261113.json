@@ -1,0 +1,50 @@
+{
+  "schema": "M3JDK21_NAME_MAP_94_DEPENDENCY_PENDING_RECEIPT_V1",
+  "product": "M3JDK21",
+  "status": "SOURCE_SEALED_SCHEMA_FIX_AWAIT_CANONICAL_MAVEN_AND_RUNTIME",
+  "source_repository": "hsoliwal/com.synexia",
+  "source_pull_request": "https://github.com/hsoliwal/com.synexia/pull/17336",
+  "source_dataset": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/naming-94-dependency-pending-20261113",
+  "target_baseline_commit": "c91c52764e80572010dbcee442e586dcc4208690",
+  "historical_receipt": {
+    "path": "m3/compatibility/name-map-94-recovery-20261113.json",
+    "git_blob": "ef349a2ac6e4e2f88f9a2c5a3e5d1cf050fcf472"
+  },
+  "preimages": {
+    "m3/docs/name-mapping.json": "7f70f9a6153fe1e79f95d709aae611816dac4aa5",
+    "m3/tooling/name-contract/name-plan.json": "867ed9914140237a158deb0d69982aaeb012b12f"
+  },
+  "postimages": {
+    "m3/docs/name-mapping.json": "0e46cb93d1f83a721910525563355e07f6a38c27",
+    "m3/tooling/name-contract/name-plan.json": "d4419fe9982266a43ab5db253c51574de4486ffc"
+  },
+  "postimage_sha256": {
+    "m3/docs/name-mapping.json": "b19302f81a0c65531895458ab2fddad096367ee59066f7af897bd228e701ab85",
+    "m3/tooling/name-contract/name-plan.json": "b533b5f82569f8f660ac8bf0ea2d7e8d4022c7501d02f1e2319353eee0337659"
+  },
+  "record_count": 94,
+  "queued_naming_operations": 4,
+  "qualified_jdk_promotions": 0,
+  "resolved_failure": {
+    "job_id": 131724751178,
+    "workflow_run": 43376700164,
+    "original_validation_errors": 80,
+    "distinct_causes": 1,
+    "record_id": "synexia.collections.eclipse-unified-set-bulk-clear",
+    "property": "dependencies[0].resolution",
+    "from": "component-qualified",
+    "to": "pending",
+    "dependency_reason_retained": true,
+    "source_state": "partial",
+    "previous_maven_qualifier": "PENDING",
+    "schema_path": "m3/docs/name-mapping.schema.json"
+  },
+  "gates": {
+    "strict_json": "SOURCE_TESTED",
+    "existing_schema_and_audit": "PENDING_NEW_GITHUB_RUN",
+    "canonical_maven_openrewrite": "PENDING",
+    "full_source_built_jdk": "PENDING",
+    "windows_jtreg_jni_gc": "PENDING",
+    "full_collection_qualification": "NOT_CLAIMED"
+  }
+}
