@@ -1,7 +1,0 @@
-donor_id	donor_type	material_used	intake_mode	license_disposition	status
-excelsior-jet-public-docs	proprietary-independent-java-runtime	publicly documented test-run, profile, global-optimization, incremental-project-database, runtime-slimming, and packaging concepts	SPEC_REIMPLEMENT	no implementation source or binaries used	REFERENCE_ONLY
-openjdk-jdk21-tools	openjdk-standard-tools	java,JFR,jdeps,jlink,AppCDS and JNI command/interface contracts	PLATFORM_API	OpenJDK/JDK tool contracts; no source copied	EXECUTED_BACKEND
-graalvm-native-image	external-optional-tool	closed-world native backend process boundary	EXTERNAL_ADAPTER	user-supplied installation and its own license	NOT_REQUIRED_NOT_EXECUTED
-leetcode-1971	algorithm-problem-catalogue	graph reachability problem category, examples, and edge-case vocabulary	TAXONOMY_ONLY	no implementation source copied	EVALUATED
-hackerrank-bfs-shortest-reach	algorithm-problem-catalogue	breadth-first traversal category and disconnected-graph cases	TAXONOMY_ONLY	no solution source copied	EVALUATED
-geeksforgeeks-bfs-graph	algorithm-problem-catalogue	breadth-first graph traversal category and complexity comparison	TAXONOMY_ONLY	no solution source copied	EVALUATED

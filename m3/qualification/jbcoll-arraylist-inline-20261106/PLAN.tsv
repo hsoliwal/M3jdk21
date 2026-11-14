@@ -1,3 +1,0 @@
-file	kind	before_blob	before_sha256	after_sha256	rule
-src/java.base/share/classes/java/util/ArrayList.java	EDIT	885d891b0f817080824622d592691a27cf8ffa26	d05d5efd61e1ae8514c904d28cea7335eec824becddbf62dcb0b425ec7790c7b	732324a2ad40629521e7253b57fde0715606fcfaebbb5caa030ed3614836835c	crate hunk, 3 anchored substitutions in removeIf(Predicate, int, int); result = crate postimage (sha256 62d73bd98166) + JDK naming PROSE_PRODUCT_VERSION
-test/jdk/java/util/ArrayList/M3ArrayListInlineMaskTest.java	NEW	-	-	f4ed9e0a82a73254276b490ec969a1115442ce541d57fed1a7d4ea9b704f6980	crate test, jtreg @run main/othervm + plain main (no package)

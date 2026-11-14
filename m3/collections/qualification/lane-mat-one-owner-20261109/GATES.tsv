@@ -1,7 +1,0 @@
-gate	host	result	evidence
-bytecode_pairs	any	javap -c -p equal modulo names: MatCsrIndex/CsrIndex 357, MatHybridIntSet/HybridIntSet 1130, MatIntRingBuffer/IntRingBuffer 281, MatIntPostingIndex/IntPostingIndex 1888 lines	master 72e8fd758303 classes
-user_bytecode	any	MatCollectionFactory javap -c -p before/after: 686/686 lines, equal modulo renames	dry run
-compile	Windows, JDK 21	module compiles after retirement	javac --module-source-path
-census	any	196 native methods: BOUND 189, ABSENT 7	native_census.py v1.2
-custody	any	module-source-successor-20261109.py --check changed=0; test_verify*.py OK	m3/collections/qualification
-suite_default	Windows, JDK 21	2756 tests, 0 failures, 0 errors, 135 skipped	mvn verify
