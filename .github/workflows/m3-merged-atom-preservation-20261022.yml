@@ -6,6 +6,8 @@ on:
     paths:
       - 'm3/file/**'
       - 'm3/collections/**'
+      - 'src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ObservableList.java'
+      - 'test/jdk/jdk/m3/collections/ObservableIndexedViewsContract.java'
       - 'm3/tooling/migration-recipes/**'
       - 'm3/history/**'
       - 'm3/docs/m3-m3jdk21-source-successions.tsv'
@@ -17,6 +19,8 @@ on:
     paths:
       - 'm3/file/**'
       - 'm3/collections/**'
+      - 'src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ObservableList.java'
+      - 'test/jdk/jdk/m3/collections/ObservableIndexedViewsContract.java'
       - 'm3/tooling/migration-recipes/**'
       - 'm3/history/**'
       - 'm3/docs/m3-m3jdk21-source-successions.tsv'
