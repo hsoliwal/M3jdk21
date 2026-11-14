@@ -2,6 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.precompute;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
+import java.nio.file.Path;
 import java.util.Objects;
 
 /**
@@ -13,14 +17,15 @@ import java.util.Objects;
 public final class NativePrecomputeOps {
   private static final boolean AVAILABLE;
   private static final boolean TUPLES_AVAILABLE;
+  private static final boolean NCM_CODEBOOK_AVAILABLE;
 
   static {
     boolean loaded = false;
     if (!Boolean.getBoolean("m3.precompute.disableNative")) {
       try {
-        System.loadLibrary("m3_precompute");
+        loadNativeLibrary();
         loaded = nativeAbiVersion() == 1;
-      } catch (UnsatisfiedLinkError ignored) {
+      } catch (IOException | InvalidPathException | UnsatisfiedLinkError ignored) {
         loaded = false;
       }
     }
@@ -31,6 +36,29 @@ public final class NativePrecomputeOps {
       catch (UnsatisfiedLinkError oldLibrary) { tuples = false; }
     }
     TUPLES_AVAILABLE = tuples;
+    boolean ncmCodebook = false;
+    if (loaded) {
+      try { ncmCodebook = ncmCodebookAbiVersionNative() == 1; }
+      catch (UnsatisfiedLinkError oldLibrary) { ncmCodebook = false; }
+    }
+    NCM_CODEBOOK_AVAILABLE = ncmCodebook;
+  }
+
+  /** The configured path is authoritative; a failed optional load keeps the Java oracle. */
+  private static void loadNativeLibrary() throws IOException {
+    String explicit = System.getProperty("m3.precompute.native.path");
+    if (explicit != null && !explicit.isBlank()) {
+      System.load(Path.of(explicit).toAbsolutePath().normalize().toString());
+      return;
+    }
+    String pathFile = System.getProperty("m3.precompute.native.pathFile");
+    if (pathFile != null && !pathFile.isBlank()) {
+      String path = Files.readString(Path.of(pathFile)).strip();
+      if (path.isEmpty()) throw new IOException("empty precompute native path file");
+      System.load(Path.of(path).toAbsolutePath().normalize().toString());
+      return;
+    }
+    System.loadLibrary("m3_precompute");
   }
 
   private NativePrecomputeOps() {}
@@ -122,6 +150,34 @@ public final class NativePrecomputeOps {
     }
     return output;
   }
+
+  /** Independent feature negotiation keeps older precompute libraries usable. */
+  public static boolean ncmCodebookAvailable() { return NCM_CODEBOOK_AVAILABLE; }
+
+  /**
+   * Checked batched nearest-code assignment using the existing native loader.
+   * Java remains the semantic oracle; no input array is modified or retained.
+   * See {@link NcmCodebook#nearestJava} for the full shape and overflow contract.
+   */
+  public static int[] nearestNcmCodes(
+      double[] vectors, int vectorOffset, int rows,
+      double[] codebook, int codebookOffset, int codeCount, int dimensions,
+      int nativeThreshold) {
+    NcmCodebook.validate(vectors, vectorOffset, rows,
+        codebook, codebookOffset, codeCount, dimensions);
+    if (nativeThreshold < 0) throw new IllegalArgumentException("negative native threshold");
+    if (NCM_CODEBOOK_AVAILABLE && rows > 0 && rows >= nativeThreshold) {
+      return nearestNcmCodesNative(vectors, vectorOffset, rows,
+          codebook, codebookOffset, codeCount, dimensions);
+    }
+    return NcmCodebook.nearestValidated(vectors, vectorOffset, rows,
+        codebook, codebookOffset, codeCount, dimensions);
+  }
+
+  private static native int ncmCodebookAbiVersionNative();
+  private static native int[] nearestNcmCodesNative(
+      double[] vectors, int vectorOffset, int rows,
+      double[] codebook, int codebookOffset, int codeCount, int dimensions);
 
   private static native int tupleLookupAbiVersionNative();
   private static native void lookupTuplesNative(
