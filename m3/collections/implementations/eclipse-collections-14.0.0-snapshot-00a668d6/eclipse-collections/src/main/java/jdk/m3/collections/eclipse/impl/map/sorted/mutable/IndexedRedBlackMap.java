@@ -12,6 +12,7 @@
  * Contributors:
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
+// Modified 2026 by Hitesh Soliwal and contributors: preserve entry validation during direct Map.forEach traversal.
 package jdk.m3.collections.eclipse.impl.map.sorted.mutable;
 
 import java.util.AbstractCollection;
@@ -314,8 +315,19 @@ final class IndexedRedBlackMap<K, V> extends AbstractMap<K, V> implements Sorted
     }
 
     /** Traverse the existing array slots without materializing public entries. */
-    @SuppressWarnings("unchecked")
     void forEachKeyValue(BiConsumer<? super K, ? super V> action)
+    {
+        forEachKeyValue(action, false);
+    }
+
+    /** Match the receiving Map.forEach entry protocol without creating entries. */
+    void forEachMapEntry(BiConsumer<? super K, ? super V> action)
+    {
+        forEachKeyValue(action, true);
+    }
+
+    @SuppressWarnings("unchecked")
+    private void forEachKeyValue(BiConsumer<? super K, ? super V> action, boolean validateEntry)
     {
         SlotIterator<V> cursor = new SlotIterator<>(VALUE);
         boolean more = cursor.hasNext();
@@ -329,6 +341,12 @@ final class IndexedRedBlackMap<K, V> extends AbstractMap<K, V> implements Sorted
                 throw new ConcurrentModificationException();
             }
             V value = cursor.next();
+            if (validateEntry && !cursor.selected.live(cursor.returned))
+            {
+                // Comparator callbacks can release the positioned slot before
+                // the epoch is captured. Entry iteration rejects that slot.
+                throw new IllegalStateException("arena slot is not live: " + cursor.returned);
+            }
             K key = (K) cursor.selected.keys[cursor.returned];
             more = cursor.hasNext();
             action.accept(key, value);
