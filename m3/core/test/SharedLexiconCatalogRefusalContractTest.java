@@ -166,6 +166,7 @@ public final class SharedLexiconCatalogRefusalContractTest {
             refuse(e, SHARDS, set(rows, 0, cell(row0, 1, unsafe)), "unsafe shard file");
         }
         driveRelativeFileNames(e);
+        containmentRecheck(e);
         for (String escape : List.of("\\u006", "\\x0061", "\\u00g1", "a\\")) {
             refuse(e, SHARDS, set(rows, 0, cell(row0, 2, escape)), "invalid UTF-16 sidecar escape");
         }
@@ -199,6 +200,30 @@ public final class SharedLexiconCatalogRefusalContractTest {
             }
         }
         e.restore();
+    }
+
+    /**
+     * After normalize(), the private safeChild re-checks that a shard path stays a direct child of the
+     * catalog directory. Both callers pass toAbsolutePath().normalize(), so on POSIX only a direct call
+     * with a non-normalized directory reaches that refusal. This needs the test-only module open
+     * (--add-opens jdk.m3.text/jdk.m3.text=ALL-UNNAMED) that run_extra_core_contracts.sh passes.
+     */
+    private static void containmentRecheck(Export e) throws Exception {
+        java.lang.reflect.Method safeChild = SharedLexiconCatalog.class.getDeclaredMethod(
+                "safeChild", Path.class, String.class, int.class);
+        safeChild.setAccessible(true);
+        Path directory = e.root().toAbsolutePath().normalize();
+        check(safeChild.invoke(null, directory, "part-0.m3lex", 0).equals(directory.resolve("part-0.m3lex")),
+                "a contained shard file resolves");
+        Path unnormalized = directory.resolve("sub").resolve("..");
+        try {
+            safeChild.invoke(null, unnormalized, "part-0.m3lex", 0);
+            throw new AssertionError("a shard outside the stated directory was accepted");
+        } catch (java.lang.reflect.InvocationTargetException refused) {
+            check(refused.getCause() instanceof IOException
+                            && refused.getCause().getMessage().contains("unsafe shard file"),
+                    "a shard path that normalizes out of its directory is refused");
+        }
     }
 
     private static void imageMetadataRefusals(Export e) throws Exception {

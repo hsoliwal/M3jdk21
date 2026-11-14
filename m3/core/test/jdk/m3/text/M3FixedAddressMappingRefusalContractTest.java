@@ -166,6 +166,21 @@ public final class M3FixedAddressMappingRefusalContractTest {
         check(
                 second != owner && second.addressOfOffset(17) == BASE + 3 * STRIDE + 17,
                 "independent second owner");
+        // A failed admission keeps its original failure: the cleanup failure is only suppressed on
+        // it, and a failure of that bookkeeping itself never escapes. The shipped mapper refuses
+        // the range (1, 1) before unmapping anything.
+        java.lang.reflect.Method release = M3FixedAddressMapping.class.getDeclaredMethod(
+                "releaseFailedAdmission", long.class, long.class, Throwable.class);
+        release.setAccessible(true);
+        IllegalStateException primary = new IllegalStateException("primary admission failure");
+        release.invoke(null, 1L, 1L, primary);
+        check(
+                primary.getSuppressed().length == 1
+                        && primary.getSuppressed()[0] instanceof IllegalArgumentException
+                        && "invalid unmap range".equals(primary.getSuppressed()[0].getMessage()),
+                "cleanup failure suppressed on the original failure");
+        release.invoke(null, 1L, 1L, (Throwable) null);
+        check(second.addressOfOffset(17) == BASE + 3 * STRIDE + 17, "admitted owner kept after cleanup failures");
         System.out.println("M3_FIXED_ADDRESS_REFUSALS_PASS checks=" + checks);
     }
 

@@ -33,8 +33,8 @@ python3 m3/release/derive_changed_atom_inventory.py --report jacoco.xml --root .
 JaCoCo analyzes every class in `--classfiles` whether or not it ran, so the method
 set does not depend on which tests executed; `--classfiles` also refuses a compiled
 class missing from the report. Re-run with `--check m3/release/coverage/changed-atoms.tsv`
-to prove the committed file is byte-identical. Result: 607 atoms in 82 classes;
-341 have no JaCoCo `BRANCH` counter and carry the explicit `branchless_explanation`;
+to prove the committed file is byte-identical. Result: 609 atoms in 82 classes;
+342 have no JaCoCo `BRANCH` counter and carry the explicit `branchless_explanation`;
 18 carry a reviewed `exemption` (below). Exemptions are review data: `--carry-exemptions`
 copies them by id and refuses one whose atom disappeared.
 `id` is `<binary class name>#<method><JVM descriptor>`.
@@ -80,3 +80,16 @@ The 21 atoms below 90% in the first measurement were routed as follows.
 
 Route B atoms reach 100% once the separate guard-removal PR lands; until then
 those two atoms are the only ones below the gate rule.
+
+The release cut of 2026-11-14 measured 609 atoms (two new since the first inventory:
+`M3BigString#indexOfSingleUnit` and `M3FixedAddressMapping#releaseFailedAdmission`). Seven atoms were
+below 90%, and all seven are now covered without an exemption. New cases in the existing contract tests
+cover `M3InstanceIndexPrecompute#compareUtf8` (malformed and null lookup probes),
+`M3LanguageCorpusManifest#read` (absent period), `SharedLexiconCatalog#findSiUnitPrecompute` (cached decode),
+`SharedLexiconCatalog#safeChild` (containment re-check, by reflection) and `M3BigString#indexOfSingleUnit`
+(String differential). Two atoms had a branch whose edge no test can complete, so they were rewritten with
+the same behaviour and their existing tests now cover them:
+- `M3PrecomputePayload#requireDouble`: `if (field == null) field = Objects.requireNonNull(field, msg)` became
+  `throw new NullPointerException(msg)`.
+- `M3FixedAddressMapping#releaseFailedAdmission`: the `cleanup != failure` guard is gone, because the existing
+  catch already absorbs the self-suppression `addSuppressed` refuses.

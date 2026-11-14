@@ -65,7 +65,8 @@ done
 "$M3JDK/bin/java" -ea -esa --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests M3PrecomputePayloadParserContractTest | tee build/logs/extra-payload-parser-contract.log
 "$M3JDK/bin/java" -ea -esa --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests M3Sha256UnavailableContractTest | tee build/logs/extra-sha256-unavailable-contract.log
 "$M3JDK/bin/java" -ea -esa --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests M3StringPieceContractTest | tee build/logs/extra-string-piece-contract.log
-"$M3JDK/bin/java" -ea -esa --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests SharedLexiconCatalogRefusalContractTest | tee build/logs/extra-lexicon-catalog-refusal-contract.log
+# The catalog refusal contract also calls the private safeChild containment re-check: test-only module open.
+"$M3JDK/bin/java" -ea -esa --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text --add-opens jdk.m3.text/jdk.m3.text=ALL-UNNAMED -cp build/tests SharedLexiconCatalogRefusalContractTest | tee build/logs/extra-lexicon-catalog-refusal-contract.log
 "$M3JDK/bin/java" -ea -esa --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests SharedLexiconFamilySidecarRefusalContractTest | tee build/logs/extra-family-sidecar-refusal-contract.log
 "$M3JDK/bin/java" -ea -esa --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests SharedLexiconImageContractTest | tee build/logs/extra-lexicon-image-contract.log
 "$M3JDK/bin/java" -ea -esa --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests SharedLexiconPrecomputeCatalogContractTest | tee build/logs/extra-precompute-catalog-contract.log

@@ -135,12 +135,11 @@ public final class M3FixedAddressMapping {
         try {
             unmapRejected0(address, length);
         } catch (Throwable cleanup) {
-            if (cleanup != failure) {
-                try {
-                    failure.addSuppressed(cleanup);
-                } catch (Throwable suppressionFailure) {
-                    // Suppression bookkeeping must not replace the original admission failure.
-                }
+            try {
+                failure.addSuppressed(cleanup);
+            } catch (Throwable suppressionFailure) {
+                // Suppression bookkeeping, including the self-suppression addSuppressed refuses
+                // before recording anything, must not replace the original admission failure.
             }
         }
     }

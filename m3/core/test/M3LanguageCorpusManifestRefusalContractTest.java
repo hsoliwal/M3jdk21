@@ -291,6 +291,20 @@ public final class M3LanguageCorpusManifestRefusalContractTest {
             check(
                     M3LanguageCorpusManifest.read(canonical).root().equals(manifest.root()),
                     "round trip");
+            // An absent period is written as an empty last field and read back as absent.
+            M3LanguageCorpusManifest periodless =
+                    M3LanguageCorpusManifest.of(
+                            List.of(artifact(Plane.DICTIONARY, "hi", 7L, DICT, TERMS, 0, null)));
+            Path periodlessFile = periodless.writeNew(dir);
+            check(
+                    Files.readString(periodlessFile, StandardCharsets.UTF_8).endsWith("\t0\t\n"),
+                    "absent period is an empty last field");
+            M3LanguageCorpusManifest periodlessRead = M3LanguageCorpusManifest.read(periodlessFile);
+            check(
+                    periodlessRead.root().equals(periodless.root())
+                            && periodlessRead.artifacts().get(0).period().isEmpty(),
+                    "absent period round trip");
+            Files.delete(periodlessFile);
             String text = Files.readString(canonical, StandardCharsets.UTF_8);
             String header = M3LanguageCorpusManifest.HEADER + "\n";
             String first = text.substring(header.length(), text.indexOf('\n', header.length()) + 1);
