@@ -2,6 +2,8 @@
 package jdk.m3.collections.apache;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.HashMap;
@@ -178,6 +180,26 @@ public final class M3StaticBucketMapProof {
         check(refused);
         same(other.get("during-value-equality"), 88);
     }
+    private static void declaredPublicApiUnchanged() {
+        final java.util.Set<String> expected = java.util.Set.of(
+            "atomic/1", "clear/0", "compute/2", "computeIfAbsent/2",
+            "computeIfPresent/2", "containsKey/1", "containsValue/1", "entrySet/0",
+            "equals/1", "forEach/1", "get/1", "getOrDefault/2", "hashCode/0",
+            "isEmpty/0", "keySet/0", "mapIterator/0", "merge/3", "put/2",
+            "putAll/1", "putIfAbsent/2", "remove/1", "remove/2", "replace/2",
+            "replace/3", "replaceAll/1", "size/0", "values/0");
+        final java.util.Set<String> actual = new java.util.HashSet<>();
+        for (final Method method : M3StaticBucketMap.class.getDeclaredMethods()) {
+            if (Modifier.isPublic(method.getModifiers()) && !method.isSynthetic()) {
+                actual.add(method.getName() + "/" + method.getParameterCount());
+                check(!Modifier.isSynchronized(method.getModifiers()));
+                check(!Modifier.isStatic(method.getModifiers()));
+            }
+        }
+        check(actual.equals(expected));
+        check(M3StaticBucketMap.class.getConstructors().length == 2);
+        check(Modifier.isFinal(M3StaticBucketMap.class.getModifiers()));
+    }
     private static void atomicParallel() throws Exception {
         M3StaticBucketMap<Integer,Integer> map = new M3StaticBucketMap<>(4);
         map.put(1,0);
@@ -198,6 +220,7 @@ public final class M3StaticBucketMapProof {
     }
     public static void main(String[] args)throws Exception{
         if(args.length!=0)throw new IllegalArgumentException("args");
+        declaredPublicApiUnchanged();
         seededDifferential();
         iteratorAndViews();
         occupancyAndRecycle();

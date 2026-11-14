@@ -2,8 +2,8 @@
 # M3StaticBucketMap: parent-owned array/index implementation candidate
 
 This module retains the original public `jdk.m3.collections.apache.M3StaticBucketMap`
-Java21 type, constructor signatures, Map/Commons interfaces and Maven artifact
-coordinate. It replaces **29 always-throwing scaffold method bodies** with an
+Java21 type, 27 method signatures, two constructor signatures, Map/Commons interfaces and Maven artifact
+coordinate. It replaces **27 always-throwing method bodies and two throwing constructors** with an
 independently implemented, bounded and reusable structure-of-arrays hash map.
 The historical generated source is an exact, sealed preimage: it is not reused
 at runtime and must not be regenerated over this candidate.

@@ -213,19 +213,23 @@ public final class M3StaticBucketMap<K, V>
         return directory < 0 ? -1 : index[directory] - 1;
     }
 
-    @Override public synchronized int size() { return size; }
-    @Override public synchronized boolean isEmpty() { return size == 0; }
-    @Override public synchronized boolean containsKey(final Object key) { return findSlot(key) >= 0; }
+    @Override public int size() { synchronized (this) { return size; } }
+    @Override public boolean isEmpty() { synchronized (this) { return size == 0; } }
+    @Override public boolean containsKey(final Object key) { synchronized (this) { return findSlot(key) >= 0; } }
 
     @SuppressWarnings("unchecked")
-    @Override public synchronized V get(final Object key) {
-        final int slot = findSlot(key);
-        return slot < 0 ? null : (V) values[slot];
+    @Override public V get(final Object key) {
+        synchronized (this) {
+            final int slot = findSlot(key);
+            return slot < 0 ? null : (V) values[slot];
+        }
     }
 
-    @Override public synchronized V getOrDefault(final Object key, final V fallback) {
-        final int slot = findSlot(key);
-        return slot < 0 ? fallback : valueAt(slot);
+    @Override public V getOrDefault(final Object key, final V fallback) {
+        synchronized (this) {
+            final int slot = findSlot(key);
+            return slot < 0 ? fallback : valueAt(slot);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -234,76 +238,84 @@ public final class M3StaticBucketMap<K, V>
     @SuppressWarnings("unchecked")
     private K keyAt(final int slot) { return (K) keys[slot]; }
 
-    @Override public synchronized V put(final K key, final V value) {
-        final int hash = keyHash(key);
-        final int position = findDirectory(key, hash);
-        if (position >= 0) {
-            final int slot = index[position] - 1;
-            final V previous = valueAt(slot);
+    @Override public V put(final K key, final V value) {
+        synchronized (this) {
+            final int hash = keyHash(key);
+            final int position = findDirectory(key, hash);
+            if (position >= 0) {
+                final int slot = index[position] - 1;
+                final V previous = valueAt(slot);
+                values[slot] = value;
+                return previous;
+            }
+            checkDirectoryGrowth();
+            final int destination = insertDirectory(hash);
+            final int slot = allocateSlot();
+            if (index[destination] == -1) tombstones--;
+            keys[slot] = key;
             values[slot] = value;
-            return previous;
-        }
-        checkDirectoryGrowth();
-        final int destination = insertDirectory(hash);
-        final int slot = allocateSlot();
-        if (index[destination] == -1) tombstones--;
-        keys[slot] = key;
-        values[slot] = value;
-        hashes[slot] = hash;
-        liveMask[slot >>> 6] |= 1L << slot;
-        index[destination] = slot + 1;
-        size++;
-        modCount++;
-        return null;
-    }
-
-    @Override public synchronized V remove(final Object key) {
-        final int directory = findDirectory(key, keyHash(key));
-        if (directory < 0) return null;
-        final int slot = index[directory] - 1;
-        final V old = valueAt(slot);
-        index[directory] = -1;
-        tombstones++;
-        releaseSlot(slot);
-        size--;
-        modCount++;
-        return old;
-    }
-
-    @Override public synchronized void clear() {
-        if (size == 0) {
-            // After individual removals all keys/values are already cleared.
-            // Keep allocated slot pages for reuse; reset only tombstoned probes.
-            if (tombstones != 0) {
-                java.util.Arrays.fill(index, 0);
-                tombstones = 0;
-            }
+            hashes[slot] = hash;
+            liveMask[slot >>> 6] |= 1L << slot;
+            index[destination] = slot + 1;
+            size++;
             modCount++;
-            return;
+            return null;
         }
-        java.util.Arrays.fill(index, 0);
-        java.util.Arrays.fill(keys, 0, highWater, null);
-        java.util.Arrays.fill(values, 0, highWater, null);
-        java.util.Arrays.fill(hashes, 0, highWater, 0);
-        java.util.Arrays.fill(nextFree, 0, highWater, 0);
-        java.util.Arrays.fill(liveMask, 0);
-        size = 0;
-        highWater = 0;
-        freeHead = FREE;
-        tombstones = 0;
-        modCount++;
     }
 
-    @Override public synchronized boolean containsValue(final Object value) {
-        final int expected = modCount;
-        for (int slot = nextLive(0); slot >= 0; slot = nextLive(slot + 1)) {
-            final boolean same = Objects.equals(values[slot], value);
-            if (expected != modCount) {
-                throw new ConcurrentModificationException("reentrant value equality");
-            }
-            if (same) return true;
+    @Override public V remove(final Object key) {
+        synchronized (this) {
+            final int directory = findDirectory(key, keyHash(key));
+            if (directory < 0) return null;
+            final int slot = index[directory] - 1;
+            final V old = valueAt(slot);
+            index[directory] = -1;
+            tombstones++;
+            releaseSlot(slot);
+            size--;
+            modCount++;
+            return old;
         }
-        return false;
+    }
+
+    @Override public void clear() {
+        synchronized (this) {
+            if (size == 0) {
+                // After individual removals all keys/values are already cleared.
+                // Keep allocated slot pages for reuse; reset only tombstoned probes.
+                if (tombstones != 0) {
+                    java.util.Arrays.fill(index, 0);
+                    tombstones = 0;
+                }
+                modCount++;
+                return;
+            }
+            java.util.Arrays.fill(index, 0);
+            java.util.Arrays.fill(keys, 0, highWater, null);
+            java.util.Arrays.fill(values, 0, highWater, null);
+            java.util.Arrays.fill(hashes, 0, highWater, 0);
+            java.util.Arrays.fill(nextFree, 0, highWater, 0);
+            java.util.Arrays.fill(liveMask, 0);
+            size = 0;
+            highWater = 0;
+            freeHead = FREE;
+            tombstones = 0;
+            modCount++;
+        }
+    }
+
+    @Override public boolean containsValue(final Object value) {
+        synchronized (this) {
+            final int expected = modCount;
+            for (int slot = nextLive(0); slot >= 0; slot = nextLive(slot + 1)) {
+                final boolean same = Objects.equals(values[slot], value);
+                if (expected != modCount) {
+                    throw new ConcurrentModificationException("reentrant value equality");
+                }
+                if (same) return true;
+            }
+            return false;
+        }
     }
 
     private int nextLive(final int from) {
@@ -320,10 +332,12 @@ public final class M3StaticBucketMap<K, V>
         }
     }
 
-    @Override public synchronized void putAll(final Map<? extends K, ? extends V> mappings) {
-        Objects.requireNonNull(mappings, "mappings");
-        for (Map.Entry<? extends K, ? extends V> entry : mappings.entrySet()) {
-            put(entry.getKey(), entry.getValue());
+    @Override public void putAll(final Map<? extends K, ? extends V> mappings) {
+        synchronized (this) {
+            Objects.requireNonNull(mappings, "mappings");
+            for (Map.Entry<? extends K, ? extends V> entry : mappings.entrySet()) {
+                put(entry.getKey(), entry.getValue());
+            }
         }
     }
 
@@ -333,114 +347,138 @@ public final class M3StaticBucketMap<K, V>
         synchronized (this) { action.run(); }
     }
 
-    @Override public synchronized boolean remove(final Object key, final Object value) {
-        final int slot = findSlot(key);
-        if (slot < 0 || !Objects.equals(values[slot], value)) return false;
-        remove(key);
-        return true;
+    @Override public boolean remove(final Object key, final Object value) {
+        synchronized (this) {
+            final int slot = findSlot(key);
+            if (slot < 0 || !Objects.equals(values[slot], value)) return false;
+            remove(key);
+            return true;
+        }
     }
 
-    @Override public synchronized V putIfAbsent(final K key, final V value) {
-        final V previous = get(key);
-        if (previous == null) put(key, value);
-        return previous;
+    @Override public V putIfAbsent(final K key, final V value) {
+        synchronized (this) {
+            final V previous = get(key);
+            if (previous == null) put(key, value);
+            return previous;
+        }
     }
 
-    @Override public synchronized V replace(final K key, final V value) {
-        final int slot = findSlot(key);
-        if (slot < 0) return null;
-        final V previous = valueAt(slot);
-        values[slot] = value;
-        return previous;
+    @Override public V replace(final K key, final V value) {
+        synchronized (this) {
+            final int slot = findSlot(key);
+            if (slot < 0) return null;
+            final V previous = valueAt(slot);
+            values[slot] = value;
+            return previous;
+        }
     }
 
-    @Override public synchronized boolean replace(final K key, final V previous, final V replacement) {
-        final int slot = findSlot(key);
-        if (slot < 0 || !Objects.equals(values[slot], previous)) return false;
-        values[slot] = replacement;
-        return true;
+    @Override public boolean replace(final K key, final V previous, final V replacement) {
+        synchronized (this) {
+            final int slot = findSlot(key);
+            if (slot < 0 || !Objects.equals(values[slot], previous)) return false;
+            values[slot] = replacement;
+            return true;
+        }
     }
 
-    @Override public synchronized V computeIfAbsent(final K key, final Function<? super K, ? extends V> factory) {
-        Objects.requireNonNull(factory, "factory");
-        final V present = get(key);
-        if (present != null) return present;
-        final V result = factory.apply(key);
-        if (result != null) put(key, result);
-        return result;
+    @Override public V computeIfAbsent(final K key, final Function<? super K, ? extends V> factory) {
+        synchronized (this) {
+            Objects.requireNonNull(factory, "factory");
+            final V present = get(key);
+            if (present != null) return present;
+            final V result = factory.apply(key);
+            if (result != null) put(key, result);
+            return result;
+        }
     }
 
-    @Override public synchronized V computeIfPresent(final K key,
+    @Override public V computeIfPresent(final K key,
             final BiFunction<? super K, ? super V, ? extends V> factory) {
-        Objects.requireNonNull(factory, "factory");
-        final V present = get(key);
-        if (present == null) return null;
-        final V result = factory.apply(key, present);
-        if (result == null) remove(key);
-        else put(key, result);
-        return result;
+        synchronized (this) {
+            Objects.requireNonNull(factory, "factory");
+            final V present = get(key);
+            if (present == null) return null;
+            final V result = factory.apply(key, present);
+            if (result == null) remove(key);
+            else put(key, result);
+            return result;
+        }
     }
 
-    @Override public synchronized V compute(final K key,
+    @Override public V compute(final K key,
             final BiFunction<? super K, ? super V, ? extends V> function) {
-        Objects.requireNonNull(function, "function");
-        final V previous = get(key);
-        final V computed = function.apply(key, previous);
-        if (computed == null) {
-            if (previous != null || containsKey(key)) remove(key);
-        } else put(key, computed);
-        return computed;
+        synchronized (this) {
+            Objects.requireNonNull(function, "function");
+            final V previous = get(key);
+            final V computed = function.apply(key, previous);
+            if (computed == null) {
+                if (previous != null || containsKey(key)) remove(key);
+            } else put(key, computed);
+            return computed;
+        }
     }
 
-    @Override public synchronized V merge(final K key, final V value,
+    @Override public V merge(final K key, final V value,
             final BiFunction<? super V, ? super V, ? extends V> function) {
-        Objects.requireNonNull(value, "value");
-        Objects.requireNonNull(function, "function");
-        final V old = get(key);
-        final V result = old == null ? value : function.apply(old, value);
-        if (result == null) remove(key);
-        else put(key, result);
-        return result;
-    }
-
-    @Override public synchronized void forEach(final BiConsumer<? super K, ? super V> action) {
-        Objects.requireNonNull(action, "action");
-        final int expected = modCount;
-        for (int slot = nextLive(0); slot >= 0; slot = nextLive(slot + 1)) {
-            action.accept(keyAt(slot), valueAt(slot));
-            if (expected != modCount) throw new ConcurrentModificationException();
+        synchronized (this) {
+            Objects.requireNonNull(value, "value");
+            Objects.requireNonNull(function, "function");
+            final V old = get(key);
+            final V result = old == null ? value : function.apply(old, value);
+            if (result == null) remove(key);
+            else put(key, result);
+            return result;
         }
     }
 
-    @Override public synchronized void replaceAll(final BiFunction<? super K, ? super V, ? extends V> function) {
-        Objects.requireNonNull(function, "function");
-        final int expected = modCount;
-        for (int slot = nextLive(0); slot >= 0; slot = nextLive(slot + 1)) {
-            values[slot] = function.apply(keyAt(slot), valueAt(slot));
-            if (expected != modCount) throw new ConcurrentModificationException();
-        }
-    }
-
-    @Override public synchronized int hashCode() {
-        int result = 0;
-        for (int slot = nextLive(0); slot >= 0; slot = nextLive(slot + 1)) {
-            result += Objects.hashCode(keys[slot]) ^ Objects.hashCode(values[slot]);
-        }
-        return result;
-    }
-
-    @Override public synchronized boolean equals(final Object candidate) {
-        if (candidate == this) return true;
-        if (!(candidate instanceof Map<?, ?> other) || other.size() != size) return false;
-        for (int slot = nextLive(0); slot >= 0; slot = nextLive(slot + 1)) {
-            final Object key = keys[slot];
-            final Object value = values[slot];
-            final Object theirs = other.get(key);
-            if (!Objects.equals(value, theirs) || (value == null && !other.containsKey(key))) {
-                return false;
+    @Override public void forEach(final BiConsumer<? super K, ? super V> action) {
+        synchronized (this) {
+            Objects.requireNonNull(action, "action");
+            final int expected = modCount;
+            for (int slot = nextLive(0); slot >= 0; slot = nextLive(slot + 1)) {
+                action.accept(keyAt(slot), valueAt(slot));
+                if (expected != modCount) throw new ConcurrentModificationException();
             }
         }
-        return true;
+    }
+
+    @Override public void replaceAll(final BiFunction<? super K, ? super V, ? extends V> function) {
+        synchronized (this) {
+            Objects.requireNonNull(function, "function");
+            final int expected = modCount;
+            for (int slot = nextLive(0); slot >= 0; slot = nextLive(slot + 1)) {
+                values[slot] = function.apply(keyAt(slot), valueAt(slot));
+                if (expected != modCount) throw new ConcurrentModificationException();
+            }
+        }
+    }
+
+    @Override public int hashCode() {
+        synchronized (this) {
+            int result = 0;
+            for (int slot = nextLive(0); slot >= 0; slot = nextLive(slot + 1)) {
+                result += Objects.hashCode(keys[slot]) ^ Objects.hashCode(values[slot]);
+            }
+            return result;
+        }
+    }
+
+    @Override public boolean equals(final Object candidate) {
+        synchronized (this) {
+            if (candidate == this) return true;
+            if (!(candidate instanceof Map<?, ?> other) || other.size() != size) return false;
+            for (int slot = nextLive(0); slot >= 0; slot = nextLive(slot + 1)) {
+                final Object key = keys[slot];
+                final Object value = values[slot];
+                final Object theirs = other.get(key);
+                if (!Objects.equals(value, theirs) || (value == null && !other.containsKey(key))) {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 
     private abstract class SlotIterator<T> implements Iterator<T> {
@@ -507,69 +545,75 @@ public final class M3StaticBucketMap<K, V>
         }
     }
 
-    @Override public synchronized Set<Map.Entry<K, V>> entrySet() {
-        if (entryView == null) {
-            entryView = new AbstractSet<>() {
-                @Override public int size() { return M3StaticBucketMap.this.size(); }
-                @Override public void clear() { M3StaticBucketMap.this.clear(); }
-                @Override public Iterator<Map.Entry<K, V>> iterator() {
-                    return new SlotIterator<>() {
-                        @Override Map.Entry<K, V> valueFor(final K key) { return new EntryView(key); }
-                    };
-                }
-                @Override public boolean contains(final Object target) {
-                    if (!(target instanceof Map.Entry<?, ?> entry)) return false;
-                    synchronized (M3StaticBucketMap.this) {
-                        final int slot = findSlot(entry.getKey());
-                        return slot >= 0 && Objects.equals(values[slot], entry.getValue());
+    @Override public Set<Map.Entry<K, V>> entrySet() {
+        synchronized (this) {
+            if (entryView == null) {
+                entryView = new AbstractSet<>() {
+                    @Override public int size() { return M3StaticBucketMap.this.size(); }
+                    @Override public void clear() { M3StaticBucketMap.this.clear(); }
+                    @Override public Iterator<Map.Entry<K, V>> iterator() {
+                        return new SlotIterator<>() {
+                            @Override Map.Entry<K, V> valueFor(final K key) { return new EntryView(key); }
+                        };
                     }
-                }
-                @Override public boolean remove(final Object target) {
-                    if (!(target instanceof Map.Entry<?, ?> entry)) return false;
-                    return M3StaticBucketMap.this.remove(entry.getKey(), entry.getValue());
-                }
-            };
+                    @Override public boolean contains(final Object target) {
+                        if (!(target instanceof Map.Entry<?, ?> entry)) return false;
+                        synchronized (M3StaticBucketMap.this) {
+                            final int slot = findSlot(entry.getKey());
+                            return slot >= 0 && Objects.equals(values[slot], entry.getValue());
+                        }
+                    }
+                    @Override public boolean remove(final Object target) {
+                        if (!(target instanceof Map.Entry<?, ?> entry)) return false;
+                        return M3StaticBucketMap.this.remove(entry.getKey(), entry.getValue());
+                    }
+                };
+            }
+            return entryView;
         }
-        return entryView;
     }
 
-    @Override public synchronized Set<K> keySet() {
-        if (keyView == null) {
-            keyView = new AbstractSet<>() {
-                @Override public int size() { return M3StaticBucketMap.this.size(); }
-                @Override public void clear() { M3StaticBucketMap.this.clear(); }
-                @Override public Iterator<K> iterator() {
-                    return new SlotIterator<>() {
-                        @Override K valueFor(final K key) { return key; }
-                    };
-                }
-                @Override public boolean contains(final Object key) { return containsKey(key); }
-                @Override public boolean remove(final Object key) {
-                    synchronized (M3StaticBucketMap.this) {
-                        if (!containsKey(key)) return false;
-                        M3StaticBucketMap.this.remove(key);
-                        return true;
+    @Override public Set<K> keySet() {
+        synchronized (this) {
+            if (keyView == null) {
+                keyView = new AbstractSet<>() {
+                    @Override public int size() { return M3StaticBucketMap.this.size(); }
+                    @Override public void clear() { M3StaticBucketMap.this.clear(); }
+                    @Override public Iterator<K> iterator() {
+                        return new SlotIterator<>() {
+                            @Override K valueFor(final K key) { return key; }
+                        };
                     }
-                }
-            };
+                    @Override public boolean contains(final Object key) { return containsKey(key); }
+                    @Override public boolean remove(final Object key) {
+                        synchronized (M3StaticBucketMap.this) {
+                            if (!containsKey(key)) return false;
+                            M3StaticBucketMap.this.remove(key);
+                            return true;
+                        }
+                    }
+                };
+            }
+            return keyView;
         }
-        return keyView;
     }
 
-    @Override public synchronized Collection<V> values() {
-        if (valueView == null) {
-            valueView = new AbstractCollection<>() {
-                @Override public int size() { return M3StaticBucketMap.this.size(); }
-                @Override public void clear() { M3StaticBucketMap.this.clear(); }
-                @Override public Iterator<V> iterator() {
-                    return new SlotIterator<>() {
-                        @Override V valueFor(final K key) { return M3StaticBucketMap.this.get(key); }
-                    };
-                }
-                @Override public boolean contains(final Object value) { return containsValue(value); }
-            };
+    @Override public Collection<V> values() {
+        synchronized (this) {
+            if (valueView == null) {
+                valueView = new AbstractCollection<>() {
+                    @Override public int size() { return M3StaticBucketMap.this.size(); }
+                    @Override public void clear() { M3StaticBucketMap.this.clear(); }
+                    @Override public Iterator<V> iterator() {
+                        return new SlotIterator<>() {
+                            @Override V valueFor(final K key) { return M3StaticBucketMap.this.get(key); }
+                        };
+                    }
+                    @Override public boolean contains(final Object value) { return containsValue(value); }
+                };
+            }
+            return valueView;
         }
-        return valueView;
     }
 
     @Override public org.apache.commons.collections4.MapIterator<K, V> mapIterator() {
