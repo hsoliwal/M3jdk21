@@ -268,6 +268,54 @@ def _verified_jdk8364182_vmsymbols_successor(
     )
 
 
+# The diagnostic command pair keeps its original JDK-8364182 pins as well. Exact successive states: the JDK21u
+# f97e75f20250 merge source of each file, then for diagnosticCommand.cpp its PACK-VITALS descendant
+# (629b2ce9e176, SapMachine VM.vitals), which adds exactly the two hunks below and nothing else.
+# path -> (historical target sha256, 21u sha256, 21u git blob, descendant hunks)
+JDK_8364182_21U_SUCCESSORS = {
+    "src/hotspot/share/services/diagnosticCommand.cpp": (
+        "4673fdbcfde7930471ba9bc50dc69334570db017479a9531bf58776a705d400f",
+        "f43c3996488a55d5f424491a01544b99362774b8df5ed00e6a199236e0cbf02c",
+        "176a174755b21bedffe296f6868084cc415cd0bb",
+        (
+            b'// SapMachine 2019-02-20: Vitals\n#include "vitals/vitalsDCmd.hpp"\n\n',
+            b"  // SapMachine 2019-02-20: Vitals\n"
+            b"  DCmdFactory::register_DCmdFactory(new DCmdFactoryImpl<sapmachine_vitals::VitalsDCmd>"
+            b"(full_export, true, false));\n",
+        ),
+    ),
+    "src/hotspot/share/services/diagnosticCommand.hpp": (
+        "3a16220bc3b5cd463ff8442aa6f2f87815d37bd4872d056d54be1d7e82fe64f7",
+        "cbb6726a127a661a16309b3c81ff7bf50ab63c425b20490f87ea1c1b3e16f70f",
+        "b5da8bd79d9931065776dd1e5b39ba49c4931ddc",
+        (),
+    ),
+}
+
+
+def _verified_jdk8364182_diagnostic_successor(
+    row: dict[str, str], data: bytes
+) -> bool:
+    """Admit only an exact 21u diagnostic command source or its exact PACK-VITALS descendant."""
+    successor = JDK_8364182_21U_SUCCESSORS.get(row["target_path"])
+    if successor is None or row.get("superseded_target_sha256"):
+        return False
+    historical, sha_21u, blob_21u, hunks = successor
+    if row["target_sha256"] != historical:
+        return False
+    if hashlib.sha256(data).hexdigest() == sha_21u:
+        return git_blob_sha1(data) == blob_21u
+    if not hunks or any(data.count(hunk) != 1 for hunk in hunks):
+        return False
+    previous = data
+    for hunk in hunks:
+        previous = previous.replace(hunk, b"", 1)
+    return (
+        hashlib.sha256(previous).hexdigest() == sha_21u
+        and git_blob_sha1(previous) == blob_21u
+    )
+
+
 
 def verify_security_properties_8364182_backport(root: Path) -> None:
     rows = read_tsv(root / "m3/backports/recipes/jdk-8364182/adaptation.tsv")
@@ -323,7 +371,8 @@ def verify_security_properties_8364182_backport(root: Path) -> None:
         allowed_targets = {row["target_sha256"]}
         if superseded:
             allowed_targets.add(superseded)
-        if _verified_jdk8364182_vmsymbols_successor(row, source_data):
+        if (_verified_jdk8364182_vmsymbols_successor(row, source_data)
+                or _verified_jdk8364182_diagnostic_successor(row, source_data)):
             allowed_targets.add(actual)
         if actual not in allowed_targets:
             raise AssertionError(
@@ -374,6 +423,32 @@ def verify_security_properties_8364182_backport(root: Path) -> None:
 
 JDK_8374808_COMMIT = "264fdc5b4ed5f4e35168048533196e670c3dda6c"
 
+# The historical JDK-8374808 adaptation TSV remains immutable. KeyStore.java was then updated by the JDK21u
+# f97e75f20250 merge (8244336, 8378853, 8373690); this exact hash pair authorizes only that merged successor.
+JDK_8374808_KEYSTORE_PATH = "src/java.base/share/classes/java/security/KeyStore.java"
+JDK_8374808_KEYSTORE_HISTORICAL_SHA256 = (
+    "ecc6fef6147ba3dbfdf3db57e0d361a48a36cda8cbf6718beeecc7899bb572a4"
+)
+JDK_8374808_KEYSTORE_21U_SHA256 = (
+    "01429d8b5bf0755172044f0cfd3ea454456cc6876c81dbc7a434b754cdc688fb"
+)
+JDK_8374808_KEYSTORE_21U_GIT_BLOB = "c1844829b21890b2c61a40c4c55be52a5a7c648d"
+
+
+def _verified_keystore_21u_successor(
+    row: dict[str, str], actual: str, data: bytes
+) -> bool:
+    """Admit only the exact upstream-update successor of the KeyStore leaf."""
+    return (
+        row["target_path"] == JDK_8374808_KEYSTORE_PATH
+        and row["target_sha256"] == JDK_8374808_KEYSTORE_HISTORICAL_SHA256
+        and actual == JDK_8374808_KEYSTORE_21U_SHA256
+        and hashlib.sha256(data).hexdigest() == actual
+        and git_blob_sha1(data) == JDK_8374808_KEYSTORE_21U_GIT_BLOB
+        and b"public final Instant getCreationInstant(String alias)" in data
+        and b"public final Date getCreationDate(String alias)" in data
+    )
+
 
 def verify_keystore_instant_8374808_backport(root: Path) -> None:
     rows = read_tsv(root / "m3/backports/recipes/jdk-8374808/adaptation.tsv")
@@ -396,8 +471,11 @@ def verify_keystore_instant_8374808_backport(root: Path) -> None:
             raise AssertionError(
                 f"missing JDK-8374808 target: {row['target_path']}"
             )
-        actual = hashlib.sha256(path.read_bytes()).hexdigest()
-        if actual != row["target_sha256"]:
+        data = path.read_bytes()
+        actual = hashlib.sha256(data).hexdigest()
+        if actual != row["target_sha256"] and not _verified_keystore_21u_successor(
+            row, actual, data
+        ):
             raise AssertionError(
                 f"JDK-8374808 target drift for {row['target_path']}: "
                 f"expected {row['target_sha256']}, actual {actual}"
