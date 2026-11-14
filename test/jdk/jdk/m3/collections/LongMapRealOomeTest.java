@@ -24,6 +24,11 @@ public final class LongMapRealOomeTest {
     private static Object get(Field field, Object owner) {
         try { return field.get(owner); } catch (IllegalAccessException error) { throw new AssertionError(error); }
     }
+    private static byte[] snapshot(PackedSlotStates states) {
+        byte[] result = new byte[states.length()];
+        for (int i = 0; i < result.length; i++) result[i] = states.get(i);
+        return result;
+    }
 
     public static void main(String[] arguments) {
         if (arguments.length != 1 || (!arguments[0].equals("direct") && !arguments[0].equals("conditional")))
@@ -34,9 +39,9 @@ public final class LongMapRealOomeTest {
         Field keysField = field("keys"), valuesField = field("values"), statesField = field("states");
         Field occupiedField = field("occupied"), sizeField = field("size"), modField = field("modCount");
         long[] keys = (long[]) get(keysField, map), values = (long[]) get(valuesField, map);
-        byte[] states = (byte[]) get(statesField, map);
+        PackedSlotStates states = (PackedSlotStates) get(statesField, map);
         long[] oldKeys = keys.clone(), oldValues = values.clone();
-        byte[] oldStates = states.clone();
+        byte[] oldStates = snapshot(states);
         int size = asInt(sizeField, map), occupied = asInt(occupiedField, map), epoch = asInt(modField, map);
         ok(size == 3_000 && occupied == 6_000 && keys.length == 32768, "compaction precondition");
         LongIterator before = map.keyIterator();
@@ -57,7 +62,7 @@ public final class LongMapRealOomeTest {
         ok(ballastOome && mutationOome, "must trigger actual JVM OOME at staging allocation");
         ok(get(keysField,map)==keys && get(valuesField,map)==values && get(statesField,map)==states,
                 "primitive lane identity on failed compaction");
-        ok(Arrays.equals(keys,oldKeys) && Arrays.equals(values,oldValues) && Arrays.equals(states,oldStates),
+        ok(Arrays.equals(keys,oldKeys) && Arrays.equals(values,oldValues) && Arrays.equals(snapshot(states),oldStates),
                 "primitive lane contents on failed compaction");
         ok(asInt(sizeField,map)==size && asInt(occupiedField,map)==occupied && asInt(modField,map)==epoch,
                 "size, occupied and modCount on failed compaction");

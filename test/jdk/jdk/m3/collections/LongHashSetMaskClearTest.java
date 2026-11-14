@@ -22,10 +22,10 @@ final class LongHashSetMaskClearTest {
         stateField.setAccessible(true);
         occupiedField.setAccessible(true);
         long[] keys = (long[]) keyField.get(actual);
-        byte[] states = (byte[]) stateField.get(actual);
-        assertEquals(keys.length, states.length);
-        for (int i = 0; i < states.length; i++) {
-            assertEquals(0, states[i], "retired occupancy: " + i);
+        PackedSlotStates states = (PackedSlotStates) stateField.get(actual);
+        assertEquals(keys.length, states.length());
+        for (int i = 0; i < states.length(); i++) {
+            assertEquals(0, states.get(i), "retired occupancy: " + i);
             assertEquals(0L, keys[i], "retired payload: " + i);
         }
         assertEquals(0, occupiedField.getInt(actual));
