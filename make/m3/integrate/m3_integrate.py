@@ -4,8 +4,8 @@
 # FLLDCIM: MRL - M3_TO_JDK_LAYOUT v1: one owner for the m3/ -> OpenJDK layout integration (map, move, refs, residue)
 """M3_TO_JDK_LAYOUT v1: dissolve the top-level m3/ tree into the OpenJDK source layout.
 
-  map      RULES.tsv + AREAS.tsv over `git ls-tree -r <rev>` -> MAPPING.tsv (one row per m3/ path), AMBIGUOUS.tsv,
-           SUMMARY.tsv. A path no rule matches, two rows with one target, or a target that is already a tracked path
+  map      RULES.tsv + AREAS.tsv (+ P1_<area>.tsv ledgers of executed area moves) over `git ls-tree -r <rev>` ->
+           MAPPING.tsv (one row per m3/ path), AMBIGUOUS.tsv, SUMMARY.tsv. A path no rule matches, two rows with one target, or a target that is already a tracked path
            outside the rows' own sources is a finding: the tool refuses (exit 2).
   move     the rows of one phase whose status is in --status -> `git update-index --index-info` lines over an index
            read from <rev>: pure moves keep blob id and mode, RETIRE rows are removed. Writes no working tree.
@@ -180,6 +180,13 @@ def cmd_map(args) -> int:
         if path.startswith("m3/"):
             target, rid, phase, status, reason = classify(path, rules, areas)
             rows.append((path, target, rid, phase, status, mode, sha, reason))
+    # P1 ledgers (P1_<area>.tsv: old path, new path, rules applied) are written by the area's own move tool; a row
+    # they name carries the executed target and status MOVE
+    ledger = {}
+    for f in sorted(Path(args.rules).parent.glob("P1_*.tsv")):
+        for line in read_tsv(f):
+            ledger[line[0]] = line[1]
+    rows = [(r[0], ledger[r[0]], r[2], "P1", "MOVE", r[5], r[6], r[7]) if r[0] in ledger else r for r in rows]
     findings = []
     by_target = defaultdict(list)
     for row in rows:
@@ -405,8 +412,9 @@ class Rewriter:
     def workflow(self, path: str, new_path: str, text: str, where: list) -> str:
         """Workflow trigger filters and sparse-checkout lists are unions: an entry whose old path still holds content
         keeps its line and the moved path is added after it; m3/** adds make/m3/** and doc/m3/**."""
-        out, mode, indent = [], None, -1
-        for line in text.split("\n"):
+        out, mode, indent, listed = [], None, -1, set()
+        lines = text.split("\n")
+        for number, line in enumerate(lines):
             stripped = line.strip()
             ind = len(line) - len(line.lstrip())
             if mode and stripped and ind <= indent:
@@ -414,6 +422,12 @@ class Rewriter:
             head = self.LIST_HEAD.match(line) or self.SPARSE_HEAD.match(line)
             if head:
                 mode, indent = ("sparse" if "sparse" in line else "paths"), len(head.group(1))
+                # the entries the block already lists: a union never adds one twice (a later phase re-reads m3/**)
+                listed = set()
+                for later in lines[number + 1:]:
+                    if later.strip() and len(later) - len(later.lstrip()) <= indent:
+                        break
+                    listed.add(later.strip().lstrip("- ").strip("'\""))
                 out.append(line)
                 continue
             item = (self.ITEM if mode == "paths" else self.SPARSE_ITEM).match(line) if mode else None
@@ -423,6 +437,7 @@ class Rewriter:
             if item and core.startswith(("m3/", "./m3/")) or (item and core in self.WHOLE):
                 rows = self.union(core, mode, where)
                 if rows is not None:
+                    rows = [rows[0]] + [v for v in rows[1:] if v not in listed]
                     pre, q, post = item.group("pre"), item.group("q"), item.group("post")
                     out.extend(f"{pre}{q}{'!' if neg else ''}{v}{q}{post}" for v in rows)
                     continue

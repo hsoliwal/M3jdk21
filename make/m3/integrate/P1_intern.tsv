@@ -1,0 +1,82 @@
+m3/intern/pom.xml	make/m3/intern/pom.xml	jdk.internal.m3.internx1;bridge-pom
+m3/intern/recipe/canonical-literals-20261106/DECISION.tsv	make/m3/intern/recipe/canonical-literals-20261106/DECISION.tsv	
+m3/intern/recipe/canonical-literals-20261106/differential.sh	make/m3/intern/recipe/canonical-literals-20261106/differential.sh	
+m3/intern/recipe/canonical-literals-20261106/FOSS_REUSE_DECISION.tsv	make/m3/intern/recipe/canonical-literals-20261106/FOSS_REUSE_DECISION.tsv	
+m3/intern/recipe/canonical-literals-20261106/GATES.tsv	make/m3/intern/recipe/canonical-literals-20261106/GATES.tsv	
+m3/intern/recipe/canonical-literals-20261106/PROVENANCE.tsv	make/m3/intern/recipe/canonical-literals-20261106/PROVENANCE.tsv	
+m3/intern/recipe/canonical-literals-20261106/README.md	make/m3/intern/recipe/canonical-literals-20261106/README.md	
+m3/intern/recipe/canonical-literals-20261106/RECIPE_MEMORY.tsv	make/m3/intern/recipe/canonical-literals-20261106/RECIPE_MEMORY.tsv	
+m3/intern/recipe/canonical-literals-20261106/relocate.py	make/m3/intern/recipe/canonical-literals-20261106/relocate.py	
+m3/intern/recipe/canonical-literals-20261106/RELOCATION_MAP.tsv	make/m3/intern/recipe/canonical-literals-20261106/RELOCATION_MAP.tsv	
+m3/intern/recipe/canonical-literals-20261106/verify.sh	make/m3/intern/recipe/canonical-literals-20261106/verify.sh	
+m3/intern/recipe/class-space-20261107/DECISION.tsv	make/m3/intern/recipe/class-space-20261107/DECISION.tsv	
+m3/intern/recipe/class-space-20261107/differential.sh	make/m3/intern/recipe/class-space-20261107/differential.sh	
+m3/intern/recipe/class-space-20261107/FOSS_REUSE_DECISION.tsv	make/m3/intern/recipe/class-space-20261107/FOSS_REUSE_DECISION.tsv	
+m3/intern/recipe/class-space-20261107/GATES.tsv	make/m3/intern/recipe/class-space-20261107/GATES.tsv	
+m3/intern/recipe/class-space-20261107/PROVENANCE.tsv	make/m3/intern/recipe/class-space-20261107/PROVENANCE.tsv	
+m3/intern/recipe/class-space-20261107/README.md	make/m3/intern/recipe/class-space-20261107/README.md	
+m3/intern/recipe/class-space-20261107/RECIPE_MEMORY.tsv	make/m3/intern/recipe/class-space-20261107/RECIPE_MEMORY.tsv	
+m3/intern/recipe/class-space-20261107/relocate.py	make/m3/intern/recipe/class-space-20261107/relocate.py	
+m3/intern/recipe/class-space-20261107/RELOCATION_MAP.tsv	make/m3/intern/recipe/class-space-20261107/RELOCATION_MAP.tsv	
+m3/intern/recipe/class-space-20261107/verify.sh	make/m3/intern/recipe/class-space-20261107/verify.sh	
+m3/intern/recipe/intern-space-20261106/differential.sh	make/m3/intern/recipe/intern-space-20261106/differential.sh	
+m3/intern/recipe/intern-space-20261106/FOSS_REUSE_DECISION.tsv	make/m3/intern/recipe/intern-space-20261106/FOSS_REUSE_DECISION.tsv	
+m3/intern/recipe/intern-space-20261106/GATES.tsv	make/m3/intern/recipe/intern-space-20261106/GATES.tsv	
+m3/intern/recipe/intern-space-20261106/PROVENANCE.tsv	make/m3/intern/recipe/intern-space-20261106/PROVENANCE.tsv	
+m3/intern/recipe/intern-space-20261106/README.md	make/m3/intern/recipe/intern-space-20261106/README.md	
+m3/intern/recipe/intern-space-20261106/RECIPE_MEMORY.tsv	make/m3/intern/recipe/intern-space-20261106/RECIPE_MEMORY.tsv	
+m3/intern/recipe/intern-space-20261106/relocate.py	make/m3/intern/recipe/intern-space-20261106/relocate.py	
+m3/intern/recipe/intern-space-20261106/RELOCATION_MAP.tsv	make/m3/intern/recipe/intern-space-20261106/RELOCATION_MAP.tsv	
+m3/intern/recipe/intern-space-20261106/verify.sh	make/m3/intern/recipe/intern-space-20261106/verify.sh	
+m3/intern/src/main/java/jdk/m3/intern/CanonicalLiteralPool.java	src/java.base/share/classes/jdk/internal/m3/intern/CanonicalLiteralPool.java	jdk.internal.m3.internx1
+m3/intern/src/main/java/jdk/m3/intern/ClassFileAtoms.java	src/java.base/share/classes/jdk/internal/m3/intern/ClassFileAtoms.java	jdk.internal.m3.internx1
+m3/intern/src/main/java/jdk/m3/intern/ClassSpace.java	src/java.base/share/classes/jdk/internal/m3/intern/ClassSpace.java	jdk.internal.m3.internx1
+m3/intern/src/main/java/jdk/m3/intern/ClassSpaceArchive.java	src/java.base/share/classes/jdk/internal/m3/intern/ClassSpaceArchive.java	jdk.internal.m3.internx1
+m3/intern/src/main/java/jdk/m3/intern/InternArchiveGuard.java	src/java.base/share/classes/jdk/internal/m3/intern/InternArchiveGuard.java	jdk.internal.m3.internx1
+m3/intern/src/main/java/jdk/m3/intern/InternPathTrie.java	src/java.base/share/classes/jdk/internal/m3/intern/InternPathTrie.java	jdk.internal.m3.internx1
+m3/intern/src/main/java/jdk/m3/intern/InternShapes.java	src/java.base/share/classes/jdk/internal/m3/intern/InternShapes.java	jdk.internal.m3.internx1
+m3/intern/src/main/java/jdk/m3/intern/InternSpace.java	src/java.base/share/classes/jdk/internal/m3/intern/InternSpace.java	jdk.internal.m3.internx1
+m3/intern/src/main/java/module-info.java	make/m3/intern/src/main/java/module-info.java	jdk.internal.m3.internx2
+m3/intern/src/test/java/jdk/m3/intern/ArchiveAllocationProbe.java	test/jdk/jdk/internal/m3/intern/ArchiveAllocationProbe.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/ArchiveCopyToJUnitTest.java	test/jdk/jdk/internal/m3/intern/ArchiveCopyToJUnitTest.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/ArchiveCopyToSelfTest.java	test/jdk/jdk/internal/m3/intern/ArchiveCopyToSelfTest.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/ArchiveFreezeParitySelfTest.java	test/jdk/jdk/internal/m3/intern/ArchiveFreezeParitySelfTest.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/CanonicalLiteralPoolDump.java	test/jdk/jdk/internal/m3/intern/CanonicalLiteralPoolDump.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/CanonicalLiteralPoolTest.java	test/jdk/jdk/internal/m3/intern/CanonicalLiteralPoolTest.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/ClassFileAtomsJUnitTest.java	test/jdk/jdk/internal/m3/intern/ClassFileAtomsJUnitTest.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/ClassFileAtomsSelfTest.java	test/jdk/jdk/internal/m3/intern/ClassFileAtomsSelfTest.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/ClassSpaceArchiveJUnitTest.java	test/jdk/jdk/internal/m3/intern/ClassSpaceArchiveJUnitTest.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/ClassSpaceArchiveNative.java	test/jdk/jdk/internal/m3/intern/ClassSpaceArchiveNative.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/ClassSpaceArchiveSelfTest.java	test/jdk/jdk/internal/m3/intern/ClassSpaceArchiveSelfTest.java	jdk.internal.m3.internx1;jdk/internal/m3/internx1
+m3/intern/src/test/java/jdk/m3/intern/ClassSpaceAtomicBatchJUnitTest.java	test/jdk/jdk/internal/m3/intern/ClassSpaceAtomicBatchJUnitTest.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/ClassSpaceAtomicBatchSelfTest.java	test/jdk/jdk/internal/m3/intern/ClassSpaceAtomicBatchSelfTest.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/ClassSpaceDifferentialDump.java	test/jdk/jdk/internal/m3/intern/ClassSpaceDifferentialDump.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/ClassSpaceJUnitTest.java	test/jdk/jdk/internal/m3/intern/ClassSpaceJUnitTest.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/ClassSpaceNative.java	test/jdk/jdk/internal/m3/intern/ClassSpaceNative.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/ClassSpacePinnedMappedJUnitTest.java	test/jdk/jdk/internal/m3/intern/ClassSpacePinnedMappedJUnitTest.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/ClassSpacePinnedMappedSelfTest.java	test/jdk/jdk/internal/m3/intern/ClassSpacePinnedMappedSelfTest.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/ClassSpacePinnedSnapshotJUnitTest.java	test/jdk/jdk/internal/m3/intern/ClassSpacePinnedSnapshotJUnitTest.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/ClassSpacePinnedSnapshotScopedTest.java	test/jdk/jdk/internal/m3/intern/ClassSpacePinnedSnapshotScopedTest.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/ClassSpaceRegionJUnitTest.java	test/jdk/jdk/internal/m3/intern/ClassSpaceRegionJUnitTest.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/ClassSpaceRegionSelfTest.java	test/jdk/jdk/internal/m3/intern/ClassSpaceRegionSelfTest.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/ClassSpaceSelfTest.java	test/jdk/jdk/internal/m3/intern/ClassSpaceSelfTest.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/GrowthFaultProbe.java	test/jdk/jdk/internal/m3/intern/GrowthFaultProbe.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/GrowthSafetyJUnitTest.java	test/jdk/jdk/internal/m3/intern/GrowthSafetyJUnitTest.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/InternArchiveGuardProof.java	test/jdk/jdk/internal/m3/intern/InternArchiveGuardProof.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/InternArchiveGuardTest.java	test/jdk/jdk/internal/m3/intern/InternArchiveGuardTest.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/InternChunkMatchProof.java	test/jdk/jdk/internal/m3/intern/InternChunkMatchProof.java	jdk.internal.m3.internx3
+m3/intern/src/test/java/jdk/m3/intern/InternChunkMatchTest.java	test/jdk/jdk/internal/m3/intern/InternChunkMatchTest.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/InternPathTrieProof.java	test/jdk/jdk/internal/m3/intern/InternPathTrieProof.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/InternPathTrieTest.java	test/jdk/jdk/internal/m3/intern/InternPathTrieTest.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/InternShapesProof.java	test/jdk/jdk/internal/m3/intern/InternShapesProof.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/InternShapesTest.java	test/jdk/jdk/internal/m3/intern/InternShapesTest.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/InternSnapshotProof.java	test/jdk/jdk/internal/m3/intern/InternSnapshotProof.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/InternSnapshotTest.java	test/jdk/jdk/internal/m3/intern/InternSnapshotTest.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/InternSpaceDump.java	test/jdk/jdk/internal/m3/intern/InternSpaceDump.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/InternSpaceProof.java	test/jdk/jdk/internal/m3/intern/InternSpaceProof.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/InternSpaceTest.java	test/jdk/jdk/internal/m3/intern/InternSpaceTest.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/InternTrieScalarProof.java	test/jdk/jdk/internal/m3/intern/InternTrieScalarProof.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/InternTrieScalarTest.java	test/jdk/jdk/internal/m3/intern/InternTrieScalarTest.java	jdk.internal.m3.internx1
+m3/intern/src/test/java/jdk/m3/intern/Sha256BatchReuseJUnitTest.java	test/jdk/jdk/internal/m3/intern/Sha256BatchReuseJUnitTest.java	jdk.internal.m3.internx1
+m3/intern/src/test/native/m3_class_space_native.c	test/jdk/jdk/internal/m3/intern/native/m3_class_space_native.c	Java_jdk_internal_m3_intern_x1
+m3/intern/src/test/native/m3_classspace_archive_native.c	test/jdk/jdk/internal/m3/intern/native/m3_classspace_archive_native.c	Java_jdk_internal_m3_intern_x1;jdk_internal_m3_intern_x1

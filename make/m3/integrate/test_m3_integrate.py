@@ -134,6 +134,11 @@ class RefsTest(unittest.TestCase):
         self.assertTrue(mi.skip_content("make/m3/tooling/jdk-naming/RENAME_MAP.tsv"))
         self.assertFalse(mi.skip_content("make/m3/tooling/jdk-naming/PACKAGE_BASELINE.tsv"))
 
+    def test_workflow_union_is_idempotent(self):
+        wf = "on:\n  push:\n    paths:\n      - 'm3/**'\n      - 'make/m3/**'\n      - 'doc/m3/**'\n"
+        text, _ = self.run_text(".github/workflows/w.yml", ".github/workflows/w.yml", wf)
+        self.assertEqual(text, wf)
+
 
 if __name__ == "__main__":
     unittest.main()

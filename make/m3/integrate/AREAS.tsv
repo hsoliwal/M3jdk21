@@ -9,21 +9,21 @@
 # status HOLD_P1: the target module exists; the area moves with its own move_area.py / move_module_area.py run
 # (package rename where java.base) and gates, one area per PR. HOLD_APPROVAL: the module root does not exist in
 # src/; creating it needs the user's approval (no new module roots without approval, 2026-11-08).
-intern	java.base	HOLD_P1	approved layout 2026-11-08: java.base jdk.internal.m3.* (package jdk.m3.intern -> jdk.internal.m3.intern via move_area.py)
-native	java.base	HOLD_P1	approved layout 2026-11-08: java.base jdk.internal.m3.* (native)
+intern	java.base	HOLD_P1	P1 leaf 1 (ledger P1_intern.tsv): move_area.py v1.1 --keep-pom; approved layout 2026-11-08: java.base jdk.internal.m3.* (package jdk.m3.intern -> jdk.internal.m3.intern via move_area.py)
+native	java.base	HOLD_APPROVAL	imports jdk.m3.collections (java.base cannot depend on it): owner decision java.base vs jdk.m3.collections; was: approved layout 2026-11-08: java.base jdk.internal.m3.* (native)
 lexicon	java.base	HOLD_P1	approved layout 2026-11-08: java.base jdk.internal.m3.* (lexicon: receiver, hf-intake, JNI sources, records)
 core	java.base	HOLD_P1	approved layout 2026-11-08: java.base jdk.internal.m3.* (core; descriptor today says jdk.m3.text)
 ports/indexstring	java.base	HOLD_P1	consumer of intern (plan 2026-11-08: intern + ports/indexstring together); jdk.internal.m3.indexstring already names java.base
 runtime-segments	java.base	HOLD_P1	approved layout: runtime-* -> java.base; probes -> test/jdk/jdk/internal/m3, run scripts beside them
 runtime-stage1	java.base	HOLD_P1	approved layout: runtime-* -> java.base; String patch recipe + probes
-fs	jdk.m3.io	HOLD_P1	approved layout 2026-11-08: jdk.m3.io = fs + file + optane (optane done #2859); natives + commons.logging stub need their own gate
-file	jdk.m3.io	HOLD_P1	approved layout 2026-11-08: jdk.m3.io = fs + file + optane; natives; consumers fs, search, nlp-search pins
-algorithms	jdk.m3.collections	HOLD_P1	approved layout 2026-11-08: jdk.m3.collections = collections + arrays + algorithms
-collections/interop	jdk.m3.collections	HOLD_P1	approved layout: collections family
-collections/gc-interop	jdk.m3.collections	HOLD_P1	approved layout: collections family (package jdk.m3.gc needs a fold decision)
-collections/signal-codegen	jdk.m3.collections	HOLD_P1	approved layout: collections family
-collections/pcollections	jdk.m3.collections	HOLD_P1	approved layout: collections family (descriptor jdk.m3.pcollections today)
-ports/collections	jdk.m3.collections	HOLD_P1	collections family (package jdk.m3.util needs a fold decision)
+fs	jdk.m3.io	HOLD_APPROVAL	THIRD-PARTY DEPENDENCIES (org.apache.commons vfs/logging, org.apache.http/hc, com.jcraft.jsch): cannot enter a JDK module before they are absorbed or dropped; was: approved layout 2026-11-08: jdk.m3.io = fs + file + optane (optane done #2859); natives + commons.logging stub need their own gate
+file	jdk.m3.io	HOLD_P1	JDK + jdk.m3.collections only, but its consumers compile module org.m3jdk.file from m3/file/src/main/java (eclipse/optional-jmod/build.py, module-packs/nlp-search/build.py, 1 workflow, 6 gate scripts): they move to module jdk.m3.io in the same PR, pack locks re-pinned on Linux; approved layout 2026-11-08: jdk.m3.io = fs + file + optane; natives; consumers fs, search, nlp-search pins
+algorithms	jdk.m3.collections	HOLD_P1	BLOCKED BY core: PrefixZ imports jdk.m3.text (m3/core), which must enter java.base first; approved layout 2026-11-08: jdk.m3.collections = collections + arrays + algorithms
+collections/interop	jdk.m3.collections	HOLD_APPROVAL	THIRD-PARTY DEPENDENCIES (interop with the five donor libraries): cannot enter a JDK module; was: approved layout: collections family
+collections/gc-interop	jdk.m3.collections	HOLD_APPROVAL	needs java.management and package jdk.m3.gc (fold decision); was: approved layout: collections family (package jdk.m3.gc needs a fold decision)
+collections/signal-codegen	jdk.m3.collections	HOLD_APPROVAL	annotation processor on com.sun.source (jdk.compiler): belongs to jdk.m3.compiler, which does not exist; was: approved layout: collections family
+collections/pcollections	jdk.m3.collections	HOLD_APPROVAL	THIRD-PARTY DEPENDENCY (org.pcollections): cannot enter a JDK module; was: approved layout: collections family (descriptor jdk.m3.pcollections today)
+ports/collections	jdk.m3.collections	HOLD_APPROVAL	JDK-only code, but exporting package jdk.m3.util from a JDK module is new public surface (user admission); was: collections family (package jdk.m3.util needs a fold decision)
 search	jdk.m3.search	HOLD_APPROVAL	approved layout names jdk.m3.search = search + indexdb + nlp, but src/jdk.m3.search does not exist: new module root
 indexdb	jdk.m3.search	HOLD_APPROVAL	jdk.m3.search does not exist; indexdb is MIGRATION_RESIDUE_NOT_CANONICAL vs jdk.internal.m3.mindex (owner decision)
 compiler	jdk.m3.compiler	HOLD_APPROVAL	approved layout names jdk.m3.compiler = compiler + ast, but src/jdk.m3.compiler does not exist: new module root

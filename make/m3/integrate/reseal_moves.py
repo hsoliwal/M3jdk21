@@ -37,6 +37,7 @@ def main(argv=None) -> int:
     ap.add_argument("--tree", required=True)
     ap.add_argument("--ref", required=True)
     ap.add_argument("--phase", required=True)
+    ap.add_argument("--name", help="ledger name RESEAL_<name>.tsv (default: the phase); one per P1 leaf")
     ap.add_argument("--mapping", default=str(HERE / "MAPPING.tsv"))
     ap.add_argument("--reseal", required=True, help="path of jdk-naming/reseal.py (with jdk_naming.py beside it)")
     ap.add_argument("--message", default="M3_TO_JDK_LAYOUT: reseal digest pins after the moves (recipe JDK_NAMING_RESEAL)")
@@ -52,7 +53,7 @@ def main(argv=None) -> int:
     # the naming owner's own files stay out; its NAMING_KEEP rows (names kept by the rename) are resealed here, since a
     # moved or rewritten file changes the digests they pin
     jn.is_self = lambda p: p.startswith(jn.SELF_PREFIX) or p in jn.SELF or p.startswith(PROTECT) or p in retired
-    reseal.LEDGER = f"make/m3/integrate/RESEAL_{a.phase.replace(',', '_')}.tsv"
+    reseal.LEDGER = f"make/m3/integrate/RESEAL_{a.name or a.phase.replace(',', '_')}.tsv"
     original = reseal.rename_pins
 
     def digest_pins_only(root, base, rev):
