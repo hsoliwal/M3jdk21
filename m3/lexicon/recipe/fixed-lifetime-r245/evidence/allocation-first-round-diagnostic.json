@@ -1,0 +1,10 @@
+{
+  "schema": "M3_ALLOCATION_FIRST_ROUND_DIAGNOSTIC_R245",
+  "status": "MEASUREMENT_ASSERTION_REVISED",
+  "unchangedDonorChecks": 83975,
+  "native": false,
+  "firstRoundAllocatedBytes": 888,
+  "result": 19100000,
+  "reason": "An initial exact-zero assertion conflated finite runtime/JIT allocation with per-query allocation. Final adapter records all five fixed-size rounds and checks every result; no portable zero-allocation assertion.",
+  "receiptCapture": "Original final receipt was truncated by tool output budget; diagnostic is from verified partial zlib prefix, not a complete proof receipt."
+}

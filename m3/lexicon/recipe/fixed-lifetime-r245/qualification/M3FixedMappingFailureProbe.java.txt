@@ -1,0 +1,36 @@
+// Copyright 2026 Hitesh Soliwal, Synexia. SPDX-License-Identifier: Apache-2.0
+package com.m3.text;
+import java.io.*;import java.net.*;import java.nio.*;import java.nio.file.*;import java.security.*;import java.util.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
+public final class M3FixedMappingFailureProbe {
+ static int checks;
+ static void check(boolean value,String message){checks++;if(!value)throw new AssertionError(message);}
+ public static void main(String[] args)throws Exception {
+  Path library=Path.of(args[1]),image=Path.of(args[2]);String expected=args[3];boolean baseline=args[4].equals("baseline");
+  long address=M3FixedAddressMapping.DEFAULT_BASE;
+  check(HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(Files.readAllBytes(image))).equals(expected),"independent image digest");
+  Provider[] providers=Security.getProviders();Throwable hashingFailure=null;
+  try {
+   for(var p:providers)Security.removeProvider(p.getName());
+   check(Security.getProviders().length==0,"provider-free probe");
+   try{M3FixedAddressMapping.open(image,address,expected,library);}catch(Throwable failure){hashingFailure=failure;}
+  } finally {for(int i=0;i<providers.length;i++)Security.insertProviderAt(providers[i],i+1);}
+  check(hashingFailure instanceof AssertionError,"missing hash provider remains fatal");
+  check(hashingFailure.getCause() instanceof NoSuchAlgorithmException,"missing algorithm cause retained");
+  var field=M3FixedAddressMapping.class.getDeclaredField("IMAGES");field.setAccessible(true);
+  check(((Map<?,?>)field.get(null)).isEmpty(),"failed admission unpublished");
+  String retry="";M3FixedAddressMapping.Image owner=null;
+  try {owner=M3FixedAddressMapping.open(image,address,expected,library);retry="ADMITTED";}
+  catch(IOException failure){retry=failure.getMessage();}
+  if(baseline)check("exact Windows address unavailable (no relocation)".equals(retry),"baseline range remains occupied after hash failure");
+  else {
+   check(owner!=null&&retry.equals("ADMITTED"),"failed mapping released before retry");
+   check(owner.address()==address&&owner.byteLength()==Files.size(image),"published geometry");
+   check(owner.readOnlyBuffer().isReadOnly()&&owner.readOnlyBuffer().isDirect(),"immutable direct view");
+   check(M3FixedAddressMapping.open(image,address,expected,library)==owner,"existing owner lifetime retained");
+  }
+  var out=new TreeMap<String,Object>();out.put("mode",args[4]);out.put("checks",checks);out.put("firstFailure",hashingFailure.toString());out.put("firstCause",hashingFailure.getCause().toString());out.put("retry",retry);out.put("unpublishedAddressLeaked",baseline);out.put("nativeLibrary",library.toString());out.put("image",image.toString());out.put("requiredSha256",expected);out.put("abiProjection","Only package declaration: current jdk.m3.text source -> cached com.m3.text JNI ABI");out.put("javaVersion",System.getProperty("java.runtime.version"));
+  var connection=(HttpURLConnection)URI.create(args[0]).toURL().openConnection();connection.setDoOutput(true);connection.setRequestMethod("POST");byte[] data=new ObjectMapper().writeValueAsBytes(out);connection.setFixedLengthStreamingMode(data.length);try(var stream=connection.getOutputStream()){stream.write(data);}if(connection.getResponseCode()!=204)throw new AssertionError("receipt refused");connection.disconnect();
+  System.out.println("M3_FIXED_MAPPING_FAILURE_PROBE_PASS mode="+args[4]+" checks="+checks);
+ }
+}

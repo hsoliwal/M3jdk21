@@ -1,0 +1,23 @@
+// Copyright 2026 Hitesh Soliwal, Synexia. SPDX-License-Identifier: Apache-2.0
+package com.synexia.unicodex.langdex;
+import java.net.*;import java.util.*;import java.lang.management.ManagementFactory;import com.fasterxml.jackson.databind.ObjectMapper;
+public final class M3UnicodeXDonorQualification {
+ static volatile long sink;
+ static long exercise(int iterations,long[] lexical,long[] semantic,int[] confidence,int[] destination){
+  long total=0;for(int i=0;i<iterations;i++){int count=LangDexNativeKernels.matchingPositionsInto(lexical,semantic,confidence,0,lexical.length,1,4,500,destination,0);total+=count+LangDexNativeKernels.countMatchingPositions(lexical,semantic,confidence,0,lexical.length,1,4,500);if(count>0)total+=destination[count-1];}sink=total;return total;
+ }
+ public static void main(String[] args)throws Exception{
+  if(!Boolean.getBoolean("synexia.langdex.native.disable")||LangDexNativeKernels.available())throw new AssertionError("Java-only donor lane required");
+  LangDexNativeSupportSelfTest.main(new String[0]);var field=LangDexNativeSupportSelfTest.class.getDeclaredField("checks");field.setAccessible(true);long checks=field.getLong(null);
+  var out=new TreeMap<String,Object>();out.put("unchangedDonorChecks",checks);out.put("native",false);
+  long[] lexical=new long[64],semantic=new long[64];int[] confidence=new int[64],destination=new int[64];Arrays.fill(lexical,1);Arrays.fill(semantic,4);Arrays.fill(confidence,900);exercise(40000,lexical,semantic,confidence,destination);
+  var bean=(com.sun.management.ThreadMXBean)ManagementFactory.getThreadMXBean();if(bean.isThreadAllocatedMemorySupported()){
+   bean.setThreadAllocatedMemoryEnabled(true);long id=Thread.currentThread().threadId();long before=bean.getThreadAllocatedBytes(id);exercise(20000,lexical,semantic,confidence,destination);long calibration=bean.getThreadAllocatedBytes(id)-before;
+   long[] allocatedRounds=new long[5];long observed=0;
+   for(int round=0;round<allocatedRounds.length;round++){before=bean.getThreadAllocatedBytes(id);observed=exercise(100000,lexical,semantic,confidence,destination);allocatedRounds[round]=bean.getThreadAllocatedBytes(id)-before;if(observed!=19100000L)throw new AssertionError("caller-owned loop result="+observed);}
+   out.put("calibrationAllocatedBytes",calibration);out.put("warmLoopAllocatedBytesByRound",allocatedRounds);out.put("measuredQueriesPerOperationPerRound",100000);out.put("warmLoopResult",observed);out.put("allocationGate","Measurement only; no portable zero-allocation or speedup claim.");
+  }else out.put("allocationMeasurement","NOT_SUPPORTED");
+  out.put("javaVersion",System.getProperty("java.runtime.version"));out.put("scope","Unchanged Java donor kernels/concept coordinate/varint and self-test; warmed caller-owned loop only. Native/corpus/image integration NOT_RUN.");
+  var c=(HttpURLConnection)URI.create(args[0]).toURL().openConnection();c.setDoOutput(true);c.setRequestMethod("POST");var b=new ObjectMapper().writeValueAsBytes(out);c.setFixedLengthStreamingMode(b.length);try(var stream=c.getOutputStream()){stream.write(b);}if(c.getResponseCode()!=204)throw new AssertionError("receipt refused");c.disconnect();
+ }
+}
