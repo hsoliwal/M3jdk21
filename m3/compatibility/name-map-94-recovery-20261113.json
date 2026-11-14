@@ -1,0 +1,39 @@
+{
+  "schema": "M3JDK21_NAME_MAP_94_RECOVERY_RECEIPT_V1",
+  "product": "M3JDK21",
+  "status": "SOURCE_RECOVERY_REVIEW_PENDING_CANONICAL_MAVEN",
+  "source_repository": "hsoliwal/com.synexia",
+  "source_pull_request": "https://github.com/hsoliwal/com.synexia/pull/17322",
+  "source_dataset": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-name-map-94-recovery-20261113",
+  "target_baseline_commit": "ec67062ba55293d9175757ba39d97112d3cdcf8b",
+  "preimages": {
+    "m3/docs/name-mapping.json": "bedf108e1d164c692c18aef7df81b470f4b1c4ed",
+    "m3/tooling/name-contract/name-plan.json": "ebe2214d98823dd77a54e6c72ca285d9a7a4c591"
+  },
+  "postimages": {
+    "m3/docs/name-mapping.json": "7f70f9a6153fe1e79f95d709aae611816dac4aa5",
+    "m3/tooling/name-contract/name-plan.json": "867ed9914140237a158deb0d69982aaeb012b12f"
+  },
+  "record_count": 94,
+  "naming_operations": 4,
+  "qualified_jdk_promotions": 0,
+  "lineage": {
+    "valid_revisions": [
+      "ea48caf10864be20ac8af908d13bd012ba166882",
+      "f764f422cdcba24ae91c61db261d237fd86163fe",
+      "764ed38684ebb9d5cce4c094a8797da996984d3d"
+    ],
+    "intact_damaged_records": 86,
+    "malformed_records_recovered": 6,
+    "missing_record_boundaries_recovered": 2,
+    "nonrecord_fields_preserved": true
+  },
+  "gates": {
+    "strict_json": "SOURCE_CANDIDATE_TESTED",
+    "canonical_maven_openrewrite": "PENDING",
+    "native_installed_jdk21": "PENDING",
+    "jtreg": "PENDING",
+    "windows": "PENDING",
+    "full_collections": "NOT_CLAIMED"
+  }
+}
