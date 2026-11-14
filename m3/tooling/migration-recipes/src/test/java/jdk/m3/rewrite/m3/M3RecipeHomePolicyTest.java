@@ -4,6 +4,7 @@ package jdk.m3.rewrite.m3;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.charset.StandardCharsets;
@@ -18,8 +19,15 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 final class M3RecipeHomePolicyTest {
+    private static final String RESIDUE_MANIFEST = "m3/compatibility/m3-canonical-residue-gitblobs.tsv";
+
+    /** Policy-ledger dispositions that keep a walked file out of the residue manifest: it is an adapter. */
+    private static final Set<String> ADAPTER_DISPOSITIONS =
+            Set.of("RECEIVER_ADAPTER_ONLY", "TARGET_PRODUCT_ADAPTER");
+
     @Test
     void reusableM3Jdk21RecipeAndM3IndexSurfacesAreConsumerOnly() throws Exception {
         Path root = repositoryRoot();
@@ -211,8 +219,7 @@ final class M3RecipeHomePolicyTest {
     @Test
     void reusableResidueIsContentFrozenAgainstIndependentTargetEvolution() throws Exception {
         Path root = repositoryRoot();
-        Path manifest =
-                root.resolve("m3/compatibility/m3-canonical-residue-gitblobs.tsv");
+        Path manifest = root.resolve(RESIDUE_MANIFEST);
         assertTrue(Files.isRegularFile(manifest));
 
         List<String> lines = Files.readAllLines(manifest);
@@ -234,14 +241,8 @@ final class M3RecipeHomePolicyTest {
             frozen.put(columns[0], new FrozenRow(columns[1], columns[3]));
         }
 
-        // Same closed set as m3/compatibility/check_m3_recipe_ownership.py (RESIDUE_DIRS) and its Python test:
-        // the semantic directory is closed; m3/indexdb is a live module, so its eight rows are pinned by blob
-        // below without closing the directory.
-        Set<String> actual = reusableResiduePaths(root);
-        assertEquals(
-                new TreeSet<>(frozen.keySet().stream().filter(path -> path.contains("/rewrite/semantic/")).toList()),
-                actual);
-        assertEquals(8L, frozen.keySet().stream().filter(path -> path.startsWith("m3/indexdb/")).count());
+        assertEquals(lines.size() - 1, frozen.size(), "duplicate residue rows");
+        assertResidueSetClosed(root, policyRows(), frozen.keySet());
 
         for (Map.Entry<String, FrozenRow> entry : frozen.entrySet()) {
             Path file = root.resolve(entry.getKey());
@@ -256,10 +257,74 @@ final class M3RecipeHomePolicyTest {
         }
     }
 
-    private static Set<String> reusableResiduePaths(Path root) throws Exception {
+    @Test
+    void plantedUnlistedNonAdapterFileFailsTheResidueSet(@TempDir Path scratch) throws Exception {
+        Path root = repositoryRoot();
+        List<PolicyRow> policy = policyRows();
+        List<String> lines = Files.readAllLines(root.resolve(RESIDUE_MANIFEST));
+        Set<String> frozen = new TreeSet<>();
+        for (String line : lines.subList(1, lines.size())) {
+            frozen.add(line.split("\t", -1)[0]);
+        }
+        Set<String> walked = residueCandidatePaths(root);
+
+        // One plant under a residue surface of the policy ledger, one under no policy row at all.
+        for (String planted : List.of(
+                "m3/indexdb/src/main/java/jdk/m3/indexdb/M3PlantedUnlistedResidue.java",
+                "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3PlantedUnlistedResidue.java")) {
+            Path mirror = Files.createTempDirectory(scratch, "mirror");
+            for (String path : walked) {
+                touch(mirror.resolve(path));
+            }
+            assertResidueSetClosed(mirror, policy, frozen);
+
+            touch(mirror.resolve(planted));
+            AssertionError failure = assertThrows(
+                    AssertionError.class, () -> assertResidueSetClosed(mirror, policy, frozen), planted);
+            assertTrue(failure.getMessage().contains(planted), failure.getMessage());
+        }
+    }
+
+    /**
+     * The walked files the residue manifest must list: every candidate except those whose
+     * m3-recipe-home-policy.tsv rows all carry an adapter disposition.
+     */
+    private static void assertResidueSetClosed(Path root, List<PolicyRow> policy, Set<String> frozen)
+            throws Exception {
+        TreeSet<String> actual = new TreeSet<>();
+        for (String path : residueCandidatePaths(root)) {
+            List<PolicyRow> matches = policy.stream().filter(row -> row.matches(path)).toList();
+            boolean adapter = !matches.isEmpty()
+                    && matches.stream().allMatch(row -> ADAPTER_DISPOSITIONS.contains(row.disposition()));
+            if (!adapter) {
+                actual.add(path);
+            }
+        }
+        assertEquals(new TreeSet<>(frozen), actual, "unlisted or retired reusable residue");
+    }
+
+    private static void touch(Path file) throws Exception {
+        Files.createDirectories(file.getParent());
+        Files.write(file, new byte[0]);
+    }
+
+    /** Every file the closed residue check walks: the two convergence files and five directories. */
+    private static Set<String> residueCandidatePaths(Path root) throws Exception {
         TreeSet<String> result = new TreeSet<>();
+        for (String exact : List.of(
+                "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceCatalog.java",
+                "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceRecipe.java")) {
+            if (Files.isRegularFile(root.resolve(exact))) {
+                result.add(exact);
+            }
+        }
+
         for (String directory : List.of(
-                "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/semantic")) {
+                "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope",
+                "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/atom",
+                "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/semantic",
+                "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/a3",
+                "m3/indexdb/src/main/java")) {
             Path start = root.resolve(directory);
             if (!Files.isDirectory(start)) {
                 continue;
