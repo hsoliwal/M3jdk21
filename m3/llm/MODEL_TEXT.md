@@ -1,3 +1,4 @@
+<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project -->
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 # Exact text, typed questions and numerical codes
 
@@ -183,14 +184,15 @@ complexity remains O(rows * codebookSize * channels); no measured speedup is cla
 
 ## Optional JNI backend
 
-`m3/llm/src/main/native` is the single NCM native owner (library `m3_ncm`). Besides
+`src/jdk.m3.llm/share/native/libm3_ncm` is the single NCM native source owner
+(library `m3_ncm`); `m3/llm/src/main/native` remains its standalone CMake bridge. Besides
 the float nearest-code kernel used here, it carries the binary64 offset-batch
 codebook entry `m3_ncm_codebook_nearest` for `jdk.m3.precompute.NativePrecomputeOps`
 (moved from the `m3_precompute` library); that class loads the library from
 `-Dm3.ncm.library`, `-Dm3.ncm.library.pathFile` or `System.loadLibrary("m3_ncm")`.
 The build writes the produced library path to `m3_ncm-path-<config>.txt`.
 
-Build with Java21 headers, a C++20 compiler and CMake 3.20 or newer. From the
+Build with Java21 headers, C17 and C++20 compilers, and CMake 3.20 or newer. From the
 repository root, with `JAVA_HOME` set to the selected Java21 installation:
 
 ```sh
@@ -226,8 +228,9 @@ var nativeQuantizer = M3NcmQuantizer.of(
 `JAVA` always uses the Java oracle. `NATIVE` refuses use before a successful
 explicit load. `AUTO` selects once at invocation entry and uses Java when a
 library has not been loaded. Failures from an available native library propagate;
-they are not converted to a successful fallback result. Native code receives
-primitive numerical arrays only; no String internals cross JNI.
+they are not converted to a successful fallback result. Native numerical inputs are
+primitive arrays; controlled calls additionally accept a synchronous cancellation
+callback. No String internals cross JNI.
 
 ## Component qualification
 
@@ -236,7 +239,7 @@ mvn -f m3/llm/pom.xml verify
 # After the explicit native build, provide the absolute path for JNI tests:
 mvn -f m3/llm/pom.xml -Dm3.ncm.library=/absolute/path/libm3_ncm.so verify
 # The same path also drives M3NcmNativeOps; require it and check JNI use:
-mvn -f m3/llm/pom.xml "-DargLine=-Xcheck:jni -Dm3.ncm.library=/absolute/path/libm3_ncm.so -Dncm.test.native.required=true" verify
+mvn -f m3/llm/pom.xml "-DargLine=-Xcheck:jni -Dm3.ncm.library=/absolute/path/libm3_ncm.so -Dncm.test.native.required=true -Dncm.test.controlled.required=true" verify
 # Optional standalone C ABI sanitizers on a compatible compiler/runtime:
 cmake -S m3/llm/src/main/native -B m3/llm/target/ncm-sanitized \
   -DM3_NCM_TESTS=ON -DM3_NCM_SANITIZERS=ON

@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+
+# The existing jdk.m3.llm module retains its public packages and Java 21 ABI.
+DISABLED_WARNINGS_java += module
+COPY += .mjs
+
+# Preserve the existing product notices in both module resources and the JDK's
+# legal-notice image. These are build-output copies of existing source files;
+# no donor archive, recipe or qualification payload becomes module content.
+M3_LLM_NOTICE_ROOT := $(TOPDIR)/m3/llm
+M3_LLM_NOTICE_FILES := $(addprefix $(M3_LLM_NOTICE_ROOT)/, LICENSE NOTICE NOTICE.txt)
+M3_LLM_NATIVE_NOTICE_ROOT := $(M3_LLM_NOTICE_ROOT)/src/main/native
+M3_LLM_NATIVE_NOTICE := $(M3_LLM_NATIVE_NOTICE_ROOT)/NCM_DONOR_NOTICE.md
+
+$(eval $(call SetupCopyFiles, COPY_M3_LLM_META_NOTICES, \
+    SRC := $(M3_LLM_NOTICE_ROOT), \
+    DEST := $(JDK_OUTPUTDIR)/modules/$(MODULE)/META-INF, \
+    FILES := $(M3_LLM_NOTICE_FILES), \
+))
+$(eval $(call SetupCopyFiles, COPY_M3_LLM_META_NATIVE_NOTICE, \
+    SRC := $(M3_LLM_NATIVE_NOTICE_ROOT), \
+    DEST := $(JDK_OUTPUTDIR)/modules/$(MODULE)/META-INF, \
+    FILES := $(M3_LLM_NATIVE_NOTICE), \
+))
+$(eval $(call SetupCopyFiles, COPY_M3_LLM_LEGAL_NOTICES, \
+    SRC := $(M3_LLM_NOTICE_ROOT), \
+    DEST := $(SUPPORT_OUTPUTDIR)/modules_legal/$(MODULE), \
+    FILES := $(M3_LLM_NOTICE_FILES), \
+))
+$(eval $(call SetupCopyFiles, COPY_M3_LLM_LEGAL_NATIVE_NOTICE, \
+    SRC := $(M3_LLM_NATIVE_NOTICE_ROOT), \
+    DEST := $(SUPPORT_OUTPUTDIR)/modules_legal/$(MODULE), \
+    FILES := $(M3_LLM_NATIVE_NOTICE), \
+))
+TARGETS += $(COPY_M3_LLM_META_NOTICES) $(COPY_M3_LLM_META_NATIVE_NOTICE) \
+    $(COPY_M3_LLM_LEGAL_NOTICES) $(COPY_M3_LLM_LEGAL_NATIVE_NOTICE)

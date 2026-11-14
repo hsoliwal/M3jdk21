@@ -33,6 +33,26 @@ bool all_finite(const float *values, size_t count) {
     }
     return true;
 }
+
+int controlled_finite(const float *values, size_t count,
+                      m3_ncm_checkpoint checkpoint, void *context) {
+    if (checkpoint == nullptr) {
+        return all_finite(values, count) ? 0 : 2;
+    }
+    if (checkpoint(context) != 0) {
+        return 4;
+    }
+    for (size_t i = 0; i < count; ++i) {
+        if ((i & static_cast<size_t>(65535)) == static_cast<size_t>(65535)
+                && checkpoint(context) != 0) {
+            return 4;
+        }
+        if (!std::isfinite(values[i])) {
+            return 2;
+        }
+    }
+    return 0;
+}
 }
 
 extern "C" int m3_ncm_nearest(
@@ -81,17 +101,29 @@ extern "C" int m3_ncm_nearest_expanded_f32(
         const float *vectors, size_t vector_count, size_t rows, size_t channels,
         const float *codebook, size_t codebook_count, size_t codebook_size,
         float *code_norms, size_t code_norm_count, int *output, size_t output_count) {
+    return m3_ncm_nearest_expanded_f32_controlled(vectors, vector_count, rows, channels,
+            codebook, codebook_count, codebook_size, code_norms, code_norm_count,
+            output, output_count, nullptr, nullptr);
+}
+
+extern "C" int m3_ncm_nearest_expanded_f32_controlled(
+        const float *vectors, size_t vector_count, size_t rows, size_t channels,
+        const float *codebook, size_t codebook_count, size_t codebook_size,
+        float *code_norms, size_t code_norm_count, int *output, size_t output_count,
+        m3_ncm_checkpoint checkpoint, void *context) {
     if (!layout_valid(vectors, vector_count, rows, channels, codebook, codebook_count,
                       codebook_size, output, output_count)
             || code_norms == nullptr || code_norm_count != codebook_size) {
         return 1;
     }
-    if (!all_finite(vectors, vector_count) || !all_finite(codebook, codebook_count)) {
-        return 2;
-    }
+    int status = controlled_finite(vectors, vector_count, checkpoint, context);
+    if (status != 0) return status;
+    status = controlled_finite(codebook, codebook_count, checkpoint, context);
+    if (status != 0) return status;
     // Same operation order as M3NcmOps.nearest: every code norm first, then per row
     // its norm and, per code, (rowNorm + codeNorm) - 2 * dot, all in binary32.
     for (size_t code = 0; code < codebook_size; ++code) {
+        if (checkpoint != nullptr && checkpoint(context) != 0) return 4;
         float sum = 0.0f;
         for (size_t channel = 0; channel < channels; ++channel) {
             const float value = codebook[code * channels + channel];
@@ -103,6 +135,7 @@ extern "C" int m3_ncm_nearest_expanded_f32(
         code_norms[code] = sum;
     }
     for (size_t row = 0; row < rows; ++row) {
+        if (checkpoint != nullptr && checkpoint(context) != 0) return 4;
         const size_t input_base = row * channels;
         float row_norm = 0.0f;
         for (size_t channel = 0; channel < channels; ++channel) {

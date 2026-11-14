@@ -15,11 +15,17 @@
     <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2</version><scope>test</scope></dependency>
   </dependencies>
   <build>
+    <sourceDirectory>${project.basedir}/../../src/jdk.m3.llm/share/classes</sourceDirectory>
+    <testSourceDirectory>${project.basedir}/../../test/jdk/jdk/m3/llm</testSourceDirectory>
     <resources>
-      <resource><directory>browser/web</directory><targetPath>jdk/m3/llm/browser</targetPath></resource>
+      <resource><directory>${project.basedir}/../../src/jdk.m3.llm/share/classes</directory><includes><include>jdk/m3/llm/browser/*.mjs</include></includes></resource>
       <resource><directory>.</directory><targetPath>META-INF</targetPath><includes><include>LICENSE</include><include>NOTICE</include><include>NOTICE.txt</include></includes></resource>
       <resource><directory>src/main/native</directory><targetPath>META-INF</targetPath><includes><include>NCM_DONOR_NOTICE.md</include></includes></resource>
     </resources>
+    <testResources>
+      <testResource><directory>${project.basedir}/../../test/jdk/jdk/m3/llm/browser</directory><targetPath>browser</targetPath><includes><include>tests/*.mjs</include></includes></testResource>
+      <testResource><directory>${project.basedir}/../../src/jdk.m3.llm/share/classes/jdk/m3/llm/browser</directory><targetPath>browser/web</targetPath><includes><include>*.mjs</include></includes></testResource>
+    </testResources>
     <plugins>
       <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-resources-plugin</artifactId><version>3.3.1</version></plugin>
       <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version>

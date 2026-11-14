@@ -94,7 +94,7 @@ identity requirements, Java examples, explicit native builds and qualification.
 
 ## Browser and native runtime boundary
 
-The four first-party browser modules are under `browser/web/` and are also
+The four first-party browser modules are under `src/jdk.m3.llm/share/classes/jdk/m3/llm/browser/` and are also
 packaged as `jdk/m3/llm/browser/` JAR resources. Use
 `chrome_summary_tree_strict.mjs` for tree execution: it recomputes source,
 plan and node integrity before the base executor runs. The native
@@ -128,9 +128,11 @@ packet/prompt and successful-tree hashes. Linux additionally executes the
 that test requires `/usr/bin/python3`. It does not run a model.
 
 ```sh
-node m3/llm/browser/tests/test_chrome_ai_summarizer_tool.mjs
-node m3/llm/browser/tests/test_chrome_summary_tree.mjs
-node m3/llm/browser/tests/test_chrome_summary_tree_integrity.mjs
+# Populate the test/web fixture while verifying the relocated module sources.
+mvn -f m3/llm/pom.xml verify
+node m3/llm/target/test-classes/browser/tests/test_chrome_ai_summarizer_tool.mjs
+node m3/llm/target/test-classes/browser/tests/test_chrome_summary_tree.mjs
+node m3/llm/target/test-classes/browser/tests/test_chrome_summary_tree_integrity.mjs
 
 # Use the chosen Java21/M3JDK toolchain; output must be a fresh directory.
 "$M3_JDK/bin/jlink" --module-path "$M3_JDK/jmods:m3/llm/target/m3-llm-0.1.0-SNAPSHOT.jar" \

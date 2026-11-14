@@ -28,9 +28,11 @@
  */
 package jdk.m3.llm.projection;
 
+import jdk.m3.llm.projection.M3NcmNativeOps.Mode;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HexFormat;
+import java.util.Objects;
 
 import static jdk.m3.llm.projection.M3NcmOps.*;
 
@@ -52,6 +54,11 @@ import static jdk.m3.llm.projection.M3NcmOps.*;
  * Operational overloads take independent per-call budgets; their ledgers cover
  * the entire multilevel call, including transient arrays. Cancellation is
  * checked during validation, between levels, and between batches/rows.</p>
+ *
+ * <p>Existing overloads always execute in Java without initializing the native
+ * loader. Mode-aware overloads select their primitive backend once per call;
+ * gather and residual accumulation remain Java. The selected backend shares
+ * the same cumulative ledger and does not change the model fingerprint.</p>
  */
 public final class M3NcmHierarchy {
     private final String modelVersion;
@@ -169,7 +176,17 @@ public final class M3NcmHierarchy {
 
     /** Produces all level-local codes for each batch member without modifying latents. */
     public int[] encode(float[] latents, int batch, Budget budget, Cancellation cancellation) {
+        return encode(latents, batch, budget, cancellation, Mode.JAVA);
+    }
+
+    public int[] encode(float[] latents, int batch, Mode mode) {
+        return encode(latents, batch, DEFAULT_BUDGET, Cancellation.NONE, mode);
+    }
+
+    /** Selects the primitive backend once; controls apply to the entire hierarchy call. */
+    public int[] encode(float[] latents, int batch, Budget budget, Cancellation cancellation, Mode mode) {
         Work work = new Work(budget, cancellation);
+        Mode selected = selectMode(mode, work);
         int full = fullLength();
         int inputCount = tensorSize(batch, full, channels);
         length(latents, inputCount, "latents");
@@ -181,15 +198,15 @@ public final class M3NcmHierarchy {
         for (int k = 0; k < levels.length; k++) {
             cancellation.checkpoint();
             float[] rows = k == levels.length - 1 ? residual
-                    : areaResize(residual, batch, full, channels, levels[k], work);
-            int[] local = nearest(rows, channels, codebooks[k], work);
+                    : resizeArea(residual, batch, full, channels, levels[k], work, selected);
+            int[] local = findNearest(rows, channels, codebooks[k], work, selected);
             work.consume(0, local.length);
             for (int b = 0; b < batch; b++) {
                 cancellation.checkpoint();
                 System.arraycopy(local, b * levels[k], result,
                         b * totalCodes() + offsets[k], levels[k]);
             }
-            float[] contribution = contribution(local, batch, levels[k], 0, k, work);
+            float[] contribution = contribution(local, batch, levels[k], 0, k, work, selected);
             work.consume(0, mul(2, inputCount));
             for (int b = 0; b < batch; b++) {
                 cancellation.checkpoint();
@@ -206,7 +223,16 @@ public final class M3NcmHierarchy {
     }
 
     public float[] decode(int[] flatCodes, int batch, Budget budget, Cancellation cancellation) {
-        return reconstruct(flatCodes, batch, levels.length, new Work(budget, cancellation));
+        return decode(flatCodes, batch, budget, cancellation, Mode.JAVA);
+    }
+
+    public float[] decode(int[] flatCodes, int batch, Mode mode) {
+        return decode(flatCodes, batch, DEFAULT_BUDGET, Cancellation.NONE, mode);
+    }
+
+    public float[] decode(int[] flatCodes, int batch, Budget budget, Cancellation cancellation, Mode mode) {
+        Work work = new Work(budget, cancellation);
+        return reconstruct(flatCodes, batch, levels.length, work, selectMode(mode, work));
     }
 
     public float[] decodePrefix(int[] prefixCodes, int batch, int completedLevels) {
@@ -219,7 +245,17 @@ public final class M3NcmHierarchy {
      */
     public float[] decodePrefix(int[] prefixCodes, int batch, int completedLevels,
                                 Budget budget, Cancellation cancellation) {
-        return reconstruct(prefixCodes, batch, completedLevels, new Work(budget, cancellation));
+        return decodePrefix(prefixCodes, batch, completedLevels, budget, cancellation, Mode.JAVA);
+    }
+
+    public float[] decodePrefix(int[] prefixCodes, int batch, int completedLevels, Mode mode) {
+        return decodePrefix(prefixCodes, batch, completedLevels, DEFAULT_BUDGET, Cancellation.NONE, mode);
+    }
+
+    public float[] decodePrefix(int[] prefixCodes, int batch, int completedLevels,
+                                Budget budget, Cancellation cancellation, Mode mode) {
+        Work work = new Work(budget, cancellation);
+        return reconstruct(prefixCodes, batch, completedLevels, work, selectMode(mode, work));
     }
 
     public float[] nextCondition(int[] prefixCodes, int batch, int completedLevels) {
@@ -229,14 +265,24 @@ public final class M3NcmHierarchy {
     /** Returns [batch,levelLengths[completedLevels],channels] for the next level. */
     public float[] nextCondition(int[] prefixCodes, int batch, int completedLevels,
                                  Budget budget, Cancellation cancellation) {
+        return nextCondition(prefixCodes, batch, completedLevels, budget, cancellation, Mode.JAVA);
+    }
+
+    public float[] nextCondition(int[] prefixCodes, int batch, int completedLevels, Mode mode) {
+        return nextCondition(prefixCodes, batch, completedLevels, DEFAULT_BUDGET, Cancellation.NONE, mode);
+    }
+
+    public float[] nextCondition(int[] prefixCodes, int batch, int completedLevels,
+                                 Budget budget, Cancellation cancellation, Mode mode) {
         if (completedLevels < 1 || completedLevels >= levels.length)
             throw new IllegalArgumentException("nextCondition requires a nonempty, incomplete prefix");
         Work work = new Work(budget, cancellation);
-        float[] cumulative = reconstruct(prefixCodes, batch, completedLevels, work);
-        return areaResize(cumulative, batch, fullLength(), channels, levels[completedLevels], work);
+        Mode selected = selectMode(mode, work);
+        float[] cumulative = reconstruct(prefixCodes, batch, completedLevels, work, selected);
+        return resizeArea(cumulative, batch, fullLength(), channels, levels[completedLevels], work, selected);
     }
 
-    private float[] reconstruct(int[] sourceCodes, int batch, int completedLevels, Work work) {
+    private float[] reconstruct(int[] sourceCodes, int batch, int completedLevels, Work work, Mode selected) {
         if (completedLevels < 1 || completedLevels > levels.length)
             throw new IllegalArgumentException("invalid completedLevels");
         positive(batch, "batch"); require(sourceCodes, "codes");
@@ -262,7 +308,7 @@ public final class M3NcmHierarchy {
         float[] result = new float[outputCount];
         for (int k = 0; k < completedLevels; k++) {
             work.cancellation.checkpoint();
-            float[] contribution = contribution(codes, batch, stride, offsets[k], k, work);
+            float[] contribution = contribution(codes, batch, stride, offsets[k], k, work, selected);
             work.consume(0, mul(2, outputCount));
             for (int b = 0; b < batch; b++) {
                 work.cancellation.checkpoint();
@@ -275,7 +321,7 @@ public final class M3NcmHierarchy {
     }
 
     private float[] contribution(int[] codes, int batch, int codeStride,
-                                  int codeOffset, int level, Work work) {
+                                  int codeOffset, int level, Work work, Mode selected) {
         int localLength = levels[level];
         int count = tensorSize(batch, localLength, channels);
         work.consume(count, mul(mul(batch, localLength), add(channels, 1)));
@@ -289,9 +335,40 @@ public final class M3NcmHierarchy {
             }
         }
         float[] full = level == levels.length - 1 ? local
-                : linearResize(local, batch, localLength, channels, fullLength(), work);
+                : resizeLinear(local, batch, localLength, channels, fullLength(), work, selected);
         return weights[level] == null ? full
-                : phi(full, batch, fullLength(), channels, weights[level], biases[level], ratios[level], work);
+                : applyPhi(full, batch, fullLength(), channels, weights[level], biases[level], ratios[level], work, selected);
+    }
+
+    private static Mode selectMode(Mode mode, Work work) {
+        Objects.requireNonNull(mode, "mode");
+        // Do not touch NativeOps in the default path: even class initialization may load JNI.
+        return mode == Mode.JAVA ? Mode.JAVA
+                : M3NcmNativeOps.resolveMode(mode, work.budget, work.cancellation);
+    }
+
+    private static int[] findNearest(float[] rows, int channels, float[] codebook,
+                                     Work work, Mode selected) {
+        return selected == Mode.JAVA ? nearest(rows, channels, codebook, work)
+                : M3NcmNativeOps.nearest(rows, channels, codebook, selected, work);
+    }
+
+    private static float[] resizeArea(float[] values, int batch, int fromLength,
+                                      int channels, int toLength, Work work, Mode selected) {
+        return selected == Mode.JAVA ? areaResize(values, batch, fromLength, channels, toLength, work)
+                : M3NcmNativeOps.areaResize(values, batch, fromLength, channels, toLength, selected, work);
+    }
+
+    private static float[] resizeLinear(float[] values, int batch, int fromLength,
+                                        int channels, int toLength, Work work, Mode selected) {
+        return selected == Mode.JAVA ? linearResize(values, batch, fromLength, channels, toLength, work)
+                : M3NcmNativeOps.linearResize(values, batch, fromLength, channels, toLength, selected, work);
+    }
+
+    private static float[] applyPhi(float[] values, int batch, int length, int channels,
+                                    float[] weights, float[] bias, float ratio, Work work, Mode selected) {
+        return selected == Mode.JAVA ? phi(values, batch, length, channels, weights, bias, ratio, work)
+                : M3NcmNativeOps.phi(values, batch, length, channels, weights, bias, ratio, selected, work);
     }
 
     private void checkLevel(int level) {

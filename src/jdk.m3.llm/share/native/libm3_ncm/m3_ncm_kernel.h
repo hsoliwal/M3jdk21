@@ -34,6 +34,22 @@ int m3_ncm_nearest_expanded_f32(const float *vectors, size_t vector_count,
                       size_t codebook_size, float *code_norms, size_t code_norm_count,
                       int *output, size_t output_count);
 
+/* Optional cooperative control for the same FP32 entry. Return zero to continue,
+ * nonzero to stop; the function/context are used only during this call and are
+ * never retained. Callbacks must not throw across this C ABI or mutate inputs.
+ * After layout validation, checkpoints precede each input scan, every 65,536th
+ * scanned element, every code norm and every row. A null callback is the original
+ * operation. Status 4 means cancelled: discard all output and scratch, which may
+ * be partially written. Statuses 0/1/2/3 retain the original meanings.
+ */
+typedef int (*m3_ncm_checkpoint)(void *context);
+int m3_ncm_nearest_expanded_f32_controlled(const float *vectors, size_t vector_count,
+                      size_t rows, size_t channels,
+                      const float *codebook, size_t codebook_count,
+                      size_t codebook_size, float *code_norms, size_t code_norm_count,
+                      int *output, size_t output_count,
+                      m3_ncm_checkpoint checkpoint, void *context);
+
 #ifdef __cplusplus
 }
 #endif
