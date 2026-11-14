@@ -86,14 +86,15 @@ final class LongHashSetStagedRehashTest {
         stateField.setAccessible(true);
         countField.setAccessible(true);
         long[] keys = (long[]) keyField.get(set);
-        byte[] states = (byte[]) stateField.get(set);
-        assertEquals(keys.length, states.length);
+        PackedSlotStates states = (PackedSlotStates) stateField.get(set);
+        assertEquals(keys.length, states.length());
         int used = 0, occupied = 0;
-        for (int i = 0; i < states.length; i++) {
-            assertTrue(states[i] >= 0 && states[i] <= 2);
-            if (states[i] == 1) used++;
-            if (states[i] != 0) occupied++;
-            if (states[i] != 1) assertEquals(0L, keys[i], "retired payload");
+        for (int i = 0; i < states.length(); i++) {
+            byte state = states.get(i);
+            assertTrue(state >= 0 && state <= 2);
+            if (state == 1) used++;
+            if (state != 0) occupied++;
+            if (state != 1) assertEquals(0L, keys[i], "retired payload");
         }
         assertEquals(used, set.size());
         assertEquals(occupied, countField.getInt(set));

@@ -35,11 +35,11 @@ public final class LongMapCompactionSuccessOracle {
         appendLong(digest,number(SIZE,m)); appendLong(digest,number(OCCUPIED,m));
         appendLong(digest,number(MOD,m));
         long[] keys=(long[])get(KEYS,m), values=(long[])get(VALUES,m);
-        byte[] states=(byte[])get(STATES,m);
-        assertThat(keys.length==values.length&&keys.length==states.length,"lane geometry");
+        PackedSlotStates states=(PackedSlotStates)get(STATES,m);
+        assertThat(keys.length==values.length&&keys.length==states.length(),"lane geometry");
         appendLong(digest,keys.length);
-        for(int i=0;i<states.length;i++) {
-            digest.update(states[i]); appendLong(digest,keys[i]); appendLong(digest,values[i]);
+        for(int i=0;i<states.length();i++) {
+            digest.update(states.get(i)); appendLong(digest,keys[i]); appendLong(digest,values[i]);
         }
     }
     private static long key(int n) {
@@ -74,8 +74,8 @@ public final class LongMapCompactionSuccessOracle {
                 catch(ConcurrentModificationException expected) { checks++; }
                 if(old!=get(KEYS,map)) {
                     compactions++;
-                    byte[] state=(byte[])get(STATES,map);
-                    for(byte b:state) assertThat(b!=2,"compaction must purge tombstones");
+                    PackedSlotStates state=(PackedSlotStates)get(STATES,map);
+                    for(int s=0;s<state.length();s++) assertThat(state.get(s)!=2,"compaction must purge tombstones");
                     assertThat(number(OCCUPIED,map)==map.size(),"compaction occupancy");
                 }
                 snapshot(digest,map);

@@ -160,8 +160,8 @@ final class LongLongHashMapAddToTest {
             try {
                 var field = LongLongHashMap.class.getDeclaredField("states");
                 field.setAccessible(true);
-                byte[] states = (byte[]) field.get(probe);
-                if (states[0] != 0) result[found++] = key;
+                PackedSlotStates states = (PackedSlotStates) field.get(probe);
+                if (states.get(0) != 0) result[found++] = key;
             } catch (ReflectiveOperationException failure) {
                 throw new AssertionError(failure);
             }

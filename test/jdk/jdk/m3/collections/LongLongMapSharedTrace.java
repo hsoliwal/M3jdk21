@@ -29,12 +29,17 @@ public final class LongLongMapSharedTrace {
             return f.get(map);
         } catch (ReflectiveOperationException e) { throw new AssertionError(e); }
     }
+    private static byte[] snapshot(PackedSlotStates states) {
+        byte[] result = new byte[states.length()];
+        for (int i = 0; i < result.length; i++) result[i] = states.get(i);
+        return result;
+    }
     private static void update(MessageDigest sha, LongLongHashMap map, int step) {
         String state = step + "|" + map.size() + "|" + map.capacity() + "|"
                 + field(map,"modCount") + "|" + field(map,"occupied") + "|"
                 + Arrays.toString((long[])field(map,"keys")) + "|"
                 + Arrays.toString((long[])field(map,"values")) + "|"
-                + Arrays.toString((byte[])field(map,"states"));
+                + Arrays.toString(snapshot((PackedSlotStates)field(map,"states")));
         sha.update(state.getBytes(StandardCharsets.UTF_8));
     }
     public static void main(String[] args) throws NoSuchAlgorithmException {

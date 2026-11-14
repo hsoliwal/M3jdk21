@@ -85,7 +85,7 @@ final class LongLongHashMapKnownSlotTest {
         LongLongHashMap map = filled(cluster, 5);
         assertTrue(map.remove(cluster[0]));
         long absent = collisionKeys(5, 1)[0];
-        assertEquals(0, states(map)[5], "the lookup terminates before the unrelated tombstone");
+        assertEquals(0, states(map).get(5), "the lookup terminates before the unrelated tombstone");
         assertTrue(map.put(absent, -7L));
         assertEquals(16, map.capacity());
         assertEquals(5, map.size());
@@ -129,7 +129,7 @@ final class LongLongHashMapKnownSlotTest {
         for (long key = 1L; found < count; key++) {
             LongLongHashMap map = new LongLongHashMap();
             map.put(key, key);
-            if (states(map)[home] != 0) result[found++] = key;
+            if (states(map).get(home) != 0) result[found++] = key;
         }
         return result;
     }
@@ -144,7 +144,7 @@ final class LongLongHashMapKnownSlotTest {
         }
     }
 
-    private static byte[] states(LongLongHashMap map) { return (byte[]) field(map, "states"); }
+    private static PackedSlotStates states(LongLongHashMap map) { return (PackedSlotStates) field(map, "states"); }
     private static long[] lane(LongLongHashMap map) { return (long[]) field(map, "keys"); }
     private static int integerField(LongLongHashMap map, String name) { return (Integer) field(map, name); }
 }

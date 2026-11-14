@@ -31,8 +31,8 @@ public final class LongLongSharedTrace {
     private static long[] longs(Field field, LongLongHashMap map) {
         try { return (long[]) field.get(map); } catch (IllegalAccessException failure) { throw new AssertionError(failure); }
     }
-    private static byte[] bytes(Field field, LongLongHashMap map) {
-        try { return (byte[]) field.get(map); } catch (IllegalAccessException failure) { throw new AssertionError(failure); }
+    private static PackedSlotStates states(Field field, LongLongHashMap map) {
+        try { return (PackedSlotStates) field.get(map); } catch (IllegalAccessException failure) { throw new AssertionError(failure); }
     }
     private static int integer(Field field, LongLongHashMap map) {
         try { return field.getInt(map); } catch (IllegalAccessException failure) { throw new AssertionError(failure); }
@@ -49,11 +49,11 @@ public final class LongLongSharedTrace {
         number(digest, integer(OCCUPIED, map));
         number(digest, integer(MOD, map));
         long[] keys = longs(KEYS, map), values = longs(VALUES, map);
-        byte[] states = bytes(STATES, map);
-        check(keys.length == values.length && states.length == keys.length, "primitive lane lengths");
+        PackedSlotStates states = states(STATES, map);
+        check(keys.length == values.length && states.length() == keys.length, "primitive lane lengths");
         number(digest, keys.length);
         for (int i = 0; i < keys.length; i++) {
-            digest.update(states[i]);
+            digest.update(states.get(i));
             number(digest, keys[i]);
             number(digest, values[i]);
         }
