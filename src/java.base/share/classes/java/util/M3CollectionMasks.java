@@ -51,6 +51,46 @@ final class M3CollectionMasks {
         return selectedJava(words, fromInclusive, toExclusive);
     }
 
+    /**
+     * Materializes a filtered capture directly from its already counted mask.
+     * The caller owns an unchanged detached capture and its selection words.
+     * Keep the native diagnostic route; the Java default needs no index array.
+     */
+    static Object[] selectedValues(long[] words, Object[] values, int count) {
+        Objects.requireNonNull(values, "values");
+        checkRange(words, 0, values.length);
+        if (count < 0 || count > values.length) {
+            throw new IllegalArgumentException("invalid selection count");
+        }
+        if (NativeSelection.ENABLED && !NativeSelection.unavailable) {
+            int[] indices = selected(words, 0, values.length);
+            if (indices.length != count) throw changedMask();
+            Object[] result = new Object[count];
+            for (int i = 0; i < count; i++) result[i] = values[indices[i]];
+            return result;
+        }
+        Object[] result = new Object[count];
+        int written = 0;
+        int wordCount = (int) (((long) values.length + 63) >>> 6);
+        for (int index = 0; index < wordCount; index++) {
+            long word = windowWord(words, index, 0, wordCount - 1, 0, values.length);
+            if (word == -1L) {
+                if (count - written < 64) throw changedMask();
+                System.arraycopy(values, index << 6, result, written, 64);
+                written += 64;
+            } else {
+                while (word != 0L) {
+                    if (written == count) throw changedMask();
+                    result[written++] = values[(index << 6)
+                            + Long.numberOfTrailingZeros(word)];
+                    word &= word - 1L;
+                }
+            }
+        }
+        if (written != count) throw changedMask();
+        return result;
+    }
+
     private static final class NativeSelection {
         // Saved startup configuration avoids new SecurityManager property
         // permissions in an existing collection operation. Initialization is

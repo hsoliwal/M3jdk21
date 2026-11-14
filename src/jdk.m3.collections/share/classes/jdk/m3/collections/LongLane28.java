@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.collections;
 
+import jdk.m3.arrays.ArrayNative;
+
 /**
  * One lazily allocated primitive-long lane over the 28-bit segmented address space.
  *
@@ -170,7 +172,7 @@ public final class LongLane28 {
         int blockIndex = Address28.block(slot);
         long[] block = region[blockIndex];
         if (block == null) {
-            block = new long[Address28.VALUES_PER_BLOCK];
+            block = ArrayNative.allocateLongsRequired(Address28.VALUES_PER_BLOCK);
             region[blockIndex] = block;
             allocatedBlocks++;
         }

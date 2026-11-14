@@ -1,0 +1,83 @@
+{
+  "schema": "m3.receiving-source-built-runtime/v1",
+  "scope": "Current receiving JUnit source/runtime qualification, locally executed Windows/JDK21",
+  "receiverHead": "1b1680508039b2c278bc623f4c81241c607372b9",
+  "applicationMainManifestSHA256": "e9742cfcf4c59f4d958b54d42adaaea794af334e6041506b18e305c6246c07e9",
+  "fullSourceManifestSHA256": "bb88e30d2bf58ea0cb1fdf5ea19f79393f9e0f56985b56cd95e0cabfd18e7b00",
+  "actualTestHelperSHA256": "47c58002bd3bb75e8eac6d2cb950a54bd1bb760aa17c57ee9467678b3c868ecd",
+  "receivingScriptGitBlob": "979c6ca73d6e353479ee00bfc7a9fb11b003942a",
+  "vendorSourceManifestSHA256": "7f561d40226815b47b34730749ada46c506d67023d721680261446df7a534aa7",
+  "sourceTrees": [
+    {
+      "path": "m3/vendor/third_party/apiguardian-api",
+      "gitTree": "7c8fe685567d1646731557b21ecbeb5c35a2c88f"
+    },
+    {
+      "path": "m3/vendor/third_party/junit-jupiter-api-5.10.2",
+      "gitTree": "1f055c4253350d3574adf5589152b10c2ffdf36c"
+    },
+    {
+      "path": "m3/vendor/third_party/junit-jupiter-engine-5.10.2",
+      "gitTree": "778838d2bbf9b2fc30ee6a57117030d5a74e12a0"
+    },
+    {
+      "path": "m3/vendor/third_party/junit-platform-commons-1.10.2",
+      "gitTree": "8934f93aaf0263c71cfa0b99a72bf32026bbf89d"
+    },
+    {
+      "path": "m3/vendor/third_party/junit-platform-engine-1.10.2",
+      "gitTree": "1013398b7a199aa1d5b44d7bbc9d18b154278d26"
+    },
+    {
+      "path": "m3/vendor/third_party/junit-platform-launcher-1.10.2",
+      "gitTree": "ce05f9c3c045c31d4874c6bdcf6645995531c9bf"
+    },
+    {
+      "path": "m3/vendor/third_party/opentest4j",
+      "gitTree": "9b5d83b020337e639a776367ded94effb64c881d"
+    }
+  ],
+  "vendorBuild": {
+    "javaSources": 475,
+    "resources": 16,
+    "sourceBytes": 2045866,
+    "release": 17,
+    "classCount": 587,
+    "classBytes": 1814116,
+    "classManifestSHA256": "cf3d14b8e2216e55d2e5089f69b1c6a03302510b876bad86a7a0efbff266e3ab",
+    "receiptSHA256": "f8b71418bd2f471ae94da3ac68fe17aeea14d1d720390a487afe40dce42d0ea5"
+  },
+  "testBuild": {
+    "sources": 151,
+    "classCount": 192,
+    "classBytes": 464891,
+    "classManifestSHA256": "294feeaa406d443a7050b378344baa1f15bfad13cd13899f9ce642f06bb12116",
+    "receiptSHA256": "7517692e945be62840ec8646f5261d8a09276b09c37649c658bc555aa8d0bc3b"
+  },
+  "publicSuite": {
+    "status": "PASS",
+    "found": 375,
+    "successful": 375,
+    "failed": 0,
+    "exitCode": 0,
+    "receiptSHA256": "0f24b606673538e30d3e12ce1488a0b6051154aa52f4eed13bbc64094a2bcdda"
+  },
+  "unchangedOracle": {
+    "status": "FAIL",
+    "fixtureSHA256": "ba22b2bf42b059ab93d906383d52c16b96be6f2cdbd3e49bade4ed3d473e8522",
+    "found": 18,
+    "successful": 12,
+    "failed": 6,
+    "exitCode": 1,
+    "receiptSHA256": "28849e34a59d45283f845c624d0a48355f11e4f58cd376a55529797237d3d818",
+    "retainedFailures": "Three accepted-damage assertions and three missing takeWide(long[]) errors"
+  },
+  "nativeLifecycle": "All five owned process jobs terminal with native handles closed and no post-guard error",
+  "artifactReuseDecision": "Cached1.10.2 binaries and-m3-source-1 artifacts inventoried; release8/MR/Kotlin jar composition does not substitute for the exact receiving --release17 source lane",
+  "hostedLinuxExecution": "NOT_RUN; this closes source-built runtime compatibility locally, not the queued hosted gate",
+  "toolkitNativeJniScreenPerformancePlatform": "NOT_RUN by these headless tests",
+  "generationCalls": 0,
+  "productionPromotion": false,
+  "canonicalEvidence": "https://github.com/hsoliwal/com.synexia/pull/17355",
+  "artifactPath": "synexia-openrewrite-recipes/recipe-crates/nebula-web-family-custody-20261031/caller-visible-damage-20261112/evidence/runtime-20261113/receiving-junit-1.10.2/"
+}

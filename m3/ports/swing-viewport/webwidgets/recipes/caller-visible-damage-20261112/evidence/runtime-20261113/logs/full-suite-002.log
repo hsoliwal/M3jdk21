@@ -1,0 +1,16 @@
+
+Failures (1):
+  JUnit Jupiter:M3AlertBannerTest:sampleContract()
+    MethodSource [className = 'jdk.m3.swing.web.M3AlertBannerTest', methodName = 'sampleContract', methodParameterTypes = '']
+    => java.lang.AssertionError: item change damages
+       jdk.m3.swing.web.model.M3WebChecks.check(M3WebChecks.java:33)
+       jdk.m3.swing.web.model.M3WebChecks.itemDamage(M3WebChecks.java:338)
+       jdk.m3.swing.web.model.M3WebChecks.viewport(M3WebChecks.java:314)
+       jdk.m3.swing.web.model.M3WebChecks.core(M3WebChecks.java:51)
+       jdk.m3.swing.web.M3AlertBannerTest.sampleContract(M3AlertBannerTest.java:28)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+[       375 tests found           ]
+[       374 tests successful      ]
+[         1 tests failed          ]

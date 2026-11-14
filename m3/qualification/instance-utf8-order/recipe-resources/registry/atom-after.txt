@@ -1,0 +1,2 @@
+            case "m3/core/src/jdk/m3/text/M3InstanceIndexPrecompute.java" -> true;
+            case "m3/core/src/jdk/m3/text/M3LangDexSourceEnvelope.java" -> true;

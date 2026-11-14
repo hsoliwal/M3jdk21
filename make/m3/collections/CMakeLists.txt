@@ -148,6 +148,10 @@ m3_collections_jni(m3_mat_csr SOURCES collections/m3csrtranspose.c
 m3_collections_jni(m3_matfilter SOURCES collections/mat_int_filter_jni.c
   CLASSES jdk.internal.m3.collections.mat.MatIntFilterKernel)
 
+# NATIVE_ABSORB: existing first-party bit-matrix provider; explicit m3.matmatrix.native.path host.
+m3_collections_jni(m3_mat_bitmatrix SOURCES collections/mat_bit_matrix.c
+  CLASSES jdk.internal.m3.collections.mat.MatBitMatrix)
+
 # NATIVE_ABSORB N6: MarkerTopKNative loads m3_marker_topk; MatIntRowKernel is host-loaded by absolute path with a
 # SHA-256 pin, named after its C owner as m3_mat_row.
 m3_collections_jni(m3_marker_topk SOURCES collections/m3_marker_topk_jni.c

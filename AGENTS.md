@@ -1,6 +1,33 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 # M3JDK21 agent instructions
 
+## Clean output rule (owner directive, 2026-11-14) - read first
+
+This rule overrides any older text in this file, including text that allows
+receipts or qualification evidence in this repository.
+
+- This repository is clean output: the JDK in its OpenJDK layout (`src/`, `make/`,
+  `test/`, `doc/`). M3 work lives inside the JDK's own modules and classes. It is
+  not stamped across folders.
+- Do not add new files under `m3/`, in any subfolder: `m3/qualification`,
+  `m3/evidence`, `m3/tooling`, `m3/release`, `m3/docs` or any other.
+- Do not add any of the following anywhere in this repository. They belong in
+  `hsoliwal/com.synexia`, the convergence workspace:
+  - qualification bundles;
+  - `ADMISSION_DECISION`/`WORK_ORDER` files;
+  - evidence, receipts and benchmark tables;
+  - donor copies (`*.original`, copied LICENSE/NOTICE files of donors);
+  - recipe engines, recipe resources and recipe tests.
+- Do not add parallel `M3`-prefixed types, or new `jdk.m3.*` modules or packages,
+  where a JDK class already owns the behaviour. Change that JDK class in place.
+- A pull request here contains only the product change, plus its tests under
+  `test/` (jtreg) or the module's own test layout. Put the proof bundle in the
+  paired `com.synexia` pull request and link to it.
+- The existing `m3/` tree is being moved out: product code into `src/`, everything
+  else into `com.synexia`. Edit existing `m3/` files only where a build needs it.
+
+
+
 ## Hard boundary: postimages only, never recipes
 
 **Synexia (`hsoliwal/com.synexia`) is the exclusive convergence, Maven/OpenRewrite

@@ -1,0 +1,352 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.synexia.unicodex.langdex;
+
+import java.util.Arrays;
+import java.util.Random;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
+import java.util.stream.IntStream;
+
+/** Same assertions run by the JUnit adapter and by the dependency-free JNI verifier. */
+public final class LangDexNativeSupportSelfTest {
+    private static long checks;
+
+    private LangDexNativeSupportSelfTest() {}
+
+    public static void main(String[] args) throws Exception {
+        requestedModeActuallyRuns();
+        requiredNativeLibraryMustLoad();
+        explicitlyRequestedNativeLibraryMustLoad();
+        hammingDistanceIncludesSignAndAllBits();
+        equalRangeHandlesDuplicatesAndEmptyInput();
+        profileFilterCombinesClassesWithConfidence();
+        hammingDistanceMatchesJdkForEveryBitAndSignedInputs();
+        equalRangesMatchJavaForEmptyDuplicateAndMissingConcepts();
+        profileFiltersMatchJavaAcrossMasksAndConfidenceThresholds();
+        equalRangePreservesDuplicateBoundaries();
+        profileFilterAndHammingDistanceAreBothAvailable();
+        equalRangesMatchIndependentLinearOracle();
+        nativeBlocksPreserveRowsAndInputs();
+        rangeCountAndDestinationMatchIndependentOracle();
+        invalidRangesAndDestinationsNeverWrite();
+        invalidLegacyInputsStillFail();
+        readersUseIndependentDestinations();
+        System.out.println("LANGDEX_SUPPORT_PASS checks=" + checks
+                + " native=" + LangDexNativeKernels.available());
+    }
+
+    static void requestedModeActuallyRuns() {
+        if (Boolean.getBoolean("synexia.langdex.native.required")) {
+            require(LangDexNativeKernels.available(), "required JNI library unavailable");
+        }
+        if (Boolean.getBoolean("synexia.langdex.native.disable")) {
+            require(!LangDexNativeKernels.available(), "disabled JNI unexpectedly loaded");
+        }
+    }
+
+    static void requiredNativeLibraryMustLoad() {
+        if (Boolean.getBoolean("synexia.langdex.native.required")) {
+            require(LangDexNativeKernels.available(), "required JNI library unavailable");
+        }
+    }
+
+    static void explicitlyRequestedNativeLibraryMustLoad() {
+        if (System.getProperty("synexia.langdex.native.path") != null
+                && !Boolean.getBoolean("synexia.langdex.native.disable")) {
+            require(LangDexNativeKernels.available(), "explicit JNI library unavailable");
+        }
+    }
+
+    static void hammingDistanceIncludesSignAndAllBits() {
+        equal(0, LangDexNativeKernels.hammingDistance(-1L, -1L));
+        equal(64, LangDexNativeKernels.hammingDistance(0L, -1L));
+        equal(1, LangDexNativeKernels.hammingDistance(0L, Long.MIN_VALUE));
+        equal(2, LangDexNativeKernels.hammingDistance(0b1010L, 0b0011L));
+    }
+
+    static void equalRangeHandlesDuplicatesAndEmptyInput() {
+        long range = LangDexNativeKernels.equalRange(new long[] {1, 2, 2, 2, 4}, 2);
+        equal(1, LangDexNativeKernels.rangeStart(range));
+        equal(4, LangDexNativeKernels.rangeEnd(range));
+        equal(0, LangDexNativeKernels.equalRange(new long[0], 1));
+    }
+
+    static void profileFilterCombinesClassesWithConfidence() {
+        array(new int[] {1}, LangDexNativeKernels.matchingPositions(
+                new long[] {1, 1, 2}, new long[] {4, 4, 4},
+                new int[] {499, 500, 900}, 1, 4, 500));
+        array(new int[0], LangDexNativeKernels.matchingPositions(
+                new long[0], new long[0], new int[0], 0, 0, 0));
+    }
+
+    static void hammingDistanceMatchesJdkForEveryBitAndSignedInputs() {
+        for (long left : new long[] {0, -1, Long.MIN_VALUE, Long.MAX_VALUE}) {
+            for (int bit = 0; bit < 64; bit++) {
+                assertDistance(left, 1L << bit);
+            }
+        }
+        Random random = new Random(3196L);
+        for (int i = 0; i < 4096; i++) {
+            assertDistance(random.nextLong(), random.nextLong());
+        }
+    }
+
+    static void equalRangesMatchJavaForEmptyDuplicateAndMissingConcepts() {
+        long[] values = {1, 2, 2, 2, 17, 99};
+        for (long key : new long[] {1, 2, 3, 17, 99, 100}) {
+            equal(LangDexNativeKernels.javaEqualRange(values, key),
+                    LangDexNativeKernels.equalRange(values, key));
+        }
+        equal(0, LangDexNativeKernels.equalRange(new long[0], 1));
+    }
+
+    static void profileFiltersMatchJavaAcrossMasksAndConfidenceThresholds() {
+        long[] lexical = {0, 1, 2, 3, Long.MIN_VALUE};
+        long[] semantic = {3, 2, 1, 0, Long.MIN_VALUE};
+        int[] confidence = {0, 500, 999, 1000, 1000};
+        for (long mask : new long[] {0, 1, 2, 3, Long.MIN_VALUE}) {
+            for (int minimum : new int[] {0, 500, 1000}) {
+                array(LangDexNativeKernels.javaMatchingPositions(
+                                lexical, semantic, confidence, mask, mask, minimum),
+                        LangDexNativeKernels.matchingPositions(
+                                lexical, semantic, confidence, mask, mask, minimum));
+            }
+        }
+        array(new int[0], LangDexNativeKernels.matchingPositions(
+                new long[0], new long[0], new int[0], 0, 0, 0));
+    }
+
+    static void equalRangePreservesDuplicateBoundaries() {
+        long[] values = {1, 3, 3, 3, 7};
+        long range = LangDexNativeKernels.equalRange(values, 3);
+        equal(1, LangDexNativeKernels.rangeStart(range));
+        equal(4, LangDexNativeKernels.rangeEnd(range));
+        equal(0, LangDexNativeKernels.equalRange(new long[0], 1));
+        long absent = LangDexNativeKernels.equalRange(values, 5);
+        equal(4, LangDexNativeKernels.rangeStart(absent));
+        equal(4, LangDexNativeKernels.rangeEnd(absent));
+    }
+
+    static void profileFilterAndHammingDistanceAreBothAvailable() {
+        array(new int[] {0, 3}, LangDexNativeKernels.matchingPositions(
+                new long[] {1, 2, 1, 3}, new long[] {4, 4, 8, 4},
+                new int[] {900, 900, 900, 700}, 1, 4, 700));
+        array(new int[0], LangDexNativeKernels.matchingPositions(
+                new long[0], new long[0], new int[0], 0, 0, 0));
+        equal(64, LangDexNativeKernels.hammingDistance(0, -1));
+        equal(0, LangDexNativeKernels.hammingDistance(Long.MIN_VALUE, Long.MIN_VALUE));
+        equal(2, LangDexNativeKernels.hammingDistance(0b1010, 0b1100));
+    }
+
+    static void equalRangesMatchIndependentLinearOracle() {
+        Random random = new Random(0x4c414e47444558L);
+        for (int trial = 0; trial < 2048; trial++) {
+            long[] values = new long[random.nextInt(1025)];
+            for (int i = 0; i < values.length; i++) values[i] = 1 + random.nextInt(64);
+            if (values.length > 0 && (trial & 1) == 0) {
+                values[0] = LangDexConcept.MAX_CONCEPT_ID;
+            }
+            Arrays.sort(values);
+            long[] original = values.clone();
+            long key = trial % 7 == 0 ? LangDexConcept.MAX_CONCEPT_ID
+                    : 1 + random.nextInt(66);
+            int start = 0;
+            while (start < values.length && values[start] < key) start++;
+            int end = start;
+            while (end < values.length && values[end] == key) end++;
+            long result = LangDexNativeKernels.equalRange(values, key);
+            equal(start, LangDexNativeKernels.rangeStart(result));
+            equal(end, LangDexNativeKernels.rangeEnd(result));
+            require(Arrays.equals(original, values), "equalRange mutated its input");
+        }
+    }
+
+    static void nativeBlocksPreserveRowsAndInputs() {
+        for (int length : new int[] {0, 1, 1023, 1024, 1025, 2047, 2048, 8193}) {
+            long[] lexical = new long[length];
+            long[] semantic = new long[length];
+            int[] confidence = new int[length];
+            for (int i = 0; i < length; i++) {
+                lexical[i] = (i & 1) == 0 ? 1 : Long.MIN_VALUE;
+                semantic[i] = i % 3 == 0 ? 4 : 8;
+                confidence[i] = i % 1001;
+            }
+            long[] savedLexical = lexical.clone();
+            long[] savedSemantic = semantic.clone();
+            int[] savedConfidence = confidence.clone();
+            for (long left : new long[] {0, 1, 2, Long.MIN_VALUE, -1}) {
+                for (long right : new long[] {0, 4, 8, Long.MIN_VALUE, -1}) {
+                    for (int minimum : new int[] {0, 500, 1000}) {
+                        array(oracle(lexical, semantic, confidence, 0, length,
+                                        left, right, minimum),
+                                LangDexNativeKernels.matchingPositions(
+                                        lexical, semantic, confidence, left, right, minimum));
+                    }
+                }
+            }
+            require(Arrays.equals(savedLexical, lexical), "lexical input changed");
+            require(Arrays.equals(savedSemantic, semantic), "semantic input changed");
+            array(savedConfidence, confidence);
+        }
+    }
+
+    static void rangeCountAndDestinationMatchIndependentOracle() {
+        Random random = new Random(20261002L);
+        for (int trial = 0; trial < 4096; trial++) {
+            int length = random.nextInt(130);
+            long[] lexical = new long[length];
+            long[] semantic = new long[length];
+            int[] confidence = new int[length];
+            for (int i = 0; i < length; i++) {
+                lexical[i] = random.nextLong();
+                semantic[i] = random.nextLong();
+                confidence[i] = random.nextInt(1004) - 1;
+            }
+            int from = random.nextInt(length + 1);
+            int to = from + random.nextInt(length - from + 1);
+            long requiredLexical = trial % 3 == 0 ? 0 : random.nextLong();
+            long requiredSemantic = trial % 5 == 0 ? 0 : random.nextLong();
+            int minimum = random.nextInt(1001);
+            int[] expected = oracle(lexical, semantic, confidence, from, to,
+                    requiredLexical, requiredSemantic, minimum);
+            equal(expected.length, LangDexNativeKernels.countMatchingPositions(
+                    lexical, semantic, confidence, from, to,
+                    requiredLexical, requiredSemantic, minimum));
+            int[] destination = new int[to - from + 7];
+            Arrays.fill(destination, -77);
+            int count = LangDexNativeKernels.matchingPositionsInto(
+                    lexical, semantic, confidence, from, to,
+                    requiredLexical, requiredSemantic, minimum, destination, 3);
+            equal(expected.length, count);
+            array(expected, Arrays.copyOfRange(destination, 3, 3 + count));
+            for (int i = 0; i < 3; i++) equal(-77, destination[i]);
+            for (int i = 3 + count; i < destination.length; i++) equal(-77, destination[i]);
+        }
+        // ANY-bit intersection must not turn into an ALL-bits requirement.
+        long[] lexical = {1, 2, 4};
+        long[] semantic = {8, 8, 8};
+        int[] confidence = {500, 500, 500};
+        int[] output = {-1, -1, -1};
+        equal(2, LangDexNativeKernels.matchingPositionsInto(
+                lexical, semantic, confidence, 0, 3, 3, 8, 500, output, 0));
+        array(new int[] {0, 1, -1}, output);
+        equal(0, LangDexNativeKernels.matchingPositionsInto(
+                lexical, semantic, confidence, 3, 3, 0, 0, 0, output, 3));
+    }
+
+    static void invalidRangesAndDestinationsNeverWrite() {
+        long[] lexical = {1, 2, 3};
+        long[] semantic = {4, 4, 4};
+        int[] confidence = {500, 900, 1000};
+        int[] destination = {-7, -7, -7};
+        expect(IndexOutOfBoundsException.class, () -> LangDexNativeKernels.matchingPositionsInto(
+                lexical, semantic, confidence, -1, 3, 0, 0, 0, destination, 0));
+        expect(IndexOutOfBoundsException.class, () -> LangDexNativeKernels.matchingPositionsInto(
+                lexical, semantic, confidence, 2, 1, 0, 0, 0, destination, 0));
+        expect(IndexOutOfBoundsException.class, () -> LangDexNativeKernels.matchingPositionsInto(
+                lexical, semantic, confidence, 0, 4, 0, 0, 0, destination, 0));
+        expect(IndexOutOfBoundsException.class, () -> LangDexNativeKernels.matchingPositionsInto(
+                lexical, semantic, confidence, 0, 3, 0, 0, 0, destination, 1));
+        expect(IndexOutOfBoundsException.class, () -> LangDexNativeKernels.matchingPositionsInto(
+                lexical, semantic, confidence, 0, 3, 0, 0, 0, destination, Integer.MAX_VALUE));
+        expect(IndexOutOfBoundsException.class, () -> LangDexNativeKernels.matchingPositionsInto(
+                lexical, semantic, confidence, 0, 0, 0, 0, 0, destination, -1));
+        expect(IllegalArgumentException.class, () -> LangDexNativeKernels.matchingPositionsInto(
+                lexical, semantic, confidence, 0, 3, 0, 0, 1001, destination, 0));
+        expect(IllegalArgumentException.class, () -> LangDexNativeKernels.matchingPositionsInto(
+                lexical, new long[0], confidence, 0, 3, 0, 0, 0, destination, 0));
+        expect(IllegalArgumentException.class, () -> LangDexNativeKernels.matchingPositionsInto(
+                lexical, semantic, confidence, 0, 3, 0, 0, 0, confidence, 0));
+        expect(NullPointerException.class, () -> LangDexNativeKernels.matchingPositionsInto(
+                lexical, semantic, confidence, 0, 3, 0, 0, 0, null, 0));
+        expect(NullPointerException.class, () -> LangDexNativeKernels.countMatchingPositions(
+                null, semantic, confidence, 0, 3, 0, 0, 0));
+        expect(IndexOutOfBoundsException.class, () -> LangDexNativeKernels.countMatchingPositions(
+                lexical, semantic, confidence, 0, Integer.MAX_VALUE, 0, 0, 0));
+        expect(IllegalArgumentException.class, () -> LangDexNativeKernels.countMatchingPositions(
+                lexical, semantic, confidence, 0, 3, 0, 0, -1));
+        array(new int[] {-7, -7, -7}, destination);
+        array(new int[] {500, 900, 1000}, confidence);
+    }
+
+    static void invalidLegacyInputsStillFail() {
+        expect(NullPointerException.class, () -> LangDexNativeKernels.equalRange(null, 1));
+        expect(IllegalArgumentException.class, () -> LangDexNativeKernels.equalRange(new long[0], 0));
+        expect(IllegalArgumentException.class, () -> LangDexNativeKernels.equalRange(
+                new long[0], LangDexConcept.MAX_CONCEPT_ID + 1));
+        expect(NullPointerException.class, () -> LangDexNativeKernels.matchingPositions(
+                null, new long[0], new int[0], 0, 0, 0));
+        expect(IllegalArgumentException.class, () -> LangDexNativeKernels.matchingPositions(
+                new long[1], new long[0], new int[1], 0, 0, 0));
+        expect(IllegalArgumentException.class, () -> LangDexNativeKernels.matchingPositions(
+                new long[0], new long[0], new int[0], 0, 0, -1));
+        expect(IllegalArgumentException.class, () -> LangDexNativeKernels.matchingPositions(
+                new long[0], new long[0], new int[0], 0, 0, 1001));
+    }
+
+    static void readersUseIndependentDestinations() throws Exception {
+        long[] lexical = new long[4097];
+        long[] semantic = new long[lexical.length];
+        int[] confidence = new int[lexical.length];
+        Arrays.fill(lexical, 1);
+        Arrays.fill(semantic, 4);
+        Arrays.fill(confidence, 900);
+        Callable<Boolean> read = () -> {
+            int[] destination = new int[lexical.length];
+            for (int pass = 0; pass < 100; pass++) {
+                int count = LangDexNativeKernels.matchingPositionsInto(
+                        lexical, semantic, confidence, 0, lexical.length,
+                        1, 4, 900, destination, 0);
+                if (count != lexical.length) return false;
+                for (int i = 0; i < count; i++) if (destination[i] != i) return false;
+            }
+            return true;
+        };
+        try (var executor = Executors.newFixedThreadPool(4)) {
+            for (var result : executor.invokeAll(java.util.List.of(read, read, read, read))) {
+                require(result.get(), "concurrent readers returned different rows");
+            }
+        }
+    }
+
+    private static int[] oracle(long[] lexical, long[] semantic, int[] confidence,
+            int from, int to, long requiredLexical, long requiredSemantic, int minimum) {
+        return IntStream.range(from, to)
+                .filter(i -> requiredLexical == 0 || (lexical[i] & requiredLexical) != 0)
+                .filter(i -> requiredSemantic == 0 || (semantic[i] & requiredSemantic) != 0)
+                .filter(i -> confidence[i] >= minimum)
+                .toArray();
+    }
+
+    private static void assertDistance(long left, long right) {
+        equal(Long.bitCount(left ^ right), LangDexNativeKernels.hammingDistance(left, right));
+    }
+
+    private static void equal(long expected, long actual) {
+        checks++;
+        if (expected != actual) throw new AssertionError(expected + " != " + actual);
+    }
+
+    private static void array(int[] expected, int[] actual) {
+        checks++;
+        if (!Arrays.equals(expected, actual)) {
+            throw new AssertionError(Arrays.toString(expected) + " != " + Arrays.toString(actual));
+        }
+    }
+
+    private static void require(boolean condition, String message) {
+        checks++;
+        if (!condition) throw new AssertionError(message);
+    }
+
+    private static void expect(Class<? extends Throwable> type, Runnable action) {
+        checks++;
+        try {
+            action.run();
+        } catch (Throwable failure) {
+            if (type.isInstance(failure)) return;
+            throw new AssertionError("expected " + type.getName(), failure);
+        }
+        throw new AssertionError("expected " + type.getName());
+    }
+}

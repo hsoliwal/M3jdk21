@@ -1,0 +1,5 @@
+capability	classification	owner	revision	fit_evidence	license	decision
+receiver-java-source-replay	DIRECT_REUSE	com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe	d80e3ebe6b85aad98e02bedc7a61ab87a88af2e3	Existing Java snapshot engine; exact source hashes, AST parsing, refusal, fixed point	Apache-2.0	ADMITTED_5_RECIPE_TESTS_14_RECEIVER_TESTS_5_UNCHANGED_PROOFS
+receiver-current-jdk-namespace	DIRECT_REUSE	hsoliwal/M3JDK21 m3/lexicon/receiver	ab6ef923dca4d32e1f003db71a800138911b5ffa	Current tree pins accepted jdk.m3 owners; no new runtime candidates	Apache-2.0	EXACT_AFTERIMAGES_ONLY
+legacy-recipe-history	REFERENCE	hsoliwal/com.synexia receiver-v1 manifest	8bcb80d60f31e351b50060ebba488dfc39fe567f	Sixteen ABSENT historical com.m3 paths differ from current jdk.m3 paths	Apache-2.0	PRESERVE_V1_ADD_V2
+test-source-envelope	DIRECT_REUSE	com.synexia.rewrite.M3ResourceEnvelope	1b0b84ab1dd08aab4c8edb5835bd00615d0cf908	Existing marked hash-bound representation; exact decode and corruption refusal executed	Apache-2.0	ADMITTED_TWO_ACCEPTED_TEST_FIXTURES

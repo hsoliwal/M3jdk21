@@ -1,0 +1,6 @@
+atom	contract	pattern	proof
+OWNER_IDENTITY	Keep every accepted JDK path, package, body and notice	EXACT_SOURCE_SNAPSHOT_V2	33 Git-blob matches
+CURRENT_FIXED_POINT	Replay current accepted owners without modification	EXISTING_JAVA_SNAPSHOT_COPARSE_V1	Zero current owners rewritten
+EMPTY_REBUILD	Rebuild missing owners exactly and reach a fixed point	ABSENT_TO_PINNED_POSTIMAGE_V1	33 exact additions; second replay no changes
+DRIFT_REFUSAL	Refuse foreign source before candidate publication	EXISTING_SNAPSHOT_ADMISSION_V1	JUnit foreign-occupant refusal
+REPLAY_CUSTODY	Reconstruct exact sealed inputs and reject changed fixtures	BOUND_TEXT_REFERENCE_V1	Executed assembler equality and drift refusal
